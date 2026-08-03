@@ -10,14 +10,17 @@ const required = [
   "safe-area-inset-bottom",
   "overflow-x:hidden",
   "min-height:44px",
-  "prefers-reduced-motion",
-  "@container video-studio",
-  "orientation:landscape",
-  "VIDEO-BEITRAG AUTONOM ERSTELLEN",
+  "object-fit:contain",
+  "KI-Video-Studio",
+  "Textbeitrag einfügen",
+  "Szenenbild erzeugen",
+  "Video-Beitrag erstellen",
+  "Server-Aufträge",
   "api/admin/video-studio",
   "X-Admin-Secret",
-  "MP4 laden",
-  "Aufträge auf dem Server"
+  "costConfirmed",
+  "Im Feed veröffentlichen",
+  "Besucher-Push senden"
 ];
 for (const needle of required) {
   assert.ok(html.includes(needle), `missing: ${needle}`);

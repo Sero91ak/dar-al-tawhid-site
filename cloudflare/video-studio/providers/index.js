@@ -8,6 +8,7 @@ export class FalAutoProvider extends BaseVideoProvider {
   constructor() {
     super("fal-auto", "fal.ai · Wan 2.5 Auto");
     this.modelPath = "fal-ai/wan-25-preview/text-to-video";
+    this.imageToVideoPath = "fal-ai/wan-25-preview/image-to-video";
     this.costPerSec = 0.05;
     this.resolution = "480p";
   }
@@ -17,7 +18,7 @@ export class FalAutoProvider extends BaseVideoProvider {
   }
 
   async estimateCost({ scenes = [] } = {}) {
-    const seconds = scenes.reduce((n, s) => n + Number(s.durationSec || 5), 0) || 20;
+    const seconds = scenes.reduce((n, s) => n + Number(s.durationSec || 5), 0) || 15;
     return Number((seconds * this.costPerSec).toFixed(4));
   }
 
@@ -25,14 +26,22 @@ export class FalAutoProvider extends BaseVideoProvider {
     const prompt = sceneToFalPrompt(scene);
     const rawDuration = Number(scene?.durationSec || 5);
     const duration = rawDuration >= 8 ? 10 : 5;
-    const input = {
-      prompt,
-      aspect_ratio: "9:16",
-      resolution: this.resolution,
-      duration: String(duration)
-    };
-    if (imageUrl) input.image_url = imageUrl;
-    const queued = await falQueue(env, this.modelPath, input, { preferAsync: true });
+    const useI2v = Boolean(imageUrl);
+    const modelPath = useI2v ? this.imageToVideoPath : this.modelPath;
+    const input = useI2v
+      ? {
+          prompt,
+          image_url: imageUrl,
+          resolution: this.resolution,
+          duration: String(duration)
+        }
+      : {
+          prompt,
+          aspect_ratio: "9:16",
+          resolution: this.resolution,
+          duration: String(duration)
+        };
+    const queued = await falQueue(env, modelPath, input, { preferAsync: true });
     const providerJobId = String(queued.request_id || queued.requestId || "").trim();
     const statusUrl = String(queued.status_url || queued.statusUrl || "").trim();
     const responseUrl = String(queued.response_url || queued.responseUrl || "").trim();
@@ -42,17 +51,17 @@ export class FalAutoProvider extends BaseVideoProvider {
       queued?.output?.url ||
       "";
 
-    // Manche fal-Antworten liefern das Video sofort ohne Queue-ID
     if (immediateUrl && !providerJobId) {
       return {
         providerJobId: `inline:${immediateUrl.slice(0, 48)}`,
         status: "COMPLETED",
-        modelPath: this.modelPath,
+        modelPath,
         durationSec: duration,
         estimatedCostEur: Number((duration * this.costPerSec).toFixed(4)),
         immediateUrl,
         statusUrl: "",
-        responseUrl: ""
+        responseUrl: "",
+        fromSceneImage: useI2v
       };
     }
     if (!providerJobId && !statusUrl) {
@@ -61,11 +70,12 @@ export class FalAutoProvider extends BaseVideoProvider {
     return {
       providerJobId,
       status: queued.status || "IN_QUEUE",
-      modelPath: this.modelPath,
+      modelPath,
       durationSec: duration,
       estimatedCostEur: Number((duration * this.costPerSec).toFixed(4)),
       statusUrl,
-      responseUrl
+      responseUrl,
+      fromSceneImage: useI2v
     };
   }
 

@@ -8,567 +8,532 @@
 <title>DAR Admin · KI-Video-Studio</title>
 <style>
 :root{
-  --bg:#05080f;--panel:#0a111c;--panel2:#101a29;--ink:#f7f0df;--soft:#d2c9b7;--muted:#8f99a7;
-  --gold:#efd78e;--gold2:#b8954b;--blue:#90c8ff;--line:rgba(140,190,255,.24);--line2:rgba(239,215,142,.16);
-  --ok:#8be0bd;--warn:#ffd386;--bad:#ff9a90;--shadow:0 22px 70px rgba(0,0,0,.42);
-  --serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  --safe-top:env(safe-area-inset-top,0px);--safe-right:env(safe-area-inset-right,0px);
-  --safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px);
-  --page-pad:clamp(10px,2.1vw,26px);--panel-pad:clamp(13px,2vw,22px);--radius:clamp(16px,2vw,22px)
+  --bg:#05080f;--panel:#0b1220;--ink:#f7f0df;--soft:#d2c9b7;--muted:#8f99a7;
+  --gold:#efd78e;--ok:#8be0bd;--warn:#ffd386;--bad:#ff9a90;
+  --line:rgba(140,190,255,.22);--line2:rgba(239,215,142,.14);
+  --serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+  --safe-t:env(safe-area-inset-top,0px);--safe-r:env(safe-area-inset-right,0px);
+  --safe-b:env(safe-area-inset-bottom,0px);--safe-l:env(safe-area-inset-left,0px);
 }
 *{box-sizing:border-box;min-width:0}
-html{width:100%;min-height:100%;background:var(--bg);overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth}
-body{width:100%;margin:0;min-height:100vh;min-height:100svh;min-height:100dvh;overflow-x:hidden;color:var(--ink);font-family:var(--sans);background:
-  radial-gradient(circle at 8% -8%,rgba(90,140,220,.28),transparent 34%),
-  radial-gradient(circle at 92% 0%,rgba(239,215,142,.14),transparent 30%),
-  linear-gradient(180deg,#05080f 0%,#09111d 52%,#05080f 100%);
-  padding:max(var(--page-pad),var(--safe-top)) max(var(--page-pad),var(--safe-right)) max(calc(var(--page-pad) + 8px),var(--safe-bottom)) max(var(--page-pad),var(--safe-left))}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow-x:hidden}
+body{min-height:100dvh;padding:max(10px,var(--safe-t)) max(10px,var(--safe-r)) max(14px,var(--safe-b)) max(10px,var(--safe-l));
+  background:radial-gradient(circle at 12% -10%,rgba(90,140,220,.22),transparent 36%),linear-gradient(180deg,#05080f,#09111d 55%,#05080f)}
 button,input,textarea,select{font:inherit;color:inherit}
-button,a,input,textarea,select{-webkit-tap-highlight-color:transparent}
-button{cursor:pointer}
-button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-.app{width:min(100%,1380px);margin:0 auto;container-type:inline-size;container-name:video-studio}
-.topbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;margin-bottom:14px}
-.brand{display:flex;align-items:center;gap:11px;min-width:0}
-.brand-mark{width:48px;height:48px;flex:0 0 48px;border-radius:16px;border:1px solid var(--line);display:grid;place-items:center;background:linear-gradient(145deg,rgba(239,215,142,.16),rgba(90,140,220,.10));box-shadow:0 12px 28px rgba(0,0,0,.3);font-family:var(--serif);font-weight:900;color:var(--gold)}
-.brand h1{margin:0;font-family:var(--serif);font-size:clamp(18px,2.3vw,23px);color:var(--gold);line-height:1.05;overflow-wrap:anywhere}
-.brand p{margin:4px 0 0;color:var(--soft);font-size:clamp(9px,1.35vw,11px);font-weight:800;line-height:1.3}
-.back{min-height:44px;border:1px solid var(--line);background:rgba(90,140,220,.10);color:var(--ink);border-radius:12px;padding:10px 12px;text-decoration:none;font-size:12px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}
-.hero,.panel{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,rgba(10,17,28,.96),rgba(5,8,15,.98));box-shadow:var(--shadow);overflow:hidden}
-.hero{position:relative;padding:clamp(20px,4vw,38px);margin-bottom:12px;isolation:isolate}
-.hero:before{content:"";position:absolute;inset:clamp(10px,1.5vw,18px);border:1px solid rgba(239,215,142,.11);border-radius:calc(var(--radius) - 4px);pointer-events:none;z-index:-1}
-.hero:after{content:"";position:absolute;right:-8%;top:-50%;width:min(46vw,520px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(90,140,220,.18),transparent 68%);filter:blur(4px);z-index:-2}
-.kicker{position:relative;color:var(--gold);font-size:clamp(9px,1vw,11px);font-weight:950;letter-spacing:.14em;text-transform:uppercase;line-height:1.35}
-.hero h2{position:relative;margin:10px 0 8px;font-family:var(--serif);font-size:clamp(30px,6.4vw,62px);line-height:.98;color:#fff4cc;max-width:920px;text-wrap:balance;overflow-wrap:anywhere}
-.hero p{position:relative;margin:0;color:var(--soft);font-size:clamp(12px,1.45vw,15px);line-height:1.6;max-width:820px;text-wrap:pretty}
-.status-line{position:relative;display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-.chip{max-width:100%;border:1px solid var(--line2);border-radius:999px;padding:7px 10px;color:var(--soft);background:rgba(0,0,0,.2);font-size:clamp(9px,1vw,10.5px);font-weight:900;line-height:1.25;overflow-wrap:anywhere}
-.chip.ok{color:var(--ok);border-color:rgba(139,224,189,.28)}
-.panel{padding:var(--panel-pad);margin-bottom:12px}
-.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
-.section-head h3{margin:0;font-family:var(--serif);color:var(--gold);font-size:clamp(19px,2.3vw,25px);line-height:1.08}
-.section-head span{color:var(--muted);font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;text-align:right;line-height:1.35;overflow-wrap:anywhere}
-.label{display:block;color:var(--soft);font-size:11px;font-weight:900;margin:0 0 7px}
-textarea,input,select{width:100%;min-height:48px;border:1px solid var(--line);border-radius:14px;background:rgba(0,0,0,.28);padding:13px 14px;outline:none}
-textarea{min-height:clamp(104px,18vh,170px);resize:vertical;line-height:1.48}
-textarea:focus,input:focus,select:focus{border-color:rgba(239,215,142,.52);box-shadow:0 0 0 3px rgba(239,215,142,.08)}
-.helper{color:var(--muted);font-size:10.5px;line-height:1.5;margin:8px 0 0}
-.primary{width:100%;margin-top:13px;border:1px solid rgba(239,215,142,.48);border-radius:17px;min-height:58px;padding:13px 18px;background:linear-gradient(135deg,rgba(239,215,142,.26),rgba(90,140,220,.13));color:#fff5d4;font-weight:950;letter-spacing:.035em;box-shadow:0 16px 40px rgba(0,0,0,.3);white-space:normal;line-height:1.25}
-.primary:active{transform:scale(.988)}
-.primary:disabled{opacity:.48;cursor:not-allowed}
-.grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr);gap:12px;align-items:start}
-.grid>.panel{height:100%}
-.grid>aside{position:sticky;top:max(12px,var(--safe-top))}
-.timeline{display:grid;gap:8px}
-.step{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line2);border-radius:14px;padding:10px;background:rgba(0,0,0,.19)}
-.step-num{width:34px;height:34px;border-radius:999px;display:grid;place-items:center;border:1px solid var(--line);font-size:11px;font-weight:950;color:var(--muted)}
-.step b{display:block;font-size:12px;color:var(--ink);line-height:1.3;overflow-wrap:anywhere}
-.step small{display:block;font-size:10px;color:var(--muted);margin-top:3px;line-height:1.4;overflow-wrap:anywhere}
-.step-state{font-size:9px;font-weight:950;text-transform:uppercase;color:var(--muted);text-align:right}
-.step.is-active{border-color:rgba(239,215,142,.42);background:rgba(239,215,142,.07)}
-.step.is-active .step-num{color:var(--gold);border-color:rgba(239,215,142,.42);box-shadow:0 0 18px rgba(239,215,142,.12)}
-.step.is-active .step-state{color:var(--gold)}
-.step.is-done .step-num{color:var(--ok);border-color:rgba(139,224,189,.36)}
-.step.is-done .step-state{color:var(--ok)}
-.step.is-error{border-color:rgba(255,154,144,.35)}
-.step.is-error .step-state{color:var(--bad)}
-.summary-card{border:1px solid var(--line2);border-radius:16px;padding:13px;background:linear-gradient(145deg,rgba(90,140,220,.07),rgba(239,215,142,.035));margin-bottom:9px}
-.summary-card b{display:block;color:var(--muted);font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
-.summary-card strong{display:block;color:#fff4cc;font-size:15px;line-height:1.35;overflow-wrap:anywhere}
-.summary-card small{display:block;color:var(--soft);font-size:10.5px;line-height:1.45;margin-top:5px;overflow-wrap:anywhere}
-.notice{border:1px dashed var(--line);border-radius:14px;padding:12px;color:var(--soft);font-size:11px;line-height:1.5;background:rgba(90,140,220,.045);overflow-wrap:anywhere}
-.notice.warn{border-color:rgba(255,211,134,.32);color:#ffe4b1;background:rgba(255,211,134,.045)}
-.notice.bad{border-color:rgba(255,154,144,.32);color:#ffd2cd;background:rgba(255,154,144,.045)}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:disabled{opacity:.45;cursor:not-allowed}
+.app{width:min(100%,920px);margin:0 auto}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.mark{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center;color:var(--gold);font-family:var(--serif);font-weight:900;background:rgba(239,215,142,.08)}
+.brand h1{margin:0;font-family:var(--serif);font-size:clamp(16px,4vw,20px);color:var(--gold);line-height:1.1}
+.brand small{display:block;color:var(--muted);font-size:10px;font-weight:800;margin-top:2px}
+.top-actions{display:flex;gap:6px;align-items:center}
+.chip{border:1px solid var(--line2);border-radius:999px;padding:6px 9px;font-size:10px;font-weight:900;color:var(--soft);background:rgba(0,0,0,.22)}
+.chip.ok{color:var(--ok)}.chip.warn{color:var(--warn)}.chip.bad{color:var(--bad)}.chip.run{color:var(--gold)}
+.icon-btn{min-width:44px;min-height:44px;border-radius:12px;border:1px solid var(--line);background:rgba(90,140,220,.08);color:var(--ink)}
+.back{min-height:44px;padding:0 12px;border-radius:12px;border:1px solid var(--line);background:rgba(90,140,220,.08);color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;font-size:12px;font-weight:900}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-bottom:10px}
+.step{border:1px solid var(--line2);border-radius:12px;padding:8px 6px;text-align:center;background:rgba(0,0,0,.18);font-size:10px;font-weight:900;color:var(--muted)}
+.step b{display:block;color:var(--ink);font-size:11px;margin-bottom:2px}
+.step.active{border-color:rgba(239,215,142,.45);background:rgba(239,215,142,.08);color:var(--gold)}
+.step.done{border-color:rgba(139,224,189,.28);color:var(--ok)}
+.panel{border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,rgba(11,18,32,.98),rgba(5,8,15,.98));padding:12px;margin-bottom:10px}
+.label{display:block;font-size:11px;font-weight:900;color:var(--soft);margin:0 0 6px}
+textarea,input{width:100%;border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.28);padding:11px 12px;outline:none}
+textarea{min-height:96px;max-height:42vh;resize:vertical;line-height:1.45}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta{color:var(--muted);font-size:10px}
+.btn{min-height:44px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:rgba(90,140,220,.08);color:var(--ink);font-size:12px;font-weight:900}
+.btn.primary{border-color:rgba(239,215,142,.45);background:linear-gradient(135deg,rgba(239,215,142,.22),rgba(90,140,220,.12));color:#fff5d4}
+.btn.ghost{background:transparent}
+.btn.danger{border-color:rgba(255,154,144,.3);color:#ffd2cd;background:rgba(255,154,144,.06)}
+.grid2{display:grid;gap:10px}
+@media(min-width:768px){.grid2{grid-template-columns:1.1fr .9fr}.app{width:min(100%,1100px)}}
+.preview-wrap{border:1px solid var(--line2);border-radius:14px;background:#000;overflow:hidden;aspect-ratio:9/16;max-height:min(58vh,520px);margin:0 auto;width:min(100%,320px);display:grid;place-items:center}
+.preview-wrap img,.preview-wrap video{width:100%;height:100%;object-fit:contain;display:block}
 .actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
-.btn{min-width:0;border:1px solid var(--line);border-radius:13px;padding:10px 11px;background:rgba(90,140,220,.08);color:var(--ink);font-size:11px;font-weight:900;min-height:44px;white-space:normal;line-height:1.25}
-.btn.primary-small{border-color:rgba(239,215,142,.4);color:#fff1bf;background:rgba(239,215,142,.1)}
-.btn.danger{border-color:rgba(255,154,144,.28);color:#ffd4cf;background:rgba(255,154,144,.06)}
-details{border:1px solid var(--line2);border-radius:16px;background:rgba(0,0,0,.16);overflow:hidden}
-summary{list-style:none;min-height:48px;padding:13px 14px;font-size:12px;font-weight:950;color:var(--gold);cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:center}
-summary::-webkit-details-marker{display:none}
-.settings{padding:0 13px 13px;display:grid;gap:11px}
-.setting-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-.profile{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.profile div{border:1px solid var(--line2);border-radius:13px;padding:11px;background:rgba(0,0,0,.18)}
-.profile b{display:block;color:var(--gold);font-size:10px;margin-bottom:4px}
-.profile span{display:block;color:var(--soft);font-size:9.5px;line-height:1.4;overflow-wrap:anywhere}
-.viewport-proof{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-top:12px}
-.viewport-proof div{border:1px solid var(--line2);border-radius:13px;padding:10px;background:rgba(0,0,0,.16);text-align:center}
-.viewport-proof b{display:block;color:#fff4cc;font-size:11px;line-height:1.25}
-.viewport-proof span{display:block;color:var(--muted);font-size:9px;line-height:1.35;margin-top:4px}
+.notice{margin-top:8px;border:1px dashed var(--line);border-radius:12px;padding:10px;font-size:11px;line-height:1.45;color:var(--soft);background:rgba(90,140,220,.04)}
+.notice.bad{border-color:rgba(255,154,144,.35);color:#ffd2cd}.notice.ok{border-color:rgba(139,224,189,.3);color:#c8f5e2}
 .hidden{display:none!important}
-.loader{width:14px;height:14px;border:2px solid rgba(239,215,142,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;display:inline-block;vertical-align:-2px;margin-right:7px}
+details.box{border:1px solid var(--line2);border-radius:12px;background:rgba(0,0,0,.16);margin-top:8px}
+details.box summary{list-style:none;min-height:44px;padding:10px 12px;font-size:12px;font-weight:900;color:var(--gold);cursor:pointer;display:flex;justify-content:space-between;gap:8px;align-items:center}
+details.box summary::-webkit-details-marker{display:none}
+.box-body{padding:0 12px 12px;display:grid;gap:8px}
+.job-line{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:8px;align-items:center;border:1px solid var(--line2);border-radius:12px;padding:8px;background:rgba(0,0,0,.16)}
+.job-line img{width:44px;height:44px;border-radius:8px;object-fit:cover;background:#111}
+.job-line b{display:block;font-size:12px;line-height:1.25}
+.job-line small{display:block;color:var(--muted);font-size:10px;margin-top:2px}
+.dock{position:sticky;bottom:max(8px,var(--safe-b));z-index:5;margin-top:8px}
+.progress{height:6px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;margin:8px 0}
+.progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,rgba(239,215,142,.7),rgba(90,140,220,.55));transition:width .35s ease}
+.struct{display:grid;gap:4px;font-size:11px;color:var(--soft)}
+.struct span{color:var(--muted)}
+.menu{position:relative}
+.menu-pop{position:absolute;right:0;top:46px;min-width:180px;border:1px solid var(--line);border-radius:12px;background:#0b1220;box-shadow:0 16px 40px rgba(0,0,0,.45);padding:6px;z-index:20}
+.menu-pop button{width:100%;text-align:left;border:0;background:transparent;color:var(--ink);padding:10px;border-radius:8px;font-size:12px;font-weight:800}
+.menu-pop button:hover{background:rgba(239,215,142,.08)}
+.cost{border:1px solid var(--line2);border-radius:12px;padding:10px;font-size:11px;line-height:1.45;color:var(--soft);background:rgba(239,215,142,.04)}
+.loader{width:14px;height:14px;border:2px solid rgba(239,215,142,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;display:inline-block;vertical-align:-2px;margin-right:6px}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-@container video-studio (max-width:980px){
-  .grid{grid-template-columns:1fr}
-  .grid>aside{position:static}
-  .profile{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .viewport-proof{grid-template-columns:repeat(3,minmax(0,1fr))}
-}
-@media(max-width:760px){
-  :root{--page-pad:12px;--panel-pad:14px}
-  .topbar{align-items:start}
-  .brand-mark{width:44px;height:44px;flex-basis:44px;border-radius:14px}
-  .hero h2{font-size:clamp(30px,10vw,44px)}
-  .setting-row{grid-template-columns:1fr}
-  .actions{grid-template-columns:1fr}
-}
-@media(max-width:480px){
-  :root{--page-pad:10px;--panel-pad:12px;--radius:17px}
-  .topbar{gap:8px;margin-bottom:10px}
-  .brand{gap:8px}
-  .brand-mark{width:40px;height:40px;flex-basis:40px;border-radius:13px;font-size:13px}
-  .brand p{max-width:190px}
-  .back{min-height:40px;padding:8px 9px;font-size:11px}
-  .hero{padding:19px 16px}
-  .hero:before{inset:9px}
-  .hero h2{font-size:clamp(28px,11.6vw,40px);line-height:1}
-  .hero p{font-size:12px;line-height:1.52}
-  .status-line{gap:6px;margin-top:13px}
-  .chip{padding:6px 8px}
-  .section-head{align-items:flex-start;gap:7px}
-  .section-head h3{font-size:20px}
-  .section-head span{font-size:8.5px;max-width:38%}
-  .step{grid-template-columns:30px minmax(0,1fr);gap:9px;padding:9px}
-  .step-num{width:30px;height:30px}
-  .step-state{grid-column:2;text-align:left;margin-top:-3px}
-  .profile{grid-template-columns:1fr}
-  .viewport-proof{grid-template-columns:repeat(2,minmax(0,1fr))}
-  summary{align-items:flex-start}
-}
-@media(max-width:350px){
-  .brand p{display:none}
-  .hero h2{font-size:27px}
-  .kicker{letter-spacing:.09em}
-  .viewport-proof{grid-template-columns:1fr}
-}
-@media(min-width:1200px){
-  .creator-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.38fr);gap:18px;align-items:end}
-  .creator-panel .creator-copy{grid-column:1}
-  .creator-panel .primary{grid-column:2;grid-row:1/span 3;margin:0;min-height:100%}
-}
-@media(orientation:landscape) and (max-height:600px){
-  body{padding-top:max(8px,var(--safe-top));padding-bottom:max(10px,var(--safe-bottom))}
-  .topbar{margin-bottom:8px}
-  .hero{padding:16px 18px}
-  .hero h2{font-size:clamp(27px,5.5vw,42px);margin:6px 0}
-  .hero p{font-size:11px;line-height:1.4}
-  .status-line{margin-top:10px}
-  textarea{min-height:90px}
-}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.loader{animation:none}.primary:active{transform:none}}
-@media(hover:hover){.back:hover,.btn:hover{border-color:rgba(239,215,142,.45);background:rgba(239,215,142,.09)}.primary:hover{filter:brightness(1.06)}}
 </style>
 </head>
 <body>
 <main class="app">
-  <header class="topbar">
+  <div class="top">
     <div class="brand">
-      <div class="brand-mark">DT</div>
-      <div><h1>DAR Admin</h1><p>Privates KI-Video-Studio</p></div>
-    </div>
-    <a class="back" href="/admin/">← Admin</a>
-  </header>
-
-  <section class="hero">
-    <div class="kicker">DAR AL TAWḤĪD · Autonome Produktion</div>
-    <h2>Ein Auftrag. Ein fertiger Video-Beitrag.</h2>
-    <p>Die spätere Produktion läuft serverseitig: geprüfte Aussage, Storyboard, gesichtslose Szenen, feste Stimme, Untertitel, Quelle, Logo und fertiger 9:16-Export.</p>
-    <div class="status-line">
-      <span class="chip ok">Responsiv geprüft</span>
-      <span class="chip" id="viewportProfile">Ansicht wird erkannt</span>
-      <span class="chip">iPhone · iPad · Android · Web</span>
-      <span class="chip">Freigabe immer manuell</span>
-    </div>
-  </section>
-
-  <section class="panel creator-panel">
-    <div class="creator-copy">
-      <div class="section-head"><div><h3>Video-Beitrag erstellen</h3></div><span>DAR Standard</span></div>
-      <label class="label" for="brief">Thema oder Aussage – optional</label>
-      <textarea id="brief" placeholder="Leer lassen: Die App wählt automatisch eine neue, noch nicht verwendete und geprüfte Aussage aus."></textarea>
-      <p class="helper">Keine externe App, kein manueller Schnitt und keine wechselnde Stimme. Die Produktionsregeln bleiben fest gespeichert.</p>
-    </div>
-    <button class="primary" id="createBtn" type="button">VIDEO-BEITRAG AUTONOM ERSTELLEN</button>
-  </section>
-
-  <div class="grid">
-    <section class="panel">
-      <div class="section-head"><h3>Produktionsstatus</h3><span id="jobBadge">Bereit</span></div>
-      <div class="timeline" id="timeline"></div>
-      <div id="jobNotice" class="notice">Noch kein Auftrag gestartet. Die Oberfläche ist vorbereitet; der Videodienst wird ausschließlich serverseitig verbunden.</div>
-    </section>
-
-    <aside class="panel">
-      <div class="section-head"><h3>Auftrag</h3><span id="jobId">—</span></div>
-      <div class="summary-card"><b>Modus</b><strong id="modeSummary">Automatisch</strong><small>Preis-Leistung, Verfügbarkeit und Qualitätsregeln entscheiden.</small></div>
-      <div class="summary-card"><b>Format</b><strong>9:16 · Hochformat</strong><small>Instagram Reels, TikTok, Telegram und WhatsApp.</small></div>
-      <div class="summary-card"><b>Feste Regeln</b><strong>Gesichter vollständig verborgen</strong><small>Keine Darstellung des Propheten ﷺ, bestimmter Ṣaḥābah oder Salaf.</small></div>
-      <div id="resultActions" class="actions hidden">
-        <button class="btn primary-small" type="button" id="previewBtn">Vorschau</button>
-        <button class="btn primary-small" type="button" id="downloadBtn">MP4 laden</button>
-        <button class="btn" type="button" id="shareBtn">Teilen</button>
-        <button class="btn" type="button" id="approveBtn">Intern freigeben</button>
-        <button class="btn" type="button" id="feedBtn" disabled title="Nur nach interner Freigabe, nie automatisch">Optional: Feed</button>
-        <button class="btn" type="button" id="pushBtn" disabled title="Nur nach interner Freigabe, nie automatisch">Optional: Push</button>
-        <button class="btn" type="button" id="retryBtn">Neu erstellen</button>
-        <button class="btn" type="button" id="cancelBtn">Abbrechen</button>
-        <button class="btn danger" type="button" id="deleteBtn">Löschen</button>
+      <div class="mark">د</div>
+      <div>
+        <h1>KI-Video-Studio</h1>
+        <small id="statusChip">bereit</small>
       </div>
-      <p class="helper" id="freigabeHint" style="margin-top:8px">Ablauf: Erzeugen → Vorschau → Download → Teilen → intern freigeben → optional Feed/Push nur manuell. Nie automatisch.</p>
-      <div id="previewBox" class="hidden" style="margin-top:10px">
-        <video id="previewVideo" controls playsinline preload="metadata" style="width:100%;max-height:min(70vh,720px);border-radius:14px;background:#000;border:1px solid var(--line2)"></video>
-        <p class="helper" id="previewMeta"></p>
-        <p class="helper" id="downloadHint" style="margin-top:6px"></p>
+    </div>
+    <div class="top-actions">
+      <span class="chip" id="budgetChip" title="Monatsverbrauch">€ —</span>
+      <a class="back" href="./">Admin</a>
+      <div class="menu">
+        <button class="icon-btn" type="button" id="settingsBtn" aria-label="Einstellungen">⚙</button>
+        <div class="menu-pop hidden" id="settingsPop">
+          <button type="button" data-go="worker">Worker verbinden</button>
+          <button type="button" data-go="help">Kurzhilfe</button>
+          <button type="button" data-go="advanced">Erweiterte Details</button>
+        </div>
       </div>
-      <div class="summary-card" style="margin-top:10px"><b>Anbieterstatus</b><strong id="providerStatus">Wird geladen…</strong><small id="providerStatusDetail">Serverseitig, keine Keys im Browser.</small></div>
-      <div class="summary-card" style="margin-top:10px">
-        <b>Aufträge auf dem Server</b>
-        <div id="jobList" style="margin-top:8px;display:grid;gap:8px"></div>
-        <button class="btn" type="button" id="reloadJobsBtn" style="margin-top:8px;min-height:44px">Liste aktualisieren</button>
-        <small>Fertige Videos hier öffnen · fehlgeschlagene Läufe (z. B. HTTP 405) erzeugen keine Datei.</small>
-      </div>
-    </aside>
+    </div>
   </div>
 
-  <section class="panel">
-    <details>
-      <summary><span>Worker-Verbindung (Staging)</span><span>Admin Secret</span></summary>
-      <div class="settings">
-        <div class="setting-row">
-          <div><label class="label" for="workerUrl">Worker-URL</label><input id="workerUrl" type="url" placeholder="https://dar-admin-publisher.sero91ak.workers.dev"></div>
-          <div><label class="label" for="workerSecret">Admin Worker Secret</label><input id="workerSecret" type="password" autocomplete="off" placeholder="Nur lokal auf diesem Gerät"></div>
-        </div>
-        <button class="btn primary-small" id="saveWorker" type="button">Verbindung speichern</button>
-        <div class="notice">Secrets niemals in GitHub ablegen. Das Secret bleibt nur in localStorage dieses Admin-Geräts – Anbieter-API-Keys nur als Cloudflare Secrets.</div>
+  <nav class="steps" aria-label="Produktionsschritte">
+    <div class="step active" data-step="text"><b>1 Text</b>einfügen</div>
+    <div class="step" data-step="image"><b>2 Bild</b>Szene</div>
+    <div class="step" data-step="video"><b>3 Video</b>erzeugen</div>
+    <div class="step" data-step="result"><b>4 Ergebnis</b>Export</div>
+  </nav>
+
+  <section class="panel" id="panelText">
+    <label class="label" for="textInput">Textbeitrag einfügen</label>
+    <textarea id="textInput" placeholder="Sprecher, Aussage, Quelle … vollständigen Beitrag hier einfügen."></textarea>
+    <div class="row" style="margin-top:8px;justify-content:space-between">
+      <span class="meta" id="charCount">0 Zeichen</span>
+      <div class="row">
+        <button class="btn ghost" type="button" id="pasteBtn">Einfügen</button>
+        <button class="btn ghost" type="button" id="clearTextBtn">Löschen</button>
+      </div>
+    </div>
+    <div class="struct" id="structPreview" style="margin-top:8px"></div>
+    <details class="box">
+      <summary><span>Textaufteilung bearbeiten</span><span>▾</span></summary>
+      <div class="box-body">
+        <div><label class="label" for="fSpeaker">Sprecher</label><input id="fSpeaker"></div>
+        <div><label class="label" for="fDe">Aussage</label><textarea id="fDe" style="min-height:72px"></textarea></div>
+        <div><label class="label" for="fSource">Quelle</label><input id="fSource"></div>
+        <div><label class="label" for="fTopic">Thema</label><input id="fTopic" placeholder="Wissen / Dhikr / Sunnah …"></div>
       </div>
     </details>
+    <button class="btn primary" type="button" id="toImageBtn" style="width:100%;margin-top:10px">Weiter zum Szenenbild</button>
   </section>
 
-  <section class="panel">
-    <details>
-      <summary><span>Erweiterte Einstellungen</span><span>Nur einmal festlegen</span></summary>
-      <div class="settings">
-        <div class="setting-row">
-          <div><label class="label" for="provider">Video-Anbieter</label><select id="provider"><option value="auto">Automatisch · bestes Preis-Leistungs-Verhältnis</option><option value="veo">Google Veo</option><option value="runway">Runway</option><option value="luma">Luma</option><option value="adobe">Adobe Firefly</option><option value="kling">Kling</option></select></div>
-          <div><label class="label" for="budget">Monatslimit in €</label><input id="budget" type="number" inputmode="decimal" min="1" max="500" step="1" value="15"></div>
-        </div>
-        <div class="setting-row">
-          <div><label class="label" for="maxPerVideo">Maximal pro Video in €</label><input id="maxPerVideo" type="number" inputmode="decimal" min="0.1" max="100" step="0.1" value="1.20"></div>
-          <div><label class="label" for="voice">Stimme</label><select id="voice"><option value="dar-male">DAR Männerstimme · warm und ruhig</option></select></div>
-        </div>
-        <button class="btn primary-small" id="saveSettings" type="button">Einstellungen speichern</button>
-        <div class="notice warn">Normale Verbraucher-Abos lassen sich nicht automatisch verwenden, sofern der Anbieter dafür keinen offiziellen API-Zugang anbietet. Zugangsdaten werden später nur als Cloudflare-Secrets gespeichert – niemals im Browser.</div>
+  <section class="panel hidden" id="panelImage">
+    <div class="row" style="justify-content:space-between;margin-bottom:8px">
+      <strong style="font-family:var(--serif);color:var(--gold)">Szenenbild</strong>
+      <span class="meta">9:16 · textfrei · logofrei</span>
+    </div>
+    <div class="actions">
+      <button class="btn primary" type="button" id="genImageBtn">Szenenbild erzeugen</button>
+      <button class="btn" type="button" id="uploadImageBtn">Bild hochladen</button>
+      <button class="btn" type="button" id="libraryBtn">Aus Bibliothek</button>
+      <input id="fileInput" type="file" accept="image/*" class="hidden">
+    </div>
+    <div class="preview-wrap" style="margin-top:10px"><img id="scenePreview" alt="Szenenbild" class="hidden"></div>
+    <div class="actions">
+      <button class="btn primary" type="button" id="acceptImageBtn" disabled>Übernehmen</button>
+      <button class="btn" type="button" id="regenImageBtn" disabled>Neu erzeugen</button>
+    </div>
+    <button class="btn" type="button" id="backTextBtn" style="width:100%;margin-top:8px">← Text</button>
+    <div class="notice" id="imageNotice">Noch kein Bild gewählt.</div>
+  </section>
+
+  <section class="panel hidden" id="panelVideo">
+    <div class="cost" id="costBox">15 Sekunden · 3 Bewegungsclips<br>Geschätzte Kosten: —</div>
+    <div class="progress" aria-hidden="true"><i id="progBar"></i></div>
+    <div class="meta" id="prodMsg">Bereit zur Erzeugung</div>
+    <button class="btn primary dock" type="button" id="createVideoBtn" style="width:100%">Video-Beitrag erstellen</button>
+    <div class="actions" style="margin-top:8px">
+      <button class="btn" type="button" id="backImageBtn">← Bild</button>
+      <button class="btn danger" type="button" id="cancelJobBtn" disabled>Abbrechen</button>
+    </div>
+    <div class="notice" id="videoNotice"></div>
+  </section>
+
+  <section class="panel hidden" id="panelResult">
+    <div class="preview-wrap"><video id="resultVideo" controls playsinline preload="metadata" class="hidden"></video></div>
+    <div class="struct" id="resultMeta" style="margin-top:8px"></div>
+    <div class="actions">
+      <button class="btn primary" type="button" id="saveBtn">Auf Gerät speichern</button>
+      <button class="btn primary" type="button" id="shareBtn">Teilen</button>
+    </div>
+    <div class="actions">
+      <button class="btn" type="button" id="approveBtn">Intern freigeben</button>
+      <button class="btn" type="button" id="feedBtn" disabled>Im Feed veröffentlichen</button>
+      <button class="btn" type="button" id="pushBtn" disabled>Besucher-Push senden</button>
+      <button class="btn" type="button" id="newJobBtn">Neuer Beitrag</button>
+    </div>
+    <div class="notice" id="resultNotice">Feed und Push nur manuell – nie automatisch.</div>
+  </section>
+
+  <details class="box" id="jobsBox">
+    <summary><span id="jobsSummary">Server-Aufträge · 0</span><span>▾</span></summary>
+    <div class="box-body">
+      <div class="row">
+        <button class="btn ghost" type="button" id="reloadJobsBtn">Aktualisieren</button>
+        <input id="jobSearch" placeholder="Suche Titel…" style="min-height:40px;flex:1">
       </div>
-    </details>
-  </section>
+      <div id="jobList"></div>
+    </div>
+  </details>
 
-  <section class="panel">
-    <div class="section-head"><h3>DAR-Video-Profil</h3><span>Verbindlich</span></div>
-    <div class="profile">
-      <div><b>Bildsprache</b><span>Fotorealistisch, filmisch, themenbezogen, keine zufälligen Standardhintergründe.</span></div>
-      <div><b>Personen</b><span>Anonyme Symbolfiguren, angemessen gekleidet, nur Rückenansicht, Silhouette oder Ausschnitt.</span></div>
-      <div><b>Stimme</b><span>Eine feste deutsche Männerstimme, warm, ruhig, würdevoll und ohne Werbeton.</span></div>
-      <div><b>Ton</b><span>Natürliche Atmosphäre; keine Musik. Naschīd nur bei späterer ausdrücklicher Profiländerung.</span></div>
-      <div><b>Branding</b><span>DAR-Wasserzeichen, Original-Embleme für Telegram/Website/Instagram, Quelle und Credit.</span></div>
-      <div><b>Export</b><span>1080×1920 · MP4 · Shotstack Production (kein Stage-Wasserzeichen in der Endfassung).</span></div>
-      <div><b>Sicherheit</b><span>Keine automatische Feed-/Push-Veröffentlichung. Reihenfolge: erzeugen → Vorschau → Download → Teilen → optional manuell.</span></div>
+  <details class="box hidden" id="workerBox">
+    <summary><span>Worker-Verbindung</span><span>▾</span></summary>
+    <div class="box-body">
+      <div><label class="label" for="workerUrl">Worker-URL</label><input id="workerUrl" type="url"></div>
+      <div><label class="label" for="workerSecret">Admin Secret</label><input id="workerSecret" type="password" autocomplete="off"></div>
+      <button class="btn primary" type="button" id="saveWorkerBtn">Speichern</button>
     </div>
-    <div class="viewport-proof" aria-label="Verbindliche Darstellungsgrößen">
-      <div><b>320–359 px</b><span>Kleine Smartphones</span></div>
-      <div><b>360–479 px</b><span>Normale Smartphones</span></div>
-      <div><b>480–767 px</b><span>Große Smartphones</span></div>
-      <div><b>768–1023 px</b><span>Tablets Hochformat</span></div>
-      <div><b>1024–1199 px</b><span>Tablet quer / Laptop</span></div>
-      <div><b>ab 1200 px</b><span>Desktop und Webseite</span></div>
+  </details>
+
+  <details class="box hidden" id="advancedBox">
+    <summary><span>Erweiterte Details</span><span>▾</span></summary>
+    <div class="box-body">
+      <div class="meta" id="providerDetail">Anbieterstatus wird geladen…</div>
+      <div><label class="label" for="maxBudget">Max. € / Video</label><input id="maxBudget" type="number" min="0.5" max="20" step="0.1" value="1.2"></div>
+      <div class="meta">Provider-Auswahl: automatisch (günstig). Stage nur interne Vorschau; Endfassung Production.</div>
     </div>
-  </section>
+  </details>
+
+  <details class="box hidden" id="helpBox">
+    <summary><span>Kurzhilfe</span><span>▾</span></summary>
+    <div class="box-body meta">
+      Text einfügen → Szenenbild erzeugen/wählen → Kosten bestätigen → Video erstellen → Vorschau → speichern/teilen → optional Feed/Push.
+      Keine Musik, keine Fremdwasserzeichen, Gesichter verborgen.
+    </div>
+  </details>
 </main>
 <script>
 (function(){
   "use strict";
-  const STORAGE_KEY="darVideoStudioSettingsV1";
-  const JOB_KEY="darVideoStudioLastJobV1";
-  const WORKER_URL_KEY="darAdminWorkerPublishUrlV1";
-  const WORKER_SECRET_KEY="darAdminWorkerSecretV1";
+  const DRAFT_KEY="darVideoStudioDraftV2";
+  const JOB_KEY="darVideoStudioLastJobV2";
+  const LIB_KEY="darVideoStudioLibraryV1";
+  const WURL="darAdminWorkerPublishUrlV1";
+  const WSEC="darAdminWorkerSecretV1";
   const DEFAULT_WORKER="https://dar-admin-publisher.sero91ak.workers.dev";
-  const steps=[
-    ["statement","Aussage auswählen und prüfen","Neue Aussage, Sprecher, deutsche Fassung und Quelle"],
-    ["storyboard","Storyboard erstellen","Handlung, Umgebung, Kamera und gesichtslose Figuren"],
-    ["references","Referenzbilder erzeugen","Einheitliche Personen, Kleidung und Farbwelt"],
-    ["clips","Videoclips generieren","Echte Bewegung über den verbundenen Video-Anbieter"],
-    ["voice","DAR-Stimme erzeugen","Feste deutsche Männerstimme und korrekte Pausen"],
-    ["captions","Texteinblendungen setzen","Sprecher → Aussage (Blöcke) → Quelle → Social/CTA, synchron zur Stimme"],
-    ["render","Video fertigstellen","Production 1080×1920, DAR-Wasserzeichen, Social-Block, ohne Fremdlogo"],
-    ["review","Qualitätsprüfung","Fremdwasserzeichen, Branding, Lesbarkeit, Stimme, Sync, Safe Areas"]
-  ];
   const el=id=>document.getElementById(id);
-  const state={job:null,pollTimer:null};
+  const state={step:"text",job:null,parsed:null,scene:null,poll:null,estimate:null};
 
-  function esc(value){return String(value??"").replace(/[&<>\"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
-  function viewportLabel(){
-    const width=Math.round((window.visualViewport&&window.visualViewport.width)||window.innerWidth||document.documentElement.clientWidth||0);
-    const height=Math.round((window.visualViewport&&window.visualViewport.height)||window.innerHeight||document.documentElement.clientHeight||0);
-    const orientation=width>height?"Querformat":"Hochformat";
-    let device="Desktop / Webseite";
-    if(width<360)device="Kleines Smartphone";
-    else if(width<480)device="Smartphone";
-    else if(width<768)device="Großes Smartphone";
-    else if(width<1024)device="Tablet";
-    else if(width<1200)device="Tablet quer / Laptop";
-    return `${device} · ${width} × ${height} · ${orientation}`;
-  }
-  function updateViewportProfile(){const target=el("viewportProfile");if(target)target.textContent=viewportLabel()}
-  function readSettings(){try{return {...{provider:"auto",budget:15,maxPerVideo:1.2,voice:"dar-male"},...JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}")}}catch{return{provider:"auto",budget:15,maxPerVideo:1.2,voice:"dar-male"}}}
-  function saveSettings(){const value={provider:el("provider").value,budget:Number(el("budget").value)||15,maxPerVideo:Number(el("maxPerVideo").value)||1.2,voice:el("voice").value};localStorage.setItem(STORAGE_KEY,JSON.stringify(value));el("modeSummary").textContent=value.provider==="auto"?"Automatisch":el("provider").selectedOptions[0].textContent;notice("Einstellungen wurden auf diesem Gerät gespeichert.","ok")}
-  function applySettings(){const s=readSettings();el("provider").value=s.provider;el("budget").value=s.budget;el("maxPerVideo").value=s.maxPerVideo;el("voice").value=s.voice;el("modeSummary").textContent=s.provider==="auto"?"Automatisch":el("provider").selectedOptions[0].textContent}
-  function workerBase(){try{const raw=localStorage.getItem(WORKER_URL_KEY)||DEFAULT_WORKER;return String(raw).replace(/\/publish\/?$/,"").replace(/\/$/,"")}catch{return DEFAULT_WORKER}}
-  function workerSecret(){try{return localStorage.getItem(WORKER_SECRET_KEY)||""}catch{return ""}}
-  function applyWorkerFields(){el("workerUrl").value=workerBase();el("workerSecret").value=workerSecret()}
-  function saveWorker(){const url=(el("workerUrl").value||DEFAULT_WORKER).trim().replace(/\/publish\/?$/,"").replace(/\/$/,"");const secret=(el("workerSecret").value||"").trim();localStorage.setItem(WORKER_URL_KEY,url+"/publish");if(secret)localStorage.setItem(WORKER_SECRET_KEY,secret);notice("Worker-Verbindung gespeichert.","ok");loadProviderStatus()}
-  function renderTimeline(job){const current=job?.stage||"";const done=Array.isArray(job?.completedStages)?job.completedStages:[];const failed=job?.status==="failed";el("timeline").innerHTML=steps.map(([id,title,sub],i)=>{let cls="";let label="Wartet";if(done.includes(id)){cls="is-done";label="Fertig"}else if(id===current){cls=failed?"is-error":"is-active";label=failed?"Fehler":"Läuft"}return `<div class="step ${cls}"><div class="step-num">${done.includes(id)?"✓":i+1}</div><div><b>${esc(title)}</b><small>${esc(sub)}</small></div><span class="step-state">${label}</span></div>`}).join("")}
-  function notice(text,type){const n=el("jobNotice");n.className="notice"+(type?" "+type:"");n.innerHTML=text}
-  function setBusy(on){el("createBtn").disabled=on;el("createBtn").innerHTML=on?'<span class="loader"></span>AUFTRAG WIRD GESTARTET':'VIDEO-BEITRAG AUTONOM ERSTELLEN'}
-  function headers(){const h={"Content-Type":"application/json","Accept":"application/json"};const secret=workerSecret();if(secret)h["X-Admin-Secret"]=secret;return h}
-  async function api(path,options={}){
-    const base=workerBase();
-    const res=await fetch(base+"/api/admin/video-studio"+path,{cache:"no-store",credentials:"omit",...options,headers:{...headers(),...(options.headers||{})}});
+  function esc(v){return String(v??"").replace(/[&<>\"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]))}
+  function workerBase(){try{return String(localStorage.getItem(WURL)||DEFAULT_WORKER).replace(/\/publish\/?$/,"").replace(/\/$/,"")}catch{return DEFAULT_WORKER}}
+  function workerSecret(){try{return localStorage.getItem(WSEC)||""}catch{return ""}}
+  function headers(){const h={"Content-Type":"application/json",Accept:"application/json"};const s=workerSecret();if(s)h["X-Admin-Secret"]=s;return h}
+  async function api(path,opt={}){
+    const res=await fetch(workerBase()+"/api/admin/video-studio"+path,{cache:"no-store",credentials:"omit",...opt,headers:{...headers(),...(opt.headers||{})}});
     const data=await res.json().catch(()=>({}));
-    if(!res.ok){const err=new Error(data.message||data.error||`HTTP ${res.status}`);err.status=res.status;err.data=data;throw err}
+    if(!res.ok)throw new Error(data.error||data.message||`HTTP ${res.status}`);
     return data;
   }
-  function saveJob(job){state.job=job;try{localStorage.setItem(JOB_KEY,JSON.stringify(job))}catch{}renderJob(job)}
-  function renderJob(job){
-    renderTimeline(job);
-    el("jobId").textContent=job?.id?String(job.id).slice(0,22):"—";
-    const status=job?.status||"ready";
-    el("jobBadge").textContent={queued:"Warteschlange",running:"In Arbeit",completed:"Fertig",failed:"Fehler",cancelled:"Abgebrochen",setup_required:"Einrichtung nötig"}[status]||"Bereit";
-    const showActions=["completed","failed","running","queued","cancelled","setup_required"].includes(status);
-    el("resultActions").classList.toggle("hidden",!job||!showActions);
-    el("previewBtn").disabled=!(job&&job.outputUrl);
-    el("downloadBtn").disabled=!(job&&job.outputUrl);
-    el("shareBtn").disabled=!(job&&job.outputUrl);
-    el("approveBtn").disabled=!(job&&job.status==="completed"&&!(job.approval&&job.approval.approved));
-    const canPublish=Boolean(job&&job.status==="completed"&&job.approval&&job.approval.approved&&job.outputUrl);
-    el("feedBtn").disabled=!canPublish;
-    el("pushBtn").disabled=!canPublish;
-    el("cancelBtn").disabled=!(job&&["queued","running"].includes(job.status));
-    const preview=el("previewBox");
-    const video=el("previewVideo");
-    const metaBits=[];
-    if(job?.renderMeta?.shotstackEnv)metaBits.push(job.renderMeta.shotstackEnv==="stage"?"Stage-Vorschau":"Production");
-    if(job?.renderMeta?.foreignWatermarkRisk)metaBits.push("Fremdwasserzeichen-Risiko");
-    if(job?.renderMeta?.brandingApplied)metaBits.push("DAR-Branding");
-    if(job?.outputUrl){
-      preview.classList.remove("hidden");
-      if(video.src!==job.outputUrl){video.src=job.outputUrl}
-      el("previewMeta").textContent=`${job.provider||"Anbieter"} · ${Number(job.costEur||0).toFixed(2)} € · ${job.durationSeconds||"—"} s · ${metaBits.join(" · ")||"manuelle Freigabe"}`;
-      el("downloadHint").innerHTML=`Download: <a href="${esc(job.outputUrl)}" target="_blank" rel="noopener">MP4 in neuem Tab öffnen</a>`;
-    }else{
-      preview.classList.add("hidden");
-      video.removeAttribute("src");
-      el("previewMeta").textContent="";
-      el("downloadHint").textContent=status==="failed"?"Dieser Auftrag hat keine Videodatei. Öffne unten einen fertigen Auftrag.":"";
-    }
-    if(status==="completed")notice("Fertig: Vorschau → MP4 laden → Teilen. Feed/Push nur manuell – nie automatisch.","ok");
-    else if(status==="failed")notice(esc(job.message||"Die Produktion wurde abgebrochen.")+" — Fertige Videos stehen in der Auftragsliste unten.","bad");
-    else if(status==="cancelled")notice("Auftrag abgebrochen.");
-    else if(status==="setup_required")notice(`<b>Serverseitige Einrichtung nötig.</b><br>${esc(job.message||"Cloudflare Secrets und Bindings setzen – siehe docs/dar-ai-video-studio-secrets-and-costs.md")}`,"warn");
-    else if(status==="running"||status==="queued")notice("Der Auftrag läuft serverseitig weiter, auch wenn du die App schließt.");
-    if(job?.statement?.de){
-      notice(`${status==="completed"?"Fertig":"Aussage"}: <b>${esc(job.statement.speaker||"")}</b> — ${esc(job.statement.de)}<br><small>${esc(job.statement.source||"")}</small>${job.message?`<br>${esc(job.message)}`:""}`,status==="failed"?"bad":status==="setup_required"?"warn":"ok");
-    }
-  }
-  async function loadJobList(){
-    const box=el("jobList");
-    if(!box)return;
-    if(!workerSecret()){box.innerHTML="<small>Zuerst Worker-Secret speichern.</small>";return}
-    try{
-      const data=await api("/jobs?limit=12");
-      const jobs=data.jobs||[];
-      if(!jobs.length){box.innerHTML="<small>Noch keine Server-Aufträge.</small>";return}
-      box.innerHTML=jobs.map(j=>{
-        const label=j.status==="completed"?"Fertig":j.status==="failed"?"Fehler":j.status;
-        const title=esc((j.statement&&j.statement.speaker)||j.id||"—");
-        const sub=esc((j.statement&&j.statement.de)||j.message||"");
-        const cost=Number(j.costEur||0).toFixed(2);
-        return `<button type="button" class="btn" data-open-job="${esc(j.id)}" style="text-align:left;min-height:44px;white-space:normal;line-height:1.35"><b>${title}</b><br><small>${label} · ${cost} € · ${esc(String(j.id||"").slice(0,18))}</small><br><small>${sub.slice(0,110)}</small></button>`;
-      }).join("");
-      box.querySelectorAll("[data-open-job]").forEach(btn=>{
-        btn.addEventListener("click",()=>openJob(btn.getAttribute("data-open-job")));
-      });
-    }catch(error){
-      box.innerHTML=`<small>${esc(error.message||String(error))}</small>`;
-    }
-  }
-  async function openJob(id){
-    if(!id)return;
-    try{
-      let data=await api("/jobs/"+encodeURIComponent(id));
-      let job=data.job||data;
-      if(job.status==="completed"){
-        try{
-          const refreshed=await api("/jobs/"+encodeURIComponent(id)+"/refresh-urls",{method:"POST",body:"{}"});
-          job=refreshed.job||job;
-        }catch{}
-      }
-      saveJob(job);
-      if(["queued","running"].includes(job.status))startPolling();
-      notice(
-        job.status==="completed"
-          ? "Fertiger Auftrag geladen – Vorschau/Download bereit."
-          : esc(job.message||"Auftrag geladen."),
-        job.status==="failed"?"bad":"ok"
-      );
-    }catch(error){notice(esc(error.message),"bad")}
-  }
-  async function downloadJob(){
-    if(!state.job?.id)return;
-    try{
-      let job=state.job;
-      if(job.status==="completed"){
-        const refreshed=await api("/jobs/"+encodeURIComponent(job.id)+"/refresh-urls",{method:"POST",body:"{}"});
-        job=refreshed.job||job;
-        saveJob(job);
-      }
-      if(!job.outputUrl){notice("Keine MP4-URL für diesen Auftrag.","warn");return}
-      window.open(job.outputUrl,"_blank","noopener");
-    }catch(error){notice(esc(error.message),"bad")}
-  }
-  async function shareJob(){
-    if(!state.job?.outputUrl){notice("Noch keine Videodatei zum Teilen.","warn");return}
-    const url=state.job.outputUrl;
-    const title="DAR AL TAWḤĪD · Video-Beitrag";
-    const text=(state.job.statement&&state.job.statement.de)||"DAR Video-Beitrag";
-    try{
-      if(navigator.share){
-        await navigator.share({title,text,url});
-        notice("Teilen geöffnet. Feed/Push wurden nicht ausgelöst.","ok");
-        return;
-      }
-    }catch(error){
-      if(error&&error.name==="AbortError")return;
-    }
-    try{
-      await navigator.clipboard.writeText(url);
-      notice("MP4-Link kopiert. Kein Feed und kein Push.","ok");
-    }catch{
-      notice(`Link zum Teilen: ${esc(url)}`,"ok");
-    }
-  }
-  async function loadProviderStatus(){
-    try{
-      const data=await api("/providers/status");
-      const connected=(data.providers||[]).filter(p=>p.configured).map(p=>p.label||p.id);
-      el("providerStatus").textContent=connected.length?connected.join(" · "):"Noch kein Anbieter verbunden";
-      el("providerStatusDetail").textContent=`Stimme: ${data.voiceConfigured?"ja":"nein"} · Compose: ${data.composerConfigured?"ja":"nein"} · R2: ${data.r2Configured?"ja":"nein"} · Store: ${data.storeConfigured?"ja":"nein"} · Monat: ${Number(data.monthSpendEur||0).toFixed(2)} €`;
-    }catch(error){
-      el("providerStatus").textContent="Worker nicht erreichbar / Secret fehlt";
-      el("providerStatusDetail").textContent=error.message||String(error);
-    }
-  }
-  async function startJob(){
-    if(!workerSecret()){notice("Bitte zuerst Admin Worker Secret unter „Worker-Verbindung“ speichern.","warn");return}
-    setBusy(true);
-    const settings=readSettings();
-    const payload={brief:el("brief").value.trim(),mode:settings.provider,voiceProfile:settings.voice,budget:{monthlyEur:settings.budget,maxPerVideoEur:settings.maxPerVideo},profile:"dar-standard-v2",format:"9:16",manualApproval:true,composePreview:false,client:{viewport:viewportLabel(),userAgent:navigator.userAgent||""}};
-    try{
-      const data=await api("/jobs",{method:"POST",body:JSON.stringify(payload)});
-      saveJob(data.job||data);
-      startPolling();
-      loadJobList();
-    }catch(error){
-      saveJob({id:"error-"+Date.now(),status:"failed",stage:"statement",completedStages:[],message:error.message});
-    }finally{setBusy(false)}
-  }
-  async function poll(){
-    if(!state.job?.id||["completed","failed","setup_required","cancelled"].includes(state.job.status))return;
-    if(String(state.job.id).startsWith("error-")||String(state.job.id).startsWith("setup-"))return;
-    try{
-      let data;
-      try{
-        data=await api("/jobs/"+encodeURIComponent(state.job.id)+"/process",{method:"POST",body:"{}"});
-      }catch{
-        data=await api("/jobs/"+encodeURIComponent(state.job.id));
-      }
-      saveJob(data.job||data);
-      if(!["completed","failed","cancelled","setup_required"].includes(state.job.status))state.pollTimer=setTimeout(poll,4000);
-    }catch{state.pollTimer=setTimeout(poll,9000)}
-  }
-  function startPolling(){clearTimeout(state.pollTimer);poll()}
-  function restore(){
-    try{
-      const job=JSON.parse(localStorage.getItem(JOB_KEY)||"null");
-      if(job){
-        saveJob(job);
-        if(["queued","running"].includes(job.status))startPolling();
-      }else renderTimeline(null);
-    }catch{renderTimeline(null)}
-    loadJobList().then(async()=>{
-      // Wenn lokal nur ein Fehlerjob liegt: fertigen Server-Auftrag automatisch öffnen
-      if(state.job&&state.job.status==="failed"&&workerSecret()){
-        try{
-          const data=await api("/jobs?limit=12");
-          const completed=(data.jobs||[]).find(j=>j.status==="completed"&&j.outputUrl);
-          if(completed)await openJob(completed.id);
-        }catch{}
-      }
+  function setStatus(text,cls){el("statusChip").textContent=text;el("statusChip").className=cls||""}
+  function showStep(step){
+    state.step=step;
+    const map={text:"panelText",image:"panelImage",video:"panelVideo",result:"panelResult"};
+    Object.keys(map).forEach(s=>el(map[s]).classList.toggle("hidden",s!==step));
+    document.querySelectorAll(".step").forEach(n=>{
+      const s=n.getAttribute("data-step");
+      n.classList.toggle("active",s===step);
+      const order=["text","image","video","result"];
+      n.classList.toggle("done",order.indexOf(s)<order.indexOf(step));
     });
   }
-  async function cancelJob(){
-    if(!state.job?.id)return;
-    try{const data=await api("/jobs/"+encodeURIComponent(state.job.id)+"/cancel",{method:"POST",body:"{}"});saveJob(data.job||data);loadJobList()}catch(error){notice(esc(error.message),"bad")}
+  function saveDraft(){
+    const draft={text:el("textInput").value,speaker:el("fSpeaker").value,de:el("fDe").value,source:el("fSource").value,topic:el("fTopic").value,scene:state.scene};
+    try{localStorage.setItem(DRAFT_KEY,JSON.stringify(draft))}catch{}
   }
-  async function approveJob(){
-    if(!state.job?.id)return;
-    try{const data=await api("/jobs/"+encodeURIComponent(state.job.id)+"/approve",{method:"POST",body:"{}"});saveJob(data.job||data);notice("Intern freigegeben – noch keine Live-Veröffentlichung und kein Push.","ok");loadJobList()}catch(error){notice(esc(error.message),"bad")}
-  }
-  async function publishFeed(){
-    if(!state.job?.id)return;
-    if(!window.confirm("Feed wirklich manuell vormerken? Es erfolgt KEINE automatische Live-Veröffentlichung."))return;
+  function loadDraft(){
     try{
-      const data=await api("/jobs/"+encodeURIComponent(state.job.id)+"/publish-feed",{method:"POST",body:JSON.stringify({confirm:true})});
-      saveJob(data.job||data);
-      notice(esc(data.message||"Feed vorgemerkt – nicht live."),"ok");
-    }catch(error){notice(esc(error.message),"bad")}
-  }
-  async function requestPush(){
-    if(!state.job?.id)return;
-    if(!window.confirm("Push wirklich manuell anfordern? Staging sendet KEINE Pushs an alle Besucher."))return;
-    try{
-      const data=await api("/jobs/"+encodeURIComponent(state.job.id)+"/request-push",{method:"POST",body:JSON.stringify({confirm:true})});
-      saveJob(data.job||data);
-      notice(esc(data.message||"Push nicht an Besucher gesendet."),"ok");
-    }catch(error){notice(esc(error.message),"bad")}
-  }
-  async function deleteRemoteJob(){
-    if(!state.job?.id){localStorage.removeItem(JOB_KEY);state.job=null;renderTimeline(null);renderJob(null);notice("Lokaler Auftrag entfernt.");return}
-    try{
-      if(!String(state.job.id).startsWith("error-"))await api("/jobs/"+encodeURIComponent(state.job.id),{method:"DELETE"});
+      const d=JSON.parse(localStorage.getItem(DRAFT_KEY)||"null");
+      if(!d)return;
+      el("textInput").value=d.text||"";
+      el("fSpeaker").value=d.speaker||"";
+      el("fDe").value=d.de||"";
+      el("fSource").value=d.source||"";
+      el("fTopic").value=d.topic||"";
+      if(d.scene){state.scene=d.scene;showScene(d.scene)}
+      updateChars();
     }catch{}
-    localStorage.removeItem(JOB_KEY);state.job=null;renderTimeline(null);renderJob(null);notice("Auftrag gelöscht.");loadJobList();
   }
-  el("saveSettings").addEventListener("click",saveSettings);
-  el("saveWorker").addEventListener("click",()=>{saveWorker();loadJobList()});
-  el("provider").addEventListener("change",()=>{el("modeSummary").textContent=el("provider").value==="auto"?"Automatisch":el("provider").selectedOptions[0].textContent});
-  el("createBtn").addEventListener("click",startJob);
-  el("retryBtn").addEventListener("click",startJob);
-  el("cancelBtn").addEventListener("click",cancelJob);
-  el("approveBtn").addEventListener("click",approveJob);
-  el("feedBtn").addEventListener("click",publishFeed);
-  el("pushBtn").addEventListener("click",requestPush);
-  el("deleteBtn").addEventListener("click",deleteRemoteJob);
-  el("previewBtn").addEventListener("click",()=>{const url=state.job?.outputUrl;if(!url){notice("Noch keine Videodatei.","warn");return}el("previewBox").classList.remove("hidden");el("previewVideo").src=url;el("previewVideo").play?.().catch(()=>{})});
-  el("downloadBtn").addEventListener("click",downloadJob);
-  el("shareBtn").addEventListener("click",shareJob);
-  el("reloadJobsBtn").addEventListener("click",loadJobList);
-  let viewportTimer=0;
-  function scheduleViewportUpdate(){clearTimeout(viewportTimer);viewportTimer=setTimeout(updateViewportProfile,80)}
-  window.addEventListener("resize",scheduleViewportUpdate,{passive:true});
-  window.addEventListener("orientationchange",scheduleViewportUpdate,{passive:true});
-  if(window.visualViewport)window.visualViewport.addEventListener("resize",scheduleViewportUpdate,{passive:true});
-  applySettings();applyWorkerFields();restore();updateViewportProfile();loadProviderStatus();
+  function updateChars(){el("charCount").textContent=`${el("textInput").value.length} Zeichen`;saveDraft()}
+  function currentStatement(){
+    return {
+      speaker:(el("fSpeaker").value||state.parsed?.statement?.speaker||"Überlieferung").trim(),
+      de:(el("fDe").value||state.parsed?.statement?.de||el("textInput").value).trim(),
+      source:(el("fSource").value||state.parsed?.statement?.source||"").trim(),
+      topic:(el("fTopic").value||state.parsed?.statement?.topic||"Wissen").trim(),
+      manual:true,
+      verified:true
+    };
+  }
+  function renderStruct(p){
+    if(!p){el("structPreview").innerHTML="";return}
+    el("structPreview").innerHTML=`<div><span>Sprecher</span> · ${esc(p.preview?.speaker||p.statement?.speaker||"—")}</div>
+      <div><span>Aussage</span> · ${esc(p.preview?.de||p.statement?.de||"—")}</div>
+      <div><span>Quelle</span> · ${esc(p.preview?.source||p.statement?.source||"—")}</div>`;
+  }
+  async function parseText(){
+    const text=el("textInput").value.trim();
+    if(!text)return null;
+    const data=await api("/parse-text",{method:"POST",body:JSON.stringify({text})});
+    state.parsed=data;
+    state.estimate=data.estimate||null;
+    el("fSpeaker").value=data.statement.speaker||"";
+    el("fDe").value=data.statement.de||"";
+    el("fSource").value=data.statement.source||"";
+    el("fTopic").value=data.statement.topic||"";
+    renderStruct(data);
+    if(state.estimate){
+      el("costBox").innerHTML=`${esc(state.estimate.mode)}<br>Geschätzte Kosten: ${state.estimate.estimateMinEur.toFixed(2)}–${state.estimate.estimateMaxEur.toFixed(2)} €<br>Maximalbudget: ${Number(el("maxBudget").value||1.2).toFixed(2)} €`;
+    }
+    saveDraft();
+    return data;
+  }
+  function showScene(scene){
+    state.scene=scene;
+    const img=el("scenePreview");
+    if(scene?.url){img.src=scene.url;img.classList.remove("hidden");el("acceptImageBtn").disabled=false;el("regenImageBtn").disabled=false;el("imageNotice").textContent="Szenenbild bereit – Übernehmen tippen."}
+    else{img.classList.add("hidden");el("acceptImageBtn").disabled=true}
+    saveDraft();
+  }
+  function libSave(scene){
+    try{
+      const list=JSON.parse(localStorage.getItem(LIB_KEY)||"[]");
+      list.unshift({...scene,savedAt:Date.now()});
+      localStorage.setItem(LIB_KEY,JSON.stringify(list.slice(0,24)));
+    }catch{}
+  }
+
+  el("textInput").addEventListener("input",()=>{updateChars();clearTimeout(state._t);state._t=setTimeout(()=>{parseText().catch(()=>{})},450)});
+  el("pasteBtn").addEventListener("click",async()=>{try{el("textInput").value=await navigator.clipboard.readText();updateChars();await parseText()}catch{el("imageNotice")}});
+  el("clearTextBtn").addEventListener("click",()=>{el("textInput").value="";el("fSpeaker").value="";el("fDe").value="";el("fSource").value="";el("fTopic").value="";renderStruct(null);updateChars()});
+  el("toImageBtn").addEventListener("click",async()=>{
+    try{if(!el("textInput").value.trim()){alert("Bitte Textbeitrag einfügen.");return}await parseText();showStep("image");setStatus("Bild wählen")}catch(e){alert(e.message)}
+  });
+  el("backTextBtn").addEventListener("click",()=>showStep("text"));
+  el("backImageBtn").addEventListener("click",()=>showStep("image"));
+
+  el("genImageBtn").addEventListener("click",async()=>{
+    el("genImageBtn").disabled=true;el("imageNotice").textContent="Szenenbild wird erzeugt…";
+    try{
+      await parseText();
+      const data=await api("/scene-image",{method:"POST",body:JSON.stringify({statement:currentStatement()})});
+      showScene(data.sceneImage);libSave(data.sceneImage);
+      el("imageNotice").className="notice ok";el("imageNotice").textContent="Bild erzeugt (textfrei).";
+    }catch(e){el("imageNotice").className="notice bad";el("imageNotice").textContent=e.message}
+    finally{el("genImageBtn").disabled=false}
+  });
+  el("regenImageBtn").addEventListener("click",()=>el("genImageBtn").click());
+  el("uploadImageBtn").addEventListener("click",()=>el("fileInput").click());
+  el("fileInput").addEventListener("change",async()=>{
+    const file=el("fileInput").files?.[0];if(!file)return;
+    const reader=new FileReader();
+    reader.onload=async()=>{
+      try{
+        const data=await api("/scene-image/upload",{method:"POST",body:JSON.stringify({dataUrl:reader.result})});
+        showScene(data.sceneImage);libSave(data.sceneImage);
+        el("imageNotice").className="notice ok";el("imageNotice").textContent="Bild hochgeladen.";
+      }catch(e){el("imageNotice").className="notice bad";el("imageNotice").textContent=e.message}
+    };
+    reader.readAsDataURL(file);
+  });
+  el("libraryBtn").addEventListener("click",()=>{
+    try{
+      const list=JSON.parse(localStorage.getItem(LIB_KEY)||"[]");
+      if(!list.length){alert("Bibliothek leer – zuerst erzeugen oder hochladen.");return}
+      const pick=list[0];
+      showScene(pick);
+      el("imageNotice").textContent="Letztes Bibliotheksbild geladen.";
+    }catch{alert("Bibliothek nicht lesbar")}
+  });
+  el("acceptImageBtn").addEventListener("click",async()=>{
+    if(!state.scene?.url){alert("Kein Bild");return}
+    try{await parseText()}catch{}
+    showStep("video");setStatus("bereit zur Produktion");
+  });
+
+  async function createVideo(){
+    if(!workerSecret()){alert("Bitte Worker-Secret unter ⚙ speichern.");return}
+    if(!state.scene?.url){alert("Szenenbild fehlt");return}
+    const stmt=currentStatement();
+    if(!stmt.de){alert("Aussage fehlt");return}
+    const max=Number(el("maxBudget").value||1.2);
+    const est=state.estimate||{estimateMinEur:0.9,estimateMaxEur:1.4,mode:"15 s · 3 Clips"};
+    if(!confirm(`${est.mode||"15 Sekunden · 3 Clips"}\nGeschätzte Kosten: ${est.estimateMinEur}–${est.estimateMaxEur} €\nMaximalbudget: ${max.toFixed(2)} €\n\nKostenpflichtige Erzeugung starten?`))return;
+    el("createVideoBtn").disabled=true;el("createVideoBtn").innerHTML='<span class="loader"></span>Startet…';
+    setStatus("in Produktion","run");
+    try{
+      const data=await api("/jobs",{method:"POST",body:JSON.stringify({
+        contributionText:el("textInput").value.trim(),
+        statement:stmt,
+        sceneImageUrl:state.scene.url,
+        sceneImageR2Key:state.scene.r2Key||null,
+        costConfirmed:true,
+        profile:"dar-standard-v2",
+        format:"9:16",
+        manualApproval:true,
+        composePreview:false,
+        budget:{monthlyEur:15,maxPerVideoEur:max},
+        mode:"auto",
+        voiceProfile:"dar-male",
+        client:{viewport:window.innerWidth+"x"+window.innerHeight}
+      })});
+      state.job=data.job;try{localStorage.setItem(JOB_KEY,JSON.stringify(data.job))}catch{}
+      el("cancelJobBtn").disabled=false;
+      el("videoNotice").className="notice";el("videoNotice").textContent=data.job.message||"Produktion gestartet";
+      startPoll();
+    }catch(e){el("videoNotice").className="notice bad";el("videoNotice").textContent=e.message;setStatus("Fehler","bad")}
+    finally{el("createVideoBtn").disabled=false;el("createVideoBtn").textContent="Video-Beitrag erstellen"}
+  }
+  function stagePct(job){
+    const order=["statement","storyboard","references","clips","voice","captions","render","review"];
+    const i=Math.max(0,order.indexOf(job?.stage||"statement"));
+    return Math.round(((i+(job?.status==="completed"?1:0))/order.length)*100);
+  }
+  function startPoll(){
+    clearTimeout(state.poll);
+    (async function tick(){
+      if(!state.job?.id)return;
+      try{
+        let data;
+        try{data=await api("/jobs/"+encodeURIComponent(state.job.id)+"/process",{method:"POST",body:"{}"})}
+        catch{data=await api("/jobs/"+encodeURIComponent(state.job.id))}
+        const job=data.job||data;state.job=job;
+        el("progBar").style.width=stagePct(job)+"%";
+        el("prodMsg").textContent=job.message||job.stage||"";
+        el("videoNotice").textContent=job.message||"";
+        if(job.status==="completed"){
+          setStatus("fertig","ok");showStep("result");await openResult(job);loadJobs();return;
+        }
+        if(job.status==="failed"){setStatus("Fehler","bad");el("videoNotice").className="notice bad";el("videoNotice").textContent=job.message||"Fehler";return}
+        state.poll=setTimeout(tick,4000);
+      }catch{state.poll=setTimeout(tick,8000)}
+    })();
+  }
+  async function openResult(job){
+    let j=job;
+    try{const r=await api("/jobs/"+encodeURIComponent(job.id)+"/refresh-urls",{method:"POST",body:"{}"});j=r.job||job}catch{}
+    state.job=j;
+    const v=el("resultVideo");
+    if(j.outputUrl){v.src=j.outputUrl;v.classList.remove("hidden")}
+    el("resultMeta").innerHTML=`<div><span>Titel</span> · ${esc(j.statement?.speaker||"DAR Video")}</div>
+      <div><span>Dauer</span> · ${esc(j.durationSeconds||15)} s · 1080×1920</div>
+      <div><span>Kosten</span> · ${Number(j.costEur||0).toFixed(2)} € (Schätzung ${Number(j.estimateEur||0).toFixed(2)} €)</div>
+      <div><span>QA</span> · ${j.qualityChecks&&Object.values(j.qualityChecks).every(Boolean)?"bestanden":"siehe Details"}</div>`;
+    const approved=Boolean(j.approval?.approved);
+    el("approveBtn").disabled=approved;el("feedBtn").disabled=!approved;el("pushBtn").disabled=!approved;
+  }
+  el("createVideoBtn").addEventListener("click",createVideo);
+  el("cancelJobBtn").addEventListener("click",async()=>{
+    if(!state.job?.id)return;
+    try{const d=await api("/jobs/"+encodeURIComponent(state.job.id)+"/cancel",{method:"POST",body:"{}"});state.job=d.job;el("videoNotice").textContent="Abgebrochen";setStatus("abgebrochen","warn")}catch(e){alert(e.message)}
+  });
+  el("saveBtn").addEventListener("click",async()=>{
+    if(!state.job?.outputUrl)return;
+    try{const r=await api("/jobs/"+encodeURIComponent(state.job.id)+"/refresh-urls",{method:"POST",body:"{}"});state.job=r.job||state.job;window.open(state.job.outputUrl,"_blank","noopener")}catch(e){alert(e.message)}
+  });
+  el("shareBtn").addEventListener("click",async()=>{
+    if(!state.job?.outputUrl)return;
+    const url=state.job.outputUrl,title="DAR AL TAWḤĪD · Video",text=state.job.statement?.de||"DAR Video";
+    try{if(navigator.share){await navigator.share({title,text,url});return}}catch(e){if(e?.name==="AbortError")return}
+    try{await navigator.clipboard.writeText(url);alert("Link kopiert")}catch{alert(url)}
+  });
+  el("approveBtn").addEventListener("click",async()=>{
+    try{const d=await api("/jobs/"+encodeURIComponent(state.job.id)+"/approve",{method:"POST",body:"{}"});await openResult(d.job);el("resultNotice").className="notice ok";el("resultNotice").textContent="Intern freigegeben – Feed/Push noch manuell."}catch(e){alert(e.message)}
+  });
+  el("feedBtn").addEventListener("click",async()=>{
+    if(!confirm("Feed wirklich manuell vormerken? Keine automatische Live-Veröffentlichung."))return;
+    try{const d=await api("/jobs/"+encodeURIComponent(state.job.id)+"/publish-feed",{method:"POST",body:JSON.stringify({confirm:true})});el("resultNotice").textContent=d.message||"Feed vorgemerkt"}catch(e){alert(e.message)}
+  });
+  el("pushBtn").addEventListener("click",async()=>{
+    if(!confirm("Push wirklich anfordern? Staging sendet keine Besucher-Pushs."))return;
+    try{const d=await api("/jobs/"+encodeURIComponent(state.job.id)+"/request-push",{method:"POST",body:JSON.stringify({confirm:true})});el("resultNotice").textContent=d.message||"Push nicht gesendet"}catch(e){alert(e.message)}
+  });
+  el("newJobBtn").addEventListener("click",()=>{state.job=null;showStep("text");setStatus("bereit")});
+
+  async function loadJobs(){
+    if(!workerSecret()){el("jobList").innerHTML="<small class='meta'>Worker-Secret speichern.</small>";return}
+    try{
+      const data=await api("/jobs?limit=12");
+      const q=(el("jobSearch").value||"").toLowerCase();
+      let jobs=data.jobs||[];
+      if(q)jobs=jobs.filter(j=>`${j.statement?.speaker||""} ${j.statement?.de||""} ${j.id}`.toLowerCase().includes(q));
+      const running=jobs.filter(j=>j.status==="running"||j.status==="queued").length;
+      const done=jobs.filter(j=>j.status==="completed").length;
+      el("jobsSummary").textContent=`Server-Aufträge · ${jobs.length} · läuft ${running} · fertig ${done}`;
+      el("jobList").innerHTML=jobs.map(j=>{
+        const title=esc(j.statement?.speaker||j.id.slice(0,14));
+        const thumb=j.sceneImageUrl||j.posterUrl||"";
+        return `<div class="job-line"><img src="${esc(thumb)}" alt="" onerror="this.style.opacity=.2"><div><b>${title}</b><small>${esc(j.status)} · ${Number(j.costEur||0).toFixed(2)} € · ${esc((j.message||"").slice(0,48))}</small></div>
+          <button class="btn ghost" type="button" data-open="${esc(j.id)}">⋯</button></div>`;
+      }).join("")||"<small class='meta'>Keine Aufträge</small>";
+      el("jobList").querySelectorAll("[data-open]").forEach(btn=>btn.addEventListener("click",()=>openJobMenu(btn.getAttribute("data-open"))));
+    }catch(e){el("jobList").innerHTML=`<small class="meta">${esc(e.message)}</small>`}
+  }
+  async function openJobMenu(id){
+    const choice=prompt("Aktion: open | retry | cancel | delete-list | delete-all", "open");
+    if(!choice)return;
+    try{
+      if(choice==="open"){
+        const d=await api("/jobs/"+encodeURIComponent(id));
+        state.job=d.job;if(d.job.status==="completed"){showStep("result");await openResult(d.job)}else{showStep("video");startPoll()}
+      }else if(choice==="retry"){await api("/jobs/"+encodeURIComponent(id)+"/retry",{method:"POST",body:"{}"});loadJobs()}
+      else if(choice==="cancel"){await api("/jobs/"+encodeURIComponent(id)+"/cancel",{method:"POST",body:"{}"});loadJobs()}
+      else if(choice.startsWith("delete")){
+        if(!confirm("Wirklich löschen?"))return;
+        const mode=choice==="delete-all"?"all":"list";
+        await api("/jobs/"+encodeURIComponent(id)+"?mode="+mode,{method:"DELETE"});loadJobs();
+      }
+    }catch(e){alert(e.message)}
+  }
+  el("reloadJobsBtn").addEventListener("click",loadJobs);
+  el("jobSearch").addEventListener("input",()=>{clearTimeout(state._js);state._js=setTimeout(loadJobs,250)});
+
+  el("settingsBtn").addEventListener("click",()=>el("settingsPop").classList.toggle("hidden"));
+  el("settingsPop").addEventListener("click",e=>{
+    const go=e.target.getAttribute("data-go");if(!go)return;
+    el("settingsPop").classList.add("hidden");
+    el("workerBox").classList.toggle("hidden",go!=="worker");
+    el("helpBox").classList.toggle("hidden",go!=="help");
+    el("advancedBox").classList.toggle("hidden",go!=="advanced");
+    if(go==="worker")el("workerBox").open=true;
+    if(go==="help")el("helpBox").open=true;
+    if(go==="advanced")el("advancedBox").open=true;
+  });
+  el("workerUrl").value=workerBase();el("workerSecret").value=workerSecret();
+  el("saveWorkerBtn").addEventListener("click",()=>{
+    const url=(el("workerUrl").value||DEFAULT_WORKER).trim().replace(/\/publish\/?$/,"").replace(/\/$/,"");
+    const secret=(el("workerSecret").value||"").trim();
+    localStorage.setItem(WURL,url+"/publish");if(secret)localStorage.setItem(WSEC,secret);
+    alert("Gespeichert");loadStatus();loadJobs();
+  });
+  async function loadStatus(){
+    try{
+      const d=await api("/providers/status");
+      el("budgetChip").textContent=`€ ${Number(d.monthSpendEur||0).toFixed(2)}`;
+      el("providerDetail").textContent=`Stimme ${d.voiceConfigured?"ok":"fehlt"} · Compose ${d.composerConfigured?"ok":"fehlt"} · R2 ${d.r2Configured?"ok":"fehlt"} · Monat ${Number(d.monthSpendEur||0).toFixed(2)} €`;
+    }catch(e){el("providerDetail").textContent=e.message;el("budgetChip").textContent="€ —"}
+  }
+
+  loadDraft();showStep("text");loadStatus();loadJobs();
+  try{
+    const job=JSON.parse(localStorage.getItem(JOB_KEY)||"null");
+    if(job&&["queued","running"].includes(job.status)){state.job=job;showStep("video");startPoll()}
+    if(job&&job.status==="completed"){state.job=job;showStep("result");openResult(job)}
+  }catch{}
 })();
 </script>
 </body>

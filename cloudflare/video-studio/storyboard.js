@@ -157,51 +157,55 @@ export function buildCaptionPlan(statement, { totalSec = 20 } = {}) {
   };
 }
 
-export function buildStoryboard(statement) {
+export function buildStoryboard(statement, { sceneImageUrl = "", clipCount = 3 } = {}) {
   const theme = String(statement?.topic || "Wissen").trim();
   const de = String(statement?.de || "").trim();
   const atmosphere = resolveThemeAtmosphere(theme, de);
-  const scenes = [
+  const fromStill = Boolean(sceneImageUrl);
+  const motionScenes = [
     {
       id: "s1",
       role: "opening",
       durationSec: 5,
       camera: "slow push-in, natural handheld micro-motion",
-      setting: atmosphere.opening,
-      action: "anonymous figure enters from behind, walks slowly toward window light, face never visible, modest clothing",
-      promptFocus: "premium cinematic opening, dust motes, noble calm DAR image-post mood"
+      setting: fromStill
+        ? "Continue the exact same scene identity as the provided still frame; preserve person, clothing, room, light and palette"
+        : atmosphere.opening,
+      action: fromStill
+        ? "gentle atmospheric motion only: soft light shift, dust motes, fabric micro-movement; anonymous figure remains face-hidden"
+        : "anonymous figure enters from behind, walks slowly toward window light, face never visible, modest clothing",
+      promptFocus: "premium cinematic opening, real motion, noble calm DAR image-post mood, no text, no logos"
     },
     {
       id: "s2",
       role: "reflection",
       durationSec: 5,
-      camera: "gentle orbit around seated silhouette",
-      setting: atmosphere.reflection,
-      action: "anonymous figure seated with back to camera, reading quietly, modest robe, face fully hidden",
-      promptFocus: "consistent clothing and room palette, contemplative, no cheap stock look"
+      camera: fromStill ? "gentle lateral drift / soft orbit" : "gentle orbit around seated silhouette",
+      setting: fromStill
+        ? "Same locked visual identity as start frame; no wardrobe or architecture change"
+        : atmosphere.reflection,
+      action: fromStill
+        ? "subtle environmental motion and calm posture shift, face never visible"
+        : "anonymous figure seated with back to camera, reading quietly, modest robe, face fully hidden",
+      promptFocus: "consistent identity, contemplative, no cheap stock look, no morphing"
     },
     {
       id: "s3",
       role: "emphasis",
       durationSec: 5,
-      camera: "slow tilt from hands to environment, never revealing face",
-      setting: `${atmosphere.emphasis}; thematic cue: ${de.slice(0, 90)}`,
-      action: "hands carefully interact with books or quiet objects; fingers anatomically correct; modest sleeves",
-      promptFocus: "accurate hands, cinematic depth of field, no deformed anatomy"
-    },
-    {
-      id: "s4",
-      role: "closing",
-      durationSec: 5,
-      camera: "pull-back revealing room silhouette",
-      setting: atmosphere.closing,
-      action: "anonymous figure walks away into soft shadow, contemplative ending, real walking motion",
-      promptFocus: "real movement, no freeze, no zoom-only still, premium closing frame"
+      camera: fromStill ? "slow pull-back revealing more of the same space" : "slow tilt from hands to environment, never revealing face",
+      setting: fromStill
+        ? `Same scene continuity; thematic calm: ${de.slice(0, 80)}`
+        : `${atmosphere.emphasis}; thematic cue: ${de.slice(0, 90)}`,
+      action: fromStill
+        ? "natural light change, dust, modest anonymous figure remains consistent; anatomically correct hands if visible"
+        : "hands carefully interact with books or quiet objects; fingers anatomically correct; modest sleeves",
+      promptFocus: "accurate anatomy, cinematic depth, real movement, no freeze-zoom fake motion"
     }
-  ];
+  ].slice(0, Math.max(1, Math.min(3, Number(clipCount) || 3)));
 
   const captionPlan = buildCaptionPlan(statement, {
-    totalSec: scenes.reduce((n, s) => n + s.durationSec, 0)
+    totalSec: motionScenes.reduce((n, s) => n + s.durationSec, 0)
   });
 
   return {
@@ -211,16 +215,18 @@ export function buildStoryboard(statement) {
     theme,
     themePreset: atmosphere.id,
     themeLabel: atmosphere.label,
+    sceneImageUrl: sceneImageUrl || null,
+    motionSeconds: motionScenes.reduce((n, s) => n + s.durationSec, 0),
     statementId: statement?.id || "",
     speaker: statement?.speaker || "",
     source: statement?.source || "",
     voiceScript: captionPlan.voiceScript,
     captionPlan,
     captionLines: captionPlan.captionLines,
-    scenes: scenes.map((scene) => ({
+    scenes: motionScenes.map((scene) => ({
       ...scene,
       negativePrompt:
-        "face visible, front portrait, celebrity, prophet, named companion, deformed hands, extra fingers, horror, mask, music waveform, text, watermark, logo, collage, still image zoom, western office, neon, tiktok captions, cartoon, fantasy creature",
+        "face visible, front portrait, celebrity, prophet, named companion, deformed hands, extra fingers, horror, mask, music waveform, text, watermark, logo, collage, still image zoom only, wardrobe change, architecture change, new person, tiktok captions, cartoon, fantasy creature",
       fullPrompt: [
         scene.setting,
         scene.action,

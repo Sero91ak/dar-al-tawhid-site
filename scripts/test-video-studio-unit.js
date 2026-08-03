@@ -46,7 +46,8 @@ assert.ok(voice.includes(DAR_VIDEO_PROFILE.branding.followLine));
 assert.equal(voice.includes("Umformulierung"), false);
 
 const board = buildStoryboard(selected.statement);
-assert.equal(board.scenes.length, 4);
+assert.equal(board.scenes.length, 3);
+assert.equal(board.motionSeconds, 15);
 assert.ok(board.scenes.every((s) => /silhouette|hidden|back|shadow|anonymous/i.test(s.fullPrompt)));
 assert.ok(board.voiceScript.includes(DAR_VIDEO_PROFILE.branding.followLine));
 assert.ok(board.captionPlan?.overlays?.length >= 5);

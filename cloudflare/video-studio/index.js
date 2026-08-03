@@ -9,9 +9,11 @@ import {
 } from "./job-store.js";
 import { createVideoStudioJob, processVideoStudioJob, publicJob, runVideoStudioPipelineLoop, refreshVideoStudioJobUrls } from "./pipeline.js";
 import { providersStatus, probeFalAuth } from "./providers/index.js";
-import { getVideoAsset, verifySignedAssetRequest } from "./storage.js";
+import { getVideoAsset, verifySignedAssetRequest, putVideoAsset, createSignedAssetUrl, deleteVideoPrefix } from "./storage.js";
 import { isVoiceConfigured, probeElevenAuth } from "./voice.js";
 import { isComposerConfigured, shotstackEnvironment, probeShotstackAuth } from "./compose.js";
+import { parseContributionText, estimateVideoCost } from "./text-parse.js";
+import { generateSceneImage } from "./scene-image.js";
 
 function json(data, cors, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -74,6 +76,73 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
     }, cors);
   }
 
+  if (request.method === "POST" && rest === "/parse-text") {
+    const body = await request.json().catch(() => ({}));
+    const parsed = parseContributionText(body.text || body.contributionText || "");
+    if (!parsed.ok) return json({ ok: false, error: parsed.reason }, cors, 422);
+    return json({ ok: true, ...parsed, estimate: estimateVideoCost({ voiceChars: (parsed.statement?.de || "").length + 120 }) }, cors);
+  }
+
+  if (request.method === "POST" && rest === "/estimate") {
+    const body = await request.json().catch(() => ({}));
+    return json({ ok: true, estimate: estimateVideoCost(body) }, cors);
+  }
+
+  if (request.method === "POST" && rest === "/scene-image") {
+    await assertVideoStudioRateLimit(env, request);
+    const body = await request.json().catch(() => ({}));
+    let statement = body.statement;
+    if (!statement && (body.text || body.contributionText)) {
+      const parsed = parseContributionText(body.text || body.contributionText);
+      if (!parsed.ok) return json({ ok: false, error: parsed.reason }, cors, 422);
+      statement = parsed.statement;
+    }
+    if (!statement?.de) return json({ ok: false, error: "Text/Aussage für Szenenbild fehlt" }, cors, 422);
+    const generated = await generateSceneImage(env, { statement });
+    if (!generated.ok) {
+      return json({ ok: false, error: generated.reason || "Szenenbild fehlgeschlagen" }, cors, generated.setupRequired ? 503 : 502);
+    }
+    const sceneId = `scene_${Date.now().toString(36)}`;
+    const key = `library/scenes/${sceneId}.jpg`;
+    try {
+      const imgRes = await fetch(generated.url);
+      const bytes = await imgRes.arrayBuffer();
+      await putVideoAsset(env, key, bytes, imgRes.headers.get("content-type") || "image/jpeg");
+      const signed = await createSignedAssetUrl(env, { jobId: "library", key, ttlSec: 24 * 3600 });
+      return json({
+        ok: true,
+        sceneImage: {
+          id: sceneId,
+          url: signed.ok ? signed.url : generated.url,
+          sourceUrl: generated.url,
+          r2Key: key,
+          estimatedCostEur: generated.estimatedCostEur || 0.05
+        }
+      }, cors);
+    } catch {
+      return json({ ok: true, sceneImage: { id: sceneId, url: generated.url, r2Key: null, estimatedCostEur: generated.estimatedCostEur || 0.05 } }, cors);
+    }
+  }
+
+  if (request.method === "POST" && rest === "/scene-image/upload") {
+    await assertVideoStudioRateLimit(env, request);
+    const body = await request.json().catch(() => ({}));
+    const dataUrl = String(body.dataUrl || "").trim();
+    const match = dataUrl.match(/^data:(image\/(?:png|jpeg|jpg|webp));base64,(.+)$/i);
+    if (!match) return json({ ok: false, error: "Ungültiges Bild (dataUrl erwartet)" }, cors, 422);
+    const mime = match[1].toLowerCase().replace("jpg", "jpeg");
+    const bin = Uint8Array.from(atob(match[2]), (c) => c.charCodeAt(0));
+    const sceneId = `upload_${Date.now().toString(36)}`;
+    const ext = mime.includes("png") ? "png" : mime.includes("webp") ? "webp" : "jpg";
+    const key = `library/scenes/${sceneId}.${ext}`;
+    await putVideoAsset(env, key, bin, mime);
+    const signed = await createSignedAssetUrl(env, { jobId: "library", key, ttlSec: 24 * 3600 });
+    return json({
+      ok: true,
+      sceneImage: { id: sceneId, url: signed.url || null, r2Key: key, uploaded: true }
+    }, cors);
+  }
+
   if (request.method === "GET" && rest === "/jobs") {
     const limit = Number(url.searchParams.get("limit") || 20);
     const jobs = (await listJobs(env, limit)).map(publicJob);
@@ -83,8 +152,12 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
   if (request.method === "POST" && rest === "/jobs") {
     await assertVideoStudioRateLimit(env, request);
     const input = await request.json().catch(() => ({}));
-    const result = await createVideoStudioJob(env, input, helpers, ctx);
-    return json(result, cors, result.job?.status === "setup_required" ? 200 : 200);
+    try {
+      const result = await createVideoStudioJob(env, input, helpers, ctx);
+      return json(result, cors, result.job?.status === "setup_required" ? 200 : 200);
+    } catch (error) {
+      return json({ ok: false, error: error.message || String(error) }, cors, error.status || 500);
+    }
   }
 
   const jobMatch = rest.match(/^\/jobs\/([^/]+)(?:\/(cancel|retry|approve|refresh-urls|publish-feed|request-push))?$/);
@@ -99,8 +172,23 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
     }
 
     if (request.method === "DELETE" && !action) {
-      await deleteJob(env, jobId);
-      return json({ ok: true, deleted: true, id: jobId }, cors);
+      const mode = String(url.searchParams.get("mode") || "list");
+      const job = await readJob(env, jobId);
+      if (mode === "assets" || mode === "all") {
+        await deleteVideoPrefix(env, `jobs/${jobId}/`);
+      }
+      if (mode !== "assets") {
+        await deleteJob(env, jobId);
+      } else if (job) {
+        await saveJob(env, {
+          ...job,
+          artifacts: { ...(job.artifacts || {}), clips: [], voice: null, render: null },
+          outputUrl: null,
+          message: "Rohdateien gelöscht, Auftrag bleibt in der Liste",
+          updatedAt: new Date().toISOString()
+        });
+      }
+      return json({ ok: true, deleted: true, id: jobId, mode }, cors);
     }
 
     if (request.method === "POST" && action === "cancel") {

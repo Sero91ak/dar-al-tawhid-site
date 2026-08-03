@@ -8,6 +8,7 @@ import { selectStatement } from "./statements.js";
 import { createSignedAssetUrl, putVideoAsset, hasVideoStudioR2 } from "./storage.js";
 import { buildStoryboard } from "./storyboard.js";
 import { isVoiceConfigured, synthesizeDarVoice } from "./voice.js";
+import { parseContributionText, estimateVideoCost } from "./text-parse.js";
 
 function httpError(message, status = 400) {
   const err = new Error(message);
@@ -39,6 +40,9 @@ function publicJob(job) {
     durationSeconds: job.durationSeconds || null,
     outputUrl: job.outputUrl || null,
     posterUrl: job.posterUrl || null,
+    sceneImageUrl: job.sceneImageUrl || job.artifacts?.sceneImage?.url || null,
+    costBreakdown: job.costBreakdown || null,
+    costConfirmed: Boolean(job.costConfirmed),
     qualityChecks: job.qualityChecks || emptyQualityChecks(),
     approval: job.approval || { approved: false },
     statement: job.statement
@@ -47,7 +51,8 @@ function publicJob(job) {
           speaker: job.statement.speaker,
           de: job.statement.de,
           source: job.statement.source,
-          topic: job.statement.topic
+          topic: job.statement.topic,
+          manual: Boolean(job.statement.manual)
         }
       : null,
     setup: job.setup || null,
@@ -102,8 +107,41 @@ export async function createVideoStudioJob(env, input = {}, helpers = {}, ctx = 
   const budget = normalizeBudget(input.budget || {});
   const mode = String(input.mode || "auto");
   const brief = String(input.brief || "").trim();
+  const contributionText = String(input.contributionText || input.text || "").trim();
   const id = newJobId();
   const setup = collectSetupGaps(env);
+
+  let statement = null;
+  if (input.statement && typeof input.statement === "object") {
+    statement = {
+      ...input.statement,
+      de: String(input.statement.de || "").trim(),
+      speaker: String(input.statement.speaker || "Überlieferung").trim(),
+      source: String(input.statement.source || "").trim(),
+      topic: String(input.statement.topic || "Wissen").trim(),
+      verified: true,
+      manual: true
+    };
+  } else if (contributionText) {
+    const parsed = parseContributionText(contributionText);
+    if (!parsed.ok) throw httpError(parsed.reason || "Text ungültig", 422);
+    statement = parsed.statement;
+  }
+
+  const sceneImageUrl = String(input.sceneImageUrl || "").trim();
+  const sceneImageR2Key = String(input.sceneImageR2Key || "").trim();
+  if (!setup.length && !sceneImageUrl && !sceneImageR2Key) {
+    throw httpError("Szenenbild fehlt – bitte zuerst erzeugen oder auswählen", 422);
+  }
+  if (!setup.length && input.costConfirmed !== true) {
+    throw httpError("Kostenbestätigung fehlt (costConfirmed:true)", 422);
+  }
+
+  const costPreview = estimateVideoCost({
+    clipCount: 3,
+    durationSec: 15,
+    voiceChars: String(statement?.de || contributionText || brief).length + 120
+  });
 
   const job = {
     id,
@@ -112,7 +150,8 @@ export async function createVideoStudioJob(env, input = {}, helpers = {}, ctx = 
     completedStages: [],
     createdAt: nowIso(),
     updatedAt: nowIso(),
-    brief,
+    brief: brief || contributionText.slice(0, 180),
+    contributionText,
     mode,
     voiceProfile: String(input.voiceProfile || "dar-male"),
     budget,
@@ -120,15 +159,24 @@ export async function createVideoStudioJob(env, input = {}, helpers = {}, ctx = 
     format: "9:16",
     manualApproval: input.manualApproval !== false,
     composePreview: input.composePreview === true,
+    costConfirmed: input.costConfirmed === true,
+    costBreakdown: costPreview,
+    sceneImageUrl: sceneImageUrl || null,
     client: input.client || {},
     message: setup.length
       ? `Einrichtung nötig: ${setup.join(" · ")}`
-      : "Auftrag in Warteschlange (Endfassung ohne Fremdwasserzeichen)",
+      : "Auftrag in Warteschlange (15 s Bewegung · DAR-Standard)",
     setup: setup.length ? { missing: setup } : null,
     costEur: 0,
+    estimateEur: costPreview.estimateMaxEur,
     qualityChecks: emptyQualityChecks(),
     approval: { approved: false },
-    artifacts: {},
+    statement: statement || null,
+    artifacts: {
+      sceneImage: sceneImageUrl || sceneImageR2Key
+        ? { url: sceneImageUrl || null, r2Key: sceneImageR2Key || null }
+        : null
+    },
     providerJobs: [],
     tick: 0
   };
@@ -139,7 +187,7 @@ export async function createVideoStudioJob(env, input = {}, helpers = {}, ctx = 
       console.error("video studio job failed", id, error?.message || error);
     }));
   }
-  return { ok: true, job: publicJob(job) };
+  return { ok: true, job: publicJob(job), estimate: costPreview };
 }
 
 async function sleep(ms) {
@@ -184,23 +232,44 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
   try {
     // 1) Statement
     if (!job.statement) {
-      const usedIds = await readUsedStatementIds(env);
-      const selected = await selectStatement(env, { brief: job.brief, usedIds }, helpers);
-      if (!selected.ok) throw httpError(selected.reason || "Aussage fehlgeschlagen", 422);
-      await markStatementUsed(env, selected.statement.id);
-      job = await patchJob(env, jobId, {
-        stage: "statement",
-        statement: selected.statement,
-        completedStages: uniqueStages([...(job.completedStages || []), "statement"]),
-        message: "Aussage geprüft"
-      });
+      if (job.contributionText) {
+        const parsed = parseContributionText(job.contributionText);
+        if (!parsed.ok) throw httpError(parsed.reason || "Aussage fehlgeschlagen", 422);
+        job = await patchJob(env, jobId, {
+          stage: "statement",
+          statement: parsed.statement,
+          completedStages: uniqueStages([...(job.completedStages || []), "statement"]),
+          message: "Textbeitrag geprüft"
+        });
+      } else {
+        const usedIds = await readUsedStatementIds(env);
+        const selected = await selectStatement(env, { brief: job.brief, usedIds }, helpers);
+        if (!selected.ok) throw httpError(selected.reason || "Aussage fehlgeschlagen", 422);
+        await markStatementUsed(env, selected.statement.id);
+        job = await patchJob(env, jobId, {
+          stage: "statement",
+          statement: selected.statement,
+          completedStages: uniqueStages([...(job.completedStages || []), "statement"]),
+          message: "Aussage geprüft"
+        });
+      }
     }
 
-    // 2) Storyboard
+    // 2) Storyboard (3 × 5 s vom Szenenbild)
     if (!job.storyboard) {
-      const storyboard = buildStoryboard(job.statement);
-      // 3 Szenen für Budget-/Laufzeitkontrolle (~15 s Clips)
-      storyboard.scenes = storyboard.scenes.slice(0, 3);
+      let sceneImageUrl = job.sceneImageUrl || job.artifacts?.sceneImage?.url || "";
+      if (!sceneImageUrl && job.artifacts?.sceneImage?.r2Key) {
+        const signed = await createSignedAssetUrl(env, {
+          jobId,
+          key: job.artifacts.sceneImage.r2Key,
+          ttlSec: 7200
+        });
+        if (signed.ok) sceneImageUrl = signed.url;
+      }
+      const storyboard = buildStoryboard(job.statement, {
+        sceneImageUrl,
+        clipCount: 3
+      });
       const spentMonthEur = await readMonthSpend(env);
       const choice = await chooseProvider(env, {
         mode: job.mode,
@@ -225,38 +294,53 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
       job = await patchJob(env, jobId, {
         stage: "storyboard",
         storyboard,
+        sceneImageUrl: sceneImageUrl || job.sceneImageUrl || null,
         provider: choice.provider.id,
         estimateEur: choice.estimateEur,
         completedStages: uniqueStages([...(job.completedStages || []), "statement", "storyboard"]),
-        message: "Storyboard erstellt · Budget geprüft",
+        message: "Storyboard · 15 s Bewegung vom Szenenbild",
         artifacts: {
           ...(job.artifacts || {}),
-          providerId: choice.provider.id
+          providerId: choice.provider.id,
+          sceneImage: {
+            ...(job.artifacts?.sceneImage || {}),
+            url: sceneImageUrl || job.artifacts?.sceneImage?.url || null
+          }
         }
       });
       return publicJob(job);
     }
 
-    // 3) References
+    // 3) References / Bild vorbereitet
     if (!(job.completedStages || []).includes("references")) {
       job = await patchJob(env, jobId, {
         stage: "references",
         references: {
-          characterBible: "anonymous modest figure, consistent robe palette charcoal/cream, always back-facing or silhouetted",
-          roomPalette: "warm dawn light, wooden textures, soft dust",
+          characterBible: "anonymous modest figure locked to scene still, always face-hidden",
+          roomPalette: "locked to selected scene image",
+          sceneImageUrl: job.sceneImageUrl || job.artifacts?.sceneImage?.url || null,
           locked: true
         },
         completedStages: uniqueStages([...(job.completedStages || []), "references"]),
-        message: "Referenzprofil gesetzt"
+        message: "Bild vorbereitet"
       });
       return publicJob(job);
     }
 
-    // 4) Clips – start or poll one scene per tick
+    // 4) Clips – start or poll one scene per tick (image-to-video)
     const provider = getProviderByMode(job.artifacts?.providerId || job.provider || job.mode);
     if (!provider.isConfigured(env)) throw httpError("Anbieter nicht konfiguriert", 503);
     const scenes = job.storyboard.scenes || [];
     let clips = Array.isArray(job.artifacts?.clips) ? [...job.artifacts.clips] : [];
+    let sceneImageUrl = job.sceneImageUrl || job.artifacts?.sceneImage?.url || "";
+    if (!sceneImageUrl && job.artifacts?.sceneImage?.r2Key) {
+      const signed = await createSignedAssetUrl(env, {
+        jobId,
+        key: job.artifacts.sceneImage.r2Key,
+        ttlSec: 7200
+      });
+      if (signed.ok) sceneImageUrl = signed.url;
+    }
 
     for (let i = 0; i < scenes.length; i++) {
       const scene = scenes[i];
@@ -264,7 +348,7 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
       if (clip?.status === "completed" && (clip.url || clip.r2Key)) continue;
 
       if (!clip?.providerJobId) {
-        const created = await provider.createClip(env, { scene });
+        const created = await provider.createClip(env, { scene, imageUrl: sceneImageUrl || undefined });
         clip = {
           sceneId: scene.id,
           providerJobId: created.providerJobId,
@@ -274,7 +358,8 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
           durationSec: created.durationSec || scene.durationSec || 5,
           statusUrl: created.statusUrl || "",
           responseUrl: created.responseUrl || "",
-          immediateUrl: created.immediateUrl || ""
+          immediateUrl: created.immediateUrl || "",
+          fromSceneImage: Boolean(created.fromSceneImage)
         };
         clips = [...clips.filter((c) => c.sceneId !== scene.id), clip];
         if (clip.status === "completed" && clip.immediateUrl) {
@@ -288,14 +373,14 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
             stage: "clips",
             artifacts: { ...(job.artifacts || {}), clips },
             costEur: Number(clipCost.toFixed(4)),
-            message: `Clip ${i + 1}/${scenes.length} gespeichert`
+            message: `Bewegung ${i + 1}/${scenes.length} gespeichert`
           });
           return publicJob(job);
         }
         job = await patchJob(env, jobId, {
           stage: "clips",
           artifacts: { ...(job.artifacts || {}), clips },
-          message: `Clip ${i + 1}/${scenes.length} gestartet`
+          message: `Bewegung ${i + 1}/${scenes.length} gestartet`
         });
         return publicJob(job);
       }
