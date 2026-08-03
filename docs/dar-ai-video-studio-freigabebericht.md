@@ -24,26 +24,19 @@
 
 Worker health: `videoStudioStore/R2/Fal/Voice/Shotstack/Signing` = true · Shotstack Host Stage.
 
-## Auth-Probes (live, Stand nach Key-Korrekturen)
+## Auth-Probes (live)
 
 ```json
 {
   "fal": {
     "ok": false,
-    "present": true,
-    "length": 69,
-    "hasColon": true,
     "httpStatus": 403,
-    "reason": "User is locked. Reason: Exhausted balance. Top up at fal.ai/dashboard/billing."
+    "reason": "Exhausted balance – Top up at fal.ai/dashboard/billing"
   },
   "elevenlabs": {
-    "ok": false,
-    "present": true,
-    "length": 50,
-    "prefix": "sk_08",
-    "voiceIdLength": 20,
-    "httpStatus": 401,
-    "reason": "Invalid API key"
+    "ok": true,
+    "length": 51,
+    "method": "tts"
   },
   "shotstack": {
     "ok": true,
@@ -53,19 +46,17 @@ Worker health: `videoStudioStore/R2/Fal/Voice/Shotstack/Signing` = true · Shots
 }
 ```
 
-**FAL_KEY** Format ok — Konto wegen **Exhausted balance** gesperrt.  
-**ELEVENLABS_API_KEY** ist hinterlegt (`sk_08…`, Länge 50), wird von ElevenLabs aber noch als **Invalid API key** abgelehnt (widerrufen, falsch kopiert oder falsches Konto).
+**ElevenLabs ist OK** (Staging-Key mit TTS-Recht; fester DAR-Voice).  
+**fal.ai** blockiert weiterhin wegen **leerem Guthaben**.
 
 ## Was du jetzt tun musst
 
 1. fal.ai Guthaben aufladen: https://fal.ai/dashboard/billing  
-2. Bei ElevenLabs einen **neuen** API-Key erzeugen und setzen (ohne Anführungszeichen, eine Zeile):
+
+Danach:
 
 ```bash
-cd cloudflare
-npx wrangler secret put ELEVENLABS_API_KEY
-# Voice-ID nur falls nötig:
-npx wrangler secret put ELEVENLABS_VOICE_ID
+node scripts/run-video-studio-autotest.js
 ```
 
 Danach prüfen:
