@@ -67,3 +67,19 @@ export async function verifySignedAssetRequest(env, { jobId, key, exp, sig }) {
   const expected = await hmacHex(secret, `${jobId}:${key}:${expires}`);
   return timingSafeEqual(expected, String(sig));
 }
+
+export async function listVideoPrefix(env, prefix) {
+  const bucket = r2(env);
+  if (!bucket?.list) return [];
+  const listed = await bucket.list({ prefix: String(prefix || "").replace(/^\/+/, ""), limit: 200 });
+  return listed?.objects || [];
+}
+
+export async function deleteVideoPrefix(env, prefix) {
+  const objects = await listVideoPrefix(env, prefix);
+  const bucket = r2(env);
+  for (const obj of objects) {
+    if (obj?.key) await bucket.delete(obj.key);
+  }
+  return { ok: true, deleted: objects.length };
+}

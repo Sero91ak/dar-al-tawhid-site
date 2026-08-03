@@ -165,6 +165,7 @@ details.box summary::-webkit-details-marker{display:none}
     <div class="progress" aria-hidden="true"><i id="progBar"></i></div>
     <div class="meta" id="prodMsg">Bereit zur Erzeugung</div>
     <button class="btn primary dock" type="button" id="createVideoBtn" style="width:100%">Video-Beitrag erstellen</button>
+    <button class="btn" type="button" id="resumeJobBtn" style="width:100%;margin-top:8px" hidden>Weiter generieren</button>
     <div class="actions" style="margin-top:8px">
       <button class="btn" type="button" id="backImageBtn">← Bild</button>
       <button class="btn danger" type="button" id="cancelJobBtn" disabled>Abbrechen</button>
@@ -441,24 +442,66 @@ details.box summary::-webkit-details-marker{display:none}
   }
   function startPoll(){
     clearTimeout(state.poll);
+    el("resumeJobBtn").hidden=true;
+    el("cancelJobBtn").disabled=!state.job?.id;
+    setStatus("in Produktion","run");
     (async function tick(){
       if(!state.job?.id)return;
       try{
         let data;
         try{data=await api("/jobs/"+encodeURIComponent(state.job.id)+"/process",{method:"POST",body:"{}"})}
-        catch{data=await api("/jobs/"+encodeURIComponent(state.job.id))}
+        catch(procErr){
+          try{data=await api("/jobs/"+encodeURIComponent(state.job.id))}
+          catch{throw procErr}
+        }
         const job=data.job||data;state.job=job;
+        try{localStorage.setItem(JOB_KEY,JSON.stringify(job))}catch{}
         el("progBar").style.width=stagePct(job)+"%";
         el("prodMsg").textContent=job.message||job.stage||"";
+        el("videoNotice").className="notice";
         el("videoNotice").textContent=job.message||"";
         if(job.status==="completed"){
           setStatus("fertig","ok");showStep("result");await openResult(job);loadJobs();return;
         }
-        if(job.status==="failed"){setStatus("Fehler","bad");el("videoNotice").className="notice bad";el("videoNotice").textContent=job.message||"Fehler";return}
-        state.poll=setTimeout(tick,4000);
-      }catch{state.poll=setTimeout(tick,8000)}
+        if(job.status==="failed"){
+          setStatus("Fehler","bad");
+          el("videoNotice").className="notice bad";
+          el("videoNotice").textContent=job.lastError||job.message||"Fehler";
+          el("prodMsg").textContent=job.lastError||job.message||"Fehler";
+          el("resumeJobBtn").hidden=false;
+          el("resumeJobBtn").textContent=/Shotstack HTTP 403|Production/i.test(String(job.message||""))
+            ? "Schnitt erneut versuchen"
+            : "Weiter generieren";
+          loadJobs();
+          return;
+        }
+        if(job.status==="cancelled"||job.status==="setup_required"){
+          setStatus(job.status==="cancelled"?"abgebrochen":"Setup","warn");
+          el("resumeJobBtn").hidden=job.status==="cancelled";
+          return;
+        }
+        setStatus("in Produktion","run");
+        state.poll=setTimeout(tick,3500);
+      }catch(e){
+        el("videoNotice").className="notice bad";
+        el("videoNotice").textContent="Verbindung kurz gestört – versuche weiter… ("+(e.message||"Netz")+")";
+        setStatus("warte","warn");
+        el("resumeJobBtn").hidden=false;
+        state.poll=setTimeout(tick,7000);
+      }
     })();
   }
+  el("resumeJobBtn").addEventListener("click",()=>{
+    if(!state.job?.id)return;
+    el("resumeJobBtn").hidden=true;
+    setStatus("in Produktion","run");
+    startPoll();
+  });
+  document.addEventListener("visibilitychange",()=>{
+    if(document.visibilityState==="visible"&&state.job&&["queued","running","failed"].includes(state.job.status)&&state.step==="video"){
+      startPoll();
+    }
+  });
   async function openResult(job){
     let j=job;
     try{const r=await api("/jobs/"+encodeURIComponent(job.id)+"/refresh-urls",{method:"POST",body:"{}"});j=r.job||job}catch{}
@@ -560,7 +603,7 @@ details.box summary::-webkit-details-marker{display:none}
     try{
       const d=await api("/providers/status");
       el("budgetChip").textContent=`€ ${Number(d.monthSpendEur||0).toFixed(2)}`;
-      el("providerDetail").textContent=`Stimme ${d.voiceConfigured?"ok":"fehlt"} · Compose ${d.composerConfigured?"ok":"fehlt"} · R2 ${d.r2Configured?"ok":"fehlt"} · Monat ${Number(d.monthSpendEur||0).toFixed(2)} €`;
+      el("providerDetail").textContent=`Stimme ${d.voiceConfigured?"ok":"fehlt"} · Compose ${d.composerConfigured?"ok":"fehlt"} · R2 ${d.r2Configured?"ok":"fehlt"} · Monat ${Number(d.monthSpendEur||0).toFixed(2)} €`+(d.probes?.shotstack?.prodOk===false?" · Shotstack v1 gesperrt (fal-Fallback)":"");
     }catch(e){el("providerDetail").textContent=e.message;el("budgetChip").textContent="€ —"}
   }
 
@@ -568,6 +611,7 @@ details.box summary::-webkit-details-marker{display:none}
   try{
     const job=JSON.parse(localStorage.getItem(JOB_KEY)||"null");
     if(job&&["queued","running"].includes(job.status)){state.job=job;showStep("video");startPoll()}
+    else if(job&&job.status==="failed"){state.job=job;showStep("video");el("prodMsg").textContent=job.lastError||job.message||"Fehler";el("videoNotice").className="notice bad";el("videoNotice").textContent=job.lastError||job.message||"Fehler";setStatus("Fehler","bad");el("resumeJobBtn").hidden=false;el("cancelJobBtn").disabled=false}
     if(job&&job.status==="completed"){state.job=job;showStep("result");openResult(job)}
   }catch{}
 })();
