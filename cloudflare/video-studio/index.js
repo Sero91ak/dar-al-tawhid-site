@@ -7,7 +7,7 @@ import {
   readMonthSpend,
   saveJob
 } from "./job-store.js";
-import { createVideoStudioJob, processVideoStudioJob, publicJob, runVideoStudioPipelineLoop } from "./pipeline.js";
+import { createVideoStudioJob, processVideoStudioJob, publicJob, runVideoStudioPipelineLoop, refreshVideoStudioJobUrls } from "./pipeline.js";
 import { providersStatus, probeFalAuth } from "./providers/index.js";
 import { getVideoAsset, verifySignedAssetRequest } from "./storage.js";
 import { isVoiceConfigured, probeElevenAuth } from "./voice.js";
@@ -87,7 +87,7 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
     return json(result, cors, result.job?.status === "setup_required" ? 200 : 200);
   }
 
-  const jobMatch = rest.match(/^\/jobs\/([^/]+)(?:\/(cancel|retry|approve))?$/);
+  const jobMatch = rest.match(/^\/jobs\/([^/]+)(?:\/(cancel|retry|approve|refresh-urls))?$/);
   if (jobMatch) {
     const jobId = decodeURIComponent(jobMatch[1]);
     const action = jobMatch[2] || "";
@@ -153,6 +153,11 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
         updatedAt: new Date().toISOString()
       });
       return json({ ok: true, job: publicJob(saved) }, cors);
+    }
+
+    if (request.method === "POST" && action === "refresh-urls") {
+      const refreshed = await refreshVideoStudioJobUrls(env, jobId);
+      return json({ ok: true, job: refreshed }, cors);
     }
   }
 

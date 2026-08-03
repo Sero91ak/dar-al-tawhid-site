@@ -500,3 +500,28 @@ async function pollCompose(env, renderMeta) {
 }
 
 export { publicJob, collectSetupGaps };
+
+/** Frische signierte Download-URLs für fertige Aufträge (Admin-Vorschau/Download). */
+export async function refreshVideoStudioJobUrls(env, jobId) {
+  const job = await readJob(env, jobId);
+  if (!job) throw httpError("Auftrag nicht gefunden", 404);
+  const finalKey = job.artifacts?.render?.r2Key || `jobs/${jobId}/final/master.mp4`;
+  const outputSigned = await createSignedAssetUrl(env, { jobId, key: finalKey, ttlSec: 24 * 3600 });
+  let posterUrl = job.posterUrl || null;
+  if (job.artifacts?.render?.posterKey) {
+    const posterSigned = await createSignedAssetUrl(env, {
+      jobId,
+      key: job.artifacts.render.posterKey,
+      ttlSec: 24 * 3600
+    });
+    if (posterSigned.ok) posterUrl = posterSigned.url;
+  }
+  const next = await patchJob(env, jobId, {
+    outputUrl: outputSigned.ok ? outputSigned.url : job.outputUrl,
+    posterUrl,
+    message: job.status === "completed"
+      ? "Video fertig – Download/Vorschau-Link erneuert (nur Admin)"
+      : job.message
+  });
+  return publicJob(next);
+}
