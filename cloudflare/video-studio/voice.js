@@ -35,26 +35,40 @@ export async function probeElevenAuth(env) {
     return { ok: false, ...fingerprint, reason: "Key oder Voice-ID fehlt" };
   }
   try {
-    const res = await fetch("https://api.elevenlabs.io/v1/user", {
-      headers: { "xi-api-key": key, Accept: "application/json" }
+    // Staging-Keys sind oft auf text_to_speech beschränkt (kein user_read/voices_read).
+    // Deshalb prüfen wir direkt einen Mini-TTS-Call mit der festen DAR-Voice-ID.
+    const res = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voiceId)}`, {
+      method: "POST",
+      headers: {
+        "xi-api-key": key,
+        "Content-Type": "application/json",
+        Accept: "audio/mpeg"
+      },
+      body: JSON.stringify({
+        text: "Test.",
+        model_id: String(env.ELEVENLABS_MODEL_ID || "eleven_multilingual_v2"),
+        voice_settings: {
+          stability: 0.55,
+          similarity_boost: 0.8
+        }
+      })
     });
-    if (!res.ok) {
-      const text = await res.text().catch(() => "");
-      return {
-        ok: false,
-        ...fingerprint,
-        httpStatus: res.status,
-        reason: text.slice(0, 160) || `HTTP ${res.status}`
-      };
+    if (res.ok) {
+      // Body verwerfen (Probe) – nur Auth/Voice prüfen
+      try { await res.arrayBuffer(); } catch {}
+      return { ok: true, ...fingerprint, httpStatus: res.status, method: "tts" };
     }
-    const voiceRes = await fetch(`https://api.elevenlabs.io/v1/voices/${encodeURIComponent(voiceId)}`, {
-      headers: { "xi-api-key": key, Accept: "application/json" }
-    });
+    const text = await res.text().catch(() => "");
+    let detail = text.slice(0, 200);
+    try {
+      const parsed = JSON.parse(text);
+      detail = String(parsed?.detail?.message || parsed?.detail || text).slice(0, 200);
+    } catch {}
     return {
-      ok: voiceRes.ok,
+      ok: false,
       ...fingerprint,
-      httpStatus: voiceRes.status,
-      reason: voiceRes.ok ? "" : `Voice-ID nicht erreichbar (HTTP ${voiceRes.status}) – ELEVENLABS_VOICE_ID prüfen`
+      httpStatus: res.status,
+      reason: detail || `HTTP ${res.status}`
     };
   } catch (error) {
     return { ok: false, ...fingerprint, reason: error.message || String(error) };
