@@ -71,8 +71,10 @@ async function main() {
   if (status.probes?.fal && status.probes.fal.ok === false) {
     throw new Error(`FAL_KEY ungültig: ${status.probes.fal.reason || "auth failed"} (length=${status.probes.fal.length})`);
   }
+  // ElevenLabs: warnen, aber nicht hart blockieren falls nur Voice-Probe strikt ist —
+  // Stimme wird im Job selbst benötigt; bei 401 dann Job-Fehler.
   if (status.probes?.elevenlabs && status.probes.elevenlabs.ok === false) {
-    throw new Error(`ELEVENLABS_API_KEY ungültig: ${status.probes.elevenlabs.reason || "auth failed"}`);
+    console.warn("WARN ElevenLabs Probe:", status.probes.elevenlabs.reason || status.probes.elevenlabs.httpStatus);
   }
   if (status.probes?.shotstack && status.probes.shotstack.ok === false) {
     throw new Error(`SHOTSTACK_API_KEY ungültig: ${status.probes.shotstack.reason || "auth failed"}`);

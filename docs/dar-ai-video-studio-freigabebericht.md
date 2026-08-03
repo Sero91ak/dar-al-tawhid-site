@@ -24,18 +24,17 @@
 
 Worker health: `videoStudioStore/R2/Fal/Voice/Shotstack/Signing` = true · Shotstack Host Stage.
 
-## Auth-Probes (live)
+## Auth-Probes (live, Stand nach FAL_KEY-Korrektur)
 
 ```json
 {
   "fal": {
     "ok": false,
     "present": true,
-    "length": 65,
+    "length": 69,
     "hasColon": true,
-    "prefix": "91da",
-    "httpStatus": 401,
-    "reason": "fal.ai lehnt den Key ab"
+    "httpStatus": 403,
+    "reason": "User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing."
   },
   "elevenlabs": {
     "ok": false,
@@ -50,27 +49,29 @@ Worker health: `videoStudioStore/R2/Fal/Voice/Shotstack/Signing` = true · Shots
 }
 ```
 
-Hinweis: fal-Keys haben oft die Form `uuid:secret` und Länge ≥ 69. Der hinterlegte Key hat Länge **65** (vermutlich abgeschnitten).
+**FAL_KEY ist syntaktisch korrekt** (Länge 69), wird aber wegen **leerem fal.ai-Guthaben** gesperrt.  
+**ELEVENLABS_API_KEY** ist weiterhin ungültig.
 
 ## Was du jetzt tun musst
 
-Im Ordner `cloudflare/` die Keys **frisch** setzen (ohne Anführungszeichen, ohne `Key `-Prefix):
+1. fal.ai Guthaben aufladen: https://fal.ai/dashboard/billing  
+2. ElevenLabs-Key neu setzen:
 
 ```bash
-npx wrangler secret put FAL_KEY
+cd cloudflare
 npx wrangler secret put ELEVENLABS_API_KEY
-# Voice-ID nur falls nötig erneut:
+# Voice-ID nur falls nötig:
 npx wrangler secret put ELEVENLABS_VOICE_ID
 ```
 
-Danach kurz prüfen:
+Danach prüfen:
 
 ```bash
 curl -sS -H "X-Admin-Secret: …" \
   https://dar-admin-publisher.sero91ak.workers.dev/api/admin/video-studio/providers/status | jq .probes
 ```
 
-Wenn `fal.ok` und `elevenlabs.ok` true sind, Autotest:
+Wenn `fal.ok` und `elevenlabs.ok` true sind:
 
 ```bash
 node scripts/run-video-studio-autotest.js
