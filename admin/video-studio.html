@@ -54,16 +54,24 @@ textarea{min-height:96px;max-height:42vh;resize:vertical;line-height:1.45}
 .preview-wrap img,.preview-wrap video{width:100%;height:100%;object-fit:contain;display:block}
 .actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
 .notice{margin-top:8px;border:1px dashed var(--line);border-radius:12px;padding:10px;font-size:11px;line-height:1.45;color:var(--soft);background:rgba(90,140,220,.04)}
-.notice.bad{border-color:rgba(255,154,144,.35);color:#ffd2cd}.notice.ok{border-color:rgba(139,224,189,.3);color:#c8f5e2}
+.notice.bad{border-color:rgba(255,154,144,.35);color:#ffd2cd}.notice.ok{border-color:rgba(139,224,189,.3);color:#c8f5e2}.notice.warn{border-color:rgba(255,211,134,.35);color:#ffe3b0}
 .hidden{display:none!important}
 details.box{border:1px solid var(--line2);border-radius:12px;background:rgba(0,0,0,.16);margin-top:8px}
 details.box summary{list-style:none;min-height:44px;padding:10px 12px;font-size:12px;font-weight:900;color:var(--gold);cursor:pointer;display:flex;justify-content:space-between;gap:8px;align-items:center}
 details.box summary::-webkit-details-marker{display:none}
 .box-body{padding:0 12px 12px;display:grid;gap:8px}
-.job-line{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:8px;align-items:center;border:1px solid var(--line2);border-radius:12px;padding:8px;background:rgba(0,0,0,.16)}
-.job-line img{width:44px;height:44px;border-radius:8px;object-fit:cover;background:#111}
+.job-line{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:8px;align-items:center;border:1px solid var(--line2);border-radius:12px;padding:8px;background:rgba(0,0,0,.16)}
+.job-line .thumb{position:relative;width:56px;height:56px;border-radius:8px;overflow:hidden;background:#111;border:0;padding:0}
+.job-line .thumb img,.job-line .thumb video{width:100%;height:100%;object-fit:cover;display:block}
+.job-line .thumb .play{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.35);color:#fff;font-size:16px;font-weight:900}
 .job-line b{display:block;font-size:12px;line-height:1.25}
 .job-line small{display:block;color:var(--muted);font-size:10px;margin-top:2px}
+.job-actions{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.sheet{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.62);display:grid;align-items:end;padding:12px}
+.sheet.hidden{display:none}
+.sheet-card{background:linear-gradient(180deg,#101826,#0a1220);border:1px solid var(--line);border-radius:18px 18px 14px 14px;padding:14px;max-height:min(88dvh,720px);overflow:auto;width:min(100%,560px);margin:0 auto}
+.sheet-card h3{margin:0 0 8px;font-family:var(--serif);color:var(--gold);font-size:18px}
+.sheet video{width:100%;border-radius:12px;background:#000;max-height:52dvh}
 .dock{position:sticky;bottom:max(8px,var(--safe-b));z-index:5;margin-top:8px}
 .progress{height:6px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;margin:8px 0}
 .progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,rgba(239,215,142,.7),rgba(90,140,220,.55));transition:width .35s ease}
@@ -120,12 +128,14 @@ details.box summary::-webkit-details-marker{display:none}
       </div>
     </div>
     <div class="struct" id="structPreview" style="margin-top:8px"></div>
-    <details class="box">
-      <summary><span>Textaufteilung bearbeiten</span><span>▾</span></summary>
+    <div class="notice" id="parseNotice" hidden></div>
+    <details class="box" id="structBox" open>
+      <summary><span>Textaufteilung (automatisch erkannt)</span><span>▾</span></summary>
       <div class="box-body">
         <div><label class="label" for="fSpeaker">Sprecher</label><input id="fSpeaker"></div>
         <div><label class="label" for="fDe">Aussage</label><textarea id="fDe" style="min-height:72px"></textarea></div>
         <div><label class="label" for="fSource">Quelle</label><input id="fSource"></div>
+        <div><label class="label" for="fFazit">Fazit / Schluss</label><textarea id="fFazit" style="min-height:56px" placeholder="optional erkannt"></textarea></div>
         <div><label class="label" for="fTopic">Thema</label><input id="fTopic" placeholder="Wissen / Dhikr / Sunnah …"></div>
       </div>
     </details>
@@ -189,7 +199,7 @@ details.box summary::-webkit-details-marker{display:none}
     <div class="notice" id="resultNotice">Feed und Push nur manuell – nie automatisch.</div>
   </section>
 
-  <details class="box" id="jobsBox">
+  <details class="box" id="jobsBox" open>
     <summary><span id="jobsSummary">Server-Aufträge · 0</span><span>▾</span></summary>
     <div class="box-body">
       <div class="row">
@@ -199,6 +209,32 @@ details.box summary::-webkit-details-marker{display:none}
       <div id="jobList"></div>
     </div>
   </details>
+
+  <div class="sheet hidden" id="jobSheet" role="dialog" aria-modal="true">
+    <div class="sheet-card">
+      <div class="row" style="justify-content:space-between;margin-bottom:6px">
+        <h3 id="jobSheetTitle">Auftrag</h3>
+        <button class="btn ghost" type="button" id="jobSheetClose">Schließen</button>
+      </div>
+      <video id="jobSheetVideo" controls playsinline preload="metadata" class="hidden" style="margin-bottom:10px"></video>
+      <div class="box-body" style="padding:0;gap:8px">
+        <div><label class="label" for="eSpeaker">Sprecher</label><input id="eSpeaker"></div>
+        <div><label class="label" for="eDe">Aussage</label><textarea id="eDe" style="min-height:90px"></textarea></div>
+        <div><label class="label" for="eSource">Quelle</label><input id="eSource"></div>
+        <div><label class="label" for="eFazit">Fazit</label><textarea id="eFazit" style="min-height:56px"></textarea></div>
+        <div><label class="label" for="eTopic">Thema</label><input id="eTopic"></div>
+        <div><label class="label" for="eRaw">Rohtext (optional neu einfügen)</label><textarea id="eRaw" style="min-height:72px" placeholder="Vollständigen Beitrag einfügen → Felder neu erkennen"></textarea></div>
+      </div>
+      <div class="actions" style="margin-top:10px">
+        <button class="btn" type="button" id="eParseBtn">Text neu erkennen</button>
+        <button class="btn primary" type="button" id="eSaveBtn">Text speichern</button>
+        <button class="btn primary" type="button" id="eRegenBtn">Neu erzeugen</button>
+        <button class="btn" type="button" id="eOpenBtn">Öffnen</button>
+        <button class="btn danger" type="button" id="eDeleteBtn">Löschen</button>
+      </div>
+      <div class="notice" id="jobSheetNotice"></div>
+    </div>
+  </div>
 
   <details class="box hidden" id="workerBox">
     <summary><span>Worker-Verbindung</span><span>▾</span></summary>
@@ -237,7 +273,7 @@ details.box summary::-webkit-details-marker{display:none}
   const WSEC="darAdminWorkerSecretV1";
   const DEFAULT_WORKER="https://dar-admin-publisher.sero91ak.workers.dev";
   const el=id=>document.getElementById(id);
-  const state={step:"text",job:null,parsed:null,scene:null,poll:null,estimate:null};
+  const state={step:"text",job:null,parsed:null,scene:null,poll:null,estimate:null,editJob:null};
 
   function esc(v){return String(v??"").replace(/[&<>\"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]))}
   function workerBase(){try{return String(localStorage.getItem(WURL)||DEFAULT_WORKER).replace(/\/publish\/?$/,"").replace(/\/$/,"")}catch{return DEFAULT_WORKER}}
@@ -262,7 +298,7 @@ details.box summary::-webkit-details-marker{display:none}
     });
   }
   function saveDraft(){
-    const draft={text:el("textInput").value,speaker:el("fSpeaker").value,de:el("fDe").value,source:el("fSource").value,topic:el("fTopic").value,scene:state.scene};
+    const draft={text:el("textInput").value,speaker:el("fSpeaker").value,de:el("fDe").value,source:el("fSource").value,fazit:el("fFazit").value,topic:el("fTopic").value,scene:state.scene};
     try{localStorage.setItem(DRAFT_KEY,JSON.stringify(draft))}catch{}
   }
   function loadDraft(){
@@ -273,6 +309,7 @@ details.box summary::-webkit-details-marker{display:none}
       el("fSpeaker").value=d.speaker||"";
       el("fDe").value=d.de||"";
       el("fSource").value=d.source||"";
+      if(el("fFazit"))el("fFazit").value=d.fazit||"";
       el("fTopic").value=d.topic||"";
       if(d.scene){state.scene=d.scene;showScene(d.scene)}
       updateChars();
@@ -284,6 +321,7 @@ details.box summary::-webkit-details-marker{display:none}
       speaker:(el("fSpeaker").value||state.parsed?.statement?.speaker||"Überlieferung").trim(),
       de:(el("fDe").value||state.parsed?.statement?.de||el("textInput").value).trim(),
       source:(el("fSource").value||state.parsed?.statement?.source||"").trim(),
+      fazit:(el("fFazit")?.value||state.parsed?.statement?.fazit||"").trim(),
       topic:(el("fTopic").value||state.parsed?.statement?.topic||"Wissen").trim(),
       manual:true,
       verified:true
@@ -293,7 +331,8 @@ details.box summary::-webkit-details-marker{display:none}
     if(!p){el("structPreview").innerHTML="";return}
     el("structPreview").innerHTML=`<div><span>Sprecher</span> · ${esc(p.preview?.speaker||p.statement?.speaker||"—")}</div>
       <div><span>Aussage</span> · ${esc(p.preview?.de||p.statement?.de||"—")}</div>
-      <div><span>Quelle</span> · ${esc(p.preview?.source||p.statement?.source||"—")}</div>`;
+      <div><span>Quelle</span> · ${esc(p.preview?.source||p.statement?.source||"—")}</div>
+      <div><span>Fazit</span> · ${esc(p.preview?.fazit||p.statement?.fazit||"—")}</div>`;
   }
   async function parseText(){
     const text=el("textInput").value.trim();
@@ -304,8 +343,21 @@ details.box summary::-webkit-details-marker{display:none}
     el("fSpeaker").value=data.statement.speaker||"";
     el("fDe").value=data.statement.de||"";
     el("fSource").value=data.statement.source||"";
+    if(el("fFazit"))el("fFazit").value=data.statement.fazit||"";
     el("fTopic").value=data.statement.topic||"";
     renderStruct(data);
+    if(el("structBox"))el("structBox").open=true;
+    const notice=el("parseNotice");
+    if(notice){
+      notice.hidden=false;
+      if(data.statement.verified){
+        notice.className="notice ok";
+        notice.textContent="Automatisch erkannt: Sprecher, Aussage, Quelle"+(data.statement.fazit?" und Fazit":"")+".";
+      }else{
+        notice.className="notice warn";
+        notice.textContent="Teilweise erkannt – bitte Felder kurz prüfen.";
+      }
+    }
     if(state.estimate){
       el("costBox").innerHTML=`${esc(state.estimate.mode)}<br>Geschätzte Kosten: ${state.estimate.estimateMinEur.toFixed(2)}–${state.estimate.estimateMaxEur.toFixed(2)} €<br>Maximalbudget: ${Number(el("maxBudget").value||1.2).toFixed(2)} €`;
     }
@@ -365,7 +417,7 @@ details.box summary::-webkit-details-marker{display:none}
 
   el("textInput").addEventListener("input",()=>{updateChars();clearTimeout(state._t);state._t=setTimeout(()=>{parseText().catch(()=>{})},450)});
   el("pasteBtn").addEventListener("click",async()=>{try{el("textInput").value=await navigator.clipboard.readText();updateChars();await parseText()}catch{}});
-  el("clearTextBtn").addEventListener("click",()=>{el("textInput").value="";el("fSpeaker").value="";el("fDe").value="";el("fSource").value="";el("fTopic").value="";renderStruct(null);updateChars()});
+  el("clearTextBtn").addEventListener("click",()=>{el("textInput").value="";el("fSpeaker").value="";el("fDe").value="";el("fSource").value="";if(el("fFazit"))el("fFazit").value="";el("fTopic").value="";renderStruct(null);if(el("parseNotice"))el("parseNotice").hidden=true;updateChars()});
   el("toImageBtn").addEventListener("click",async()=>{
     try{if(!el("textInput").value.trim()){alert("Bitte Textbeitrag einfügen.");return}await parseText();showStep("image");setStatus("Bild wählen")}catch(e){alert(e.message)}
   });
@@ -555,29 +607,118 @@ details.box summary::-webkit-details-marker{display:none}
       el("jobsSummary").textContent=`Server-Aufträge · ${jobs.length} · läuft ${running} · fertig ${done}`;
       el("jobList").innerHTML=jobs.map(j=>{
         const title=esc(j.statement?.speaker||j.id.slice(0,14));
-        const thumb=j.sceneImageUrl||j.posterUrl||"";
-        return `<div class="job-line"><img src="${esc(thumb)}" alt="" onerror="this.style.opacity=.2"><div><b>${title}</b><small>${esc(j.status)} · ${Number(j.costEur||0).toFixed(2)} € · ${esc((j.message||"").slice(0,48))}</small></div>
-          <button class="btn ghost" type="button" data-open="${esc(j.id)}">⋯</button></div>`;
+        const thumb=j.posterUrl||j.sceneImageUrl||"";
+        const playable=Boolean(j.outputUrl);
+        return `<div class="job-line" data-job="${esc(j.id)}">
+          <button class="thumb" type="button" data-play="${esc(j.id)}" title="${playable?"Abspielen":"Noch kein Video"}" ${playable?"":"disabled"}>
+            <img src="${esc(thumb)}" alt="" onerror="this.style.opacity=.2">
+            ${playable?'<span class="play">▶</span>':""}
+          </button>
+          <div>
+            <b>${title}</b>
+            <small>${esc(j.status)} · ${Number(j.costEur||0).toFixed(2)} € · ${esc((j.statement?.de||j.message||"").slice(0,42))}</small>
+          </div>
+          <div class="job-actions">
+            ${playable?`<button class="btn ghost" type="button" data-play="${esc(j.id)}">Play</button>`:""}
+            <button class="btn ghost" type="button" data-edit="${esc(j.id)}">⋯</button>
+          </div>
+        </div>`;
       }).join("")||"<small class='meta'>Keine Aufträge</small>";
-      el("jobList").querySelectorAll("[data-open]").forEach(btn=>btn.addEventListener("click",()=>openJobMenu(btn.getAttribute("data-open"))));
+      el("jobList").querySelectorAll("[data-play]").forEach(btn=>btn.addEventListener("click",e=>{e.stopPropagation();playJob(btn.getAttribute("data-play"))}));
+      el("jobList").querySelectorAll("[data-edit]").forEach(btn=>btn.addEventListener("click",e=>{e.stopPropagation();openJobSheet(btn.getAttribute("data-edit"))}));
     }catch(e){el("jobList").innerHTML=`<small class="meta">${esc(e.message)}</small>`}
   }
-  async function openJobMenu(id){
-    const choice=prompt("Aktion: open | retry | cancel | delete-list | delete-all", "open");
-    if(!choice)return;
+  async function playJob(id){
     try{
-      if(choice==="open"){
-        const d=await api("/jobs/"+encodeURIComponent(id));
-        state.job=d.job;if(d.job.status==="completed"){showStep("result");await openResult(d.job)}else{showStep("video");startPoll()}
-      }else if(choice==="retry"){await api("/jobs/"+encodeURIComponent(id)+"/retry",{method:"POST",body:"{}"});loadJobs()}
-      else if(choice==="cancel"){await api("/jobs/"+encodeURIComponent(id)+"/cancel",{method:"POST",body:"{}"});loadJobs()}
-      else if(choice.startsWith("delete")){
-        if(!confirm("Wirklich löschen?"))return;
-        const mode=choice==="delete-all"?"all":"list";
-        await api("/jobs/"+encodeURIComponent(id)+"?mode="+mode,{method:"DELETE"});loadJobs();
-      }
+      const d=await api("/jobs/"+encodeURIComponent(id)+"/refresh-urls",{method:"POST",body:"{}"});
+      const j=d.job||{};
+      if(!j.outputUrl){alert("Noch kein abspielbares Video");return}
+      await openJobSheet(id,{play:true,job:j});
     }catch(e){alert(e.message)}
   }
+  async function openJobSheet(id,opts={}){
+    try{
+      let j=opts.job;
+      if(!j){const d=await api("/jobs/"+encodeURIComponent(id));j=d.job}
+      state.editJob=j;
+      el("jobSheetTitle").textContent=j.statement?.speaker||j.id.slice(0,18);
+      el("eSpeaker").value=j.statement?.speaker||"";
+      el("eDe").value=j.statement?.de||"";
+      el("eSource").value=j.statement?.source||"";
+      el("eFazit").value=j.statement?.fazit||"";
+      el("eTopic").value=j.statement?.topic||"";
+      el("eRaw").value=j.contributionText||"";
+      const v=el("jobSheetVideo");
+      if(j.outputUrl){v.src=j.outputUrl;v.classList.remove("hidden");if(opts.play){try{await v.play()}catch{}}}
+      else{v.removeAttribute("src");v.classList.add("hidden")}
+      el("jobSheetNotice").className="notice";
+      el("jobSheetNotice").textContent=j.message||j.status||"";
+      el("jobSheet").classList.remove("hidden");
+    }catch(e){alert(e.message)}
+  }
+  function closeJobSheet(){
+    const v=el("jobSheetVideo");
+    try{v.pause()}catch{}
+    v.removeAttribute("src");v.classList.add("hidden");
+    el("jobSheet").classList.add("hidden");
+    state.editJob=null;
+  }
+  el("jobSheetClose").addEventListener("click",closeJobSheet);
+  el("jobSheet").addEventListener("click",e=>{if(e.target===el("jobSheet"))closeJobSheet()});
+  el("eParseBtn").addEventListener("click",async()=>{
+    const text=el("eRaw").value.trim();
+    if(!text){alert("Bitte Rohtext einfügen");return}
+    try{
+      const data=await api("/parse-text",{method:"POST",body:JSON.stringify({text})});
+      el("eSpeaker").value=data.statement.speaker||"";
+      el("eDe").value=data.statement.de||"";
+      el("eSource").value=data.statement.source||"";
+      el("eFazit").value=data.statement.fazit||"";
+      el("eTopic").value=data.statement.topic||"";
+      el("jobSheetNotice").className="notice ok";
+      el("jobSheetNotice").textContent="Felder aus Rohtext erkannt.";
+    }catch(e){alert(e.message)}
+  });
+  el("eSaveBtn").addEventListener("click",async()=>{
+    if(!state.editJob?.id)return;
+    try{
+      const d=await api("/jobs/"+encodeURIComponent(state.editJob.id),{method:"PATCH",body:JSON.stringify({
+        speaker:el("eSpeaker").value,de:el("eDe").value,source:el("eSource").value,fazit:el("eFazit").value,topic:el("eTopic").value,
+        contributionText:el("eRaw").value
+      })});
+      state.editJob=d.job;
+      el("jobSheetNotice").className="notice ok";
+      el("jobSheetNotice").textContent="Text gespeichert.";
+      loadJobs();
+    }catch(e){alert(e.message)}
+  });
+  el("eRegenBtn").addEventListener("click",async()=>{
+    if(!state.editJob?.id)return;
+    if(!confirm("Video mit aktuellem Text neu erzeugen? Kosten fallen erneut an."))return;
+    try{
+      const d=await api("/jobs/"+encodeURIComponent(state.editJob.id)+"/regenerate",{method:"POST",body:JSON.stringify({
+        speaker:el("eSpeaker").value,de:el("eDe").value,source:el("eSource").value,fazit:el("eFazit").value,topic:el("eTopic").value,
+        contributionText:el("eRaw").value||undefined
+      })});
+      state.job=d.job;closeJobSheet();showStep("video");startPoll();loadJobs();
+    }catch(e){alert(e.message)}
+  });
+  el("eOpenBtn").addEventListener("click",async()=>{
+    if(!state.editJob?.id)return;
+    const j=state.editJob;
+    closeJobSheet();
+    state.job=j;
+    if(j.status==="completed"){showStep("result");await openResult(j)}
+    else{showStep("video");startPoll()}
+  });
+  el("eDeleteBtn").addEventListener("click",async()=>{
+    if(!state.editJob?.id)return;
+    if(!confirm("Auftrag inkl. Dateien löschen?"))return;
+    try{
+      await api("/jobs/"+encodeURIComponent(state.editJob.id)+"?mode=all",{method:"DELETE"});
+      closeJobSheet();loadJobs();
+    }catch(e){alert(e.message)}
+  });
   el("reloadJobsBtn").addEventListener("click",loadJobs);
   el("jobSearch").addEventListener("input",()=>{clearTimeout(state._js);state._js=setTimeout(loadJobs,250)});
 

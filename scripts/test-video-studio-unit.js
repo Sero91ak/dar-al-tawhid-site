@@ -191,4 +191,24 @@ assert.equal(qualityFal.ok, true, qualityFal.reasons.join(" · "));
 assert.equal(qualityFal.falComposeFallback, true);
 assert.equal(qualityFal.checks.noForeignWatermark, true);
 
+import { parseContributionText } from "../cloudflare/video-studio/text-parse.js";
+import { readFileSync } from "node:fs";
+
+const fancy =
+  "🖋️ ʿAbdullāh ibn Masʿūd رضي الله عنه 𝒔𝒂𝒈𝒕𝒆: „Ihr seid 𝒎𝒆𝒉𝒓 𝒊𝒎 𝑭𝒂𝒔𝒕𝒆𝒏.“ 📝 𝐐𝐮𝐞𝐥𝐥𝐞: Ibn Abī Šaybah, Athar Nr. 1 🌙 𝐅𝐚𝐳𝐢𝐭: Die Herzen zählten mehr als die Menge.";
+const parsedFancy = parseContributionText(fancy);
+assert.equal(parsedFancy.ok, true);
+assert.match(parsedFancy.statement.speaker, /Masʿūd|Mas.ud/);
+assert.match(parsedFancy.statement.de, /Fasten|mehr/i);
+assert.match(parsedFancy.statement.source, /Šaybah|Shaybah|Ibn/i);
+assert.match(parsedFancy.statement.fazit, /Herzen|Menge/i);
+assert.equal(parsedFancy.statement.verified, true);
+
+const md = readFileSync(new URL("../content/posts/zuhd-437-sei-von-den-kindern-der-akhirah.md", import.meta.url), "utf8");
+const parsedMd = parseContributionText(md);
+assert.equal(parsedMd.statement.speaker.includes("Alī") || parsedMd.statement.speaker.includes("Ali"), true);
+assert.match(parsedMd.statement.source, /Zuhd|Ḥanbal|Hanbal/i);
+assert.ok(parsedMd.statement.de.length > 40);
+assert.ok(parsedMd.statement.fazit.length > 20);
+
 console.log("video-studio unit checks ok");
