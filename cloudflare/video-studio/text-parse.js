@@ -49,10 +49,11 @@ function cleanSpeaker(raw) {
 
 function cleanStatement(raw) {
   let s = stripMdDecor(String(raw || ""))
-    .replace(/^[\s"„“«»]+/u, "")
+    .replace(/^[\s\u0022\u201E\u201C\u201D\u00AB\u00BB]+/u, "")
     .replace(/\s+/g, " ")
     .trim();
-  s = s.replace(/[“”"»]+$/u, "").trim();
+  // trailing typographic quotes (often U+201C after period)
+  s = s.replace(/[\u201C\u201D\u0022\u00BB]+$/u, "").trim();
   return s;
 }
 
