@@ -356,8 +356,13 @@ async function composeWithShotstack(env, payload, { final }) {
     logoUrl: brands.logoUrl,
     sceneDurationSec: payload.sceneDurationSec
   });
+  return submitShotstackTimeline(env, bodyFull, { final, envInfo });
+}
+
+export async function submitShotstackTimeline(env, bodyFull, { final = true, envInfo = null } = {}) {
+  const info = envInfo || shotstackEnvironment(env, { final });
   const { meta: timelineMeta, ...body } = bodyFull;
-  const res = await fetch(`${envInfo.host}/render`, {
+  const res = await fetch(`${info.host}/render`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -367,12 +372,11 @@ async function composeWithShotstack(env, payload, { final }) {
   });
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
-    // Production fehlgeschlagen → klar melden (kein stilles Stage-Fallback für Endfassung)
     return {
       ok: false,
       httpStatus: res.status,
-      reason: data?.message || data?.response?.message || `Shotstack HTTP ${res.status} (${envInfo.isStage ? "stage" : "v1"})`,
-      shotstackEnv: envInfo.isStage ? "stage" : "v1"
+      reason: data?.message || data?.response?.message || `Shotstack HTTP ${res.status} (${info.isStage ? "stage" : "v1"})`,
+      shotstackEnv: info.isStage ? "stage" : "v1"
     };
   }
   const renderId = data?.response?.id || data?.id || "";
@@ -380,13 +384,13 @@ async function composeWithShotstack(env, payload, { final }) {
     ok: true,
     provider: "shotstack",
     renderId,
-    shotstackEnv: envInfo.isStage ? "stage" : "v1",
-    host: envInfo.host,
-    foreignWatermarkRisk: envInfo.isStage,
+    shotstackEnv: info.isStage ? "stage" : "v1",
+    host: info.host,
+    foreignWatermarkRisk: info.isStage,
     brandingApplied: true,
-    isPreview: envInfo.isStage,
+    isPreview: info.isStage,
     timelineMeta: timelineMeta || null,
-    durationSeconds: 15,
+    durationSeconds: Number(timelineMeta?.durationSec || 15),
     poll: async () => pollShotstackRender(env, renderId, { final })
   };
 }

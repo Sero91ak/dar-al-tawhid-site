@@ -11,7 +11,10 @@ import { createVideoStudioJob, processVideoStudioJob, publicJob, runVideoStudioP
 import { providersStatus, probeFalAuth } from "./providers/index.js";
 import { getVideoAsset, verifySignedAssetRequest, putVideoAsset, createSignedAssetUrl, deleteVideoPrefix } from "./storage.js";
 import { isVoiceConfigured, probeElevenAuth } from "./voice.js";
-import { isComposerConfigured, shotstackEnvironment, probeShotstackAuth } from "./compose.js";
+import { isComposerConfigured, shotstackEnvironment, probeShotstackAuth, submitShotstackTimeline, composeFinalVideo } from "./compose.js";
+import { createProjectFromJob, normalizeProject, scaleProjectDuration, projectToCaptionPlan, DAR_EDITOR_TEMPLATES } from "./project.js";
+import { buildTimelineFromProject } from "./project-compose.js";
+import { runVideoValidation } from "./validation.js";
 import { parseContributionText, estimateVideoCost } from "./text-parse.js";
 import { generateSceneImage } from "./scene-image.js";
 
@@ -172,6 +175,211 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
       return json(result, cors, result.job?.status === "setup_required" ? 200 : 200);
     } catch (error) {
       return json({ ok: false, error: error.message || String(error) }, cors, error.status || 500);
+    }
+  }
+
+  const editorMatch = rest.match(/^\/jobs\/([^/]+)\/(project|editor-export)$/);
+  if (editorMatch) {
+    const jobId = decodeURIComponent(editorMatch[1]);
+    const action = editorMatch[2];
+
+    async function resolveJobMedia(job) {
+      const clipUrls = [];
+      for (const clip of job.artifacts?.clips || []) {
+        if (clip.r2Key) {
+          const signed = await createSignedAssetUrl(env, clip.r2Key, { expiresSec: 3600 });
+          if (signed.ok && signed.url) clipUrls.push(signed.url);
+          else if (clip.url) clipUrls.push(clip.url);
+        } else if (clip.url) clipUrls.push(clip.url);
+      }
+      let voiceUrl = "";
+      if (job.artifacts?.voice?.r2Key) {
+        const signed = await createSignedAssetUrl(env, job.artifacts.voice.r2Key, { expiresSec: 3600 });
+        voiceUrl = signed.url || job.artifacts.voice.url || "";
+      } else {
+        voiceUrl = job.artifacts?.voice?.url || "";
+      }
+      let sceneImageUrl = job.sceneImageUrl || "";
+      if (job.artifacts?.sceneImage?.r2Key) {
+        const signed = await createSignedAssetUrl(env, job.artifacts.sceneImage.r2Key, { expiresSec: 3600 });
+        sceneImageUrl = signed.url || sceneImageUrl;
+      }
+      return { clipUrls, voiceUrl, sceneImageUrl };
+    }
+
+    if (request.method === "GET" && action === "project") {
+      const job = await readJob(env, jobId);
+      if (!job) return json({ ok: false, error: "Auftrag nicht gefunden" }, cors, 404);
+      const media = await resolveJobMedia(job);
+      let project = job.editorProject ? normalizeProject(job.editorProject) : null;
+      if (!project) {
+        project = createProjectFromJob({
+          jobId,
+          name: job.statement?.speaker ? `${job.statement.speaker} – Video` : "DAR Video",
+          statement: job.statement || {},
+          captionPlan: job.storyboard?.captionPlan || null,
+          sceneImageUrl: media.sceneImageUrl,
+          voiceUrl: media.voiceUrl,
+          clipUrls: media.clipUrls,
+          durationSec: job.durationSeconds || 15
+        });
+      } else {
+        project.background = {
+          ...project.background,
+          clipUrls: media.clipUrls.length ? media.clipUrls : project.background?.clipUrls || [],
+          assetUrl: media.sceneImageUrl || project.background?.assetUrl || ""
+        };
+        if (media.voiceUrl && project.audioTracks?.[0]) {
+          project.audioTracks[0].url = media.voiceUrl;
+        }
+      }
+      return json({
+        ok: true,
+        job: publicJob(job),
+        project,
+        templates: DAR_EDITOR_TEMPLATES,
+        media
+      }, cors);
+    }
+
+    if ((request.method === "PUT" || request.method === "PATCH") && action === "project") {
+      const body = await request.json().catch(() => ({}));
+      const job = await readJob(env, jobId);
+      if (!job) return json({ ok: false, error: "Auftrag nicht gefunden" }, cors, 404);
+      let project = normalizeProject(body.project || body);
+      if (!project) return json({ ok: false, error: "Ungültiges Projekt" }, cors, 422);
+      if (body.scaleDuration != null) {
+        project = scaleProjectDuration(project, body.scaleDuration, {
+          proportional: body.proportional !== false
+        });
+      }
+      const saved = await saveJob(env, {
+        ...job,
+        editorProject: project,
+        message: "Editor-Projekt gespeichert",
+        updatedAt: new Date().toISOString()
+      });
+      return json({ ok: true, project, job: publicJob(saved) }, cors);
+    }
+
+    if (request.method === "POST" && action === "editor-export") {
+      await assertVideoStudioRateLimit(env, request);
+      const body = await request.json().catch(() => ({}));
+      const job = await readJob(env, jobId);
+      if (!job) return json({ ok: false, error: "Auftrag nicht gefunden" }, cors, 404);
+      const media = await resolveJobMedia(job);
+      let project = normalizeProject(body.project || job.editorProject);
+      if (!project) {
+        project = createProjectFromJob({
+          jobId,
+          statement: job.statement || {},
+          captionPlan: job.storyboard?.captionPlan || null,
+          sceneImageUrl: media.sceneImageUrl,
+          voiceUrl: media.voiceUrl,
+          clipUrls: media.clipUrls,
+          durationSec: job.durationSeconds || 15
+        });
+      }
+      project.background = {
+        ...project.background,
+        clipUrls: media.clipUrls,
+        assetUrl: media.sceneImageUrl || project.background?.assetUrl || ""
+      };
+      if (project.audioTracks?.[0]) project.audioTracks[0].url = media.voiceUrl || project.audioTracks[0].url;
+
+      if (!media.clipUrls.length) {
+        return json({ ok: false, error: "Keine Bewegungsclips – zuerst Video erzeugen" }, cors, 409);
+      }
+
+      const timeline = buildTimelineFromProject(env, project);
+      const validation = runVideoValidation({
+        statement: job.statement,
+        storyboard: job.storyboard,
+        captionPlan: projectToCaptionPlan(project),
+        render: {
+          ok: true,
+          audioAttached: Boolean(media.voiceUrl),
+          provider: "shotstack",
+          shotstackEnv: "v1",
+          foreignWatermarkRisk: false,
+          brandingApplied: true,
+          durationSeconds: project.duration
+        },
+        timelineMeta: timeline.meta
+      });
+
+      if (body.previewOnly === true) {
+        await saveJob(env, { ...job, editorProject: project, validation, updatedAt: new Date().toISOString() });
+        return json({ ok: true, validation, project, previewOnly: true }, cors);
+      }
+
+      if (validation.blocked && body.force !== true) {
+        return json({
+          ok: false,
+          error: "Export blockiert durch Qualitätsprüfung",
+          validation,
+          blocked: true
+        }, cors, 422);
+      }
+
+      let compose = await submitShotstackTimeline(env, timeline, { final: true });
+      if (!compose.ok) {
+        const code = Number(compose.httpStatus || 0);
+        if (code === 401 || code === 403) {
+          // Kein Stage (Fremdwasserzeichen) – fal nur als unvollständige Vorschau
+          compose = await composeFinalVideo(env, {
+            clipUrls: media.clipUrls,
+            voiceUrl: media.voiceUrl,
+            captionPlan: projectToCaptionPlan(project),
+            final: true
+          });
+        }
+      }
+
+      if (!compose.ok) {
+        return json({ ok: false, error: compose.reason || "Export fehlgeschlagen", compose }, cors, 502);
+      }
+
+      const saved = await saveJob(env, {
+        ...job,
+        editorProject: project,
+        validation,
+        status: "running",
+        stage: "render",
+        artifacts: {
+          ...(job.artifacts || {}),
+          render: {
+            provider: compose.provider,
+            renderId: compose.renderId,
+            status: "running",
+            statusUrl: compose.statusUrl || null,
+            responseUrl: compose.responseUrl || null,
+            falPhase: compose.falPhase || null,
+            voiceUrl: media.voiceUrl || null,
+            shotstackEnv: compose.shotstackEnv || null,
+            foreignWatermarkRisk: Boolean(compose.foreignWatermarkRisk),
+            brandingApplied: Boolean(compose.brandingApplied),
+            composeFallback: compose.composeFallback || "editor",
+            timelineMeta: compose.timelineMeta || timeline.meta,
+            fromEditor: true
+          }
+        },
+        message: "Editor-Export läuft…",
+        updatedAt: new Date().toISOString()
+      });
+
+      if (ctx?.waitUntil) {
+        ctx.waitUntil(runVideoStudioPipelineLoop(env, jobId, helpers, { maxTicks: 24, delayMs: 2500 }));
+      }
+
+      return json({
+        ok: true,
+        job: publicJob(saved),
+        project,
+        validation,
+        renderId: compose.renderId,
+        provider: compose.provider
+      }, cors);
     }
   }
 

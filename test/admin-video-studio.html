@@ -192,6 +192,7 @@ details.box summary::-webkit-details-marker{display:none}
     <div class="frame-strip" id="previewFrames" aria-label="Prüfbilder bei 2s, 6s, 11s, 14s"></div>
     <div class="struct" id="resultMeta" style="margin-top:8px"></div>
     <div class="actions">
+      <button class="btn primary" type="button" id="editTouchBtn">Touch-Editor</button>
       <button class="btn primary" type="button" id="saveBtn">Auf Gerät speichern</button>
       <button class="btn primary" type="button" id="shareBtn">Teilen</button>
     </div>
@@ -615,6 +616,10 @@ details.box summary::-webkit-details-marker{display:none}
   el("cancelJobBtn").addEventListener("click",async()=>{
     if(!state.job?.id)return;
     try{const d=await api("/jobs/"+encodeURIComponent(state.job.id)+"/cancel",{method:"POST",body:"{}"});state.job=d.job;el("videoNotice").textContent="Abgebrochen";setStatus("abgebrochen","warn")}catch(e){alert(e.message)}
+  });
+  el("editTouchBtn").addEventListener("click",()=>{
+    if(!state.job?.id){alert("Kein Auftrag");return;}
+    location.href="/admin/video-editor.html?job="+encodeURIComponent(state.job.id);
   });
   el("saveBtn").addEventListener("click",async()=>{
     if(!state.job?.outputUrl)return;

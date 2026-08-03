@@ -47,6 +47,7 @@ function publicJob(job) {
     qualityIncomplete: Boolean(job.qualityIncomplete),
     validation: job.validation || null,
     previewFrames: job.previewFrames || [2, 6, 11, 14],
+    hasEditorProject: Boolean(job.editorProject?.id),
     approval: job.approval || { approved: false },
     statement: job.statement
       ? {

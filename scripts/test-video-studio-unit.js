@@ -262,4 +262,34 @@ assert.equal(parsedMd.statement.speaker.includes("Alī") || parsedMd.statement.s
 assert.match(parsedMd.statement.source, /Zuhd|Ḥanbal|Hanbal/i);
 assert.ok(parsedMd.statement.de.length > 40);
 
+import { createProjectFromJob, scaleProjectDuration, projectToCaptionPlan } from "../cloudflare/video-studio/project.js";
+import { buildTimelineFromProject } from "../cloudflare/video-studio/project-compose.js";
+
+const proj = createProjectFromJob({
+  jobId: "job_test",
+  statement: selected.statement,
+  captionPlan: plan,
+  sceneImageUrl: "https://example.com/still.jpg",
+  voiceUrl: "https://example.com/voice.mp3",
+  clipUrls: ["https://example.com/a.mp4", "https://example.com/b.mp4", "https://example.com/c.mp4"],
+  durationSec: 15
+});
+assert.equal(proj.width, 1080);
+assert.equal(proj.height, 1920);
+assert.equal(proj.duration, 15);
+assert.ok(proj.elements.some((e) => e.role === "watermark"));
+assert.ok(proj.elements.some((e) => e.role === "speaker"));
+assert.ok(proj.elements.some((e) => e.role === "social"));
+assert.equal(proj.elements.filter((e) => e.role === "watermark").length, 1);
+const scaled = scaleProjectDuration(proj, 30, { proportional: true });
+assert.equal(scaled.duration, 30);
+assert.ok(scaled.elements.find((e) => e.role === "social")?.timing.end > 20);
+const plan2 = projectToCaptionPlan(proj);
+assert.ok(plan2.overlays.length >= 4);
+const tl = buildTimelineFromProject({}, { ...proj, background: { ...proj.background, clipUrls: proj.background.clipUrls } });
+assert.equal(tl.meta.fromEditor, true);
+assert.equal(tl.meta.watermarkCount, 1);
+assert.ok(tl.meta.watermark.opacity <= 0.12);
+
 console.log("video-studio unit checks ok");
+
