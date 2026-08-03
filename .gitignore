@@ -6,3 +6,8 @@ node_modules/
 Thumbs.db
 *.log
 .cursor/
+
+# Local agent secrets / autotest artifacts (never commit)
+.local/
+
+cloudflare/.wrangler/
