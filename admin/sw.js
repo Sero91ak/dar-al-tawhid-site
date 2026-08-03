@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'dar-admin-stats-v61-video-studio-compose-fallback';
+const CACHE_VERSION = 'dar-admin-stats-v61b-video-studio-compose-fallback';
 const SHELL = [
   '/admin/manifest.json',
   '/admin/admin-icon-192.png',
