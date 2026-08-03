@@ -187,9 +187,11 @@ const qualityFal = runQualityChecks({
   captionPlan: plan,
   providerMeta: { simulated: false }
 });
-assert.equal(qualityFal.ok, true, qualityFal.reasons.join(" · "));
+assert.equal(qualityFal.ok, false, "fal ohne Branding darf QA nicht bestehen");
 assert.equal(qualityFal.falComposeFallback, true);
 assert.equal(qualityFal.checks.noForeignWatermark, true);
+assert.equal(qualityFal.checks.brandingComplete, false);
+assert.equal(qualityFal.checks.captionsSafe, false);
 
 import { parseContributionText } from "../cloudflare/video-studio/text-parse.js";
 import { readFileSync } from "node:fs";
