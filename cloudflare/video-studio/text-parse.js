@@ -95,7 +95,7 @@ export function parseContributionText(raw) {
 
   // 1) Sprecher … sagte: „Aussage“
   const saidRe =
-    /(?:^|\n)\s*(?:🖋️\s*)?(?:\*\*)?([^\n*]{2,120}?)(?:\*\*)?\s*(?:رضي الله عنه|رضى الله عنه|رحمه الله|عليه السلام)?\s*sagte\s*[:：]\s*([\s\S]*?)(?=(?:\n\s*(?:📝|🌙|Quelle|Fundstelle|Fazit|Schluss|Folgt für)|$))/iu;
+    /(?:^|\n)\s*(?:🖋️\s*)?(?:\*\*)?([^\n*]{2,120}?)(?:\*\*)?\s*(?:رضي الله عنه|رضى الله عنه|رحمه الله|عليه السلام)?\s*sagte\s*[:：]\s*([\s\S]*?)(?=(?:\s*(?:📝|🌙)|(?:\n\s*)?(?:Quelle|Fundstelle|Fazit|Schluss|Folgt für)|$))/iu;
   const said = text.match(saidRe);
   if (said) {
     speaker = cleanSpeaker(said[1]);
@@ -167,12 +167,13 @@ export function parseContributionText(raw) {
 
   // Aussage ohne Quelle/Fazit-Reste
   if (de) {
-    de = de
-      .replace(/\s*📝[\s\S]*$/u, "")
-      .replace(/\s*🌙[\s\S]*$/u, "")
-      .replace(/\s*(?:Quelle|Fundstelle)\s*[:：][\s\S]*$/iu, "")
-      .replace(/\s*(?:Fazit|Schluss)\s*[:：][\s\S]*$/iu, "")
-      .trim();
+    de = cleanStatement(
+      de
+        .replace(/\s*📝[\s\S]*$/u, "")
+        .replace(/\s*🌙[\s\S]*$/u, "")
+        .replace(/\s*(?:Quelle|Fundstelle)\s*[:：][\s\S]*$/iu, "")
+        .replace(/\s*(?:Fazit|Schluss)\s*[:：][\s\S]*$/iu, "")
+    );
   }
 
   if (!speaker) speaker = "Überlieferung";
