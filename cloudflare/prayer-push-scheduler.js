@@ -4,7 +4,7 @@
  */
 
 import { PRAYER_PUSH_COPY_VERSION, pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";
-import { writePrayerStatusToStore } from "./prayer-status-store.js";
+import { writePrayerStatusToStore, claimPrayerPushSeed, releasePrayerPushSeed } from "./prayer-status-store.js";
 
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de/#prayer";
@@ -19,6 +19,9 @@ const SCHEDULE_CRON_BUFFER_MINUTES = 5;
 const SCHEDULE_LOOKAHEAD_MINUTES = SCHEDULE_LOOKAHEAD_BASE_MINUTES + DEFAULT_PRAYER_ADVANCE_MINUTES + SCHEDULE_CRON_BUFFER_MINUTES;
 const SCHEDULE_LOOKAHEAD_MAX_MINUTES = 120;
 const SCHEDULE_GRACE_MINUTES = 15;
+// Nachholfenster: kurz halten, damit kein Cron-Nachsende-Sturm entsteht.
+const ADVANCE_CATCHUP_MAX_MINUTES = 3;
+const ENTRY_CATCHUP_MAX_MINUTES = 2;
 // Migration abgeschlossen – kein cancelObsoleteSchedules mehr im Cron (verhindert Subrequest-Limit).
 const PRAYER_COPY_MIGRATION_UNTIL = 0;
 const MIGRATION_MAX_PER_RUN = 0;
@@ -187,9 +190,10 @@ function resolvePrayerSlotSendAfter(slot, entryAt, now, graceMinutes = SCHEDULE_
   if (slot.mode !== "advance" || !(entryAt instanceof Date) || entryAt <= now) return slot.sendAfter;
   const originalAdvance = slot.sendAfter;
   if (originalAdvance > now) return originalAdvance;
-  // Vorab-Zeit vorbei, Gebetszeit noch nicht – höchstens einmal innerhalb der Grace nachholen.
-  const graceEnd = new Date(originalAdvance.getTime() + graceMinutes * 60000);
-  if (now <= graceEnd && now < entryAt) return new Date(now.getTime() + 1500);
+  // Vorab-Zeit vorbei, Gebetszeit noch nicht – nur kurz nachholen (nicht volle Grace = kein Loop).
+  const catchUpMinutes = Math.min(ADVANCE_CATCHUP_MAX_MINUTES, Math.max(0, Number(graceMinutes) || 0));
+  const catchUpEnd = new Date(originalAdvance.getTime() + catchUpMinutes * 60000);
+  if (now <= catchUpEnd && now < entryAt) return new Date(now.getTime() + 1500);
   return null;
 }
 
@@ -460,6 +464,15 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun, s
   }
   sentInRun.add(seed);
 
+  // PRAYER_PUSH_CLAIM_LOCK: ein Push pro seed/Tag – spätere Cron-Läufe werden blockiert.
+  const claim = await claimPrayerPushSeed(env, seed, slotDay);
+  if (claim.duplicate) {
+    stats.duplicates += 1;
+    return;
+  }
+  const claimHeld = Boolean(claim.claimed);
+
+  const collapse = `prayer-${PRAYER_PUSH_COPY_VERSION}-${mode}-${prayer.key}-${slotDay}-${group.lat.toFixed(3)}-${group.lon.toFixed(3)}`;
   const copy = notifyCopy(prayer, mode, group);
   const body = withIcons({
     app_id: String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim(),
@@ -469,13 +482,17 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun, s
     contents: copy.contents,
     url: String(env.SITE_URL || DEFAULT_SITE_URL),
     isAnyWeb: true,
+    collapse_id: collapse,
+    web_push_topic: collapse,
     data: {
       type: "prayer",
       prayer: prayer.key,
       mode,
       copyVersion: PRAYER_PUSH_COPY_VERSION,
-      environment: "production"
+      environment: "production",
+      collapseId: collapse
     },
+    name: collapse,
     idempotency_key: await uuidFrom(seed)
   }, env);
 
@@ -483,20 +500,25 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun, s
     body.send_after = sendAfter.toISOString();
   }
 
-  await cancelObsoleteSchedules(env, body, group, prayer, sendAfter, mode, stats);
-  const result = await postOneSignal(env, body);
-  stats.scheduled += 1;
-  stats.recipients += subscriptionIds.length;
-  stats.planned.push({
-    prayer: prayer.name,
-    key: prayer.key,
-    mode,
-    time: prayer.time == null ? null : formatHour(prayer.time),
-    sendAfter: sendAfter.toISOString(),
-    recipients: subscriptionIds.length,
-    timeZone: group.timeZone
-  });
-  stats.oneSignalAccepted += result.status >= 200 && result.status < 300 ? 1 : 0;
+  try {
+    await cancelObsoleteSchedules(env, body, group, prayer, sendAfter, mode, stats);
+    const result = await postOneSignal(env, body);
+    stats.scheduled += 1;
+    stats.recipients += subscriptionIds.length;
+    stats.planned.push({
+      prayer: prayer.name,
+      key: prayer.key,
+      mode,
+      time: prayer.time == null ? null : formatHour(prayer.time),
+      sendAfter: sendAfter.toISOString(),
+      recipients: subscriptionIds.length,
+      timeZone: group.timeZone
+    });
+    stats.oneSignalAccepted += result.status >= 200 && result.status < 300 ? 1 : 0;
+  } catch (error) {
+    if (claimHeld) await releasePrayerPushSeed(env, seed, slotDay);
+    throw error;
+  }
 }
 
 function buildOverview(planned, skippedPast, reference = REFERENCE) {
@@ -704,13 +726,14 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
 
         for (const slot of slots) {
           const slotDay = slotDayKey(day);
+          const originalSendAfter = slot.sendAfter;
           const plannedSendAfter = resolvePrayerSlotSendAfter(slot, entryAt, now, grace);
           if (plannedSendAfter == null) {
             stats.skippedPast += 1;
             stats.skippedPastDetails.push({
               key: prayer.key,
               mode: slot.mode,
-              sendAfter: slot.sendAfter.toISOString(),
+              sendAfter: originalSendAfter.toISOString(),
               time: prayer.time == null ? null : formatHour(prayer.time),
               timeZone: group.timeZone
             });
@@ -721,11 +744,26 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
             stats.skippedPastDetails.push({
               key: prayer.key,
               mode: slot.mode,
-              sendAfter: slot.sendAfter.toISOString(),
+              sendAfter: originalSendAfter.toISOString(),
               time: prayer.time == null ? null : formatHour(prayer.time),
               timeZone: group.timeZone
             });
             continue;
+          }
+          // Entry nur kurz nachholen – verhindert 15-Min-Nachsende-Sturm nach Gebetszeit.
+          if (slot.mode === "entry" && originalSendAfter < now) {
+            const entryLagMs = now.getTime() - originalSendAfter.getTime();
+            if (entryLagMs > ENTRY_CATCHUP_MAX_MINUTES * 60000) {
+              stats.skippedPast += 1;
+              stats.skippedPastDetails.push({
+                key: prayer.key,
+                mode: slot.mode,
+                sendAfter: originalSendAfter.toISOString(),
+                time: prayer.time == null ? null : formatHour(prayer.time),
+                timeZone: group.timeZone
+              });
+              continue;
+            }
           }
           slot.sendAfter = plannedSendAfter;
           if (slot.sendAfter > windowEnd) {

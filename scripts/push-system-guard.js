@@ -134,7 +134,10 @@ function runPushSystemGuard() {
   ].forEach((file) => mustExist(file));
 
   mustInclude("prayer-push-scheduler.js", read("cloudflare/prayer-push-scheduler.js"), [
-    "export async function runPrayerPushScheduler"
+    "export async function runPrayerPushScheduler",
+    "PRAYER_PUSH_CLAIM_LOCK",
+    "claimPrayerPushSeed",
+    "collapse_id: collapse"
   ]);
 
   mustInclude("daily-push-scheduler.js", read("cloudflare/daily-push-scheduler.js"), [
