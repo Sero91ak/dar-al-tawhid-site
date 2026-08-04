@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-04T22:13:37.673Z",
+  "updatedAt": "2026-08-04T22:13:43.452Z",
   "cacheVersion": 6,
   "settings": {
     "autoDownloadEnabled": true,
@@ -33,17 +33,24 @@
     ]
   },
   "syncState": {
-    "lastSyncAt": "",
-    "lastSyncStatus": "idle",
-    "lastSyncError": "",
-    "nextSyncAt": "",
-    "dailyDownloadDate": "",
-    "dailyDownloadCount": 0,
-    "lastRunDownloads": 0,
-    "lastRunRejected": 0,
-    "lastRunErrors": [],
-    "totalDownloads": 0,
-    "totalRejected": 0
+    "lastSyncAt": "2026-08-04T22:10:32.774Z",
+    "lastSyncStatus": "ok",
+    "lastSyncError": "pexels:9501471: Update is not a fast forward",
+    "nextSyncAt": "2026-08-05T22:13:43.452Z",
+    "dailyDownloadDate": "2026-08-04",
+    "dailyDownloadCount": 20,
+    "lastRunDownloads": 20,
+    "lastRunRejected": 29,
+    "lastRunErrors": [
+      "pexels:9501471: Update is not a fast forward",
+      "pexels:38850947: Update is not a fast forward",
+      "pexels:15103188: Download 404",
+      "pexels:4405243: Update is not a fast forward",
+      "unsplash:9bd6LStI8ug: Update is not a fast forward",
+      "unsplash:bbhMPVdkFCA: GitHub binary blob Fehler 522"
+    ],
+    "totalDownloads": 20,
+    "totalRejected": 21
   },
   "items": [
     {
