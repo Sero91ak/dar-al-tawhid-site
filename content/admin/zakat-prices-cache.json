@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-04T16:01:55.536Z",
+  "updatedAt": "2026-08-04T18:01:17.489Z",
   "provider": "mintedmetal.com",
   "active": true,
   "gold": {
@@ -12,7 +12,7 @@
     "nisabEur": 9556.55,
     "source": "London PM Fix / London Silver Fix · Minted Metal (LBMA, 2× täglich) · EUR via Frankfurter/ECB · Echtzeit-Fallback (EUR-Umrechnung fehlgeschlagen (Frankfurter/ECB))",
     "provider": "mintedmetal.com",
-    "fetchedAt": "2026-08-04T16:01:55.536Z",
+    "fetchedAt": "2026-08-04T18:01:17.489Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
@@ -27,17 +27,27 @@
     "nisabEur": 957.95,
     "source": "London PM Fix / London Silver Fix · Minted Metal (LBMA, 2× täglich) · EUR via Frankfurter/ECB · Echtzeit-Fallback (EUR-Umrechnung fehlgeschlagen (Frankfurter/ECB))",
     "provider": "mintedmetal.com",
-    "fetchedAt": "2026-08-04T16:01:55.536Z",
+    "fetchedAt": "2026-08-04T18:01:17.489Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
     "adminNote": ""
   },
   "standardNisabEur": 957.95,
-  "lastSuccessAt": "2026-08-04T16:01:55.536Z",
+  "lastSuccessAt": "2026-08-04T18:01:17.489Z",
   "lastError": "",
-  "lastFetchAt": "2026-08-04T16:01:55.536Z",
+  "lastFetchAt": "2026-08-04T18:01:17.489Z",
   "fetchLogs": [
+    {
+      "id": "log-1785866477489",
+      "provider": "mintedmetal.com",
+      "status": "ok",
+      "errorMessage": "",
+      "fetchedAt": "2026-08-04T18:01:17.489Z",
+      "durationMs": 22555,
+      "goldPerGram": 112.43,
+      "silverPerGram": 1.61
+    },
     {
       "id": "log-1785859315536",
       "provider": "mintedmetal.com",
@@ -526,16 +536,6 @@
       "fetchedAt": "2026-08-03T19:05:15.753Z",
       "durationMs": 6994,
       "goldPerGram": 114.25,
-      "silverPerGram": 1.62
-    },
-    {
-      "id": "log-1785782409584",
-      "provider": "aurumrates.com",
-      "status": "ok",
-      "errorMessage": "",
-      "fetchedAt": "2026-08-03T18:40:09.584Z",
-      "durationMs": 982,
-      "goldPerGram": 114.08,
       "silverPerGram": 1.62
     }
   ]
