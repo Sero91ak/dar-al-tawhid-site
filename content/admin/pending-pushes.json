@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-04T11:10:32.373Z",
+  "generated": "2026-08-04T11:10:48.930Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -285,7 +285,24 @@
       "pushApproved": true,
       "pushApprovedAt": "2026-08-04T11:10:32.181Z",
       "postId": "lib:pub-20260804-001",
-      "updatedAt": "2026-08-04T11:10:32.373Z"
+      "updatedAt": "2026-08-04T11:10:48.930Z",
+      "lastCheckAt": "2026-08-04T11:10:48.741Z",
+      "liveCheck": {
+        "ok": false,
+        "diagnosis": "PDF noch nicht im Live-Katalog enthalten.",
+        "site": "https://dar-al-tawhid.de",
+        "publicationId": "pub-20260804-001",
+        "slug": "die-aqidah-eines-menschen-prufen",
+        "catalogFoundPublic": true,
+        "publicationInCatalog": false,
+        "pdfFilePublic": false,
+        "visitorUrlOk": true,
+        "visitorUrl": "https://dar-al-tawhid.de/?v=1785841848690#bibliothek/die-aqidah-eines-menschen-prufen",
+        "pdfHttpStatus": 404,
+        "attempt": 5
+      },
+      "attempts": 5,
+      "lastError": "PDF noch nicht im Live-Katalog enthalten."
     }
   }
 }
