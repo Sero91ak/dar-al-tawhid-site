@@ -16,5 +16,23 @@
     "title": "Duʿāʾ um Vergebung, Festigkeit und Sieg",
     "snippet": "Unser Herr, vergib uns unsere Sünden und unsere Überschreitung in unserer Angelegenheit, festige unsere Füße und hilf uns gegen das ungläubige Volk.",
     "category": "Vergebung & Standhaftigkeit"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 456,
+      "remaining": 448
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 90,
+      "remaining": 83,
+      "sources": {
+        "markdown": 90,
+        "total": 90,
+        "poolSize": 90,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
