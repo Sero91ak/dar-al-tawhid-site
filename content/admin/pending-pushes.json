@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-04T10:59:25.641Z",
+  "generated": "2026-08-04T10:59:30.558Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -240,8 +240,32 @@
       "createdAt": "2026-08-04T10:59:25.378Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-08-04T10:59:25.378Z",
-      "lastError": "Push wartet auf Live-Verfügbarkeit",
-      "updatedAt": "2026-08-04T10:59:25.641Z"
+      "lastError": "",
+      "updatedAt": "2026-08-04T10:59:30.558Z",
+      "lastCheckAt": "2026-08-04T10:59:30.387Z",
+      "liveCheck": {
+        "ok": true,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": true,
+          "postFilePublic": true,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": true
+        },
+        "diagnosis": "",
+        "indexOk": true,
+        "postOk": true,
+        "visitorUrlOk": true,
+        "attempts": 2,
+        "site": "https://dar-al-tawhid.de",
+        "postId": "sulayman-ibn-suhman-julus-tajsim-buhtan-457",
+        "indexGenerated": "2026-08-04T10:59:22.682Z",
+        "indexCount": 457,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=sulayman-ibn-suhman-julus-tajsim-buhtan-457&v=1785841169939#post/sulayman-ibn-suhman-julus-tajsim-buhtan-457"
+      },
+      "attempts": 2
     }
   }
 }
