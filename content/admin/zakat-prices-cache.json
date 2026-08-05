@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-05T13:40:33.537Z",
+  "updatedAt": "2026-08-05T14:01:20.667Z",
   "provider": "aurumrates.com",
   "active": true,
   "gold": {
     "metal": "gold",
     "currency": "EUR",
-    "pricePerOunce": 3694.39,
-    "pricePerGram": 118.78,
+    "pricePerOunce": 3680.54,
+    "pricePerGram": 118.33,
     "nisabGrams": 85,
-    "nisabEur": 10096.3,
+    "nisabEur": 10058.05,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-08-05T13:40:33.537Z",
+    "fetchedAt": "2026-08-05T14:01:20.667Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
@@ -21,23 +21,33 @@
   "silver": {
     "metal": "silver",
     "currency": "EUR",
-    "pricePerOunce": 54.05,
-    "pricePerGram": 1.74,
+    "pricePerOunce": 53.85,
+    "pricePerGram": 1.73,
     "nisabGrams": 595,
-    "nisabEur": 1035.3,
+    "nisabEur": 1029.35,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-08-05T13:40:33.537Z",
+    "fetchedAt": "2026-08-05T14:01:20.667Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
     "adminNote": ""
   },
-  "standardNisabEur": 1035.3,
-  "lastSuccessAt": "2026-08-05T13:40:33.537Z",
+  "standardNisabEur": 1029.35,
+  "lastSuccessAt": "2026-08-05T14:01:20.667Z",
   "lastError": "",
-  "lastFetchAt": "2026-08-05T13:40:33.537Z",
+  "lastFetchAt": "2026-08-05T14:01:20.667Z",
   "fetchLogs": [
+    {
+      "id": "log-1785938480667",
+      "provider": "aurumrates.com",
+      "status": "ok",
+      "errorMessage": "",
+      "fetchedAt": "2026-08-05T14:01:20.667Z",
+      "durationMs": 47689,
+      "goldPerGram": 118.33,
+      "silverPerGram": 1.73
+    },
     {
       "id": "log-1785937233537",
       "provider": "aurumrates.com",
@@ -525,16 +535,6 @@
       "durationMs": 44225,
       "goldPerGram": 115.69,
       "silverPerGram": 1.67
-    },
-    {
-      "id": "log-1785866477489",
-      "provider": "mintedmetal.com",
-      "status": "ok",
-      "errorMessage": "",
-      "fetchedAt": "2026-08-04T18:01:17.489Z",
-      "durationMs": 22555,
-      "goldPerGram": 112.43,
-      "silverPerGram": 1.61
     }
   ]
 }
