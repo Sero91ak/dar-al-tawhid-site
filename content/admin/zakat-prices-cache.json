@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-05T12:30:34.342Z",
+  "updatedAt": "2026-08-05T12:55:33.393Z",
   "provider": "aurumrates.com",
   "active": true,
   "gold": {
     "metal": "gold",
     "currency": "EUR",
-    "pricePerOunce": 3703.94,
-    "pricePerGram": 119.08,
+    "pricePerOunce": 3694.65,
+    "pricePerGram": 118.79,
     "nisabGrams": 85,
-    "nisabEur": 10121.8,
+    "nisabEur": 10097.15,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-08-05T12:30:34.342Z",
+    "fetchedAt": "2026-08-05T12:55:33.393Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
@@ -21,23 +21,33 @@
   "silver": {
     "metal": "silver",
     "currency": "EUR",
-    "pricePerOunce": 54.34,
-    "pricePerGram": 1.75,
+    "pricePerOunce": 53.96,
+    "pricePerGram": 1.73,
     "nisabGrams": 595,
-    "nisabEur": 1041.25,
+    "nisabEur": 1029.35,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-08-05T12:30:34.342Z",
+    "fetchedAt": "2026-08-05T12:55:33.393Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
     "adminNote": ""
   },
-  "standardNisabEur": 1041.25,
-  "lastSuccessAt": "2026-08-05T12:30:34.342Z",
+  "standardNisabEur": 1029.35,
+  "lastSuccessAt": "2026-08-05T12:55:33.393Z",
   "lastError": "",
-  "lastFetchAt": "2026-08-05T12:30:34.342Z",
+  "lastFetchAt": "2026-08-05T12:55:33.393Z",
   "fetchLogs": [
+    {
+      "id": "log-1785934533393",
+      "provider": "aurumrates.com",
+      "status": "ok",
+      "errorMessage": "",
+      "fetchedAt": "2026-08-05T12:55:33.393Z",
+      "durationMs": 503,
+      "goldPerGram": 118.79,
+      "silverPerGram": 1.73
+    },
     {
       "id": "log-1785933034342",
       "provider": "aurumrates.com",
@@ -524,16 +534,6 @@
       "fetchedAt": "2026-08-04T15:01:35.694Z",
       "durationMs": 40704,
       "goldPerGram": 112.43,
-      "silverPerGram": 1.61
-    },
-    {
-      "id": "log-1785844881073",
-      "provider": "mintedmetal.com",
-      "status": "ok",
-      "errorMessage": "",
-      "fetchedAt": "2026-08-04T12:01:21.073Z",
-      "durationMs": 26120,
-      "goldPerGram": 112.23,
       "silverPerGram": 1.61
     }
   ]
