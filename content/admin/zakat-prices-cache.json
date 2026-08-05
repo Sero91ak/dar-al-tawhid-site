@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-05T21:50:33.615Z",
+  "updatedAt": "2026-08-05T22:10:33.691Z",
   "provider": "aurumrates.com",
   "active": true,
   "gold": {
@@ -12,7 +12,7 @@
     "nisabEur": 10189.8,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-08-05T21:50:33.615Z",
+    "fetchedAt": "2026-08-05T22:10:33.691Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
@@ -21,23 +21,33 @@
   "silver": {
     "metal": "silver",
     "currency": "EUR",
-    "pricePerOunce": 53.88,
+    "pricePerOunce": 53.95,
     "pricePerGram": 1.73,
     "nisabGrams": 595,
     "nisabEur": 1029.35,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-08-05T21:50:33.615Z",
+    "fetchedAt": "2026-08-05T22:10:33.691Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
     "adminNote": ""
   },
   "standardNisabEur": 1029.35,
-  "lastSuccessAt": "2026-08-05T21:50:33.615Z",
+  "lastSuccessAt": "2026-08-05T22:10:33.691Z",
   "lastError": "",
-  "lastFetchAt": "2026-08-05T21:50:33.615Z",
+  "lastFetchAt": "2026-08-05T22:10:33.691Z",
   "fetchLogs": [
+    {
+      "id": "log-1785967833691",
+      "provider": "aurumrates.com",
+      "status": "ok",
+      "errorMessage": "",
+      "fetchedAt": "2026-08-05T22:10:33.691Z",
+      "durationMs": 721,
+      "goldPerGram": 119.88,
+      "silverPerGram": 1.73
+    },
     {
       "id": "log-1785966633615",
       "provider": "aurumrates.com",
@@ -526,16 +536,6 @@
       "fetchedAt": "2026-08-05T04:10:33.476Z",
       "durationMs": 503,
       "goldPerGram": 116.89,
-      "silverPerGram": 1.7
-    },
-    {
-      "id": "log-1785901833639",
-      "provider": "aurumrates.com",
-      "status": "ok",
-      "errorMessage": "",
-      "fetchedAt": "2026-08-05T03:50:33.639Z",
-      "durationMs": 551,
-      "goldPerGram": 116.85,
       "silverPerGram": 1.7
     }
   ]
