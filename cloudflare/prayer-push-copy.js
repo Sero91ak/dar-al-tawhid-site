@@ -17,7 +17,11 @@ export const PRAYER_ADVANCE_PUSH_VARIANTS = {
     "In {minutes} Min · {time} Uhr. Fajr naht — steh für das Gebet auf, bevor der Alltag beginnt.",
     "In {minutes} Min · {time} Uhr. Bewahre Fajr früh, bevor dich Schlaf oder Ablenkung festhalten.",
     "In {minutes} Min · {time} Uhr. Fajr ist eine Grenze zwischen Nachlässigkeit und einem Morgen in Gehorsam.",
-    "In {minutes} Min · {time} Uhr. Vor dem Trubel des Tages ruft dich Fajr zuerst zum Gebet."
+    "In {minutes} Min · {time} Uhr. Vor dem Trubel des Tages ruft dich Fajr zuerst zum Gebet.",
+    "In {minutes} Min · {time} Uhr. Vor Sonnenaufgang liegt ein Beginn, der mit Gehorsam gesegnet ist.",
+    "In {minutes} Min · {time} Uhr. Lass Fajr nicht schwerer wiegen als dein Schlaf.",
+    "In {minutes} Min · {time} Uhr. Wer früh aufsteht für Allah, beginnt den Tag nicht leer.",
+    "In {minutes} Min · {time} Uhr. Noch vor dem ersten Lärm des Tages ist Zeit, deinem Herrn zu antworten."
   ],
   dhuhr: [
     "In {minutes} Min · {time} Uhr. Die Sonne hat sich geneigt — Zeit, dich Dhuhr zuzuwenden.",
@@ -25,7 +29,11 @@ export const PRAYER_ADVANCE_PUSH_VARIANTS = {
     "In {minutes} Min · {time} Uhr. Dhuhr kommt — gib Allah jetzt einen festen Teil deines Tages.",
     "In {minutes} Min · {time} Uhr. Mitten im Tag ruft dich das Gebet zurück zur Erinnerung an Allah.",
     "In {minutes} Min · {time} Uhr. Wenn der Tag dich bindet, löst dich Dhuhr wieder zum Gehorsam.",
-    "In {minutes} Min · {time} Uhr. Dhuhr naht — richte deinen Tag neu aus, bevor er dich ganz einnimmt."
+    "In {minutes} Min · {time} Uhr. Dhuhr naht — richte deinen Tag neu aus, bevor er dich ganz einnimmt.",
+    "In {minutes} Min · {time} Uhr. Zwischen Arbeit und Terminen bleibt Dhuhr eine feste Pflicht.",
+    "In {minutes} Min · {time} Uhr. Lass die Mitte deines Tages nicht ohne Gebet verstreichen.",
+    "In {minutes} Min · {time} Uhr. Dhuhr trennt nützige Beschäftigung von gedankenloser Ablenkung.",
+    "In {minutes} Min · {time} Uhr. Nimm dir für Dhuhr bewusst Zeit, bevor der Rest des Tages dich trägt."
   ],
   asr: [
     "In {minutes} Min · {time} Uhr. ʿAṣr naht — bewahre das Gebet, das besonders geschützt werden soll.",
@@ -33,7 +41,11 @@ export const PRAYER_ADVANCE_PUSH_VARIANTS = {
     "In {minutes} Min · {time} Uhr. Der Tag geht weiter, aber ʿAṣr darf nicht nach hinten fallen.",
     "In {minutes} Min · {time} Uhr. Richte dich auf ʿAṣr aus, bevor Müdigkeit oder Arbeit dich ablenken.",
     "In {minutes} Min · {time} Uhr. ʿAṣr naht — verliere nicht das Gebet, wenn der Tag sich dem Ende nähert.",
-    "In {minutes} Min · {time} Uhr. Halte ʿAṣr fest, bevor Eile, Termine oder Erschöpfung dich überrollen."
+    "In {minutes} Min · {time} Uhr. Halte ʿAṣr fest, bevor Eile, Termine oder Erschöpfung dich überrollen.",
+    "In {minutes} Min · {time} Uhr. Der späte Tag ist oft prüfend — gerade dann bleibt ʿAṣr zu bewahren.",
+    "In {minutes} Min · {time} Uhr. Lass nicht zu, dass das Ende des Tages dein Gebet schwächt.",
+    "In {minutes} Min · {time} Uhr. ʿAṣr erinnert daran, den Tag nicht in Nachlässigkeit ausklingen zu lassen.",
+    "In {minutes} Min · {time} Uhr. Wer ʿAṣr achtet, schützt einen der empfindlichsten Zeitpunkte des Tages."
   ],
   maghrib: [
     "In {minutes} Min · {time} Uhr. Der Abend tritt ein — bereite dich auf Maghrib vor.",
@@ -41,7 +53,11 @@ export const PRAYER_ADVANCE_PUSH_VARIANTS = {
     "In {minutes} Min · {time} Uhr. Die Sonne sinkt — kehre mit deinem Herzen zum Gebet zurück.",
     "In {minutes} Min · {time} Uhr. Maghrib naht — beginne den Abend mit Dankbarkeit und Gebet.",
     "In {minutes} Min · {time} Uhr. Wenn der Tag endet, lass Maghrib nicht untergehen wie die Sonne.",
-    "In {minutes} Min · {time} Uhr. Der Wechsel in die Nacht beginnt — empfange ihn mit Maghrib."
+    "In {minutes} Min · {time} Uhr. Der Wechsel in die Nacht beginnt — empfange ihn mit Maghrib.",
+    "In {minutes} Min · {time} Uhr. Der Tagesabschluss wird schön, wenn er mit Gebet beginnt.",
+    "In {minutes} Min · {time} Uhr. Lass den ersten Schritt in die Nacht nicht ohne Maghrib sein.",
+    "In {minutes} Min · {time} Uhr. Wenn die Sonne weicht, halte am Gebet fest, bevor der Abend sich füllt.",
+    "In {minutes} Min · {time} Uhr. Maghrib naht — kehre zurück, bevor Gespräche, Wege oder Termine dich binden."
   ],
   isha: [
     "In {minutes} Min · {time} Uhr. ʿIshāʾ naht — beende den Tag mit Gehorsam.",
@@ -49,7 +65,11 @@ export const PRAYER_ADVANCE_PUSH_VARIANTS = {
     "In {minutes} Min · {time} Uhr. ʿIshāʾ kommt — schließe deinen Tag mit dem Gebet ab.",
     "In {minutes} Min · {time} Uhr. Wer ʿIshāʾ bewahrt, schützt den Abschluss seines Tages.",
     "In {minutes} Min · {time} Uhr. Die Nacht beginnt — gib dem Gebet den Vorrang vor Müdigkeit und Aufschub.",
-    "In {minutes} Min · {time} Uhr. ʿIshāʾ naht — lass der letzte große Schritt deines Tages vor Allah sein."
+    "In {minutes} Min · {time} Uhr. ʿIshāʾ naht — lass der letzte große Schritt deines Tages vor Allah sein.",
+    "In {minutes} Min · {time} Uhr. Vor Ruhe und Schlaf bleibt ʿIshāʾ eine Pflicht, keine Nebensache.",
+    "In {minutes} Min · {time} Uhr. Schließe den Tag nicht nur müde, sondern gehorsam ab.",
+    "In {minutes} Min · {time} Uhr. ʿIshāʾ bewahrt den Abend davor, in bloßer Gewohnheit zu enden.",
+    "In {minutes} Min · {time} Uhr. Wenn die Nacht dich zur Ruhe ruft, soll das Gebet dir vorausgehen."
   ],
   tahajjud: [
     "Das letzte Drittel der Nacht naht — Zeit für Duʿāʾ, Istighfār und Gebet.",
@@ -57,7 +77,11 @@ export const PRAYER_ADVANCE_PUSH_VARIANTS = {
     "Die Nacht öffnet sich für Taḥajjud — steh auf, auch wenn es nur wenig ist.",
     "Taḥajjud rückt näher. In der Nacht liegt eine besondere Zeit für Duʿāʾ und Reue.",
     "Das letzte Drittel der Nacht ist nahe — richte dein Herz auf Istighfār und Bittgebet aus.",
-    "Taḥajjud naht. In der Stille der Nacht ist der Aufruf zum Herrn freier von Ablenkung."
+    "Taḥajjud naht. In der Stille der Nacht ist der Aufruf zum Herrn freier von Ablenkung.",
+    "Die tiefe Nacht eignet sich für ein Gebet, das fern von Blicken und Lärm verrichtet wird.",
+    "Nutze diese Nachtzeit für ein stilles Stehen, ehrliches Bitten und aufrichtige Reue.",
+    "Noch vor Fajr liegt eine Zeit, in der das Herz leichter weich wird.",
+    "Taḥajjud naht — selbst wenige Minuten in Aufrichtigkeit sind in dieser Nacht kostbar."
   ]
 };
 
@@ -69,7 +93,10 @@ export const PRAYER_ENTRY_PUSH_VARIANTS = {
     { title: "✨ Fajr ruft dich", body: "Qurʾān al-Fajr ist bezeugt — verpasse nicht dieses Gebet am Beginn des Tages." },
     { title: "✨ Fajr ist da", body: "Wer Fajr bewahrt, beginnt den Morgen mit Gehorsam und klarer Ausrichtung." },
     { title: "✨ Der Morgen hat begonnen", body: "Antworte zuerst dem Gebet, bevor die Welt deinen Tag für sich beansprucht." },
-    { title: "✨ Fajr tritt ein", body: "Die Engel bezeugen diese Zeit — verliere Fajr nicht im Schlaf oder in Aufschub." }
+    { title: "✨ Fajr tritt ein", body: "Die Engel bezeugen diese Zeit — verliere Fajr nicht im Schlaf oder in Aufschub." },
+    { title: "✨ Fajr ist jetzt", body: "Noch vor Sonnenaufgang liegt ein Gebet, das den Tag in Gehorsam eröffnet." },
+    { title: "✨ Erhebe dich zu Fajr", body: "Lass nicht zu, dass dir der Morgen vergeht, bevor du vor Allah gestanden hast." },
+    { title: "✨ Antworte dem Morgenruf", body: "Fajr ist eingetreten — gib dem Gebet den Vorrang vor Bequemlichkeit." }
   ],
   dhuhr: [
     { title: "☀️ Dhuhr-Zeit ist eingetreten", body: "Unterbrich deine Beschäftigung und antworte dem Ruf Allahs." },
@@ -78,7 +105,10 @@ export const PRAYER_ENTRY_PUSH_VARIANTS = {
     { title: "☀️ Dhuhr ist eingetreten", body: "Wenn der Tag dich bindet, löst dich Dhuhr wieder zur Erinnerung an Allah." },
     { title: "☀️ Dhuhr ist jetzt", body: "Die Sonne ist nach dem Zenit — richte deinen Tag mit dem Gebet neu aus." },
     { title: "☀️ Dhuhr ruft dich", body: "Halte im Lauf des Tages an und gib Allah den Vorrang vor deinen Aufgaben." },
-    { title: "☀️ Dhuhr ist da", body: "Mit Dhuhr kehrt der Tag zurück zur Erinnerung an Allah und weg von bloßer Ablenkung." }
+    { title: "☀️ Dhuhr ist da", body: "Mit Dhuhr kehrt der Tag zurück zur Erinnerung an Allah und weg von bloßer Ablenkung." },
+    { title: "☀️ Die Mitte des Tages ruft", body: "Dhuhr ist eingetreten — unterbrich den Lauf des Tages mit Gehorsam." },
+    { title: "☀️ Halte an für Dhuhr", body: "Bevor der Tag weiterzieht, antworte jetzt dem Gebet." },
+    { title: "☀️ Dhuhr beginnt", body: "Die Zeit ist da — richte dein Herz neu aus und verrichte dein Gebet." }
   ],
   asr: [
     { title: "🌤️ ʿAṣr-Zeit ist eingetreten", body: "Bewahre dein ʿAṣr-Gebet. Verliere nicht, was bei Allah schwer wiegt." },
@@ -87,7 +117,10 @@ export const PRAYER_ENTRY_PUSH_VARIANTS = {
     { title: "🌤️ ʿAṣr ist da", body: "Bewahre das mittlere Gebet mit Sorgfalt und steh vor Allah in Hingabe." },
     { title: "🌤️ ʿAṣr ruft dich", body: "Wer die beiden kühlen Gebete bewahrt, hat eine große Verheißung — verliere ʿAṣr nicht." },
     { title: "🌤️ ʿAṣr tritt ein", body: "Lass nicht zu, dass der späte Tag dir das Gebet nimmt." },
-    { title: "🌤️ Jetzt ist ʿAṣr", body: "Halte das Gebet fest, bevor der Rest des Tages in Eile vergeht." }
+    { title: "🌤️ Jetzt ist ʿAṣr", body: "Halte das Gebet fest, bevor der Rest des Tages in Eile vergeht." },
+    { title: "🌤️ Bewahre ʿAṣr", body: "Der späte Tag ist oft schwer — gerade dann soll ʿAṣr nicht verloren gehen." },
+    { title: "🌤️ Die Zeit für ʿAṣr ist da", body: "Schütze dieses Gebet, bevor Müdigkeit oder Termine dich abziehen." },
+    { title: "🌤️ ʿAṣr ist eingetreten", body: "Wenn der Tag sich neigt, bleibt das Gebet vor Allah bestehen." }
   ],
   maghrib: [
     { title: "🌥️ Maghrib-Zeit ist eingetreten", body: "Der Tag endet – schließe ihn mit Dankbarkeit und Gebet ab." },
@@ -96,7 +129,10 @@ export const PRAYER_ENTRY_PUSH_VARIANTS = {
     { title: "🌥️ Maghrib ist da", body: "An der Schwelle zur Nacht beginnt Maghrib — lass den Tag mit Gebet enden." },
     { title: "🌥️ Maghrib ruft dich", body: "Wenn das Licht des Tages weicht, halte am Gebet fest und beginne den Abend richtig." },
     { title: "🌥️ Der Abend ist eingetreten", body: "Begib dich zu Maghrib, bevor die Nacht dich mit anderem beschäftigt." },
-    { title: "🌥️ Maghrib tritt ein", body: "Mit dem Untergang der Sonne ist die Zeit da, vor Allah zu stehen." }
+    { title: "🌥️ Maghrib tritt ein", body: "Mit dem Untergang der Sonne ist die Zeit da, vor Allah zu stehen." },
+    { title: "🌥️ Jetzt ist Maghrib", body: "Empfange den Abend mit Gebet, bevor die Nacht ihren Lauf nimmt." },
+    { title: "🌥️ Antworte zu Maghrib", body: "Der Wechsel in die Nacht ist da — beginne ihn mit Gehorsam." },
+    { title: "🌥️ Maghrib ist eingetreten", body: "Bevor der Abend sich füllt, verrichte jetzt dein Gebet." }
   ],
   isha: [
     { title: "🌙 ʿIshāʾ-Zeit ist eingetreten", body: "Beende deinen Tag mit Gehorsam, bevor du dich zur Ruhe legst." },
@@ -105,7 +141,10 @@ export const PRAYER_ENTRY_PUSH_VARIANTS = {
     { title: "🌙 ʿIshāʾ ist da", body: "Die Nacht ist eingetreten — gib dem Gebet Vorrang, bevor Ruhe und Müdigkeit dich einholen." },
     { title: "🌙 ʿIshāʾ ruft dich", body: "Wer ʿIshāʾ und Fajr bewahrt, hat einen großen Lohn — beginne mit ʿIshāʾ." },
     { title: "🌙 ʿIshāʾ tritt ein", body: "Bevor du den Tag abschließt, stelle dich im Gebet vor deinen Herrn." },
-    { title: "🌙 Jetzt ist ʿIshāʾ", body: "Verschiebe dieses Gebet nicht, wenn Müdigkeit und Ruhe schon näher kommen." }
+    { title: "🌙 Jetzt ist ʿIshāʾ", body: "Verschiebe dieses Gebet nicht, wenn Müdigkeit und Ruhe schon näher kommen." },
+    { title: "🌙 Die Nachtzeit ist da", body: "ʿIshāʾ ist eingetreten — schließe den Tag nicht ohne Gebet ab." },
+    { title: "🌙 Verrichte ʿIshāʾ jetzt", body: "Lass die Müdigkeit nicht vor deinem Gebet den Vorrang bekommen." },
+    { title: "🌙 ʿIshāʾ ist eingetreten", body: "Die Nacht hat begonnen — begegne ihr mit Gehorsam vor Allah." }
   ],
   tahajjud: [
     { title: "🌙 Taḥajjud-Erinnerung", body: "Die letzte Nachtzeit ist eine Gelegenheit für Duʿāʾ, Reue und Nähe zu Allah." },
@@ -114,7 +153,10 @@ export const PRAYER_ENTRY_PUSH_VARIANTS = {
     { title: "🌙 Die Nacht ruft dich", body: "Im letzten Drittel der Nacht liegt eine besondere Zeit für Istighfār und Duʿāʾ." },
     { title: "🌙 Steh für Taḥajjud auf", body: "Wer in der stillen Nacht aufsteht, sucht eine Zeit besonderer Nähe und Antwort." },
     { title: "🌙 Das letzte Drittel ist da", body: "Diese Nachtzeit lädt zu Reue, Duʿāʾ und stillem Gebet vor Allah ein." },
-    { title: "🌙 Taḥajjud tritt näher", body: "Nutze die Nacht, bevor der Morgen beginnt und der Tag dich wieder bindet." }
+    { title: "🌙 Taḥajjud tritt näher", body: "Nutze die Nacht, bevor der Morgen beginnt und der Tag dich wieder bindet." },
+    { title: "🌙 Nutze die stille Nacht", body: "Diese Zeit ist geeignet für ehrliches Bitten, Istighfār und verborgenes Gebet." },
+    { title: "🌙 Die letzte Nachtzeit ist da", body: "Steh auf, auch wenn es wenig ist — die Nacht trägt aufrichtige Duʿāʾ." },
+    { title: "🌙 Zeit für nächtliches Gebet", body: "Vor Fajr liegt eine Stunde, in der das Herz leichter zu Allah zurückkehrt." }
   ]
 };
 
@@ -130,24 +172,33 @@ export const PRAYER_TITLE_EMOJI = {
 export function pickPrayerEntryVariant(prayerKey, seedExtra = "") {
   const key = String(prayerKey || "").toLowerCase();
   const list = PRAYER_ENTRY_PUSH_VARIANTS[key] || PRAYER_ENTRY_PUSH_VARIANTS.fajr;
-  const text = seededPrayerText(key, "entry", seedExtra);
-  let seed = 0;
-  for (let i = 0; i < text.length; i++) seed = (seed + text.charCodeAt(i)) % 9973;
-  return list[seed % list.length];
+  return pickPrayerVariantByCycle(list, key, "entry", seedExtra);
 }
 
-function seededPrayerText(prayerKey, mode, seedExtra = "") {
-  const dayKey = new Date().toISOString().slice(0, 10);
-  return `${dayKey}-${prayerKey}-${mode}-${seedExtra}`;
+function utcDaySerial() {
+  return Math.floor(Date.now() / 86400000);
+}
+
+function stablePrayerOffset(prayerKey, mode, seedExtra, listLength) {
+  if (!listLength) return 0;
+  const text = `${String(prayerKey || "").toLowerCase()}::${mode}::${seedExtra || ""}`;
+  let hash = 0;
+  for (let i = 0; i < text.length; i++) {
+    hash = (hash * 33 + text.charCodeAt(i)) % 104729;
+  }
+  return hash % listLength;
+}
+
+function pickPrayerVariantByCycle(list, prayerKey, mode, seedExtra = "") {
+  if (!Array.isArray(list) || list.length === 0) return null;
+  const index = (utcDaySerial() + stablePrayerOffset(prayerKey, mode, seedExtra, list.length)) % list.length;
+  return list[index];
 }
 
 function pickPrayerAdvanceVariant(prayerKey, advanceMinutes, timeLabel = "") {
   const key = String(prayerKey || "").toLowerCase();
   const list = PRAYER_ADVANCE_PUSH_VARIANTS[key] || PRAYER_ADVANCE_PUSH_VARIANTS.fajr;
-  const text = seededPrayerText(key, "advance", `${advanceMinutes}-${timeLabel}`);
-  let seed = 0;
-  for (let i = 0; i < text.length; i++) seed = (seed + text.charCodeAt(i)) % 9973;
-  return list[seed % list.length];
+  return pickPrayerVariantByCycle(list, key, "advance", `${advanceMinutes}-${timeLabel}`);
 }
 
 export function buildAdvancePushBody(prayerKey, advanceMinutes, timeLabel) {
