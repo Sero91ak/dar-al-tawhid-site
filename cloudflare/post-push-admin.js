@@ -1,20 +1,9 @@
-import { broadcastPushAttemptSucceeded } from "./onesignal-delivery.js";
-
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_POST_PUSH_LOG_PATH = "content/admin/post-push-log.json";
 const SUPABASE_URL = "https://djyfkttjbdraynuxrzno.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw";
 const ONESIGNAL_BATCH_SIZE = 2000;
-
-async function uuidFrom(seed) {
-  const hash = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(String(seed || "")));
-  const bytes = new Uint8Array(hash.slice(0, 16));
-  bytes[6] = (bytes[6] & 0x0f) | 0x40;
-  bytes[8] = (bytes[8] & 0x3f) | 0x80;
-  const hex = Array.from(bytes, (value) => value.toString(16).padStart(2, "0")).join("");
-  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
-}
 
 function oneSignalApiKey(env) {
   return String(env.ONESIGNAL_API_KEY_NEW || env.ONESIGNAL_API_KEY || env.ONESIGNAL_APP_API_KEY || "")
@@ -46,6 +35,15 @@ function chunkValues(values, size) {
   const out = [];
   for (let i = 0; i < values.length; i += size) out.push(values.slice(i, i + size));
   return out;
+}
+
+async function deterministicUuid(seed) {
+  const hash = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(String(seed || "")));
+  const bytes = new Uint8Array(hash.slice(0, 16));
+  bytes[6] = (bytes[6] & 0x0f) | 0x40;
+  bytes[8] = (bytes[8] & 0x3f) | 0x80;
+  const hex = Array.from(bytes, (value) => value.toString(16).padStart(2, "0")).join("");
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
 }
 
 async function loadPostPushSubscriptionIds(env) {
@@ -162,7 +160,11 @@ async function postOneSignalAttempt(env, payload) {
       });
       const text = await res.text();
       const oneSignal = parseOneSignalResponse(text, res.status);
-      const success = res.ok && broadcastPushAttemptSucceeded(oneSignal.raw || {}, payload);
+      const hasInvalidSubs = Array.isArray(oneSignal.invalidSubscriptions) && oneSignal.invalidSubscriptions.length > 0;
+      const hasErrors = oneSignal.errors && (Array.isArray(oneSignal.errors) ? oneSignal.errors.length : true);
+      const zeroRecipients = oneSignal.recipients === 0;
+      const hasNotificationId = !!oneSignal.notificationId;
+      const success = res.ok && hasNotificationId && !zeroRecipients && !hasInvalidSubs && !hasErrors;
 
       lastResult = {
         ok: res.ok,
@@ -174,10 +176,8 @@ async function postOneSignalAttempt(env, payload) {
         reason: success ? "" : classifyPushFailure(res.status, oneSignal, target)
       };
 
-      // Nach HTTP 200 niemals denselben Payload mit anderem Auth erneut senden —
-      // sonst Doppelzustellung, wenn die erste Antwort gemischte invalid_player_ids enthält.
-      if (res.ok) return lastResult;
-      if (res.status !== 401 && res.status !== 403) return lastResult;
+      if (res.ok && success) return lastResult;
+      if (res.status === 401 || res.status === 403) return lastResult;
     } catch (error) {
       lastResult = {
         ok: false,
@@ -194,28 +194,34 @@ async function postOneSignalAttempt(env, payload) {
   return lastResult || { ok: false, sent: false, reason: "OneSignal-Aufruf fehlgeschlagen", target };
 }
 
-function buildPostPushPayload(env, { postTitle, postId, filename, publishedAt, cacheVersion, test = false }) {
+async function buildPostPushPayload(env, { postTitle, postId, filename, publishedAt, cacheVersion, test = false, subscriptionId = "" }) {
   const site = siteOrigin(env);
   const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
   const title = test ? "[Test] Neuer Beitrag online" : "Neuer Beitrag online";
   const message = String(postTitle || "Neuer Beitrag").trim();
   const slug = String(postId || "").trim();
+  const fileKey = String(filename || "").trim();
+  const publishedKey = String(publishedAt || "").trim();
+  const subscriptionKey = String(subscriptionId || "").trim();
   const version = cacheVersion || Date.now();
   const url = slug ? buildPostPushUrl(env, slug, version) : `${site}/#recent`;
   const icon = `${site}/notification-icon-192.png?v=2`;
   const badge = `${site}/notification-badge-96.png?v=2`;
+  const idempotencySeed = test
+    ? `post-test:${slug || fileKey || message}:${subscriptionKey || "unknown"}:${publishedKey || "draft"}`
+    : `post-live:${slug || fileKey || message}:${publishedKey || "draft"}`;
+  const idempotencyKey = await deterministicUuid(idempotencySeed);
   const pushData = {
     type: "post",
     postId: slug,
     slug,
-    filename: String(filename || "").trim(),
+    filename: fileKey,
     url,
-    publishedAt: publishedAt || new Date().toISOString(),
+    publishedAt: publishedKey || new Date().toISOString(),
     cacheVersion: String(version),
     test: test || undefined
   };
 
-  const collapse = slug ? `post-${slug}`.slice(0, 64) : "";
   return {
     payload: {
       app_id: appId,
@@ -224,16 +230,11 @@ function buildPostPushPayload(env, { postTitle, postId, filename, publishedAt, c
       contents: { en: message, de: message },
       url,
       data: pushData,
+      idempotency_key: idempotencyKey,
       chrome_web_icon: icon,
       chrome_web_badge: badge,
       firefox_icon: icon,
-      name: test ? `admin-post-test-${slug || Date.now()}` : `admin-publish-${slug || Date.now()}`,
-      ...(collapse && !test
-        ? {
-            collapse_id: collapse,
-            web_push_topic: collapse.slice(0, 32)
-          }
-        : {})
+      name: test ? `admin-post-test-${Date.now()}` : `admin-publish-${Date.now()}`
     },
     pushData,
     targetUrl: url,
@@ -260,7 +261,7 @@ function buildPostPushAttempts(basePayload, subscriptionIds, { singleSubscriptio
   return attempts;
 }
 
-export async function sendBroadcastPush(env, basePayload, meta = {}) {
+export async function sendNewPostPush(env, options = {}) {
   const apiKey = oneSignalApiKey(env);
   if (!apiKey) {
     return {
@@ -272,8 +273,11 @@ export async function sendBroadcastPush(env, basePayload, meta = {}) {
   }
 
   const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
-  const targetUrl = String(meta.targetUrl || basePayload?.url || "").trim();
-  const pushData = meta.pushData || basePayload?.data || null;
+  if (!appId) {
+    return { sent: false, prepared: false, oneSignalCalled: false, reason: "OneSignal App-ID fehlt" };
+  }
+
+  const { payload: basePayload, pushData, targetUrl } = await buildPostPushPayload(env, options);
   const subscriptionIds = await loadPostPushSubscriptionIds(env);
   const attempts = buildPostPushAttempts(basePayload, subscriptionIds);
   const attemptLog = [];
@@ -342,30 +346,6 @@ export async function sendBroadcastPush(env, basePayload, meta = {}) {
   };
 }
 
-export async function sendNewPostPush(env, options = {}) {
-  const apiKey = oneSignalApiKey(env);
-  if (!apiKey) {
-    return {
-      sent: false,
-      prepared: false,
-      oneSignalCalled: false,
-      reason: "OneSignal API-Key fehlt am Worker (ONESIGNAL_API_KEY_NEW)"
-    };
-  }
-
-  const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
-  if (!appId) {
-    return { sent: false, prepared: false, oneSignalCalled: false, reason: "OneSignal App-ID fehlt" };
-  }
-
-  const { payload: basePayload, pushData, targetUrl } = buildPostPushPayload(env, options);
-  const postId = String(options.postId || "").trim();
-  if (postId && !options.test) {
-    basePayload.idempotency_key = await uuidFrom(`post-push:v1:${postId}`);
-  }
-  return sendBroadcastPush(env, basePayload, { targetUrl, pushData });
-}
-
 export async function sendPostPushTest(env, input = {}) {
   const subscriptionId = String(input.subscriptionId || input.subscription_id || "").trim();
   if (!subscriptionId) {
@@ -379,13 +359,14 @@ export async function sendPostPushTest(env, input = {}) {
   const postTitle = String(input.postTitle || input.title || "Test-Beitrag").trim();
   const postId = String(input.postId || "test-post-push").trim();
   const filename = String(input.filename || "test-post.md").trim();
-  const { payload: basePayload, pushData, targetUrl, appId } = buildPostPushPayload(env, {
+  const { payload: basePayload, pushData, targetUrl, appId } = await buildPostPushPayload(env, {
     postTitle,
     postId,
     filename,
     publishedAt: new Date().toISOString(),
     cacheVersion: Date.now(),
-    test: true
+    test: true,
+    subscriptionId
   });
 
   const attemptPayload = { ...basePayload, include_subscription_ids: [subscriptionId] };
