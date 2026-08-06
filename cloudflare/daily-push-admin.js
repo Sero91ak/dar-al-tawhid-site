@@ -63,6 +63,15 @@ function schedulerDeps(githubGet, githubPut, base64ToUtf8, utf8ToBase64) {
   return { githubGet, githubPut, base64ToUtf8, utf8ToBase64 };
 }
 
+async function deterministicUuid(seed) {
+  const hash = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(String(seed || "")));
+  const bytes = new Uint8Array(hash.slice(0, 16));
+  bytes[6] = (bytes[6] & 0x0f) | 0x40;
+  bytes[8] = (bytes[8] & 0x3f) | 0x80;
+  const hex = Array.from(bytes, (value) => value.toString(16).padStart(2, "0")).join("");
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+}
+
 export async function runDailySchedulerNow(env, deps = {}, options = {}) {
   return runDailyPushScheduler(
     env,
@@ -109,6 +118,7 @@ export async function sendWelcomePush(env, input = {}) {
   const title = "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh";
   const body = "Willkommen bei DAR AL TAWḤID. Du erhältst neue Beiträge aus Qurʾān, Sunnah und Āthār direkt als Benachrichtigung.";
   const url = `${site}/#home`;
+  const idempotencyKey = await deterministicUuid(`welcome:${subscriptionId}`);
 
   const payload = {
     app_id: appId,
@@ -117,6 +127,7 @@ export async function sendWelcomePush(env, input = {}) {
     headings: { de: title, en: title },
     contents: { de: body, en: body },
     url,
+    idempotency_key: idempotencyKey,
     data: { type: "welcome", source: "dar-welcome-push" },
     chrome_web_icon: `${site}/notification-icon-192.png?v=2`,
     chrome_web_badge: `${site}/notification-badge-96.png?v=2`
@@ -166,6 +177,9 @@ export async function sendDailyTestPush(env, input = {}) {
   const url = isDua
     ? `${site}/#dua/${encodeURIComponent(item.id)}`
     : `${site}/#post/${encodeURIComponent(item.id)}`;
+  const idempotencyKey = await deterministicUuid(
+    `daily-test:${kind}:${subscriptionId}:${item.id}:${daily?.date || "undated"}`
+  );
 
   const payload = {
     app_id: appId,
@@ -174,6 +188,7 @@ export async function sendDailyTestPush(env, input = {}) {
     headings: { de: `[Test] ${title}`, en: `[Test] ${title}` },
     contents: { de: body, en: body },
     url,
+    idempotency_key: idempotencyKey,
     data: {
       type: isDua ? "daily_dua" : "daily_recommendation",
       content_id: item.id,
