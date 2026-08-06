@@ -1,4 +1,4 @@
-/* v490 · Gelehrten-Index — edel wie Duʿāʾ: Seite transparent, Suche dunkel, ovales Licht, Zierlinien */
+/* v491 · Gelehrten-Index — edel wie Duʿāʾ: Seite transparent, Suche dunkel, ovales Licht, Zierlinien */
 :root{
   --scholars-page-bg:transparent;
   --scholars-header-text:var(--cat-ink,var(--theme-text,var(--cream)));
@@ -553,3 +553,32 @@
 .scholars-sort-sheet__opt[aria-checked="true"]{color:var(--scholars-accent);font-weight:700}
 .scholars-sort-sheet__opt:focus-visible{outline:2px solid var(--scholars-focus-ring);outline-offset:2px}
 .scholars-sort-sheet__opt:last-child{border-bottom:0}
+
+
+/* oval icon inset lock */
+.scholars-index__row,
+.scholars-index__group-head{
+  overflow:hidden!important;
+  box-sizing:border-box!important;
+}
+.scholars-index__row{
+  padding:14px 16px 16px 18px!important;
+  column-gap:12px!important;
+}
+.scholars-index__row:before{
+  left:10px!important;
+}
+.scholars-index__row:hover,
+.scholars-index__row:focus-visible,
+.scholars-index__row:active{
+  padding-left:18px!important;
+  padding-right:16px!important;
+}
+.scholars-index__mono{
+  position:relative;
+  z-index:1;
+  margin-left:4px;
+}
+.scholars-index__group-head{
+  padding:14px 16px 16px 18px!important;
+}
