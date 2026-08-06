@@ -1,6 +1,6 @@
 /**
- * DAR AL TAWḤĪD — Adaptive Layout Controller
- * Single source for Compact / Medium / Expanded.
+ * DAR AL TAWḤĪD — Adaptive Layout Controller (emergency-safe)
+ * Compact / Medium only. Expanded left-rail disabled (broke Fold UX).
  * Uses ResizeObserver + visualViewport; no UA / device model detection.
  */
 (function (global) {
@@ -17,12 +17,10 @@
   function resolveLayoutMode(width, height) {
     var w = Number(width) || 0;
     var h = Number(height) || 0;
-    /* Compact: cover display / phone / narrow split */
+    /* Cover / phone */
     if (w < 600) return "compact";
-    /* Medium: Fold open portrait (~600–839), short height / flex mode, split */
-    if (w < 840 || h < 600) return "medium";
-    /* Expanded: Fold Ultra / tablet landscape / desktop (≥840 × ≥600) */
-    return "expanded";
+    /* Fold open, Fold Ultra, tablet, split — keep bottom nav (no left rail) */
+    return "medium";
   }
 
   function measureViewport() {
@@ -57,26 +55,8 @@
       return;
     }
 
-    nav.classList.toggle("is-adaptive-rail", mode === "expanded");
+    nav.classList.remove("is-adaptive-rail");
     nav.classList.toggle("is-adaptive-centered", mode === "medium");
-
-    if (mode === "expanded") {
-      nav.style.setProperty("position", "fixed", "important");
-      nav.style.setProperty("left", "max(10px, env(safe-area-inset-left))", "important");
-      nav.style.setProperty("right", "auto", "important");
-      nav.style.setProperty("top", "max(12px, env(safe-area-inset-top))", "important");
-      nav.style.setProperty("bottom", "max(12px, env(safe-area-inset-bottom))", "important");
-      nav.style.setProperty("width", "var(--layout-rail-width, 84px)", "important");
-      nav.style.setProperty("max-width", "var(--layout-rail-width, 84px)", "important");
-      nav.style.setProperty("height", "auto", "important");
-      nav.style.setProperty("min-height", "0", "important");
-      nav.style.setProperty("max-height", "none", "important");
-      nav.style.setProperty("transform", "none", "important");
-      nav.style.setProperty("-webkit-transform", "none", "important");
-      nav.style.setProperty("margin", "0", "important");
-      nav.style.setProperty("z-index", "40", "important");
-      return;
-    }
 
     if (mode === "medium") {
       nav.style.setProperty("position", "fixed", "important");
@@ -90,17 +70,17 @@
       nav.style.setProperty("max-width", "var(--layout-navigation-max, 800px)", "important");
       nav.style.setProperty("top", "auto", "important");
       nav.style.setProperty("bottom", navBottomCompact(), "important");
+      nav.style.setProperty("height", "auto", "important");
+      nav.style.setProperty("min-height", "0", "important");
+      nav.style.setProperty("max-height", "none", "important");
       nav.style.setProperty("transform", "translateX(-50%)", "important");
       nav.style.setProperty("-webkit-transform", "translateX(-50%)", "important");
-      nav.style.removeProperty("height");
-      nav.style.removeProperty("min-height");
-      nav.style.removeProperty("max-height");
+      nav.style.setProperty("flex-direction", "row", "important");
       nav.style.setProperty("margin", "0", "important");
       nav.style.setProperty("z-index", "40", "important");
       return;
     }
 
-    /* compact: restore dock defaults without fighting other chrome */
     var inset = "14px";
     try {
       var w = measureViewport().width;
@@ -113,11 +93,10 @@
     nav.style.setProperty("bottom", navBottomCompact(), "important");
     nav.style.setProperty("width", "auto", "important");
     nav.style.setProperty("max-width", "none", "important");
+    nav.style.setProperty("height", "auto", "important");
     nav.style.setProperty("transform", "none", "important");
     nav.style.setProperty("-webkit-transform", "none", "important");
-    nav.style.removeProperty("height");
-    nav.style.removeProperty("min-height");
-    nav.style.removeProperty("max-height");
+    nav.style.setProperty("flex-direction", "row", "important");
     nav.style.setProperty("margin", "0", "important");
     nav.style.setProperty("z-index", "40", "important");
   }
@@ -142,6 +121,7 @@
     if (changed || force) {
       currentMode = mode;
       root.setAttribute("data-layout", mode);
+      root.classList.remove("data-layout-expanded-legacy");
       root.style.setProperty("--layout-vw", metrics.width + "px");
       root.style.setProperty("--layout-vh", metrics.height + "px");
     }
@@ -205,9 +185,13 @@
     }
 
     global.addEventListener("resize", onResize, { passive: true });
-    global.addEventListener("orientationchange", function () {
-      scheduleApply(true);
-    }, { passive: true });
+    global.addEventListener(
+      "orientationchange",
+      function () {
+        scheduleApply(true);
+      },
+      { passive: true }
+    );
 
     if (global.visualViewport) {
       global.visualViewport.addEventListener("resize", onResize, { passive: true });

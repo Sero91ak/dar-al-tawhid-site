@@ -172,7 +172,17 @@
         bornHijri: m.bornHijri,
         diedHijri: m.diedHijri,
         searchHaystack: normalizeSearchText(
-          [displayName, m.kuniyah, m.eraLabel, m.lifespanLabel, m.bio, ...(m.aliases || []), ...(m.works || []).map((w) => w.title || w)]
+          [
+            displayName,
+            m.kuniyah,
+            m.eraLabel,
+            m.lifespanLabel,
+            m.bio,
+            ...(m.aliases || []),
+            ...(m.teachers || []).map((x) => (x && x.name) || x),
+            ...(m.students || []).map((x) => (x && x.name) || x),
+            ...(m.works || []).map((w) => w.title || w),
+          ]
             .filter(Boolean)
             .join(' ')
         ),
@@ -711,4 +721,11 @@
     pushRecent,
     normalizeSearchText,
   };
+
+  /* Prefetch history so Lehrer/Schüler/Werke are ready when a profile opens */
+  try {
+    loadMeta();
+  } catch (e) {
+    /* ignore */
+  }
 })(typeof window !== 'undefined' ? window : globalThis);
