@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1785515013940 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v542";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v543";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -17466,25 +17466,27 @@ html[data-theme] #bottomNav.bottom-nav{
 }
 </style>
 
-<style id="dua-pages-premium-v542">
-/* v542 · Duʿāʾ charmant: edle Haarlinien, geordnete Züge, ruhiger Charakter */
+<style id="dua-pages-premium-v543">
+/* v543 · Duʿāʾ idyllisch: eckiges Licht, edle Akzentlinie, lesbare Schrift, passendere Glyphs */
 body.is-dua-route{
   --dua-ink:var(--cream,var(--text));
-  --dua-title:var(--gold2,var(--cream));
+  --dua-title:var(--cream,var(--text));
+  --dua-accent:var(--gold2,var(--cream));
   --dua-muted:var(--muted);
   --dua-muted2:var(--muted2,var(--muted));
   --dua-line:color-mix(in srgb,var(--gold2,var(--line)) 26%,transparent);
-  --dua-line-soft:color-mix(in srgb,var(--gold2,var(--line2,var(--line))) 13%,transparent);
-  --dua-line-strong:color-mix(in srgb,var(--gold2) 42%,transparent);
-  --dua-wash:color-mix(in srgb,var(--gold2) 5%,transparent);
-  --dua-wash-strong:color-mix(in srgb,var(--gold2) 9%,transparent);
-  --dua-rule:linear-gradient(90deg,transparent 0%,var(--dua-line-strong) 18%,var(--dua-line-strong) 82%,transparent 100%);
-  --dua-ornament:color-mix(in srgb,var(--gold2) 55%,transparent);
+  --dua-line-soft:color-mix(in srgb,var(--gold2,var(--line2,var(--line))) 12%,transparent);
+  --dua-line-strong:color-mix(in srgb,var(--gold2) 44%,transparent);
+  --dua-wash:color-mix(in srgb,var(--gold2) 7.5%,transparent);
+  --dua-wash-strong:color-mix(in srgb,var(--gold2) 12%,transparent);
+  --dua-rule:linear-gradient(90deg,transparent 0%,var(--dua-line-strong) 16%,var(--dua-line-strong) 84%,transparent 100%);
+  --dua-ornament:color-mix(in srgb,var(--gold2) 72%,transparent);
+  --dua-rail:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--gold2) 35%,transparent) 12%,var(--gold2) 42%,var(--gold2) 58%,color-mix(in srgb,var(--gold2) 35%,transparent) 88%,transparent 100%);
 }
 body.is-dua-route #appView.view{padding-bottom:12px}
 body.is-dua-route #appView > .view-head{
-  margin:4px 0 26px;
-  padding:6px 0 20px;
+  margin:4px 0 24px;
+  padding:4px 0 18px;
   border-bottom:0;
   position:relative;
   text-align:left;
@@ -17493,17 +17495,16 @@ body.is-dua-route #appView > .view-head::after{
   content:"";
   display:block;
   height:1px;
-  margin:18px auto 0;
-  max-width:min(100%,420px);
+  margin:16px auto 0;
+  max-width:min(100%,400px);
   background:var(--dua-rule);
-  opacity:.95;
-  position:relative;
+  opacity:.92;
 }
 body.is-dua-route #appView > .view-head::before{
   content:"";
   position:absolute;
   left:50%;
-  bottom: -1px;
+  bottom:-1px;
   width:5px;
   height:5px;
   margin-left:-2.5px;
@@ -17515,29 +17516,31 @@ body.is-dua-route #appView > .view-head::before{
   pointer-events:none;
 }
 body.is-dua-route #appView > .view-head .eyebrow{
-  letter-spacing:.26em;
-  font-size:8.5px;
-  font-weight:800;
-  color:var(--dua-title);
-  opacity:.72;
-  margin-bottom:12px;
+  letter-spacing:.22em;
+  font-size:9px;
+  font-weight:750;
+  color:var(--dua-accent);
+  opacity:.8;
+  margin-bottom:10px;
   text-transform:uppercase;
 }
 body.is-dua-route #appView > .view-head h2{
   font-family:var(--serif);
-  font-weight:600;
-  letter-spacing:.028em;
-  line-height:1.08;
+  font-weight:650;
+  letter-spacing:.01em;
+  line-height:1.14;
   color:var(--dua-ink);
-  font-size:clamp(32px,6.4vw,44px);
+  font-size:clamp(28px,5.8vw,38px);
+  text-wrap:balance;
 }
 body.is-dua-route #appView > .view-head .view-desc{
-  margin-top:12px;
-  max-width:32rem;
-  font-size:12.5px;
-  line-height:1.62;
+  margin-top:10px;
+  max-width:34rem;
+  font-family:var(--sans,var(--ui,system-ui));
+  font-size:13.5px;
+  line-height:1.55;
   color:var(--dua-muted);
-  letter-spacing:.018em;
+  letter-spacing:.005em;
   font-weight:450;
 }
 
@@ -17547,60 +17550,60 @@ body.is-dua-route #appView > .view-head .view-desc{
   align-items:center;
   justify-content:space-between;
   gap:14px;
-  margin:4px 0 4px;
-  padding:0 2px 14px;
+  margin:2px 0 2px;
+  padding:0 2px 12px;
   position:relative;
 }
 .dua-hub__label::after{
   content:"";
   position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
+  left:0;right:0;bottom:0;
   height:1px;
   background:var(--dua-rule);
-  opacity:.75;
+  opacity:.7;
 }
 .dua-hub__label b{
   font-family:var(--serif);
-  font-size:13px;
+  font-size:12.5px;
   font-weight:650;
-  letter-spacing:.2em;
+  letter-spacing:.18em;
   text-transform:uppercase;
-  color:var(--dua-title);
+  color:var(--dua-accent);
 }
 .dua-hub__label span{
-  font-size:10.5px;
+  font-family:var(--sans,var(--ui,system-ui));
+  font-size:11px;
   color:var(--dua-muted2);
-  letter-spacing:.08em;
+  letter-spacing:.06em;
   text-transform:uppercase;
   font-weight:650;
 }
 
-.dua-hub .main-search{margin:2px 0 26px!important}
+.dua-hub .main-search{margin:2px 0 22px!important}
 .dua-hub .main-search .search,
 body.is-dua-route .main-search:has(#duaSearchInput) .search{
   height:46px!important;
   min-height:46px!important;
-  border-radius:999px!important;
+  border-radius:14px!important;
   border:1px solid var(--dua-line)!important;
-  background:transparent!important;
-  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2) 4%,transparent)!important;
+  background:color-mix(in srgb,var(--gold2) 3%,transparent)!important;
+  box-shadow:none!important;
   color:var(--dua-ink)!important;
-  font-size:13.5px!important;
-  letter-spacing:.02em;
-  padding:0 20px!important;
+  font-family:var(--sans,var(--ui,system-ui))!important;
+  font-size:14px!important;
+  letter-spacing:.01em;
+  padding:0 16px!important;
 }
 .dua-hub .main-search .search:focus,
 body.is-dua-route .main-search:has(#duaSearchInput) .search:focus{
   border-color:var(--dua-line-strong)!important;
   background:var(--dua-wash)!important;
-  box-shadow:0 0 0 3px color-mix(in srgb,var(--gold2) 12%,transparent)!important;
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--gold2) 10%,transparent)!important;
 }
 
 .dua-hub #duaSearchBlock.section-block{
-  margin:0 0 22px;
-  padding:0 0 18px;
+  margin:0 0 20px;
+  padding:0 0 16px;
   border-bottom:0;
   position:relative;
 }
@@ -17608,9 +17611,9 @@ body.is-dua-route .main-search:has(#duaSearchInput) .search:focus{
   content:"";
   display:block;
   height:1px;
-  margin-top:16px;
+  margin-top:14px;
   background:var(--dua-rule);
-  opacity:.7;
+  opacity:.65;
 }
 .dua-hub #duaSearchBlock .section-head{
   margin-bottom:10px;
@@ -17619,123 +17622,126 @@ body.is-dua-route .main-search:has(#duaSearchInput) .search:focus{
 }
 .dua-hub #duaSearchBlock .section-head h3{
   font-family:var(--serif);
-  font-size:16px;
+  font-size:17px;
   font-weight:650;
-  letter-spacing:.04em;
-  color:var(--dua-title);
+  letter-spacing:.01em;
+  color:var(--dua-ink);
 }
 .dua-hub #duaSearchBlock .section-head span{
-  font-size:10.5px;
+  font-family:var(--sans,var(--ui,system-ui));
+  font-size:11px;
   color:var(--dua-muted2);
-  letter-spacing:.08em;
+  letter-spacing:.06em;
   text-transform:uppercase;
 }
 
-/* Themenkatalog: geordnete Haarlinien-Zeilen */
 .dua-theme-grid{
   display:flex;
   flex-direction:column;
   gap:0;
-  margin:6px 0 0;
+  margin:4px 0 0;
   padding:0;
-  border-top:0;
 }
 .dua-theme-card{
   display:grid!important;
-  grid-template-columns:28px 36px minmax(0,1fr) auto!important;
-  grid-template-rows:auto!important;
+  grid-template-columns:26px 38px minmax(0,1fr) auto!important;
   align-items:center!important;
   column-gap:12px!important;
   min-height:0!important;
   margin:0!important;
-  padding:17px 4px 17px 2px!important;
+  padding:16px 4px 16px 6px!important;
   border:0!important;
   border-bottom:1px solid var(--dua-line-soft)!important;
   border-radius:0!important;
   background:transparent!important;
   box-shadow:none!important;
   cursor:pointer;
-  transition:background .18s ease, padding .18s ease, border-color .18s ease;
+  transition:background .15s ease, padding .15s ease, border-color .15s ease;
   position:relative;
   overflow:visible;
 }
 .dua-theme-card:last-child{border-bottom-color:transparent!important}
+/* edle Akzentlinie: weich auslaufend, leichter Goldschimmer */
 .dua-theme-card:before{
   content:""!important;
   display:block!important;
   position:absolute;
-  left:0;
-  top:26%;
-  bottom:26%;
-  width:1.5px;
-  border-radius:2px;
+  left:1px;
+  top:28%;
+  bottom:28%;
+  width:2px;
+  border-radius:999px;
   background:transparent;
-  transition:background .18s ease, top .18s ease, bottom .18s ease;
+  box-shadow:none;
+  opacity:0;
+  transition:opacity .18s ease, top .18s ease, bottom .18s ease, box-shadow .18s ease;
   pointer-events:none;
 }
 .dua-theme-card:hover,
 .dua-theme-card:focus-visible{
   transform:none!important;
   filter:none!important;
-  background:linear-gradient(90deg,var(--dua-wash),transparent 72%)!important;
+  /* eckiges, rechteckiges Licht – bewusst ohne Soft-Fade rechts */
+  background:var(--dua-wash)!important;
   box-shadow:none!important;
   outline:none;
-  padding-left:10px!important;
+  padding-left:12px!important;
   border-bottom-color:var(--dua-line)!important;
 }
 .dua-theme-card:hover:before,
 .dua-theme-card:focus-visible:before{
-  background:var(--dua-ornament);
-  top:20%;
-  bottom:20%;
+  background:var(--dua-rail);
+  opacity:1;
+  top:16%;
+  bottom:16%;
+  box-shadow:0 0 10px color-mix(in srgb,var(--gold2) 28%,transparent);
 }
 .dua-theme-card__idx{
   font-family:var(--serif);
-  font-size:11px;
+  font-size:12px;
   font-weight:650;
-  letter-spacing:.12em;
+  letter-spacing:.08em;
   color:var(--dua-muted2);
-  opacity:.72;
+  opacity:.78;
   text-align:right;
   font-variant-numeric:tabular-nums;
 }
 .dua-theme-card:hover .dua-theme-card__idx{
-  color:var(--dua-title);
-  opacity:.95;
+  color:var(--dua-accent);
+  opacity:1;
 }
 .dua-theme-card__icon{
-  width:36px!important;
-  height:36px!important;
+  width:38px!important;
+  height:38px!important;
   display:grid;
   place-items:center;
   border:1px solid var(--dua-line-soft)!important;
   border-radius:50%!important;
-  background:transparent!important;
+  background:color-mix(in srgb,var(--gold2) 3.5%,transparent)!important;
   margin:0!important;
-  opacity:1;
-  transition:border-color .18s ease, background .18s ease;
+  transition:border-color .15s ease, background .15s ease;
 }
 .dua-theme-card:hover .dua-theme-card__icon,
 .dua-theme-card:focus-visible .dua-theme-card__icon{
   border-color:var(--dua-line-strong)!important;
-  background:var(--dua-wash)!important;
+  background:color-mix(in srgb,var(--gold2) 8%,transparent)!important;
 }
 .dua-theme-card__icon .emoji-emblem{
   width:18px!important;
   height:18px!important;
-  font-size:14px!important;
+  font-size:15px!important;
   filter:none!important;
-  opacity:.9;
+  opacity:.95;
   line-height:1;
 }
-.dua-theme-card__body{min-width:0;display:grid;gap:6px}
+.dua-theme-card__body{min-width:0;display:grid;gap:5px}
 .dua-theme-card h3{
   margin:0!important;
   font-family:var(--serif)!important;
-  font-size:17px!important;
-  line-height:1.2!important;
-  font-weight:600!important;
-  letter-spacing:.02em;
+  font-size:17.5px!important;
+  line-height:1.25!important;
+  font-weight:650!important;
+  letter-spacing:.004em;
   color:var(--dua-title)!important;
   display:block!important;
   -webkit-line-clamp:unset!important;
@@ -17743,63 +17749,60 @@ body.is-dua-route .main-search:has(#duaSearchInput) .search:focus{
 }
 .dua-theme-card__count{
   margin:0!important;
-  font-size:10.5px!important;
-  line-height:1.2!important;
-  font-weight:700!important;
-  letter-spacing:.14em;
+  font-family:var(--sans,var(--ui,system-ui))!important;
+  font-size:11.5px!important;
+  line-height:1.25!important;
+  font-weight:600!important;
+  letter-spacing:.08em;
   text-transform:uppercase;
   color:var(--dua-muted2)!important;
   display:block!important;
-  overflow:visible!important;
 }
 .dua-theme-card__chev{
   color:var(--dua-muted2);
-  font-size:15px;
+  font-size:16px;
   font-weight:300;
-  opacity:.38;
-  transition:opacity .18s ease,transform .18s ease,color .18s ease;
+  opacity:.35;
+  transition:opacity .15s ease,transform .15s ease,color .15s ease;
   padding-right:2px;
 }
 .dua-theme-card:hover .dua-theme-card__chev{
-  opacity:.9;
+  opacity:.88;
   transform:translateX(3px);
-  color:var(--dua-title);
+  color:var(--dua-accent);
 }
 
-/* Themen-Sammlung: ruhige Leseliste mit Charakter */
 .dua-collection{
   display:flex;
   flex-direction:column;
   gap:0;
-  margin:8px 0 0;
+  margin:6px 0 0;
   padding:0;
-  border-top:0;
 }
 .dua-collection::before{
   content:"";
   display:block;
   height:1px;
-  margin:0 auto 8px;
-  max-width:min(100%,360px);
+  margin:0 auto 6px;
+  max-width:min(100%,340px);
   background:var(--dua-rule);
-  opacity:.8;
+  opacity:.75;
 }
 .dua-row{
   display:grid!important;
-  grid-template-columns:34px minmax(0,1fr)!important;
-  grid-template-rows:auto!important;
+  grid-template-columns:38px minmax(0,1fr)!important;
   column-gap:14px!important;
   align-items:start!important;
   min-height:0!important;
   margin:0!important;
-  padding:19px 2px 18px!important;
+  padding:18px 4px 17px 6px!important;
   border:0!important;
   border-bottom:1px solid var(--dua-line-soft)!important;
   border-radius:0!important;
   background:transparent!important;
   box-shadow:none!important;
   cursor:pointer;
-  transition:background .16s ease,padding .16s ease;
+  transition:background .14s ease,padding .14s ease;
   position:relative;
   overflow:visible;
 }
@@ -17808,72 +17811,77 @@ body.is-dua-route .main-search:has(#duaSearchInput) .search:focus{
   content:""!important;
   display:block!important;
   position:absolute;
-  left:0;
-  top:24%;
-  bottom:24%;
-  width:1.5px;
-  border-radius:2px;
+  left:1px;
+  top:28%;
+  bottom:28%;
+  width:2px;
+  border-radius:999px;
   background:transparent;
-  transition:background .16s ease;
+  opacity:0;
+  transition:opacity .16s ease, top .16s ease, bottom .16s ease, box-shadow .16s ease;
   pointer-events:none;
 }
 .dua-row:hover,
 .dua-row:focus-visible{
   transform:none!important;
   filter:none!important;
-  background:linear-gradient(90deg,var(--dua-wash),transparent 78%)!important;
+  background:var(--dua-wash)!important;
   box-shadow:none!important;
   outline:none;
-  padding-left:10px!important;
+  padding-left:12px!important;
 }
 .dua-row:hover:before,
 .dua-row:focus-visible:before{
-  background:var(--dua-ornament);
+  background:var(--dua-rail);
+  opacity:1;
+  top:16%;
+  bottom:16%;
+  box-shadow:0 0 10px color-mix(in srgb,var(--gold2) 26%,transparent);
 }
 .dua-row:active{background:var(--dua-wash-strong)!important}
 .dua-row__icon{
-  width:34px;
-  height:34px;
+  width:38px;
+  height:38px;
   margin-top:1px;
   display:grid;
   place-items:center;
   border:1px solid var(--dua-line-soft)!important;
   border-radius:50%!important;
-  background:transparent!important;
-  opacity:1;
-  transition:border-color .16s ease, background .16s ease;
+  background:color-mix(in srgb,var(--gold2) 3.5%,transparent)!important;
+  transition:border-color .14s ease, background .14s ease;
 }
 .dua-row:hover .dua-row__icon{
   border-color:var(--dua-line)!important;
-  background:var(--dua-wash)!important;
+  background:color-mix(in srgb,var(--gold2) 8%,transparent)!important;
 }
 .dua-row__icon .emoji-emblem,
 .dua-row__icon .folder-icon{
-  width:14px!important;
-  height:14px!important;
-  font-size:12px!important;
+  width:16px!important;
+  height:16px!important;
+  font-size:14px!important;
   margin:0!important;
   filter:none!important;
-  opacity:.88;
+  opacity:.94;
 }
-.dua-row__body{min-width:0;display:grid;gap:7px}
+.dua-row__body{min-width:0;display:grid;gap:6px}
 .dua-row h3{
   margin:0!important;
   font-family:var(--serif)!important;
-  font-size:16.5px!important;
-  line-height:1.28!important;
-  font-weight:600!important;
-  letter-spacing:.014em;
+  font-size:17px!important;
+  line-height:1.32!important;
+  font-weight:650!important;
+  letter-spacing:.002em;
   color:var(--dua-title)!important;
   display:block!important;
   overflow:visible!important;
 }
 .dua-row__sub{
   margin:0!important;
-  font-size:12.5px!important;
+  font-family:var(--sans,var(--ui,system-ui))!important;
+  font-size:13.5px!important;
   line-height:1.5!important;
   color:var(--dua-muted)!important;
-  letter-spacing:.01em;
+  letter-spacing:.0em;
   display:block!important;
   -webkit-line-clamp:2;
   -webkit-box-orient:vertical;
@@ -17883,9 +17891,9 @@ body.is-dua-route .main-search:has(#duaSearchInput) .search:focus{
   display:flex;
   flex-wrap:wrap;
   gap:6px 12px;
-  margin-top:2px;
-  padding-top:6px;
-  border-top:1px solid color-mix(in srgb,var(--gold2) 8%,transparent);
+  margin-top:1px;
+  padding-top:7px;
+  border-top:1px solid color-mix(in srgb,var(--gold2) 9%,transparent);
   max-width:fit-content;
 }
 .dua-row__meta span{
@@ -17893,23 +17901,24 @@ body.is-dua-route .main-search:has(#duaSearchInput) .search:focus{
   border-radius:0!important;
   padding:0!important;
   background:transparent!important;
+  font-family:var(--sans,var(--ui,system-ui))!important;
   color:var(--dua-muted2)!important;
-  font-size:9px!important;
-  font-weight:750!important;
-  letter-spacing:.14em;
+  font-size:10px!important;
+  font-weight:700!important;
+  letter-spacing:.1em;
   text-transform:uppercase;
 }
 .dua-row__meta span + span::before{
   content:"·";
   margin-right:12px;
-  opacity:.45;
+  opacity:.4;
   letter-spacing:0;
 }
 
 body.is-dua-route .footer{
-  margin-top:48px!important;
-  padding-top:28px!important;
-  padding-bottom:calc(26px + env(safe-area-inset-bottom))!important;
+  margin-top:44px!important;
+  padding-top:26px!important;
+  padding-bottom:calc(24px + env(safe-area-inset-bottom))!important;
   border-top:0!important;
   background:transparent!important;
   box-shadow:none!important;
@@ -17920,16 +17929,16 @@ body.is-dua-route .footer::before{
   content:"";
   display:block;
   height:1px;
-  margin:0 auto 22px;
-  max-width:180px;
+  margin:0 auto 20px;
+  max-width:168px;
   background:var(--dua-rule);
-  opacity:.95;
+  opacity:.9;
 }
 body.is-dua-route .footer::after{
   content:"";
   position:absolute;
   left:50%;
-  top:28px;
+  top:26px;
   width:5px;
   height:5px;
   margin-left:-2.5px;
@@ -17943,18 +17952,19 @@ body.is-dua-route .footer strong{
   display:block;
   font-family:var(--display,var(--serif))!important;
   font-size:11px!important;
-  letter-spacing:.22em!important;
+  letter-spacing:.2em!important;
   font-weight:750!important;
-  color:var(--dua-title)!important;
-  margin-bottom:10px;
+  color:var(--dua-accent)!important;
+  margin-bottom:9px;
 }
 body.is-dua-route .footer{
-  font-size:11.5px;
-  line-height:1.6;
+  font-family:var(--sans,var(--ui,system-ui));
+  font-size:12px;
+  line-height:1.55;
   color:var(--dua-muted)!important;
 }
 body.is-dua-route .footer-actions{
-  margin-top:18px!important;
+  margin-top:16px!important;
   gap:8px!important;
   justify-content:center;
 }
@@ -17962,14 +17972,14 @@ body.is-dua-route .footer-action-btn,
 body.is-dua-route .footer-social-link,
 body.is-dua-route .footer-app-save{
   min-height:34px!important;
-  padding:6px 13px!important;
+  padding:6px 12px!important;
   border-radius:999px!important;
   border:1px solid var(--dua-line)!important;
   background:transparent!important;
   box-shadow:none!important;
-  font-size:10.5px!important;
+  font-size:11px!important;
   font-weight:700!important;
-  letter-spacing:.04em;
+  letter-spacing:.03em;
   color:var(--dua-muted)!important;
 }
 body.is-dua-route .footer-action-btn svg,
@@ -17979,42 +17989,45 @@ body.is-dua-route .footer-social-link svg{
   opacity:.85;
 }
 body.is-dua-route .footer .signature{
-  margin-top:18px!important;
+  margin-top:16px!important;
   font-size:16px!important;
-  opacity:.72;
-  letter-spacing:.04em;
+  opacity:.7;
+  letter-spacing:.03em;
 }
 
 html[data-theme="light"] body.is-dua-route{
+  --dua-title:var(--text,var(--cream));
+  --dua-ink:var(--text,var(--cream));
   --dua-line:color-mix(in srgb,var(--gold2,#8a6a28) 30%,transparent);
-  --dua-line-soft:color-mix(in srgb,var(--gold2,#8a6a28) 15%,transparent);
-  --dua-wash:color-mix(in srgb,var(--gold2,#8a6a28) 6.5%,transparent);
-  --dua-ornament:color-mix(in srgb,var(--gold2,#8a6a28) 58%,transparent);
+  --dua-line-soft:color-mix(in srgb,var(--gold2,#8a6a28) 14%,transparent);
+  --dua-wash:color-mix(in srgb,var(--gold2,#8a6a28) 8%,transparent);
+  --dua-ornament:color-mix(in srgb,var(--gold2,#8a6a28) 62%,transparent);
 }
 html[data-theme="soft"] body.is-dua-route{
-  --dua-wash:color-mix(in srgb,var(--gold2) 7.5%,transparent);
+  --dua-wash:color-mix(in srgb,var(--gold2) 9%,transparent);
 }
 html[data-theme="royal"] body.is-dua-route,
 html[data-theme="dar-al-layl"] body.is-dua-route,
 html[data-theme="aurora"] body.is-dua-route,
 html[data-theme="bordeaux"] body.is-dua-route{
-  --dua-wash:color-mix(in srgb,var(--gold2) 6%,transparent);
-  --dua-wash-strong:color-mix(in srgb,var(--gold2) 10%,transparent);
+  --dua-wash:color-mix(in srgb,var(--gold2) 8%,transparent);
+  --dua-wash-strong:color-mix(in srgb,var(--gold2) 13%,transparent);
 }
 
 @media(max-width:700px){
   .dua-theme-card{
-    grid-template-columns:24px 32px minmax(0,1fr) auto!important;
+    grid-template-columns:24px 34px minmax(0,1fr) auto!important;
     column-gap:10px!important;
-    padding:16px 2px 15px!important;
+    padding:15px 2px 15px 5px!important;
   }
-  .dua-theme-card h3{font-size:15.5px!important}
-  .dua-theme-card__icon{width:32px!important;height:32px!important}
-  .dua-row{padding:17px 1px 16px!important;grid-template-columns:30px minmax(0,1fr)!important}
-  .dua-row__icon{width:30px;height:30px}
-  .dua-row h3{font-size:15.5px!important}
-  body.is-dua-route .footer{margin-top:38px!important}
-  body.is-dua-route #appView > .view-head h2{font-size:clamp(28px,8vw,38px)}
+  .dua-theme-card h3{font-size:16.5px!important}
+  .dua-theme-card__icon{width:34px!important;height:34px!important}
+  .dua-row{padding:16px 2px 15px 5px!important;grid-template-columns:34px minmax(0,1fr)!important}
+  .dua-row__icon{width:34px;height:34px}
+  .dua-row h3{font-size:16px!important}
+  .dua-row__sub{font-size:13px!important}
+  body.is-dua-route .footer{margin-top:36px!important}
+  body.is-dua-route #appView > .view-head h2{font-size:clamp(26px,7.2vw,34px)}
 }
 </style></style>
 <body class="has-bottom-nav">
@@ -19105,16 +19118,36 @@ const DUA_THEMES=[
 function duaTheme(cat){const c=String(cat||"");for(const t of DUA_THEMES){if(t.re.test(c))return t.title}return"Weitere Duʿāʾ"}
 function duaThemeGlyph(name){
   const n=String(name||"");
-  if(/Vergebung|Reue/i.test(n))return"🌿";
-  if(/Schutz|Zuflucht/i.test(n))return"🛡️";
-  if(/Standhaftigkeit|Geduld/i.test(n))return"🕯️";
-  if(/Herz|Charakter|Dank/i.test(n))return"🤍";
-  if(/Wissen|Urteil|Īmān|Iman/i.test(n))return"📖";
-  if(/Familie|Nachkommen/i.test(n))return"🏡";
-  if(/Jannah|Jenseits|Erleichterung/i.test(n))return"🌙";
-  if(/Alltag|Sunnah/i.test(n))return"☀️";
-  if(/Qur|Rechtleitung/i.test(n))return"✨";
+  if(/Vergebung|Reue/i.test(n))return"🕊️";
+  if(/Schutz|Zuflucht/i.test(n))return"🕌";
+  if(/Standhaftigkeit|Geduld/i.test(n))return"🌾";
+  if(/Herz|Charakter|Dank/i.test(n))return"💛";
+  if(/Wissen|Urteil|Īmān|Iman/i.test(n))return"📜";
+  if(/Familie|Nachkommen/i.test(n))return"🌳";
+  if(/Jannah|Jenseits|Erleichterung/i.test(n))return"🌌";
+  if(/Alltag|Sunnah/i.test(n))return"🌤️";
+  if(/Qur|Rechtleitung/i.test(n))return"📿";
   return"🤲";
+}
+function duaItemGlyph(d){
+  const blob=[d&&d.title,d&&d.occasion,d&&d.cat,d&&d.type,d&&d.category].filter(Boolean).join(" ");
+  const t=String(blob||"");
+  if(/sterben|tawaffa|\btod\b|muslimin sterben|als muslime/i.test(t))return"🌙";
+  if(/geduld|ṣabr|sabr|afrigh|standhaft|festig|thabbit|festen stand/i.test(t))return"🌾";
+  if(/tawakkul|vertrauen|auf dich vertrauen|anabna/i.test(t))return"🤝";
+  if(/herz|qalb|muqallib|herzen/i.test(t))return"💛";
+  if(/vergeb|reue|istighfar|sünde|ghfir|tawbah|maghfir/i.test(t))return"🕊️";
+  if(/schutz|zuflucht|audhu|aʿūdhu|feuer|fitnah|ungerecht|retten/i.test(t))return"🕌";
+  if(/jannah|paradies|garten|wonne|naim|ākhirah|akhirah/i.test(t))return"🌌";
+  if(/eltern|waliday|familie|kinder|nachkommen|azwaj|ehe/i.test(t))return"🌳";
+  if(/wissen|ilm|urteil|hukm|rechtleit|hidaya|wahrheit/i.test(t))return"📜";
+  if(/dank|shukr|awzini|gunst/i.test(t))return"🌼";
+  if(/gebet|salah|salat|witr|qunut|moschee/i.test(t))return"🕌";
+  if(/morgen|abend|schlaf|aufwach|essen|reise|krank/i.test(t))return"🌤️";
+  if(/qur|rechtleit|allgemein/i.test(t))return"📿";
+  if(/rizq|versorg|erleichter|barmherzig|rahmah/i.test(t))return"💧";
+  if(/licht|nur|atmim/i.test(t))return"✨";
+  return duaThemeGlyph(duaTheme(normalizeDuaCategory(d)||(d&&d.cat)||""));
 }
 function duaCatMap(){const m=new Map();DUAS.forEach(d=>{const cat=normalizeDuaCategory(d);d.cat=cat;if(!cat||cat==="Beiträge")return;m.set(cat,(m.get(cat)||0)+1)});return m}
 function uniqueList(key){const vals=posts.map(p=>key==="category"?normalizePostCategory(p.category):p[key]).filter(Boolean);return [...new Set(vals)].sort((a,b)=>String(a).localeCompare(String(b),"de"))}
@@ -23254,7 +23287,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v542";
+const APP_BUILD_ID="app-shell-v543";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -23279,7 +23312,7 @@ function renderAbout(){
   return `${setPageHeader("Über diese App","Maßstab, Quellenordnung und Aufbau","Maßstab")}<section class="about-page about-page--smart" aria-label="Quellenordnung der App"><div class="about-smart-overview">${principles.map((p)=>`<div class="about-smart-chip"><span>${esc(p.step)}</span><b>${esc(p.tag)}</b></div>`).join("")}</div><div class="about-smart-list">${principles.map((p)=>`<article class="about-smart-row"><div class="about-smart-step" aria-hidden="true">${esc(p.step)}</div><div class="about-smart-copy"><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></div></article>`).join("")}</div></section>${renderAppSaveBox({compact:true})}`;
 }
 function renderDuas(){normalizeLoadedDuas();const groups=new Map();DUAS.forEach(d=>{const cat=normalizeDuaCategory(d);if(!cat||cat==="Beiträge")return;const th=duaTheme(cat);groups.set(th,(groups.get(th)||0)+1)});const order=DUA_THEMES.map(t=>t.title).concat(["Weitere Duʿāʾ"]);const items=[...groups.entries()].sort((a,b)=>{const ia=order.indexOf(a[0]),ib=order.indexOf(b[0]);return(ia<0?999:ia)-(ib<0?999:ib)});const themeCards=items.map(([name,count],i)=>`<article class="dua-theme-card" data-nav="dua-cat" data-value="${esc(name)}"><span class="dua-theme-card__idx" aria-hidden="true">${String(i+1).padStart(2,"0")}</span><div class="dua-theme-card__icon" aria-hidden="true"><span class="emoji-emblem">${duaThemeGlyph(name)}</span></div><div class="dua-theme-card__body"><h3>${esc(name)}</h3><p class="dua-theme-card__count">${count} Duʿāʾ</p></div><span class="dua-theme-card__chev" aria-hidden="true">›</span></article>`).join("");return`<div class="dua-hub">${setPageHeader("Duʿāʾ",`${DUAS.length} bekannte Duʿāʾ – nach Themen geordnet.`,"Duʿāʾ")}<section class="main-search"><input id="duaSearchInput" class="search" type="search" placeholder="Duʿāʾ suchen nach Anlass, Thema, Arabisch, Deutsch oder Quelle…"></section><section id="duaSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="duaSearchCount">0 Treffer</span></div><div id="duaSearchResults" class="dua-collection"></div></section><div class="dua-hub__label"><b>Themen</b><span>${items.length} Bereiche</span></div><section class="dua-theme-grid" aria-label="Duʿāʾ-Themen">${themeCards}</section></div>`}
-function duaCard(d){return`<article class="dua-row" data-nav="dua" data-value="${esc(d.id)}"><div class="dua-row__icon" aria-hidden="true"><span class="emoji-emblem">${duaThemeGlyph(duaTheme(normalizeDuaCategory(d)||d.cat))}</span></div><div class="dua-row__body"><h3>${esc(d.title)}</h3><p class="dua-row__sub">${esc(d.occasion)}</p><div class="dua-row__meta"><span>${esc(d.type)}</span><span>${esc(d.cat)}</span></div></div></article>`}
+function duaCard(d){return`<article class="dua-row" data-nav="dua" data-value="${esc(d.id)}"><div class="dua-row__icon" aria-hidden="true"><span class="emoji-emblem">${duaItemGlyph(d)}</span></div><div class="dua-row__body"><h3>${esc(d.title)}</h3><p class="dua-row__sub">${esc(d.occasion)}</p><div class="dua-row__meta"><span>${esc(d.type)}</span><span>${esc(d.cat)}</span></div></div></article>`}
 function renderDuaCat(cat){normalizeLoadedDuas();const items=DUAS.filter(d=>{const c=normalizeDuaCategory(d);return c===cat||duaTheme(c)===cat});return`<div class="dua-collection-page">${setHeader(cat,`${items.length} Duʿāʾ in diesem Thema.`, "Duʿāʾ-Thema")}<section class="dua-collection" aria-label="${esc(cat)}">${items.length?items.map(duaCard).join(""):`<div class="empty">Keine Duʿāʾ in diesem Thema.</div>`}</section></div>`}
 function renderDua(id){
   const d=DUAS.find(x=>x.id===id);
