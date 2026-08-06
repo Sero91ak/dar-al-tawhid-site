@@ -3,13 +3,13 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-06T16:55:19.060Z",
+  "updatedAt": "2026-08-06T17:00:19.051Z",
   "usersChecked": 9,
   "duaCandidates": 0,
-  "recCandidates": 1,
-  "sent": 1,
+  "recCandidates": 0,
+  "sent": 0,
   "skipped": 0,
-  "duplicates": 7,
+  "duplicates": 8,
   "errors": 0,
   "dailyContentDate": "2026-08-06",
   "currentRecommendation": {
@@ -24,15 +24,5 @@
     "category": "Schutz vor dem Feuer"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "recommendation",
-      "batch": true,
-      "count": 1,
-      "contentId": "eid-zaehlt-quran-rezitation-als-sprechen-122",
-      "recipients": "be977c5e-bdd3-4193-a339-cf2cc2af7806",
-      "ok": true,
-      "invalid": 0
-    }
-  ]
+  "responses": []
 }
