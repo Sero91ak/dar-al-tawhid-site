@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1785515013940 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v548";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v549";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -9778,7 +9778,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/html2canvas.min.js" defer></script>
 <script src="/assets/premium-feed-app.js?v=91" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
-<script src="/assets/scholars-index.js?v=489" defer></script>
+<script src="/assets/scholars-index.js?v=490" defer></script>
 <link rel="preload" href="/assets/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11328,7 +11328,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=5">
 <link rel="stylesheet" href="/assets/books-library.css?v=2">
 <link rel="stylesheet" href="/assets/dar-account-visibility.css?v=11">
-<link rel="stylesheet" href="/assets/scholars-index.css?v=489">
+<link rel="stylesheet" href="/assets/scholars-index.css?v=490">
 <style id="typography-compact-fix-v310">
 /* Finale Typografie-Korrektur — gewinnt gegen Home-Compact-Overrides */
 .section-head h3,
@@ -18003,6 +18003,7 @@ body.is-scholars-route #appView.view{
 body.is-scholars-route .scholars-index{
   padding-left:0!important;
   padding-right:0!important;
+  padding-bottom:calc(var(--bottom-navigation-height,70px) + env(safe-area-inset-bottom,0px) + 88px)!important;
   background:transparent!important;
 }
 body.is-scholars-route .scholars-index__header,
@@ -18029,10 +18030,11 @@ body.is-scholars-route .scholars-index__search{
   background:color-mix(in srgb,#050505 82%,transparent)!important;
 }
 body.is-scholars-route .scholars-index__group-head{
-  padding:2px 2px 14px!important;
+  padding:14px 14px 16px 12px!important;
   margin:0!important;
   min-height:0!important;
   border:0!important;
+  border-radius:999px!important;
   background:transparent!important;
 }
 body.is-scholars-route .scholars-index__group-body{margin-top:12px!important}
@@ -20618,18 +20620,48 @@ function categoryRank(name){const key=categoryKey(name);const layout=CATEGORY_LA
 function scholarProfile(nameOrKey){
   const ref=resolveScholarRef(nameOrKey);
   const related=postsForScholarKey(ref.key);
-  const books=[...new Set(related.map(p=>p.book).filter(Boolean))].slice(0,5);
+  const booksFromPosts=[...new Set(related.map(p=>p.book).filter(Boolean))].slice(0,6);
   const topics=[...new Set(related.map(p=>p.category||p.topic).filter(Boolean))].slice(0,6);
-  let desc="Gelehrtenprofil mit Beiträgen, Themen und verwendeten Werken auf DAR AL TAWḤID.";
-  if(ref.key===PROPHET_SCHOLAR_KEY)desc="Aussagen und Lehren des Propheten Muḥammad ﷺ – höchste Autorität nach dem Qurʾān.";
-  if(/abū ḥātim|abu hatim|ar-rāzī|ar-razi/i.test(ref.label))desc="Imām von Ahl al-Ḥadīth, Vater von Ibn Abī Ḥātim. Bekannt für seine Aussagen in Jarḥ wa-Taʿdīl und ʿAqīdah.";
-  if(/lālakā|lalaka/i.test(ref.label))desc="Bekannter Überlieferer und Autor von Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah wa’l-Jamāʿah.";
-  if(/aḥmad|ahmad ibn ḥanbal|ahmad ibn hanbal/i.test(ref.label))desc="Imām von Ahl al-Sunnah, bekannt für seine Standhaftigkeit in der Miḥnah und für überlieferte Aussagen in ʿAqīdah und Sunnah.";
-  return {name:ref.label,desc,epoch:ref.key===PROPHET_SCHOLAR_KEY?"Der Prophet ﷺ":"Frühe Imāme / Ahl al-Ḥadīth",books,topics,count:related.length};
+  const meta=(window.DARScholarsIndex&&typeof window.DARScholarsIndex.getScholarMeta==="function")
+    ? window.DARScholarsIndex.getScholarMeta(ref.key)
+    : ((window.__darScholarMetaCache&&window.__darScholarMetaCache.scholars)||{})[ref.key];
+  const teachers=Array.isArray(meta?.teachers)?meta.teachers:[];
+  const students=Array.isArray(meta?.students)?meta.students:[];
+  const worksMeta=Array.isArray(meta?.works)?meta.works.map(w=>w&&w.title?w.title:w).filter(Boolean):[];
+  const works=[...new Set([...worksMeta,...booksFromPosts])].slice(0,8);
+  let desc=meta?.bio||"Gelehrtenprofil mit historischer Einordnung, Lehrern, Schülern und Werken auf DAR AL TAWḤĪD.";
+  if(ref.key===PROPHET_SCHOLAR_KEY&&!meta?.bio)desc="Aussagen und Lehren des Propheten Muḥammad ﷺ – höchste Autorität nach dem Qurʾān.";
+  const epoch=meta?.eraLabel||(ref.key===PROPHET_SCHOLAR_KEY?"Der Prophet ﷺ":"Frühe Imāme / Ahl al-Ḥadīth");
+  const life=meta?.lifespanLabel||"";
+  return {key:ref.key,name:ref.label,desc,epoch,life,teachers,students,works,topics,count:related.length};
+}
+function renderScholarChipList(items,emptyText){
+  if(!items||!items.length)return`<span class="profile-empty">${esc(emptyText)}</span>`;
+  return`<div class="profile-chip-row">${items.map(it=>{
+    const id=it&&it.id?String(it.id):"";
+    const label=it&&it.name?String(it.name):(typeof it==="string"?it:"");
+    if(!label)return"";
+    if(id)return`<button type="button" class="profile-chip" data-nav="scholar" data-value="${esc(id)}">${esc(label)}</button>`;
+    return`<span class="profile-chip is-static">${esc(label)}</span>`;
+  }).join("")}</div>`;
 }
 function renderScholarProfile(name){
   const p=scholarProfile(name);
-  return `<section class="profile-box"><h3 class="profile-title">${esc(p.name)}</h3><p class="profile-desc">${esc(p.desc)}</p><div class="profile-meta-grid"><div class="profile-meta"><b>Epoche</b>${esc(p.epoch)}</div><div class="profile-meta"><b>Bekannte Werke</b>${p.books.length?esc(p.books.join(" · ")):"Werke werden aus Beiträgen erkannt."}</div><div class="profile-meta"><b>Themenbereiche</b>${p.topics.length?esc(p.topics.join(" · ")):"Noch keine Themen erkannt."}</div></div></section>`;
+  try{window.DARScholarsIndex&&window.DARScholarsIndex.loadMeta&&window.DARScholarsIndex.loadMeta()}catch(e){}
+  return `<section class="profile-box profile-box--scholar">
+    <h3 class="profile-title">${esc(p.name)}</h3>
+    ${p.life?`<p class="profile-life">${esc(p.life)}</p>`:""}
+    <p class="profile-desc">${esc(p.desc)}</p>
+    <div class="profile-meta-grid profile-meta-grid--scholar">
+      <div class="profile-meta"><b>Epoche / Ort</b>${esc(p.epoch)}</div>
+      <div class="profile-meta"><b>Lebenszeit</b>${p.life?esc(p.life):"Noch nicht kuratiert – nur sichere Angaben werden gezeigt."}</div>
+      <div class="profile-meta"><b>Beiträge hier</b>${p.count} Beiträge auf DAR AL TAWḤĪD</div>
+    </div>
+    <div class="profile-section"><h4 class="profile-section__title">Lehrer</h4>${renderScholarChipList(p.teachers,"Noch keine gesicherten Lehrer-Angaben hinterlegt.")}</div>
+    <div class="profile-section"><h4 class="profile-section__title">Schüler</h4>${renderScholarChipList(p.students,"Noch keine gesicherten Schüler-Angaben hinterlegt.")}</div>
+    <div class="profile-section"><h4 class="profile-section__title">Werke</h4>${p.works.length?`<div class="profile-chip-row">${p.works.map(w=>`<span class="profile-chip is-static">${esc(w)}</span>`).join("")}</div>`:`<span class="profile-empty">Werke werden aus Beiträgen erkannt oder kuratiert ergänzt.</span>`}</div>
+    <div class="profile-section"><h4 class="profile-section__title">Themen in der App</h4>${p.topics.length?`<div class="profile-chip-row">${p.topics.map(t=>`<span class="profile-chip is-static">${esc(t)}</span>`).join("")}</div>`:`<span class="profile-empty">Noch keine Themen erkannt.</span>`}</div>
+  </section>`;
 }
 function bookProfile(name){
   const related=posts.filter(p=>p.book===name);
@@ -23547,7 +23579,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v548";
+const APP_BUILD_ID="app-shell-v549";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
