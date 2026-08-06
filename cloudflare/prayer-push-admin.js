@@ -2,14 +2,12 @@ import {
   runPrayerPushScheduler,
   readPrayerPushStatusFromKv
 } from "./prayer-push-scheduler.js";
-import { PRAYER_PUSH_COPY_VERSION, pickPrayerEntryVariant, buildAdvancePushBody } from "./prayer-push-copy.js";
-import { readPrayerStatusFromStore, writePrayerStatusToStore } from "./prayer-status-store.js";
+import { pickPrayerEntryVariant, buildAdvancePushBody, PRAYER_TITLE_EMOJI } from "./prayer-push-copy.js";
 import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
 
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de/#prayer";
 const DEFAULT_PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json";
-const SUPABASE_URL = "https://djyfkttjbdraynuxrzno.supabase.co";
 
 const PRAYER_NAMES = {
   fajr: "Fajr",
@@ -20,50 +18,17 @@ const PRAYER_NAMES = {
   tahajjud: "Taḥajjud"
 };
 
-const PRAYER_PUSH_EMOJI = Object.freeze({
-  fajr: "✨",
-  dhuhr: "☀️",
-  asr: "🌤️",
-  maghrib: "🌥️",
-  isha: "🌙",
-  tahajjud: "🌙"
-});
-
-function sanitizePublicPrayerStatus(status) {
-  if (!status || typeof status !== "object") return status || null;
-  const safe = { ...status };
-  delete safe.userRegistry;
-  delete safe.oneSignalResponses;
-  delete safe.skippedPastDetails;
-  delete safe.errorDetails;
-  if (Array.isArray(safe.planned)) {
-    safe.planned = safe.planned.slice(0, 40).map(item => ({
-      prayer: item?.prayer || "",
-      key: item?.key || "",
-      mode: item?.mode || "",
-      time: item?.time ?? null,
-      sendAfter: item?.sendAfter || null,
-      recipients: Number(item?.recipients || 0),
-      timeZone: item?.timeZone || ""
-    }));
-  }
-  return safe;
-}
-
 export function buildPrayerTestCopy(prayerKey, mode, advanceMinutes = 15) {
   const key = String(prayerKey || "maghrib").toLowerCase();
   const name = PRAYER_NAMES[key] || "Maghrib";
+  const emoji = PRAYER_TITLE_EMOJI[key] || "";
   const minutes = [5, 10, 15].includes(Number(advanceMinutes)) ? Number(advanceMinutes) : 15;
   const timeLabel = "21:46";
-
   if (mode === "advance") {
-    const emoji = PRAYER_PUSH_EMOJI[key] || "🔔";
-    const title = key === "tahajjud"
-      ? `${emoji} Taḥajjud-Erinnerung`
-      : `${emoji} ${name} in ${minutes} Min`;
+    const rawTitle = key === "tahajjud" ? `Taḥajjud in ${minutes} Min` : `${name} in ${minutes} Min`;
+    const title = emoji ? `${emoji} ${rawTitle}` : rawTitle;
     return { title: `[Test] ${title}`, body: buildAdvancePushBody(key, minutes, timeLabel), key, mode };
   }
-
   const variant = pickPrayerEntryVariant(key, timeLabel);
   return { title: `[Test] ${variant.title}`, body: variant.body, key, mode };
 }
@@ -71,19 +36,13 @@ export function buildPrayerTestCopy(prayerKey, mode, advanceMinutes = 15) {
 export async function readPrayerPushStatus(env, githubGet, base64ToUtf8) {
   const cached = readPrayerPushStatusFromKv();
   if (cached?.updatedAt) {
-    return { ok: true, status: sanitizePublicPrayerStatus(cached), source: "worker-memory" };
-  }
-
-  const durable = await readPrayerStatusFromStore(env);
-  if (durable?.status?.updatedAt) {
-    return { ok: true, status: sanitizePublicPrayerStatus(durable.status), source: "durable-object" };
+    return { ok: true, status: cached, source: "worker" };
   }
 
   const owner = env.GITHUB_OWNER || "Sero91ak";
   const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
   const branch = env.GITHUB_BRANCH || "main";
   const statusPath = env.PRAYER_STATUS_PATH || DEFAULT_PRAYER_STATUS_PATH;
-
   try {
     const file = await githubGet(env, owner, repo, statusPath, branch);
     if (!file?.content) return { ok: false, error: "Status-Datei fehlt" };
@@ -91,7 +50,7 @@ export async function readPrayerPushStatus(env, githubGet, base64ToUtf8) {
     if (!status?.updatedAt) {
       return { ok: false, error: "Noch kein Scheduler-Lauf gespeichert", status: null };
     }
-    return { ok: true, status: sanitizePublicPrayerStatus(status), source: "github-fallback" };
+    return { ok: true, status, source: "github" };
   } catch (err) {
     return { ok: false, error: err.message || String(err) };
   }
@@ -147,11 +106,11 @@ export async function sendPrayerTestPush(env, input = {}) {
     headings: { de: copy.title, en: copy.title },
     contents: { de: copy.body, en: copy.body },
     url: `${site}/#prayer`,
-    data: { type: "prayer-test", prayer: prayerKey, mode, test: true, copyVersion: PRAYER_PUSH_COPY_VERSION },
+    data: { type: "prayer-test", prayer: prayerKey, mode, test: true },
     chrome_web_icon: icon,
     chrome_web_badge: badge,
     firefox_icon: icon,
-    name: `prayer-test-${PRAYER_PUSH_COPY_VERSION}-${prayerKey}-${mode}-${Date.now()}`
+    name: `prayer-test-${prayerKey}-${mode}-${Date.now()}`
   };
 
   try {
@@ -163,7 +122,6 @@ export async function sendPrayerTestPush(env, input = {}) {
       delivered: delivery.delivered,
       prayer: prayerKey,
       mode,
-      copyVersion: PRAYER_PUSH_COPY_VERSION,
       title: copy.title,
       body: copy.body,
       subscriptionId,
@@ -178,7 +136,6 @@ export async function sendPrayerTestPush(env, input = {}) {
       delivered: false,
       prayer: prayerKey,
       mode,
-      copyVersion: PRAYER_PUSH_COPY_VERSION,
       subscriptionId,
       reason: err.message || String(err)
     };
@@ -207,7 +164,7 @@ export async function triggerPrayerWorkflowForSubscription(env, subscriptionId, 
     scheduled: result.scheduled,
     recipients: result.recipients,
     usersWithLocation: result.usersWithLocation,
-    status: sanitizePublicPrayerStatus(result.status)
+    status: result.status
   };
 }
 
@@ -219,76 +176,10 @@ export async function runPrayerSchedulerNow(env, deps = {}, options = {}) {
   );
 }
 
-function supabaseServiceKey(env) {
-  return String(env.SUPABASE_SERVICE_KEY || env.SUPABASE_SERVICE_ROLE_KEY || "").trim();
-}
-
-export async function repairPrayerRegistrationsDisabledByDaily(env) {
-  const key = supabaseServiceKey(env);
-  if (!key) return { ok: false, reason: "SUPABASE_SERVICE_KEY fehlt am Worker" };
-  const filter = [
-    "app_environment=eq.production",
-    "enabled=eq.false",
-    "push_opted_in=eq.false",
-    "daily_push_error=not.is.null"
-  ].join("&");
-  const response = await fetch(`${SUPABASE_URL}/rest/v1/prayer_push_registrations?${filter}`, {
-    method: "PATCH",
-    headers: {
-      apikey: key,
-      Authorization: `Bearer ${key}`,
-      "Content-Type": "application/json",
-      Prefer: "return=representation"
-    },
-    body: JSON.stringify({
-      enabled: true,
-      push_opted_in: true,
-      daily_push_error: null,
-      last_synced_at: new Date().toISOString()
-    })
-  });
-  const text = await response.text();
-  let rows = [];
-  try { rows = text ? JSON.parse(text) : []; } catch (_) {}
-  if (!response.ok) {
-    return { ok: false, reason: `Supabase ${response.status}: ${text.slice(0, 240)}`, restored: 0 };
-  }
-  return {
-    ok: true,
-    restored: Array.isArray(rows) ? rows.length : 0,
-    subscriptionIds: Array.isArray(rows) ? rows.map(row => row.subscription_id).filter(Boolean) : []
-  };
-}
-
 export async function ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, options = {}) {
-  const scopedSubscriptionId = String(options.subscriptionId || "").trim();
-  if (!scopedSubscriptionId) {
-    await repairPrayerRegistrationsDisabledByDaily(env).catch(() => null);
+  if (options.force) {
+    return runPrayerSchedulerNow(env, { githubGet, githubPut, base64ToUtf8, utf8ToBase64 }, { force: true });
   }
 
-  const result = await runPrayerSchedulerNow(
-    env,
-    { githubGet, githubPut, base64ToUtf8, utf8ToBase64 },
-    { force: true, subscriptionId: scopedSubscriptionId }
-  );
-
-  if (!result?.status?.updatedAt) {
-    const now = new Date().toISOString();
-    const heartbeat = {
-      updatedAt: now,
-      ok: false,
-      schedulerStatus: "error",
-      schedulerEngine: "cloudflare-worker-cron-v3",
-      prayerCopyVersion: PRAYER_PUSH_COPY_VERSION,
-      cronIntervalMinutes: 5,
-      lastCronRun: now,
-      lastError: result?.lastError || result?.reason || "Gebets-Push-Cron ohne Status beendet",
-      scheduled: Number(result?.scheduled || 0),
-      recipients: Number(result?.recipients || 0),
-      usersWithLocation: Number(result?.usersWithLocation || 0)
-    };
-    await writePrayerStatusToStore(env, heartbeat);
-  }
-
-  return result;
+  return runPrayerSchedulerNow(env, { githubGet, githubPut, base64ToUtf8, utf8ToBase64 }, { force: true });
 }
