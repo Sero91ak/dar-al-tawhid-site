@@ -1,6 +1,6 @@
 /**
- * DAR AL TAWḤID — Gelehrten-Index v490
- * Historische Tiefe: Jahre, Lehrer, Schüler, Werke; Schnellsuche unten; edles Duʿāʾ-Licht.
+ * DAR AL TAWḤID — Gelehrten-Index v492
+ * Historische Tiefe; Tabs & Sortierung oben; edles Duʿāʾ-Licht.
  */
 (function (global) {
   'use strict';
@@ -12,11 +12,11 @@
   const META_URL = '/data/scholar-index-meta.json';
 
   const SORT_OPTIONS = [
-    { id: 'generation', label: 'Historische Generation' },
-    { id: 'alpha', label: 'Alphabetisch' },
-    { id: 'count_desc', label: 'Meiste Beiträge' },
-    { id: 'count_asc', label: 'Wenigste Beiträge' },
-    { id: 'recent', label: 'Zuletzt angesehen' },
+    { id: 'generation', label: 'Historische Generation', short: 'Generation' },
+    { id: 'alpha', label: 'Alphabetisch', short: 'A–Z' },
+    { id: 'count_desc', label: 'Meiste Beiträge', short: 'Meiste' },
+    { id: 'count_asc', label: 'Wenigste Beiträge', short: 'Wenigste' },
+    { id: 'recent', label: 'Zuletzt angesehen', short: 'Zuletzt' },
   ];
 
   const GROUPED_SORTS = new Set(['generation', 'alpha']);
@@ -362,18 +362,6 @@
     </button>`;
   }
 
-  function renderSortSheet(state, esc) {
-    return `<div id="scholarsSortSheet" class="scholars-sort-sheet" hidden role="dialog" aria-modal="true" aria-labelledby="scholarsSortTitle">
-      <div class="scholars-sort-sheet__panel">
-        <h3 id="scholarsSortTitle" class="scholars-sort-sheet__title">Sortierung</h3>
-        ${SORT_OPTIONS.map(
-          (o) =>
-            `<button type="button" class="scholars-sort-sheet__opt" data-scholars-sort="${esc(o.id)}" aria-checked="${state.sort === o.id ? 'true' : 'false'}">${esc(o.label)}${state.sort === o.id ? ' ✓' : ''}</button>`
-        ).join('')}
-      </div>
-    </div>`;
-  }
-
   function renderGroup(g, esc, useCols, foldMap) {
     const expanded = foldMap[g.id] !== false;
     if (g.flat) {
@@ -413,7 +401,6 @@
     const groups = groupScholars(sorted, state.sort);
     const foldMap = resolveFoldMap(groups, state, items.length, filtered.length);
     const filters = availableFilters(items);
-    const sortLabel = (SORT_OPTIONS.find((o) => o.id === state.sort) || SORT_OPTIONS[0]).label;
     const useCols = global.innerWidth >= 720;
     const alphaLetters = state.sort === 'alpha'
       ? [...new Set(sorted.map((s) => (/^[A-Z]$/.test(s.alphaKey) ? s.alphaKey : '#')))]
@@ -422,7 +409,7 @@
     const recentHtml =
       recent.length && !state.query
         ? `<section class="scholars-index__recent" aria-label="Zuletzt angesehen">
-            <span class="scholars-index__recent-label">ZULETZT</span>
+            <span class="scholars-index__recent-label">Schnellzugriff</span>
             <div class="scholars-index__recent-links">${recent
               .map(
                 (r) =>
@@ -451,6 +438,18 @@
         .join('')}</div>`;
     }
 
+    const filterTabs = filters
+      .map(
+        (f) =>
+          `<button type="button" class="scholars-index__tab" role="tab" id="scholars-tab-${esc(f.id)}" data-scholars-filter="${esc(f.id)}" aria-selected="${state.filter === f.id ? 'true' : 'false'}" tabindex="${state.filter === f.id ? '0' : '-1'}">${esc(f.label)}</button>`
+      )
+      .join('');
+
+    const sortTabs = SORT_OPTIONS.map(
+      (o) =>
+        `<button type="button" class="scholars-index__sort-tab" data-scholars-sort="${esc(o.id)}" aria-pressed="${state.sort === o.id ? 'true' : 'false'}" title="${esc(o.label)}" aria-label="${esc(o.label)}">${esc(o.short || o.label)}</button>`
+    ).join('');
+
     return `<section class="scholars-index" id="scholarsIndexRoot" data-scholars-index>
       <header class="scholars-index__header">
         <p class="scholars-index__eyebrow">Personen &amp; Überlieferer</p>
@@ -459,22 +458,20 @@
         <hr class="scholars-index__rule" aria-hidden="true">
       </header>
       <div class="scholars-index__sticky">
-        <div class="scholars-index__search-wrap">
-          <svg class="scholars-index__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-          <input id="scholarsSearchInput" class="scholars-index__search" type="search" placeholder="Name, Kuniyah oder Schreibweise" value="${esc(state.query)}" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-label="Gelehrte suchen">
-          <button type="button" id="scholarsSearchClear" class="scholars-index__search-clear" aria-label="Suche löschen" ${state.query ? '' : 'hidden'}>×</button>
+        <div class="scholars-index__search-bar">
+          <div class="scholars-index__search-wrap">
+            <svg class="scholars-index__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            <input id="scholarsSearchInput" class="scholars-index__search" type="search" placeholder="Name, Kuniyah oder Schreibweise" value="${esc(state.query)}" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-label="Gelehrte suchen">
+            <button type="button" id="scholarsSearchClear" class="scholars-index__search-clear" aria-label="Suche löschen" ${state.query ? '' : 'hidden'}>×</button>
+          </div>
+          <span id="scholarsResultCount" class="scholars-index__count-badge" aria-live="polite">${filtered.length}</span>
         </div>
-        <div class="scholars-index__meta-row">
-          <span id="scholarsResultCount" class="scholars-index__count">${filtered.length} Treffer</span>
-          <button type="button" id="scholarsSortBtn" class="scholars-index__sort-btn" aria-haspopup="dialog" aria-controls="scholarsSortSheet">${esc(sortLabel)}</button>
+        <div class="scholars-index__tabs" role="tablist" aria-label="Gelehrten-Bereich">
+          ${filterTabs}
         </div>
-        <div class="scholars-index__filters" role="toolbar" aria-label="Gelehrten filtern">
-          ${filters
-            .map(
-              (f) =>
-                `<button type="button" class="scholars-index__chip" data-scholars-filter="${esc(f.id)}" aria-selected="${state.filter === f.id ? 'true' : 'false'}">${esc(f.label)}</button>`
-            )
-            .join('')}
+        <div class="scholars-index__sort-rail" role="group" aria-label="Sortierung">
+          <span class="scholars-index__sort-label">Sortierung</span>
+          <div class="scholars-index__sort-tabs">${sortTabs}</div>
         </div>
         ${
           alphaLetters.length
@@ -486,18 +483,9 @@
                 .join('')}</div>`
             : ''
         }
+        ${recentHtml}
       </div>
-      ${recentHtml}
       ${bodyHtml}
-      <div class="scholars-index__dock" role="search">
-        <label class="scholars-index__dock-label" for="scholarsDockSearch">Schnellsuche</label>
-        <div class="scholars-index__dock-wrap">
-          <svg class="scholars-index__dock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-          <input id="scholarsDockSearch" class="scholars-index__dock-input" type="search" placeholder="Name, Lehrer, Schüler, Werk oder Jahr…" value="${esc(state.query)}" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-label="Gelehrte schnell suchen">
-          <button type="button" id="scholarsDockClear" class="scholars-index__dock-clear" aria-label="Schnellsuche löschen" ${state.query ? '' : 'hidden'}>×</button>
-        </div>
-      </div>
-      ${renderSortSheet(state, esc)}
     </section>`;
   }
 
@@ -528,22 +516,6 @@
     const foldMap = readFoldState();
     foldMap[groupId] = expanded;
     saveFoldState(foldMap);
-  }
-
-  function openSortSheet(root) {
-    const sheet = root.querySelector('#scholarsSortSheet');
-    if (!sheet) return;
-    sheet.hidden = false;
-    document.body.classList.add('scholars-sort-open');
-    sheet.querySelector('[aria-checked="true"]')?.focus();
-  }
-
-  function closeSortSheet(root) {
-    const sheet = root.querySelector('#scholarsSortSheet');
-    if (!sheet) return;
-    sheet.hidden = true;
-    document.body.classList.remove('scholars-sort-open');
-    root.querySelector('#scholarsSortBtn')?.focus();
   }
 
   function bindRowActions(root, esc) {
@@ -587,9 +559,9 @@
     if (!root || root.dataset.bound === '1') return;
     root.dataset.bound = '1';
     boundRoot = root;
+    document.body.classList.remove('scholars-sort-open');
 
     const search = root.querySelector('#scholarsSearchInput');
-    const dock = root.querySelector('#scholarsDockSearch');
     const syncQuery = (value, focusId) => {
       clearTimeout(searchTimer);
       searchTimer = setTimeout(() => {
@@ -608,62 +580,26 @@
       }, 120);
     };
     if (search) {
-      search.oninput = () => {
-        if (dock) dock.value = search.value;
-        syncQuery(search.value || '', '#scholarsSearchInput');
-      };
-    }
-    if (dock) {
-      dock.oninput = () => {
-        if (search) search.value = dock.value;
-        syncQuery(dock.value || '', '#scholarsDockSearch');
-      };
+      search.oninput = () => syncQuery(search.value || '', '#scholarsSearchInput');
     }
     const clear = root.querySelector('#scholarsSearchClear');
     if (clear) {
       clear.onclick = () => {
         if (search) search.value = '';
-        if (dock) dock.value = '';
         rerender(root, catalog, esc, { query: '' });
         search?.focus();
-      };
-    }
-    const dockClear = root.querySelector('#scholarsDockClear');
-    if (dockClear) {
-      dockClear.onclick = () => {
-        if (search) search.value = '';
-        if (dock) dock.value = '';
-        rerender(root, catalog, esc, { query: '' });
-        dock?.focus();
       };
     }
     root.querySelectorAll('[data-scholars-filter]').forEach((btn) => {
       btn.onclick = () => rerender(root, catalog, esc, { filter: btn.getAttribute('data-scholars-filter') || 'all' });
     });
-    const sortBtn = root.querySelector('#scholarsSortBtn');
-    if (sortBtn) sortBtn.onclick = () => openSortSheet(root);
     root.querySelectorAll('[data-scholars-sort]').forEach((btn) => {
       btn.onclick = () => {
         const sort = btn.getAttribute('data-scholars-sort') || 'generation';
         setJson(SORT_KEY, sort);
-        closeSortSheet(root);
         rerender(root, catalog, esc, { sort });
       };
     });
-    const sheet = root.querySelector('#scholarsSortSheet');
-    if (sheet) {
-      sheet.onclick = (e) => {
-        if (e.target === sheet) closeSortSheet(root);
-      };
-    }
-    if (!global.__darScholarsEscBound) {
-      global.__darScholarsEscBound = true;
-      document.addEventListener('keydown', (e) => {
-        if (e.key !== 'Escape') return;
-        const open = document.querySelector('#scholarsSortSheet:not([hidden])');
-        if (open) closeSortSheet(open.closest('[data-scholars-index]'));
-      });
-    }
     bindRowActions(root, esc);
     bindAlpha(root);
     bindFold(root);
