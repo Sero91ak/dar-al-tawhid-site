@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-06T12:08:34.806Z",
+  "generated": "2026-08-06T12:08:51.579Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -320,7 +320,24 @@
       "pushApproved": true,
       "pushApprovedAt": "2026-08-06T12:08:33.739Z",
       "postId": "lib:pub-20260806-001",
-      "updatedAt": "2026-08-06T12:08:34.806Z"
+      "updatedAt": "2026-08-06T12:08:51.579Z",
+      "lastCheckAt": "2026-08-06T12:08:51.382Z",
+      "liveCheck": {
+        "ok": false,
+        "diagnosis": "PDF noch nicht im Live-Katalog enthalten.",
+        "site": "https://dar-al-tawhid.de",
+        "publicationId": "pub-20260806-001",
+        "slug": "der-quran-ist-allahs-unerschaffenes-wort",
+        "catalogFoundPublic": true,
+        "publicationInCatalog": false,
+        "pdfFilePublic": false,
+        "visitorUrlOk": true,
+        "visitorUrl": "https://dar-al-tawhid.de/?v=1786018131319#bibliothek/der-quran-ist-allahs-unerschaffenes-wort",
+        "pdfHttpStatus": 404,
+        "attempt": 5
+      },
+      "attempts": 5,
+      "lastError": "PDF noch nicht im Live-Katalog enthalten."
     }
   }
 }
