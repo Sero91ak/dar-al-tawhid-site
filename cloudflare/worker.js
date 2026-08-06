@@ -72,9 +72,9 @@ import {
   cleanupFeedBackgroundPool,
   blockFeedBackgroundImage
 } from "./feed-backgrounds-sync.js";
-export { PrayerStatusStore } from "./prayer-status-store.js";
-export { VideoStudioStore } from "./video-studio/job-store.js";
-import { handleVideoStudioRequest, resumeStuckVideoStudioJobs } from "./video-studio/index.js";
+import {
+  sendNewPostPush as sendNewPostPushShared
+} from "./post-push-admin.js";
 import {
   readLibraryCatalog,
   saveLibraryPublication,
@@ -90,7 +90,7 @@ import {
   sendLibraryPublicationPush,
   LIBRARY_PUSH_DELAY_AFTER_LIVE_MS
 } from "./library-push-admin.js";
-import { sendNewPostPush } from "./post-push-admin.js";
+export { PrayerStatusStore } from "./prayer-status-store.js";
 
 const DEFAULT_OWNER = "Sero91ak";
 const DEFAULT_REPO = "dar-al-tawhid-site";
@@ -110,10 +110,8 @@ const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_TELEGRAM_POSTS_PATH = "content/admin/telegram-posts.json";
 const DEFAULT_PENDING_PUSHES_PATH = "content/admin/pending-pushes.json";
 const DEFAULT_PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json";
-// Sofort prüfen, dann gestaffelt nachziehen — nicht erst 30s warten (Admin-Retry hing sonst).
-const LIVE_CHECK_SCHEDULE_FULL_MS = [0, 15000, 30000, 60000, 120000, 180000, 240000, 300000];
-const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 3000, 8000];
-const LIVE_CHECK_SCHEDULE_CRON_MS = [0, 5000, 15000, 30000, 60000, 120000];
+const LIVE_CHECK_SCHEDULE_FULL_MS = [30000, 60000, 120000, 180000, 240000, 300000];
+const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 5000, 10000];
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -140,32 +138,12 @@ export default {
           prayerScheduler: "cloudflare-worker-cron-v3",
           prayerCron: "*/5 * * * *",
           prayerStatusStore: Boolean(env.PRAYER_STATUS_STORE),
-          libraryApi: "v3-split-push",
-          libraryPushDelayMs: LIBRARY_PUSH_DELAY_AFTER_LIVE_MS,
           dailyPushScheduler: "cloudflare-worker-daily-v1",
           dailyPushCron: "*/5 * * * *",
           jummahPushScheduler: "cloudflare-worker-jummah-v1",
           jummahPushCron: "*/5 * * * *",
-          videoStudioStore: Boolean(env.VIDEO_STUDIO_STORE),
-          videoStudioR2: Boolean(env.VIDEO_STUDIO_R2 || env.VIDEO_STUDIO_BUCKET),
-          videoStudioFal: Boolean(String(env.FAL_KEY || env.FAL_API_KEY || "").trim()),
-          videoStudioVoice: Boolean(String(env.ELEVENLABS_API_KEY || "").trim() && String(env.ELEVENLABS_VOICE_ID || env.DAR_MALE_VOICE_ID || "").trim()),
-          videoStudioShotstack: Boolean(String(env.SHOTSTACK_API_KEY || "").trim()),
-          videoStudioSigning: Boolean(String(env.VIDEO_STUDIO_SIGNING_SECRET || "").trim()),
-          videoStudioShotstackHost: String(env.SHOTSTACK_HOST || "https://api.shotstack.io/edit/stage"),
           scheduler: "ready"
         }, cors);
-      }
-
-      // DAR KI-Video-Studio (Admin only; approve = no visitor push)
-      if (url.pathname.startsWith("/api/admin/video-studio")) {
-        assertConfigured(env);
-        const videoResponse = await handleVideoStudioRequest(request, env, ctx, {
-          cors,
-          assertAuthorized,
-          helpers: { githubGet, githubPut, githubCommitBatch, base64ToUtf8, utf8ToBase64 }
-        });
-        if (videoResponse) return videoResponse;
       }
 
       if (url.pathname === "/api/prayer/status" && request.method === "GET") {
@@ -838,16 +816,11 @@ export default {
   async scheduled(event, env, ctx) {
     ctx.waitUntil(ensureDailyPushSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
     ctx.waitUntil(runScheduledPublishes(env));
-    try {
-      await processAllPendingPushes(env);
-    } catch (error) {
-      console.error("processAllPendingPushes cron failed:", error?.message || error);
-    }
+    ctx.waitUntil(processAllPendingPushes(env));
     ctx.waitUntil(ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
     ctx.waitUntil(ensureJummahPushSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64));
     ctx.waitUntil(ensureZakatPricesFresh(env, { githubGet, githubPut, githubCommitBatch, base64ToUtf8 }));
     ctx.waitUntil(ensureFeedBackgroundsFresh(env, { githubGet, githubPut, githubCommitBatch, base64ToUtf8 }, { staging: true }));
-    ctx.waitUntil(resumeStuckVideoStudioJobs(env, { githubGet, githubPut, githubCommitBatch, base64ToUtf8, utf8ToBase64 }));
   }
 };
 
@@ -1200,8 +1173,6 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
       postPath,
       status: "pending",
       createdAt: publishedAt,
-      pushApproved: true,
-      pushApprovedAt: publishedAt,
       lastError: "Push wartet auf Live-Verfügbarkeit"
     };
     if (postId) await writePendingPushStatus(env, postId, pendingRecord);
@@ -1214,12 +1185,7 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
       targetUrl: buildPostPushUrl(env, postId, Date.now())
     };
     if (ctx && postId) {
-      ctx.waitUntil((async () => {
-        const quick = await processPendingPushUntilLive(env, pendingRecord, { schedule: "quick" });
-        if (!quick.sent && quick.pending) {
-          await processPendingPushUntilLive(env, pendingRecord, { schedule: "cron" });
-        }
-      })());
+      ctx.waitUntil(processPendingPushUntilLive(env, pendingRecord));
     }
   }
 
@@ -1350,8 +1316,6 @@ async function publishBulkPostsFromMarkdown(env, input, ctx, options = {}) {
       postPath: lastPost.postPath,
       status: "pending",
       createdAt: publishedAt,
-      pushApproved: true,
-      pushApprovedAt: publishedAt,
       lastError: "Push wartet auf Live-Verfügbarkeit"
     };
     await writePendingPushStatus(env, lastPost.postId, pendingRecord);
@@ -1903,7 +1867,7 @@ function corsHeaders(request, env) {
   const allowOrigin = origin.startsWith("http://127.0.0.1") || origin.startsWith("http://localhost") || origin === allowed ? origin || allowed : allowed;
   return {
     "Access-Control-Allow-Origin": allowOrigin,
-    "Access-Control-Allow-Methods": "GET,POST,PATCH,DELETE,OPTIONS",
+    "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Admin-Secret",
     "Access-Control-Max-Age": "86400",
     "Vary": "Origin"
@@ -2503,6 +2467,8 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+const LIBRARY_PUSH_PROCESSING_TTL_MS = 10 * 60 * 1000;
+
 function pendingPushesPath(env) {
   return trimSlashes(env.PENDING_PUSHES_PATH || DEFAULT_PENDING_PUSHES_PATH);
 }
@@ -2515,23 +2481,10 @@ async function readPendingPushesRegistry(env) {
   const file = await githubGet(env, owner, repo, path, branch);
   if (!file?.content) return { pushes: {} };
   try {
-    const raw = base64ToUtf8(file.content);
-    if (/^<<<<<<<|^>>>>>>>|^=======/m.test(raw)) {
-      throw new Error("pending-pushes.json enthält Merge-Konflikt-Marker");
-    }
-    const data = JSON.parse(raw);
+    const data = JSON.parse(base64ToUtf8(file.content));
     return { pushes: data.pushes || {}, sha: file.sha };
   } catch (error) {
-    return { pushes: {}, sha: file.sha, parseError: error?.message || "JSON parse failed" };
-  }
-}
-
-function assertPendingPushesRegistryReadable(registry) {
-  if (registry?.parseError) {
-    throw httpError(
-      `Push-Registry defekt (${registry.parseError}). Kein erneuter Versand – bitte content/admin/pending-pushes.json reparieren.`,
-      503
-    );
+    return { pushes: {}, sha: file.sha };
   }
 }
 
@@ -2540,47 +2493,72 @@ async function writePendingPushStatus(env, postId, patch) {
   const repo = env.GITHUB_REPO || DEFAULT_REPO;
   const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
   const path = pendingPushesPath(env);
+  const registry = await readPendingPushesRegistry(env);
+  const pushes = { ...(registry.pushes || {}) };
   const key = String(postId || "").trim();
   if (!key) return null;
-  let lastError = null;
+  pushes[key] = {
+    ...(pushes[key] || {}),
+    ...patch,
+    postId: key,
+    updatedAt: new Date().toISOString()
+  };
+  const payload = { version: 1, generated: new Date().toISOString(), pushes };
+  await githubPut(
+    env,
+    owner,
+    repo,
+    path,
+    `${JSON.stringify(payload, null, 2)}\n`,
+    `Update pending push ${key}`,
+    branch,
+    registry.sha
+  );
+  return pushes[key];
+}
 
-  for (let attempt = 1; attempt <= 4; attempt++) {
-    try {
-      const registry = await readPendingPushesRegistry(env);
-      const pushes = { ...(registry.pushes || {}) };
-      pushes[key] = {
-        ...(pushes[key] || {}),
-        ...patch,
-        postId: key,
-        updatedAt: new Date().toISOString()
-      };
-      const payload = { version: 1, generated: new Date().toISOString(), pushes };
-      await githubPut(
-        env,
-        owner,
-        repo,
-        path,
-        `${JSON.stringify(payload, null, 2)}\n`,
-        `Update pending push ${key}`,
-        branch,
-        registry.sha
-      );
-      return pushes[key];
-    } catch (error) {
-      lastError = error;
-      const status = Number(error?.status || 0);
-      if (status !== 409 && status !== 422) throw error;
-      await sleep(250 * attempt);
-    }
+function isActiveLibraryPushProcessing(item) {
+  if (!item || item.kind !== "library" || item.status !== "processing") return false;
+  const startedAt = Date.parse(item.processingStartedAt || item.updatedAt || "");
+  if (!Number.isFinite(startedAt)) return false;
+  return (Date.now() - startedAt) < LIBRARY_PUSH_PROCESSING_TTL_MS;
+}
+
+async function claimLibraryPushProcessing(env, key, patch = {}) {
+  const processingToken = crypto.randomUUID();
+  await writePendingPushStatus(env, key, {
+    ...patch,
+    status: "processing",
+    processingToken,
+    processingStartedAt: new Date().toISOString()
+  });
+  const registry = await readPendingPushesRegistry(env);
+  const current = registry.pushes?.[key] || null;
+  return {
+    ok: current?.processingToken === processingToken,
+    processingToken,
+    current
+  };
+}
+
+async function ensureLibraryPushProcessingOwner(env, key, processingToken) {
+  const registry = await readPendingPushesRegistry(env);
+  const current = registry.pushes?.[key] || null;
+  if (current?.status === "sent") {
+    return { owned: false, sent: true, current };
   }
-
-  throw lastError || httpError(`Pending push update für ${key} fehlgeschlagen`, 500);
+  return {
+    owned: current?.status === "processing" && current?.processingToken === processingToken,
+    sent: false,
+    current
+  };
 }
 
 function isPostPushApproved(item) {
   if (!item) return false;
   if (item.kind === "library") return item.pushApproved === true;
-  return item.pushApproved === true;
+  if (Object.prototype.hasOwnProperty.call(item, "pushApproved")) return item.pushApproved === true;
+  return true;
 }
 
 function diagnoseLiveFailure(steps, live = {}) {
@@ -2609,7 +2587,7 @@ function buildLiveCheckResult(githubSteps, live, attempts) {
     visitorUrlOk: !!live.visitorUrlOk,
     cloudflareDeployed: !!(live.indexFoundPublic && live.postFilePublic)
   };
-  const ok = steps.postInIndex && steps.postFilePublic;
+  const ok = steps.indexFoundPublic && steps.postInIndex && steps.postFilePublic;
   const diagnosis = ok ? "" : diagnoseLiveFailure(steps, live);
   return {
     ok,
@@ -2683,45 +2661,11 @@ async function fetchLiveResources(env, { filename, postId, postPath }) {
     }
   }
 
-  if ((!result.postInIndex || !result.postFilePublic) && String(env.GITHUB_TOKEN || "").trim()) {
-    try {
-      const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
-      const repo = env.GITHUB_REPO || DEFAULT_REPO;
-      const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
-      if (!result.postInIndex) {
-        const indexFile = await githubGet(env, owner, repo, `${postsDir}/posts-index.json`, branch);
-        if (indexFile?.content) {
-          const indexData = JSON.parse(base64ToUtf8(indexFile.content));
-          result.indexGenerated = indexData.generated || result.indexGenerated;
-          result.indexCount = Number(indexData.count ?? (indexData.files?.length ?? 0)) || result.indexCount;
-          const files = listPostFiles(indexData.files || []);
-          result.postInIndex = files.some((file) => file.name === filename)
-            || (postId && files.some((file) => String(file.name).replace(/\.md$/, "") === String(postId)));
-          if (result.postInIndex) result.githubIndexVerified = true;
-        }
-      }
-      if (!result.postFilePublic && postPath) {
-        const ghPost = await githubGet(env, owner, repo, postPath, branch);
-        if (ghPost?.content) {
-          result.postFilePublic = true;
-          result.githubPostVerified = true;
-        }
-      }
-    } catch (error) {
-      result.githubVerifyError = error.message || String(error);
-    }
-  }
-
   return result;
 }
 
 async function verifyPostLiveAvailability(env, opts, { schedule = "full" } = {}) {
-  const delays =
-    schedule === "quick"
-      ? LIVE_CHECK_SCHEDULE_QUICK_MS
-      : schedule === "cron"
-        ? LIVE_CHECK_SCHEDULE_CRON_MS
-        : LIVE_CHECK_SCHEDULE_FULL_MS;
+  const delays = schedule === "quick" ? LIVE_CHECK_SCHEDULE_QUICK_MS : LIVE_CHECK_SCHEDULE_FULL_MS;
   let lastResult = null;
   let elapsed = 0;
 
@@ -2739,95 +2683,24 @@ async function verifyPostLiveAvailability(env, opts, { schedule = "full" } = {})
   return lastResult;
 }
 
-
-async function claimPendingPushSend(env, postId) {
-  const key = String(postId || "").trim();
-  if (!key) return { claimed: false, reason: "postId fehlt" };
-
-  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
-  const repo = env.GITHUB_REPO || DEFAULT_REPO;
-  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
-  const path = pendingPushesPath(env);
-  let lastError = null;
-
-  for (let attempt = 1; attempt <= 4; attempt++) {
-    try {
-      const registry = await readPendingPushesRegistry(env);
-      const current = registry.pushes?.[key];
-      if (!current) return { claimed: false, reason: "Pending-Eintrag fehlt" };
-      if (current.status === "sent") {
-        return { claimed: false, skipped: true, reason: "Push wurde bereits gesendet." };
-      }
-      if (current.status === "sending") {
-        const started = Date.parse(current.sendingAt || "");
-        if (Number.isFinite(started) && Date.now() - started < 10 * 60 * 1000) {
-          return { claimed: false, skipped: true, reason: "Push wird bereits gesendet." };
-        }
-      }
-
-      const pushes = { ...(registry.pushes || {}) };
-      pushes[key] = {
-        ...current,
-        postId: key,
-        status: "sending",
-        sendingAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-      };
-      const payload = { version: 1, generated: new Date().toISOString(), pushes };
-      await githubPut(
-        env,
-        owner,
-        repo,
-        path,
-        `${JSON.stringify(payload, null, 2)}\n`,
-        `Claim pending push ${key}`,
-        branch,
-        registry.sha
-      );
-      return { claimed: true };
-    } catch (error) {
-      lastError = error;
-      const status = Number(error?.status || 0);
-      if (status !== 409 && status !== 422) throw error;
-      await sleep(250 * attempt);
-    }
-  }
-
-  throw lastError || httpError(`Push-Claim für ${key} fehlgeschlagen`, 500);
-}
-
 async function processPendingPushUntilLive(env, record, options = {}) {
   const postId = String(record?.postId || "").trim();
   if (!postId) return { sent: false, reason: "postId fehlt" };
-  const schedule =
-    options.schedule === "quick" || options.singleCheck
-      ? "quick"
-      : options.schedule === "cron"
-        ? "cron"
-        : "full";
 
   const registry = await readPendingPushesRegistry(env);
-  assertPendingPushesRegistryReadable(registry);
-  const existing = registry.pushes?.[postId];
-  if (existing?.status === "sent") {
-    return { sent: true, skipped: true, reason: "Push wurde bereits gesendet.", liveCheck: existing.liveCheck || null };
-  }
-  if (existing?.status === "sending") {
-    const started = Date.parse(existing.sendingAt || "");
-    if (Number.isFinite(started) && Date.now() - started < 10 * 60 * 1000) {
-      return { sent: false, skipped: true, reason: "Push wird bereits gesendet.", liveCheck: existing.liveCheck || null };
-    }
+  if (registry.pushes?.[postId]?.status === "sent") {
+    return { sent: true, skipped: true, reason: "Push wurde bereits gesendet." };
   }
 
   const liveCheck = await verifyPostLiveAvailability(
     env,
     {
-      filename: record.filename || existing?.filename,
+      filename: record.filename,
       postId,
-      postPath: record.postPath || existing?.postPath,
+      postPath: record.postPath,
       githubSteps: { postCreated: true, indexUpdated: true }
     },
-    { schedule }
+    { schedule: options.schedule || "full" }
   );
 
   await writePendingPushStatus(env, postId, {
@@ -2841,33 +2714,11 @@ async function processPendingPushUntilLive(env, record, options = {}) {
     return { sent: false, pending: true, waitingForLive: true, liveCheck, reason: liveCheck.diagnosis };
   }
 
-  const freshRegistry = await readPendingPushesRegistry(env);
-  const freshExisting = freshRegistry.pushes?.[postId];
-  if (freshExisting?.status === "sent" && !options.forceResend) {
-    return {
-      sent: true,
-      skipped: true,
-      reason: "Push wurde bereits gesendet.",
-      liveCheck: freshExisting.liveCheck || existing?.liveCheck || liveCheck
-    };
-  }
-
-  const claim = await claimPendingPushSend(env, postId);
-  if (!claim.claimed) {
-    const alreadySent = Boolean(claim.skipped && /bereits gesendet/i.test(String(claim.reason || "")));
-    return {
-      sent: alreadySent,
-      skipped: true,
-      reason: claim.reason || "Push-Claim abgelehnt",
-      liveCheck
-    };
-  }
-
-  const push = await sendNewPostPush(env, {
-    postTitle: record.postTitle || existing?.postTitle,
+  const push = await sendNewPostPushShared(env, {
+    postTitle: record.postTitle,
     postId,
-    filename: record.filename || existing?.filename,
-    publishedAt: record.publishedAt || existing?.publishedAt,
+    filename: record.filename,
+    publishedAt: record.publishedAt,
     cacheVersion: Date.now()
   });
 
@@ -2896,20 +2747,24 @@ async function processAllPendingPushes(env) {
     const aTime = Date.parse(a.updatedAt || a.createdAt || a.publishedAt || "");
     const bTime = Date.parse(b.updatedAt || b.createdAt || b.publishedAt || "");
     return (Number.isFinite(bTime) ? bTime : 0) - (Number.isFinite(aTime) ? aTime : 0);
-  }).slice(0, Number(env.PENDING_PUSH_CRON_BATCH_SIZE || 5));
-  const results = [];
-  for (const record of pending) {
-    try {
-      const handler = record?.kind === "library"
-        ? () => processPendingLibraryPushUntilLive(env, record, { extendedWait: false })
-        : () => processPendingPushUntilLive(env, record, { schedule: "cron" });
-      results.push(await handler());
-    } catch (error) {
-      console.error(`Pending push failed for ${record?.postId || record?.publicationId || "?"}:`, error?.message || error);
-      results.push({ sent: false, reason: error?.message || String(error) });
-    }
+  });
+  const postBatchSize = Number(env.PENDING_POST_PUSH_CRON_BATCH_SIZE || env.PENDING_PUSH_CRON_BATCH_SIZE || 5);
+  const libraryBatchSize = Number(env.PENDING_LIBRARY_PUSH_CRON_BATCH_SIZE || env.PENDING_PUSH_CRON_BATCH_SIZE || 5);
+  const pendingPosts = pending.filter((item) => item?.kind !== "library").slice(0, postBatchSize);
+  const pendingLibraries = pending.filter((item) => item?.kind === "library").slice(0, libraryBatchSize);
+  const results = { posts: [], library: [] };
+  for (const record of pendingPosts) {
+    results.posts.push(await processPendingPushUntilLive(env, record, { schedule: "quick" }));
   }
-  return { processed: pending.length, results };
+  for (const record of pendingLibraries) {
+    results.library.push(await processPendingLibraryPushUntilLive(env, record, { extendedWait: false }));
+  }
+  return {
+    processed: pendingPosts.length + pendingLibraries.length,
+    postsProcessed: pendingPosts.length,
+    libraryProcessed: pendingLibraries.length,
+    results
+  };
 }
 
 async function processPendingLibraryPushUntilLive(env, record, options = {}) {
@@ -2922,6 +2777,14 @@ async function processPendingLibraryPushUntilLive(env, record, options = {}) {
   }
 
   const current = registry.pushes?.[key] || record;
+  if (isActiveLibraryPushProcessing(current)) {
+    return {
+      sent: false,
+      pending: true,
+      processing: true,
+      reason: "Push wird bereits verarbeitet."
+    };
+  }
   if (!isPostPushApproved(current)) {
     return {
       sent: false,
@@ -2931,10 +2794,27 @@ async function processPendingLibraryPushUntilLive(env, record, options = {}) {
     };
   }
 
+  const claim = await claimLibraryPushProcessing(env, key, { kind: "library", lastError: "" });
+  if (!claim.ok) {
+    if (claim.current?.status === "sent") {
+      return { sent: true, skipped: true, reason: "Push wurde bereits gesendet." };
+    }
+    return {
+      sent: false,
+      pending: true,
+      processing: true,
+      reason: "Push wird bereits verarbeitet."
+    };
+  }
+  const processingToken = claim.processingToken;
+
   const liveCheck = await verifyLibraryLiveAvailabilityWithRetry(env, current, {
     schedule: options.extendedWait ? "full" : "quick"
   });
   await writePendingPushStatus(env, key, {
+    status: "processing",
+    processingToken,
+    processingStartedAt: claim.current?.processingStartedAt || new Date().toISOString(),
     lastCheckAt: new Date().toISOString(),
     liveCheck,
     attempts: liveCheck.attempt,
@@ -2942,6 +2822,11 @@ async function processPendingLibraryPushUntilLive(env, record, options = {}) {
   });
 
   if (!liveCheck.ok) {
+    await writePendingPushStatus(env, key, {
+      status: "pending",
+      processingToken: null,
+      processingStartedAt: null
+    });
     return { sent: false, pending: true, waitingForLive: true, liveCheck, reason: liveCheck.diagnosis };
   }
 
@@ -2949,17 +2834,35 @@ async function processPendingLibraryPushUntilLive(env, record, options = {}) {
     await sleep(LIBRARY_PUSH_DELAY_AFTER_LIVE_MS);
   }
 
+  const ownership = await ensureLibraryPushProcessingOwner(env, key, processingToken);
+  if (!ownership.owned) {
+    if (ownership.sent) {
+      return { sent: true, skipped: true, reason: "Push wurde bereits gesendet.", liveCheck };
+    }
+    return {
+      sent: false,
+      pending: true,
+      processing: true,
+      reason: "Push wird bereits verarbeitet.",
+      liveCheck
+    };
+  }
+
   const push = await sendLibraryPublicationPush(env, current);
   if (push.sent) {
     await writePendingPushStatus(env, key, {
       status: "sent",
       sentAt: new Date().toISOString(),
+      processingToken: null,
+      processingStartedAt: null,
       lastError: "",
       pushResult: { target: push.target, targetUrl: push.targetUrl }
     });
   } else {
     await writePendingPushStatus(env, key, {
       status: "failed",
+      processingToken: null,
+      processingStartedAt: null,
       lastError: push.reason || "OneSignal Push fehlgeschlagen"
     });
   }
@@ -3031,7 +2934,6 @@ async function retryPendingPostPush(env, input, ctx) {
   if (!postId || !filename) throw httpError("postId und filename fehlen", 400);
 
   const registry = await readPendingPushesRegistry(env);
-  assertPendingPushesRegistryReadable(registry);
   const existing = registry.pushes?.[postId];
   if (existing?.status === "sent" && !input.forceResend) {
     return {
@@ -3039,50 +2941,32 @@ async function retryPendingPostPush(env, input, ctx) {
       sent: true,
       skipped: true,
       reason: "Push wurde bereits gesendet.",
-      liveCheck: existing.liveCheck || { ok: true },
-      push: {
-        sent: true,
-        skipped: true,
-        reason: "Push wurde bereits gesendet.",
-        targetUrl: existing.pushResult?.targetUrl || buildPostPushUrl(env, postId, Date.now())
-      }
+      liveCheck: existing.liveCheck || null,
+      push: { sent: true, targetUrl: buildPostPushUrl(env, postId, Date.now()) }
     };
   }
 
   const record = {
     postId,
-    filename: existing?.filename || filename,
+    filename,
     postTitle: existing?.postTitle || postTitle,
     publishedAt: existing?.publishedAt || publishedAt,
     postPath: existing?.postPath || postPath,
-    status: "pending",
-    pushApproved: true,
-    pushApprovedAt: new Date().toISOString()
+    status: "pending"
   };
-
-  if (existing?.status !== "pending" && existing?.status !== "sending" && existing?.status !== "sent") {
-    await writePendingPushStatus(env, postId, record);
-  } else if (existing?.status !== "sent") {
-    await writePendingPushStatus(env, postId, {
-      pushApproved: true,
-      pushApprovedAt: record.pushApprovedAt
-    });
-  }
-
-  // Admin-Retry: längere Live-Prüfung (cron), danach volle Hintergrund-Wartezeit
-  const push = await processPendingPushUntilLive(env, { ...existing, ...record }, { schedule: "cron", singleCheck: false });
+  await writePendingPushStatus(env, postId, record);
+  const push = await processPendingPushUntilLive(env, record);
   if (ctx && push?.pending) {
-    ctx.waitUntil(processPendingPushUntilLive(env, { ...existing, ...record }, { schedule: "full" }));
+    ctx.waitUntil(processPendingPushUntilLive(env, record));
   }
   return {
     ok: true,
     postId,
-    filename: record.filename,
+    filename,
     liveCheck: push.liveCheck || null,
     push
   };
 }
-
 function newsPushBody(text) {
   const raw = String(text || "").replace(/\s+/g, " ").trim();
   if (!raw) return "Neue Meldung auf DAR AL TAWḤID.";
