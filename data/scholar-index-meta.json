@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generatedAt": "2026-08-06T20:25:35.893Z",
+  "generatedAt": "2026-08-06T21:06:41.831Z",
   "groups": {
     "prophet": {
       "filterLabel": "Prophet",
@@ -240,10 +240,36 @@
       "bornHijri": 88,
       "diedHijri": 157,
       "eraLabel": "Atbāʿ · Syrien · Fiqh",
-      "bio": "Imām von Syrien; früher Madhhab, der später zurückging. Bedeutender Faqīh und Muḥaddith.",
-      "teachers": [],
-      "students": [],
-      "works": []
+      "bio": "Imām von Syrien; früher Madhhab. Bedeutender Faqīh und Muḥaddith der Küstenregion (Beirut).",
+      "teachers": [
+        {
+          "id": "s:atababirabah",
+          "name": "ʿAṭāʾ ibn Abī Rabāḥ"
+        },
+        {
+          "id": "s:qatadah",
+          "name": "Qatādah"
+        },
+        {
+          "id": "s:muhammadibnshihabazzuhri",
+          "name": "az-Zuhrī"
+        }
+      ],
+      "students": [
+        {
+          "id": "s:abdullahibnalmubarak",
+          "name": "ʿAbdullāh ibn al-Mubārak"
+        },
+        {
+          "id": "s:walidibnmuslim",
+          "name": "al-Walīd ibn Muslim"
+        }
+      ],
+      "works": [
+        {
+          "title": "Fiqh- und Ḥadīth-Überlieferungen (über Schüler)"
+        }
+      ]
     },
     "s:abdarrahmanibnmahdi": {
       "displayName": "ʿAbd ar-Raḥmān ibn Mahdī",
@@ -367,9 +393,27 @@
       "bornHijri": null,
       "diedHijri": 187,
       "eraLabel": "Atbāʿ · Makkah · Zuhd",
-      "bio": "Bekannt für Tawbah und Askese; Muḥaddith und Lehrer in Makkah.",
-      "teachers": [],
-      "students": [],
+      "bio": "al-Fuḍayl ibn ʿIyāḍ. Bekannt für Askese und Aufrichtigkeit; Muḥaddith und Mahner.",
+      "teachers": [
+        {
+          "id": "s:mansur",
+          "name": "Manṣūr ibn al-Muʿtamir"
+        },
+        {
+          "id": "s:alamash",
+          "name": "al-Aʿmash"
+        }
+      ],
+      "students": [
+        {
+          "id": "s:abdullahibnalmubarak",
+          "name": "ʿAbdullāh ibn al-Mubārak"
+        },
+        {
+          "id": "sufyan-ibn-uyaynah",
+          "name": "Sufyān ibn ʿUyaynah"
+        }
+      ],
       "works": []
     },
     "al-lalakai": {
@@ -589,10 +633,10 @@
         }
       ]
     },
-    "s:sufyanaththawri": {
+    "sufyan-ath-thauri": {
       "displayName": "Sufyān ath-Thawrī",
       "primaryGroup": "tabiun",
-      "generationGroup": "tabiun",
+      "generationGroup": "atba",
       "generationOrder": 42,
       "roles": [
         "tabi",
@@ -600,7 +644,8 @@
         "muhaddith"
       ],
       "aliases": [
-        "Sufyan al-Thawri"
+        "Sufyan al-Thawri",
+        "Sufyān ath-Thawrī"
       ],
       "monogram": "",
       "kuniyah": "",
@@ -608,21 +653,61 @@
       "bornHijri": 97,
       "diedHijri": 161,
       "eraLabel": "Atbāʿ / frühe Imāme · Kūfah",
-      "bio": "Imām von Kūfah; Muḥaddith und Faqīh. Bekannt für Askese und Standhaftigkeit.",
-      "teachers": [],
+      "bio": "Imām von Kūfah; Amīr al-Muʾminīn im Ḥadīth; Faqīh und Asket. Lehrer und Schüler zahlreicher Imāme der frühen Generation.",
+      "teachers": [
+        {
+          "id": "s:saidibnmasruq",
+          "name": "Saʿīd ibn Masrūq ath-Thawrī (Vater)"
+        },
+        {
+          "id": "s:alamash",
+          "name": "al-Aʿmash"
+        },
+        {
+          "id": "s:hamzahazzayyat",
+          "name": "Ḥamzah az-Zayyāt"
+        },
+        {
+          "id": "s:atababirabah",
+          "name": "ʿAṭāʾ ibn Abī Rabāḥ"
+        },
+        {
+          "id": "s:amribndinar",
+          "name": "ʿAmr ibn Dīnār"
+        }
+      ],
       "students": [
         {
           "id": "s:abdullahibnalmubarak",
           "name": "ʿAbdullāh ibn al-Mubārak"
         },
         {
-          "id": "yahya",
+          "id": "s:yahyaibnsaidalqattan",
           "name": "Yaḥyā ibn Saʿīd al-Qaṭṭān"
+        },
+        {
+          "id": "s:wakibnaljarrah",
+          "name": "Wakīʿ ibn al-Jarrāḥ"
+        },
+        {
+          "id": "s:abdarrahmanibnmahdi",
+          "name": "ʿAbd ar-Raḥmān ibn Mahdī"
+        },
+        {
+          "id": "sufyan-ibn-uyaynah",
+          "name": "Sufyān ibn ʿUyaynah"
+        },
+        {
+          "id": "s:shubah",
+          "name": "Shuʿbah ibn al-Ḥajjāj"
         }
       ],
       "works": [
         {
-          "title": "al-Jāmiʿ (Ḥadīth-Sammlung, überliefert)"
+          "title": "al-Jāmiʿ (Ḥadīth / Fiqh, überliefert)"
+        },
+        {
+          "title": "Tafsīr (Fragmente überliefert)"
         }
       ]
     },
@@ -721,14 +806,46 @@
       ],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "",
-      "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
-      "teachers": [],
-      "students": [],
-      "works": []
+      "lifespanLabel": "157–224 H · ca. 774–838 n. Chr.",
+      "bornHijri": 157,
+      "diedHijri": 224,
+      "eraLabel": "Frühe Imāme · Sprache & Ḥadīth",
+      "bio": "Abū ʿUbayd al-Qāsim ibn Sallām. Imām in Sprache, Fiqh und Ḥadīth; Verfasser klassischer Werke zu Gharīb und Amwāl.",
+      "teachers": [
+        {
+          "id": "s:ismailibnjafar",
+          "name": "Ismāʿīl ibn Jaʿfar"
+        },
+        {
+          "id": "sufyan-ibn-uyaynah",
+          "name": "Sufyān ibn ʿUyaynah"
+        },
+        {
+          "id": "s:yahyaibnsaidalqattan",
+          "name": "Yaḥyā ibn Saʿīd al-Qaṭṭān"
+        }
+      ],
+      "students": [
+        {
+          "id": "ahmad-ibn-hanbal",
+          "name": "Aḥmad ibn Ḥanbal"
+        },
+        {
+          "id": "s:aliibnalmadini",
+          "name": "ʿAlī ibn al-Madīnī"
+        }
+      ],
+      "works": [
+        {
+          "title": "Gharīb al-Ḥadīth"
+        },
+        {
+          "title": "Kitāb al-Amwāl"
+        },
+        {
+          "title": "Faḍāʾil al-Qurʾān"
+        }
+      ]
     },
     "al-hasan-al-basri": {
       "displayName": "al-Ḥasan al-Baṣrī",
@@ -825,22 +942,39 @@
       "lifespanLabel": "158–233 H · ca. 775–847 n. Chr.",
       "bornHijri": 158,
       "diedHijri": 233,
-      "eraLabel": "Imām · Baghdād · Jarḥ wa-Taʿdīl",
-      "bio": "Imām der Ḥadīth-Kritik; enger Gefährte von Aḥmad ibn Ḥanbal.",
-      "teachers": [],
+      "eraLabel": "Frühe Imāme · Baghdād · Rijāl",
+      "bio": "Yaḥyā ibn Maʿīn. Imām der Rijāl-Kritik; enger Gefährte von Aḥmad ibn Ḥanbal.",
+      "teachers": [
+        {
+          "id": "s:abdullahibnalmubarak",
+          "name": "ʿAbdullāh ibn al-Mubārak"
+        },
+        {
+          "id": "sufyan-ibn-uyaynah",
+          "name": "Sufyān ibn ʿUyaynah"
+        },
+        {
+          "id": "s:wakibnaljarrah",
+          "name": "Wakīʿ"
+        }
+      ],
       "students": [
         {
           "id": "al-bukhari",
           "name": "al-Bukhārī"
         },
         {
-          "id": "ahmad-ibn-hanbal",
-          "name": "Aḥmad ibn Ḥanbal"
+          "id": "s:muslim",
+          "name": "Muslim"
+        },
+        {
+          "id": "s:abudawud",
+          "name": "Abū Dāwūd"
         }
       ],
       "works": [
         {
-          "title": "at-Tārīkh (Yaḥyā ibn Maʿīn)"
+          "title": "at-Tārīkh / Rijāl-Aussagen (überliefert)"
         }
       ]
     },
@@ -1149,13 +1283,31 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "",
+      "lifespanLabel": "gest. 126 H · ca. 743 n. Chr.",
       "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
-      "teachers": [],
-      "students": [],
+      "diedHijri": 126,
+      "eraLabel": "Tābiʿī · Makkah · Ḥadīth",
+      "bio": "ʿAmr ibn Dīnār. Vertrauenswürdiger Tābiʿī und Muḥaddith von Makkah.",
+      "teachers": [
+        {
+          "id": "ibn-abbas",
+          "name": "Ibn ʿAbbās"
+        },
+        {
+          "id": "s:jabirbabdillah",
+          "name": "Jābir ibn ʿAbdillāh"
+        }
+      ],
+      "students": [
+        {
+          "id": "sufyan-ibn-uyaynah",
+          "name": "Sufyān ibn ʿUyaynah"
+        },
+        {
+          "id": "sufyan-ath-thauri",
+          "name": "Sufyān ath-Thawrī"
+        }
+      ],
       "works": []
     },
     "ibn-abd-al-barr": {
@@ -1264,14 +1416,18 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "",
+      "lifespanLabel": "gest. 212 H · ca. 827 n. Chr.",
       "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
+      "diedHijri": 212,
+      "eraLabel": "Frühe Imāme · Ḥadīth",
+      "bio": "Asad ibn Mūsā („Asad as-Sunnah“). Früher Sammler; bekannt für Kitāb az-Zuhd.",
       "teachers": [],
       "students": [],
-      "works": []
+      "works": [
+        {
+          "title": "Kitāb az-Zuhd"
+        }
+      ]
     },
     "s:yazidibnharun": {
       "displayName": "Yazīd ibn Hārūn",
@@ -1282,13 +1438,31 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "",
-      "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
-      "teachers": [],
-      "students": [],
+      "lifespanLabel": "118–206 H · ca. 736–821 n. Chr.",
+      "bornHijri": 118,
+      "diedHijri": 206,
+      "eraLabel": "Atbāʿ · Wāsiṭ · Ḥadīth",
+      "bio": "Yazīd ibn Hārūn. Vertrauenswürdiger Ḥāfiẓ; Lehrer vieler späterer Imāme.",
+      "teachers": [
+        {
+          "id": "s:hammadibnsalamah",
+          "name": "Ḥammād ibn Salamah"
+        },
+        {
+          "id": "s:said",
+          "name": "Saʿīd ibn Abī ʿArūbah"
+        }
+      ],
+      "students": [
+        {
+          "id": "ahmad-ibn-hanbal",
+          "name": "Aḥmad ibn Ḥanbal"
+        },
+        {
+          "id": "s:yahyabmain",
+          "name": "Yaḥyā ibn Maʿīn"
+        }
+      ],
       "works": []
     },
     "s:abujafarmuhammadibnuthmanibnabishaybah": {
@@ -1338,14 +1512,28 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "",
-      "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
-      "teachers": [],
-      "students": [],
-      "works": []
+      "lifespanLabel": "175–264 H · ca. 791–878 n. Chr.",
+      "bornHijri": 175,
+      "diedHijri": 264,
+      "eraLabel": "Frühe Imāme · Shāfiʿī · Ägypten",
+      "bio": "Ismāʿīl ibn Yaḥyā al-Muzanī. Herausragender Schüler ash-Shāfiʿīs; Verfasser des Mukhtaṣar.",
+      "teachers": [
+        {
+          "id": "ash-shafii",
+          "name": "ash-Shāfiʿī"
+        }
+      ],
+      "students": [
+        {
+          "id": "s:attahawi",
+          "name": "aṭ-Ṭaḥāwī"
+        }
+      ],
+      "works": [
+        {
+          "title": "Mukhtaṣar al-Muzanī"
+        }
+      ]
     },
     "ibn-qudamah": {
       "displayName": "Ibn Qudāmah",
@@ -1411,12 +1599,21 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "",
+      "lifespanLabel": "gest. 127 H · ca. 745 n. Chr.",
       "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
-      "teachers": [],
+      "diedHijri": 127,
+      "eraLabel": "Tābiʿī · Baṣrah · Zuhd",
+      "bio": "Mālik ibn Dīnār. Tābiʿī, bekannt für Askese und Ermahnung; Überlieferer.",
+      "teachers": [
+        {
+          "id": "anas-b-malik",
+          "name": "Anas ibn Mālik"
+        },
+        {
+          "id": "al-hasan-al-basri",
+          "name": "al-Ḥasan al-Baṣrī"
+        }
+      ],
       "students": [],
       "works": []
     },
@@ -1431,13 +1628,27 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "ca. 200–264 H",
-      "bornHijri": null,
+      "lifespanLabel": "200–264 H · ca. 815–878 n. Chr.",
+      "bornHijri": 200,
       "diedHijri": 264,
-      "eraLabel": "Imām · Ḥadīth-Kritik",
-      "bio": "Abū Zurʿah ar-Rāzī.",
-      "teachers": [],
-      "students": [],
+      "eraLabel": "Frühe Imāme · Rayy · Ḥadīth",
+      "bio": "Abū Zurʿah ar-Rāzī. Großer Ḥāfiẓ und Rijāl-Kenner; Gefährte von Abū Ḥātim.",
+      "teachers": [
+        {
+          "id": "ahmad-ibn-hanbal",
+          "name": "Aḥmad ibn Ḥanbal"
+        },
+        {
+          "id": "s:yahyabmain",
+          "name": "Yaḥyā ibn Maʿīn"
+        }
+      ],
+      "students": [
+        {
+          "id": "s:ibnabihati",
+          "name": "Ibn Abī Ḥātim"
+        }
+      ],
       "works": []
     },
     "s:ibnbattahalukbari": {
@@ -1503,9 +1714,14 @@
       "lifespanLabel": "",
       "bornHijri": null,
       "diedHijri": null,
-      "eraLabel": "",
+      "eraLabel": "Ṣaḥābī",
       "bio": "",
-      "teachers": [],
+      "teachers": [
+        {
+          "id": "__prophet__",
+          "name": "Prophet Muhammad ﷺ"
+        }
+      ],
       "students": [],
       "works": []
     },
@@ -1608,9 +1824,14 @@
       "lifespanLabel": "",
       "bornHijri": null,
       "diedHijri": null,
-      "eraLabel": "",
+      "eraLabel": "Ṣaḥābī",
       "bio": "",
-      "teachers": [],
+      "teachers": [
+        {
+          "id": "__prophet__",
+          "name": "Prophet Muhammad ﷺ"
+        }
+      ],
       "students": [],
       "works": []
     },
@@ -1734,12 +1955,17 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "",
+      "lifespanLabel": "gest. ca. 55 H · ca. 675 n. Chr.",
       "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
-      "teachers": [],
+      "diedHijri": 55,
+      "eraLabel": "Ṣaḥābī · Madīnah",
+      "bio": "Saʿd ibn Abī Waqqāṣ. Früher Gefährte; einer der Zehn, denen das Paradies verheißen wurde; Heerführer von al-Qādisiyyah.",
+      "teachers": [
+        {
+          "id": "__prophet__",
+          "name": "Prophet Muhammad ﷺ"
+        }
+      ],
       "students": [],
       "works": []
     },
@@ -1837,9 +2063,14 @@
       "lifespanLabel": "",
       "bornHijri": null,
       "diedHijri": null,
-      "eraLabel": "",
+      "eraLabel": "Ṣaḥābī",
       "bio": "",
-      "teachers": [],
+      "teachers": [
+        {
+          "id": "__prophet__",
+          "name": "Prophet Muhammad ﷺ"
+        }
+      ],
       "students": [],
       "works": []
     },
@@ -1882,9 +2113,18 @@
       "lifespanLabel": "gest. 117 H · ca. 735 n. Chr.",
       "bornHijri": null,
       "diedHijri": 117,
-      "eraLabel": "Tābiʿī · al-Jazīrah",
-      "bio": "Tābiʿī und Gelehrter; Richter und Vertrauter von ʿUmar ibn ʿAbd al-ʿAzīz.",
-      "teachers": [],
+      "eraLabel": "Tābiʿī · Syrien / Jazīrah",
+      "bio": "Maymūn ibn Mihrān. Vertrauenswürdiger Tābiʿī; Faqīh und Muḥaddith.",
+      "teachers": [
+        {
+          "id": "s:aishah",
+          "name": "ʿĀʾishah"
+        },
+        {
+          "id": "s:abdullahibnumar",
+          "name": "Ibn ʿUmar"
+        }
+      ],
       "students": [],
       "works": []
     },
@@ -1943,12 +2183,21 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "",
+      "lifespanLabel": "gest. ca. 100–110 H",
       "bornHijri": null,
       "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
-      "teachers": [],
+      "eraLabel": "Tābiʿī · Baṣrah",
+      "bio": "Abū Mijlaz Lāḥiq ibn Ḥumayd. Tābiʿī und Überlieferer aus Baṣrah.",
+      "teachers": [
+        {
+          "id": "s:abdullahibnumar",
+          "name": "Ibn ʿUmar"
+        },
+        {
+          "id": "s:imranbhusayn",
+          "name": "ʿImrān ibn Ḥuṣayn"
+        }
+      ],
       "students": [],
       "works": []
     },
@@ -1966,27 +2215,14 @@
       "lifespanLabel": "",
       "bornHijri": null,
       "diedHijri": null,
-      "eraLabel": "",
+      "eraLabel": "Ṣaḥābī",
       "bio": "",
-      "teachers": [],
-      "students": [],
-      "works": []
-    },
-    "s:quran": {
-      "displayName": "Qurʾān",
-      "primaryGroup": "weitere",
-      "generationGroup": "weitere",
-      "generationOrder": 9000,
-      "roles": [],
-      "aliases": [],
-      "monogram": "",
-      "kuniyah": "",
-      "lifespanLabel": "",
-      "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
-      "teachers": [],
+      "teachers": [
+        {
+          "id": "__prophet__",
+          "name": "Prophet Muhammad ﷺ"
+        }
+      ],
       "students": [],
       "works": []
     },
@@ -2002,14 +2238,36 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "gest. 127 H · ca. 744 n. Chr.",
+      "lifespanLabel": "gest. 127 H · ca. 745 n. Chr.",
       "bornHijri": null,
       "diedHijri": 127,
       "eraLabel": "Tābiʿī · Kūfah · Tafsīr",
-      "bio": "Ismāʿīl as-Suddī; früher Tafsīr-Überlieferer aus Kūfah.",
-      "teachers": [],
-      "students": [],
-      "works": []
+      "bio": "Ismāʿīl as-Suddī. Tābiʿī mit bekannten Tafsīr-Überlieferungen (mit kritischer Bewertung einzelner Wege).",
+      "teachers": [
+        {
+          "id": "anas-b-malik",
+          "name": "Anas ibn Mālik"
+        },
+        {
+          "id": "ibn-abbas",
+          "name": "Ibn ʿAbbās"
+        }
+      ],
+      "students": [
+        {
+          "id": "sufyan-ath-thauri",
+          "name": "Sufyān ath-Thawrī"
+        },
+        {
+          "id": "s:shubah",
+          "name": "Shuʿbah"
+        }
+      ],
+      "works": [
+        {
+          "title": "Tafsīr as-Suddī (überliefert)"
+        }
+      ]
     },
     "s:tawus": {
       "displayName": "Ṭāwūs",
@@ -2036,24 +2294,6 @@
       "students": [],
       "works": []
     },
-    "s:ahlussunnah": {
-      "displayName": "Ahlus-Sunnah",
-      "primaryGroup": "weitere",
-      "generationGroup": "weitere",
-      "generationOrder": 9001,
-      "roles": [],
-      "aliases": [],
-      "monogram": "",
-      "kuniyah": "",
-      "lifespanLabel": "",
-      "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
-      "teachers": [],
-      "students": [],
-      "works": []
-    },
     "s:ibnqutaybah": {
       "displayName": "Ibn Qutaybah",
       "primaryGroup": "muhaddith",
@@ -2065,14 +2305,29 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "",
-      "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
-      "teachers": [],
+      "lifespanLabel": "213–276 H · ca. 828–889 n. Chr.",
+      "bornHijri": 213,
+      "diedHijri": 276,
+      "eraLabel": "Frühe Imāme · Sprache & Ḥadīth",
+      "bio": "Ibn Qutaybah. Literat und Gelehrter; Werke zu Ḥadīth, Sprache und Adab.",
+      "teachers": [
+        {
+          "id": "s:ishaqibnarahawayh",
+          "name": "Isḥāq ibn Rāhawayh"
+        }
+      ],
       "students": [],
-      "works": []
+      "works": [
+        {
+          "title": "Taʾwīl Mukhtalif al-Ḥadīth"
+        },
+        {
+          "title": "ʿUyūn al-Akhbār"
+        },
+        {
+          "title": "Adab al-Kātib"
+        }
+      ]
     },
     "s:assawkani": {
       "displayName": "aš-Šawkānī",
@@ -2174,14 +2429,31 @@
       "bornHijri": 21,
       "diedHijri": 104,
       "eraLabel": "Tābiʿī · Makkah · Tafsīr",
-      "bio": "Schüler von Ibn ʿAbbās; eine der wichtigsten frühen Tafsīr-Autoritäten.",
+      "bio": "Mujāhid ibn Jabr. Führender Tābiʿī im Tafsīr; Schüler von Ibn ʿAbbās.",
       "teachers": [
         {
           "id": "ibn-abbas",
           "name": "Ibn ʿAbbās"
+        },
+        {
+          "id": "s:aishah",
+          "name": "ʿĀʾishah"
         }
       ],
-      "students": [],
+      "students": [
+        {
+          "id": "s:qatadah",
+          "name": "Qatādah"
+        },
+        {
+          "id": "s:ibnjurayj",
+          "name": "Ibn Jurayj"
+        },
+        {
+          "id": "s:alamash",
+          "name": "al-Aʿmash"
+        }
+      ],
       "works": [
         {
           "title": "Tafsīr Mujāhid (überliefert)"
@@ -2225,14 +2497,26 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "",
-      "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
-      "teachers": [],
+      "lifespanLabel": "708–763 H · ca. 1308–1362 n. Chr.",
+      "bornHijri": 708,
+      "diedHijri": 763,
+      "eraLabel": "Spätere Gelehrte · Ḥanbalī · Damaskus",
+      "bio": "Ibn Mufliḥ. Ḥanbalī-Faqīh; Verfasser von al-Furūʿ und Adab-Werken.",
+      "teachers": [
+        {
+          "id": "ibn-taymiyyah",
+          "name": "Ibn Taymiyyah"
+        }
+      ],
       "students": [],
-      "works": []
+      "works": [
+        {
+          "title": "al-Furūʿ"
+        },
+        {
+          "title": "al-Ādāb ash-Sharʿiyyah"
+        }
+      ]
     },
     "adh-dhahabi": {
       "displayName": "adh-Dhahabī",
@@ -2365,9 +2649,14 @@
       "lifespanLabel": "",
       "bornHijri": null,
       "diedHijri": null,
-      "eraLabel": "",
+      "eraLabel": "Ṣaḥābī",
       "bio": "",
-      "teachers": [],
+      "teachers": [
+        {
+          "id": "__prophet__",
+          "name": "Prophet Muhammad ﷺ"
+        }
+      ],
       "students": [],
       "works": []
     },
@@ -2425,9 +2714,14 @@
       "lifespanLabel": "",
       "bornHijri": null,
       "diedHijri": null,
-      "eraLabel": "",
+      "eraLabel": "Ṣaḥābī",
       "bio": "",
-      "teachers": [],
+      "teachers": [
+        {
+          "id": "__prophet__",
+          "name": "Prophet Muhammad ﷺ"
+        }
+      ],
       "students": [],
       "works": []
     },
@@ -2446,9 +2740,27 @@
       "bornHijri": null,
       "diedHijri": 187,
       "eraLabel": "Atbāʿ · Makkah · Zuhd",
-      "bio": "al-Fuḍayl ibn ʿIyāḍ – Asket und Muḥaddith.",
-      "teachers": [],
-      "students": [],
+      "bio": "al-Fuḍayl ibn ʿIyāḍ. Bekannt für Askese und Aufrichtigkeit; Muḥaddith und Mahner.",
+      "teachers": [
+        {
+          "id": "s:mansur",
+          "name": "Manṣūr ibn al-Muʿtamir"
+        },
+        {
+          "id": "s:alamash",
+          "name": "al-Aʿmash"
+        }
+      ],
+      "students": [
+        {
+          "id": "s:abdullahibnalmubarak",
+          "name": "ʿAbdullāh ibn al-Mubārak"
+        },
+        {
+          "id": "sufyan-ibn-uyaynah",
+          "name": "Sufyān ibn ʿUyaynah"
+        }
+      ],
       "works": []
     },
     "s:hammadbzayd": {
@@ -2462,13 +2774,31 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "",
-      "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
-      "teachers": [],
-      "students": [],
+      "lifespanLabel": "98–179 H · ca. 717–795 n. Chr.",
+      "bornHijri": 98,
+      "diedHijri": 179,
+      "eraLabel": "Atbāʿ · Baṣrah · Ḥadīth",
+      "bio": "Ḥammād ibn Zayd. Vertrauenswürdiger Muḥaddith von Baṣrah; von den Imāmen hochgeschätzt.",
+      "teachers": [
+        {
+          "id": "s:thabit",
+          "name": "Thābit al-Bunānī"
+        },
+        {
+          "id": "s:ayyub",
+          "name": "Ayyūb as-Sakhtiyānī"
+        }
+      ],
+      "students": [
+        {
+          "id": "s:abdullahibnalmubarak",
+          "name": "ʿAbdullāh ibn al-Mubārak"
+        },
+        {
+          "id": "sufyan-ibn-uyaynah",
+          "name": "Sufyān ibn ʿUyaynah"
+        }
+      ],
       "works": []
     },
     "s:harbalkirmani": {
@@ -2480,14 +2810,23 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "",
+      "lifespanLabel": "gest. 280 H · ca. 893 n. Chr.",
       "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
-      "teachers": [],
+      "diedHijri": 280,
+      "eraLabel": "Frühe Imāme · Ḥanbalī",
+      "bio": "Ḥarb al-Kirmānī. Schüler Aḥmads; überlieferte Masāʾil und Glaubensaussagen.",
+      "teachers": [
+        {
+          "id": "ahmad-ibn-hanbal",
+          "name": "Aḥmad ibn Ḥanbal"
+        }
+      ],
       "students": [],
-      "works": []
+      "works": [
+        {
+          "title": "Masāʾil Ḥarb (Überlieferung von Aḥmad)"
+        }
+      ]
     },
     "s:ibnabizaydalqayrawani": {
       "displayName": "Ibn Abī Zayd al-Qayrawānī",
@@ -2498,14 +2837,21 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "",
-      "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
+      "lifespanLabel": "310–386 H · ca. 922–996 n. Chr.",
+      "bornHijri": 310,
+      "diedHijri": 386,
+      "eraLabel": "Spätere Gelehrte · Mālikī · Qayrawān",
+      "bio": "Ibn Abī Zayd al-Qayrawānī. Mālikī-Imām; Verfasser der berühmten Risālah.",
       "teachers": [],
       "students": [],
-      "works": []
+      "works": [
+        {
+          "title": "ar-Risālah"
+        },
+        {
+          "title": "an-Nawādir wa-z-Ziyādāt"
+        }
+      ]
     },
     "s:ibnmandah": {
       "displayName": "Ibn Mandah",
@@ -2516,14 +2862,21 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "",
-      "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
+      "lifespanLabel": "310–395 H · ca. 922–1005 n. Chr.",
+      "bornHijri": 310,
+      "diedHijri": 395,
+      "eraLabel": "Spätere Gelehrte · Ḥadīth · Iṣfahān",
+      "bio": "Abū ʿAbdillāh Ibn Mandah. Großer Ḥāfiẓ; Werke zu Tawḥīd und Ṣaḥābah.",
       "teachers": [],
       "students": [],
-      "works": []
+      "works": [
+        {
+          "title": "at-Tawḥīd"
+        },
+        {
+          "title": "Maʿrifat aṣ-Ṣaḥābah"
+        }
+      ]
     },
     "s:abdarrahmanbnasiralbarrak": {
       "displayName": "ʿAbd ar-Raḥmān b. Nāṣir al-Barrāk",
@@ -2694,14 +3047,23 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "",
-      "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
-      "teachers": [],
+      "lifespanLabel": "144–207 H · ca. 761–822 n. Chr.",
+      "bornHijri": 144,
+      "diedHijri": 207,
+      "eraLabel": "Frühe Imāme · Sprache · Kūfah",
+      "bio": "Yaḥyā ibn Ziyād al-Farrāʾ. Kufischer Grammatiker; sprachliche Erklärungen zum Qurʾān.",
+      "teachers": [
+        {
+          "id": "s:alkisai",
+          "name": "al-Kisāʾī"
+        }
+      ],
       "students": [],
-      "works": []
+      "works": [
+        {
+          "title": "Maʿānī al-Qurʾān"
+        }
+      ]
     },
     "s:jabirbabdillah": {
       "displayName": "Jābir b. ʿAbdillāh",
@@ -2799,14 +3161,21 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "",
-      "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
+      "lifespanLabel": "762–855 H · ca. 1361–1451 n. Chr.",
+      "bornHijri": 762,
+      "diedHijri": 855,
+      "eraLabel": "Spätere Gelehrte · Ḥanafī · Sharḥ",
+      "bio": "Badr ad-Dīn al-ʿAynī. Ḥanafī-Gelehrter; Verfasser großer Sharḥ-Werke zu Ḥadīth und Fiqh.",
       "teachers": [],
       "students": [],
-      "works": []
+      "works": [
+        {
+          "title": "ʿUmdat al-Qārī (Sharḥ Ṣaḥīḥ al-Bukhārī)"
+        },
+        {
+          "title": "al-Bināyah (Sharḥ al-Hidāyah)"
+        }
+      ]
     },
     "s:rabiah": {
       "displayName": "Rabīʿah",
@@ -2819,13 +3188,23 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "",
+      "lifespanLabel": "gest. 136 H · ca. 753 n. Chr.",
       "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
-      "teachers": [],
-      "students": [],
+      "diedHijri": 136,
+      "eraLabel": "Tābiʿī · Madīnah · Fiqh",
+      "bio": "Rabīʿah ar-Raʾy. Madīnenser Faqīh; einer der Lehrer von Mālik ibn Anas.",
+      "teachers": [
+        {
+          "id": "anas-b-malik",
+          "name": "Anas ibn Mālik"
+        }
+      ],
+      "students": [
+        {
+          "id": "malik-ibn-anas",
+          "name": "Mālik ibn Anas"
+        }
+      ],
       "works": []
     },
     "s:muhammadibnjafar": {
@@ -2862,10 +3241,36 @@
       "bornHijri": 94,
       "diedHijri": 175,
       "eraLabel": "Atbāʿ · Ägypten · Fiqh",
-      "bio": "Imām von Ägypten; Faqīh und Muḥaddith, Zeitgenosse von Mālik.",
-      "teachers": [],
-      "students": [],
-      "works": []
+      "bio": "Imām von Ägypten; Faqīh und Muḥaddith, Zeitgenosse von Mālik. Sein Madhhab setzte sich langfristig nicht durch.",
+      "teachers": [
+        {
+          "id": "s:nafi",
+          "name": "Nāfiʿ (Mawlā Ibn ʿUmar)"
+        },
+        {
+          "id": "s:muhammadibnshihabazzuhri",
+          "name": "az-Zuhrī"
+        },
+        {
+          "id": "s:yazidibnabibabib",
+          "name": "Yazīd ibn Abī Ḥabīb"
+        }
+      ],
+      "students": [
+        {
+          "id": "s:abdullahibnalmubarak",
+          "name": "ʿAbdullāh ibn al-Mubārak"
+        },
+        {
+          "id": "s:abdullahibnwahb",
+          "name": "ʿAbdullāh ibn Wahb"
+        }
+      ],
+      "works": [
+        {
+          "title": "Fiqh- und Ḥadīth-Überlieferungen (über Schüler)"
+        }
+      ]
     },
     "s:ubayyibnkab": {
       "displayName": "Ubayy ibn Kaʿb",
@@ -2906,9 +3311,14 @@
       "lifespanLabel": "",
       "bornHijri": null,
       "diedHijri": null,
-      "eraLabel": "",
+      "eraLabel": "Ṣaḥābī",
       "bio": "",
-      "teachers": [],
+      "teachers": [
+        {
+          "id": "__prophet__",
+          "name": "Prophet Muhammad ﷺ"
+        }
+      ],
       "students": [],
       "works": []
     },
@@ -3038,9 +3448,14 @@
       "lifespanLabel": "",
       "bornHijri": null,
       "diedHijri": null,
-      "eraLabel": "",
+      "eraLabel": "Ṣaḥābī",
       "bio": "",
-      "teachers": [],
+      "teachers": [
+        {
+          "id": "__prophet__",
+          "name": "Prophet Muhammad ﷺ"
+        }
+      ],
       "students": [],
       "works": []
     },
@@ -3071,11 +3486,11 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "gest. vor dem Prophetenamt · vor 610 n. Chr.",
+      "lifespanLabel": "gest. vor dem Prophetenamt",
       "bornHijri": null,
       "diedHijri": null,
-      "eraLabel": "Vorislamische Ḥunafāʾ (kein Tābiʿī)",
-      "bio": "Kein Tābiʿī und kein Ṣaḥābī im üblichen Sinn: Ḥanīf in Makkah, der den Götzendienst ablehnte und vor dem öffentlichen Prophetenamt starb. Der Prophet ﷺ lobte ihn.",
+      "eraLabel": "Ḥanīf · vor dem Islam · Makkah",
+      "bio": "Zayd ibn ʿAmr ibn Nufayl. Suchte den reinen Monotheismus vor dem Islam; wird in Berichten der Sīrah genannt (kein späterer Madhhab-Gelehrter).",
       "teachers": [],
       "students": [],
       "works": []
@@ -3094,9 +3509,14 @@
       "lifespanLabel": "",
       "bornHijri": null,
       "diedHijri": null,
-      "eraLabel": "",
+      "eraLabel": "Ṣaḥābī",
       "bio": "",
-      "teachers": [],
+      "teachers": [
+        {
+          "id": "__prophet__",
+          "name": "Prophet Muhammad ﷺ"
+        }
+      ],
       "students": [],
       "works": []
     },
@@ -3182,9 +3602,14 @@
       "lifespanLabel": "",
       "bornHijri": null,
       "diedHijri": null,
-      "eraLabel": "",
+      "eraLabel": "Ṣaḥābī",
       "bio": "",
-      "teachers": [],
+      "teachers": [
+        {
+          "id": "__prophet__",
+          "name": "Prophet Muhammad ﷺ"
+        }
+      ],
       "students": [],
       "works": []
     },
@@ -3202,9 +3627,14 @@
       "lifespanLabel": "",
       "bornHijri": null,
       "diedHijri": null,
-      "eraLabel": "",
+      "eraLabel": "Ṣaḥābī",
       "bio": "",
-      "teachers": [],
+      "teachers": [
+        {
+          "id": "__prophet__",
+          "name": "Prophet Muhammad ﷺ"
+        }
+      ],
       "students": [],
       "works": []
     },
@@ -3217,32 +3647,104 @@
       "aliases": [],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "",
-      "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
-      "teachers": [],
+      "lifespanLabel": "468–543 H · ca. 1076–1148 n. Chr.",
+      "bornHijri": 468,
+      "diedHijri": 543,
+      "eraLabel": "Spätere Gelehrte · Mālikī · Andalus",
+      "bio": "Abū Bakr Ibn al-ʿArabī al-Mālikī. Richter und Gelehrter; Werke zu Aḥkām al-Qurʾān und Ḥadīth.",
+      "teachers": [
+        {
+          "id": "s:alghazali",
+          "name": "al-Ghazālī"
+        }
+      ],
       "students": [],
-      "works": []
+      "works": [
+        {
+          "title": "Aḥkām al-Qurʾān"
+        },
+        {
+          "title": "ʿĀriḍat al-Aḥwadhī"
+        }
+      ]
     },
-    "s:yusufsbruder": {
-      "displayName": "Yūsufs Brüder",
-      "primaryGroup": "weitere",
-      "generationGroup": "weitere",
-      "generationOrder": 8999,
-      "roles": [],
-      "aliases": [],
+    "s:sufyanaththawri": {
+      "displayName": "Sufyān ath-Thawrī",
+      "primaryGroup": "tabiun",
+      "generationGroup": "atba",
+      "generationOrder": 42,
+      "roles": [
+        "tabi",
+        "imam",
+        "muhaddith"
+      ],
+      "aliases": [
+        "Sufyan al-Thawri",
+        "Sufyān ath-Thawrī"
+      ],
       "monogram": "",
       "kuniyah": "",
-      "lifespanLabel": "",
-      "bornHijri": null,
-      "diedHijri": null,
-      "eraLabel": "",
-      "bio": "",
-      "teachers": [],
-      "students": [],
-      "works": []
+      "lifespanLabel": "97–161 H · ca. 716–778 n. Chr.",
+      "bornHijri": 97,
+      "diedHijri": 161,
+      "eraLabel": "Atbāʿ / frühe Imāme · Kūfah",
+      "bio": "Imām von Kūfah; Amīr al-Muʾminīn im Ḥadīth; Faqīh und Asket. Lehrer und Schüler zahlreicher Imāme der frühen Generation.",
+      "teachers": [
+        {
+          "id": "s:saidibnmasruq",
+          "name": "Saʿīd ibn Masrūq ath-Thawrī (Vater)"
+        },
+        {
+          "id": "s:alamash",
+          "name": "al-Aʿmash"
+        },
+        {
+          "id": "s:hamzahazzayyat",
+          "name": "Ḥamzah az-Zayyāt"
+        },
+        {
+          "id": "s:atababirabah",
+          "name": "ʿAṭāʾ ibn Abī Rabāḥ"
+        },
+        {
+          "id": "s:amribndinar",
+          "name": "ʿAmr ibn Dīnār"
+        }
+      ],
+      "students": [
+        {
+          "id": "s:abdullahibnalmubarak",
+          "name": "ʿAbdullāh ibn al-Mubārak"
+        },
+        {
+          "id": "s:yahyaibnsaidalqattan",
+          "name": "Yaḥyā ibn Saʿīd al-Qaṭṭān"
+        },
+        {
+          "id": "s:wakibnaljarrah",
+          "name": "Wakīʿ ibn al-Jarrāḥ"
+        },
+        {
+          "id": "s:abdarrahmanibnmahdi",
+          "name": "ʿAbd ar-Raḥmān ibn Mahdī"
+        },
+        {
+          "id": "sufyan-ibn-uyaynah",
+          "name": "Sufyān ibn ʿUyaynah"
+        },
+        {
+          "id": "s:shubah",
+          "name": "Shuʿbah ibn al-Ḥajjāj"
+        }
+      ],
+      "works": [
+        {
+          "title": "al-Jāmiʿ (Ḥadīth / Fiqh, überliefert)"
+        },
+        {
+          "title": "Tafsīr (Fragmente überliefert)"
+        }
+      ]
     }
   }
 }

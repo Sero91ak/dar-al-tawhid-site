@@ -77,6 +77,7 @@ const CURATED = {
   's:abubakralajurri': { primaryGroup: 'imam', generationGroup: 'early_imam', generationOrder: 116, roles: ['imam'] },
   'al-hasan-al-basri': { primaryGroup: 'tabiun', generationGroup: 'tabiun', generationOrder: 41, roles: ['tabi', 'imam'], aliases: ['Hasan al-Basri'] },
   's:sufyanaththawri': { primaryGroup: 'tabiun', generationGroup: 'tabiun', generationOrder: 42, roles: ['tabi', 'imam', 'muhaddith'], aliases: ['Sufyan al-Thawri'] },
+  'sufyan-ath-thauri': { primaryGroup: 'tabiun', generationGroup: 'atba', generationOrder: 42, roles: ['tabi', 'imam', 'muhaddith'], aliases: ['Sufyan al-Thawri', 'Sufyān ath-Thawrī'] },
   'malik-ibn-anas': { primaryGroup: 'imam', generationGroup: 'early_imam', generationOrder: 50, roles: ['imam', 'faqih', 'muhaddith'], aliases: ['Malik ibn Anas', 'Imam Malik'] },
   'sufyan-ibn-uyaynah': { primaryGroup: 'tabiun', generationGroup: 'tabiun', generationOrder: 43, roles: ['tabi', 'muhaddith'] },
   'al-awzai': { primaryGroup: 'tabiun', generationGroup: 'tabiun', generationOrder: 44, roles: ['tabi', 'faqih'] },
@@ -130,8 +131,6 @@ const CURATED = {
   's:ibnabializz': { primaryGroup: 'imam', generationGroup: 'later', generationOrder: 212, roles: ['imam'] },
   's:assawkani': { primaryGroup: 'imam', generationGroup: 'later', generationOrder: 213, roles: ['imam'] },
   's:ashshanqiti': { primaryGroup: 'mufassir', generationGroup: 'later', generationOrder: 214, roles: ['mufassir'] },
-  's:quran': { primaryGroup: 'weitere', generationGroup: 'weitere', generationOrder: 9000, roles: [] },
-  's:ahlussunnah': { primaryGroup: 'weitere', generationGroup: 'weitere', generationOrder: 9001, roles: [] },
   's:ummsalamah': { primaryGroup: 'sahabah', generationGroup: 'sahabah', generationOrder: 35, roles: ['sahabi'], aliases: ['Umm Salamah'] },
   's:qatadah': { primaryGroup: 'tabiun', generationGroup: 'tabiun', generationOrder: 57, roles: ['tabi', 'mufassir'], aliases: ['Qatadah'] },
   's:assuddi': { primaryGroup: 'tabiun', generationGroup: 'tabiun', generationOrder: 58, roles: ['tabi', 'mufassir'] },
@@ -152,6 +151,19 @@ function splitScholarParts(raw) {
 function mapScholarPart(part) {
   const n = scholarNorm(part);
   if (!n) return null;
+  // Scripture / collectives / story-groups — not person folders
+  if (
+    /^(der)?quran$/.test(n) ||
+    /^ahl(us|al)?(as)?sunnah/.test(n) ||
+    /^yusufs?bruder/.test(n) ||
+    /^(die)?sunnah$/.test(n) ||
+    /^(die)?athar$/.test(n) ||
+    /^ijma/.test(n) ||
+    /^ahlalhadith$/.test(n) ||
+    /^salaf$/.test(n)
+  ) {
+    return null;
+  }
   const rules = [
     [PROPHET_SCHOLAR_KEY, 'Prophet Muhammad ﷺ', 0, /^(der)?prophet/],
     ['ahmad-ibn-hanbal', 'Aḥmad ibn Ḥanbal', 1, /ahmadibnhanbal|imamahmad/],
@@ -159,7 +171,7 @@ function mapScholarPart(part) {
     ['abu-hurayrah', 'Abū Hurayrah', 1, /abuhurayrah|abuhurairah/],
     ['abu-ubayd', 'Abū ʿUbayd al-Qāsim ibn Sallām', 1, /abuubaid|abuubayd|qasim.*sallam/],
     ['malik-ibn-anas', 'Mālik ibn Anas', 1, /malikibnanas|imammalik/],
-    ['sufyan-ath-thauri', 'Sufyān ath-Thawrī', 1, /sufyanaththauri|sufyanalthauri/],
+    ['sufyan-ath-thauri', 'Sufyān ath-Thawrī', 1, /sufyanaththauri|sufyanaththawri|sufyanalthauri|sufyanalthawri/],
     ['sufyan-ibn-uyaynah', 'Sufyān ibn ʿUyaynah', 1, /sufyanibnuyaynah/],
     ['al-awzai', 'al-Awzāʿī', 1, /alawzai|alawza/],
     ['abu-hatim-ar-razi', 'Abū Ḥātim ar-Rāzī', 1, /abuhatim.*razi|abuhatin/],
@@ -261,6 +273,16 @@ for (const item of catalog) {
     students: Array.isArray(hist.students) ? hist.students : [],
     works: Array.isArray(hist.works) ? hist.works : [],
   };
+}
+
+// Legacy route aliases (old keys → canonical meta)
+const ALIASES = {
+  's:sufyanaththawri': 'sufyan-ath-thauri',
+  's:alfudaylbiyad': 'al-fudayl',
+  's:ibnmasud': 'abdullah-ibn-masud',
+};
+for (const [from, to] of Object.entries(ALIASES)) {
+  if (scholars[to] && !scholars[from]) scholars[from] = { ...scholars[to] };
 }
 
 const out = {
