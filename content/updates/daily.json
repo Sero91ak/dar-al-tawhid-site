@@ -1,38 +1,18 @@
 {
-  "date": "2026-08-06",
+  "date": "2026-08-07",
   "timezone": "Europe/Berlin",
-  "generated": "2026-08-05T22:00:33.187Z",
-  "source": "dar-daily-no-repeat-rotation",
+  "generated": "2026-08-06T22:00:20.355Z",
+  "source": "dar-daily-scheduler-regenerated",
   "recommendation": {
-    "id": "eid-zaehlt-quran-rezitation-als-sprechen-122",
-    "title": "Eid: Zählt Qurʾān-Rezitation als Sprechen?",
-    "file": "eid-zaehlt-quran-rezitation-als-sprechen-122.md",
+    "id": "imam-shafii-wasser-wird-durch-veraenderung-unrein-354",
+    "title": "Wenn Wasser durch Unreinheit verändert wird",
+    "file": "fiqh-354-wenn-wasser-durch-unreinheit-verandert-wird.md",
     "category": "Fiqh",
-    "scholar": "Abū ʿUbayd al-Qāsim ibn Sallām",
-    "snippet": "„Wenn ein Mann schwört, heute nicht zu sprechen, und dann den Qurʾān rezitiert, bricht er den Eid nicht.“"
+    "scholar": "Imām ash-Shāfiʿī",
+    "snippet": "„Wenn sich Geschmack, Farbe oder Geruch des Wassers durch etwas Verbotenes, das sich mit ihm vermischt, verändert, wird das Wasser nicht wieder rein, bis es ausgeschöpft wird oder viel Wasser darauf gegossen wird, sodass"
   },
   "dua": {
-    "id": "dua-039-rabbana-innaka-man-tudkhil-an-nar",
-    "title": "Duʿāʾ um Rettung vor Schande am Jüngsten Tag",
-    "snippet": "Unser Herr, wen Du ins Feuer eintreten lässt, den hast Du wahrlich beschämt; und die Ungerechten haben keine Helfer.",
-    "category": "Schutz vor dem Feuer"
-  },
-  "rotation": {
-    "recommendation": {
-      "cycle": 0,
-      "poolSize": 457,
-      "remaining": 449
-    },
-    "dua": {
-      "cycle": 0,
-      "poolSize": 90,
-      "remaining": 83,
-      "sources": {
-        "markdown": 90,
-        "total": 90,
-        "poolSize": 90,
-        "canonicalSource": "content/duas/dua-*.md"
-      }
-    }
+    "snippet": "",
+    "category": ""
   }
 }
