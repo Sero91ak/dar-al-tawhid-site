@@ -2917,12 +2917,13 @@ async function processPendingLibraryPushUntilLive(env, record, options = {}) {
   if (!key) return { sent: false, reason: "publicationId fehlt" };
 
   const registry = await readPendingPushesRegistry(env);
-  if (registry.pushes?.[key]?.status === "sent") {
+  const existing = registry.pushes?.[key];
+  if (existing?.status === "sent" && !options.forceResend) {
     return { sent: true, skipped: true, reason: "Push wurde bereits gesendet." };
   }
 
-  const current = registry.pushes?.[key] || record;
-  if (!isPostPushApproved(current)) {
+  const current = existing || record;
+  if (!isPostPushApproved(current) && !options.forceResend) {
     return {
       sent: false,
       pending: true,
@@ -2949,13 +2950,40 @@ async function processPendingLibraryPushUntilLive(env, record, options = {}) {
     await sleep(LIBRARY_PUSH_DELAY_AFTER_LIVE_MS);
   }
 
+  /* Nach der Wartezeit erneut prüfen – parallele Cron/Retry-Aufrufe */
+  const afterWait = await readPendingPushesRegistry(env);
+  if (afterWait.pushes?.[key]?.status === "sent" && !options.forceResend) {
+    return {
+      sent: true,
+      skipped: true,
+      reason: "Push wurde bereits gesendet.",
+      liveCheck: afterWait.pushes[key].liveCheck || liveCheck
+    };
+  }
+
+  const claim = await claimPendingPushSend(env, key);
+  if (!claim.claimed) {
+    const alreadySent = Boolean(claim.skipped && /bereits gesendet/i.test(String(claim.reason || "")));
+    return {
+      sent: alreadySent,
+      skipped: true,
+      reason: claim.reason || "Push-Claim abgelehnt",
+      liveCheck
+    };
+  }
+
   const push = await sendLibraryPublicationPush(env, current);
   if (push.sent) {
     await writePendingPushStatus(env, key, {
       status: "sent",
       sentAt: new Date().toISOString(),
       lastError: "",
-      pushResult: { target: push.target, targetUrl: push.targetUrl }
+      pushResult: {
+        target: push.target,
+        targetUrl: push.targetUrl,
+        collapseId: push.collapseId || null,
+        recipients: push.recipients ?? null
+      }
     });
   } else {
     await writePendingPushStatus(env, key, {
@@ -2985,7 +3013,7 @@ async function retryPendingLibraryPush(env, input, ctx) {
       skipped: true,
       reason: "Push wurde bereits gesendet.",
       liveCheck: existing.liveCheck || null,
-      push: { sent: true, targetUrl: buildLibraryPushUrl(env, slug, Date.now()) }
+      push: { sent: true, skipped: true, reason: "Push wurde bereits gesendet.", targetUrl: buildLibraryPushUrl(env, slug, Date.now()) }
     };
   }
 
@@ -3008,9 +3036,14 @@ async function retryPendingLibraryPush(env, input, ctx) {
     pushApprovedAt: new Date().toISOString()
   };
   await writePendingPushStatus(env, key, approvedRecord);
-  const push = await processPendingLibraryPushUntilLive(env, approvedRecord);
+  const push = await processPendingLibraryPushUntilLive(env, approvedRecord, {
+    forceResend: input.forceResend === true
+  });
   if (ctx && push?.pending) {
-    ctx.waitUntil(processPendingLibraryPushUntilLive(env, approvedRecord, { extendedWait: true }));
+    ctx.waitUntil(processPendingLibraryPushUntilLive(env, approvedRecord, {
+      extendedWait: true,
+      forceResend: input.forceResend === true
+    }));
   }
   return {
     ok: true,

@@ -112,13 +112,24 @@ function runPushSystemGuard() {
     "PUSH_SYSTEM_GUARD"
   ]);
 
-  mustInclude("worker.js Pending-Beitrags-Push", worker, [
-    "function isPostPushApproved",
-    "processAllPendingPushes",
-    "processPendingPushUntilLive",
-    'status === "pending"',
-    'sendNewPostPush'
+  mustInclude("library-push-admin.js Dedupe", read("cloudflare/library-push-admin.js"), [
+    "collapse_id",
+    "idempotency_key",
+    "Ein erfolgreicher Versuch reicht",
+    "Segmente nur als Fallback"
   ]);
+
+  mustInclude("worker.js Library-Push-Lock", worker, [
+    "claimPendingPushSend(env, key)",
+    "processPendingLibraryPushUntilLive",
+    "libraryPushRegistryKey"
+  ]);
+
+  if (/Einzel-Abos: weiter/.test(read("cloudflare/library-push-admin.js"))) {
+    fail("library-push-admin.js: Einzel-Abo-Schleife + Segmente würden Doppel-Push erzeugen");
+  } else {
+    ok("library-push-admin.js: kein Doppel-Versand nach erfolgreichem Versuch");
+  }
 
   const wrangler = read("cloudflare/wrangler.toml");
   mustInclude("wrangler.toml", wrangler, ["[triggers]", 'crons = ["*/5 * * * *"]']);

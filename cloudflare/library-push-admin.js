@@ -96,15 +96,9 @@ async function loadLibraryPushSubscriptionIds(env) {
 function buildLibraryPushAttempts(basePayload, subscriptionIds) {
   const attempts = [];
   const ids = uniqueValues(subscriptionIds);
-  // Kleine Listen einzeln (wie Gebets-/Tages-Push) – robuster bei ungültigen IDs
-  if (ids.length > 0 && ids.length <= 40) {
-    for (const id of ids) {
-      attempts.push({ ...basePayload, include_subscription_ids: [id] });
-    }
-  } else {
-    for (const batch of chunkValues(ids, ONESIGNAL_BATCH_SIZE)) {
-      attempts.push({ ...basePayload, include_subscription_ids: batch });
-    }
+  /* Zuerst Abos in Batches – Segmente nur als Fallback, nie parallel (sonst Doppel-Push). */
+  for (const batch of chunkValues(ids, ONESIGNAL_BATCH_SIZE)) {
+    if (batch.length) attempts.push({ ...basePayload, include_subscription_ids: batch });
   }
   attempts.push(
     { ...basePayload, included_segments: ["DAR_PUSH"] },
@@ -270,6 +264,7 @@ export async function sendLibraryPublicationPush(env, record) {
     publishedAt: record?.publishedAt || new Date().toISOString(),
     cacheVersion: String(version)
   };
+  const collapse = `library-${publicationId || slug || "pdf"}`.slice(0, 64);
 
   const basePayload = {
     app_id: appId,
@@ -281,7 +276,10 @@ export async function sendLibraryPublicationPush(env, record) {
     chrome_web_icon: icon,
     chrome_web_badge: badge,
     firefox_icon: icon,
-    name: `library-publish-${Date.now()}`
+    name: `library-publish-${publicationId || slug || Date.now()}`.slice(0, 128),
+    collapse_id: collapse,
+    web_push_topic: collapse.slice(0, 32),
+    idempotency_key: collapse
   };
 
   const subscriptionIds = await loadLibraryPushSubscriptionIds(env);
@@ -291,8 +289,6 @@ export async function sendLibraryPublicationPush(env, record) {
     ? "Kein Empfänger gefunden – Abo-/Segment-Versuche ohne Zustellung"
     : "Keine Supabase-Abos geladen – Segment-/Tag-Ziele ohne Empfänger";
   const attemptLog = [];
-  let deliveredCount = 0;
-  let lastSuccess = null;
 
   for (const payload of attempts) {
     for (const authMode of ["Key", "Basic"]) {
@@ -307,9 +303,7 @@ export async function sendLibraryPublicationPush(env, record) {
         });
         const text = await res.text();
         const targetLabel = payload.include_subscription_ids?.length
-          ? (payload.include_subscription_ids.length === 1
-            ? `subscription:${payload.include_subscription_ids[0]}`
-            : `supabase-subscriptions:${payload.include_subscription_ids.length}`)
+          ? `supabase-subscriptions:${payload.include_subscription_ids.length}`
           : (payload.included_segments?.[0] || "tag-filter");
         if (res.ok) {
           let parsed = {};
@@ -327,12 +321,11 @@ export async function sendLibraryPublicationPush(env, record) {
               notificationId: parsed?.id || null,
               reason: lastError
             });
-            // HTTP 200: nicht mit Basic-Auth denselben Payload erneut senden
             break;
           }
           const accepted = parseOneSignalAcceptedRecipients(parsed);
-          deliveredCount += 1;
-          lastSuccess = {
+          /* Ein erfolgreicher Versuch reicht – keine weiteren Segmente/Abos (Doppel-Push-Schutz). */
+          return {
             sent: true,
             target: targetLabel,
             authMode,
@@ -341,14 +334,17 @@ export async function sendLibraryPublicationPush(env, record) {
             recipients: accepted,
             response: text.slice(0, 400),
             subscriptionCount: subscriptionIds.length,
-            deliveredCount,
-            attempts: attemptLog
+            deliveredCount: 1,
+            collapseId: collapse,
+            attempts: attemptLog.concat([{
+              target: targetLabel,
+              httpStatus: res.status,
+              authMode,
+              sent: true,
+              recipients: accepted,
+              notificationId: parsed?.id || null
+            }])
           };
-          // Einzel-Abos: weiter, damit möglichst viele Nutzer erreicht werden
-          if (!(payload.include_subscription_ids?.length === 1 && subscriptionIds.length > 1)) {
-            return lastSuccess;
-          }
-          break;
         }
         if (res.status === 401 || res.status === 403) {
           lastError = `OneSignal ${res.status} (${authMode}): ${text.slice(0, 240)}`;
@@ -395,10 +391,6 @@ export async function sendLibraryPublicationPush(env, record) {
         break;
       }
     }
-  }
-
-  if (lastSuccess) {
-    return { ...lastSuccess, deliveredCount, attempts: attemptLog };
   }
 
   return { sent: false, reason: lastError, subscriptionCount: subscriptionIds.length, attempts: attemptLog };
