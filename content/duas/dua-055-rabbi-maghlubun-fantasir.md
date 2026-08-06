@@ -1,5 +1,6 @@
 ---
 id: "dua-055-rabbi-maghlubun-fantasir"
+order: 72
 type: "Qurʾān"
 cat: "Not & Bedrängnis"
 title: "Duʿāʾ von Nūḥ bei Überwältigung"

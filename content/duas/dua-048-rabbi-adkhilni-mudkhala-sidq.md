@@ -1,5 +1,6 @@
 ---
 id: "dua-048-rabbi-adkhilni-mudkhala-sidq"
+order: 65
 type: "Qurʾān"
 cat: "Hilfe & Aufrichtigkeit"
 title: "Duʿāʾ um ehrlichen Eintritt und Ausgang"

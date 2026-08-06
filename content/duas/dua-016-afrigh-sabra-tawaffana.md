@@ -1,5 +1,6 @@
 ---
 id: "dua-016-afrigh-sabra-tawaffana"
+order: 33
 type: "Qurʾān"
 cat: "Standhaftigkeit"
 title: "Lass uns als Muslime sterben"

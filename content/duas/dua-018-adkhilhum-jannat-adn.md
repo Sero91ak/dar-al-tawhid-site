@@ -1,5 +1,6 @@
 ---
 id: "dua-018-adkhilhum-jannat-adn"
+order: 35
 type: "Qurʾān"
 cat: "Jannah"
 title: "Lass sie in die Gärten von ʿAdn eintreten"

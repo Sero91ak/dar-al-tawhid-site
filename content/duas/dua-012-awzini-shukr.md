@@ -1,5 +1,6 @@
 ---
 id: "dua-012-awzini-shukr"
+order: 29
 type: "Qurʾān"
 cat: "Dankbarkeit"
 title: "Leite mich an, Deine Gunst dankbar zu erkennen"

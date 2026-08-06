@@ -1,5 +1,6 @@
 ---
 id: "dua-081-allahumma-ainni-ala-dhikrik"
+order: 98
 type: "Sunnah"
 cat: "Dhikr & Gottesdienst"
 title: "Hilfe beim Gedenken und guten Gottesdienst"

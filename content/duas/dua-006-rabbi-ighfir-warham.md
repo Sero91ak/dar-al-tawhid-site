@@ -1,5 +1,6 @@
 ---
 id: "dua-006-rabbi-ighfir-warham"
+order: 23
 type: "Qurʾān"
 cat: "Vergebung"
 title: "Mein Herr, vergib und erbarme Dich"

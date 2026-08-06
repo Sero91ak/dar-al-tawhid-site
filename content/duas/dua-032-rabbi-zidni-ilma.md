@@ -1,5 +1,6 @@
 ---
 id: "dua-032-rabbi-zidni-ilma"
+order: 49
 type: "Qurʾān"
 cat: "Wissen & Lernen"
 title: "Duʿāʾ um mehr Wissen"

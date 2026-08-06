@@ -1,5 +1,6 @@
 ---
 id: "dua-035-rabbana-innana-amanna"
+order: 52
 type: "Qurʾān"
 cat: "Vergebung & Schutz"
 title: "Duʿāʾ um Vergebung und Schutz vor dem Feuer"

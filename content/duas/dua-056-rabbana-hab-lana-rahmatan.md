@@ -1,5 +1,6 @@
 ---
 id: "dua-056-rabbana-hab-lana-rahmatan"
+order: 73
 type: "Qurʾān"
 cat: "Barmherzigkeit & Rechtleitung"
 title: "Duʿāʾ der Gefährten der Höhle"

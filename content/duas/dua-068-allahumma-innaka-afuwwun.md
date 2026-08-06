@@ -1,5 +1,6 @@
 ---
 id: "dua-068-allahumma-innaka-afuwwun"
+order: 85
 type: "Sunnah"
 cat: "Vergebung"
 title: "Duʿāʾ um Allahs Vergebung"

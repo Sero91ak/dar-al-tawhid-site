@@ -1,0 +1,45 @@
+{
+  "existing_visible_ids": 107,
+  "existing_unique_arabic_note": "Vorbestand hat ID-Überschneidungen im arabischen Text (Builtin↔MD und MD↔MD); unangetastet belassen.",
+  "rejected_as_duplicates": [
+    {
+      "brief": 108,
+      "proposed_id": "dua-108-huda-tuqa-afaf-ghina",
+      "reason": "identisch mit dua-027-allahumma-inni-asaluka-huda (Muslim 2721)",
+      "existing_ids": ["dua-027-allahumma-inni-asaluka-huda"]
+    },
+    {
+      "brief": 109,
+      "proposed_id": "dua-109-zawal-nimah",
+      "reason": "identisch mit dua-029-audhu-bika-min-zawal (Muslim 2739)",
+      "existing_ids": ["dua-029-audhu-bika-min-zawal"]
+    },
+    {
+      "brief": 110,
+      "proposed_id": "dua-110-ilm-la-yanfa",
+      "reason": "identisch mit dua-028-allahumma-inni-audhu-bika-min-ilm-la-yanfa (Muslim 2722)",
+      "existing_ids": ["dua-028-allahumma-inni-audhu-bika-min-ilm-la-yanfa"]
+    }
+  ],
+  "accepted_new": [
+    { "id": "dua-111-adhab-jahannam-qabr-dajjal", "order": 108, "brief": 111 },
+    { "id": "dua-112-ighfir-dhanbi-kullahu", "order": 109, "brief": 112 },
+    { "id": "dua-113-audhu-biridaka", "order": 110, "brief": 113 },
+    { "id": "dua-114-ighsil-khatayaya", "order": 111, "brief": 114 },
+    { "id": "dua-115-rabb-jibril-mikail-israfil", "order": 112, "brief": 115 },
+    { "id": "dua-116-laka-aslamtu", "order": 113, "brief": 116 },
+    { "id": "dua-117-la-sahla", "order": 114, "brief": 117 }
+  ],
+  "final_id_count": 114,
+  "order_range": "1-114",
+  "validation": {
+    "existing_unique_ids": 107,
+    "new_unique_ids": 7,
+    "total": 114,
+    "duplicate_ids": 0,
+    "duplicate_orders": 0,
+    "new_arabic_duplicates": 0,
+    "suspicious_partials_new": 0
+  },
+  "note": "Brief forderte 117, aber 108–110 wären Duplikate der vorhandenen dua-027/028/029. Strenge Duplikatprüfung hat Import dieser drei abgebrochen. Sieben neue einzigartige Duʿāʾ als order 108–114 mit Original-IDs dua-111…dua-117."
+}

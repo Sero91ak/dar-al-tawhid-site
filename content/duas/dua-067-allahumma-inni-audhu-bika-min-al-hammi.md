@@ -1,5 +1,6 @@
 ---
 id: "dua-067-allahumma-inni-audhu-bika-min-al-hammi"
+order: 84
 type: "Sunnah"
 cat: "Sorge, Trauer & Schulden"
 title: "Schutz vor Sorge, Trauer, Schwäche und Schulden"

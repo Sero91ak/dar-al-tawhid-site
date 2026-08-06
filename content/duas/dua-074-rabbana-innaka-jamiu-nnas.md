@@ -1,5 +1,6 @@
 ---
 id: "dua-074-rabbana-innaka-jamiu-nnas"
+order: 91
 type: "Qurʾān"
 cat: "Auferstehung & Gewissheit"
 title: "Bekenntnis zur Auferstehung"

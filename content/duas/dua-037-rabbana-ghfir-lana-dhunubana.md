@@ -1,5 +1,6 @@
 ---
 id: "dua-037-rabbana-ghfir-lana-dhunubana"
+order: 54
 type: "Qurʾān"
 cat: "Vergebung & Standhaftigkeit"
 title: "Duʿāʾ um Vergebung, Festigkeit und Sieg"

@@ -1,5 +1,6 @@
 ---
 id: "dua-078-rabbi-zidni-ilma"
+order: 95
 type: "Qurʾān"
 cat: "Wissen"
 title: "Bitte um Mehrung des Wissens"

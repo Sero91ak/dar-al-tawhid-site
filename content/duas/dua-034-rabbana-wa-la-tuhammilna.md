@@ -1,5 +1,6 @@
 ---
 id: "dua-034-rabbana-wa-la-tuhammilna"
+order: 51
 type: "Qurʾān"
 cat: "Erleichterung & Vergebung"
 title: "Duʿāʾ um Nachsicht, Vergebung und Barmherzigkeit"

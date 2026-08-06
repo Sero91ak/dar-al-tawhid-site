@@ -1,5 +1,6 @@
 ---
 id: "dua-022-tawakkalna-anabna"
+order: 39
 type: "Qurʾān"
 cat: "Tawakkul"
 title: "Auf Dich vertrauen wir und zu Dir kehren wir zurück"

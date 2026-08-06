@@ -1,5 +1,6 @@
 ---
 id: "dua-057-rabbi-awzini-an-ashkura"
+order: 74
 type: "Qurʾān"
 cat: "Dankbarkeit & Familie"
 title: "Duʿāʾ um Dankbarkeit und rechtschaffenes Handeln"

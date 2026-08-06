@@ -1,5 +1,6 @@
 ---
 id: "dua-087-sayyid-al-istighfar"
+order: 104
 type: "Sunnah"
 cat: "Morgen, Abend & Vergebung"
 title: "Sayyid al-Istighfār"

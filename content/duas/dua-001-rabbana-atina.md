@@ -1,5 +1,6 @@
 ---
 id: "dua-001-rabbana-atina"
+order: 18
 type: "Qurʾān"
 cat: "Dunyā & Ākhirah"
 title: "Unser Herr, gib uns Gutes in Dunyā und Ākhirah"

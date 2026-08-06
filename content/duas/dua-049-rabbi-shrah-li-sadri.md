@@ -1,5 +1,6 @@
 ---
 id: "dua-049-rabbi-shrah-li-sadri"
+order: 66
 type: "Qurʾān"
 cat: "Erleichterung & Rede"
 title: "Duʿāʾ von Mūsā um Erleichterung und klare Rede"

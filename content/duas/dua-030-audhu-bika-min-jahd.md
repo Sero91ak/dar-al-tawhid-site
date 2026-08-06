@@ -1,5 +1,6 @@
 ---
 id: "dua-030-audhu-bika-min-jahd"
+order: 47
 type: "Sunnah"
 cat: "Schutz"
 title: "Schutz vor schwerer Prüfung und schlechtem Schicksal"

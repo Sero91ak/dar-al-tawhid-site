@@ -1,5 +1,6 @@
 ---
 id: "dua-065-allahumma-inni-asaluka-al-afwa-wal-afiyah"
+order: 82
 type: "Sunnah"
 cat: "Vergebung & Wohlergehen"
 title: "Bitte um Vergebung und Wohlergehen"

@@ -1,5 +1,6 @@
 ---
 id: "dua-007-qalb-salim"
+order: 24
 type: "Qurʾān"
 cat: "Herz"
 title: "Lass mich mit einem gesunden Herzen kommen"

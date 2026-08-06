@@ -1,5 +1,6 @@
 ---
 id: "dua-089-allahumma-audhu-min-al-kufri-wal-faqr"
+order: 106
 type: "Sunnah"
 cat: "Kufr, Armut & Grab"
 title: "Schutz vor Kufr, Armut und Grabstrafe"

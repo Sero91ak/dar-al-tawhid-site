@@ -1,5 +1,6 @@
 ---
 id: "dua-024-atmim-nurana"
+order: 41
 type: "Qurʾān"
 cat: "Licht"
 title: "Vollende unser Licht und vergib uns"

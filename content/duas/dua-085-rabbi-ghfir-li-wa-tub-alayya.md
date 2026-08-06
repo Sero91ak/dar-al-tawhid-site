@@ -1,5 +1,6 @@
 ---
 id: "dua-085-rabbi-ghfir-li-wa-tub-alayya"
+order: 102
 type: "Sunnah"
 cat: "Istighfār & Reue"
 title: "Kurze häufige Bitte um Vergebung"

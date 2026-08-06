@@ -1,5 +1,6 @@
 ---
 id: "dua-090-umar-shahadah-madinah"
+order: 107
 type: "Athar – Ṣaḥābī"
 cat: "Shahādah & Madīnah"
 title: "Duʿāʾ von ʿUmar um Shahādah"

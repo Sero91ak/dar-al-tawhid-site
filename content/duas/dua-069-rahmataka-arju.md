@@ -1,5 +1,6 @@
 ---
 id: "dua-069-rahmataka-arju"
+order: 86
 type: "Sunnah"
 cat: "Kummer & Bedrängnis"
 title: "Duʿāʾ bei Kummer und schwerer Bedrängnis"

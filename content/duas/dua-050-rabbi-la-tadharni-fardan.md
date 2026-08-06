@@ -1,5 +1,6 @@
 ---
 id: "dua-050-rabbi-la-tadharni-fardan"
+order: 67
 type: "Qurʾān"
 cat: "Kinder & Nachkommen"
 title: "Duʿāʾ von Zakariyyā um Nachkommen"

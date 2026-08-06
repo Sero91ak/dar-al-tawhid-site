@@ -1,5 +1,6 @@
 ---
 id: "dua-047-rabbi-qad-ataytani-min-al-mulk"
+order: 64
 type: "Qurʾān"
 cat: "Guter Tod & Rechtschaffene"
 title: "Duʿāʾ von Yūsuf um guten Abschluss"

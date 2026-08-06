@@ -1,5 +1,6 @@
 ---
 id: "dua-010-jannah-naim"
+order: 27
 type: "Qurʾān"
 cat: "Jannah"
 title: "Mache mich zu den Erben des Gartens der Wonne"

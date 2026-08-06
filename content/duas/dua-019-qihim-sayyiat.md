@@ -1,5 +1,6 @@
 ---
 id: "dua-019-qihim-sayyiat"
+order: 36
 type: "Qurʾān"
 cat: "Schutz"
 title: "Bewahre sie vor schlechten Taten"

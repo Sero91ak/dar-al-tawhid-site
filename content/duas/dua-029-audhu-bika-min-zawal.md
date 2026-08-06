@@ -1,5 +1,6 @@
 ---
 id: "dua-029-audhu-bika-min-zawal"
+order: 46
 type: "Sunnah"
 cat: "Schutz"
 title: "Schutz vor dem Verschwinden der Gunst"

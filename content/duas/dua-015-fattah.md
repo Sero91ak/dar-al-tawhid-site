@@ -1,5 +1,6 @@
 ---
 id: "dua-015-fattah"
+order: 32
 type: "Qurʾān"
 cat: "Urteil & Wahrheit"
 title: "Unser Herr, entscheide zwischen uns in Wahrheit"

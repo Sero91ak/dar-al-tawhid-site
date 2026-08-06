@@ -1,5 +1,6 @@
 ---
 id: "dua-003-la-tuakhidhna"
+order: 20
 type: "Qurʾān"
 cat: "Vergebung"
 title: "Unser Herr, nimm uns nicht für Vergessen und Fehler zur Rechenschaft"

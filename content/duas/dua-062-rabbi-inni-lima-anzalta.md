@@ -1,5 +1,6 @@
 ---
 id: "dua-062-rabbi-inni-lima-anzalta"
+order: 79
 type: "Qurʾān"
 cat: "Versorgung & Bedürftigkeit"
 title: "Duʿāʾ von Mūsā um Allahs Gutes"

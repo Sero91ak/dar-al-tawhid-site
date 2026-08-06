@@ -1,5 +1,6 @@
 ---
 id: "dua-009-lisan-sidq"
+order: 26
 type: "Qurʾān"
 cat: "Akhlaq"
 title: "Schenke mir einen wahrhaftigen Ruf"

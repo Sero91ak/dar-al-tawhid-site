@@ -1,5 +1,6 @@
 ---
 id: "dua-011-najji-mina-zalimin"
+order: 28
 type: "Qurʾān"
 cat: "Schutz"
 title: "Rette mich vor dem ungerechten Volk"

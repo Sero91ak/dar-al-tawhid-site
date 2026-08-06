@@ -1,5 +1,6 @@
 ---
 id: "dua-084-allahumma-audhu-min-sharri-ma-amilt"
+order: 101
 type: "Sunnah"
 cat: "Schutz vor Taten"
 title: "Schutz vor dem Übel eigener Taten"

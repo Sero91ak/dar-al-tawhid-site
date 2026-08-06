@@ -1,5 +1,6 @@
 ---
 id: "dua-077-rabbana-atina-min-ladunka-rahmah"
+order: 94
 type: "Qurʾān"
 cat: "Barmherzigkeit & Rechtleitung"
 title: "Bitte um Barmherzigkeit und einen rechten Weg"

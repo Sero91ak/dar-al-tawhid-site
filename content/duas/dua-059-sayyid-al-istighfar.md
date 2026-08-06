@@ -1,5 +1,6 @@
 ---
 id: "dua-059-sayyid-al-istighfar"
+order: 76
 type: "Sunnah"
 cat: "Vergebung & Reue"
 title: "Das beste Bittgebet um Vergebung"

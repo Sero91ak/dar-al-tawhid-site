@@ -1,5 +1,6 @@
 ---
 id: "dua-066-allahumma-aslih-li-dini"
+order: 83
 type: "Sunnah"
 cat: "Religion, Leben & Jenseits"
 title: "Bitte um Verbesserung der Religion und aller Angelegenheiten"

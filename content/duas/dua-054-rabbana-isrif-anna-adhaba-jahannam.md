@@ -1,5 +1,6 @@
 ---
 id: "dua-054-rabbana-isrif-anna-adhaba-jahannam"
+order: 71
 type: "Qurʾān"
 cat: "Schutz vor dem Feuer"
 title: "Duʿāʾ der Diener des Allerbarmers gegen Jahannam"

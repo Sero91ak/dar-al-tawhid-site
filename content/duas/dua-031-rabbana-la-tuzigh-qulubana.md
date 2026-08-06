@@ -1,5 +1,6 @@
 ---
 id: "dua-031-rabbana-la-tuzigh-qulubana"
+order: 48
 type: "Qurʾān"
 cat: "Rechtleitung & Herz"
 title: "Duʿāʾ um festen Iman und Barmherzigkeit"

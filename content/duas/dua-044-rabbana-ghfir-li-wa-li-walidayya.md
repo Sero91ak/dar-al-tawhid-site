@@ -1,5 +1,6 @@
 ---
 id: "dua-044-rabbana-ghfir-li-wa-li-walidayya"
+order: 61
 type: "Qurʾān"
 cat: "Vergebung & Eltern"
 title: "Duʿāʾ um Vergebung für sich, Eltern und Gläubige"

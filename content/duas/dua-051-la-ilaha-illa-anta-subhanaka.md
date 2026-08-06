@@ -1,5 +1,6 @@
 ---
 id: "dua-051-la-ilaha-illa-anta-subhanaka"
+order: 68
 type: "Qurʾān"
 cat: "Not & Bedrängnis"
 title: "Duʿāʾ von Yūnus in der Dunkelheit"

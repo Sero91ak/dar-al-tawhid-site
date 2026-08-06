@@ -1,5 +1,6 @@
 ---
 id: "dua-014-adkhilni-rahmatik"
+order: 31
 type: "Qurʾān"
 cat: "Barmherzigkeit"
 title: "Lass mich durch Deine Barmherzigkeit unter Deine rechtschaffenen Diener eintreten"
