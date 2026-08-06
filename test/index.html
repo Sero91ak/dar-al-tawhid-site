@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1785515013940 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v543";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v544";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -17466,41 +17466,77 @@ html[data-theme] #bottomNav.bottom-nav{
 }
 </style>
 
-<style id="dua-pages-premium-v543">
-/* v543 · Duʿāʾ idyllisch: eckiges Licht, edle Akzentlinie, lesbare Schrift, passendere Glyphs */
-body.is-dua-route{
-  --dua-ink:var(--cream,var(--text));
-  --dua-title:var(--cream,var(--text));
-  --dua-accent:var(--gold2,var(--cream));
-  --dua-muted:var(--muted);
-  --dua-muted2:var(--muted2,var(--muted));
-  --dua-line:color-mix(in srgb,var(--gold2,var(--line)) 26%,transparent);
-  --dua-line-soft:color-mix(in srgb,var(--gold2,var(--line2,var(--line))) 12%,transparent);
-  --dua-line-strong:color-mix(in srgb,var(--gold2) 44%,transparent);
-  --dua-wash:color-mix(in srgb,var(--gold2) 7.5%,transparent);
-  --dua-wash-strong:color-mix(in srgb,var(--gold2) 12%,transparent);
-  --dua-rule:linear-gradient(90deg,transparent 0%,var(--dua-line-strong) 16%,var(--dua-line-strong) 84%,transparent 100%);
-  --dua-ornament:color-mix(in srgb,var(--gold2) 72%,transparent);
-  --dua-rail:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--gold2) 35%,transparent) 12%,var(--gold2) 42%,var(--gold2) 58%,color-mix(in srgb,var(--gold2) 35%,transparent) 88%,transparent 100%);
+<style id="catalog-oval-premium-v544">
+/* v544 · Ovales Katalog-Licht: Duʿāʾ + Beiträge + Gelehrte */
+body.is-catalog-route,
+body.is-dua-route,
+body.is-topics-route,
+body.is-topic-route,
+body.is-scholars-route,
+body.is-scholar-route{
+  --cat-ink:var(--cream,var(--text));
+  --cat-title:var(--cream,var(--text));
+  --cat-accent:var(--gold2,var(--cream));
+  --cat-muted:var(--muted);
+  --cat-muted2:var(--muted2,var(--muted));
+  --cat-line:color-mix(in srgb,var(--gold2,var(--line)) 26%,transparent);
+  --cat-line-soft:color-mix(in srgb,var(--gold2,var(--line2,var(--line))) 12%,transparent);
+  --cat-line-strong:color-mix(in srgb,var(--gold2) 44%,transparent);
+  --cat-wash:color-mix(in srgb,var(--gold2) 10%,transparent);
+  --cat-wash-strong:color-mix(in srgb,var(--gold2) 16%,transparent);
+  --cat-rule:linear-gradient(90deg,transparent 0%,var(--cat-line-strong) 16%,var(--cat-line-strong) 84%,transparent 100%);
+  --cat-ornament:color-mix(in srgb,var(--gold2) 72%,transparent);
+  --cat-rail:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--gold2) 35%,transparent) 12%,var(--gold2) 42%,var(--gold2) 58%,color-mix(in srgb,var(--gold2) 35%,transparent) 88%,transparent 100%);
+  --dua-ink:var(--cat-ink);
+  --dua-title:var(--cat-title);
+  --dua-accent:var(--cat-accent);
+  --dua-muted:var(--cat-muted);
+  --dua-muted2:var(--cat-muted2);
+  --dua-line:var(--cat-line);
+  --dua-line-soft:var(--cat-line-soft);
+  --dua-line-strong:var(--cat-line-strong);
+  --dua-wash:var(--cat-wash);
+  --dua-wash-strong:var(--cat-wash-strong);
+  --dua-rule:var(--cat-rule);
+  --dua-ornament:var(--cat-ornament);
+  --dua-rail:var(--cat-rail);
 }
-body.is-dua-route #appView.view{padding-bottom:12px}
-body.is-dua-route #appView > .view-head{
+
+body.is-catalog-route #appView.view,
+body.is-dua-route #appView.view,
+body.is-topics-route #appView.view,
+body.is-topic-route #appView.view,
+body.is-scholars-route #appView.view,
+body.is-scholar-route #appView.view{padding-bottom:12px}
+
+body.is-catalog-route #appView > .view-head,
+body.is-dua-route #appView > .view-head,
+body.is-topics-route #appView > .view-head,
+body.is-topic-route #appView > .view-head,
+body.is-scholar-route #appView > .view-head{
   margin:4px 0 24px;
   padding:4px 0 18px;
   border-bottom:0;
   position:relative;
-  text-align:left;
 }
-body.is-dua-route #appView > .view-head::after{
+body.is-catalog-route #appView > .view-head::after,
+body.is-dua-route #appView > .view-head::after,
+body.is-topics-route #appView > .view-head::after,
+body.is-topic-route #appView > .view-head::after,
+body.is-scholar-route #appView > .view-head::after{
   content:"";
   display:block;
   height:1px;
   margin:16px auto 0;
   max-width:min(100%,400px);
-  background:var(--dua-rule);
+  background:var(--cat-rule);
   opacity:.92;
 }
-body.is-dua-route #appView > .view-head::before{
+body.is-catalog-route #appView > .view-head::before,
+body.is-dua-route #appView > .view-head::before,
+body.is-topics-route #appView > .view-head::before,
+body.is-topic-route #appView > .view-head::before,
+body.is-scholar-route #appView > .view-head::before{
   content:"";
   position:absolute;
   left:50%;
@@ -17508,44 +17544,56 @@ body.is-dua-route #appView > .view-head::before{
   width:5px;
   height:5px;
   margin-left:-2.5px;
-  border:1px solid var(--dua-ornament);
+  border:1px solid var(--cat-ornament);
   border-radius:50%;
   background:transparent;
   box-shadow:0 0 0 3px color-mix(in srgb,var(--panel,var(--bg)) 88%,transparent);
   z-index:1;
   pointer-events:none;
 }
-body.is-dua-route #appView > .view-head .eyebrow{
+body.is-catalog-route #appView > .view-head .eyebrow,
+body.is-dua-route #appView > .view-head .eyebrow,
+body.is-topics-route #appView > .view-head .eyebrow,
+body.is-topic-route #appView > .view-head .eyebrow,
+body.is-scholar-route #appView > .view-head .eyebrow{
   letter-spacing:.22em;
   font-size:9px;
   font-weight:750;
-  color:var(--dua-accent);
+  color:var(--cat-accent);
   opacity:.8;
   margin-bottom:10px;
   text-transform:uppercase;
 }
-body.is-dua-route #appView > .view-head h2{
+body.is-catalog-route #appView > .view-head h2,
+body.is-dua-route #appView > .view-head h2,
+body.is-topics-route #appView > .view-head h2,
+body.is-topic-route #appView > .view-head h2,
+body.is-scholar-route #appView > .view-head h2{
   font-family:var(--serif);
   font-weight:650;
   letter-spacing:.01em;
   line-height:1.14;
-  color:var(--dua-ink);
+  color:var(--cat-ink);
   font-size:clamp(28px,5.8vw,38px);
   text-wrap:balance;
 }
-body.is-dua-route #appView > .view-head .view-desc{
+body.is-catalog-route #appView > .view-head .view-desc,
+body.is-dua-route #appView > .view-head .view-desc,
+body.is-topics-route #appView > .view-head .view-desc,
+body.is-topic-route #appView > .view-head .view-desc,
+body.is-scholar-route #appView > .view-head .view-desc{
   margin-top:10px;
   max-width:34rem;
   font-family:var(--sans,var(--ui,system-ui));
   font-size:13.5px;
   line-height:1.55;
-  color:var(--dua-muted);
+  color:var(--cat-muted);
   letter-spacing:.005em;
   font-weight:450;
 }
 
-.dua-hub,.dua-collection-page{display:block}
-.dua-hub__label{
+.dua-hub,.dua-collection-page,.topics-hub,.topic-collection-page{display:block}
+.dua-hub__label,.topics-hub__label{
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -17554,26 +17602,26 @@ body.is-dua-route #appView > .view-head .view-desc{
   padding:0 2px 12px;
   position:relative;
 }
-.dua-hub__label::after{
+.dua-hub__label::after,.topics-hub__label::after{
   content:"";
   position:absolute;
   left:0;right:0;bottom:0;
   height:1px;
-  background:var(--dua-rule);
+  background:var(--cat-rule);
   opacity:.7;
 }
-.dua-hub__label b{
+.dua-hub__label b,.topics-hub__label b{
   font-family:var(--serif);
   font-size:12.5px;
   font-weight:650;
   letter-spacing:.18em;
   text-transform:uppercase;
-  color:var(--dua-accent);
+  color:var(--cat-accent);
 }
-.dua-hub__label span{
+.dua-hub__label span,.topics-hub__label span{
   font-family:var(--sans,var(--ui,system-ui));
   font-size:11px;
-  color:var(--dua-muted2);
+  color:var(--cat-muted2);
   letter-spacing:.06em;
   text-transform:uppercase;
   font-weight:650;
@@ -17581,237 +17629,134 @@ body.is-dua-route #appView > .view-head .view-desc{
 
 .dua-hub .main-search{margin:2px 0 22px!important}
 .dua-hub .main-search .search,
-body.is-dua-route .main-search:has(#duaSearchInput) .search{
+body.is-dua-route .main-search:has(#duaSearchInput) .search,
+body.is-topics-route .search-pro-panel .search-input-field{
   height:46px!important;
   min-height:46px!important;
-  border-radius:14px!important;
-  border:1px solid var(--dua-line)!important;
+  border-radius:999px!important;
+  border:1px solid var(--cat-line)!important;
   background:color-mix(in srgb,var(--gold2) 3%,transparent)!important;
   box-shadow:none!important;
-  color:var(--dua-ink)!important;
+  color:var(--cat-ink)!important;
   font-family:var(--sans,var(--ui,system-ui))!important;
   font-size:14px!important;
   letter-spacing:.01em;
   padding:0 16px!important;
 }
 .dua-hub .main-search .search:focus,
-body.is-dua-route .main-search:has(#duaSearchInput) .search:focus{
-  border-color:var(--dua-line-strong)!important;
-  background:var(--dua-wash)!important;
+body.is-dua-route .main-search:has(#duaSearchInput) .search:focus,
+body.is-topics-route .search-pro-panel .search-input-field:focus{
+  border-color:var(--cat-line-strong)!important;
+  background:var(--cat-wash)!important;
   box-shadow:0 0 0 3px color-mix(in srgb,var(--gold2) 10%,transparent)!important;
 }
 
-.dua-hub #duaSearchBlock.section-block{
+body.is-topics-route .search-pro-panel{
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:0 0 8px!important;
+  margin:0 0 18px!important;
+}
+body.is-topics-route .search-helper{color:var(--cat-muted2)!important;font-size:11.5px!important}
+body.is-topics-route .advanced-toggle{
+  border-radius:999px!important;
+  border:1px solid var(--cat-line)!important;
+  background:transparent!important;
+}
+
+.dua-hub #duaSearchBlock.section-block,
+body.is-topics-route #homeSearchBlock.section-block{
   margin:0 0 20px;
   padding:0 0 16px;
   border-bottom:0;
   position:relative;
 }
-.dua-hub #duaSearchBlock.section-block::after{
+.dua-hub #duaSearchBlock.section-block::after,
+body.is-topics-route #homeSearchBlock.section-block::after{
   content:"";
   display:block;
   height:1px;
   margin-top:14px;
-  background:var(--dua-rule);
+  background:var(--cat-rule);
   opacity:.65;
 }
-.dua-hub #duaSearchBlock .section-head{
-  margin-bottom:10px;
-  padding-bottom:10px;
-  border-bottom:1px solid var(--dua-line-soft);
-}
-.dua-hub #duaSearchBlock .section-head h3{
+.dua-hub #duaSearchBlock .section-head h3,
+body.is-topics-route #homeSearchBlock .section-head h3{
   font-family:var(--serif);
   font-size:17px;
   font-weight:650;
   letter-spacing:.01em;
-  color:var(--dua-ink);
-}
-.dua-hub #duaSearchBlock .section-head span{
-  font-family:var(--sans,var(--ui,system-ui));
-  font-size:11px;
-  color:var(--dua-muted2);
-  letter-spacing:.06em;
-  text-transform:uppercase;
+  color:var(--cat-ink);
 }
 
-.dua-theme-grid{
-  display:flex;
-  flex-direction:column;
-  gap:0;
+/* ovaler Hover-Lichtfleck – geteilt */
+.dua-theme-grid,
+.topics-theme-grid,
+.dua-collection,
+.topic-collection,
+body.is-topic-route .post-grid,
+body.is-scholar-route .post-grid,
+body.is-topics-route #homeSearchResults{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:4px!important;
   margin:4px 0 0;
   padding:0;
+  grid-template-columns:none!important;
 }
-.dua-theme-card{
-  display:grid!important;
-  grid-template-columns:26px 38px minmax(0,1fr) auto!important;
-  align-items:center!important;
-  column-gap:12px!important;
-  min-height:0!important;
-  margin:0!important;
-  padding:16px 4px 16px 6px!important;
-  border:0!important;
-  border-bottom:1px solid var(--dua-line-soft)!important;
-  border-radius:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  cursor:pointer;
-  transition:background .15s ease, padding .15s ease, border-color .15s ease;
-  position:relative;
-  overflow:visible;
-}
-.dua-theme-card:last-child{border-bottom-color:transparent!important}
-/* edle Akzentlinie: weich auslaufend, leichter Goldschimmer */
-.dua-theme-card:before{
-  content:""!important;
-  display:block!important;
-  position:absolute;
-  left:1px;
-  top:28%;
-  bottom:28%;
-  width:2px;
-  border-radius:999px;
-  background:transparent;
-  box-shadow:none;
-  opacity:0;
-  transition:opacity .18s ease, top .18s ease, bottom .18s ease, box-shadow .18s ease;
-  pointer-events:none;
-}
-.dua-theme-card:hover,
-.dua-theme-card:focus-visible{
-  transform:none!important;
-  filter:none!important;
-  /* eckiges, rechteckiges Licht – bewusst ohne Soft-Fade rechts */
-  background:var(--dua-wash)!important;
-  box-shadow:none!important;
-  outline:none;
-  padding-left:12px!important;
-  border-bottom-color:var(--dua-line)!important;
-}
-.dua-theme-card:hover:before,
-.dua-theme-card:focus-visible:before{
-  background:var(--dua-rail);
-  opacity:1;
-  top:16%;
-  bottom:16%;
-  box-shadow:0 0 10px color-mix(in srgb,var(--gold2) 28%,transparent);
-}
-.dua-theme-card__idx{
-  font-family:var(--serif);
-  font-size:12px;
-  font-weight:650;
-  letter-spacing:.08em;
-  color:var(--dua-muted2);
-  opacity:.78;
-  text-align:right;
-  font-variant-numeric:tabular-nums;
-}
-.dua-theme-card:hover .dua-theme-card__idx{
-  color:var(--dua-accent);
-  opacity:1;
-}
-.dua-theme-card__icon{
-  width:38px!important;
-  height:38px!important;
-  display:grid;
-  place-items:center;
-  border:1px solid var(--dua-line-soft)!important;
-  border-radius:50%!important;
-  background:color-mix(in srgb,var(--gold2) 3.5%,transparent)!important;
-  margin:0!important;
-  transition:border-color .15s ease, background .15s ease;
-}
-.dua-theme-card:hover .dua-theme-card__icon,
-.dua-theme-card:focus-visible .dua-theme-card__icon{
-  border-color:var(--dua-line-strong)!important;
-  background:color-mix(in srgb,var(--gold2) 8%,transparent)!important;
-}
-.dua-theme-card__icon .emoji-emblem{
-  width:18px!important;
-  height:18px!important;
-  font-size:15px!important;
-  filter:none!important;
-  opacity:.95;
-  line-height:1;
-}
-.dua-theme-card__body{min-width:0;display:grid;gap:5px}
-.dua-theme-card h3{
-  margin:0!important;
-  font-family:var(--serif)!important;
-  font-size:17.5px!important;
-  line-height:1.25!important;
-  font-weight:650!important;
-  letter-spacing:.004em;
-  color:var(--dua-title)!important;
-  display:block!important;
-  -webkit-line-clamp:unset!important;
-  overflow:visible!important;
-}
-.dua-theme-card__count{
-  margin:0!important;
-  font-family:var(--sans,var(--ui,system-ui))!important;
-  font-size:11.5px!important;
-  line-height:1.25!important;
-  font-weight:600!important;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:var(--dua-muted2)!important;
-  display:block!important;
-}
-.dua-theme-card__chev{
-  color:var(--dua-muted2);
-  font-size:16px;
-  font-weight:300;
-  opacity:.35;
-  transition:opacity .15s ease,transform .15s ease,color .15s ease;
-  padding-right:2px;
-}
-.dua-theme-card:hover .dua-theme-card__chev{
-  opacity:.88;
-  transform:translateX(3px);
-  color:var(--dua-accent);
-}
-
-.dua-collection{
-  display:flex;
-  flex-direction:column;
-  gap:0;
-  margin:6px 0 0;
-  padding:0;
-}
-.dua-collection::before{
+.dua-collection::before,
+.topic-collection::before{
   content:"";
   display:block;
   height:1px;
   margin:0 auto 6px;
   max-width:min(100%,340px);
-  background:var(--dua-rule);
+  background:var(--cat-rule);
   opacity:.75;
 }
-.dua-row{
+
+.dua-theme-card,
+.topics-theme-card,
+.dua-row,
+.post-row{
   display:grid!important;
-  grid-template-columns:38px minmax(0,1fr)!important;
-  column-gap:14px!important;
-  align-items:start!important;
+  align-items:center!important;
   min-height:0!important;
   margin:0!important;
-  padding:18px 4px 17px 6px!important;
   border:0!important;
-  border-bottom:1px solid var(--dua-line-soft)!important;
-  border-radius:0!important;
+  border-bottom:0!important;
+  border-radius:999px!important;
   background:transparent!important;
   box-shadow:none!important;
   cursor:pointer;
-  transition:background .14s ease,padding .14s ease;
   position:relative;
-  overflow:visible;
+  overflow:visible!important;
+  transform:none!important;
+  filter:none!important;
+  transition:background .16s ease, box-shadow .16s ease, padding .16s ease;
 }
-.dua-row:last-child{border-bottom-color:transparent!important}
-.dua-row:before{
+.dua-theme-card,
+.topics-theme-card{
+  grid-template-columns:26px 38px minmax(0,1fr) auto!important;
+  column-gap:12px!important;
+  padding:14px 14px 14px 10px!important;
+}
+.dua-row,
+.post-row{
+  grid-template-columns:38px minmax(0,1fr)!important;
+  column-gap:14px!important;
+  align-items:start!important;
+  padding:14px 14px 14px 10px!important;
+}
+.dua-theme-card:before,
+.topics-theme-card:before,
+.dua-row:before,
+.post-row:before{
   content:""!important;
   display:block!important;
   position:absolute;
-  left:1px;
+  left:6px;
   top:28%;
   bottom:28%;
   width:2px;
@@ -17821,73 +17766,151 @@ body.is-dua-route .main-search:has(#duaSearchInput) .search:focus{
   transition:opacity .16s ease, top .16s ease, bottom .16s ease, box-shadow .16s ease;
   pointer-events:none;
 }
+.dua-theme-card:hover,
+.dua-theme-card:focus-visible,
+.topics-theme-card:hover,
+.topics-theme-card:focus-visible,
 .dua-row:hover,
-.dua-row:focus-visible{
+.dua-row:focus-visible,
+.post-row:hover,
+.post-row:focus-visible{
   transform:none!important;
   filter:none!important;
-  background:var(--dua-wash)!important;
-  box-shadow:none!important;
   outline:none;
-  padding-left:12px!important;
+  /* oval / abgerundet – kein eckiges Rechteck */
+  background:radial-gradient(ellipse 96% 86% at 38% 50%,var(--cat-wash-strong),color-mix(in srgb,var(--gold2) 5%,transparent) 58%,transparent 76%)!important;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2) 14%,transparent)!important;
+  border-radius:999px!important;
+  padding-left:14px!important;
 }
+.dua-theme-card:hover:before,
+.dua-theme-card:focus-visible:before,
+.topics-theme-card:hover:before,
+.topics-theme-card:focus-visible:before,
 .dua-row:hover:before,
-.dua-row:focus-visible:before{
-  background:var(--dua-rail);
+.dua-row:focus-visible:before,
+.post-row:hover:before,
+.post-row:focus-visible:before{
+  background:var(--cat-rail);
   opacity:1;
-  top:16%;
-  bottom:16%;
+  top:22%;
+  bottom:22%;
   box-shadow:0 0 10px color-mix(in srgb,var(--gold2) 26%,transparent);
 }
-.dua-row:active{background:var(--dua-wash-strong)!important}
-.dua-row__icon{
-  width:38px;
-  height:38px;
-  margin-top:1px;
-  display:grid;
-  place-items:center;
-  border:1px solid var(--dua-line-soft)!important;
+.dua-theme-card:active,
+.topics-theme-card:active,
+.dua-row:active,
+.post-row:active{
+  background:radial-gradient(ellipse 96% 86% at 38% 50%,var(--cat-wash-strong),transparent 74%)!important;
+}
+
+.dua-theme-card__idx,
+.topics-theme-card__idx{
+  font-family:var(--serif);
+  font-size:12px;
+  font-weight:650;
+  letter-spacing:.08em;
+  color:var(--cat-muted2);
+  opacity:.78;
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+}
+.dua-theme-card:hover .dua-theme-card__idx,
+.topics-theme-card:hover .topics-theme-card__idx{
+  color:var(--cat-accent);
+  opacity:1;
+}
+.dua-theme-card__icon,
+.topics-theme-card__icon,
+.dua-row__icon,
+.post-row__icon{
+  width:38px!important;
+  height:38px!important;
+  display:grid!important;
+  place-items:center!important;
+  border:1px solid var(--cat-line-soft)!important;
   border-radius:50%!important;
   background:color-mix(in srgb,var(--gold2) 3.5%,transparent)!important;
-  transition:border-color .14s ease, background .14s ease;
+  margin:0!important;
+  box-shadow:none!important;
 }
-.dua-row:hover .dua-row__icon{
-  border-color:var(--dua-line)!important;
+.dua-theme-card:hover .dua-theme-card__icon,
+.topics-theme-card:hover .topics-theme-card__icon,
+.dua-row:hover .dua-row__icon,
+.post-row:hover .post-row__icon{
+  border-color:var(--cat-line-strong)!important;
   background:color-mix(in srgb,var(--gold2) 8%,transparent)!important;
 }
+.dua-theme-card__icon .emoji-emblem,
+.topics-theme-card__icon .emoji-emblem,
 .dua-row__icon .emoji-emblem,
-.dua-row__icon .folder-icon{
-  width:16px!important;
-  height:16px!important;
-  font-size:14px!important;
-  margin:0!important;
+.post-row__icon .emoji-emblem{
+  width:18px!important;
+  height:18px!important;
+  font-size:15px!important;
   filter:none!important;
-  opacity:.94;
+  opacity:.95;
+  line-height:1;
+  margin:0!important;
 }
-.dua-row__body{min-width:0;display:grid;gap:6px}
-.dua-row h3{
+.dua-theme-card__body,
+.topics-theme-card__body,
+.dua-row__body,
+.post-row__body{min-width:0;display:grid;gap:5px}
+.dua-theme-card h3,
+.topics-theme-card h3,
+.dua-row h3,
+.post-row h3{
   margin:0!important;
   font-family:var(--serif)!important;
   font-size:17px!important;
-  line-height:1.32!important;
+  line-height:1.28!important;
   font-weight:650!important;
   letter-spacing:.002em;
-  color:var(--dua-title)!important;
+  color:var(--cat-title)!important;
   display:block!important;
+  -webkit-line-clamp:unset!important;
   overflow:visible!important;
+  white-space:normal!important;
 }
-.dua-row__sub{
+.dua-theme-card__count,
+.topics-theme-card__count{
+  margin:0!important;
+  font-family:var(--sans,var(--ui,system-ui))!important;
+  font-size:11.5px!important;
+  font-weight:600!important;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--cat-muted2)!important;
+}
+.dua-theme-card__chev,
+.topics-theme-card__chev{
+  color:var(--cat-muted2);
+  font-size:16px;
+  font-weight:300;
+  opacity:.35;
+  transition:opacity .15s ease,transform .15s ease,color .15s ease;
+}
+.dua-theme-card:hover .dua-theme-card__chev,
+.topics-theme-card:hover .topics-theme-card__chev{
+  opacity:.88;
+  transform:translateX(3px);
+  color:var(--cat-accent);
+}
+.dua-row__sub,
+.post-row__sub{
   margin:0!important;
   font-family:var(--sans,var(--ui,system-ui))!important;
   font-size:13.5px!important;
   line-height:1.5!important;
-  color:var(--dua-muted)!important;
-  letter-spacing:.0em;
-  display:block!important;
+  color:var(--cat-muted)!important;
+  display:-webkit-box;
   -webkit-line-clamp:2;
   -webkit-box-orient:vertical;
   overflow:hidden;
 }
-.dua-row__meta{
+.dua-row__meta,
+.post-row__meta{
   display:flex;
   flex-wrap:wrap;
   gap:6px 12px;
@@ -17896,26 +17919,166 @@ body.is-dua-route .main-search:has(#duaSearchInput) .search:focus{
   border-top:1px solid color-mix(in srgb,var(--gold2) 9%,transparent);
   max-width:fit-content;
 }
-.dua-row__meta span{
+.dua-row__meta span,
+.post-row__meta span{
   border:0!important;
   border-radius:0!important;
   padding:0!important;
   background:transparent!important;
   font-family:var(--sans,var(--ui,system-ui))!important;
-  color:var(--dua-muted2)!important;
+  color:var(--cat-muted2)!important;
   font-size:10px!important;
   font-weight:700!important;
   letter-spacing:.1em;
   text-transform:uppercase;
 }
-.dua-row__meta span + span::before{
+.dua-row__meta span + span::before,
+.post-row__meta span + span::before{
   content:"·";
   margin-right:12px;
   opacity:.4;
   letter-spacing:0;
 }
+.post-row .excerpt,
+.post-row .source-preview,
+.post-row .post-meta,
+.post-row .badge{display:none!important}
 
-body.is-dua-route .footer{
+/* Post-Katalogzeilen überall in Listen */
+.post-grid:has(.post-row),
+.pinned-grid:has(.post-row),
+.latest-grid:has(.post-row),
+.home-v380-search-grid:has(.post-row){
+  display:flex!important;
+  flex-direction:column!important;
+  gap:4px!important;
+  grid-template-columns:none!important;
+}
+
+
+/* Beiträge-Übersicht: keine alten Kartenraster */
+body.is-topics-route .category-cluster{
+  margin:18px 0 0;
+  padding:0;
+  border:0;
+  background:transparent;
+}
+body.is-topics-route .category-cluster h3{
+  font-family:var(--serif);
+  font-size:12.5px;
+  font-weight:650;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--cat-accent);
+  margin:0 0 8px;
+  padding:0 2px 10px;
+  border-bottom:0;
+  position:relative;
+}
+body.is-topics-route .category-cluster h3::after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:0;
+  height:1px;
+  background:var(--cat-rule);
+  opacity:.7;
+}
+body.is-topics-route .grid-list{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:4px!important;
+  grid-template-columns:none!important;
+}
+body.is-topics-route .list-card,
+body.is-topics-route .folder-card{
+  display:none!important;
+}
+
+/* Gelehrte: ovales Licht, runde Glyphs */
+body.is-scholars-route .scholars-index{
+  padding-left:0!important;
+  padding-right:0!important;
+}
+body.is-scholars-route .scholars-index__title{
+  font-size:clamp(28px,5.8vw,36px)!important;
+  font-weight:650!important;
+  letter-spacing:.01em!important;
+  color:var(--cat-ink)!important;
+}
+body.is-scholars-route .scholars-index__eyebrow{color:var(--cat-accent)!important;letter-spacing:.22em!important}
+body.is-scholars-route .scholars-index__subtitle{font-size:13.5px!important;line-height:1.55!important}
+body.is-scholars-route .scholars-index__search{
+  border-radius:999px!important;
+  min-height:44px!important;
+  border-color:var(--cat-line)!important;
+}
+body.is-scholars-route .scholars-index__row{
+  position:relative;
+  gap:12px!important;
+  min-height:56px!important;
+  padding:10px 14px 10px 10px!important;
+  border-bottom:0!important;
+  border-radius:999px!important;
+  transition:background .16s ease, box-shadow .16s ease;
+  overflow:visible!important;
+}
+body.is-scholars-route .scholars-index__row:before{
+  content:"";
+  position:absolute;
+  left:6px;
+  top:28%;
+  bottom:28%;
+  width:2px;
+  border-radius:999px;
+  background:transparent;
+  opacity:0;
+  transition:opacity .16s ease, top .16s ease, bottom .16s ease, box-shadow .16s ease;
+  pointer-events:none;
+}
+body.is-scholars-route .scholars-index__row:hover,
+body.is-scholars-route .scholars-index__row:focus-visible,
+body.is-scholars-route .scholars-index__row:active{
+  background:radial-gradient(ellipse 96% 86% at 38% 50%,var(--cat-wash-strong),color-mix(in srgb,var(--gold2) 5%,transparent) 58%,transparent 76%)!important;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2) 14%,transparent)!important;
+  border-radius:999px!important;
+  outline:none;
+}
+body.is-scholars-route .scholars-index__row:hover:before,
+body.is-scholars-route .scholars-index__row:focus-visible:before{
+  background:var(--cat-rail);
+  opacity:1;
+  top:22%;
+  bottom:22%;
+  box-shadow:0 0 10px color-mix(in srgb,var(--gold2) 26%,transparent);
+}
+body.is-scholars-route .scholars-index__mono{
+  width:38px!important;
+  height:38px!important;
+  border-radius:50%!important;
+  font-size:15px!important;
+  font-weight:600!important;
+  letter-spacing:0!important;
+  border-color:var(--cat-line-soft)!important;
+  background:color-mix(in srgb,var(--gold2) 3.5%,transparent)!important;
+}
+body.is-scholars-route .scholars-index__name{
+  font-size:16px!important;
+  font-weight:650!important;
+  color:var(--cat-title)!important;
+}
+body.is-scholars-route .scholars-index__roles{
+  font-size:11.5px!important;
+  letter-spacing:.02em;
+}
+body.is-scholars-route .scholars-index__list{gap:4px!important}
+body.is-scholars-route .scholars-index__list--cols{grid-template-columns:1fr!important}
+
+body.is-catalog-route .footer,
+body.is-dua-route .footer,
+body.is-topics-route .footer,
+body.is-topic-route .footer,
+body.is-scholars-route .footer,
+body.is-scholar-route .footer{
   margin-top:44px!important;
   padding-top:26px!important;
   padding-bottom:calc(24px + env(safe-area-inset-bottom))!important;
@@ -17925,109 +18088,59 @@ body.is-dua-route .footer{
   position:relative;
   text-align:center;
 }
-body.is-dua-route .footer::before{
+body.is-catalog-route .footer::before,
+body.is-dua-route .footer::before,
+body.is-topics-route .footer::before,
+body.is-topic-route .footer::before,
+body.is-scholars-route .footer::before,
+body.is-scholar-route .footer::before{
   content:"";
   display:block;
   height:1px;
   margin:0 auto 20px;
   max-width:168px;
-  background:var(--dua-rule);
+  background:var(--cat-rule);
   opacity:.9;
 }
-body.is-dua-route .footer::after{
-  content:"";
-  position:absolute;
-  left:50%;
-  top:26px;
-  width:5px;
-  height:5px;
-  margin-left:-2.5px;
-  margin-top:-3px;
-  border:1px solid var(--dua-ornament);
-  border-radius:50%;
-  background:color-mix(in srgb,var(--panel,var(--bg)) 90%,transparent);
-  pointer-events:none;
-}
-body.is-dua-route .footer strong{
+body.is-catalog-route .footer strong,
+body.is-dua-route .footer strong,
+body.is-topics-route .footer strong,
+body.is-topic-route .footer strong,
+body.is-scholars-route .footer strong,
+body.is-scholar-route .footer strong{
   display:block;
   font-family:var(--display,var(--serif))!important;
   font-size:11px!important;
   letter-spacing:.2em!important;
   font-weight:750!important;
-  color:var(--dua-accent)!important;
+  color:var(--cat-accent)!important;
   margin-bottom:9px;
 }
-body.is-dua-route .footer{
-  font-family:var(--sans,var(--ui,system-ui));
-  font-size:12px;
-  line-height:1.55;
-  color:var(--dua-muted)!important;
-}
-body.is-dua-route .footer-actions{
-  margin-top:16px!important;
-  gap:8px!important;
-  justify-content:center;
-}
-body.is-dua-route .footer-action-btn,
-body.is-dua-route .footer-social-link,
-body.is-dua-route .footer-app-save{
-  min-height:34px!important;
-  padding:6px 12px!important;
-  border-radius:999px!important;
-  border:1px solid var(--dua-line)!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  font-size:11px!important;
-  font-weight:700!important;
-  letter-spacing:.03em;
-  color:var(--dua-muted)!important;
-}
-body.is-dua-route .footer-action-btn svg,
-body.is-dua-route .footer-social-link svg{
-  width:13px!important;
-  height:13px!important;
-  opacity:.85;
-}
-body.is-dua-route .footer .signature{
-  margin-top:16px!important;
-  font-size:16px!important;
-  opacity:.7;
-  letter-spacing:.03em;
-}
 
-html[data-theme="light"] body.is-dua-route{
-  --dua-title:var(--text,var(--cream));
-  --dua-ink:var(--text,var(--cream));
-  --dua-line:color-mix(in srgb,var(--gold2,#8a6a28) 30%,transparent);
-  --dua-line-soft:color-mix(in srgb,var(--gold2,#8a6a28) 14%,transparent);
-  --dua-wash:color-mix(in srgb,var(--gold2,#8a6a28) 8%,transparent);
-  --dua-ornament:color-mix(in srgb,var(--gold2,#8a6a28) 62%,transparent);
-}
-html[data-theme="soft"] body.is-dua-route{
-  --dua-wash:color-mix(in srgb,var(--gold2) 9%,transparent);
-}
-html[data-theme="royal"] body.is-dua-route,
-html[data-theme="dar-al-layl"] body.is-dua-route,
-html[data-theme="aurora"] body.is-dua-route,
-html[data-theme="bordeaux"] body.is-dua-route{
-  --dua-wash:color-mix(in srgb,var(--gold2) 8%,transparent);
-  --dua-wash-strong:color-mix(in srgb,var(--gold2) 13%,transparent);
+html[data-theme="light"] body.is-catalog-route,
+html[data-theme="light"] body.is-dua-route,
+html[data-theme="light"] body.is-topics-route,
+html[data-theme="light"] body.is-topic-route,
+html[data-theme="light"] body.is-scholars-route,
+html[data-theme="light"] body.is-scholar-route{
+  --cat-title:var(--text,var(--cream));
+  --cat-ink:var(--text,var(--cream));
+  --cat-line:color-mix(in srgb,var(--gold2,#8a6a28) 30%,transparent);
+  --cat-line-soft:color-mix(in srgb,var(--gold2,#8a6a28) 14%,transparent);
+  --cat-wash:color-mix(in srgb,var(--gold2,#8a6a28) 10%,transparent);
+  --cat-wash-strong:color-mix(in srgb,var(--gold2,#8a6a28) 16%,transparent);
 }
 
 @media(max-width:700px){
-  .dua-theme-card{
+  .dua-theme-card,.topics-theme-card{
     grid-template-columns:24px 34px minmax(0,1fr) auto!important;
     column-gap:10px!important;
-    padding:15px 2px 15px 5px!important;
+    padding:12px 12px 12px 8px!important;
   }
-  .dua-theme-card h3{font-size:16.5px!important}
-  .dua-theme-card__icon{width:34px!important;height:34px!important}
-  .dua-row{padding:16px 2px 15px 5px!important;grid-template-columns:34px minmax(0,1fr)!important}
-  .dua-row__icon{width:34px;height:34px}
-  .dua-row h3{font-size:16px!important}
-  .dua-row__sub{font-size:13px!important}
-  body.is-dua-route .footer{margin-top:36px!important}
-  body.is-dua-route #appView > .view-head h2{font-size:clamp(26px,7.2vw,34px)}
+  .dua-theme-card h3,.topics-theme-card h3,.dua-row h3,.post-row h3{font-size:16px!important}
+  .dua-row,.post-row{padding:12px 12px 12px 8px!important;grid-template-columns:34px minmax(0,1fr)!important}
+  .dua-theme-card__icon,.topics-theme-card__icon,.dua-row__icon,.post-row__icon,
+  body.is-scholars-route .scholars-index__mono{width:34px!important;height:34px!important}
 }
 </style></style>
 <body class="has-bottom-nav">
@@ -19093,7 +19206,7 @@ function initBottomNavSwipe(){}
 function initBottomNavContentSwipe(){const view=$("appView");if(view){view.dataset.tabSwipeBound="tap-only";view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}resetTabSwipePreview()}
 function setHeader(title,desc,eyebrow="DAR AL TAWḤID",headClass=""){const isHome=title==="Startseite";const hijriFrame=isHome?`<button id="homeHijriDayBtn" class="home-hijri-dayframe dar-click-glow" type="button" data-hijri-today data-nav="calendar" aria-label="Kalender öffnen"><span class="home-hijri-ico" aria-hidden="true">📅</span><span data-hijri-date-text>—</span></button>`:"";const homeRow=isHome?`<div class="view-head-home-row view-head-home-row--v380 view-head-home-row--v475"><div class="view-head-home-leading"><h2 class="home-start-title">${esc(title)}</h2>${renderHomeRefreshButton()}</div><div class="view-head-home-hijri-end">${hijriFrame}</div><span id="homeRefreshLive" class="home-refresh-live-header" aria-live="polite"></span></div><div class="home-start-rule" aria-hidden="true"></div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home view-head-home--v380":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
 function findQuote(post){const lines=stripMd(post.statement).split(/\n+/).map(x=>x.trim()).filter(Boolean);return lines.find(x=>x.includes("„"))||lines[0]||""}
-function postCard(post){return`<article class="post-card" data-nav="post" data-value="${esc(post.id)}"><div><h3>${esc(post.title)}</h3><div class="post-meta">${post.category?`<span class="badge">${esc(post.category)}</span>`:""}${post.scholar?`<span class="badge">${esc(post.scholar)}</span>`:""}</div><div class="excerpt">${esc(findQuote(post))}</div></div><div class="source-preview">${esc(post.source||"")}</div></article>`}
+function postCard(post){const cat=normalizePostCategory(post.category||"");const meta=[cat,post.scholar].filter(Boolean);return`<article class="post-row dua-row" data-nav="post" data-value="${esc(post.id)}"><div class="post-row__icon dua-row__icon" aria-hidden="true"><span class="emoji-emblem">${postItemGlyph(post)}</span></div><div class="post-row__body dua-row__body"><h3>${esc(post.title)}</h3><p class="post-row__sub dua-row__sub">${esc(findQuote(post))}</p>${meta.length?`<div class="post-row__meta dua-row__meta">${meta.map(m=>`<span>${esc(m)}</span>`).join("")}</div>`:""}</div></article>`}
 function iconMarkup(type="",value="",fallback=""){const key=String(type+" "+value+" "+fallback).toLowerCase();let emoji="📁";if(key.includes("hadith")||key.includes("hadithe")||key.includes("ḥadīth"))emoji="📜";if(key.includes("duas")||key.includes("dua")||key.includes("duʿ")||key.includes("du'a")||key.includes("bitt"))emoji="🤲";if(key.includes("topics")||key.includes("themen")||key.includes("kategorien")||key.includes("topic")||key.includes("adab")||key.includes("aqid")||key.includes("akhl"))emoji="📚";if(key.includes("scholars")||key.includes("gelehrte")||key.includes("scholar"))emoji="👤";if(key.includes("books")||key.includes("bücher")||key.includes("buch")||key.includes("werke")||key.includes("book"))emoji="📖";if(key.includes("recent")||key.includes("neueste")||key.includes("aktuell"))emoji="🆕";if(key.includes("saved")||key.includes("gespeichert"))emoji="♡";if(key.includes("about")||key.includes("über die app")||key.includes("maßstab")||key.includes("manhaj"))emoji="⚖️";if(key.includes("morgen")||key.includes("abend"))emoji="🌅";if(key.includes("schlaf"))emoji="🌙";if(key.includes("aufwachen"))emoji="☀️";if(key.includes("krankheit")||key.includes("krank"))emoji="🤲";if(key.includes("reise"))emoji="🧭";if(key.includes("essen"))emoji="🍽️";if(key.includes("moschee")||key.includes("gebet"))emoji="🕌";if(key.includes("schutz"))emoji="🛡️";if(key.includes("familie"))emoji="🏡";if(key.includes("eltern"))emoji="🤲";if(key.includes("rizq"))emoji="🌾";if(key.includes("regen"))emoji="🌧️";if(key.includes("wind"))emoji="🍃";return`<span class="emoji-emblem" aria-hidden="true">${emoji}</span>`}
 function listCard(title,count,view,value,icon=""){return`<article class="list-card" data-nav="${esc(view)}" data-value="${esc(value)}"><div class="folder-icon">${iconMarkup(view,value,icon)}</div><h3>${esc(title)}</h3><div class="count">${count} öffnen</div></article>`}
 function getBookAuthor(bookName){const direct=posts.find(post=>String(post.book||"")===String(bookName)&&(post.author||post.bookAuthor));if(direct)return direct.author||direct.bookAuthor;const related=posts.find(post=>String(post.book||"")===String(bookName)&&post.scholar);return related?related.scholar:""}
@@ -19163,7 +19276,7 @@ function postMatchesScholarKey(post,key){return splitScholarParts(post.scholar).
 function renderScholarOptions(){return buildScholarCatalog().map(s=>`<option value="${esc(s.key)}">${esc(s.label)}</option>`).join("")}
 function sourceType(post){const s=[post.category,post.topic,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ").toLowerCase();if(s.includes("qurʾān")||s.includes("quran")||s.includes("tafsīr"))return"quran";if(s.includes("hadith")||s.includes("ḥadīth")||s.includes("sunnah")||s.includes("bukh")||s.includes("muslim")||s.includes("tirmidh")||s.includes("abī dāwūd")||s.includes("abu dawud"))return"sunnah";if(s.includes("athar")||s.includes("āthār")||s.includes("ṣaḥāb")||s.includes("tabi")||s.includes("tābi")||s.includes("muṣannaf"))return"athar";return"other"}
 function highlightText(value,q){const text=esc(value||"");if(!q)return text;const clean=String(q).trim();if(!clean)return text;const safe=clean.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");return text.replace(new RegExp(safe,"gi"),m=>`<mark class="search-hit">${m}</mark>`)}
-function filteredPostCard(post,q=""){return`<article class="post-card" data-nav="post" data-value="${esc(post.id)}"><div><h3>${highlightText(post.title,q)}</h3><div class="post-meta">${post.category?`<span class="badge">${highlightText(post.category,q)}</span>`:""}${post.scholar?`<span class="badge">${highlightText(post.scholar,q)}</span>`:""}</div><div class="excerpt">${highlightText(findQuote(post),q)}</div></div><div class="source-preview">${highlightText(post.source||"",q)}${searchMatchLabel(post,q)}</div></article>`}
+function filteredPostCard(post,q=""){const cat=normalizePostCategory(post.category||"");const meta=[cat,post.scholar].filter(Boolean);return`<article class="post-row dua-row" data-nav="post" data-value="${esc(post.id)}"><div class="post-row__icon dua-row__icon" aria-hidden="true"><span class="emoji-emblem">${postItemGlyph(post)}</span></div><div class="post-row__body dua-row__body"><h3>${highlightText(post.title,q)}</h3><p class="post-row__sub dua-row__sub">${highlightText(findQuote(post),q)}</p>${meta.length?`<div class="post-row__meta dua-row__meta">${meta.map(m=>`<span>${highlightText(m,q)}</span>`).join("")}</div>`:""}${q?`<div class="post-row__meta dua-row__meta" style="border:0;padding-top:0">${searchMatchLabel(post,q)}</div>`:""}</div></article>`}
 function renderFilterPanel(prefix="home",hidden=true){const cats=uniqueList("category").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");const scholars=renderScholarOptions();const books=uniqueList("book").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");const stateClass=hidden?"advanced-hidden":"advanced-visible";return`<section id="${prefix}FilterPanel" class="filter-panel ${stateClass}"><div class="filter-grid"><select id="${prefix}FilterCat" class="filter-select"><option value="">Alle Kategorien</option>${cats}</select><select id="${prefix}FilterScholar" class="filter-select"><option value="">Alle Gelehrten</option>${scholars}</select><select id="${prefix}FilterBook" class="filter-select"><option value="">Alle Bücher</option>${books}</select><select id="${prefix}FilterType" class="filter-select"><option value="">Qurʾān / Sunnah / Athar</option><option value="quran">Qurʾān / Tafsīr</option><option value="sunnah">Sunnah / Hadith</option><option value="athar">Āthār</option><option value="other">Sonstige</option></select></div></section>`}
 function renderSearchPanel(){
   return `<section class="search-pro-panel"><div class="search-line"><div class="search-input-shell"><span class="search-input-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span><input id="homeSearchInput" class="search search-input-field" type="search" placeholder="Suche nach Beitrag, Duʿāʾ, Thema, Gelehrtem, Buch oder Quelle…" autocomplete="off" spellcheck="false" enterkeyhint="search"></div><button id="advancedFilterBtn" class="advanced-toggle" type="button">Filter anzeigen</button></div>${renderFilterPanel("home",true)}<div class="search-helper">Tipp: Nutze „Schnell auswählen“ für Thema, Gelehrten oder Buch. Die Filter brauchst du nur für gezielte Suche.</div></section>`;
@@ -20425,21 +20538,48 @@ function postsForSeries(id){
   if(typeof s.match==="function")return posts.filter(p=>s.match(p));
   return posts.filter(p=>(s.keys||[]).some(k=>postSeriesHaystack(p).includes(k.toLowerCase())));
 }
-function topicEmblem(title){
+function topicGlyph(title){
   const k=String(title||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-  let e="📚";
-  if(/shirk/.test(k))e="⚠️";
-  else if(/bid[a']?ah|ahl al-bid/.test(k))e="👥";
-  else if(/hukm|muhakamah|tahakum/.test(k))e="⚖️";
-  else if(/sifat|sifa allah/.test(k))e="ﷲ";
-  else if(/sahabah|sahaba|aussagen/.test(k))e="👥";
-  else if(/du'a|dua|bittgeb/.test(k))e="📖";
-  else if(/tawhid|tauhid/.test(k))e="☝️";
-  else if(/sunnah/.test(k))e="🕌";
-  else if(/qur|quran|tafsir/.test(k))e="📖";
-  else if(/isnad|quelle|methodik|uberlief/.test(k))e="🔗";
-  else if(/takfir/.test(k))e="⚖️";
-  return `<span class="emoji-emblem" aria-hidden="true">${e}</span>`;
+  if(/shirk/.test(k))return"⚠️";
+  if(/bid[a']?ah|ahl al-bid/.test(k))return"🧭";
+  if(/hukm|muhakamah|tahakum|fiqh|manhaj|widerleg|takfir/.test(k))return"⚖️";
+  if(/sifat|sifa allah|aqidah|aqida/.test(k))return"🕋";
+  if(/sahabah|sahaba|athar|tabi/.test(k))return"🌙";
+  if(/du'a|dua|bittgeb|duʿ/.test(k))return"🤲";
+  if(/tawhid|tauhid/.test(k))return"☝️";
+  if(/sunnah|hadith/.test(k))return"📜";
+  if(/qur|quran|tafsir/.test(k))return"📿";
+  if(/adab|akhlaq|tarbiyyah|tazkiyah|zuhd/.test(k))return"💛";
+  if(/tawakkul/.test(k))return"🤝";
+  if(/wissen|ilm/.test(k))return"📖";
+  if(/isnad|quelle|methodik|uberlief/.test(k))return"🔗";
+  return"📚";
+}
+function topicEmblem(title){return`<span class="emoji-emblem" aria-hidden="true">${topicGlyph(title)}</span>`}
+function postItemGlyph(post){
+  const blob=[post&&post.category,post&&post.topic,post&&post.title,post&&post.tags&&post.tags.join(" ")].filter(Boolean).join(" ");
+  return topicGlyph(blob||"Beiträge");
+}
+function scholarGroupGlyph(metaText){
+  const t=String(metaText||"");
+  if(/Prophet/i.test(t))return"✨";
+  if(/Ṣaḥāb|Sahab/i.test(t))return"🌙";
+  if(/Tābiʿ|Tabi/i.test(t))return"📜";
+  if(/Atbāʿ|Atba/i.test(t))return"🕊️";
+  if(/Imām|Imam/i.test(t))return"⚖️";
+  if(/Muḥaddith|Muhaddith/i.test(t))return"📘";
+  if(/Fāqih|Faqih|Fuqah/i.test(t))return"🧭";
+  if(/Mufassir/i.test(t))return"📿";
+  return"👤";
+}
+function polishScholarsOvalGlyphs(){
+  document.querySelectorAll(".scholars-index__row").forEach(row=>{
+    const mono=row.querySelector(".scholars-index__mono");
+    const roles=row.querySelector(".scholars-index__roles");
+    if(!mono||mono.dataset.glyphReady==="1")return;
+    mono.dataset.glyphReady="1";
+    mono.textContent=scholarGroupGlyph(roles?roles.textContent:"");
+  });
 }
 function renderSeriesBox(){
   return `<section class="series-box collapsible-section"><div class="collapsible-head"><h3 class="series-title">Serien</h3><button class="collapse-toggle premium-pill" type="button" data-collapse-target="seriesGrid">Alle anzeigen</button></div><div id="seriesGrid" class="series-grid collapsible-grid collapsed">${SERIES_DEFS.map(s=>`<article class="series-card has-icon" data-nav="series" data-value="${esc(s.id)}"><div class="folder-icon">${topicEmblem(s.title)}</div><div class="card-text"><h3>${esc(s.title)}</h3><p>${postsForSeries(s.id).length} passende Beiträge öffnen</p></div></article>`).join("")}</div><div class="collapsible-fade">Es werden zunächst nur die wichtigsten Serien angezeigt. Tippe auf „Alle anzeigen“, um alles zu öffnen.</div></section>`;
@@ -23287,7 +23427,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v543";
+const APP_BUILD_ID="app-shell-v544";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -23295,9 +23435,9 @@ function stripFeedPageHeader(){document.querySelectorAll("#appView>.view-head").
 function initPremiumFeedTab(force){if(currentRoute.view!=="feed")return;stripFeedPageHeader();const run=()=>{if(!window.DAR_PREMIUM_FEED)return false;(window.DAR_PREMIUM_FEED.onAppReady||window.DAR_PREMIUM_FEED.rebuild).call(window.DAR_PREMIUM_FEED,{force:!!force});return true};if(!run()){requestAnimationFrame(()=>{stripFeedPageHeader();if(!run())setTimeout(()=>{stripFeedPageHeader();if(!run())setTimeout(run,400)},150)})}}
 window.addEventListener("load",()=>{if(readRoute().view==="feed")initPremiumFeedTab(true)});
 function renderHome(){return`${renderStagingBanner()}${setHeader("Startseite")}<div id="focusFeedMount" style="display:none"></div><div class="home-v380-shell">${renderLibraryHomeFocusTile()}${renderOfflineBox()}${renderHomeQuranHero()}${renderHomeTodaySection()}${renderHomeDiscoverSection()}${renderHomePopularSection()}${renderHomeLibrariesSection()}${renderHomeSearchSection()}<section id="homeSearchBlock" class="home-v380-section home-v380-search-results" style="display:none"><div class="home-v380-section-head"><h3 class="home-v380-section-title" style="font-size:clamp(18px,4vw,22px)">Suchergebnisse</h3><span id="homeSearchCount" class="home-v380-open-row__meta">0 Treffer</span></div><div id="homeSearchResults" class="home-v380-search-grid post-grid"></div></section></div>`}
-function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<1000);const other=entries.filter(([name])=>categoryRank(name)>=1000);const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="grid-list">${items.map(([name,count])=>listCard(name,count+" Beiträge","topic",name,"📚")).join("")}</div></section>`:"";return`${renderStagingBanner()}${setPageHeader("Beiträge","Aussagen mit Quellen und Nachweisen","Beiträge")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid"></div></section>${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}`}
+function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<1000);const other=entries.filter(([name])=>categoryRank(name)>=1000);let idx=0;const row=([name,count])=>{idx+=1;return`<article class="topics-theme-card dua-theme-card" data-nav="topic" data-value="${esc(name)}"><span class="topics-theme-card__idx dua-theme-card__idx" aria-hidden="true">${String(idx).padStart(2,"0")}</span><div class="topics-theme-card__icon dua-theme-card__icon" aria-hidden="true"><span class="emoji-emblem">${topicGlyph(name)}</span></div><div class="topics-theme-card__body dua-theme-card__body"><h3>${esc(name)}</h3><p class="topics-theme-card__count dua-theme-card__count">${count} Beiträge</p></div><span class="topics-theme-card__chev dua-theme-card__chev" aria-hidden="true">›</span></article>`};const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="topics-theme-grid grid-list" aria-label="${esc(title)}">${items.map(row).join("")}</div></section>`:"";return`${renderStagingBanner()}<div class="topics-hub">${setPageHeader("Beiträge","Aussagen mit Quellen und Nachweisen","Beiträge")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid topic-collection"></div></section><div class="topics-hub__label"><b>Themen</b><span>${entries.length} Bereiche</span></div>${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}</div>`}
 function renderScholars(){const items=buildScholarCatalog();if(window.DARScholarsIndex&&typeof window.DARScholarsIndex.renderScholars==="function")return window.DARScholarsIndex.renderScholars(items,esc);return`<section class="scholars-index"><header class="scholars-index__header"><p class="scholars-index__eyebrow">PERSONEN &amp; ÜBERLIEFERER</p><h1 class="scholars-index__title">Gelehrte</h1><p class="scholars-index__subtitle">Beiträge nach Ṣaḥābah, Tābiʿīn, Imāmen und frühen Gelehrten</p></header><div class="scholars-index__loading">Gelehrte werden geladen…</div></section>`}
-function renderFiltered(type,value){let filtered,displayValue=value;if(type==="scholar"){const ref=resolveScholarRef(value);displayValue=ref.label;filtered=postsForScholarKey(ref.key)}else if(type==="category"){displayValue=normalizePostCategory(value);filtered=posts.filter(post=>normalizePostCategory(post.category)===normalizePostCategory(value))}else{filtered=posts.filter(post=>String(post[type]||"")===String(value))}filtered=[...filtered].sort(comparePostsNewestFirst);const visible=filtered.slice(0,FILTER_RENDER_LIMIT);const hidden=Math.max(0,filtered.length-visible.length);const titleMap={category:"Kategorie",scholar:"Gelehrter",book:"Buch"};const routeMap={category:"topic",scholar:"scholar",book:"book"};const url=routeUrl(routeMap[type]||"topic",type==="scholar"?resolveScholarRef(value).key:value);const desc=`${filtered.length} Beiträge im Bereich ${displayValue} auf DAR AL TAWḤID.`;return`${setHeader(displayValue,`${filtered.length} Beiträge in diesem Ordner. Über den Zurückbutton kommst du zur vorherigen Übersicht.`,titleMap[type]||"Auswahl")}${type==="scholar"?renderScholarProfile(value):""}${type==="book"?renderBookProfile(value):""}<section class="post-grid">${visible.length?visible.map(postCard).join(""):`<div class="empty">Keine Beiträge gefunden.</div>`}${hidden?`<div class="empty">${hidden} weitere Beiträge in dieser Kategorie – nutze die Suche zum Eingrenzen.</div>`:""}</section>`}
+function renderFiltered(type,value){let filtered,displayValue=value;if(type==="scholar"){const ref=resolveScholarRef(value);displayValue=ref.label;filtered=postsForScholarKey(ref.key)}else if(type==="category"){displayValue=normalizePostCategory(value);filtered=posts.filter(post=>normalizePostCategory(post.category)===normalizePostCategory(value))}else{filtered=posts.filter(post=>String(post[type]||"")===String(value))}filtered=[...filtered].sort(comparePostsNewestFirst);const visible=filtered.slice(0,FILTER_RENDER_LIMIT);const hidden=Math.max(0,filtered.length-visible.length);const titleMap={category:"Kategorie",scholar:"Gelehrter",book:"Buch"};const routeMap={category:"topic",scholar:"scholar",book:"book"};const url=routeUrl(routeMap[type]||"topic",type==="scholar"?resolveScholarRef(value).key:value);const desc=`${filtered.length} Beiträge im Bereich ${displayValue} auf DAR AL TAWḤID.`;return`<div class="topic-collection-page">${setHeader(displayValue,`${filtered.length} Beiträge in diesem Ordner. Über den Zurückbutton kommst du zur vorherigen Übersicht.`,titleMap[type]||"Auswahl")}${type==="scholar"?renderScholarProfile(value):""}${type==="book"?renderBookProfile(value):""}<section class="post-grid topic-collection" aria-label="${esc(displayValue)}">${visible.length?visible.map(postCard).join(""):`<div class="empty">Keine Beiträge gefunden.</div>`}${hidden?`<div class="empty">${hidden} weitere Beiträge in dieser Kategorie – nutze die Suche zum Eingrenzen.</div>`:""}</section></div>`}
 function renderRecent(){const latest=posts.slice(0,60);return`${setPageHeader("Neueste Beiträge","Die neuesten Beiträge, sortiert nach Datum","Aktuell")}<section class="post-grid">${latest.length?latest.map(postCard).join(""):`<div class="empty">Noch keine Beiträge vorhanden.</div>`}</section>`}
 function renderAccountPrompt(){const s=accountSession();return `<section class="account-panel premium-surface"><h3>${s?"Cloud-Sync aktiv":"Favoriten sichern"}</h3><p>${s?`Angemeldet als ${esc(s.username)}. Neue gespeicherte Beiträge werden automatisch synchronisiert.`:"Melde dich mit Anmeldename und PIN an, damit deine Favoriten auch auf anderen Geräten verfügbar sind."}</p><div class="account-actions"><button type="button" class="primary" data-nav="account">${s?"Mein Bereich öffnen":"Anmelden / Konto anlegen"}</button></div></section>`}
 function renderSaved(){const ids=savedIds();const saved=ids.map(id=>posts.find(p=>String(p.id)===String(id))).filter(Boolean);return`${setPageHeader("Favoriten","Deine persönliche Merkliste","Favoriten")}${renderAccountPrompt()}<section class="post-grid">${saved.length?saved.map(postCard).join(""):`<div class="empty">Noch keine Favoriten. Tippe bei einem Beitrag auf „♡ Speichern“, um ihn hier schneller wiederzufinden.</div>`}</section>`}
@@ -23581,6 +23721,11 @@ function updateChrome(route){
   document.documentElement.classList.toggle("dar-scroll-guard",true);
   document.body.classList.toggle("is-library-route",["bibliothek","bibliothek-detail","bibliothek-reader"].includes(route.view));
   document.body.classList.toggle("is-dua-route",["duas","dua-cat","dua"].includes(route.view));
+  document.body.classList.toggle("is-topics-route",route.view==="topics");
+  document.body.classList.toggle("is-topic-route",route.view==="topic"||route.view==="book"||route.view==="series");
+  document.body.classList.toggle("is-scholars-route",route.view==="scholars");
+  document.body.classList.toggle("is-scholar-route",route.view==="scholar");
+  document.body.classList.toggle("is-catalog-route",["duas","dua-cat","dua","topics","topic","scholars","scholar","book","series"].includes(route.view));
   document.body.classList.toggle("is-library-reader-route",route.view==="bibliothek-reader");
   document.body.classList.toggle("is-post-route",isPost);
   if(appBar)appBar.classList.toggle("is-more-route",isMore);
@@ -23883,7 +24028,7 @@ function bindEvents(){
   if(currentRoute.view==="home"&&typeof bindHomeV380Events==="function")bindHomeV380Events();
   bindHighlightDailyPush();
   if(currentRoute.view==="hadith")bindHadithLibraryEvents();
-  if(currentRoute.view==="scholars"&&window.DARScholarsIndex&&typeof window.DARScholarsIndex.bindScholars==="function")window.DARScholarsIndex.bindScholars(buildScholarCatalog(),esc);
+  if(currentRoute.view==="scholars"&&window.DARScholarsIndex&&typeof window.DARScholarsIndex.bindScholars==="function"){window.DARScholarsIndex.bindScholars(buildScholarCatalog(),esc);const polish=()=>polishScholarsOvalGlyphs();requestAnimationFrame(()=>{polish();setTimeout(polish,120);setTimeout(polish,400)});const root=document.querySelector(".scholars-index");if(root&&!root.dataset.glyphObserver){root.dataset.glyphObserver="1";new MutationObserver(()=>polish()).observe(root,{childList:true,subtree:true})}}
   bindThemeControls();
   bindFontControls();
   bindImageEditor();
