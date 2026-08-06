@@ -1,20 +1,20 @@
 {
-  "updatedAt": "2026-08-06T19:07:37.847Z",
+  "updatedAt": "2026-08-06T19:10:16.549Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-06T19:07:37.847Z",
+  "lastCronRun": "2026-08-06T19:10:16.549Z",
   "nextPlannedPush": {
-    "prayer": "Maghrib",
-    "key": "maghrib",
-    "mode": "entry",
-    "sendAfter": "2026-08-06T19:09:00.000Z",
+    "prayer": "ʿIshāʾ",
+    "key": "isha",
+    "mode": "advance",
+    "sendAfter": "2026-08-06T20:23:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-06T18:52:36.702Z",
-  "windowEnd": "2026-08-07T21:07:36.702Z",
+  "windowStart": "2026-08-06T18:55:15.340Z",
+  "windowEnd": "2026-08-07T21:10:15.340Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 1,
@@ -28,9 +28,9 @@
   "usersWithLocation": 1,
   "usersWithActivePush": 1,
   "locationGroups": 1,
-  "scheduled": 14,
-  "recipients": 14,
-  "skippedPast": 16,
+  "scheduled": 13,
+  "recipients": 13,
+  "skippedPast": 17,
   "skippedWindow": 10,
   "duplicates": 1,
   "errors": 0,
@@ -80,7 +80,7 @@
         "time": "21:09",
         "advance": {
           "status": "geplant",
-          "recipients": 2
+          "recipients": 1
         },
         "entry": {
           "status": "geplant",
@@ -158,7 +158,7 @@
       "time": "21:09",
       "advance": {
         "status": "geplant",
-        "recipients": 2
+        "recipients": 1
       },
       "entry": {
         "status": "geplant",
@@ -206,15 +206,6 @@
       "mode": "entry",
       "time": "21:09",
       "sendAfter": "2026-08-06T19:09:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "prayer": "Maghrib",
-      "key": "maghrib",
-      "mode": "advance",
-      "time": "21:09",
-      "sendAfter": "2026-08-06T18:54:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin"
     },
@@ -439,6 +430,13 @@
       "sendAfter": "2026-08-06T15:28:00.000Z",
       "time": "17:43",
       "timeZone": "Europe/Berlin"
+    },
+    {
+      "key": "maghrib",
+      "mode": "advance",
+      "sendAfter": "2026-08-06T18:54:00.000Z",
+      "time": "21:09",
+      "timeZone": "Europe/Berlin"
     }
   ],
   "oneSignalResponses": [
@@ -447,12 +445,6 @@
       "mode": "entry",
       "recipients": 1,
       "response": "{\"id\":\"79eb650b-df79-43e3-958e-fa9adce3da12\",\"external_id\":\"c71381c7-482c-46bf-b1c9-46068752e0f6\"}"
-    },
-    {
-      "prayer": "maghrib",
-      "mode": "advance",
-      "recipients": 1,
-      "response": "{\"id\":\"985c4e3b-9b4f-4530-9986-07c746a953a7\",\"external_id\":\"0fc920a0-6149-4d47-a9eb-deec9d2bd876\"}"
     },
     {
       "prayer": "isha",
@@ -562,13 +554,13 @@
       "subscriptionId": "f5133294-c6c9-4aca-9511-a43d00374c62",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-06T19:06:32.439+00:00"
+      "lastSyncedAt": "2026-08-06T19:10:14.798+00:00"
     },
     {
       "subscriptionId": "5d891600-4c4a-4d49-8774-74cb23deb64c",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-06T19:07:36.508+00:00"
+      "lastSyncedAt": "2026-08-06T19:07:37.516+00:00"
     },
     {
       "subscriptionId": "7fe8041e-fb2b-488c-9596-e0b4a9daeb38",
