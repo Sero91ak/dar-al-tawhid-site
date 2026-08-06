@@ -1,27 +1,16 @@
 {
   "ok": true,
-  "schedulerEngine": "cloudflare-worker-daily-v4-isolated",
-  "idVersion": "v4",
+  "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-06T16:50:32.369Z",
-  "usersChecked": 8,
-  "registrationsRead": 9,
-  "uniqueSubscriptions": 8,
-  "duplicateRegistrationsDropped": 1,
-  "appEnvironment": "production",
+  "updatedAt": "2026-08-06T16:55:19.060Z",
+  "usersChecked": 9,
   "duaCandidates": 0,
-  "recCandidates": 0,
-  "sent": 0,
-  "accepted": {
-    "dua": 0,
-    "recommendation": 0
-  },
-  "invalidSubscriptionsDisabled": 0,
+  "recCandidates": 1,
+  "sent": 1,
   "skipped": 0,
   "duplicates": 7,
   "errors": 0,
-  "forceSend": null,
   "dailyContentDate": "2026-08-06",
   "currentRecommendation": {
     "id": "eid-zaehlt-quran-rezitation-als-sprechen-122",
@@ -34,5 +23,16 @@
     "title": "Duʿāʾ um Rettung vor Schande am Jüngsten Tag",
     "category": "Schutz vor dem Feuer"
   },
-  "configAutomatic": true
+  "configAutomatic": true,
+  "responses": [
+    {
+      "kind": "recommendation",
+      "batch": true,
+      "count": 1,
+      "contentId": "eid-zaehlt-quran-rezitation-als-sprechen-122",
+      "recipients": "be977c5e-bdd3-4193-a339-cf2cc2af7806",
+      "ok": true,
+      "invalid": 0
+    }
+  ]
 }
