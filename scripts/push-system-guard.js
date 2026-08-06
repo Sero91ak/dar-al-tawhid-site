@@ -117,8 +117,16 @@ function runPushSystemGuard() {
     "processAllPendingPushes",
     "processPendingPushUntilLive",
     'status === "pending"',
-    'sendNewPostPush'
+    "sendNewPostPush",
+    "POST_PUSH_DELAY_AFTER_LIVE_MS",
+    "indexFoundPublic && steps.postInIndex && steps.postFilePublic"
   ]);
+
+  if (/result\.postFilePublic\s*=\s*true/.test(worker)) {
+    fail("worker.js: GitHub-Fallback darf postFilePublic nicht auf true setzen (Push vor CDN)");
+  } else {
+    ok("worker.js: kein GitHub-Override für postFilePublic");
+  }
 
   const wrangler = read("cloudflare/wrangler.toml");
   mustInclude("wrangler.toml", wrangler, ["[triggers]", 'crons = ["*/5 * * * *"]']);

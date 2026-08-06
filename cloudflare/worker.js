@@ -112,8 +112,11 @@ const DEFAULT_PENDING_PUSHES_PATH = "content/admin/pending-pushes.json";
 const DEFAULT_PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json";
 // Sofort prüfen, dann gestaffelt nachziehen — nicht erst 30s warten (Admin-Retry hing sonst).
 const LIVE_CHECK_SCHEDULE_FULL_MS = [0, 15000, 30000, 60000, 120000, 180000, 240000, 300000];
-const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 3000, 8000];
+/** Schnellpfad: länger warten – Cloudflare Pages braucht oft 30–90 s. */
+const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 5000, 12000, 25000, 45000, 70000, 90000];
 const LIVE_CHECK_SCHEDULE_CRON_MS = [0, 5000, 15000, 30000, 60000, 120000];
+/** Nach öffentlicher Live-Bestätigung kurz warten, damit CDN/Caches nachziehen. */
+const POST_PUSH_DELAY_AFTER_LIVE_MS = 15000;
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -2588,11 +2591,13 @@ function diagnoseLiveFailure(steps, live = {}) {
   if (!steps.indexUpdatedGithub) return "Indexdatei wurde auf GitHub nicht aktualisiert.";
   if (!steps.indexFoundPublic) {
     if (live.indexHttpStatus === 404) return "Indexdatei öffentlich nicht gefunden.";
+    if (live.githubIndexVerified) return "Beitrag auf GitHub im Index, aber Cloudflare/Pages noch nicht live.";
     return "GitHub Commit erfolgreich, aber Cloudflare Deployment noch nicht fertig.";
   }
   if (!steps.postInIndex) return "Beitrag ist nicht im öffentlichen Index enthalten.";
   if (!steps.postFilePublic) {
     if (live.postHttpStatus === 404) return "Beitrag-Datei öffentlich nicht erreichbar.";
+    if (live.githubPostVerified) return "Beitrag auf GitHub vorhanden, aber öffentlich noch nicht ausgeliefert.";
     return "Cloudflare liefert noch alte Cache-Version.";
   }
   if (!steps.visitorUrlOk) return "Besucher-URL (?post=…) noch nicht erreichbar.";
@@ -2607,9 +2612,12 @@ function buildLiveCheckResult(githubSteps, live, attempts) {
     postInIndex: !!live.postInIndex,
     postFilePublic: !!live.postFilePublic,
     visitorUrlOk: !!live.visitorUrlOk,
-    cloudflareDeployed: !!(live.indexFoundPublic && live.postFilePublic)
+    cloudflareDeployed: !!(live.indexFoundPublic && live.postFilePublic),
+    githubIndexVerified: !!live.githubIndexVerified,
+    githubPostVerified: !!live.githubPostVerified
   };
-  const ok = steps.postInIndex && steps.postFilePublic;
+  /* Push nur wenn die öffentliche Site den Beitrag wirklich ausliefert – nicht nur GitHub. */
+  const ok = steps.indexFoundPublic && steps.postInIndex && steps.postFilePublic;
   const diagnosis = ok ? "" : diagnoseLiveFailure(steps, live);
   return {
     ok,
@@ -2695,16 +2703,17 @@ async function fetchLiveResources(env, { filename, postId, postPath }) {
           result.indexGenerated = indexData.generated || result.indexGenerated;
           result.indexCount = Number(indexData.count ?? (indexData.files?.length ?? 0)) || result.indexCount;
           const files = listPostFiles(indexData.files || []);
-          result.postInIndex = files.some((file) => file.name === filename)
+          const onGithub = files.some((file) => file.name === filename)
             || (postId && files.some((file) => String(file.name).replace(/\.md$/, "") === String(postId)));
-          if (result.postInIndex) result.githubIndexVerified = true;
+          if (onGithub) result.githubIndexVerified = true;
+          /* postInIndex bleibt nur true, wenn die öffentliche Index-URL den Beitrag enthält */
         }
       }
       if (!result.postFilePublic && postPath) {
         const ghPost = await githubGet(env, owner, repo, postPath, branch);
         if (ghPost?.content) {
-          result.postFilePublic = true;
           result.githubPostVerified = true;
+          /* postFilePublic bleibt nur true bei öffentlichem HTTP 200 – sonst Push vor CDN */
         }
       }
     } catch (error) {
@@ -2839,6 +2848,10 @@ async function processPendingPushUntilLive(env, record, options = {}) {
 
   if (!liveCheck.ok) {
     return { sent: false, pending: true, waitingForLive: true, liveCheck, reason: liveCheck.diagnosis };
+  }
+
+  if (POST_PUSH_DELAY_AFTER_LIVE_MS > 0) {
+    await sleep(POST_PUSH_DELAY_AFTER_LIVE_MS);
   }
 
   const freshRegistry = await readPendingPushesRegistry(env);
