@@ -64,6 +64,11 @@ requireText("Scheduler", scheduler, [
   'SCHEDULE_LOOKAHEAD_MINUTES = SCHEDULE_LOOKAHEAD_BASE_MINUTES + DEFAULT_PRAYER_ADVANCE_MINUTES + SCHEDULE_CRON_BUFFER_MINUTES',
   'dedupeRegistrations',
   'writePrayerStatusToStore',
+  'claimPrayerPushSeed',
+  'PRAYER_PUSH_CLAIM_LOCK',
+  'collapse_id: collapse',
+  'ENTRY_CATCHUP_MAX_MINUTES',
+  'ADVANCE_CATCHUP_MAX_MINUTES',
   'environment: "production"',
   'slotDayKey',
   'resolvePrayerSlotSendAfter',
@@ -104,6 +109,14 @@ requireText("Worker", worker, [
   'prayerScheduler: "cloudflare-worker-cron-v3"',
   'prayerStatusStore: Boolean(env.PRAYER_STATUS_STORE)',
   'ctx.waitUntil(ensurePrayerSchedulerFresh'
+]);
+
+const statusStore = read("cloudflare/prayer-status-store.js");
+requireText("Status-Store", statusStore, [
+  "PRAYER_PUSH_CLAIM_LOCK",
+  "claimPrayerPushSeed",
+  "releasePrayerPushSeed",
+  '/claim'
 ]);
 
 forbidText("Deploy", deploy, [

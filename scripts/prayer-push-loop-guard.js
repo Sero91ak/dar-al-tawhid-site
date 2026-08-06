@@ -25,7 +25,12 @@ const REQUIRED_STRINGS = [
   "return null;",
   "const slotDay = slotDayKey(day);",
   "if (plannedSendAfter == null)",
-  "await sendPush(env, group, prayer, slot.sendAfter, slot.mode, stats, sentInRun, slotDay)"
+  "await sendPush(env, group, prayer, slot.sendAfter, slot.mode, stats, sentInRun, slotDay)",
+  "PRAYER_PUSH_CLAIM_LOCK",
+  "claimPrayerPushSeed",
+  "ENTRY_CATCHUP_MAX_MINUTES",
+  "ADVANCE_CATCHUP_MAX_MINUTES",
+  "collapse_id: collapse"
 ];
 
 const FORBIDDEN_PATTERNS = [
