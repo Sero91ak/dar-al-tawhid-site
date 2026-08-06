@@ -1,6 +1,6 @@
 /**
- * DAR AL TAWḤID — Gelehrten-Index v489
- * Edel wie Duʿāʾ: transparente Flächen, dunkle Suche, Zierlinien, ovales Licht.
+ * DAR AL TAWḤID — Gelehrten-Index v490
+ * Historische Tiefe: Jahre, Lehrer, Schüler, Werke; Schnellsuche unten; edles Duʿāʾ-Licht.
  */
 (function (global) {
   'use strict';
@@ -139,6 +139,7 @@
       .catch(() => null)
       .then((data) => {
         metaCache = data && data.scholars ? data : { scholars: {} };
+        global.__darScholarMetaCache = metaCache;
         return metaCache;
       });
     return metaPromise;
@@ -162,8 +163,18 @@
         aliases: m.aliases || [],
         kuniyah: m.kuniyah || '',
         monogram: buildMonogram(displayName, m.monogram),
+        lifespanLabel: m.lifespanLabel || '',
+        eraLabel: m.eraLabel || '',
+        bio: m.bio || '',
+        teachers: Array.isArray(m.teachers) ? m.teachers : [],
+        students: Array.isArray(m.students) ? m.students : [],
+        works: Array.isArray(m.works) ? m.works : [],
+        bornHijri: m.bornHijri,
+        diedHijri: m.diedHijri,
         searchHaystack: normalizeSearchText(
-          [displayName, m.kuniyah, ...(m.aliases || [])].filter(Boolean).join(' ')
+          [displayName, m.kuniyah, m.eraLabel, m.lifespanLabel, m.bio, ...(m.aliases || []), ...(m.works || []).map((w) => w.title || w)]
+            .filter(Boolean)
+            .join(' ')
         ),
         alphaKey: normalizeSearchText(displayName).charAt(0).toUpperCase() || '#',
       };
@@ -334,13 +345,18 @@
 
   function renderRow(s, esc) {
     const roles = roleLine(s.roles);
-    const meta = roles ? `${roles} · ${contributionLabel(s.count)}` : contributionLabel(s.count);
-    const aria = `${s.displayName}, ${meta.replace(/ · /g, ', ')}, öffnen`;
+    const life = s.lifespanLabel ? String(s.lifespanLabel) : '';
+    const era = s.eraLabel ? String(s.eraLabel) : '';
+    const metaParts = [roles, contributionLabel(s.count)].filter(Boolean);
+    const meta = metaParts.join(' · ');
+    const sub = [life || era, meta].filter(Boolean).join(' · ');
+    const aria = `${s.displayName}, ${sub.replace(/ · /g, ', ')}, öffnen`;
     return `<button type="button" class="scholars-index__row" data-scholar-open="${esc(s.id)}" aria-label="${esc(aria)}">
       <span class="scholars-index__mono${s.primaryGroup === 'prophet' ? ' scholars-index__mono--prophet' : ''}" aria-hidden="true">${esc(s.monogram)}</span>
       <span class="scholars-index__copy">
         <span class="scholars-index__name">${esc(s.displayName)}</span>
-        <span class="scholars-index__roles">${esc(meta)}</span>
+        ${life ? `<span class="scholars-index__life">${esc(life)}</span>` : ''}
+        <span class="scholars-index__roles">${esc(meta)}${era && !life ? ` · ${esc(era)}` : ''}</span>
       </span>
       <span class="scholars-index__chev" aria-hidden="true">›</span>
     </button>`;
@@ -473,6 +489,14 @@
       </div>
       ${recentHtml}
       ${bodyHtml}
+      <div class="scholars-index__dock" role="search">
+        <label class="scholars-index__dock-label" for="scholarsDockSearch">Schnellsuche</label>
+        <div class="scholars-index__dock-wrap">
+          <svg class="scholars-index__dock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input id="scholarsDockSearch" class="scholars-index__dock-input" type="search" placeholder="Name, Lehrer, Schüler, Werk oder Jahr…" value="${esc(state.query)}" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-label="Gelehrte schnell suchen">
+          <button type="button" id="scholarsDockClear" class="scholars-index__dock-clear" aria-label="Schnellsuche löschen" ${state.query ? '' : 'hidden'}>×</button>
+        </div>
+      </div>
       ${renderSortSheet(state, esc)}
     </section>`;
   }
@@ -565,18 +589,52 @@
     boundRoot = root;
 
     const search = root.querySelector('#scholarsSearchInput');
+    const dock = root.querySelector('#scholarsDockSearch');
+    const syncQuery = (value, focusId) => {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => {
+        rerender(root, catalog, esc, { query: value || '' });
+        requestAnimationFrame(() => {
+          const nextRoot = document.getElementById('scholarsIndexRoot');
+          const focusEl = nextRoot?.querySelector(focusId);
+          if (focusEl) {
+            focusEl.focus();
+            try {
+              const len = String(focusEl.value || '').length;
+              focusEl.setSelectionRange(len, len);
+            } catch (e) { /* ignore */ }
+          }
+        });
+      }, 120);
+    };
     if (search) {
       search.oninput = () => {
-        clearTimeout(searchTimer);
-        searchTimer = setTimeout(() => rerender(root, catalog, esc, { query: search.value || '' }), 120);
+        if (dock) dock.value = search.value;
+        syncQuery(search.value || '', '#scholarsSearchInput');
+      };
+    }
+    if (dock) {
+      dock.oninput = () => {
+        if (search) search.value = dock.value;
+        syncQuery(dock.value || '', '#scholarsDockSearch');
       };
     }
     const clear = root.querySelector('#scholarsSearchClear');
     if (clear) {
       clear.onclick = () => {
         if (search) search.value = '';
+        if (dock) dock.value = '';
         rerender(root, catalog, esc, { query: '' });
         search?.focus();
+      };
+    }
+    const dockClear = root.querySelector('#scholarsDockClear');
+    if (dockClear) {
+      dockClear.onclick = () => {
+        if (search) search.value = '';
+        if (dock) dock.value = '';
+        rerender(root, catalog, esc, { query: '' });
+        dock?.focus();
       };
     }
     root.querySelectorAll('[data-scholars-filter]').forEach((btn) => {
@@ -646,6 +704,10 @@
     renderScholars,
     bindScholars,
     loadMeta,
+    getScholarMeta(id) {
+      const key = String(id || '');
+      return (metaCache?.scholars || global.__darScholarMetaCache?.scholars || {})[key] || null;
+    },
     pushRecent,
     normalizeSearchText,
   };

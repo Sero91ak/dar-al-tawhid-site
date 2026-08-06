@@ -1,4 +1,4 @@
-/* v489 · Gelehrten-Index — edel wie Duʿāʾ: Seite transparent, Suche dunkel, ovales Licht, Zierlinien */
+/* v490 · Gelehrten-Index — edel wie Duʿāʾ: Seite transparent, Suche dunkel, ovales Licht, Zierlinien */
 :root{
   --scholars-page-bg:transparent;
   --scholars-header-text:var(--cat-ink,var(--theme-text,var(--cream)));
@@ -230,30 +230,39 @@
   padding:0;
 }
 
-/* Gruppenkopf wie Duʿāʾ-Themenlabel: Abstand + Zierlinie */
+/* Gruppenkopf wie Duʿāʾ-Themenlabel: Abstand + Zierlinie + ovales Licht */
 .scholars-index__group-head{
   display:flex;align-items:center;justify-content:space-between;gap:14px;
   width:100%;min-height:0;
   margin:0;
-  padding:2px 2px 14px;
+  padding:14px 14px 16px 12px;
   border:0;
   border-bottom:0;
+  border-radius:999px!important;
   background:transparent!important;
   color:inherit;cursor:pointer;text-align:left;
   position:relative;
+  overflow:visible;
+  transition:background .16s ease, box-shadow .16s ease;
 }
 .scholars-index__group-head::after{
   content:"";
   position:absolute;
-  left:0;right:0;bottom:0;
+  left:14%;right:14%;bottom:4px;
   height:1px;
   background:var(--scholars-rule);
-  opacity:.72;
+  opacity:.7;
+  pointer-events:none;
+}
+.scholars-index__group-head:hover,
+.scholars-index__group-head:focus-visible{
+  background:radial-gradient(ellipse 96% 86% at 38% 50%,var(--scholars-wash-strong),color-mix(in srgb,var(--gold2) 5%,transparent) 58%,transparent 76%)!important;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2) 14%,transparent)!important;
+  outline:none;
 }
 .scholars-index__group-head:focus-visible{
   outline:2px solid var(--scholars-focus-ring);
   outline-offset:2px;
-  border-radius:12px;
 }
 .scholars-index__group-title{
   margin:0;
@@ -421,6 +430,14 @@
   color:var(--scholars-text-secondary);
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
+.scholars-index__life{
+  margin:0;
+  font-size:11px;
+  line-height:1.35;
+  letter-spacing:.02em;
+  color:color-mix(in srgb,var(--scholars-accent) 78%,var(--scholars-text-secondary));
+  font-weight:650;
+}
 .scholars-index__countline{font-size:11px;color:var(--scholars-text-secondary)}
 .scholars-index__chev{
   flex:0 0 auto;font-size:18px;line-height:1;color:var(--scholars-text-secondary);
@@ -429,6 +446,56 @@
 .scholars-index__row:hover .scholars-index__chev,
 .scholars-index__row:focus-visible .scholars-index__chev{
   opacity:.9;transform:translateX(2px);
+}
+
+/* Untere Schnellsuche — über der Bottom-Nav */
+.scholars-index__dock{
+  position:sticky;
+  bottom:calc(var(--bottom-navigation-height,70px) + env(safe-area-inset-bottom,0px) + 8px);
+  z-index:14;
+  margin:18px 0 8px;
+  padding:10px 10px 12px;
+  border-radius:22px;
+  background:color-mix(in srgb,var(--bg,#050505) 88%,transparent);
+  border:1px solid var(--scholars-line-soft);
+  box-shadow:0 10px 28px rgba(0,0,0,.28);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+.scholars-index__dock-label{
+  display:block;
+  margin:0 2px 8px;
+  font-family:var(--serif);
+  font-size:11px;
+  font-weight:650;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--scholars-accent);
+}
+.scholars-index__dock-wrap{position:relative}
+.scholars-index__dock-icon{
+  position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  width:15px;height:15px;color:var(--scholars-text-secondary);opacity:.75;pointer-events:none;
+}
+.scholars-index__dock-input{
+  width:100%;box-sizing:border-box;
+  min-height:46px;height:46px;padding:0 40px 0 38px;
+  border:1px solid var(--scholars-line);
+  border-radius:999px;
+  background:var(--scholars-search-bg)!important;
+  color:var(--scholars-text-primary);
+  font-size:14px;letter-spacing:.01em;
+}
+.scholars-index__dock-input:focus{
+  outline:none;
+  border-color:color-mix(in srgb,var(--scholars-accent) 44%,var(--scholars-line));
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--gold2) 10%,transparent);
+}
+.scholars-index__dock-clear{
+  position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  width:32px;height:32px;border:0;border-radius:999px;
+  background:transparent;color:var(--scholars-text-secondary);
+  font-size:18px;cursor:pointer;
 }
 
 .scholars-index__empty,.scholars-index__error,.scholars-index__loading{

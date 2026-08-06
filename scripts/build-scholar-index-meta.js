@@ -74,7 +74,7 @@ const CURATED = {
   's:amrbshuayb': { primaryGroup: 'sahabah', generationGroup: 'sahabah', generationOrder: 33, roles: ['sahabi'] },
   's:umarbalhattab': { primaryGroup: 'sahabah', generationGroup: 'sahabah', generationOrder: 34, roles: ['sahabi'], aliases: ['Umar ibn al-Khattab'] },
   's:umaribnalkhattab': { primaryGroup: 'sahabah', generationGroup: 'sahabah', generationOrder: 34, roles: ['sahabi'] },
-  's:abubakralajurri': { primaryGroup: 'tabiun', generationGroup: 'tabiun', generationOrder: 40, roles: ['tabi'] },
+  's:abubakralajurri': { primaryGroup: 'imam', generationGroup: 'early_imam', generationOrder: 116, roles: ['imam'] },
   'al-hasan-al-basri': { primaryGroup: 'tabiun', generationGroup: 'tabiun', generationOrder: 41, roles: ['tabi', 'imam'], aliases: ['Hasan al-Basri'] },
   's:sufyanaththawri': { primaryGroup: 'tabiun', generationGroup: 'tabiun', generationOrder: 42, roles: ['tabi', 'imam', 'muhaddith'], aliases: ['Sufyan al-Thawri'] },
   'malik-ibn-anas': { primaryGroup: 'imam', generationGroup: 'early_imam', generationOrder: 50, roles: ['imam', 'faqih', 'muhaddith'], aliases: ['Malik ibn Anas', 'Imam Malik'] },
@@ -126,12 +126,18 @@ const CURATED = {
   's:abumijlaz': { primaryGroup: 'tabiun', generationGroup: 'tabiun', generationOrder: 54, roles: ['tabi'] },
   's:umaribnabdalaziz': { primaryGroup: 'tabiun', generationGroup: 'tabiun', generationOrder: 55, roles: ['tabi', 'imam'] },
   's:yahyabmain': { primaryGroup: 'muhaddith', generationGroup: 'early_imam', generationOrder: 115, roles: ['imam', 'muhaddith'], aliases: ['Yahya ibn Main'] },
-  's:zaydibnamribnnufayl': { primaryGroup: 'tabiun', generationGroup: 'tabiun', generationOrder: 56, roles: ['tabi'] },
+  's:zaydibnamribnnufayl': { primaryGroup: 'weitere', generationGroup: 'weitere', generationOrder: 7000, roles: [] },
   's:ibnabializz': { primaryGroup: 'imam', generationGroup: 'later', generationOrder: 212, roles: ['imam'] },
   's:assawkani': { primaryGroup: 'imam', generationGroup: 'later', generationOrder: 213, roles: ['imam'] },
   's:ashshanqiti': { primaryGroup: 'mufassir', generationGroup: 'later', generationOrder: 214, roles: ['mufassir'] },
   's:quran': { primaryGroup: 'weitere', generationGroup: 'weitere', generationOrder: 9000, roles: [] },
   's:ahlussunnah': { primaryGroup: 'weitere', generationGroup: 'weitere', generationOrder: 9001, roles: [] },
+  's:ummsalamah': { primaryGroup: 'sahabah', generationGroup: 'sahabah', generationOrder: 35, roles: ['sahabi'], aliases: ['Umm Salamah'] },
+  's:qatadah': { primaryGroup: 'tabiun', generationGroup: 'tabiun', generationOrder: 57, roles: ['tabi', 'mufassir'], aliases: ['Qatadah'] },
+  's:assuddi': { primaryGroup: 'tabiun', generationGroup: 'tabiun', generationOrder: 58, roles: ['tabi', 'mufassir'] },
+  's:maymunibnmihran': { primaryGroup: 'tabiun', generationGroup: 'tabiun', generationOrder: 59, roles: ['tabi'] },
+  's:abdarrahmanibnmahdi': { primaryGroup: 'muhaddith', generationGroup: 'early_imam', generationOrder: 95, roles: ['imam', 'muhaddith'], aliases: ['Abd ar-Rahman ibn Mahdi'] },
+  's:abdarrahmanbmahdi': { primaryGroup: 'muhaddith', generationGroup: 'early_imam', generationOrder: 95, roles: ['imam', 'muhaddith'] },
 };
 
 function scholarNorm(s) {
@@ -216,6 +222,15 @@ function buildCatalog() {
   return [...map.values()];
 }
 
+const HISTORY_PATH = path.join(ROOT, 'data', 'scholar-history-curated.json');
+let HISTORY = {};
+try {
+  HISTORY = JSON.parse(fs.readFileSync(HISTORY_PATH, 'utf8'));
+  delete HISTORY._note;
+} catch (e) {
+  console.warn('No scholar-history-curated.json:', e.message);
+}
+
 const catalog = buildCatalog();
 const scholars = {};
 
@@ -227,6 +242,7 @@ for (const item of catalog) {
     roles: [],
     aliases: [],
   };
+  const hist = HISTORY[item.key] || {};
   scholars[item.key] = {
     displayName: item.label,
     primaryGroup: base.primaryGroup || 'weitere',
@@ -236,11 +252,19 @@ for (const item of catalog) {
     aliases: base.aliases || [],
     monogram: base.monogram || '',
     kuniyah: base.kuniyah || '',
+    lifespanLabel: hist.lifespanLabel || '',
+    bornHijri: Number.isFinite(hist.bornHijri) ? hist.bornHijri : null,
+    diedHijri: Number.isFinite(hist.diedHijri) ? hist.diedHijri : null,
+    eraLabel: hist.eraLabel || '',
+    bio: hist.bio || '',
+    teachers: Array.isArray(hist.teachers) ? hist.teachers : [],
+    students: Array.isArray(hist.students) ? hist.students : [],
+    works: Array.isArray(hist.works) ? hist.works : [],
   };
 }
 
 const out = {
-  version: 1,
+  version: 2,
   generatedAt: new Date().toISOString(),
   groups: GROUPS,
   sections: SECTION_ORDER,
@@ -248,4 +272,5 @@ const out = {
 };
 
 fs.writeFileSync(OUT, JSON.stringify(out, null, 2) + '\n');
-console.log('Wrote', OUT, 'with', Object.keys(scholars).length, 'scholars');
+const withYears = Object.values(scholars).filter((s) => s.lifespanLabel).length;
+console.log('Wrote', OUT, 'with', Object.keys(scholars).length, 'scholars,', withYears, 'with lifespan');

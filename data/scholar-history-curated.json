@@ -1,0 +1,901 @@
+{
+  "_note": "Nur weithin belegte Angaben (klassische Biographien). Unsichere Felder weglassen. Jahre: Hidschra; CE ungefähr.",
+  "__prophet__": {
+    "lifespanLabel": "53 v. H. – 11 H · ca. 570–632 n. Chr.",
+    "bornHijri": -53,
+    "diedHijri": 11,
+    "eraLabel": "Prophet · Makkah & Madīnah",
+    "bio": "Gesandter Allahs ﷺ. Höchste Autorität nach dem Qurʾān. Sunnah und Vorbild für die Ummah.",
+    "teachers": [],
+    "students": [
+      { "id": "abu-hurayrah", "name": "Abū Hurayrah" },
+      { "id": "abdullah-ibn-masud", "name": "ʿAbdullāh ibn Masʿūd" },
+      { "id": "ibn-abbas", "name": "Ibn ʿAbbās" },
+      { "id": "anas-b-malik", "name": "Anas ibn Mālik" },
+      { "id": "s:aishah", "name": "ʿĀʾishah" },
+      { "id": "s:aliibnabitalib", "name": "ʿAlī ibn Abī Ṭālib" },
+      { "id": "s:umarbalhattab", "name": "ʿUmar ibn al-Khaṭṭāb" },
+      { "id": "s:uthmanbaffan", "name": "ʿUthmān ibn ʿAffān" }
+    ],
+    "works": []
+  },
+  "abu-hurayrah": {
+    "lifespanLabel": "gest. 57/59 H · ca. 676/678 n. Chr.",
+    "diedHijri": 59,
+    "eraLabel": "Ṣaḥābī · Madīnah",
+    "bio": "Einer der am meisten überliefernden Gefährten. Nahm zahlreiche Aḥādīth vom Propheten ﷺ.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [
+      { "id": "s:muhammadibnshihabazzuhri", "name": "Ibn Shihāb az-Zuhrī" },
+      { "id": "ibn-sirin", "name": "Ibn Sīrīn" }
+    ],
+    "works": []
+  },
+  "abdullah-ibn-masud": {
+    "lifespanLabel": "gest. 32 H · ca. 652 n. Chr.",
+    "diedHijri": 32,
+    "eraLabel": "Ṣaḥābī · Madīnah / Kūfah",
+    "bio": "Früher Gefährte, herausragend in Qurʾān-Lesung und Fiqh. Viele Schüler in Kūfah.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [
+      { "id": "al-hasan-al-basri", "name": "al-Ḥasan al-Baṣrī" }
+    ],
+    "works": []
+  },
+  "ibn-abbas": {
+    "lifespanLabel": "3 v. H. – 68 H · ca. 619–687 n. Chr.",
+    "bornHijri": -3,
+    "diedHijri": 68,
+    "eraLabel": "Ṣaḥābī · Tafsīr",
+    "bio": "Cousin des Propheten ﷺ. Als „Übersetzer des Qurʾān“ bekannt; große Autorität im Tafsīr.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [
+      { "id": "mujahid", "name": "Mujāhid ibn Jabr" },
+      { "id": "s:atababirabah", "name": "ʿAṭāʾ ibn Abī Rabāḥ" },
+      { "id": "s:tawus", "name": "Ṭāwūs ibn Kaysān" }
+    ],
+    "works": []
+  },
+  "anas-b-malik": {
+    "lifespanLabel": "gest. 93 H · ca. 711 n. Chr.",
+    "diedHijri": 93,
+    "eraLabel": "Ṣaḥābī · Madīnah / Baṣrah",
+    "bio": "Langjähriger Diener des Propheten ﷺ. Überlieferte viele Aḥādīth und lebte bis in die Zeit der Tābiʿīn.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [
+      { "id": "al-hasan-al-basri", "name": "al-Ḥasan al-Baṣrī" },
+      { "id": "ibn-sirin", "name": "Ibn Sīrīn" },
+      { "id": "s:qatadah", "name": "Qatādah" }
+    ],
+    "works": []
+  },
+  "s:abdullahibnamr": {
+    "lifespanLabel": "gest. 63/65 H · ca. 682/684 n. Chr.",
+    "diedHijri": 65,
+    "eraLabel": "Ṣaḥābī · Madīnah / Syrien",
+    "bio": "Gefährte, der früh schrieb und viele Aḥādīth bewahrte (u. a. aṣ-Ṣaḥīfah aṣ-Ṣādiqah).",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [],
+    "works": [{ "title": "aṣ-Ṣaḥīfah aṣ-Ṣādiqah (Überlieferungsnotiz)" }]
+  },
+  "s:abdullahbamr": {
+    "lifespanLabel": "gest. 63/65 H · ca. 682/684 n. Chr.",
+    "diedHijri": 65,
+    "eraLabel": "Ṣaḥābī",
+    "bio": "Gleich ʿAbdullāh ibn ʿAmr ibn al-ʿĀṣ – früher Schreiber von Aḥādīth.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [],
+    "works": []
+  },
+  "s:abuaddarda": {
+    "lifespanLabel": "gest. 32 H · ca. 652 n. Chr.",
+    "diedHijri": 32,
+    "eraLabel": "Ṣaḥābī · Syrien",
+    "bio": "Gefährte, bekannt für Wissen und Askese; Richter und Lehrer in Syrien.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [],
+    "works": []
+  },
+  "s:abudharr": {
+    "lifespanLabel": "gest. 32 H · ca. 652 n. Chr.",
+    "diedHijri": 32,
+    "eraLabel": "Ṣaḥābī",
+    "bio": "Früher Gefährte, bekannt für Wahrhaftigkeit und strenge Haltung gegenüber Luxus.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [],
+    "works": []
+  },
+  "s:abusaidalkhudri": {
+    "lifespanLabel": "gest. 74 H · ca. 693 n. Chr.",
+    "diedHijri": 74,
+    "eraLabel": "Ṣaḥābī · Madīnah",
+    "bio": "Junger Gefährte aus den Anṣār; viele Überlieferungen, besonders zu Fiqh und Adab.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [],
+    "works": []
+  },
+  "s:abdullahibnumar": {
+    "lifespanLabel": "gest. 73/74 H · ca. 692/693 n. Chr.",
+    "diedHijri": 74,
+    "eraLabel": "Ṣaḥābī · Madīnah",
+    "bio": "Sohn ʿUmars. Streng in der Nachahmung der Sunnah; große Autorität im Fiqh von Madīnah.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }, { "id": "s:umarbalhattab", "name": "ʿUmar ibn al-Khaṭṭāb" }],
+    "students": [
+      { "id": "s:muhammadibnshihabazzuhri", "name": "az-Zuhrī" },
+      { "id": "nafī", "name": "Nāfiʿ (mawlā)" }
+    ],
+    "works": []
+  },
+  "s:ibnumar": {
+    "lifespanLabel": "gest. 73/74 H · ca. 692/693 n. Chr.",
+    "diedHijri": 74,
+    "eraLabel": "Ṣaḥābī · Madīnah",
+    "bio": "ʿAbdullāh ibn ʿUmar – eng an der Sunnah des Propheten ﷺ orientiert.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [],
+    "works": []
+  },
+  "s:aliibnabitalib": {
+    "lifespanLabel": "gest. 40 H · 661 n. Chr.",
+    "diedHijri": 40,
+    "eraLabel": "Ṣaḥābī · Khalīfah",
+    "bio": "Vetter und Schwiegersohn des Propheten ﷺ. Vierter rechtgeleiteter Khalīfah; große Autorität in Wissen und Rechtsprechung.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [
+      { "id": "al-hasan-al-basri", "name": "al-Ḥasan al-Baṣrī" }
+    ],
+    "works": []
+  },
+  "s:aishah": {
+    "lifespanLabel": "gest. 58 H · ca. 678 n. Chr.",
+    "diedHijri": 58,
+    "eraLabel": "Ṣaḥābiyyah · Madīnah",
+    "bio": "Mutter der Gläubigen. Eine der kenntnisreichsten Überlieferinnen; Fiqh, Tafsīr und Sunnah.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [
+      { "id": "s:urwah", "name": "ʿUrwah ibn az-Zubayr" },
+      { "id": "s:muhammadibnshihabazzuhri", "name": "az-Zuhrī" }
+    ],
+    "works": []
+  },
+  "s:aishahbintabibakr": {
+    "lifespanLabel": "gest. 58 H · ca. 678 n. Chr.",
+    "diedHijri": 58,
+    "eraLabel": "Ṣaḥābiyyah · Madīnah",
+    "bio": "ʿĀʾishah bint Abī Bakr – Mutter der Gläubigen.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [],
+    "works": []
+  },
+  "s:jabirbabdillah": {
+    "lifespanLabel": "gest. 78 H · ca. 697 n. Chr.",
+    "diedHijri": 78,
+    "eraLabel": "Ṣaḥābī · Madīnah",
+    "bio": "Anṣārī-Gefährte; zahlreiche Überlieferungen, u. a. zur Ḥajj-Beschreibung.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [],
+    "works": []
+  },
+  "s:uthmanbaffan": {
+    "lifespanLabel": "gest. 35 H · 656 n. Chr.",
+    "diedHijri": 35,
+    "eraLabel": "Ṣaḥābī · Khalīfah",
+    "bio": "Dritter rechtgeleiteter Khalīfah. Sammlung und Vereinheitlichung des Qurʾān-Muṣḥaf.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [],
+    "works": []
+  },
+  "s:umarbalhattab": {
+    "lifespanLabel": "gest. 23 H · 644 n. Chr.",
+    "diedHijri": 23,
+    "eraLabel": "Ṣaḥābī · Khalīfah",
+    "bio": "Zweiter rechtgeleiteter Khalīfah. Bekannt für Gerechtigkeit und Ausbreitung des Islams.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [
+      { "id": "s:abdullahibnumar", "name": "ʿAbdullāh ibn ʿUmar" }
+    ],
+    "works": []
+  },
+  "s:umaribnalkhattab": {
+    "lifespanLabel": "gest. 23 H · 644 n. Chr.",
+    "diedHijri": 23,
+    "eraLabel": "Ṣaḥābī · Khalīfah",
+    "bio": "ʿUmar ibn al-Khaṭṭāb رضي الله عنه.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [],
+    "works": []
+  },
+  "s:salmanalfarisi": {
+    "lifespanLabel": "gest. ca. 35 H · ca. 655 n. Chr.",
+    "diedHijri": 35,
+    "eraLabel": "Ṣaḥābī",
+    "bio": "Persischer Gefährte; berühmt für die Suche nach der Wahrheit und den Graben von Madīnah.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [],
+    "works": []
+  },
+  "s:ubayyibnkab": {
+    "lifespanLabel": "gest. ca. 30/32 H",
+    "diedHijri": 32,
+    "eraLabel": "Ṣaḥābī · Madīnah",
+    "bio": "Einer der führenden Qurʾān-Leser unter den Gefährten.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [],
+    "works": []
+  },
+  "s:ummsalamah": {
+    "lifespanLabel": "gest. ca. 59/62 H · ca. 678/681 n. Chr.",
+    "diedHijri": 62,
+    "eraLabel": "Ṣaḥābiyyah · Madīnah",
+    "bio": "Mutter der Gläubigen. Wichtige Überlieferin von Aḥādīth und Rechtsurteilen.",
+    "teachers": [{ "id": "__prophet__", "name": "Prophet Muhammad ﷺ" }],
+    "students": [],
+    "works": []
+  },
+  "al-hasan-al-basri": {
+    "lifespanLabel": "21–110 H · ca. 642–728 n. Chr.",
+    "bornHijri": 21,
+    "diedHijri": 110,
+    "eraLabel": "Tābiʿī · Baṣrah",
+    "bio": "Führender Tābiʿī von Baṣrah. Bekannt für Predigt, Askese und Wissen; traf viele Ṣaḥābah.",
+    "teachers": [
+      { "id": "anas-b-malik", "name": "Anas ibn Mālik" },
+      { "id": "s:aliibnabitalib", "name": "ʿAlī ibn Abī Ṭālib" }
+    ],
+    "students": [
+      { "id": "s:qatadah", "name": "Qatādah" },
+      { "id": "s:ayyub", "name": "Ayyūb as-Sakhtiyānī" }
+    ],
+    "works": []
+  },
+  "ibn-sirin": {
+    "lifespanLabel": "33–110 H · ca. 653–728 n. Chr.",
+    "bornHijri": 33,
+    "diedHijri": 110,
+    "eraLabel": "Tābiʿī · Baṣrah",
+    "bio": "Tābiʿī von Baṣrah; Muḥaddith und bekannt für Traumdeutung in späteren Überlieferungen.",
+    "teachers": [
+      { "id": "abu-hurayrah", "name": "Abū Hurayrah" },
+      { "id": "anas-b-malik", "name": "Anas ibn Mālik" }
+    ],
+    "students": [],
+    "works": []
+  },
+  "mujahid": {
+    "lifespanLabel": "21–104 H · ca. 642–722 n. Chr.",
+    "bornHijri": 21,
+    "diedHijri": 104,
+    "eraLabel": "Tābiʿī · Makkah · Tafsīr",
+    "bio": "Schüler von Ibn ʿAbbās; eine der wichtigsten frühen Tafsīr-Autoritäten.",
+    "teachers": [{ "id": "ibn-abbas", "name": "Ibn ʿAbbās" }],
+    "students": [],
+    "works": [{ "title": "Tafsīr Mujāhid (überliefert)" }]
+  },
+  "s:atababirabah": {
+    "lifespanLabel": "gest. 114/115 H · ca. 732/733 n. Chr.",
+    "diedHijri": 115,
+    "eraLabel": "Tābiʿī · Makkah · Fiqh",
+    "bio": "Führender Mufti von Makkah; Schüler von Ibn ʿAbbās.",
+    "teachers": [{ "id": "ibn-abbas", "name": "Ibn ʿAbbās" }],
+    "students": [],
+    "works": []
+  },
+  "s:tawus": {
+    "lifespanLabel": "gest. 106 H · ca. 724 n. Chr.",
+    "diedHijri": 106,
+    "eraLabel": "Tābiʿī · Jemen / Makkah",
+    "bio": "Tābiʿī aus dem Jemen; Schüler von Ibn ʿAbbās; bekannt für Wissen und Gottesfurcht.",
+    "teachers": [{ "id": "ibn-abbas", "name": "Ibn ʿAbbās" }],
+    "students": [],
+    "works": []
+  },
+  "s:qatadah": {
+    "lifespanLabel": "61–117 H · ca. 680–735 n. Chr.",
+    "bornHijri": 61,
+    "diedHijri": 117,
+    "eraLabel": "Tābiʿī · Baṣrah · Tafsīr",
+    "bio": "Blinder Tābiʿī von Baṣrah; große Autorität in Tafsīr und Ḥadīth.",
+    "teachers": [
+      { "id": "anas-b-malik", "name": "Anas ibn Mālik" },
+      { "id": "al-hasan-al-basri", "name": "al-Ḥasan al-Baṣrī" }
+    ],
+    "students": [],
+    "works": []
+  },
+  "s:assuddi": {
+    "lifespanLabel": "gest. 127 H · ca. 744 n. Chr.",
+    "diedHijri": 127,
+    "eraLabel": "Tābiʿī · Kūfah · Tafsīr",
+    "bio": "Ismāʿīl as-Suddī; früher Tafsīr-Überlieferer aus Kūfah.",
+    "teachers": [],
+    "students": [],
+    "works": []
+  },
+  "s:sufyanaththawri": {
+    "lifespanLabel": "97–161 H · ca. 716–778 n. Chr.",
+    "bornHijri": 97,
+    "diedHijri": 161,
+    "eraLabel": "Atbāʿ / frühe Imāme · Kūfah",
+    "bio": "Imām von Kūfah; Muḥaddith und Faqīh. Bekannt für Askese und Standhaftigkeit.",
+    "teachers": [],
+    "students": [
+      { "id": "s:abdullahibnalmubarak", "name": "ʿAbdullāh ibn al-Mubārak" },
+      { "id": "yahya", "name": "Yaḥyā ibn Saʿīd al-Qaṭṭān" }
+    ],
+    "works": [{ "title": "al-Jāmiʿ (Ḥadīth-Sammlung, überliefert)" }]
+  },
+  "sufyan-ibn-uyaynah": {
+    "lifespanLabel": "107–198 H · ca. 725–814 n. Chr.",
+    "bornHijri": 107,
+    "diedHijri": 198,
+    "eraLabel": "Atbāʿ · Makkah · Ḥadīth",
+    "bio": "Großer Muḥaddith von Makkah; Lehrer vieler späterer Imāme, darunter ash-Shāfiʿī.",
+    "teachers": [
+      { "id": "s:muhammadibnshihabazzuhri", "name": "az-Zuhrī" },
+      { "id": "s:amribndinar", "name": "ʿAmr ibn Dīnār" }
+    ],
+    "students": [
+      { "id": "ash-shafii", "name": "ash-Shāfiʿī" },
+      { "id": "ahmad-ibn-hanbal", "name": "Aḥmad ibn Ḥanbal" }
+    ],
+    "works": []
+  },
+  "al-awzai": {
+    "lifespanLabel": "88–157 H · ca. 707–774 n. Chr.",
+    "bornHijri": 88,
+    "diedHijri": 157,
+    "eraLabel": "Atbāʿ · Syrien · Fiqh",
+    "bio": "Imām von Syrien; früher Madhhab, der später zurückging. Bedeutender Faqīh und Muḥaddith.",
+    "teachers": [],
+    "students": [],
+    "works": []
+  },
+  "al-layth": {
+    "lifespanLabel": "94–175 H · ca. 713–791 n. Chr.",
+    "bornHijri": 94,
+    "diedHijri": 175,
+    "eraLabel": "Atbāʿ · Ägypten · Fiqh",
+    "bio": "Imām von Ägypten; Faqīh und Muḥaddith, Zeitgenosse von Mālik.",
+    "teachers": [],
+    "students": [],
+    "works": []
+  },
+  "s:umaribnabdalaziz": {
+    "lifespanLabel": "61–101 H · ca. 680–720 n. Chr.",
+    "bornHijri": 61,
+    "diedHijri": 101,
+    "eraLabel": "Tābiʿī · Umayyaden-Khalīfah",
+    "bio": "Gerechter Khalīfah; wird oft als „fünfter rechtgeleiteter Khalīfah“ gelobt. Förderte Ḥadīth-Sammlung.",
+    "teachers": [],
+    "students": [
+      { "id": "s:muhammadibnshihabazzuhri", "name": "az-Zuhrī" }
+    ],
+    "works": []
+  },
+  "s:maymunibnmihran": {
+    "lifespanLabel": "gest. 117 H · ca. 735 n. Chr.",
+    "diedHijri": 117,
+    "eraLabel": "Tābiʿī · al-Jazīrah",
+    "bio": "Tābiʿī und Gelehrter; Richter und Vertrauter von ʿUmar ibn ʿAbd al-ʿAzīz.",
+    "teachers": [],
+    "students": [],
+    "works": []
+  },
+  "al-fudayl": {
+    "lifespanLabel": "gest. 187 H · ca. 803 n. Chr.",
+    "diedHijri": 187,
+    "eraLabel": "Atbāʿ · Makkah · Zuhd",
+    "bio": "Bekannt für Tawbah und Askese; Muḥaddith und Lehrer in Makkah.",
+    "teachers": [],
+    "students": [],
+    "works": []
+  },
+  "s:alfudaylbiyad": {
+    "lifespanLabel": "gest. 187 H · ca. 803 n. Chr.",
+    "diedHijri": 187,
+    "eraLabel": "Atbāʿ · Makkah · Zuhd",
+    "bio": "al-Fuḍayl ibn ʿIyāḍ – Asket und Muḥaddith.",
+    "teachers": [],
+    "students": [],
+    "works": []
+  },
+  "s:muhammadibnshihabazzuhri": {
+    "lifespanLabel": "50–124 H · ca. 670–742 n. Chr.",
+    "bornHijri": 50,
+    "diedHijri": 124,
+    "eraLabel": "Atbāʿ at-Tābiʿīn · Madīnah / Syrien",
+    "bio": "Pionier der systematischen Ḥadīth-Sammlung. Traf viele ältere Tābiʿīn und einige jüngere Ṣaḥābah.",
+    "teachers": [
+      { "id": "s:anass", "name": "Anas ibn Mālik (Überlieferung)" },
+      { "id": "s:abdullahibnumar", "name": "Ibn ʿUmar (über Nāfiʿ u. a.)" },
+      { "id": "s:umaribnabdalaziz", "name": "ʿUmar ibn ʿAbd al-ʿAzīz" }
+    ],
+    "students": [
+      { "id": "malik-ibn-anas", "name": "Mālik ibn Anas" },
+      { "id": "sufyan-ibn-uyaynah", "name": "Sufyān ibn ʿUyaynah" },
+      { "id": "s:abdullahibnalmubarak", "name": "Ibn al-Mubārak" }
+    ],
+    "works": []
+  },
+  "s:abdullahibnalmubarak": {
+    "lifespanLabel": "118–181 H · ca. 736–797 n. Chr.",
+    "bornHijri": 118,
+    "diedHijri": 181,
+    "eraLabel": "Atbāʿ · Khurāsān · Jihād & ʿIlm",
+    "bio": "Imām der Sunnah; vereinte Ḥadīth, Fiqh, Zuhd und Jihād. Weit gereist für Wissen.",
+    "teachers": [
+      { "id": "s:sufyanaththawri", "name": "Sufyān ath-Thawrī" },
+      { "id": "malik-ibn-anas", "name": "Mālik ibn Anas" },
+      { "id": "s:muhammadibnshihabazzuhri", "name": "az-Zuhrī" }
+    ],
+    "students": [],
+    "works": [
+      { "title": "Kitāb az-Zuhd" },
+      { "title": "Kitāb al-Jihād" }
+    ]
+  },
+  "s:abdarrahmanibnmahdi": {
+    "lifespanLabel": "135–198 H · ca. 752–813 n. Chr.",
+    "bornHijri": 135,
+    "diedHijri": 198,
+    "eraLabel": "Frühe Muḥaddithūn · Baṣrah",
+    "bio": "Einer der Imāme der Ḥadīth-Kritik; Zeitgenosse und Peer von Yaḥyā ibn Saʿīd al-Qaṭṭān.",
+    "teachers": [],
+    "students": [
+      { "id": "ahmad-ibn-hanbal", "name": "Aḥmad ibn Ḥanbal" }
+    ],
+    "works": []
+  },
+  "s:abdarrahmanbmahdi": {
+    "lifespanLabel": "135–198 H · ca. 752–813 n. Chr.",
+    "bornHijri": 135,
+    "diedHijri": 198,
+    "eraLabel": "Frühe Muḥaddithūn · Baṣrah",
+    "bio": "ʿAbd ar-Raḥmān ibn Mahdī – Imām der ʿIlal und Ḥadīth-Kritik.",
+    "teachers": [],
+    "students": [{ "id": "ahmad-ibn-hanbal", "name": "Aḥmad ibn Ḥanbal" }],
+    "works": []
+  },
+  "malik-ibn-anas": {
+    "lifespanLabel": "93–179 H · ca. 711–795 n. Chr.",
+    "bornHijri": 93,
+    "diedHijri": 179,
+    "eraLabel": "Imām · Madīnah · Fiqh",
+    "bio": "Imām von Madīnah; Begründer der mālikitischen Schule. Sein Muwaṭṭaʾ ist eines der frühesten Ḥadīth-Werke.",
+    "teachers": [
+      { "id": "s:muhammadibnshihabazzuhri", "name": "az-Zuhrī" },
+      { "id": "nafī", "name": "Nāfiʿ mawlā Ibn ʿUmar" },
+      { "id": "s:rabiah", "name": "Rabīʿah ar-Raʾy" }
+    ],
+    "students": [
+      { "id": "ash-shafii", "name": "ash-Shāfiʿī" },
+      { "id": "s:abdullahibnalmubarak", "name": "Ibn al-Mubārak" }
+    ],
+    "works": [{ "title": "al-Muwaṭṭaʾ" }]
+  },
+  "ash-shafii": {
+    "lifespanLabel": "150–204 H · ca. 767–820 n. Chr.",
+    "bornHijri": 150,
+    "diedHijri": 204,
+    "eraLabel": "Imām · Makkah / Ägypten · Uṣūl",
+    "bio": "Begründer der schāfiʿitischen Schule; Wegbereiter der klassischen Uṣūl al-Fiqh.",
+    "teachers": [
+      { "id": "malik-ibn-anas", "name": "Mālik ibn Anas" },
+      { "id": "sufyan-ibn-uyaynah", "name": "Sufyān ibn ʿUyaynah" }
+    ],
+    "students": [
+      { "id": "ahmad-ibn-hanbal", "name": "Aḥmad ibn Ḥanbal" },
+      { "id": "s:ismailibnyahyaalmuzani", "name": "al-Muzanī" }
+    ],
+    "works": [
+      { "title": "ar-Risālah" },
+      { "title": "al-Umm" }
+    ]
+  },
+  "s:imamassafii": {
+    "lifespanLabel": "150–204 H · ca. 767–820 n. Chr.",
+    "bornHijri": 150,
+    "diedHijri": 204,
+    "eraLabel": "Imām · Uṣūl & Fiqh",
+    "bio": "Imām Muḥammad ibn Idrīs ash-Shāfiʿī.",
+    "teachers": [
+      { "id": "malik-ibn-anas", "name": "Mālik ibn Anas" }
+    ],
+    "students": [{ "id": "ahmad-ibn-hanbal", "name": "Aḥmad ibn Ḥanbal" }],
+    "works": [{ "title": "ar-Risālah" }, { "title": "al-Umm" }]
+  },
+  "ahmad-ibn-hanbal": {
+    "lifespanLabel": "164–241 H · ca. 780–855 n. Chr.",
+    "bornHijri": 164,
+    "diedHijri": 241,
+    "eraLabel": "Imām · Baghdād · Sunnah",
+    "bio": "Imām von Ahl as-Sunnah. Standhaftigkeit in der Miḥnah; sein Musnad ist eine der größten Ḥadīth-Sammlungen.",
+    "teachers": [
+      { "id": "ash-shafii", "name": "ash-Shāfiʿī" },
+      { "id": "sufyan-ibn-uyaynah", "name": "Sufyān ibn ʿUyaynah" },
+      { "id": "s:abdarrahmanibnmahdi", "name": "ʿAbd ar-Raḥmān ibn Mahdī" },
+      { "id": "s:yahyabmain", "name": "Yaḥyā ibn Maʿīn" }
+    ],
+    "students": [
+      { "id": "al-bukhari", "name": "al-Bukhārī (traf ihn / Überlieferungsnetz)" },
+      { "id": "s:ishaqibnrahawayh", "name": "Isḥāq ibn Rāhawayh (Peer/Austausch)" }
+    ],
+    "works": [
+      { "title": "al-Musnad" },
+      { "title": "Uṣūl as-Sunnah (überliefert)" }
+    ]
+  },
+  "al-bukhari": {
+    "lifespanLabel": "194–256 H · ca. 810–870 n. Chr.",
+    "bornHijri": 194,
+    "diedHijri": 256,
+    "eraLabel": "Imām · Khurāsān · Ṣaḥīḥ",
+    "bio": "Verfasser von Ṣaḥīḥ al-Bukhārī, dem authentischsten Ḥadīth-Werk nach dem Qurʾān bei Ahl as-Sunnah.",
+    "teachers": [
+      { "id": "s:ishaqibnrahawayh", "name": "Isḥāq ibn Rāhawayh" },
+      { "id": "s:yahyabmain", "name": "Yaḥyā ibn Maʿīn" },
+      { "id": "ahmad-ibn-hanbal", "name": "Aḥmad ibn Ḥanbal" }
+    ],
+    "students": [
+      { "id": "abu-isa-at-tirmidhi", "name": "at-Tirmidhī" },
+      { "id": "muslim", "name": "Muslim ibn al-Ḥajjāj" }
+    ],
+    "works": [
+      { "title": "Ṣaḥīḥ al-Bukhārī" },
+      { "title": "at-Tārīkh al-Kabīr" },
+      { "title": "al-Adab al-Mufrad" }
+    ]
+  },
+  "abu-isa-at-tirmidhi": {
+    "lifespanLabel": "209–279 H · ca. 824–892 n. Chr.",
+    "bornHijri": 209,
+    "diedHijri": 279,
+    "eraLabel": "Imām · Khurāsān · Sunan",
+    "bio": "Schüler von al-Bukhārī; Verfasser von Jāmiʿ at-Tirmidhī mit Bewertungen der Überlieferungen.",
+    "teachers": [
+      { "id": "al-bukhari", "name": "al-Bukhārī" },
+      { "id": "abu-zurah-ar-razi", "name": "Abū Zurʿah ar-Rāzī" }
+    ],
+    "students": [],
+    "works": [
+      { "title": "Jāmiʿ at-Tirmidhī" },
+      { "title": "ash-Shamāʾil al-Muḥammadiyyah" }
+    ]
+  },
+  "abu-hatim-ar-razi": {
+    "lifespanLabel": "195–277 H · ca. 811–890 n. Chr.",
+    "bornHijri": 195,
+    "diedHijri": 277,
+    "eraLabel": "Imām · ar-Rayy · Jarḥ wa-Taʿdīl",
+    "bio": "Imām der Ḥadīth-Kritik; Vater von Ibn Abī Ḥātim. Autorität in ʿIlal und ʿAqīdah der Muḥaddithūn.",
+    "teachers": [],
+    "students": [
+      { "id": "ibn-abi-hatim", "name": "Ibn Abī Ḥātim" }
+    ],
+    "works": []
+  },
+  "abu-zurah-ar-razi": {
+    "lifespanLabel": "ca. 200–264 H · ca. 815–878 n. Chr.",
+    "bornHijri": 200,
+    "diedHijri": 264,
+    "eraLabel": "Imām · ar-Rayy · Ḥadīth",
+    "bio": "Enge Verbindung zu Abū Ḥātim; Imām der Ḥadīth-Kritik und der Sunnah.",
+    "teachers": [],
+    "students": [
+      { "id": "abu-isa-at-tirmidhi", "name": "at-Tirmidhī" }
+    ],
+    "works": []
+  },
+  "s:abuzurah": {
+    "lifespanLabel": "ca. 200–264 H",
+    "diedHijri": 264,
+    "eraLabel": "Imām · Ḥadīth-Kritik",
+    "bio": "Abū Zurʿah ar-Rāzī.",
+    "teachers": [],
+    "students": [],
+    "works": []
+  },
+  "s:ishaqibnrahawayh": {
+    "lifespanLabel": "161–238 H · ca. 778–853 n. Chr.",
+    "bornHijri": 161,
+    "diedHijri": 238,
+    "eraLabel": "Imām · Naysābūr · Ḥadīth & Fiqh",
+    "bio": "Imām von Khurāsān; Peer von Aḥmad; Lehrer von al-Bukhārī.",
+    "teachers": [],
+    "students": [
+      { "id": "al-bukhari", "name": "al-Bukhārī" },
+      { "id": "ahmad-ibn-hanbal", "name": "Aḥmad ibn Ḥanbal (Austausch)" }
+    ],
+    "works": [{ "title": "al-Musnad (Isḥāq)" }]
+  },
+  "s:ishaqbrahawayh": {
+    "lifespanLabel": "161–238 H · ca. 778–853 n. Chr.",
+    "bornHijri": 161,
+    "diedHijri": 238,
+    "eraLabel": "Imām · Naysābūr",
+    "bio": "Isḥāq ibn Rāhawayh.",
+    "teachers": [],
+    "students": [{ "id": "al-bukhari", "name": "al-Bukhārī" }],
+    "works": []
+  },
+  "s:yahyabmain": {
+    "lifespanLabel": "158–233 H · ca. 775–847 n. Chr.",
+    "bornHijri": 158,
+    "diedHijri": 233,
+    "eraLabel": "Imām · Baghdād · Jarḥ wa-Taʿdīl",
+    "bio": "Imām der Ḥadīth-Kritik; enger Gefährte von Aḥmad ibn Ḥanbal.",
+    "teachers": [],
+    "students": [
+      { "id": "al-bukhari", "name": "al-Bukhārī" },
+      { "id": "ahmad-ibn-hanbal", "name": "Aḥmad ibn Ḥanbal" }
+    ],
+    "works": [{ "title": "at-Tārīkh (Yaḥyā ibn Maʿīn)" }]
+  },
+  "al-barbahari": {
+    "lifespanLabel": "gest. 329 H · ca. 941 n. Chr.",
+    "diedHijri": 329,
+    "eraLabel": "Imām · Baghdād · ʿAqīdah",
+    "bio": "Ḥanbalī-Imām; Autor von Sharḥ as-Sunnah – klassische Darlegung der ʿAqīdah von Ahl as-Sunnah.",
+    "teachers": [],
+    "students": [],
+    "works": [{ "title": "Sharḥ as-Sunnah" }]
+  },
+  "s:uthmanibnsaidaddarimi": {
+    "lifespanLabel": "gest. 280 H · ca. 894 n. Chr.",
+    "diedHijri": 280,
+    "eraLabel": "Imām · ʿAqīdah & Ḥadīth",
+    "bio": "Verfasser von ar-Radd ʿalā al-Jahmiyyah; Verteidiger der Ṣifāt gegen die Jahmiyyah.",
+    "teachers": [],
+    "students": [],
+    "works": [
+      { "title": "ar-Radd ʿalā al-Jahmiyyah" },
+      { "title": "Sunan ad-Dārimī (nicht zu verwechseln mit dem späteren Sunan-Autor)" }
+    ]
+  },
+  "al-lalakai": {
+    "lifespanLabel": "gest. 418 H · ca. 1027 n. Chr.",
+    "diedHijri": 418,
+    "eraLabel": "Imām · ʿAqīdah-Überlieferung",
+    "bio": "Autor von Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah – Sammlung früher ʿAqīdah-Überlieferungen.",
+    "teachers": [],
+    "students": [],
+    "works": [{ "title": "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah wa-l-Jamāʿah" }]
+  },
+  "s:ibnbattahalukbari": {
+    "lifespanLabel": "304–387 H · ca. 917–997 n. Chr.",
+    "bornHijri": 304,
+    "diedHijri": 387,
+    "eraLabel": "Imām · Ḥanbalī · ʿAqīdah",
+    "bio": "Autor von al-Ibānah; Verteidiger der Sunnah gegen Bidʿah.",
+    "teachers": [],
+    "students": [],
+    "works": [{ "title": "al-Ibānah ʿan Sharīʿat al-Firqah an-Nājiyah" }]
+  },
+  "s:abubakralajurri": {
+    "lifespanLabel": "gest. 360 H · ca. 970 n. Chr.",
+    "diedHijri": 360,
+    "eraLabel": "Imām · Baghdād / Makkah · Adab & ʿAqīdah",
+    "bio": "Nicht Tābiʿī, sondern späterer Imām. Verfasser von ash-Sharīʿah und Werken zu Adab und ʿAqīdah.",
+    "teachers": [],
+    "students": [],
+    "works": [
+      { "title": "ash-Sharīʿah" },
+      { "title": "Akhlāq Ḥamalat al-Qurʾān" }
+    ]
+  },
+  "ibn-qudamah": {
+    "lifespanLabel": "541–620 H · ca. 1147–1223 n. Chr.",
+    "bornHijri": 541,
+    "diedHijri": 620,
+    "eraLabel": "Imām · Ḥanbalī · Fiqh",
+    "bio": "Autor von al-Mughnī; führender ḥanbalitischer Faqīh.",
+    "teachers": [],
+    "students": [],
+    "works": [
+      { "title": "al-Mughnī" },
+      { "title": "Lumʿat al-Iʿtiqād" }
+    ]
+  },
+  "at-tabari": {
+    "lifespanLabel": "224–310 H · ca. 839–923 n. Chr.",
+    "bornHijri": 224,
+    "diedHijri": 310,
+    "eraLabel": "Imām · Baghdād · Tafsīr & Tārīkh",
+    "bio": "Enzyklopädischer Gelehrter; Tafsīr und Weltgeschichte als Standardwerke.",
+    "teachers": [],
+    "students": [],
+    "works": [
+      { "title": "Jāmiʿ al-Bayān (Tafsīr aṭ-Ṭabarī)" },
+      { "title": "Tārīkh ar-Rusul wa-l-Mulūk" }
+    ]
+  },
+  "ibn-abd-al-barr": {
+    "lifespanLabel": "368–463 H · ca. 978–1071 n. Chr.",
+    "bornHijri": 368,
+    "diedHijri": 463,
+    "eraLabel": "Imām · Andalus · Ḥadīth",
+    "bio": "Ḥāfiẓ von al-Andalus; Werke zu den Gefährten und zum Muwaṭṭaʾ.",
+    "teachers": [],
+    "students": [],
+    "works": [
+      { "title": "at-Tamhīd" },
+      { "title": "al-Istīʿāb" }
+    ]
+  },
+  "al-qurtubi": {
+    "lifespanLabel": "gest. 671 H · ca. 1273 n. Chr.",
+    "diedHijri": 671,
+    "eraLabel": "Mufassir · Andalus / Ägypten",
+    "bio": "Verfasser des bekannten Tafsīr al-Jāmiʿ li-Aḥkām al-Qurʾān.",
+    "teachers": [],
+    "students": [],
+    "works": [{ "title": "al-Jāmiʿ li-Aḥkām al-Qurʾān" }]
+  },
+  "an-nawawi": {
+    "lifespanLabel": "631–676 H · ca. 1233–1277 n. Chr.",
+    "bornHijri": 631,
+    "diedHijri": 676,
+    "eraLabel": "Imām · Damaskus · Shāfiʿī",
+    "bio": "Führender schāfiʿitischer Imām; Werke zu Ḥadīth, Fiqh und Adab weit verbreitet.",
+    "teachers": [],
+    "students": [],
+    "works": [
+      { "title": "Riyāḍ aṣ-Ṣāliḥīn" },
+      { "title": "al-Arbaʿūn an-Nawawiyyah" },
+      { "title": "al-Minhāj (Sharḥ Muslim)" },
+      { "title": "al-Majmūʿ" }
+    ]
+  },
+  "ibn-taymiyyah": {
+    "lifespanLabel": "661–728 H · ca. 1263–1328 n. Chr.",
+    "bornHijri": 661,
+    "diedHijri": 728,
+    "eraLabel": "Imām · Damaskus · ʿAqīdah & Fiqh",
+    "bio": "Erneuerer der Sunnah; zahlreiche Fatāwā und Werke gegen philosophische und sufische Abweichungen.",
+    "teachers": [],
+    "students": [
+      { "id": "s:ibnalqayyim", "name": "Ibn al-Qayyim" },
+      { "id": "adh-dhahabi", "name": "adh-Dhahabī" },
+      { "id": "ibn-kathir", "name": "Ibn Kathīr" }
+    ],
+    "works": [
+      { "title": "Majmūʿ al-Fatāwā" },
+      { "title": "al-ʿAqīdah al-Wāsiṭiyyah" },
+      { "title": "Kitāb at-Tawḥīd (verschiedene Schriften)" }
+    ]
+  },
+  "s:ibnalqayyim": {
+    "lifespanLabel": "691–751 H · ca. 1292–1350 n. Chr.",
+    "bornHijri": 691,
+    "diedHijri": 751,
+    "eraLabel": "Imām · Damaskus · Schüler Ibn Taymiyyahs",
+    "bio": "Engster Schüler von Ibn Taymiyyah; Werke zu Herz, Fiqh und ʿAqīdah.",
+    "teachers": [{ "id": "ibn-taymiyyah", "name": "Ibn Taymiyyah" }],
+    "students": [],
+    "works": [
+      { "title": "Madārij as-Sālikīn" },
+      { "title": "Zād al-Maʿād" },
+      { "title": "Iʿlām al-Muwaqqiʿīn" }
+    ]
+  },
+  "adh-dhahabi": {
+    "lifespanLabel": "673–748 H · ca. 1274–1348 n. Chr.",
+    "bornHijri": 673,
+    "diedHijri": 748,
+    "eraLabel": "Imām · Damaskus · Ḥadīth & Tārīkh",
+    "bio": "Ḥāfiẓ und Historiker; Standardwerke zur Ḥadīth-Kritik und Gelehrtenbiographien.",
+    "teachers": [{ "id": "ibn-taymiyyah", "name": "Ibn Taymiyyah" }],
+    "students": [{ "id": "ibn-kathir", "name": "Ibn Kathīr" }],
+    "works": [
+      { "title": "Siyar Aʿlām an-Nubalāʾ" },
+      { "title": "Mīzān al-Iʿtidāl" },
+      { "title": "Tadhkirat al-Ḥuffāẓ" }
+    ]
+  },
+  "ibn-kathir": {
+    "lifespanLabel": "701–774 H · ca. 1301–1373 n. Chr.",
+    "bornHijri": 701,
+    "diedHijri": 774,
+    "eraLabel": "Imām · Damaskus · Tafsīr",
+    "bio": "Schüler von Ibn Taymiyyah und adh-Dhahabī; Tafsīr und Geschichte weit verbreitet.",
+    "teachers": [
+      { "id": "ibn-taymiyyah", "name": "Ibn Taymiyyah" },
+      { "id": "adh-dhahabi", "name": "adh-Dhahabī" }
+    ],
+    "students": [],
+    "works": [
+      { "title": "Tafsīr Ibn Kathīr" },
+      { "title": "al-Bidāyah wa-n-Nihāyah" }
+    ]
+  },
+  "ibn-hajar": {
+    "lifespanLabel": "773–852 H · ca. 1372–1449 n. Chr.",
+    "bornHijri": 773,
+    "diedHijri": 852,
+    "eraLabel": "Imām · Kairo · Ḥadīth",
+    "bio": "Ḥāfiẓ; Verfasser von Fatḥ al-Bārī, dem bedeutendsten Kommentar zu Ṣaḥīḥ al-Bukhārī.",
+    "teachers": [],
+    "students": [],
+    "works": [
+      { "title": "Fatḥ al-Bārī" },
+      { "title": "Bulūgh al-Marām" },
+      { "title": "Taqrīb at-Tahdhīb" }
+    ]
+  },
+  "ibn-al-jawzi": {
+    "lifespanLabel": "510–597 H · ca. 1116–1201 n. Chr.",
+    "bornHijri": 510,
+    "diedHijri": 597,
+    "eraLabel": "Imām · Baghdād · Predigt & Ḥadīth",
+    "bio": "Ḥanbalī-Gelehrter und Prediger; viele Werke zu Geschichte, Zuhd und Ḥadīth.",
+    "teachers": [],
+    "students": [],
+    "works": [
+      { "title": "Zād al-Masīr" },
+      { "title": "Ṣayd al-Khāṭir" }
+    ]
+  },
+  "al-qadi-iyad": {
+    "lifespanLabel": "476–544 H · ca. 1083–1149 n. Chr.",
+    "bornHijri": 476,
+    "diedHijri": 544,
+    "eraLabel": "Imām · Maghrib · Mālikī",
+    "bio": "Qāḍī und Gelehrter; bekannt für ash-Shifāʾ über die Rechte des Propheten ﷺ.",
+    "teachers": [],
+    "students": [],
+    "works": [
+      { "title": "ash-Shifāʾ" },
+      { "title": "Tartīb al-Madārik" }
+    ]
+  },
+  "al-mawardi": {
+    "lifespanLabel": "364–450 H · ca. 974–1058 n. Chr.",
+    "bornHijri": 364,
+    "diedHijri": 450,
+    "eraLabel": "Faqīh · Baghdād · Shāfiʿī",
+    "bio": "Shāfiʿitischer Qāḍī; Autor von al-Aḥkām as-Sulṭāniyyah.",
+    "teachers": [],
+    "students": [],
+    "works": [{ "title": "al-Aḥkām as-Sulṭāniyyah" }]
+  },
+  "s:ibnabializz": {
+    "lifespanLabel": "gest. 792 H · ca. 1390 n. Chr.",
+    "diedHijri": 792,
+    "eraLabel": "Imām · Sharḥ aṭ-Ṭaḥāwiyyah",
+    "bio": "Verfasser des bekannten Kommentars zur ʿAqīdah aṭ-Ṭaḥāwiyyah.",
+    "teachers": [],
+    "students": [],
+    "works": [{ "title": "Sharḥ al-ʿAqīdah aṭ-Ṭaḥāwiyyah" }]
+  },
+  "s:assawkani": {
+    "lifespanLabel": "1173–1250 H · ca. 1760–1834 n. Chr.",
+    "bornHijri": 1173,
+    "diedHijri": 1250,
+    "eraLabel": "Imām · Jemen · Ijtihād",
+    "bio": "Jemenitischer Muḥaddith und Mujtahid; Nayl al-Awṭār und andere Werke.",
+    "teachers": [],
+    "students": [],
+    "works": [
+      { "title": "Nayl al-Awṭār" },
+      { "title": "Fatḥ al-Qadīr" }
+    ]
+  },
+  "s:ashshanqiti": {
+    "lifespanLabel": "1325–1393 H · ca. 1907–1973 n. Chr.",
+    "bornHijri": 1325,
+    "diedHijri": 1393,
+    "eraLabel": "Mufassir · moderne Zeit · Madīnah",
+    "bio": "Muḥammad al-Amīn ash-Shanqīṭī; Autor von Aḍwāʾ al-Bayān.",
+    "teachers": [],
+    "students": [],
+    "works": [{ "title": "Aḍwāʾ al-Bayān" }]
+  },
+  "s:zaydibnamribnnufayl": {
+    "lifespanLabel": "gest. vor dem Prophetenamt · vor 610 n. Chr.",
+    "eraLabel": "Vorislamische Ḥunafāʾ (kein Tābiʿī)",
+    "bio": "Kein Tābiʿī und kein Ṣaḥābī im üblichen Sinn: Ḥanīf in Makkah, der den Götzendienst ablehnte und vor dem öffentlichen Prophetenamt starb. Der Prophet ﷺ lobte ihn.",
+    "teachers": [],
+    "students": [],
+    "works": []
+  }
+}
