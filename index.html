@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1784844487885 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v485";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v486";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -14859,7 +14859,7 @@ html[data-theme] #bottomNav.bottom-nav{
   }
 }
 </style>
-<style id="live-dua-scholars-oval-v485">
+<style id="live-dua-scholars-oval-v486">
 /* v485 live · Ovales Katalog-Licht: Duʿāʾ + Gelehrte */
 body.is-catalog-route,
 body.is-dua-route,
@@ -14877,7 +14877,7 @@ body.is-scholar-route{
   --cat-line-strong:color-mix(in srgb,var(--gold2) 44%,transparent);
   --cat-wash:color-mix(in srgb,var(--gold2) 10%,transparent);
   --cat-wash-strong:color-mix(in srgb,var(--gold2) 16%,transparent);
-  --cat-rule:linear-gradient(90deg,transparent 0%,var(--cat-line-strong) 16%,var(--cat-line-strong) 84%,transparent 100%);
+  --cat-rule:radial-gradient(ellipse 62% 900% at 50% 50%,var(--cat-line-strong),color-mix(in srgb,var(--gold2) 22%,transparent) 46%,transparent 72%);
   --cat-ornament:color-mix(in srgb,var(--gold2) 72%,transparent);
   --cat-rail:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--gold2) 35%,transparent) 12%,var(--gold2) 42%,var(--gold2) 58%,color-mix(in srgb,var(--gold2) 35%,transparent) 88%,transparent 100%);
   --dua-ink:var(--cat-ink);
@@ -15535,7 +15535,140 @@ html[data-theme="light"] body.is-scholar-route{
   .dua-theme-card__icon,.topics-theme-card__icon,.dua-row__icon,.post-row__icon,
   body.is-scholars-route .scholars-index__mono{width:34px!important;height:34px!important}
 }
+
+/* v486 · Edle Oval-Zierlinien (Duʿāʾ/Gelehrte) */
+.dua-hub__label::after,
+body.is-catalog-route #appView > .view-head::after,
+body.is-dua-route #appView > .view-head::after,
+body.is-scholar-route #appView > .view-head::after,
+.dua-collection::before,
+body.is-catalog-route .footer::before,
+body.is-dua-route .footer::before,
+body.is-scholars-route .footer::before,
+body.is-scholar-route .footer::before{
+  height:1px!important;
+  background:radial-gradient(ellipse 58% 900% at 50% 50%,var(--cat-ornament,color-mix(in srgb,var(--gold2) 62%,transparent)),transparent 72%)!important;
+  opacity:.92!important;
+  border:0!important;
+}
+body.is-catalog-route #appView > .view-head::before,
+body.is-dua-route #appView > .view-head::before,
+body.is-scholar-route #appView > .view-head::before{
+  width:7px!important;height:7px!important;margin-left:-3.5px!important;bottom:-3px!important;
+  border-radius:50%!important;
+  background:radial-gradient(circle at 50% 50%,color-mix(in srgb,var(--gold2) 35%,transparent),transparent 70%)!important;
+}
+.dua-theme-card,.dua-row,.topics-theme-card,.post-row{border-bottom:0!important}
+.dua-theme-card:after,
+.topics-theme-card:after,
+.dua-row:after,
+.post-row:after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  left:18%!important;
+  right:18%!important;
+  bottom:3px!important;
+  height:1px!important;
+  border:0!important;
+  background:transparent!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  transition:opacity .16s ease!important;
+}
+.dua-theme-card:hover:after,
+.dua-theme-card:focus-visible:after,
+.topics-theme-card:hover:after,
+.topics-theme-card:focus-visible:after,
+.dua-row:hover:after,
+.dua-row:focus-visible:after,
+.post-row:hover:after,
+.post-row:focus-visible:after{
+  background:radial-gradient(ellipse 58% 900% at 50% 50%,var(--cat-ornament,color-mix(in srgb,var(--gold2) 62%,transparent)),transparent 72%)!important;
+  opacity:.88!important;
+}
 </style>
+
+<style id="live-quran-oval-v486">
+/* v486 live · Qurʾān edler: ovale Köpfe, Emoji-Aktionen, Zierlinien */
+body.is-quran-route .quran-surah-head,
+.quran-surah-head{
+  border:0!important;
+  border-radius:22px!important;
+  padding:14px 16px!important;
+  background:radial-gradient(ellipse 120% 100% at 50% 0%,color-mix(in srgb,var(--gold2) 10%,transparent),transparent 70%)!important;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2) 18%,transparent)!important;
+  margin-bottom:14px!important;
+}
+.quran-surah-head h2{
+  font-family:var(--serif)!important;
+  font-weight:650!important;
+  letter-spacing:.02em!important;
+}
+.quran-jump-bar,.quran-mode-tabs{
+  gap:8px!important;
+}
+.quran-mode-tab,.quran-jump-bar input,.quran-jump-bar button{
+  border-radius:999px!important;
+}
+.quran-ayah{
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  position:relative!important;
+  padding:16px 2px 18px!important;
+  margin-bottom:0!important;
+}
+.quran-ayah::after{
+  content:"";
+  position:absolute;
+  left:10%;right:10%;bottom:4px;
+  height:1px;
+  background:radial-gradient(ellipse 58% 900% at 50% 50%,color-mix(in srgb,var(--gold2) 55%,transparent),transparent 72%);
+  pointer-events:none;
+}
+.quran-ayah::before{
+  content:"";
+  position:absolute;
+  left:50%;bottom:1px;
+  width:6px;height:6px;margin-left:-3px;
+  border-radius:50%;
+  border:1px solid color-mix(in srgb,var(--gold2) 50%,transparent);
+  background:color-mix(in srgb,var(--bg) 90%,transparent);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--bg) 92%,transparent);
+  pointer-events:none;
+  z-index:1;
+}
+.quran-ayah:last-child::after,.quran-ayah:last-child::before{display:none}
+.quran-ayah-actions{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:4px!important;
+  margin:12px auto 0!important;
+  padding:3px 6px!important;
+  width:auto!important;
+  border-radius:999px!important;
+  border:1px solid color-mix(in srgb,var(--gold2) 18%,transparent)!important;
+  background:radial-gradient(ellipse 120% 100% at 50% 0%,color-mix(in srgb,var(--gold2) 8%,transparent),transparent 70%)!important;
+  grid-template-columns:none!important;
+}
+.quran-explain-btn,.quran-share-ayah-btn,.quran-save-ayah-btn{
+  border-radius:999px!important;
+  border:0!important;
+  background:transparent!important;
+  min-height:34px!important;
+  box-shadow:none!important;
+}
+.quran-share-ayah-btn,.quran-save-ayah-btn{
+  width:34px!important;
+  flex:0 0 34px!important;
+  font-size:15px!important;
+}
+.quran-explain-btn{padding:6px 12px!important;font-size:12px!important}
+</style>
+
 <body class="has-bottom-nav">
 <div id="newPostsBanner" class="new-posts-banner hidden" role="button" tabindex="0" aria-label="Aktualisieren" style="display:none">
   <span class="new-posts-icon">&#x23F3;</span>
@@ -16094,7 +16227,7 @@ function quranTopicContext(){try{return getJson('darQuranTopicContextV1',null)}c
 function setQuranTopicContext(data){try{setJson('darQuranTopicContextV1',data)}catch(e){}}
 function clearQuranTopicContext(){try{localStorage.removeItem('darQuranTopicContextV1')}catch(e){}}
 function renderQuranTopicContextBar(surahId,ayah){const ctx=quranTopicContext();if(!ctx||Number(ctx.surah)!==Number(surahId)||Number(ctx.ayah)!==Number(ayah))return '';const topic=quranTopicById(ctx.topicId)||{title:ctx.topicTitle||'Thema'};return '<section class="quran-topic-context"><span>Aus Thema: <strong>'+esc(topic.title)+'</strong></span><button type="button" class="quran-topic-back-btn" data-nav="quran-topic" data-value="'+esc(ctx.topicId||'')+'">← Zurück zum Thema</button></section>'}
-function renderQuranExplainButton(surah,ayah,ayahData){const manual=getQuranReadingState().manual;const isManual=manual&&Number(manual.surahNumber)===Number(surah)&&Number(manual.ayahNumber)===Number(ayah);const icon=isManual?"★":"☆";return '<div class="quran-ayah-actions"><button type="button" class="quran-explain-btn" data-quran-explain="'+esc(surah)+':'+esc(ayah)+'">📖 Tafsīr & Erklärung</button><button type="button" class="quran-share-ayah-btn" data-quran-share-ayah="'+esc(ayahData||"")+'" title="Vers teilen">↗</button><button type="button" class="quran-save-ayah-btn'+(isManual?' is-progress':'')+'" data-quran-save-ayah="'+esc(surah)+':'+esc(ayah)+'" title="Merken oder Lesestand speichern">'+icon+'</button></div>'}
+function renderQuranExplainButton(surah,ayah,ayahData){const manual=getQuranReadingState().manual;const isManual=manual&&Number(manual.surahNumber)===Number(surah)&&Number(manual.ayahNumber)===Number(ayah);const icon=isManual?"⭐":"🔖";return '<div class="quran-ayah-actions"><button type="button" class="quran-explain-btn" data-quran-explain="'+esc(surah)+':'+esc(ayah)+'" aria-label="Tafsīr & Erklärung">📖</button><button type="button" class="quran-share-ayah-btn" data-quran-share-ayah="'+esc(ayahData||"")+'" title="Vers teilen" aria-label="Vers teilen">📤</button><button type="button" class="quran-save-ayah-btn'+(isManual?' is-progress':'')+'" data-quran-save-ayah="'+esc(surah)+':'+esc(ayah)+'" title="Merken oder Lesestand speichern" aria-label="Merken">'+icon+'</button></div>'}
 function parseQuranAyahShareData(value){try{return JSON.parse(decodeURIComponent(String(value||"")))}catch(e){return null}}
 function quranAyahShareUrl(surah,ayah){const sid=Number(surah),aid=Number(ayah);if(!Number.isFinite(sid)||!Number.isFinite(aid))return location.href;return `${location.origin}${location.pathname}#quran-surah/${sid}/${aid}`}
 function buildQuranAyahShareText(data){const sid=Number(data?.s),aid=Number(data?.a);const ref=(Number.isFinite(sid)&&Number.isFinite(aid))?`Qurʾān ${sid}:${aid}`:"Qurʾān-Vers";const ar=String(data?.ar||"").trim();const de=String(data?.de||"").trim();const surah=String(data?.name||"").trim();return `${ref}${surah?` · ${surah}`:""}\n\n${ar}${de?`\n\n${de}`:""}\n\n${quranAyahShareUrl(sid,aid)}`}
@@ -20745,7 +20878,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v485";
+const APP_BUILD_ID="app-shell-v486";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
