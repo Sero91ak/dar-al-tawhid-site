@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-06T12:10:33.466Z",
+  "generated": "2026-08-06T12:10:52.083Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -316,11 +316,11 @@
       "pdfUrl": "/assets/library/pdfs/pub-20260806-001-v1-0.pdf",
       "catalogPath": "data/library-publications.json",
       "publishedAt": "2026-08-06",
-      "status": "pending",
+      "status": "sent",
       "pushApproved": true,
       "pushApprovedAt": "2026-08-06T12:08:33.739Z",
       "postId": "lib:pub-20260806-001",
-      "updatedAt": "2026-08-06T12:10:33.466Z",
+      "updatedAt": "2026-08-06T12:10:52.083Z",
       "lastCheckAt": "2026-08-06T12:10:33.250Z",
       "liveCheck": {
         "ok": true,
@@ -336,7 +336,12 @@
         "attempt": 1
       },
       "attempts": 1,
-      "lastError": ""
+      "lastError": "",
+      "sentAt": "2026-08-06T12:10:51.811Z",
+      "pushResult": {
+        "target": "DAR_PUSH",
+        "targetUrl": "https://dar-al-tawhid.de/?v=1786018249288#bibliothek/der-quran-ist-allahs-unerschaffenes-wort"
+      }
     }
   }
 }
