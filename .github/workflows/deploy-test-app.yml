@@ -7,7 +7,12 @@ on:
       - index.html
       - test/**
       - assets/**
-      - content/**
+      - content/posts/**
+      - content/duas/**
+      - content/staging/**
+      - content/quran/**
+      - content/updates/current.json
+      - content/updates/daily.json
       - data/**
       - admin/index.html
       - admin/library-*.js
