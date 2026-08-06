@@ -1,5 +1,6 @@
 ---
 id: "dua-040-rabbana-atina-ma-waadtana"
+order: 57
 type: "Qurʾān"
 cat: "Jenseits & Vergebung"
 title: "Duʿāʾ um Erfüllung der Verheißung"

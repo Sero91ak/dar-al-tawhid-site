@@ -1,5 +1,6 @@
 ---
 id: "dua-071-rabbana-taqabbal-minna"
+order: 88
 type: "Qurʾān"
 cat: "Annahme guter Taten"
 title: "Bitte um Annahme der Taten"

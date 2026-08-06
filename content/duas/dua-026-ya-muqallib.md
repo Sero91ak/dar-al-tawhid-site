@@ -1,5 +1,6 @@
 ---
 id: "dua-026-ya-muqallib"
+order: 43
 type: "Sunnah"
 cat: "Standhaftigkeit"
 title: "O Wender der Herzen, festige mein Herz"

@@ -1,5 +1,6 @@
 ---
 id: "dua-028-allahumma-inni-audhu-bika-min-ilm-la-yanfa"
+order: 45
 type: "Sunnah"
 cat: "Wissen"
 title: "Schutz vor Wissen, das nicht nützt"

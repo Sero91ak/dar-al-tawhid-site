@@ -1,5 +1,6 @@
 ---
 id: "dua-046-rabbi-inni-audhu-bika-an-asalaka"
+order: 63
 type: "Qurʾān"
 cat: "Wissen & Schutz"
 title: "Duʿāʾ nicht unwissend zu bitten"

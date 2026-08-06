@@ -1,5 +1,6 @@
 ---
 id: "dua-052-rabbi-anzilni-munzalan-mubarakan"
+order: 69
 type: "Qurʾān"
 cat: "Reise & Unterkunft"
 title: "Duʿāʾ für eine gesegnete Ankunft"

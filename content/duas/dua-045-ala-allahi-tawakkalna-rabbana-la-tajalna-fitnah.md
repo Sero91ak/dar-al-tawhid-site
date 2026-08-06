@@ -1,5 +1,6 @@
 ---
 id: "dua-045-ala-allahi-tawakkalna-rabbana-la-tajalna-fitnah"
+order: 62
 type: "Qurʾān"
 cat: "Tawakkul & Schutz vor Fitnah"
 title: "Duʿāʾ nicht zur Prüfung für Ungerechte zu werden"

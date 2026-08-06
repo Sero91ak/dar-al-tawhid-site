@@ -1,5 +1,6 @@
 ---
 id: "dua-076-rabbana-ghfir-li-wa-liwalidayya"
+order: 93
 type: "Qurʾān"
 cat: "Vergebung & Eltern"
 title: "Bitte um Vergebung für Eltern und Gläubige"

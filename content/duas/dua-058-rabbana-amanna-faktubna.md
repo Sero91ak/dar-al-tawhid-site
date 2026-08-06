@@ -1,5 +1,6 @@
 ---
 id: "dua-058-rabbana-amanna-faktubna"
+order: 75
 type: "Qurʾān"
 cat: "Glaube & Zeugnis"
 title: "Duʿāʾ um Aufzeichnung mit den Zeugen"

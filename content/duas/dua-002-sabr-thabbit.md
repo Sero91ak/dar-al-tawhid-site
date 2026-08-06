@@ -1,5 +1,6 @@
 ---
 id: "dua-002-sabr-thabbit"
+order: 19
 type: "Qurʾān"
 cat: "Standhaftigkeit"
 title: "Duʿāʾ um Geduld und festen Stand"

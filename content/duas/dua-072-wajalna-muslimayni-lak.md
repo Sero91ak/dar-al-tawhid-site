@@ -1,5 +1,6 @@
 ---
 id: "dua-072-wajalna-muslimayni-lak"
+order: 89
 type: "Qurʾān"
 cat: "Hingabe & Nachkommen"
 title: "Bitte um vollständige Hingabe an Allah"

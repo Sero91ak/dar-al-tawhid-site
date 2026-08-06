@@ -1,5 +1,6 @@
 ---
 id: "dua-038-rabbana-ma-khalaqta-hadha-batilan"
+order: 55
 type: "Qurʾān"
 cat: "Tafakkur & Schutz"
 title: "Duʿāʾ beim Nachdenken über die Schöpfung"

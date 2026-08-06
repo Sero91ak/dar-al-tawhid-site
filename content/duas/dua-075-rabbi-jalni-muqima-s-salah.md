@@ -1,5 +1,6 @@
 ---
 id: "dua-075-rabbi-jalni-muqima-s-salah"
+order: 92
 type: "Qurʾān"
 cat: "Gebet & Nachkommen"
 title: "Bitte um Beständigkeit im Gebet"

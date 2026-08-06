@@ -1,5 +1,6 @@
 ---
 id: "dua-020-rabbana-ghfir-lana-ikhwan"
+order: 37
 type: "Qurʾān"
 cat: "Brüderlichkeit"
 title: "Vergib uns und unseren Brüdern, die uns im Glauben vorausgingen"

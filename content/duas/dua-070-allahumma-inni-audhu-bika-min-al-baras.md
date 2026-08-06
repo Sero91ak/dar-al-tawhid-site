@@ -1,5 +1,6 @@
 ---
 id: "dua-070-allahumma-inni-audhu-bika-min-al-baras"
+order: 87
 type: "Sunnah"
 cat: "Krankheit & Schutz"
 title: "Schutz vor schweren Krankheiten"

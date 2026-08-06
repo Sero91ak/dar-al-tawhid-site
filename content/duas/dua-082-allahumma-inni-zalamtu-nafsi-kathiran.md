@@ -1,5 +1,6 @@
 ---
 id: "dua-082-allahumma-inni-zalamtu-nafsi-kathiran"
+order: 99
 type: "Sunnah"
 cat: "Vergebung & Reue"
 title: "Umfassende Bitte um Vergebung"

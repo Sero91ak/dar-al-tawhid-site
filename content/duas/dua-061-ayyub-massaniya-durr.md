@@ -1,5 +1,6 @@
 ---
 id: "dua-061-ayyub-massaniya-durr"
+order: 78
 type: "Qurʾān"
 cat: "Krankheit & Not"
 title: "Duʿāʾ von Ayyūb bei Krankheit und Leid"

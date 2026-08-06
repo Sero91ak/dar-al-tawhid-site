@@ -1,5 +1,6 @@
 ---
 id: "dua-005-faghfir-lana"
+order: 22
 type: "Qurʾān"
 cat: "Vergebung"
 title: "Vergib uns und erbarme Dich unser"

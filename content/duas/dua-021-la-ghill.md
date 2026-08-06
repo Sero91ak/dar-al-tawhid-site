@@ -1,5 +1,6 @@
 ---
 id: "dua-021-la-ghill"
+order: 38
 type: "Qurʾān"
 cat: "Herz"
 title: "Lass keinen Groll in unseren Herzen gegen die Gläubigen"

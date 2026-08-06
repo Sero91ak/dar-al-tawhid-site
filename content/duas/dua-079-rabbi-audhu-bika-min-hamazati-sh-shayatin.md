@@ -1,5 +1,6 @@
 ---
 id: "dua-079-rabbi-audhu-bika-min-hamazati-sh-shayatin"
+order: 96
 type: "Qurʾān"
 cat: "Schutz vor Shayāṭīn"
 title: "Schutz vor den Einflüsterungen der Shayāṭīn"

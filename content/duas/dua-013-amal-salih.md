@@ -1,5 +1,6 @@
 ---
 id: "dua-013-amal-salih"
+order: 30
 type: "Qurʾān"
 cat: "Taten"
 title: "Leite mich zu rechtschaffenen Taten"

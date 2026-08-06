@@ -1,5 +1,6 @@
 ---
 id: "dua-063-rabbi-inni-zalamtu-nafsi"
+order: 80
 type: "Qurʾān"
 cat: "Vergebung & Reue"
 title: "Duʿāʾ von Mūsā um Vergebung"

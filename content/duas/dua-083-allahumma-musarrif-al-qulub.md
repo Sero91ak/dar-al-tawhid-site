@@ -1,5 +1,6 @@
 ---
 id: "dua-083-allahumma-musarrif-al-qulub"
+order: 100
 type: "Sunnah"
 cat: "Herz & Gehorsam"
 title: "Bitte um Ausrichtung der Herzen auf Gehorsam"

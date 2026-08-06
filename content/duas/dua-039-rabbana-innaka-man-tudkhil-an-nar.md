@@ -1,5 +1,6 @@
 ---
 id: "dua-039-rabbana-innaka-man-tudkhil-an-nar"
+order: 56
 type: "Qurʾān"
 cat: "Schutz vor dem Feuer"
 title: "Duʿāʾ um Rettung vor Schande am Jüngsten Tag"

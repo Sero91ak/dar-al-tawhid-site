@@ -1,5 +1,6 @@
 ---
 id: "dua-060-rabbi-awzini-ahqaf"
+order: 77
 type: "Qurʾān"
 cat: "Dankbarkeit & Nachkommen"
 title: "Duʿāʾ ab vierzig Jahren und für rechtschaffene Nachkommen"

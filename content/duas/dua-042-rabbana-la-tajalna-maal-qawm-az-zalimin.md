@@ -1,5 +1,6 @@
 ---
 id: "dua-042-rabbana-la-tajalna-maal-qawm-az-zalimin"
+order: 59
 type: "Qurʾān"
 cat: "Schutz vor Ungerechtigkeit"
 title: "Duʿāʾ nicht mit den Ungerechten zu sein"

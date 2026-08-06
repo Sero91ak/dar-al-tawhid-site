@@ -1,5 +1,6 @@
 ---
 id: "dua-027-allahumma-inni-asaluka-huda"
+order: 44
 type: "Sunnah"
 cat: "Rechtleitung"
 title: "Bitte um Rechtleitung, Taqwā, Keuschheit und Genügsamkeit"

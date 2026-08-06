@@ -1,5 +1,6 @@
 ---
 id: "dua-008-hukman-walhiqni"
+order: 25
 type: "Qurʾān"
 cat: "Wissen & Rechtschaffenheit"
 title: "Gib mir Urteilskraft und füge mich den Rechtschaffenen zu"

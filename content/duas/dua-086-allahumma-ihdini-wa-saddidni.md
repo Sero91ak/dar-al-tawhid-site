@@ -1,5 +1,6 @@
 ---
 id: "dua-086-allahumma-ihdini-wa-saddidni"
+order: 103
 type: "Sunnah"
 cat: "Rechtleitung & Richtigkeit"
 title: "Bitte um Rechtleitung und richtiges Handeln"

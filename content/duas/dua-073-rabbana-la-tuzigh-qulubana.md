@@ -1,5 +1,6 @@
 ---
 id: "dua-073-rabbana-la-tuzigh-qulubana"
+order: 90
 type: "Qurʾān"
 cat: "Rechtleitung & Herz"
 title: "Schutz vor dem Abweichen des Herzens"

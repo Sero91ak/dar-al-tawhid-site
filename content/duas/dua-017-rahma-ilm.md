@@ -1,5 +1,6 @@
 ---
 id: "dua-017-rahma-ilm"
+order: 34
 type: "Qurʾān"
 cat: "Barmherzigkeit"
 title: "Unser Herr umfasst alles mit Barmherzigkeit und Wissen"

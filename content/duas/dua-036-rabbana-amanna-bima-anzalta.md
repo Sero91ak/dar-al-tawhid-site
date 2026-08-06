@@ -1,5 +1,6 @@
 ---
 id: "dua-036-rabbana-amanna-bima-anzalta"
+order: 53
 type: "Qurʾān"
 cat: "Īmān & Zeugenschaft"
 title: "Duʿāʾ um Zugehörigkeit zu den Bezeugenden"

@@ -1,5 +1,6 @@
 ---
 id: "dua-064-rabbi-hab-li-dhurriyyatan-tayyibah"
+order: 81
 type: "Qurʾān"
 cat: "Kinder & Nachkommen"
 title: "Duʿāʾ von Zakariyyā um gute Nachkommenschaft"

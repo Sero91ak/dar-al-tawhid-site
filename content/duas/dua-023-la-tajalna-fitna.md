@@ -1,5 +1,6 @@
 ---
 id: "dua-023-la-tajalna-fitna"
+order: 40
 type: "Qurʾān"
 cat: "Schutz"
 title: "Mache uns nicht zur Versuchung für die Ungläubigen"

@@ -1,5 +1,6 @@
 ---
 id: "dua-033-rabbana-wa-la-tahmil-alayna-isran"
+order: 50
 type: "Qurʾān"
 cat: "Erleichterung"
 title: "Duʿāʾ gegen schwere Last"

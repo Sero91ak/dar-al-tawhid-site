@@ -1,5 +1,6 @@
 ---
 id: "dua-043-rabbi-jalni-muqimas-salati"
+order: 60
 type: "Qurʾān"
 cat: "Gebet & Nachkommen"
 title: "Duʿāʾ um beständiges Gebet"

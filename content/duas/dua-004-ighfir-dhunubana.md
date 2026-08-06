@@ -1,5 +1,6 @@
 ---
 id: "dua-004-ighfir-dhunubana"
+order: 21
 type: "Qurʾān"
 cat: "Vergebung"
 title: "Duʿāʾ um Vergebung der Sünden und Festigkeit"

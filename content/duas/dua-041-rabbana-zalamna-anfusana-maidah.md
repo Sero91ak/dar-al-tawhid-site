@@ -1,5 +1,6 @@
 ---
 id: "dua-041-rabbana-zalamna-anfusana-maidah"
+order: 58
 type: "Qurʾān"
 cat: "Reue & Vergebung"
 title: "Duʿāʾ nach eigenem Unrecht"

@@ -1,5 +1,6 @@
 ---
 id: "dua-088-allahumma-audhu-min-munkarati-l-akhlaq"
+order: 105
 type: "Sunnah"
 cat: "Charakter, Taten & Neigungen"
 title: "Schutz vor verwerflichem Charakter und Handeln"

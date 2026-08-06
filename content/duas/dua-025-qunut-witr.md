@@ -1,5 +1,6 @@
 ---
 id: "dua-025-qunut-witr"
+order: 42
 type: "Sunnah"
 cat: "Gebet"
 title: "Duʿāʾ al-Qunūt im Witr"
