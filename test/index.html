@@ -13854,11 +13854,12 @@ html[data-theme="light"] .qov-btn-primary,html[data-theme="light"] .qov-direct-g
 /* v465 · Globaler Overscroll-Schutz: kein Hintergrund über Schrift bei Ziehen */
 html.dar-scroll-guard,html.dar-scroll-guard body{overscroll-behavior-y:none!important;-webkit-overflow-scrolling:touch}
 html[data-theme] .top-edge-fade,html[data-theme] .top-swim-aura{z-index:-1}
-html.is-quran-reader-route,html.is-quran-reader-route body{background:var(--bg)!important;background-color:var(--bg)!important;overscroll-behavior-y:none!important}
-html.is-quran-overview,html.is-quran-overview body{background:var(--quran-page-bg,var(--bg))!important;background-color:var(--quran-page-bg,var(--bg))!important;overscroll-behavior-y:none!important}
+html.is-quran-reader-route{background:var(--page-cover,var(--bg))!important;background-color:var(--page-cover,var(--bg))!important;overscroll-behavior-y:none!important}
+html.is-quran-reader-route body,body.is-quran-reader-route{background:var(--premium-bg)!important;overscroll-behavior-y:none!important}
+html.is-quran-overview,html.is-quran-overview body{background:var(--premium-bg)!important;background-color:var(--page-cover,var(--bg))!important;overscroll-behavior-y:none!important}
 html.is-quran-reader-route .top-edge-fade,html.is-quran-reader-route .top-swim-aura,html.is-quran-overview .top-edge-fade,html.is-quran-overview .top-swim-aura,html.is-ilm-chat-route .top-edge-fade,html.is-ilm-chat-route .top-swim-aura,body.is-ilm-chat-route .top-edge-fade,body.is-ilm-chat-route .top-swim-aura{display:none!important}
-body.is-quran-reader-route #appView.view,body.is-quran-reader-route .qrc-shell{background:var(--bg)!important}
-body.is-quran-overview #appView.view{background:var(--quran-gradient-page,var(--bg))!important}
+body.is-quran-reader-route #appView.view,body.is-quran-reader-route .qrc-shell{background:transparent!important}
+body.is-quran-overview #appView.view{background:transparent!important}
 body.is-quran-overview .qov-header{position:sticky;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:linear-gradient(180deg,color-mix(in srgb,var(--quran-page-bg,var(--bg)) 98%,var(--quran-accent-primary) 2%) 0%,color-mix(in srgb,var(--quran-page-bg,var(--bg)) 92%,transparent) 100%)!important;overflow:visible;isolation:isolate}
 body.is-quran-overview .qov-header::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:100vh;background:var(--quran-page-bg,var(--bg));pointer-events:none;z-index:-1}
 /* v467 · Suche + Juzʾ/Sūrah/Āyah/Öffnen in einem Block */
@@ -13889,7 +13890,7 @@ body.is-quran-overview .qov-header::before{content:"";position:absolute;left:0;r
 .qov-nav-stack #qovSearchRecent,.qov-nav-stack #quranSearchBlock{padding:0 10px 8px}
 .qrc-chrome-main,.qrc-chrome-sub,.qrc-title-btn,.qrc-title,.qrc-actions,.qrc-icon-btn,.qrc-header-leading{position:relative;z-index:2}
 /* v466 · Lesekopf deckt Vers-Text beim Scrollen vollständig ab — Höhe folgt echtem Chrome */
-html.is-quran-reader-route::after{content:"";position:fixed;top:0;left:0;right:0;height:var(--qrc-chrome-h,calc(env(safe-area-inset-top,0px) + 92px));background:var(--bg);z-index:499;pointer-events:none}
+html.is-quran-reader-route::after{content:"";position:fixed;top:0;left:0;right:0;height:var(--qrc-chrome-h,calc(env(safe-area-inset-top,0px) + 92px));background:var(--page-cover,var(--bg));z-index:499;pointer-events:none}
 html.is-quran-reader-route.qrc-chrome-hidden::after{display:none!important}
 html.is-quran-reader-route.qrc-chrome-hidden .qrc-chrome-spacer{height:0!important;min-height:0!important}
 body.is-quran-reader-route .qrc-body{position:relative;z-index:1;isolation:isolate;padding-top:2px}
@@ -14088,7 +14089,7 @@ body.is-quran-reader-route #appView.view{
   border:0!important;
   border-radius:0!important;
   box-shadow:none!important;
-  background:var(--bg)!important;
+  background:transparent!important;
   background-image:none!important;
 }
 body.is-quran-reader-route .qrc-body .quran-ayah::before,
@@ -14309,8 +14310,7 @@ body.is-quran-reader-route,
 html.is-quran-reader-route body{
   padding-left:0!important;
   padding-right:0!important;
-  background:var(--bg)!important;
-  background-image:none!important;
+  background:var(--premium-bg)!important;
 }
 body.is-quran-reader-route #appView.view{
   padding-left:0!important;
