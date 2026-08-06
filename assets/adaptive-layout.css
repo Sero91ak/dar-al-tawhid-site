@@ -1,0 +1,484 @@
+/**
+ * DAR AL TAWḤĪD — Adaptive Layout System
+ * Compact / Medium / Expanded for foldables, split-screen, tablets.
+ * Layout-only: no theme colors, no font family changes.
+ */
+
+:root,
+html[data-theme] {
+  --layout-content-max: 920px;
+  --layout-reader-max: 760px;
+  --layout-navigation-max: 800px;
+  --layout-card-min: 250px;
+  --layout-page-gutter: clamp(16px, 3vw, 32px);
+  --layout-rail-width: 84px;
+  --layout-shell-max: 1180px;
+  --layout-form-max: 640px;
+  --layout-dialog-max: 560px;
+  --layout-feed-max: 680px;
+  --library-card-min: 250px;
+  --layout-vv-height: 100dvh;
+  --layout-vv-offset-top: 0px;
+  --layout-segment-gap: 0px;
+}
+
+/* Progressive CSS fallbacks (JS sets data-layout; media mirrors breakpoints) */
+@media (max-width: 599.98px) {
+  :root,
+  html[data-theme] {
+    --layout-shell-max: 100%;
+    --layout-page-gutter: clamp(12px, 3.2vw, 18px);
+  }
+}
+
+@media (min-width: 600px) and (max-width: 839.98px),
+       (min-width: 840px) and (max-height: 599.98px) {
+  :root,
+  html[data-theme] {
+    --layout-shell-max: min(920px, 100%);
+    --layout-content-max: 920px;
+    --layout-reader-max: 760px;
+    --layout-navigation-max: 800px;
+    --layout-page-gutter: clamp(16px, 3vw, 32px);
+  }
+}
+
+@media (min-width: 840px) and (min-height: 600px) {
+  :root,
+  html[data-theme] {
+    --layout-shell-max: min(1420px, 100%);
+    --layout-content-max: 1080px;
+    --layout-reader-max: 760px;
+    --layout-navigation-max: 800px;
+    --layout-page-gutter: clamp(18px, 2.4vw, 36px);
+  }
+}
+
+html[data-layout="compact"] {
+  --layout-shell-max: 100%;
+}
+
+html[data-layout="medium"] {
+  --layout-shell-max: min(920px, 100%);
+  --layout-content-max: 920px;
+  --layout-reader-max: 760px;
+  --layout-navigation-max: 800px;
+}
+
+html[data-layout="expanded"] {
+  --layout-shell-max: min(1420px, 100%);
+  --layout-content-max: 1080px;
+  --layout-reader-max: 760px;
+}
+
+/* —— Shell / gutters —— */
+html[data-layout="medium"] .app,
+html[data-layout="expanded"] .app {
+  width: min(var(--layout-shell-max), 100%);
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: max(var(--layout-page-gutter), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--layout-page-gutter), env(safe-area-inset-right, 0px));
+  box-sizing: border-box;
+}
+
+html[data-layout="expanded"] .app {
+  padding-left: calc(
+    var(--layout-rail-width) + var(--layout-page-gutter) + env(safe-area-inset-left, 0px)
+  );
+}
+
+/* Feed fullscreen keeps its own shell rules */
+html[data-layout="medium"] body.is-feed-fullscreen .app,
+html[data-layout="expanded"] body.is-feed-fullscreen .app,
+html[data-layout="expanded"] body.is-ilm-chat-route .app {
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+  max-width: none;
+}
+
+html[data-layout="expanded"] body.is-feed-fullscreen {
+  padding-left: calc(var(--layout-rail-width) + env(safe-area-inset-left, 0px));
+}
+
+html[data-layout="expanded"] body.is-ilm-chat-route {
+  padding-left: 0;
+}
+
+/* —— Content / reader width caps —— */
+html[data-layout="medium"] .view,
+html[data-layout="expanded"] .view,
+html[data-layout="medium"] .dua-hub,
+html[data-layout="expanded"] .dua-hub,
+html[data-layout="medium"] .dua-collection-page,
+html[data-layout="expanded"] .dua-collection-page,
+html[data-layout="medium"] .topics-hub,
+html[data-layout="expanded"] .topics-hub,
+html[data-layout="medium"] .topic-collection-page,
+html[data-layout="expanded"] .topic-collection-page,
+html[data-layout="medium"] .qov-page,
+html[data-layout="expanded"] .qov-page,
+html[data-layout="medium"] .quran-topic-page,
+html[data-layout="expanded"] .quran-topic-page,
+html[data-layout="medium"] .quran-topic-detail,
+html[data-layout="expanded"] .quran-topic-detail,
+html[data-layout="medium"] .books-library-shell,
+html[data-layout="expanded"] .books-library-shell,
+html[data-layout="medium"] .scholars-index,
+html[data-layout="expanded"] .scholars-index,
+html[data-layout="medium"] .prayer-overview,
+html[data-layout="expanded"] .prayer-overview,
+html[data-layout="medium"] .zakat-view,
+html[data-layout="expanded"] .zakat-view,
+html[data-layout="medium"] .account-page,
+html[data-layout="expanded"] .account-page,
+html[data-layout="medium"] .more-page,
+html[data-layout="expanded"] .more-page,
+html[data-layout="medium"] .quiz-home,
+html[data-layout="expanded"] .quiz-home,
+html[data-layout="medium"] .quiz-session,
+html[data-layout="expanded"] .quiz-session,
+html[data-layout="medium"] .ilm-page,
+html[data-layout="expanded"] .ilm-page {
+  width: 100%;
+  max-width: var(--layout-content-max);
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+html[data-layout="medium"] .article,
+html[data-layout="expanded"] .article,
+html[data-layout="medium"] .dua-detail-box,
+html[data-layout="expanded"] .dua-detail-box,
+html[data-layout="medium"] .dua-arabic,
+html[data-layout="expanded"] .dua-arabic,
+html[data-layout="medium"] .post-reader,
+html[data-layout="expanded"] .post-reader,
+html[data-layout="medium"] .post-body,
+html[data-layout="expanded"] .post-body,
+html[data-layout="medium"] .quran-ayah-list,
+html[data-layout="expanded"] .quran-ayah-list,
+html[data-layout="medium"] .quran-surah-head,
+html[data-layout="expanded"] .quran-surah-head,
+html[data-layout="medium"] .quran-jump-bar,
+html[data-layout="expanded"] .quran-jump-bar,
+html[data-layout="medium"] .quran-reader-shell,
+html[data-layout="expanded"] .quran-reader-shell,
+html[data-layout="medium"] .quran-ayah-ar,
+html[data-layout="expanded"] .quran-ayah-ar,
+html[data-layout="medium"] .quiz-shell,
+html[data-layout="expanded"] .quiz-shell,
+html[data-layout="medium"] .quiz-session,
+html[data-layout="expanded"] .quiz-session {
+  max-width: var(--layout-reader-max);
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+html[data-layout="medium"] .dua-hub .main-search,
+html[data-layout="expanded"] .dua-hub .main-search,
+html[data-layout="medium"] .dua-hub .search,
+html[data-layout="expanded"] .dua-hub .search,
+html[data-layout="medium"] .qov-search-wrap,
+html[data-layout="expanded"] .qov-search-wrap,
+html[data-layout="medium"] .qov-search-shell,
+html[data-layout="expanded"] .qov-search-shell,
+html[data-layout="medium"] .books-library-toolbar,
+html[data-layout="expanded"] .books-library-toolbar,
+html[data-layout="medium"] .main-search,
+html[data-layout="expanded"] .main-search {
+  max-width: min(100%, var(--layout-content-max));
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+html[data-layout="medium"] .prayer-settings-grid,
+html[data-layout="expanded"] .prayer-settings-grid,
+html[data-layout="medium"] .settings-stack,
+html[data-layout="expanded"] .settings-stack,
+html[data-layout="medium"] .notify-settings,
+html[data-layout="expanded"] .notify-settings,
+html[data-layout="medium"] .form-stack,
+html[data-layout="expanded"] .form-stack {
+  max-width: var(--layout-form-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Feed column */
+html[data-layout="medium"] body.is-feed-fullscreen .sf-feed,
+html[data-layout="medium"] body.is-feed-fullscreen .sf-top,
+html[data-layout="medium"] body.is-feed-fullscreen .sf-filters,
+html[data-layout="expanded"] body.is-feed-fullscreen .sf-feed,
+html[data-layout="expanded"] body.is-feed-fullscreen .sf-top,
+html[data-layout="expanded"] body.is-feed-fullscreen .sf-filters {
+  --sf-feed-col-max: var(--layout-feed-max);
+  max-width: var(--layout-feed-max);
+}
+
+/* —— Duʿāʾ theme grids on wider windows —— */
+html[data-layout="medium"] .dua-theme-grid,
+html[data-layout="medium"] .topics-theme-grid {
+  display: grid !important;
+  flex-direction: unset !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  max-width: var(--layout-content-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+html[data-layout="expanded"] .dua-theme-grid,
+html[data-layout="expanded"] .topics-theme-grid {
+  display: grid !important;
+  flex-direction: unset !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  max-width: var(--layout-content-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+html[data-layout="medium"] .dua-collection,
+html[data-layout="expanded"] .dua-collection,
+html[data-layout="medium"] .topic-collection,
+html[data-layout="expanded"] .topic-collection {
+  max-width: var(--layout-reader-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* —— Library adaptive raster —— */
+html[data-layout="medium"] .lib-grid,
+html[data-layout="expanded"] .lib-grid {
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--library-card-min)), 1fr)
+  ) !important;
+}
+
+html[data-layout="medium"] .books-library-list,
+html[data-layout="expanded"] .books-library-list {
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--layout-card-min)), 1fr)
+  );
+}
+
+/* —— Dialogs / overlays —— */
+html[data-layout="medium"] .post-intro-dialog,
+html[data-layout="expanded"] .post-intro-dialog,
+html[data-layout="medium"] .modal-dialog,
+html[data-layout="expanded"] .modal-dialog,
+html[data-layout="medium"] .app-update-dialog,
+html[data-layout="expanded"] .app-update-dialog,
+html[data-layout="medium"] .sheet-panel,
+html[data-layout="expanded"] .sheet-panel,
+html[data-layout="medium"] .qov-sheet,
+html[data-layout="expanded"] .qov-sheet {
+  width: min(var(--layout-dialog-max), calc(100% - 2 * var(--layout-page-gutter)));
+  max-width: var(--layout-dialog-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* —— Bottom navigation: Medium centered —— */
+html[data-theme][data-layout="medium"] #appChromeDock #bottomNav.bottom-nav,
+html[data-theme][data-layout="medium"] #bottomNav.bottom-nav,
+html[data-layout="medium"] #appChromeDock #bottomNav.bottom-nav,
+html[data-layout="medium"] #bottomNav.bottom-nav {
+  left: 50% !important;
+  right: auto !important;
+  width: min(var(--layout-navigation-max), calc(100vw - 28px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px))) !important;
+  max-width: var(--layout-navigation-max) !important;
+  transform: translateX(-50%) !important;
+  -webkit-transform: translateX(-50%) !important;
+  top: auto !important;
+  bottom: calc(max(7px, calc(env(safe-area-inset-bottom) - 18px)) + 3mm) !important;
+}
+
+/* —— Bottom navigation: Expanded left rail —— */
+html[data-theme][data-layout="expanded"] #appChromeDock #bottomNav.bottom-nav,
+html[data-theme][data-layout="expanded"] #bottomNav.bottom-nav,
+html[data-layout="expanded"] #appChromeDock #bottomNav.bottom-nav,
+html[data-layout="expanded"] #bottomNav.bottom-nav {
+  left: max(10px, env(safe-area-inset-left, 0px)) !important;
+  right: auto !important;
+  top: max(12px, env(safe-area-inset-top, 0px)) !important;
+  bottom: max(12px, env(safe-area-inset-bottom, 0px)) !important;
+  width: var(--layout-rail-width) !important;
+  max-width: var(--layout-rail-width) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: stretch !important;
+  gap: 4px !important;
+  padding: 10px 6px !important;
+  border-radius: 22px !important;
+  overflow: visible !important;
+}
+
+html[data-theme][data-layout="expanded"] #bottomNav.bottom-nav .bottom-nav-btn,
+html[data-layout="expanded"] #bottomNav.bottom-nav .bottom-nav-btn {
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 56px !important;
+  padding: 8px 4px !important;
+}
+
+html[data-theme][data-layout="expanded"] #bottomNav.bottom-nav .bottom-nav-btn::before,
+html[data-layout="expanded"] #bottomNav.bottom-nav .bottom-nav-btn::before {
+  width: calc(100% - 8px) !important;
+  max-width: none !important;
+  height: calc(100% - 8px) !important;
+  max-height: none !important;
+  border-radius: 16px !important;
+}
+
+/* Expanded body padding: rail instead of bottom bar */
+html[data-layout="expanded"] body.has-bottom-nav {
+  padding-bottom: max(18px, env(safe-area-inset-bottom, 0px)) !important;
+  padding-left: 0;
+}
+
+html[data-layout="expanded"] body.has-bottom-nav .float-actions {
+  bottom: calc(18px + 0.5cm + env(safe-area-inset-bottom, 0px));
+}
+
+html[data-layout="expanded"] body.has-bottom-nav .footer {
+  padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+}
+
+html[data-layout="expanded"] .quick-access-menu,
+html[data-layout="expanded"] .quick-access-hint {
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  left: calc(var(--layout-rail-width) + 16px + env(safe-area-inset-left, 0px));
+  right: auto;
+}
+
+/* Medium: keep bottom padding, tighten float against centered nav */
+html[data-layout="medium"] body.has-bottom-nav .float-actions {
+  bottom: calc(76px + 0.5cm + max(0px, calc(env(safe-area-inset-bottom) - 22px)) + 3mm);
+}
+
+/* Keyboard / visualViewport height helpers */
+html.adaptive-keyboard-open #bottomNav.bottom-nav {
+  bottom: max(8px, calc(var(--layout-vv-offset-top, 0px) + 8px)) !important;
+}
+
+html[data-layout="expanded"].adaptive-keyboard-open #bottomNav.bottom-nav {
+  bottom: max(12px, env(safe-area-inset-bottom, 0px)) !important;
+}
+
+/* —— Viewport segments (hinge) — progressive, safe if unsupported —— */
+@supports (width: env(viewport-segment-width 0 0)) {
+  @media (horizontal-viewport-segments: 2) {
+    html[data-layout="medium"] .adaptive-segment-layout,
+    html[data-layout="expanded"] .adaptive-segment-layout {
+      display: grid;
+      grid-template-columns:
+        env(viewport-segment-width 0 0)
+        env(viewport-segment-width 1 0);
+      column-gap: env(viewport-segment-left 1 0);
+    }
+
+    html[data-layout="medium"] .quran-ayah-ar,
+    html[data-layout="expanded"] .quran-ayah-ar,
+    html[data-layout="medium"] .dua-hub .main-search,
+    html[data-layout="expanded"] .dua-hub .main-search,
+    html[data-layout="medium"] #bottomNav.bottom-nav,
+    html[data-layout="expanded"] #bottomNav.bottom-nav {
+      /* Prefer resting content in a single segment width */
+      max-width: min(var(--layout-reader-max), env(viewport-segment-width 0 0));
+    }
+  }
+}
+
+/* —— Reduced motion —— */
+@media (prefers-reduced-motion: reduce) {
+  html[data-layout] .app,
+  html[data-layout] #bottomNav.bottom-nav,
+  html[data-layout] .view {
+    transition: none !important;
+  }
+}
+
+/* Soft layout transitions (only when motion allowed) */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-layout] .app {
+    transition: padding 160ms ease, width 160ms ease;
+  }
+}
+
+/* Overflow guard */
+html[data-layout] body {
+  overflow-x: hidden;
+}
+
+html[data-layout] .app,
+html[data-layout] .view {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Touch targets remain usable in rail */
+html[data-layout="expanded"] #bottomNav .bottom-nav-btn {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+html[data-layout="expanded"] #bottomNav .bottom-nav-btn:focus-visible {
+  outline: 2px solid var(--gold2, currentColor) !important;
+  outline-offset: 2px;
+}
+
+/* —— Fold / tablet home rasters (Galaxy Fold cover→open, Fold Ultra) —— */
+html[data-layout="medium"] #folderGrid.folder-grid,
+html[data-layout="medium"] .folder-grid,
+html[data-layout="medium"] #latestGrid.latest-grid,
+html[data-layout="medium"] .latest-grid,
+html[data-layout="medium"] .series-grid:not(.home-more-body .series-grid),
+html[data-layout="medium"] .pinned-grid:not(.home-more-body .pinned-grid) {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: var(--card-gap, 10px);
+}
+
+html[data-layout="expanded"] #folderGrid.folder-grid,
+html[data-layout="expanded"] .folder-grid,
+html[data-layout="expanded"] #latestGrid.latest-grid,
+html[data-layout="expanded"] .latest-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)) !important;
+  gap: var(--card-gap, 12px);
+}
+
+/* Cover / compact stays single column where existing phone rules apply;
+   medium+ uses centered shell so open Fold never looks like a stretched phone. */
+html[data-layout="medium"] .top-shell,
+html[data-layout="expanded"] .top-shell,
+html[data-layout="medium"] #appView.view,
+html[data-layout="expanded"] #appView.view {
+  width: 100%;
+  max-width: var(--layout-content-max);
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+/* Ultra-wide open Fold / desktop: keep reader column readable */
+@media (min-width: 1000px) and (min-height: 600px) {
+  html[data-layout="expanded"] {
+    --layout-content-max: 1120px;
+    --layout-shell-max: min(1480px, 100%);
+  }
+}
