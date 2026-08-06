@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-06T16:38:17.787Z",
+  "generated": "2026-08-06T16:38:36.289Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -351,11 +351,11 @@
       "pdfUrl": "/assets/library/pdfs/pub-20260806-002-v1-0.pdf",
       "catalogPath": "data/library-publications.json",
       "publishedAt": "2026-08-06",
-      "status": "pending",
+      "status": "sent",
       "pushApproved": true,
       "pushApprovedAt": "2026-08-06T16:38:15.218Z",
       "postId": "lib:pub-20260806-002",
-      "updatedAt": "2026-08-06T16:38:17.787Z",
+      "updatedAt": "2026-08-06T16:38:36.289Z",
       "lastCheckAt": "2026-08-06T16:38:17.608Z",
       "liveCheck": {
         "ok": true,
@@ -371,7 +371,12 @@
         "attempt": 1
       },
       "attempts": 1,
-      "lastError": ""
+      "lastError": "",
+      "sentAt": "2026-08-06T16:38:36.090Z",
+      "pushResult": {
+        "target": "DAR_PUSH",
+        "targetUrl": "https://dar-al-tawhid.de/?v=1786034313589#bibliothek/die-sahabah-als-hujjahm"
+      }
     }
   }
 }
