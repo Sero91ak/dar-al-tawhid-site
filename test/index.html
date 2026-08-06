@@ -20708,7 +20708,33 @@ function renderScholarChipList(items,emptyText){
 }
 function renderScholarProfile(name){
   const p=scholarProfile(name);
-  try{window.DARScholarsIndex&&window.DARScholarsIndex.loadMeta&&window.DARScholarsIndex.loadMeta()}catch(e){}
+  try{
+    const loader=window.DARScholarsIndex&&window.DARScholarsIndex.loadMeta&&window.DARScholarsIndex.loadMeta();
+    if(loader&&typeof loader.then==="function"){
+      loader.then(()=>{
+        try{
+          const ref=resolveScholarRef(name);
+          const still=currentRoute&&(currentRoute.view==="scholar"||currentRoute.view==="filtered")&&resolveScholarRef(currentRoute.value).key===ref.key;
+          if(!still)return;
+          const box=document.querySelector(".profile-box--scholar");
+          if(!box)return;
+          const next=scholarProfile(name);
+          const tmp=document.createElement("div");
+          tmp.innerHTML=renderScholarProfileSync(next);
+          const fresh=tmp.firstElementChild;
+          if(fresh){
+            box.replaceWith(fresh);
+            document.querySelectorAll(".profile-box--scholar [data-nav]").forEach(btn=>{
+              btn.onclick=()=>navigate(btn.getAttribute("data-nav"),btn.getAttribute("data-value")||"");
+            });
+          }
+        }catch(e){}
+      });
+    }
+  }catch(e){}
+  return renderScholarProfileSync(p);
+}
+function renderScholarProfileSync(p){
   return `<section class="profile-box profile-box--scholar">
     <h3 class="profile-title">${esc(p.name)}</h3>
     ${p.life?`<p class="profile-life">${esc(p.life)}</p>`:""}
