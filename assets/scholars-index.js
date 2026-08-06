@@ -1,6 +1,6 @@
 /**
- * DAR AL TAWḤID — Gelehrten-Index v488
- * Kompakt, klappbare Gruppen, korrekte Sortierung.
+ * DAR AL TAWḤID — Gelehrten-Index v489
+ * Edel wie Duʿāʾ: transparente Flächen, dunkle Suche, Zierlinien, ovales Licht.
  */
 (function (global) {
   'use strict';
@@ -412,7 +412,7 @@
                 (r) =>
                   `<button type="button" class="scholars-index__recent-link" data-scholar-open="${esc(r.id)}">${esc(r.name)}</button>`
               )
-              .join('<span aria-hidden="true"> · </span>')}</div>
+              .join('')}</div>
           </section>`
         : '';
 
