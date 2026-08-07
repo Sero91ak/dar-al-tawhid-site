@@ -12396,7 +12396,9 @@ function appRecoveryReload(){
   })();
 }
 const APP_UPDATE_RECOVERY_GUARD="APP_UPDATE_RECOVERY_GUARD";
+const BOOT_AUTONOMOUS_GUARD="BOOT_AUTONOMOUS_GUARD";
 const APP_BOOT_GUARD_KEY="darAppBootGuardV1";
+const RECOVERY_BANNER_KEY="darAppRecoveryBannerV1";
 const APP_BOOT_GUARD_TIMEOUT_MS=7200;
 function readAppBootGuardState(){
   try{
@@ -12416,6 +12418,10 @@ function writeAppBootGuardState(patch){
 function removeRecoveryBanner(){
   const banner=document.getElementById("appRecoveryBanner");
   if(banner)banner.remove();
+  try{sessionStorage.removeItem(RECOVERY_BANNER_KEY)}catch(e){}
+}
+function getBannerMode(){
+  try{return sessionStorage.getItem(RECOVERY_BANNER_KEY)||""}catch(e){return""}
 }
 function showRecoveryBanner(reason){
   removeRecoveryBanner();
@@ -12431,9 +12437,10 @@ function showRecoveryBanner(reason){
   banner.style.transform="translateX(-50%)";
   banner.style.zIndex="95";
   banner.style.maxWidth="min(92vw,560px)";
-  banner.innerHTML=`<span class="new-posts-icon">↻</span><span class="new-posts-text">${appRecoveryEscape(reason||"App-Ansicht reagiert nicht richtig. App frisch laden.")}</span><button class="new-posts-refresh" type="button">Reparieren</button>`;
+  banner.innerHTML=`<span class="new-posts-icon">↻</span><span class="new-posts-text"><b>App-Update erforderlich</b><br>${appRecoveryEscape(reason||"Die Ansicht reagiert nicht richtig. Bitte die Test-App frisch laden.")}</span><button class="new-posts-refresh" type="button">Jetzt aktualisieren</button>`;
   const refreshBtn=banner.querySelector(".new-posts-refresh");
   if(refreshBtn)refreshBtn.onclick=()=>appRecoveryReload();
+  try{sessionStorage.setItem(RECOVERY_BANNER_KEY,"recovery")}catch(e){}
   host.appendChild(banner);
 }
 function isAppViewStuck(){
@@ -12452,11 +12459,14 @@ function requestAppRecoveryUpdate(reason){
   writeAppBootGuardState({buildId:typeof APP_BUILD_ID==="string"?APP_BUILD_ID:"",pending:true,requestedAt:Date.now(),reason:String(reason||"")});
   showRecoveryBanner(reason||"App-Ansicht reagiert nicht richtig. App frisch laden.");
 }
+function scheduleBootAutonomousRepair(reason){
+  requestAppRecoveryUpdate(reason||"Die Test-App braucht eine frische Aktualisierung.");
+}
 function armAppUpdateRecoveryGuard(){
   writeAppBootGuardState({buildId:typeof APP_BUILD_ID==="string"?APP_BUILD_ID:"",startedAt:Date.now(),pending:false});
   window.clearTimeout(window.__darBootGuardTimer||0);
   window.__darBootGuardTimer=window.setTimeout(()=>{
-    if(isAppViewStuck())requestAppRecoveryUpdate("App-Start hängt. Bitte die Test-App frisch laden.");
+    if(isAppViewStuck())scheduleBootAutonomousRepair("App-Start hängt. Bitte die Test-App frisch laden.");
   },APP_BOOT_GUARD_TIMEOUT_MS);
 }
 function renderAppRecovery(error,stage="App-Start"){
