@@ -52,10 +52,10 @@ function patchTestIndex() {
 function bumpTestCache() {
   if (!fs.existsSync(SERVICE_WORKER)) return;
   let sw = fs.readFileSync(SERVICE_WORKER, 'utf8');
-  const next = "const CACHE_VERSION = 'dar-al-tawhid-offline-light-v351-test-canonical';";
+  // Never overwrite visitor CACHE_VERSION during shared root builds/deploys.
+  // Only ensure library shell URLs stay listed in APP_SHELL.
   const pattern = /const CACHE_VERSION = ['"]dar-al-tawhid-offline-light-[^'"]+['"];?/;
   if (!pattern.test(sw)) throw new Error('Service worker cache version declaration not found.');
-  sw = sw.replace(pattern, next);
 
   const required = [
     "  '/data/books-library.json',",

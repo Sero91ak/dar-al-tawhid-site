@@ -42,7 +42,9 @@
     "data/scholar-index-meta.json",
     "data/scholar-history-curated.json",
     "version.json",
-    ".github/workflows/cloudflare-pages-deploy.yml"
+    ".github/workflows/cloudflare-pages-deploy.yml",
+    "scripts/patch-test-canonical-library.js",
+    "scripts/cf-pages-build.js"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -82,7 +84,9 @@
         "content/admin/prayer-push-status.json",
         ".github/workflows/purge-live-cache.yml",
         ".github/workflows/cloudflare-pages-deploy.yml",
-        "content/updates/daily.json"
+        "content/updates/daily.json",
+        "scripts/patch-test-canonical-library.js",
+        "scripts/cf-pages-build.js"
       ],
       "expiresAt": "2026-09-30T23:59:00.000Z"
     },
