@@ -2438,6 +2438,22 @@
         "service-worker.js"
       ],
       "expiresAt": "2026-09-30T23:59:00.000Z"
+    },
+    {
+      "id": "quran-v584-cache-redeploy-2026-08-07",
+      "approvedBy": "user-report-quran-crash-everywhere",
+      "note": "CDN-Cache-Refresh nach v584 Deploy; Verify nutzt / statt nur /index.html",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/verify-live-deploy.js",
+        "index.html",
+        "test/index.html",
+        "manifest.json"
+      ],
+      "expiresAt": "2026-09-30T23:59:00.000Z"
     }
   ],
   "enabled": true

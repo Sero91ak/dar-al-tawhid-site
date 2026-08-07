@@ -75,8 +75,9 @@ async function main() {
   if (mode === "visitor" || mode === "all") {
     const visitorBuild = process.env.EXPECT_BUILD || readBuildId("version.json");
     const expectZakat = Number(process.env.EXPECT_ZAKAT_VERSION || 18);
-    const visitorOk = await waitForHtmlIncludes(`${SITE_URL}/index.html`, [visitorBuild]);
-    const { text } = await fetchStatus(`${SITE_URL}/index.html`);
+    let visitorOk = await waitForHtmlIncludes(`${SITE_URL}/`, [visitorBuild]);
+    if (!visitorOk) visitorOk = await waitForHtmlIncludes(`${SITE_URL}/index.html`, [visitorBuild]);
+    const { text } = await fetchStatus(`${SITE_URL}/`);
     const zakatMatch = text.match(/zakat-app\.js\?v=(\d+)/);
     const zakatVer = zakatMatch ? Number(zakatMatch[1]) : 0;
     if (!visitorOk || zakatVer < expectZakat) {
