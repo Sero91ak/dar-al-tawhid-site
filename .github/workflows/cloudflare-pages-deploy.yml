@@ -8,6 +8,7 @@ on:
     paths:
       - index.html
       - version.json
+      - content/updates/daily.json
       - service-worker.js
       - manifest.json
       - assets/**
