@@ -5,11 +5,12 @@
 <!-- workers-deploy-stamp:1785515013940 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v587";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v589";</script>
+<script>/* VISUAL_PAST_PURGE_V588: alte Optik-Caches löschen – aktuelle Darstellung bleibt Autorität */(function(){var BUILD=String(window.__DAR_EXPECTED_BUILD||"");var KEY="dar_visual_authority_build_v1";var ONCE="dar_visual_past_purge_once_v588";function num(id){var m=String(id||"").match(/v(\d+)/);return m?parseInt(m[1],10):0}function wipe(){if(!("caches"in window))return Promise.resolve();return caches.keys().then(function(keys){return Promise.all(keys.filter(function(k){return /^dar-al-tawhid-offline-light-/i.test(k)}).map(function(k){return caches.delete(k)}))})}function bustReload(tag){try{if(sessionStorage.getItem(ONCE)===BUILD+"|"+tag)return;sessionStorage.setItem(ONCE,BUILD+"|"+tag)}catch(e){}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?"+tag+"="+Date.now()+h)}try{var prev=localStorage.getItem(KEY)||"";var localN=num(BUILD);var prevN=num(prev);if(prevN>localN&&localN>0){wipe().then(function(){if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){try{g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}catch(e){}}).catch(function(){})}bustReload("visual-stale")}).catch(function(){bustReload("visual-stale")});return}if(localN>prevN){wipe().then(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}bustReload("visual-new")}).catch(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}});return}if(!prev&&BUILD){try{localStorage.setItem(KEY,BUILD)}catch(e){}}if(localN>0&&"caches"in window){caches.keys().then(function(keys){keys.forEach(function(k){if(!/^dar-al-tawhid-offline-light-/i.test(k))return;var kn=num(k);if(kn&&kn<localN)caches.delete(k)})}).catch(function(){})}}catch(e){}try{var path=String(location.pathname||"");var ver=path.indexOf("/test")===0?"/test/version.json":"/version.json";fetch(ver,{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(remote){if(!remote||!remote.buildId)return;var remoteN=num(remote.buildId);if(remoteN>localN&&localN>0){wipe().then(function(){bustReload("visual-remote")}).catch(function(){bustReload("visual-remote")})}}).catch(function(){})}catch(e){}})();</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
-<script defer src="/assets/live-boot.js?v=587"></script>
+<script defer src="/assets/live-boot.js?v=589"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
 <title>Dar Test</title>
@@ -17950,6 +17951,101 @@ html.is-standalone-pwa body{
   }
 }
 </style>
+<style id="header-prayer-status-clear-v589">
+/* v589 · Statuszeile klar unter der Goldlinie, eine Zeile, alles lesbar */
+.top-shell.theme-hero-shell .header-prayer-hub__status,
+.header-prayer-hub__status{
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:clamp(2px,.9vw,8px)!important;
+  row-gap:0!important;
+  width:100%!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+  margin-top:clamp(8px,1.8vw,11px)!important;
+  padding-top:clamp(12px,2.6vw,15px)!important;
+  padding-bottom:3px!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  font-size:clamp(8.6px,2.05vw,10.5px)!important;
+  font-weight:780!important;
+  line-height:1.2!important;
+  letter-spacing:.005em!important;
+  white-space:nowrap!important;
+  overflow-x:auto!important;
+  overflow-y:visible!important;
+  text-overflow:clip!important;
+  scrollbar-width:none!important;
+  -ms-overflow-style:none!important;
+}
+.top-shell.theme-hero-shell .header-prayer-hub__status::-webkit-scrollbar,
+.header-prayer-hub__status::-webkit-scrollbar{display:none!important;width:0!important;height:0!important}
+.header-prayer-hub__status::before{
+  top:0!important;
+  height:1px!important;
+  pointer-events:none!important;
+}
+.header-prayer-hub__status>span{
+  display:inline-flex!important;
+  align-items:center!important;
+  flex:0 1 auto!important;
+  min-width:0!important;
+  max-width:none!important;
+  gap:3px!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  line-height:1.2!important;
+}
+.header-prayer-hub__status>span:first-child{justify-content:flex-start!important;flex:0 0 auto!important}
+.header-prayer-hub__status>span.header-prayer-hub__hijri{flex:1 1 auto!important;justify-content:center!important;min-width:0!important}
+.header-prayer-hub__status>span.header-prayer-hub__clock{flex:0 0 auto!important;justify-content:center!important}
+.header-prayer-hub__status>span.header-prayer-hub__place,
+.header-prayer-hub__place{
+  flex:0 1 auto!important;
+  justify-content:flex-end!important;
+  max-width:28%!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.header-prayer-hub__status>span+span::before{display:none!important;content:none!important;margin:0!important}
+.header-prayer-hub__ico{
+  font-size:.86em!important;
+  line-height:1!important;
+  opacity:.84!important;
+  flex-shrink:0!important;
+  transform:translateY(0)!important;
+}
+@media(max-width:700px){
+  .top-shell.theme-hero-shell .header-prayer-hub__status,
+  .header-prayer-hub__status{
+    font-size:clamp(8.2px,1.95vw,9.8px)!important;
+    padding-top:clamp(11px,2.5vw,14px)!important;
+    gap:clamp(2px,.7vw,6px)!important;
+  }
+  .header-prayer-hub__status>span{gap:2px!important}
+  .header-prayer-hub__place{max-width:24%!important}
+}
+@media(max-width:430px){
+  .top-shell.theme-hero-shell .header-prayer-hub__status,
+  .header-prayer-hub__status{
+    font-size:clamp(7.8px,1.85vw,9.2px)!important;
+    padding-top:12px!important;
+    gap:2px!important;
+  }
+  .header-prayer-hub__ico{font-size:.8em!important}
+  .header-prayer-hub__place{max-width:22%!important}
+}
+@media(max-width:390px){
+  .top-shell.theme-hero-shell .header-prayer-hub__status,
+  .header-prayer-hub__status{
+    font-size:clamp(7.4px,1.75vw,8.6px)!important;
+    padding-top:11px!important;
+  }
+}
+</style>
 <style id="quran-tafsir-nav-smooth-v568">
 /* QURAN_TAFSIR_NAV_GUARD · smooth open/close, kein Schwarzfeld */
 #quranExplanationMount{
@@ -22297,7 +22393,7 @@ function buildHeaderPrayerHubAriaLabel(current,next){
 }
 function renderHeaderPrayerStatusLineHtml(settings){
   const now=new Date();
-  const gregShort=new Intl.DateTimeFormat("de-DE",{weekday:"short",day:"2-digit",month:"2-digit",year:"numeric"}).format(now);
+  const gregShort=new Intl.DateTimeFormat("de-DE",{weekday:"short",day:"2-digit",month:"2-digit",year:"2-digit"}).format(now);
   const timeStr=`${new Intl.DateTimeFormat("de-DE",{hour:"2-digit",minute:"2-digit"}).format(now)} Uhr`;
   let hijriHtml="";
   try{const h=islamicCalendarNow();if(h&&h.day&&h.month&&h.year)hijriHtml=`<span class="header-prayer-hub__hijri"><span class="header-prayer-hub__ico" aria-hidden="true">☾</span>${esc(`${h.day}. ${h.month} ${h.year}`)}</span>`}catch(e){}
@@ -24805,7 +24901,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v587";
+const APP_BUILD_ID="app-shell-v589";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -26011,7 +26107,7 @@ window.addEventListener("load",()=>{
       window.__darSwMessageBound=true;
       navigator.serviceWorker.addEventListener("message",(ev)=>{
         const d=ev.data||{};
-        if(d.type==="NAVIGATE_POST"&&d.postId)openPostFromPush(d.postId,d.url);
+        if(d.type==="NAVIGATE_POST"&&d.postId)openPostFromPush(d.postId,d.url);if(d.type==="VISUAL_CACHE_INVALIDATED"){try{var vk="dar_visual_sw_reload_v588";if(sessionStorage.getItem(vk)!==String(d.version||"")){sessionStorage.setItem(vk,String(d.version||""));location.reload()}}catch(e){}}
       });
     }
     setTimeout(()=>{loadQuranIndex().then(()=>{syncQuranOfflinePrecache();if(["quran","quran-surah"].includes(readRoute().view))render()}).catch(e=>console.warn("Qurʾān-Index:",e))},1500);
@@ -26036,7 +26132,7 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
 <script>
 window.addEventListener("online",function(){updateOfflineBox();flushOfflineQueue().catch(()=>{});refreshContent({forceRender:true})});
 window.addEventListener("offline",function(){updateOfflineBox()});
-window.addEventListener("focus",function(){scheduleRefreshContent({forceRender:false},900)});
+window.addEventListener("focus",function(){scheduleRefreshContent({forceRender:false},900)});window.addEventListener("pageshow",function(ev){/* VISUAL_BFCACHE_GUARD_V588 */if(ev&&ev.persisted){try{var b=String(window.__DAR_EXPECTED_BUILD||APP_BUILD_ID||"");var s=localStorage.getItem("dar_visual_authority_build_v1")||"";if(s&&b&&s!==b){location.reload();return}fetch((String(location.pathname||"").indexOf("/test")===0?"/test/version.json":"/version.json"),{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(remote){if(remote&&remote.buildId&&String(remote.buildId)!==b)location.reload()}).catch(function(){})}catch(e){}}});
 document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")scheduleRefreshContent({forceRender:true},150)});
 </script>
 <script>
@@ -26524,167 +26620,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
 </body>
 
 <style id="quran-chrome-oval-v545">
-/* v545 · Qurʾān-Chrome edler/oval + passende Emojis + Zierlinien */
-body.is-quran-reader-route{
-  --quran-divider:color-mix(in srgb,var(--gold2) 34%,transparent);
-  --quran-divider-soft:color-mix(in srgb,var(--gold2) 16%,transparent);
-  --quran-ornament:color-mix(in srgb,var(--gold2) 62%,transparent);
-}
-/* Surah-Titel-Pill: charmant, oval */
-body.is-quran-reader-route .qrc-chrome .qrc-title-btn,
-.qrc-title-btn{
-  border-radius:999px!important;
-  padding:8px 16px!important;
-  min-height:40px!important;
-  background:radial-gradient(ellipse 120% 100% at 50% 0%,color-mix(in srgb,var(--gold2) 12%,transparent),color-mix(in srgb,var(--card,rgba(255,255,255,.06)) 70%,transparent))!important;
-  border:0!important;
-  box-shadow:none!important;
-}
-body.is-quran-reader-route .qrc-chrome .qrc-title{
-  font-family:var(--serif)!important;
-  font-weight:650!important;
-  letter-spacing:.02em!important;
-  font-size:15.5px!important;
-  color:var(--cream,var(--text))!important;
-}
-body.is-quran-reader-route .qrc-chrome .qrc-chevron{opacity:.7;margin-left:4px}
-body.is-quran-reader-route .qrc-chrome .qrc-icon-btn,
-body.is-quran-reader-route .qrc-chrome .qrc-wake-icon-btn{
-  border-radius:50%!important;
-  width:38px!important;height:38px!important;
-  border:0!important;
-  background:transparent!important;
-}
-body.is-quran-reader-route .qrc-chrome{
-  border-bottom:0!important;
-  box-shadow:none!important;
-  position:fixed!important;
-  top:0!important;left:0!important;right:0!important;
-  z-index:560!important;
-}
-body.is-quran-reader-route .qrc-chrome-sub{
-  border-top:0!important;
-  position:relative;
-  padding-top:8px!important;
-}
-body.is-quran-reader-route .qrc-chrome-sub::before{
-  content:"";
-  display:block;
-  position:absolute;
-  left:12%;
-  right:12%;
-  top:0;
-  height:1px;
-  background:radial-gradient(ellipse 55% 900% at 50% 50%,var(--quran-ornament),transparent 72%);
-  opacity:.85;
-}
-
-/* Vers-Trenner: ovale Goldzierlinie mit Mittelpunkt */
-body.is-quran-reader-route .qrc-body .quran-ayah.quran-ayah--page::after,
-body.is-quran-reader-route .qrc-body .quran-ayah.quran-ayah--noble::after{
-  left:10%!important;
-  right:10%!important;
-  bottom:2px!important;
-  height:1px!important;
-  background:radial-gradient(ellipse 58% 900% at 50% 50%,var(--quran-ornament),color-mix(in srgb,var(--gold2) 18%,transparent) 45%,transparent 72%)!important;
-  opacity:.92!important;
-}
-body.is-quran-reader-route .qrc-body .quran-ayah.quran-ayah--page::before,
-body.is-quran-reader-route .qrc-body .quran-ayah.quran-ayah--noble::before{
-  content:""!important;
-  display:block!important;
-  visibility:visible!important;
-  position:absolute!important;
-  left:50%!important;
-  bottom:0!important;
-  width:6px!important;
-  height:6px!important;
-  margin-left:-3px!important;
-  border-radius:50%!important;
-  border:1px solid var(--quran-ornament)!important;
-  background:color-mix(in srgb,var(--bg) 88%,transparent)!important;
-  box-shadow:0 0 0 3px color-mix(in srgb,var(--bg) 92%,transparent)!important;
-  z-index:1!important;
-  pointer-events:none!important;
-  opacity:.9!important;
-}
-body.is-quran-reader-route .qrc-body .quran-ayah.quran-ayah--page:last-child::before,
-body.is-quran-reader-route .qrc-body .quran-ayah.quran-ayah--noble:last-child::before{display:none!important}
-
-/* Ayah-Aktionsbuttons: oval + Emoji */
-body.is-quran-reader-route .quran-ayah-actions-row,
-body.is-quran-reader-route .quran-ayah-actions-row--compact{
-  display:inline-flex!important;
-  align-items:center!important;
-  gap:4px!important;
-  padding:3px 5px!important;
-  border-radius:999px!important;
-  border:1px solid color-mix(in srgb,var(--gold2) 18%,transparent)!important;
-  background:radial-gradient(ellipse 120% 100% at 50% 0%,color-mix(in srgb,var(--gold2) 8%,transparent),transparent 70%)!important;
-  box-shadow:none!important;
-  width:auto!important;
-  margin-left:auto!important;
-}
-body.is-quran-reader-route .quran-ayah-action-btn{
-  width:34px!important;
-  height:34px!important;
-  min-width:34px!important;
-  border-radius:50%!important;
-  border:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  font-size:15px!important;
-  line-height:1!important;
-  display:inline-grid!important;
-  place-items:center!important;
-  color:var(--cream)!important;
-}
-body.is-quran-reader-route .quran-ayah-action-btn svg{display:none!important}
-body.is-quran-reader-route .quran-ayah-action-btn .qrc-btn-emoji{font-size:15px;line-height:1;filter:none}
-body.is-quran-reader-route .quran-ayah-action-btn.is-saved{
-  background:color-mix(in srgb,var(--gold2) 14%,transparent)!important;
-}
-body.is-quran-reader-route .quran-ayah-action-btn:active{
-  background:color-mix(in srgb,var(--gold2) 10%,transparent)!important;
-}
-
-/* Floating Schnellleiste: voll oval */
-.qrc-context-bar{
-  border-radius:999px!important;
-  border:1px solid color-mix(in srgb,var(--gold2) 22%,transparent)!important;
-  border-bottom:1px solid color-mix(in srgb,var(--gold2) 22%,transparent)!important;
-  background:radial-gradient(ellipse 100% 140% at 50% 0%,color-mix(in srgb,var(--gold2) 10%,transparent),color-mix(in srgb,var(--bg) 88%,rgba(20,18,14,.92)))!important;
-  box-shadow:0 10px 28px color-mix(in srgb,#000 35%,transparent)!important;
-  padding:4px 8px 4px 14px!important;
-  height:auto!important;
-  min-height:48px!important;
-  left:max(16px,env(safe-area-inset-left))!important;
-  right:max(16px,env(safe-area-inset-right))!important;
-}
-.qrc-context-pos{
-  font-family:var(--serif)!important;
-  font-size:13px!important;
-  font-weight:650!important;
-  letter-spacing:.01em!important;
-  color:var(--cream,var(--text))!important;
-}
-.qrc-context-btn{
-  width:40px!important;
-  height:40px!important;
-  border-radius:50%!important;
-  border:1px solid color-mix(in srgb,var(--gold2) 16%,transparent)!important;
-  background:color-mix(in srgb,var(--gold2) 5%,transparent)!important;
-  color:var(--cream)!important;
-}
-.qrc-context-btn svg{display:none!important}
-.qrc-context-btn .qrc-btn-emoji{font-size:15px;line-height:1}
-.qrc-context-actions{gap:6px!important}
-
-html[data-theme="light"] body.is-quran-reader-route{
-  --quran-divider:color-mix(in srgb,var(--gold2,#8a6a28) 36%,transparent);
-  --quran-divider-soft:color-mix(in srgb,var(--gold2,#8a6a28) 18%,transparent);
-  --quran-ornament:color-mix(in srgb,var(--gold2,#8a6a28) 55%,transparent);
-}
+/* RETIRED_V588 · Alte Oval-Optik entfernt – aktuelle Darstellung: quran-tab-root-chrome + visual-authority */
 </style>
 
 <style id="quran-tab-root-chrome-v586">
@@ -27704,8 +27640,8 @@ html[data-theme="bordeaux"] body.is-quran-reader-route{
 </style>
 
 
-<style id="visual-authority-v587">
-/* VISUAL_AUTHORITY_V587 · Endgültige Optik-Sperre: aktuelle Darstellung gewinnt immer */
+<style id="visual-authority-v589">
+/* VISUAL_AUTHORITY_V589 · Endgültige Optik-Sperre: nur aktuelle Darstellung – Vergangenheit gelöscht */
 body.is-quran-overview .qov-header{padding:12px 4px 10px!important}
 body.is-quran-overview .qov-title{font-size:clamp(24px,5.4vw,30px)!important;line-height:1.08!important;letter-spacing:.05em!important}
 body.is-quran-overview .qov-subtitle{font-size:12px!important;margin-top:4px!important}
@@ -27726,16 +27662,13 @@ body.is-quran-overview .qov-segment-btn.active{border:0!important;background:col
 body.is-quran-overview .qov-sort-btn{border:0!important;box-shadow:none!important;background:transparent!important}
 body.is-quran-reader-route .qrc-chrome-main{padding:10px clamp(12px,3.2vw,16px) 8px!important}
 body.is-quran-reader-route .qrc-chrome .qrc-title-btn,
-body.is-quran-reader-route .qrc-title-btn{border:0!important;box-shadow:none!important;min-height:44px!important;padding:10px 18px!important;background:color-mix(in srgb,var(--card,rgba(255,255,255,.06)) 42%,transparent)!important}
+body.is-quran-reader-route .qrc-title-btn{border:0!important;box-shadow:none!important;border-radius:12px!important;min-height:44px!important;padding:10px 18px!important;background:color-mix(in srgb,var(--card,rgba(255,255,255,.06)) 42%,transparent)!important}
 body.is-quran-reader-route .qrc-chrome .qrc-title{font-size:16.5px!important;font-weight:700!important}
 body.is-quran-reader-route .qrc-chrome .qrc-icon-btn,
 body.is-quran-reader-route .qrc-chrome .qrc-wake-icon-btn,
 body.is-quran-reader-route .qrc-actions .qrc-icon-btn,
 body.is-quran-reader-route #qrcInfoBtn,
-body.is-quran-reader-route #qrcSettingsBtn{border:0!important;box-shadow:none!important;background:transparent!important;width:42px!important;height:42px!important;min-width:42px!important}
-/* Alte Oval-/Kanten-Patches (v545 u.ä.) entmachten, Funktionen bleiben */
-#quran-chrome-oval-v545 body.is-quran-reader-route .qrc-chrome .qrc-title-btn,
-body.is-quran-reader-route .qrc-chrome .qrc-title-btn{border-width:0!important}
+body.is-quran-reader-route #qrcSettingsBtn{border:0!important;box-shadow:none!important;background:transparent!important;border-radius:12px!important;width:42px!important;height:42px!important;min-width:42px!important}
 </style>
 
 </html>
