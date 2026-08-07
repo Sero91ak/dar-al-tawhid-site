@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="de">
 <head>
-<!-- pages-deploy-stamp:1786133643450 -->
-<!-- workers-deploy-stamp:1786133643450 -->
+<!-- pages-deploy-stamp:1786134093716 -->
+<!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v593";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v594";</script>
 <script>/* VISUAL_PAST_PURGE_V588: alte Optik-Caches löschen – aktuelle Darstellung bleibt Autorität */(function(){var BUILD=String(window.__DAR_EXPECTED_BUILD||"");var KEY="dar_visual_authority_build_v1";var ONCE="dar_visual_past_purge_once_v588";function num(id){var m=String(id||"").match(/v(\d+)/);return m?parseInt(m[1],10):0}function wipe(){if(!("caches"in window))return Promise.resolve();return caches.keys().then(function(keys){return Promise.all(keys.filter(function(k){return /^dar-al-tawhid-offline-light-/i.test(k)}).map(function(k){return caches.delete(k)}))})}function bustReload(tag){try{if(sessionStorage.getItem(ONCE)===BUILD+"|"+tag)return;sessionStorage.setItem(ONCE,BUILD+"|"+tag)}catch(e){}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?"+tag+"="+Date.now()+h)}try{var prev=localStorage.getItem(KEY)||"";var localN=num(BUILD);var prevN=num(prev);if(prevN>localN&&localN>0){wipe().then(function(){if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){try{g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}catch(e){}}).catch(function(){})}bustReload("visual-stale")}).catch(function(){bustReload("visual-stale")});return}if(localN>prevN){wipe().then(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}bustReload("visual-new")}).catch(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}});return}if(!prev&&BUILD){try{localStorage.setItem(KEY,BUILD)}catch(e){}}if(localN>0&&"caches"in window){caches.keys().then(function(keys){keys.forEach(function(k){if(!/^dar-al-tawhid-offline-light-/i.test(k))return;var kn=num(k);if(kn&&kn<localN)caches.delete(k)})}).catch(function(){})}}catch(e){}try{var path=String(location.pathname||"");var ver=path.indexOf("/test")===0?"/test/version.json":"/version.json";fetch(ver,{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(remote){if(!remote||!remote.buildId)return;var remoteN=num(remote.buildId);if(remoteN>localN&&localN>0){wipe().then(function(){bustReload("visual-remote")}).catch(function(){bustReload("visual-remote")})}}).catch(function(){})}catch(e){}})();</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
@@ -37,7 +37,7 @@
 <meta name="twitter:image" content="/app-icon-512.png?v=source-under-statement-v12">
 <meta name="theme-color" content="#080806">
 <script>(function(){try{var p=new URLSearchParams(location.search);var wantStaging=p.get("env")==="staging"||location.hostname.indexOf("staging.")===0;var underTest=location.pathname.indexOf("/test/")===0||location.pathname==="/test";if(wantStaging&&!underTest){location.replace("/test/"+location.search+location.hash);return}}catch(e){}})();</script>
-<script>(function(){try{var params=new URLSearchParams(location.search);var underTest=location.pathname.indexOf("/test/")===0||location.pathname==="/test";var stagingHost=location.hostname.indexOf("staging.")===0;var staging=params.get("env")==="staging"||stagingHost||underTest;var manifest=document.getElementById("appManifestLink");var touch=document.getElementById("appleTouchIconLink");if(staging&&manifest)manifest.href="/manifest.json?v=source-under-statement-v12";if(staging&&touch)touch.href="/apple-touch-icon.png?v=source-under-statement-v12";if(staging){document.title="Dar Test";var app=document.querySelector('meta[name="application-name"]');if(app)app.content="DAR AL TAWḤID";var apple=document.querySelector('meta[name="apple-mobile-web-app-title"]');if(apple)apple.content="DAR AL TAWḤID"}var key="darThemeV1";var t=localStorage.getItem(key)||"dark";if(t==="emerald"||t==="smaragd"||t==="aurora"){t="dark";try{localStorage.setItem(key,t)}catch(e){}}else if(t!=="light"&&t!=="soft"&&t!=="royal"&&t!=="bordeaux"&&t!=="dar-al-layl")t="dark";var names={dark:"Klassisch Dunkel",light:"Klassisch Hell",soft:"Sanft Elegant",royal:"Royal Nachtblau",bordeaux:"Bordeaux Royal Premium","dar-al-layl":"Dār al-Layl"};var colors={dark:"#080806",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#0B1210"};document.documentElement.setAttribute("data-theme",t);document.documentElement.setAttribute("data-theme-name",names[t]||names.dark);if(/Android/i.test(navigator.userAgent||""))document.documentElement.classList.add("is-android");var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=(underTest||stagingHost)?"#061826":colors[t]||colors.dark;var tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=(underTest||stagingHost)?"#061826":colors[t]||colors.dark;var sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content="black-translucent";window.__DAR_INITIAL_THEME=t;window.__DAR_STAGING_APP=underTest||stagingHost}catch(e){}})();</script>
+<script>(function(){try{var params=new URLSearchParams(location.search);var underTest=location.pathname.indexOf("/test/")===0||location.pathname==="/test";var stagingHost=location.hostname.indexOf("staging.")===0;var staging=params.get("env")==="staging"||stagingHost||underTest;var manifest=document.getElementById("appManifestLink");var touch=document.getElementById("appleTouchIconLink");if(staging&&manifest)manifest.href="/manifest.json?v=source-under-statement-v12";if(staging&&touch)touch.href="/apple-touch-icon.png?v=source-under-statement-v12";if(staging){document.title="Dar Test";var app=document.querySelector('meta[name="application-name"]');if(app)app.content="DAR AL TAWḤID";var apple=document.querySelector('meta[name="apple-mobile-web-app-title"]');if(apple)apple.content="DAR AL TAWḤID"}var key="darThemeV1";var t=localStorage.getItem(key)||"dark";if(t==="emerald"||t==="smaragd"||t==="aurora"){t="dark";try{localStorage.setItem(key,t)}catch(e){}}else if(t!=="light"&&t!=="soft"&&t!=="royal"&&t!=="bordeaux"&&t!=="dar-al-layl")t="dark";var names={dark:"Klassisch Dunkel",light:"Klassisch Hell",soft:"Sanft Elegant",royal:"Royal Nachtblau",bordeaux:"Bordeaux Royal Premium","dar-al-layl":"Dār al-Layl"};var colors={dark:"#080806",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605"};document.documentElement.setAttribute("data-theme",t);document.documentElement.setAttribute("data-theme-name",names[t]||names.dark);if(/Android/i.test(navigator.userAgent||""))document.documentElement.classList.add("is-android");var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=(underTest||stagingHost)?"#061826":colors[t]||colors.dark;var tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=(underTest||stagingHost)?"#061826":colors[t]||colors.dark;var sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content="black-translucent";window.__DAR_INITIAL_THEME=t;window.__DAR_STAGING_APP=underTest||stagingHost}catch(e){}})();</script>
 <script>(function(){try{function clamp(v){v=Number(v);if(!Number.isFinite(v))return 5;v=Math.round(v);if(v<=0)v=1;return Math.max(1,Math.min(10,v))}function set(name,val){document.documentElement.style.setProperty(name,String(val))}var app=clamp(localStorage.getItem("appFontScale"));var qa=clamp(localStorage.getItem("quranArabicScale"));var qt=clamp(localStorage.getItem("quranTransliterationScale"));var qd=clamp(localStorage.getItem("quranGermanScale"));var da=clamp(localStorage.getItem("duaArabicScale"));var dt=clamp(localStorage.getItem("duaTransliterationScale"));var dd=clamp(localStorage.getItem("duaGermanScale"));var pt=clamp(localStorage.getItem("postTextScale"));var ps=clamp(localStorage.getItem("postSourceScale"));document.documentElement.setAttribute("data-app-font-scale",app);document.documentElement.setAttribute("data-reading-arabic-scale",qa);document.documentElement.setAttribute("data-reading-transliteration-scale",qt);document.documentElement.setAttribute("data-reading-translation-scale",qd);set("--text-xs",(9.4+app*.18)+"px");set("--text-sm",(11.2+app*.36)+"px");set("--text-base",(14.4+app*.32)+"px");set("--text-lg",(16.2+app*.38)+"px");set("--text-xl",(20+app*.64)+"px");set("--title-size",(27+app*1.0)+"px");set("--quran-arabic-size",(17+qa*3.3)+"px");set("--quran-trans-size",(12+qt*2.1)+"px");set("--quran-de-size",(12+qd*2.1)+"px");set("--dua-arabic-size",(16+da*3.1)+"px");set("--dua-trans-size",(12+dt*2.1)+"px");set("--dua-de-size",(12+dd*2.1)+"px");set("--post-text-size",(16.5+pt*.55)+"px");set("--post-source-size",(13.5+ps*.35)+"px")}catch(e){}})();</script>
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -5320,15 +5320,15 @@ html[data-theme="royal"] .top-swim-aura{display:none!important}
 /* DĀR AL-LAYL — zentrales Premium-Dark-Theme */
 html[data-theme="dar-al-layl"]{
   color-scheme:dark!important;
-  --layl-bg-deep:#050706!important;
-  --layl-bg-base:#080B0A!important;
-  --layl-bg-secondary:#0B0F0D!important;
-  --layl-bg-elevated:#0E1210!important;
-  --layl-bg-header:#101410!important;
-  --layl-bg-overlay:rgba(4,6,5,.87)!important;
+  --layl-bg-deep:#030403!important;
+  --layl-bg-base:#060807!important;
+  --layl-bg-secondary:#090B0A!important;
+  --layl-bg-elevated:#0C0F0D!important;
+  --layl-bg-header:#0E110F!important;
+  --layl-bg-overlay:rgba(2,3,2,.88)!important;
 
-  --layl-surface-1:#0E1310!important;
-  --layl-surface-2:#121713!important;
+  --layl-surface-1:#0C100E!important;
+  --layl-surface-2:#101410!important;
   --layl-surface-3:#171D18!important;
   --layl-surface-4:#1C231D!important;
   --layl-surface-active:#252A21!important;
@@ -5401,7 +5401,7 @@ html[data-theme="dar-al-layl"]{
   --premium-border:var(--layl-border-default)!important;
   --premium-line:var(--layl-divider)!important;
   --premium-panel:linear-gradient(145deg,rgba(22,28,24,.98),rgba(13,17,15,.98))!important;
-  --premium-bg:radial-gradient(circle at 14% 0%,rgba(168,139,79,.065),transparent 29%),radial-gradient(circle at 86% 10%,rgba(28,37,34,.055),transparent 25%),linear-gradient(168deg,#101310 0%,#090D0B 48%,#050706 100%)!important;
+  --premium-bg:radial-gradient(circle at 14% 0%,rgba(168,139,79,.05),transparent 28%),radial-gradient(circle at 86% 10%,rgba(0,0,0,.30),transparent 28%),linear-gradient(168deg,#070908 0%,#040504 48%,#020302 100%)!important;
   --premium-shadow:var(--layl-shadow-card)!important;
   --premium-label:var(--layl-text-gold)!important;
   --premium-title:var(--layl-text-cream)!important;
@@ -7255,6 +7255,13 @@ html[data-theme="bordeaux"]{
   --cover-edge-bg:linear-gradient(180deg,#140b0c 0%,#241014 50%,rgba(20,11,12,0) 100%);
   --cover-panel-bg:radial-gradient(circle at 16% 0%,rgba(214,190,132,.12),transparent 36%),linear-gradient(180deg,#241014 0%,#170b0d 58%,rgba(20,11,12,.96) 100%);
   --cover-panel-border:rgba(214,190,132,.24);
+}
+html[data-theme="dar-al-layl"]{
+  --outer-bg-flat:#050605;
+  --outer-bg:radial-gradient(circle at 12% 0%,rgba(168,139,79,.04),transparent 30%),radial-gradient(circle at 88% 10%,rgba(0,0,0,.42),transparent 36%),linear-gradient(180deg,#060807 0%,#040504 46%,#020302 100%);
+  --cover-edge-bg:linear-gradient(180deg,#030403 0%,#060807 48%,rgba(3,4,3,0) 100%);
+  --cover-panel-bg:radial-gradient(circle at 16% 0%,rgba(168,139,79,.06),transparent 36%),linear-gradient(180deg,#0C0F0D 0%,#060807 58%,rgba(3,4,3,.96) 100%);
+  --cover-panel-border:rgba(168,139,79,.16);
 }
 html[data-theme],
 html[data-theme].is-standalone-pwa{
@@ -19050,7 +19057,7 @@ document.addEventListener("pointerdown",e=>{if(isEditableTarget(e.target))lastFo
 const THEME_KEY="darThemeV1";
 const THEME_SETTINGS_KEY="darThemeSettingsV1";
 /* EDGE_TO_EDGE_THEME_LOCK · Format: Edge-to-Edge Erscheinungsbild — jedes Theme inkl. künftiger: --outer-bg-flat/--outer-bg/--page-cover/--premium-bg + THEME_META/normalizeTheme; Rahmenrandlos. */
-const THEME_META={dark:{label:"Klassisch Dunkel",color:"#080806",status:"black-translucent",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"black-translucent",asset:"light"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"black-translucent",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black-translucent",asset:"royal"},bordeaux:{label:"Bordeaux Royal Premium",color:"#140B0C",status:"black-translucent",asset:"bordeaux"},"dar-al-layl":{label:"Dār al-Layl",color:"#080B0A",status:"black-translucent",asset:"dar-al-layl"}};
+const THEME_META={dark:{label:"Klassisch Dunkel",color:"#080806",status:"black-translucent",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"black-translucent",asset:"light"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"black-translucent",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black-translucent",asset:"royal"},bordeaux:{label:"Bordeaux Royal Premium",color:"#140B0C",status:"black-translucent",asset:"bordeaux"},"dar-al-layl":{label:"Dār al-Layl",color:"#050605",status:"black-translucent",asset:"dar-al-layl"}};
 function normalizeTheme(theme){if(theme==="emerald"||theme==="smaragd"||theme==="aurora")return"dark";return theme==="light"||theme==="soft"||theme==="royal"||theme==="bordeaux"||theme==="dar-al-layl"?theme:"dark"}
 function getTheme(){try{return normalizeTheme(localStorage.getItem(THEME_KEY))}catch(e){return"dark"}}
 function applyTheme(theme){const next=normalizeTheme(theme);const info=THEME_META[next]||THEME_META.dark;const root=document.documentElement;root.classList.add("theme-switching");root.style.backgroundColor=info.color;root.setAttribute("data-theme",next);root.setAttribute("data-theme-name",info.label);try{localStorage.setItem(THEME_KEY,next);localStorage.setItem(THEME_SETTINGS_KEY,JSON.stringify({theme:next,label:info.label,assetVariant:info.asset,updatedAt:Date.now()}))}catch(e){}const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=info.color;const tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=info.color;const sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content="black-translucent";const logo=document.querySelector(".logo");if(logo){logo.title="DAR AL TAWḤID";if(!logo.getAttribute("data-logo-ready")){logo.setAttribute("data-logo-ready","1");logo.onerror=function(){this.onerror=null;this.src="/watermark-my-logo-full.png?v=fallback"};if(!logo.getAttribute("src")||logo.getAttribute("src").indexOf("watermark-my-logo")<0)logo.src="/watermark-my-logo-full.png"}}document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.classList.toggle("is-active",btn.getAttribute("data-theme-select")===next);btn.setAttribute("aria-pressed",btn.getAttribute("data-theme-select")===next?"true":"false")});try{window.dispatchEvent(new CustomEvent("dar-theme-change",{detail:{theme:next,...info}}))}catch(e){}requestAnimationFrame(()=>requestAnimationFrame(()=>{root.classList.remove("theme-switching");if(next!=="bordeaux")root.style.backgroundColor=""}))}
@@ -24900,7 +24907,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v593";
+const APP_BUILD_ID="app-shell-v594";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -27784,6 +27791,57 @@ html.is-android.is-standalone-pwa body{
 }
 html.is-android .top-shell .header{
   padding-top:calc(env(safe-area-inset-top,0px) + 12px)!important;
+}
+</style>
+
+
+<style id="dar-al-layl-black-depth-v594">
+/* DAR_AL_LAYL_BLACK_DEPTH_V594 · Nacht-Schwarz mit nur dezentem Grün-Unterton
+   Kein flächiges Olivgrün mehr — Übergänge wieder schwarz-dunkel. */
+html[data-theme="dar-al-layl"]{
+  --layl-bg-deep:#030403!important;
+  --layl-bg-base:#060807!important;
+  --layl-bg-secondary:#090B0A!important;
+  --layl-bg-elevated:#0C0F0D!important;
+  --layl-bg-header:#0E110F!important;
+  --page-cover:#030403!important;
+  --page-cover-mid:#060807!important;
+  --outer-bg-flat:#050605!important;
+  --outer-bg:radial-gradient(circle at 12% 0%,rgba(168,139,79,.04),transparent 30%),radial-gradient(circle at 88% 10%,rgba(0,0,0,.42),transparent 36%),linear-gradient(180deg,#060807 0%,#040504 46%,#020302 100%)!important;
+  --cover-edge-bg:linear-gradient(180deg,#030403 0%,#060807 48%,rgba(3,4,3,0) 100%)!important;
+  --premium-bg:radial-gradient(circle at 14% 0%,rgba(168,139,79,.05),transparent 28%),radial-gradient(circle at 86% 10%,rgba(0,0,0,.30),transparent 28%),linear-gradient(168deg,#070908 0%,#040504 48%,#020302 100%)!important;
+  --premium-panel:linear-gradient(145deg,rgba(14,18,15,.98),rgba(8,10,9,.98))!important;
+  --bg:var(--layl-bg-base)!important;
+  --bg2:var(--layl-bg-elevated)!important;
+}
+html[data-theme="dar-al-layl"],
+html[data-theme="dar-al-layl"].is-standalone-pwa,
+html[data-theme="dar-al-layl"] body,
+html[data-theme="dar-al-layl"].is-standalone-pwa body{
+  background:var(--outer-bg)!important;
+  background-color:#030403!important;
+}
+html[data-theme="dar-al-layl"] .top-shell,
+html[data-theme="dar-al-layl"] .view,
+html[data-theme="dar-al-layl"] .theme-hero-shell{
+  background:transparent!important;
+}
+html[data-theme="dar-al-layl"] .header{
+  background:transparent!important;
+}
+/* Karten leicht angehoben, aber schwarz-dunkel — nicht olivgrün */
+html[data-theme="dar-al-layl"] .premium-surface,
+html[data-theme="dar-al-layl"] .post-card,
+html[data-theme="dar-al-layl"] .list-card,
+html[data-theme="dar-al-layl"] .info-card,
+html[data-theme="dar-al-layl"] .dua-card,
+html[data-theme="dar-al-layl"] .overview-panel,
+html[data-theme="dar-al-layl"] .folder-card{
+  background:linear-gradient(145deg,rgba(14,17,15,.96),rgba(7,9,8,.98))!important;
+}
+html[data-theme="dar-al-layl"] .bottom-nav,
+html[data-theme="dar-al-layl"] #bottomNav.bottom-nav{
+  background:rgba(6,8,7,.78)!important;
 }
 </style>
 

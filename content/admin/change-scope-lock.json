@@ -78,6 +78,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "dar-al-layl-black-depth-v594-2026-08-07",
+      "approvedBy": "user-explicit-layl-color-fix",
+      "reason": "Nutzer: Dār al-Layl hatte schwarz-dunkle Übergänge — jetzt komplett grün; Schwarz-Tiefe wiederherstellen, Live+Test",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "status-bar-edge-v593-2026-08-07",
       "approvedBy": "user-explicit-live-and-test",
       "reason": "Nutzer: Edge-to-edge oben wie Cursor — kein Schwarz-Schnitt; Live + Test; Statusleiste black-translucent",
