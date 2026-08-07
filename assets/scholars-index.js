@@ -1,6 +1,6 @@
 /**
- * DAR AL TAWḤID — Gelehrten-Index v502
- * Historische Tiefe: Jahre, Lehrer, Schüler, Werke; Schnellsuche unten; edles Duʿāʾ-Licht.
+ * DAR AL TAWḤID — Gelehrten-Index v504
+ * Historische Tiefe: Jahre, Lehrer, Schüler, Werke; Schnellauswahl unter Suche; kompakt v504.
  */
 (function (global) {
   'use strict';
@@ -357,16 +357,14 @@
     const roles = roleLine(s.roles);
     const life = s.lifespanLabel ? String(s.lifespanLabel) : '';
     const era = s.eraLabel ? String(s.eraLabel) : '';
-    const metaParts = [roles, contributionLabel(s.count)].filter(Boolean);
-    const meta = metaParts.join(' · ');
-    const sub = [life || era, meta].filter(Boolean).join(' · ');
+    const metaParts = [life || era, roles, contributionLabel(s.count)].filter(Boolean);
+    const sub = metaParts.join(' · ');
     const aria = `${s.displayName}, ${sub.replace(/ · /g, ', ')}, öffnen`;
     return `<button type="button" class="scholars-index__row" data-scholar-open="${esc(s.id)}" aria-label="${esc(aria)}">
       <span class="scholars-index__mono${s.primaryGroup === 'prophet' ? ' scholars-index__mono--prophet' : ''}" aria-hidden="true">${esc(s.monogram)}</span>
       <span class="scholars-index__copy">
         <span class="scholars-index__name">${esc(s.displayName)}</span>
-        ${life ? `<span class="scholars-index__life">${esc(life)}</span>` : ''}
-        <span class="scholars-index__roles">${esc(meta)}${era && !life ? ` · ${esc(era)}` : ''}</span>
+        <span class="scholars-index__sub">${esc(sub)}</span>
       </span>
       <span class="scholars-index__chev" aria-hidden="true">›</span>
     </button>`;
@@ -474,17 +472,37 @@
           <input id="scholarsSearchInput" class="scholars-index__search" type="search" placeholder="Name, Kuniyah oder Schreibweise" value="${esc(state.query)}" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-label="Gelehrte suchen">
           <button type="button" id="scholarsSearchClear" class="scholars-index__search-clear" aria-label="Suche löschen" ${state.query ? '' : 'hidden'}>×</button>
         </div>
+        <section class="scholars-index__quickpick" aria-label="Schnellauswahl Suche und Filter">
+          <div class="scholars-index__quickpick-head">
+            <h3>Schnellauswahl</h3>
+            <span>Generation · Zeitgenossen · Sortierung</span>
+          </div>
+          <div class="scholars-index__quickpick-grid">
+            <label class="scholars-index__pick-wrap">
+              <span class="scholars-index__pick-label">Generation</span>
+              <select id="scholarsFilterPick" class="scholars-index__pick" aria-label="Generation oder Rolle filtern">
+                ${FILTER_DEFS.map((f) => `<option value="${esc(f.id)}" ${state.filter === f.id ? 'selected' : ''}>${esc(f.label)}</option>`).join('')}
+              </select>
+            </label>
+            <label class="scholars-index__pick-wrap">
+              <span class="scholars-index__pick-label">Sortierung</span>
+              <select id="scholarsSortPick" class="scholars-index__pick" aria-label="Liste sortieren">
+                ${SORT_OPTIONS.map((o) => `<option value="${esc(o.id)}" ${state.sort === o.id ? 'selected' : ''}>${esc(o.label)}</option>`).join('')}
+              </select>
+            </label>
+          </div>
+          <div class="scholars-index__filters" role="toolbar" aria-label="Schnellfilter">
+            ${filters
+              .map(
+                (f) =>
+                  `<button type="button" class="scholars-index__chip" data-scholars-filter="${esc(f.id)}" aria-selected="${state.filter === f.id ? 'true' : 'false'}">${esc(f.label)}</button>`
+              )
+              .join('')}
+          </div>
+        </section>
         <div class="scholars-index__meta-row">
           <span id="scholarsResultCount" class="scholars-index__count">${filtered.length} Treffer</span>
           <button type="button" id="scholarsSortBtn" class="scholars-index__sort-btn" aria-haspopup="dialog" aria-controls="scholarsSortSheet">${esc(sortLabel)}</button>
-        </div>
-        <div class="scholars-index__filters" role="toolbar" aria-label="Gelehrten filtern">
-          ${filters
-            .map(
-              (f) =>
-                `<button type="button" class="scholars-index__chip" data-scholars-filter="${esc(f.id)}" aria-selected="${state.filter === f.id ? 'true' : 'false'}">${esc(f.label)}</button>`
-            )
-            .join('')}
         </div>
         ${
           alphaLetters.length
@@ -499,14 +517,6 @@
       </div>
       ${recentHtml}
       ${bodyHtml}
-      <div class="scholars-index__dock" role="search">
-        <label class="scholars-index__dock-label" for="scholarsDockSearch">Schnellsuche</label>
-        <div class="scholars-index__dock-wrap">
-          <svg class="scholars-index__dock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-          <input id="scholarsDockSearch" class="scholars-index__dock-input" type="search" placeholder="Name, Lehrer, Schüler, Werk oder Jahr…" value="${esc(state.query)}" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-label="Gelehrte schnell suchen">
-          <button type="button" id="scholarsDockClear" class="scholars-index__dock-clear" aria-label="Schnellsuche löschen" ${state.query ? '' : 'hidden'}>×</button>
-        </div>
-      </div>
       ${renderSortSheet(state, esc)}
     </section>`;
   }
@@ -599,7 +609,6 @@
     boundRoot = root;
 
     const search = root.querySelector('#scholarsSearchInput');
-    const dock = root.querySelector('#scholarsDockSearch');
     const syncQuery = (value, focusId) => {
       clearTimeout(searchTimer);
       searchTimer = setTimeout(() => {
@@ -619,32 +628,27 @@
     };
     if (search) {
       search.oninput = () => {
-        if (dock) dock.value = search.value;
         syncQuery(search.value || '', '#scholarsSearchInput');
-      };
-    }
-    if (dock) {
-      dock.oninput = () => {
-        if (search) search.value = dock.value;
-        syncQuery(dock.value || '', '#scholarsDockSearch');
       };
     }
     const clear = root.querySelector('#scholarsSearchClear');
     if (clear) {
       clear.onclick = () => {
         if (search) search.value = '';
-        if (dock) dock.value = '';
         rerender(root, catalog, esc, { query: '' });
         search?.focus();
       };
     }
-    const dockClear = root.querySelector('#scholarsDockClear');
-    if (dockClear) {
-      dockClear.onclick = () => {
-        if (search) search.value = '';
-        if (dock) dock.value = '';
-        rerender(root, catalog, esc, { query: '' });
-        dock?.focus();
+    const filterPick = root.querySelector('#scholarsFilterPick');
+    if (filterPick) {
+      filterPick.onchange = () => rerender(root, catalog, esc, { filter: filterPick.value || 'all' });
+    }
+    const sortPick = root.querySelector('#scholarsSortPick');
+    if (sortPick) {
+      sortPick.onchange = () => {
+        const sort = sortPick.value || 'generation';
+        setJson(SORT_KEY, sort);
+        rerender(root, catalog, esc, { sort });
       };
     }
     root.querySelectorAll('[data-scholars-filter]').forEach((btn) => {
