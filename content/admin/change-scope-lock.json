@@ -78,6 +78,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "visitor-quellenbibliothek-live-v596-2026-08-07",
+      "approvedBy": "user-explicit-live-push",
+      "reason": "Nutzer: Besucher Mehr — altes Bücher/Ordner ersetzen durch Quellenbibliothek, sofort live pushen",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/publish-visitor-canonical-library.js",
+        "assets/library/canonical-source-library.js",
+        "assets/library/covers/qsrc/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "propheten-compact-noble-v595-2026-08-07",
       "approvedBy": "user-explicit-propheten-compact",
       "reason": "Nutzer: Propheten-Kachel Chaos/zu groß — kompakt wie andere Zeilen, edle Kanten/Licht behalten; nur Test",
