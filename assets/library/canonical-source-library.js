@@ -1241,30 +1241,11 @@
     });
   }
 
-  function bindBibliothekAddon() {
-    const wrap = document.querySelector(".lib-canonical-wrap");
-    if (!wrap) return;
-    wrap.querySelectorAll("[data-nav]").forEach((el) => {
-      if (el.dataset.libCanonicalNavBound === "1") return;
-      el.dataset.libCanonicalNavBound = "1";
-      el.addEventListener("click", (ev) => {
-        ev.preventDefault();
-        ev.stopPropagation();
-        const view = el.getAttribute("data-nav");
-        const value = el.getAttribute("data-value") || "";
-        if (!view || typeof global.navigate !== "function") return;
-        global.__smoothNav = true;
-        global.navigate(view, value);
-      });
-      if (typeof global.bindNavActivation === "function") global.bindNavActivation(el);
-    });
-  }
-
   function renderBibliothekAddon() {
     if (!isReady() || !state.books.length) return "";
     const preview = state.books.slice(0, 3).map((book) => {
       const accent = categoryAccent(book.category);
-      return `<button type="button" class="lib-canonical-card qsrc-card qsrc-card-compact" data-nav="quellen-book" data-value="${esc(book.id)}" aria-label="${esc(book.title)} öffnen" style="grid-template-columns:46px 1fr;--qsrc-accent-border:${accent.border};--qsrc-accent-title:${accent.title};--qsrc-accent-chip:${accent.chip}">
+      return `<article class="lib-canonical-card qsrc-card" style="cursor:default;grid-template-columns:46px 1fr;--qsrc-accent-border:${accent.border};--qsrc-accent-title:${accent.title};--qsrc-accent-chip:${accent.chip}">
       ${coverHtml(book)}
       <span class="qsrc-card-body">
       <span class="qsrc-card-kicker">${esc(book.category || "Geprüftes Werk")}</span>
@@ -1272,7 +1253,7 @@
       <span class="qsrc-card-author"><span class="qsrc-label">Autor</span><span class="qsrc-author-name">${esc(book.author)}</span></span>
       <span class="qsrc-card-foot"><span class="qsrc-card-badge">${Number(book.postCount || 0)} Beiträge</span></span>
       </span>
-    </button>`;
+    </article>`;
     }).join("");
 
     return `<section class="lib-canonical-wrap" aria-label="Quellenbibliothek">
@@ -1346,7 +1327,6 @@
     renderRoute,
     bind,
     getBookCount: () => state.books.length,
-    getScholarCount: () => state.scholars.length,
-    bindBibliothekAddon
+    getScholarCount: () => state.scholars.length
   };
 })(window);

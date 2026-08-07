@@ -10,7 +10,7 @@ const DEST_JS = path.join(ROOT, "assets", "library", "canonical-source-library.j
 const SOURCE_COVERS = path.join(ROOT, "test", "assets", "library", "covers", "qsrc");
 const DEST_COVERS = path.join(ROOT, "assets", "library", "covers", "qsrc");
 const SCRIPT_SRC = "/assets/library/canonical-source-library.js";
-const SCRIPT_TAG = `<script src="${SCRIPT_SRC}?v=1"></script>`;
+const SCRIPT_TAG = `<script src="${SCRIPT_SRC}?v=18"></script>`;
 
 function copyDir(src, dest) {
   if (!fs.existsSync(src)) return 0;
@@ -33,7 +33,14 @@ function replaceOnce(html, search, replacement, label) {
 
 function patchIndex() {
   let html = fs.readFileSync(INDEX, "utf8");
-  if (html.includes('quellenbibliothek:"books"') && html.includes("function ensureCanonicalSourceLibrary()")) {
+  // Nur überspringen, wenn Besucher-App wirklich auf Quellenbibliothek steht (kein Test-Gate / kein altes Bücher).
+  const visitorReady =
+    html.includes('function renderBooks(){if(window.DARCanonicalSourceLibrary)')
+    && html.includes('title:"Quellenbibliothek"')
+    && html.includes('/assets/library/canonical-source-library.js')
+    && !html.includes('if(typeof IS_TEST_PATH==="undefined"||!IS_TEST_PATH)return Promise.resolve(null)')
+    && !html.includes('Werke und Quellenordner');
+  if (visitorReady) {
     return;
   }
 
@@ -90,7 +97,7 @@ function patchIndex() {
       return;
     }
     const s=document.createElement("script");
-    s.src="${SCRIPT_SRC}?v=1";
+    s.src="${SCRIPT_SRC}?v=18";
     s.defer=true;
     s.onload=()=>{
       if(!window.DARCanonicalSourceLibrary){reject(new Error("canonical source library missing"));return}
