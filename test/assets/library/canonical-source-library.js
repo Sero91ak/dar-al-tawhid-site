@@ -2,8 +2,17 @@
 (function attachCanonicalSourceLibrary(global) {
   "use strict";
 
-  const BOOKS_URL = "/data/books-library.json";
-  const SCHOLARS_URL = "/data/scholars-library.json";
+  function dataUrl(file) {
+    try {
+      if (location.pathname.indexOf("/test/") === 0 || location.pathname === "/test") {
+        // Test teilt die kanonischen Daten mit Live-Root, falls kein Test-Spiegel existiert.
+        return "/data/" + file;
+      }
+    } catch (e) {}
+    return "/data/" + file;
+  }
+  const BOOKS_URL = dataUrl("books-library.json");
+  const SCHOLARS_URL = dataUrl("scholars-library.json");
   const HIDDEN_PLACEHOLDERS = new Set([
     "autor nicht verifiziert",
     "autor unbekannt",
@@ -1326,7 +1335,19 @@
     renderScholarDetail,
     renderRoute,
     bind,
-    getBookCount: () => state.books.length,
+    getBookCount: () => (state.status === "ready" ? state.books.length : Math.max(state.books.length, 0)),
+    getReadyBookCount: () => (state.status === "ready" ? state.books.length : null),
     getScholarCount: () => state.scholars.length
   };
+
+  // Sofort laden — nicht auf DARLibraryApp warten (Besucher-Mehr braucht Zähler/Liste).
+  ensureModule().then(() => {
+    try {
+      const view = (global.currentRoute && global.currentRoute.view) || "";
+      if (typeof global.render === "function" && ["more","home","books","quellen-book","quellen-scholar","bibliothek"].includes(view)) {
+        global.render();
+      }
+    } catch (e) {}
+  }).catch(() => {});
+
 })(window);
