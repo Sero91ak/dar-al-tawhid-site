@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1784844487885 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v497";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v498";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -1474,6 +1474,9 @@ html.is-standalone-pwa{background:var(--page-cover)}
 /* DAR AL TAWḤID Elegant Theme: dunkelgrün, antik-gold, creme, kurvige Akzente */
 :root{
   --bg:#050706;--bg2:#0a100c;--panel:#10170f;--card:#121b13;
+  --page-cover:#050706;--page-cover-mid:#0a100c;
+  --outer-bg-flat:#050706;
+  --premium-bg:radial-gradient(circle at 10% 0%,rgba(214,183,106,.13),transparent 34%),radial-gradient(circle at 90% 10%,rgba(17,54,37,.24),transparent 35%),radial-gradient(circle at 50% 45%,rgba(255,245,210,.035),transparent 42%),linear-gradient(180deg,#050706 0%,#0a100c 42%,#040504 100%);
   --gold:#c8a85b;--gold2:#f0d98f;--bronze:#9a7435;--cream:#f7efd6;
   --text:#f4ebd1;--muted:#c7bda3;--muted2:#9c927b;
   --line:rgba(214,183,106,.34);--line2:rgba(214,183,106,.18);
@@ -9496,7 +9499,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/premium-feed-app.js?v=91" defer></script>
 <script src="/assets/scholars-index.js?v=496" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
-<script src="/assets/adaptive-layout.js?v=4" defer></script>
+<script src="/assets/adaptive-layout.js?v=5" defer></script>
 <link rel="preload" href="/assets/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11047,7 +11050,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/books-library.css?v=2">
 <link rel="stylesheet" href="/assets/dar-account-visibility.css?v=11">
 <link rel="stylesheet" href="/assets/scholars-index.css?v=494">
-<link rel="stylesheet" href="/assets/adaptive-layout.css?v=4">
+<link rel="stylesheet" href="/assets/adaptive-layout.css?v=5">
 <style id="typography-compact-fix-v310">
 /* Finale Typografie-Korrektur — gewinnt gegen Home-Compact-Overrides */
 .section-head h3,
@@ -14868,6 +14871,84 @@ html[data-theme] #bottomNav.bottom-nav{
   }
 }
 </style>
+<style id="app-frame-color-restore-v498">
+/* v498 · Seitenverhältnis edge-to-edge; Klassisch Dunkel Farbübergang wie 4.8. */
+:root,
+html[data-theme="dark"]{
+  --page-cover:#050706!important;
+  --page-cover-mid:#0a100c!important;
+  --outer-bg-flat:#050706!important;
+  --outer-bg:radial-gradient(circle at 10% 0%,rgba(214,183,106,.13),transparent 34%),radial-gradient(circle at 90% 10%,rgba(17,54,37,.24),transparent 35%),radial-gradient(circle at 50% 45%,rgba(255,245,210,.035),transparent 42%),linear-gradient(180deg,#050706 0%,#0a100c 42%,#040504 100%)!important;
+  --premium-bg:radial-gradient(circle at 10% 0%,rgba(214,183,106,.13),transparent 34%),radial-gradient(circle at 90% 10%,rgba(17,54,37,.24),transparent 35%),radial-gradient(circle at 50% 45%,rgba(255,245,210,.035),transparent 42%),linear-gradient(180deg,#050706 0%,#0a100c 42%,#040504 100%)!important;
+  --cover-edge-bg:linear-gradient(180deg,#050706 0%,#0a100c 46%,rgba(5,7,6,0) 100%)!important;
+  --cover-panel-bg:radial-gradient(circle at 18% 0%,rgba(214,183,106,.10),transparent 42%),radial-gradient(circle at 82% 12%,rgba(17,54,37,.16),transparent 40%),linear-gradient(145deg,rgba(16,23,15,.94),rgba(5,7,6,.92))!important;
+  --cover-panel-border:rgba(214,183,106,.28)!important;
+  --theme-page-bg:#050706!important;
+  --theme-hero-blend-top:rgba(5,7,6,1)!important;
+  --theme-hero-blend-bottom:rgba(5,7,6,0)!important;
+}
+html:not([data-theme]),
+html[data-theme="dark"],
+html[data-theme="dark"].is-standalone-pwa{
+  background:radial-gradient(circle at 10% 0%,rgba(214,183,106,.13),transparent 34%),radial-gradient(circle at 90% 10%,rgba(17,54,37,.24),transparent 35%),radial-gradient(circle at 50% 45%,rgba(255,245,210,.035),transparent 42%),linear-gradient(180deg,#050706 0%,#0a100c 42%,#040504 100%)!important;
+  background-color:#050706!important;
+}
+html:not([data-theme]) body,
+html[data-theme="dark"] body,
+html[data-theme="dark"].is-standalone-pwa body{
+  background:radial-gradient(circle at 10% 0%,rgba(214,183,106,.13),transparent 34%),radial-gradient(circle at 90% 10%,rgba(17,54,37,.24),transparent 35%),radial-gradient(circle at 50% 45%,rgba(255,245,210,.035),transparent 42%),linear-gradient(180deg,#050706 0%,#0a100c 42%,#040504 100%)!important;
+  background-color:#050706!important;
+}
+/* Alle Themes: kein Kasten-Rahmen / keine Seitenränder */
+html[data-theme] body,
+html[data-theme].is-standalone-pwa body{
+  padding-left:0!important;
+  padding-right:0!important;
+}
+html[data-theme] .app{
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+html[data-theme] .app:after{display:none!important}
+html[data-theme] .top-shell,
+html[data-theme] .view{
+  border:0!important;
+  border-left:0!important;
+  border-right:0!important;
+  border-bottom:0!important;
+  border-top:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+html[data-theme] .top-shell:after{display:none!important}
+html[data-layout] .app{
+  padding-left:0!important;
+  padding-right:0!important;
+  max-width:100%!important;
+  width:100%!important;
+  margin:0!important;
+}
+@media(max-width:700px){
+  html[data-theme] body,
+  html[data-theme] body.has-bottom-nav,
+  html[data-theme].is-standalone-pwa body{
+    padding-left:0!important;
+    padding-right:0!important;
+  }
+  html[data-theme] .top-shell,
+  html[data-theme] .view{
+    border:0!important;
+    border-radius:0!important;
+    margin-top:0!important;
+  }
+}
+</style>
 <style id="live-dua-scholars-oval-v486">
 /* v485 live · Ovales Katalog-Licht: Duʿāʾ + Gelehrte */
 body.is-catalog-route,
@@ -15850,7 +15931,7 @@ function isFormEditingNow(){
 document.addEventListener("pointerdown",e=>{if(isEditableTarget(e.target))lastFormPointerAt=Date.now()},{capture:true,passive:true});
 const THEME_KEY="darThemeV1";
 const THEME_SETTINGS_KEY="darThemeSettingsV1";
-const THEME_META={dark:{label:"Klassisch Dunkel",color:"#080806",status:"black",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"default",asset:"light"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"default",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black",asset:"royal"},bordeaux:{label:"Bordeaux Royal Premium",color:"#140B0C",status:"black",asset:"bordeaux"},"dar-al-layl":{label:"Dār al-Layl",color:"#080B0A",status:"black",asset:"dar-al-layl"}};
+const THEME_META={dark:{label:"Klassisch Dunkel",color:"#050706",status:"black",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"default",asset:"light"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"default",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black",asset:"royal"},bordeaux:{label:"Bordeaux Royal Premium",color:"#140B0C",status:"black",asset:"bordeaux"},"dar-al-layl":{label:"Dār al-Layl",color:"#080B0A",status:"black",asset:"dar-al-layl"}};
 function normalizeTheme(theme){if(theme==="emerald"||theme==="smaragd"||theme==="aurora")return"dark";return theme==="light"||theme==="soft"||theme==="royal"||theme==="bordeaux"||theme==="dar-al-layl"?theme:"dark"}
 function getTheme(){try{return normalizeTheme(localStorage.getItem(THEME_KEY))}catch(e){return"dark"}}
 function applyTheme(theme){const next=normalizeTheme(theme);const info=THEME_META[next]||THEME_META.dark;const root=document.documentElement;root.classList.add("theme-switching");root.style.backgroundColor=info.color;root.setAttribute("data-theme",next);root.setAttribute("data-theme-name",info.label);try{localStorage.setItem(THEME_KEY,next);localStorage.setItem(THEME_SETTINGS_KEY,JSON.stringify({theme:next,label:info.label,assetVariant:info.asset,updatedAt:Date.now()}))}catch(e){}const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=info.color;const tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=info.color;const sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content=info.status;const logo=document.querySelector(".logo");if(logo){logo.title="DAR AL TAWḤID";if(!logo.getAttribute("data-logo-ready")){logo.setAttribute("data-logo-ready","1");logo.onerror=function(){this.onerror=null;this.src="/watermark-my-logo-full.png?v=fallback"};if(!logo.getAttribute("src")||logo.getAttribute("src").indexOf("watermark-my-logo")<0)logo.src="/watermark-my-logo-full.png"}}document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.classList.toggle("is-active",btn.getAttribute("data-theme-select")===next);btn.setAttribute("aria-pressed",btn.getAttribute("data-theme-select")===next?"true":"false")});try{window.dispatchEvent(new CustomEvent("dar-theme-change",{detail:{theme:next,...info}}))}catch(e){}requestAnimationFrame(()=>requestAnimationFrame(()=>{root.classList.remove("theme-switching");if(next!=="bordeaux")root.style.backgroundColor=""}))}
@@ -21002,7 +21083,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v497";
+const APP_BUILD_ID="app-shell-v498";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
