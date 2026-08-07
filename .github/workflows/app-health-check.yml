@@ -25,6 +25,9 @@ jobs:
       - name: Header prayer display guard (Maghrib/Zeit im Header)
         run: node scripts/header-prayer-display-guard.js
 
+      - name: Qurʾān Tafsīr nav guard (kein Schwarzfeld/Hänger)
+        run: node scripts/quran-tafsir-nav-guard.js
+
       - name: App update recovery guard (Update-Banner nur bei echtem Fehler)
         run: node scripts/app-update-recovery-guard.js
 
