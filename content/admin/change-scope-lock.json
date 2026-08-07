@@ -41,7 +41,8 @@
     "assets/scholars-index.css",
     "data/scholar-index-meta.json",
     "data/scholar-history-curated.json",
-    "version.json"
+    "version.json",
+    ".github/workflows/cloudflare-pages-deploy.yml"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -80,7 +81,8 @@
         "content/admin/change-scope-lock.json",
         "content/admin/prayer-push-status.json",
         ".github/workflows/purge-live-cache.yml",
-        ".github/workflows/cloudflare-pages-deploy.yml"
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "content/updates/daily.json"
       ],
       "expiresAt": "2026-09-30T23:59:00.000Z"
     },
