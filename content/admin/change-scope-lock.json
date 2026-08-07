@@ -78,6 +78,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "propheten-compact-noble-v595-2026-08-07",
+      "approvedBy": "user-explicit-propheten-compact",
+      "reason": "Nutzer: Propheten-Kachel Chaos/zu groß — kompakt wie andere Zeilen, edle Kanten/Licht behalten; nur Test",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/assets/prophets/prophets.css",
+        "test/assets/prophets/prophets.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "dar-al-layl-black-depth-v594-2026-08-07",
       "approvedBy": "user-explicit-layl-color-fix",
       "reason": "Nutzer: Dār al-Layl hatte schwarz-dunkle Übergänge — jetzt komplett grün; Schwarz-Tiefe wiederherstellen, Live+Test",

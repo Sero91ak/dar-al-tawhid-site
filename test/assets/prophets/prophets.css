@@ -19,68 +19,113 @@
 .prophets-root *{box-sizing:border-box}
 .prophets-root{container-type:inline-size;container-name:prophets}
 
-/* —— Mehr: Premium-Einstieg —— */
-.prophets-spotlight{
-  display:block;width:100%;text-align:left;cursor:pointer;
-  position:relative;overflow:hidden;
-  margin:0 0 16px;padding:18px 18px 16px;
-  border:1px solid var(--p-line);
-  border-radius:22px;
+/* —— Mehr: kompakter Premium-Einstieg (gleiche Zeilenhöhe wie Feed u. a.) —— */
+button.prophets-spotlight.more-feature-row,
+.prophets-spotlight.more-feature-row{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:40px minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:10px!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-height:62px!important;
+  margin:0!important;
+  padding:10px 12px 10px 10px!important;
+  text-align:left!important;
+  cursor:pointer;
+  overflow:hidden!important;
+  border:1px solid color-mix(in srgb,var(--gold2) 28%,var(--line2,var(--line)))!important;
+  border-radius:17px!important;
   background:
-    radial-gradient(ellipse 120% 90% at 12% 0%,var(--p-wash-strong),transparent 55%),
-    linear-gradient(165deg,color-mix(in srgb,var(--gold2) 6%,var(--card,var(--bg))) 0%,var(--bg) 78%);
-  color:inherit;font:inherit;
-  box-shadow:var(--p-glow);
+    radial-gradient(ellipse 90% 140% at 8% 0%,color-mix(in srgb,var(--gold2) 14%,transparent),transparent 58%),
+    radial-gradient(ellipse 70% 120% at 100% 100%,color-mix(in srgb,var(--gold2) 6%,transparent),transparent 55%),
+    linear-gradient(145deg,color-mix(in srgb,var(--gold2) 5%,var(--card,var(--bg))) 0%,var(--card,var(--bg)) 72%)!important;
+  color:inherit;
+  font:inherit;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb,var(--gold2) 22%,transparent),
+    inset 0 -1px 0 color-mix(in srgb,var(--gold2) 6%,transparent),
+    0 0 0 1px color-mix(in srgb,var(--gold2) 8%,transparent),
+    0 8px 20px color-mix(in srgb,var(--gold2) 6%,transparent)!important;
   transition:border-color .18s ease,box-shadow .18s ease,transform .12s ease;
 }
-.prophets-spotlight::before{
-  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
-  background:linear-gradient(180deg,color-mix(in srgb,var(--gold2) 8%,transparent),transparent 55%);
-  opacity:.85;
+/* Oberes Lichtband */
+button.prophets-spotlight.more-feature-row::before,
+.prophets-spotlight.more-feature-row::before{
+  content:"";
+  position:absolute;left:10%;right:10%;top:0;height:1px;pointer-events:none;z-index:2;
+  background:radial-gradient(ellipse 70% 100% at 50% 0%,color-mix(in srgb,var(--gold2) 70%,transparent),transparent 75%);
+  opacity:.95;border-radius:0;
+}
+/* Linke Goldschiene */
+button.prophets-spotlight.more-feature-row::after,
+.prophets-spotlight.more-feature-row::after{
+  content:"";
+  position:absolute;left:3px;top:18%;bottom:18%;width:2px;border-radius:2px;pointer-events:none;z-index:2;
+  background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--gold2) 62%,transparent),transparent);
+  opacity:.9;
 }
 .prophets-spotlight:hover,.prophets-spotlight:focus-visible{
-  border-color:var(--p-line-strong);
-  box-shadow:0 0 0 1px color-mix(in srgb,var(--gold2) 22%,transparent),0 14px 34px color-mix(in srgb,var(--gold2) 12%,transparent);
+  border-color:color-mix(in srgb,var(--gold2) 48%,var(--line2,var(--line)))!important;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb,var(--gold2) 30%,transparent),
+    inset 0 -1px 0 color-mix(in srgb,var(--gold2) 8%,transparent),
+    0 0 0 1px color-mix(in srgb,var(--gold2) 18%,transparent),
+    0 12px 26px color-mix(in srgb,var(--gold2) 10%,transparent)!important;
   outline:none;
 }
 .prophets-spotlight:active{transform:translateY(1px)}
-.prophets-spotlight__eyebrow{
+.prophets-spotlight__icon{
   position:relative;z-index:1;
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:10px;font-weight:800;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--muted);margin:0 0 10px;
+  width:40px!important;height:40px!important;
+  border-radius:13px!important;
+  border:1px solid color-mix(in srgb,var(--gold2) 26%,transparent)!important;
+  background:
+    radial-gradient(circle at 30% 22%,color-mix(in srgb,var(--gold2) 22%,transparent),transparent 62%),
+    color-mix(in srgb,var(--gold2) 6%,var(--card,rgba(255,255,255,.05)))!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--gold2) 18%,transparent)!important;
+  color:color-mix(in srgb,var(--gold2) 82%,var(--text))!important;
+  font-size:17px!important;
 }
-.prophets-spotlight__title{
-  position:relative;z-index:1;
-  margin:0;font-family:var(--serif);font-size:clamp(1.35rem,4.2vw,1.7rem);
-  font-weight:800;letter-spacing:.06em;color:var(--cream,var(--text));line-height:1.08;
+.prophets-spotlight__body{
+  position:relative;z-index:1;min-width:0;
+  display:flex;flex-direction:column;justify-content:center;gap:0;
 }
-.prophets-spotlight__ar{
-  position:relative;z-index:1;
-  margin:6px 0 0;font-size:clamp(1.4rem,4vw,1.7rem);font-weight:700;
+.prophets-spotlight.more-feature-row h4{
+  font-family:var(--serif)!important;
+  font-size:15px!important;
+  font-weight:750!important;
+  letter-spacing:.03em!important;
+  line-height:1.15!important;
+  margin:0!important;
+  color:var(--cream,var(--text))!important;
+}
+.prophets-spotlight.more-feature-row p{
+  margin:3px 0 0!important;
+  font-size:11px!important;
+  line-height:1.28!important;
+  font-weight:650!important;
+  color:var(--muted)!important;
+  display:-webkit-box!important;
+  -webkit-line-clamp:2!important;
+  -webkit-box-orient:vertical!important;
+  overflow:hidden!important;
+}
+.prophets-spotlight__ar-inline{
   color:color-mix(in srgb,var(--gold2) 78%,var(--text));
-  direction:rtl;line-height:1.35;
+  font-weight:750;
+  letter-spacing:.01em;
 }
-.prophets-spotlight__row{
-  position:relative;z-index:1;
-  display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px;margin-top:8px;
+.prophets-spotlight__edge{
+  position:absolute;left:14%;right:14%;bottom:5px;height:1px;pointer-events:none;z-index:2;
+  background:radial-gradient(ellipse 68% 100% at 50% 50%,color-mix(in srgb,var(--gold2) 42%,transparent),transparent 72%);
+  opacity:.7;
 }
-.prophets-spotlight__meta{
-  margin:0;font-size:12px;font-weight:650;color:var(--muted);line-height:1.45;
-}
-.prophets-spotlight__cta{
-  position:relative;z-index:1;
-  display:inline-flex;align-items:center;gap:6px;margin-top:14px;
-  font-size:12.5px;font-weight:850;color:var(--cream,var(--text));
-}
-.prophets-spotlight__cta::after{
-  content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;
-  background:var(--p-rule-soft);opacity:.9;
-}
-.prophets-spotlight__ornament{
-  position:relative;z-index:1;
-  display:block;height:1px;margin:14px 0 0;
-  background:var(--p-rule);opacity:.75;
+.prophets-spotlight .feature-badge{
+  border-color:color-mix(in srgb,var(--gold2) 34%,transparent)!important;
+  background:color-mix(in srgb,var(--gold2) 10%,transparent)!important;
+  color:color-mix(in srgb,var(--gold2) 78%,var(--text))!important;
 }
 
 /* —— Shell / master-detail —— */

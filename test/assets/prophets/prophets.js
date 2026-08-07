@@ -201,19 +201,18 @@
     }
   }
 
-  /* —— Spotlight in Mehr —— */
+  /* —— Spotlight in Mehr (kompakt wie andere Feature-Zeilen, edle Kante/Licht) —— */
   function renderSpotlight() {
     if (!isTest()) return "";
     return (
-      '<button type="button" class="prophets-spotlight" data-nav="propheten" aria-label="Die Propheten öffnen">' +
-      '<span class="prophets-spotlight__eyebrow"><span aria-hidden="true">✦</span> Lernen &amp; Wissen</span>' +
-      '<div class="prophets-spotlight__title">DIE PROPHETEN</div>' +
-      '<div class="prophets-spotlight__row">' +
-      '<div class="prophets-spotlight__ar" lang="ar" dir="rtl">الأنبياء</div>' +
-      '<p class="prophets-spotlight__meta">Qurʾān · Sunnah · authentische Überlieferungen</p>' +
-      "</div>" +
-      '<span class="prophets-spotlight__cta">Entdecken <span aria-hidden="true">›</span></span>' +
-      '<span class="prophets-spotlight__ornament" aria-hidden="true"></span>' +
+      '<button type="button" class="prophets-spotlight more-feature-row" data-nav="propheten" data-feature-search="die propheten anbiya quran sunnah ueberlieferungen lernen wissen musa" aria-label="Die Propheten öffnen">' +
+      '<span class="feature-icon prophets-spotlight__icon" aria-hidden="true">✦</span>' +
+      '<span class="prophets-spotlight__body">' +
+      "<h4>Die Propheten <span class=\"feature-badge\">Wissen</span></h4>" +
+      '<p><span class="prophets-spotlight__ar-inline" lang="ar" dir="rtl">الأنبياء</span>' +
+      " · Qurʾān · Sunnah · authentische Überlieferungen</p>" +
+      "</span>" +
+      '<span class="prophets-spotlight__edge" aria-hidden="true"></span>' +
       "</button>"
     );
   }
