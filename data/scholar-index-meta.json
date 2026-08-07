@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generatedAt": "2026-08-06T21:06:41.831Z",
+  "generatedAt": "2026-08-07T09:01:46.000Z",
   "groups": {
     "prophet": {
       "filterLabel": "Prophet",
@@ -110,15 +110,19 @@
           "name": "Sufyān ibn ʿUyaynah"
         },
         {
-          "id": "s:abdarrahmanibnmahdi",
-          "name": "ʿAbd ar-Raḥmān ibn Mahdī"
-        },
-        {
           "id": "s:yahyabmain",
           "name": "Yaḥyā ibn Maʿīn"
+        },
+        {
+          "id": "s:abdarrahmanibnmahdi",
+          "name": "ʿAbd ar-Raḥmān ibn Mahdī"
         }
       ],
       "students": [
+        {
+          "id": "s:abuzurah",
+          "name": "Abū Zurʿah"
+        },
         {
           "id": "al-bukhari",
           "name": "al-Bukhārī (traf ihn / Überlieferungsnetz)"
@@ -126,6 +130,10 @@
         {
           "id": "s:ishaqibnrahawayh",
           "name": "Isḥāq ibn Rāhawayh (Peer/Austausch)"
+        },
+        {
+          "id": "s:harbalkirmani",
+          "name": "Ḥarb al-Kirmānī"
         }
       ],
       "works": [
@@ -161,36 +169,136 @@
       "teachers": [],
       "students": [
         {
+          "id": "s:abdullahibnamr",
+          "name": "Abdullah ibn Amr"
+        },
+        {
+          "id": "s:abuaddarda",
+          "name": "Abū ad-Dardāʾ"
+        },
+        {
+          "id": "s:abudharr",
+          "name": "Abū Dharr"
+        },
+        {
           "id": "abu-hurayrah",
           "name": "Abū Hurayrah"
         },
         {
-          "id": "abdullah-ibn-masud",
-          "name": "ʿAbdullāh ibn Masʿūd"
+          "id": "s:abumasudalansari",
+          "name": "Abū Masʿūd al-Anṣārī"
         },
         {
-          "id": "ibn-abbas",
-          "name": "Ibn ʿAbbās"
+          "id": "s:abusaidalkhudri",
+          "name": "Abū Saʿīd al-Khudrī"
+        },
+        {
+          "id": "s:abushurayh",
+          "name": "Abū Shurayḥ"
+        },
+        {
+          "id": "s:abuumamahalbahili",
+          "name": "Abū Umāmah al-Bāhilī"
         },
         {
           "id": "anas-b-malik",
           "name": "Anas ibn Mālik"
         },
         {
-          "id": "s:aishah",
-          "name": "ʿĀʾishah"
+          "id": "s:ibnmasud",
+          "name": "Ibn Masʿūd"
+        },
+        {
+          "id": "ibn-abbas",
+          "name": "Ibn ʿAbbās"
+        },
+        {
+          "id": "s:ibnumar",
+          "name": "Ibn ʿUmar"
+        },
+        {
+          "id": "s:jabirbabdillah",
+          "name": "Jābir b. ʿAbdillāh"
+        },
+        {
+          "id": "s:sahlbsad",
+          "name": "Sahl b. Saʿd"
+        },
+        {
+          "id": "s:salmanalfarisi",
+          "name": "Salmān al-Fārisī"
+        },
+        {
+          "id": "s:sadibnabiwaqqas",
+          "name": "Saʿd ibn Abī Waqqāṣ رضي الله عنه"
+        },
+        {
+          "id": "s:ubayyibnkab",
+          "name": "Ubayy ibn Kaʿb"
+        },
+        {
+          "id": "s:ummsalamah",
+          "name": "Umm Salamah"
+        },
+        {
+          "id": "s:abdullahbamr",
+          "name": "ʿAbdullāh b. ʿAmr"
+        },
+        {
+          "id": "abdullah-ibn-masud",
+          "name": "ʿAbdullāh ibn Masʿūd"
+        },
+        {
+          "id": "s:abdullahibnumar",
+          "name": "ʿAbdullāh ibn ʿUmar"
         },
         {
           "id": "s:aliibnabitalib",
           "name": "ʿAlī ibn Abī Ṭālib"
         },
         {
+          "id": "s:amrbshuayb",
+          "name": "ʿAmr b. Shuʿayb"
+        },
+        {
+          "id": "s:amribnabasahassulami",
+          "name": "ʿAmr ibn ʿAbasah as-Sulamī"
+        },
+        {
+          "id": "s:imranbhusayn",
+          "name": "ʿImrān b. Ḥuṣayn"
+        },
+        {
+          "id": "s:ubadahbassamit",
+          "name": "ʿUbādah b. aṣ-Ṣāmit"
+        },
+        {
           "id": "s:umarbalhattab",
+          "name": "ʿUmar ibn al-Khaṭṭāb"
+        },
+        {
+          "id": "s:umaribnalkhattab",
           "name": "ʿUmar ibn al-Khaṭṭāb"
         },
         {
           "id": "s:uthmanbaffan",
           "name": "ʿUthmān ibn ʿAffān"
+        },
+        {
+          "id": "s:aishah",
+          "name": "ʿĀʾishah"
+        },
+        {
+          "id": "s:aishahbintabibakr",
+          "name": "ʿĀʾishah bint Abī Bakr"
+        },
+        {
+          "id": "s:hudhayfahibnalyaman",
+          "name": "Ḥudhayfah ibn al-Yamān"
+        },
+        {
+          "id": "s:hudayfahibnalyaman",
+          "name": "Ḥuḏayfah ibn al-Yamān"
         }
       ],
       "works": []
@@ -243,26 +351,26 @@
       "bio": "Imām von Syrien; früher Madhhab. Bedeutender Faqīh und Muḥaddith der Küstenregion (Beirut).",
       "teachers": [
         {
-          "id": "s:atababirabah",
-          "name": "ʿAṭāʾ ibn Abī Rabāḥ"
+          "id": "s:muhammadibnshihabazzuhri",
+          "name": "az-Zuhrī"
         },
         {
           "id": "s:qatadah",
           "name": "Qatādah"
         },
         {
-          "id": "s:muhammadibnshihabazzuhri",
-          "name": "az-Zuhrī"
+          "id": "s:atababirabah",
+          "name": "ʿAṭāʾ ibn Abī Rabāḥ"
         }
       ],
       "students": [
         {
-          "id": "s:abdullahibnalmubarak",
-          "name": "ʿAbdullāh ibn al-Mubārak"
-        },
-        {
           "id": "s:walidibnmuslim",
           "name": "al-Walīd ibn Muslim"
+        },
+        {
+          "id": "s:abdullahibnalmubarak",
+          "name": "ʿAbdullāh ibn al-Mubārak"
         }
       ],
       "works": [
@@ -396,22 +504,22 @@
       "bio": "al-Fuḍayl ibn ʿIyāḍ. Bekannt für Askese und Aufrichtigkeit; Muḥaddith und Mahner.",
       "teachers": [
         {
-          "id": "s:mansur",
-          "name": "Manṣūr ibn al-Muʿtamir"
-        },
-        {
           "id": "s:alamash",
           "name": "al-Aʿmash"
+        },
+        {
+          "id": "s:mansur",
+          "name": "Manṣūr ibn al-Muʿtamir"
         }
       ],
       "students": [
         {
-          "id": "s:abdullahibnalmubarak",
-          "name": "ʿAbdullāh ibn al-Mubārak"
-        },
-        {
           "id": "sufyan-ibn-uyaynah",
           "name": "Sufyān ibn ʿUyaynah"
+        },
+        {
+          "id": "s:abdullahibnalmubarak",
+          "name": "ʿAbdullāh ibn al-Mubārak"
         }
       ],
       "works": []
@@ -459,25 +567,30 @@
       "bio": "Imām der Sunnah; vereinte Ḥadīth, Fiqh, Zuhd und Jihād. Weit gereist für Wissen.",
       "teachers": [
         {
-          "id": "s:sufyanaththawri",
-          "name": "Sufyān ath-Thawrī"
+          "id": "s:muhammadibnshihabazzuhri",
+          "name": "az-Zuhrī"
         },
         {
           "id": "malik-ibn-anas",
           "name": "Mālik ibn Anas"
         },
         {
-          "id": "s:muhammadibnshihabazzuhri",
-          "name": "az-Zuhrī"
+          "id": "s:sufyanaththawri",
+          "name": "Sufyān ath-Thawrī"
         }
       ],
-      "students": [],
+      "students": [
+        {
+          "id": "s:yahyabmain",
+          "name": "Yaḥyā b. Maʿīn"
+        }
+      ],
       "works": [
         {
-          "title": "Kitāb az-Zuhd"
+          "title": "Kitāb al-Jihād"
         },
         {
-          "title": "Kitāb al-Jihād"
+          "title": "Kitāb az-Zuhd"
         }
       ]
     },
@@ -557,6 +670,10 @@
         {
           "id": "s:abdullahibnalmubarak",
           "name": "Ibn al-Mubārak"
+        },
+        {
+          "id": "s:imamassafii",
+          "name": "Imām aš-Šāfiʿī"
         }
       ],
       "works": [
@@ -616,20 +733,20 @@
       ],
       "students": [
         {
-          "id": "ahmad-ibn-hanbal",
-          "name": "Aḥmad ibn Ḥanbal"
-        },
-        {
           "id": "s:ismailibnyahyaalmuzani",
           "name": "al-Muzanī"
+        },
+        {
+          "id": "ahmad-ibn-hanbal",
+          "name": "Aḥmad ibn Ḥanbal"
         }
       ],
       "works": [
         {
-          "title": "ar-Risālah"
+          "title": "al-Umm"
         },
         {
-          "title": "al-Umm"
+          "title": "ar-Risālah"
         }
       ]
     },
@@ -656,50 +773,50 @@
       "bio": "Imām von Kūfah; Amīr al-Muʾminīn im Ḥadīth; Faqīh und Asket. Lehrer und Schüler zahlreicher Imāme der frühen Generation.",
       "teachers": [
         {
-          "id": "s:saidibnmasruq",
-          "name": "Saʿīd ibn Masrūq ath-Thawrī (Vater)"
-        },
-        {
           "id": "s:alamash",
           "name": "al-Aʿmash"
         },
         {
-          "id": "s:hamzahazzayyat",
-          "name": "Ḥamzah az-Zayyāt"
+          "id": "s:saidibnmasruq",
+          "name": "Saʿīd ibn Masrūq ath-Thawrī (Vater)"
+        },
+        {
+          "id": "s:amribndinar",
+          "name": "ʿAmr ibn Dīnār"
         },
         {
           "id": "s:atababirabah",
           "name": "ʿAṭāʾ ibn Abī Rabāḥ"
         },
         {
-          "id": "s:amribndinar",
-          "name": "ʿAmr ibn Dīnār"
+          "id": "s:hamzahazzayyat",
+          "name": "Ḥamzah az-Zayyāt"
         }
       ],
       "students": [
         {
-          "id": "s:abdullahibnalmubarak",
-          "name": "ʿAbdullāh ibn al-Mubārak"
-        },
-        {
-          "id": "s:yahyaibnsaidalqattan",
-          "name": "Yaḥyā ibn Saʿīd al-Qaṭṭān"
-        },
-        {
-          "id": "s:wakibnaljarrah",
-          "name": "Wakīʿ ibn al-Jarrāḥ"
-        },
-        {
-          "id": "s:abdarrahmanibnmahdi",
-          "name": "ʿAbd ar-Raḥmān ibn Mahdī"
+          "id": "s:shubah",
+          "name": "Shuʿbah ibn al-Ḥajjāj"
         },
         {
           "id": "sufyan-ibn-uyaynah",
           "name": "Sufyān ibn ʿUyaynah"
         },
         {
-          "id": "s:shubah",
-          "name": "Shuʿbah ibn al-Ḥajjāj"
+          "id": "s:wakibnaljarrah",
+          "name": "Wakīʿ ibn al-Jarrāḥ"
+        },
+        {
+          "id": "s:yahyaibnsaidalqattan",
+          "name": "Yaḥyā ibn Saʿīd al-Qaṭṭān"
+        },
+        {
+          "id": "s:abdarrahmanibnmahdi",
+          "name": "ʿAbd ar-Raḥmān ibn Mahdī"
+        },
+        {
+          "id": "s:abdullahibnalmubarak",
+          "name": "ʿAbdullāh ibn al-Mubārak"
         }
       ],
       "works": [
@@ -740,12 +857,20 @@
       ],
       "students": [
         {
+          "id": "abu-ubayd",
+          "name": "Abū ʿUbayd al-Qāsim ibn Sallām"
+        },
+        {
           "id": "ash-shafii",
           "name": "ash-Shāfiʿī"
         },
         {
           "id": "ahmad-ibn-hanbal",
           "name": "Aḥmad ibn Ḥanbal"
+        },
+        {
+          "id": "s:yahyabmain",
+          "name": "Yaḥyā b. Maʿīn"
         }
       ],
       "works": []
@@ -778,8 +903,16 @@
       ],
       "students": [
         {
+          "id": "s:assuddi",
+          "name": "as-Suddī"
+        },
+        {
           "id": "mujahid",
           "name": "Mujāhid ibn Jabr"
+        },
+        {
+          "id": "s:amribndinar",
+          "name": "ʿAmr ibn Dīnār"
         },
         {
           "id": "s:atababirabah",
@@ -837,13 +970,13 @@
       ],
       "works": [
         {
+          "title": "Faḍāʾil al-Qurʾān"
+        },
+        {
           "title": "Gharīb al-Ḥadīth"
         },
         {
           "title": "Kitāb al-Amwāl"
-        },
-        {
-          "title": "Faḍāʾil al-Qurʾān"
         }
       ]
     },
@@ -878,12 +1011,16 @@
       ],
       "students": [
         {
-          "id": "s:qatadah",
-          "name": "Qatādah"
-        },
-        {
           "id": "s:ayyub",
           "name": "Ayyūb as-Sakhtiyānī"
+        },
+        {
+          "id": "s:malikibndinar",
+          "name": "Mālik ibn Dīnār رحمه الله"
+        },
+        {
+          "id": "s:qatadah",
+          "name": "Qatādah"
         }
       ],
       "works": []
@@ -915,12 +1052,20 @@
       ],
       "students": [
         {
-          "id": "s:urwah",
-          "name": "ʿUrwah ibn az-Zubayr"
-        },
-        {
           "id": "s:muhammadibnshihabazzuhri",
           "name": "az-Zuhrī"
+        },
+        {
+          "id": "s:maymunibnmihran",
+          "name": "Maymūn ibn Mihrān"
+        },
+        {
+          "id": "mujahid",
+          "name": "Mujāhid"
+        },
+        {
+          "id": "s:urwah",
+          "name": "ʿUrwah ibn az-Zubayr"
         }
       ],
       "works": []
@@ -946,30 +1091,38 @@
       "bio": "Yaḥyā ibn Maʿīn. Imām der Rijāl-Kritik; enger Gefährte von Aḥmad ibn Ḥanbal.",
       "teachers": [
         {
-          "id": "s:abdullahibnalmubarak",
-          "name": "ʿAbdullāh ibn al-Mubārak"
-        },
-        {
           "id": "sufyan-ibn-uyaynah",
           "name": "Sufyān ibn ʿUyaynah"
         },
         {
           "id": "s:wakibnaljarrah",
           "name": "Wakīʿ"
+        },
+        {
+          "id": "s:abdullahibnalmubarak",
+          "name": "ʿAbdullāh ibn al-Mubārak"
         }
       ],
       "students": [
+        {
+          "id": "s:abudawud",
+          "name": "Abū Dāwūd"
+        },
+        {
+          "id": "s:abuzurah",
+          "name": "Abū Zurʿah"
+        },
         {
           "id": "al-bukhari",
           "name": "al-Bukhārī"
         },
         {
-          "id": "s:muslim",
-          "name": "Muslim"
+          "id": "ahmad-ibn-hanbal",
+          "name": "Aḥmad ibn Ḥanbal"
         },
         {
-          "id": "s:abudawud",
-          "name": "Abū Dāwūd"
+          "id": "s:muslim",
+          "name": "Muslim"
         }
       ],
       "works": [
@@ -1029,10 +1182,10 @@
       "students": [],
       "works": [
         {
-          "title": "ash-Sharīʿah"
+          "title": "Akhlāq Ḥamalat al-Qurʾān"
         },
         {
-          "title": "Akhlāq Ḥamalat al-Qurʾān"
+          "title": "ash-Sharīʿah"
         }
       ]
     },
@@ -1084,21 +1237,21 @@
       "bio": "Schüler von al-Bukhārī; Verfasser von Jāmiʿ at-Tirmidhī mit Bewertungen der Überlieferungen.",
       "teachers": [
         {
-          "id": "al-bukhari",
-          "name": "al-Bukhārī"
-        },
-        {
           "id": "abu-zurah-ar-razi",
           "name": "Abū Zurʿah ar-Rāzī"
+        },
+        {
+          "id": "al-bukhari",
+          "name": "al-Bukhārī"
         }
       ],
       "students": [],
       "works": [
         {
-          "title": "Jāmiʿ at-Tirmidhī"
+          "title": "ash-Shamāʾil al-Muḥammadiyyah"
         },
         {
-          "title": "ash-Shamāʾil al-Muḥammadiyyah"
+          "title": "Jāmiʿ at-Tirmidhī"
         }
       ]
     },
@@ -1163,16 +1316,16 @@
       "bio": "Verfasser von Ṣaḥīḥ al-Bukhārī, dem authentischsten Ḥadīth-Werk nach dem Qurʾān bei Ahl as-Sunnah.",
       "teachers": [
         {
+          "id": "ahmad-ibn-hanbal",
+          "name": "Aḥmad ibn Ḥanbal"
+        },
+        {
           "id": "s:ishaqibnrahawayh",
           "name": "Isḥāq ibn Rāhawayh"
         },
         {
           "id": "s:yahyabmain",
           "name": "Yaḥyā ibn Maʿīn"
-        },
-        {
-          "id": "ahmad-ibn-hanbal",
-          "name": "Aḥmad ibn Ḥanbal"
         }
       ],
       "students": [
@@ -1187,13 +1340,13 @@
       ],
       "works": [
         {
-          "title": "Ṣaḥīḥ al-Bukhārī"
+          "title": "al-Adab al-Mufrad"
         },
         {
           "title": "at-Tārīkh al-Kabīr"
         },
         {
-          "title": "al-Adab al-Mufrad"
+          "title": "Ṣaḥīḥ al-Bukhārī"
         }
       ]
     },
@@ -1219,27 +1372,31 @@
       "teachers": [],
       "students": [
         {
-          "id": "s:ibnalqayyim",
-          "name": "Ibn al-Qayyim"
-        },
-        {
           "id": "adh-dhahabi",
           "name": "adh-Dhahabī"
         },
         {
+          "id": "s:ibnalqayyim",
+          "name": "Ibn al-Qayyim"
+        },
+        {
           "id": "ibn-kathir",
           "name": "Ibn Kathīr"
+        },
+        {
+          "id": "s:ibnmuflih",
+          "name": "Ibn Mufliḥ"
         }
       ],
       "works": [
-        {
-          "title": "Majmūʿ al-Fatāwā"
-        },
         {
           "title": "al-ʿAqīdah al-Wāsiṭiyyah"
         },
         {
           "title": "Kitāb at-Tawḥīd (verschiedene Schriften)"
+        },
+        {
+          "title": "Majmūʿ al-Fatāwā"
         }
       ]
     },
@@ -1300,12 +1457,16 @@
       ],
       "students": [
         {
-          "id": "sufyan-ibn-uyaynah",
-          "name": "Sufyān ibn ʿUyaynah"
-        },
-        {
           "id": "sufyan-ath-thauri",
           "name": "Sufyān ath-Thawrī"
+        },
+        {
+          "id": "s:sufyanaththawri",
+          "name": "Sufyān ath-Thawrī"
+        },
+        {
+          "id": "sufyan-ibn-uyaynah",
+          "name": "Sufyān ibn ʿUyaynah"
         }
       ],
       "works": []
@@ -1331,10 +1492,10 @@
       "students": [],
       "works": [
         {
-          "title": "at-Tamhīd"
+          "title": "al-Istīʿāb"
         },
         {
-          "title": "al-Istīʿāb"
+          "title": "at-Tamhīd"
         }
       ]
     },
@@ -1445,12 +1606,12 @@
       "bio": "Yazīd ibn Hārūn. Vertrauenswürdiger Ḥāfiẓ; Lehrer vieler späterer Imāme.",
       "teachers": [
         {
-          "id": "s:hammadibnsalamah",
-          "name": "Ḥammād ibn Salamah"
-        },
-        {
           "id": "s:said",
           "name": "Saʿīd ibn Abī ʿArūbah"
+        },
+        {
+          "id": "s:hammadibnsalamah",
+          "name": "Ḥammād ibn Salamah"
         }
       ],
       "students": [
@@ -1585,7 +1746,20 @@
           "name": "Ibn ʿAbbās"
         }
       ],
-      "students": [],
+      "students": [
+        {
+          "id": "al-awzai",
+          "name": "al-Awzāʿī"
+        },
+        {
+          "id": "sufyan-ath-thauri",
+          "name": "Sufyān ath-Thawrī"
+        },
+        {
+          "id": "s:sufyanaththawri",
+          "name": "Sufyān ath-Thawrī"
+        }
+      ],
       "works": []
     },
     "s:malikibndinar": {
@@ -1606,12 +1780,12 @@
       "bio": "Mālik ibn Dīnār. Tābiʿī, bekannt für Askese und Ermahnung; Überlieferer.",
       "teachers": [
         {
-          "id": "anas-b-malik",
-          "name": "Anas ibn Mālik"
-        },
-        {
           "id": "al-hasan-al-basri",
           "name": "al-Ḥasan al-Baṣrī"
+        },
+        {
+          "id": "anas-b-malik",
+          "name": "Anas ibn Mālik"
         }
       ],
       "students": [],
@@ -1722,7 +1896,12 @@
           "name": "Prophet Muhammad ﷺ"
         }
       ],
-      "students": [],
+      "students": [
+        {
+          "id": "s:abumijlaz",
+          "name": "Abū Mijlaz"
+        }
+      ],
       "works": []
     },
     "at-tabari": {
@@ -1884,10 +2063,10 @@
       "students": [],
       "works": [
         {
-          "title": "Fatḥ al-Bārī"
+          "title": "Bulūgh al-Marām"
         },
         {
-          "title": "Bulūgh al-Marām"
+          "title": "Fatḥ al-Bārī"
         },
         {
           "title": "Taqrīb at-Tahdhīb"
@@ -1991,21 +2170,21 @@
       "bio": "Schüler von Ibn Taymiyyah und adh-Dhahabī; Tafsīr und Geschichte weit verbreitet.",
       "teachers": [
         {
-          "id": "ibn-taymiyyah",
-          "name": "Ibn Taymiyyah"
-        },
-        {
           "id": "adh-dhahabi",
           "name": "adh-Dhahabī"
+        },
+        {
+          "id": "ibn-taymiyyah",
+          "name": "Ibn Taymiyyah"
         }
       ],
       "students": [],
       "works": [
         {
-          "title": "Tafsīr Ibn Kathīr"
+          "title": "al-Bidāyah wa-n-Nihāyah"
         },
         {
-          "title": "al-Bidāyah wa-n-Nihāyah"
+          "title": "Tafsīr Ibn Kathīr"
         }
       ]
     },
@@ -2039,8 +2218,16 @@
       ],
       "students": [
         {
+          "id": "s:abumijlaz",
+          "name": "Abū Mijlaz"
+        },
+        {
           "id": "s:muhammadibnshihabazzuhri",
           "name": "az-Zuhrī"
+        },
+        {
+          "id": "s:maymunibnmihran",
+          "name": "Maymūn ibn Mihrān"
         },
         {
           "id": "nafī",
@@ -2117,12 +2304,12 @@
       "bio": "Maymūn ibn Mihrān. Vertrauenswürdiger Tābiʿī; Faqīh und Muḥaddith.",
       "teachers": [
         {
-          "id": "s:aishah",
-          "name": "ʿĀʾishah"
-        },
-        {
           "id": "s:abdullahibnumar",
           "name": "Ibn ʿUmar"
+        },
+        {
+          "id": "s:aishah",
+          "name": "ʿĀʾishah"
         }
       ],
       "students": [],
@@ -2255,12 +2442,12 @@
       ],
       "students": [
         {
-          "id": "sufyan-ath-thauri",
-          "name": "Sufyān ath-Thawrī"
-        },
-        {
           "id": "s:shubah",
           "name": "Shuʿbah"
+        },
+        {
+          "id": "sufyan-ath-thauri",
+          "name": "Sufyān ath-Thawrī"
         }
       ],
       "works": [
@@ -2319,13 +2506,13 @@
       "students": [],
       "works": [
         {
+          "title": "Adab al-Kātib"
+        },
+        {
           "title": "Taʾwīl Mukhtalif al-Ḥadīth"
         },
         {
           "title": "ʿUyūn al-Akhbār"
-        },
-        {
-          "title": "Adab al-Kātib"
         }
       ]
     },
@@ -2349,10 +2536,10 @@
       "students": [],
       "works": [
         {
-          "title": "Nayl al-Awṭār"
+          "title": "Fatḥ al-Qadīr"
         },
         {
-          "title": "Fatḥ al-Qadīr"
+          "title": "Nayl al-Awṭār"
         }
       ]
     },
@@ -2402,15 +2589,20 @@
       "bio": "Blinder Tābiʿī von Baṣrah; große Autorität in Tafsīr und Ḥadīth.",
       "teachers": [
         {
-          "id": "anas-b-malik",
-          "name": "Anas ibn Mālik"
-        },
-        {
           "id": "al-hasan-al-basri",
           "name": "al-Ḥasan al-Baṣrī"
+        },
+        {
+          "id": "anas-b-malik",
+          "name": "Anas ibn Mālik"
         }
       ],
-      "students": [],
+      "students": [
+        {
+          "id": "al-awzai",
+          "name": "al-Awzāʿī"
+        }
+      ],
       "works": []
     },
     "mujahid": {
@@ -2442,16 +2634,16 @@
       ],
       "students": [
         {
-          "id": "s:qatadah",
-          "name": "Qatādah"
+          "id": "s:alamash",
+          "name": "al-Aʿmash"
         },
         {
           "id": "s:ibnjurayj",
           "name": "Ibn Jurayj"
         },
         {
-          "id": "s:alamash",
-          "name": "al-Aʿmash"
+          "id": "s:qatadah",
+          "name": "Qatādah"
         }
       ],
       "works": [
@@ -2553,10 +2745,10 @@
       ],
       "works": [
         {
-          "title": "Siyar Aʿlām an-Nubalāʾ"
+          "title": "Mīzān al-Iʿtidāl"
         },
         {
-          "title": "Mīzān al-Iʿtidāl"
+          "title": "Siyar Aʿlām an-Nubalāʾ"
         },
         {
           "title": "Tadhkirat al-Ḥuffāẓ"
@@ -2594,10 +2786,10 @@
       ],
       "works": [
         {
-          "title": "ar-Risālah"
+          "title": "al-Umm"
         },
         {
-          "title": "al-Umm"
+          "title": "ar-Risālah"
         }
       ]
     },
@@ -2690,12 +2882,24 @@
           "name": "al-Ḥasan al-Baṣrī"
         },
         {
+          "id": "s:assuddi",
+          "name": "as-Suddī"
+        },
+        {
           "id": "ibn-sirin",
           "name": "Ibn Sīrīn"
         },
         {
+          "id": "s:malikibndinar",
+          "name": "Mālik ibn Dīnār رحمه الله"
+        },
+        {
           "id": "s:qatadah",
           "name": "Qatādah"
+        },
+        {
+          "id": "s:rabiah",
+          "name": "Rabīʿah"
         }
       ],
       "works": []
@@ -2743,22 +2947,22 @@
       "bio": "al-Fuḍayl ibn ʿIyāḍ. Bekannt für Askese und Aufrichtigkeit; Muḥaddith und Mahner.",
       "teachers": [
         {
-          "id": "s:mansur",
-          "name": "Manṣūr ibn al-Muʿtamir"
-        },
-        {
           "id": "s:alamash",
           "name": "al-Aʿmash"
+        },
+        {
+          "id": "s:mansur",
+          "name": "Manṣūr ibn al-Muʿtamir"
         }
       ],
       "students": [
         {
-          "id": "s:abdullahibnalmubarak",
-          "name": "ʿAbdullāh ibn al-Mubārak"
-        },
-        {
           "id": "sufyan-ibn-uyaynah",
           "name": "Sufyān ibn ʿUyaynah"
+        },
+        {
+          "id": "s:abdullahibnalmubarak",
+          "name": "ʿAbdullāh ibn al-Mubārak"
         }
       ],
       "works": []
@@ -2781,22 +2985,22 @@
       "bio": "Ḥammād ibn Zayd. Vertrauenswürdiger Muḥaddith von Baṣrah; von den Imāmen hochgeschätzt.",
       "teachers": [
         {
-          "id": "s:thabit",
-          "name": "Thābit al-Bunānī"
-        },
-        {
           "id": "s:ayyub",
           "name": "Ayyūb as-Sakhtiyānī"
+        },
+        {
+          "id": "s:thabit",
+          "name": "Thābit al-Bunānī"
         }
       ],
       "students": [
         {
-          "id": "s:abdullahibnalmubarak",
-          "name": "ʿAbdullāh ibn al-Mubārak"
-        },
-        {
           "id": "sufyan-ibn-uyaynah",
           "name": "Sufyān ibn ʿUyaynah"
+        },
+        {
+          "id": "s:abdullahibnalmubarak",
+          "name": "ʿAbdullāh ibn al-Mubārak"
         }
       ],
       "works": []
@@ -2846,10 +3050,10 @@
       "students": [],
       "works": [
         {
-          "title": "ar-Risālah"
+          "title": "an-Nawādir wa-z-Ziyādāt"
         },
         {
-          "title": "an-Nawādir wa-z-Ziyādāt"
+          "title": "ar-Risālah"
         }
       ]
     },
@@ -3004,13 +3208,13 @@
       "students": [],
       "works": [
         {
+          "title": "Iʿlām al-Muwaqqiʿīn"
+        },
+        {
           "title": "Madārij as-Sālikīn"
         },
         {
           "title": "Zād al-Maʿād"
-        },
-        {
-          "title": "Iʿlām al-Muwaqqiʿīn"
         }
       ]
     },
@@ -3087,7 +3291,12 @@
           "name": "Prophet Muhammad ﷺ"
         }
       ],
-      "students": [],
+      "students": [
+        {
+          "id": "s:amribndinar",
+          "name": "ʿAmr ibn Dīnār"
+        }
+      ],
       "works": []
     },
     "s:abuaddarda": {
@@ -3139,16 +3348,16 @@
       "students": [],
       "works": [
         {
-          "title": "Riyāḍ aṣ-Ṣāliḥīn"
+          "title": "al-Arbaʿūn an-Nawawiyyah"
         },
         {
-          "title": "al-Arbaʿūn an-Nawawiyyah"
+          "title": "al-Majmūʿ"
         },
         {
           "title": "al-Minhāj (Sharḥ Muslim)"
         },
         {
-          "title": "al-Majmūʿ"
+          "title": "Riyāḍ aṣ-Ṣāliḥīn"
         }
       ]
     },
@@ -3170,10 +3379,10 @@
       "students": [],
       "works": [
         {
-          "title": "ʿUmdat al-Qārī (Sharḥ Ṣaḥīḥ al-Bukhārī)"
+          "title": "al-Bināyah (Sharḥ al-Hidāyah)"
         },
         {
-          "title": "al-Bināyah (Sharḥ al-Hidāyah)"
+          "title": "ʿUmdat al-Qārī (Sharḥ Ṣaḥīḥ al-Bukhārī)"
         }
       ]
     },
@@ -3244,12 +3453,12 @@
       "bio": "Imām von Ägypten; Faqīh und Muḥaddith, Zeitgenosse von Mālik. Sein Madhhab setzte sich langfristig nicht durch.",
       "teachers": [
         {
-          "id": "s:nafi",
-          "name": "Nāfiʿ (Mawlā Ibn ʿUmar)"
-        },
-        {
           "id": "s:muhammadibnshihabazzuhri",
           "name": "az-Zuhrī"
+        },
+        {
+          "id": "s:nafi",
+          "name": "Nāfiʿ (Mawlā Ibn ʿUmar)"
         },
         {
           "id": "s:yazidibnabibabib",
@@ -3404,16 +3613,24 @@
       ],
       "students": [
         {
+          "id": "al-awzai",
+          "name": "al-Awzāʿī"
+        },
+        {
+          "id": "al-layth",
+          "name": "al-Layth ibn Saʿd"
+        },
+        {
+          "id": "s:abdullahibnalmubarak",
+          "name": "Ibn al-Mubārak"
+        },
+        {
           "id": "malik-ibn-anas",
           "name": "Mālik ibn Anas"
         },
         {
           "id": "sufyan-ibn-uyaynah",
           "name": "Sufyān ibn ʿUyaynah"
-        },
-        {
-          "id": "s:abdullahibnalmubarak",
-          "name": "Ibn al-Mubārak"
         }
       ],
       "works": []
@@ -3691,50 +3908,50 @@
       "bio": "Imām von Kūfah; Amīr al-Muʾminīn im Ḥadīth; Faqīh und Asket. Lehrer und Schüler zahlreicher Imāme der frühen Generation.",
       "teachers": [
         {
-          "id": "s:saidibnmasruq",
-          "name": "Saʿīd ibn Masrūq ath-Thawrī (Vater)"
-        },
-        {
           "id": "s:alamash",
           "name": "al-Aʿmash"
         },
         {
-          "id": "s:hamzahazzayyat",
-          "name": "Ḥamzah az-Zayyāt"
+          "id": "s:saidibnmasruq",
+          "name": "Saʿīd ibn Masrūq ath-Thawrī (Vater)"
+        },
+        {
+          "id": "s:amribndinar",
+          "name": "ʿAmr ibn Dīnār"
         },
         {
           "id": "s:atababirabah",
           "name": "ʿAṭāʾ ibn Abī Rabāḥ"
         },
         {
-          "id": "s:amribndinar",
-          "name": "ʿAmr ibn Dīnār"
+          "id": "s:hamzahazzayyat",
+          "name": "Ḥamzah az-Zayyāt"
         }
       ],
       "students": [
         {
-          "id": "s:abdullahibnalmubarak",
-          "name": "ʿAbdullāh ibn al-Mubārak"
-        },
-        {
-          "id": "s:yahyaibnsaidalqattan",
-          "name": "Yaḥyā ibn Saʿīd al-Qaṭṭān"
-        },
-        {
-          "id": "s:wakibnaljarrah",
-          "name": "Wakīʿ ibn al-Jarrāḥ"
-        },
-        {
-          "id": "s:abdarrahmanibnmahdi",
-          "name": "ʿAbd ar-Raḥmān ibn Mahdī"
+          "id": "s:shubah",
+          "name": "Shuʿbah ibn al-Ḥajjāj"
         },
         {
           "id": "sufyan-ibn-uyaynah",
           "name": "Sufyān ibn ʿUyaynah"
         },
         {
-          "id": "s:shubah",
-          "name": "Shuʿbah ibn al-Ḥajjāj"
+          "id": "s:wakibnaljarrah",
+          "name": "Wakīʿ ibn al-Jarrāḥ"
+        },
+        {
+          "id": "s:yahyaibnsaidalqattan",
+          "name": "Yaḥyā ibn Saʿīd al-Qaṭṭān"
+        },
+        {
+          "id": "s:abdarrahmanibnmahdi",
+          "name": "ʿAbd ar-Raḥmān ibn Mahdī"
+        },
+        {
+          "id": "s:abdullahibnalmubarak",
+          "name": "ʿAbdullāh ibn al-Mubārak"
         }
       ],
       "works": [
@@ -3746,5 +3963,6 @@
         }
       ]
     }
-  }
+  },
+  "note": "v502: reverse student graph + sorted Lehrer/Schüler/Werke"
 }

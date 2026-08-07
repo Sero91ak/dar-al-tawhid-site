@@ -69,6 +69,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "feed-gelehrte-dua-parity-v502-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Feed leer reparieren; Gelehrte Lehrer/Schüler/Werke auf/zuklappbar wie Duʿāʾ; live freigeben",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "assets/premium-feed-app.js",
+        "assets/scholars-index.js",
+        "assets/scholars-index.css",
+        "data/scholar-index-meta.json",
+        "data/scholar-history-curated.json",
+        "content/admin/change-scope-lock.json"
+      ]
+    },
+    {
       "id": "edge-top-scroll-fix-v500-2026-08-07",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer: Farbübergang/Scroll-Fehler oben — theme-hero clip-path und Safe-Area",

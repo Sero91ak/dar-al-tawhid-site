@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1785515013940 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v560";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v562";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -830,7 +830,7 @@ body.is-post-route .bottom-nav.post-nav-hidden{transform:translateY(120%);opacit
 .profile-chip-row{display:flex;flex-wrap:wrap;gap:8px}
 .profile-chip{appearance:none;-webkit-appearance:none;display:inline-flex;align-items:center;max-width:100%;margin:0;padding:7px 11px;border-radius:999px;border:1px solid color-mix(in srgb,var(--gold2) 42%,transparent);background:color-mix(in srgb,var(--gold2) 12%,transparent);color:var(--cream);font:inherit;font-size:12px;font-weight:650;line-height:1.25;text-align:left;cursor:pointer}
 .profile-chip.is-static{cursor:default;background:color-mix(in srgb,var(--gold2) 8%,transparent);border-color:color-mix(in srgb,var(--gold2) 28%,transparent)}
-.profile-chip:not(.is-static):active{transform:scale(.98)}
+.profile-chip:not(.is-static):active{transform:scale(.98)}/* Scholar profile relations — Duʿāʾ-row optics + fold (v502) */.profile-box--scholar .scholar-rel{  margin-top:10px;  border:1px solid color-mix(in srgb,var(--gold2) 22%,transparent);  border-radius:18px;  background:linear-gradient(180deg,color-mix(in srgb,var(--gold2) 7%,transparent),transparent 70%);  overflow:hidden;}.profile-box--scholar .scholar-rel + .scholar-rel{margin-top:8px}.profile-box--scholar .scholar-rel__head{  width:100%;  display:grid;  grid-template-columns:minmax(0,1fr) auto;  align-items:center;  gap:10px;  margin:0;  padding:12px 14px;  border:0;  background:transparent;  color:inherit;  font:inherit;  text-align:left;  cursor:pointer;  -webkit-tap-highlight-color:transparent;}.profile-box--scholar .scholar-rel__head:focus-visible{  outline:2px solid color-mix(in srgb,var(--gold2) 55%,transparent);  outline-offset:-2px;}.profile-box--scholar .scholar-rel__title{  margin:0;  font-family:var(--serif);  font-size:15px;  font-weight:750;  letter-spacing:.02em;  color:var(--cream);}.profile-box--scholar .scholar-rel__meta{  display:inline-flex;  align-items:center;  gap:8px;  color:var(--gold2);  font-size:12px;  font-weight:850;}.profile-box--scholar .scholar-rel__chev{  display:inline-block;  transition:transform .22s ease;}.profile-box--scholar .scholar-rel.is-collapsed .scholar-rel__chev{transform:rotate(-90deg)}.profile-box--scholar .scholar-rel.is-collapsed .scholar-rel__body{display:none}.profile-box--scholar .scholar-rel__body{  padding:0 8px 10px;  display:grid;  gap:0;}.profile-box--scholar .scholar-rel__body .dua-row{  width:100%;  border:0;  background:transparent;  text-align:left;  cursor:pointer;  font:inherit;  color:inherit;}.profile-box--scholar .scholar-rel__body .dua-row.is-static{  cursor:default;}.profile-box--scholar .scholar-rel__empty{  display:block;  padding:4px 10px 8px;  color:var(--muted);  font-size:12.5px;  line-height:1.4;}
 .profile-empty{display:block;margin:0;color:var(--muted);font-size:12px;line-height:1.45}
 .category-cluster{margin-bottom:18px}
 .category-cluster h3{font-family:var(--serif);color:var(--gold2);font-size:24px;margin:0 0 10px}
@@ -9786,10 +9786,10 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-app.js?v=20" defer></script>
 <script src="/assets/focus-feed-app.js?v=6" defer></script>
 <script src="/assets/html2canvas.min.js" defer></script>
-<script src="/assets/premium-feed-app.js?v=91" defer></script>
+<script src="/assets/premium-feed-app.js?v=92" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <script src="/assets/adaptive-layout.js?v=5" defer></script>
-<script src="/assets/scholars-index.js?v=556" defer></script>
+<script src="/assets/scholars-index.js?v=562" defer></script>
 <link rel="preload" href="/assets/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11339,7 +11339,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=5">
 <link rel="stylesheet" href="/assets/books-library.css?v=2">
 <link rel="stylesheet" href="/assets/dar-account-visibility.css?v=11">
-<link rel="stylesheet" href="/assets/scholars-index.css?v=494">
+<link rel="stylesheet" href="/assets/scholars-index.css?v=502">
 <link rel="stylesheet" href="/assets/adaptive-layout.css?v=5">
 <style id="typography-compact-fix-v310">
 /* Finale Typografie-Korrektur — gewinnt gegen Home-Compact-Overrides */
@@ -18511,7 +18511,7 @@ html[data-theme="light"] body.is-scholar-route{
 <script>
 
 /* PUBLISH ISOLATION GUARD FINAL: stale index, incremental sync, render caps */
-const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const IS_TEST_PATH=location.pathname.indexOf("/test/")===0||location.pathname==="/test";function isTestAppPath(){return IS_TEST_PATH}function isVisitorTestOnlyView(view){return!isTestAppPath()&&String(view||"")==="hadith"}const IS_STAGING_HOST=location.hostname.startsWith("staging.");const IS_STAGING_ENV=new URLSearchParams(location.search).get("env")==="staging";const CONTENT_ENV=IS_TEST_PATH||IS_STAGING_ENV||IS_STAGING_HOST?"staging":"production";const IS_STAGING_APP=IS_TEST_PATH||IS_STAGING_HOST;const POSTS_DIR=IS_STAGING_APP?"content/staging/posts":"content/posts";const BRANCH="main";const CACHE_KEY=IS_STAGING_APP?"darCachedPostsStagingV3":"darCachedPostsV12";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY=IS_STAGING_APP?"darPostFileMapStagingV3":"darPostFileMapV10";const POST_PARSE_VERSION=12;const FEED_MIN_POST_NUM=431;const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_TOPICS_PATH="/data/quran-topics.json";const QURAN_TOPICS_CACHE_KEY="darQuranTopicsV2";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV1";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="darQuranTrModeV1";const QURAN_VIEW_SETTINGS_KEY="darQuranViewSettingsV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";const POST_BROWSE_KEY="darPostBrowseV1";const ILM_CHAT_STORE_KEY=IS_STAGING_APP?"darIlmChatStoreStagingV1":"darIlmChatStoreV1";const ILM_ADMIN_STORE_KEY=IS_STAGING_APP?"darIlmAdminStoreStagingV1":"darIlmAdminStoreV1";const ILM_QUIZ_PATH="/data/quiz-questions.json";const ILM_KNOWLEDGE_INDEX_PATH="/data/ilm-knowledge-index.json";const ILM_QUIZ_CACHE_KEY=IS_STAGING_APP?"darIlmQuizStagingV1":"darIlmQuizV1";const ILM_KNOWLEDGE_CACHE_KEY=IS_STAGING_APP?"darIlmKnowledgeIndexStagingV1":"darIlmKnowledgeIndexV1";const ILM_MAX_CHAT_MESSAGES=120;const ILM_MAX_MATCHES=10;const ILM_MIN_SCORE=4;const ILM_STRONG_SCORE=12;const CONTENT_REFRESH_MS=60000;const POSTS_FETCH_BATCH=8;const FILTER_RENDER_LIMIT=80;const POSTS_CACHE_QUOTA_MAX=300;const POSTS_INDEX_STALE_KEY=IS_STAGING_APP?"darPostsIndexStaleStagingV2":"darPostsIndexStaleV2";const POSTS_FETCH_TIMEOUT_MS=12000;let postsSyncBusy=false;let postsSyncSilent=false;let postsSyncLabel="";let refreshContentPromise=null;let refreshContentQueued=false;let refreshContentDebTimer=null;let postsRenderTimer=null;
+const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const IS_TEST_PATH=location.pathname.indexOf("/test/")===0||location.pathname==="/test";function isTestAppPath(){return IS_TEST_PATH}function isVisitorTestOnlyView(view){return!isTestAppPath()&&String(view||"")==="hadith"}const IS_STAGING_HOST=location.hostname.startsWith("staging.");const IS_STAGING_ENV=new URLSearchParams(location.search).get("env")==="staging";const CONTENT_ENV=IS_TEST_PATH||IS_STAGING_ENV||IS_STAGING_HOST?"staging":"production";const IS_STAGING_APP=IS_TEST_PATH||IS_STAGING_HOST;const POSTS_DIR=IS_STAGING_APP?"content/staging/posts":"content/posts";const BRANCH="main";const CACHE_KEY=IS_STAGING_APP?"darCachedPostsStagingV3":"darCachedPostsV12";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY=IS_STAGING_APP?"darPostFileMapStagingV3":"darPostFileMapV10";const POST_PARSE_VERSION=13;const FEED_MIN_POST_NUM=431;const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_TOPICS_PATH="/data/quran-topics.json";const QURAN_TOPICS_CACHE_KEY="darQuranTopicsV2";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV1";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="darQuranTrModeV1";const QURAN_VIEW_SETTINGS_KEY="darQuranViewSettingsV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";const POST_BROWSE_KEY="darPostBrowseV1";const ILM_CHAT_STORE_KEY=IS_STAGING_APP?"darIlmChatStoreStagingV1":"darIlmChatStoreV1";const ILM_ADMIN_STORE_KEY=IS_STAGING_APP?"darIlmAdminStoreStagingV1":"darIlmAdminStoreV1";const ILM_QUIZ_PATH="/data/quiz-questions.json";const ILM_KNOWLEDGE_INDEX_PATH="/data/ilm-knowledge-index.json";const ILM_QUIZ_CACHE_KEY=IS_STAGING_APP?"darIlmQuizStagingV1":"darIlmQuizV1";const ILM_KNOWLEDGE_CACHE_KEY=IS_STAGING_APP?"darIlmKnowledgeIndexStagingV1":"darIlmKnowledgeIndexV1";const ILM_MAX_CHAT_MESSAGES=120;const ILM_MAX_MATCHES=10;const ILM_MIN_SCORE=4;const ILM_STRONG_SCORE=12;const CONTENT_REFRESH_MS=60000;const POSTS_FETCH_BATCH=8;const FILTER_RENDER_LIMIT=80;const POSTS_CACHE_QUOTA_MAX=300;const POSTS_INDEX_STALE_KEY=IS_STAGING_APP?"darPostsIndexStaleStagingV2":"darPostsIndexStaleV2";const POSTS_FETCH_TIMEOUT_MS=12000;let postsSyncBusy=false;let postsSyncSilent=false;let postsSyncLabel="";let refreshContentPromise=null;let refreshContentQueued=false;let refreshContentDebTimer=null;let postsRenderTimer=null;
 const CURRENT_UPDATES_PATH=IS_STAGING_APP?"/content/staging/updates/current.json":"/content/updates/current.json";const CURRENT_UPDATES_CACHE_KEY=IS_STAGING_APP?"darCurrentUpdatesStagingV1":"darCurrentUpdatesV1";let currentUpdates=[];
 const DAILY_CONTENT_PATH="/content/updates/daily.json";let darDailyContent=null;
 const HADITH_BOOKS_PATH="/data/hadith/books.json";const HADITH_SEARCH_PATH="/data/hadith/search-index.json";const HADITH_CACHE_KEY="darHadithLibraryV2";const HADITH_FILTER_KEY="darHadithFiltersV2";const HADITH_FAV_KEY="darHadithFavoritesV1";const HADITH_MACHINE_CACHE_KEY="darHadithMachineTranslationsV1";const HADITH_DAILY_KEY="darHadithDailySettingsV1";let hadithBooks=[];let hadithSearchIndex=[];let hadithCollections=new Map();let hadithLoading=null;let hadithActiveBook="";let hadithActiveChapter="";let hadithActiveSection="";let hadithFilters={status:"",grade:"",language:"german"};
@@ -18728,7 +18728,7 @@ function categoryKey(name){return String(name||"").trim().toLowerCase().normaliz
 const CATEGORY_CANONICAL={"akhlāq":"Akhlaq","akhlaq":"Akhlaq","widerlegung":"Widerlegungen","widerlegungen":"Widerlegungen","uṣūl":"Aqīdah","usul":"Aqīdah","usul al din":"Aqīdah","ikhlas":"Tawḥīd","aqidah":"Aqīdah","aqi dah":"Aqīdah","aqida":"Aqīdah","manhaj":"Manhaj","athar":"Āthār","athar al salaf":"Āthār","makan allah github posts final":"Makan الله","makan allah github post final":"Makan الله"}
 function normalizePostCategory(cat){const raw=String(cat||"").trim();if(!raw)return raw;const key=categoryKey(raw);const mapped=CATEGORY_CANONICAL[key];if(mapped)return mapped;for(const c of CATEGORY_ORDER){if(categoryKey(c)===key)return c}return raw}
 function normalizeLoadedPosts(){posts.forEach(p=>{if(p.category)p.category=normalizePostCategory(p.category);ensurePostSlidesHydrated(p);ensurePostFeedMeta(p)})}
-function ensurePostFeedMeta(post){if(!post)return post;const feed=post.feed||{};const enabled=feed.enabled===true||feed.enabled==="true";const image=String(feed.image||"").trim();const explicit=post._feedExplicit===true;const num=postSeriesRank(post);if(!explicit||!enabled||!image||num<FEED_MIN_POST_NUM){post.feed={enabled:false,image:"",originalImage:"",alt:"",shareEnabled:false};post._feedExplicit=false}return post}
+function ensurePostFeedMeta(post){if(!post)return post;const feed=post.feed||{};const enabled=feed.enabled===true||feed.enabled==="true";const image=String(feed.image||"").trim();const num=postSeriesRank(post);const explicit=post._feedExplicit===true||(enabled&&!!image&&num>=FEED_MIN_POST_NUM);if(explicit&&enabled&&image&&num>=FEED_MIN_POST_NUM){post._feedExplicit=true;post.feed={enabled:true,image,originalImage:String(feed.originalImage||image),alt:String(feed.alt||""),shareEnabled:feed.shareEnabled!==false};return post}post.feed={enabled:false,image:"",originalImage:"",alt:"",shareEnabled:false};post._feedExplicit=false;return post}
 function postSeriesRank(post){const parts=[post?.id,post?._sourceFile,post?.title].filter(Boolean).join(" ");const nums=[...String(parts).matchAll(/(?:^|[-_])(\d{2,4})(?:[.\-_]|$)/g)].map(m=>Number(m[1])).filter(n=>Number.isFinite(n)&&n>0);if(!nums.length){const any=[...String(parts).matchAll(/(\d{2,4})/g)].map(m=>Number(m[1])).filter(n=>n>10);nums.push(...any)}return nums.length?Math.max(...nums):0}
 function postSortTimestamp(post){const ts=Date.parse(String(post?.date||""));return Number.isFinite(ts)?ts:0}
 function comparePostsNewestFirst(a,b){const da=postSortTimestamp(a),db=postSortTimestamp(b);if(db!==da)return db-da;const sa=postSeriesRank(a),sb=postSeriesRank(b);if(sb!==sa)return sb-sa;return String(b?._sourceFile||b?.id||"").localeCompare(String(a?._sourceFile||a?.id||""),"de")}
@@ -19581,7 +19581,7 @@ function scholarNorm(s){return String(s||"").toLowerCase().normalize("NFD").repl
 function splitScholarParts(raw){if(!raw)return[];return String(raw).split(/\s*,\s*|\s+und\s+/i).map(s=>s.trim()).filter(Boolean)}
 function mapScholarPart(part){const n=scholarNorm(part);if(!n)return null;if(/^(der)?quran$/.test(n)||/^ahl(us|al)?(as)?sunnah/.test(n)||/^yusufs?bruder/.test(n)||/^(die)?sunnah$/.test(n)||/^(die)?athar$/.test(n)||/^ijma/.test(n)||/^ahlalhadith$/.test(n)||/^salaf$/.test(n))return null;const rules=[[PROPHET_SCHOLAR_KEY,PROPHET_SCHOLAR_LABEL,0,/^(der)?prophet/],["ahmad-ibn-hanbal","Aḥmad ibn Ḥanbal",1,/ahmadibnhanbal|imamahmad/],["ash-shafii","ash-Shāfiʿī",1,/muhammadibnidris|imamashshafi|imamasshafi|imamasshafii|ashshafii|shafii/],["abu-hurayrah","Abū Hurayrah",1,/abuhurayrah|abuhurairah/],["abu-ubayd","Abū ʿUbayd al-Qāsim ibn Sallām",1,/abuubaid|abuubayd|qasim.*sallam/],["malik-ibn-anas","Mālik ibn Anas",1,/malikibnanas|imammalik/],["sufyan-ath-thauri","Sufyān ath-Thawrī",1,/sufyanaththauri|sufyanaththawri|sufyanalthauri|sufyanalthawri/],["sufyan-ibn-uyaynah","Sufyān ibn ʿUyaynah",1,/sufyanibnuyaynah/],["al-awzai","al-Awzāʿī",1,/alawzai|alawza/],["abu-hatim-ar-razi","Abū Ḥātim ar-Rāzī",1,/abuhatim.*razi|abuhatin/],["abu-zurah-ar-razi","Abū Zurʿah ar-Rāzī",1,/abuzurah.*razi/],["ibn-taymiyyah","Ibn Taymiyyah",1,/ibntaymiyyah/],["ibn-abd-al-barr","Ibn ʿAbd al-Barr",1,/ibnabd.*barr/],["ibn-sirin","Ibn Sīrīn",1,/ibnsirin/],["al-hasan-al-basri","al-Ḥasan al-Baṣrī",1,/alhasan.*basri|hasanbasri/],["ibn-kathir","Ibn Kathīr",1,/ibnkathir/],["ibn-hajar","Ibn Ḥajar",1,/ibnhajar/],["an-nawawi","an-Nawawī",1,/annawawi|nawawi/],["al-bukhari","al-Bukhārī",1,/albukhari|bukhari/],["ibn-qudamah","Ibn Qudāmah",1,/ibnqudamah/],["at-tabari","aṭ-Ṭabarī",1,/attabari|tabari/],["ibn-abbas","Ibn ʿAbbās",1,/ibnabbas/],["abdullah-ibn-masud","ʿAbdullāh ibn Masʿūd",1,/abdullahibnmasud/],["anas-b-malik","Anas b. Mālik",1,/anasbmalik|anasibnmalik/],["adh-dhahabi","adh-Dhahabī",1,/dhahabi/],["al-layth","al-Layth ibn Saʿd",1,/laythibnsad|allayth/],["al-qadi-iyad","al-Qāḍī ʿIyāḍ",1,/alqadiiyad/],["abu-isa-at-tirmidhi","Abū ʿĪsā at-Tirmidhī",1,/abuisa.*tirmidhi/],["ibn-al-jawzi","Ibn al-Jawzī",1,/ibnaljawzi/],["mujahid","Mujāhid",1,/mujahid/],["ibn-al-arabi","Ibn al-ʿArabī",1,/ibnalarabi/],["al-mawardi","al-Māwardī",1,/almawardi/],["al-qurtubi","al-Qurṭubī",1,/alqurtubi/],["al-fudayl","al-Fuḍayl ibn ʿIyāḍ",1,/alfudaylibniyad/],["al-lalakai","al-Lālakāʾī",1,/allalakai/],["al-barbahari","al-Barbahārī",1,/albarbahari/],["al-ayni","al-ʿAynī",1,/alayni/]];for(const [key,label,priority,re] of rules){if(re.test(n))return{key,label,priority}}return{key:"s:"+n,label:part.trim(),priority:999}}
 function buildScholarCatalog(){const map=new Map();posts.forEach(post=>{splitScholarParts(post.scholar).forEach(part=>{const c=mapScholarPart(part);if(!c)return;const prev=map.get(c.key);if(!prev)map.set(c.key,{...c,count:1});else{prev.count++;if(c.priority<prev.priority){prev.label=c.label;prev.priority=c.priority}}})});return[...map.values()].sort((a,b)=>a.priority!==b.priority?a.priority-b.priority:a.label.localeCompare(b.label,"de"))}
-function resolveScholarRef(value){const cat=buildScholarCatalog();return cat.find(s=>s.key===value)||cat.find(s=>s.label===value)||{key:value,label:value,priority:999,count:posts.filter(p=>p.scholar===value).length}}
+function resolveScholarRef(value){const cat=buildScholarCatalog();const hit=cat.find(s=>s.key===value)||cat.find(s=>s.label===value);if(hit)return hit;const meta=(window.DARScholarsIndex&&typeof window.DARScholarsIndex.getScholarMeta==="function")?window.DARScholarsIndex.getScholarMeta(value):((window.__darScholarMetaCache&&window.__darScholarMetaCache.scholars)||{})[value];const label=(meta&&meta.displayName)||value;return{key:value,label,priority:999,count:postsForScholarKey(value).length}}
 function postsForScholarKey(key){return posts.filter(post=>splitScholarParts(post.scholar).some(part=>mapScholarPart(part)?.key===key))}
 function postMatchesScholarKey(post,key){return splitScholarParts(post.scholar).some(part=>mapScholarPart(part)?.key===key)}
 function renderScholarOptions(){return buildScholarCatalog().map(s=>`<option value="${esc(s.key)}">${esc(s.label)}</option>`).join("")}
@@ -20814,15 +20814,106 @@ function scholarProfile(nameOrKey){
   const meta=(window.DARScholarsIndex&&typeof window.DARScholarsIndex.getScholarMeta==="function")
     ? window.DARScholarsIndex.getScholarMeta(ref.key)
     : ((window.__darScholarMetaCache&&window.__darScholarMetaCache.scholars)||{})[ref.key];
-  const teachers=Array.isArray(meta?.teachers)?meta.teachers:[];
-  const students=Array.isArray(meta?.students)?meta.students:[];
+  const teachers=mergeScholarRelItems(Array.isArray(meta?.teachers)?meta.teachers:[],[]);
+  const students=mergeScholarRelItems(Array.isArray(meta?.students)?meta.students:[],inferredStudentsForScholar(ref.key));
   const worksMeta=Array.isArray(meta?.works)?meta.works.map(w=>w&&w.title?w.title:w).filter(Boolean):[];
-  const works=[...new Set([...worksMeta,...booksFromPosts])].slice(0,8);
+  const works=[...new Set([...worksMeta,...booksFromPosts])].slice(0,24);
   let desc=meta?.bio||"Gelehrtenprofil mit historischer Einordnung, Lehrern, Schülern und Werken auf DAR AL TAWḤĪD.";
   if(ref.key===PROPHET_SCHOLAR_KEY&&!meta?.bio)desc="Aussagen und Lehren des Propheten Muḥammad ﷺ – höchste Autorität nach dem Qurʾān.";
   const epoch=meta?.eraLabel||(ref.key===PROPHET_SCHOLAR_KEY?"Der Prophet ﷺ":"Frühe Imāme / Ahl al-Ḥadīth");
   const life=meta?.lifespanLabel||"";
   return {key:ref.key,name:ref.label,desc,epoch,life,teachers,students,works,topics,count:related.length};
+}
+function sortScholarRelItems(items){
+  return (items||[]).slice().sort((a,b)=>{
+    const an=String((a&&a.name)||a||"");
+    const bn=String((b&&b.name)||b||"");
+    return an.localeCompare(bn,"de",{sensitivity:"base"});
+  });
+}
+function mergeScholarRelItems(primary,extra){
+  const seen=new Set();
+  const out=[];
+  (primary||[]).concat(extra||[]).forEach(it=>{
+    if(!it)return;
+    const id=it&&it.id?String(it.id):"";
+    const name=it&&it.name?String(it.name):(typeof it==="string"?it:"");
+    if(!name&&!id)return;
+    const key=id||name;
+    if(seen.has(key))return;
+    seen.add(key);
+    out.push(id?{id,name:name||id}:{name});
+  });
+  return sortScholarRelItems(out);
+}
+function inferredStudentsForScholar(key){
+  const map=(window.DARScholarsIndex&&typeof window.DARScholarsIndex.getAllScholarMeta==="function")
+    ? window.DARScholarsIndex.getAllScholarMeta()
+    : ((window.__darScholarMetaCache&&window.__darScholarMetaCache.scholars)||{});
+  const out=[];
+  Object.keys(map||{}).forEach(id=>{
+    const s=map[id];
+    (s&&s.teachers||[]).forEach(t=>{
+      if(t&&String(t.id)===String(key))out.push({id,name:s.displayName||id});
+    });
+  });
+  return out;
+}
+function resolveWorkBookMatch(title){
+  const t=String(title||"").trim();
+  if(!t)return"";
+  const books=[...countBy("book").keys()].filter(Boolean);
+  const hit=books.find(b=>b===t)||books.find(b=>scholarNorm(b)===scholarNorm(t));
+  return hit||"";
+}
+function scholarRelRow(opts){
+  const icon=opts.icon||"📜";
+  const title=opts.title||"";
+  const sub=opts.sub||"";
+  const meta=opts.meta||"";
+  const nav=opts.nav||"";
+  const value=opts.value||"";
+  const interactive=!!(nav&&value);
+  const attrs=interactive?` data-nav="${esc(nav)}" data-value="${esc(value)}"`:"";
+  const tag=interactive?"button":"div";
+  const type=interactive?` type="button"`:"";
+  return `<${tag}${type} class="dua-row${interactive?"":" is-static"}"${attrs}><div class="dua-row__icon" aria-hidden="true"><span class="emoji-emblem">${icon}</span></div><div class="dua-row__body"><h3>${esc(title)}</h3>${sub?`<p class="dua-row__sub">${esc(sub)}</p>`:""}${meta?`<div class="dua-row__meta"><span>${esc(meta)}</span></div>`:""}</div></${tag}>`;
+}
+function renderScholarRelFold(id,title,rowsHtml,count,emptyText,startOpen){
+  const collapsed=startOpen?"":" is-collapsed";
+  const expanded=startOpen?"true":"false";
+  const body=count?rowsHtml:`<span class="scholar-rel__empty">${esc(emptyText)}</span>`;
+  return `<section class="scholar-rel${collapsed}" data-scholar-rel="${esc(id)}">
+    <button type="button" class="scholar-rel__head" data-scholar-rel-fold="${esc(id)}" aria-expanded="${expanded}" aria-controls="scholar-rel-body-${esc(id)}">
+      <h4 class="scholar-rel__title">${esc(title)}</h4>
+      <span class="scholar-rel__meta"><span>${count}</span><span class="scholar-rel__chev" aria-hidden="true">▾</span></span>
+    </button>
+    <div class="scholar-rel__body" id="scholar-rel-body-${esc(id)}" role="region">${body}</div>
+  </section>`;
+}
+function bindScholarRelFolds(scope){
+  const root=scope||document;
+  root.querySelectorAll("[data-scholar-rel-fold]").forEach(btn=>{
+    if(btn.dataset.boundRel==="1")return;
+    btn.dataset.boundRel="1";
+    btn.onclick=(ev)=>{
+      ev.preventDefault();
+      ev.stopPropagation();
+      const sec=btn.closest(".scholar-rel");
+      if(!sec)return;
+      const open=sec.classList.toggle("is-collapsed")===false;
+      btn.setAttribute("aria-expanded",open?"true":"false");
+    };
+  });
+  root.querySelectorAll(".profile-box--scholar [data-nav]").forEach(btn=>{
+    if(btn.dataset.boundNav==="1")return;
+    btn.dataset.boundNav="1";
+    btn.onclick=(ev)=>{
+      ev.preventDefault();
+      ev.stopPropagation();
+      navigate(btn.getAttribute("data-nav"),btn.getAttribute("data-value")||"");
+    };
+  });
 }
 function renderScholarChipList(items,emptyText){
   if(!items||!items.length)return`<span class="profile-empty">${esc(emptyText)}</span>`;
@@ -20852,9 +20943,7 @@ function renderScholarProfile(name){
           const fresh=tmp.firstElementChild;
           if(fresh){
             box.replaceWith(fresh);
-            document.querySelectorAll(".profile-box--scholar [data-nav]").forEach(btn=>{
-              btn.onclick=()=>navigate(btn.getAttribute("data-nav"),btn.getAttribute("data-value")||"");
-            });
+            bindScholarRelFolds(document.querySelector(".profile-box--scholar"));
           }
         }catch(e){}
       });
@@ -20863,6 +20952,46 @@ function renderScholarProfile(name){
   return renderScholarProfileSync(p);
 }
 function renderScholarProfileSync(p){
+  const teachers=sortScholarRelItems(p.teachers||[]);
+  const students=sortScholarRelItems(p.students||[]);
+  const works=(p.works||[]).map(w=>typeof w==="string"?w:(w&&w.title?w.title:"")).filter(Boolean);
+  const topics=sortScholarRelItems((p.topics||[]).map(t=>({name:String(t)})));
+  const teacherRows=teachers.map((it,i)=>scholarRelRow({
+    icon:"📖",
+    title:it.name||it.id,
+    sub:"Lehrer · Profil öffnen",
+    meta:String(i+1).padStart(2,"0"),
+    nav:it.id?"scholar":"",
+    value:it.id||""
+  })).join("");
+  const studentRows=students.map((it,i)=>scholarRelRow({
+    icon:"🌙",
+    title:it.name||it.id,
+    sub:"Schüler · Profil öffnen",
+    meta:String(i+1).padStart(2,"0"),
+    nav:it.id?"scholar":"",
+    value:it.id||""
+  })).join("");
+  const workRows=works.map((title,i)=>{
+    const book=resolveWorkBookMatch(title);
+    return scholarRelRow({
+      icon:"📚",
+      title,
+      sub:book?"Werk · Beiträge öffnen":"Werk · kuratiert",
+      meta:String(i+1).padStart(2,"0"),
+      nav:book?"book":"",
+      value:book||""
+    });
+  }).join("");
+  const topicRows=topics.map((it,i)=>scholarRelRow({
+    icon:"✨",
+    title:it.name,
+    sub:"Thema in der App",
+    meta:String(i+1).padStart(2,"0"),
+    nav:"topic",
+    value:it.name
+  })).join("");
+  const openId=teachers.length?"teachers":(students.length?"students":(works.length?"works":(topics.length?"topics":"")));
   return `<section class="profile-box profile-box--scholar">
     <h3 class="profile-title">${esc(p.name)}</h3>
     ${p.life?`<p class="profile-life">${esc(p.life)}</p>`:""}
@@ -20872,12 +21001,13 @@ function renderScholarProfileSync(p){
       <div class="profile-meta"><b>Lebenszeit</b>${p.life?esc(p.life):"Noch nicht kuratiert – nur sichere Angaben werden gezeigt."}</div>
       <div class="profile-meta"><b>Beiträge hier</b>${p.count} Beiträge auf DAR AL TAWḤĪD</div>
     </div>
-    <div class="profile-section"><h4 class="profile-section__title">Lehrer (${p.teachers.length})</h4>${renderScholarChipList(p.teachers,"Noch keine gesicherten Lehrer-Angaben hinterlegt.")}</div>
-    <div class="profile-section"><h4 class="profile-section__title">Schüler (${p.students.length})</h4>${renderScholarChipList(p.students,"Noch keine gesicherten Schüler-Angaben hinterlegt.")}</div>
-    <div class="profile-section"><h4 class="profile-section__title">Werke (${p.works.length})</h4>${p.works.length?`<div class="profile-chip-row">${p.works.map(w=>`<span class="profile-chip is-static">${esc(w)}</span>`).join("")}</div>`:`<span class="profile-empty">Werke werden aus Beiträgen erkannt oder kuratiert ergänzt.</span>`}</div>
-    <div class="profile-section"><h4 class="profile-section__title">Themen in der App (${p.topics.length})</h4>${p.topics.length?`<div class="profile-chip-row">${p.topics.map(t=>`<span class="profile-chip is-static">${esc(t)}</span>`).join("")}</div>`:`<span class="profile-empty">Noch keine Themen erkannt.</span>`}</div>
+    ${renderScholarRelFold("teachers","Lehrer",teacherRows,teachers.length,"Noch keine gesicherten Lehrer-Angaben hinterlegt.",openId==="teachers")}
+    ${renderScholarRelFold("students","Schüler",studentRows,students.length,"Noch keine gesicherten Schüler-Angaben hinterlegt.",openId==="students")}
+    ${renderScholarRelFold("works","Werke",workRows,works.length,"Werke werden aus Beiträgen erkannt oder kuratiert ergänzt.",openId==="works")}
+    ${renderScholarRelFold("topics","Themen in der App",topicRows,topics.length,"Noch keine Themen erkannt.",openId==="topics")}
   </section>`;
 }
+
 function bookProfile(name){
   const related=posts.filter(p=>p.book===name);
   const author=(related.find(p=>p.author)?.author)||(related.find(p=>p.scholar)?.scholar)||"Autor/Gelehrter wird aus Beiträgen erkannt";
@@ -23794,7 +23924,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v560";
+const APP_BUILD_ID="app-shell-v562";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}

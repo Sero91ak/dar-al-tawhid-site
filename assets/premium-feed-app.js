@@ -1703,11 +1703,12 @@
 
   function resolvePostFeedMeta(post) {
     if (!post) return null;
-    if (post._feedExplicit !== true) return null;
     if (postFeedNumber(post) < FEED_MIN_POST_NUM) return null;
     var feed = post.feed || {};
     var image = String(feed.image || '').trim();
-    if (feedEnabledFlag(feed.enabled) && image) {
+    var enabled = feedEnabledFlag(feed.enabled);
+    var explicit = post._feedExplicit === true || (enabled && !!image);
+    if (explicit && enabled && image) {
       return {
         enabled: true,
         image: image,
