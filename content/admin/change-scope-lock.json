@@ -2454,6 +2454,19 @@
         "manifest.json"
       ],
       "expiresAt": "2026-09-30T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-knowledge-phase1-test-2026-08-07",
+      "approvedBy": "user-explicit-komplettauftrag-propheten-test-only",
+      "note": "Phase 1 Propheten-Wissensbibliothek ausschließlich Test-App; keine Live-Freigabe",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/assets/prophets/",
+        "test/data/prophets/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

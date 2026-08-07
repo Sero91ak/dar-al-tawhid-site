@@ -1,0 +1,314 @@
+/* DAR AL TAWḤĪD — Propheten Wissensbibliothek (Test only)
+   Theme tokens only. No hardcoded brand colors. */
+
+.prophets-root{
+  --prophets-rail-min:240px;
+  --prophets-rail-max:360px;
+  --prophets-rail-pct:34%;
+  --prophets-read-max:46rem;
+  color:var(--text);
+}
+.prophets-root *{box-sizing:border-box}
+
+/* —— Mehr: Premium-Einstieg —— */
+.prophets-spotlight{
+  display:block;width:100%;text-align:left;cursor:pointer;
+  margin:0 0 14px;padding:16px 16px 14px;
+  border:1px solid color-mix(in srgb,var(--gold2) 28%,var(--line2));
+  border-radius:4px;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--gold2) 8%,var(--bg)) 0%,
+      var(--bg) 72%);
+  color:inherit;font:inherit;
+  box-shadow:none;
+}
+.prophets-spotlight:active{transform:translateY(1px)}
+.prophets-spotlight__eyebrow{
+  display:block;font-size:10px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 8px;
+}
+.prophets-spotlight__title{
+  margin:0;font-size:1.28rem;font-weight:900;letter-spacing:.04em;
+  color:var(--text);line-height:1.15;
+}
+.prophets-spotlight__ar{
+  margin:4px 0 10px;font-size:1.35rem;font-weight:700;
+  color:color-mix(in srgb,var(--gold2) 70%,var(--text));
+  direction:rtl;line-height:1.4;
+}
+.prophets-spotlight__meta{
+  margin:0 0 12px;font-size:12px;font-weight:650;color:var(--muted);line-height:1.45;
+}
+.prophets-spotlight__cta{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:850;color:var(--text);
+  border-bottom:1px solid color-mix(in srgb,var(--gold2) 45%,transparent);
+  padding-bottom:1px;
+}
+.prophets-spotlight__ornament{
+  display:block;height:1px;margin:12px 0 0;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in srgb,var(--gold2) 55%,var(--line2)) 20%,
+    color-mix(in srgb,var(--gold2) 55%,var(--line2)) 80%,
+    transparent 100%);
+}
+
+/* —— Shell / master-detail —— */
+.prophets-shell{display:flex;flex-direction:column;gap:0;min-width:0}
+.prophets-layout{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:0;align-items:start;min-width:0;
+}
+.prophets-rail,.prophets-pane{min-width:0}
+.prophets-rail{
+  padding:0 0 18px;
+}
+.prophets-pane{padding:0 0 28px}
+
+/* Dual pane: width-based only (Fold open / tablet landscape / wide split) */
+@container prophets (min-width: 720px){
+  .prophets-layout--dual{
+    grid-template-columns:
+      clamp(var(--prophets-rail-min), var(--prophets-rail-pct), var(--prophets-rail-max))
+      minmax(0,1fr);
+    gap:0;
+  }
+  .prophets-rail{
+    position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);
+    max-height:calc(100dvh - 110px);overflow:auto;
+    padding:0 14px 24px 0;
+    border-inline-end:1px solid transparent;
+    background:
+      linear-gradient(90deg,
+        transparent 0%,
+        transparent calc(100% - 1px),
+        color-mix(in srgb,var(--gold2) 22%,var(--line2)) calc(100% - 1px),
+        color-mix(in srgb,var(--gold2) 8%,transparent) 100%);
+  }
+  .prophets-pane{padding:0 0 28px 18px}
+  .prophets-rail__back-mobile{display:none!important}
+}
+@supports not (container-type:inline-size){
+  @media (min-width:720px){
+    .prophets-layout--dual{
+      grid-template-columns:
+        clamp(240px,34%,360px) minmax(0,1fr);
+    }
+    .prophets-rail{
+      position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);
+      max-height:calc(100dvh - 110px);overflow:auto;
+      padding:0 14px 24px 0;
+      border-inline-end:1px solid color-mix(in srgb,var(--gold2) 22%,var(--line2));
+    }
+    .prophets-pane{padding:0 0 28px 18px}
+    .prophets-rail__back-mobile{display:none!important}
+  }
+}
+.prophets-root{container-type:inline-size;container-name:prophets}
+
+/* —— Start / list —— */
+.prophets-hero{
+  padding:4px 0 14px;margin:0 0 4px;
+}
+.prophets-hero h1{
+  margin:0;font-size:1.45rem;font-weight:900;letter-spacing:.05em;line-height:1.15;
+}
+.prophets-hero__ar{
+  margin:4px 0 10px;font-size:1.5rem;direction:rtl;
+  color:color-mix(in srgb,var(--gold2) 72%,var(--text));font-weight:700;
+}
+.prophets-hero p{
+  margin:0;font-size:13px;line-height:1.55;color:var(--muted);max-width:36rem;font-weight:600;
+}
+.prophets-rule{
+  height:1px;border:0;margin:14px 0;
+  background:linear-gradient(90deg,
+    color-mix(in srgb,var(--gold2) 40%,var(--line2)),
+    color-mix(in srgb,var(--line2) 80%,transparent) 70%,
+    transparent);
+}
+.prophets-search{
+  width:100%;padding:11px 12px;border-radius:4px;
+  border:1px solid color-mix(in srgb,var(--gold2) 18%,var(--line2));
+  background:color-mix(in srgb,var(--bg) 92%,var(--card,var(--bg)));
+  color:var(--text);font:inherit;font-size:14px;font-weight:650;
+}
+.prophets-search::placeholder{color:var(--muted);opacity:.85}
+.prophets-filters{
+  display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px;
+}
+.prophets-filter{
+  appearance:none;border:1px solid color-mix(in srgb,var(--line2) 85%,var(--gold2));
+  background:transparent;color:var(--muted);font:inherit;font-size:11px;font-weight:800;
+  padding:6px 10px;border-radius:3px;cursor:pointer;
+}
+.prophets-filter.is-active{
+  color:var(--text);
+  border-color:color-mix(in srgb,var(--gold2) 45%,var(--line2));
+  background:color-mix(in srgb,var(--gold2) 10%,transparent);
+}
+.prophets-section-label{
+  margin:18px 0 8px;font-size:10px;font-weight:850;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);
+}
+.prophets-list{display:flex;flex-direction:column;gap:0;margin:0;padding:0;list-style:none}
+.prophets-row{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:start;
+  width:100%;text-align:left;padding:12px 4px;margin:0;
+  border:0;border-bottom:1px solid color-mix(in srgb,var(--line2) 75%,transparent);
+  background:transparent;color:inherit;font:inherit;cursor:pointer;border-radius:0;
+}
+.prophets-row:hover,.prophets-row:focus-visible{
+  background:color-mix(in srgb,var(--gold2) 6%,transparent);outline:none;
+}
+.prophets-row.is-active{
+  background:color-mix(in srgb,var(--gold2) 9%,transparent);
+  box-shadow:inset 2px 0 0 color-mix(in srgb,var(--gold2) 55%,transparent);
+}
+.prophets-row__name{
+  display:block;font-size:15px;font-weight:900;letter-spacing:.03em;line-height:1.25;
+}
+.prophets-row__honor{
+  font-weight:650;font-size:12px;color:var(--muted);margin-inline-start:4px;
+}
+.prophets-row__meta{
+  display:block;margin-top:3px;font-size:11.5px;font-weight:650;color:var(--muted);line-height:1.4;
+}
+.prophets-row__tags{
+  display:block;margin-top:4px;font-size:10.5px;font-weight:750;color:var(--muted);
+  letter-spacing:.02em;
+}
+.prophets-row__chev{color:var(--muted);font-size:14px;padding-top:2px}
+.prophets-empty{
+  padding:18px 4px;color:var(--muted);font-size:13px;font-weight:650;
+}
+.prophets-note{
+  margin:16px 0 0;padding:10px 0 0;font-size:11.5px;line-height:1.5;color:var(--muted);
+  border-top:1px solid color-mix(in srgb,var(--line2) 70%,transparent);
+}
+
+/* —— Detail —— */
+.prophets-detail{max-width:var(--prophets-read-max)}
+.prophets-detail__head{padding:2px 0 8px}
+.prophets-detail__name{
+  margin:0;font-size:1.55rem;font-weight:900;letter-spacing:.06em;line-height:1.1;
+}
+.prophets-detail__ar{
+  margin:6px 0 4px;font-size:1.65rem;direction:rtl;font-weight:700;
+  color:color-mix(in srgb,var(--gold2) 75%,var(--text));line-height:1.35;
+}
+.prophets-detail__honor{margin:0 0 10px;font-size:13px;font-weight:700;color:var(--muted)}
+.prophets-detail__roles{
+  margin:0 0 6px;font-size:12.5px;font-weight:800;color:var(--text);
+}
+.prophets-detail__people{margin:0;font-size:12.5px;font-weight:650;color:var(--muted)}
+
+.prophets-tabs{
+  display:flex;flex-wrap:nowrap;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;
+  margin:8px 0 0;padding:0 0 2px;
+  border-bottom:1px solid color-mix(in srgb,var(--line2) 80%,transparent);
+  scrollbar-width:none;
+}
+.prophets-tabs::-webkit-scrollbar{display:none}
+.prophets-tab{
+  flex:0 0 auto;appearance:none;border:0;background:transparent;cursor:pointer;
+  font:inherit;font-size:12px;font-weight:850;color:var(--muted);
+  padding:10px 12px 9px;border-bottom:2px solid transparent;margin-bottom:-1px;
+}
+.prophets-tab.is-active{
+  color:var(--text);
+  border-bottom-color:color-mix(in srgb,var(--gold2) 70%,var(--text));
+}
+
+.prophets-chapter{padding:16px 0 8px}
+.prophets-chapter h3{
+  margin:0 0 10px;font-size:11px;font-weight:850;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);
+}
+.prophets-field{
+  padding:10px 0;border-bottom:1px solid color-mix(in srgb,var(--line2) 65%,transparent);
+}
+.prophets-field__label{
+  display:block;font-size:11px;font-weight:800;color:var(--muted);margin-bottom:3px;
+}
+.prophets-field__value{display:block;font-size:14px;font-weight:750;line-height:1.45}
+.prophets-status{
+  display:inline-block;margin-top:4px;font-size:10.5px;font-weight:800;
+  color:var(--muted);letter-spacing:.02em;
+}
+.prophets-status--ok{color:color-mix(in srgb,var(--text) 70%,var(--gold2))}
+.prophets-status--na{color:var(--muted);font-style:italic}
+
+.prophets-timeline{position:relative;padding:4px 0 8px 14px}
+.prophets-timeline::before{
+  content:"";position:absolute;left:3px;top:6px;bottom:6px;width:1px;
+  background:color-mix(in srgb,var(--gold2) 28%,var(--line2));
+}
+.prophets-station{position:relative;padding:0 0 22px}
+.prophets-station::before{
+  content:"";position:absolute;left:-14px;top:6px;width:7px;height:7px;border-radius:50%;
+  background:color-mix(in srgb,var(--gold2) 65%,var(--bg));
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--bg) 80%,transparent);
+}
+.prophets-station h4{
+  margin:0 0 8px;font-size:14px;font-weight:900;letter-spacing:.04em;
+}
+.prophets-station p{
+  margin:0 0 8px;font-size:13.5px;line-height:1.65;font-weight:600;color:var(--text);
+}
+.prophets-src{
+  margin:0;font-size:11.5px;font-weight:700;color:var(--muted);line-height:1.45;
+}
+.prophets-link{
+  appearance:none;border:1px solid color-mix(in srgb,var(--gold2) 30%,var(--line2));
+  background:transparent;color:var(--text);font:inherit;font-size:12px;font-weight:800;
+  padding:8px 12px;border-radius:3px;cursor:pointer;margin-top:8px;display:inline-flex;
+}
+.prophets-link:active{transform:translateY(1px)}
+
+.prophets-quote{
+  padding:12px 0;border-bottom:1px solid color-mix(in srgb,var(--line2) 65%,transparent);
+}
+.prophets-quote__ar{
+  direction:rtl;font-size:1.2rem;line-height:1.85;font-weight:600;margin:0 0 8px;
+  overflow-wrap:anywhere;
+}
+.prophets-quote__de{margin:0 0 8px;font-size:13.5px;line-height:1.6;font-weight:600}
+.prophets-quote__meta{margin:0;font-size:11.5px;color:var(--muted);font-weight:700;line-height:1.45}
+.prophets-badge{
+  display:inline-block;font-size:10px;font-weight:850;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);
+  border:1px solid color-mix(in srgb,var(--line2) 80%,var(--gold2));
+  padding:2px 6px;border-radius:2px;margin-inline-end:6px;
+}
+
+.prophets-family-card{
+  padding:12px 0;border-bottom:1px solid color-mix(in srgb,var(--line2) 65%,transparent);
+}
+.prophets-family-card h4{margin:0 0 6px;font-size:13px;font-weight:900}
+.prophets-family-card p{margin:0 0 6px;font-size:13px;line-height:1.55;font-weight:600}
+
+.prophets-work-list{display:flex;flex-direction:column;gap:0}
+.prophets-work{
+  display:flex;justify-content:space-between;gap:10px;align-items:center;
+  width:100%;text-align:left;padding:11px 2px;margin:0;
+  border:0;border-bottom:1px solid color-mix(in srgb,var(--line2) 70%,transparent);
+  background:transparent;color:inherit;font:inherit;cursor:pointer;
+}
+.prophets-work span:first-child{font-weight:800;font-size:13.5px}
+.prophets-work span:last-child{font-size:11px;font-weight:750;color:var(--muted)}
+
+.prophets-rail__back-mobile{
+  appearance:none;border:0;background:transparent;color:var(--muted);
+  font:inherit;font-size:12px;font-weight:800;padding:0 0 10px;cursor:pointer;
+}
+
+body.is-propheten-route #appView{overflow-x:hidden}
+body.is-propheten-route .prophets-root{padding-bottom:8px}
+
+@media (prefers-reduced-motion:reduce){
+  .prophets-spotlight:active,.prophets-link:active{transform:none}
+}
