@@ -69,6 +69,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-reader-chrome-v506-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Qurʾān Ayah-Hintergrund, Einzel-Buttons, rechtes Bild-Vorlagen, visitor+test",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
       "id": "gelehrte-data-polish-v505-2026-08-07",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer: Doppel-Buttons weg; passende Emojis; Lehrer/Schüler/Werke vollständig; Namen lesbarer; live",
