@@ -2480,6 +2480,22 @@
         "test/version.json"
       ],
       "expiresAt": "2026-09-30T23:59:00.000Z"
+    },
+    {
+      "id": "visual-cache-authority-v587-2026-08-07",
+      "approvedBy": "user-report-old-visuals-keep-returning",
+      "note": "Alte Optik darf nicht wieder erscheinen: SW/Manifest/Version-Guard + Style-Autorität; Test+Live",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "manifest.json",
+        "assets/live-boot.js"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
     }
   ],
   "enabled": true

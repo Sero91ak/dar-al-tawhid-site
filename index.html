@@ -5,11 +5,11 @@
 <!-- workers-deploy-stamp:1785515013940 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v586";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v587";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
-<script defer src="/assets/live-boot.js?v=483"></script>
+<script defer src="/assets/live-boot.js?v=587"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 
 <title>DAR AL TAWḤID</title>
@@ -9792,14 +9792,14 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/premium-feed-app.js?v=92" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <script src="/assets/adaptive-layout.js?v=5" defer></script>
-<script src="/assets/scholars-index.js?v=565" defer></script>
+<script src="/assets/scholars-index.js?v=587" defer></script>
 <link rel="preload" href="/assets/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Elsie+Swash+Caps:wght@400;900&family=Inter:wght@400;600;700;800;900&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Elsie+Swash+Caps:wght@400;900&family=Inter:wght@400;600;700;800;900&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="/assets/app-card-layout.css?v=4">
-<link rel="stylesheet" href="/assets/app-theme-surfaces.css?v=2">
+<link rel="stylesheet" href="/assets/app-theme-surfaces.css?v=587">
 
 
 <style id="feature-final-v202">
@@ -11338,12 +11338,12 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
   color:#2a6fa8!important;
 }
 </style>
-<link rel="stylesheet" href="/assets/dar-premium-depth.css?v=2">
+<link rel="stylesheet" href="/assets/dar-premium-depth.css?v=587">
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=5">
 <link rel="stylesheet" href="/assets/books-library.css?v=2">
 <link rel="stylesheet" href="/assets/dar-account-visibility.css?v=11">
-<link rel="stylesheet" href="/assets/scholars-index.css?v=505">
-<link rel="stylesheet" href="/assets/adaptive-layout.css?v=5">
+<link rel="stylesheet" href="/assets/scholars-index.css?v=587">
+<link rel="stylesheet" href="/assets/adaptive-layout.css?v=587">
 <style id="typography-compact-fix-v310">
 /* Finale Typografie-Korrektur — gewinnt gegen Home-Compact-Overrides */
 .section-head h3,
@@ -24774,21 +24774,22 @@ function hardRefreshApp(){
     try{if(typeof window.DAR_AUTO_REFRESH?.hideAllBanners==="function")window.DAR_AUTO_REFRESH.hideAllBanners()}catch(e){}
     window.__darAppVersionAvailable=false;
     try{
-      var appliedId=String(window.__darRemoteBuildId||"").trim();
-      if(!appliedId){
+      var pendingId=String(window.__darRemoteBuildId||"").trim();
+      if(!pendingId){
         try{
           var versionPath=String(location.pathname||"").indexOf("/test")>=0?"/test/version.json":"/version.json";
           var vr=await fetch(versionPath,{cache:"no-store"});
-          if(vr.ok){var remote=await vr.json();appliedId=String(remote&&remote.buildId||"").trim()}
+          if(vr.ok){var remote=await vr.json();pendingId=String(remote&&remote.buildId||"").trim()}
         }catch(e){}
       }
-      if(!appliedId)appliedId=String(APP_BUILD_ID||"").trim();
-      try{var stuckId=appliedId;if(stuckId)sessionStorage.setItem("dar_version_stuck_guard_v1",JSON.stringify({buildId:stuckId,tries:1,at:Date.now()}))}catch(e){}
-      if(appliedId&&typeof localStorage!=="undefined"){
+      if(!pendingId)pendingId=String(APP_BUILD_ID||"").trim();
+      /* Nur pending setzen – applied erst nach erfolgreichem Laden der neuen Hülle */
+      if(pendingId&&typeof localStorage!=="undefined"){
         var raw=localStorage.getItem("dar_app_version_state_v1");
         var state=raw?JSON.parse(raw):{};
-        localStorage.setItem("dar_app_version_state_v1",JSON.stringify(Object.assign({},state&&typeof state==="object"?state:{},{appliedBuildId:appliedId,appliedAt:Date.now(),acknowledgedBuildId:appliedId,pendingBuildId:""})));
+        localStorage.setItem("dar_app_version_state_v1",JSON.stringify(Object.assign({},state&&typeof state==="object"?state:{},{pendingBuildId:pendingId,appliedBuildId:"",acknowledgedBuildId:"",requestedAt:Date.now()})));
       }
+      try{sessionStorage.removeItem("dar_version_stuck_guard_v1")}catch(e){}
     }catch(e){}
     try{await clearAppRuntimeCaches()}catch(e){console.warn("Cache-Reparatur:",e)}
     try{await requestHardShellRefresh()}catch(e){console.warn("Shell-Refresh:",e)}
@@ -24799,7 +24800,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v586";
+const APP_BUILD_ID="app-shell-v587";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -26157,12 +26158,12 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
         var stuck = JSON.parse(sessionStorage.getItem(VERSION_STUCK_KEY) || '{}');
         var tries = String(stuck.buildId) === id ? (Number(stuck.tries) || 0) + 1 : 1;
         sessionStorage.setItem(VERSION_STUCK_KEY, JSON.stringify({ buildId: id, tries: tries, at: Date.now() }));
-        if (tries >= 1) {
+        /* Nie appliedBuildId setzen, solange die geladene Hülle noch alt sein kann */
+        if (tries >= 3) {
           writeVersionState({
-            acknowledgedBuildId: id,
-            appliedBuildId: id,
             updateOfferBlockedBuildId: id,
-            updateOfferBlockedUntil: Date.now() + VERSION_UPDATE_COOLDOWN_MS
+            updateOfferBlockedUntil: Date.now() + VERSION_UPDATE_COOLDOWN_MS,
+            pendingBuildId: id
           });
         }
       } catch (e) {}
@@ -26176,6 +26177,20 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       if (String(state.pendingBuildId || '') === id) patch.pendingBuildId = '';
       writeVersionState(patch);
     }
+    (function reconcileShellVersionState(){
+      try{
+        var local=String(APP_BUILD_ID||"").trim();
+        if(!local)return;
+        var state=readVersionState();
+        if(String(state.pendingBuildId||"")===local || String(state.appliedBuildId||"")===local){
+          rememberAppliedBuild(local);
+          try{sessionStorage.removeItem(VERSION_STUCK_KEY)}catch(e){}
+        } else if(state.appliedBuildId && String(state.appliedBuildId)!==local){
+          writeVersionState({appliedBuildId:"",acknowledgedBuildId:""});
+        }
+      }catch(e){}
+    })();
+
     function readVersionUpdatePending() {
       try {
         var raw = sessionStorage.getItem(VERSION_UPDATE_KEY);
@@ -26222,7 +26237,6 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       if (!canAutoShellReload(id)) return false;
       markAutoShellReload(id);
       markVersionUpdatePending(id);
-      markVersionUpdateStuck(id);
       try {
         if (typeof hardRefreshApp === 'function') {
           hardRefreshApp();
@@ -26239,12 +26253,14 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       var id = String(remoteBuildId || '').trim();
       if (!id || typeof APP_BUILD_ID !== 'string' || id === String(APP_BUILD_ID)) return false;
       var state = readVersionState();
-      if (String(state.appliedBuildId || '') === id) return false;
-      if (String(state.acknowledgedBuildId || '') === id) return false;
+      /* Falsch gesetztes applied/ack bei alter Hülle zurücksetzen */
+      if ((String(state.appliedBuildId || '') === id || String(state.acknowledgedBuildId || '') === id) && id !== String(APP_BUILD_ID)) {
+        state = writeVersionState({ appliedBuildId: '', acknowledgedBuildId: '', pendingBuildId: id });
+      }
       if (state.updateOfferBlockedUntil && Date.now() < Number(state.updateOfferBlockedUntil) && String(state.updateOfferBlockedBuildId || '') === id) return false;
       try {
         var stuck = JSON.parse(sessionStorage.getItem(VERSION_STUCK_KEY) || '{}');
-        if (String(stuck.buildId) === id && (Number(stuck.tries) || 0) >= 1) return false;
+        if (String(stuck.buildId) === id && (Number(stuck.tries) || 0) >= 3) return false;
       } catch (e) {}
       return true;
     }
@@ -26512,8 +26528,8 @@ body.is-quran-reader-route .qrc-chrome .qrc-title-btn,
   padding:8px 16px!important;
   min-height:40px!important;
   background:radial-gradient(ellipse 120% 100% at 50% 0%,color-mix(in srgb,var(--gold2) 12%,transparent),color-mix(in srgb,var(--card,rgba(255,255,255,.06)) 70%,transparent))!important;
-  border:1px solid color-mix(in srgb,var(--gold2) 30%,transparent)!important;
-  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2) 8%,transparent)!important;
+  border:0!important;
+  box-shadow:none!important;
 }
 body.is-quran-reader-route .qrc-chrome .qrc-title{
   font-family:var(--serif)!important;
@@ -26527,8 +26543,8 @@ body.is-quran-reader-route .qrc-chrome .qrc-icon-btn,
 body.is-quran-reader-route .qrc-chrome .qrc-wake-icon-btn{
   border-radius:50%!important;
   width:38px!important;height:38px!important;
-  border:1px solid color-mix(in srgb,var(--gold2) 24%,transparent)!important;
-  background:color-mix(in srgb,var(--gold2) 5%,transparent)!important;
+  border:0!important;
+  background:transparent!important;
 }
 body.is-quran-reader-route .qrc-chrome{
   border-bottom:0!important;
@@ -27673,6 +27689,41 @@ html[data-theme="bordeaux"] body.is-quran-reader-route{
   --qrc-dock-bg:rgba(255,255,255,.045);
   --qrc-dock-border:rgba(255,255,255,.09);
 }
+</style>
+
+
+<style id="visual-authority-v587">
+/* VISUAL_AUTHORITY_V587 · Endgültige Optik-Sperre: aktuelle Darstellung gewinnt immer */
+body.is-quran-overview .qov-header{padding:12px 4px 10px!important}
+body.is-quran-overview .qov-title{font-size:clamp(24px,5.4vw,30px)!important;line-height:1.08!important;letter-spacing:.05em!important}
+body.is-quran-overview .qov-subtitle{font-size:12px!important;margin-top:4px!important}
+body.is-quran-overview .qov-icon-btn,
+body.is-quran-overview .qov-wake-icon-btn,
+body.is-quran-overview .qov-wake-btn,
+body.is-quran-overview #qovWakeBtn,
+body.is-quran-overview #qovSettingsBtn{border:0!important;box-shadow:none!important;background:transparent!important}
+body.is-quran-overview .qov-nav-stack{border:0!important;box-shadow:none!important;background:color-mix(in srgb,var(--quran-surface-panel,var(--card)) 55%,transparent)!important}
+body.is-quran-overview .qov-nav-stack .qov-nav-stack-search{border:0!important;box-shadow:none!important}
+body.is-quran-overview .qov-jump-pick,
+body.is-quran-overview .qov-direct-grid--compact select,
+body.is-quran-overview .qov-direct-grid--compact .direct-pick{border:0!important;box-shadow:none!important}
+body.is-quran-overview .qov-segment-bar{border:0!important;box-shadow:none!important;background:transparent!important;padding:0!important;gap:6px!important}
+body.is-quran-overview .qov-segment-btn{border:0!important;box-shadow:none!important;background:transparent!important;min-height:38px!important;font-size:11.5px!important}
+body.is-quran-overview .qov-segment-btn[aria-selected="true"],
+body.is-quran-overview .qov-segment-btn.active{border:0!important;background:color-mix(in srgb,var(--gold2) 12%,transparent)!important;box-shadow:inset 0 -2px 0 color-mix(in srgb,var(--gold2) 55%,transparent)!important;border-radius:10px!important}
+body.is-quran-overview .qov-sort-btn{border:0!important;box-shadow:none!important;background:transparent!important}
+body.is-quran-reader-route .qrc-chrome-main{padding:10px clamp(12px,3.2vw,16px) 8px!important}
+body.is-quran-reader-route .qrc-chrome .qrc-title-btn,
+body.is-quran-reader-route .qrc-title-btn{border:0!important;box-shadow:none!important;min-height:44px!important;padding:10px 18px!important;background:color-mix(in srgb,var(--card,rgba(255,255,255,.06)) 42%,transparent)!important}
+body.is-quran-reader-route .qrc-chrome .qrc-title{font-size:16.5px!important;font-weight:700!important}
+body.is-quran-reader-route .qrc-chrome .qrc-icon-btn,
+body.is-quran-reader-route .qrc-chrome .qrc-wake-icon-btn,
+body.is-quran-reader-route .qrc-actions .qrc-icon-btn,
+body.is-quran-reader-route #qrcInfoBtn,
+body.is-quran-reader-route #qrcSettingsBtn{border:0!important;box-shadow:none!important;background:transparent!important;width:42px!important;height:42px!important;min-width:42px!important}
+/* Alte Oval-/Kanten-Patches (v545 u.ä.) entmachten, Funktionen bleiben */
+#quran-chrome-oval-v545 body.is-quran-reader-route .qrc-chrome .qrc-title-btn,
+body.is-quran-reader-route .qrc-chrome .qrc-title-btn{border-width:0!important}
 </style>
 
 </html>

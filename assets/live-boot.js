@@ -233,11 +233,18 @@
           } catch (e) {}
         }
         var state = readVersionState();
-        if (state && (state.appliedBuildId === remoteBuildId || state.acknowledgedBuildId === remoteBuildId)) return;
+        // Nie als „fertig“ werten, wenn die geladene Hülle noch alt ist.
+        if (state && (String(state.appliedBuildId || "") === remoteBuildId || String(state.acknowledgedBuildId || "") === remoteBuildId) && remoteBuildId !== local) {
+          try {
+            var cleared = Object.assign({}, state, { appliedBuildId: "", acknowledgedBuildId: "", pendingBuildId: remoteBuildId });
+            localStorage.setItem("dar_app_version_state_v1", JSON.stringify(cleared));
+          } catch (e) {}
+          state = readVersionState();
+        }
         if (state && state.updateOfferBlockedUntil && Date.now() < Number(state.updateOfferBlockedUntil) && String(state.updateOfferBlockedBuildId || "") === remoteBuildId) return;
         try {
           var stuck = JSON.parse(sessionStorage.getItem("dar_version_stuck_guard_v1") || "{}");
-          if (String(stuck.buildId) === remoteBuildId && (Number(stuck.tries) || 0) >= 1) return;
+          if (String(stuck.buildId) === remoteBuildId && (Number(stuck.tries) || 0) >= 3) return;
         } catch (e) {}
         window.__darRemoteBuildId = remoteBuildId;
         if (typeof window.DAR_AUTO_REFRESH === "object" && typeof window.DAR_AUTO_REFRESH.check === "function") {
