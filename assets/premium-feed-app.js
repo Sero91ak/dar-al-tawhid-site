@@ -3544,7 +3544,8 @@
   }
 
   function destroy() {
-    saveFeedState();
+    // Tab-Reentry: wenn der Feed bewusst zurückgesetzt wird, Position nicht wieder speichern
+    if (!global.__darFeedTabFresh) saveFeedState();
     document.body.classList.remove('is-premium-feed-view');
     if (observer) observer.disconnect();
   }
