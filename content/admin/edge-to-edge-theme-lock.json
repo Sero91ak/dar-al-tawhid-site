@@ -1,9 +1,9 @@
 {
   "locked": true,
-  "lockedAt": "2026-08-07T07:48:00.000Z",
+  "lockedAt": "2026-08-07T09:42:48.000Z",
   "formatName": "Edge-to-Edge Erscheinungsbild",
   "formatId": "EDGE_TO_EDGE_THEME_LOCK",
-  "lockedReason": "Nutzer-Auftrag: Edge-to-Edge für jedes Erscheinungsbild (aktuell und künftig) — randlos, durchgängiger Farbübergang. Darf nie geändert/entfernt werden ohne ausdrückliche Freigabe.",
+  "lockedReason": "Edge-to-Edge = nur Layout (randlos). Theme-Farben bleiben je Erscheinungsbild eigen — keine Layl-/Grün-Übernahme.",
   "unlockPolicy": "Nur nach ausdrücklichem Nutzer-Auftrag, z. B. „Edge-to-Edge-Sperre aufheben“.",
   "requiredThemes": [
     "dark",
@@ -15,7 +15,7 @@
   ],
   "requiredCssMarkers": [
     "EDGE_TO_EDGE_THEME_LOCK",
-    "app-edge-to-edge-theme-lock-v500",
+    "app-edge-to-edge-theme-lock-v503",
     "Edge-to-Edge Erscheinungsbild",
     "html[data-theme] .app{",
     "padding-left:0!important",
@@ -23,8 +23,8 @@
     "border-radius:0!important",
     "clip-path:none!important",
     "theme-hero-shell",
-    "--premium-bg:var(--outer-bg)!important",
-    "html[data-theme=\"dar-al-layl\"]"
+    "html[data-theme=\"dar-al-layl\"]",
+    "Keine Theme-Farben überschreiben"
   ],
   "requiredJsMarkers": [
     "EDGE_TO_EDGE_THEME_LOCK · Format: Edge-to-Edge Erscheinungsbild",
@@ -47,6 +47,11 @@
       "id": "legacy-restore-only-dark",
       "re": "app-frame-color-restore-v498",
       "reason": "Nur-Dunkel-Restore darf die All-Theme-Sperre nicht ersetzen"
+    },
+    {
+      "id": "lock-force-layl-green-on-all",
+      "re": "app-edge-to-edge-theme-lock[\\s\\S]{0,800}html\\[data-theme=\"dark\"\\],\\s*:root\\{[\\s\\S]*#050706",
+      "reason": "Edge-Lock darf Klassisch Dunkel/:root nicht auf Layl-Grün #050706 zwingen"
     }
   ],
   "newThemeChecklist": [
@@ -54,5 +59,6 @@
     "THEME_META Eintrag mit color = page flat color",
     "normalizeTheme erlaubt den neuen Key",
     "Lock-CSS: --page-cover/--premium-bg an outer-bg koppeln (wie light/soft/royal/bordeaux) oder eigenes seamless Mapping"
-  ]
+  ],
+  "notes": "v503: Color overrides removed from lock; Elegant defaults warm bronze again; green only on dar-al-layl"
 }

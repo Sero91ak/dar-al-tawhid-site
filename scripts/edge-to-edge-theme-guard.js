@@ -64,8 +64,12 @@ function runEdgeToEdgeThemeGuard() {
       const attr = `data-theme="${theme}"`;
       if (!content.includes(attr)) failed += fail(`${file}: Theme fehlt: ${theme}`);
     }
-    if (!content.includes("--premium-bg:var(--outer-bg)!important")) {
-      failed += fail(`${file}: Hell/Soft/Royal/Bordeaux müssen --premium-bg an --outer-bg koppeln`);
+    // Colors stay theme-native — lock must NOT force a shared palette.
+    if (/app-edge-to-edge-theme-lock[\s\S]{0,900}html\[data-theme="dark"\],\s*:root\{[\s\S]*#050706/.test(content)) {
+      failed += fail(`${file}: Edge-Lock darf nicht Layl-Grün auf dark/:root zwingen`);
+    }
+    if (!content.includes("Keine Theme-Farben überschreiben") && !content.includes("Farben bleiben theme-eigen")) {
+      failed += fail(`${file}: Lock muss theme-eigene Farben bewahren (kein Farb-Override)`);
     }
     const lockMatch = content.match(/<style id="app-edge-to-edge-theme-lock-v\d+">([\s\S]*?)<\/style>/);
     if (!lockMatch) {

@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1785515013940 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v562";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v563";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -47,6 +47,8 @@
 <style>
 :root{
   --bg:#070706;--bg2:#0d0c09;--panel:#12100c;--card:#14120e;
+  --page-cover:#060604;--page-cover-mid:#0b0a07;--outer-bg-flat:#080806;
+  --premium-bg:radial-gradient(circle at 16% 0%,rgba(239,215,142,.20),transparent 42%),radial-gradient(circle at 86% 12%,rgba(155,122,60,.16),transparent 34%),linear-gradient(145deg,rgba(24,20,14,.97),rgba(7,7,5,.95));
   --gold:#c8a85b;--gold2:#efd78e;--bronze:#9b7a3c;--cream:#f8efd4;
   --text:#f6edd2;--muted:#b8ad91;--muted2:#8f856f;
   --line:rgba(210,177,91,.30);--line2:rgba(210,177,91,.16);
@@ -1471,12 +1473,9 @@ html.is-standalone-pwa{background:var(--page-cover)}
 }
 
 
-/* DAR AL TAWḤID Elegant Theme: dunkelgrün, antik-gold, creme, kurvige Akzente */
+/* DAR AL TAWḤĪD Elegant Theme: warm dark bronze-gold (no fixed dunkelgrün field) */
 :root{
-  --bg:#050706;--bg2:#0a100c;--panel:#10170f;--card:#121b13;
-  --page-cover:#050706;--page-cover-mid:#0a100c;
-  --outer-bg-flat:#050706;
-  --premium-bg:radial-gradient(circle at 10% 0%,rgba(214,183,106,.13),transparent 34%),radial-gradient(circle at 90% 10%,rgba(17,54,37,.24),transparent 35%),radial-gradient(circle at 50% 45%,rgba(255,245,210,.035),transparent 42%),linear-gradient(180deg,#050706 0%,#0a100c 42%,#040504 100%);
+  --bg:#070706;--bg2:#0d0c09;--panel:#12100c;--card:#14120e;
   --gold:#c8a85b;--gold2:#f0d98f;--bronze:#9a7435;--cream:#f7efd6;
   --text:#f4ebd1;--muted:#c7bda3;--muted2:#9c927b;
   --line:rgba(214,183,106,.34);--line2:rgba(214,183,106,.18);
@@ -1489,19 +1488,23 @@ html.is-standalone-pwa{background:var(--page-cover)}
   --sans:var(--font-ui);
   --font-serif:var(--font-display);
 }
-html{background:#050706}
-body{
-  background:radial-gradient(circle at 10% 0%,rgba(214,183,106,.13),transparent 34%),
-  radial-gradient(circle at 90% 10%,rgba(17,54,37,.24),transparent 35%),
-  radial-gradient(circle at 50% 45%,rgba(255,245,210,.035),transparent 42%),
-  linear-gradient(180deg,#050706 0%,#0a100c 42%,#040504 100%)!important;
+html{background:var(--page-cover,var(--bg))}
+/* Defaults nur für Klassisch Dunkel — andere Erscheinungsbilder behalten eigene Farben */
+html[data-theme="dark"] body,
+html:not([data-theme]) body{
+  background:radial-gradient(circle at 12% 0%,rgba(239,215,142,.13),transparent 34%),
+  radial-gradient(circle at 88% 8%,rgba(155,122,60,.09),transparent 32%),
+  linear-gradient(180deg,#060604 0%,#0b0a07 42%,#050504 100%)!important;
 }
-body:before{opacity:.07!important;filter:sepia(.2) saturate(.9)}
-.top-shell,.view{
+html[data-theme="dark"] body:before,
+html:not([data-theme]) body:before{opacity:.055!important;filter:none!important}
+html[data-theme="dark"] .top-shell,
+html[data-theme="dark"] .view,
+html:not([data-theme]) .top-shell,
+html:not([data-theme]) .view{
   border-color:rgba(214,183,106,.38)!important;
   background:radial-gradient(circle at 18% 0%,rgba(240,217,143,.10),transparent 42%),
-  radial-gradient(circle at 85% 12%,rgba(20,70,46,.12),transparent 38%),
-  linear-gradient(145deg,rgba(15,22,15,.96),rgba(5,7,5,.94))!important;
+  linear-gradient(145deg,rgba(18,16,12,.94),rgba(6,6,5,.92))!important;
   box-shadow:0 24px 70px rgba(0,0,0,.46), inset 0 0 0 1px rgba(255,245,205,.025)!important;
 }
 h1{font-family:var(--display)!important;color:var(--gold2)!important;text-shadow:0 3px 20px rgba(214,183,106,.12),0 1px 0 rgba(0,0,0,.55);letter-spacing:clamp(.02em,.055em,.115em)!important}
@@ -1517,7 +1520,7 @@ h1{font-family:var(--display)!important;color:var(--gold2)!important;text-shadow
 .folder-card,.post-card,.list-card,.info-card,.dua-card,.overview-panel,.direct-pick-panel,.search-pro-panel,.profile-box,.book-profile-box,.series-box,.pinned-box,.daily-box,.recommended-box,.source-strong,.statement,.dua-detail-box{
   border-color:rgba(214,183,106,.34)!important;
   background:radial-gradient(circle at 22% 0%,rgba(240,217,143,.095),transparent 40%),
-  linear-gradient(145deg,rgba(18,27,19,.96),rgba(7,9,7,.96))!important;
+  linear-gradient(145deg,rgba(22,19,14,.94),rgba(10,10,8,.94))!important;
   box-shadow:0 14px 38px rgba(0,0,0,.28), inset 0 0 0 1px rgba(255,245,205,.025)!important;
 }
 .folder-card,.post-card,.list-card,.info-card,.dua-card,.series-card,.pinned-card,.event-card{position:relative;overflow:hidden}
@@ -3768,22 +3771,22 @@ html[data-theme="light"] .prayer-overview__time-hour{color:#3d2a12!important}
 }
 
 /* Dezenter Neutral-Glass für App-Controls – Tab-Buttons ausgenommen */
-:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save):not(.share-btn):not(.qov-btn-primary):not(.qov-btn-secondary):not(.qov-direct-go):not(.qrc-picker-item):not(.qrc-picker-apply-fab):not(.qrc-picker-apply-side){
+:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save):not(.share-btn):not(.qov-btn-primary):not(.qov-btn-secondary):not(.qov-direct-go){
   border-color:rgba(255,255,255,.14)!important;
   background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03))!important;
   -webkit-backdrop-filter:blur(10px) saturate(1.12)!important;
   backdrop-filter:blur(10px) saturate(1.12)!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 4px 12px rgba(0,0,0,.10)!important;
 }
-:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save):not(.share-btn):not(.qrc-picker-item):not(.qrc-picker-apply-fab):not(.qrc-picker-apply-side):hover{
+:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save):not(.share-btn):hover{
   border-color:rgba(255,255,255,.20)!important;
   filter:brightness(1.03);
 }
-:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save):not(.share-btn):not(.qrc-picker-item):not(.qrc-picker-apply-fab):not(.qrc-picker-apply-side):active{
+:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save):not(.share-btn):active{
   transform:scale(.98);
 }
-:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill,[data-nav]):not(.bottom-nav-btn):not(.qrc-picker-item):not(.qrc-picker-apply-fab):not(.qrc-picker-apply-side):focus,
-:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill,[data-nav]):not(.bottom-nav-btn):not(.qrc-picker-item):not(.qrc-picker-apply-fab):not(.qrc-picker-apply-side):focus-visible{
+:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill,[data-nav]):not(.bottom-nav-btn):focus,
+:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill,[data-nav]):not(.bottom-nav-btn):focus-visible{
   outline:none!important;
 }
 .quran-tafsir-tab.active,.advanced-toggle.active,.action-btn.active,.prayer-action-btn.active{
@@ -17404,39 +17407,15 @@ html[data-theme="dark"]{--home-refresh-ring:rgba(220,92,92,.50);--home-refresh-g
 </style>
 
 
-<style id="app-edge-to-edge-theme-lock-v500">
+<style id="app-edge-to-edge-theme-lock-v503">
 /* EDGE_TO_EDGE_THEME_LOCK
    Format-Name: Edge-to-Edge Erscheinungsbild
-   Pflicht für JEDES Erscheinungsbild (inkl. künftige):
-   1) Vollflächig randlos (kein Kasten, keine Seitenränder links/rechts/oben/unten außer Safe-Area)
-   2) Durchgängiger Farbübergang: html/body/app nutzen --premium-bg / --page-cover derselben Theme-Palette
-   3) Neue Themes: --outer-bg-flat, --outer-bg, --page-cover, --premium-bg setzen + THEME_META/normalizeTheme
-   Top/Scroll-Fix v500 · Sperre: content/admin/edge-to-edge-theme-lock.json + scripts/edge-to-edge-theme-guard.js — darf nicht entfernt/umgangen werden.
+   NUR Layout (randlos). Keine Theme-Farben überschreiben.
+   Jedes Erscheinungsbild behält eigene --page-cover / --premium-bg / --outer-bg.
+   v503: Farb-Override entfernt — Farben bleiben theme-eigen.
+   Sperre: content/admin/edge-to-edge-theme-lock.json + scripts/edge-to-edge-theme-guard.js
 */
-html[data-theme="dark"],
-:root{
-  --page-cover:#050706!important;
-  --page-cover-mid:#0a100c!important;
-  --outer-bg-flat:#050706!important;
-  --outer-bg:radial-gradient(circle at 10% 0%,rgba(214,183,106,.13),transparent 34%),radial-gradient(circle at 90% 10%,rgba(17,54,37,.24),transparent 35%),radial-gradient(circle at 50% 45%,rgba(255,245,210,.035),transparent 42%),linear-gradient(180deg,#050706 0%,#0a100c 42%,#040504 100%)!important;
-  --premium-bg:radial-gradient(circle at 10% 0%,rgba(214,183,106,.13),transparent 34%),radial-gradient(circle at 90% 10%,rgba(17,54,37,.24),transparent 35%),radial-gradient(circle at 50% 45%,rgba(255,245,210,.035),transparent 42%),linear-gradient(180deg,#050706 0%,#0a100c 42%,#040504 100%)!important;
-  --theme-page-bg:#050706!important;
-}
-html[data-theme="light"],
-html[data-theme="soft"],
-html[data-theme="royal"],
-html[data-theme="bordeaux"]{
-  --page-cover:var(--outer-bg-flat)!important;
-  --page-cover-mid:var(--outer-bg-flat)!important;
-  --premium-bg:var(--outer-bg)!important;
-  --theme-page-bg:var(--outer-bg-flat)!important;
-}
-html[data-theme="dar-al-layl"]{
-  --outer-bg-flat:var(--page-cover,var(--layl-bg-deep,#050706))!important;
-  --outer-bg:var(--premium-bg)!important;
-  --theme-page-bg:var(--page-cover,var(--layl-bg-deep,#050706))!important;
-}
-/* Surface continuity — every theme */
+/* Continuity uses EACH theme's own palette — do not force Layl/green onto others */
 html[data-theme],
 html[data-theme].is-standalone-pwa{
   --app-frame-inset-x:0!important;
@@ -17444,8 +17423,8 @@ html[data-theme].is-standalone-pwa{
   --app-frame-inset-right:env(safe-area-inset-right,0px)!important;
   --page-gutter-x:env(safe-area-inset-left,0px)!important;
   --page-gutter-y:env(safe-area-inset-right,0px)!important;
-  background:var(--premium-bg,var(--outer-bg))!important;
-  background-color:var(--page-cover,var(--outer-bg-flat))!important;
+  background:var(--premium-bg,var(--outer-bg,var(--bg)))!important;
+  background-color:var(--page-cover,var(--outer-bg-flat,var(--bg)))!important;
 }
 html[data-theme] body,
 html[data-theme].is-standalone-pwa body{
@@ -17481,7 +17460,6 @@ html[data-theme] .view{
   border-radius:0!important;
   box-shadow:none!important;
   border-color:transparent!important;
-  background:transparent!important;
 }
 html[data-theme] .top-shell:after{display:none!important}
 html[data-theme] .bottom-nav,
@@ -17507,8 +17485,9 @@ html[data-layout] .app{
   html[data-theme].is-standalone-pwa body{
     padding-left:0!important;
     padding-right:0!important;
-    padding-top:env(safe-area-inset-top,0px)!important;
-    background:var(--premium-bg,var(--bg))!important;
+    padding-top:0!important;
+    background:var(--premium-bg,var(--outer-bg,var(--bg)))!important;
+    background-color:var(--page-cover,var(--outer-bg-flat,var(--bg)))!important;
   }
   html.is-standalone-pwa .top-shell,
   html[data-theme] .top-shell,
@@ -17519,11 +17498,10 @@ html[data-layout] .app{
     clip-path:none!important;
   }
   html[data-theme] .top-shell .header{
-    padding-top:calc(env(safe-area-inset-top,0px) + 16px)!important;
+    padding-top:calc(env(safe-area-inset-top,0px) + 12px)!important;
   }
 }
-
-/* EDGE_TO_EDGE_THEME_LOCK · Top/Scroll: kein Kasten, kein clip-path, Safe-Area = Theme-Farbe */
+/* Top/Scroll: kein Kasten — Farben kommen aus dem Theme, nicht aus dem Lock */
 html[data-theme] .theme-hero-shell,
 html[data-theme] .top-shell.theme-hero-shell,
 html[data-theme] .top-shell,
@@ -17535,11 +17513,6 @@ html[data-theme] .theme-hero-surface{
   -webkit-clip-path:none!important;
   box-shadow:none!important;
   background-clip:border-box!important;
-}
-html[data-theme] .theme-hero-shell,
-html[data-theme] .top-shell.theme-hero-shell{
-  background:transparent!important;
-  border-color:transparent!important;
 }
 html[data-theme] .theme-hero-shell::before,
 html[data-theme] .theme-hero-shell::after,
@@ -17561,8 +17534,8 @@ html.is-standalone-pwa .app:after{
 html[data-theme],
 html[data-theme].is-standalone-pwa,
 html.is-standalone-pwa{
-  background:var(--premium-bg,var(--outer-bg))!important;
-  background-color:var(--page-cover,var(--outer-bg-flat))!important;
+  background:var(--premium-bg,var(--outer-bg,var(--bg)))!important;
+  background-color:var(--page-cover,var(--outer-bg-flat,var(--bg)))!important;
 }
 html[data-theme] body,
 html[data-theme].is-standalone-pwa body,
@@ -18552,7 +18525,7 @@ document.addEventListener("pointerdown",e=>{if(isEditableTarget(e.target))lastFo
 const THEME_KEY="darThemeV1";
 const THEME_SETTINGS_KEY="darThemeSettingsV1";
 /* EDGE_TO_EDGE_THEME_LOCK · Format: Edge-to-Edge Erscheinungsbild — jedes Theme inkl. künftiger: --outer-bg-flat/--outer-bg/--page-cover/--premium-bg + THEME_META/normalizeTheme; Rahmenrandlos. */
-const THEME_META={dark:{label:"Klassisch Dunkel",color:"#050706",status:"black",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"default",asset:"light"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"default",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black",asset:"royal"},bordeaux:{label:"Bordeaux Royal Premium",color:"#140B0C",status:"black",asset:"bordeaux"},"dar-al-layl":{label:"Dār al-Layl",color:"#080B0A",status:"black",asset:"dar-al-layl"}};
+const THEME_META={dark:{label:"Klassisch Dunkel",color:"#080806",status:"black",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"default",asset:"light"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"default",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black",asset:"royal"},bordeaux:{label:"Bordeaux Royal Premium",color:"#140B0C",status:"black",asset:"bordeaux"},"dar-al-layl":{label:"Dār al-Layl",color:"#080B0A",status:"black",asset:"dar-al-layl"}};
 function normalizeTheme(theme){if(theme==="emerald"||theme==="smaragd"||theme==="aurora")return"dark";return theme==="light"||theme==="soft"||theme==="royal"||theme==="bordeaux"||theme==="dar-al-layl"?theme:"dark"}
 function getTheme(){try{return normalizeTheme(localStorage.getItem(THEME_KEY))}catch(e){return"dark"}}
 function applyTheme(theme){const next=normalizeTheme(theme);const info=THEME_META[next]||THEME_META.dark;const root=document.documentElement;root.classList.add("theme-switching");root.style.backgroundColor=info.color;root.setAttribute("data-theme",next);root.setAttribute("data-theme-name",info.label);try{localStorage.setItem(THEME_KEY,next);localStorage.setItem(THEME_SETTINGS_KEY,JSON.stringify({theme:next,label:info.label,assetVariant:info.asset,updatedAt:Date.now()}))}catch(e){}const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=info.color;const tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=info.color;const sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content=info.status;const logo=document.querySelector(".logo");if(logo){logo.title="DAR AL TAWḤID";if(!logo.getAttribute("data-logo-ready")){logo.setAttribute("data-logo-ready","1");logo.onerror=function(){this.onerror=null;this.src="/watermark-my-logo-full.png?v=fallback"};if(!logo.getAttribute("src")||logo.getAttribute("src").indexOf("watermark-my-logo")<0)logo.src="/watermark-my-logo-full.png"}}document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.classList.toggle("is-active",btn.getAttribute("data-theme-select")===next);btn.setAttribute("aria-pressed",btn.getAttribute("data-theme-select")===next?"true":"false")});try{window.dispatchEvent(new CustomEvent("dar-theme-change",{detail:{theme:next,...info}}))}catch(e){}requestAnimationFrame(()=>requestAnimationFrame(()=>{root.classList.remove("theme-switching");if(next!=="bordeaux")root.style.backgroundColor=""}))}
@@ -23924,7 +23897,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v562";
+const APP_BUILD_ID="app-shell-v563";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
