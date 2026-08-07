@@ -1,0 +1,23 @@
+{
+  "locked": true,
+  "lockedAt": "2026-08-07T12:40:00.000Z",
+  "lockedReason": "Nutzer: Qurʾān Vers-Picker außerhalb tippen verursacht Safari-Crash/Fehler — Fix + Sperre.",
+  "unlockPolicy": "Änderungen nur nach ausdrücklichem Nutzer-Auftrag, z. B. „Picker-Navigation freigeben“.",
+  "lockedPaths": [
+    "index.html",
+    "test/index.html"
+  ],
+  "lockedSections": [
+    "QURAN_PICKER_OUTSIDE_GUARD",
+    "quran-picker-outside-fix-v569",
+    "bindQuranNavPickerSheet",
+    "closeQuranReaderSheets"
+  ],
+  "requiredMarkers": [
+    "QURAN_PICKER_OUTSIDE_GUARD",
+    "quran-picker-outside-fix-v569",
+    "__qrcPickerSession",
+    "closeSafe",
+    "progScroll&&Date.now()-progScroll<280"
+  ]
+}

@@ -50,7 +50,9 @@
     "content/admin/app-stability-lock.json",
     "scripts/app-health-check.js",
     "content/admin/quran-tafsir-nav-lock.json",
-    "scripts/quran-tafsir-nav-guard.js"
+    "scripts/quran-tafsir-nav-guard.js",
+    "content/admin/quran-picker-outside-lock.json",
+    "scripts/quran-picker-outside-guard.js"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -70,6 +72,25 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "quran-picker-outside-fix-v569-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Vers-Picker außerhalb tippen — Safari-Crash/Fehler, Sofortfix + Sperre",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json",
+        "content/admin/quran-picker-outside-lock.json",
+        "scripts/quran-picker-outside-guard.js",
+        "scripts/repo-integrity-guard.js",
+        ".github/workflows/app-health-check.yml",
+        ".github/workflows/canonical-state-guard.yml"
+      ],
+      "expiresAt": "2026-08-14T00:00:00.000Z"
+    },
     {
       "id": "quran-tafsir-nav-smooth-v568-2026-08-07",
       "approvedBy": "user-explicit-order",

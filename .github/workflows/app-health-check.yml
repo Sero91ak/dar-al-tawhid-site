@@ -28,6 +28,9 @@ jobs:
       - name: Qurʾān Tafsīr nav guard (kein Schwarzfeld/Hänger)
         run: node scripts/quran-tafsir-nav-guard.js
 
+      - name: Qurʾān picker outside guard (kein Safari-Crash)
+        run: node scripts/quran-picker-outside-guard.js
+
       - name: App update recovery guard (Update-Banner nur bei echtem Fehler)
         run: node scripts/app-update-recovery-guard.js
 
