@@ -2401,13 +2401,15 @@
     {
       "id": "quran-ios-chrome-crash-2026-08-07",
       "approvedBy": "user-report-quran-crash",
-      "note": "iOS/PWA Qurʾān Absturz: Soft-Hide Chrome ohne Spacer-Collapse; Test zuerst",
+      "note": "iOS/PWA Qurʾān Absturz: Soft-Hide off + DOM-Slim Share-Payload; Test+Live",
       "paths": [
         "content/admin/change-scope-lock.json",
         "index.html",
         "test/index.html",
         "version.json",
-        "test/version.json"
+        "test/version.json",
+        "manifest.json",
+        "service-worker.js"
       ]
     },
     {
@@ -2421,6 +2423,21 @@
         "version.json",
         "test/version.json"
       ]
+    },
+    {
+      "id": "quran-dom-slim-deploy-v584-2026-08-07",
+      "approvedBy": "user-report-quran-crash-everywhere",
+      "note": "Nutzer: Überall Fehler im Qurʾān (iOS PWA Black Screen). Manifest freigeben für Deploy + DOM-Slim.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "manifest.json",
+        "service-worker.js"
+      ],
+      "expiresAt": "2026-09-30T23:59:00.000Z"
     }
   ],
   "enabled": true
