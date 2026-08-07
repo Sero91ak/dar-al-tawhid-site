@@ -1,10 +1,10 @@
-// workers-deploy-stamp:1786127667892
+// workers-deploy-stamp:1786129986426
 /* DAR AL TAWḤID – Offline Light Service Worker
    Ziel: Startseite/App-Hülle offline nutzbar machen, ohne viel Speicher zu belegen.
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v584-quran-dom';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v587-visual-authority';
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
 const OFFLINE_PREP_PROGRESS_KEY = '/__offline_prep_progress_v1__';
@@ -524,6 +524,22 @@ self.addEventListener('fetch', (event) => {
 
   // Beitragsdaten und Index: Network-first, damit neue Beiträge nicht blockiert werden.
   if (isPostDataRequest(url) || isFeedAssetRequest(url) || Date.now() < bypassPostCacheUntil) {
+    event.respondWith(
+      fetch(request, { cache: 'no-store' })
+        .then((response) => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy)).catch(() => null);
+          }
+          return response;
+        })
+        .catch(() => caches.match(request))
+    );
+    return;
+  }
+
+  // Styles/Scripts: network-first, damit neue Optik nicht von altem Cache überdeckt wird.
+  if (request.destination === 'style' || request.destination === 'script' || /\.(css|js)(\?|$)/i.test(url.pathname)) {
     event.respondWith(
       fetch(request, { cache: 'no-store' })
         .then((response) => {
