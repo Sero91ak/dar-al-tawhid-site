@@ -2,6 +2,26 @@ name: Deploy Besucher-App (Cloudflare Workers)
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - index.html
+      - version.json
+      - service-worker.js
+      - manifest.json
+      - assets/**
+      - data/scholar-index-meta.json
+      - data/scholar-history-curated.json
+      - wrangler.toml
+      - _headers
+      - .assetsignore
+      - package.json
+      - scripts/cf-pages-build.js
+      - scripts/sync-app-build-ids.js
+      - scripts/verify-live-deploy.js
+      - scripts/purge-cloudflare-cache.js
+      - .github/workflows/cloudflare-pages-deploy.yml
 
 permissions:
   contents: read
