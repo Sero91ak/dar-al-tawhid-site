@@ -69,6 +69,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "gelehrte-data-polish-v505-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Doppel-Buttons weg; passende Emojis; Lehrer/Schüler/Werke vollständig; Namen lesbarer; live",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "assets/scholars-index.js",
+        "assets/scholars-index.css",
+        "data/scholar-history-curated.json",
+        "data/scholar-index-meta.json",
+        "content/admin/change-scope-lock.json"
+      ]
+    },
+    {
       "id": "gelehrte-compact-quickfilter-v504-2026-08-07",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer: Schüler kompakt; Schnellauswahl unter Suche; untere Schnellsuche löschen; live",

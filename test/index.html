@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1785515013940 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v564";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v565";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -9792,7 +9792,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/premium-feed-app.js?v=92" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <script src="/assets/adaptive-layout.js?v=5" defer></script>
-<script src="/assets/scholars-index.js?v=564" defer></script>
+<script src="/assets/scholars-index.js?v=565" defer></script>
 <link rel="preload" href="/assets/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11342,7 +11342,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=5">
 <link rel="stylesheet" href="/assets/books-library.css?v=2">
 <link rel="stylesheet" href="/assets/dar-account-visibility.css?v=11">
-<link rel="stylesheet" href="/assets/scholars-index.css?v=504">
+<link rel="stylesheet" href="/assets/scholars-index.css?v=505">
 <link rel="stylesheet" href="/assets/adaptive-layout.css?v=5">
 <style id="typography-compact-fix-v310">
 /* Finale Typografie-Korrektur — gewinnt gegen Home-Compact-Overrides */
@@ -20787,7 +20787,7 @@ function scholarProfile(nameOrKey){
   const meta=(window.DARScholarsIndex&&typeof window.DARScholarsIndex.getScholarMeta==="function")
     ? window.DARScholarsIndex.getScholarMeta(ref.key)
     : ((window.__darScholarMetaCache&&window.__darScholarMetaCache.scholars)||{})[ref.key];
-  const teachers=mergeScholarRelItems(Array.isArray(meta?.teachers)?meta.teachers:[],[]);
+  const teachers=mergeScholarRelItems(Array.isArray(meta?.teachers)?meta.teachers:[],inferredTeachersForScholar(ref.key));
   const students=mergeScholarRelItems(Array.isArray(meta?.students)?meta.students:[],inferredStudentsForScholar(ref.key));
   const worksMeta=Array.isArray(meta?.works)?meta.works.map(w=>w&&w.title?w.title:w).filter(Boolean):[];
   const works=[...new Set([...worksMeta,...booksFromPosts])].slice(0,24);
@@ -20828,6 +20828,19 @@ function inferredStudentsForScholar(key){
     const s=map[id];
     (s&&s.teachers||[]).forEach(t=>{
       if(t&&String(t.id)===String(key))out.push({id,name:s.displayName||id});
+    });
+  });
+  return out;
+}
+function inferredTeachersForScholar(key){
+  const map=(window.DARScholarsIndex&&typeof window.DARScholarsIndex.getAllScholarMeta==="function")
+    ? window.DARScholarsIndex.getAllScholarMeta()
+    : ((window.__darScholarMetaCache&&window.__darScholarMetaCache.scholars)||{});
+  const out=[];
+  Object.keys(map||{}).forEach(id=>{
+    const s=map[id];
+    (s&&s.students||[]).forEach(st=>{
+      if(st&&String(st.id)===String(key))out.push({id,name:s.displayName||id});
     });
   });
   return out;
@@ -20969,7 +20982,6 @@ function renderScholarProfileSync(p){
     <p class="profile-desc">${esc(p.desc)}</p>
     <div class="profile-meta-grid profile-meta-grid--scholar">
       <div class="profile-meta"><b>Epoche / Ort</b>${esc(p.epoch)}</div>
-      <div class="profile-meta"><b>Lebenszeit</b>${p.life?esc(p.life):"Noch nicht kuratiert – nur sichere Angaben werden gezeigt."}</div>
       <div class="profile-meta"><b>Beiträge hier</b>${p.count} Beiträge auf DAR AL TAWḤĪD</div>
     </div>
     ${renderScholarRelFold("teachers","Lehrer",teacherRows,teachers.length,"Noch keine gesicherten Lehrer-Angaben hinterlegt.",openId==="teachers")}
@@ -21030,23 +21042,26 @@ function postItemGlyph(post){
 }
 function scholarGroupGlyph(metaText){
   const t=String(metaText||"");
-  if(/Prophet/i.test(t))return"✨";
-  if(/Ṣaḥāb|Sahab/i.test(t))return"🌙";
-  if(/Tābiʿ|Tabi/i.test(t))return"📜";
-  if(/Atbāʿ|Atba/i.test(t))return"🕊️";
-  if(/Imām|Imam/i.test(t))return"⚖️";
-  if(/Muḥaddith|Muhaddith/i.test(t))return"📘";
-  if(/Fāqih|Faqih|Fuqah/i.test(t))return"🧭";
-  if(/Mufassir/i.test(t))return"📿";
-  return"👤";
+  if(/prophet/i.test(t))return"✨";
+  if(/sahab|ṣaḥāb/i.test(t))return"🌙";
+  if(/tabi|tābi/i.test(t))return"📜";
+  if(/atba|atbā/i.test(t))return"🕊️";
+  if(/imam|imām/i.test(t))return"⚖️";
+  if(/mufassir/i.test(t))return"📿";
+  if(/muhaddith|muḥaddith/i.test(t))return"📘";
+  if(/faqih|fāqih|fuqah/i.test(t))return"🧭";
+  return"📚";
 }
 function polishScholarsOvalGlyphs(){
   document.querySelectorAll(".scholars-index__row").forEach(row=>{
     const mono=row.querySelector(".scholars-index__mono");
-    const roles=row.querySelector(".scholars-index__roles");
     if(!mono||mono.dataset.glyphReady==="1")return;
     mono.dataset.glyphReady="1";
-    mono.textContent=scholarGroupGlyph(roles?roles.textContent:"");
+    if(/[✨🌙📜🕊️📿📘🧭⚖️📚]/.test(mono.textContent||""))return;
+    const group=mono.getAttribute("data-group")||"";
+    const sub=row.querySelector(".scholars-index__sub");
+    const hay=(group+" "+(sub?sub.textContent:"")).trim();
+    mono.textContent=scholarGroupGlyph(hay||"Prophet");
   });
 }
 function renderSeriesBox(){
@@ -23895,7 +23910,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v564";
+const APP_BUILD_ID="app-shell-v565";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
