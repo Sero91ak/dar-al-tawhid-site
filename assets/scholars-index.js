@@ -1,6 +1,6 @@
 /**
- * DAR AL TAWḤID — Gelehrten-Index v504
- * Historische Tiefe: Jahre, Lehrer, Schüler, Werke; Schnellauswahl unter Suche; kompakt v504.
+ * DAR AL TAWḤID — Gelehrten-Index v505
+ * Historische Tiefe: Jahre, Lehrer, Schüler, Werke; Schnellauswahl unter Suche; Daten+Glyphs+kompakt v505.
  */
 (function (global) {
   'use strict';
@@ -110,6 +110,22 @@
       .trim();
   }
 
+
+  function scholarGlyphFromMeta(m) {
+    m = m || {};
+    if (m.glyph) return m.glyph;
+    const roles = m.roles || [];
+    if (m.primaryGroup === 'prophet' || roles.includes('prophet')) return '✨';
+    if (m.primaryGroup === 'sahabah' || roles.includes('sahabi')) return '🌙';
+    if (m.primaryGroup === 'tabiun' || roles.includes('tabi')) return '📜';
+    if (m.primaryGroup === 'atba') return '🕊️';
+    if (m.primaryGroup === 'imam' || roles.includes('imam')) return '⚖️';
+    if (roles.includes('mufassir')) return '📿';
+    if (roles.includes('muhaddith')) return '📘';
+    if (roles.includes('faqih')) return '🧭';
+    return '📚';
+  }
+
   function buildMonogram(name, explicit) {
     if (explicit) return explicit;
     const clean = String(name || '').replace(/[ﷺ]/g, '').trim();
@@ -163,6 +179,7 @@
         aliases: m.aliases || [],
         kuniyah: m.kuniyah || '',
         monogram: buildMonogram(displayName, m.monogram),
+        glyph: m.glyph || scholarGlyphFromMeta(m),
         lifespanLabel: m.lifespanLabel || '',
         eraLabel: m.eraLabel || '',
         bio: m.bio || '',
@@ -360,8 +377,9 @@
     const metaParts = [life || era, roles, contributionLabel(s.count)].filter(Boolean);
     const sub = metaParts.join(' · ');
     const aria = `${s.displayName}, ${sub.replace(/ · /g, ', ')}, öffnen`;
+    const glyph = s.glyph || scholarGlyphFromMeta(s);
     return `<button type="button" class="scholars-index__row" data-scholar-open="${esc(s.id)}" aria-label="${esc(aria)}">
-      <span class="scholars-index__mono${s.primaryGroup === 'prophet' ? ' scholars-index__mono--prophet' : ''}" aria-hidden="true">${esc(s.monogram)}</span>
+      <span class="scholars-index__mono${s.primaryGroup === 'prophet' ? ' scholars-index__mono--prophet' : ''}" data-group="${esc(s.primaryGroup || '')}" aria-hidden="true">${glyph}</span>
       <span class="scholars-index__copy">
         <span class="scholars-index__name">${esc(s.displayName)}</span>
         <span class="scholars-index__sub">${esc(sub)}</span>
@@ -475,7 +493,7 @@
         <section class="scholars-index__quickpick" aria-label="Schnellauswahl Suche und Filter">
           <div class="scholars-index__quickpick-head">
             <h3>Schnellauswahl</h3>
-            <span>Generation · Zeitgenossen · Sortierung</span>
+            <span>Generation &amp; Sortierung — ohne Scrollen</span>
           </div>
           <div class="scholars-index__quickpick-grid">
             <label class="scholars-index__pick-wrap">
@@ -491,18 +509,9 @@
               </select>
             </label>
           </div>
-          <div class="scholars-index__filters" role="toolbar" aria-label="Schnellfilter">
-            ${filters
-              .map(
-                (f) =>
-                  `<button type="button" class="scholars-index__chip" data-scholars-filter="${esc(f.id)}" aria-selected="${state.filter === f.id ? 'true' : 'false'}">${esc(f.label)}</button>`
-              )
-              .join('')}
-          </div>
         </section>
         <div class="scholars-index__meta-row">
           <span id="scholarsResultCount" class="scholars-index__count">${filtered.length} Treffer</span>
-          <button type="button" id="scholarsSortBtn" class="scholars-index__sort-btn" aria-haspopup="dialog" aria-controls="scholarsSortSheet">${esc(sortLabel)}</button>
         </div>
         ${
           alphaLetters.length
@@ -656,6 +665,7 @@
     });
     const sortBtn = root.querySelector('#scholarsSortBtn');
     if (sortBtn) sortBtn.onclick = () => openSortSheet(root);
+    // Sort-Button bewusst entfernt (v505) — Sortierung läuft über Schnellauswahl.
     root.querySelectorAll('[data-scholars-sort]').forEach((btn) => {
       btn.onclick = () => {
         const sort = btn.getAttribute('data-scholars-sort') || 'generation';

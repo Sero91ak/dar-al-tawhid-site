@@ -246,6 +246,44 @@ try {
 const catalog = buildCatalog();
 const scholars = {};
 
+function scholarGlyph(base) {
+  const roles = base.roles || [];
+  if (base.primaryGroup === 'prophet' || roles.includes('prophet')) return '✨';
+  if (base.primaryGroup === 'sahabah' || roles.includes('sahabi')) return '🌙';
+  if (base.primaryGroup === 'tabiun' || roles.includes('tabi')) return '📜';
+  if (base.primaryGroup === 'atba') return '🕊️';
+  if (base.primaryGroup === 'imam' || roles.includes('imam')) return '⚖️';
+  if (roles.includes('mufassir')) return '📿';
+  if (roles.includes('muhaddith')) return '📘';
+  if (roles.includes('faqih')) return '🧭';
+  return '📚';
+}
+
+function normalizeRelList(list) {
+  if (!Array.isArray(list)) return [];
+  const out = [];
+  const seen = new Set();
+  for (const raw of list) {
+    if (!raw) continue;
+    const id = typeof raw === 'string' ? raw : raw.id;
+    const name = typeof raw === 'string' ? raw : raw.name || raw.id || '';
+    const title = raw && raw.title ? raw.title : '';
+    if (title) {
+      const key = 'w:' + title.toLowerCase();
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push({ title });
+      continue;
+    }
+    if (!id && !name) continue;
+    const key = String(id || name);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(id ? { id: String(id), name: String(name || id) } : { name: String(name) });
+  }
+  return out;
+}
+
 for (const item of catalog) {
   const base = CURATED[item.key] || {
     primaryGroup: 'weitere',
@@ -264,15 +302,33 @@ for (const item of catalog) {
     aliases: base.aliases || [],
     monogram: base.monogram || '',
     kuniyah: base.kuniyah || '',
+    glyph: scholarGlyph(base),
     lifespanLabel: hist.lifespanLabel || '',
     bornHijri: Number.isFinite(hist.bornHijri) ? hist.bornHijri : null,
     diedHijri: Number.isFinite(hist.diedHijri) ? hist.diedHijri : null,
     eraLabel: hist.eraLabel || '',
     bio: hist.bio || '',
-    teachers: Array.isArray(hist.teachers) ? hist.teachers : [],
-    students: Array.isArray(hist.students) ? hist.students : [],
-    works: Array.isArray(hist.works) ? hist.works : [],
+    teachers: normalizeRelList(hist.teachers),
+    students: normalizeRelList(hist.students),
+    works: normalizeRelList(hist.works),
   };
+}
+
+// Bidirectional Lehrer ↔ Schüler graph (curated edges only)
+function mergePersonInto(list, person) {
+  if (!person || !person.id) return;
+  if (list.some((x) => x && x.id === person.id)) return;
+  list.push({ id: person.id, name: person.name || person.id });
+}
+for (const [id, s] of Object.entries(scholars)) {
+  for (const t of s.teachers || []) {
+    if (!t || !t.id || !scholars[t.id]) continue;
+    mergePersonInto(scholars[t.id].students, { id, name: s.displayName });
+  }
+  for (const st of s.students || []) {
+    if (!st || !st.id || !scholars[st.id]) continue;
+    mergePersonInto(scholars[st.id].teachers, { id, name: s.displayName });
+  }
 }
 
 // Legacy route aliases (old keys → canonical meta)
