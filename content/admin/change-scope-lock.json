@@ -65,6 +65,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "color-scheme-aug4-v497-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Farbschema von vor 3 Tagen zurück, sonst nichts ändern",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-09-30T23:59:00.000Z"
+    },
+    {
       "id": "layl-color-restore-v496-2026-08-07",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer: Dark/Layl Farbschema unverändert lassen, Erscheinungsbild spiegeln",
