@@ -1,5 +1,5 @@
 /**
- * DAR AL TAWḤID — Gelehrten-Index v490
+ * DAR AL TAWḤID — Gelehrten-Index v502
  * Historische Tiefe: Jahre, Lehrer, Schüler, Werke; Schnellsuche unten; edles Duʿāʾ-Licht.
  */
 (function (global) {
@@ -717,6 +717,9 @@
     getScholarMeta(id) {
       const key = String(id || '');
       return (metaCache?.scholars || global.__darScholarMetaCache?.scholars || {})[key] || null;
+    },
+    getAllScholarMeta() {
+      return (metaCache?.scholars || global.__darScholarMetaCache?.scholars || {});
     },
     pushRecent,
     normalizeSearchText,

@@ -582,3 +582,79 @@
 .scholars-index__group-head{
   padding:14px 16px 16px 18px!important;
 }
+
+/* Scholar profile relations — Duʿāʾ-row optics + fold (v502) */
+.profile-box--scholar .scholar-rel{
+  margin-top:10px;
+  border:1px solid color-mix(in srgb,var(--gold2) 22%,transparent);
+  border-radius:18px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--gold2) 7%,transparent),transparent 70%);
+  overflow:hidden;
+}
+.profile-box--scholar .scholar-rel + .scholar-rel{margin-top:8px}
+.profile-box--scholar .scholar-rel__head{
+  width:100%;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:10px;
+  margin:0;
+  padding:12px 14px;
+  border:0;
+  background:transparent;
+  color:inherit;
+  font:inherit;
+  text-align:left;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.profile-box--scholar .scholar-rel__head:focus-visible{
+  outline:2px solid color-mix(in srgb,var(--gold2) 55%,transparent);
+  outline-offset:-2px;
+}
+.profile-box--scholar .scholar-rel__title{
+  margin:0;
+  font-family:var(--serif);
+  font-size:15px;
+  font-weight:750;
+  letter-spacing:.02em;
+  color:var(--cream);
+}
+.profile-box--scholar .scholar-rel__meta{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:var(--gold2);
+  font-size:12px;
+  font-weight:850;
+}
+.profile-box--scholar .scholar-rel__chev{
+  display:inline-block;
+  transition:transform .22s ease;
+}
+.profile-box--scholar .scholar-rel.is-collapsed .scholar-rel__chev{transform:rotate(-90deg)}
+.profile-box--scholar .scholar-rel.is-collapsed .scholar-rel__body{display:none}
+.profile-box--scholar .scholar-rel__body{
+  padding:0 8px 10px;
+  display:grid;
+  gap:0;
+}
+.profile-box--scholar .scholar-rel__body .dua-row{
+  width:100%;
+  border:0;
+  background:transparent;
+  text-align:left;
+  cursor:pointer;
+  font:inherit;
+  color:inherit;
+}
+.profile-box--scholar .scholar-rel__body .dua-row.is-static{
+  cursor:default;
+}
+.profile-box--scholar .scholar-rel__empty{
+  display:block;
+  padding:4px 10px 8px;
+  color:var(--muted);
+  font-size:12.5px;
+  line-height:1.4;
+}
