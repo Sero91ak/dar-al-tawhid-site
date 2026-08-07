@@ -73,6 +73,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "home-logo-prayer-status-tune-v570-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Logo kleiner + nach rechts zur Dhuhr-Kante; Datumszeile in Gebetsbox größer/lesbarer",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
       "id": "quran-picker-outside-fix-v569-2026-08-07",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer: Vers-Picker außerhalb tippen — Safari-Crash/Fehler, Sofortfix + Sperre",
