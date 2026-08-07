@@ -1,4 +1,4 @@
-// workers-deploy-stamp:1786076887736
+// workers-deploy-stamp:1786077230676
 /* DAR AL TAWḤID – Offline Light Service Worker
    Ziel: Startseite/App-Hülle offline nutzbar machen, ohne viel Speicher zu belegen.
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
