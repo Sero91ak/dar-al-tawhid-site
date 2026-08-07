@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1785515013940 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v579";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v580";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -19350,7 +19350,7 @@ function renderQuranAyahActionsRow(surah,ayah,ayahData){const saved=isQuranAyahB
 async function openQuranAyahTafsirDirect(surah,ayah){const sid=Number(surah),aid=Number(ayah);if(!Number.isFinite(sid)||!Number.isFinite(aid))return;await openQuranExplanationPanel(sid,aid,quranDefaultTafsirTab(sid,aid))}
 let qrcVisibleAyah={surah:0,ayah:0};let qrcVisibleAyahMap=new Map();let qrcVisibleAyahObserver=null;let qrcContextBarState={surahId:0,surahName:""};
 function getQrcContextBarBottomInset(){const nav=$("bottomNav");if(nav){const r=nav.getBoundingClientRect();const vh=window.innerHeight||document.documentElement.clientHeight||0;if(r.height>20&&vh>0)return Math.max(0,Math.round(vh-r.top))+"px"}const h=Number(String(getComputedStyle(document.documentElement).getPropertyValue("--bottom-navigation-height")).replace("px",""))||70;return"calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm + "+h+"px)"}
-function syncQrcContextBarDock(){const bar=$("qrcContextBar");const nav=$("bottomNav");if(!bar)return;bar.classList.add("qrc-context-bar--dock");if(nav){const r=nav.getBoundingClientRect();const vw=window.innerWidth||document.documentElement.clientWidth||0;const vh=window.innerHeight||document.documentElement.clientHeight||0;if(r.width>40&&r.height>20){bar.style.left=Math.max(0,Math.round(r.left))+"px";bar.style.right=Math.max(0,Math.round(vw-r.right))+"px";bar.style.width="";bar.style.bottom=Math.max(0,Math.round(vh-r.top))+"px";document.documentElement.style.setProperty("--qrc-dock-nav-h",Math.round(r.height)+"px");return}}bar.style.bottom=getQrcContextBarBottomInset();bar.style.left="max(14px, env(safe-area-inset-left))";bar.style.right="max(14px, env(safe-area-inset-right))"}
+function syncQrcContextBarDock(){const bar=$("qrcContextBar");const nav=$("bottomNav");if(!bar)return;bar.classList.add("qrc-context-bar--dock");/* L/R via CSS vars (= Bottom-Nav), nur Bottom/Höhe koppeln */bar.style.removeProperty("left");bar.style.removeProperty("right");bar.style.removeProperty("width");if(nav){const r=nav.getBoundingClientRect();const vh=window.innerHeight||document.documentElement.clientHeight||0;if(r.width>40&&r.height>20){bar.style.setProperty("bottom",Math.max(0,Math.round(vh-r.top))+"px","important");document.documentElement.style.setProperty("--qrc-dock-nav-h",Math.round(r.height)+"px");return}}bar.style.setProperty("bottom",getQrcContextBarBottomInset(),"important")}
 function renderQuranContextBar(surahId,meta,ayah){const name=meta?.transliteration||("Sūrah "+surahId);const ay=Number(ayah)||1;return '<nav class="qrc-context-bar qrc-context-bar--dock" id="qrcContextBar" aria-label="Qurʾān Lesedock"><button type="button" class="qrc-context-pos" id="qrcContextPosBtn" aria-label="Sūrah und Āyah wählen"><span id="qrcContextPosLabel">'+esc(name)+' · '+esc(surahId)+':'+esc(ay)+'</span><span class="qrc-context-chevron" aria-hidden="true">▾</span></button><div class="qrc-context-actions" role="group" aria-label="Schnellaktionen"><button type="button" class="qrc-context-btn" id="qrcContextSearchBtn" aria-label="Qurʾān durchsuchen">'+qrcBtnEmoji("search")+'</button><button type="button" class="qrc-context-btn" id="qrcContextTafsirBtn" aria-label="Tafsīr zur sichtbaren Āyah">'+qrcBtnEmoji("book")+'</button><button type="button" class="qrc-context-btn" id="qrcContextBookmarksBtn" aria-label="Merkliste öffnen">'+qrcBtnEmoji("bookmark")+'</button></div></nav>'}
 function ensureQrcContextBarOnBody(surahId,meta,ayah){const nodes=[...document.querySelectorAll("#qrcContextBar")];let bar=nodes.find(el=>el.parentElement===document.body)||nodes[nodes.length-1]||null;nodes.forEach(el=>{if(bar&&el!==bar)el.remove()});if(!bar){bar=document.createElement("div");bar.innerHTML=renderQuranContextBar(surahId,meta,ayah);bar=bar.firstElementChild;document.body.appendChild(bar)}else{bar.outerHTML=renderQuranContextBar(surahId,meta,ayah);bar=$("qrcContextBar")}qrcContextBarState={surahId:Number(surahId),surahName:meta?.transliteration||""};return bar}
 function updateQuranContextBarLabel(surahId,ayah){const label=$("qrcContextPosLabel");if(!label)return;const name=qrcContextBarState.surahName||quranSurahMeta(surahId)?.transliteration||("Sūrah "+surahId);label.textContent=name+" · "+surahId+":"+Number(ayah||1);qrcVisibleAyah={surah:Number(surahId),ayah:Number(ayah||1)}}
@@ -24719,7 +24719,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v579";
+const APP_BUILD_ID="app-shell-v580";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -27257,6 +27257,230 @@ html[data-theme="light"] body.is-quran-reader-route.qrc-dock-united #bottomNav.b
 }
 html[data-theme="light"] body.is-quran-reader-route .qrc-context-pos{color:#1a1612!important}
 html[data-theme="light"] body.is-quran-reader-route .qrc-context-btn{color:rgba(26,22,18,.72)!important}
+</style>
+
+<style id="quran-context-dock-v580">
+/* QURAN_CONTEXT_DOCK_V580 · eine edle Kapsel: Lesedock + Tabs, gleiche Farbe/Kanten L+R, kompakt */
+body.is-quran-reader-route{
+  --qrc-context-bar-h:38px!important;
+  --qrc-dock-radius:27px;
+  --qrc-dock-inset-l:max(14px,env(safe-area-inset-left));
+  --qrc-dock-inset-r:max(14px,env(safe-area-inset-right));
+  --qrc-dock-bg:rgba(255,255,255,.045);
+  --qrc-dock-border:rgba(255,255,255,.09);
+  --qrc-dock-shadow:0 8px 22px rgba(0,0,0,.16);
+  --qrc-dock-divider:color-mix(in srgb,var(--gold2) 26%,transparent);
+  --qrc-dock-text:color-mix(in srgb,var(--cream,var(--text)) 92%,transparent);
+  --qrc-dock-muted:color-mix(in srgb,var(--cream,var(--text)) 62%,transparent);
+}
+@media(max-width:700px){
+  body.is-quran-reader-route{
+    --qrc-dock-inset-l:max(10px,env(safe-area-inset-left,0px));
+    --qrc-dock-inset-r:max(10px,env(safe-area-inset-right,0px));
+    --qrc-dock-radius:24px;
+    --qrc-context-bar-h:36px!important;
+  }
+}
+/* Kill older conflicting floating/rect styles for the dock row */
+body.is-quran-reader-route .qrc-context-bar,
+body.is-quran-reader-route .qrc-context-bar.qrc-context-bar--dock,
+.qrc-context-bar.qrc-context-bar--dock{
+  position:fixed!important;
+  left:var(--qrc-dock-inset-l)!important;
+  right:var(--qrc-dock-inset-r)!important;
+  width:auto!important;
+  max-width:none!important;
+  z-index:39!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  height:var(--qrc-context-bar-h,38px)!important;
+  min-height:var(--qrc-context-bar-h,38px)!important;
+  max-height:var(--qrc-context-bar-h,38px)!important;
+  margin:0!important;
+  padding:0 6px 0 12px!important;
+  gap:4px!important;
+  border-radius:var(--qrc-dock-radius) var(--qrc-dock-radius) 0 0!important;
+  border:1px solid var(--qrc-dock-border)!important;
+  border-bottom:0!important;
+  background:var(--qrc-dock-bg)!important;
+  background-color:var(--qrc-dock-bg)!important;
+  background-image:none!important;
+  box-shadow:var(--qrc-dock-shadow)!important;
+  -webkit-backdrop-filter:blur(12px) saturate(1.1)!important;
+  backdrop-filter:blur(12px) saturate(1.1)!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  outline:none!important;
+  transform:none!important;
+}
+body.is-quran-reader-route .qrc-context-bar.is-visible{
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+  transform:none!important;
+}
+/* Soft gold seam — no hard rectangular band */
+body.is-quran-reader-route .qrc-context-bar::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--gold2) 7%,transparent),transparent 62%);
+  opacity:.9;
+  z-index:0;
+}
+body.is-quran-reader-route .qrc-context-bar::after{
+  content:"";
+  position:absolute;
+  left:12px;right:12px;bottom:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--qrc-dock-divider),transparent);
+  pointer-events:none;
+  opacity:.85;
+  z-index:1;
+}
+body.is-quran-reader-route .qrc-context-pos,
+body.is-quran-reader-route .qrc-context-actions,
+body.is-quran-reader-route .qrc-context-btn{
+  position:relative;
+  z-index:2;
+}
+/* Surah chip: fully rounded, no square corners */
+body.is-quran-reader-route .qrc-context-pos{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:5px!important;
+  flex:1 1 auto!important;
+  min-width:0!important;
+  min-height:28px!important;
+  max-width:100%!important;
+  margin:0!important;
+  padding:4px 10px!important;
+  border:1px solid color-mix(in srgb,var(--gold2) 16%,transparent)!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--gold2) 6%,transparent)!important;
+  box-shadow:none!important;
+  outline:none!important;
+  font-family:var(--serif)!important;
+  font-size:12.5px!important;
+  font-weight:650!important;
+  letter-spacing:.015em!important;
+  line-height:1.15!important;
+  color:var(--qrc-dock-text)!important;
+  text-align:left!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+  -webkit-tap-highlight-color:transparent;
+}
+body.is-quran-reader-route .qrc-context-pos:active{
+  transform:scale(.985)!important;
+  background:color-mix(in srgb,var(--gold2) 10%,transparent)!important;
+}
+body.is-quran-reader-route .qrc-context-pos:focus-visible{
+  outline:2px solid color-mix(in srgb,var(--gold2) 45%,transparent)!important;
+  outline-offset:1px!important;
+  border-radius:999px!important;
+}
+body.is-quran-reader-route #qrcContextPosLabel{
+  min-width:0!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
+body.is-quran-reader-route .qrc-context-chevron{
+  flex:0 0 auto;
+  font-size:10px!important;
+  opacity:.55!important;
+  color:var(--gold2)!important;
+  transform:translateY(0.5px);
+}
+body.is-quran-reader-route .qrc-context-actions{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:2px!important;
+  flex:0 0 auto!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-quran-reader-route .qrc-context-btn,
+.qrc-context-bar--dock .qrc-context-btn{
+  width:34px!important;
+  height:34px!important;
+  min-width:34px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  outline:none!important;
+  color:var(--qrc-dock-muted)!important;
+}
+body.is-quran-reader-route .qrc-context-btn:hover,
+body.is-quran-reader-route .qrc-context-btn:focus-visible{
+  background:color-mix(in srgb,var(--gold2) 11%,transparent)!important;
+  color:var(--qrc-dock-text)!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+body.is-quran-reader-route .qrc-context-btn:active{
+  background:color-mix(in srgb,var(--gold2) 16%,transparent)!important;
+  filter:none!important;
+}
+body.is-quran-reader-route .qrc-context-btn .qrc-btn-emoji{
+  font-size:14px!important;
+  line-height:1!important;
+  filter:none!important;
+}
+/* Bottom tabs: same capsule skin, flush top, shared L/R */
+body.is-quran-reader-route.qrc-dock-united #bottomNav.bottom-nav,
+body.is-quran-reader-route.qrc-dock-united #appChromeDock #bottomNav.bottom-nav{
+  left:var(--qrc-dock-inset-l)!important;
+  right:var(--qrc-dock-inset-r)!important;
+  border-top-left-radius:0!important;
+  border-top-right-radius:0!important;
+  border-bottom-left-radius:var(--qrc-dock-radius)!important;
+  border-bottom-right-radius:var(--qrc-dock-radius)!important;
+  border-top:0!important;
+  border-color:var(--qrc-dock-border)!important;
+  background:var(--qrc-dock-bg)!important;
+  background-color:var(--qrc-dock-bg)!important;
+  background-image:none!important;
+  box-shadow:var(--qrc-dock-shadow)!important;
+  -webkit-backdrop-filter:blur(12px) saturate(1.1)!important;
+  backdrop-filter:blur(12px) saturate(1.1)!important;
+  overflow:hidden!important;
+}
+body.is-quran-reader-route .qrc-body{
+  padding-bottom:calc(var(--qrc-context-bar-h,38px) + var(--bottom-navigation-height,70px) + env(safe-area-inset-bottom) + 14px)!important;
+}
+html[data-theme="light"] body.is-quran-reader-route{
+  --qrc-dock-bg:rgba(255,252,245,.78);
+  --qrc-dock-border:rgba(120,90,40,.14);
+  --qrc-dock-shadow:0 8px 22px rgba(120,90,40,.10);
+  --qrc-dock-text:#1a1612;
+  --qrc-dock-muted:rgba(26,22,18,.66);
+  --qrc-dock-divider:color-mix(in srgb,var(--gold2,#8a6a28) 32%,transparent);
+}
+html[data-theme="light"] body.is-quran-reader-route .qrc-context-pos{
+  border-color:rgba(120,90,40,.14)!important;
+  background:rgba(255,255,255,.42)!important;
+  color:#1a1612!important;
+}
+html[data-theme="soft"] body.is-quran-reader-route,
+html[data-theme="royal"] body.is-quran-reader-route,
+html[data-theme="dar-al-layl"] body.is-quran-reader-route,
+html[data-theme="aurora"] body.is-quran-reader-route,
+html[data-theme="bordeaux"] body.is-quran-reader-route{
+  --qrc-dock-bg:rgba(255,255,255,.045);
+  --qrc-dock-border:rgba(255,255,255,.09);
+}
 </style>
 
 </html>
