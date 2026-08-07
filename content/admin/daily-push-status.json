@@ -3,11 +3,11 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-07T06:55:19.028Z",
+  "updatedAt": "2026-08-07T07:00:19.030Z",
   "usersChecked": 9,
-  "duaCandidates": 0,
+  "duaCandidates": 9,
   "recCandidates": 0,
-  "sent": 0,
+  "sent": 9,
   "skipped": 0,
   "duplicates": 0,
   "errors": 0,
@@ -24,5 +24,15 @@
     "category": "Vergebung"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "dua",
+      "batch": true,
+      "count": 9,
+      "contentId": "dua-005-faghfir-lana",
+      "recipients": "6333432d-45d5-4ea1-93c5-661bb097cee6",
+      "ok": true,
+      "invalid": 0
+    }
+  ]
 }
