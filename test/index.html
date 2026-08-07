@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1785515013940 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v572";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v573";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -17680,6 +17680,112 @@ html.is-standalone-pwa body{
   }
 }
 </style>
+
+<style id="home-logo-prayer-status-tune-v570">
+/* v570 · Logo etwas kleiner + nach rechts zur Dhuhr-Kante; Statuszeile lesbarer */
+.top-shell.theme-hero-shell .brand-main{
+  padding-left:clamp(12px,3vw,18px)!important;
+  box-sizing:border-box!important;
+}
+.top-shell.theme-hero-shell .logo,
+.top-shell.theme-hero-shell .brand-main .logo{
+  width:clamp(68px,17.5vw,86px)!important;
+  height:clamp(68px,17.5vw,86px)!important;
+  flex:0 0 clamp(68px,17.5vw,86px)!important;
+  flex-basis:clamp(68px,17.5vw,86px)!important;
+  transform:scale(1.06)!important;
+  transform-origin:center center!important;
+}
+.top-shell.theme-hero-shell .brand-main{
+  grid-template-columns:clamp(68px,17.5vw,86px) minmax(0,1fr)!important;
+  column-gap:clamp(10px,2.4vw,14px)!important;
+}
+.top-shell.theme-hero-shell .header-prayer-hub__status,
+.header-prayer-hub__status{
+  margin-top:clamp(7px,1.7vw,10px)!important;
+  padding-top:clamp(8px,1.9vw,11px)!important;
+  padding-bottom:2px!important;
+  font-size:clamp(10.5px,2.45vw,12.5px)!important;
+  line-height:1.35!important;
+  font-weight:780!important;
+  gap:0!important;
+  justify-content:center!important;
+  flex-wrap:wrap!important;
+  row-gap:4px!important;
+}
+.header-prayer-hub__status>span{
+  gap:5px!important;
+}
+.header-prayer-hub__status>span+span::before{
+  margin:0 .42em!important;
+  opacity:.55!important;
+}
+.header-prayer-hub__ico{
+  font-size:1.05em!important;
+  opacity:.86!important;
+}
+@media(max-width:700px){
+  .top-shell.theme-hero-shell .brand-main{padding-left:14px!important}
+  .top-shell.theme-hero-shell .logo,
+  .top-shell.theme-hero-shell .brand-main .logo{
+    width:64px!important;
+    height:64px!important;
+    flex:0 0 64px!important;
+    flex-basis:64px!important;
+    transform:scale(1.05)!important;
+  }
+  .top-shell.theme-hero-shell .brand-main{
+    grid-template-columns:64px minmax(0,1fr)!important;
+    column-gap:11px!important;
+  }
+}
+@media(max-width:430px){
+  .top-shell.theme-hero-shell .brand-main{padding-left:13px!important}
+  .top-shell.theme-hero-shell .logo,
+  .top-shell.theme-hero-shell .brand-main .logo{
+    width:60px!important;
+    height:60px!important;
+    flex:0 0 60px!important;
+    flex-basis:60px!important;
+  }
+  .top-shell.theme-hero-shell .brand-main{
+    grid-template-columns:60px minmax(0,1fr)!important;
+    column-gap:10px!important;
+  }
+  .top-shell.theme-hero-shell .header-prayer-hub__status,
+  .header-prayer-hub__status{
+    font-size:clamp(10px,2.35vw,11.5px)!important;
+  }
+}
+@media(max-width:390px){
+  .top-shell.theme-hero-shell .brand-main{padding-left:12px!important}
+  .top-shell.theme-hero-shell .logo,
+  .top-shell.theme-hero-shell .brand-main .logo{
+    width:56px!important;
+    height:56px!important;
+    flex:0 0 56px!important;
+    flex-basis:56px!important;
+  }
+  .top-shell.theme-hero-shell .brand-main{
+    grid-template-columns:56px minmax(0,1fr)!important;
+    column-gap:9px!important;
+  }
+}
+@media(min-width:981px){
+  .top-shell.theme-hero-shell .brand-main{padding-left:18px!important}
+  .top-shell.theme-hero-shell .logo,
+  .top-shell.theme-hero-shell .brand-main .logo{
+    width:clamp(88px,7.5vw,100px)!important;
+    height:clamp(88px,7.5vw,100px)!important;
+    flex:0 0 clamp(88px,7.5vw,100px)!important;
+    flex-basis:clamp(88px,7.5vw,100px)!important;
+  }
+  .top-shell.theme-hero-shell .brand-main{
+    grid-template-columns:clamp(88px,7.5vw,100px) minmax(0,1fr)!important;
+  }
+}
+</style>
+
 <style id="quran-tafsir-nav-smooth-v568">
 /* QURAN_TAFSIR_NAV_GUARD · smooth open/close, kein Schwarzfeld */
 #quranExplanationMount{
@@ -24515,7 +24621,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v572";
+const APP_BUILD_ID="app-shell-v573";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
