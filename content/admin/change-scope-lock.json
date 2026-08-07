@@ -73,6 +73,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "home-logo-status-oneline-v576-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Logo links bündig mit B; Datum/Uhr/Ort eine Zeile, Datum etwas nach links",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-21T00:00:00.000Z"
+    },
+    {
       "id": "home-logo-prayer-status-tune-v570-2026-08-07",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer: Logo kleiner + nach rechts zur Dhuhr-Kante; Datumszeile in Gebetsbox größer/lesbarer",
