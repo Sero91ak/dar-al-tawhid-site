@@ -48,14 +48,14 @@ html[data-layout="expanded"] {
   --layout-rail-width: 0px;
 }
 
-/* Full-bleed shell — no letterbox gutters on Fold */
+/* Full-bleed shell — no extra gutters (Aug-4 Seitenverhältnis) */
 html[data-layout] .app {
   width: 100% !important;
   max-width: 100% !important;
   margin-left: 0 !important;
   margin-right: 0 !important;
-  padding-left: max(var(--layout-page-gutter), env(safe-area-inset-left, 0px)) !important;
-  padding-right: max(var(--layout-page-gutter), env(safe-area-inset-right, 0px)) !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
   box-sizing: border-box;
 }
 
