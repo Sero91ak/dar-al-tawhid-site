@@ -1,15 +1,15 @@
 {
-  "version": 1,
+  "version": 2,
   "feature": "prophetsKnowledgeBase",
   "env": {
     "test": "enabled",
-    "production": "enabled"
+    "production": "disabled"
   },
   "title": {
     "de": "Die Propheten",
     "ar": "الأنبياء"
   },
-  "intro": "Was Qurʾān, authentische Sunnah und zuverlässig belegte frühe Überlieferungen über die Propheten berichten.",
+  "intro": "Was Qurʾān, authentische Sunnah und zuverlässig belegte frühe Überlieferungen über die Propheten berichten. Zero-Trust: Unsicher = nicht veröffentlichen.",
   "sourcePriority": [
     "Qurʾān",
     "authentische Sunnah",
@@ -19,9 +19,12 @@
     "spätere Werke ausschließlich zur Einordnung und Quellenanalyse"
   ],
   "notes": [
-    "Nur namentlich zuverlässig belegte Personen.",
-    "Die Überlieferung über 124.000 Propheten wird hier nicht als gesicherte Gesamtzahl dargestellt.",
-    "Keine erfundenen biografischen Ergänzungen."
+    "Nur namentlich zuverlässig belegte Personen in der Hauptliste.",
+    "Die Überlieferung über 124.000 Propheten wird nicht als gesicherte Gesamtzahl dargestellt.",
+    "Keine erfundenen biografischen Ergänzungen.",
+    "KI-Ausgabe ist keine Quelle.",
+    "production = disabled bis ausdrückliche Freigabe.",
+    "approved erfordert reviewPass1 und reviewPass2."
   ],
   "uluAlAzmIds": [
     "nuh",
@@ -30,6 +33,15 @@
     "isa",
     "muhammad"
   ],
+  "policy": {
+    "zeroTrust": true,
+    "rule": "UNSICHER = NICHT VERÖFFENTLICHEN",
+    "kiIsNotASource": true,
+    "secondaryCannotReplacePrimary": true,
+    "earlyWorkNotAutomaticallySahih": true,
+    "israiliyyatDefaultHidden": true,
+    "report124000": "document_only_in_research_with_isnad_never_as_certain_total"
+  },
   "prophets": [
     {
       "id": "adam",
@@ -41,7 +53,23 @@
       ],
       "people": "",
       "uluAlAzm": false,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "adam.json",
+      "profileStatus": "research"
+    },
+    {
+      "id": "idris",
+      "name": "Idrīs",
+      "nameAr": "إدريس",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī"
+      ],
+      "people": "",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_explicit",
+      "profileFile": "idris.json",
+      "profileStatus": "research"
     },
     {
       "id": "nuh",
@@ -54,7 +82,9 @@
       ],
       "people": "Qawm Nūḥ",
       "uluAlAzm": true,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "nuh.json",
+      "profileStatus": "research"
     },
     {
       "id": "hud",
@@ -67,7 +97,9 @@
       ],
       "people": "ʿĀd",
       "uluAlAzm": false,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "hud.json",
+      "profileStatus": "research"
     },
     {
       "id": "salih",
@@ -80,7 +112,9 @@
       ],
       "people": "Thamūd",
       "uluAlAzm": false,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "salih.json",
+      "profileStatus": "research"
     },
     {
       "id": "ibrahim",
@@ -93,7 +127,9 @@
       ],
       "people": "",
       "uluAlAzm": true,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "ibrahim.json",
+      "profileStatus": "research"
     },
     {
       "id": "lut",
@@ -106,7 +142,9 @@
       ],
       "people": "Qawm Lūṭ",
       "uluAlAzm": false,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "lut.json",
+      "profileStatus": "research"
     },
     {
       "id": "ismail",
@@ -119,7 +157,9 @@
       ],
       "people": "",
       "uluAlAzm": false,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "ismail.json",
+      "profileStatus": "research"
     },
     {
       "id": "ishaq",
@@ -131,7 +171,9 @@
       ],
       "people": "",
       "uluAlAzm": false,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "ishaq.json",
+      "profileStatus": "research"
     },
     {
       "id": "yaqub",
@@ -143,7 +185,9 @@
       ],
       "people": "",
       "uluAlAzm": false,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "yaqub.json",
+      "profileStatus": "research"
     },
     {
       "id": "yusuf",
@@ -151,12 +195,13 @@
       "nameAr": "يوسف",
       "honorific": "عليه السلام",
       "roles": [
-        "nabī",
-        "rasūl"
+        "nabī"
       ],
       "people": "",
       "uluAlAzm": false,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "yusuf.json",
+      "profileStatus": "research"
     },
     {
       "id": "ayyub",
@@ -168,7 +213,9 @@
       ],
       "people": "",
       "uluAlAzm": false,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "ayyub.json",
+      "profileStatus": "research"
     },
     {
       "id": "shuayb",
@@ -181,7 +228,9 @@
       ],
       "people": "Madyan",
       "uluAlAzm": false,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "shuayb.json",
+      "profileStatus": "research"
     },
     {
       "id": "musa",
@@ -195,7 +244,8 @@
       "people": "Banū Isrāʾīl",
       "uluAlAzm": true,
       "prophetStatus": "quran_explicit",
-      "hasProfile": true
+      "profileFile": "musa.json",
+      "profileStatus": "research"
     },
     {
       "id": "harun",
@@ -207,7 +257,9 @@
       ],
       "people": "Banū Isrāʾīl",
       "uluAlAzm": false,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "harun.json",
+      "profileStatus": "research"
     },
     {
       "id": "dawud",
@@ -217,9 +269,11 @@
       "roles": [
         "nabī"
       ],
-      "people": "Banū Isrāʾīl",
+      "people": "",
       "uluAlAzm": false,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "dawud.json",
+      "profileStatus": "research"
     },
     {
       "id": "sulayman",
@@ -229,9 +283,11 @@
       "roles": [
         "nabī"
       ],
-      "people": "Banū Isrāʾīl",
+      "people": "",
       "uluAlAzm": false,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "sulayman.json",
+      "profileStatus": "research"
     },
     {
       "id": "ilyas",
@@ -244,7 +300,9 @@
       ],
       "people": "",
       "uluAlAzm": false,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "ilyas.json",
+      "profileStatus": "research"
     },
     {
       "id": "alyasa",
@@ -256,7 +314,9 @@
       ],
       "people": "",
       "uluAlAzm": false,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "alyasa.json",
+      "profileStatus": "research"
     },
     {
       "id": "yunus",
@@ -269,7 +329,9 @@
       ],
       "people": "",
       "uluAlAzm": false,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "yunus.json",
+      "profileStatus": "research"
     },
     {
       "id": "zakariyya",
@@ -279,9 +341,11 @@
       "roles": [
         "nabī"
       ],
-      "people": "Banū Isrāʾīl",
+      "people": "",
       "uluAlAzm": false,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "zakariyya.json",
+      "profileStatus": "research"
     },
     {
       "id": "yahya",
@@ -291,9 +355,11 @@
       "roles": [
         "nabī"
       ],
-      "people": "Banū Isrāʾīl",
+      "people": "",
       "uluAlAzm": false,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "yahya.json",
+      "profileStatus": "research"
     },
     {
       "id": "isa",
@@ -306,7 +372,23 @@
       ],
       "people": "Banū Isrāʾīl",
       "uluAlAzm": true,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "isa.json",
+      "profileStatus": "research"
+    },
+    {
+      "id": "dhul-kifl",
+      "name": "Dhū l-Kifl",
+      "nameAr": "ذو الكفل",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī"
+      ],
+      "people": "",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_named_status_under_review",
+      "profileFile": "dhul-kifl.json",
+      "profileStatus": "research"
     },
     {
       "id": "muhammad",
@@ -319,31 +401,53 @@
       ],
       "people": "",
       "uluAlAzm": true,
-      "prophetStatus": "quran_explicit"
+      "prophetStatus": "quran_explicit",
+      "profileFile": "muhammad.json",
+      "profileStatus": "research"
     }
   ],
   "disputed": [
-    {
-      "id": "dhul-kifl",
-      "name": "Dhū l-Kifl",
-      "nameAr": "ذو الكفل",
-      "honorific": "عليه السلام",
-      "roles": [],
-      "people": "",
-      "uluAlAzm": false,
-      "prophetStatus": "disputed",
-      "note": "Im Qurʾān genannt; die Einordnung als Prophet ist unter den Gelehrten umstritten."
-    },
     {
       "id": "uzayr",
       "name": "ʿUzayr",
       "nameAr": "عزير",
       "honorific": "",
-      "roles": [],
-      "people": "",
-      "uluAlAzm": false,
       "prophetStatus": "disputed",
-      "note": "Im Qurʾān erwähnt; Prophetentum nicht als gesichert darzustellen."
+      "note": "Im Qurʾān genannt; Prophetentum ist Gegenstand wissenschaftlicher Einordnung — nicht automatisch bestätigt.",
+      "profileFile": "uzayr.json"
+    },
+    {
+      "id": "luqman",
+      "name": "Luqmān",
+      "nameAr": "لقمان",
+      "honorific": "",
+      "prophetStatus": "disputed",
+      "note": "Im Qurʾān genannt; Weisheit bezeugt — Prophetentum nicht pauschal als gesichert führen.",
+      "profileFile": "luqman.json"
+    },
+    {
+      "id": "al-khidr",
+      "name": "al-Khiḍr",
+      "nameAr": "الخضر",
+      "honorific": "",
+      "prophetStatus": "disputed",
+      "note": "In der Überlieferung diskutiert; nicht als bestätigter Prophet in der Hauptliste.",
+      "profileFile": "al-khidr.json"
+    },
+    {
+      "id": "dhul-qarnayn",
+      "name": "Dhū l-Qarnayn",
+      "nameAr": "ذو القرنين",
+      "honorific": "",
+      "prophetStatus": "disputed",
+      "note": "Im Qurʾān erwähnt; keine automatische Einordnung als Prophet.",
+      "profileFile": "dhul-qarnayn.json"
     }
-  ]
+  ],
+  "audit": {
+    "updatedAt": "2026-08-07T22:40:30.000Z",
+    "scope": "test-only",
+    "production": "disabled",
+    "notes": "Index und Profile unter Zero-Trust neu aufgesetzt; Mūsā-Claims re-auditiert."
+  }
 }

@@ -1,0 +1,134 @@
+{
+  "id": "adam",
+  "name": "Ādam",
+  "nameAr": "آدم",
+  "honorific": "عليه السلام",
+  "nameVariants": [],
+  "prophetStatus": "quran_explicit",
+  "roles": [
+    "nabī"
+  ],
+  "uluAlAzm": false,
+  "people": "",
+  "region": "",
+  "mission": "",
+  "profileStatus": "research",
+  "identity": {
+    "name": "Ādam",
+    "nameAr": "آدم",
+    "quranOrthography": "آدم",
+    "safeVariants": [],
+    "prophetStatus": "quran_explicit",
+    "rolesPendingAudit": true,
+    "uluAlAzm": false,
+    "uluAlAzmNote": "Nicht als Ulū l-ʿAzm geführt, solange nicht belegt."
+  },
+  "overviewFields": [
+    {
+      "key": "name",
+      "label": "Name",
+      "value": "Ādam",
+      "status": "in Prüfung — Claim-Beleg ausstehend (Zero-Trust)",
+      "claimIds": [],
+      "chronologyStatus": "textually-established"
+    },
+    {
+      "key": "nameAr",
+      "label": "Arabischer Name",
+      "value": "آدم",
+      "status": "in Prüfung — Claim-Beleg ausstehend (Zero-Trust)",
+      "claimIds": []
+    },
+    {
+      "key": "roles",
+      "label": "Nabī / Rasūl",
+      "value": "Nabī",
+      "status": "vorläufig — Rollen einzeln gegen Qurʾān prüfen",
+      "claimIds": []
+    },
+    {
+      "key": "people",
+      "label": "Volk",
+      "value": "Nicht authentisch belegt",
+      "status": "nicht authentisch belegt",
+      "claimIds": [],
+      "absenceStatus": "not-established-in-reviewed-sources"
+    },
+    {
+      "key": "region",
+      "label": "Region",
+      "value": "Nicht authentisch belegt",
+      "status": "nicht authentisch belegt",
+      "claimIds": [],
+      "absenceStatus": "not-established-in-reviewed-sources"
+    },
+    {
+      "key": "father",
+      "label": "Vater",
+      "value": "Nicht authentisch belegt",
+      "status": "nicht authentisch belegt",
+      "claimIds": [],
+      "absenceStatus": "not-established-in-reviewed-sources"
+    },
+    {
+      "key": "mother",
+      "label": "Mutter",
+      "value": "Nicht authentisch belegt",
+      "status": "nicht authentisch belegt",
+      "claimIds": [],
+      "absenceStatus": "not-established-in-reviewed-sources"
+    },
+    {
+      "key": "birth",
+      "label": "Geburt",
+      "value": "Nicht authentisch belegt",
+      "status": "nicht authentisch belegt",
+      "claimIds": [],
+      "absenceStatus": "not-established-in-reviewed-sources"
+    },
+    {
+      "key": "death",
+      "label": "Tod / Grab",
+      "value": "Nicht authentisch belegt",
+      "status": "nicht authentisch belegt",
+      "claimIds": [],
+      "absenceStatus": "not-established-in-reviewed-sources"
+    },
+    {
+      "key": "epoch",
+      "label": "Zeitliche Einordnung",
+      "value": "Nicht bestimmbar als islamisch authentische Datierung",
+      "status": "nicht bestimmbar",
+      "chronologyStatus": "not-determinable",
+      "claimIds": [],
+      "absenceStatus": "not-established-in-reviewed-sources"
+    }
+  ],
+  "family": [],
+  "timeline": [],
+  "quranRefs": [],
+  "statements": {
+    "quran": [],
+    "sunnah": []
+  },
+  "prophetMuhammadAbout": [],
+  "athar": [],
+  "worksIndex": [],
+  "claims": [],
+  "weakReports": [],
+  "audit": {
+    "zeroTrust": true,
+    "createdAt": "2026-08-07T22:40:30.000Z",
+    "updatedAt": "2026-08-07T22:40:30.000Z",
+    "profileStatus": "research",
+    "notes": [
+      "Zero-Trust: Kein Claim ohne Primärbeleg freigeben.",
+      "UNSICHER = NICHT VERÖFFENTLICHEN.",
+      "KI-Ausgabe ist keine Quelle.",
+      "approved erfordert reviewPass1 + reviewPass2."
+    ],
+    "reviewPass1": "pending",
+    "reviewPass2": "pending",
+    "pipeline": "draft"
+  }
+}
