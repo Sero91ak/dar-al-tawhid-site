@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-07T20:49:22.955Z",
+  "updatedAt": "2026-08-07T20:49:31.025Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-07T20:49:22.955Z",
+  "lastCronRun": "2026-08-07T20:49:31.025Z",
   "nextPlannedPush": {
     "prayer": "Fajr",
     "key": "fajr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-08T02:26:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-07T20:34:22.100Z",
-  "windowEnd": "2026-08-08T22:49:22.100Z",
+  "windowStart": "2026-08-07T20:34:30.210Z",
+  "windowEnd": "2026-08-08T22:49:30.210Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 1,
@@ -544,7 +544,7 @@
       "subscriptionId": "5d891600-4c4a-4d49-8774-74cb23deb64c",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-07T20:49:21.894+00:00"
+      "lastSyncedAt": "2026-08-07T20:49:30.007+00:00"
     },
     {
       "subscriptionId": "7fe8041e-fb2b-488c-9596-e0b4a9daeb38",
