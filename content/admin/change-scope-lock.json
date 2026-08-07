@@ -76,6 +76,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-ayah-mark-toggle-v577-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Linker Āyah-Button nur Markierung umschalten, kein Drei-Funktionen-Prompt",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-21T00:00:00.000Z"
+    },
+    {
       "id": "home-logo-status-oneline-v576-2026-08-07",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer: Logo links bündig mit B; Datum/Uhr/Ort eine Zeile, Datum etwas nach links",
