@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-07T21:10:20.718Z",
+  "updatedAt": "2026-08-07T21:35:20.645Z",
   "provider": "aurumrates.com",
   "active": true,
   "gold": {
     "metal": "gold",
     "currency": "EUR",
-    "pricePerOunce": 3815.01,
-    "pricePerGram": 122.66,
+    "pricePerOunce": 3815.62,
+    "pricePerGram": 122.68,
     "nisabGrams": 85,
-    "nisabEur": 10426.1,
+    "nisabEur": 10427.8,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-08-07T21:10:20.718Z",
+    "fetchedAt": "2026-08-07T21:35:20.645Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
@@ -27,17 +27,27 @@
     "nisabEur": 1059.1,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-08-07T21:10:20.718Z",
+    "fetchedAt": "2026-08-07T21:35:20.645Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
     "adminNote": ""
   },
   "standardNisabEur": 1059.1,
-  "lastSuccessAt": "2026-08-07T21:10:20.718Z",
+  "lastSuccessAt": "2026-08-07T21:35:20.645Z",
   "lastError": "",
-  "lastFetchAt": "2026-08-07T21:10:20.718Z",
+  "lastFetchAt": "2026-08-07T21:35:20.645Z",
   "fetchLogs": [
+    {
+      "id": "log-1786138520645",
+      "provider": "aurumrates.com",
+      "status": "ok",
+      "errorMessage": "",
+      "fetchedAt": "2026-08-07T21:35:20.645Z",
+      "durationMs": 1016,
+      "goldPerGram": 122.68,
+      "silverPerGram": 1.78
+    },
     {
       "id": "log-1786137020718",
       "provider": "aurumrates.com",
@@ -526,16 +536,6 @@
       "fetchedAt": "2026-08-07T04:10:21.870Z",
       "durationMs": 1787,
       "goldPerGram": 120.45,
-      "silverPerGram": 1.74
-    },
-    {
-      "id": "log-1786074620986",
-      "provider": "aurumrates.com",
-      "status": "ok",
-      "errorMessage": "",
-      "fetchedAt": "2026-08-07T03:50:20.986Z",
-      "durationMs": 1365,
-      "goldPerGram": 120.31,
       "silverPerGram": 1.74
     }
   ]
