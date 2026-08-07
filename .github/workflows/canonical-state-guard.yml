@@ -81,6 +81,9 @@ jobs:
       - name: Qurʾān picker outside guard (kein Safari-Crash)
         run: node scripts/quran-picker-outside-guard.js
 
+      - name: Qurʾān stability + Tajweed guard (Veil/Locks/Schrift)
+        run: node scripts/quran-stability-tajweed-guard.js
+
       - name: App update recovery guard (Update-Banner nur bei echtem Fehler)
         run: node scripts/app-update-recovery-guard.js
 

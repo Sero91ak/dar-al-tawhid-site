@@ -5,6 +5,9 @@
   "lockedReason": "Nutzer-Freigabe: Nach Maghrib-Push-Reparatur keine Änderungen ohne ausdrücklichen Auftrag.",
   "message": "GLOBAL GESPERRT: Nur freigeschaltete Bereiche dürfen geändert werden. Freischaltung nur nach ausdrücklichem Nutzer-Auftrag in unlockedScopes eintragen.",
   "alwaysAllowed": [
+    "content/quran-tajweed/",
+    "scripts/quran-stability-tajweed-guard.js",
+    "content/admin/quran-stability-tajweed-lock.json",
     "content/admin/change-scope-lock.json",
     "data/quiz-questions.json",
     "data/quiz-questions-test.json",
@@ -72,6 +75,88 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "live-ship-v574-578-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Ja Push live — offene Aufträge #475–#478 in Test + Besucher live",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/quran-tajweed/",
+        "content/admin/quran-stability-tajweed-lock.json",
+        "scripts/quran-stability-tajweed-guard.js",
+        "scripts/repo-integrity-guard.js",
+        "scripts/verify-test-app-deploy.js",
+        "scripts/purge-cloudflare-cache.js",
+        "scripts/app-live-parity-check.js",
+        "scripts/verify-live-deploy.js",
+        ".github/workflows/app-health-check.yml",
+        ".github/workflows/canonical-state-guard.yml",
+        ".github/workflows/deploy-test-app.yml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "wrangler.test.toml",
+        "cloudflare/test-app-worker.js"
+      ],
+      "expiresAt": "2026-09-30T23:59:00.000Z"
+    },
+    {
+      "id": "quran-ayah-mark-toggle-v577-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Linker Āyah-Button nur Markierung umschalten, kein Drei-Funktionen-Prompt",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-21T00:00:00.000Z"
+    },
+    {
+      "id": "home-logo-status-oneline-v576-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Logo links bündig mit B; Datum/Uhr/Ort eine Zeile, Datum etwas nach links",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-21T00:00:00.000Z"
+    },
+    {
+      "id": "quran-context-dock-v575-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Schnellleiste über Bottom-Nav wirkt aufgeklebt — edles vereintes Lesedock in Dar Test",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-21T00:00:00.000Z"
+    },
+    {
+      "id": "quran-stability-tajweed-v574-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Qurʾān Seite Bugs (hängen/schwarz/weiß/Nav/Buttons) + Schrift lesbar + Tajweed strikt — Dar Test zuerst",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/quran-tajweed/",
+        "content/admin/change-scope-lock.json",
+        "content/admin/quran-stability-tajweed-lock.json",
+        "scripts/quran-stability-tajweed-guard.js",
+        "scripts/repo-integrity-guard.js",
+        ".github/workflows/app-health-check.yml",
+        ".github/workflows/canonical-state-guard.yml"
+      ],
+      "expiresAt": "2026-08-21T00:00:00.000Z"
+    },
     {
       "id": "home-logo-prayer-status-tune-v570-2026-08-07",
       "approvedBy": "user-explicit-order",
@@ -2293,6 +2378,23 @@
         "docs/dar-ai-video-studio-freigabebericht.md",
         ".github/workflows/deploy-admin-publisher.yml",
         ".github/workflows/deploy-live-admin-app.yml"
+      ],
+      "expiresAt": "2026-09-30T23:59:00.000Z"
+    },
+    {
+      "id": "test-public-route-bind-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Öffentliche /test/-Adresse an separaten Cloudflare-Test-Worker anbinden; Verify+Purge reparieren; Besucher-App unberührt",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "wrangler.test.toml",
+        "cloudflare/test-app-worker.js",
+        ".github/workflows/deploy-test-app.yml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "scripts/verify-test-app-deploy.js",
+        "scripts/purge-cloudflare-cache.js",
+        "scripts/app-live-parity-check.js",
+        "scripts/verify-live-deploy.js"
       ],
       "expiresAt": "2026-09-30T23:59:00.000Z"
     }

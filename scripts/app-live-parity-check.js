@@ -28,12 +28,25 @@ async function fetchText(url) {
 
 async function checkBuildSyncParity() {
   const bust = Date.now();
+  const scope = String(process.env.VERIFY_SCOPE || "both").toLowerCase();
   const visitorBuild = JSON.parse(fs.readFileSync(path.join(ROOT, "version.json"), "utf8")).buildId;
   const testBuild = JSON.parse(fs.readFileSync(path.join(ROOT, "test/version.json"), "utf8")).buildId;
-  const visitorHtml = await fetchText(`${SITE_URL}/index.html?v=${bust}`);
-  const testHtml = await fetchText(`${SITE_URL}/test/index.html?v=${bust}`);
-  const visitorOk = visitorHtml.includes(visitorBuild);
-  const testOk = testHtml.includes(testBuild);
+  let visitorOk = true;
+  let testOk = true;
+
+  // Besucher-App: immer gegen Live-Root prüfen, außer Scope=test
+  if (scope === "both" || scope === "visitor") {
+    const visitorHtml = await fetchText(`${SITE_URL}/index.html?v=${bust}`);
+    visitorOk = visitorHtml.includes(visitorBuild);
+  }
+
+  // Test-App: eigener Worker unter /test* — nur prüfen wenn Scope es verlangt.
+  // Live-Deploy (VERIFY_SCOPE=visitor) darf Test-Build nicht gegen Repo-Commit erzwingen.
+  if (scope === "both" || scope === "test") {
+    const testHtml = await fetchText(`${SITE_URL}/test/index.html?v=${bust}`);
+    testOk = testHtml.includes(testBuild);
+  }
+
   return {
     ok: visitorOk && testOk,
     id: "build-sync",
@@ -45,7 +58,8 @@ async function checkBuildSyncParity() {
     visitorBuild,
     testBuild,
     visitorOk,
-    testOk
+    testOk,
+    scope
   };
 }
 

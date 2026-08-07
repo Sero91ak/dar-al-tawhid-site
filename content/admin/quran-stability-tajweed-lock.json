@@ -1,0 +1,27 @@
+{
+  "locked": true,
+  "lockedAt": "2026-08-07T13:10:00.000Z",
+  "lockedReason": "Nutzer-Auftrag: Qurʾān Stabilität (Schwarz/Weiß/Hänger/Nav) + lesbare Schrift + Tajweed — strikt, Dar Test zuerst.",
+  "unlockPolicy": "Änderungen nur nach ausdrücklichem Nutzer-Auftrag, z. B. „Qurʾān Tajweed freigeben“ oder „Qurʾān-Stabilität freigeben“.",
+  "lockedPaths": [
+    "test/index.html",
+    "content/quran-tajweed/"
+  ],
+  "lockedSections": [
+    "QURAN_STABILITY_TAJWEED_V574",
+    "forceResetQrcUiState",
+    "armQrcJumpVeilFailsafe",
+    "renderQuranAyahArHtml",
+    "loadQuranTajweed",
+    "quran-stability-tajweed-v574"
+  ],
+  "requiredMarkers": [
+    "QURAN_STABILITY_TAJWEED_V574",
+    "forceResetQrcUiState",
+    "armQrcJumpVeilFailsafe",
+    "renderQuranAyahArHtml",
+    "loadQuranTajweed",
+    "showTajweed",
+    "content/quran-tajweed/"
+  ]
+}
