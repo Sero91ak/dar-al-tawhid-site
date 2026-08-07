@@ -61,6 +61,8 @@ const NEVER_DELETE_PREFIXES = [
   "scripts/header-prayer-display-guard.js",
   "scripts/quran-tafsir-nav-guard.js",
   "content/admin/quran-tafsir-nav-lock.json",
+  "scripts/quran-picker-outside-guard.js",
+  "content/admin/quran-picker-outside-lock.json",
   "content/admin/app-update-recovery-lock.json",
   "scripts/app-update-recovery-guard.js",
   "content/admin/change-scope-lock.json",
