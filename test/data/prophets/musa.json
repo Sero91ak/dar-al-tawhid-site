@@ -1,0 +1,924 @@
+{
+  "id": "musa",
+  "name": "Mūsā",
+  "nameAr": "موسى",
+  "honorific": "عليه السلام",
+  "nameVariants": [
+    "Musa",
+    "Moses",
+    "موسى",
+    "Mūsā ibn ʿImrān"
+  ],
+  "prophetStatus": "quran_explicit",
+  "roles": [
+    "nabī",
+    "rasūl"
+  ],
+  "uluAlAzm": true,
+  "people": "Banū Isrāʾīl",
+  "region": "Ägypten · Madyan · Sinai-Region (nach Qurʾān-Kontext)",
+  "mission": "Gesandt zu Firʿawn und den Banū Isrāʾīl; Ruf zum Tawḥīd und Befreiung der Banū Isrāʾīl.",
+  "profileStatus": "approved",
+  "overviewFields": [
+    {
+      "key": "name",
+      "label": "Name",
+      "value": "Mūsā",
+      "status": "authentisch belegt",
+      "claimIds": [
+        "musa-name-quran"
+      ]
+    },
+    {
+      "key": "nameAr",
+      "label": "Arabischer Name",
+      "value": "موسى",
+      "status": "authentisch belegt",
+      "claimIds": [
+        "musa-name-quran"
+      ]
+    },
+    {
+      "key": "roles",
+      "label": "Nabī / Rasūl",
+      "value": "Nabī · Rasūl",
+      "status": "authentisch belegt",
+      "claimIds": [
+        "musa-rasul-quran"
+      ]
+    },
+    {
+      "key": "people",
+      "label": "Volk",
+      "value": "Banū Isrāʾīl",
+      "status": "authentisch belegt",
+      "claimIds": [
+        "musa-people-quran"
+      ]
+    },
+    {
+      "key": "region",
+      "label": "Region",
+      "value": "Ägypten · Madyan · Sinai-Region (nach Qurʾān-Kontext)",
+      "status": "authentisch belegt",
+      "claimIds": [
+        "musa-egypt-context",
+        "musa-madyan"
+      ]
+    },
+    {
+      "key": "mission",
+      "label": "Auftrag",
+      "value": "Gesandt zu Firʿawn und den Banū Isrāʾīl.",
+      "status": "authentisch belegt",
+      "claimIds": [
+        "musa-mission-firaun"
+      ]
+    },
+    {
+      "key": "father",
+      "label": "Vater (Name)",
+      "value": "Nicht authentisch belegt",
+      "status": "nicht authentisch belegt",
+      "claimIds": [
+        "musa-father-name-unattested"
+      ]
+    },
+    {
+      "key": "mother",
+      "label": "Mutter (Name)",
+      "value": "Nicht authentisch belegt",
+      "status": "nicht authentisch belegt",
+      "claimIds": [
+        "musa-mother-name-unattested"
+      ]
+    },
+    {
+      "key": "birth",
+      "label": "Geburt",
+      "value": "Nicht authentisch belegt (Jahr/Ort)",
+      "status": "nicht authentisch belegt",
+      "claimIds": [
+        "musa-birth-unattested"
+      ]
+    },
+    {
+      "key": "death",
+      "label": "Tod",
+      "value": "Nicht authentisch belegt (Jahr/Ort/Grab)",
+      "status": "nicht authentisch belegt",
+      "claimIds": [
+        "musa-death-unattested"
+      ]
+    },
+    {
+      "key": "epoch",
+      "label": "Epoche",
+      "value": "Nicht bestimmbar als islamisch authentische Datierung",
+      "status": "nicht bestimmbar",
+      "claimIds": [
+        "musa-epoch-unattested"
+      ]
+    }
+  ],
+  "family": [
+    {
+      "relation": "mother",
+      "label": "Mutter",
+      "summary": "Im Qurʾān erwähnt; ihr Handeln bei der Rettung des Kindes ist bezeugt.",
+      "name": "Nicht authentisch belegt",
+      "nameStatus": "nicht authentisch belegt",
+      "claimIds": [
+        "musa-mother-mentioned",
+        "musa-mother-name-unattested"
+      ]
+    },
+    {
+      "relation": "brother",
+      "label": "Bruder",
+      "summary": "Hārūn war der Bruder von Mūsā und wurde mit ihm gesandt.",
+      "name": "Hārūn عليه السلام",
+      "nameStatus": "authentisch belegt",
+      "claimIds": [
+        "musa-harun-brother"
+      ]
+    },
+    {
+      "relation": "father",
+      "label": "Vater",
+      "summary": "Im Qurʾān nicht namentlich genannt.",
+      "name": "Nicht authentisch belegt",
+      "nameStatus": "nicht authentisch belegt",
+      "claimIds": [
+        "musa-father-name-unattested"
+      ]
+    },
+    {
+      "relation": "wife",
+      "label": "Ehefrau",
+      "summary": "In Madyan heiratete Mūsā eine der beiden Frauen (Qurʾān); ihr Name ist im Qurʾān nicht genannt.",
+      "name": "Nicht authentisch belegt",
+      "nameStatus": "nicht authentisch belegt",
+      "claimIds": [
+        "musa-marriage-madyan",
+        "musa-wife-name-unattested"
+      ]
+    },
+    {
+      "relation": "sister",
+      "label": "Schwester",
+      "summary": "Eine Schwester wird im Kontext der Rettung erwähnt; der Name ist im Qurʾān nicht genannt.",
+      "name": "Nicht authentisch belegt",
+      "nameStatus": "nicht authentisch belegt",
+      "claimIds": [
+        "musa-sister-mentioned",
+        "musa-sister-name-unattested"
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "id": "birth-rescue",
+      "title": "Geburt und Rettung",
+      "body": "Der Qurʾān berichtet, dass die Mutter von Mūsā ihn nach Eingebung Allahs in den Fluss setzte, damit er gerettet werde. Er wurde im Haus Firʿawns aufgenommen.",
+      "timeClass": "authentisch belegt",
+      "claimIds": [
+        "musa-birth-rescue"
+      ],
+      "quran": [
+        {
+          "surah": 28,
+          "ayah": 7,
+          "ayahEnd": 13,
+          "event": "Rettung und Aufnahme"
+        }
+      ]
+    },
+    {
+      "id": "madyan",
+      "title": "Madyan",
+      "body": "Nachdem Mūsā Ägypten verlassen hatte, gelangte er nach Madyan, half dort zwei Frauen und blieb für eine vereinbarte Zeit.",
+      "timeClass": "authentisch belegt",
+      "claimIds": [
+        "musa-madyan"
+      ],
+      "quran": [
+        {
+          "surah": 28,
+          "ayah": 22,
+          "ayahEnd": 28,
+          "event": "Madyan"
+        }
+      ]
+    },
+    {
+      "id": "call",
+      "title": "Die Berufung",
+      "body": "Am heiligen Tal Ṭuwā sprach Allah zu Mūsā, gab ihm Zeichen und sandte ihn zu Firʿawn. Hārūn wurde ihm zur Unterstützung gegeben.",
+      "timeClass": "authentisch belegt",
+      "claimIds": [
+        "musa-call-tuwa",
+        "musa-harun-brother"
+      ],
+      "quran": [
+        {
+          "surah": 20,
+          "ayah": 9,
+          "ayahEnd": 36,
+          "event": "Berufung"
+        },
+        {
+          "surah": 28,
+          "ayah": 29,
+          "ayahEnd": 35,
+          "event": "Berufung"
+        }
+      ]
+    },
+    {
+      "id": "firaun",
+      "title": "Mūsā und Firʿawn",
+      "body": "Mūsā und Hārūn traten vor Firʿawn, forderten ihn zum Tawḥīd auf und verlangten die Freilassung der Banū Isrāʾīl. Die Zeichen und die Auseinandersetzung mit den Zauberern werden im Qurʾān ausführlich berichtet.",
+      "timeClass": "authentisch belegt",
+      "claimIds": [
+        "musa-mission-firaun"
+      ],
+      "quran": [
+        {
+          "surah": 20,
+          "ayah": 42,
+          "ayahEnd": 76,
+          "event": "Firʿawn"
+        },
+        {
+          "surah": 26,
+          "ayah": 10,
+          "ayahEnd": 51,
+          "event": "Firʿawn"
+        },
+        {
+          "surah": 7,
+          "ayah": 103,
+          "ayahEnd": 126,
+          "event": "Firʿawn"
+        }
+      ]
+    },
+    {
+      "id": "sea",
+      "title": "Die Spaltung des Meeres",
+      "body": "Allah rettete Mūsā und die Banū Isrāʾīl und ließ Firʿawn und sein Heer im Meer untergehen.",
+      "timeClass": "authentisch belegt",
+      "claimIds": [
+        "musa-sea-rescue"
+      ],
+      "quran": [
+        {
+          "surah": 26,
+          "ayah": 52,
+          "ayahEnd": 66,
+          "event": "Meer"
+        },
+        {
+          "surah": 10,
+          "ayah": 90,
+          "ayahEnd": 92,
+          "event": "Meer"
+        }
+      ]
+    },
+    {
+      "id": "tur",
+      "title": "Am Berg und die Tafeln",
+      "body": "Mūsā wurde zu einem Termin mit seinem Herrn gerufen. Der Qurʾān berichtet von den Tafeln und von der Prüfung der Banū Isrāʾīl in seiner Abwesenheit.",
+      "timeClass": "authentisch belegt",
+      "claimIds": [
+        "musa-tur-tablets"
+      ],
+      "quran": [
+        {
+          "surah": 7,
+          "ayah": 142,
+          "ayahEnd": 154,
+          "event": "Berg und Tafeln"
+        },
+        {
+          "surah": 20,
+          "ayah": 83,
+          "ayahEnd": 98,
+          "event": "Prüfung"
+        }
+      ]
+    }
+  ],
+  "quranRefs": [
+    {
+      "surah": 2,
+      "ayah": 51,
+      "ayahEnd": 61,
+      "filter": "ereignis",
+      "event": "Banū Isrāʾīl",
+      "context": "Erwähnungen im Kontext der Banū Isrāʾīl",
+      "kind": "about"
+    },
+    {
+      "surah": 7,
+      "ayah": 103,
+      "ayahEnd": 156,
+      "filter": "ereignis",
+      "event": "Firʿawn · Tafeln",
+      "context": "Sendung zu Firʿawn, Zeichen, Tafeln",
+      "kind": "about"
+    },
+    {
+      "surah": 10,
+      "ayah": 75,
+      "ayahEnd": 92,
+      "filter": "ereignis",
+      "event": "Firʿawn · Meer",
+      "context": "Mūsā und Hārūn vor Firʿawn; Untergang",
+      "kind": "about"
+    },
+    {
+      "surah": 20,
+      "ayah": 9,
+      "ayahEnd": 98,
+      "filter": "ereignis",
+      "event": "Berufung · Firʿawn",
+      "context": "Berufung, Firʿawn, Prüfung",
+      "kind": "about"
+    },
+    {
+      "surah": 20,
+      "ayah": 25,
+      "ayahEnd": 35,
+      "filter": "aussagen",
+      "event": "Duʿāʾ",
+      "context": "Duʿāʾ von Mūsā um Erleichterung und Unterstützung durch Hārūn",
+      "kind": "speech"
+    },
+    {
+      "surah": 26,
+      "ayah": 10,
+      "ayahEnd": 66,
+      "filter": "ereignis",
+      "event": "Firʿawn · Meer",
+      "context": "Sendung und Rettung",
+      "kind": "about"
+    },
+    {
+      "surah": 28,
+      "ayah": 3,
+      "ayahEnd": 43,
+      "filter": "ereignis",
+      "event": "Lebensweg",
+      "context": "Rettung, Madyan, Berufung",
+      "kind": "about"
+    },
+    {
+      "surah": 28,
+      "ayah": 15,
+      "ayahEnd": 21,
+      "filter": "aussagen",
+      "event": "Ägypten",
+      "context": "Rede und Reue im Kontext des Vorfalls in der Stadt",
+      "kind": "speech"
+    },
+    {
+      "surah": 18,
+      "ayah": 60,
+      "ayahEnd": 82,
+      "filter": "ereignis",
+      "event": "Mit dem Diener Allahs",
+      "context": "Reise mit dem Diener, dem Wissen gegeben wurde",
+      "kind": "about"
+    },
+    {
+      "surah": 79,
+      "ayah": 15,
+      "ayahEnd": 26,
+      "filter": "ereignis",
+      "event": "Firʿawn",
+      "context": "Ansprache an Firʿawn",
+      "kind": "about"
+    }
+  ],
+  "statements": {
+    "quran": [
+      {
+        "id": "musa-dua-20-25",
+        "context": "Duʿāʾ um Erleichterung der Aufgabe und Unterstützung durch Hārūn",
+        "arabicOriginal": "قَالَ رَبِّ اشْرَحْ لِي صَدْرِي · وَيَسِّرْ لِي أَمْرِي · وَاحْلُلْ عُقْدَةً مِّن لِّسَانِي · يَفْقَهُوا قَوْلِي · وَاجْعَل لِّي وَزِيرًا مِّنْ أَهْلِي · هَارُونَ أَخِي",
+        "translationDe": "Er sagte: Mein Herr, weite mir meine Brust, und erleichtere mir meine Angelegenheit, und löse den Knoten von meiner Zunge, damit sie meine Rede verstehen, und bestelle mir einen Helfer aus meiner Familie: Hārūn, meinen Bruder.",
+        "source": "Qurʾān",
+        "reference": "Ṭā-Hā 20:25–30",
+        "grading": "quran",
+        "verificationStatus": "approved",
+        "directReference": "#quran-surah/20/25",
+        "surah": 20,
+        "ayah": 25,
+        "ayahEnd": 30
+      }
+    ],
+    "sunnah": []
+  },
+  "prophetAbout": [
+    {
+      "id": "isra-musa",
+      "arabicOriginal": "",
+      "translationDe": "In den authentischen Berichten über die Nachtreise (al-Isrāʾ) wird erwähnt, dass der Prophet ﷺ Mūsā عليه السلام begegnete. Der genaue Wortlaut und die Nummern sind in den Primärwerken zu prüfen und hier nur als Rahmen vermerkt, bis der Direktnachweis redaktionell vollständig hinterlegt ist.",
+      "sahabiRawi": "u. a. Anas ibn Mālik und andere Wege (nach den Sammlungen)",
+      "work": "Ṣaḥīḥ al-Buḫārī / Ṣaḥīḥ Muslim",
+      "bookChapter": "Kitāb al-Isrāʾ / Kitāb al-Īmān (Wege variieren)",
+      "number": "",
+      "volumePage": "",
+      "grading": "sahih",
+      "verificationStatus": "research",
+      "directReference": "",
+      "notes": "Rahmenhinweis; vollständiger arabischer Text + exakte Nummer folgen nach Isnād-/Stellenprüfung. Nicht in der Hauptansicht, bis approved."
+    }
+  ],
+  "athar": [],
+  "weakReports": [],
+  "worksIndex": [
+    {
+      "id": "quran",
+      "title": "Qurʾān",
+      "countFrom": "quranRefs"
+    },
+    {
+      "id": "bukhari",
+      "title": "Ṣaḥīḥ al-Buḫārī",
+      "countFrom": "prophetAbout"
+    },
+    {
+      "id": "muslim",
+      "title": "Ṣaḥīḥ Muslim",
+      "countFrom": "prophetAbout"
+    }
+  ],
+  "claims": [
+    {
+      "verificationStatus": "approved",
+      "grading": "quran",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "arabicOriginal": "",
+      "translationDe": "Hat dich die Geschichte von Mūsā erreicht?",
+      "directReference": "#quran-surah/20/9",
+      "notes": "",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-name-quran",
+      "prophetId": "musa",
+      "category": "identity",
+      "claim": "Sein Name im Qurʾān lautet Mūsā (موسى).",
+      "reference": "zahlreiche Stellen, z. B. Ṭā-Hā 20:9"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "quran",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "arabicOriginal": "",
+      "translationDe": "Und gedenke im Buch Mūsās. Er war aufrichtig und war ein Gesandter, ein Prophet.",
+      "directReference": "#quran-surah/19/51",
+      "notes": "",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-rasul-quran",
+      "prophetId": "musa",
+      "category": "identity",
+      "claim": "Mūsā ist im Qurʾān als Gesandter (Rasūl) und Prophet bezeugt.",
+      "reference": "u. a. Maryam 19:51"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "quran",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "directReference": "#quran-surah/20/47",
+      "notes": "",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-people-quran",
+      "prophetId": "musa",
+      "category": "mission",
+      "claim": "Mūsā wurde zu den Banū Isrāʾīl gesandt / steht im Kontext der Banū Isrāʾīl.",
+      "reference": "u. a. al-Aʿrāf 7:105; Ṭā-Hā 20:47"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "quran",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "directReference": "#quran-surah/28/3",
+      "notes": "",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-egypt-context",
+      "prophetId": "musa",
+      "category": "region",
+      "claim": "Der Qurʾān verortet zentrale Ereignisse im Machtbereich Firʿawns (Ägypten-Kontext).",
+      "reference": "al-Qaṣaṣ 28:3–6"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "quran",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "directReference": "#quran-surah/20/42",
+      "notes": "",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-mission-firaun",
+      "prophetId": "musa",
+      "category": "mission",
+      "claim": "Mūsā (mit Hārūn) wurde zu Firʿawn gesandt.",
+      "reference": "Ṭā-Hā 20:42–44; ash-Shuʿarāʾ 26:10–17"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "quran",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "arabicOriginal": "وَاجْعَل لِّي وَزِيرًا مِّنْ أَهْلِي · هَارُونَ أَخِي",
+      "translationDe": "… und bestelle mir einen Helfer aus meiner Familie: Hārūn, meinen Bruder.",
+      "directReference": "#quran-surah/20/30",
+      "notes": "",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-harun-brother",
+      "prophetId": "musa",
+      "category": "family",
+      "claim": "Hārūn war der Bruder von Mūsā.",
+      "reference": "Ṭā-Hā 20:29–30; al-Aʿrāf 7:142"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "quran",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "directReference": "#quran-surah/28/7",
+      "notes": "",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-mother-mentioned",
+      "prophetId": "musa",
+      "category": "family",
+      "claim": "Die Mutter von Mūsā wird im Qurʾān erwähnt (ohne Namensnennung).",
+      "reference": "al-Qaṣaṣ 28:7–13; Ṭā-Hā 20:38–40"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "unverified",
+      "evidenceType": "editorial",
+      "source": "Redaktionelle Feststellung",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "directReference": "",
+      "notes": "Wert: Nicht authentisch belegt",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-mother-name-unattested",
+      "prophetId": "musa",
+      "category": "family",
+      "claim": "Der Name der Mutter von Mūsā ist im Qurʾān und in der hier freigegebenen Datenbasis nicht authentisch belegt.",
+      "reference": "—"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "unverified",
+      "evidenceType": "editorial",
+      "source": "Redaktionelle Feststellung",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "directReference": "",
+      "notes": "Populäre Namensangaben ohne geprüften Isnād werden nicht übernommen.",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-father-name-unattested",
+      "prophetId": "musa",
+      "category": "family",
+      "claim": "Der Name des Vaters von Mūsā ist in der hier freigegebenen Datenbasis nicht authentisch belegt.",
+      "reference": "—"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "unverified",
+      "evidenceType": "editorial",
+      "source": "Redaktionelle Feststellung",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "directReference": "",
+      "notes": "",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-birth-unattested",
+      "prophetId": "musa",
+      "category": "biography",
+      "claim": "Geburtsjahr und genauer Geburtsort sind nicht authentisch belegt.",
+      "reference": "—"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "unverified",
+      "evidenceType": "editorial",
+      "source": "Redaktionelle Feststellung",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "directReference": "",
+      "notes": "",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-death-unattested",
+      "prophetId": "musa",
+      "category": "biography",
+      "claim": "Todesjahr, Todesort und Grabstätte sind nicht authentisch belegt.",
+      "reference": "—"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "unverified",
+      "evidenceType": "editorial",
+      "source": "Redaktionelle Feststellung",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "directReference": "",
+      "notes": "Zeitklasse: nicht bestimmbar",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-epoch-unattested",
+      "prophetId": "musa",
+      "category": "biography",
+      "claim": "Eine moderne historische Jahreszahl darf nicht als islamisch authentische Datierung dargestellt werden.",
+      "reference": "—"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "quran",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "directReference": "#quran-surah/28/7",
+      "notes": "",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-birth-rescue",
+      "prophetId": "musa",
+      "category": "timeline",
+      "claim": "Die Mutter setzte Mūsā nach Eingebung Allahs in den Fluss; er wurde im Haus Firʿawns aufgenommen.",
+      "reference": "al-Qaṣaṣ 28:7–13"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "quran",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "directReference": "#quran-surah/28/22",
+      "notes": "",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-madyan",
+      "prophetId": "musa",
+      "category": "timeline",
+      "claim": "Mūsā gelangte nach Madyan und blieb dort für eine vereinbarte Zeit.",
+      "reference": "al-Qaṣaṣ 28:22–28"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "quran",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "directReference": "#quran-surah/28/27",
+      "notes": "",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-marriage-madyan",
+      "prophetId": "musa",
+      "category": "family",
+      "claim": "In Madyan wurde eine Ehevereinbarung getroffen (eine der beiden Frauen).",
+      "reference": "al-Qaṣaṣ 28:27–28"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "unverified",
+      "evidenceType": "editorial",
+      "source": "Redaktionelle Feststellung",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "directReference": "",
+      "notes": "",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-wife-name-unattested",
+      "prophetId": "musa",
+      "category": "family",
+      "claim": "Der Name der Ehefrau ist im Qurʾān nicht genannt und hier nicht als authentisch belegt geführt.",
+      "reference": "—"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "quran",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "directReference": "#quran-surah/28/11",
+      "notes": "",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-sister-mentioned",
+      "prophetId": "musa",
+      "category": "family",
+      "claim": "Eine Schwester wird im Rettungskontext erwähnt.",
+      "reference": "al-Qaṣaṣ 28:11–13; Ṭā-Hā 20:40"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "unverified",
+      "evidenceType": "editorial",
+      "source": "Redaktionelle Feststellung",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "directReference": "",
+      "notes": "",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-sister-name-unattested",
+      "prophetId": "musa",
+      "category": "family",
+      "claim": "Der Name der Schwester ist im Qurʾān nicht genannt.",
+      "reference": "—"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "quran",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "directReference": "#quran-surah/20/12",
+      "notes": "",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-call-tuwa",
+      "prophetId": "musa",
+      "category": "timeline",
+      "claim": "Allah sprach zu Mūsā im heiligen Tal Ṭuwā und sandte ihn mit Zeichen.",
+      "reference": "Ṭā-Hā 20:9–36; an-Nāziʿāt 79:15–20"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "quran",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "directReference": "#quran-surah/26/63",
+      "notes": "",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-sea-rescue",
+      "prophetId": "musa",
+      "category": "timeline",
+      "claim": "Allah rettete Mūsā und die Banū Isrāʾīl und ließ Firʿawn untergehen.",
+      "reference": "ash-Shuʿarāʾ 26:52–66; Yūnus 10:90–92"
+    },
+    {
+      "verificationStatus": "approved",
+      "grading": "quran",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "directReference": "#quran-surah/7/145",
+      "notes": "",
+      "isnad": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "id": "musa-tur-tablets",
+      "prophetId": "musa",
+      "category": "timeline",
+      "claim": "Mūsā erhielt die Tafeln; in seiner Abwesenheit wurden die Banū Isrāʾīl geprüft.",
+      "reference": "al-Aʿrāf 7:142–154; Ṭā-Hā 20:83–98"
+    }
+  ]
+}
