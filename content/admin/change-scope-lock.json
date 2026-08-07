@@ -69,6 +69,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "gelehrte-compact-quickfilter-v504-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Schüler kompakt; Schnellauswahl unter Suche; untere Schnellsuche löschen; live",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "assets/scholars-index.js",
+        "assets/scholars-index.css",
+        "content/admin/change-scope-lock.json"
+      ]
+    },
+    {
       "id": "restore-theme-colors-v503-2026-08-07",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer: Erscheinungsbild-Farben zurück — Edge-to-Edge nur Layout, nicht Layl-Farben",
