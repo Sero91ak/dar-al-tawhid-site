@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v596";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v597";</script>
 <script>/* VISUAL_PAST_PURGE_V588: alte Optik-Caches löschen – aktuelle Darstellung bleibt Autorität */(function(){var BUILD=String(window.__DAR_EXPECTED_BUILD||"");var KEY="dar_visual_authority_build_v1";var ONCE="dar_visual_past_purge_once_v588";function num(id){var m=String(id||"").match(/v(\d+)/);return m?parseInt(m[1],10):0}function wipe(){if(!("caches"in window))return Promise.resolve();return caches.keys().then(function(keys){return Promise.all(keys.filter(function(k){return /^dar-al-tawhid-offline-light-/i.test(k)}).map(function(k){return caches.delete(k)}))})}function bustReload(tag){try{if(sessionStorage.getItem(ONCE)===BUILD+"|"+tag)return;sessionStorage.setItem(ONCE,BUILD+"|"+tag)}catch(e){}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?"+tag+"="+Date.now()+h)}try{var prev=localStorage.getItem(KEY)||"";var localN=num(BUILD);var prevN=num(prev);if(prevN>localN&&localN>0){wipe().then(function(){if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){try{g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}catch(e){}}).catch(function(){})}bustReload("visual-stale")}).catch(function(){bustReload("visual-stale")});return}if(localN>prevN){wipe().then(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}bustReload("visual-new")}).catch(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}});return}if(!prev&&BUILD){try{localStorage.setItem(KEY,BUILD)}catch(e){}}if(localN>0&&"caches"in window){caches.keys().then(function(keys){keys.forEach(function(k){if(!/^dar-al-tawhid-offline-light-/i.test(k))return;var kn=num(k);if(kn&&kn<localN)caches.delete(k)})}).catch(function(){})}}catch(e){}try{var path=String(location.pathname||"");var ver=path.indexOf("/test")===0?"/test/version.json":"/version.json";fetch(ver,{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(remote){if(!remote||!remote.buildId)return;var remoteN=num(remote.buildId);if(remoteN>localN&&localN>0){wipe().then(function(){bustReload("visual-remote")}).catch(function(){bustReload("visual-remote")})}}).catch(function(){})}catch(e){}})();</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
@@ -11349,6 +11349,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=587">
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=5">
 <link rel="stylesheet" href="/assets/books-library.css?v=2">
+<link rel="stylesheet" href="/assets/prophets/prophets.css?v=4">
 <link rel="stylesheet" href="/assets/dar-account-visibility.css?v=11">
 <link rel="stylesheet" href="/assets/scholars-index.css?v=587">
 <link rel="stylesheet" href="/assets/adaptive-layout.css?v=587">
@@ -20298,7 +20299,7 @@ function isDetailRoute(route){return ["post","dua","quran-surah","news-detail"].
 function migrateLegacyTopicsRoute(){const hash=safeDecodeURIComponent((location.hash||"").replace(/^#/,""));if(hash==="feed/topics"||hash.startsWith("feed/topics/")){try{history.replaceState(null,"",routeToHash("topics",""))}catch(e){location.replace(routeToHash("topics",""))}return true}return false}
 function migrateTopicsScrollKey(){try{const map=JSON.parse(sessionStorage.getItem(NAV_SCROLL_KEY)||"{}");if(map["feed/topics"]!=null&&map.topics==null){map.topics=map["feed/topics"];sessionStorage.setItem(NAV_SCROLL_KEY,JSON.stringify(map))}}catch(e){}}
 function setPageHeader(title,subtitle="",eyebrow=""){return setHeader(title,subtitle,eyebrow||title)}
-const ROUTE_ALIASES={start:"home",home:"home",feed:"feed",ilm:"ilm",quiz:"quiz","din-quiz":"quiz",beitraege:"topics",topics:"topics",themen:"topics",quran:"quran",quran_themen:"quran-topic",themen_quran:"quran-topic","quran-topic":"quran-topic",dua:"duas",duas:"duas",mehr:"more",more:"more",hadith:"hadith",ahadith:"hadith",gelehrte:"scholars",scholars:"scholars",buecher:"books",bucher:"books",books:"books",quellenbibliothek:"books",quellenbuch:"quellen-book","quellen-book":"quellen-book",quellengelehrter:"quellen-scholar","quellen-scholar":"quellen-scholar",bibliothek:"bibliothek",zakat:"zakat",kalender:"calendar",calendar:"calendar","mein-bereich":"account",account:"account",gebetszeiten:"prayer",prayer:"prayer",jumuah:"jummah",jummah:"jummah",einstellungen:"settings",settings:"settings",favoriten:"saved",saved:"saved",beitrag:"post",post:"post",news:"news",neu:"news"};
+const ROUTE_ALIASES={start:"home",home:"home",feed:"feed",ilm:"ilm",quiz:"quiz","din-quiz":"quiz",beitraege:"topics",topics:"topics",themen:"topics",quran:"quran",quran_themen:"quran-topic",themen_quran:"quran-topic","quran-topic":"quran-topic",dua:"duas",duas:"duas",mehr:"more",more:"more",hadith:"hadith",ahadith:"hadith",propheten:"propheten",prophets:"propheten",anbiya:"propheten",gelehrte:"scholars",scholars:"scholars",buecher:"books",bucher:"books",books:"books",quellenbibliothek:"books",quellenbuch:"quellen-book","quellen-book":"quellen-book",quellengelehrter:"quellen-scholar","quellen-scholar":"quellen-scholar",bibliothek:"bibliothek",zakat:"zakat",kalender:"calendar",calendar:"calendar","mein-bereich":"account",account:"account",gebetszeiten:"prayer",prayer:"prayer",jumuah:"jummah",jummah:"jummah",einstellungen:"settings",settings:"settings",favoriten:"saved",saved:"saved",beitrag:"post",post:"post",news:"news",neu:"news"};
 function normalizeRouteSlug(slug){return String(slug||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
 function looksLikePostId(val){if(!val)return false;const id=String(val).split("/")[0];if(posts.some(p=>String(p.id)===id))return true;if(/^\d+$/.test(id))return true;if(/^[a-z0-9][a-z0-9_-]*-\d{2,}$/i.test(id))return true;return false}
 function isLikelyPostId(val){return looksLikePostId(val)}
@@ -20385,7 +20386,7 @@ function readRoute(){
   else if(head==="feed"&&bare.startsWith("feed/topics"))canonicalizeRouteHash(route);
   return route;
 }
-function parentRoute(route){
+function parentRoute(route){if(route&&route.view==="propheten"&&route.value){const parts=String(route.value||"").split("/").filter(Boolean);if(parts.length>1)return{view:"propheten",value:parts[0]};return{view:"propheten",value:""}}if(route&&route.view==="propheten")return{view:"more",value:""};
   if(route.view==="news-detail")return{view:"news"};
   if(route.view==="news")return{view:"home"};
   if(route.view==="ilm")return{view:"home"};
@@ -20425,7 +20426,7 @@ function parentRoute(route){
   return{view:"home"};
 }
 function bottomNavSecondaryTab(){return isTestAppPath()?"ilm":"quiz"}
-function bottomNavTabForRoute(routeOrView){const route=typeof routeOrView==="string"?{view:routeOrView,value:""}:(routeOrView||{view:"",value:""});const view=route.view||"";if(view==="news-detail")return"home";if(view==="home")return"home";if(isTestAppPath()){if(view==="ilm")return"ilm"}else{if(view==="quiz"||view==="statistik")return"quiz"}if(view==="feed")return"feed";if(["quran","quran-surah","quran-topic"].includes(view))return"quran";if(["topics","topic","recent","series","post","more","scholars","scholar","books","book","quellen-book","quellen-scholar","calendar","saved","account","about","hadith","statistik","prayer","ramadan","zakat","bibliothek","bibliothek-detail","bibliothek-reader","image-editor","image-editor-test","duas","dua-cat","dua","settings","jummah","news","ilm","quiz"].includes(view))return"more";return""}
+function bottomNavTabForRoute(routeOrView){const route=typeof routeOrView==="string"?{view:routeOrView,value:""}:(routeOrView||{view:"",value:""});const view=route.view||"";if(view==="news-detail")return"home";if(view==="home")return"home";if(isTestAppPath()){if(view==="ilm")return"ilm"}else{if(view==="quiz"||view==="statistik")return"quiz"}if(view==="feed")return"feed";if(["quran","quran-surah","quran-topic"].includes(view))return"quran";if(["topics","topic","recent","series","post","more","scholars","scholar","books","book","quellen-book","quellen-scholar","calendar","saved","account","about","hadith","propheten","statistik","prayer","ramadan","zakat","bibliothek","bibliothek-detail","bibliothek-reader","image-editor","image-editor-test","duas","dua-cat","dua","settings","jummah","news","ilm","quiz"].includes(view))return"more";return""}
 const BOTTOM_NAV_TABS=["home",bottomNavSecondaryTab(),"feed","quran","more"];
 let bottomNavDrag=null;
 function bottomNavTabIndex(tab){const i=BOTTOM_NAV_TABS.indexOf(tab);return i>=0?i:0}
@@ -24287,6 +24288,7 @@ function featureCatalog(){
     {id:"about",title:"Über die App",icon:"ℹ️",desc:"Maßstab, Quellenordnung und Aufbau.",button:"Lesen",nav:"about",group:"App"}
   ];
   if(typeof seasonalIslamicContext==="function"&&seasonalIslamicContext())items.push({id:"ramadan",title:"Ramaḍān & ʿĪd",icon:"🌙",desc:"Saisonale Beiträge und Zeiten.",button:"Öffnen",nav:"ramadan",group:"Alltag & Gebet",badge:"Saison"});
+  items.unshift({id:"propheten",title:"Die Propheten",icon:"",desc:"Qurʾān · Sunnah · authentische Überlieferungen",button:"Entdecken",nav:"propheten",group:"Lernen & Wissen",badge:"Wissen",premium:true});
   {const qIdx=items.findIndex(x=>x.id==="quran");items.splice(qIdx>=0?qIdx+1:3,0,{id:"bibliothek",title:"DAR AL TAWḤĪD Bibliothek",icon:"📚",desc:"PDFs, Bücher und Themenhefte von DAR AL TAWḤĪD.",button:"Öffnen",nav:"bibliothek",group:"Lernen & Wissen",badge:"Neu"})}
   if(!testOnly)return items.filter(item=>item.id!=="ilm"&&item.id!=="hadith");
   return items;
@@ -24301,7 +24303,7 @@ function renderFeatureHint(){return""}
 function renderPinnedFeaturesSection(){const pins=featurePins().map(featureById).filter(Boolean).slice(0,6);if(!pins.length)return"";return `<section class="feature-section"><div class="feature-head"><div><h3>Meine Schnellzugriffe</h3><span>Angepinnte Bereiche für schnellen Zugriff.</span></div></div><div class="feature-grid">${pins.map(renderFeatureCard).join("")}</div></section>`}
 function renderFeatureDiscoverySection(){return""}
 function renderTodayRecommendedFeatures(){return""}
-function renderMoreFeatureRow(item){const search=[item.title,item.desc,item.group,item.badge].filter(Boolean).join(" ").toLowerCase();return `<button class="more-feature-row" type="button" data-nav="${esc(item.nav)}" ${item.value?`data-value="${esc(item.value)}"`:""} data-feature-search="${esc(search)}"><span class="feature-icon">${esc(item.icon||"✨")}</span><span><h4>${esc(item.title)} ${item.badge?`<span class="feature-badge">${esc(item.badge)}</span>`:""}</h4><p>${esc(item.desc||"")}</p></span></button>`}
+function renderMoreFeatureRow(item){if(item&&item.id==="propheten"&&window.DARProphets&&typeof window.DARProphets.renderSpotlight==="function"){let spot=window.DARProphets.renderSpotlight();if(spot.indexOf("more-feature-row")<0)spot=spot.replace('class="prophets-spotlight"','class="prophets-spotlight more-feature-row" data-feature-search="die propheten anbiya quran sunnah ueberlieferungen lernen wissen musa"');return spot}const search=[item.title,item.desc,item.group,item.badge].filter(Boolean).join(" ").toLowerCase();return `<button class="more-feature-row" type="button" data-nav="${esc(item.nav)}" ${item.value?`data-value="${esc(item.value)}"`:""} data-feature-search="${esc(search)}"><span class="feature-icon">${esc(item.icon||"✨")}</span><span><h4>${esc(item.title)} ${item.badge?`<span class="feature-badge">${esc(item.badge)}</span>`:""}</h4><p>${esc(item.desc||"")}</p></span></button>`}
 function renderMoreGroup(title,items){if(!items.length)return"";return `<section class="more-group" data-more-group><h3>${esc(title)}</h3><div class="more-group-grid">${items.map(renderMoreFeatureRow).join("")}</div></section>`}
 function filterMoreFeatures(){const input=$("moreFeatureSearch");if(!input)return;const q=input.value.trim().toLowerCase();document.querySelectorAll(".more-feature-row").forEach(row=>{row.classList.toggle("is-hidden",!!q&&!String(row.getAttribute("data-feature-search")||"").includes(q))});document.querySelectorAll("[data-more-group]").forEach(group=>{group.classList.toggle("is-hidden",!group.querySelector(".more-feature-row:not(.is-hidden)"))})}
 
@@ -24907,7 +24909,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v596";
+const APP_BUILD_ID="app-shell-v597";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -25184,6 +25186,7 @@ function updateChrome(route){
   const isIlm=route.view==="ilm";
   const isPost=route.view==="post";
   if(!isIlm)rememberIlmReturnRoute(route,window.scrollY||0);
+  document.body.classList.toggle("is-propheten-route",route.view==="propheten");
   document.body.classList.toggle("is-home-route",isHome);
   document.body.classList.toggle("is-area-route",!isHome);
   document.body.classList.toggle("is-ilm-chat-route",isIlm);
@@ -25350,6 +25353,7 @@ function render(){
     else if(currentRoute.view==="quiz")html=renderQuiz();
     else if(currentRoute.view==="topics")html=renderTopics();
     else if(currentRoute.view==="scholars")html=renderScholars();
+    else if(currentRoute.view==="propheten")html=(window.DARProphets&&typeof window.DARProphets.render==="function"?window.DARProphets.render(currentRoute.value):`<div class="empty">Prophetenbibliothek wird geladen…</div>`);
     else if(currentRoute.view==="books")html=renderBooks();
     else if(currentRoute.view==="quellen-book")html=window.DARCanonicalSourceLibrary?DARCanonicalSourceLibrary.renderBookDetail(currentRoute.value):renderBooks();
     else if(currentRoute.view==="quellen-scholar")html=window.DARCanonicalSourceLibrary?DARCanonicalSourceLibrary.renderScholarDetail(currentRoute.value):renderBooks();
@@ -25535,6 +25539,7 @@ function bindEvents(){
   const moreFeatureSearch=$("moreFeatureSearch");if(moreFeatureSearch)moreFeatureSearch.oninput=filterMoreFeatures;
   const booksSearchInput=$("booksSearchInput");if(booksSearchInput)booksSearchInput.oninput=filterBooksLibrary;
   if(window.DARCanonicalSourceLibrary)DARCanonicalSourceLibrary.bind();
+  if(currentRoute.view==="propheten"&&window.DARProphets&&typeof window.DARProphets.bind==="function"){window.DARProphets.bind();}
   const advancedFilterBtn=$("advancedFilterBtn");const homeFilterPanel=$("homeFilterPanel");
   if(advancedFilterBtn&&homeFilterPanel){advancedFilterBtn.onclick=()=>{const open=homeFilterPanel.classList.contains("advanced-visible");homeFilterPanel.classList.toggle("advanced-visible",!open);homeFilterPanel.classList.toggle("advanced-hidden",open);advancedFilterBtn.classList.toggle("active",!open);advancedFilterBtn.textContent=open?"Filter anzeigen":"Filter ausblenden"}}
   const homeSearchInput=$("homeSearchInput");
@@ -26618,7 +26623,9 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
   </script>
   <script src="/assets/dar-account-visibility.js?v=17"></script>
 <script src="/assets/library/canonical-source-library.js?v=18"></script>
+<script src="/assets/prophets/prophets.js?v=4" defer></script>
 
+<script>try{if(window.DARProphets&&DARProphets.prefetch)DARProphets.prefetch()}catch(e){}</script>
 </body>
 
 <style id="quran-chrome-oval-v545">

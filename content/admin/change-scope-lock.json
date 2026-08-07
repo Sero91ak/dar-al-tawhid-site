@@ -57,7 +57,11 @@
     "content/admin/quran-picker-outside-lock.json",
     "scripts/quran-picker-outside-guard.js",
     "manifest.json",
-    "test/manifest.json"
+    "test/manifest.json",
+    "assets/prophets/",
+    "data/prophets/",
+    "test/assets/prophets/",
+    "test/data/prophets/"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -77,6 +81,24 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "propheten-live-compact-v597-2026-08-07",
+      "approvedBy": "user-explicit-live-push",
+      "reason": "Nutzer: Propheten Titel nur einmal, Filter unter Suche, sofort live Besucher+Test",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "assets/prophets/",
+        "test/assets/prophets/",
+        "data/prophets/",
+        "test/data/prophets/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
     {
       "id": "visitor-quellenbibliothek-live-v596-2026-08-07",
       "approvedBy": "user-explicit-live-push",
