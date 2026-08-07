@@ -12395,6 +12395,70 @@ function appRecoveryReload(){
     location.replace(target);
   })();
 }
+const APP_UPDATE_RECOVERY_GUARD="APP_UPDATE_RECOVERY_GUARD";
+const APP_BOOT_GUARD_KEY="darAppBootGuardV1";
+const APP_BOOT_GUARD_TIMEOUT_MS=7200;
+function readAppBootGuardState(){
+  try{
+    const raw=sessionStorage.getItem(APP_BOOT_GUARD_KEY);
+    if(!raw)return{};
+    const data=JSON.parse(raw);
+    return data&&typeof data==="object"?data:{};
+  }catch(e){return{}}
+}
+function writeAppBootGuardState(patch){
+  try{
+    const next=Object.assign({},readAppBootGuardState(),patch||{});
+    sessionStorage.setItem(APP_BOOT_GUARD_KEY,JSON.stringify(next));
+    return next;
+  }catch(e){return readAppBootGuardState()}
+}
+function removeRecoveryBanner(){
+  const banner=document.getElementById("appRecoveryBanner");
+  if(banner)banner.remove();
+}
+function showRecoveryBanner(reason){
+  removeRecoveryBanner();
+  const host=document.querySelector(".app-wrap")||document.body;
+  if(!host)return;
+  const banner=document.createElement("div");
+  banner.id="appRecoveryBanner";
+  banner.className="new-posts-banner";
+  banner.style.display="flex";
+  banner.style.position="fixed";
+  banner.style.left="50%";
+  banner.style.bottom="calc(var(--safe-bottom) + 88px)";
+  banner.style.transform="translateX(-50%)";
+  banner.style.zIndex="95";
+  banner.style.maxWidth="min(92vw,560px)";
+  banner.innerHTML=`<span class="new-posts-icon">↻</span><span class="new-posts-text">${appRecoveryEscape(reason||"App-Ansicht reagiert nicht richtig. App frisch laden.")}</span><button class="new-posts-refresh" type="button">Reparieren</button>`;
+  const refreshBtn=banner.querySelector(".new-posts-refresh");
+  if(refreshBtn)refreshBtn.onclick=()=>appRecoveryReload();
+  host.appendChild(banner);
+}
+function isAppViewStuck(){
+  const el=document.getElementById("appView");
+  if(!el)return true;
+  const text=(el.textContent||"").trim();
+  if(!text||text==="App wird geladen…")return true;
+  if(el.querySelector(".loading")&&!el.querySelector(".section-block,.home-homeframe,.pf-mount-root,.ilm-shell,.prophets-library,.prophet-detail"))return true;
+  return false;
+}
+function markAppBootComplete(){
+  writeAppBootGuardState({buildId:typeof APP_BUILD_ID==="string"?APP_BUILD_ID:"",completedAt:Date.now(),pending:false});
+  removeRecoveryBanner();
+}
+function requestAppRecoveryUpdate(reason){
+  writeAppBootGuardState({buildId:typeof APP_BUILD_ID==="string"?APP_BUILD_ID:"",pending:true,requestedAt:Date.now(),reason:String(reason||"")});
+  showRecoveryBanner(reason||"App-Ansicht reagiert nicht richtig. App frisch laden.");
+}
+function armAppUpdateRecoveryGuard(){
+  writeAppBootGuardState({buildId:typeof APP_BUILD_ID==="string"?APP_BUILD_ID:"",startedAt:Date.now(),pending:false});
+  window.clearTimeout(window.__darBootGuardTimer||0);
+  window.__darBootGuardTimer=window.setTimeout(()=>{
+    if(isAppViewStuck())requestAppRecoveryUpdate("App-Start hängt. Bitte die Test-App frisch laden.");
+  },APP_BOOT_GUARD_TIMEOUT_MS);
+}
 function renderAppRecovery(error,stage="App-Start"){
   const el=document.getElementById("appView");
   if(!el)return;
@@ -12775,6 +12839,7 @@ function render(){
     }
     window.__lastRenderSig=routeSig(currentRoute);
     ensureBottomNavDock();
+    markAppBootComplete();
   }catch(error){
     console.error(error);
     renderAppRecovery(error,"Darstellung");
@@ -13089,6 +13154,7 @@ function initQuickAccessMenu(){
 }
 window.addEventListener("DOMContentLoaded",()=>{
   try{
+    armAppUpdateRecoveryGuard();
     if("scrollRestoration" in history)history.scrollRestoration="manual";
     migrateTopicsScrollKey();
     window.DARScrollManager?.init?.({saveNavScroll,getNavScroll,getCurrentRoute:()=>currentRoute});
@@ -13128,6 +13194,7 @@ window.addEventListener("DOMContentLoaded",()=>{
 });
 window.addEventListener("load",()=>{
   try{
+    if(isAppViewStuck())armAppUpdateRecoveryGuard();
     applyPushLaunchRoute();
     if(!appBootHydrated){
       appBootHydrated=true;
