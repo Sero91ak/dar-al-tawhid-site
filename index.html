@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1785515013940 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v567";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v568";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -17680,6 +17680,34 @@ html.is-standalone-pwa body{
   }
 }
 </style>
+<style id="quran-tafsir-nav-smooth-v568">
+/* QURAN_TAFSIR_NAV_GUARD · smooth open/close, kein Schwarzfeld */
+#quranExplanationMount{
+  position:fixed;inset:0;z-index:99998;
+  background:var(--bg)!important;
+  pointer-events:auto;
+}
+#quranExplanationMount .quran-explain-overlay{
+  background:var(--bg)!important;
+  animation:quran-explain-in .16s ease-out;
+}
+@keyframes quran-explain-in{
+  from{opacity:.4;transform:translateY(10px)}
+  to{opacity:1;transform:none}
+}
+.quran-explain-head button,
+.quran-explain-tab,
+.quran-explain-nav button{
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  cursor:pointer;
+}
+html.quran-panel-open,
+body.quran-panel-open{
+  background:var(--bg)!important;
+}
+</style>
+
 <style id="catalog-oval-premium-v544">
 /* v544 · Ovales Katalog-Licht: Duʿāʾ + Beiträge + Gelehrte */
 body.is-catalog-route,
@@ -19109,7 +19137,7 @@ function qrcSvgIcon(kind){const icons={search:'<svg viewBox="0 0 24 24" fill="no
 function isQuranAyahBookmarked(surah,ayah){const value=String(surah)+":"+String(ayah);const list=getJson("darSavedQuranAyahsV1",[]);if(list.includes(value))return true;const manual=getQuranReadingState().manual;return !!(manual&&Number(manual.surahNumber)===Number(surah)&&Number(manual.ayahNumber)===Number(ayah))}
 function renderQuranAyahLabel(surah,ayah){return '<div class="quran-ayah-ref" aria-label="Āyah '+esc(ayah)+'"><span class="quran-ayah-ref-code">'+esc(surah)+':'+esc(ayah)+'</span></div>'}
 function renderQuranAyahActionsRow(surah,ayah,ayahData){const saved=isQuranAyahBookmarked(surah,ayah);return '<footer class="quran-ayah-actions-row quran-ayah-actions-row--compact"><button type="button" class="quran-ayah-action-btn quran-ayah-action-btn--bookmark'+(saved?" is-saved":"")+'" data-qrc-ayah-bookmark="'+esc(surah)+":"+esc(ayah)+'" aria-label="'+(saved?"Gemerkte Āyah":"Āyah merken")+'" aria-pressed="'+(saved?"true":"false")+'">'+qrcBtnEmoji(saved?"bookmarkFill":"bookmark")+'</button><button type="button" class="quran-ayah-action-btn quran-ayah-action-btn--share" data-qrc-ayah-share="'+esc(ayahData||"")+'" aria-label="Āyah teilen">'+qrcBtnEmoji("share")+'</button><button type="button" class="quran-ayah-action-btn quran-ayah-action-btn--tafsir" data-qrc-ayah-tafsir="'+esc(surah)+":"+esc(ayah)+'" aria-label="Tafsīr öffnen">'+qrcBtnEmoji("tafsir")+'</button><button type="button" class="quran-ayah-action-btn quran-ayah-action-btn--more" data-quran-ayah-menu="'+esc(surah)+":"+esc(ayah)+'" data-quran-ayah-share="'+esc(ayahData||"")+'" aria-expanded="false" aria-haspopup="dialog" aria-label="Weitere Aktionen" hidden>'+qrcBtnEmoji("more")+'</button></footer>'}
-async function openQuranAyahTafsirDirect(surah,ayah){const sid=Number(surah),aid=Number(ayah);if(!Number.isFinite(sid)||!Number.isFinite(aid))return;await Promise.all([loadQuranSurah(sid),loadTafsirSurah(sid),loadQuranAtharSurah(sid)]);openQuranExplanationPanel(sid,aid,quranDefaultTafsirTab(sid,aid))}
+async function openQuranAyahTafsirDirect(surah,ayah){const sid=Number(surah),aid=Number(ayah);if(!Number.isFinite(sid)||!Number.isFinite(aid))return;await openQuranExplanationPanel(sid,aid,quranDefaultTafsirTab(sid,aid))}
 let qrcVisibleAyah={surah:0,ayah:0};let qrcVisibleAyahMap=new Map();let qrcVisibleAyahObserver=null;let qrcContextBarState={surahId:0,surahName:""};
 function getQrcContextBarBottomInset(){const nav=$("bottomNav");const h=nav?Math.max(56,Math.ceil(nav.getBoundingClientRect().height)):Number(String(getComputedStyle(document.documentElement).getPropertyValue("--bottom-navigation-height")).replace("px",""))||70;return"calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm + "+h+"px)"}
 function syncQrcContextBarDock(){const bar=$("qrcContextBar");if(!bar)return;bar.style.bottom=getQrcContextBarBottomInset();bar.style.left="max(14px, env(safe-area-inset-left))";bar.style.right="max(14px, env(safe-area-inset-right))"}
@@ -19132,11 +19160,123 @@ function quranAyahShareUrl(surah,ayah){const sid=Number(surah),aid=Number(ayah);
 function buildQuranAyahShareText(data){const sid=Number(data?.s),aid=Number(data?.a);const ref=(Number.isFinite(sid)&&Number.isFinite(aid))?`Qurʾān ${sid}:${aid}`:"Qurʾān-Vers";const ar=String(data?.ar||"").trim();const de=String(data?.de||"").trim();const surah=String(data?.name||"").trim();return `${ref}${surah?` · ${surah}`:""}\n\n${ar}${de?`\n\n${de}`:""}\n\n${quranAyahShareUrl(sid,aid)}`}
 function quranExplanationSectionList(ayah,entry,meta,atharEntry){const terms=glossaryTermsForAyah(ayah,entry);const period=[entry?.period,entry?.year,entry?.place||quranTypeLabel(meta.type)].filter(Boolean).join(' · ');const sections=[{id:'meaning',title:'Bedeutung',html:esc(entry?.meaning||ayah?.de||'')},{id:'athar',title:'Āthār',html:renderAtharPanel(atharEntry,true)},{id:'ibn-kathir',title:'Ibn Kathīr',html:esc(tafsirBySource(entry,'ibn kath','kathīr','kathir'))},{id:'saadi',title:'as-Saʿdī',html:esc(tafsirBySource(entry,'saʿd','saadi','sadi'))},{id:'ibn-abbas',title:'Ibn ʿAbbās',html:esc(tafsirBySource(entry,'ibn ʿabb','ibn abb','ibn abbas'))},{id:'sabab',title:'Offenbarung',html:esc([entry?.sabab,period?'Einordnung: '+period:''].filter(Boolean).join('\n\n'))},{id:'hadiths',title:'Hadithe',html:esc(tafsirText(entry?.hadiths))},{id:'words',title:'Worte',html:renderWordsPanel(terms,true)}];return sections.filter(function(x){return String(x.html||'').trim().length>0})}
 function renderQuranExplanationSheet(surahId,ayahId,tab){const meta=quranSurahMeta(surahId);const surah=quranSurahCache.get(Number(surahId));const verse=surah?.verses?.find(function(v){return Number(v.id)===Number(ayahId)})||null;if(!meta||!verse)return '<div class="quran-explain-overlay" data-quran-explain-overlay><section class="quran-explain-sheet"><div class="quran-explain-head"><button type="button" data-quran-explain-close>←</button><div class="quran-explain-title"><strong>Erklärung</strong></div><button type="button" data-quran-explain-close>×</button></div><div class="quran-explain-body"><div class="quran-explain-empty">Diese Āyah konnte nicht geladen werden.</div></div></section></div>';const tafsir=tafsirSurahCache.get(Number(surahId))||null;const athar=quranAtharCache.get(Number(surahId))||null;const entry=ayahTafsirEntry(tafsir,ayahId);const atharEntry=ayahAtharEntry(athar,ayahId);const sections=quranExplanationSectionList(verse,entry,meta,atharEntry);const activeId=sections.some(function(s){return s.id===tab})?tab:(sections[0]?.id||'meaning');const active=sections.find(function(s){return s.id===activeId});return '<div class="quran-explain-overlay" data-quran-explain-overlay><section class="quran-explain-sheet" role="dialog" aria-modal="true"><div class="quran-explain-head"><button type="button" data-quran-explain-close>←</button><div class="quran-explain-title"><strong>Sūrat '+esc(meta.transliteration)+' · Āyah '+esc(ayahId)+'</strong><div class="quran-explain-ar">'+esc(verse.ar||'')+'</div></div><button type="button" data-quran-explain-close>×</button></div><div class="quran-explain-tabs">'+sections.map(function(s){return '<button type="button" class="quran-explain-tab '+(s.id===activeId?'active':'')+'" data-quran-explain-tab="'+esc(s.id)+'">'+esc(s.title)+'</button>'}).join('')+'</div><div class="quran-explain-body"><div class="quran-explain-content">'+(active?.html||'<div class="quran-explain-empty">Für diese Āyah ist in dieser Kategorie aktuell kein geprüfter Inhalt hinterlegt.</div>')+'</div><div class="quran-explain-nav"><button type="button" data-quran-explain-prev>← Vorherige Āyah</button><button type="button" data-quran-explain-next>Nächste Āyah →</button></div></div></section></div>'}
-async function openQuranExplanationPanel(surahId,ayahId,tab){const sid=Number(surahId), aid=Number(ayahId);if(!Number.isFinite(sid)||!Number.isFinite(aid))return;quranExplanationState={surah:sid,ayah:aid,tab:tab||'meaning',scrollY:window.scrollY||0};lockAppOverlayScroll("quran-panel-open");await Promise.all([loadQuranSurah(sid),loadTafsirSurah(sid),loadQuranAtharSurah(sid)]);document.getElementById('quranExplanationMount')?.remove();const mount=document.createElement('div');mount.id='quranExplanationMount';mount.innerHTML=renderQuranExplanationSheet(sid,aid,quranExplanationState.tab);document.body.appendChild(mount);try{history.pushState({quranPanel:true,surah:sid,ayah:aid},'')}catch(e){}bindQuranExplanationPanel()}
-function closeQuranExplanationPanel(opts){opts=opts||{};const state=quranExplanationState;quranExplanationState=null;document.getElementById('quranExplanationMount')?.remove();unlockAppOverlayScroll("quran-panel-open");if(state){requestAnimationFrame(()=>{const top=Math.max(0,Number(state.scrollY)||0);if(window.DARScrollManager?.stableScrollTo)window.DARScrollManager.stableScrollTo(top,{force:true});else window.scrollTo({top,behavior:"auto"})})}if(!opts.fromPop){try{history.back()}catch(e){}}}
-function refreshQuranExplanationPanel(){if(!quranExplanationState)return;const mount=document.getElementById('quranExplanationMount');if(!mount)return;mount.innerHTML=renderQuranExplanationSheet(quranExplanationState.surah,quranExplanationState.ayah,quranExplanationState.tab);bindQuranExplanationPanel()}
-function bindQuranExplanationPanel(){const mount=document.getElementById('quranExplanationMount');if(!mount)return;mount.querySelectorAll('[data-quran-explain-close]').forEach(function(btn){btn.onclick=function(){closeQuranExplanationPanel()}});mount.querySelector('[data-quran-explain-overlay]')?.addEventListener('click',function(e){if(e.target===e.currentTarget)closeQuranExplanationPanel()});mount.querySelectorAll('[data-quran-explain-tab]').forEach(function(btn){btn.onclick=function(){if(!quranExplanationState)return;quranExplanationState.tab=btn.getAttribute('data-quran-explain-tab')||'meaning';refreshQuranExplanationPanel()}});const prev=mount.querySelector('[data-quran-explain-prev]');const next=mount.querySelector('[data-quran-explain-next]');if(prev)prev.onclick=function(){if(!quranExplanationState||quranExplanationState.ayah<=1)return;quranExplanationState.ayah-=1;refreshQuranExplanationPanel()};if(next)next.onclick=function(){if(!quranExplanationState)return;const meta=quranSurahMeta(quranExplanationState.surah);if(meta&&quranExplanationState.ayah<meta.total_verses){quranExplanationState.ayah+=1;refreshQuranExplanationPanel()}}}
-window.addEventListener('popstate',function(){if(quranExplanationState)closeQuranExplanationPanel({fromPop:true})});
+/* QURAN_TAFSIR_NAV_GUARD */
+let quranExplanationBusy=false;
+let quranExplanationHistoryPushed=false;
+let quranExplanationOpenGen=0;
+async function openQuranExplanationPanel(surahId,ayahId,tab){
+  const sid=Number(surahId), aid=Number(ayahId);
+  if(!Number.isFinite(sid)||!Number.isFinite(aid))return;
+  if(quranExplanationBusy)return;
+  quranExplanationBusy=true;
+  const openGen=++quranExplanationOpenGen;
+  try{
+    await Promise.all([loadQuranSurah(sid),loadTafsirSurah(sid),loadQuranAtharSurah(sid)]);
+    if(openGen!==quranExplanationOpenGen)return;
+    if(quranExplanationState){
+      quranExplanationState.surah=sid;
+      quranExplanationState.ayah=aid;
+      quranExplanationState.tab=tab||quranExplanationState.tab||"meaning";
+      const mount=document.getElementById("quranExplanationMount");
+      if(mount){
+        mount.innerHTML=renderQuranExplanationSheet(sid,aid,quranExplanationState.tab);
+        bindQuranExplanationPanel();
+        return;
+      }
+    }
+    const scrollY=window.scrollY||document.documentElement.scrollTop||0;
+    quranExplanationState={surah:sid,ayah:aid,tab:tab||"meaning",scrollY:scrollY};
+    document.getElementById("quranExplanationMount")?.remove();
+    const mount=document.createElement("div");
+    mount.id="quranExplanationMount";
+    mount.setAttribute("data-quran-explain-mount","1");
+    mount.innerHTML=renderQuranExplanationSheet(sid,aid,quranExplanationState.tab);
+    document.body.appendChild(mount);
+    lockAppOverlayScroll("quran-panel-open");
+    if(!quranExplanationHistoryPushed){
+      try{history.pushState({quranPanel:true,surah:sid,ayah:aid},"");quranExplanationHistoryPushed=true}catch(e){}
+    }else{
+      try{history.replaceState({quranPanel:true,surah:sid,ayah:aid},"")}catch(e){}
+    }
+    bindQuranExplanationPanel();
+  }finally{
+    quranExplanationBusy=false;
+  }
+}
+function closeQuranExplanationPanel(opts){
+  opts=opts||{};
+  const mount=document.getElementById("quranExplanationMount");
+  if(!quranExplanationState&&!mount)return;
+  if(quranExplanationBusy&&!opts.force&&!opts.fromPop&&!mount)return;
+  const state=quranExplanationState;
+  const hadHistory=quranExplanationHistoryPushed;
+    quranExplanationOpenGen+=1;
+  quranExplanationState=null; const wasOpen=document.body.classList.contains("quran-panel-open")||document.documentElement.classList.contains("quran-panel-open");
+  if(state&&Number.isFinite(Number(state.scrollY)))qrcSheetLockScrollY=Math.max(0,Number(state.scrollY)||0);
+  mount?.remove();
+  if(wasOpen)unlockAppOverlayScroll("quran-panel-open");
+  else{
+    document.documentElement.classList.remove("quran-panel-open");
+    document.body.classList.remove("quran-panel-open");
+  }
+  if(!opts.fromPop&&hadHistory){
+    quranExplanationHistoryPushed=false;
+    try{history.back()}catch(e){}
+  }else if(opts.fromPop){
+    quranExplanationHistoryPushed=false;
+  }
+}
+function refreshQuranExplanationPanel(){
+  if(!quranExplanationState)return;
+  const mount=document.getElementById("quranExplanationMount");
+  if(!mount)return;
+  mount.innerHTML=renderQuranExplanationSheet(quranExplanationState.surah,quranExplanationState.ayah,quranExplanationState.tab);
+  bindQuranExplanationPanel();
+}
+async function stepQuranExplanationAyah(delta){
+  if(!quranExplanationState||quranExplanationBusy)return;
+  const meta=quranSurahMeta(quranExplanationState.surah);
+  if(!meta)return;
+  const next=Number(quranExplanationState.ayah)+(delta|0);
+  if(!Number.isFinite(next)||next<1||next>Number(meta.total_verses||0))return;
+  quranExplanationBusy=true;
+  try{
+    const sid=quranExplanationState.surah;
+    quranExplanationState.ayah=next;
+    await Promise.all([loadQuranSurah(sid),loadTafsirSurah(sid),loadQuranAtharSurah(sid)]);
+    if(!quranExplanationState)return;
+    refreshQuranExplanationPanel();
+  }finally{
+    quranExplanationBusy=false;
+  }
+}
+function bindQuranExplanationPanel(){
+  const mount=document.getElementById("quranExplanationMount");
+  if(!mount)return;
+  mount.querySelectorAll("[data-quran-explain-close]").forEach(function(btn){
+    btn.onclick=function(e){
+      if(e){e.preventDefault();e.stopPropagation()}
+      closeQuranExplanationPanel();
+    };
+  });
+  mount.querySelector("[data-quran-explain-overlay]")?.addEventListener("click",function(e){
+    if(e.target===e.currentTarget)closeQuranExplanationPanel();
+  });
+  mount.querySelectorAll("[data-quran-explain-tab]").forEach(function(btn){
+    btn.onclick=function(e){
+      if(e){e.preventDefault();e.stopPropagation()}
+      if(!quranExplanationState||quranExplanationBusy)return;
+      quranExplanationState.tab=btn.getAttribute("data-quran-explain-tab")||"meaning";
+      refreshQuranExplanationPanel();
+    };
+  });
+  const prev=mount.querySelector("[data-quran-explain-prev]");
+  const next=mount.querySelector("[data-quran-explain-next]");
+  if(prev)prev.onclick=function(e){if(e){e.preventDefault();e.stopPropagation()}stepQuranExplanationAyah(-1)};
+  if(next)next.onclick=function(e){if(e){e.preventDefault();e.stopPropagation()}stepQuranExplanationAyah(1)};
+}
+
+window.addEventListener('popstate',function(){if(quranExplanationBusy)quranExplanationOpenGen+=1;if(quranExplanationState||document.getElementById('quranExplanationMount'))closeQuranExplanationPanel({fromPop:true,force:true})});
 
 function scrollToQuranAyah(ayah,opts){const el=document.getElementById(`ayah-${ayah}`);if(!el)return;const ratio=Math.max(0,Math.min(1,Number(opts?.scrollOffset)||0));const offsetPx=Math.round(el.offsetHeight*ratio);const top=Math.max(0,el.getBoundingClientRect().top+window.scrollY-scrollChromeOffset()+offsetPx);if(window.DARScrollManager?.stableScrollTo)window.DARScrollManager.stableScrollTo(top,{force:true});else window.scrollTo({top,behavior:"auto"});el.classList.add("quran-ayah-highlight");setTimeout(()=>el.classList.remove("quran-ayah-highlight"),1800)}
 function scrollToPostStatement(){return scrollToViewAnchor("postReadStart",10)}
@@ -24027,7 +24167,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v567";
+const APP_BUILD_ID="app-shell-v568";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}

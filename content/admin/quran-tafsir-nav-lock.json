@@ -1,0 +1,28 @@
+{
+  "locked": true,
+  "lockedAt": "2026-08-07T12:30:00.000Z",
+  "lockedReason": "Nutzer-Auftrag: Tafsīr/Erklärung Öffnen·Zurück·Buttons smooth ohne Schwarzfeld/Hänger — danach Sperre.",
+  "unlockPolicy": "Änderungen nur nach ausdrücklichem Nutzer-Auftrag, z. B. „Tafsīr-Navigation freigeben“.",
+  "lockedPaths": [
+    "index.html",
+    "test/index.html"
+  ],
+  "lockedSections": [
+    "QURAN_TAFSIR_NAV_GUARD",
+    "quran-tafsir-nav-smooth-v568",
+    "openQuranExplanationPanel",
+    "closeQuranExplanationPanel",
+    "bindQuranExplanationPanel",
+    "stepQuranExplanationAyah"
+  ],
+  "requiredMarkers": [
+    "QURAN_TAFSIR_NAV_GUARD",
+    "quran-tafsir-nav-smooth-v568",
+    "quranExplanationOpenGen",
+    "quranExplanationHistoryPushed",
+    "function stepQuranExplanationAyah",
+    "data-quran-explain-mount",
+    "lockAppOverlayScroll(\"quran-panel-open\")"
+  ],
+  "forbiddenPatterns": []
+}
