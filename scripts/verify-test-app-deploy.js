@@ -1,44 +1,140 @@
 #!/usr/bin/env node
+/**
+ * Verifiziert Dar Test nach Deploy:
+ * 1) öffentliches https://dar-al-tawhid.de/test/
+ * 2) workers.dev-Spiegel
+ * Beide müssen denselben Build wie test/version.json ausliefern.
+ * Kein stilles SKIP mehr — öffentliche URL ist Pflicht.
+ */
 const fs = require("fs");
 const path = require("path");
 
 const ROOT_DIR = path.join(__dirname, "..");
-const SITE_URL = String(process.env.SITE_URL || "").replace(/\/$/, "");
-
-if (!SITE_URL) {
-  console.log("SKIP: SITE_URL für Test-App-Verifikation nicht gesetzt.");
-  process.exit(0);
-}
+const PUBLIC_TEST_BASE = "https://dar-al-tawhid.de/test";
+const WORKERS_DEV_TEST_BASE = "https://dar-al-tawhid-test.sero91ak.workers.dev/test";
+const ATTEMPTS = Number(process.env.DEPLOY_VERIFY_ATTEMPTS || 12);
+const DELAY_MS = Number(process.env.DEPLOY_VERIFY_DELAY_MS || 5000);
 
 const TEST_EXPECT_BUILD =
   process.env.EXPECT_TEST_BUILD ||
   JSON.parse(fs.readFileSync(path.join(ROOT_DIR, "test/version.json"), "utf8")).buildId;
 
-async function fetchHtml(url) {
+function normalizeTestBase(raw, fallback) {
+  let base = String(raw || fallback || PUBLIC_TEST_BASE).trim().replace(/\/$/, "");
+  if (!base) base = fallback || PUBLIC_TEST_BASE;
+  if (!/\/test$/i.test(base)) base = `${base.replace(/\/$/, "")}/test`;
+  return base;
+}
+
+const publicBase = normalizeTestBase(
+  process.env.SITE_URL || process.env.DAR_TEST_SITE_URL,
+  PUBLIC_TEST_BASE
+);
+const workersBase = normalizeTestBase(
+  process.env.DAR_TEST_WORKERS_URL,
+  WORKERS_DEV_TEST_BASE
+);
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function fetchText(url) {
   const res = await fetch(url, {
     cache: "no-store",
     headers: { "Cache-Control": "no-cache", Pragma: "no-cache" }
   });
-  const html = await res.text();
-  return { res, html };
+  const text = await res.text();
+  return {
+    status: res.status,
+    text,
+    cf: res.headers.get("cf-cache-status") || "n/a"
+  };
 }
 
-function checkHtml(url, html, res) {
-  const cf = res.headers.get("cf-cache-status") || "n/a";
-  const buildOk = html.includes(TEST_EXPECT_BUILD);
-  console.log(`${url}: cf-cache=${cf} expect=${TEST_EXPECT_BUILD} build=${buildOk}`);
-  return buildOk;
+async function waitForBuild(label, urls) {
+  for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
+    let matched = null;
+    for (const url of urls) {
+      try {
+        const { status, text, cf } = await fetchText(url);
+        const ok = status === 200 && text.includes(TEST_EXPECT_BUILD);
+        console.log(
+          `${label}: ${url} -> ${status} cf=${cf} expect=${TEST_EXPECT_BUILD} ok=${ok} (attempt ${attempt}/${ATTEMPTS})`
+        );
+        if (ok) {
+          matched = url;
+          break;
+        }
+      } catch (err) {
+        console.log(`${label}: ${url} -> error ${err.message || err} (attempt ${attempt}/${ATTEMPTS})`);
+      }
+    }
+    if (matched) return matched;
+    if (attempt < ATTEMPTS) await sleep(DELAY_MS);
+  }
+  return null;
+}
+
+async function fetchVersionBuild(base) {
+  const url = `${base}/version.json?v=${Date.now()}`;
+  const { status, text, cf } = await fetchText(url);
+  let buildId = "";
+  try {
+    buildId = JSON.parse(text).buildId || "";
+  } catch (e) {
+    buildId = "";
+  }
+  console.log(`version: ${url} -> ${status} cf=${cf} buildId=${buildId || "?"}`);
+  return { url, status, buildId };
 }
 
 (async function main() {
-  const targets = [`${SITE_URL}/`, `${SITE_URL}/test/`, `${SITE_URL}/test/index.html`];
-  let ok = false;
-  for (const url of targets) {
-    const { res, html } = await fetchHtml(url);
-    if (checkHtml(url, html, res)) ok = true;
+  console.log(`Dar Test Verify: expect=${TEST_EXPECT_BUILD}`);
+  console.log(`public=${publicBase}`);
+  console.log(`workers.dev=${workersBase}`);
+
+  const publicOk = await waitForBuild("public", [
+    `${publicBase}/`,
+    `${publicBase}/index.html`,
+    `${publicBase}/version.json`
+  ]);
+  if (!publicOk) {
+    throw new Error(
+      `Öffentliche Test-URL liefert noch nicht ${TEST_EXPECT_BUILD}. Route/Cache prüfen: ${publicBase}/`
+    );
   }
-  if (!ok) throw new Error(`Dar Test liefert noch nicht ${TEST_EXPECT_BUILD}.`);
-  console.log("Dar Test live OK.");
+
+  const workersOk = await waitForBuild("workers.dev", [
+    `${workersBase}/`,
+    `${workersBase}/index.html`,
+    `${workersBase}/version.json`
+  ]);
+  if (!workersOk) {
+    throw new Error(`workers.dev Test-App liefert noch nicht ${TEST_EXPECT_BUILD}: ${workersBase}/`);
+  }
+
+  const publicVersion = await fetchVersionBuild(publicBase);
+  const workersVersion = await fetchVersionBuild(workersBase);
+  if (publicVersion.buildId !== TEST_EXPECT_BUILD) {
+    throw new Error(
+      `public /test/version.json=${publicVersion.buildId || "?"} ≠ expect ${TEST_EXPECT_BUILD}`
+    );
+  }
+  if (workersVersion.buildId !== TEST_EXPECT_BUILD) {
+    throw new Error(
+      `workers.dev /test/version.json=${workersVersion.buildId || "?"} ≠ expect ${TEST_EXPECT_BUILD}`
+    );
+  }
+  if (publicVersion.buildId !== workersVersion.buildId) {
+    throw new Error(
+      `Parität fehlgeschlagen: public=${publicVersion.buildId} workers.dev=${workersVersion.buildId}`
+    );
+  }
+
+  console.log(
+    `Dar Test live OK — public und workers.dev liefern identisch ${TEST_EXPECT_BUILD}.`
+  );
 })().catch((error) => {
   console.error(error.message || error);
   process.exit(1);

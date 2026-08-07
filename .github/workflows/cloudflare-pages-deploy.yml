@@ -81,11 +81,12 @@ jobs:
         run: node scripts/purge-cloudflare-cache.js
         continue-on-error: true
 
-      - name: Live-Deploy verifizieren (Besucher + Test + Stabilität)
+      - name: Live-Deploy verifizieren (nur Besucher-App)
         env:
           SITE_URL: "https://dar-al-tawhid.de"
           VERIFY_SCOPE: "visitor"
-          DEPLOY_VERIFY_MODE: "all"
+          # Test-App läuft auf eigenem Worker + Route /test* — nicht gegen Live-Commit prüfen
+          DEPLOY_VERIFY_MODE: "visitor"
           EXPECT_ZAKAT_VERSION: "18"
         run: |
           node scripts/verify-live-deploy.js
