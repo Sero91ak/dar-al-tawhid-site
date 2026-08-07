@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1785515013940 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v558";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v559";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -61,7 +61,7 @@
   --font-serif:var(--font-display);
   --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
   --page-cover:#060604;--page-cover-mid:#0b0a07;
-  --page-gutter-x:max(4px,env(safe-area-inset-left,0px));--page-gutter-y:max(4px,env(safe-area-inset-right,0px));--app-frame-inset-x:10px;--app-frame-inset-left:max(var(--app-frame-inset-x),env(safe-area-inset-left,0px));--app-frame-inset-right:max(var(--app-frame-inset-x),env(safe-area-inset-right,0px));--page-padding-x:4px;--page-padding-left:var(--page-gutter-x);--page-padding-right:var(--page-gutter-y);--content-inset:12px;--section-gap:13px;--card-padding-x:15px;--card-padding-y:15px;--content-max-width:min(1420px,100%);--panel-radius:20px;--card-radius:22px;--view-padding-y:16px;
+  --page-gutter-x:max(4px,env(safe-area-inset-left,0px));--page-gutter-y:max(4px,env(safe-area-inset-right,0px));--app-frame-inset-x:0;--app-frame-inset-left:max(var(--app-frame-inset-x),env(safe-area-inset-left,0px));--app-frame-inset-right:max(var(--app-frame-inset-x),env(safe-area-inset-right,0px));--page-padding-x:4px;--page-padding-left:var(--page-gutter-x);--page-padding-right:var(--page-gutter-y);--content-inset:12px;--section-gap:13px;--card-padding-x:15px;--card-padding-y:15px;--content-max-width:min(1420px,100%);--panel-radius:20px;--card-radius:22px;--view-padding-y:16px;
   --card-cols:3;--card-gap:16px;--pick-cols:3;--pick-gap:8px;--filter-cols:4;
   --premium-border:rgba(239,215,142,.46);
   --premium-bg:radial-gradient(circle at 16% 0%,rgba(239,215,142,.20),transparent 42%),radial-gradient(circle at 86% 12%,rgba(155,122,60,.16),transparent 34%),linear-gradient(145deg,rgba(24,20,14,.97),rgba(7,7,5,.95));
@@ -7218,11 +7218,11 @@ html[data-theme="light"] .account-actions button{
 
 /* GLOBALER APP-HINTERGRUND: keine fremde Farbe bei Bounce, Safe-Area oder Seitenrand */
 html[data-theme="dark"]{
-  --outer-bg-flat:#080806;
-  --outer-bg:radial-gradient(circle at 12% 0%,rgba(239,215,142,.13),transparent 34%),radial-gradient(circle at 88% 8%,rgba(155,122,60,.09),transparent 32%),linear-gradient(180deg,#080806 0%,#0b0a07 46%,#050504 100%);
-  --cover-edge-bg:linear-gradient(180deg,#080806 0%,#090806 46%,rgba(8,8,6,0) 100%);
-  --cover-panel-bg:radial-gradient(circle at 14% 0%,rgba(239,215,142,.10),transparent 36%),linear-gradient(180deg,#090806 0%,#070706 56%,rgba(7,7,6,.96) 100%);
-  --cover-panel-border:rgba(239,215,142,.24);
+  --outer-bg-flat:#050706;
+  --outer-bg:radial-gradient(circle at 10% 0%,rgba(214,183,106,.13),transparent 34%),radial-gradient(circle at 90% 10%,rgba(17,54,37,.24),transparent 35%),radial-gradient(circle at 50% 45%,rgba(255,245,210,.035),transparent 42%),linear-gradient(180deg,#050706 0%,#0a100c 42%,#040504 100%);
+  --cover-edge-bg:linear-gradient(180deg,#050706 0%,#0a100c 46%,rgba(5,7,6,0) 100%);
+  --cover-panel-bg:radial-gradient(circle at 18% 0%,rgba(214,183,106,.10),transparent 42%),radial-gradient(circle at 82% 12%,rgba(17,54,37,.16),transparent 40%),linear-gradient(145deg,rgba(16,23,15,.94),rgba(5,7,6,.92));
+  --cover-panel-border:rgba(214,183,106,.28);
 }
 html[data-theme="light"]{
   --outer-bg-flat:#f7f0df;
@@ -17402,8 +17402,41 @@ html[data-theme="dark"]{--home-refresh-ring:rgba(220,92,92,.50);--home-refresh-g
   .about-install-grid,.about-offline-actions{grid-template-columns:1fr}
 }
 </style>
-<style id="app-edge-to-edge-v450">
-/* v450 · Alle Erscheinungsbilder: edge-to-edge wie Dār al-Layl */
+
+
+<style id="app-edge-to-edge-theme-lock-v499">
+/* EDGE_TO_EDGE_THEME_LOCK
+   Format-Name: Edge-to-Edge Erscheinungsbild
+   Pflicht für JEDES Erscheinungsbild (inkl. künftige):
+   1) Vollflächig randlos (kein Kasten, keine Seitenränder links/rechts/oben/unten außer Safe-Area)
+   2) Durchgängiger Farbübergang: html/body/app nutzen --premium-bg / --page-cover derselben Theme-Palette
+   3) Neue Themes: --outer-bg-flat, --outer-bg, --page-cover, --premium-bg setzen + THEME_META/normalizeTheme
+   Sperre: content/admin/edge-to-edge-theme-lock.json + scripts/edge-to-edge-theme-guard.js — darf nicht entfernt/umgangen werden.
+*/
+html[data-theme="dark"],
+:root{
+  --page-cover:#050706!important;
+  --page-cover-mid:#0a100c!important;
+  --outer-bg-flat:#050706!important;
+  --outer-bg:radial-gradient(circle at 10% 0%,rgba(214,183,106,.13),transparent 34%),radial-gradient(circle at 90% 10%,rgba(17,54,37,.24),transparent 35%),radial-gradient(circle at 50% 45%,rgba(255,245,210,.035),transparent 42%),linear-gradient(180deg,#050706 0%,#0a100c 42%,#040504 100%)!important;
+  --premium-bg:radial-gradient(circle at 10% 0%,rgba(214,183,106,.13),transparent 34%),radial-gradient(circle at 90% 10%,rgba(17,54,37,.24),transparent 35%),radial-gradient(circle at 50% 45%,rgba(255,245,210,.035),transparent 42%),linear-gradient(180deg,#050706 0%,#0a100c 42%,#040504 100%)!important;
+  --theme-page-bg:#050706!important;
+}
+html[data-theme="light"],
+html[data-theme="soft"],
+html[data-theme="royal"],
+html[data-theme="bordeaux"]{
+  --page-cover:var(--outer-bg-flat)!important;
+  --page-cover-mid:var(--outer-bg-flat)!important;
+  --premium-bg:var(--outer-bg)!important;
+  --theme-page-bg:var(--outer-bg-flat)!important;
+}
+html[data-theme="dar-al-layl"]{
+  --outer-bg-flat:var(--page-cover,var(--layl-bg-deep,#050706))!important;
+  --outer-bg:var(--premium-bg)!important;
+  --theme-page-bg:var(--page-cover,var(--layl-bg-deep,#050706))!important;
+}
+/* Surface continuity — every theme */
 html[data-theme],
 html[data-theme].is-standalone-pwa{
   --app-frame-inset-x:0!important;
@@ -17411,12 +17444,13 @@ html[data-theme].is-standalone-pwa{
   --app-frame-inset-right:env(safe-area-inset-right,0px)!important;
   --page-gutter-x:env(safe-area-inset-left,0px)!important;
   --page-gutter-y:env(safe-area-inset-right,0px)!important;
-  background:var(--premium-bg,var(--outer-bg-flat))!important;
+  background:var(--premium-bg,var(--outer-bg))!important;
   background-color:var(--page-cover,var(--outer-bg-flat))!important;
 }
 html[data-theme] body,
 html[data-theme].is-standalone-pwa body{
-  background:var(--premium-bg,var(--bg))!important;
+  background:var(--premium-bg,var(--outer-bg,var(--bg)))!important;
+  background-color:var(--page-cover,var(--outer-bg-flat,var(--bg)))!important;
   padding-left:0!important;
   padding-right:0!important;
 }
@@ -17431,17 +17465,23 @@ html[data-theme] .app{
   overflow:visible!important;
   width:100%!important;
   max-width:100%!important;
-  margin-left:0!important;
-  margin-right:0!important;
-  background:var(--premium-bg,var(--bg))!important;
+  margin:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  background:transparent!important;
 }
 html[data-theme] .app:after{display:none!important}
 html[data-theme] .top-shell,
 html[data-theme] .view{
   border:0!important;
+  border-left:0!important;
+  border-right:0!important;
+  border-bottom:0!important;
+  border-top:0!important;
   border-radius:0!important;
   box-shadow:none!important;
   border-color:transparent!important;
+  background:transparent!important;
 }
 html[data-theme] .top-shell:after{display:none!important}
 html[data-theme] .bottom-nav,
@@ -17454,84 +17494,6 @@ html[data-theme] #bottomNav.bottom-nav{
   padding-right:env(safe-area-inset-right,0px)!important;
   box-sizing:border-box!important;
 }
-@media(max-width:700px){
-  html[data-theme].is-standalone-pwa body{
-    padding-top:env(safe-area-inset-top,0px)!important;
-    background:var(--premium-bg,var(--bg))!important;
-  }
-  html.is-standalone-pwa .top-shell,
-  html[data-theme] .top-shell{
-    border:0!important;
-    border-left:0!important;
-    border-right:0!important;
-    border-bottom:0!important;
-    border-top:0!important;
-    border-radius:0!important;
-    box-shadow:none!important;
-    margin-top:0!important;
-    clip-path:none!important;
-  }
-  html[data-theme] .top-shell .header{
-    padding-top:calc(env(safe-area-inset-top,0px) + 16px)!important;
-  }
-}
-</style>
-<style id="app-frame-color-restore-v498">
-/* v498 · Seitenverhältnis edge-to-edge; Klassisch Dunkel Farbübergang wie 4.8. */
-:root,
-html[data-theme="dark"]{
-  --page-cover:#050706!important;
-  --page-cover-mid:#0a100c!important;
-  --outer-bg-flat:#050706!important;
-  --outer-bg:radial-gradient(circle at 10% 0%,rgba(214,183,106,.13),transparent 34%),radial-gradient(circle at 90% 10%,rgba(17,54,37,.24),transparent 35%),radial-gradient(circle at 50% 45%,rgba(255,245,210,.035),transparent 42%),linear-gradient(180deg,#050706 0%,#0a100c 42%,#040504 100%)!important;
-  --premium-bg:radial-gradient(circle at 10% 0%,rgba(214,183,106,.13),transparent 34%),radial-gradient(circle at 90% 10%,rgba(17,54,37,.24),transparent 35%),radial-gradient(circle at 50% 45%,rgba(255,245,210,.035),transparent 42%),linear-gradient(180deg,#050706 0%,#0a100c 42%,#040504 100%)!important;
-  --cover-edge-bg:linear-gradient(180deg,#050706 0%,#0a100c 46%,rgba(5,7,6,0) 100%)!important;
-  --cover-panel-bg:radial-gradient(circle at 18% 0%,rgba(214,183,106,.10),transparent 42%),radial-gradient(circle at 82% 12%,rgba(17,54,37,.16),transparent 40%),linear-gradient(145deg,rgba(16,23,15,.94),rgba(5,7,6,.92))!important;
-  --cover-panel-border:rgba(214,183,106,.28)!important;
-  --theme-page-bg:#050706!important;
-  --theme-hero-blend-top:rgba(5,7,6,1)!important;
-  --theme-hero-blend-bottom:rgba(5,7,6,0)!important;
-}
-html:not([data-theme]),
-html[data-theme="dark"],
-html[data-theme="dark"].is-standalone-pwa{
-  background:radial-gradient(circle at 10% 0%,rgba(214,183,106,.13),transparent 34%),radial-gradient(circle at 90% 10%,rgba(17,54,37,.24),transparent 35%),radial-gradient(circle at 50% 45%,rgba(255,245,210,.035),transparent 42%),linear-gradient(180deg,#050706 0%,#0a100c 42%,#040504 100%)!important;
-  background-color:#050706!important;
-}
-html:not([data-theme]) body,
-html[data-theme="dark"] body,
-html[data-theme="dark"].is-standalone-pwa body{
-  background:radial-gradient(circle at 10% 0%,rgba(214,183,106,.13),transparent 34%),radial-gradient(circle at 90% 10%,rgba(17,54,37,.24),transparent 35%),radial-gradient(circle at 50% 45%,rgba(255,245,210,.035),transparent 42%),linear-gradient(180deg,#050706 0%,#0a100c 42%,#040504 100%)!important;
-  background-color:#050706!important;
-}
-/* Alle Themes: kein Kasten-Rahmen / keine Seitenränder */
-html[data-theme] body,
-html[data-theme].is-standalone-pwa body{
-  padding-left:0!important;
-  padding-right:0!important;
-}
-html[data-theme] .app{
-  width:100%!important;
-  max-width:100%!important;
-  margin:0!important;
-  padding-left:0!important;
-  padding-right:0!important;
-  border:0!important;
-  border-radius:0!important;
-  box-shadow:none!important;
-}
-html[data-theme] .app:after{display:none!important}
-html[data-theme] .top-shell,
-html[data-theme] .view{
-  border:0!important;
-  border-left:0!important;
-  border-right:0!important;
-  border-bottom:0!important;
-  border-top:0!important;
-  border-radius:0!important;
-  box-shadow:none!important;
-}
-html[data-theme] .top-shell:after{display:none!important}
 html[data-layout] .app{
   padding-left:0!important;
   padding-right:0!important;
@@ -17545,17 +17507,22 @@ html[data-layout] .app{
   html[data-theme].is-standalone-pwa body{
     padding-left:0!important;
     padding-right:0!important;
+    padding-top:env(safe-area-inset-top,0px)!important;
+    background:var(--premium-bg,var(--bg))!important;
   }
+  html.is-standalone-pwa .top-shell,
   html[data-theme] .top-shell,
   html[data-theme] .view{
     border:0!important;
     border-radius:0!important;
     margin-top:0!important;
+    clip-path:none!important;
+  }
+  html[data-theme] .top-shell .header{
+    padding-top:calc(env(safe-area-inset-top,0px) + 16px)!important;
   }
 }
 </style>
-
-
 <style id="catalog-oval-premium-v544">
 /* v544 · Ovales Katalog-Licht: Duʿāʾ + Beiträge + Gelehrte */
 body.is-catalog-route,
@@ -18515,6 +18482,7 @@ function isFormEditingNow(){
 document.addEventListener("pointerdown",e=>{if(isEditableTarget(e.target))lastFormPointerAt=Date.now()},{capture:true,passive:true});
 const THEME_KEY="darThemeV1";
 const THEME_SETTINGS_KEY="darThemeSettingsV1";
+/* EDGE_TO_EDGE_THEME_LOCK · Format: Edge-to-Edge Erscheinungsbild — jedes Theme inkl. künftiger: --outer-bg-flat/--outer-bg/--page-cover/--premium-bg + THEME_META/normalizeTheme; Rahmenrandlos. */
 const THEME_META={dark:{label:"Klassisch Dunkel",color:"#050706",status:"black",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"default",asset:"light"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"default",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black",asset:"royal"},bordeaux:{label:"Bordeaux Royal Premium",color:"#140B0C",status:"black",asset:"bordeaux"},"dar-al-layl":{label:"Dār al-Layl",color:"#080B0A",status:"black",asset:"dar-al-layl"}};
 function normalizeTheme(theme){if(theme==="emerald"||theme==="smaragd"||theme==="aurora")return"dark";return theme==="light"||theme==="soft"||theme==="royal"||theme==="bordeaux"||theme==="dar-al-layl"?theme:"dark"}
 function getTheme(){try{return normalizeTheme(localStorage.getItem(THEME_KEY))}catch(e){return"dark"}}
@@ -23757,7 +23725,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v558";
+const APP_BUILD_ID="app-shell-v559";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}

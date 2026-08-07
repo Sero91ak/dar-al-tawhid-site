@@ -136,6 +136,9 @@ if (!fs.existsSync(path.join(ROOT, "scripts/send-prayer-push.js"))) fail("send-p
 if (!fs.existsSync(path.join(ROOT, "scripts/send-post-push.js"))) fail("send-post-push.js fehlt");
 
 // Repo-Integrität (Massen-Lösch-Schutz)
+const edgeToEdgeFails = require("./edge-to-edge-theme-guard.js").runEdgeToEdgeThemeGuard();
+if (edgeToEdgeFails) failed += edgeToEdgeFails;
+
 const repoIntegrityFails = require("./repo-integrity-guard.js").runRepoIntegrityGuard();
 if (repoIntegrityFails) failed += repoIntegrityFails;
 
