@@ -15,12 +15,14 @@
   ],
   "requiredCssMarkers": [
     "EDGE_TO_EDGE_THEME_LOCK",
-    "app-edge-to-edge-theme-lock-v499",
+    "app-edge-to-edge-theme-lock-v500",
     "Edge-to-Edge Erscheinungsbild",
     "html[data-theme] .app{",
     "padding-left:0!important",
     "padding-right:0!important",
     "border-radius:0!important",
+    "clip-path:none!important",
+    "theme-hero-shell",
     "--premium-bg:var(--outer-bg)!important",
     "html[data-theme=\"dar-al-layl\"]"
   ],

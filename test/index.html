@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1785515013940 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v559";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v560";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -17404,14 +17404,14 @@ html[data-theme="dark"]{--home-refresh-ring:rgba(220,92,92,.50);--home-refresh-g
 </style>
 
 
-<style id="app-edge-to-edge-theme-lock-v499">
+<style id="app-edge-to-edge-theme-lock-v500">
 /* EDGE_TO_EDGE_THEME_LOCK
    Format-Name: Edge-to-Edge Erscheinungsbild
    Pflicht für JEDES Erscheinungsbild (inkl. künftige):
    1) Vollflächig randlos (kein Kasten, keine Seitenränder links/rechts/oben/unten außer Safe-Area)
    2) Durchgängiger Farbübergang: html/body/app nutzen --premium-bg / --page-cover derselben Theme-Palette
    3) Neue Themes: --outer-bg-flat, --outer-bg, --page-cover, --premium-bg setzen + THEME_META/normalizeTheme
-   Sperre: content/admin/edge-to-edge-theme-lock.json + scripts/edge-to-edge-theme-guard.js — darf nicht entfernt/umgangen werden.
+   Top/Scroll-Fix v500 · Sperre: content/admin/edge-to-edge-theme-lock.json + scripts/edge-to-edge-theme-guard.js — darf nicht entfernt/umgangen werden.
 */
 html[data-theme="dark"],
 :root{
@@ -17520,6 +17520,75 @@ html[data-layout] .app{
   }
   html[data-theme] .top-shell .header{
     padding-top:calc(env(safe-area-inset-top,0px) + 16px)!important;
+  }
+}
+
+/* EDGE_TO_EDGE_THEME_LOCK · Top/Scroll: kein Kasten, kein clip-path, Safe-Area = Theme-Farbe */
+html[data-theme] .theme-hero-shell,
+html[data-theme] .top-shell.theme-hero-shell,
+html[data-theme] .top-shell,
+html[data-theme] .view,
+html[data-theme] .theme-hero-surface{
+  border:0!important;
+  border-radius:0!important;
+  clip-path:none!important;
+  -webkit-clip-path:none!important;
+  box-shadow:none!important;
+  background-clip:border-box!important;
+}
+html[data-theme] .theme-hero-shell,
+html[data-theme] .top-shell.theme-hero-shell{
+  background:transparent!important;
+  border-color:transparent!important;
+}
+html[data-theme] .theme-hero-shell::before,
+html[data-theme] .theme-hero-shell::after,
+html[data-theme] .top-shell:after{
+  display:none!important;
+  content:none!important;
+}
+html[data-theme] .top-edge-fade,
+html[data-theme] .top-swim-aura,
+html.is-standalone-pwa .top-edge-fade,
+html.is-standalone-pwa .top-swim-aura{
+  display:none!important;
+}
+html[data-theme].is-standalone-pwa .app:after,
+html.is-standalone-pwa .app:after{
+  display:none!important;
+  content:none!important;
+}
+html[data-theme],
+html[data-theme].is-standalone-pwa,
+html.is-standalone-pwa{
+  background:var(--premium-bg,var(--outer-bg))!important;
+  background-color:var(--page-cover,var(--outer-bg-flat))!important;
+}
+html[data-theme] body,
+html[data-theme].is-standalone-pwa body,
+html.is-standalone-pwa body{
+  background:var(--premium-bg,var(--outer-bg,var(--bg)))!important;
+  background-color:var(--page-cover,var(--outer-bg-flat,var(--bg)))!important;
+  padding-top:0!important;
+  overscroll-behavior-y:none!important;
+}
+@media(max-width:700px){
+  html[data-theme] .theme-hero-shell,
+  html[data-theme] .top-shell.theme-hero-shell,
+  html[data-theme] .top-shell,
+  html[data-theme] .theme-hero-surface{
+    border-radius:0!important;
+    clip-path:none!important;
+    -webkit-clip-path:none!important;
+    margin-top:0!important;
+  }
+  html[data-theme].is-standalone-pwa body,
+  html.is-standalone-pwa body{
+    padding-top:0!important;
+  }
+  html[data-theme] .top-shell .header,
+  html[data-theme] .theme-hero-shell .header{
+    padding-top:calc(env(safe-area-inset-top,0px) + 12px)!important;
   }
 }
 </style>
@@ -23725,7 +23794,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v559";
+const APP_BUILD_ID="app-shell-v560";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}

@@ -67,6 +67,15 @@ function runEdgeToEdgeThemeGuard() {
     if (!content.includes("--premium-bg:var(--outer-bg)!important")) {
       failed += fail(`${file}: Hell/Soft/Royal/Bordeaux müssen --premium-bg an --outer-bg koppeln`);
     }
+    const lockMatch = content.match(/<style id="app-edge-to-edge-theme-lock-v\d+">([\s\S]*?)<\/style>/);
+    if (!lockMatch) {
+      failed += fail(`${file}: Lock-Style-Block fehlt`);
+    } else {
+      const block = lockMatch[1];
+      for (const need of ["theme-hero-shell", "clip-path:none!important", "top-edge-fade", "overscroll-behavior-y:none"]) {
+        if (!block.includes(need)) failed += fail(`${file}: Lock-Block fehlt „${need}“ (Top/Scroll)`);
+      }
+    }
     for (const item of forbidden) {
       try {
         const re = new RegExp(item.re);
