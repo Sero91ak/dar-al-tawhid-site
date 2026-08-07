@@ -69,6 +69,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "home-header-prayer-restore-v567-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Gebetszeiten/Datum Schriftformat zurück, Logo mittiger und größer — nur Header-Bereich, Besucher-App sofort",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
       "id": "quran-picker-crash-fix-v509-2026-08-07",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer: Picker/Top-Auswahl crashed Safari/PWA — Sofortfix, nur Picker",
