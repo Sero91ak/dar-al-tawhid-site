@@ -1,0 +1,349 @@
+{
+  "version": 1,
+  "feature": "prophetsKnowledgeBase",
+  "env": {
+    "test": "enabled",
+    "production": "disabled"
+  },
+  "title": {
+    "de": "Die Propheten",
+    "ar": "الأنبياء"
+  },
+  "intro": "Was Qurʾān, authentische Sunnah und zuverlässig belegte frühe Überlieferungen über die Propheten berichten.",
+  "sourcePriority": [
+    "Qurʾān",
+    "authentische Sunnah",
+    "authentische Überlieferungen der Ṣaḥābah",
+    "zuverlässig belegte Überlieferungen der Tābiʿīn und frühen Salaf",
+    "frühe Ḥadīṯ-, Tafsīr- und Athar-Werke mit Isnād-Prüfung",
+    "spätere Werke ausschließlich zur Einordnung und Quellenanalyse"
+  ],
+  "notes": [
+    "Nur namentlich zuverlässig belegte Personen.",
+    "Die Überlieferung über 124.000 Propheten wird hier nicht als gesicherte Gesamtzahl dargestellt.",
+    "Keine erfundenen biografischen Ergänzungen."
+  ],
+  "uluAlAzmIds": [
+    "nuh",
+    "ibrahim",
+    "musa",
+    "isa",
+    "muhammad"
+  ],
+  "prophets": [
+    {
+      "id": "adam",
+      "name": "Ādam",
+      "nameAr": "آدم",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī"
+      ],
+      "people": "",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "nuh",
+      "name": "Nūḥ",
+      "nameAr": "نوح",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī",
+        "rasūl"
+      ],
+      "people": "Qawm Nūḥ",
+      "uluAlAzm": true,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "hud",
+      "name": "Hūd",
+      "nameAr": "هود",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī",
+        "rasūl"
+      ],
+      "people": "ʿĀd",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "salih",
+      "name": "Ṣāliḥ",
+      "nameAr": "صالح",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī",
+        "rasūl"
+      ],
+      "people": "Thamūd",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "ibrahim",
+      "name": "Ibrāhīm",
+      "nameAr": "إبراهيم",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī",
+        "rasūl"
+      ],
+      "people": "",
+      "uluAlAzm": true,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "lut",
+      "name": "Lūṭ",
+      "nameAr": "لوط",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī",
+        "rasūl"
+      ],
+      "people": "Qawm Lūṭ",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "ismail",
+      "name": "Ismāʿīl",
+      "nameAr": "إسماعيل",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī",
+        "rasūl"
+      ],
+      "people": "",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "ishaq",
+      "name": "Isḥāq",
+      "nameAr": "إسحاق",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī"
+      ],
+      "people": "",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "yaqub",
+      "name": "Yaʿqūb",
+      "nameAr": "يعقوب",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī"
+      ],
+      "people": "",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "yusuf",
+      "name": "Yūsuf",
+      "nameAr": "يوسف",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī",
+        "rasūl"
+      ],
+      "people": "",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "ayyub",
+      "name": "Ayyūb",
+      "nameAr": "أيوب",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī"
+      ],
+      "people": "",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "shuayb",
+      "name": "Shuʿayb",
+      "nameAr": "شعيب",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī",
+        "rasūl"
+      ],
+      "people": "Madyan",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "musa",
+      "name": "Mūsā",
+      "nameAr": "موسى",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī",
+        "rasūl"
+      ],
+      "people": "Banū Isrāʾīl",
+      "uluAlAzm": true,
+      "prophetStatus": "quran_explicit",
+      "hasProfile": true
+    },
+    {
+      "id": "harun",
+      "name": "Hārūn",
+      "nameAr": "هارون",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī"
+      ],
+      "people": "Banū Isrāʾīl",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "dawud",
+      "name": "Dāwūd",
+      "nameAr": "داود",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī"
+      ],
+      "people": "Banū Isrāʾīl",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "sulayman",
+      "name": "Sulaymān",
+      "nameAr": "سليمان",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī"
+      ],
+      "people": "Banū Isrāʾīl",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "ilyas",
+      "name": "Ilyās",
+      "nameAr": "إلياس",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī",
+        "rasūl"
+      ],
+      "people": "",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "alyasa",
+      "name": "Al-Yasaʿ",
+      "nameAr": "اليسع",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī"
+      ],
+      "people": "",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "yunus",
+      "name": "Yūnus",
+      "nameAr": "يونس",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī",
+        "rasūl"
+      ],
+      "people": "",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "zakariyya",
+      "name": "Zakariyyā",
+      "nameAr": "زكريا",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī"
+      ],
+      "people": "Banū Isrāʾīl",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "yahya",
+      "name": "Yaḥyā",
+      "nameAr": "يحيى",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī"
+      ],
+      "people": "Banū Isrāʾīl",
+      "uluAlAzm": false,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "isa",
+      "name": "ʿĪsā",
+      "nameAr": "عيسى",
+      "honorific": "عليه السلام",
+      "roles": [
+        "nabī",
+        "rasūl"
+      ],
+      "people": "Banū Isrāʾīl",
+      "uluAlAzm": true,
+      "prophetStatus": "quran_explicit"
+    },
+    {
+      "id": "muhammad",
+      "name": "Muḥammad",
+      "nameAr": "محمد",
+      "honorific": "ﷺ",
+      "roles": [
+        "nabī",
+        "rasūl"
+      ],
+      "people": "",
+      "uluAlAzm": true,
+      "prophetStatus": "quran_explicit"
+    }
+  ],
+  "disputed": [
+    {
+      "id": "dhul-kifl",
+      "name": "Dhū l-Kifl",
+      "nameAr": "ذو الكفل",
+      "honorific": "عليه السلام",
+      "roles": [],
+      "people": "",
+      "uluAlAzm": false,
+      "prophetStatus": "disputed",
+      "note": "Im Qurʾān genannt; die Einordnung als Prophet ist unter den Gelehrten umstritten."
+    },
+    {
+      "id": "uzayr",
+      "name": "ʿUzayr",
+      "nameAr": "عزير",
+      "honorific": "",
+      "roles": [],
+      "people": "",
+      "uluAlAzm": false,
+      "prophetStatus": "disputed",
+      "note": "Im Qurʾān erwähnt; Prophetentum nicht als gesichert darzustellen."
+    }
+  ]
+}
