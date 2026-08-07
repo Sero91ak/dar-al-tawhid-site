@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-07T10:26:59.947Z",
+  "generated": "2026-08-07T10:27:21.308Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -390,9 +390,26 @@
       "pushApproved": true,
       "pushApprovedAt": "2026-08-07T10:26:58.398Z",
       "postId": "lib:pub-20260807-001",
-      "updatedAt": "2026-08-07T10:26:59.947Z",
+      "updatedAt": "2026-08-07T10:27:21.308Z",
       "processingToken": "library:1786098419748:94u9s5l7",
-      "processingStartedAt": "2026-08-07T10:26:59.947Z"
+      "processingStartedAt": "2026-08-07T10:26:59.947Z",
+      "lastCheckAt": "2026-08-07T10:27:21.024Z",
+      "liveCheck": {
+        "ok": false,
+        "diagnosis": "PDF noch nicht im Live-Katalog enthalten.",
+        "site": "https://dar-al-tawhid.de",
+        "publicationId": "pub-20260807-001",
+        "slug": "khabar-al-wahid-in-der-aqidah",
+        "catalogFoundPublic": true,
+        "publicationInCatalog": false,
+        "pdfFilePublic": false,
+        "visitorUrlOk": true,
+        "visitorUrl": "https://dar-al-tawhid.de/?v=1786098440990#bibliothek/khabar-al-wahid-in-der-aqidah",
+        "pdfHttpStatus": 404,
+        "attempt": 5
+      },
+      "attempts": 5,
+      "lastError": "PDF noch nicht im Live-Katalog enthalten."
     }
   }
 }
