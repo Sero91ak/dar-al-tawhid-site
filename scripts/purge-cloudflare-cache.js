@@ -128,10 +128,41 @@ function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
+function testPurgeFiles() {
+  return [
+    `${SITE_URL}/test`,
+    `${SITE_URL}/test/`,
+    `${SITE_URL}/test/index.html`,
+    `${SITE_URL}/test/version.json`,
+    `${SITE_URL}/test/manifest.json`,
+    `${SITE_URL}/test/service-worker.js`
+  ];
+}
+
 (async function main() {
   const hostname = new URL(SITE_URL).hostname;
   const zoneId = await resolveZoneId(hostname);
-  console.log("Zone:", zoneId, "für", hostname);
+  console.log("Zone:", zoneId, "für", hostname, "scope=", PURGE_SCOPE);
+
+  // Nur /test/*: kein Zone-weites purge_everything (Besucher-App unberührt lassen).
+  if (PURGE_SCOPE === "test") {
+    await purgeFiles(zoneId, testPurgeFiles());
+    await sleep(2500);
+    if (await verifyLiveHtml()) {
+      console.log("Test-Purge OK — öffentliche /test/-App ist aktuell.");
+      return;
+    }
+    console.warn("Nach Datei-Purge /test/* noch alt — zweiter Datei-Purge…");
+    await purgeFiles(zoneId, testPurgeFiles());
+    await sleep(2500);
+    if (await verifyLiveHtml()) {
+      console.log("Test-Purge OK nach zweitem Datei-Purge.");
+      return;
+    }
+    throw new Error(
+      "Cloudflare liefert nach /test/*-Purge noch alten Test-Stand. Route dar-al-tawhid.de/test* → Test-Worker prüfen."
+    );
+  }
 
   await purgeEverything(zoneId);
   await sleep(2500);
@@ -155,8 +186,8 @@ function sleep(ms) {
     `${SITE_URL}/assets/focus-feed-app.js`,
     `${SITE_URL}/assets/live-boot.js`
   ];
-  if (PURGE_SCOPE === "both" || PURGE_SCOPE === "test") {
-    files.push(`${SITE_URL}/test/`, `${SITE_URL}/test/index.html`, `${SITE_URL}/test/version.json`);
+  if (PURGE_SCOPE === "both") {
+    files.push(...testPurgeFiles());
   }
   await purgeFiles(zoneId, files);
   await sleep(2500);

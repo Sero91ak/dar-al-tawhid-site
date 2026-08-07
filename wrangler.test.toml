@@ -1,7 +1,22 @@
+# Cloudflare Worker — Dar Test App (isoliert von Besucher-App)
+# workers.dev: https://dar-al-tawhid-test.sero91ak.workers.dev/test/
+# Öffentlich:  https://dar-al-tawhid.de/test/  (Route hat Vorrang vor Live-Custom-Domain)
+
 name = "dar-al-tawhid-test"
 main = "cloudflare/test-app-worker.js"
 compatibility_date = "2026-08-01"
 compatibility_flags = ["nodejs_compat"]
+workers_dev = true
 
 [assets]
 directory = "."
+
+# Path-spezifische Routen: liefern den Test-Worker unter der öffentlichen Domain.
+# Ohne diese Bindung bedient der Live-Worker (Custom Domain) weiterhin /test/* mit altem Snapshot.
+[[routes]]
+pattern = "dar-al-tawhid.de/test"
+zone_name = "dar-al-tawhid.de"
+
+[[routes]]
+pattern = "dar-al-tawhid.de/test/*"
+zone_name = "dar-al-tawhid.de"

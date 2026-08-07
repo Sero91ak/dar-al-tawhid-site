@@ -31,6 +31,7 @@ on:
       - scripts/library-deploy-repair.js
       - scripts/test-app-health-check.js
       - scripts/verify-test-app-deploy.js
+      - scripts/purge-cloudflare-cache.js
       - package.json
       - _headers
       - .assetsignore
@@ -69,13 +70,39 @@ jobs:
           node scripts/library-deploy-guard.js
           node scripts/app-stability-guard.js
 
-      - name: Deploy Dar Test (separat)
+      - name: Deploy Dar Test (separat + öffentliche /test/-Route)
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: npx wrangler deploy -c wrangler.test.toml
 
-      - name: Dar Test verifizieren
+      - name: Cloudflare-Cache für /test/* leeren
         env:
-          SITE_URL: ${{ secrets.DAR_TEST_SITE_URL }}
-        run: node scripts/verify-test-app-deploy.js
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CLOUDFLARE_GLOBAL_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
+          SITE_URL: "https://dar-al-tawhid.de"
+          PURGE_SCOPE: "test"
+          CLOUDFLARE_DEV_MODE: "0"
+        run: |
+          EXPECT_BUILD_TEST="$(node -e "console.log(JSON.parse(require('fs').readFileSync('test/version.json','utf8')).buildId)")"
+          export EXPECT_BUILD_TEST
+          node scripts/purge-cloudflare-cache.js
+        continue-on-error: true
+
+      - name: Dar Test verifizieren (öffentlich + workers.dev)
+        env:
+          DAR_TEST_WORKERS_URL: "https://dar-al-tawhid-test.sero91ak.workers.dev/test"
+          DEPLOY_VERIFY_ATTEMPTS: "12"
+          DEPLOY_VERIFY_DELAY_MS: "5000"
+        run: |
+          EXPECT_TEST_BUILD="$(node -e "console.log(JSON.parse(require('fs').readFileSync('test/version.json','utf8')).buildId)")"
+          export EXPECT_TEST_BUILD
+          # Öffentliche Test-URL ist Pflicht; Secret DAR_TEST_SITE_URL darf nur überschreiben wenn gesetzt
+          if [ -n "${{ secrets.DAR_TEST_SITE_URL }}" ]; then
+            export SITE_URL="${{ secrets.DAR_TEST_SITE_URL }}"
+          else
+            export SITE_URL="https://dar-al-tawhid.de/test"
+          fi
+          node scripts/verify-test-app-deploy.js
