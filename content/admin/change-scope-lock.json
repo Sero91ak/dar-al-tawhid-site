@@ -69,6 +69,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-picker-compact-v508-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Qurʾān-Picker Sofortfix — kompakt, nicht Seiten-Schwarz, Verswechsel hängt nicht; sonst nichts ändern",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
       "id": "quran-chrome-nav-fix-v507-2026-08-07",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer: Top-Chrome wiederherstellen; rechter Button Tafsīr; Quiz-Tab live; Ilm+Hadith Test; Dock-Kanten",
