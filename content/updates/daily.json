@@ -1,38 +1,18 @@
 {
-  "date": "2026-08-07",
+  "date": "2026-08-08",
   "timezone": "Europe/Berlin",
-  "generated": "2026-08-07T04:31:00.383Z",
-  "source": "dar-daily-no-repeat-rotation",
+  "generated": "2026-08-07T22:20:53.680Z",
+  "source": "dar-daily-scheduler-regenerated",
   "recommendation": {
-    "id": "nuzul-allahs-ist-haqq-424",
-    "title": "Das Nuzūl Allahs ist Haqq",
-    "file": "aqidah-424-das-nuzul-allahs-ist-haqq.md",
-    "category": "Aqīdah",
-    "scholar": "Zuhayr ibn ʿAbbād",
-    "snippet": "🖋️ Zuhayr ibn ʿAbbād berichtete über die Imāme, die er erreichte:"
+    "id": "fiqh-frauen-haben-rechte-wie-pflichten-242",
+    "title": "Fiqh: Frauen haben Rechte wie Pflichten",
+    "file": "fiqh-frauen-haben-rechte-wie-pflichten-242.md",
+    "category": "Fiqh",
+    "scholar": "Ibn Kathīr",
+    "snippet": "„Ibn Kathīr erklärte zu Allahs Aussage, dass Frauen Rechte haben wie Pflichten nach dem Gebilligten: Für sie gibt es Rechte gegenüber den Männern, wie es für die Männer Rechte gegenüber ihnen gibt.“"
   },
   "dua": {
-    "id": "dua-005-faghfir-lana",
-    "title": "Vergib uns und erbarme Dich unser",
-    "snippet": "Unser Herr, wir glauben, so vergib uns und erbarme Dich unser, denn Du bist der Beste der Barmherzigen.",
-    "category": "Vergebung"
-  },
-  "rotation": {
-    "recommendation": {
-      "cycle": 0,
-      "poolSize": 457,
-      "remaining": 448
-    },
-    "dua": {
-      "cycle": 0,
-      "poolSize": 97,
-      "remaining": 89,
-      "sources": {
-        "markdown": 97,
-        "total": 97,
-        "poolSize": 97,
-        "canonicalSource": "content/duas/dua-*.md"
-      }
-    }
+    "snippet": "",
+    "category": ""
   }
 }
