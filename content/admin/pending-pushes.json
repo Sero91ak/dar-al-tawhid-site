@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-07T10:29:47.895Z",
+  "generated": "2026-08-07T10:30:04.291Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -386,13 +386,13 @@
       "pdfUrl": "/assets/library/pdfs/pub-20260807-001-v1-0.pdf",
       "catalogPath": "data/library-publications.json",
       "publishedAt": "2026-08-07",
-      "status": "processing",
+      "status": "sent",
       "pushApproved": true,
       "pushApprovedAt": "2026-08-07T10:29:44.177Z",
       "postId": "lib:pub-20260807-001",
-      "updatedAt": "2026-08-07T10:29:47.895Z",
-      "processingToken": "library:1786098585466:e37uvcqu",
-      "processingStartedAt": "2026-08-07T10:29:45.714Z",
+      "updatedAt": "2026-08-07T10:30:04.291Z",
+      "processingToken": null,
+      "processingStartedAt": null,
       "lastCheckAt": "2026-08-07T10:29:46.774Z",
       "liveCheck": {
         "ok": true,
@@ -408,7 +408,12 @@
         "attempt": 1
       },
       "attempts": 1,
-      "lastError": ""
+      "lastError": "",
+      "sentAt": "2026-08-07T10:30:04.086Z",
+      "pushResult": {
+        "target": "supabase-subscriptions:25",
+        "targetUrl": "https://dar-al-tawhid.de/?v=1786098603942#bibliothek/khabar-al-wahid-in-der-aqidah"
+      }
     }
   }
 }
