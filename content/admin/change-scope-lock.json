@@ -55,7 +55,9 @@
     "content/admin/quran-tafsir-nav-lock.json",
     "scripts/quran-tafsir-nav-guard.js",
     "content/admin/quran-picker-outside-lock.json",
-    "scripts/quran-picker-outside-guard.js"
+    "scripts/quran-picker-outside-guard.js",
+    "manifest.json",
+    "test/manifest.json"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -75,6 +77,22 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "status-bar-edge-v593-2026-08-07",
+      "approvedBy": "user-explicit-live-and-test",
+      "reason": "Nutzer: Edge-to-edge oben wie Cursor — kein Schwarz-Schnitt; Live + Test; Statusleiste black-translucent",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "manifest.json",
+        "test/manifest.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
     {
       "id": "live-ship-v574-578-2026-08-07",
       "approvedBy": "user-explicit-order",
