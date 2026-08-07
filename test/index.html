@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1785515013940 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v555";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v556";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -5392,7 +5392,7 @@ html[data-theme="dar-al-layl"]{
   --premium-border:var(--layl-border-default)!important;
   --premium-line:var(--layl-divider)!important;
   --premium-panel:linear-gradient(145deg,rgba(22,28,24,.98),rgba(13,17,15,.98))!important;
-  --premium-bg:radial-gradient(circle at 14% 0%,rgba(168,139,79,.08),transparent 30%),radial-gradient(circle at 88% 12%,rgba(120,90,40,.05),transparent 26%),linear-gradient(168deg,#14110c 0%,#0c0a08 48%,#070605 100%)!important;
+  --premium-bg:radial-gradient(circle at 14% 0%,rgba(168,139,79,.065),transparent 29%),radial-gradient(circle at 86% 10%,rgba(28,37,34,.055),transparent 25%),linear-gradient(168deg,#101310 0%,#090D0B 48%,#050706 100%)!important;
   --premium-shadow:var(--layl-shadow-card)!important;
   --premium-label:var(--layl-text-gold)!important;
   --premium-title:var(--layl-text-cream)!important;
@@ -9784,7 +9784,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/premium-feed-app.js?v=91" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <script src="/assets/adaptive-layout.js?v=4" defer></script>
-<script src="/assets/scholars-index.js?v=555" defer></script>
+<script src="/assets/scholars-index.js?v=556" defer></script>
 <link rel="preload" href="/assets/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23673,7 +23673,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v555";
+const APP_BUILD_ID="app-shell-v556";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -25369,36 +25369,22 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
   <script src="/assets/dar-account-visibility.js?v=17"></script>
 <script src="/test/assets/library/canonical-source-library.js?v=17"></script>
 
-<style id="live-quran-theme-bg-v495">
-/* v495 · Qurʾān folgt Erscheinungsbild – kein festes Dunkelgrün */
-html{background:var(--page-cover,var(--premium-bg,var(--bg)))!important}
-body,
+<style id="live-quran-theme-bg-v496">
+/* v496 · Qurʾān/Seiten spiegeln exakt das gewählte Erscheinungsbild (inkl. Dar al-Layl unverändert) */
+html{background:var(--page-cover,var(--bg))!important}
 body.is-quran-route,
 body.is-quran-overview,
-body.is-quran-reader-route,
-html[data-theme] body.is-quran-route,
-html[data-theme] body.is-quran-overview{
-  background:var(--premium-bg,var(--bg))!important;
-  background-image:var(--premium-bg-image,none)!important;
+body.is-quran-reader-route{
+  background:var(--premium-bg,var(--page-cover,var(--bg)))!important;
 }
 body.is-quran-route #appView.view,
 body.is-quran-overview #appView.view,
 body.is-quran-reader-route #appView.view,
-body.is-quran-route .quran-reader,
-body.is-quran-route .quran-surah-view,
 body.is-quran-route .quran-ayah,
-body.is-quran-route .quran-page,
-body.is-quran-reader-route .quran-digital-page,
-body.is-quran-reader-route .quran-ayah-block{
+body.is-quran-reader-route .quran-ayah-block,
+body.is-quran-reader-route .quran-digital-page{
   background:transparent!important;
-  background-color:transparent!important;
   background-image:none!important;
-}
-/* Alte Elegant-Grün-Reste hart überschreiben */
-body.is-quran-route,
-body.is-quran-overview,
-body.is-quran-reader-route{
-  --quran-surface:transparent;
 }
 </style>
 </body>
