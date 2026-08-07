@@ -2467,6 +2467,19 @@
         "test/data/prophets/"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "quran-tab-root-chrome-v586-2026-08-07",
+      "approvedBy": "user-report-quran-tab-favoriten-edges",
+      "note": "Qurʾān Bottom-Tab immer Start/Alle; Kopf größer; Kanten an Markenliste/Tabs/Icons entfernen; Test+Live",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json"
+      ],
+      "expiresAt": "2026-09-30T23:59:00.000Z"
     }
   ],
   "enabled": true
