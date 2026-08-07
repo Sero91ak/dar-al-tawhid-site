@@ -33,7 +33,15 @@
     "content/admin/live-scholars.json",
     "content/admin/live-books.json",
     "admin/sw.js",
-    "assets/site-analytics.js"
+    "assets/site-analytics.js",
+    "content/admin/prayer-push-status.json",
+    "assets/adaptive-layout.css",
+    "assets/adaptive-layout.js",
+    "assets/scholars-index.js",
+    "assets/scholars-index.css",
+    "data/scholar-index-meta.json",
+    "data/scholar-history-curated.json",
+    "version.json"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -53,6 +61,29 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "visitor-visible-fix-v495-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Besucher-App keine sichtbare Änderung — SW-Cache, Gelehrte Lehrer/Schüler/Werke, Qurʾān-Hintergrund, Deploy",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "assets/adaptive-layout.css",
+        "assets/adaptive-layout.js",
+        "assets/scholars-index.js",
+        "assets/scholars-index.css",
+        "data/scholar-index-meta.json",
+        "data/scholar-history-curated.json",
+        "content/admin/change-scope-lock.json",
+        "content/admin/prayer-push-status.json",
+        ".github/workflows/purge-live-cache.yml",
+        ".github/workflows/cloudflare-pages-deploy.yml"
+      ],
+      "expiresAt": "2026-09-30T23:59:00.000Z"
+    },
     {
       "id": "post-push-dedupe-2026-07-29",
       "approvedBy": "user-explicit-order",
