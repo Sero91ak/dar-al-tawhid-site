@@ -69,6 +69,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-chrome-nav-fix-v507-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Top-Chrome wiederherstellen; rechter Button Tafsīr; Quiz-Tab live; Ilm+Hadith Test; Dock-Kanten",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json",
+        "scripts/sync-live-from-test.js"
+      ],
+      "expiresAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
       "id": "quran-reader-chrome-v506-2026-08-07",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer: Qurʾān Ayah-Hintergrund, Einzel-Buttons, rechtes Bild-Vorlagen, visitor+test",
