@@ -76,6 +76,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-context-dock-v575-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Schnellleiste über Bottom-Nav wirkt aufgeklebt — edles vereintes Lesedock in Dar Test",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-08-21T00:00:00.000Z"
+    },
+    {
       "id": "quran-stability-tajweed-v574-2026-08-07",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer: Qurʾān Seite Bugs (hängen/schwarz/weiß/Nav/Buttons) + Schrift lesbar + Tajweed strikt — Dar Test zuerst",
