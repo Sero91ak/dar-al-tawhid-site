@@ -69,6 +69,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "edge-statusbar-continuity-v501-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer bestätigt Farbübergang/Scroll oben — Status-Bar black + theme-color mismatch",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/edge-to-edge-theme-guard.js",
+        "content/admin/edge-to-edge-theme-lock.json",
+        "content/admin/change-scope-lock.json"
+      ]
+    },
+    {
       "id": "edge-top-scroll-fix-v500-2026-08-07",
       "approvedBy": "user-explicit-order",
       "reason": "Nutzer: Farbübergang/Scroll-Fehler oben — theme-hero clip-path und Safe-Area",
