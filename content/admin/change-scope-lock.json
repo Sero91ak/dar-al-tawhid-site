@@ -2397,6 +2397,30 @@
         "scripts/verify-live-deploy.js"
       ],
       "expiresAt": "2026-09-30T23:59:00.000Z"
+    },
+    {
+      "id": "quran-ios-chrome-crash-2026-08-07",
+      "approvedBy": "user-report-quran-crash",
+      "note": "iOS/PWA Qurʾān Absturz: Soft-Hide Chrome ohne Spacer-Collapse; Test zuerst",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json"
+      ]
+    },
+    {
+      "id": "quran-dock-noble-live-2026-08-07",
+      "approvedBy": "user-explicit-live-and-test",
+      "note": "Qurʾān Tab/Dock optisch edel+kompakt, live+test freigegeben",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json"
+      ]
     }
   ],
   "enabled": true
