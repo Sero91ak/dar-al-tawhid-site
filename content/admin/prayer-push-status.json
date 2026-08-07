@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-07T00:35:39.276Z",
+  "updatedAt": "2026-08-07T00:40:39.501Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-07T00:35:39.276Z",
+  "lastCronRun": "2026-08-07T00:40:39.501Z",
   "nextPlannedPush": {
     "prayer": "Fajr",
     "key": "fajr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-07T02:23:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-07T00:20:19.332Z",
-  "windowEnd": "2026-08-08T02:35:19.332Z",
+  "windowStart": "2026-08-07T00:25:19.350Z",
+  "windowEnd": "2026-08-08T02:40:19.350Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 25,
@@ -28,10 +28,10 @@
   "usersWithLocation": 25,
   "usersWithActivePush": 25,
   "locationGroups": 6,
-  "scheduled": 65,
-  "recipients": 274,
+  "scheduled": 67,
+  "recipients": 276,
   "skippedPast": 60,
-  "skippedWindow": 115,
+  "skippedWindow": 113,
   "duplicates": 1,
   "errors": 0,
   "lastError": null,
@@ -44,11 +44,11 @@
         "time": "04:39",
         "advance": {
           "status": "geplant",
-          "recipients": 49
+          "recipients": 50
         },
         "entry": {
           "status": "geplant",
-          "recipients": 25
+          "recipients": 26
         }
       },
       "dhuhr": {
@@ -119,11 +119,11 @@
       "time": "04:39",
       "advance": {
         "status": "geplant",
-        "recipients": 49
+        "recipients": 50
       },
       "entry": {
         "status": "geplant",
-        "recipients": 25
+        "recipients": 26
       },
       "answer": "Fajr 04:39: Vorab und Gebetszeit geplant."
     },
@@ -590,6 +590,15 @@
     {
       "prayer": "Fajr",
       "key": "fajr",
+      "mode": "entry",
+      "time": "04:40",
+      "sendAfter": "2026-08-08T02:40:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Fajr",
+      "key": "fajr",
       "mode": "advance",
       "time": "04:40",
       "sendAfter": "2026-08-08T02:25:00.000Z",
@@ -782,6 +791,15 @@
       "mode": "advance",
       "time": "22:35",
       "sendAfter": "2026-08-07T20:30:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Fajr",
+      "key": "fajr",
+      "mode": "advance",
+      "time": "04:41",
+      "sendAfter": "2026-08-08T02:36:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin"
     }
