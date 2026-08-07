@@ -5,6 +5,9 @@
   "lockedReason": "Nutzer-Freigabe: Nach Maghrib-Push-Reparatur keine Änderungen ohne ausdrücklichen Auftrag.",
   "message": "GLOBAL GESPERRT: Nur freigeschaltete Bereiche dürfen geändert werden. Freischaltung nur nach ausdrücklichem Nutzer-Auftrag in unlockedScopes eintragen.",
   "alwaysAllowed": [
+    "content/quran-tajweed/",
+    "scripts/quran-stability-tajweed-guard.js",
+    "content/admin/quran-stability-tajweed-lock.json",
     "content/admin/change-scope-lock.json",
     "data/quiz-questions.json",
     "data/quiz-questions-test.json",
@@ -72,6 +75,24 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "quran-stability-tajweed-v574-2026-08-07",
+      "approvedBy": "user-explicit-order",
+      "reason": "Nutzer: Qurʾān Seite Bugs (hängen/schwarz/weiß/Nav/Buttons) + Schrift lesbar + Tajweed strikt — Dar Test zuerst",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "content/quran-tajweed/",
+        "content/admin/change-scope-lock.json",
+        "content/admin/quran-stability-tajweed-lock.json",
+        "scripts/quran-stability-tajweed-guard.js",
+        "scripts/repo-integrity-guard.js",
+        ".github/workflows/app-health-check.yml",
+        ".github/workflows/canonical-state-guard.yml"
+      ],
+      "expiresAt": "2026-08-21T00:00:00.000Z"
+    },
     {
       "id": "home-logo-prayer-status-tune-v570-2026-08-07",
       "approvedBy": "user-explicit-order",
