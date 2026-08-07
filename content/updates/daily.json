@@ -1,20 +1,38 @@
 {
   "date": "2026-08-07",
   "timezone": "Europe/Berlin",
-  "generated": "2026-08-07T04:29:35.088Z",
-  "source": "dar-daily-visitor-deploy-repair",
+  "generated": "2026-08-07T04:31:00.383Z",
+  "source": "dar-daily-no-repeat-rotation",
   "recommendation": {
-    "id": "imam-shafii-wasser-wird-durch-veraenderung-unrein-354",
-    "title": "Wenn Wasser durch Unreinheit verändert wird",
-    "file": "fiqh-354-wenn-wasser-durch-unreinheit-verandert-wird.md",
-    "category": "Fiqh",
-    "scholar": "Imām ash-Shāfiʿī",
-    "snippet": "„Wenn sich Geschmack, Farbe oder Geruch des Wassers durch etwas Verbotenes, das sich mit ihm vermischt, verändert, wird das Wasser nicht wieder rein, bis es ausgeschöpft wird oder viel Wasser darauf gegossen wird, sodass"
+    "id": "nuzul-allahs-ist-haqq-424",
+    "title": "Das Nuzūl Allahs ist Haqq",
+    "file": "aqidah-424-das-nuzul-allahs-ist-haqq.md",
+    "category": "Aqīdah",
+    "scholar": "Zuhayr ibn ʿAbbād",
+    "snippet": "🖋️ Zuhayr ibn ʿAbbād berichtete über die Imāme, die er erreichte:"
   },
   "dua": {
-    "id": "dua-040-rabbana-atina-ma-waadtana",
-    "title": "Duʿāʾ um Erfüllung der Verheißung",
-    "snippet": "Unser Herr, gib uns, was Du uns durch Deine Gesandten versprochen hast, und beschäme uns nicht am Tag der Auferstehung. Gewiss, Du brichst das Versprechen nicht.",
-    "category": "Jenseits & Vergebung"
+    "id": "dua-005-faghfir-lana",
+    "title": "Vergib uns und erbarme Dich unser",
+    "snippet": "Unser Herr, wir glauben, so vergib uns und erbarme Dich unser, denn Du bist der Beste der Barmherzigen.",
+    "category": "Vergebung"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 457,
+      "remaining": 448
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 89,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
