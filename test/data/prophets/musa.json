@@ -401,6 +401,78 @@
       "event": "Firʿawn",
       "context": "Ansprache an Firʿawn",
       "kind": "about"
+    },
+    {
+      "surah": 19,
+      "ayah": 51,
+      "ayahEnd": 53,
+      "filter": "ereignis",
+      "event": "Identität · Hārūn",
+      "context": "Mūsā als aufrichtiger Gesandter und Prophet; Hārūn als Prophet genannt",
+      "kind": "about"
+    },
+    {
+      "surah": 14,
+      "ayah": 5,
+      "ayahEnd": 8,
+      "filter": "ereignis",
+      "event": "Banū Isrāʾīl",
+      "context": "Sendung zu den Banū Isrāʾīl und Erinnerung an die Gunst Allahs",
+      "kind": "about"
+    },
+    {
+      "surah": 27,
+      "ayah": 7,
+      "ayahEnd": 14,
+      "filter": "ereignis",
+      "event": "Zeichen · Firʿawn",
+      "context": "Zeichen und Auftreten vor Firʿawn und seinem Volk",
+      "kind": "about"
+    },
+    {
+      "surah": 40,
+      "ayah": 23,
+      "ayahEnd": 46,
+      "filter": "ereignis",
+      "event": "Firʿawn",
+      "context": "Mūsā mit klaren Zeichen; Glaube eines Mannes aus dem Volk Firʿawns",
+      "kind": "about"
+    },
+    {
+      "surah": 43,
+      "ayah": 46,
+      "ayahEnd": 56,
+      "filter": "ereignis",
+      "event": "Firʿawn · Meer",
+      "context": "Sendung zu Firʿawn und Untergang",
+      "kind": "about"
+    },
+    {
+      "surah": 44,
+      "ayah": 17,
+      "ayahEnd": 33,
+      "filter": "ereignis",
+      "event": "Prüfung · Banū Isrāʾīl",
+      "context": "Prüfung Firʿawns und Rettung der Banū Isrāʾīl",
+      "kind": "about"
+    },
+    {
+      "surah": 7,
+      "ayah": 143,
+      "ayahEnd": 144,
+      "filter": "aussagen",
+      "event": "Berg",
+      "context": "Rede Mūsās bei der Bitte, seinen Herrn zu schauen",
+      "kind": "speech"
+    },
+    {
+      "surah": 26,
+      "ayah": 62,
+      "ayahEnd": 62,
+      "filter": "aussagen",
+      "event": "Meer",
+      "context": "Vertrauen Mūsās beim Erreichen des Meeres",
+      "kind": "speech"
     }
   ],
   "statements": {
@@ -418,6 +490,34 @@
         "surah": 20,
         "ayah": 25,
         "ayahEnd": 30
+      },
+      {
+        "id": "musa-sea-trust-26-62",
+        "context": "Vertrauen beim Erreichen des Meeres, als die Banū Isrāʾīl Firʿawn hinter sich wussten",
+        "arabicOriginal": "قَالَ كَلَّا إِنَّ مَعِيَ رَبِّي سَيَهْدِينِ",
+        "translationDe": "Er sagte: Keineswegs! Mein Herr ist mit mir; Er wird mich rechtleiten.",
+        "source": "Qurʾān",
+        "reference": "asch-Schuʿarāʾ 26:62",
+        "grading": "quran",
+        "verificationStatus": "approved",
+        "directReference": "#quran-surah/26/62",
+        "surah": 26,
+        "ayah": 62,
+        "ayahEnd": 62
+      },
+      {
+        "id": "musa-repent-28-16",
+        "context": "Reue und Bitte um Vergebung nach dem Vorfall in der Stadt",
+        "arabicOriginal": "قَالَ رَبِّ إِنِّي ظَلَمْتُ نَفْسِي فَاغْفِرْ لِي فَغَفَرَ لَهُ إِنَّهُ هُوَ الْغَفُورُ الرَّحِيمُ",
+        "translationDe": "Er sagte: Mein Herr, ich habe mir selbst Unrecht getan; so vergib mir. Da vergab Er ihm. Er ist der Allvergebende, der Barmherzige.",
+        "source": "Qurʾān",
+        "reference": "al-Qaṣaṣ 28:16",
+        "grading": "quran",
+        "verificationStatus": "approved",
+        "directReference": "#quran-surah/28/16",
+        "surah": 28,
+        "ayah": 16,
+        "ayahEnd": 16
       }
     ],
     "sunnah": []
@@ -438,6 +538,7 @@
       "notes": "Rahmenhinweis; vollständiger arabischer Text + exakte Nummer folgen nach Isnād-/Stellenprüfung. Nicht in der Hauptansicht, bis approved."
     }
   ],
+  "sunnahPrepNote": "Für Mūsā liegen in den authentischen Sammlungen Berichte vor (u. a. Begegnung in der Nachtreise). Freigegebene Aḥādīṯ mit arabischem Text, Nummer und Isnād-Hinweis erscheinen hier nach abgeschlossener Prüfung — ungeprüfte Texte bleiben unsichtbar.",
   "athar": [],
   "weakReports": [],
   "worksIndex": [
