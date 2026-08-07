@@ -231,6 +231,24 @@
             var stuck = JSON.parse(sessionStorage.getItem(stuckKey) || "{}");
             if (String(stuck.buildId) === remoteBuildId && (Number(stuck.tries) || 0) >= 1) return;
           } catch (e) {}
+          // Alte Optik-Caches sofort löschen, sobald neuere Hülle erkannt wird.
+          try {
+            if ("caches" in window) {
+              caches.keys().then(function (keys) {
+                keys.forEach(function (k) {
+                  if (/^dar-al-tawhid-offline-light-/i.test(k)) caches.delete(k);
+                });
+              });
+            }
+          } catch (e) {}
+          try {
+            if ("serviceWorker" in navigator) {
+              navigator.serviceWorker.getRegistration("/").then(function (reg) {
+                try { reg && reg.active && reg.active.postMessage({ type: "HARD_REFRESH" }); } catch (e) {}
+                if (reg && typeof reg.update === "function") reg.update().catch(function () {});
+              });
+            }
+          } catch (e) {}
         }
         var state = readVersionState();
         // Nie als „fertig“ werten, wenn die geladene Hülle noch alt ist.
