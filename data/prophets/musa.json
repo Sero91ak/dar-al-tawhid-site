@@ -16,64 +16,71 @@
   ],
   "uluAlAzm": true,
   "people": "Banū Isrāʾīl",
-  "region": "Ägypten · Madyan · Sinai-Region (nach Qurʾān-Kontext)",
+  "region": "Ägypten · Madyan (Qurʾān-Kontext); weitere Ortsangaben nur bei Beleg",
   "mission": "Gesandt zu Firʿawn und den Banū Isrāʾīl; Ruf zum Tawḥīd und Befreiung der Banū Isrāʾīl.",
-  "profileStatus": "approved",
+  "profileStatus": "research",
   "overviewFields": [
     {
       "key": "name",
       "label": "Name",
       "value": "Mūsā",
-      "status": "authentisch belegt",
+      "status": "in Prüfung — noch nicht freigegeben (Zero-Trust)",
       "claimIds": [
         "musa-name-quran"
-      ]
+      ],
+      "displayMode": "research_preview"
     },
     {
       "key": "nameAr",
       "label": "Arabischer Name",
       "value": "موسى",
-      "status": "authentisch belegt",
+      "status": "in Prüfung — noch nicht freigegeben (Zero-Trust)",
       "claimIds": [
         "musa-name-quran"
-      ]
+      ],
+      "displayMode": "research_preview"
     },
     {
       "key": "roles",
       "label": "Nabī / Rasūl",
       "value": "Nabī · Rasūl",
-      "status": "authentisch belegt",
+      "status": "in Prüfung — noch nicht freigegeben (Zero-Trust)",
       "claimIds": [
         "musa-rasul-quran"
-      ]
+      ],
+      "displayMode": "research_preview"
     },
     {
       "key": "people",
       "label": "Volk",
       "value": "Banū Isrāʾīl",
-      "status": "authentisch belegt",
+      "status": "in Prüfung — noch nicht freigegeben (Zero-Trust)",
       "claimIds": [
         "musa-people-quran"
-      ]
+      ],
+      "displayMode": "research_preview"
     },
     {
       "key": "region",
       "label": "Region",
-      "value": "Ägypten · Madyan · Sinai-Region (nach Qurʾān-Kontext)",
-      "status": "authentisch belegt",
+      "value": "Ägypten · Madyan (Qurʾān-Kontext); weitere Ortsangaben nur bei Beleg",
+      "status": "in Prüfung — noch nicht freigegeben (Zero-Trust)",
       "claimIds": [
         "musa-egypt-context",
         "musa-madyan"
-      ]
+      ],
+      "chronologyStatus": "textually-established",
+      "displayMode": "research_preview"
     },
     {
       "key": "mission",
       "label": "Auftrag",
       "value": "Gesandt zu Firʿawn und den Banū Isrāʾīl.",
-      "status": "authentisch belegt",
+      "status": "in Prüfung — noch nicht freigegeben (Zero-Trust)",
       "claimIds": [
         "musa-mission-firaun"
-      ]
+      ],
+      "displayMode": "research_preview"
     },
     {
       "key": "father",
@@ -485,11 +492,16 @@
         "source": "Qurʾān",
         "reference": "Ṭā-Hā 20:25–30",
         "grading": "quran",
-        "verificationStatus": "approved",
+        "verificationStatus": "final_review",
         "directReference": "#quran-surah/20/25",
         "surah": 20,
         "ayah": 25,
-        "ayahEnd": 30
+        "ayahEnd": 30,
+        "notes": " Dual-Review (reviewPass1/2) ausstehend — Zero-Trust.",
+        "review": {
+          "reviewPass1": "pending",
+          "reviewPass2": "pending"
+        }
       },
       {
         "id": "musa-sea-trust-26-62",
@@ -499,11 +511,16 @@
         "source": "Qurʾān",
         "reference": "asch-Schuʿarāʾ 26:62",
         "grading": "quran",
-        "verificationStatus": "approved",
+        "verificationStatus": "final_review",
         "directReference": "#quran-surah/26/62",
         "surah": 26,
         "ayah": 62,
-        "ayahEnd": 62
+        "ayahEnd": 62,
+        "notes": " Dual-Review (reviewPass1/2) ausstehend — Zero-Trust.",
+        "review": {
+          "reviewPass1": "pending",
+          "reviewPass2": "pending"
+        }
       },
       {
         "id": "musa-repent-28-16",
@@ -513,11 +530,16 @@
         "source": "Qurʾān",
         "reference": "al-Qaṣaṣ 28:16",
         "grading": "quran",
-        "verificationStatus": "approved",
+        "verificationStatus": "final_review",
         "directReference": "#quran-surah/28/16",
         "surah": 28,
         "ayah": 16,
-        "ayahEnd": 16
+        "ayahEnd": 16,
+        "notes": " Dual-Review (reviewPass1/2) ausstehend — Zero-Trust.",
+        "review": {
+          "reviewPass1": "pending",
+          "reviewPass2": "pending"
+        }
       }
     ],
     "sunnah": []
@@ -560,14 +582,14 @@
   ],
   "claims": [
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "final_review",
       "grading": "quran",
       "evidenceType": "quran",
       "source": "Qurʾān",
       "arabicOriginal": "",
       "translationDe": "Hat dich die Geschichte von Mūsā erreicht?",
       "directReference": "#quran-surah/20/9",
-      "notes": "",
+      "notes": " | Audit 2026-08-07: Qurʾān-Claim zur Zweitprüfung (reviewPass2) zurückgestuft.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -579,17 +601,26 @@
       "prophetId": "musa",
       "category": "identity",
       "claim": "Sein Name im Qurʾān lautet Mūsā (موسى).",
-      "reference": "zahlreiche Stellen, z. B. Ṭā-Hā 20:9"
+      "reference": "zahlreiche Stellen, z. B. Ṭā-Hā 20:9",
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": false,
+        "directLinkChecked": true,
+        "reviewPass1": "pending_reaudit",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "final_review",
       "grading": "quran",
       "evidenceType": "quran",
       "source": "Qurʾān",
       "arabicOriginal": "",
       "translationDe": "Und gedenke im Buch Mūsās. Er war aufrichtig und war ein Gesandter, ein Prophet.",
       "directReference": "#quran-surah/19/51",
-      "notes": "",
+      "notes": " | Audit 2026-08-07: Qurʾān-Claim zur Zweitprüfung (reviewPass2) zurückgestuft.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -601,17 +632,26 @@
       "prophetId": "musa",
       "category": "identity",
       "claim": "Mūsā ist im Qurʾān als Gesandter (Rasūl) und Prophet bezeugt.",
-      "reference": "u. a. Maryam 19:51"
+      "reference": "u. a. Maryam 19:51",
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": false,
+        "directLinkChecked": true,
+        "reviewPass1": "pending_reaudit",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "final_review",
       "grading": "quran",
       "evidenceType": "quran",
       "source": "Qurʾān",
       "arabicOriginal": "",
       "translationDe": "",
       "directReference": "#quran-surah/20/47",
-      "notes": "",
+      "notes": " | Audit 2026-08-07: Qurʾān-Claim zur Zweitprüfung (reviewPass2) zurückgestuft.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -623,17 +663,26 @@
       "prophetId": "musa",
       "category": "mission",
       "claim": "Mūsā wurde zu den Banū Isrāʾīl gesandt / steht im Kontext der Banū Isrāʾīl.",
-      "reference": "u. a. al-Aʿrāf 7:105; Ṭā-Hā 20:47"
+      "reference": "u. a. al-Aʿrāf 7:105; Ṭā-Hā 20:47",
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": false,
+        "directLinkChecked": true,
+        "reviewPass1": "pending_reaudit",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "final_review",
       "grading": "quran",
       "evidenceType": "quran",
       "source": "Qurʾān",
       "arabicOriginal": "",
       "translationDe": "",
       "directReference": "#quran-surah/28/3",
-      "notes": "",
+      "notes": " | Audit 2026-08-07: Qurʾān-Claim zur Zweitprüfung (reviewPass2) zurückgestuft.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -645,17 +694,26 @@
       "prophetId": "musa",
       "category": "region",
       "claim": "Der Qurʾān verortet zentrale Ereignisse im Machtbereich Firʿawns (Ägypten-Kontext).",
-      "reference": "al-Qaṣaṣ 28:3–6"
+      "reference": "al-Qaṣaṣ 28:3–6",
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": false,
+        "directLinkChecked": true,
+        "reviewPass1": "pending_reaudit",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "final_review",
       "grading": "quran",
       "evidenceType": "quran",
       "source": "Qurʾān",
       "arabicOriginal": "",
       "translationDe": "",
       "directReference": "#quran-surah/20/42",
-      "notes": "",
+      "notes": " | Audit 2026-08-07: Qurʾān-Claim zur Zweitprüfung (reviewPass2) zurückgestuft.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -667,17 +725,26 @@
       "prophetId": "musa",
       "category": "mission",
       "claim": "Mūsā (mit Hārūn) wurde zu Firʿawn gesandt.",
-      "reference": "Ṭā-Hā 20:42–44; ash-Shuʿarāʾ 26:10–17"
+      "reference": "Ṭā-Hā 20:42–44; ash-Shuʿarāʾ 26:10–17",
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": false,
+        "directLinkChecked": true,
+        "reviewPass1": "pending_reaudit",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "final_review",
       "grading": "quran",
       "evidenceType": "quran",
       "source": "Qurʾān",
       "arabicOriginal": "وَاجْعَل لِّي وَزِيرًا مِّنْ أَهْلِي · هَارُونَ أَخِي",
       "translationDe": "… und bestelle mir einen Helfer aus meiner Familie: Hārūn, meinen Bruder.",
       "directReference": "#quran-surah/20/30",
-      "notes": "",
+      "notes": " | Audit 2026-08-07: Qurʾān-Claim zur Zweitprüfung (reviewPass2) zurückgestuft.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -689,17 +756,26 @@
       "prophetId": "musa",
       "category": "family",
       "claim": "Hārūn war der Bruder von Mūsā.",
-      "reference": "Ṭā-Hā 20:29–30; al-Aʿrāf 7:142"
+      "reference": "Ṭā-Hā 20:29–30; al-Aʿrāf 7:142",
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": false,
+        "directLinkChecked": true,
+        "reviewPass1": "pending_reaudit",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "final_review",
       "grading": "quran",
       "evidenceType": "quran",
       "source": "Qurʾān",
       "arabicOriginal": "",
       "translationDe": "",
       "directReference": "#quran-surah/28/7",
-      "notes": "",
+      "notes": " | Audit 2026-08-07: Qurʾān-Claim zur Zweitprüfung (reviewPass2) zurückgestuft.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -711,17 +787,26 @@
       "prophetId": "musa",
       "category": "family",
       "claim": "Die Mutter von Mūsā wird im Qurʾān erwähnt (ohne Namensnennung).",
-      "reference": "al-Qaṣaṣ 28:7–13; Ṭā-Hā 20:38–40"
+      "reference": "al-Qaṣaṣ 28:7–13; Ṭā-Hā 20:38–40",
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": false,
+        "directLinkChecked": true,
+        "reviewPass1": "pending_reaudit",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "research",
       "grading": "unverified",
       "evidenceType": "editorial",
       "source": "Redaktionelle Feststellung",
       "arabicOriginal": "",
       "translationDe": "",
       "directReference": "",
-      "notes": "Wert: Nicht authentisch belegt",
+      "notes": "Wert: Nicht authentisch belegt | Audit 2026-08-07: nicht als approved geführt — Negativfeststellung nur nach Quellenprüfung; zweite Prüfung ausstehend.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -733,17 +818,27 @@
       "prophetId": "musa",
       "category": "family",
       "claim": "Der Name der Mutter von Mūsā ist im Qurʾān und in der hier freigegebenen Datenbasis nicht authentisch belegt.",
-      "reference": "—"
+      "reference": "—",
+      "absenceStatus": "not-established-in-reviewed-sources",
+      "review": {
+        "sourceChecked": false,
+        "textChecked": false,
+        "gradingChecked": false,
+        "translationChecked": false,
+        "directLinkChecked": false,
+        "reviewPass1": "pending",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "research",
       "grading": "unverified",
       "evidenceType": "editorial",
       "source": "Redaktionelle Feststellung",
       "arabicOriginal": "",
       "translationDe": "",
       "directReference": "",
-      "notes": "Populäre Namensangaben ohne geprüften Isnād werden nicht übernommen.",
+      "notes": "Populäre Namensangaben ohne geprüften Isnād werden nicht übernommen. | Audit 2026-08-07: nicht als approved geführt — Negativfeststellung nur nach Quellenprüfung; zweite Prüfung ausstehend.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -755,17 +850,27 @@
       "prophetId": "musa",
       "category": "family",
       "claim": "Der Name des Vaters von Mūsā ist in der hier freigegebenen Datenbasis nicht authentisch belegt.",
-      "reference": "—"
+      "reference": "—",
+      "absenceStatus": "not-established-in-reviewed-sources",
+      "review": {
+        "sourceChecked": false,
+        "textChecked": false,
+        "gradingChecked": false,
+        "translationChecked": false,
+        "directLinkChecked": false,
+        "reviewPass1": "pending",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "research",
       "grading": "unverified",
       "evidenceType": "editorial",
       "source": "Redaktionelle Feststellung",
       "arabicOriginal": "",
       "translationDe": "",
       "directReference": "",
-      "notes": "",
+      "notes": " | Audit 2026-08-07: nicht als approved geführt — Negativfeststellung nur nach Quellenprüfung; zweite Prüfung ausstehend.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -777,17 +882,27 @@
       "prophetId": "musa",
       "category": "biography",
       "claim": "Geburtsjahr und genauer Geburtsort sind nicht authentisch belegt.",
-      "reference": "—"
+      "reference": "—",
+      "absenceStatus": "not-established-in-reviewed-sources",
+      "review": {
+        "sourceChecked": false,
+        "textChecked": false,
+        "gradingChecked": false,
+        "translationChecked": false,
+        "directLinkChecked": false,
+        "reviewPass1": "pending",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "research",
       "grading": "unverified",
       "evidenceType": "editorial",
       "source": "Redaktionelle Feststellung",
       "arabicOriginal": "",
       "translationDe": "",
       "directReference": "",
-      "notes": "",
+      "notes": " | Audit 2026-08-07: nicht als approved geführt — Negativfeststellung nur nach Quellenprüfung; zweite Prüfung ausstehend.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -799,17 +914,27 @@
       "prophetId": "musa",
       "category": "biography",
       "claim": "Todesjahr, Todesort und Grabstätte sind nicht authentisch belegt.",
-      "reference": "—"
+      "reference": "—",
+      "absenceStatus": "not-established-in-reviewed-sources",
+      "review": {
+        "sourceChecked": false,
+        "textChecked": false,
+        "gradingChecked": false,
+        "translationChecked": false,
+        "directLinkChecked": false,
+        "reviewPass1": "pending",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "research",
       "grading": "unverified",
       "evidenceType": "editorial",
       "source": "Redaktionelle Feststellung",
       "arabicOriginal": "",
       "translationDe": "",
       "directReference": "",
-      "notes": "Zeitklasse: nicht bestimmbar",
+      "notes": "Zeitklasse: nicht bestimmbar | Audit 2026-08-07: nicht als approved geführt — Negativfeststellung nur nach Quellenprüfung; zweite Prüfung ausstehend.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -821,17 +946,27 @@
       "prophetId": "musa",
       "category": "biography",
       "claim": "Eine moderne historische Jahreszahl darf nicht als islamisch authentische Datierung dargestellt werden.",
-      "reference": "—"
+      "reference": "—",
+      "absenceStatus": "not-established-in-reviewed-sources",
+      "review": {
+        "sourceChecked": false,
+        "textChecked": false,
+        "gradingChecked": false,
+        "translationChecked": false,
+        "directLinkChecked": false,
+        "reviewPass1": "pending",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "final_review",
       "grading": "quran",
       "evidenceType": "quran",
       "source": "Qurʾān",
       "arabicOriginal": "",
       "translationDe": "",
       "directReference": "#quran-surah/28/7",
-      "notes": "",
+      "notes": " | Audit 2026-08-07: Qurʾān-Claim zur Zweitprüfung (reviewPass2) zurückgestuft.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -843,17 +978,26 @@
       "prophetId": "musa",
       "category": "timeline",
       "claim": "Die Mutter setzte Mūsā nach Eingebung Allahs in den Fluss; er wurde im Haus Firʿawns aufgenommen.",
-      "reference": "al-Qaṣaṣ 28:7–13"
+      "reference": "al-Qaṣaṣ 28:7–13",
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": false,
+        "directLinkChecked": true,
+        "reviewPass1": "pending_reaudit",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "final_review",
       "grading": "quran",
       "evidenceType": "quran",
       "source": "Qurʾān",
       "arabicOriginal": "",
       "translationDe": "",
       "directReference": "#quran-surah/28/22",
-      "notes": "",
+      "notes": " | Audit 2026-08-07: Qurʾān-Claim zur Zweitprüfung (reviewPass2) zurückgestuft.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -865,17 +1009,26 @@
       "prophetId": "musa",
       "category": "timeline",
       "claim": "Mūsā gelangte nach Madyan und blieb dort für eine vereinbarte Zeit.",
-      "reference": "al-Qaṣaṣ 28:22–28"
+      "reference": "al-Qaṣaṣ 28:22–28",
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": false,
+        "directLinkChecked": true,
+        "reviewPass1": "pending_reaudit",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "final_review",
       "grading": "quran",
       "evidenceType": "quran",
       "source": "Qurʾān",
       "arabicOriginal": "",
       "translationDe": "",
       "directReference": "#quran-surah/28/27",
-      "notes": "",
+      "notes": " | Audit 2026-08-07: Qurʾān-Claim zur Zweitprüfung (reviewPass2) zurückgestuft.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -887,17 +1040,26 @@
       "prophetId": "musa",
       "category": "family",
       "claim": "In Madyan wurde eine Ehevereinbarung getroffen (eine der beiden Frauen).",
-      "reference": "al-Qaṣaṣ 28:27–28"
+      "reference": "al-Qaṣaṣ 28:27–28",
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": false,
+        "directLinkChecked": true,
+        "reviewPass1": "pending_reaudit",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "research",
       "grading": "unverified",
       "evidenceType": "editorial",
       "source": "Redaktionelle Feststellung",
       "arabicOriginal": "",
       "translationDe": "",
       "directReference": "",
-      "notes": "",
+      "notes": " | Audit 2026-08-07: nicht als approved geführt — Negativfeststellung nur nach Quellenprüfung; zweite Prüfung ausstehend.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -909,17 +1071,27 @@
       "prophetId": "musa",
       "category": "family",
       "claim": "Der Name der Ehefrau ist im Qurʾān nicht genannt und hier nicht als authentisch belegt geführt.",
-      "reference": "—"
+      "reference": "—",
+      "absenceStatus": "not-established-in-reviewed-sources",
+      "review": {
+        "sourceChecked": false,
+        "textChecked": false,
+        "gradingChecked": false,
+        "translationChecked": false,
+        "directLinkChecked": false,
+        "reviewPass1": "pending",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "final_review",
       "grading": "quran",
       "evidenceType": "quran",
       "source": "Qurʾān",
       "arabicOriginal": "",
       "translationDe": "",
       "directReference": "#quran-surah/28/11",
-      "notes": "",
+      "notes": " | Audit 2026-08-07: Qurʾān-Claim zur Zweitprüfung (reviewPass2) zurückgestuft.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -931,17 +1103,26 @@
       "prophetId": "musa",
       "category": "family",
       "claim": "Eine Schwester wird im Rettungskontext erwähnt.",
-      "reference": "al-Qaṣaṣ 28:11–13; Ṭā-Hā 20:40"
+      "reference": "al-Qaṣaṣ 28:11–13; Ṭā-Hā 20:40",
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": false,
+        "directLinkChecked": true,
+        "reviewPass1": "pending_reaudit",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "research",
       "grading": "unverified",
       "evidenceType": "editorial",
       "source": "Redaktionelle Feststellung",
       "arabicOriginal": "",
       "translationDe": "",
       "directReference": "",
-      "notes": "",
+      "notes": " | Audit 2026-08-07: nicht als approved geführt — Negativfeststellung nur nach Quellenprüfung; zweite Prüfung ausstehend.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -953,17 +1134,27 @@
       "prophetId": "musa",
       "category": "family",
       "claim": "Der Name der Schwester ist im Qurʾān nicht genannt.",
-      "reference": "—"
+      "reference": "—",
+      "absenceStatus": "not-established-in-reviewed-sources",
+      "review": {
+        "sourceChecked": false,
+        "textChecked": false,
+        "gradingChecked": false,
+        "translationChecked": false,
+        "directLinkChecked": false,
+        "reviewPass1": "pending",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "final_review",
       "grading": "quran",
       "evidenceType": "quran",
       "source": "Qurʾān",
       "arabicOriginal": "",
       "translationDe": "",
       "directReference": "#quran-surah/20/12",
-      "notes": "",
+      "notes": " | Audit 2026-08-07: Qurʾān-Claim zur Zweitprüfung (reviewPass2) zurückgestuft.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -975,17 +1166,26 @@
       "prophetId": "musa",
       "category": "timeline",
       "claim": "Allah sprach zu Mūsā im heiligen Tal Ṭuwā und sandte ihn mit Zeichen.",
-      "reference": "Ṭā-Hā 20:9–36; an-Nāziʿāt 79:15–20"
+      "reference": "Ṭā-Hā 20:9–36; an-Nāziʿāt 79:15–20",
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": false,
+        "directLinkChecked": true,
+        "reviewPass1": "pending_reaudit",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "final_review",
       "grading": "quran",
       "evidenceType": "quran",
       "source": "Qurʾān",
       "arabicOriginal": "",
       "translationDe": "",
       "directReference": "#quran-surah/26/63",
-      "notes": "",
+      "notes": " | Audit 2026-08-07: Qurʾān-Claim zur Zweitprüfung (reviewPass2) zurückgestuft.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -997,17 +1197,26 @@
       "prophetId": "musa",
       "category": "timeline",
       "claim": "Allah rettete Mūsā und die Banū Isrāʾīl und ließ Firʿawn untergehen.",
-      "reference": "ash-Shuʿarāʾ 26:52–66; Yūnus 10:90–92"
+      "reference": "ash-Shuʿarāʾ 26:52–66; Yūnus 10:90–92",
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": false,
+        "directLinkChecked": true,
+        "reviewPass1": "pending_reaudit",
+        "reviewPass2": "pending"
+      }
     },
     {
-      "verificationStatus": "approved",
+      "verificationStatus": "final_review",
       "grading": "quran",
       "evidenceType": "quran",
       "source": "Qurʾān",
       "arabicOriginal": "",
       "translationDe": "",
       "directReference": "#quran-surah/7/145",
-      "notes": "",
+      "notes": " | Audit 2026-08-07: Qurʾān-Claim zur Zweitprüfung (reviewPass2) zurückgestuft.",
       "isnad": "",
       "work": "",
       "bookChapter": "",
@@ -1019,7 +1228,67 @@
       "prophetId": "musa",
       "category": "timeline",
       "claim": "Mūsā erhielt die Tafeln; in seiner Abwesenheit wurden die Banū Isrāʾīl geprüft.",
-      "reference": "al-Aʿrāf 7:142–154; Ṭā-Hā 20:83–98"
+      "reference": "al-Aʿrāf 7:142–154; Ṭā-Hā 20:83–98",
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": false,
+        "directLinkChecked": true,
+        "reviewPass1": "pending_reaudit",
+        "reviewPass2": "pending"
+      }
+    }
+  ],
+  "audit": {
+    "zeroTrust": true,
+    "updatedAt": "2026-08-07T22:40:30.000Z",
+    "profileStatus": "research",
+    "notes": [
+      "Vollständiges Re-Audit begonnen: approved ohne Doppelprüfung zurückgestuft.",
+      "Editorial-Negativclaims nicht mehr als approved.",
+      "Sunnah-Rahmenhinweise bleiben research bis Wortlaut+Nummer+Isnād vorliegen."
+    ],
+    "reviewPass1": "in_progress",
+    "reviewPass2": "pending",
+    "pipeline": "source_check",
+    "lastAudit": "2026-08-07",
+    "note": "Bestehende approved-Markierungen wurden re-auditiert. Ohne duale Endprüfung kein approved. production=disabled.",
+    "approvedRequiresDualPass": true
+  },
+  "identity": {
+    "name": "Mūsā",
+    "nameAr": "موسى",
+    "quranOrthography": "موسى",
+    "safeVariants": [
+      "Musa",
+      "Moses",
+      "موسى",
+      "Mūsā ibn ʿImrān"
+    ],
+    "prophetStatus": "quran_explicit",
+    "roles": [
+      "nabī",
+      "rasūl"
+    ],
+    "uluAlAzm": true,
+    "people": "Banū Isrāʾīl",
+    "rolesPendingAudit": false
+  },
+  "prophetMuhammadAbout": [
+    {
+      "id": "isra-musa",
+      "arabicOriginal": "",
+      "translationDe": "In den authentischen Berichten über die Nachtreise (al-Isrāʾ) wird erwähnt, dass der Prophet ﷺ Mūsā عليه السلام begegnete. Der genaue Wortlaut und die Nummern sind in den Primärwerken zu prüfen und hier nur als Rahmen vermerkt, bis der Direktnachweis redaktionell vollständig hinterlegt ist.",
+      "sahabiRawi": "u. a. Anas ibn Mālik und andere Wege (nach den Sammlungen)",
+      "work": "Ṣaḥīḥ al-Buḫārī / Ṣaḥīḥ Muslim",
+      "bookChapter": "Kitāb al-Isrāʾ / Kitāb al-Īmān (Wege variieren)",
+      "number": "",
+      "volumePage": "",
+      "grading": "sahih",
+      "verificationStatus": "research",
+      "directReference": "",
+      "notes": "Rahmenhinweis; vollständiger arabischer Text + exakte Nummer folgen nach Isnād-/Stellenprüfung. Nicht in der Hauptansicht, bis approved."
     }
   ]
 }

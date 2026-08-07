@@ -113,10 +113,27 @@
   }
 
 
+  /* Zero-Trust: fehlender Status ≠ freigegeben. Nur explizites approved. */
   function approvedOnly(items) {
     return (items || []).filter(function (x) {
-      return !x.verificationStatus || x.verificationStatus === "approved";
+      return x && x.verificationStatus === "approved";
     });
+  }
+
+  function claimsApproved(profile, claimIds) {
+    var ids = claimIds || [];
+    if (!ids.length) return false;
+    return ids.every(function (id) {
+      var c = claimById(profile, id);
+      return c && c.verificationStatus === "approved";
+    });
+  }
+
+  function isFeatureEnabled(index) {
+    var idx = index || indexCache;
+    var env = (idx && idx.env) || {};
+    if (isTest()) return env.test === "enabled" || env.test === true;
+    return env.production === "enabled" || env.production === true;
   }
 
   function claimById(profile, id) {
@@ -209,6 +226,10 @@
 
   /* —— Spotlight in Mehr (kompakt wie andere Feature-Zeilen, edle Kante/Licht) —— */
   function renderSpotlight() {
+    /* Besucher: kein Spotlight solange production disabled. */
+    if (!isTest()) {
+      if (!indexCache || !isFeatureEnabled(indexCache)) return "";
+    }
     return (
       '<button type="button" class="prophets-spotlight more-feature-row" data-nav="propheten" data-feature-search="die propheten anbiya quran sunnah ueberlieferungen lernen wissen musa" aria-label="Die Propheten öffnen">' +
       '<span class="feature-icon prophets-spotlight__icon" aria-hidden="true">✦</span>' +
@@ -369,20 +390,35 @@
   }
 
   function renderOverview(profile) {
+    var research = profile.profileStatus && profile.profileStatus !== "approved";
     var fields = (profile.overviewFields || [])
       .map(function (f) {
+        var showValue = f.value;
+        var st = f.status || "";
+        var ids = f.claimIds || [];
+        var ok = !ids.length
+          ? /nicht authentisch|nicht bestimmbar|nicht belegt|in prüfung/i.test(String(st))
+          : claimsApproved(profile, ids);
+        /* Positive Werte ohne freigegebene Claims: im Lesertext nicht als Tatsache. */
+        if (ids.length && !ok && f.displayMode === "research_preview") {
+          if (research && isTest()) {
+            showValue = String(f.value || "") + " (Vorschau · nicht freigegeben)";
+          } else {
+            showValue = "In Prüfung — noch nicht freigegeben";
+          }
+        }
         return (
           '<div class="prophets-field">' +
           '<span class="prophets-field__label">' +
           esc(f.label) +
           "</span>" +
           '<span class="prophets-field__value">' +
-          esc(f.value) +
+          esc(showValue) +
           "</span>" +
           '<span class="prophets-status ' +
-          statusClass(f.status) +
+          statusClass(st) +
           '">' +
-          esc(f.status) +
+          esc(st) +
           "</span>" +
           "</div>"
         );
@@ -391,14 +427,21 @@
     return (
       '<section class="prophets-chapter"><h3>Übersicht</h3><div class="prophets-field-grid">' +
       fields +
-      '</div><p class="prophets-note">Jedes Feld ist einzeln belegt oder ausdrücklich als „Nicht authentisch belegt“ geführt.</p></section>'
+      '</div><p class="prophets-note">Jedes Feld ist einzeln belegt oder ausdrücklich als „Nicht authentisch belegt“ geführt. Unsichere Angaben erscheinen nicht als freigegebene Tatsache.</p></section>'
     );
   }
 
   function renderTimeline(profile) {
+    var research = isTest() && profile.profileStatus && profile.profileStatus !== "approved";
     var stations = (profile.timeline || [])
+      .filter(function (st) {
+        var ids = st.claimIds || [];
+        if (!ids.length) return research; /* ohne Claims nur Test-Forschung */
+        return claimsApproved(profile, ids) || research;
+      })
       .map(function (st) {
-        var qLinks = (st.quran || [])
+        var ok = claimsApproved(profile, st.claimIds || []);
+        var qLinks = (st.quran || st.quranRefs || [])
           .map(function (q) {
             var label =
               surahName(q.surah) +
@@ -422,12 +465,14 @@
           '<article class="prophets-station">' +
           "<h4>" +
           esc(st.title) +
+          (!ok ? ' <span class="prophets-badge">Forschung</span>' : "") +
           "</h4>" +
           "<p>" +
-          esc(st.body) +
+          esc(st.body || st.summary || "") +
           "</p>" +
           '<p class="prophets-src">Zeitklasse: ' +
-          esc(st.timeClass || "authentisch belegt") +
+          esc(st.timeClass || st.chronologyStatus || "textually-established") +
+          (!ok ? " · noch nicht freigegeben" : "") +
           "</p>" +
           (qLinks ? '<div class="prophets-link-row">' + qLinks + "</div>" : "") +
           "</article>"
@@ -436,7 +481,7 @@
       .join("");
     return (
       '<section class="prophets-chapter"><h3>Lebensweg</h3><div class="prophets-timeline">' +
-      stations +
+      (stations || '<div class="prophets-empty">Noch keine freigegebenen Lebensstationen.</div>') +
       "</div></section>"
     );
   }
@@ -610,12 +655,20 @@
   }
 
   function renderFamily(profile) {
+    var research = isTest() && profile.profileStatus && profile.profileStatus !== "approved";
     var rows = (profile.family || [])
+      .filter(function (f) {
+        var ids = f.claimIds || [];
+        if (!ids.length) return research;
+        return claimsApproved(profile, ids) || research;
+      })
       .map(function (f) {
+        var ok = claimsApproved(profile, f.claimIds || []);
         return (
           '<article class="prophets-family-card">' +
           "<h4>" +
           esc(f.label) +
+          (!ok ? ' <span class="prophets-badge">Forschung</span>' : "") +
           "</h4>" +
           "<p>" +
           esc(f.summary || "") +
@@ -628,12 +681,17 @@
           statusClass(f.nameStatus) +
           '">' +
           esc(f.nameStatus) +
+          (!ok ? " · noch nicht freigegeben" : "") +
           "</span>" +
           "</article>"
         );
       })
       .join("");
-    return '<section class="prophets-chapter"><h3>Familie</h3>' + rows + "</section>";
+    return (
+      '<section class="prophets-chapter"><h3>Familie</h3>' +
+      (rows || '<div class="prophets-empty">Noch keine freigegebenen Familienangaben.</div>') +
+      "</section>"
+    );
   }
 
   function countApproved(profile, key) {
@@ -735,8 +793,11 @@
     if (!profile) {
       return renderStubDetail(meta || null);
     }
-    if (profile.profileStatus && profile.profileStatus !== "approved") {
-      return '<div class="prophets-empty">Profil noch nicht freigegeben.</div>';
+    var researchMode = profile.profileStatus && profile.profileStatus !== "approved";
+    if (researchMode && !isTest()) {
+      return (
+        '<div class="prophets-empty">Profil noch nicht freigegeben. Zero-Trust: Ungeprüftes erscheint nicht in der Besucher-App.</div>'
+      );
     }
     var sec = section || "overview";
     var tabs = TABS.map(function (t) {
@@ -772,6 +833,12 @@
     });
     if (profile.uluAlAzm) roleChips.push('<span class="prophets-chip">✦ Ulū l-ʿAzm</span>');
 
+    var banner = researchMode
+      ? '<p class="prophets-status prophets-status--na">Zero-Trust · Profilstatus: ' +
+        esc(profile.profileStatus) +
+        " · Lesertext nur aus freigegebenen Claims · Test-Forschungsvorschau</p>"
+      : "";
+
     return (
       '<article class="prophets-detail" data-prophet-detail="' +
       esc(profile.id) +
@@ -790,6 +857,7 @@
       "</p>" +
       (roleChips.length ? '<div class="prophets-detail__roles">' + roleChips.join("") + "</div>" : "") +
       (profile.people ? '<p class="prophets-detail__people">👥 ' + esc(profile.people) + (profile.region ? " · " + esc(profile.region) : "") + "</p>" : "") +
+      banner +
       '<div class="prophets-detail__stats" aria-label="Quellenübersicht">' +
       '<div class="prophets-stat"><b>' + qCount + '</b><span>Qurʾān</span></div>' +
       '<div class="prophets-stat"><b>' + sunnahN + '</b><span>Sunnah</span></div>' +
@@ -872,6 +940,13 @@
         })
         .catch(function () {});
       return header + '<div class="prophets-root"><div class="prophets-empty">Prophetenbibliothek wird geladen…</div></div>';
+    }
+
+    if (!isFeatureEnabled(indexCache)) {
+      return (
+        header +
+        '<div class="prophets-root"><div class="prophets-empty">Prophetenbibliothek ist in dieser Umgebung deaktiviert (production = disabled · Zero-Trust).</div></div>'
+      );
     }
 
     if (parts.prophetId && profileCache[parts.prophetId] === undefined) {
@@ -1039,6 +1114,9 @@
     prefetch: prefetch,
     loadIndex: loadIndex,
     loadProfile: loadProfile,
-    isEnabled: function () { return true; }
+    isEnabled: function () {
+      if (!indexCache) return isTest();
+      return isFeatureEnabled(indexCache);
+    }
   };
 })(window);

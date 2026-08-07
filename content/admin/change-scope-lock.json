@@ -82,6 +82,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "prophets-zero-trust-audit-v601-2026-08-07",
+      "approvedBy": "user-verbindlicher-datenauftrag-propheten-zero-trust",
+      "note": "Zero-Trust Datenaudit Propheten: production=disabled, Test-Befüllung, Besucher-Gate; keine Live-Content-Freigabe",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "assets/prophets/",
+        "test/assets/prophets/",
+        "data/prophets/",
+        "test/data/prophets/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quellenbibliothek-visitor-load-v600-2026-08-07",
       "approvedBy": "user-explicit-live-push",
       "reason": "Nutzer: Quellenbibliothek Besucher leer/0 — sofort live pushen",
