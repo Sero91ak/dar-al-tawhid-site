@@ -4,7 +4,8 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v587-visual-authority';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v588-visual-past-purge';
+const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
 const OFFLINE_PREP_PROGRESS_KEY = '/__offline_prep_progress_v1__';
@@ -424,12 +425,40 @@ self.addEventListener('install', (event) => {
   );
 });
 
+async function purgePastVisualCaches() {
+  const keys = await caches.keys();
+  await Promise.all(
+    keys
+      .filter((key) => key.startsWith('dar-al-tawhid-offline-light-') && key !== CACHE_VERSION)
+      .map((key) => caches.delete(key))
+  );
+  try {
+    const cache = await caches.open(CACHE_VERSION);
+    const requests = await cache.keys();
+    await Promise.all(
+      requests
+        .filter((req) => {
+          try {
+            const u = new URL(req.url);
+            if (VISUAL_SHELL_KEYS.includes(u.pathname)) return true;
+            if (/\.(css|js)(\?|$)/i.test(u.pathname)) return true;
+            if (u.pathname === '/manifest.json' || u.pathname === '/test/manifest.json') return true;
+            return false;
+          } catch (e) {
+            return false;
+          }
+        })
+        .map((req) => cache.delete(req))
+    );
+  } catch (e) {}
+}
+
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) => Promise.all(
-      keys.filter((key) => key.startsWith('dar-al-tawhid-offline-light-') && key !== CACHE_VERSION)
-        .map((key) => caches.delete(key))
-    )).then(() => self.clients.claim())
+    purgePastVisualCaches()
+      .then(() => self.clients.claim())
+      .then(() => postToClients({ type: 'VISUAL_CACHE_INVALIDATED', version: CACHE_VERSION }))
+      .catch(() => self.clients.claim())
   );
 });
 
@@ -538,17 +567,12 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Styles/Scripts: network-first, damit neue Optik nicht von altem Cache überdeckt wird.
+  // Styles/Scripts: network-only bevorzugt – alte Optik darf nicht aus Cache gewinnen.
+  // Offline-Fallback nur wenn Netz fehlt; erfolgreiche Antworten werden nicht mehr
+  // als dauerhafte visuelle Quelle zurückgeschrieben.
   if (request.destination === 'style' || request.destination === 'script' || /\.(css|js)(\?|$)/i.test(url.pathname)) {
     event.respondWith(
       fetch(request, { cache: 'no-store' })
-        .then((response) => {
-          if (response && response.ok) {
-            const copy = response.clone();
-            caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy)).catch(() => null);
-          }
-          return response;
-        })
         .catch(() => caches.match(request))
     );
     return;
