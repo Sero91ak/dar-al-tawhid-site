@@ -3,13 +3,13 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-07T10:00:19.033Z",
+  "updatedAt": "2026-08-07T10:10:19.029Z",
   "usersChecked": 9,
   "duaCandidates": 0,
-  "recCandidates": 8,
-  "sent": 8,
+  "recCandidates": 0,
+  "sent": 0,
   "skipped": 0,
-  "duplicates": 9,
+  "duplicates": 17,
   "errors": 0,
   "dailyContentDate": "2026-08-07",
   "currentRecommendation": {
@@ -24,15 +24,5 @@
     "category": "Vergebung"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "recommendation",
-      "batch": true,
-      "count": 8,
-      "contentId": "nuzul-allahs-ist-haqq-424",
-      "recipients": "12782778-bb0a-4977-b292-068ccbc60064",
-      "ok": true,
-      "invalid": 0
-    }
-  ]
+  "responses": []
 }
