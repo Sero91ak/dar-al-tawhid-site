@@ -87,6 +87,26 @@
       .join(" · ");
   }
 
+  var PROPHET_EMOJI = {
+    adam:"🌱", nuh:"🚢", hud:"🏜️", salih:"🐪", ibrahim:"🔥", lut:"🏙️",
+    ismail:"⛺", ishaq:"👶", yaqub:"👨‍👦", yusuf:"🌙", ayyub:"🤲",
+    shuayb:"⚖️", musa:"🌊", harun:"📜", dawud:"🗡️", sulayman:"👑",
+    ilyas:"⚡", alyasa:"🌿", yunus:"🐋", zakariyya:"🕌", yahya:"💧",
+    isa:"✨", muhammad:"🌟", "dhul-kifl":"📘", uzayr:"📖"
+  };
+
+  function prophetEmoji(id, p) {
+    if (PROPHET_EMOJI[id]) return PROPHET_EMOJI[id];
+    if (p && p.uluAlAzm) return "✦";
+    if (p && p.prophetStatus === "disputed") return "❔";
+    return "🕊️";
+  }
+
+  function sectionCountLabel(n) {
+    return String(n) + (n === 1 ? " Eintrag" : " Einträge");
+  }
+
+
   function approvedOnly(items) {
     return (items || []).filter(function (x) {
       return !x.verificationStatus || x.verificationStatus === "approved";
@@ -186,10 +206,12 @@
     if (!isTest()) return "";
     return (
       '<button type="button" class="prophets-spotlight" data-nav="propheten" aria-label="Die Propheten öffnen">' +
-      '<span class="prophets-spotlight__eyebrow">Lernen &amp; Wissen</span>' +
+      '<span class="prophets-spotlight__eyebrow"><span aria-hidden="true">✦</span> Lernen &amp; Wissen</span>' +
       '<div class="prophets-spotlight__title">DIE PROPHETEN</div>' +
+      '<div class="prophets-spotlight__row">' +
       '<div class="prophets-spotlight__ar" lang="ar" dir="rtl">الأنبياء</div>' +
       '<p class="prophets-spotlight__meta">Qurʾān · Sunnah · authentische Überlieferungen</p>' +
+      "</div>" +
       '<span class="prophets-spotlight__cta">Entdecken <span aria-hidden="true">›</span></span>' +
       '<span class="prophets-spotlight__ornament" aria-hidden="true"></span>' +
       "</button>"
@@ -249,17 +271,19 @@
     var roles = rolesLabel(p.roles);
     var meta = [roles, p.people].filter(Boolean).join(" · ");
     var tags = p.uluAlAzm
-      ? "Ulū l-ʿAzm · Qurʾān"
+      ? "Ulū l-ʿAzm"
       : p.prophetStatus === "disputed"
-        ? "Umstrittene Einordnung"
-        : "Qurʾān · geprüfte Überlieferungen";
+        ? "Umstritten"
+        : "Qurʾān";
+    var emoji = prophetEmoji(p.id, p);
     return (
       '<button type="button" class="prophets-row' +
       (active ? " is-active" : "") +
       '" data-prophet-id="' +
       esc(p.id) +
       '">' +
-      "<span>" +
+      '<span class="prophets-row__icon" aria-hidden="true">' + emoji + "</span>" +
+      '<span class="prophets-row__body">' +
       '<span class="prophets-row__name">' +
       esc(p.name) +
       ' <span class="prophets-row__honor">' +
@@ -291,52 +315,45 @@
       );
     }).join("");
 
+    function section(title, items) {
+      if (!items.length) return "";
+      return (
+        '<div class="prophets-section-label"><b>' +
+        esc(title) +
+        "</b><span>" +
+        esc(sectionCountLabel(items.length)) +
+        '</span></div><div class="prophets-list">' +
+        items.map(function (p) { return renderRow(p, activeId); }).join("") +
+        "</div>"
+      );
+    }
+
     var body = "";
-    if (packs.ulu.length) {
-      body +=
-        '<div class="prophets-section-label">Ulū l-ʿAzm</div><div class="prophets-list">' +
-        packs.ulu.map(function (p) {
-          return renderRow(p, activeId);
-        }).join("") +
-        "</div>";
-    }
-    if (packs.established.length) {
-      body +=
-        '<div class="prophets-section-label">Belegte Propheten</div><div class="prophets-list">' +
-        packs.established
-          .map(function (p) {
-            return renderRow(p, activeId);
-          })
-          .join("") +
-        "</div>";
-    }
-    if (packs.disputed.length) {
-      body +=
-        '<div class="prophets-section-label">Umstrittene Einordnung</div><div class="prophets-list">' +
-        packs.disputed
-          .map(function (p) {
-            return renderRow(p, activeId);
-          })
-          .join("") +
-        "</div>";
-    }
+    body += section("Ulū l-ʿAzm", packs.ulu);
+    body += section("Belegte Propheten", packs.established);
+    body += section("Umstrittene Einordnung", packs.disputed);
     if (!packs.ulu.length && !packs.established.length && !packs.disputed.length) {
       body = '<div class="prophets-empty">Keine Treffer für diese Suche.</div>';
     }
 
     return (
       '<div class="prophets-hero">' +
+      '<span class="prophets-hero__eyebrow">Propheten · الأنبياء</span>' +
       "<h1>DIE PROPHETEN</h1>" +
+      '<div class="prophets-hero__title-row">' +
       '<div class="prophets-hero__ar" lang="ar" dir="rtl">الأنبياء</div>' +
+      "</div>" +
       "<p>" +
       esc(index.intro || "") +
       "</p>" +
       "</div>" +
       '<hr class="prophets-rule" />' +
+      '<div class="prophets-search-block">' +
       '<input class="prophets-search" id="prophetsSearch" type="search" placeholder="Prophet, Volk, Ereignis, Sūrah oder Aussage suchen" value="' +
       esc(query) +
       '" autocomplete="off" />' +
-      '<div class="prophets-filters">' +
+      "</div>" +
+      '<div class="prophets-filters" role="toolbar" aria-label="Propheten filtern">' +
       filtersHtml +
       "</div>" +
       '<hr class="prophets-rule" />' +
@@ -372,9 +389,9 @@
       })
       .join("");
     return (
-      '<section class="prophets-chapter"><h3>Übersicht</h3>' +
+      '<section class="prophets-chapter"><h3>Übersicht</h3><div class="prophets-field-grid">' +
       fields +
-      '<p class="prophets-note">Jedes Feld ist einzeln belegt oder ausdrücklich als „Nicht authentisch belegt“ geführt.</p></section>'
+      '</div><p class="prophets-note">Jedes Feld ist einzeln belegt oder ausdrücklich als „Nicht authentisch belegt“ geführt.</p></section>'
     );
   }
 
@@ -412,7 +429,7 @@
           '<p class="prophets-src">Zeitklasse: ' +
           esc(st.timeClass || "authentisch belegt") +
           "</p>" +
-          qLinks +
+          (qLinks ? '<div class="prophets-link-row">' + qLinks + "</div>" : "") +
           "</article>"
         );
       })
@@ -478,11 +495,11 @@
           (r.event ? " · " + esc(r.event) : "") +
           "</p>" +
           (r.context ? '<p class="prophets-quote__de">' + esc(r.context) + "</p>" : "") +
-          '<button type="button" class="prophets-link" data-quran-surah="' +
+          '<div class="prophets-link-row"><button type="button" class="prophets-link" data-quran-surah="' +
           esc(r.surah) +
           '" data-quran-ayah="' +
           esc(r.ayah) +
-          '">Im Qurʾān öffnen</button>' +
+          '">📖 Im Qurʾān öffnen</button></div>' +
           "</article>"
         );
       })
@@ -555,7 +572,13 @@
     if (!items.length) {
       return (
         '<section class="prophets-chapter"><h3>Der Prophet Muḥammad ﷺ über ihn</h3>' +
-        '<div class="prophets-empty">Freigegebene Aḥādīṯ folgen nach abgeschlossener Stellen- und Isnād-Prüfung. Entwürfe bleiben unsichtbar.</div></section>'
+        '<article class="prophets-quote">' +
+        '<span class="prophets-badge">Sunnah</span>' +
+        '<p class="prophets-quote__de">' +
+        esc(profile.sunnahPrepNote || "Freigegebene Aḥādīṯ folgen nach abgeschlossener Stellen- und Isnād-Prüfung. Entwürfe bleiben unsichtbar.") +
+        "</p>" +
+        '<p class="prophets-status prophets-status--na">In Prüfung · noch nicht freigegeben</p>' +
+        "</article></section>"
       );
     }
     return (
@@ -687,9 +710,12 @@
       '<h2 class="prophets-detail__name">' + esc(meta.name) + "</h2>" +
       '<div class="prophets-detail__ar" lang="ar" dir="rtl">' + esc(meta.nameAr || "") + "</div>" +
       '<p class="prophets-detail__honor">' + esc(meta.honorific || "") + "</p>" +
-      '<p class="prophets-detail__roles">' + esc(rolesLabel(meta.roles)) + (meta.uluAlAzm ? " · Ulū l-ʿAzm" : "") + "</p>" +
-      (meta.people ? '<p class="prophets-detail__people">' + esc(meta.people) + "</p>" : "") +
-      "</header><hr class=\"prophets-rule\" />" +
+      '<div class="prophets-detail__roles">' +
+      (rolesLabel(meta.roles) ? '<span class="prophets-chip">' + esc(rolesLabel(meta.roles)) + "</span>" : "") +
+      (meta.uluAlAzm ? '<span class="prophets-chip">✦ Ulū l-ʿAzm</span>' : "") +
+      "</div>" +
+      (meta.people ? '<p class="prophets-detail__people">👥 ' + esc(meta.people) + "</p>" : "") +
+      '</header><hr class="prophets-rule" />' +
       '<section class="prophets-chapter"><h3>' + (disputed ? "Umstrittene Einordnung" : "Profil") + "</h3>" +
       "<p class=\"prophets-quote__de\">" +
       esc(meta.note || "Die vollständige Wissensakte wird nach dem Referenzprofil Mūsā schrittweise mit geprüften Claims aufgebaut. Es werden keine ungeprüften biografischen Angaben ergänzt.") +
@@ -735,28 +761,43 @@
     else if (sec === "quellen") body = renderQuellen(profile);
     else body = renderOverview(profile);
 
+    var qCount = (profile.quranRefs || []).length;
+    var stQ = approvedOnly((profile.statements && profile.statements.quran) || []).length;
+    var stS = approvedOnly((profile.statements && profile.statements.sunnah) || []).length;
+    var aboutN = approvedOnly(profile.prophetAbout || []).length;
+    var sunnahN = aboutN + stS;
+    var roleChips = [];
+    (profile.roles || []).forEach(function (r) {
+      roleChips.push('<span class="prophets-chip">' + esc(rolesLabel([r]) || r) + "</span>");
+    });
+    if (profile.uluAlAzm) roleChips.push('<span class="prophets-chip">✦ Ulū l-ʿAzm</span>');
+
     return (
       '<article class="prophets-detail" data-prophet-detail="' +
       esc(profile.id) +
       '">' +
       '<header class="prophets-detail__head">' +
+      '<div class="prophets-detail__head-top">' +
       '<h2 class="prophets-detail__name">' +
       esc(profile.name) +
       "</h2>" +
       '<div class="prophets-detail__ar" lang="ar" dir="rtl">' +
       esc(profile.nameAr) +
       "</div>" +
+      "</div>" +
       '<p class="prophets-detail__honor">' +
       esc(profile.honorific || "") +
       "</p>" +
-      '<p class="prophets-detail__roles">' +
-      esc(rolesLabel(profile.roles)) +
-      (profile.uluAlAzm ? " · Ulū l-ʿAzm" : "") +
-      "</p>" +
-      (profile.people ? '<p class="prophets-detail__people">' + esc(profile.people) + "</p>" : "") +
+      (roleChips.length ? '<div class="prophets-detail__roles">' + roleChips.join("") + "</div>" : "") +
+      (profile.people ? '<p class="prophets-detail__people">👥 ' + esc(profile.people) + (profile.region ? " · " + esc(profile.region) : "") + "</p>" : "") +
+      '<div class="prophets-detail__stats" aria-label="Quellenübersicht">' +
+      '<div class="prophets-stat"><b>' + qCount + '</b><span>Qurʾān</span></div>' +
+      '<div class="prophets-stat"><b>' + sunnahN + '</b><span>Sunnah</span></div>' +
+      '<div class="prophets-stat"><b>' + (stQ + stS) + '</b><span>Aussagen</span></div>' +
+      "</div>" +
       "</header>" +
       '<hr class="prophets-rule" />' +
-      '<nav class="prophets-tabs" aria-label="Prophetenkapitel">' +
+      '<nav class="prophets-tabs" aria-label="Propheten-Abschnitte">' +
       tabs +
       "</nav>" +
       body +
@@ -773,7 +814,7 @@
       detailHtml = renderDetail(profile, routeParts.section, state, findMeta(activeId));
     } else if (dual) {
       detailHtml =
-        '<div class="prophets-empty">Wähle links einen Propheten, um die Wissensakte zu öffnen.</div>';
+        '<div class="prophets-pane-empty">✦ Wähle links einen Propheten,<br>um die edle Wissensakte zu öffnen.</div>';
     }
 
     if (!dual && activeId) {
