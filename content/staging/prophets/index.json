@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "lastUpdated": "2026-08-07",
+  "searchPlaceholder": "Prophet, Volk, Ereignis, Sūrah oder Aussage suchen",
+  "intro": {
+    "eyebrow": "DIE PROPHETEN",
+    "arabic": "الأنبياء",
+    "description": "Was Qurʾān, authentische Sunnah und zuverlässig belegte frühe Überlieferungen über die Propheten berichten."
+  },
+  "ululAzm": [
+    "musa"
+  ],
+  "prophets": [
+    {
+      "id": "musa",
+      "name": "Mūsā",
+      "arabicName": "موسى",
+      "honorific": "عليه السلام",
+      "displayTitle": "MŪSĀ",
+      "prophetStatus": "quran_explicit",
+      "roles": [
+        "Nabī",
+        "Rasūl"
+      ],
+      "people": "Banū Isrāʾīl",
+      "region": "Miṣr · Madyan · Sinai",
+      "metaLine": "Qurʾān · authentische Sunnah · geprüfte Überlieferungen",
+      "summary": "Referenzprofil für Phase 1 mit chronologischer Biografie, Qurʾān-Fundstellen, direkten Aussagen und claim-basierter Quellenstruktur.",
+      "searchTerms": [
+        "musa",
+        "mūsā",
+        "موسى",
+        "moses",
+        "firawn",
+        "firʿawn",
+        "meer",
+        "madyan",
+        "banu israil",
+        "banū isrāʾīl",
+        "harun",
+        "hārūn",
+        "stock",
+        "ta ha",
+        "ṭā hā",
+        "20:25",
+        "rabbi ishrah li sadri"
+      ],
+      "profilePath": "/content/staging/prophets/musa.json"
+    }
+  ],
+  "disputedPeople": [
+    {
+      "id": "khidr",
+      "name": "al-Ḫiḍr",
+      "arabicName": "الخضر",
+      "prophetStatus": "scholarly_disputed",
+      "note": "Sein Prophetentum wird in den verwendeten Daten nicht als eindeutig feststehend veröffentlicht."
+    },
+    {
+      "id": "luqman",
+      "name": "Luqmān",
+      "arabicName": "لقمان",
+      "prophetStatus": "not_established",
+      "note": "Im Qurʾān erwähnt, aber in dieser Struktur nicht als eindeutig belegter Prophet geführt."
+    },
+    {
+      "id": "dhul-qarnayn",
+      "name": "Ḏū l-Qarnayn",
+      "arabicName": "ذو القرنين",
+      "prophetStatus": "scholarly_disputed",
+      "note": "Sein Status wird getrennt behandelt und erscheint nicht in der Hauptliste belegter Propheten."
+    }
+  ]
+}

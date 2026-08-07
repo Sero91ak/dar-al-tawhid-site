@@ -1,0 +1,645 @@
+{
+  "id": "musa",
+  "name": "Mūsā",
+  "arabicName": "موسى",
+  "honorific": "عليه السلام",
+  "displayTitle": "MŪSĀ",
+  "prophetStatus": "quran_explicit",
+  "roles": [
+    "Nabī",
+    "Rasūl"
+  ],
+  "people": "Banū Isrāʾīl",
+  "region": "Miṣr · Madyan · Sinai",
+  "mission": "Ruf zu Allah gegen Firʿawn, Befreiung von Banū Isrāʾīl und Überbringung der Schrift.",
+  "claims": [
+    {
+      "id": "musa-prophet-status",
+      "category": "identity",
+      "claim": "Mūsā ist im Qurʾān ausdrücklich als Gesandter bezeichnet.",
+      "status": "verified",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "sourceLocation": "al-Qaṣaṣ 28:7",
+      "arabicOriginal": "وَجَاعِلُوهُ مِنَ ٱلۡمُرۡسَلِينَ",
+      "translationDe": "Und Wir werden ihn zu einem der Gesandten machen.",
+      "narrator": "",
+      "isnad": "",
+      "grading": "quran",
+      "gradingSource": "Qurʾān",
+      "directReference": {
+        "kind": "quran",
+        "surah": 28,
+        "ayah": 7
+      },
+      "notes": "",
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "musa-brother-harun",
+      "category": "family",
+      "claim": "Hārūn war der Bruder von Mūsā.",
+      "status": "verified",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "sourceLocation": "Ṭā-Hā 20:29–30",
+      "arabicOriginal": "وَٱجۡعَل لِّي وَزِيرٗا مِّنۡ أَهۡلِي ۝ هَٰرُونَ أَخِي",
+      "translationDe": "Und bestimme mir einen Beistand aus meiner Familie: Hārūn, meinen Bruder.",
+      "narrator": "",
+      "isnad": "",
+      "grading": "quran",
+      "gradingSource": "Qurʾān",
+      "directReference": {
+        "kind": "quran",
+        "surah": 20,
+        "ayah": 29
+      },
+      "notes": "",
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "musa-mother-mentioned",
+      "category": "family",
+      "claim": "Die Mutter von Mūsā wird im Qurʾān erwähnt, aber ihr Name ist in den verwendeten Belegen nicht authentisch festgelegt.",
+      "status": "partial",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "sourceLocation": "al-Qaṣaṣ 28:7",
+      "arabicOriginal": "وَأَوۡحَيۡنَآ إِلَىٰٓ أُمِّ مُوسَىٰٓ",
+      "translationDe": "Und Wir gaben der Mutter Mūsās ein ...",
+      "narrator": "",
+      "isnad": "",
+      "grading": "quran",
+      "gradingSource": "Qurʾān",
+      "directReference": {
+        "kind": "quran",
+        "surah": 28,
+        "ayah": 7
+      },
+      "notes": "Der Name der Mutter wird in dieser Phase nicht als authentisch feststehender Datensatz veröffentlicht.",
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "musa-people-banu-israil",
+      "category": "people",
+      "claim": "Mūsā wurde mit der Führung und Befreiung von Banū Isrāʾīl konfrontiert und ihnen gegenüber gesandt.",
+      "status": "verified",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "sourceLocation": "aš-Šuʿarāʾ 26:17",
+      "arabicOriginal": "أَنۡ أَرۡسِلۡ مَعَنَا بَنِيٓ إِسۡرَٰٓءِيلَ",
+      "translationDe": "Sende mit uns Banū Isrāʾīl fort.",
+      "narrator": "",
+      "isnad": "",
+      "grading": "quran",
+      "gradingSource": "Qurʾān",
+      "directReference": {
+        "kind": "quran",
+        "surah": 26,
+        "ayah": 17
+      },
+      "notes": "",
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "musa-madyan-journey",
+      "category": "biography",
+      "claim": "Mūsā wandte sich nach Madyan und erreichte dort den Wasserplatz.",
+      "status": "verified",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "sourceLocation": "al-Qaṣaṣ 28:22–23",
+      "arabicOriginal": "وَلَمَّا تَوَجَّهَ تِلۡقَآءَ مَدۡيَنَ ... وَلَمَّا وَرَدَ مَآءَ مَدۡيَنَ",
+      "translationDe": "Und als er sich Madyan zuwandte ... Und als er zum Wasser von Madyan kam ...",
+      "narrator": "",
+      "isnad": "",
+      "grading": "quran",
+      "gradingSource": "Qurʾān",
+      "directReference": {
+        "kind": "quran",
+        "surah": 28,
+        "ayah": 22
+      },
+      "notes": "",
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "musa-calling-at-tur",
+      "category": "biography",
+      "claim": "Die Berufung von Mūsā erfolgte nach seiner Ankunft am Feuer im gesegneten Tal.",
+      "status": "verified",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "sourceLocation": "al-Qaṣaṣ 28:29–32",
+      "arabicOriginal": "فَلَمَّآ أَتَىٰهَا نُودِيَ مِن شَٰطِئِ ٱلۡوَادِ ٱلۡأَيۡمَنِ ... يَٰمُوسَىٰٓ إِنِّيٓ أَنَا ٱللَّهُ رَبُّ ٱلۡعَٰلَمِينَ",
+      "translationDe": "Als er dort ankam, wurde er vom rechten Ufer des Tales ... zugerufen: O Mūsā, gewiss, Ich bin Allah, der Herr der Weltenbewohner.",
+      "narrator": "",
+      "isnad": "",
+      "grading": "quran",
+      "gradingSource": "Qurʾān",
+      "directReference": {
+        "kind": "quran",
+        "surah": 28,
+        "ayah": 30
+      },
+      "notes": "",
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "musa-unintentional-killing-repentance",
+      "category": "biography",
+      "claim": "Mūsā schlug einen Mann und bat danach Allah um Vergebung.",
+      "status": "verified",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "sourceLocation": "al-Qaṣaṣ 28:15–16",
+      "arabicOriginal": "فَوَكَزَهُۥ مُوسَىٰ فَقَضَىٰ عَلَيۡهِ ... قَالَ رَبِّ إِنِّي ظَلَمۡتُ نَفۡسِي فَٱغۡفِرۡ لِي",
+      "translationDe": "Da schlug ihn Mūsā mit der Faust und brachte ihn so um ... Er sagte: Mein Herr, ich habe mir selbst Unrecht zugefügt, so vergib mir.",
+      "narrator": "",
+      "isnad": "",
+      "grading": "quran",
+      "gradingSource": "Qurʾān",
+      "directReference": {
+        "kind": "quran",
+        "surah": 28,
+        "ayah": 15
+      },
+      "notes": "",
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "musa-split-sea",
+      "category": "events",
+      "claim": "Allah befahl Mūsā, mit seinem Stock auf das Meer zu schlagen, worauf es sich spaltete.",
+      "status": "verified",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "sourceLocation": "aš-Šuʿarāʾ 26:63",
+      "arabicOriginal": "فَأَوۡحَيۡنَآ إِلَىٰ مُوسَىٰٓ أَنِ ٱضۡرِب بِّعَصَاكَ ٱلۡبَحۡرَۖ فَٱنفَلَقَ",
+      "translationDe": "Da gaben Wir Mūsā ein: Schlage mit deinem Stock auf das Meer. Da spaltete es sich.",
+      "narrator": "",
+      "isnad": "",
+      "grading": "quran",
+      "gradingSource": "Qurʾān",
+      "directReference": {
+        "kind": "quran",
+        "surah": 26,
+        "ayah": 63
+      },
+      "notes": "",
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "musa-book-given",
+      "category": "revelation",
+      "claim": "Mūsā erhielt die Schrift als Rechtleitung und Barmherzigkeit.",
+      "status": "verified",
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "sourceLocation": "al-Qaṣaṣ 28:43",
+      "arabicOriginal": "وَلَقَدۡ ءَاتَيۡنَا مُوسَى ٱلۡكِتَٰبَ",
+      "translationDe": "Und Wir gaben ja Mūsā die Schrift ...",
+      "narrator": "",
+      "isnad": "",
+      "grading": "quran",
+      "gradingSource": "Qurʾān",
+      "directReference": {
+        "kind": "quran",
+        "surah": 28,
+        "ayah": 43
+      },
+      "notes": "",
+      "verificationStatus": "approved"
+    }
+  ],
+  "overviewFields": [
+    {
+      "label": "Name",
+      "value": "Mūsā",
+      "verificationStatus": "approved",
+      "claimIds": [
+        "musa-prophet-status"
+      ]
+    },
+    {
+      "label": "Arabischer Name",
+      "value": "موسى",
+      "verificationStatus": "approved",
+      "claimIds": [
+        "musa-prophet-status"
+      ]
+    },
+    {
+      "label": "Namensvarianten",
+      "value": "Mūsā · Musa · Moses",
+      "verificationStatus": "approved",
+      "claimIds": []
+    },
+    {
+      "label": "Nabī / Rasūl",
+      "value": "Nabī · Rasūl",
+      "verificationStatus": "approved",
+      "claimIds": [
+        "musa-prophet-status"
+      ]
+    },
+    {
+      "label": "Volk",
+      "value": "Banū Isrāʾīl",
+      "verificationStatus": "approved",
+      "claimIds": [
+        "musa-people-banu-israil"
+      ]
+    },
+    {
+      "label": "Region",
+      "value": "Miṣr · Madyan · Sinai",
+      "verificationStatus": "approved",
+      "claimIds": [
+        "musa-madyan-journey",
+        "musa-calling-at-tur"
+      ]
+    },
+    {
+      "label": "Auftrag",
+      "value": "Ruf zu Allah gegen Firʿawn und Führung von Banū Isrāʾīl.",
+      "verificationStatus": "approved",
+      "claimIds": [
+        "musa-people-banu-israil"
+      ]
+    },
+    {
+      "label": "Geburtsjahr",
+      "value": "Nicht authentisch belegt",
+      "verificationStatus": "approved",
+      "claimIds": []
+    },
+    {
+      "label": "Todesjahr",
+      "value": "Nicht authentisch belegt",
+      "verificationStatus": "approved",
+      "claimIds": []
+    }
+  ],
+  "familyFields": [
+    {
+      "label": "Mutter",
+      "value": "Im Qurʾān erwähnt. Name in dieser Phase nicht authentisch belegt.",
+      "verificationStatus": "approved",
+      "claimIds": [
+        "musa-mother-mentioned"
+      ]
+    },
+    {
+      "label": "Bruder",
+      "value": "Hārūn",
+      "verificationStatus": "approved",
+      "claimIds": [
+        "musa-brother-harun"
+      ]
+    },
+    {
+      "label": "Vater",
+      "value": "Keine zuverlässige Angabe in den verwendeten freigegebenen Quellen.",
+      "verificationStatus": "approved",
+      "claimIds": []
+    },
+    {
+      "label": "Ehefrau",
+      "value": "Im Qurʾān nicht namentlich festgelegt.",
+      "verificationStatus": "approved",
+      "claimIds": []
+    },
+    {
+      "label": "Kinder",
+      "value": "Keine zuverlässige Angabe in den verwendeten freigegebenen Quellen.",
+      "verificationStatus": "approved",
+      "claimIds": []
+    }
+  ],
+  "biographySections": [
+    {
+      "id": "birth-rescue",
+      "title": "Geburt und Rettung",
+      "summary": "Der Qurʾān berichtet, dass Allah der Mutter Mūsās eingab, ihn bei Gefahr ins Wasser zu setzen, und versprach, ihn zurückzubringen und ihn zu einem der Gesandten zu machen.",
+      "verificationStatus": "approved",
+      "claimIds": [
+        "musa-prophet-status",
+        "musa-mother-mentioned"
+      ]
+    },
+    {
+      "id": "city-incident",
+      "title": "Der Vorfall in der Stadt und die Reue",
+      "summary": "Mūsā geriet in einen Konflikt zwischen zwei Männern, schlug einen von ihnen und bat danach Allah um Vergebung.",
+      "verificationStatus": "approved",
+      "claimIds": [
+        "musa-unintentional-killing-repentance"
+      ]
+    },
+    {
+      "id": "madyan",
+      "title": "Madyan",
+      "summary": "Nach seiner Flucht wandte sich Mūsā nach Madyan, half dort zwei Frauen am Wasserplatz und blieb für eine vereinbarte Frist.",
+      "verificationStatus": "approved",
+      "claimIds": [
+        "musa-madyan-journey"
+      ]
+    },
+    {
+      "id": "calling",
+      "title": "Die Berufung",
+      "summary": "Auf dem Rückweg wurde Mūsā am gesegneten Ort angesprochen, erhielt die Zeichen des Stocks und der leuchtenden Hand und wurde zu Firʿawn gesandt.",
+      "verificationStatus": "approved",
+      "claimIds": [
+        "musa-calling-at-tur"
+      ]
+    },
+    {
+      "id": "firawn-sea",
+      "title": "Firʿawn und das Meer",
+      "summary": "Mūsā stellte Firʿawn die Zeichen vor. Als Banū Isrāʾīl verfolgt wurden, schlug er auf Allahs Befehl mit dem Stock auf das Meer, worauf es sich spaltete.",
+      "verificationStatus": "approved",
+      "claimIds": [
+        "musa-split-sea",
+        "musa-people-banu-israil"
+      ]
+    },
+    {
+      "id": "scripture",
+      "title": "Die Schrift",
+      "summary": "Der Qurʾān nennt ausdrücklich, dass Mūsā die Schrift erhielt als einsichtbringende Zeichen, Rechtleitung und Barmherzigkeit.",
+      "verificationStatus": "approved",
+      "claimIds": [
+        "musa-book-given"
+      ]
+    }
+  ],
+  "quranReferences": [
+    {
+      "id": "musa-q28-3-13",
+      "title": "Geburt, Aussetzung und Rückgabe an seine Mutter",
+      "range": "al-Qaṣaṣ 28:3–13",
+      "surah": 28,
+      "ayahStart": 3,
+      "ayahEnd": 13,
+      "classification": "Ereignis",
+      "note": "Grundlage für die frühe Lebensphase und den Hinweis, dass er zu den Gesandten gehören wird.",
+      "claimIds": [
+        "musa-prophet-status",
+        "musa-mother-mentioned"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "musa-q28-15-16",
+      "title": "Der Vorfall in der Stadt und die Reue",
+      "range": "al-Qaṣaṣ 28:15–16",
+      "surah": 28,
+      "ayahStart": 15,
+      "ayahEnd": 16,
+      "classification": "Biografie",
+      "note": "Der Qurʾān nennt den Schlag, den Tod des Mannes und die unmittelbar folgende Bitte um Vergebung.",
+      "claimIds": [
+        "musa-unintentional-killing-repentance"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "musa-q28-22-28",
+      "title": "Flucht und Madyan",
+      "range": "al-Qaṣaṣ 28:22–28",
+      "surah": 28,
+      "ayahStart": 22,
+      "ayahEnd": 28,
+      "classification": "Biografie",
+      "note": "Weg nach Madyan, Hilfe am Wasser und die Verbindung zu der Familie des alten Mannes.",
+      "claimIds": [
+        "musa-madyan-journey"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "musa-q28-29-35",
+      "title": "Berufung, Stock, Hand und Bitte um Hārūn",
+      "range": "al-Qaṣaṣ 28:29–35",
+      "surah": 28,
+      "ayahStart": 29,
+      "ayahEnd": 35,
+      "classification": "Berufung",
+      "note": "Berufung am Feuer, Zeichen und die Bitte, Hārūn zur Stärkung mitzusenden.",
+      "claimIds": [
+        "musa-calling-at-tur",
+        "musa-brother-harun"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "musa-q20-25-35",
+      "title": "Direkte Bitte von Mūsā",
+      "range": "Ṭā-Hā 20:25–35",
+      "surah": 20,
+      "ayahStart": 25,
+      "ayahEnd": 35,
+      "classification": "Aussagen",
+      "note": "Die bekannte Bittschrift von Mūsā vor seiner Mission.",
+      "claimIds": [
+        "musa-brother-harun"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "musa-q26-17-18",
+      "title": "Banū Isrāʾīl und Firʿawn",
+      "range": "aš-Šuʿarāʾ 26:17–18",
+      "surah": 26,
+      "ayahStart": 17,
+      "ayahEnd": 18,
+      "classification": "Mission",
+      "note": "Mūsā fordert die Freigabe von Banū Isrāʾīl.",
+      "claimIds": [
+        "musa-people-banu-israil"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "musa-q26-63",
+      "title": "Die Spaltung des Meeres",
+      "range": "aš-Šuʿarāʾ 26:63",
+      "surah": 26,
+      "ayahStart": 63,
+      "ayahEnd": 63,
+      "classification": "Ereignis",
+      "note": "Allah befiehlt Mūsā, mit dem Stock auf das Meer zu schlagen.",
+      "claimIds": [
+        "musa-split-sea"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "musa-q28-43",
+      "title": "Die Schrift",
+      "range": "al-Qaṣaṣ 28:43",
+      "surah": 28,
+      "ayahStart": 43,
+      "ayahEnd": 43,
+      "classification": "Offenbarung",
+      "note": "Mūsā erhält die Schrift als Rechtleitung und Barmherzigkeit.",
+      "claimIds": [
+        "musa-book-given"
+      ],
+      "verificationStatus": "approved"
+    }
+  ],
+  "sayings": [
+    {
+      "id": "musa-saying-20-25",
+      "sourceType": "quran",
+      "title": "Rabbi shraḥ lī ṣadrī",
+      "arabicOriginal": "رَبِّ ٱشۡرَحۡ لِي صَدۡرِي ۝ وَيَسِّرۡ لِيٓ أَمۡرِي ۝ وَٱحۡلُلۡ عُقۡدَةٗ مِّن لِّسَانِي ۝ يَفۡقَهُواْ قَوۡلِي",
+      "translationDe": "Mein Herr, öffne mir meine Brust, erleichtere mir meine Angelegenheit und löse den Knoten von meiner Zunge, damit sie meine Worte verstehen.",
+      "context": "Bitte vor der Konfrontation mit Firʿawn.",
+      "source": "Qurʾān",
+      "sourceLocation": "Ṭā-Hā 20:25–28",
+      "grading": "quran",
+      "directReference": {
+        "kind": "quran",
+        "surah": 20,
+        "ayah": 25
+      },
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "musa-saying-28-16",
+      "sourceType": "quran",
+      "title": "Rabbi innī ẓalamtu nafsī",
+      "arabicOriginal": "قَالَ رَبِّ إِنِّي ظَلَمۡتُ نَفۡسِي فَٱغۡفِرۡ لِي",
+      "translationDe": "Er sagte: Mein Herr, ich habe mir selbst Unrecht zugefügt, so vergib mir.",
+      "context": "Reue nach dem Vorfall in der Stadt.",
+      "source": "Qurʾān",
+      "sourceLocation": "al-Qaṣaṣ 28:16",
+      "grading": "quran",
+      "directReference": {
+        "kind": "quran",
+        "surah": 28,
+        "ayah": 16
+      },
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "musa-saying-28-21",
+      "sourceType": "quran",
+      "title": "Rabbi najjinī mina l-qawmi ẓ-ẓālimīn",
+      "arabicOriginal": "قَالَ رَبِّ نَجِّنِي مِنَ ٱلۡقَوۡمِ ٱلظَّٰلِمِينَ",
+      "translationDe": "Er sagte: Mein Herr, errette mich vor dem ungerechten Volk.",
+      "context": "Bitte auf dem Weg der Flucht.",
+      "source": "Qurʾān",
+      "sourceLocation": "al-Qaṣaṣ 28:21",
+      "grading": "quran",
+      "directReference": {
+        "kind": "quran",
+        "surah": 28,
+        "ayah": 21
+      },
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "musa-saying-28-24",
+      "sourceType": "quran",
+      "title": "Rabbi innī limā anzalta إلي من خير فقير",
+      "arabicOriginal": "رَبِّ إِنِّي لِمَآ أَنزَلۡتَ إِلَيَّ مِنۡ خَيۡرٖ فَقِيرٞ",
+      "translationDe": "Mein Herr, ich bin für das Gute, das Du zu mir herabsendest, bedürftig.",
+      "context": "Bitte in Madyan nach dem Tränken der Tiere.",
+      "source": "Qurʾān",
+      "sourceLocation": "al-Qaṣaṣ 28:24",
+      "grading": "quran",
+      "directReference": {
+        "kind": "quran",
+        "surah": 28,
+        "ayah": 24
+      },
+      "verificationStatus": "approved"
+    }
+  ],
+  "hadithAboutProphet": [],
+  "athar": [],
+  "sources": [
+    {
+      "id": "quran-28",
+      "work": "Qurʾān",
+      "sourceType": "primary",
+      "entries": [
+        "al-Qaṣaṣ 28:3–13",
+        "al-Qaṣaṣ 28:15–16",
+        "al-Qaṣaṣ 28:22–35",
+        "al-Qaṣaṣ 28:43"
+      ],
+      "directReference": {
+        "kind": "quran",
+        "surah": 28,
+        "ayah": 3
+      },
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "quran-20",
+      "work": "Qurʾān",
+      "sourceType": "primary",
+      "entries": [
+        "Ṭā-Hā 20:25–35"
+      ],
+      "directReference": {
+        "kind": "quran",
+        "surah": 20,
+        "ayah": 25
+      },
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "quran-26",
+      "work": "Qurʾān",
+      "sourceType": "primary",
+      "entries": [
+        "aš-Šuʿarāʾ 26:17",
+        "aš-Šuʿarāʾ 26:63"
+      ],
+      "directReference": {
+        "kind": "quran",
+        "surah": 26,
+        "ayah": 17
+      },
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tafsir-28",
+      "work": "Deutscher Tafsīr-Bereich",
+      "sourceType": "supporting",
+      "entries": [
+        "al-Qaṣaṣ 28"
+      ],
+      "directReference": {
+        "kind": "url",
+        "url": "/content/tafsir/de/028.json"
+      },
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tafsir-20",
+      "work": "Deutscher Tafsīr-Bereich",
+      "sourceType": "supporting",
+      "entries": [
+        "Ṭā-Hā 20"
+      ],
+      "directReference": {
+        "kind": "url",
+        "url": "/content/tafsir/de/020.json"
+      },
+      "verificationStatus": "approved"
+    }
+  ],
+  "researchStatus": {
+    "hadith": "Für Phase 1 noch keine separat freigegebenen Ṣaḥīḥ-Ḥadīṯe über Mūsā in diesem Bereich veröffentlicht.",
+    "athar": "Āthār-Bereich technisch vorbereitet. Sichtbare Freigabe erfolgt erst nach Isnād-Prüfung und Kennzeichnung.",
+    "disputedReports": "Nicht authentisch gesicherte Berichte sind bewusst nicht in die Hauptbiografie übernommen."
+  }
+}
