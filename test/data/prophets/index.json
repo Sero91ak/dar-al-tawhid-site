@@ -452,36 +452,44 @@
       "name": "ʿUzayr",
       "nameAr": "عزير",
       "honorific": "",
-      "prophetStatus": "disputed",
-      "note": "Im Qurʾān genannt; Prophetentum ist Gegenstand wissenschaftlicher Einordnung — nicht automatisch bestätigt.",
-      "profileFile": "uzayr.json"
+      "prophetStatus": "scholarly_disputed",
+      "note": "In 9:30 namentlich; Prophetenstatus research/disputed; 2:259 nicht automatisch zuschreiben.",
+      "profileFile": "uzayr.json",
+      "profileStatus": "approved",
+      "listGroup": "D"
     },
     {
       "id": "luqman",
       "name": "Luqmān",
       "nameAr": "لقمان",
       "honorific": "",
-      "prophetStatus": "disputed",
-      "note": "Im Qurʾān genannt; Weisheit bezeugt — Prophetentum nicht pauschal als gesichert führen.",
-      "profileFile": "luqman.json"
+      "prophetStatus": "scholarly_disputed",
+      "note": "Qurʾānisch namentlich mit Weisheit; Prophetenstatus scholarly_disputed — nicht quran_explicit.",
+      "profileFile": "luqman.json",
+      "profileStatus": "approved",
+      "listGroup": "D"
     },
     {
       "id": "al-khidr",
       "name": "al-Khiḍr",
       "nameAr": "الخضر",
       "honorific": "",
-      "prophetStatus": "disputed",
-      "note": "In der Überlieferung diskutiert; nicht als bestätigter Prophet in der Hauptliste.",
-      "profileFile": "al-khidr.json"
+      "prophetStatus": "scholarly_disputed_or_inferred",
+      "note": "Qurʾān: unbenannter Diener (18:65); Name via Ṣaḥīḥ-Sunnah; Prophetenstatus erschlossen/umstritten — kein Core-Prophet.",
+      "profileFile": "al-khidr.json",
+      "profileStatus": "approved",
+      "listGroup": "C"
     },
     {
       "id": "dhul-qarnayn",
       "name": "Dhū l-Qarnayn",
       "nameAr": "ذو القرنين",
       "honorific": "",
-      "prophetStatus": "disputed",
-      "note": "Im Qurʾān erwähnt; keine automatische Einordnung als Prophet.",
-      "profileFile": "dhul-qarnayn.json"
+      "prophetStatus": "scholarly_disputed",
+      "note": "Qurʾānisch benannter Herrscher/Diener; persönliche Identität und Prophetenstatus unresolved/disputed.",
+      "profileFile": "dhul-qarnayn.json",
+      "profileStatus": "approved",
+      "listGroup": "D"
     },
     {
       "id": "yusha-ibn-nun",
@@ -496,10 +504,37 @@
     }
   ],
   "audit": {
-    "updatedAt": "2026-08-08T09:03:10.000Z",
+    "updatedAt": "2026-08-08T09:14:12.000Z",
     "scope": "test-only",
     "production": "disabled",
-    "notes": "Block 05 Kernabschluss: Yaḥyā, ʿĪsā, Dhū l-Kifl (Ikhtilāf), Muḥammad (Index), Yūshaʿ (Sonderdatensatz).",
-    "block05": true
+    "notes": "Block 06 Research-Profile + globaler End-Audit.",
+    "block06": true
+  },
+  "profileGroups": {
+    "A_confirmedProphets": "Hauptliste mit quran_explicit / starker Beleglage (inkl. Muḥammad ﷺ)",
+    "B_quranNamedDisputedProphethood": [
+      "luqman",
+      "dhul-qarnayn",
+      "uzayr",
+      "dhul-kifl"
+    ],
+    "C_sunnahNamedSourceCorrelation": [
+      "al-khidr",
+      "yusha-ibn-nun"
+    ],
+    "D_nonProphetOrDisputedQuranPersons": [
+      "luqman",
+      "dhul-qarnayn",
+      "uzayr",
+      "al-khidr"
+    ],
+    "E_internalResearchOnly": [
+      "adam",
+      "ayyub",
+      "shuayb",
+      "harun",
+      "dawud"
+    ],
+    "note": "Gruppen dürfen visuell nicht alle als unstrittige Propheten erscheinen."
   }
 }

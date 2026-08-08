@@ -2724,6 +2724,21 @@
         "scripts/build_prophets_block05.py"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-block06-research-endaudit-v608-2026-08-08",
+      "approvedBy": "user-task-sonderblock-06-endaudit",
+      "note": "Sonderblock 06: al-Khiḍr, Luqmān, Dhū l-Qarnayn, ʿUzayr (kein künstlicher Core-Prophet) + globaler End-Audit — Test-first, production=disabled",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "data/prophets/",
+        "test/assets/prophets/prophets.js",
+        "test/index.html",
+        "test/version.json",
+        "scripts/build_prophets_block06.py"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
