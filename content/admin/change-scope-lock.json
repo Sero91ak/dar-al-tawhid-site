@@ -3012,6 +3012,16 @@
         "scripts/prophets-phase09-smoke.js"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-ci-skip-preprod-when-live-v621d-2026-08-08",
+      "approvedBy": "user-task-propheten-dua-licht-emoji-fokus-push-live",
+      "note": "CI: Phase 10–13 skip when production already enabled",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        ".github/workflows/prophets-test-validate.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
