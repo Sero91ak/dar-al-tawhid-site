@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-08T17:01:13.021Z",
+  "updatedAt": "2026-08-08T17:06:10.057Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-08T17:01:13.021Z",
+  "lastCronRun": "2026-08-08T17:06:10.057Z",
   "nextPlannedPush": {
     "prayer": "Maghrib",
     "key": "maghrib",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-08T18:51:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-08T16:45:56.002Z",
-  "windowEnd": "2026-08-09T19:00:56.002Z",
+  "windowStart": "2026-08-08T16:50:52.052Z",
+  "windowEnd": "2026-08-09T19:05:52.052Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 25,
@@ -28,10 +28,10 @@
   "usersWithLocation": 25,
   "usersWithActivePush": 25,
   "locationGroups": 5,
-  "scheduled": 55,
-  "recipients": 275,
+  "scheduled": 60,
+  "recipients": 300,
   "skippedPast": 80,
-  "skippedWindow": 65,
+  "skippedWindow": 60,
   "duplicates": 1,
   "errors": 0,
   "lastError": null,
@@ -84,7 +84,7 @@
         },
         "entry": {
           "status": "geplant",
-          "recipients": 25
+          "recipients": 50
         }
       },
       "isha": {
@@ -162,7 +162,7 @@
       },
       "entry": {
         "status": "geplant",
-        "recipients": 25
+        "recipients": 50
       },
       "answer": "Maghrib 21:06: Vorab und Gebetszeit geplant."
     },
@@ -293,6 +293,15 @@
     {
       "prayer": "Maghrib",
       "key": "maghrib",
+      "mode": "entry",
+      "time": "21:04",
+      "sendAfter": "2026-08-09T19:04:00.000Z",
+      "recipients": 17,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Maghrib",
+      "key": "maghrib",
       "mode": "advance",
       "time": "21:04",
       "sendAfter": "2026-08-09T18:49:00.000Z",
@@ -392,6 +401,15 @@
     {
       "prayer": "Maghrib",
       "key": "maghrib",
+      "mode": "entry",
+      "time": "21:04",
+      "sendAfter": "2026-08-09T19:04:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Maghrib",
+      "key": "maghrib",
       "mode": "advance",
       "time": "21:04",
       "sendAfter": "2026-08-09T18:49:00.000Z",
@@ -485,6 +503,15 @@
       "mode": "advance",
       "time": "17:40",
       "sendAfter": "2026-08-09T15:25:00.000Z",
+      "recipients": 5,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Maghrib",
+      "key": "maghrib",
+      "mode": "entry",
+      "time": "21:04",
+      "sendAfter": "2026-08-09T19:04:00.000Z",
       "recipients": 5,
       "timeZone": "Europe/Berlin"
     },
@@ -590,6 +617,15 @@
     {
       "prayer": "Maghrib",
       "key": "maghrib",
+      "mode": "entry",
+      "time": "21:04",
+      "sendAfter": "2026-08-09T19:04:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Maghrib",
+      "key": "maghrib",
       "mode": "advance",
       "time": "21:04",
       "sendAfter": "2026-08-09T18:49:00.000Z",
@@ -683,6 +719,15 @@
       "mode": "advance",
       "time": "17:40",
       "sendAfter": "2026-08-09T15:35:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Maghrib",
+      "key": "maghrib",
+      "mode": "entry",
+      "time": "21:04",
+      "sendAfter": "2026-08-09T19:04:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin"
     },
@@ -1041,6 +1086,12 @@
     },
     {
       "prayer": "maghrib",
+      "mode": "entry",
+      "recipients": 17,
+      "response": "{\"id\":\"c0f10eb1-8c23-4844-ad8a-eb4c381c6e5c\",\"external_id\":\"cbe32bd9-4335-4181-a5ad-ba05536fc173\",\"errors\":{\"invalid_player_ids\":[\"19ab451c-bf40-4b43-a99e-2cef488cd734\",\"9a7881c4-2744-4b95-9f3e-92486b"
+    },
+    {
+      "prayer": "maghrib",
       "mode": "advance",
       "recipients": 17,
       "response": "{\"id\":\"defa3a3e-a104-4a52-bdac-b981141c1e5f\",\"external_id\":\"d7c78d88-c2ad-4f18-bda4-304b9ed59281\"}"
@@ -1090,12 +1141,6 @@
     {
       "prayer": "dhuhr",
       "mode": "advance",
-      "recipients": 1,
-      "response": "{\"id\":\"\",\"errors\":{\"invalid_player_ids\":[\"e67e4b16-6faf-4f42-9569-38e915259e79\"]}}"
-    },
-    {
-      "prayer": "asr",
-      "mode": "entry",
       "recipients": 1,
       "response": "{\"id\":\"\",\"errors\":{\"invalid_player_ids\":[\"e67e4b16-6faf-4f42-9569-38e915259e79\"]}}"
     }
