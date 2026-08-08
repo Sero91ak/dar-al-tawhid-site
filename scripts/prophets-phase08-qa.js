@@ -157,7 +157,7 @@ function main() {
 
   const out = path.join(TEST, "phase08-ui-report.json");
   fs.writeFileSync(out, JSON.stringify(report, null, 2) + "\n");
-  fs.writeFileSync(path.join(ROOT, "data/prophets/phase08-ui-report.json"), JSON.stringify(report, null, 2) + "\n");
+  /* Phase 09: never write production data/prophets/ from TEST QA. */
   console.log(JSON.stringify({ result: report.result, failures, profilesReachable: report.profilesReachable, research: report.researchProfilesReachableSeparately }, null, 2));
   if (report.result !== "PASS") process.exit(1);
 }

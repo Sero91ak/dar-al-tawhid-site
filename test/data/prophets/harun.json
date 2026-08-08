@@ -26,8 +26,10 @@
     "honorific": "عليه السلام",
     "quranNamed": true,
     "nabī": {
-      "value": true,
-      "claimIds": []
+      "value": false,
+      "claimIds": [],
+      "pendingUntilEvidence": true,
+      "notedRole": "nabī"
     },
     "rasūl": {
       "value": false,
@@ -149,5 +151,7 @@
     "musa-harun"
   ],
   "schemaVersion": 4,
-  "searchTerms": []
+  "searchTerms": [],
+  "contentVersion": "prophets-test-rc-01",
+  "updatedAt": "2026-08-08T09:44:46.450Z"
 }

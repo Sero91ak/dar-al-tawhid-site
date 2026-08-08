@@ -60,12 +60,12 @@
         "hasSunnah": false,
         "banuIsrail": false,
         "arabicMessenger": false,
-        "furtherPerson": true
+        "furtherPerson": false
       },
       "hasSunnah": false,
       "banuIsrail": false,
       "arabicMessenger": false,
-      "furtherPerson": true
+      "furtherPerson": false
     },
     {
       "id": "idris",
@@ -385,12 +385,12 @@
         "hasSunnah": false,
         "banuIsrail": false,
         "arabicMessenger": false,
-        "furtherPerson": true
+        "furtherPerson": false
       },
       "hasSunnah": false,
       "banuIsrail": false,
       "arabicMessenger": false,
-      "furtherPerson": true
+      "furtherPerson": false
     },
     {
       "id": "shuayb",
@@ -412,13 +412,13 @@
         "quranExplicit": true,
         "hasSunnah": false,
         "banuIsrail": false,
-        "arabicMessenger": false,
-        "furtherPerson": true
+        "arabicMessenger": true,
+        "furtherPerson": false
       },
       "hasSunnah": false,
       "banuIsrail": false,
-      "arabicMessenger": false,
-      "furtherPerson": true
+      "arabicMessenger": true,
+      "furtherPerson": false
     },
     {
       "id": "musa",
@@ -481,12 +481,12 @@
         "hasSunnah": false,
         "banuIsrail": true,
         "arabicMessenger": false,
-        "furtherPerson": true
+        "furtherPerson": false
       },
       "hasSunnah": false,
       "banuIsrail": true,
       "arabicMessenger": false,
-      "furtherPerson": true
+      "furtherPerson": false
     },
     {
       "id": "dawud",
@@ -508,12 +508,12 @@
         "hasSunnah": false,
         "banuIsrail": false,
         "arabicMessenger": false,
-        "furtherPerson": true
+        "furtherPerson": false
       },
       "hasSunnah": false,
       "banuIsrail": false,
       "arabicMessenger": false,
-      "furtherPerson": true
+      "furtherPerson": false
     },
     {
       "id": "sulayman",
@@ -1003,8 +1003,8 @@
     "relations": "relations/*.json"
   },
   "titleAr": "الأنبياء",
-  "contentVersion": "prophets-phase08-v610",
-  "updatedAt": "2026-08-08T09:33:13.000Z",
+  "contentVersion": "prophets-test-rc-01",
+  "updatedAt": "2026-08-08T09:44:46.504Z",
   "furtherPersons": [
     {
       "id": "dhul-kifl",
@@ -1230,5 +1230,7 @@
     "arabicMessenger": true,
     "further": true
   },
-  "phase08": true
+  "phase08": true,
+  "releaseCandidate": "prophets-test-rc-01",
+  "phase09": true
 }

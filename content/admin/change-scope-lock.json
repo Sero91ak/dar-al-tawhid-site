@@ -2771,6 +2771,26 @@
         "scripts/prophets-phase08-qa.js"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-phase09-release-candidate-v611-2026-08-08",
+      "approvedBy": "user-task-phase-09-final-test-rc",
+      "note": "Phase 09: finaler TEST Release-Candidate (Validatoren, CI, Manifest, Search-Index, Offline/Error UX) — keine neuen Inhalte; production=disabled; NO live deploy",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "test/assets/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "scripts/validate-prophets-all.js",
+        "scripts/prepare-prophets-rc.js",
+        "scripts/build-prophets-search-index.js",
+        "scripts/build-prophets-content-manifest.js",
+        "scripts/prophets-phase09-smoke.js",
+        ".github/workflows/prophets-test-validate.yml",
+        "scripts/prophets-phase08-qa.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

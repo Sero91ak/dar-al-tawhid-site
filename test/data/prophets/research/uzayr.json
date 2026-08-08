@@ -58,7 +58,8 @@
       "claimIds": []
     },
     "nameAttributionType": "explicit_name",
-    "quran2259AttributionType": "tafsir_attribution"
+    "quran2259AttributionType": "tafsir_attribution",
+    "quran2259ExplicitIdentity": null
   },
   "overviewFields": [
     {
@@ -234,7 +235,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "uzayr-9-30-claim-rejected",
@@ -270,7 +273,9 @@
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
       },
-      "aqidahClaim": true
+      "aqidahClaim": true,
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "uzayr-no-explicit-nabi",
@@ -306,7 +311,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "uzayr-2-259-event-anonymous",
@@ -350,7 +357,9 @@
           "type": "tafsir_attribution",
           "verificationStatus": "research"
         }
-      ]
+      ],
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "uzayr-2-259-attribution-research",
@@ -386,7 +395,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "uzayr-100-years-in-2-259-if-linked",
@@ -421,7 +432,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "uzayr-not-ezra-as-quran-name",
@@ -457,7 +470,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "uzayr-no-invented-tawrah-story",
@@ -493,7 +508,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "uzayr-father-research",
@@ -529,7 +546,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "uzayr-mother-research",
@@ -565,7 +584,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "uzayr-wife-research",
@@ -601,7 +622,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "uzayr-children-research",
@@ -637,7 +660,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "uzayr-birth-unattested",
@@ -673,7 +698,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "uzayr-death-unattested",
@@ -709,7 +736,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "uzayr-grave-unattested",
@@ -745,7 +774,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     }
   ],
   "audit": {
@@ -794,5 +825,7 @@
     "schemaVersion": 4,
     "updatedAt": "2026-08-08T09:25:18.000Z"
   },
-  "schemaVersion": 4
+  "schemaVersion": 4,
+  "contentVersion": "prophets-test-rc-01",
+  "updatedAt": "2026-08-08T09:44:46.502Z"
 }

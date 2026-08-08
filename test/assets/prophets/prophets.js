@@ -7,11 +7,46 @@
 
   function dataBase() {
     try {
-      if (location.pathname.indexOf("/test/") === 0 || location.pathname === "/test") return "/test/data/prophets/";
+      if (global.IS_TEST_PATH || location.pathname.indexOf("/test/") === 0 || location.pathname === "/test") {
+        return "/test/data/prophets/";
+      }
     } catch (e) {}
+    /* Live path only when explicitly not on Test — never used as silent fallback for missing Test files. */
     return "/data/prophets/";
   }
   var DATA_BASE = dataBase();
+  var LAST_LOAD_ERROR = null;
+
+  function logProphetLoadError(info) {
+    LAST_LOAD_ERROR = Object.assign(
+      {
+        timestamp: new Date().toISOString(),
+        dataBase: DATA_BASE
+      },
+      info || {}
+    );
+    try {
+      console.info("[prophets]", LAST_LOAD_ERROR);
+    } catch (e) {}
+  }
+
+  function visitorLoadErrorHtml() {
+    return (
+      '<div class="prophets-empty" role="alert">' +
+      "<p>Dieser Inhalt konnte nicht geladen werden.</p>" +
+      '<button type="button" class="prophets-rail__back-mobile" data-prophets-back>Zur Übersicht</button>' +
+      "</div>"
+    );
+  }
+
+  function notFoundHtml() {
+    return (
+      '<div class="prophets-empty" role="status">' +
+      "<p>Prophetenprofil nicht gefunden</p>" +
+      '<button type="button" class="prophets-rail__back-mobile" data-prophets-back>Zur Übersicht</button>' +
+      "</div>"
+    );
+  }
   var DUAL_MIN = 720;
   var STATE_KEY = "dar_prophets_ui_v1";
   var LAST_READ_KEY = "dar_prophets_last_read_v1";
@@ -181,9 +216,17 @@
   function loadIndex() {
     if (indexCache) return Promise.resolve(indexCache);
     if (loadIndexPromise) return loadIndexPromise;
-    loadIndexPromise = fetch(DATA_BASE + "index.json", { cache: "no-store" })
+    var requestedFile = DATA_BASE + "index.json";
+    loadIndexPromise = fetch(requestedFile, { cache: "no-store" })
       .then(function (r) {
-        if (!r.ok) throw new Error("index " + r.status);
+        if (!r.ok) {
+          logProphetLoadError({
+            prophetId: null,
+            requestedFile: requestedFile,
+            errorType: "index_http_" + r.status
+          });
+          throw new Error("index " + r.status);
+        }
         return r.json();
       })
       .then(function (data) {
@@ -192,6 +235,13 @@
       })
       .catch(function (err) {
         loadIndexPromise = null;
+        if (!LAST_LOAD_ERROR || LAST_LOAD_ERROR.requestedFile !== requestedFile) {
+          logProphetLoadError({
+            prophetId: null,
+            requestedFile: requestedFile,
+            errorType: "index_fetch_failed"
+          });
+        }
         throw err;
       });
     return loadIndexPromise;
@@ -253,7 +303,9 @@
   function openExternalSafe(url) {
     if (!url) return;
     if (!isOnline()) {
-      try { alert("Quelle online öffnen\n\nInternetverbindung erforderlich."); } catch (e) {}
+      try {
+        alert("Für den externen Direktnachweis ist eine Internetverbindung erforderlich.");
+      } catch (e) {}
       return;
     }
     try {
@@ -340,13 +392,23 @@
     if (!key) return Promise.resolve(null);
     if (profileCache[key]) return Promise.resolve(profileCache[key]);
     var start = indexCache ? Promise.resolve(indexCache) : loadIndex();
+    var requestedFile = "";
     return start
       .then(function () {
         var file = profileFileFor(key);
-        return fetch(DATA_BASE + file, { cache: "no-store" });
+        requestedFile = DATA_BASE + file;
+        /* Test must never silently fall back to /data/prophets/ when a Test file is missing. */
+        return fetch(requestedFile, { cache: "no-store" });
       })
       .then(function (r) {
-        if (!r.ok) throw new Error("profile " + r.status);
+        if (!r.ok) {
+          logProphetLoadError({
+            prophetId: key,
+            requestedFile: requestedFile,
+            errorType: "profile_http_" + r.status
+          });
+          throw new Error("profile " + r.status);
+        }
         return r.json();
       })
       .then(function (data) {
@@ -357,6 +419,13 @@
         return data;
       })
       .catch(function () {
+        if (!LAST_LOAD_ERROR || LAST_LOAD_ERROR.prophetId !== key) {
+          logProphetLoadError({
+            prophetId: key,
+            requestedFile: requestedFile || DATA_BASE + profileFileFor(key),
+            errorType: "profile_fetch_failed"
+          });
+        }
         profileCache[key] = null;
         return null;
       });
@@ -426,6 +495,7 @@
   }
 
   function normalizeQuery(q) {
+    /* Search-only normalization — never overwrite display/source strings. */
     return String(q || "")
       .trim()
       .toLowerCase()
@@ -438,7 +508,14 @@
       .replace(/ḍ/g, "d")
       .replace(/ẓ/g, "z")
       .replace(/ṭ/g, "t")
-      .replace(/ǧ|ğ/g, "g");
+      .replace(/ǧ|ğ/g, "g")
+      .replace(/[إأآٱ]/g, "ا")
+      .replace(/ى/g, "ي")
+      .replace(/ؤ/g, "و")
+      .replace(/ئ/g, "ي")
+      .replace(/ة/g, "ه")
+      .replace(/موسى/g, "موسى")
+      .replace(/mousa|moosa/g, "musa");
   }
 
   function matchesQuery(p, q) {
@@ -1178,8 +1255,10 @@
     );
   }
 
-  function renderStubDetail(meta) {
-    if (!meta) return '<div class="prophets-empty">Prophet nicht gefunden.</div>';
+  function renderStubDetail(meta, opts) {
+    opts = opts || {};
+    if (!meta) return notFoundHtml();
+    if (opts.loadFailed) return visitorLoadErrorHtml();
     var disputed = isDisputedStatus(meta.prophetStatus);
     var note = disputedStatusNote(meta) || meta.note || "Die vollständige Wissensakte wird mit geprüften Claims aufgebaut.";
     return (
@@ -1193,7 +1272,7 @@
       (disputed ? '<span class="prophets-chip">Umstritten</span>' : "") +
       (meta.uluAlAzm ? '<span class="prophets-chip">✦ Ulū l-ʿAzm</span>' : "") +
       "</div>" +
-      (meta.people ? '<p class="prophets-detail__people">👥 ' + esc(meta.people) + "</p>" : "") +
+      (meta.people ? '<p class="prophets-detail__people">' + esc(meta.people) + "</p>" : "") +
       '</header><hr class="prophets-rule" />' +
       '<section class="prophets-chapter"><h3>' + (disputed ? "Umstrittene Einordnung" : "Profil") + "</h3>" +
       "<p class=\"prophets-quote__de\">" +
@@ -1213,7 +1292,9 @@
 
   function renderDetail(profile, section, state, meta) {
     if (!profile) {
-      return renderStubDetail(meta || null);
+      var loadFailed =
+        !!(meta && LAST_LOAD_ERROR && LAST_LOAD_ERROR.prophetId && String(LAST_LOAD_ERROR.prophetId) === String(meta.id));
+      return renderStubDetail(meta || null, { loadFailed: loadFailed });
     }
     var researchMode = profile.profileStatus && profile.profileStatus !== "approved";
     if (researchMode && !isTest()) {
@@ -1374,7 +1455,14 @@
             if (typeof global.render === "function") global.render();
           }
         })
-        .catch(function () {});
+        .catch(function () {
+          if (global.currentRoute && global.currentRoute.view === "propheten") {
+            if (typeof global.render === "function") global.render();
+          }
+        });
+      if (LAST_LOAD_ERROR && /index_/.test(String(LAST_LOAD_ERROR.errorType || ""))) {
+        return header + '<div class="prophets-root">' + visitorLoadErrorHtml() + "</div>";
+      }
       return header + '<div class="prophets-root"><div class="prophets-empty">Prophetenbibliothek wird geladen…</div></div>';
     }
 

@@ -1,0 +1,62 @@
+name: Prophets Test Validate
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - test/data/prophets/**
+      - test/assets/prophets/**
+      - scripts/validate-prophets-all.js
+      - scripts/build-prophets-search-index.js
+      - scripts/build-prophets-content-manifest.js
+      - scripts/prepare-prophets-rc.js
+      - scripts/prophets-phase09-smoke.js
+      - scripts/prophets-phase08-qa.js
+      - scripts/prophets-phase07-production-guard.js
+      - .github/workflows/prophets-test-validate.yml
+  push:
+    paths:
+      - test/data/prophets/**
+      - test/assets/prophets/**
+      - scripts/validate-prophets-all.js
+      - scripts/build-prophets-search-index.js
+      - scripts/build-prophets-content-manifest.js
+      - scripts/prepare-prophets-rc.js
+      - scripts/prophets-phase09-smoke.js
+      - scripts/prophets-phase08-qa.js
+      - scripts/prophets-phase07-production-guard.js
+      - .github/workflows/prophets-test-validate.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate-prophets-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install (minimal)
+        run: |
+          if [ -f package-lock.json ]; then npm ci --ignore-scripts; else npm install --ignore-scripts; fi
+
+      - name: Validate prophets (master)
+        run: node scripts/validate-prophets-all.js
+
+      - name: Rebuild search index + content manifest
+        run: |
+          node scripts/build-prophets-search-index.js
+          node scripts/build-prophets-content-manifest.js
+
+      - name: Re-validate search index + production lock
+        run: node scripts/validate-prophets-all.js
+
+      - name: Phase 09 smoke + RC acceptance
+        run: node scripts/prophets-phase09-smoke.js
+
+      - name: Guard — production must stay disabled
+        run: node scripts/prophets-phase07-production-guard.js

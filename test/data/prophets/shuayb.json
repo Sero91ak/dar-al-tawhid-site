@@ -27,12 +27,16 @@
     "honorific": "عليه السلام",
     "quranNamed": true,
     "nabī": {
-      "value": true,
-      "claimIds": []
+      "value": false,
+      "claimIds": [],
+      "pendingUntilEvidence": true,
+      "notedRole": "nabī"
     },
     "rasūl": {
-      "value": true,
-      "claimIds": []
+      "value": false,
+      "claimIds": [],
+      "pendingUntilEvidence": true,
+      "notedRole": "rasūl"
     },
     "nameAttributionType": "explicit_name"
   },
@@ -147,5 +151,7 @@
     "schemaVersion": 4
   },
   "schemaVersion": 4,
-  "searchTerms": []
+  "searchTerms": [],
+  "contentVersion": "prophets-test-rc-01",
+  "updatedAt": "2026-08-08T09:44:46.488Z"
 }

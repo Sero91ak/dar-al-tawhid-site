@@ -466,7 +466,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "yusha-fata-musa-bukhari-3401",
@@ -514,7 +516,9 @@
         "hadithId": "bukhari-3401",
         "relation": "direct_report"
       },
-      "_matnInCanonicalHadith": true
+      "_matnInCanonicalHadith": true,
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "yusha-fata-role-18-60",
@@ -551,7 +555,9 @@
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
       },
       "attributionType": "quran_plus_sahih_sunnah",
-      "singleVerseExplicitPersonalName": false
+      "singleVerseExplicitPersonalName": false,
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "yusha-anon-prophet-sun-bukhari-3124",
@@ -599,7 +605,9 @@
         "hadithId": "bukhari-3124",
         "relation": "direct_report"
       },
-      "_matnInCanonicalHadith": true
+      "_matnInCanonicalHadith": true,
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "yusha-anon-prophet-sun-muslim-1747",
@@ -646,7 +654,9 @@
         "hadithId": "muslim-1747",
         "relation": "direct_report"
       },
-      "_matnInCanonicalHadith": true
+      "_matnInCanonicalHadith": true,
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "yusha-named-sun-ahmad-8315",
@@ -696,7 +706,9 @@
         "hadithId": "ahmad-8315",
         "relation": "direct_report"
       },
-      "_matnInCanonicalHadith": true
+      "_matnInCanonicalHadith": true,
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "yusha-prophethood-correlation-status",
@@ -732,7 +744,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "yusha-father-nun",
@@ -768,7 +782,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "yusha-mother-research",
@@ -804,7 +820,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "yusha-wife-research",
@@ -840,7 +858,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "yusha-children-research",
@@ -876,7 +896,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "yusha-successor-musa-research",
@@ -912,7 +934,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "yusha-death-research",
@@ -948,7 +972,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "yusha-grave-unattested",
@@ -984,7 +1010,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     }
   ],
   "audit": {
@@ -1034,5 +1062,7 @@
     "schemaVersion": 4,
     "updatedAt": "2026-08-08T09:25:18.000Z"
   },
-  "schemaVersion": 4
+  "schemaVersion": 4,
+  "contentVersion": "prophets-test-rc-01",
+  "updatedAt": "2026-08-08T09:44:46.503Z"
 }

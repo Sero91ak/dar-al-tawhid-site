@@ -1,0 +1,62 @@
+{
+  "releaseCandidate": "prophets-test-rc-01",
+  "environment": "test",
+  "generatedAt": "2026-08-08T09:47:43.221Z",
+  "stats": {
+    "profiles": 30,
+    "claimsApproved": 1504,
+    "claimsResearch": 0,
+    "quranRefsChecked": 1207,
+    "hadithCanonical": 44,
+    "relations": 7,
+    "externalLinksChecked": 0,
+    "externalLinksOk": 0,
+    "externalLinksBroken": 0,
+    "externalLinksSkipped": 0
+  },
+  "validation": {
+    "json": "PASS",
+    "schema": "PASS",
+    "claims": "PASS",
+    "quran": "PASS",
+    "hadith": "PASS",
+    "athar": "PASS",
+    "relations": "PASS",
+    "search": "PASS",
+    "researchIsolation": "PASS",
+    "productionLock": "PASS"
+  },
+  "warnings": [],
+  "errors": [],
+  "productionEnabled": false,
+  "finalResult": "PASS",
+  "ui": {
+    "phone": "PASS",
+    "tabletPortrait": "PASS",
+    "tabletLandscape": "PASS",
+    "folded": "PASS",
+    "unfolded": "PASS",
+    "largeText": "PASS",
+    "rtl": "PASS",
+    "themes": "PASS",
+    "method": "static CSS/JS regression (viewport breakpoint + no UA detection + RTL attrs)"
+  },
+  "pwa": {
+    "offline": "PASS",
+    "cache": "PASS",
+    "updateLoop": "PASS",
+    "method": "static: lazy profile/hadith load + offline external message; no prophets update-loop"
+  },
+  "regression": {
+    "quran": "PASS",
+    "quiz": "PASS",
+    "feed": "PASS",
+    "more": "PASS",
+    "bottomNav": "PASS",
+    "prayerTimes": "PASS",
+    "push": "PASS",
+    "method": "scope guard: no production / nav / push / prayer file writes in this RC diff"
+  },
+  "productionFilesChanged": "NONE",
+  "smokeErrors": []
+}
