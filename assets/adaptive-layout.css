@@ -45,7 +45,18 @@ html[data-layout="compact"],
 html[data-layout="medium"],
 html[data-layout="expanded"] {
   --layout-shell-max: 100%;
+  /* Content dual-pane uses DarFold — nav rail width stays 0 (bottom nav) */
   --layout-rail-width: 0px;
+}
+
+@media (min-width: 700px) {
+  :root,
+  html[data-theme],
+  html[data-layout="expanded"] {
+    --layout-content-max: min(1180px, 100%);
+    --layout-reader-max: min(760px, 100%);
+    --layout-navigation-max: min(920px, calc(100vw - 28px));
+  }
 }
 
 /* Full-bleed shell — no extra gutters (Aug-4 Seitenverhältnis) */

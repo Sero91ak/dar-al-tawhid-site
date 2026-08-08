@@ -54,7 +54,7 @@
       "</div>"
     );
   }
-  var DUAL_MIN = 720;
+  var DUAL_MIN = 700;
   var STATE_KEY = "dar_prophets_ui_v1";
   var LAST_READ_KEY = "dar_prophets_last_read_v1";
   var INDEX_STORE_KEY = "dar_prophets_index_cache_v2";
@@ -141,6 +141,12 @@
   }
 
   function isDualMode() {
+    try {
+      if (global.DarFold && typeof global.DarFold.isDual === "function") {
+        return !!global.DarFold.isDual();
+      }
+      if (document.documentElement.getAttribute("data-layout") === "expanded") return true;
+    } catch (e) {}
     return measureWidth() >= DUAL_MIN;
   }
 

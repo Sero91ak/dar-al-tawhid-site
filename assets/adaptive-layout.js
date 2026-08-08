@@ -1,15 +1,15 @@
 /**
- * DAR AL TAWḤĪD — Adaptive Layout Controller (emergency-safe)
- * Compact / Medium only. Expanded left-rail disabled (broke Fold UX).
- * Uses ResizeObserver + visualViewport; no UA / device model detection.
- * v6: Fold/Tablet orientation re-apply (Android lag) + data-orientation.
+ * DAR AL TAWḤĪD — Adaptive Layout Controller
+ * compact <600 · medium 600–719 · expanded ≥720 (Fold open / Tablet)
+ * Expanded = content master-detail (DarFold). Bottom-Nav bleibt unten — KEIN Left-Rail-Nav.
+ * v7: expanded dual gate + orientation burst (Android Fold lag)
  */
 (function (global) {
   "use strict";
 
   var COMPACT_MAX = 599;
-  var EXPANDED_MIN = 840;
-  var EXPANDED_MIN_HEIGHT = 600;
+  var EXPANDED_MIN = 700;
+  var EXPANDED_MIN_HEIGHT = 480;
   var currentMode = "";
   var rafId = 0;
   var started = false;
@@ -19,9 +19,9 @@
   function resolveLayoutMode(width, height) {
     var w = Number(width) || 0;
     var h = Number(height) || 0;
-    /* Cover / phone */
     if (w < 600) return "compact";
-    /* Fold open, Fold Ultra, tablet, split — keep bottom nav (no left rail) */
+    /* Fold open, Fold Ultra, iPad, Android tablet — dual content */
+    if (w >= EXPANDED_MIN && (h >= EXPANDED_MIN_HEIGHT || w >= h)) return "expanded";
     return "medium";
   }
 
@@ -37,7 +37,6 @@
     );
     var vvW = vv && vv.width ? Math.round(vv.width) : 0;
     var vvH = vv && vv.height ? Math.round(vv.height) : 0;
-    /* Prefer the largest stable width — Fold/Tablet lag after unfold/rotate */
     var w = Math.max(vvW, clientW, innerW) || vvW || clientW || innerW || 0;
     var h = vvH || clientH || innerH || 0;
     if (!h) h = Math.max(clientH, innerH) || 0;
@@ -59,10 +58,12 @@
       return;
     }
 
+    /* NEVER left-rail nav — Fold dual is content split only */
     nav.classList.remove("is-adaptive-rail");
-    nav.classList.toggle("is-adaptive-centered", mode === "medium");
+    var wide = mode === "medium" || mode === "expanded";
+    nav.classList.toggle("is-adaptive-centered", wide);
 
-    if (mode === "medium") {
+    if (wide) {
       nav.style.setProperty("position", "fixed", "important");
       nav.style.setProperty("left", "50%", "important");
       nav.style.setProperty("right", "auto", "important");
@@ -122,6 +123,7 @@
     root.setAttribute("data-orientation", landscape ? "landscape" : "portrait");
     root.classList.toggle("is-layout-landscape", landscape);
     root.classList.toggle("is-layout-wide", metrics.width >= 600);
+    root.classList.toggle("is-fold-dual", metrics.width >= EXPANDED_MIN);
   }
 
   function applyLayout(force) {
@@ -150,11 +152,17 @@
               mode: mode,
               width: metrics.width,
               height: metrics.height,
+              dual: mode === "expanded",
               orientation: metrics.width >= metrics.height ? "landscape" : "portrait",
             },
           })
         );
       } catch (e) {}
+      if (global.DarFold && typeof global.DarFold.sync === "function") {
+        try {
+          global.DarFold.sync();
+        } catch (e2) {}
+      }
     }
   }
 
@@ -176,7 +184,6 @@
   function scheduleOrientBurst() {
     clearOrientTimers();
     scheduleApply(true);
-    /* Android Fold / tablet: viewport size lags after rotate/unfold */
     [50, 150, 350, 700].forEach(function (ms) {
       orientTimers.push(
         setTimeout(function () {

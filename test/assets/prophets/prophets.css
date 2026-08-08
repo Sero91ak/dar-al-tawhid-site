@@ -142,7 +142,7 @@ button.prophets-spotlight.more-feature-row::after,
   max-width:var(--prophets-read-max);
 }
 
-@container prophets (min-width: 720px){
+@container prophets (min-width: 700px){
   .prophets-layout--dual{
     grid-template-columns:
       clamp(var(--prophets-rail-min), var(--prophets-rail-pct), var(--prophets-rail-max))
@@ -164,7 +164,7 @@ button.prophets-spotlight.more-feature-row::after,
   .prophets-rail__back-mobile{display:none!important}
 }
 @supports not (container-type:inline-size){
-  @media (min-width:720px){
+  @media (min-width:700px){
     .prophets-layout--dual{grid-template-columns:clamp(320px,34%,380px) minmax(0,1fr)}
     .prophets-rail{
       position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);

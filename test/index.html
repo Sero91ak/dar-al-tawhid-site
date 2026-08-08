@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v624";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v625";</script>
 <script>/* VISUAL_PAST_PURGE_V588: alte Optik-Caches löschen – aktuelle Darstellung bleibt Autorität */(function(){var BUILD=String(window.__DAR_EXPECTED_BUILD||"");var KEY="dar_visual_authority_build_v1";var ONCE="dar_visual_past_purge_once_v588";function num(id){var m=String(id||"").match(/v(\d+)/);return m?parseInt(m[1],10):0}function wipe(){if(!("caches"in window))return Promise.resolve();return caches.keys().then(function(keys){return Promise.all(keys.filter(function(k){return /^dar-al-tawhid-offline-light-/i.test(k)}).map(function(k){return caches.delete(k)}))})}function bustReload(tag){try{if(sessionStorage.getItem(ONCE)===BUILD+"|"+tag)return;sessionStorage.setItem(ONCE,BUILD+"|"+tag)}catch(e){}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?"+tag+"="+Date.now()+h)}try{var prev=localStorage.getItem(KEY)||"";var localN=num(BUILD);var prevN=num(prev);if(prevN>localN&&localN>0){wipe().then(function(){if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){try{g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}catch(e){}}).catch(function(){})}bustReload("visual-stale")}).catch(function(){bustReload("visual-stale")});return}if(localN>prevN){wipe().then(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}bustReload("visual-new")}).catch(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}});return}if(!prev&&BUILD){try{localStorage.setItem(KEY,BUILD)}catch(e){}}if(localN>0&&"caches"in window){caches.keys().then(function(keys){keys.forEach(function(k){if(!/^dar-al-tawhid-offline-light-/i.test(k))return;var kn=num(k);if(kn&&kn<localN)caches.delete(k)})}).catch(function(){})}}catch(e){}try{var path=String(location.pathname||"");var ver=path.indexOf("/test")===0?"/test/version.json":"/version.json";fetch(ver,{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(remote){if(!remote||!remote.buildId)return;var remoteN=num(remote.buildId);if(remoteN>localN&&localN>0){wipe().then(function(){bustReload("visual-remote")}).catch(function(){bustReload("visual-remote")})}}).catch(function(){})}catch(e){}})();</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
@@ -9799,9 +9799,10 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/html2canvas.min.js" defer></script>
 <script src="/assets/premium-feed-app.js?v=92" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
-<script src="/assets/adaptive-layout.js?v=6" defer></script>
+<script src="/assets/adaptive-layout.js?v=7" defer></script>
+<script src="/assets/fold-split.js?v=1" defer></script>
 <script src="/assets/scholars-index.js?v=587" defer></script>
-<script src="/test/assets/prophets/prophets.js?v=27" defer></script>
+<script src="/test/assets/prophets/prophets.js?v=28" defer></script>
 <link rel="preload" href="/assets/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11353,8 +11354,9 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/dar-account-visibility.css?v=11">
 <link rel="stylesheet" href="/assets/scholars-index.css?v=587">
 <link rel="preload" href="/test/data/prophets/index.json" as="fetch" crossorigin>
-<link rel="stylesheet" href="/test/assets/prophets/prophets.css?v=14">
-<link rel="stylesheet" href="/assets/adaptive-layout.css?v=624">
+<link rel="stylesheet" href="/test/assets/prophets/prophets.css?v=15">
+<link rel="stylesheet" href="/assets/adaptive-layout.css?v=625">
+<link rel="stylesheet" href="/assets/fold-split.css?v=1">
 <style id="typography-compact-fix-v310">
 /* Finale Typografie-Korrektur — gewinnt gegen Home-Compact-Overrides */
 .section-head h3,
@@ -24925,7 +24927,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v624";
+const APP_BUILD_ID="app-shell-v625";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -25308,11 +25310,72 @@ function ensureCanonicalSourceLibrary(){
 }
 function renderLibraryRoute(view,value){
   if(!window.DARLibraryApp)return `<section class="empty">Bibliothek lädt…</section>`;
-  if(view==="bibliothek")return `<div id="libraryMount">${DARLibraryApp.renderBibliothek()}</div>`;
-  if(view==="bibliothek-detail")return `<div id="libraryMount">${DARLibraryApp.renderBibliothekDetail(value||"")}</div>`;
   if(view==="bibliothek-reader")return DARLibraryApp.renderBibliothekReader(value||"");
+  const rail=`<div id="libraryMount" data-fold-role="rail">${DARLibraryApp.renderBibliothek()}</div>`;
+  if(window.DarFold&&DarFold.isDual()){
+    if(view==="bibliothek-detail"){
+      const pane=`<div data-fold-role="pane">${DARLibraryApp.renderBibliothekDetail(value||"")}</div>`;
+      return DarFold.shell(rail,pane,{family:"library",emptyMsg:"Links eine Veröffentlichung wählen",compactMode:"pane"});
+    }
+    return DarFold.shell(rail,DarFold.emptyPane("Links eine Veröffentlichung wählen"),{family:"library",emptyMsg:"Links eine Veröffentlichung wählen",compactMode:"rail"});
+  }
+  if(view==="bibliothek")return rail;
+  if(view==="bibliothek-detail")return `<div id="libraryMount">${DARLibraryApp.renderBibliothekDetail(value||"")}</div>`;
   return `<section class="empty">Bibliothek lädt…</section>`;
 }
+
+function renderDuaFoldRoute(view,value){
+  if(!(window.DarFold&&DarFold.isDual())){
+    if(view==="duas")return renderDuas();
+    if(view==="dua-cat")return renderDuaCat(value);
+    return renderDua(value);
+  }
+  if(view==="duas")return DarFold.shell(renderDuas(),DarFold.emptyPane("Links ein Thema oder eine Duʿāʾ wählen"),{family:"dua",compactMode:"rail"});
+  if(view==="dua-cat")return DarFold.shell(renderDuaCat(value),DarFold.emptyPane("Links eine Duʿāʾ öffnen"),{family:"dua",compactMode:"rail"});
+  try{
+    normalizeLoadedDuas();
+    const d=(typeof DUAS!=="undefined"?DUAS:[]).find(x=>String(x.id)===String(value)||String(x.slug||"")===String(value));
+    const cat=d?duaTheme(normalizeDuaCategory(d)):"";
+    const rail=cat?renderDuaCat(cat):renderDuas();
+    return DarFold.shell(rail,renderDua(value),{family:"dua",compactMode:"pane"});
+  }catch(e){
+    return renderDua(value);
+  }
+}
+function renderQuranFoldRoute(view,value){
+  if(!(window.DarFold&&DarFold.isDual())){
+    if(view==="quran")return renderQuran();
+    return renderQuranSurah(value);
+  }
+  const rail=renderQuran();
+  if(view==="quran")return DarFold.shell(rail,DarFold.emptyPane("Links eine Sūrah öffnen"),{family:"quran",compactMode:"rail"});
+  return DarFold.shell(rail,renderQuranSurah(value),{family:"quran",compactMode:"pane"});
+}
+function renderPostFold(id){
+  if(!(window.DarFold&&DarFold.isDual()))return renderPost(id);
+  let rail="";
+  try{
+    const from=(typeof getPostBrowseFrom==="function"&&getPostBrowseFrom())||window.__darPostBrowseFrom||null;
+    if(from&&from.view==="topic")rail=renderFiltered("category",from.value||"");
+    else if(from&&from.view==="scholar")rail=renderFiltered("scholar",from.value||"");
+    else if(from&&from.view==="book")rail=renderFiltered("book",from.value||"");
+    else if(from&&from.view==="recent")rail=renderRecent();
+    else if(from&&from.view==="saved")rail=renderSaved();
+    else if(from&&from.view==="series")rail=renderSeries(from.value||"");
+    else rail=renderTopics();
+  }catch(e){rail=renderTopics()}
+  return DarFold.shell(rail,renderPost(id),{family:"posts",compactMode:"pane"});
+}
+function renderScholarsFoldRoute(view,value){
+  if(!(window.DarFold&&DarFold.isDual())){
+    if(view==="scholars")return renderScholars();
+    if(view==="scholar")return renderFiltered("scholar",value);
+    return renderScholars();
+  }
+  if(view==="scholars")return DarFold.shell(renderScholars(),DarFold.emptyPane("Links einen Gelehrten wählen"),{family:"scholars",compactMode:"rail"});
+  return DarFold.shell(renderScholars(),renderFiltered("scholar",value),{family:"scholars",compactMode:"pane"});
+}
+
 function render(){
   try{
     const routeBefore=readRoute();
@@ -25369,12 +25432,12 @@ function render(){
     else if(currentRoute.view==="quiz")html=renderQuiz();
     else if(currentRoute.view==="topics")html=renderTopics();
     else if(currentRoute.view==="propheten")html=(window.DARProphets&&typeof window.DARProphets.render==="function"?window.DARProphets.render(currentRoute.value):`<div class="empty">Prophetenbibliothek wird geladen…</div>`);
-    else if(currentRoute.view==="scholars")html=renderScholars();
+    else if(currentRoute.view==="scholars")html=renderScholarsFoldRoute("scholars");
     else if(currentRoute.view==="books")html=renderBooks();
     else if(currentRoute.view==="quellen-book")html=window.DARCanonicalSourceLibrary?DARCanonicalSourceLibrary.renderBookDetail(currentRoute.value):renderBooks();
     else if(currentRoute.view==="quellen-scholar")html=window.DARCanonicalSourceLibrary?DARCanonicalSourceLibrary.renderScholarDetail(currentRoute.value):renderBooks();
     else if(currentRoute.view==="topic")html=renderFiltered("category",currentRoute.value);
-    else if(currentRoute.view==="scholar")html=renderFiltered("scholar",currentRoute.value);
+    else if(currentRoute.view==="scholar")html=renderScholarsFoldRoute("scholar",currentRoute.value);
     else if(currentRoute.view==="book")html=renderFiltered("book",currentRoute.value);
     else if(currentRoute.view==="calendar")html=renderCalendar();
     else if(currentRoute.view==="ramadan")html=renderRamadan();
@@ -25394,14 +25457,14 @@ function render(){
     else if(currentRoute.view==="jummah")html=renderJummah();
     else if(currentRoute.view==="image-editor")html=renderImageEditor();
     else if(currentRoute.view==="image-editor-test")html=renderImageEditorTest();
-    else if(currentRoute.view==="quran")html=renderQuran();
+    else if(currentRoute.view==="quran")html=renderQuranFoldRoute("quran");
     else if(currentRoute.view==="quran-topic")html=currentRoute.value?renderQuranTopicDetail(currentRoute.value):renderQuranTopics();
-    else if(currentRoute.view==="quran-surah")html=renderQuranSurah(currentRoute.value);
-    else if(currentRoute.view==="duas")html=renderDuas();
-    else if(currentRoute.view==="dua-cat")html=renderDuaCat(currentRoute.value);
-    else if(currentRoute.view==="dua")html=renderDua(currentRoute.value);
-    else if(currentRoute.view==="post")html=renderPost(currentRoute.value);
-      else if(currentRoute.view==="news-detail")html=renderNewsDetail(currentRoute.value);
+    else if(currentRoute.view==="quran-surah")html=renderQuranFoldRoute("quran-surah",currentRoute.value);
+    else if(currentRoute.view==="duas")html=renderDuaFoldRoute("duas");
+    else if(currentRoute.view==="dua-cat")html=renderDuaFoldRoute("dua-cat",currentRoute.value);
+    else if(currentRoute.view==="dua")html=renderDuaFoldRoute("dua",currentRoute.value);
+    else if(currentRoute.view==="post")html=renderPostFold(currentRoute.value);
+    else if(currentRoute.view==="news-detail")html=renderNewsDetail(currentRoute.value);
     else if(currentRoute.view==="statistik"){navigate("quiz","stats",{skipPush:true,noAnim:true});return}
     else if(currentRoute.view==="hadith")html=renderHadith();
     else html=renderHome();
@@ -25445,16 +25508,35 @@ function render(){
     if(["bibliothek","bibliothek-detail","bibliothek-reader"].includes(currentRoute.view)&&window.DARLibraryApp){
       const libRoute={...currentRoute};
       window.DARLibraryApp.bindLibrary(libRoute);
+      const foldDual=!!(window.DarFold&&DarFold.isDual());
       if(currentRoute.view==="bibliothek"){
         window.DARLibraryApp.renderBibliothekWithOffline().then(html=>{
           const mount=document.getElementById("libraryMount");
           if(mount&&readRoute().view==="bibliothek"){mount.innerHTML=html;window.DARLibraryApp.bindLibrary(readRoute())}
         });
       }else if(currentRoute.view==="bibliothek-detail"){
-        window.DARLibraryApp.renderBibliothekDetailWithOffline(currentRoute.value||"").then(html=>{
-          const mount=document.getElementById("libraryMount");
-          if(mount&&readRoute().view==="bibliothek-detail"&&readRoute().value===currentRoute.value){mount.innerHTML=html;window.DARLibraryApp.bindLibrary(readRoute())}
-        });
+        if(foldDual){
+          window.DARLibraryApp.renderBibliothekWithOffline().then(html=>{
+            const mount=document.getElementById("libraryMount");
+            if(mount&&readRoute().view==="bibliothek-detail"&&readRoute().value===currentRoute.value){
+              mount.innerHTML=html;
+              try{mount.querySelectorAll("[data-library-open]").forEach(el=>{el.classList.toggle("is-fold-active",String(el.getAttribute("data-library-open")||"")===String(currentRoute.value||""))})}catch(e){}
+              window.DARLibraryApp.bindLibrary(readRoute());
+            }
+          });
+          window.DARLibraryApp.renderBibliothekDetailWithOffline(currentRoute.value||"").then(html=>{
+            const pane=document.querySelector('.dar-fold__pane [data-fold-role="pane"]')||document.querySelector(".dar-fold__pane");
+            if(pane&&readRoute().view==="bibliothek-detail"&&readRoute().value===currentRoute.value){
+              pane.innerHTML=html;
+              window.DARLibraryApp.bindLibrary(readRoute());
+            }
+          });
+        }else{
+          window.DARLibraryApp.renderBibliothekDetailWithOffline(currentRoute.value||"").then(html=>{
+            const mount=document.getElementById("libraryMount");
+            if(mount&&readRoute().view==="bibliothek-detail"&&readRoute().value===currentRoute.value){mount.innerHTML=html;window.DARLibraryApp.bindLibrary(readRoute())}
+          });
+        }
       }
     }
     stopStatsRefresh();
@@ -25622,6 +25704,16 @@ function bindEvents(){
 }
 bindFastAction($("backBtn"),()=>goBack());const homeBtnEl=$("homeBtn");if(homeBtnEl)bindFastAction(homeBtnEl,()=>hardGoHome());
 window.addEventListener("hashchange",render);
+window.addEventListener("dar:layoutchange",function(ev){
+  try{
+    var d=ev&&ev.detail||{};
+    var prev=window.__darLastFoldDual;
+    var now=!!(d.dual|| (window.DarFold&&DarFold.isDual()));
+    if(prev===now)return;
+    window.__darLastFoldDual=now;
+    if(typeof render==="function")render();
+  }catch(e){}
+},{passive:true});
 const FLOAT_TIPS_KEY="darFloatTipsShownV1";
 function showFloatTipsOnce(){return}
 const FLOAT_TOUCHBAR_KEY="darFloatTouchbarActivatedV1";
@@ -27954,6 +28046,61 @@ html[data-orientation="landscape"][data-layout="medium"] .app{
   html[data-layout="medium"] .latest-grid{
     grid-template-columns:repeat(4,minmax(0,1fr))!important;
   }
+}
+</style>
+
+
+<style id="android-scroll-fold-fix-v625">
+/* ANDROID_SCROLL_FOLD_FIX_V625 · Document-scroll on Android + Fold dual */
+html.is-android{
+  height:auto!important;
+  min-height:100%!important;
+  overflow-x:hidden!important;
+  overflow-y:scroll!important;
+  overscroll-behavior-y:auto!important;
+  overscroll-behavior-x:none!important;
+  touch-action:manipulation!important;
+  -webkit-overflow-scrolling:touch!important;
+}
+html.is-android body,
+html.is-android.is-standalone-pwa body,
+html.is-android[data-theme] body{
+  height:auto!important;
+  min-height:100%!important;
+  overflow-x:hidden!important;
+  overflow-y:visible!important;
+  overscroll-behavior-y:auto!important;
+  touch-action:manipulation!important;
+  -webkit-overflow-scrolling:touch!important;
+}
+html.is-android #appView,
+html.is-android #appView.view,
+html.is-android .app{
+  transform:none!important;
+  -webkit-transform:none!important;
+  will-change:auto!important;
+  backface-visibility:visible!important;
+  -webkit-backface-visibility:visible!important;
+  touch-action:manipulation!important;
+  overflow-x:hidden!important;
+  overflow-y:visible!important;
+}
+html.is-android.dar-scroll-guard,
+html.is-android.dar-scroll-guard body{
+  overscroll-behavior-y:auto!important;
+}
+html.is-android .view:not(.is-tab-swiping):not(.page-enter-forward):not(.page-enter-back):not(.tab-swipe-left):not(.tab-swipe-right){
+  transform:none!important;
+  will-change:auto!important;
+}
+/* Fold dual: independent rails scroll on Android */
+html.is-android .dar-fold__rail,
+html.is-android .dar-fold__pane,
+html.is-android .prophets-rail,
+html.is-android .prophets-pane{
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior:contain!important;
+  touch-action:pan-y!important;
 }
 </style>
 
