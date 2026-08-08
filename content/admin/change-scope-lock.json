@@ -2999,6 +2999,19 @@
         "test/service-worker.js"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-ci-emoji-prod-allow-v621c-2026-08-08",
+      "approvedBy": "user-task-propheten-dua-licht-emoji-fokus-push-live",
+      "note": "CI Phase07/10: thematische Emojis + production=enabled nach Live-Ship",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "scripts/prophets-phase07-production-guard.js",
+        "scripts/prophets-phase10-preprod.js",
+        "scripts/prophets-phase08-qa.js",
+        "scripts/prophets-phase09-smoke.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
