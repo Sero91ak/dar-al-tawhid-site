@@ -103,6 +103,27 @@
       "expiresAt": "2026-12-31T23:59:00.000Z"
     },
     {
+      "id": "fold-tablet-landscape-dual-v627-2026-08-08",
+      "approvedBy": "user-explicit-binding-order",
+      "reason": "Verbindlicher Auftrag: Fold + Tablet Querformat Zwei-Bereichs-Modus; Tablet Hochformat Einspalte; State erhalten; Test+Live",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/adaptive-layout.js",
+        "assets/adaptive-layout.css",
+        "assets/fold-split.js",
+        "assets/fold-split.css",
+        "assets/prophets/",
+        "test/assets/prophets/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "fold-dual-pane-android-scroll-v625-2026-08-08",
       "approvedBy": "user-explicit-live-push",
       "reason": "Nutzer: Android Scroll noch kaputt; feste Fold-Regel (links Auswahl / rechts Inhalt) für Fold+Tablet; Live+Test push",

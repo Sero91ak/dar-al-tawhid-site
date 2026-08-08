@@ -2,6 +2,7 @@
  * DAR AL TAWḤĪD — Fold / Tablet Master-Detail CSS
  * Feste Regel: Links finden · Rechts öffnen/lesen
  * 34% / 66% · Rail max 320–380px · Pane interne Lesebreite
+ * Dual nur bei Expanded / is-fold-dual (Tablet Querformat, Fold offen)
  * Bottom-Nav bleibt unten (kein Left-Rail-Nav).
  */
 
@@ -61,9 +62,10 @@ html[data-theme] {
   max-width: 28ch;
 }
 
-/* —— Dual: Fold open / tablet / iPad landscape —— */
+/* —— Dual: Fold open / tablet landscape / wide desktop —— */
 html[data-layout="expanded"] .dar-fold[data-fold-mode="dual"],
-html.is-fold-dual .dar-fold[data-fold-mode="dual"] {
+html.is-fold-dual .dar-fold[data-fold-mode="dual"],
+html[data-fold-dual="1"] .dar-fold[data-fold-mode="dual"] {
   grid-template-columns:
     clamp(var(--fold-rail-min), var(--fold-rail-pct), var(--fold-rail-max))
     minmax(0, 1fr);
@@ -71,7 +73,8 @@ html.is-fold-dual .dar-fold[data-fold-mode="dual"] {
 }
 
 html[data-layout="expanded"] .dar-fold[data-fold-mode="dual"] > .dar-fold__rail,
-html.is-fold-dual .dar-fold[data-fold-mode="dual"] > .dar-fold__rail {
+html.is-fold-dual .dar-fold[data-fold-mode="dual"] > .dar-fold__rail,
+html[data-fold-dual="1"] .dar-fold[data-fold-mode="dual"] > .dar-fold__rail {
   position: sticky;
   top: calc(env(safe-area-inset-top, 0px) + 6px);
   max-height: calc(100dvh - 108px);
@@ -89,7 +92,8 @@ html.is-fold-dual .dar-fold[data-fold-mode="dual"] > .dar-fold__rail {
 }
 
 html[data-layout="expanded"] .dar-fold[data-fold-mode="dual"] > .dar-fold__pane,
-html.is-fold-dual .dar-fold[data-fold-mode="dual"] > .dar-fold__pane {
+html.is-fold-dual .dar-fold[data-fold-mode="dual"] > .dar-fold__pane,
+html[data-fold-dual="1"] .dar-fold[data-fold-mode="dual"] > .dar-fold__pane {
   padding: 0 0 28px 18px;
 }
 
@@ -101,36 +105,42 @@ html[data-layout="expanded"] .dar-fold__pane .dua-detail-box,
 html[data-layout="expanded"] .dar-fold__pane .qrc-shell,
 html[data-layout="expanded"] .dar-fold__pane .quran-ayah-list,
 html[data-layout="expanded"] .dar-fold__pane .lib-detail,
+html[data-layout="expanded"] .dar-fold__pane .qsrc-detail,
 html.is-fold-dual .dar-fold__pane .article,
 html.is-fold-dual .dar-fold__pane .post-reader,
 html.is-fold-dual .dar-fold__pane .post-body,
 html.is-fold-dual .dar-fold__pane .dua-detail-box,
 html.is-fold-dual .dar-fold__pane .qrc-shell,
 html.is-fold-dual .dar-fold__pane .quran-ayah-list,
-html.is-fold-dual .dar-fold__pane .lib-detail {
+html.is-fold-dual .dar-fold__pane .lib-detail,
+html.is-fold-dual .dar-fold__pane .qsrc-detail,
+html[data-fold-dual="1"] .dar-fold__pane .article,
+html[data-fold-dual="1"] .dar-fold__pane .post-reader,
+html[data-fold-dual="1"] .dar-fold__pane .post-body,
+html[data-fold-dual="1"] .dar-fold__pane .dua-detail-box,
+html[data-fold-dual="1"] .dar-fold__pane .qrc-shell,
+html[data-fold-dual="1"] .dar-fold__pane .quran-ayah-list,
+html[data-fold-dual="1"] .dar-fold__pane .lib-detail,
+html[data-fold-dual="1"] .dar-fold__pane .qsrc-detail {
   max-width: var(--fold-pane-read-max);
   margin-left: auto;
   margin-right: auto;
 }
 
-/* Hide mobile-only back chrome inside dual rail/pane when duplicated */
-html[data-layout="expanded"] .dar-fold__pane .view-head .back-btn,
-html.is-fold-dual .dar-fold__pane .view-head .back-btn {
-  /* keep back for deep stacks inside pane */
-}
-
 /* Active row highlight in rail */
 .dar-fold__rail [data-nav].is-fold-active,
 .dar-fold__rail [data-library-open].is-fold-active,
+.dar-fold__rail [data-qsrc-open].is-fold-active,
 .dar-fold__rail .quran-surah-card.is-fold-active,
 .dar-fold__rail .dua-card.is-fold-active,
 .dar-fold__rail .post-card.is-fold-active,
-.dar-fold__rail .lib-card.is-fold-active {
+.dar-fold__rail .lib-card.is-fold-active,
+.dar-fold__rail .qsrc-card.is-fold-active {
   border-color: color-mix(in srgb, var(--gold2, #efd78e) 52%, transparent) !important;
   box-shadow: inset 3px 0 0 color-mix(in srgb, var(--gold2, #efd78e) 72%, transparent);
 }
 
-/* Compact: never force dual grid */
+/* Compact / Tablet Hochformat: nie Dual-Grid erzwingen */
 @media (max-width: 699.98px) {
   .dar-fold[data-fold-mode="dual"] {
     grid-template-columns: 1fr !important;
@@ -143,6 +153,30 @@ html.is-fold-dual .dar-fold__pane .view-head .back-btn {
     background: none !important;
   }
   .dar-fold__pane {
+    padding-left: 0 !important;
+  }
+}
+
+/* Tablet Hochformat (typisch 700–899): Einspalte, auch wenn Markup dual ist */
+@media (min-width: 700px) and (max-width: 899.98px) and (orientation: portrait) {
+  html:not(.is-fold-dual) .dar-fold[data-fold-mode="dual"],
+  html[data-fold-dual="0"] .dar-fold[data-fold-mode="dual"],
+  html[data-layout="medium"] .dar-fold[data-fold-mode="dual"],
+  html[data-layout="compact"] .dar-fold[data-fold-mode="dual"] {
+    grid-template-columns: 1fr !important;
+  }
+  html:not(.is-fold-dual) .dar-fold__rail,
+  html[data-fold-dual="0"] .dar-fold__rail,
+  html[data-layout="medium"] .dar-fold__rail {
+    position: static !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding-right: 0 !important;
+    background: none !important;
+  }
+  html:not(.is-fold-dual) .dar-fold__pane,
+  html[data-fold-dual="0"] .dar-fold__pane,
+  html[data-layout="medium"] .dar-fold__pane {
     padding-left: 0 !important;
   }
 }

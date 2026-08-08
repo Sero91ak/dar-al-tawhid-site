@@ -55,6 +55,7 @@
     );
   }
   var DUAL_MIN = 700;
+  var DUAL_PORTRAIT_MIN = 900;
   var STATE_KEY = "dar_prophets_ui_v1";
   var LAST_READ_KEY = "dar_prophets_last_read_v1";
   var INDEX_STORE_KEY = "dar_prophets_index_cache_v2";
@@ -145,9 +146,23 @@
       if (global.DarFold && typeof global.DarFold.isDual === "function") {
         return !!global.DarFold.isDual();
       }
+      if (global.DarAdaptiveLayout && typeof global.DarAdaptiveLayout.isDual === "function") {
+        return !!global.DarAdaptiveLayout.isDual();
+      }
+      if (document.documentElement.getAttribute("data-fold-dual") === "1") return true;
+      if (document.documentElement.classList.contains("is-fold-dual")) return true;
       if (document.documentElement.getAttribute("data-layout") === "expanded") return true;
     } catch (e) {}
-    return measureWidth() >= DUAL_MIN;
+    var w = measureWidth();
+    var h = Math.round(
+      (global.visualViewport && global.visualViewport.height) ||
+        document.documentElement.clientHeight ||
+        global.innerHeight ||
+        0
+    );
+    if (w < DUAL_MIN) return false;
+    if (w >= h) return true;
+    return w >= DUAL_PORTRAIT_MIN;
   }
 
   function rolesLabel(roles) {

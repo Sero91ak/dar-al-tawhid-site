@@ -142,38 +142,43 @@ button.prophets-spotlight.more-feature-row::after,
   max-width:var(--prophets-read-max);
 }
 
-@container prophets (min-width: 700px){
-  .prophets-layout--dual{
-    grid-template-columns:
-      clamp(var(--prophets-rail-min), var(--prophets-rail-pct), var(--prophets-rail-max))
-      minmax(0,1fr);
-    gap:0;
-  }
-  .prophets-rail{
-    position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);
-    max-height:calc(100dvh - 110px);overflow:auto;
-    padding:0 16px 24px 0;
-    background:
-      linear-gradient(90deg,
-        transparent 0%,
-        transparent calc(100% - 1px),
-        color-mix(in srgb,var(--gold2) 28%,transparent) calc(100% - 1px),
-        transparent 100%);
-  }
-  .prophets-pane{padding:0 0 28px 20px}
-  .prophets-rail__back-mobile{display:none!important}
+/* Dual nur wenn JS-Regel aktiv (Tablet Quer / Fold offen) — nicht bei Tablet Hochformat */
+html.is-fold-dual .prophets-layout--dual,
+html[data-fold-dual="1"] .prophets-layout--dual,
+html[data-layout="expanded"] .prophets-layout--dual{
+  grid-template-columns:
+    clamp(var(--prophets-rail-min), var(--prophets-rail-pct), var(--prophets-rail-max))
+    minmax(0,1fr);
+  gap:0;
 }
-@supports not (container-type:inline-size){
-  @media (min-width:700px){
-    .prophets-layout--dual{grid-template-columns:clamp(320px,34%,380px) minmax(0,1fr)}
-    .prophets-rail{
-      position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);
-      max-height:calc(100dvh - 110px);overflow:auto;
-      padding:0 16px 24px 0;
-      border-inline-end:1px solid color-mix(in srgb,var(--gold2) 24%,transparent);
-    }
-    .prophets-pane{padding:0 0 28px 20px}
-    .prophets-rail__back-mobile{display:none!important}
+html.is-fold-dual .prophets-layout--dual .prophets-rail,
+html[data-fold-dual="1"] .prophets-layout--dual .prophets-rail,
+html[data-layout="expanded"] .prophets-layout--dual .prophets-rail{
+  position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);
+  max-height:calc(100dvh - 110px);overflow:auto;
+  padding:0 16px 24px 0;
+  background:
+    linear-gradient(90deg,
+      transparent 0%,
+      transparent calc(100% - 1px),
+      color-mix(in srgb,var(--gold2) 28%,transparent) calc(100% - 1px),
+      transparent 100%);
+}
+html.is-fold-dual .prophets-layout--dual .prophets-pane,
+html[data-fold-dual="1"] .prophets-layout--dual .prophets-pane,
+html[data-layout="expanded"] .prophets-layout--dual .prophets-pane{
+  padding:0 0 28px 20px;
+}
+html.is-fold-dual .prophets-rail__back-mobile,
+html[data-fold-dual="1"] .prophets-rail__back-mobile,
+html[data-layout="expanded"] .prophets-rail__back-mobile{
+  display:none!important;
+}
+@media (min-width:700px) and (max-width:899.98px) and (orientation:portrait){
+  html:not(.is-fold-dual) .prophets-layout--dual,
+  html[data-fold-dual="0"] .prophets-layout--dual,
+  html[data-layout="medium"] .prophets-layout--dual{
+    grid-template-columns:1fr!important;
   }
 }
 
