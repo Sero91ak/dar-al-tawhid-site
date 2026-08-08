@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "sources": {
+    "quran": {
+      "id": "quran",
+      "title": "Qurʾān",
+      "type": "revelation",
+      "loader": "existing-reader"
+    },
+    "bukhari": {
+      "id": "bukhari",
+      "title": "Ṣaḥīḥ al-Buḫārī",
+      "type": "hadith",
+      "gradingDefault": "sahih"
+    },
+    "muslim": {
+      "id": "muslim",
+      "title": "Ṣaḥīḥ Muslim",
+      "type": "hadith",
+      "gradingDefault": "sahih"
+    },
+    "tirmidhi": {
+      "id": "tirmidhi",
+      "title": "Jāmiʿ at-Tirmidhī",
+      "type": "hadith"
+    },
+    "ahmad": {
+      "id": "ahmad",
+      "title": "Musnad Aḥmad",
+      "type": "hadith"
+    }
+  },
+  "hadithCount": 44,
+  "note": "Canonical hadith bodies live in ../hadith/; Qurʾān text via existing reader."
+}

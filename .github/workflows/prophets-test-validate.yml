@@ -1,0 +1,98 @@
+name: Prophets Test Validate
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - test/data/prophets/**
+      - test/assets/prophets/**
+      - scripts/validate-prophets-all.js
+      - scripts/build-prophets-search-index.js
+      - scripts/build-prophets-content-manifest.js
+      - scripts/prepare-prophets-rc.js
+      - scripts/prophets-phase09-smoke.js
+      - scripts/prophets-phase08-qa.js
+      - scripts/prophets-phase07-production-guard.js
+      - scripts/prophets-phase12-coverage-audit.js
+      - scripts/prophets-phase12-coverage-audit-block02.js
+      - scripts/prophets-phase12-final-audit.js
+      - scripts/prophets-phase12-final-freeze.js
+      - scripts/prophets_phase12_coverage_block01.py
+      - scripts/prophets_phase12_coverage_block02.py
+      - scripts/prophets_phase12_final_build.py
+      - scripts/prophets-phase13-implement.js
+      - scripts/prophets-phase13-final-report.js
+      - .github/workflows/prophets-test-validate.yml
+  push:
+    paths:
+      - test/data/prophets/**
+      - test/assets/prophets/**
+      - scripts/validate-prophets-all.js
+      - scripts/build-prophets-search-index.js
+      - scripts/build-prophets-content-manifest.js
+      - scripts/prepare-prophets-rc.js
+      - scripts/prophets-phase09-smoke.js
+      - scripts/prophets-phase08-qa.js
+      - scripts/prophets-phase07-production-guard.js
+      - scripts/prophets-phase12-coverage-audit.js
+      - scripts/prophets-phase12-coverage-audit-block02.js
+      - scripts/prophets-phase12-final-audit.js
+      - scripts/prophets-phase12-final-freeze.js
+      - scripts/prophets_phase12_coverage_block01.py
+      - scripts/prophets_phase12_coverage_block02.py
+      - scripts/prophets_phase12_final_build.py
+      - scripts/prophets-phase13-implement.js
+      - scripts/prophets-phase13-final-report.js
+      - .github/workflows/prophets-test-validate.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate-prophets-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install (minimal)
+        run: |
+          if [ -f package-lock.json ]; then npm ci --ignore-scripts; else npm install --ignore-scripts; fi
+
+      - name: Validate prophets (master)
+        run: node scripts/validate-prophets-all.js
+
+      - name: Rebuild search index + content manifest
+        run: |
+          node scripts/build-prophets-search-index.js
+          node scripts/build-prophets-content-manifest.js
+
+      - name: Re-validate search index + production lock
+        run: node scripts/validate-prophets-all.js
+
+      - name: Phase 09 smoke + RC acceptance
+        run: node scripts/prophets-phase09-smoke.js
+
+      - name: Guard — production must stay disabled
+        run: node scripts/prophets-phase07-production-guard.js
+
+      - name: Phase 10 pre-production prep (no live copy)
+        run: node scripts/prophets-phase10-preprod.js
+
+      - name: Phase 11 go-live dry-run (no production write)
+        run: node scripts/prophets-phase11-dry-run.js
+
+      - name: Phase 12 coverage audit block 01
+        run: node scripts/prophets-phase12-coverage-audit.js
+
+      - name: Phase 12 coverage audit block 02
+        run: node scripts/prophets-phase12-coverage-audit-block02.js
+
+      - name: Phase 12 FINAL audit + freeze (test only)
+        run: SKIP_PHASE12_REBUILD=1 node scripts/prophets-phase12-final-audit.js
+
+      - name: Phase 13 final report (honest NOT_RUN for manual UI)
+        run: node scripts/prophets-phase13-final-report.js

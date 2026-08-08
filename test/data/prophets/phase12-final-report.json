@@ -1,0 +1,96 @@
+{
+  "project": "DAR AL TAWḤĪD – Propheten",
+  "environment": "test",
+  "releaseCandidate": "prophets-final-test-v1",
+  "coreProfiles": 25,
+  "researchProfiles": 5,
+  "claims": {
+    "approved": 1639,
+    "research": 9,
+    "disputed": 0,
+    "rejected": 0
+  },
+  "evidence": {
+    "quran": 1338,
+    "sahih": 78,
+    "hasan": 0,
+    "reliableAthar": 0
+  },
+  "excluded": {
+    "daif": 0,
+    "veryWeak": 0,
+    "mawdu": 0,
+    "israiliyyat": 0,
+    "unverified": 0
+  },
+  "errors": {
+    "json": [],
+    "schema": [],
+    "quran": [],
+    "hadith": [],
+    "athar": [],
+    "relations": [],
+    "sources": [],
+    "search": [],
+    "researchLeaks": [],
+    "offline": [],
+    "routing": []
+  },
+  "coverage": {
+    "completeProfiles": 25,
+    "partialProfiles": 0
+  },
+  "coreResults": {
+    "adam": "PASS",
+    "idris": "PASS",
+    "nuh": "PASS",
+    "hud": "PASS",
+    "salih": "PASS",
+    "ibrahim": "PASS",
+    "lut": "PASS",
+    "ismail": "PASS",
+    "ishaq": "PASS",
+    "yaqub": "PASS",
+    "yusuf": "PASS",
+    "ayyub": "PASS",
+    "shuayb": "PASS",
+    "musa": "PASS",
+    "harun": "PASS",
+    "dawud": "PASS",
+    "sulayman": "PASS",
+    "ilyas": "PASS",
+    "alyasa": "PASS",
+    "yunus": "PASS",
+    "zakariyya": "PASS",
+    "yahya": "PASS",
+    "isa": "PASS",
+    "dhul-kifl": "PASS",
+    "muhammad": "PASS"
+  },
+  "researchResults": {
+    "al-khidr": "PASS",
+    "luqman": "PASS",
+    "dhul-qarnayn": "PASS",
+    "uzayr": "PASS",
+    "yusha-ibn-nun": "PASS"
+  },
+  "ui": {
+    "phone": "PASS",
+    "tablet": "PASS",
+    "fold": "PASS",
+    "rtl": "PASS",
+    "themes": "PASS"
+  },
+  "pwa": {
+    "offline": "PASS",
+    "updateLoop": "PASS"
+  },
+  "regression": "PASS",
+  "productionEnabled": false,
+  "testEnabled": true,
+  "noLiveRelease": true,
+  "finalResult": "PASS",
+  "generatedAt": "2026-08-08T11:00:05.543Z",
+  "note": "FINAL TEST VERSION — production remains disabled; PASS ≠ live",
+  "validator": "PASS"
+}

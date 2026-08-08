@@ -1,0 +1,419 @@
+{
+  "releaseCandidate": "prophets-final-test-v1",
+  "environment": "test",
+  "productionEnabled": false,
+  "build": "PASS",
+  "validatorExit": "PASS",
+  "coreProfilesLoaded": 25,
+  "ui": {
+    "phone": "PASS",
+    "tablet": "PASS",
+    "fold": "PASS",
+    "rtl": "PASS",
+    "themes": "PASS"
+  },
+  "pwa": {
+    "offline": "PASS",
+    "updateLoop": "NOT_RUN"
+  },
+  "regression": "PASS",
+  "criticalErrors": [],
+  "details": {
+    "phone": {
+      "name": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dual": false,
+      "rail": 0,
+      "mode": "single-detail",
+      "errors": [],
+      "tabs": [
+        "Übersicht",
+        "Lebensweg",
+        "Qurʾān",
+        "Sunnah",
+        "Aussagen",
+        "Familie",
+        "Ereignisse",
+        "Quellen"
+      ],
+      "pass": true
+    },
+    "fold": {
+      "name": "fold",
+      "viewport": {
+        "width": 840,
+        "height": 900
+      },
+      "dual": true,
+      "rail": 320,
+      "mode": "dual",
+      "errors": [],
+      "tabs": [
+        "Übersicht",
+        "Lebensweg",
+        "Qurʾān",
+        "Sunnah",
+        "Aussagen",
+        "Familie",
+        "Ereignisse",
+        "Quellen"
+      ],
+      "pass": true
+    },
+    "tablet": {
+      "name": "tabletLandscape",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "dual": true,
+      "rail": 339,
+      "mode": "dual",
+      "errors": [],
+      "tabs": [
+        "Übersicht",
+        "Lebensweg",
+        "Qurʾān",
+        "Sunnah",
+        "Aussagen",
+        "Familie",
+        "Ereignisse",
+        "Quellen"
+      ],
+      "pass": true
+    },
+    "core": {
+      "opened": 25,
+      "failed": [],
+      "tabCoverage": {
+        "adam": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "idris": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "nuh": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "hud": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "salih": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "ibrahim": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "lut": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "ismail": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "ishaq": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "yaqub": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "yusuf": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "ayyub": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "shuayb": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "musa": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "harun": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "dawud": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "sulayman": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "ilyas": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "alyasa": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "yunus": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "zakariyya": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "yahya": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "isa": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "dhul-kifl": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ],
+        "muhammad": [
+          "Übersicht",
+          "Lebensweg",
+          "Qurʾān",
+          "Sunnah",
+          "Aussagen",
+          "Familie",
+          "Ereignisse",
+          "Quellen"
+        ]
+      },
+      "pass": true
+    },
+    "research": {
+      "pass": true,
+      "errors": [],
+      "probe": {
+        "leaks": [],
+        "furtherHas": [
+          "al-Khiḍr",
+          "Luqmān",
+          "Dhū l-Qarnayn",
+          "ʿUzayr",
+          "Yūshaʿ"
+        ],
+        "establishedCount": 19,
+        "furtherCount": 6
+      }
+    },
+    "search": {
+      "pass": true,
+      "hits": {
+        "Musa": {
+          "ok": true,
+          "count": 5,
+          "sample": "✦ Mūsā موسى عليه السلام Nabī · Rasūl · Banū Isrāʾīl ›"
+        },
+        "Mūsā": {
+          "ok": true,
+          "count": 5,
+          "sample": "✦ Mūsā موسى عليه السلام Nabī · Rasūl · Banū Isrāʾīl ›"
+        },
+        "موسى": {
+          "ok": true,
+          "count": 1,
+          "sample": "✦ Mūsā موسى عليه السلام Nabī · Rasūl · Banū Isrāʾīl ›"
+        },
+        "Ibrahim": {
+          "ok": true,
+          "count": 5,
+          "sample": "✦ Ibrāhīm إبراهيم عليه السلام Nabī ›"
+        },
+        "Yunus": {
+          "ok": true,
+          "count": 1,
+          "sample": "◆ Yūnus يونس عليه السلام Nabī · Rasūl ›"
+        },
+        "Fisch": {
+          "ok": true,
+          "count": 1,
+          "sample": "◆ Yūnus يونس عليه السلام Nabī · Rasūl ›"
+        },
+        "Zamzam": {
+          "ok": true,
+          "count": 2,
+          "sample": "✦ Ibrāhīm إبراهيم عليه السلام Nabī ›"
+        },
+        "Kalb": {
+          "ok": true,
+          "count": 2,
+          "sample": "✦ Mūsā موسى عليه السلام Nabī · Rasūl · Banū Isrāʾīl ›"
+        }
+      },
+      "errors": []
+    },
+    "offline": {
+      "pass": true,
+      "errors": [],
+      "externalAlert": null
+    },
+    "themeRtl": {
+      "themes": "PASS",
+      "rtl": "PASS",
+      "errors": []
+    }
+  },
+  "generatedAt": "2026-08-08T11:48:25.038Z"
+}

@@ -1,0 +1,258 @@
+{
+  "prophetsCoreCount": 25,
+  "profilesPresent": 25,
+  "researchProfiles": [
+    {
+      "id": "adam",
+      "profileStatus": "research"
+    },
+    {
+      "id": "ayyub",
+      "profileStatus": "research"
+    },
+    {
+      "id": "shuayb",
+      "profileStatus": "research"
+    },
+    {
+      "id": "harun",
+      "profileStatus": "research"
+    },
+    {
+      "id": "dawud",
+      "profileStatus": "research"
+    }
+  ],
+  "approvedClaims": 1427,
+  "researchClaims": 0,
+  "disputedClaims": 0,
+  "weakReports": 75,
+  "israiliyyatReports": 9,
+  "brokenSourceLinks": [],
+  "brokenQuranLinks": [],
+  "duplicateHadithRecords": [],
+  "orphanClaims": [],
+  "unresolvedFamilyCorrelations": [
+    {
+      "prophetId": "idris",
+      "relation": "father"
+    },
+    {
+      "prophetId": "idris",
+      "relation": "mother"
+    },
+    {
+      "prophetId": "idris",
+      "relation": "wife"
+    },
+    {
+      "prophetId": "idris",
+      "relation": "children"
+    },
+    {
+      "prophetId": "hud",
+      "relation": "father"
+    },
+    {
+      "prophetId": "hud",
+      "relation": "mother"
+    },
+    {
+      "prophetId": "hud",
+      "relation": "wife"
+    },
+    {
+      "prophetId": "hud",
+      "relation": "children"
+    },
+    {
+      "prophetId": "salih",
+      "relation": "father"
+    },
+    {
+      "prophetId": "salih",
+      "relation": "mother"
+    },
+    {
+      "prophetId": "salih",
+      "relation": "wife"
+    },
+    {
+      "prophetId": "salih",
+      "relation": "children"
+    },
+    {
+      "prophetId": "ibrahim",
+      "relation": "mother"
+    },
+    {
+      "prophetId": "lut",
+      "relation": "father"
+    },
+    {
+      "prophetId": "ismail",
+      "relation": "children"
+    },
+    {
+      "prophetId": "ishaq",
+      "relation": "wife"
+    },
+    {
+      "prophetId": "yaqub",
+      "relation": "sons"
+    },
+    {
+      "prophetId": "yaqub",
+      "relation": "wives"
+    },
+    {
+      "prophetId": "yusuf",
+      "relation": "mother"
+    },
+    {
+      "prophetId": "yusuf",
+      "relation": "brothers"
+    },
+    {
+      "prophetId": "sulayman",
+      "relation": "mother"
+    },
+    {
+      "prophetId": "sulayman",
+      "relation": "children"
+    },
+    {
+      "prophetId": "ilyas",
+      "relation": "father"
+    },
+    {
+      "prophetId": "ilyas",
+      "relation": "mother"
+    },
+    {
+      "prophetId": "ilyas",
+      "relation": "wife"
+    },
+    {
+      "prophetId": "ilyas",
+      "relation": "children"
+    },
+    {
+      "prophetId": "ilyas",
+      "relation": "alyasa"
+    },
+    {
+      "prophetId": "alyasa",
+      "relation": "father"
+    },
+    {
+      "prophetId": "alyasa",
+      "relation": "mother"
+    },
+    {
+      "prophetId": "alyasa",
+      "relation": "wife"
+    },
+    {
+      "prophetId": "alyasa",
+      "relation": "children"
+    },
+    {
+      "prophetId": "alyasa",
+      "relation": "ilyas"
+    },
+    {
+      "prophetId": "yunus",
+      "relation": "mother"
+    },
+    {
+      "prophetId": "yunus",
+      "relation": "wife"
+    },
+    {
+      "prophetId": "yunus",
+      "relation": "children"
+    },
+    {
+      "prophetId": "zakariyya",
+      "relation": "wife"
+    },
+    {
+      "prophetId": "zakariyya",
+      "relation": "father"
+    },
+    {
+      "prophetId": "zakariyya",
+      "relation": "mother"
+    },
+    {
+      "prophetId": "yahya",
+      "relation": "mother"
+    },
+    {
+      "prophetId": "yahya",
+      "relation": "wife"
+    },
+    {
+      "prophetId": "yahya",
+      "relation": "children"
+    },
+    {
+      "prophetId": "isa",
+      "relation": "wife"
+    },
+    {
+      "prophetId": "isa",
+      "relation": "children"
+    },
+    {
+      "prophetId": "dhul-kifl",
+      "relation": "father"
+    },
+    {
+      "prophetId": "dhul-kifl",
+      "relation": "mother"
+    }
+  ],
+  "unresolvedFamilyCorrelationsCount": 45,
+  "unresolvedProphetStatusQuestions": [
+    {
+      "id": "dhul-kifl",
+      "prophetStatus": "scholarly_disputed"
+    },
+    {
+      "id": "yusha-ibn-nun",
+      "prophetStatus": "scholarly_source_correlation",
+      "note": "Sonderdatensatz — nicht Core-Qurʾān-Prophet"
+    }
+  ],
+  "specialSunnahPersons": [
+    {
+      "id": "yusha-ibn-nun",
+      "profileStatus": "approved",
+      "prophetStatus": "scholarly_source_correlation",
+      "claims": 14
+    }
+  ],
+  "block03StillResearch": [
+    "adam",
+    "ayyub",
+    "shuayb",
+    "harun",
+    "dawud"
+  ],
+  "productionEnabled": false,
+  "env": {
+    "test": "enabled",
+    "production": "disabled"
+  },
+  "validation": "PASS_WITH_NOTES",
+  "validationNotes": [
+    "Block 03 (Ayyūb, Shuʿayb, Hārūn, Dāwūd) und Ādam noch research — nicht Teil von Block 05.",
+    "Dhū l-Kifl: scholarly_disputed sichtbar.",
+    "Yūshaʿ: special sunnah dataset, nicht confirmedQuranProphets.",
+    "Muḥammad: Index-Profil, keine Voll-Sunnah-Kopie.",
+    "production=disabled."
+  ],
+  "generatedAt": "2026-08-08T09:03:10.612442+00:00"
+}

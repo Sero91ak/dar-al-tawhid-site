@@ -2663,6 +2663,280 @@
         "assets/live-boot.js"
       ],
       "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-block01-idris-ibrahim-v604-2026-08-08",
+      "approvedBy": "user-task-propheten-5er-block-01",
+      "note": "Zero-Trust Profile: Idrīs, Nūḥ, Hūd, Ṣāliḥ, Ibrāhīm — Test-first, production=disabled",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "data/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "index.html",
+        "scripts/build_prophets_block01.py"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-block02-lut-yusuf-v605-2026-08-08",
+      "approvedBy": "user-task-propheten-5er-block-02",
+      "note": "Zero-Trust: Lūṭ, Ismāʿīl, Isḥāq, Yaʿqūb, Yūsuf — Test-first, production=disabled",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "data/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "index.html",
+        "scripts/build_prophets_block02.py"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-block04-sulayman-zakariyya-v606-2026-08-08",
+      "approvedBy": "user-task-propheten-5er-block-04",
+      "note": "Zero-Trust: Sulaymān, Ilyās, al-Yasaʿ, Yūnus, Zakariyyā — Test-first, production=disabled",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "data/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "index.html",
+        "scripts/build_prophets_block04.py"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-block05-final-core-v607-2026-08-08",
+      "approvedBy": "user-task-propheten-5er-block-05",
+      "note": "Zero-Trust letzter Kernblock: Yaḥyā, ʿĪsā, Dhū l-Kifl (Ikhtilāf), Muḥammad (Index), Yūshaʿ — Test-first, production=disabled",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "data/prophets/",
+        "test/assets/prophets/prophets.js",
+        "test/index.html",
+        "test/version.json",
+        "index.html",
+        "scripts/build_prophets_block05.py"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-block06-research-endaudit-v608-2026-08-08",
+      "approvedBy": "user-task-sonderblock-06-endaudit",
+      "note": "Sonderblock 06: al-Khiḍr, Luqmān, Dhū l-Qarnayn, ʿUzayr (kein künstlicher Core-Prophet) + globaler End-Audit — Test-first, production=disabled",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "data/prophets/",
+        "test/assets/prophets/prophets.js",
+        "test/index.html",
+        "test/version.json",
+        "scripts/build_prophets_block06.py"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-phase07-tech-integration-v609-2026-08-08",
+      "approvedBy": "user-task-phase-07-tech-fertigstellen",
+      "note": "Phase 07: technische Gesamtintegration (research/, hadith/, relations/, Validatoren, UI-Status) — kein Content-Bulkimport; Test-first; production=disabled",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "data/prophets/",
+        "test/assets/prophets/prophets.js",
+        "test/index.html",
+        "test/version.json",
+        "scripts/prophets_phase07_integrate.py",
+        "scripts/prophets-phase07-production-guard.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-phase08-usable-ui-v610-2026-08-08",
+      "approvedBy": "user-task-phase-08-usable-ui",
+      "note": "Phase 08: Prophetenbereich in Test-App vollständig nutzbar (Suche, Filter, Tabs, Quellen, Offline-Hinweise) — keine neuen Fakten; production=disabled",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "data/prophets/",
+        "test/assets/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "scripts/prophets_phase08_search_index.py",
+        "scripts/prophets-phase08-qa.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-phase09-release-candidate-v611-2026-08-08",
+      "approvedBy": "user-task-phase-09-final-test-rc",
+      "note": "Phase 09: finaler TEST Release-Candidate (Validatoren, CI, Manifest, Search-Index, Offline/Error UX) — keine neuen Inhalte; production=disabled; NO live deploy",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "test/assets/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "scripts/validate-prophets-all.js",
+        "scripts/prepare-prophets-rc.js",
+        "scripts/build-prophets-search-index.js",
+        "scripts/build-prophets-content-manifest.js",
+        "scripts/prophets-phase09-smoke.js",
+        ".github/workflows/prophets-test-validate.yml",
+        "scripts/prophets-phase08-qa.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-phase10-preprod-prep-v612-2026-08-08",
+      "approvedBy": "user-task-phase-10-preprod-prep",
+      "note": "Phase 10: Produktions-Rollout VORBEREITEN only — freeze/hash/diff/rollback/preflight; production=disabled; NO live copy/deploy",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "test/assets/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "scripts/prophets-phase10-preprod.js",
+        ".github/workflows/prophets-test-validate.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-phase11-golive-dryrun-v613-2026-08-08",
+      "approvedBy": "user-task-phase-11-golive-dryrun",
+      "note": "Phase 11: finale Abnahme + Go-Live Dry-Run — KEINE Production Writes, production=disabled, READY≠LIVE",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "test/assets/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "scripts/prophets-phase11-dry-run.js",
+        ".github/workflows/prophets-test-validate.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-phase12-coverage-block01-v614-2026-08-08",
+      "approvedBy": "user-task-phase-12-coverage-block01",
+      "note": "Phase 12: Quellen-Vollständigkeits-Audit 5er-Block 01 (Ādam–Ṣāliḥ) — kein Bulk-Import, production=disabled, NO live",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "test/assets/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "scripts/prophets_phase12_coverage_block01.py",
+        "scripts/prophets-phase12-coverage-audit.js",
+        ".github/workflows/prophets-test-validate.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-phase12-coverage-block02-v615-2026-08-08",
+      "approvedBy": "user-task-phase-12-coverage-block02",
+      "note": "Phase 12: Quellen-Vollständigkeits-Audit 5er-Block 02 (Lūṭ–Yūsuf) — kein freier Content, production=disabled, NO live",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "test/assets/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "scripts/prophets_phase12_coverage_block02.py",
+        "scripts/prophets-phase12-coverage-audit-block02.js",
+        ".github/workflows/prophets-test-validate.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-phase12-final-test-v1-v616-2026-08-08",
+      "approvedBy": "user-task-phase-12-finalversion",
+      "note": "Phase 12 FINAL: alle Restprofile + Endaudit + prophets-final-test-v1 Freeze — production=disabled, NO live",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "test/assets/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "scripts/prophets_phase12_final_build.py",
+        "scripts/prophets-phase12-final-audit.js",
+        "scripts/prophets-phase12-final-freeze.js",
+        "scripts/prepare-prophets-rc.js",
+        ".github/workflows/prophets-test-validate.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-phase13-implement-final-v617-2026-08-08",
+      "approvedBy": "user-task-phase-13-jetzt-umsetzen",
+      "note": "Phase 13: Finalstand im TEST-Bereich umsetzen — production=disabled, NO live, NO production copy",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "test/assets/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/validate-prophets-all.js",
+        "scripts/prophets-phase13-implement.js",
+        "scripts/prophets-phase13-final-report.js",
+        "scripts/prophets-phase13-acceptance.js",
+        "scripts/build-prophets-search-index.js",
+        "scripts/prophets-phase12-final-freeze.js",
+        ".github/workflows/prophets-test-validate.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-ui-filter-restore-v617-2026-08-08",
+      "approvedBy": "user-task-restore-filter-design",
+      "note": "Propheten Filter/Suche Optik wie App-Schnellauswahl wiederherstellen — TEST only",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/assets/prophets/",
+        "test/index.html",
+        "test/version.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-fast-open-v618-2026-08-08",
+      "approvedBy": "user-task-propheten-schnell-oeffnen",
+      "note": "Propheten-Seite muss sofort öffnen: Index nicht blockieren, Cache-first für Index — TEST only",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/assets/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    }
+    {
+      "id": "prophets-dua-compact-live-v619-2026-08-08",
+      "approvedBy": "user-task-propheten-dua-optik-live",
+      "note": "Propheten kompakt wie Duʿāʾ + Live in Besucher-App (ausdrücklich: push live)",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/assets/prophets/",
+        "assets/prophets/",
+        "test/data/prophets/",
+        "data/prophets/",
+        "test/index.html",
+        "index.html",
+        "test/version.json",
+        "version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

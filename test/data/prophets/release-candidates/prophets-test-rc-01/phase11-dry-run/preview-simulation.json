@@ -1,0 +1,50 @@
+{
+  "mode": "production_like_preview_docs_only",
+  "publicDomainChanged": false,
+  "productionAssetPathsWouldBe": {
+    "data": "data/prophets/**",
+    "assets": "assets/prophets/**"
+  },
+  "testSourceOfTruth": {
+    "data": "test/data/prophets/**",
+    "assets": "test/assets/prophets/**"
+  },
+  "routes": [
+    {
+      "route": "/propheten",
+      "ok": true
+    },
+    {
+      "route": "/propheten/adam",
+      "ok": true,
+      "dataPath": "test/data/prophets/adam.json"
+    },
+    {
+      "route": "/propheten/ibrahim",
+      "ok": true,
+      "dataPath": "test/data/prophets/ibrahim.json"
+    },
+    {
+      "route": "/propheten/musa",
+      "ok": true,
+      "dataPath": "test/data/prophets/musa.json"
+    },
+    {
+      "route": "/propheten/yusuf",
+      "ok": true,
+      "dataPath": "test/data/prophets/yusuf.json"
+    },
+    {
+      "route": "/propheten/isa",
+      "ok": true,
+      "dataPath": "test/data/prophets/isa.json"
+    },
+    {
+      "route": "/propheten/muhammad",
+      "ok": true,
+      "dataPath": "test/data/prophets/muhammad.json"
+    }
+  ],
+  "caching": "lazy profile + hadith; index + search-index essential",
+  "result": "PASS"
+}

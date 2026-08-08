@@ -1,0 +1,16 @@
+{
+  "ADDED": [
+    "scripts/prophets-phase11-dry-run.js",
+    "test/data/prophets/release-candidates/prophets-test-rc-01/phase11-dry-run/",
+    "test/data/prophets/phase11-dry-run-report.json"
+  ],
+  "MODIFIED": [
+    "test/assets/prophets/prophets.js (search empty / offline uncached / https external guard)",
+    "test/index.html",
+    "test/version.json",
+    "content/admin/change-scope-lock.json",
+    ".github/workflows/prophets-test-validate.yml"
+  ],
+  "DELETED": [],
+  "PRODUCTION_FILES_CHANGED": "NONE"
+}

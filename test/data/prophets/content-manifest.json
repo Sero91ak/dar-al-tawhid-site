@@ -1,0 +1,245 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-08T11:00:14.527Z",
+  "environment": "test",
+  "productionEnabled": false,
+  "releaseCandidate": "prophets-final-test-v1",
+  "contentVersion": "prophets-final-test-v1",
+  "coreProfiles": [
+    {
+      "id": "adam",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "adam.json",
+      "claimCount": 31
+    },
+    {
+      "id": "idris",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "idris.json",
+      "claimCount": 21
+    },
+    {
+      "id": "nuh",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "nuh.json",
+      "claimCount": 165
+    },
+    {
+      "id": "hud",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "hud.json",
+      "claimCount": 83
+    },
+    {
+      "id": "salih",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "salih.json",
+      "claimCount": 93
+    },
+    {
+      "id": "ibrahim",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "ibrahim.json",
+      "claimCount": 243
+    },
+    {
+      "id": "lut",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "lut.json",
+      "claimCount": 127
+    },
+    {
+      "id": "ismail",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "ismail.json",
+      "claimCount": 43
+    },
+    {
+      "id": "ishaq",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "ishaq.json",
+      "claimCount": 34
+    },
+    {
+      "id": "yaqub",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "yaqub.json",
+      "claimCount": 63
+    },
+    {
+      "id": "yusuf",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "yusuf.json",
+      "claimCount": 160
+    },
+    {
+      "id": "ayyub",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "ayyub.json",
+      "claimCount": 16
+    },
+    {
+      "id": "shuayb",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "shuayb.json",
+      "claimCount": 15
+    },
+    {
+      "id": "musa",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "musa.json",
+      "claimCount": 260
+    },
+    {
+      "id": "harun",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "harun.json",
+      "claimCount": 22
+    },
+    {
+      "id": "dawud",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "dawud.json",
+      "claimCount": 26
+    },
+    {
+      "id": "sulayman",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "sulayman.json",
+      "claimCount": 40
+    },
+    {
+      "id": "ilyas",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "ilyas.json",
+      "claimCount": 21
+    },
+    {
+      "id": "alyasa",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "alyasa.json",
+      "claimCount": 17
+    },
+    {
+      "id": "yunus",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "yunus.json",
+      "claimCount": 32
+    },
+    {
+      "id": "zakariyya",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "zakariyya.json",
+      "claimCount": 28
+    },
+    {
+      "id": "yahya",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "yahya.json",
+      "claimCount": 25
+    },
+    {
+      "id": "isa",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "isa.json",
+      "claimCount": 37
+    },
+    {
+      "id": "muhammad",
+      "profileStatus": "approved",
+      "prophetStatus": "quran_explicit",
+      "profileFile": "muhammad.json",
+      "claimCount": 30
+    }
+  ],
+  "researchProfiles": [
+    {
+      "id": "dhul-kifl",
+      "profileStatus": "approved",
+      "prophetStatus": "scholarly_disputed",
+      "profileFile": "dhul-kifl.json",
+      "claimCount": 16
+    },
+    {
+      "id": "yusha-ibn-nun",
+      "profileStatus": "approved",
+      "prophetStatus": "scholarly_source_correlation",
+      "profileFile": "research/yusha-ibn-nun.json",
+      "claimCount": 14
+    },
+    {
+      "id": "al-khidr",
+      "profileStatus": "approved",
+      "prophetStatus": "scholarly_disputed_or_inferred",
+      "profileFile": "research/al-khidr.json",
+      "claimCount": 20
+    },
+    {
+      "id": "luqman",
+      "profileStatus": "approved",
+      "prophetStatus": "scholarly_disputed",
+      "profileFile": "research/luqman.json",
+      "claimCount": 21
+    },
+    {
+      "id": "dhul-qarnayn",
+      "profileStatus": "approved",
+      "prophetStatus": "scholarly_disputed",
+      "profileFile": "research/dhul-qarnayn.json",
+      "claimCount": 21
+    },
+    {
+      "id": "uzayr",
+      "profileStatus": "approved",
+      "prophetStatus": "scholarly_disputed",
+      "profileFile": "research/uzayr.json",
+      "claimCount": 15
+    }
+  ],
+  "profileCount": 30,
+  "claimCount": {
+    "approved": 1730,
+    "research": 9,
+    "disputed": 0,
+    "rejected": 0
+  },
+  "evidenceCount": {
+    "quran": 1369,
+    "sahih": 84,
+    "hasan": 0,
+    "athar": 0
+  },
+  "excludedReports": {
+    "daif": 2,
+    "veryWeak": 0,
+    "mawdu": 0,
+    "israiliyyat": 9,
+    "unverified": 48
+  },
+  "sourceCount": {
+    "canonicalHadith": 58
+  }
+}

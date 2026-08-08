@@ -1,0 +1,58 @@
+{
+  "phase": 7,
+  "generatedAt": "2026-08-08T09:25:18.000Z",
+  "profiles": {
+    "total": 30,
+    "approved": 25,
+    "partial": 0,
+    "research": 5
+  },
+  "claims": {
+    "total": 1504,
+    "quran": 1207,
+    "sahih": 70,
+    "hasan": 0,
+    "athar": 0,
+    "disputed": 5,
+    "daif": 2,
+    "israiliyyat": 9,
+    "editorial": 227,
+    "researchStatus": 0
+  },
+  "hadithCanonical": 44,
+  "relations": 7,
+  "weakReports": 90,
+  "validation": {
+    "jsonErrors": [],
+    "quranErrors": [],
+    "sourceErrors": [],
+    "relationErrors": [],
+    "gradingErrors": [],
+    "duplicateErrors": [],
+    "nabiEvidenceErrors": [],
+    "orphanClaimErrors": [],
+    "productionErrors": []
+  },
+  "brokenLinks": 0,
+  "brokenQuranReferences": 0,
+  "duplicateIds": 0,
+  "orphanClaims": 0,
+  "crossProfileRelationErrors": 0,
+  "jsonValidation": "PASS",
+  "sourceValidation": "PASS",
+  "quranValidation": "PASS",
+  "production": false,
+  "env": {
+    "test": "enabled",
+    "production": "disabled"
+  },
+  "result": "PASS_WITH_NOTES",
+  "notes": [
+    "Kein neuer Content-Bulkimport.",
+    "Research-Profile unter research/.",
+    "Canonical Hadith unter hadith/.",
+    "profile count ≠ Gesamtzahl aller Propheten.",
+    "124000 nicht als sichere Gesamtzahl.",
+    "Block 03 / Ādam research stubs erwartet."
+  ]
+}

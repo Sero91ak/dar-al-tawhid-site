@@ -7,18 +7,73 @@
 
   function dataBase() {
     try {
-      if (location.pathname.indexOf("/test/") === 0 || location.pathname === "/test") return "/test/data/prophets/";
+      if (global.IS_TEST_PATH || location.pathname.indexOf("/test/") === 0 || location.pathname === "/test") {
+        return "/test/data/prophets/";
+      }
     } catch (e) {}
+    /* Live path only when explicitly not on Test — never used as silent fallback for missing Test files. */
     return "/data/prophets/";
   }
   var DATA_BASE = dataBase();
+  var LAST_LOAD_ERROR = null;
+
+  function logProphetLoadError(info) {
+    LAST_LOAD_ERROR = Object.assign(
+      {
+        timestamp: new Date().toISOString(),
+        dataBase: DATA_BASE
+      },
+      info || {}
+    );
+    try {
+      console.info("[prophets]", LAST_LOAD_ERROR);
+    } catch (e) {}
+  }
+
+  function visitorLoadErrorHtml(opts) {
+    opts = opts || {};
+    var offlineUncached = !isOnline() || opts.offlineUncached;
+    var msg = offlineUncached
+      ? "Dieser Inhalt ist auf diesem Gerät noch nicht offline gespeichert."
+      : "Dieser Inhalt konnte nicht geladen werden.";
+    return (
+      '<div class="prophets-empty" role="alert">' +
+      "<p>" +
+      msg +
+      "</p>" +
+      '<button type="button" class="prophets-rail__back-mobile" data-prophets-back>Zur Übersicht</button>' +
+      "</div>"
+    );
+  }
+
+  function notFoundHtml() {
+    return (
+      '<div class="prophets-empty" role="status">' +
+      "<p>Prophetenprofil nicht gefunden</p>" +
+      '<button type="button" class="prophets-rail__back-mobile" data-prophets-back>Zur Übersicht</button>' +
+      "</div>"
+    );
+  }
   var DUAL_MIN = 720;
   var STATE_KEY = "dar_prophets_ui_v1";
+  var LAST_READ_KEY = "dar_prophets_last_read_v1";
+  var INDEX_STORE_KEY = "dar_prophets_index_cache_v2";
   var indexCache = null;
+  var searchIndexCache = null;
   var profileCache = Object.create(null);
+  var hadithCache = Object.create(null);
+  var relationCache = Object.create(null);
   var loadIndexPromise = null;
+  var indexRefreshPromise = null;
   var resizeBound = false;
   var lastWidthMode = "";
+  var DISPUTED_STATUSES = {
+    disputed: 1,
+    scholarly_disputed: 1,
+    scholarly_disputed_or_inferred: 1,
+    scholarly_source_correlation: 1,
+    quran_named_status_under_review: 1
+  };
 
   var TABS = [
     { id: "overview", label: "Übersicht" },
@@ -27,14 +82,18 @@
     { id: "sunnah", label: "Sunnah" },
     { id: "aussagen", label: "Aussagen" },
     { id: "familie", label: "Familie" },
+    { id: "ereignisse", label: "Ereignisse" },
     { id: "quellen", label: "Quellen" }
   ];
 
-  var FILTERS = [
-    { id: "all", label: "Alle" },
-    { id: "quran", label: "Qurʾān" },
-    { id: "ulu", label: "Ulū l-ʿAzm" },
-    { id: "disputed", label: "Umstritten" }
+  var FILTER_DEFS = [
+    { id: "all", label: "Alle", flag: "all" },
+    { id: "quran", label: "Qurʾān", flag: "quran" },
+    { id: "sunnah", label: "Sunnah", flag: "sunnah" },
+    { id: "ulu", label: "Ulū l-ʿAzm", flag: "ulu" },
+    { id: "banuIsrail", label: "Banū Isrāʾīl", flag: "banuIsrail" },
+    { id: "arabicMessenger", label: "Arabische Gesandte", flag: "arabicMessenger" },
+    { id: "further", label: "Weitere Personen", flag: "further" }
   ];
 
   function esc(s) {
@@ -93,19 +152,54 @@
       .join(" · ");
   }
 
-  var PROPHET_EMOJI = {
-    adam:"🌱", nuh:"🚢", hud:"🏜️", salih:"🐪", ibrahim:"🔥", lut:"🏙️",
-    ismail:"⛺", ishaq:"👶", yaqub:"👨‍👦", yusuf:"🌙", ayyub:"🤲",
-    shuayb:"⚖️", musa:"🌊", harun:"📜", dawud:"🗡️", sulayman:"👑",
-    ilyas:"⚡", alyasa:"🌿", yunus:"🐋", zakariyya:"🕌", yahya:"💧",
-    isa:"✨", muhammad:"🌟", "dhul-kifl":"📘", uzayr:"📖"
-  };
-
-  function prophetEmoji(id, p) {
-    if (PROPHET_EMOJI[id]) return PROPHET_EMOJI[id];
+  /* Keine Prophetenporträts/Figuren — nur dezente Geometrie. */
+  function prophetMark(id, p) {
     if (p && p.uluAlAzm) return "✦";
-    if (p && p.prophetStatus === "disputed") return "❔";
-    return "🕊️";
+    if (p && isDisputedStatus(p.prophetStatus)) return "◇";
+    return "◆";
+  }
+
+  function isDisputedStatus(status) {
+    return !!(status && DISPUTED_STATUSES[String(status)]);
+  }
+
+  function publicStatusLabel(gradingOrStatus) {
+    var g = String(gradingOrStatus || "").toLowerCase();
+    if (g === "quran" || g === "qurʾān") return "Qurʾān";
+    if (g.indexOf("sahih") >= 0 || g.indexOf("ṣaḥīḥ") >= 0) return "Ṣaḥīḥ";
+    if (g.indexOf("hasan") >= 0 || g.indexOf("ḥasan") >= 0) return "Ḥasan";
+    if (g.indexOf("athar") >= 0) return "Authentischer Athar";
+    if (isDisputedStatus(g) || g.indexOf("disputed") >= 0 || g.indexOf("umstritten") >= 0) return "Umstritten";
+    if (
+      g.indexOf("not_authentically") >= 0 ||
+      g.indexOf("nicht authentisch") >= 0 ||
+      g.indexOf("unattested") >= 0 ||
+      g.indexOf("not_established") >= 0 ||
+      g === "not_established_in_reviewed_sources"
+    ) {
+      return "Nicht authentisch belegt";
+    }
+    return gradingOrStatus || "";
+  }
+
+  function absenceVisitorNote(status) {
+    var s = String(status || "");
+    if (s === "not_established_in_reviewed_sources" || /not_established|nicht authentisch belegt/i.test(s)) {
+      return "In den für dieses Profil geprüften Quellen liegt derzeit kein freigegebener authentischer Nachweis vor.";
+    }
+    return "";
+  }
+
+  function disputedStatusNote(metaOrProfile) {
+    var p = metaOrProfile || {};
+    if (!isDisputedStatus(p.prophetStatus)) return "";
+    if (p.quranNamed || (p.identity && p.identity.quranNamed)) {
+      return "Im Qurʾān genannt · Prophetenstatus unter den Gelehrten unterschiedlich eingeordnet";
+    }
+    if (p.prophetStatus === "scholarly_source_correlation" || p.prophetStatus === "scholarly_disputed_or_inferred") {
+      return "In authentischer Sunnah namentlich verbunden · Prophetenstatus nicht als Konsens darstellen";
+    }
+    return "Prophetenstatus unter den Gelehrten unterschiedlich eingeordnet";
   }
 
   function sectionCountLabel(n) {
@@ -142,39 +236,312 @@
     });
   }
 
-  function loadIndex() {
-    if (indexCache) return Promise.resolve(indexCache);
-    if (loadIndexPromise) return loadIndexPromise;
-    loadIndexPromise = fetch(DATA_BASE + "index.json", { cache: "no-store" })
-      .then(function (r) {
-        if (!r.ok) throw new Error("index " + r.status);
-        return r.json();
-      })
+  function indexAssetUrl(file) {
+    /* Stabile URL ohne Query → SW APP_SHELL / Runtime-Cache treffen. */
+    return DATA_BASE + file;
+  }
+
+  function readSessionIndex() {
+    try {
+      var raw = sessionStorage.getItem(INDEX_STORE_KEY);
+      if (!raw) return null;
+      var parsed = JSON.parse(raw);
+      if (!parsed || !parsed.data || !parsed.data.prophets) return null;
+      return parsed.data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function writeSessionIndex(data) {
+    try {
+      if (!data || !data.prophets) return;
+      sessionStorage.setItem(
+        INDEX_STORE_KEY,
+        JSON.stringify({
+          at: Date.now(),
+          dataBase: DATA_BASE,
+          data: data
+        })
+      );
+    } catch (e) {}
+  }
+
+  function hydrateIndexFromSession() {
+    if (indexCache) return indexCache;
+    var cached = readSessionIndex();
+    if (cached && isFeatureEnabled(cached)) {
+      indexCache = cached;
+      return cached;
+    }
+    return null;
+  }
+
+  function fetchJsonPreferCache(url) {
+    return fetch(url, { cache: "default" }).then(function (r) {
+      if (!r.ok) throw new Error("http_" + r.status);
+      return r.json();
+    });
+  }
+
+  function applyIndexData(data, opts) {
+    opts = opts || {};
+    if (!data || !data.prophets) return null;
+    var prevVersion =
+      indexCache && (indexCache.contentVersion || indexCache.updatedAt || indexCache.version);
+    var nextVersion = data.contentVersion || data.updatedAt || data.version;
+    indexCache = data;
+    writeSessionIndex(data);
+    if (!opts.silent && prevVersion && nextVersion && String(prevVersion) !== String(nextVersion)) {
+      if (global.currentRoute && global.currentRoute.view === "propheten") {
+        if (typeof global.render === "function") global.render();
+      }
+    }
+    return data;
+  }
+
+  function refreshIndexInBackground() {
+    if (indexRefreshPromise) return indexRefreshPromise;
+    var requestedFile = DATA_BASE + "index.json";
+    indexRefreshPromise = fetchJsonPreferCache(indexAssetUrl("index.json"))
       .then(function (data) {
-        indexCache = data;
+        applyIndexData(data, { silent: false });
+        loadSearchIndex().catch(function () {});
+        return data;
+      })
+      .catch(function (err) {
+        if (!indexCache) {
+          logProphetLoadError({
+            prophetId: null,
+            requestedFile: requestedFile,
+            errorType: "index_fetch_failed"
+          });
+        }
+        throw err;
+      })
+      .finally(function () {
+        indexRefreshPromise = null;
+      });
+    return indexRefreshPromise;
+  }
+
+  function loadIndex() {
+    if (indexCache) {
+      refreshIndexInBackground().catch(function () {});
+      return Promise.resolve(indexCache);
+    }
+    var warm = hydrateIndexFromSession();
+    if (warm) {
+      refreshIndexInBackground().catch(function () {});
+      loadSearchIndex().catch(function () {});
+      return Promise.resolve(warm);
+    }
+    if (loadIndexPromise) return loadIndexPromise;
+    var requestedFile = DATA_BASE + "index.json";
+    loadIndexPromise = fetchJsonPreferCache(indexAssetUrl("index.json"))
+      .then(function (data) {
+        applyIndexData(data, { silent: true });
+        /* Suche separat — blockiert die Liste nicht. */
+        loadSearchIndex().catch(function () {});
         return data;
       })
       .catch(function (err) {
         loadIndexPromise = null;
+        if (!LAST_LOAD_ERROR || LAST_LOAD_ERROR.requestedFile !== requestedFile) {
+          logProphetLoadError({
+            prophetId: null,
+            requestedFile: requestedFile,
+            errorType: "index_fetch_failed"
+          });
+        }
         throw err;
       });
     return loadIndexPromise;
+  }
+
+  function loadSearchIndex() {
+    if (searchIndexCache) return Promise.resolve(searchIndexCache);
+    return fetchJsonPreferCache(indexAssetUrl("search-index.json"))
+      .then(function (data) {
+        searchIndexCache = data;
+        return data;
+      })
+      .catch(function () {
+        searchIndexCache = { entries: [] };
+        return searchIndexCache;
+      });
+  }
+
+  function searchEntry(id) {
+    var entries = (searchIndexCache && searchIndexCache.entries) || [];
+    return entries.find(function (e) { return String(e.prophetId) === String(id); }) || null;
+  }
+
+  function loadRelation(id) {
+    var key = String(id || "");
+    if (!key) return Promise.resolve(null);
+    if (Object.prototype.hasOwnProperty.call(relationCache, key)) return Promise.resolve(relationCache[key]);
+    return fetch(DATA_BASE + "relations/" + encodeURIComponent(key) + ".json", { cache: "no-store" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("relation " + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        relationCache[key] = data;
+        return data;
+      })
+      .catch(function () {
+        relationCache[key] = null;
+        return null;
+      });
+  }
+
+  function readLastRead() {
+    try { return JSON.parse(localStorage.getItem(LAST_READ_KEY) || "null"); } catch (e) { return null; }
+  }
+
+  function writeLastRead(entry) {
+    try { localStorage.setItem(LAST_READ_KEY, JSON.stringify(entry || null)); } catch (e) {}
+  }
+
+  function isOnline() {
+    try { return navigator.onLine !== false; } catch (e) { return true; }
+  }
+
+  function openExternalSafe(url) {
+    if (!url) return;
+    var href = String(url).trim();
+    if (!/^https:\/\//i.test(href)) {
+      try {
+        console.info("[prophets] blocked non-https external url", { errorType: "unsafe_external_url" });
+      } catch (e) {}
+      return;
+    }
+    if (!isOnline()) {
+      try {
+        alert("Für den externen Direktnachweis ist eine Internetverbindung erforderlich.");
+      } catch (e) {}
+      return;
+    }
+    try {
+      var a = document.createElement("a");
+      a.href = href;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.click();
+    } catch (e) {
+      try { window.open(href, "_blank", "noopener,noreferrer"); } catch (e2) {}
+    }
+  }
+
+  function profileFileFor(id) {
+    var meta = findMeta(id);
+    if (meta && meta.profileFile) return String(meta.profileFile).replace(/^\/+/, "");
+    return encodeURIComponent(String(id || "")) + ".json";
+  }
+
+  function loadHadith(hadithId) {
+    var key = String(hadithId || "");
+    if (!key) return Promise.resolve(null);
+    if (Object.prototype.hasOwnProperty.call(hadithCache, key)) {
+      return Promise.resolve(hadithCache[key]);
+    }
+    return fetch(DATA_BASE + "hadith/" + encodeURIComponent(key) + ".json", { cache: "no-store" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("hadith " + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        hadithCache[key] = data;
+        return data;
+      })
+      .catch(function () {
+        hadithCache[key] = null;
+        return null;
+      });
+  }
+
+  function collectHadithIds(profile) {
+    var ids = [];
+    var seen = Object.create(null);
+    function add(hid) {
+      if (!hid || seen[hid]) return;
+      seen[hid] = 1;
+      ids.push(hid);
+    }
+    (profile.claims || []).forEach(function (c) {
+      add(c.hadithId || (c.hadithRef && c.hadithRef.hadithId));
+    });
+    return ids;
+  }
+
+  function hydrateProfileHadith(profile) {
+    if (!profile || profile.__hadithHydrated) return Promise.resolve(profile);
+    var ids = collectHadithIds(profile);
+    if (!ids.length) {
+      profile.__hadithHydrated = true;
+      return Promise.resolve(profile);
+    }
+    return Promise.all(ids.map(loadHadith)).then(function (rows) {
+      var map = Object.create(null);
+      rows.forEach(function (h) {
+        if (h && h.id) map[h.id] = h;
+      });
+      (profile.claims || []).forEach(function (c) {
+        var hid = c.hadithId || (c.hadithRef && c.hadithRef.hadithId);
+        var h = hid && map[hid];
+        if (!h) return;
+        if (!c.arabicOriginal && h.arabicOriginal) c.arabicOriginal = h.arabicOriginal;
+        if (!c.translationDe && h.translationDe) c.translationDe = h.translationDe;
+        if (!c.directReference && h.directReference) c.directReference = h.directReference;
+        if (!c.rawi && h.rawi) c.rawi = h.rawi;
+        if (!c.grading && h.grading) c.grading = h.grading;
+      });
+      profile.__hadithHydrated = true;
+      return profile;
+    });
   }
 
   function loadProfile(id) {
     var key = String(id || "");
     if (!key) return Promise.resolve(null);
     if (profileCache[key]) return Promise.resolve(profileCache[key]);
-    return fetch(DATA_BASE + encodeURIComponent(key) + ".json", { cache: "no-store" })
+    var start = indexCache ? Promise.resolve(indexCache) : loadIndex();
+    var requestedFile = "";
+    return start
+      .then(function () {
+        var file = profileFileFor(key);
+        requestedFile = DATA_BASE + file;
+        /* Test must never silently fall back to /data/prophets/ when a Test file is missing. */
+        return fetch(requestedFile, { cache: "default" });
+      })
       .then(function (r) {
-        if (!r.ok) throw new Error("profile " + r.status);
+        if (!r.ok) {
+          logProphetLoadError({
+            prophetId: key,
+            requestedFile: requestedFile,
+            errorType: "profile_http_" + r.status
+          });
+          throw new Error("profile " + r.status);
+        }
         return r.json();
       })
       .then(function (data) {
+        return hydrateProfileHadith(data);
+      })
+      .then(function (data) {
         profileCache[key] = data;
+        if (requestedFile) precacheOpenedProfile(requestedFile);
         return data;
       })
       .catch(function () {
+        if (!LAST_LOAD_ERROR || LAST_LOAD_ERROR.prophetId !== key) {
+          logProphetLoadError({
+            prophetId: key,
+            requestedFile: requestedFile || DATA_BASE + profileFileFor(key),
+            errorType: "profile_fetch_failed"
+          });
+        }
         profileCache[key] = null;
         return null;
       });
@@ -243,85 +610,208 @@
     );
   }
 
+  function normalizeQuery(q) {
+    /* Search-only normalization — never overwrite display/source strings. */
+    return String(q || "")
+      .trim()
+      .toLowerCase()
+      .replace(/ā/g, "a")
+      .replace(/ī/g, "i")
+      .replace(/ū/g, "u")
+      .replace(/ʿ|ʾ|ʼ/g, "")
+      .replace(/ḥ/g, "h")
+      .replace(/ṣ/g, "s")
+      .replace(/ḍ/g, "d")
+      .replace(/ẓ/g, "z")
+      .replace(/ṭ/g, "t")
+      .replace(/ǧ|ğ/g, "g")
+      .replace(/[إأآٱ]/g, "ا")
+      .replace(/ى/g, "ي")
+      .replace(/ؤ/g, "و")
+      .replace(/ئ/g, "ي")
+      .replace(/ة/g, "ه")
+      .replace(/موسى/g, "موسى")
+      .replace(/mousa|moosa/g, "musa");
+  }
+
   function matchesQuery(p, q) {
     if (!q) return true;
-    var blob = [
-      p.name,
-      p.nameAr,
-      p.id,
-      p.people,
-      p.region,
-      (p.nameVariants || []).join(" "),
-      (p.searchTerms || []).join(" "),
-      (p.roles || []).join(" "),
-      p.note || ""
-    ]
-      .join(" ")
-      .toLowerCase();
-    return blob.indexOf(q) !== -1;
+    var nq = normalizeQuery(q);
+    var entry = searchEntry(p.id);
+    var blob = entry && entry.searchBlob
+      ? entry.searchBlob
+      : [p.name, p.nameAr, p.id, p.people, (p.searchTerms || []).join(" "), p.note || ""].join(" ");
+    var nb = normalizeQuery(blob);
+    if (nb.indexOf(nq) !== -1) return true;
+    // raw arabic / original also
+    return String(blob).toLowerCase().indexOf(String(q).trim().toLowerCase()) !== -1;
+  }
+
+  function isFurtherPerson(p) {
+    if (!p) return false;
+    if (p.furtherPerson || p.listSection === "further") return true;
+    if (String(p.id) === "dhul-kifl") return true;
+    if (isDisputedStatus(p.prophetStatus)) return true;
+    return false;
   }
 
   function filterProphets(index, filter, query) {
-    var q = String(query || "")
-      .trim()
-      .toLowerCase();
-    var established = (index.prophets || []).slice();
-    var disputed = (index.disputed || []).slice();
-    if (filter === "disputed") {
-      return { established: [], disputed: disputed.filter(function (p) {
-        return matchesQuery(p, q);
-      }), ulu: [] };
+    var q = String(query || "").trim();
+    var established = (index.prophets || []).filter(function (p) { return !isFurtherPerson(p); });
+    var further = (index.furtherPersons || []).slice();
+    if (!further.length) {
+      further = (index.prophets || [])
+        .filter(function (p) { return isFurtherPerson(p); })
+        .concat(index.disputed || []);
+      // dedupe
+      var seen = Object.create(null);
+      further = further.filter(function (p) {
+        if (seen[p.id]) return false;
+        seen[p.id] = 1;
+        return true;
+      });
+    }
+    if (filter === "further" || filter === "disputed") {
+      return {
+        established: [],
+        ulu: [],
+        further: further.filter(function (p) { return matchesQuery(p, q); })
+      };
     }
     var list = established.filter(function (p) {
-      if (filter === "ulu" && !p.uluAlAzm) return false;
+      if (filter === "ulu" && !(p.uluAlAzm || (p.classifications && p.classifications.uluAlAzm))) return false;
       if (filter === "quran" && p.prophetStatus !== "quran_explicit") return false;
+      if (filter === "sunnah" && !(p.hasSunnah || (p.classifications && p.classifications.hasSunnah))) return false;
+      if (filter === "banuIsrail" && !(p.banuIsrail || (p.classifications && p.classifications.banuIsrail))) return false;
+      if (filter === "arabicMessenger" && !(p.arabicMessenger || (p.classifications && p.classifications.arabicMessenger))) return false;
       return matchesQuery(p, q);
     });
-    var ulu = list.filter(function (p) {
-      return p.uluAlAzm;
-    });
-    var rest = list.filter(function (p) {
-      return !p.uluAlAzm;
-    });
-    var disp =
-      filter === "all" || filter === "quran"
-        ? disputed.filter(function (p) {
-            return matchesQuery(p, q);
-          })
-        : [];
-    return { established: rest, disputed: disp, ulu: ulu };
+    var ulu = list.filter(function (p) { return p.uluAlAzm; });
+    var rest = list.filter(function (p) { return !p.uluAlAzm; });
+    var showFurther = filter === "all";
+    return {
+      established: rest,
+      ulu: ulu,
+      further: showFurther ? further.filter(function (p) { return matchesQuery(p, q); }) : []
+    };
   }
 
   function renderRow(p, activeId) {
     var active = String(p.id) === String(activeId);
-    var roles = rolesLabel(p.roles);
-    var meta = [roles, p.people].filter(Boolean).join(" · ");
-    var tags = p.uluAlAzm
-      ? "Ulū l-ʿAzm"
-      : p.prophetStatus === "disputed"
-        ? "Umstritten"
-        : "Qurʾān";
-    var emoji = prophetEmoji(p.id, p);
+    var roles = isDisputedStatus(p.prophetStatus) ? "" : rolesLabel(p.roles);
+    var metaBits = [p.honorific || "", roles, p.people].filter(Boolean);
+    var meta = metaBits.join(" · ");
+    var mark = prophetMark(p.id, p);
     return (
       '<button type="button" class="prophets-row' +
       (active ? " is-active" : "") +
       '" data-prophet-id="' +
       esc(p.id) +
       '">' +
-      '<span class="prophets-row__icon" aria-hidden="true">' + emoji + "</span>" +
+      '<span class="prophets-row__icon" aria-hidden="true">' +
+      mark +
+      "</span>" +
       '<span class="prophets-row__body">' +
+      '<span class="prophets-row__titleline">' +
       '<span class="prophets-row__name">' +
       esc(p.name) +
-      ' <span class="prophets-row__honor">' +
-      esc(p.honorific || "") +
-      "</span></span>" +
-      (meta ? '<span class="prophets-row__meta">' + esc(meta) + "</span>" : "") +
-      '<span class="prophets-row__tags">' +
-      esc(tags) +
       "</span>" +
+      (p.nameAr
+        ? '<span class="prophets-row__ar" lang="ar" dir="rtl">' + esc(p.nameAr) + "</span>"
+        : "") +
+      "</span>" +
+      (meta ? '<span class="prophets-row__meta">' + esc(meta) + "</span>" : "") +
       "</span>" +
       '<span class="prophets-row__chev" aria-hidden="true">›</span>' +
       "</button>"
+    );
+  }
+
+  function availableFilters(index) {
+    var flags = (index && index.availableFilters) || {};
+    return FILTER_DEFS.filter(function (f) {
+      if (f.id === "all" || f.id === "quran" || f.id === "further") return true;
+      return !!flags[f.flag];
+    });
+  }
+
+  function renderLastReadCard() {
+    var lr = readLastRead();
+    if (!lr || !lr.prophetId) return "";
+    return (
+      '<button type="button" class="prophets-lastread" data-prophets-continue="' +
+      esc(lr.prophetId) +
+      '" data-prophets-continue-tab="' +
+      esc(lr.tab || "overview") +
+      '">' +
+      '<span class="prophets-lastread__kicker">Zuletzt</span>' +
+      '<span class="prophets-lastread__title">' +
+      esc(lr.name || lr.prophetId) +
+      (lr.honorific ? " " + esc(lr.honorific) : "") +
+      "</span>" +
+      '<span class="prophets-lastread__cta">Weiterlesen ›</span>' +
+      "</button>"
+    );
+  }
+
+  function renderProphetJumpSelect(index) {
+    var names = (index.prophets || [])
+      .filter(function (p) {
+        return p && p.id && !isFurtherPerson(p) && p.profileStatus === "approved";
+      })
+      .slice()
+      .sort(function (a, b) {
+        return String(a.name || "").localeCompare(String(b.name || ""), "de");
+      });
+    return (
+      '<select class="prophets-pick prophets-pick--names" data-prophets-jump aria-label="Prophet">' +
+      '<option value="">✦ Prophet</option>' +
+      names
+        .map(function (p) {
+          return (
+            '<option value="' +
+            esc(p.id) +
+            '">' +
+            esc(p.name) +
+            (p.nameAr ? " · " + esc(p.nameAr) : "") +
+            "</option>"
+          );
+        })
+        .join("") +
+      "</select>"
+    );
+  }
+
+  function renderFilterPickSelect(groupId, placeholder, options, currentFilter) {
+    var inGroup = options.some(function (o) {
+      return o.id === currentFilter;
+    });
+    var selected = inGroup ? currentFilter : "all";
+    return (
+      '<select class="prophets-pick" data-prophets-pick="' +
+      esc(groupId) +
+      '" aria-label="' +
+      esc(placeholder.replace(/^[^\s]+\s/, "")) +
+      '">' +
+      '<option value="all"' +
+      (selected === "all" ? " selected" : "") +
+      ">" +
+      esc(placeholder) +
+      "</option>" +
+      options
+        .map(function (o) {
+          return (
+            '<option value="' +
+            esc(o.id) +
+            '"' +
+            (selected === o.id ? " selected" : "") +
+            ">" +
+            esc(o.label) +
+            "</option>"
+          );
+        })
+        .join("") +
+      "</select>"
     );
   }
 
@@ -329,17 +819,18 @@
     var filter = state.filter || "all";
     var query = state.query || "";
     var packs = filterProphets(index, filter, query);
-    var filtersHtml = FILTERS.map(function (f) {
-      return (
-        '<button type="button" class="prophets-filter' +
-        (filter === f.id ? " is-active" : "") +
-        '" data-prophets-filter="' +
-        esc(f.id) +
-        '">' +
-        esc(f.label) +
-        "</button>"
-      );
-    }).join("");
+    var avail = availableFilters(index);
+    var byId = Object.create(null);
+    avail.forEach(function (f) {
+      byId[f.id] = f;
+    });
+
+    function opt(id) {
+      return byId[id] ? { id: id, label: byId[id].label } : null;
+    }
+
+    var sourceOpts = [opt("quran"), opt("sunnah")].filter(Boolean);
+    var groupOpts = [opt("ulu"), opt("banuIsrail"), opt("arabicMessenger"), opt("further")].filter(Boolean);
 
     function section(title, items) {
       if (!items.length) return "";
@@ -355,32 +846,39 @@
     }
 
     var body = "";
-    body += section("Ulū l-ʿAzm", packs.ulu);
-    body += section("Belegte Propheten", packs.established);
-    body += section("Umstrittene Einordnung", packs.disputed);
-    if (!packs.ulu.length && !packs.established.length && !packs.disputed.length) {
-      body = '<div class="prophets-empty">Keine Treffer für diese Suche.</div>';
+    body += section("Ulū l-ʿAzm", packs.ulu || []);
+    body += section("Belegte Propheten", packs.established || []);
+    body += section("Weitere Personen", packs.further || []);
+    if (!(packs.ulu || []).length && !(packs.established || []).length && !(packs.further || []).length) {
+      body = '<div class="prophets-empty">Keine Treffer.</div>';
     }
 
     return (
       '<div class="prophets-toolbar">' +
-      (index.intro
-        ? '<p class="prophets-toolbar__intro">' + esc(index.intro) + "</p>"
-        : "") +
-      '<div class="prophets-search-block">' +
-      '<input class="prophets-search" id="prophetsSearch" type="search" placeholder="Prophet, Volk, Ereignis, Sūrah oder Aussage suchen" value="' +
+      renderLastReadCard() +
+      '<section class="prophets-sf" aria-label="Suche und Filter">' +
+      '<div class="prophets-search-panel">' +
+      '<div class="prophets-pick-title">' +
+      "<h3>Suche und Filter</h3>" +
+      "</div>" +
+      '<div class="prophets-pick-grid">' +
+      renderProphetJumpSelect(index) +
+      renderFilterPickSelect("group", "Gruppe", groupOpts, filter) +
+      renderFilterPickSelect("source", "Quelle", sourceOpts, filter) +
+      "</div>" +
+      '<div class="prophets-search-shell">' +
+      '<span class="prophets-search-icon" aria-hidden="true">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">' +
+      '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>' +
+      "</span>" +
+      '<input class="prophets-search" id="prophetsSearch" type="search" placeholder="Name, Volk, Ereignis, Sūrah …" value="' +
       esc(query) +
-      '" autocomplete="off" />' +
-      "</div>" +
-      '<div class="prophets-filter-bar">' +
-      '<span class="prophets-filter-bar__label">Filter</span>' +
-      '<div class="prophets-filters" role="toolbar" aria-label="Propheten filtern">' +
-      filtersHtml +
+      '" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-label="Propheten durchsuchen" />' +
       "</div>" +
       "</div>" +
+      "</section>" +
       "</div>" +
-      body +
-      '<p class="prophets-note">Nur namentlich zuverlässig belegte Personen. Die Überlieferung über 124.000 Propheten wird nicht als gesicherte Gesamtzahl dargestellt. Fehlende biografische Angaben erscheinen als „Nicht authentisch belegt“.</p>'
+      body
     );
   }
 
@@ -395,6 +893,9 @@
     var fields = (profile.overviewFields || [])
       .map(function (f) {
         var showValue = f.value;
+        if (showValue == null || showValue === "" || showValue === "null" || showValue === "undefined") {
+          showValue = "Nicht authentisch belegt";
+        }
         var st = f.status || "";
         var ids = f.claimIds || [];
         var ok = !ids.length
@@ -462,29 +963,44 @@
             );
           })
           .join(" ");
+        var qMeta = (st.quran || st.quranRefs || [])
+          .map(function (q) {
+            return (
+              "Qurʾān " +
+              q.surah +
+              ":" +
+              q.ayah +
+              (q.ayahEnd && q.ayahEnd !== q.ayah ? "–" + q.ayahEnd : "")
+            );
+          })
+          .join(" · ");
         return (
           '<article class="prophets-station">' +
+          '<span class="prophets-station__dot" aria-hidden="true"></span>' +
+          '<div class="prophets-station__body">' +
           "<h4>" +
           esc(st.title) +
-          (!ok ? ' <span class="prophets-badge">Forschung</span>' : "") +
+          (!ok ? ' <span class="prophets-badge">Umstritten</span>' : "") +
           "</h4>" +
-          "<p>" +
-          esc(st.body || st.summary || "") +
-          "</p>" +
-          '<p class="prophets-src">Zeitklasse: ' +
-          esc(st.timeClass || st.chronologyStatus || "textually-established") +
-          (!ok ? " · noch nicht freigegeben" : "") +
-          "</p>" +
+          (st.summary || st.body
+            ? "<p>" + esc(st.summary || st.body || "") + "</p>"
+            : "") +
+          (qMeta ? '<p class="prophets-src">' + esc(qMeta) + "</p>" : "") +
           (qLinks ? '<div class="prophets-link-row">' + qLinks + "</div>" : "") +
-          "</article>"
+          "</div></article>"
         );
       })
       .join("");
     return (
-      '<section class="prophets-chapter"><h3>Lebensweg</h3><div class="prophets-timeline">' +
+      '<section class="prophets-chapter"><h3>Lebensweg</h3><div class="prophets-timeline prophets-timeline--rail">' +
       (stations || '<div class="prophets-empty">Noch keine freigegebenen Lebensstationen.</div>') +
       "</div></section>"
     );
+  }
+
+  function renderEreignisse(profile) {
+    // Same approved timeline stations as compact event list (no invented chronology).
+    return renderTimeline(profile).replace(">Lebensweg<", ">Ereignisse<").replace("prophets-timeline--rail", "prophets-timeline--rail prophets-timeline--events");
   }
 
   function renderQuranSection(profile, state) {
@@ -533,9 +1049,15 @@
           ":" +
           r.ayah +
           (r.ayahEnd && r.ayahEnd !== r.ayah ? "–" + r.ayahEnd : "");
+        var kindLabel = "";
+        if (r.kind === "speech" || r.filter === "aussagen" || r.type === "directSpeech") kindLabel = "Direkte Aussage";
+        else if (r.kind === "dua" || r.type === "dua") kindLabel = "Duʿāʾ";
+        else if (r.event) kindLabel = "Ereignis";
+        else kindLabel = "Beschreibung";
         return (
           '<article class="prophets-quote">' +
           '<span class="prophets-badge">Qurʾān</span>' +
+          (kindLabel ? '<span class="prophets-badge prophets-badge--soft">' + esc(kindLabel) + "</span>" : "") +
           '<p class="prophets-quote__meta">' +
           esc(ref) +
           (r.event ? " · " + esc(r.event) : "") +
@@ -545,7 +1067,7 @@
           esc(r.surah) +
           '" data-quran-ayah="' +
           esc(r.ayah) +
-          '">📖 Im Qurʾān öffnen</button></div>' +
+          '">Im Qurʾān öffnen</button></div>' +
           "</article>"
         );
       })
@@ -621,9 +1143,9 @@
         '<article class="prophets-quote">' +
         '<span class="prophets-badge">Sunnah</span>' +
         '<p class="prophets-quote__de">' +
-        esc(profile.sunnahPrepNote || "Freigegebene Aḥādīṯ folgen nach abgeschlossener Stellen- und Isnād-Prüfung. Entwürfe bleiben unsichtbar.") +
+        esc(profile.sunnahPrepNote || "Keine weiteren authentisch belegten Sunnah-Berichte in diesem Profil freigegeben.") +
         "</p>" +
-        '<p class="prophets-status prophets-status--na">In Prüfung · noch nicht freigegeben</p>' +
+        '<p class="prophets-status prophets-status--na">Keine freigegebene Sunnah in diesem Profil</p>' +
         "</article></section>"
       );
     }
@@ -633,20 +1155,29 @@
       "</h3>" +
       items
         .map(function (it) {
+          var metaLine = [it.work, it.bookChapter, it.number].filter(Boolean).join(" · ");
+          var rawi = it.sahabiRawi || it.rawi || "";
+          var ext = it.directReference && String(it.directReference).indexOf("http") === 0 ? it.directReference : "";
           return (
             '<article class="prophets-quote">' +
             '<span class="prophets-badge">' +
-            esc(it.grading || "sahih") +
+            esc(publicStatusLabel(it.grading || "sahih")) +
             "</span>" +
             (it.arabicOriginal
               ? '<p class="prophets-quote__ar" lang="ar" dir="rtl">' + esc(it.arabicOriginal) + "</p>"
               : "") +
             '<p class="prophets-quote__de">' +
-            esc(it.translationDe || "") +
+            esc(it.translationDe || it.summary || "") +
             "</p>" +
             '<p class="prophets-quote__meta">' +
-            esc([it.work, it.bookChapter, it.number, it.sahabiRawi].filter(Boolean).join(" · ")) +
+            esc(metaLine) +
+            (rawi ? "<br>Rāwī: " + esc(rawi) : "") +
             "</p>" +
+            (ext
+              ? '<button type="button" class="prophets-link" data-external-url="' +
+                esc(ext) +
+                '">Quelle öffnen</button>'
+              : "") +
             "</article>"
           );
         })
@@ -665,34 +1196,117 @@
       })
       .map(function (f) {
         var ok = claimsApproved(profile, f.claimIds || []);
+        var linkId = f.relatedProphetId || f.prophetId || "";
+        var nameHtml = esc(f.name);
+        if (ok && linkId) {
+          nameHtml =
+            '<button type="button" class="prophets-inline-link" data-prophet-id="' +
+            esc(linkId) +
+            '">' +
+            esc(f.name) +
+            "</button>";
+        } else if (ok) {
+          // best-effort cross-link by known names in index
+          var hit = findProphetIdByName(f.name);
+          if (hit && hit !== profile.id) {
+            nameHtml =
+              '<button type="button" class="prophets-inline-link" data-prophet-id="' +
+              esc(hit) +
+              '">' +
+              esc(f.name) +
+              "</button>";
+          }
+        }
+        var absNote = absenceVisitorNote(f.absenceStatus || f.nameStatus);
         return (
           '<article class="prophets-family-card">' +
           "<h4>" +
           esc(f.label) +
-          (!ok ? ' <span class="prophets-badge">Forschung</span>' : "") +
+          (!ok ? ' <span class="prophets-badge">Umstritten</span>' : "") +
           "</h4>" +
-          "<p>" +
-          esc(f.summary || "") +
-          "</p>" +
+          (f.summary ? "<p>" + esc(f.summary) + "</p>" : "") +
           '<span class="prophets-field__label">Name</span>' +
           '<span class="prophets-field__value">' +
-          esc(f.name) +
+          nameHtml +
           "</span>" +
           '<span class="prophets-status ' +
           statusClass(f.nameStatus) +
           '">' +
-          esc(f.nameStatus) +
-          (!ok ? " · noch nicht freigegeben" : "") +
+          esc(publicStatusLabel(f.nameStatus) || f.nameStatus || "") +
+          (!ok ? " · nicht als gesichert dargestellt" : "") +
           "</span>" +
+          (absNote ? '<p class="prophets-note">' + esc(absNote) + "</p>" : "") +
           "</article>"
         );
       })
       .join("");
+    var tree = renderApprovedFamilyTree(profile);
     return (
       '<section class="prophets-chapter"><h3>Familie</h3>' +
+      tree +
       (rows || '<div class="prophets-empty">Noch keine freigegebenen Familienangaben.</div>') +
       "</section>"
     );
+  }
+
+  function findProphetIdByName(name) {
+    var n = String(name || "").toLowerCase();
+    if (!n || !indexCache) return "";
+    var all = (indexCache.prophets || []).concat(indexCache.disputed || []).concat(indexCache.furtherPersons || []);
+    for (var i = 0; i < all.length; i++) {
+      var p = all[i];
+      if (!p) continue;
+      if (n.indexOf(String(p.name || "").toLowerCase()) >= 0) return p.id;
+      if (p.nameAr && n.indexOf(String(p.nameAr).toLowerCase()) >= 0) return p.id;
+    }
+    return "";
+  }
+
+  function renderApprovedFamilyTree(profile) {
+    var ids = profile.relationIds || [];
+    if (!ids.length) return "";
+    // Synchronous render uses already-cached relations only; hydrate async on bind.
+    var lines = [];
+    ids.forEach(function (rid) {
+      var rel = relationCache[rid];
+      if (!rel || rel.verificationStatus !== "approved") return;
+      var a = findMeta(rel.personA);
+      var b = findMeta(rel.personB);
+      var aName = (a && a.name) || (rel.personADisplay && rel.personADisplay.name) || rel.personA;
+      var bName = (b && b.name) || (rel.personBDisplay && rel.personBDisplay.name) || rel.personB;
+      if (!aName || !bName) return;
+      var relLabel =
+        rel.relation === "brothers"
+          ? "Brüder"
+          : rel.relation === "mother_son"
+            ? "Mutter → Sohn"
+            : "Vater → Sohn";
+      var aBtn = a
+        ? '<button type="button" class="prophets-inline-link" data-prophet-id="' +
+          esc(a.id) +
+          '">' +
+          esc(aName) +
+          "</button>"
+        : "<span>" + esc(aName) + "</span>";
+      var bBtn = b
+        ? '<button type="button" class="prophets-inline-link" data-prophet-id="' +
+          esc(b.id) +
+          '">' +
+          esc(bName) +
+          "</button>"
+        : "<span>" + esc(bName) + "</span>";
+      lines.push(
+        '<div class="prophets-tree-line">' +
+          aBtn +
+          '<span class="prophets-tree-rel">' +
+          esc(relLabel) +
+          "</span>" +
+          bBtn +
+          "</div>"
+      );
+    });
+    if (!lines.length) return '<div class="prophets-tree prophets-tree--pending" data-prophets-tree="' + esc(profile.id) + '"></div>';
+    return '<div class="prophets-tree"><h4>Geprüfte Beziehungen</h4>' + lines.join("") + "</div>";
   }
 
   function countApproved(profile, key) {
@@ -708,61 +1322,145 @@
 
   function renderQuellen(profile) {
     var claims = approvedOnly(profile.claims || []);
-    var works = (profile.worksIndex || [])
-      .map(function (w) {
-        var n = typeof w.approvedCount === "number" ? w.approvedCount : countApproved(profile, w.countFrom);
-        if (!n && w.id !== "quran") return "";
+    var groups = [
+      { key: "quran", title: "Qurʾān", match: function (c) { return c.evidenceType === "quran"; } },
+      { key: "bukhari", title: "Ṣaḥīḥ al-Buḫārī", match: function (c) { return c.evidenceType === "sunnah" && /bu[kḫ]h?ārī|bukhari/i.test(String(c.source || c.hadithId || "")); } },
+      { key: "muslim", title: "Ṣaḥīḥ Muslim", match: function (c) { return c.evidenceType === "sunnah" && /muslim/i.test(String(c.source || c.hadithId || "")); } },
+      { key: "sunnah", title: "Weitere authentische Sunnah", match: function (c) {
+          return c.evidenceType === "sunnah" && !/bu[kḫ]h?ārī|bukhari|muslim/i.test(String(c.source || c.hadithId || ""));
+        } },
+      { key: "athar", title: "Authentische Āthār", match: function (c) { return c.evidenceType === "athar"; } },
+      { key: "early", title: "Frühe Quellen", match: function (c) {
+          return c.evidenceType === "early" || /sīrah|ibn.?ish[āa]q|ṭabarī|tabari|ibn.?saʿd/i.test(String(c.source || ""));
+        } },
+      { key: "research", title: "Qualifizierte Research-Einordnung", match: function (c) {
+          return c.evidenceType === "editorial" || c.evidenceType === "research" || /isolation|not_established|research/i.test(String(c.category || c.id || ""));
+        } }
+    ];
+    var used = Object.create(null);
+    var worksHtml = groups
+      .map(function (g) {
+        var items = claims.filter(function (c) {
+          if (used[c.id]) return false;
+          if (!g.match(c)) return false;
+          used[c.id] = 1;
+          return true;
+        });
+        if (!items.length) return "";
         return (
-          '<button type="button" class="prophets-work" data-prophets-work="' +
-          esc(w.id) +
+          '<button type="button" class="prophets-work" data-prophets-source-group="' +
+          esc(g.key) +
           '"><span>' +
-          esc(w.title) +
-          "</span><span>" +
-          n +
-          " Belege</span></button>"
+          esc(g.title) +
+          '</span><span>' +
+          items.length +
+          " geprüfte Berichte</span></button>"
         );
       })
       .join("");
 
-    var claimList = claims
+    var activeGroup = (readState().sourceGroup || "all");
+    var filtered =
+      activeGroup === "all"
+        ? claims
+        : claims.filter(function (c) {
+            var g = groups.find(function (x) { return x.key === activeGroup; });
+            return g ? g.match(c) : true;
+          });
+
+    var claimList = filtered
       .map(function (c) {
+        var ext = c.directReference && String(c.directReference).indexOf("http") === 0 ? c.directReference : "";
         return (
-          '<article class="prophets-quote">' +
+          '<article class="prophets-quote" id="claim-' +
+          esc(c.id) +
+          '">' +
           '<span class="prophets-badge">' +
-          esc(c.grading || c.evidenceType || "") +
+          esc(publicStatusLabel(c.grading || c.evidenceType || "")) +
           "</span>" +
           '<p class="prophets-quote__de">' +
           esc(c.claim) +
           "</p>" +
+          (c.arabicOriginal
+            ? '<p class="prophets-quote__ar" lang="ar" dir="rtl">' + esc(c.arabicOriginal) + "</p>"
+            : "") +
           '<p class="prophets-quote__meta">' +
-          esc(c.source) +
-          (c.reference ? " · " + esc(c.reference) : "") +
+          esc([c.source, c.reference || c.number, c.rawi || c.sahabiRawi].filter(Boolean).join(" · ")) +
           "</p>" +
           (c.directReference && c.directReference.indexOf("#quran-surah/") === 0
             ? '<button type="button" class="prophets-link" data-nav-hash="' +
               esc(c.directReference) +
               '">Direktnachweis</button>'
             : "") +
+          (ext
+            ? '<button type="button" class="prophets-link" data-external-url="' +
+              esc(ext) +
+              '">Quelle öffnen</button>'
+            : "") +
           "</article>"
         );
       })
       .join("");
 
+    var researchNote =
+      '<details class="prophets-research-fold"><summary>Research / umstritten (bewusst öffnen)</summary>' +
+      '<p class="prophets-note">Schwache, isrāʾīliyyāt- oder ungeprüfte Berichte gehören nicht zur Hauptbiografie und erscheinen hier nicht als sichere Tatsachen.</p>' +
+      ((profile.weakReports || []).length
+        ? '<ul class="prophets-weak-list">' +
+          (profile.weakReports || [])
+            .slice(0, 12)
+            .map(function (w) {
+              return (
+                "<li><b>" +
+                esc(w.title || w.id || "Bericht") +
+                "</b> · " +
+                esc(publicStatusLabel(w.grading || "Umstritten")) +
+                "</li>"
+              );
+            })
+            .join("") +
+          "</ul>"
+        : "<p>Keine zusätzlichen Research-Einträge in diesem Profil.</p>") +
+      "</details>";
+
     return (
       '<section class="prophets-chapter"><h3>Quellenbibliothek</h3><div class="prophets-work-list">' +
-      works +
+      worksHtml +
       "</div></section>" +
-      '<section class="prophets-chapter"><h3>Belegte Aussagen (Claims) · ' +
-      claims.length +
+      '<section class="prophets-chapter"><h3>Belegte Aussagen · ' +
+      filtered.length +
       "</h3>" +
-      claimList +
-      "</section>"
+      (claimList || '<div class="prophets-empty">Keine freigegebenen Quellenberichte in dieser Gruppe.</div>') +
+      "</section>" +
+      researchNote
     );
   }
 
-  function renderStubDetail(meta) {
-    if (!meta) return '<div class="prophets-empty">Prophet nicht gefunden.</div>';
-    var disputed = meta.prophetStatus === "disputed";
+  function renderDisputedPositions(profile, meta) {
+    if (!isDisputedStatus(profile.prophetStatus) && !(meta && isDisputedStatus(meta.prophetStatus))) return "";
+    var note = disputedStatusNote(Object.assign({}, meta || {}, profile));
+    return (
+      '<section class="prophets-chapter prophets-chapter--ikhtilaf"><h3>Einordnung</h3>' +
+      '<p class="prophets-quote__de">' +
+      esc(note || "Prophetenstatus unter den Gelehrten unterschiedlich eingeordnet") +
+      "</p>" +
+      '<details class="prophets-research-fold"><summary>Positionen ansehen</summary>' +
+      '<div class="prophets-ikhtilaf">' +
+      "<article><h4>Position 1</h4><p><b>Prophet</b></p><p>Begründung: kontextuelle Einordnung durch Gelehrte — nicht als ausdrücklicher Qurʾān-Wortlaut „Nabī“.</p></article>" +
+      "<hr class=\"prophets-rule\" />" +
+      "<article><h4>Position 2</h4><p><b>Rechtschaffener Mann / Diener, kein Prophet</b></p><p>Frühe Überlieferungen und Tafsīr-Meinungen mit jeweiligem Isnādstatus — nicht automatisch freigegeben.</p></article>" +
+      "</div></details></section>"
+    );
+  }
+
+  function renderStubDetail(meta, opts) {
+    opts = opts || {};
+    if (!meta) return notFoundHtml();
+    if (opts.loadFailed) {
+      return visitorLoadErrorHtml({ offlineUncached: !isOnline() });
+    }
+    var disputed = isDisputedStatus(meta.prophetStatus);
+    var note = disputedStatusNote(meta) || meta.note || "Die vollständige Wissensakte wird mit geprüften Claims aufgebaut.";
     return (
       '<article class="prophets-detail">' +
       '<header class="prophets-detail__head">' +
@@ -770,15 +1468,17 @@
       '<div class="prophets-detail__ar" lang="ar" dir="rtl">' + esc(meta.nameAr || "") + "</div>" +
       '<p class="prophets-detail__honor">' + esc(meta.honorific || "") + "</p>" +
       '<div class="prophets-detail__roles">' +
-      (rolesLabel(meta.roles) ? '<span class="prophets-chip">' + esc(rolesLabel(meta.roles)) + "</span>" : "") +
+      (!disputed && rolesLabel(meta.roles) ? '<span class="prophets-chip">' + esc(rolesLabel(meta.roles)) + "</span>" : "") +
+      (disputed ? '<span class="prophets-chip">Umstritten</span>' : "") +
       (meta.uluAlAzm ? '<span class="prophets-chip">✦ Ulū l-ʿAzm</span>' : "") +
       "</div>" +
-      (meta.people ? '<p class="prophets-detail__people">👥 ' + esc(meta.people) + "</p>" : "") +
+      (meta.people ? '<p class="prophets-detail__people">' + esc(meta.people) + "</p>" : "") +
       '</header><hr class="prophets-rule" />' +
       '<section class="prophets-chapter"><h3>' + (disputed ? "Umstrittene Einordnung" : "Profil") + "</h3>" +
       "<p class=\"prophets-quote__de\">" +
-      esc(meta.note || "Die vollständige Wissensakte wird nach dem Referenzprofil Mūsā schrittweise mit geprüften Claims aufgebaut. Es werden keine ungeprüften biografischen Angaben ergänzt.") +
+      esc(note) +
       "</p>" +
+      (meta.note && disputedStatusNote(meta) ? '<p class="prophets-quote__de">' + esc(meta.note) + "</p>" : "") +
       '<p class="prophets-status prophets-status--na">Struktur vorbereitet · Inhalte folgen nach Freigabe</p>' +
       "</section></article>"
     );
@@ -792,7 +1492,9 @@
 
   function renderDetail(profile, section, state, meta) {
     if (!profile) {
-      return renderStubDetail(meta || null);
+      var loadFailed =
+        !!(meta && LAST_LOAD_ERROR && LAST_LOAD_ERROR.prophetId && String(LAST_LOAD_ERROR.prophetId) === String(meta.id));
+      return renderStubDetail(meta || null, { loadFailed: loadFailed });
     }
     var researchMode = profile.profileStatus && profile.profileStatus !== "approved";
     if (researchMode && !isTest()) {
@@ -814,8 +1516,9 @@
     }).join("");
 
     var body = "";
-    if (sec === "overview") body = renderOverview(profile);
+    if (sec === "overview") body = renderOverview(profile) + renderDisputedPositions(profile, meta);
     else if (sec === "lebensweg") body = renderTimeline(profile);
+    else if (sec === "ereignisse") body = renderEreignisse(profile);
     else if (sec === "quran") body = renderQuranSection(profile, state);
     else if (sec === "sunnah") body = renderSunnahAbout(profile);
     else if (sec === "aussagen") body = renderStatements(profile);
@@ -828,17 +1531,30 @@
     var stS = approvedOnly((profile.statements && profile.statements.sunnah) || []).length;
     var aboutN = approvedOnly(profile.prophetAbout || []).length;
     var sunnahN = aboutN + stS;
+    var disputed = isDisputedStatus(profile.prophetStatus) || isDisputedStatus((meta || {}).prophetStatus);
     var roleChips = [];
-    (profile.roles || []).forEach(function (r) {
-      roleChips.push('<span class="prophets-chip">' + esc(rolesLabel([r]) || r) + "</span>");
-    });
+    if (!disputed) {
+      (profile.roles || []).forEach(function (r) {
+        roleChips.push('<span class="prophets-chip">' + esc(rolesLabel([r]) || r) + "</span>");
+      });
+    } else {
+      roleChips.push('<span class="prophets-chip">Umstritten</span>');
+      if (profile.quranExplicitName || (profile.identity && profile.identity.quranNamed) || (meta && meta.quranNamed)) {
+        roleChips.push('<span class="prophets-chip">Im Qurʾān genannt</span>');
+      }
+    }
     if (profile.uluAlAzm) roleChips.push('<span class="prophets-chip">✦ Ulū l-ʿAzm</span>');
 
-    var banner = researchMode
-      ? '<p class="prophets-status prophets-status--na">Zero-Trust · Profilstatus: ' +
-        esc(profile.profileStatus) +
-        " · Lesertext nur aus freigegebenen Claims · Test-Forschungsvorschau</p>"
-      : "";
+    var banner = "";
+    if (disputed) {
+      banner =
+        '<p class="prophets-status prophets-status--na">' +
+        esc(disputedStatusNote(Object.assign({}, meta || {}, profile)) || "Prophetenstatus unter den Gelehrten unterschiedlich eingeordnet") +
+        "</p>";
+    } else if (researchMode) {
+      banner =
+        '<p class="prophets-status prophets-status--na">Zero-Trust · Profil noch in Prüfung · Lesertext nur aus freigegebenen Claims</p>';
+    }
 
     return (
       '<article class="prophets-detail" data-prophet-detail="' +
@@ -853,19 +1569,26 @@
       esc(profile.nameAr) +
       "</div>" +
       "</div>" +
-      '<p class="prophets-detail__honor">' +
-      esc(profile.honorific || "") +
+      '<p class="prophets-detail__sub">' +
+      esc(
+        [profile.honorific || "", rolesLabel(profile.roles || []), profile.people || ""]
+          .filter(Boolean)
+          .join(" · ")
+      ) +
       "</p>" +
-      (roleChips.length ? '<div class="prophets-detail__roles">' + roleChips.join("") + "</div>" : "") +
-      (profile.people ? '<p class="prophets-detail__people">👥 ' + esc(profile.people) + (profile.region ? " · " + esc(profile.region) : "") + "</p>" : "") +
       banner +
       '<div class="prophets-detail__stats" aria-label="Quellenübersicht">' +
-      '<div class="prophets-stat"><b>' + qCount + '</b><span>Qurʾān</span></div>' +
-      '<div class="prophets-stat"><b>' + sunnahN + '</b><span>Sunnah</span></div>' +
-      '<div class="prophets-stat"><b>' + (stQ + stS) + '</b><span>Aussagen</span></div>' +
+      '<div class="prophets-stat"><b>' +
+      qCount +
+      "</b><span>Qurʾān</span></div>" +
+      '<div class="prophets-stat"><b>' +
+      sunnahN +
+      "</b><span>Sunnah</span></div>" +
+      '<div class="prophets-stat"><b>' +
+      (stQ + stS) +
+      "</b><span>Aussagen</span></div>" +
       "</div>" +
       "</header>" +
-      '<hr class="prophets-rule" />' +
       '<nav class="prophets-tabs" aria-label="Propheten-Abschnitte">' +
       tabs +
       "</nav>" +
@@ -915,14 +1638,10 @@
 
   function setPageHeaderSafe() {
     if (typeof global.setPageHeader === "function") {
-      return global.setPageHeader(
-        "Die Propheten",
-        "الأنبياء · Qurʾān · Sunnah · geprüfte Überlieferungen",
-        ""
-      );
+      return global.setPageHeader("Die Propheten", "الأنبياء", "");
     }
     if (typeof global.setHeader === "function") {
-      return global.setHeader("Die Propheten", "الأنبياء · Qurʾān · Sunnah · geprüfte Überlieferungen", "");
+      return global.setHeader("Die Propheten", "الأنبياء", "");
     }
     return "";
   }
@@ -932,6 +1651,8 @@
     var state = readState();
     var header = setPageHeaderSafe();
 
+    if (!indexCache) hydrateIndexFromSession();
+
     if (!indexCache) {
       loadIndex()
         .then(function () {
@@ -939,8 +1660,20 @@
             if (typeof global.render === "function") global.render();
           }
         })
-        .catch(function () {});
-      return header + '<div class="prophets-root"><div class="prophets-empty">Prophetenbibliothek wird geladen…</div></div>';
+        .catch(function () {
+          if (global.currentRoute && global.currentRoute.view === "propheten") {
+            if (typeof global.render === "function") global.render();
+          }
+        });
+      if (LAST_LOAD_ERROR && /index_/.test(String(LAST_LOAD_ERROR.errorType || ""))) {
+        return header + '<div class="prophets-root">' + visitorLoadErrorHtml() + "</div>";
+      }
+      return (
+        header +
+        '<div class="prophets-root" data-prophets-loading="1">' +
+        '<div class="prophets-empty prophets-empty--boot">Prophetenbibliothek wird geladen…</div>' +
+        "</div>"
+      );
     }
 
     if (!isFeatureEnabled(indexCache)) {
@@ -992,6 +1725,36 @@
       });
     }
 
+    root.querySelectorAll("[data-prophets-pick]").forEach(function (sel) {
+      if (sel.dataset.bound) return;
+      sel.dataset.bound = "1";
+      sel.addEventListener("change", function () {
+        var next = sel.value || "all";
+        writeState({ filter: next, scrollY: window.scrollY || 0 });
+        if (typeof global.render === "function") global.render();
+      });
+    });
+    root.querySelectorAll("[data-prophets-jump]").forEach(function (sel) {
+      if (sel.dataset.bound) return;
+      sel.dataset.bound = "1";
+      sel.addEventListener("change", function () {
+        var id = sel.value || "";
+        sel.value = "";
+        if (!id) return;
+        var meta = findMeta(id);
+        writeLastRead({
+          prophetId: id,
+          name: meta && meta.name,
+          honorific: meta && meta.honorific,
+          tab: "overview",
+          tabLabel: "Übersicht",
+          at: Date.now()
+        });
+        writeState({ selectedId: id, section: "overview", scrollY: 0 });
+        navigateProphets(id, "overview");
+      });
+    });
+    /* Legacy chip buttons (falls Cache) */
     root.querySelectorAll("[data-prophets-filter]").forEach(function (btn) {
       if (btn.dataset.bound) return;
       btn.dataset.bound = "1";
@@ -1006,8 +1769,24 @@
       btn.dataset.bound = "1";
       btn.addEventListener("click", function () {
         var id = btn.getAttribute("data-prophet-id");
-        writeState({ scrollY: window.scrollY || 0, selectedId: id, section: "overview" });
+        var rail = root.querySelector(".prophets-rail");
+        writeState({
+          scrollY: window.scrollY || 0,
+          leftScroll: rail ? rail.scrollTop : 0,
+          selectedId: id,
+          section: "overview"
+        });
+        var meta = findMeta(id);
+        writeLastRead({
+          prophetId: id,
+          name: meta && meta.name,
+          honorific: meta && meta.honorific,
+          tab: "overview",
+          tabLabel: "Übersicht",
+          at: Date.now()
+        });
         navigateProphets(id, "overview");
+        prefetchNeighbor(id);
       });
     });
 
@@ -1018,7 +1797,17 @@
         var tab = btn.getAttribute("data-prophets-tab") || "overview";
         var detail = root.querySelector("[data-prophet-detail]");
         var id = detail && detail.getAttribute("data-prophet-detail");
+        var label = btn.textContent || tab;
         writeState({ section: tab, scrollY: 0 });
+        var meta = findMeta(id);
+        writeLastRead({
+          prophetId: id,
+          name: meta && meta.name,
+          honorific: meta && meta.honorific,
+          tab: tab,
+          tabLabel: label,
+          at: Date.now()
+        });
         navigateProphets(id, tab);
       });
     });
@@ -1059,11 +1848,71 @@
       btn.dataset.bound = "1";
       btn.addEventListener("click", function () {
         navigateProphets("", "");
+        restoreScroll(readState());
       });
     });
 
+    root.querySelectorAll("[data-external-url]").forEach(function (btn) {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = "1";
+      btn.addEventListener("click", function () {
+        openExternalSafe(btn.getAttribute("data-external-url"));
+      });
+    });
+
+    root.querySelectorAll("[data-prophets-continue]").forEach(function (btn) {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = "1";
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-prophets-continue");
+        var tab = btn.getAttribute("data-prophets-continue-tab") || "overview";
+        navigateProphets(id, tab);
+      });
+    });
+
+    root.querySelectorAll("[data-prophets-source-group]").forEach(function (btn) {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = "1";
+      btn.addEventListener("click", function () {
+        writeState({ sourceGroup: btn.getAttribute("data-prophets-source-group") || "all" });
+        if (typeof global.render === "function") global.render();
+      });
+    });
+
+    // hydrate approved relations for family tree
+    var detail = root.querySelector("[data-prophet-detail]");
+    if (detail) {
+      var pid = detail.getAttribute("data-prophet-detail");
+      var prof = profileCache[pid];
+      if (prof && (prof.relationIds || []).length) {
+        Promise.all((prof.relationIds || []).map(loadRelation)).then(function () {
+          var treeHost = root.querySelector(".prophets-tree--pending");
+          if (treeHost && typeof global.render === "function") global.render();
+        });
+      }
+    }
+
     ensureResizeWatch();
     restoreScroll(state);
+    restoreRailScroll(state);
+  }
+
+  function restoreRailScroll(state) {
+    var y = Number(state.leftScroll || 0);
+    if (!(y > 0)) return;
+    requestAnimationFrame(function () {
+      var rail = document.querySelector(".prophets-rail");
+      if (rail) rail.scrollTop = y;
+    });
+  }
+
+  function prefetchNeighbor(id) {
+    if (!indexCache) return;
+    var established = (indexCache.prophets || []).filter(function (p) { return !isFurtherPerson(p); });
+    var ix = established.findIndex(function (p) { return String(p.id) === String(id); });
+    if (ix < 0) return;
+    var next = established[ix + 1] || established[ix - 1];
+    if (next) loadProfile(next.id);
   }
 
   function ensureResizeWatch() {
@@ -1104,8 +1953,46 @@
     );
   }
 
+  function precacheProphetsShell() {
+    if (!isTest()) return;
+    if (!("serviceWorker" in navigator)) return;
+    var urls = [
+      "/test/assets/prophets/prophets.js",
+      "/test/assets/prophets/prophets.css",
+      DATA_BASE + "index.json",
+      DATA_BASE + "search-index.json"
+    ];
+    navigator.serviceWorker.ready
+      .then(function (reg) {
+        try {
+          reg.active && reg.active.postMessage({ type: "PRECACHE", urls: urls });
+        } catch (e) {}
+      })
+      .catch(function () {});
+  }
+
+  function precacheOpenedProfile(fileUrl) {
+    if (!isTest() || !fileUrl) return;
+    if (!("serviceWorker" in navigator)) return;
+    navigator.serviceWorker.ready
+      .then(function (reg) {
+        try {
+          reg.active && reg.active.postMessage({ type: "PRECACHE", urls: [fileUrl] });
+        } catch (e) {}
+      })
+      .catch(function () {});
+  }
+
   function prefetch() {
-    loadIndex().catch(function () {});
+    try {
+      hydrateIndexFromSession();
+    } catch (e) {}
+    loadIndex()
+      .then(function () {
+        precacheProphetsShell();
+        return loadSearchIndex();
+      })
+      .catch(function () {});
   }
 
   global.DARProphets = {
@@ -1114,10 +2001,24 @@
     bind: bind,
     prefetch: prefetch,
     loadIndex: loadIndex,
+    loadSearchIndex: loadSearchIndex,
     loadProfile: loadProfile,
     isEnabled: function () {
+      if (!indexCache) hydrateIndexFromSession();
       if (!indexCache) return isTest();
       return isFeatureEnabled(indexCache);
     }
   };
+
+  /* Sofort vorwärmen — nicht erst nach vollständigem HTML-Parse. */
+  try {
+    if (isTest()) {
+      hydrateIndexFromSession();
+      if (typeof requestIdleCallback === "function") {
+        requestIdleCallback(function () { prefetch(); }, { timeout: 1200 });
+      } else {
+        setTimeout(function () { prefetch(); }, 0);
+      }
+    }
+  } catch (e) {}
 })(window);

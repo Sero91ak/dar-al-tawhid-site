@@ -1,0 +1,47 @@
+{
+  "releaseCandidate": "prophets-final-test-v1",
+  "environment": "test",
+  "generatedAt": "2026-08-08T11:48:37.553Z",
+  "stats": {
+    "profiles": 30,
+    "claimsApproved": 1730,
+    "claimsResearch": 9,
+    "quranRefsChecked": 1369,
+    "hadithCanonical": 58,
+    "relations": 8,
+    "externalLinksChecked": 0,
+    "externalLinksOk": 0,
+    "externalLinksBroken": 0,
+    "externalLinksSkipped": 0
+  },
+  "validation": {
+    "json": "PASS",
+    "schema": "PASS",
+    "claims": "PASS",
+    "quran": "PASS",
+    "hadith": "PASS",
+    "athar": "PASS",
+    "relations": "PASS",
+    "search": "PASS",
+    "researchIsolation": "PASS",
+    "productionLock": "PASS"
+  },
+  "warnings": [
+    "possible hadith duplicate (keep as variants if wording differs): muslim-165 ~ muslim-165.02"
+  ],
+  "errors": [],
+  "productionEnabled": false,
+  "finalResult": "PASS",
+  "ui": {
+    "phone": "PASS",
+    "tablet": "PASS",
+    "fold": "PASS",
+    "rtl": "PASS",
+    "themes": "PASS"
+  },
+  "pwa": {
+    "offline": "PASS",
+    "updateLoop": "NOT_RUN"
+  },
+  "regression": "PASS"
+}

@@ -114,16 +114,29 @@ async function fetchVersionBuild(base) {
     throw new Error(`workers.dev Test-App liefert noch nicht ${TEST_EXPECT_BUILD}: ${workersBase}/`);
   }
 
-  const publicVersion = await fetchVersionBuild(publicBase);
-  const workersVersion = await fetchVersionBuild(workersBase);
-  if (publicVersion.buildId !== TEST_EXPECT_BUILD) {
+  async function waitForMatchingVersion(label, base) {
+    for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
+      const v = await fetchVersionBuild(base);
+      const ok = v.status === 200 && v.buildId === TEST_EXPECT_BUILD;
+      console.log(
+        `${label} version check: buildId=${v.buildId || "?"} expect=${TEST_EXPECT_BUILD} ok=${ok} (attempt ${attempt}/${ATTEMPTS})`
+      );
+      if (ok) return v;
+      if (attempt < ATTEMPTS) await sleep(DELAY_MS);
+    }
+    return null;
+  }
+
+  const publicVersion = await waitForMatchingVersion("public", publicBase);
+  const workersVersion = await waitForMatchingVersion("workers.dev", workersBase);
+  if (!publicVersion) {
     throw new Error(
-      `public /test/version.json=${publicVersion.buildId || "?"} ≠ expect ${TEST_EXPECT_BUILD}`
+      `public /test/version.json still ≠ expect ${TEST_EXPECT_BUILD}`
     );
   }
-  if (workersVersion.buildId !== TEST_EXPECT_BUILD) {
+  if (!workersVersion) {
     throw new Error(
-      `workers.dev /test/version.json=${workersVersion.buildId || "?"} ≠ expect ${TEST_EXPECT_BUILD}`
+      `workers.dev /test/version.json still ≠ expect ${TEST_EXPECT_BUILD}`
     );
   }
   if (publicVersion.buildId !== workersVersion.buildId) {

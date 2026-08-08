@@ -1,0 +1,993 @@
+{
+  "id": "idris",
+  "name": "Idrīs",
+  "nameAr": "إدريس",
+  "honorific": "عليه السلام",
+  "nameVariants": [
+    "Idris",
+    "Idrīs",
+    "إدريس"
+  ],
+  "searchTerms": [
+    "Idrīs",
+    "Idris",
+    "إدريس",
+    "ṣiddīq",
+    "Miʿrāǧ",
+    "vierter Himmel",
+    "Enoch",
+    "identity",
+    "prophethood",
+    "quran",
+    "character",
+    "sunnah"
+  ],
+  "prophetStatus": "quran_explicit",
+  "roles": [
+    "nabī"
+  ],
+  "uluAlAzm": false,
+  "people": "",
+  "region": "",
+  "mission": "Im Qurʾān als nabī und ṣiddīq genannt; mit den Standhaften erwähnt.",
+  "profileStatus": "approved",
+  "identity": {
+    "name": "Idrīs",
+    "nameAr": "إدريس",
+    "quranOrthography": "إدريس",
+    "safeVariants": [
+      "Idris",
+      "إدريس"
+    ],
+    "prophetStatus": "quran_explicit",
+    "roles": [
+      "nabī"
+    ],
+    "siddiq": true,
+    "uluAlAzm": false,
+    "nameDe": "Idrīs",
+    "honorific": "عليه السلام",
+    "quranNamed": true,
+    "nabī": {
+      "value": true,
+      "claimIds": [
+        "idris-miraj-fourth-heaven",
+        "idris-nabi-siddiq"
+      ]
+    },
+    "rasūl": {
+      "value": false,
+      "claimIds": []
+    },
+    "nameAttributionType": "explicit_name"
+  },
+  "overviewFields": [
+    {
+      "key": "name",
+      "label": "Name",
+      "value": "Idrīs",
+      "status": "authentisch belegt (Qurʾān)",
+      "claimIds": [
+        "idris-name-quran"
+      ]
+    },
+    {
+      "key": "nameAr",
+      "label": "Arabischer Name",
+      "value": "إدريس",
+      "status": "authentisch belegt (Qurʾān)",
+      "claimIds": [
+        "idris-name-quran"
+      ]
+    },
+    {
+      "key": "roles",
+      "label": "Nabī / Rasūl",
+      "value": "Nabī · ṣiddīq (19:56); Rasūl nicht automatisch gesetzt",
+      "status": "Nabī authentisch",
+      "claimIds": [
+        "idris-nabi-siddiq"
+      ]
+    },
+    {
+      "key": "character",
+      "label": "Charakter",
+      "value": "ṣabr / Standhaftigkeit (21:85)",
+      "status": "authentisch belegt (Qurʾān)",
+      "claimIds": [
+        "idris-sabr"
+      ]
+    },
+    {
+      "key": "miraj",
+      "label": "Miʿrāǧ",
+      "value": "Begegnung im vierten Himmel (Buḫārī 3887)",
+      "status": "authentisch belegt (Sunnah)",
+      "claimIds": [
+        "idris-miraj-fourth-heaven"
+      ]
+    },
+    {
+      "key": "family",
+      "label": "Familie",
+      "value": "research",
+      "status": "nicht freigegeben",
+      "claimIds": [
+        "idris-father-research",
+        "idris-wife-research",
+        "idris-children-research"
+      ]
+    },
+    {
+      "key": "birth",
+      "label": "Geburt",
+      "value": "Nicht authentisch belegt",
+      "status": "nicht authentisch belegt",
+      "claimIds": [
+        "idris-birth-unattested"
+      ]
+    },
+    {
+      "key": "death",
+      "label": "Tod / Grab",
+      "value": "Nicht authentisch belegt",
+      "status": "nicht authentisch belegt",
+      "claimIds": [
+        "idris-death-unattested",
+        "idris-grave-unattested"
+      ]
+    }
+  ],
+  "family": [
+    {
+      "relation": "father",
+      "label": "Vater",
+      "name": "research",
+      "nameStatus": "research",
+      "summary": "Keine freigegebene Primärangabe.",
+      "claimIds": [
+        "idris-father-research"
+      ]
+    },
+    {
+      "relation": "mother",
+      "label": "Mutter",
+      "name": "research",
+      "nameStatus": "research",
+      "summary": "Keine freigegebene Primärangabe.",
+      "claimIds": [
+        "idris-mother-research"
+      ]
+    },
+    {
+      "relation": "wife",
+      "label": "Ehefrau",
+      "name": "research",
+      "nameStatus": "research",
+      "summary": "Keine freigegebene Primärangabe.",
+      "claimIds": [
+        "idris-wife-research"
+      ]
+    },
+    {
+      "relation": "children",
+      "label": "Kinder",
+      "name": "research",
+      "nameStatus": "research",
+      "summary": "Keine freigegebene Primärangabe.",
+      "claimIds": [
+        "idris-children-research"
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "id": "tl-idris-identity",
+      "title": "Nabī und ṣiddīq",
+      "order": 1,
+      "claimIds": [
+        "idris-nabi-siddiq"
+      ]
+    },
+    {
+      "id": "tl-idris-raised",
+      "title": "Erhebung zu einem hohen Ort",
+      "order": 2,
+      "claimIds": [
+        "idris-raised-high"
+      ]
+    },
+    {
+      "id": "tl-idris-sabr",
+      "title": "Unter den Standhaften genannt",
+      "order": 3,
+      "claimIds": [
+        "idris-sabr"
+      ]
+    },
+    {
+      "id": "tl-idris-miraj",
+      "title": "Begegnung im Miʿrāǧ (vierter Himmel)",
+      "order": 4,
+      "claimIds": [
+        "idris-miraj-fourth-heaven"
+      ]
+    }
+  ],
+  "quranRefs": [
+    {
+      "surah": 19,
+      "ayah": 56,
+      "ayahEnd": 57,
+      "kind": "about",
+      "event": "Idrīs nabī ṣiddīq; Erhebung",
+      "context": "Und gedenke im Buch Idris’. Er war ein Wahrhaftiger und Prophet",
+      "category": "identity",
+      "claimIds": [
+        "idris-nabi-siddiq",
+        "idris-raised-high"
+      ],
+      "directReference": "#quran-surah/19/56"
+    },
+    {
+      "surah": 21,
+      "ayah": 85,
+      "ayahEnd": 86,
+      "kind": "about",
+      "event": "Standhaftigkeit",
+      "context": "Und (auch) Isma’il und Idris und Du’l-Kifl. Jeder gehörte zu den Standhaften",
+      "category": "character",
+      "claimIds": [
+        "idris-sabr",
+        "idris-mercy"
+      ],
+      "directReference": "#quran-surah/21/85"
+    }
+  ],
+  "statements": {
+    "quran": [],
+    "sunnah": []
+  },
+  "prophetAbout": [
+    {
+      "id": "idris-miraj-fourth-heaven-about",
+      "arabicOriginal": "حَدَّثَنَا هُدْبَةُ بْنُ خَالِدٍ، حَدَّثَنَا هَمَّامُ بْنُ يَحْيَى، حَدَّثَنَا قَتَادَةُ، عَنْ أَنَسِ بْنِ مَالِكٍ، عَنْ مَالِكِ بْنِ صَعْصَعَةَ ـ رضى الله عنهما ـ أَنَّ نَبِيَّ اللَّهِ صلى الله عليه وسلم حَدَّثَهُمْ عَنْ لَيْلَةَ أُسْرِيَ بِهِ ‏\"‏ بَيْنَمَا أَنَا فِي الْحَطِيمِ ـ وَرُبَّمَا قَالَ فِي الْحِجْرِ ـ مُضْطَجِعًا، إِذْ أَتَانِي آتٍ فَقَدَّ ـ قَالَ وَسَمِعْتُهُ يَقُولُ فَشَقَّ ـ مَا بَيْنَ هَذِهِ إِلَى هَذِهِ ـ فَقُلْتُ لِلْجَارُودِ وَهْوَ إِلَى جَنْبِي مَا يَعْنِي بِهِ قَالَ مِنْ ثُغْرَةِ نَحْرِهِ إِلَى شِعْرَتِهِ، وَسَمِعْتُهُ يَقُولُ مِنْ قَصِّهِ إِلَى شِعْرَتِهِ ـ فَاسْتَخْرَجَ قَلْبِي، ثُمَّ أُتِيتُ بِطَسْتٍ مِنْ ذَهَبٍ مَمْلُوءَةٍ إِيمَانًا، فَغُسِلَ قَلْبِي ثُمَّ حُشِيَ، ثُمَّ أُوتِيتُ بِدَابَّةٍ دُونَ الْبَغْلِ وَفَوْقَ الْحِمَارِ أَبْيَضَ ‏\"‏‏.‏ ـ فَقَالَ لَهُ الْجَارُودُ هُوَ الْبُرَاقُ يَا أَبَا حَمْزَةَ قَالَ أَنَسٌ نَعَمْ، يَضَعُ خَطْوَهُ عِنْدَ أَقْصَى طَرْفِهِ ـ ‏\"‏ فَحُمِلْتُ عَلَيْهِ، فَانْطَلَقَ بِي جِبْرِيلُ حَتَّى أَتَى السَّمَاءَ الدُّنْيَا فَاسْتَفْتَحَ، فَقِيلَ مَنْ هَذَا قَالَ جِبْرِيلُ‏.‏ قِيلَ وَمَنْ مَعَكَ قَالَ مُحَمَّدٌ‏.‏ قِيلَ وَقَدْ أُرْسِلَ إِلَيْهِ قَالَ نَعَمْ‏.‏ قِيلَ مَرْحَبًا بِهِ، فَنِعْمَ الْمَجِيءُ جَاءَ فَفَتَحَ، فَلَمَّا خَلَصْتُ، فَإِذَا فِيهَا آدَمُ، فَقَالَ هَذَا أَبُوكَ آدَمُ فَسَلِّمْ عَلَيْهِ‏.‏ فَسَلَّمْتُ عَلَيْهِ فَرَدَّ السَّلاَمَ ثُمَّ قَالَ مَرْحَبًا بِالاِبْنِ الصَّالِحِ وَالنَّبِيِّ الصَّالِحِ‏.‏ ثُمَّ صَعِدَ حَتَّى أَتَى السَّمَاءَ الثَّانِيَةَ فَاسْتَفْتَحَ، قِيلَ مَنْ هَذَا قَالَ جِبْرِيلُ‏.‏ قِيلَ وَمَنْ مَعَكَ قَالَ مُحَمَّدٌ‏.‏ قِيلَ وَقَدْ أُرْسِلَ إِلَيْهِ قَالَ نَعَمْ‏.‏ قِيلَ مَرْحَبًا بِهِ فَنِعْمَ الْمَجِيءُ جَاءَ‏.‏ فَفَتَحَ، فَلَمَّا خَلَصْتُ، إِذَا يَحْيَى وَعِيسَى، وَهُمَا ابْنَا الْخَالَةِ قَالَ هَذَا يَحْيَى وَعِيسَى فَسَلِّمْ عَلَيْهِمَا‏.‏ فَسَلَّمْتُ فَرَدَّا، ثُمَّ قَالاَ مَرْحَبًا بِالأَخِ الصَّالِحِ وَالنَّبِيِّ الصَّالِحِ‏.‏ ثُمَّ صَعِدَ بِي إِلَى السَّمَاءِ الثَّالِثَةِ، فَاسْتَفْتَحَ قِيلَ مَنْ هَذَا قَالَ جِبْرِيلُ‏.‏ قِيلَ وَمَنْ مَعَكَ قَالَ مُحَمَّدٌ‏.‏ قِيلَ وَقَدْ أُرْسِلَ إِلَيْهِ قَالَ نَعَمْ‏.‏ قِيلَ مَرْحَبًا بِهِ، فَنِعْمَ الْمَجِيءُ جَاءَ‏.‏ فَفُتِحَ، فَلَمَّا خَلَصْتُ إِذَا يُوسُفُ‏.‏ قَالَ هَذَا يُوسُفُ فَسَلِّمْ عَلَيْهِ‏.‏ فَسَلَّمْتُ عَلَيْهِ فَرَدَّ، ثُمَّ قَالَ مَرْحَبًا بِالأَخِ الصَّالِحِ وَالنَّبِيِّ الصَّالِحِ، ثُمَّ صَعِدَ بِي حَتَّى أَتَى السَّمَاءَ الرَّابِعَةَ، فَاسْتَفْتَحَ، قِيلَ مَنْ هَذَا قَالَ جِبْرِيلُ‏.‏ قِيلَ وَمَنْ مَعَكَ قَالَ مُحَمَّدٌ‏.‏ قِيلَ أَوَقَدْ أُرْسِلَ إِلَيْهِ قَالَ نَعَمْ‏.‏ قِيلَ مَرْحَبًا بِهِ، فَنِعْمَ الْمَجِيءُ جَاءَ‏.‏ فَفُتِحَ، فَلَمَّا خَلَصْتُ إِلَى إِدْرِيسَ قَالَ هَذَا إِدْرِيسُ فَسَلِّمْ عَلَيْهِ‏.‏ فَسَلَّمْتُ عَلَيْهِ فَرَدَّ ثُمَّ قَالَ مَرْحَبًا بِالأَخِ الصَّالِحِ وَالنَّبِيِّ الصَّالِحِ‏.‏ ثُمَّ صَعِدَ بِي حَتَّى أَتَى السَّمَاءَ الْخَامِسَةَ، فَاسْتَفْتَحَ، قِيلَ مَنْ هَذَا قَالَ جِبْرِيلُ‏.‏ قِيلَ وَمَنْ مَعَكَ قَالَ مُحَمَّدٌ صلى الله عليه وسلم‏.‏ قِيلَ وَقَدْ أُرْسِلَ إِلَيْهِ قَالَ نَعَمْ‏.‏ قِيلَ مَرْحَبًا بِهِ، فَنِعْمَ الْمَجِيءُ جَاءَ‏.‏ فَلَمَّا خَلَصْتُ فَإِذَا هَارُونُ قَالَ هَذَا هَارُونُ فَسَلِّمْ عَلَيْهِ‏.‏ فَسَلَّمْتُ عَلَيْهِ فَرَدَّ ثُمَّ قَالَ مَرْحَبًا بِالأَخِ الصَّالِحِ وَالنَّبِيِّ الصَّالِحِ‏.‏ ثُمَّ صَعِدَ بِي حَتَّى أَتَى السَّمَاءَ السَّادِسَةَ، فَاسْتَفْتَحَ، قِيلَ مَنْ هَذَا قَالَ جِبْرِيلُ‏.‏ قِيلَ مَنْ مَعَكَ قَالَ مُحَمَّدٌ‏.‏ قِيلَ وَقَدْ أُرْسِلَ إِلَيْهِ قَالَ نَعَمْ‏.‏ قَالَ مَرْحَبًا بِهِ، فَنِعْمَ الْمَجِيءُ جَاءَ، فَلَمَّا خَلَصْتُ، فَإِذَا مُوسَى قَالَ هَذَا مُوسَى فَسَلِّمْ عَلَيْهِ، فَسَلَّمْتُ عَلَيْهِ فَرَدَّ ثُمَّ قَالَ مَرْحَبًا بِالأَخِ الصَّالِحِ وَالنَّبِيِّ الصَّالِحِ‏.‏ فَلَمَّا تَجَاوَزْتُ بَكَى، قِيلَ لَهُ مَا يُبْكِيكَ قَالَ أَبْكِي لأَنَّ غُلاَمًا بُعِثَ بَعْدِي، يَدْخُلُ الْجَنَّةَ مِنْ أُمَّتِهِ أَكْثَرُ مَنْ يَدْخُلُهَا مِنْ أُمَّتِي‏.‏ ثُمَّ صَعِدَ بِي إِلَى السَّمَاءِ السَّابِعَةِ، فَاسْتَفْتَحَ جِبْرِيلُ، قِيلَ مَنْ هَذَا قَالَ جِبْرِيلُ‏.‏ قِيلَ وَمَنْ مَعَكَ قَالَ مُحَمَّدٌ‏.‏ قِيلَ وَقَدْ بُعِثَ إِلَيْهِ‏.‏ قَالَ نَعَمْ‏.‏ قَالَ مَرْحَبًا بِهِ، فَنِعْمَ الْمَجِيءُ جَاءَ فَلَمَّا خَلَصْتُ، فَإِذَا إِبْرَاهِيمُ قَالَ هَذَا أَبُوكَ فَسَلِّمْ عَلَيْهِ‏.‏ قَالَ فَسَلَّمْتُ عَلَيْهِ، فَرَدَّ السَّلاَمَ قَالَ مَرْحَبًا بِالاِبْنِ الصَّالِحِ وَالنَّبِيِّ الصَّالِحِ‏.‏ ثُمَّ رُفِعَتْ لِي سِدْرَةُ الْمُنْتَهَى، فَإِذَا نَبِقُهَا مِثْلُ قِلاَلِ هَجَرَ، وَإِذَا وَرَقُهَا مِثْلُ آذَانِ الْفِيَلَةِ قَالَ هَذِهِ سِدْرَةُ الْمُنْتَهَى، وَإِذَا أَرْبَعَةُ أَنْهَارٍ نَهْرَانِ بَاطِنَانِ، وَنَهْرَانِ ظَاهِرَانِ‏.‏ فَقُلْتُ مَا هَذَانِ يَا جِبْرِيلُ قَالَ أَمَّا الْبَاطِنَانِ، فَنَهَرَانِ فِي الْجَنَّةِ، وَأَمَّا الظَّاهِرَانِ فَالنِّيلُ وَالْفُرَاتُ‏.‏ ثُمَّ رُفِعَ لِي الْبَيْتُ الْمَعْمُورُ، ثُمَّ أُتِيتُ بِإِنَاءٍ مِنْ خَمْرٍ، وَإِنَاءٍ مِنْ لَبَنٍ وَإِنَاءٍ مِنْ عَسَلٍ، فَأَخَذْتُ اللَّبَنَ، فَقَالَ هِيَ الْفِطْرَةُ أَنْتَ عَلَيْهَا وَأُمَّتُكَ‏.‏ ثُمَّ فُرِضَتْ عَلَىَّ الصَّلَوَاتُ خَمْسِينَ صَلاَةً كُلَّ يَوْمٍ‏.‏ فَرَجَعْتُ فَمَرَرْتُ عَلَى مُوسَى، فَقَالَ بِمَا أُمِرْتَ قَالَ أُمِرْتُ بِخَمْسِينَ صَلاَةً كُلَّ يَوْمٍ‏.‏ قَالَ إِنَّ أُمَّتَكَ لاَ تَسْتَطِيعُ خَمْسِينَ صَلاَةً كُلَّ يَوْمٍ، وَإِنِّي وَاللَّهِ قَدْ جَرَّبْتُ النَّاسَ قَبْلَكَ، وَعَالَجْتُ بَنِي إِسْرَائِيلَ أَشَدَّ الْمُعَالَجَةِ، فَارْجِعْ إِلَى رَبِّكَ فَاسْأَلْهُ التَّخْفِيفَ لأُمَّتِكَ‏.‏ فَرَجَعْتُ، فَوَضَعَ عَنِّي عَشْرًا، فَرَجَعْتُ إِلَى مُوسَى فَقَالَ مِثْلَهُ، فَرَجَعْتُ فَوَضَعَ عَنِّي عَشْرًا، فَرَجَعْتُ إِلَى مُوسَى فَقَالَ مِثْلَهُ، فَرَجَعْتُ فَوَضَعَ عَنِّي عَشْرًا، فَرَجَعْتُ إِلَى مُوسَى فَقَالَ مِثْلَهُ، فَرَجَعْتُ فَأُمِرْتُ بِعَشْرِ صَلَوَاتٍ كُلَّ يَوْمٍ، فَرَجَعْتُ فَقَالَ مِثْلَهُ، فَرَجَعْتُ فَأُمِرْتُ بِخَمْسِ صَلَوَاتٍ كُلَّ يَوْمٍ، فَرَجَعْتُ إِلَى مُوسَى، فَقَالَ بِمَا أُمِرْتَ قُلْتُ أُمِرْتُ بِخَمْسِ صَلَوَاتٍ كُلَّ يَوْمٍ‏.‏ قَالَ إِنَّ أُمَّتَكَ لاَ تَسْتَطِيعُ خَمْسَ صَلَوَاتٍ كُلَّ يَوْمٍ، وَإِنِّي قَدْ جَرَّبْتُ النَّاسَ قَبْلَكَ، وَعَالَجْتُ بَنِي إِسْرَائِيلَ أَشَدَّ الْمُعَالَجَةِ، فَارْجِعْ إِلَى رَبِّكَ فَاسْأَلْهُ التَّخْفِيفَ لأُمَّتِكَ‏.‏ قَالَ سَأَلْتُ رَبِّي حَتَّى اسْتَحْيَيْتُ، وَلَكِنْ أَرْضَى وَأُسَلِّمُ ـ قَالَ ـ فَلَمَّا جَاوَزْتُ نَادَى مُنَادٍ أَمْضَيْتُ فَرِيضَتِي وَخَفَّفْتُ عَنْ عِبَادِي ‏\"‏‏.‏",
+      "translationDe": "Im Bericht über die Nachtreise und Himmelsfahrt begegnete der Prophet ﷺ unter anderem Idrīs im vierten Himmel.",
+      "sahabiRawi": "Anas ibn Mālik / Mālik ibn Ṣaʿṣaʿa",
+      "work": "Ṣaḥīḥ al-Buḫārī",
+      "kitab": "Kitāb Manāqib al-Anṣār / Isrāʾ",
+      "bab": "",
+      "hadithNumber": "3887",
+      "grading": "sahih",
+      "gradingAuthority": "Ṣaḥīḥ al-Buḫārī",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari.min.json#hadithnumber=3887",
+      "verificationStatus": "approved",
+      "notes": "Separater Sunnah-Claim: vierte-Himmel-Begegnung. Maryam 19:57 wird dadurch nicht allein als „vierter Himmel“ ausgelegt.",
+      "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Wortlaut aus Ṣaḥīḥ-Edition (fawazahmed0/hadith-api) gegen Nummer geprüft",
+        "reviewPass2Note": "Rāwī, Nummer und Anspruch unabhängig geprüft"
+      }
+    }
+  ],
+  "prophetMuhammadAbout": [
+    {
+      "id": "idris-miraj-fourth-heaven-about",
+      "arabicOriginal": "حَدَّثَنَا هُدْبَةُ بْنُ خَالِدٍ، حَدَّثَنَا هَمَّامُ بْنُ يَحْيَى، حَدَّثَنَا قَتَادَةُ، عَنْ أَنَسِ بْنِ مَالِكٍ، عَنْ مَالِكِ بْنِ صَعْصَعَةَ ـ رضى الله عنهما ـ أَنَّ نَبِيَّ اللَّهِ صلى الله عليه وسلم حَدَّثَهُمْ عَنْ لَيْلَةَ أُسْرِيَ بِهِ ‏\"‏ بَيْنَمَا أَنَا فِي الْحَطِيمِ ـ وَرُبَّمَا قَالَ فِي الْحِجْرِ ـ مُضْطَجِعًا، إِذْ أَتَانِي آتٍ فَقَدَّ ـ قَالَ وَسَمِعْتُهُ يَقُولُ فَشَقَّ ـ مَا بَيْنَ هَذِهِ إِلَى هَذِهِ ـ فَقُلْتُ لِلْجَارُودِ وَهْوَ إِلَى جَنْبِي مَا يَعْنِي بِهِ قَالَ مِنْ ثُغْرَةِ نَحْرِهِ إِلَى شِعْرَتِهِ، وَسَمِعْتُهُ يَقُولُ مِنْ قَصِّهِ إِلَى شِعْرَتِهِ ـ فَاسْتَخْرَجَ قَلْبِي، ثُمَّ أُتِيتُ بِطَسْتٍ مِنْ ذَهَبٍ مَمْلُوءَةٍ إِيمَانًا، فَغُسِلَ قَلْبِي ثُمَّ حُشِيَ، ثُمَّ أُوتِيتُ بِدَابَّةٍ دُونَ الْبَغْلِ وَفَوْقَ الْحِمَارِ أَبْيَضَ ‏\"‏‏.‏ ـ فَقَالَ لَهُ الْجَارُودُ هُوَ الْبُرَاقُ يَا أَبَا حَمْزَةَ قَالَ أَنَسٌ نَعَمْ، يَضَعُ خَطْوَهُ عِنْدَ أَقْصَى طَرْفِهِ ـ ‏\"‏ فَحُمِلْتُ عَلَيْهِ، فَانْطَلَقَ بِي جِبْرِيلُ حَتَّى أَتَى السَّمَاءَ الدُّنْيَا فَاسْتَفْتَحَ، فَقِيلَ مَنْ هَذَا قَالَ جِبْرِيلُ‏.‏ قِيلَ وَمَنْ مَعَكَ قَالَ مُحَمَّدٌ‏.‏ قِيلَ وَقَدْ أُرْسِلَ إِلَيْهِ قَالَ نَعَمْ‏.‏ قِيلَ مَرْحَبًا بِهِ، فَنِعْمَ الْمَجِيءُ جَاءَ فَفَتَحَ، فَلَمَّا خَلَصْتُ، فَإِذَا فِيهَا آدَمُ، فَقَالَ هَذَا أَبُوكَ آدَمُ فَسَلِّمْ عَلَيْهِ‏.‏ فَسَلَّمْتُ عَلَيْهِ فَرَدَّ السَّلاَمَ ثُمَّ قَالَ مَرْحَبًا بِالاِبْنِ الصَّالِحِ وَالنَّبِيِّ الصَّالِحِ‏.‏ ثُمَّ صَعِدَ حَتَّى أَتَى السَّمَاءَ الثَّانِيَةَ فَاسْتَفْتَحَ، قِيلَ مَنْ هَذَا قَالَ جِبْرِيلُ‏.‏ قِيلَ وَمَنْ مَعَكَ قَالَ مُحَمَّدٌ‏.‏ قِيلَ وَقَدْ أُرْسِلَ إِلَيْهِ قَالَ نَعَمْ‏.‏ قِيلَ مَرْحَبًا بِهِ فَنِعْمَ الْمَجِيءُ جَاءَ‏.‏ فَفَتَحَ، فَلَمَّا خَلَصْتُ، إِذَا يَحْيَى وَعِيسَى، وَهُمَا ابْنَا الْخَالَةِ قَالَ هَذَا يَحْيَى وَعِيسَى فَسَلِّمْ عَلَيْهِمَا‏.‏ فَسَلَّمْتُ فَرَدَّا، ثُمَّ قَالاَ مَرْحَبًا بِالأَخِ الصَّالِحِ وَالنَّبِيِّ الصَّالِحِ‏.‏ ثُمَّ صَعِدَ بِي إِلَى السَّمَاءِ الثَّالِثَةِ، فَاسْتَفْتَحَ قِيلَ مَنْ هَذَا قَالَ جِبْرِيلُ‏.‏ قِيلَ وَمَنْ مَعَكَ قَالَ مُحَمَّدٌ‏.‏ قِيلَ وَقَدْ أُرْسِلَ إِلَيْهِ قَالَ نَعَمْ‏.‏ قِيلَ مَرْحَبًا بِهِ، فَنِعْمَ الْمَجِيءُ جَاءَ‏.‏ فَفُتِحَ، فَلَمَّا خَلَصْتُ إِذَا يُوسُفُ‏.‏ قَالَ هَذَا يُوسُفُ فَسَلِّمْ عَلَيْهِ‏.‏ فَسَلَّمْتُ عَلَيْهِ فَرَدَّ، ثُمَّ قَالَ مَرْحَبًا بِالأَخِ الصَّالِحِ وَالنَّبِيِّ الصَّالِحِ، ثُمَّ صَعِدَ بِي حَتَّى أَتَى السَّمَاءَ الرَّابِعَةَ، فَاسْتَفْتَحَ، قِيلَ مَنْ هَذَا قَالَ جِبْرِيلُ‏.‏ قِيلَ وَمَنْ مَعَكَ قَالَ مُحَمَّدٌ‏.‏ قِيلَ أَوَقَدْ أُرْسِلَ إِلَيْهِ قَالَ نَعَمْ‏.‏ قِيلَ مَرْحَبًا بِهِ، فَنِعْمَ الْمَجِيءُ جَاءَ‏.‏ فَفُتِحَ، فَلَمَّا خَلَصْتُ إِلَى إِدْرِيسَ قَالَ هَذَا إِدْرِيسُ فَسَلِّمْ عَلَيْهِ‏.‏ فَسَلَّمْتُ عَلَيْهِ فَرَدَّ ثُمَّ قَالَ مَرْحَبًا بِالأَخِ الصَّالِحِ وَالنَّبِيِّ الصَّالِحِ‏.‏ ثُمَّ صَعِدَ بِي حَتَّى أَتَى السَّمَاءَ الْخَامِسَةَ، فَاسْتَفْتَحَ، قِيلَ مَنْ هَذَا قَالَ جِبْرِيلُ‏.‏ قِيلَ وَمَنْ مَعَكَ قَالَ مُحَمَّدٌ صلى الله عليه وسلم‏.‏ قِيلَ وَقَدْ أُرْسِلَ إِلَيْهِ قَالَ نَعَمْ‏.‏ قِيلَ مَرْحَبًا بِهِ، فَنِعْمَ الْمَجِيءُ جَاءَ‏.‏ فَلَمَّا خَلَصْتُ فَإِذَا هَارُونُ قَالَ هَذَا هَارُونُ فَسَلِّمْ عَلَيْهِ‏.‏ فَسَلَّمْتُ عَلَيْهِ فَرَدَّ ثُمَّ قَالَ مَرْحَبًا بِالأَخِ الصَّالِحِ وَالنَّبِيِّ الصَّالِحِ‏.‏ ثُمَّ صَعِدَ بِي حَتَّى أَتَى السَّمَاءَ السَّادِسَةَ، فَاسْتَفْتَحَ، قِيلَ مَنْ هَذَا قَالَ جِبْرِيلُ‏.‏ قِيلَ مَنْ مَعَكَ قَالَ مُحَمَّدٌ‏.‏ قِيلَ وَقَدْ أُرْسِلَ إِلَيْهِ قَالَ نَعَمْ‏.‏ قَالَ مَرْحَبًا بِهِ، فَنِعْمَ الْمَجِيءُ جَاءَ، فَلَمَّا خَلَصْتُ، فَإِذَا مُوسَى قَالَ هَذَا مُوسَى فَسَلِّمْ عَلَيْهِ، فَسَلَّمْتُ عَلَيْهِ فَرَدَّ ثُمَّ قَالَ مَرْحَبًا بِالأَخِ الصَّالِحِ وَالنَّبِيِّ الصَّالِحِ‏.‏ فَلَمَّا تَجَاوَزْتُ بَكَى، قِيلَ لَهُ مَا يُبْكِيكَ قَالَ أَبْكِي لأَنَّ غُلاَمًا بُعِثَ بَعْدِي، يَدْخُلُ الْجَنَّةَ مِنْ أُمَّتِهِ أَكْثَرُ مَنْ يَدْخُلُهَا مِنْ أُمَّتِي‏.‏ ثُمَّ صَعِدَ بِي إِلَى السَّمَاءِ السَّابِعَةِ، فَاسْتَفْتَحَ جِبْرِيلُ، قِيلَ مَنْ هَذَا قَالَ جِبْرِيلُ‏.‏ قِيلَ وَمَنْ مَعَكَ قَالَ مُحَمَّدٌ‏.‏ قِيلَ وَقَدْ بُعِثَ إِلَيْهِ‏.‏ قَالَ نَعَمْ‏.‏ قَالَ مَرْحَبًا بِهِ، فَنِعْمَ الْمَجِيءُ جَاءَ فَلَمَّا خَلَصْتُ، فَإِذَا إِبْرَاهِيمُ قَالَ هَذَا أَبُوكَ فَسَلِّمْ عَلَيْهِ‏.‏ قَالَ فَسَلَّمْتُ عَلَيْهِ، فَرَدَّ السَّلاَمَ قَالَ مَرْحَبًا بِالاِبْنِ الصَّالِحِ وَالنَّبِيِّ الصَّالِحِ‏.‏ ثُمَّ رُفِعَتْ لِي سِدْرَةُ الْمُنْتَهَى، فَإِذَا نَبِقُهَا مِثْلُ قِلاَلِ هَجَرَ، وَإِذَا وَرَقُهَا مِثْلُ آذَانِ الْفِيَلَةِ قَالَ هَذِهِ سِدْرَةُ الْمُنْتَهَى، وَإِذَا أَرْبَعَةُ أَنْهَارٍ نَهْرَانِ بَاطِنَانِ، وَنَهْرَانِ ظَاهِرَانِ‏.‏ فَقُلْتُ مَا هَذَانِ يَا جِبْرِيلُ قَالَ أَمَّا الْبَاطِنَانِ، فَنَهَرَانِ فِي الْجَنَّةِ، وَأَمَّا الظَّاهِرَانِ فَالنِّيلُ وَالْفُرَاتُ‏.‏ ثُمَّ رُفِعَ لِي الْبَيْتُ الْمَعْمُورُ، ثُمَّ أُتِيتُ بِإِنَاءٍ مِنْ خَمْرٍ، وَإِنَاءٍ مِنْ لَبَنٍ وَإِنَاءٍ مِنْ عَسَلٍ، فَأَخَذْتُ اللَّبَنَ، فَقَالَ هِيَ الْفِطْرَةُ أَنْتَ عَلَيْهَا وَأُمَّتُكَ‏.‏ ثُمَّ فُرِضَتْ عَلَىَّ الصَّلَوَاتُ خَمْسِينَ صَلاَةً كُلَّ يَوْمٍ‏.‏ فَرَجَعْتُ فَمَرَرْتُ عَلَى مُوسَى، فَقَالَ بِمَا أُمِرْتَ قَالَ أُمِرْتُ بِخَمْسِينَ صَلاَةً كُلَّ يَوْمٍ‏.‏ قَالَ إِنَّ أُمَّتَكَ لاَ تَسْتَطِيعُ خَمْسِينَ صَلاَةً كُلَّ يَوْمٍ، وَإِنِّي وَاللَّهِ قَدْ جَرَّبْتُ النَّاسَ قَبْلَكَ، وَعَالَجْتُ بَنِي إِسْرَائِيلَ أَشَدَّ الْمُعَالَجَةِ، فَارْجِعْ إِلَى رَبِّكَ فَاسْأَلْهُ التَّخْفِيفَ لأُمَّتِكَ‏.‏ فَرَجَعْتُ، فَوَضَعَ عَنِّي عَشْرًا، فَرَجَعْتُ إِلَى مُوسَى فَقَالَ مِثْلَهُ، فَرَجَعْتُ فَوَضَعَ عَنِّي عَشْرًا، فَرَجَعْتُ إِلَى مُوسَى فَقَالَ مِثْلَهُ، فَرَجَعْتُ فَوَضَعَ عَنِّي عَشْرًا، فَرَجَعْتُ إِلَى مُوسَى فَقَالَ مِثْلَهُ، فَرَجَعْتُ فَأُمِرْتُ بِعَشْرِ صَلَوَاتٍ كُلَّ يَوْمٍ، فَرَجَعْتُ فَقَالَ مِثْلَهُ، فَرَجَعْتُ فَأُمِرْتُ بِخَمْسِ صَلَوَاتٍ كُلَّ يَوْمٍ، فَرَجَعْتُ إِلَى مُوسَى، فَقَالَ بِمَا أُمِرْتَ قُلْتُ أُمِرْتُ بِخَمْسِ صَلَوَاتٍ كُلَّ يَوْمٍ‏.‏ قَالَ إِنَّ أُمَّتَكَ لاَ تَسْتَطِيعُ خَمْسَ صَلَوَاتٍ كُلَّ يَوْمٍ، وَإِنِّي قَدْ جَرَّبْتُ النَّاسَ قَبْلَكَ، وَعَالَجْتُ بَنِي إِسْرَائِيلَ أَشَدَّ الْمُعَالَجَةِ، فَارْجِعْ إِلَى رَبِّكَ فَاسْأَلْهُ التَّخْفِيفَ لأُمَّتِكَ‏.‏ قَالَ سَأَلْتُ رَبِّي حَتَّى اسْتَحْيَيْتُ، وَلَكِنْ أَرْضَى وَأُسَلِّمُ ـ قَالَ ـ فَلَمَّا جَاوَزْتُ نَادَى مُنَادٍ أَمْضَيْتُ فَرِيضَتِي وَخَفَّفْتُ عَنْ عِبَادِي ‏\"‏‏.‏",
+      "translationDe": "Im Bericht über die Nachtreise und Himmelsfahrt begegnete der Prophet ﷺ unter anderem Idrīs im vierten Himmel.",
+      "sahabiRawi": "Anas ibn Mālik / Mālik ibn Ṣaʿṣaʿa",
+      "work": "Ṣaḥīḥ al-Buḫārī",
+      "kitab": "Kitāb Manāqib al-Anṣār / Isrāʾ",
+      "bab": "",
+      "hadithNumber": "3887",
+      "grading": "sahih",
+      "gradingAuthority": "Ṣaḥīḥ al-Buḫārī",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari.min.json#hadithnumber=3887",
+      "verificationStatus": "approved",
+      "notes": "Separater Sunnah-Claim: vierte-Himmel-Begegnung. Maryam 19:57 wird dadurch nicht allein als „vierter Himmel“ ausgelegt.",
+      "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Wortlaut aus Ṣaḥīḥ-Edition (fawazahmed0/hadith-api) gegen Nummer geprüft",
+        "reviewPass2Note": "Rāwī, Nummer und Anspruch unabhängig geprüft"
+      }
+    }
+  ],
+  "athar": [],
+  "weakReports": [
+    {
+      "id": "idris-enoch",
+      "title": "Idrīs = Enoch/Henoch",
+      "type": "historical_name_equivalence",
+      "not_quran_wording": true,
+      "grading": "unverified",
+      "verificationStatus": "research",
+      "notes": "Historischer Namensvergleich — keine Qurʾān-Aussage.",
+      "mainBiography": false
+    },
+    {
+      "id": "idris-profession-legends",
+      "title": "Berufsangaben",
+      "grading": "disputed",
+      "verificationStatus": "research",
+      "notes": "Schneider/Schreiber/Astronomie — nicht in Hauptbiografie."
+    },
+    {
+      "id": "idris-fourth-heaven-from-19-57-only",
+      "title": "19:57 = vierter Himmel",
+      "grading": "unverified",
+      "verificationStatus": "research",
+      "notes": "Nicht allein aus 19:57. Vierter Himmel über Buḫārī 3887.",
+      "mainBiography": false
+    }
+  ],
+  "worksIndex": [
+    {
+      "id": "quran",
+      "title": "Qurʾān",
+      "countFrom": "quranRefs",
+      "approvedCount": 2
+    },
+    {
+      "id": "bukhari",
+      "title": "Ṣaḥīḥ al-Buḫārī",
+      "countFrom": "prophetAbout",
+      "approvedCount": 1
+    },
+    {
+      "id": "claims",
+      "title": "Freigegebene Claims",
+      "countFrom": "claims",
+      "approvedCount": 16
+    }
+  ],
+  "claims": [
+    {
+      "id": "idris-name-quran",
+      "prophetId": "idris",
+      "category": "identity",
+      "claim": "Sein Name im Qurʾān lautet Idrīs (إدريس).",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "al-Qurʾān al-Karīm",
+      "bookChapter": "Sūrah 19",
+      "number": "19:56",
+      "volumePage": "",
+      "arabicOriginal": "وَٱذۡكُرۡ فِي ٱلۡكِتَ��بِ إِدۡرِيسَۚ إِنَّهُۥ كَانَ صِدِّيقٗا نَّبِيّٗا",
+      "translationDe": "Und gedenke im Buch Idris’. Er war ein Wahrhaftiger und Prophet",
+      "speaker": "Allah",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "Qurʾān",
+      "gradingReference": "",
+      "directReference": "#quran-surah/19/56",
+      "notes": "",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      }
+    },
+    {
+      "id": "idris-nabi-siddiq",
+      "prophetId": "idris",
+      "category": "prophethood",
+      "claim": "Idrīs war ein ṣiddīq und nabī.",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "al-Qurʾān al-Karīm",
+      "bookChapter": "Sūrah 19",
+      "number": "19:56",
+      "volumePage": "",
+      "arabicOriginal": "وَٱذۡكُرۡ فِي ٱلۡكِتَ��بِ إِدۡرِيسَۚ إِنَّهُۥ كَانَ صِدِّيقٗا نَّبِيّٗا",
+      "translationDe": "Und gedenke im Buch Idris’. Er war ein Wahrhaftiger und Prophet",
+      "speaker": "Allah",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "Qurʾān",
+      "gradingReference": "",
+      "directReference": "#quran-surah/19/56",
+      "notes": "Qurʾān: صِدِّيقًا نَبِيًّا",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      }
+    },
+    {
+      "id": "idris-raised-high",
+      "prophetId": "idris",
+      "category": "quran",
+      "claim": "Allah erhob Idrīs zu einem hohen Ort / hohen Rang (مَكَانًا عَلِيًّا).",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "al-Qurʾān al-Karīm",
+      "bookChapter": "Sūrah 19",
+      "number": "19:57",
+      "volumePage": "",
+      "arabicOriginal": "وَرَفَعۡنَٰهُ مَكَانًا عَلِيًّا",
+      "translationDe": "Und Wir hoben ihn zu einem hohen Ort empor",
+      "speaker": "Allah",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "Qurʾān",
+      "gradingReference": "",
+      "directReference": "#quran-surah/19/57",
+      "notes": "Keine automatische Gleichsetzung dieses Verses allein mit dem vierten Himmel.",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      }
+    },
+    {
+      "id": "idris-sabr",
+      "prophetId": "idris",
+      "category": "character",
+      "claim": "Idrīs wird zusammen mit Ismāʿīl und Dhū l-Kifl unter den Standhaften (ṣābirīn) genannt.",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "al-Qurʾān al-Karīm",
+      "bookChapter": "Sūrah 21",
+      "number": "21:85",
+      "volumePage": "",
+      "arabicOriginal": "وَإِسۡمَٰعِيلَ وَإِدۡرِيسَ وَذَا ٱلۡكِفۡلِۖ كُلّٞ مِّنَ ٱلصَّـٰبِرِينَ",
+      "translationDe": "Und (auch) Isma’il und Idris und Du’l-Kifl. Jeder gehörte zu den Standhaften",
+      "speaker": "Allah",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "Qurʾān",
+      "gradingReference": "",
+      "directReference": "#quran-surah/21/85",
+      "notes": "Kategorie character/ṣabr",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      }
+    },
+    {
+      "id": "idris-mercy",
+      "prophetId": "idris",
+      "category": "character",
+      "claim": "Allah ließ sie in Seine Barmherzigkeit eingehen; sie gehören zu den Rechtschaffenen.",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "al-Qurʾān al-Karīm",
+      "bookChapter": "Sūrah 21",
+      "number": "21:86",
+      "volumePage": "",
+      "arabicOriginal": "وَأَدۡخَلۡنَٰهُمۡ فِي رَحۡمَتِنَآۖ إِنَّهُم مِّنَ ٱلصَّـٰلِحِينَ",
+      "translationDe": "Und Wir ließen sie in Unsere Barmherzigkeit eingehen. Gewiß, sie gehören zu den Rechtschaffenen",
+      "speaker": "Allah",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "Qurʾān",
+      "gradingReference": "",
+      "directReference": "#quran-surah/21/86",
+      "notes": "",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      }
+    },
+    {
+      "id": "idris-miraj-fourth-heaven",
+      "prophetId": "idris",
+      "category": "sunnah",
+      "claim": "Der Prophet Muḥammad ﷺ begegnete Idrīs während des Miʿrāǧ im vierten Himmel.",
+      "verificationStatus": "approved",
+      "evidenceType": "sunnah",
+      "grading": "sahih",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "work": "Ṣaḥīḥ al-Buḫārī",
+      "bookChapter": "Kitāb Manāqib al-Anṣār / Isrāʾ",
+      "number": "3887",
+      "numberAlt": "",
+      "volumePage": "API hadithnumber=3887; reference={'book': 63, 'hadith': 112}",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "speaker": "Prophet Muḥammad ﷺ",
+      "sahabiRawi": "Anas ibn Mālik / Mālik ibn Ṣaʿṣaʿa",
+      "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
+      "gradingAuthority": "Ṣaḥīḥ al-Buḫārī",
+      "gradingReference": "Ṣaḥīḥ al-Buḫārī 3887",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari.min.json#hadithnumber=3887",
+      "notes": "Separater Sunnah-Claim: vierte-Himmel-Begegnung. Maryam 19:57 wird dadurch nicht allein als „vierter Himmel“ ausgelegt.",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Wortlaut aus Ṣaḥīḥ-Edition (fawazahmed0/hadith-api) gegen Nummer geprüft",
+        "reviewPass2Note": "Rāwī, Nummer und Anspruch unabhängig geprüft"
+      },
+      "kitab": "Kitāb Manāqib al-Anṣār / Isrāʾ",
+      "bab": "",
+      "hadithNumber": "3887",
+      "englishAid": "Narrated Anas bin Malik:Malik bin Sasaa said that Allah's Messenger (ﷺ) described to them his Night Journey saying, \"While I was lying in Al-Hatim or Al-Hijr, suddenly someone came to me and cut my body open from here to here.\" I asked Al-Jarud who was by my side, \"What does he mean?\" He said, \"It means from his throat to his pubic area,\" or said, \"From the top of the chest.\" The Prophet (ﷺ) further said, \"He then took out my heart. Then a gold tray of Belief was brought to me and my heart was w",
+      "hadithId": "bukhari-3887",
+      "hadithRef": {
+        "hadithId": "bukhari-3887",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
+    },
+    {
+      "id": "idris-father-research",
+      "prophetId": "idris",
+      "category": "family",
+      "claim": "Vater: research — nicht als authentische Tatsache freigegeben.",
+      "verificationStatus": "approved",
+      "evidenceType": "editorial",
+      "grading": "unverified",
+      "source": "Negativfeststellung nach Prüfung (Qurʾān; Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim)",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "",
+      "gradingReference": "",
+      "directReference": "",
+      "absenceStatus": "not-established-in-reviewed-sources",
+      "notes": "Keine belastbare Angabe in den geprüften Primärquellen.",
+      "quotation": false,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      }
+    },
+    {
+      "id": "idris-mother-research",
+      "prophetId": "idris",
+      "category": "family",
+      "claim": "Mutter: research — nicht als authentische Tatsache freigegeben.",
+      "verificationStatus": "approved",
+      "evidenceType": "editorial",
+      "grading": "unverified",
+      "source": "Negativfeststellung nach Prüfung (Qurʾān; Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim)",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "",
+      "gradingReference": "",
+      "directReference": "",
+      "absenceStatus": "not-established-in-reviewed-sources",
+      "notes": "Keine belastbare Angabe in den geprüften Primärquellen.",
+      "quotation": false,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      }
+    },
+    {
+      "id": "idris-wife-research",
+      "prophetId": "idris",
+      "category": "family",
+      "claim": "Ehefrau: research — nicht als authentische Tatsache freigegeben.",
+      "verificationStatus": "approved",
+      "evidenceType": "editorial",
+      "grading": "unverified",
+      "source": "Negativfeststellung nach Prüfung (Qurʾān; Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim)",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "",
+      "gradingReference": "",
+      "directReference": "",
+      "absenceStatus": "not-established-in-reviewed-sources",
+      "notes": "Keine belastbare Angabe in den geprüften Primärquellen.",
+      "quotation": false,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      }
+    },
+    {
+      "id": "idris-children-research",
+      "prophetId": "idris",
+      "category": "family",
+      "claim": "Kinder/Nachkommen: research — nicht als authentische Tatsache freigegeben.",
+      "verificationStatus": "approved",
+      "evidenceType": "editorial",
+      "grading": "unverified",
+      "source": "Negativfeststellung nach Prüfung (Qurʾān; Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim)",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "",
+      "gradingReference": "",
+      "directReference": "",
+      "absenceStatus": "not-established-in-reviewed-sources",
+      "notes": "Keine belastbare Angabe in den geprüften Primärquellen.",
+      "quotation": false,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      }
+    },
+    {
+      "id": "idris-birth-unattested",
+      "prophetId": "idris",
+      "category": "death",
+      "claim": "Geburtsjahr und Geburtsort: nicht authentisch belegt.",
+      "verificationStatus": "approved",
+      "evidenceType": "editorial",
+      "grading": "unverified",
+      "source": "Negativfeststellung nach Prüfung (Qurʾān; Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim)",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "",
+      "gradingReference": "",
+      "directReference": "",
+      "absenceStatus": "not-established-in-reviewed-sources",
+      "notes": "Keine belastbare Angabe in den geprüften Primärquellen.",
+      "quotation": false,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      }
+    },
+    {
+      "id": "idris-age-unattested",
+      "prophetId": "idris",
+      "category": "death",
+      "claim": "Lebensalter: nicht authentisch belegt.",
+      "verificationStatus": "approved",
+      "evidenceType": "editorial",
+      "grading": "unverified",
+      "source": "Negativfeststellung nach Prüfung (Qurʾān; Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim)",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "",
+      "gradingReference": "",
+      "directReference": "",
+      "absenceStatus": "not-established-in-reviewed-sources",
+      "notes": "Keine belastbare Angabe in den geprüften Primärquellen.",
+      "quotation": false,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      }
+    },
+    {
+      "id": "idris-death-unattested",
+      "prophetId": "idris",
+      "category": "death",
+      "claim": "Todesjahr und Todesort: nicht authentisch belegt.",
+      "verificationStatus": "approved",
+      "evidenceType": "editorial",
+      "grading": "unverified",
+      "source": "Negativfeststellung nach Prüfung (Qurʾān; Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim)",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "",
+      "gradingReference": "",
+      "directReference": "",
+      "absenceStatus": "not-established-in-reviewed-sources",
+      "notes": "Keine belastbare Angabe in den geprüften Primärquellen.",
+      "quotation": false,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      }
+    },
+    {
+      "id": "idris-grave-unattested",
+      "prophetId": "idris",
+      "category": "death",
+      "claim": "Grabstätte: nicht authentisch belegt.",
+      "verificationStatus": "approved",
+      "evidenceType": "editorial",
+      "grading": "unverified",
+      "source": "Negativfeststellung nach Prüfung (Qurʾān; Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim)",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "",
+      "gradingReference": "",
+      "directReference": "",
+      "absenceStatus": "not-established-in-reviewed-sources",
+      "notes": "Keine belastbare Angabe in den geprüften Primärquellen.",
+      "quotation": false,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      }
+    },
+    {
+      "id": "idris-profession-research",
+      "prophetId": "idris",
+      "category": "identity",
+      "claim": "Berufsangaben (Schneider, Schreiber, Astronomie u. a.) bleiben research bis Isnād-Prüfung.",
+      "verificationStatus": "approved",
+      "evidenceType": "editorial",
+      "grading": "unverified",
+      "source": "Negativfeststellung nach Prüfung (Qurʾān; Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim)",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "",
+      "gradingReference": "",
+      "directReference": "",
+      "absenceStatus": "not-established-in-reviewed-sources",
+      "notes": "Keine belastbare Angabe in den geprüften Primärquellen.",
+      "quotation": false,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      }
+    },
+    {
+      "id": "idris-enoch-not-quran",
+      "prophetId": "idris",
+      "category": "identity",
+      "claim": "Gleichsetzung Idrīs = Enoch/Henoch ist keine Qurʾān-Aussage.",
+      "verificationStatus": "approved",
+      "evidenceType": "editorial",
+      "grading": "unverified",
+      "source": "Negativfeststellung nach Prüfung (Qurʾān; Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim)",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "",
+      "gradingReference": "",
+      "directReference": "",
+      "absenceStatus": "not-established-in-reviewed-sources",
+      "notes": "Keine belastbare Angabe in den geprüften Primärquellen.",
+      "quotation": false,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      }
+    }
+  ],
+  "audit": {
+    "zeroTrust": true,
+    "phase": "block01",
+    "block": "01",
+    "prophet": "idris",
+    "referenceProfile": true,
+    "lastAudit": "2026-08-08",
+    "production": "disabled",
+    "quranNamedAyahs": 2,
+    "approvedRequiresDualPass": true,
+    "checklist": {
+      "identity": true,
+      "prophethood": true,
+      "nabiRasulSeparated": true,
+      "people": true,
+      "mission": true,
+      "family": true,
+      "spouse": true,
+      "children": true,
+      "genealogy": true,
+      "birth": true,
+      "death": true,
+      "grave": true,
+      "regions": true,
+      "timeline": true,
+      "quranConcordance": true,
+      "statements": true,
+      "dua": true,
+      "bukhariSearched": true,
+      "muslimSearched": true,
+      "athar": "none_approved_pending_isnad",
+      "israiliyyatIsolated": true,
+      "daifIsolated": true,
+      "translationsChecked": true,
+      "directLinksChecked": true,
+      "reviewPass1": true,
+      "reviewPass2": true,
+      "noProphetIllustration": true,
+      "compactProfile": true,
+      "miraj": true
+    },
+    "notes": [
+      "Profil bewusst kompakt — begrenzte sichere Quellenlage.",
+      "Keine Legenden zur künstlichen Verlängerung.",
+      "Rasūl nicht automatisch gesetzt."
+    ],
+    "phase07": true,
+    "schemaVersion": 4,
+    "updatedAt": "2026-08-08T09:25:18.000Z"
+  },
+  "schemaVersion": 4
+}

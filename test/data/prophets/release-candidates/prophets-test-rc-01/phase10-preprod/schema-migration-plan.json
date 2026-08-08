@@ -1,0 +1,20 @@
+{
+  "supportedSchemaVersion": 4,
+  "rule": "if cachedSchemaVersion < 4 → invalidate only prophets cache keys, not entire app storage",
+  "preserveUserData": [
+    "quran reading position",
+    "bookmarks",
+    "app settings",
+    "theme",
+    "prayer settings",
+    "local favorites",
+    "other existing user state"
+  ],
+  "idStability": {
+    "prophetId": "stable",
+    "claimId": "stable",
+    "eventId": "stable",
+    "hadithId": "stable",
+    "idMigrationMapRequiredIfChanged": true
+  }
+}
