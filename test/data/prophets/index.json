@@ -52,17 +52,17 @@
       "uluAlAzm": false,
       "prophetStatus": "quran_explicit",
       "profileFile": "adam.json",
-      "profileStatus": "research",
+      "profileStatus": "approved",
       "quranNamed": true,
       "classifications": {
         "uluAlAzm": false,
         "quranExplicit": true,
-        "hasSunnah": false,
+        "hasSunnah": true,
         "banuIsrail": false,
         "arabicMessenger": false,
         "furtherPerson": false
       },
-      "hasSunnah": false,
+      "hasSunnah": true,
       "banuIsrail": false,
       "arabicMessenger": false,
       "furtherPerson": false
@@ -1004,7 +1004,7 @@
   },
   "titleAr": "الأنبياء",
   "contentVersion": "prophets-test-rc-01",
-  "updatedAt": "2026-08-08T09:44:46.504Z",
+  "updatedAt": "2026-08-08T10:14:45.071Z",
   "furtherPersons": [
     {
       "id": "dhul-kifl",

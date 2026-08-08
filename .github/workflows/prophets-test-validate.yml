@@ -66,3 +66,6 @@ jobs:
 
       - name: Phase 11 go-live dry-run (no production write)
         run: node scripts/prophets-phase11-dry-run.js
+
+      - name: Phase 12 coverage audit block 01
+        run: node scripts/prophets-phase12-coverage-audit.js

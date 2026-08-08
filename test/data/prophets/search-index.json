@@ -1,24 +1,83 @@
 {
   "schemaVersion": 4,
   "contentVersion": "prophets-test-rc-01",
-  "updatedAt": "2026-08-08T10:04:56.228Z",
+  "updatedAt": "2026-08-08T10:14:45.124Z",
   "entries": [
     {
       "prophetId": "adam",
       "names": [
         "Ādam",
         "آدم",
-        "adam"
+        "adam",
+        "Adam",
+        "Ḥawwāʾ",
+        "Hawwa",
+        "Banū Ādam",
+        "Khalīfa"
       ],
       "aliases": [
         "آدم",
-        "adam"
+        "adam",
+        "Adam",
+        "Ḥawwāʾ",
+        "Hawwa",
+        "Banū Ādam",
+        "Khalīfa"
       ],
-      "approvedTopics": [],
-      "approvedEvents": [],
-      "approvedFamilyRelations": [],
-      "approvedQuranRefs": [],
-      "approvedHadithMetadata": [],
+      "approvedTopics": [
+        "identity",
+        "knowledge",
+        "event",
+        "creation",
+        "family",
+        "other",
+        "quran-index",
+        "timeline",
+        "death",
+        "sunnah",
+        "prophethood"
+      ],
+      "approvedEvents": [
+        "Erschaffung",
+        "Paradies und Prüfung",
+        "Herabkunft",
+        "Die beiden Söhne"
+      ],
+      "approvedFamilyRelations": [
+        "Bericht über die beiden Söhne Ādams (5:27–31) — ohne Qurʾān-Eigennamen Qābīl/Hābīl.",
+        "Die Eigennamen Qābīl und Hābīl stehen nicht im Qurʾān (5:27–31).",
+        "Gattin Ādams im Qurʾān erwähnt — Eigenname nicht im Qurʾān.",
+        "Authentische Sunnah nennt Ḥawwāʾ/Eve (Buḫārī 3330) — nicht als Qurʾān-Eigenname.",
+        "Ḥawwāʾ in der authentischen Sunnah — Ṣaḥīḥ Muslim (API 3650; klassisch oft 1470).",
+        "Gattin Ḥawwāʾ",
+        "Zwei Söhne nicht namentlich im Qurʾān"
+      ],
+      "approvedQuranRefs": [
+        "2:30",
+        "2:31–33",
+        "2:34",
+        "2:35",
+        "2:36–39",
+        "3:33",
+        "3:59",
+        "5:27–31",
+        "7:11–18",
+        "7:19–25",
+        "7:26–27",
+        "15:26–44",
+        "17:61–65",
+        "18:50",
+        "20:115–123",
+        "38:71–85",
+        "4:1"
+      ],
+      "approvedHadithMetadata": [
+        "Ṣaḥīḥ al-Buḫārī 3326 bukhari-3326 Abū Hurayra",
+        "Ṣaḥīḥ al-Buḫārī 3330 bukhari-3330 Abū Hurayra",
+        "Ṣaḥīḥ al-Buḫārī 3409 bukhari-3409 Abū Hurayra",
+        "Ṣaḥīḥ Muslim 854 muslim-1976 Abū Hurayra",
+        "Ṣaḥīḥ Muslim 1470 muslim-3650 Abū Hurayra"
+      ],
       "people": "",
       "roles": [
         "nabī"
@@ -26,7 +85,7 @@
       "classifications": {
         "uluAlAzm": false,
         "quranExplicit": true,
-        "hasSunnah": false,
+        "hasSunnah": true,
         "banuIsrail": false,
         "arabicMessenger": false,
         "furtherPerson": false
@@ -36,8 +95,8 @@
       "honorific": "عليه السلام",
       "name": "Ādam",
       "nameAr": "آدم",
-      "searchBlob": "ādam آدم adam",
-      "nameOnlySearch": true
+      "searchBlob": "ādam آدم adam adam ḥawwāʾ hawwa banū ādam khalīfa identity knowledge event creation family other quran-index timeline death sunnah prophethood erschaffung paradies und prüfung herabkunft die beiden söhne bericht über die beiden söhne ādams (5:27–31) — ohne qurʾān-eigennamen qābīl/hābīl. die eigennamen qābīl und hābīl stehen nicht im qurʾān (5:27–31). gattin ādams im qurʾān erwähnt — eigenname nicht im qurʾān. authentische sunnah nennt ḥawwāʾ/eve (buḫārī 3330) — nicht als qurʾān-eigenname. ḥawwāʾ in der authentischen sunnah — ṣaḥīḥ muslim (api 3650; klassisch oft 1470). gattin ḥawwāʾ zwei söhne nicht namentlich im qurʾān 2:30 2:31–33 2:34 2:35 2:36–39 3:33 3:59 5:27–31 7:11–18 7:19–25 7:26–27 15:26–44 17:61–65 18:50 20:115–123 38:71–85 4:1 2:35 3:33 ṣaḥīḥ al-buḫārī 3326 bukhari-3326 abū hurayra ṣaḥīḥ al-buḫārī 3330 bukhari-3330 abū hurayra ṣaḥīḥ al-buḫārī 3409 bukhari-3409 abū hurayra ṣaḥīḥ muslim 854 muslim-1976 abū hurayra ṣaḥīḥ muslim 1470 muslim-3650 abū hurayra  adam",
+      "nameOnlySearch": false
     },
     {
       "prophetId": "idris",
@@ -102,7 +161,8 @@
         "21:86"
       ],
       "approvedHadithMetadata": [
-        "Ṣaḥīḥ al-Buḫārī 3887 bukhari-3887 Anas ibn Mālik / Mālik ibn Ṣaʿṣaʿa"
+        "Ṣaḥīḥ al-Buḫārī 3887 bukhari-3887 Anas ibn Mālik / Mālik ibn Ṣaʿṣaʿa",
+        "Ṣaḥīḥ Muslim 416 muslim-416 Anas b. Mālik"
       ],
       "people": "",
       "roles": [
@@ -121,7 +181,7 @@
       "honorific": "عليه السلام",
       "name": "Idrīs",
       "nameAr": "إدريس",
-      "searchBlob": "idrīs إدريس idris idris ṣiddīq miʿrāǧ vierter himmel enoch identity prophethood quran character sunnah identity prophethood quran character sunnah family death nabī und ṣiddīq erhebung zu einem hohen ort unter den standhaften genannt begegnung im miʿrāǧ (vierter himmel) vater: research — nicht als authentische tatsache freigegeben. mutter: research — nicht als authentische tatsache freigegeben. ehefrau: research — nicht als authentische tatsache freigegeben. kinder/nachkommen: research — nicht als authentische tatsache freigegeben. vater research mutter research ehefrau research kinder research 19:56 19:56 19:57 21:85 21:86 ṣaḥīḥ al-buḫārī 3887 bukhari-3887 anas ibn mālik / mālik ibn ṣaʿṣaʿa  idris",
+      "searchBlob": "idrīs إدريس idris idris ṣiddīq miʿrāǧ vierter himmel enoch identity prophethood quran character sunnah identity prophethood quran character sunnah family death nabī und ṣiddīq erhebung zu einem hohen ort unter den standhaften genannt begegnung im miʿrāǧ (vierter himmel) vater: research — nicht als authentische tatsache freigegeben. mutter: research — nicht als authentische tatsache freigegeben. ehefrau: research — nicht als authentische tatsache freigegeben. kinder/nachkommen: research — nicht als authentische tatsache freigegeben. vater research mutter research ehefrau research kinder research 19:56 19:56 19:57 21:85 21:86 ṣaḥīḥ al-buḫārī 3887 bukhari-3887 anas ibn mālik / mālik ibn ṣaʿṣaʿa ṣaḥīḥ muslim 416 muslim-416 anas b. mālik  idris",
       "nameOnlySearch": false
     },
     {
@@ -183,7 +243,8 @@
         "family",
         "flood",
         "sunnah",
-        "quran-index"
+        "quran-index",
+        "event"
       ],
       "approvedEvents": [
         "Sendung zu seinem Volk",
@@ -306,7 +367,7 @@
       "honorific": "عليه السلام",
       "name": "Nūḥ",
       "nameAr": "نوح",
-      "searchBlob": "nūḥ نوح nuh nuh noah arche sintflut 950 daǧǧāl qawm identity prophethood people timeline mission dawah ark family flood sunnah quran-index identity prophethood people timeline death mission dawah ark family flood sunnah quran-index sendung zu seinem volk vielfältige daʿwah (tag/nacht, öffentlich/privat) schiffbau sintflut gespräch über den sohn zeugenschaft am tag der auferstehung (sunnah) ein sohn nūḥs wird in 11:42–46 erwähnt; im qurʾān nicht namentlich genannt. die ehefrau nūḥs wird in 66:10 als beispiel genannt; im qurʾān nicht namentlich genannt. verbreitete namenszuweisungen des sohnes: research. namen der ehefrau aus späterer literatur: nicht als authentische tatsache. ehefrau im qurʾān nicht namentlich genannt sohn im qurʾān nicht namentlich genannt 7:59 7:59 26:107 7:59 29:14 7:59 11:25–26 23:23 71:5 71:8–9 71:10–12 71:13–20 11:36–44 23:27 54:13–15 11:42–46 66:10 11:40–44 7:59 7:60 7:61 7:62 7:63 7:64 10:71 10:72 10:73 11:25 11:26 11:27 11:28 11:29 11:30 11:31 11:32 11:33 11:34 11:35 11:36 11:37 11:38 11:39 11:40 11:41 11:42 11:43 11:44 11:45 11:46 11:47 11:48 11:49 21:76 21:77 23:23 23:24 23:25 23:26 23:27 23:28 23:29 23:30 26:105 26:106 26:107 26:108 26:109 26:110 26:111 26:112 26:113 26:114 26:115 26:116 26:117 26:118 26:119 26:120 26:121 26:122 29:14 29:15 37:75 37:76 37:77 37:78 37:79 37:80 37:81 37:82 54:9 54:10 54:11 54:12 54:13 54:14 54:15 71:1 71:2 71:3 71:4 71:5 71:6 71:7 71:8 71:9 71:10 71:11 71:12 71:13 71:14 71:15 71:16 71:17 71:18 71:19 71:20 71:21 71:22 71:23 71:24 71:25 71:26 71:27 71:28 66:10 3:33 3:44 4:163 6:84 7:69 9:70 11:89 12:102 12:109 14:9 16:43 17:3 17:17 19:58 21:7 21:25 22:42 25:37 33:7 38:12 40:5 40:31 42:13 50:12 51:46 53:52 57:26 ṣaḥīḥ al-buḫārī 3340 bukhari-3340 abū hurayra ṣaḥīḥ al-buḫārī 3339 bukhari-3339 abū saʿīd al-khudrī ṣaḥīḥ al-buḫārī 3337 bukhari-3337 ʿabdullāh ibn ʿumar qawm nūḥ nuh",
+      "searchBlob": "nūḥ نوح nuh nuh noah arche sintflut 950 daǧǧāl qawm identity prophethood people timeline mission dawah ark family flood sunnah quran-index identity prophethood people timeline death mission dawah ark family flood sunnah quran-index event sendung zu seinem volk vielfältige daʿwah (tag/nacht, öffentlich/privat) schiffbau sintflut gespräch über den sohn zeugenschaft am tag der auferstehung (sunnah) ein sohn nūḥs wird in 11:42–46 erwähnt; im qurʾān nicht namentlich genannt. die ehefrau nūḥs wird in 66:10 als beispiel genannt; im qurʾān nicht namentlich genannt. verbreitete namenszuweisungen des sohnes: research. namen der ehefrau aus späterer literatur: nicht als authentische tatsache. ehefrau im qurʾān nicht namentlich genannt sohn im qurʾān nicht namentlich genannt 7:59 7:59 26:107 7:59 29:14 7:59 11:25–26 23:23 71:5 71:8–9 71:10–12 71:13–20 11:36–44 23:27 54:13–15 11:42–46 66:10 11:40–44 7:59 7:60 7:61 7:62 7:63 7:64 10:71 10:72 10:73 11:25 11:26 11:27 11:28 11:29 11:30 11:31 11:32 11:33 11:34 11:35 11:36 11:37 11:38 11:39 11:40 11:41 11:42 11:43 11:44 11:45 11:46 11:47 11:48 11:49 21:76 21:77 23:23 23:24 23:25 23:26 23:27 23:28 23:29 23:30 26:105 26:106 26:107 26:108 26:109 26:110 26:111 26:112 26:113 26:114 26:115 26:116 26:117 26:118 26:119 26:120 26:121 26:122 29:14 29:15 37:75 37:76 37:77 37:78 37:79 37:80 37:81 37:82 54:9 54:10 54:11 54:12 54:13 54:14 54:15 71:1 71:2 71:3 71:4 71:5 71:6 71:7 71:8 71:9 71:10 71:11 71:12 71:13 71:14 71:15 71:16 71:17 71:18 71:19 71:20 71:21 71:22 71:23 71:24 71:25 71:26 71:27 71:28 66:10 3:33 3:44 4:163 6:84 7:69 9:70 11:89 12:102 12:109 14:9 16:43 17:3 17:17 19:58 21:7 21:25 22:42 25:37 33:7 38:12 40:5 40:31 42:13 50:12 51:46 53:52 57:26 54:16 11:44 ṣaḥīḥ al-buḫārī 3340 bukhari-3340 abū hurayra ṣaḥīḥ al-buḫārī 3339 bukhari-3339 abū saʿīd al-khudrī ṣaḥīḥ al-buḫārī 3337 bukhari-3337 ʿabdullāh ibn ʿumar qawm nūḥ nuh",
       "nameOnlySearch": false
     },
     {
@@ -435,7 +496,9 @@
         "54:21",
         "69:6",
         "69:7",
-        "69:8"
+        "69:8",
+        "53:50",
+        "89:6–8"
       ],
       "approvedHadithMetadata": [],
       "people": "ʿĀd",
@@ -456,7 +519,7 @@
       "honorific": "عليه السلام",
       "name": "Hūd",
       "nameAr": "هود",
-      "searchBlob": "hūd هود hud hud ʿād ad aḥqāf ahqaf identity people mission prophethood character region punishment quran-index identity people mission prophethood character region punishment family death quran-index sendung zu ʿād daʿwah und tawakkul ablehnung und hochmut der ʿād errettung hūds; strafe der ʿād vater: research. mutter: research. ehefrau: research — name nicht freigegeben. kinder: research. genealogie: research. vater research mutter research ehefrau research kinder research 7:65 7:65 11:50 26:125 11:56 46:21 7:72 11:58–60 41:15–16 46:24–25 51:41–42 54:18–21 69:6–8 41:15–16 7:65 7:66 7:67 7:68 7:69 7:70 7:71 7:72 11:50 11:51 11:52 11:53 11:54 11:55 11:56 11:57 11:58 11:59 11:60 26:123 26:124 26:125 26:126 26:127 26:128 26:129 26:130 26:131 26:132 26:133 26:134 26:135 26:136 26:137 26:138 26:139 26:140 46:21 46:22 46:23 46:24 46:25 46:26 41:15 41:16 51:41 51:42 54:18 54:19 54:20 54:21 69:6 69:7 69:8 ʿād hud",
+      "searchBlob": "hūd هود hud hud ʿād ad aḥqāf ahqaf identity people mission prophethood character region punishment quran-index identity people mission prophethood character region punishment family death quran-index sendung zu ʿād daʿwah und tawakkul ablehnung und hochmut der ʿād errettung hūds; strafe der ʿād vater: research. mutter: research. ehefrau: research — name nicht freigegeben. kinder: research. genealogie: research. vater research mutter research ehefrau research kinder research 7:65 7:65 11:50 26:125 11:56 46:21 7:72 11:58–60 41:15–16 46:24–25 51:41–42 54:18–21 69:6–8 41:15–16 7:65 7:66 7:67 7:68 7:69 7:70 7:71 7:72 11:50 11:51 11:52 11:53 11:54 11:55 11:56 11:57 11:58 11:59 11:60 26:123 26:124 26:125 26:126 26:127 26:128 26:129 26:130 26:131 26:132 26:133 26:134 26:135 26:136 26:137 26:138 26:139 26:140 46:21 46:22 46:23 46:24 46:25 46:26 41:15 41:16 51:41 51:42 54:18 54:19 54:20 54:21 69:6 69:7 69:8 53:50 89:6–8 7:65 46:21 ʿād hud",
       "nameOnlySearch": false
     },
     {
@@ -510,7 +573,8 @@
         "sunnah",
         "family",
         "death",
-        "quran-index"
+        "quran-index",
+        "event"
       ],
       "approvedEvents": [
         "Sendung zu Thamūd",
@@ -591,7 +655,12 @@
         "91:11",
         "91:12",
         "91:13",
-        "91:15"
+        "91:15",
+        "17:59",
+        "41:17",
+        "51:43–45",
+        "69:4–5",
+        "89:9"
       ],
       "approvedHadithMetadata": [
         "Ṣaḥīḥ al-Buḫārī 3378 bukhari-3378 ʿAbdullāh ibn ʿUmar",
@@ -615,7 +684,7 @@
       "honorific": "عليه السلام",
       "name": "Ṣāliḥ",
       "nameAr": "صالح",
-      "searchBlob": "ṣāliḥ صالح salih salih thamūd thamud nāqa kamelstute al-ḥiǧr hijr identity people mission prophethood sign sin sunnah quran-index identity people mission prophethood sign sin sunnah family death quran-index sendung zu thamūd kamelstute als zeichen; wasserregel töten der kamelstute al-ḥiǧr in der sunnah vater: research. mutter: research. ehefrau: research. kinder: research. genealogie: research. vater research mutter research ehefrau research kinder research 7:73 7:73 11:61 26:143 7:73 11:64 26:155 54:28 7:77 11:65 26:157 54:29 91:14 7:73 7:74 7:75 7:76 7:77 7:78 7:79 11:61 11:62 11:63 11:64 11:65 11:66 11:67 11:68 15:80 15:81 15:82 15:83 15:84 26:141 26:142 26:143 26:144 26:145 26:146 26:147 26:148 26:149 26:150 26:151 26:152 26:153 26:154 26:155 26:156 26:157 26:158 26:159 27:45 27:46 27:47 27:48 27:49 27:50 27:51 27:52 27:53 54:23 54:24 54:25 54:26 54:27 54:28 54:29 54:30 54:31 91:11 91:12 91:13 91:14 91:15 ṣaḥīḥ al-buḫārī 3378 bukhari-3378 ʿabdullāh ibn ʿumar ṣaḥīḥ al-buḫārī 3379 bukhari-3379 ʿabdullāh ibn ʿumar thamūd salih",
+      "searchBlob": "ṣāliḥ صالح salih salih thamūd thamud nāqa kamelstute al-ḥiǧr hijr identity people mission prophethood sign sin sunnah quran-index identity people mission prophethood sign sin sunnah family death quran-index event sendung zu thamūd kamelstute als zeichen; wasserregel töten der kamelstute al-ḥiǧr in der sunnah vater: research. mutter: research. ehefrau: research. kinder: research. genealogie: research. vater research mutter research ehefrau research kinder research 7:73 7:73 11:61 26:143 7:73 11:64 26:155 54:28 7:77 11:65 26:157 54:29 91:14 7:73 7:74 7:75 7:76 7:77 7:78 7:79 11:61 11:62 11:63 11:64 11:65 11:66 11:67 11:68 15:80 15:81 15:82 15:83 15:84 26:141 26:142 26:143 26:144 26:145 26:146 26:147 26:148 26:149 26:150 26:151 26:152 26:153 26:154 26:155 26:156 26:157 26:158 26:159 27:45 27:46 27:47 27:48 27:49 27:50 27:51 27:52 27:53 54:23 54:24 54:25 54:26 54:27 54:28 54:29 54:30 54:31 91:11 91:12 91:13 91:14 91:15 17:59 41:17 51:43–45 69:4–5 89:9 7:77 ṣaḥīḥ al-buḫārī 3378 bukhari-3378 ʿabdullāh ibn ʿumar ṣaḥīḥ al-buḫārī 3379 bukhari-3379 ʿabdullāh ibn ʿumar thamūd salih",
       "nameOnlySearch": false
     },
     {

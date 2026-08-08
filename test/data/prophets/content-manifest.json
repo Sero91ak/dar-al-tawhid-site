@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-08T10:04:56.314Z",
+  "generatedAt": "2026-08-08T10:14:58.528Z",
   "environment": "test",
   "productionEnabled": false,
   "releaseCandidate": "prophets-test-rc-01",
@@ -8,38 +8,38 @@
   "coreProfiles": [
     {
       "id": "adam",
-      "profileStatus": "research",
+      "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "adam.json",
-      "claimCount": 0
+      "claimCount": 31
     },
     {
       "id": "idris",
       "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "idris.json",
-      "claimCount": 16
+      "claimCount": 21
     },
     {
       "id": "nuh",
       "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "nuh.json",
-      "claimCount": 161
+      "claimCount": 165
     },
     {
       "id": "hud",
       "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "hud.json",
-      "claimCount": 78
+      "claimCount": 83
     },
     {
       "id": "salih",
       "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "salih.json",
-      "claimCount": 87
+      "claimCount": 93
     },
     {
       "id": "ibrahim",
@@ -221,14 +221,14 @@
   ],
   "profileCount": 30,
   "claimCount": {
-    "approved": 1504,
-    "research": 0,
+    "approved": 1547,
+    "research": 8,
     "disputed": 0,
     "rejected": 0
   },
   "evidenceCount": {
-    "quran": 1207,
-    "sahih": 70,
+    "quran": 1238,
+    "sahih": 76,
     "hasan": 0,
     "athar": 0
   },
@@ -240,6 +240,6 @@
     "unverified": 48
   },
   "sourceCount": {
-    "canonicalHadith": 44
+    "canonicalHadith": 49
   }
 }
