@@ -15,7 +15,13 @@
     "إسحاق",
     "Yaʿqūb",
     "Ibrāhīm",
-    "Sarah"
+    "Sarah",
+    "identity",
+    "prophethood",
+    "family",
+    "timeline",
+    "trial",
+    "quran-index"
   ],
   "prophetStatus": "quran_explicit",
   "roles": [
@@ -31,7 +37,21 @@
     "nameAr": "إسحاق",
     "roles": [
       "nabī"
-    ]
+    ],
+    "nameDe": "Isḥāq",
+    "honorific": "عليه السلام",
+    "quranNamed": true,
+    "nabī": {
+      "value": true,
+      "claimIds": [
+        "ishaq-nabi-quran"
+      ]
+    },
+    "rasūl": {
+      "value": false,
+      "claimIds": []
+    },
+    "nameAttributionType": "explicit_name"
   },
   "overviewFields": [
     {
@@ -523,7 +543,8 @@
       "id": "ishaq-grave",
       "title": "Grabtraditionen",
       "verificationStatus": "research",
-      "grading": "unverified"
+      "grading": "unverified",
+      "mainBiography": false
     }
   ],
   "worksIndex": [
@@ -783,8 +804,8 @@
       "number": "3390",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3390; reference={'book': 60, 'hadith': 64}",
-      "arabicOriginal": "أَخْبَرَنِي عَبْدَةُ، حَدَّثَنَا عَبْدُ الصَّمَدِ، عَنْ عَبْدِ الرَّحْمَنِ، عَنْ أَبِيهِ، عَنِ ابْنِ عُمَرَ ـ رضى الله عنهما ـ عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ الْكَرِيمُ ابْنُ الْكَرِيمِ ابْنِ الْكَرِيمِ ابْنِ الْكَرِيمِ يُوسُفُ بْنُ يَعْقُوبَ بْنِ إِسْحَاقَ بْنِ إِبْرَاهِيمَ عَلَيْهِمِ السَّلاَمُ ‏\"‏‏.‏",
-      "translationDe": "Der Edle, Sohn des Edlen, Sohn des Edlen, Sohn des Edlen: Yūsuf ibn Yaʿqūb ibn Isḥāq ibn Ibrāhīm.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "ʿAbdullāh ibn ʿUmar",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -807,7 +828,13 @@
       "kitab": "Kitāb Aḥādīṯ al-Anbiyāʾ",
       "bab": "",
       "hadithNumber": "3390",
-      "englishAid": "Narrated Ibn `Umar:The Prophet (ﷺ) said, \"The honorable, the son of the honorable, the son of the honorable, the son of the honorable, (was) Joseph, the son of Jacob, the son of Isaac, the son of Abraham"
+      "englishAid": "Narrated Ibn `Umar:The Prophet (ﷺ) said, \"The honorable, the son of the honorable, the son of the honorable, the son of the honorable, (was) Joseph, the son of Jacob, the son of Isaac, the son of Abraham",
+      "hadithId": "bukhari-3390",
+      "hadithRef": {
+        "hadithId": "bukhari-3390",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "ishaq-mother-sarah-correlation",
@@ -823,8 +850,8 @@
       "number": "3358",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3358; reference={'book': 60, 'hadith': 33}",
-      "arabicOriginal": "حَدَّثَنَا مُحَمَّدُ بْنُ مَحْبُوبٍ، حَدَّثَنَا حَمَّادُ بْنُ زَيْدٍ، عَنْ أَيُّوبَ، عَنْ مُحَمَّدٍ، عَنْ أَبِي هُرَيْرَةَ ـ رضى الله عنه ـ قَالَ لَمْ يَكْذِبْ إِبْرَاهِيمُ ـ عَلَيْهِ السَّلاَمُ ـ إِلاَّ ثَلاَثَ كَذَبَاتٍ ثِنْتَيْنِ مِنْهُنَّ فِي ذَاتِ اللَّهِ عَزَّ وَجَلَّ، قَوْلُهُ ‏{‏إِنِّي سَقِيمٌ ‏}‏ وَقَوْلُهُ ‏{‏بَلْ فَعَلَهُ كَبِيرُهُمْ هَذَا‏}‏، وَقَالَ بَيْنَا هُوَ ذَاتَ يَوْمٍ وَسَارَةُ إِذْ أَتَى عَلَى جَبَّارٍ مِنَ الْجَبَابِرَةِ فَقِيلَ لَهُ إِنَّ هَا هُنَا رَجُلاً مَعَهُ امْرَأَةٌ مِنْ أَحْسَنِ النَّاسِ، فَأَرْسَلَ إِلَيْهِ، فَسَأَلَهُ عَنْهَا‏.‏ فَقَالَ مَنْ هَذِهِ قَالَ أُخْتِي، فَأَتَى سَارَةَ قَالَ يَا سَارَةُ، لَيْسَ عَلَى وَجْهِ الأَرْضِ مُؤْمِنٌ غَيْرِي وَغَيْرُكِ، وَإِنَّ هَذَا سَأَلَنِي، فَأَخْبَرْتُهُ أَنَّكِ أُخْتِي فَلاَ تُكَذِّبِينِي‏.‏ فَأَرْسَلَ إِلَيْهَا، فَلَمَّا دَخَلَتْ عَلَيْهِ ذَهَبَ يَتَنَاوَلُهَا بِيَدِهِ، فَأُخِذَ فَقَالَ ادْعِي اللَّهَ لِي وَلاَ أَضُرُّكِ‏.‏ فَدَعَتِ اللَّهَ فَأُطْلِقَ، ثُمَّ تَنَاوَلَهَا الثَّانِيَةَ، فَأُخِذَ مِثْلَهَا أَوْ أَشَدَّ فَقَالَ ادْعِي اللَّهَ لِي وَلاَ أَضُرُّكِ‏.‏ فَدَعَتْ فَأُطْلِقَ‏.‏ فَدَعَا بَعْضَ حَجَبَتِهِ فَقَالَ إِنَّكُمْ لَمْ تَأْتُونِي بِإِنْسَانٍ، إِنَّمَا أَتَيْتُمُونِي بِشَيْطَانٍ‏.‏ فَأَخْدَمَهَا هَاجَرَ فَأَتَتْهُ، وَهُوَ قَائِمٌ يُصَلِّي، فَأَوْمَأَ بِيَدِهِ مَهْيَا قَالَتْ رَدَّ اللَّهُ كَيْدَ الْكَافِرِ ـ أَوِ الْفَاجِرِ ـ فِي نَحْرِهِ، وَأَخْدَمَ هَاجَرَ‏.‏ قَالَ أَبُو هُرَيْرَةَ تِلْكَ أُمُّكُمْ يَا بَنِي مَاءِ السَّمَاءِ‏.‏",
-      "translationDe": "Abū Hurayra: Bericht über Ibrāhīm, Sarah und Hājar (Buḫārī 3358).",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Abū Hurayra",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -847,7 +874,13 @@
       "kitab": "Kitāb Aḥādīṯ al-Anbiyāʾ",
       "bab": "",
       "hadithNumber": "3358",
-      "englishAid": "Narrated Abu Huraira:Abraham did not tell a lie except on three occasion. Twice for the Sake of Allah when he said, \"I am sick,\" and he said, \"(I have not done this but) the big idol has done it.\" The (third was) that while Abraham and Sarah (his wife) were going (on a journey) they passed by (the territory of) a tyrant. Someone said to the tyrant, \"This man (i.e. Abraham) is accompanied by a very charming lady.\" So, he sent for Abraham and asked him about Sarah saying, \"Who is this lady?\" Abrah"
+      "englishAid": "Narrated Abu Huraira:Abraham did not tell a lie except on three occasion. Twice for the Sake of Allah when he said, \"I am sick,\" and he said, \"(I have not done this but) the big idol has done it.\" The (third was) that while Abraham and Sarah (his wife) were going (on a journey) they passed by (the territory of) a tyrant. Someone said to the tyrant, \"This man (i.e. Abraham) is accompanied by a very charming lady.\" So, he sent for Abraham and asked him about Sarah saying, \"Who is this lady?\" Abrah",
+      "hadithId": "bukhari-3358",
+      "hadithRef": {
+        "hadithId": "bukhari-3358",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "ishaq-wife-research",
@@ -1702,6 +1735,14 @@
     "notes": [
       "Profil bewusst kompakt.",
       "Sarah-Mutter: Korrelations-Claim dual-reviewed."
-    ]
-  }
+    ],
+    "phase07": true,
+    "schemaVersion": 4,
+    "updatedAt": "2026-08-08T09:25:18.000Z"
+  },
+  "relationIds": [
+    "ibrahim-ishaq",
+    "ishaq-yaqub"
+  ],
+  "schemaVersion": 4
 }

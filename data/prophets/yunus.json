@@ -18,7 +18,14 @@
     "Dhū n-Nūn",
     "Ḥūt",
     "Fisch",
-    "Yaqṭīn"
+    "Yaqṭīn",
+    "identity",
+    "prophethood",
+    "family",
+    "people",
+    "quran",
+    "dua",
+    "sunnah"
   ],
   "prophetStatus": "quran_explicit",
   "roles": [
@@ -47,7 +54,29 @@
         "name": "Ṣāḥib al-Ḥūt",
         "attributionType": "quran_cross_reference"
       }
-    ]
+    ],
+    "nameDe": "Yūnus",
+    "honorific": "عليه السلام",
+    "quranNamed": true,
+    "nabī": {
+      "value": true,
+      "claimIds": [
+        "yunus-hundred-thousand-37-147",
+        "yunus-nabi-6-86-89",
+        "yunus-rasul-37-139",
+        "yunus-revelation-4-163"
+      ]
+    },
+    "rasūl": {
+      "value": true,
+      "claimIds": [
+        "yunus-hundred-thousand-37-147",
+        "yunus-nabi-6-86-89",
+        "yunus-rasul-37-139",
+        "yunus-revelation-4-163"
+      ]
+    },
+    "nameAttributionType": "explicit_name"
   },
   "overviewFields": [
     {
@@ -556,13 +585,15 @@
       "id": "yunus-fish-species",
       "title": "Zoologische Fischart",
       "grading": "unverified",
-      "verificationStatus": "research"
+      "verificationStatus": "research",
+      "mainBiography": false
     },
     {
       "id": "yunus-duration-numbers",
       "title": "Exakte Dauer im Fisch",
       "grading": "unverified",
-      "verificationStatus": "research"
+      "verificationStatus": "research",
+      "mainBiography": false
     },
     {
       "id": "yunus-angry-at-allah",
@@ -580,7 +611,8 @@
       "id": "yunus-grave",
       "title": "Grabtradition",
       "grading": "unverified",
-      "verificationStatus": "research"
+      "verificationStatus": "research",
+      "mainBiography": false
     }
   ],
   "worksIndex": [
@@ -776,8 +808,8 @@
       "number": "2377",
       "numberAlt": "",
       "volumePage": "API hadithnumber=6160; arabicnumber=2377; reference={'book': 43, 'hadith': 218}",
-      "arabicOriginal": "حَدَّثَنَا مُحَمَّدُ بْنُ الْمُثَنَّى، وَابْنُ، بَشَّارٍ - وَاللَّفْظُ لاِبْنِ الْمُثَنَّى - قَالاَ حَدَّثَنَا مُحَمَّدُ، بْنُ جَعْفَرٍ حَدَّثَنَا شُعْبَةُ، عَنْ قَتَادَةَ، قَالَ سَمِعْتُ أَبَا الْعَالِيَةِ، يَقُولُ حَدَّثَنِي ابْنُ عَمِّ، نَبِيِّكُمْ صلى الله عليه وسلم - يَعْنِي ابْنَ عَبَّاسٍ - عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ مَا يَنْبَغِي لِعَبْدٍ أَنْ يَقُولَ أَنَا خَيْرٌ مِنْ يُونُسَ بْنِ مَتَّى ‏\"‏ ‏.‏ وَنَسَبَهُ إِلَى أَبِيهِ ‏.‏",
-      "translationDe": "Der Prophet ﷺ sagte, niemand solle sagen, er sei besser als Yūnus ibn Mattā; und er führte die Nisbah auf seinen Vater zurück.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Ibn ʿAbbās رضي الله عنهما",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -800,7 +832,13 @@
       "kitab": "Kitāb al-Faḍāʾil",
       "bab": "",
       "hadithNumber": "2377",
-      "englishAid": "Abu al-Aliya said:The son of the uncle of your Prophet (ﷺ), i. e. Ibn Abbas, reported Allah's Messenger (ﷺ) as saying: It is not meet for a servant that he should say: I am better than Yunus b. Matta (and this Matta) is the name of his father"
+      "englishAid": "Abu al-Aliya said:The son of the uncle of your Prophet (ﷺ), i. e. Ibn Abbas, reported Allah's Messenger (ﷺ) as saying: It is not meet for a servant that he should say: I am better than Yunus b. Matta (and this Matta) is the name of his father",
+      "hadithId": "muslim-2377",
+      "hadithRef": {
+        "hadithId": "muslim-2377",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "yunus-people-10-98",
@@ -1102,8 +1140,8 @@
       "number": "3505",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3505; arabicnumber=3505; reference={'book': 48, 'hadith': 136}",
-      "arabicOriginal": "حَدَّثَنَا مُحَمَّدُ بْنُ يَحْيَى، حَدَّثَنَا مُحَمَّدُ بْنُ يُوسُفَ، حَدَّثَنَا يُونُسُ بْنُ أَبِي إِسْحَاقَ، عَنْ إِبْرَاهِيمَ بْنِ مُحَمَّدِ بْنِ سَعْدٍ، عَنْ أَبِيهِ، عَنْ سَعْدٍ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ دَعْوَةُ ذِي النُّونِ إِذْ دَعَا وَهُوَ فِي بَطْنِ الْحُوتِ لاَ إِلَهَ إِلاَّ أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ ‏.‏ فَإِنَّهُ لَمْ يَدْعُ بِهَا رَجُلٌ مُسْلِمٌ فِي شَيْءٍ قَطُّ إِلاَّ اسْتَجَابَ اللَّهُ لَهُ ‏\"‏ ‏.‏ قَالَ مُحَمَّدُ بْنُ يَحْيَى قَالَ مُحَمَّدُ بْنُ يُوسُفَ مَرَّةً عَنْ إِبْرَاهِيمَ بْنِ مُحَمَّدِ بْنِ سَعْدٍ، عَنْ سَعْدٍ، ‏.‏ قَالَ أَبُو عِيسَى وَقَدْ رَوَى غَيْرُ، وَاحِدٍ، هَذَا الْحَدِيثَ عَنْ يُونُسَ بْنِ أَبِي إِسْحَاقَ، عَنْ إِبْرَاهِيمَ بْنِ مُحَمَّدِ بْنِ سَعْدٍ، عَنْ سَعْدٍ، وَلَمْ يَذْكُرُوا فِيهِ عَنْ أَبِيهِ، ‏.‏ وَرَوَى بَعْضُهُمْ، عَنْ يُونُسَ بْنِ أَبِي إِسْحَاقَ، فَقَالُوا عَنْ إِبْرَاهِيمَ بْنِ مُحَمَّدِ بْنِ سَعْدٍ، عَنْ أَبِيهِ، عَنْ سَعْدٍ، وَكَانَ، يُونُسُ بْنُ أَبِي إِسْحَاقَ رُبَّمَا ذَكَرَ فِي هَذَا الْحَدِيثِ عَنْ أَبِيهِ، وَرُبَّمَا، لَمْ يَذْكُرْهُ ‏.‏",
-      "translationDe": "Der Prophet ﷺ lehrte das Duʿāʾ von Dhū n-Nūn im Bauch des Fisches; kein Muslim ruft damit, ohne dass Allah antwortet.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Saʿd ibn Abī Waqqāṣ رضي الله عنه",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -1126,7 +1164,13 @@
       "kitab": "Kitāb ad-Daʿawāt",
       "bab": "",
       "hadithNumber": "3505",
-      "englishAid": "Ibrahim bin Muhammad bin Sa`d narrated from his father, from Sa`d that the Messenger of Allah (ﷺ) said:“The supplication of Dhun-Nun (Prophet Yunus) when he supplicated, while in the belly of the whale was: ‘There is none worthy of worship except You, Glory to You, Indeed, I have been of the transgressors. (Lā ilāha illā anta subḥānaka innī kuntu minaẓ-ẓālimīn)’ So indeed, no Muslim man supplicates with it for anything, ever, except Allah responds to him.”"
+      "englishAid": "Ibrahim bin Muhammad bin Sa`d narrated from his father, from Sa`d that the Messenger of Allah (ﷺ) said:“The supplication of Dhun-Nun (Prophet Yunus) when he supplicated, while in the belly of the whale was: ‘There is none worthy of worship except You, Glory to You, Indeed, I have been of the transgressors. (Lā ilāha illā anta subḥānaka innī kuntu minaẓ-ẓālimīn)’ So indeed, no Muslim man supplicates with it for anything, ever, except Allah responds to him.”",
+      "hadithId": "tirmidhi-3505",
+      "hadithRef": {
+        "hadithId": "tirmidhi-3505",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "yunus-rescue-21-88",
@@ -1390,8 +1434,8 @@
       "number": "3416",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3416; arabicnumber=3416; reference={'book': 60, 'hadith': 88}",
-      "arabicOriginal": "حَدَّثَنَا أَبُو الْوَلِيدِ، حَدَّثَنَا شُعْبَةُ، عَنْ سَعْدِ بْنِ إِبْرَاهِيمَ، سَمِعْتُ حُمَيْدَ بْنَ عَبْدِ الرَّحْمَنِ، عَنْ أَبِي هُرَيْرَةَ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ لاَ يَنْبَغِي لِعَبْدٍ أَنْ يَقُولَ أَنَا خَيْرٌ مِنْ يُونُسَ بْنِ مَتَّى ‏\"‏‏.‏",
-      "translationDe": "Der Prophet ﷺ: Es ziemt sich für einen Diener nicht zu sagen: Ich bin besser als Yūnus ibn Mattā.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Abū Hurayrah رضي الله عنه",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -1414,7 +1458,13 @@
       "kitab": "Kitāb Aḥādīth al-Anbiyāʾ",
       "bab": "",
       "hadithNumber": "3416",
-      "englishAid": "Narrated Abu Huraira:The Prophet (ﷺ) said, \"None should say that I am better than Yunus bin Matta"
+      "englishAid": "Narrated Abu Huraira:The Prophet (ﷺ) said, \"None should say that I am better than Yunus bin Matta",
+      "hadithId": "bukhari-3416",
+      "hadithRef": {
+        "hadithId": "bukhari-3416",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "yunus-not-better-muslim-2376",
@@ -1430,8 +1480,8 @@
       "number": "2376",
       "numberAlt": "",
       "volumePage": "API hadithnumber=6159; arabicnumber=2376; reference={'book': 43, 'hadith': 217}",
-      "arabicOriginal": "حَدَّثَنَا أَبُو بَكْرِ بْنُ أَبِي شَيْبَةَ، وَمُحَمَّدُ بْنُ الْمُثَنَّى، وَمُحَمَّدُ بْنُ بَشَّارٍ، قَالُوا حَدَّثَنَا مُحَمَّدُ بْنُ جَعْفَرٍ، - حَدَّثَنَا شُعْبَةُ، عَنْ سَعْدِ بْنِ إِبْرَاهِيمَ، قَالَ سَمِعْتُ حُمَيْدَ بْنَ عَبْدِ الرَّحْمَنِ، يُحَدِّثُ عَنْ أَبِي هُرَيْرَةَ، عَنِ النَّبِيِّ صلى الله عليه وسلم أَنَّهُ ‏ \"‏ قَالَ - يَعْنِي اللَّهَ تَبَارَكَ وَتَعَالَى - لاَ يَنْبَغِي لِعَبْدٍ لِي - وَقَالَ ابْنُ الْمُثَنَّى لِعَبْدِي - أَنْ يَقُولَ أَنَا خَيْرٌ مِنْ يُونُسَ بْنِ مَتَّى عَلَيْهِ السَّلاَمُ ‏\"‏ ‏.‏ قَالَ ابْنُ أَبِي شَيْبَةَ مُحَمَّدُ بْنُ جَعْفَرٍ عَنْ شُعْبَةَ ‏.‏",
-      "translationDe": "Allah sagt (im Ḥadīṯ qudsī-Kontext der Fassung): Es ziemt sich für Meinen Diener nicht zu sagen, er sei besser als Yūnus ibn Mattā.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Abū Hurayrah رضي الله عنه",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -1454,7 +1504,13 @@
       "kitab": "Kitāb al-Faḍāʾil",
       "bab": "",
       "hadithNumber": "2376",
-      "englishAid": "Abu Huraira reported Allah's Messenger (may prace be upon him) as saying that Allah, the Exalted and Majestic, said:It is not meet for a servant of Mine that he should say: I am better than Yunus b. Matta (peace be upon him)"
+      "englishAid": "Abu Huraira reported Allah's Messenger (may prace be upon him) as saying that Allah, the Exalted and Majestic, said:It is not meet for a servant of Mine that he should say: I am better than Yunus b. Matta (peace be upon him)",
+      "hadithId": "muslim-2376",
+      "hadithRef": {
+        "hadithId": "muslim-2376",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "yunus-mother-research",
@@ -1753,6 +1809,10 @@
     "notes": [
       "Dhū n-Nūn / Ṣāḥib al-Ḥūt technisch von Namensnennungen getrennt.",
       "Tirmidhī 3505: gradingAuthority gespeichert."
-    ]
-  }
+    ],
+    "phase07": true,
+    "schemaVersion": 4,
+    "updatedAt": "2026-08-08T09:25:18.000Z"
+  },
+  "schemaVersion": 4
 }

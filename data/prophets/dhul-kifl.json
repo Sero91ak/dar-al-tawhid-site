@@ -13,7 +13,9 @@
     "Dhū l-Kifl",
     "Dhul-Kifl",
     "الكفل",
-    "Ikhtilāf"
+    "Ikhtilāf",
+    "identity",
+    "character"
   ],
   "prophetStatus": "scholarly_disputed",
   "roles": [],
@@ -30,7 +32,17 @@
     "nameAr": "ذو الكفل",
     "quranNamed": true,
     "quranExplicitProphetTitle": false,
-    "prophetStatus": "scholarly_disputed"
+    "prophetStatus": "scholarly_disputed",
+    "nameDe": "Dhū l-Kifl",
+    "honorific": "عليه السلام",
+    "nabī": {
+      "value": false,
+      "claimIds": []
+    },
+    "rasūl": {
+      "value": false,
+      "claimIds": []
+    }
   },
   "prophethoodPositions": [
     {
@@ -154,13 +166,15 @@
       "id": "dhulkifl-alkifl-conflation",
       "title": "Gleichsetzung mit al-Kifl-Ḥadīṯ",
       "grading": "unverified_correlation",
-      "verificationStatus": "research"
+      "verificationStatus": "research",
+      "mainBiography": false
     },
     {
       "id": "dhulkifl-invented-bio",
       "title": "Spätere Detailbiografie",
       "grading": "israiliyyat_or_unverified",
-      "verificationStatus": "research"
+      "verificationStatus": "research",
+      "mainBiography": false
     }
   ],
   "worksIndex": [
@@ -795,6 +809,10 @@
     "notes": [
       "Kein falscher Konsens über Prophetenstatus.",
       "Profil bewusst klein."
-    ]
-  }
+    ],
+    "phase07": true,
+    "schemaVersion": 4,
+    "updatedAt": "2026-08-08T09:25:18.000Z"
+  },
+  "schemaVersion": 4
 }

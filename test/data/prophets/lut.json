@@ -14,7 +14,17 @@
     "Lut",
     "لوط",
     "Engel",
-    "rukn"
+    "rukn",
+    "identity",
+    "prophethood",
+    "mission",
+    "people",
+    "timeline",
+    "punishment",
+    "family",
+    "angels",
+    "sunnah",
+    "quran-index"
   ],
   "prophetStatus": "quran_explicit",
   "roles": [
@@ -33,7 +43,24 @@
       "nabī",
       "rasūl"
     ],
-    "rasulEvidence": "37:133"
+    "rasulEvidence": "37:133",
+    "nameDe": "Lūṭ",
+    "honorific": "عليه السلام",
+    "quranNamed": true,
+    "nabī": {
+      "value": true,
+      "claimIds": [
+        "lut-rasul-quran",
+        "lut-rukn-bukhari-3375"
+      ]
+    },
+    "rasūl": {
+      "value": true,
+      "claimIds": [
+        "lut-rasul-quran"
+      ]
+    },
+    "nameAttributionType": "explicit_name"
   },
   "overviewFields": [
     {
@@ -1802,13 +1829,15 @@
       "title": "Sodom/Gomorra",
       "evidenceType": "historical",
       "verificationStatus": "research",
-      "grading": "unverified"
+      "grading": "unverified",
+      "mainBiography": false
     },
     {
       "id": "lut-wife-name",
       "title": "Name der Ehefrau",
       "verificationStatus": "research",
-      "grading": "unverified"
+      "grading": "unverified",
+      "mainBiography": false
     },
     {
       "id": "lut-daughters-tafsir",
@@ -1821,7 +1850,8 @@
       "id": "lut-angel-names",
       "title": "Engelnamen",
       "verificationStatus": "research",
-      "grading": "unverified"
+      "grading": "unverified",
+      "mainBiography": false
     }
   ],
   "worksIndex": [
@@ -2614,8 +2644,8 @@
       "number": "3375",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3375; reference={'book': 60, 'hadith': 49}",
-      "arabicOriginal": "حَدَّثَنَا أَبُو الْيَمَانِ، أَخْبَرَنَا شُعَيْبٌ، حَدَّثَنَا أَبُو الزِّنَادِ، عَنِ الأَعْرَجِ، عَنْ أَبِي هُرَيْرَةَ ـ رضى الله عنه ـ أَنَّ النَّبِيَّ صلى الله عليه وسلم قَالَ ‏{‏يَغْفِرُ اللَّهُ لِلُوطٍ إِنْ كَانَ لَيَأْوِي إِلَى رُكْنٍ شَدِيدٍ‏}‏‏.‏",
-      "translationDe": "Abū Hurayra berichtete, dass der Prophet ﷺ sagte: Möge Allah Lūṭ vergeben — er suchte Zuflucht bei einem starken Rückhalt (rukn shadīd).",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Abū Hurayra",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -2638,7 +2668,13 @@
       "kitab": "Kitāb Aḥādīṯ al-Anbiyāʾ",
       "bab": "",
       "hadithNumber": "3375",
-      "englishAid": "Narrated Abu Huraira:The Prophet (ﷺ) said, \"May Allah forgive Lot: He wanted to have a powerful support"
+      "englishAid": "Narrated Abu Huraira:The Prophet (ﷺ) said, \"May Allah forgive Lot: He wanted to have a powerful support",
+      "hadithId": "bukhari-3375",
+      "hadithRef": {
+        "hadithId": "bukhari-3375",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "lut-rukn-bukhari-3387",
@@ -2654,8 +2690,8 @@
       "number": "3387",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3387; reference={'book': 60, 'hadith': 61}",
-      "arabicOriginal": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ مُحَمَّدِ بْنِ أَسْمَاءَ ابْنِ أَخِي جُوَيْرِيَةَ حَدَّثَنَا جُوَيْرِيَةُ بْنُ أَسْمَاءَ، عَنْ مَالِكٍ، عَنِ الزُّهْرِيِّ، أَنَّ سَعِيدَ بْنَ الْمُسَيَّبِ، وَأَبَا، عُبَيْدٍ أَخْبَرَاهُ عَنْ أَبِي هُرَيْرَةَ ـ رضى الله عنه ـ قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ يَرْحَمُ اللَّهُ لُوطًا، لَقَدْ كَانَ يَأْوِي إِلَى رُكْنٍ شَدِيدٍ، وَلَوْ لَبِثْتُ فِي السِّجْنِ مَا لَبِثَ يُوسُفُ ثُمَّ أَتَانِي الدَّاعِي لأَجَبْتُهُ ‏\"‏‏.‏",
-      "translationDe": "Abū Hurayra berichtete, dass der Gesandte Allahs ﷺ sagte: Möge Allah sich Lūṭ erbarmen — er suchte Zuflucht bei einem starken Rückhalt. Und hätte ich so lange im Gefängnis verweilt wie Yūsuf und dann käme der Rufer zu mir, ich hätte ihm Folge geleistet.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Abū Hurayra",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -2678,7 +2714,13 @@
       "kitab": "Kitāb Aḥādīṯ al-Anbiyāʾ",
       "bab": "",
       "hadithNumber": "3387",
-      "englishAid": "Narrated Abu Huraira:Allah's Messenger (ﷺ) said, \"May Allah bestow His Mercy on Lot. He wanted to have a powerful support. If I were to stay in prison (for a period equal to) the stay of Joseph (in prison) and then the offer of freedom came to me, then I would have accepted it.\" (See Hadith No)"
+      "englishAid": "Narrated Abu Huraira:Allah's Messenger (ﷺ) said, \"May Allah bestow His Mercy on Lot. He wanted to have a powerful support. If I were to stay in prison (for a period equal to) the stay of Joseph (in prison) and then the offer of freedom came to me, then I would have accepted it.\" (See Hadith No)",
+      "hadithId": "bukhari-3387",
+      "hadithRef": {
+        "hadithId": "bukhari-3387",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "lut-rukn-muslim-151",
@@ -2694,8 +2736,8 @@
       "number": "151.01",
       "numberAlt": "382",
       "volumePage": "API hadithnumber=382; reference={'book': 1, 'hadith': 289}",
-      "arabicOriginal": "وَحَدَّثَنِي حَرْمَلَةُ بْنُ يَحْيَى، أَخْبَرَنَا ابْنُ وَهْبٍ، أَخْبَرَنِي يُونُسُ، عَنِ ابْنِ شِهَابٍ، عَنْ أَبِي سَلَمَةَ بْنِ عَبْدِ الرَّحْمَنِ، وَسَعِيدِ بْنِ الْمُسَيَّبِ، عَنْ أَبِي هُرَيْرَةَ، أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏\"‏ نَحْنُ أَحَقُّ بِالشَّكِّ مِنْ إِبْرَاهِيمَ صلى الله عليه وسلم إِذْ قَالَ ‏{‏ رَبِّ أَرِنِي كَيْفَ تُحْيِي الْمَوْتَى قَالَ أَوَلَمْ تُؤْمِنْ قَالَ بَلَى وَلَكِنْ لِيَطْمَئِنَّ قَلْبِي‏}‏ قَالَ ‏\"‏ وَيَرْحَمُ اللَّهُ لُوطًا لَقَدْ كَانَ يَأْوِي إِلَى رُكْنٍ شَدِيدٍ وَلَوْ لَبِثْتُ فِي السِّجْنِ طُولَ لَبْثِ يُوسُفَ لأَجَبْتُ الدَّاعِيَ ‏\"‏ ‏.‏",
-      "translationDe": "Abū Hurayra: Der Gesandte Allahs ﷺ sagte u. a.: Möge Allah sich Lūṭ erbarmen — er suchte Zuflucht bei einem starken Rückhalt. Und hätte ich so lange im Gefängnis verweilt wie Yūsuf, hätte ich dem Rufer Folge geleistet.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Abū Hurayra",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -2718,7 +2760,13 @@
       "kitab": "Ṣaḥīḥ Muslim",
       "bab": "",
       "hadithNumber": "151.01",
-      "englishAid": "It is narrated on the authority of Abu Huraira that the Messenger of Allah (ﷺ) observed:We have more claim to doubt than Ibrahim (ﷺ) when he said: My Lord! Show me how Thou wilt quicken the dead. He said: Believeth thou not? He said: Yes! But that my heart may rest at ease. He (the Holy Prophet) observed: May Lord take mercy on Lot, that he wanted a strong support, and had I stayed (in the prison) as long as Yusuf stayed, I would have responded to him who invited me"
+      "englishAid": "It is narrated on the authority of Abu Huraira that the Messenger of Allah (ﷺ) observed:We have more claim to doubt than Ibrahim (ﷺ) when he said: My Lord! Show me how Thou wilt quicken the dead. He said: Believeth thou not? He said: Yes! But that my heart may rest at ease. He (the Holy Prophet) observed: May Lord take mercy on Lot, that he wanted a strong support, and had I stayed (in the prison) as long as Yusuf stayed, I would have responded to him who invited me",
+      "hadithId": "muslim-151.01",
+      "hadithRef": {
+        "hadithId": "muslim-151.01",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "lut-qref-6-86",
@@ -6263,6 +6311,10 @@
     "notes": [
       "66:10 Verrat: keine eigenmächtige sexuelle Untreue.",
       "Geografie: historical/research."
-    ]
-  }
+    ],
+    "phase07": true,
+    "schemaVersion": 4,
+    "updatedAt": "2026-08-08T09:25:18.000Z"
+  },
+  "schemaVersion": 4
 }

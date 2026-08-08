@@ -13,7 +13,11 @@
     "Ilyas",
     "إلياس",
     "Baʿl",
-    "Baal"
+    "Baal",
+    "identity",
+    "prophethood",
+    "mission",
+    "quran"
   ],
   "prophetStatus": "quran_explicit",
   "roles": [
@@ -31,7 +35,25 @@
     "roles": [
       "nabī",
       "rasūl"
-    ]
+    ],
+    "nameDe": "Ilyās",
+    "honorific": "عليه السلام",
+    "quranNamed": true,
+    "nabī": {
+      "value": true,
+      "claimIds": [
+        "ilyas-nabi-6-85-89",
+        "ilyas-rasul-37-123"
+      ]
+    },
+    "rasūl": {
+      "value": true,
+      "claimIds": [
+        "ilyas-nabi-6-85-89",
+        "ilyas-rasul-37-123"
+      ]
+    },
+    "nameAttributionType": "explicit_name"
   },
   "overviewFields": [
     {
@@ -246,14 +268,16 @@
       "id": "ilyas-khidr-eq",
       "title": "Ilyās = al-Khiḍr",
       "grading": "daif_or_unverified",
-      "verificationStatus": "research"
+      "verificationStatus": "research",
+      "mainBiography": false
     },
     {
       "id": "ilyas-immortal",
       "title": "Lebt bis heute",
       "grading": "unverified",
       "verificationStatus": "research",
-      "notes": "NOT approved"
+      "notes": "NOT approved",
+      "mainBiography": false
     },
     {
       "id": "ilyas-baalbek-details",
@@ -1042,6 +1066,10 @@
     "notes": [
       "Kompakt gemäß sicherer Quellenlage.",
       "Kein erfundener Sunnah-Abschnitt (sunnahVerifiedReports=[])."
-    ]
-  }
+    ],
+    "phase07": true,
+    "schemaVersion": 4,
+    "updatedAt": "2026-08-08T09:25:18.000Z"
+  },
+  "schemaVersion": 4
 }

@@ -14,7 +14,13 @@
     "يحيى",
     "Zakariyyā",
     "ḥaṣūr",
-    "Miʿrāǧ"
+    "Miʿrāǧ",
+    "identity",
+    "prophethood",
+    "quran",
+    "family",
+    "character",
+    "sunnah"
   ],
   "prophetStatus": "quran_explicit",
   "roles": [
@@ -31,7 +37,22 @@
     "roles": [
       "nabī"
     ],
-    "father": "Zakariyyā"
+    "father": "Zakariyyā",
+    "nameDe": "Yaḥyā",
+    "honorific": "عليه السلام",
+    "quranNamed": true,
+    "nabī": {
+      "value": true,
+      "claimIds": [
+        "yahya-attr-nabi-salihin-3-39",
+        "yahya-nabi-3-39"
+      ]
+    },
+    "rasūl": {
+      "value": false,
+      "claimIds": []
+    },
+    "nameAttributionType": "explicit_name"
   },
   "overviewFields": [
     {
@@ -314,7 +335,8 @@
       "id": "yahya-mother-elizabeth",
       "title": "Muttername Elisabeth",
       "grading": "unverified_as_islamic_main",
-      "verificationStatus": "research"
+      "verificationStatus": "research",
+      "mainBiography": false
     }
   ],
   "worksIndex": [
@@ -983,8 +1005,8 @@
       "number": "3430",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3430; arabicnumber=3430; reference={'book': 60, 'hadith': 101}",
-      "arabicOriginal": "حَدَّثَنَا هُدْبَةُ بْنُ خَالِدٍ، حَدَّثَنَا هَمَّامُ بْنُ يَحْيَى، حَدَّثَنَا قَتَادَةُ، عَنْ أَنَسِ بْنِ مَالِكٍ، عَنْ مَالِكِ بْنِ صَعْصَعَةَ، أَنَّ نَبِيَّ اللَّهِ صلى الله عليه وسلم حَدَّثَهُمْ عَنْ لَيْلَةَ أُسْرِيَ ‏ \"‏ ثُمَّ صَعِدَ حَتَّى أَتَى السَّمَاءَ الثَّانِيَةَ فَاسْتَفْتَحَ، قِيلَ مَنْ هَذَا قَالَ جِبْرِيلُ‏.‏ قِيلَ وَمَنْ مَعَكَ قَالَ مُحَمَّدٌ‏.‏ قِيلَ وَقَدْ أُرْسِلَ إِلَيْهِ قَالَ نَعَمْ‏.‏ فَلَمَّا خَلَصْتُ، فَإِذَا يَحْيَى وَعِيسَى وَهُمَا ابْنَا خَالَةٍ‏.‏ قَالَ هَذَا يَحْيَى وَعِيسَى فَسَلِّمْ عَلَيْهِمَا‏.‏ فَسَلَّمْتُ فَرَدَّا ثُمَّ قَالاَ مَرْحَبًا بِالأَخِ الصَّالِحِ وَالنَّبِيِّ الصَّالِحِ ‏\"‏‏.‏",
-      "translationDe": "Im zweiten Himmel begegnete der Prophet ﷺ Yaḥyā und ʿĪsā — beiden als Vettern mütterlicherseits (ibnā khāla).",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Mālik ibn Ṣaʿṣaʿa / Anas",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -1009,7 +1031,13 @@
       "hadithNumber": "3430",
       "englishAid": "Narrated Malik bin Sasaa:That the Prophet (ﷺ) talked to them about the night of his Ascension to the Heavens. He said, \"(Then Gabriel took me) and ascended up till he reached the second heaven where he asked for the gate to be opened, but it was asked, 'Who is it?' Gabriel replied, 'I am Gabriel.' It was asked, 'Who is accompanying you?' He replied, 'Muhammad.' It was asked, 'Has he been called?' He said, 'Yes.' When we reached over the second heaven, I saw Yahya (i.e. John) and Jesus who were c",
       "familyCorrelation": "ibnā khāla",
-      "heaven": "second"
+      "heaven": "second",
+      "hadithId": "bukhari-3430",
+      "hadithRef": {
+        "hadithId": "bukhari-3430",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "yahya-death-method-research",
@@ -1271,6 +1299,13 @@
     "notes": [
       "Enthauptungsnarrative nicht freigegeben.",
       "ibnā khāla aus Buḫārī 3430."
-    ]
-  }
+    ],
+    "phase07": true,
+    "schemaVersion": 4,
+    "updatedAt": "2026-08-08T09:25:18.000Z"
+  },
+  "relationIds": [
+    "zakariyya-yahya"
+  ],
+  "schemaVersion": 4
 }

@@ -16,9 +16,17 @@
   var STATE_KEY = "dar_prophets_ui_v1";
   var indexCache = null;
   var profileCache = Object.create(null);
+  var hadithCache = Object.create(null);
   var loadIndexPromise = null;
   var resizeBound = false;
   var lastWidthMode = "";
+  var DISPUTED_STATUSES = {
+    disputed: 1,
+    scholarly_disputed: 1,
+    scholarly_disputed_or_inferred: 1,
+    scholarly_source_correlation: 1,
+    quran_named_status_under_review: 1
+  };
 
   var TABS = [
     { id: "overview", label: "Übersicht" },
@@ -104,8 +112,37 @@
   function prophetEmoji(id, p) {
     if (PROPHET_EMOJI[id]) return PROPHET_EMOJI[id];
     if (p && p.uluAlAzm) return "✦";
-    if (p && (p.prophetStatus === "disputed" || p.prophetStatus === "scholarly_disputed" || p.prophetStatus === "scholarly_disputed_or_inferred" || p.prophetStatus === "scholarly_source_correlation")) return "❔";
+    if (p && isDisputedStatus(p.prophetStatus)) return "❔";
     return "🕊️";
+  }
+
+  function isDisputedStatus(status) {
+    return !!(status && DISPUTED_STATUSES[String(status)]);
+  }
+
+  function publicStatusLabel(gradingOrStatus) {
+    var g = String(gradingOrStatus || "").toLowerCase();
+    if (g === "quran" || g === "qurʾān") return "Qurʾān";
+    if (g.indexOf("sahih") >= 0 || g.indexOf("ṣaḥīḥ") >= 0) return "Ṣaḥīḥ";
+    if (g.indexOf("hasan") >= 0 || g.indexOf("ḥasan") >= 0) return "Ḥasan";
+    if (g.indexOf("athar") >= 0) return "Authentischer Athar";
+    if (isDisputedStatus(g) || g.indexOf("disputed") >= 0 || g.indexOf("umstritten") >= 0) return "Umstritten";
+    if (g.indexOf("not_authentically") >= 0 || g.indexOf("nicht authentisch") >= 0 || g.indexOf("unattested") >= 0) {
+      return "Nicht authentisch belegt";
+    }
+    return gradingOrStatus || "";
+  }
+
+  function disputedStatusNote(metaOrProfile) {
+    var p = metaOrProfile || {};
+    if (!isDisputedStatus(p.prophetStatus)) return "";
+    if (p.quranNamed || (p.identity && p.identity.quranNamed)) {
+      return "Im Qurʾān genannt · Prophetenstatus unter den Gelehrten unterschiedlich eingeordnet";
+    }
+    if (p.prophetStatus === "scholarly_source_correlation" || p.prophetStatus === "scholarly_disputed_or_inferred") {
+      return "In authentischer Sunnah namentlich verbunden · Prophetenstatus nicht als Konsens darstellen";
+    }
+    return "Prophetenstatus unter den Gelehrten unterschiedlich eingeordnet";
   }
 
   function sectionCountLabel(n) {
@@ -161,14 +198,90 @@
     return loadIndexPromise;
   }
 
+  function profileFileFor(id) {
+    var meta = findMeta(id);
+    if (meta && meta.profileFile) return String(meta.profileFile).replace(/^\/+/, "");
+    return encodeURIComponent(String(id || "")) + ".json";
+  }
+
+  function loadHadith(hadithId) {
+    var key = String(hadithId || "");
+    if (!key) return Promise.resolve(null);
+    if (Object.prototype.hasOwnProperty.call(hadithCache, key)) {
+      return Promise.resolve(hadithCache[key]);
+    }
+    return fetch(DATA_BASE + "hadith/" + encodeURIComponent(key) + ".json", { cache: "no-store" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("hadith " + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        hadithCache[key] = data;
+        return data;
+      })
+      .catch(function () {
+        hadithCache[key] = null;
+        return null;
+      });
+  }
+
+  function collectHadithIds(profile) {
+    var ids = [];
+    var seen = Object.create(null);
+    function add(hid) {
+      if (!hid || seen[hid]) return;
+      seen[hid] = 1;
+      ids.push(hid);
+    }
+    (profile.claims || []).forEach(function (c) {
+      add(c.hadithId || (c.hadithRef && c.hadithRef.hadithId));
+    });
+    return ids;
+  }
+
+  function hydrateProfileHadith(profile) {
+    if (!profile || profile.__hadithHydrated) return Promise.resolve(profile);
+    var ids = collectHadithIds(profile);
+    if (!ids.length) {
+      profile.__hadithHydrated = true;
+      return Promise.resolve(profile);
+    }
+    return Promise.all(ids.map(loadHadith)).then(function (rows) {
+      var map = Object.create(null);
+      rows.forEach(function (h) {
+        if (h && h.id) map[h.id] = h;
+      });
+      (profile.claims || []).forEach(function (c) {
+        var hid = c.hadithId || (c.hadithRef && c.hadithRef.hadithId);
+        var h = hid && map[hid];
+        if (!h) return;
+        if (!c.arabicOriginal && h.arabicOriginal) c.arabicOriginal = h.arabicOriginal;
+        if (!c.translationDe && h.translationDe) c.translationDe = h.translationDe;
+        if (!c.directReference && h.directReference) c.directReference = h.directReference;
+        if (!c.rawi && h.rawi) c.rawi = h.rawi;
+        if (!c.grading && h.grading) c.grading = h.grading;
+      });
+      profile.__hadithHydrated = true;
+      return profile;
+    });
+  }
+
   function loadProfile(id) {
     var key = String(id || "");
     if (!key) return Promise.resolve(null);
     if (profileCache[key]) return Promise.resolve(profileCache[key]);
-    return fetch(DATA_BASE + encodeURIComponent(key) + ".json", { cache: "no-store" })
+    var start = indexCache ? Promise.resolve(indexCache) : loadIndex();
+    return start
+      .then(function () {
+        var file = profileFileFor(key);
+        return fetch(DATA_BASE + file, { cache: "no-store" });
+      })
       .then(function (r) {
         if (!r.ok) throw new Error("profile " + r.status);
         return r.json();
+      })
+      .then(function (data) {
+        return hydrateProfileHadith(data);
       })
       .then(function (data) {
         profileCache[key] = data;
@@ -294,11 +407,11 @@
 
   function renderRow(p, activeId) {
     var active = String(p.id) === String(activeId);
-    var roles = rolesLabel(p.roles);
+    var roles = isDisputedStatus(p.prophetStatus) ? "" : rolesLabel(p.roles);
     var meta = [roles, p.people].filter(Boolean).join(" · ");
     var tags = p.uluAlAzm
       ? "Ulū l-ʿAzm"
-      : (p.prophetStatus === "disputed" || p.prophetStatus === "scholarly_disputed" || p.prophetStatus === "scholarly_disputed_or_inferred" || p.prophetStatus === "scholarly_source_correlation")
+      : isDisputedStatus(p.prophetStatus)
         ? "Umstritten"
         : "Qurʾān";
     var emoji = prophetEmoji(p.id, p);
@@ -380,7 +493,11 @@
       "</div>" +
       "</div>" +
       body +
-      '<p class="prophets-note">Nur namentlich zuverlässig belegte Personen. Die Überlieferung über 124.000 Propheten wird nicht als gesicherte Gesamtzahl dargestellt. Fehlende biografische Angaben erscheinen als „Nicht authentisch belegt“.</p>'
+      '<p class="prophets-note">Nur geprüfte, freigegebene Angaben. Bekannte Profile: ' +
+      esc(String((index.counts && index.counts.verifiedQuranExplicitProfiles) || (index.prophets || []).filter(function (p) { return p.prophetStatus === "quran_explicit" && p.profileStatus === "approved"; }).length)) +
+      " mit ausdrücklicher Qurʾān-Beleglage · Research: " +
+      esc(String((index.counts && index.counts.researchProfiles) || (index.disputed || []).length)) +
+      ". Die bekannte Profilzahl ist nicht die Gesamtzahl aller Gesandten (Qurʾān 4:164 / 40:78). 124.000 wird nicht als sichere Gesamtzahl dargestellt.</p>"
     );
   }
 
@@ -636,7 +753,7 @@
           return (
             '<article class="prophets-quote">' +
             '<span class="prophets-badge">' +
-            esc(it.grading || "sahih") +
+            esc(publicStatusLabel(it.grading || "sahih")) +
             "</span>" +
             (it.arabicOriginal
               ? '<p class="prophets-quote__ar" lang="ar" dir="rtl">' + esc(it.arabicOriginal) + "</p>"
@@ -729,7 +846,7 @@
         return (
           '<article class="prophets-quote">' +
           '<span class="prophets-badge">' +
-          esc(c.grading || c.evidenceType || "") +
+          esc(publicStatusLabel(c.grading || c.evidenceType || "")) +
           "</span>" +
           '<p class="prophets-quote__de">' +
           esc(c.claim) +
@@ -762,7 +879,8 @@
 
   function renderStubDetail(meta) {
     if (!meta) return '<div class="prophets-empty">Prophet nicht gefunden.</div>';
-    var disputed = meta.prophetStatus === "disputed";
+    var disputed = isDisputedStatus(meta.prophetStatus);
+    var note = disputedStatusNote(meta) || meta.note || "Die vollständige Wissensakte wird mit geprüften Claims aufgebaut.";
     return (
       '<article class="prophets-detail">' +
       '<header class="prophets-detail__head">' +
@@ -770,15 +888,17 @@
       '<div class="prophets-detail__ar" lang="ar" dir="rtl">' + esc(meta.nameAr || "") + "</div>" +
       '<p class="prophets-detail__honor">' + esc(meta.honorific || "") + "</p>" +
       '<div class="prophets-detail__roles">' +
-      (rolesLabel(meta.roles) ? '<span class="prophets-chip">' + esc(rolesLabel(meta.roles)) + "</span>" : "") +
+      (!disputed && rolesLabel(meta.roles) ? '<span class="prophets-chip">' + esc(rolesLabel(meta.roles)) + "</span>" : "") +
+      (disputed ? '<span class="prophets-chip">Umstritten</span>' : "") +
       (meta.uluAlAzm ? '<span class="prophets-chip">✦ Ulū l-ʿAzm</span>' : "") +
       "</div>" +
       (meta.people ? '<p class="prophets-detail__people">👥 ' + esc(meta.people) + "</p>" : "") +
       '</header><hr class="prophets-rule" />' +
       '<section class="prophets-chapter"><h3>' + (disputed ? "Umstrittene Einordnung" : "Profil") + "</h3>" +
       "<p class=\"prophets-quote__de\">" +
-      esc(meta.note || "Die vollständige Wissensakte wird nach dem Referenzprofil Mūsā schrittweise mit geprüften Claims aufgebaut. Es werden keine ungeprüften biografischen Angaben ergänzt.") +
+      esc(note) +
       "</p>" +
+      (meta.note && disputedStatusNote(meta) ? '<p class="prophets-quote__de">' + esc(meta.note) + "</p>" : "") +
       '<p class="prophets-status prophets-status--na">Struktur vorbereitet · Inhalte folgen nach Freigabe</p>' +
       "</section></article>"
     );
@@ -828,17 +948,30 @@
     var stS = approvedOnly((profile.statements && profile.statements.sunnah) || []).length;
     var aboutN = approvedOnly(profile.prophetAbout || []).length;
     var sunnahN = aboutN + stS;
+    var disputed = isDisputedStatus(profile.prophetStatus) || isDisputedStatus((meta || {}).prophetStatus);
     var roleChips = [];
-    (profile.roles || []).forEach(function (r) {
-      roleChips.push('<span class="prophets-chip">' + esc(rolesLabel([r]) || r) + "</span>");
-    });
+    if (!disputed) {
+      (profile.roles || []).forEach(function (r) {
+        roleChips.push('<span class="prophets-chip">' + esc(rolesLabel([r]) || r) + "</span>");
+      });
+    } else {
+      roleChips.push('<span class="prophets-chip">Umstritten</span>');
+      if (profile.quranExplicitName || (profile.identity && profile.identity.quranNamed) || (meta && meta.quranNamed)) {
+        roleChips.push('<span class="prophets-chip">Im Qurʾān genannt</span>');
+      }
+    }
     if (profile.uluAlAzm) roleChips.push('<span class="prophets-chip">✦ Ulū l-ʿAzm</span>');
 
-    var banner = researchMode
-      ? '<p class="prophets-status prophets-status--na">Zero-Trust · Profilstatus: ' +
-        esc(profile.profileStatus) +
-        " · Lesertext nur aus freigegebenen Claims · Test-Forschungsvorschau</p>"
-      : "";
+    var banner = "";
+    if (disputed) {
+      banner =
+        '<p class="prophets-status prophets-status--na">' +
+        esc(disputedStatusNote(Object.assign({}, meta || {}, profile)) || "Prophetenstatus unter den Gelehrten unterschiedlich eingeordnet") +
+        "</p>";
+    } else if (researchMode) {
+      banner =
+        '<p class="prophets-status prophets-status--na">Zero-Trust · Profil noch in Prüfung · Lesertext nur aus freigegebenen Claims</p>';
+    }
 
     return (
       '<article class="prophets-detail" data-prophet-detail="' +

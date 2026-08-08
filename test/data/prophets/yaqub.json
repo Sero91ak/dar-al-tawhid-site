@@ -16,7 +16,15 @@
     "يعقوب",
     "Yūsuf",
     "ṣabr",
-    "Isrāʾīl"
+    "Isrāʾīl",
+    "identity",
+    "prophethood",
+    "family",
+    "statements",
+    "character",
+    "miracle",
+    "timeline",
+    "quran-index"
   ],
   "prophetStatus": "quran_explicit",
   "roles": [
@@ -37,7 +45,21 @@
       "israel": {
         "status": "source_review"
       }
-    }
+    },
+    "nameDe": "Yaʿqūb",
+    "honorific": "عليه السلام",
+    "quranNamed": true,
+    "nabī": {
+      "value": true,
+      "claimIds": [
+        "yaqub-nabi-quran"
+      ]
+    },
+    "rasūl": {
+      "value": false,
+      "claimIds": []
+    },
+    "nameAttributionType": "explicit_name"
   },
   "overviewFields": [
     {
@@ -928,7 +950,8 @@
       "id": "yaqub-twelve-names",
       "title": "Zwölf-Söhne-Namensliste",
       "verificationStatus": "research",
-      "grading": "israiliyyat"
+      "grading": "israiliyyat",
+      "mainBiography": false
     },
     {
       "id": "yaqub-israel-alias",
@@ -941,7 +964,8 @@
       "id": "yaqub-rachel",
       "title": "Ehefrauen-Namen (Rāḥīl etc.)",
       "verificationStatus": "research",
-      "grading": "israiliyyat"
+      "grading": "israiliyyat",
+      "mainBiography": false
     }
   ],
   "worksIndex": [
@@ -1061,8 +1085,8 @@
       "number": "3390",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3390; reference={'book': 60, 'hadith': 64}",
-      "arabicOriginal": "أَخْبَرَنِي عَبْدَةُ، حَدَّثَنَا عَبْدُ الصَّمَدِ، عَنْ عَبْدِ الرَّحْمَنِ، عَنْ أَبِيهِ، عَنِ ابْنِ عُمَرَ ـ رضى الله عنهما ـ عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ الْكَرِيمُ ابْنُ الْكَرِيمِ ابْنِ الْكَرِيمِ ابْنِ الْكَرِيمِ يُوسُفُ بْنُ يَعْقُوبَ بْنِ إِسْحَاقَ بْنِ إِبْرَاهِيمَ عَلَيْهِمِ السَّلاَمُ ‏\"‏‏.‏",
-      "translationDe": "Der Edle, Sohn des Edlen, Sohn des Edlen, Sohn des Edlen: Yūsuf ibn Yaʿqūb ibn Isḥāq ibn Ibrāhīm.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "ʿAbdullāh ibn ʿUmar",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -1085,7 +1109,13 @@
       "kitab": "Kitāb Aḥādīṯ al-Anbiyāʾ",
       "bab": "",
       "hadithNumber": "3390",
-      "englishAid": "Narrated Ibn `Umar:The Prophet (ﷺ) said, \"The honorable, the son of the honorable, the son of the honorable, the son of the honorable, (was) Joseph, the son of Jacob, the son of Isaac, the son of Abraham"
+      "englishAid": "Narrated Ibn `Umar:The Prophet (ﷺ) said, \"The honorable, the son of the honorable, the son of the honorable, the son of the honorable, (was) Joseph, the son of Jacob, the son of Isaac, the son of Abraham",
+      "hadithId": "bukhari-3390",
+      "hadithRef": {
+        "hadithId": "bukhari-3390",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "yaqub-grandfather-ibrahim-3390",
@@ -1101,8 +1131,8 @@
       "number": "3390",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3390; reference={'book': 60, 'hadith': 64}",
-      "arabicOriginal": "أَخْبَرَنِي عَبْدَةُ، حَدَّثَنَا عَبْدُ الصَّمَدِ، عَنْ عَبْدِ الرَّحْمَنِ، عَنْ أَبِيهِ، عَنِ ابْنِ عُمَرَ ـ رضى الله عنهما ـ عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ الْكَرِيمُ ابْنُ الْكَرِيمِ ابْنِ الْكَرِيمِ ابْنِ الْكَرِيمِ يُوسُفُ بْنُ يَعْقُوبَ بْنِ إِسْحَاقَ بْنِ إِبْرَاهِيمَ عَلَيْهِمِ السَّلاَمُ ‏\"‏‏.‏",
-      "translationDe": "Der Edle, Sohn des Edlen, Sohn des Edlen, Sohn des Edlen: Yūsuf ibn Yaʿqūb ibn Isḥāq ibn Ibrāhīm.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "ʿAbdullāh ibn ʿUmar",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -1125,7 +1155,13 @@
       "kitab": "Kitāb Aḥādīṯ al-Anbiyāʾ",
       "bab": "",
       "hadithNumber": "3390",
-      "englishAid": "Narrated Ibn `Umar:The Prophet (ﷺ) said, \"The honorable, the son of the honorable, the son of the honorable, the son of the honorable, (was) Joseph, the son of Jacob, the son of Isaac, the son of Abraham"
+      "englishAid": "Narrated Ibn `Umar:The Prophet (ﷺ) said, \"The honorable, the son of the honorable, the son of the honorable, the son of the honorable, (was) Joseph, the son of Jacob, the son of Isaac, the son of Abraham",
+      "hadithId": "bukhari-3390",
+      "hadithRef": {
+        "hadithId": "bukhari-3390",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "yaqub-son-yusuf-3390",
@@ -1141,8 +1177,8 @@
       "number": "3390",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3390; reference={'book': 60, 'hadith': 64}",
-      "arabicOriginal": "أَخْبَرَنِي عَبْدَةُ، حَدَّثَنَا عَبْدُ الصَّمَدِ، عَنْ عَبْدِ الرَّحْمَنِ، عَنْ أَبِيهِ، عَنِ ابْنِ عُمَرَ ـ رضى الله عنهما ـ عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ الْكَرِيمُ ابْنُ الْكَرِيمِ ابْنِ الْكَرِيمِ ابْنِ الْكَرِيمِ يُوسُفُ بْنُ يَعْقُوبَ بْنِ إِسْحَاقَ بْنِ إِبْرَاهِيمَ عَلَيْهِمِ السَّلاَمُ ‏\"‏‏.‏",
-      "translationDe": "Der Edle, Sohn des Edlen, Sohn des Edlen, Sohn des Edlen: Yūsuf ibn Yaʿqūb ibn Isḥāq ibn Ibrāhīm.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "ʿAbdullāh ibn ʿUmar",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -1165,7 +1201,13 @@
       "kitab": "Kitāb Aḥādīṯ al-Anbiyāʾ",
       "bab": "",
       "hadithNumber": "3390",
-      "englishAid": "Narrated Ibn `Umar:The Prophet (ﷺ) said, \"The honorable, the son of the honorable, the son of the honorable, the son of the honorable, (was) Joseph, the son of Jacob, the son of Isaac, the son of Abraham"
+      "englishAid": "Narrated Ibn `Umar:The Prophet (ﷺ) said, \"The honorable, the son of the honorable, the son of the honorable, the son of the honorable, (was) Joseph, the son of Jacob, the son of Isaac, the son of Abraham",
+      "hadithId": "bukhari-3390",
+      "hadithRef": {
+        "hadithId": "bukhari-3390",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "yaqub-dream-warning",
@@ -3034,6 +3076,14 @@
     },
     "notes": [
       "Isrāʾīl-Alias: source_review."
-    ]
-  }
+    ],
+    "phase07": true,
+    "schemaVersion": 4,
+    "updatedAt": "2026-08-08T09:25:18.000Z"
+  },
+  "relationIds": [
+    "ishaq-yaqub",
+    "yaqub-yusuf"
+  ],
+  "schemaVersion": 4
 }

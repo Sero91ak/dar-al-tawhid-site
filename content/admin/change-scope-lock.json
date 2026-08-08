@@ -2739,6 +2739,22 @@
         "scripts/build_prophets_block06.py"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-phase07-tech-integration-v609-2026-08-08",
+      "approvedBy": "user-task-phase-07-tech-fertigstellen",
+      "note": "Phase 07: technische Gesamtintegration (research/, hadith/, relations/, Validatoren, UI-Status) — kein Content-Bulkimport; Test-first; production=disabled",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "data/prophets/",
+        "test/assets/prophets/prophets.js",
+        "test/index.html",
+        "test/version.json",
+        "scripts/prophets_phase07_integrate.py",
+        "scripts/prophets-phase07-production-guard.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

@@ -18,7 +18,18 @@
     "Sintflut",
     "950",
     "Daǧǧāl",
-    "Qawm"
+    "Qawm",
+    "identity",
+    "prophethood",
+    "people",
+    "timeline",
+    "mission",
+    "dawah",
+    "ark",
+    "family",
+    "flood",
+    "sunnah",
+    "quran-index"
   ],
   "prophetStatus": "quran_explicit",
   "roles": [
@@ -40,7 +51,28 @@
     "uluAlAzm": true,
     "people": "Qawm Nūḥ",
     "firstMessengerToEarthPeople": true,
-    "firstMessengerNote": "Buḫārī 3340 — leugnet keine früheren Propheten (Ādam)."
+    "firstMessengerNote": "Buḫārī 3340 — leugnet keine früheren Propheten (Ādam).",
+    "nameDe": "Nūḥ",
+    "honorific": "عليه السلام",
+    "quranNamed": true,
+    "nabī": {
+      "value": true,
+      "claimIds": [
+        "nuh-dajjal-bukhari-3337",
+        "nuh-first-rasul-bukhari-3340",
+        "nuh-nabi",
+        "nuh-rasul"
+      ]
+    },
+    "rasūl": {
+      "value": true,
+      "claimIds": [
+        "nuh-first-rasul-bukhari-3340",
+        "nuh-nabi",
+        "nuh-rasul"
+      ]
+    },
+    "nameAttributionType": "explicit_name"
   },
   "overviewFields": [
     {
@@ -2377,26 +2409,30 @@
       "id": "nuh-ark-dimensions",
       "title": "Arche-Maße / Fundort",
       "grading": "israiliyyat",
-      "verificationStatus": "research"
+      "verificationStatus": "research",
+      "mainBiography": false
     },
     {
       "id": "nuh-son-popular-names",
       "title": "Populäre Namen des Sohnes",
       "grading": "unverified",
-      "verificationStatus": "research"
+      "verificationStatus": "research",
+      "mainBiography": false
     },
     {
       "id": "nuh-geology",
       "title": "Moderne Flut-Theorien",
       "grading": "unverified",
       "verificationStatus": "research",
-      "notes": "Nicht Teil des Offenbarungsdatensatzes."
+      "notes": "Nicht Teil des Offenbarungsdatensatzes.",
+      "mainBiography": false
     },
     {
       "id": "nuh-grave-traditions",
       "title": "Grabtraditionen",
       "grading": "unverified",
-      "verificationStatus": "research"
+      "verificationStatus": "research",
+      "mainBiography": false
     }
   ],
   "worksIndex": [
@@ -3250,8 +3286,8 @@
       "number": "3340",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3340; reference={'book': 60, 'hadith': 15}",
-      "arabicOriginal": "حَدَّثَنِي إِسْحَاقُ بْنُ نَصْرٍ، حَدَّثَنَا مُحَمَّدُ بْنُ عُبَيْدٍ، حَدَّثَنَا أَبُو حَيَّانَ، عَنْ أَبِي زُرْعَةَ، عَنْ أَبِي هُرَيْرَةَ ـ رضى الله عنه ـ قَالَ كُنَّا مَعَ النَّبِيِّ صلى الله عليه وسلم فِي دَعْوَةٍ، فَرُفِعَ إِلَيْهِ الذِّرَاعُ، وَكَانَتْ تُعْجِبُهُ، فَنَهَسَ مِنْهَا نَهْسَةً وَقَالَ ‏ \"‏ أَنَا سَيِّدُ الْقَوْمِ يَوْمَ الْقِيَامَةِ، هَلْ تَدْرُونَ بِمَنْ يَجْمَعُ اللَّهُ الأَوَّلِينَ وَالآخِرِينَ فِي صَعِيدٍ وَاحِدٍ فَيُبْصِرُهُمُ النَّاظِرُ وَيُسْمِعُهُمُ الدَّاعِي، وَتَدْنُو مِنْهُمُ الشَّمْسُ، فَيَقُولُ بَعْضُ النَّاسِ أَلاَ تَرَوْنَ إِلَى مَا أَنْتُمْ فِيهِ، إِلَى مَا بَلَغَكُمْ، أَلاَ تَنْظُرُونَ إِلَى مَنْ يَشْفَعُ لَكُمْ إِلَى رَبِّكُمْ فَيَقُولُ بَعْضُ النَّاسِ أَبُوكُمْ آدَمُ، فَيَأْتُونَهُ فَيَقُولُونَ يَا آدَمُ أَنْتَ أَبُو الْبَشَرِ، خَلَقَكَ اللَّهُ بِيَدِهِ وَنَفَخَ فِيكَ مِنْ رُوحِهِ، وَأَمَرَ الْمَلاَئِكَةَ فَسَجَدُوا لَكَ، وَأَسْكَنَكَ الْجَنَّةَ، أَلاَ تَشْفَعُ لَنَا إِلَى رَبِّكَ أَلاَ تَرَى مَا نَحْنُ فِيهِ وَمَا بَلَغَنَا فَيَقُولُ رَبِّي غَضِبَ غَضَبًا لَمْ يَغْضَبْ قَبْلَهُ مِثْلَهُ، وَلاَ يَغْضَبُ بَعْدَهُ مِثْلَهُ، وَنَهَانِي عَنِ الشَّجَرَةِ فَعَصَيْتُهُ، نَفْسِي نَفْسِي، اذْهَبُوا إِلَى غَيْرِي، اذْهَبُوا إِلَى نُوحٍ‏.‏ فَيَأْتُونَ نُوحًا فَيَقُولُونَ يَا نُوحُ أَنْتَ أَوَّلُ الرُّسُلِ إِلَى أَهْلِ الأَرْضِ، وَسَمَّاكَ اللَّهُ عَبْدًا شَكُورًا، أَمَا تَرَى إِلَى مَا نَحْنُ فِيهِ أَلاَ تَرَى إِلَى مَا بَلَغَنَا أَلاَ تَشْفَعُ لَنَا إِلَى رَبِّكَ فَيَقُولُ رَبِّي غَضِبَ الْيَوْمَ غَضَبًا لَمْ يَغْضَبْ قَبْلَهُ مِثْلَهُ، وَلاَ يَغْضَبُ بَعْدَهُ مِثْلَهُ، نَفْسِي نَفْسِي، ائْتُوا النَّبِيَّ صلى الله عليه وسلم، فَيَأْتُونِي، فَأَسْجُدُ تَحْتَ الْعَرْشِ فَيُقَالُ يَا مُحَمَّدُ ارْفَعْ رَأْسَكَ وَاشْفَعْ تُشَفَّعْ، وَسَلْ تُعْطَهُ ‏\"‏‏.‏ قَالَ مُحَمَّدُ بْنُ عُبَيْدٍ لاَ أَحْفَظُ سَائِرَهُ‏.‏",
-      "translationDe": "Im langen Bericht über die große Fürsprache am Tag der Auferstehung wird Nūḥ als der erste Gesandte zu den Bewohnern der Erde genannt. Das bedeutet nicht, dass vor Nūḥ keinerlei Prophet existiert habe — Ādam عليه السلام war bereits Prophet.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Abū Hurayra",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -3274,7 +3310,13 @@
       "kitab": "Kitāb Aḥādīṯ al-Anbiyāʾ",
       "bab": "",
       "hadithNumber": "3340",
-      "englishAid": "Narrated Abu Huraira:We were in the company of the Prophet (ﷺ) at a banquet and a cooked (mutton) forearm was set before him, and he used to like it. He ate a morsel of it and said, \"I will be the chief of all the people on the Day of Resurrection. Do you know how Allah will gather all the first and the last (people) in one level place where an observer will be able to see (all) of them and they will be able to hear the announcer, and the sun will come near to them. Some People will say: Don't y"
+      "englishAid": "Narrated Abu Huraira:We were in the company of the Prophet (ﷺ) at a banquet and a cooked (mutton) forearm was set before him, and he used to like it. He ate a morsel of it and said, \"I will be the chief of all the people on the Day of Resurrection. Do you know how Allah will gather all the first and the last (people) in one level place where an observer will be able to see (all) of them and they will be able to hear the announcer, and the sun will come near to them. Some People will say: Don't y",
+      "hadithId": "bukhari-3340",
+      "hadithRef": {
+        "hadithId": "bukhari-3340",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "nuh-witness-bukhari-3339",
@@ -3290,8 +3332,8 @@
       "number": "3339",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3339; reference={'book': 60, 'hadith': 14}",
-      "arabicOriginal": "حَدَّثَنَا مُوسَى بْنُ إِسْمَاعِيلَ، حَدَّثَنَا عَبْدُ الْوَاحِدِ بْنُ زِيَادٍ، حَدَّثَنَا الأَعْمَشُ، عَنْ أَبِي صَالِحٍ، عَنْ أَبِي سَعِيدٍ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ يَجِيءُ نُوحٌ وَأُمَّتُهُ فَيَقُولُ اللَّهُ تَعَالَى هَلْ بَلَّغْتَ فَيَقُولُ نَعَمْ، أَىْ رَبِّ‏.‏ فَيَقُولُ لأُمَّتِهِ هَلْ بَلَّغَكُمْ فَيَقُولُونَ لاَ، مَا جَاءَنَا مِنْ نَبِيٍّ‏.‏ فَيَقُولُ لِنُوحٍ مَنْ يَشْهَدُ لَكَ فَيَقُولُ مُحَمَّدٌ صلى الله عليه وسلم وَأُمَّتُهُ، فَنَشْهَدُ أَنَّهُ قَدْ بَلَّغَ، وَهْوَ قَوْلُهُ جَلَّ ذِكْرُهُ ‏{‏وَكَذَلِكَ جَعَلْنَاكُمْ أُمَّةً وَسَطًا لِتَكُونُوا شُهَدَاءَ عَلَى النَّاسِ‏}‏ وَالْوَسَطُ الْعَدْلُ ‏\"‏‏.‏",
-      "translationDe": "Der Gesandte Allahs ﷺ sagte sinngemäß: Nūḥ und seine Ummah kommen; Allah fragt, ob er übermittelt habe; er sagt ja; sein Volk leugnet; er nennt Muḥammad ﷺ und seine Ummah als Zeugen; und sie bezeugen, dass er übermittelt hat.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Abū Saʿīd al-Khudrī",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -3314,7 +3356,13 @@
       "kitab": "Kitāb Aḥādīṯ al-Anbiyāʾ",
       "bab": "",
       "hadithNumber": "3339",
-      "englishAid": "Narrated Abu Sa`id:Allah's Messenger (ﷺ) said, \"Noah and his nation will come (on the Day of Resurrection and Allah will ask (Noah), \"Did you convey (the Message)?' He will reply, 'Yes, O my Lord!' Then Allah will ask Noah's nation, 'Did Noah convey My Message to you?' They will reply, 'No, no prophet came to us.' Then Allah will ask Noah, 'Who will stand a witness for you?' He will reply, 'Muhammad and his followers (will stand witness for me).' So, I and my followers will stand as witnesses fo"
+      "englishAid": "Narrated Abu Sa`id:Allah's Messenger (ﷺ) said, \"Noah and his nation will come (on the Day of Resurrection and Allah will ask (Noah), \"Did you convey (the Message)?' He will reply, 'Yes, O my Lord!' Then Allah will ask Noah's nation, 'Did Noah convey My Message to you?' They will reply, 'No, no prophet came to us.' Then Allah will ask Noah, 'Who will stand a witness for you?' He will reply, 'Muhammad and his followers (will stand witness for me).' So, I and my followers will stand as witnesses fo",
+      "hadithId": "bukhari-3339",
+      "hadithRef": {
+        "hadithId": "bukhari-3339",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "nuh-dajjal-bukhari-3337",
@@ -3330,8 +3378,8 @@
       "number": "3337",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3337; reference={'book': 60, 'hadith': 12}",
-      "arabicOriginal": "حَدَّثَنَا عَبْدَانُ، أَخْبَرَنَا عَبْدُ اللَّهِ، عَنْ يُونُسَ، عَنِ الزُّهْرِيِّ، قَالَ سَالِمٌ وَقَالَ ابْنُ عُمَرَ ـ رضى الله عنهما قَامَ رَسُولُ اللَّهِ صلى الله عليه وسلم فِي النَّاسِ فَأَثْنَى عَلَى اللَّهِ بِمَا هُوَ أَهْلُهُ، ثُمَّ ذَكَرَ الدَّجَّالَ، فَقَالَ ‏ \"‏ إِنِّي لأُنْذِرُكُمُوهُ، وَمَا مِنْ نَبِيٍّ إِلاَّ أَنْذَرَهُ قَوْمَهُ، لَقَدْ أَنْذَرَ نُوحٌ قَوْمَهُ، وَلَكِنِّي أَقُولُ لَكُمْ فِيهِ قَوْلاً لَمْ يَقُلْهُ نَبِيٌّ لِقَوْمِهِ، تَعْلَمُونَ أَنَّهُ أَعْوَرُ، وَأَنَّ اللَّهَ لَيْسَ بِأَعْوَرَ ‏\"‏‏.‏",
-      "translationDe": "Der Gesandte Allahs ﷺ erwähnte den Daǧǧāl und sagte sinngemäß: Ich warne euch vor ihm; und es gab keinen Propheten, der nicht sein Volk vor ihm gewarnt hätte — gewiss hat Nūḥ sein Volk gewarnt. Doch ich sage euch etwas, was kein Prophet seinem Volk gesagt hat: ihr wisst, dass er einäugig ist, und dass Allah nicht einäugig ist.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "ʿAbdullāh ibn ʿUmar",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -3354,7 +3402,13 @@
       "kitab": "Kitāb Aḥādīṯ al-Anbiyāʾ",
       "bab": "",
       "hadithNumber": "3337",
-      "englishAid": "Narrated Ibn `Umar:Once Allah's Messenger (ﷺ) stood amongst the people, glorified and praised Allah as He deserved and then mentioned the Dajjal saying, \"I warn you against him (i.e. the Dajjal) and there was no prophet but warned his nation against him. No doubt, Noah warned his nation against him but I tell you about him something of which no prophet told his nation before me. You should know that he is one-eyed, and Allah is not one-eyed"
+      "englishAid": "Narrated Ibn `Umar:Once Allah's Messenger (ﷺ) stood amongst the people, glorified and praised Allah as He deserved and then mentioned the Dajjal saying, \"I warn you against him (i.e. the Dajjal) and there was no prophet but warned his nation against him. No doubt, Noah warned his nation against him but I tell you about him something of which no prophet told his nation before me. You should know that he is one-eyed, and Allah is not one-eyed",
+      "hadithId": "bukhari-3337",
+      "hadithRef": {
+        "hadithId": "bukhari-3337",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "nuh-qref-7-59",
@@ -8127,6 +8181,10 @@
     "notes": [
       "29:14 = Verbleib unter dem Volk, nicht automatisches Gesamtalter.",
       "Daǧǧāl: Buḫārī 3337 nennt Nūḥ ausdrücklich."
-    ]
-  }
+    ],
+    "phase07": true,
+    "schemaVersion": 4,
+    "updatedAt": "2026-08-08T09:25:18.000Z"
+  },
+  "schemaVersion": 4
 }

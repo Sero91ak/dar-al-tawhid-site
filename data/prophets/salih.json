@@ -17,7 +17,15 @@
     "Nāqa",
     "Kamelstute",
     "al-Ḥiǧr",
-    "Hijr"
+    "Hijr",
+    "identity",
+    "people",
+    "mission",
+    "prophethood",
+    "sign",
+    "sin",
+    "sunnah",
+    "quran-index"
   ],
   "prophetStatus": "quran_explicit",
   "roles": [
@@ -38,7 +46,27 @@
     ],
     "people": "Thamūd",
     "relationToPeople": "their brother / member of their people",
-    "biologicalSiblingClaim": false
+    "biologicalSiblingClaim": false,
+    "nameDe": "Ṣāliḥ",
+    "honorific": "عليه السلام",
+    "quranNamed": true,
+    "nabī": {
+      "value": true,
+      "claimIds": [
+        "salih-hijr-bukhari-3378",
+        "salih-hijr-bukhari-3379",
+        "salih-people-thamud",
+        "salih-rasul"
+      ]
+    },
+    "rasūl": {
+      "value": true,
+      "claimIds": [
+        "salih-people-thamud",
+        "salih-rasul"
+      ]
+    },
+    "nameAttributionType": "explicit_name"
   },
   "overviewFields": [
     {
@@ -1217,7 +1245,8 @@
       "id": "salih-naqa-legends",
       "title": "Ausschmückungen der Kamelstute",
       "grading": "israiliyyat",
-      "verificationStatus": "research"
+      "verificationStatus": "research",
+      "mainBiography": false
     },
     {
       "id": "salih-killer-name",
@@ -1229,7 +1258,8 @@
       "id": "salih-modern-shrine",
       "title": "Moderne Grabschreine",
       "grading": "unverified",
-      "verificationStatus": "research"
+      "verificationStatus": "research",
+      "mainBiography": false
     }
   ],
   "worksIndex": [
@@ -1800,8 +1830,8 @@
       "number": "3378",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3378; reference={'book': 60, 'hadith': 52}",
-      "arabicOriginal": "حَدَّثَنَا مُحَمَّدُ بْنُ مِسْكِينٍ أَبُو الْحَسَنِ، حَدَّثَنَا يَحْيَى بْنُ حَسَّانَ بْنِ حَيَّانَ أَبُو زَكَرِيَّاءَ، حَدَّثَنَا سُلَيْمَانُ، عَنْ عَبْدِ اللَّهِ بْنِ دِينَارٍ، عَنِ ابْنِ عُمَرَ ـ رضى الله عنهما أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم لَمَّا نَزَلَ الْحِجْرَ فِي غَزْوَةِ تَبُوكَ أَمَرَهُمْ أَنْ لاَ يَشْرَبُوا مِنْ بِئْرِهَا، وَلاَ يَسْتَقُوا مِنْهَا فَقَالُوا قَدْ عَجَنَّا مِنْهَا، وَاسْتَقَيْنَا‏.‏ فَأَمَرَهُمْ أَنْ يَطْرَحُوا ذَلِكَ الْعَجِينَ وَيُهَرِيقُوا ذَلِكَ الْمَاءَ‏.‏ وَيُرْوَى عَنْ سَبْرَةَ بْنِ مَعْبَدٍ وَأَبِي الشُّمُوسِ أَنَّ النَّبِيَّ صلى الله عليه وسلم أَمَرَ بِإِلْقَاءِ الطَّعَامِ‏.‏ وَقَالَ أَبُو ذَرٍّ عَنِ النَّبِيَّ صلى الله عليه وسلم ‏ \"‏ مَنِ اعْتَجَنَ بِمَائِهِ ‏\"‏‏.‏",
-      "translationDe": "Als der Gesandte Allahs ﷺ bei al-Ḥiǧr während des Feldzugs nach Tabūk Halt machte, befahl er ihnen, nicht aus ihrem Brunnen zu trinken und kein Wasser daraus zu schöpfen. Sie sagten, sie hätten bereits Teig damit geknetet und Wasser geschöpft. Da befahl er, diesen Teig wegzwerfen und jenes Wasser auszuschütten.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "ʿAbdullāh ibn ʿUmar",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -1824,7 +1854,13 @@
       "kitab": "Kitāb Aḥādīṯ al-Anbiyāʾ",
       "bab": "",
       "hadithNumber": "3378",
-      "englishAid": "Narrated Ibn `Umar:When Allah's Messenger (ﷺ) landed at Al-Hijr during the Ghazwa of Tabuk, he ordered his companions not to drink water from its well or reserve water from it. They said, \"We have already kneaded the dough with its water. and also filled our bags with its water.'' On that, the Prophet (ﷺ) ordered them to throw away the dough and pour out the water"
+      "englishAid": "Narrated Ibn `Umar:When Allah's Messenger (ﷺ) landed at Al-Hijr during the Ghazwa of Tabuk, he ordered his companions not to drink water from its well or reserve water from it. They said, \"We have already kneaded the dough with its water. and also filled our bags with its water.'' On that, the Prophet (ﷺ) ordered them to throw away the dough and pour out the water",
+      "hadithId": "bukhari-3378",
+      "hadithRef": {
+        "hadithId": "bukhari-3378",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "salih-hijr-bukhari-3379",
@@ -1840,8 +1876,8 @@
       "number": "3379",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3379; reference={'book': 60, 'hadith': 53}",
-      "arabicOriginal": "حَدَّثَنَا إِبْرَاهِيمُ بْنُ الْمُنْذِرِ، حَدَّثَنَا أَنَسُ بْنُ عِيَاضٍ، عَنْ عُبَيْدِ اللَّهِ، عَنْ نَافِعٍ، أَنَّ عَبْدَ اللَّهِ بْنَ عُمَرَ ـ رضى الله عنهما ـ أَخْبَرَهُ أَنَّ النَّاسَ نَزَلُوا مَعَ رَسُولِ اللَّهِ صلى الله عليه وسلم أَرْضَ ثَمُودَ الْحِجْرَ، فَاسْتَقَوْا مِنْ بِئْرِهَا، وَاعْتَجَنُوا بِهِ، فَأَمَرَهُمْ رَسُولُ اللَّهِ صلى الله عليه وسلم أَنْ يُهَرِيقُوا مَا اسْتَقَوْا مِنْ بِئْرِهَا، وَأَنْ يَعْلِفُوا الإِبِلَ الْعَجِينَ، وَأَمَرَهُمْ أَنْ يَسْتَقُوا مِنَ الْبِئْرِ الَّتِي كَانَ تَرِدُهَا النَّاقَةُ‏.‏ تَابَعَهُ أُسَامَةُ عَنْ نَافِعٍ‏.‏",
-      "translationDe": "Die Leute hielten mit dem Gesandten Allahs ﷺ im Land Thamūd — al-Ḥiǧr — und schöpften aus ihrem Brunnen und kneteten damit. Der Gesandte Allahs ﷺ befahl ihnen, das geschöpfte Wasser auszuschütten und den Teig den Kamelen zu füttern, und befahl ihnen, aus dem Brunnen zu schöpfen, aus dem die Kamelstute Ṣāliḥs getrunken hatte.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "ʿAbdullāh ibn ʿUmar",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -1864,7 +1900,13 @@
       "kitab": "Kitāb Aḥādīṯ al-Anbiyāʾ",
       "bab": "",
       "hadithNumber": "3379",
-      "englishAid": "Narrated `Abdullah bin `Umar:The people landed at the land of Thamud called Al-Hijr along with Allah's Messenger (ﷺ) and they took water from its well for drinking and kneading the dough with it as well. (When Allah's Messenger (ﷺ) heard about it) he ordered them to pour out the water they had taken from its wells and feed the camels with the dough, and ordered them to take water from the well whence the she-camel (of Prophet Salih) used to drink"
+      "englishAid": "Narrated `Abdullah bin `Umar:The people landed at the land of Thamud called Al-Hijr along with Allah's Messenger (ﷺ) and they took water from its well for drinking and kneading the dough with it as well. (When Allah's Messenger (ﷺ) heard about it) he ordered them to pour out the water they had taken from its wells and feed the camels with the dough, and ordered them to take water from the well whence the she-camel (of Prophet Salih) used to drink",
+      "hadithId": "bukhari-3379",
+      "hadithRef": {
+        "hadithId": "bukhari-3379",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "salih-father-research",
@@ -4367,6 +4409,10 @@
     },
     "notes": [
       "Strafe: Qurʾān-Bezeichnungen exakt belassen — keine naturwissenschaftliche Ersatztheorie."
-    ]
-  }
+    ],
+    "phase07": true,
+    "schemaVersion": 4,
+    "updatedAt": "2026-08-08T09:25:18.000Z"
+  },
+  "schemaVersion": 4
 }

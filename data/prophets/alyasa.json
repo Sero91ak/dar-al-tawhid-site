@@ -13,7 +13,10 @@
     "al-Yasaʿ",
     "Alyasa",
     "اليسع",
-    "Elisha"
+    "Elisha",
+    "identity",
+    "prophethood",
+    "character"
   ],
   "prophetStatus": "quran_explicit",
   "roles": [
@@ -29,7 +32,21 @@
     "nameAr": "اليسع",
     "roles": [
       "nabī"
-    ]
+    ],
+    "nameDe": "Al-Yasaʿ",
+    "honorific": "عليه السلام",
+    "quranNamed": true,
+    "nabī": {
+      "value": true,
+      "claimIds": [
+        "alyasa-nabi-6-86-89"
+      ]
+    },
+    "rasūl": {
+      "value": false,
+      "claimIds": []
+    },
+    "nameAttributionType": "explicit_name"
   },
   "overviewFields": [
     {
@@ -177,7 +194,8 @@
       "id": "alyasa-disciple-ilyas",
       "title": "Schüler/Nachfolger Ilyās'",
       "grading": "unverified",
-      "verificationStatus": "research"
+      "verificationStatus": "research",
+      "mainBiography": false
     },
     {
       "id": "alyasa-elisha-as-quran",
@@ -189,13 +207,15 @@
       "id": "alyasa-invented-bio",
       "title": "Spätere Lebensgeschichten",
       "grading": "israiliyyat_or_unverified",
-      "verificationStatus": "research"
+      "verificationStatus": "research",
+      "mainBiography": false
     },
     {
       "id": "alyasa-grave",
       "title": "Grabtradition",
       "grading": "unverified",
-      "verificationStatus": "research"
+      "verificationStatus": "research",
+      "mainBiography": false
     }
   ],
   "worksIndex": [
@@ -865,6 +885,10 @@
     },
     "notes": [
       "Sehr kompakt — geringe sichere Quellenmenge bewusst nicht aufgefüllt."
-    ]
-  }
+    ],
+    "phase07": true,
+    "schemaVersion": 4,
+    "updatedAt": "2026-08-08T09:25:18.000Z"
+  },
+  "schemaVersion": 4
 }

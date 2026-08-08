@@ -15,7 +15,15 @@
     "ʿĀd",
     "Ad",
     "Aḥqāf",
-    "Ahqaf"
+    "Ahqaf",
+    "identity",
+    "people",
+    "mission",
+    "prophethood",
+    "character",
+    "region",
+    "punishment",
+    "quran-index"
   ],
   "prophetStatus": "quran_explicit",
   "roles": [
@@ -37,7 +45,25 @@
     ],
     "people": "ʿĀd",
     "relationToPeople": "their brother / member of their people",
-    "biologicalSiblingClaim": false
+    "biologicalSiblingClaim": false,
+    "nameDe": "Hūd",
+    "honorific": "عليه السلام",
+    "quranNamed": true,
+    "nabī": {
+      "value": true,
+      "claimIds": [
+        "hud-people-ad",
+        "hud-rasul"
+      ]
+    },
+    "rasūl": {
+      "value": true,
+      "claimIds": [
+        "hud-people-ad",
+        "hud-rasul"
+      ]
+    },
+    "nameAttributionType": "explicit_name"
   },
   "overviewFields": [
     {
@@ -1028,13 +1054,15 @@
       "title": "Qiṣaṣ-al-Anbiyāʾ-Details",
       "grading": "unverified",
       "verificationStatus": "research",
-      "notes": "Keine populären Biografiedetails ohne Primärbeleg."
+      "notes": "Keine populären Biografiedetails ohne Primärbeleg.",
+      "mainBiography": false
     },
     {
       "id": "hud-modern-grave",
       "title": "Modernes Grab Hūds",
       "grading": "unverified",
-      "verificationStatus": "research"
+      "verificationStatus": "research",
+      "mainBiography": false
     }
   ],
   "worksIndex": [
@@ -3841,6 +3869,10 @@
     "notes": [
       "Sunnah-Suche: keine zusätzlichen Buḫārī/Muslim-Pflichtberichte in diesem Auftrag freigegeben außer Qurʾān-Kern.",
       "Keine Qiṣaṣ-Ausschmückung."
-    ]
-  }
+    ],
+    "phase07": true,
+    "schemaVersion": 4,
+    "updatedAt": "2026-08-08T09:25:18.000Z"
+  },
+  "schemaVersion": 4
 }

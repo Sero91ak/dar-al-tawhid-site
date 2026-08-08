@@ -18,7 +18,18 @@
     "Sabaʾ",
     "Jinn",
     "Wind",
-    "Ameise"
+    "Ameise",
+    "identity",
+    "prophethood",
+    "family",
+    "aqidah",
+    "knowledge",
+    "miracle",
+    "quran",
+    "statements",
+    "death",
+    "dua",
+    "sunnah"
   ],
   "prophetStatus": "quran_explicit",
   "roles": [
@@ -35,7 +46,23 @@
     "roles": [
       "nabī"
     ],
-    "father": "Dāwūd"
+    "father": "Dāwūd",
+    "nameDe": "Sulaymān",
+    "honorific": "عليه السلام",
+    "quranNamed": true,
+    "nabī": {
+      "value": true,
+      "claimIds": [
+        "sulayman-ifrit-dua-bukhari-3423",
+        "sulayman-nabi-6-84-89",
+        "sulayman-nabi-bukhari-7469"
+      ]
+    },
+    "rasūl": {
+      "value": false,
+      "claimIds": []
+    },
+    "nameAttributionType": "explicit_name"
   },
   "overviewFields": [
     {
@@ -807,13 +834,15 @@
       "title": "Königin = Bilqīs",
       "grading": "unverified",
       "verificationStatus": "research",
-      "notes": "Nicht im Qurʾān."
+      "notes": "Nicht im Qurʾān.",
+      "mainBiography": false
     },
     {
       "id": "sulayman-asif-name",
       "title": "Āṣif ibn Barkhiyā",
       "grading": "unverified",
-      "verificationStatus": "research"
+      "verificationStatus": "research",
+      "mainBiography": false
     },
     {
       "id": "sulayman-horses-slaughter-as-fact",
@@ -825,7 +854,8 @@
       "id": "sulayman-throne-body-israiliyyat",
       "title": "Körper auf dem Thron — Isrāʾīliyyāt",
       "grading": "israiliyyat",
-      "verificationStatus": "research"
+      "verificationStatus": "research",
+      "mainBiography": false
     },
     {
       "id": "sulayman-wives-normalized-count",
@@ -838,7 +868,8 @@
       "id": "sulayman-grave-claim",
       "title": "Exaktes Grab",
       "grading": "unverified",
-      "verificationStatus": "research"
+      "verificationStatus": "research",
+      "mainBiography": false
     }
   ],
   "worksIndex": [
@@ -952,8 +983,8 @@
       "number": "7469",
       "numberAlt": "",
       "volumePage": "API hadithnumber=7469; arabicnumber=7469; reference={'book': 97, 'hadith': 95}",
-      "arabicOriginal": "حَدَّثَنَا مُعَلَّى بْنُ أَسَدٍ، حَدَّثَنَا وُهَيْبٌ، عَنْ أَيُّوبَ، عَنْ مُحَمَّدٍ، عَنْ أَبِي هُرَيْرَةَ، أَنَّ نَبِيَّ اللَّهِ سُلَيْمَانَ ـ عَلَيْهِ السَّلاَمُ ـ كَانَ لَهُ سِتُّونَ امْرَأَةً فَقَالَ لأَطُوفَنَّ اللَّيْلَةَ عَلَى نِسَائِي، فَلْتَحْمِلْنَ كُلُّ امْرَأَةٍ وَلْتَلِدْنَ فَارِسًا يُقَاتِلُ فِي سَبِيلِ اللَّهِ، فَطَافَ عَلَى نِسَائِهِ، فَمَا وَلَدَتْ مِنْهُنَّ إِلاَّ امْرَأَةٌ وَلَدَتْ شِقَّ غُلاَمٍ‏.‏ قَالَ نَبِيُّ اللَّهِ صلى الله عليه وسلم ‏ \"‏ لَوْ كَانَ سُلَيْمَانُ اسْتَثْنَى لَحَمَلَتْ كُلُّ امْرَأَةٍ مِنْهُنَّ، فَوَلَدَتْ فَارِسًا يُقَاتِلُ فِي سَبِيلِ اللَّهِ ‏\"‏‏.‏",
-      "translationDe": "Der Bericht nennt Sulaymān als Propheten Allahs (nabīyy Allāh Sulaymān).",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Abū Hurayrah رضي الله عنه",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -976,7 +1007,13 @@
       "kitab": "Kitāb at-Tawḥīd",
       "bab": "",
       "hadithNumber": "7469",
-      "englishAid": "Narrated Abu Huraira:Allah's Prophet Solomon who had sixty wives, once said, \"Tonight I will have sexual relation (sleep) with all my wives so that each of them will become pregnant and bring forth (a boy who will grow into) a cavalier and will fight in Allah's Cause.\" So he slept with his wives and none of them (conceived and) delivered (a child) except one who brought a half (body) boy (deformed). Allah's Prophet said, \"If Solomon had said; 'If Allah Will,' then each of those women would have "
+      "englishAid": "Narrated Abu Huraira:Allah's Prophet Solomon who had sixty wives, once said, \"Tonight I will have sexual relation (sleep) with all my wives so that each of them will become pregnant and bring forth (a boy who will grow into) a cavalier and will fight in Allah's Cause.\" So he slept with his wives and none of them (conceived and) delivered (a child) except one who brought a half (body) boy (deformed). Allah's Prophet said, \"If Solomon had said; 'If Allah Will,' then each of those women would have ",
+      "hadithId": "bukhari-7469",
+      "hadithRef": {
+        "hadithId": "bukhari-7469",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "sulayman-father-dawud-27-16",
@@ -1062,8 +1099,8 @@
       "number": "3424",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3424; arabicnumber=3424; reference={'book': 60, 'hadith': 96}",
-      "arabicOriginal": "حَدَّثَنَا خَالِدُ بْنُ مَخْلَدٍ، حَدَّثَنَا مُغِيرَةُ بْنُ عَبْدِ الرَّحْمَنِ، عَنْ أَبِي الزِّنَادِ، عَنِ الأَعْرَجِ، عَنْ أَبِي هُرَيْرَةَ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏\"‏ قَالَ سُلَيْمَانُ بْنُ دَاوُدَ لأَطُوفَنَّ اللَّيْلَةَ عَلَى سَبْعِينَ امْرَأَةً تَحْمِلُ كُلُّ امْرَأَةٍ فَارِسًا يُجَاهِدُ فِي سَبِيلِ اللَّهِ، فَقَالَ لَهُ صَاحِبُهُ إِنْ شَاءَ اللَّهُ‏.‏ فَلَمْ يَقُلْ، وَلَمْ تَحْمِلْ شَيْئًا إِلاَّ وَاحِدًا سَاقِطًا إِحْدَى شِقَّيْهِ ‏\"‏‏.‏ فَقَالَ النَّبِيُّ صلى الله عليه وسلم ‏\"‏ لَوْ قَالَهَا لَجَاهَدُوا فِي سَبِيلِ اللَّهِ ‏\"‏‏.‏ قَالَ شُعَيْبٌ وَابْنُ أَبِي الزِّنَادِ ‏\"‏ تِسْعِينَ ‏\"‏‏.‏ وَهْوَ أَصَحُّ‏.‏",
-      "translationDe": "Der Prophet ﷺ berichtet von Sulaymān ibn Dāwūd.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Abū Hurayrah رضي الله عنه",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -1086,7 +1123,13 @@
       "kitab": "Kitāb Aḥādīth al-Anbiyāʾ",
       "bab": "",
       "hadithNumber": "3424",
-      "englishAid": "Narrated Abu Huraira:The Prophet (ﷺ) said, \"Solomon (the son of) David said, 'Tonight I will sleep with seventy ladies each of whom will conceive a child who will be a knight fighting for \"Allah's Cause.' His companion said, 'If Allah will.' But Solomon did not say so; therefore none of those women got pregnant except one who gave birth to a half child.\" The Prophet (ﷺ) further said, \"If the Prophet Solomon (ﷺ) had said it (i.e. 'If Allah will') he would have begotten children who would have fou"
+      "englishAid": "Narrated Abu Huraira:The Prophet (ﷺ) said, \"Solomon (the son of) David said, 'Tonight I will sleep with seventy ladies each of whom will conceive a child who will be a knight fighting for \"Allah's Cause.' His companion said, 'If Allah will.' But Solomon did not say so; therefore none of those women got pregnant except one who gave birth to a half child.\" The Prophet (ﷺ) further said, \"If the Prophet Solomon (ﷺ) had said it (i.e. 'If Allah will') he would have begotten children who would have fou",
+      "hadithId": "bukhari-3424",
+      "hadithRef": {
+        "hadithId": "bukhari-3424",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "sulayman-not-kafir-2-102",
@@ -1910,8 +1953,8 @@
       "number": "3423",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3423; arabicnumber=3423; reference={'book': 60, 'hadith': 95}",
-      "arabicOriginal": "حَدَّثَنِي مُحَمَّدُ بْنُ بَشَّارٍ، حَدَّثَنَا مُحَمَّدُ بْنُ جَعْفَرٍ، حَدَّثَنَا شُعْبَةُ، عَنْ مُحَمَّدِ بْنِ زِيَادٍ، عَنْ أَبِي هُرَيْرَةَ، عَنِ النَّبِيِّ صلى الله عليه وسلم ‏ \"‏ إِنَّ عِفْرِيتًا مِنَ الْجِنِّ تَفَلَّتَ الْبَارِحَةَ لِيَقْطَعَ عَلَىَّ صَلاَتِي، فَأَمْكَنَنِي اللَّهُ مِنْهُ، فَأَخَذْتُهُ، فَأَرَدْتُ أَنْ أَرْبُطَهُ عَلَى سَارِيَةٍ مِنْ سَوَارِي الْمَسْجِدِ حَتَّى تَنْظُرُوا إِلَيْهِ كُلُّكُمْ فَذَكَرْتُ دَعْوَةَ أَخِي سُلَيْمَانَ رَبِّ هَبْ لِي مُلْكًا لاَ يَنْبَغِي لأَحَدٍ مِنْ بَعْدِي‏.‏ فَرَدَدْتُهُ خَاسِئًا ‏\"‏‏.‏ عِفْرِيتٌ مُتَمَرِّدٌ مِنْ إِنْسٍ أَوْ جَانٍّ، مِثْلُ زِبْنِيَةٍ جَمَاعَتُهَا الزَّبَانِيَةُ‏.‏",
-      "translationDe": "Ein ʿifrīt der Jinn wollte das Gebet stören; der Prophet ﷺ erinnerte sich an das Duʿāʾ seines Bruders Sulaymān um eine einzigartige Herrschaft und ließ ihn gehen.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Abū Hurayrah رضي الله عنه",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -1934,7 +1977,13 @@
       "kitab": "Kitāb Aḥādīth al-Anbiyāʾ",
       "bab": "",
       "hadithNumber": "3423",
-      "englishAid": "Narrated Abu Huraira:The Prophet (ﷺ) said, \"A strong demon from the Jinns came to me yesterday suddenly, so as to spoil my prayer, but Allah enabled me to overpower him, and so I caught him and intended to tie him to one of the pillars of the Mosque so that all of you might see him, but I remembered the invocation of my brother Solomon: 'And grant me a kingdom such as shall not belong to any other after me.' (38.35) so I let him go cursed"
+      "englishAid": "Narrated Abu Huraira:The Prophet (ﷺ) said, \"A strong demon from the Jinns came to me yesterday suddenly, so as to spoil my prayer, but Allah enabled me to overpower him, and so I caught him and intended to tie him to one of the pillars of the Mosque so that all of you might see him, but I remembered the invocation of my brother Solomon: 'And grant me a kingdom such as shall not belong to any other after me.' (38.35) so I let him go cursed",
+      "hadithId": "bukhari-3423",
+      "hadithRef": {
+        "hadithId": "bukhari-3423",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "sulayman-wives-bukhari-3424",
@@ -1950,8 +1999,8 @@
       "number": "3424",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3424; arabicnumber=3424; reference={'book': 60, 'hadith': 96}",
-      "arabicOriginal": "حَدَّثَنَا خَالِدُ بْنُ مَخْلَدٍ، حَدَّثَنَا مُغِيرَةُ بْنُ عَبْدِ الرَّحْمَنِ، عَنْ أَبِي الزِّنَادِ، عَنِ الأَعْرَجِ، عَنْ أَبِي هُرَيْرَةَ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏\"‏ قَالَ سُلَيْمَانُ بْنُ دَاوُدَ لأَطُوفَنَّ اللَّيْلَةَ عَلَى سَبْعِينَ امْرَأَةً تَحْمِلُ كُلُّ امْرَأَةٍ فَارِسًا يُجَاهِدُ فِي سَبِيلِ اللَّهِ، فَقَالَ لَهُ صَاحِبُهُ إِنْ شَاءَ اللَّهُ‏.‏ فَلَمْ يَقُلْ، وَلَمْ تَحْمِلْ شَيْئًا إِلاَّ وَاحِدًا سَاقِطًا إِحْدَى شِقَّيْهِ ‏\"‏‏.‏ فَقَالَ النَّبِيُّ صلى الله عليه وسلم ‏\"‏ لَوْ قَالَهَا لَجَاهَدُوا فِي سَبِيلِ اللَّهِ ‏\"‏‏.‏ قَالَ شُعَيْبٌ وَابْنُ أَبِي الزِّنَادِ ‏\"‏ تِسْعِينَ ‏\"‏‏.‏ وَهْوَ أَصَحُّ‏.‏",
-      "translationDe": "Eine Fassung nennt siebzig Frauen; im selben Kontext wird neunzig als andere/korrektere Fassung erwähnt. Kern: In-shāʾ-Allāh wurde nicht gesagt.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Abū Hurayrah رضي الله عنه",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -1987,7 +2036,13 @@
           "reportedCount": "90",
           "exactWordingNote": "تِسْعِينَ — laut Anmerkung أَصَحُّ"
         }
-      ]
+      ],
+      "hadithId": "bukhari-3424",
+      "hadithRef": {
+        "hadithId": "bukhari-3424",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "sulayman-wives-bukhari-7469",
@@ -2003,8 +2058,8 @@
       "number": "7469",
       "numberAlt": "",
       "volumePage": "API hadithnumber=7469; arabicnumber=7469; reference={'book': 97, 'hadith': 95}",
-      "arabicOriginal": "حَدَّثَنَا مُعَلَّى بْنُ أَسَدٍ، حَدَّثَنَا وُهَيْبٌ، عَنْ أَيُّوبَ، عَنْ مُحَمَّدٍ، عَنْ أَبِي هُرَيْرَةَ، أَنَّ نَبِيَّ اللَّهِ سُلَيْمَانَ ـ عَلَيْهِ السَّلاَمُ ـ كَانَ لَهُ سِتُّونَ امْرَأَةً فَقَالَ لأَطُوفَنَّ اللَّيْلَةَ عَلَى نِسَائِي، فَلْتَحْمِلْنَ كُلُّ امْرَأَةٍ وَلْتَلِدْنَ فَارِسًا يُقَاتِلُ فِي سَبِيلِ اللَّهِ، فَطَافَ عَلَى نِسَائِهِ، فَمَا وَلَدَتْ مِنْهُنَّ إِلاَّ امْرَأَةٌ وَلَدَتْ شِقَّ غُلاَمٍ‏.‏ قَالَ نَبِيُّ اللَّهِ صلى الله عليه وسلم ‏ \"‏ لَوْ كَانَ سُلَيْمَانُ اسْتَثْنَى لَحَمَلَتْ كُلُّ امْرَأَةٍ مِنْهُنَّ، فَوَلَدَتْ فَارِسًا يُقَاتِلُ فِي سَبِيلِ اللَّهِ ‏\"‏‏.‏",
-      "translationDe": "Fassung nennt sechzig Frauen; Kernaussage zum Auslassen von „in shāʾ Allāh“ bleibt.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Abū Hurayrah رضي الله عنه",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -2035,7 +2090,13 @@
           "reportedCount": "60",
           "exactWordingNote": "سِتُّونَ امْرَأَةً"
         }
-      ]
+      ],
+      "hadithId": "bukhari-7469",
+      "hadithRef": {
+        "hadithId": "bukhari-7469",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "sulayman-inshaallah-lesson-3424",
@@ -2051,8 +2112,8 @@
       "number": "3424",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3424; arabicnumber=3424; reference={'book': 60, 'hadith': 96}",
-      "arabicOriginal": "حَدَّثَنَا خَالِدُ بْنُ مَخْلَدٍ، حَدَّثَنَا مُغِيرَةُ بْنُ عَبْدِ الرَّحْمَنِ، عَنْ أَبِي الزِّنَادِ، عَنِ الأَعْرَجِ، عَنْ أَبِي هُرَيْرَةَ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏\"‏ قَالَ سُلَيْمَانُ بْنُ دَاوُدَ لأَطُوفَنَّ اللَّيْلَةَ عَلَى سَبْعِينَ امْرَأَةً تَحْمِلُ كُلُّ امْرَأَةٍ فَارِسًا يُجَاهِدُ فِي سَبِيلِ اللَّهِ، فَقَالَ لَهُ صَاحِبُهُ إِنْ شَاءَ اللَّهُ‏.‏ فَلَمْ يَقُلْ، وَلَمْ تَحْمِلْ شَيْئًا إِلاَّ وَاحِدًا سَاقِطًا إِحْدَى شِقَّيْهِ ‏\"‏‏.‏ فَقَالَ النَّبِيُّ صلى الله عليه وسلم ‏\"‏ لَوْ قَالَهَا لَجَاهَدُوا فِي سَبِيلِ اللَّهِ ‏\"‏‏.‏ قَالَ شُعَيْبٌ وَابْنُ أَبِي الزِّنَادِ ‏\"‏ تِسْعِينَ ‏\"‏‏.‏ وَهْوَ أَصَحُّ‏.‏",
-      "translationDe": "Die Zahlenvarianten sind von dieser Kernaussage getrennt zu behandeln.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Abū Hurayrah رضي الله عنه",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -2075,7 +2136,13 @@
       "kitab": "Kitāb Aḥādīth al-Anbiyāʾ",
       "bab": "",
       "hadithNumber": "3424",
-      "englishAid": "Narrated Abu Huraira:The Prophet (ﷺ) said, \"Solomon (the son of) David said, 'Tonight I will sleep with seventy ladies each of whom will conceive a child who will be a knight fighting for \"Allah's Cause.' His companion said, 'If Allah will.' But Solomon did not say so; therefore none of those women got pregnant except one who gave birth to a half child.\" The Prophet (ﷺ) further said, \"If the Prophet Solomon (ﷺ) had said it (i.e. 'If Allah will') he would have begotten children who would have fou"
+      "englishAid": "Narrated Abu Huraira:The Prophet (ﷺ) said, \"Solomon (the son of) David said, 'Tonight I will sleep with seventy ladies each of whom will conceive a child who will be a knight fighting for \"Allah's Cause.' His companion said, 'If Allah will.' But Solomon did not say so; therefore none of those women got pregnant except one who gave birth to a half child.\" The Prophet (ﷺ) further said, \"If the Prophet Solomon (ﷺ) had said it (i.e. 'If Allah will') he would have begotten children who would have fou",
+      "hadithId": "bukhari-3424",
+      "hadithRef": {
+        "hadithId": "bukhari-3424",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "sulayman-wife-names-research",
@@ -2377,6 +2444,13 @@
       "Umfangreich gemäß Quellenlage.",
       "Frauen-Zahlen: transmissionVariants — keine Harmonisierung.",
       "Königin/Āṣif nicht als Qurʾān-Namen freigegeben."
-    ]
-  }
+    ],
+    "phase07": true,
+    "schemaVersion": 4,
+    "updatedAt": "2026-08-08T09:25:18.000Z"
+  },
+  "relationIds": [
+    "dawud-sulayman"
+  ],
+  "schemaVersion": 4
 }

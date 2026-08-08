@@ -19,7 +19,18 @@
     "Masīḥ",
     "Injīl",
     "Aḥmad",
-    "Kreuzigung"
+    "Kreuzigung",
+    "identity",
+    "prophethood",
+    "family",
+    "aqidah",
+    "quran",
+    "statements",
+    "revelation",
+    "people",
+    "miracle",
+    "eschatology",
+    "sunnah"
   ],
   "prophetStatus": "quran_explicit",
   "roles": [
@@ -43,7 +54,32 @@
       "al-Masīḥ"
     ],
     "uluAlAzm": true,
-    "noPortrait": true
+    "noPortrait": true,
+    "nameDe": "ʿĪsā",
+    "honorific": "عليه السلام",
+    "quranNamed": true,
+    "nabī": {
+      "value": true,
+      "claimIds": [
+        "isa-abd-nabi-19-30",
+        "isa-ahmad-gladtidings-61-6",
+        "isa-banu-israel-3-49",
+        "isa-banu-israel-61-6",
+        "isa-infant-speech-19-29-33",
+        "isa-rasul-4-171"
+      ]
+    },
+    "rasūl": {
+      "value": true,
+      "claimIds": [
+        "isa-abd-nabi-19-30",
+        "isa-ahmad-gladtidings-61-6",
+        "isa-banu-israel-3-49",
+        "isa-banu-israel-61-6",
+        "isa-rasul-4-171"
+      ]
+    },
+    "nameAttributionType": "explicit_name"
   },
   "overviewFields": [
     {
@@ -1726,8 +1762,8 @@
       "number": "3448",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3448; arabicnumber=3448; reference={'book': 60, 'hadith': 118}",
-      "arabicOriginal": "حَدَّثَنَا إِسْحَاقُ، أَخْبَرَنَا يَعْقُوبُ بْنُ إِبْرَاهِيمَ، حَدَّثَنَا أَبِي، عَنْ صَالِحٍ، عَنِ ابْنِ شِهَابٍ، أَنَّ سَعِيدَ بْنَ الْمُسَيَّبِ، سَمِعَ أَبَا هُرَيْرَةَ ـ رضى الله عنه ـ قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ وَالَّذِي نَفْسِي بِيَدِهِ، لَيُوشِكَنَّ أَنْ يَنْزِلَ فِيكُمُ ابْنُ مَرْيَمَ حَكَمًا عَدْلاً، فَيَكْسِرَ الصَّلِيبَ، وَيَقْتُلَ الْخِنْزِيرَ، وَيَضَعَ الْجِزْيَةَ، وَيَفِيضَ الْمَالُ حَتَّى لاَ يَقْبَلَهُ أَحَدٌ، حَتَّى تَكُونَ السَّجْدَةُ الْوَاحِدَةُ خَيْرًا مِنَ الدُّنْيَا وَمَا فِيهَا ‏\"‏‏.‏ ثُمَّ يَقُولُ أَبُو هُرَيْرَةَ وَاقْرَءُوا إِنْ شِئْتُمْ ‏{‏وَإِنْ مِنْ أَهْلِ الْكِتَابِ إِلاَّ لَيُؤْمِنَنَّ بِهِ قَبْلَ مَوْتِهِ وَيَوْمَ الْقِيَامَةِ يَكُونُ عَلَيْهِمْ شَهِيدًا‏}‏‏.‏",
-      "translationDe": "Der Prophet ﷺ schwur, dass ibn Maryam bald als gerechter Richter herabkommen werde …",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Abū Hurayrah رضي الله عنه",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -1750,7 +1786,13 @@
       "kitab": "Kitāb Aḥādīth al-Anbiyāʾ",
       "bab": "",
       "hadithNumber": "3448",
-      "englishAid": "Narrated Abu Huraira:Allah's Messenger (ﷺ) said, \"By Him in Whose Hands my soul is, surely (Jesus,) the son of Mary will soon descend amongst you and will judge mankind justly (as a Just Ruler); he will break the Cross and kill the pigs and there will be no Jizya (i.e. taxation taken from non Muslims). Money will be in abundance so that nobody will accept it, and a single prostration to Allah (in prayer) will be better than the whole world and whatever is in it.\" Abu Huraira added \"If you wish, "
+      "englishAid": "Narrated Abu Huraira:Allah's Messenger (ﷺ) said, \"By Him in Whose Hands my soul is, surely (Jesus,) the son of Mary will soon descend amongst you and will judge mankind justly (as a Just Ruler); he will break the Cross and kill the pigs and there will be no Jizya (i.e. taxation taken from non Muslims). Money will be in abundance so that nobody will accept it, and a single prostration to Allah (in prayer) will be better than the whole world and whatever is in it.\" Abu Huraira added \"If you wish, ",
+      "hadithId": "bukhari-3448",
+      "hadithRef": {
+        "hadithId": "bukhari-3448",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "isa-return-muslim-155",
@@ -1766,8 +1808,8 @@
       "number": "155",
       "numberAlt": "155.01",
       "volumePage": "API hadithnumber=389; arabicnumber=155.01; reference={'book': 1, 'hadith': 294}",
-      "arabicOriginal": "حَدَّثَنَا قُتَيْبَةُ بْنُ سَعِيدٍ، حَدَّثَنَا لَيْثٌ، ح وَحَدَّثَنَا مُحَمَّدُ بْنُ رُمْحٍ، أَخْبَرَنَا اللَّيْثُ، عَنِ ابْنِ شِهَابٍ، عَنِ ابْنِ الْمُسَيَّبِ، أَنَّهُ سَمِعَ أَبَا هُرَيْرَةَ، يَقُولُ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ وَالَّذِي نَفْسِي بِيَدِهِ لَيُوشِكَنَّ أَنْ يَنْزِلَ فِيكُمُ ابْنُ مَرْيَمَ صلى الله عليه وسلم حَكَمًا مُقْسِطًا فَيَكْسِرَ الصَّلِيبَ وَيَقْتُلَ الْخِنْزِيرَ وَيَضَعَ الْجِزْيَةَ وَيَفِيضَ الْمَالُ حَتَّى لاَ يَقْبَلَهُ أَحَدٌ ‏\"‏ ‏.‏",
-      "translationDe": "Herabkunft ibn Maryams als gerechter Richter (u. a. Kreuz, Schwein, Jizyah).",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Abū Hurayrah رضي الله عنه",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -1790,7 +1832,13 @@
       "kitab": "Kitāb al-Īmān",
       "bab": "",
       "hadithNumber": "155",
-      "englishAid": "Abu Huraira reported that the Messenger of Allah (ﷺ) said:By Him in Whose hand is my life, the son of Mary (ﷺ) will soon descend among you as a just judge. He will break crosses, kill swine and abolish Jizya and the wealth will pour forth to such an extent that no one will accept it"
+      "englishAid": "Abu Huraira reported that the Messenger of Allah (ﷺ) said:By Him in Whose hand is my life, the son of Mary (ﷺ) will soon descend among you as a just judge. He will break crosses, kill swine and abolish Jizya and the wealth will pour forth to such an extent that no one will accept it",
+      "hadithId": "muslim-155",
+      "hadithRef": {
+        "hadithId": "muslim-155",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "isa-miraj-second-heaven-3430",
@@ -1806,8 +1854,8 @@
       "number": "3430",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3430; arabicnumber=3430; reference={'book': 60, 'hadith': 101}",
-      "arabicOriginal": "حَدَّثَنَا هُدْبَةُ بْنُ خَالِدٍ، حَدَّثَنَا هَمَّامُ بْنُ يَحْيَى، حَدَّثَنَا قَتَادَةُ، عَنْ أَنَسِ بْنِ مَالِكٍ، عَنْ مَالِكِ بْنِ صَعْصَعَةَ، أَنَّ نَبِيَّ اللَّهِ صلى الله عليه وسلم حَدَّثَهُمْ عَنْ لَيْلَةَ أُسْرِيَ ‏ \"‏ ثُمَّ صَعِدَ حَتَّى أَتَى السَّمَاءَ الثَّانِيَةَ فَاسْتَفْتَحَ، قِيلَ مَنْ هَذَا قَالَ جِبْرِيلُ‏.‏ قِيلَ وَمَنْ مَعَكَ قَالَ مُحَمَّدٌ‏.‏ قِيلَ وَقَدْ أُرْسِلَ إِلَيْهِ قَالَ نَعَمْ‏.‏ فَلَمَّا خَلَصْتُ، فَإِذَا يَحْيَى وَعِيسَى وَهُمَا ابْنَا خَالَةٍ‏.‏ قَالَ هَذَا يَحْيَى وَعِيسَى فَسَلِّمْ عَلَيْهِمَا‏.‏ فَسَلَّمْتُ فَرَدَّا ثُمَّ قَالاَ مَرْحَبًا بِالأَخِ الصَّالِحِ وَالنَّبِيِّ الصَّالِحِ ‏\"‏‏.‏",
-      "translationDe": "Begegnung mit Yaḥyā und ʿĪsā im zweiten Himmel.",
+      "arabicOriginal": "",
+      "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Mālik ibn Ṣaʿṣaʿa / Anas",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -1832,7 +1880,13 @@
       "hadithNumber": "3430",
       "englishAid": "Narrated Malik bin Sasaa:That the Prophet (ﷺ) talked to them about the night of his Ascension to the Heavens. He said, \"(Then Gabriel took me) and ascended up till he reached the second heaven where he asked for the gate to be opened, but it was asked, 'Who is it?' Gabriel replied, 'I am Gabriel.' It was asked, 'Who is accompanying you?' He replied, 'Muhammad.' It was asked, 'Has he been called?' He said, 'Yes.' When we reached over the second heaven, I saw Yahya (i.e. John) and Jesus who were c",
       "heaven": "second",
-      "familyCorrelation": "ibnā khāla"
+      "familyCorrelation": "ibnā khāla",
+      "hadithId": "bukhari-3430",
+      "hadithRef": {
+        "hadithId": "bukhari-3430",
+        "relation": "direct_report"
+      },
+      "_matnInCanonicalHadith": true
     },
     {
       "id": "isa-no-portrait",
@@ -2060,6 +2114,10 @@
       "Wunder immer mit byPermissionOfAllah.",
       "Rückkehr ≠ neues Prophetentum nach Muḥammad ﷺ.",
       "Keine Prophetendarstellung."
-    ]
-  }
+    ],
+    "phase07": true,
+    "schemaVersion": 4,
+    "updatedAt": "2026-08-08T09:25:18.000Z"
+  },
+  "schemaVersion": 4
 }
