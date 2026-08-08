@@ -82,6 +82,22 @@
   ],
   "unlockedScopes": [
     {
+      "id": "musa-reference-profile-phase2-v602-2026-08-08",
+      "approvedBy": "user-phase2-musa-referenzprofil",
+      "note": "Phase 2: Mūsā vollständig als Referenzprofil (Test); production bleibt disabled",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/assets/prophets/",
+        "test/data/prophets/",
+        "assets/prophets/",
+        "data/prophets/",
+        "index.html"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "prophets-zero-trust-audit-v601-2026-08-07",
       "approvedBy": "user-verbindlicher-datenauftrag-propheten-zero-trust",
       "note": "Zero-Trust Datenaudit Propheten: production=disabled, Test-Befüllung, Besucher-Gate; keine Live-Content-Freigabe",

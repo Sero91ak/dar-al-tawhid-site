@@ -252,6 +252,7 @@
       p.people,
       p.region,
       (p.nameVariants || []).join(" "),
+      (p.searchTerms || []).join(" "),
       (p.roles || []).join(" "),
       p.note || ""
     ]
@@ -709,7 +710,7 @@
     var claims = approvedOnly(profile.claims || []);
     var works = (profile.worksIndex || [])
       .map(function (w) {
-        var n = countApproved(profile, w.countFrom);
+        var n = typeof w.approvedCount === "number" ? w.approvedCount : countApproved(profile, w.countFrom);
         if (!n && w.id !== "quran") return "";
         return (
           '<button type="button" class="prophets-work" data-prophets-work="' +
