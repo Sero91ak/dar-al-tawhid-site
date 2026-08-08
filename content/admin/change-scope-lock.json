@@ -2755,6 +2755,22 @@
         "scripts/prophets-phase07-production-guard.js"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-phase08-usable-ui-v610-2026-08-08",
+      "approvedBy": "user-task-phase-08-usable-ui",
+      "note": "Phase 08: Prophetenbereich in Test-App vollständig nutzbar (Suche, Filter, Tabs, Quellen, Offline-Hinweise) — keine neuen Fakten; production=disabled",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "data/prophets/",
+        "test/assets/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "scripts/prophets_phase08_search_index.py",
+        "scripts/prophets-phase08-qa.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

@@ -2,8 +2,8 @@
    Noble Duʿāʾ-catalog optics · theme tokens · illumination */
 
 .prophets-root{
-  --prophets-rail-min:240px;
-  --prophets-rail-max:360px;
+  --prophets-rail-min:320px;
+  --prophets-rail-max:380px;
   --prophets-rail-pct:34%;
   --prophets-read-max:46rem;
   --p-line:color-mix(in srgb,var(--gold2) 22%,var(--line2,var(--line)));
@@ -135,7 +135,12 @@ button.prophets-spotlight.more-feature-row::after,
 }
 .prophets-rail,.prophets-pane{min-width:0}
 .prophets-rail{padding:0 0 20px}
-.prophets-pane{padding:0 0 32px}
+.prophets-pane{
+  padding:0 0 calc(32px + var(--bottom-nav-height, 64px) + env(safe-area-inset-bottom, 0px));
+}
+.prophets-detail{
+  max-width:var(--prophets-read-max);
+}
 
 @container prophets (min-width: 720px){
   .prophets-layout--dual{
@@ -160,7 +165,7 @@ button.prophets-spotlight.more-feature-row::after,
 }
 @supports not (container-type:inline-size){
   @media (min-width:720px){
-    .prophets-layout--dual{grid-template-columns:clamp(240px,34%,360px) minmax(0,1fr)}
+    .prophets-layout--dual{grid-template-columns:clamp(320px,34%,380px) minmax(0,1fr)}
     .prophets-rail{
       position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);
       max-height:calc(100dvh - 110px);overflow:auto;
@@ -564,3 +569,73 @@ body.is-propheten-route #appView > .view-head .view-desc{
   margin-top:4px!important;
   line-height:1.4!important;
 }
+
+/* —— Phase 08: hero, list Arabic, timeline rail, tree, last-read —— */
+.prophets-hero-title{
+  display:flex;flex-direction:column;gap:2px;margin:0 0 8px;
+}
+.prophets-hero-title__de{
+  font-family:var(--serif);font-size:1.05rem;font-weight:750;letter-spacing:.04em;
+  color:var(--cream,var(--text));
+}
+.prophets-hero-title__ar{
+  font-size:1.15rem;line-height:1.5;font-weight:650;color:color-mix(in srgb,var(--gold2) 55%,var(--text));
+}
+.prophets-row__ar{
+  display:block;margin-top:2px;font-size:1.05rem;line-height:1.45;font-weight:650;
+  color:color-mix(in srgb,var(--gold2) 48%,var(--text));
+  unicode-bidi:isolate;
+}
+.prophets-row__honor{display:block;margin-top:2px;margin-inline-start:0}
+.prophets-lastread{
+  display:grid;gap:2px;width:100%;text-align:left;cursor:pointer;
+  margin:0 0 10px;padding:12px 14px;border-radius:16px;
+  border:1px solid var(--p-line);background:var(--p-wash);color:inherit;font:inherit;
+}
+.prophets-lastread__kicker{
+  font-size:10px;font-weight:850;letter-spacing:.12em;text-transform:uppercase;
+  color:color-mix(in srgb,var(--gold2) 65%,var(--muted));
+}
+.prophets-lastread__title{font-family:var(--serif);font-size:15px;font-weight:750}
+.prophets-lastread__meta{font-size:12px;color:var(--muted);font-weight:650}
+.prophets-lastread__cta{font-size:11.5px;font-weight:800;color:color-mix(in srgb,var(--gold2) 70%,var(--text));margin-top:4px}
+.prophets-timeline--rail{
+  gap:0;padding-left:18px;
+  background:linear-gradient(180deg,
+    transparent 0,
+    color-mix(in srgb,var(--gold2) 35%,transparent) 8px,
+    color-mix(in srgb,var(--gold2) 35%,transparent) calc(100% - 8px),
+    transparent 100%) left 7px top / 1px 100% no-repeat;
+}
+.prophets-timeline--rail .prophets-station{
+  display:grid;grid-template-columns:14px minmax(0,1fr);gap:10px;align-items:start;
+  border:0;background:transparent;box-shadow:none;border-radius:0;padding:10px 0 14px;
+}
+.prophets-timeline--rail .prophets-station::before{display:none}
+.prophets-station__dot{
+  width:11px;height:11px;margin-top:5px;border-radius:50%;
+  border:1px solid color-mix(in srgb,var(--gold2) 55%,transparent);
+  background:color-mix(in srgb,var(--gold2) 22%,var(--card,transparent));
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--bg,transparent) 80%,transparent);
+}
+.prophets-station__body{min-width:0}
+.prophets-badge--soft{
+  text-transform:none;letter-spacing:.02em;font-weight:750;
+  color:var(--muted);border-color:color-mix(in srgb,var(--line2,var(--line)) 70%,transparent);
+  background:transparent;
+}
+.prophets-inline-link{
+  appearance:none;border:0;background:transparent;padding:0;margin:0;cursor:pointer;
+  color:color-mix(in srgb,var(--gold2) 70%,var(--text));font:inherit;font-weight:750;
+  text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;
+}
+.prophets-tree{margin:0 0 14px;padding:12px 14px;border:1px solid var(--p-line);border-radius:16px;background:var(--p-wash)}
+.prophets-tree h4{margin:0 0 8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.prophets-tree-line{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 8px;font-size:13.5px}
+.prophets-tree-rel{color:var(--muted);font-size:11px;font-weight:750}
+.prophets-research-fold{margin:12px 0 0;padding:10px 12px;border:1px solid var(--p-line);border-radius:14px}
+.prophets-research-fold > summary{cursor:pointer;font-weight:800;font-size:13px}
+.prophets-weak-list{margin:8px 0 0;padding-left:1.1rem;color:var(--muted);font-size:12.5px}
+.prophets-ikhtilaf article{margin:0 0 8px}
+.prophets-ikhtilaf h4{margin:0 0 4px;font-size:13px}
+.prophets-quote__ar{unicode-bidi:isolate}

@@ -14,9 +14,12 @@
   var DATA_BASE = dataBase();
   var DUAL_MIN = 720;
   var STATE_KEY = "dar_prophets_ui_v1";
+  var LAST_READ_KEY = "dar_prophets_last_read_v1";
   var indexCache = null;
+  var searchIndexCache = null;
   var profileCache = Object.create(null);
   var hadithCache = Object.create(null);
+  var relationCache = Object.create(null);
   var loadIndexPromise = null;
   var resizeBound = false;
   var lastWidthMode = "";
@@ -35,14 +38,18 @@
     { id: "sunnah", label: "Sunnah" },
     { id: "aussagen", label: "Aussagen" },
     { id: "familie", label: "Familie" },
+    { id: "ereignisse", label: "Ereignisse" },
     { id: "quellen", label: "Quellen" }
   ];
 
-  var FILTERS = [
-    { id: "all", label: "Alle" },
-    { id: "quran", label: "Qurʾān" },
-    { id: "ulu", label: "Ulū l-ʿAzm" },
-    { id: "disputed", label: "Umstritten" }
+  var FILTER_DEFS = [
+    { id: "all", label: "Alle", flag: "all" },
+    { id: "quran", label: "Qurʾān", flag: "quran" },
+    { id: "sunnah", label: "Sunnah", flag: "sunnah" },
+    { id: "ulu", label: "Ulū l-ʿAzm", flag: "ulu" },
+    { id: "banuIsrail", label: "Banū Isrāʾīl", flag: "banuIsrail" },
+    { id: "arabicMessenger", label: "Arabische Gesandte", flag: "arabicMessenger" },
+    { id: "further", label: "Weitere Personen", flag: "further" }
   ];
 
   function esc(s) {
@@ -101,19 +108,11 @@
       .join(" · ");
   }
 
-  var PROPHET_EMOJI = {
-    adam:"🌱", nuh:"🚢", hud:"🏜️", salih:"🐪", ibrahim:"🔥", lut:"🏙️",
-    ismail:"⛺", ishaq:"👶", yaqub:"👨‍👦", yusuf:"🌙", ayyub:"🤲",
-    shuayb:"⚖️", musa:"🌊", harun:"📜", dawud:"🗡️", sulayman:"👑",
-    ilyas:"⚡", alyasa:"🌿", yunus:"🐋", zakariyya:"🕌", yahya:"💧",
-    isa:"✨", muhammad:"🌟", "dhul-kifl":"📘", uzayr:"📖"
-  };
-
-  function prophetEmoji(id, p) {
-    if (PROPHET_EMOJI[id]) return PROPHET_EMOJI[id];
+  /* Keine Prophetenporträts/Figuren — nur dezente Geometrie. */
+  function prophetMark(id, p) {
     if (p && p.uluAlAzm) return "✦";
-    if (p && isDisputedStatus(p.prophetStatus)) return "❔";
-    return "🕊️";
+    if (p && isDisputedStatus(p.prophetStatus)) return "◇";
+    return "◆";
   }
 
   function isDisputedStatus(status) {
@@ -189,13 +188,83 @@
       })
       .then(function (data) {
         indexCache = data;
-        return data;
+        return loadSearchIndex().then(function () { return data; });
       })
       .catch(function (err) {
         loadIndexPromise = null;
         throw err;
       });
     return loadIndexPromise;
+  }
+
+  function loadSearchIndex() {
+    if (searchIndexCache) return Promise.resolve(searchIndexCache);
+    return fetch(DATA_BASE + "search-index.json", { cache: "no-store" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("search-index " + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        searchIndexCache = data;
+        return data;
+      })
+      .catch(function () {
+        searchIndexCache = { entries: [] };
+        return searchIndexCache;
+      });
+  }
+
+  function searchEntry(id) {
+    var entries = (searchIndexCache && searchIndexCache.entries) || [];
+    return entries.find(function (e) { return String(e.prophetId) === String(id); }) || null;
+  }
+
+  function loadRelation(id) {
+    var key = String(id || "");
+    if (!key) return Promise.resolve(null);
+    if (Object.prototype.hasOwnProperty.call(relationCache, key)) return Promise.resolve(relationCache[key]);
+    return fetch(DATA_BASE + "relations/" + encodeURIComponent(key) + ".json", { cache: "no-store" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("relation " + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        relationCache[key] = data;
+        return data;
+      })
+      .catch(function () {
+        relationCache[key] = null;
+        return null;
+      });
+  }
+
+  function readLastRead() {
+    try { return JSON.parse(localStorage.getItem(LAST_READ_KEY) || "null"); } catch (e) { return null; }
+  }
+
+  function writeLastRead(entry) {
+    try { localStorage.setItem(LAST_READ_KEY, JSON.stringify(entry || null)); } catch (e) {}
+  }
+
+  function isOnline() {
+    try { return navigator.onLine !== false; } catch (e) { return true; }
+  }
+
+  function openExternalSafe(url) {
+    if (!url) return;
+    if (!isOnline()) {
+      try { alert("Quelle online öffnen\n\nInternetverbindung erforderlich."); } catch (e) {}
+      return;
+    }
+    try {
+      var a = document.createElement("a");
+      a.href = url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.click();
+    } catch (e) {
+      try { window.open(url, "_blank", "noopener,noreferrer"); } catch (e2) {}
+    }
   }
 
   function profileFileFor(id) {
@@ -356,84 +425,136 @@
     );
   }
 
+  function normalizeQuery(q) {
+    return String(q || "")
+      .trim()
+      .toLowerCase()
+      .replace(/ā/g, "a")
+      .replace(/ī/g, "i")
+      .replace(/ū/g, "u")
+      .replace(/ʿ|ʾ|ʼ/g, "")
+      .replace(/ḥ/g, "h")
+      .replace(/ṣ/g, "s")
+      .replace(/ḍ/g, "d")
+      .replace(/ẓ/g, "z")
+      .replace(/ṭ/g, "t")
+      .replace(/ǧ|ğ/g, "g");
+  }
+
   function matchesQuery(p, q) {
     if (!q) return true;
-    var blob = [
-      p.name,
-      p.nameAr,
-      p.id,
-      p.people,
-      p.region,
-      (p.nameVariants || []).join(" "),
-      (p.searchTerms || []).join(" "),
-      (p.roles || []).join(" "),
-      p.note || ""
-    ]
-      .join(" ")
-      .toLowerCase();
-    return blob.indexOf(q) !== -1;
+    var nq = normalizeQuery(q);
+    var entry = searchEntry(p.id);
+    var blob = entry && entry.searchBlob
+      ? entry.searchBlob
+      : [p.name, p.nameAr, p.id, p.people, (p.searchTerms || []).join(" "), p.note || ""].join(" ");
+    var nb = normalizeQuery(blob);
+    if (nb.indexOf(nq) !== -1) return true;
+    // raw arabic / original also
+    return String(blob).toLowerCase().indexOf(String(q).trim().toLowerCase()) !== -1;
+  }
+
+  function isFurtherPerson(p) {
+    if (!p) return false;
+    if (p.furtherPerson || p.listSection === "further") return true;
+    if (String(p.id) === "dhul-kifl") return true;
+    if (isDisputedStatus(p.prophetStatus)) return true;
+    return false;
   }
 
   function filterProphets(index, filter, query) {
-    var q = String(query || "")
-      .trim()
-      .toLowerCase();
-    var established = (index.prophets || []).slice();
-    var disputed = (index.disputed || []).slice();
-    if (filter === "disputed") {
-      return { established: [], disputed: disputed.filter(function (p) {
-        return matchesQuery(p, q);
-      }), ulu: [] };
+    var q = String(query || "").trim();
+    var established = (index.prophets || []).filter(function (p) { return !isFurtherPerson(p); });
+    var further = (index.furtherPersons || []).slice();
+    if (!further.length) {
+      further = (index.prophets || [])
+        .filter(function (p) { return isFurtherPerson(p); })
+        .concat(index.disputed || []);
+      // dedupe
+      var seen = Object.create(null);
+      further = further.filter(function (p) {
+        if (seen[p.id]) return false;
+        seen[p.id] = 1;
+        return true;
+      });
+    }
+    if (filter === "further" || filter === "disputed") {
+      return {
+        established: [],
+        ulu: [],
+        further: further.filter(function (p) { return matchesQuery(p, q); })
+      };
     }
     var list = established.filter(function (p) {
-      if (filter === "ulu" && !p.uluAlAzm) return false;
+      if (filter === "ulu" && !(p.uluAlAzm || (p.classifications && p.classifications.uluAlAzm))) return false;
       if (filter === "quran" && p.prophetStatus !== "quran_explicit") return false;
+      if (filter === "sunnah" && !(p.hasSunnah || (p.classifications && p.classifications.hasSunnah))) return false;
+      if (filter === "banuIsrail" && !(p.banuIsrail || (p.classifications && p.classifications.banuIsrail))) return false;
+      if (filter === "arabicMessenger" && !(p.arabicMessenger || (p.classifications && p.classifications.arabicMessenger))) return false;
       return matchesQuery(p, q);
     });
-    var ulu = list.filter(function (p) {
-      return p.uluAlAzm;
-    });
-    var rest = list.filter(function (p) {
-      return !p.uluAlAzm;
-    });
-    var disp =
-      filter === "all" || filter === "quran"
-        ? disputed.filter(function (p) {
-            return matchesQuery(p, q);
-          })
-        : [];
-    return { established: rest, disputed: disp, ulu: ulu };
+    var ulu = list.filter(function (p) { return p.uluAlAzm; });
+    var rest = list.filter(function (p) { return !p.uluAlAzm; });
+    var showFurther = filter === "all";
+    return {
+      established: rest,
+      ulu: ulu,
+      further: showFurther ? further.filter(function (p) { return matchesQuery(p, q); }) : []
+    };
   }
 
   function renderRow(p, activeId) {
     var active = String(p.id) === String(activeId);
     var roles = isDisputedStatus(p.prophetStatus) ? "" : rolesLabel(p.roles);
     var meta = [roles, p.people].filter(Boolean).join(" · ");
-    var tags = p.uluAlAzm
-      ? "Ulū l-ʿAzm"
-      : isDisputedStatus(p.prophetStatus)
-        ? "Umstritten"
-        : "Qurʾān";
-    var emoji = prophetEmoji(p.id, p);
+    var mark = prophetMark(p.id, p);
     return (
       '<button type="button" class="prophets-row' +
       (active ? " is-active" : "") +
       '" data-prophet-id="' +
       esc(p.id) +
       '">' +
-      '<span class="prophets-row__icon" aria-hidden="true">' + emoji + "</span>" +
+      '<span class="prophets-row__icon" aria-hidden="true">' + mark + "</span>" +
       '<span class="prophets-row__body">' +
-      '<span class="prophets-row__name">' +
-      esc(p.name) +
-      ' <span class="prophets-row__honor">' +
-      esc(p.honorific || "") +
-      "</span></span>" +
+      '<span class="prophets-row__name">' + esc(p.name) + "</span>" +
+      (p.nameAr
+        ? '<span class="prophets-row__ar" lang="ar" dir="rtl">' + esc(p.nameAr) + "</span>"
+        : "") +
+      (p.honorific ? '<span class="prophets-row__honor">' + esc(p.honorific) + "</span>" : "") +
       (meta ? '<span class="prophets-row__meta">' + esc(meta) + "</span>" : "") +
-      '<span class="prophets-row__tags">' +
-      esc(tags) +
-      "</span>" +
       "</span>" +
       '<span class="prophets-row__chev" aria-hidden="true">›</span>' +
+      "</button>"
+    );
+  }
+
+  function availableFilters(index) {
+    var flags = (index && index.availableFilters) || {};
+    return FILTER_DEFS.filter(function (f) {
+      if (f.id === "all" || f.id === "quran" || f.id === "further") return true;
+      return !!flags[f.flag];
+    });
+  }
+
+  function renderLastReadCard() {
+    var lr = readLastRead();
+    if (!lr || !lr.prophetId) return "";
+    return (
+      '<button type="button" class="prophets-lastread" data-prophets-continue="' +
+      esc(lr.prophetId) +
+      '" data-prophets-continue-tab="' +
+      esc(lr.tab || "overview") +
+      '">' +
+      '<span class="prophets-lastread__kicker">Zuletzt gelesen</span>' +
+      '<span class="prophets-lastread__title">' +
+      esc(lr.name || lr.prophetId) +
+      (lr.honorific ? " " + esc(lr.honorific) : "") +
+      "</span>" +
+      '<span class="prophets-lastread__meta">' +
+      esc(lr.tabLabel || lr.tab || "Übersicht") +
+      (lr.snippet ? " · " + esc(lr.snippet) : "") +
+      "</span>" +
+      '<span class="prophets-lastread__cta">Weiterlesen</span>' +
       "</button>"
     );
   }
@@ -442,17 +563,19 @@
     var filter = state.filter || "all";
     var query = state.query || "";
     var packs = filterProphets(index, filter, query);
-    var filtersHtml = FILTERS.map(function (f) {
-      return (
-        '<button type="button" class="prophets-filter' +
-        (filter === f.id ? " is-active" : "") +
-        '" data-prophets-filter="' +
-        esc(f.id) +
-        '">' +
-        esc(f.label) +
-        "</button>"
-      );
-    }).join("");
+    var filtersHtml = availableFilters(index)
+      .map(function (f) {
+        return (
+          '<button type="button" class="prophets-filter' +
+          (filter === f.id ? " is-active" : "") +
+          '" data-prophets-filter="' +
+          esc(f.id) +
+          '">' +
+          esc(f.label) +
+          "</button>"
+        );
+      })
+      .join("");
 
     function section(title, items) {
       if (!items.length) return "";
@@ -468,22 +591,31 @@
     }
 
     var body = "";
-    body += section("Ulū l-ʿAzm", packs.ulu);
-    body += section("Belegte Propheten", packs.established);
-    body += section("Umstrittene Einordnung", packs.disputed);
-    if (!packs.ulu.length && !packs.established.length && !packs.disputed.length) {
+    body += section("Ulū l-ʿAzm", packs.ulu || []);
+    body += section("Belegte Propheten", packs.established || []);
+    body += section("Weitere Qurʾān- und Sunnah-Personen", packs.further || []);
+    if (!(packs.ulu || []).length && !(packs.established || []).length && !(packs.further || []).length) {
       body = '<div class="prophets-empty">Keine Treffer für diese Suche.</div>';
     }
 
+    var intro =
+      index.intro ||
+      "Was Qurʾān, authentische Sunnah und gesicherte frühe Überlieferungen über die Propheten berichten.";
+
     return (
       '<div class="prophets-toolbar">' +
-      (index.intro
-        ? '<p class="prophets-toolbar__intro">' + esc(index.intro) + "</p>"
-        : "") +
+      '<div class="prophets-hero-title" aria-hidden="true">' +
+      '<span class="prophets-hero-title__de">Die Propheten</span>' +
+      '<span class="prophets-hero-title__ar" lang="ar" dir="rtl">الأنبياء</span>' +
+      "</div>" +
+      '<p class="prophets-toolbar__intro">' +
+      esc(intro) +
+      "</p>" +
+      renderLastReadCard() +
       '<div class="prophets-search-block">' +
-      '<input class="prophets-search" id="prophetsSearch" type="search" placeholder="Prophet, Volk, Ereignis, Sūrah oder Aussage suchen" value="' +
+      '<input class="prophets-search" id="prophetsSearch" type="search" placeholder="Name, Volk, Ereignis, Sūrah …" value="' +
       esc(query) +
-      '" autocomplete="off" />' +
+      '" autocomplete="off" enterkeyhint="search" />' +
       "</div>" +
       '<div class="prophets-filter-bar">' +
       '<span class="prophets-filter-bar__label">Filter</span>' +
@@ -493,11 +625,7 @@
       "</div>" +
       "</div>" +
       body +
-      '<p class="prophets-note">Nur geprüfte, freigegebene Angaben. Bekannte Profile: ' +
-      esc(String((index.counts && index.counts.verifiedQuranExplicitProfiles) || (index.prophets || []).filter(function (p) { return p.prophetStatus === "quran_explicit" && p.profileStatus === "approved"; }).length)) +
-      " mit ausdrücklicher Qurʾān-Beleglage · Research: " +
-      esc(String((index.counts && index.counts.researchProfiles) || (index.disputed || []).length)) +
-      ". Die bekannte Profilzahl ist nicht die Gesamtzahl aller Gesandten (Qurʾān 4:164 / 40:78). 124.000 wird nicht als sichere Gesamtzahl dargestellt.</p>"
+      '<p class="prophets-note">Nur freigegebene Angaben erscheinen in der normalen Suche. Research bleibt getrennt. Profilzahl ≠ Gesamtzahl aller Gesandten (Qurʾān 4:164 / 40:78).</p>'
     );
   }
 
@@ -512,6 +640,9 @@
     var fields = (profile.overviewFields || [])
       .map(function (f) {
         var showValue = f.value;
+        if (showValue == null || showValue === "" || showValue === "null" || showValue === "undefined") {
+          showValue = "Nicht authentisch belegt";
+        }
         var st = f.status || "";
         var ids = f.claimIds || [];
         var ok = !ids.length
@@ -579,29 +710,44 @@
             );
           })
           .join(" ");
+        var qMeta = (st.quran || st.quranRefs || [])
+          .map(function (q) {
+            return (
+              "Qurʾān " +
+              q.surah +
+              ":" +
+              q.ayah +
+              (q.ayahEnd && q.ayahEnd !== q.ayah ? "–" + q.ayahEnd : "")
+            );
+          })
+          .join(" · ");
         return (
           '<article class="prophets-station">' +
+          '<span class="prophets-station__dot" aria-hidden="true"></span>' +
+          '<div class="prophets-station__body">' +
           "<h4>" +
           esc(st.title) +
-          (!ok ? ' <span class="prophets-badge">Forschung</span>' : "") +
+          (!ok ? ' <span class="prophets-badge">Umstritten</span>' : "") +
           "</h4>" +
-          "<p>" +
-          esc(st.body || st.summary || "") +
-          "</p>" +
-          '<p class="prophets-src">Zeitklasse: ' +
-          esc(st.timeClass || st.chronologyStatus || "textually-established") +
-          (!ok ? " · noch nicht freigegeben" : "") +
-          "</p>" +
+          (st.summary || st.body
+            ? "<p>" + esc(st.summary || st.body || "") + "</p>"
+            : "") +
+          (qMeta ? '<p class="prophets-src">' + esc(qMeta) + "</p>" : "") +
           (qLinks ? '<div class="prophets-link-row">' + qLinks + "</div>" : "") +
-          "</article>"
+          "</div></article>"
         );
       })
       .join("");
     return (
-      '<section class="prophets-chapter"><h3>Lebensweg</h3><div class="prophets-timeline">' +
+      '<section class="prophets-chapter"><h3>Lebensweg</h3><div class="prophets-timeline prophets-timeline--rail">' +
       (stations || '<div class="prophets-empty">Noch keine freigegebenen Lebensstationen.</div>') +
       "</div></section>"
     );
+  }
+
+  function renderEreignisse(profile) {
+    // Same approved timeline stations as compact event list (no invented chronology).
+    return renderTimeline(profile).replace(">Lebensweg<", ">Ereignisse<").replace("prophets-timeline--rail", "prophets-timeline--rail prophets-timeline--events");
   }
 
   function renderQuranSection(profile, state) {
@@ -650,9 +796,15 @@
           ":" +
           r.ayah +
           (r.ayahEnd && r.ayahEnd !== r.ayah ? "–" + r.ayahEnd : "");
+        var kindLabel = "";
+        if (r.kind === "speech" || r.filter === "aussagen" || r.type === "directSpeech") kindLabel = "Direkte Aussage";
+        else if (r.kind === "dua" || r.type === "dua") kindLabel = "Duʿāʾ";
+        else if (r.event) kindLabel = "Ereignis";
+        else kindLabel = "Beschreibung";
         return (
           '<article class="prophets-quote">' +
           '<span class="prophets-badge">Qurʾān</span>' +
+          (kindLabel ? '<span class="prophets-badge prophets-badge--soft">' + esc(kindLabel) + "</span>" : "") +
           '<p class="prophets-quote__meta">' +
           esc(ref) +
           (r.event ? " · " + esc(r.event) : "") +
@@ -738,9 +890,9 @@
         '<article class="prophets-quote">' +
         '<span class="prophets-badge">Sunnah</span>' +
         '<p class="prophets-quote__de">' +
-        esc(profile.sunnahPrepNote || "Freigegebene Aḥādīṯ folgen nach abgeschlossener Stellen- und Isnād-Prüfung. Entwürfe bleiben unsichtbar.") +
+        esc(profile.sunnahPrepNote || "Keine weiteren authentisch belegten Sunnah-Berichte in diesem Profil freigegeben.") +
         "</p>" +
-        '<p class="prophets-status prophets-status--na">In Prüfung · noch nicht freigegeben</p>' +
+        '<p class="prophets-status prophets-status--na">Keine freigegebene Sunnah in diesem Profil</p>' +
         "</article></section>"
       );
     }
@@ -750,6 +902,9 @@
       "</h3>" +
       items
         .map(function (it) {
+          var metaLine = [it.work, it.bookChapter, it.number].filter(Boolean).join(" · ");
+          var rawi = it.sahabiRawi || it.rawi || "";
+          var ext = it.directReference && String(it.directReference).indexOf("http") === 0 ? it.directReference : "";
           return (
             '<article class="prophets-quote">' +
             '<span class="prophets-badge">' +
@@ -759,11 +914,17 @@
               ? '<p class="prophets-quote__ar" lang="ar" dir="rtl">' + esc(it.arabicOriginal) + "</p>"
               : "") +
             '<p class="prophets-quote__de">' +
-            esc(it.translationDe || "") +
+            esc(it.translationDe || it.summary || "") +
             "</p>" +
             '<p class="prophets-quote__meta">' +
-            esc([it.work, it.bookChapter, it.number, it.sahabiRawi].filter(Boolean).join(" · ")) +
+            esc(metaLine) +
+            (rawi ? "<br>Rāwī: " + esc(rawi) : "") +
             "</p>" +
+            (ext
+              ? '<button type="button" class="prophets-link" data-external-url="' +
+                esc(ext) +
+                '">Quelle öffnen</button>'
+              : "") +
             "</article>"
           );
         })
@@ -782,34 +943,101 @@
       })
       .map(function (f) {
         var ok = claimsApproved(profile, f.claimIds || []);
+        var linkId = f.relatedProphetId || f.prophetId || "";
+        var nameHtml = esc(f.name);
+        if (ok && linkId) {
+          nameHtml =
+            '<button type="button" class="prophets-inline-link" data-prophet-id="' +
+            esc(linkId) +
+            '">' +
+            esc(f.name) +
+            "</button>";
+        } else if (ok) {
+          // best-effort cross-link by known names in index
+          var hit = findProphetIdByName(f.name);
+          if (hit && hit !== profile.id) {
+            nameHtml =
+              '<button type="button" class="prophets-inline-link" data-prophet-id="' +
+              esc(hit) +
+              '">' +
+              esc(f.name) +
+              "</button>";
+          }
+        }
         return (
           '<article class="prophets-family-card">' +
           "<h4>" +
           esc(f.label) +
-          (!ok ? ' <span class="prophets-badge">Forschung</span>' : "") +
+          (!ok ? ' <span class="prophets-badge">Umstritten</span>' : "") +
           "</h4>" +
-          "<p>" +
-          esc(f.summary || "") +
-          "</p>" +
+          (f.summary ? "<p>" + esc(f.summary) + "</p>" : "") +
           '<span class="prophets-field__label">Name</span>' +
           '<span class="prophets-field__value">' +
-          esc(f.name) +
+          nameHtml +
           "</span>" +
           '<span class="prophets-status ' +
           statusClass(f.nameStatus) +
           '">' +
-          esc(f.nameStatus) +
-          (!ok ? " · noch nicht freigegeben" : "") +
+          esc(publicStatusLabel(f.nameStatus) || f.nameStatus || "") +
+          (!ok ? " · nicht als gesichert dargestellt" : "") +
           "</span>" +
           "</article>"
         );
       })
       .join("");
+    var tree = renderApprovedFamilyTree(profile);
     return (
       '<section class="prophets-chapter"><h3>Familie</h3>' +
+      tree +
       (rows || '<div class="prophets-empty">Noch keine freigegebenen Familienangaben.</div>') +
       "</section>"
     );
+  }
+
+  function findProphetIdByName(name) {
+    var n = String(name || "").toLowerCase();
+    if (!n || !indexCache) return "";
+    var all = (indexCache.prophets || []).concat(indexCache.disputed || []).concat(indexCache.furtherPersons || []);
+    for (var i = 0; i < all.length; i++) {
+      var p = all[i];
+      if (!p) continue;
+      if (n.indexOf(String(p.name || "").toLowerCase()) >= 0) return p.id;
+      if (p.nameAr && n.indexOf(String(p.nameAr).toLowerCase()) >= 0) return p.id;
+    }
+    return "";
+  }
+
+  function renderApprovedFamilyTree(profile) {
+    var ids = profile.relationIds || [];
+    if (!ids.length) return "";
+    // Synchronous render uses already-cached relations only; hydrate async on bind.
+    var lines = [];
+    ids.forEach(function (rid) {
+      var rel = relationCache[rid];
+      if (!rel || rel.verificationStatus !== "approved") return;
+      var a = findMeta(rel.personA);
+      var b = findMeta(rel.personB);
+      if (!a || !b) return;
+      lines.push(
+        '<div class="prophets-tree-line">' +
+          '<button type="button" class="prophets-inline-link" data-prophet-id="' +
+          esc(a.id) +
+          '">' +
+          esc(a.name) +
+          "</button>" +
+          '<span class="prophets-tree-rel">' +
+          esc(rel.relation === "brothers" ? "Brüder" : "Vater → Sohn") +
+          "</span>" +
+          '<button type="button" class="prophets-inline-link" data-prophet-id="' +
+          esc(b.id) +
+          '">' +
+          esc(b.name) +
+          "</button>" +
+          "</div>"
+      );
+    });
+    if (!lines.length) return '<div class="prophets-tree prophets-tree--pending" data-prophets-tree="' + esc(profile.id) + '"></div>';
+    return '<div class="prophets-tree"><h4>Geprüfte Beziehungen</h4>' + lines.join("") + "</div>";
   }
 
   function countApproved(profile, key) {
@@ -825,55 +1053,128 @@
 
   function renderQuellen(profile) {
     var claims = approvedOnly(profile.claims || []);
-    var works = (profile.worksIndex || [])
-      .map(function (w) {
-        var n = typeof w.approvedCount === "number" ? w.approvedCount : countApproved(profile, w.countFrom);
-        if (!n && w.id !== "quran") return "";
+    var groups = [
+      { key: "quran", title: "Qurʾān", match: function (c) { return c.evidenceType === "quran"; } },
+      { key: "bukhari", title: "Ṣaḥīḥ al-Buḫārī", match: function (c) { return c.evidenceType === "sunnah" && /bu[kḫ]h?ārī|bukhari/i.test(String(c.source || c.hadithId || "")); } },
+      { key: "muslim", title: "Ṣaḥīḥ Muslim", match: function (c) { return c.evidenceType === "sunnah" && /muslim/i.test(String(c.source || c.hadithId || "")); } },
+      { key: "sunnah", title: "Weitere authentische Sunnah", match: function (c) {
+          return c.evidenceType === "sunnah" && !/bu[kḫ]h?ārī|bukhari|muslim/i.test(String(c.source || c.hadithId || ""));
+        } },
+      { key: "athar", title: "Authentische Āthār", match: function (c) { return c.evidenceType === "athar"; } }
+    ];
+    var used = Object.create(null);
+    var worksHtml = groups
+      .map(function (g) {
+        var items = claims.filter(function (c) {
+          if (used[c.id]) return false;
+          if (!g.match(c)) return false;
+          used[c.id] = 1;
+          return true;
+        });
+        if (!items.length) return "";
         return (
-          '<button type="button" class="prophets-work" data-prophets-work="' +
-          esc(w.id) +
+          '<button type="button" class="prophets-work" data-prophets-source-group="' +
+          esc(g.key) +
           '"><span>' +
-          esc(w.title) +
-          "</span><span>" +
-          n +
-          " Belege</span></button>"
+          esc(g.title) +
+          '</span><span>' +
+          items.length +
+          " geprüfte Berichte</span></button>"
         );
       })
       .join("");
 
-    var claimList = claims
+    var activeGroup = (readState().sourceGroup || "all");
+    var filtered =
+      activeGroup === "all"
+        ? claims
+        : claims.filter(function (c) {
+            var g = groups.find(function (x) { return x.key === activeGroup; });
+            return g ? g.match(c) : true;
+          });
+
+    var claimList = filtered
       .map(function (c) {
+        var ext = c.directReference && String(c.directReference).indexOf("http") === 0 ? c.directReference : "";
         return (
-          '<article class="prophets-quote">' +
+          '<article class="prophets-quote" id="claim-' +
+          esc(c.id) +
+          '">' +
           '<span class="prophets-badge">' +
           esc(publicStatusLabel(c.grading || c.evidenceType || "")) +
           "</span>" +
           '<p class="prophets-quote__de">' +
           esc(c.claim) +
           "</p>" +
+          (c.arabicOriginal
+            ? '<p class="prophets-quote__ar" lang="ar" dir="rtl">' + esc(c.arabicOriginal) + "</p>"
+            : "") +
           '<p class="prophets-quote__meta">' +
-          esc(c.source) +
-          (c.reference ? " · " + esc(c.reference) : "") +
+          esc([c.source, c.reference || c.number, c.rawi || c.sahabiRawi].filter(Boolean).join(" · ")) +
           "</p>" +
           (c.directReference && c.directReference.indexOf("#quran-surah/") === 0
             ? '<button type="button" class="prophets-link" data-nav-hash="' +
               esc(c.directReference) +
               '">Direktnachweis</button>'
             : "") +
+          (ext
+            ? '<button type="button" class="prophets-link" data-external-url="' +
+              esc(ext) +
+              '">Quelle öffnen</button>'
+            : "") +
           "</article>"
         );
       })
       .join("");
 
+    var researchNote =
+      '<details class="prophets-research-fold"><summary>Research / umstritten (bewusst öffnen)</summary>' +
+      '<p class="prophets-note">Schwache, isrāʾīliyyāt- oder ungeprüfte Berichte gehören nicht zur Hauptbiografie und erscheinen hier nicht als sichere Tatsachen.</p>' +
+      ((profile.weakReports || []).length
+        ? '<ul class="prophets-weak-list">' +
+          (profile.weakReports || [])
+            .slice(0, 12)
+            .map(function (w) {
+              return (
+                "<li><b>" +
+                esc(w.title || w.id || "Bericht") +
+                "</b> · " +
+                esc(publicStatusLabel(w.grading || "Umstritten")) +
+                "</li>"
+              );
+            })
+            .join("") +
+          "</ul>"
+        : "<p>Keine zusätzlichen Research-Einträge in diesem Profil.</p>") +
+      "</details>";
+
     return (
       '<section class="prophets-chapter"><h3>Quellenbibliothek</h3><div class="prophets-work-list">' +
-      works +
+      worksHtml +
       "</div></section>" +
-      '<section class="prophets-chapter"><h3>Belegte Aussagen (Claims) · ' +
-      claims.length +
+      '<section class="prophets-chapter"><h3>Belegte Aussagen · ' +
+      filtered.length +
       "</h3>" +
-      claimList +
-      "</section>"
+      (claimList || '<div class="prophets-empty">Keine freigegebenen Quellenberichte in dieser Gruppe.</div>') +
+      "</section>" +
+      researchNote
+    );
+  }
+
+  function renderDisputedPositions(profile, meta) {
+    if (!isDisputedStatus(profile.prophetStatus) && !(meta && isDisputedStatus(meta.prophetStatus))) return "";
+    var note = disputedStatusNote(Object.assign({}, meta || {}, profile));
+    return (
+      '<section class="prophets-chapter prophets-chapter--ikhtilaf"><h3>Einordnung</h3>' +
+      '<p class="prophets-quote__de">' +
+      esc(note || "Prophetenstatus unter den Gelehrten unterschiedlich eingeordnet") +
+      "</p>" +
+      '<details class="prophets-research-fold"><summary>Positionen ansehen</summary>' +
+      '<div class="prophets-ikhtilaf">' +
+      "<article><h4>Position 1</h4><p><b>Prophet</b></p><p>Begründung: kontextuelle Einordnung durch Gelehrte — nicht als ausdrücklicher Qurʾān-Wortlaut „Nabī“.</p></article>" +
+      "<hr class=\"prophets-rule\" />" +
+      "<article><h4>Position 2</h4><p><b>Rechtschaffener Mann / Diener, kein Prophet</b></p><p>Frühe Überlieferungen und Tafsīr-Meinungen mit jeweiligem Isnādstatus — nicht automatisch freigegeben.</p></article>" +
+      "</div></details></section>"
     );
   }
 
@@ -934,8 +1235,9 @@
     }).join("");
 
     var body = "";
-    if (sec === "overview") body = renderOverview(profile);
+    if (sec === "overview") body = renderOverview(profile) + renderDisputedPositions(profile, meta);
     else if (sec === "lebensweg") body = renderTimeline(profile);
+    else if (sec === "ereignisse") body = renderEreignisse(profile);
     else if (sec === "quran") body = renderQuranSection(profile, state);
     else if (sec === "sunnah") body = renderSunnahAbout(profile);
     else if (sec === "aussagen") body = renderStatements(profile);
@@ -990,7 +1292,7 @@
       esc(profile.honorific || "") +
       "</p>" +
       (roleChips.length ? '<div class="prophets-detail__roles">' + roleChips.join("") + "</div>" : "") +
-      (profile.people ? '<p class="prophets-detail__people">👥 ' + esc(profile.people) + (profile.region ? " · " + esc(profile.region) : "") + "</p>" : "") +
+      (profile.people ? '<p class="prophets-detail__people">' + esc(profile.people) + (profile.region ? " · " + esc(profile.region) : "") + "</p>" : "") +
       banner +
       '<div class="prophets-detail__stats" aria-label="Quellenübersicht">' +
       '<div class="prophets-stat"><b>' + qCount + '</b><span>Qurʾān</span></div>' +
@@ -1050,12 +1352,12 @@
     if (typeof global.setPageHeader === "function") {
       return global.setPageHeader(
         "Die Propheten",
-        "الأنبياء · Qurʾān · Sunnah · geprüfte Überlieferungen",
+        "الأنبياء",
         ""
       );
     }
     if (typeof global.setHeader === "function") {
-      return global.setHeader("Die Propheten", "الأنبياء · Qurʾān · Sunnah · geprüfte Überlieferungen", "");
+      return global.setHeader("Die Propheten", "الأنبياء", "");
     }
     return "";
   }
@@ -1139,8 +1441,24 @@
       btn.dataset.bound = "1";
       btn.addEventListener("click", function () {
         var id = btn.getAttribute("data-prophet-id");
-        writeState({ scrollY: window.scrollY || 0, selectedId: id, section: "overview" });
+        var rail = root.querySelector(".prophets-rail");
+        writeState({
+          scrollY: window.scrollY || 0,
+          leftScroll: rail ? rail.scrollTop : 0,
+          selectedId: id,
+          section: "overview"
+        });
+        var meta = findMeta(id);
+        writeLastRead({
+          prophetId: id,
+          name: meta && meta.name,
+          honorific: meta && meta.honorific,
+          tab: "overview",
+          tabLabel: "Übersicht",
+          at: Date.now()
+        });
         navigateProphets(id, "overview");
+        prefetchNeighbor(id);
       });
     });
 
@@ -1151,7 +1469,17 @@
         var tab = btn.getAttribute("data-prophets-tab") || "overview";
         var detail = root.querySelector("[data-prophet-detail]");
         var id = detail && detail.getAttribute("data-prophet-detail");
+        var label = btn.textContent || tab;
         writeState({ section: tab, scrollY: 0 });
+        var meta = findMeta(id);
+        writeLastRead({
+          prophetId: id,
+          name: meta && meta.name,
+          honorific: meta && meta.honorific,
+          tab: tab,
+          tabLabel: label,
+          at: Date.now()
+        });
         navigateProphets(id, tab);
       });
     });
@@ -1192,11 +1520,71 @@
       btn.dataset.bound = "1";
       btn.addEventListener("click", function () {
         navigateProphets("", "");
+        restoreScroll(readState());
       });
     });
 
+    root.querySelectorAll("[data-external-url]").forEach(function (btn) {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = "1";
+      btn.addEventListener("click", function () {
+        openExternalSafe(btn.getAttribute("data-external-url"));
+      });
+    });
+
+    root.querySelectorAll("[data-prophets-continue]").forEach(function (btn) {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = "1";
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-prophets-continue");
+        var tab = btn.getAttribute("data-prophets-continue-tab") || "overview";
+        navigateProphets(id, tab);
+      });
+    });
+
+    root.querySelectorAll("[data-prophets-source-group]").forEach(function (btn) {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = "1";
+      btn.addEventListener("click", function () {
+        writeState({ sourceGroup: btn.getAttribute("data-prophets-source-group") || "all" });
+        if (typeof global.render === "function") global.render();
+      });
+    });
+
+    // hydrate approved relations for family tree
+    var detail = root.querySelector("[data-prophet-detail]");
+    if (detail) {
+      var pid = detail.getAttribute("data-prophet-detail");
+      var prof = profileCache[pid];
+      if (prof && (prof.relationIds || []).length) {
+        Promise.all((prof.relationIds || []).map(loadRelation)).then(function () {
+          var treeHost = root.querySelector(".prophets-tree--pending");
+          if (treeHost && typeof global.render === "function") global.render();
+        });
+      }
+    }
+
     ensureResizeWatch();
     restoreScroll(state);
+    restoreRailScroll(state);
+  }
+
+  function restoreRailScroll(state) {
+    var y = Number(state.leftScroll || 0);
+    if (!(y > 0)) return;
+    requestAnimationFrame(function () {
+      var rail = document.querySelector(".prophets-rail");
+      if (rail) rail.scrollTop = y;
+    });
+  }
+
+  function prefetchNeighbor(id) {
+    if (!indexCache) return;
+    var established = (indexCache.prophets || []).filter(function (p) { return !isFurtherPerson(p); });
+    var ix = established.findIndex(function (p) { return String(p.id) === String(id); });
+    if (ix < 0) return;
+    var next = established[ix + 1] || established[ix - 1];
+    if (next) loadProfile(next.id);
   }
 
   function ensureResizeWatch() {
@@ -1238,7 +1626,7 @@
   }
 
   function prefetch() {
-    loadIndex().catch(function () {});
+    loadIndex().then(function () { return loadSearchIndex(); }).catch(function () {});
   }
 
   global.DARProphets = {
@@ -1247,6 +1635,7 @@
     bind: bind,
     prefetch: prefetch,
     loadIndex: loadIndex,
+    loadSearchIndex: loadSearchIndex,
     loadProfile: loadProfile,
     isEnabled: function () {
       if (!indexCache) return isTest();

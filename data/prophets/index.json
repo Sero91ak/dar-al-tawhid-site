@@ -5,11 +5,8 @@
     "test": "enabled",
     "production": "disabled"
   },
-  "title": {
-    "de": "Die Propheten",
-    "ar": "الأنبياء"
-  },
-  "intro": "Was Qurʾān, authentische Sunnah und zuverlässig belegte frühe Überlieferungen über die Propheten berichten. Zero-Trust: Unsicher = nicht veröffentlichen.",
+  "title": "Die Propheten",
+  "intro": "Was Qurʾān, authentische Sunnah und gesicherte frühe Überlieferungen über die Propheten berichten.",
   "sourcePriority": [
     "Qurʾān",
     "authentische Sunnah",
@@ -56,7 +53,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "adam.json",
       "profileStatus": "research",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": true,
+        "hasSunnah": false,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": true
+      },
+      "hasSunnah": false,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": true
     },
     {
       "id": "idris",
@@ -78,7 +87,19 @@
         "ṣiddīq",
         "Miʿrāǧ"
       ],
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": true,
+        "hasSunnah": true,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": false
+      },
+      "hasSunnah": true,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": false
     },
     {
       "id": "nuh",
@@ -101,7 +122,19 @@
         "نوح",
         "Arche"
       ],
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": true,
+        "quranExplicit": true,
+        "hasSunnah": true,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": false
+      },
+      "hasSunnah": true,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": false
     },
     {
       "id": "hud",
@@ -117,7 +150,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "hud.json",
       "profileStatus": "approved",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": true,
+        "hasSunnah": false,
+        "banuIsrail": false,
+        "arabicMessenger": true,
+        "furtherPerson": false
+      },
+      "hasSunnah": false,
+      "banuIsrail": false,
+      "arabicMessenger": true,
+      "furtherPerson": false
     },
     {
       "id": "salih",
@@ -133,7 +178,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "salih.json",
       "profileStatus": "approved",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": true,
+        "hasSunnah": true,
+        "banuIsrail": false,
+        "arabicMessenger": true,
+        "furtherPerson": false
+      },
+      "hasSunnah": true,
+      "banuIsrail": false,
+      "arabicMessenger": true,
+      "furtherPerson": false
     },
     {
       "id": "ibrahim",
@@ -157,7 +214,19 @@
         "Sarah",
         "Hājar"
       ],
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": true,
+        "quranExplicit": true,
+        "hasSunnah": true,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": false
+      },
+      "hasSunnah": true,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": false
     },
     {
       "id": "lut",
@@ -173,7 +242,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "lut.json",
       "profileStatus": "approved",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": true,
+        "hasSunnah": true,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": false
+      },
+      "hasSunnah": true,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": false
     },
     {
       "id": "ismail",
@@ -189,7 +270,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "ismail.json",
       "profileStatus": "approved",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": true,
+        "hasSunnah": true,
+        "banuIsrail": false,
+        "arabicMessenger": true,
+        "furtherPerson": false
+      },
+      "hasSunnah": true,
+      "banuIsrail": false,
+      "arabicMessenger": true,
+      "furtherPerson": false
     },
     {
       "id": "ishaq",
@@ -204,7 +297,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "ishaq.json",
       "profileStatus": "approved",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": true,
+        "hasSunnah": true,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": false
+      },
+      "hasSunnah": true,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": false
     },
     {
       "id": "yaqub",
@@ -219,7 +324,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "yaqub.json",
       "profileStatus": "approved",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": true,
+        "hasSunnah": true,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": false
+      },
+      "hasSunnah": true,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": false
     },
     {
       "id": "yusuf",
@@ -234,7 +351,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "yusuf.json",
       "profileStatus": "approved",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": true,
+        "hasSunnah": true,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": false
+      },
+      "hasSunnah": true,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": false
     },
     {
       "id": "ayyub",
@@ -249,7 +378,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "ayyub.json",
       "profileStatus": "research",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": true,
+        "hasSunnah": false,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": true
+      },
+      "hasSunnah": false,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": true
     },
     {
       "id": "shuayb",
@@ -265,7 +406,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "shuayb.json",
       "profileStatus": "research",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": true,
+        "hasSunnah": false,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": true
+      },
+      "hasSunnah": false,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": true
     },
     {
       "id": "musa",
@@ -294,7 +447,19 @@
         "Tawrāh",
         "ʿImrān"
       ],
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": true,
+        "quranExplicit": true,
+        "hasSunnah": true,
+        "banuIsrail": true,
+        "arabicMessenger": false,
+        "furtherPerson": false
+      },
+      "hasSunnah": true,
+      "banuIsrail": true,
+      "arabicMessenger": false,
+      "furtherPerson": false
     },
     {
       "id": "harun",
@@ -309,7 +474,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "harun.json",
       "profileStatus": "research",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": true,
+        "hasSunnah": false,
+        "banuIsrail": true,
+        "arabicMessenger": false,
+        "furtherPerson": true
+      },
+      "hasSunnah": false,
+      "banuIsrail": true,
+      "arabicMessenger": false,
+      "furtherPerson": true
     },
     {
       "id": "dawud",
@@ -324,7 +501,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "dawud.json",
       "profileStatus": "research",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": true,
+        "hasSunnah": false,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": true
+      },
+      "hasSunnah": false,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": true
     },
     {
       "id": "sulayman",
@@ -339,7 +528,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "sulayman.json",
       "profileStatus": "approved",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": true,
+        "hasSunnah": true,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": false
+      },
+      "hasSunnah": true,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": false
     },
     {
       "id": "ilyas",
@@ -355,7 +556,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "ilyas.json",
       "profileStatus": "approved",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": true,
+        "hasSunnah": false,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": false
+      },
+      "hasSunnah": false,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": false
     },
     {
       "id": "alyasa",
@@ -370,7 +583,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "alyasa.json",
       "profileStatus": "approved",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": true,
+        "hasSunnah": false,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": false
+      },
+      "hasSunnah": false,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": false
     },
     {
       "id": "yunus",
@@ -386,7 +611,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "yunus.json",
       "profileStatus": "approved",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": true,
+        "hasSunnah": true,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": false
+      },
+      "hasSunnah": true,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": false
     },
     {
       "id": "zakariyya",
@@ -401,7 +638,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "zakariyya.json",
       "profileStatus": "approved",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": true,
+        "hasSunnah": true,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": false
+      },
+      "hasSunnah": true,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": false
     },
     {
       "id": "yahya",
@@ -416,7 +665,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "yahya.json",
       "profileStatus": "approved",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": true,
+        "hasSunnah": true,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": false
+      },
+      "hasSunnah": true,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": false
     },
     {
       "id": "isa",
@@ -432,7 +693,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "isa.json",
       "profileStatus": "approved",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": true,
+        "quranExplicit": true,
+        "hasSunnah": true,
+        "banuIsrail": true,
+        "arabicMessenger": false,
+        "furtherPerson": false
+      },
+      "hasSunnah": true,
+      "banuIsrail": true,
+      "arabicMessenger": false,
+      "furtherPerson": false
     },
     {
       "id": "dhul-kifl",
@@ -452,7 +725,21 @@
         "الكفل",
         "Ikhtilāf"
       ],
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": false,
+        "hasSunnah": false,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": true
+      },
+      "hasSunnah": false,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": true,
+      "listSection": "further",
+      "uiLabel": "Im Qurʾān genannt · Prophetenstatus unterschiedlich beurteilt"
     },
     {
       "id": "muhammad",
@@ -468,7 +755,19 @@
       "prophetStatus": "quran_explicit",
       "profileFile": "muhammad.json",
       "profileStatus": "approved",
-      "quranNamed": true
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": true,
+        "quranExplicit": true,
+        "hasSunnah": true,
+        "banuIsrail": false,
+        "arabicMessenger": true,
+        "furtherPerson": false
+      },
+      "hasSunnah": true,
+      "banuIsrail": false,
+      "arabicMessenger": true,
+      "furtherPerson": false
     }
   ],
   "disputed": [
@@ -494,7 +793,19 @@
         "quran",
         "miracle"
       ],
-      "uiLabel": "Im Qurʾān / in der Sunnah genannt — Prophetenstatus nicht als Konsens darstellen"
+      "uiLabel": "Im Qurʾān / in der Sunnah genannt — Prophetenstatus nicht als Konsens darstellen",
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": false,
+        "hasSunnah": true,
+        "banuIsrail": true,
+        "arabicMessenger": false,
+        "furtherPerson": true
+      },
+      "hasSunnah": true,
+      "banuIsrail": true,
+      "arabicMessenger": false,
+      "furtherPerson": true
     },
     {
       "id": "al-khidr",
@@ -518,7 +829,19 @@
         "quran",
         "prophethood"
       ],
-      "uiLabel": "Im Qurʾān / in der Sunnah genannt — Prophetenstatus nicht als Konsens darstellen"
+      "uiLabel": "Im Qurʾān / in der Sunnah genannt — Prophetenstatus nicht als Konsens darstellen",
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": false,
+        "hasSunnah": true,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": true
+      },
+      "hasSunnah": true,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": true
     },
     {
       "id": "luqman",
@@ -544,7 +867,19 @@
         "tawhid",
         "statements"
       ],
-      "uiLabel": "Im Qurʾān / in der Sunnah genannt — Prophetenstatus nicht als Konsens darstellen"
+      "uiLabel": "Im Qurʾān / in der Sunnah genannt — Prophetenstatus nicht als Konsens darstellen",
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": false,
+        "hasSunnah": false,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": true
+      },
+      "hasSunnah": false,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": true
     },
     {
       "id": "dhul-qarnayn",
@@ -567,7 +902,19 @@
         "identity",
         "quran"
       ],
-      "uiLabel": "Im Qurʾān / in der Sunnah genannt — Prophetenstatus nicht als Konsens darstellen"
+      "uiLabel": "Im Qurʾān / in der Sunnah genannt — Prophetenstatus nicht als Konsens darstellen",
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": false,
+        "hasSunnah": false,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": true
+      },
+      "hasSunnah": false,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": true
     },
     {
       "id": "uzayr",
@@ -590,15 +937,27 @@
         "aqidah",
         "quran"
       ],
-      "uiLabel": "Im Qurʾān / in der Sunnah genannt — Prophetenstatus nicht als Konsens darstellen"
+      "uiLabel": "Im Qurʾān / in der Sunnah genannt — Prophetenstatus nicht als Konsens darstellen",
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": false,
+        "hasSunnah": false,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": true
+      },
+      "hasSunnah": false,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": true
     }
   ],
   "audit": {
-    "updatedAt": "2026-08-08T09:25:18.000Z",
+    "updatedAt": "2026-08-08T09:33:13.000Z",
     "scope": "test-only",
     "production": "disabled",
-    "phase07": true,
-    "notes": "Phase 07 technische Integration — kein neuer Content-Bulkimport."
+    "phase08": true,
+    "notes": "UI-Nutzbarkeit · search-index approved-only · production=disabled"
   },
   "profileGroups": {
     "A_confirmedProphets": "Hauptliste mit quran_explicit / starker Beleglage",
@@ -642,5 +1001,234 @@
     "athar": "athar/*.json",
     "sources": "sources/*.json",
     "relations": "relations/*.json"
-  }
+  },
+  "titleAr": "الأنبياء",
+  "contentVersion": "prophets-phase08-v610",
+  "updatedAt": "2026-08-08T09:33:13.000Z",
+  "furtherPersons": [
+    {
+      "id": "dhul-kifl",
+      "name": "Dhū l-Kifl",
+      "nameAr": "ذو الكفل",
+      "honorific": "عليه السلام",
+      "roles": [],
+      "people": "",
+      "uluAlAzm": false,
+      "prophetStatus": "scholarly_disputed",
+      "profileFile": "dhul-kifl.json",
+      "profileStatus": "approved",
+      "note": "Qurʾānisch namentlich; Prophetenstatus Ikhtilāf — kein falscher Konsens.",
+      "searchTerms": [
+        "Dhū l-Kifl",
+        "Dhul-Kifl",
+        "الكفل",
+        "Ikhtilāf"
+      ],
+      "quranNamed": true,
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": false,
+        "hasSunnah": false,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": true
+      },
+      "hasSunnah": false,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": true,
+      "listSection": "further",
+      "uiLabel": "Im Qurʾān genannt · Prophetenstatus unterschiedlich beurteilt"
+    },
+    {
+      "id": "al-khidr",
+      "name": "al-Khiḍr",
+      "nameAr": "الخضر",
+      "honorific": "",
+      "quranNamed": false,
+      "prophetStatus": "scholarly_disputed_or_inferred",
+      "profileFile": "research/al-khidr.json",
+      "profileStatus": "approved",
+      "listPlacement": "research",
+      "note": "Qurʾān: unbenannter Diener (18:65); Name via Ṣaḥīḥ-Sunnah; Prophetenstatus erschlossen/umstritten.",
+      "searchTerms": [
+        "al-Khiḍr",
+        "Khidr",
+        "الخضر",
+        "Kahf",
+        "Mūsā",
+        "identity",
+        "knowledge",
+        "quran",
+        "prophethood"
+      ],
+      "uiLabel": "Im Qurʾān / in der Sunnah genannt — Prophetenstatus nicht als Konsens darstellen",
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": false,
+        "hasSunnah": true,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": true
+      },
+      "hasSunnah": true,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": true
+    },
+    {
+      "id": "luqman",
+      "name": "Luqmān",
+      "nameAr": "لقمان",
+      "honorific": "",
+      "quranNamed": true,
+      "prophetStatus": "scholarly_disputed",
+      "profileFile": "research/luqman.json",
+      "profileStatus": "approved",
+      "listPlacement": "research",
+      "note": "Qurʾānisch namentlich mit Weisheit; Prophetenstatus scholarly_disputed — nicht quran_explicit.",
+      "searchTerms": [
+        "Luqmān",
+        "Luqman",
+        "لقمان",
+        "Ḥikmah",
+        "Weisheit",
+        "Shirk",
+        "identity",
+        "character",
+        "family",
+        "tawhid",
+        "statements"
+      ],
+      "uiLabel": "Im Qurʾān / in der Sunnah genannt — Prophetenstatus nicht als Konsens darstellen",
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": false,
+        "hasSunnah": false,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": true
+      },
+      "hasSunnah": false,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": true
+    },
+    {
+      "id": "dhul-qarnayn",
+      "name": "Dhū l-Qarnayn",
+      "nameAr": "ذو القرنين",
+      "honorific": "",
+      "quranNamed": true,
+      "prophetStatus": "scholarly_disputed",
+      "profileFile": "research/dhul-qarnayn.json",
+      "profileStatus": "approved",
+      "listPlacement": "research",
+      "note": "Qurʾānisch benannter Herrscher/Diener; historische Identität unresolved; Prophetenstatus disputed.",
+      "searchTerms": [
+        "Dhū l-Qarnayn",
+        "Dhul-Qarnayn",
+        "القرنين",
+        "Yaʾǧūǧ",
+        "Maʾǧūǧ",
+        "Alexander",
+        "identity",
+        "quran"
+      ],
+      "uiLabel": "Im Qurʾān / in der Sunnah genannt — Prophetenstatus nicht als Konsens darstellen",
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": false,
+        "hasSunnah": false,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": true
+      },
+      "hasSunnah": false,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": true
+    },
+    {
+      "id": "uzayr",
+      "name": "ʿUzayr",
+      "nameAr": "عزير",
+      "honorific": "",
+      "quranNamed": true,
+      "prophetStatus": "scholarly_disputed",
+      "profileFile": "research/uzayr.json",
+      "profileStatus": "approved",
+      "listPlacement": "research",
+      "note": "In 9:30 namentlich; 2:259 nicht automatisch zuschreiben; Prophetenstatus disputed/research.",
+      "searchTerms": [
+        "ʿUzayr",
+        "Uzayr",
+        "عزير",
+        "Ezra",
+        "2:259",
+        "identity",
+        "aqidah",
+        "quran"
+      ],
+      "uiLabel": "Im Qurʾān / in der Sunnah genannt — Prophetenstatus nicht als Konsens darstellen",
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": false,
+        "hasSunnah": false,
+        "banuIsrail": false,
+        "arabicMessenger": false,
+        "furtherPerson": true
+      },
+      "hasSunnah": false,
+      "banuIsrail": false,
+      "arabicMessenger": false,
+      "furtherPerson": true
+    },
+    {
+      "id": "yusha-ibn-nun",
+      "name": "Yūshaʿ ibn Nūn",
+      "nameAr": "يوشع بن نون",
+      "honorific": "عليه السلام",
+      "quranNamed": false,
+      "prophetStatus": "scholarly_source_correlation",
+      "profileFile": "research/yusha-ibn-nun.json",
+      "profileStatus": "approved",
+      "listPlacement": "research",
+      "note": "Name und Sonnenwunder in authentischer Sunnah; finale Prophetenstatus-Korrelation ausstehend.",
+      "searchTerms": [
+        "Yūshaʿ",
+        "Yusha",
+        "يوشع",
+        "Nūn",
+        "Bayt al-Maqdis",
+        "Sonne",
+        "family",
+        "quran",
+        "miracle"
+      ],
+      "uiLabel": "Im Qurʾān / in der Sunnah genannt — Prophetenstatus nicht als Konsens darstellen",
+      "classifications": {
+        "uluAlAzm": false,
+        "quranExplicit": false,
+        "hasSunnah": true,
+        "banuIsrail": true,
+        "arabicMessenger": false,
+        "furtherPerson": true
+      },
+      "hasSunnah": true,
+      "banuIsrail": true,
+      "arabicMessenger": false,
+      "furtherPerson": true
+    }
+  ],
+  "availableFilters": {
+    "all": true,
+    "quran": true,
+    "sunnah": true,
+    "ulu": true,
+    "banuIsrail": true,
+    "arabicMessenger": true,
+    "further": true
+  },
+  "phase08": true
 }
