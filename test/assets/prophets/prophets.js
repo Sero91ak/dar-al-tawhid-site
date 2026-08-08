@@ -674,7 +674,7 @@
       '<select class="prophets-pick" data-prophets-pick="' +
       esc(groupId) +
       '" aria-label="' +
-      esc(placeholder) +
+      esc(placeholder.replace(/^[^\s]+\s/, "")) +
       '">' +
       '<option value="all"' +
       (selected === "all" ? " selected" : "") +
@@ -747,15 +747,17 @@
       esc(intro) +
       "</p>" +
       renderLastReadCard() +
-      '<section class="prophets-search-panel" aria-label="Suche und Filter">' +
+      '<section class="prophets-sf" aria-labelledby="prophetsSfTitle">' +
+      '<h2 class="prophets-sf__title" id="prophetsSfTitle">Suche und Filter</h2>' +
+      '<div class="prophets-search-panel">' +
       '<div class="prophets-pick-title">' +
       "<h3>Schnell auswählen</h3>" +
       "<span>Quelle · Gruppe · Bereich</span>" +
       "</div>" +
       '<div class="prophets-pick-grid">' +
-      renderFilterPickSelect("source", "Quelle", sourceOpts, filter) +
-      renderFilterPickSelect("group", "Gruppe", groupOpts, filter) +
-      renderFilterPickSelect("list", "Bereich", listOpts, filter) +
+      renderFilterPickSelect("source", "📚 Quelle", sourceOpts, filter) +
+      renderFilterPickSelect("group", "👤 Gruppe", groupOpts, filter) +
+      renderFilterPickSelect("list", "📖 Bereich", listOpts, filter) +
       "</div>" +
       '<div class="prophets-search-shell">' +
       '<span class="prophets-search-icon" aria-hidden="true">' +
@@ -764,7 +766,8 @@
       "</span>" +
       '<input class="prophets-search" id="prophetsSearch" type="search" placeholder="Name, Volk, Ereignis, Sūrah …" value="' +
       esc(query) +
-      '" autocomplete="off" enterkeyhint="search" />' +
+      '" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-label="Propheten durchsuchen" />' +
+      "</div>" +
       "</div>" +
       "</section>" +
       "</div>" +
