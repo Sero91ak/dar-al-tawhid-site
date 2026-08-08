@@ -6,6 +6,8 @@ on:
     paths:
       - test/data/prophets/**
       - test/assets/prophets/**
+      - assets/prophets/**
+      - data/prophets/**
       - scripts/validate-prophets-all.js
       - scripts/build-prophets-search-index.js
       - scripts/build-prophets-content-manifest.js
@@ -13,6 +15,8 @@ on:
       - scripts/prophets-phase09-smoke.js
       - scripts/prophets-phase08-qa.js
       - scripts/prophets-phase07-production-guard.js
+      - scripts/prophets-phase10-preprod.js
+      - scripts/prophets-phase11-dry-run.js
       - scripts/prophets-phase12-coverage-audit.js
       - scripts/prophets-phase12-coverage-audit-block02.js
       - scripts/prophets-phase12-final-audit.js
@@ -27,6 +31,8 @@ on:
     paths:
       - test/data/prophets/**
       - test/assets/prophets/**
+      - assets/prophets/**
+      - data/prophets/**
       - scripts/validate-prophets-all.js
       - scripts/build-prophets-search-index.js
       - scripts/build-prophets-content-manifest.js
@@ -34,6 +40,8 @@ on:
       - scripts/prophets-phase09-smoke.js
       - scripts/prophets-phase08-qa.js
       - scripts/prophets-phase07-production-guard.js
+      - scripts/prophets-phase10-preprod.js
+      - scripts/prophets-phase11-dry-run.js
       - scripts/prophets-phase12-coverage-audit.js
       - scripts/prophets-phase12-coverage-audit-block02.js
       - scripts/prophets-phase12-final-audit.js
@@ -62,6 +70,15 @@ jobs:
         run: |
           if [ -f package-lock.json ]; then npm ci --ignore-scripts; else npm install --ignore-scripts; fi
 
+      - name: Detect live production ship
+        id: live
+        run: |
+          PROD=$(node -e "const i=require('./data/prophets/index.json'); process.stdout.write(String(i.env&&(i.env.production==='enabled'||i.env.production===true)?'1':'0'))")
+          echo "enabled=$PROD" >> "$GITHUB_OUTPUT"
+          if [ "$PROD" = "1" ]; then
+            echo "Propheten already live (production=enabled) — skip preprod Phase 10–13 dry-runs"
+          fi
+
       - name: Validate prophets (master)
         run: node scripts/validate-prophets-all.js
 
@@ -76,23 +93,34 @@ jobs:
       - name: Phase 09 smoke + RC acceptance
         run: node scripts/prophets-phase09-smoke.js
 
-      - name: Guard — production must stay disabled
+      - name: Guard — prophets env / research files
         run: node scripts/prophets-phase07-production-guard.js
 
+      # Pre-go-live dry-runs only while production is still disabled.
       - name: Phase 10 pre-production prep (no live copy)
+        if: steps.live.outputs.enabled != '1'
         run: node scripts/prophets-phase10-preprod.js
 
       - name: Phase 11 go-live dry-run (no production write)
+        if: steps.live.outputs.enabled != '1'
         run: node scripts/prophets-phase11-dry-run.js
 
       - name: Phase 12 coverage audit block 01
+        if: steps.live.outputs.enabled != '1'
         run: node scripts/prophets-phase12-coverage-audit.js
 
       - name: Phase 12 coverage audit block 02
+        if: steps.live.outputs.enabled != '1'
         run: node scripts/prophets-phase12-coverage-audit-block02.js
 
       - name: Phase 12 FINAL audit + freeze (test only)
+        if: steps.live.outputs.enabled != '1'
         run: SKIP_PHASE12_REBUILD=1 node scripts/prophets-phase12-final-audit.js
 
       - name: Phase 13 final report (honest NOT_RUN for manual UI)
+        if: steps.live.outputs.enabled != '1'
         run: node scripts/prophets-phase13-final-report.js
+
+      - name: Live ship note
+        if: steps.live.outputs.enabled == '1'
+        run: echo "SKIP Phase 10–13 — Propheten already production-enabled in Besucher-App"
