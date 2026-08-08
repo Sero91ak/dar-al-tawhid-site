@@ -3039,6 +3039,23 @@
         "test/service-worker.js"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-quran-filter-polish-v623-2026-08-08",
+      "approvedBy": "user-task-propheten-quran-filter-optik",
+      "note": "Qurʾān-Filter: kein Blau, Duʿāʾ-Scroll-Chips, kompakte Fundstellen-Liste — Test+Live",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "assets/prophets/",
+        "test/assets/prophets/",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
