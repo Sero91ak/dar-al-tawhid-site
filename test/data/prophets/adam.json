@@ -220,341 +220,123 @@
     {
       "id": "tl-creation",
       "title": "Erschaffung Ādams",
-      "summary": "Qurʾānische Berichte über Ankündigung und Erschaffung; Sunnah: Freitag; Größe sechzig Ellen.",
-      "body": "Qurʾānische Berichte über Ankündigung und Erschaffung; Sunnah: Freitag; Größe sechzig Ellen.",
-      "chronologyStatus": "textually-established",
-      "timeClass": "textually-established",
+      "order": 1,
       "claimIds": [
-        "adam-creation-2-30",
         "adam-friday-muslim",
         "adam-height-greeting-bukhari"
-      ],
-      "quran": [
-        {
-          "surah": 2,
-          "ayah": 30,
-          "ayahEnd": 30
-        },
-        {
-          "surah": 3,
-          "ayah": 59,
-          "ayahEnd": 59
-        }
-      ],
-      "quranRefs": [
-        {
-          "surah": 2,
-          "ayah": 30,
-          "ayahEnd": 30
-        },
-        {
-          "surah": 3,
-          "ayah": 59,
-          "ayahEnd": 59
-        }
-      ],
-      "hadithRefs": [],
-      "atharRefs": []
+      ]
     },
     {
       "id": "tl-names",
       "title": "Lehre der Namen",
-      "summary": "Allah lehrte Ādam die Namen; Befragung der Engel; Mitteilung durch Ādam.",
-      "body": "Allah lehrte Ādam die Namen; Befragung der Engel; Mitteilung durch Ādam.",
-      "chronologyStatus": "textually-established",
-      "timeClass": "textually-established",
+      "order": 2,
       "claimIds": [
         "adam-names-taught"
-      ],
-      "quran": [
-        {
-          "surah": 2,
-          "ayah": 31,
-          "ayahEnd": 33
-        }
-      ],
-      "quranRefs": [
-        {
-          "surah": 2,
-          "ayah": 31,
-          "ayahEnd": 33
-        }
-      ],
-      "hadithRefs": [],
-      "atharRefs": []
+      ]
     },
     {
       "id": "tl-angels",
-      "title": "Befehl an die Engel und Weigerung Iblīs’",
-      "summary": "Engel gehorchten; Iblīs verweigerte sich; Einordnung als ǧinn (18:50).",
-      "body": "Engel gehorchten; Iblīs verweigerte sich; Einordnung als ǧinn (18:50).",
-      "chronologyStatus": "textually-established",
-      "timeClass": "textually-established",
+      "title": "Befehl an die Engel",
+      "order": 3,
       "claimIds": [
-        "adam-angels-prostrate",
-        "adam-iblis-jinn"
-      ],
-      "quran": [
-        {
-          "surah": 2,
-          "ayah": 34,
-          "ayahEnd": 34
-        },
-        {
-          "surah": 18,
-          "ayah": 50,
-          "ayahEnd": 50
-        }
-      ],
-      "quranRefs": [
-        {
-          "surah": 2,
-          "ayah": 34,
-          "ayahEnd": 34
-        },
-        {
-          "surah": 18,
-          "ayah": 50,
-          "ayahEnd": 50
-        }
-      ],
-      "hadithRefs": [],
-      "atharRefs": []
+        "adam-angels-prostrate"
+      ]
+    },
+    {
+      "id": "tl-iblis",
+      "title": "Weigerung Iblīs’",
+      "order": 4,
+      "claimIds": [
+        "adam-iblis-refused",
+        "adam-iblis-not-auto-angel"
+      ]
     },
     {
       "id": "tl-greeting",
       "title": "Gruß an die Engel",
-      "summary": "Sunnah: Anweisung zu grüßen; Antwort der Engel als Grußformel.",
-      "body": "Sunnah: Anweisung zu grüßen; Antwort der Engel als Grußformel.",
-      "chronologyStatus": "authenticated",
-      "timeClass": "authenticated",
+      "order": 5,
       "claimIds": [
-        "adam-height-greeting-bukhari"
-      ],
-      "quran": [],
-      "quranRefs": [],
-      "hadithRefs": [
-        {
-          "work": "Ṣaḥīḥ al-Buḫārī",
-          "number": "3326",
-          "claimId": "adam-height-greeting-bukhari"
-        }
-      ],
-      "atharRefs": []
+        "adam-angel-greeting-bukhari"
+      ]
     },
     {
       "id": "tl-paradise",
       "title": "Ādam und seine Gattin im Garten",
-      "summary": "Aufenthalt im Garten mit der Gattin; Verbot bezüglich des Baumes.",
-      "body": "Aufenthalt im Garten mit der Gattin; Verbot bezüglich des Baumes.",
-      "chronologyStatus": "textually-established",
-      "timeClass": "textually-established",
+      "order": 6,
       "claimIds": [
-        "adam-wife-quran",
-        "adam-tree-forbidden"
-      ],
-      "quran": [
-        {
-          "surah": 2,
-          "ayah": 35,
-          "ayahEnd": 35
-        },
-        {
-          "surah": 7,
-          "ayah": 19,
-          "ayahEnd": 19
-        }
-      ],
-      "quranRefs": [
-        {
-          "surah": 2,
-          "ayah": 35,
-          "ayahEnd": 35
-        },
-        {
-          "surah": 7,
-          "ayah": 19,
-          "ayahEnd": 19
-        }
-      ],
-      "hadithRefs": [],
-      "atharRefs": []
+        "adam-in-paradise-quran",
+        "adam-wife-quran"
+      ]
+    },
+    {
+      "id": "tl-tree",
+      "title": "Verbot bezüglich des Baumes",
+      "order": 7,
+      "claimIds": [
+        "adam-tree-forbidden",
+        "adam-tree-species-unattested"
+      ]
     },
     {
       "id": "tl-temptation",
       "title": "Versuchung und Essen vom Baum",
-      "summary": "Versuchung durch Shayṭān; Essen vom Baum — beide betreffend.",
-      "body": "Versuchung durch Shayṭān; Essen vom Baum — beide betreffend.",
-      "chronologyStatus": "textually-established",
-      "timeClass": "textually-established",
+      "order": 8,
       "claimIds": [
         "adam-temptation",
-        "adam-temptation-20",
-        "adam-slip"
-      ],
-      "quran": [
-        {
-          "surah": 7,
-          "ayah": 20,
-          "ayahEnd": 22
-        },
-        {
-          "surah": 20,
-          "ayah": 120,
-          "ayahEnd": 121
-        }
-      ],
-      "quranRefs": [
-        {
-          "surah": 7,
-          "ayah": 20,
-          "ayahEnd": 22
-        },
-        {
-          "surah": 20,
-          "ayah": 120,
-          "ayahEnd": 121
-        }
-      ],
-      "hadithRefs": [],
-      "atharRefs": []
+        "adam-temptation-20"
+      ]
     },
     {
       "id": "tl-repentance",
-      "title": "Reue und Annahme",
-      "summary": "Duʿāʾ 7:23; Annahme der Reue 2:37 und 20:122.",
-      "body": "Duʿāʾ 7:23; Annahme der Reue 2:37 und 20:122.",
-      "chronologyStatus": "textually-established",
-      "timeClass": "textually-established",
+      "title": "Reue und Annahme der Reue",
+      "order": 9,
       "claimIds": [
-        "adam-repentance-dua",
-        "adam-repentance-accepted",
-        "adam-repentance-accepted-20"
-      ],
-      "quran": [
-        {
-          "surah": 7,
-          "ayah": 23,
-          "ayahEnd": 23
-        },
-        {
-          "surah": 2,
-          "ayah": 37,
-          "ayahEnd": 37
-        },
-        {
-          "surah": 20,
-          "ayah": 122,
-          "ayahEnd": 122
-        }
-      ],
-      "quranRefs": [
-        {
-          "surah": 7,
-          "ayah": 23,
-          "ayahEnd": 23
-        },
-        {
-          "surah": 2,
-          "ayah": 37,
-          "ayahEnd": 37
-        },
-        {
-          "surah": 20,
-          "ayah": 122,
-          "ayahEnd": 122
-        }
-      ],
-      "hadithRefs": [],
-      "atharRefs": []
+        "adam-repentance-7-23",
+        "adam-tawba-accepted"
+      ]
     },
     {
       "id": "tl-descent",
       "title": "Herabkunft",
-      "summary": "Hinuntergehen auf die Erde; Rechtleitung — ohne moderne Ortslegende.",
-      "body": "Hinuntergehen auf die Erde; Rechtleitung — ohne moderne Ortslegende.",
-      "chronologyStatus": "textually-established",
-      "timeClass": "textually-established",
+      "order": 10,
       "claimIds": [
         "adam-descent",
         "adam-descent-place-unattested"
-      ],
-      "quran": [
-        {
-          "surah": 2,
-          "ayah": 36,
-          "ayahEnd": 39
-        },
-        {
-          "surah": 20,
-          "ayah": 123,
-          "ayahEnd": 123
-        }
-      ],
-      "quranRefs": [
-        {
-          "surah": 2,
-          "ayah": 36,
-          "ayahEnd": 39
-        },
-        {
-          "surah": 20,
-          "ayah": 123,
-          "ayahEnd": 123
-        }
-      ],
-      "hadithRefs": [],
-      "atharRefs": []
+      ]
+    },
+    {
+      "id": "tl-descendants",
+      "title": "Leben der Nachkommenschaft",
+      "order": 11,
+      "claimIds": [
+        "adam-children-count-unattested"
+      ]
     },
     {
       "id": "tl-sons",
-      "title": "Die beiden Söhne",
-      "summary": "Opfergaben, Tötung, Rabe, Bestattung — Namen im Qurʾān nicht genannt.",
-      "body": "Opfergaben, Tötung, Rabe, Bestattung — Namen im Qurʾān nicht genannt.",
-      "chronologyStatus": "textually-established",
-      "timeClass": "textually-established",
+      "title": "Geschichte der beiden Söhne",
+      "order": 12,
       "claimIds": [
         "adam-two-sons",
         "adam-sons-names-quran-unattested"
-      ],
-      "quran": [
-        {
-          "surah": 5,
-          "ayah": 27,
-          "ayahEnd": 31
-        }
-      ],
-      "quranRefs": [
-        {
-          "surah": 5,
-          "ayah": 27,
-          "ayahEnd": 31
-        }
-      ],
-      "hadithRefs": [],
-      "atharRefs": []
+      ]
     },
     {
       "id": "tl-musa-debate",
-      "title": "Ādam und Mūsā",
-      "summary": "Authentische Sunnah über ihre Argumentation.",
-      "body": "Authentische Sunnah über ihre Argumentation.",
-      "chronologyStatus": "authenticated",
-      "timeClass": "authenticated",
+      "title": "Ādam und Mūsā (Sunnah)",
+      "order": 13,
       "claimIds": [
-        "adam-musa-debate-bukhari",
-        "adam-musa-debate-muslim"
-      ],
-      "quran": [],
-      "quranRefs": [],
-      "hadithRefs": [
-        {
-          "work": "Ṣaḥīḥ al-Buḫārī",
-          "number": "3409",
-          "claimId": "adam-musa-debate-bukhari"
-        }
-      ],
-      "atharRefs": []
+        "adam-musa-debate-bukhari"
+      ]
+    },
+    {
+      "id": "tl-death",
+      "title": "Tod — research (nicht freigegeben)",
+      "order": 14,
+      "claimIds": [
+        "adam-death-research",
+        "adam-grave-unattested"
+      ]
     }
   ],
   "quranRefs": [
@@ -1974,6 +1756,38 @@
       "hadithNumber": "854.01"
     },
     {
+      "id": "adam-friday-muslim-854b-about",
+      "arabicOriginal": "وَحَدَّثَنَا قُتَيْبَةُ بْنُ سَعِيدٍ، حَدَّثَنَا الْمُغِيرَةُ، - يَعْنِي الْحِزَامِيَّ - عَنْ أَبِي الزِّنَادِ، عَنِ الأَعْرَجِ، عَنْ أَبِي هُرَيْرَةَ، أَنَّ النَّبِيَّ صلى الله عليه وسلم قَالَ ‏ \"‏ خَيْرُ يَوْمٍ طَلَعَتْ عَلَيْهِ الشَّمْسُ يَوْمُ الْجُمُعَةِ فِيهِ خُلِقَ آدَمُ وَفِيهِ أُدْخِلَ الْجَنَّةَ وَفِيهِ أُخْرِجَ مِنْهَا وَلاَ تَقُومُ السَّاعَةُ إِلاَّ فِي يَوْمِ الْجُمُعَةِ ‏\"‏ ‏.‏",
+      "translationDe": "Abū Hurayra berichtete, dass der Prophet ﷺ sagte: Der beste Tag, an dem die Sonne aufgegangen ist, ist der Freitag: an ihm wurde Ādam erschaffen, an ihm wurde er ins Paradies eingelassen, an ihm wurde er daraus herausgebracht. Und die letzte Stunde wird an keinem anderen Tag eintreten als am Freitag.",
+      "sahabiRawi": "Abū Hurayra",
+      "work": "Ṣaḥīḥ Muslim",
+      "bookChapter": "Kitāb al-Jumuʿah (book 7) — arabicnumber 854.01",
+      "number": "854.02",
+      "volumePage": "API hadithnumber=1976; reference={'book': 7, 'hadith': 26}",
+      "grading": "sahih",
+      "verificationStatus": "approved",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim.min.json#hadithnumber=1977",
+      "notes": "Zweite Überlieferungsfassung (854b / API 1977); enthält zusätzlich Hinweis auf die letzte Stunde am Freitag. Keine Uhrzeit/Kalenderdatierung ergänzt.",
+      "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
+      "gradingAuthority": "Ṣaḥīḥ Muslim",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Wortlaut aus Primäredition/API bzw. Ibn-Ḥibbān-Wortlaut geprüft",
+        "reviewPass2Note": "Rāwī, Nummer, Anspruch und Übersetzung unabhängig geprüft"
+      },
+      "kitab": "Kitāb al-Jumuʿah (book 7) — arabicnumber 854.01",
+      "hadithNumber": "854.02",
+      "numberAlt": "1977",
+      "gradingReference": "Ṣaḥīḥ Muslim 854b"
+    },
+    {
       "id": "adam-height-greeting-bukhari-about",
       "arabicOriginal": "حَدَّثَنِي عَبْدُ اللَّهِ بْنُ مُحَمَّدٍ، حَدَّثَنَا عَبْدُ الرَّزَّاقِ، عَنْ مَعْمَرٍ، عَنْ هَمَّامٍ، عَنْ أَبِي هُرَيْرَةَ ـ رضى الله عنه ـ عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ خَلَقَ اللَّهُ آدَمَ وَطُولُهُ سِتُّونَ ذِرَاعًا، ثُمَّ قَالَ اذْهَبْ فَسَلِّمْ عَلَى أُولَئِكَ مِنَ الْمَلاَئِكَةِ، فَاسْتَمِعْ مَا يُحَيُّونَكَ، تَحِيَّتُكَ وَتَحِيَّةُ ذُرِّيَّتِكَ‏.‏ فَقَالَ السَّلاَمُ عَلَيْكُمْ‏.‏ فَقَالُوا السَّلاَمُ عَلَيْكَ وَرَحْمَةُ اللَّهِ‏.‏ فَزَادُوهُ وَرَحْمَةُ اللَّهِ‏.‏ فَكُلُّ مَنْ يَدْخُلُ الْجَنَّةَ عَلَى صُورَةِ آدَمَ، فَلَمْ يَزَلِ الْخَلْقُ يَنْقُصُ حَتَّى الآنَ ‏\"‏‏.‏",
       "translationDe": "Abū Hurayra berichtete vom Propheten ﷺ: Allah erschuf Ādam, und seine Länge betrug sechzig Ellen. Dann sagte Er: Geh und grüße jene unter den Engeln, und höre, womit sie dich begrüßen — das ist dein Gruß und der Gruß deiner Nachkommenschaft. Er sagte: as-salāmu ʿalaykum. Sie antworteten: as-salāmu ʿalayka wa raḥmatullāh. …",
@@ -2806,7 +2620,7 @@
     {
       "id": "adam-hawwa-bukhari",
       "prophetId": "adam",
-      "category": "wife",
+      "category": "family",
       "claim": "In authentischer Sunnah wird Ḥawwāʾ (حواء) namentlich erwähnt.",
       "verificationStatus": "approved",
       "evidenceType": "sunnah",
@@ -2845,7 +2659,7 @@
     {
       "id": "adam-hawwa-muslim",
       "prophetId": "adam",
-      "category": "wife",
+      "category": "family",
       "claim": "Parallele bei Muslim: namentliche Erwähnung Ḥawwāʾs.",
       "verificationStatus": "approved",
       "evidenceType": "sunnah",
@@ -3605,7 +3419,7 @@
     {
       "id": "adam-children-count-unattested",
       "prophetId": "adam",
-      "category": "children",
+      "category": "family",
       "claim": "Die Gesamtzahl der Kinder Ādams ist durch Qurʾān und hier freigegebene Ṣaḥīḥ-Sunnah nicht vollständig bestimmt.",
       "verificationStatus": "approved",
       "evidenceType": "editorial",
@@ -6968,6 +6782,214 @@
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
       }
+    },
+    {
+      "id": "adam-angel-greeting-bukhari",
+      "prophetId": "adam",
+      "category": "greeting",
+      "claim": "Ādam wurde angewiesen, eine Gruppe von Engeln zu grüßen; deren Antwort wurde zum Gruß der Menschen.",
+      "verificationStatus": "approved",
+      "evidenceType": "sunnah",
+      "grading": "sahih",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "work": "Ṣaḥīḥ al-Buḫārī",
+      "hadithNumber": "3326",
+      "number": "3326",
+      "sahabiRawi": "Abū Hurayra",
+      "gradingAuthority": "Ṣaḥīḥ al-Buḫārī",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari.min.json#hadithnumber=3326",
+      "notes": "Separates Ereignis aus demselben Bericht wie die Körpergröße (3326).",
+      "review": {
+        "pass1": true,
+        "pass2": true
+      },
+      "quotation": false,
+      "arabicOriginal": "حَدَّثَنِي عَبْدُ اللَّهِ بْنُ مُحَمَّدٍ، حَدَّثَنَا عَبْدُ الرَّزَّاقِ، عَنْ مَعْمَرٍ، عَنْ هَمَّامٍ، عَنْ أَبِي هُرَيْرَةَ ـ رضى الله عنه ـ عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ خَلَقَ اللَّهُ آدَمَ وَطُولُهُ سِتُّونَ ذِرَاعًا، ثُمَّ قَالَ اذْهَبْ فَسَلِّمْ عَلَى أُولَئِكَ مِنَ الْمَلاَئِكَةِ، فَاسْتَمِعْ مَا يُحَيُّونَكَ، تَحِيَّتُكَ وَتَحِيَّةُ ذُرِّيَّتِكَ‏.‏ فَقَالَ السَّلاَمُ عَلَيْكُمْ‏.‏ فَقَالُوا السَّلاَمُ عَلَيْكَ وَرَحْمَةُ اللَّهِ‏.‏ فَزَادُوهُ وَرَحْمَةُ اللَّهِ‏.‏ فَكُلُّ مَنْ يَدْخُلُ الْجَنَّةَ عَلَى صُورَةِ آدَمَ، فَلَمْ يَزَلِ الْخَلْقُ يَنْقُصُ حَتَّى الآنَ ‏\"‏‏.‏",
+      "translationDe": "Abū Hurayra berichtete vom Propheten ﷺ: Allah erschuf Ādam, und seine Länge betrug sechzig Ellen. Dann sagte Er: Geh und grüße jene unter den Engeln, und höre, womit sie dich begrüßen — das ist dein Gruß und der Gruß deiner Nachkommenschaft. Er sagte: as-salāmu ʿalaykum. Sie antworteten: as-salāmu ʿalayka wa raḥmatullāh. …",
+      "kitab": "Kitāb Aḥādīṯ al-Anbiyāʾ (book 60)",
+      "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
+      "bookChapter": "Kitāb Aḥādīṯ al-Anbiyāʾ (book 60)"
+    },
+    {
+      "id": "adam-in-paradise-quran",
+      "prophetId": "adam",
+      "category": "paradise",
+      "claim": "Ādam und seine Gattin wurden im Garten angesiedelt und vor dem Baum gewarnt (u. a. 2:35, 7:19, 20:117–119).",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "Qurʾān",
+      "number": "2:35; 7:19; 20:117-119",
+      "notes": "Keine exakte geografische Identifikation des Gartens als heutiger Erdenort als Fakt.",
+      "review": {
+        "pass1": true,
+        "pass2": true
+      },
+      "quotation": false
+    },
+    {
+      "id": "adam-statement-7-23",
+      "prophetId": "adam",
+      "category": "statements",
+      "claim": "Direkte Rede Ādams und seiner Gattin: Reue-Duʿāʾ in 7:23.",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "Qurʾān",
+      "number": "7:23",
+      "speaker": "adam_and_spouse",
+      "notes": "statementType=dua; siehe statements.quran",
+      "review": {
+        "pass1": true,
+        "pass2": true
+      },
+      "quotation": true
+    },
+    {
+      "id": "adam-friday-muslim-854b",
+      "prophetId": "adam",
+      "category": "friday",
+      "claim": "Weitere Fassung: Freitag – Erschaffung, Eintritt, Herausführung; die letzte Stunde an keinem anderen Tag als Freitag (Muslim 854b).",
+      "verificationStatus": "approved",
+      "evidenceType": "sunnah",
+      "grading": "sahih",
+      "source": "Ṣaḥīḥ Muslim",
+      "work": "Ṣaḥīḥ Muslim",
+      "hadithNumber": "854.02",
+      "number": "854.02",
+      "numberAlt": "1977",
+      "arabicOriginal": "وَحَدَّثَنَا قُتَيْبَةُ بْنُ سَعِيدٍ، حَدَّثَنَا الْمُغِيرَةُ، - يَعْنِي الْحِزَامِيَّ - عَنْ أَبِي الزِّنَادِ، عَنِ الأَعْرَجِ، عَنْ أَبِي هُرَيْرَةَ، أَنَّ النَّبِيَّ صلى الله عليه وسلم قَالَ ‏ \"‏ خَيْرُ يَوْمٍ طَلَعَتْ عَلَيْهِ الشَّمْسُ يَوْمُ الْجُمُعَةِ فِيهِ خُلِقَ آدَمُ وَفِيهِ أُدْخِلَ الْجَنَّةَ وَفِيهِ أُخْرِجَ مِنْهَا وَلاَ تَقُومُ السَّاعَةُ إِلاَّ فِي يَوْمِ الْجُمُعَةِ ‏\"‏ ‏.‏",
+      "translationDe": "Abū Hurayra berichtete, dass der Prophet ﷺ sagte: Der beste Tag, an dem die Sonne aufgegangen ist, ist der Freitag: an ihm wurde Ādam erschaffen, an ihm wurde er ins Paradies eingelassen, an ihm wurde er daraus herausgebracht. Und die letzte Stunde wird an keinem anderen Tag eintreten als am Freitag.",
+      "sahabiRawi": "Abū Hurayra",
+      "gradingAuthority": "Ṣaḥīḥ Muslim",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim.min.json#hadithnumber=1977",
+      "notes": "Kein Kalenderdatum und keine Uhrzeit ergänzt.",
+      "review": {
+        "pass1": true,
+        "pass2": true
+      },
+      "quotation": true
+    },
+    {
+      "id": "adam-iblis-refused",
+      "prophetId": "adam",
+      "category": "iblis",
+      "claim": "Iblīs verweigerte den Befehl und war hochmütig.",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "Qurʾān",
+      "notes": "Phase-3 Zero-Trust",
+      "review": {
+        "pass1": true,
+        "pass2": true
+      },
+      "quotation": false
+    },
+    {
+      "id": "adam-iblis-not-auto-angel",
+      "prophetId": "adam",
+      "category": "iblis",
+      "claim": "Iblīs wird nicht allein wegen der Anwesenheit beim Befehl automatisch als Engel klassifiziert (vgl. 18:50).",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "Qurʾān",
+      "notes": "Phase-3 Zero-Trust",
+      "review": {
+        "pass1": true,
+        "pass2": true
+      },
+      "quotation": false
+    },
+    {
+      "id": "adam-repentance-7-23",
+      "prophetId": "adam",
+      "category": "repentance",
+      "claim": "Ādam und seine Gattin sprachen die Reue-Duʿāʾ (7:23).",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "Qurʾān",
+      "notes": "Phase-3 Zero-Trust",
+      "review": {
+        "pass1": true,
+        "pass2": true
+      },
+      "quotation": false
+    },
+    {
+      "id": "adam-tawba-accepted",
+      "prophetId": "adam",
+      "category": "repentance",
+      "claim": "Allah nahm die Reue Ādams an (2:37; 20:122).",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "Qurʾān",
+      "notes": "Phase-3 Zero-Trust",
+      "review": {
+        "pass1": true,
+        "pass2": true
+      },
+      "quotation": false
+    },
+    {
+      "id": "adam-death-research",
+      "prophetId": "adam",
+      "category": "death",
+      "claim": "Tod, Bestattung und Alter Ādams bleiben research — keine populäre Todesgeschichte freigegeben.",
+      "verificationStatus": "research",
+      "evidenceType": "none",
+      "grading": "unverified",
+      "source": "—",
+      "work": "—",
+      "notes": "Phase-3 Zero-Trust",
+      "review": {
+        "pass1": true,
+        "pass2": true
+      },
+      "quotation": false
+    },
+    {
+      "id": "adam-sources-index",
+      "prophetId": "adam",
+      "category": "sources",
+      "claim": "Quellenansicht: Qurʾān · Buḫārī · Muslim · Ibn Ḥibbān · research/Isrāʾīliyyāt isoliert.",
+      "verificationStatus": "approved",
+      "evidenceType": "meta",
+      "grading": "meta",
+      "source": "Profil-Metadaten",
+      "work": "—",
+      "review": {
+        "pass1": true,
+        "pass2": true
+      },
+      "quotation": false
+    },
+    {
+      "id": "adam-dua-claim",
+      "prophetId": "adam",
+      "category": "dua",
+      "claim": "Duʿāʾ der Reue (7:23), Sprecher: Ādam und Gattin.",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "Qurʾān",
+      "number": "7:23",
+      "speaker": "adam_and_spouse",
+      "review": {
+        "pass1": true,
+        "pass2": true
+      },
+      "quotation": true
     }
   ],
   "audit": {
@@ -7017,7 +7039,9 @@
       "Ḥawwāʾ nur über Sunnah namentlich.",
       "Keine Erbsündenlehre.",
       "Keine bildliche Darstellung.",
-      "STOPP nach Ādam — nächster: Idrīs (nicht automatisch)."
+      "STOPP nach Ādam — nächster: Idrīs (nicht automatisch).",
+      "Muslim 854a/b beide erfasst.",
+      "Timeline textlich belegbar, Tod research."
     ]
   }
 }
