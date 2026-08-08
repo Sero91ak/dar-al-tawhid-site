@@ -14,7 +14,7 @@ import re
 from datetime import datetime, timezone
 from pathlib import Path
 
-ROOT = Path("/workspace")
+ROOT = Path(__file__).resolve().parents[1]
 QURAN = ROOT / "content/quran"
 TEST = ROOT / "test/data/prophets"
 REL = TEST / "relations"
