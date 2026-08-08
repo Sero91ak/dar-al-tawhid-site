@@ -3,23 +3,25 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-08T03:25:51.780Z",
+  "updatedAt": "2026-08-08T08:50:51.780Z",
   "usersChecked": 10,
   "duaCandidates": 0,
   "recCandidates": 0,
   "sent": 0,
   "skipped": 0,
-  "duplicates": 0,
+  "duplicates": 10,
   "errors": 0,
   "dailyContentDate": "2026-08-08",
   "currentRecommendation": {
-    "id": "fiqh-frauen-haben-rechte-wie-pflichten-242",
-    "title": "Fiqh: Frauen haben Rechte wie Pflichten",
-    "category": "Fiqh",
-    "scholar": "Ibn Kathīr"
+    "id": "hukm-muhakamah-kufr-begriff-braucht-tafsil-383",
+    "title": "Der Begriff Kufr braucht Tafṣīl",
+    "category": "Hukm & Muḥākamah",
+    "scholar": "Ibn Kathīr / aṭ-Ṭabarī"
   },
   "currentDua": {
-    "category": ""
+    "id": "dua-067-allahumma-inni-audhu-bika-min-al-hammi",
+    "title": "Schutz vor Sorge, Trauer, Schwäche und Schulden",
+    "category": "Sorge, Trauer & Schulden"
   },
   "configAutomatic": true,
   "responses": []
