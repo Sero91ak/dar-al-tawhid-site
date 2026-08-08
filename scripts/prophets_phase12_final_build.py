@@ -628,7 +628,7 @@ def build_dawud(buk_en, buk_ar):
         claim_q(pid, "dawud-disputants-38-21-25", "events", "Streitende im Miḥrāb (38:21–25) — KEINE Uriyā-/Ehebruchs-/Tötungsplan-Legende in Hauptbiografie.", 38, 21, 25, notes="uriya_narrative=excluded_from_main_bio"),
         claim_q(pid, "dawud-son-sulayman-27-16", "family", "Sulaymān erbt von Dāwūd (27:16).", 27, 16),
         claim_q(pid, "dawud-son-sulayman-38-30", "family", "Sulaymān als Sohn Dāwūds (38:30).", 38, 30),
-        claim_absence(pid, "dawud-uriya-israiliyyat-isolated", "research", "Uriyā-Legende / Ehebruchsgeschichte / Tötungsplan: isrāʾīliyyāt — nicht in Hauptbiografie."),
+        claim_absence(pid, "dawud-uriya-israiliyyat-isolated", "research", "Uriyā-Legende / Ehebruchsgeschichte / Tötungsplan: Isrāʾīliyyāt ablehnen — never as mainBiography."),
         claim_absence(pid, "dawud-wives-other-children-research", "family", "wives/otherChildren=research."),
         claim_absence(pid, "dawud-death-grave-unattested", "death", "deathYear=not_established; grave=not_authentically_established."),
     ]
