@@ -28,14 +28,15 @@ function splitStatementBlocks(text, minBlocks = 2, maxBlocks = 4) {
 }
 
 export function emphasizeHtml(text) {
+  /* Bildbeitrag-Stil: nur Kernbegriffe dezent gold unterstreichen – kein Flash aller langen Wörter */
   return String(text || "")
     .split(/(\s+)/)
     .map((token) => {
       if (/^\s+$/.test(token)) return token;
       const bare = token.replace(/[^\p{L}\p{N}ʾʿāīūĀĪŪ]/gu, "").toLowerCase();
-      const important = bare.length >= 7 || HIGHLIGHT_WORDS.has(bare) || /allāh|allah|qur/i.test(bare);
+      const important = HIGHLIGHT_WORDS.has(bare) || /allāh|allah|qurʾ?ān|quran|tawḥ?īd|tauhid/i.test(bare);
       if (!important) return escapeHtml(token);
-      return `<span style="color:#efd78e;font-weight:700;font-style:italic;border-bottom:1px solid rgba(239,215,142,.55);padding-bottom:2px">${escapeHtml(token)}</span>`;
+      return `<span style="color:#efd78e;font-weight:600;text-decoration:underline;text-decoration-color:rgba(239,215,142,.75);text-underline-offset:3px;text-decoration-thickness:1px">${escapeHtml(token)}</span>`;
     })
     .join("");
 }
@@ -70,14 +71,14 @@ export function buildVoiceScript(statement) {
 }
 
 /**
- * Abschnittsweise Einblendungen mit geschätzter Synchronität zur Stimme.
+ * Abschnittsweise Einblendungen – ruhig, lesbar wie Bildbeitrag (kein Topic/Dhikr-Flash).
  */
 export function buildCaptionPlan(statement, { totalSec = 20 } = {}) {
   const brand = DAR_VIDEO_PROFILE.branding;
   const speakerLine = buildSpeakerLine(statement);
   const de = String(statement?.de || "").trim();
   const source = String(statement?.source || "").trim();
-  const blocks = splitStatementBlocks(de, 2, 4);
+  const blocks = splitStatementBlocks(de, 2, 3);
   const duration = Math.max(16, Number(totalSec) || 20);
 
   const speakerChars = speakerLine.length;
@@ -86,30 +87,31 @@ export function buildCaptionPlan(statement, { totalSec = 20 } = {}) {
   const ctaChars = brand.followLine.length + 40;
   const totalChars = speakerChars + statementChars + sourceChars + ctaChars;
 
-  let cursor = 0.6;
+  let cursor = 0.45;
   const overlays = [
     {
       role: "brand",
-      at: 0.25,
-      length: 2.4,
+      at: 0.15,
+      length: 2.0,
       text: brand.title,
-      topic: String(statement?.topic || "").trim() || null,
+      /* Kein Topic (Dhikr etc.) – Branding nur über Logo-Wasserzeichen + dezente Markenzeile */
+      topic: null,
       htmlEmphasis: false
     },
     {
       role: "speaker",
       at: cursor,
-      length: Math.max(2.8, Math.min(4.2, (speakerChars / totalChars) * duration + 1.2)),
+      length: Math.max(3.2, Math.min(4.8, (speakerChars / totalChars) * duration + 1.6)),
       text: speakerLine,
       htmlEmphasis: false
     }
   ];
-  cursor += overlays[1].length + 0.25;
+  cursor += overlays[1].length + 0.35;
 
-  const statementBudget = Math.max(6, duration - cursor - 7);
+  const statementBudget = Math.max(7, duration - cursor - 8);
   blocks.forEach((block, index) => {
     const share = block.length / statementChars;
-    const length = Math.max(2.6, Math.min(5.5, statementBudget * share));
+    const length = Math.max(3.4, Math.min(6.2, statementBudget * share));
     overlays.push({
       role: "statement",
       at: cursor,
@@ -118,21 +120,21 @@ export function buildCaptionPlan(statement, { totalSec = 20 } = {}) {
       htmlEmphasis: true,
       blockIndex: index
     });
-    cursor += length + 0.18;
+    cursor += length + 0.28;
   });
 
   overlays.push({
     role: "source",
-    at: Math.min(cursor + 0.15, duration - 6.2),
-    length: 3.2,
-    text: source,
+    at: Math.min(cursor + 0.2, duration - 7.0),
+    length: 4.0,
+    text: source ? `Quelle: ${source}` : "",
     htmlEmphasis: false
   });
 
   overlays.push({
     role: "cta",
-    at: Math.max(duration - 5.8, overlays[overlays.length - 1].at + 2.8),
-    length: 5.4,
+    at: Math.max(duration - 6.2, overlays[overlays.length - 1].at + overlays[overlays.length - 1].length + 0.2),
+    length: 6.0,
     text: brand.followLine,
     credit: brand.credit,
     social: {
@@ -144,7 +146,7 @@ export function buildCaptionPlan(statement, { totalSec = 20 } = {}) {
   });
 
   return {
-    version: 3,
+    version: 4,
     templateId: DAR_VIDEO_PROFILE.id,
     voiceScript: buildVoiceScript(statement),
     overlays,

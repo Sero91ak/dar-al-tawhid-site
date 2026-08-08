@@ -250,7 +250,7 @@ details.box summary::-webkit-details-marker{display:none}
     <div class="box-body">
       <div class="meta" id="providerDetail">Anbieterstatus wird geladen…</div>
       <div><label class="label" for="maxBudget">Max. € / Video</label><input id="maxBudget" type="number" min="0.5" max="20" step="0.1" value="1.2"></div>
-      <div class="meta">Provider-Auswahl: automatisch (günstig). Stage nur interne Vorschau; Endfassung Production.</div>
+      <div class="meta">Provider-Auswahl: automatisch. Endfassung nur Shotstack Production (ohne Fremdwasserzeichen). Stage wird nicht mehr als Fallback genutzt.</div>
     </div>
   </details>
 
@@ -259,7 +259,8 @@ details.box summary::-webkit-details-marker{display:none}
     <div class="box-body meta">
       <b>ChatGPT:</b> „Video-Bild erstellen“ / „Video-Bildbeitrag“ / „Videobeitrag erstellen“ = nur das reine 4K-Ausgangsbild (textfrei, logofrei).<br><br>
       <b>Admin-Button „Video-Beitrag erstellen“:</b> Text + Ausgangsbild → 15 s Bewegung → Stimme → Texteinblendungen → Branding → MP4.<br><br>
-      Standard: externes Bild hochladen/Bibliothek. KI-Bild nur optional. Feed/Push nie automatisch. Keine Musik, keine Fremdwasserzeichen, Propheten nie körperlich dargestellt.
+      Branding wie Bildbeitrag: großes DAR-Logo mittig als Wasserzeichen, lesbare Schrift (Cormorant/Amiri), Quelle klar, Social-Logos am Ende, kein Topic/Dhikr-Flash, kein Shotstack-Wasserzeichen.<br><br>
+      Standard: externes Bild hochladen/Bibliothek. KI-Bild nur optional. Feed/Push nie automatisch. Keine Musik, keine Fremdwasserzeichen, keine modernen Autos, Propheten nie körperlich dargestellt.
     </div>
   </details>
 </main>
@@ -471,7 +472,7 @@ details.box summary::-webkit-details-marker{display:none}
         sceneImageUrl:state.scene.url,
         sceneImageR2Key:state.scene.r2Key||null,
         costConfirmed:true,
-        profile:"dar-standard-v2",
+        profile:"dar-standard-v3",
         format:"9:16",
         manualApproval:true,
         composePreview:false,

@@ -58,7 +58,8 @@ export function depictionPromptBlock(statement) {
       "Forbidden: face, back view, side view, silhouette, shadow-person, veiled body, hands, body crop, or any figure meant to be the prophet.",
       "Allowed only: historically fitting landscapes, architecture, roads, houses, mosques, objects, manuscripts, empty rooms,",
       "and optional distant anonymous people who are clearly NOT the prophet and never the narrative focus as the prophet.",
-      "Historically and temporally plausible setting for the period of the topic; no modern lamps, furniture, electronics, cars, plastic, or fantasy architecture.",
+      "Historically and temporally plausible setting for the period of the topic; no modern lamps, furniture, electronics, cars, vehicles, plastic, or fantasy architecture.",
+      "Absolutely no automobiles, cars, trucks, vans, buses, motorcycles, scooters, traffic, or modern transport.",
       "Photorealistic cinematic still/motion, calm, noble, no text, no logos, no watermarks, no readable invented writing on props."
     ].join(" ");
   }
@@ -69,7 +70,8 @@ export function depictionPromptBlock(statement) {
     "For Sahabah, Tabiin, Salaf, or named early scholars: anonymous symbolic figure only, never an identifiable portrait.",
     "Modest historically fitting clothing, anatomically correct hands, no extra fingers, no deformed bodies.",
     "Historically and temporally plausible architecture, tools, books, light sources, and environment for the topic era.",
-    "No modern lamps, modern furniture, modern clothing, electronics, cars, plastic, neon, cartoon, fantasy, collage.",
+    "No modern lamps, modern furniture, modern clothing, electronics, cars, vehicles, plastic, neon, cartoon, fantasy, collage.",
+    "Absolutely no automobiles, cars, trucks, vans, buses, motorcycles, scooters, traffic, or modern transport in frame.",
     "Photorealistic cinematic look; no text, logos, watermarks, icons, or readable invented writing in the scene."
   ].join(" ");
 }
@@ -79,7 +81,8 @@ export function motionNegativePrompt(statement) {
     "face visible", "front portrait", "recognizable face", "eyes visible", "celebrity",
     "deformed hands", "extra fingers", "horror", "mask", "music waveform",
     "text", "watermark", "logo", "social icons", "collage", "cartoon", "fantasy creature",
-    "modern laptop", "smartphone", "car", "neon lights", "plastic bottle",
+    "modern laptop", "smartphone", "car", "automobile", "truck", "van", "bus", "motorcycle",
+    "scooter", "traffic", "vehicle", "sports car", "neon lights", "plastic bottle",
     "wardrobe change", "architecture change", "new person appearing", "morphing"
   ];
   if (isProphetRelatedStatement(statement)) {
