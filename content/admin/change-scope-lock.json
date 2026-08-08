@@ -2708,6 +2708,22 @@
         "scripts/build_prophets_block04.py"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-block05-final-core-v607-2026-08-08",
+      "approvedBy": "user-task-propheten-5er-block-05",
+      "note": "Zero-Trust letzter Kernblock: Yaḥyā, ʿĪsā, Dhū l-Kifl (Ikhtilāf), Muḥammad (Index), Yūshaʿ — Test-first, production=disabled",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "data/prophets/",
+        "test/assets/prophets/prophets.js",
+        "test/index.html",
+        "test/version.json",
+        "index.html",
+        "scripts/build_prophets_block05.py"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

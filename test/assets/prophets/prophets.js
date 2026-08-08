@@ -104,7 +104,7 @@
   function prophetEmoji(id, p) {
     if (PROPHET_EMOJI[id]) return PROPHET_EMOJI[id];
     if (p && p.uluAlAzm) return "✦";
-    if (p && p.prophetStatus === "disputed") return "❔";
+    if (p && (p.prophetStatus === "disputed" || p.prophetStatus === "scholarly_disputed" || p.prophetStatus === "scholarly_source_correlation")) return "❔";
     return "🕊️";
   }
 
@@ -298,7 +298,7 @@
     var meta = [roles, p.people].filter(Boolean).join(" · ");
     var tags = p.uluAlAzm
       ? "Ulū l-ʿAzm"
-      : p.prophetStatus === "disputed"
+      : (p.prophetStatus === "disputed" || p.prophetStatus === "scholarly_disputed" || p.prophetStatus === "scholarly_source_correlation")
         ? "Umstritten"
         : "Qurʾān";
     var emoji = prophetEmoji(p.id, p);

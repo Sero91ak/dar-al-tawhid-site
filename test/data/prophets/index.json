@@ -394,7 +394,7 @@
       "uluAlAzm": false,
       "prophetStatus": "quran_explicit",
       "profileFile": "yahya.json",
-      "profileStatus": "research"
+      "profileStatus": "approved"
     },
     {
       "id": "isa",
@@ -409,21 +409,26 @@
       "uluAlAzm": true,
       "prophetStatus": "quran_explicit",
       "profileFile": "isa.json",
-      "profileStatus": "research"
+      "profileStatus": "approved"
     },
     {
       "id": "dhul-kifl",
       "name": "Dhū l-Kifl",
       "nameAr": "ذو الكفل",
       "honorific": "عليه السلام",
-      "roles": [
-        "nabī"
-      ],
+      "roles": [],
       "people": "",
       "uluAlAzm": false,
-      "prophetStatus": "quran_named_status_under_review",
+      "prophetStatus": "scholarly_disputed",
       "profileFile": "dhul-kifl.json",
-      "profileStatus": "research"
+      "profileStatus": "approved",
+      "note": "Qurʾānisch namentlich; Prophetenstatus Ikhtilāf — kein falscher Konsens.",
+      "searchTerms": [
+        "Dhū l-Kifl",
+        "Dhul-Kifl",
+        "الكفل",
+        "Ikhtilāf"
+      ]
     },
     {
       "id": "muhammad",
@@ -438,7 +443,7 @@
       "uluAlAzm": true,
       "prophetStatus": "quran_explicit",
       "profileFile": "muhammad.json",
-      "profileStatus": "research"
+      "profileStatus": "approved"
     }
   ],
   "disputed": [
@@ -477,12 +482,24 @@
       "prophetStatus": "disputed",
       "note": "Im Qurʾān erwähnt; keine automatische Einordnung als Prophet.",
       "profileFile": "dhul-qarnayn.json"
+    },
+    {
+      "id": "yusha-ibn-nun",
+      "name": "Yūshaʿ ibn Nūn",
+      "nameAr": "يوشع بن نون",
+      "honorific": "عليه السلام",
+      "prophetStatus": "scholarly_source_correlation",
+      "note": "Name und Sonnenwunder in authentischer Sunnah; Prophetenstatus = Quellenkorrelation (nicht Qurʾān-Eigenname).",
+      "profileFile": "yusha-ibn-nun.json",
+      "profileStatus": "approved",
+      "listPlacement": "special_sunnah_not_core_quran_prophet"
     }
   ],
   "audit": {
-    "updatedAt": "2026-08-07T22:40:30.000Z",
+    "updatedAt": "2026-08-08T09:03:10.000Z",
     "scope": "test-only",
     "production": "disabled",
-    "notes": "Index und Profile unter Zero-Trust neu aufgesetzt; Mūsā-Claims re-auditiert."
+    "notes": "Block 05 Kernabschluss: Yaḥyā, ʿĪsā, Dhū l-Kifl (Ikhtilāf), Muḥammad (Index), Yūshaʿ (Sonderdatensatz).",
+    "block05": true
   }
 }
