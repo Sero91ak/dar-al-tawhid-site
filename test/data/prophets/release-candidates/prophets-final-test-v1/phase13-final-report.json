@@ -1,0 +1,59 @@
+{
+  "releaseCandidate": "prophets-final-test-v1",
+  "environment": "test",
+  "coreProfiles": 25,
+  "coreProfilesLoaded": 25,
+  "researchProfiles": 5,
+  "claims": {
+    "approved": 1730,
+    "research": 9,
+    "disputed": 0,
+    "rejected": 0
+  },
+  "evidence": {
+    "quran": 1369,
+    "sahih": 311,
+    "hasan": 0,
+    "reliableAthar": 0
+  },
+  "excluded": {
+    "daif": 0,
+    "veryWeak": 0,
+    "mawdu": 0,
+    "israiliyyat": 0,
+    "unverified": 227
+  },
+  "validation": {
+    "json": "PASS",
+    "schema": "PASS",
+    "claims": "PASS",
+    "quran": "PASS",
+    "hadith": "PASS",
+    "athar": "PASS",
+    "relations": "PASS",
+    "search": "PASS",
+    "researchIsolation": "PASS",
+    "productionLock": "PASS"
+  },
+  "ui": {
+    "phone": "NOT_RUN",
+    "tablet": "NOT_RUN",
+    "fold": "NOT_RUN",
+    "rtl": "NOT_RUN",
+    "themes": "PASS"
+  },
+  "pwa": {
+    "offline": "NOT_RUN",
+    "updateLoop": "NOT_RUN"
+  },
+  "regression": "NOT_RUN",
+  "errors": [],
+  "productionEnabled": false,
+  "testEnabled": true,
+  "validatorExit": "PASS",
+  "finalResult": "PASS",
+  "note": "Manual viewport/offline/regression marked NOT_RUN when not browser-executed. PASS on finalResult means data+validator+lock only when ui/pwa not all PASS.",
+  "generatedAt": "2026-08-08T10:59:40.441Z",
+  "finalResultDataGate": "PASS",
+  "finalResultStrictManual": "NOT_RUN"
+}

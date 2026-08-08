@@ -514,39 +514,7 @@
       "directReference": "#quran-surah/68/4"
     }
   ],
-  "statements": {
-    "quran": [
-      {
-        "id": "muhammad-st-via-quran-address",
-        "speaker": "Allah",
-        "sourceType": "quran",
-        "statementType": "address",
-        "arabicOriginal": "مَّا كَانَ مُحَمَّدٌ أَبَآ أَحَدٖ مِّن رِّجَالِكُمۡ وَلَٰكِن رَّسُولَ ٱللَّهِ وَخَاتَمَ ٱلنَّبِيِّـۧنَۗ وَكَانَ ٱللَّهُ بِكُلِّ شَيۡءٍ عَلِيمٗا",
-        "translationDe": "Muhammad ist nicht der Vater irgend jemandes von euren Männern, sondern Allahs Gesandter und das Siegel der Propheten. Und Allah weiß über alles Bescheid",
-        "surah": 33,
-        "ayah": 40,
-        "ayahEnd": 40,
-        "context": "Siegel der Propheten",
-        "reference": "33:40",
-        "grading": "quran",
-        "verificationStatus": "approved",
-        "directReference": "#quran-surah/33/40",
-        "category": "statements",
-        "review": {
-          "sourceChecked": true,
-          "textChecked": true,
-          "gradingChecked": true,
-          "translationChecked": true,
-          "directLinkChecked": true,
-          "reviewPass1": "passed",
-          "reviewPass2": "passed",
-          "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
-          "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-        }
-      }
-    ],
-    "sunnah": []
-  },
+  "statements": [],
   "prophetAbout": [
     {
       "id": "muhammad-brick-3535-about",
@@ -2048,12 +2016,12 @@
   },
   "schemaVersion": 4,
   "contentVersion": "prophets-final-test-v1",
-  "updatedAt": "2026-08-08T10:48:09Z",
+  "updatedAt": "2026-08-08T10:58:11.412Z",
   "coverage": {
     "authenticitySeparateFromCoverage": true,
     "coverageStatus": "complete_for_defined_scope",
     "coverageNote": "Muḥammad ﷺ: modularer Index; 33:40 Siegel; production lock bleibt.",
-    "auditedAt": "2026-08-08T10:48:09.594Z",
+    "auditedAt": "2026-08-08T11:00:05.467Z",
     "phase": 12,
     "block": "final",
     "reviewPass1": true,
@@ -2061,5 +2029,322 @@
     "contentVersion": "prophets-final-test-v1",
     "lastAuditResult": "PASS",
     "releaseCandidate": "prophets-final-test-v1"
-  }
+  },
+  "overview": [
+    {
+      "key": "name",
+      "label": "Name",
+      "value": "Muḥammad / Aḥmad",
+      "status": "authentisch belegt",
+      "claimIds": [
+        "muhammad-name-33-40",
+        "muhammad-ahmad-61-6"
+      ]
+    },
+    {
+      "key": "roles",
+      "label": "Nabī / Rasūl",
+      "value": "Rasūl · Siegel der Propheten",
+      "status": "authentisch belegt",
+      "claimIds": [
+        "muhammad-khatam-33-40",
+        "muhammad-brick-3535"
+      ]
+    },
+    {
+      "key": "ulu",
+      "label": "Ulū l-ʿAzm",
+      "value": "ja — mit Qurʾān-/Tafsīr-Verknüpfung",
+      "status": "authentisch/kontextuell",
+      "claimIds": [
+        "muhammad-ulu-azm-33-7"
+      ]
+    },
+    {
+      "key": "profileType",
+      "label": "Profiltyp",
+      "value": "Biografie-Index (nicht Voll-Sunnah-Kopie)",
+      "status": "policy",
+      "claimIds": [
+        "muhammad-index-not-full-sunnah"
+      ]
+    },
+    {
+      "key": "wahy",
+      "label": "Offenbarungsbeginn",
+      "value": "Buḫārī 3",
+      "status": "authentisch belegt",
+      "claimIds": [
+        "muhammad-wahy-bukhari-3"
+      ]
+    }
+  ],
+  "sunnah": [
+    {
+      "hadithId": "bukhari-3535",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3535",
+      "claimIds": [
+        "muhammad-brick-3535"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "bukhari-3455",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3455",
+      "claimIds": [
+        "muhammad-no-prophet-after-3455"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "bukhari-3",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3",
+      "claimIds": [
+        "muhammad-wahy-bukhari-3"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "muslim-1162",
+      "source": "Ṣaḥīḥ Muslim",
+      "reference": "1162",
+      "claimIds": [
+        "muhammad-monday-muslim-1162"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    }
+  ],
+  "events": [],
+  "sources": [
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "33:40",
+      "hadithId": "",
+      "claimIds": [
+        "muhammad-name-33-40"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "3:144",
+      "hadithId": "",
+      "claimIds": [
+        "muhammad-name-3-144"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "47:2",
+      "hadithId": "",
+      "claimIds": [
+        "muhammad-name-47-2"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "48:29",
+      "hadithId": "",
+      "claimIds": [
+        "muhammad-name-48-29"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "61:6",
+      "hadithId": "",
+      "claimIds": [
+        "muhammad-ahmad-61-6"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3535",
+      "hadithId": "bukhari-3535",
+      "claimIds": [
+        "muhammad-brick-3535"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3455",
+      "hadithId": "bukhari-3455",
+      "claimIds": [
+        "muhammad-no-prophet-after-3455"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "33:7",
+      "hadithId": "",
+      "claimIds": [
+        "muhammad-ulu-azm-33-7"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "42:13",
+      "hadithId": "",
+      "claimIds": [
+        "muhammad-ulu-azm-42-13"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "46:35",
+      "hadithId": "",
+      "claimIds": [
+        "muhammad-ulu-azm-46-35"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "68:4",
+      "hadithId": "",
+      "claimIds": [
+        "muhammad-character-68-4"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "9:128",
+      "hadithId": "",
+      "claimIds": [
+        "muhammad-character-9-128"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:107",
+      "hadithId": "",
+      "claimIds": [
+        "muhammad-character-21-107"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "33:21",
+      "hadithId": "",
+      "claimIds": [
+        "muhammad-character-33-21"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3",
+      "hadithId": "bukhari-3",
+      "claimIds": [
+        "muhammad-wahy-bukhari-3"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ Muslim",
+      "reference": "1162",
+      "hadithId": "muslim-1162",
+      "claimIds": [
+        "muhammad-monday-muslim-1162"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Negativfeststellung nach Prüfung (Qurʾān; Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "muhammad-father-abdullah"
+      ],
+      "grading": "unverified",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Coverage-Audit (definierter Korpus)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "muhammad-no-synthetic-farewell-sermon"
+      ],
+      "grading": "absence_in_reviewed_corpus",
+      "verificationStatus": "approved"
+    }
+  ],
+  "research": []
 }

@@ -180,39 +180,7 @@
       "directReference": "#quran-surah/18/60"
     }
   ],
-  "statements": {
-    "quran": [
-      {
-        "id": "khidr-st-not-own-command",
-        "speaker": "al-Khiḍr (Sunnah-Name) / Diener",
-        "sourceType": "quran",
-        "statementType": "statement",
-        "arabicOriginal": "وَأَمَّا ٱلۡجِدَارُ فَكَانَ لِغُلَٰمَيۡنِ يَتِيمَيۡنِ فِي ٱلۡمَدِينَةِ وَكَانَ تَحۡتَهُۥ كَنزٞ لَّهُمَا وَكَانَ أَبُوهُمَا صَٰلِحٗا فَأَرَادَ رَبُّكَ أَن يَبۡلُغَآ أَشُدَّهُمَا وَيَسۡتَخۡرِجَا كَنزَهُمَا رَحۡمَةٗ مِّن رَّبِّكَۚ وَمَا فَعَلۡتُهُۥ عَنۡ أَمۡرِيۚ ذَٰلِكَ تَأۡوِيلُ مَا لَمۡ تَسۡطِع عَّلَيۡهِ صَبۡرٗا",
-        "translationDe": "Was aber die Mauer angeht, so gehörte sie zwei Waisenjungen in der Stadt, und unter ihr befand sich ein für sie bestimmter Schatz. Ihr Vater war rechtschaffen, und da wollte dein Herr, daß sie (erst) ihre Vollreife erlangen und (dann) ihren Schatz hervorholen - aus Barmherzigkeit von deinem Herrn. Ich tat es ja nicht aus eigenem Ermessen. Das ist die Deutung dessen, was du nicht aushalten konntest",
-        "surah": 18,
-        "ayah": 82,
-        "ayahEnd": 82,
-        "context": "Abschluss der Erklärung",
-        "reference": "18:82",
-        "grading": "quran",
-        "verificationStatus": "approved",
-        "directReference": "#quran-surah/18/82",
-        "category": "statements",
-        "review": {
-          "sourceChecked": true,
-          "textChecked": true,
-          "gradingChecked": true,
-          "translationChecked": true,
-          "directLinkChecked": true,
-          "reviewPass1": "passed",
-          "reviewPass2": "passed",
-          "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
-          "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-        }
-      }
-    ],
-    "sunnah": []
-  },
+  "statements": [],
   "prophetAbout": [
     {
       "id": "khidr-name-bukhari-3400-about",
@@ -1211,5 +1179,56 @@
     "reviewPass1": true,
     "reviewPass2": true,
     "contentVersion": "prophets-final-test-v1"
-  }
+  },
+  "overview": [
+    {
+      "key": "name",
+      "label": "Name",
+      "value": "al-Khiḍr (Sunnah); Qurʾān: ʿabd",
+      "status": "sahih_sunnah name",
+      "claimIds": [
+        "khidr-name-bukhari-3400"
+      ]
+    },
+    {
+      "key": "quranName",
+      "label": "Qurʾān-Eigenname",
+      "value": "false",
+      "status": "nicht ausdrücklich",
+      "claimIds": [
+        "khidr-quran-explicit-name-false"
+      ]
+    },
+    {
+      "key": "prophetStatus",
+      "label": "Prophetenstatus",
+      "value": "scholarly_disputed_or_inferred",
+      "status": "umstritten / erschlossen",
+      "claimIds": [
+        "khidr-prophet-status-disputed"
+      ]
+    },
+    {
+      "key": "musa",
+      "label": "zu Mūsā",
+      "value": "Qurʾān-Geschichte + Sunnah-Name",
+      "status": "authentisch verknüpft",
+      "claimIds": [
+        "khidr-name-bukhari-3401"
+      ]
+    },
+    {
+      "key": "alive",
+      "label": "Weiterleben",
+      "value": "NOT approved",
+      "status": "nicht freigegeben",
+      "claimIds": [
+        "khidr-immortal-not-approved"
+      ]
+    }
+  ],
+  "sunnah": [],
+  "events": [],
+  "sources": [],
+  "research": []
 }

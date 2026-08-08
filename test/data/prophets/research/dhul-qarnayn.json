@@ -159,10 +159,7 @@
       "directReference": "#quran-surah/18/83"
     }
   ],
-  "statements": {
-    "quran": [],
-    "sunnah": []
-  },
+  "statements": [],
   "prophetAbout": [],
   "prophetMuhammadAbout": [],
   "athar": [],
@@ -1058,5 +1055,56 @@
     "reviewPass1": true,
     "reviewPass2": true,
     "contentVersion": "prophets-final-test-v1"
-  }
+  },
+  "overview": [
+    {
+      "key": "name",
+      "label": "Bezeichnung",
+      "value": "Dhū l-Qarnayn",
+      "status": "qurʾānisch",
+      "claimIds": [
+        "dq-name-title-18-83"
+      ]
+    },
+    {
+      "key": "personalName",
+      "label": "Eigenname",
+      "value": "nicht qurʾānisch festgelegt",
+      "status": "unbekannt",
+      "claimIds": [
+        "dq-personal-name-unknown"
+      ]
+    },
+    {
+      "key": "prophetStatus",
+      "label": "Prophetenstatus",
+      "value": "scholarly_disputed",
+      "status": "umstritten",
+      "claimIds": [
+        "dq-prophet-status-disputed"
+      ]
+    },
+    {
+      "key": "alexander",
+      "label": "Alexander u. a.",
+      "value": "NOT approved as revelation ID",
+      "status": "historical_only",
+      "claimIds": [
+        "dq-not-alexander"
+      ]
+    },
+    {
+      "key": "barrier",
+      "label": "Barriere",
+      "value": "Eisen / qiṭr (Qurʾān)",
+      "status": "authentisch belegt",
+      "claimIds": [
+        "dq-barrier-materials-18-95-97"
+      ]
+    }
+  ],
+  "sunnah": [],
+  "events": [],
+  "sources": [],
+  "research": []
 }

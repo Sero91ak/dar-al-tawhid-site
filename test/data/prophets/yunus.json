@@ -312,39 +312,7 @@
       "directReference": "#quran-surah/68/48"
     }
   ],
-  "statements": {
-    "quran": [
-      {
-        "id": "yunus-st-dua-21-87",
-        "speaker": "Yūnus / Dhū n-Nūn",
-        "sourceType": "quran",
-        "statementType": "dua",
-        "arabicOriginal": "وَذَا ٱلنُّونِ إِذ ذَّهَبَ مُغَٰضِبٗا فَظَنَّ أَن لَّن نَّقۡدِرَ عَلَيۡهِ فَنَادَىٰ فِي ٱلظُّلُمَٰتِ أَن لَّآ إِلَٰهَ إِلَّآ أَنتَ سُبۡحَٰنَكَ إِنِّي كُنتُ مِنَ ٱلظَّـٰلِمِينَ",
-        "translationDe": "Und (auch) dem Mann mit dem Fisch’, als er erzürnt wegging. Da meinte er, Wir würden ihm nicht (den Lebensunterhalt) bemessen. Dann rief er in den Finsternissen: „Es gibt keinen Gott außer Dir! Preis sei Dir! Gewiß, ich gehöre zu den Ungerechten",
-        "surah": 21,
-        "ayah": 87,
-        "ayahEnd": 87,
-        "context": "Im Bauch des Fisches / in den Finsternissen",
-        "reference": "21:87",
-        "grading": "quran",
-        "verificationStatus": "approved",
-        "directReference": "#quran-surah/21/87",
-        "category": "statements",
-        "review": {
-          "sourceChecked": true,
-          "textChecked": true,
-          "gradingChecked": true,
-          "translationChecked": true,
-          "directLinkChecked": true,
-          "reviewPass1": "passed",
-          "reviewPass2": "passed",
-          "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
-          "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-        }
-      }
-    ],
-    "sunnah": []
-  },
+  "statements": [],
   "prophetAbout": [
     {
       "id": "yunus-father-matta-muslim-2377-about",
@@ -1952,12 +1920,12 @@
   },
   "schemaVersion": 4,
   "contentVersion": "prophets-final-test-v1",
-  "updatedAt": "2026-08-08T10:48:09Z",
+  "updatedAt": "2026-08-08T10:58:11.407Z",
   "coverage": {
     "authenticitySeparateFromCoverage": true,
     "coverageStatus": "complete_for_defined_scope",
     "coverageNote": "Yūnus: Mattā approved; Ninive nicht qurʾānisch; Duʿāʾ 21:87.",
-    "auditedAt": "2026-08-08T10:48:09.589Z",
+    "auditedAt": "2026-08-08T11:00:05.460Z",
     "phase": 12,
     "block": "final",
     "reviewPass1": true,
@@ -1965,5 +1933,362 @@
     "contentVersion": "prophets-final-test-v1",
     "lastAuditResult": "PASS",
     "releaseCandidate": "prophets-final-test-v1"
-  }
+  },
+  "overview": [
+    {
+      "key": "name",
+      "label": "Name",
+      "value": "Yūnus",
+      "status": "authentisch belegt (Qurʾān)",
+      "claimIds": [
+        "yunus-name-quran"
+      ]
+    },
+    {
+      "key": "nameAr",
+      "label": "Arabisch",
+      "value": "يونس",
+      "status": "authentisch belegt (Qurʾān)",
+      "claimIds": [
+        "yunus-name-quran"
+      ]
+    },
+    {
+      "key": "roles",
+      "label": "Nabī / Rasūl",
+      "value": "Nabī · Rasūl (37:139)",
+      "status": "authentisch belegt",
+      "claimIds": [
+        "yunus-rasul-37-139",
+        "yunus-nabi-6-86-89"
+      ]
+    },
+    {
+      "key": "father",
+      "label": "Vater",
+      "value": "Mattā",
+      "status": "authentisch belegt (Muslim 2377)",
+      "claimIds": [
+        "yunus-father-matta-muslim-2377"
+      ]
+    },
+    {
+      "key": "alias",
+      "label": "Bezeichnungen",
+      "value": "Dhū n-Nūn / Ṣāḥib al-Ḥūt (Korrelation)",
+      "status": "quran_cross_reference",
+      "claimIds": [
+        "yunus-dhu-nun-21-87",
+        "yunus-sahib-al-hut-68-48"
+      ]
+    },
+    {
+      "key": "people",
+      "label": "Volk",
+      "value": "قَوْمَ يُونُسَ (glaubten)",
+      "status": "authentisch belegt",
+      "claimIds": [
+        "yunus-people-10-98"
+      ]
+    },
+    {
+      "key": "grave",
+      "label": "Grab",
+      "value": "Nicht authentisch festgelegt",
+      "status": "nicht authentisch belegt",
+      "claimIds": [
+        "yunus-grave-unattested"
+      ]
+    }
+  ],
+  "sunnah": [
+    {
+      "hadithId": "muslim-2377",
+      "source": "Ṣaḥīḥ Muslim",
+      "reference": "2377",
+      "claimIds": [
+        "yunus-father-matta-muslim-2377"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "tirmidhi-3505",
+      "source": "Jāmiʿ at-Tirmidhī",
+      "reference": "3505",
+      "claimIds": [
+        "yunus-dua-tirmidhi-3505"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "bukhari-3416",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3416",
+      "claimIds": [
+        "yunus-not-better-bukhari-3416"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "muslim-2376",
+      "source": "Ṣaḥīḥ Muslim",
+      "reference": "2376",
+      "claimIds": [
+        "yunus-not-better-muslim-2376"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    }
+  ],
+  "events": [],
+  "sources": [
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "37:139",
+      "hadithId": "",
+      "claimIds": [
+        "yunus-name-quran"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "6:86–89",
+      "hadithId": "",
+      "claimIds": [
+        "yunus-nabi-6-86-89"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "4:163",
+      "hadithId": "",
+      "claimIds": [
+        "yunus-revelation-4-163"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ Muslim",
+      "reference": "2377",
+      "hadithId": "muslim-2377",
+      "claimIds": [
+        "yunus-father-matta-muslim-2377"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "10:98",
+      "hadithId": "",
+      "claimIds": [
+        "yunus-people-10-98"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Negativfeststellung nach Prüfung (Qurʾān; Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "yunus-nineveh-not-quran"
+      ],
+      "grading": "unverified",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "37:140–141",
+      "hadithId": "",
+      "claimIds": [
+        "yunus-ship-37-140-141"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "37:142",
+      "hadithId": "",
+      "claimIds": [
+        "yunus-fish-37-142"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "37:143–144",
+      "hadithId": "",
+      "claimIds": [
+        "yunus-tasbih-37-143-144"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:87",
+      "hadithId": "",
+      "claimIds": [
+        "yunus-dhu-nun-21-87"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Jāmiʿ at-Tirmidhī",
+      "reference": "3505",
+      "hadithId": "tirmidhi-3505",
+      "claimIds": [
+        "yunus-dua-tirmidhi-3505"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:88",
+      "hadithId": "",
+      "claimIds": [
+        "yunus-rescue-21-88"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "37:145",
+      "hadithId": "",
+      "claimIds": [
+        "yunus-shore-37-145"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "37:146",
+      "hadithId": "",
+      "claimIds": [
+        "yunus-yaqtin-37-146"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "37:147",
+      "hadithId": "",
+      "claimIds": [
+        "yunus-hundred-thousand-37-147"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "37:148",
+      "hadithId": "",
+      "claimIds": [
+        "yunus-they-believed-37-148"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "68:48",
+      "hadithId": "",
+      "claimIds": [
+        "yunus-sahib-al-hut-68-48"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3416",
+      "hadithId": "bukhari-3416",
+      "claimIds": [
+        "yunus-not-better-bukhari-3416"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ Muslim",
+      "reference": "2376",
+      "hadithId": "muslim-2376",
+      "claimIds": [
+        "yunus-not-better-muslim-2376"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Coverage-Audit (definierter Korpus)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "yunus-anger-object-tafsir-review"
+      ],
+      "grading": "absence_in_reviewed_corpus",
+      "verificationStatus": "approved"
+    }
+  ],
+  "research": []
 }

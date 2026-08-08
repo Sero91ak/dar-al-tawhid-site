@@ -244,10 +244,7 @@
       "directReference": "#quran-surah/21/85"
     }
   ],
-  "statements": {
-    "quran": [],
-    "sunnah": []
-  },
+  "statements": [],
   "prophetAbout": [
     {
       "id": "idris-miraj-fourth-heaven-about",
@@ -1180,16 +1177,201 @@
   },
   "schemaVersion": 4,
   "contentVersion": "prophets-final-test-v1",
-  "updatedAt": "2026-08-08T09:44:46.463Z",
+  "updatedAt": "2026-08-08T10:58:11.355Z",
   "coverage": {
     "authenticitySeparateFromCoverage": true,
     "coverageStatus": "complete_for_defined_scope",
     "coverageNote": "Qurʾān 19:56–57 / 21:85–86 vollständig; Buḫārī 3887 + Muslim-Miʿrāǧ-Variante; Familie/Beruf research isoliert.",
-    "auditedAt": "2026-08-08T10:48:09.541Z",
+    "auditedAt": "2026-08-08T11:00:05.395Z",
     "phase": 12,
     "block": "final",
     "lastAuditResult": "PASS",
     "contentVersion": "prophets-final-test-v1",
     "releaseCandidate": "prophets-final-test-v1"
-  }
+  },
+  "overview": [
+    {
+      "key": "name",
+      "label": "Name",
+      "value": "Idrīs",
+      "status": "authentisch belegt (Qurʾān)",
+      "claimIds": [
+        "idris-name-quran"
+      ]
+    },
+    {
+      "key": "nameAr",
+      "label": "Arabischer Name",
+      "value": "إدريس",
+      "status": "authentisch belegt (Qurʾān)",
+      "claimIds": [
+        "idris-name-quran"
+      ]
+    },
+    {
+      "key": "roles",
+      "label": "Nabī / Rasūl",
+      "value": "Nabī · ṣiddīq (19:56); Rasūl nicht automatisch gesetzt",
+      "status": "Nabī authentisch",
+      "claimIds": [
+        "idris-nabi-siddiq"
+      ]
+    },
+    {
+      "key": "character",
+      "label": "Charakter",
+      "value": "ṣabr / Standhaftigkeit (21:85)",
+      "status": "authentisch belegt (Qurʾān)",
+      "claimIds": [
+        "idris-sabr"
+      ]
+    },
+    {
+      "key": "miraj",
+      "label": "Miʿrāǧ",
+      "value": "Begegnung im vierten Himmel (Buḫārī 3887)",
+      "status": "authentisch belegt (Sunnah)",
+      "claimIds": [
+        "idris-miraj-fourth-heaven"
+      ]
+    },
+    {
+      "key": "family",
+      "label": "Familie",
+      "value": "research",
+      "status": "nicht freigegeben",
+      "claimIds": [
+        "idris-father-research",
+        "idris-wife-research",
+        "idris-children-research"
+      ]
+    },
+    {
+      "key": "birth",
+      "label": "Geburt",
+      "value": "Nicht authentisch belegt",
+      "status": "nicht authentisch belegt",
+      "claimIds": [
+        "idris-birth-unattested"
+      ]
+    },
+    {
+      "key": "death",
+      "label": "Tod / Grab",
+      "value": "Nicht authentisch belegt",
+      "status": "nicht authentisch belegt",
+      "claimIds": [
+        "idris-death-unattested",
+        "idris-grave-unattested"
+      ]
+    }
+  ],
+  "sunnah": [
+    {
+      "hadithId": "bukhari-3887",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3887",
+      "claimIds": [
+        "idris-miraj-fourth-heaven"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "muslim-416",
+      "source": "Ṣaḥīḥ Muslim",
+      "reference": "416",
+      "claimIds": [
+        "idris-miraj-muslim-416"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    }
+  ],
+  "events": [],
+  "sources": [
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "19:56",
+      "hadithId": "",
+      "claimIds": [
+        "idris-name-quran"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "19:57",
+      "hadithId": "",
+      "claimIds": [
+        "idris-raised-high"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:85",
+      "hadithId": "",
+      "claimIds": [
+        "idris-sabr"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:86",
+      "hadithId": "",
+      "claimIds": [
+        "idris-mercy"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3887",
+      "hadithId": "bukhari-3887",
+      "claimIds": [
+        "idris-miraj-fourth-heaven"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Negativfeststellung nach Prüfung (Qurʾān; Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "idris-father-research"
+      ],
+      "grading": "unverified",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ Muslim",
+      "reference": "416",
+      "hadithId": "muslim-416",
+      "claimIds": [
+        "idris-miraj-muslim-416"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    }
+  ],
+  "research": []
 }

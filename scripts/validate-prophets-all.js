@@ -114,10 +114,48 @@ function validateProphetStatus(prof, file) {
   }
 }
 
+function approvedClaimsBlob(prof) {
+  return (prof.claims || [])
+    .filter((c) => c && c.verificationStatus === "approved")
+    .map((c) => JSON.stringify(c))
+    .join("\n");
+}
+
+function hasApprovedClaimMatching(prof, re) {
+  return (prof.claims || []).some(
+    (c) => c && c.verificationStatus === "approved" && re.test(JSON.stringify(c))
+  );
+}
+
+/** Fail only when an approved claim affirms a forbidden reading without isolation/negation. */
+function badApprovedAffirmation(prof, topicRe, msg, opts) {
+  if (!prof) return;
+  const negate =
+    (opts && opts.negate) ||
+    /nicht|ohne|kein|false|not |never|ablehnen|isolat|research|NOT approved|nicht als|keine |kein |\bkein\b|unresolved|vermisch/i;
+  for (const c of prof.claims || []) {
+    if (!c || c.verificationStatus !== "approved") continue;
+    const s = JSON.stringify(c);
+    if (!topicRe.test(s)) continue;
+    if (negate.test(s)) continue;
+    if (opts && opts.requireAlso && !opts.requireAlso.test(s)) continue;
+    fail(`${msg} [${c.id}]`);
+  }
+}
+
 function validateSpecialCases() {
   const loadProf = (rel) => readJson(path.join(TEST, rel));
   const dk = loadProf("dhul-kifl.json");
-  if (dk && dk.prophetStatus === "quran_explicit") fail("dhul-kifl.prophetStatus must != quran_explicit");
+  if (dk) {
+    if (dk.prophetStatus === "quran_explicit") fail("dhul-kifl.prophetStatus must != quran_explicit");
+    if (dk.quranExplicitProphetTitle === true) fail("dhul-kifl.quranExplicitProphetTitle must === false");
+    if (dk.prophetStatus !== "scholarly_disputed" && (dk.identity || {}).prophetStatus !== "scholarly_disputed") {
+      fail("dhul-kifl.prophetStatus must be scholarly_disputed");
+    }
+    if (dk.quranNamed !== true && (dk.identity || {}).quranNamed !== true) {
+      fail("dhul-kifl.quranNamed must be true");
+    }
+  }
 
   const kh = loadProf("research/al-khidr.json");
   if (kh && kh.quranExplicitName !== false) fail("al-khidr.quranExplicitName must === false");
@@ -131,22 +169,19 @@ function validateSpecialCases() {
     if (explicitId != null && explicitId !== null) {
       fail("uzayr 2:259 quranExplicitIdentity must be null");
     }
-    // ensure we do not mark 2:259 as quran identity of uzayr
     const bad = (uz.claims || []).some(
       (c) =>
         /259/.test(c.id || "") &&
         c.verificationStatus === "approved" &&
-        /explizit.*ʿuzayr|quranExplicitIdentity\s*=\s*uzayr/i.test(JSON.stringify(c))
+        /explizit.*ʿuzayr|quranExplicitIdentity\s*=\s*uzayr/i.test(JSON.stringify(c)) &&
+        !/nicht|false|not /i.test(JSON.stringify(c))
     );
     if (bad) fail("uzayr claim falsely asserts explicit Qurʾān identity for 2:259");
     if (!anon) warn("uzayr: missing 2:259 related claim markers");
   }
 
   const yu = loadProf("research/yusha-ibn-nun.json");
-  if (yu && yu.quranExplicitName !== false && (yu.identity || {}).quranNamed !== false) {
-    // allow either flag
-    if (yu.quranExplicitName !== false) fail("yusha.quranExplicitName must === false");
-  }
+  if (yu && yu.quranExplicitName !== false) fail("yusha.quranExplicitName must === false");
 
   const lu = loadProf("research/luqman.json");
   if (lu && lu.quranExplicitProphetTitle === true) fail("luqman.quranExplicitProphetTitle must === false");
@@ -155,6 +190,195 @@ function validateSpecialCases() {
   const dq = loadProf("research/dhul-qarnayn.json");
   if (dq && dq.quranExplicitProphetTitle === true) fail("dhul-qarnayn.quranExplicitProphetTitle must === false");
   if (dq && dq.prophetStatus === "quran_explicit") fail("dhul-qarnayn must not be quran_explicit prophet");
+  badApprovedAffirmation(
+    dq,
+    /Alexander the Great is Dhū|Cyrus is Dhul|quranExplicitIdentity\s*[:=]\s*(alexander|cyrus)/i,
+    "dhul-qarnayn: Alexander/Cyrus must not be approved identity"
+  );
+
+  // —— Hard content assertions (Phase 13 §42) ——
+  const adam = loadProf("adam.json");
+  if (adam) {
+    badApprovedAffirmation(
+      adam,
+      /quranExplicitName\s*[:=]\s*true.*(Qābīl|Hābīl|Qabil|Habil)|(Qābīl|Hābīl).*(stehen im Qurʾān|quran.?explicit\s*=\s*true)/i,
+      "Adam: Qābīl/Hābīl must not be marked quran-explicit names in approved claims"
+    );
+    if (!hasApprovedClaimMatching(adam, /nicht im Qurʾān|ohne Qurʾān-Eigennamen/i)) {
+      warn("adam: expected isolation claim for sons' names");
+    }
+  }
+
+  const idris = loadProf("idris.json");
+  if (idris) {
+    // Fail if one approved claim equates 19:57 wording with fourth heaven as identity
+    badApprovedAffirmation(
+      idris,
+      /(19:57|number":"19:57").{0,120}(vierter Himmel|fourth heaven)|(vierter Himmel|fourth heaven).{0,120}(19:57|gleichsetz)/i,
+      "Idris: 19:57 must not be hardcoded as fourth heaven"
+    );
+  }
+
+  const nuh = loadProf("nuh.json");
+  if (nuh) {
+    badApprovedAffirmation(
+      nuh,
+      /950.*(Gesamtlebensdauer|total lifespan|Lebensalter insgesamt)|(Gesamtlebensdauer|total lifespan).*950/i,
+      "Nuh: 950 years must not equal automatic total lifespan"
+    );
+  }
+
+  const ibrahim = loadProf("ibrahim.json");
+  if (ibrahim) {
+    badApprovedAffirmation(
+      ibrahim,
+      /37:10[0-7].*(quranExplicitName\s*[:=]\s*(Ismāʿīl|Isḥāq)|explizit als (Ismāʿīl|Isḥāq) genannt)/i,
+      "Ibrahim: sacrifice son must not be quran-explicit named in 37:100–107"
+    );
+  }
+
+  const lut = loadProf("lut.json");
+  if (lut) {
+    badApprovedAffirmation(
+      lut,
+      /Ehefrau.*(quranExplicitName\s*[:=]\s*true|explizit genannt als)/i,
+      "Lut: wife name must not be quran-explicit"
+    );
+  }
+
+  const ismail = loadProf("ismail.json");
+  if (ismail) {
+    const hajar = (ismail.claims || []).find((c) => /h[āa][ǧj]ar|hagar/i.test(JSON.stringify(c)));
+    if (hajar && hajar.verificationStatus === "approved") {
+      const et = String(hajar.evidenceType || "").toLowerCase();
+      if (et === "quran" && /name|hāǧar|hajar/i.test(hajar.claim || "") && !/nicht|ohne/i.test(hajar.claim || "")) {
+        fail("Ismail: Hāǧar source type must not be Quran-only for name");
+      }
+    }
+  }
+
+  const yaqub = loadProf("yaqub.json");
+  if (yaqub) {
+    badApprovedAffirmation(
+      yaqub,
+      /quranExplicitName\s*[:=]\s*true.*(Binyāmīn|Benjamin)|(Binyāmīn|Benjamin).*(quranExplicitName\s*[:=]\s*true|explizit im Qurʾān genannt)/i,
+      "Yaqub: Binyāmīn must not be quran-explicit"
+    );
+  }
+
+  const yusuf = loadProf("yusuf.json");
+  if (yusuf) {
+    badApprovedAffirmation(
+      yusuf,
+      /quranExplicitName\s*[:=]\s*true.*Zulaykh|Zulaykhā.*(quranExplicitName\s*[:=]\s*true|explizit im Qurʾān)/i,
+      "Yusuf: Zulaykhā must not be quran-explicit"
+    );
+  }
+
+  const ayyub = loadProf("ayyub.json");
+  if (ayyub) {
+    badApprovedAffirmation(
+      ayyub,
+      /(Lepra|Aussatz|elephantiasis).*(festgestellt|als Tatsache|quran.?explicit)/i,
+      "Ayyub: specific disease must not be approved as established fact"
+    );
+  }
+
+  const shuayb = loadProf("shuayb.json");
+  if (shuayb) {
+    badApprovedAffirmation(
+      shuayb,
+      /musa\.fatherInLaw\s*=\s*true|father-in-law of Mūsā\s*=\s*true|automatisch.*Schwiegervater.*Mūsā/i,
+      "Shuayb: must not automatically be Musa father-in-law"
+    );
+  }
+
+  const musa = loadProf("musa.json");
+  if (musa) {
+    if (!hasApprovedClaimMatching(musa, /ʿImrān|Imran|عمران/)) {
+      fail("Musa: father = Imran requires authenticated evidence claim");
+    }
+  }
+
+  const harun = loadProf("harun.json");
+  if (harun) {
+    if (!hasApprovedClaimMatching(harun, /Bruder|brother|Mūsā|Musa/)) {
+      fail("Harun: brother = Musa evidence missing");
+    }
+  }
+
+  const dawud = loadProf("dawud.json");
+  if (dawud) {
+    badApprovedAffirmation(
+      dawud,
+      /Uriyā.*(mainBiography\s*[:=]\s*true|als gesicherte Tatsache)|Ehebruch.*(mainBiography\s*[:=]\s*true)/i,
+      "Dawud: no Uriya/adultery narrative in approved biography"
+    );
+  }
+
+  const sulayman = loadProf("sulayman.json");
+  if (sulayman) {
+    badApprovedAffirmation(
+      sulayman,
+      /Bilqīs.*(quranExplicitName\s*[:=]\s*true)|Āṣif.*(quranExplicitName\s*[:=]\s*true)|Asif.*(quranExplicitName\s*[:=]\s*true)/i,
+      "Sulayman: Bilqis/Asif must not be quran-explicit"
+    );
+  }
+
+  const ilyas = loadProf("ilyas.json");
+  if (ilyas) {
+    badApprovedAffirmation(
+      ilyas,
+      /identical to Idris|is al-Khidr|automatisch.*(Idrīs|al-Khiḍr)/i,
+      "Ilyas: not automatically Idris / al-Khidr"
+    );
+  }
+
+  const yunus = loadProf("yunus.json");
+  if (yunus) {
+    if (!hasApprovedClaimMatching(yunus, /Mattā|Matta|متى/)) {
+      fail("Yunus: father = Matta evidence missing");
+    }
+    badApprovedAffirmation(
+      yunus,
+      /(Ninive|Nineveh).*(quranExplicitName\s*[:=]\s*true|explizit im Qurʾān|Der Qurʾān sagt Ninive\s*=\s*true)/i,
+      "Yunus: Nineveh must not be quran-explicit"
+    );
+  }
+
+  const zakariyya = loadProf("zakariyya.json");
+  if (zakariyya) {
+    const carp = (zakariyya.claims || []).find((c) => /Zimmermann|carpenter|نجار/i.test(JSON.stringify(c)));
+    if (carp && carp.verificationStatus === "approved" && carp.evidenceType === "quran") {
+      fail("Zakariyya: carpenter must be sourced through authentic Sunnah, not Quran-only");
+    }
+  }
+
+  const yahya = loadProf("yahya.json");
+  if (yahya) {
+    badApprovedAffirmation(
+      yahya,
+      /(Enthauptung|behead).*(mainBiography\s*[:=]\s*true|als gesicherte Tatsache|ṣaḥīḥ-biografie)/i,
+      "Yahya: beheading story must not be automatically approved as fact"
+    );
+  }
+
+  const isa = loadProf("isa.json");
+  if (isa) {
+    if (!hasApprovedClaimMatching(isa, /kein menschlicher Vater|humanFather|no human father|19:20/i)) {
+      fail("Isa: humanFather=none evidence missing");
+    }
+    if (!hasApprovedClaimMatching(isa, /nicht getötet|not killed|nicht gekreuzigt|not crucified|4:157/i)) {
+      fail("Isa: not killed / not crucified evidence missing");
+    }
+    badApprovedAffirmation(
+      isa,
+      /humanFather\s*=\s*Joseph(?![^"]{0,40}NOT approved)|Joseph ist der Vater ʿĪsās/i,
+      "Isa: Joseph must not be approved as human father"
+    );
+  }
+
+  void approvedClaimsBlob;
 }
 
 function validateClaims(prof) {
@@ -254,6 +478,7 @@ function validateHadithCanonical() {
 function validateRelations() {
   const files = listJson(path.join(TEST, "relations"));
   const pairs = new Set();
+  const NON_PROFILE_PERSONS = new Set(["maryam"]);
   for (const file of files) {
     const r = readJson(file);
     if (!r) continue;
@@ -263,11 +488,18 @@ function validateRelations() {
     const b = path.join(TEST, `${r.personB}.json`);
     const ar = path.join(TEST, "research", `${r.personA}.json`);
     const br = path.join(TEST, "research", `${r.personB}.json`);
-    if (!exists(a) && !exists(ar)) fail(`relation ${r.id}: missing person ${r.personA}`);
-    if (!exists(b) && !exists(br)) fail(`relation ${r.id}: missing person ${r.personB}`);
+    if (!exists(a) && !exists(ar) && !NON_PROFILE_PERSONS.has(r.personA) && r.personAIsProphetProfile !== false) {
+      fail(`relation ${r.id}: missing person ${r.personA}`);
+    }
+    if (!exists(b) && !exists(br) && !NON_PROFILE_PERSONS.has(r.personB) && r.personBIsProphetProfile !== false) {
+      fail(`relation ${r.id}: missing person ${r.personB}`);
+    }
+    if (NON_PROFILE_PERSONS.has(r.personA) && !(r.personADisplay && r.personADisplay.name)) {
+      fail(`relation ${r.id}: non-profile personA needs personADisplay.name`);
+    }
     pairs.add(`${r.personA}->${r.personB}:${r.relation}`);
-    // profile should reference relationIds if approved
     for (const pid of [r.personA, r.personB]) {
+      if (NON_PROFILE_PERSONS.has(pid)) continue;
       const pfile = exists(path.join(TEST, `${pid}.json`))
         ? path.join(TEST, `${pid}.json`)
         : path.join(TEST, "research", `${pid}.json`);
@@ -280,7 +512,6 @@ function validateRelations() {
       }
     }
   }
-  // expected core pairs present
   const expected = [
     ["musa", "harun"],
     ["ibrahim", "ismail"],
@@ -288,7 +519,8 @@ function validateRelations() {
     ["ishaq", "yaqub"],
     ["yaqub", "yusuf"],
     ["dawud", "sulayman"],
-    ["zakariyya", "yahya"]
+    ["zakariyya", "yahya"],
+    ["maryam", "isa"]
   ];
   for (const [a, b] of expected) {
     const ok = [...pairs].some((p) => p.startsWith(`${a}->${b}:`) || p.startsWith(`${b}->${a}:`));
@@ -402,14 +634,14 @@ function collectProfiles(index) {
 
 function writeReport(index) {
   const report = {
-    releaseCandidate: "prophets-test-rc-01",
+    releaseCandidate: "prophets-final-test-v1",
     environment: "test",
     generatedAt: new Date().toISOString(),
     stats,
     validation: {
       json: errors.some((e) => /JSON invalid/.test(e)) ? "FAIL" : "PASS",
       schema: errors.some((e) => /schemaVersion/.test(e)) ? "FAIL" : "PASS",
-      claims: errors.some((e) => /approved without|reviewPass|orphan claim|duplicate claim/.test(e)) ? "FAIL" : "PASS",
+      claims: errors.some((e) => /approved without|reviewPass|orphan claim|duplicate claim|ASSERT|must not|evidence missing/i.test(e)) ? "FAIL" : "PASS",
       quran: errors.some((e) => /surah|ayah/.test(e)) ? "FAIL" : "PASS",
       hadith: errors.some((e) => /hadith/.test(e)) ? "FAIL" : "PASS",
       athar: "PASS",

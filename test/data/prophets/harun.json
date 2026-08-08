@@ -1084,7 +1084,44 @@
       ]
     }
   ],
-  "timeline": [],
+  "timeline": [
+    {
+      "id": "tl-harun-prophet-19-53",
+      "title": "Hārūn als Prophet (19:53).",
+      "order": 1,
+      "claimIds": [
+        "harun-prophet-19-53"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-harun-calf-warned-20-90-94",
+      "title": "Hārūn warnte das Volk vor dem Kalb (20:90–94) — niemals als Mitwirkender am Kalbskult darstellen.",
+      "order": 2,
+      "claimIds": [
+        "harun-calf-warned-20-90-94"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-harun-calf-7-142-151",
+      "title": "Kalb-Komplex mit Hārūn (7:142–151) — Warnung/Loyalität, nicht Kultbeteiligung.",
+      "order": 3,
+      "claimIds": [
+        "harun-calf-7-142-151"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-harun-death-grave-unattested",
+      "title": "deathYear=not_established; grave=not_authentically_established.",
+      "order": 4,
+      "claimIds": [
+        "harun-death-grave-unattested"
+      ],
+      "verificationStatus": "approved"
+    }
+  ],
   "statements": [],
   "athar": [],
   "weakReports": [],
@@ -1093,7 +1130,7 @@
   "prophetMuhammadAbout": [],
   "schemaVersion": 4,
   "contentVersion": "prophets-final-test-v1",
-  "updatedAt": "2026-08-08T10:48:09Z",
+  "updatedAt": "2026-08-08T10:58:11.403Z",
   "audit": {
     "phase12Final": true,
     "auditedAt": "2026-08-08T10:48:09Z"
@@ -1105,7 +1142,7 @@
     "authenticitySeparateFromCoverage": true,
     "coverageStatus": "complete_for_defined_scope",
     "coverageNote": "Hārūn: Nabī 19:53; Bruder Mūsā; Kalb-Warnung; Miʿrāǧ 5. Himmel; Vater=source_correlation.",
-    "auditedAt": "2026-08-08T10:48:09.584Z",
+    "auditedAt": "2026-08-08T11:00:05.454Z",
     "phase": 12,
     "block": "final",
     "reviewPass1": true,
@@ -1113,5 +1150,252 @@
     "contentVersion": "prophets-final-test-v1",
     "lastAuditResult": "PASS",
     "releaseCandidate": "prophets-final-test-v1"
-  }
+  },
+  "overview": [],
+  "sunnah": [
+    {
+      "hadithId": "bukhari-3887",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3887",
+      "claimIds": [
+        "harun-miraj-fifth-heaven-3887"
+      ],
+      "verificationStatus": "approved"
+    }
+  ],
+  "events": [
+    {
+      "id": "ev-harun-prophet-19-53",
+      "title": "Hārūn als Prophet (19:53).",
+      "claimIds": [
+        "harun-prophet-19-53"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-harun-calf-warned-20-90-94",
+      "title": "Hārūn warnte das Volk vor dem Kalb (20:90–94) — niemals als Mitwirkender am Kalbskult darstellen.",
+      "claimIds": [
+        "harun-calf-warned-20-90-94"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-harun-calf-7-142-151",
+      "title": "Kalb-Komplex mit Hārūn (7:142–151) — Warnung/Loyalität, nicht Kultbeteiligung.",
+      "claimIds": [
+        "harun-calf-7-142-151"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-harun-death-grave-unattested",
+      "title": "deathYear=not_established; grave=not_authentically_established.",
+      "claimIds": [
+        "harun-death-grave-unattested"
+      ],
+      "verificationStatus": "approved"
+    }
+  ],
+  "sources": [
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "4:163",
+      "hadithId": "",
+      "claimIds": [
+        "harun-qref-4-163"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "6:84",
+      "hadithId": "",
+      "claimIds": [
+        "harun-qref-6-84"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "7:122",
+      "hadithId": "",
+      "claimIds": [
+        "harun-qref-7-122"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "7:142–151",
+      "hadithId": "",
+      "claimIds": [
+        "harun-qref-7-142-151"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "10:75",
+      "hadithId": "",
+      "claimIds": [
+        "harun-qref-10-75"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "19:53",
+      "hadithId": "",
+      "claimIds": [
+        "harun-qref-19-53"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "20:29–36",
+      "hadithId": "",
+      "claimIds": [
+        "harun-qref-20-29-36"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "20:42–94",
+      "hadithId": "",
+      "claimIds": [
+        "harun-qref-20-42-94"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:48",
+      "hadithId": "",
+      "claimIds": [
+        "harun-qref-21-48"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "23:45–49",
+      "hadithId": "",
+      "claimIds": [
+        "harun-qref-23-45-49"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "25:35",
+      "hadithId": "",
+      "claimIds": [
+        "harun-qref-25-35"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "28:34–35",
+      "hadithId": "",
+      "claimIds": [
+        "harun-qref-28-34-35"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "37:114–122",
+      "hadithId": "",
+      "claimIds": [
+        "harun-qref-37-114-122"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "20:29–30",
+      "hadithId": "",
+      "claimIds": [
+        "harun-brother-20-29-30"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "28:34",
+      "hadithId": "",
+      "claimIds": [
+        "harun-brother-28-34"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "20:90–94",
+      "hadithId": "",
+      "claimIds": [
+        "harun-calf-warned-20-90-94"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Coverage-Audit (definierter Korpus)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "harun-father-imran-source-correlation"
+      ],
+      "grading": "absence_in_reviewed_corpus",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3887",
+      "hadithId": "bukhari-3887",
+      "claimIds": [
+        "harun-miraj-fifth-heaven-3887"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    }
+  ],
+  "research": []
 }

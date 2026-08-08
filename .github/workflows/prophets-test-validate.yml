@@ -20,6 +20,8 @@ on:
       - scripts/prophets_phase12_coverage_block01.py
       - scripts/prophets_phase12_coverage_block02.py
       - scripts/prophets_phase12_final_build.py
+      - scripts/prophets-phase13-implement.js
+      - scripts/prophets-phase13-final-report.js
       - .github/workflows/prophets-test-validate.yml
   push:
     paths:
@@ -39,6 +41,8 @@ on:
       - scripts/prophets_phase12_coverage_block01.py
       - scripts/prophets_phase12_coverage_block02.py
       - scripts/prophets_phase12_final_build.py
+      - scripts/prophets-phase13-implement.js
+      - scripts/prophets-phase13-final-report.js
       - .github/workflows/prophets-test-validate.yml
 
 permissions:
@@ -88,4 +92,7 @@ jobs:
         run: node scripts/prophets-phase12-coverage-audit-block02.js
 
       - name: Phase 12 FINAL audit + freeze (test only)
-        run: node scripts/prophets-phase12-final-audit.js
+        run: SKIP_PHASE12_REBUILD=1 node scripts/prophets-phase12-final-audit.js
+
+      - name: Phase 13 final report (honest NOT_RUN for manual UI)
+        run: node scripts/prophets-phase13-final-report.js

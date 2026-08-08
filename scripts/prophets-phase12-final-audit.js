@@ -204,23 +204,26 @@ function main() {
     process.exit(1);
   }
 
-  // build content
-  let build = spawnSync("python3", [path.join(__dirname, "prophets_phase12_final_build.py")], {
-    cwd: ROOT,
-    encoding: "utf8",
-    timeout: 300000
-  });
-  if (build.status !== 0) {
-    console.error(build.stdout || "");
-    console.error(build.stderr || "");
-    process.exit(1);
+  // build content (idempotent). Phase 13+ may skip rebuild to preserve freeze hashes.
+  if (process.env.SKIP_PHASE12_REBUILD === "1") {
+    console.log("SKIP_PHASE12_REBUILD=1 — using existing test/data/prophets content");
+  } else {
+    let build = spawnSync("python3", [path.join(__dirname, "prophets_phase12_final_build.py")], {
+      cwd: ROOT,
+      encoding: "utf8",
+      timeout: 300000
+    });
+    if (build.status !== 0) {
+      console.error(build.stdout || "");
+      console.error(build.stderr || "");
+      process.exit(1);
+    }
+    console.log(build.stdout);
+
+    spawnSync(process.execPath, [path.join(__dirname, "prepare-prophets-rc.js")], { cwd: ROOT, encoding: "utf8" });
+    spawnSync(process.execPath, [path.join(__dirname, "build-prophets-search-index.js")], { cwd: ROOT, encoding: "utf8" });
+    spawnSync(process.execPath, [path.join(__dirname, "build-prophets-content-manifest.js")], { cwd: ROOT, encoding: "utf8" });
   }
-  console.log(build.stdout);
-
-  spawnSync(process.execPath, [path.join(__dirname, "prepare-prophets-rc.js")], { cwd: ROOT, encoding: "utf8" });
-  spawnSync(process.execPath, [path.join(__dirname, "build-prophets-search-index.js")], { cwd: ROOT, encoding: "utf8" });
-  spawnSync(process.execPath, [path.join(__dirname, "build-prophets-content-manifest.js")], { cwd: ROOT, encoding: "utf8" });
-
   const coreReports = CORE.map(auditCore);
   const researchReports = RESEARCH.map(auditResearch);
   const familyErrors = familyConsistency();

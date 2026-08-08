@@ -423,39 +423,7 @@
       "directReference": "#quran-surah/14/37"
     }
   ],
-  "statements": {
-    "quran": [
-      {
-        "id": "ismail-dua-joint",
-        "speaker": "Ibrāhīm + Ismāʿīl",
-        "sourceType": "quran",
-        "statementType": "dua",
-        "arabicOriginal": "وَإِذۡ يَرۡفَعُ إِبۡرَٰهِـۧمُ ٱلۡقَوَاعِدَ مِنَ ٱلۡبَيۡتِ وَإِسۡمَٰعِيلُ رَبَّنَا تَقَبَّلۡ مِنَّآۖ إِنَّكَ أَنتَ ٱلسَّمِيعُ ٱلۡعَلِيمُ · رَبَّنَا وَٱجۡعَلۡنَا مُسۡلِمَيۡنِ لَكَ وَمِن ذُرِّيَّتِنَآ أُمَّةٗ مُّسۡلِمَةٗ لَّكَ وَأَرِنَا مَنَاسِكَنَا وَتُبۡ عَلَيۡنَآۖ إِنَّكَ أَنتَ ٱلتَّوَّابُ ٱلرَّحِيمُ · رَبَّنَا وَٱبۡعَثۡ فِيهِمۡ رَسُولٗا مِّنۡهُمۡ يَتۡلُواْ عَلَيۡهِمۡ ءَايَٰتِكَ وَيُعَلِّمُهُمُ ٱلۡكِتَٰبَ وَٱلۡحِكۡمَةَ وَيُزَكِّيهِمۡۖ إِنَّكَ أَنتَ ٱلۡعَزِيزُ ٱلۡحَكِيمُ",
-        "translationDe": "Und (gedenkt,) als Ibrahim die Grundmauern des Hauses errichtete, zusammen mit Isma’il, (da beteten sie): „Unser Herr, nimm (es) von uns an. Du bist ja der Allhörende und Allwissende Unser Herr, mache uns Dir ergeben und von unserer Nachkommenschaft eine Dir ergebene Gemeinschaft. Und zeige uns unsere Riten, und nimm unsere Reue an. Du bist ja der Reue-Annehmende und Barmherzige Unser Herr, schicke zu ihnen einen Gesandten von ihnen, der ihnen Deine Worte verliest und sie das Buch und die Weisheit lehrt und sie läutert. Du bist ja der Allmächtige und Allweise",
-        "surah": 2,
-        "ayah": 127,
-        "ayahEnd": 129,
-        "context": "Gemeinsames Duʿāʾ",
-        "reference": "2:127–129",
-        "grading": "quran",
-        "verificationStatus": "approved",
-        "directReference": "#quran-surah/2/127",
-        "category": "dua",
-        "review": {
-          "sourceChecked": true,
-          "textChecked": true,
-          "gradingChecked": true,
-          "translationChecked": true,
-          "directLinkChecked": true,
-          "reviewPass1": "passed",
-          "reviewPass2": "passed",
-          "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
-          "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-        }
-      }
-    ],
-    "sunnah": []
-  },
+  "statements": [],
   "prophetAbout": [
     {
       "id": "ismail-mother-hajar-3358-about",
@@ -2506,12 +2474,12 @@
   ],
   "schemaVersion": 4,
   "contentVersion": "prophets-final-test-v1",
-  "updatedAt": "2026-08-08T10:25:00Z",
+  "updatedAt": "2026-08-08T10:58:11.381Z",
   "coverage": {
     "authenticitySeparateFromCoverage": true,
     "coverageStatus": "complete_for_defined_scope",
     "coverageNote": "Ismāʿīl: Concordance inkl. 14:37–38; Hāǧar via Sunnah; Opfer-Sohn-Namen-Disziplin; Buḫārī 3358/3362–3364.",
-    "auditedAt": "2026-08-08T10:48:09.562Z",
+    "auditedAt": "2026-08-08T11:00:05.426Z",
     "phase": 12,
     "block": "final",
     "reviewPass1": true,
@@ -2538,5 +2506,470 @@
     },
     "contentVersion": "prophets-final-test-v1",
     "releaseCandidate": "prophets-final-test-v1"
-  }
+  },
+  "overview": [
+    {
+      "key": "roles",
+      "label": "Nabī / Rasūl",
+      "value": "Rasūl und Nabī (19:54)",
+      "status": "authentisch belegt (Qurʾān)",
+      "claimIds": [
+        "ismail-nabi-rasul"
+      ]
+    },
+    {
+      "key": "father",
+      "label": "Vater",
+      "value": "Ibrāhīm",
+      "status": "approved",
+      "claimIds": [
+        "ismail-father-ibrahim"
+      ]
+    },
+    {
+      "key": "mother",
+      "label": "Mutter",
+      "value": "Hājar",
+      "status": "approved (Sunnah)",
+      "claimIds": [
+        "ismail-mother-hajar-3358"
+      ]
+    },
+    {
+      "key": "kabah",
+      "label": "Kaʿbah",
+      "value": "2:127 mit Ibrāhīm",
+      "status": "approved",
+      "claimIds": [
+        "ismail-kabah"
+      ]
+    },
+    {
+      "key": "sacrifice",
+      "label": "Opferprüfung",
+      "value": "quranExplicitSonName=false",
+      "status": "streng",
+      "claimIds": [
+        "ismail-sacrifice-not-named"
+      ]
+    },
+    {
+      "key": "wives",
+      "label": "Ehefrauen",
+      "value": "Existenz Sunnah; Namen research",
+      "status": "teilweise",
+      "claimIds": [
+        "ismail-3364-wives-exist",
+        "ismail-wives-names-research"
+      ]
+    },
+    {
+      "key": "grave",
+      "label": "Grab",
+      "value": "not_authentically_established",
+      "status": "nicht belegt",
+      "claimIds": [
+        "ismail-grave-unattested"
+      ]
+    }
+  ],
+  "sunnah": [
+    {
+      "hadithId": "bukhari-3358",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3358",
+      "claimIds": [
+        "ismail-mother-hajar-3358"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "bukhari-3362",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3362",
+      "claimIds": [
+        "ismail-makkah-3362"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "bukhari-3363",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3363",
+      "claimIds": [
+        "ismail-makkah-3363"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "bukhari-3364",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3364",
+      "claimIds": [
+        "ismail-makkah-3364"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "bukhari-3364",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3364",
+      "claimIds": [
+        "ismail-3364-infant"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "bukhari-3364",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3364",
+      "claimIds": [
+        "ismail-3364-no-water"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "bukhari-3364",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3364",
+      "claimIds": [
+        "ismail-3364-zamzam"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "bukhari-3364",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3364",
+      "claimIds": [
+        "ismail-3364-settlement"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "bukhari-3364",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3364",
+      "claimIds": [
+        "ismail-3364-arabic"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "bukhari-3364",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3364",
+      "claimIds": [
+        "ismail-3364-wives-exist"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    }
+  ],
+  "events": [],
+  "sources": [
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "19:54",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-name-quran"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "19:55",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-salah-zakah"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:85",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-sabr"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:127",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-father-ibrahim"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:127–129",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-dua-2-127"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "37:100–107",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-sacrifice-not-named"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3358",
+      "hadithId": "bukhari-3358",
+      "claimIds": [
+        "ismail-mother-hajar-3358"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3362",
+      "hadithId": "bukhari-3362",
+      "claimIds": [
+        "ismail-makkah-3362"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3363",
+      "hadithId": "bukhari-3363",
+      "claimIds": [
+        "ismail-makkah-3363"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3364",
+      "hadithId": "bukhari-3364",
+      "claimIds": [
+        "ismail-makkah-3364"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Negativfeststellung nach Prüfung (Qurʾān; Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-wives-names-research"
+      ],
+      "grading": "unverified",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:125",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-qref-2-125"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:126",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-qref-2-126"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:128",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-qref-2-128"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:129",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-qref-2-129"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:133",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-qref-2-133"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:136",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-qref-2-136"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:140",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-qref-2-140"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "4:163",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-qref-4-163"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "6:86",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-qref-6-86"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "14:39",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-qref-14-39"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:86",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-qref-21-86"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "38:48",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-qref-38-48"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "14:37–38",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-qref-14-37-38"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Coverage-Audit (definierter Korpus)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "ismail-hajar-not-quran-explicit-name"
+      ],
+      "grading": "absence_in_reviewed_corpus",
+      "verificationStatus": "approved"
+    }
+  ],
+  "research": []
 }

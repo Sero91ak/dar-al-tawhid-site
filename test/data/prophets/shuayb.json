@@ -695,7 +695,53 @@
       ]
     }
   ],
-  "timeline": [],
+  "timeline": [
+    {
+      "id": "tl-shuayb-message-weights",
+      "title": "Tawḥīd; Maß/Waage gerecht; nichts mindern; keine Verderbnis (7:85–86; 11:84–85).",
+      "order": 1,
+      "claimIds": [
+        "shuayb-message-weights"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-shuayb-punishment-rajfah-7-91",
+      "title": "Strafe: raǧfah (7:91) — getrennt speichern.",
+      "order": 2,
+      "claimIds": [
+        "shuayb-punishment-rajfah-7-91"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-shuayb-punishment-sayhah-11-94",
+      "title": "Strafe: ṣayḥah (11:94) — getrennt speichern.",
+      "order": 3,
+      "claimIds": [
+        "shuayb-punishment-sayhah-11-94"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-shuayb-punishment-shadow-26-189",
+      "title": "Strafe des Schattentags (26:189) — Harmonisierung nur nach Tafsīrprüfung.",
+      "order": 4,
+      "claimIds": [
+        "shuayb-punishment-shadow-26-189"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-shuayb-grave-unattested",
+      "title": "grave=not_authentically_established.",
+      "order": 5,
+      "claimIds": [
+        "shuayb-grave-unattested"
+      ],
+      "verificationStatus": "approved"
+    }
+  ],
   "statements": [],
   "athar": [],
   "weakReports": [],
@@ -704,7 +750,7 @@
   "prophetMuhammadAbout": [],
   "schemaVersion": 4,
   "contentVersion": "prophets-final-test-v1",
-  "updatedAt": "2026-08-08T10:48:09Z",
+  "updatedAt": "2026-08-08T10:58:11.392Z",
   "audit": {
     "phase12Final": true,
     "auditedAt": "2026-08-08T10:48:09Z"
@@ -713,7 +759,7 @@
     "authenticitySeparateFromCoverage": true,
     "coverageStatus": "complete_for_defined_scope",
     "coverageNote": "Shuʿayb: Madyan/Aykah getrennt; Strafen getrennt; nicht auto Schwiegervater Mūsās.",
-    "auditedAt": "2026-08-08T10:48:09.573Z",
+    "auditedAt": "2026-08-08T11:00:05.442Z",
     "phase": 12,
     "block": "final",
     "reviewPass1": true,
@@ -721,5 +767,173 @@
     "contentVersion": "prophets-final-test-v1",
     "lastAuditResult": "PASS",
     "releaseCandidate": "prophets-final-test-v1"
-  }
+  },
+  "overview": [],
+  "sunnah": [],
+  "events": [
+    {
+      "id": "ev-shuayb-message-weights",
+      "title": "Tawḥīd; Maß/Waage gerecht; nichts mindern; keine Verderbnis (7:85–86; 11:84–85).",
+      "claimIds": [
+        "shuayb-message-weights"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-shuayb-punishment-rajfah-7-91",
+      "title": "Strafe: raǧfah (7:91) — getrennt speichern.",
+      "claimIds": [
+        "shuayb-punishment-rajfah-7-91"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-shuayb-punishment-sayhah-11-94",
+      "title": "Strafe: ṣayḥah (11:94) — getrennt speichern.",
+      "claimIds": [
+        "shuayb-punishment-sayhah-11-94"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-shuayb-punishment-shadow-26-189",
+      "title": "Strafe des Schattentags (26:189) — Harmonisierung nur nach Tafsīrprüfung.",
+      "claimIds": [
+        "shuayb-punishment-shadow-26-189"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-shuayb-grave-unattested",
+      "title": "grave=not_authentically_established.",
+      "claimIds": [
+        "shuayb-grave-unattested"
+      ],
+      "verificationStatus": "approved"
+    }
+  ],
+  "sources": [
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "7:85–93",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-qref-7-85-93"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "11:84–95",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-qref-11-84-95"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "26:176–191",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-qref-26-176-191"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "29:36–37",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-qref-29-36-37"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "7:85",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-madyan-7-85"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "11:84",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-madyan-11-84"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "7:85–86",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-message-weights"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "7:91",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-punishment-rajfah-7-91"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "11:94",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-punishment-sayhah-11-94"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "26:189",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-punishment-shadow-26-189"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Coverage-Audit (definierter Korpus)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-not-auto-musa-fil"
+      ],
+      "grading": "absence_in_reviewed_corpus",
+      "verificationStatus": "approved"
+    }
+  ],
+  "research": []
 }

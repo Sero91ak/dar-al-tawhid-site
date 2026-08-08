@@ -159,10 +159,7 @@
       "directReference": "#quran-surah/2/259"
     }
   ],
-  "statements": {
-    "quran": [],
-    "sunnah": []
-  },
+  "statements": [],
   "prophetAbout": [],
   "prophetMuhammadAbout": [],
   "athar": [],
@@ -838,5 +835,47 @@
     "reviewPass1": true,
     "reviewPass2": true,
     "contentVersion": "prophets-final-test-v1"
-  }
+  },
+  "overview": [
+    {
+      "key": "name",
+      "label": "Name",
+      "value": "ʿUzayr",
+      "status": "qurʾānisch (9:30)",
+      "claimIds": [
+        "uzayr-name-9-30"
+      ]
+    },
+    {
+      "key": "prophetStatus",
+      "label": "Prophetenstatus",
+      "value": "scholarly_disputed / research",
+      "status": "umstritten",
+      "claimIds": [
+        "uzayr-no-explicit-nabi"
+      ]
+    },
+    {
+      "key": "2-259",
+      "label": "2:259",
+      "value": "anonym im Vers; Attribution research",
+      "status": "nicht qurʾānisch identifiziert",
+      "claimIds": [
+        "uzayr-2-259-attribution-research"
+      ]
+    },
+    {
+      "key": "ezra",
+      "label": "Ezra",
+      "value": "comparative only",
+      "status": "research",
+      "claimIds": [
+        "uzayr-not-ezra-as-quran-name"
+      ]
+    }
+  ],
+  "sunnah": [],
+  "events": [],
+  "sources": [],
+  "research": []
 }

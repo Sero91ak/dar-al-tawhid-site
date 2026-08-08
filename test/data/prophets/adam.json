@@ -1566,16 +1566,13 @@
       "reviewPass2": "passed"
     }
   ],
-  "statements": {
-    "quran": [],
-    "sunnah": []
-  },
+  "statements": [],
   "weakReports": [],
   "coverage": {
     "authenticitySeparateFromCoverage": true,
     "coverageStatus": "complete_for_defined_scope",
     "coverageNote": "Qurʾān-Pflichtstellen + Buḫārī 3326/3330/3409 + Muslim Freitag/Ḥawwāʾ geprüft. Ibn Ḥibbān 6190: pending primary edition.",
-    "auditedAt": "2026-08-08T10:48:09.539Z",
+    "auditedAt": "2026-08-08T11:00:05.392Z",
     "phase": 12,
     "block": "final",
     "lastAuditResult": "PASS",
@@ -1598,5 +1595,362 @@
     "treeSpecies": "not_approved",
     "landingPlace": "not_approved",
     "grave": "not_authentically_established"
-  }
+  },
+  "overview": [
+    {
+      "key": "name",
+      "label": "Name",
+      "value": "Ādam",
+      "status": "authentisch belegt (Qurʾān)",
+      "claimIds": [
+        "adam-khalifa-2-30"
+      ]
+    },
+    {
+      "key": "roles",
+      "label": "Nabī / Rasūl",
+      "value": "Nabī",
+      "status": "belegt",
+      "claimIds": [
+        "adam-nabi-quran-identity"
+      ]
+    },
+    {
+      "key": "wife",
+      "label": "Gattin",
+      "value": "Im Qurʾān erwähnt; Eigenname Ḥawwāʾ aus authentischer Sunnah",
+      "status": "Qurʾān + Sunnah",
+      "claimIds": [
+        "adam-wife-quran-unnamed",
+        "adam-hawwa-bukhari-3330"
+      ]
+    },
+    {
+      "key": "sons",
+      "label": "Zwei Söhne",
+      "value": "5:27–31 — ohne Qurʾān-Eigennamen Qābīl/Hābīl",
+      "status": "Qurʾān",
+      "claimIds": [
+        "adam-two-sons-5-27",
+        "adam-sons-names-not-quran"
+      ]
+    },
+    {
+      "key": "grave",
+      "label": "Grab",
+      "value": "nicht authentisch belegt",
+      "status": "not_authentically_established",
+      "claimIds": [
+        "adam-grave-unattested"
+      ]
+    }
+  ],
+  "sunnah": [
+    {
+      "hadithId": "bukhari-3326",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3326",
+      "claimIds": [
+        "adam-creation-bukhari-3326"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "bukhari-3330",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3330",
+      "claimIds": [
+        "adam-hawwa-bukhari-3330"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "bukhari-3409",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3409",
+      "claimIds": [
+        "adam-musa-debate-bukhari-3409"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "muslim-1976",
+      "source": "Ṣaḥīḥ Muslim",
+      "reference": "854",
+      "claimIds": [
+        "adam-friday-muslim-1976"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "muslim-3650",
+      "source": "Ṣaḥīḥ Muslim",
+      "reference": "1470",
+      "claimIds": [
+        "adam-hawwa-muslim-3650"
+      ],
+      "verificationStatus": "approved"
+    }
+  ],
+  "events": [],
+  "sources": [
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:30",
+      "hadithId": "",
+      "claimIds": [
+        "adam-khalifa-2-30"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:31–33",
+      "hadithId": "",
+      "claimIds": [
+        "adam-names-2-31"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:34",
+      "hadithId": "",
+      "claimIds": [
+        "adam-sujud-2-34"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:35",
+      "hadithId": "",
+      "claimIds": [
+        "adam-paradise-2-35"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:36–39",
+      "hadithId": "",
+      "claimIds": [
+        "adam-descent-2-36"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "3:33",
+      "hadithId": "",
+      "claimIds": [
+        "adam-chosen-3-33"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "3:59",
+      "hadithId": "",
+      "claimIds": [
+        "adam-likeness-3-59"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "5:27–31",
+      "hadithId": "",
+      "claimIds": [
+        "adam-two-sons-5-27"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "7:11–18",
+      "hadithId": "",
+      "claimIds": [
+        "adam-creation-7-11"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "7:19–25",
+      "hadithId": "",
+      "claimIds": [
+        "adam-warning-7-19"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "7:26–27",
+      "hadithId": "",
+      "claimIds": [
+        "adam-garments-7-26"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "15:26–44",
+      "hadithId": "",
+      "claimIds": [
+        "adam-clay-15-26"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "17:61–65",
+      "hadithId": "",
+      "claimIds": [
+        "adam-iblis-17-61"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "18:50",
+      "hadithId": "",
+      "claimIds": [
+        "adam-iblis-18-50"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "20:115–123",
+      "hadithId": "",
+      "claimIds": [
+        "adam-covenant-20-115"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "38:71–85",
+      "hadithId": "",
+      "claimIds": [
+        "adam-creation-38-71"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "4:1",
+      "hadithId": "",
+      "claimIds": [
+        "adam-4-1-context"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Coverage-Audit (definierter Korpus)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "adam-sons-names-not-quran"
+      ],
+      "grading": "absence_in_reviewed_corpus",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3326",
+      "hadithId": "bukhari-3326",
+      "claimIds": [
+        "adam-creation-bukhari-3326"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3330",
+      "hadithId": "bukhari-3330",
+      "claimIds": [
+        "adam-hawwa-bukhari-3330"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3409",
+      "hadithId": "bukhari-3409",
+      "claimIds": [
+        "adam-musa-debate-bukhari-3409"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ Muslim",
+      "reference": "854",
+      "hadithId": "muslim-1976",
+      "claimIds": [
+        "adam-friday-muslim-1976"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ Muslim",
+      "reference": "1470",
+      "hadithId": "muslim-3650",
+      "claimIds": [
+        "adam-hawwa-muslim-3650"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    }
+  ],
+  "research": [],
+  "audit": {
+    "fromCoverage": true
+  },
+  "updatedAt": "2026-08-08T10:58:11.354Z"
 }

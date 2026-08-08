@@ -153,10 +153,7 @@
       "directReference": "#quran-surah/38/48"
     }
   ],
-  "statements": {
-    "quran": [],
-    "sunnah": []
-  },
+  "statements": [],
   "prophetAbout": [],
   "prophetMuhammadAbout": [],
   "athar": [],
@@ -848,12 +845,12 @@
   },
   "schemaVersion": 4,
   "contentVersion": "prophets-final-test-v1",
-  "updatedAt": "2026-08-08T10:48:09Z",
+  "updatedAt": "2026-08-08T10:58:11.411Z",
   "coverage": {
     "authenticitySeparateFromCoverage": true,
     "coverageStatus": "complete_for_defined_scope",
     "coverageNote": "Dhū l-Kifl: quranNamed; prophetStatus scholarly_disputed; UI-Qualifizierung.",
-    "auditedAt": "2026-08-08T10:48:09.593Z",
+    "auditedAt": "2026-08-08T11:00:05.466Z",
     "phase": 12,
     "block": "final",
     "reviewPass1": true,
@@ -861,5 +858,86 @@
     "contentVersion": "prophets-final-test-v1",
     "lastAuditResult": "PASS",
     "releaseCandidate": "prophets-final-test-v1"
-  }
+  },
+  "overview": [
+    {
+      "key": "name",
+      "label": "Name",
+      "value": "Dhū l-Kifl",
+      "status": "qurʾānisch namentlich",
+      "claimIds": [
+        "dhulkifl-name-21-85"
+      ]
+    },
+    {
+      "key": "prophetStatus",
+      "label": "Prophetenstatus",
+      "value": "Ikhtilāf / scholarly_disputed",
+      "status": "umstrittene Einordnung",
+      "claimIds": [
+        "dhulkifl-no-explicit-nabi-title",
+        "dhulkifl-position-prophet-context",
+        "dhulkifl-position-non-prophet-athar"
+      ]
+    },
+    {
+      "key": "character",
+      "label": "Eigenschaften",
+      "value": "Ṣabr · Ṣalāḥ · Aḫyār",
+      "status": "authentisch belegt (Qurʾān)",
+      "claimIds": [
+        "dhulkifl-sabr-salihin-21-85-86",
+        "dhulkifl-akhyar-38-48"
+      ]
+    }
+  ],
+  "sunnah": [],
+  "events": [],
+  "sources": [
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:85",
+      "hadithId": "",
+      "claimIds": [
+        "dhulkifl-name-21-85"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:85–86",
+      "hadithId": "",
+      "claimIds": [
+        "dhulkifl-sabr-salihin-21-85-86"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "38:48",
+      "hadithId": "",
+      "claimIds": [
+        "dhulkifl-akhyar-38-48"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Negativfeststellung nach Prüfung (Qurʾān; Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "dhulkifl-no-explicit-nabi-title"
+      ],
+      "grading": "unverified",
+      "verificationStatus": "approved"
+    }
+  ],
+  "research": []
 }

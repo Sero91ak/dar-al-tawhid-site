@@ -2871,6 +2871,26 @@
         ".github/workflows/prophets-test-validate.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-phase13-implement-final-v617-2026-08-08",
+      "approvedBy": "user-task-phase-13-jetzt-umsetzen",
+      "note": "Phase 13: Finalstand im TEST-Bereich umsetzen — production=disabled, NO live, NO production copy",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "test/assets/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js",
+        "scripts/validate-prophets-all.js",
+        "scripts/prophets-phase13-implement.js",
+        "scripts/prophets-phase13-final-report.js",
+        "scripts/build-prophets-search-index.js",
+        "scripts/prophets-phase12-final-freeze.js",
+        ".github/workflows/prophets-test-validate.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

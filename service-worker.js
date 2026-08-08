@@ -1,10 +1,10 @@
-// workers-deploy-stamp:1786134093716
+// workers-deploy-stamp:1786186691337
 /* DAR AL TAWḤID – Offline Light Service Worker
    Ziel: Startseite/App-Hülle offline nutzbar machen, ohne viel Speicher zu belegen.
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v600-quellen-visitor';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v617-prophets-test';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -29,6 +29,10 @@ const APP_SHELL = [
   '/assets/prophets/prophets.js',
   '/assets/prophets/prophets.css',
   '/data/prophets/index.json',
+  '/test/assets/prophets/prophets.js',
+  '/test/assets/prophets/prophets.css',
+  '/test/data/prophets/index.json',
+  '/test/data/prophets/search-index.json',
   '/data/books-library.json',
   '/data/scholars-library.json',
   '/test-apple-touch-icon.png',
@@ -266,6 +270,10 @@ function isPinnedLiveBootRequest(url) {
 
 function isPostDataRequest(url) {
   return url.pathname.includes('/content/posts/') || url.pathname.endsWith('/posts-index.json') || url.pathname.includes('/content/staging/posts/') || url.pathname.includes('/content/stories/') || url.pathname.includes('/content/staging/stories/') || url.pathname.includes('/content/focus-feed/') || url.pathname.includes('/content/staging/focus-feed/') || url.pathname.includes('/content/feed-backgrounds/') || url.pathname.includes('/content/staging/feed-backgrounds/') || url.pathname.includes('/assets/feed-backgrounds/') || url.pathname.includes('/content/updates/') || url.pathname.includes('/content/staging/updates/');
+}
+
+function isProphetsTestDataRequest(url) {
+  return url.pathname.indexOf('/test/data/prophets/') === 0;
 }
 
 function navigationShellKey(url) {
@@ -555,7 +563,8 @@ self.addEventListener('fetch', (event) => {
   }
 
   // Beitragsdaten und Index: Network-first, damit neue Beiträge nicht blockiert werden.
-  if (isPostDataRequest(url) || isFeedAssetRequest(url) || Date.now() < bypassPostCacheUntil) {
+  // Propheten-Testprofile: Network-first + Runtime-Cache der geöffneten Dateien.
+  if (isPostDataRequest(url) || isFeedAssetRequest(url) || isProphetsTestDataRequest(url) || Date.now() < bypassPostCacheUntil) {
     event.respondWith(
       fetch(request, { cache: 'no-store' })
         .then((response) => {

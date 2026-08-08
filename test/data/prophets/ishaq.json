@@ -411,10 +411,7 @@
       "directReference": "#quran-surah/38/45"
     }
   ],
-  "statements": {
-    "quran": [],
-    "sunnah": []
-  },
+  "statements": [],
   "prophetAbout": [
     {
       "id": "ishaq-genealogy-3390-about",
@@ -1924,12 +1921,12 @@
   ],
   "schemaVersion": 4,
   "contentVersion": "prophets-final-test-v1",
-  "updatedAt": "2026-08-08T10:25:00Z",
+  "updatedAt": "2026-08-08T10:58:11.383Z",
   "coverage": {
     "authenticitySeparateFromCoverage": true,
     "coverageStatus": "complete_for_defined_scope",
     "coverageNote": "Isḥāq: Concordance; Nabī 37:112; Genealogie Buḫārī 3390; Mutter-Korrelation getrennt; Opfer-Sohn-Disziplin.",
-    "auditedAt": "2026-08-08T10:48:09.564Z",
+    "auditedAt": "2026-08-08T11:00:05.428Z",
     "phase": 12,
     "block": "final",
     "reviewPass1": true,
@@ -1956,5 +1953,353 @@
     },
     "contentVersion": "prophets-final-test-v1",
     "releaseCandidate": "prophets-final-test-v1"
-  }
+  },
+  "overview": [
+    {
+      "key": "roles",
+      "label": "Nabī",
+      "value": "Ja (37:112)",
+      "status": "approved",
+      "claimIds": [
+        "ishaq-nabi-quran"
+      ]
+    },
+    {
+      "key": "father",
+      "label": "Vater",
+      "value": "Ibrāhīm",
+      "status": "approved",
+      "claimIds": [
+        "ishaq-father-ibrahim",
+        "ishaq-genealogy-3390"
+      ]
+    },
+    {
+      "key": "mother",
+      "label": "Mutter",
+      "value": "Sarah (Korrelations-Claim 3358+11:71)",
+      "status": "approved after correlation review",
+      "claimIds": [
+        "ishaq-mother-sarah-correlation"
+      ]
+    },
+    {
+      "key": "son",
+      "label": "Sohn",
+      "value": "Yaʿqūb",
+      "status": "approved",
+      "claimIds": [
+        "ishaq-genealogy-3390"
+      ]
+    },
+    {
+      "key": "sacrifice",
+      "label": "Opferprüfung",
+      "value": "Nicht mit 37:112 vermischen",
+      "status": "streng",
+      "claimIds": [
+        "ishaq-sacrifice-not-mix"
+      ]
+    },
+    {
+      "key": "grave",
+      "label": "Grab",
+      "value": "not_authentically_established",
+      "status": "nicht belegt",
+      "claimIds": [
+        "ishaq-grave-unattested"
+      ]
+    }
+  ],
+  "sunnah": [
+    {
+      "hadithId": "bukhari-3390",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3390",
+      "claimIds": [
+        "ishaq-genealogy-3390"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "bukhari-3358",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3358",
+      "claimIds": [
+        "ishaq-mother-sarah-correlation"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    }
+  ],
+  "events": [],
+  "sources": [
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "37:112",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-name-quran"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "14:39",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-father-ibrahim"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "11:71–73",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-bashara-11"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "11:71",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-son-yaqub-quran"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3390",
+      "hadithId": "bukhari-3390",
+      "claimIds": [
+        "ishaq-genealogy-3390"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3358",
+      "hadithId": "bukhari-3358",
+      "claimIds": [
+        "ishaq-mother-sarah-correlation"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Negativfeststellung nach Prüfung (Qurʾān; Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-wife-research"
+      ],
+      "grading": "unverified",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:133",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-2-133"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:136",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-2-136"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:140",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-2-140"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "3:84",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-3-84"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "4:163",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-4-163"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "6:84",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-6-84"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "11:72",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-11-72"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "11:73",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-11-73"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "12:6",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-12-6"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "19:49",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-19-49"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:72",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-21-72"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:73",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-21-73"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "29:27",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-29-27"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "37:113",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-37-113"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "38:45",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-38-45"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Coverage-Audit (definierter Korpus)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-sacrifice-son-not-quran-explicit"
+      ],
+      "grading": "absence_in_reviewed_corpus",
+      "verificationStatus": "approved"
+    }
+  ],
+  "research": []
 }

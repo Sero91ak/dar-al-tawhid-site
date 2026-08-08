@@ -156,10 +156,7 @@
       "directReference": "#quran-surah/18/60"
     }
   ],
-  "statements": {
-    "quran": [],
-    "sunnah": []
-  },
+  "statements": [],
   "prophetAbout": [
     {
       "id": "yusha-fata-musa-bukhari-3401-about",
@@ -1075,5 +1072,58 @@
     "reviewPass1": true,
     "reviewPass2": true,
     "contentVersion": "prophets-final-test-v1"
-  }
+  },
+  "overview": [
+    {
+      "key": "name",
+      "label": "Name",
+      "value": "Yūshaʿ ibn Nūn",
+      "status": "authentisch (Sunnah)",
+      "claimIds": [
+        "yusha-fata-musa-bukhari-3401",
+        "yusha-named-sun-ahmad-8315"
+      ]
+    },
+    {
+      "key": "quranName",
+      "label": "Qurʾān-Eigenname",
+      "value": "false",
+      "status": "nicht qurʾānisch namentlich",
+      "claimIds": [
+        "yusha-quran-explicit-name-false"
+      ]
+    },
+    {
+      "key": "prophetStatus",
+      "label": "Prophetenstatus",
+      "value": "scholarly_source_correlation",
+      "status": "Korrelation Ṣaḥīḥayn↔Aḥmad",
+      "claimIds": [
+        "yusha-prophethood-correlation-status"
+      ]
+    },
+    {
+      "key": "musa",
+      "label": "zu Mūsā",
+      "value": "fatā (18:60 + Buḫārī 3401)",
+      "status": "authentisch",
+      "claimIds": [
+        "yusha-fata-musa-bukhari-3401"
+      ]
+    },
+    {
+      "key": "sun",
+      "label": "Sonne",
+      "value": "Report A anonym + Report B namentlich",
+      "status": "Ebenen getrennt",
+      "claimIds": [
+        "yusha-anon-prophet-sun-bukhari-3124",
+        "yusha-named-sun-ahmad-8315"
+      ]
+    }
+  ],
+  "sunnah": [],
+  "events": [],
+  "sources": [],
+  "research": []
 }

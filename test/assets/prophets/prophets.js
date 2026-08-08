@@ -168,10 +168,24 @@
     if (g.indexOf("hasan") >= 0 || g.indexOf("ḥasan") >= 0) return "Ḥasan";
     if (g.indexOf("athar") >= 0) return "Authentischer Athar";
     if (isDisputedStatus(g) || g.indexOf("disputed") >= 0 || g.indexOf("umstritten") >= 0) return "Umstritten";
-    if (g.indexOf("not_authentically") >= 0 || g.indexOf("nicht authentisch") >= 0 || g.indexOf("unattested") >= 0) {
+    if (
+      g.indexOf("not_authentically") >= 0 ||
+      g.indexOf("nicht authentisch") >= 0 ||
+      g.indexOf("unattested") >= 0 ||
+      g.indexOf("not_established") >= 0 ||
+      g === "not_established_in_reviewed_sources"
+    ) {
       return "Nicht authentisch belegt";
     }
     return gradingOrStatus || "";
+  }
+
+  function absenceVisitorNote(status) {
+    var s = String(status || "");
+    if (s === "not_established_in_reviewed_sources" || /not_established|nicht authentisch belegt/i.test(s)) {
+      return "In den für dieses Profil geprüften Quellen liegt derzeit kein freigegebener authentischer Nachweis vor.";
+    }
+    return "";
   }
 
   function disputedStatusNote(metaOrProfile) {
@@ -430,6 +444,7 @@
       })
       .then(function (data) {
         profileCache[key] = data;
+        if (requestedFile) precacheOpenedProfile(requestedFile);
         return data;
       })
       .catch(function () {
@@ -905,7 +920,7 @@
           esc(r.surah) +
           '" data-quran-ayah="' +
           esc(r.ayah) +
-          '">📖 Im Qurʾān öffnen</button></div>' +
+          '">Im Qurʾān öffnen</button></div>' +
           "</article>"
         );
       })
@@ -1055,6 +1070,7 @@
               "</button>";
           }
         }
+        var absNote = absenceVisitorNote(f.absenceStatus || f.nameStatus);
         return (
           '<article class="prophets-family-card">' +
           "<h4>" +
@@ -1072,6 +1088,7 @@
           esc(publicStatusLabel(f.nameStatus) || f.nameStatus || "") +
           (!ok ? " · nicht als gesichert dargestellt" : "") +
           "</span>" +
+          (absNote ? '<p class="prophets-note">' + esc(absNote) + "</p>" : "") +
           "</article>"
         );
       })
@@ -1108,22 +1125,36 @@
       if (!rel || rel.verificationStatus !== "approved") return;
       var a = findMeta(rel.personA);
       var b = findMeta(rel.personB);
-      if (!a || !b) return;
-      lines.push(
-        '<div class="prophets-tree-line">' +
-          '<button type="button" class="prophets-inline-link" data-prophet-id="' +
+      var aName = (a && a.name) || (rel.personADisplay && rel.personADisplay.name) || rel.personA;
+      var bName = (b && b.name) || (rel.personBDisplay && rel.personBDisplay.name) || rel.personB;
+      if (!aName || !bName) return;
+      var relLabel =
+        rel.relation === "brothers"
+          ? "Brüder"
+          : rel.relation === "mother_son"
+            ? "Mutter → Sohn"
+            : "Vater → Sohn";
+      var aBtn = a
+        ? '<button type="button" class="prophets-inline-link" data-prophet-id="' +
           esc(a.id) +
           '">' +
-          esc(a.name) +
-          "</button>" +
-          '<span class="prophets-tree-rel">' +
-          esc(rel.relation === "brothers" ? "Brüder" : "Vater → Sohn") +
-          "</span>" +
-          '<button type="button" class="prophets-inline-link" data-prophet-id="' +
+          esc(aName) +
+          "</button>"
+        : "<span>" + esc(aName) + "</span>";
+      var bBtn = b
+        ? '<button type="button" class="prophets-inline-link" data-prophet-id="' +
           esc(b.id) +
           '">' +
-          esc(b.name) +
-          "</button>" +
+          esc(bName) +
+          "</button>"
+        : "<span>" + esc(bName) + "</span>";
+      lines.push(
+        '<div class="prophets-tree-line">' +
+          aBtn +
+          '<span class="prophets-tree-rel">' +
+          esc(relLabel) +
+          "</span>" +
+          bBtn +
           "</div>"
       );
     });
@@ -1151,7 +1182,13 @@
       { key: "sunnah", title: "Weitere authentische Sunnah", match: function (c) {
           return c.evidenceType === "sunnah" && !/bu[kḫ]h?ārī|bukhari|muslim/i.test(String(c.source || c.hadithId || ""));
         } },
-      { key: "athar", title: "Authentische Āthār", match: function (c) { return c.evidenceType === "athar"; } }
+      { key: "athar", title: "Authentische Āthār", match: function (c) { return c.evidenceType === "athar"; } },
+      { key: "early", title: "Frühe Quellen", match: function (c) {
+          return c.evidenceType === "early" || /sīrah|ibn.?ish[āa]q|ṭabarī|tabari|ibn.?saʿd/i.test(String(c.source || ""));
+        } },
+      { key: "research", title: "Qualifizierte Research-Einordnung", match: function (c) {
+          return c.evidenceType === "editorial" || c.evidenceType === "research" || /isolation|not_established|research/i.test(String(c.category || c.id || ""));
+        } }
     ];
     var used = Object.create(null);
     var worksHtml = groups
@@ -1729,8 +1766,43 @@
     );
   }
 
+  function precacheProphetsShell() {
+    if (!isTest()) return;
+    if (!("serviceWorker" in navigator)) return;
+    var urls = [
+      "/test/assets/prophets/prophets.js",
+      "/test/assets/prophets/prophets.css",
+      DATA_BASE + "index.json",
+      DATA_BASE + "search-index.json"
+    ];
+    navigator.serviceWorker.ready
+      .then(function (reg) {
+        try {
+          reg.active && reg.active.postMessage({ type: "PRECACHE", urls: urls });
+        } catch (e) {}
+      })
+      .catch(function () {});
+  }
+
+  function precacheOpenedProfile(fileUrl) {
+    if (!isTest() || !fileUrl) return;
+    if (!("serviceWorker" in navigator)) return;
+    navigator.serviceWorker.ready
+      .then(function (reg) {
+        try {
+          reg.active && reg.active.postMessage({ type: "PRECACHE", urls: [fileUrl] });
+        } catch (e) {}
+      })
+      .catch(function () {});
+  }
+
   function prefetch() {
-    loadIndex().then(function () { return loadSearchIndex(); }).catch(function () {});
+    loadIndex()
+      .then(function () {
+        precacheProphetsShell();
+        return loadSearchIndex();
+      })
+      .catch(function () {});
   }
 
   global.DARProphets = {

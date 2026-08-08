@@ -181,10 +181,7 @@
       "directReference": "#quran-surah/38/48"
     }
   ],
-  "statements": {
-    "quran": [],
-    "sunnah": []
-  },
+  "statements": [],
   "prophetAbout": [],
   "prophetMuhammadAbout": [],
   "athar": [],
@@ -926,12 +923,12 @@
   },
   "schemaVersion": 4,
   "contentVersion": "prophets-final-test-v1",
-  "updatedAt": "2026-08-08T10:48:09Z",
+  "updatedAt": "2026-08-08T10:58:11.407Z",
   "coverage": {
     "authenticitySeparateFromCoverage": true,
     "coverageStatus": "complete_for_defined_scope",
     "coverageNote": "al-Yasaʿ: kurzes Profil; keine Biografie-Auffüllung.",
-    "auditedAt": "2026-08-08T10:48:09.588Z",
+    "auditedAt": "2026-08-08T11:00:05.459Z",
     "phase": 12,
     "block": "final",
     "reviewPass1": true,
@@ -939,5 +936,101 @@
     "contentVersion": "prophets-final-test-v1",
     "lastAuditResult": "PASS",
     "releaseCandidate": "prophets-final-test-v1"
-  }
+  },
+  "overview": [
+    {
+      "key": "name",
+      "label": "Name",
+      "value": "al-Yasaʿ",
+      "status": "authentisch belegt (Qurʾān)",
+      "claimIds": [
+        "alyasa-name-quran"
+      ]
+    },
+    {
+      "key": "nameAr",
+      "label": "Arabisch",
+      "value": "اليسع",
+      "status": "authentisch belegt (Qurʾān)",
+      "claimIds": [
+        "alyasa-name-quran"
+      ]
+    },
+    {
+      "key": "roles",
+      "label": "Nabī / Rasūl",
+      "value": "Nabī (6:86–89)",
+      "status": "authentisch belegt",
+      "claimIds": [
+        "alyasa-nabi-6-86-89"
+      ]
+    },
+    {
+      "key": "note",
+      "label": "Quellenlage",
+      "value": "Sehr kompakt — keine künstliche Biografie",
+      "status": "policy",
+      "claimIds": [
+        "alyasa-no-full-bio"
+      ]
+    },
+    {
+      "key": "grave",
+      "label": "Grab",
+      "value": "Nicht authentisch festgelegt",
+      "status": "nicht authentisch belegt",
+      "claimIds": [
+        "alyasa-grave-unattested"
+      ]
+    }
+  ],
+  "sunnah": [],
+  "events": [],
+  "sources": [
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "6:86",
+      "hadithId": "",
+      "claimIds": [
+        "alyasa-name-quran"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "6:86–89",
+      "hadithId": "",
+      "claimIds": [
+        "alyasa-nabi-6-86-89"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "38:48",
+      "hadithId": "",
+      "claimIds": [
+        "alyasa-akhyar-38-48"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Negativfeststellung nach Prüfung (Qurʾān; Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "alyasa-no-full-bio"
+      ],
+      "grading": "unverified",
+      "verificationStatus": "approved"
+    }
+  ],
+  "research": []
 }

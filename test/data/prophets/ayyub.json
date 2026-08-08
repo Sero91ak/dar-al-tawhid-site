@@ -753,7 +753,80 @@
       ]
     }
   ],
-  "timeline": [],
+  "timeline": [
+    {
+      "id": "tl-ayyub-prophet-4-163",
+      "title": "Ayyūb in der Offenbarungs-/Prophetenreihe (4:163).",
+      "order": 1,
+      "claimIds": [
+        "ayyub-prophet-4-163"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-ayyub-prophet-6-84",
+      "title": "Ayyūb unter den Geführten/Propheten (6:84).",
+      "order": 2,
+      "claimIds": [
+        "ayyub-prophet-6-84"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-ayyub-dua-21-83",
+      "title": "Duʿāʾ Ayyūbs in der Prüfung (21:83).",
+      "order": 3,
+      "claimIds": [
+        "ayyub-dua-21-83"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-ayyub-healing-21-84",
+      "title": "Heilung und Wiederherstellung der Familie (21:84).",
+      "order": 4,
+      "claimIds": [
+        "ayyub-healing-21-84"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-ayyub-spring-38-42",
+      "title": "Aufforderung zum Stampfen; kühles Waschen/Trinken (38:42).",
+      "order": 5,
+      "claimIds": [
+        "ayyub-spring-38-42"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-ayyub-illness-type-not-established",
+      "title": "illnessType=not_established — keine freigegebene Spezifikation (Aussatz/Würmer/Hautkrankheit o. ä.).",
+      "order": 6,
+      "claimIds": [
+        "ayyub-illness-type-not-established"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-ayyub-illness-duration-not-established",
+      "title": "illnessDuration=not_established — keine freigegebene Dauer (7/18 Jahre o. ä.).",
+      "order": 7,
+      "claimIds": [
+        "ayyub-illness-duration-not-established"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-ayyub-grave-unattested",
+      "title": "grave=not_authentically_established.",
+      "order": 8,
+      "claimIds": [
+        "ayyub-grave-unattested"
+      ],
+      "verificationStatus": "approved"
+    }
+  ],
   "statements": [],
   "athar": [],
   "weakReports": [],
@@ -762,7 +835,7 @@
   "prophetMuhammadAbout": [],
   "schemaVersion": 4,
   "contentVersion": "prophets-final-test-v1",
-  "updatedAt": "2026-08-08T10:48:09Z",
+  "updatedAt": "2026-08-08T10:58:11.392Z",
   "audit": {
     "phase12Final": true,
     "auditedAt": "2026-08-08T10:48:09Z"
@@ -771,7 +844,7 @@
     "authenticitySeparateFromCoverage": true,
     "coverageStatus": "complete_for_defined_scope",
     "coverageNote": "Ayyūb: Qurʾān 4:163; 6:84; 21:83–84; 38:41–44; Buḫārī 3391; Krankheit/Namen isoliert.",
-    "auditedAt": "2026-08-08T10:48:09.572Z",
+    "auditedAt": "2026-08-08T11:00:05.441Z",
     "phase": 12,
     "block": "final",
     "reviewPass1": true,
@@ -779,5 +852,236 @@
     "contentVersion": "prophets-final-test-v1",
     "lastAuditResult": "PASS",
     "releaseCandidate": "prophets-final-test-v1"
-  }
+  },
+  "overview": [
+    {
+      "key": "name",
+      "label": "Name",
+      "value": "Ayyūb",
+      "status": "authentisch belegt (Qurʾān)",
+      "claimIds": [
+        "ayyub-prophet-4-163"
+      ]
+    },
+    {
+      "key": "roles",
+      "label": "Nabī / Rasūl",
+      "value": "Nabī",
+      "status": "authentisch belegt",
+      "claimIds": [
+        "ayyub-prophet-4-163",
+        "ayyub-prophet-6-84"
+      ]
+    },
+    {
+      "key": "family",
+      "label": "Familie",
+      "value": "ahl belegt; Namen research",
+      "status": "teilweise",
+      "claimIds": [
+        "ayyub-family-names-research"
+      ]
+    }
+  ],
+  "sunnah": [
+    {
+      "hadithId": "bukhari-3391",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3391",
+      "claimIds": [
+        "ayyub-bath-gold-locusts-3391"
+      ],
+      "verificationStatus": "approved"
+    }
+  ],
+  "events": [
+    {
+      "id": "ev-ayyub-prophet-4-163",
+      "title": "Ayyūb in der Offenbarungs-/Prophetenreihe (4:163).",
+      "claimIds": [
+        "ayyub-prophet-4-163"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-ayyub-prophet-6-84",
+      "title": "Ayyūb unter den Geführten/Propheten (6:84).",
+      "claimIds": [
+        "ayyub-prophet-6-84"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-ayyub-dua-21-83",
+      "title": "Duʿāʾ Ayyūbs in der Prüfung (21:83).",
+      "claimIds": [
+        "ayyub-dua-21-83"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-ayyub-healing-21-84",
+      "title": "Heilung und Wiederherstellung der Familie (21:84).",
+      "claimIds": [
+        "ayyub-healing-21-84"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-ayyub-spring-38-42",
+      "title": "Aufforderung zum Stampfen; kühles Waschen/Trinken (38:42).",
+      "claimIds": [
+        "ayyub-spring-38-42"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-ayyub-illness-type-not-established",
+      "title": "illnessType=not_established — keine freigegebene Spezifikation (Aussatz/Würmer/Hautkrankheit o. ä.).",
+      "claimIds": [
+        "ayyub-illness-type-not-established"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-ayyub-illness-duration-not-established",
+      "title": "illnessDuration=not_established — keine freigegebene Dauer (7/18 Jahre o. ä.).",
+      "claimIds": [
+        "ayyub-illness-duration-not-established"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-ayyub-grave-unattested",
+      "title": "grave=not_authentically_established.",
+      "claimIds": [
+        "ayyub-grave-unattested"
+      ],
+      "verificationStatus": "approved"
+    }
+  ],
+  "sources": [
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "4:163",
+      "hadithId": "",
+      "claimIds": [
+        "ayyub-qref-4-163"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "6:84",
+      "hadithId": "",
+      "claimIds": [
+        "ayyub-qref-6-84"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:83–84",
+      "hadithId": "",
+      "claimIds": [
+        "ayyub-qref-21-83-84"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "38:41–44",
+      "hadithId": "",
+      "claimIds": [
+        "ayyub-qref-38-41-44"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:83",
+      "hadithId": "",
+      "claimIds": [
+        "ayyub-dua-21-83"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:84",
+      "hadithId": "",
+      "claimIds": [
+        "ayyub-healing-21-84"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "38:42",
+      "hadithId": "",
+      "claimIds": [
+        "ayyub-spring-38-42"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "38:43",
+      "hadithId": "",
+      "claimIds": [
+        "ayyub-family-38-43"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "38:44",
+      "hadithId": "",
+      "claimIds": [
+        "ayyub-sabr-38-44"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Coverage-Audit (definierter Korpus)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "ayyub-illness-type-not-established"
+      ],
+      "grading": "absence_in_reviewed_corpus",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3391",
+      "hadithId": "bukhari-3391",
+      "claimIds": [
+        "ayyub-bath-gold-locusts-3391"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    }
+  ],
+  "research": []
 }

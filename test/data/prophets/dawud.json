@@ -1192,7 +1192,80 @@
       ]
     }
   ],
-  "timeline": [],
+  "timeline": [
+    {
+      "id": "tl-dawud-zabur-4-163",
+      "title": "Zabūr gegeben (4:163).",
+      "order": 1,
+      "claimIds": [
+        "dawud-zabur-4-163"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-dawud-zabur-17-55",
+      "title": "Zabūr gegeben (17:55).",
+      "order": 2,
+      "claimIds": [
+        "dawud-zabur-17-55"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-dawud-killed-jalut-2-251",
+      "title": "Dāwūd tötete Jālūt; Königreich und Weisheit (2:251).",
+      "order": 3,
+      "claimIds": [
+        "dawud-killed-jalut-2-251"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-dawud-judgment-sulayman-21-78-79",
+      "title": "Urteil mit Sulaymān (21:78–79).",
+      "order": 4,
+      "claimIds": [
+        "dawud-judgment-sulayman-21-78-79"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-dawud-mountains-birds-34-10",
+      "title": "Berge und Vögel preisen mit ihm (34:10).",
+      "order": 5,
+      "claimIds": [
+        "dawud-mountains-birds-34-10"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-dawud-iron-34-10-11",
+      "title": "Eisen weich gemacht; Rüstung (34:10–11).",
+      "order": 6,
+      "claimIds": [
+        "dawud-iron-34-10-11"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-dawud-disputants-38-21-25",
+      "title": "Streitende im Miḥrāb (38:21–25) — KEINE Uriyā-/Ehebruchs-/Tötungsplan-Legende in Hauptbiografie.",
+      "order": 7,
+      "claimIds": [
+        "dawud-disputants-38-21-25"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-dawud-death-grave-unattested",
+      "title": "deathYear=not_established; grave=not_authentically_established.",
+      "order": 8,
+      "claimIds": [
+        "dawud-death-grave-unattested"
+      ],
+      "verificationStatus": "approved"
+    }
+  ],
   "statements": [],
   "athar": [],
   "weakReports": [],
@@ -1201,7 +1274,7 @@
   "prophetMuhammadAbout": [],
   "schemaVersion": 4,
   "contentVersion": "prophets-final-test-v1",
-  "updatedAt": "2026-08-08T10:48:09Z",
+  "updatedAt": "2026-08-08T10:58:11.404Z",
   "audit": {
     "phase12Final": true,
     "auditedAt": "2026-08-08T10:48:09Z"
@@ -1213,7 +1286,7 @@
     "authenticitySeparateFromCoverage": true,
     "coverageStatus": "complete_for_defined_scope",
     "coverageNote": "Dāwūd: Zabūr; Jālūt; Rüstung; Fasten/Nacht 1131; Handarbeit 2072; Uriyā isoliert.",
-    "auditedAt": "2026-08-08T10:48:09.585Z",
+    "auditedAt": "2026-08-08T11:00:05.455Z",
     "phase": 12,
     "block": "final",
     "reviewPass1": true,
@@ -1221,5 +1294,324 @@
     "contentVersion": "prophets-final-test-v1",
     "lastAuditResult": "PASS",
     "releaseCandidate": "prophets-final-test-v1"
-  }
+  },
+  "overview": [],
+  "sunnah": [
+    {
+      "hadithId": "bukhari-2072",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "2072",
+      "claimIds": [
+        "dawud-work-hands-2072"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "bukhari-1131",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "1131",
+      "claimIds": [
+        "dawud-fast-prayer-1131"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "bukhari-3417",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3417",
+      "claimIds": [
+        "dawud-zabur-easy-3417"
+      ],
+      "verificationStatus": "approved"
+    }
+  ],
+  "events": [
+    {
+      "id": "ev-dawud-zabur-4-163",
+      "title": "Zabūr gegeben (4:163).",
+      "claimIds": [
+        "dawud-zabur-4-163"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-dawud-zabur-17-55",
+      "title": "Zabūr gegeben (17:55).",
+      "claimIds": [
+        "dawud-zabur-17-55"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-dawud-killed-jalut-2-251",
+      "title": "Dāwūd tötete Jālūt; Königreich und Weisheit (2:251).",
+      "claimIds": [
+        "dawud-killed-jalut-2-251"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-dawud-judgment-sulayman-21-78-79",
+      "title": "Urteil mit Sulaymān (21:78–79).",
+      "claimIds": [
+        "dawud-judgment-sulayman-21-78-79"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-dawud-mountains-birds-34-10",
+      "title": "Berge und Vögel preisen mit ihm (34:10).",
+      "claimIds": [
+        "dawud-mountains-birds-34-10"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-dawud-iron-34-10-11",
+      "title": "Eisen weich gemacht; Rüstung (34:10–11).",
+      "claimIds": [
+        "dawud-iron-34-10-11"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-dawud-disputants-38-21-25",
+      "title": "Streitende im Miḥrāb (38:21–25) — KEINE Uriyā-/Ehebruchs-/Tötungsplan-Legende in Hauptbiografie.",
+      "claimIds": [
+        "dawud-disputants-38-21-25"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-dawud-death-grave-unattested",
+      "title": "deathYear=not_established; grave=not_authentically_established.",
+      "claimIds": [
+        "dawud-death-grave-unattested"
+      ],
+      "verificationStatus": "approved"
+    }
+  ],
+  "sources": [
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:251",
+      "hadithId": "",
+      "claimIds": [
+        "dawud-qref-2-251"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "4:163",
+      "hadithId": "",
+      "claimIds": [
+        "dawud-qref-4-163"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "5:78",
+      "hadithId": "",
+      "claimIds": [
+        "dawud-qref-5-78"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "6:84",
+      "hadithId": "",
+      "claimIds": [
+        "dawud-qref-6-84"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "17:55",
+      "hadithId": "",
+      "claimIds": [
+        "dawud-qref-17-55"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:78–80",
+      "hadithId": "",
+      "claimIds": [
+        "dawud-qref-21-78-80"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "27:15–16",
+      "hadithId": "",
+      "claimIds": [
+        "dawud-qref-27-15-16"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "34:10–11",
+      "hadithId": "",
+      "claimIds": [
+        "dawud-qref-34-10-11"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "38:17–30",
+      "hadithId": "",
+      "claimIds": [
+        "dawud-qref-38-17-30"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:78–79",
+      "hadithId": "",
+      "claimIds": [
+        "dawud-judgment-sulayman-21-78-79"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "34:10",
+      "hadithId": "",
+      "claimIds": [
+        "dawud-mountains-birds-34-10"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:80",
+      "hadithId": "",
+      "claimIds": [
+        "dawud-armor-21-80"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "38:20",
+      "hadithId": "",
+      "claimIds": [
+        "dawud-kingdom-wisdom-38-20"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "38:21–25",
+      "hadithId": "",
+      "claimIds": [
+        "dawud-disputants-38-21-25"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "27:16",
+      "hadithId": "",
+      "claimIds": [
+        "dawud-son-sulayman-27-16"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "38:30",
+      "hadithId": "",
+      "claimIds": [
+        "dawud-son-sulayman-38-30"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Coverage-Audit (definierter Korpus)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "dawud-uriya-israiliyyat-isolated"
+      ],
+      "grading": "absence_in_reviewed_corpus",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "2072",
+      "hadithId": "bukhari-2072",
+      "claimIds": [
+        "dawud-work-hands-2072"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "1131",
+      "hadithId": "bukhari-1131",
+      "claimIds": [
+        "dawud-fast-prayer-1131"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3417",
+      "hadithId": "bukhari-3417",
+      "claimIds": [
+        "dawud-zabur-easy-3417"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    }
+  ],
+  "research": []
 }
