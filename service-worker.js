@@ -1,10 +1,10 @@
-// workers-deploy-stamp:1786186691337
+// workers-deploy-stamp:1786190641000
 /* DAR AL TAWḤID – Offline Light Service Worker
    Ziel: Startseite/App-Hülle offline nutzbar machen, ohne viel Speicher zu belegen.
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v617-prophets-test';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v618-prophets-fast';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -274,6 +274,16 @@ function isPostDataRequest(url) {
 
 function isProphetsTestDataRequest(url) {
   return url.pathname.indexOf('/test/data/prophets/') === 0;
+}
+
+function isProphetsCatalogRequest(url) {
+  const p = url.pathname;
+  return (
+    p === '/test/data/prophets/index.json' ||
+    p === '/test/data/prophets/search-index.json' ||
+    p === '/data/prophets/index.json' ||
+    p === '/data/prophets/search-index.json'
+  );
 }
 
 function navigationShellKey(url) {
@@ -558,6 +568,25 @@ self.addEventListener('fetch', (event) => {
           return response;
         })
         .catch(() => caches.match(request))
+    );
+    return;
+  }
+
+  // Propheten-Katalog (Index/Suche): Cache-first + Hintergrund-Refresh → Seite öffnet sofort.
+  if (isProphetsCatalogRequest(url)) {
+    event.respondWith(
+      caches.open(CACHE_VERSION).then(async (cache) => {
+        const cached = await cache.match(request);
+        const networkPromise = fetch(request)
+          .then((response) => {
+            if (response && response.ok) {
+              try { cache.put(request, response.clone()); } catch (e) {}
+            }
+            return response;
+          })
+          .catch(() => cached || Response.error());
+        return cached || networkPromise;
+      })
     );
     return;
   }

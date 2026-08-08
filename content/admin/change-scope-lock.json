@@ -2904,6 +2904,19 @@
         "test/version.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-fast-open-v618-2026-08-08",
+      "approvedBy": "user-task-propheten-schnell-oeffnen",
+      "note": "Propheten-Seite muss sofort öffnen: Index nicht blockieren, Cache-first für Index — TEST only",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/assets/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

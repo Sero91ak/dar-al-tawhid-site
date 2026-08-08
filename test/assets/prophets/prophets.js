@@ -57,12 +57,14 @@
   var DUAL_MIN = 720;
   var STATE_KEY = "dar_prophets_ui_v1";
   var LAST_READ_KEY = "dar_prophets_last_read_v1";
+  var INDEX_STORE_KEY = "dar_prophets_index_cache_v2";
   var indexCache = null;
   var searchIndexCache = null;
   var profileCache = Object.create(null);
   var hadithCache = Object.create(null);
   var relationCache = Object.create(null);
   var loadIndexPromise = null;
+  var indexRefreshPromise = null;
   var resizeBound = false;
   var lastWidthMode = "";
   var DISPUTED_STATUSES = {
@@ -234,25 +236,114 @@
     });
   }
 
-  function loadIndex() {
-    if (indexCache) return Promise.resolve(indexCache);
-    if (loadIndexPromise) return loadIndexPromise;
+  function indexAssetUrl(file) {
+    /* Stabile URL ohne Query → SW APP_SHELL / Runtime-Cache treffen. */
+    return DATA_BASE + file;
+  }
+
+  function readSessionIndex() {
+    try {
+      var raw = sessionStorage.getItem(INDEX_STORE_KEY);
+      if (!raw) return null;
+      var parsed = JSON.parse(raw);
+      if (!parsed || !parsed.data || !parsed.data.prophets) return null;
+      return parsed.data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function writeSessionIndex(data) {
+    try {
+      if (!data || !data.prophets) return;
+      sessionStorage.setItem(
+        INDEX_STORE_KEY,
+        JSON.stringify({
+          at: Date.now(),
+          dataBase: DATA_BASE,
+          data: data
+        })
+      );
+    } catch (e) {}
+  }
+
+  function hydrateIndexFromSession() {
+    if (indexCache) return indexCache;
+    var cached = readSessionIndex();
+    if (cached && isFeatureEnabled(cached)) {
+      indexCache = cached;
+      return cached;
+    }
+    return null;
+  }
+
+  function fetchJsonPreferCache(url) {
+    return fetch(url, { cache: "default" }).then(function (r) {
+      if (!r.ok) throw new Error("http_" + r.status);
+      return r.json();
+    });
+  }
+
+  function applyIndexData(data, opts) {
+    opts = opts || {};
+    if (!data || !data.prophets) return null;
+    var prevVersion =
+      indexCache && (indexCache.contentVersion || indexCache.updatedAt || indexCache.version);
+    var nextVersion = data.contentVersion || data.updatedAt || data.version;
+    indexCache = data;
+    writeSessionIndex(data);
+    if (!opts.silent && prevVersion && nextVersion && String(prevVersion) !== String(nextVersion)) {
+      if (global.currentRoute && global.currentRoute.view === "propheten") {
+        if (typeof global.render === "function") global.render();
+      }
+    }
+    return data;
+  }
+
+  function refreshIndexInBackground() {
+    if (indexRefreshPromise) return indexRefreshPromise;
     var requestedFile = DATA_BASE + "index.json";
-    loadIndexPromise = fetch(requestedFile, { cache: "no-store" })
-      .then(function (r) {
-        if (!r.ok) {
+    indexRefreshPromise = fetchJsonPreferCache(indexAssetUrl("index.json"))
+      .then(function (data) {
+        applyIndexData(data, { silent: false });
+        loadSearchIndex().catch(function () {});
+        return data;
+      })
+      .catch(function (err) {
+        if (!indexCache) {
           logProphetLoadError({
             prophetId: null,
             requestedFile: requestedFile,
-            errorType: "index_http_" + r.status
+            errorType: "index_fetch_failed"
           });
-          throw new Error("index " + r.status);
         }
-        return r.json();
+        throw err;
       })
+      .finally(function () {
+        indexRefreshPromise = null;
+      });
+    return indexRefreshPromise;
+  }
+
+  function loadIndex() {
+    if (indexCache) {
+      refreshIndexInBackground().catch(function () {});
+      return Promise.resolve(indexCache);
+    }
+    var warm = hydrateIndexFromSession();
+    if (warm) {
+      refreshIndexInBackground().catch(function () {});
+      loadSearchIndex().catch(function () {});
+      return Promise.resolve(warm);
+    }
+    if (loadIndexPromise) return loadIndexPromise;
+    var requestedFile = DATA_BASE + "index.json";
+    loadIndexPromise = fetchJsonPreferCache(indexAssetUrl("index.json"))
       .then(function (data) {
-        indexCache = data;
-        return loadSearchIndex().then(function () { return data; });
+        applyIndexData(data, { silent: true });
+        /* Suche separat — blockiert die Liste nicht. */
+        loadSearchIndex().catch(function () {});
+        return data;
       })
       .catch(function (err) {
         loadIndexPromise = null;
@@ -270,11 +361,7 @@
 
   function loadSearchIndex() {
     if (searchIndexCache) return Promise.resolve(searchIndexCache);
-    return fetch(DATA_BASE + "search-index.json", { cache: "no-store" })
-      .then(function (r) {
-        if (!r.ok) throw new Error("search-index " + r.status);
-        return r.json();
-      })
+    return fetchJsonPreferCache(indexAssetUrl("search-index.json"))
       .then(function (data) {
         searchIndexCache = data;
         return data;
@@ -426,7 +513,7 @@
         var file = profileFileFor(key);
         requestedFile = DATA_BASE + file;
         /* Test must never silently fall back to /data/prophets/ when a Test file is missing. */
-        return fetch(requestedFile, { cache: "no-store" });
+        return fetch(requestedFile, { cache: "default" });
       })
       .then(function (r) {
         if (!r.ok) {
@@ -1542,6 +1629,8 @@
     var state = readState();
     var header = setPageHeaderSafe();
 
+    if (!indexCache) hydrateIndexFromSession();
+
     if (!indexCache) {
       loadIndex()
         .then(function () {
@@ -1557,7 +1646,12 @@
       if (LAST_LOAD_ERROR && /index_/.test(String(LAST_LOAD_ERROR.errorType || ""))) {
         return header + '<div class="prophets-root">' + visitorLoadErrorHtml() + "</div>";
       }
-      return header + '<div class="prophets-root"><div class="prophets-empty">Prophetenbibliothek wird geladen…</div></div>';
+      return (
+        header +
+        '<div class="prophets-root" data-prophets-loading="1">' +
+        '<div class="prophets-empty prophets-empty--boot">Prophetenbibliothek wird geladen…</div>' +
+        "</div>"
+      );
     }
 
     if (!isFeatureEnabled(indexCache)) {
@@ -1848,6 +1942,9 @@
   }
 
   function prefetch() {
+    try {
+      hydrateIndexFromSession();
+    } catch (e) {}
     loadIndex()
       .then(function () {
         precacheProphetsShell();
@@ -1865,8 +1962,21 @@
     loadSearchIndex: loadSearchIndex,
     loadProfile: loadProfile,
     isEnabled: function () {
+      if (!indexCache) hydrateIndexFromSession();
       if (!indexCache) return isTest();
       return isFeatureEnabled(indexCache);
     }
   };
+
+  /* Sofort vorwärmen — nicht erst nach vollständigem HTML-Parse. */
+  try {
+    if (isTest()) {
+      hydrateIndexFromSession();
+      if (typeof requestIdleCallback === "function") {
+        requestIdleCallback(function () { prefetch(); }, { timeout: 1200 });
+      } else {
+        setTimeout(function () { prefetch(); }, 0);
+      }
+    }
+  } catch (e) {}
 })(window);
