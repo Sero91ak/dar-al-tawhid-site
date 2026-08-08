@@ -305,7 +305,7 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
         mode: job.mode || "auto",
         voiceProfile: job.voiceProfile || "dar-male",
         budget: normalizeBudget(job.budget || {}),
-        profile: job.profile || "dar-standard-v2",
+        profile: job.profile || "dar-standard-v4",
         format: "9:16",
         manualApproval: true,
         composePreview: job.composePreview === true,
@@ -321,6 +321,12 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
       if (job.status !== "completed") {
         return json({ ok: false, error: "Nur fertige Aufträge können freigegeben werden" }, cors, 409);
       }
+      if (job.qualityIncomplete || job.composePreview) {
+        return json({
+          ok: false,
+          error: "Unvollständige Vorschau – Freigabe erst nach bestandener Pflichtprüfung / Production-Endfassung"
+        }, cors, 409);
+      }
       if (job.artifacts?.render?.foreignWatermarkRisk || job.artifacts?.render?.shotstackEnv === "stage") {
         return json({
           ok: false,
@@ -333,12 +339,18 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
           error: "fal-ffmpeg-Merge ohne DAR-Texte/Wasserzeichen – Freigabe erst nach Shotstack Production-Endfassung"
         }, cors, 409);
       }
+      if (job.validation?.blocked || (job.validation && job.validation.ok === false)) {
+        return json({
+          ok: false,
+          error: `Export-Validierung blockiert: ${(job.validation.errors || []).join(" · ") || "Pflichtchecks fehlgeschlagen"}`
+        }, cors, 409);
+      }
       const saved = await saveJob(env, {
         ...job,
         approval: {
           approved: true,
           approvedAt: new Date().toISOString(),
-          note: "Interne Freigabe – keine automatische Besucher-Veröffentlichung und kein Push"
+          note: "Interne Freigabe – Feed und Push bleiben getrennt manuell"
         },
         message: "Intern freigegeben (noch nicht veröffentlicht)",
         updatedAt: new Date().toISOString()
