@@ -3,7 +3,7 @@
   "feature": "prophetsKnowledgeBase",
   "env": {
     "test": "enabled",
-    "production": "disabled"
+    "production": "enabled"
   },
   "title": "Die Propheten",
   "intro": "Was Qurʾān, authentische Sunnah und gesicherte frühe Überlieferungen über die Propheten berichten.",
@@ -20,7 +20,6 @@
     "Die Überlieferung über 124.000 Propheten wird nicht als gesicherte Gesamtzahl dargestellt.",
     "Keine erfundenen biografischen Ergänzungen.",
     "KI-Ausgabe ist keine Quelle.",
-    "production = disabled bis ausdrückliche Freigabe.",
     "approved erfordert reviewPass1 und reviewPass2."
   ],
   "uluAlAzmIds": [
@@ -52,20 +51,20 @@
       "uluAlAzm": false,
       "prophetStatus": "quran_explicit",
       "profileFile": "adam.json",
-      "profileStatus": "research",
+      "profileStatus": "approved",
       "quranNamed": true,
       "classifications": {
         "uluAlAzm": false,
         "quranExplicit": true,
-        "hasSunnah": false,
+        "hasSunnah": true,
         "banuIsrail": false,
         "arabicMessenger": false,
-        "furtherPerson": true
+        "furtherPerson": false
       },
-      "hasSunnah": false,
+      "hasSunnah": true,
       "banuIsrail": false,
       "arabicMessenger": false,
-      "furtherPerson": true
+      "furtherPerson": false
     },
     {
       "id": "idris",
@@ -377,20 +376,20 @@
       "uluAlAzm": false,
       "prophetStatus": "quran_explicit",
       "profileFile": "ayyub.json",
-      "profileStatus": "research",
+      "profileStatus": "approved",
       "quranNamed": true,
       "classifications": {
         "uluAlAzm": false,
         "quranExplicit": true,
-        "hasSunnah": false,
+        "hasSunnah": true,
         "banuIsrail": false,
         "arabicMessenger": false,
-        "furtherPerson": true
+        "furtherPerson": false
       },
-      "hasSunnah": false,
+      "hasSunnah": true,
       "banuIsrail": false,
       "arabicMessenger": false,
-      "furtherPerson": true
+      "furtherPerson": false
     },
     {
       "id": "shuayb",
@@ -405,20 +404,20 @@
       "uluAlAzm": false,
       "prophetStatus": "quran_explicit",
       "profileFile": "shuayb.json",
-      "profileStatus": "research",
+      "profileStatus": "approved",
       "quranNamed": true,
       "classifications": {
         "uluAlAzm": false,
         "quranExplicit": true,
         "hasSunnah": false,
         "banuIsrail": false,
-        "arabicMessenger": false,
-        "furtherPerson": true
+        "arabicMessenger": true,
+        "furtherPerson": false
       },
       "hasSunnah": false,
       "banuIsrail": false,
-      "arabicMessenger": false,
-      "furtherPerson": true
+      "arabicMessenger": true,
+      "furtherPerson": false
     },
     {
       "id": "musa",
@@ -473,20 +472,20 @@
       "uluAlAzm": false,
       "prophetStatus": "quran_explicit",
       "profileFile": "harun.json",
-      "profileStatus": "research",
+      "profileStatus": "approved",
       "quranNamed": true,
       "classifications": {
         "uluAlAzm": false,
         "quranExplicit": true,
-        "hasSunnah": false,
+        "hasSunnah": true,
         "banuIsrail": true,
         "arabicMessenger": false,
-        "furtherPerson": true
+        "furtherPerson": false
       },
-      "hasSunnah": false,
+      "hasSunnah": true,
       "banuIsrail": true,
       "arabicMessenger": false,
-      "furtherPerson": true
+      "furtherPerson": false
     },
     {
       "id": "dawud",
@@ -500,20 +499,20 @@
       "uluAlAzm": false,
       "prophetStatus": "quran_explicit",
       "profileFile": "dawud.json",
-      "profileStatus": "research",
+      "profileStatus": "approved",
       "quranNamed": true,
       "classifications": {
         "uluAlAzm": false,
         "quranExplicit": true,
-        "hasSunnah": false,
+        "hasSunnah": true,
         "banuIsrail": false,
         "arabicMessenger": false,
-        "furtherPerson": true
+        "furtherPerson": false
       },
-      "hasSunnah": false,
+      "hasSunnah": true,
       "banuIsrail": false,
       "arabicMessenger": false,
-      "furtherPerson": true
+      "furtherPerson": false
     },
     {
       "id": "sulayman",
@@ -1003,8 +1002,8 @@
     "relations": "relations/*.json"
   },
   "titleAr": "الأنبياء",
-  "contentVersion": "prophets-phase08-v610",
-  "updatedAt": "2026-08-08T09:33:13.000Z",
+  "contentVersion": "prophets-final-test-v1",
+  "updatedAt": "2026-08-08T10:58:11.417Z",
   "furtherPersons": [
     {
       "id": "dhul-kifl",
@@ -1230,5 +1229,24 @@
     "arabicMessenger": true,
     "further": true
   },
-  "phase08": true
+  "phase08": true,
+  "releaseCandidate": "prophets-final-test-v1",
+  "phase09": true,
+  "finalFreeze": {
+    "releaseCandidate": "prophets-final-test-v1",
+    "environment": "test",
+    "contentVersion": "prophets-final-test-v1",
+    "contentFrozen": true,
+    "productionEnabled": false,
+    "testEnabled": true,
+    "noLiveCopy": true,
+    "noProductionMerge": true,
+    "frozenAt": "2026-08-08T11:48:36.730Z",
+    "coreProfiles": 25,
+    "note": "Content freeze for FINAL TEST VERSION. PASS ≠ live. Explicit separate go-live required."
+  },
+  "phase13": {
+    "implementedAt": "2026-08-08T10:58:11.417Z",
+    "note": "Phase 13 implementation pass — TEST only; production remains disabled"
+  }
 }

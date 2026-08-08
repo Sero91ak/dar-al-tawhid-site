@@ -3,149 +3,937 @@
   "name": "Shuʿayb",
   "nameAr": "شعيب",
   "honorific": "عليه السلام",
-  "nameVariants": [],
+  "nameVariants": [
+    "Shuʿayb",
+    "شعيب"
+  ],
+  "searchTerms": [
+    "Shuʿayb",
+    "شعيب",
+    "Shuaib",
+    "Madyan",
+    "Midian",
+    "Aykah",
+    "Maß",
+    "Waage"
+  ],
   "prophetStatus": "quran_explicit",
   "roles": [
     "nabī",
     "rasūl"
   ],
   "uluAlAzm": false,
-  "people": "Madyan",
+  "people": "Madyan; Aṣḥāb al-Aykah (Identität nicht auto-mergen)",
   "region": "",
-  "mission": "",
-  "profileStatus": "research",
+  "mission": "Tawḥīd; gerechtes Maß und Waage.",
+  "profileStatus": "approved",
   "identity": {
     "name": "Shuʿayb",
     "nameAr": "شعيب",
-    "quranOrthography": "شعيب",
-    "safeVariants": [],
-    "prophetStatus": "quran_explicit",
-    "rolesPendingAudit": true,
-    "uluAlAzm": false,
-    "uluAlAzmNote": "Nicht als Ulū l-ʿAzm geführt, solange nicht belegt.",
     "nameDe": "Shuʿayb",
     "honorific": "عليه السلام",
     "quranNamed": true,
+    "roles": [
+      "nabī",
+      "rasūl"
+    ],
     "nabī": {
       "value": true,
-      "claimIds": []
+      "claimIds": [
+        "shuayb-madyan-7-85"
+      ]
     },
     "rasūl": {
       "value": true,
-      "claimIds": []
+      "claimIds": [
+        "shuayb-madyan-7-85"
+      ]
     },
     "nameAttributionType": "explicit_name"
   },
-  "overviewFields": [
+  "overviewFields": [],
+  "claims": [
     {
-      "key": "name",
-      "label": "Name",
-      "value": "Shuʿayb",
-      "status": "in Prüfung — Claim-Beleg ausstehend (Zero-Trust)",
-      "claimIds": [],
-      "chronologyStatus": "textually-established"
+      "id": "shuayb-qref-7-85-93",
+      "prophetId": "shuayb",
+      "category": "quran-index",
+      "claim": "Qurʾān-Fundstelle 7:85–93.",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "al-Qurʾān al-Karīm",
+      "bookChapter": "Sūrah 7",
+      "number": "7:85–93",
+      "volumePage": "",
+      "arabicOriginal": "وَإِلَىٰ مَدۡيَنَ أَخَاهُمۡ شُعَيۡبٗاۚ قَالَ يَٰقَوۡمِ ٱعۡبُدُواْ ٱللَّهَ مَا لَكُم مِّنۡ إِلَٰهٍ غَيۡرُهُۥۖ قَدۡ جَآءَتۡكُم بَيِّنَةٞ مِّن رَّبِّكُمۡۖ فَأَوۡفُواْ ٱلۡكَيۡلَ وَٱلۡمِيزَانَ وَلَا تَبۡخَسُواْ ٱلنَّاسَ أَشۡيَآءَهُمۡ وَلَا تُفۡسِدُواْ فِي ٱلۡأَرۡضِ بَعۡدَ إِصۡلَٰحِهَاۚ ذَٰلِكُمۡ خَيۡرٞ لَّكُمۡ إِن كُنتُم مُّؤۡمِنِينَ · وَلَا تَقۡعُدُواْ بِكُلِّ صِرَٰطٖ تُوعِدُونَ وَتَصُدُّونَ عَن سَبِيلِ ٱللَّهِ مَنۡ ءَامَنَ بِهِۦ وَتَبۡغُونَهَا عِوَجٗاۚ وَٱذۡكُرُوٓاْ إِذۡ كُنتُمۡ قَلِيلٗا فَكَثَّرَكُمۡۖ وَٱنظُرُواْ كَيۡفَ كَانَ عَٰقِبَةُ ٱلۡمُفۡسِدِينَ · وَإِن كَانَ طَآئِفَةٞ مِّنكُمۡ ءَامَنُواْ بِٱلَّذِيٓ أُرۡسِلۡتُ بِهِۦ وَطَآئِفَةٞ لَّمۡ يُؤۡمِنُواْ فَٱصۡبِرُواْ حَتَّىٰ يَحۡكُمَ ٱللَّهُ بَيۡنَنَاۚ وَهُوَ خَيۡرُ ٱلۡحَٰكِمِينَ · ۞قَالَ ٱلۡمَلَأُ ٱلَّذِينَ ٱسۡتَكۡبَرُواْ مِن قَوۡمِهِۦ لَنُخۡرِجَنَّكَ يَٰشُعَيۡبُ وَٱلَّذِينَ ءَامَنُواْ مَعَكَ مِن قَرۡيَتِنَآ أَوۡ لَتَعُودُنَّ فِي مِلَّتِنَاۚ قَالَ أَوَلَوۡ كُنَّا كَٰرِهِينَ · قَدِ ٱفۡتَرَيۡنَا عَلَى ٱللَّهِ كَذِبًا إِنۡ عُدۡنَا فِي مِلَّتِكُم بَعۡدَ إِذۡ نَجَّىٰنَا ٱللَّهُ مِنۡهَاۚ وَمَا يَكُونُ لَنَآ أَن نَّعُودَ فِيهَآ إِلَّآ أَن يَشَآءَ ٱللَّهُ رَبُّنَاۚ وَسِعَ رَبُّنَا كُلَّ شَيۡءٍ عِلۡمًاۚ عَلَى ٱللَّهِ تَوَكَّلۡنَاۚ رَبَّنَا ٱفۡتَحۡ بَيۡنَنَا وَبَيۡنَ قَوۡمِنَا بِٱلۡحَقِّ وَأَنتَ خَيۡرُ ٱلۡفَٰتِحِينَ · وَقَالَ ٱلۡمَلَأُ ٱلَّذِينَ كَفَرُواْ مِن قَوۡمِهِۦ لَئِنِ ٱتَّبَعۡتُمۡ شُعَيۡبًا إِنَّكُمۡ إِذٗا لَّخَٰسِرُونَ · فَأَخَذَتۡهُمُ ٱلرَّجۡفَةُ فَأَصۡبَحُواْ فِي دَارِهِمۡ جَٰثِمِينَ · ٱلَّذِينَ كَذَّبُواْ شُعَيۡبٗا كَأَن لَّمۡ يَغۡنَوۡاْ فِيهَاۚ ٱلَّذِينَ كَذَّبُواْ شُعَيۡبٗا كَانُواْ هُمُ ٱلۡخَٰسِرِينَ · فَتَوَلَّىٰ عَنۡهُمۡ وَقَالَ يَٰقَوۡمِ لَقَدۡ أَبۡلَغۡتُكُمۡ رِسَٰلَٰتِ رَبِّي وَنَصَحۡتُ لَكُمۡۖ فَكَيۡفَ ءَاسَىٰ عَلَىٰ قَوۡمٖ كَٰفِرِينَ",
+      "translationDe": "Und (Wir sandten) zu Madyan ihren Bruder Su’aib. Er sagte: O mein Volk, dient Allah! Keinen Gott habt ihr außer Ihm. Nun ist ein klarer Beweis von eurem Herrn zu euch gekommen; so gebt volles Maß und Gewicht und schmälert den Menschen nicht ihre Sachen und stiftet auf der Erde nicht Unheil, nachdem sie in Ordnung gebracht worden ist! Das ist besser für euch, wenn ihr gläubig seid Und lauert nicht auf jedem Weg, indem ihr droht und von Allahs Weg denjenigen abhaltet, der an Ihn glaubt, und danach trachtet, ihn krumm zu machen. Und gedenkt (der Zeit), als ihr (nur) wenige wart und Er euch dann zu vielen machte. Und schaut, wie das Ende der Unheilstifter war Und wenn ein Teil von euch an das glauben sollte, womit ich gesandt worden bin, ein anderer Teil aber nicht glauben sollte, so geduldet euch, bis Allah zwischen uns richtet. Er ist der Beste derer, die richten Die führende Schar, die sich hochmütig verhielt, aus seinem Volk, sagte: Wir werden dich, o Su’aib, und diejenigen, die mit dir glauben, ganz gewiß aus unserer Stadt vertreiben, oder aber ihr kehrt zu unserem Glaubensbekenntnis zurück! Er sagte: Was denn, auch wenn es uns zuwider ist Wir würden ja gegen Allah eine Lüge ersinnen, wenn wir zu eurem Glaubensbekenntnis zurückkehrten, nachdem Allah uns vor ihr errettet hat. Es steht uns nicht zu, zu ihr zurückzukehren, außer daß Allah, unser Herr, (es) wollte. Unser Herr umfaßt alles mit (Seinem) Wissen. Auf Allah verlassen wir uns. Unser Herr, entscheide zwischen uns und unserem Volk der Wahrheit entsprechend! Du bist ja der beste Entscheider Aber die führende Schar aus seinem Volk, die ungläubig war, sagte: Wenn ihr Su’aib folgt, dann werdet ihr fürwahr Verlierer sein Da ergriff sie das Zittern, und am Morgen lagen sie in ihrer Wohnstätte auf den Brüsten da Diejenigen, die Su’aib der Lüge bezichtigen, waren, als hätten sie (überhaupt) nicht darin gewohnt. Diejenigen, die Su’aib der Lüge bezichtigten, waren (nun) selbst die Verlierer So kehrte er sich von ihnen ab und sagte: O mein Volk, ich habe euch doch die Botschaften meines Herrn ausgerichtet und euch gut geraten. Wie sollte ich betrübt sein über ungläubige Leute",
+      "speaker": "Allah",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "Qurʾān",
+      "gradingReference": "",
+      "directReference": "#quran-surah/7/85",
+      "notes": "",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
-      "key": "nameAr",
-      "label": "Arabischer Name",
-      "value": "شعيب",
-      "status": "in Prüfung — Claim-Beleg ausstehend (Zero-Trust)",
-      "claimIds": []
+      "id": "shuayb-qref-11-84-95",
+      "prophetId": "shuayb",
+      "category": "quran-index",
+      "claim": "Qurʾān-Fundstelle 11:84–95.",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "al-Qurʾān al-Karīm",
+      "bookChapter": "Sūrah 11",
+      "number": "11:84–95",
+      "volumePage": "",
+      "arabicOriginal": "۞وَإِلَىٰ مَدۡيَنَ أَخَاهُمۡ شُعَيۡبٗاۚ قَالَ يَٰقَوۡمِ ٱعۡبُدُواْ ٱللَّهَ مَا لَكُم مِّنۡ إِلَٰهٍ غَيۡرُهُۥۖ وَلَا تَنقُصُواْ ٱلۡمِكۡيَالَ وَٱلۡمِيزَانَۖ إِنِّيٓ أَرَىٰكُم بِخَيۡرٖ وَإِنِّيٓ أَخَافُ عَلَيۡكُمۡ عَذَابَ يَوۡمٖ مُّحِيطٖ · وَيَٰقَوۡمِ أَوۡفُواْ ٱلۡمِكۡيَالَ وَٱلۡمِيزَانَ بِٱلۡقِسۡطِۖ وَلَا تَبۡخَسُواْ ٱلنَّاسَ أَشۡيَآءَهُمۡ وَلَا تَعۡثَوۡاْ فِي ٱلۡأَرۡضِ مُفۡسِدِينَ · بَقِيَّتُ ٱللَّهِ خَيۡرٞ لَّكُمۡ إِن كُنتُم مُّؤۡمِنِينَۚ وَمَآ أَنَا۠ عَلَيۡكُم بِحَفِيظٖ · قَالُواْ يَٰشُعَيۡبُ أَصَلَوٰتُكَ تَأۡمُرُكَ أَن نَّتۡرُكَ مَا يَعۡبُدُ ءَابَآؤُنَآ أَوۡ أَن نَّفۡعَلَ فِيٓ أَمۡوَٰلِنَا مَا نَشَـٰٓؤُاْۖ إِنَّكَ لَأَنتَ ٱلۡحَلِيمُ ٱلرَّشِيدُ · قَالَ يَٰقَوۡمِ أَرَءَيۡتُمۡ إِن كُنتُ عَلَىٰ بَيِّنَةٖ مِّن رَّبِّي وَرَزَقَنِي مِنۡهُ رِزۡقًا حَسَنٗاۚ وَمَآ أُرِيدُ أَنۡ أُخَالِفَكُمۡ إِلَىٰ مَآ أَنۡهَىٰكُمۡ عَنۡهُۚ إِنۡ أُرِيدُ إِلَّا ٱلۡإِصۡلَٰحَ مَا ٱسۡتَطَعۡتُۚ وَمَا تَوۡفِيقِيٓ إِلَّا بِٱللَّهِۚ عَلَيۡهِ تَوَكَّلۡتُ وَإِلَيۡهِ أُنِيبُ · وَيَٰقَوۡمِ لَا يَجۡرِمَنَّكُمۡ شِقَاقِيٓ أَن يُصِيبَكُم مِّثۡلُ مَآ أَصَابَ قَوۡمَ نُوحٍ أَوۡ قَوۡمَ هُودٍ أَوۡ قَوۡمَ صَٰلِحٖۚ وَمَا قَوۡمُ لُوطٖ مِّنكُم بِبَعِيدٖ · وَٱسۡتَغۡفِرُواْ رَبَّكُمۡ ثُمَّ تُوبُوٓاْ إِلَيۡهِۚ إِنَّ رَبِّي رَحِيمٞ وَدُودٞ · قَالُواْ يَٰشُعَيۡبُ مَا نَفۡقَهُ كَثِيرٗا مِّمَّا تَقُولُ وَإِنَّا لَنَرَىٰكَ فِينَا ضَعِيفٗاۖ وَلَوۡلَا رَهۡطُكَ لَرَجَمۡنَٰكَۖ وَمَآ أَنتَ عَلَيۡنَا بِعَزِيزٖ · قَالَ يَٰقَوۡمِ أَرَهۡطِيٓ أَعَزُّ عَلَيۡكُم مِّنَ ٱللَّهِ وَٱتَّخَذۡتُمُوهُ وَرَآءَكُمۡ ظِهۡرِيًّاۖ إِنَّ رَبِّي بِمَا تَعۡمَلُونَ مُحِيطٞ · وَيَٰقَوۡمِ ٱعۡمَلُواْ عَلَىٰ مَكَانَتِكُمۡ إِنِّي عَٰمِلٞۖ سَوۡفَ تَعۡلَمُونَ مَن يَأۡتِيهِ عَذَابٞ يُخۡزِيهِ وَمَنۡ هُوَ كَٰذِبٞۖ وَٱرۡتَقِبُوٓاْ إِنِّي مَعَكُمۡ رَقِيبٞ · وَلَمَّا جَآءَ أَمۡرُنَا نَجَّيۡنَا شُعَيۡبٗا وَٱلَّذِينَ ءَامَنُواْ مَعَهُۥ بِرَحۡمَةٖ مِّنَّا وَأَخَذَتِ ٱلَّذِينَ ظَلَمُواْ ٱلصَّيۡحَةُ فَأَصۡبَحُواْ فِي دِيَٰرِهِمۡ جَٰثِمِينَ · كَأَن لَّمۡ يَغۡنَوۡاْ فِيهَآۗ أَلَا بُعۡدٗا لِّمَدۡيَنَ كَمَا بَعِدَتۡ ثَمُودُ",
+      "translationDe": "Und (Wir sandten) zu Madyan ihren Bruder Su’aib. Er sagte: O mein Volk, dient Allah! Keinen Gott habt ihr außer Ihm. Laßt an Maß und Gewicht nichts fehlen! Ich sehe, es geht euch gut. Aber ich fürchte für euch die Strafe eines umfassenden Tages Und, o mein Volk, gebt volles Maß und Gewicht in Gerechtigkeit und schmälert den Menschen nicht ihre Sachen und richtet auf der Erde nicht unheilstiftend Verderben an Das Bleibende (an Lohn) von Allah ist besser für euch, wenn ihr gläubig seid. Und ich bin nicht Hüter über euch Sie sagten: O Su’aib, befiehlt dir denn dein Gebet, daß wir das verlassen, dem unsere Väter dienen, oder (davon absehen), mit unserem Besitz zu tun, was wir wollen? Du bist fürwahr der Nachsichtige und Besonnene Er sagte: O mein Volk, was meint ihr, wenn ich mich auf einen klaren Beweis von meinem Herrn stütze und Er mir eine schöne Versorgung gewährt hat? Und ich will mich (dann in meinem Vorhaben) von euch nicht unterscheiden, indem ich das tue, was ich euch verbiete. Ich will nur Besserung, soweit ich (sie erreichen) kann. Das Gelingen wird mir nur durch Allah (allein) beschieden. Auf Ihn verlasse ich mich, und Ihm wende ich mich reuig zu Und, o mein Volk, meine Feindseligkeit soll euch ja nicht dazu bringen, daß euch das Gleiche trifft, was das Volk Nuhs oder das Volk Huds oder das Volk Salihs traf. Und das Volk Luts liegt euch nicht fern Und bittet euren Herrn um Vergebung und hierauf bereut vor Ihm! Gewiß, mein Herr ist Barmherzig und Liebevoll Sie sagten: O Su’aib, wir verstehen nicht viel von dem, was du sagst. Und wir sehen wahrlich, daß du unter uns nicht wehrhaft bist. Wenn deine Sippschaft nicht wäre, hätten wir dich fürwahr gesteinigt. Du hast ja bei uns kein Ansehen Er sagte: O mein Volk, hat meine Sippschaft bei euch mehr Ansehen als Allah, und habt ihr Ihn hinter eurem Rücken gelassen? Gewiß, mein Herr umfaßt, was ihr tut Und, o mein Volk, handelt nach eurer Stellung! Ich werde (ebenfalls so) handeln. Ihr werdet (noch) erfahren, über wen eine Strafe kommen wird, die ihn in Schande stürzt, und wer ein Lügner ist. Und wartet (es) ab! Ich bin mit euch ein Beobachter Als nun Unser Befehl kam, erretteten Wir Su’aib und diejenigen, die mit ihm glaubten, durch Barmherzigkeit von Uns. Da ergriff diejenigen, die Unrecht taten, der Schrei, und so lagen sie morgens in ihren Wohnstätten auf den Brüsten da als hätten sie (überhaupt) nicht darin gewohnt. Aber ja, weg mit Madyan, wie auch die Tamud entfernt wurden",
+      "speaker": "Allah",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "Qurʾān",
+      "gradingReference": "",
+      "directReference": "#quran-surah/11/84",
+      "notes": "",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
-      "key": "roles",
-      "label": "Nabī / Rasūl",
-      "value": "Nabī · Rasūl",
-      "status": "vorläufig — Rollen einzeln gegen Qurʾān prüfen",
-      "claimIds": []
+      "id": "shuayb-qref-26-176-191",
+      "prophetId": "shuayb",
+      "category": "quran-index",
+      "claim": "Qurʾān-Fundstelle 26:176–191.",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "al-Qurʾān al-Karīm",
+      "bookChapter": "Sūrah 26",
+      "number": "26:176–191",
+      "volumePage": "",
+      "arabicOriginal": "كَذَّبَ أَصۡحَٰبُ لۡـَٔيۡكَةِ ٱلۡمُرۡسَلِينَ · إِذۡ قَالَ لَهُمۡ شُعَيۡبٌ أَلَا تَتَّقُونَ · إِنِّي لَكُمۡ رَسُولٌ أَمِينٞ · فَٱتَّقُواْ ٱللَّهَ وَأَطِيعُونِ · وَمَآ أَسۡـَٔلُكُمۡ عَلَيۡهِ مِنۡ أَجۡرٍۖ إِنۡ أَجۡرِيَ إِلَّا عَلَىٰ رَبِّ ٱلۡعَٰلَمِينَ · ۞أَوۡفُواْ ٱلۡكَيۡلَ وَلَا تَكُونُواْ مِنَ ٱلۡمُخۡسِرِينَ · وَزِنُواْ بِٱلۡقِسۡطَاسِ ٱلۡمُسۡتَقِيمِ · وَلَا تَبۡخَسُواْ ٱلنَّاسَ أَشۡيَآءَهُمۡ وَلَا تَعۡثَوۡاْ فِي ٱلۡأَرۡضِ مُفۡسِدِينَ · وَٱتَّقُواْ ٱلَّذِي خَلَقَكُمۡ وَٱلۡجِبِلَّةَ ٱلۡأَوَّلِينَ · قَالُوٓاْ إِنَّمَآ أَنتَ مِنَ ٱلۡمُسَحَّرِينَ · وَمَآ أَنتَ إِلَّا بَشَرٞ مِّثۡلُنَا وَإِن نَّظُنُّكَ لَمِنَ ٱلۡكَٰذِبِينَ · فَأَسۡقِطۡ عَلَيۡنَا كِسَفٗا مِّنَ ٱلسَّمَآءِ إِن كُنتَ مِنَ ٱلصَّـٰدِقِينَ · قَالَ رَبِّيٓ أَعۡلَمُ بِمَا تَعۡمَلُونَ · فَكَذَّبُوهُ فَأَخَذَهُمۡ عَذَابُ يَوۡمِ ٱلظُّلَّةِۚ إِنَّهُۥ كَانَ عَذَابَ يَوۡمٍ عَظِيمٍ · إِنَّ فِي ذَٰلِكَ لَأٓيَةٗۖ وَمَا كَانَ أَكۡثَرُهُم مُّؤۡمِنِينَ · وَإِنَّ رَبَّكَ لَهُوَ ٱلۡعَزِيزُ ٱلرَّحِيمُ",
+      "translationDe": "Die Bewohner des Dickichts bezichtigte die Gesandten der Lüge Als Su’aib zu ihnen sagte: „Wollt ihr nicht gottesfürchtig sein Gewiß, ich bin für euch ein vertrauenswürdiger Gesandter So fürchtet Allah und gehorcht mir Ich verlange von euch keinen Lohn dafür. Mein Lohn obliegt nur dem Herrn der Weltenbewohner Gebt volles Maß und gehört nicht zu denjenigen, die (anderen) Verlust verursachen Und wägt mit der richtigen Waage Und schmälert den Menschen nicht ihre Sachen und richtet auf der Erde nicht unheilstiftend Verderben an Und fürchtet Denjenigen, Der euch und die früheren Geschöpfe erschaffen hat Sie sagten: „Du gehörst ja nur zu denjenigen, die einem starken Zauber verfallen sind Du bist nur ein menschliches Wesen wie wir. Wir meinen wahrlich, daß du zu den Lügnern gehörst Lasse doch Stücke vom Himmel auf uns herabfallen, wenn du zu den Wahrhaftigen gehörst Er sagte: „Mein Herr weiß am besten, was ihr tut Aber sie bezichtigten ihn der Lüge. Da ergriff sie die Strafe des Tages der schattenspendenden Wolke; gewiß es war die Strafe eines gewaltigen Tages Darin ist wahrlich ein Zeichen, doch sind die meisten von ihnen nicht gläubig Und dein Herr ist fürwahr der Allmächtige und Barmherzige",
+      "speaker": "Allah",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "Qurʾān",
+      "gradingReference": "",
+      "directReference": "#quran-surah/26/176",
+      "notes": "",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
-      "key": "people",
-      "label": "Volk",
-      "value": "Madyan",
-      "status": "in Prüfung — Claim-Beleg ausstehend (Zero-Trust)",
-      "claimIds": [],
-      "absenceStatus": null
+      "id": "shuayb-qref-29-36-37",
+      "prophetId": "shuayb",
+      "category": "quran-index",
+      "claim": "Qurʾān-Fundstelle 29:36–37.",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "al-Qurʾān al-Karīm",
+      "bookChapter": "Sūrah 29",
+      "number": "29:36–37",
+      "volumePage": "",
+      "arabicOriginal": "وَإِلَىٰ مَدۡيَنَ أَخَاهُمۡ شُعَيۡبٗا فَقَالَ يَٰقَوۡمِ ٱعۡبُدُواْ ٱللَّهَ وَٱرۡجُواْ ٱلۡيَوۡمَ ٱلۡأٓخِرَ وَلَا تَعۡثَوۡاْ فِي ٱلۡأَرۡضِ مُفۡسِدِينَ · فَكَذَّبُوهُ فَأَخَذَتۡهُمُ ٱلرَّجۡفَةُ فَأَصۡبَحُواْ فِي دَارِهِمۡ جَٰثِمِينَ",
+      "translationDe": "Und (Wir sandten) zu Madyan ihren Bruder Su’aib. Da sagte er: „O mein Volk, dient Allah, erwartet den Jüngsten Tag und richtet auf der Erde nicht unheilstiftend Verderben an Aber sie bezichtigten ihn der Lüge. Da ergriff sie das Zittern, und am Morgen lagen sie in ihrer Wohnstätte auf den Brüsten da",
+      "speaker": "Allah",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "Qurʾān",
+      "gradingReference": "",
+      "directReference": "#quran-surah/29/36",
+      "notes": "",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
-      "key": "region",
-      "label": "Region",
-      "value": "Nicht authentisch belegt",
-      "status": "nicht authentisch belegt",
-      "claimIds": [],
+      "id": "shuayb-madyan-7-85",
+      "prophetId": "shuayb",
+      "category": "people",
+      "claim": "Shuʿayb zu Madyan gesandt (7:85).",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "al-Qurʾān al-Karīm",
+      "bookChapter": "Sūrah 7",
+      "number": "7:85",
+      "volumePage": "",
+      "arabicOriginal": "وَإِلَىٰ مَدۡيَنَ أَخَاهُمۡ شُعَيۡبٗاۚ قَالَ يَٰقَوۡمِ ٱعۡبُدُواْ ٱللَّهَ مَا لَكُم مِّنۡ إِلَٰهٍ غَيۡرُهُۥۖ قَدۡ جَآءَتۡكُم بَيِّنَةٞ مِّن رَّبِّكُمۡۖ فَأَوۡفُواْ ٱلۡكَيۡلَ وَٱلۡمِيزَانَ وَلَا تَبۡخَسُواْ ٱلنَّاسَ أَشۡيَآءَهُمۡ وَلَا تُفۡسِدُواْ فِي ٱلۡأَرۡضِ بَعۡدَ إِصۡلَٰحِهَاۚ ذَٰلِكُمۡ خَيۡرٞ لَّكُمۡ إِن كُنتُم مُّؤۡمِنِينَ",
+      "translationDe": "Und (Wir sandten) zu Madyan ihren Bruder Su’aib. Er sagte: O mein Volk, dient Allah! Keinen Gott habt ihr außer Ihm. Nun ist ein klarer Beweis von eurem Herrn zu euch gekommen; so gebt volles Maß und Gewicht und schmälert den Menschen nicht ihre Sachen und stiftet auf der Erde nicht Unheil, nachdem sie in Ordnung gebracht worden ist! Das ist besser für euch, wenn ihr gläubig seid",
+      "speaker": "Allah",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "Qurʾān",
+      "gradingReference": "",
+      "directReference": "#quran-surah/7/85",
+      "notes": "",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
+    },
+    {
+      "id": "shuayb-madyan-11-84",
+      "prophetId": "shuayb",
+      "category": "people",
+      "claim": "Shuʿayb zu Madyan (11:84).",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "al-Qurʾān al-Karīm",
+      "bookChapter": "Sūrah 11",
+      "number": "11:84",
+      "volumePage": "",
+      "arabicOriginal": "۞وَإِلَىٰ مَدۡيَنَ أَخَاهُمۡ شُعَيۡبٗاۚ قَالَ يَٰقَوۡمِ ٱعۡبُدُواْ ٱللَّهَ مَا لَكُم مِّنۡ إِلَٰهٍ غَيۡرُهُۥۖ وَلَا تَنقُصُواْ ٱلۡمِكۡيَالَ وَٱلۡمِيزَانَۖ إِنِّيٓ أَرَىٰكُم بِخَيۡرٖ وَإِنِّيٓ أَخَافُ عَلَيۡكُمۡ عَذَابَ يَوۡمٖ مُّحِيطٖ",
+      "translationDe": "Und (Wir sandten) zu Madyan ihren Bruder Su’aib. Er sagte: O mein Volk, dient Allah! Keinen Gott habt ihr außer Ihm. Laßt an Maß und Gewicht nichts fehlen! Ich sehe, es geht euch gut. Aber ich fürchte für euch die Strafe eines umfassenden Tages",
+      "speaker": "Allah",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "Qurʾān",
+      "gradingReference": "",
+      "directReference": "#quran-surah/11/84",
+      "notes": "",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
+    },
+    {
+      "id": "shuayb-message-weights",
+      "prophetId": "shuayb",
+      "category": "mission",
+      "claim": "Tawḥīd; Maß/Waage gerecht; nichts mindern; keine Verderbnis (7:85–86; 11:84–85).",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "al-Qurʾān al-Karīm",
+      "bookChapter": "Sūrah 7",
+      "number": "7:85–86",
+      "volumePage": "",
+      "arabicOriginal": "وَإِلَىٰ مَدۡيَنَ أَخَاهُمۡ شُعَيۡبٗاۚ قَالَ يَٰقَوۡمِ ٱعۡبُدُواْ ٱللَّهَ مَا لَكُم مِّنۡ إِلَٰهٍ غَيۡرُهُۥۖ قَدۡ جَآءَتۡكُم بَيِّنَةٞ مِّن رَّبِّكُمۡۖ فَأَوۡفُواْ ٱلۡكَيۡلَ وَٱلۡمِيزَانَ وَلَا تَبۡخَسُواْ ٱلنَّاسَ أَشۡيَآءَهُمۡ وَلَا تُفۡسِدُواْ فِي ٱلۡأَرۡضِ بَعۡدَ إِصۡلَٰحِهَاۚ ذَٰلِكُمۡ خَيۡرٞ لَّكُمۡ إِن كُنتُم مُّؤۡمِنِينَ · وَلَا تَقۡعُدُواْ بِكُلِّ صِرَٰطٖ تُوعِدُونَ وَتَصُدُّونَ عَن سَبِيلِ ٱللَّهِ مَنۡ ءَامَنَ بِهِۦ وَتَبۡغُونَهَا عِوَجٗاۚ وَٱذۡكُرُوٓاْ إِذۡ كُنتُمۡ قَلِيلٗا فَكَثَّرَكُمۡۖ وَٱنظُرُواْ كَيۡفَ كَانَ عَٰقِبَةُ ٱلۡمُفۡسِدِينَ",
+      "translationDe": "Und (Wir sandten) zu Madyan ihren Bruder Su’aib. Er sagte: O mein Volk, dient Allah! Keinen Gott habt ihr außer Ihm. Nun ist ein klarer Beweis von eurem Herrn zu euch gekommen; so gebt volles Maß und Gewicht und schmälert den Menschen nicht ihre Sachen und stiftet auf der Erde nicht Unheil, nachdem sie in Ordnung gebracht worden ist! Das ist besser für euch, wenn ihr gläubig seid Und lauert nicht auf jedem Weg, indem ihr droht und von Allahs Weg denjenigen abhaltet, der an Ihn glaubt, und danach trachtet, ihn krumm zu machen. Und gedenkt (der Zeit), als ihr (nur) wenige wart und Er euch dann zu vielen machte. Und schaut, wie das Ende der Unheilstifter war",
+      "speaker": "Allah",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "Qurʾān",
+      "gradingReference": "",
+      "directReference": "#quran-surah/7/85",
+      "notes": "",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
+    },
+    {
+      "id": "shuayb-aykah-26",
+      "prophetId": "shuayb",
+      "category": "people",
+      "claim": "Shuʿayb spricht zu den Aṣḥāb al-Aykah (26:176–191). Madyan===Aykah nicht automatisch hardcoden.",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "al-Qurʾān al-Karīm",
+      "bookChapter": "Sūrah 26",
+      "number": "26:176–191",
+      "volumePage": "",
+      "arabicOriginal": "كَذَّبَ أَصۡحَٰبُ لۡـَٔيۡكَةِ ٱلۡمُرۡسَلِينَ · إِذۡ قَالَ لَهُمۡ شُعَيۡبٌ أَلَا تَتَّقُونَ · إِنِّي لَكُمۡ رَسُولٌ أَمِينٞ · فَٱتَّقُواْ ٱللَّهَ وَأَطِيعُونِ · وَمَآ أَسۡـَٔلُكُمۡ عَلَيۡهِ مِنۡ أَجۡرٍۖ إِنۡ أَجۡرِيَ إِلَّا عَلَىٰ رَبِّ ٱلۡعَٰلَمِينَ · ۞أَوۡفُواْ ٱلۡكَيۡلَ وَلَا تَكُونُواْ مِنَ ٱلۡمُخۡسِرِينَ · وَزِنُواْ بِٱلۡقِسۡطَاسِ ٱلۡمُسۡتَقِيمِ · وَلَا تَبۡخَسُواْ ٱلنَّاسَ أَشۡيَآءَهُمۡ وَلَا تَعۡثَوۡاْ فِي ٱلۡأَرۡضِ مُفۡسِدِينَ · وَٱتَّقُواْ ٱلَّذِي خَلَقَكُمۡ وَٱلۡجِبِلَّةَ ٱلۡأَوَّلِينَ · قَالُوٓاْ إِنَّمَآ أَنتَ مِنَ ٱلۡمُسَحَّرِينَ · وَمَآ أَنتَ إِلَّا بَشَرٞ مِّثۡلُنَا وَإِن نَّظُنُّكَ لَمِنَ ٱلۡكَٰذِبِينَ · فَأَسۡقِطۡ عَلَيۡنَا كِسَفٗا مِّنَ ٱلسَّمَآءِ إِن كُنتَ مِنَ ٱلصَّـٰدِقِينَ · قَالَ رَبِّيٓ أَعۡلَمُ بِمَا تَعۡمَلُونَ · فَكَذَّبُوهُ فَأَخَذَهُمۡ عَذَابُ يَوۡمِ ٱلظُّلَّةِۚ إِنَّهُۥ كَانَ عَذَابَ يَوۡمٍ عَظِيمٍ · إِنَّ فِي ذَٰلِكَ لَأٓيَةٗۖ وَمَا كَانَ أَكۡثَرُهُم مُّؤۡمِنِينَ · وَإِنَّ رَبَّكَ لَهُوَ ٱلۡعَزِيزُ ٱلرَّحِيمُ",
+      "translationDe": "Die Bewohner des Dickichts bezichtigte die Gesandten der Lüge Als Su’aib zu ihnen sagte: „Wollt ihr nicht gottesfürchtig sein Gewiß, ich bin für euch ein vertrauenswürdiger Gesandter So fürchtet Allah und gehorcht mir Ich verlange von euch keinen Lohn dafür. Mein Lohn obliegt nur dem Herrn der Weltenbewohner Gebt volles Maß und gehört nicht zu denjenigen, die (anderen) Verlust verursachen Und wägt mit der richtigen Waage Und schmälert den Menschen nicht ihre Sachen und richtet auf der Erde nicht unheilstiftend Verderben an Und fürchtet Denjenigen, Der euch und die früheren Geschöpfe erschaffen hat Sie sagten: „Du gehörst ja nur zu denjenigen, die einem starken Zauber verfallen sind Du bist nur ein menschliches Wesen wie wir. Wir meinen wahrlich, daß du zu den Lügnern gehörst Lasse doch Stücke vom Himmel auf uns herabfallen, wenn du zu den Wahrhaftigen gehörst Er sagte: „Mein Herr weiß am besten, was ihr tut Aber sie bezichtigten ihn der Lüge. Da ergriff sie die Strafe des Tages der schattenspendenden Wolke; gewiß es war die Strafe eines gewaltigen Tages Darin ist wahrlich ein Zeichen, doch sind die meisten von ihnen nicht gläubig Und dein Herr ist fürwahr der Allmächtige und Barmherzige",
+      "speaker": "Allah",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "Qurʾān",
+      "gradingReference": "",
+      "directReference": "#quran-surah/26/176",
+      "notes": "aykah_madyan_identity=not_auto_hardcoded",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
+    },
+    {
+      "id": "shuayb-punishment-rajfah-7-91",
+      "prophetId": "shuayb",
+      "category": "events",
+      "claim": "Strafe: raǧfah (7:91) — getrennt speichern.",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "al-Qurʾān al-Karīm",
+      "bookChapter": "Sūrah 7",
+      "number": "7:91",
+      "volumePage": "",
+      "arabicOriginal": "فَأَخَذَتۡهُمُ ٱلرَّجۡفَةُ فَأَصۡبَحُواْ فِي دَارِهِمۡ جَٰثِمِينَ",
+      "translationDe": "Da ergriff sie das Zittern, und am Morgen lagen sie in ihrer Wohnstätte auf den Brüsten da",
+      "speaker": "Allah",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "Qurʾān",
+      "gradingReference": "",
+      "directReference": "#quran-surah/7/91",
+      "notes": "",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
+    },
+    {
+      "id": "shuayb-punishment-sayhah-11-94",
+      "prophetId": "shuayb",
+      "category": "events",
+      "claim": "Strafe: ṣayḥah (11:94) — getrennt speichern.",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "al-Qurʾān al-Karīm",
+      "bookChapter": "Sūrah 11",
+      "number": "11:94",
+      "volumePage": "",
+      "arabicOriginal": "وَلَمَّا جَآءَ أَمۡرُنَا نَجَّيۡنَا شُعَيۡبٗا وَٱلَّذِينَ ءَامَنُواْ مَعَهُۥ بِرَحۡمَةٖ مِّنَّا وَأَخَذَتِ ٱلَّذِينَ ظَلَمُواْ ٱلصَّيۡحَةُ فَأَصۡبَحُواْ فِي دِيَٰرِهِمۡ جَٰثِمِينَ",
+      "translationDe": "Als nun Unser Befehl kam, erretteten Wir Su’aib und diejenigen, die mit ihm glaubten, durch Barmherzigkeit von Uns. Da ergriff diejenigen, die Unrecht taten, der Schrei, und so lagen sie morgens in ihren Wohnstätten auf den Brüsten da",
+      "speaker": "Allah",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "Qurʾān",
+      "gradingReference": "",
+      "directReference": "#quran-surah/11/94",
+      "notes": "",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
+    },
+    {
+      "id": "shuayb-punishment-shadow-26-189",
+      "prophetId": "shuayb",
+      "category": "events",
+      "claim": "Strafe des Schattentags (26:189) — Harmonisierung nur nach Tafsīrprüfung.",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "al-Qurʾān al-Karīm",
+      "bookChapter": "Sūrah 26",
+      "number": "26:189",
+      "volumePage": "",
+      "arabicOriginal": "فَكَذَّبُوهُ فَأَخَذَهُمۡ عَذَابُ يَوۡمِ ٱلظُّلَّةِۚ إِنَّهُۥ كَانَ عَذَابَ يَوۡمٍ عَظِيمٍ",
+      "translationDe": "Aber sie bezichtigten ihn der Lüge. Da ergriff sie die Strafe des Tages der schattenspendenden Wolke; gewiß es war die Strafe eines gewaltigen Tages",
+      "speaker": "Allah",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "Qurʾān",
+      "gradingReference": "",
+      "directReference": "#quran-surah/26/189",
+      "notes": "",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
+    },
+    {
+      "id": "shuayb-not-auto-musa-fil",
+      "prophetId": "shuayb",
+      "category": "family",
+      "claim": "musa.fatherInLaw=Shuʿayb bleibt false/research — 28:23–28 nennt älteren Mann UNNAMED.",
+      "verificationStatus": "approved",
+      "evidenceType": "editorial",
+      "grading": "absence_in_reviewed_corpus",
+      "source": "Coverage-Audit (definierter Korpus)",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "",
+      "gradingReference": "",
+      "directReference": "",
+      "notes": "Im definierten geprüften Korpus liegt derzeit kein freigegebener belastbarer Nachweis vor — nicht: ‚Existiert garantiert nirgendwo.‘",
+      "quotation": false,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed",
       "absenceStatus": "not-established-in-reviewed-sources"
     },
     {
-      "key": "father",
-      "label": "Vater",
-      "value": "Nicht authentisch belegt",
-      "status": "nicht authentisch belegt",
-      "claimIds": [],
+      "id": "shuayb-khatib-al-anbiya",
+      "prophetId": "shuayb",
+      "category": "titles",
+      "claim": "Titel „Khaṭīb al-Anbiyāʾ“: research / isnad_check_required.",
+      "verificationStatus": "research",
+      "evidenceType": "research",
+      "grading": "research",
+      "source": "",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "",
+      "gradingReference": "",
+      "directReference": "",
+      "notes": "",
+      "quotation": false,
+      "review": {
+        "reviewPass1": "pending",
+        "reviewPass2": "pending"
+      }
+    },
+    {
+      "id": "shuayb-family-research",
+      "prophetId": "shuayb",
+      "category": "family",
+      "claim": "father/mother/wife/children=research.",
+      "verificationStatus": "approved",
+      "evidenceType": "editorial",
+      "grading": "absence_in_reviewed_corpus",
+      "source": "Coverage-Audit (definierter Korpus)",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "",
+      "gradingReference": "",
+      "directReference": "",
+      "notes": "Im definierten geprüften Korpus liegt derzeit kein freigegebener belastbarer Nachweis vor — nicht: ‚Existiert garantiert nirgendwo.‘",
+      "quotation": false,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed",
       "absenceStatus": "not-established-in-reviewed-sources"
     },
     {
-      "key": "mother",
-      "label": "Mutter",
-      "value": "Nicht authentisch belegt",
-      "status": "nicht authentisch belegt",
-      "claimIds": [],
-      "absenceStatus": "not-established-in-reviewed-sources"
-    },
-    {
-      "key": "birth",
-      "label": "Geburt",
-      "value": "Nicht authentisch belegt",
-      "status": "nicht authentisch belegt",
-      "claimIds": [],
-      "absenceStatus": "not-established-in-reviewed-sources"
-    },
-    {
-      "key": "death",
-      "label": "Tod / Grab",
-      "value": "Nicht authentisch belegt",
-      "status": "nicht authentisch belegt",
-      "claimIds": [],
-      "absenceStatus": "not-established-in-reviewed-sources"
-    },
-    {
-      "key": "epoch",
-      "label": "Zeitliche Einordnung",
-      "value": "Nicht bestimmbar als islamisch authentische Datierung",
-      "status": "nicht bestimmbar",
-      "chronologyStatus": "not-determinable",
-      "claimIds": [],
+      "id": "shuayb-grave-unattested",
+      "prophetId": "shuayb",
+      "category": "death",
+      "claim": "grave=not_authentically_established.",
+      "verificationStatus": "approved",
+      "evidenceType": "editorial",
+      "grading": "absence_in_reviewed_corpus",
+      "source": "Coverage-Audit (definierter Korpus)",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "",
+      "gradingReference": "",
+      "directReference": "",
+      "notes": "Im definierten geprüften Korpus liegt derzeit kein freigegebener belastbarer Nachweis vor — nicht: ‚Existiert garantiert nirgendwo.‘",
+      "quotation": false,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed",
       "absenceStatus": "not-established-in-reviewed-sources"
     }
   ],
-  "family": [],
-  "timeline": [],
-  "quranRefs": [],
-  "statements": {
-    "quran": [],
-    "sunnah": []
-  },
-  "prophetMuhammadAbout": [],
+  "quranRefs": [
+    {
+      "surah": 7,
+      "ayah": 85,
+      "ayahEnd": 93,
+      "kind": "about",
+      "event": "",
+      "context": "",
+      "category": "other",
+      "claimIds": [
+        "shuayb-qref-7-85-93"
+      ],
+      "directReference": "#quran-surah/7/85"
+    },
+    {
+      "surah": 11,
+      "ayah": 84,
+      "ayahEnd": 95,
+      "kind": "about",
+      "event": "",
+      "context": "",
+      "category": "other",
+      "claimIds": [
+        "shuayb-qref-11-84-95"
+      ],
+      "directReference": "#quran-surah/11/84"
+    },
+    {
+      "surah": 26,
+      "ayah": 176,
+      "ayahEnd": 191,
+      "kind": "about",
+      "event": "",
+      "context": "",
+      "category": "other",
+      "claimIds": [
+        "shuayb-qref-26-176-191"
+      ],
+      "directReference": "#quran-surah/26/176"
+    },
+    {
+      "surah": 29,
+      "ayah": 36,
+      "ayahEnd": 37,
+      "kind": "about",
+      "event": "",
+      "context": "",
+      "category": "other",
+      "claimIds": [
+        "shuayb-qref-29-36-37"
+      ],
+      "directReference": "#quran-surah/29/36"
+    }
+  ],
+  "family": [
+    {
+      "relation": "father",
+      "label": "Vater",
+      "name": "research",
+      "nameStatus": "research",
+      "claimIds": [
+        "shuayb-family-research"
+      ]
+    },
+    {
+      "relation": "mother",
+      "label": "Mutter",
+      "name": "research",
+      "nameStatus": "research",
+      "claimIds": [
+        "shuayb-family-research"
+      ]
+    },
+    {
+      "relation": "wife",
+      "label": "Ehefrau",
+      "name": "research",
+      "nameStatus": "research",
+      "claimIds": [
+        "shuayb-family-research"
+      ]
+    },
+    {
+      "relation": "children",
+      "label": "Kinder",
+      "name": "research",
+      "nameStatus": "research",
+      "claimIds": [
+        "shuayb-family-research"
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "id": "tl-shuayb-message-weights",
+      "title": "Tawḥīd; Maß/Waage gerecht; nichts mindern; keine Verderbnis (7:85–86; 11:84–85).",
+      "order": 1,
+      "claimIds": [
+        "shuayb-message-weights"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-shuayb-punishment-rajfah-7-91",
+      "title": "Strafe: raǧfah (7:91) — getrennt speichern.",
+      "order": 2,
+      "claimIds": [
+        "shuayb-punishment-rajfah-7-91"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-shuayb-punishment-sayhah-11-94",
+      "title": "Strafe: ṣayḥah (11:94) — getrennt speichern.",
+      "order": 3,
+      "claimIds": [
+        "shuayb-punishment-sayhah-11-94"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-shuayb-punishment-shadow-26-189",
+      "title": "Strafe des Schattentags (26:189) — Harmonisierung nur nach Tafsīrprüfung.",
+      "order": 4,
+      "claimIds": [
+        "shuayb-punishment-shadow-26-189"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "tl-shuayb-grave-unattested",
+      "title": "grave=not_authentically_established.",
+      "order": 5,
+      "claimIds": [
+        "shuayb-grave-unattested"
+      ],
+      "verificationStatus": "approved"
+    }
+  ],
+  "statements": [],
   "athar": [],
-  "worksIndex": [],
-  "claims": [],
   "weakReports": [],
-  "audit": {
-    "zeroTrust": true,
-    "createdAt": "2026-08-07T22:40:30.000Z",
-    "updatedAt": "2026-08-08T09:25:18.000Z",
-    "profileStatus": "research",
-    "notes": [
-      "Zero-Trust: Kein Claim ohne Primärbeleg freigeben.",
-      "UNSICHER = NICHT VERÖFFENTLICHEN.",
-      "KI-Ausgabe ist keine Quelle.",
-      "approved erfordert reviewPass1 + reviewPass2."
-    ],
-    "reviewPass1": "pending",
-    "reviewPass2": "pending",
-    "pipeline": "draft",
-    "phase07": true,
-    "schemaVersion": 4
-  },
+  "worksIndex": [],
+  "prophetAbout": [],
+  "prophetMuhammadAbout": [],
   "schemaVersion": 4,
-  "searchTerms": []
+  "contentVersion": "prophets-final-test-v1",
+  "updatedAt": "2026-08-08T10:58:11.392Z",
+  "audit": {
+    "phase12Final": true,
+    "auditedAt": "2026-08-08T10:48:09Z"
+  },
+  "coverage": {
+    "authenticitySeparateFromCoverage": true,
+    "coverageStatus": "complete_for_defined_scope",
+    "coverageNote": "Shuʿayb: Madyan/Aykah getrennt; Strafen getrennt; nicht auto Schwiegervater Mūsās.",
+    "auditedAt": "2026-08-08T11:00:05.442Z",
+    "phase": 12,
+    "block": "final",
+    "reviewPass1": true,
+    "reviewPass2": true,
+    "contentVersion": "prophets-final-test-v1",
+    "lastAuditResult": "PASS",
+    "releaseCandidate": "prophets-final-test-v1"
+  },
+  "overview": [],
+  "sunnah": [],
+  "events": [
+    {
+      "id": "ev-shuayb-message-weights",
+      "title": "Tawḥīd; Maß/Waage gerecht; nichts mindern; keine Verderbnis (7:85–86; 11:84–85).",
+      "claimIds": [
+        "shuayb-message-weights"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-shuayb-punishment-rajfah-7-91",
+      "title": "Strafe: raǧfah (7:91) — getrennt speichern.",
+      "claimIds": [
+        "shuayb-punishment-rajfah-7-91"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-shuayb-punishment-sayhah-11-94",
+      "title": "Strafe: ṣayḥah (11:94) — getrennt speichern.",
+      "claimIds": [
+        "shuayb-punishment-sayhah-11-94"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-shuayb-punishment-shadow-26-189",
+      "title": "Strafe des Schattentags (26:189) — Harmonisierung nur nach Tafsīrprüfung.",
+      "claimIds": [
+        "shuayb-punishment-shadow-26-189"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "id": "ev-shuayb-grave-unattested",
+      "title": "grave=not_authentically_established.",
+      "claimIds": [
+        "shuayb-grave-unattested"
+      ],
+      "verificationStatus": "approved"
+    }
+  ],
+  "sources": [
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "7:85–93",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-qref-7-85-93"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "11:84–95",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-qref-11-84-95"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "26:176–191",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-qref-26-176-191"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "29:36–37",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-qref-29-36-37"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "7:85",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-madyan-7-85"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "11:84",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-madyan-11-84"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "7:85–86",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-message-weights"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "7:91",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-punishment-rajfah-7-91"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "11:94",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-punishment-sayhah-11-94"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "26:189",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-punishment-shadow-26-189"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Coverage-Audit (definierter Korpus)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "shuayb-not-auto-musa-fil"
+      ],
+      "grading": "absence_in_reviewed_corpus",
+      "verificationStatus": "approved"
+    }
+  ],
+  "research": []
 }

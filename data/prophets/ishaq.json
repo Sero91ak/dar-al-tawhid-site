@@ -411,10 +411,7 @@
       "directReference": "#quran-surah/38/45"
     }
   ],
-  "statements": {
-    "quran": [],
-    "sunnah": []
-  },
+  "statements": [],
   "prophetAbout": [
     {
       "id": "ishaq-genealogy-3390-about",
@@ -613,7 +610,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-nabi-quran",
@@ -648,7 +647,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-father-ibrahim",
@@ -683,7 +684,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-bashara-11",
@@ -718,7 +721,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-son-yaqub-quran",
@@ -753,7 +758,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-sacrifice-not-mix",
@@ -788,7 +795,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-genealogy-3390",
@@ -834,7 +843,9 @@
         "hadithId": "bukhari-3390",
         "relation": "direct_report"
       },
-      "_matnInCanonicalHadith": true
+      "_matnInCanonicalHadith": true,
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-mother-sarah-correlation",
@@ -880,7 +891,11 @@
         "hadithId": "bukhari-3358",
         "relation": "direct_report"
       },
-      "_matnInCanonicalHadith": true
+      "_matnInCanonicalHadith": true,
+      "reviewPass1": "passed",
+      "reviewPass2": "passed",
+      "motherOfIshaq": "source_correlation",
+      "quranExplicitName": false
     },
     {
       "id": "ishaq-wife-research",
@@ -916,7 +931,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-other-children-research",
@@ -952,7 +969,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-birth-unattested",
@@ -988,7 +1007,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-death-unattested",
@@ -1024,7 +1045,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-grave-unattested",
@@ -1060,7 +1083,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-qref-2-133",
@@ -1095,7 +1120,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-qref-2-136",
@@ -1130,7 +1157,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-qref-2-140",
@@ -1165,7 +1194,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-qref-3-84",
@@ -1200,7 +1231,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-qref-4-163",
@@ -1235,7 +1268,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-qref-6-84",
@@ -1270,7 +1305,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-qref-11-71",
@@ -1305,7 +1342,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-qref-11-72",
@@ -1340,7 +1379,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-qref-11-73",
@@ -1375,7 +1416,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-qref-12-6",
@@ -1410,7 +1453,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-qref-14-39",
@@ -1445,7 +1490,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-qref-19-49",
@@ -1480,7 +1527,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-qref-21-72",
@@ -1515,7 +1564,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-qref-21-73",
@@ -1550,7 +1601,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-qref-29-27",
@@ -1585,7 +1638,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-qref-37-112",
@@ -1620,7 +1675,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-qref-37-113",
@@ -1655,7 +1712,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "ishaq-qref-38-45",
@@ -1690,7 +1749,123 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
+    },
+    {
+      "id": "ishaq-mother-11-71-name-not-quran-explicit",
+      "prophetId": "ishaq",
+      "category": "quran-naming-discipline",
+      "claim": "11:71 nennt امرأته (Ehefrau Ibrāhīms) mit Frohbotschaft von Isḥāq — Name Sarah dort nicht qurʾānisch explizit.",
+      "verificationStatus": "approved",
+      "evidenceType": "quran",
+      "grading": "quran",
+      "source": "Qurʾān",
+      "work": "al-Qurʾān al-Karīm",
+      "bookChapter": "Sūrah 11",
+      "number": "11:71",
+      "volumePage": "",
+      "arabicOriginal": "وَٱمۡرَأَتُهُۥ قَآئِمَةٞ فَضَحِكَتۡ فَبَشَّرۡنَٰهَا بِإِسۡحَٰقَ وَمِن وَرَآءِ إِسۡحَٰقَ يَعۡقُوبَ",
+      "translationDe": "Seine Frau stand dabei. Sie lachte, und da verkündeten Wir ihr Ishaq, und nach Ishaq Ya’qub",
+      "speaker": "Allah",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "Qurʾān",
+      "gradingReference": "",
+      "directReference": "#quran-surah/11/71",
+      "notes": "Korrelation Sarah über Buḫārī 3358 = eigener Claim (source_correlation).",
+      "quotation": true,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed",
+      "quranExplicitName": false
+    },
+    {
+      "id": "ishaq-sacrifice-son-not-quran-explicit",
+      "prophetId": "ishaq",
+      "category": "quran-naming-discipline",
+      "claim": "quranExplicitSacrificeSonName=false für 37:100–107 — Isḥāq nicht als ausdrücklich genannten Opfer-Sohn eintragen.",
+      "verificationStatus": "approved",
+      "evidenceType": "editorial",
+      "grading": "absence_in_reviewed_corpus",
+      "source": "Coverage-Audit (definierter Korpus)",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "",
+      "gradingReference": "",
+      "directReference": "",
+      "notes": "Bedeutet: Im definierten geprüften Korpus liegt derzeit kein freigegebener belastbarer Nachweis vor — nicht: ‚Existiert garantiert nirgendwo.‘",
+      "quotation": false,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed",
+      "absenceStatus": "not-established-in-reviewed-sources"
+    },
+    {
+      "id": "ishaq-death-grave-unattested",
+      "prophetId": "ishaq",
+      "category": "timeline",
+      "claim": "birthYear/deathYear/graveLocation: not_authentically_established; ageAtDeath=research.",
+      "verificationStatus": "approved",
+      "evidenceType": "editorial",
+      "grading": "absence_in_reviewed_corpus",
+      "source": "Coverage-Audit (definierter Korpus)",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "",
+      "gradingReference": "",
+      "directReference": "",
+      "notes": "Bedeutet: Im definierten geprüften Korpus liegt derzeit kein freigegebener belastbarer Nachweis vor — nicht: ‚Existiert garantiert nirgendwo.‘",
+      "quotation": false,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed",
+      "absenceStatus": "not-established-in-reviewed-sources"
     }
   ],
   "audit": {
@@ -1744,5 +1919,387 @@
     "ibrahim-ishaq",
     "ishaq-yaqub"
   ],
-  "schemaVersion": 4
+  "schemaVersion": 4,
+  "contentVersion": "prophets-final-test-v1",
+  "updatedAt": "2026-08-08T10:58:11.383Z",
+  "coverage": {
+    "authenticitySeparateFromCoverage": true,
+    "coverageStatus": "complete_for_defined_scope",
+    "coverageNote": "Isḥāq: Concordance; Nabī 37:112; Genealogie Buḫārī 3390; Mutter-Korrelation getrennt; Opfer-Sohn-Disziplin.",
+    "auditedAt": "2026-08-08T11:00:05.428Z",
+    "phase": 12,
+    "block": "final",
+    "reviewPass1": true,
+    "reviewPass2": true,
+    "requiredAuditsComplete": true,
+    "lastAuditResult": "PASS",
+    "requiredAudits": {
+      "quranConcordance": "PASS",
+      "bukhariAudit": "PASS",
+      "muslimAudit": "PASS",
+      "otherSunnahAudit": "PASS",
+      "sahabaAtharAudit": "PASS",
+      "earlySalafAudit": "PASS",
+      "earlyTafsirAudit": "PASS",
+      "familyAudit": "PASS",
+      "namesAudit": "PASS",
+      "timelineAudit": "PASS",
+      "birthDeathAudit": "PASS",
+      "graveAudit": "PASS",
+      "weakReportIsolation": "PASS",
+      "israiliyyatIsolation": "PASS",
+      "sourceLinks": "PASS",
+      "searchLog": "PASS"
+    },
+    "contentVersion": "prophets-final-test-v1",
+    "releaseCandidate": "prophets-final-test-v1"
+  },
+  "overview": [
+    {
+      "key": "roles",
+      "label": "Nabī",
+      "value": "Ja (37:112)",
+      "status": "approved",
+      "claimIds": [
+        "ishaq-nabi-quran"
+      ]
+    },
+    {
+      "key": "father",
+      "label": "Vater",
+      "value": "Ibrāhīm",
+      "status": "approved",
+      "claimIds": [
+        "ishaq-father-ibrahim",
+        "ishaq-genealogy-3390"
+      ]
+    },
+    {
+      "key": "mother",
+      "label": "Mutter",
+      "value": "Sarah (Korrelations-Claim 3358+11:71)",
+      "status": "approved after correlation review",
+      "claimIds": [
+        "ishaq-mother-sarah-correlation"
+      ]
+    },
+    {
+      "key": "son",
+      "label": "Sohn",
+      "value": "Yaʿqūb",
+      "status": "approved",
+      "claimIds": [
+        "ishaq-genealogy-3390"
+      ]
+    },
+    {
+      "key": "sacrifice",
+      "label": "Opferprüfung",
+      "value": "Nicht mit 37:112 vermischen",
+      "status": "streng",
+      "claimIds": [
+        "ishaq-sacrifice-not-mix"
+      ]
+    },
+    {
+      "key": "grave",
+      "label": "Grab",
+      "value": "not_authentically_established",
+      "status": "nicht belegt",
+      "claimIds": [
+        "ishaq-grave-unattested"
+      ]
+    }
+  ],
+  "sunnah": [
+    {
+      "hadithId": "bukhari-3390",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3390",
+      "claimIds": [
+        "ishaq-genealogy-3390"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "bukhari-3358",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3358",
+      "claimIds": [
+        "ishaq-mother-sarah-correlation"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    }
+  ],
+  "events": [],
+  "sources": [
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "37:112",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-name-quran"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "14:39",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-father-ibrahim"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "11:71–73",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-bashara-11"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "11:71",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-son-yaqub-quran"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3390",
+      "hadithId": "bukhari-3390",
+      "claimIds": [
+        "ishaq-genealogy-3390"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3358",
+      "hadithId": "bukhari-3358",
+      "claimIds": [
+        "ishaq-mother-sarah-correlation"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Negativfeststellung nach Prüfung (Qurʾān; Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-wife-research"
+      ],
+      "grading": "unverified",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:133",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-2-133"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:136",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-2-136"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "2:140",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-2-140"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "3:84",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-3-84"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "4:163",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-4-163"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "6:84",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-6-84"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "11:72",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-11-72"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "11:73",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-11-73"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "12:6",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-12-6"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "19:49",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-19-49"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:72",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-21-72"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "21:73",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-21-73"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "29:27",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-29-27"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "37:113",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-37-113"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "38:45",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-qref-38-45"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Coverage-Audit (definierter Korpus)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "ishaq-sacrifice-son-not-quran-explicit"
+      ],
+      "grading": "absence_in_reviewed_corpus",
+      "verificationStatus": "approved"
+    }
+  ],
+  "research": []
 }

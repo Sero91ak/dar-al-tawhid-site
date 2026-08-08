@@ -3,7 +3,7 @@
   "feature": "prophetsKnowledgeBase",
   "env": {
     "test": "enabled",
-    "production": "disabled"
+    "production": "enabled"
   },
   "title": "Die Propheten",
   "intro": "Was Qurʾān, authentische Sunnah und gesicherte frühe Überlieferungen über die Propheten berichten.",
@@ -20,7 +20,6 @@
     "Die Überlieferung über 124.000 Propheten wird nicht als gesicherte Gesamtzahl dargestellt.",
     "Keine erfundenen biografischen Ergänzungen.",
     "KI-Ausgabe ist keine Quelle.",
-    "production = disabled bis ausdrückliche Freigabe.",
     "approved erfordert reviewPass1 und reviewPass2."
   ],
   "uluAlAzmIds": [

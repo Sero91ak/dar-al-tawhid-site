@@ -2919,6 +2919,25 @@
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     }
+    {
+      "id": "prophets-dua-compact-live-v619-2026-08-08",
+      "approvedBy": "user-task-propheten-dua-optik-live",
+      "note": "Propheten kompakt wie Duʿāʾ + Live in Besucher-App (ausdrücklich: push live)",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/assets/prophets/",
+        "assets/prophets/",
+        "test/data/prophets/",
+        "data/prophets/",
+        "test/index.html",
+        "index.html",
+        "test/version.json",
+        "version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    }
   ],
   "enabled": true
 }

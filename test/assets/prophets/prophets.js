@@ -699,7 +699,8 @@
   function renderRow(p, activeId) {
     var active = String(p.id) === String(activeId);
     var roles = isDisputedStatus(p.prophetStatus) ? "" : rolesLabel(p.roles);
-    var meta = [roles, p.people].filter(Boolean).join(" · ");
+    var metaBits = [p.honorific || "", roles, p.people].filter(Boolean);
+    var meta = metaBits.join(" · ");
     var mark = prophetMark(p.id, p);
     return (
       '<button type="button" class="prophets-row' +
@@ -707,13 +708,18 @@
       '" data-prophet-id="' +
       esc(p.id) +
       '">' +
-      '<span class="prophets-row__icon" aria-hidden="true">' + mark + "</span>" +
+      '<span class="prophets-row__icon" aria-hidden="true">' +
+      mark +
+      "</span>" +
       '<span class="prophets-row__body">' +
-      '<span class="prophets-row__name">' + esc(p.name) + "</span>" +
+      '<span class="prophets-row__titleline">' +
+      '<span class="prophets-row__name">' +
+      esc(p.name) +
+      "</span>" +
       (p.nameAr
         ? '<span class="prophets-row__ar" lang="ar" dir="rtl">' + esc(p.nameAr) + "</span>"
         : "") +
-      (p.honorific ? '<span class="prophets-row__honor">' + esc(p.honorific) + "</span>" : "") +
+      "</span>" +
       (meta ? '<span class="prophets-row__meta">' + esc(meta) + "</span>" : "") +
       "</span>" +
       '<span class="prophets-row__chev" aria-hidden="true">›</span>' +
@@ -738,17 +744,41 @@
       '" data-prophets-continue-tab="' +
       esc(lr.tab || "overview") +
       '">' +
-      '<span class="prophets-lastread__kicker">Zuletzt gelesen</span>' +
+      '<span class="prophets-lastread__kicker">Zuletzt</span>' +
       '<span class="prophets-lastread__title">' +
       esc(lr.name || lr.prophetId) +
       (lr.honorific ? " " + esc(lr.honorific) : "") +
       "</span>" +
-      '<span class="prophets-lastread__meta">' +
-      esc(lr.tabLabel || lr.tab || "Übersicht") +
-      (lr.snippet ? " · " + esc(lr.snippet) : "") +
-      "</span>" +
-      '<span class="prophets-lastread__cta">Weiterlesen</span>' +
+      '<span class="prophets-lastread__cta">Weiterlesen ›</span>' +
       "</button>"
+    );
+  }
+
+  function renderProphetJumpSelect(index) {
+    var names = (index.prophets || [])
+      .filter(function (p) {
+        return p && p.id && !isFurtherPerson(p) && p.profileStatus === "approved";
+      })
+      .slice()
+      .sort(function (a, b) {
+        return String(a.name || "").localeCompare(String(b.name || ""), "de");
+      });
+    return (
+      '<select class="prophets-pick prophets-pick--names" data-prophets-jump aria-label="Prophet">' +
+      '<option value="">✦ Prophet</option>' +
+      names
+        .map(function (p) {
+          return (
+            '<option value="' +
+            esc(p.id) +
+            '">' +
+            esc(p.name) +
+            (p.nameAr ? " · " + esc(p.nameAr) : "") +
+            "</option>"
+          );
+        })
+        .join("") +
+      "</select>"
     );
   }
 
@@ -800,8 +830,7 @@
     }
 
     var sourceOpts = [opt("quran"), opt("sunnah")].filter(Boolean);
-    var groupOpts = [opt("ulu"), opt("banuIsrail"), opt("arabicMessenger")].filter(Boolean);
-    var listOpts = [opt("further")].filter(Boolean);
+    var groupOpts = [opt("ulu"), opt("banuIsrail"), opt("arabicMessenger"), opt("further")].filter(Boolean);
 
     function section(title, items) {
       if (!items.length) return "";
@@ -819,32 +848,23 @@
     var body = "";
     body += section("Ulū l-ʿAzm", packs.ulu || []);
     body += section("Belegte Propheten", packs.established || []);
-    body += section("Weitere Qurʾān- und Sunnah-Personen", packs.further || []);
+    body += section("Weitere Personen", packs.further || []);
     if (!(packs.ulu || []).length && !(packs.established || []).length && !(packs.further || []).length) {
-      body = '<div class="prophets-empty">Keine geprüften Treffer gefunden.</div>';
+      body = '<div class="prophets-empty">Keine Treffer.</div>';
     }
-
-    var intro =
-      index.intro ||
-      "Was Qurʾān, authentische Sunnah und gesicherte frühe Überlieferungen über die Propheten berichten.";
 
     return (
       '<div class="prophets-toolbar">' +
-      '<p class="prophets-toolbar__intro">' +
-      esc(intro) +
-      "</p>" +
       renderLastReadCard() +
-      '<section class="prophets-sf" aria-labelledby="prophetsSfTitle">' +
-      '<h2 class="prophets-sf__title" id="prophetsSfTitle">Suche und Filter</h2>' +
+      '<section class="prophets-sf" aria-label="Suche und Filter">' +
       '<div class="prophets-search-panel">' +
       '<div class="prophets-pick-title">' +
-      "<h3>Schnell auswählen</h3>" +
-      "<span>Quelle · Gruppe · Bereich</span>" +
+      "<h3>Suche und Filter</h3>" +
       "</div>" +
       '<div class="prophets-pick-grid">' +
-      renderFilterPickSelect("source", "📚 Quelle", sourceOpts, filter) +
-      renderFilterPickSelect("group", "👤 Gruppe", groupOpts, filter) +
-      renderFilterPickSelect("list", "📖 Bereich", listOpts, filter) +
+      renderProphetJumpSelect(index) +
+      renderFilterPickSelect("group", "Gruppe", groupOpts, filter) +
+      renderFilterPickSelect("source", "Quelle", sourceOpts, filter) +
       "</div>" +
       '<div class="prophets-search-shell">' +
       '<span class="prophets-search-icon" aria-hidden="true">' +
@@ -858,8 +878,7 @@
       "</div>" +
       "</section>" +
       "</div>" +
-      body +
-      '<p class="prophets-note">Nur freigegebene Angaben erscheinen in der normalen Suche. Research bleibt getrennt. Profilzahl ≠ Gesamtzahl aller Gesandten (Qurʾān 4:164 / 40:78).</p>'
+      body
     );
   }
 
@@ -1550,19 +1569,26 @@
       esc(profile.nameAr) +
       "</div>" +
       "</div>" +
-      '<p class="prophets-detail__honor">' +
-      esc(profile.honorific || "") +
+      '<p class="prophets-detail__sub">' +
+      esc(
+        [profile.honorific || "", rolesLabel(profile.roles || []), profile.people || ""]
+          .filter(Boolean)
+          .join(" · ")
+      ) +
       "</p>" +
-      (roleChips.length ? '<div class="prophets-detail__roles">' + roleChips.join("") + "</div>" : "") +
-      (profile.people ? '<p class="prophets-detail__people">' + esc(profile.people) + (profile.region ? " · " + esc(profile.region) : "") + "</p>" : "") +
       banner +
       '<div class="prophets-detail__stats" aria-label="Quellenübersicht">' +
-      '<div class="prophets-stat"><b>' + qCount + '</b><span>Qurʾān</span></div>' +
-      '<div class="prophets-stat"><b>' + sunnahN + '</b><span>Sunnah</span></div>' +
-      '<div class="prophets-stat"><b>' + (stQ + stS) + '</b><span>Aussagen</span></div>' +
+      '<div class="prophets-stat"><b>' +
+      qCount +
+      "</b><span>Qurʾān</span></div>" +
+      '<div class="prophets-stat"><b>' +
+      sunnahN +
+      "</b><span>Sunnah</span></div>" +
+      '<div class="prophets-stat"><b>' +
+      (stQ + stS) +
+      "</b><span>Aussagen</span></div>" +
       "</div>" +
       "</header>" +
-      '<hr class="prophets-rule" />' +
       '<nav class="prophets-tabs" aria-label="Propheten-Abschnitte">' +
       tabs +
       "</nav>" +
@@ -1612,11 +1638,7 @@
 
   function setPageHeaderSafe() {
     if (typeof global.setPageHeader === "function") {
-      return global.setPageHeader(
-        "Die Propheten",
-        "الأنبياء",
-        ""
-      );
+      return global.setPageHeader("Die Propheten", "الأنبياء", "");
     }
     if (typeof global.setHeader === "function") {
       return global.setHeader("Die Propheten", "الأنبياء", "");
@@ -1710,6 +1732,26 @@
         var next = sel.value || "all";
         writeState({ filter: next, scrollY: window.scrollY || 0 });
         if (typeof global.render === "function") global.render();
+      });
+    });
+    root.querySelectorAll("[data-prophets-jump]").forEach(function (sel) {
+      if (sel.dataset.bound) return;
+      sel.dataset.bound = "1";
+      sel.addEventListener("change", function () {
+        var id = sel.value || "";
+        sel.value = "";
+        if (!id) return;
+        var meta = findMeta(id);
+        writeLastRead({
+          prophetId: id,
+          name: meta && meta.name,
+          honorific: meta && meta.honorific,
+          tab: "overview",
+          tabLabel: "Übersicht",
+          at: Date.now()
+        });
+        writeState({ selectedId: id, section: "overview", scrollY: 0 });
+        navigateProphets(id, "overview");
       });
     });
     /* Legacy chip buttons (falls Cache) */

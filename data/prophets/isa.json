@@ -499,67 +499,7 @@
       "directReference": "#quran-surah/61/14"
     }
   ],
-  "statements": {
-    "quran": [
-      {
-        "id": "isa-st-abd-19-30-33",
-        "speaker": "ʿĪsā",
-        "sourceType": "quran",
-        "statementType": "statement",
-        "arabicOriginal": "قَالَ إِنِّي عَبۡدُ ٱللَّهِ ءَاتَىٰنِيَ ٱلۡكِتَٰبَ وَجَعَلَنِي نَبِيّٗا · وَجَعَلَنِي مُبَارَكًا أَيۡنَ مَا كُنتُ وَأَوۡصَٰنِي بِٱلصَّلَوٰةِ وَٱلزَّكَوٰةِ مَا دُمۡتُ حَيّٗا · وَبَرَّۢا بِوَٰلِدَتِي وَلَمۡ يَجۡعَلۡنِي جَبَّارٗا شَقِيّٗا · وَٱلسَّلَٰمُ عَلَيَّ يَوۡمَ وُلِدتُّ وَيَوۡمَ أَمُوتُ وَيَوۡمَ أُبۡعَثُ حَيّٗا",
-        "translationDe": "Er sagte: „Ich bin wahrlich Allahs Diener; Er hat mir die Schrift gegeben und mich zu einem Propheten gemacht Und gesegnet hat Er mich gemacht, wo immer ich bin, und angeordnet hat Er mir, das Gebet (zu verrichten) und die Abgabe (zu entrichten), solange ich lebe und gütig gegen meine Mutter zu sein. Und Er hat mich weder gewalttätig noch unglücklich gemacht Und der Friede sei auf mir am Tag, da ich geboren wurde, und am Tag, da ich sterbe, und am Tag, da ich wieder zum Leben auferweckt werde",
-        "surah": 19,
-        "ayah": 30,
-        "ayahEnd": 33,
-        "context": "Rede als Säugling",
-        "reference": "19:30–33",
-        "grading": "quran",
-        "verificationStatus": "approved",
-        "directReference": "#quran-surah/19/30",
-        "category": "statements",
-        "review": {
-          "sourceChecked": true,
-          "textChecked": true,
-          "gradingChecked": true,
-          "translationChecked": true,
-          "directLinkChecked": true,
-          "reviewPass1": "passed",
-          "reviewPass2": "passed",
-          "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
-          "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-        }
-      },
-      {
-        "id": "isa-st-ahmad-61-6",
-        "speaker": "ʿĪsā",
-        "sourceType": "quran",
-        "statementType": "gladtidings",
-        "arabicOriginal": "وَإِذۡ قَالَ عِيسَى ٱبۡنُ مَرۡيَمَ يَٰبَنِيٓ إِسۡرَـٰٓءِيلَ إِنِّي رَسُولُ ٱللَّهِ إِلَيۡكُم مُّصَدِّقٗا لِّمَا بَيۡنَ يَدَيَّ مِنَ ٱلتَّوۡرَىٰةِ وَمُبَشِّرَۢا بِرَسُولٖ يَأۡتِي مِنۢ بَعۡدِي ٱسۡمُهُۥٓ أَحۡمَدُۖ فَلَمَّا جَآءَهُم بِٱلۡبَيِّنَٰتِ قَالُواْ هَٰذَا سِحۡرٞ مُّبِينٞ",
-        "translationDe": "Und als ’Isa, der Sohn Maryams, sagte: O Kinder Isra’ils, gewiß, ich bin Allahs Gesandter an euch, das bestätigend, was von der Tora vor mir (offenbart) war, und einen Gesandten verkündend, der nach mir kommen wird: sein Name ist Ahmad’. Als er nun mit den klaren Beweisen zu ihnen kam, sagten sie: Das ist deutliche Zauberei",
-        "surah": 61,
-        "ayah": 6,
-        "ayahEnd": 6,
-        "context": "Frohbotschaft Aḥmad",
-        "reference": "61:6",
-        "grading": "quran",
-        "verificationStatus": "approved",
-        "directReference": "#quran-surah/61/6",
-        "category": "statements",
-        "review": {
-          "sourceChecked": true,
-          "textChecked": true,
-          "gradingChecked": true,
-          "translationChecked": true,
-          "directLinkChecked": true,
-          "reviewPass1": "passed",
-          "reviewPass2": "passed",
-          "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
-          "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-        }
-      }
-    ],
-    "sunnah": []
-  },
+  "statements": [],
   "prophetAbout": [
     {
       "id": "isa-return-bukhari-3448-about",
@@ -825,7 +765,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-abd-nabi-19-30",
@@ -861,7 +803,9 @@
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
       },
-      "aqidahClaim": true
+      "aqidahClaim": true,
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-rasul-4-171",
@@ -896,7 +840,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-mother-maryam",
@@ -931,7 +877,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-no-human-father-3-47",
@@ -966,7 +914,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-no-human-father-19-20-21",
@@ -1001,7 +951,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-joseph-not-father",
@@ -1037,7 +989,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-adam-likeness-3-59",
@@ -1073,7 +1027,9 @@
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
       },
-      "aqidahClaim": true
+      "aqidahClaim": true,
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-masih-title",
@@ -1108,7 +1064,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-kalimat-allah-3-45",
@@ -1144,7 +1102,9 @@
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
       },
-      "aqidahClaim": true
+      "aqidahClaim": true,
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-kalimat-ruh-4-171",
@@ -1180,7 +1140,9 @@
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
       },
-      "aqidahClaim": true
+      "aqidahClaim": true,
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-birth-3-45-47",
@@ -1215,7 +1177,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-birth-19-16-34",
@@ -1250,7 +1214,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-birthdate-unattested",
@@ -1286,7 +1252,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-infant-speech-19-29-33",
@@ -1321,7 +1289,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-injil-5-46",
@@ -1356,7 +1326,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-injil-57-27",
@@ -1391,7 +1363,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-banu-israel-3-49",
@@ -1426,7 +1400,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-banu-israel-61-6",
@@ -1461,7 +1437,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-miracles-3-49",
@@ -1497,7 +1475,9 @@
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
       },
-      "byPermissionOfAllah": true
+      "byPermissionOfAllah": true,
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-miracles-5-110",
@@ -1533,7 +1513,9 @@
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
       },
-      "byPermissionOfAllah": true
+      "byPermissionOfAllah": true,
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-maida-5-112-115",
@@ -1568,7 +1550,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-hawariyyun",
@@ -1603,7 +1587,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-disciples-names-research",
@@ -1639,7 +1625,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-ahmad-gladtidings-61-6",
@@ -1674,7 +1662,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-not-killed-4-157",
@@ -1710,7 +1700,9 @@
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
       },
-      "aqidahClaim": true
+      "aqidahClaim": true,
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-raised-4-158",
@@ -1746,7 +1738,9 @@
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
       },
-      "aqidahClaim": true
+      "aqidahClaim": true,
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-return-bukhari-3448",
@@ -1792,7 +1786,9 @@
         "hadithId": "bukhari-3448",
         "relation": "direct_report"
       },
-      "_matnInCanonicalHadith": true
+      "_matnInCanonicalHadith": true,
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-return-muslim-155",
@@ -1838,7 +1834,9 @@
         "hadithId": "muslim-155",
         "relation": "direct_report"
       },
-      "_matnInCanonicalHadith": true
+      "_matnInCanonicalHadith": true,
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-miraj-second-heaven-3430",
@@ -1886,7 +1884,9 @@
         "hadithId": "bukhari-3430",
         "relation": "direct_report"
       },
-      "_matnInCanonicalHadith": true
+      "_matnInCanonicalHadith": true,
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-no-portrait",
@@ -1922,7 +1922,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-wife-unattested",
@@ -1958,7 +1960,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-children-unattested",
@@ -1994,7 +1998,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-death-current-not-crucified",
@@ -2030,7 +2036,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
     },
     {
       "id": "isa-dajjal-eschatology-module",
@@ -2066,7 +2074,85 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
         "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
-      }
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed"
+    },
+    {
+      "id": "isa-no-december-25",
+      "prophetId": "isa",
+      "category": "timeline",
+      "claim": "25 December: NOT authenticated Islamic fact; exact birth date=not_established.",
+      "verificationStatus": "approved",
+      "evidenceType": "editorial",
+      "grading": "absence_in_reviewed_corpus",
+      "source": "Coverage-Audit (definierter Korpus)",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "",
+      "gradingReference": "",
+      "directReference": "",
+      "notes": "Im definierten geprüften Korpus liegt derzeit kein freigegebener belastbarer Nachweis vor — nicht: ‚Existiert garantiert nirgendwo.‘",
+      "quotation": false,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed",
+      "absenceStatus": "not-established-in-reviewed-sources"
+    },
+    {
+      "id": "isa-injil-not-auto-canonical-gospels",
+      "prophetId": "isa",
+      "category": "revelation",
+      "claim": "Injīl nicht automatisch mit allen heutigen kanonischen Evangelientexten gleichsetzen.",
+      "verificationStatus": "approved",
+      "evidenceType": "editorial",
+      "grading": "absence_in_reviewed_corpus",
+      "source": "Coverage-Audit (definierter Korpus)",
+      "work": "",
+      "bookChapter": "",
+      "number": "",
+      "volumePage": "",
+      "arabicOriginal": "",
+      "translationDe": "",
+      "speaker": "",
+      "sahabiRawi": "",
+      "isnad": "",
+      "gradingAuthority": "",
+      "gradingReference": "",
+      "directReference": "",
+      "notes": "Im definierten geprüften Korpus liegt derzeit kein freigegebener belastbarer Nachweis vor — nicht: ‚Existiert garantiert nirgendwo.‘",
+      "quotation": false,
+      "review": {
+        "sourceChecked": true,
+        "textChecked": true,
+        "gradingChecked": true,
+        "translationChecked": true,
+        "directLinkChecked": true,
+        "reviewPass1": "passed",
+        "reviewPass2": "passed",
+        "reviewPass1Note": "Arabischer Text gegen content/quran geprüft",
+        "reviewPass2Note": "Zuordnung und deutsche Übersetzung unabhängig gegengeprüft"
+      },
+      "reviewPass1": "passed",
+      "reviewPass2": "passed",
+      "absenceStatus": "not-established-in-reviewed-sources"
     }
   ],
   "audit": {
@@ -2119,5 +2205,400 @@
     "schemaVersion": 4,
     "updatedAt": "2026-08-08T09:25:18.000Z"
   },
-  "schemaVersion": 4
+  "schemaVersion": 4,
+  "contentVersion": "prophets-final-test-v1",
+  "updatedAt": "2026-08-08T10:58:11.410Z",
+  "coverage": {
+    "authenticitySeparateFromCoverage": true,
+    "coverageStatus": "complete_for_defined_scope",
+    "coverageNote": "ʿĪsā: kein menschlicher Vater; nicht getötet/gekreuzigt; Nuzūl; keine Darstellung.",
+    "auditedAt": "2026-08-08T11:00:05.464Z",
+    "phase": 12,
+    "block": "final",
+    "reviewPass1": true,
+    "reviewPass2": true,
+    "contentVersion": "prophets-final-test-v1",
+    "lastAuditResult": "PASS",
+    "releaseCandidate": "prophets-final-test-v1"
+  },
+  "overview": [
+    {
+      "key": "name",
+      "label": "Name",
+      "value": "ʿĪsā ibn Maryam",
+      "status": "authentisch belegt",
+      "claimIds": [
+        "isa-name-quran"
+      ]
+    },
+    {
+      "key": "roles",
+      "label": "Nabī / Rasūl",
+      "value": "Nabī (19:30) · Rasūl (4:171)",
+      "status": "authentisch belegt",
+      "claimIds": [
+        "isa-abd-nabi-19-30",
+        "isa-rasul-4-171"
+      ]
+    },
+    {
+      "key": "mother",
+      "label": "Mutter",
+      "value": "Maryam",
+      "status": "authentisch belegt",
+      "claimIds": [
+        "isa-mother-maryam"
+      ]
+    },
+    {
+      "key": "aqidah",
+      "label": "ʿAqīdah",
+      "value": "ʿAbd Allāh; nicht getötet/gekreuzigt; erhoben",
+      "status": "authentisch belegt",
+      "claimIds": [
+        "isa-abd-nabi-19-30",
+        "isa-not-killed-4-157",
+        "isa-raised-4-158"
+      ]
+    },
+    {
+      "key": "return",
+      "label": "Rückkehr",
+      "value": "authentische Sunnah (Buḫārī 3448 / Muslim 155)",
+      "status": "authentisch belegt",
+      "claimIds": [
+        "isa-return-bukhari-3448"
+      ]
+    },
+    {
+      "key": "illustration",
+      "label": "Darstellung",
+      "value": "Keine menschliche Abbildung",
+      "status": "policy",
+      "claimIds": [
+        "isa-no-portrait"
+      ]
+    }
+  ],
+  "sunnah": [
+    {
+      "hadithId": "bukhari-3448",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3448",
+      "claimIds": [
+        "isa-return-bukhari-3448"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "muslim-155",
+      "source": "Ṣaḥīḥ Muslim",
+      "reference": "155",
+      "claimIds": [
+        "isa-return-muslim-155"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "bukhari-3430",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3430",
+      "claimIds": [
+        "isa-miraj-second-heaven-3430"
+      ],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    },
+    {
+      "hadithId": "",
+      "source": "",
+      "reference": "",
+      "claimIds": [],
+      "verificationStatus": "approved"
+    }
+  ],
+  "events": [],
+  "sources": [
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "19:34",
+      "hadithId": "",
+      "claimIds": [
+        "isa-name-quran"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "19:30",
+      "hadithId": "",
+      "claimIds": [
+        "isa-abd-nabi-19-30"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "4:171",
+      "hadithId": "",
+      "claimIds": [
+        "isa-rasul-4-171"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "3:47",
+      "hadithId": "",
+      "claimIds": [
+        "isa-no-human-father-3-47"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "19:20–21",
+      "hadithId": "",
+      "claimIds": [
+        "isa-no-human-father-19-20-21"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Negativfeststellung nach Prüfung (Qurʾān; Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "isa-joseph-not-father"
+      ],
+      "grading": "unverified",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "3:59",
+      "hadithId": "",
+      "claimIds": [
+        "isa-adam-likeness-3-59"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "3:45",
+      "hadithId": "",
+      "claimIds": [
+        "isa-masih-title"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "3:45–47",
+      "hadithId": "",
+      "claimIds": [
+        "isa-birth-3-45-47"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "19:16–34",
+      "hadithId": "",
+      "claimIds": [
+        "isa-birth-19-16-34"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "19:29–33",
+      "hadithId": "",
+      "claimIds": [
+        "isa-infant-speech-19-29-33"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "5:46",
+      "hadithId": "",
+      "claimIds": [
+        "isa-injil-5-46"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "57:27",
+      "hadithId": "",
+      "claimIds": [
+        "isa-injil-57-27"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "3:49",
+      "hadithId": "",
+      "claimIds": [
+        "isa-banu-israel-3-49"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "61:6",
+      "hadithId": "",
+      "claimIds": [
+        "isa-banu-israel-61-6"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "5:110",
+      "hadithId": "",
+      "claimIds": [
+        "isa-miracles-5-110"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "5:112–115",
+      "hadithId": "",
+      "claimIds": [
+        "isa-maida-5-112-115"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "3:52",
+      "hadithId": "",
+      "claimIds": [
+        "isa-hawariyyun"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "4:157",
+      "hadithId": "",
+      "claimIds": [
+        "isa-not-killed-4-157"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "quran",
+      "source": "Qurʾān",
+      "reference": "4:158",
+      "hadithId": "",
+      "claimIds": [
+        "isa-raised-4-158"
+      ],
+      "grading": "quran",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3448",
+      "hadithId": "bukhari-3448",
+      "claimIds": [
+        "isa-return-bukhari-3448"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ Muslim",
+      "reference": "155",
+      "hadithId": "muslim-155",
+      "claimIds": [
+        "isa-return-muslim-155"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "sunnah",
+      "source": "Ṣaḥīḥ al-Buḫārī",
+      "reference": "3430",
+      "hadithId": "bukhari-3430",
+      "claimIds": [
+        "isa-miraj-second-heaven-3430"
+      ],
+      "grading": "sahih",
+      "verificationStatus": "approved"
+    },
+    {
+      "evidenceType": "editorial",
+      "source": "Coverage-Audit (definierter Korpus)",
+      "reference": "",
+      "hadithId": "",
+      "claimIds": [
+        "isa-no-december-25"
+      ],
+      "grading": "absence_in_reviewed_corpus",
+      "verificationStatus": "approved"
+    }
+  ],
+  "research": [],
+  "relationIds": [
+    "maryam-isa"
+  ]
 }
