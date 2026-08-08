@@ -1,16 +1,16 @@
 {
-  "ok": true,
+  "ok": false,
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "worker-local",
-  "schedulerStatus": "success",
-  "updatedAt": "2026-08-08T06:55:50.485Z",
+  "schedulerStatus": "error",
+  "updatedAt": "2026-08-08T07:00:55.777Z",
   "usersChecked": 10,
-  "duaCandidates": 0,
+  "duaCandidates": 10,
   "recCandidates": 0,
   "sent": 0,
   "skipped": 0,
   "duplicates": 0,
-  "errors": 0,
+  "errors": 10,
   "dailyContentDate": "2026-08-08",
   "currentRecommendation": {
     "id": "hukm-muhakamah-kufr-begriff-braucht-tafsil-383",
@@ -24,5 +24,15 @@
     "category": "Sorge, Trauer & Schulden"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "dua",
+      "batch": true,
+      "count": 10,
+      "contentId": "dua-067-allahumma-inni-audhu-bika-min-al-hammi",
+      "recipients": "9f3b5c2b-65ee-44da-80dc-77c3746f5054",
+      "ok": false,
+      "invalid": 1
+    }
+  ]
 }
