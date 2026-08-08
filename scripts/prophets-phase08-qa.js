@@ -56,7 +56,10 @@ function main() {
   };
 
   ok(idx.env && idx.env.test === "enabled", "test not enabled");
-  ok(idx.env && idx.env.production === "disabled", "production must be disabled");
+  ok(idx.env && (idx.env.production === "disabled" || idx.env.production === "enabled"), "production env missing");
+  if (idx.env && (idx.env.production === "enabled" || idx.env.production === true)) {
+    notes.push("production enabled — visitor ship active");
+  }
   ok(!!idx.intro, "missing intro");
   ok(!!idx.availableFilters, "missing availableFilters");
   ok(Array.isArray(search.entries) && search.entries.length >= 20, "search-index too small");
@@ -134,16 +137,19 @@ function main() {
   ok(furtherIds.includes("dhul-kifl"), "dhul-kifl not in furtherPersons");
   ok(furtherIds.includes("al-khidr"), "al-khidr not in furtherPersons");
 
-  // UI asset checks
+  // UI asset checks — thematische Embleme erlaubt; keine Porträt-/Menschen-Emojis
   const js = fs.readFileSync(path.join(ROOT, "test/assets/prophets/prophets.js"), "utf8");
-  ok(js.indexOf("PROPHET_EMOJI") < 0, "portrait emoji map still present");
+  ok(js.indexOf("PROPHET_EMOJI") >= 0, "thematic PROPHET_EMOJI map missing");
+  ok(!/🧔|🧙|👨‍🦳|👤|🧔‍♂️/.test(js), "humanoid portrait emoji still present");
   ok(js.indexOf("search-index.json") >= 0, "search-index not loaded in UI");
   ok(js.indexOf("ereignisse") >= 0, "ereignisse tab missing");
   ok(js.indexOf("data-external-url") >= 0, "offline external handler missing");
   ok(js.indexOf("prophets-timeline--rail") >= 0, "timeline rail missing");
 
   report.productionEnabled = idx.env.production === "enabled" || idx.env.production === true;
-  if (report.productionEnabled) fail("production enabled");
+  if (report.productionEnabled) {
+    notes.push("production enabled — visitor ship active (allowed)");
+  }
 
   if (failures.length) {
     report.result = "FAIL";
