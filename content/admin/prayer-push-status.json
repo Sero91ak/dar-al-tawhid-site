@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-08T03:22:09.793Z",
+  "updatedAt": "2026-08-08T03:23:26.353Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-08T03:22:09.793Z",
+  "lastCronRun": "2026-08-08T03:23:26.353Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-08T11:22:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-08T03:07:09.037Z",
-  "windowEnd": "2026-08-09T05:22:09.037Z",
+  "windowStart": "2026-08-08T03:08:25.662Z",
+  "windowEnd": "2026-08-09T05:23:25.662Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 1,
@@ -337,15 +337,15 @@
     {
       "key": "maghrib",
       "mode": "entry",
-      "sendAfter": "2026-08-07T19:08:00.000Z",
-      "time": "21:08",
+      "sendAfter": "2026-08-07T19:07:00.000Z",
+      "time": "21:07",
       "timeZone": "Europe/Berlin"
     },
     {
       "key": "maghrib",
       "mode": "advance",
-      "sendAfter": "2026-08-07T18:53:00.000Z",
-      "time": "21:08",
+      "sendAfter": "2026-08-07T18:52:00.000Z",
+      "time": "21:07",
       "timeZone": "Europe/Berlin"
     },
     {
@@ -382,61 +382,61 @@
       "prayer": "dhuhr",
       "mode": "entry",
       "recipients": 1,
-      "response": "{\"id\":\"90134037-ffa7-4e14-8bfb-be16c02eac29\",\"external_id\":\"9a5659c4-2960-46f2-90a6-24245fbf8cf2\"}"
+      "response": "{\"id\":\"e6af557e-76b2-4c6a-8ee5-ae2762e459e0\",\"external_id\":\"f484c2d2-284c-4aea-89ac-437e7b820e7a\"}"
     },
     {
       "prayer": "dhuhr",
       "mode": "advance",
       "recipients": 1,
-      "response": "{\"id\":\"cc191cec-84f5-45c9-85ca-e73e5055afcb\",\"external_id\":\"c9987595-087a-4866-8042-20895573e7f9\"}"
+      "response": "{\"id\":\"292ac9b8-9f8f-4a89-bc8f-05a987328713\",\"external_id\":\"9d24a737-abc0-4491-abf7-73064be2124c\"}"
     },
     {
       "prayer": "asr",
       "mode": "entry",
       "recipients": 1,
-      "response": "{\"id\":\"d73d3128-c0a5-4704-bd7a-da44e83ada0f\",\"external_id\":\"23d1a127-66a9-49de-8cc3-e910030d5b94\"}"
+      "response": "{\"id\":\"ae8503d4-68a8-474d-8eb5-86858f5869e6\",\"external_id\":\"da57f550-c654-4671-97b4-57e8c97bfbb2\"}"
     },
     {
       "prayer": "asr",
       "mode": "advance",
       "recipients": 1,
-      "response": "{\"id\":\"5a2d02ca-ef3a-4775-a624-1f779a3dce6b\",\"external_id\":\"2874db0a-efd5-403f-b604-322e26d7e628\"}"
+      "response": "{\"id\":\"2e86d14c-1f28-4eda-9e66-aecf38e6a922\",\"external_id\":\"1539ccbf-d63e-4c44-91f6-43583a53b9c3\"}"
     },
     {
       "prayer": "maghrib",
       "mode": "entry",
       "recipients": 1,
-      "response": "{\"id\":\"b26ff8ce-7f0b-4d8c-9128-ae971dc5c38d\",\"external_id\":\"6c59826c-106f-4bfe-a16b-222855c40786\"}"
+      "response": "{\"id\":\"17708fe1-2ccc-4525-8951-fcd6b2539ad4\",\"external_id\":\"ae8b124b-7225-43cf-86e5-ae4acc4004c3\"}"
     },
     {
       "prayer": "maghrib",
       "mode": "advance",
       "recipients": 1,
-      "response": "{\"id\":\"54ccc0e6-0d19-4351-926f-f18e8585ef72\",\"external_id\":\"053a23c8-4b2f-4d0d-906a-cafaaa80fa3b\"}"
+      "response": "{\"id\":\"3884a46f-4e03-4c54-ab27-ad50d4c8c631\",\"external_id\":\"fe0d352b-3559-49cb-9d54-d74ae0e2eafb\"}"
     },
     {
       "prayer": "isha",
       "mode": "entry",
       "recipients": 1,
-      "response": "{\"id\":\"363ac0c3-8368-4081-802d-ca962aaca16b\",\"external_id\":\"e5643d39-2eae-4343-85cb-043e89a89a7f\"}"
+      "response": "{\"id\":\"f733d590-d11f-4354-9c0c-10bcf9e0a471\",\"external_id\":\"78b3f280-5120-4790-8a42-c83e6e92a367\"}"
     },
     {
       "prayer": "isha",
       "mode": "advance",
       "recipients": 1,
-      "response": "{\"id\":\"12351482-9e1d-4de3-9c74-07b4f1dee0f3\",\"external_id\":\"973e66d3-56f2-492a-8829-dacf78d2731f\"}"
+      "response": "{\"id\":\"74c8d30c-3ef9-4d36-8d0a-d49639870b5c\",\"external_id\":\"a9eb79e5-7d92-4691-9190-bf4bcb900ed6\"}"
     },
     {
       "prayer": "fajr",
       "mode": "entry",
       "recipients": 1,
-      "response": "{\"id\":\"cc8dbd67-f9da-48c9-8266-176c1909256d\",\"external_id\":\"c29e07e4-2107-40f9-9197-0e72e639eb06\"}"
+      "response": "{\"id\":\"c049433e-ca20-4d67-a632-6192b360a6db\",\"external_id\":\"a955c276-f97a-4099-a36d-4af85b52aa6e\"}"
     },
     {
       "prayer": "fajr",
       "mode": "advance",
       "recipients": 1,
-      "response": "{\"id\":\"1d006d50-e643-4085-9716-39c2a634f435\",\"external_id\":\"68657c65-92ee-45b5-b10f-0a746b8bb64c\"}"
+      "response": "{\"id\":\"8e71e223-7d3e-46c9-845c-01d6bdc52654\",\"external_id\":\"350e30ee-2b78-42c2-93ed-cc7afb45a03f\"}"
     }
   ],
   "userRegistry": [
@@ -537,12 +537,6 @@
       "lastSyncedAt": "2026-08-07T10:00:20.263+00:00"
     },
     {
-      "subscriptionId": "5ac92c0e-645d-4f93-b45d-e3d27031fca6",
-      "timezone": "Europe/Berlin",
-      "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-08T03:22:08.875+00:00"
-    },
-    {
       "subscriptionId": "8fe3c8c1-f070-40a9-a9c4-1ecf5806d0ed",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
@@ -565,6 +559,12 @@
       "timezone": "Europe/Berlin",
       "city": "Meckenheim",
       "lastSyncedAt": "2026-07-23T16:01:52.373433+00:00"
+    },
+    {
+      "subscriptionId": "5ac92c0e-645d-4f93-b45d-e3d27031fca6",
+      "timezone": "Europe/Berlin",
+      "city": "Rheinbach",
+      "lastSyncedAt": "2026-08-08T03:23:25.556+00:00"
     },
     {
       "subscriptionId": "9316390f-2d02-48d2-9761-4db7caab23d7",
