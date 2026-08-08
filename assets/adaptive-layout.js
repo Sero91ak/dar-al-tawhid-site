@@ -2,6 +2,7 @@
  * DAR AL TAWḤĪD — Adaptive Layout Controller (emergency-safe)
  * Compact / Medium only. Expanded left-rail disabled (broke Fold UX).
  * Uses ResizeObserver + visualViewport; no UA / device model detection.
+ * v6: Fold/Tablet orientation re-apply (Android lag) + data-orientation.
  */
 (function (global) {
   "use strict";
@@ -13,6 +14,7 @@
   var rafId = 0;
   var started = false;
   var resizeObserver = null;
+  var orientTimers = [];
 
   function resolveLayoutMode(width, height) {
     var w = Number(width) || 0;
@@ -25,18 +27,20 @@
 
   function measureViewport() {
     var vv = global.visualViewport;
-    var w = Math.round(
-      (vv && vv.width) ||
-        document.documentElement.clientWidth ||
-        global.innerWidth ||
-        0
+    var innerW = Math.round(global.innerWidth || 0);
+    var innerH = Math.round(global.innerHeight || 0);
+    var clientW = Math.round(
+      (document.documentElement && document.documentElement.clientWidth) || 0
     );
-    var h = Math.round(
-      (vv && vv.height) ||
-        document.documentElement.clientHeight ||
-        global.innerHeight ||
-        0
+    var clientH = Math.round(
+      (document.documentElement && document.documentElement.clientHeight) || 0
     );
+    var vvW = vv && vv.width ? Math.round(vv.width) : 0;
+    var vvH = vv && vv.height ? Math.round(vv.height) : 0;
+    /* Prefer the largest stable width — Fold/Tablet lag after unfold/rotate */
+    var w = Math.max(vvW, clientW, innerW) || vvW || clientW || innerW || 0;
+    var h = vvH || clientH || innerH || 0;
+    if (!h) h = Math.max(clientH, innerH) || 0;
     var offsetTop = vv && typeof vv.offsetTop === "number" ? vv.offsetTop : 0;
     return { width: w, height: h, offsetTop: offsetTop };
   }
@@ -112,6 +116,14 @@
     root.style.setProperty("--layout-vv-offset-top", (metrics.offsetTop || 0) + "px");
   }
 
+  function applyOrientationAttrs(metrics) {
+    var root = document.documentElement;
+    var landscape = metrics.width >= metrics.height;
+    root.setAttribute("data-orientation", landscape ? "landscape" : "portrait");
+    root.classList.toggle("is-layout-landscape", landscape);
+    root.classList.toggle("is-layout-wide", metrics.width >= 600);
+  }
+
   function applyLayout(force) {
     var metrics = measureViewport();
     var mode = resolveLayoutMode(metrics.width, metrics.height);
@@ -126,6 +138,7 @@
       root.style.setProperty("--layout-vh", metrics.height + "px");
     }
 
+    applyOrientationAttrs(metrics);
     applyKeyboardState(metrics);
     applyNavLayout(mode);
 
@@ -137,6 +150,7 @@
               mode: mode,
               width: metrics.width,
               height: metrics.height,
+              orientation: metrics.width >= metrics.height ? "landscape" : "portrait",
             },
           })
         );
@@ -149,6 +163,26 @@
     rafId = global.requestAnimationFrame(function () {
       rafId = 0;
       applyLayout(!!force);
+    });
+  }
+
+  function clearOrientTimers() {
+    for (var i = 0; i < orientTimers.length; i++) {
+      clearTimeout(orientTimers[i]);
+    }
+    orientTimers = [];
+  }
+
+  function scheduleOrientBurst() {
+    clearOrientTimers();
+    scheduleApply(true);
+    /* Android Fold / tablet: viewport size lags after rotate/unfold */
+    [50, 150, 350, 700].forEach(function (ms) {
+      orientTimers.push(
+        setTimeout(function () {
+          applyLayout(true);
+        }, ms)
+      );
     });
   }
 
@@ -185,13 +219,13 @@
     }
 
     global.addEventListener("resize", onResize, { passive: true });
-    global.addEventListener(
-      "orientationchange",
-      function () {
-        scheduleApply(true);
-      },
-      { passive: true }
-    );
+    global.addEventListener("orientationchange", scheduleOrientBurst, { passive: true });
+
+    if (global.screen && global.screen.orientation && typeof global.screen.orientation.addEventListener === "function") {
+      try {
+        global.screen.orientation.addEventListener("change", scheduleOrientBurst);
+      } catch (e) {}
+    }
 
     if (global.visualViewport) {
       global.visualViewport.addEventListener("resize", onResize, { passive: true });
@@ -199,7 +233,7 @@
     }
 
     document.addEventListener("visibilitychange", function () {
-      if (!document.hidden) scheduleApply(true);
+      if (!document.hidden) scheduleOrientBurst();
     });
   }
 

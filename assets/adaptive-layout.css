@@ -247,6 +247,43 @@ html[data-layout] .view {
   max-width: 100%;
 }
 
+/* v624 · Fold open / tablet landscape — wide grids, full-bleed shell */
+html[data-orientation="landscape"][data-layout="medium"] .app,
+html.is-layout-landscape[data-layout="medium"] .app {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+@media (orientation: landscape) and (min-width: 600px) {
+  html[data-layout="medium"] #folderGrid.folder-grid,
+  html[data-layout="medium"] .folder-grid,
+  html[data-layout="medium"] #latestGrid.latest-grid,
+  html[data-layout="medium"] .latest-grid,
+  html[data-layout="medium"] .dua-theme-grid,
+  html[data-layout="medium"] .topics-theme-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  html[data-layout="medium"] .view,
+  html[data-layout="medium"] .dua-hub,
+  html[data-layout="medium"] .topics-hub,
+  html[data-layout="medium"] .qov-page,
+  html[data-layout="medium"] .books-library-shell,
+  html[data-layout="medium"] .more-page,
+  html[data-layout="medium"] .account-page {
+    max-width: min(1080px, 100%);
+  }
+}
+
+@media (orientation: landscape) and (min-width: 900px) {
+  html[data-layout="medium"] #folderGrid.folder-grid,
+  html[data-layout="medium"] .folder-grid,
+  html[data-layout="medium"] #latestGrid.latest-grid,
+  html[data-layout="medium"] .latest-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html[data-layout] .app,
   html[data-layout] #bottomNav.bottom-nav,

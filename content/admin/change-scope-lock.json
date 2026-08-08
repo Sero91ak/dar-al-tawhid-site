@@ -82,6 +82,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "android-scroll-fold-live-v624-2026-08-08",
+      "approvedBy": "user-explicit-live-push",
+      "reason": "Nutzer: Android Scroll extrem buggy; Fold + Tablet-Quer nicht live — Fix + Live-Push",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/adaptive-layout.js",
+        "assets/adaptive-layout.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "musa-reference-profile-phase2-v602-2026-08-08",
       "approvedBy": "user-phase2-musa-referenzprofil",
       "note": "Phase 2: Mūsā vollständig als Referenzprofil (Test); production bleibt disabled",
