@@ -891,9 +891,6 @@
       renderLastReadCard() +
       '<section class="prophets-sf" aria-label="Suche und Filter">' +
       '<div class="prophets-search-panel">' +
-      '<div class="prophets-pick-title">' +
-      "<h3>Suche und Filter</h3>" +
-      "</div>" +
       '<div class="prophets-pick-grid">' +
       renderProphetJumpSelect(index) +
       renderFilterPickSelect("group", "Gruppe", groupOpts, filter) +
@@ -1644,17 +1641,17 @@
       ) +
       "</p>" +
       banner +
-      '<div class="prophets-detail__stats" aria-label="Quellenübersicht">' +
-      '<div class="prophets-stat"><b>' +
+      '<p class="prophets-detail__meta" aria-label="Quellenübersicht">' +
+      "<span><b>" +
       qCount +
-      "</b><span>Qurʾān</span></div>" +
-      '<div class="prophets-stat"><b>' +
+      "</b> Qurʾān</span><span class=\"prophets-detail__dot\" aria-hidden=\"true\">·</span>" +
+      "<span><b>" +
       sunnahN +
-      "</b><span>Sunnah</span></div>" +
-      '<div class="prophets-stat"><b>' +
+      "</b> Sunnah</span><span class=\"prophets-detail__dot\" aria-hidden=\"true\">·</span>" +
+      "<span><b>" +
       (stQ + stS) +
-      "</b><span>Aussagen</span></div>" +
-      "</div>" +
+      "</b> Aussagen</span>" +
+      "</p>" +
       "</header>" +
       '<nav class="prophets-tabs" aria-label="Propheten-Abschnitte">' +
       tabs +

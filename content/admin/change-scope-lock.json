@@ -2961,6 +2961,27 @@
         "test/service-worker.js"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-push-detail-polish-v621-2026-08-08",
+      "approvedBy": "user-task-propheten-dua-licht-emoji-fokus-push-live",
+      "note": "v621: OneSignal Push-Fix, Detail Duʿāʾ-Polish, Validator Live-Allow, Build-Sync — Test+Live",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/assets/prophets/",
+        "assets/prophets/",
+        "test/index.html",
+        "index.html",
+        "test/version.json",
+        "version.json",
+        "content/admin/push-triggers/",
+        "scripts/send-prophets-focus-push.js",
+        "scripts/validate-prophets-all.js",
+        "scripts/prophets-phase13-acceptance.js",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
