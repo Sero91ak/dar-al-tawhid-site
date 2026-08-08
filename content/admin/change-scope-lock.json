@@ -2663,6 +2663,21 @@
         "assets/live-boot.js"
       ],
       "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-block01-idris-ibrahim-v604-2026-08-08",
+      "approvedBy": "user-task-propheten-5er-block-01",
+      "note": "Zero-Trust Profile: Idrīs, Nūḥ, Hūd, Ṣāliḥ, Ibrāhīm — Test-first, production=disabled",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "data/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "index.html",
+        "scripts/build_prophets_block01.py"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
