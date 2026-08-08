@@ -2837,6 +2837,22 @@
         ".github/workflows/prophets-test-validate.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-phase12-coverage-block02-v615-2026-08-08",
+      "approvedBy": "user-task-phase-12-coverage-block02",
+      "note": "Phase 12: Quellen-Vollständigkeits-Audit 5er-Block 02 (Lūṭ–Yūsuf) — kein freier Content, production=disabled, NO live",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "test/assets/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "scripts/prophets_phase12_coverage_block02.py",
+        "scripts/prophets-phase12-coverage-audit-block02.js",
+        ".github/workflows/prophets-test-validate.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
