@@ -2678,6 +2678,21 @@
         "scripts/build_prophets_block01.py"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-block02-lut-yusuf-v605-2026-08-08",
+      "approvedBy": "user-task-propheten-5er-block-02",
+      "note": "Zero-Trust: Lūṭ, Ismāʿīl, Isḥāq, Yaʿqūb, Yūsuf — Test-first, production=disabled",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "data/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "index.html",
+        "scripts/build_prophets_block02.py"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
