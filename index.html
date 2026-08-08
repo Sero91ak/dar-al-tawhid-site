@@ -25306,18 +25306,56 @@ function ensureCanonicalSourceLibrary(){
 }
 function renderLibraryRoute(view,value){
   if(!window.DARLibraryApp)return `<section class="empty">Bibliothek lädt…</section>`;
-  if(view==="bibliothek-reader")return DARLibraryApp.renderBibliothekReader(value||"");
   const rail=`<div id="libraryMount" data-fold-role="rail">${DARLibraryApp.renderBibliothek()}</div>`;
   if(window.DarFold&&DarFold.isDual()){
+    if(view==="bibliothek-reader"){
+      const pane=`<div data-fold-role="pane">${DARLibraryApp.renderBibliothekReader(value||"")}</div>`;
+      return DarFold.shell(rail,pane,{family:"library",emptyMsg:"Links eine Veröffentlichung wählen",compactMode:"pane"});
+    }
     if(view==="bibliothek-detail"){
       const pane=`<div data-fold-role="pane">${DARLibraryApp.renderBibliothekDetail(value||"")}</div>`;
       return DarFold.shell(rail,pane,{family:"library",emptyMsg:"Links eine Veröffentlichung wählen",compactMode:"pane"});
     }
     return DarFold.shell(rail,DarFold.emptyPane("Links eine Veröffentlichung wählen"),{family:"library",emptyMsg:"Links eine Veröffentlichung wählen",compactMode:"rail"});
   }
+  if(view==="bibliothek-reader")return DARLibraryApp.renderBibliothekReader(value||"");
   if(view==="bibliothek")return rail;
   if(view==="bibliothek-detail")return `<div id="libraryMount">${DARLibraryApp.renderBibliothekDetail(value||"")}</div>`;
   return `<section class="empty">Bibliothek lädt…</section>`;
+}
+function renderQuellenFoldRoute(view,value){
+  if(!(window.DARCanonicalSourceLibrary&&typeof DARCanonicalSourceLibrary.renderRoute==="function")){
+    return renderBooks();
+  }
+  if(!(window.DarFold&&DarFold.isDual())){
+    if(view==="quellen-book")return DARCanonicalSourceLibrary.renderBookDetail(value);
+    if(view==="quellen-scholar")return DARCanonicalSourceLibrary.renderScholarDetail(value);
+    return DARCanonicalSourceLibrary.renderRoute({view:"books",value:""});
+  }
+  const rail=`<div data-fold-role="rail">${DARCanonicalSourceLibrary.renderRoute({view:"books",value:""})}</div>`;
+  if(view==="quellen-book"){
+    return DarFold.shell(rail,`<div data-fold-role="pane">${DARCanonicalSourceLibrary.renderBookDetail(value)}</div>`,{family:"quellen",emptyMsg:"Links ein Werk wählen",compactMode:"pane"});
+  }
+  if(view==="quellen-scholar"){
+    return DarFold.shell(rail,`<div data-fold-role="pane">${DARCanonicalSourceLibrary.renderScholarDetail(value)}</div>`,{family:"quellen",emptyMsg:"Links einen Gelehrten wählen",compactMode:"pane"});
+  }
+  return DarFold.shell(rail,DarFold.emptyPane("Links ein Werk oder einen Gelehrten wählen"),{family:"quellen",emptyMsg:"Links ein Werk oder einen Gelehrten wählen",compactMode:"rail"});
+}
+function renderTopicsFoldRoute(view,value){
+  if(!(window.DarFold&&DarFold.isDual())){
+    if(view==="topics")return renderTopics();
+    if(view==="topic")return renderFiltered("category",value);
+    if(view==="recent")return renderRecent();
+    if(view==="saved")return renderSaved();
+    if(view==="series")return renderSeries(value);
+    return renderTopics();
+  }
+  if(view==="topics")return DarFold.shell(renderTopics(),DarFold.emptyPane("Links ein Thema öffnen"),{family:"posts",compactMode:"rail"});
+  if(view==="topic")return DarFold.shell(renderTopics(),renderFiltered("category",value),{family:"posts",compactMode:"pane"});
+  if(view==="recent")return DarFold.shell(renderTopics(),renderRecent(),{family:"posts",compactMode:"pane"});
+  if(view==="saved")return DarFold.shell(renderTopics(),renderSaved(),{family:"posts",compactMode:"pane"});
+  if(view==="series")return DarFold.shell(renderTopics(),renderSeries(value),{family:"posts",compactMode:"pane"});
+  return renderTopics();
 }
 
 function renderDuaFoldRoute(view,value){
@@ -25426,21 +25464,21 @@ function render(){
     else if(currentRoute.view==="feed")html=renderFeed();
     else if(currentRoute.view==="ilm")html=renderIlm();
     else if(currentRoute.view==="quiz")html=renderQuiz();
-    else if(currentRoute.view==="topics")html=renderTopics();
+    else if(currentRoute.view==="topics")html=renderTopicsFoldRoute("topics");
     else if(currentRoute.view==="scholars")html=renderScholarsFoldRoute("scholars");
     else if(currentRoute.view==="propheten")html=(window.DARProphets&&typeof window.DARProphets.render==="function"?window.DARProphets.render(currentRoute.value):`<div class="empty">Prophetenbibliothek wird geladen…</div>`);
-    else if(currentRoute.view==="books")html=renderBooks();
-    else if(currentRoute.view==="quellen-book")html=window.DARCanonicalSourceLibrary?DARCanonicalSourceLibrary.renderBookDetail(currentRoute.value):renderBooks();
-    else if(currentRoute.view==="quellen-scholar")html=window.DARCanonicalSourceLibrary?DARCanonicalSourceLibrary.renderScholarDetail(currentRoute.value):renderBooks();
-    else if(currentRoute.view==="topic")html=renderFiltered("category",currentRoute.value);
+    else if(currentRoute.view==="books")html=renderQuellenFoldRoute("books");
+    else if(currentRoute.view==="quellen-book")html=renderQuellenFoldRoute("quellen-book",currentRoute.value);
+    else if(currentRoute.view==="quellen-scholar")html=renderQuellenFoldRoute("quellen-scholar",currentRoute.value);
+    else if(currentRoute.view==="topic")html=renderTopicsFoldRoute("topic",currentRoute.value);
     else if(currentRoute.view==="scholar")html=renderScholarsFoldRoute("scholar",currentRoute.value);
     else if(currentRoute.view==="book")html=renderFiltered("book",currentRoute.value);
     else if(currentRoute.view==="calendar")html=renderCalendar();
     else if(currentRoute.view==="ramadan")html=renderRamadan();
     else if(currentRoute.view==="prayer")html=renderPrayerTimes();
-    else if(currentRoute.view==="series")html=renderSeries(currentRoute.value);
-    else if(currentRoute.view==="recent")html=renderRecent();
-    else if(currentRoute.view==="saved")html=renderSaved();
+    else if(currentRoute.view==="series")html=renderTopicsFoldRoute("series",currentRoute.value);
+    else if(currentRoute.view==="recent")html=renderTopicsFoldRoute("recent");
+    else if(currentRoute.view==="saved")html=renderTopicsFoldRoute("saved");
     else if(currentRoute.view==="account")html=renderAccount();
     else if(currentRoute.view==="about")html=renderAbout();
     else if(currentRoute.view==="zakat")html=`${setPageHeader("Zakāt","Berechnung, Niṣāb und Bericht","Zakāt")}${window.DARZakatApp?DARZakatApp.renderZakat():`<section class="empty">Zakāt-Rechner lädt…</section>`}`;
@@ -25510,24 +25548,27 @@ function render(){
           const mount=document.getElementById("libraryMount");
           if(mount&&readRoute().view==="bibliothek"){mount.innerHTML=html;window.DARLibraryApp.bindLibrary(readRoute())}
         });
-      }else if(currentRoute.view==="bibliothek-detail"){
+      }else if(currentRoute.view==="bibliothek-detail"||currentRoute.view==="bibliothek-reader"){
         if(foldDual){
           window.DARLibraryApp.renderBibliothekWithOffline().then(html=>{
             const mount=document.getElementById("libraryMount");
-            if(mount&&readRoute().view==="bibliothek-detail"&&readRoute().value===currentRoute.value){
+            if(mount&&["bibliothek-detail","bibliothek-reader"].includes(readRoute().view)&&readRoute().value===currentRoute.value){
               mount.innerHTML=html;
               try{mount.querySelectorAll("[data-library-open]").forEach(el=>{el.classList.toggle("is-fold-active",String(el.getAttribute("data-library-open")||"")===String(currentRoute.value||""))})}catch(e){}
               window.DARLibraryApp.bindLibrary(readRoute());
             }
           });
-          window.DARLibraryApp.renderBibliothekDetailWithOffline(currentRoute.value||"").then(html=>{
+          const panePromise=currentRoute.view==="bibliothek-reader"
+            ? Promise.resolve(DARLibraryApp.renderBibliothekReader(currentRoute.value||""))
+            : DARLibraryApp.renderBibliothekDetailWithOffline(currentRoute.value||"");
+          panePromise.then(html=>{
             const pane=document.querySelector('.dar-fold__pane [data-fold-role="pane"]')||document.querySelector(".dar-fold__pane");
-            if(pane&&readRoute().view==="bibliothek-detail"&&readRoute().value===currentRoute.value){
+            if(pane&&["bibliothek-detail","bibliothek-reader"].includes(readRoute().view)&&readRoute().value===currentRoute.value){
               pane.innerHTML=html;
               window.DARLibraryApp.bindLibrary(readRoute());
             }
           });
-        }else{
+        }else if(currentRoute.view==="bibliothek-detail"){
           window.DARLibraryApp.renderBibliothekDetailWithOffline(currentRoute.value||"").then(html=>{
             const mount=document.getElementById("libraryMount");
             if(mount&&readRoute().view==="bibliothek-detail"&&readRoute().value===currentRoute.value){mount.innerHTML=html;window.DARLibraryApp.bindLibrary(readRoute())}
@@ -25704,10 +25745,50 @@ window.addEventListener("dar:layoutchange",function(ev){
   try{
     var d=ev&&ev.detail||{};
     var prev=window.__darLastFoldDual;
-    var now=!!(d.dual|| (window.DarFold&&DarFold.isDual()));
+    var now=!!(d.dual!=null?d.dual:(window.DarFold&&DarFold.isDual()));
     if(prev===now)return;
     window.__darLastFoldDual=now;
+    /* Zustand beim Drehen/Fold behalten: Scroll, Rail, Suche, Route bleibt in Hash */
+    try{
+      window.__darPreserveLayoutScrollY=window.scrollY||0;
+      var railEl=document.querySelector(".dar-fold__rail,.prophets-rail");
+      if(railEl)window.__darPreserveRailScrollTop=railEl.scrollTop||0;
+      var paneEl=document.querySelector(".dar-fold__pane,.prophets-pane");
+      if(paneEl)window.__darPreservePaneScrollTop=paneEl.scrollTop||0;
+      var quranSearch=$("quranSearchInput");
+      if(quranSearch)window.__darPreserveQuranSearch=quranSearch.value||"";
+      var duaSearch=$("duaSearchInput");
+      if(duaSearch)window.__darPreserveDuaSearch=duaSearch.value||"";
+      var homeSearch=$("homeSearchInput");
+      if(homeSearch)window.__darPreserveHomeSearch=homeSearch.value||"";
+      var qsrcSearch=document.getElementById("qsrcSearchInput");
+      if(qsrcSearch)window.__darPreserveQsrcSearch=qsrcSearch.value||"";
+      var prophetsSearch=document.getElementById("prophetsSearch");
+      if(prophetsSearch)window.__darPreserveProphetsSearch=prophetsSearch.value||"";
+    }catch(pe){}
     if(typeof render==="function")render();
+    requestAnimationFrame(function(){
+      try{
+        if(Number.isFinite(window.__darPreserveLayoutScrollY)){
+          var y=window.__darPreserveLayoutScrollY;window.__darPreserveLayoutScrollY=null;
+          if(window.DARScrollManager&&DARScrollManager.stableScrollTo)DARScrollManager.stableScrollTo(y,{force:true});
+          else window.scrollTo(0,y);
+        }
+        var rail2=document.querySelector(".dar-fold__rail,.prophets-rail");
+        if(rail2&&Number.isFinite(window.__darPreserveRailScrollTop)){
+          rail2.scrollTop=window.__darPreserveRailScrollTop;window.__darPreserveRailScrollTop=null;
+        }
+        var pane2=document.querySelector(".dar-fold__pane,.prophets-pane");
+        if(pane2&&Number.isFinite(window.__darPreservePaneScrollTop)){
+          pane2.scrollTop=window.__darPreservePaneScrollTop;window.__darPreservePaneScrollTop=null;
+        }
+        if(window.__darPreserveQuranSearch!=null){var qs=$("quranSearchInput");if(qs){qs.value=window.__darPreserveQuranSearch;if(typeof applyQuranSearch==="function")applyQuranSearch()}window.__darPreserveQuranSearch=null}
+        if(window.__darPreserveDuaSearch!=null){var ds=$("duaSearchInput");if(ds){ds.value=window.__darPreserveDuaSearch;ds.dispatchEvent(new Event("input"))}window.__darPreserveDuaSearch=null}
+        if(window.__darPreserveHomeSearch!=null){var hs=$("homeSearchInput");if(hs){hs.value=window.__darPreserveHomeSearch;if(typeof applyHomeFilters==="function")applyHomeFilters()}window.__darPreserveHomeSearch=null}
+        if(window.__darPreserveQsrcSearch!=null){var qss=document.getElementById("qsrcSearchInput");if(qss){qss.value=window.__darPreserveQsrcSearch;qss.dispatchEvent(new Event("input"))}window.__darPreserveQsrcSearch=null}
+        if(window.__darPreserveProphetsSearch!=null){var ps=document.getElementById("prophetsSearch");if(ps){ps.value=window.__darPreserveProphetsSearch;ps.dispatchEvent(new Event("input"))}window.__darPreserveProphetsSearch=null}
+      }catch(re){}
+    });
   }catch(e){}
 },{passive:true});
 const FLOAT_TIPS_KEY="darFloatTipsShownV1";

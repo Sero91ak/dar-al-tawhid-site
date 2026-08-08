@@ -1,29 +1,24 @@
 /**
  * DAR AL TAWḤĪD — Adaptive Layout Controller
- * compact <600 · medium 600–719 · expanded ≥720 (Fold open / Tablet)
- * Expanded = content master-detail (DarFold). Bottom-Nav bleibt unten — KEIN Left-Rail-Nav.
- * v7: expanded dual gate + orientation burst (Android Fold lag)
+ * Compact: Smartphone, Fold geschlossen, Tablet Hochformat → Einspalte
+ * Expanded: Fold geöffnet, Tablet Querformat, große Breite → Zwei-Bereichs-Modus
+ * Bottom-Nav bleibt unten — KEIN Left-Rail-Nav.
+ * v8: verbindliche Tablet-Querformat / Fold Dual-Regel + State-sichere Orientation
  */
 (function (global) {
   "use strict";
 
   var COMPACT_MAX = 599;
+  /* Ab dieser Breite + Querformat: Dual (Tablet landscape, Fold landscape) */
   var EXPANDED_MIN = 700;
+  /* Portrait mit sehr großer Breite: Fold offen / Desktop (nicht Tablet-Hochformat ~768–834) */
+  var EXPANDED_PORTRAIT_MIN = 900;
   var EXPANDED_MIN_HEIGHT = 480;
   var currentMode = "";
   var rafId = 0;
   var started = false;
   var resizeObserver = null;
   var orientTimers = [];
-
-  function resolveLayoutMode(width, height) {
-    var w = Number(width) || 0;
-    var h = Number(height) || 0;
-    if (w < 600) return "compact";
-    /* Fold open, Fold Ultra, iPad, Android tablet — dual content */
-    if (w >= EXPANDED_MIN && (h >= EXPANDED_MIN_HEIGHT || w >= h)) return "expanded";
-    return "medium";
-  }
 
   function measureViewport() {
     var vv = global.visualViewport;
@@ -42,6 +37,32 @@
     if (!h) h = Math.max(clientH, innerH) || 0;
     var offsetTop = vv && typeof vv.offsetTop === "number" ? vv.offsetTop : 0;
     return { width: w, height: h, offsetTop: offsetTop };
+  }
+
+  /**
+   * Verbindliche Dual-Regel (Breite + Orientierung, kein reiner Gerätetyp):
+   * - Compact/Einspalte: Phone, Fold zu, Tablet Hochformat
+   * - Dual: Tablet Querformat (≥700), Fold offen / große Breite (≥900 Portrait)
+   */
+  function isDualViewport(width, height) {
+    var w = Number(width);
+    var h = Number(height);
+    if (!Number.isFinite(w)) w = 0;
+    if (!Number.isFinite(h)) h = 0;
+    if (w < EXPANDED_MIN) return false;
+    if (w >= h) return true; /* landscape / square-ish */
+    if (w >= EXPANDED_PORTRAIT_MIN) return true; /* Fold open / desktop portrait */
+    return false; /* Tablet portrait 700–899 */
+  }
+
+  function resolveLayoutMode(width, height) {
+    var w = Number(width) || 0;
+    var h = Number(height) || 0;
+    if (w < 600) return "compact";
+    if (isDualViewport(w, h) && (h >= EXPANDED_MIN_HEIGHT || w >= h || w >= EXPANDED_PORTRAIT_MIN)) {
+      return "expanded";
+    }
+    return "medium";
   }
 
   function navBottomCompact() {
@@ -120,17 +141,21 @@
   function applyOrientationAttrs(metrics) {
     var root = document.documentElement;
     var landscape = metrics.width >= metrics.height;
+    var dual = isDualViewport(metrics.width, metrics.height);
     root.setAttribute("data-orientation", landscape ? "landscape" : "portrait");
     root.classList.toggle("is-layout-landscape", landscape);
     root.classList.toggle("is-layout-wide", metrics.width >= 600);
-    root.classList.toggle("is-fold-dual", metrics.width >= EXPANDED_MIN);
+    root.classList.toggle("is-fold-dual", dual);
+    root.setAttribute("data-fold-dual", dual ? "1" : "0");
   }
 
   function applyLayout(force) {
     var metrics = measureViewport();
     var mode = resolveLayoutMode(metrics.width, metrics.height);
+    var dual = isDualViewport(metrics.width, metrics.height);
     var root = document.documentElement;
     var changed = mode !== currentMode;
+    var prevDual = root.getAttribute("data-fold-dual") === "1";
 
     if (changed || force) {
       currentMode = mode;
@@ -144,7 +169,8 @@
     applyKeyboardState(metrics);
     applyNavLayout(mode);
 
-    if (changed || force) {
+    var dualChanged = prevDual !== dual;
+    if (changed || force || dualChanged) {
       try {
         global.dispatchEvent(
           new CustomEvent("dar:layoutchange", {
@@ -152,7 +178,7 @@
               mode: mode,
               width: metrics.width,
               height: metrics.height,
-              dual: mode === "expanded",
+              dual: dual,
               orientation: metrics.width >= metrics.height ? "landscape" : "portrait",
             },
           })
@@ -246,8 +272,13 @@
 
   var api = {
     resolveLayoutMode: resolveLayoutMode,
+    isDualViewport: isDualViewport,
     getMode: function () {
       return currentMode || resolveLayoutMode(measureViewport().width, measureViewport().height);
+    },
+    isDual: function () {
+      var m = measureViewport();
+      return isDualViewport(m.width, m.height);
     },
     measure: measureViewport,
     apply: function () {
@@ -257,6 +288,7 @@
     start: start,
     COMPACT_MAX: COMPACT_MAX,
     EXPANDED_MIN: EXPANDED_MIN,
+    EXPANDED_PORTRAIT_MIN: EXPANDED_PORTRAIT_MIN,
     EXPANDED_MIN_HEIGHT: EXPANDED_MIN_HEIGHT,
   };
 

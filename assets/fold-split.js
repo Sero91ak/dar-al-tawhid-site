@@ -1,17 +1,24 @@
 /**
- * DAR AL TAWḤĪD — Fold / Tablet Master-Detail (feste Fold-Regel)
+ * DAR AL TAWḤĪD — Fold / Tablet Master-Detail (verbindliche Regel)
  * LINKS ≈ 34 % finden/auswählen · RECHTS ≈ 66 % öffnen/lesen
- * Compact (<720): normale Smartphone-App — Zustand bleibt in der Route.
- * Expanded (≥720): Zwei Arbeitsbereiche, Bottom-Nav bleibt unten (kein Left-Rail).
+ * Dual: Tablet Querformat (≥700) ODER große Portrait-Breite (≥900, Fold offen)
+ * Compact: Smartphone, Fold zu, Tablet Hochformat — Zustand bleibt in der Route.
+ * Bottom-Nav bleibt unten (kein Left-Rail).
  */
 (function (global) {
   "use strict";
 
   var DUAL_MIN = 700;
+  var DUAL_PORTRAIT_MIN = 900;
   var RAIL_MIN = 320;
   var RAIL_MAX = 380;
 
-  function measureWidth() {
+  function measureViewport() {
+    if (global.DarAdaptiveLayout && typeof global.DarAdaptiveLayout.measure === "function") {
+      try {
+        return global.DarAdaptiveLayout.measure();
+      } catch (e) {}
+    }
     var vv = global.visualViewport;
     var w = Math.round(
       Math.max(
@@ -20,23 +27,42 @@
         global.innerWidth || 0
       )
     );
-    return w || 0;
+    var h = Math.round(
+      Math.max(
+        (vv && vv.height) || 0,
+        (document.documentElement && document.documentElement.clientHeight) || 0,
+        global.innerHeight || 0
+      )
+    );
+    return { width: w || 0, height: h || 0, offsetTop: 0 };
   }
 
-  function layoutMode() {
-    try {
-      return String(document.documentElement.getAttribute("data-layout") || "");
-    } catch (e) {
-      return "";
+  function measureWidth() {
+    return measureViewport().width;
+  }
+
+  function isDualViewport(width, height) {
+    if (global.DarAdaptiveLayout && typeof global.DarAdaptiveLayout.isDualViewport === "function") {
+      try {
+        return !!global.DarAdaptiveLayout.isDualViewport(width, height);
+      } catch (e) {}
     }
+    var w = Number(width) || 0;
+    var h = Number(height) || 0;
+    if (w < DUAL_MIN) return false;
+    if (w >= h) return true;
+    if (w >= DUAL_PORTRAIT_MIN) return true;
+    return false;
   }
 
   function isDual() {
-    var mode = layoutMode();
-    if (mode === "expanded") return true;
-    if (mode === "compact") return false;
-    /* medium / unknown: width gate (Fold open, iPad, Android tablet) */
-    return measureWidth() >= DUAL_MIN;
+    try {
+      if (global.DarAdaptiveLayout && typeof global.DarAdaptiveLayout.isDual === "function") {
+        return !!global.DarAdaptiveLayout.isDual();
+      }
+    } catch (e) {}
+    var m = measureViewport();
+    return isDualViewport(m.width, m.height);
   }
 
   function emptyPane(message) {
@@ -129,9 +155,12 @@
 
   var api = {
     DUAL_MIN: DUAL_MIN,
+    DUAL_PORTRAIT_MIN: DUAL_PORTRAIT_MIN,
     RAIL_MIN: RAIL_MIN,
     RAIL_MAX: RAIL_MAX,
     measureWidth: measureWidth,
+    measureViewport: measureViewport,
+    isDualViewport: isDualViewport,
     isDual: isDual,
     emptyPane: emptyPane,
     shell: shell,
