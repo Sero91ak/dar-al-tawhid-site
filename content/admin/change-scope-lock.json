@@ -2892,6 +2892,18 @@
         ".github/workflows/prophets-test-validate.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-ui-filter-restore-v617-2026-08-08",
+      "approvedBy": "user-task-restore-filter-design",
+      "note": "Propheten Filter/Suche Optik wie App-Schnellauswahl wiederherstellen — TEST only",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/assets/prophets/",
+        "test/index.html",
+        "test/version.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

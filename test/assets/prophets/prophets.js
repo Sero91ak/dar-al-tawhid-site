@@ -665,23 +665,56 @@
     );
   }
 
+  function renderFilterPickSelect(groupId, placeholder, options, currentFilter) {
+    var inGroup = options.some(function (o) {
+      return o.id === currentFilter;
+    });
+    var selected = inGroup ? currentFilter : "all";
+    return (
+      '<select class="prophets-pick" data-prophets-pick="' +
+      esc(groupId) +
+      '" aria-label="' +
+      esc(placeholder) +
+      '">' +
+      '<option value="all"' +
+      (selected === "all" ? " selected" : "") +
+      ">" +
+      esc(placeholder) +
+      "</option>" +
+      options
+        .map(function (o) {
+          return (
+            '<option value="' +
+            esc(o.id) +
+            '"' +
+            (selected === o.id ? " selected" : "") +
+            ">" +
+            esc(o.label) +
+            "</option>"
+          );
+        })
+        .join("") +
+      "</select>"
+    );
+  }
+
   function renderListPanel(index, state, activeId) {
     var filter = state.filter || "all";
     var query = state.query || "";
     var packs = filterProphets(index, filter, query);
-    var filtersHtml = availableFilters(index)
-      .map(function (f) {
-        return (
-          '<button type="button" class="prophets-filter' +
-          (filter === f.id ? " is-active" : "") +
-          '" data-prophets-filter="' +
-          esc(f.id) +
-          '">' +
-          esc(f.label) +
-          "</button>"
-        );
-      })
-      .join("");
+    var avail = availableFilters(index);
+    var byId = Object.create(null);
+    avail.forEach(function (f) {
+      byId[f.id] = f;
+    });
+
+    function opt(id) {
+      return byId[id] ? { id: id, label: byId[id].label } : null;
+    }
+
+    var sourceOpts = [opt("quran"), opt("sunnah")].filter(Boolean);
+    var groupOpts = [opt("ulu"), opt("banuIsrail"), opt("arabicMessenger")].filter(Boolean);
+    var listOpts = [opt("further")].filter(Boolean);
 
     function section(title, items) {
       if (!items.length) return "";
@@ -710,25 +743,30 @@
 
     return (
       '<div class="prophets-toolbar">' +
-      '<div class="prophets-hero-title" aria-hidden="true">' +
-      '<span class="prophets-hero-title__de">Die Propheten</span>' +
-      '<span class="prophets-hero-title__ar" lang="ar" dir="rtl">الأنبياء</span>' +
-      "</div>" +
       '<p class="prophets-toolbar__intro">' +
       esc(intro) +
       "</p>" +
       renderLastReadCard() +
-      '<div class="prophets-search-block">' +
+      '<section class="prophets-search-panel" aria-label="Suche und Filter">' +
+      '<div class="prophets-pick-title">' +
+      "<h3>Schnell auswählen</h3>" +
+      "<span>Quelle · Gruppe · Bereich</span>" +
+      "</div>" +
+      '<div class="prophets-pick-grid">' +
+      renderFilterPickSelect("source", "Quelle", sourceOpts, filter) +
+      renderFilterPickSelect("group", "Gruppe", groupOpts, filter) +
+      renderFilterPickSelect("list", "Bereich", listOpts, filter) +
+      "</div>" +
+      '<div class="prophets-search-shell">' +
+      '<span class="prophets-search-icon" aria-hidden="true">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">' +
+      '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>' +
+      "</span>" +
       '<input class="prophets-search" id="prophetsSearch" type="search" placeholder="Name, Volk, Ereignis, Sūrah …" value="' +
       esc(query) +
       '" autocomplete="off" enterkeyhint="search" />' +
       "</div>" +
-      '<div class="prophets-filter-bar">' +
-      '<span class="prophets-filter-bar__label">Filter</span>' +
-      '<div class="prophets-filters" role="toolbar" aria-label="Propheten filtern">' +
-      filtersHtml +
-      "</div>" +
-      "</div>" +
+      "</section>" +
       "</div>" +
       body +
       '<p class="prophets-note">Nur freigegebene Angaben erscheinen in der normalen Suche. Research bleibt getrennt. Profilzahl ≠ Gesamtzahl aller Gesandten (Qurʾān 4:164 / 40:78).</p>'
@@ -1568,6 +1606,16 @@
       });
     }
 
+    root.querySelectorAll("[data-prophets-pick]").forEach(function (sel) {
+      if (sel.dataset.bound) return;
+      sel.dataset.bound = "1";
+      sel.addEventListener("change", function () {
+        var next = sel.value || "all";
+        writeState({ filter: next, scrollY: window.scrollY || 0 });
+        if (typeof global.render === "function") global.render();
+      });
+    });
+    /* Legacy chip buttons (falls Cache) */
     root.querySelectorAll("[data-prophets-filter]").forEach(function (btn) {
       if (btn.dataset.bound) return;
       btn.dataset.bound = "1";
