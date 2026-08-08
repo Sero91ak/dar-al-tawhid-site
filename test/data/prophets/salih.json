@@ -1112,7 +1112,7 @@
       "hadithNumber": "3378",
       "grading": "sahih",
       "gradingAuthority": "Ṣaḥīḥ al-Buḫārī",
-      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari.min.json#hadithnumber=3378",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/3378.min.json",
       "verificationStatus": "approved",
       "notes": "",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -1127,7 +1127,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Wortlaut aus Ṣaḥīḥ-Edition (fawazahmed0/hadith-api) gegen Nummer geprüft",
         "reviewPass2Note": "Rāwī, Nummer und Anspruch unabhängig geprüft"
-      }
+      },
+      "hadithId": "bukhari-3378",
+      "sunnahComUrl": "https://sunnah.com/bukhari:3378"
     },
     {
       "id": "salih-hijr-bukhari-3379-about",
@@ -1140,7 +1142,7 @@
       "hadithNumber": "3379",
       "grading": "sahih",
       "gradingAuthority": "Ṣaḥīḥ al-Buḫārī",
-      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari.min.json#hadithnumber=3379",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/3379.min.json",
       "verificationStatus": "approved",
       "notes": "Authentische Verbindung: Thamūd · al-Ḥiǧr · Kamelstute Ṣāliḥs · Brunnen.",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -1155,7 +1157,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Wortlaut aus Ṣaḥīḥ-Edition (fawazahmed0/hadith-api) gegen Nummer geprüft",
         "reviewPass2Note": "Rāwī, Nummer und Anspruch unabhängig geprüft"
-      }
+      },
+      "hadithId": "bukhari-3379",
+      "sunnahComUrl": "https://sunnah.com/bukhari:3379"
     }
   ],
   "prophetMuhammadAbout": [
@@ -1837,14 +1841,14 @@
       "number": "3378",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3378; reference={'book': 60, 'hadith': 52}",
-      "arabicOriginal": "",
+      "arabicOriginal": "حَدَّثَنَا مُحَمَّدُ بْنُ مِسْكِينٍ أَبُو الْحَسَنِ، حَدَّثَنَا يَحْيَى بْنُ حَسَّانَ بْنِ حَيَّانَ أَبُو زَكَرِيَّاءَ، حَدَّثَنَا سُلَيْمَانُ، عَنْ عَبْدِ اللَّهِ بْنِ دِينَارٍ، عَنِ ابْنِ عُمَرَ ـ رضى الله عنهما أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم لَمَّا نَزَلَ الْحِجْرَ فِي غَزْوَةِ تَبُوكَ أَمَرَهُمْ أَنْ لاَ يَشْرَبُوا مِنْ بِئْرِهَا، وَلاَ يَسْتَقُوا مِنْهَا فَقَالُوا قَدْ عَجَنَّا مِنْهَا، وَاسْتَقَيْنَا‏.‏ فَأَمَرَهُمْ أَنْ يَطْرَحُوا ذَلِكَ الْعَجِينَ وَيُهَرِيقُوا ذَلِكَ الْمَاءَ‏.‏ وَيُرْوَى عَنْ سَبْرَةَ بْنِ مَعْبَدٍ وَأَبِي الشُّمُوسِ أَنَّ النَّبِيَّ صلى الله عليه وسلم أَمَرَ بِإِلْقَاءِ الطَّعَامِ‏.‏ وَقَالَ أَبُو ذَرٍّ عَنِ النَّبِيَّ صلى الله عليه وسلم ‏ \"‏ مَنِ اعْتَجَنَ بِمَائِهِ ‏\"‏‏.‏",
       "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "ʿAbdullāh ibn ʿUmar",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
       "gradingAuthority": "Ṣaḥīḥ al-Buḫārī",
       "gradingReference": "Ṣaḥīḥ al-Buḫārī 3378",
-      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari.min.json#hadithnumber=3378",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/3378.min.json",
       "notes": "",
       "quotation": true,
       "review": {
@@ -1869,7 +1873,8 @@
       },
       "_matnInCanonicalHadith": true,
       "reviewPass1": "passed",
-      "reviewPass2": "passed"
+      "reviewPass2": "passed",
+      "sunnahComUrl": "https://sunnah.com/bukhari:3378"
     },
     {
       "id": "salih-hijr-bukhari-3379",
@@ -1885,14 +1890,14 @@
       "number": "3379",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3379; reference={'book': 60, 'hadith': 53}",
-      "arabicOriginal": "",
+      "arabicOriginal": "حَدَّثَنَا إِبْرَاهِيمُ بْنُ الْمُنْذِرِ، حَدَّثَنَا أَنَسُ بْنُ عِيَاضٍ، عَنْ عُبَيْدِ اللَّهِ، عَنْ نَافِعٍ، أَنَّ عَبْدَ اللَّهِ بْنَ عُمَرَ ـ رضى الله عنهما ـ أَخْبَرَهُ أَنَّ النَّاسَ نَزَلُوا مَعَ رَسُولِ اللَّهِ صلى الله عليه وسلم أَرْضَ ثَمُودَ الْحِجْرَ، فَاسْتَقَوْا مِنْ بِئْرِهَا، وَاعْتَجَنُوا بِهِ، فَأَمَرَهُمْ رَسُولُ اللَّهِ صلى الله عليه وسلم أَنْ يُهَرِيقُوا مَا اسْتَقَوْا مِنْ بِئْرِهَا، وَأَنْ يَعْلِفُوا الإِبِلَ الْعَجِينَ، وَأَمَرَهُمْ أَنْ يَسْتَقُوا مِنَ الْبِئْرِ الَّتِي كَانَ تَرِدُهَا النَّاقَةُ‏.‏ تَابَعَهُ أُسَامَةُ عَنْ نَافِعٍ‏.‏",
       "translationDe": "",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "ʿAbdullāh ibn ʿUmar",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
       "gradingAuthority": "Ṣaḥīḥ al-Buḫārī",
       "gradingReference": "Ṣaḥīḥ al-Buḫārī 3379",
-      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari.min.json#hadithnumber=3379",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/3379.min.json",
       "notes": "Authentische Verbindung: Thamūd · al-Ḥiǧr · Kamelstute Ṣāliḥs · Brunnen.",
       "quotation": true,
       "review": {
@@ -1917,7 +1922,8 @@
       },
       "_matnInCanonicalHadith": true,
       "reviewPass1": "passed",
-      "reviewPass2": "passed"
+      "reviewPass2": "passed",
+      "sunnahComUrl": "https://sunnah.com/bukhari:3379"
     },
     {
       "id": "salih-father-research",

@@ -296,7 +296,7 @@
     {
       "id": "zakariyya-carpenter-muslim-2379-about",
       "arabicOriginal": "حَدَّثَنَا هَدَّابُ بْنُ خَالِدٍ، حَدَّثَنَا حَمَّادُ بْنُ سَلَمَةَ، عَنْ ثَابِتٍ، عَنْ أَبِي رَافِعٍ، عَنْ أَبِي، هُرَيْرَةَ أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ كَانَ زَكَرِيَّاءُ نَجَّارًا ‏\"‏ ‏.‏",
-      "translationDe": "Der Gesandte Allahs ﷺ sagte: Zakariyyā war Zimmermann.",
+      "translationDe": "Niemand soll sagen: Ich bin besser als Yūnus ibn Mattā عليه السلام.",
       "sahabiRawi": "Abū Hurayrah رضي الله عنه",
       "work": "Ṣaḥīḥ Muslim",
       "kitab": "Kitāb al-Faḍāʾil",
@@ -304,7 +304,7 @@
       "hadithNumber": "2379",
       "grading": "sahih",
       "gradingAuthority": "Ṣaḥīḥ Muslim",
-      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim.min.json#hadithnumber=6162",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6162.min.json",
       "verificationStatus": "approved",
       "notes": "Nicht ausschmücken: Werkstattort, Einkommen, Möbel, Bauprojekte, Dauer.",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -319,7 +319,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Wortlaut aus Ṣaḥīḥ-Edition (fawazahmed0/hadith-api) gegen Nummer geprüft",
         "reviewPass2Note": "Rāwī, Nummer und Anspruch unabhängig geprüft"
-      }
+      },
+      "hadithId": "muslim-2379",
+      "sunnahComUrl": "https://sunnah.com/muslim:2379"
     }
   ],
   "prophetMuhammadAbout": [
@@ -1097,14 +1099,14 @@
       "number": "2379",
       "numberAlt": "",
       "volumePage": "API hadithnumber=6162; arabicnumber=2379; reference={'book': 43, 'hadith': 220}",
-      "arabicOriginal": "",
-      "translationDe": "",
+      "arabicOriginal": "حَدَّثَنَا هَدَّابُ بْنُ خَالِدٍ، حَدَّثَنَا حَمَّادُ بْنُ سَلَمَةَ، عَنْ ثَابِتٍ، عَنْ أَبِي رَافِعٍ، عَنْ أَبِي، هُرَيْرَةَ أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ ‏ \"‏ كَانَ زَكَرِيَّاءُ نَجَّارًا ‏\"‏ ‏.‏",
+      "translationDe": "Niemand soll sagen: Ich bin besser als Yūnus ibn Mattā عليه السلام.",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Abū Hurayrah رضي الله عنه",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
       "gradingAuthority": "Ṣaḥīḥ Muslim",
       "gradingReference": "Ṣaḥīḥ Muslim 2379",
-      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim.min.json#hadithnumber=6162",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6162.min.json",
       "notes": "Nicht ausschmücken: Werkstattort, Einkommen, Möbel, Bauprojekte, Dauer.",
       "quotation": true,
       "review": {
@@ -1129,7 +1131,8 @@
       },
       "_matnInCanonicalHadith": true,
       "reviewPass1": "passed",
-      "reviewPass2": "passed"
+      "reviewPass2": "passed",
+      "sunnahComUrl": "https://sunnah.com/muslim:2379"
     },
     {
       "id": "zakariyya-blood-relation-maryam-research",

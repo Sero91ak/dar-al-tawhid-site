@@ -453,9 +453,44 @@
     try { return navigator.onLine !== false; } catch (e) { return true; }
   }
 
+  function rewriteSourceUrl(url) {
+    var href = String(url || "").trim();
+    if (!href) return "";
+    /* Alte Collection-Dumps → einzelne Hadith-Datei */
+    var m = href.match(/editions\/ara-([a-z0-9-]+)\.min\.json#hadithnumber=(\d+)/i);
+    if (m) {
+      return (
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-" +
+        m[1] +
+        "/" +
+        m[2] +
+        ".min.json"
+      );
+    }
+    return href;
+  }
+
+  function sunnahComFromRef(url, sunnahComUrl) {
+    if (sunnahComUrl && /^https:\/\/sunnah\.com\//i.test(String(sunnahComUrl))) {
+      return String(sunnahComUrl);
+    }
+    var href = String(url || "");
+    var m = href.match(/editions\/ara-([a-z0-9-]+)(?:\.min\.json#hadithnumber=|\/)(\d+)/i);
+    if (!m) return "";
+    var coll = m[1];
+    var num = m[2];
+    if (coll === "bukhari") return "https://sunnah.com/bukhari:" + num;
+    if (coll === "muslim") return "https://sunnah.com/muslim:" + num;
+    if (coll === "tirmidhi") return "https://sunnah.com/tirmidhi:" + num;
+    if (coll === "abudawud") return "https://sunnah.com/abudawud:" + num;
+    if (coll === "nasai") return "https://sunnah.com/nasai:" + num;
+    if (coll === "ibnmajah") return "https://sunnah.com/ibnmajah:" + num;
+    return "";
+  }
+
   function openExternalSafe(url) {
     if (!url) return;
-    var href = String(url).trim();
+    var href = rewriteSourceUrl(url);
     if (!/^https:\/\//i.test(href)) {
       try {
         console.info("[prophets] blocked non-https external url", { errorType: "unsafe_external_url" });
@@ -475,8 +510,60 @@
       a.rel = "noopener noreferrer";
       a.click();
     } catch (e) {
-      try { window.open(href, "_blank", "noopener,noreferrer"); } catch (e2) {}
+      try {
+        window.open(href, "_blank", "noopener,noreferrer");
+      } catch (e2) {}
     }
+  }
+
+  function fullGermanText(it) {
+    var de = String((it && (it.translationDe || it.summary)) || "").trim();
+    return de;
+  }
+
+  function renderSourceActions(it) {
+    var ext = it && it.directReference && String(it.directReference).indexOf("http") === 0 ? it.directReference : "";
+    var sunnah = sunnahComFromRef(ext, it && it.sunnahComUrl);
+    var panelId = "psrc-" + String((it && (it.id || it.hadithId)) || Math.random()).replace(/[^\w-]+/g, "");
+    var metaBits = [
+      it.work || it.collection || it.source || "",
+      it.bookChapter || "",
+      it.number || it.hadithNumber || it.displayNumber || "",
+      it.grading || ""
+    ].filter(Boolean);
+    var rawi = it.sahabiRawi || it.rawi || "";
+    var ar = it.arabicOriginal || "";
+    var de = fullGermanText(it);
+    if (!ext && !sunnah && !ar && !de) return "";
+    return (
+      '<div class="prophets-source-actions">' +
+      '<button type="button" class="prophets-link" data-prophets-source-toggle="' +
+      esc(panelId) +
+      '" aria-expanded="false">Quelle öffnen</button>' +
+      (sunnah
+        ? '<button type="button" class="prophets-link prophets-link--ghost" data-external-url="' +
+          esc(sunnah) +
+          '">sunnah.com</button>'
+        : "") +
+      (ext
+        ? '<button type="button" class="prophets-link prophets-link--ghost" data-external-url="' +
+          esc(rewriteSourceUrl(ext)) +
+          '">API-Nachweis</button>'
+        : "") +
+      '</div><div class="prophets-source-panel" id="' +
+      esc(panelId) +
+      '" hidden>' +
+      (metaBits.length
+        ? '<p class="prophets-source-panel__meta">' + esc(metaBits.join(" · ")) + "</p>"
+        : "") +
+      (rawi ? '<p class="prophets-source-panel__meta">Rāwī: ' + esc(rawi) + "</p>" : "") +
+      (ar
+        ? '<p class="prophets-quote__ar" lang="ar" dir="rtl">' + esc(ar) + "</p>"
+        : "") +
+      (de ? '<p class="prophets-quote__de">' + esc(de) + "</p>" : "") +
+      '<p class="prophets-note">Authentische Zuordnung gemäß freigegebenem Profil · kein gekürzter Ersatztext.</p>' +
+      "</div>"
+    );
   }
 
   function profileFileFor(id) {
@@ -512,12 +599,36 @@
     function add(hid) {
       if (!hid || seen[hid]) return;
       seen[hid] = 1;
-      ids.push(hid);
+      ids.push(String(hid));
     }
-    (profile.claims || []).forEach(function (c) {
-      add(c.hadithId || (c.hadithRef && c.hadithRef.hadithId));
-    });
+    function fromItem(it) {
+      if (!it || typeof it !== "object") return;
+      add(it.hadithId || (it.hadithRef && it.hadithRef.hadithId));
+    }
+    (profile.claims || []).forEach(fromItem);
+    (profile.prophetAbout || []).forEach(fromItem);
+    var st = profile.statements || {};
+    (st.sunnah || []).forEach(fromItem);
+    (st.quran || []).forEach(fromItem);
     return ids;
+  }
+
+  function applyHadithToItem(it, h) {
+    if (!it || !h) return;
+    var de = String(it.translationDe || "").trim();
+    var truncated = !de || de.indexOf("…") >= 0 || /\.\.\.\s*$/.test(de) || de.length < 120;
+    if ((!it.arabicOriginal || String(it.arabicOriginal).length < 40) && h.arabicOriginal) {
+      it.arabicOriginal = h.arabicOriginal;
+    }
+    if (truncated && h.translationDe) it.translationDe = h.translationDe;
+    if ((!it.directReference || String(it.directReference).indexOf(".min.json#hadithnumber=") >= 0) && h.directReference) {
+      it.directReference = h.directReference;
+    }
+    if (!it.sunnahComUrl && h.sunnahComUrl) it.sunnahComUrl = h.sunnahComUrl;
+    if (!it.rawi && !it.sahabiRawi && h.rawi) it.rawi = h.rawi;
+    if (!it.grading && h.grading) it.grading = h.grading;
+    if (!it.bookChapter && h.bookChapter) it.bookChapter = h.bookChapter;
+    if (!it.hadithId && h.id) it.hadithId = h.id;
   }
 
   function hydrateProfileHadith(profile) {
@@ -532,16 +643,16 @@
       rows.forEach(function (h) {
         if (h && h.id) map[h.id] = h;
       });
-      (profile.claims || []).forEach(function (c) {
-        var hid = c.hadithId || (c.hadithRef && c.hadithRef.hadithId);
-        var h = hid && map[hid];
-        if (!h) return;
-        if (!c.arabicOriginal && h.arabicOriginal) c.arabicOriginal = h.arabicOriginal;
-        if (!c.translationDe && h.translationDe) c.translationDe = h.translationDe;
-        if (!c.directReference && h.directReference) c.directReference = h.directReference;
-        if (!c.rawi && h.rawi) c.rawi = h.rawi;
-        if (!c.grading && h.grading) c.grading = h.grading;
-      });
+      function hydrateList(list) {
+        (list || []).forEach(function (c) {
+          if (!c || typeof c !== "object") return;
+          var hid = c.hadithId || (c.hadithRef && c.hadithRef.hadithId);
+          applyHadithToItem(c, hid && map[hid]);
+        });
+      }
+      hydrateList(profile.claims);
+      hydrateList(profile.prophetAbout);
+      hydrateList(profile.statements && profile.statements.sunnah);
       profile.__hadithHydrated = true;
       return profile;
     });
@@ -1187,7 +1298,7 @@
                 ? '<p class="prophets-quote__ar" lang="ar" dir="rtl">' + esc(it.arabicOriginal) + "</p>"
                 : "") +
               '<p class="prophets-quote__de">' +
-              esc(it.translationDe || "") +
+              esc(fullGermanText(it)) +
               "</p>" +
               '<p class="prophets-quote__meta">' +
               esc(it.reference || it.source || "") +
@@ -1202,6 +1313,7 @@
                   esc(it.ayah) +
                   '">Im Qurʾān öffnen</button>'
                 : "") +
+              renderSourceActions(it) +
               "</article>"
             );
           })
@@ -1232,9 +1344,14 @@
       "</h3>" +
       items
         .map(function (it) {
-          var metaLine = [it.work, it.bookChapter, it.number].filter(Boolean).join(" · ");
+          var metaLine = [
+            it.work,
+            it.bookChapter,
+            it.number || it.hadithNumber || (it.hadithId ? String(it.hadithId).replace(/^[a-z]+-/, "") : "")
+          ]
+            .filter(Boolean)
+            .join(" · ");
           var rawi = it.sahabiRawi || it.rawi || "";
-          var ext = it.directReference && String(it.directReference).indexOf("http") === 0 ? it.directReference : "";
           return (
             '<article class="prophets-quote">' +
             '<span class="prophets-badge">' +
@@ -1244,17 +1361,13 @@
               ? '<p class="prophets-quote__ar" lang="ar" dir="rtl">' + esc(it.arabicOriginal) + "</p>"
               : "") +
             '<p class="prophets-quote__de">' +
-            esc(it.translationDe || it.summary || "") +
+            esc(fullGermanText(it)) +
             "</p>" +
             '<p class="prophets-quote__meta">' +
             esc(metaLine) +
             (rawi ? "<br>Rāwī: " + esc(rawi) : "") +
             "</p>" +
-            (ext
-              ? '<button type="button" class="prophets-link" data-external-url="' +
-                esc(ext) +
-                '">Quelle öffnen</button>'
-              : "") +
+            renderSourceActions(it) +
             "</article>"
           );
         })
@@ -1447,7 +1560,6 @@
 
     var claimList = filtered
       .map(function (c) {
-        var ext = c.directReference && String(c.directReference).indexOf("http") === 0 ? c.directReference : "";
         return (
           '<article class="prophets-quote" id="claim-' +
           esc(c.id) +
@@ -1455,25 +1567,24 @@
           '<span class="prophets-badge">' +
           esc(publicStatusLabel(c.grading || c.evidenceType || "")) +
           "</span>" +
-          '<p class="prophets-quote__de">' +
-          esc(c.claim) +
-          "</p>" +
           (c.arabicOriginal
             ? '<p class="prophets-quote__ar" lang="ar" dir="rtl">' + esc(c.arabicOriginal) + "</p>"
+            : "") +
+          '<p class="prophets-quote__de">' +
+          esc(c.translationDe || c.claim || "") +
+          "</p>" +
+          (c.translationDe && c.claim && c.translationDe !== c.claim
+            ? '<p class="prophets-quote__meta">' + esc(c.claim) + "</p>"
             : "") +
           '<p class="prophets-quote__meta">' +
           esc([c.source, c.reference || c.number, c.rawi || c.sahabiRawi].filter(Boolean).join(" · ")) +
           "</p>" +
-          (c.directReference && c.directReference.indexOf("#quran-surah/") === 0
+          (c.directReference && String(c.directReference).indexOf("#quran-surah/") === 0
             ? '<button type="button" class="prophets-link" data-nav-hash="' +
               esc(c.directReference) +
               '">Direktnachweis</button>'
             : "") +
-          (ext
-            ? '<button type="button" class="prophets-link" data-external-url="' +
-              esc(ext) +
-              '">Quelle öffnen</button>'
-            : "") +
+          renderSourceActions(c) +
           "</article>"
         );
       })
@@ -1987,6 +2098,26 @@
       btn.dataset.bound = "1";
       btn.addEventListener("click", function () {
         openExternalSafe(btn.getAttribute("data-external-url"));
+      });
+    });
+
+    root.querySelectorAll("[data-prophets-source-toggle]").forEach(function (btn) {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = "1";
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-prophets-source-toggle");
+        var panel = id ? document.getElementById(id) : null;
+        if (!panel) return;
+        var open = panel.hasAttribute("hidden");
+        if (open) panel.removeAttribute("hidden");
+        else panel.setAttribute("hidden", "");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+        btn.textContent = open ? "Quelle schließen" : "Quelle öffnen";
+        if (open) {
+          try {
+            panel.scrollIntoView({ block: "nearest", behavior: "smooth" });
+          } catch (e) {}
+        }
       });
     });
 

@@ -84,6 +84,25 @@
   ],
   "unlockedScopes": [
     {
+      "id": "prophets-quellen-full-v626-2026-08-08",
+      "approvedBy": "user-explicit-live-push",
+      "reason": "Nutzer: Propheten Quelle öffnen kaputt; Aussagen/Quellen gekürzt — voller Text + Direktnachweis Live+Test",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/prophets/",
+        "test/assets/prophets/",
+        "data/prophets/",
+        "test/data/prophets/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "fold-dual-pane-android-scroll-v625-2026-08-08",
       "approvedBy": "user-explicit-live-push",
       "reason": "Nutzer: Android Scroll noch kaputt; feste Fold-Regel (links Auswahl / rechts Inhalt) für Fold+Tablet; Live+Test push",

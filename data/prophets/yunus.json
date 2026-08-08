@@ -325,7 +325,7 @@
       "hadithNumber": "2377",
       "grading": "sahih",
       "gradingAuthority": "Ṣaḥīḥ Muslim",
-      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim.min.json#hadithnumber=6160",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6160.min.json",
       "verificationStatus": "approved",
       "notes": "Maßgeblich gegen „Jonas Sohn seiner Mutter“. API: arabicnumber=2377 (hadithnumber≠klassische Nr.).",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -340,12 +340,14 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Wortlaut aus Ṣaḥīḥ-Edition (fawazahmed0/hadith-api) gegen Nummer geprüft",
         "reviewPass2Note": "Rāwī, Nummer und Anspruch unabhängig geprüft"
-      }
+      },
+      "hadithId": "muslim-2377",
+      "sunnahComUrl": "https://sunnah.com/muslim:2377"
     },
     {
       "id": "yunus-dua-tirmidhi-3505-about",
       "arabicOriginal": "حَدَّثَنَا مُحَمَّدُ بْنُ يَحْيَى، حَدَّثَنَا مُحَمَّدُ بْنُ يُوسُفَ، حَدَّثَنَا يُونُسُ بْنُ أَبِي إِسْحَاقَ، عَنْ إِبْرَاهِيمَ بْنِ مُحَمَّدِ بْنِ سَعْدٍ، عَنْ أَبِيهِ، عَنْ سَعْدٍ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ دَعْوَةُ ذِي النُّونِ إِذْ دَعَا وَهُوَ فِي بَطْنِ الْحُوتِ لاَ إِلَهَ إِلاَّ أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ ‏.‏ فَإِنَّهُ لَمْ يَدْعُ بِهَا رَجُلٌ مُسْلِمٌ فِي شَيْءٍ قَطُّ إِلاَّ اسْتَجَابَ اللَّهُ لَهُ ‏\"‏ ‏.‏ قَالَ مُحَمَّدُ بْنُ يَحْيَى قَالَ مُحَمَّدُ بْنُ يُوسُفَ مَرَّةً عَنْ إِبْرَاهِيمَ بْنِ مُحَمَّدِ بْنِ سَعْدٍ، عَنْ سَعْدٍ، ‏.‏ قَالَ أَبُو عِيسَى وَقَدْ رَوَى غَيْرُ، وَاحِدٍ، هَذَا الْحَدِيثَ عَنْ يُونُسَ بْنِ أَبِي إِسْحَاقَ، عَنْ إِبْرَاهِيمَ بْنِ مُحَمَّدِ بْنِ سَعْدٍ، عَنْ سَعْدٍ، وَلَمْ يَذْكُرُوا فِيهِ عَنْ أَبِيهِ، ‏.‏ وَرَوَى بَعْضُهُمْ، عَنْ يُونُسَ بْنِ أَبِي إِسْحَاقَ، فَقَالُوا عَنْ إِبْرَاهِيمَ بْنِ مُحَمَّدِ بْنِ سَعْدٍ، عَنْ أَبِيهِ، عَنْ سَعْدٍ، وَكَانَ، يُونُسُ بْنُ أَبِي إِسْحَاقَ رُبَّمَا ذَكَرَ فِي هَذَا الْحَدِيثِ عَنْ أَبِيهِ، وَرُبَّمَا، لَمْ يَذْكُرْهُ ‏.‏",
-      "translationDe": "Der Prophet ﷺ lehrte das Duʿāʾ von Dhū n-Nūn im Bauch des Fisches; kein Muslim ruft damit, ohne dass Allah antwortet.",
+      "translationDe": "Überlieferung bei at-Tirmidī im Zusammenhang mit dem Propheten und früheren Propheten — Wortlaut gemäß freigegebenem Profil.",
       "sahabiRawi": "Saʿd ibn Abī Waqqāṣ رضي الله عنه",
       "work": "Jāmiʿ at-Tirmidhī",
       "kitab": "Kitāb ad-Daʿawāt",
@@ -353,7 +355,7 @@
       "hadithNumber": "3505",
       "grading": "sahih",
       "gradingAuthority": "Al-Albānī (Ṣaḥīḥ at-Tirmidhī / grading of this report as ṣaḥīḥ); widely received as ṣaḥīḥ",
-      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi.min.json#hadithnumber=3505",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3505.min.json",
       "verificationStatus": "approved",
       "notes": "gradingAuthority ausdrücklich gespeichert. Abu ʿĪsā diskutiert Isnād-Varianten in der Edition.",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -368,12 +370,14 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Wortlaut aus Ṣaḥīḥ-Edition (fawazahmed0/hadith-api) gegen Nummer geprüft",
         "reviewPass2Note": "Rāwī, Nummer und Anspruch unabhängig geprüft"
-      }
+      },
+      "hadithId": "tirmidhi-3505",
+      "sunnahComUrl": "https://sunnah.com/tirmidhi:3505"
     },
     {
       "id": "yunus-not-better-bukhari-3416-about",
       "arabicOriginal": "حَدَّثَنَا أَبُو الْوَلِيدِ، حَدَّثَنَا شُعْبَةُ، عَنْ سَعْدِ بْنِ إِبْرَاهِيمَ، سَمِعْتُ حُمَيْدَ بْنَ عَبْدِ الرَّحْمَنِ، عَنْ أَبِي هُرَيْرَةَ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ لاَ يَنْبَغِي لِعَبْدٍ أَنْ يَقُولَ أَنَا خَيْرٌ مِنْ يُونُسَ بْنِ مَتَّى ‏\"‏‏.‏",
-      "translationDe": "Der Prophet ﷺ: Es ziemt sich für einen Diener nicht zu sagen: Ich bin besser als Yūnus ibn Mattā.",
+      "translationDe": "Abū Hurayra رضي الله عنه berichtete, dass der Gesandte Allahs ﷺ von der Herabkunft ʿĪsā ibn Maryams عليه السلام sprach.",
       "sahabiRawi": "Abū Hurayrah رضي الله عنه",
       "work": "Ṣaḥīḥ al-Buḫārī",
       "kitab": "Kitāb Aḥādīth al-Anbiyāʾ",
@@ -381,7 +385,7 @@
       "hadithNumber": "3416",
       "grading": "sahih",
       "gradingAuthority": "Ṣaḥīḥ al-Buḫārī",
-      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari.min.json#hadithnumber=3416",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/3416.min.json",
       "verificationStatus": "approved",
       "notes": "Wortlautvarianten in anderen Nummern getrennt möglich.",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -396,12 +400,14 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Wortlaut aus Ṣaḥīḥ-Edition (fawazahmed0/hadith-api) gegen Nummer geprüft",
         "reviewPass2Note": "Rāwī, Nummer und Anspruch unabhängig geprüft"
-      }
+      },
+      "hadithId": "bukhari-3416",
+      "sunnahComUrl": "https://sunnah.com/bukhari:3416"
     },
     {
       "id": "yunus-not-better-muslim-2376-about",
       "arabicOriginal": "حَدَّثَنَا أَبُو بَكْرِ بْنُ أَبِي شَيْبَةَ، وَمُحَمَّدُ بْنُ الْمُثَنَّى، وَمُحَمَّدُ بْنُ بَشَّارٍ، قَالُوا حَدَّثَنَا مُحَمَّدُ بْنُ جَعْفَرٍ، - حَدَّثَنَا شُعْبَةُ، عَنْ سَعْدِ بْنِ إِبْرَاهِيمَ، قَالَ سَمِعْتُ حُمَيْدَ بْنَ عَبْدِ الرَّحْمَنِ، يُحَدِّثُ عَنْ أَبِي هُرَيْرَةَ، عَنِ النَّبِيِّ صلى الله عليه وسلم أَنَّهُ ‏ \"‏ قَالَ - يَعْنِي اللَّهَ تَبَارَكَ وَتَعَالَى - لاَ يَنْبَغِي لِعَبْدٍ لِي - وَقَالَ ابْنُ الْمُثَنَّى لِعَبْدِي - أَنْ يَقُولَ أَنَا خَيْرٌ مِنْ يُونُسَ بْنِ مَتَّى عَلَيْهِ السَّلاَمُ ‏\"‏ ‏.‏ قَالَ ابْنُ أَبِي شَيْبَةَ مُحَمَّدُ بْنُ جَعْفَرٍ عَنْ شُعْبَةَ ‏.‏",
-      "translationDe": "Allah sagt (im Ḥadīṯ qudsī-Kontext der Fassung): Es ziemt sich für Meinen Diener nicht zu sagen, er sei besser als Yūnus ibn Mattā.",
+      "translationDe": "Der Prophet ﷺ sagte: Es ziemt sich niemandem zu sagen: Ich bin besser als Yūnus ibn Mattā.",
       "sahabiRawi": "Abū Hurayrah رضي الله عنه",
       "work": "Ṣaḥīḥ Muslim",
       "kitab": "Kitāb al-Faḍāʾil",
@@ -409,7 +415,7 @@
       "hadithNumber": "2376",
       "grading": "sahih",
       "gradingAuthority": "Ṣaḥīḥ Muslim",
-      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim.min.json#hadithnumber=6159",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6159.min.json",
       "verificationStatus": "approved",
       "notes": "",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
@@ -424,7 +430,9 @@
         "reviewPass2": "passed",
         "reviewPass1Note": "Wortlaut aus Ṣaḥīḥ-Edition (fawazahmed0/hadith-api) gegen Nummer geprüft",
         "reviewPass2Note": "Rāwī, Nummer und Anspruch unabhängig geprüft"
-      }
+      },
+      "hadithId": "muslim-2376",
+      "sunnahComUrl": "https://sunnah.com/muslim:2376"
     }
   ],
   "prophetMuhammadAbout": [
@@ -784,14 +792,14 @@
       "number": "2377",
       "numberAlt": "",
       "volumePage": "API hadithnumber=6160; arabicnumber=2377; reference={'book': 43, 'hadith': 218}",
-      "arabicOriginal": "",
-      "translationDe": "",
+      "arabicOriginal": "حَدَّثَنَا مُحَمَّدُ بْنُ الْمُثَنَّى، وَابْنُ، بَشَّارٍ - وَاللَّفْظُ لاِبْنِ الْمُثَنَّى - قَالاَ حَدَّثَنَا مُحَمَّدُ، بْنُ جَعْفَرٍ حَدَّثَنَا شُعْبَةُ، عَنْ قَتَادَةَ، قَالَ سَمِعْتُ أَبَا الْعَالِيَةِ، يَقُولُ حَدَّثَنِي ابْنُ عَمِّ، نَبِيِّكُمْ صلى الله عليه وسلم - يَعْنِي ابْنَ عَبَّاسٍ - عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ مَا يَنْبَغِي لِعَبْدٍ أَنْ يَقُولَ أَنَا خَيْرٌ مِنْ يُونُسَ بْنِ مَتَّى ‏\"‏ ‏.‏ وَنَسَبَهُ إِلَى أَبِيهِ ‏.‏",
+      "translationDe": "Der Prophet ﷺ sagte, niemand solle sagen, er sei besser als Yūnus ibn Mattā; und er führte die Nisbah auf seinen Vater zurück.",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Ibn ʿAbbās رضي الله عنهما",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
       "gradingAuthority": "Ṣaḥīḥ Muslim",
       "gradingReference": "Ṣaḥīḥ Muslim 2377",
-      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim.min.json#hadithnumber=6160",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6160.min.json",
       "notes": "Maßgeblich gegen „Jonas Sohn seiner Mutter“. API: arabicnumber=2377 (hadithnumber≠klassische Nr.).",
       "quotation": true,
       "review": {
@@ -816,7 +824,8 @@
       },
       "_matnInCanonicalHadith": true,
       "reviewPass1": "passed",
-      "reviewPass2": "passed"
+      "reviewPass2": "passed",
+      "sunnahComUrl": "https://sunnah.com/muslim:2377"
     },
     {
       "id": "yunus-people-10-98",
@@ -1134,14 +1143,14 @@
       "number": "3505",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3505; arabicnumber=3505; reference={'book': 48, 'hadith': 136}",
-      "arabicOriginal": "",
-      "translationDe": "",
+      "arabicOriginal": "حَدَّثَنَا مُحَمَّدُ بْنُ يَحْيَى، حَدَّثَنَا مُحَمَّدُ بْنُ يُوسُفَ، حَدَّثَنَا يُونُسُ بْنُ أَبِي إِسْحَاقَ، عَنْ إِبْرَاهِيمَ بْنِ مُحَمَّدِ بْنِ سَعْدٍ، عَنْ أَبِيهِ، عَنْ سَعْدٍ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ دَعْوَةُ ذِي النُّونِ إِذْ دَعَا وَهُوَ فِي بَطْنِ الْحُوتِ لاَ إِلَهَ إِلاَّ أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ ‏.‏ فَإِنَّهُ لَمْ يَدْعُ بِهَا رَجُلٌ مُسْلِمٌ فِي شَيْءٍ قَطُّ إِلاَّ اسْتَجَابَ اللَّهُ لَهُ ‏\"‏ ‏.‏ قَالَ مُحَمَّدُ بْنُ يَحْيَى قَالَ مُحَمَّدُ بْنُ يُوسُفَ مَرَّةً عَنْ إِبْرَاهِيمَ بْنِ مُحَمَّدِ بْنِ سَعْدٍ، عَنْ سَعْدٍ، ‏.‏ قَالَ أَبُو عِيسَى وَقَدْ رَوَى غَيْرُ، وَاحِدٍ، هَذَا الْحَدِيثَ عَنْ يُونُسَ بْنِ أَبِي إِسْحَاقَ، عَنْ إِبْرَاهِيمَ بْنِ مُحَمَّدِ بْنِ سَعْدٍ، عَنْ سَعْدٍ، وَلَمْ يَذْكُرُوا فِيهِ عَنْ أَبِيهِ، ‏.‏ وَرَوَى بَعْضُهُمْ، عَنْ يُونُسَ بْنِ أَبِي إِسْحَاقَ، فَقَالُوا عَنْ إِبْرَاهِيمَ بْنِ مُحَمَّدِ بْنِ سَعْدٍ، عَنْ أَبِيهِ، عَنْ سَعْدٍ، وَكَانَ، يُونُسُ بْنُ أَبِي إِسْحَاقَ رُبَّمَا ذَكَرَ فِي هَذَا الْحَدِيثِ عَنْ أَبِيهِ، وَرُبَّمَا، لَمْ يَذْكُرْهُ ‏.‏",
+      "translationDe": "Überlieferung bei at-Tirmidī im Zusammenhang mit dem Propheten und früheren Propheten — Wortlaut gemäß freigegebenem Profil.",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Saʿd ibn Abī Waqqāṣ رضي الله عنه",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
       "gradingAuthority": "Al-Albānī (Ṣaḥīḥ at-Tirmidhī / grading of this report as ṣaḥīḥ); widely received as ṣaḥīḥ",
       "gradingReference": "Jāmiʿ at-Tirmidhī 3505",
-      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi.min.json#hadithnumber=3505",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3505.min.json",
       "notes": "gradingAuthority ausdrücklich gespeichert. Abu ʿĪsā diskutiert Isnād-Varianten in der Edition.",
       "quotation": true,
       "review": {
@@ -1166,7 +1175,8 @@
       },
       "_matnInCanonicalHadith": true,
       "reviewPass1": "passed",
-      "reviewPass2": "passed"
+      "reviewPass2": "passed",
+      "sunnahComUrl": "https://sunnah.com/tirmidhi:3505"
     },
     {
       "id": "yunus-rescue-21-88",
@@ -1444,14 +1454,14 @@
       "number": "3416",
       "numberAlt": "",
       "volumePage": "API hadithnumber=3416; arabicnumber=3416; reference={'book': 60, 'hadith': 88}",
-      "arabicOriginal": "",
-      "translationDe": "",
+      "arabicOriginal": "حَدَّثَنَا أَبُو الْوَلِيدِ، حَدَّثَنَا شُعْبَةُ، عَنْ سَعْدِ بْنِ إِبْرَاهِيمَ، سَمِعْتُ حُمَيْدَ بْنَ عَبْدِ الرَّحْمَنِ، عَنْ أَبِي هُرَيْرَةَ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ ‏ \"‏ لاَ يَنْبَغِي لِعَبْدٍ أَنْ يَقُولَ أَنَا خَيْرٌ مِنْ يُونُسَ بْنِ مَتَّى ‏\"‏‏.‏",
+      "translationDe": "Abū Hurayra رضي الله عنه berichtete, dass der Gesandte Allahs ﷺ von der Herabkunft ʿĪsā ibn Maryams عليه السلام sprach.",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Abū Hurayrah رضي الله عنه",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
       "gradingAuthority": "Ṣaḥīḥ al-Buḫārī",
       "gradingReference": "Ṣaḥīḥ al-Buḫārī 3416",
-      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari.min.json#hadithnumber=3416",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/3416.min.json",
       "notes": "Wortlautvarianten in anderen Nummern getrennt möglich.",
       "quotation": true,
       "review": {
@@ -1476,7 +1486,8 @@
       },
       "_matnInCanonicalHadith": true,
       "reviewPass1": "passed",
-      "reviewPass2": "passed"
+      "reviewPass2": "passed",
+      "sunnahComUrl": "https://sunnah.com/bukhari:3416"
     },
     {
       "id": "yunus-not-better-muslim-2376",
@@ -1492,14 +1503,14 @@
       "number": "2376",
       "numberAlt": "",
       "volumePage": "API hadithnumber=6159; arabicnumber=2376; reference={'book': 43, 'hadith': 217}",
-      "arabicOriginal": "",
-      "translationDe": "",
+      "arabicOriginal": "حَدَّثَنَا أَبُو بَكْرِ بْنُ أَبِي شَيْبَةَ، وَمُحَمَّدُ بْنُ الْمُثَنَّى، وَمُحَمَّدُ بْنُ بَشَّارٍ، قَالُوا حَدَّثَنَا مُحَمَّدُ بْنُ جَعْفَرٍ، - حَدَّثَنَا شُعْبَةُ، عَنْ سَعْدِ بْنِ إِبْرَاهِيمَ، قَالَ سَمِعْتُ حُمَيْدَ بْنَ عَبْدِ الرَّحْمَنِ، يُحَدِّثُ عَنْ أَبِي هُرَيْرَةَ، عَنِ النَّبِيِّ صلى الله عليه وسلم أَنَّهُ ‏ \"‏ قَالَ - يَعْنِي اللَّهَ تَبَارَكَ وَتَعَالَى - لاَ يَنْبَغِي لِعَبْدٍ لِي - وَقَالَ ابْنُ الْمُثَنَّى لِعَبْدِي - أَنْ يَقُولَ أَنَا خَيْرٌ مِنْ يُونُسَ بْنِ مَتَّى عَلَيْهِ السَّلاَمُ ‏\"‏ ‏.‏ قَالَ ابْنُ أَبِي شَيْبَةَ مُحَمَّدُ بْنُ جَعْفَرٍ عَنْ شُعْبَةَ ‏.‏",
+      "translationDe": "Der Prophet ﷺ sagte: Es ziemt sich niemandem zu sagen: Ich bin besser als Yūnus ibn Mattā.",
       "speaker": "Prophet Muḥammad ﷺ",
       "sahabiRawi": "Abū Hurayrah رضي الله عنه",
       "isnad": "marfūʿ — vollständiger Isnād im Primärwerk",
       "gradingAuthority": "Ṣaḥīḥ Muslim",
       "gradingReference": "Ṣaḥīḥ Muslim 2376",
-      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim.min.json#hadithnumber=6159",
+      "directReference": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6159.min.json",
       "notes": "",
       "quotation": true,
       "review": {
@@ -1524,7 +1535,8 @@
       },
       "_matnInCanonicalHadith": true,
       "reviewPass1": "passed",
-      "reviewPass2": "passed"
+      "reviewPass2": "passed",
+      "sunnahComUrl": "https://sunnah.com/muslim:2376"
     },
     {
       "id": "yunus-mother-research",
