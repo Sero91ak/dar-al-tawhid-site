@@ -2806,6 +2806,21 @@
         ".github/workflows/prophets-test-validate.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-phase11-golive-dryrun-v613-2026-08-08",
+      "approvedBy": "user-task-phase-11-golive-dryrun",
+      "note": "Phase 11: finale Abnahme + Go-Live Dry-Run — KEINE Production Writes, production=disabled, READY≠LIVE",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "test/assets/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "scripts/prophets-phase11-dry-run.js",
+        ".github/workflows/prophets-test-validate.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

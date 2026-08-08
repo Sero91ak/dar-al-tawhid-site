@@ -30,10 +30,17 @@
     } catch (e) {}
   }
 
-  function visitorLoadErrorHtml() {
+  function visitorLoadErrorHtml(opts) {
+    opts = opts || {};
+    var offlineUncached = !isOnline() || opts.offlineUncached;
+    var msg = offlineUncached
+      ? "Dieser Inhalt ist auf diesem Gerät noch nicht offline gespeichert."
+      : "Dieser Inhalt konnte nicht geladen werden.";
     return (
       '<div class="prophets-empty" role="alert">' +
-      "<p>Dieser Inhalt konnte nicht geladen werden.</p>" +
+      "<p>" +
+      msg +
+      "</p>" +
       '<button type="button" class="prophets-rail__back-mobile" data-prophets-back>Zur Übersicht</button>' +
       "</div>"
     );
@@ -302,6 +309,13 @@
 
   function openExternalSafe(url) {
     if (!url) return;
+    var href = String(url).trim();
+    if (!/^https:\/\//i.test(href)) {
+      try {
+        console.info("[prophets] blocked non-https external url", { errorType: "unsafe_external_url" });
+      } catch (e) {}
+      return;
+    }
     if (!isOnline()) {
       try {
         alert("Für den externen Direktnachweis ist eine Internetverbindung erforderlich.");
@@ -310,12 +324,12 @@
     }
     try {
       var a = document.createElement("a");
-      a.href = url;
+      a.href = href;
       a.target = "_blank";
       a.rel = "noopener noreferrer";
       a.click();
     } catch (e) {
-      try { window.open(url, "_blank", "noopener,noreferrer"); } catch (e2) {}
+      try { window.open(href, "_blank", "noopener,noreferrer"); } catch (e2) {}
     }
   }
 
@@ -672,7 +686,7 @@
     body += section("Belegte Propheten", packs.established || []);
     body += section("Weitere Qurʾān- und Sunnah-Personen", packs.further || []);
     if (!(packs.ulu || []).length && !(packs.established || []).length && !(packs.further || []).length) {
-      body = '<div class="prophets-empty">Keine Treffer für diese Suche.</div>';
+      body = '<div class="prophets-empty">Keine geprüften Treffer gefunden.</div>';
     }
 
     var intro =
@@ -1258,7 +1272,9 @@
   function renderStubDetail(meta, opts) {
     opts = opts || {};
     if (!meta) return notFoundHtml();
-    if (opts.loadFailed) return visitorLoadErrorHtml();
+    if (opts.loadFailed) {
+      return visitorLoadErrorHtml({ offlineUncached: !isOnline() });
+    }
     var disputed = isDisputedStatus(meta.prophetStatus);
     var note = disputedStatusNote(meta) || meta.note || "Die vollständige Wissensakte wird mit geprüften Claims aufgebaut.";
     return (

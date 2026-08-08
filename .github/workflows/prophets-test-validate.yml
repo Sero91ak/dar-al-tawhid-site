@@ -63,3 +63,6 @@ jobs:
 
       - name: Phase 10 pre-production prep (no live copy)
         run: node scripts/prophets-phase10-preprod.js
+
+      - name: Phase 11 go-live dry-run (no production write)
+        run: node scripts/prophets-phase11-dry-run.js
