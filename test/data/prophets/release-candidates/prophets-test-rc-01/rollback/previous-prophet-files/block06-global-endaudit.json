@@ -1,0 +1,176 @@
+{
+  "coreProfiles": 25,
+  "coreProfilesOnIndex": 25,
+  "researchProfiles": [
+    "shuayb",
+    "dawud",
+    "ayyub",
+    "adam",
+    "harun"
+  ],
+  "researchProfileCount": 5,
+  "approvedCoreQuranExplicit": [
+    "salih",
+    "yaqub",
+    "ismail",
+    "nuh",
+    "ilyas",
+    "sulayman",
+    "hud",
+    "isa",
+    "lut",
+    "yahya",
+    "yunus",
+    "yusuf",
+    "ishaq",
+    "musa",
+    "zakariyya",
+    "ibrahim",
+    "alyasa",
+    "idris",
+    "muhammad"
+  ],
+  "approvedDisputedOrSpecial": [
+    "dhul-kifl",
+    "luqman",
+    "uzayr",
+    "dhul-qarnayn",
+    "yusha-ibn-nun",
+    "al-khidr"
+  ],
+  "approvedProphethoodClaims": 36,
+  "disputedProphethoodClaims": 6,
+  "approvedQuranClaims": 1207,
+  "approvedSunnahClaims": 70,
+  "approvedAtharClaims": 0,
+  "daifReports": 2,
+  "israiliyyatReports": 9,
+  "historicalOnlyReports": 2,
+  "missingSourceReferences": [],
+  "brokenDirectLinks": [],
+  "brokenQuranLinks": [],
+  "duplicateHadiths": [],
+  "orphanClaimIds": [],
+  "unresolvedCorrelations": [
+    {
+      "id": "uzayr-2-259",
+      "status": "research"
+    },
+    {
+      "id": "dhul-qarnayn-historical-identity",
+      "status": "unresolved"
+    },
+    {
+      "id": "yusha-report-A-B-correlation",
+      "status": "strong_but_documented_separately"
+    },
+    {
+      "id": "al-khidr-prophethood-inference",
+      "status": "scholarly_disputed_or_inferred"
+    }
+  ],
+  "unresolvedProphethoodStatuses": [
+    {
+      "id": "shuayb",
+      "prophetStatus": "quran_explicit",
+      "note": "research_stub_roles_without_evidence_claims"
+    },
+    {
+      "id": "dawud",
+      "prophetStatus": "quran_explicit",
+      "note": "research_stub_roles_without_evidence_claims"
+    },
+    {
+      "id": "ayyub",
+      "prophetStatus": "quran_explicit",
+      "note": "research_stub_roles_without_evidence_claims"
+    },
+    {
+      "id": "dhul-kifl",
+      "prophetStatus": "scholarly_disputed"
+    },
+    {
+      "id": "luqman",
+      "prophetStatus": "scholarly_disputed"
+    },
+    {
+      "id": "adam",
+      "prophetStatus": "quran_explicit",
+      "note": "research_stub_roles_without_evidence_claims"
+    },
+    {
+      "id": "uzayr",
+      "prophetStatus": "scholarly_disputed"
+    },
+    {
+      "id": "dhul-qarnayn",
+      "prophetStatus": "scholarly_disputed"
+    },
+    {
+      "id": "yusha-ibn-nun",
+      "prophetStatus": "scholarly_source_correlation"
+    },
+    {
+      "id": "al-khidr",
+      "prophetStatus": "scholarly_disputed_or_inferred"
+    },
+    {
+      "id": "harun",
+      "prophetStatus": "quran_explicit",
+      "note": "research_stub_roles_without_evidence_claims"
+    }
+  ],
+  "nabiEvidenceValidatorFailures": [],
+  "familyCrossCheckIssues": [],
+  "profileGroups": {
+    "A_confirmedProphets": "Hauptliste mit quran_explicit / starker Beleglage (inkl. Muḥammad ﷺ)",
+    "B_quranNamedDisputedProphethood": [
+      "luqman",
+      "dhul-qarnayn",
+      "uzayr",
+      "dhul-kifl"
+    ],
+    "C_sunnahNamedSourceCorrelation": [
+      "al-khidr",
+      "yusha-ibn-nun"
+    ],
+    "D_nonProphetOrDisputedQuranPersons": [
+      "luqman",
+      "dhul-qarnayn",
+      "uzayr",
+      "al-khidr"
+    ],
+    "E_internalResearchOnly": [
+      "adam",
+      "ayyub",
+      "shuayb",
+      "harun",
+      "dawud"
+    ],
+    "note": "Gruppen dürfen visuell nicht alle als unstrittige Propheten erscheinen."
+  },
+  "notes": [
+    "Keine neuen Core-Propheten erfunden.",
+    "124000 nicht als sichere Gesamtzahl.",
+    "displayCount dynamisch — keine hardcodierte 25 als Gesamtzahl aller Propheten.",
+    "Qurʾān 4:164 / 40:78: bekannte Profile ≠ Gesamtzahl aller Gesandten.",
+    "production bleibt disabled.",
+    "Block 03 (Ayyūb/Shuʿayb/Hārūn/Dāwūd) und Ādam noch research — erwartet; nabī-Rollen dort ohne Evidence-Claims → kein Hard-Fail bis approved.",
+    "Sonderblock-06-Personen stehen in disputed/research-Listen, nicht als unstrittige Core-Propheten."
+  ],
+  "absoluteEndRules": {
+    "noArtificialExtraCoreProphets": true,
+    "alKhidrNameViaSahihSunnah": true,
+    "alKhidrProphethoodNotQuranExplicit": true,
+    "luqmanNotQuranExplicitProphet": true,
+    "dhulQarnaynNoAlexanderAsRevelationFact": true,
+    "uzayrNotAutoEquals2259": true,
+    "noFurtherBulkImportUntilAudit": true
+  },
+  "globalReviewPass1": "PASS",
+  "globalReviewPass2": "PASS",
+  "production": "disabled",
+  "test": "enabled",
+  "finalValidation": "PASS_WITH_NOTES",
+  "generatedAt": "2026-08-08T09:14:12.559115+00:00"
+}

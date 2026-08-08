@@ -1,0 +1,16 @@
+{
+  "prophetId": "muhammad",
+  "profileType": "indexed_biography",
+  "modules": [
+    "quran",
+    "hadith",
+    "sirah",
+    "family",
+    "events",
+    "sources"
+  ],
+  "rule": "secondary biography != primary evidence",
+  "present": true,
+  "claimCount": 28,
+  "note": "Profile must not imply complete Sunnah corpus in one file; modular indexing for production UI."
+}

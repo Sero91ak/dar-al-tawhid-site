@@ -60,3 +60,6 @@ jobs:
 
       - name: Guard — production must stay disabled
         run: node scripts/prophets-phase07-production-guard.js
+
+      - name: Phase 10 pre-production prep (no live copy)
+        run: node scripts/prophets-phase10-preprod.js

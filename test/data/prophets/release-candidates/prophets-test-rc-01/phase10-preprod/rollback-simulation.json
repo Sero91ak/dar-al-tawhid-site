@@ -1,0 +1,22 @@
+{
+  "result": "PASS",
+  "steps": [
+    {
+      "step": "RC present",
+      "ok": true
+    },
+    {
+      "step": "rollback snapshot present",
+      "ok": true
+    },
+    {
+      "step": "RC validate after rollback package create",
+      "ok": true
+    },
+    {
+      "step": "production remains disabled",
+      "ok": true
+    }
+  ],
+  "note": "No live install/uninstall performed — package integrity + RC re-validate only."
+}

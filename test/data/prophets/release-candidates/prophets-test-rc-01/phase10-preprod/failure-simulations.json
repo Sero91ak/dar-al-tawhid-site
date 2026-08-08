@@ -1,0 +1,35 @@
+{
+  "results": [
+    {
+      "name": "corrupt_musa_json",
+      "expectFail": true,
+      "exit": 1,
+      "pass": true
+    },
+    {
+      "name": "approved_without_source",
+      "expectFail": true,
+      "exit": 1,
+      "pass": true
+    },
+    {
+      "name": "invalid_quran_115",
+      "expectFail": true,
+      "exit": 1,
+      "pass": true
+    },
+    {
+      "name": "research_leak_simulation_detected",
+      "expectFail": true,
+      "exit": 1,
+      "pass": true
+    },
+    {
+      "name": "clean_search_no_zulaykha_as_quran_fact",
+      "expectFail": false,
+      "exit": 0,
+      "pass": true
+    }
+  ],
+  "musaRestored": true
+}

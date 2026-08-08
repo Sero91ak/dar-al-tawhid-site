@@ -1,0 +1,51 @@
+{
+  "releaseCandidate": "prophets-test-rc-01",
+  "note": "DOCUMENTATION ONLY — do not copy automatically",
+  "autoSyncForbidden": true,
+  "mappings": [
+    {
+      "test": "test/data/prophets/index.json",
+      "plannedProduction": "data/prophets/index.json"
+    },
+    {
+      "test": "test/data/prophets/*.json (core profiles)",
+      "plannedProduction": "data/prophets/*.json"
+    },
+    {
+      "test": "test/data/prophets/research/",
+      "plannedProduction": "data/prophets/research/"
+    },
+    {
+      "test": "test/data/prophets/hadith/",
+      "plannedProduction": "data/prophets/hadith/"
+    },
+    {
+      "test": "test/data/prophets/athar/",
+      "plannedProduction": "data/prophets/athar/"
+    },
+    {
+      "test": "test/data/prophets/relations/",
+      "plannedProduction": "data/prophets/relations/"
+    },
+    {
+      "test": "test/data/prophets/sources/",
+      "plannedProduction": "data/prophets/sources/"
+    },
+    {
+      "test": "test/data/prophets/search-index.json",
+      "plannedProduction": "data/prophets/search-index.json"
+    },
+    {
+      "test": "test/assets/prophets/prophets.js",
+      "plannedProduction": "assets/prophets/prophets.js"
+    },
+    {
+      "test": "test/assets/prophets/prophets.css",
+      "plannedProduction": "assets/prophets/prophets.css"
+    }
+  ],
+  "productionEnvTargetAfterExplicitApprovalOnly": {
+    "test": "enabled",
+    "production": "disabled_until_explicit_user_approval"
+  }
+}

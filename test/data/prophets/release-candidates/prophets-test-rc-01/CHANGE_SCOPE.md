@@ -12,7 +12,6 @@ ADDED:
 - test/data/prophets/release-candidates/
 
 MODIFIED:
-- scripts/prophets-phase08-qa.js (stop writing live data/prophets report)
 - test/data/prophets/** (reviewPass stamps, RC metadata, search index — no new religious claims)
 - test/assets/prophets/prophets.js (load errors, offline message, search normalize)
 - test/index.html / test/version.json (shell v611)

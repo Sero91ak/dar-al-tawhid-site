@@ -2791,6 +2791,21 @@
         "scripts/prophets-phase08-qa.js"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-phase10-preprod-prep-v612-2026-08-08",
+      "approvedBy": "user-task-phase-10-preprod-prep",
+      "note": "Phase 10: Produktions-Rollout VORBEREITEN only — freeze/hash/diff/rollback/preflight; production=disabled; NO live copy/deploy",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "test/assets/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "scripts/prophets-phase10-preprod.js",
+        ".github/workflows/prophets-test-validate.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
