@@ -1,13 +1,13 @@
 {
   "releaseCandidate": "prophets-test-rc-01",
   "environment": "test",
-  "generatedAt": "2026-08-08T10:25:20.467Z",
+  "generatedAt": "2026-08-08T10:41:47.167Z",
   "stats": {
     "profiles": 30,
-    "claimsApproved": 1572,
-    "claimsResearch": 8,
-    "quranRefsChecked": 1246,
-    "hadithCanonical": 49,
+    "claimsApproved": 1730,
+    "claimsResearch": 9,
+    "quranRefsChecked": 1369,
+    "hadithCanonical": 58,
     "relations": 7,
     "externalLinksChecked": 0,
     "externalLinksOk": 0,
@@ -26,7 +26,9 @@
     "researchIsolation": "PASS",
     "productionLock": "PASS"
   },
-  "warnings": [],
+  "warnings": [
+    "possible hadith duplicate (keep as variants if wording differs): muslim-165 ~ muslim-165.02"
+  ],
   "errors": [],
   "productionEnabled": false,
   "finalResult": "PASS",

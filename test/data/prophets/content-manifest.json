@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-08T10:14:58.528Z",
+  "generatedAt": "2026-08-08T10:41:53.821Z",
   "environment": "test",
   "productionEnabled": false,
-  "releaseCandidate": "prophets-test-rc-01",
-  "contentVersion": "prophets-test-rc-01",
+  "releaseCandidate": "prophets-final-test-v1",
+  "contentVersion": "prophets-final-test-v1",
   "coreProfiles": [
     {
       "id": "adam",
@@ -46,77 +46,77 @@
       "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "ibrahim.json",
-      "claimCount": 242
+      "claimCount": 243
     },
     {
       "id": "lut",
       "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "lut.json",
-      "claimCount": 124
+      "claimCount": 127
     },
     {
       "id": "ismail",
       "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "ismail.json",
-      "claimCount": 38
+      "claimCount": 43
     },
     {
       "id": "ishaq",
       "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "ishaq.json",
-      "claimCount": 31
+      "claimCount": 34
     },
     {
       "id": "yaqub",
       "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "yaqub.json",
-      "claimCount": 57
+      "claimCount": 63
     },
     {
       "id": "yusuf",
       "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "yusuf.json",
-      "claimCount": 152
+      "claimCount": 160
     },
     {
       "id": "ayyub",
-      "profileStatus": "research",
+      "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "ayyub.json",
-      "claimCount": 0
+      "claimCount": 16
     },
     {
       "id": "shuayb",
-      "profileStatus": "research",
+      "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "shuayb.json",
-      "claimCount": 0
+      "claimCount": 15
     },
     {
       "id": "musa",
       "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "musa.json",
-      "claimCount": 188
+      "claimCount": 260
     },
     {
       "id": "harun",
-      "profileStatus": "research",
+      "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "harun.json",
-      "claimCount": 0
+      "claimCount": 22
     },
     {
       "id": "dawud",
-      "profileStatus": "research",
+      "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "dawud.json",
-      "claimCount": 0
+      "claimCount": 26
     },
     {
       "id": "sulayman",
@@ -130,7 +130,7 @@
       "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "ilyas.json",
-      "claimCount": 20
+      "claimCount": 21
     },
     {
       "id": "alyasa",
@@ -144,7 +144,7 @@
       "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "yunus.json",
-      "claimCount": 30
+      "claimCount": 32
     },
     {
       "id": "zakariyya",
@@ -165,14 +165,14 @@
       "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "isa.json",
-      "claimCount": 35
+      "claimCount": 37
     },
     {
       "id": "muhammad",
       "profileStatus": "approved",
       "prophetStatus": "quran_explicit",
       "profileFile": "muhammad.json",
-      "claimCount": 28
+      "claimCount": 30
     }
   ],
   "researchProfiles": [
@@ -221,14 +221,14 @@
   ],
   "profileCount": 30,
   "claimCount": {
-    "approved": 1547,
-    "research": 8,
+    "approved": 1730,
+    "research": 9,
     "disputed": 0,
     "rejected": 0
   },
   "evidenceCount": {
-    "quran": 1238,
-    "sahih": 76,
+    "quran": 1369,
+    "sahih": 84,
     "hasan": 0,
     "athar": 0
   },
@@ -240,6 +240,6 @@
     "unverified": 48
   },
   "sourceCount": {
-    "canonicalHadith": 49
+    "canonicalHadith": 58
   }
 }

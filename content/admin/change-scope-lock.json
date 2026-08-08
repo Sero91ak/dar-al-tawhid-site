@@ -2853,6 +2853,24 @@
         ".github/workflows/prophets-test-validate.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-phase12-final-test-v1-v616-2026-08-08",
+      "approvedBy": "user-task-phase-12-finalversion",
+      "note": "Phase 12 FINAL: alle Restprofile + Endaudit + prophets-final-test-v1 Freeze — production=disabled, NO live",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "test/assets/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "scripts/prophets_phase12_final_build.py",
+        "scripts/prophets-phase12-final-audit.js",
+        "scripts/prophets-phase12-final-freeze.js",
+        "scripts/prepare-prophets-rc.js",
+        ".github/workflows/prophets-test-validate.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

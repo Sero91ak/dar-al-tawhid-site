@@ -121,7 +121,7 @@ function main() {
     }
 
     if (changed) {
-      prof.contentVersion = "prophets-test-rc-01";
+      prof.contentVersion = process.env.PROPHETS_CONTENT_VERSION || "prophets-final-test-v1";
       prof.updatedAt = new Date().toISOString();
       fs.writeFileSync(file, JSON.stringify(prof, null, 2) + "\n");
     }
@@ -130,16 +130,17 @@ function main() {
   // index content version
   const indexPath = path.join(TEST, "index.json");
   const idx = JSON.parse(fs.readFileSync(indexPath, "utf8"));
+  const cv = process.env.PROPHETS_CONTENT_VERSION || "prophets-final-test-v1";
   idx.env = idx.env || {};
   idx.env.test = "enabled";
   idx.env.production = "disabled";
-  idx.contentVersion = "prophets-test-rc-01";
-  idx.releaseCandidate = "prophets-test-rc-01";
+  idx.contentVersion = cv;
+  idx.releaseCandidate = cv;
   idx.updatedAt = new Date().toISOString();
   idx.phase09 = true;
   fs.writeFileSync(indexPath, JSON.stringify(idx, null, 2) + "\n");
 
-  console.log(JSON.stringify({ stampedClaims: stamped, stubIdentityFixed: stubFixed, contentVersion: "prophets-test-rc-01" }, null, 2));
+  console.log(JSON.stringify({ stampedClaims: stamped, stubIdentityFixed: stubFixed, contentVersion: cv }, null, 2));
 }
 
 main();

@@ -1,0 +1,415 @@
+{
+  "releaseCandidate": "prophets-final-test-v1",
+  "algorithm": "SHA-256",
+  "generatedAt": "2026-08-08T10:41:46.402Z",
+  "entries": [
+    {
+      "path": "scripts/prophets-phase12-final-audit.js",
+      "sha256": "e50084f7aa95e2977aa66b34476f8abc4def3cd36aed2fcd567856639b6bd09d"
+    },
+    {
+      "path": "scripts/prophets_phase12_final_build.py",
+      "sha256": "489e29776f07d3374351d464fee36b357fbeed36218de6d27908c2d8ef1ff08a"
+    },
+    {
+      "path": "scripts/validate-prophets-all.js",
+      "sha256": "e9cdbdd946034894f621d1a6ac53f6dda636eab8412ac9c21bad1fac13b0f7d8"
+    },
+    {
+      "path": "test/assets/prophets/prophets.css",
+      "sha256": "41540db8549bc1e0e70c1c6174d02c7634e673724208a4172c93b11aec7917bb"
+    },
+    {
+      "path": "test/assets/prophets/prophets.js",
+      "sha256": "997fc240b0d47d31e2a77cb1cf92626a7cfaddbb573bf414dc2da0c69e2ee644"
+    },
+    {
+      "path": "test/data/prophets/adam.json",
+      "sha256": "49a1f7150c84228b5ef3ec623ca482556330473c0d0a7ef79234b4a3c808fbec"
+    },
+    {
+      "path": "test/data/prophets/alyasa.json",
+      "sha256": "957a50ea8aef31206d13e9aef8d164708a7cbded265e242436b44d6c1243f956"
+    },
+    {
+      "path": "test/data/prophets/ayyub.json",
+      "sha256": "04d10bede2c361e8f83d07b998da7e7696f0c8c5b9488576fcdf9c76a9983d96"
+    },
+    {
+      "path": "test/data/prophets/dawud.json",
+      "sha256": "98638cb10a46f669c93599fbe8f23160c3d0478da4d2afa5e9e8e7ffbd4170f8"
+    },
+    {
+      "path": "test/data/prophets/dhul-kifl.json",
+      "sha256": "6db7a6837adac38944b2a3d5c33ae5e0d88e52bbc73b82c96d3d2df9ab14328d"
+    },
+    {
+      "path": "test/data/prophets/hadith/ahmad-8315.json",
+      "sha256": "159793acf35a400be41448c7763e6d6169c28b5f58deb96f004ffa1c62ed2df8"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-1131.json",
+      "sha256": "96298379fc06bbf97371a4e9ed34eb08295fb60ce033bcd5fc9155feaf3f48fb"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-2072.json",
+      "sha256": "426a30cf9e1c6dc9eac3f969e82a388fd8f79a7d2a3f5cb9f5503c4ebed2bfa8"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3.json",
+      "sha256": "540de0dbebb189bc9ff6132415a30771da751a01752dec9fbfd6299356dd81e9"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3124.json",
+      "sha256": "d6b9f14dbd7440c929a092b01c6fc1f06aeb92c47fb84185f29313daa6215615"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3326.json",
+      "sha256": "b14e00c17efb76df7760095310b54900d781ae4cac441e1c01ae9c85b544f5d4"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3330.json",
+      "sha256": "c3d5101c72648c56b1f30f8364e3021e978683301b146a86d040e62e146681cd"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3337.json",
+      "sha256": "e9177600707440f06cd5eaac0e38e4dcc3c803623e1cadefc18cb6f0df97ded3"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3339.json",
+      "sha256": "7e68ffe9fd19184ff6a04af4229de8ae941eb34c0d55ef6db8a83995d519dfa2"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3340.json",
+      "sha256": "20ebe1383fbcc2528a36f3ebeb48f33d96f1c792226c966a1f810cb9789ebb6c"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3358.json",
+      "sha256": "d7c21c1c4352b02dd724af66fecf5074edfd5c25fe7ef1aeb2ed9287cf69b481"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3361.json",
+      "sha256": "46c4ba5de50505204ee9d4a03ecc162b33cc0efcfb6f999a9271cc03ec54dc00"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3362.json",
+      "sha256": "fd1fcbab063bc2960fdb3162e646cdfcc3a1203ef0cd3bc093d282a3557455a7"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3363.json",
+      "sha256": "dd66400ae368fc44e59681010e9349f9eeaf8d9684d6b6f8778dade1c94eba8b"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3364.json",
+      "sha256": "9548244f46b5d858b6fb9ba00d33c61328dc02e30560008126393e17230d43c2"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3375.json",
+      "sha256": "d229f5391c3e7b535539fd37f36ceac378c4c57be620c57afc21521fe64715dc"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3378.json",
+      "sha256": "cbb505951212c44d8e26adb357ffcff11e2ef135efa3e5a2b9c08bd3c55912fc"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3379.json",
+      "sha256": "65eeb62d08890b048d02c20052a7a983974a037f015d2e217845e3e991957d59"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3387.json",
+      "sha256": "a47c2fe9c2a8fd3105861ba1b8b897536cb3dca2905ebf15ab1d60f45b58cbae"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3390.json",
+      "sha256": "f7223a3a7f2f0ac5a9c75d6977161d0624f7465a07af2ef6d0531f45ccae6917"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3391.json",
+      "sha256": "fb0aedb5cfd494505af4402986fb01c5046bc5af569c216bf43b2f150c0644cc"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3394.json",
+      "sha256": "4700d02670c80d978e9ec4bc036082462b3efcbd7423f2d6bffeb20b9c8b1fde"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3397.json",
+      "sha256": "b8dfc1abeac709d68b489aae65398dc29a35692bf8c4eef0a03064d9a9baddea"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3400.json",
+      "sha256": "86d511d05c8fc206e44518ab18991b0c3eed4081f9c467be2b841d9d58246172"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3401.json",
+      "sha256": "c75e4cdd18b5d5e55122cad2446ad0910132c0bd0ad944b62b09c179bd12cf6d"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3404.json",
+      "sha256": "4f141ba5cb9914549cb976039aca7a22de939482ea1ba806ea9495dec352ff8b"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3407.json",
+      "sha256": "4ed213727c3b96568e4de087c2269e02019f3cd4a1a8c09d099e920a18d15be7"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3409.json",
+      "sha256": "a246c8d5a6313348c38cf5b15ea99084e8cdf86437cc79c80bd5fc8fd0876e94"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3416.json",
+      "sha256": "4a7b324ec1d4fef3cffcd153a3dac0bcba6638fa54da388133a5fc1c69eac8bd"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3417.json",
+      "sha256": "1a1c5ee617842fe404cfd645bbf4ee38c713f3f084fa9b7242704e9696681427"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3423.json",
+      "sha256": "071ee9c4388697261e0c322015f11cd5bf3b696855f882455b91fdcf5a45bfe7"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3424.json",
+      "sha256": "321e02acc9026c16b0b591eec6c12df2e7f9c1e00c07a558883585ec236cb2d1"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3430.json",
+      "sha256": "aa22f166abc7b19c83b1608a1412431e8f1c57f583cd0e05870b5a1e39e6c3d8"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3448.json",
+      "sha256": "bb014fcb9f2ecfe1f84bb291ac84330f899824027a11baff0f2094053c67d74d"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3455.json",
+      "sha256": "7b67eb29098b83bbe738f9f0f009c124554fab5ceb18a3b7bb10af31c4d0788f"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3535.json",
+      "sha256": "d902ac139f6e71ac570e1045c04aa5eb4860f28c7d75cfc14241ca8de274e311"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-3887.json",
+      "sha256": "1c0d446f76c4f0d45b025c959fa52f2672784f7602e74a8ef72ab46fdfef2cb9"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-6298.json",
+      "sha256": "618214e31de746b3ce52f34663fac5f229e21013a798546db0da0662cb7c02a7"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-7469.json",
+      "sha256": "53c25a99ebf9d29eb90654aea938a2a6c81fe6101033aaf2cca444115b4a2d00"
+    },
+    {
+      "path": "test/data/prophets/hadith/bukhari-7517.json",
+      "sha256": "3dc4ed5eed59a11f615c615e1de4dcacad96c0264e43480771bb097deb6bbef1"
+    },
+    {
+      "path": "test/data/prophets/hadith/muslim-1162.json",
+      "sha256": "e303db79573917b8d9b189c63a82fa6dc7313e7690ec41026a20188412df34b6"
+    },
+    {
+      "path": "test/data/prophets/hadith/muslim-151.01.json",
+      "sha256": "16b0958c12939366355d76e328d3b5047158e7a649ef5cd0f7c875e89877fb9f"
+    },
+    {
+      "path": "test/data/prophets/hadith/muslim-155.json",
+      "sha256": "fb8341c1623f694ed024c0a891e049009325814c4b37cb65888b8f528acca2fc"
+    },
+    {
+      "path": "test/data/prophets/hadith/muslim-162.01.json",
+      "sha256": "337ecc9b360e718f4782ba4e427657986c64815a52b86785036d246ccee4bb1c"
+    },
+    {
+      "path": "test/data/prophets/hadith/muslim-165.02.json",
+      "sha256": "ac0032dbf14bfc34ad9db25baf8e96c042112ad4129944b94a955be419a5bee0"
+    },
+    {
+      "path": "test/data/prophets/hadith/muslim-165.json",
+      "sha256": "0f55bfa8428c53612aae28f4c2eefe5e3cc098c69358ada6ce38e5e85d701d3c"
+    },
+    {
+      "path": "test/data/prophets/hadith/muslim-1747.json",
+      "sha256": "02a6ac23893513cb9c042b05f094e17e5b69ec7cf5cec11e9f3a7b6ced864945"
+    },
+    {
+      "path": "test/data/prophets/hadith/muslim-1976.json",
+      "sha256": "b7b46a80f04e556997680a322e1898fd4271a65403cf817c4b98bd69a45ddf20"
+    },
+    {
+      "path": "test/data/prophets/hadith/muslim-2372.json",
+      "sha256": "1e4c781ff377af455accdb47360f305342bd2e333a4845b22030a1584b0a72cc"
+    },
+    {
+      "path": "test/data/prophets/hadith/muslim-2376.json",
+      "sha256": "7c03798f6f601e6c210543d426f2e8e823b1aa493c2be2e9feac6883da279ac1"
+    },
+    {
+      "path": "test/data/prophets/hadith/muslim-2377.json",
+      "sha256": "8cc12f662d90e55ce3d1011fe36253e005cbf63aa7a362c536e49eb167911660"
+    },
+    {
+      "path": "test/data/prophets/hadith/muslim-2379.json",
+      "sha256": "6007128d419287e12d58f4108ecf66c7fbc767f2bea399c8445393adf78e7980"
+    },
+    {
+      "path": "test/data/prophets/hadith/muslim-3650.json",
+      "sha256": "e1cea982cad1beb198dddddb0851bf5f1976746a787c286685ee71b3e93e7b16"
+    },
+    {
+      "path": "test/data/prophets/hadith/muslim-416.json",
+      "sha256": "b8b252b0ee2e5519acf7bae4710008aae65a136d67f6b8b1e22aad40d5fbc066"
+    },
+    {
+      "path": "test/data/prophets/hadith/muslim-419.json",
+      "sha256": "65d9aa065a762fdb846a52c61d912fe6edf2cde1f916dd84c576f61ef4a8be64"
+    },
+    {
+      "path": "test/data/prophets/hadith/muslim-420.json",
+      "sha256": "eefc0785909677eec28bd31ab45d5d96f4e5e86953aa0513ec6a48e6ba1c6e9b"
+    },
+    {
+      "path": "test/data/prophets/hadith/muslim-421.json",
+      "sha256": "d908695690ab6012c1c8a31040b4284962ea35da797e4d70c8ed88dcd04d9be4"
+    },
+    {
+      "path": "test/data/prophets/hadith/tirmidhi-3505.json",
+      "sha256": "9b6f0da15681ebc4a3e2326e16d14696b6b056cd7fffef7f81e3948501befaf1"
+    },
+    {
+      "path": "test/data/prophets/harun.json",
+      "sha256": "07f9791cf7c089b035fc70a15e6c42a2ebc4d02c894bb25089bae7dbda9c45fd"
+    },
+    {
+      "path": "test/data/prophets/hud.json",
+      "sha256": "93172d77a6e2d579564af4d72f78546193dde76b07d826f427214f6328ab9ba4"
+    },
+    {
+      "path": "test/data/prophets/ibrahim.json",
+      "sha256": "8e4b38f860d8e21c02b03b439c44ba4b83e816ece0375f8e4c54d878a4a91bb1"
+    },
+    {
+      "path": "test/data/prophets/idris.json",
+      "sha256": "097f798c8480adc89506ee50abd7bdd764c102c4ba81e4304fdcf96e75c0bb3c"
+    },
+    {
+      "path": "test/data/prophets/ilyas.json",
+      "sha256": "3f0069d971794d9b7f8b1634a74abf1ae79681359266261c4e01d503c4f5712c"
+    },
+    {
+      "path": "test/data/prophets/index.json",
+      "sha256": "2c4f680865c87f3e30b003dd60402234c9eb0abcc60414813159a5082c2613a8"
+    },
+    {
+      "path": "test/data/prophets/isa.json",
+      "sha256": "b698931644ec282b8ff1047dc1b5f29d356300054deb7b32f70b4377bfd71127"
+    },
+    {
+      "path": "test/data/prophets/ishaq.json",
+      "sha256": "ab709daad0d22a77d2330f8bc129e4826f3d9c25ae5c26741e0bd2aa500bdee1"
+    },
+    {
+      "path": "test/data/prophets/ismail.json",
+      "sha256": "c19e093c39cceec9a86909e0990795892f6a7cbd93bd1c247314c8fb822a243e"
+    },
+    {
+      "path": "test/data/prophets/lut.json",
+      "sha256": "af10277f83acfaca6d0855815fb40fd8edd15eec479e58e48720993d7b343822"
+    },
+    {
+      "path": "test/data/prophets/muhammad.json",
+      "sha256": "bb31cce96e68b69d8245bab5bf21d96706f1894c9e375a538dd34147236ce452"
+    },
+    {
+      "path": "test/data/prophets/musa.json",
+      "sha256": "6922d69b2989ebb79eba837ef8257b7748682f19a3a420fa17a738d28c695c58"
+    },
+    {
+      "path": "test/data/prophets/nuh.json",
+      "sha256": "2de6eb13a1c320c8c1f0cb9deb0627a4730a03bebd60fed015d5a4ba96cc9c99"
+    },
+    {
+      "path": "test/data/prophets/relations/dawud-sulayman.json",
+      "sha256": "6f880834d1377694f816b3f9ba31bbe814fa399d08fa32cc6e130ea83d155c4b"
+    },
+    {
+      "path": "test/data/prophets/relations/ibrahim-ishaq.json",
+      "sha256": "2494123ec28fe35672487e4f0f32ada5b20e4580f20dcc9f8b06d130423bc137"
+    },
+    {
+      "path": "test/data/prophets/relations/ibrahim-ismail.json",
+      "sha256": "557a89027cc2efea0c33a1bd6e8843d85c8be27ae7eb25dd79e439c57bc40dd5"
+    },
+    {
+      "path": "test/data/prophets/relations/ishaq-yaqub.json",
+      "sha256": "ee24ac07971eb1439a4862798e665f11b6852b8cf3da44e6a583035b4bca42ea"
+    },
+    {
+      "path": "test/data/prophets/relations/musa-harun.json",
+      "sha256": "79b1814d2707303b4bf37a38d8a90717ea71a422ed6cc7f9b58c47ffcb4fc788"
+    },
+    {
+      "path": "test/data/prophets/relations/yaqub-yusuf.json",
+      "sha256": "47893b216af03d7c115b80034f2e0481edf40c4c7bf60ccf8ed59cae9ffa5f72"
+    },
+    {
+      "path": "test/data/prophets/relations/zakariyya-yahya.json",
+      "sha256": "4784242cbeabef26277470ca4c8bdaad53932c421bf2b65a3e910079b204995c"
+    },
+    {
+      "path": "test/data/prophets/research/al-khidr.json",
+      "sha256": "b396b4109b71482e4f5a4b898afe160cec8ac2c8797199a20e9524cab6966db9"
+    },
+    {
+      "path": "test/data/prophets/research/dhul-qarnayn.json",
+      "sha256": "1317dd4f0b80aba48d79db7a6e97b702eba09b5be74b30f622ba0c3660c6618b"
+    },
+    {
+      "path": "test/data/prophets/research/luqman.json",
+      "sha256": "d189e4539d61b260770a33e5e8c8a585cbf3096a256978767061a0873f0fb84f"
+    },
+    {
+      "path": "test/data/prophets/research/uzayr.json",
+      "sha256": "bb272db4dc93d37229866ad702167fa17142d8a7ba2aeedb59fb3161479ea7f8"
+    },
+    {
+      "path": "test/data/prophets/research/yusha-ibn-nun.json",
+      "sha256": "3c332c081ccc61b2a895930134593eb67316fefcf1c28b4ebe220aff13ead816"
+    },
+    {
+      "path": "test/data/prophets/salih.json",
+      "sha256": "750312fbabf6056c7b8d65b74c8b8d2d52dc523486596c975a96f299350fe67b"
+    },
+    {
+      "path": "test/data/prophets/search-index.json",
+      "sha256": "6594391fc2a092b02e751d4f23efef9ff8d9c80fdc371622a4269ea8014627a2"
+    },
+    {
+      "path": "test/data/prophets/shuayb.json",
+      "sha256": "533670568ac1aac1d124fdb465f418c01d3d740042db660a70ddc60db2b95199"
+    },
+    {
+      "path": "test/data/prophets/sulayman.json",
+      "sha256": "788ed0e76eb56af7d87777f74e3f53fda821fb6a4a6798a426bfa65cade65503"
+    },
+    {
+      "path": "test/data/prophets/yahya.json",
+      "sha256": "c31048989cfc4cbd50fa484c34711927db0f276e155a942b33909a98ecec0e1d"
+    },
+    {
+      "path": "test/data/prophets/yaqub.json",
+      "sha256": "e99e348b404b18002cc02c22ffff4fed6472dcb47030f0888bedeac3a47b2c2b"
+    },
+    {
+      "path": "test/data/prophets/yunus.json",
+      "sha256": "3403aa2aed0f3affdcb81c49a6b6b69b1c092d0038fd04666654d8e271d5cbc3"
+    },
+    {
+      "path": "test/data/prophets/yusuf.json",
+      "sha256": "dc97231b454c03c261c478aee27025833849a2f3a5acb6f0d4c313b09d3765c9"
+    },
+    {
+      "path": "test/data/prophets/zakariyya.json",
+      "sha256": "47acdbf7c1b2fe9c76efd57128e74950dd37c853b7510ca78e71a87999ea7d45"
+    }
+  ]
+}

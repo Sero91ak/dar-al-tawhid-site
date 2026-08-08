@@ -8379,15 +8379,15 @@
     "yaqub-yusuf"
   ],
   "schemaVersion": 4,
-  "contentVersion": "prophets-test-rc-01",
+  "contentVersion": "prophets-final-test-v1",
   "updatedAt": "2026-08-08T10:25:00Z",
   "coverage": {
     "authenticitySeparateFromCoverage": true,
     "coverageStatus": "complete_for_defined_scope",
     "coverageNote": "Yūsuf: Sūrat Yūsuf atomisiert; Genealogie 3390; Buḫārī 3387; Muslim 162a; Zulaykhā/Brüder/Gefängnisdauer isoliert.",
-    "auditedAt": "2026-08-08T10:25:00.958Z",
+    "auditedAt": "2026-08-08T10:41:06.999Z",
     "phase": 12,
-    "block": "02",
+    "block": "final",
     "reviewPass1": true,
     "reviewPass2": true,
     "requiredAuditsComplete": true,
@@ -8409,6 +8409,8 @@
       "israiliyyatIsolation": "PASS",
       "sourceLinks": "PASS",
       "searchLog": "PASS"
-    }
+    },
+    "contentVersion": "prophets-final-test-v1",
+    "releaseCandidate": "prophets-final-test-v1"
   }
 }

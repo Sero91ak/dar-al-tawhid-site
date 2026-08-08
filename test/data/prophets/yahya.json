@@ -1358,6 +1358,19 @@
     "zakariyya-yahya"
   ],
   "schemaVersion": 4,
-  "contentVersion": "prophets-test-rc-01",
-  "updatedAt": "2026-08-08T09:44:46.489Z"
+  "contentVersion": "prophets-final-test-v1",
+  "updatedAt": "2026-08-08T10:41:06Z",
+  "coverage": {
+    "authenticitySeparateFromCoverage": true,
+    "coverageStatus": "complete_for_defined_scope",
+    "coverageNote": "Yaḥyā: Nabī; Vater Zakariyyā; Miʿrāǧ mit ʿĪsā.",
+    "auditedAt": "2026-08-08T10:41:07.020Z",
+    "phase": 12,
+    "block": "final",
+    "reviewPass1": true,
+    "reviewPass2": true,
+    "contentVersion": "prophets-final-test-v1",
+    "lastAuditResult": "PASS",
+    "releaseCandidate": "prophets-final-test-v1"
+  }
 }

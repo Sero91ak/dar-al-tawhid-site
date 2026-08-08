@@ -27,7 +27,7 @@
   "mission": "Erster Mensch; Qurʾān- und Sunnah-gestützte Kernereignisse ohne Legendenauffüllung.",
   "profileStatus": "approved",
   "schemaVersion": 4,
-  "contentVersion": "prophets-test-rc-01",
+  "contentVersion": "prophets-final-test-v1",
   "identity": {
     "name": "Ādam",
     "nameAr": "آدم",
@@ -1575,10 +1575,12 @@
     "authenticitySeparateFromCoverage": true,
     "coverageStatus": "complete_for_defined_scope",
     "coverageNote": "Qurʾān-Pflichtstellen + Buḫārī 3326/3330/3409 + Muslim Freitag/Ḥawwāʾ geprüft. Ibn Ḥibbān 6190: pending primary edition.",
-    "auditedAt": "2026-08-08T10:14:45.133Z",
+    "auditedAt": "2026-08-08T10:41:06.966Z",
     "phase": 12,
-    "block": "01",
-    "lastAuditResult": "PASS"
+    "block": "final",
+    "lastAuditResult": "PASS",
+    "contentVersion": "prophets-final-test-v1",
+    "releaseCandidate": "prophets-final-test-v1"
   },
   "endAudit": {
     "phase": 12,

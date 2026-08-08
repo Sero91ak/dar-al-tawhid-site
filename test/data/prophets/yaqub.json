@@ -3478,15 +3478,15 @@
     "yaqub-yusuf"
   ],
   "schemaVersion": 4,
-  "contentVersion": "prophets-test-rc-01",
+  "contentVersion": "prophets-final-test-v1",
   "updatedAt": "2026-08-08T10:25:00Z",
   "coverage": {
     "authenticitySeparateFromCoverage": true,
     "coverageStatus": "complete_for_defined_scope",
     "coverageNote": "Yaʿqūb: Sūrat Yūsuf 12:4–101 Concordance; Genealogie 3390; Binyāmīn/Alias Isrāʾīl diszipliniert.",
-    "auditedAt": "2026-08-08T10:25:00.950Z",
+    "auditedAt": "2026-08-08T10:41:06.996Z",
     "phase": 12,
-    "block": "02",
+    "block": "final",
     "reviewPass1": true,
     "reviewPass2": true,
     "requiredAuditsComplete": true,
@@ -3508,6 +3508,8 @@
       "israiliyyatIsolation": "PASS",
       "sourceLinks": "PASS",
       "searchLog": "PASS"
-    }
+    },
+    "contentVersion": "prophets-final-test-v1",
+    "releaseCandidate": "prophets-final-test-v1"
   }
 }

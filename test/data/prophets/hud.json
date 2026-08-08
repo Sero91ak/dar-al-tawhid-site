@@ -4233,15 +4233,17 @@
     "updatedAt": "2026-08-08T09:25:18.000Z"
   },
   "schemaVersion": 4,
-  "contentVersion": "prophets-test-rc-01",
+  "contentVersion": "prophets-final-test-v1",
   "updatedAt": "2026-08-08T09:44:46.451Z",
   "coverage": {
     "authenticitySeparateFromCoverage": true,
     "coverageStatus": "complete_for_defined_scope",
     "coverageNote": "Qurʾān inkl. ʿĀd-Kontextstellen; Tawakkul 11:56; Iram/Aḥqāf/Grab korrekt getrennt.",
-    "auditedAt": "2026-08-08T10:14:45.146Z",
+    "auditedAt": "2026-08-08T10:41:06.976Z",
     "phase": 12,
-    "block": "01",
-    "lastAuditResult": "PASS"
+    "block": "final",
+    "lastAuditResult": "PASS",
+    "contentVersion": "prophets-final-test-v1",
+    "releaseCandidate": "prophets-final-test-v1"
   }
 }
