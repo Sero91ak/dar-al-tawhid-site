@@ -20,7 +20,7 @@ const TEST = path.join(ROOT, "test/data/prophets");
 const LIVE = path.join(ROOT, "data/prophets");
 const TEST_UI = path.join(ROOT, "test/assets/prophets");
 const LIVE_UI = path.join(ROOT, "assets/prophets");
-const RC_ID = "prophets-test-rc-01";
+const RC_ID = "prophets-final-test-v1";
 const RELEASE_ID = "prophets-production-candidate-01";
 const RC_DIR = path.join(TEST, "release-candidates", RC_ID);
 const PHASE10 = path.join(RC_DIR, "phase10-preprod");
@@ -863,7 +863,7 @@ function main() {
   writeJson(path.join(PHASE11, "CHANGE_SCOPE.md.json"), {
     ADDED: [
       "scripts/prophets-phase11-dry-run.js",
-      "test/data/prophets/release-candidates/prophets-test-rc-01/phase11-dry-run/",
+      "test/data/prophets/release-candidates/prophets-final-test-v1/phase11-dry-run/",
       "test/data/prophets/phase11-dry-run-report.json"
     ],
     MODIFIED: [

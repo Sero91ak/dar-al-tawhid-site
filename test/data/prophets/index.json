@@ -1004,7 +1004,7 @@
   },
   "titleAr": "الأنبياء",
   "contentVersion": "prophets-final-test-v1",
-  "updatedAt": "2026-08-08T10:41:46.380Z",
+  "updatedAt": "2026-08-08T10:45:45.299Z",
   "furtherPersons": [
     {
       "id": "dhul-kifl",
@@ -1237,11 +1237,12 @@
     "releaseCandidate": "prophets-final-test-v1",
     "environment": "test",
     "contentVersion": "prophets-final-test-v1",
+    "contentFrozen": true,
     "productionEnabled": false,
     "testEnabled": true,
     "noLiveCopy": true,
     "noProductionMerge": true,
-    "frozenAt": "2026-08-08T10:41:46.409Z",
+    "frozenAt": "2026-08-08T10:45:46.397Z",
     "coreProfiles": 25,
     "note": "Content freeze for FINAL TEST VERSION. PASS ≠ live. Explicit separate go-live required."
   }

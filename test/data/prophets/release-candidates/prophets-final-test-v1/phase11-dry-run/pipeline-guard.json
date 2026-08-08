@@ -1,0 +1,15 @@
+{
+  "importedClaimDefaultStatus": "research",
+  "neverAutoApprove": true,
+  "futurePipeline": [
+    "research",
+    "source check",
+    "isnad check where required",
+    "review pass 1",
+    "review pass 2",
+    "risk review if high-risk",
+    "approved"
+  ],
+  "buildBlocksApprovedWithoutReviews": true,
+  "note": "Enforced by scripts/validate-prophets-all.js"
+}

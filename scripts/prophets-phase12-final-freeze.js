@@ -105,6 +105,7 @@ function main() {
     releaseCandidate: RC_ID,
     environment: "test",
     contentVersion: index.contentVersion || RC_ID,
+    contentFrozen: true,
     productionEnabled: false,
     testEnabled: true,
     noLiveCopy: true,

@@ -113,7 +113,7 @@ function writeAcceptance(validationReport) {
   const regressionPass = !errors.some((e) => /PRODUCTION FILES/.test(e));
 
   const acceptance = {
-    releaseCandidate: "prophets-test-rc-01",
+    releaseCandidate: "prophets-final-test-v1",
     environment: "test",
     generatedAt: new Date().toISOString(),
     checksRun: [
@@ -167,7 +167,7 @@ function writeAcceptance(validationReport) {
 
   fs.writeFileSync(path.join(TEST, "phase09-acceptance.json"), JSON.stringify(acceptance, null, 2) + "\n");
 
-  const rcDir = path.join(TEST, "release-candidates/prophets-test-rc-01");
+  const rcDir = path.join(TEST, "release-candidates/prophets-final-test-v1");
   fs.mkdirSync(rcDir, { recursive: true });
   fs.writeFileSync(path.join(rcDir, "acceptance.json"), JSON.stringify(acceptance, null, 2) + "\n");
   if (validationReport) {
@@ -176,7 +176,7 @@ function writeAcceptance(validationReport) {
   fs.writeFileSync(
     path.join(rcDir, "CHANGE_SCOPE.md"),
     [
-      "# prophets-test-rc-01 — Change Scope",
+      "# prophets-final-test-v1 — Change Scope",
       "",
       "ADDED:",
       "- scripts/validate-prophets-all.js",
@@ -240,13 +240,13 @@ function main() {
     pwa: acceptance.pwa,
     regression: acceptance.regression,
     productionFilesChanged: "NONE",
-    releaseCandidate: "prophets-test-rc-01",
+    releaseCandidate: "prophets-final-test-v1",
     smokeErrors: errors,
     finalResult: errors.length === 0 && (!validationReport || validationReport.finalResult === "PASS") ? "PASS" : "FAIL"
   });
   fs.writeFileSync(path.join(TEST, "phase09-validation-report.json"), JSON.stringify(finalReport, null, 2) + "\n");
   fs.writeFileSync(
-    path.join(TEST, "release-candidates/prophets-test-rc-01/validation-report.json"),
+    path.join(TEST, "release-candidates/prophets-final-test-v1/validation-report.json"),
     JSON.stringify(finalReport, null, 2) + "\n"
   );
 

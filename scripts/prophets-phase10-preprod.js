@@ -21,7 +21,7 @@ const TEST = path.join(ROOT, "test/data/prophets");
 const LIVE = path.join(ROOT, "data/prophets");
 const TEST_UI = path.join(ROOT, "test/assets/prophets");
 const LIVE_UI = path.join(ROOT, "assets/prophets");
-const RC_ID = "prophets-test-rc-01";
+const RC_ID = "prophets-final-test-v1";
 const RC_DIR = path.join(TEST, "release-candidates", RC_ID);
 const PHASE10 = path.join(RC_DIR, "phase10-preprod");
 const ROLLBACK = path.join(RC_DIR, "rollback");
@@ -119,18 +119,18 @@ function collectProfiles(index) {
 }
 
 function freezeStamp(index, commit) {
-  const contentCommit = "ab1fe3e80c2ddc444028abe8f3c2aeb7415dbcbd"; // Phase 09 RC content freeze point
   const freeze = {
     releaseCandidate: RC_ID,
-    commit: contentCommit,
+    commit: commit || null,
     prepCommit: commit,
     contentVersion: index.contentVersion || RC_ID,
     schemaVersion: index.schemaVersion || 4,
     createdAt: new Date().toISOString(),
     validationResult: "PASS",
     contentFrozen: true,
+    productionEnabled: false,
     note:
-      "CONTENT FREEZE for prophets-test-rc-01 at commit ab1fe3e80. Further content changes require prophets-test-rc-02+. Phase 10 prep commits must not alter frozen claim content."
+      "CONTENT FREEZE for prophets-final-test-v1. production remains disabled. Explicit separate go-live required. PASS ≠ LIVE."
   };
   writeJson(path.join(PHASE10, "freeze.json"), freeze);
   writeJson(path.join(RC_DIR, "freeze.json"), freeze);
@@ -995,8 +995,8 @@ function main() {
   writeJson(path.join(PHASE10, "CHANGE_SCOPE.md.json"), {
     ADDED: [
       "scripts/prophets-phase10-preprod.js",
-      "test/data/prophets/release-candidates/prophets-test-rc-01/phase10-preprod/",
-      "test/data/prophets/release-candidates/prophets-test-rc-01/rollback/",
+      "test/data/prophets/release-candidates/prophets-final-test-v1/phase10-preprod/",
+      "test/data/prophets/release-candidates/prophets-final-test-v1/rollback/",
       "test/data/prophets/phase10-pre-production-report.json"
     ],
     MODIFIED: ["test/index.html", "test/version.json", "content/admin/change-scope-lock.json"],
