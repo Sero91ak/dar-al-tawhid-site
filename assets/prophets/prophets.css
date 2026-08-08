@@ -449,23 +449,81 @@ button.prophets-spotlight.more-feature-row::after,
 }
 .prophets-link:active{transform:translateY(1px)}
 
-.prophets-quote{
-  position:relative;padding:14px 14px 14px 15px;margin:0 0 10px;
-  border:1px solid var(--p-line);border-radius:20px;
-  background:
-    radial-gradient(ellipse 110% 90% at 100% 0%,var(--p-wash),transparent 55%),
-    color-mix(in srgb,var(--card,rgba(255,255,255,.03)) 60%,transparent);
+/* Qurʾān-/Detail-Filter: eine edle Scroll-Zeile wie Tabs — nie Browser-Blau */
+.prophets-filters{
+  display:flex;flex-wrap:nowrap;gap:5px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+  margin:0 0 12px;padding:2px 0 10px;scrollbar-width:none;position:relative;
 }
+.prophets-filters::-webkit-scrollbar{display:none}
+.prophets-filters::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--p-rule);opacity:.55;
+}
+.prophets-filter{
+  flex:0 0 auto;appearance:none;-webkit-appearance:none;cursor:pointer;margin:0;
+  border:1px solid color-mix(in srgb,var(--gold2) 16%,transparent);
+  background:var(--p-wash);
+  color:color-mix(in srgb,var(--gold2) 42%,var(--muted));
+  font:inherit;font-size:11px;font-weight:800;letter-spacing:.02em;
+  padding:7px 12px;border-radius:999px;white-space:nowrap;line-height:1.2;
+  transition:border-color .15s ease,background .15s ease,color .15s ease,box-shadow .15s ease;
+}
+.prophets-filter:hover,.prophets-filter:focus-visible{
+  outline:none;border-color:var(--p-line-strong);
+  color:var(--cream,var(--text));background:var(--p-wash-strong);
+}
+.prophets-filter.is-active{
+  color:var(--cream,var(--text));
+  border-color:color-mix(in srgb,var(--gold2) 42%,transparent);
+  background:radial-gradient(ellipse 96% 86% at 50% 40%,color-mix(in srgb,var(--gold2) 14%,transparent),var(--p-wash-strong));
+  box-shadow:inset 0 -2px 0 color-mix(in srgb,var(--gold2) 55%,transparent);
+}
+.prophets-chapter--quran .prophets-filters{margin-top:2px}
+.prophets-quote-list{display:flex;flex-direction:column;gap:6px}
+
+.prophets-quote{
+  position:relative;padding:12px 12px 12px 14px;margin:0;
+  border:0;border-radius:0;
+  background:transparent;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2) 10%,transparent);
+  transition:background .16s ease;
+}
+.prophets-quote:last-child{border-bottom:0}
 .prophets-quote::before{
-  content:"";position:absolute;left:0;top:14px;bottom:14px;width:2px;border-radius:2px;
-  background:var(--p-rail);opacity:.75;
+  content:"";position:absolute;left:2px;top:28%;bottom:28%;width:2px;border-radius:999px;
+  background:transparent;opacity:0;pointer-events:none;
+  transition:opacity .16s ease,top .16s ease,bottom .16s ease,box-shadow .16s ease;
+}
+.prophets-quote:hover,.prophets-quote:focus-within{
+  background:radial-gradient(ellipse 96% 86% at 38% 50%,var(--p-wash-strong),transparent 76%);
+}
+.prophets-quote:hover::before,.prophets-quote:focus-within::before{
+  background:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--gold2) 35%,transparent) 12%,var(--gold2) 42%,var(--gold2) 58%,color-mix(in srgb,var(--gold2) 35%,transparent) 88%,transparent 100%);
+  opacity:1;top:20%;bottom:20%;
+  box-shadow:0 0 10px color-mix(in srgb,var(--gold2) 22%,transparent);
+}
+.prophets-quote__head{margin:0 0 4px}
+.prophets-quote__title{
+  margin:0;font-family:var(--serif);font-size:14.5px;font-weight:700;
+  letter-spacing:.01em;line-height:1.3;color:var(--cream,var(--text));
 }
 .prophets-quote__ar{
   direction:rtl;font-size:1.22rem;line-height:1.85;font-weight:600;margin:8px 0;
   overflow-wrap:anywhere;color:var(--cream,var(--text));
 }
-.prophets-quote__de{margin:0 0 8px;font-size:13.5px;line-height:1.6;font-weight:600}
-.prophets-quote__meta{margin:0;font-size:11.5px;color:var(--muted);font-weight:700;line-height:1.45}
+.prophets-quote__de{margin:0 0 8px;font-size:13px;line-height:1.55;font-weight:600;color:var(--text)}
+.prophets-quote__meta{
+  margin:2px 0 0;font-size:10.5px;color:var(--muted);font-weight:750;line-height:1.4;
+  letter-spacing:.04em;text-transform:uppercase;
+}
+.prophets-quote--ref .prophets-link-row{margin-top:6px}
+.prophets-quote--ref .prophets-link{
+  padding:5px 10px;font-size:11px;border-color:transparent;background:transparent;
+  color:color-mix(in srgb,var(--gold2) 70%,var(--text));
+}
+.prophets-quote--ref .prophets-link:hover,.prophets-quote--ref .prophets-link:focus-visible{
+  border-color:var(--p-line);background:var(--p-wash);
+}
 .prophets-badge{
   display:inline-flex;align-items:center;gap:4px;
   font-size:10px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;

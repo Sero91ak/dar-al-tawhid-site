@@ -1088,10 +1088,10 @@
     var chips =
       [
         ["all", "Alle"],
-        ["surah", "nach Sūrah"],
-        ["event", "nach Ereignis"],
-        ["speech", "direkte Aussagen"],
-        ["about", "über ihn"]
+        ["surah", "Sūrah"],
+        ["event", "Ereignis"],
+        ["speech", "Aussagen"],
+        ["about", "Über ihn"]
       ]
         .map(function (c) {
           return (
@@ -1117,38 +1117,42 @@
           r.ayah +
           (r.ayahEnd && r.ayahEnd !== r.ayah ? "–" + r.ayahEnd : "");
         var kindLabel = "";
-        if (r.kind === "speech" || r.filter === "aussagen" || r.type === "directSpeech") kindLabel = "Direkte Aussage";
+        if (r.kind === "speech" || r.filter === "aussagen" || r.type === "directSpeech") kindLabel = "Aussage";
         else if (r.kind === "dua" || r.type === "dua") kindLabel = "Duʿāʾ";
         else if (r.event) kindLabel = "Ereignis";
-        else kindLabel = "Beschreibung";
+        else kindLabel = "Stelle";
+        var subBits = [kindLabel, r.event || ""].filter(Boolean);
         return (
-          '<article class="prophets-quote">' +
-          '<span class="prophets-badge">Qurʾān</span>' +
-          (kindLabel ? '<span class="prophets-badge prophets-badge--soft">' + esc(kindLabel) + "</span>" : "") +
-          '<p class="prophets-quote__meta">' +
+          '<article class="prophets-quote prophets-quote--ref">' +
+          '<div class="prophets-quote__head">' +
+          '<p class="prophets-quote__title">' +
           esc(ref) +
-          (r.event ? " · " + esc(r.event) : "") +
           "</p>" +
+          (subBits.length
+            ? '<p class="prophets-quote__meta">' + esc(subBits.join(" · ")) + "</p>"
+            : "") +
+          "</div>" +
           (r.context ? '<p class="prophets-quote__de">' + esc(r.context) + "</p>" : "") +
           '<div class="prophets-link-row"><button type="button" class="prophets-link" data-quran-surah="' +
           esc(r.surah) +
           '" data-quran-ayah="' +
           esc(r.ayah) +
-          '">Im Qurʾān öffnen</button></div>' +
+          '">Im Qurʾān öffnen ›</button></div>' +
           "</article>"
         );
       })
       .join("");
 
     return (
-      '<section class="prophets-chapter"><h3>Qurʾān · ' +
+      '<section class="prophets-chapter prophets-chapter--quran"><h3>Qurʾān · ' +
       count +
       " Fundstellen</h3>" +
-      '<div class="prophets-filters">' +
+      '<div class="prophets-filters" role="toolbar" aria-label="Qurʾān-Filter">' +
       chips +
       "</div>" +
+      '<div class="prophets-quote-list">' +
       (list || '<div class="prophets-empty">Keine Qurʾān-Stellen in diesem Filter.</div>') +
-      "</section>"
+      "</div></section>"
     );
   }
 
