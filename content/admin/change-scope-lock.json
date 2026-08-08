@@ -2693,6 +2693,21 @@
         "scripts/build_prophets_block02.py"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-block04-sulayman-zakariyya-v606-2026-08-08",
+      "approvedBy": "user-task-propheten-5er-block-04",
+      "note": "Zero-Trust: Sulaymān, Ilyās, al-Yasaʿ, Yūnus, Zakariyyā — Test-first, production=disabled",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prophets/",
+        "data/prophets/",
+        "test/index.html",
+        "test/version.json",
+        "index.html",
+        "scripts/build_prophets_block04.py"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
