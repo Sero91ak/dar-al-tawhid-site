@@ -74,13 +74,14 @@ function ayahCount(surah) {
 
 function validateProductionLock(index) {
   const env = (index && index.env) || {};
+  /* Live freigegeben: production=enabled ist erlaubt (Besucher-App). */
   if (env.production === true || env.production === "enabled") {
-    fail("PROPHETS PRODUCTION MUST REMAIN DISABLED");
+    warn("production enabled — Propheten live in Besucher-App");
   }
   if (!(env.test === true || env.test === "enabled")) {
     fail("prophets env.test must be enabled for TEST RC");
   }
-  // Ensure this script does not treat LIVE as source of truth
+  // Ensure this script does not treat LIVE as source of truth for writes
   if (process.env.PROPHETS_ALLOW_LIVE_WRITE === "1") {
     fail("PROPHETS_ALLOW_LIVE_WRITE must not be set during RC validation");
   }
@@ -701,12 +702,11 @@ function main() {
     validateExternalLinks(prof, checkNet);
   }
 
-  // LIVE must not be required; warn if someone enabled production mirror edits in this run
+  // LIVE may be production-enabled after explicit visitor ship; only warn.
   if (exists(path.join(LIVE, "index.json"))) {
-    // do not fail merely for existence — fail only if production enabled there AND we are shipping RC claiming lock
     const liveIdx = readJson(path.join(LIVE, "index.json"));
     if (liveIdx && liveIdx.env && (liveIdx.env.production === "enabled" || liveIdx.env.production === true)) {
-      fail("LIVE data/prophets has production enabled");
+      warn("LIVE data/prophets has production enabled (visitor ship active)");
     }
   }
 

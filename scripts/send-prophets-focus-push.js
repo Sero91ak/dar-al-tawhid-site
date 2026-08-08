@@ -23,13 +23,19 @@ function readTrigger() {
   }
 }
 
+function newsPushBody(text) {
+  const raw = String(text || "").replace(/\s+/g, " ").trim();
+  if (!raw) return "Die Propheten jetzt online · 72 Std. im Fokus.";
+  return raw.length > 180 ? `${raw.slice(0, 177)}…` : raw;
+}
+
 (async function main() {
   if (!API_KEY) throw new Error("OneSignal API-Key fehlt");
   const trig = readTrigger();
   const title = String(process.env.NEWS_TITLE || trig.title || "Die Propheten jetzt online").trim();
-  const text = String(
+  const text = newsPushBody(
     process.env.NEWS_TEXT || trig.text || "72 Std. im Fokus · Qurʾān & Sunnah · tippe zum Öffnen"
-  ).trim();
+  );
   const newsId = String(process.env.NEWS_ID || trig.id || "propheten-wissen-live-2026-08-08").trim();
   const site = siteOriginFromEnv(SITE_URL);
   const url = `${site}/#propheten`;
@@ -47,6 +53,8 @@ function readTrigger() {
         nav: "propheten",
         value: "",
         url,
+        focus: "prophets-72h",
+        badge: "72 Std. im Fokus",
         publishedAt: new Date().toISOString()
       },
       name: `prophets-focus-live-${RUN_ID}`
@@ -69,15 +77,14 @@ function readTrigger() {
 
   let lastError = null;
   for (const body of attempts) {
-    for (const authMode of ["Key", "Basic"]) {
-      try {
-        const res = await postOneSignalNotification(body, { apiKey: API_KEY, authMode });
-        console.log("OK prophets focus push", authMode, res && res.id ? res.id : res);
-        return;
-      } catch (err) {
-        lastError = err;
-        console.warn("attempt failed", authMode, err && err.message ? err.message : err);
-      }
+    try {
+      const result = await postOneSignalNotification(body, API_KEY, { retries: 2 });
+      const target = body.included_segments?.[0] || "tag-filter";
+      console.log(`OK prophets focus push (${target}):`, result.text || result);
+      return;
+    } catch (err) {
+      lastError = err;
+      console.warn("attempt failed", err && err.message ? err.message : err);
     }
   }
   throw lastError || new Error("Propheten-Fokus-Push fehlgeschlagen");
