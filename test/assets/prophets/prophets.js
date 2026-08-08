@@ -58,6 +58,7 @@
   var STATE_KEY = "dar_prophets_ui_v1";
   var LAST_READ_KEY = "dar_prophets_last_read_v1";
   var INDEX_STORE_KEY = "dar_prophets_index_cache_v2";
+  var PROPHETS_BOOT_INDEX = {"version":2,"feature":"prophetsKnowledgeBase","env":{"test":"enabled","production":"enabled"},"title":"Die Propheten","contentVersion":"prophets-final-test-v1","availableFilters":{"all":true,"quran":true,"sunnah":true,"ulu":true,"banuIsrail":true,"arabicMessenger":true,"further":true},"prophets":[{"id":"adam","name":"Ādam","nameAr":"آدم","honorific":"عليه السلام","roles":["nabī"],"people":"","uluAlAzm":false,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"adam.json","classifications":{"uluAlAzm":false,"quranExplicit":true,"hasSunnah":true,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":false},"hasSunnah":true,"quranNamed":true},{"id":"idris","name":"Idrīs","nameAr":"إدريس","honorific":"عليه السلام","roles":["nabī"],"people":"","uluAlAzm":false,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"idris.json","classifications":{"uluAlAzm":false,"quranExplicit":true,"hasSunnah":true,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":false},"hasSunnah":true,"quranNamed":true},{"id":"nuh","name":"Nūḥ","nameAr":"نوح","honorific":"عليه السلام","roles":["nabī","rasūl"],"people":"Qawm Nūḥ","uluAlAzm":true,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"nuh.json","classifications":{"uluAlAzm":true,"quranExplicit":true,"hasSunnah":true,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":false},"hasSunnah":true,"quranNamed":true},{"id":"hud","name":"Hūd","nameAr":"هود","honorific":"عليه السلام","roles":["nabī","rasūl"],"people":"ʿĀd","uluAlAzm":false,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"hud.json","classifications":{"uluAlAzm":false,"quranExplicit":true,"hasSunnah":false,"banuIsrail":false,"arabicMessenger":true,"furtherPerson":false},"arabicMessenger":true,"quranNamed":true},{"id":"salih","name":"Ṣāliḥ","nameAr":"صالح","honorific":"عليه السلام","roles":["nabī","rasūl"],"people":"Thamūd","uluAlAzm":false,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"salih.json","classifications":{"uluAlAzm":false,"quranExplicit":true,"hasSunnah":true,"banuIsrail":false,"arabicMessenger":true,"furtherPerson":false},"hasSunnah":true,"arabicMessenger":true,"quranNamed":true},{"id":"ibrahim","name":"Ibrāhīm","nameAr":"إبراهيم","honorific":"عليه السلام","roles":["nabī"],"people":"","uluAlAzm":true,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"ibrahim.json","classifications":{"uluAlAzm":true,"quranExplicit":true,"hasSunnah":true,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":false},"hasSunnah":true,"quranNamed":true},{"id":"lut","name":"Lūṭ","nameAr":"لوط","honorific":"عليه السلام","roles":["nabī","rasūl"],"people":"Qawm Lūṭ","uluAlAzm":false,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"lut.json","classifications":{"uluAlAzm":false,"quranExplicit":true,"hasSunnah":true,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":false},"hasSunnah":true,"quranNamed":true},{"id":"ismail","name":"Ismāʿīl","nameAr":"إسماعيل","honorific":"عليه السلام","roles":["nabī","rasūl"],"people":"","uluAlAzm":false,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"ismail.json","classifications":{"uluAlAzm":false,"quranExplicit":true,"hasSunnah":true,"banuIsrail":false,"arabicMessenger":true,"furtherPerson":false},"hasSunnah":true,"arabicMessenger":true,"quranNamed":true},{"id":"ishaq","name":"Isḥāq","nameAr":"إسحاق","honorific":"عليه السلام","roles":["nabī"],"people":"","uluAlAzm":false,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"ishaq.json","classifications":{"uluAlAzm":false,"quranExplicit":true,"hasSunnah":true,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":false},"hasSunnah":true,"quranNamed":true},{"id":"yaqub","name":"Yaʿqūb","nameAr":"يعقوب","honorific":"عليه السلام","roles":["nabī"],"people":"","uluAlAzm":false,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"yaqub.json","classifications":{"uluAlAzm":false,"quranExplicit":true,"hasSunnah":true,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":false},"hasSunnah":true,"quranNamed":true},{"id":"yusuf","name":"Yūsuf","nameAr":"يوسف","honorific":"عليه السلام","roles":["nabī"],"people":"","uluAlAzm":false,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"yusuf.json","classifications":{"uluAlAzm":false,"quranExplicit":true,"hasSunnah":true,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":false},"hasSunnah":true,"quranNamed":true},{"id":"ayyub","name":"Ayyūb","nameAr":"أيوب","honorific":"عليه السلام","roles":["nabī"],"people":"","uluAlAzm":false,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"ayyub.json","classifications":{"uluAlAzm":false,"quranExplicit":true,"hasSunnah":true,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":false},"hasSunnah":true,"quranNamed":true},{"id":"shuayb","name":"Shuʿayb","nameAr":"شعيب","honorific":"عليه السلام","roles":["nabī","rasūl"],"people":"Madyan","uluAlAzm":false,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"shuayb.json","classifications":{"uluAlAzm":false,"quranExplicit":true,"hasSunnah":false,"banuIsrail":false,"arabicMessenger":true,"furtherPerson":false},"arabicMessenger":true,"quranNamed":true},{"id":"musa","name":"Mūsā","nameAr":"موسى","honorific":"عليه السلام","roles":["nabī","rasūl"],"people":"Banū Isrāʾīl","uluAlAzm":true,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"musa.json","classifications":{"uluAlAzm":true,"quranExplicit":true,"hasSunnah":true,"banuIsrail":true,"arabicMessenger":false,"furtherPerson":false},"hasSunnah":true,"banuIsrail":true,"quranNamed":true},{"id":"harun","name":"Hārūn","nameAr":"هارون","honorific":"عليه السلام","roles":["nabī"],"people":"Banū Isrāʾīl","uluAlAzm":false,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"harun.json","classifications":{"uluAlAzm":false,"quranExplicit":true,"hasSunnah":true,"banuIsrail":true,"arabicMessenger":false,"furtherPerson":false},"hasSunnah":true,"banuIsrail":true,"quranNamed":true},{"id":"dawud","name":"Dāwūd","nameAr":"داود","honorific":"عليه السلام","roles":["nabī"],"people":"","uluAlAzm":false,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"dawud.json","classifications":{"uluAlAzm":false,"quranExplicit":true,"hasSunnah":true,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":false},"hasSunnah":true,"quranNamed":true},{"id":"sulayman","name":"Sulaymān","nameAr":"سليمان","honorific":"عليه السلام","roles":["nabī"],"people":"","uluAlAzm":false,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"sulayman.json","classifications":{"uluAlAzm":false,"quranExplicit":true,"hasSunnah":true,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":false},"hasSunnah":true,"quranNamed":true},{"id":"ilyas","name":"Ilyās","nameAr":"إلياس","honorific":"عليه السلام","roles":["nabī","rasūl"],"people":"","uluAlAzm":false,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"ilyas.json","classifications":{"uluAlAzm":false,"quranExplicit":true,"hasSunnah":false,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":false},"quranNamed":true},{"id":"alyasa","name":"Al-Yasaʿ","nameAr":"اليسع","honorific":"عليه السلام","roles":["nabī"],"people":"","uluAlAzm":false,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"alyasa.json","classifications":{"uluAlAzm":false,"quranExplicit":true,"hasSunnah":false,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":false},"quranNamed":true},{"id":"yunus","name":"Yūnus","nameAr":"يونس","honorific":"عليه السلام","roles":["nabī","rasūl"],"people":"","uluAlAzm":false,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"yunus.json","classifications":{"uluAlAzm":false,"quranExplicit":true,"hasSunnah":true,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":false},"hasSunnah":true,"quranNamed":true},{"id":"zakariyya","name":"Zakariyyā","nameAr":"زكريا","honorific":"عليه السلام","roles":["nabī"],"people":"","uluAlAzm":false,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"zakariyya.json","classifications":{"uluAlAzm":false,"quranExplicit":true,"hasSunnah":true,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":false},"hasSunnah":true,"quranNamed":true},{"id":"yahya","name":"Yaḥyā","nameAr":"يحيى","honorific":"عليه السلام","roles":["nabī"],"people":"","uluAlAzm":false,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"yahya.json","classifications":{"uluAlAzm":false,"quranExplicit":true,"hasSunnah":true,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":false},"hasSunnah":true,"quranNamed":true},{"id":"isa","name":"ʿĪsā","nameAr":"عيسى","honorific":"عليه السلام","roles":["nabī","rasūl"],"people":"Banū Isrāʾīl","uluAlAzm":true,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"isa.json","classifications":{"uluAlAzm":true,"quranExplicit":true,"hasSunnah":true,"banuIsrail":true,"arabicMessenger":false,"furtherPerson":false},"hasSunnah":true,"banuIsrail":true,"quranNamed":true},{"id":"dhul-kifl","name":"Dhū l-Kifl","nameAr":"ذو الكفل","honorific":"عليه السلام","roles":[],"people":"","uluAlAzm":false,"prophetStatus":"scholarly_disputed","profileStatus":"approved","profileFile":"dhul-kifl.json","classifications":{"uluAlAzm":false,"quranExplicit":false,"hasSunnah":false,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":true},"quranNamed":true},{"id":"muhammad","name":"Muḥammad","nameAr":"محمد","honorific":"ﷺ","roles":["nabī","rasūl"],"people":"","uluAlAzm":true,"prophetStatus":"quran_explicit","profileStatus":"approved","profileFile":"muhammad.json","classifications":{"uluAlAzm":true,"quranExplicit":true,"hasSunnah":true,"banuIsrail":false,"arabicMessenger":true,"furtherPerson":false},"hasSunnah":true,"arabicMessenger":true,"quranNamed":true}],"disputed":[{"id":"yusha-ibn-nun","name":"Yūshaʿ ibn Nūn","nameAr":"يوشع بن نون","honorific":"عليه السلام","roles":[],"people":"","uluAlAzm":false,"prophetStatus":"scholarly_source_correlation","profileStatus":"approved","profileFile":"research/yusha-ibn-nun.json","classifications":{"uluAlAzm":false,"quranExplicit":false,"hasSunnah":true,"banuIsrail":true,"arabicMessenger":false,"furtherPerson":true},"hasSunnah":true,"banuIsrail":true},{"id":"al-khidr","name":"al-Khiḍr","nameAr":"الخضر","honorific":"","roles":[],"people":"","uluAlAzm":false,"prophetStatus":"scholarly_disputed_or_inferred","profileStatus":"approved","profileFile":"research/al-khidr.json","classifications":{"uluAlAzm":false,"quranExplicit":false,"hasSunnah":true,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":true},"hasSunnah":true},{"id":"luqman","name":"Luqmān","nameAr":"لقمان","honorific":"","roles":[],"people":"","uluAlAzm":false,"prophetStatus":"scholarly_disputed","profileStatus":"approved","profileFile":"research/luqman.json","classifications":{"uluAlAzm":false,"quranExplicit":false,"hasSunnah":false,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":true},"quranNamed":true},{"id":"dhul-qarnayn","name":"Dhū l-Qarnayn","nameAr":"ذو القرنين","honorific":"","roles":[],"people":"","uluAlAzm":false,"prophetStatus":"scholarly_disputed","profileStatus":"approved","profileFile":"research/dhul-qarnayn.json","classifications":{"uluAlAzm":false,"quranExplicit":false,"hasSunnah":false,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":true},"quranNamed":true},{"id":"uzayr","name":"ʿUzayr","nameAr":"عزير","honorific":"","roles":[],"people":"","uluAlAzm":false,"prophetStatus":"scholarly_disputed","profileStatus":"approved","profileFile":"research/uzayr.json","classifications":{"uluAlAzm":false,"quranExplicit":false,"hasSunnah":false,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":true},"quranNamed":true}],"furtherPersons":[{"id":"dhul-kifl","name":"Dhū l-Kifl","nameAr":"ذو الكفل","honorific":"عليه السلام","roles":[],"people":"","uluAlAzm":false,"prophetStatus":"scholarly_disputed","profileStatus":"approved","profileFile":"dhul-kifl.json","classifications":{"uluAlAzm":false,"quranExplicit":false,"hasSunnah":false,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":true},"quranNamed":true},{"id":"al-khidr","name":"al-Khiḍr","nameAr":"الخضر","honorific":"","roles":[],"people":"","uluAlAzm":false,"prophetStatus":"scholarly_disputed_or_inferred","profileStatus":"approved","profileFile":"research/al-khidr.json","classifications":{"uluAlAzm":false,"quranExplicit":false,"hasSunnah":true,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":true},"hasSunnah":true},{"id":"luqman","name":"Luqmān","nameAr":"لقمان","honorific":"","roles":[],"people":"","uluAlAzm":false,"prophetStatus":"scholarly_disputed","profileStatus":"approved","profileFile":"research/luqman.json","classifications":{"uluAlAzm":false,"quranExplicit":false,"hasSunnah":false,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":true},"quranNamed":true},{"id":"dhul-qarnayn","name":"Dhū l-Qarnayn","nameAr":"ذو القرنين","honorific":"","roles":[],"people":"","uluAlAzm":false,"prophetStatus":"scholarly_disputed","profileStatus":"approved","profileFile":"research/dhul-qarnayn.json","classifications":{"uluAlAzm":false,"quranExplicit":false,"hasSunnah":false,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":true},"quranNamed":true},{"id":"uzayr","name":"ʿUzayr","nameAr":"عزير","honorific":"","roles":[],"people":"","uluAlAzm":false,"prophetStatus":"scholarly_disputed","profileStatus":"approved","profileFile":"research/uzayr.json","classifications":{"uluAlAzm":false,"quranExplicit":false,"hasSunnah":false,"banuIsrail":false,"arabicMessenger":false,"furtherPerson":true},"quranNamed":true},{"id":"yusha-ibn-nun","name":"Yūshaʿ ibn Nūn","nameAr":"يوشع بن نون","honorific":"عليه السلام","roles":[],"people":"","uluAlAzm":false,"prophetStatus":"scholarly_source_correlation","profileStatus":"approved","profileFile":"research/yusha-ibn-nun.json","classifications":{"uluAlAzm":false,"quranExplicit":false,"hasSunnah":true,"banuIsrail":true,"arabicMessenger":false,"furtherPerson":true},"hasSunnah":true,"banuIsrail":true}],"__boot":true};
   var indexCache = null;
   var searchIndexCache = null;
   var profileCache = Object.create(null);
@@ -307,6 +308,11 @@
       indexCache = cached;
       return cached;
     }
+    /* Sofort-Start: schlanker Boot-Index ohne Netzwartezeit. */
+    if (PROPHETS_BOOT_INDEX && PROPHETS_BOOT_INDEX.prophets && isFeatureEnabled(PROPHETS_BOOT_INDEX)) {
+      indexCache = PROPHETS_BOOT_INDEX;
+      return indexCache;
+    }
     return null;
   }
 
@@ -535,18 +541,30 @@
     });
   }
 
+  function requestProphetsPaint() {
+    if (!(global.currentRoute && global.currentRoute.view === "propheten")) return;
+    if (typeof global.render === "function") global.render();
+  }
+
   function loadProfile(id) {
     var key = String(id || "");
     if (!key) return Promise.resolve(null);
-    if (profileCache[key]) return Promise.resolve(profileCache[key]);
+    if (Object.prototype.hasOwnProperty.call(profileCache, key)) {
+      return Promise.resolve(profileCache[key]);
+    }
+    if (profileLoadInflight[key] && profileLoadInflight[key].promise) {
+      return profileLoadInflight[key].promise;
+    }
     var start = indexCache ? Promise.resolve(indexCache) : loadIndex();
     var requestedFile = "";
-    return start
+    var promise = start
       .then(function () {
         var file = profileFileFor(key);
         requestedFile = DATA_BASE + file;
         /* Test must never silently fall back to /data/prophets/ when a Test file is missing. */
-        return fetch(requestedFile, { cache: "default" });
+        return fetch(requestedFile, { cache: "force-cache" }).catch(function () {
+          return fetch(requestedFile, { cache: "default" });
+        });
       })
       .then(function (r) {
         if (!r.ok) {
@@ -560,11 +578,25 @@
         return r.json();
       })
       .then(function (data) {
-        return hydrateProfileHadith(data);
-      })
-      .then(function (data) {
+        /* Sofort anzeigen — Hadith-Hydration blockiert nicht mehr die Detailseite. */
         profileCache[key] = data;
         if (requestedFile) precacheOpenedProfile(requestedFile);
+        hydrateProfileHadith(data)
+          .then(function (hydrated) {
+            if (hydrated) profileCache[key] = hydrated;
+            var route = global.currentRoute;
+            if (
+              route &&
+              route.view === "propheten" &&
+              String(route.value || "").indexOf(key) === 0
+            ) {
+              var sec = String(route.value || "").split("/")[1] || "overview";
+              if (sec === "sunnah" || sec === "aussagen" || sec === "quellen") {
+                requestProphetsPaint();
+              }
+            }
+          })
+          .catch(function () {});
         return data;
       })
       .catch(function () {
@@ -577,7 +609,12 @@
         }
         profileCache[key] = null;
         return null;
+      })
+      .finally(function () {
+        if (profileLoadInflight[key]) profileLoadInflight[key] = false;
       });
+    profileLoadInflight[key] = { promise: promise };
+    return promise;
   }
 
   function parseRouteValue(value) {
@@ -1747,19 +1784,10 @@
       );
     }
 
-    if (parts.prophetId) {
-      if (!Object.prototype.hasOwnProperty.call(profileCache, parts.prophetId)) {
-        if (!profileLoadInflight[parts.prophetId]) {
-          profileLoadInflight[parts.prophetId] = true;
-          loadProfile(parts.prophetId).then(function (prof) {
-            profileCache[parts.prophetId] = prof;
-            profileLoadInflight[parts.prophetId] = false;
-            if (global.currentRoute && global.currentRoute.view === "propheten") {
-              if (typeof global.render === "function") global.render();
-            }
-          });
-        }
-      }
+    if (parts.prophetId && !Object.prototype.hasOwnProperty.call(profileCache, parts.prophetId)) {
+      loadProfile(parts.prophetId).then(function () {
+        requestProphetsPaint();
+      });
     }
 
     var profile = null;
@@ -1847,13 +1875,14 @@
         btn.addEventListener(
           "pointerdown",
           function () {
-            if (!Object.prototype.hasOwnProperty.call(profileCache, warmId) && !profileLoadInflight[warmId]) {
-              profileLoadInflight[warmId] = true;
-              loadProfile(warmId).then(function (prof) {
-                profileCache[warmId] = prof;
-                profileLoadInflight[warmId] = false;
-              });
-            }
+            loadProfile(warmId).catch(function () {});
+          },
+          { passive: true }
+        );
+        btn.addEventListener(
+          "mouseenter",
+          function () {
+            loadProfile(warmId).catch(function () {});
           },
           { passive: true }
         );
@@ -2045,14 +2074,20 @@
   }
 
   function precacheProphetsShell() {
-    if (!isTest()) return;
     if (!("serviceWorker" in navigator)) return;
-    var urls = [
-      "/test/assets/prophets/prophets.js",
-      "/test/assets/prophets/prophets.css",
-      DATA_BASE + "index.json",
-      DATA_BASE + "search-index.json"
-    ];
+    var urls = isTest()
+      ? [
+          "/test/assets/prophets/prophets.js",
+          "/test/assets/prophets/prophets.css",
+          DATA_BASE + "index.json",
+          DATA_BASE + "search-index.json"
+        ]
+      : [
+          "/assets/prophets/prophets.js",
+          "/assets/prophets/prophets.css",
+          DATA_BASE + "index.json",
+          DATA_BASE + "search-index.json"
+        ];
     navigator.serviceWorker.ready
       .then(function (reg) {
         try {
@@ -2063,7 +2098,7 @@
   }
 
   function precacheOpenedProfile(fileUrl) {
-    if (!isTest() || !fileUrl) return;
+    if (!fileUrl) return;
     if (!("serviceWorker" in navigator)) return;
     navigator.serviceWorker.ready
       .then(function (reg) {
@@ -2081,9 +2116,27 @@
     loadIndex()
       .then(function () {
         precacheProphetsShell();
-        return loadSearchIndex();
+        /* search-index erst bei Bedarf / idle — blockiert Open nicht */
+        if (typeof requestIdleCallback === "function") {
+          requestIdleCallback(function () { loadSearchIndex().catch(function () {}); }, { timeout: 2500 });
+        } else {
+          setTimeout(function () { loadSearchIndex().catch(function () {}); }, 400);
+        }
       })
       .catch(function () {});
+  }
+
+  function bindGlobalWarm() {
+    if (bindGlobalWarm._done) return;
+    bindGlobalWarm._done = true;
+    document.addEventListener(
+      "pointerdown",
+      function (ev) {
+        var t = ev.target && ev.target.closest ? ev.target.closest('[data-nav="propheten"],.prophets-focus-teaser,.prophets-spotlight') : null;
+        if (t) prefetch();
+      },
+      { passive: true, capture: true }
+    );
   }
 
   global.DARProphets = {
@@ -2094,6 +2147,7 @@
     loadIndex: loadIndex,
     loadSearchIndex: loadSearchIndex,
     loadProfile: loadProfile,
+    warm: prefetch,
     isEnabled: function () {
       if (!indexCache) hydrateIndexFromSession();
       if (!indexCache) return isTest();
@@ -2101,15 +2155,14 @@
     }
   };
 
-  /* Sofort vorwärmen — nicht erst nach vollständigem HTML-Parse. */
+  /* Sofort vorwärmen — Live + Test (nicht erst beim Öffnen). */
   try {
-    if (isTest()) {
-      hydrateIndexFromSession();
-      if (typeof requestIdleCallback === "function") {
-        requestIdleCallback(function () { prefetch(); }, { timeout: 1200 });
-      } else {
-        setTimeout(function () { prefetch(); }, 0);
-      }
+    hydrateIndexFromSession();
+    bindGlobalWarm();
+    if (typeof requestIdleCallback === "function") {
+      requestIdleCallback(function () { prefetch(); }, { timeout: 600 });
+    } else {
+      setTimeout(function () { prefetch(); }, 0);
     }
   } catch (e) {}
 })(window);
