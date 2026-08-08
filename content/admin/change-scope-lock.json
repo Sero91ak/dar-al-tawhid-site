@@ -3022,6 +3022,23 @@
         ".github/workflows/prophets-test-validate.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-instant-open-v622-2026-08-08",
+      "approvedBy": "user-task-propheten-sofort-oeffnen",
+      "note": "Propheten Seiten/Details sofort öffnen: Boot-Index, Live-Prefetch, Hadith non-blocking — Test+Live",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "assets/prophets/",
+        "test/assets/prophets/",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
