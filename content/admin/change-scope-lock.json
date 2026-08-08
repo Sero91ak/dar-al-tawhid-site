@@ -82,6 +82,22 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adam-reference-profile-phase3-v603-2026-08-08",
+      "approvedBy": "user-phase3-adam-referenzprofil",
+      "note": "Phase 3: Ādam vollständig als Referenzprofil (Test); production disabled; STOPP vor Idrīs",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/assets/prophets/",
+        "test/data/prophets/",
+        "assets/prophets/",
+        "data/prophets/",
+        "index.html"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "musa-reference-profile-phase2-v602-2026-08-08",
       "approvedBy": "user-phase2-musa-referenzprofil",
       "note": "Phase 2: Mūsā vollständig als Referenzprofil (Test); production bleibt disabled",
