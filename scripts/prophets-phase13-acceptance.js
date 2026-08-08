@@ -117,7 +117,7 @@ async function checkViewport(browser, base, name, viewport) {
         dualMode: mode === "dual",
         railW: rail ? Math.round(rail.getBoundingClientRect().width) : 0,
         tabs,
-        emojiHit: /📖|🕌|🧔|🧙|👨|👤/.test(html),
+        emojiHit: /🧔|🧙|👨‍🦳|👤|🧔‍♂️/.test(html),
         hasMusa: /Mūsā|موسى/i.test(text),
         whiteScreen: !text.trim() || /^App wird geladen/i.test(text.trim())
       };

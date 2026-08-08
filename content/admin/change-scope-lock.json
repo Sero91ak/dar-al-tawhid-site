@@ -2937,6 +2937,30 @@
         "test/service-worker.js"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-dua-light-emoji-focus-v620-2026-08-08",
+      "approvedBy": "user-task-propheten-dua-licht-emoji-fokus-push-live",
+      "note": "Propheten: Duʿāʾ-Licht + Emojis + Sofort-Detail + 72h Fokus + Push — Test und Live",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/assets/prophets/",
+        "assets/prophets/",
+        "test/index.html",
+        "index.html",
+        "test/version.json",
+        "version.json",
+        "content/updates/current.json",
+        "content/staging/updates/current.json",
+        "content/admin/push-triggers/",
+        "scripts/send-news-push.js",
+        "scripts/send-prophets-focus-push.js",
+        ".github/workflows/prophets-focus-push.yml",
+        "scripts/prophets-phase13-acceptance.js",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

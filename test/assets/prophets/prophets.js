@@ -65,6 +65,7 @@
   var relationCache = Object.create(null);
   var loadIndexPromise = null;
   var indexRefreshPromise = null;
+  var profileLoadInflight = Object.create(null);
   var resizeBound = false;
   var lastWidthMode = "";
   var DISPUTED_STATUSES = {
@@ -152,8 +153,40 @@
       .join(" · ");
   }
 
-  /* Keine Prophetenporträts/Figuren — nur dezente Geometrie. */
+  /* Thematische Embleme (wie Duʿāʾ) — keine Porträts/Figuren. */
+  var PROPHET_EMOJI = {
+    adam: "🌱",
+    idris: "✒️",
+    nuh: "🚢",
+    hud: "🏜️",
+    salih: "🐪",
+    ibrahim: "🔥",
+    lut: "🏙️",
+    ismail: "⛺",
+    ishaq: "👶",
+    yaqub: "🧬",
+    yusuf: "🌙",
+    ayyub: "🤲",
+    shuayb: "⚖️",
+    musa: "🌊",
+    harun: "📜",
+    dawud: "🗡️",
+    sulayman: "👑",
+    ilyas: "⚡",
+    alyasa: "🌿",
+    yunus: "🐋",
+    zakariyya: "🛕",
+    yahya: "💧",
+    isa: "✨",
+    muhammad: "🌟",
+    "dhul-kifl": "📘",
+    uzayr: "📖",
+    maryam: "🕊️"
+  };
+
   function prophetMark(id, p) {
+    var key = String(id || (p && p.id) || "").toLowerCase();
+    if (PROPHET_EMOJI[key]) return PROPHET_EMOJI[key];
     if (p && p.uluAlAzm) return "✦";
     if (p && isDisputedStatus(p.prophetStatus)) return "◇";
     return "◆";
@@ -1453,34 +1486,62 @@
     );
   }
 
+  function renderLoadingDetail(meta) {
+    meta = meta || {};
+    var mark = prophetMark(meta.id, meta);
+    return (
+      '<article class="prophets-detail prophets-detail--loading" data-prophet-detail="' +
+      esc(meta.id || "") +
+      '">' +
+      '<header class="prophets-detail__head">' +
+      '<div class="prophets-detail__head-top">' +
+      '<span class="prophets-detail__emoji" aria-hidden="true">' +
+      mark +
+      "</span>" +
+      '<h2 class="prophets-detail__name">' +
+      esc(meta.name || "…") +
+      "</h2>" +
+      (meta.nameAr
+        ? '<div class="prophets-detail__ar" lang="ar" dir="rtl">' + esc(meta.nameAr) + "</div>"
+        : "") +
+      "</div>" +
+      '<p class="prophets-detail__sub">' +
+      esc(meta.honorific || "عليه السلام") +
+      "</p>" +
+      "</header>" +
+      '<div class="prophets-empty prophets-empty--inline">Wird geöffnet…</div>' +
+      "</article>"
+    );
+  }
+
   function renderStubDetail(meta, opts) {
     opts = opts || {};
     if (!meta) return notFoundHtml();
     if (opts.loadFailed) {
       return visitorLoadErrorHtml({ offlineUncached: !isOnline() });
     }
-    var disputed = isDisputedStatus(meta.prophetStatus);
-    var note = disputedStatusNote(meta) || meta.note || "Die vollständige Wissensakte wird mit geprüften Claims aufgebaut.";
+    /* Kein Platzhalter-Marketingtext — direkt Profilkopf + Hinweis. */
+    var mark = prophetMark(meta.id, meta);
     return (
       '<article class="prophets-detail">' +
       '<header class="prophets-detail__head">' +
-      '<h2 class="prophets-detail__name">' + esc(meta.name) + "</h2>" +
-      '<div class="prophets-detail__ar" lang="ar" dir="rtl">' + esc(meta.nameAr || "") + "</div>" +
-      '<p class="prophets-detail__honor">' + esc(meta.honorific || "") + "</p>" +
-      '<div class="prophets-detail__roles">' +
-      (!disputed && rolesLabel(meta.roles) ? '<span class="prophets-chip">' + esc(rolesLabel(meta.roles)) + "</span>" : "") +
-      (disputed ? '<span class="prophets-chip">Umstritten</span>' : "") +
-      (meta.uluAlAzm ? '<span class="prophets-chip">✦ Ulū l-ʿAzm</span>' : "") +
+      '<div class="prophets-detail__head-top">' +
+      '<span class="prophets-detail__emoji" aria-hidden="true">' +
+      mark +
+      "</span>" +
+      '<h2 class="prophets-detail__name">' +
+      esc(meta.name) +
+      "</h2>" +
+      '<div class="prophets-detail__ar" lang="ar" dir="rtl">' +
+      esc(meta.nameAr || "") +
       "</div>" +
-      (meta.people ? '<p class="prophets-detail__people">' + esc(meta.people) + "</p>" : "") +
-      '</header><hr class="prophets-rule" />' +
-      '<section class="prophets-chapter"><h3>' + (disputed ? "Umstrittene Einordnung" : "Profil") + "</h3>" +
-      "<p class=\"prophets-quote__de\">" +
-      esc(note) +
+      "</div>" +
+      '<p class="prophets-detail__sub">' +
+      esc([meta.honorific || "", rolesLabel(meta.roles || []), meta.people || ""].filter(Boolean).join(" · ")) +
       "</p>" +
-      (meta.note && disputedStatusNote(meta) ? '<p class="prophets-quote__de">' + esc(meta.note) + "</p>" : "") +
-      '<p class="prophets-status prophets-status--na">Struktur vorbereitet · Inhalte folgen nach Freigabe</p>' +
-      "</section></article>"
+      "</header>" +
+      notFoundHtml() +
+      "</article>"
     );
   }
 
@@ -1491,6 +1552,9 @@
   }
 
   function renderDetail(profile, section, state, meta) {
+    if (profile && profile.__loading) {
+      return renderLoadingDetail(meta || profile);
+    }
     if (!profile) {
       var loadFailed =
         !!(meta && LAST_LOAD_ERROR && LAST_LOAD_ERROR.prophetId && String(LAST_LOAD_ERROR.prophetId) === String(meta.id));
@@ -1562,6 +1626,9 @@
       '">' +
       '<header class="prophets-detail__head">' +
       '<div class="prophets-detail__head-top">' +
+      '<span class="prophets-detail__emoji" aria-hidden="true">' +
+      prophetMark(profile.id, profile) +
+      "</span>" +
       '<h2 class="prophets-detail__name">' +
       esc(profile.name) +
       "</h2>" +
@@ -1683,18 +1750,29 @@
       );
     }
 
-    if (parts.prophetId && profileCache[parts.prophetId] === undefined) {
-      // undefined = not attempted; null = missing file
-      profileCache[parts.prophetId] = null;
-      loadProfile(parts.prophetId).then(function (prof) {
-        profileCache[parts.prophetId] = prof;
-        if (global.currentRoute && global.currentRoute.view === "propheten") {
-          if (typeof global.render === "function") global.render();
+    if (parts.prophetId) {
+      if (!Object.prototype.hasOwnProperty.call(profileCache, parts.prophetId)) {
+        if (!profileLoadInflight[parts.prophetId]) {
+          profileLoadInflight[parts.prophetId] = true;
+          loadProfile(parts.prophetId).then(function (prof) {
+            profileCache[parts.prophetId] = prof;
+            profileLoadInflight[parts.prophetId] = false;
+            if (global.currentRoute && global.currentRoute.view === "propheten") {
+              if (typeof global.render === "function") global.render();
+            }
+          });
         }
-      });
+      }
     }
 
-    var profile = parts.prophetId ? profileCache[parts.prophetId] || null : null;
+    var profile = null;
+    if (parts.prophetId) {
+      if (Object.prototype.hasOwnProperty.call(profileCache, parts.prophetId)) {
+        profile = profileCache[parts.prophetId];
+      } else {
+        profile = Object.assign({ __loading: true, id: parts.prophetId }, findMeta(parts.prophetId) || {});
+      }
+    }
     return header + renderShell(indexCache, profile, parts, state);
   }
 
@@ -1767,6 +1845,22 @@
     root.querySelectorAll("[data-prophet-id]").forEach(function (btn) {
       if (btn.dataset.bound) return;
       btn.dataset.bound = "1";
+      var warmId = btn.getAttribute("data-prophet-id");
+      if (warmId) {
+        btn.addEventListener(
+          "pointerdown",
+          function () {
+            if (!Object.prototype.hasOwnProperty.call(profileCache, warmId) && !profileLoadInflight[warmId]) {
+              profileLoadInflight[warmId] = true;
+              loadProfile(warmId).then(function (prof) {
+                profileCache[warmId] = prof;
+                profileLoadInflight[warmId] = false;
+              });
+            }
+          },
+          { passive: true }
+        );
+      }
       btn.addEventListener("click", function () {
         var id = btn.getAttribute("data-prophet-id");
         var rail = root.querySelector(".prophets-rail");
