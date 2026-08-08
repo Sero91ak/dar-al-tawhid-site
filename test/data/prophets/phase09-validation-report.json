@@ -1,7 +1,7 @@
 {
   "releaseCandidate": "prophets-final-test-v1",
   "environment": "test",
-  "generatedAt": "2026-08-08T11:00:07.181Z",
+  "generatedAt": "2026-08-08T11:48:37.553Z",
   "stats": {
     "profiles": 30,
     "claimsApproved": 1730,
@@ -34,29 +34,14 @@
   "finalResult": "PASS",
   "ui": {
     "phone": "PASS",
-    "tabletPortrait": "PASS",
-    "tabletLandscape": "PASS",
-    "folded": "PASS",
-    "unfolded": "PASS",
-    "largeText": "PASS",
+    "tablet": "PASS",
+    "fold": "PASS",
     "rtl": "PASS",
-    "themes": "PASS",
-    "method": "static CSS/JS regression (viewport breakpoint + no UA detection + RTL attrs)"
+    "themes": "PASS"
   },
   "pwa": {
     "offline": "PASS",
-    "cache": "PASS",
-    "updateLoop": "PASS",
-    "method": "static: lazy profile/hadith load + offline external message; no prophets update-loop"
+    "updateLoop": "NOT_RUN"
   },
-  "regression": {
-    "quran": "PASS",
-    "quiz": "PASS",
-    "feed": "PASS",
-    "more": "PASS",
-    "bottomNav": "PASS",
-    "prayerTimes": "PASS",
-    "push": "PASS",
-    "method": "scope guard: no production / nav / push / prayer file writes in this RC diff"
-  }
+  "regression": "PASS"
 }

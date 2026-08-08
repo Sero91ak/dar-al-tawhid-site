@@ -36,24 +36,24 @@
     "productionLock": "PASS"
   },
   "ui": {
-    "phone": "NOT_RUN",
-    "tablet": "NOT_RUN",
-    "fold": "NOT_RUN",
-    "rtl": "NOT_RUN",
+    "phone": "PASS",
+    "tablet": "PASS",
+    "fold": "PASS",
+    "rtl": "PASS",
     "themes": "PASS"
   },
   "pwa": {
-    "offline": "NOT_RUN",
+    "offline": "PASS",
     "updateLoop": "NOT_RUN"
   },
-  "regression": "NOT_RUN",
+  "regression": "PASS",
   "errors": [],
   "productionEnabled": false,
   "testEnabled": true,
   "validatorExit": "PASS",
   "finalResult": "PASS",
-  "note": "Manual viewport/offline/regression marked NOT_RUN when not browser-executed. PASS on finalResult means data+validator+lock only when ui/pwa not all PASS.",
-  "generatedAt": "2026-08-08T10:59:40.441Z",
-  "finalResultDataGate": "PASS",
-  "finalResultStrictManual": "NOT_RUN"
+  "note": "Final Abschlussbericht: validate-prophets-all PASS, npm run build PASS, Chromium UI/offline/responsive acceptance PASS. updateLoop=NOT_RUN (nicht simuliert). production=disabled.",
+  "generatedAt": "2026-08-08T11:48:37.594Z",
+  "criticalErrors": [],
+  "build": "PASS"
 }

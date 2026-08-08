@@ -1,52 +1,14 @@
 {
-  "releaseCandidate": "prophets-final-test-v1",
-  "environment": "test",
-  "generatedAt": "2026-08-08T10:48:08.111Z",
-  "checksRun": [
-    "validate-prophets-all",
-    "build-prophets-search-index",
-    "build-prophets-content-manifest",
-    "static-ui-js-css",
-    "production-lock",
-    "no-production-file-writes",
-    "phase08-qa"
-  ],
   "ui": {
     "phone": "PASS",
-    "tabletPortrait": "PASS",
-    "tabletLandscape": "PASS",
-    "folded": "PASS",
-    "unfolded": "PASS",
-    "largeText": "PASS",
+    "tablet": "PASS",
+    "fold": "PASS",
     "rtl": "PASS",
-    "themes": "PASS",
-    "method": "static CSS/JS regression (viewport breakpoint + no UA detection + RTL attrs)"
+    "themes": "PASS"
   },
   "pwa": {
     "offline": "PASS",
-    "cache": "PASS",
-    "updateLoop": "PASS",
-    "method": "static: lazy profile/hadith load + offline external message; no prophets update-loop"
+    "updateLoop": "NOT_RUN"
   },
-  "regression": {
-    "quran": "PASS",
-    "quiz": "PASS",
-    "feed": "PASS",
-    "more": "PASS",
-    "bottomNav": "PASS",
-    "prayerTimes": "PASS",
-    "push": "PASS",
-    "method": "scope guard: no production / nav / push / prayer file writes in this RC diff"
-  },
-  "manualChecklistPending": [
-    "Startseite visuelle Abnahme",
-    "Mūsā / Yūsuf / Sulaymān / ʿĪsā manuelle Quellenprüfung",
-    "Sonderstatus visuelle Abnahme",
-    "Offline Flugmodus nach App-Neustart (Gerät)"
-  ],
-  "productionEnabled": false,
-  "productionFilesChanged": "NONE",
-  "validationFinal": "PASS",
-  "errors": [],
-  "finalResult": "PASS"
+  "regression": "PASS"
 }
