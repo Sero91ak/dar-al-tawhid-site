@@ -5,15 +5,41 @@ import {
   listJobs,
   readJob,
   readMonthSpend,
-  saveJob
+  saveJob,
+  listEditorTemplates,
+  saveEditorTemplates,
+  readPronunciationDict,
+  savePronunciationDict
 } from "./job-store.js";
 import { createVideoStudioJob, processVideoStudioJob, publicJob, runVideoStudioPipelineLoop, refreshVideoStudioJobUrls } from "./pipeline.js";
 import { providersStatus, probeFalAuth } from "./providers/index.js";
 import { getVideoAsset, verifySignedAssetRequest, putVideoAsset, createSignedAssetUrl, deleteVideoPrefix } from "./storage.js";
 import { isVoiceConfigured, probeElevenAuth } from "./voice.js";
-import { isComposerConfigured, shotstackEnvironment, probeShotstackAuth } from "./compose.js";
+import { isComposerConfigured, shotstackEnvironment, probeShotstackAuth, submitShotstackTimeline, composeFinalVideo } from "./compose.js";
+import {
+  createProjectFromJob,
+  normalizeProject,
+  scaleProjectDuration,
+  projectToCaptionPlan,
+  DAR_EDITOR_TEMPLATES,
+  applyTemplateToProject,
+  extractTemplatePayload
+} from "./project.js";
+import { buildTimelineFromProject } from "./project-compose.js";
+import { runVideoValidation } from "./validation.js";
+import {
+  recommendedReadingSeconds,
+  checkTextContrast,
+  redistributeTimings,
+  HIGHLIGHT_PRESETS,
+  ANIMATION_PRESETS,
+  SOCIAL_LAYOUTS,
+  snapshotVersion
+} from "./editor-lib.js";
 import { parseContributionText, estimateVideoCost } from "./text-parse.js";
 import { generateSceneImage } from "./scene-image.js";
+import { synthesizeDarVoice } from "./voice.js";
+import { prepareVoiceScript, stripVoiceNoise } from "./voice-prep.js";
 
 function json(data, cors, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -158,6 +184,78 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
     }, cors);
   }
 
+  if (request.method === "GET" && rest === "/editor/meta") {
+    const [customTemplates, pronunciation] = await Promise.all([
+      listEditorTemplates(env),
+      readPronunciationDict(env)
+    ]);
+    return json({
+      ok: true,
+      builtinTemplates: DAR_EDITOR_TEMPLATES,
+      customTemplates,
+      pronunciation,
+      highlights: HIGHLIGHT_PRESETS,
+      animations: ANIMATION_PRESETS,
+      socialLayouts: SOCIAL_LAYOUTS
+    }, cors);
+  }
+
+  if (request.method === "GET" && rest === "/editor/templates") {
+    const customTemplates = await listEditorTemplates(env);
+    return json({ ok: true, builtin: DAR_EDITOR_TEMPLATES, custom: customTemplates }, cors);
+  }
+
+  if (request.method === "POST" && rest === "/editor/templates") {
+    const body = await request.json().catch(() => ({}));
+    const custom = await listEditorTemplates(env);
+    if (body.deleteId) {
+      const next = custom.filter((t) => t.id !== body.deleteId);
+      await saveEditorTemplates(env, next);
+      return json({ ok: true, custom: next }, cors);
+    }
+    const payload = body.template || extractTemplatePayload(body.project || {});
+    if (!payload?.elements?.length && !body.project) {
+      return json({ ok: false, error: "Vorlage ohne Elemente" }, cors, 422);
+    }
+    const savedTpl = {
+      ...payload,
+      id: payload.id || `tpl_${Date.now().toString(36)}`,
+      label: String(body.label || payload.label || "Eigene Vorlage").slice(0, 80),
+      topic: String(body.topic || "").slice(0, 40),
+      isDefault: Boolean(body.isDefault)
+    };
+    let next = [savedTpl, ...custom.filter((t) => t.id !== savedTpl.id)];
+    if (savedTpl.isDefault) next = next.map((t) => ({ ...t, isDefault: t.id === savedTpl.id }));
+    next = next.slice(0, 40);
+    await saveEditorTemplates(env, next);
+    return json({ ok: true, template: savedTpl, custom: next }, cors);
+  }
+
+  if (request.method === "GET" && rest === "/editor/pronunciation") {
+    return json({ ok: true, dict: await readPronunciationDict(env) }, cors);
+  }
+
+  if (request.method === "PUT" && rest === "/editor/pronunciation") {
+    const body = await request.json().catch(() => ({}));
+    const dict = await savePronunciationDict(env, body.dict || {});
+    return json({ ok: true, dict }, cors);
+  }
+
+  if (request.method === "POST" && rest === "/editor/pronunciation") {
+    const body = await request.json().catch(() => ({}));
+    const display = String(body.display || "").trim();
+    const spoken = String(body.spoken || "").trim();
+    if (!display || !spoken) return json({ ok: false, error: "display und spoken erforderlich" }, cors, 422);
+    const dict = await readPronunciationDict(env);
+    dict[display] = {
+      spoken,
+      scope: body.scope === "project" ? "project" : "global",
+      updatedAt: new Date().toISOString()
+    };
+    await savePronunciationDict(env, dict);
+    return json({ ok: true, dict, entry: dict[display] }, cors);
+  }
+
   if (request.method === "GET" && rest === "/jobs") {
     const limit = Number(url.searchParams.get("limit") || 20);
     const jobs = (await listJobs(env, limit)).map(publicJob);
@@ -172,6 +270,373 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
       return json(result, cors, result.job?.status === "setup_required" ? 200 : 200);
     } catch (error) {
       return json({ ok: false, error: error.message || String(error) }, cors, error.status || 500);
+    }
+  }
+
+  const editorMatch = rest.match(/^\/jobs\/([^/]+)\/(project|editor-export|editor-voice|editor-version|editor-redistribute|editor-apply-template)$/);
+  if (editorMatch) {
+    const jobId = decodeURIComponent(editorMatch[1]);
+    const action = editorMatch[2];
+
+    async function resolveJobMedia(job) {
+      const clipUrls = [];
+      for (const clip of job.artifacts?.clips || []) {
+        if (clip.r2Key) {
+          const signed = await createSignedAssetUrl(env, { jobId, key: clip.r2Key, ttlSec: 3600 });
+          if (signed.ok && signed.url) clipUrls.push(signed.url);
+          else if (clip.url) clipUrls.push(clip.url);
+        } else if (clip.url) clipUrls.push(clip.url);
+      }
+      let voiceUrl = "";
+      if (job.artifacts?.voice?.r2Key) {
+        const signed = await createSignedAssetUrl(env, { jobId, key: job.artifacts.voice.r2Key, ttlSec: 3600 });
+        voiceUrl = signed.url || job.artifacts.voice.url || "";
+      } else {
+        voiceUrl = job.artifacts?.voice?.url || "";
+      }
+      let sceneImageUrl = job.sceneImageUrl || "";
+      if (job.artifacts?.sceneImage?.r2Key) {
+        const signed = await createSignedAssetUrl(env, {
+          jobId,
+          key: job.artifacts.sceneImage.r2Key,
+          ttlSec: 3600
+        });
+        sceneImageUrl = signed.url || sceneImageUrl;
+      }
+      return { clipUrls, voiceUrl, sceneImageUrl };
+    }
+
+    if (request.method === "GET" && action === "project") {
+      const job = await readJob(env, jobId);
+      if (!job) return json({ ok: false, error: "Auftrag nicht gefunden" }, cors, 404);
+      const media = await resolveJobMedia(job);
+      let project = job.editorProject ? normalizeProject(job.editorProject) : null;
+      if (!project) {
+        project = createProjectFromJob({
+          jobId,
+          name: job.statement?.speaker ? `${job.statement.speaker} – Video` : "DAR Video",
+          statement: job.statement || {},
+          captionPlan: job.storyboard?.captionPlan || null,
+          sceneImageUrl: media.sceneImageUrl,
+          voiceUrl: media.voiceUrl,
+          clipUrls: media.clipUrls,
+          durationSec: job.durationSeconds || 15
+        });
+      } else {
+        project.background = {
+          ...project.background,
+          clipUrls: media.clipUrls.length ? media.clipUrls : project.background?.clipUrls || [],
+          assetUrl: media.sceneImageUrl || project.background?.assetUrl || ""
+        };
+        if (media.voiceUrl && project.audioTracks?.[0]) {
+          project.audioTracks[0].url = media.voiceUrl;
+        }
+      }
+      return json({
+        ok: true,
+        job: publicJob(job),
+        project,
+        templates: DAR_EDITOR_TEMPLATES,
+        customTemplates: await listEditorTemplates(env),
+        pronunciation: await readPronunciationDict(env),
+        highlights: HIGHLIGHT_PRESETS,
+        animations: ANIMATION_PRESETS,
+        socialLayouts: SOCIAL_LAYOUTS,
+        media,
+        versions: job.editorVersions || []
+      }, cors);
+    }
+
+    if ((request.method === "PUT" || request.method === "PATCH") && action === "project") {
+      const body = await request.json().catch(() => ({}));
+      const job = await readJob(env, jobId);
+      if (!job) return json({ ok: false, error: "Auftrag nicht gefunden" }, cors, 404);
+      let project = normalizeProject(body.project || body);
+      if (!project) return json({ ok: false, error: "Ungültiges Projekt" }, cors, 422);
+      if (body.scaleDuration != null) {
+        project = scaleProjectDuration(project, body.scaleDuration, {
+          proportional: body.proportional !== false
+        });
+      }
+      const saved = await saveJob(env, {
+        ...job,
+        editorProject: project,
+        message: "Editor-Projekt gespeichert",
+        updatedAt: new Date().toISOString()
+      });
+      return json({ ok: true, project, job: publicJob(saved) }, cors);
+    }
+
+    if (request.method === "POST" && action === "editor-apply-template") {
+      const body = await request.json().catch(() => ({}));
+      const job = await readJob(env, jobId);
+      if (!job) return json({ ok: false, error: "Auftrag nicht gefunden" }, cors, 404);
+      let project = normalizeProject(body.project || job.editorProject);
+      if (!project) return json({ ok: false, error: "Kein Projekt" }, cors, 422);
+      project = applyTemplateToProject(project, body.templateId || "dar-gold-elegant");
+      const custom = await listEditorTemplates(env);
+      const customTpl = custom.find((t) => t.id === body.templateId);
+      if (customTpl?.elements?.length) {
+        // Styles aus eigener Vorlage auf Rollen mappen
+        const byRole = {};
+        customTpl.elements.forEach((e) => { byRole[e.role] = e; });
+        project.elements = project.elements.map((el) => {
+          const src = byRole[el.role];
+          if (!src) return el;
+          return {
+            ...el,
+            style: { ...el.style, ...src.style },
+            opacity: src.opacity ?? el.opacity,
+            animationIn: src.animationIn || el.animationIn,
+            animationOut: src.animationOut || el.animationOut,
+            transform: { ...el.transform, width: src.transform?.width || el.transform.width }
+          };
+        });
+      }
+      await saveJob(env, { ...job, editorProject: project, updatedAt: new Date().toISOString() });
+      return json({ ok: true, project }, cors);
+    }
+
+    if (request.method === "POST" && action === "editor-redistribute") {
+      const body = await request.json().catch(() => ({}));
+      const job = await readJob(env, jobId);
+      if (!job) return json({ ok: false, error: "Auftrag nicht gefunden" }, cors, 404);
+      let project = normalizeProject(body.project || job.editorProject);
+      if (!project) return json({ ok: false, error: "Kein Projekt" }, cors, 422);
+      project.elements = redistributeTimings(project.elements, project.duration, job.storyboard?.voiceScript || "");
+      project = normalizeProject(project);
+      const reading = project.elements.map((el) => ({
+        id: el.id,
+        role: el.role,
+        duration: el.timing.duration,
+        recommended: recommendedReadingSeconds(el.content || el.social?.followLine || "", { role: el.role }),
+        short: el.timing.duration < recommendedReadingSeconds(el.content || el.social?.followLine || "", { role: el.role }) - 0.15
+      }));
+      await saveJob(env, { ...job, editorProject: project, updatedAt: new Date().toISOString() });
+      return json({ ok: true, project, reading }, cors);
+    }
+
+    if (request.method === "POST" && action === "editor-version") {
+      const body = await request.json().catch(() => ({}));
+      const job = await readJob(env, jobId);
+      if (!job) return json({ ok: false, error: "Auftrag nicht gefunden" }, cors, 404);
+      const versions = Array.isArray(job.editorVersions) ? job.editorVersions.slice() : [];
+      if (body.restoreId) {
+        const found = versions.find((v) => v.id === body.restoreId);
+        if (!found) return json({ ok: false, error: "Version nicht gefunden" }, cors, 404);
+        const project = normalizeProject(found.project);
+        await saveJob(env, {
+          ...job,
+          editorProject: project,
+          message: `Version wiederhergestellt: ${found.label}`,
+          updatedAt: new Date().toISOString()
+        });
+        return json({ ok: true, project, versions }, cors);
+      }
+      const project = normalizeProject(body.project || job.editorProject);
+      if (!project) return json({ ok: false, error: "Kein Projekt" }, cors, 422);
+      const snap = snapshotVersion(project, body.label || "");
+      const nextVersions = [snap, ...versions].slice(0, 20);
+      await saveJob(env, {
+        ...job,
+        editorProject: project,
+        editorVersions: nextVersions,
+        updatedAt: new Date().toISOString()
+      });
+      return json({ ok: true, version: snap, versions: nextVersions, project }, cors);
+    }
+
+    if (request.method === "POST" && action === "editor-voice") {
+      await assertVideoStudioRateLimit(env, request);
+      const body = await request.json().catch(() => ({}));
+      const job = await readJob(env, jobId);
+      if (!job) return json({ ok: false, error: "Auftrag nicht gefunden" }, cors, 404);
+      const project = normalizeProject(body.project || job.editorProject);
+      const dict = await readPronunciationDict(env);
+      let speakerLine = (project?.elements || []).find((e) => e.role === "speaker")?.content || "";
+      let quote = (project?.elements || []).filter((e) => e.role === "quote").map((e) => e.content).join(" ");
+      let source = (project?.elements || []).find((e) => e.role === "source")?.content || "";
+      Object.keys(dict || {}).forEach((display) => {
+        const spoken = dict[display]?.spoken;
+        if (!spoken) return;
+        const re = new RegExp(display.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g");
+        speakerLine = speakerLine.replace(re, spoken);
+        quote = quote.replace(re, spoken);
+        source = source.replace(re, spoken);
+      });
+      const script = prepareVoiceScript({
+        speakerLine: body.includeSpeaker === false ? "" : speakerLine,
+        quote,
+        source: body.readSource === false ? "" : source,
+        followLine: body.includeFollow === false ? "" : (project?.elements || []).find((e) => e.role === "social")?.social?.followLine || ""
+      });
+      const voice = await synthesizeDarVoice(env, stripVoiceNoise(script));
+      if (!voice.ok) return json({ ok: false, error: voice.reason || "Stimme fehlgeschlagen" }, cors, 502);
+      const key = `jobs/${jobId}/voice-editor-${Date.now().toString(36)}.mp3`;
+      await putVideoAsset(env, key, voice.bytes, "audio/mpeg");
+      const signed = await createSignedAssetUrl(env, { jobId, key, ttlSec: 3600 });
+      if (project?.audioTracks?.[0]) {
+        project.audioTracks[0].url = signed.url || "";
+        project.audioTracks[0].r2Key = key;
+      }
+      await saveJob(env, {
+        ...job,
+        editorProject: project,
+        artifacts: {
+          ...(job.artifacts || {}),
+          voice: {
+            ...(job.artifacts?.voice || {}),
+            r2Key: key,
+            url: signed.url || null,
+            bytes: voice.bytes?.byteLength || voice.bytes?.length || 0,
+            ok: true,
+            fromEditor: true
+          }
+        },
+        updatedAt: new Date().toISOString()
+      });
+      return json({ ok: true, voiceUrl: signed.url || null, script, project }, cors);
+    }
+
+    if (request.method === "POST" && action === "editor-export") {
+      await assertVideoStudioRateLimit(env, request);
+      const body = await request.json().catch(() => ({}));
+      const job = await readJob(env, jobId);
+      if (!job) return json({ ok: false, error: "Auftrag nicht gefunden" }, cors, 404);
+      const media = await resolveJobMedia(job);
+      let project = normalizeProject(body.project || job.editorProject);
+      if (!project) {
+        project = createProjectFromJob({
+          jobId,
+          statement: job.statement || {},
+          captionPlan: job.storyboard?.captionPlan || null,
+          sceneImageUrl: media.sceneImageUrl,
+          voiceUrl: media.voiceUrl,
+          clipUrls: media.clipUrls,
+          durationSec: job.durationSeconds || 15
+        });
+      }
+      project.background = {
+        ...project.background,
+        clipUrls: media.clipUrls,
+        assetUrl: media.sceneImageUrl || project.background?.assetUrl || ""
+      };
+      if (project.audioTracks?.[0]) project.audioTracks[0].url = media.voiceUrl || project.audioTracks[0].url;
+
+      if (!media.clipUrls.length) {
+        return json({ ok: false, error: "Keine Bewegungsclips – zuerst Video erzeugen" }, cors, 409);
+      }
+
+      const timeline = buildTimelineFromProject(env, project);
+      const validation = runVideoValidation({
+        statement: job.statement,
+        storyboard: job.storyboard,
+        captionPlan: projectToCaptionPlan(project),
+        render: {
+          ok: true,
+          audioAttached: Boolean(media.voiceUrl),
+          provider: "shotstack",
+          shotstackEnv: "v1",
+          foreignWatermarkRisk: false,
+          brandingApplied: true,
+          durationSeconds: project.duration
+        },
+        timelineMeta: timeline.meta
+      });
+
+      if (body.previewOnly === true) {
+        const reading = (project.elements || []).map((el) => {
+          const recommended = recommendedReadingSeconds(el.content || el.social?.followLine || "", { role: el.role });
+          return {
+            id: el.id,
+            role: el.role,
+            duration: el.timing.duration,
+            recommended,
+            short: el.role !== "watermark" && el.timing.duration + 0.05 < recommended
+          };
+        });
+        const contrast = (project.elements || [])
+          .filter((el) => el.type === "text" || el.role === "social")
+          .map((el) => ({ id: el.id, role: el.role, ...checkTextContrast(el.style || {}) }));
+        await saveJob(env, { ...job, editorProject: project, validation, updatedAt: new Date().toISOString() });
+        return json({
+          ok: true,
+          validation,
+          project,
+          previewOnly: true,
+          reading,
+          contrast,
+          previewFrames: [2, 6, 10, 13, Math.max(1, project.duration - 0.2)]
+        }, cors);
+      }
+
+      if (validation.blocked && body.force !== true) {
+        return json({
+          ok: false,
+          error: "Export blockiert durch Qualitätsprüfung",
+          validation,
+          blocked: true
+        }, cors, 422);
+      }
+
+      let compose = await submitShotstackTimeline(env, timeline, { final: true });
+      if (!compose.ok) {
+        const code = Number(compose.httpStatus || 0);
+        if (code === 401 || code === 403) {
+          // Kein Stage (Fremdwasserzeichen) – fal nur als unvollständige Vorschau
+          compose = await composeFinalVideo(env, {
+            clipUrls: media.clipUrls,
+            voiceUrl: media.voiceUrl,
+            captionPlan: projectToCaptionPlan(project),
+            final: true
+          });
+        }
+      }
+
+      if (!compose.ok) {
+        return json({ ok: false, error: compose.reason || "Export fehlgeschlagen", compose }, cors, 502);
+      }
+
+      const saved = await saveJob(env, {
+        ...job,
+        editorProject: project,
+        validation,
+        status: "running",
+        stage: "render",
+        artifacts: {
+          ...(job.artifacts || {}),
+          render: {
+            provider: compose.provider,
+            renderId: compose.renderId,
+            status: "running",
+            statusUrl: compose.statusUrl || null,
+            responseUrl: compose.responseUrl || null,
+            falPhase: compose.falPhase || null,
+            voiceUrl: media.voiceUrl || null,
+            shotstackEnv: compose.shotstackEnv || null,
+            foreignWatermarkRisk: Boolean(compose.foreignWatermarkRisk),
+            brandingApplied: Boolean(compose.brandingApplied),
+            composeFallback: compose.composeFallback || "editor",
+            timelineMeta: compose.timelineMeta || timeline.meta,
+            fromEditor: true
+          }
+        },
+        message: "Editor-Export läuft…",
+        updatedAt: new Date().toISOString()
+      });
+
+      if (ctx?.waitUntil) {
+        ctx.waitUntil(runVideoStudioPipelineLoop(env, jobId, helpers, { maxTicks: 24, delayMs: 2500 }));
+      }
+
+      return json({
+        ok: true,
+        job: publicJob(saved),
+        project,
+        validation,
+        renderId: compose.renderId,
+        provider: compose.provider
+      }, cors);
     }
   }
 
@@ -305,7 +770,7 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
         mode: job.mode || "auto",
         voiceProfile: job.voiceProfile || "dar-male",
         budget: normalizeBudget(job.budget || {}),
-        profile: job.profile || "dar-standard-v2",
+        profile: job.profile || "dar-standard-v4",
         format: "9:16",
         manualApproval: true,
         composePreview: job.composePreview === true,
@@ -321,6 +786,12 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
       if (job.status !== "completed") {
         return json({ ok: false, error: "Nur fertige Aufträge können freigegeben werden" }, cors, 409);
       }
+      if (job.qualityIncomplete || job.composePreview) {
+        return json({
+          ok: false,
+          error: "Unvollständige Vorschau – Freigabe erst nach bestandener Pflichtprüfung / Production-Endfassung"
+        }, cors, 409);
+      }
       if (job.artifacts?.render?.foreignWatermarkRisk || job.artifacts?.render?.shotstackEnv === "stage") {
         return json({
           ok: false,
@@ -333,12 +804,18 @@ export async function handleVideoStudioRequest(request, env, ctx, { cors, assert
           error: "fal-ffmpeg-Merge ohne DAR-Texte/Wasserzeichen – Freigabe erst nach Shotstack Production-Endfassung"
         }, cors, 409);
       }
+      if (job.validation?.blocked || (job.validation && job.validation.ok === false)) {
+        return json({
+          ok: false,
+          error: `Export-Validierung blockiert: ${(job.validation.errors || []).join(" · ") || "Pflichtchecks fehlgeschlagen"}`
+        }, cors, 409);
+      }
       const saved = await saveJob(env, {
         ...job,
         approval: {
           approved: true,
           approvedAt: new Date().toISOString(),
-          note: "Interne Freigabe – keine automatische Besucher-Veröffentlichung und kein Push"
+          note: "Interne Freigabe – Feed und Push bleiben getrennt manuell"
         },
         message: "Intern freigegeben (noch nicht veröffentlicht)",
         updatedAt: new Date().toISOString()

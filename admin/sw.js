@@ -1,9 +1,13 @@
-const CACHE_VERSION = 'dar-admin-stats-v63-video-studio-voice-brand';
+const CACHE_VERSION = 'dar-admin-stats-v67-video-editor-full';
 const SHELL = [
   '/admin/manifest.json',
   '/admin/admin-icon-192.png',
   '/admin/admin-icon-512.png',
   '/admin/video-studio.html',
+  '/admin/video-editor.html',
+  '/admin/video-editor.js',
+  '/admin/video-editor.css',
+  '/test/admin-video-editor.html',
   '/test/admin-video-studio.html',
   '/favicon.ico'
 ];

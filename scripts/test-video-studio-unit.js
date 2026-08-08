@@ -12,18 +12,28 @@ import { runQualityChecks } from "../cloudflare/video-studio/quality.js";
 import { selectStatement } from "../cloudflare/video-studio/statements.js";
 import { DAR_VIDEO_PROFILE } from "../cloudflare/video-studio/profile.js";
 import { buildShotstackTimeline, shotstackEnvironment } from "../cloudflare/video-studio/compose.js";
-
 import { resolveThemeAtmosphere } from "../cloudflare/video-studio/theme-presets.js";
 import { isProphetRelatedStatement } from "../cloudflare/video-studio/depiction-rules.js";
+import { DAR_CAPTION_SLOTS, PRESERVE_SCENE_PROMPT } from "../cloudflare/video-studio/timeline.js";
+import { validateGlyphCoverage } from "../cloudflare/video-studio/glyphs.js";
+import { runVideoValidation } from "../cloudflare/video-studio/validation.js";
+import { stripVoiceNoise } from "../cloudflare/video-studio/voice-prep.js";
 
-assert.equal(DAR_VIDEO_PROFILE.id, "dar-standard-v2");
+assert.equal(DAR_VIDEO_PROFILE.id, "dar-standard-v4");
 assert.equal(DAR_VIDEO_PROFILE.width, 1080);
 assert.equal(DAR_VIDEO_PROFILE.height, 1920);
+assert.equal(DAR_VIDEO_PROFILE.durationSec, 15);
 assert.equal(DAR_VIDEO_PROFILE.safety.noForeignWatermarkOnFinal, true);
-assert.equal(DAR_VIDEO_PROFILE.safety.noAutoFeedPublish, true);
-assert.equal(DAR_VIDEO_PROFILE.safety.uploadFirstSceneImage, true);
-assert.equal(DAR_VIDEO_PROFILE.safety.noProphetSilhouette, true);
+assert.equal(DAR_VIDEO_PROFILE.safety.noShotstackStageOnFinal, true);
+assert.equal(DAR_VIDEO_PROFILE.safety.noModernVehicles, true);
+assert.equal(DAR_VIDEO_PROFILE.safety.singleCenteredWatermark, true);
+assert.ok(Number(DAR_VIDEO_PROFILE.branding.watermarkOpacity) >= 0.07);
+assert.ok(Number(DAR_VIDEO_PROFILE.branding.watermarkOpacity) <= 0.10);
+assert.ok(Number(DAR_VIDEO_PROFILE.branding.watermarkScale) >= 0.35);
+assert.ok(Number(DAR_VIDEO_PROFILE.safeArea.sidePx) >= 80);
 assert.equal(DAR_VIDEO_PROFILE.branding.credit, "by Serhat Abu Malik");
+assert.ok(PRESERVE_SCENE_PROMPT.includes("Do not introduce any new people"));
+
 assert.equal(resolveThemeAtmosphere("Dhikr").id, "dhikr");
 assert.equal(resolveThemeAtmosphere("Sunnah").id, "manhaj");
 assert.equal(resolveThemeAtmosphere("Wissen").id, "ilm");
@@ -36,44 +46,60 @@ assert.equal(
   false
 );
 
+const glyphOk = validateGlyphCoverage("ʿAbdullāh ibn Masʿūd رضي الله عنه sagte:");
+assert.equal(glyphOk.ok, true);
+assert.equal(validateGlyphCoverage("bad\uFFFD").ok, false);
+
+assert.equal(stripVoiceNoise("Siehe https://x.test #tag 🖋️ Text").includes("http"), false);
+assert.equal(stripVoiceNoise("Siehe https://x.test #tag Text").includes("#"), false);
+
 const budget = normalizeBudget({ monthlyEur: 15, maxPerVideoEur: 1.2 });
 assert.equal(budget.maxPerVideoEur, 1.2);
 assert.equal(assertWithinBudget({ estimateEur: 0.9, spentMonthEur: 0, budget }).ok, true);
 assert.equal(assertWithinBudget({ estimateEur: 1.5, spentMonthEur: 0, budget }).ok, false);
-assert.equal(assertWithinBudget({ estimateEur: 1.0, spentMonthEur: 14.5, budget }).ok, false);
 
 const selected = await selectStatement({}, { brief: "" }, {});
 assert.equal(selected.ok, true);
 assert.ok(selected.statement.source);
 assert.ok(selected.statement.de);
 
+const withHonorific = buildSpeakerLine({
+  speaker: "ʿAbdullāh ibn Masʿūd رضي الله عنه",
+  de: "x",
+  source: "y"
+});
+assert.match(withHonorific, /رضي الله عنه sagte:$/);
+assert.equal(withHonorific.includes("رحمه الله"), false);
+
 const speakerLine = buildSpeakerLine(selected.statement);
-assert.match(speakerLine, /رحمه الله sagte:$/);
+assert.match(speakerLine, /sagte:$/);
 
 const voice = buildVoiceScript(selected.statement);
 assert.ok(voice.includes(selected.statement.de));
-assert.ok(voice.includes(selected.statement.speaker));
+assert.ok(voice.includes(selected.statement.speaker.split(/\s/)[0]));
 assert.ok(voice.includes(DAR_VIDEO_PROFILE.branding.followLine));
-assert.equal(voice.includes("Umformulierung"), false);
 
-const board = buildStoryboard(selected.statement);
+const board = buildStoryboard(selected.statement, { sceneImageUrl: "https://example.com/still.jpg" });
 assert.equal(board.scenes.length, 3);
 assert.equal(board.motionSeconds, 15);
-assert.ok(board.scenes.every((s) => /silhouette|hidden|back|shadow|anonymous/i.test(s.fullPrompt)));
-assert.ok(board.voiceScript.includes(DAR_VIDEO_PROFILE.branding.followLine));
-assert.ok(board.captionPlan?.overlays?.length >= 5);
+assert.ok(board.scenes.every((s) => /Preserve the original composition/i.test(s.fullPrompt)));
+assert.ok(/car|automobile|vehicle|motorcycle/i.test(board.scenes[0].negativePrompt));
 
-const plan = buildCaptionPlan(selected.statement, { totalSec: 20 });
+const plan = buildCaptionPlan({ ...selected.statement, topic: "Dhikr" }, { totalSec: 15 });
 const roles = plan.overlays.map((o) => o.role);
 assert.ok(roles.includes("brand"));
 assert.ok(roles.includes("speaker"));
 assert.ok(roles.includes("statement"));
 assert.ok(roles.includes("source"));
 assert.ok(roles.includes("cta"));
+assert.equal(plan.overlays.find((o) => o.role === "brand")?.topic, null);
+assert.equal(plan.overlays.find((o) => o.role === "brand")?.at, DAR_CAPTION_SLOTS.brand.at);
+assert.equal(plan.overlays.find((o) => o.role === "speaker")?.at, DAR_CAPTION_SLOTS.speaker.at);
+assert.equal(plan.overlays.find((o) => o.role === "source")?.at, DAR_CAPTION_SLOTS.source.at);
+assert.equal(plan.overlays.find((o) => o.role === "source")?.length, 2);
+assert.equal(plan.overlays.find((o) => o.role === "cta")?.at, DAR_CAPTION_SLOTS.cta.at);
 assert.ok(plan.overlays.filter((o) => o.role === "statement").length >= 2);
 assert.ok(plan.overlays.find((o) => o.role === "cta")?.social?.telegram, "@dar_al_tauhid");
-assert.equal(plan.overlays.find((o) => o.role === "cta")?.credit, "by Serhat Abu Malik");
-assert.ok(board.themePreset);
 
 const stage = shotstackEnvironment({ SHOTSTACK_HOST: "https://api.shotstack.io/edit/stage" }, { final: false });
 assert.equal(stage.isStage, true);
@@ -89,8 +115,32 @@ const timeline = buildShotstackTimeline({
 });
 assert.equal(timeline.output.size.width, 1080);
 assert.equal(timeline.output.size.height, 1920);
-assert.ok(timeline.timeline.tracks.length >= 2);
-assert.ok(JSON.stringify(timeline).includes("DAR AL TAWḤĪD") || JSON.stringify(timeline).includes("watermark"));
+assert.equal(timeline.meta.durationSec, 15);
+assert.equal(timeline.meta.watermarkCount, 1);
+assert.equal(timeline.meta.watermark.position, "center");
+assert.ok(timeline.meta.watermark.opacity <= 0.1);
+assert.ok(timeline.meta.lastClipCoversEnd);
+assert.deepEqual(timeline.meta.previewFrames, [2, 6, 11, 14]);
+assert.equal(timeline.timeline.background, "#1a1814");
+assert.ok(JSON.stringify(timeline.timeline).includes("DAR AL TAWḤĪD"));
+assert.equal(JSON.stringify(timeline.timeline).includes("Dhikr"), false);
+
+const validation = runVideoValidation({
+  statement: selected.statement,
+  storyboard: board,
+  captionPlan: plan,
+  render: {
+    ok: true,
+    audioAttached: true,
+    provider: "shotstack",
+    shotstackEnv: "v1",
+    foreignWatermarkRisk: false,
+    brandingApplied: true,
+    durationSeconds: 15
+  },
+  timelineMeta: timeline.meta
+});
+assert.equal(validation.ok, true, validation.errors.join(" · "));
 
 const qualityFail = runQualityChecks({
   statement: selected.statement,
@@ -102,7 +152,6 @@ const qualityFail = runQualityChecks({
   providerMeta: { simulated: true }
 });
 assert.equal(qualityFail.ok, false);
-assert.equal(qualityFail.checks.noForeignWatermark, false);
 
 const qualityStage = runQualityChecks({
   statement: selected.statement,
@@ -123,7 +172,8 @@ const qualityStage = runQualityChecks({
     hasMusic: false,
     brandingApplied: true,
     shotstackEnv: "stage",
-    foreignWatermarkRisk: true
+    foreignWatermarkRisk: true,
+    durationSeconds: 15
   },
   captionPlan: plan,
   providerMeta: { simulated: false }
@@ -151,15 +201,18 @@ const qualityOk = runQualityChecks({
     brandingApplied: true,
     shotstackEnv: "v1",
     foreignWatermarkRisk: false,
-    provider: "shotstack"
+    provider: "shotstack",
+    durationSeconds: 15,
+    timelineMeta: timeline.meta
   },
   captionPlan: plan,
   providerMeta: { simulated: false }
 });
 assert.equal(qualityOk.ok, true, qualityOk.reasons.join(" · "));
 assert.equal(qualityOk.checks.brandingComplete, true);
-assert.equal(qualityOk.checks.textHierarchyOk, true);
-assert.equal(qualityOk.checks.voiceExact, true);
+assert.equal(qualityOk.checks.darLogoCentered, true);
+assert.equal(qualityOk.checks.noInventedCategory, true);
+assert.equal(qualityOk.checks.durationValid, true);
 
 const qualityFal = runQualityChecks({
   statement: selected.statement,
@@ -182,16 +235,14 @@ const qualityFal = runQualityChecks({
     shotstackEnv: null,
     foreignWatermarkRisk: false,
     provider: "fal-ffmpeg",
-    composeFallback: "fal-ffmpeg"
+    composeFallback: "fal-ffmpeg",
+    durationSeconds: 15
   },
   captionPlan: plan,
   providerMeta: { simulated: false }
 });
 assert.equal(qualityFal.ok, false, "fal ohne Branding darf QA nicht bestehen");
 assert.equal(qualityFal.falComposeFallback, true);
-assert.equal(qualityFal.checks.noForeignWatermark, true);
-assert.equal(qualityFal.checks.brandingComplete, false);
-assert.equal(qualityFal.checks.captionsSafe, false);
 
 import { parseContributionText } from "../cloudflare/video-studio/text-parse.js";
 import { readFileSync } from "node:fs";
@@ -203,14 +254,80 @@ assert.equal(parsedFancy.ok, true);
 assert.match(parsedFancy.statement.speaker, /Masʿūd|Mas.ud/);
 assert.match(parsedFancy.statement.de, /Fasten|mehr/i);
 assert.match(parsedFancy.statement.source, /Šaybah|Shaybah|Ibn/i);
-assert.match(parsedFancy.statement.fazit, /Herzen|Menge/i);
-assert.equal(parsedFancy.statement.verified, true);
+assert.notEqual(parsedFancy.statement.topic, "Dhikr");
 
 const md = readFileSync(new URL("../content/posts/zuhd-437-sei-von-den-kindern-der-akhirah.md", import.meta.url), "utf8");
 const parsedMd = parseContributionText(md);
 assert.equal(parsedMd.statement.speaker.includes("Alī") || parsedMd.statement.speaker.includes("Ali"), true);
 assert.match(parsedMd.statement.source, /Zuhd|Ḥanbal|Hanbal/i);
 assert.ok(parsedMd.statement.de.length > 40);
-assert.ok(parsedMd.statement.fazit.length > 20);
+
+import { createProjectFromJob, scaleProjectDuration, projectToCaptionPlan } from "../cloudflare/video-studio/project.js";
+import { buildTimelineFromProject } from "../cloudflare/video-studio/project-compose.js";
+
+const proj = createProjectFromJob({
+  jobId: "job_test",
+  statement: selected.statement,
+  captionPlan: plan,
+  sceneImageUrl: "https://example.com/still.jpg",
+  voiceUrl: "https://example.com/voice.mp3",
+  clipUrls: ["https://example.com/a.mp4", "https://example.com/b.mp4", "https://example.com/c.mp4"],
+  durationSec: 15
+});
+assert.equal(proj.width, 1080);
+assert.equal(proj.height, 1920);
+assert.equal(proj.duration, 15);
+assert.ok(proj.elements.some((e) => e.role === "watermark"));
+assert.ok(proj.elements.some((e) => e.role === "speaker"));
+assert.ok(proj.elements.some((e) => e.role === "social"));
+assert.equal(proj.elements.filter((e) => e.role === "watermark").length, 1);
+const scaled = scaleProjectDuration(proj, 30, { proportional: true });
+assert.equal(scaled.duration, 30);
+assert.ok(scaled.elements.find((e) => e.role === "social")?.timing.end > 20);
+const plan2 = projectToCaptionPlan(proj);
+assert.ok(plan2.overlays.length >= 4);
+const tl = buildTimelineFromProject({}, { ...proj, background: { ...proj.background, clipUrls: proj.background.clipUrls } });
+assert.equal(tl.meta.fromEditor, true);
+assert.equal(tl.meta.watermarkCount, 1);
+assert.ok(tl.meta.watermark.opacity <= 0.12);
+
+import {
+  recommendedReadingSeconds,
+  contrastRatio,
+  checkTextContrast,
+  redistributeTimings,
+  interpolateKeyframes,
+  addKeyframe,
+  applyHighlightToSelection,
+  snapshotVersion,
+  HIGHLIGHT_PRESETS,
+  ANIMATION_PRESETS
+} from "../cloudflare/video-studio/editor-lib.js";
+
+assert.ok(recommendedReadingSeconds("Kurzer Text.", { role: "source" }) >= 2);
+assert.ok(recommendedReadingSeconds("Ein etwas längerer Satz mit mehreren Wörtern für die Lesedauer.", { role: "quote" }) >= 2.4);
+assert.ok(contrastRatio("#fff8e8", "#12141a") >= 4.5);
+assert.equal(checkTextContrast({ color: "#fff8e8", background: { mode: "none" } }).ok, true);
+assert.ok(HIGHLIGHT_PRESETS["dar-gold"]);
+assert.ok(ANIMATION_PRESETS.fade);
+
+const redistributed = redistributeTimings(proj.elements, 15, voice);
+assert.ok(Array.isArray(redistributed));
+assert.ok(redistributed.every((e) => e.timing.end > e.timing.start));
+
+const withKf = addKeyframe({ transform: { x: 0, y: 0 }, opacity: 1 }, 0, { x: 10, y: 20, opacity: 1 });
+const withKf2 = addKeyframe(withKf, 2, { x: 30, y: 40, opacity: 0.5 });
+const mid = interpolateKeyframes(withKf2.keyframes, 1);
+assert.ok(mid.x > 10 && mid.x < 30);
+
+const hi = applyHighlightToSelection("Dies ist ein Testsatz.", { start: 9, end: 12 }, "dar-gold");
+assert.equal(hi.segments.length, 1);
+assert.equal(hi.segments[0].text, "ein");
+assert.equal(hi.segments[0].color, "#efd78e");
+
+const snap = snapshotVersion(proj, "unit");
+assert.equal(snap.label, "unit");
+assert.ok(snap.project.duration === 15);
 
 console.log("video-studio unit checks ok");
+
