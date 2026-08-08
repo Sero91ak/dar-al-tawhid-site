@@ -42,7 +42,7 @@ function stripMdDecor(s) {
 function cleanSpeaker(raw) {
   return stripMdDecor(String(raw || ""))
     .replace(/^[🖋️📌📖]*\s*/u, "")
-    .replace(/\s*(رضي الله عنه|رضى الله عنه|رحمه الله|عليه السلام|ﷺ)\s*/giu, " ")
+    .replace(/\s+(رضي الله عنه|رضى الله عنه|رحمه الله|عليه السلام|ﷺ)\s*/giu, " $1")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -95,7 +95,7 @@ export function parseContributionText(raw) {
 
   // 1) Sprecher … sagte: „Aussage“
   const saidRe =
-    /(?:^|\n)\s*(?:🖋️\s*)?(?:\*\*)?([^\n*]{2,120}?)(?:\*\*)?\s*(?:رضي الله عنه|رضى الله عنه|رحمه الله|عليه السلام)?\s*sagte\s*[:：]\s*([\s\S]*?)(?=(?:\s*(?:📝|🌙)|(?:\n\s*)?(?:Quelle|Fundstelle|Fazit|Schluss|Folgt für)|$))/iu;
+    /(?:^|\n)\s*(?:🖋️\s*)?(?:\*\*)?([^\n*]{2,120}?(?:\s*(?:رضي الله عنه|رضى الله عنه|رحمه الله|عليه السلام|ﷺ))?)(?:\*\*)?\s*sagte\s*[:：]\s*([\s\S]*?)(?=(?:\s*(?:📝|🌙)|(?:\n\s*)?(?:Quelle|Fundstelle|Fazit|Schluss|Folgt für)|$))/iu;
   const said = text.match(saidRe);
   if (said) {
     speaker = cleanSpeaker(said[1]);
@@ -207,26 +207,28 @@ export function parseContributionText(raw) {
 
 function guessTopic(de) {
   const t = String(de || "").toLowerCase();
-  if (/dhikr|gedenken|herz|taqw/.test(t)) return "Dhikr";
-  if (/zuhd|duny|ākhir|akhir|jenzeit/.test(t)) return "Zuhd";
-  if (/sunnah|manhaj|glauben|aqidah|ʿaq/.test(t)) return "Sunnah";
+  /* Verbotene Auto-Labels nur bei ausdrücklichem Vorkommen im Beitragstext */
+  if (/\bdhikr\b/.test(t)) return "Dhikr";
+  if (/\bhadith\b|\baḥādīṯ\b|\bahadith\b/.test(t)) return "Hadith";
+  if (/zuhd|dunyā|dunya|ākhirah|akhirah|jenzeit/.test(t)) return "Zuhd";
+  if (/sunnah|manhaj|ʿaqīdah|aqidah/.test(t)) return "Sunnah";
   if (/familie|adab|kind/.test(t)) return "Adab";
-  if (/fasten|gebet|ṣalāh|salah/.test(t)) return "Ibadah";
+  if (/fasten|ṣalāh|salah|gebet/.test(t)) return "Ibadah";
   if (/wissen|gelehrt|lernen/.test(t)) return "Wissen";
-  return "Wissen";
+  return "";
 }
 
-export function estimateVideoCost({ clipCount = 3, durationSec = 15, voiceChars = 400 } = {}) {
-  const videoEur = Number((durationSec * 0.05).toFixed(2));
-  const voiceEur = Number(((voiceChars / 1000) * 0.18).toFixed(2));
-  const renderEur = 0.05;
-  const totalMin = Number((videoEur + voiceEur + renderEur).toFixed(2));
-  const totalMax = Number((totalMin * 1.25).toFixed(2));
+export function estimateVideoCost({ voiceChars = 400, durationSec = 0 } = {}) {
+  const voiceEur = Number(((Math.max(80, voiceChars) / 1000) * 0.18).toFixed(2));
+  const renderEur = 0.08;
+  const dur = Number(durationSec) || 0;
+  const totalMin = Number((voiceEur + renderEur).toFixed(2));
+  const totalMax = Number((totalMin * 1.2).toFixed(2));
   return {
-    mode: "günstig · 3 × 5 s Bewegung",
-    clipCount,
-    durationSec,
-    breakdown: { videoEur, voiceEur, renderEur },
+    mode: "Sprach-Bildbeitrag · Stimme + Rendering",
+    clipCount: 0,
+    durationSec: dur || null,
+    breakdown: { voiceEur, renderEur, videoEur: 0 },
     estimateMinEur: totalMin,
     estimateMaxEur: totalMax
   };

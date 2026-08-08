@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#07111d">
 <meta name="color-scheme" content="dark">
-<title>DAR Admin · KI-Video-Studio</title>
+<title>DAR Admin · Sprach-Bildbeitrag</title>
 <style>
 :root{
   --bg:#05080f;--panel:#0b1220;--ink:#f7f0df;--soft:#d2c9b7;--muted:#8f99a7;
@@ -33,14 +33,19 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .chip.ok{color:var(--ok)}.chip.warn{color:var(--warn)}.chip.bad{color:var(--bad)}.chip.run{color:var(--gold)}
 .icon-btn{min-width:44px;min-height:44px;border-radius:12px;border:1px solid var(--line);background:rgba(90,140,220,.08);color:var(--ink)}
 .back{min-height:44px;padding:0 12px;border-radius:12px;border:1px solid var(--line);background:rgba(90,140,220,.08);color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;font-size:12px;font-weight:900}
-.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-bottom:10px}
-.step{border:1px solid var(--line2);border-radius:12px;padding:8px 6px;text-align:center;background:rgba(0,0,0,.18);font-size:10px;font-weight:900;color:var(--muted)}
-.step b{display:block;color:var(--ink);font-size:11px;margin-bottom:2px}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-bottom:10px}
+.step{border:1px solid var(--line2);border-radius:12px;padding:8px 4px;text-align:center;background:rgba(0,0,0,.18);font-size:9px;font-weight:900;color:var(--muted)}
+.step b{display:block;color:var(--ink);font-size:10px;margin-bottom:2px}
 .step.active{border-color:rgba(239,215,142,.45);background:rgba(239,215,142,.08);color:var(--gold)}
 .step.done{border-color:rgba(139,224,189,.28);color:var(--ok)}
+.design-controls{display:grid;gap:10px;margin-top:10px}
+.design-controls label{display:grid;gap:4px;font-size:11px;font-weight:800;color:var(--soft)}
+.design-controls input[type=range]{width:100%;accent-color:var(--gold)}
+.voice-box{border:1px solid var(--line2);border-radius:12px;padding:10px;background:rgba(0,0,0,.22);margin-top:8px}
+.voice-box audio{width:100%;margin-top:8px}
 .panel{border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,rgba(11,18,32,.98),rgba(5,8,15,.98));padding:12px;margin-bottom:10px}
 .label{display:block;font-size:11px;font-weight:900;color:var(--soft);margin:0 0 6px}
-textarea,input{width:100%;border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.28);padding:11px 12px;outline:none}
+textarea,input,select{width:100%;border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.28);padding:11px 12px;outline:none}
 textarea{min-height:96px;max-height:42vh;resize:vertical;line-height:1.45}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .meta{color:var(--muted);font-size:10px}
@@ -50,8 +55,23 @@ textarea{min-height:96px;max-height:42vh;resize:vertical;line-height:1.45}
 .btn.danger{border-color:rgba(255,154,144,.3);color:#ffd2cd;background:rgba(255,154,144,.06)}
 .grid2{display:grid;gap:10px}
 @media(min-width:768px){.grid2{grid-template-columns:1.1fr .9fr}.app{width:min(100%,1100px)}}
-.preview-wrap{border:1px solid var(--line2);border-radius:14px;background:#000;overflow:hidden;aspect-ratio:9/16;max-height:min(58vh,520px);margin:0 auto;width:min(100%,320px);display:grid;place-items:center}
+.preview-wrap{border:1px solid var(--line2);border-radius:14px;background:#000;overflow:hidden;aspect-ratio:9/16;max-height:min(58vh,520px);margin:0 auto;width:min(100%,320px);display:grid;place-items:center;position:relative}
+.comp-preview{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:7% 6% 6%;z-index:2;background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,.06) 22%,rgba(0,0,0,.08) 55%,rgba(0,0,0,.42))}
+.comp-preview .c-top{text-align:center;font-family:var(--serif);letter-spacing:.16em;font-size:10px;font-weight:900;color:var(--gold);text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.comp-preview .c-mid{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:0 4px}
+.comp-preview .c-wm{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:34%;opacity:.065;pointer-events:none}
+.comp-preview .c-wm img{width:100%;display:block}
+.comp-preview .c-speaker{font-family:var(--serif);font-size:11px;color:#fff8e8;line-height:1.35;text-shadow:0 1px 8px #000}
+.comp-preview .c-quote{font-family:var(--serif);font-size:12px;color:#fff8e8;line-height:1.35;max-width:92%;text-shadow:0 1px 8px #000}
+.comp-preview .c-source{font-family:var(--serif);font-size:9px;font-style:italic;color:#d2c9b7;margin-top:4px;text-shadow:0 1px 6px #000}
+.comp-preview .c-foot{text-align:center;font-size:8px;line-height:1.35;color:#e8dcc0;text-shadow:0 1px 8px #000}
+.comp-preview .c-foot b{display:block;color:#fff8e8;font-weight:800;margin-bottom:3px;font-size:8.5px}
+.comp-preview .c-foot .credit{color:var(--gold);margin-top:3px;letter-spacing:.03em}
 .preview-wrap img,.preview-wrap video{width:100%;height:100%;object-fit:contain;display:block}
+.frame-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:8px}
+.frame-strip button{border:1px solid var(--line2);border-radius:10px;background:rgba(0,0,0,.35);padding:0;overflow:hidden;min-height:72px;cursor:pointer}
+.frame-strip canvas,.frame-strip img{width:100%;height:72px;object-fit:cover;display:block;background:#111}
+.frame-strip small{display:block;text-align:center;font-size:10px;opacity:.75;margin-top:2px}
 .actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
 .notice{margin-top:8px;border:1px dashed var(--line);border-radius:12px;padding:10px;font-size:11px;line-height:1.45;color:var(--soft);background:rgba(90,140,220,.04)}
 .notice.bad{border-color:rgba(255,154,144,.35);color:#ffd2cd}.notice.ok{border-color:rgba(139,224,189,.3);color:#c8f5e2}.notice.warn{border-color:rgba(255,211,134,.35);color:#ffe3b0}
@@ -92,7 +112,7 @@ details.box summary::-webkit-details-marker{display:none}
     <div class="brand">
       <div class="mark">د</div>
       <div>
-        <h1>KI-Video-Studio</h1>
+        <h1>Sprach-Bildbeitrag</h1>
         <small id="statusChip">bereit</small>
       </div>
     </div>
@@ -113,13 +133,14 @@ details.box summary::-webkit-details-marker{display:none}
   <nav class="steps" aria-label="Produktionsschritte">
     <div class="step active" data-step="text"><b>1 Text</b>einfügen</div>
     <div class="step" data-step="image"><b>2 Bild</b>Upload</div>
-    <div class="step" data-step="video"><b>3 Video</b>erzeugen</div>
-    <div class="step" data-step="result"><b>4 Ergebnis</b>Export</div>
+    <div class="step" data-step="voice"><b>3 Stimme</b>Vorschau</div>
+    <div class="step" data-step="design"><b>4 Gestaltung</b>prüfen</div>
+    <div class="step" data-step="result"><b>5 Ergebnis</b>Export</div>
   </nav>
 
   <section class="panel" id="panelText">
     <label class="label" for="textInput">Textbeitrag einfügen</label>
-    <textarea id="textInput" placeholder="Sprecher, Aussage, Quelle … vollständigen Beitrag hier einfügen."></textarea>
+    <textarea id="textInput" placeholder="Beitrag einfügen …"></textarea>
     <div class="row" style="margin-top:8px;justify-content:space-between">
       <span class="meta" id="charCount">0 Zeichen</span>
       <div class="row">
@@ -129,11 +150,12 @@ details.box summary::-webkit-details-marker{display:none}
     </div>
     <div class="struct" id="structPreview" style="margin-top:8px"></div>
     <div class="notice" id="parseNotice" hidden></div>
-    <details class="box" id="structBox" open>
-      <summary><span>Textaufteilung (automatisch erkannt)</span><span>▾</span></summary>
+    <details class="box" id="structBox">
+      <summary><span>Textaufteilung bearbeiten</span><span>▾</span></summary>
       <div class="box-body">
         <div><label class="label" for="fSpeaker">Sprecher</label><input id="fSpeaker"></div>
         <div><label class="label" for="fDe">Aussage</label><textarea id="fDe" style="min-height:72px"></textarea></div>
+        <div><label class="label" for="fVoiceScript">Sprechertext</label><textarea id="fVoiceScript" style="min-height:64px" placeholder="optional – abweichender Vorlesetext"></textarea></div>
         <div><label class="label" for="fSource">Quelle</label><input id="fSource"></div>
         <div><label class="label" for="fFazit">Fazit / Schluss</label><textarea id="fFazit" style="min-height:56px" placeholder="optional erkannt"></textarea></div>
         <div><label class="label" for="fTopic">Thema</label><input id="fTopic" placeholder="Wissen / Dhikr / Sunnah …"></div>
@@ -145,22 +167,29 @@ details.box summary::-webkit-details-marker{display:none}
   <section class="panel hidden" id="panelImage">
     <div class="row" style="justify-content:space-between;margin-bottom:8px">
       <strong style="font-family:var(--serif);color:var(--gold)">Ausgangsbild</strong>
-      <span class="meta">4K · 9:16 · textfrei · Standard: Upload</span>
+      <span class="meta">4K · 9:16 · textfrei · unverändert</span>
     </div>
-    <p class="meta" style="margin:0 0 8px;line-height:1.45">Standardweg: extern erzeugtes Video-Bild (z. B. ChatGPT) hochladen oder aus der Bibliothek wählen. Interne KI-Bildgenerierung ist nur optional.</p>
+    <p class="meta" style="margin:0 0 8px;line-height:1.45">Bild hochladen oder aus der Bibliothek wählen – wird unverändert als Grundlage genutzt.</p>
     <div class="actions">
       <button class="btn primary" type="button" id="uploadImageBtn">Bild hochladen</button>
       <button class="btn primary" type="button" id="libraryBtn">Aus Bibliothek</button>
       <input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp" class="hidden">
     </div>
-    <details class="box" id="optionalGenBox">
-      <summary><span>Optional: KI-Szenenbild</span><span>▾</span></summary>
-      <div class="box-body">
-        <p class="meta" style="margin:0;line-height:1.4">Nur falls kein externes 4K-Bild vorliegt. Erzeugt ein textfreies Themenbild – nicht der Standardweg.</p>
-        <button class="btn" type="button" id="genImageBtn" style="width:100%">Optional erzeugen</button>
+    <div class="preview-wrap" style="margin-top:10px"><img id="scenePreview" alt="Ausgangsbild" class="hidden"><div class="comp-preview hidden" id="compPreview" aria-hidden="true">
+      <div class="c-top">DAR AL TAWḤĪD</div>
+      <div class="c-wm"><img src="/watermark-my-logo-full.png" alt=""></div>
+      <div class="c-mid">
+        <div class="c-speaker" id="compSpeaker">Sprecher رحمه الله</div>
+        <div class="c-quote" id="compQuote">„Aussage erscheint hier im Lesebereich.“</div>
+        <div class="c-source" id="compSource">Quelle: …</div>
       </div>
-    </details>
-    <div class="preview-wrap" style="margin-top:10px"><img id="scenePreview" alt="Ausgangsbild" class="hidden"></div>
+      <div class="c-foot">
+        <b>Folgt für mehr Wissen aus Qurʾān &amp; Sunnah</b>
+        Telegram · Website · Instagram
+        <div class="credit">by Serhat Abu Malik</div>
+      </div>
+    </div></div>
+    <p class="meta" style="text-align:center;margin:6px 0 0">Kompositionsvorschau · Branding vom ersten bis letzten Frame</p>
     <div class="actions">
       <button class="btn primary" type="button" id="acceptImageBtn" disabled>Übernehmen</button>
       <button class="btn" type="button" id="replaceImageBtn" disabled>Ersetzen</button>
@@ -170,23 +199,85 @@ details.box summary::-webkit-details-marker{display:none}
     <div class="notice" id="imageNotice">Bitte 4K-/9:16-Ausgangsbild hochladen oder aus der Bibliothek wählen.</div>
   </section>
 
-  <section class="panel hidden" id="panelVideo">
-    <div class="cost" id="costBox">15 Sekunden · 3 Bewegungsclips<br>Geschätzte Kosten: —</div>
+  <section class="panel hidden" id="panelVoice">
+    <div class="cost" id="costBox">Dauer folgt der Stimme · Kosten nur Stimme + Rendering</div>
     <div class="progress" aria-hidden="true"><i id="progBar"></i></div>
-    <div class="meta" id="prodMsg">Bereit zur Erzeugung</div>
-    <button class="btn primary dock" type="button" id="createVideoBtn" style="width:100%">Video-Beitrag erstellen</button>
-    <button class="btn" type="button" id="resumeJobBtn" style="width:100%;margin-top:8px" hidden>Weiter generieren</button>
+    <div class="meta" id="prodMsg">Bereit – Stimme erzeugen und freigeben</div>
+    <button class="btn primary dock" type="button" id="createVoiceBtn" style="width:100%">Stimme erzeugen</button>
+    <div class="voice-box hidden" id="voicePreviewBox">
+      <strong style="font-family:var(--serif);color:var(--gold);font-size:13px">Audiovorschau</strong>
+      <p class="meta" style="margin:4px 0 0;line-height:1.4">Nur Sprecherzeile und Aussage. Quelle und Social Media werden nicht vorgelesen.</p>
+      <audio id="voiceAudio" controls preload="metadata"></audio>
+      <div class="actions" style="margin-top:8px">
+        <button class="btn" type="button" id="playVoiceBtn">Abspielen</button>
+        <button class="btn" type="button" id="stopVoiceBtn">Stoppen</button>
+        <button class="btn" type="button" id="regenVoiceBtn">Erneut erzeugen</button>
+        <button class="btn primary" type="button" id="approveVoiceBtn">Stimme freigeben</button>
+      </div>
+    </div>
+    <button class="btn" type="button" id="resumeJobBtn" style="width:100%;margin-top:8px" hidden>Weiter erzeugen</button>
     <div class="actions" style="margin-top:8px">
       <button class="btn" type="button" id="backImageBtn">← Bild</button>
       <button class="btn danger" type="button" id="cancelJobBtn" disabled>Abbrechen</button>
     </div>
-    <div class="notice" id="videoNotice"></div>
+    <div class="notice" id="voiceNotice">Nach dem Bild die Stimme erzeugen, anhören und freigeben – erst danach Gestaltung und MP4.</div>
+  </section>
+
+  <section class="panel hidden" id="panelDesign">
+    <div class="row" style="justify-content:space-between;margin-bottom:8px">
+      <strong style="font-family:var(--serif);color:var(--gold)">Gestaltung</strong>
+      <span class="meta">9:16 · volles DAR-Layout</span>
+    </div>
+    <div class="preview-wrap"><img id="designPreviewImg" alt="Gestaltung" class="hidden"><div class="comp-preview" id="designCompPreview" aria-hidden="true">
+      <div class="c-top">DAR AL TAWḤĪD</div>
+      <div class="c-wm" id="designWm"><img src="/watermark-my-logo-full.png" alt=""></div>
+      <div class="c-mid">
+        <div class="c-speaker" id="designSpeaker">Sprecher رحمه الله</div>
+        <div class="c-quote" id="designQuote">„Aussage erscheint hier im Lesebereich.“</div>
+        <div class="c-source" id="designSource">Quelle: …</div>
+      </div>
+      <div class="c-foot">
+        <b>Folgt für mehr Wissen aus Qurʾān &amp; Sunnah</b>
+        Telegram · Website · Instagram
+        <div class="credit">by Serhat Abu Malik</div>
+      </div>
+    </div></div>
+    <div class="design-controls">
+      <label>Layoutvariante
+        <select id="designVariant">
+          <option value="classic">Klassisch</option>
+          <option value="compact">Kompakt</option>
+          <option value="elevated">Leicht angehoben</option>
+        </select>
+      </label>
+      <label>Textgröße <span class="meta" id="textScaleVal">100 %</span>
+        <input id="designTextScale" type="range" min="85" max="120" value="100">
+      </label>
+      <label>Wasserzeichen-Deckkraft <span class="meta" id="wmOpacityVal">6,5 %</span>
+        <input id="designWmOpacity" type="range" min="5" max="8" step="0.5" value="6.5">
+      </label>
+      <label>Lesbarkeitszone <span class="meta" id="dimOpacityVal">18 %</span>
+        <input id="designDimOpacity" type="range" min="8" max="45" value="18">
+      </label>
+      <label>Textblock vertikal <span class="meta" id="textShiftVal">Mitte</span>
+        <input id="designTextShift" type="range" min="-12" max="12" value="0">
+      </label>
+    </div>
+    <button class="btn primary dock" type="button" id="createVideoBtn" style="width:100%;margin-top:12px">Sprach-Bildbeitrag erstellen</button>
+    <div class="actions" style="margin-top:8px">
+      <button class="btn" type="button" id="backVoiceBtn">← Stimme</button>
+      <button class="btn danger" type="button" id="cancelDesignBtn" disabled>Abbrechen</button>
+    </div>
+    <div class="meta" id="designMsg" style="margin-top:8px">Gestaltung prüfen – dann MP4 rendern.</div>
+    <div class="notice" id="designNotice">Vollständige DAR-Vorschau: Titel, Logo, Aussage, Quelle, Social Media dauerhaft – keine Endkarte.</div>
   </section>
 
   <section class="panel hidden" id="panelResult">
     <div class="preview-wrap"><video id="resultVideo" controls playsinline preload="metadata" class="hidden"></video></div>
+    <div class="frame-strip" id="previewFrames" aria-label="Prüfbilder"></div>
     <div class="struct" id="resultMeta" style="margin-top:8px"></div>
     <div class="actions">
+      <button class="btn primary" type="button" id="editTouchBtn">Touch-Editor</button>
       <button class="btn primary" type="button" id="saveBtn">Auf Gerät speichern</button>
       <button class="btn primary" type="button" id="shareBtn">Teilen</button>
     </div>
@@ -194,13 +285,13 @@ details.box summary::-webkit-details-marker{display:none}
       <button class="btn" type="button" id="approveBtn">Intern freigeben</button>
       <button class="btn" type="button" id="feedBtn" disabled>Im Feed veröffentlichen</button>
       <button class="btn" type="button" id="pushBtn" disabled>Besucher-Push senden</button>
-      <button class="btn" type="button" id="newJobBtn">Neuer Beitrag</button>
+      <button class="btn" type="button" id="newJobBtn">Neuer Sprach-Bildbeitrag</button>
     </div>
     <div class="notice" id="resultNotice">Feed und Push nur manuell – nie automatisch.</div>
   </section>
 
   <details class="box" id="jobsBox" open>
-    <summary><span id="jobsSummary">Server-Aufträge · 0</span><span>▾</span></summary>
+    <summary><span id="jobsSummary">Sprach-Bildbeiträge · 0</span><span>▾</span></summary>
     <div class="box-body">
       <div class="row">
         <button class="btn ghost" type="button" id="reloadJobsBtn">Aktualisieren</button>
@@ -228,8 +319,10 @@ details.box summary::-webkit-details-marker{display:none}
       <div class="actions" style="margin-top:10px">
         <button class="btn" type="button" id="eParseBtn">Text neu erkennen</button>
         <button class="btn primary" type="button" id="eSaveBtn">Text speichern</button>
+        <button class="btn primary" type="button" id="eOpenBtn">Öffnen</button>
+        <button class="btn" type="button" id="eResumeBtn">Weiter erzeugen</button>
         <button class="btn primary" type="button" id="eRegenBtn">Neu erzeugen</button>
-        <button class="btn" type="button" id="eOpenBtn">Öffnen</button>
+        <button class="btn danger" type="button" id="eCancelBtn">Abbrechen</button>
         <button class="btn danger" type="button" id="eDeleteBtn">Löschen</button>
       </div>
       <div class="notice" id="jobSheetNotice"></div>
@@ -249,17 +342,15 @@ details.box summary::-webkit-details-marker{display:none}
     <summary><span>Erweiterte Details</span><span>▾</span></summary>
     <div class="box-body">
       <div class="meta" id="providerDetail">Anbieterstatus wird geladen…</div>
-      <div><label class="label" for="maxBudget">Max. € / Video</label><input id="maxBudget" type="number" min="0.5" max="20" step="0.1" value="1.2"></div>
-      <div class="meta">Provider-Auswahl: automatisch (günstig). Stage nur interne Vorschau; Endfassung Production.</div>
+      <div><label class="label" for="maxBudget">Max. € / Beitrag (Stimme+Render)</label><input id="maxBudget" type="number" min="0.5" max="20" step="0.1" value="1.2"></div>
+      <div class="meta">Stimme: ElevenLabs · Rendering: Shotstack Production. Keine Fremdwasserzeichen.</div>
     </div>
   </details>
 
   <details class="box hidden" id="helpBox">
     <summary><span>Kurzhilfe</span><span>▾</span></summary>
     <div class="box-body meta">
-      <b>ChatGPT:</b> „Video-Bild erstellen“ / „Video-Bildbeitrag“ / „Videobeitrag erstellen“ = nur das reine 4K-Ausgangsbild (textfrei, logofrei).<br><br>
-      <b>Admin-Button „Video-Beitrag erstellen“:</b> Text + Ausgangsbild → 15 s Bewegung → Stimme → Texteinblendungen → Branding → MP4.<br><br>
-      Standard: externes Bild hochladen/Bibliothek. KI-Bild nur optional. Feed/Push nie automatisch. Keine Musik, keine Fremdwasserzeichen, Propheten nie körperlich dargestellt.
+      Text → Bild → Stimme vorhören &amp; freigeben → Gestaltung prüfen → Sprach-Bildbeitrag erstellen. Branding vom ersten bis letzten Frame – keine Endkarte. Keine Musik, keine Fremdwasserzeichen.
     </div>
   </details>
 </main>
@@ -272,6 +363,29 @@ details.box summary::-webkit-details-marker{display:none}
   const WURL="darAdminWorkerPublishUrlV1";
   const WSEC="darAdminWorkerSecretV1";
   const DEFAULT_WORKER="https://dar-admin-publisher.sero91ak.workers.dev";
+  const STAGE_ORDER=["statement","image","voice","layout","render","review"];
+  const STAGE_ALIASES={storyboard:"statement",references:"image",clips:"voice",captions:"layout"};
+  const STAGE_PROGRESS={
+    statement:12,storyboard:12,image:28,references:28,voice:48,clips:48,
+    layout:68,captions:68,render:86,review:96,completed:100
+  };
+  const STAGE_LABELS={
+    statement:"Text geprüft",
+    storyboard:"Text geprüft",
+    image:"Bild vorbereitet",
+    references:"Bild vorbereitet",
+    voice:"Stimme wird erzeugt",
+    clips:"Stimme wird erzeugt",
+    voice_pending:"Stimme wartet auf Freigabe",
+    layout:"Gestaltung wird vorbereitet",
+    captions:"Gestaltung wird vorbereitet",
+    design_pending:"Gestaltung prüfen",
+    render:"MP4 wird gerendert",
+    review:"Qualitätsprüfung",
+    completed:"Fertig",
+    awaiting_voice_approval:"Stimme wartet auf Freigabe",
+    awaiting_design:"Gestaltung prüfen"
+  };
   const el=id=>document.getElementById(id);
   const state={step:"text",job:null,parsed:null,scene:null,poll:null,estimate:null,editJob:null};
 
@@ -288,17 +402,27 @@ details.box summary::-webkit-details-marker{display:none}
   function setStatus(text,cls){el("statusChip").textContent=text;el("statusChip").className=cls||""}
   function showStep(step){
     state.step=step;
-    const map={text:"panelText",image:"panelImage",video:"panelVideo",result:"panelResult"};
+    const map={text:"panelText",image:"panelImage",voice:"panelVoice",design:"panelDesign",result:"panelResult"};
     Object.keys(map).forEach(s=>el(map[s]).classList.toggle("hidden",s!==step));
     document.querySelectorAll(".step").forEach(n=>{
       const s=n.getAttribute("data-step");
       n.classList.toggle("active",s===step);
-      const order=["text","image","video","result"];
+      const order=["text","image","voice","design","result"];
       n.classList.toggle("done",order.indexOf(s)<order.indexOf(step));
     });
+    if(step==="design")syncDesignPreview();
   }
   function saveDraft(){
-    const draft={text:el("textInput").value,speaker:el("fSpeaker").value,de:el("fDe").value,source:el("fSource").value,fazit:el("fFazit").value,topic:el("fTopic").value,scene:state.scene};
+    const draft={
+      text:el("textInput").value,
+      speaker:el("fSpeaker").value,
+      de:el("fDe").value,
+      voiceScript:el("fVoiceScript")?el("fVoiceScript").value:"",
+      source:el("fSource").value,
+      fazit:el("fFazit").value,
+      topic:el("fTopic").value,
+      scene:state.scene
+    };
     try{localStorage.setItem(DRAFT_KEY,JSON.stringify(draft))}catch{}
   }
   function loadDraft(){
@@ -308,6 +432,7 @@ details.box summary::-webkit-details-marker{display:none}
       el("textInput").value=d.text||"";
       el("fSpeaker").value=d.speaker||"";
       el("fDe").value=d.de||"";
+      if(el("fVoiceScript"))el("fVoiceScript").value=d.voiceScript||"";
       el("fSource").value=d.source||"";
       if(el("fFazit"))el("fFazit").value=d.fazit||"";
       el("fTopic").value=d.topic||"";
@@ -316,8 +441,9 @@ details.box summary::-webkit-details-marker{display:none}
     }catch{}
   }
   function updateChars(){el("charCount").textContent=`${el("textInput").value.length} Zeichen`;saveDraft()}
+  function voiceScriptValue(){return String(el("fVoiceScript")?.value||"").trim()}
   function currentStatement(){
-    return {
+    const stmt={
       speaker:(el("fSpeaker").value||state.parsed?.statement?.speaker||"Überlieferung").trim(),
       de:(el("fDe").value||state.parsed?.statement?.de||el("textInput").value).trim(),
       source:(el("fSource").value||state.parsed?.statement?.source||"").trim(),
@@ -326,6 +452,9 @@ details.box summary::-webkit-details-marker{display:none}
       manual:true,
       verified:true
     };
+    const vs=voiceScriptValue();
+    if(vs)stmt.voiceScript=vs;
+    return stmt;
   }
   function renderStruct(p){
     if(!p){el("structPreview").innerHTML="";return}
@@ -333,6 +462,35 @@ details.box summary::-webkit-details-marker{display:none}
       <div><span>Aussage</span> · ${esc(p.preview?.de||p.statement?.de||"—")}</div>
       <div><span>Quelle</span> · ${esc(p.preview?.source||p.statement?.source||"—")}</div>
       <div><span>Fazit</span> · ${esc(p.preview?.fazit||p.statement?.fazit||"—")}</div>`;
+  }
+  function fmtWhen(iso){
+    if(!iso)return "—";
+    try{
+      const d=new Date(iso);
+      if(Number.isNaN(d.getTime()))return String(iso).slice(0,16);
+      return d.toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"});
+    }catch{return "—"}
+  }
+  function normalizeStage(stage){
+    const s=String(stage||"statement");
+    return STAGE_ALIASES[s]||s;
+  }
+  function stageLabel(job){
+    if(job?.status==="completed")return STAGE_LABELS.completed;
+    if(job?.status==="awaiting_voice_approval")return STAGE_LABELS.awaiting_voice_approval;
+    if(job?.status==="awaiting_design")return STAGE_LABELS.awaiting_design;
+    const key=String(job?.stage||"");
+    return STAGE_LABELS[key]||STAGE_LABELS[normalizeStage(key)]||job?.message||"";
+  }
+  function stagePct(job){
+    if(job?.status==="completed")return 100;
+    if(job?.status==="awaiting_voice_approval")return 52;
+    if(job?.status==="awaiting_design")return 72;
+    const key=String(job?.stage||"statement");
+    if(STAGE_PROGRESS[key]!=null)return STAGE_PROGRESS[key];
+    const order=STAGE_ORDER;
+    const i=Math.max(0,order.indexOf(normalizeStage(key)));
+    return Math.round(((i+0.35)/order.length)*100);
   }
   async function parseText(){
     const text=el("textInput").value.trim();
@@ -346,7 +504,6 @@ details.box summary::-webkit-details-marker{display:none}
     if(el("fFazit"))el("fFazit").value=data.statement.fazit||"";
     el("fTopic").value=data.statement.topic||"";
     renderStruct(data);
-    if(el("structBox"))el("structBox").open=true;
     const notice=el("parseNotice");
     if(notice){
       notice.hidden=false;
@@ -359,16 +516,88 @@ details.box summary::-webkit-details-marker{display:none}
       }
     }
     if(state.estimate){
-      el("costBox").innerHTML=`${esc(state.estimate.mode)}<br>Geschätzte Kosten: ${state.estimate.estimateMinEur.toFixed(2)}–${state.estimate.estimateMaxEur.toFixed(2)} €<br>Maximalbudget: ${Number(el("maxBudget").value||1.2).toFixed(2)} €`;
+      const dur=state.estimate.durationSec?` · ca. ${Number(state.estimate.durationSec).toFixed(0)} s` : "";
+      el("costBox").innerHTML=`${esc(state.estimate.mode||"Dauer folgt der Stimme")}${dur}<br>Geschätzte Kosten: ${Number(state.estimate.estimateMinEur||0).toFixed(2)}–${Number(state.estimate.estimateMaxEur||0).toFixed(2)} €<br>Maximalbudget: ${Number(el("maxBudget").value||1.2).toFixed(2)} €`;
     }
     saveDraft();
     return data;
   }
+  function updateCompPreview(){
+    const stmt=currentStatement();
+    const speaker=stmt.speaker?stmt.speaker.replace(/\s*sagte\s*:?\s*$/i,""):"Sprecher";
+    const quote=(()=>{const q=String(stmt.de||"").trim();return q?("„"+(q.length>110?q.slice(0,108)+"…":q)+"“"):"„Aussage erscheint hier im Lesebereich.“";})();
+    const source=stmt.source?("Quelle: "+stmt.source):"Quelle: …";
+    if(el("compSpeaker"))el("compSpeaker").textContent=speaker;
+    if(el("compQuote"))el("compQuote").textContent=quote;
+    if(el("compSource"))el("compSource").textContent=source;
+    if(el("designSpeaker"))el("designSpeaker").textContent=speaker;
+    if(el("designQuote"))el("designQuote").textContent=quote;
+    if(el("designSource"))el("designSource").textContent=source;
+  }
+  function readDesign(){
+    return {
+      layoutVariant:el("designVariant")?.value||"classic",
+      textScale:Number(el("designTextScale")?.value||100)/100,
+      watermarkOpacity:Number(el("designWmOpacity")?.value||6.5)/100,
+      dimOpacity:Number(el("designDimOpacity")?.value||18)/100,
+      textShift:Number(el("designTextShift")?.value||0)
+    };
+  }
+  function syncDesignPreview(){
+    updateCompPreview();
+    const d=readDesign();
+    const img=el("designPreviewImg");
+    const url=state.scene?.url||state.job?.sceneImageUrl||state.job?.posterUrl||"";
+    if(img&&url){img.src=url;img.classList.remove("hidden")}
+    else if(img)img.classList.add("hidden");
+    const wm=el("designWm");
+    if(wm){wm.style.opacity=String(d.watermarkOpacity);wm.style.width=(d.layoutVariant==="compact"?"30%":d.layoutVariant==="elevated"?"36%":"34%")}
+    const mid=el("designCompPreview")?.querySelector(".c-mid");
+    if(mid){
+      const shift=Number(d.textShift||0);
+      mid.style.transform=`translateY(${shift}%)`;
+      mid.style.fontSize=d.textScale!==1?(d.textScale*100)+"%":"";
+    }
+    const zone=el("designCompPreview");
+    if(zone){
+      const dim=d.dimOpacity;
+      zone.style.background=`linear-gradient(180deg,rgba(0,0,0,${(dim+0.06).toFixed(2)}),rgba(0,0,0,${(dim*0.45).toFixed(2)}) 22%,rgba(0,0,0,${(dim*0.55).toFixed(2)}) 55%,rgba(0,0,0,${Math.min(0.55,dim+0.28).toFixed(2)}))`;
+    }
+    if(el("textScaleVal"))el("textScaleVal").textContent=Math.round(d.textScale*100)+" %";
+    if(el("wmOpacityVal"))el("wmOpacityVal").textContent=(d.watermarkOpacity*100).toFixed(1).replace(".",",")+" %";
+    if(el("dimOpacityVal"))el("dimOpacityVal").textContent=Math.round(d.dimOpacity*100)+" %";
+    if(el("textShiftVal"))el("textShiftVal").textContent=d.textShift===0?"Mitte":(d.textShift<0?"oben":"unten")+" ("+d.textShift+")";
+  }
+  function showVoicePreview(job){
+    const box=el("voicePreviewBox");
+    const audio=el("voiceAudio");
+    const url=job?.voiceUrl||job?.artifacts?.voice?.url||"";
+    if(!box||!audio)return;
+    if(url){
+      audio.src=url;
+      box.classList.remove("hidden");
+      el("approveVoiceBtn").disabled=Boolean(job.voiceApproved);
+      el("voiceNotice").className="notice ok";
+      el("voiceNotice").textContent=job.voiceApproved
+        ?"Stimme freigegeben – weiter zur Gestaltung."
+        :"Stimme anhören und freigeben, bevor die Gestaltung bestätigt wird.";
+    }else{
+      box.classList.add("hidden");
+    }
+  }
   function showScene(scene){
     state.scene=scene;
     const img=el("scenePreview");
-    if(scene?.url){img.src=scene.url;img.classList.remove("hidden");el("acceptImageBtn").disabled=false;el("replaceImageBtn").disabled=false;el("imageNotice").className="notice ok";el("imageNotice").textContent="Ausgangsbild bereit – Übernehmen tippen."}
-    else{img.classList.add("hidden");el("acceptImageBtn").disabled=true;el("replaceImageBtn").disabled=true}
+    const comp=el("compPreview");
+    if(scene?.url){
+      img.src=scene.url;img.classList.remove("hidden");
+      if(comp){comp.classList.remove("hidden");updateCompPreview();}
+      el("acceptImageBtn").disabled=false;el("replaceImageBtn").disabled=false;
+      el("imageNotice").className="notice ok";el("imageNotice").textContent="Ausgangsbild bereit – DAR-Komposition sichtbar.";
+    }else{
+      img.classList.add("hidden");if(comp)comp.classList.add("hidden");
+      el("acceptImageBtn").disabled=true;el("replaceImageBtn").disabled=true;
+    }
     saveDraft();
   }
   function libSave(scene){
@@ -378,7 +607,7 @@ details.box summary::-webkit-details-marker{display:none}
       localStorage.setItem(LIB_KEY,JSON.stringify(list.slice(0,24)));
     }catch{}
   }
-  /** 4K-Uploads für Worker/fal auf max. 2160×3840 JPEG normalisieren (Seitenverhältnis bleibt). */
+  /** Uploads auf max. 2160×3840 JPEG normalisieren (Seitenverhältnis bleibt). */
   function prepareUploadDataUrl(file){
     return new Promise((resolve,reject)=>{
       const url=URL.createObjectURL(file);
@@ -417,23 +646,21 @@ details.box summary::-webkit-details-marker{display:none}
 
   el("textInput").addEventListener("input",()=>{updateChars();clearTimeout(state._t);state._t=setTimeout(()=>{parseText().catch(()=>{})},450)});
   el("pasteBtn").addEventListener("click",async()=>{try{el("textInput").value=await navigator.clipboard.readText();updateChars();await parseText()}catch{}});
-  el("clearTextBtn").addEventListener("click",()=>{el("textInput").value="";el("fSpeaker").value="";el("fDe").value="";el("fSource").value="";if(el("fFazit"))el("fFazit").value="";el("fTopic").value="";renderStruct(null);if(el("parseNotice"))el("parseNotice").hidden=true;updateChars()});
+  el("clearTextBtn").addEventListener("click",()=>{
+    el("textInput").value="";el("fSpeaker").value="";el("fDe").value="";
+    if(el("fVoiceScript"))el("fVoiceScript").value="";
+    el("fSource").value="";if(el("fFazit"))el("fFazit").value="";el("fTopic").value="";
+    renderStruct(null);if(el("parseNotice"))el("parseNotice").hidden=true;updateChars();
+  });
+  ["fSpeaker","fDe","fVoiceScript","fSource","fFazit","fTopic"].forEach(id=>{
+    const node=el(id);if(node)node.addEventListener("input",saveDraft);
+  });
   el("toImageBtn").addEventListener("click",async()=>{
     try{if(!el("textInput").value.trim()){alert("Bitte Textbeitrag einfügen.");return}await parseText();showStep("image");setStatus("Bild wählen")}catch(e){alert(e.message)}
   });
   el("backTextBtn").addEventListener("click",()=>showStep("text"));
   el("backImageBtn").addEventListener("click",()=>showStep("image"));
 
-  el("genImageBtn").addEventListener("click",async()=>{
-    el("genImageBtn").disabled=true;el("imageNotice").textContent="Optionales KI-Bild wird erzeugt…";
-    try{
-      await parseText();
-      const data=await api("/scene-image",{method:"POST",body:JSON.stringify({statement:currentStatement()})});
-      showScene(data.sceneImage);libSave(data.sceneImage);
-      el("imageNotice").className="notice ok";el("imageNotice").textContent="Optionales KI-Bild erzeugt. Standard bleibt Upload.";
-    }catch(e){el("imageNotice").className="notice bad";el("imageNotice").textContent=e.message}
-    finally{el("genImageBtn").disabled=false}
-  });
   el("replaceImageBtn").addEventListener("click",()=>el("fileInput").click());
   el("uploadImageBtn").addEventListener("click",()=>el("fileInput").click());
   el("fileInput").addEventListener("change",async()=>{
@@ -451,51 +678,107 @@ details.box summary::-webkit-details-marker{display:none}
   el("acceptImageBtn").addEventListener("click",async()=>{
     if(!state.scene?.url){alert("Kein Bild");return}
     try{await parseText()}catch{}
-    showStep("video");setStatus("bereit zur Produktion");
+    updateCompPreview();showStep("voice");setStatus("Stimme erzeugen");
   });
 
-  async function createVideo(){
+  async function startVoiceJob(){
     if(!workerSecret()){alert("Bitte Worker-Secret unter ⚙ speichern.");return}
     if(!state.scene?.url){alert("Szenenbild fehlt");return}
     const stmt=currentStatement();
     if(!stmt.de){alert("Aussage fehlt");return}
     const max=Number(el("maxBudget").value||1.2);
-    const est=state.estimate||{estimateMinEur:0.9,estimateMaxEur:1.4,mode:"15 s · 3 Clips"};
-    if(!confirm(`${est.mode||"15 Sekunden · 3 Clips"}\nGeschätzte Kosten: ${est.estimateMinEur}–${est.estimateMaxEur} €\nMaximalbudget: ${max.toFixed(2)} €\n\nKostenpflichtige Erzeugung starten?`))return;
-    el("createVideoBtn").disabled=true;el("createVideoBtn").innerHTML='<span class="loader"></span>Startet…';
-    setStatus("in Produktion","run");
+    const est=state.estimate||{estimateMinEur:0.2,estimateMaxEur:0.4,mode:"Dauer folgt der Stimme · Kosten nur Stimme + Rendering"};
+    const modeLine=est.mode||"Sprach-Bildbeitrag · Dauer folgt der Stimme";
+    if(!confirm(`Stimme erzeugen\n${modeLine}\nGeschätzte Kosten (Stimme+Render später): ${Number(est.estimateMinEur||0).toFixed(2)}–${Number(est.estimateMaxEur||0).toFixed(2)} €\nMaximalbudget: ${max.toFixed(2)} €\n\nAudiovorschau starten?`))return;
+    el("createVoiceBtn").disabled=true;el("createVoiceBtn").innerHTML='<span class="loader"></span>Stimme…';
+    setStatus("Stimme","run");
     try{
-      const data=await api("/jobs",{method:"POST",body:JSON.stringify({
+      const payload={
         contributionText:el("textInput").value.trim(),
         statement:stmt,
         sceneImageUrl:state.scene.url,
         sceneImageR2Key:state.scene.r2Key||null,
         costConfirmed:true,
-        profile:"dar-standard-v2",
+        profile:"dar-speech-image-v1",
         format:"9:16",
         manualApproval:true,
         composePreview:false,
+        pauseAfterVoice:true,
+        voiceApproved:false,
+        designConfirmed:false,
+        design:readDesign(),
         budget:{monthlyEur:15,maxPerVideoEur:max},
-        mode:"auto",
+        mode:"speech-image",
         voiceProfile:"dar-male",
         client:{viewport:window.innerWidth+"x"+window.innerHeight}
-      })});
+      };
+      const vs=voiceScriptValue();
+      if(vs)payload.voiceScript=vs;
+      const data=await api("/jobs",{method:"POST",body:JSON.stringify(payload)});
       state.job=data.job;try{localStorage.setItem(JOB_KEY,JSON.stringify(data.job))}catch{}
       el("cancelJobBtn").disabled=false;
-      el("videoNotice").className="notice";el("videoNotice").textContent=data.job.message||"Produktion gestartet";
+      el("voiceNotice").className="notice";el("voiceNotice").textContent=data.job.message||"Stimme wird erzeugt";
       startPoll();
-    }catch(e){el("videoNotice").className="notice bad";el("videoNotice").textContent=e.message;setStatus("Fehler","bad")}
-    finally{el("createVideoBtn").disabled=false;el("createVideoBtn").textContent="Video-Beitrag erstellen"}
+    }catch(e){el("voiceNotice").className="notice bad";el("voiceNotice").textContent=e.message;setStatus("Fehler","bad")}
+    finally{el("createVoiceBtn").disabled=false;el("createVoiceBtn").textContent="Stimme erzeugen"}
   }
-  function stagePct(job){
-    const order=["statement","storyboard","references","clips","voice","captions","render","review"];
-    const i=Math.max(0,order.indexOf(job?.stage||"statement"));
-    return Math.round(((i+(job?.status==="completed"?1:0))/order.length)*100);
+
+  function handleJobTick(job){
+    state.job=job;
+    try{localStorage.setItem(JOB_KEY,JSON.stringify(job))}catch{}
+    if(el("progBar"))el("progBar").style.width=stagePct(job)+"%";
+    const label=stageLabel(job);
+    if(el("prodMsg"))el("prodMsg").textContent=label||job.message||job.stage||"";
+    if(job.status==="awaiting_voice_approval"||(job.voiceUrl&&!job.voiceApproved&&!["completed","running","queued","awaiting_design"].includes(job.status))){
+      showStep("voice");
+      showVoicePreview(job);
+      setStatus("Stimme freigeben","warn");
+      el("createVoiceBtn").disabled=true;
+      return "pause";
+    }
+    if(job.status==="awaiting_design"){
+      showStep("design");
+      syncDesignPreview();
+      setStatus("Gestaltung","warn");
+      el("designMsg").textContent=job.message||"Gestaltung prüfen und MP4 starten";
+      el("designNotice").className="notice ok";
+      el("designNotice").textContent="Stimme freigegeben. Layout prüfen – dann Sprach-Bildbeitrag erstellen.";
+      el("cancelDesignBtn").disabled=false;
+      return "pause";
+    }
+    if(job.status==="completed"){
+      setStatus("fertig","ok");showStep("result");
+      return "done";
+    }
+    if(job.status==="failed"){
+      setStatus("Fehler","bad");
+      const notice=state.step==="design"?el("designNotice"):el("voiceNotice");
+      if(notice){notice.className="notice bad";notice.textContent=job.lastError||job.message||"Fehler"}
+      if(el("prodMsg"))el("prodMsg").textContent=job.lastError||job.message||"Fehler";
+      el("resumeJobBtn").hidden=false;
+      el("resumeJobBtn").textContent=/Shotstack|HTTP 403|Production|render/i.test(String(job.message||job.lastError||""))
+        ? "Erneut rendern"
+        : "Weiter erzeugen";
+      return "fail";
+    }
+    if(job.status==="cancelled"||job.status==="setup_required"){
+      setStatus(job.status==="cancelled"?"abgebrochen":"Setup","warn");
+      el("resumeJobBtn").hidden=job.status==="cancelled";
+      return "stop";
+    }
+    if(["render","review"].includes(normalizeStage(job.stage))||job.status==="running"){
+      if(state.step!=="design"&&state.step!=="result")showStep("design");
+      el("designMsg").textContent=label||job.message||"MP4 wird gerendert…";
+      setStatus("in Produktion","run");
+    }
+    return "continue";
   }
+
   function startPoll(){
     clearTimeout(state.poll);
     el("resumeJobBtn").hidden=true;
     el("cancelJobBtn").disabled=!state.job?.id;
+    if(el("cancelDesignBtn"))el("cancelDesignBtn").disabled=!state.job?.id;
     setStatus("in Produktion","run");
     (async function tick(){
       if(!state.job?.id)return;
@@ -506,43 +789,68 @@ details.box summary::-webkit-details-marker{display:none}
           try{data=await api("/jobs/"+encodeURIComponent(state.job.id))}
           catch{throw procErr}
         }
-        const job=data.job||data;state.job=job;
-        try{localStorage.setItem(JOB_KEY,JSON.stringify(job))}catch{}
-        el("progBar").style.width=stagePct(job)+"%";
-        el("prodMsg").textContent=job.message||job.stage||"";
-        el("videoNotice").className="notice";
-        el("videoNotice").textContent=job.message||"";
-        if(job.status==="completed"){
-          setStatus("fertig","ok");showStep("result");await openResult(job);loadJobs();return;
-        }
-        if(job.status==="failed"){
-          setStatus("Fehler","bad");
-          el("videoNotice").className="notice bad";
-          el("videoNotice").textContent=job.lastError||job.message||"Fehler";
-          el("prodMsg").textContent=job.lastError||job.message||"Fehler";
-          el("resumeJobBtn").hidden=false;
-          el("resumeJobBtn").textContent=/Shotstack HTTP 403|Production/i.test(String(job.message||""))
-            ? "Schnitt erneut versuchen"
-            : "Weiter generieren";
-          loadJobs();
-          return;
-        }
-        if(job.status==="cancelled"||job.status==="setup_required"){
-          setStatus(job.status==="cancelled"?"abgebrochen":"Setup","warn");
-          el("resumeJobBtn").hidden=job.status==="cancelled";
-          return;
-        }
-        setStatus("in Produktion","run");
+        const job=data.job||data;
+        const outcome=handleJobTick(job);
+        if(outcome==="done"){await openResult(job);loadJobs();return}
+        if(outcome==="pause"||outcome==="fail"||outcome==="stop"){loadJobs();return}
         state.poll=setTimeout(tick,3500);
       }catch(e){
-        el("videoNotice").className="notice bad";
-        el("videoNotice").textContent="Verbindung kurz gestört – versuche weiter… ("+(e.message||"Netz")+")";
+        const notice=state.step==="design"?el("designNotice"):el("voiceNotice");
+        if(notice){notice.className="notice bad";notice.textContent="Verbindung kurz gestört – versuche weiter… ("+(e.message||"Netz")+")"}
         setStatus("warte","warn");
         el("resumeJobBtn").hidden=false;
+        el("resumeJobBtn").textContent="Weiter erzeugen";
         state.poll=setTimeout(tick,7000);
       }
     })();
   }
+
+  async function approveVoice(){
+    if(!state.job?.id)return;
+    el("approveVoiceBtn").disabled=true;
+    try{
+      const d=await api("/jobs/"+encodeURIComponent(state.job.id)+"/approve-voice",{method:"POST",body:"{}"});
+      state.job=d.job;
+      showVoicePreview(d.job);
+      el("voiceNotice").className="notice ok";
+      el("voiceNotice").textContent="Stimme freigegeben – Gestaltung wird vorbereitet.";
+      setStatus("Gestaltung","run");
+      startPoll();
+    }catch(e){el("approveVoiceBtn").disabled=false;alert(e.message)}
+  }
+  async function regenerateVoice(){
+    if(!state.job?.id)return;
+    if(!confirm("Stimme erneut erzeugen? Bisherige Freigabe wird zurückgesetzt."))return;
+    el("regenVoiceBtn").disabled=true;
+    try{
+      const d=await api("/jobs/"+encodeURIComponent(state.job.id)+"/regenerate-voice",{method:"POST",body:"{}"});
+      state.job=d.job;
+      el("voicePreviewBox").classList.add("hidden");
+      el("voiceNotice").textContent="Stimme wird erneut erzeugt…";
+      setStatus("Stimme","run");
+      startPoll();
+    }catch(e){alert(e.message)}
+    finally{el("regenVoiceBtn").disabled=false}
+  }
+  async function confirmDesignAndRender(){
+    if(!state.job?.id){alert("Zuerst Stimme erzeugen und freigeben.");return}
+    if(!state.job.voiceApproved&&state.job.status!=="awaiting_design"){
+      alert("Bitte zuerst die Stimme freigeben.");showStep("voice");return;
+    }
+    if(!confirm("Gestaltung bestätigen und MP4 rendern?\nVollständiges DAR-Layout · 1080×1920 · keine Endkarte."))return;
+    el("createVideoBtn").disabled=true;el("createVideoBtn").innerHTML='<span class="loader"></span>Rendert…';
+    try{
+      const d=await api("/jobs/"+encodeURIComponent(state.job.id)+"/confirm-design",{method:"POST",body:JSON.stringify(readDesign())});
+      state.job=d.job;
+      el("designMsg").textContent=d.job.message||"MP4 wird gerendert";
+      el("designNotice").className="notice";
+      el("designNotice").textContent="Rendering gestartet – bitte warten.";
+      setStatus("Rendern","run");
+      startPoll();
+    }catch(e){el("designNotice").className="notice bad";el("designNotice").textContent=e.message;setStatus("Fehler","bad")}
+    finally{el("createVideoBtn").disabled=false;el("createVideoBtn").textContent="Sprach-Bildbeitrag erstellen"}
+  }
+
   el("resumeJobBtn").addEventListener("click",()=>{
     if(!state.job?.id)return;
     el("resumeJobBtn").hidden=true;
@@ -550,18 +858,66 @@ details.box summary::-webkit-details-marker{display:none}
     startPoll();
   });
   document.addEventListener("visibilitychange",()=>{
-    if(document.visibilityState==="visible"&&state.job&&["queued","running","failed"].includes(state.job.status)&&state.step==="video"){
+    if(document.visibilityState==="visible"&&state.job&&["queued","running","failed"].includes(state.job.status)&&["voice","design"].includes(state.step)){
       startPoll();
     }
   });
+
+  el("createVoiceBtn").addEventListener("click",startVoiceJob);
+  el("createVideoBtn").addEventListener("click",confirmDesignAndRender);
+  el("approveVoiceBtn").addEventListener("click",approveVoice);
+  el("regenVoiceBtn").addEventListener("click",regenerateVoice);
+  el("playVoiceBtn").addEventListener("click",()=>{const a=el("voiceAudio");if(a){try{a.play()}catch{}}});
+  el("stopVoiceBtn").addEventListener("click",()=>{const a=el("voiceAudio");if(a){try{a.pause();a.currentTime=0}catch{}}});
+  el("backVoiceBtn").addEventListener("click",()=>showStep("voice"));
+  ["designVariant","designTextScale","designWmOpacity","designDimOpacity","designTextShift"].forEach(id=>{
+    const node=el(id);if(node)node.addEventListener("input",syncDesignPreview);
+  });
+  el("cancelJobBtn").addEventListener("click",async()=>{
+    if(!state.job?.id)return;
+    try{const d=await api("/jobs/"+encodeURIComponent(state.job.id)+"/cancel",{method:"POST",body:"{}"});state.job=d.job;el("voiceNotice").textContent="Abgebrochen";setStatus("abgebrochen","warn")}catch(e){alert(e.message)}
+  });
+  el("cancelDesignBtn").addEventListener("click",async()=>{
+    if(!state.job?.id)return;
+    try{const d=await api("/jobs/"+encodeURIComponent(state.job.id)+"/cancel",{method:"POST",body:"{}"});state.job=d.job;el("designNotice").textContent="Abgebrochen";setStatus("abgebrochen","warn")}catch(e){alert(e.message)}
+  });
+
+  async function capturePreviewFrames(video, times){
+    const host=el("previewFrames"); if(!host||!video)return;
+    host.innerHTML="";
+    const list=times&&times.length?times:[2,6,11,14];
+    for(const sec of list){
+      const cell=document.createElement("div");
+      const btn=document.createElement("button");
+      btn.type="button";
+      const canvas=document.createElement("canvas");
+      canvas.width=180; canvas.height=320;
+      const label=document.createElement("small");
+      label.textContent=sec+"s";
+      btn.appendChild(canvas); cell.appendChild(btn); cell.appendChild(label); host.appendChild(cell);
+      btn.addEventListener("click",()=>{try{video.currentTime=sec;video.play().catch(()=>{});}catch{}});
+      try{
+        await new Promise((resolve)=>{
+          const onSeek=()=>{video.removeEventListener("seeked",onSeek);resolve();};
+          video.addEventListener("seeked",onSeek);
+          video.currentTime=Math.min(sec, Math.max(0,(video.duration||15)-0.05));
+          setTimeout(()=>{video.removeEventListener("seeked",onSeek);resolve();},900);
+        });
+        const ctx=canvas.getContext("2d");
+        if(ctx && video.videoWidth){ctx.drawImage(video,0,0,canvas.width,canvas.height);}
+      }catch{}
+    }
+  }
+
   async function openResult(job){
     let j=job;
     try{const r=await api("/jobs/"+encodeURIComponent(job.id)+"/refresh-urls",{method:"POST",body:"{}"});j=r.job||job}catch{}
     state.job=j;
     const v=el("resultVideo");
-    if(j.outputUrl){v.src=j.outputUrl;v.classList.remove("hidden")}
-    el("resultMeta").innerHTML=`<div><span>Titel</span> · ${esc(j.statement?.speaker||"DAR Video")}</div>
-      <div><span>Dauer</span> · ${esc(j.durationSeconds||15)} s · 1080×1920</div>
+    if(j.outputUrl){v.src=j.outputUrl;v.classList.remove("hidden");try{await capturePreviewFrames(v)}catch{}}
+    const dur=Number(j.durationSeconds||0);
+    el("resultMeta").innerHTML=`<div><span>Titel</span> · ${esc(j.statement?.speaker||"Sprach-Bildbeitrag")}</div>
+      <div><span>Dauer</span> · ${dur?esc(dur)+" s":"folgt Stimme"} · 1080×1920</div>
       <div><span>Kosten</span> · ${Number(j.costEur||0).toFixed(2)} € (Schätzung ${Number(j.estimateEur||0).toFixed(2)} €)</div>
       <div><span>QA</span> · ${qaLabel(j)}</div>`;
     el("resultNotice").className=j.qualityIncomplete|| (j.renderMeta&& (j.renderMeta.isPreview||!j.renderMeta.brandingApplied)) ?"notice warn":"notice";
@@ -577,10 +933,9 @@ details.box summary::-webkit-details-marker{display:none}
     if(j.qualityChecks&&Object.values(j.qualityChecks).every(Boolean))return "bestanden";
     return "siehe Details";
   }
-  el("createVideoBtn").addEventListener("click",createVideo);
-  el("cancelJobBtn").addEventListener("click",async()=>{
-    if(!state.job?.id)return;
-    try{const d=await api("/jobs/"+encodeURIComponent(state.job.id)+"/cancel",{method:"POST",body:"{}"});state.job=d.job;el("videoNotice").textContent="Abgebrochen";setStatus("abgebrochen","warn")}catch(e){alert(e.message)}
+  el("editTouchBtn").addEventListener("click",()=>{
+    if(!state.job?.id){alert("Kein Auftrag");return;}
+    location.href="/admin/video-editor.html?job="+encodeURIComponent(state.job.id);
   });
   el("saveBtn").addEventListener("click",async()=>{
     if(!state.job?.outputUrl)return;
@@ -588,7 +943,7 @@ details.box summary::-webkit-details-marker{display:none}
   });
   el("shareBtn").addEventListener("click",async()=>{
     if(!state.job?.outputUrl)return;
-    const url=state.job.outputUrl,title="DAR AL TAWḤĪD · Video",text=state.job.statement?.de||"DAR Video";
+    const url=state.job.outputUrl,title="DAR AL TAWḤĪD · Sprach-Bildbeitrag",text=state.job.statement?.de||"Sprach-Bildbeitrag";
     try{if(navigator.share){await navigator.share({title,text,url});return}}catch(e){if(e?.name==="AbortError")return}
     try{await navigator.clipboard.writeText(url);alert("Link kopiert")}catch{alert(url)}
   });
@@ -612,13 +967,12 @@ details.box summary::-webkit-details-marker{display:none}
       const q=(el("jobSearch").value||"").toLowerCase();
       let jobs=data.jobs||[];
       if(q)jobs=jobs.filter(j=>`${j.statement?.speaker||""} ${j.statement?.de||""} ${j.id}`.toLowerCase().includes(q));
-      const running=jobs.filter(j=>j.status==="running"||j.status==="queued").length;
-      const done=jobs.filter(j=>j.status==="completed").length;
-      el("jobsSummary").textContent=`Server-Aufträge · ${jobs.length} · läuft ${running} · fertig ${done}`;
+      el("jobsSummary").textContent=`Sprach-Bildbeiträge · ${jobs.length}`;
       el("jobList").innerHTML=jobs.map(j=>{
         const title=esc(j.statement?.speaker||j.id.slice(0,14));
         const thumb=j.posterUrl||j.sceneImageUrl||"";
         const playable=Boolean(j.outputUrl);
+        const dur=Number(j.durationSeconds||0);
         return `<div class="job-line" data-job="${esc(j.id)}">
           <button class="thumb" type="button" data-play="${esc(j.id)}" title="${playable?"Abspielen":"Noch kein Video"}" ${playable?"":"disabled"}>
             <img src="${esc(thumb)}" alt="" onerror="this.style.opacity=.2">
@@ -626,7 +980,7 @@ details.box summary::-webkit-details-marker{display:none}
           </button>
           <div>
             <b>${title}</b>
-            <small>${esc(j.status)} · ${Number(j.costEur||0).toFixed(2)} € · ${esc((j.statement?.de||j.message||"").slice(0,42))}</small>
+            <small>${esc(j.status)} · ${dur?dur+"s":"—"} · ${esc(fmtWhen(j.createdAt))} · ${Number(j.costEur||0).toFixed(2)} €</small>
           </div>
           <div class="job-actions">
             ${playable?`<button class="btn ghost" type="button" data-play="${esc(j.id)}">Play</button>`:""}
@@ -702,24 +1056,51 @@ details.box summary::-webkit-details-marker{display:none}
       loadJobs();
     }catch(e){alert(e.message)}
   });
+  function resumeJobUi(j){
+    state.job=j;
+    if(j.status==="completed"){showStep("result");openResult(j);return}
+    if(j.status==="awaiting_voice_approval"||(j.voiceUrl&&!j.voiceApproved)){
+      showStep("voice");showVoicePreview(j);setStatus("Stimme freigeben","warn");return;
+    }
+    if(j.status==="awaiting_design"||(j.voiceApproved&&!j.designConfirmed)){
+      showStep("design");syncDesignPreview();setStatus("Gestaltung","warn");return;
+    }
+    if(["render","review"].includes(normalizeStage(j.stage))||j.status==="running"||j.status==="queued"){
+      showStep(j.voiceApproved?"design":"voice");startPoll();return;
+    }
+    showStep("voice");startPoll();
+  }
+  el("eResumeBtn").addEventListener("click",async()=>{
+    if(!state.editJob?.id)return;
+    closeJobSheet();
+    resumeJobUi(state.editJob);
+  });
   el("eRegenBtn").addEventListener("click",async()=>{
     if(!state.editJob?.id)return;
-    if(!confirm("Video mit aktuellem Text neu erzeugen? Kosten fallen erneut an."))return;
+    if(!confirm("Sprach-Bildbeitrag mit aktuellem Text neu erzeugen? Kosten fallen erneut an."))return;
     try{
       const d=await api("/jobs/"+encodeURIComponent(state.editJob.id)+"/regenerate",{method:"POST",body:JSON.stringify({
         speaker:el("eSpeaker").value,de:el("eDe").value,source:el("eSource").value,fazit:el("eFazit").value,topic:el("eTopic").value,
         contributionText:el("eRaw").value||undefined
       })});
-      state.job=d.job;closeJobSheet();showStep("video");startPoll();loadJobs();
+      state.job=d.job;closeJobSheet();showStep("voice");startPoll();loadJobs();
+    }catch(e){alert(e.message)}
+  });
+  el("eCancelBtn").addEventListener("click",async()=>{
+    if(!state.editJob?.id)return;
+    if(!confirm("Auftrag abbrechen?"))return;
+    try{
+      const d=await api("/jobs/"+encodeURIComponent(state.editJob.id)+"/cancel",{method:"POST",body:"{}"});
+      state.editJob=d.job;
+      el("jobSheetNotice").textContent="Abgebrochen";
+      loadJobs();
     }catch(e){alert(e.message)}
   });
   el("eOpenBtn").addEventListener("click",async()=>{
     if(!state.editJob?.id)return;
     const j=state.editJob;
     closeJobSheet();
-    state.job=j;
-    if(j.status==="completed"){showStep("result");await openResult(j)}
-    else{showStep("video");startPoll()}
+    resumeJobUi(j);
   });
   el("eDeleteBtn").addEventListener("click",async()=>{
     if(!state.editJob?.id)return;
@@ -754,16 +1135,32 @@ details.box summary::-webkit-details-marker{display:none}
     try{
       const d=await api("/providers/status");
       el("budgetChip").textContent=`€ ${Number(d.monthSpendEur||0).toFixed(2)}`;
-      el("providerDetail").textContent=`Stimme ${d.voiceConfigured?"ok":"fehlt"} · Compose ${d.composerConfigured?"ok":"fehlt"} · R2 ${d.r2Configured?"ok":"fehlt"} · Monat ${Number(d.monthSpendEur||0).toFixed(2)} €`+(d.probes?.shotstack?.prodOk===false?" · Shotstack v1 gesperrt (fal-Fallback)":"");
+      const eleven=d.probes?.elevenlabs||{};
+      const shot=d.probes?.shotstack||{};
+      const elevenOk=d.voiceConfigured===true||eleven.ok===true||eleven.prodOk===true;
+      const shotOk=d.composerConfigured===true||shot.ok===true||shot.prodOk===true;
+      const shotWarn=shot.prodOk===false||shot.isStage===true||d.shotstackStageOnly===true;
+      el("providerDetail").textContent=
+        `ElevenLabs ${elevenOk?"ok":"fehlt"} · Shotstack ${shotOk?(shotWarn?"Stage/Warnung":"ok"):"fehlt"} · R2 ${d.r2Configured?"ok":"fehlt"} · Monat ${Number(d.monthSpendEur||0).toFixed(2)} €`;
     }catch(e){el("providerDetail").textContent=e.message;el("budgetChip").textContent="€ —"}
   }
 
   loadDraft();showStep("text");loadStatus();loadJobs();
   try{
     const job=JSON.parse(localStorage.getItem(JOB_KEY)||"null");
-    if(job&&["queued","running"].includes(job.status)){state.job=job;showStep("video");startPoll()}
-    else if(job&&job.status==="failed"){state.job=job;showStep("video");el("prodMsg").textContent=job.lastError||job.message||"Fehler";el("videoNotice").className="notice bad";el("videoNotice").textContent=job.lastError||job.message||"Fehler";setStatus("Fehler","bad");el("resumeJobBtn").hidden=false;el("cancelJobBtn").disabled=false}
     if(job&&job.status==="completed"){state.job=job;showStep("result");openResult(job)}
+    else if(job&&["queued","running","failed","awaiting_voice_approval","awaiting_design"].includes(job.status)){
+      resumeJobUi(job);
+      if(job.status==="failed"){
+        el("prodMsg").textContent=job.lastError||job.message||"Fehler";
+        el("voiceNotice").className="notice bad";
+        el("voiceNotice").textContent=job.lastError||job.message||"Fehler";
+        setStatus("Fehler","bad");
+        el("resumeJobBtn").hidden=false;
+        el("resumeJobBtn").textContent="Weiter erzeugen";
+        el("cancelJobBtn").disabled=false;
+      }
+    }
   }catch{}
 })();
 </script>
