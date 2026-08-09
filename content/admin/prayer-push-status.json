@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-09T09:20:06.556Z",
+  "updatedAt": "2026-08-09T09:25:07.206Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-09T09:20:06.556Z",
+  "lastCronRun": "2026-08-09T09:25:07.206Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-09T11:22:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-09T09:05:03.059Z",
-  "windowEnd": "2026-08-10T11:20:03.059Z",
+  "windowStart": "2026-08-09T09:10:02.955Z",
+  "windowEnd": "2026-08-10T11:25:02.955Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 25,
@@ -28,10 +28,10 @@
   "usersWithLocation": 25,
   "usersWithActivePush": 25,
   "locationGroups": 5,
-  "scheduled": 50,
-  "recipients": 250,
+  "scheduled": 54,
+  "recipients": 274,
   "skippedPast": 60,
-  "skippedWindow": 90,
+  "skippedWindow": 86,
   "duplicates": 1,
   "errors": 0,
   "lastError": null,
@@ -56,7 +56,7 @@
         "time": "13:37",
         "advance": {
           "status": "geplant",
-          "recipients": 25
+          "recipients": 49
         },
         "entry": {
           "status": "geplant",
@@ -132,7 +132,7 @@
       "time": "13:37",
       "advance": {
         "status": "geplant",
-        "recipients": 25
+        "recipients": 49
       },
       "entry": {
         "status": "geplant",
@@ -293,6 +293,15 @@
     {
       "prayer": "Dhuhr",
       "key": "dhuhr",
+      "mode": "advance",
+      "time": "13:37",
+      "sendAfter": "2026-08-10T11:22:00.000Z",
+      "recipients": 17,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Dhuhr",
+      "key": "dhuhr",
       "mode": "entry",
       "time": "13:37",
       "sendAfter": "2026-08-09T11:37:00.000Z",
@@ -377,6 +386,15 @@
       "mode": "advance",
       "time": "04:45",
       "sendAfter": "2026-08-10T02:30:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Dhuhr",
+      "key": "dhuhr",
+      "mode": "advance",
+      "time": "13:37",
+      "sendAfter": "2026-08-10T11:22:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin"
     },
@@ -473,6 +491,15 @@
     {
       "prayer": "Dhuhr",
       "key": "dhuhr",
+      "mode": "advance",
+      "time": "13:37",
+      "sendAfter": "2026-08-10T11:22:00.000Z",
+      "recipients": 5,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Dhuhr",
+      "key": "dhuhr",
       "mode": "entry",
       "time": "13:37",
       "sendAfter": "2026-08-09T11:37:00.000Z",
@@ -557,6 +584,15 @@
       "mode": "advance",
       "time": "04:44",
       "sendAfter": "2026-08-10T02:29:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Dhuhr",
+      "key": "dhuhr",
+      "mode": "advance",
+      "time": "13:37",
+      "sendAfter": "2026-08-10T11:22:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin"
     },
@@ -996,6 +1032,12 @@
     },
     {
       "prayer": "dhuhr",
+      "mode": "advance",
+      "recipients": 17,
+      "response": "{\"id\":\"21beb62b-cd44-4659-9c18-2612157f2309\",\"external_id\":\"badf403a-eea4-467c-912d-241659fed1d1\",\"errors\":{\"invalid_player_ids\":[\"187b4bf7-9cb5-4ef3-8a2b-986b792a43c4\",\"2aa85538-0952-473d-a191-7474ce"
+    },
+    {
+      "prayer": "dhuhr",
       "mode": "entry",
       "recipients": 1,
       "response": "{\"id\":\"\",\"errors\":{\"invalid_player_ids\":[\"e67e4b16-6faf-4f42-9569-38e915259e79\"]}}"
@@ -1045,12 +1087,6 @@
     {
       "prayer": "fajr",
       "mode": "entry",
-      "recipients": 1,
-      "response": "{\"id\":\"\",\"errors\":{\"invalid_player_ids\":[\"e67e4b16-6faf-4f42-9569-38e915259e79\"]}}"
-    },
-    {
-      "prayer": "fajr",
-      "mode": "advance",
       "recipients": 1,
       "response": "{\"id\":\"\",\"errors\":{\"invalid_player_ids\":[\"e67e4b16-6faf-4f42-9569-38e915259e79\"]}}"
     }
