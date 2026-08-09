@@ -285,10 +285,21 @@
     return env.production === "enabled" || env.production === true;
   }
 
-  function claimById(profile, id) {
-    return ((profile && profile.claims) || []).find(function (c) {
-      return c.id === id;
+  function ensureClaimMap(profile) {
+    if (!profile) return null;
+    if (profile.__claimMap) return profile.__claimMap;
+    var map = Object.create(null);
+    (profile.claims || []).forEach(function (c) {
+      if (c && c.id) map[String(c.id)] = c;
     });
+    profile.__claimMap = map;
+    return map;
+  }
+
+  function claimById(profile, id) {
+    if (!profile || id == null || id === "") return null;
+    var map = ensureClaimMap(profile);
+    return map[String(id)] || null;
   }
 
   function indexAssetUrl(file) {
@@ -394,6 +405,9 @@
     if (warm) {
       refreshIndexInBackground().catch(function () {});
       loadSearchIndex().catch(function () {});
+      try {
+        warmPopularProfiles();
+      } catch (e) {}
       return Promise.resolve(warm);
     }
     if (loadIndexPromise) return loadIndexPromise;
@@ -403,6 +417,9 @@
         applyIndexData(data, { silent: true });
         /* Suche separat — blockiert die Liste nicht. */
         loadSearchIndex().catch(function () {});
+        try {
+          warmPopularProfiles();
+        } catch (e) {}
         return data;
       })
       .catch(function (err) {
@@ -678,6 +695,72 @@
     if (typeof global.render === "function") global.render();
   }
 
+  function activeProphetRouteId() {
+    try {
+      var route = global.currentRoute;
+      if (!route || route.view !== "propheten") return "";
+      return String(parseRouteValue(route.value).prophetId || "");
+    } catch (e) {
+      return "";
+    }
+  }
+
+  /** Ersetzt „Wird geöffnet…“ sofort — ohne auf vollen App-Render zu warten. */
+  function paintOpenProfile(id) {
+    var key = String(id || "");
+    if (!key) return false;
+    if (activeProphetRouteId() !== key) return false;
+    if (!Object.prototype.hasOwnProperty.call(profileCache, key)) return false;
+    var profile = profileCache[key];
+    if (profile && profile.__loading) return false;
+
+    var loading = document.querySelector(
+      '.prophets-detail--loading[data-prophet-detail="' + key + '"]'
+    );
+    if (loading) {
+      try {
+        var parts = parseRouteValue((global.currentRoute && global.currentRoute.value) || key);
+        var html = renderDetail(profile, parts.section || "overview", readState(), findMeta(key));
+        var box = document.createElement("div");
+        box.innerHTML = html;
+        var fresh = box.firstElementChild;
+        if (fresh) {
+          loading.replaceWith(fresh);
+          try {
+            bind();
+          } catch (e) {}
+          return true;
+        }
+      } catch (e2) {}
+    }
+    requestProphetsPaint();
+    return true;
+  }
+
+  function fetchProfileResponse(url) {
+    var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
+    var timer = null;
+    if (ctrl) {
+      timer = setTimeout(function () {
+        try {
+          ctrl.abort();
+        } catch (e) {}
+      }, 14000);
+    }
+    var opts = { cache: "default" };
+    if (ctrl) opts.signal = ctrl.signal;
+    return fetch(url, opts)
+      .then(function (r) {
+        if (timer) clearTimeout(timer);
+        return r;
+      })
+      .catch(function () {
+        if (timer) clearTimeout(timer);
+        /* Zweiter Versuch ohne Abort/Cache — iOS hängt manchmal an force-cache. */
+        return fetch(url, { cache: "no-store" });
+      });
+  }
+
   function loadProfile(id) {
     var key = String(id || "");
     if (!key) return Promise.resolve(null);
@@ -694,28 +777,45 @@
         var file = profileFileFor(key);
         requestedFile = DATA_BASE + file;
         /* Test must never silently fall back to /data/prophets/ when a Test file is missing. */
-        return fetch(requestedFile, { cache: "force-cache" }).catch(function () {
-          return fetch(requestedFile, { cache: "default" });
-        });
+        return fetchProfileResponse(requestedFile);
       })
       .then(function (r) {
-        if (!r.ok) {
+        if (!r || !r.ok) {
+          var status = r ? r.status : 0;
           logProphetLoadError({
             prophetId: key,
             requestedFile: requestedFile,
-            errorType: "profile_http_" + r.status
+            errorType: "profile_http_" + status
           });
-          throw new Error("profile " + r.status);
+          throw new Error("profile " + status);
         }
         return r.json();
       })
       .then(function (data) {
         /* Sofort anzeigen — Hadith-Hydration blockiert nicht mehr die Detailseite. */
+        if (data && typeof data === "object") ensureClaimMap(data);
         profileCache[key] = data;
         if (requestedFile) precacheOpenedProfile(requestedFile);
+        /* Kritisch: Loading-Stub sofort ersetzen (sonst bleibt „Wird geöffnet…“ bis Zweitklick). */
+        try {
+          paintOpenProfile(key);
+        } catch (e) {}
+        queueMicrotask(function () {
+          try {
+            paintOpenProfile(key);
+          } catch (e2) {}
+        });
+        requestAnimationFrame(function () {
+          try {
+            paintOpenProfile(key);
+          } catch (e3) {}
+        });
         hydrateProfileHadith(data)
           .then(function (hydrated) {
-            if (hydrated) profileCache[key] = hydrated;
+            if (hydrated) {
+              ensureClaimMap(hydrated);
+              profileCache[key] = hydrated;
+            }
             var route = global.currentRoute;
             if (
               route &&
@@ -724,7 +824,7 @@
             ) {
               var sec = String(route.value || "").split("/")[1] || "overview";
               if (sec === "sunnah" || sec === "aussagen" || sec === "quellen") {
-                requestProphetsPaint();
+                paintOpenProfile(key);
               }
             }
           })
@@ -740,6 +840,9 @@
           });
         }
         profileCache[key] = null;
+        try {
+          paintOpenProfile(key);
+        } catch (e) {}
         return null;
       })
       .finally(function () {
@@ -1922,7 +2025,7 @@
 
     if (parts.prophetId && !Object.prototype.hasOwnProperty.call(profileCache, parts.prophetId)) {
       loadProfile(parts.prophetId).then(function () {
-        requestProphetsPaint();
+        paintOpenProfile(parts.prophetId);
       });
     }
 
@@ -2189,6 +2292,23 @@
     if (ix < 0) return;
     var next = established[ix + 1] || established[ix - 1];
     if (next) loadProfile(next.id);
+  }
+
+  /** Häufig geöffnete Profile vorwärmen (Mūsā etc. sonst ~800KB Kaltstart). */
+  function warmPopularProfiles() {
+    if (warmPopularProfiles._done) return;
+    warmPopularProfiles._done = true;
+    var ids = ["musa", "isa", "ibrahim", "nuh", "muhammad", "adam", "yusuf"];
+    ids.forEach(function (pid, i) {
+      setTimeout(function () {
+        try {
+          if (!indexCache) return;
+          if (!findMeta(pid)) return;
+          if (Object.prototype.hasOwnProperty.call(profileCache, pid)) return;
+          loadProfile(pid).catch(function () {});
+        } catch (e) {}
+      }, 700 + i * 450);
+    });
   }
 
   function ensureResizeWatch() {
