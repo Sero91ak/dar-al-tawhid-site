@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-09T13:40:07.304Z",
+  "updatedAt": "2026-08-09T13:45:08.032Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-09T13:40:07.304Z",
+  "lastCronRun": "2026-08-09T13:45:08.032Z",
   "nextPlannedPush": {
     "prayer": "ʿAṣr",
     "key": "asr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-09T15:25:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-09T13:25:02.965Z",
-  "windowEnd": "2026-08-10T15:40:02.965Z",
+  "windowStart": "2026-08-09T13:30:03.037Z",
+  "windowEnd": "2026-08-10T15:45:03.037Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 25,
@@ -1088,7 +1088,7 @@
       "prayer": "asr",
       "mode": "entry",
       "recipients": 17,
-      "response": "{\"id\":\"590c4022-46bd-414d-a604-7ca20681adba\",\"external_id\":\"bb647b16-34aa-438a-a051-30464f8f6df9\",\"errors\":{\"invalid_player_ids\":[\"187b4bf7-9cb5-4ef3-8a2b-986b792a43c4\",\"2aa85538-0952-473d-a191-7474ce"
+      "response": "{\"id\":\"590c4022-46bd-414d-a604-7ca20681adba\",\"external_id\":\"bb647b16-34aa-438a-a051-30464f8f6df9\"}"
     },
     {
       "prayer": "asr",
