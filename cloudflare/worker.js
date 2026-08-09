@@ -111,9 +111,13 @@ const DEFAULT_TELEGRAM_POSTS_PATH = "content/admin/telegram-posts.json";
 const DEFAULT_PENDING_PUSHES_PATH = "content/admin/pending-pushes.json";
 const DEFAULT_PRAYER_STATUS_PATH = "content/admin/prayer-push-status.json";
 // Sofort prüfen, dann gestaffelt nachziehen — nicht erst 30s warten (Admin-Retry hing sonst).
-const LIVE_CHECK_SCHEDULE_FULL_MS = [0, 15000, 30000, 60000, 120000, 180000, 240000, 300000];
-const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 3000, 8000];
-const LIVE_CHECK_SCHEDULE_CRON_MS = [0, 5000, 15000, 30000, 60000, 120000];
+// Dense early polls so Push within ~10s after the post is truly public on CDN.
+const LIVE_CHECK_SCHEDULE_FULL_MS = [
+  0, 5000, 10000, 15000, 20000, 30000, 45000, 60000,
+  90000, 120000, 150000, 180000, 240000, 300000
+];
+const LIVE_CHECK_SCHEDULE_QUICK_MS = [0, 4000, 8000, 12000, 18000, 25000];
+const LIVE_CHECK_SCHEDULE_CRON_MS = [0, 5000, 10000, 20000, 35000, 55000, 90000, 120000];
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -1215,9 +1219,11 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
     };
     if (ctx && postId) {
       ctx.waitUntil((async () => {
+        // Ensure Besucher-App assets deploy so public CDN gets the post before Push.
+        await triggerSiteDeployWorkflow(env, `post-live:${postId}`);
         const quick = await processPendingPushUntilLive(env, pendingRecord, { schedule: "quick" });
         if (!quick.sent && quick.pending) {
-          await processPendingPushUntilLive(env, pendingRecord, { schedule: "cron" });
+          await processPendingPushUntilLive(env, pendingRecord, { schedule: "full" });
         }
       })());
     }
@@ -2588,12 +2594,20 @@ function diagnoseLiveFailure(steps, live = {}) {
   if (!steps.indexUpdatedGithub) return "Indexdatei wurde auf GitHub nicht aktualisiert.";
   if (!steps.indexFoundPublic) {
     if (live.indexHttpStatus === 404) return "Indexdatei öffentlich nicht gefunden.";
-    return "GitHub Commit erfolgreich, aber Cloudflare Deployment noch nicht fertig.";
+    return "GitHub Commit erfolgreich, aber öffentliches Deployment noch nicht fertig.";
   }
-  if (!steps.postInIndex) return "Beitrag ist nicht im öffentlichen Index enthalten.";
+  if (!steps.postInIndex) {
+    if (live.githubIndexVerified) {
+      return "Beitrag auf GitHub im Index, öffentlicher CDN-Index noch nicht aktualisiert.";
+    }
+    return "Beitrag ist nicht im öffentlichen Index enthalten.";
+  }
   if (!steps.postFilePublic) {
+    if (live.githubPostVerified) {
+      return "Beitrag auf GitHub vorhanden, öffentlicher CDN noch nicht live.";
+    }
     if (live.postHttpStatus === 404) return "Beitrag-Datei öffentlich nicht erreichbar.";
-    return "Cloudflare liefert noch alte Cache-Version.";
+    return "Öffentlicher CDN liefert noch alte Cache-Version.";
   }
   if (!steps.visitorUrlOk) return "Besucher-URL (?post=…) noch nicht erreichbar.";
   return "";
@@ -2607,9 +2621,12 @@ function buildLiveCheckResult(githubSteps, live, attempts) {
     postInIndex: !!live.postInIndex,
     postFilePublic: !!live.postFilePublic,
     visitorUrlOk: !!live.visitorUrlOk,
-    cloudflareDeployed: !!(live.indexFoundPublic && live.postFilePublic)
+    cloudflareDeployed: !!(live.indexFoundPublic && live.postInIndex && live.postFilePublic),
+    githubIndexVerified: !!live.githubIndexVerified,
+    githubPostVerified: !!live.githubPostVerified
   };
-  const ok = steps.postInIndex && steps.postFilePublic;
+  // Public CDN only — never treat GitHub presence as visitor-live.
+  const ok = steps.indexFoundPublic && steps.postInIndex && steps.postFilePublic;
   const diagnosis = ok ? "" : diagnoseLiveFailure(steps, live);
   return {
     ok,
@@ -2626,7 +2643,9 @@ function buildLiveCheckResult(githubSteps, live, attempts) {
     visitorUrl: live.visitorUrl,
     indexError: live.indexError,
     postError: live.postError,
-    visitorError: live.visitorError
+    visitorError: live.visitorError,
+    githubIndexVerified: steps.githubIndexVerified,
+    githubPostVerified: steps.githubPostVerified
   };
 }
 
@@ -2641,6 +2660,8 @@ async function fetchLiveResources(env, { filename, postId, postPath }) {
     postInIndex: false,
     postFilePublic: false,
     visitorUrlOk: false,
+    githubIndexVerified: false,
+    githubPostVerified: false,
     indexGenerated: null,
     indexCount: null,
     visitorUrl: postId ? buildPostPushUrl(env, postId, bust) : null
@@ -2683,6 +2704,8 @@ async function fetchLiveResources(env, { filename, postId, postPath }) {
     }
   }
 
+  // GitHub is diagnostic only — never mark public flags from repo presence.
+  // Otherwise Push fires while visitors still cannot open the post on the app CDN.
   if ((!result.postInIndex || !result.postFilePublic) && String(env.GITHUB_TOKEN || "").trim()) {
     try {
       const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
@@ -2692,20 +2715,14 @@ async function fetchLiveResources(env, { filename, postId, postPath }) {
         const indexFile = await githubGet(env, owner, repo, `${postsDir}/posts-index.json`, branch);
         if (indexFile?.content) {
           const indexData = JSON.parse(base64ToUtf8(indexFile.content));
-          result.indexGenerated = indexData.generated || result.indexGenerated;
-          result.indexCount = Number(indexData.count ?? (indexData.files?.length ?? 0)) || result.indexCount;
           const files = listPostFiles(indexData.files || []);
-          result.postInIndex = files.some((file) => file.name === filename)
+          result.githubIndexVerified = files.some((file) => file.name === filename)
             || (postId && files.some((file) => String(file.name).replace(/\.md$/, "") === String(postId)));
-          if (result.postInIndex) result.githubIndexVerified = true;
         }
       }
       if (!result.postFilePublic && postPath) {
         const ghPost = await githubGet(env, owner, repo, postPath, branch);
-        if (ghPost?.content) {
-          result.postFilePublic = true;
-          result.githubPostVerified = true;
-        }
+        if (ghPost?.content) result.githubPostVerified = true;
       }
     } catch (error) {
       result.githubVerifyError = error.message || String(error);

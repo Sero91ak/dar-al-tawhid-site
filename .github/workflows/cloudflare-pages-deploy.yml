@@ -9,6 +9,9 @@ on:
       - index.html
       - version.json
       - content/updates/daily.json
+      - content/posts/**
+      - assets/posts/**
+      - p/**
       - service-worker.js
       - manifest.json
       - assets/**

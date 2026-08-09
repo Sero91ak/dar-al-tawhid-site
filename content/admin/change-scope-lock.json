@@ -63,7 +63,11 @@
     "test/assets/prophets/",
     "test/data/prophets/",
     "assets/fold-split.js",
-    "assets/fold-split.css"
+    "assets/fold-split.css",
+    "content/posts/",
+    "assets/posts/",
+    "p/",
+    "scripts/send-post-push.js"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -83,6 +87,19 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "post-push-after-live-v631-2026-08-09",
+      "approvedBy": "user-explicit-live-push",
+      "reason": "Beitrag-Push ging vor Live-Online raus. Push erst nach öffentlichem CDN, dann innerhalb ~10s; Live+Test",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "cloudflare/worker.js",
+        "cloudflare/post-push-admin.js",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "scripts/send-post-push.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
     {
       "id": "prophets-instant-open-v630-2026-08-09",
       "approvedBy": "user-explicit-live-push",
