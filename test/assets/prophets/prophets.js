@@ -17,6 +17,34 @@
   var DATA_BASE = dataBase();
   var LAST_LOAD_ERROR = null;
 
+  /** currentRoute ist im App-Script als `let` deklariert → NICHT auf window.
+   *  Immer Hash/`readRoute` nutzen, sonst bleibt „Wird geöffnet…“ hängen. */
+  function appRoute() {
+    try {
+      if (typeof global.readRoute === "function") {
+        var r = global.readRoute();
+        if (r && r.view) return r;
+      }
+    } catch (e) {}
+    try {
+      var raw = String(location.hash || "").replace(/^#\/?/, "");
+      var segs = raw.split("/").map(function (p) {
+        try {
+          return decodeURIComponent(p || "");
+        } catch (e2) {
+          return p || "";
+        }
+      });
+      return { view: String(segs[0] || "").toLowerCase(), value: segs.slice(1).join("/") };
+    } catch (e3) {
+      return { view: "", value: "" };
+    }
+  }
+
+  function isProphetenRoute() {
+    return appRoute().view === "propheten";
+  }
+
   function logProphetLoadError(info) {
     LAST_LOAD_ERROR = Object.assign(
       {
@@ -364,7 +392,7 @@
     indexCache = data;
     writeSessionIndex(data);
     if (!opts.silent && prevVersion && nextVersion && String(prevVersion) !== String(nextVersion)) {
-      if (global.currentRoute && global.currentRoute.view === "propheten") {
+      if (isProphetenRoute()) {
         if (typeof global.render === "function") global.render();
       }
     }
@@ -691,13 +719,13 @@
   }
 
   function requestProphetsPaint() {
-    if (!(global.currentRoute && global.currentRoute.view === "propheten")) return;
+    if (!isProphetenRoute()) return;
     if (typeof global.render === "function") global.render();
   }
 
   function activeProphetRouteId() {
     try {
-      var route = global.currentRoute;
+      var route = appRoute();
       if (!route || route.view !== "propheten") return "";
       return String(parseRouteValue(route.value).prophetId || "");
     } catch (e) {
@@ -719,7 +747,7 @@
     );
     if (loading) {
       try {
-        var parts = parseRouteValue((global.currentRoute && global.currentRoute.value) || key);
+        var parts = parseRouteValue((appRoute().value) || key);
         var html = renderDetail(profile, parts.section || "overview", readState(), findMeta(key));
         var box = document.createElement("div");
         box.innerHTML = html;
@@ -816,7 +844,7 @@
               ensureClaimMap(hydrated);
               profileCache[key] = hydrated;
             }
-            var route = global.currentRoute;
+            var route = appRoute();
             if (
               route &&
               route.view === "propheten" &&
@@ -1996,12 +2024,12 @@
     if (!indexCache) {
       loadIndex()
         .then(function () {
-          if (global.currentRoute && global.currentRoute.view === "propheten") {
+          if (isProphetenRoute()) {
             if (typeof global.render === "function") global.render();
           }
         })
         .catch(function () {
-          if (global.currentRoute && global.currentRoute.view === "propheten") {
+          if (isProphetenRoute()) {
             if (typeof global.render === "function") global.render();
           }
         });
@@ -2144,6 +2172,18 @@
           tabLabel: "Übersicht",
           at: Date.now()
         });
+        /* Laden starten BEVOR Hash wechselt — dann ist Cache oft schon da. */
+        var openId = String(id || "");
+        var ready = Object.prototype.hasOwnProperty.call(profileCache, openId);
+        if (!ready) {
+          loadProfile(openId)
+            .then(function () {
+              paintOpenProfile(openId);
+            })
+            .catch(function () {
+              paintOpenProfile(openId);
+            });
+        }
         navigateProphets(id, "overview");
         prefetchNeighbor(id);
       });
@@ -2294,21 +2334,48 @@
     if (next) loadProfile(next.id);
   }
 
-  /** Häufig geöffnete Profile vorwärmen (Mūsā etc. sonst ~800KB Kaltstart). */
+  /** Alle freigegebenen Profile im Hintergrund vorladen — Klick öffnet dann sofort. */
   function warmPopularProfiles() {
     if (warmPopularProfiles._done) return;
     warmPopularProfiles._done = true;
-    var ids = ["musa", "isa", "ibrahim", "nuh", "muhammad", "adam", "yusuf"];
-    ids.forEach(function (pid, i) {
-      setTimeout(function () {
-        try {
-          if (!indexCache) return;
-          if (!findMeta(pid)) return;
-          if (Object.prototype.hasOwnProperty.call(profileCache, pid)) return;
-          loadProfile(pid).catch(function () {});
-        } catch (e) {}
-      }, 700 + i * 450);
+    if (!indexCache) return;
+    var established = (indexCache.prophets || []).filter(function (p) {
+      return p && p.id && !isFurtherPerson(p);
     });
+    var prefer = ["musa", "ibrahim", "isa", "nuh", "yusuf", "muhammad", "adam", "ismail"];
+    var ordered = [];
+    var seen = Object.create(null);
+    prefer.forEach(function (id) {
+      var hit = established.find(function (p) {
+        return String(p.id) === id;
+      });
+      if (hit) {
+        ordered.push(hit);
+        seen[id] = 1;
+      }
+    });
+    established.forEach(function (p) {
+      if (!seen[String(p.id)]) ordered.push(p);
+    });
+    var i = 0;
+    var inflight = 0;
+    var maxParallel = 3;
+    function pump() {
+      while (inflight < maxParallel && i < ordered.length) {
+        var p = ordered[i++];
+        var pid = String(p.id);
+        if (Object.prototype.hasOwnProperty.call(profileCache, pid)) continue;
+        inflight++;
+        loadProfile(pid)
+          .catch(function () {})
+          .then(function () {
+            inflight--;
+            pump();
+          });
+      }
+    }
+    /* Sofort starten — nicht erst nach Idle, sonst bleibt Erstklick leer. */
+    setTimeout(pump, 120);
   }
 
   function ensureResizeWatch() {
@@ -2321,7 +2388,7 @@
       ticking = true;
       requestAnimationFrame(function () {
         ticking = false;
-        if (!(global.currentRoute && global.currentRoute.view === "propheten")) return;
+        if (!isProphetenRoute()) return;
         var mode = isDualMode() ? "dual" : "single";
         if (mode === lastWidthMode) return;
         lastWidthMode = mode;
