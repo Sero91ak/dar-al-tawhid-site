@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-09T16:43:27.612Z",
+  "generated": "2026-08-09T16:43:29.382Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -462,8 +462,32 @@
       "createdAt": "2026-08-09T16:43:27.348Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-08-09T16:43:27.348Z",
-      "lastError": "Push wartet auf Live-Verfügbarkeit",
-      "updatedAt": "2026-08-09T16:43:27.612Z"
+      "lastError": "",
+      "updatedAt": "2026-08-09T16:43:29.382Z",
+      "lastCheckAt": "2026-08-09T16:43:29.138Z",
+      "liveCheck": {
+        "ok": true,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": true,
+          "postFilePublic": true,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": true
+        },
+        "diagnosis": "",
+        "indexOk": true,
+        "postOk": true,
+        "visitorUrlOk": true,
+        "attempts": 1,
+        "site": "https://dar-al-tawhid.de",
+        "postId": "amanah-und-iman-gehoeren-zusammen-458",
+        "indexGenerated": "2026-08-09T16:43:22.482Z",
+        "indexCount": 458,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=amanah-und-iman-gehoeren-zusammen-458&v=1786293808668#post/amanah-und-iman-gehoeren-zusammen-458"
+      },
+      "attempts": 1
     }
   }
 }
