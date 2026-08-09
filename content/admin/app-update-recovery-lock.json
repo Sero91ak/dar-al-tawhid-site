@@ -1,7 +1,7 @@
 {
   "locked": true,
   "lockedAt": "2026-07-25T12:00:00.000Z",
-  "lockedReason": "Nutzer-Auftrag: Autonome Boot-Reparatur bei hängendem Laden; Update-Banner nur bei echtem Fehler, blaues Design, keine Endlos-Schleife.",
+  "lockedReason": "Nutzer-Auftrag 2026-08-09: Kein blockierendes Update-Modal. Blauer Top-Banner + Hintergrund-Updates. Autonome Boot-Reparatur bleibt.",
   "unlockPolicy": "Änderungen nur nach ausdrücklichem Nutzer-Auftrag, z. B. „App-Update-Banner freigeben“ oder „autonome Reparatur“.",
   "lockedPaths": [
     "index.html",
@@ -35,5 +35,6 @@
     "scheduleAutoRepair",
     "classList.add('is-app-repair')",
     "auto:true,delayMs"
-  ]
+  ],
+  "lastEmergencyFix": "UPDATE_SOFT_BANNER_V628"
 }

@@ -84,6 +84,22 @@
   ],
   "unlockedScopes": [
     {
+      "id": "fix-blocking-update-modal-v628-2026-08-09",
+      "approvedBy": "user-explicit-emergency-fix",
+      "reason": "App öffnet nicht: blockierendes Neue-Version-Modal. Sofort: blauer Top-Update-Push + Hintergrund-Updates; iOS+Android; Test+Live",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/admin/app-update-recovery-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "prophets-quellen-full-v626-2026-08-08",
       "approvedBy": "user-explicit-live-push",
       "reason": "Nutzer: Propheten Quelle öffnen kaputt; Aussagen/Quellen gekürzt — voller Text + Direktnachweis Live+Test",
