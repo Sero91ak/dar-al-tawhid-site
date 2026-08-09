@@ -1,18 +1,38 @@
 {
   "date": "2026-08-09",
   "timezone": "Europe/Berlin",
-  "generated": "2026-08-08T22:00:55.039Z",
-  "source": "dar-daily-scheduler-regenerated",
+  "generated": "2026-08-09T03:50:40.320Z",
+  "source": "dar-daily-no-repeat-rotation",
   "recommendation": {
-    "id": "ghulat-100-einen-muslim-des-kufr-zu-beschuldigen",
-    "title": "Einen Muslim des Kufr zu beschuldigen",
-    "file": "ghulat-100-einen-muslim-des-kufr-zu-beschuldigen.md",
-    "category": "Widerlegungen",
-    "scholar": "Der Prophet ﷺ",
-    "snippet": "„Wer einen Gläubigen des Kufr beschuldigt, der ist wie sein Mörder.“"
+    "id": "ali-ibn-abi-talib-kinder-der-akhirah-437",
+    "title": "Sei von den Kindern der Ākhirah",
+    "file": "zuhd-437-sei-von-den-kindern-der-akhirah.md",
+    "category": "Zuhd",
+    "scholar": "ʿAlī ibn Abī Ṭālib",
+    "snippet": "🖋️ ʿAlī ibn Abī Ṭālib رضي الله عنه sagte:"
   },
   "dua": {
-    "snippet": "",
-    "category": ""
+    "id": "dua-044-rabbana-ghfir-li-wa-li-walidayya",
+    "title": "Duʿāʾ um Vergebung für sich, Eltern und Gläubige",
+    "snippet": "Unser Herr, vergib mir und meinen Eltern und den Gläubigen am Tag, an dem die Abrechnung stattfindet.",
+    "category": "Vergebung & Eltern"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 457,
+      "remaining": 446
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 87,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
