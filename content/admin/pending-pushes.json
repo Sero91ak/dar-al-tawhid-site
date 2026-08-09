@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-09T15:10:03.459Z",
+  "generated": "2026-08-09T15:10:04.987Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -427,26 +427,25 @@
       "pushApproved": true,
       "pushApprovedAt": "2026-08-09T15:07:59.218Z",
       "postId": "lib:pub-20260809-001",
-      "updatedAt": "2026-08-09T15:10:03.459Z",
+      "updatedAt": "2026-08-09T15:10:04.987Z",
       "processingToken": "library:1786288203239:20x103ls",
       "processingStartedAt": "2026-08-09T15:10:03.459Z",
-      "lastCheckAt": "2026-08-09T15:08:22.776Z",
+      "lastCheckAt": "2026-08-09T15:10:04.745Z",
       "liveCheck": {
-        "ok": false,
-        "diagnosis": "PDF noch nicht im Live-Katalog enthalten.",
+        "ok": true,
+        "diagnosis": "",
         "site": "https://dar-al-tawhid.de",
         "publicationId": "pub-20260809-001",
         "slug": "al-ijma",
         "catalogFoundPublic": true,
-        "publicationInCatalog": false,
-        "pdfFilePublic": false,
+        "publicationInCatalog": true,
+        "pdfFilePublic": true,
         "visitorUrlOk": true,
-        "visitorUrl": "https://dar-al-tawhid.de/?v=1786288102734#bibliothek/al-ijma",
-        "pdfHttpStatus": 404,
-        "attempt": 5
+        "visitorUrl": "https://dar-al-tawhid.de/?v=1786288204287#bibliothek/al-ijma",
+        "attempt": 1
       },
-      "attempts": 5,
-      "lastError": "PDF noch nicht im Live-Katalog enthalten."
+      "attempts": 1,
+      "lastError": ""
     }
   }
 }
