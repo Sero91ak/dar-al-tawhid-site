@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-09T21:15:06.567Z",
+  "updatedAt": "2026-08-09T21:20:06.555Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-09T21:15:06.567Z",
+  "lastCronRun": "2026-08-09T21:20:06.555Z",
   "nextPlannedPush": {
     "prayer": "Fajr",
     "key": "fajr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-10T02:29:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-09T21:00:02.938Z",
-  "windowEnd": "2026-08-10T23:15:02.938Z",
+  "windowStart": "2026-08-09T21:05:02.939Z",
+  "windowEnd": "2026-08-10T23:20:02.939Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 27,
