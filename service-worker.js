@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v628-soft-update-banner';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v629-prophets-open-paint';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -275,6 +275,15 @@ function isPostDataRequest(url) {
 
 function isProphetsTestDataRequest(url) {
   return url.pathname.indexOf('/test/data/prophets/') === 0;
+}
+
+function isProphetsProfileDataRequest(url) {
+  const p = url.pathname;
+  if (isProphetsCatalogRequest(url)) return false;
+  if (p.indexOf('/data/prophets/') !== 0 && p.indexOf('/test/data/prophets/') !== 0) return false;
+  if (p.indexOf('/hadith/') >= 0) return true;
+  if (p.indexOf('/relations/') >= 0) return true;
+  return /\.json$/i.test(p);
 }
 
 function isProphetsCatalogRequest(url) {
@@ -594,7 +603,7 @@ self.addEventListener('fetch', (event) => {
 
   // Beitragsdaten und Index: Network-first, damit neue Beiträge nicht blockiert werden.
   // Propheten-Testprofile: Network-first + Runtime-Cache der geöffneten Dateien.
-  if (isPostDataRequest(url) || isFeedAssetRequest(url) || isProphetsTestDataRequest(url) || Date.now() < bypassPostCacheUntil) {
+  if (isPostDataRequest(url) || isFeedAssetRequest(url) || isProphetsTestDataRequest(url) || isProphetsProfileDataRequest(url) || Date.now() < bypassPostCacheUntil) {
     event.respondWith(
       fetch(request, { cache: 'no-store' })
         .then((response) => {

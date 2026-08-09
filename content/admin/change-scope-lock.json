@@ -84,6 +84,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "prophets-open-paint-fix-v629-2026-08-09",
+      "approvedBy": "user-explicit-fix",
+      "reason": "Propheten bleiben bei Wird geöffnet hängen; erst Zweitklick zeigt Inhalt. Sofort-Paint + schnelleres Laden; Test+Live",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/prophets/",
+        "test/assets/prophets/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "fix-blocking-update-modal-v628-2026-08-09",
       "approvedBy": "user-explicit-emergency-fix",
       "reason": "App öffnet nicht: blockierendes Neue-Version-Modal. Sofort: blauer Top-Update-Push + Hintergrund-Updates; iOS+Android; Test+Live",
