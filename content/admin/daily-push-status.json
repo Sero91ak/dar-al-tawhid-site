@@ -1,16 +1,16 @@
 {
-  "ok": true,
+  "ok": false,
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "worker-local",
-  "schedulerStatus": "success",
-  "updatedAt": "2026-08-10T09:55:02.704Z",
+  "schedulerStatus": "error",
+  "updatedAt": "2026-08-10T10:00:02.710Z",
   "usersChecked": 12,
   "duaCandidates": 0,
-  "recCandidates": 0,
+  "recCandidates": 11,
   "sent": 0,
   "skipped": 0,
   "duplicates": 12,
-  "errors": 0,
+  "errors": 11,
   "dailyContentDate": "2026-08-10",
   "currentRecommendation": {
     "id": "tawakkul-frag-nur-allah-001",
@@ -24,5 +24,15 @@
     "category": "Suǧūd & Vergebung"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "recommendation",
+      "batch": true,
+      "count": 11,
+      "contentId": "tawakkul-frag-nur-allah-001",
+      "recipients": "7c741d32-25d2-4472-9772-074cf6facf50",
+      "ok": false,
+      "invalid": 2
+    }
+  ]
 }
