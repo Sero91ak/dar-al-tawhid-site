@@ -1,7 +1,7 @@
 /**
- * DAR AL TAWḤĪD — Gebet erlernen (Test Phase 6)
- * Review / Freigabe-System · Zero-Trust · TEST ONLY
- * productionEnabled = false | audioVisible = false | no self-approval
+ * DAR AL TAWḤĪD — Gebet erlernen (Test Phase 7)
+ * Echte bedienbare Testversion · Zero-Trust Content/Pose
+ * productionEnabled = false | audioVisible = false | TEST ONLY
  */
 (function (global) {
   "use strict";
@@ -14,8 +14,10 @@
   var AUDIO_ENABLED = false;
   var AUDIO_VISIBLE = false;
   var AUDIO_PRELOAD = false;
-  var CONTENT_PENDING_LABEL = "Inhalt wird geprüft";
-  var PHASE = 6;
+  var CONTENT_PENDING_LABEL = "Inhalt wird quellengeprüft.";
+  var POSE_PENDING_LABEL = "Pose wird geprüft";
+  var TEXTS_EMPTY_LABEL = "Noch keine geprüften Texte verfügbar.";
+  var PHASE = 7;
   var CHAR_MALE = "dar-prayer-male-v1";
   var CHAR_FEMALE = "dar-prayer-female-v1";
   var CHAR_VERSION = 1;
@@ -1101,17 +1103,10 @@
     return (
       '<div class="prl-stage" aria-label="Lehrfigur">' +
       '<div class="prl-figure">' +
-      '<div class="prl-figure-pending">' +
-      "<b>" +
-      esc(title || poseKey) +
-      "</b>" +
-      "<span>Pose noch nicht freigegeben</span>" +
-      "<span>" +
-      esc(cid) +
-      " · " +
-      esc(poseKey) +
-      "</span>" +
-      "<span>Keine Ersatzfigur – freigegebenes Master-Asset abwarten.</span>" +
+      '<div class="prl-figure-pending" data-prl-pose-placeholder="1">' +
+      "<b>" + esc(title || poseKey) + "</b>" +
+      "<span>" + esc(POSE_PENDING_LABEL) + "</span>" +
+      (isTestEnv() ? '<span class="prl-test-marker">TEST</span>' : "") +
       "</div></div>" +
       '<div class="prl-stage-floor" aria-hidden="true"></div></div>'
     );
@@ -1130,19 +1125,26 @@
       if (missingAssets.indexOf(pendingKey) < 0) missingAssets.push(pendingKey);
       return (
         '<div class="prl-stage" role="img" aria-label="' + esc(label) + '" data-prl-character-id="' + esc(cid) + '" data-prl-pose-id="' + esc(poseKey) + '" data-prl-pose-status="' + esc(status) + '">' +
-        '<div class="prl-figure"><div class="prl-figure-pending">' +
+        '<div class="prl-figure"><div class="prl-figure-pending" data-prl-pose-placeholder="1">' +
         "<b>" + esc(step.titleDe || poseKey) + "</b>" +
-        "<span>Pose noch nicht freigegeben</span>" +
-        "<span>" + esc(cid) + " · " + esc(poseKey) + " · " + esc(status) + "</span>" +
-        (isTestEnv() ? '<span class="prl-test-marker">TEST · pending/missing asset</span>' : "") +
-        "<span>Keine Ersatzfigur – freigegebenes Master-Asset abwarten.</span>" +
+        "<span>" + esc(POSE_PENDING_LABEL) + "</span>" +
+        (isTestEnv() ? '<span class="prl-test-marker">TEST</span>' : "") +
         '</div></div><div class="prl-stage-floor" aria-hidden="true"></div></div>'
       );
     }
-    var marker = resolved.meta && resolved.meta.approved ? "" : '<span class="prl-test-marker">TEST · pending asset</span>';
+    var marker = resolved.meta && resolved.meta.approved ? "" : (isTestEnv() ? '<span class="prl-test-marker">TEST</span>' : "");
+    var srcset = "";
+    if (resolved.srcset && resolved.srcset.length) {
+      srcset = ' srcset="' + esc(resolved.srcset.join(", ")) + '"';
+    }
     return (
       '<div class="prl-stage" data-prl-character-id="' + esc(resolved.characterId) + '" data-prl-pose-id="' + esc(resolved.poseId) + '" data-prl-asset-id="' + esc(resolved.assetId) + '">' +
-      '<div class="prl-figure"><img src="' + esc(resolved.url) + '" alt="' + esc(label) + '" loading="lazy" decoding="async" data-prl-pose-img>' + marker + "</div>" +
+      '<div class="prl-figure">' +
+      '<picture>' +
+      (resolved.srcAvif ? '<source type="image/avif" srcset="' + esc(resolved.srcAvif) + '">' : "") +
+      (resolved.srcWebp ? '<source type="image/webp" srcset="' + esc(resolved.srcWebp) + '">' : "") +
+      '<img src="' + esc(resolved.url) + '"' + srcset + ' alt="' + esc(label) + '" loading="lazy" decoding="async" data-prl-pose-img>' +
+      "</picture>" + marker + "</div>" +
       '<div class="prl-stage-floor" aria-hidden="true"></div></div>'
     );
   }
@@ -1167,10 +1169,15 @@
 
   function controlsHtml(state, opts) {
     opts = opts || {};
+    var charHint =
+      '<div class="prl-char-lock" aria-hidden="true">' +
+      '<span class="' + (state.character === "male" ? "is-active" : "") + '">Männer · ' + esc(CHAR_MALE) + "</span>" +
+      '<span class="' + (state.character === "female" ? "is-active" : "") + '">Frauen · ' + esc(CHAR_FEMALE) + "</span>" +
+      "</div>";
     return (
       '<div class="prl-controls">' +
-      (isTestEnv() ? '<div class="prl-test-badge" aria-hidden="true">TEST · Gebet erlernen</div>' : "") +
-      '<div class="prl-controls-label" id="prlCharLabel">Für wen möchtest du die Darstellung sehen?</div>' +
+      (isTestEnv() ? '<div class="prl-test-badge" aria-hidden="true">TEST</div>' : "") +
+      '<div class="prl-controls-label" id="prlCharLabel">Darstellung</div>' +
       '<div class="prl-segment" role="group" aria-labelledby="prlCharLabel">' +
       '<button type="button" data-prl-character="male" aria-pressed="' + (state.character === "male" ? "true" : "false") + '" class="' +
       (state.character === "male" ? "is-active" : "") +
@@ -1179,7 +1186,8 @@
       (state.character === "female" ? "is-active" : "") +
       '">Frauen</button>' +
       "</div>" +
-      '<div class="prl-controls-label" id="prlViewLabel">Wie möchtest du lernen?</div>' +
+      (opts.compact ? "" : charHint) +
+      '<div class="prl-controls-label" id="prlViewLabel">Lernmodus</div>' +
       '<div class="prl-segment" role="group" aria-labelledby="prlViewLabel">' +
       '<button type="button" data-prl-view="swipe" aria-pressed="' + (state.viewMode === "swipe" ? "true" : "false") + '" class="' +
       (state.viewMode === "swipe" ? "is-active" : "") +
@@ -1219,6 +1227,19 @@
       "</div>" +
       "</div>"
     );
+  }
+
+  function countApprovedClaims(step) {
+    var resolved = resolveContentForStep(step);
+    var ids = (resolved.sourceClaimIds && resolved.sourceClaimIds.length
+      ? resolved.sourceClaimIds
+      : (step.sourceClaimIds || step.claimSlotIds || [])).slice();
+    var n = 0;
+    ids.forEach(function (id) {
+      var c = cache.claimsById && cache.claimsById[id];
+      if (c && c.approved === true && c.reviewPass1 === true && c.reviewPass2 === true && !isWeakSourceType(c.sourceType)) n += 1;
+    });
+    return n;
   }
 
   function getApprovedDetails(step) {
@@ -1265,16 +1286,16 @@
     }
 
     if (!resolved.publishable) {
-      blocks +=
-        '<div class="prl-research">Technischer Prototyp · Status: ' +
-        esc(resolved.status || step.verificationStatus || "research") +
-        " – keine ungeprüften religiösen Texte als gesichert dargestellt.</div>";
+      blocks += '<div class="prl-research">' + esc(CONTENT_PENDING_LABEL) + "</div>";
     }
 
-    blocks +=
-      '<div class="prl-btn-row"><button type="button" class="prl-btn" data-prl-sources="' +
-      esc(step.id) +
-      '">Beleg ansehen</button></div>';
+    var approvedClaimCount = countApprovedClaims(step);
+    if (approvedClaimCount > 0) {
+      blocks +=
+        '<div class="prl-btn-row"><button type="button" class="prl-btn" data-prl-sources="' +
+        esc(step.id) +
+        '">Beleg ansehen</button></div>';
+    }
 
     if (resolved.variantIds && resolved.variantIds.length) {
       blocks +=
@@ -1523,7 +1544,7 @@
       '<header class="prl-hero prl-hero--compact"><h2>Was sage ich im Gebet?</h2><p>Nur freigegebene Content-Module · keine zweite Textdatenbank.</p></header>' +
       controlsHtml(state) +
       '<div class="prl-paths">' +
-      (approvedRows.length ? approvedRows.join("") : '<div class="prl-research">' + esc(CONTENT_PENDING_LABEL) + " – noch keine freigegebenen Gebetstexte.</div>") +
+      (approvedRows.length ? approvedRows.join("") : '<div class="prl-research">' + esc(TEXTS_EMPTY_LABEL) + "</div>") +
       "</div>" +
       '<div class="prl-btn-row"><button type="button" class="prl-btn" data-prl-go="">Zurück</button></div>' +
       "</section>"
@@ -1623,19 +1644,20 @@
       '<section class="prl-shell prl-shell--hub" data-prl-root="hub">' +
       '<header class="prl-hero prl-hero--compact">' +
       "<h2>Gebet erlernen</h2>" +
-      '<p class="prl-ar">الصلاة</p>' +
+      '<p class="prl-ar" lang="ar" dir="rtl">الصلاة</p>' +
       "<p>Schritt für Schritt sehen und lernen.</p>" +
       "</header>" +
       controlsHtml(state) +
       resumeCard(state, fajr) +
       '<div class="prl-paths">' +
-      '<button type="button" class="prl-path" data-prl-go="fajr"><b>Gebet Schritt für Schritt</b><span>Fajr-Prototyp · 2 Rakʿāt · 19 Schritte</span></button>' +
-      '<button type="button" class="prl-path" data-prl-go="gebet"><b>Ein bestimmtes Gebet</b><span>Fajr jetzt · weitere Gebete folgen</span></button>' +
-      '<button type="button" class="prl-path" data-prl-go="stellung"><b>Eine Stellung nachsehen</b><span>Direkt zu Takbīr, Rukūʿ, Suǧūd und mehr</span></button>' +
-      '<button type="button" class="prl-path" data-prl-go="texte"><b>Was sage ich im Gebet?</b><span>Texte aus denselben Content-Modulen</span></button>' +
-      (isTestEnv() ? '<button type="button" class="prl-path" data-prl-go="review"><b>Prayer Learning Review</b><span>Content · Sources · Pose · nur Test</span></button>' : "") +
-      (isTestEnv() ? '<button type="button" class="prl-path" data-prl-go="debug"><b>Prayer Learning Debug</b><span>Validierung · nur Test</span></button>' : "") +
+      '<button type="button" class="prl-path" data-prl-go="fajr"><b>Gebet Schritt für Schritt</b><span>Fajr · 2 Rakʿāt</span></button>' +
+      '<button type="button" class="prl-path" data-prl-go="gebet"><b>Ein bestimmtes Gebet</b><span>Fajr aktiv · weitere in Vorbereitung</span></button>' +
+      '<button type="button" class="prl-path" data-prl-go="stellung"><b>Eine Stellung nachsehen</b><span>Takbīr, Rukūʿ, Suǧūd und mehr</span></button>' +
+      '<button type="button" class="prl-path" data-prl-go="texte"><b>Was sage ich im Gebet?</b><span>Nur geprüfte Textmodule</span></button>' +
       "</div>" +
+      (isTestEnv()
+        ? '<div class="prl-test-tools"><button type="button" class="prl-btn" data-prl-go="review">Review</button><button type="button" class="prl-btn" data-prl-go="debug">Debug</button></div>'
+        : "") +
       "</section>"
     );
   }
@@ -1656,7 +1678,7 @@
           esc(p.titleAr || "") +
           "</div></span>" +
           '<span class="prl-badge">' +
-          (ready ? p.rakat + " Rakʿāt" : "folgt") +
+          (ready ? p.rakat + " Rakʿāt" : "In Vorbereitung") +
           "</span></button>"
         );
       })
@@ -1731,10 +1753,10 @@
       "</div>";
     var complete =
       '<div class="prl-complete" data-prl-complete ' + (idx >= steps.length - 1 ? "" : "hidden") + '>' +
-      "<b>Fajr abgeschlossen</b><span>Lernhilfe · keine religiöse Bewertung des Nutzers.</span>" +
+      "<b>Fajr-Lernablauf beendet.</b><span>Lernhilfe · keine religiöse Bewertung.</span>" +
       '<div class="prl-btn-row">' +
-      '<button type="button" class="prl-btn primary" data-prl-retry-fajr>Noch einmal üben</button>' +
-      '<button type="button" class="prl-btn" data-prl-go="">Zur Übersicht</button>' +
+      '<button type="button" class="prl-btn primary" data-prl-retry-fajr>Noch einmal ansehen</button>' +
+      '<button type="button" class="prl-btn" data-prl-go="gebet">Zur Gebetsübersicht</button>' +
       "</div></div>";
 
     preloadAdjacent(state.character, steps, idx);
@@ -1825,6 +1847,23 @@
     );
   }
 
+  function renderVisitorClaim(claim) {
+    if (!claim) return "";
+    var lines = [];
+    lines.push('<li class="prl-claim">');
+    if (claim.statementDe) lines.push("<div>" + esc(claim.statementDe) + "</div>");
+    lines.push("<div><b>Quelle</b> · " + esc(claim.sourceType || "—") + "</div>");
+    var fund = [claim.work, claim.book, claim.chapter, claim.hadithNumber && ("Nr. " + claim.hadithNumber), claim.volume && ("Bd. " + claim.volume), claim.page && ("S. " + claim.page)].filter(Boolean);
+    if (fund.length) lines.push("<div><b>Fundstelle</b> · " + esc(fund.join(" · ")) + "</div>");
+    if (claim.grading) lines.push("<div><b>Status</b> · " + esc(claim.grading) + "</div>");
+    else if (claim.sourceType) lines.push("<div><b>Status</b> · " + esc(claim.sourceType) + "</div>");
+    if (claim.directEvidenceUrl) {
+      lines.push('<div><a href="' + esc(claim.directEvidenceUrl) + '" target="_blank" rel="noopener noreferrer">Direktnachweis</a></div>');
+    }
+    lines.push("</li>");
+    return lines.join("");
+  }
+
   function renderClaimRecord(claim) {
     if (!claim) return "";
     var approved = claim.approved === true && claim.reviewPass1 === true && claim.reviewPass2 === true;
@@ -1857,21 +1896,21 @@
     var resolved = resolveContentForStep(step);
     var claimIds = (resolved.sourceClaimIds && resolved.sourceClaimIds.length ? resolved.sourceClaimIds : (step.sourceClaimIds || step.claimSlotIds || [])).slice();
     ensureClaims().then(function () {
-      if (!claimIds.length) {
+      var approvedIds = claimIds.filter(function (id) {
+        var c = cache.claimsById && cache.claimsById[id];
+        return c && c.approved === true && c.reviewPass1 === true && c.reviewPass2 === true;
+      });
+      if (!approvedIds.length) {
         body.innerHTML =
-          '<p class="prl-research">Noch keine geprüfte Quelle hinterlegt.<br>Status: ' +
-          esc(step.verificationStatus || resolved.status || "research") +
-          "</p>" +
-          "<p>Werk · Fundstelle · Authentizitätsstatus folgen nach Quellenprüfung.</p>" +
+          '<p class="prl-research">Noch keine geprüfte Quelle hinterlegt.</p>' +
           "<p>Internet-/Social-Media-Grafiken sind kein Beleg.</p>";
       } else {
-        var items = claimIds.map(function (id) {
+        var items = approvedIds.map(function (id) {
           var claim = cache.claimsById && cache.claimsById[id];
-          if (claim) return renderClaimRecord(claim);
-          return "<li><b>" + esc(id) + "</b><div class=\"prl-research\">Claim-Datensatz fehlt</div></li>";
+          return renderVisitorClaim(claim);
         }).join("");
         body.innerHTML =
-          "<p><b>Belege</b> · contentId: " + esc(resolved.contentId || "—") + "</p>" +
+          "<p><b>Beleg</b></p>" +
           "<ul class=\"prl-claim-list\">" + items + "</ul>";
       }
       sheet.hidden = false;
@@ -2223,11 +2262,27 @@
     });
   }
 
+  function bindPoseImgFallback(scope) {
+    var root = scope || document;
+    root.querySelectorAll("[data-prl-pose-img]").forEach(function (img) {
+      if (img.getAttribute("data-prl-err-bound") === "1") return;
+      img.setAttribute("data-prl-err-bound", "1");
+      img.addEventListener("error", function () {
+        var wrap = document.createElement("div");
+        wrap.className = "prl-figure-pending";
+        wrap.setAttribute("data-prl-pose-placeholder", "1");
+        wrap.innerHTML = "<b>Pose</b><span>" + esc(POSE_PENDING_LABEL) + "</span>";
+        if (img.parentNode) img.parentNode.replaceChild(wrap, img);
+      });
+    });
+  }
+
   function afterRender() {
     try {
       var root = document.querySelector("[data-prl-root]");
       if (!root) return;
       if (root.getAttribute("data-prl-root") === "learn") restoreLearnPosition(root);
+      bindPoseImgFallback(root);
     } catch (err) {
       console.warn("[prayer-learning] afterRender error", err);
     }

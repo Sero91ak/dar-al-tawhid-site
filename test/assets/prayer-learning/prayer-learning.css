@@ -514,3 +514,42 @@
 @media (max-width:560px){
   .prl-review-summary{grid-template-columns:1fr}
 }
+
+
+/* Phase 7 – usable test polish */
+.prl-shell{--prl-stage-min:min(52vh,460px)}
+.prl-char-lock{
+  display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 8px;font-size:11px;opacity:.72
+}
+.prl-char-lock span{
+  padding:4px 8px;border-radius:999px;
+  border:1px solid color-mix(in srgb, var(--line,#c9b896) 45%, transparent)
+}
+.prl-char-lock span.is-active{opacity:1;border-color:color-mix(in srgb, var(--accent,#b08d57) 65%, transparent)}
+.prl-test-tools{
+  display:flex;gap:8px;justify-content:flex-end;margin-top:8px;opacity:.7
+}
+.prl-test-tools .prl-btn{font-size:12px;padding:6px 10px}
+.prl-segment button{
+  transition:background .18s ease, border-color .18s ease, transform .12s ease
+}
+.prl-segment button:active{transform:scale(.98)}
+.prl-btn{
+  transition:opacity .15s ease, transform .12s ease
+}
+.prl-btn:active{transform:scale(.98)}
+.prl-swipe-track{
+  scroll-behavior:smooth
+}
+@media (prefers-reduced-motion:reduce){
+  .prl-segment button,.prl-btn,.prl-swipe-track{transition:none;scroll-behavior:auto}
+}
+.prl-figure-pending[data-prl-pose-placeholder]{
+  justify-content:center;min-height:calc(var(--prl-stage-min) * .78);
+  background:color-mix(in srgb, var(--card, transparent) 70%, transparent)
+}
+.prl-shell[data-prl-container="phone"]{--prl-stage-min:min(52vh,440px)}
+.prl-nav{
+  bottom:calc(78px + env(safe-area-inset-bottom,0px));
+  z-index:6
+}

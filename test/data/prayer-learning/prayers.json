@@ -1,5 +1,6 @@
 {
-  "version": 3,
+  "version": 4,
+  "phase": 7,
   "audioEnabled": false,
   "characters": {
     "male": "dar-prayer-male-v1",
@@ -16,7 +17,7 @@
     },
     {
       "id": "dhuhr",
-      "titleDe": "Dhuhr",
+      "titleDe": "Ẓuhr",
       "titleAr": "الظهر",
       "rakat": 4,
       "status": "planned",
@@ -32,7 +33,7 @@
     },
     {
       "id": "maghrib",
-      "titleDe": "Maghrib",
+      "titleDe": "Maġrib",
       "titleAr": "المغرب",
       "rakat": 3,
       "status": "planned",
@@ -40,7 +41,7 @@
     },
     {
       "id": "isha",
-      "titleDe": "ʿIshāʾ",
+      "titleDe": "ʿIšāʾ",
       "titleAr": "العشاء",
       "rakat": 4,
       "status": "planned",

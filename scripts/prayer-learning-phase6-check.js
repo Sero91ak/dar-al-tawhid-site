@@ -129,8 +129,8 @@ try {
   if (js.includes("preview must NOT change approval") && js.includes("data-prl-preview-deep")) ok("preview≠approve", "PASS");
   else fail("preview", "fehlt");
 
-  if (js.includes("PHASE = 6") && testHtml.includes("app-shell-v638")) ok("version", "v638");
-  else fail("version", "nicht v638");
+  if (/PHASE = [6-9]/.test(js) && /app-shell-v63[8-9]|app-shell-v6[4-9]\d/.test(testHtml)) ok("version", "v638+");
+  else fail("version", "nicht v638+");
 
   if (js.includes("data-prl-content-id") && js.includes("CONTENT_PENDING_LABEL")) ok("contentResolveUI", "PASS");
   else fail("contentResolveUI", "stepCopyHtml nicht registry-basiert");
