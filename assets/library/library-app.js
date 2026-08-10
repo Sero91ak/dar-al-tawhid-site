@@ -902,12 +902,12 @@
 
   function readerPdfDisplayUrl(page) {
     const pageHash = page ? `#page=${page}` : "";
+    if (readerState?.blobUrl) return `${readerState.blobUrl}${pageHash}`;
     const pub = readerState?.pub;
     if (pub?.pdfUrl && !readerState?.useOfflineBlob) {
       const path = String(pub.pdfUrl).startsWith("/") ? `${LIB_BASE}${pub.pdfUrl}` : pub.pdfUrl;
       return `${path}${pageHash}`;
     }
-    if (readerState?.blobUrl) return `${readerState.blobUrl}${pageHash}`;
     return "";
   }
 
@@ -999,15 +999,6 @@
     const page = Math.max(1, Math.min(readerState.total || 1, Number(pageNum) || 1));
     readerState.page = page;
     stage.innerHTML = '<div class="lib-reader-msg">Seite wird geladen…</div>';
-
-    if (shouldUseNativePdfViewer()) {
-      if (token !== readerRenderToken) return;
-      renderReaderNativeFallback(stage, page);
-      const input = getReaderRoot()?.querySelector("[data-library-reader-input]");
-      if (input) input.value = String(page);
-      saveProgress(readerState.pub.id, page, readerState.total);
-      return;
-    }
 
     try {
       const layoutWidth = await waitForReaderLayout(stage);
@@ -1148,14 +1139,7 @@
       readerState.total = doc.numPages;
       const totalEl = root.querySelector("[data-library-reader-total]");
       if (totalEl) totalEl.textContent = String(readerState.total);
-      if (shouldUseNativePdfViewer()) {
-        const stage = root.querySelector("[data-library-reader-stage]");
-        if (stage) renderReaderNativeFallback(stage, readerState.page);
-        const input = root.querySelector("[data-library-reader-input]");
-        if (input) input.value = String(readerState.page);
-      } else {
-        await renderReaderScroll({ page: readerState.page });
-      }
+      await renderReaderScroll({ page: readerState.page });
       if (session !== readerSessionId) return;
       trackLibraryEvent("library_read", pub);
     } catch (e) {
