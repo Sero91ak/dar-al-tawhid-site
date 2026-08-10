@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-10T03:15:06.709Z",
+  "updatedAt": "2026-08-10T03:20:06.518Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-10T03:15:06.709Z",
+  "lastCronRun": "2026-08-10T03:20:06.518Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-10T11:22:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-10T03:00:03.047Z",
-  "windowEnd": "2026-08-11T05:15:03.047Z",
+  "windowStart": "2026-08-10T03:05:03.024Z",
+  "windowEnd": "2026-08-11T05:20:03.024Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 27,
