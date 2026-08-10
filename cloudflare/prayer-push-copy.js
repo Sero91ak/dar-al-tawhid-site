@@ -117,21 +117,21 @@ export const PRAYER_ADVANCE_PUSH_VARIANTS = {
 
 export const PRAYER_ENTRY_PUSH_VARIANTS = {
   fajr: [
-    { title: "✨ Fajr-Zeit ist eingetreten", body: "Beginne deinen Tag mit dem Gebet. Wer den Morgen mit Allah beginnt, verliert nicht." },
-    { title: "✨ Zeit für Fajr", body: "Steh auf für dein Gebet. Der Schlaf vergeht, aber die Pflicht vor Allah bleibt." },
-    { title: "✨ Fajr erinnert dich", body: "Der Tag beginnt nicht mit dem Handy, sondern mit der Niederwerfung vor Allah." },
-    { title: "✨ Fajr-Zeit ist eingetreten", body: "Qurʾān al-Fajr ist bezeugt — verpasse nicht dieses Gebet am Beginn des Tages." },
-    { title: "✨ Fajr ist da", body: "Wer Fajr bewahrt, beginnt den Morgen mit Gehorsam und klarer Ausrichtung." },
-    { title: "✨ Der Morgen hat begonnen", body: "Antworte zuerst dem Gebet, bevor die Welt deinen Tag für sich beansprucht." },
-    { title: "✨ Fajr tritt ein", body: "Die Engel bezeugen diese Zeit — verliere Fajr nicht im Schlaf oder in Aufschub." },
-    { title: "✨ Fajr ist jetzt", body: "Noch vor Sonnenaufgang liegt ein Gebet, das den Tag in Gehorsam eröffnet." },
-    { title: "✨ Erhebe dich zu Fajr", body: "Lass nicht zu, dass dir der Morgen vergeht, bevor du vor Allah gestanden hast." },
-    { title: "✨ Antworte dem Morgenruf", body: "Fajr ist eingetreten — gib dem Gebet den Vorrang vor Bequemlichkeit." },
-    { title: "✨ Fajr beginnt jetzt", body: "Nutze den Eintritt des Morgens für ein Gebet, das den Tag aufrichtet." },
-    { title: "✨ Der frühe Ruf ist da", body: "Bevor der Tag sich ausbreitet, antworte jetzt dem Gebet." },
-    { title: "✨ Steh für den Morgen auf", body: "Fajr ist da — verliere diese Stunde nicht an Trägheit." },
-    { title: "✨ Der Morgen gehört Allah", body: "Beginne ihn mit Gebet, nicht mit Aufschub." },
-    { title: "✨ Jetzt ist die Zeit für Fajr", body: "Stell dich vor Allah, bevor der Alltag seinen Zugriff auf den Tag nimmt." }
+    { title: "🌅 Fajr-Zeit ist eingetreten", body: "Beginne deinen Tag mit dem Gebet. Wer den Morgen mit Allah beginnt, verliert nicht." },
+    { title: "🌅 Zeit für Fajr", body: "Steh auf für dein Gebet. Der Schlaf vergeht, aber die Pflicht vor Allah bleibt." },
+    { title: "🌅 Fajr erinnert dich", body: "Der Tag beginnt nicht mit dem Handy, sondern mit der Niederwerfung vor Allah." },
+    { title: "🌅 Fajr-Zeit ist eingetreten", body: "Qurʾān al-Fajr ist bezeugt — verpasse nicht dieses Gebet am Beginn des Tages." },
+    { title: "🌅 Fajr ist da", body: "Wer Fajr bewahrt, beginnt den Morgen mit Gehorsam und klarer Ausrichtung." },
+    { title: "🌅 Der Morgen hat begonnen", body: "Antworte zuerst dem Gebet, bevor die Welt deinen Tag für sich beansprucht." },
+    { title: "🌅 Fajr tritt ein", body: "Die Engel bezeugen diese Zeit — verliere Fajr nicht im Schlaf oder in Aufschub." },
+    { title: "🌅 Fajr ist jetzt", body: "Noch vor Sonnenaufgang liegt ein Gebet, das den Tag in Gehorsam eröffnet." },
+    { title: "🌅 Erhebe dich zu Fajr", body: "Lass nicht zu, dass dir der Morgen vergeht, bevor du vor Allah gestanden hast." },
+    { title: "🌅 Antworte dem Morgenruf", body: "Fajr ist eingetreten — gib dem Gebet den Vorrang vor Bequemlichkeit." },
+    { title: "🌅 Fajr beginnt jetzt", body: "Nutze den Eintritt des Morgens für ein Gebet, das den Tag aufrichtet." },
+    { title: "🌅 Der frühe Ruf ist da", body: "Bevor der Tag sich ausbreitet, antworte jetzt dem Gebet." },
+    { title: "🌅 Steh für den Morgen auf", body: "Fajr ist da — verliere diese Stunde nicht an Trägheit." },
+    { title: "🌅 Der Morgen gehört Allah", body: "Beginne ihn mit Gebet, nicht mit Aufschub." },
+    { title: "🌅 Jetzt ist die Zeit für Fajr", body: "Stell dich vor Allah, bevor der Alltag seinen Zugriff auf den Tag nimmt." }
   ],
   dhuhr: [
     { title: "☀️ Dhuhr-Zeit ist eingetreten", body: "Unterbrich deine Beschäftigung und antworte dem Ruf Allahs." },
@@ -168,21 +168,21 @@ export const PRAYER_ENTRY_PUSH_VARIANTS = {
     { title: "🌤️ ʿAṣr ist nun da", body: "Schütze dieses Gebet mit Entschlossenheit und verrichte es rechtzeitig." }
   ],
   maghrib: [
-    { title: "🌥️ Maghrib-Zeit ist eingetreten", body: "Der Tag endet – schließe ihn mit Dankbarkeit und Gebet ab." },
-    { title: "🌥️ Zeit für Maghrib", body: "Bevor die Nacht beginnt, kehre mit deinem Herzen zu Allah zurück." },
-    { title: "🌥️ Maghrib erinnert dich", body: "Die Sonne ist untergegangen. Vergiss nicht, vor Allah zu stehen." },
-    { title: "🌥️ Maghrib ist da", body: "An der Schwelle zur Nacht beginnt Maghrib — lass den Tag mit Gebet enden." },
-    { title: "🌥️ Maghrib-Zeit ist jetzt", body: "Wenn das Licht des Tages weicht, halte am Gebet fest und beginne den Abend richtig." },
-    { title: "🌥️ Der Abend ist eingetreten", body: "Begib dich zu Maghrib, bevor die Nacht dich mit anderem beschäftigt." },
-    { title: "🌥️ Maghrib tritt ein", body: "Mit dem Untergang der Sonne ist die Zeit da, vor Allah zu stehen." },
-    { title: "🌥️ Jetzt ist Maghrib", body: "Empfange den Abend mit Gebet, bevor die Nacht ihren Lauf nimmt." },
-    { title: "🌥️ Antworte zu Maghrib", body: "Der Wechsel in die Nacht ist da — beginne ihn mit Gehorsam." },
-    { title: "🌥️ Maghrib ist eingetreten", body: "Bevor der Abend sich füllt, verrichte jetzt dein Gebet." },
-    { title: "🌥️ Der Abend beginnt", body: "Maghrib ist da — nimm den Übergang in die Nacht mit Gebet an." },
-    { title: "🌥️ Jetzt ist die Zeit für Maghrib", body: "Mit dem Sonnenuntergang beginnt eine Zeit, die du nicht aufschieben solltest." },
-    { title: "🌥️ Steh zu Maghrib auf", body: "Bevor Wege, Stimmen und Termine dich binden, verrichte dein Gebet." },
-    { title: "🌥️ Die Sonne ist fort", body: "Maghrib ist eingetreten — schließe den Tag im Gebet ab." },
-    { title: "🌥️ Maghrib ist nun da", body: "Empfange den Abend mit Gehorsam vor Allah." }
+    { title: "🌇 Maghrib-Zeit ist eingetreten", body: "Der Tag endet – schließe ihn mit Dankbarkeit und Gebet ab." },
+    { title: "🌇 Zeit für Maghrib", body: "Bevor die Nacht beginnt, kehre mit deinem Herzen zu Allah zurück." },
+    { title: "🌇 Maghrib erinnert dich", body: "Die Sonne ist untergegangen. Vergiss nicht, vor Allah zu stehen." },
+    { title: "🌇 Maghrib ist da", body: "An der Schwelle zur Nacht beginnt Maghrib — lass den Tag mit Gebet enden." },
+    { title: "🌇 Maghrib-Zeit ist jetzt", body: "Wenn das Licht des Tages weicht, halte am Gebet fest und beginne den Abend richtig." },
+    { title: "🌇 Der Abend ist eingetreten", body: "Begib dich zu Maghrib, bevor die Nacht dich mit anderem beschäftigt." },
+    { title: "🌇 Maghrib tritt ein", body: "Mit dem Untergang der Sonne ist die Zeit da, vor Allah zu stehen." },
+    { title: "🌇 Jetzt ist Maghrib", body: "Empfange den Abend mit Gebet, bevor die Nacht ihren Lauf nimmt." },
+    { title: "🌇 Antworte zu Maghrib", body: "Der Wechsel in die Nacht ist da — beginne ihn mit Gehorsam." },
+    { title: "🌇 Maghrib ist eingetreten", body: "Bevor der Abend sich füllt, verrichte jetzt dein Gebet." },
+    { title: "🌇 Der Abend beginnt", body: "Maghrib ist da — nimm den Übergang in die Nacht mit Gebet an." },
+    { title: "🌇 Jetzt ist die Zeit für Maghrib", body: "Mit dem Sonnenuntergang beginnt eine Zeit, die du nicht aufschieben solltest." },
+    { title: "🌇 Steh zu Maghrib auf", body: "Bevor Wege, Stimmen und Termine dich binden, verrichte dein Gebet." },
+    { title: "🌇 Die Sonne ist fort", body: "Maghrib ist eingetreten — schließe den Tag im Gebet ab." },
+    { title: "🌇 Maghrib ist nun da", body: "Empfange den Abend mit Gehorsam vor Allah." }
   ],
   isha: [
     { title: "🌙 ʿIshāʾ-Zeit ist eingetreten", body: "Beende deinen Tag mit Gehorsam, bevor du dich zur Ruhe legst." },
@@ -221,10 +221,10 @@ export const PRAYER_ENTRY_PUSH_VARIANTS = {
 };
 
 export const PRAYER_TITLE_EMOJI = {
-  fajr: "✨",
+  fajr: "🌅",
   dhuhr: "☀️",
   asr: "🌤️",
-  maghrib: "🌥️",
+  maghrib: "🌇",
   isha: "🌙",
   tahajjud: "🌙"
 };
