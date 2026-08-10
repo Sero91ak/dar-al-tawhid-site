@@ -45,7 +45,8 @@
         "looseGarment": null,
         "sleevesClosed": null,
         "noForearmsVisible": null,
-        "sameMasterFigure": null
+        "sameMasterFigure": null,
+        "sleevesStayClosedOnHandRaise": null
       },
       "review": {
         "sourceReview": {
@@ -68,7 +69,9 @@
           "reviewedAt": null,
           "reviewer": null
         }
-      }
+      },
+      "integrationBlock": "Takbir + Qiyam",
+      "phase": 8
     },
     "qiyam": {
       "assetId": "female-v1-qiyam-v1",
@@ -125,7 +128,9 @@
           "reviewedAt": null,
           "reviewer": null
         }
-      }
+      },
+      "integrationBlock": "Takbir + Qiyam",
+      "phase": 8
     },
     "ruku": {
       "assetId": "female-v1-ruku-v1",
@@ -597,5 +602,5 @@
     "inconsistent-niqab",
     "character-drift"
   ],
-  "phase": 6
+  "phase": 8
 }

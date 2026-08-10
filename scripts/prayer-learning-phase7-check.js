@@ -163,8 +163,8 @@ try {
   if (js.includes("In Vorbereitung") || read("test/assets/prayer-learning/prayer-learning.js").includes("In Vorbereitung")) ok("plannedPrayers", "PASS");
   else fail("plannedPrayers", "fehlt");
 
-  if (js.includes("PHASE = 7") && testHtml.includes("app-shell-v639")) ok("version", "v639");
-  else fail("version", "nicht v639");
+  if (/PHASE = [7-9]/.test(js) && /app-shell-v63[9]|app-shell-v6[4-9]\d/.test(testHtml)) ok("version", "v639+");
+  else fail("version", "nicht v639+");
 
   if (js.includes("TEXTS_EMPTY_LABEL") && js.includes("Noch keine geprüften Texte verfügbar")) ok("textsEmpty", "PASS");
   else fail("textsEmpty", "fehlt");

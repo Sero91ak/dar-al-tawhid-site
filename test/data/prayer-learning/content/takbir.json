@@ -2,12 +2,22 @@
   "id": "takbir-main-v1",
   "stepId": "takbir",
   "titleDe": "Takbīrat al-Iḥrām",
+  "titleAr": "تكبيرة الإحرام",
   "instructionDe": null,
   "arabic": null,
   "transliteration": null,
   "meaningDe": null,
   "spokenText": null,
   "sourceClaimIds": [],
+  "relatedClaimSlotIds": [
+    "takbir-standing-position",
+    "takbir-hand-raising",
+    "takbir-hand-height",
+    "takbir-palm-direction",
+    "takbir-fingers",
+    "takbir-spoken-wording",
+    "takbir-transition-to-qiyam"
+  ],
   "variantIds": [],
   "defaultVariantId": null,
   "status": "research",
@@ -15,8 +25,12 @@
   "reviewPass2": false,
   "approved": false,
   "audioId": null,
-  "revision": 1,
+  "revision": 2,
   "contentHash": null,
+  "selfApproved": false,
+  "aiGenerated": false,
+  "integrationBlock": "Takbir + Qiyam",
+  "phase": 8,
   "review": {
     "contentReview": {
       "status": "pending",
@@ -46,21 +60,16 @@
   },
   "claimMappings": {
     "instructionDe": null,
-    "arabic": null,
-    "transliteration": null,
-    "meaningDe": null,
-    "poseDetails": []
-  },
-  "selfApproved": false,
-  "aiGenerated": false,
-  "relatedClaimSlotIds": [
-    "takbir-starting-posture",
-    "takbir-hand-raise",
-    "takbir-hand-height",
-    "takbir-palm-orientation",
-    "takbir-finger-position",
-    "takbir-timing",
-    "takbir-wording",
-    "takbir-transition"
-  ]
+    "arabic": "takbir-spoken-wording",
+    "transliteration": "takbir-spoken-wording",
+    "meaningDe": "takbir-spoken-wording",
+    "poseDetails": [
+      "takbir-standing-position",
+      "takbir-hand-raising",
+      "takbir-hand-height",
+      "takbir-palm-direction",
+      "takbir-fingers",
+      "takbir-transition-to-qiyam"
+    ]
+  }
 }

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "phase": 6,
+  "phase": 8,
   "prayerId": "fajr",
   "statusValues": [
     "draft",
@@ -18,8 +18,8 @@
   "steps": [
     {
       "id": "takbir",
-      "titleDe": "Takbīr",
-      "titleAr": "التكبير",
+      "titleDe": "Takbīrat al-Iḥrām",
+      "titleAr": "تكبيرة الإحرام",
       "contentId": "takbir-main-v1",
       "poseId": "takbir",
       "status": "research",
@@ -80,21 +80,22 @@
         "looseGarment": null,
         "sleevesClosed": null,
         "noForearmsVisible": null,
-        "sameMasterFigure": null
+        "sameMasterFigure": null,
+        "sleevesStayClosedOnHandRaise": null
       },
       "claimIds": [
-        "takbir-starting-posture",
-        "takbir-hand-raise",
+        "takbir-standing-position",
+        "takbir-hand-raising",
         "takbir-hand-height",
-        "takbir-palm-orientation",
-        "takbir-finger-position",
-        "takbir-timing",
-        "takbir-wording",
-        "takbir-transition"
+        "takbir-palm-direction",
+        "takbir-fingers",
+        "takbir-spoken-wording",
+        "takbir-transition-to-qiyam"
       ],
       "detailClaimIds": [],
       "notesInternal": null,
-      "audioId": null
+      "audioId": null,
+      "integrationBlock": "Takbir + Qiyam"
     },
     {
       "id": "qiyam",
@@ -163,15 +164,17 @@
         "sameMasterFigure": null
       },
       "claimIds": [
-        "qiyam-body-posture",
-        "qiyam-gaze",
+        "qiyam-standing",
         "qiyam-hand-position",
-        "qiyam-foot-stance",
-        "qiyam-transition"
+        "qiyam-right-left-hand-relation",
+        "qiyam-foot-position",
+        "qiyam-gaze",
+        "qiyam-transition-to-recitation"
       ],
       "detailClaimIds": [],
       "notesInternal": null,
-      "audioId": null
+      "audioId": null,
+      "integrationBlock": "Takbir + Qiyam"
     },
     {
       "id": "recitation",
@@ -781,5 +784,6 @@
       "notesInternal": null,
       "audioId": null
     }
-  ]
+  ],
+  "integrationBlock": "Takbir + Qiyam"
 }

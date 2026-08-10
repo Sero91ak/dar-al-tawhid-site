@@ -1,72 +1,7 @@
 {
   "version": 1,
-  "phase": 6,
+  "phase": 8,
   "edges": [
-    {
-      "from": "takbir-starting-posture",
-      "to": "content:takbir",
-      "type": "claim→content-step"
-    },
-    {
-      "from": "takbir-hand-raise",
-      "to": "content:takbir",
-      "type": "claim→content-step"
-    },
-    {
-      "from": "takbir-hand-height",
-      "to": "content:takbir",
-      "type": "claim→content-step"
-    },
-    {
-      "from": "takbir-palm-orientation",
-      "to": "content:takbir",
-      "type": "claim→content-step"
-    },
-    {
-      "from": "takbir-finger-position",
-      "to": "content:takbir",
-      "type": "claim→content-step"
-    },
-    {
-      "from": "takbir-timing",
-      "to": "content:takbir",
-      "type": "claim→content-step"
-    },
-    {
-      "from": "takbir-wording",
-      "to": "content:takbir",
-      "type": "claim→content-step"
-    },
-    {
-      "from": "takbir-transition",
-      "to": "content:takbir",
-      "type": "claim→content-step"
-    },
-    {
-      "from": "qiyam-body-posture",
-      "to": "content:qiyam",
-      "type": "claim→content-step"
-    },
-    {
-      "from": "qiyam-gaze",
-      "to": "content:qiyam",
-      "type": "claim→content-step"
-    },
-    {
-      "from": "qiyam-hand-position",
-      "to": "content:qiyam",
-      "type": "claim→content-step"
-    },
-    {
-      "from": "qiyam-foot-stance",
-      "to": "content:qiyam",
-      "type": "claim→content-step"
-    },
-    {
-      "from": "qiyam-transition",
-      "to": "content:qiyam",
-      "type": "claim→content-step"
-    },
     {
       "from": "recitation-fatiha-source",
       "to": "content:recitation",
@@ -376,6 +311,71 @@
       "from": "pose:taslim",
       "to": "step:taslim",
       "type": "pose→step"
+    },
+    {
+      "from": "takbir-standing-position",
+      "to": "content:takbir",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "takbir-hand-raising",
+      "to": "content:takbir",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "takbir-hand-height",
+      "to": "content:takbir",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "takbir-palm-direction",
+      "to": "content:takbir",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "takbir-fingers",
+      "to": "content:takbir",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "takbir-spoken-wording",
+      "to": "content:takbir",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "takbir-transition-to-qiyam",
+      "to": "content:takbir",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "qiyam-standing",
+      "to": "content:qiyam",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "qiyam-hand-position",
+      "to": "content:qiyam",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "qiyam-right-left-hand-relation",
+      "to": "content:qiyam",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "qiyam-foot-position",
+      "to": "content:qiyam",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "qiyam-gaze",
+      "to": "content:qiyam",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "qiyam-transition-to-recitation",
+      "to": "content:qiyam",
+      "type": "claim→content-step"
     }
   ],
   "note": "Source Claim → Content → Step → Prayer → Visitor UI; Source Claim → Pose → Step → Visitor UI",

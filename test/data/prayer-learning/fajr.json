@@ -5,9 +5,9 @@
   "rakAhCount": 2,
   "rakat": 2,
   "audioEnabled": false,
-  "phase": 7,
+  "phase": 8,
   "engine": "compose-from-templates",
-  "verificationNote": "Phase-7: Bedienbare Testversion. Ungeprüfte Inhalte/Posen als kontrollierter Zustand. productionEnabled=false.",
+  "verificationNote": "Phase-8: Erste echte Befüllung Takbīr + Qiyām (Slots/Claims/Posen). Noch research. productionEnabled=false.",
   "sequence": [
     "fajr-r1-takbir",
     "fajr-r1-qiyam",
@@ -39,7 +39,18 @@
       "contentId": "takbir-main-v1",
       "status": "research",
       "sourceClaimIds": [],
-      "poseId": "takbir"
+      "poseId": "takbir",
+      "prayerId": "fajr",
+      "claimSlotIds": [
+        "takbir-standing-position",
+        "takbir-hand-raising",
+        "takbir-hand-height",
+        "takbir-palm-direction",
+        "takbir-fingers",
+        "takbir-spoken-wording",
+        "takbir-transition-to-qiyam"
+      ],
+      "integrationBlock": "Takbir + Qiyam"
     },
     {
       "id": "fajr-r1-qiyam",
@@ -50,7 +61,17 @@
       "contentId": "qiyam-main-v1",
       "status": "research",
       "sourceClaimIds": [],
-      "poseId": "qiyam"
+      "poseId": "qiyam",
+      "prayerId": "fajr",
+      "claimSlotIds": [
+        "qiyam-standing",
+        "qiyam-hand-position",
+        "qiyam-right-left-hand-relation",
+        "qiyam-foot-position",
+        "qiyam-gaze",
+        "qiyam-transition-to-recitation"
+      ],
+      "integrationBlock": "Takbir + Qiyam"
     },
     {
       "id": "fajr-r1-recitation",
@@ -143,7 +164,16 @@
       "contentId": "qiyam-main-v1",
       "status": "research",
       "sourceClaimIds": [],
-      "poseId": "qiyam"
+      "poseId": "qiyam",
+      "prayerId": "fajr",
+      "claimSlotIds": [
+        "qiyam-standing",
+        "qiyam-hand-position",
+        "qiyam-right-left-hand-relation",
+        "qiyam-foot-position",
+        "qiyam-gaze",
+        "qiyam-transition-to-recitation"
+      ]
     },
     {
       "id": "fajr-r2-recitation",
@@ -306,5 +336,14 @@
     "noGamification": true,
     "noReligiousJudgement": true
   },
-  "readyForApprovedContent": true
+  "readyForApprovedContent": true,
+  "integrationBlocks": {
+    "current": "Takbir + Qiyam",
+    "completed": [],
+    "next": [
+      "Recitation",
+      "Ruku",
+      "Standing after Ruku"
+    ]
+  }
 }

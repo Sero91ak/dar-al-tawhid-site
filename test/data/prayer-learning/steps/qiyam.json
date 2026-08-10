@@ -21,14 +21,17 @@
   ],
   "textModuleIds": [],
   "claimSlotIds": [
-    "qiyam-body-posture",
-    "qiyam-gaze",
+    "qiyam-standing",
     "qiyam-hand-position",
-    "qiyam-foot-stance",
-    "qiyam-transition"
+    "qiyam-right-left-hand-relation",
+    "qiyam-foot-position",
+    "qiyam-gaze",
+    "qiyam-transition-to-recitation"
   ],
   "variants": [],
   "verificationStatus": "research",
   "audioId": null,
-  "ikhtilafNote": "Legitimer Ikhtilāf darf nicht durch ein einzelnes Asset verborgen werden."
+  "ikhtilafNote": "Legitimer Ikhtilāf darf nicht durch ein einzelnes Asset verborgen werden.",
+  "phase": 8,
+  "integrationBlock": "Takbir + Qiyam"
 }

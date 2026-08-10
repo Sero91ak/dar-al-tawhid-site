@@ -1,6 +1,6 @@
 {
   "version": 5,
-  "phase": 7,
+  "phase": 8,
   "audioEnabled": false,
   "environment": "test",
   "characters": {
@@ -37,5 +37,6 @@
     "visitorVisible": false,
     "route": "gebet-lernen/review",
     "zeroTrust": true
-  }
+  },
+  "integrationBlock": "Takbir + Qiyam"
 }

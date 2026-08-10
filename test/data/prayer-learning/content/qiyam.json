@@ -2,12 +2,21 @@
   "id": "qiyam-main-v1",
   "stepId": "qiyam",
   "titleDe": "Qiyām",
+  "titleAr": "القيام",
   "instructionDe": null,
   "arabic": null,
   "transliteration": null,
   "meaningDe": null,
   "spokenText": null,
   "sourceClaimIds": [],
+  "relatedClaimSlotIds": [
+    "qiyam-standing",
+    "qiyam-hand-position",
+    "qiyam-right-left-hand-relation",
+    "qiyam-foot-position",
+    "qiyam-gaze",
+    "qiyam-transition-to-recitation"
+  ],
   "variantIds": [],
   "defaultVariantId": null,
   "status": "research",
@@ -15,8 +24,12 @@
   "reviewPass2": false,
   "approved": false,
   "audioId": null,
-  "revision": 1,
+  "revision": 2,
   "contentHash": null,
+  "selfApproved": false,
+  "aiGenerated": false,
+  "integrationBlock": "Takbir + Qiyam",
+  "phase": 8,
   "review": {
     "contentReview": {
       "status": "pending",
@@ -49,15 +62,13 @@
     "arabic": null,
     "transliteration": null,
     "meaningDe": null,
-    "poseDetails": []
-  },
-  "selfApproved": false,
-  "aiGenerated": false,
-  "relatedClaimSlotIds": [
-    "qiyam-body-posture",
-    "qiyam-gaze",
-    "qiyam-hand-position",
-    "qiyam-foot-stance",
-    "qiyam-transition"
-  ]
+    "poseDetails": [
+      "qiyam-standing",
+      "qiyam-hand-position",
+      "qiyam-right-left-hand-relation",
+      "qiyam-foot-position",
+      "qiyam-gaze",
+      "qiyam-transition-to-recitation"
+    ]
+  }
 }

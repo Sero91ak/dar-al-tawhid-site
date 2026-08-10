@@ -25,16 +25,17 @@
     "takbir-allahu-akbar"
   ],
   "claimSlotIds": [
-    "takbir-starting-posture",
-    "takbir-hand-raise",
+    "takbir-standing-position",
+    "takbir-hand-raising",
     "takbir-hand-height",
-    "takbir-palm-orientation",
-    "takbir-finger-position",
-    "takbir-timing",
-    "takbir-wording",
-    "takbir-transition"
+    "takbir-palm-direction",
+    "takbir-fingers",
+    "takbir-spoken-wording",
+    "takbir-transition-to-qiyam"
   ],
   "variants": [],
   "verificationStatus": "research",
-  "audioId": null
+  "audioId": null,
+  "phase": 8,
+  "integrationBlock": "Takbir + Qiyam"
 }

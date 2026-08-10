@@ -1,6 +1,6 @@
 /**
- * DAR AL TAWḤĪD — Gebet erlernen (Test Phase 7)
- * Echte bedienbare Testversion · Zero-Trust Content/Pose
+ * DAR AL TAWḤĪD — Gebet erlernen (Test Phase 8)
+ * Integration: Takbīr + Qiyām · bestehende Engine
  * productionEnabled = false | audioVisible = false | TEST ONLY
  */
 (function (global) {
@@ -17,7 +17,7 @@
   var CONTENT_PENDING_LABEL = "Inhalt wird quellengeprüft.";
   var POSE_PENDING_LABEL = "Pose wird geprüft";
   var TEXTS_EMPTY_LABEL = "Noch keine geprüften Texte verfügbar.";
-  var PHASE = 7;
+  var PHASE = 8;
   var CHAR_MALE = "dar-prayer-male-v1";
   var CHAR_FEMALE = "dar-prayer-female-v1";
   var CHAR_VERSION = 1;
@@ -305,6 +305,14 @@
     cache.claimsById = {};
     (cache.claims.claims || []).forEach(function (c) {
       if (c && c.id) cache.claimsById[c.id] = c;
+      if (c && c.aliases && c.aliases.length) {
+        c.aliases.forEach(function (a) { if (a) cache.claimsById[a] = c; });
+      }
+    });
+    var aliases = cache.claims.claimAliases || {};
+    Object.keys(aliases).forEach(function (oldId) {
+      var neu = aliases[oldId];
+      if (neu && cache.claimsById[neu] && !cache.claimsById[oldId]) cache.claimsById[oldId] = cache.claimsById[neu];
     });
     return cache.claims;
   }
@@ -822,6 +830,10 @@
       var s = seq[i];
       var tpl = await ensureStepTemplate(s.templateId);
       var titles = titleForInstance(tpl, s);
+      var contentIdEarly = s.contentId || contentIdForStep({ templateId: tpl.id, poseId: s.poseId }, s);
+      var contentEarly = getContentById(contentIdEarly);
+      if (contentEarly && contentEarly.titleDe) titles.titleDe = contentEarly.titleDe;
+      if (contentEarly && contentEarly.titleAr) titles.titleAr = contentEarly.titleAr;
       var poses = resolvePoseId(tpl, s);
       if (tpl.preferredPoseId && tpl.poseFallbackId) {
         var reg = await ensureRegistry();
@@ -832,12 +844,19 @@
           poses.female = tpl.poseFallbackId;
         }
       }
-      var claimIds = (s.sourceClaimIds && s.sourceClaimIds.length ? s.sourceClaimIds : (tpl.claimSlotIds || [])).slice();
       var contentId = s.contentId || contentIdForStep({ templateId: tpl.id, poseId: s.poseId || poses.male }, s);
       var poseId = s.poseId || poses.male;
       var content = getContentById(contentId);
-      if (content && content.sourceClaimIds && content.sourceClaimIds.length && !claimIds.length) {
-        claimIds = content.sourceClaimIds.slice();
+      var claimIds = (s.sourceClaimIds && s.sourceClaimIds.length
+        ? s.sourceClaimIds
+        : (s.claimSlotIds && s.claimSlotIds.length
+          ? s.claimSlotIds
+          : (content && content.relatedClaimSlotIds && content.relatedClaimSlotIds.length
+            ? content.relatedClaimSlotIds
+            : (tpl.claimSlotIds || [])))).slice();
+      // approved sourceClaimIds only count for publishing; slots may be research-only
+      if (content && content.sourceClaimIds && content.sourceClaimIds.length) {
+        /* keep approved sources separate — publish gate uses content.sourceClaimIds */
       }
       steps.push({
         id: s.id,

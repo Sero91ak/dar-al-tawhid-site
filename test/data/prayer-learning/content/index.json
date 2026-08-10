@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "phase": 5,
+  "phase": 8,
   "modules": [
     {
       "stepId": "takbir",
@@ -80,5 +80,6 @@
       "reviewPass2",
       "sourceClaimIds.length>0"
     ]
-  }
+  },
+  "integrationBlock": "Takbir + Qiyam"
 }
