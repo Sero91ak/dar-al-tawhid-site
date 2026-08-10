@@ -31,5 +31,49 @@
       "approved": false
     }
   ],
-  "note": "Texte nicht zu einem synthetischen Satz vermischen."
+  "note": "Texte nicht zu einem synthetischen Satz vermischen.",
+  "revision": 1,
+  "contentHash": null,
+  "review": {
+    "contentReview": {
+      "status": "pending",
+      "reviewedAt": null,
+      "reviewer": null
+    },
+    "sourceReview": {
+      "status": "pending",
+      "reviewedAt": null,
+      "reviewer": null
+    },
+    "poseReview": {
+      "status": "pending",
+      "reviewedAt": null,
+      "reviewer": null
+    },
+    "reviewPass1": {
+      "passed": false,
+      "reviewedAt": null,
+      "reviewer": null
+    },
+    "reviewPass2": {
+      "passed": false,
+      "reviewedAt": null,
+      "reviewer": null
+    }
+  },
+  "claimMappings": {
+    "instructionDe": null,
+    "arabic": null,
+    "transliteration": null,
+    "meaningDe": null,
+    "poseDetails": []
+  },
+  "selfApproved": false,
+  "aiGenerated": false,
+  "relatedClaimSlotIds": [
+    "standing-after-ruku-rise",
+    "standing-after-ruku-text-while",
+    "standing-after-ruku-text-after",
+    "standing-after-ruku-hands"
+  ]
 }

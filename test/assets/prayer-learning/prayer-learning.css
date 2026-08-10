@@ -471,3 +471,46 @@
 .prl-claim-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
 .prl-claim{padding:10px 12px;border:1px solid color-mix(in srgb, var(--line, #c9b896) 50%, transparent);border-radius:10px}
 @media (max-width:560px){.prl-debug-grid{grid-template-columns:1fr}}
+
+
+/* Phase 6 – internal review dashboard (test only; not visitor lesson chrome) */
+.prl-shell--review{gap:14px}
+.prl-review-summary{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;font-size:13px
+}
+.prl-review-summary > div{
+  display:flex;flex-direction:column;gap:2px;padding:8px 10px;
+  border:1px solid color-mix(in srgb, var(--line,#c9b896) 55%, transparent);border-radius:10px
+}
+.prl-review-summary b{font-size:11px;letter-spacing:.03em;text-transform:uppercase;opacity:.72}
+.prl-review-filters{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0}
+.prl-review-filter{
+  border:1px solid color-mix(in srgb, var(--line,#c9b896) 60%, transparent);
+  background:transparent;color:inherit;border-radius:999px;padding:6px 10px;font:inherit;font-size:12px;cursor:pointer
+}
+.prl-review-filter.is-active{border-color:color-mix(in srgb, var(--accent,#b08d57) 70%, transparent);font-weight:600}
+.prl-review-list{display:flex;flex-direction:column;gap:8px}
+.prl-review-row{
+  display:flex;flex-direction:column;gap:8px;text-align:left;width:100%;
+  border:1px solid color-mix(in srgb, var(--line,#c9b896) 55%, transparent);
+  background:color-mix(in srgb, var(--card,transparent) 88%, transparent);
+  border-radius:12px;padding:12px 14px;color:inherit;font:inherit;cursor:pointer
+}
+.prl-review-badges,.prl-preview-row{display:flex;flex-wrap:wrap;gap:6px}
+.prl-rev-badge{
+  display:inline-flex;align-items:center;padding:3px 8px;border-radius:8px;font-size:11px;
+  border:1px solid color-mix(in srgb, var(--line,#c9b896) 50%, transparent)
+}
+.prl-rev-badge.is-approved{border-color:#2f6b45}
+.prl-rev-badge.is-pending{border-color:#8a6a2f}
+.prl-rev-badge.is-rejected{border-color:#8a3030}
+.prl-rev-badge.is-missing{border-color:#666;opacity:.85}
+.prl-review-section{margin:10px 0;padding:12px;border:1px solid color-mix(in srgb, var(--line,#c9b896) 50%, transparent);border-radius:12px}
+.prl-review-section h3{margin:0 0 8px;font-size:15px}
+.prl-review-checks ul{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-direction:column;gap:4px}
+.prl-review-checks li{display:flex;justify-content:space-between;gap:8px;font-size:13px}
+.prl-review-sidebys{display:grid;gap:8px;margin:8px 0}
+.prl-review-internal{font-size:12px;opacity:.7;margin-top:4px}
+@media (max-width:560px){
+  .prl-review-summary{grid-template-columns:1fr}
+}

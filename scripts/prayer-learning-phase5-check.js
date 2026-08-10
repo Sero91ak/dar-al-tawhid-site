@@ -142,8 +142,8 @@ try {
     ok("offlineUrls", "PASS");
   } else fail("offlineUrls", "Phase-5 Offline-Pfade fehlen");
 
-  if (testHtml.includes("app-shell-v637")) ok("version", "v637");
-  else fail("version", "Build nicht v637");
+  if (/app-shell-v63[7-9]|app-shell-v6[4-9]\d/.test(testHtml)) ok("version", "v637+");
+  else fail("version", "Build nicht v637+");
 
   let validated = null;
   try {

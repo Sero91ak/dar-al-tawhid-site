@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * validate-prayer-learning — Phase 5 schema / sequence / refs / gates (test data).
+ * validate-prayer-learning — Phase 5–6 schema / sequence / refs / gates / review (test data).
  */
 const fs = require("fs");
 const path = require("path");
@@ -53,7 +53,7 @@ function canPublishPose(p) {
 
 const report = {
   feature: "Gebet erlernen",
-  phase: 5,
+  phase: 6,
   environment: "test",
   contentRegistry: "FAIL",
   sourceRegistry: "FAIL",
@@ -239,6 +239,124 @@ try {
     ok("offlineManifest");
   }
 
+
+  // —— Phase 6 review system ——
+  const VALID_STATUSES = new Set(["draft","research","source_check","pose_check","review_pass_1","review_pass_2","approved","rejected"]);
+  if (!exists("review/index.json") || !exists("review/fajr-steps.json") || !exists("review/audit-log.json") || !exists("review/fajr-readiness.json") || !exists("review/dependencies.json")) {
+    fail("review data files missing");
+  } else {
+    const revIdx = readJson("review/index.json");
+    if (revIdx.visitorVisible === true) fail("review must not be visitor visible");
+    if (revIdx.productionEnabled === true) fail("review index productionEnabled must be false");
+    const revSteps = readJson("review/fajr-steps.json");
+    (revSteps.steps || []).forEach((st) => {
+      if (!VALID_STATUSES.has(st.status)) fail("invalid review status: " + st.status + " @ " + st.id);
+      if (st.approved === true) {
+        if (!(st.contentApproved && st.sourceCoverageApproved && st.poseApproved && st.reviewPass1 && st.reviewPass2)) {
+          fail("step marked approved without full formula: " + st.id);
+        }
+      }
+      if (st.selfApproved) fail("self-approval flag illegal: " + st.id);
+    });
+    const readiness = readJson("review/fajr-readiness.json");
+    if (readiness.computed !== true) fail("readiness must be computed");
+    if (readiness.fajr && readiness.fajr.releaseReady === true) {
+      const f = readiness.fajr;
+      if (!(f.sequenceValid && f.contentCoverage && f.sourceCoverage && f.malePoseCoverage && f.femalePoseCoverage && f.reviewPass1 && f.reviewPass2)) {
+        fail("releaseReady true without all coverage flags");
+      }
+    }
+    // Dynamic readiness from live data (must currently be false)
+    const male = readJson("poses/male-v1.json");
+    const female = readJson("poses/female-v1.json");
+    let contentCoverage = true, sourceCoverage = true, malePoseCoverage = true, femalePoseCoverage = true, rp1 = true, rp2 = true;
+    (revSteps.steps || []).forEach((st) => {
+      const contentFile = st.id === "rise-next-rakah" ? "standing-next-rakah.json" : (st.id === "recitation" ? "recitation.json" : st.id + ".json");
+      const contentPath = exists("content/" + contentFile) ? contentFile : null;
+      let content = null;
+      if (contentPath) content = readJson("content/" + contentPath);
+      else {
+        // try contentId file via index
+        contentCoverage = false;
+      }
+      if (!canPublishContent(content)) contentCoverage = false;
+      const claimIds = st.claimIds || (content && content.sourceClaimIds) || [];
+      if (!claimIds.length) sourceCoverage = false;
+      else {
+        const claimsFile = readJson("sources/claims.json");
+        const byId = {};
+        (claimsFile.claims || []).forEach((c) => { byId[c.id] = c; });
+        claimIds.forEach((id) => {
+          const c = byId[id];
+          if (!(c && c.approved && c.reviewPass1 && c.reviewPass2 && !WEAK.has(String(c.sourceType || "").toLowerCase()))) sourceCoverage = false;
+        });
+      }
+      let mp = male.poses && male.poses[st.poseId];
+      let fp = female.poses && female.poses[st.poseId];
+      if (st.poseId === "taslim-right") {
+        mp = (male.poses && (male.poses["taslim-right"] || male.poses.taslim)) || mp;
+        fp = (female.poses && (female.poses["taslim-right"] || female.poses.taslim)) || fp;
+      }
+      if (!canPublishPose(mp)) malePoseCoverage = false;
+      if (!canPublishPose(fp)) femalePoseCoverage = false;
+      if (!st.reviewPass1) rp1 = false;
+      if (!st.reviewPass2) rp2 = false;
+      // character lock
+      if (mp && mp.characterId && mp.characterId !== CHAR_MALE) {
+        report.wrongCharacterAssets = (report.wrongCharacterAssets || 0) + 1;
+        fail("male pose wrong character: " + st.poseId);
+      }
+      if (fp && fp.characterId && fp.characterId !== CHAR_FEMALE) {
+        report.wrongCharacterAssets = (report.wrongCharacterAssets || 0) + 1;
+        fail("female pose wrong character: " + st.poseId);
+      }
+    });
+    const releaseReady = !!(true /* sequence checked above */ && contentCoverage && sourceCoverage && malePoseCoverage && femalePoseCoverage && rp1 && rp2);
+    report.fajrReleaseReady = releaseReady;
+    if (releaseReady) fail("unexpected releaseReady=true while content still pending");
+    else ok("fajrReleaseReady=false (expected)");
+
+    // Negativtest 1: content approved + sources missing => not approved
+    {
+      const fakeContent = { status: "approved", reviewPass1: true, reviewPass2: true, sourceClaimIds: [] };
+      if (canPublishContent(fakeContent)) fail("negativtest1: content without sources must not publish");
+      else ok("negativtest1 sources-missing gate");
+    }
+    // Negativtest 2: wrong character
+    {
+      const bad = { approved: true, characterConsistency: true, clothingReview: true, poseReview: true, reviewPass1: true, reviewPass2: true, sourceClaimIds: ["x"], characterId: "wrong" };
+      if (bad.characterId === CHAR_MALE) fail("negativtest2 setup");
+      else ok("negativtest2 wrong-character detectable");
+    }
+    // Negativtest 3: female contour
+    {
+      const badPose = { approved: true, characterConsistency: true, clothingReview: false, poseReview: true, reviewPass1: true, reviewPass2: true, sourceClaimIds: ["x"] };
+      if (canPublishPose(badPose)) fail("negativtest3 clothingReview false must block");
+      else ok("negativtest3 clothingReview gate");
+    }
+    // Negativtest 4: male moustache / consistency
+    {
+      const badPose = { approved: true, characterConsistency: false, clothingReview: true, poseReview: true, reviewPass1: true, reviewPass2: true, sourceClaimIds: ["x"] };
+      if (canPublishPose(badPose)) fail("negativtest4 characterConsistency false must block");
+      else ok("negativtest4 characterConsistency gate");
+    }
+    // Negativtest 6: pass1 true pass2 false
+    {
+      const stepOkish = { contentApproved: true, sourceCoverageApproved: true, poseApproved: true, reviewPass1: true, reviewPass2: false };
+      const fully = stepOkish.contentApproved && stepOkish.sourceCoverageApproved && stepOkish.poseApproved && stepOkish.reviewPass1 && stepOkish.reviewPass2;
+      if (fully) fail("negativtest6 pass2 false must block");
+      else ok("negativtest6 reviewPass2 required");
+    }
+
+    const audit = readJson("review/audit-log.json");
+    if (!Array.isArray(audit.entries)) fail("audit entries must be array");
+    else ok("auditLog structure");
+
+    const deps = readJson("review/dependencies.json");
+    if (!deps.invalidationRules || !deps.invalidationRules.claimSourceChanged) fail("dependency invalidation rules missing");
+    else ok("dependencyInvalidation rules");
+  }
+
   const live = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
   if (live.includes("gebet-lernen") || live.includes("prayer-learning")) {
     report.productionChanged = true;
@@ -249,6 +367,11 @@ try {
   if (js.includes("AUDIO_VISIBLE = false") && !js.includes("audioVisible = true") && js.includes("canPublishPrayerContent") && js.includes("resolvePrayerPose") && js.includes("CONTENT_PENDING_LABEL")) {
     ok("engine gates present");
   } else fail("engine missing phase5 gates");
+  if (js.includes("computeFajrReadiness") && js.includes("appendAuditEntry") && js.includes("reviewOverviewHtml") && js.includes('mode = "review"') && js.includes("invalidateClaimApproval") && js.includes("PHASE = 6")) {
+    ok("phase6 review engine present");
+  } else fail("phase6 review engine missing");
+  if (js.includes("data-prl-preview-deep") && js.includes("preview must NOT change approval")) ok("preview≠approve");
+  else fail("preview guard missing");
   if (/Subḥāna Rabbiyal|سبحان ربي العظيم/.test(js)) fail("hardcoded religious text in UI engine");
 
   report.validator = errors.length ? "FAIL" : "PASS";

@@ -84,6 +84,27 @@
   ],
   "unlockedScopes": [
     {
+      "id": "gebet-erlernen-phase6-review-v638-2026-08-10",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Phase 6 Gebet erlernen: Review/Freigabe-System, Audit, Readiness. Produktion unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/",
+        "scripts/prayer-learning-phase1-check.js",
+        "scripts/prayer-learning-phase2-check.js",
+        "scripts/prayer-learning-phase3-check.js",
+        "scripts/prayer-learning-phase4-check.js",
+        "scripts/prayer-learning-phase5-check.js",
+        "scripts/prayer-learning-phase6-check.js",
+        "scripts/validate-prayer-learning.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "gebet-erlernen-phase5-content-v637-2026-08-10",
       "approvedBy": "user-explicit-test-only",
       "reason": "Phase 5 Gebet erlernen: Content/Claim/Pose Registries, Gates, Validator. Produktion unverändert.",

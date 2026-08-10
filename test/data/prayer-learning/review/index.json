@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "phase": 6,
+  "environment": "test",
+  "route": "gebet-lernen/review",
+  "visitorVisible": false,
+  "levels": [
+    "CONTENT REVIEW",
+    "SOURCE REVIEW",
+    "VISUAL / POSE REVIEW"
+  ],
+  "filters": [
+    "all",
+    "missing",
+    "research",
+    "source_check",
+    "pose_check",
+    "review_pass_1",
+    "review_pass_2",
+    "approved",
+    "rejected"
+  ],
+  "paths": {
+    "steps": "review/fajr-steps.json",
+    "readiness": "review/fajr-readiness.json",
+    "audit": "review/audit-log.json",
+    "dependencies": "review/dependencies.json"
+  },
+  "formulas": {
+    "stepApproved": "contentApproved && sourceCoverageApproved && poseApproved && reviewPass1 && reviewPass2",
+    "releaseReady": "sequenceValid && contentCoverage && sourceCoverage && malePoseCoverage && femalePoseCoverage && reviewPass1 && reviewPass2",
+    "productionGateSeparate": true
+  },
+  "audioVisible": false,
+  "productionEnabled": false
+}

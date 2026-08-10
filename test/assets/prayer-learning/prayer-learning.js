@@ -1,7 +1,7 @@
 /**
- * DAR AL TAWḤĪD — Gebet erlernen (Test Phase 5)
- * Content registry · Claim gates · Pose slots · Character lock
- * productionEnabled = false | audioVisible = false | TEST ONLY
+ * DAR AL TAWḤĪD — Gebet erlernen (Test Phase 6)
+ * Review / Freigabe-System · Zero-Trust · TEST ONLY
+ * productionEnabled = false | audioVisible = false | no self-approval
  */
 (function (global) {
   "use strict";
@@ -15,12 +15,12 @@
   var AUDIO_VISIBLE = false;
   var AUDIO_PRELOAD = false;
   var CONTENT_PENDING_LABEL = "Inhalt wird geprüft";
-  var PHASE = 5;
+  var PHASE = 6;
   var CHAR_MALE = "dar-prayer-male-v1";
   var CHAR_FEMALE = "dar-prayer-female-v1";
   var CHAR_VERSION = 1;
 
-  var cache = { index: null, prayers: null, fajr: null, fajrComposed: null, steps: {}, texts: null, claims: null, claimsById: null, registry: null, poses: { male: null, female: null }, poseSlots: { male: null, female: null }, poseIndex: null, contentIndex: null, contentById: {}, variantsIndex: null, searchIndex: null, validationDash: null, manifest: null, characters: {} };
+  var cache = { index: null, prayers: null, fajr: null, fajrComposed: null, steps: {}, texts: null, claims: null, claimsById: null, registry: null, poses: { male: null, female: null }, poseSlots: { male: null, female: null }, poseIndex: null, contentIndex: null, contentById: {}, variantsIndex: null, searchIndex: null, validationDash: null, manifest: null, reviewIndex: null, reviewSteps: null, readiness: null, auditLog: null, dependencies: null, characters: {} };
   var listenersBound = false;
   var missingAssets = [];
   var validationErrors = [];
@@ -220,12 +220,23 @@
     else if (head === "gebet") mode = "prayers";
     else if (head === "texte" || head === "was-sage-ich") mode = "texts";
     else if (head === "debug" || head === "validation") mode = "debug";
+    else if (head === "review") mode = "review";
     else if (head) mode = "learn";
+    var reviewFilters = ["all","missing","research","source_check","pose_check","review_pass_1","review_pass_2","approved","rejected"];
+    var reviewFilter = "all";
+    var reviewStepId = "";
+    if (mode === "review") {
+      if (parts[1] === "filter" && parts[2]) reviewFilter = parts[2];
+      else if (parts[1] && reviewFilters.indexOf(parts[1]) >= 0) reviewFilter = parts[1];
+      else if (parts[1]) reviewStepId = parts[1];
+    }
     return {
       prayer: head,
       mode: mode,
       rakAh: parts[1] ? Number(parts[1]) : null,
-      stepKey: parts[2] || ""
+      stepKey: parts[2] || "",
+      reviewFilter: reviewFilter,
+      reviewStepId: reviewStepId
     };
   }
 
@@ -250,6 +261,7 @@
     await ensurePoseSlotRegistries();
     await ensureSearchIndex();
     await ensureManifest();
+    await ensureReviewData();
     if (cache.fajrComposed) return cache.fajrComposed;
     if (!cache.fajr) cache.fajr = await fetchJson(DATA_BASE + "fajr.json");
     return composeFajr(cache.fajr);
@@ -395,6 +407,251 @@
     try { cache.manifest = await fetchJson(DATA_BASE + "prayer-learning-manifest.json"); }
     catch (e) { cache.manifest = { version: 1, assets: [] }; }
     return cache.manifest;
+  }
+
+  async function ensureReviewData() {
+    if (cache.reviewSteps && cache.reviewIndex) return cache.reviewSteps;
+    try { cache.reviewIndex = await fetchJson(DATA_BASE + "review/index.json"); }
+    catch (e) { cache.reviewIndex = { visitorVisible: false, filters: [] }; }
+    try { cache.reviewSteps = await fetchJson(DATA_BASE + "review/fajr-steps.json"); }
+    catch (e2) { cache.reviewSteps = { steps: [] }; }
+    try { cache.readiness = await fetchJson(DATA_BASE + "review/fajr-readiness.json"); }
+    catch (e3) { cache.readiness = { fajr: {}, computed: true }; }
+    try { cache.auditLog = await fetchJson(DATA_BASE + "review/audit-log.json"); }
+    catch (e4) { cache.auditLog = { entries: [] }; }
+    try { cache.dependencies = await fetchJson(DATA_BASE + "review/dependencies.json"); }
+    catch (e5) { cache.dependencies = { edges: [], invalidationRules: {} }; }
+    return cache.reviewSteps;
+  }
+
+  function isStepFullyApproved(stepReview) {
+    if (!stepReview || typeof stepReview !== "object") return false;
+    if (stepReview.rejected === true) return false;
+    return !!(
+      stepReview.contentApproved === true &&
+      stepReview.sourceCoverageApproved === true &&
+      stepReview.poseApproved === true &&
+      stepReview.reviewPass1 === true &&
+      stepReview.reviewPass2 === true
+    );
+  }
+
+  function computeStepApprovedFlags(stepReview, content, claimsById, malePose, femalePose) {
+    var contentOk = canPublishPrayerContent(content);
+    var claimIds = (stepReview && stepReview.claimIds) || (content && content.sourceClaimIds) || [];
+    var sourceOk = claimIds.length > 0 && claimIds.every(function (id) {
+      var c = claimsById && claimsById[id];
+      return !!(c && c.approved === true && c.reviewPass1 === true && c.reviewPass2 === true && !isWeakSourceType(c.sourceType));
+    });
+    var maleOk = canPublishPose(malePose);
+    var femaleOk = canPublishPose(femalePose);
+    var poseOk = maleOk && femaleOk;
+    var pass1 = !!(stepReview && (stepReview.reviewPass1 === true || (stepReview.review && stepReview.review.reviewPass1 && stepReview.review.reviewPass1.passed)));
+    var pass2 = !!(stepReview && (stepReview.reviewPass2 === true || (stepReview.review && stepReview.review.reviewPass2 && stepReview.review.reviewPass2.passed)));
+    return {
+      contentApproved: contentOk,
+      sourceCoverageApproved: sourceOk,
+      poseApproved: poseOk,
+      malePoseApproved: maleOk,
+      femalePoseApproved: femaleOk,
+      reviewPass1: pass1,
+      reviewPass2: pass2,
+      approved: contentOk && sourceOk && poseOk && pass1 && pass2
+    };
+  }
+
+  function statusLabel(ok, missing) {
+    if (ok === true) return "approved";
+    if (missing) return "missing";
+    return "pending";
+  }
+
+  function computeMissingCounts() {
+    var steps = (cache.reviewSteps && cache.reviewSteps.steps) || [];
+    var claimsById = cache.claimsById || {};
+    var male = cache.poseSlots && cache.poseSlots.male;
+    var female = cache.poseSlots && cache.poseSlots.female;
+    var counts = {
+      missingSources: 0,
+      missingMalePoses: 0,
+      missingFemalePoses: 0,
+      contentPending: 0,
+      reviewPass1Pending: 0,
+      reviewPass2Pending: 0,
+      rejected: 0,
+      approvedSteps: 0
+    };
+    steps.forEach(function (st) {
+      var content = getContentById(st.contentId);
+      var malePose = male && male.poses ? male.poses[st.poseId] : null;
+      if (st.poseId === "taslim-right" && male && male.poses) malePose = male.poses["taslim-right"] || male.poses.taslim || malePose;
+      var femalePose = female && female.poses ? female.poses[st.poseId] : null;
+      if (st.poseId === "taslim-right" && female && female.poses) femalePose = female.poses["taslim-right"] || female.poses.taslim || femalePose;
+      var flags = computeStepApprovedFlags(st, content, claimsById, malePose, femalePose);
+      if (!flags.contentApproved) counts.contentPending += 1;
+      if (!flags.sourceCoverageApproved) counts.missingSources += 1;
+      if (!flags.malePoseApproved) counts.missingMalePoses += 1;
+      if (!flags.femalePoseApproved) counts.missingFemalePoses += 1;
+      if (!flags.reviewPass1) counts.reviewPass1Pending += 1;
+      if (!flags.reviewPass2) counts.reviewPass2Pending += 1;
+      if (st.rejected) counts.rejected += 1;
+      if (flags.approved) counts.approvedSteps += 1;
+    });
+    return counts;
+  }
+
+  function computeFajrReadiness(prayer) {
+    var steps = (prayer && prayer.steps) || [];
+    var sequenceValid = steps.length === 19;
+    if (sequenceValid) {
+      var orders = {};
+      steps.forEach(function (st) {
+        if (st.order == null || orders[st.order]) sequenceValid = false;
+        orders[st.order] = true;
+        if (!st.id || !st.poseId || !st.contentId) sequenceValid = false;
+      });
+    }
+    var counts = computeMissingCounts();
+    var masterSteps = (cache.reviewSteps && cache.reviewSteps.steps) || [];
+    var contentCoverage = counts.contentPending === 0 && masterSteps.length > 0;
+    var sourceCoverage = counts.missingSources === 0 && masterSteps.length > 0;
+    var malePoseCoverage = counts.missingMalePoses === 0 && masterSteps.length > 0;
+    var femalePoseCoverage = counts.missingFemalePoses === 0 && masterSteps.length > 0;
+    var reviewPass1 = counts.reviewPass1Pending === 0 && masterSteps.length > 0;
+    var reviewPass2 = counts.reviewPass2Pending === 0 && masterSteps.length > 0;
+    var releaseReady = !!(
+      sequenceValid &&
+      contentCoverage &&
+      sourceCoverage &&
+      malePoseCoverage &&
+      femalePoseCoverage &&
+      reviewPass1 &&
+      reviewPass2
+    );
+    var fajr = {
+      sequenceValid: !!sequenceValid,
+      contentCoverage: !!contentCoverage,
+      sourceCoverage: !!sourceCoverage,
+      malePoseCoverage: !!malePoseCoverage,
+      femalePoseCoverage: !!femalePoseCoverage,
+      reviewPass1: !!reviewPass1,
+      reviewPass2: !!reviewPass2,
+      releaseReady: releaseReady
+    };
+    cache.readiness = {
+      version: 1,
+      phase: PHASE,
+      computed: true,
+      fajr: fajr,
+      productionEnabled: false,
+      counts: counts,
+      updatedAt: new Date().toISOString()
+    };
+    return cache.readiness;
+  }
+
+  function appendAuditEntry(entry) {
+    if (!cache.auditLog) cache.auditLog = { entries: [] };
+    if (!Array.isArray(cache.auditLog.entries)) cache.auditLog.entries = [];
+    var row = {
+      entityId: entry.entityId || "",
+      from: entry.from || null,
+      to: entry.to || null,
+      changedAt: entry.changedAt || new Date().toISOString(),
+      changedBy: entry.changedBy || "system",
+      reason: entry.reason || "",
+      selfApproval: false
+    };
+    if (row.changedBy === "ai" || row.changedBy === "import-auto") {
+      validationErrors.push("self-approval blocked: " + row.entityId);
+      return null;
+    }
+    cache.auditLog.entries.push(row);
+    return row;
+  }
+
+  function invalidateClaimApproval(claim, reason) {
+    if (!claim) return null;
+    var from = claim.approved ? "approved" : (claim.status || claim.verificationStatus || "research");
+    claim.approved = false;
+    claim.reviewPass1 = false;
+    claim.reviewPass2 = false;
+    claim.status = "source_check";
+    claim.verificationStatus = "source_check";
+    appendAuditEntry({ entityId: claim.id, from: from, to: "source_check", reason: reason || "claim source changed", changedBy: "system" });
+    return claim;
+  }
+
+  function invalidatePoseApproval(pose, reason) {
+    if (!pose) return null;
+    var from = pose.approved ? "approved" : (pose.status || "pending");
+    pose.characterConsistency = false;
+    pose.clothingReview = false;
+    pose.poseReview = false;
+    pose.reviewPass1 = false;
+    pose.reviewPass2 = false;
+    pose.approved = false;
+    pose.status = "pending";
+    appendAuditEntry({ entityId: pose.assetId || pose.poseId, from: from, to: "pending", reason: reason || "pose asset changed", changedBy: "system" });
+    return pose;
+  }
+
+  function invalidateContentAfterDependency(content, reason) {
+    if (!content) return null;
+    var from = content.approved ? "approved" : (content.status || "research");
+    content.approved = false;
+    content.reviewPass1 = false;
+    content.reviewPass2 = false;
+    content.status = "source_check";
+    if (content.review) {
+      content.review.contentReview = content.review.contentReview || {};
+      content.review.contentReview.status = "pending";
+      content.review.sourceReview = content.review.sourceReview || {};
+      content.review.sourceReview.status = "pending";
+      content.review.reviewPass1 = { passed: false, reviewedAt: null, reviewer: null };
+      content.review.reviewPass2 = { passed: false, reviewedAt: null, reviewer: null };
+    }
+    appendAuditEntry({ entityId: content.id, from: from, to: "source_check", reason: reason || "dependency invalidated", changedBy: "system" });
+    return content;
+  }
+
+  function reviewStatusClass(status) {
+    var s = String(status || "pending").toLowerCase();
+    if (s === "approved") return "is-approved";
+    if (s === "rejected") return "is-rejected";
+    if (s === "missing") return "is-missing";
+    return "is-pending";
+  }
+
+  function getReviewStepById(stepId) {
+    var steps = (cache.reviewSteps && cache.reviewSteps.steps) || [];
+    return steps.find(function (s) { return s.id === stepId; }) || null;
+  }
+
+  function buildReviewStepRow(st) {
+    var content = getContentById(st.contentId);
+    var male = cache.poseSlots && cache.poseSlots.male;
+    var female = cache.poseSlots && cache.poseSlots.female;
+    var malePose = male && male.poses ? male.poses[st.poseId] : null;
+    var femalePose = female && female.poses ? female.poses[st.poseId] : null;
+    if (st.poseId === "taslim-right") {
+      malePose = (male && male.poses && (male.poses["taslim-right"] || male.poses.taslim)) || malePose;
+      femalePose = (female && female.poses && (female.poses["taslim-right"] || female.poses.taslim)) || femalePose;
+    }
+    var flags = computeStepApprovedFlags(st, content, cache.claimsById, malePose, femalePose);
+    return {
+      id: st.id,
+      titleDe: st.titleDe,
+      titleAr: st.titleAr,
+      status: st.rejected ? "rejected" : (flags.approved ? "approved" : (st.status || "research")),
+      content: statusLabel(flags.contentApproved, !content),
+      sources: statusLabel(flags.sourceCoverageApproved, !(st.claimIds && st.claimIds.length)),
+      malePose: statusLabel(flags.malePoseApproved, !malePose),
+      femalePose: statusLabel(flags.femalePoseApproved, !femalePose),
+      reviewPass1: statusLabel(flags.reviewPass1, false),
+      reviewPass2: statusLabel(flags.reviewPass2, false),
+      flags: flags
+    };
   }
 
   function contentIdForStep(step, seqStep) {
@@ -978,29 +1235,40 @@
   }
 
   function stepCopyHtml(step) {
+    var resolved = resolveContentForStep(step);
     var blocks = "";
-    if (step.instruction) {
-      blocks +=
-        '<div class="prl-block"><div class="prl-label">So führst du die Stellung aus</div><div class="prl-de">' +
-        esc(step.instruction) +
-        "</div></div>";
+    blocks += '<div class="prl-block" data-prl-content-id="' + esc(resolved.contentId || "") + '" data-prl-content-status="' + esc(resolved.status || "") + '">';
+    blocks += '<div class="prl-label">So führst du die Stellung aus</div>';
+    if (resolved.publishable && resolved.instructionDe) {
+      blocks += '<div class="prl-de">' + esc(resolved.instructionDe) + "</div>";
     } else {
-      blocks +=
-        '<div class="prl-block"><div class="prl-label">So führst du die Stellung aus</div><div class="prl-research">Quellengeprüfte Kurzanweisung folgt.</div></div>';
+      blocks += '<div class="prl-research">' + esc(CONTENT_PENDING_LABEL) + "</div>";
     }
+    blocks += "</div>";
 
-    var hasSpeech = !!(step.recitation || step.transliteration || step.translationDe);
-    if (hasSpeech) {
+    if (resolved.publishable && resolved.spokenVisible) {
       blocks += '<div class="prl-block"><div class="prl-label">Was sage ich?</div>';
-      if (step.recitation) blocks += '<div class="prl-ar-text" lang="ar" dir="rtl">' + esc(step.recitation) + "</div>";
-      if (step.transliteration) blocks += '<div class="prl-tr">' + esc(step.transliteration) + "</div>";
-      if (step.translationDe) blocks += '<div class="prl-de">' + esc(step.translationDe) + "</div>";
+      if (resolved.arabic) blocks += '<div class="prl-ar-text" lang="ar" dir="rtl">' + esc(resolved.arabic) + "</div>";
+      if (resolved.transliteration) blocks += '<div class="prl-tr">' + esc(resolved.transliteration) + "</div>";
+      if (resolved.meaningDe) blocks += '<div class="prl-de">' + esc(resolved.meaningDe) + "</div>";
       blocks += "</div>";
+    } else if (resolved.publishable && resolved.quranRef && resolved.doNotDuplicateQuranText) {
+      blocks +=
+        '<div class="prl-block"><div class="prl-label">Was sage ich?</div>' +
+        '<div class="prl-de">Qurʾān-Referenz: Sūrah ' +
+        esc(String(resolved.quranRef.surah)) +
+        ", Āyah " +
+        esc(String(resolved.quranRef.ayahStart)) +
+        "–" +
+        esc(String(resolved.quranRef.ayahEnd)) +
+        " (bestehende Qurʾān-Datenbank, keine Textkopie).</div></div>";
     }
 
-    if (step.verificationStatus === "research") {
+    if (!resolved.publishable) {
       blocks +=
-        '<div class="prl-research">Technischer Prototyp · Status: research – keine ungeprüften Details als gesichert dargestellt.</div>';
+        '<div class="prl-research">Technischer Prototyp · Status: ' +
+        esc(resolved.status || step.verificationStatus || "research") +
+        " – keine ungeprüften religiösen Texte als gesichert dargestellt.</div>";
     }
 
     blocks +=
@@ -1008,13 +1276,13 @@
       esc(step.id) +
       '">Beleg ansehen</button></div>';
 
-    var variants = approvedVariants(step);
-    if (variants.length) {
+    if (resolved.variantIds && resolved.variantIds.length) {
       blocks +=
         '<div class="prl-variants"><div class="prl-label">Weitere authentische Varianten</div>' +
-        variants
-          .map(function (v) {
-            return "<div>" + esc(v.titleDe || v.id || "Variante") + "</div>";
+        resolved.variantIds
+          .map(function (vid) {
+            var v = getContentById(vid);
+            return "<div>" + esc((v && (v.titleDe || v.id)) || vid) + "</div>";
           })
           .join("") +
         "</div>";
@@ -1034,12 +1302,14 @@
       blocks += '<div class="prl-detail-prep" hidden data-prl-detail-prep="' + esc((step.detailSlots || []).join(",")) + '"></div>';
     }
 
-    if (AUDIO_ENABLED) {
-      /* intentionally empty in v1/v2 — no speaker / play UI */
+    if (AUDIO_ENABLED || AUDIO_VISIBLE || AUDIO_PRELOAD) {
+      /* Phase 6: audio remains fully invisible / unmounted */
     }
 
     return (
-      '<div class="prl-step-copy">' +
+      '<div class="prl-step-copy" data-prl-pose-id="' +
+      esc(step.poseId || step.malePoseId || "") +
+      '">' +
       '<div class="prl-kicker">' +
       esc(String(step.rakAh)) +
       ". Rakʿah</div>" +
@@ -1067,27 +1337,194 @@
     return "";
   }
 
+  function reviewFilterButtons(active) {
+    var filters = (cache.reviewIndex && cache.reviewIndex.filters) || ["all","missing","research","source_check","pose_check","review_pass_1","review_pass_2","approved","rejected"];
+    return (
+      '<div class="prl-review-filters" role="toolbar" aria-label="Review-Filter">' +
+      filters.map(function (f) {
+        return (
+          '<button type="button" class="prl-review-filter' + (f === active ? " is-active" : "") + '" data-prl-review-filter="' + esc(f) + '">' +
+          esc(f) +
+          "</button>"
+        );
+      }).join("") +
+      "</div>"
+    );
+  }
+
+  function reviewOverviewHtml(state, prayer, filter) {
+    if (!isTestEnv()) {
+      return '<section class="prl-shell"><div class="prl-research">Review nur intern / Test.</div><div class="prl-btn-row"><button type="button" class="prl-btn" data-prl-go="">Zurück</button></div></section>';
+    }
+    filter = filter || "all";
+    var readiness = computeFajrReadiness(prayer);
+    var counts = readiness.counts || computeMissingCounts();
+    var fajr = readiness.fajr || {};
+    var rows = ((cache.reviewSteps && cache.reviewSteps.steps) || []).map(buildReviewStepRow);
+    if (filter === "missing") {
+      rows = rows.filter(function (r) {
+        return r.content !== "approved" || r.sources !== "approved" || r.malePose !== "approved" || r.femalePose !== "approved";
+      });
+    } else if (filter !== "all") {
+      rows = rows.filter(function (r) { return r.status === filter || r.content === filter || r.sources === filter; });
+    }
+    var list = rows.map(function (r) {
+      return (
+        '<button type="button" class="prl-review-row" data-prl-review-step="' + esc(r.id) + '">' +
+        "<div><b>" + esc(r.titleDe) + '</b><span class="prl-ar" lang="ar" dir="rtl">' + esc(r.titleAr || "") + "</span></div>" +
+        '<div class="prl-review-badges">' +
+        '<span class="prl-rev-badge ' + reviewStatusClass(r.content) + '">Content: ' + esc(r.content) + "</span>" +
+        '<span class="prl-rev-badge ' + reviewStatusClass(r.sources) + '">Sources: ' + esc(r.sources) + "</span>" +
+        '<span class="prl-rev-badge ' + reviewStatusClass(r.malePose) + '">Male Pose: ' + esc(r.malePose) + "</span>" +
+        '<span class="prl-rev-badge ' + reviewStatusClass(r.femalePose) + '">Female Pose: ' + esc(r.femalePose) + "</span>" +
+        "</div></button>"
+      );
+    }).join("");
+    return (
+      '<section class="prl-shell prl-shell--review" data-prl-root="review">' +
+      '<header class="prl-hero prl-hero--compact">' +
+      "<h2>Prayer Learning Review</h2>" +
+      "<p>Intern · Zero-Trust · kein Self-Approval · Phase " + PHASE + "</p>" +
+      "</header>" +
+      '<div class="prl-review-summary">' +
+      "<div><b>FAJR Gesamtstatus</b><span class=\"prl-rev-badge " + reviewStatusClass(fajr.releaseReady ? "approved" : "pending") + '\">' +
+      (fajr.releaseReady ? "RELEASE READY" : "PENDING") +
+      "</span></div>" +
+      "<div><b>releaseReady</b><span>" + String(!!fajr.releaseReady) + " (computed)</span></div>" +
+      "<div><b>productionEnabled</b><span>false (separates Gate)</span></div>" +
+      "<div><b>Missing sources</b><span>" + counts.missingSources + "</span></div>" +
+      "<div><b>Missing male poses</b><span>" + counts.missingMalePoses + "</span></div>" +
+      "<div><b>Missing female poses</b><span>" + counts.missingFemalePoses + "</span></div>" +
+      "<div><b>Content pending</b><span>" + counts.contentPending + "</span></div>" +
+      "<div><b>Review Pass 1 pending</b><span>" + counts.reviewPass1Pending + "</span></div>" +
+      "<div><b>Review Pass 2 pending</b><span>" + counts.reviewPass2Pending + "</span></div>" +
+      "</div>" +
+      reviewFilterButtons(filter) +
+      '<div class="prl-review-list">' + (list || '<div class="prl-research">Keine Einträge für diesen Filter.</div>') + "</div>" +
+      '<div class="prl-btn-row">' +
+      '<button type="button" class="prl-btn" data-prl-go="debug">Debug</button>' +
+      '<button type="button" class="prl-btn" data-prl-go="">Zur Übersicht</button>' +
+      "</div></section>"
+    );
+  }
+
+  function reviewStepDetailHtml(state, prayer, stepId) {
+    if (!isTestEnv()) {
+      return '<section class="prl-shell"><div class="prl-research">Review nur intern / Test.</div></section>';
+    }
+    var st = getReviewStepById(stepId);
+    if (!st) {
+      return (
+        '<section class="prl-shell"><div class="prl-research">Schritt nicht gefunden: ' + esc(stepId) +
+        '</div><div class="prl-btn-row"><button type="button" class="prl-btn" data-prl-go="review">Zurück</button></div></section>'
+      );
+    }
+    var content = getContentById(st.contentId);
+    var resolved = resolveContentForStep({ contentId: st.contentId, poseId: st.poseId, sourceClaimIds: st.claimIds || [], verificationStatus: st.status });
+    var male = cache.poseSlots && cache.poseSlots.male;
+    var female = cache.poseSlots && cache.poseSlots.female;
+    var malePose = male && male.poses ? male.poses[st.poseId] : null;
+    var femalePose = female && female.poses ? female.poses[st.poseId] : null;
+    if (st.poseId === "taslim-right") {
+      malePose = (male && male.poses && (male.poses["taslim-right"] || male.poses.taslim)) || malePose;
+      femalePose = (female && female.poses && (female.poses["taslim-right"] || female.poses.taslim)) || femalePose;
+    }
+    var flags = computeStepApprovedFlags(st, content, cache.claimsById, malePose, femalePose);
+    var claimIds = st.claimIds || [];
+    var claimHtml = claimIds.length
+      ? "<ul class=\"prl-claim-list\">" + claimIds.map(function (id) {
+          var c = cache.claimsById && cache.claimsById[id];
+          if (!c) return "<li><b>" + esc(id) + "</b><div class=\"prl-research\">fehlt</div></li>";
+          return (
+            "<li class=\"prl-claim\"><b>" + esc(c.id) + "</b>" +
+            "<div>" + esc(c.statementDe || "—") + "</div>" +
+            "<div>sourceType: " + esc(c.sourceType || "unverified") + " · status: " + esc(c.status || c.verificationStatus || "research") +
+            " · approved: " + String(!!c.approved) + "</div>" +
+            (c.directEvidenceUrl ? '<div><a href="' + esc(c.directEvidenceUrl) + '" target="_blank" rel="noopener noreferrer">Direktnachweis</a></div>' : "<div class=\"prl-research\">Kein Direktnachweis</div>") +
+            (isTestEnv() ? "<div class=\"prl-review-internal\">internal: pass1=" + String(!!c.reviewPass1) + " pass2=" + String(!!c.reviewPass2) + "</div>" : "") +
+            "</li>"
+          );
+        }).join("") + "</ul>"
+      : '<div class="prl-research">Keine Claim-Slots verknüpft.</div>';
+
+    function checkListHtml(title, checks) {
+      if (!checks) return "";
+      return (
+        "<div class=\"prl-review-checks\"><b>" + esc(title) + "</b><ul>" +
+        Object.keys(checks).map(function (k) {
+          var v = checks[k];
+          var label = v === true ? "PASS" : v === false ? "FAIL" : "PENDING";
+          return "<li><span>" + esc(k) + '</span><span class="prl-rev-badge ' + reviewStatusClass(v === true ? "approved" : v === false ? "rejected" : "pending") + '">' + label + "</span></li>";
+        }).join("") +
+        "</ul></div>"
+      );
+    }
+
+    var deep = "fajr/1/" + (st.id === "rise-next-rakah" ? "rise" : st.id);
+    return (
+      '<section class="prl-shell prl-shell--review" data-prl-root="review-step" data-prl-review-step-id="' + esc(st.id) + '">' +
+      '<header class="prl-hero prl-hero--compact"><h2>STEP · ' + esc(st.titleDe) + '</h2>' +
+      '<p class="prl-ar" lang="ar" dir="rtl">' + esc(st.titleAr || "") + "</p>" +
+      "<p>approved (computed): <b>" + String(!!flags.approved) + "</b> · preview ≠ approve</p></header>" +
+      '<div class="prl-review-section"><h3>CONTENT</h3>' +
+      "<div><b>Instruction</b><div>" + esc((content && content.instructionDe) || CONTENT_PENDING_LABEL) + "</div></div>" +
+      "<div><b>Arabic</b><div lang=\"ar\" dir=\"rtl\">" + esc((content && content.arabic) || "—") + "</div></div>" +
+      "<div><b>Transliteration</b><div>" + esc((content && content.transliteration) || "—") + "</div></div>" +
+      "<div><b>Meaning</b><div>" + esc((content && content.meaningDe) || "—") + "</div></div>" +
+      "<div>contentId: " + esc(st.contentId) + " · status: " + esc((content && content.status) || "missing") + " · contentApproved: " + String(flags.contentApproved) + "</div>" +
+      "</div>" +
+      '<div class="prl-review-section"><h3>SOURCE CLAIMS</h3>' + claimHtml +
+      "<div>sourceCoverageApproved: " + String(flags.sourceCoverageApproved) + "</div></div>" +
+      '<div class="prl-review-section"><h3>POSE</h3>' +
+      "<div>Male v1 · " + esc((malePose && malePose.assetId) || "missing") + " · " + esc((malePose && malePose.status) || "missing") + " · approved=" + String(flags.malePoseApproved) + "</div>" +
+      "<div>Female v1 · " + esc((femalePose && femalePose.assetId) || "missing") + " · " + esc((femalePose && femalePose.status) || "missing") + " · approved=" + String(flags.femalePoseApproved) + "</div>" +
+      '<div class="prl-review-sidebys">' +
+      "<div><b>Male Master vs Pose</b><span>dar-prayer-male-v1 · side-by-side wenn Asset freigegeben</span></div>" +
+      "<div><b>Female Master vs Pose</b><span>dar-prayer-female-v1 · Niqāb/Kontur-Checkliste</span></div>" +
+      "</div>" +
+      checkListHtml("Male visual checks", st.maleVisualChecks) +
+      checkListHtml("Female visual checks", st.femaleVisualChecks) +
+      "</div>" +
+      '<div class="prl-review-section"><h3>REVIEW</h3>' +
+      "<div>Pass 1: " + String(flags.reviewPass1) + "</div>" +
+      "<div>Pass 2: " + String(flags.reviewPass2) + "</div>" +
+      "<div class=\"prl-research\">Kein Self-Approval · KI darf nicht approven · Preview ändert Status nicht</div>" +
+      "</div>" +
+      '<div class="prl-review-section"><h3>PREVIEW</h3><div class="prl-btn-row prl-preview-row">' +
+      '<button type="button" class="prl-btn" data-prl-preview-char="male" data-prl-preview-deep="' + esc(deep) + '">Preview as Male</button>' +
+      '<button type="button" class="prl-btn" data-prl-preview-char="female" data-prl-preview-deep="' + esc(deep) + '">Preview as Female</button>' +
+      '<button type="button" class="prl-btn" data-prl-preview-view="swipe" data-prl-preview-deep="' + esc(deep) + '">Preview Swipe</button>' +
+      '<button type="button" class="prl-btn" data-prl-preview-view="scroll" data-prl-preview-deep="' + esc(deep) + '">Preview Scroll</button>' +
+      "</div></div>" +
+      '<div class="prl-btn-row"><button type="button" class="prl-btn" data-prl-go="review">Zurück zum Review</button></div>' +
+      "</section>"
+    );
+  }
+
   function textsHtml(state) {
     var modules = (cache.contentIndex && cache.contentIndex.modules) || [];
     var order = ["takbir", "ruku", "standing-after-ruku", "sujud", "sitting-between-sujud", "tashahhud", "taslim"];
     var byStep = {};
     modules.forEach(function (m) { if (m && m.stepId) byStep[m.stepId] = m; });
-    var rows = order.map(function (stepId) {
+    var approvedRows = [];
+    order.forEach(function (stepId) {
       var mod = byStep[stepId];
-      if (!mod) return "";
+      if (!mod) return;
       var content = getContentById(mod.contentId);
-      var ok = canPublishPrayerContent(content);
-      return (
+      if (!canPublishPrayerContent(content)) return;
+      approvedRows.push(
         '<button type="button" class="prl-path" data-prl-text-content="' + esc(mod.contentId) + '" data-prl-position="' + esc(stepId) + '">' +
         "<b>" + esc((content && content.titleDe) || stepId) + "</b>" +
-        "<span>" + (ok ? "freigegeben" : esc(CONTENT_PENDING_LABEL)) + " · " + esc(mod.contentId) + "</span></button>"
+        "<span>freigegeben · " + esc(mod.contentId) + "</span></button>"
       );
-    }).join("");
+    });
     return (
       '<section class="prl-shell" data-prl-root="texts">' +
-      '<header class="prl-hero prl-hero--compact"><h2>Was sage ich im Gebet?</h2><p>Dieselben Content-Module wie in Wisch- und Scrollmodus · keine zweite Textdatenbank.</p></header>' +
+      '<header class="prl-hero prl-hero--compact"><h2>Was sage ich im Gebet?</h2><p>Nur freigegebene Content-Module · keine zweite Textdatenbank.</p></header>' +
       controlsHtml(state) +
-      '<div class="prl-paths">' + rows + "</div>" +
+      '<div class="prl-paths">' +
+      (approvedRows.length ? approvedRows.join("") : '<div class="prl-research">' + esc(CONTENT_PENDING_LABEL) + " – noch keine freigegebenen Gebetstexte.</div>") +
+      "</div>" +
       '<div class="prl-btn-row"><button type="button" class="prl-btn" data-prl-go="">Zurück</button></div>' +
       "</section>"
     );
@@ -1196,6 +1633,7 @@
       '<button type="button" class="prl-path" data-prl-go="gebet"><b>Ein bestimmtes Gebet</b><span>Fajr jetzt · weitere Gebete folgen</span></button>' +
       '<button type="button" class="prl-path" data-prl-go="stellung"><b>Eine Stellung nachsehen</b><span>Direkt zu Takbīr, Rukūʿ, Suǧūd und mehr</span></button>' +
       '<button type="button" class="prl-path" data-prl-go="texte"><b>Was sage ich im Gebet?</b><span>Texte aus denselben Content-Modulen</span></button>' +
+      (isTestEnv() ? '<button type="button" class="prl-path" data-prl-go="review"><b>Prayer Learning Review</b><span>Content · Sources · Pose · nur Test</span></button>' : "") +
       (isTestEnv() ? '<button type="button" class="prl-path" data-prl-go="debug"><b>Prayer Learning Debug</b><span>Validierung · nur Test</span></button>' : "") +
       "</div>" +
       "</section>"
@@ -1467,6 +1905,7 @@
     if (parsed.mode === "prayers") return global.setPageHeader("Gebete", "Ein bestimmtes Gebet wählen", "Gebet erlernen");
     if (parsed.mode === "positions") return global.setPageHeader("Stellungen", "Direkt nachschlagen", "Gebet erlernen");
     if (parsed.mode === "texts") return global.setPageHeader("Was sage ich?", "Texte aus Content-Modulen", "Gebet erlernen");
+    if (parsed.mode === "review") return global.setPageHeader("Prayer Learning Review", "Intern · Zero-Trust", "Gebet erlernen");
     if (parsed.mode === "debug") return global.setPageHeader("Prayer Learning Debug", "Nur Test", "Gebet erlernen");
     return global.setPageHeader("Fajr", "صلاة الفجر · 2 Rakʿāt", "Gebet erlernen");
   }
@@ -1504,11 +1943,16 @@
     var index = await ensureIndex();
     var fajr = await ensurePrayer("fajr");
     if (parsed.mode === "debug") await ensureValidationDash();
+    if (parsed.mode === "review") await ensureReviewData();
     var html = headerFor(parsed);
 
     if (parsed.mode === "prayers") html += prayersHtml(state, index);
     else if (parsed.mode === "positions") html += positionsHtml(state, index);
     else if (parsed.mode === "texts") html += textsHtml(state);
+    else if (parsed.mode === "review") {
+      if (parsed.reviewStepId) html += reviewStepDetailHtml(state, fajr, parsed.reviewStepId);
+      else html += reviewOverviewHtml(state, fajr, parsed.reviewFilter || "all");
+    }
     else if (parsed.mode === "debug") html += debugHtml(state, fajr);
     else if (parsed.mode === "learn") {
       var prayer = await ensurePrayer(parsed.prayer || state.prayerId || "fajr");
@@ -1899,6 +2343,37 @@
       return;
     }
 
+    var reviewFilterBtn = t.closest("[data-prl-review-filter]");
+    if (reviewFilterBtn) {
+      navigate(VIEW, "review/" + (reviewFilterBtn.getAttribute("data-prl-review-filter") || "all"));
+      return;
+    }
+    var reviewStepBtn = t.closest("[data-prl-review-step]");
+    if (reviewStepBtn) {
+      navigate(VIEW, "review/" + (reviewStepBtn.getAttribute("data-prl-review-step") || ""));
+      return;
+    }
+    var previewBtn = t.closest("[data-prl-preview-deep]");
+    if (previewBtn) {
+      var deepLink = previewBtn.getAttribute("data-prl-preview-deep") || "fajr/1/takbir";
+      var pChar = previewBtn.getAttribute("data-prl-preview-char");
+      var pView = previewBtn.getAttribute("data-prl-preview-view");
+      var stPrev = loadState();
+      var patch = { prayerId: "fajr", prayer: "fajr" };
+      if (pChar === "female" || pChar === "male") {
+        patch.character = pChar;
+        patch.characterId = characterIdFromKey(pChar);
+      }
+      if (pView === "swipe" || pView === "scroll") patch.viewMode = pView;
+      // preview must NOT change approval / review status
+      saveState(Object.assign({}, patch, {
+        stepId: stPrev.stepId,
+        stepIndex: stPrev.stepIndex,
+        rakAh: stPrev.rakAh
+      }));
+      navigate(VIEW, deepLink);
+      return;
+    }
     var retry = t.closest("[data-prl-retry-fajr]");
     if (retry) {
       saveState({ stepId: "fajr-r1-takbir", stepIndex: 0, rakAh: 1, prayerId: "fajr", prayer: "fajr" });
@@ -1992,6 +2467,13 @@
     canPublishPrayerContent: canPublishPrayerContent,
     canPublishPose: canPublishPose,
     canUseClaimAsDefaultInstruction: canUseClaimAsDefaultInstruction,
+    isStepFullyApproved: isStepFullyApproved,
+    computeFajrReadiness: computeFajrReadiness,
+    computeMissingCounts: computeMissingCounts,
+    invalidateClaimApproval: invalidateClaimApproval,
+    invalidatePoseApproval: invalidatePoseApproval,
+    invalidateContentAfterDependency: invalidateContentAfterDependency,
+    appendAuditEntry: appendAuditEntry,
     characterIds: { male: CHAR_MALE, female: CHAR_FEMALE },
     audioEnabled: AUDIO_ENABLED,
     audioVisible: AUDIO_VISIBLE,
@@ -2029,6 +2511,8 @@
         quickLookDataReuse: "PASS",
         prayerTextsDataReuse: "PASS",
         offlineManifest: cache.manifest ? "PASS" : "FAIL",
+        reviewDashboard: cache.reviewIndex ? "PASS" : "FAIL",
+        fajrReleaseReady: !!(cache.readiness && cache.readiness.fajr && cache.readiness.fajr.releaseReady),
         audioVisible: false,
         wrongCharacterAssets: 0,
         unexpectedCharacterAssets: 0,
