@@ -327,5 +327,41 @@
       "sujud",
       "sitting-between-sujud"
     ]
+  },
+  "statusEnum": [
+    "research",
+    "pending_visual_review",
+    "pending_source_review",
+    "approved",
+    "rejected",
+    "MISSING"
+  ],
+  "approval": {
+    "requires": [
+      "characterConsistency",
+      "clothing",
+      "poseAccuracy"
+    ],
+    "visitorRequiresApproved": true,
+    "testPendingAllowed": true
+  },
+  "responsive": {
+    "formats": [
+      "avif",
+      "webp"
+    ],
+    "objectFit": "contain",
+    "srcsetReady": true,
+    "futureContainers": [
+      "webp",
+      "glb",
+      "gltf"
+    ]
+  },
+  "preloadPolicy": {
+    "current": true,
+    "next": true,
+    "previous": true,
+    "allPrayers": false
   }
 }

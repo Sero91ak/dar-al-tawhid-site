@@ -379,3 +379,79 @@
   border-radius:999px;
   border:1px dashed color-mix(in srgb,var(--border,currentColor) 70%,transparent);
 }
+
+/* Phase 4 — interaction / responsive / a11y */
+.prl-test-badge{
+  font-size:11px;
+  letter-spacing:.04em;
+  opacity:.62;
+  justify-self:start;
+}
+.prl-shell{
+  padding-bottom:calc(28px + env(safe-area-inset-bottom,0px));
+}
+.prl-shell.is-dual-shell .prl-learn-layout.is-dual{
+  grid-template-columns:minmax(0,45%) minmax(0,55%);
+}
+.prl-complete{
+  display:grid;
+  gap:8px;
+  text-align:center;
+  padding:14px 16px;
+  border-radius:14px;
+  border:1px solid color-mix(in srgb,var(--border,currentColor) 60%,transparent);
+  background:color-mix(in srgb,var(--surface,transparent) 88%,transparent);
+}
+.prl-complete[hidden]{display:none!important}
+.prl-complete span{font-size:13px;opacity:.75}
+.prl-swipe-track,
+.prl-swipe-slide,
+.prl-scroll-item{
+  transition:opacity .18s ease, transform .18s ease;
+}
+.prl-figure img{
+  object-fit:contain;
+  width:auto;
+  height:auto;
+  max-width:100%;
+}
+.prl-shell[data-prl-container="phone"]{--prl-stage-min:min(46vh,400px)}
+.prl-shell[data-prl-container="phone-small"]{--prl-stage-min:min(40vh,320px)}
+.prl-shell[data-prl-container="phone-small"] .prl-step-copy h3{font-size:clamp(20px,5vw,26px)}
+.prl-shell[data-prl-container="fold-open"],
+.prl-shell[data-prl-container="tablet-landscape"]{--prl-stage-min:min(62vh,540px)}
+.prl-sheet.is-side{
+  align-items:stretch;
+  justify-items:end;
+  pointer-events:none;
+}
+.prl-sheet.is-side .prl-sheet-backdrop{
+  background:transparent;
+  pointer-events:auto;
+}
+.prl-sheet.is-side .prl-sheet-panel{
+  pointer-events:auto;
+  width:min(380px,42vw);
+  max-height:none;
+  height:100%;
+  border-radius:18px 0 0 18px;
+  border-left:1px solid color-mix(in srgb,var(--border,currentColor) 60%,transparent);
+  border-top:0;
+}
+.prl-nav{
+  bottom:calc(76px + env(safe-area-inset-bottom,0px));
+}
+.prl-segment button:focus-visible,
+.prl-btn:focus-visible{
+  outline:2px solid color-mix(in srgb,var(--accent,#c9a24a) 70%,transparent);
+  outline-offset:2px;
+}
+@media (prefers-reduced-motion: reduce){
+  .prl-swipe-track,
+  .prl-swipe-slide,
+  .prl-scroll-item,
+  .prl-sheet-panel{
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
+}
