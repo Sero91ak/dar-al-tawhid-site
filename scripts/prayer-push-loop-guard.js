@@ -17,15 +17,13 @@ const LOCK_FILE = "content/admin/prayer-push-scheduler-lock.json";
 const MARKER = "PRAYER_PUSH_LOOP_GUARD";
 
 const REQUIRED_STRINGS = [
-  MARKER,
-  "function slotDayKey(localDate)",
-  "function scheduleSeed(version, group, prayer, slotDay, mode)",
-  "function scheduleSeedBySendAfter(version, group, prayer, sendAfter, mode)",
-  "function resolvePrayerSlotSendAfter(slot, entryAt, now, graceMinutes = SCHEDULE_GRACE_MINUTES)",
-  "return null;",
-  "const slotDay = slotDayKey(day);",
-  "if (plannedSendAfter == null)",
-  "await sendPush(env, group, prayer, slot.sendAfter, slot.mode, stats, sentInRun, slotDay)"
+  "function schedId(group, prayer, sendAfter, mode)",
+  "idempotency_key: await uuidFrom(idKey)",
+  'const slots = [{ mode: "entry", sendAfter: entryAt }];',
+  'slots.push({ mode: "advance", sendAfter: new Date(entryAt.getTime() - normAdvance(group.advanceMinutes) * 60000) });',
+  "if (slot.sendAfter < windowStart)",
+  "if (slot.sendAfter > windowEnd)",
+  "await sendPush(env, group, prayer, slot.sendAfter, slot.mode, stats, sentInRun);"
 ];
 
 const FORBIDDEN_PATTERNS = [
