@@ -1,0 +1,15 @@
+{
+  "characterId": "dar-prayer-female-v1",
+  "characterVersion": 1,
+  "poses": {
+    "takbir": { "characterId": "dar-prayer-female-v1", "poseId": "takbir", "asset": null, "file": null, "characterVersion": 1, "status": "awaiting", "rules": ["sleeves-closed", "no-forearms"] },
+    "qiyam": { "characterId": "dar-prayer-female-v1", "poseId": "qiyam", "asset": null, "file": null, "characterVersion": 1, "status": "awaiting", "rules": ["wide-jilbab", "no-body-contour"] },
+    "ruku": { "characterId": "dar-prayer-female-v1", "poseId": "ruku", "asset": null, "file": null, "characterVersion": 1, "status": "awaiting", "rules": ["no-chest-contour", "no-waist", "no-hip-contour"] },
+    "itidal": { "characterId": "dar-prayer-female-v1", "poseId": "itidal", "asset": null, "file": null, "characterVersion": 1, "status": "awaiting", "rules": ["wide-jilbab", "no-body-contour"] },
+    "sujud": { "characterId": "dar-prayer-female-v1", "poseId": "sujud", "asset": null, "file": null, "characterVersion": 1, "status": "awaiting", "rules": ["wide-cloth", "no-back-contour", "no-hip-contour"] },
+    "jalsa": { "characterId": "dar-prayer-female-v1", "poseId": "jalsa", "asset": null, "file": null, "characterVersion": 1, "status": "awaiting", "rules": ["cloth-covers-legs", "no-body-shape"] },
+    "tashahhud": { "characterId": "dar-prayer-female-v1", "poseId": "tashahhud", "asset": null, "file": null, "characterVersion": 1, "status": "awaiting", "rules": ["cloth-covers-legs", "no-body-shape"] },
+    "taslim-right": { "characterId": "dar-prayer-female-v1", "poseId": "taslim-right", "asset": null, "file": null, "characterVersion": 1, "status": "awaiting", "rules": ["sleeves-closed"] },
+    "taslim-left": { "characterId": "dar-prayer-female-v1", "poseId": "taslim-left", "asset": null, "file": null, "characterVersion": 1, "status": "awaiting", "rules": ["sleeves-closed"] }
+  }
+}
