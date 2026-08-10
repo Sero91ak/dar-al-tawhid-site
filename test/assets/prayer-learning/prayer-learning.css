@@ -1,0 +1,355 @@
+/* DAR AL TAWḤĪD — Gebet erlernen (Test Phase 1) */
+.prl-shell{
+  --prl-stage-min:min(52vh,420px);
+  display:grid;
+  gap:18px;
+  padding:4px 0 28px;
+  color:var(--text,inherit);
+}
+.prl-hero{
+  text-align:center;
+  display:grid;
+  gap:8px;
+  padding:8px 4px 4px;
+}
+.prl-hero h2{
+  margin:0;
+  font-family:var(--serif,Georgia,serif);
+  font-size:clamp(28px,7vw,40px);
+  line-height:1.05;
+  letter-spacing:.02em;
+}
+.prl-hero .prl-ar{
+  margin:0;
+  font-size:clamp(22px,5.5vw,30px);
+  opacity:.88;
+  direction:rtl;
+}
+.prl-hero p{
+  margin:0 auto;
+  max-width:34rem;
+  color:var(--muted,color-mix(in srgb,var(--text) 70%,transparent));
+  font-size:15px;
+  line-height:1.5;
+}
+.prl-segment{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  border:1px solid var(--border,color-mix(in srgb,var(--accent,#c9a24a) 35%,transparent));
+  border-radius:16px;
+  overflow:hidden;
+  background:color-mix(in srgb,var(--surface,transparent) 88%,transparent);
+}
+.prl-segment button{
+  appearance:none;
+  border:0;
+  background:transparent;
+  color:inherit;
+  min-height:46px;
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+  opacity:.72;
+}
+.prl-segment button.is-active{
+  background:color-mix(in srgb,var(--accent,#c9a24a) 18%,transparent);
+  opacity:1;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent,#c9a24a) 35%,transparent);
+}
+.prl-paths{
+  display:grid;
+  gap:10px;
+}
+.prl-path{
+  display:grid;
+  gap:4px;
+  text-align:left;
+  padding:14px 16px;
+  border-radius:18px;
+  border:1px solid var(--border,color-mix(in srgb,var(--accent,#c9a24a) 28%,transparent));
+  background:color-mix(in srgb,var(--surface,transparent) 80%,transparent);
+  color:inherit;
+  cursor:pointer;
+  font:inherit;
+}
+.prl-path b{font-size:16px}
+.prl-path span{font-size:13px;opacity:.75;line-height:1.4}
+.prl-resume{
+  display:grid;
+  gap:10px;
+  padding:14px 16px;
+  border-radius:18px;
+  border:1px solid color-mix(in srgb,var(--accent,#c9a24a) 42%,transparent);
+  background:linear-gradient(160deg,color-mix(in srgb,var(--accent,#c9a24a) 12%,transparent),transparent 70%);
+}
+.prl-resume .prl-resume-meta{font-size:14px;opacity:.85;line-height:1.45}
+.prl-btn-row{display:flex;flex-wrap:wrap;gap:10px}
+.prl-btn{
+  appearance:none;
+  border:1px solid var(--border,color-mix(in srgb,var(--accent,#c9a24a) 30%,transparent));
+  background:color-mix(in srgb,var(--surface,transparent) 85%,transparent);
+  color:inherit;
+  border-radius:999px;
+  min-height:42px;
+  padding:0 16px;
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+}
+.prl-btn.primary{
+  background:color-mix(in srgb,var(--accent,#c9a24a) 22%,transparent);
+  border-color:color-mix(in srgb,var(--accent,#c9a24a) 55%,transparent);
+}
+.prl-btn:disabled{opacity:.45;cursor:not-allowed}
+.prl-progress{
+  display:grid;
+  gap:8px;
+  text-align:center;
+}
+.prl-progress-title{font-weight:800;letter-spacing:.02em}
+.prl-progress-rail{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  align-items:center;
+  font-size:13px;
+  opacity:.85;
+}
+.prl-progress-bar{
+  height:4px;
+  border-radius:999px;
+  background:color-mix(in srgb,var(--text) 12%,transparent);
+  overflow:hidden;
+  grid-column:1 / -1;
+}
+.prl-progress-bar > span{
+  display:block;
+  height:100%;
+  width:0;
+  background:var(--accent,#c9a24a);
+  transition:width .25s ease;
+}
+.prl-stage{
+  position:relative;
+  min-height:var(--prl-stage-min);
+  border-radius:28px;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+  background:
+    radial-gradient(120% 90% at 50% 18%, color-mix(in srgb,var(--accent,#c9a24a) 16%,transparent), transparent 58%),
+    linear-gradient(180deg, color-mix(in srgb,var(--surface,transparent) 92%,#000 4%), color-mix(in srgb,var(--surface,transparent) 70%,transparent));
+  border:1px solid color-mix(in srgb,var(--accent,#c9a24a) 24%,transparent);
+  box-shadow:inset 0 -40px 60px color-mix(in srgb,#000 12%,transparent);
+}
+.prl-stage::before{
+  content:"";
+  position:absolute;
+  inset:10% 12% auto;
+  height:42%;
+  border:1px solid color-mix(in srgb,var(--accent,#c9a24a) 18%,transparent);
+  border-radius:999px 999px 40% 40%;
+  pointer-events:none;
+  opacity:.55;
+}
+.prl-stage-floor{
+  position:absolute;
+  left:18%;
+  right:18%;
+  bottom:10%;
+  height:18px;
+  border-radius:50%;
+  background:radial-gradient(ellipse at center, color-mix(in srgb,#000 28%,transparent), transparent 70%);
+  pointer-events:none;
+}
+.prl-figure{
+  position:relative;
+  z-index:1;
+  width:min(78%,320px);
+  aspect-ratio:3/4;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  gap:8px;
+  padding:12px;
+}
+.prl-figure img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 18px 28px rgba(0,0,0,.28));
+}
+.prl-figure-pending{
+  width:100%;
+  height:100%;
+  display:grid;
+  place-content:center;
+  gap:8px;
+  border-radius:22px;
+  border:1px dashed color-mix(in srgb,var(--accent,#c9a24a) 40%,transparent);
+  background:color-mix(in srgb,var(--surface,transparent) 40%,transparent);
+  padding:18px;
+}
+.prl-figure-pending b{font-size:14px}
+.prl-figure-pending span{font-size:12px;opacity:.75;line-height:1.4;max-width:16rem}
+.prl-step-copy{display:grid;gap:10px}
+.prl-step-copy h3{
+  margin:0;
+  font-family:var(--serif,Georgia,serif);
+  font-size:clamp(24px,6vw,34px);
+  line-height:1.1;
+}
+.prl-step-ar{
+  margin:0;
+  font-size:clamp(20px,5vw,28px);
+  direction:rtl;
+  opacity:.9;
+}
+.prl-kicker{font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.65;font-weight:800}
+.prl-block{display:grid;gap:6px}
+.prl-block .prl-label{font-size:12px;font-weight:800;opacity:.65;letter-spacing:.04em}
+.prl-block .prl-ar-text{
+  font-size:clamp(20px,5.2vw,28px);
+  direction:rtl;
+  line-height:1.55;
+}
+.prl-block .prl-tr,
+.prl-block .prl-de{font-size:15px;line-height:1.55;opacity:.9}
+.prl-research{
+  font-size:13px;
+  opacity:.75;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid color-mix(in srgb,var(--border,currentColor) 70%,transparent);
+}
+.prl-detail-slots{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:4px;
+}
+.prl-detail-slot{
+  font-size:12px;
+  opacity:.55;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px dashed color-mix(in srgb,var(--border,currentColor) 65%,transparent);
+  text-transform:capitalize;
+}
+.prl-nav{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  position:sticky;
+  bottom:calc(72px + env(safe-area-inset-bottom,0px));
+  z-index:5;
+  padding:8px 0;
+  background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--bg,var(--surface,#111)) 88%,transparent) 35%);
+}
+.prl-swipe-track{
+  display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  gap:0;
+  margin:0 -4px;
+  scrollbar-width:none;
+}
+.prl-swipe-track::-webkit-scrollbar{display:none}
+.prl-swipe-slide{
+  flex:0 0 100%;
+  scroll-snap-align:center;
+  scroll-snap-stop:always;
+  padding:0 4px;
+  box-sizing:border-box;
+  display:grid;
+  gap:14px;
+}
+.prl-scroll-list{display:grid;gap:0}
+.prl-scroll-item{
+  display:grid;
+  gap:14px;
+  padding:22px 2px;
+  scroll-margin-top:88px;
+}
+.prl-scroll-item + .prl-scroll-item{
+  border-top:1px solid color-mix(in srgb,var(--accent,#c9a24a) 22%,transparent);
+}
+.prl-quick-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+.prl-quick-grid button{
+  appearance:none;
+  border:1px solid var(--border,color-mix(in srgb,var(--accent,#c9a24a) 28%,transparent));
+  background:color-mix(in srgb,var(--surface,transparent) 82%,transparent);
+  color:inherit;
+  border-radius:16px;
+  min-height:64px;
+  padding:10px 12px;
+  text-align:left;
+  font:inherit;
+  cursor:pointer;
+  display:grid;
+  gap:2px;
+}
+.prl-quick-grid button b{font-size:15px}
+.prl-quick-grid button span{font-size:13px;opacity:.75;direction:rtl}
+.prl-prayer-list{display:grid;gap:10px}
+.prl-prayer-card{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:14px 16px;
+  border-radius:18px;
+  border:1px solid var(--border,color-mix(in srgb,var(--accent,#c9a24a) 28%,transparent));
+  background:color-mix(in srgb,var(--surface,transparent) 82%,transparent);
+  color:inherit;
+  font:inherit;
+  cursor:pointer;
+  text-align:left;
+}
+.prl-prayer-card[disabled]{opacity:.5;cursor:not-allowed}
+.prl-prayer-card .prl-ar{direction:rtl;opacity:.8;font-size:14px}
+.prl-badge{
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.04em;
+  padding:4px 8px;
+  border-radius:999px;
+  border:1px solid color-mix(in srgb,var(--accent,#c9a24a) 40%,transparent);
+}
+.prl-controls{
+  display:grid;
+  gap:12px;
+}
+.prl-controls-label{
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  opacity:.65;
+}
+.prl-learn-layout{
+  display:grid;
+  gap:16px;
+}
+@media (min-width:700px) and (orientation:landscape), (min-width:900px){
+  .prl-learn-layout.is-dual{
+    grid-template-columns:minmax(280px,45%) minmax(0,55%);
+    align-items:start;
+    gap:22px;
+  }
+  .prl-learn-layout.is-dual .prl-stage{
+    position:sticky;
+    top:76px;
+    min-height:min(68vh,560px);
+  }
+  .prl-learn-layout.is-dual .prl-figure{width:min(86%,380px)}
+}
+@media (max-width:699px){
+  .prl-stage{min-height:min(46vh,380px)}
+}
