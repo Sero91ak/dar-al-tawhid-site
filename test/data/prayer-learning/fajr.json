@@ -5,9 +5,9 @@
   "rakAhCount": 2,
   "rakat": 2,
   "audioEnabled": false,
-  "phase": 8,
+  "phase": 9,
   "engine": "compose-from-templates",
-  "verificationNote": "Phase-8: Erste echte Befüllung Takbīr + Qiyām (Slots/Claims/Posen). Noch research. productionEnabled=false.",
+  "verificationNote": "Phase-9: Integrationsblock Rezitation + Rukūʿ + Aufrichten. Content/Claims/Posen research. productionEnabled=false. Kein Audio.",
   "sequence": [
     "fajr-r1-takbir",
     "fajr-r1-qiyam",
@@ -80,10 +80,20 @@
       "templateId": "recitation",
       "deepLink": "recitation",
       "poseReuseFrom": "qiyam",
-      "contentId": "recitation-fatiha-ref-v1",
+      "contentId": "fajr-r1-recitation-v1",
       "status": "research",
       "sourceClaimIds": [],
-      "poseId": "qiyam"
+      "poseId": "qiyam",
+      "poseReuse": true,
+      "prayerId": "fajr",
+      "claimSlotIds": [
+        "recitation-standing",
+        "recitation-al-fatihah",
+        "recitation-additional-quran",
+        "recitation-order",
+        "recitation-transition-ruku"
+      ],
+      "integrationBlock": "Recitation + Ruku + Standing After Ruku"
     },
     {
       "id": "fajr-r1-ruku",
@@ -94,7 +104,21 @@
       "contentId": "ruku-main-v1",
       "status": "research",
       "sourceClaimIds": [],
-      "poseId": "ruku"
+      "poseId": "ruku",
+      "prayerId": "fajr",
+      "claimSlotIds": [
+        "ruku-body-position",
+        "ruku-back-position",
+        "ruku-head-position",
+        "ruku-hands-on-knees",
+        "ruku-finger-position",
+        "ruku-arm-position",
+        "ruku-leg-position",
+        "ruku-foot-position",
+        "ruku-dhikr",
+        "ruku-transition-out"
+      ],
+      "integrationBlock": "Recitation + Ruku + Standing After Ruku"
     },
     {
       "id": "fajr-r1-standing-after-ruku",
@@ -102,10 +126,20 @@
       "order": 5,
       "templateId": "standing-after-ruku",
       "deepLink": "standing-after-ruku",
-      "contentId": "standing-after-ruku-main-v1",
+      "contentId": "standing-after-ruku-v1",
       "status": "research",
       "sourceClaimIds": [],
-      "poseId": "standing-after-ruku"
+      "poseId": "standing-after-ruku",
+      "prayerId": "fajr",
+      "claimSlotIds": [
+        "standing-rise-motion",
+        "standing-complete-upright-position",
+        "standing-hand-related-detail",
+        "standing-spoken-text-during-rise",
+        "standing-spoken-text-after-rise",
+        "standing-transition-to-sujud"
+      ],
+      "integrationBlock": "Recitation + Ruku + Standing After Ruku"
     },
     {
       "id": "fajr-r1-sujud-1",
@@ -182,10 +216,21 @@
       "templateId": "recitation",
       "deepLink": "recitation",
       "poseReuseFrom": "qiyam",
-      "contentId": "recitation-fatiha-ref-v1",
+      "contentId": "fajr-r1-recitation-v1",
       "status": "research",
       "sourceClaimIds": [],
-      "poseId": "qiyam"
+      "poseId": "qiyam",
+      "poseReuse": true,
+      "prayerId": "fajr",
+      "claimSlotIds": [
+        "recitation-standing",
+        "recitation-al-fatihah",
+        "recitation-additional-quran",
+        "recitation-order",
+        "recitation-transition-ruku"
+      ],
+      "integrationBlock": "Recitation + Ruku + Standing After Ruku",
+      "note": "Rakʿah-2 reuse: gleiche Content-/Pose-Registry, mapping über prayerId+rakAh"
     },
     {
       "id": "fajr-r2-ruku",
@@ -197,7 +242,22 @@
       "contentId": "ruku-main-v1",
       "status": "research",
       "sourceClaimIds": [],
-      "poseId": "ruku"
+      "poseId": "ruku",
+      "prayerId": "fajr",
+      "claimSlotIds": [
+        "ruku-body-position",
+        "ruku-back-position",
+        "ruku-head-position",
+        "ruku-hands-on-knees",
+        "ruku-finger-position",
+        "ruku-arm-position",
+        "ruku-leg-position",
+        "ruku-foot-position",
+        "ruku-dhikr",
+        "ruku-transition-out"
+      ],
+      "integrationBlock": "Recitation + Ruku + Standing After Ruku",
+      "note": "Rakʿah-2 reuse: gleiche Rukūʿ-Pose-Registry"
     },
     {
       "id": "fajr-r2-standing-after-ruku",
@@ -206,10 +266,21 @@
       "templateId": "standing-after-ruku",
       "deepLink": "standing-after-ruku",
       "poseReuseFrom": "standing-after-ruku",
-      "contentId": "standing-after-ruku-main-v1",
+      "contentId": "standing-after-ruku-v1",
       "status": "research",
       "sourceClaimIds": [],
-      "poseId": "standing-after-ruku"
+      "poseId": "standing-after-ruku",
+      "prayerId": "fajr",
+      "claimSlotIds": [
+        "standing-rise-motion",
+        "standing-complete-upright-position",
+        "standing-hand-related-detail",
+        "standing-spoken-text-during-rise",
+        "standing-spoken-text-after-rise",
+        "standing-transition-to-sujud"
+      ],
+      "integrationBlock": "Recitation + Ruku + Standing After Ruku",
+      "note": "Rakʿah-2 reuse: gleiche Aufrichten-Pose-Registry"
     },
     {
       "id": "fajr-r2-sujud-1",
@@ -345,5 +416,6 @@
       "Ruku",
       "Standing after Ruku"
     ]
-  }
+  },
+  "integrationBlock": "Recitation + Ruku + Standing After Ruku"
 }

@@ -1,33 +1,36 @@
 {
   "id": "standing-after-ruku",
-  "titleDe": "Aufrichten aus Rukūʿ",
-  "titleAr": "الاعتدال من الركوع",
+  "titleDe": "Aufrichten",
+  "titleAr": "الاعتدال بعد الركوع",
   "category": "standing",
   "poseReuseAllowed": true,
+  "poseReuseNote": "Nur nach Review – qiyam != automatisch standing-after-ruku",
   "malePoseId": "standing-after-ruku",
   "femalePoseId": "standing-after-ruku",
   "femalePoseStatus": "pending_review",
   "detailSlots": [],
   "checkAreas": [
-    "full-rise",
-    "hand-raise-if-relevant",
-    "text-while-rising",
+    "rise-motion",
+    "complete-upright",
+    "hand-related",
+    "text-during-rise",
     "text-after-rise",
-    "hand-position-standing",
     "transition-to-sujud"
   ],
   "textModuleIds": [
-    "standing-after-ruku-while",
-    "standing-after-ruku-after"
+    "standing-during-rise",
+    "standing-after-rise"
   ],
   "claimSlotIds": [
-    "standing-after-ruku-rise",
-    "standing-after-ruku-text-while",
-    "standing-after-ruku-text-after",
-    "standing-after-ruku-hands"
+    "standing-rise-motion",
+    "standing-complete-upright-position",
+    "standing-hand-related-detail",
+    "standing-spoken-text-during-rise",
+    "standing-spoken-text-after-rise",
+    "standing-transition-to-sujud"
   ],
   "variants": [],
   "verificationStatus": "research",
   "audioId": null,
-  "note": "Gesprochene Texte nicht zu einem synthetischen Satz vermischen."
+  "note": "Gesprochene Texte (duringRise / afterStanding) nicht vermischen. Eigene Lernstellung vor Suǧūd."
 }

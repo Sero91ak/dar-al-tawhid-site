@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "phase": 6,
+  "phase": 9,
   "computed": true,
-  "note": "releaseReady is computed only — never set manually to true",
+  "note": "releaseReady is computed only — never set manually to true. Phase 9 block still research.",
   "fajr": {
     "sequenceValid": false,
     "contentCoverage": false,
@@ -14,5 +14,6 @@
     "releaseReady": false
   },
   "productionEnabled": false,
-  "updatedAt": null
+  "updatedAt": null,
+  "integrationBlock": "Recitation + Ruku + Standing After Ruku"
 }

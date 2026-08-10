@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "phase": 8,
+  "version": 2,
+  "phase": 9,
   "modules": [
     {
       "stepId": "takbir",
@@ -18,10 +18,12 @@
     },
     {
       "stepId": "recitation",
-      "contentId": "recitation-fatiha-ref-v1",
+      "contentId": "fajr-r1-recitation-v1",
       "file": "recitation.json",
       "status": "research",
-      "approved": false
+      "approved": false,
+      "poseReuse": true,
+      "poseId": "qiyam"
     },
     {
       "stepId": "ruku",
@@ -32,7 +34,7 @@
     },
     {
       "stepId": "standing-after-ruku",
-      "contentId": "standing-after-ruku-main-v1",
+      "contentId": "standing-after-ruku-v1",
       "file": "standing-after-ruku.json",
       "status": "research",
       "approved": false
@@ -81,5 +83,5 @@
       "sourceClaimIds.length>0"
     ]
   },
-  "integrationBlock": "Takbir + Qiyam"
+  "integrationBlock": "Recitation + Ruku + Standing After Ruku"
 }

@@ -154,7 +154,9 @@
         "sameKufi": null,
         "sameClothing": null,
         "faceless": null,
-        "noCharacterDrift": null
+        "noCharacterDrift": null,
+        "shoulderWidth": null,
+        "beardVisibleInBow": null
       },
       "review": {
         "sourceReview": {
@@ -177,7 +179,9 @@
           "reviewedAt": null,
           "reviewer": null
         }
-      }
+      },
+      "phase": 9,
+      "integrationBlock": "Recitation + Ruku + Standing After Ruku"
     },
     "standing-after-ruku": {
       "assetId": "male-v1-standing-after-ruku-v1",
@@ -231,7 +235,9 @@
           "reviewedAt": null,
           "reviewer": null
         }
-      }
+      },
+      "phase": 9,
+      "integrationBlock": "Recitation + Ruku + Standing After Ruku"
     },
     "sujud": {
       "assetId": "male-v1-sujud-v1",
@@ -567,5 +573,5 @@
     "thawb-changed",
     "different-character"
   ],
-  "phase": 8
+  "phase": 9
 }

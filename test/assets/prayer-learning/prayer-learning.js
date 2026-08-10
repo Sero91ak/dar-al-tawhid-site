@@ -1,6 +1,6 @@
 /**
- * DAR AL TAWḤĪD — Gebet erlernen (Test Phase 8)
- * Integration: Takbīr + Qiyām · bestehende Engine
+ * DAR AL TAWḤĪD — Gebet erlernen (Test Phase 9)
+ * Integration: Rezitation + Rukūʿ + Aufrichten · bestehende Engine
  * productionEnabled = false | audioVisible = false | TEST ONLY
  */
 (function (global) {
@@ -11,26 +11,29 @@
   var HINT_KEY = "darPrayerLearningSwipeHintV1";
   var ASSET_BASE = "/test/assets/prayer-learning/";
   var DATA_BASE = "/test/data/prayer-learning/";
+  var QURAN_BASE = "/content/quran/";
   var AUDIO_ENABLED = false;
   var AUDIO_VISIBLE = false;
   var AUDIO_PRELOAD = false;
   var CONTENT_PENDING_LABEL = "Inhalt wird quellengeprüft.";
   var POSE_PENDING_LABEL = "Pose wird geprüft";
   var TEXTS_EMPTY_LABEL = "Noch keine geprüften Texte verfügbar.";
-  var PHASE = 8;
+  var PHASE = 9;
   var CHAR_MALE = "dar-prayer-male-v1";
   var CHAR_FEMALE = "dar-prayer-female-v1";
   var CHAR_VERSION = 1;
 
-  var cache = { index: null, prayers: null, fajr: null, fajrComposed: null, steps: {}, texts: null, claims: null, claimsById: null, registry: null, poses: { male: null, female: null }, poseSlots: { male: null, female: null }, poseIndex: null, contentIndex: null, contentById: {}, variantsIndex: null, searchIndex: null, validationDash: null, manifest: null, reviewIndex: null, reviewSteps: null, readiness: null, auditLog: null, dependencies: null, characters: {} };
+  var cache = { index: null, prayers: null, fajr: null, fajrComposed: null, steps: {}, texts: null, claims: null, claimsById: null, registry: null, poses: { male: null, female: null }, poseSlots: { male: null, female: null }, poseIndex: null, contentIndex: null, contentById: {}, variantsIndex: null, searchIndex: null, validationDash: null, manifest: null, reviewIndex: null, reviewSteps: null, readiness: null, auditLog: null, dependencies: null, characters: {}, quranBySurah: {} };
   var listenersBound = false;
   var missingAssets = [];
   var validationErrors = [];
+  var wrongCharacterAssets = 0;
   var sourceSheetOpen = false;
   var sourceSheetStepId = "";
   var scrollObserver = null;
   var resizeTimer = 0;
   var pointerSwipe = null;
+  var characterSwitchPending = false;
   var SWIPE_THRESHOLD_PX = 56;
   var SWIPE_RATIO = 1.35;
   var productionEnabled = false;
@@ -368,7 +371,17 @@
       if (!m || !m.file) continue;
       try {
         var entry = await fetchJson(DATA_BASE + "content/" + m.file);
-        if (entry && entry.id) cache.contentById[entry.id] = entry;
+        if (entry && entry.id) {
+          cache.contentById[entry.id] = entry;
+          if (entry.aliases && entry.aliases.length) {
+            entry.aliases.forEach(function (alias) {
+              if (alias) cache.contentById[alias] = entry;
+            });
+          }
+          if (m.contentId && m.contentId !== entry.id) {
+            cache.contentById[m.contentId] = entry;
+          }
+        }
       } catch (err) {
         validationErrors.push("content load fail: " + m.file);
       }
@@ -667,11 +680,65 @@
   function contentIdForStep(step, seqStep) {
     if (seqStep && seqStep.contentId) return seqStep.contentId;
     if (step && step.contentId) return step.contentId;
-    var pose = (step && (step.poseId || step.templateId)) || "";
-    if (pose === "recitation") return "recitation-fatiha-ref-v1";
+    var pose = (step && (step.templateId || step.poseId)) || "";
+    if (pose === "recitation") return "fajr-r1-recitation-v1";
+    if (pose === "standing-after-ruku") return "standing-after-ruku-v1";
     if (pose === "standing-next-rakah" || pose === "rise-next-rakah") return "rise-next-rakah-main-v1";
     if (pose) return pose + "-main-v1";
     return null;
+  }
+
+  async function loadQuranSurah(surahNum) {
+    var n = Number(surahNum) || 0;
+    if (!n) return null;
+    if (cache.quranBySurah[n]) return cache.quranBySurah[n];
+    var pad = String(n).padStart(3, "0");
+    try {
+      cache.quranBySurah[n] = await fetchJson(QURAN_BASE + pad + ".json");
+      return cache.quranBySurah[n];
+    } catch (e) {
+      try {
+        cache.quranBySurah[n] = await fetchJson("/test" + QURAN_BASE + pad + ".json");
+        return cache.quranBySurah[n];
+      } catch (e2) {
+        validationErrors.push("quran load fail: " + pad);
+        return null;
+      }
+    }
+  }
+
+  function quranAyahsHtml(surahData, ref) {
+    if (!surahData || !ref) return "";
+    var start = Number(ref.ayahStart) || 1;
+    var end = Number(ref.ayahEnd) || start;
+    var verses = surahData.verses || surahData.ayahs || [];
+    var rows = verses.filter(function (v) {
+      var id = Number(v.id || v.number || v.ayah || 0);
+      return id >= start && id <= end;
+    });
+    if (!rows.length) return "";
+    return (
+      '<div class="prl-quran" data-prl-quran-reuse="1" data-prl-surah="' +
+      esc(String(ref.surah)) +
+      '">' +
+      rows
+        .map(function (v) {
+          var id = v.id || v.number || v.ayah || "";
+          var ar = v.ar || v.arabic || v.text || "";
+          return (
+            '<div class="quran-ayah prl-quran-ayah">' +
+            '<div class="quran-ayah-num">Āyah ' +
+            esc(String(id)) +
+            "</div>" +
+            '<div class="quran-ayah-ar" lang="ar" dir="rtl">' +
+            esc(ar) +
+            "</div>" +
+            "</div>"
+          );
+        })
+        .join("") +
+      "</div>"
+    );
   }
 
   function getContentById(contentId) {
@@ -693,10 +760,10 @@
     var sourceClaimIds = [];
 
     if (publishable && content) {
-      instructionDe = content.instructionDe || null;
-      arabic = content.arabic || null;
+      instructionDe = content.instructionDe || content.instructionText || null;
+      arabic = content.arabic || content.arabicText || null;
       transliteration = content.transliteration || null;
-      meaningDe = content.meaningDe || null;
+      meaningDe = content.meaningDe || content.germanMeaning || null;
       spokenVisible = !!(arabic || transliteration || meaningDe || content.spokenText);
       quranRef = content.quranRef || null;
       sourceClaimIds = (content.sourceClaimIds || []).slice();
@@ -707,9 +774,17 @@
     } else if (content && Array.isArray(content.sourceClaimIds)) {
       sourceClaimIds = content.sourceClaimIds.slice();
     }
+    if (content && content.quranRef) {
+      quranRef = content.quranRef;
+    }
     if (step && Array.isArray(step.sourceClaimIds) && step.sourceClaimIds.length) {
       sourceClaimIds = step.sourceClaimIds.slice();
     }
+
+    var duringRise = content && content.duringRiseText ? content.duringRiseText : null;
+    var afterStanding = content && content.afterStandingText ? content.afterStandingText : null;
+    var duringRiseApproved = !!(duringRise && duringRise.approved === true && duringRise.status === "approved");
+    var afterStandingApproved = !!(afterStanding && afterStanding.approved === true && afterStanding.status === "approved");
 
     return {
       contentId: contentId,
@@ -723,12 +798,19 @@
       spokenVisible: spokenVisible,
       quranRef: quranRef,
       doNotDuplicateQuranText: !!(content && content.doNotDuplicateQuranText),
+      quranDatabaseReuse: !!(content && (content.quranDatabaseReuse || content.doNotDuplicateQuranText)),
+      duringRiseText: duringRise,
+      afterStandingText: afterStanding,
+      duringRiseApproved: duringRiseApproved,
+      afterStandingApproved: afterStandingApproved,
       variantIds: variantIds,
       sourceClaimIds: sourceClaimIds,
       status: content ? content.status : "missing",
       approved: !!(content && content.approved),
       audioId: null,
-      audioVisible: false
+      audioVisible: false,
+      audioEnabled: false,
+      audioPreload: false
     };
   }
 
@@ -740,19 +822,22 @@
     var gender = characterId === CHAR_FEMALE ? "female" : "male";
     var expected = gender === "female" ? CHAR_FEMALE : CHAR_MALE;
     if (characterId !== expected) {
+      wrongCharacterAssets += 1;
       return { ok: false, reason: "character-mismatch", asset: null, characterId: characterId, poseId: poseId };
     }
     var slotReg = cache.poseSlots && cache.poseSlots[gender];
     if (slotReg) {
       if (slotReg.characterId !== expected) {
         validationErrors.push("pose slot character lock fail: " + gender);
+        wrongCharacterAssets += 1;
         return { ok: false, reason: "character-lock", asset: null };
       }
       var poseEntry = (slotReg.poses && slotReg.poses[poseId]) || null;
       var activeId = slotReg.activeAssets ? slotReg.activeAssets[poseId] : null;
       if (poseEntry && poseEntry.characterId && poseEntry.characterId !== expected) {
         validationErrors.push("wrong character asset blocked: " + poseId);
-        return { ok: false, reason: "wrong-character", asset: null };
+        wrongCharacterAssets += 1;
+        return { ok: false, reason: "wrong-character", asset: null, controlledPlaceholder: true };
       }
       if (activeId && poseEntry && canPublishPose(poseEntry) && poseEntry.src) {
         return {
@@ -883,14 +968,18 @@
         quranSource: tpl.quranSource || (content && content.quranRef) || null,
         sourceClaimIds: claimIds,
         claimSlotIds: claimIds,
+        details: tpl.details || [],
         variants: tpl.variants || [],
         verificationStatus: (s.status || tpl.verificationStatus || "research"),
         audioId: null,
         audioVisible: false,
+        audioEnabled: false,
         deepLink: s.deepLink || tpl.id,
         poseReuseFrom: s.poseReuseFrom || null,
+        poseReuse: !!(s.poseReuse || tpl.poseReuse || tpl.poseReuseAllowed),
         side: s.side || null,
-        transitionType: s.transitionType || null
+        transitionType: s.transitionType || null,
+        integrationBlock: s.integrationBlock || null
       });
     }
     var composed = {
@@ -1274,7 +1363,8 @@
     });
   }
 
-  function stepCopyHtml(step) {
+  function stepCopyHtml(step, opts) {
+    opts = opts || {};
     var resolved = resolveContentForStep(step);
     var blocks = "";
     blocks += '<div class="prl-block" data-prl-content-id="' + esc(resolved.contentId || "") + '" data-prl-content-status="' + esc(resolved.status || "") + '">';
@@ -1286,25 +1376,50 @@
     }
     blocks += "</div>";
 
+    if (resolved.quranRef && resolved.doNotDuplicateQuranText) {
+      blocks += '<div class="prl-block" data-prl-quran-block="1"><div class="prl-label">Qurʾān</div>';
+      if (opts.quranHtml) {
+        blocks += opts.quranHtml;
+      } else {
+        blocks +=
+          '<div class="prl-de">Sūrah ' +
+          esc(String(resolved.quranRef.surah)) +
+          ", Āyah " +
+          esc(String(resolved.quranRef.ayahStart)) +
+          "–" +
+          esc(String(resolved.quranRef.ayahEnd)) +
+          " · bestehende Qurʾān-Datenbank (keine Textkopie).</div>";
+      }
+      blocks +=
+        '<div class="prl-research">Darstellung als Pflicht/Säule/Sunnah bleibt quellengeprüft.</div></div>';
+    }
+
     if (resolved.publishable && resolved.spokenVisible) {
       blocks += '<div class="prl-block"><div class="prl-label">Was sage ich?</div>';
       if (resolved.arabic) blocks += '<div class="prl-ar-text" lang="ar" dir="rtl">' + esc(resolved.arabic) + "</div>";
       if (resolved.transliteration) blocks += '<div class="prl-tr">' + esc(resolved.transliteration) + "</div>";
       if (resolved.meaningDe) blocks += '<div class="prl-de">' + esc(resolved.meaningDe) + "</div>";
       blocks += "</div>";
-    } else if (resolved.publishable && resolved.quranRef && resolved.doNotDuplicateQuranText) {
-      blocks +=
-        '<div class="prl-block"><div class="prl-label">Was sage ich?</div>' +
-        '<div class="prl-de">Qurʾān-Referenz: Sūrah ' +
-        esc(String(resolved.quranRef.surah)) +
-        ", Āyah " +
-        esc(String(resolved.quranRef.ayahStart)) +
-        "–" +
-        esc(String(resolved.quranRef.ayahEnd)) +
-        " (bestehende Qurʾān-Datenbank, keine Textkopie).</div></div>";
+    } else if (resolved.duringRiseApproved || resolved.afterStandingApproved) {
+      blocks += '<div class="prl-block"><div class="prl-label">Was sage ich?</div>';
+      if (resolved.duringRiseApproved && resolved.duringRiseText) {
+        blocks += '<div class="prl-label">Beim Aufrichten</div>';
+        if (resolved.duringRiseText.arabicText) blocks += '<div class="prl-ar-text" lang="ar" dir="rtl">' + esc(resolved.duringRiseText.arabicText) + "</div>";
+        if (resolved.duringRiseText.transliteration) blocks += '<div class="prl-tr">' + esc(resolved.duringRiseText.transliteration) + "</div>";
+        if (resolved.duringRiseText.germanMeaning) blocks += '<div class="prl-de">' + esc(resolved.duringRiseText.germanMeaning) + "</div>";
+      }
+      if (resolved.afterStandingApproved && resolved.afterStandingText) {
+        blocks += '<div class="prl-label">Nach dem Aufrichten</div>';
+        if (resolved.afterStandingText.arabicText) blocks += '<div class="prl-ar-text" lang="ar" dir="rtl">' + esc(resolved.afterStandingText.arabicText) + "</div>";
+        if (resolved.afterStandingText.transliteration) blocks += '<div class="prl-tr">' + esc(resolved.afterStandingText.transliteration) + "</div>";
+        if (resolved.afterStandingText.germanMeaning) blocks += '<div class="prl-de">' + esc(resolved.afterStandingText.germanMeaning) + "</div>";
+      }
+      blocks += "</div>";
+    } else if (isTestEnv() && (resolved.duringRiseText || resolved.afterStandingText)) {
+      blocks += '<div class="prl-block"><div class="prl-label">Was sage ich?</div><div class="prl-research">Inhalt wird geprüft.</div></div>';
     }
 
-    if (!resolved.publishable) {
+    if (!resolved.publishable && !(resolved.quranRef && resolved.doNotDuplicateQuranText)) {
       blocks += '<div class="prl-research">' + esc(CONTENT_PENDING_LABEL) + "</div>";
     }
 
@@ -1332,6 +1447,7 @@
     if (approvedDetails.length) {
       blocks +=
         '<div class="prl-detail-slots" role="group" aria-label="Details ansehen">' +
+        '<div class="prl-label">Details ansehen</div>' +
         approvedDetails
           .map(function (d) {
             return '<button type="button" class="prl-detail-slot" data-prl-detail="' + esc(d.id) + '">' + esc(d.label || d.id) + "</button>";
@@ -1343,7 +1459,7 @@
     }
 
     if (AUDIO_ENABLED || AUDIO_VISIBLE || AUDIO_PRELOAD) {
-      /* Phase 6: audio remains fully invisible / unmounted */
+      /* Phase 9: audio remains fully invisible / unmounted */
     }
 
     return (
@@ -1362,6 +1478,16 @@
       blocks +
       "</div>"
     );
+  }
+
+  async function stepCopyHtmlAsync(step) {
+    var resolved = resolveContentForStep(step);
+    var quranHtml = "";
+    if (resolved.quranRef && resolved.doNotDuplicateQuranText) {
+      var surah = await loadQuranSurah(resolved.quranRef.surah);
+      quranHtml = quranAyahsHtml(surah, resolved.quranRef);
+    }
+    return stepCopyHtml(step, { quranHtml: quranHtml });
   }
 
   function rakahMarkerHtml(prevStep, nextStep) {
@@ -1784,7 +1910,10 @@
       var items = "";
       for (var i = 0; i < steps.length; i++) {
         var s = steps[i];
-        var fig = await figureHtmlResolved(state.character, s);
+        var fig = characterSwitchPending
+          ? '<div class="prl-stage prl-stage--loading" data-prl-pose-loading="1"><div class="prl-figure"><div class="prl-figure-pending"><span>Darstellung wird geladen…</span></div></div></div>'
+          : await figureHtmlResolved(state.character, s);
+        var copy = await stepCopyHtmlAsync(s);
         if (i > 0) items += rakahMarkerHtml(steps[i - 1], s);
         items +=
           '<article class="prl-scroll-item" id="prl-step-' +
@@ -1796,7 +1925,7 @@
           '">' +
           progressHtml(prayer, s, i, steps.length) +
           fig +
-          stepCopyHtml(s) +
+          copy +
           "</article>";
       }
       return (
@@ -1817,7 +1946,10 @@
     var slides = "";
     for (var j = 0; j < steps.length; j++) {
       var sj = steps[j];
-      var figj = await figureHtmlResolved(state.character, sj);
+      var figj = characterSwitchPending
+        ? '<div class="prl-stage prl-stage--loading" data-prl-pose-loading="1"><div class="prl-figure"><div class="prl-figure-pending"><span>Darstellung wird geladen…</span></div></div></div>'
+        : await figureHtmlResolved(state.character, sj);
+      var copyj = await stepCopyHtmlAsync(sj);
       var mark = j > 0 ? rakahMarkerHtml(steps[j - 1], sj) : "";
       slides +=
         '<article class="prl-swipe-slide" data-prl-step-id="' +
@@ -1831,9 +1963,9 @@
             figj +
             "<div>" +
             progressHtml(prayer, sj, j, steps.length) +
-            stepCopyHtml(sj) +
+            copyj +
             "</div></div>"
-          : progressHtml(prayer, sj, j, steps.length) + figj + stepCopyHtml(sj)) +
+          : progressHtml(prayer, sj, j, steps.length) + figj + copyj) +
         "</article>";
     }
 
@@ -1877,7 +2009,11 @@
     if (claim.grading) lines.push("<div><b>Status</b> · " + esc(claim.grading) + "</div>");
     else if (claim.sourceType) lines.push("<div><b>Status</b> · " + esc(claim.sourceType) + "</div>");
     if (claim.directEvidenceUrl) {
-      lines.push('<div><a href="' + esc(claim.directEvidenceUrl) + '" target="_blank" rel="noopener noreferrer">Direktnachweis</a></div>');
+      if (typeof navigator !== "undefined" && navigator.onLine === false) {
+        lines.push('<div class="prl-research">Direktnachweis benötigt Internet.</div>');
+      } else {
+        lines.push('<div><a href="' + esc(claim.directEvidenceUrl) + '" target="_blank" rel="noopener noreferrer">Direktnachweis</a></div>');
+      }
     }
     lines.push("</li>");
     return lines.join("");
@@ -1896,7 +2032,11 @@
       var meta = [claim.work, claim.book, claim.chapter, claim.hadithNumber && ("Nr. " + claim.hadithNumber), claim.volume && ("Bd. " + claim.volume), claim.page && ("S. " + claim.page), claim.grading].filter(Boolean);
       if (meta.length) lines.push("<div>" + esc(meta.join(" · ")) + "</div>");
       if (claim.directEvidenceUrl) {
-        lines.push('<div><a href="' + esc(claim.directEvidenceUrl) + '" target="_blank" rel="noopener noreferrer">Direktnachweis</a></div>');
+        if (typeof navigator !== "undefined" && navigator.onLine === false) {
+          lines.push('<div class="prl-research">Direktnachweis benötigt Internet.</div>');
+        } else {
+          lines.push('<div><a href="' + esc(claim.directEvidenceUrl) + '" target="_blank" rel="noopener noreferrer">Direktnachweis</a></div>');
+        }
       } else {
         lines.push("<div class=\"prl-research\">Direktnachweis noch nicht hinterlegt</div>");
       }
@@ -2390,6 +2530,8 @@
     if (characterBtn) {
       var gender = characterBtn.getAttribute("data-prl-character") === "female" ? "female" : "male";
       var st = loadState();
+      if (st.character === gender) return;
+      characterSwitchPending = true;
       saveState({
         character: gender,
         characterId: characterIdFromKey(gender),
@@ -2398,7 +2540,15 @@
         rakAh: st.rakAh,
         prayerId: st.prayerId
       });
-      if (typeof global.render === "function") global.render();
+      // Kein stale previous asset: zuerst Loading, dann Ziel-Character
+      Promise.resolve(typeof global.render === "function" ? global.render() : null)
+        .then(function () {
+          characterSwitchPending = false;
+          if (typeof global.render === "function") return global.render();
+        })
+        .catch(function () {
+          characterSwitchPending = false;
+        });
       return;
     }
 
@@ -2588,7 +2738,7 @@
         reviewDashboard: cache.reviewIndex ? "PASS" : "FAIL",
         fajrReleaseReady: !!(cache.readiness && cache.readiness.fajr && cache.readiness.fajr.releaseReady),
         audioVisible: false,
-        wrongCharacterAssets: 0,
+        wrongCharacterAssets: wrongCharacterAssets,
         unexpectedCharacterAssets: 0,
         approvedFajrSteps: approved,
         pendingFajrSteps: Math.max(0, steps.length - approved) || 19,

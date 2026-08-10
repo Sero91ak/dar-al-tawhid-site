@@ -1,13 +1,41 @@
 {
   "id": "ruku-main-v1",
   "stepId": "ruku",
+  "prayerId": null,
+  "reusableAcrossPrayers": true,
   "titleDe": "Rukūʿ",
+  "titleAr": "الركوع",
   "instructionDe": null,
+  "instructionText": null,
   "arabic": null,
   "transliteration": null,
   "meaningDe": null,
   "spokenText": null,
-  "sourceClaimIds": [],
+  "sourceClaimIds": [
+    "ruku-body-position",
+    "ruku-back-position",
+    "ruku-head-position",
+    "ruku-hands-on-knees",
+    "ruku-finger-position",
+    "ruku-arm-position",
+    "ruku-leg-position",
+    "ruku-foot-position",
+    "ruku-dhikr",
+    "ruku-transition-out"
+  ],
+  "relatedClaimSlotIds": [
+    "ruku-body-position",
+    "ruku-back-position",
+    "ruku-head-position",
+    "ruku-hands-on-knees",
+    "ruku-finger-position",
+    "ruku-arm-position",
+    "ruku-leg-position",
+    "ruku-foot-position",
+    "ruku-dhikr",
+    "ruku-transition-out"
+  ],
+  "detailIds": ["ruku-hands", "ruku-back", "ruku-legs"],
   "variantIds": [],
   "defaultVariantId": null,
   "status": "research",
@@ -15,8 +43,16 @@
   "reviewPass2": false,
   "approved": false,
   "audioId": null,
-  "revision": 1,
+  "audioEnabled": false,
+  "audioVisible": false,
+  "audioPreload": false,
+  "revision": 3,
   "contentHash": null,
+  "selfApproved": false,
+  "aiGenerated": false,
+  "integrationBlock": "Recitation + Ruku + Standing After Ruku",
+  "phase": 9,
+  "notes": "Phase 9: Ein Content-Datensatz für Fajr und spätere Gebete / Quick Look / Gebetstexte. Keine erfundenen Dhikr-Texte.",
   "review": {
     "contentReview": {
       "status": "pending",
@@ -24,11 +60,6 @@
       "reviewer": null
     },
     "sourceReview": {
-      "status": "pending",
-      "reviewedAt": null,
-      "reviewer": null
-    },
-    "poseReview": {
       "status": "pending",
       "reviewedAt": null,
       "reviewer": null
@@ -43,22 +74,5 @@
       "reviewedAt": null,
       "reviewer": null
     }
-  },
-  "claimMappings": {
-    "instructionDe": null,
-    "arabic": null,
-    "transliteration": null,
-    "meaningDe": null,
-    "poseDetails": []
-  },
-  "selfApproved": false,
-  "aiGenerated": false,
-  "relatedClaimSlotIds": [
-    "ruku-body-bending",
-    "ruku-hands-knees",
-    "ruku-back",
-    "ruku-head",
-    "ruku-dhikr",
-    "ruku-transition"
-  ]
+  }
 }

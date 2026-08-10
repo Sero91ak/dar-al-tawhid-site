@@ -319,10 +319,13 @@
 .prl-quick-grid button span{font-size:13px;opacity:.75;direction:rtl}
 .prl-learn-layout.is-dual{
   display:grid;
-  grid-template-columns:minmax(0,44%) minmax(0,56%);
+  grid-template-columns:minmax(0,46%) minmax(0,54%);
   gap:18px;
   align-items:start;
 }
+.prl-quran{margin-top:6px}
+.prl-quran .quran-ayah{margin-bottom:8px}
+.prl-stage--loading .prl-figure-pending{opacity:.72}
 .prl-learn-layout.is-dual .prl-stage{min-height:min(62vh,520px)}
 .prl-learn-layout.is-dual .prl-step-copy{text-align:left}
 .prl-learn-layout.is-dual .prl-detail-slots{justify-content:flex-start}

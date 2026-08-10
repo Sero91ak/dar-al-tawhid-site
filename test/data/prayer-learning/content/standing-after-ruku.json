@@ -1,13 +1,49 @@
 {
-  "id": "standing-after-ruku-main-v1",
+  "id": "standing-after-ruku-v1",
+  "aliases": ["standing-after-ruku-main-v1"],
   "stepId": "standing-after-ruku",
-  "titleDe": "Aufrichten aus Rukūʿ",
+  "prayerId": null,
+  "reusableAcrossPrayers": true,
+  "titleDe": "Aufrichten",
+  "titleAr": "الاعتدال بعد الركوع",
   "instructionDe": null,
+  "instructionText": null,
+  "duringRiseText": {
+    "arabicText": null,
+    "transliteration": null,
+    "germanMeaning": null,
+    "status": "research",
+    "approved": false,
+    "sourceClaimIds": ["standing-spoken-text-during-rise"]
+  },
+  "afterStandingText": {
+    "arabicText": null,
+    "transliteration": null,
+    "germanMeaning": null,
+    "status": "research",
+    "approved": false,
+    "sourceClaimIds": ["standing-spoken-text-after-rise"]
+  },
   "arabic": null,
   "transliteration": null,
   "meaningDe": null,
   "spokenText": null,
-  "sourceClaimIds": [],
+  "sourceClaimIds": [
+    "standing-rise-motion",
+    "standing-complete-upright-position",
+    "standing-hand-related-detail",
+    "standing-spoken-text-during-rise",
+    "standing-spoken-text-after-rise",
+    "standing-transition-to-sujud"
+  ],
+  "relatedClaimSlotIds": [
+    "standing-rise-motion",
+    "standing-complete-upright-position",
+    "standing-hand-related-detail",
+    "standing-spoken-text-during-rise",
+    "standing-spoken-text-after-rise",
+    "standing-transition-to-sujud"
+  ],
   "variantIds": [],
   "defaultVariantId": null,
   "status": "research",
@@ -15,25 +51,16 @@
   "reviewPass2": false,
   "approved": false,
   "audioId": null,
-  "phases": [
-    {
-      "id": "while-rising",
-      "arabic": null,
-      "transliteration": null,
-      "meaningDe": null,
-      "approved": false
-    },
-    {
-      "id": "after-rise",
-      "arabic": null,
-      "transliteration": null,
-      "meaningDe": null,
-      "approved": false
-    }
-  ],
-  "note": "Texte nicht zu einem synthetischen Satz vermischen.",
-  "revision": 1,
+  "audioEnabled": false,
+  "audioVisible": false,
+  "audioPreload": false,
+  "revision": 3,
   "contentHash": null,
+  "selfApproved": false,
+  "aiGenerated": false,
+  "integrationBlock": "Recitation + Ruku + Standing After Ruku",
+  "phase": 9,
+  "notes": "Phase 9: Eigene Lernstellung zwischen Rukūʿ und Suǧūd. duringRiseText und afterStandingText getrennt. Pose nicht blind mit Qiyām gleichsetzen.",
   "review": {
     "contentReview": {
       "status": "pending",
@@ -41,11 +68,6 @@
       "reviewer": null
     },
     "sourceReview": {
-      "status": "pending",
-      "reviewedAt": null,
-      "reviewer": null
-    },
-    "poseReview": {
       "status": "pending",
       "reviewedAt": null,
       "reviewer": null
@@ -60,20 +82,5 @@
       "reviewedAt": null,
       "reviewer": null
     }
-  },
-  "claimMappings": {
-    "instructionDe": null,
-    "arabic": null,
-    "transliteration": null,
-    "meaningDe": null,
-    "poseDetails": []
-  },
-  "selfApproved": false,
-  "aiGenerated": false,
-  "relatedClaimSlotIds": [
-    "standing-after-ruku-rise",
-    "standing-after-ruku-text-while",
-    "standing-after-ruku-text-after",
-    "standing-after-ruku-hands"
-  ]
+  }
 }

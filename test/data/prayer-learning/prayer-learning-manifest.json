@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "phase": 6,
+  "phase": 9,
   "prayers": [
     "fajr"
   ],
@@ -32,5 +32,10 @@
   ],
   "cachePolicy": {
     "removeObsoletePoseVersionsAfterConfirm": true
-  }
+  },
+  "integrationBlock": "Recitation + Ruku + Standing After Ruku",
+  "quranReuse": [
+    "content/quran/001.json"
+  ],
+  "audioEnabled": false
 }

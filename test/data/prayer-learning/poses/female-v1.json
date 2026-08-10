@@ -164,7 +164,18 @@
         "looseGarment": null,
         "sleevesClosed": null,
         "noForearmsVisible": null,
-        "sameMasterFigure": null
+        "sameMasterFigure": null,
+        "noBodyAccentBack": null,
+        "fullCoverageLength": null,
+        "muscularBuild": null,
+        "shoulderWidth": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "beardVisibleInBow": null,
+        "noCharacterDrift": null
       },
       "review": {
         "sourceReview": {
@@ -187,7 +198,10 @@
           "reviewedAt": null,
           "reviewer": null
         }
-      }
+      },
+      "phase": 9,
+      "integrationBlock": "Recitation + Ruku + Standing After Ruku",
+      "modestyPrecedence": true
     },
     "standing-after-ruku": {
       "assetId": "female-v1-standing-after-ruku-v1",
@@ -244,7 +258,9 @@
           "reviewedAt": null,
           "reviewer": null
         }
-      }
+      },
+      "phase": 9,
+      "integrationBlock": "Recitation + Ruku + Standing After Ruku"
     },
     "sujud": {
       "assetId": "female-v1-sujud-v1",
@@ -602,5 +618,5 @@
     "inconsistent-niqab",
     "character-drift"
   ],
-  "phase": 8
+  "phase": 9
 }

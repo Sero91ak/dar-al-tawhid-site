@@ -8,41 +8,44 @@
   "femalePoseId": "ruku",
   "femalePoseStatus": "pending_review",
   "detailSlots": [
-    "hands",
-    "back",
-    "legs"
+    "ruku-hands",
+    "ruku-back",
+    "ruku-legs"
   ],
   "checkAreas": [
-    "bending",
+    "body-position",
     "back",
     "head",
-    "knees",
     "hands-on-knees",
-    "finger-hold",
+    "fingers",
     "arms",
     "legs",
     "feet",
-    "gaze",
     "dhikr",
-    "transition-up"
+    "transition-out"
   ],
   "textModuleIds": [
     "ruku-dhikr"
   ],
   "claimSlotIds": [
-    "ruku-body-bending",
-    "ruku-hands-knees",
-    "ruku-back",
-    "ruku-head",
+    "ruku-body-position",
+    "ruku-back-position",
+    "ruku-head-position",
+    "ruku-hands-on-knees",
+    "ruku-finger-position",
+    "ruku-arm-position",
+    "ruku-leg-position",
+    "ruku-foot-position",
     "ruku-dhikr",
-    "ruku-transition"
+    "ruku-transition-out"
   ],
   "variants": [],
   "verificationStatus": "research",
   "audioId": null,
   "details": [
     {
-      "id": "hands",
+      "id": "ruku-hands",
+      "poseId": "ruku",
       "label": "Hände",
       "assetId": null,
       "sourceClaimIds": [],
@@ -50,7 +53,8 @@
       "status": "research"
     },
     {
-      "id": "back",
+      "id": "ruku-back",
+      "poseId": "ruku",
       "label": "Rücken",
       "assetId": null,
       "sourceClaimIds": [],
@@ -58,7 +62,8 @@
       "status": "research"
     },
     {
-      "id": "legs",
+      "id": "ruku-legs",
+      "poseId": "ruku",
       "label": "Beine",
       "assetId": null,
       "sourceClaimIds": [],

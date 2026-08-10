@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "phase": 8,
+  "phase": 9,
   "audioEnabled": false,
   "characters": {
     "male": "dar-prayer-male-v1",
@@ -68,14 +68,16 @@
       "titleDe": "Rukūʿ",
       "titleAr": "الركوع",
       "stepTemplateId": "ruku",
-      "defaultSequenceId": "fajr-r1-ruku"
+      "defaultSequenceId": "fajr-r1-ruku",
+      "integrationBlock": "Recitation + Ruku + Standing After Ruku"
     },
     {
       "id": "standing-after-ruku",
       "titleDe": "Aufrichten",
-      "titleAr": "الاعتدال",
+      "titleAr": "الاعتدال بعد الركوع",
       "stepTemplateId": "standing-after-ruku",
-      "defaultSequenceId": "fajr-r1-standing-after-ruku"
+      "defaultSequenceId": "fajr-r1-standing-after-ruku",
+      "optionalUntilApproved": true
     },
     {
       "id": "sujud",
