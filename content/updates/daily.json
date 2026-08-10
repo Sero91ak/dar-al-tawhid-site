@@ -1,18 +1,38 @@
 {
   "date": "2026-08-10",
   "timezone": "Europe/Berlin",
-  "generated": "2026-08-09T22:00:02.882Z",
-  "source": "dar-daily-scheduler-regenerated",
+  "generated": "2026-08-10T04:04:53.232Z",
+  "source": "dar-daily-no-repeat-rotation",
   "recommendation": {
-    "id": "ghulat-104-sie-toeten-die-muslime-und-lassen-die-goetzendiener",
-    "title": "Sie töten die Muslime und lassen die Götzendiener",
-    "file": "ghulat-104-sie-toeten-die-muslime-und-lassen-die-goetzendiener.md",
-    "category": "Widerlegungen",
-    "scholar": "Der Prophet ﷺ",
-    "snippet": "„Sie töten die Leute des Islam und lassen die Leute der Götzen.“"
+    "id": "tawakkul-frag-nur-allah-001",
+    "title": "Wenn du bittest, dann bitte Allah",
+    "file": "2026-06-05-tawakkul-frag-nur-allah.md",
+    "category": "Tawakkul",
+    "scholar": "Prophet ﷺ",
+    "snippet": "🖋️ Der Prophet ﷺ sagte zu Ibn ʿAbbās:"
   },
   "dua": {
-    "snippet": "",
-    "category": ""
+    "id": "dua-112-ighfir-dhanbi-kullahu",
+    "title": "Umfassende Bitte um Vergebung aller Sünden",
+    "snippet": "O Allah, vergib mir alle meine Sünden: ihre kleinen und großen, ihre ersten und letzten sowie ihre öffentlichen und verborgenen.",
+    "category": "Suǧūd & Vergebung"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 458,
+      "remaining": 446
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 86,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
