@@ -368,3 +368,14 @@
 @media (min-width:700px) and (orientation:landscape){
   .prl-shell{--prl-stage-min:min(58vh,520px)}
 }
+
+.prl-test-marker{
+  display:inline-block;
+  margin-top:8px;
+  font-size:11px;
+  letter-spacing:.04em;
+  opacity:.7;
+  padding:4px 8px;
+  border-radius:999px;
+  border:1px dashed color-mix(in srgb,var(--border,currentColor) 70%,transparent);
+}

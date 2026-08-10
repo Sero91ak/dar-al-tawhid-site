@@ -84,6 +84,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "gebet-erlernen-phase3-master-v635-2026-08-10",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Phase 3 Gebet erlernen: Fajr-Master, Steps/Texts/Sources/Pose-Registry. Produktion unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/",
+        "scripts/prayer-learning-phase1-check.js",
+        "scripts/prayer-learning-phase2-check.js",
+        "scripts/prayer-learning-phase3-check.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "gebet-erlernen-phase2-test-v634-2026-08-10",
       "approvedBy": "user-explicit-test-only",
       "reason": "Phase 2 Gebet erlernen: bedienbarer Fajr-Prototyp, Character-Lock, Swipe/Scroll. Produktion unverändert.",

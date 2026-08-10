@@ -1,0 +1,34 @@
+{
+  "id": "qiyam",
+  "titleDe": "Qiyām",
+  "titleAr": "القيام",
+  "category": "standing",
+  "poseReuseAllowed": true,
+  "malePoseId": "qiyam",
+  "femalePoseId": "qiyam",
+  "femalePoseStatus": "pending_review",
+  "detailSlots": [],
+  "checkAreas": [
+    "body-posture",
+    "gaze",
+    "hand-position",
+    "right-left-hand",
+    "body-placement",
+    "foot-stance",
+    "foot-distance",
+    "clothing-visibility",
+    "transition-to-recitation"
+  ],
+  "textModuleIds": [],
+  "claimSlotIds": [
+    "qiyam-body-posture",
+    "qiyam-gaze",
+    "qiyam-hand-position",
+    "qiyam-foot-stance",
+    "qiyam-transition"
+  ],
+  "variants": [],
+  "verificationStatus": "research",
+  "audioId": null,
+  "ikhtilafNote": "Legitimer Ikhtilāf darf nicht durch ein einzelnes Asset verborgen werden."
+}

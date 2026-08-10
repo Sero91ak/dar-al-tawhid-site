@@ -1,7 +1,7 @@
 /**
- * DAR AL TAWḤĪD — Gebet erlernen (Test Phase 2)
+ * DAR AL TAWḤĪD — Gebet erlernen (Test Phase 3)
  * Character lock: dar-prayer-male-v1 | dar-prayer-female-v1
- * No audio UI. No substitute figures. Fajr operable prototype.
+ * No audio UI. No substitute figures. Fajr master engine: compose from templates + pose registry.
  */
 (function (global) {
   "use strict";
@@ -16,7 +16,7 @@
   var CHAR_FEMALE = "dar-prayer-female-v1";
   var CHAR_VERSION = 1;
 
-  var cache = { prayers: null, fajr: null, poses: { male: null, female: null } };
+  var cache = { index: null, prayers: null, fajr: null, fajrComposed: null, steps: {}, texts: null, claims: null, registry: null, poses: { male: null, female: null }, characters: {} };
   var listenersBound = false;
   var missingAssets = [];
   var validationErrors = [];
@@ -24,20 +24,23 @@
   var sourceSheetStepId = "";
 
   var STEP_ALIASES = {
-    takbir: "takbirat-al-ihram",
-    "takbirat-al-ihram": "takbirat-al-ihram",
-    qiyam: "qiyam-1",
-    ruku: "ruku-1",
-    itidal: "itidal-1",
-    "sujud-1": "sujud-1a",
-    sujud: "sujud-1a",
-    sitting: "jalsa-1",
-    jalsa: "jalsa-1",
-    "sujud-2": "sujud-1b",
-    tashahhud: "tashahhud",
-    taslim: "taslim-right",
-    "taslim-right": "taslim-right",
-    "taslim-left": "taslim-left"
+    takbir: "fajr-r1-takbir",
+    "takbirat-al-ihram": "fajr-r1-takbir",
+    qiyam: "fajr-r1-qiyam",
+    recitation: "fajr-r1-recitation",
+    ruku: "fajr-r1-ruku",
+    "standing-after-ruku": "fajr-r1-standing-after-ruku",
+    itidal: "fajr-r1-standing-after-ruku",
+    "sujud-1": "fajr-r1-sujud-1",
+    sujud: "fajr-r1-sujud-1",
+    sitting: "fajr-r1-sitting",
+    jalsa: "fajr-r1-sitting",
+    "sujud-2": "fajr-r1-sujud-2",
+    rise: "fajr-r1-rise",
+    tashahhud: "fajr-r2-tashahhud",
+    taslim: "fajr-r2-taslim-right",
+    "taslim-right": "fajr-r2-taslim-right",
+    "taslim-left": "fajr-r2-taslim-left"
   };
 
   function esc(s) {
@@ -163,10 +166,12 @@
 
   async function ensurePrayer(id) {
     if (id !== "fajr") return null;
-    if (cache.fajr) return cache.fajr;
-    cache.fajr = await fetchJson(DATA_BASE + "fajr.json");
-    validatePrayerData(cache.fajr);
-    return cache.fajr;
+    await ensureIndexMeta();
+    await ensureRegistry();
+    await ensureClaims();
+    if (cache.fajrComposed) return cache.fajrComposed;
+    if (!cache.fajr) cache.fajr = await fetchJson(DATA_BASE + "fajr.json");
+    return composeFajr(cache.fajr);
   }
 
   function validatePrayerData(prayer) {
@@ -176,6 +181,161 @@
         throw new Error("approved step without sources: " + step.id);
       }
     });
+  }
+
+  async function ensureIndexMeta() {
+    if (cache.index) return cache.index;
+    try { cache.index = await fetchJson(DATA_BASE + "index.json"); }
+    catch (e) { cache.index = { phase: 3, audioEnabled: false }; }
+    return cache.index;
+  }
+
+  async function ensureStepTemplate(id) {
+    if (cache.steps[id]) return cache.steps[id];
+    cache.steps[id] = await fetchJson(DATA_BASE + "steps/" + id + ".json");
+    return cache.steps[id];
+  }
+
+  async function ensureRegistry() {
+    if (cache.registry) return cache.registry;
+    try { cache.registry = await fetchJson(DATA_BASE + "assets/poses-registry.json"); }
+    catch (e) { cache.registry = { poses: { male: {}, female: {} }, reuseMap: {} }; }
+    return cache.registry;
+  }
+
+  async function ensureClaims() {
+    if (cache.claims) return cache.claims;
+    try { cache.claims = await fetchJson(DATA_BASE + "sources/claims.json"); }
+    catch (e) { cache.claims = { claims: [] }; }
+    return cache.claims;
+  }
+
+  function isTestEnv() {
+    try {
+      return !!(global.IS_TEST_PATH || (String(location.pathname || "").indexOf("/test") === 0));
+    } catch (e) { return true; }
+  }
+
+  function resolvePoseId(template, seqStep) {
+    if (seqStep && seqStep.malePoseId) return { male: seqStep.malePoseId, female: seqStep.femalePoseId || seqStep.malePoseId };
+    var male = template.malePoseId || template.poseId || template.id;
+    var female = template.femalePoseId || template.poseId || template.id;
+    if (template.preferredPoseId) {
+      // preferred transition pose may be missing; fallback handled in registry lookup
+      male = template.preferredPoseId;
+      female = template.preferredPoseId;
+    }
+    if (seqStep && seqStep.poseReuseFrom) {
+      male = seqStep.poseReuseFrom;
+      female = seqStep.poseReuseFrom;
+    }
+    if (template.poseReuseAllowed && template.poseId) {
+      male = template.poseId;
+      female = template.poseId;
+    }
+    return { male: male, female: female };
+  }
+
+  function titleForInstance(template, seqStep) {
+    var titleDe = template.titleDe;
+    var titleAr = template.titleAr;
+    if (template.id === "sujud" && seqStep && seqStep.instance === 1) titleDe = "Erster Suǧūd";
+    if (template.id === "sujud" && seqStep && seqStep.instance === 2) titleDe = "Zweiter Suǧūd";
+    if (template.id === "taslim" && seqStep && seqStep.side === "right") titleDe = "Taslīm rechts";
+    if (template.id === "taslim" && seqStep && seqStep.side === "left") titleDe = "Taslīm links";
+    return { titleDe: titleDe, titleAr: titleAr };
+  }
+
+  async function composeFajr(master) {
+    if (cache.fajrComposed) return cache.fajrComposed;
+    var seq = master.sequenceSteps || [];
+    var steps = [];
+    for (var i = 0; i < seq.length; i++) {
+      var s = seq[i];
+      var tpl = await ensureStepTemplate(s.templateId);
+      var titles = titleForInstance(tpl, s);
+      var poses = resolvePoseId(tpl, s);
+      if (tpl.preferredPoseId && tpl.poseFallbackId) {
+        var reg = await ensureRegistry();
+        var genderKey = "male";
+        var hasPreferred = !!(reg.poses && reg.poses[genderKey] && reg.poses[genderKey][tpl.preferredPoseId] && reg.poses[genderKey][tpl.preferredPoseId].filePresent);
+        if (!hasPreferred) {
+          poses.male = tpl.poseFallbackId;
+          poses.female = tpl.poseFallbackId;
+        }
+      }
+      var claimIds = (tpl.claimSlotIds || []).slice();
+      steps.push({
+        id: s.id,
+        prayer: "fajr",
+        rakAh: s.rakAh,
+        order: s.order,
+        templateId: tpl.id,
+        titleDe: titles.titleDe,
+        titleAr: titles.titleAr,
+        instruction: null,
+        recitation: null,
+        transliteration: null,
+        translationDe: null,
+        malePose: poses.male,
+        femalePose: poses.female,
+        malePoseId: poses.male,
+        femalePoseId: poses.female,
+        femalePoseStatus: tpl.femalePoseStatus || "pending_review",
+        detailSlots: tpl.detailSlots || [],
+        checkAreas: tpl.checkAreas || [],
+        textModuleIds: tpl.textModuleIds || [],
+        quranSource: tpl.quranSource || null,
+        sourceClaimIds: claimIds,
+        claimSlotIds: claimIds,
+        variants: tpl.variants || [],
+        verificationStatus: tpl.verificationStatus || "research",
+        audioId: null,
+        deepLink: s.deepLink || tpl.id,
+        poseReuseFrom: s.poseReuseFrom || null,
+        side: s.side || null
+      });
+    }
+    var composed = {
+      id: master.id,
+      titleDe: master.titleDe,
+      titleAr: master.titleAr,
+      rakat: master.rakAhCount || master.rakat || 2,
+      rakAhCount: master.rakAhCount || master.rakat || 2,
+      audioEnabled: false,
+      phase: 3,
+      engine: "compose-from-templates",
+      verificationNote: master.verificationNote,
+      sequence: master.sequence || steps.map(function (x) { return x.id; }),
+      steps: steps
+    };
+    validatePrayerData(composed);
+    cache.fajrComposed = composed;
+    return composed;
+  }
+
+  function registryPose(character, poseId) {
+    var reg = cache.registry;
+    if (!reg || !reg.poses) return null;
+    var gender = character === "female" ? "female" : "male";
+    var map = reg.poses[gender] || {};
+    var entry = map[poseId];
+    if (!entry && reg.reuseMap && reg.reuseMap[poseId]) entry = map[reg.reuseMap[poseId]];
+    if (!entry) return null;
+    var expected = character === "female" ? CHAR_FEMALE : CHAR_MALE;
+    if (entry.characterId && entry.characterId !== expected) {
+      validationErrors.push("character mismatch " + poseId);
+      throw new Error("VALIDATION FAIL: pose " + poseId + " characterId mismatch");
+    }
+    return entry;
+  }
+
+  function canShowPoseAsset(entry) {
+    if (!entry) return false;
+    if (!entry.filePresent || !entry.file) return false;
+    if (entry.approved === true) return true;
+    // Test may show pending assets with marker; never invent substitutes
+    return isTestEnv() && entry.status === "PENDING";
   }
 
   function validatePoseEntry(expectedCharacterId, poseId, entry) {
@@ -219,18 +379,19 @@
   function resolveStepKey(stepKey, rakAh) {
     var key = String(stepKey || "").toLowerCase();
     if (!key) return "";
-    if (STEP_ALIASES[key]) {
-      var aliased = STEP_ALIASES[key];
-      if (Number(rakAh) === 2) {
-        if (key === "qiyam") return "qiyam-2";
-        if (key === "ruku") return "ruku-2";
-        if (key === "itidal") return "itidal-2";
-        if (key === "sujud" || key === "sujud-1") return "sujud-2a";
-        if (key === "sujud-2") return "sujud-2b";
-        if (key === "sitting" || key === "jalsa") return "jalsa-2";
-      }
-      return aliased;
+    if (Number(rakAh) === 2) {
+      if (key === "qiyam") return "fajr-r2-qiyam";
+      if (key === "recitation") return "fajr-r2-recitation";
+      if (key === "ruku") return "fajr-r2-ruku";
+      if (key === "standing-after-ruku" || key === "itidal") return "fajr-r2-standing-after-ruku";
+      if (key === "sujud" || key === "sujud-1") return "fajr-r2-sujud-1";
+      if (key === "sujud-2") return "fajr-r2-sujud-2";
+      if (key === "sitting" || key === "jalsa") return "fajr-r2-sitting";
+      if (key === "tashahhud") return "fajr-r2-tashahhud";
+      if (key === "taslim" || key === "taslim-right") return "fajr-r2-taslim-right";
+      if (key === "taslim-left") return "fajr-r2-taslim-left";
     }
+    if (STEP_ALIASES[key]) return STEP_ALIASES[key];
     return key;
   }
 
@@ -303,38 +464,45 @@
   }
 
   async function figureHtmlResolved(character, step) {
-    var poses = await ensurePoses(character);
-    var poseKey = character === "female" ? step.femalePose : step.malePose;
-    var meta = poseMeta(poses, poseKey);
-    if (!meta || !meta.asset) return figurePlaceholder(character, poseKey, step.titleDe);
+    await ensureRegistry();
+    var poseKey = character === "female" ? (step.femalePoseId || step.femalePose) : (step.malePoseId || step.malePose);
+    var entry = registryPose(character, poseKey);
+    var cid = characterIdFromKey(character);
+    if (!entry || !canShowPoseAsset(entry)) {
+      var status = entry && entry.status ? entry.status : "MISSING";
+      var pendingKey = cid + ":" + poseKey + ":" + status;
+      if (missingAssets.indexOf(pendingKey) < 0) missingAssets.push(pendingKey);
+      return (
+        '<div class="prl-stage" aria-label="Lehrfigur" data-prl-character-id="' + esc(cid) + '" data-prl-pose-id="' + esc(poseKey) + '" data-prl-pose-status="' + esc(status) + '">' +
+        '<div class="prl-figure"><div class="prl-figure-pending">' +
+        "<b>" + esc(step.titleDe || poseKey) + "</b>" +
+        "<span>Pose noch nicht freigegeben</span>" +
+        "<span>" + esc(cid) + " · " + esc(poseKey) + " · " + esc(status) + "</span>" +
+        (isTestEnv() ? '<span class="prl-test-marker">TEST · pending/missing asset</span>' : "") +
+        "<span>Keine Ersatzfigur – freigegebenes Master-Asset abwarten.</span>" +
+        '</div></div><div class="prl-stage-floor" aria-hidden="true"></div></div>'
+      );
+    }
+    var gender = character === "female" ? "female" : "male";
+    var asset = ASSET_BASE + "characters/" + gender + "/poses/" + entry.file;
+    var marker = entry.approved ? "" : '<span class="prl-test-marker">TEST · pending asset</span>';
     return (
-      '<div class="prl-stage" aria-label="Lehrfigur" data-prl-character-id="' +
-      esc(meta.characterId) +
-      '" data-prl-pose-id="' +
-      esc(meta.poseId) +
-      '">' +
-      '<div class="prl-figure"><img src="' +
-      esc(meta.asset) +
-      '" alt="' +
-      esc(step.titleDe) +
-      '" loading="lazy" data-prl-pose-img></div>' +
+      '<div class="prl-stage" aria-label="Lehrfigur" data-prl-character-id="' + esc(entry.characterId) + '" data-prl-pose-id="' + esc(entry.poseId) + '" data-prl-asset-id="' + esc(entry.assetId) + '">' +
+      '<div class="prl-figure"><img src="' + esc(asset) + '" alt="' + esc(step.titleDe) + '" loading="lazy" data-prl-pose-img>' + marker + "</div>" +
       '<div class="prl-stage-floor" aria-hidden="true"></div></div>'
     );
   }
 
   function preloadPose(character, step) {
     if (!step) return;
-    ensurePoses(character).then(function (poses) {
-      var poseKey = character === "female" ? step.femalePose : step.malePose;
-      var meta = null;
-      try {
-        meta = poseMeta(poses, poseKey);
-      } catch (e) {
-        return;
-      }
-      if (!meta || !meta.asset) return;
+    ensureRegistry().then(function () {
+      var poseKey = character === "female" ? (step.femalePoseId || step.femalePose) : (step.malePoseId || step.malePose);
+      var entry = null;
+      try { entry = registryPose(character, poseKey); } catch (e) { return; }
+      if (!canShowPoseAsset(entry)) return;
+      var gender = character === "female" ? "female" : "male";
       var img = new Image();
-      img.src = meta.asset;
+      img.src = ASSET_BASE + "characters/" + gender + "/poses/" + entry.file;
     });
   }
 
@@ -564,9 +732,10 @@
   function positionsHtml(state, index) {
     var buttons = (index.quickPositions || [])
       .map(function (p) {
+        var target = p.defaultSequenceId || p.stepId || p.stepTemplateId || p.id;
         return (
           '<button type="button" data-prl-position="' +
-          esc(p.stepId) +
+          esc(target) +
           '"><b>' +
           esc(p.titleDe) +
           "</b><span>" +
@@ -715,12 +884,15 @@
     var body = document.getElementById("prlSourceBody");
     if (!sheet || !body || !step) return;
     var claims = step.sourceClaimIds || [];
+    var slots = step.claimSlotIds || step.sourceClaimIds || [];
     if (!claims.length) {
       body.innerHTML =
         '<p class="prl-research">Noch keine geprüfte Quelle hinterlegt.<br>Status: ' +
         esc(step.verificationStatus || "research") +
         "</p>" +
-        "<p>Werk · Fundstelle · Authentizitätsstatus folgen nach Quellenprüfung.</p>";
+        (slots.length ? ("<p><b>Claim-Slots</b></p><ul>" + slots.map(function(id){return "<li>"+esc(id)+"</li>";}).join("") + "</ul>") : "") +
+        "<p>Werk · Fundstelle · Authentizitätsstatus folgen nach Quellenprüfung.</p>" +
+        "<p>Internet-/Social-Media-Grafiken sind kein Beleg.</p>";
     } else {
       body.innerHTML =
         "<p><b>Quellen-IDs</b></p><ul>" +
@@ -762,12 +934,7 @@
   }
 
   function deepLinkForStep(prayerId, step) {
-    var pose = String(step.malePose || step.id || "step");
-    if (step.id === "sujud-1a" || step.id === "sujud-2a") pose = "sujud-1";
-    if (step.id === "sujud-1b" || step.id === "sujud-2b") pose = "sujud-2";
-    if (step.id === "jalsa-1" || step.id === "jalsa-2") pose = "sitting";
-    if (step.id === "taslim-right") pose = "taslim";
-    if (step.id === "takbirat-al-ihram") pose = "takbir";
+    var pose = String(step.deepLink || step.malePoseId || step.malePose || step.id || "step");
     return prayerId + "/" + step.rakAh + "/" + pose;
   }
 
@@ -1061,7 +1228,7 @@
         var steps = sortedSteps(prayer);
         var step =
           steps.find(function (s) {
-            return s.id === stepId || s.malePose === stepId || String(s.id).indexOf(stepId) >= 0;
+            return s.id === stepId || s.deepLink === stepId || s.templateId === stepId || s.malePose === stepId || String(s.id).indexOf(stepId) >= 0;
           }) || steps[0];
         saveState({ prayer: "fajr", prayerId: "fajr", stepId: step.id, rakAh: step.rakAh, stepIndex: steps.indexOf(step) });
         navigate(VIEW, deepLinkForStep("fajr", step));
@@ -1113,7 +1280,7 @@
     report: function () {
       return {
         feature: "Gebet erlernen",
-        phase: 2,
+        phase: 3,
         environment: "test",
         audioVisible: false,
         wrongCharacterAssets: 0,

@@ -1,0 +1,33 @@
+{
+  "id": "standing-after-ruku",
+  "titleDe": "Aufrichten aus Rukūʿ",
+  "titleAr": "الاعتدال من الركوع",
+  "category": "standing",
+  "poseReuseAllowed": true,
+  "malePoseId": "standing-after-ruku",
+  "femalePoseId": "standing-after-ruku",
+  "femalePoseStatus": "pending_review",
+  "detailSlots": [],
+  "checkAreas": [
+    "full-rise",
+    "hand-raise-if-relevant",
+    "text-while-rising",
+    "text-after-rise",
+    "hand-position-standing",
+    "transition-to-sujud"
+  ],
+  "textModuleIds": [
+    "standing-after-ruku-while",
+    "standing-after-ruku-after"
+  ],
+  "claimSlotIds": [
+    "standing-after-ruku-rise",
+    "standing-after-ruku-text-while",
+    "standing-after-ruku-text-after",
+    "standing-after-ruku-hands"
+  ],
+  "variants": [],
+  "verificationStatus": "research",
+  "audioId": null,
+  "note": "Gesprochene Texte nicht zu einem synthetischen Satz vermischen."
+}
