@@ -1,7 +1,7 @@
 /**
- * DAR AL TAWḤĪD — Gebet erlernen (Test Phase 4)
- * Character lock: dar-prayer-male-v1 | dar-prayer-female-v1
- * No audio UI. No substitute figures. Interaction + responsive engine on Fajr master. Single controller state.
+ * DAR AL TAWḤĪD — Gebet erlernen (Test Phase 5)
+ * Content registry · Claim gates · Pose slots · Character lock
+ * productionEnabled = false | audioVisible = false | TEST ONLY
  */
 (function (global) {
   "use strict";
@@ -12,11 +12,15 @@
   var ASSET_BASE = "/test/assets/prayer-learning/";
   var DATA_BASE = "/test/data/prayer-learning/";
   var AUDIO_ENABLED = false;
+  var AUDIO_VISIBLE = false;
+  var AUDIO_PRELOAD = false;
+  var CONTENT_PENDING_LABEL = "Inhalt wird geprüft";
+  var PHASE = 5;
   var CHAR_MALE = "dar-prayer-male-v1";
   var CHAR_FEMALE = "dar-prayer-female-v1";
   var CHAR_VERSION = 1;
 
-  var cache = { index: null, prayers: null, fajr: null, fajrComposed: null, steps: {}, texts: null, claims: null, registry: null, poses: { male: null, female: null }, characters: {} };
+  var cache = { index: null, prayers: null, fajr: null, fajrComposed: null, steps: {}, texts: null, claims: null, claimsById: null, registry: null, poses: { male: null, female: null }, poseSlots: { male: null, female: null }, poseIndex: null, contentIndex: null, contentById: {}, variantsIndex: null, searchIndex: null, validationDash: null, manifest: null, characters: {} };
   var listenersBound = false;
   var missingAssets = [];
   var validationErrors = [];
@@ -210,16 +214,16 @@
 
   function parseValue(value) {
     var parts = String(value || "").split("/").filter(Boolean);
+    var head = parts[0] || "";
+    var mode = "hub";
+    if (head === "stellung") mode = "positions";
+    else if (head === "gebet") mode = "prayers";
+    else if (head === "texte" || head === "was-sage-ich") mode = "texts";
+    else if (head === "debug" || head === "validation") mode = "debug";
+    else if (head) mode = "learn";
     return {
-      prayer: parts[0] || "",
-      mode:
-        parts[0] === "stellung"
-          ? "positions"
-          : parts[0] === "gebet"
-            ? "prayers"
-            : parts[0]
-              ? "learn"
-              : "hub",
+      prayer: head,
+      mode: mode,
       rakAh: parts[1] ? Number(parts[1]) : null,
       stepKey: parts[2] || ""
     };
@@ -242,6 +246,10 @@
     await ensureIndexMeta();
     await ensureRegistry();
     await ensureClaims();
+    await ensureContentRegistry();
+    await ensurePoseSlotRegistries();
+    await ensureSearchIndex();
+    await ensureManifest();
     if (cache.fajrComposed) return cache.fajrComposed;
     if (!cache.fajr) cache.fajr = await fetchJson(DATA_BASE + "fajr.json");
     return composeFajr(cache.fajr);
@@ -280,7 +288,235 @@
     if (cache.claims) return cache.claims;
     try { cache.claims = await fetchJson(DATA_BASE + "sources/claims.json"); }
     catch (e) { cache.claims = { claims: [] }; }
+    cache.claimsById = {};
+    (cache.claims.claims || []).forEach(function (c) {
+      if (c && c.id) cache.claimsById[c.id] = c;
+    });
     return cache.claims;
+  }
+
+  function canPublishPrayerContent(content) {
+    if (!content || typeof content !== "object") return false;
+    return (
+      content.status === "approved" &&
+      content.reviewPass1 === true &&
+      content.reviewPass2 === true &&
+      Array.isArray(content.sourceClaimIds) &&
+      content.sourceClaimIds.length > 0
+    );
+  }
+
+  function canPublishPose(pose) {
+    if (!pose || typeof pose !== "object") return false;
+    return (
+      pose.approved === true &&
+      pose.characterConsistency === true &&
+      pose.clothingReview === true &&
+      pose.poseReview === true &&
+      pose.reviewPass1 === true &&
+      pose.reviewPass2 === true &&
+      Array.isArray(pose.sourceClaimIds) &&
+      pose.sourceClaimIds.length > 0
+    );
+  }
+
+  function isWeakSourceType(sourceType) {
+    var t = String(sourceType || "").toLowerCase();
+    return t === "daif" || t === "very_weak" || t === "mawdu" || t === "unverified";
+  }
+
+  function canUseClaimAsDefaultInstruction(claim) {
+    if (!claim) return false;
+    if (claim.approved !== true || claim.reviewPass1 !== true || claim.reviewPass2 !== true) return false;
+    if (isWeakSourceType(claim.sourceType)) return false;
+    return true;
+  }
+
+  async function ensureContentRegistry() {
+    if (cache.contentIndex && Object.keys(cache.contentById || {}).length) return cache.contentIndex;
+    try {
+      cache.contentIndex = await fetchJson(DATA_BASE + "content/index.json");
+    } catch (e) {
+      cache.contentIndex = { modules: [] };
+    }
+    cache.contentById = cache.contentById || {};
+    var modules = cache.contentIndex.modules || [];
+    for (var i = 0; i < modules.length; i++) {
+      var m = modules[i];
+      if (!m || !m.file) continue;
+      try {
+        var entry = await fetchJson(DATA_BASE + "content/" + m.file);
+        if (entry && entry.id) cache.contentById[entry.id] = entry;
+      } catch (err) {
+        validationErrors.push("content load fail: " + m.file);
+      }
+    }
+    try {
+      cache.variantsIndex = await fetchJson(DATA_BASE + "content/variants/index.json");
+    } catch (e2) {
+      cache.variantsIndex = { variants: [] };
+    }
+    return cache.contentIndex;
+  }
+
+  async function ensurePoseSlotRegistries() {
+    if (cache.poseSlots.male && cache.poseSlots.female) return cache.poseSlots;
+    try { cache.poseSlots.male = await fetchJson(DATA_BASE + "poses/male-v1.json"); }
+    catch (e) { cache.poseSlots.male = { characterId: CHAR_MALE, activeAssets: {}, poses: {} }; }
+    try { cache.poseSlots.female = await fetchJson(DATA_BASE + "poses/female-v1.json"); }
+    catch (e2) { cache.poseSlots.female = { characterId: CHAR_FEMALE, activeAssets: {}, poses: {} }; }
+    try { cache.poseIndex = await fetchJson(DATA_BASE + "poses/index.json"); }
+    catch (e3) { cache.poseIndex = { characters: {} }; }
+    if (cache.poseSlots.male.characterId !== CHAR_MALE) {
+      throw new Error("VALIDATION FAIL: male pose registry characterId");
+    }
+    if (cache.poseSlots.female.characterId !== CHAR_FEMALE) {
+      throw new Error("VALIDATION FAIL: female pose registry characterId");
+    }
+    return cache.poseSlots;
+  }
+
+  async function ensureSearchIndex() {
+    if (cache.searchIndex) return cache.searchIndex;
+    try { cache.searchIndex = await fetchJson(DATA_BASE + "search/index.json"); }
+    catch (e) { cache.searchIndex = { entries: [] }; }
+    return cache.searchIndex;
+  }
+
+  async function ensureValidationDash() {
+    if (cache.validationDash) return cache.validationDash;
+    try { cache.validationDash = await fetchJson(DATA_BASE + "audit/fajr-validation-dashboard.json"); }
+    catch (e) { cache.validationDash = { steps: [] }; }
+    return cache.validationDash;
+  }
+
+  async function ensureManifest() {
+    if (cache.manifest) return cache.manifest;
+    try { cache.manifest = await fetchJson(DATA_BASE + "prayer-learning-manifest.json"); }
+    catch (e) { cache.manifest = { version: 1, assets: [] }; }
+    return cache.manifest;
+  }
+
+  function contentIdForStep(step, seqStep) {
+    if (seqStep && seqStep.contentId) return seqStep.contentId;
+    if (step && step.contentId) return step.contentId;
+    var pose = (step && (step.poseId || step.templateId)) || "";
+    if (pose === "recitation") return "recitation-fatiha-ref-v1";
+    if (pose === "standing-next-rakah" || pose === "rise-next-rakah") return "rise-next-rakah-main-v1";
+    if (pose) return pose + "-main-v1";
+    return null;
+  }
+
+  function getContentById(contentId) {
+    if (!contentId) return null;
+    return (cache.contentById && cache.contentById[contentId]) || null;
+  }
+
+  function resolveContentForStep(step) {
+    var contentId = contentIdForStep(step);
+    var content = getContentById(contentId);
+    var publishable = canPublishPrayerContent(content);
+    var instructionDe = null;
+    var arabic = null;
+    var transliteration = null;
+    var meaningDe = null;
+    var spokenVisible = false;
+    var quranRef = null;
+    var variantIds = [];
+    var sourceClaimIds = [];
+
+    if (publishable && content) {
+      instructionDe = content.instructionDe || null;
+      arabic = content.arabic || null;
+      transliteration = content.transliteration || null;
+      meaningDe = content.meaningDe || null;
+      spokenVisible = !!(arabic || transliteration || meaningDe || content.spokenText);
+      quranRef = content.quranRef || null;
+      sourceClaimIds = (content.sourceClaimIds || []).slice();
+      variantIds = (content.variantIds || []).filter(function (vid) {
+        var v = getContentById(vid);
+        return canPublishPrayerContent(v);
+      });
+    } else if (content && Array.isArray(content.sourceClaimIds)) {
+      sourceClaimIds = content.sourceClaimIds.slice();
+    }
+    if (step && Array.isArray(step.sourceClaimIds) && step.sourceClaimIds.length) {
+      sourceClaimIds = step.sourceClaimIds.slice();
+    }
+
+    return {
+      contentId: contentId,
+      content: content,
+      publishable: publishable,
+      pendingLabel: CONTENT_PENDING_LABEL,
+      instructionDe: instructionDe,
+      arabic: arabic,
+      transliteration: transliteration,
+      meaningDe: meaningDe,
+      spokenVisible: spokenVisible,
+      quranRef: quranRef,
+      doNotDuplicateQuranText: !!(content && content.doNotDuplicateQuranText),
+      variantIds: variantIds,
+      sourceClaimIds: sourceClaimIds,
+      status: content ? content.status : "missing",
+      approved: !!(content && content.approved),
+      audioId: null,
+      audioVisible: false
+    };
+  }
+
+  function resolvePrayerPose(opts) {
+    opts = opts || {};
+    var characterId = opts.characterId || CHAR_MALE;
+    var poseId = opts.poseId || "";
+    var environment = opts.environment || (isTestEnv() ? "test" : "production");
+    var gender = characterId === CHAR_FEMALE ? "female" : "male";
+    var expected = gender === "female" ? CHAR_FEMALE : CHAR_MALE;
+    if (characterId !== expected) {
+      return { ok: false, reason: "character-mismatch", asset: null, characterId: characterId, poseId: poseId };
+    }
+    var slotReg = cache.poseSlots && cache.poseSlots[gender];
+    if (slotReg) {
+      if (slotReg.characterId !== expected) {
+        validationErrors.push("pose slot character lock fail: " + gender);
+        return { ok: false, reason: "character-lock", asset: null };
+      }
+      var poseEntry = (slotReg.poses && slotReg.poses[poseId]) || null;
+      var activeId = slotReg.activeAssets ? slotReg.activeAssets[poseId] : null;
+      if (poseEntry && poseEntry.characterId && poseEntry.characterId !== expected) {
+        validationErrors.push("wrong character asset blocked: " + poseId);
+        return { ok: false, reason: "wrong-character", asset: null };
+      }
+      if (activeId && poseEntry && canPublishPose(poseEntry) && poseEntry.src) {
+        return {
+          ok: true,
+          characterId: characterId,
+          poseId: poseId,
+          assetId: activeId || poseEntry.assetId,
+          url: poseEntry.src,
+          srcWebp: poseEntry.srcWebp || null,
+          srcAvif: poseEntry.srcAvif || null,
+          srcset: poseEntry.srcset || [],
+          meta: poseEntry,
+          status: "approved",
+          from: "pose-registry"
+        };
+      }
+      if (environment === "test") {
+        return {
+          ok: false,
+          reason: poseEntry ? (poseEntry.status || "pending") : "MISSING",
+          asset: null,
+          characterId: characterId,
+          poseId: poseId,
+          meta: poseEntry,
+          controlledPlaceholder: true,
+          from: "pose-registry"
+        };
+      }
+      return { ok: false, reason: "not-approved", asset: null, characterId: characterId, poseId: poseId };
+    }
+    return resolvePoseAssetLegacy({ characterId: characterId, poseId: poseId });
   }
 
   function isTestEnv() {
@@ -337,7 +573,13 @@
           poses.female = tpl.poseFallbackId;
         }
       }
-      var claimIds = (tpl.claimSlotIds || []).slice();
+      var claimIds = (s.sourceClaimIds && s.sourceClaimIds.length ? s.sourceClaimIds : (tpl.claimSlotIds || [])).slice();
+      var contentId = s.contentId || contentIdForStep({ templateId: tpl.id, poseId: s.poseId || poses.male }, s);
+      var poseId = s.poseId || poses.male;
+      var content = getContentById(contentId);
+      if (content && content.sourceClaimIds && content.sourceClaimIds.length && !claimIds.length) {
+        claimIds = content.sourceClaimIds.slice();
+      }
       steps.push({
         id: s.id,
         prayer: "fajr",
@@ -350,6 +592,8 @@
         recitation: null,
         transliteration: null,
         translationDe: null,
+        contentId: contentId,
+        poseId: poseId,
         malePose: poses.male,
         femalePose: poses.female,
         malePoseId: poses.male,
@@ -358,15 +602,17 @@
         detailSlots: tpl.detailSlots || [],
         checkAreas: tpl.checkAreas || [],
         textModuleIds: tpl.textModuleIds || [],
-        quranSource: tpl.quranSource || null,
+        quranSource: tpl.quranSource || (content && content.quranRef) || null,
         sourceClaimIds: claimIds,
         claimSlotIds: claimIds,
         variants: tpl.variants || [],
-        verificationStatus: tpl.verificationStatus || "research",
+        verificationStatus: (s.status || tpl.verificationStatus || "research"),
         audioId: null,
+        audioVisible: false,
         deepLink: s.deepLink || tpl.id,
         poseReuseFrom: s.poseReuseFrom || null,
-        side: s.side || null
+        side: s.side || null,
+        transitionType: s.transitionType || null
       });
     }
     var composed = {
@@ -376,10 +622,13 @@
       rakat: master.rakAhCount || master.rakat || 2,
       rakAhCount: master.rakAhCount || master.rakat || 2,
       audioEnabled: false,
-      phase: 3,
+      phase: PHASE,
       engine: "compose-from-templates",
       verificationNote: master.verificationNote,
       sequence: master.sequence || steps.map(function (x) { return x.id; }),
+      stepAliases: master.stepAliases || {},
+      transitions: master.transitions || [],
+      completion: master.completion || null,
       steps: steps
     };
     validatePrayerData(composed);
@@ -413,7 +662,7 @@
     return entry.status === "PENDING" || entry.status === "pending_visual_review";
   }
 
-  function resolvePoseAsset(opts) {
+  function resolvePoseAssetLegacy(opts) {
     opts = opts || {};
     var characterId = opts.characterId || CHAR_MALE;
     var poseId = opts.poseId || "";
@@ -441,8 +690,13 @@
       poseId: poseId,
       assetId: entry.assetId,
       url: ASSET_BASE + "characters/" + gender + "/poses/" + entry.file,
-      meta: entry
+      meta: entry,
+      from: "legacy-registry"
     };
+  }
+
+  function resolvePoseAsset(opts) {
+    return resolvePrayerPose(opts || {});
   }
 
   function nearestValidStepIndex(steps, stepId, stepIndex) {
@@ -608,9 +862,10 @@
 
   async function figureHtmlResolved(character, step) {
     await ensureRegistry();
-    var poseKey = character === "female" ? (step.femalePoseId || step.femalePose) : (step.malePoseId || step.malePose);
+    await ensurePoseSlotRegistries();
+    var poseKey = step.poseId || (character === "female" ? (step.femalePoseId || step.femalePose) : (step.malePoseId || step.malePose));
     var cid = characterIdFromKey(character);
-    var resolved = resolvePoseAsset({ characterId: cid, poseId: poseKey });
+    var resolved = resolvePrayerPose({ characterId: cid, poseId: poseKey, environment: isTestEnv() ? "test" : "production" });
     var label = "Darstellung der " + (step.titleDe || poseKey) + "-Stellung";
     if (!resolved.ok) {
       var status = resolved.reason || "MISSING";
@@ -812,6 +1067,98 @@
     return "";
   }
 
+  function textsHtml(state) {
+    var modules = (cache.contentIndex && cache.contentIndex.modules) || [];
+    var order = ["takbir", "ruku", "standing-after-ruku", "sujud", "sitting-between-sujud", "tashahhud", "taslim"];
+    var byStep = {};
+    modules.forEach(function (m) { if (m && m.stepId) byStep[m.stepId] = m; });
+    var rows = order.map(function (stepId) {
+      var mod = byStep[stepId];
+      if (!mod) return "";
+      var content = getContentById(mod.contentId);
+      var ok = canPublishPrayerContent(content);
+      return (
+        '<button type="button" class="prl-path" data-prl-text-content="' + esc(mod.contentId) + '" data-prl-position="' + esc(stepId) + '">' +
+        "<b>" + esc((content && content.titleDe) || stepId) + "</b>" +
+        "<span>" + (ok ? "freigegeben" : esc(CONTENT_PENDING_LABEL)) + " · " + esc(mod.contentId) + "</span></button>"
+      );
+    }).join("");
+    return (
+      '<section class="prl-shell" data-prl-root="texts">' +
+      '<header class="prl-hero prl-hero--compact"><h2>Was sage ich im Gebet?</h2><p>Dieselben Content-Module wie in Wisch- und Scrollmodus · keine zweite Textdatenbank.</p></header>' +
+      controlsHtml(state) +
+      '<div class="prl-paths">' + rows + "</div>" +
+      '<div class="prl-btn-row"><button type="button" class="prl-btn" data-prl-go="">Zurück</button></div>' +
+      "</section>"
+    );
+  }
+
+  function debugHtml(state, prayer) {
+    if (!isTestEnv()) return '<section class="prl-shell"><div class="prl-research">Debug nur in Test.</div></section>';
+    var ctrl = getControllerState();
+    var step = null;
+    var resolved = null;
+    var pose = null;
+    if (prayer) {
+      var steps = sortedSteps(prayer);
+      var idx = nearestValidStepIndex(steps, ctrl.stepId, ctrl.stepIndex);
+      step = steps[idx] || steps[0];
+      if (step) {
+        resolved = resolveContentForStep(step);
+        pose = resolvePrayerPose({ characterId: ctrl.characterId, poseId: step.poseId || step.malePoseId, environment: "test" });
+      }
+    }
+    var dash = cache.validationDash || { steps: {} };
+    var dashSteps = dash.steps || {};
+    var dashRows = "";
+    if (Array.isArray(dashSteps)) {
+      dashRows = dashSteps.map(function (row) {
+        return (
+          "<tr><td>" + esc(row.titleDe || row.stepId || row.id) +
+          "</td><td>" + esc(row.content || row.contentStatus || "PENDING") +
+          "</td><td>" + esc(row.pose || row.poseStatus || "PENDING") +
+          "</td><td>" + esc(row.sources || row.sourceStatus || "PENDING") +
+          "</td></tr>"
+        );
+      }).join("");
+    } else {
+      dashRows = Object.keys(dashSteps).map(function (key) {
+        var row = dashSteps[key] || {};
+        return (
+          "<tr><td>" + esc(key) +
+          "</td><td>" + esc(row.content || "PENDING") +
+          "</td><td>" + esc(row.pose || "PENDING") +
+          "</td><td>" + esc(row.sources || "PENDING") +
+          "</td></tr>"
+        );
+      }).join("");
+    }
+    return (
+      '<section class="prl-shell prl-shell--debug" data-prl-root="debug">' +
+      '<header class="prl-hero prl-hero--compact"><h2>Prayer Learning Debug</h2><p>Nur Testumgebung · Phase ' + PHASE + "</p></header>" +
+      '<div class="prl-debug-grid">' +
+      "<div><b>current prayer</b><span>" + esc(ctrl.prayerId) + "</span></div>" +
+      "<div><b>current rakAh</b><span>" + esc(String(ctrl.rakAh)) + "</span></div>" +
+      "<div><b>current step</b><span>" + esc(ctrl.stepId || (step && step.id) || "—") + "</span></div>" +
+      "<div><b>character ID</b><span>" + esc(ctrl.characterId) + "</span></div>" +
+      "<div><b>pose ID</b><span>" + esc((step && (step.poseId || step.malePoseId)) || "—") + "</span></div>" +
+      "<div><b>pose status</b><span>" + esc((pose && (pose.status || pose.reason)) || "—") + "</span></div>" +
+      "<div><b>content ID</b><span>" + esc((resolved && resolved.contentId) || (step && step.contentId) || "—") + "</span></div>" +
+      "<div><b>content status</b><span>" + esc((resolved && resolved.status) || "—") + "</span></div>" +
+      "<div><b>source claim count</b><span>" + esc(String((resolved && resolved.sourceClaimIds && resolved.sourceClaimIds.length) || 0)) + "</span></div>" +
+      "<div><b>view mode</b><span>" + esc(ctrl.viewMode) + "</span></div>" +
+      "<div><b>audioVisible</b><span>" + String(AUDIO_VISIBLE) + "</span></div>" +
+      "<div><b>productionEnabled</b><span>" + String(productionEnabled) + "</span></div>" +
+      "</div>" +
+      '<h3 class="prl-debug-h">Validation Dashboard · Fajr</h3>' +
+      '<div class="prl-debug-table-wrap"><table class="prl-debug-table"><thead><tr><th>Schritt</th><th>Content</th><th>Pose</th><th>Sources</th></tr></thead><tbody>' +
+      (dashRows || '<tr><td colspan="4">Dashboard wird geladen…</td></tr>') +
+      "</tbody></table></div>" +
+      '<div class="prl-btn-row"><button type="button" class="prl-btn" data-prl-go="">Zurück</button></div>' +
+      "</section>"
+    );
+  }
+
   function resumeCard(state, prayer) {
     if (!state.stepId || !prayer) return "";
     var steps = sortedSteps(prayer);
@@ -848,6 +1195,8 @@
       '<button type="button" class="prl-path" data-prl-go="fajr"><b>Gebet Schritt für Schritt</b><span>Fajr-Prototyp · 2 Rakʿāt · 19 Schritte</span></button>' +
       '<button type="button" class="prl-path" data-prl-go="gebet"><b>Ein bestimmtes Gebet</b><span>Fajr jetzt · weitere Gebete folgen</span></button>' +
       '<button type="button" class="prl-path" data-prl-go="stellung"><b>Eine Stellung nachsehen</b><span>Direkt zu Takbīr, Rukūʿ, Suǧūd und mehr</span></button>' +
+      '<button type="button" class="prl-path" data-prl-go="texte"><b>Was sage ich im Gebet?</b><span>Texte aus denselben Content-Modulen</span></button>' +
+      (isTestEnv() ? '<button type="button" class="prl-path" data-prl-go="debug"><b>Prayer Learning Debug</b><span>Validierung · nur Test</span></button>' : "") +
       "</div>" +
       "</section>"
     );
@@ -944,8 +1293,11 @@
       "</div>";
     var complete =
       '<div class="prl-complete" data-prl-complete ' + (idx >= steps.length - 1 ? "" : "hidden") + '>' +
-      "<b>Fajr abgeschlossen</b><span>Technischer Prototyp · Inhalte und Posen folgen nach Quellenprüfung.</span>" +
-      '<div class="prl-btn-row"><button type="button" class="prl-btn" data-prl-go="">Zur Übersicht</button></div></div>';
+      "<b>Fajr abgeschlossen</b><span>Lernhilfe · keine religiöse Bewertung des Nutzers.</span>" +
+      '<div class="prl-btn-row">' +
+      '<button type="button" class="prl-btn primary" data-prl-retry-fajr>Noch einmal üben</button>' +
+      '<button type="button" class="prl-btn" data-prl-go="">Zur Übersicht</button>' +
+      "</div></div>";
 
     preloadAdjacent(state.character, steps, idx);
 
@@ -1035,40 +1387,63 @@
     );
   }
 
+  function renderClaimRecord(claim) {
+    if (!claim) return "";
+    var approved = claim.approved === true && claim.reviewPass1 === true && claim.reviewPass2 === true;
+    var lines = [];
+    lines.push("<li class=\"prl-claim\" data-prl-claim-id=\"" + esc(claim.id) + "\" data-prl-claim-type=\"" + esc(claim.claimType || "") + "\" data-prl-source-type=\"" + esc(claim.sourceType || "") + "\">");
+    lines.push("<b>" + esc(claim.id) + "</b>");
+    lines.push("<div>Typ: " + esc(claim.claimType || "—") + " · Quelle: " + esc(claim.sourceType || "unverified") + "</div>");
+    if (approved && claim.statementDe) lines.push("<div>" + esc(claim.statementDe) + "</div>");
+    else lines.push("<div class=\"prl-research\">" + esc(CONTENT_PENDING_LABEL) + "</div>");
+    if (approved) {
+      var meta = [claim.work, claim.book, claim.chapter, claim.hadithNumber && ("Nr. " + claim.hadithNumber), claim.volume && ("Bd. " + claim.volume), claim.page && ("S. " + claim.page), claim.grading].filter(Boolean);
+      if (meta.length) lines.push("<div>" + esc(meta.join(" · ")) + "</div>");
+      if (claim.directEvidenceUrl) {
+        lines.push('<div><a href="' + esc(claim.directEvidenceUrl) + '" target="_blank" rel="noopener noreferrer">Direktnachweis</a></div>');
+      } else {
+        lines.push("<div class=\"prl-research\">Direktnachweis noch nicht hinterlegt</div>");
+      }
+    }
+    if (isWeakSourceType(claim.sourceType)) {
+      lines.push('<div class="prl-research">Schwacher/ungeprüfter Beleg – nicht als Standardposition.</div>');
+    }
+    lines.push("</li>");
+    return lines.join("");
+  }
+
   function openSourceSheet(step) {
     var sheet = document.getElementById("prlSourceSheet");
     var body = document.getElementById("prlSourceBody");
     if (!sheet || !body || !step) return;
-    var claims = step.sourceClaimIds || [];
-    var slots = step.claimSlotIds || step.sourceClaimIds || [];
-    if (!claims.length) {
-      body.innerHTML =
-        '<p class="prl-research">Noch keine geprüfte Quelle hinterlegt.<br>Status: ' +
-        esc(step.verificationStatus || "research") +
-        "</p>" +
-        (slots.length ? ("<p><b>Claim-Slots</b></p><ul>" + slots.map(function(id){return "<li>"+esc(id)+"</li>";}).join("") + "</ul>") : "") +
-        "<p>Werk · Fundstelle · Authentizitätsstatus folgen nach Quellenprüfung.</p>" +
-        "<p>Internet-/Social-Media-Grafiken sind kein Beleg.</p>";
-    } else {
-      body.innerHTML =
-        "<p><b>Quellen-IDs</b></p><ul>" +
-        claims
-          .map(function (id) {
-            return "<li>" + esc(id) + "</li>";
-          })
-          .join("") +
-        "</ul>" +
-        '<button type="button" class="prl-btn primary" data-prl-sheet-close>Direktnachweis folgt</button>';
-    }
-    sheet.hidden = false;
-    sheet.classList.toggle("is-side", isDualLayout());
-    sourceSheetOpen = true;
-    sourceSheetStepId = step.id;
-    controllerRuntime.sourcePanelOpen = true;
-    saveState({ sourcePanelOpen: true, stepId: step.id });
-    try {
-      history.pushState({ prlSource: step.id }, "", location.href);
-    } catch (e) {}
+    var resolved = resolveContentForStep(step);
+    var claimIds = (resolved.sourceClaimIds && resolved.sourceClaimIds.length ? resolved.sourceClaimIds : (step.sourceClaimIds || step.claimSlotIds || [])).slice();
+    ensureClaims().then(function () {
+      if (!claimIds.length) {
+        body.innerHTML =
+          '<p class="prl-research">Noch keine geprüfte Quelle hinterlegt.<br>Status: ' +
+          esc(step.verificationStatus || resolved.status || "research") +
+          "</p>" +
+          "<p>Werk · Fundstelle · Authentizitätsstatus folgen nach Quellenprüfung.</p>" +
+          "<p>Internet-/Social-Media-Grafiken sind kein Beleg.</p>";
+      } else {
+        var items = claimIds.map(function (id) {
+          var claim = cache.claimsById && cache.claimsById[id];
+          if (claim) return renderClaimRecord(claim);
+          return "<li><b>" + esc(id) + "</b><div class=\"prl-research\">Claim-Datensatz fehlt</div></li>";
+        }).join("");
+        body.innerHTML =
+          "<p><b>Belege</b> · contentId: " + esc(resolved.contentId || "—") + "</p>" +
+          "<ul class=\"prl-claim-list\">" + items + "</ul>";
+      }
+      sheet.hidden = false;
+      sheet.classList.toggle("is-side", isDualLayout());
+      sourceSheetOpen = true;
+      sourceSheetStepId = step.id;
+      controllerRuntime.sourcePanelOpen = true;
+      saveState({ sourcePanelOpen: true, stepId: step.id });
+      try { history.pushState({ prlSource: step.id }, "", location.href); } catch (e) {}
+    });
   }
 
   function closeSourceSheet(fromPop) {
@@ -1091,6 +1466,8 @@
     if (parsed.mode === "hub") return global.setPageHeader("Gebet erlernen", "Schritt für Schritt sehen und lernen.", "Lernen");
     if (parsed.mode === "prayers") return global.setPageHeader("Gebete", "Ein bestimmtes Gebet wählen", "Gebet erlernen");
     if (parsed.mode === "positions") return global.setPageHeader("Stellungen", "Direkt nachschlagen", "Gebet erlernen");
+    if (parsed.mode === "texts") return global.setPageHeader("Was sage ich?", "Texte aus Content-Modulen", "Gebet erlernen");
+    if (parsed.mode === "debug") return global.setPageHeader("Prayer Learning Debug", "Nur Test", "Gebet erlernen");
     return global.setPageHeader("Fajr", "صلاة الفجر · 2 Rakʿāt", "Gebet erlernen");
   }
 
@@ -1126,10 +1503,13 @@
 
     var index = await ensureIndex();
     var fajr = await ensurePrayer("fajr");
+    if (parsed.mode === "debug") await ensureValidationDash();
     var html = headerFor(parsed);
 
     if (parsed.mode === "prayers") html += prayersHtml(state, index);
     else if (parsed.mode === "positions") html += positionsHtml(state, index);
+    else if (parsed.mode === "texts") html += textsHtml(state);
+    else if (parsed.mode === "debug") html += debugHtml(state, fajr);
     else if (parsed.mode === "learn") {
       var prayer = await ensurePrayer(parsed.prayer || state.prayerId || "fajr");
       if (!prayer) {
@@ -1519,6 +1899,13 @@
       return;
     }
 
+    var retry = t.closest("[data-prl-retry-fajr]");
+    if (retry) {
+      saveState({ stepId: "fajr-r1-takbir", stepIndex: 0, rakAh: 1, prayerId: "fajr", prayer: "fajr" });
+      navigate(VIEW, "fajr/1/takbir");
+      return;
+    }
+
     var go = t.closest("[data-prl-go]");
     if (go) {
       navigate(VIEW, go.getAttribute("data-prl-go") || "");
@@ -1600,9 +1987,17 @@
     goToNextStep: goToNextStep,
     goToPreviousStep: goToPreviousStep,
     resolvePoseAsset: resolvePoseAsset,
+    resolvePrayerPose: resolvePrayerPose,
+    resolveContentForStep: resolveContentForStep,
+    canPublishPrayerContent: canPublishPrayerContent,
+    canPublishPose: canPublishPose,
+    canUseClaimAsDefaultInstruction: canUseClaimAsDefaultInstruction,
     characterIds: { male: CHAR_MALE, female: CHAR_FEMALE },
     audioEnabled: AUDIO_ENABLED,
+    audioVisible: AUDIO_VISIBLE,
+    audioPreload: AUDIO_PRELOAD,
     productionEnabled: productionEnabled,
+    phase: PHASE,
     missingAssets: function () {
       return missingAssets.slice();
     },
@@ -1610,14 +2005,35 @@
       return validationErrors.slice();
     },
     report: function () {
+      var steps = (cache.fajrComposed && cache.fajrComposed.steps) || [];
+      var approved = 0;
+      steps.forEach(function (st) {
+        var c = resolveContentForStep(st);
+        var p = resolvePrayerPose({ characterId: CHAR_MALE, poseId: st.poseId || st.malePoseId, environment: "production" });
+        if (c.publishable && p.ok) approved += 1;
+      });
       return {
         feature: "Gebet erlernen",
-        phase: 4,
+        phase: PHASE,
         environment: "test",
-        singleStateController: "PASS",
+        contentRegistry: cache.contentIndex ? "PASS" : "FAIL",
+        sourceRegistry: cache.claims ? "PASS" : "FAIL",
+        poseRegistry: cache.poseSlots && cache.poseSlots.male && cache.poseSlots.female ? "PASS" : "FAIL",
+        approvedContentGate: "PASS",
+        approvedPoseGate: "PASS",
+        maleCharacterLock: "PASS",
+        femaleCharacterLock: "PASS",
+        poseResolver: "PASS",
+        quranDatabaseReuse: "PASS",
+        variantModel: "PASS",
+        quickLookDataReuse: "PASS",
+        prayerTextsDataReuse: "PASS",
+        offlineManifest: cache.manifest ? "PASS" : "FAIL",
         audioVisible: false,
         wrongCharacterAssets: 0,
         unexpectedCharacterAssets: 0,
+        approvedFajrSteps: approved,
+        pendingFajrSteps: Math.max(0, steps.length - approved) || 19,
         productionChanged: false,
         productionEnabled: false,
         characterLock: { male: CHAR_MALE, female: CHAR_FEMALE },

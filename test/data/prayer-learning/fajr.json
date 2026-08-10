@@ -5,9 +5,9 @@
   "rakAhCount": 2,
   "rakat": 2,
   "audioEnabled": false,
-  "phase": 3,
+  "phase": 5,
   "engine": "compose-from-templates",
-  "verificationNote": "Phase-3-Master: Schritte/Posen/Claims modular. Kein Schritt approved ohne Quellenprüfung.",
+  "verificationNote": "Phase-5: Content-/Pose-/Claim-Registries. Kein Schritt approved ohne Quellenprüfung. productionEnabled=false.",
   "sequence": [
     "fajr-r1-takbir",
     "fajr-r1-qiyam",
@@ -35,14 +35,22 @@
       "rakAh": 1,
       "order": 1,
       "templateId": "takbir",
-      "deepLink": "takbir"
+      "deepLink": "takbir",
+      "contentId": "takbir-main-v1",
+      "status": "research",
+      "sourceClaimIds": [],
+      "poseId": "takbir"
     },
     {
       "id": "fajr-r1-qiyam",
       "rakAh": 1,
       "order": 2,
       "templateId": "qiyam",
-      "deepLink": "qiyam"
+      "deepLink": "qiyam",
+      "contentId": "qiyam-main-v1",
+      "status": "research",
+      "sourceClaimIds": [],
+      "poseId": "qiyam"
     },
     {
       "id": "fajr-r1-recitation",
@@ -50,21 +58,33 @@
       "order": 3,
       "templateId": "recitation",
       "deepLink": "recitation",
-      "poseReuseFrom": "qiyam"
+      "poseReuseFrom": "qiyam",
+      "contentId": "recitation-fatiha-ref-v1",
+      "status": "research",
+      "sourceClaimIds": [],
+      "poseId": "qiyam"
     },
     {
       "id": "fajr-r1-ruku",
       "rakAh": 1,
       "order": 4,
       "templateId": "ruku",
-      "deepLink": "ruku"
+      "deepLink": "ruku",
+      "contentId": "ruku-main-v1",
+      "status": "research",
+      "sourceClaimIds": [],
+      "poseId": "ruku"
     },
     {
       "id": "fajr-r1-standing-after-ruku",
       "rakAh": 1,
       "order": 5,
       "templateId": "standing-after-ruku",
-      "deepLink": "standing-after-ruku"
+      "deepLink": "standing-after-ruku",
+      "contentId": "standing-after-ruku-main-v1",
+      "status": "research",
+      "sourceClaimIds": [],
+      "poseId": "standing-after-ruku"
     },
     {
       "id": "fajr-r1-sujud-1",
@@ -72,14 +92,22 @@
       "order": 6,
       "templateId": "sujud",
       "deepLink": "sujud-1",
-      "instance": 1
+      "instance": 1,
+      "contentId": "sujud-main-v1",
+      "status": "research",
+      "sourceClaimIds": [],
+      "poseId": "sujud"
     },
     {
       "id": "fajr-r1-sitting",
       "rakAh": 1,
       "order": 7,
       "templateId": "sitting-between-sujud",
-      "deepLink": "sitting"
+      "deepLink": "sitting",
+      "contentId": "sitting-between-sujud-main-v1",
+      "status": "research",
+      "sourceClaimIds": [],
+      "poseId": "sitting-between-sujud"
     },
     {
       "id": "fajr-r1-sujud-2",
@@ -88,14 +116,22 @@
       "templateId": "sujud",
       "deepLink": "sujud-2",
       "instance": 2,
-      "poseReuseFrom": "sujud"
+      "poseReuseFrom": "sujud",
+      "contentId": "sujud-main-v1",
+      "status": "research",
+      "sourceClaimIds": [],
+      "poseId": "sujud"
     },
     {
       "id": "fajr-r1-rise",
       "rakAh": 1,
       "order": 9,
       "templateId": "standing-next-rakah",
-      "deepLink": "rise"
+      "deepLink": "rise",
+      "contentId": "rise-next-rakah-main-v1",
+      "status": "research",
+      "sourceClaimIds": [],
+      "poseId": "qiyam"
     },
     {
       "id": "fajr-r2-qiyam",
@@ -103,7 +139,11 @@
       "order": 10,
       "templateId": "qiyam",
       "deepLink": "qiyam",
-      "poseReuseFrom": "qiyam"
+      "poseReuseFrom": "qiyam",
+      "contentId": "qiyam-main-v1",
+      "status": "research",
+      "sourceClaimIds": [],
+      "poseId": "qiyam"
     },
     {
       "id": "fajr-r2-recitation",
@@ -111,7 +151,11 @@
       "order": 11,
       "templateId": "recitation",
       "deepLink": "recitation",
-      "poseReuseFrom": "qiyam"
+      "poseReuseFrom": "qiyam",
+      "contentId": "recitation-fatiha-ref-v1",
+      "status": "research",
+      "sourceClaimIds": [],
+      "poseId": "qiyam"
     },
     {
       "id": "fajr-r2-ruku",
@@ -119,7 +163,11 @@
       "order": 12,
       "templateId": "ruku",
       "deepLink": "ruku",
-      "poseReuseFrom": "ruku"
+      "poseReuseFrom": "ruku",
+      "contentId": "ruku-main-v1",
+      "status": "research",
+      "sourceClaimIds": [],
+      "poseId": "ruku"
     },
     {
       "id": "fajr-r2-standing-after-ruku",
@@ -127,7 +175,11 @@
       "order": 13,
       "templateId": "standing-after-ruku",
       "deepLink": "standing-after-ruku",
-      "poseReuseFrom": "standing-after-ruku"
+      "poseReuseFrom": "standing-after-ruku",
+      "contentId": "standing-after-ruku-main-v1",
+      "status": "research",
+      "sourceClaimIds": [],
+      "poseId": "standing-after-ruku"
     },
     {
       "id": "fajr-r2-sujud-1",
@@ -136,7 +188,11 @@
       "templateId": "sujud",
       "deepLink": "sujud-1",
       "instance": 1,
-      "poseReuseFrom": "sujud"
+      "poseReuseFrom": "sujud",
+      "contentId": "sujud-main-v1",
+      "status": "research",
+      "sourceClaimIds": [],
+      "poseId": "sujud"
     },
     {
       "id": "fajr-r2-sitting",
@@ -144,7 +200,11 @@
       "order": 15,
       "templateId": "sitting-between-sujud",
       "deepLink": "sitting",
-      "poseReuseFrom": "sitting-between-sujud"
+      "poseReuseFrom": "sitting-between-sujud",
+      "contentId": "sitting-between-sujud-main-v1",
+      "status": "research",
+      "sourceClaimIds": [],
+      "poseId": "sitting-between-sujud"
     },
     {
       "id": "fajr-r2-sujud-2",
@@ -153,14 +213,22 @@
       "templateId": "sujud",
       "deepLink": "sujud-2",
       "instance": 2,
-      "poseReuseFrom": "sujud"
+      "poseReuseFrom": "sujud",
+      "contentId": "sujud-main-v1",
+      "status": "research",
+      "sourceClaimIds": [],
+      "poseId": "sujud"
     },
     {
       "id": "fajr-r2-tashahhud",
       "rakAh": 2,
       "order": 17,
       "templateId": "tashahhud",
-      "deepLink": "tashahhud"
+      "deepLink": "tashahhud",
+      "contentId": "tashahhud-main-v1",
+      "status": "research",
+      "sourceClaimIds": [],
+      "poseId": "tashahhud"
     },
     {
       "id": "fajr-r2-taslim-right",
@@ -170,7 +238,11 @@
       "deepLink": "taslim",
       "side": "right",
       "malePoseId": "taslim-right",
-      "femalePoseId": "taslim-right"
+      "femalePoseId": "taslim-right",
+      "contentId": "taslim-main-v1",
+      "status": "research",
+      "sourceClaimIds": [],
+      "poseId": "taslim-right"
     },
     {
       "id": "fajr-r2-taslim-left",
@@ -180,7 +252,59 @@
       "deepLink": "taslim-left",
       "side": "left",
       "malePoseId": "taslim-left",
-      "femalePoseId": "taslim-left"
+      "femalePoseId": "taslim-left",
+      "contentId": "taslim-main-v1",
+      "status": "research",
+      "sourceClaimIds": [],
+      "poseId": "taslim-left"
     }
-  ]
+  ],
+  "stepAliases": {
+    "takbirat-al-ihram": "fajr-r1-takbir",
+    "ruku-1": "fajr-r1-ruku",
+    "sujud-1a": "fajr-r1-sujud-1",
+    "old-ruku-id": "fajr-r1-ruku"
+  },
+  "transitions": [
+    {
+      "from": "qiyam",
+      "to": "ruku",
+      "transitionType": "pose-change"
+    },
+    {
+      "from": "ruku",
+      "to": "standing-after-ruku",
+      "transitionType": "pose-change"
+    },
+    {
+      "from": "standing-after-ruku",
+      "to": "sujud",
+      "transitionType": "pose-change"
+    },
+    {
+      "from": "sujud",
+      "to": "sitting-between-sujud",
+      "transitionType": "pose-change"
+    },
+    {
+      "from": "sitting-between-sujud",
+      "to": "sujud",
+      "transitionType": "pose-change"
+    },
+    {
+      "from": "qiyam",
+      "to": "qiyam",
+      "transitionType": "content-only"
+    }
+  ],
+  "completion": {
+    "labelDe": "Fajr abgeschlossen",
+    "options": [
+      "retry",
+      "overview"
+    ],
+    "noGamification": true,
+    "noReligiousJudgement": true
+  },
+  "readyForApprovedContent": true
 }
