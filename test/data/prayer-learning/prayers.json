@@ -1,0 +1,111 @@
+{
+  "version": 4,
+  "phase": 9,
+  "audioEnabled": false,
+  "characters": {
+    "male": "dar-prayer-male-v1",
+    "female": "dar-prayer-female-v1"
+  },
+  "prayers": [
+    {
+      "id": "fajr",
+      "titleDe": "Fajr",
+      "titleAr": "صلاة الفجر",
+      "rakat": 2,
+      "status": "prototype",
+      "masterFile": "fajr.json"
+    },
+    {
+      "id": "dhuhr",
+      "titleDe": "Ẓuhr",
+      "titleAr": "الظهر",
+      "rakat": 4,
+      "status": "planned",
+      "masterFile": null
+    },
+    {
+      "id": "asr",
+      "titleDe": "ʿAṣr",
+      "titleAr": "العصر",
+      "rakat": 4,
+      "status": "planned",
+      "masterFile": null
+    },
+    {
+      "id": "maghrib",
+      "titleDe": "Maġrib",
+      "titleAr": "المغرب",
+      "rakat": 3,
+      "status": "planned",
+      "masterFile": null
+    },
+    {
+      "id": "isha",
+      "titleDe": "ʿIšāʾ",
+      "titleAr": "العشاء",
+      "rakat": 4,
+      "status": "planned",
+      "masterFile": null
+    }
+  ],
+  "quickPositions": [
+    {
+      "id": "takbir",
+      "titleDe": "Takbīrat al-Iḥrām",
+      "titleAr": "تكبيرة الإحرام",
+      "stepTemplateId": "takbir",
+      "defaultSequenceId": "fajr-r1-takbir"
+    },
+    {
+      "id": "qiyam",
+      "titleDe": "Qiyām",
+      "titleAr": "القيام",
+      "stepTemplateId": "qiyam",
+      "defaultSequenceId": "fajr-r1-qiyam"
+    },
+    {
+      "id": "ruku",
+      "titleDe": "Rukūʿ",
+      "titleAr": "الركوع",
+      "stepTemplateId": "ruku",
+      "defaultSequenceId": "fajr-r1-ruku",
+      "integrationBlock": "Recitation + Ruku + Standing After Ruku"
+    },
+    {
+      "id": "standing-after-ruku",
+      "titleDe": "Aufrichten",
+      "titleAr": "الاعتدال بعد الركوع",
+      "stepTemplateId": "standing-after-ruku",
+      "defaultSequenceId": "fajr-r1-standing-after-ruku",
+      "optionalUntilApproved": true
+    },
+    {
+      "id": "sujud",
+      "titleDe": "Suǧūd",
+      "titleAr": "السجود",
+      "stepTemplateId": "sujud",
+      "defaultSequenceId": "fajr-r1-sujud-1"
+    },
+    {
+      "id": "sitting",
+      "titleDe": "Sitzen",
+      "titleAr": "الجلسة",
+      "stepTemplateId": "sitting-between-sujud",
+      "defaultSequenceId": "fajr-r1-sitting"
+    },
+    {
+      "id": "tashahhud",
+      "titleDe": "Tašahhud",
+      "titleAr": "التشهد",
+      "stepTemplateId": "tashahhud",
+      "defaultSequenceId": "fajr-r2-tashahhud"
+    },
+    {
+      "id": "taslim",
+      "titleDe": "Taslīm",
+      "titleAr": "التسليم",
+      "stepTemplateId": "taslim",
+      "defaultSequenceId": "fajr-r2-taslim-right"
+    }
+  ]
+}

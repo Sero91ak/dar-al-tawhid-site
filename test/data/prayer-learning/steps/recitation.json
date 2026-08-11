@@ -1,0 +1,46 @@
+{
+  "id": "recitation",
+  "titleDe": "Rezitation",
+  "titleAr": "القراءة",
+  "category": "recitation",
+  "poseReuseAllowed": true,
+  "poseReuse": true,
+  "poseId": "qiyam",
+  "malePoseId": "qiyam",
+  "femalePoseId": "qiyam",
+  "femalePoseStatus": "pending_review",
+  "detailSlots": [],
+  "checkAreas": [
+    "standing",
+    "al-fatihah",
+    "additional-quran",
+    "order",
+    "transition-ruku"
+  ],
+  "textModuleIds": [
+    "fatiha-ref"
+  ],
+  "texts": [],
+  "sourceClaimIds": [],
+  "claimSlotIds": [
+    "recitation-standing",
+    "recitation-al-fatihah",
+    "recitation-additional-quran",
+    "recitation-order",
+    "recitation-transition-ruku"
+  ],
+  "quranSource": {
+    "type": "existing-quran-db",
+    "surah": 1,
+    "ayahStart": 1,
+    "ayahEnd": 7,
+    "ayahRange": "1:1-7",
+    "titleAr": "سورة الفاتحة",
+    "path": "content/quran/001.json"
+  },
+  "variants": [],
+  "verificationStatus": "research",
+  "audioId": null,
+  "audioEnabled": false,
+  "audioVisible": false
+}

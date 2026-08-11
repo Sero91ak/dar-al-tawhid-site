@@ -1,0 +1,126 @@
+{
+  "id": "fajr-r1-recitation-v1",
+  "aliases": ["recitation-fatiha-ref-v1"],
+  "stepId": "recitation",
+  "prayerId": "fajr",
+  "rakAh": 1,
+  "poseId": "qiyam",
+  "poseReuse": true,
+  "titleDe": "Rezitation",
+  "titleAr": "القراءة",
+  "instructionDe": null,
+  "instructionText": null,
+  "arabic": null,
+  "transliteration": null,
+  "meaningDe": null,
+  "spokenText": null,
+  "doNotDuplicateQuranText": true,
+  "quranDatabaseReuse": true,
+  "quranRef": {
+    "type": "quran",
+    "surah": 1,
+    "ayahStart": 1,
+    "ayahEnd": 7
+  },
+  "quranSourcePath": "content/quran/001.json",
+  "modules": {
+    "openingRelated": {
+      "id": "recitation-opening-related-v1",
+      "status": "research",
+      "approved": false,
+      "note": "Separates Modul – nicht mit al-Fātiḥah vermischen",
+      "instructionText": null,
+      "sourceClaimIds": []
+    },
+    "alFatihah": {
+      "id": "recitation-al-fatihah-ref-v1",
+      "status": "research",
+      "approved": false,
+      "quranRef": {
+        "type": "quran",
+        "surah": 1,
+        "ayahStart": 1,
+        "ayahEnd": 7
+      },
+      "quranSourcePath": "content/quran/001.json",
+      "sourceClaimIds": ["recitation-al-fatihah"]
+    },
+    "additionalRecitation": {
+      "id": "recitation-additional-quran-v1",
+      "status": "research",
+      "approved": false,
+      "note": "Zusätzliche Qurʾān-Rezitation nur wenn geprüft",
+      "quranRef": null,
+      "instructionText": null,
+      "sourceClaimIds": ["recitation-additional-quran"]
+    },
+    "silentAudibleMetadata": {
+      "id": "recitation-silent-audible-v1",
+      "status": "research",
+      "approved": false,
+      "note": "Gebetsabhängig (laut/leise) – datenbasiert pro prayerId",
+      "instructionText": null,
+      "sourceClaimIds": []
+    },
+    "transitionToRuku": {
+      "id": "recitation-transition-ruku-v1",
+      "status": "research",
+      "approved": false,
+      "instructionText": null,
+      "sourceClaimIds": ["recitation-transition-ruku"]
+    }
+  },
+  "sourceClaimIds": [
+    "recitation-standing",
+    "recitation-al-fatihah",
+    "recitation-additional-quran",
+    "recitation-order",
+    "recitation-transition-ruku"
+  ],
+  "relatedClaimSlotIds": [
+    "recitation-standing",
+    "recitation-al-fatihah",
+    "recitation-additional-quran",
+    "recitation-order",
+    "recitation-transition-ruku"
+  ],
+  "variantIds": [],
+  "defaultVariantId": null,
+  "status": "research",
+  "reviewPass1": false,
+  "reviewPass2": false,
+  "approved": false,
+  "audioId": null,
+  "audioEnabled": false,
+  "audioVisible": false,
+  "audioPreload": false,
+  "revision": 3,
+  "contentHash": null,
+  "selfApproved": false,
+  "aiGenerated": false,
+  "integrationBlock": "Recitation + Ruku + Standing After Ruku",
+  "phase": 9,
+  "notes": "Phase 9: Qurʾān-Text ausschließlich aus content/quran/001.json. Keine zweite al-Fātiḥah-Kopie. Pflicht/Säule/Sunnah-Darstellung bleibt review-pflichtig.",
+  "review": {
+    "contentReview": {
+      "status": "pending",
+      "reviewedAt": null,
+      "reviewer": null
+    },
+    "sourceReview": {
+      "status": "pending",
+      "reviewedAt": null,
+      "reviewer": null
+    },
+    "reviewPass1": {
+      "passed": false,
+      "reviewedAt": null,
+      "reviewer": null
+    },
+    "reviewPass2": {
+      "passed": false,
+      "reviewedAt": null,
+      "reviewer": null
+    }
+  }
+}

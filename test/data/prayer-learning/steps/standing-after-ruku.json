@@ -1,0 +1,36 @@
+{
+  "id": "standing-after-ruku",
+  "titleDe": "Aufrichten",
+  "titleAr": "الاعتدال بعد الركوع",
+  "category": "standing",
+  "poseReuseAllowed": true,
+  "poseReuseNote": "Nur nach Review – qiyam != automatisch standing-after-ruku",
+  "malePoseId": "standing-after-ruku",
+  "femalePoseId": "standing-after-ruku",
+  "femalePoseStatus": "pending_review",
+  "detailSlots": [],
+  "checkAreas": [
+    "rise-motion",
+    "complete-upright",
+    "hand-related",
+    "text-during-rise",
+    "text-after-rise",
+    "transition-to-sujud"
+  ],
+  "textModuleIds": [
+    "standing-during-rise",
+    "standing-after-rise"
+  ],
+  "claimSlotIds": [
+    "standing-rise-motion",
+    "standing-complete-upright-position",
+    "standing-hand-related-detail",
+    "standing-spoken-text-during-rise",
+    "standing-spoken-text-after-rise",
+    "standing-transition-to-sujud"
+  ],
+  "variants": [],
+  "verificationStatus": "research",
+  "audioId": null,
+  "note": "Gesprochene Texte (duringRise / afterStanding) nicht vermischen. Eigene Lernstellung vor Suǧūd."
+}

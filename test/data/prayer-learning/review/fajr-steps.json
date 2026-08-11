@@ -1,0 +1,810 @@
+{
+  "version": 1,
+  "phase": 9,
+  "prayerId": "fajr",
+  "statusValues": [
+    "draft",
+    "research",
+    "source_check",
+    "pose_check",
+    "review_pass_1",
+    "review_pass_2",
+    "approved",
+    "rejected"
+  ],
+  "zeroTrust": true,
+  "selfApprovalForbidden": true,
+  "productionEnabled": false,
+  "steps": [
+    {
+      "id": "takbir",
+      "titleDe": "Takbīrat al-Iḥrām",
+      "titleAr": "تكبيرة الإحرام",
+      "contentId": "takbir-main-v1",
+      "poseId": "takbir",
+      "status": "research",
+      "contentApproved": false,
+      "sourceCoverageApproved": false,
+      "poseApproved": false,
+      "malePoseApproved": false,
+      "femalePoseApproved": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "rejected": false,
+      "revision": 1,
+      "contentHash": null,
+      "review": {
+        "contentReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "maleVisualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null
+      },
+      "femaleVisualChecks": {
+        "niqabConsistent": null,
+        "noRecognizableFace": null,
+        "noChestContour": null,
+        "noWaistContour": null,
+        "noHipContour": null,
+        "noButtockContour": null,
+        "looseGarment": null,
+        "sleevesClosed": null,
+        "noForearmsVisible": null,
+        "sameMasterFigure": null,
+        "sleevesStayClosedOnHandRaise": null
+      },
+      "claimIds": [
+        "takbir-standing-position",
+        "takbir-hand-raising",
+        "takbir-hand-height",
+        "takbir-palm-direction",
+        "takbir-fingers",
+        "takbir-spoken-wording",
+        "takbir-transition-to-qiyam"
+      ],
+      "detailClaimIds": [],
+      "notesInternal": null,
+      "audioId": null,
+      "integrationBlock": "Takbir + Qiyam"
+    },
+    {
+      "id": "qiyam",
+      "titleDe": "Qiyām",
+      "titleAr": "القيام",
+      "contentId": "qiyam-main-v1",
+      "poseId": "qiyam",
+      "status": "research",
+      "contentApproved": false,
+      "sourceCoverageApproved": false,
+      "poseApproved": false,
+      "malePoseApproved": false,
+      "femalePoseApproved": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "rejected": false,
+      "revision": 1,
+      "contentHash": null,
+      "review": {
+        "contentReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "maleVisualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null
+      },
+      "femaleVisualChecks": {
+        "niqabConsistent": null,
+        "noRecognizableFace": null,
+        "noChestContour": null,
+        "noWaistContour": null,
+        "noHipContour": null,
+        "noButtockContour": null,
+        "looseGarment": null,
+        "sleevesClosed": null,
+        "noForearmsVisible": null,
+        "sameMasterFigure": null
+      },
+      "claimIds": [
+        "qiyam-standing",
+        "qiyam-hand-position",
+        "qiyam-right-left-hand-relation",
+        "qiyam-foot-position",
+        "qiyam-gaze",
+        "qiyam-transition-to-recitation"
+      ],
+      "detailClaimIds": [],
+      "notesInternal": null,
+      "audioId": null,
+      "integrationBlock": "Takbir + Qiyam"
+    },
+    {
+      "id": "recitation",
+      "titleDe": "Rezitation",
+      "titleAr": "القراءة",
+      "contentId": "fajr-r1-recitation-v1",
+      "poseId": "qiyam",
+      "status": "research",
+      "contentApproved": false,
+      "sourceCoverageApproved": false,
+      "poseApproved": false,
+      "malePoseApproved": false,
+      "femalePoseApproved": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "rejected": false,
+      "revision": 1,
+      "contentHash": null,
+      "review": {
+        "contentReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "maleVisualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null
+      },
+      "femaleVisualChecks": {
+        "niqabConsistent": null,
+        "noRecognizableFace": null,
+        "noChestContour": null,
+        "noWaistContour": null,
+        "noHipContour": null,
+        "noButtockContour": null,
+        "looseGarment": null,
+        "sleevesClosed": null,
+        "noForearmsVisible": null,
+        "sameMasterFigure": null
+      },
+      "claimIds": [
+        "recitation-fatiha-source",
+        "recitation-additional"
+      ],
+      "detailClaimIds": [],
+      "notesInternal": null,
+      "audioId": null,
+      "poseReuse": true,
+      "integrationBlock": "Recitation + Ruku + Standing After Ruku"
+    },
+    {
+      "id": "ruku",
+      "titleDe": "Rukūʿ",
+      "titleAr": "الركوع",
+      "contentId": "ruku-main-v1",
+      "poseId": "ruku",
+      "status": "research",
+      "contentApproved": false,
+      "sourceCoverageApproved": false,
+      "poseApproved": false,
+      "malePoseApproved": false,
+      "femalePoseApproved": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "rejected": false,
+      "revision": 1,
+      "contentHash": null,
+      "review": {
+        "contentReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "maleVisualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null
+      },
+      "femaleVisualChecks": {
+        "niqabConsistent": null,
+        "noRecognizableFace": null,
+        "noChestContour": null,
+        "noWaistContour": null,
+        "noHipContour": null,
+        "noButtockContour": null,
+        "looseGarment": null,
+        "sleevesClosed": null,
+        "noForearmsVisible": null,
+        "sameMasterFigure": null
+      },
+      "claimIds": [
+        "ruku-body-bending",
+        "ruku-hands-knees",
+        "ruku-back",
+        "ruku-head",
+        "ruku-dhikr",
+        "ruku-transition"
+      ],
+      "detailClaimIds": [],
+      "notesInternal": null,
+      "audioId": null,
+      "integrationBlock": "Recitation + Ruku + Standing After Ruku",
+      "details": [
+        {
+          "id": "ruku-hands",
+          "label": "Hände",
+          "approved": false
+        },
+        {
+          "id": "ruku-back",
+          "label": "Rücken",
+          "approved": false
+        },
+        {
+          "id": "ruku-legs",
+          "label": "Beine",
+          "approved": false
+        }
+      ]
+    },
+    {
+      "id": "standing-after-ruku",
+      "titleDe": "Aufrichten",
+      "titleAr": "الاعتدال بعد الركوع",
+      "contentId": "standing-after-ruku-v1",
+      "poseId": "standing-after-ruku",
+      "status": "research",
+      "contentApproved": false,
+      "sourceCoverageApproved": false,
+      "poseApproved": false,
+      "malePoseApproved": false,
+      "femalePoseApproved": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "rejected": false,
+      "revision": 1,
+      "contentHash": null,
+      "review": {
+        "contentReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "maleVisualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null
+      },
+      "femaleVisualChecks": {
+        "niqabConsistent": null,
+        "noRecognizableFace": null,
+        "noChestContour": null,
+        "noWaistContour": null,
+        "noHipContour": null,
+        "noButtockContour": null,
+        "looseGarment": null,
+        "sleevesClosed": null,
+        "noForearmsVisible": null,
+        "sameMasterFigure": null
+      },
+      "claimIds": [
+        "standing-after-ruku-rise",
+        "standing-after-ruku-text-while",
+        "standing-after-ruku-text-after",
+        "standing-after-ruku-hands"
+      ],
+      "detailClaimIds": [],
+      "notesInternal": null,
+      "audioId": null,
+      "integrationBlock": "Recitation + Ruku + Standing After Ruku"
+    },
+    {
+      "id": "sujud",
+      "titleDe": "Suǧūd",
+      "titleAr": "السجود",
+      "contentId": "sujud-main-v1",
+      "poseId": "sujud",
+      "status": "research",
+      "contentApproved": false,
+      "sourceCoverageApproved": false,
+      "poseApproved": false,
+      "malePoseApproved": false,
+      "femalePoseApproved": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "rejected": false,
+      "revision": 1,
+      "contentHash": null,
+      "review": {
+        "contentReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "maleVisualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null
+      },
+      "femaleVisualChecks": {
+        "niqabConsistent": null,
+        "noRecognizableFace": null,
+        "noChestContour": null,
+        "noWaistContour": null,
+        "noHipContour": null,
+        "noButtockContour": null,
+        "looseGarment": null,
+        "sleevesClosed": null,
+        "noForearmsVisible": null,
+        "sameMasterFigure": null
+      },
+      "claimIds": [
+        "sujud-forehead-nose",
+        "sujud-hands",
+        "sujud-knees",
+        "sujud-feet",
+        "sujud-arms",
+        "sujud-dhikr"
+      ],
+      "detailClaimIds": [],
+      "notesInternal": null,
+      "audioId": null
+    },
+    {
+      "id": "sitting-between-sujud",
+      "titleDe": "Sitzen",
+      "titleAr": "الجلسة",
+      "contentId": "sitting-between-sujud-main-v1",
+      "poseId": "sitting-between-sujud",
+      "status": "research",
+      "contentApproved": false,
+      "sourceCoverageApproved": false,
+      "poseApproved": false,
+      "malePoseApproved": false,
+      "femalePoseApproved": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "rejected": false,
+      "revision": 1,
+      "contentHash": null,
+      "review": {
+        "contentReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "maleVisualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null
+      },
+      "femaleVisualChecks": {
+        "niqabConsistent": null,
+        "noRecognizableFace": null,
+        "noChestContour": null,
+        "noWaistContour": null,
+        "noHipContour": null,
+        "noButtockContour": null,
+        "looseGarment": null,
+        "sleevesClosed": null,
+        "noForearmsVisible": null,
+        "sameMasterFigure": null
+      },
+      "claimIds": [
+        "sitting-legs",
+        "sitting-feet",
+        "sitting-hands",
+        "sitting-dhikr"
+      ],
+      "detailClaimIds": [],
+      "notesInternal": null,
+      "audioId": null
+    },
+    {
+      "id": "rise-next-rakah",
+      "titleDe": "Aufstehen",
+      "titleAr": "القيام للركعة",
+      "contentId": "rise-next-rakah-main-v1",
+      "poseId": "rise-next-rakah",
+      "status": "research",
+      "contentApproved": false,
+      "sourceCoverageApproved": false,
+      "poseApproved": false,
+      "malePoseApproved": false,
+      "femalePoseApproved": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "rejected": false,
+      "revision": 1,
+      "contentHash": null,
+      "review": {
+        "contentReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "maleVisualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null
+      },
+      "femaleVisualChecks": {
+        "niqabConsistent": null,
+        "noRecognizableFace": null,
+        "noChestContour": null,
+        "noWaistContour": null,
+        "noHipContour": null,
+        "noButtockContour": null,
+        "looseGarment": null,
+        "sleevesClosed": null,
+        "noForearmsVisible": null,
+        "sameMasterFigure": null
+      },
+      "claimIds": [
+        "rise-next-rakah-motion"
+      ],
+      "detailClaimIds": [],
+      "notesInternal": null,
+      "audioId": null
+    },
+    {
+      "id": "tashahhud",
+      "titleDe": "Tašahhud",
+      "titleAr": "التشهد",
+      "contentId": "tashahhud-main-v1",
+      "poseId": "tashahhud",
+      "status": "research",
+      "contentApproved": false,
+      "sourceCoverageApproved": false,
+      "poseApproved": false,
+      "malePoseApproved": false,
+      "femalePoseApproved": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "rejected": false,
+      "revision": 1,
+      "contentHash": null,
+      "review": {
+        "contentReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "maleVisualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null
+      },
+      "femaleVisualChecks": {
+        "niqabConsistent": null,
+        "noRecognizableFace": null,
+        "noChestContour": null,
+        "noWaistContour": null,
+        "noHipContour": null,
+        "noButtockContour": null,
+        "looseGarment": null,
+        "sleevesClosed": null,
+        "noForearmsVisible": null,
+        "sameMasterFigure": null
+      },
+      "claimIds": [
+        "tashahhud-sitting",
+        "tashahhud-hands",
+        "tashahhud-index",
+        "tashahhud-text",
+        "salat-ibrahimiyya",
+        "dua-before-taslim"
+      ],
+      "detailClaimIds": [],
+      "notesInternal": null,
+      "audioId": null
+    },
+    {
+      "id": "taslim",
+      "titleDe": "Taslīm",
+      "titleAr": "التسليم",
+      "contentId": "taslim-main-v1",
+      "poseId": "taslim-right",
+      "status": "research",
+      "contentApproved": false,
+      "sourceCoverageApproved": false,
+      "poseApproved": false,
+      "malePoseApproved": false,
+      "femalePoseApproved": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "rejected": false,
+      "revision": 1,
+      "contentHash": null,
+      "review": {
+        "contentReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "maleVisualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null
+      },
+      "femaleVisualChecks": {
+        "niqabConsistent": null,
+        "noRecognizableFace": null,
+        "noChestContour": null,
+        "noWaistContour": null,
+        "noHipContour": null,
+        "noButtockContour": null,
+        "looseGarment": null,
+        "sleevesClosed": null,
+        "noForearmsVisible": null,
+        "sameMasterFigure": null
+      },
+      "claimIds": [
+        "taslim-head",
+        "taslim-wording",
+        "taslim-sides"
+      ],
+      "detailClaimIds": [],
+      "notesInternal": null,
+      "audioId": null
+    }
+  ],
+  "integrationBlock": "Recitation + Ruku + Standing After Ruku"
+}
