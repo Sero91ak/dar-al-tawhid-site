@@ -1,0 +1,33 @@
+{
+  "id": "sitting-between-sujud",
+  "titleDe": "Sitzen zwischen den Suǧūd",
+  "titleAr": "الجلسة بين السجدتين",
+  "category": "sitting",
+  "poseReuseAllowed": true,
+  "malePoseId": "sitting-between-sujud",
+  "femalePoseId": "sitting-between-sujud",
+  "femalePoseStatus": "pending_review",
+  "detailSlots": [],
+  "checkAreas": [
+    "leg-position",
+    "foot-position",
+    "sitting-posture",
+    "hands",
+    "fingers",
+    "back",
+    "gaze",
+    "dhikr-dua"
+  ],
+  "textModuleIds": [
+    "sitting-between-sujud-dhikr"
+  ],
+  "claimSlotIds": [
+    "sitting-legs",
+    "sitting-feet",
+    "sitting-hands",
+    "sitting-dhikr"
+  ],
+  "variants": [],
+  "verificationStatus": "research",
+  "audioId": null
+}

@@ -1,0 +1,80 @@
+{
+  "id": "sujud",
+  "titleDe": "Suǧūd",
+  "titleAr": "السجود",
+  "category": "prostration",
+  "poseReuseAllowed": true,
+  "malePoseId": "sujud",
+  "femalePoseId": "sujud",
+  "femalePoseStatus": "pending_review",
+  "detailSlots": [
+    "hands",
+    "knees",
+    "feet"
+  ],
+  "checkAreas": [
+    "forehead",
+    "nose",
+    "hands",
+    "knees",
+    "feet",
+    "toes",
+    "arms",
+    "elbows",
+    "belly",
+    "thighs",
+    "body-distance",
+    "gaze",
+    "dhikr"
+  ],
+  "textModuleIds": [
+    "sujud-dhikr"
+  ],
+  "claimSlotIds": [
+    "sujud-forehead-nose",
+    "sujud-hands",
+    "sujud-knees",
+    "sujud-feet",
+    "sujud-arms",
+    "sujud-dhikr"
+  ],
+  "femaleAssetRules": [
+    "wide-cloth",
+    "no-chest-contour",
+    "no-back-contour",
+    "no-waist-contour",
+    "no-hip-contour",
+    "no-buttock-contour",
+    "niqab-correct",
+    "sleeves-closed"
+  ],
+  "variants": [],
+  "verificationStatus": "research",
+  "audioId": null,
+  "details": [
+    {
+      "id": "hands",
+      "label": "Hände",
+      "assetId": null,
+      "sourceClaimIds": [],
+      "approved": false,
+      "status": "research"
+    },
+    {
+      "id": "knees",
+      "label": "Knie",
+      "assetId": null,
+      "sourceClaimIds": [],
+      "approved": false,
+      "status": "research"
+    },
+    {
+      "id": "feet",
+      "label": "Füße",
+      "assetId": null,
+      "sourceClaimIds": [],
+      "approved": false,
+      "status": "research"
+    }
+  ]
+}

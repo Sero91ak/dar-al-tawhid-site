@@ -1,0 +1,30 @@
+{
+  "version": 3,
+  "phase": 3,
+  "audioEnabled": false,
+  "environment": "test",
+  "characters": {
+    "male": "dar-prayer-male-v1",
+    "female": "dar-prayer-female-v1"
+  },
+  "paths": {
+    "prayers": "prayers.json",
+    "fajrMaster": "fajr.json",
+    "steps": "steps/",
+    "texts": "texts/",
+    "sources": "sources/",
+    "characters": "characters/",
+    "assets": "assets/poses-registry.json",
+    "audit": "audit/"
+  },
+  "engine": {
+    "composeFromSequence": true,
+    "poseReuse": true,
+    "renderers": [
+      "swipe",
+      "scroll"
+    ],
+    "productionApprovedAssetsOnly": true,
+    "testPendingAssetsAllowed": true
+  }
+}

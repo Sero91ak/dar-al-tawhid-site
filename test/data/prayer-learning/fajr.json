@@ -1,0 +1,186 @@
+{
+  "id": "fajr",
+  "titleDe": "Fajr",
+  "titleAr": "صلاة الفجر",
+  "rakAhCount": 2,
+  "rakat": 2,
+  "audioEnabled": false,
+  "phase": 3,
+  "engine": "compose-from-templates",
+  "verificationNote": "Phase-3-Master: Schritte/Posen/Claims modular. Kein Schritt approved ohne Quellenprüfung.",
+  "sequence": [
+    "fajr-r1-takbir",
+    "fajr-r1-qiyam",
+    "fajr-r1-recitation",
+    "fajr-r1-ruku",
+    "fajr-r1-standing-after-ruku",
+    "fajr-r1-sujud-1",
+    "fajr-r1-sitting",
+    "fajr-r1-sujud-2",
+    "fajr-r1-rise",
+    "fajr-r2-qiyam",
+    "fajr-r2-recitation",
+    "fajr-r2-ruku",
+    "fajr-r2-standing-after-ruku",
+    "fajr-r2-sujud-1",
+    "fajr-r2-sitting",
+    "fajr-r2-sujud-2",
+    "fajr-r2-tashahhud",
+    "fajr-r2-taslim-right",
+    "fajr-r2-taslim-left"
+  ],
+  "sequenceSteps": [
+    {
+      "id": "fajr-r1-takbir",
+      "rakAh": 1,
+      "order": 1,
+      "templateId": "takbir",
+      "deepLink": "takbir"
+    },
+    {
+      "id": "fajr-r1-qiyam",
+      "rakAh": 1,
+      "order": 2,
+      "templateId": "qiyam",
+      "deepLink": "qiyam"
+    },
+    {
+      "id": "fajr-r1-recitation",
+      "rakAh": 1,
+      "order": 3,
+      "templateId": "recitation",
+      "deepLink": "recitation",
+      "poseReuseFrom": "qiyam"
+    },
+    {
+      "id": "fajr-r1-ruku",
+      "rakAh": 1,
+      "order": 4,
+      "templateId": "ruku",
+      "deepLink": "ruku"
+    },
+    {
+      "id": "fajr-r1-standing-after-ruku",
+      "rakAh": 1,
+      "order": 5,
+      "templateId": "standing-after-ruku",
+      "deepLink": "standing-after-ruku"
+    },
+    {
+      "id": "fajr-r1-sujud-1",
+      "rakAh": 1,
+      "order": 6,
+      "templateId": "sujud",
+      "deepLink": "sujud-1",
+      "instance": 1
+    },
+    {
+      "id": "fajr-r1-sitting",
+      "rakAh": 1,
+      "order": 7,
+      "templateId": "sitting-between-sujud",
+      "deepLink": "sitting"
+    },
+    {
+      "id": "fajr-r1-sujud-2",
+      "rakAh": 1,
+      "order": 8,
+      "templateId": "sujud",
+      "deepLink": "sujud-2",
+      "instance": 2,
+      "poseReuseFrom": "sujud"
+    },
+    {
+      "id": "fajr-r1-rise",
+      "rakAh": 1,
+      "order": 9,
+      "templateId": "standing-next-rakah",
+      "deepLink": "rise"
+    },
+    {
+      "id": "fajr-r2-qiyam",
+      "rakAh": 2,
+      "order": 10,
+      "templateId": "qiyam",
+      "deepLink": "qiyam",
+      "poseReuseFrom": "qiyam"
+    },
+    {
+      "id": "fajr-r2-recitation",
+      "rakAh": 2,
+      "order": 11,
+      "templateId": "recitation",
+      "deepLink": "recitation",
+      "poseReuseFrom": "qiyam"
+    },
+    {
+      "id": "fajr-r2-ruku",
+      "rakAh": 2,
+      "order": 12,
+      "templateId": "ruku",
+      "deepLink": "ruku",
+      "poseReuseFrom": "ruku"
+    },
+    {
+      "id": "fajr-r2-standing-after-ruku",
+      "rakAh": 2,
+      "order": 13,
+      "templateId": "standing-after-ruku",
+      "deepLink": "standing-after-ruku",
+      "poseReuseFrom": "standing-after-ruku"
+    },
+    {
+      "id": "fajr-r2-sujud-1",
+      "rakAh": 2,
+      "order": 14,
+      "templateId": "sujud",
+      "deepLink": "sujud-1",
+      "instance": 1,
+      "poseReuseFrom": "sujud"
+    },
+    {
+      "id": "fajr-r2-sitting",
+      "rakAh": 2,
+      "order": 15,
+      "templateId": "sitting-between-sujud",
+      "deepLink": "sitting",
+      "poseReuseFrom": "sitting-between-sujud"
+    },
+    {
+      "id": "fajr-r2-sujud-2",
+      "rakAh": 2,
+      "order": 16,
+      "templateId": "sujud",
+      "deepLink": "sujud-2",
+      "instance": 2,
+      "poseReuseFrom": "sujud"
+    },
+    {
+      "id": "fajr-r2-tashahhud",
+      "rakAh": 2,
+      "order": 17,
+      "templateId": "tashahhud",
+      "deepLink": "tashahhud"
+    },
+    {
+      "id": "fajr-r2-taslim-right",
+      "rakAh": 2,
+      "order": 18,
+      "templateId": "taslim",
+      "deepLink": "taslim",
+      "side": "right",
+      "malePoseId": "taslim-right",
+      "femalePoseId": "taslim-right"
+    },
+    {
+      "id": "fajr-r2-taslim-left",
+      "rakAh": 2,
+      "order": 19,
+      "templateId": "taslim",
+      "deepLink": "taslim-left",
+      "side": "left",
+      "malePoseId": "taslim-left",
+      "femalePoseId": "taslim-left"
+    }
+  ]
+}
