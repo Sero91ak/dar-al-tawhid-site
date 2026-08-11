@@ -1,18 +1,38 @@
 {
   "date": "2026-08-11",
   "timezone": "Europe/Berlin",
-  "generated": "2026-08-10T22:00:03.003Z",
-  "source": "dar-daily-scheduler-regenerated",
+  "generated": "2026-08-11T03:52:39.776Z",
+  "source": "dar-daily-no-repeat-rotation",
   "recommendation": {
-    "id": "abu-hatim-hadithkritik-ist-wissen-393",
-    "title": "Hadithkritik ist Wissen, nicht Vermutung",
-    "file": "hadith-393-hadithkritik-ist-wissen-nicht-vermutung.md",
-    "category": "Hadith",
-    "scholar": "Abū Ḥātim ar-Rāzī",
-    "snippet": "🖋️ Abū Ḥātim ar-Rāzī sagte über die Prüfung einiger Überlieferungen:"
+    "id": "imam-ahmad-nimm-von-dort-wo-die-imame-nahmen-283",
+    "title": "Imām Aḥmad: Nimm von dort, wo die Imāme nahmen",
+    "file": "imam-ahmad-nimm-von-dort-wo-die-imame-nahmen-283.md",
+    "category": "Manhaj",
+    "scholar": "Imām Aḥmad ibn Ḥanbal",
+    "snippet": "🖋️ Imām Aḥmad ibn Ḥanbal sagte:"
   },
   "dua": {
-    "snippet": "",
-    "category": ""
+    "id": "dua-002-sabr-thabbit",
+    "title": "Duʿāʾ um Geduld und festen Stand",
+    "snippet": "Unser Herr, gieße Geduld über uns aus, festige unsere Schritte und hilf uns gegen das ungläubige Volk.",
+    "category": "Standhaftigkeit"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 458,
+      "remaining": 445
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 85,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
