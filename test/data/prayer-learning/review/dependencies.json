@@ -1,0 +1,400 @@
+{
+  "version": 1,
+  "phase": 6,
+  "edges": [
+    {
+      "from": "takbir-starting-posture",
+      "to": "content:takbir",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "takbir-hand-raise",
+      "to": "content:takbir",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "takbir-hand-height",
+      "to": "content:takbir",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "takbir-palm-orientation",
+      "to": "content:takbir",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "takbir-finger-position",
+      "to": "content:takbir",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "takbir-timing",
+      "to": "content:takbir",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "takbir-wording",
+      "to": "content:takbir",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "takbir-transition",
+      "to": "content:takbir",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "qiyam-body-posture",
+      "to": "content:qiyam",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "qiyam-gaze",
+      "to": "content:qiyam",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "qiyam-hand-position",
+      "to": "content:qiyam",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "qiyam-foot-stance",
+      "to": "content:qiyam",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "qiyam-transition",
+      "to": "content:qiyam",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "recitation-fatiha-source",
+      "to": "content:recitation",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "recitation-additional",
+      "to": "content:recitation",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "ruku-body-bending",
+      "to": "content:ruku",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "ruku-hands-knees",
+      "to": "content:ruku",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "ruku-back",
+      "to": "content:ruku",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "ruku-head",
+      "to": "content:ruku",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "ruku-dhikr",
+      "to": "content:ruku",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "ruku-transition",
+      "to": "content:ruku",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "standing-after-ruku-rise",
+      "to": "content:standing-after-ruku",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "standing-after-ruku-text-while",
+      "to": "content:standing-after-ruku",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "standing-after-ruku-text-after",
+      "to": "content:standing-after-ruku",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "standing-after-ruku-hands",
+      "to": "content:standing-after-ruku",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "sujud-forehead-nose",
+      "to": "content:sujud",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "sujud-hands",
+      "to": "content:sujud",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "sujud-knees",
+      "to": "content:sujud",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "sujud-feet",
+      "to": "content:sujud",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "sujud-arms",
+      "to": "content:sujud",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "sujud-dhikr",
+      "to": "content:sujud",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "sitting-legs",
+      "to": "content:sitting-between-sujud",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "sitting-feet",
+      "to": "content:sitting-between-sujud",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "sitting-hands",
+      "to": "content:sitting-between-sujud",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "sitting-dhikr",
+      "to": "content:sitting-between-sujud",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "rise-next-rakah-motion",
+      "to": "content:standing-next-rakah",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "tashahhud-sitting",
+      "to": "content:tashahhud",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "tashahhud-hands",
+      "to": "content:tashahhud",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "tashahhud-index",
+      "to": "content:tashahhud",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "tashahhud-text",
+      "to": "content:tashahhud",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "salat-ibrahimiyya",
+      "to": "content:tashahhud",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "dua-before-taslim",
+      "to": "content:tashahhud",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "taslim-head",
+      "to": "content:taslim",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "taslim-wording",
+      "to": "content:taslim",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "taslim-sides",
+      "to": "content:taslim",
+      "type": "claim→content-step"
+    },
+    {
+      "from": "content:takbir-main-v1",
+      "to": "step:takbir",
+      "type": "content→step"
+    },
+    {
+      "from": "step:takbir",
+      "to": "prayer:fajr",
+      "type": "step→prayer"
+    },
+    {
+      "from": "pose:takbir",
+      "to": "step:takbir",
+      "type": "pose→step"
+    },
+    {
+      "from": "content:qiyam-main-v1",
+      "to": "step:qiyam",
+      "type": "content→step"
+    },
+    {
+      "from": "step:qiyam",
+      "to": "prayer:fajr",
+      "type": "step→prayer"
+    },
+    {
+      "from": "pose:qiyam",
+      "to": "step:qiyam",
+      "type": "pose→step"
+    },
+    {
+      "from": "content:recitation-fatiha-ref-v1",
+      "to": "step:recitation",
+      "type": "content→step"
+    },
+    {
+      "from": "step:recitation",
+      "to": "prayer:fajr",
+      "type": "step→prayer"
+    },
+    {
+      "from": "pose:recitation",
+      "to": "step:recitation",
+      "type": "pose→step"
+    },
+    {
+      "from": "content:ruku-main-v1",
+      "to": "step:ruku",
+      "type": "content→step"
+    },
+    {
+      "from": "step:ruku",
+      "to": "prayer:fajr",
+      "type": "step→prayer"
+    },
+    {
+      "from": "pose:ruku",
+      "to": "step:ruku",
+      "type": "pose→step"
+    },
+    {
+      "from": "content:standing-after-ruku-main-v1",
+      "to": "step:standing-after-ruku",
+      "type": "content→step"
+    },
+    {
+      "from": "step:standing-after-ruku",
+      "to": "prayer:fajr",
+      "type": "step→prayer"
+    },
+    {
+      "from": "pose:standing-after-ruku",
+      "to": "step:standing-after-ruku",
+      "type": "pose→step"
+    },
+    {
+      "from": "content:sujud-main-v1",
+      "to": "step:sujud",
+      "type": "content→step"
+    },
+    {
+      "from": "step:sujud",
+      "to": "prayer:fajr",
+      "type": "step→prayer"
+    },
+    {
+      "from": "pose:sujud",
+      "to": "step:sujud",
+      "type": "pose→step"
+    },
+    {
+      "from": "content:sitting-between-sujud-main-v1",
+      "to": "step:sitting-between-sujud",
+      "type": "content→step"
+    },
+    {
+      "from": "step:sitting-between-sujud",
+      "to": "prayer:fajr",
+      "type": "step→prayer"
+    },
+    {
+      "from": "pose:sitting-between-sujud",
+      "to": "step:sitting-between-sujud",
+      "type": "pose→step"
+    },
+    {
+      "from": "content:rise-next-rakah-main-v1",
+      "to": "step:standing-next-rakah",
+      "type": "content→step"
+    },
+    {
+      "from": "step:standing-next-rakah",
+      "to": "prayer:fajr",
+      "type": "step→prayer"
+    },
+    {
+      "from": "pose:standing-next-rakah",
+      "to": "step:standing-next-rakah",
+      "type": "pose→step"
+    },
+    {
+      "from": "content:tashahhud-main-v1",
+      "to": "step:tashahhud",
+      "type": "content→step"
+    },
+    {
+      "from": "step:tashahhud",
+      "to": "prayer:fajr",
+      "type": "step→prayer"
+    },
+    {
+      "from": "pose:tashahhud",
+      "to": "step:tashahhud",
+      "type": "pose→step"
+    },
+    {
+      "from": "content:taslim-main-v1",
+      "to": "step:taslim",
+      "type": "content→step"
+    },
+    {
+      "from": "step:taslim",
+      "to": "prayer:fajr",
+      "type": "step→prayer"
+    },
+    {
+      "from": "pose:taslim",
+      "to": "step:taslim",
+      "type": "pose→step"
+    }
+  ],
+  "note": "Source Claim → Content → Step → Prayer → Visitor UI; Source Claim → Pose → Step → Visitor UI",
+  "invalidationRules": {
+    "claimSourceChanged": [
+      "claim.approved=false",
+      "dependent content requires review"
+    ],
+    "poseAssetChanged": [
+      "characterConsistency=false",
+      "clothingReview=false",
+      "poseReview=false",
+      "approved=false"
+    ],
+    "claimRejected": [
+      "dependent approved content must be re-evaluated"
+    ],
+    "approvedContentEdited": [
+      "approved→modified→source_check/review required"
+    ]
+  }
+}
