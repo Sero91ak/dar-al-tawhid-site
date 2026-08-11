@@ -1,6 +1,6 @@
 /**
- * DAR AL TAWḤĪD — Gebet erlernen (Test · Visual Step Fix v648)
- * Eigenständige Lernwelt · Figure Stage Pflicht · Fajr 19 · Maġrib 28 · 4-Rakʿah 36
+ * DAR AL TAWḤĪD — Gebet erlernen (Test · 3D View + Visual Step v649)
+ * Eigenständige Lernwelt · Figure Stage Pflicht · 3D-Ansicht ein/aus
  * productionEnabled = false | audioVisible = false | TEST ONLY
  * Keine erfundenen religiösen Inhalte · keine Fake-/Silhouette-Ersatzfiguren
  */
@@ -21,8 +21,9 @@
   var POSE_PENDING_LABEL = "Lehrfigur folgt";
   var TEXTS_EMPTY_LABEL = "Noch keine geprüften Texte verfügbar.";
   var OFFLINE_EVIDENCE_LABEL = "Direktnachweis benötigt eine Internetverbindung.";
-  var PHASE = 14;
+  var PHASE = 15;
   var FIGURE_STAGE_REQUIRED = true;
+  var THREE_D_ENABLED = true;
   var PRAYER_IDS = ["fajr", "maghrib", "dhuhr", "asr", "isha"];
   var CHAR_MALE = "dar-prayer-male-v1";
   var CHAR_FEMALE = "dar-prayer-female-v1";
@@ -68,10 +69,67 @@
   }
 
   function wrapSurface(inner) {
-    return '<div class="prl-surface" data-prl-surface="1">' + inner + "</div>";
+    return (
+      '<div class="prl-surface" data-prl-surface="1">' +
+      inner +
+      threeDViewerShell() +
+      "</div>"
+    );
   }
 
-  var cache = { index: null, prayers: null, masters: {}, composed: {}, steps: {}, texts: null, claims: null, claimsById: null, registry: null, poses: { male: null, female: null }, poseSlots: { male: null, female: null }, poseIndex: null, contentIndex: null, contentById: {}, variantsIndex: null, searchIndex: null, validationDash: null, manifest: null, reviewIndex: null, reviewSteps: null, readiness: null, auditLog: null, dependencies: null, characters: {}, quranBySurah: {} };
+  function threeDViewerShell() {
+    if (!THREE_D_ENABLED) return "";
+    return (
+      '<div class="prl-3d" id="prl3dViewer" hidden data-prl-3d-root="1">' +
+      '<div class="prl-3d-backdrop" data-prl-3d-close tabindex="-1" aria-hidden="true"></div>' +
+      '<div class="prl-3d-panel" role="dialog" aria-modal="true" aria-labelledby="prl3dTitle">' +
+      '<header class="prl-3d-head">' +
+      '<div class="prl-3d-head-text">' +
+      '<span class="prl-3d-kicker">3D-Ansicht</span>' +
+      '<h3 id="prl3dTitle">Lehrfigur</h3>' +
+      "</div>" +
+      '<button type="button" class="prl-btn prl-3d-close" data-prl-3d-close aria-label="3D-Ansicht beenden">Beenden</button>' +
+      "</header>" +
+      '<div class="prl-3d-stage" data-prl-3d-stage>' +
+      '<div class="prl-3d-orbit" data-prl-3d-orbit>' +
+      '<div class="prl-3d-card" data-prl-3d-card>' +
+      '<img alt="" data-prl-3d-img decoding="async">' +
+      '<div class="prl-3d-pending" data-prl-3d-pending hidden>' +
+      "<b>Lehrfigur folgt</b><span>3D-Ansicht ist bereit, sobald die Figur geladen ist.</span>" +
+      "</div>" +
+      "</div>" +
+      "</div>" +
+      '<p class="prl-3d-hint">Ziehen zum Drehen · Finger oder Maus</p>' +
+      "</div>" +
+      '<div class="prl-3d-actions">' +
+      '<button type="button" class="prl-btn" data-prl-3d-reset>Zurücksetzen</button>' +
+      '<button type="button" class="prl-btn primary" data-prl-3d-close>3D beenden</button>' +
+      "</div>" +
+      "</div></div>"
+    );
+  }
+
+  function figureChromeHtml(opts) {
+    opts = opts || {};
+    var hasImg = !!opts.hasImage;
+    var title = opts.title || "Lehrfigur";
+    var src = opts.src || "";
+    return (
+      '<div class="prl-poseview-chrome">' +
+      '<button type="button" class="prl-3d-btn" data-prl-3d-open' +
+      (hasImg ? "" : ' data-prl-3d-empty="1"') +
+      ' data-prl-3d-title="' +
+      esc(title) +
+      '"' +
+      (src ? ' data-prl-3d-src="' + esc(src) + '"' : "") +
+      ' aria-label="3D-Ansicht öffnen">' +
+      "<b>3D</b><span>Ansicht</span>" +
+      "</button>" +
+      "</div>"
+    );
+  }
+
+  var cache = { index: null, prayers: null, masters: {}, composed: {}, steps: {}, texts: null, claims: null, claimsById: null, registry: null, poses: { male: null, female: null }, poseSlots: { male: null, female: null }, poseIndex: null, contentIndex: null, contentById: {}, variantsIndex: null, searchIndex: null, validationDash: null, manifest: null, reviewIndex: null, reviewSteps: null, readiness: null, auditLog: null, dependencies: null, characters: {}, quranBySurah: {}, poseProbe: {} };
   var listenersBound = false;
   var missingAssets = [];
   var validationErrors = [];
@@ -1421,6 +1479,47 @@
     };
   }
 
+  function expectedPoseFile(gender, poseId) {
+    var prefix = gender === "female" ? "female-v1-" : "male-v1-";
+    return prefix + String(poseId || "") + ".webp";
+  }
+
+  async function probePoseFile(gender, poseId) {
+    var g = gender === "female" ? "female" : "male";
+    var file = expectedPoseFile(g, poseId);
+    var url = ASSET_BASE + "characters/" + g + "/poses/" + file;
+    var avif = url.replace(/\.webp$/i, ".avif");
+    if (!cache.poseProbe) cache.poseProbe = {};
+    if (Object.prototype.hasOwnProperty.call(cache.poseProbe, url)) return cache.poseProbe[url];
+    async function exists(u) {
+      try {
+        var head = await fetch(u, { method: "HEAD", cache: "no-store" });
+        if (head && head.ok) return true;
+      } catch (e) {}
+      try {
+        var get = await fetch(u, { method: "GET", cache: "no-store" });
+        return !!(get && get.ok);
+      } catch (e2) {
+        return false;
+      }
+    }
+    var okWebp = await exists(url);
+    var okAvif = okWebp ? false : await exists(avif);
+    var hit = null;
+    if (okWebp || okAvif) {
+      hit = {
+        url: okWebp ? url : avif,
+        srcWebp: okWebp ? url : null,
+        srcAvif: okAvif ? avif : null,
+        file: file,
+        poseId: poseId,
+        gender: g
+      };
+    }
+    cache.poseProbe[url] = hit;
+    return hit;
+  }
+
   function figureStageFrame(opts) {
     opts = opts || {};
     var cid = opts.characterId || CHAR_MALE;
@@ -1431,7 +1530,6 @@
     var compact = !!opts.compact;
     var pendingKey = cid + ":" + poseKey + ":" + status;
     if (missingAssets.indexOf(pendingKey) < 0) missingAssets.push(pendingKey);
-    // Figure Stage bleibt IMMER im Layout — keine Silhouette / kein Stock-Ersatz
     return (
       '<div class="prl-poseview' +
       (compact ? " prl-poseview--compact" : "") +
@@ -1444,6 +1542,7 @@
       '" data-prl-pose-status="' +
       esc(status) +
       '">' +
+      figureChromeHtml({ hasImage: false, title: title }) +
       '<div class="prl-figure">' +
       '<div class="prl-figure-pending" data-prl-pose-placeholder="1">' +
       '<div class="prl-figure-frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>' +
@@ -1478,17 +1577,39 @@
       step.poseId ||
       (character === "female" ? step.femalePoseId || step.femalePose : step.malePoseId || step.malePose);
     var cid = characterIdFromKey(character);
+    var gender = character === "female" || cid === CHAR_FEMALE ? "female" : "male";
     var resolved = resolvePrayerPose({
       characterId: cid,
       poseId: poseKey,
       environment: isTestEnv() ? "test" : "production"
     });
     var label = "Darstellung der " + (step.titleDe || poseKey) + "-Stellung";
+    var title = step.titleDe || poseKey;
+
+    if ((!resolved.ok || !resolved.url) && isTestEnv()) {
+      var probed = await probePoseFile(gender, poseKey);
+      if (!probed && step.poseReuseFrom) probed = await probePoseFile(gender, step.poseReuseFrom);
+      if (probed) {
+        resolved = {
+          ok: true,
+          characterId: cid,
+          poseId: poseKey,
+          assetId: probed.file,
+          url: probed.url,
+          srcWebp: probed.srcWebp,
+          srcAvif: probed.srcAvif,
+          srcset: [],
+          from: "file-probe",
+          status: "probe-loaded"
+        };
+      }
+    }
+
     if (!resolved.ok || !resolved.url) {
       return figureStageFrame({
         characterId: cid,
         poseId: poseKey,
-        title: step.titleDe || poseKey,
+        title: title,
         status: resolved.reason || "MISSING",
         compact: !!opts.compact
       });
@@ -1505,8 +1626,11 @@
       '" data-prl-pose-id="' +
       esc(resolved.poseId) +
       '" data-prl-asset-id="' +
-      esc(resolved.assetId) +
-      '" data-prl-pose-status="approved">' +
+      esc(resolved.assetId || "") +
+      '" data-prl-pose-status="' +
+      esc(resolved.status || "approved") +
+      '">' +
+      figureChromeHtml({ hasImage: true, title: title, src: resolved.url }) +
       '<div class="prl-figure">' +
       "<picture>" +
       (resolved.srcAvif ? '<source type="image/avif" srcset="' + esc(resolved.srcAvif) + '">' : "") +
@@ -1517,7 +1641,7 @@
       srcset +
       ' alt="' +
       esc(label) +
-      '" loading="lazy" decoding="async" data-prl-pose-img>' +
+      '" class="prl-poseview-img" loading="eager" decoding="async" data-prl-pose-img>' +
       "</picture></div>" +
       '<div class="prl-poseview-floor" aria-hidden="true"></div></div>'
     );
@@ -2927,6 +3051,15 @@
       if (img.getAttribute("data-prl-err-bound") === "1") return;
       img.setAttribute("data-prl-err-bound", "1");
       img.addEventListener("error", function () {
+        var stage = img.closest(".prl-poseview");
+        if (stage) {
+          var btn = stage.querySelector("[data-prl-3d-open]");
+          if (btn) {
+            btn.setAttribute("data-prl-3d-empty", "1");
+            btn.removeAttribute("data-prl-3d-src");
+          }
+          stage.setAttribute("data-prl-pose-status", "MISSING");
+        }
         var wrap = document.createElement("div");
         wrap.className = "prl-figure-pending";
         wrap.setAttribute("data-prl-pose-placeholder", "1");
@@ -2934,6 +3067,170 @@
         if (img.parentNode) img.parentNode.replaceChild(wrap, img);
       });
     });
+  }
+
+  /* ─── 3D Ansicht (Bild → Orbit-Ansicht, wieder beendbar) ─── */
+  var threeDState = {
+    open: false,
+    yaw: 18,
+    pitch: -8,
+    dragging: false,
+    startX: 0,
+    startY: 0,
+    baseYaw: 18,
+    basePitch: -8,
+    src: "",
+    empty: false,
+    bound: false
+  };
+
+  function threeDRoot() {
+    return document.querySelector("[data-prl-3d-root]");
+  }
+
+  function threeDEls() {
+    var root = threeDRoot();
+    if (!root) return {};
+    return {
+      root: root,
+      img: root.querySelector("[data-prl-3d-img]"),
+      pending: root.querySelector("[data-prl-3d-pending]"),
+      card: root.querySelector("[data-prl-3d-card]"),
+      stage: root.querySelector("[data-prl-3d-stage]"),
+      title: root.querySelector("#prl3dTitle")
+    };
+  }
+
+  function applyThreeDTransform() {
+    var els = threeDEls();
+    if (!els.card) return;
+    els.card.style.transform =
+      "rotateX(" + threeDState.pitch + "deg) rotateY(" + threeDState.yaw + "deg) translateZ(12px)";
+  }
+
+  function setThreeDSource(src, empty, title) {
+    var els = threeDEls();
+    threeDState.src = src || "";
+    threeDState.empty = !!empty || !src;
+    if (els.title && title) els.title.textContent = title;
+    if (!els.img || !els.pending) return;
+    if (threeDState.empty) {
+      els.img.removeAttribute("src");
+      els.img.hidden = true;
+      els.pending.hidden = false;
+    } else {
+      els.img.src = threeDState.src;
+      els.img.alt = title || "Lehrfigur";
+      els.img.hidden = false;
+      els.pending.hidden = true;
+    }
+  }
+
+  function openThreeDFromButton(btn) {
+    if (!THREE_D_ENABLED || !btn) return;
+    var src = btn.getAttribute("data-prl-3d-src") || "";
+    var empty = btn.getAttribute("data-prl-3d-empty") === "1" || !src;
+    var title = btn.getAttribute("data-prl-3d-title") || "Lehrfigur";
+    if (!src) {
+      var stage = btn.closest(".prl-poseview");
+      var img = stage
+        ? stage.querySelector("[data-prl-pose-img], .prl-poseview-img, img")
+        : null;
+      if (img && img.getAttribute("src") && !img.hasAttribute("data-prl-pose-placeholder")) {
+        src = img.getAttribute("src");
+        empty = false;
+      }
+    }
+    openThreeD(src, empty, title);
+  }
+
+  function openThreeD(src, empty, title) {
+    var els = threeDEls();
+    if (!els.root) return;
+    bindThreeDPointers();
+    threeDState.open = true;
+    threeDState.yaw = 18;
+    threeDState.pitch = -8;
+    threeDState.dragging = false;
+    setThreeDSource(src, empty, title || "Lehrfigur");
+    applyThreeDTransform();
+    els.root.hidden = false;
+    els.root.setAttribute("aria-hidden", "false");
+    document.documentElement.classList.add("prl-3d-open");
+    document.body.classList.add("prl-3d-open");
+    try {
+      var closeBtn = els.root.querySelector("[data-prl-3d-close]");
+      if (closeBtn) closeBtn.focus();
+    } catch (_e) {}
+  }
+
+  function closeThreeD() {
+    var els = threeDEls();
+    threeDState.open = false;
+    threeDState.dragging = false;
+    if (els.stage) els.stage.classList.remove("is-dragging");
+    if (els.root) {
+      els.root.hidden = true;
+      els.root.setAttribute("aria-hidden", "true");
+    }
+    document.documentElement.classList.remove("prl-3d-open");
+    document.body.classList.remove("prl-3d-open");
+  }
+
+  function resetThreeD() {
+    threeDState.yaw = 18;
+    threeDState.pitch = -8;
+    applyThreeDTransform();
+  }
+
+  function onThreeDPointerDown(e) {
+    if (!threeDState.open) return;
+    if (e.button != null && e.button !== 0) return;
+    var els = threeDEls();
+    if (!els.stage) return;
+    threeDState.dragging = true;
+    threeDState.startX = e.clientX;
+    threeDState.startY = e.clientY;
+    threeDState.baseYaw = threeDState.yaw;
+    threeDState.basePitch = threeDState.pitch;
+    els.stage.classList.add("is-dragging");
+    try {
+      els.stage.setPointerCapture(e.pointerId);
+    } catch (_e) {}
+    e.preventDefault();
+  }
+
+  function onThreeDPointerMove(e) {
+    if (!threeDState.dragging) return;
+    var dx = e.clientX - threeDState.startX;
+    var dy = e.clientY - threeDState.startY;
+    threeDState.yaw = threeDState.baseYaw + dx * 0.35;
+    threeDState.pitch = Math.max(-28, Math.min(28, threeDState.basePitch - dy * 0.22));
+    applyThreeDTransform();
+  }
+
+  function onThreeDPointerUp(e) {
+    if (!threeDState.dragging) return;
+    threeDState.dragging = false;
+    var els = threeDEls();
+    if (els.stage) {
+      els.stage.classList.remove("is-dragging");
+      try {
+        els.stage.releasePointerCapture(e.pointerId);
+      } catch (_e) {}
+    }
+  }
+
+  function bindThreeDPointers() {
+    if (threeDState.bound) return;
+    var els = threeDEls();
+    if (!els.stage) return;
+    threeDState.bound = true;
+    els.stage.addEventListener("pointerdown", onThreeDPointerDown);
+    els.stage.addEventListener("pointermove", onThreeDPointerMove);
+    els.stage.addEventListener("pointerup", onThreeDPointerUp);
+    els.stage.addEventListener("pointercancel", onThreeDPointerUp);
+    els.stage.addEventListener("lostpointercapture", onThreeDPointerUp);
   }
 
   function ensureGlobalListeners() {
@@ -2954,6 +3251,7 @@
       if (!root) return;
       if (root.getAttribute("data-prl-root") === "learn") restoreLearnPosition(root);
       bindPoseImgFallback(root);
+      bindThreeDPointers();
       var learn = document.querySelector("[data-prl-root='learn']");
       if (learn) learn.classList.toggle("is-dual-shell", isDualLayout());
     } catch (err) {
@@ -2995,6 +3293,11 @@
   }
 
   function onKeydown(ev) {
+    if (threeDState.open && ev.key === "Escape") {
+      ev.preventDefault();
+      closeThreeD();
+      return;
+    }
     var root = document.querySelector("[data-prl-root='learn']");
     if (!root) return;
     if (sourceSheetOpen && ev.key === "Escape") {
@@ -3015,6 +3318,23 @@
   function onClick(ev) {
     var t = ev.target;
     if (!t || !t.closest) return;
+
+    if (t.closest("[data-prl-3d-close]")) {
+      ev.preventDefault();
+      closeThreeD();
+      return;
+    }
+    if (t.closest("[data-prl-3d-reset]")) {
+      ev.preventDefault();
+      resetThreeD();
+      return;
+    }
+    var threeDOpenBtn = t.closest("[data-prl-3d-open]");
+    if (threeDOpenBtn) {
+      ev.preventDefault();
+      openThreeDFromButton(threeDOpenBtn);
+      return;
+    }
 
     if (t.closest("[data-prl-sheet-close]")) {
       closeSourceSheet(false);
@@ -3204,6 +3524,9 @@
   }
 
   function onPopState() {
+    if (threeDState.open) {
+      closeThreeD();
+    }
     if (sourceSheetOpen) {
       closeSourceSheet(true);
     }

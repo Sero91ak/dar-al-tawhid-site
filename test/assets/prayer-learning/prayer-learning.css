@@ -626,3 +626,17 @@ html.prl-immersive .prl-figure-pending,
 html.prl-immersive .prl-figure-pending[data-prl-pose-placeholder]{
   min-height:0!important;
 }
+
+
+/* 3D Ansicht (base fallback v649) */
+.prl-poseview{position:relative}
+.prl-poseview-chrome{position:absolute;top:10px;right:10px;z-index:4}
+.prl-3d-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  min-height:34px;padding:6px 11px;border-radius:999px;
+  border:1px solid rgba(200,170,120,.4);
+  background:rgba(20,16,22,.9);color:#f2e8d8;
+  font-size:11px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
+}
+.prl-3d[hidden]{display:none!important}
+.prl-3d{position:fixed;inset:0;z-index:12050;display:grid;place-items:center}

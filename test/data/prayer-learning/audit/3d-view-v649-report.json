@@ -1,0 +1,32 @@
+{
+  "id": "gebet-erlernen-3d-view-v649",
+  "build": "app-shell-v649",
+  "scope": "test-only",
+  "features": {
+    "threeDButtonOnFigureStage": true,
+    "threeDOpenClose": true,
+    "threeDOrbitDrag": true,
+    "threeDReset": true,
+    "threeDEscapeClose": true,
+    "poseFileProbeOnTest": true
+  },
+  "honestAssetStatus": {
+    "malePoseImageFilesOnDisk": false,
+    "femalePoseImageFilesOnDisk": false,
+    "note": "Figuren erscheinen erst, wenn genehmigte Pose-Dateien (webp/avif) unter characters/{male,female}/poses/ geliefert werden. Keine Fake-/Silhouette-Ersatzbilder erzeugt."
+  },
+  "changedFiles": [
+    "test/assets/prayer-learning/prayer-learning.js",
+    "test/assets/prayer-learning/prayer-learning-premium.css",
+    "test/assets/prayer-learning/prayer-learning.css",
+    "test/index.html",
+    "test/version.json",
+    "test/service-worker.js",
+    "content/admin/change-scope-lock.json"
+  ],
+  "visitorFlow": [
+    "Auf Figure Stage: Button „3D Ansicht“ tippen",
+    "Bild öffnet sich in Orbit-Ansicht (ziehen zum Drehen)",
+    "Beenden / Escape schließt die 3D-Ansicht wieder"
+  ]
+}
