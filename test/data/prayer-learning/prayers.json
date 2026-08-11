@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "audioEnabled": false,
+  "characters": {
+    "male": "dar-prayer-male-v1",
+    "female": "dar-prayer-female-v1"
+  },
+  "prayers": [
+    {
+      "id": "fajr",
+      "titleDe": "Fajr",
+      "titleAr": "الفجر",
+      "rakat": 2,
+      "status": "prototype",
+      "dataFile": "fajr.json"
+    },
+    {
+      "id": "dhuhr",
+      "titleDe": "Dhuhr",
+      "titleAr": "الظهر",
+      "rakat": 4,
+      "status": "planned",
+      "dataFile": null
+    },
+    {
+      "id": "asr",
+      "titleDe": "ʿAṣr",
+      "titleAr": "العصر",
+      "rakat": 4,
+      "status": "planned",
+      "dataFile": null
+    },
+    {
+      "id": "maghrib",
+      "titleDe": "Maghrib",
+      "titleAr": "المغرب",
+      "rakat": 3,
+      "status": "planned",
+      "dataFile": null
+    },
+    {
+      "id": "isha",
+      "titleDe": "ʿIshāʾ",
+      "titleAr": "العشاء",
+      "rakat": 4,
+      "status": "planned",
+      "dataFile": null
+    }
+  ],
+  "quickPositions": [
+    { "id": "takbir", "titleDe": "Takbīr", "titleAr": "التكبير", "stepId": "takbirat-al-ihram" },
+    { "id": "qiyam", "titleDe": "Qiyām", "titleAr": "القيام", "stepId": "qiyam" },
+    { "id": "ruku", "titleDe": "Rukūʿ", "titleAr": "الركوع", "stepId": "ruku" },
+    { "id": "itidal", "titleDe": "Aufrichten", "titleAr": "الاعتدال", "stepId": "itidal" },
+    { "id": "sujud", "titleDe": "Suǧūd", "titleAr": "السجود", "stepId": "sujud-1" },
+    { "id": "jalsa", "titleDe": "Sitzen", "titleAr": "الجلوس", "stepId": "jalsa" },
+    { "id": "tashahhud", "titleDe": "Tašahhud", "titleAr": "التشهد", "stepId": "tashahhud" },
+    { "id": "taslim", "titleDe": "Taslīm", "titleAr": "التسليم", "stepId": "taslim-right" }
+  ]
+}
