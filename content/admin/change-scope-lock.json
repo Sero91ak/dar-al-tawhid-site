@@ -84,6 +84,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "gebet-erlernen-noble-compact-v650-2026-08-11",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Noble Kompakt-UI wie Duʿāʾ-Flächen: weniger Rahmen-Labyrinth, kleinere Figure Stage, Glow, Ladeleiste, Vers-Überblendung. Test only.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "gebet-erlernen-3d-view-v649-2026-08-11",
       "approvedBy": "user-explicit-test-only",
       "reason": "3D-Ansicht Button + Asset-Ladeprobe + View-Vervollständigung Gebet erlernen. Test only. Keine Fake-Posen erfinden.",

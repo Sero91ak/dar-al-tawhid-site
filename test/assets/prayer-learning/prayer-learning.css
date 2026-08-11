@@ -640,3 +640,18 @@ html.prl-immersive .prl-figure-pending[data-prl-pose-placeholder]{
 }
 .prl-3d[hidden]{display:none!important}
 .prl-3d{position:fixed;inset:0;z-index:12050;display:grid;place-items:center}
+
+
+/* v650 noble compact base soften */
+.prl-prayer-card,
+.prl-quick-grid button{
+  border-radius:999px;
+  border:0;
+  background:transparent;
+  padding:12px 16px;
+}
+.prl-prayer-list,.prl-quick-grid{gap:4px}
+.prl-controls-row,.prl-segment{
+  border:0;background:transparent;padding:0;
+}
+.prl-shell{--prl-poseview-min:min(28vh,240px)}

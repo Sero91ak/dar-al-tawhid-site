@@ -1,5 +1,5 @@
 /**
- * DAR AL TAWḤĪD — Gebet erlernen (Test · 3D View + Visual Step v649)
+ * DAR AL TAWḤĪD — Gebet erlernen (Test · Noble Compact + Ayah Deck v650)
  * Eigenständige Lernwelt · Figure Stage Pflicht · 3D-Ansicht ein/aus
  * productionEnabled = false | audioVisible = false | TEST ONLY
  * Keine erfundenen religiösen Inhalte · keine Fake-/Silhouette-Ersatzfiguren
@@ -21,9 +21,12 @@
   var POSE_PENDING_LABEL = "Lehrfigur folgt";
   var TEXTS_EMPTY_LABEL = "Noch keine geprüften Texte verfügbar.";
   var OFFLINE_EVIDENCE_LABEL = "Direktnachweis benötigt eine Internetverbindung.";
-  var PHASE = 15;
+  var PHASE = 16;
   var FIGURE_STAGE_REQUIRED = true;
   var THREE_D_ENABLED = true;
+  var AYAH_DECK_ENABLED = true;
+  var NOBLE_LOAD_MS = 1600;
+  var LOAD_SESSION_KEY = "darPrlNobleLoadV650";
   var PRAYER_IDS = ["fajr", "maghrib", "dhuhr", "asr", "isha"];
   var CHAR_MALE = "dar-prayer-male-v1";
   var CHAR_FEMALE = "dar-prayer-female-v1";
@@ -71,9 +74,22 @@
   function wrapSurface(inner) {
     return (
       '<div class="prl-surface" data-prl-surface="1">' +
+      nobleLoadShell() +
       inner +
       threeDViewerShell() +
       "</div>"
+    );
+  }
+
+  function nobleLoadShell() {
+    return (
+      '<div class="prl-load" id="prlNobleLoad" data-prl-load="1" hidden aria-hidden="true">' +
+      '<div class="prl-load-panel" role="status" aria-live="polite">' +
+      '<span class="prl-load-kicker">DAR AL TAWḤĪD</span>' +
+      "<b>Gebet erlernen</b>" +
+      '<div class="prl-load-track" aria-hidden="true"><i data-prl-load-bar></i></div>' +
+      '<span class="prl-load-pct" data-prl-load-pct>0%</span>' +
+      "</div></div>"
     );
   }
 
@@ -889,35 +905,69 @@
     });
     if (!rows.length) return "";
     var surahName = surahData.transliteration || surahData.nameLatin || surahData.name || ("Sūrah " + String(ref.surah));
+    var title =
+      String(surahName).toUpperCase().indexOf("FATI") >= 0 || Number(ref.surah) === 1
+        ? "AL-FĀTIḤAH"
+        : surahName;
+    var leaves = rows
+      .map(function (v, i) {
+        var id = v.id || v.number || v.ayah || "";
+        var ar = v.ar || v.arabic || v.text || "";
+        var tr = v.tr_readable || v.tr_academic || v.tr || v.transliteration || "";
+        var de = v.de || v.translationDe || v.meaningDe || "";
+        return (
+          '<article class="prl-ayah-leaf' +
+          (i === 0 ? " is-active" : "") +
+          '" data-prl-ayah-leaf="' +
+          esc(String(i)) +
+          '" data-prl-ayah="' +
+          esc(String(id)) +
+          '"' +
+          (i === 0 ? "" : " hidden") +
+          ">" +
+          '<div class="prl-ayah-num">Āyah ' +
+          esc(String(id)) +
+          "</div>" +
+          (ar
+            ? '<div class="prl-ar-text prl-ayah-ar" lang="ar" dir="rtl">' + esc(ar) + "</div>"
+            : "") +
+          (tr ? '<div class="prl-tr prl-ayah-tr">' + esc(tr) + "</div>" : "") +
+          (de ? '<div class="prl-de prl-ayah-de">' + esc(de) + "</div>" : "") +
+          "</article>"
+        );
+      })
+      .join("");
+    if (!AYAH_DECK_ENABLED) {
+      return (
+        '<div class="prl-recite" data-prl-quran-reuse="1" data-prl-prayer-quran="1" data-prl-surah="' +
+        esc(String(ref.surah)) +
+        '"><div class="prl-recite-surah">' +
+        esc(title) +
+        "</div>" +
+        leaves +
+        "</div>"
+      );
+    }
     return (
-      '<div class="prl-recite" data-prl-quran-reuse="1" data-prl-prayer-quran="1" data-prl-surah="' +
+      '<div class="prl-recite prl-ayah-deck" data-prl-quran-reuse="1" data-prl-prayer-quran="1" data-prl-surah="' +
       esc(String(ref.surah)) +
+      '" data-prl-ayah-deck="1" data-prl-ayah-index="0" data-prl-ayah-total="' +
+      rows.length +
       '">' +
       '<div class="prl-recite-surah">' +
-      esc(String(surahName).toUpperCase().indexOf("FATI") >= 0 || Number(ref.surah) === 1 ? "AL-FĀTIḤAH" : surahName) +
+      esc(title) +
       "</div>" +
-      rows
-        .map(function (v) {
-          var id = v.id || v.number || v.ayah || "";
-          var ar = v.ar || v.arabic || v.text || "";
-          var tr = v.tr_readable || v.tr_academic || v.tr || v.transliteration || "";
-          var de = v.de || v.translationDe || v.meaningDe || "";
-          return (
-            '<div class="prl-ayah" data-prl-ayah="' +
-            esc(String(id)) +
-            '">' +
-            '<div class="prl-ayah-num">Āyah ' +
-            esc(String(id)) +
-            "</div>" +
-            (ar
-              ? '<div class="prl-ar-text prl-ayah-ar" lang="ar" dir="rtl">' + esc(ar) + "</div>"
-              : "") +
-            (tr ? '<div class="prl-tr prl-ayah-tr">' + esc(tr) + "</div>" : "") +
-            (de ? '<div class="prl-de prl-ayah-de">' + esc(de) + "</div>" : "") +
-            "</div>"
-          );
-        })
-        .join("") +
+      '<div class="prl-ayah-viewport" data-prl-ayah-viewport>' +
+      leaves +
+      "</div>" +
+      '<div class="prl-ayah-rail" aria-label="Vers-Navigation">' +
+      '<button type="button" class="prl-ayah-navbtn" data-prl-ayah-prev aria-label="Vorheriger Vers">↑</button>' +
+      '<span class="prl-ayah-pos" data-prl-ayah-pos>1 / ' +
+      rows.length +
+      "</span>" +
+      '<button type="button" class="prl-ayah-navbtn" data-prl-ayah-next aria-label="Nächster Vers">↓</button>' +
+      "</div>" +
+      '<p class="prl-ayah-hint">Ein Vers · wischen oder tippen für den nächsten</p>' +
       "</div>"
     );
   }
@@ -1545,7 +1595,6 @@
       figureChromeHtml({ hasImage: false, title: title }) +
       '<div class="prl-figure">' +
       '<div class="prl-figure-pending" data-prl-pose-placeholder="1">' +
-      '<div class="prl-figure-frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>' +
       '<span class="prl-figure-gender">' +
       esc(genderLabel) +
       "</span>" +
@@ -1670,7 +1719,7 @@
     var compact = !!opts.compact;
     return (
       '<div class="prl-controls' +
-      (compact ? " prl-controls--compact" : "") +
+      (compact ? " prl-controls--compact" : "") + " prl-controls--noble" +
       '" data-prl-char-male="' +
       esc(CHAR_MALE) +
       '" data-prl-char-female="' +
@@ -2248,7 +2297,7 @@
       '<section class="prl-shell" data-prl-root="texts">' +
       '<header class="prl-hero prl-hero--compact"><h2>Was sage ich im Gebet?</h2><p>Nur freigegebene Content-Module.</p></header>' +
       controlsHtml(state) +
-      '<div class="prl-paths">' +
+      '<div class="prl-paths prl-paths--noble">' +
       (approvedRows.length ? approvedRows.join("") : '<div class="prl-research">' + esc(TEXTS_EMPTY_LABEL) + "</div>") +
       "</div>" +
       "</section>"
@@ -2356,7 +2405,7 @@
       "</header>" +
       controlsHtml(state) +
       resumeCard(state, currentPrayer) +
-      '<div class="prl-paths">' +
+      '<div class="prl-paths prl-paths--noble">' +
       '<button type="button" class="prl-path" data-prl-go="gebet"><b>Gebet Schritt für Schritt</b><span>Vom Takbīr bis zum Taslīm</span></button>' +
       '<button type="button" class="prl-path" data-prl-go="gebet"><b>Ein bestimmtes Gebet</b><span>Fajr · Maġrib · Ẓuhr · ʿAṣr · ʿIšāʾ</span></button>' +
       '<button type="button" class="prl-path" data-prl-go="stellung"><b>Eine Stellung nachsehen</b><span>Takbīr, Rukūʿ, Suǧūd und mehr</span></button>' +
@@ -2385,7 +2434,7 @@
           '</b><div class="prl-ar" lang="ar" dir="rtl">' +
           esc(p.titleAr || "") +
           "</div></span>" +
-          '<span class="prl-badge">' +
+          '<span class="prl-meta">' +
           badge +
           "</span></button>"
         );
@@ -2396,7 +2445,7 @@
       '<section class="prl-shell">' +
       '<header class="prl-hero prl-hero--compact"><h2>Ein bestimmtes Gebet</h2><p>Wähle das Gebet, das du lernen möchtest.</p></header>' +
       controlsHtml(state) +
-      '<div class="prl-prayer-list">' +
+      '<div class="prl-prayer-list prl-paths--noble">' +
       cards +
       "</div>" +
       "</section>"
@@ -3069,6 +3118,144 @@
     });
   }
 
+  /* ─── Noble Load + Ayah-Deck (v650) ─── */
+  var ayahDeckBound = false;
+  var nobleLoadTimer = 0;
+
+  function runNobleLoad(force) {
+    var root = document.querySelector("[data-prl-load]");
+    if (!root) return Promise.resolve();
+    var skip = false;
+    try {
+      if (!force && sessionStorage.getItem(LOAD_SESSION_KEY) === "1") skip = true;
+    } catch (_e) {}
+    if (skip) {
+      root.hidden = true;
+      root.setAttribute("aria-hidden", "true");
+      return Promise.resolve();
+    }
+    var bar = root.querySelector("[data-prl-load-bar]");
+    var pctEl = root.querySelector("[data-prl-load-pct]");
+    root.hidden = false;
+    root.setAttribute("aria-hidden", "false");
+    root.classList.add("is-active");
+    document.documentElement.classList.add("prl-load-open");
+    if (bar) bar.style.width = "0%";
+    if (pctEl) pctEl.textContent = "0%";
+    return new Promise(function (resolve) {
+      var start = performance.now();
+      var dur = Math.min(NOBLE_LOAD_MS, 9000);
+      clearInterval(nobleLoadTimer);
+      function tick(now) {
+        var p = Math.min(1, (now - start) / dur);
+        // ease-out cubic
+        var e = 1 - Math.pow(1 - p, 3);
+        var pct = Math.round(e * 100);
+        if (bar) bar.style.width = pct + "%";
+        if (pctEl) pctEl.textContent = pct + "%";
+        if (p < 1) {
+          nobleLoadTimer = requestAnimationFrame(tick);
+        } else {
+          try { sessionStorage.setItem(LOAD_SESSION_KEY, "1"); } catch (_e2) {}
+          root.classList.add("is-done");
+          setTimeout(function () {
+            root.hidden = true;
+            root.setAttribute("aria-hidden", "true");
+            root.classList.remove("is-active", "is-done");
+            document.documentElement.classList.remove("prl-load-open");
+            resolve();
+          }, 220);
+        }
+      }
+      nobleLoadTimer = requestAnimationFrame(tick);
+    });
+  }
+
+  function setAyahDeckIndex(deck, next) {
+    if (!deck) return;
+    var total = Number(deck.getAttribute("data-prl-ayah-total") || 0);
+    if (!total) return;
+    var cur = Number(deck.getAttribute("data-prl-ayah-index") || 0);
+    var idx = Math.max(0, Math.min(total - 1, next));
+    if (idx === cur && deck.querySelector(".prl-ayah-leaf.is-active")) {
+      // still refresh UI
+    }
+    var leaves = deck.querySelectorAll("[data-prl-ayah-leaf]");
+    var dir = idx > cur ? 1 : idx < cur ? -1 : 0;
+    leaves.forEach(function (leaf, i) {
+      var on = i === idx;
+      leaf.classList.toggle("is-active", on);
+      leaf.classList.toggle("is-exit-up", !on && dir === 1 && i === cur);
+      leaf.classList.toggle("is-exit-down", !on && dir === -1 && i === cur);
+      leaf.classList.toggle("is-enter-up", on && dir === -1);
+      leaf.classList.toggle("is-enter-down", on && dir === 1);
+      if (on) leaf.removeAttribute("hidden");
+      else leaf.setAttribute("hidden", "");
+    });
+    deck.setAttribute("data-prl-ayah-index", String(idx));
+    var pos = deck.querySelector("[data-prl-ayah-pos]");
+    if (pos) pos.textContent = idx + 1 + " / " + total;
+    var prev = deck.querySelector("[data-prl-ayah-prev]");
+    var nextBtn = deck.querySelector("[data-prl-ayah-next]");
+    if (prev) prev.disabled = idx <= 0;
+    if (nextBtn) nextBtn.disabled = idx >= total - 1;
+  }
+
+  function advanceAyahDeck(deck, delta) {
+    if (!deck) return;
+    var cur = Number(deck.getAttribute("data-prl-ayah-index") || 0);
+    setAyahDeckIndex(deck, cur + delta);
+  }
+
+  function bindAyahDecks(scope) {
+    var root = scope || document;
+    root.querySelectorAll("[data-prl-ayah-deck]").forEach(function (deck) {
+      if (deck.getAttribute("data-prl-ayah-bound") === "1") return;
+      deck.setAttribute("data-prl-ayah-bound", "1");
+      setAyahDeckIndex(deck, 0);
+      var viewport = deck.querySelector("[data-prl-ayah-viewport]");
+      var touch = { y: 0, active: false };
+      if (viewport) {
+        viewport.addEventListener(
+          "touchstart",
+          function (e) {
+            if (!e.touches || !e.touches[0]) return;
+            touch.active = true;
+            touch.y = e.touches[0].clientY;
+          },
+          { passive: true }
+        );
+        viewport.addEventListener(
+          "touchend",
+          function (e) {
+            if (!touch.active) return;
+            touch.active = false;
+            var y = e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientY : touch.y;
+            var dy = y - touch.y;
+            if (Math.abs(dy) < 36) return;
+            // Finger nach oben → nächster Vers (überblendet)
+            advanceAyahDeck(deck, dy < 0 ? 1 : -1);
+          },
+          { passive: true }
+        );
+        viewport.addEventListener(
+          "wheel",
+          function (e) {
+            if (Math.abs(e.deltaY) < 8) return;
+            e.preventDefault();
+            if (deck._prlWheelLock) return;
+            deck._prlWheelLock = true;
+            advanceAyahDeck(deck, e.deltaY > 0 ? 1 : -1);
+            setTimeout(function () {
+              deck._prlWheelLock = false;
+            }, 420);
+          },
+          { passive: false }
+        );
+      }
+    });
+  }
+
   /* ─── 3D Ansicht (Bild → Orbit-Ansicht, wieder beendbar) ─── */
   var threeDState = {
     open: false,
@@ -3252,6 +3439,10 @@
       if (root.getAttribute("data-prl-root") === "learn") restoreLearnPosition(root);
       bindPoseImgFallback(root);
       bindThreeDPointers();
+      bindAyahDecks(root);
+      var rootName = root.getAttribute("data-prl-root") || "";
+      /* Hub einmal pro Session; Learn erneut nach Gebet-Start (Session-Key wird geleert) */
+      if (rootName === "learn" || rootName === "hub") runNobleLoad(false);
       var learn = document.querySelector("[data-prl-root='learn']");
       if (learn) learn.classList.toggle("is-dual-shell", isDualLayout());
     } catch (err) {
@@ -3319,6 +3510,18 @@
     var t = ev.target;
     if (!t || !t.closest) return;
 
+    var ayahPrev = t.closest("[data-prl-ayah-prev]");
+    if (ayahPrev) {
+      ev.preventDefault();
+      advanceAyahDeck(ayahPrev.closest("[data-prl-ayah-deck]"), -1);
+      return;
+    }
+    var ayahNext = t.closest("[data-prl-ayah-next]");
+    if (ayahNext) {
+      ev.preventDefault();
+      advanceAyahDeck(ayahNext.closest("[data-prl-ayah-deck]"), 1);
+      return;
+    }
     if (t.closest("[data-prl-3d-close]")) {
       ev.preventDefault();
       closeThreeD();
@@ -3473,6 +3676,7 @@
 
     var resume = t.closest("[data-prl-resume]");
     if (resume) {
+      try { sessionStorage.removeItem(LOAD_SESSION_KEY); } catch (_e) {}
       var st3 = loadState();
       ensurePrayer(st3.prayerId || "fajr").then(function (prayer) {
         if (!prayer) return;
@@ -3488,6 +3692,7 @@
     var prayerBtn = t.closest("[data-prl-prayer]");
     if (prayerBtn && !prayerBtn.disabled) {
       var nextPid = prayerBtn.getAttribute("data-prl-prayer");
+      try { sessionStorage.removeItem(LOAD_SESSION_KEY); } catch (_e) {}
       switchToPrayer(nextPid);
       navigate(VIEW, nextPid);
       return;

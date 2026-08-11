@@ -24,7 +24,7 @@ html.prl-immersive{
   --prl-danger-soft:rgba(180,120,120,.35);
   --prl-serif:"Cormorant Garamond","Iowan Old Style",Palatino,Georgia,serif;
   --prl-sans:"Outfit","Avenir Next","Segoe UI",sans-serif;
-  --prl-poseview-min:min(48vh,420px);
+  --prl-poseview-min:min(28vh,240px);
   --prl-radius:2px;
   color-scheme:dark;
 }
@@ -1213,4 +1213,382 @@ html.prl-3d-open body{
 }
 @media (prefers-reduced-motion:reduce){
   .prl-3d-btn,.prl-3d-card{transition:none}
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   v650 · Noble Compact (Duʿāʾ-Feld-Logik)
+   Weniger Rahmen-Labyrinth · Glow · kompakte Flächen · Ayah-Deck
+   ═══════════════════════════════════════════════════════════ */
+html.prl-immersive{
+  --prl-poseview-min:min(26vh,220px)!important;
+  --prl-noble-line:rgba(201,184,150,.28);
+  --prl-noble-line-soft:rgba(201,184,150,.12);
+  --prl-noble-wash:rgba(201,184,150,.09);
+  --prl-noble-wash-strong:rgba(201,184,150,.16);
+  --prl-noble-glow:0 0 14px rgba(201,184,150,.14);
+  --prl-noble-rail:linear-gradient(180deg,transparent,rgba(201,184,150,.55) 30%,rgba(201,184,150,.85) 50%,rgba(201,184,150,.55) 70%,transparent);
+}
+
+/* Shell denser */
+html.prl-immersive .prl-shell{gap:14px!important}
+html.prl-immersive .prl-shell--hub{gap:16px!important}
+html.prl-immersive .prl-surface{
+  padding-left:max(18px, env(safe-area-inset-left))!important;
+  padding-right:max(18px, env(safe-area-inset-right))!important;
+}
+
+/* Controls: no boxed segment borders — oval light like Duʿāʾ */
+.prl-controls--noble,
+.prl-controls--compact{
+  gap:6px!important;
+  margin:0 0 8px!important;
+}
+.prl-controls--noble .prl-controls-row,
+.prl-controls--compact .prl-controls-row,
+.prl-segment{
+  border:0!important;
+  background:transparent!important;
+  padding:0!important;
+  border-radius:0!important;
+  gap:4px!important;
+  box-shadow:none!important;
+}
+.prl-controls--noble .prl-controls-row button,
+.prl-controls--compact .prl-controls-row button,
+.prl-segment button{
+  min-height:36px!important;
+  border-radius:999px!important;
+  border:0!important;
+  background:transparent!important;
+  color:var(--prl-mute)!important;
+  box-shadow:none!important;
+  transition:background .16s ease, box-shadow .16s ease, color .16s ease;
+}
+.prl-controls--noble .prl-controls-row button:hover,
+.prl-controls--compact .prl-controls-row button:hover,
+.prl-segment button:hover{
+  background:var(--prl-noble-wash)!important;
+  box-shadow:inset 0 0 0 1px var(--prl-noble-line-soft), var(--prl-noble-glow)!important;
+  color:var(--prl-ink)!important;
+}
+.prl-controls--noble .prl-controls-row button.is-active,
+.prl-controls--compact .prl-controls-row button.is-active,
+.prl-segment button.is-active{
+  background:var(--prl-noble-wash-strong)!important;
+  color:var(--prl-ink)!important;
+  box-shadow:inset 0 0 0 1px var(--prl-noble-line), var(--prl-noble-glow)!important;
+}
+.prl-controls--noble .prl-controls-row button:active,
+.prl-controls--compact .prl-controls-row button:active{
+  box-shadow:inset 0 0 0 1px var(--prl-noble-line), 0 0 18px rgba(201,184,150,.22)!important;
+}
+
+/* Paths / prayer list — Duʿāʾ oval rows, compact */
+.prl-paths--noble,
+.prl-prayer-list.prl-paths--noble,
+.prl-paths{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:4px!important;
+  margin-top:6px!important;
+}
+.prl-paths--noble .prl-path,
+.prl-paths--noble .prl-prayer-card,
+.prl-prayer-list .prl-prayer-card,
+.prl-path{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:center!important;
+  gap:10px!important;
+  text-align:left!important;
+  padding:12px 16px 12px 18px!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  position:relative!important;
+  overflow:hidden!important;
+  transition:background .16s ease, box-shadow .16s ease, padding .16s ease!important;
+}
+.prl-paths--noble .prl-path:first-child,
+.prl-prayer-list .prl-prayer-card:first-child,
+.prl-path:first-child{
+  border-top:0!important;
+}
+.prl-paths--noble .prl-path::before,
+.prl-paths--noble .prl-prayer-card::before,
+.prl-prayer-list .prl-prayer-card::before{
+  content:""!important;
+  position:absolute;
+  left:10px;top:30%;bottom:30%;
+  width:2px;border-radius:999px;
+  background:transparent;
+  opacity:0;
+  transition:opacity .16s ease, box-shadow .16s ease;
+  pointer-events:none;
+}
+.prl-paths--noble .prl-path:hover,
+.prl-paths--noble .prl-prayer-card:hover,
+.prl-prayer-list .prl-prayer-card:hover,
+.prl-path:hover{
+  padding-left:20px!important;
+  background:radial-gradient(ellipse 90% 120% at 30% 50%, var(--prl-noble-wash-strong), transparent 70%)!important;
+  box-shadow:inset 0 0 0 1px var(--prl-noble-line-soft), var(--prl-noble-glow)!important;
+}
+.prl-paths--noble .prl-path:hover::before,
+.prl-paths--noble .prl-prayer-card:hover::before,
+.prl-prayer-list .prl-prayer-card:hover::before{
+  opacity:1;
+  background:var(--prl-noble-rail)!important;
+  box-shadow:0 0 10px rgba(201,184,150,.35);
+}
+.prl-paths--noble .prl-path:active,
+.prl-paths--noble .prl-prayer-card:active,
+.prl-prayer-list .prl-prayer-card:active{
+  box-shadow:inset 0 0 0 1px var(--prl-noble-line), 0 0 20px rgba(201,184,150,.28)!important;
+}
+.prl-paths--noble .prl-path b,
+.prl-prayer-list .prl-prayer-card b,
+.prl-path b{
+  font-size:17px!important;
+  letter-spacing:.03em!important;
+}
+.prl-paths--noble .prl-path span,
+.prl-path span{
+  font-size:12px!important;
+  line-height:1.4!important;
+}
+.prl-prayer-list .prl-prayer-card .prl-ar{
+  font-size:13px!important;
+  margin-top:2px!important;
+}
+.prl-meta{
+  font-family:var(--prl-sans)!important;
+  font-size:10px!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+  color:var(--prl-mute-2)!important;
+  border:0!important;
+  background:transparent!important;
+  padding:0!important;
+}
+
+/* Quick positions same oval treatment */
+.prl-quick-grid{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:4px!important;
+}
+.prl-quick-grid button{
+  border:0!important;
+  border-radius:999px!important;
+  background:transparent!important;
+  padding:12px 16px 12px 18px!important;
+  box-shadow:none!important;
+}
+.prl-quick-grid button:hover{
+  background:var(--prl-noble-wash)!important;
+  box-shadow:inset 0 0 0 1px var(--prl-noble-line-soft), var(--prl-noble-glow)!important;
+}
+
+/* Figure room — smaller, single soft rule, no nested boxes */
+html.prl-immersive .prl-poseview{
+  min-height:var(--prl-poseview-min)!important;
+  max-height:min(32vh,260px)!important;
+  margin:4px 0 8px!important;
+  border:0!important;
+  border-top:1px solid var(--prl-noble-line-soft)!important;
+  border-bottom:1px solid var(--prl-noble-line-soft)!important;
+  border-radius:0!important;
+  background:
+    radial-gradient(ellipse 55% 45% at 50% 48%, rgba(158,176,199,.08), transparent 70%),
+    linear-gradient(180deg, rgba(23,30,43,.2), rgba(10,13,20,.05))!important;
+}
+html.prl-immersive .prl-poseview::before,
+html.prl-immersive .prl-poseview::after{
+  display:none!important; /* kill labyrinth inner frame */
+}
+html.prl-immersive .prl-poseview--compact{
+  min-height:clamp(160px,22vh,200px)!important;
+  max-height:min(26vh,220px)!important;
+}
+html.prl-immersive .prl-figure{
+  width:min(100%,300px)!important;
+  min-height:0!important;
+  padding:10px 8px 14px!important;
+}
+html.prl-immersive .prl-figure img{
+  max-height:min(26vh,220px)!important;
+}
+html.prl-immersive .prl-figure-pending{
+  min-height:0!important;
+  gap:6px!important;
+  padding:2px!important;
+}
+html.prl-immersive .prl-figure-frame{display:none!important}
+html.prl-immersive .prl-figure-pending b{font-size:14px!important;letter-spacing:.1em!important}
+html.prl-immersive .prl-poseview-floor{
+  left:28%;right:28%;bottom:10%;height:10px!important;
+}
+
+/* 3D btn compact */
+.prl-3d-btn{
+  min-height:32px!important;
+  padding:5px 10px!important;
+  box-shadow:0 0 0 1px var(--prl-noble-line-soft), var(--prl-noble-glow)!important;
+}
+.prl-3d-btn:active{
+  box-shadow:0 0 0 1px var(--prl-noble-line), 0 0 18px rgba(201,184,150,.3)!important;
+}
+
+/* Step copy denser + better side inset */
+.prl-step-head{margin:2px 0 6px!important;gap:2px!important}
+.prl-step-head h3{font-size:clamp(22px,5.2vw,28px)!important}
+.prl-instruction,.prl-words{
+  gap:8px!important;
+  padding:10px 4px 12px!important;
+  border-bottom:1px solid var(--prl-noble-line-soft)!important;
+}
+.prl-scroll-item{gap:8px!important;padding:12px 4px 14px!important}
+.prl-progress--sticky{padding:8px 0 10px!important;margin-bottom:6px!important}
+
+/* Noble load curtain */
+html.prl-load-open,html.prl-load-open body{overflow:hidden!important}
+.prl-load{
+  position:fixed;inset:0;z-index:12100;
+  display:grid;place-items:center;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 40%, rgba(40,52,72,.55), transparent 70%),
+    rgba(8,10,16,.88);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  transition:opacity .22s ease;
+}
+.prl-load[hidden]{display:none!important}
+.prl-load.is-done{opacity:0;pointer-events:none}
+.prl-load-panel{
+  width:min(320px,86vw);
+  display:grid;gap:12px;justify-items:center;text-align:center;
+  padding:28px 22px;
+}
+.prl-load-kicker{
+  font-family:var(--prl-sans);
+  font-size:10px;letter-spacing:.32em;text-transform:uppercase;
+  color:rgba(201,184,150,.7);
+}
+.prl-load-panel b{
+  font-family:var(--prl-serif);
+  font-size:26px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--prl-ink);
+}
+.prl-load-track{
+  width:100%;height:2px;margin-top:8px;
+  border-radius:999px;
+  background:rgba(168,181,196,.12);
+  overflow:hidden;
+  box-shadow:inset 0 0 0 1px rgba(201,184,150,.1);
+}
+.prl-load-track i{
+  display:block;height:100%;width:0%;
+  border-radius:inherit;
+  background:linear-gradient(90deg, rgba(158,176,199,.2), var(--prl-accent), rgba(242,240,234,.95));
+  box-shadow:0 0 12px rgba(201,184,150,.45);
+}
+.prl-load-pct{
+  font-family:var(--prl-sans);
+  font-size:11px;letter-spacing:.18em;color:var(--prl-mute);
+}
+
+/* Ayah deck — one verse focus, smooth overlap */
+.prl-ayah-deck{margin-top:6px}
+.prl-ayah-viewport{
+  position:relative;
+  min-height:168px;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  touch-action:pan-y;
+  padding:8px 4px 10px;
+  border-top:1px solid var(--prl-noble-line-soft);
+  border-bottom:1px solid var(--prl-noble-line-soft);
+}
+.prl-ayah-leaf{
+  grid-area:1/1;
+  width:100%;
+  display:grid;gap:8px;
+  padding:12px 6px;
+  opacity:0;
+  transform:translateY(18px) scale(.985);
+  pointer-events:none;
+  transition:opacity .38s cubic-bezier(.22,1,.36,1), transform .38s cubic-bezier(.22,1,.36,1);
+}
+.prl-ayah-leaf.is-active{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  pointer-events:auto;
+  z-index:2;
+}
+.prl-ayah-leaf.is-exit-up{
+  opacity:0;
+  transform:translateY(-28px) scale(.98);
+  z-index:1;
+}
+.prl-ayah-leaf.is-exit-down{
+  opacity:0;
+  transform:translateY(28px) scale(.98);
+  z-index:1;
+}
+.prl-ayah-leaf[hidden]{
+  display:grid!important; /* keep in stack for overlap */
+}
+.prl-ayah-leaf:not(.is-active):not(.is-exit-up):not(.is-exit-down){
+  visibility:hidden;
+}
+.prl-ayah-rail{
+  display:flex;align-items:center;justify-content:center;gap:16px;
+  margin-top:10px;
+}
+.prl-ayah-navbtn{
+  appearance:none;border:0;background:transparent;
+  color:var(--prl-mute);
+  width:40px;height:40px;border-radius:999px;
+  font-size:16px;cursor:pointer;
+  transition:background .16s ease, box-shadow .16s ease, color .16s ease;
+}
+.prl-ayah-navbtn:hover,
+.prl-ayah-navbtn:focus-visible{
+  color:var(--prl-ink);
+  background:var(--prl-noble-wash);
+  box-shadow:inset 0 0 0 1px var(--prl-noble-line-soft), var(--prl-noble-glow);
+  outline:none;
+}
+.prl-ayah-navbtn:disabled{opacity:.28;pointer-events:none}
+.prl-ayah-pos{
+  font-family:var(--prl-sans);
+  font-size:11px;letter-spacing:.16em;color:var(--prl-mute);
+}
+.prl-ayah-hint{
+  margin:8px 0 0;
+  text-align:center;
+  font-size:11px;color:var(--prl-mute-2);
+  letter-spacing:.04em;
+}
+.prl-ayah-ar{font-size:clamp(20px,5vw,26px)!important}
+.prl-ayah-tr{font-size:14px!important}
+.prl-ayah-de{font-size:13px!important}
+
+@media (max-width:699px){
+  html.prl-immersive{--prl-poseview-min:min(24vh,210px)!important}
+  html.prl-immersive .prl-poseview{max-height:min(30vh,240px)!important}
+}
+@media (min-width:900px) and (orientation:landscape){
+  html.prl-immersive .prl-learn-layout.is-dual .prl-poseview{
+    min-height:min(48vh,360px)!important;
+    max-height:min(56vh,420px)!important;
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  .prl-ayah-leaf,.prl-load-track i{transition:none!important}
 }
