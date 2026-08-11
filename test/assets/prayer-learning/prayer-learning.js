@@ -1,5 +1,5 @@
 /**
- * DAR AL TAWḤĪD — Gebet erlernen (Test · KI-Figuren Qiyām v651)
+ * DAR AL TAWḤĪD — Gebet erlernen (Test · Studio Poses + Chamber v652)
  * Eigenständige Lernwelt · Figure Stage Pflicht · 3D-Ansicht ein/aus
  * productionEnabled = false | audioVisible = false | TEST ONLY
  * Keine erfundenen religiösen Inhalte · keine Fake-/Silhouette-Ersatzfiguren
@@ -21,7 +21,7 @@
   var POSE_PENDING_LABEL = "Lehrfigur folgt";
   var TEXTS_EMPTY_LABEL = "Noch keine geprüften Texte verfügbar.";
   var OFFLINE_EVIDENCE_LABEL = "Direktnachweis benötigt eine Internetverbindung.";
-  var PHASE = 17;
+  var PHASE = 18;
   var FIGURE_STAGE_REQUIRED = true;
   var THREE_D_ENABLED = true;
   var AYAH_DECK_ENABLED = true;
@@ -131,7 +131,7 @@
     var title = opts.title || "Lehrfigur";
     var src = opts.src || "";
     return (
-      '<div class="prl-poseview-chrome">' +
+      '<div class="prl-poseview prl-poseview--studio-chrome">' +
       '<button type="button" class="prl-3d-btn" data-prl-3d-open' +
       (hasImg ? "" : ' data-prl-3d-empty="1"') +
       ' data-prl-3d-title="' +
@@ -141,7 +141,10 @@
       ' aria-label="3D-Ansicht öffnen">' +
       "<b>3D</b><span>Ansicht</span>" +
       "</button>" +
-      "</div>"
+      "</div>" +
+      (hasImg
+        ? '<p class="prl-studio-note">Studio · Orientierung · Prüfung läuft</p>'
+        : "")
     );
   }
 
@@ -1609,7 +1612,7 @@
     var pendingKey = cid + ":" + poseKey + ":" + status;
     if (missingAssets.indexOf(pendingKey) < 0) missingAssets.push(pendingKey);
     return (
-      '<div class="prl-poseview' +
+      '<div class="prl-poseview prl-poseview--studio' +
       (compact ? " prl-poseview--compact" : "") +
       '" role="img" aria-label="' +
       esc("Lehrfigur · " + title) +
@@ -1633,7 +1636,7 @@
       esc(POSE_PENDING_LABEL) +
       "</span>" +
       "</div></div>" +
-      '<div class="prl-poseview-floor" aria-hidden="true"></div></div>'
+      '<div class="prl-poseview prl-poseview--studio-floor" aria-hidden="true"></div></div>'
     );
   }
 
@@ -1696,7 +1699,7 @@
       srcset = ' srcset="' + esc(resolved.srcset.join(", ")) + '"';
     }
     return (
-      '<div class="prl-poseview' +
+      '<div class="prl-poseview prl-poseview--studio' +
       (opts.compact ? " prl-poseview--compact" : "") +
       '" data-prl-figure-stage="1" data-prl-character-id="' +
       esc(resolved.characterId) +
@@ -1720,7 +1723,7 @@
       esc(label) +
       '" class="prl-poseview-img" loading="eager" decoding="async" data-prl-pose-img>' +
       "</picture></div>" +
-      '<div class="prl-poseview-floor" aria-hidden="true"></div></div>'
+      '<div class="prl-poseview prl-poseview--studio-floor" aria-hidden="true"></div></div>'
     );
   }
 
@@ -2560,7 +2563,7 @@
       for (var i = 0; i < steps.length; i++) {
         var s = steps[i];
         var fig = characterSwitchPending
-          ? '<div class="prl-poseview prl-poseview--compact prl-poseview--loading" data-prl-figure-stage="1" data-prl-pose-loading="1"><div class="prl-figure"><div class="prl-figure-pending"><span>Darstellung wird geladen…</span></div></div></div>'
+          ? '<div class="prl-poseview prl-poseview--studio prl-poseview--compact prl-poseview--loading" data-prl-figure-stage="1" data-prl-pose-loading="1"><div class="prl-figure"><div class="prl-figure-pending"><span>Darstellung wird geladen…</span></div></div></div>'
           : await figureHtmlResolved(state.character, s, { compact: true });
         var title = stepTitleHtml(s);
         var copy = await stepCopyHtmlAsync(s);
@@ -2599,7 +2602,7 @@
     for (var j = 0; j < steps.length; j++) {
       var sj = steps[j];
       var figj = characterSwitchPending
-        ? '<div class="prl-poseview prl-poseview--loading" data-prl-figure-stage="1" data-prl-pose-loading="1"><div class="prl-figure"><div class="prl-figure-pending"><span>Darstellung wird geladen…</span></div></div></div>'
+        ? '<div class="prl-poseview prl-poseview--studio prl-poseview--loading" data-prl-figure-stage="1" data-prl-pose-loading="1"><div class="prl-figure"><div class="prl-figure-pending"><span>Darstellung wird geladen…</span></div></div></div>'
         : await figureHtmlResolved(state.character, sj);
       var titlej = stepTitleHtml(sj);
       var copyj = await stepCopyHtmlAsync(sj);

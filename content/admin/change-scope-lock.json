@@ -84,6 +84,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "gebet-erlernen-studio-poses-v652-2026-08-11",
+      "approvedBy": "user-explicit-ai-figures-studio-all-poses",
+      "reason": "Studio-Figure-Stage + weitere KI-Posen ohne Augen (User erlaubt). Test only. Religiöse Pose-Prüfung vor Live nötig.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "gebet-erlernen-ki-figuren-v651-2026-08-11",
       "approvedBy": "user-explicit-ai-figures-no-eyes",
       "reason": "Nutzer erlaubt ausdrücklich KI-Lehrfiguren zu erstellen, ohne Augen. Male/Female Qiyām Character-Lock für Dar Test. Keine Live-Freigabe.",

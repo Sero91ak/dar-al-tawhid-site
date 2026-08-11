@@ -1592,3 +1592,171 @@ html.prl-load-open,html.prl-load-open body{overflow:hidden!important}
 @media (prefers-reduced-motion:reduce){
   .prl-ayah-leaf,.prl-load-track i{transition:none!important}
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   v652 · Studio Prayer Chamber
+   Beige Mihrab-Licht · Figur dominant · kein dunkles Labyrinth
+   ═══════════════════════════════════════════════════════════ */
+html.prl-immersive{
+  --prl-studio-sand:#d8cbb8;
+  --prl-studio-sand-2:#c4b39a;
+  --prl-studio-wall:#e6dccb;
+  --prl-studio-deep:#b9a78d;
+  --prl-studio-glow:rgba(255,236,200,.55);
+  --prl-poseview-min:min(42vh,380px)!important;
+}
+
+/* Learn page: warmer wash behind the studio */
+html.prl-immersive .prl-shell--learn,
+html.prl-immersive .prl-shell[data-prl-root="learn"]{
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 18%, rgba(230,220,203,.14), transparent 60%),
+    transparent!important;
+}
+
+/* Figure stage = studio chamber */
+html.prl-immersive .prl-poseview{
+  position:relative!important;
+  min-height:var(--prl-poseview-min)!important;
+  max-height:min(52vh,460px)!important;
+  margin:8px 0 14px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:18px!important;
+  overflow:hidden!important;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 42%, var(--prl-studio-glow), transparent 68%),
+    linear-gradient(180deg, #efe6d7 0%, var(--prl-studio-wall) 42%, var(--prl-studio-sand-2) 100%)!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.28),
+    0 18px 40px rgba(0,0,0,.28)!important;
+}
+html.prl-immersive .prl-poseview::before{
+  display:block!important;
+  content:""!important;
+  position:absolute!important;
+  left:12%!important;right:12%!important;top:6%!important;bottom:10%!important;
+  border-radius:42% 42% 18px 18px / 28% 28% 18px 18px!important;
+  border:0!important;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 30%, rgba(255,248,230,.55), transparent 70%),
+    linear-gradient(180deg, rgba(232,220,198,.35), rgba(196,179,154,.15))!important;
+  opacity:1!important;
+  pointer-events:none!important;
+  box-shadow:inset 0 0 40px rgba(255,240,210,.25)!important;
+  animation:none!important;
+  transform:none!important;
+}
+html.prl-immersive .prl-poseview::after{
+  display:block!important;
+  content:""!important;
+  position:absolute!important;
+  inset:auto 18% 6% 18%!important;
+  height:18px!important;
+  border-radius:50%!important;
+  background:radial-gradient(ellipse at center, rgba(90,70,45,.22), transparent 70%)!important;
+  pointer-events:none!important;
+  z-index:0!important;
+}
+html.prl-immersive .prl-poseview--compact{
+  min-height:clamp(220px,34vh,300px)!important;
+  max-height:min(40vh,340px)!important;
+}
+html.prl-immersive .prl-figure{
+  position:relative!important;
+  z-index:1!important;
+  width:100%!important;
+  max-width:none!important;
+  min-height:0!important;
+  height:100%!important;
+  padding:10px 8px 16px!important;
+  display:grid!important;
+  place-items:center!important;
+}
+html.prl-immersive .prl-figure picture,
+html.prl-immersive .prl-figure img,
+html.prl-immersive .prl-poseview-img{
+  width:auto!important;
+  max-width:min(92%,420px)!important;
+  height:auto!important;
+  max-height:min(46vh,420px)!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  filter:drop-shadow(0 14px 28px rgba(60,40,20,.22))!important;
+  border-radius:0!important;
+}
+html.prl-immersive .prl-poseview--compact .prl-figure img{
+  max-height:min(34vh,300px)!important;
+}
+html.prl-immersive .prl-poseview-floor{display:none!important}
+html.prl-immersive .prl-figure-frame{display:none!important}
+html.prl-immersive .prl-figure-pending{
+  color:#4a3f33!important;
+  gap:8px!important;
+}
+html.prl-immersive .prl-figure-pending b{color:#2f2922!important}
+html.prl-immersive .prl-figure-pending span,
+html.prl-immersive .prl-figure-gender{color:#6a5c4c!important}
+
+/* 3D button on light studio */
+html.prl-immersive .prl-3d-btn{
+  background:linear-gradient(165deg,rgba(40,32,24,.78),rgba(20,16,12,.88))!important;
+  border-color:rgba(201,184,150,.5)!important;
+}
+html.prl-immersive .prl-poseview-chrome{
+  top:10px!important;right:10px!important;
+}
+
+/* 3D overlay: studio chamber */
+html.prl-immersive .prl-3d-panel{
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(230,220,203,.22), transparent 55%),
+    linear-gradient(180deg, #1a1612, #0c0a08)!important;
+  border-color:rgba(201,184,150,.32)!important;
+}
+html.prl-immersive .prl-3d-stage{
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 40%, rgba(255,236,200,.22), transparent 65%),
+    linear-gradient(180deg, #e8dcc8, #c4b39a)!important;
+  border-color:rgba(255,255,255,.2)!important;
+}
+html.prl-immersive .prl-3d-card{
+  width:min(78%,360px)!important;
+  aspect-ratio:3/4!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  border-radius:12px!important;
+}
+html.prl-immersive .prl-3d-card img{
+  object-fit:contain!important;
+  filter:drop-shadow(0 18px 30px rgba(40,28,14,.28));
+}
+
+/* Soft review note under studio */
+html.prl-immersive .prl-poseview .prl-studio-note{
+  position:absolute;left:10px;right:10px;bottom:8px;z-index:3;
+  margin:0;text-align:center;
+  font-family:var(--prl-sans);
+  font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(70,56,42,.55);
+  pointer-events:none;
+}
+.prl-studio-note{
+  margin:0 0 8px;text-align:center;
+  font-family:var(--prl-sans);
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--prl-mute-2);
+}
+
+@media (max-width:699px){
+  html.prl-immersive{--prl-poseview-min:min(40vh,360px)!important}
+  html.prl-immersive .prl-poseview{max-height:min(48vh,420px)!important;border-radius:16px!important}
+}
+@media (min-width:900px) and (orientation:landscape){
+  html.prl-immersive .prl-learn-layout.is-dual .prl-poseview{
+    min-height:min(62vh,520px)!important;
+    max-height:min(70vh,580px)!important;
+  }
+}

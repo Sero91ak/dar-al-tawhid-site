@@ -1,18 +1,18 @@
 {
   "characterId": "dar-prayer-female-v1",
   "activeAssets": {
-    "takbir": null,
+    "takbir": "female-v1-takbir-v1",
     "qiyam": "female-v1-qiyam-v1",
-    "ruku": null,
-    "standing-after-ruku": null,
-    "sujud": null,
-    "sitting-between-sujud": null,
-    "rise-next-rakah": null,
-    "tashahhud": null,
-    "taslim-right": null,
-    "taslim-left": null,
-    "middle-tashahhud": null,
-    "final-tashahhud": null
+    "ruku": "female-v1-ruku-v1",
+    "standing-after-ruku": "female-v1-standing-after-ruku-v1",
+    "sujud": "female-v1-sujud-v1",
+    "sitting-between-sujud": "female-v1-sitting-between-sujud-v1",
+    "rise-next-rakah": "female-v1-qiyam-v1",
+    "tashahhud": "female-v1-tashahhud-v1",
+    "taslim-right": "female-v1-taslim-right-v1",
+    "taslim-left": "female-v1-taslim-left-v1",
+    "middle-tashahhud": "female-v1-tashahhud-v1",
+    "final-tashahhud": "female-v1-tashahhud-v1"
   },
   "poses": {
     "takbir": {
@@ -20,19 +20,21 @@
       "characterId": "dar-prayer-female-v1",
       "poseId": "takbir",
       "assetType": "image",
-      "src": null,
-      "srcWebp": null,
+      "src": "/test/assets/prayer-learning/characters/female/poses/female-v1-takbir.webp",
+      "srcWebp": "/test/assets/prayer-learning/characters/female/poses/female-v1-takbir.webp",
       "srcAvif": null,
-      "srcset": [],
+      "srcset": [
+        "/test/assets/prayer-learning/characters/female/poses/female-v1-takbir.webp"
+      ],
       "sourceClaimIds": [],
-      "status": "MISSING",
+      "status": "test-delivered",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
       "reviewPass1": false,
       "reviewPass2": false,
       "approved": false,
-      "active": false,
+      "active": true,
       "versions": [
         "female-v1-takbir-v1"
       ],
@@ -75,7 +77,13 @@
       "integrationBlock": "Takbir + Qiyam",
       "phase": 8,
       "expectedFile": "female-v1-takbir.webp",
-      "expectedAvif": "female-v1-takbir.avif"
+      "expectedAvif": "female-v1-takbir.avif",
+      "filePresent": true,
+      "testOnly": true,
+      "aiGenerated": true,
+      "aiConstraint": "no-eyes",
+      "religiousReviewPending": true,
+      "notes": "User-authorized AI figure (no eyes). Dar Test only. Religious pose review required before live."
     },
     "qiyam": {
       "assetId": "female-v1-qiyam-v1",
@@ -143,26 +151,29 @@
       "testOnly": true,
       "aiGenerated": true,
       "aiConstraint": "no-eyes",
-      "notes": "User-authorized AI figure for Dar Test only. No eyes. Not production-approved."
+      "notes": "User-authorized AI figure (no eyes). Dar Test only. Religious pose review required before live.",
+      "religiousReviewPending": true
     },
     "ruku": {
       "assetId": "female-v1-ruku-v1",
       "characterId": "dar-prayer-female-v1",
       "poseId": "ruku",
       "assetType": "image",
-      "src": null,
-      "srcWebp": null,
+      "src": "/test/assets/prayer-learning/characters/female/poses/female-v1-ruku.webp",
+      "srcWebp": "/test/assets/prayer-learning/characters/female/poses/female-v1-ruku.webp",
       "srcAvif": null,
-      "srcset": [],
+      "srcset": [
+        "/test/assets/prayer-learning/characters/female/poses/female-v1-ruku.webp"
+      ],
       "sourceClaimIds": [],
-      "status": "MISSING",
+      "status": "test-delivered",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
       "reviewPass1": false,
       "reviewPass2": false,
       "approved": false,
-      "active": false,
+      "active": true,
       "versions": [
         "female-v1-ruku-v1"
       ],
@@ -216,26 +227,34 @@
       "integrationBlock": "Recitation + Ruku + Standing After Ruku",
       "modestyPrecedence": true,
       "expectedFile": "female-v1-ruku.webp",
-      "expectedAvif": "female-v1-ruku.avif"
+      "expectedAvif": "female-v1-ruku.avif",
+      "filePresent": true,
+      "testOnly": true,
+      "aiGenerated": true,
+      "aiConstraint": "no-eyes",
+      "religiousReviewPending": true,
+      "notes": "User-authorized AI figure (no eyes). Dar Test only. Religious pose review required before live."
     },
     "standing-after-ruku": {
       "assetId": "female-v1-standing-after-ruku-v1",
       "characterId": "dar-prayer-female-v1",
       "poseId": "standing-after-ruku",
       "assetType": "image",
-      "src": null,
-      "srcWebp": null,
+      "src": "/test/assets/prayer-learning/characters/female/poses/female-v1-standing-after-ruku.webp",
+      "srcWebp": "/test/assets/prayer-learning/characters/female/poses/female-v1-standing-after-ruku.webp",
       "srcAvif": null,
-      "srcset": [],
+      "srcset": [
+        "/test/assets/prayer-learning/characters/female/poses/female-v1-standing-after-ruku.webp"
+      ],
       "sourceClaimIds": [],
-      "status": "MISSING",
+      "status": "test-delivered",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
       "reviewPass1": false,
       "reviewPass2": false,
       "approved": false,
-      "active": false,
+      "active": true,
       "versions": [
         "female-v1-standing-after-ruku-v1"
       ],
@@ -277,26 +296,34 @@
       "phase": 9,
       "integrationBlock": "Recitation + Ruku + Standing After Ruku",
       "expectedFile": "female-v1-standing-after-ruku.webp",
-      "expectedAvif": "female-v1-standing-after-ruku.avif"
+      "expectedAvif": "female-v1-standing-after-ruku.avif",
+      "filePresent": true,
+      "testOnly": true,
+      "aiGenerated": true,
+      "aiConstraint": "no-eyes",
+      "religiousReviewPending": true,
+      "notes": "User-authorized AI figure (no eyes). Dar Test only. Religious pose review required before live."
     },
     "sujud": {
       "assetId": "female-v1-sujud-v1",
       "characterId": "dar-prayer-female-v1",
       "poseId": "sujud",
       "assetType": "image",
-      "src": null,
-      "srcWebp": null,
+      "src": "/test/assets/prayer-learning/characters/female/poses/female-v1-sujud.webp",
+      "srcWebp": "/test/assets/prayer-learning/characters/female/poses/female-v1-sujud.webp",
       "srcAvif": null,
-      "srcset": [],
+      "srcset": [
+        "/test/assets/prayer-learning/characters/female/poses/female-v1-sujud.webp"
+      ],
       "sourceClaimIds": [],
-      "status": "MISSING",
+      "status": "test-delivered",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
       "reviewPass1": false,
       "reviewPass2": false,
       "approved": false,
-      "active": false,
+      "active": true,
       "versions": [
         "female-v1-sujud-v1"
       ],
@@ -345,26 +372,34 @@
       "modestyPrecedence": true,
       "fiqhIndependentOfGarmentFall": true,
       "expectedFile": "female-v1-sujud.webp",
-      "expectedAvif": "female-v1-sujud.avif"
+      "expectedAvif": "female-v1-sujud.avif",
+      "filePresent": true,
+      "testOnly": true,
+      "aiGenerated": true,
+      "aiConstraint": "no-eyes",
+      "religiousReviewPending": true,
+      "notes": "User-authorized AI figure (no eyes). Dar Test only. Religious pose review required before live."
     },
     "sitting-between-sujud": {
       "assetId": "female-v1-sitting-between-sujud-v1",
       "characterId": "dar-prayer-female-v1",
       "poseId": "sitting-between-sujud",
       "assetType": "image",
-      "src": null,
-      "srcWebp": null,
+      "src": "/test/assets/prayer-learning/characters/female/poses/female-v1-sitting-between-sujud.webp",
+      "srcWebp": "/test/assets/prayer-learning/characters/female/poses/female-v1-sitting-between-sujud.webp",
       "srcAvif": null,
-      "srcset": [],
+      "srcset": [
+        "/test/assets/prayer-learning/characters/female/poses/female-v1-sitting-between-sujud.webp"
+      ],
       "sourceClaimIds": [],
-      "status": "MISSING",
+      "status": "test-delivered",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
       "reviewPass1": false,
       "reviewPass2": false,
       "approved": false,
-      "active": false,
+      "active": true,
       "versions": [
         "female-v1-sitting-between-sujud-v1"
       ],
@@ -413,26 +448,34 @@
       "modestyPrecedence": true,
       "fiqhIndependentOfGarmentFall": true,
       "expectedFile": "female-v1-sitting-between-sujud.webp",
-      "expectedAvif": "female-v1-sitting-between-sujud.avif"
+      "expectedAvif": "female-v1-sitting-between-sujud.avif",
+      "filePresent": true,
+      "testOnly": true,
+      "aiGenerated": true,
+      "aiConstraint": "no-eyes",
+      "religiousReviewPending": true,
+      "notes": "User-authorized AI figure (no eyes). Dar Test only. Religious pose review required before live."
     },
     "rise-next-rakah": {
       "assetId": "female-v1-rise-next-rakah-v1",
       "characterId": "dar-prayer-female-v1",
       "poseId": "rise-next-rakah",
       "assetType": "image",
-      "src": null,
-      "srcWebp": null,
+      "src": "/test/assets/prayer-learning/characters/female/poses/female-v1-qiyam.webp",
+      "srcWebp": "/test/assets/prayer-learning/characters/female/poses/female-v1-qiyam.webp",
       "srcAvif": null,
-      "srcset": [],
+      "srcset": [
+        "/test/assets/prayer-learning/characters/female/poses/female-v1-qiyam.webp"
+      ],
       "sourceClaimIds": [],
-      "status": "MISSING",
+      "status": "test-delivered",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
       "reviewPass1": false,
       "reviewPass2": false,
       "approved": false,
-      "active": false,
+      "active": true,
       "versions": [
         "female-v1-rise-next-rakah-v1"
       ],
@@ -481,26 +524,32 @@
       "modestyPrecedence": true,
       "fiqhIndependentOfGarmentFall": true,
       "expectedFile": "female-v1-rise-next-rakah.webp",
-      "expectedAvif": "female-v1-rise-next-rakah.avif"
+      "expectedAvif": "female-v1-rise-next-rakah.avif",
+      "poseReuseFrom": "qiyam",
+      "testOnly": true,
+      "aiGenerated": true,
+      "religiousReviewPending": true
     },
     "tashahhud": {
       "assetId": "female-v1-tashahhud-v1",
       "characterId": "dar-prayer-female-v1",
       "poseId": "tashahhud",
       "assetType": "image",
-      "src": null,
-      "srcWebp": null,
+      "src": "/test/assets/prayer-learning/characters/female/poses/female-v1-tashahhud.webp",
+      "srcWebp": "/test/assets/prayer-learning/characters/female/poses/female-v1-tashahhud.webp",
       "srcAvif": null,
-      "srcset": [],
+      "srcset": [
+        "/test/assets/prayer-learning/characters/female/poses/female-v1-tashahhud.webp"
+      ],
       "sourceClaimIds": [],
-      "status": "MISSING",
+      "status": "test-delivered",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
       "reviewPass1": false,
       "reviewPass2": false,
       "approved": false,
-      "active": false,
+      "active": true,
       "versions": [
         "female-v1-tashahhud-v1"
       ],
@@ -547,26 +596,34 @@
       "noInventedFingerBehavior": true,
       "modestyPrecedence": true,
       "expectedFile": "female-v1-tashahhud.webp",
-      "expectedAvif": "female-v1-tashahhud.avif"
+      "expectedAvif": "female-v1-tashahhud.avif",
+      "filePresent": true,
+      "testOnly": true,
+      "aiGenerated": true,
+      "aiConstraint": "no-eyes",
+      "religiousReviewPending": true,
+      "notes": "User-authorized AI figure (no eyes). Dar Test only. Religious pose review required before live."
     },
     "taslim-right": {
       "assetId": "female-v1-taslim-right-v1",
       "characterId": "dar-prayer-female-v1",
       "poseId": "taslim-right",
       "assetType": "image",
-      "src": null,
-      "srcWebp": null,
+      "src": "/test/assets/prayer-learning/characters/female/poses/female-v1-taslim-right.webp",
+      "srcWebp": "/test/assets/prayer-learning/characters/female/poses/female-v1-taslim-right.webp",
       "srcAvif": null,
-      "srcset": [],
+      "srcset": [
+        "/test/assets/prayer-learning/characters/female/poses/female-v1-taslim-right.webp"
+      ],
       "sourceClaimIds": [],
-      "status": "MISSING",
+      "status": "test-delivered",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
       "reviewPass1": false,
       "reviewPass2": false,
       "approved": false,
-      "active": false,
+      "active": true,
       "versions": [
         "female-v1-taslim-right-v1"
       ],
@@ -612,26 +669,34 @@
       "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
       "modestyPrecedence": true,
       "expectedFile": "female-v1-taslim-right.webp",
-      "expectedAvif": "female-v1-taslim-right.avif"
+      "expectedAvif": "female-v1-taslim-right.avif",
+      "filePresent": true,
+      "testOnly": true,
+      "aiGenerated": true,
+      "aiConstraint": "no-eyes",
+      "religiousReviewPending": true,
+      "notes": "User-authorized AI figure (no eyes). Dar Test only. Religious pose review required before live."
     },
     "taslim-left": {
       "assetId": "female-v1-taslim-left-v1",
       "characterId": "dar-prayer-female-v1",
       "poseId": "taslim-left",
       "assetType": "image",
-      "src": null,
-      "srcWebp": null,
+      "src": "/test/assets/prayer-learning/characters/female/poses/female-v1-taslim-left.webp",
+      "srcWebp": "/test/assets/prayer-learning/characters/female/poses/female-v1-taslim-left.webp",
       "srcAvif": null,
-      "srcset": [],
+      "srcset": [
+        "/test/assets/prayer-learning/characters/female/poses/female-v1-taslim-left.webp"
+      ],
       "sourceClaimIds": [],
-      "status": "MISSING",
+      "status": "test-delivered",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
       "reviewPass1": false,
       "reviewPass2": false,
       "approved": false,
-      "active": false,
+      "active": true,
       "versions": [
         "female-v1-taslim-left-v1"
       ],
@@ -677,53 +742,69 @@
       "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
       "modestyPrecedence": true,
       "expectedFile": "female-v1-taslim-left.webp",
-      "expectedAvif": "female-v1-taslim-left.avif"
+      "expectedAvif": "female-v1-taslim-left.avif",
+      "filePresent": true,
+      "testOnly": true,
+      "aiGenerated": true,
+      "aiConstraint": "no-eyes",
+      "religiousReviewPending": true,
+      "notes": "User-authorized AI figure (no eyes). Dar Test only. Religious pose review required before live."
     },
     "middle-tashahhud": {
       "assetId": "female-v1-middle-tashahhud-v1",
       "characterId": "dar-prayer-female-v1",
       "poseId": "middle-tashahhud",
       "assetType": "image",
-      "src": null,
-      "srcWebp": null,
+      "src": "/test/assets/prayer-learning/characters/female/poses/female-v1-tashahhud.webp",
+      "srcWebp": "/test/assets/prayer-learning/characters/female/poses/female-v1-tashahhud.webp",
       "srcAvif": null,
-      "srcset": [],
+      "srcset": [
+        "/test/assets/prayer-learning/characters/female/poses/female-v1-tashahhud.webp"
+      ],
       "sourceClaimIds": [],
-      "status": "MISSING",
+      "status": "test-delivered",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
       "reviewPass1": false,
       "reviewPass2": false,
       "approved": false,
-      "active": false,
+      "active": true,
       "poseReuseFrom": "tashahhud",
       "expectedFile": "female-v1-middle-tashahhud.webp",
       "expectedAvif": "female-v1-middle-tashahhud.avif",
-      "note": "Slot · may reuse tashahhud master until separate approved asset"
+      "note": "Slot · may reuse tashahhud master until separate approved asset",
+      "testOnly": true,
+      "aiGenerated": true,
+      "religiousReviewPending": true
     },
     "final-tashahhud": {
       "assetId": "female-v1-final-tashahhud-v1",
       "characterId": "dar-prayer-female-v1",
       "poseId": "final-tashahhud",
       "assetType": "image",
-      "src": null,
-      "srcWebp": null,
+      "src": "/test/assets/prayer-learning/characters/female/poses/female-v1-tashahhud.webp",
+      "srcWebp": "/test/assets/prayer-learning/characters/female/poses/female-v1-tashahhud.webp",
       "srcAvif": null,
-      "srcset": [],
+      "srcset": [
+        "/test/assets/prayer-learning/characters/female/poses/female-v1-tashahhud.webp"
+      ],
       "sourceClaimIds": [],
-      "status": "MISSING",
+      "status": "test-delivered",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
       "reviewPass1": false,
       "reviewPass2": false,
       "approved": false,
-      "active": false,
+      "active": true,
       "poseReuseFrom": "tashahhud",
       "expectedFile": "female-v1-final-tashahhud.webp",
       "expectedAvif": "female-v1-final-tashahhud.avif",
-      "note": "Slot · may reuse tashahhud master until separate approved asset"
+      "note": "Slot · may reuse tashahhud master until separate approved asset",
+      "testOnly": true,
+      "aiGenerated": true,
+      "religiousReviewPending": true
     }
   },
   "rejectIf": [
