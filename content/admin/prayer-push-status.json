@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-11T18:16:03.981Z",
+  "updatedAt": "2026-08-11T18:21:06.368Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-11T18:16:03.981Z",
+  "lastCronRun": "2026-08-11T18:21:06.368Z",
   "nextPlannedPush": {
     "prayer": "Maghrib",
     "key": "maghrib",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-11T18:45:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-11T18:00:58.938Z",
-  "windowEnd": "2026-08-12T20:15:58.938Z",
+  "windowStart": "2026-08-11T18:06:01.538Z",
+  "windowEnd": "2026-08-12T20:21:01.538Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 27,
@@ -28,10 +28,10 @@
   "usersWithLocation": 27,
   "usersWithActivePush": 27,
   "locationGroups": 5,
-  "scheduled": 64,
-  "recipients": 350,
+  "scheduled": 65,
+  "recipients": 351,
   "skippedPast": 80,
-  "skippedWindow": 56,
+  "skippedWindow": 55,
   "duplicates": 1,
   "errors": 0,
   "lastError": null,
@@ -92,7 +92,7 @@
         "time": "22:26",
         "advance": {
           "status": "geplant",
-          "recipients": 53
+          "recipients": 54
         },
         "entry": {
           "status": "geplant",
@@ -171,7 +171,7 @@
       "time": "22:26",
       "advance": {
         "status": "geplant",
-        "recipients": 53
+        "recipients": 54
       },
       "entry": {
         "status": "geplant",
@@ -773,6 +773,15 @@
       "mode": "advance",
       "time": "20:59",
       "sendAfter": "2026-08-12T18:54:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "ʿIshāʾ",
+      "key": "isha",
+      "mode": "advance",
+      "time": "22:23",
+      "sendAfter": "2026-08-12T20:18:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin"
     }
