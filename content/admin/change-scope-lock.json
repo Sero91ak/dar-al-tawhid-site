@@ -84,6 +84,15 @@
   ],
   "unlockedScopes": [
     {
+      "id": "gebet-erlernen-maghrib-gate-stop-v645-2026-08-11",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Maghrib-Auftrag Gate-Stop: Fajr HIGH-Bugs → kein Maghrib-Bau. Nur Audit-Report + Scope.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prayer-learning/audit/"
+      ]
+    },
+    {
       "id": "gebet-erlernen-final-ultimatum-v645-2026-08-11",
       "approvedBy": "user-explicit-test-only",
       "reason": "Finaler Ultimativ-Auftrag Gebet erlernen: Fünf-Gebete-Engine (Fajr 19 / Maghrib 28 / 4-Rakʿah 36), Test only. Keine erfundenen religiösen Inhalte. Keine Produktionsfreigabe. technical≠religious≠RC.",
