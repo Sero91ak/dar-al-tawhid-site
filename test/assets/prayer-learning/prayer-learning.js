@@ -1,5 +1,5 @@
 /**
- * DAR AL TAWḤĪD — Gebet erlernen (Test · Studio Poses + Chamber v652)
+ * DAR AL TAWḤĪD — Gebet erlernen (Test · Figure Visible Fix v653)
  * Eigenständige Lernwelt · Figure Stage Pflicht · 3D-Ansicht ein/aus
  * productionEnabled = false | audioVisible = false | TEST ONLY
  * Keine erfundenen religiösen Inhalte · keine Fake-/Silhouette-Ersatzfiguren
@@ -21,7 +21,7 @@
   var POSE_PENDING_LABEL = "Lehrfigur folgt";
   var TEXTS_EMPTY_LABEL = "Noch keine geprüften Texte verfügbar.";
   var OFFLINE_EVIDENCE_LABEL = "Direktnachweis benötigt eine Internetverbindung.";
-  var PHASE = 18;
+  var PHASE = 19;
   var FIGURE_STAGE_REQUIRED = true;
   var THREE_D_ENABLED = true;
   var AYAH_DECK_ENABLED = true;
@@ -131,7 +131,7 @@
     var title = opts.title || "Lehrfigur";
     var src = opts.src || "";
     return (
-      '<div class="prl-poseview prl-poseview--studio-chrome">' +
+      '<div class="prl-figchrome">' +
       '<button type="button" class="prl-3d-btn" data-prl-3d-open' +
       (hasImg ? "" : ' data-prl-3d-empty="1"') +
       ' data-prl-3d-title="' +
@@ -1636,7 +1636,7 @@
       esc(POSE_PENDING_LABEL) +
       "</span>" +
       "</div></div>" +
-      '<div class="prl-poseview prl-poseview--studio-floor" aria-hidden="true"></div></div>'
+      '<div class="prl-figfloor" aria-hidden="true"></div></div>'
     );
   }
 
@@ -1723,7 +1723,7 @@
       esc(label) +
       '" class="prl-poseview-img" loading="eager" decoding="async" data-prl-pose-img>' +
       "</picture></div>" +
-      '<div class="prl-poseview prl-poseview--studio-floor" aria-hidden="true"></div></div>'
+      '<div class="prl-figfloor" aria-hidden="true"></div></div>'
     );
   }
 

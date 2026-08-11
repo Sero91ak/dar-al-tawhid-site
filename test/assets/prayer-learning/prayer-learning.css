@@ -630,7 +630,7 @@ html.prl-immersive .prl-figure-pending[data-prl-pose-placeholder]{
 
 /* 3D Ansicht (base fallback v649) */
 .prl-poseview{position:relative}
-.prl-poseview-chrome{position:absolute;top:10px;right:10px;z-index:4}
+.prl-figchrome{position:absolute;top:10px;right:10px;z-index:4}
 .prl-3d-btn{
   display:inline-flex;align-items:center;gap:6px;
   min-height:34px;padding:6px 11px;border-radius:999px;
@@ -655,3 +655,8 @@ html.prl-immersive .prl-figure-pending[data-prl-pose-placeholder]{
   border:0;background:transparent;padding:0;
 }
 .prl-shell{--prl-poseview-min:min(28vh,240px)}
+
+/* v653 figure visible */
+.prl-figchrome{position:absolute;top:10px;right:10px;z-index:6;pointer-events:none}
+.prl-figchrome .prl-3d-btn{pointer-events:auto}
+.prl-figfloor{display:none}

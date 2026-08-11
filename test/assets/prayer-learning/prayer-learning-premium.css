@@ -1028,7 +1028,7 @@ html.prl-3d-open body{
   overflow:hidden!important;
 }
 .prl-poseview{position:relative}
-.prl-poseview-chrome{
+.prl-figchrome{
   position:absolute;
   top:12px;
   right:12px;
@@ -1209,7 +1209,7 @@ html.prl-3d-open body{
   .prl-3d-panel{padding:12px;border-radius:18px}
   .prl-3d-stage{min-height:min(52vh,440px)}
   .prl-3d-card{width:min(78%,300px)}
-  .prl-poseview-chrome{top:10px;right:10px}
+  .prl-figchrome{top:10px;right:10px}
 }
 @media (prefers-reduced-motion:reduce){
   .prl-3d-btn,.prl-3d-card{transition:none}
@@ -1704,7 +1704,7 @@ html.prl-immersive .prl-3d-btn{
   background:linear-gradient(165deg,rgba(40,32,24,.78),rgba(20,16,12,.88))!important;
   border-color:rgba(201,184,150,.5)!important;
 }
-html.prl-immersive .prl-poseview-chrome{
+html.prl-immersive .prl-figchrome{
   top:10px!important;right:10px!important;
 }
 
@@ -1760,3 +1760,77 @@ html.prl-immersive .prl-poseview .prl-studio-note{
     max-height:min(70vh,580px)!important;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   v653 · Figure Visible Fix
+   Chrome/Floor dürfen KEINE .prl-poseview min-heights erben
+   ═══════════════════════════════════════════════════════════ */
+.prl-figchrome{
+  position:absolute!important;
+  top:10px!important;
+  right:10px!important;
+  z-index:6!important;
+  pointer-events:none!important;
+  min-height:0!important;
+  max-height:none!important;
+  height:auto!important;
+  width:auto!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+.prl-figchrome .prl-3d-btn{pointer-events:auto!important}
+.prl-figfloor{display:none!important}
+
+html.prl-immersive .prl-poseview.prl-poseview--studio,
+html.prl-immersive .prl-poseview{
+  display:grid!important;
+  place-items:center!important;
+}
+html.prl-immersive .prl-poseview::before,
+html.prl-immersive .prl-poseview::after{
+  z-index:0!important;
+}
+html.prl-immersive .prl-figure{
+  z-index:2!important;
+  position:relative!important;
+  min-height:min(38vh,340px)!important;
+  width:100%!important;
+}
+html.prl-immersive .prl-figure picture{
+  display:grid!important;
+  place-items:center!important;
+  width:100%!important;
+  min-height:min(36vh,320px)!important;
+}
+html.prl-immersive .prl-figure img,
+html.prl-immersive .prl-poseview-img{
+  display:block!important;
+  opacity:1!important;
+  visibility:visible!important;
+  position:relative!important;
+  z-index:3!important;
+  width:auto!important;
+  max-width:min(94%,440px)!important;
+  height:auto!important;
+  max-height:min(44vh,400px)!important;
+  object-fit:contain!important;
+}
+html.prl-immersive .prl-poseview .prl-studio-note{
+  z-index:5!important;
+}
+/* 3D: ensure image visible on sand stage */
+html.prl-immersive .prl-3d-card img{
+  display:block!important;
+  opacity:1!important;
+  visibility:visible!important;
+  max-height:100%!important;
+  width:100%!important;
+  object-fit:contain!important;
+}
+html.prl-immersive .prl-3d-pending[hidden]{display:none!important}
+

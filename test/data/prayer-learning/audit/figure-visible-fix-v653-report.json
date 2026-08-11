@@ -1,0 +1,5 @@
+{
+  "id": "figure-visible-fix-v653",
+  "bug": "prl-poseview-chrome and prl-poseview-floor were accidentally renamed to prl-poseview studio variants, inheriting min-height and covering/clipping the figure + emptying 3D",
+  "fix": "renamed to prl-figchrome / prl-figfloor; CSS forces img visible"
+}
