@@ -1,0 +1,74 @@
+{
+  "id": "qiyam-main-v1",
+  "stepId": "qiyam",
+  "titleDe": "Qiyām",
+  "titleAr": "القيام",
+  "instructionDe": null,
+  "arabic": null,
+  "transliteration": null,
+  "meaningDe": null,
+  "spokenText": null,
+  "sourceClaimIds": [],
+  "relatedClaimSlotIds": [
+    "qiyam-standing",
+    "qiyam-hand-position",
+    "qiyam-right-left-hand-relation",
+    "qiyam-foot-position",
+    "qiyam-gaze",
+    "qiyam-transition-to-recitation"
+  ],
+  "variantIds": [],
+  "defaultVariantId": null,
+  "status": "research",
+  "reviewPass1": false,
+  "reviewPass2": false,
+  "approved": false,
+  "audioId": null,
+  "revision": 2,
+  "contentHash": null,
+  "selfApproved": false,
+  "aiGenerated": false,
+  "integrationBlock": "Takbir + Qiyam",
+  "phase": 8,
+  "review": {
+    "contentReview": {
+      "status": "pending",
+      "reviewedAt": null,
+      "reviewer": null
+    },
+    "sourceReview": {
+      "status": "pending",
+      "reviewedAt": null,
+      "reviewer": null
+    },
+    "poseReview": {
+      "status": "pending",
+      "reviewedAt": null,
+      "reviewer": null
+    },
+    "reviewPass1": {
+      "passed": false,
+      "reviewedAt": null,
+      "reviewer": null
+    },
+    "reviewPass2": {
+      "passed": false,
+      "reviewedAt": null,
+      "reviewer": null
+    }
+  },
+  "claimMappings": {
+    "instructionDe": null,
+    "arabic": null,
+    "transliteration": null,
+    "meaningDe": null,
+    "poseDetails": [
+      "qiyam-standing",
+      "qiyam-hand-position",
+      "qiyam-right-left-hand-relation",
+      "qiyam-foot-position",
+      "qiyam-gaze",
+      "qiyam-transition-to-recitation"
+    ]
+  }
+}

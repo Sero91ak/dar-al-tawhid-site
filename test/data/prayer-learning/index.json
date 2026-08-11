@@ -1,0 +1,42 @@
+{
+  "version": 5,
+  "phase": 10,
+  "audioEnabled": false,
+  "environment": "test",
+  "characters": {
+    "male": "dar-prayer-male-v1",
+    "female": "dar-prayer-female-v1"
+  },
+  "paths": {
+    "prayers": "prayers.json",
+    "fajrMaster": "fajr.json",
+    "steps": "steps/",
+    "texts": "texts/",
+    "sources": "sources/",
+    "characters": "characters/",
+    "assets": "assets/poses-registry.json",
+    "audit": "audit/",
+    "content": "content/",
+    "poses": "poses/",
+    "search": "search/index.json",
+    "manifest": "prayer-learning-manifest.json",
+    "review": "review/"
+  },
+  "engine": {
+    "composeFromSequence": true,
+    "poseReuse": true,
+    "renderers": [
+      "swipe",
+      "scroll"
+    ],
+    "productionApprovedAssetsOnly": true,
+    "testPendingAssetsAllowed": true
+  },
+  "productionEnabled": false,
+  "review": {
+    "visitorVisible": false,
+    "route": "gebet-lernen/review",
+    "zeroTrust": true
+  },
+  "integrationBlock": "Sujud + Sitting + Sujud + Rise"
+}

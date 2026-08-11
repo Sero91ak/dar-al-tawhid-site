@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "phase": 10,
+  "computed": true,
+  "note": "releaseReady is computed only — never set manually to true. Phase 9 block still research.",
+  "fajr": {
+    "sequenceValid": false,
+    "contentCoverage": false,
+    "sourceCoverage": false,
+    "malePoseCoverage": false,
+    "femalePoseCoverage": false,
+    "reviewPass1": false,
+    "reviewPass2": false,
+    "releaseReady": false
+  },
+  "productionEnabled": false,
+  "updatedAt": null,
+  "integrationBlock": "Sujud + Sitting + Sujud + Rise"
+}

@@ -1,0 +1,37 @@
+{
+  "characterId": "dar-prayer-female-v1",
+  "version": 1,
+  "locked": true,
+  "label": "DAR Prayer Female v1",
+  "locks": {
+    "niqab": true,
+    "eyeOpeningConstructive": true,
+    "noRecognizableFace": true,
+    "noFacialIdentity": true,
+    "wideFloorLengthAbayah": true,
+    "noChestContour": true,
+    "noWaistContour": true,
+    "noHipContour": true,
+    "noButtockContour": true,
+    "noBodyCurves": true,
+    "wideSleeves": true,
+    "sleevesClosedAtWrist": true,
+    "noBareForearms": true,
+    "sameFabricColorProportions": true,
+    "sameAcrossAllPoses": true
+  },
+  "sujudExtraRules": [
+    "wide-cloth",
+    "no-chest-contour",
+    "no-back-contour",
+    "no-waist-contour",
+    "no-hip-contour",
+    "no-buttock-contour",
+    "niqab-correct",
+    "sleeves-closed"
+  ],
+  "forbidden": [
+    "substitute-figure",
+    "invented-female-fiqh-difference-without-source"
+  ]
+}

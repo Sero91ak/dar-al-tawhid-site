@@ -1,0 +1,62 @@
+{
+  "id": "tashahhud",
+  "titleDe": "Tašahhud",
+  "titleAr": "التشهد",
+  "category": "sitting",
+  "poseReuseAllowed": false,
+  "malePoseId": "tashahhud",
+  "femalePoseId": "tashahhud",
+  "femalePoseStatus": "pending_review",
+  "detailSlots": [
+    "hands",
+    "feet"
+  ],
+  "checkAreas": [
+    "sitting-posture",
+    "left-foot",
+    "right-foot",
+    "left-hand",
+    "right-hand",
+    "finger-hold",
+    "index-finger",
+    "pointing-timing",
+    "gaze",
+    "tashahhud-text",
+    "salat-ibrahimiyya",
+    "dua-before-taslim"
+  ],
+  "textModuleIds": [
+    "tashahhud",
+    "salat-ibrahimiyya",
+    "dua-before-taslim"
+  ],
+  "claimSlotIds": [
+    "tashahhud-sitting",
+    "tashahhud-hands",
+    "tashahhud-index",
+    "tashahhud-text",
+    "salat-ibrahimiyya",
+    "dua-before-taslim"
+  ],
+  "variants": [],
+  "verificationStatus": "research",
+  "audioId": null,
+  "details": [
+    {
+      "id": "hands",
+      "label": "Hände",
+      "assetId": null,
+      "sourceClaimIds": [],
+      "approved": false,
+      "status": "research"
+    },
+    {
+      "id": "feet",
+      "label": "Füße",
+      "assetId": null,
+      "sourceClaimIds": [],
+      "approved": false,
+      "status": "research"
+    }
+  ]
+}
