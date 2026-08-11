@@ -3,14 +3,14 @@
   "gender": "female",
   "label": "DAR Prayer Female v1",
   "locked": true,
-  "masterAsset": "../poses/female-v1-qiyam.webp",
-  "masterAssetStatus": "test-delivered-ai-no-eyes",
+  "masterAsset": null,
+  "masterAssetStatus": "awaiting-delivery",
   "notes": [
     "Nur diese Character-ID verwenden.",
     "Keine Ersatzfigur erzeugen.",
     "Niqāb mit offenem Augenbereich ohne Gesichtsidentität.",
     "Pose-Dateien unter ../poses/ einspielen.",
-    "v651: User authorized AI figure generation without eyes (Dar Test only)."
+    "v654: Alle Figuren-Dateien entfernt (Nutzerauftrag)."
   ],
   "locks": {
     "niqab": true,

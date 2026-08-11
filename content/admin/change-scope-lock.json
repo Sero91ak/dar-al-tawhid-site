@@ -84,6 +84,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "gebet-erlernen-remove-figures-v654-2026-08-11",
+      "approvedBy": "user-explicit-delete-all-figures",
+      "reason": "Nutzer: Alle Figuren komplett löschen. Test only.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "gebet-erlernen-figure-visible-fix-v653-2026-08-11",
       "approvedBy": "user-bug-report-figures-missing",
       "reason": "Fix: Figur unsichtbar weil prl-poseview-chrome/floor falsch zu Studio-Kästen umbenannt wurden. Test only.",

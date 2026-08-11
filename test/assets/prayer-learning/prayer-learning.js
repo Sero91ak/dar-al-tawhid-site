@@ -1,5 +1,5 @@
 /**
- * DAR AL TAWḤĪD — Gebet erlernen (Test · Figure Visible Fix v653)
+ * DAR AL TAWḤĪD — Gebet erlernen (Test · Figures Removed v654)
  * Eigenständige Lernwelt · Figure Stage Pflicht · 3D-Ansicht ein/aus
  * productionEnabled = false | audioVisible = false | TEST ONLY
  * Keine erfundenen religiösen Inhalte · keine Fake-/Silhouette-Ersatzfiguren
@@ -21,7 +21,7 @@
   var POSE_PENDING_LABEL = "Lehrfigur folgt";
   var TEXTS_EMPTY_LABEL = "Noch keine geprüften Texte verfügbar.";
   var OFFLINE_EVIDENCE_LABEL = "Direktnachweis benötigt eine Internetverbindung.";
-  var PHASE = 19;
+  var PHASE = 20;
   var FIGURE_STAGE_REQUIRED = true;
   var THREE_D_ENABLED = true;
   var AYAH_DECK_ENABLED = true;
@@ -141,10 +141,7 @@
       ' aria-label="3D-Ansicht öffnen">' +
       "<b>3D</b><span>Ansicht</span>" +
       "</button>" +
-      "</div>" +
-      (hasImg
-        ? '<p class="prl-studio-note">Studio · Orientierung · Prüfung läuft</p>'
-        : "")
+      "</div>"
     );
   }
 
