@@ -1,0 +1,43 @@
+{
+  "id": "ruku",
+  "titleDe": "Rukūʿ",
+  "titleAr": "الركوع",
+  "category": "bowing",
+  "poseReuseAllowed": false,
+  "malePoseId": "ruku",
+  "femalePoseId": "ruku",
+  "femalePoseStatus": "pending_review",
+  "detailSlots": [
+    "hands",
+    "back",
+    "legs"
+  ],
+  "checkAreas": [
+    "bending",
+    "back",
+    "head",
+    "knees",
+    "hands-on-knees",
+    "finger-hold",
+    "arms",
+    "legs",
+    "feet",
+    "gaze",
+    "dhikr",
+    "transition-up"
+  ],
+  "textModuleIds": [
+    "ruku-dhikr"
+  ],
+  "claimSlotIds": [
+    "ruku-body-bending",
+    "ruku-hands-knees",
+    "ruku-back",
+    "ruku-head",
+    "ruku-dhikr",
+    "ruku-transition"
+  ],
+  "variants": [],
+  "verificationStatus": "research",
+  "audioId": null
+}

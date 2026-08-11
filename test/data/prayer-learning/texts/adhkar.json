@@ -1,0 +1,105 @@
+{
+  "modules": [
+    {
+      "id": "takbir-allahu-akbar",
+      "type": "dhikr",
+      "stepTemplateIds": [
+        "takbir"
+      ],
+      "arabic": null,
+      "transliteration": null,
+      "translationDe": null,
+      "verificationStatus": "research",
+      "sourceClaimIds": [
+        "takbir-wording"
+      ]
+    },
+    {
+      "id": "ruku-dhikr",
+      "type": "dhikr",
+      "stepTemplateIds": [
+        "ruku"
+      ],
+      "arabic": null,
+      "transliteration": null,
+      "translationDe": null,
+      "verificationStatus": "research",
+      "sourceClaimIds": [
+        "ruku-dhikr"
+      ]
+    },
+    {
+      "id": "standing-after-ruku-while",
+      "type": "dhikr",
+      "stepTemplateIds": [
+        "standing-after-ruku"
+      ],
+      "phase": "while-rising",
+      "arabic": null,
+      "transliteration": null,
+      "translationDe": null,
+      "verificationStatus": "research",
+      "sourceClaimIds": [
+        "standing-after-ruku-text-while"
+      ],
+      "note": "Nicht mit Text nach dem Aufrichten vermischen."
+    },
+    {
+      "id": "standing-after-ruku-after",
+      "type": "dhikr",
+      "stepTemplateIds": [
+        "standing-after-ruku"
+      ],
+      "phase": "after-rise",
+      "arabic": null,
+      "transliteration": null,
+      "translationDe": null,
+      "verificationStatus": "research",
+      "sourceClaimIds": [
+        "standing-after-ruku-text-after"
+      ]
+    },
+    {
+      "id": "sujud-dhikr",
+      "type": "dhikr",
+      "stepTemplateIds": [
+        "sujud"
+      ],
+      "arabic": null,
+      "transliteration": null,
+      "translationDe": null,
+      "verificationStatus": "research",
+      "sourceClaimIds": [
+        "sujud-dhikr"
+      ]
+    },
+    {
+      "id": "sitting-between-sujud-dhikr",
+      "type": "dhikr",
+      "stepTemplateIds": [
+        "sitting-between-sujud"
+      ],
+      "arabic": null,
+      "transliteration": null,
+      "translationDe": null,
+      "verificationStatus": "research",
+      "sourceClaimIds": [
+        "sitting-dhikr"
+      ]
+    },
+    {
+      "id": "taslim-wording",
+      "type": "dhikr",
+      "stepTemplateIds": [
+        "taslim"
+      ],
+      "arabic": null,
+      "transliteration": null,
+      "translationDe": null,
+      "verificationStatus": "research",
+      "sourceClaimIds": [
+        "taslim-wording"
+      ]
+    }
+  ]
+}
