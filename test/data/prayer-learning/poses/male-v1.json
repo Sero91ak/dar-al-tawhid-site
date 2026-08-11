@@ -1,0 +1,671 @@
+{
+  "characterId": "dar-prayer-male-v1",
+  "activeAssets": {
+    "takbir": null,
+    "qiyam": null,
+    "ruku": null,
+    "standing-after-ruku": null,
+    "sujud": null,
+    "sitting-between-sujud": null,
+    "rise-next-rakah": null,
+    "tashahhud": null,
+    "taslim-right": null,
+    "taslim-left": null,
+    "middle-tashahhud": null,
+    "final-tashahhud": null
+  },
+  "poses": {
+    "takbir": {
+      "assetId": "male-v1-takbir-v1",
+      "characterId": "dar-prayer-male-v1",
+      "poseId": "takbir",
+      "assetType": "image",
+      "src": null,
+      "srcWebp": null,
+      "srcAvif": null,
+      "srcset": [],
+      "sourceClaimIds": [],
+      "status": "MISSING",
+      "characterConsistency": false,
+      "clothingReview": false,
+      "poseReview": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "active": false,
+      "versions": [
+        "male-v1-takbir-v1"
+      ],
+      "revision": 1,
+      "visualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null
+      },
+      "review": {
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "integrationBlock": "Takbir + Qiyam",
+      "phase": 8,
+      "expectedFile": "male-v1-takbir.webp",
+      "expectedAvif": "male-v1-takbir.avif"
+    },
+    "qiyam": {
+      "assetId": "male-v1-qiyam-v1",
+      "characterId": "dar-prayer-male-v1",
+      "poseId": "qiyam",
+      "assetType": "image",
+      "src": null,
+      "srcWebp": null,
+      "srcAvif": null,
+      "srcset": [],
+      "sourceClaimIds": [],
+      "status": "MISSING",
+      "characterConsistency": false,
+      "clothingReview": false,
+      "poseReview": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "active": false,
+      "versions": [
+        "male-v1-qiyam-v1"
+      ],
+      "revision": 1,
+      "visualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null
+      },
+      "review": {
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "integrationBlock": "Takbir + Qiyam",
+      "phase": 8,
+      "expectedFile": "male-v1-qiyam.webp",
+      "expectedAvif": "male-v1-qiyam.avif"
+    },
+    "ruku": {
+      "assetId": "male-v1-ruku-v1",
+      "characterId": "dar-prayer-male-v1",
+      "poseId": "ruku",
+      "assetType": "image",
+      "src": null,
+      "srcWebp": null,
+      "srcAvif": null,
+      "srcset": [],
+      "sourceClaimIds": [],
+      "status": "MISSING",
+      "characterConsistency": false,
+      "clothingReview": false,
+      "poseReview": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "active": false,
+      "versions": [
+        "male-v1-ruku-v1"
+      ],
+      "revision": 1,
+      "visualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null,
+        "shoulderWidth": null,
+        "beardVisibleInBow": null
+      },
+      "review": {
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "phase": 9,
+      "integrationBlock": "Recitation + Ruku + Standing After Ruku",
+      "expectedFile": "male-v1-ruku.webp",
+      "expectedAvif": "male-v1-ruku.avif"
+    },
+    "standing-after-ruku": {
+      "assetId": "male-v1-standing-after-ruku-v1",
+      "characterId": "dar-prayer-male-v1",
+      "poseId": "standing-after-ruku",
+      "assetType": "image",
+      "src": null,
+      "srcWebp": null,
+      "srcAvif": null,
+      "srcset": [],
+      "sourceClaimIds": [],
+      "status": "MISSING",
+      "characterConsistency": false,
+      "clothingReview": false,
+      "poseReview": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "active": false,
+      "versions": [
+        "male-v1-standing-after-ruku-v1"
+      ],
+      "revision": 1,
+      "visualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null
+      },
+      "review": {
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "phase": 9,
+      "integrationBlock": "Recitation + Ruku + Standing After Ruku",
+      "expectedFile": "male-v1-standing-after-ruku.webp",
+      "expectedAvif": "male-v1-standing-after-ruku.avif"
+    },
+    "sujud": {
+      "assetId": "male-v1-sujud-v1",
+      "characterId": "dar-prayer-male-v1",
+      "poseId": "sujud",
+      "assetType": "image",
+      "src": null,
+      "srcWebp": null,
+      "srcAvif": null,
+      "srcset": [],
+      "sourceClaimIds": [],
+      "status": "MISSING",
+      "characterConsistency": false,
+      "clothingReview": false,
+      "poseReview": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "active": false,
+      "versions": [
+        "male-v1-sujud-v1"
+      ],
+      "revision": 1,
+      "visualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null,
+        "sameDarkThobe": null,
+        "beardMayBePartiallyOccluded": null
+      },
+      "review": {
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "phase": 10,
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise",
+      "expectedFile": "male-v1-sujud.webp",
+      "expectedAvif": "male-v1-sujud.avif"
+    },
+    "sitting-between-sujud": {
+      "assetId": "male-v1-sitting-between-sujud-v1",
+      "characterId": "dar-prayer-male-v1",
+      "poseId": "sitting-between-sujud",
+      "assetType": "image",
+      "src": null,
+      "srcWebp": null,
+      "srcAvif": null,
+      "srcset": [],
+      "sourceClaimIds": [],
+      "status": "MISSING",
+      "characterConsistency": false,
+      "clothingReview": false,
+      "poseReview": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "active": false,
+      "versions": [
+        "male-v1-sitting-between-sujud-v1"
+      ],
+      "revision": 1,
+      "visualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null,
+        "sameDarkThobe": null,
+        "beardMayBePartiallyOccluded": null
+      },
+      "review": {
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "phase": 10,
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise",
+      "expectedFile": "male-v1-sitting-between-sujud.webp",
+      "expectedAvif": "male-v1-sitting-between-sujud.avif"
+    },
+    "rise-next-rakah": {
+      "assetId": "male-v1-rise-next-rakah-v1",
+      "characterId": "dar-prayer-male-v1",
+      "poseId": "rise-next-rakah",
+      "assetType": "image",
+      "src": null,
+      "srcWebp": null,
+      "srcAvif": null,
+      "srcset": [],
+      "sourceClaimIds": [],
+      "status": "MISSING",
+      "characterConsistency": false,
+      "clothingReview": false,
+      "poseReview": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "active": false,
+      "versions": [
+        "male-v1-rise-next-rakah-v1"
+      ],
+      "revision": 1,
+      "visualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null,
+        "sameDarkThobe": null,
+        "beardMayBePartiallyOccluded": null
+      },
+      "review": {
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "phase": 10,
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise",
+      "expectedFile": "male-v1-rise-next-rakah.webp",
+      "expectedAvif": "male-v1-rise-next-rakah.avif"
+    },
+    "tashahhud": {
+      "assetId": "male-v1-tashahhud-v1",
+      "characterId": "dar-prayer-male-v1",
+      "poseId": "tashahhud",
+      "assetType": "image",
+      "src": null,
+      "srcWebp": null,
+      "srcAvif": null,
+      "srcset": [],
+      "sourceClaimIds": [],
+      "status": "MISSING",
+      "characterConsistency": false,
+      "clothingReview": false,
+      "poseReview": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "active": false,
+      "versions": [
+        "male-v1-tashahhud-v1"
+      ],
+      "revision": 1,
+      "visualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null,
+        "sameDarkThobe": null
+      },
+      "review": {
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "phase": 11,
+      "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+      "fingerDetailsRequireSource": true,
+      "noInventedFingerBehavior": true,
+      "expectedFile": "male-v1-tashahhud.webp",
+      "expectedAvif": "male-v1-tashahhud.avif"
+    },
+    "taslim-right": {
+      "assetId": "male-v1-taslim-right-v1",
+      "characterId": "dar-prayer-male-v1",
+      "poseId": "taslim-right",
+      "assetType": "image",
+      "src": null,
+      "srcWebp": null,
+      "srcAvif": null,
+      "srcset": [],
+      "sourceClaimIds": [],
+      "status": "MISSING",
+      "characterConsistency": false,
+      "clothingReview": false,
+      "poseReview": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "active": false,
+      "versions": [
+        "male-v1-taslim-right-v1"
+      ],
+      "revision": 1,
+      "visualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null,
+        "sameDarkThobe": null,
+        "beardConsistentOnHeadTurn": null
+      },
+      "review": {
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "phase": 11,
+      "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+      "expectedFile": "male-v1-taslim-right.webp",
+      "expectedAvif": "male-v1-taslim-right.avif"
+    },
+    "taslim-left": {
+      "assetId": "male-v1-taslim-left-v1",
+      "characterId": "dar-prayer-male-v1",
+      "poseId": "taslim-left",
+      "assetType": "image",
+      "src": null,
+      "srcWebp": null,
+      "srcAvif": null,
+      "srcset": [],
+      "sourceClaimIds": [],
+      "status": "MISSING",
+      "characterConsistency": false,
+      "clothingReview": false,
+      "poseReview": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "active": false,
+      "versions": [
+        "male-v1-taslim-left-v1"
+      ],
+      "revision": 1,
+      "visualChecks": {
+        "muscularBuild": null,
+        "fullBeard": null,
+        "moustache": null,
+        "sameKufi": null,
+        "sameClothing": null,
+        "faceless": null,
+        "noCharacterDrift": null,
+        "sameDarkThobe": null,
+        "beardConsistentOnHeadTurn": null
+      },
+      "review": {
+        "sourceReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "poseReview": {
+          "status": "pending",
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass1": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        },
+        "reviewPass2": {
+          "passed": false,
+          "reviewedAt": null,
+          "reviewer": null
+        }
+      },
+      "phase": 11,
+      "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+      "expectedFile": "male-v1-taslim-left.webp",
+      "expectedAvif": "male-v1-taslim-left.avif"
+    },
+    "middle-tashahhud": {
+      "assetId": "male-v1-middle-tashahhud-v1",
+      "characterId": "dar-prayer-male-v1",
+      "poseId": "middle-tashahhud",
+      "assetType": "image",
+      "src": null,
+      "srcWebp": null,
+      "srcAvif": null,
+      "srcset": [],
+      "sourceClaimIds": [],
+      "status": "MISSING",
+      "characterConsistency": false,
+      "clothingReview": false,
+      "poseReview": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "active": false,
+      "poseReuseFrom": "tashahhud",
+      "expectedFile": "male-v1-middle-tashahhud.webp",
+      "expectedAvif": "male-v1-middle-tashahhud.avif",
+      "note": "Slot · may reuse tashahhud master until separate approved asset"
+    },
+    "final-tashahhud": {
+      "assetId": "male-v1-final-tashahhud-v1",
+      "characterId": "dar-prayer-male-v1",
+      "poseId": "final-tashahhud",
+      "assetType": "image",
+      "src": null,
+      "srcWebp": null,
+      "srcAvif": null,
+      "srcset": [],
+      "sourceClaimIds": [],
+      "status": "MISSING",
+      "characterConsistency": false,
+      "clothingReview": false,
+      "poseReview": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "active": false,
+      "poseReuseFrom": "tashahhud",
+      "expectedFile": "male-v1-final-tashahhud.webp",
+      "expectedAvif": "male-v1-final-tashahhud.avif",
+      "note": "Slot · may reuse tashahhud master until separate approved asset"
+    }
+  },
+  "rejectIf": [
+    "face-shown",
+    "build-drift",
+    "beard-missing",
+    "moustache-missing",
+    "kufi-changed",
+    "thawb-changed",
+    "different-character"
+  ],
+  "phase": 13,
+  "note": "Phase 13: No approved runtime assets present. Placeholders remain until reviewed AVIF/WebP intake."
+}

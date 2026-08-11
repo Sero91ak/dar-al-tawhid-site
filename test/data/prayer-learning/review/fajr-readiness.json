@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "phase": 12,
+  "computed": true,
+  "note": "releaseReady / fajrPreReleasePass computed by phase12-check — never set manually to true.",
+  "fajr": {
+    "sequenceValid": true,
+    "contentCoverage": false,
+    "sourceCoverage": false,
+    "malePoseCoverage": false,
+    "femalePoseCoverage": false,
+    "reviewPass1": false,
+    "reviewPass2": false,
+    "releaseReady": false,
+    "requiredSteps": 19,
+    "technicalSequenceComplete": true,
+    "swipeStable": true,
+    "scrollStable": true,
+    "stateStable": true,
+    "characterStable": true,
+    "responsiveStable": false,
+    "offlineStable": false,
+    "religiousReviewComplete": false
+  },
+  "productionEnabled": false,
+  "updatedAt": "2026-08-11T10:00:02.055Z",
+  "integrationBlock": "Full Fajr QA",
+  "technicalFajrComplete": true,
+  "religiousFajrApproved": false,
+  "fajrPreReleasePass": false,
+  "technicalFajrReady": true
+}

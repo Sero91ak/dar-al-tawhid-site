@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "takbir",
+      "terms": [
+        "Takbīr",
+        "Takbirat",
+        "تكبيرة",
+        "takbir"
+      ],
+      "type": "pose",
+      "target": "fajr-r1-takbir"
+    },
+    {
+      "id": "qiyam",
+      "terms": [
+        "Qiyām",
+        "Qiyam",
+        "القيام",
+        "stehen"
+      ],
+      "type": "pose",
+      "target": "fajr-r1-qiyam"
+    },
+    {
+      "id": "ruku",
+      "terms": [
+        "Rukūʿ",
+        "Ruku",
+        "الركوع"
+      ],
+      "type": "pose",
+      "target": "fajr-r1-ruku"
+    },
+    {
+      "id": "sujud",
+      "terms": [
+        "Suǧūd",
+        "Sujud",
+        "السجود"
+      ],
+      "type": "pose",
+      "target": "fajr-r1-sujud-1"
+    },
+    {
+      "id": "sitting",
+      "terms": [
+        "Sitzen",
+        "جلسة",
+        "jalsa"
+      ],
+      "type": "pose",
+      "target": "fajr-r1-sitting"
+    },
+    {
+      "id": "tashahhud",
+      "terms": [
+        "Tašahhud",
+        "Tashahhud",
+        "التشهد"
+      ],
+      "type": "pose",
+      "target": "fajr-r2-tashahhud"
+    },
+    {
+      "id": "taslim",
+      "terms": [
+        "Taslīm",
+        "Taslim",
+        "التسليم"
+      ],
+      "type": "pose",
+      "target": "fajr-r2-taslim-right"
+    },
+    {
+      "id": "fajr",
+      "terms": [
+        "Fajr",
+        "الفجر",
+        "Morgengebet"
+      ],
+      "type": "prayer",
+      "target": "fajr"
+    }
+  ]
+}
