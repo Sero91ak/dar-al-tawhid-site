@@ -1,6 +1,6 @@
 /* DAR AL TAWḤĪD — Gebet erlernen (Test Phase 2) */
 .prl-shell{
-  --prl-stage-min:min(48vh,440px);
+  --prl-poseview-min:min(48vh,440px);
   display:grid;
   gap:16px;
   padding:2px 0 28px;
@@ -137,9 +137,9 @@
   font-variant-numeric:tabular-nums;
   text-align:center;
 }
-.prl-stage{
+.prl-poseview{
   position:relative;
-  min-height:var(--prl-stage-min);
+  min-height:var(--prl-poseview-min);
   display:grid;
   place-items:center;
   border-radius:28px;
@@ -151,7 +151,7 @@
 }
 .prl-figure{
   width:min(100%,360px);
-  min-height:calc(var(--prl-stage-min) * .82);
+  min-height:calc(var(--prl-poseview-min) * .82);
   display:grid;
   place-items:center;
   padding:12px;
@@ -171,7 +171,7 @@
 }
 .prl-figure-pending b{font-size:15px}
 .prl-figure-pending span{font-size:12px;line-height:1.45;opacity:.78}
-.prl-stage-floor{
+.prl-poseview-floor{
   position:absolute;
   left:18%;
   right:18%;
@@ -305,6 +305,7 @@
   gap:0;
   margin:0 -4px;
   scrollbar-width:none;
+  align-items:flex-start;
 }
 .prl-swipe-track::-webkit-scrollbar{display:none}
 .prl-swipe-slide{
@@ -315,6 +316,9 @@
   gap:14px;
   padding:0 4px 8px;
   box-sizing:border-box;
+  align-content:start;
+  align-self:flex-start;
+  height:auto;
 }
 .prl-scroll-list{display:grid;gap:0}
 .prl-scroll-item{
@@ -352,8 +356,8 @@
 }
 .prl-quran{margin-top:6px}
 .prl-quran .quran-ayah{margin-bottom:8px}
-.prl-stage--loading .prl-figure-pending{opacity:.72}
-.prl-learn-layout.is-dual .prl-stage{
+.prl-poseview--loading .prl-figure-pending{opacity:.72}
+.prl-learn-layout.is-dual .prl-poseview{
   min-height:min(62vh,520px);
   position:sticky;
   top:calc(12px + env(safe-area-inset-top,0px));
@@ -417,10 +421,10 @@
 .prl-sheet-body{display:grid;gap:10px;font-size:14px;line-height:1.5}
 @media (max-width:699px){
   .prl-learn-layout.is-dual{grid-template-columns:1fr}
-  .prl-shell{--prl-stage-min:min(46vh,380px)}
+  .prl-shell{--prl-poseview-min:min(46vh,380px)}
 }
 @media (min-width:700px) and (orientation:landscape){
-  .prl-shell{--prl-stage-min:min(58vh,520px)}
+  .prl-shell{--prl-poseview-min:min(58vh,520px)}
 }
 
 .prl-test-marker{
@@ -469,11 +473,11 @@
   height:auto;
   max-width:100%;
 }
-.prl-shell[data-prl-container="phone"]{--prl-stage-min:min(46vh,400px)}
-.prl-shell[data-prl-container="phone-small"]{--prl-stage-min:min(40vh,320px)}
+.prl-shell[data-prl-container="phone"]{--prl-poseview-min:min(46vh,400px)}
+.prl-shell[data-prl-container="phone-small"]{--prl-poseview-min:min(40vh,320px)}
 .prl-shell[data-prl-container="phone-small"] .prl-step-copy h3{font-size:clamp(20px,5vw,26px)}
 .prl-shell[data-prl-container="fold-open"],
-.prl-shell[data-prl-container="tablet-landscape"]{--prl-stage-min:min(62vh,540px)}
+.prl-shell[data-prl-container="tablet-landscape"]{--prl-poseview-min:min(62vh,540px)}
 .prl-sheet.is-side{
   align-items:stretch;
   justify-items:end;
@@ -571,7 +575,7 @@
 
 
 /* Phase 7 – usable test polish */
-.prl-shell{--prl-stage-min:min(52vh,460px)}
+.prl-shell{--prl-poseview-min:min(52vh,460px)}
 .prl-char-lock{
   display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 8px;font-size:11px;opacity:.72
 }
@@ -599,13 +603,26 @@
   .prl-segment button,.prl-btn,.prl-swipe-track{transition:none;scroll-behavior:auto}
 }
 .prl-figure-pending[data-prl-pose-placeholder]{
-  justify-content:center;min-height:calc(var(--prl-stage-min) * .78);
+  justify-content:center;min-height:calc(var(--prl-poseview-min) * .78);
   background:color-mix(in srgb, var(--card, transparent) 70%, transparent)
 }
-.prl-shell[data-prl-container="phone"]{--prl-stage-min:min(52vh,440px)}
+.prl-shell[data-prl-container="phone"]{--prl-poseview-min:min(52vh,440px)}
 .prl-nav{
   bottom:calc(78px + env(safe-area-inset-bottom,0px));
   z-index:6
 }
 
 .prl-last-viewed{margin:8px 0 0;font-size:12px;opacity:.72}
+
+
+/* v648-poseview-height-lock: prevent compounded min-heights */
+html.prl-immersive .prl-poseview,
+html.prl-immersive .prl-stage{
+  min-height:clamp(300px,42vh,400px)!important;
+  max-height:min(48vh,420px);
+}
+html.prl-immersive .prl-figure,
+html.prl-immersive .prl-figure-pending,
+html.prl-immersive .prl-figure-pending[data-prl-pose-placeholder]{
+  min-height:0!important;
+}

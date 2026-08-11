@@ -1,8 +1,8 @@
 /**
- * DAR AL TAWḤĪD — Gebet erlernen (Test · Atelier Identity v647)
- * Eigenständige visuelle Welt · Fajr 19 · Maġrib 28 · 4-Rakʿah 36
+ * DAR AL TAWḤĪD — Gebet erlernen (Test · Visual Step Fix v648)
+ * Eigenständige Lernwelt · Figure Stage Pflicht · Fajr 19 · Maġrib 28 · 4-Rakʿah 36
  * productionEnabled = false | audioVisible = false | TEST ONLY
- * Keine erfundenen religiösen Inhalte · keine Fake-Pose-Assets
+ * Keine erfundenen religiösen Inhalte · keine Fake-/Silhouette-Ersatzfiguren
  */
 (function (global) {
   "use strict";
@@ -17,11 +17,12 @@
   var AUDIO_VISIBLE = false;
   var AUDIO_PRELOAD = false;
   var AUDIO_AUTOPLAY = false;
-  var CONTENT_PENDING_LABEL = "Inhalt wird quellengeprüft.";
-  var POSE_PENDING_LABEL = "Lehrfigur wird vorbereitet.";
+  var CONTENT_PENDING_LABEL = "In Prüfung";
+  var POSE_PENDING_LABEL = "Lehrfigur folgt";
   var TEXTS_EMPTY_LABEL = "Noch keine geprüften Texte verfügbar.";
   var OFFLINE_EVIDENCE_LABEL = "Direktnachweis benötigt eine Internetverbindung.";
-  var PHASE = 13;
+  var PHASE = 14;
+  var FIGURE_STAGE_REQUIRED = true;
   var PRAYER_IDS = ["fajr", "maghrib", "dhuhr", "asr", "isha"];
   var CHAR_MALE = "dar-prayer-male-v1";
   var CHAR_FEMALE = "dar-prayer-female-v1";
@@ -35,23 +36,6 @@
       if (on) root.classList.add(IMMERSIVE_CLASS);
       else root.classList.remove(IMMERSIVE_CLASS);
     } catch (e) {}
-  }
-
-  function silhouetteSvg(character) {
-    var female = character === "female" || character === CHAR_FEMALE;
-    // Abstract Lehrfigur-Silhouette — kein Pose-Foto, keine fremde Figur
-    if (female) {
-      return (
-        '<svg class="prl-sil" viewBox="0 0 120 220" aria-hidden="true" focusable="false">' +
-        '<path fill="currentColor" opacity=".88" d="M60 18c-9 0-16 6-16 15v8c0 4 2 7 5 9l-3 10c-10 6-18 20-18 38v18c0 6 4 10 9 10h4v64c0 8 5 14 12 14h14c7 0 12-6 12-14v-64h4c5 0 9-4 9-10v-18c0-18-8-32-18-38l-3-10c3-2 5-5 5-9v-8c0-9-7-15-16-15zm0 10c4 0 7 2 7 5v6H53v-6c0-3 3-5 7-5zm-22 70c0-14 8-26 16-31 2 8 6 14 14 14s12-6 14-14c8 5 16 17 16 31v12H38v-12z"/>' +
-        "</svg>"
-      );
-    }
-    return (
-      '<svg class="prl-sil" viewBox="0 0 120 220" aria-hidden="true" focusable="false">' +
-      '<path fill="currentColor" opacity=".88" d="M60 14c-11 0-20 8-20 20 0 7 3 12 8 16-2 3-4 7-4 12v8c-12 8-20 24-20 44v14c0 6 4 10 9 10h5v58c0 8 5 14 12 14h20c7 0 12-6 12-14v-58h5c5 0 9-4 9-10v-14c0-20-8-36-20-44v-8c0-5-2-9-4-12 5-4 8-9 8-16 0-12-9-20-20-20zm0 12c5 0 9 3 9 8s-4 8-9 8-9-3-9-8 4-8 9-8zm-18 78c0-16 8-28 18-34 2 7 6 12 12 12s10-5 12-12c10 6 18 18 18 34v8H42v-8z"/>' +
-      "</svg>"
-    );
   }
 
   function topbarHtml(opts) {
@@ -846,22 +830,32 @@
       return id >= start && id <= end;
     });
     if (!rows.length) return "";
+    var surahName = surahData.transliteration || surahData.nameLatin || surahData.name || ("Sūrah " + String(ref.surah));
     return (
-      '<div class="prl-quran" data-prl-quran-reuse="1" data-prl-surah="' +
+      '<div class="prl-recite" data-prl-quran-reuse="1" data-prl-prayer-quran="1" data-prl-surah="' +
       esc(String(ref.surah)) +
       '">' +
+      '<div class="prl-recite-surah">' +
+      esc(String(surahName).toUpperCase().indexOf("FATI") >= 0 || Number(ref.surah) === 1 ? "AL-FĀTIḤAH" : surahName) +
+      "</div>" +
       rows
         .map(function (v) {
           var id = v.id || v.number || v.ayah || "";
           var ar = v.ar || v.arabic || v.text || "";
+          var tr = v.tr_readable || v.tr_academic || v.tr || v.transliteration || "";
+          var de = v.de || v.translationDe || v.meaningDe || "";
           return (
-            '<div class="quran-ayah prl-quran-ayah">' +
-            '<div class="quran-ayah-num">Āyah ' +
+            '<div class="prl-ayah" data-prl-ayah="' +
+            esc(String(id)) +
+            '">' +
+            '<div class="prl-ayah-num">Āyah ' +
             esc(String(id)) +
             "</div>" +
-            '<div class="quran-ayah-ar" lang="ar" dir="rtl">' +
-            esc(ar) +
-            "</div>" +
+            (ar
+              ? '<div class="prl-ar-text prl-ayah-ar" lang="ar" dir="rtl">' + esc(ar) + "</div>"
+              : "") +
+            (tr ? '<div class="prl-tr prl-ayah-tr">' + esc(tr) + "</div>" : "") +
+            (de ? '<div class="prl-de prl-ayah-de">' + esc(de) + "</div>" : "") +
             "</div>"
           );
         })
@@ -1427,55 +1421,105 @@
     };
   }
 
-  function figurePlaceholder(character, poseKey, title) {
-    var cid = characterIdFromKey(character);
-    var pendingKey = cid + ":" + poseKey;
+  function figureStageFrame(opts) {
+    opts = opts || {};
+    var cid = opts.characterId || CHAR_MALE;
+    var poseKey = opts.poseId || "";
+    var title = opts.title || poseKey;
+    var status = opts.status || "MISSING";
+    var genderLabel = cid === CHAR_FEMALE ? "Frauen" : "Männer";
+    var compact = !!opts.compact;
+    var pendingKey = cid + ":" + poseKey + ":" + status;
     if (missingAssets.indexOf(pendingKey) < 0) missingAssets.push(pendingKey);
+    // Figure Stage bleibt IMMER im Layout — keine Silhouette / kein Stock-Ersatz
     return (
-      '<div class="prl-stage" aria-label="Lehrfigur">' +
+      '<div class="prl-poseview' +
+      (compact ? " prl-poseview--compact" : "") +
+      '" role="img" aria-label="' +
+      esc("Lehrfigur · " + title) +
+      '" data-prl-figure-stage="1" data-prl-character-id="' +
+      esc(cid) +
+      '" data-prl-pose-id="' +
+      esc(poseKey) +
+      '" data-prl-pose-status="' +
+      esc(status) +
+      '">' +
       '<div class="prl-figure">' +
       '<div class="prl-figure-pending" data-prl-pose-placeholder="1">' +
-      silhouetteSvg(character) +
-      "<b>" + esc(title || poseKey) + "</b>" +
-      "<span>" + esc(POSE_PENDING_LABEL) + "</span>" +
+      '<div class="prl-figure-frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>' +
+      '<span class="prl-figure-gender">' +
+      esc(genderLabel) +
+      "</span>" +
+      "<b>" +
+      esc(title || "Stellung") +
+      "</b>" +
+      "<span>" +
+      esc(POSE_PENDING_LABEL) +
+      "</span>" +
       "</div></div>" +
-      '<div class="prl-stage-floor" aria-hidden="true"></div></div>'
+      '<div class="prl-poseview-floor" aria-hidden="true"></div></div>'
     );
   }
 
-  async function figureHtmlResolved(character, step) {
+  function figurePlaceholder(character, poseKey, title) {
+    return figureStageFrame({
+      characterId: characterIdFromKey(character),
+      poseId: poseKey,
+      title: title,
+      status: "MISSING"
+    });
+  }
+
+  async function figureHtmlResolved(character, step, opts) {
+    opts = opts || {};
     await ensureRegistry();
     await ensurePoseSlotRegistries();
-    var poseKey = step.poseId || (character === "female" ? (step.femalePoseId || step.femalePose) : (step.malePoseId || step.malePose));
+    var poseKey =
+      step.poseId ||
+      (character === "female" ? step.femalePoseId || step.femalePose : step.malePoseId || step.malePose);
     var cid = characterIdFromKey(character);
-    var resolved = resolvePrayerPose({ characterId: cid, poseId: poseKey, environment: isTestEnv() ? "test" : "production" });
+    var resolved = resolvePrayerPose({
+      characterId: cid,
+      poseId: poseKey,
+      environment: isTestEnv() ? "test" : "production"
+    });
     var label = "Darstellung der " + (step.titleDe || poseKey) + "-Stellung";
-    if (!resolved.ok) {
-      var status = resolved.reason || "MISSING";
-      var pendingKey = cid + ":" + poseKey + ":" + status;
-      if (missingAssets.indexOf(pendingKey) < 0) missingAssets.push(pendingKey);
-      return (
-        '<div class="prl-stage" role="img" aria-label="' + esc(label) + '" data-prl-character-id="' + esc(cid) + '" data-prl-pose-id="' + esc(poseKey) + '" data-prl-pose-status="' + esc(status) + '">' +
-        '<div class="prl-figure"><div class="prl-figure-pending" data-prl-pose-placeholder="1">' +
-        silhouetteSvg(character) +
-        "<b>" + esc(step.titleDe || poseKey) + "</b>" +
-        "<span>" + esc(POSE_PENDING_LABEL) + "</span>" +
-        '</div></div><div class="prl-stage-floor" aria-hidden="true"></div></div>'
-      );
+    if (!resolved.ok || !resolved.url) {
+      return figureStageFrame({
+        characterId: cid,
+        poseId: poseKey,
+        title: step.titleDe || poseKey,
+        status: resolved.reason || "MISSING",
+        compact: !!opts.compact
+      });
     }
     var srcset = "";
     if (resolved.srcset && resolved.srcset.length) {
       srcset = ' srcset="' + esc(resolved.srcset.join(", ")) + '"';
     }
     return (
-      '<div class="prl-stage" data-prl-character-id="' + esc(resolved.characterId) + '" data-prl-pose-id="' + esc(resolved.poseId) + '" data-prl-asset-id="' + esc(resolved.assetId) + '">' +
+      '<div class="prl-poseview' +
+      (opts.compact ? " prl-poseview--compact" : "") +
+      '" data-prl-figure-stage="1" data-prl-character-id="' +
+      esc(resolved.characterId) +
+      '" data-prl-pose-id="' +
+      esc(resolved.poseId) +
+      '" data-prl-asset-id="' +
+      esc(resolved.assetId) +
+      '" data-prl-pose-status="approved">' +
       '<div class="prl-figure">' +
-      '<picture>' +
+      "<picture>" +
       (resolved.srcAvif ? '<source type="image/avif" srcset="' + esc(resolved.srcAvif) + '">' : "") +
       (resolved.srcWebp ? '<source type="image/webp" srcset="' + esc(resolved.srcWebp) + '">' : "") +
-      '<img src="' + esc(resolved.url) + '"' + srcset + ' alt="' + esc(label) + '" loading="lazy" decoding="async" data-prl-pose-img>' +
+      '<img src="' +
+      esc(resolved.url) +
+      '"' +
+      srcset +
+      ' alt="' +
+      esc(label) +
+      '" loading="lazy" decoding="async" data-prl-pose-img>' +
       "</picture></div>" +
-      '<div class="prl-stage-floor" aria-hidden="true"></div></div>'
+      '<div class="prl-poseview-floor" aria-hidden="true"></div></div>'
     );
   }
 
@@ -1499,23 +1543,36 @@
 
   function controlsHtml(state, opts) {
     opts = opts || {};
+    var compact = !!opts.compact;
     return (
-      '<div class="prl-controls" data-prl-char-male="' + esc(CHAR_MALE) + '" data-prl-char-female="' + esc(CHAR_FEMALE) + '">' +
-      '<div class="prl-controls-label" id="prlCharLabel">Darstellung</div>' +
-      '<div class="prl-segment" role="group" aria-labelledby="prlCharLabel">' +
-      '<button type="button" data-prl-character="male" aria-pressed="' + (state.character === "male" ? "true" : "false") + '" class="' +
+      '<div class="prl-controls' +
+      (compact ? " prl-controls--compact" : "") +
+      '" data-prl-char-male="' +
+      esc(CHAR_MALE) +
+      '" data-prl-char-female="' +
+      esc(CHAR_FEMALE) +
+      '">' +
+      '<div class="prl-controls-row" role="group" aria-label="Darstellung">' +
+      '<button type="button" data-prl-character="male" aria-pressed="' +
+      (state.character === "male" ? "true" : "false") +
+      '" class="' +
       (state.character === "male" ? "is-active" : "") +
       '">Männer</button>' +
-      '<button type="button" data-prl-character="female" aria-pressed="' + (state.character === "female" ? "true" : "false") + '" class="' +
+      '<button type="button" data-prl-character="female" aria-pressed="' +
+      (state.character === "female" ? "true" : "false") +
+      '" class="' +
       (state.character === "female" ? "is-active" : "") +
       '">Frauen</button>' +
       "</div>" +
-      '<div class="prl-controls-label" id="prlViewLabel">Lernmodus</div>' +
-      '<div class="prl-segment" role="group" aria-labelledby="prlViewLabel">' +
-      '<button type="button" data-prl-view="swipe" aria-pressed="' + (state.viewMode === "swipe" ? "true" : "false") + '" class="' +
+      '<div class="prl-controls-row" role="group" aria-label="Lernmodus">' +
+      '<button type="button" data-prl-view="swipe" aria-pressed="' +
+      (state.viewMode === "swipe" ? "true" : "false") +
+      '" class="' +
       (state.viewMode === "swipe" ? "is-active" : "") +
       '">Wischen</button>' +
-      '<button type="button" data-prl-view="scroll" aria-pressed="' + (state.viewMode === "scroll" ? "true" : "false") + '" class="' +
+      '<button type="button" data-prl-view="scroll" aria-pressed="' +
+      (state.viewMode === "scroll" ? "true" : "false") +
+      '" class="' +
       (state.viewMode === "scroll" ? "is-active" : "") +
       '">Scrollen</button>' +
       "</div>" +
@@ -1523,19 +1580,43 @@
     );
   }
 
-  function progressHtml(prayer, step, index, total) {
+  function progressHtml(prayer, step, index, total, opts) {
+    opts = opts || {};
     var rakTotal = Number(prayer.rakat || prayer.rakAhCount || 2);
     var cur = Number(step.rakAh) || 1;
     var segs = "";
     for (var r = 1; r <= rakTotal; r++) {
       segs +=
-        '<span class="' +
-        (r === cur ? "is-active" : "") +
-        '">' +
+        '<span class="prl-rak-dot' +
+        (r === cur ? " is-active" : "") +
+        '" aria-current="' +
+        (r === cur ? "true" : "false") +
+        '"><i aria-hidden="true"></i>' +
         r +
-        ".</span>";
+        "</span>";
     }
     var pct = total > 0 ? Math.round(((index + 1) / total) * 100) : 0;
+    if (opts.compact) {
+      return (
+        '<div class="prl-progress prl-progress--sticky" data-prl-sticky-progress="1">' +
+        '<div class="prl-progress-compact">' +
+        "<b>" +
+        esc(prayer.titleDe) +
+        " · " +
+        esc(String(cur)) +
+        ". Rakʿah</b>" +
+        "<span>Schritt " +
+        (index + 1) +
+        " / " +
+        total +
+        "</span>" +
+        "</div>" +
+        '<div class="prl-progress-dots" aria-label="Rakʿāt">' +
+        segs +
+        "</div>" +
+        "</div>"
+      );
+    }
     return (
       '<div class="prl-progress">' +
       '<div class="prl-progress-title">' +
@@ -1543,18 +1624,13 @@
       " · " +
       esc(String(rakTotal)) +
       " Rakʿāt</div>" +
-      '<div class="prl-progress-rail" aria-hidden="true">' +
-      '<span class="is-active">' +
-      esc(String(cur)) +
-      ". Rakʿah</span>" +
-      '<span class="prl-progress-dots">' +
+      '<div class="prl-progress-dots" aria-label="Rakʿāt">' +
       segs +
-      "</span>" +
-      "<span>Schritt " +
+      "</div>" +
+      '<div class="prl-progress-meta">Schritt ' +
       (index + 1) +
       " / " +
       total +
-      "</span>" +
       "</div>" +
       '<div class="prl-progress-bar" aria-hidden="true"><i style="width:' +
       pct +
@@ -1589,12 +1665,48 @@
     });
   }
 
+  function instructionLabelForStep(step, content) {
+    if (content && content.instructionLabel) return content.instructionLabel;
+    var tid = (step && step.templateId) || "";
+    if (tid === "recitation") return "Während du stehst";
+    if (tid === "qiyam") return "So stehst du";
+    if (tid === "tashahhud" || tid === "sitting-between-sujud") return "So sitzt du";
+    if (tid === "sujud") return "So führst du die Stellung aus";
+    if (tid === "ruku") return "So führst du die Stellung aus";
+    if (tid === "takbir") return "So beginnst du";
+    if (tid === "taslim") return "So beendest du";
+    if (tid === "standing-after-ruku") return "So richtest du dich auf";
+    return "So führst du die Stellung aus";
+  }
+
+  function spokenWordsHtml(opts) {
+    opts = opts || {};
+    var title = opts.title || "Was sage ich?";
+    var arabic = opts.arabic || "";
+    var tr = opts.transliteration || "";
+    var meaning = opts.meaningDe || "";
+    if (!arabic && !tr && !meaning) return "";
+    return (
+      '<section class="prl-words">' +
+      '<div class="prl-label">' +
+      esc(title) +
+      "</div>" +
+      (arabic ? '<div class="prl-ar-text" lang="ar" dir="rtl">' + esc(arabic) + "</div>" : "") +
+      (tr ? '<div class="prl-tr">' + esc(tr) + "</div>" : "") +
+      (meaning ? '<div class="prl-de">' + esc(meaning) + "</div>" : "") +
+      "</section>"
+    );
+  }
+
+  function pendingChipOnce(shownRef) {
+    if (shownRef.pendingShown) return "";
+    shownRef.pendingShown = true;
+    return '<p class="prl-pending-note" role="status">' + esc(CONTENT_PENDING_LABEL) + "</p>";
+  }
+
   function stepTitleHtml(step) {
     return (
       '<div class="prl-step-head">' +
-      '<div class="prl-kicker">' +
-      esc(String(step.rakAh)) +
-      ". Rakʿah</div>" +
       "<h3>" +
       esc(step.titleDe) +
       "</h3>" +
@@ -1609,54 +1721,71 @@
     opts = opts || {};
     var resolved = resolveContentForStep(step);
     var blocks = "";
-    blocks += '<div class="prl-block" data-prl-content-id="' + esc(resolved.contentId || "") + '" data-prl-content-status="' + esc(resolved.status || "") + '">';
-    var instrLabel = (resolved.content && resolved.content.instructionLabel) ||
-      (step && (step.templateId === "tashahhud" || step.poseId === "tashahhud") ? "So sitzt du" : "So führst du die Stellung aus");
+    var pendingRef = { pendingShown: false };
+    var isRecitation = !!(
+      step.templateId === "recitation" ||
+      (resolved.quranRef && resolved.doNotDuplicateQuranText)
+    );
+    var instrLabel = instructionLabelForStep(step, resolved.content);
+
+    blocks +=
+      '<section class="prl-instruction" data-prl-content-id="' +
+      esc(resolved.contentId || "") +
+      '" data-prl-content-status="' +
+      esc(resolved.status || "") +
+      '">';
     blocks += '<div class="prl-label">' + esc(instrLabel) + "</div>";
     if (resolved.publishable && resolved.instructionDe) {
       blocks += '<div class="prl-de">' + esc(resolved.instructionDe) + "</div>";
-    } else {
-      blocks += '<div class="prl-research">' + esc(CONTENT_PENDING_LABEL) + "</div>";
+    } else if (isTestEnv()) {
+      blocks += pendingChipOnce(pendingRef);
     }
-    blocks += "</div>";
+    blocks += "</section>";
 
-    // Tašahhud modules: separate reviewable parts (no invented text)
     var mods = resolved.content && resolved.content.modules;
-    if (mods && typeof mods === "object" && !Array.isArray(mods) && (step.templateId === "tashahhud" || step.poseId === "tashahhud" || resolved.content.stepId === "tashahhud")) {
+    if (
+      mods &&
+      typeof mods === "object" &&
+      !Array.isArray(mods) &&
+      (step.templateId === "tashahhud" || step.poseId === "tashahhud" || (resolved.content && resolved.content.stepId === "tashahhud"))
+    ) {
       var tash = mods.tashahhudText;
       var salat = mods.salatIbrahimiyya;
       var dua = mods.duaBeforeTaslim;
+      var anySpoken = false;
       if (tash && tash.approved === true && (tash.arabicText || tash.transliteration || tash.germanMeaning)) {
-        blocks += '<div class="prl-block"><div class="prl-label">Was sage ich?</div>';
-        blocks += '<div class="prl-label">' + esc(tash.labelDe || "Tašahhud") + "</div>";
-        if (tash.arabicText) blocks += '<div class="prl-ar-text" lang="ar" dir="rtl">' + esc(tash.arabicText) + "</div>";
-        if (tash.transliteration) blocks += '<div class="prl-tr">' + esc(tash.transliteration) + "</div>";
-        if (tash.germanMeaning) blocks += '<div class="prl-de">' + esc(tash.germanMeaning) + "</div>";
-        blocks += "</div>";
-      } else if (isTestEnv()) {
-        blocks += '<div class="prl-block"><div class="prl-label">Was sage ich?</div><div class="prl-research">Inhalt wird geprüft.</div></div>';
+        anySpoken = true;
+        blocks += spokenWordsHtml({
+          title: "Was sage ich?",
+          arabic: tash.arabicText,
+          transliteration: tash.transliteration,
+          meaningDe: tash.germanMeaning
+        });
       }
       if (salat && salat.approved === true && (salat.arabicText || salat.transliteration || salat.germanMeaning)) {
-        blocks += '<div class="prl-block"><div class="prl-label">Danach · ' + esc(salat.labelDe || "Ṣalāh Ibrāhīmiyyah") + "</div>";
-        if (salat.arabicText) blocks += '<div class="prl-ar-text" lang="ar" dir="rtl">' + esc(salat.arabicText) + "</div>";
-        if (salat.transliteration) blocks += '<div class="prl-tr">' + esc(salat.transliteration) + "</div>";
-        if (salat.germanMeaning) blocks += '<div class="prl-de">' + esc(salat.germanMeaning) + "</div>";
-        blocks += "</div>";
-      } else if (isTestEnv() && salat) {
-        blocks += '<div class="prl-block"><div class="prl-label">Danach</div><div class="prl-research">Inhalt wird geprüft.</div></div>';
+        anySpoken = true;
+        blocks += spokenWordsHtml({
+          title: "Danach · " + (salat.labelDe || "Ṣalāh Ibrāhīmiyyah"),
+          arabic: salat.arabicText,
+          transliteration: salat.transliteration,
+          meaningDe: salat.germanMeaning
+        });
       }
       if (dua && dua.approved === true && (dua.arabicText || dua.transliteration || dua.germanMeaning)) {
-        blocks += '<div class="prl-block"><div class="prl-label">' + esc(dua.labelDe || "Duʿāʾ vor Taslīm") + "</div>";
-        if (dua.arabicText) blocks += '<div class="prl-ar-text" lang="ar" dir="rtl">' + esc(dua.arabicText) + "</div>";
-        if (dua.transliteration) blocks += '<div class="prl-tr">' + esc(dua.transliteration) + "</div>";
-        if (dua.germanMeaning) blocks += '<div class="prl-de">' + esc(dua.germanMeaning) + "</div>";
-        blocks += "</div>";
+        anySpoken = true;
+        blocks += spokenWordsHtml({
+          title: dua.labelDe || "Duʿāʾ vor Taslīm",
+          arabic: dua.arabicText,
+          transliteration: dua.transliteration,
+          meaningDe: dua.germanMeaning
+        });
       }
-    } else if (resolved.quranRef && resolved.doNotDuplicateQuranText) {
-      blocks += '<div class="prl-block" data-prl-quran-block="1"><div class="prl-label">Qurʾān</div>';
+      if (!anySpoken && isTestEnv()) blocks += pendingChipOnce(pendingRef);
+    } else if (isRecitation) {
+      blocks += '<section class="prl-words prl-words--recite"><div class="prl-label">Was rezitiere ich?</div>';
       if (opts.quranHtml) {
         blocks += opts.quranHtml;
-      } else {
+      } else if (resolved.quranRef) {
         blocks +=
           '<div class="prl-de">Sūrah ' +
           esc(String(resolved.quranRef.surah)) +
@@ -1664,47 +1793,73 @@
           esc(String(resolved.quranRef.ayahStart)) +
           "–" +
           esc(String(resolved.quranRef.ayahEnd)) +
-          " · bestehende Qurʾān-Datenbank (keine Textkopie).</div>";
+          "</div>";
+      } else if (isTestEnv()) {
+        blocks += pendingChipOnce(pendingRef);
       }
-      blocks +=
-        '<div class="prl-research">Darstellung als Pflicht/Säule/Sunnah bleibt quellengeprüft.</div></div>';
-    }
-
-    if (resolved.publishable && resolved.spokenVisible) {
-      blocks += '<div class="prl-block"><div class="prl-label">Was sage ich?</div>';
-      if (resolved.arabic) blocks += '<div class="prl-ar-text" lang="ar" dir="rtl">' + esc(resolved.arabic) + "</div>";
-      if (resolved.transliteration) blocks += '<div class="prl-tr">' + esc(resolved.transliteration) + "</div>";
-      if (resolved.meaningDe) blocks += '<div class="prl-de">' + esc(resolved.meaningDe) + "</div>";
-      blocks += "</div>";
+      blocks += "</section>";
+    } else if (resolved.publishable && resolved.spokenVisible) {
+      blocks += spokenWordsHtml({
+        title: "Was sage ich?",
+        arabic: resolved.arabic,
+        transliteration: resolved.transliteration,
+        meaningDe: resolved.meaningDe
+      });
     } else if (resolved.duringRiseApproved || resolved.afterStandingApproved) {
-      blocks += '<div class="prl-block"><div class="prl-label">Was sage ich?</div>';
       if (resolved.duringRiseApproved && resolved.duringRiseText) {
-        blocks += '<div class="prl-label">Beim Aufrichten</div>';
-        if (resolved.duringRiseText.arabicText) blocks += '<div class="prl-ar-text" lang="ar" dir="rtl">' + esc(resolved.duringRiseText.arabicText) + "</div>";
-        if (resolved.duringRiseText.transliteration) blocks += '<div class="prl-tr">' + esc(resolved.duringRiseText.transliteration) + "</div>";
-        if (resolved.duringRiseText.germanMeaning) blocks += '<div class="prl-de">' + esc(resolved.duringRiseText.germanMeaning) + "</div>";
+        blocks += spokenWordsHtml({
+          title: "Beim Aufrichten",
+          arabic: resolved.duringRiseText.arabicText,
+          transliteration: resolved.duringRiseText.transliteration,
+          meaningDe: resolved.duringRiseText.germanMeaning
+        });
       }
       if (resolved.afterStandingApproved && resolved.afterStandingText) {
-        blocks += '<div class="prl-label">Nach dem Aufrichten</div>';
-        if (resolved.afterStandingText.arabicText) blocks += '<div class="prl-ar-text" lang="ar" dir="rtl">' + esc(resolved.afterStandingText.arabicText) + "</div>";
-        if (resolved.afterStandingText.transliteration) blocks += '<div class="prl-tr">' + esc(resolved.afterStandingText.transliteration) + "</div>";
-        if (resolved.afterStandingText.germanMeaning) blocks += '<div class="prl-de">' + esc(resolved.afterStandingText.germanMeaning) + "</div>";
+        blocks += spokenWordsHtml({
+          title: "Nach dem Aufrichten",
+          arabic: resolved.afterStandingText.arabicText,
+          transliteration: resolved.afterStandingText.transliteration,
+          meaningDe: resolved.afterStandingText.germanMeaning
+        });
       }
-      blocks += "</div>";
-    } else if (isTestEnv() && (resolved.duringRiseText || resolved.afterStandingText)) {
-      blocks += '<div class="prl-block"><div class="prl-label">Was sage ich?</div><div class="prl-research">Inhalt wird geprüft.</div></div>';
-    }
-
-    if (!resolved.publishable && !(resolved.quranRef && resolved.doNotDuplicateQuranText)) {
-      blocks += '<div class="prl-research">' + esc(CONTENT_PENDING_LABEL) + "</div>";
+    } else if (
+      isTestEnv() &&
+      resolved.content &&
+      (resolved.content.arabic != null ||
+        resolved.content.transliteration != null ||
+        resolved.content.meaningDe != null ||
+        resolved.duringRiseText ||
+        resolved.afterStandingText ||
+        (Array.isArray(step.textModuleIds) && step.textModuleIds.length))
+    ) {
+      // Spoken module expected but not publishable — one chip only, no empty section
+      blocks += pendingChipOnce(pendingRef);
     }
 
     var approvedClaimCount = countApprovedClaims(step);
-    if (approvedClaimCount > 0) {
+    var approvedDetails = getApprovedDetails(step);
+    if (approvedDetails.length || approvedClaimCount > 0) {
+      blocks += '<div class="prl-btn-row prl-btn-row--actions">';
+      approvedDetails.forEach(function (d) {
+        blocks +=
+          '<button type="button" class="prl-btn" data-prl-detail="' +
+          esc(d.id) +
+          '">' +
+          esc(d.label || d.id) +
+          "</button>";
+      });
+      if (approvedClaimCount > 0) {
+        blocks +=
+          '<button type="button" class="prl-btn" data-prl-sources="' +
+          esc(step.id) +
+          '">Beleg ansehen</button>';
+      }
+      blocks += "</div>";
+    } else if (isTestEnv() && step.detailSlots && step.detailSlots.length) {
       blocks +=
-        '<div class="prl-btn-row"><button type="button" class="prl-btn" data-prl-sources="' +
-        esc(step.id) +
-        '">Beleg ansehen</button></div>';
+        '<div class="prl-detail-prep" hidden data-prl-detail-prep="' +
+        esc((step.detailSlots || []).join(",")) +
+        '"></div>';
     }
 
     if (resolved.variantIds && resolved.variantIds.length) {
@@ -1719,26 +1874,10 @@
         "</div>";
     }
 
-    var approvedDetails = getApprovedDetails(step);
-    if (approvedDetails.length) {
-      blocks +=
-        '<div class="prl-detail-slots" role="group" aria-label="Details ansehen">' +
-        '<div class="prl-label">Details ansehen</div>' +
-        approvedDetails
-          .map(function (d) {
-            return '<button type="button" class="prl-detail-slot" data-prl-detail="' + esc(d.id) + '">' + esc(d.label || d.id) + "</button>";
-          })
-          .join("") +
-        "</div>";
-    } else if (isTestEnv() && step.detailSlots && step.detailSlots.length) {
-      blocks += '<div class="prl-detail-prep" hidden data-prl-detail-prep="' + esc((step.detailSlots || []).join(",")) + '"></div>';
-    }
-
     if (AUDIO_ENABLED || AUDIO_VISIBLE || AUDIO_PRELOAD || AUDIO_AUTOPLAY) {
-      /* Phase 13: audio remains fully invisible / unmounted */
+      /* Phase 14: audio remains fully invisible / unmounted */
     }
 
-    // Titles via stepTitleHtml (hierarchy: title → figure → body)
     return (
       '<div class="prl-step-copy" data-prl-pose-id="' +
       esc(step.poseId || step.malePoseId || "") +
@@ -1751,9 +1890,16 @@
   async function stepCopyHtmlAsync(step) {
     var resolved = resolveContentForStep(step);
     var quranHtml = "";
-    if (resolved.quranRef && resolved.doNotDuplicateQuranText) {
-      var surah = await loadQuranSurah(resolved.quranRef.surah);
-      quranHtml = quranAyahsHtml(surah, resolved.quranRef);
+    var wantQuran =
+      !!(resolved.quranRef && resolved.doNotDuplicateQuranText) ||
+      step.templateId === "recitation" ||
+      (resolved.content && resolved.content.quranRef);
+    if (wantQuran) {
+      var ref = resolved.quranRef || (resolved.content && resolved.content.quranRef);
+      if (ref) {
+        var surah = await loadQuranSurah(ref.surah);
+        quranHtml = quranAyahsHtml(surah, ref);
+      }
     }
     return stepCopyHtml(step, { quranHtml: quranHtml });
   }
@@ -2208,12 +2354,13 @@
     preloadAdjacent(state.character, steps, idx);
 
     if (state.viewMode === "scroll") {
+      var sticky = progressHtml(prayer, step, idx, steps.length, { compact: true });
       var items = "";
       for (var i = 0; i < steps.length; i++) {
         var s = steps[i];
         var fig = characterSwitchPending
-          ? '<div class="prl-stage prl-stage--loading" data-prl-pose-loading="1"><div class="prl-figure"><div class="prl-figure-pending"><span>Darstellung wird geladen…</span></div></div></div>'
-          : await figureHtmlResolved(state.character, s);
+          ? '<div class="prl-poseview prl-poseview--compact prl-poseview--loading" data-prl-figure-stage="1" data-prl-pose-loading="1"><div class="prl-figure"><div class="prl-figure-pending"><span>Darstellung wird geladen…</span></div></div></div>'
+          : await figureHtmlResolved(state.character, s, { compact: true });
         var title = stepTitleHtml(s);
         var copy = await stepCopyHtmlAsync(s);
         if (i > 0) items += rakahMarkerHtml(steps[i - 1], s);
@@ -2225,7 +2372,6 @@
           '" data-prl-step-index="' +
           i +
           '">' +
-          progressHtml(prayer, s, i, steps.length) +
           title +
           fig +
           copy +
@@ -2233,10 +2379,11 @@
       }
       return (
         topbarHtml({ backValue: "gebet", title: prayer.titleDe || "Lernen", kicker: "Gebet erlernen" }) +
-        '<section class="prl-shell prl-shell--' + esc(detectContainerMode()) + '" data-prl-root="learn" data-prl-mode="scroll" data-prl-index="' +
+        '<section class="prl-shell prl-shell--learn prl-shell--' + esc(detectContainerMode()) + '" data-prl-root="learn" data-prl-mode="scroll" data-prl-index="' +
         idx +
-        '" data-prl-final-step="' + esc(finalStepId) + '" data-prl-container="' + esc(detectContainerMode()) + '">' +
+        '" data-prl-final-step="' + esc(finalStepId) + '" data-prl-container="' + esc(detectContainerMode()) + '" data-prl-figure-required="' + (FIGURE_STAGE_REQUIRED ? "1" : "0") + '">' +
         controlsHtml(state, { compact: true }) +
+        sticky +
         recovery +
         '<div class="prl-scroll-list">' +
         items +
@@ -2251,7 +2398,7 @@
     for (var j = 0; j < steps.length; j++) {
       var sj = steps[j];
       var figj = characterSwitchPending
-        ? '<div class="prl-stage prl-stage--loading" data-prl-pose-loading="1"><div class="prl-figure"><div class="prl-figure-pending"><span>Darstellung wird geladen…</span></div></div></div>'
+        ? '<div class="prl-poseview prl-poseview--loading" data-prl-figure-stage="1" data-prl-pose-loading="1"><div class="prl-figure"><div class="prl-figure-pending"><span>Darstellung wird geladen…</span></div></div></div>'
         : await figureHtmlResolved(state.character, sj);
       var titlej = stepTitleHtml(sj);
       var copyj = await stepCopyHtmlAsync(sj);
@@ -2279,9 +2426,9 @@
 
     return (
       topbarHtml({ backValue: "gebet", title: prayer.titleDe || "Lernen", kicker: "Gebet erlernen" }) +
-      '<section class="prl-shell" data-prl-root="learn" data-prl-mode="swipe" data-prl-index="' +
+      '<section class="prl-shell prl-shell--learn" data-prl-root="learn" data-prl-mode="swipe" data-prl-index="' +
       idx +
-      '" data-prl-final-step="' + esc(finalStepId) + '">' +
+      '" data-prl-final-step="' + esc(finalStepId) + '" data-prl-figure-required="' + (FIGURE_STAGE_REQUIRED ? "1" : "0") + '">' +
       controlsHtml(state, { compact: true }) +
       recovery +
       swipeHintHtml() +
@@ -2588,6 +2735,17 @@
     }
   }
 
+  function updateStickyProgress(root, prayer, step, index, total) {
+    if (!root) return;
+    var box = root.querySelector("[data-prl-sticky-progress]");
+    if (!box || !step || !prayer) return;
+    var html = progressHtml(prayer, step, index, total, { compact: true });
+    var tmp = document.createElement("div");
+    tmp.innerHTML = html;
+    var next = tmp.firstChild;
+    if (next && box.parentNode) box.parentNode.replaceChild(next, box);
+  }
+
   function applyStepFromIndex(root, best, prayer, steps) {
     var step = steps[best];
     if (!step) return;
@@ -2609,6 +2767,7 @@
     syncHashToStep(prayer.id, step, true);
     updateNavButtons(root, best, steps.length);
     showCompletionIfNeeded(root, best, steps.length);
+    updateStickyProgress(root, prayer, step, best, steps.length);
     preloadAdjacent(loadState().character, steps, best);
   }
 
@@ -2777,10 +2936,20 @@
     });
   }
 
+  function ensureGlobalListeners() {
+    if (listenersBound) return;
+    listenersBound = true;
+    document.addEventListener("click", onClick);
+    global.addEventListener("popstate", onPopState);
+    global.addEventListener("resize", onResizeOrOrient, { passive: true });
+    global.addEventListener("orientationchange", onResizeOrOrient, { passive: true });
+    document.addEventListener("keydown", onKeydown);
+  }
+
   function afterRender() {
     try {
       setImmersiveMode(true);
-      bindListeners();
+      ensureGlobalListeners();
       var root = document.querySelector("[data-prl-root]");
       if (!root) return;
       if (root.getAttribute("data-prl-root") === "learn") restoreLearnPosition(root);

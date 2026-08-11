@@ -84,6 +84,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "gebet-erlernen-visual-step-fix-v648-2026-08-11",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Sofort-Korrektur Visual Learning UI: Figure Stage Pflicht, Step-Struktur, Qurʾān-kompakt, Scroll-Header, Bottom-Nav. Test only. Keine Fake-Posen, keine erfundenen religiösen Texte.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "gebet-erlernen-atelier-identity-v647-2026-08-11",
       "approvedBy": "user-explicit-test-only",
       "reason": "Gebet erlernen Atelier-Identität v647: extreme visuelle Abgrenzung von der Haupt-App (Farben, Typo, Atmosphäre). Test only. Keine Fake-Posen. Keine Live-Freigabe.",
