@@ -1,0 +1,26 @@
+{
+  "id": "recitation-fatiha-ref-v1",
+  "stepId": "recitation",
+  "titleDe": "Rezitation",
+  "instructionDe": null,
+  "arabic": null,
+  "transliteration": null,
+  "meaningDe": null,
+  "spokenText": null,
+  "sourceClaimIds": [],
+  "variantIds": [],
+  "defaultVariantId": null,
+  "status": "research",
+  "reviewPass1": false,
+  "reviewPass2": false,
+  "approved": false,
+  "audioId": null,
+  "quranRef": {
+    "type": "quran",
+    "surah": 1,
+    "ayahStart": 1,
+    "ayahEnd": 7
+  },
+  "doNotDuplicateQuranText": true,
+  "note": "Text aus bestehender Qurʾān-Datenbank referenzieren, nicht duplizieren."
+}

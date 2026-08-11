@@ -1,0 +1,23 @@
+{
+  "characterId": "dar-prayer-male-v1",
+  "version": 1,
+  "locked": true,
+  "label": "DAR Prayer Male v1",
+  "locks": {
+    "build": "muscular",
+    "statureFixed": true,
+    "beard": "full-black",
+    "mustache": true,
+    "beardLengthFixed": true,
+    "headwearFixed": true,
+    "clothing": "dark-blue-long",
+    "facelessMannequin": true,
+    "sameAcrossAllPoses": true
+  },
+  "forbidden": [
+    "substitute-figure",
+    "style-drift",
+    "beard-change",
+    "clothing-change"
+  ]
+}

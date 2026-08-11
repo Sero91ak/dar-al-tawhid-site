@@ -1,0 +1,40 @@
+{
+  "id": "takbir",
+  "titleDe": "Takbīrat al-Iḥrām",
+  "titleAr": "تكبيرة الإحرام",
+  "category": "opening",
+  "poseReuseAllowed": false,
+  "malePoseId": "takbir",
+  "femalePoseId": "takbir",
+  "femalePoseStatus": "pending_review",
+  "detailSlots": [
+    "hands"
+  ],
+  "checkAreas": [
+    "starting-posture",
+    "body-upright",
+    "hand-raise",
+    "hand-height",
+    "palm-orientation",
+    "finger-position",
+    "takbir-timing",
+    "spoken-wording",
+    "transition-to-qiyam"
+  ],
+  "textModuleIds": [
+    "takbir-allahu-akbar"
+  ],
+  "claimSlotIds": [
+    "takbir-starting-posture",
+    "takbir-hand-raise",
+    "takbir-hand-height",
+    "takbir-palm-orientation",
+    "takbir-finger-position",
+    "takbir-timing",
+    "takbir-wording",
+    "takbir-transition"
+  ],
+  "variants": [],
+  "verificationStatus": "research",
+  "audioId": null
+}
