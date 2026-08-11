@@ -1,7 +1,8 @@
 /**
- * DAR AL TAWḤĪD — Gebet erlernen (Test Phase 10)
- * Integration: Suǧūd + Sitzen + Suǧūd 2 + Aufstehen · bestehende Engine
+ * DAR AL TAWḤĪD — Gebet erlernen (Test Phase 11)
+ * Integration: Rakʿah 2 + Tašahhud + Taslīm · bestehende Engine
  * productionEnabled = false | audioVisible = false | TEST ONLY
+ * technicalFajrComplete ≠ religiousFajrApproved
  */
 (function (global) {
   "use strict";
@@ -18,7 +19,7 @@
   var CONTENT_PENDING_LABEL = "Inhalt wird quellengeprüft.";
   var POSE_PENDING_LABEL = "Pose wird geprüft";
   var TEXTS_EMPTY_LABEL = "Noch keine geprüften Texte verfügbar.";
-  var PHASE = 10;
+  var PHASE = 11;
   var CHAR_MALE = "dar-prayer-male-v1";
   var CHAR_FEMALE = "dar-prayer-female-v1";
   var CHAR_VERSION = 1;
@@ -107,6 +108,9 @@
       scrollPosition: 0,
       sourcePanelOpen: false,
       detailView: null,
+      learningSequenceCompleted: false,
+      lastStepId: "",
+      lastPrayerId: "",
       orientation: detectOrientation(),
       containerMode: detectContainerMode()
     };
@@ -159,6 +163,9 @@
       stepIndex: s.stepIndex || 0,
       sourcePanelOpen: !!(s.sourcePanelOpen || sourceSheetOpen),
       detailView: s.detailView || null,
+      learningSequenceCompleted: !!s.learningSequenceCompleted,
+      lastStepId: s.lastStepId || "",
+      lastPrayerId: s.lastPrayerId || "",
       orientation: s.orientation || detectOrientation(),
       containerMode: s.containerMode || detectContainerMode()
     };
@@ -181,6 +188,9 @@
     next.rakAh = Number(next.rakAh) || 1;
     next.sourcePanelOpen = !!next.sourcePanelOpen;
     next.detailView = next.detailView || null;
+    next.learningSequenceCompleted = !!next.learningSequenceCompleted;
+    next.lastStepId = next.lastStepId || "";
+    next.lastPrayerId = next.lastPrayerId || "";
     next.orientation = next.orientation || detectOrientation();
     next.containerMode = next.containerMode || detectContainerMode();
     return next;
@@ -531,13 +541,20 @@
   function computeFajrReadiness(prayer) {
     var steps = (prayer && prayer.steps) || [];
     var sequenceValid = steps.length === 19;
+    var finalOk = false;
+    var rakAh2Ok = false;
     if (sequenceValid) {
       var orders = {};
+      var rakAhs = {};
       steps.forEach(function (st) {
         if (st.order == null || orders[st.order]) sequenceValid = false;
         orders[st.order] = true;
         if (!st.id || !st.poseId || !st.contentId) sequenceValid = false;
+        rakAhs[st.rakAh] = true;
+        if (st.id === "fajr-r2-taslim-left" && Number(st.order) === 19) finalOk = true;
       });
+      rakAh2Ok = !!rakAhs[1] && !!rakAhs[2];
+      if (!finalOk || !rakAh2Ok) sequenceValid = false;
     }
     var counts = computeMissingCounts();
     var masterSteps = (cache.reviewSteps && cache.reviewSteps.steps) || [];
@@ -558,6 +575,9 @@
     );
     var fajr = {
       sequenceValid: !!sequenceValid,
+      requiredSteps: 19,
+      technicalSequenceComplete: !!sequenceValid,
+      religiousFajrApproved: false,
       contentCoverage: !!contentCoverage,
       sourceCoverage: !!sourceCoverage,
       malePoseCoverage: !!malePoseCoverage,
@@ -570,6 +590,8 @@
       version: 1,
       phase: PHASE,
       computed: true,
+      technicalFajrComplete: !!sequenceValid,
+      religiousFajrApproved: false,
       fajr: fajr,
       productionEnabled: false,
       counts: counts,
@@ -909,8 +931,14 @@
     var titleAr = template.titleAr;
     if (template.id === "sujud" && seqStep && seqStep.instance === 1) titleDe = "Erster Suǧūd";
     if (template.id === "sujud" && seqStep && seqStep.instance === 2) titleDe = "Zweiter Suǧūd";
-    if (template.id === "taslim" && seqStep && seqStep.side === "right") titleDe = "Taslīm rechts";
-    if (template.id === "taslim" && seqStep && seqStep.side === "left") titleDe = "Taslīm links";
+    if (template.id === "taslim" && seqStep && seqStep.side === "right") {
+      titleDe = "Taslīm nach rechts";
+      titleAr = "التسليم";
+    }
+    if (template.id === "taslim" && seqStep && seqStep.side === "left") {
+      titleDe = "Taslīm nach links";
+      titleAr = "التسليم";
+    }
     return { titleDe: titleDe, titleAr: titleAr };
   }
 
@@ -928,6 +956,14 @@
       if (contentEarly && contentEarly.titleAr) titles.titleAr = contentEarly.titleAr;
       if (tpl.id === "sujud" && s.instance === 1) titles.titleDe = "Erster Suǧūd";
       if (tpl.id === "sujud" && s.instance === 2) titles.titleDe = "Zweiter Suǧūd";
+      if (tpl.id === "taslim" && s.side === "right") {
+        titles.titleDe = "Taslīm nach rechts";
+        titles.titleAr = "التسليم";
+      }
+      if (tpl.id === "taslim" && s.side === "left") {
+        titles.titleDe = "Taslīm nach links";
+        titles.titleAr = "التسليم";
+      }
       var poses = resolvePoseId(tpl, s);
       if (tpl.preferredPoseId && tpl.poseFallbackId) {
         var reg = await ensureRegistry();
@@ -1109,6 +1145,19 @@
     var done = idx >= total - 1;
     box.hidden = !done;
     controllerRuntime.completed = done;
+    var st = loadState();
+    var lastId = st.stepId || "";
+    // Nur am finalen Taslīm-links: Lernsequenz angesehen (keine religiöse Validierung)
+    if (done && lastId === "fajr-r2-taslim-left") {
+      saveState({
+        learningSequenceCompleted: true,
+        lastStepId: "fajr-r2-taslim-left",
+        lastPrayerId: st.prayerId || "fajr"
+      });
+    } else if (!done && st.learningSequenceCompleted && lastId !== "fajr-r2-taslim-left") {
+      // Negativschutz: Completion nicht vor finalem Schritt setzen/lassen
+      saveState({ learningSequenceCompleted: false });
+    }
   }
 
   function validatePoseEntry(expectedCharacterId, poseId, entry) {
@@ -1159,7 +1208,7 @@
       if (key === "standing-after-ruku" || key === "itidal") return "fajr-r2-standing-after-ruku";
       if (key === "sujud" || key === "sujud-1") return "fajr-r2-sujud-1";
       if (key === "sujud-2") return "fajr-r2-sujud-2";
-      if (key === "sitting" || key === "jalsa" || key === "sitting-between-sujud") return "fajr-r2-sitting";
+      if (key === "sitting" || key === "jalsa" || key === "sitting-between-sujud") return "fajr-r2-sitting-between-sujud";
       if (key === "tashahhud") return "fajr-r2-tashahhud";
       if (key === "taslim" || key === "taslim-right") return "fajr-r2-taslim-right";
       if (key === "taslim-left") return "fajr-r2-taslim-left";
@@ -1377,7 +1426,9 @@
     var resolved = resolveContentForStep(step);
     var blocks = "";
     blocks += '<div class="prl-block" data-prl-content-id="' + esc(resolved.contentId || "") + '" data-prl-content-status="' + esc(resolved.status || "") + '">';
-    blocks += '<div class="prl-label">So führst du die Stellung aus</div>';
+    var instrLabel = (resolved.content && resolved.content.instructionLabel) ||
+      (step && (step.templateId === "tashahhud" || step.poseId === "tashahhud") ? "So sitzt du" : "So führst du die Stellung aus");
+    blocks += '<div class="prl-label">' + esc(instrLabel) + "</div>";
     if (resolved.publishable && resolved.instructionDe) {
       blocks += '<div class="prl-de">' + esc(resolved.instructionDe) + "</div>";
     } else {
@@ -1385,7 +1436,39 @@
     }
     blocks += "</div>";
 
-    if (resolved.quranRef && resolved.doNotDuplicateQuranText) {
+    // Tašahhud modules: separate reviewable parts (no invented text)
+    var mods = resolved.content && resolved.content.modules;
+    if (mods && typeof mods === "object" && !Array.isArray(mods) && (step.templateId === "tashahhud" || step.poseId === "tashahhud" || resolved.content.stepId === "tashahhud")) {
+      var tash = mods.tashahhudText;
+      var salat = mods.salatIbrahimiyya;
+      var dua = mods.duaBeforeTaslim;
+      if (tash && tash.approved === true && (tash.arabicText || tash.transliteration || tash.germanMeaning)) {
+        blocks += '<div class="prl-block"><div class="prl-label">Was sage ich?</div>';
+        blocks += '<div class="prl-label">' + esc(tash.labelDe || "Tašahhud") + "</div>";
+        if (tash.arabicText) blocks += '<div class="prl-ar-text" lang="ar" dir="rtl">' + esc(tash.arabicText) + "</div>";
+        if (tash.transliteration) blocks += '<div class="prl-tr">' + esc(tash.transliteration) + "</div>";
+        if (tash.germanMeaning) blocks += '<div class="prl-de">' + esc(tash.germanMeaning) + "</div>";
+        blocks += "</div>";
+      } else if (isTestEnv()) {
+        blocks += '<div class="prl-block"><div class="prl-label">Was sage ich?</div><div class="prl-research">Inhalt wird geprüft.</div></div>';
+      }
+      if (salat && salat.approved === true && (salat.arabicText || salat.transliteration || salat.germanMeaning)) {
+        blocks += '<div class="prl-block"><div class="prl-label">Danach · ' + esc(salat.labelDe || "Ṣalāh Ibrāhīmiyyah") + "</div>";
+        if (salat.arabicText) blocks += '<div class="prl-ar-text" lang="ar" dir="rtl">' + esc(salat.arabicText) + "</div>";
+        if (salat.transliteration) blocks += '<div class="prl-tr">' + esc(salat.transliteration) + "</div>";
+        if (salat.germanMeaning) blocks += '<div class="prl-de">' + esc(salat.germanMeaning) + "</div>";
+        blocks += "</div>";
+      } else if (isTestEnv() && salat) {
+        blocks += '<div class="prl-block"><div class="prl-label">Danach</div><div class="prl-research">Inhalt wird geprüft.</div></div>';
+      }
+      if (dua && dua.approved === true && (dua.arabicText || dua.transliteration || dua.germanMeaning)) {
+        blocks += '<div class="prl-block"><div class="prl-label">' + esc(dua.labelDe || "Duʿāʾ vor Taslīm") + "</div>";
+        if (dua.arabicText) blocks += '<div class="prl-ar-text" lang="ar" dir="rtl">' + esc(dua.arabicText) + "</div>";
+        if (dua.transliteration) blocks += '<div class="prl-tr">' + esc(dua.transliteration) + "</div>";
+        if (dua.germanMeaning) blocks += '<div class="prl-de">' + esc(dua.germanMeaning) + "</div>";
+        blocks += "</div>";
+      }
+    } else if (resolved.quranRef && resolved.doNotDuplicateQuranText) {
       blocks += '<div class="prl-block" data-prl-quran-block="1"><div class="prl-label">Qurʾān</div>';
       if (opts.quranHtml) {
         blocks += opts.quranHtml;
@@ -1685,7 +1768,11 @@
     var modules = (cache.contentIndex && cache.contentIndex.modules) || [];
     var order = ["takbir", "ruku", "standing-after-ruku", "sujud", "sitting-between-sujud", "tashahhud", "taslim"];
     var byStep = {};
-    modules.forEach(function (m) { if (m && m.stepId) byStep[m.stepId] = m; });
+    modules.forEach(function (m) {
+      if (!m || !m.stepId) return;
+      // Prefer primary contentId (skip rakAh-specific duplicates for index display)
+      if (!byStep[m.stepId] || !m.rakAh) byStep[m.stepId] = m;
+    });
     var approvedRows = [];
     order.forEach(function (stepId) {
       var mod = byStep[stepId];
@@ -1697,6 +1784,18 @@
         "<b>" + esc((content && content.titleDe) || stepId) + "</b>" +
         "<span>freigegeben · " + esc(mod.contentId) + "</span></button>"
       );
+      // Expand approved Tašahhud submodules without duplicating registry
+      if (stepId === "tashahhud" && content && content.modules && typeof content.modules === "object") {
+        ["tashahhudText", "salatIbrahimiyya", "duaBeforeTaslim"].forEach(function (key) {
+          var sub = content.modules[key];
+          if (!sub || sub.approved !== true) return;
+          approvedRows.push(
+            '<button type="button" class="prl-path" data-prl-text-content="' + esc(content.id) + '" data-prl-position="tashahhud">' +
+            "<b>" + esc(sub.labelDe || key) + "</b>" +
+            "<span>Modul · " + esc(sub.id || key) + "</span></button>"
+          );
+        });
+      }
     });
     return (
       '<section class="prl-shell" data-prl-root="texts">' +
@@ -1799,12 +1898,17 @@
   }
 
   function hubHtml(state, index, fajr) {
+    var lastNote = "";
+    if (state.lastPrayerId === "fajr" || state.learningSequenceCompleted) {
+      lastNote = '<p class="prl-last-viewed" data-prl-last-viewed>Fajr zuletzt angesehen</p>';
+    }
     return (
       '<section class="prl-shell prl-shell--hub" data-prl-root="hub">' +
       '<header class="prl-hero prl-hero--compact">' +
       "<h2>Gebet erlernen</h2>" +
       '<p class="prl-ar" lang="ar" dir="rtl">الصلاة</p>' +
       "<p>Schritt für Schritt sehen und lernen.</p>" +
+      lastNote +
       "</header>" +
       controlsHtml(state) +
       resumeCard(state, fajr) +
@@ -2616,7 +2720,18 @@
     }
     var retry = t.closest("[data-prl-retry-fajr]");
     if (retry) {
-      saveState({ stepId: "fajr-r1-takbir", stepIndex: 0, rakAh: 1, prayerId: "fajr", prayer: "fajr" });
+      var stRetry = loadState();
+      saveState({
+        stepId: "fajr-r1-takbir",
+        stepIndex: 0,
+        rakAh: 1,
+        prayerId: "fajr",
+        prayer: "fajr",
+        learningSequenceCompleted: false,
+        character: stRetry.character,
+        characterId: stRetry.characterId,
+        viewMode: stRetry.viewMode
+      });
       navigate(VIEW, "fajr/1/takbir");
       return;
     }

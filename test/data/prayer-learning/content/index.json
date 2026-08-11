@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "phase": 10,
+  "phase": 11,
   "modules": [
     {
       "stepId": "takbir",
@@ -62,7 +62,7 @@
     },
     {
       "stepId": "tashahhud",
-      "contentId": "tashahhud-main-v1",
+      "contentId": "tashahhud-final-v1",
       "file": "tashahhud.json",
       "status": "research",
       "approved": false
@@ -73,6 +73,15 @@
       "file": "taslim.json",
       "status": "research",
       "approved": false
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "fajr-r2-recitation-v1",
+      "file": "recitation-r2.json",
+      "status": "research",
+      "approved": false,
+      "rakAh": 2,
+      "prayerId": "fajr"
     }
   ],
   "gates": {
@@ -83,5 +92,5 @@
       "sourceClaimIds.length>0"
     ]
   },
-  "integrationBlock": "Sujud + Sitting + Sujud + Rise"
+  "integrationBlock": "RakAh 2 + Tashahhud + Taslim"
 }

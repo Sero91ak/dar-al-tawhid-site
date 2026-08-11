@@ -570,3 +570,5 @@
   bottom:calc(78px + env(safe-area-inset-bottom,0px));
   z-index:6
 }
+
+.prl-last-viewed{margin:8px 0 0;font-size:12px;opacity:.72}

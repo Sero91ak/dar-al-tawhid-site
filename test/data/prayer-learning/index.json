@@ -1,6 +1,6 @@
 {
   "version": 5,
-  "phase": 10,
+  "phase": 11,
   "audioEnabled": false,
   "environment": "test",
   "characters": {
@@ -38,5 +38,7 @@
     "route": "gebet-lernen/review",
     "zeroTrust": true
   },
-  "integrationBlock": "Sujud + Sitting + Sujud + Rise"
+  "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+  "technicalFajrComplete": true,
+  "religiousFajrApproved": false
 }

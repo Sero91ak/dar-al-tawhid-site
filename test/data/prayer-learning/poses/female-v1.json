@@ -492,7 +492,9 @@
         "looseGarment": null,
         "sleevesClosed": null,
         "noForearmsVisible": null,
-        "sameMasterFigure": null
+        "sameMasterFigure": null,
+        "noFacialIdentity": null,
+        "noThighContour": null
       },
       "review": {
         "sourceReview": {
@@ -515,7 +517,12 @@
           "reviewedAt": null,
           "reviewer": null
         }
-      }
+      },
+      "phase": 11,
+      "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+      "fingerDetailsRequireSource": true,
+      "noInventedFingerBehavior": true,
+      "modestyPrecedence": true
     },
     "taslim-right": {
       "assetId": "female-v1-taslim-right-v1",
@@ -549,7 +556,10 @@
         "looseGarment": null,
         "sleevesClosed": null,
         "noForearmsVisible": null,
-        "sameMasterFigure": null
+        "sameMasterFigure": null,
+        "noFacialIdentity": null,
+        "noThighContour": null,
+        "headTurnNoFaceExposure": null
       },
       "review": {
         "sourceReview": {
@@ -572,7 +582,10 @@
           "reviewedAt": null,
           "reviewer": null
         }
-      }
+      },
+      "phase": 11,
+      "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+      "modestyPrecedence": true
     },
     "taslim-left": {
       "assetId": "female-v1-taslim-left-v1",
@@ -606,7 +619,10 @@
         "looseGarment": null,
         "sleevesClosed": null,
         "noForearmsVisible": null,
-        "sameMasterFigure": null
+        "sameMasterFigure": null,
+        "noFacialIdentity": null,
+        "noThighContour": null,
+        "headTurnNoFaceExposure": null
       },
       "review": {
         "sourceReview": {
@@ -629,7 +645,10 @@
           "reviewedAt": null,
           "reviewer": null
         }
-      }
+      },
+      "phase": 11,
+      "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+      "modestyPrecedence": true
     }
   },
   "rejectIf": [
@@ -645,5 +664,5 @@
     "inconsistent-niqab",
     "character-drift"
   ],
-  "phase": 10
+  "phase": 11
 }

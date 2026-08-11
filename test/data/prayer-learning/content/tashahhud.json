@@ -1,13 +1,85 @@
 {
-  "id": "tashahhud-main-v1",
+  "id": "tashahhud-final-v1",
+  "aliases": ["tashahhud-main-v1"],
   "stepId": "tashahhud",
+  "prayerId": null,
+  "reusableAcrossPrayers": true,
   "titleDe": "Tašahhud",
+  "titleAr": "التشهد",
   "instructionDe": null,
+  "instructionText": null,
+  "instructionLabel": "So sitzt du",
   "arabic": null,
   "transliteration": null,
   "meaningDe": null,
   "spokenText": null,
-  "sourceClaimIds": [],
+  "modules": {
+    "tashahhudText": {
+      "id": "tashahhud-text-v1",
+      "labelDe": "Tašahhud",
+      "status": "research",
+      "approved": false,
+      "arabicText": null,
+      "transliteration": null,
+      "germanMeaning": null,
+      "sourceClaimIds": ["tashahhud-text"],
+      "note": "Kein Finger-/Text-Detail erfinden – nur nach Quellenprüfung"
+    },
+    "salatIbrahimiyya": {
+      "id": "salat-ibrahimiyya-v1",
+      "labelDe": "Ṣalāh Ibrāhīmiyyah",
+      "status": "research",
+      "approved": false,
+      "arabicText": null,
+      "transliteration": null,
+      "germanMeaning": null,
+      "sourceClaimIds": ["tashahhud-salat-ibrahimiyya"]
+    },
+    "duaBeforeTaslim": {
+      "id": "dua-before-taslim-v1",
+      "labelDe": "Duʿāʾ vor Taslīm",
+      "status": "research",
+      "approved": false,
+      "optional": true,
+      "arabicText": null,
+      "transliteration": null,
+      "germanMeaning": null,
+      "sourceClaimIds": ["tashahhud-dua-before-taslim"]
+    }
+  },
+  "sourceClaimIds": [
+    "tashahhud-general-sitting",
+    "tashahhud-left-leg",
+    "tashahhud-right-leg",
+    "tashahhud-left-foot",
+    "tashahhud-right-foot",
+    "tashahhud-left-hand",
+    "tashahhud-right-hand",
+    "tashahhud-finger-shape",
+    "tashahhud-index-finger",
+    "tashahhud-index-finger-timing",
+    "tashahhud-gaze",
+    "tashahhud-text",
+    "tashahhud-salat-ibrahimiyya",
+    "tashahhud-dua-before-taslim"
+  ],
+  "relatedClaimSlotIds": [
+    "tashahhud-general-sitting",
+    "tashahhud-left-leg",
+    "tashahhud-right-leg",
+    "tashahhud-left-foot",
+    "tashahhud-right-foot",
+    "tashahhud-left-hand",
+    "tashahhud-right-hand",
+    "tashahhud-finger-shape",
+    "tashahhud-index-finger",
+    "tashahhud-index-finger-timing",
+    "tashahhud-gaze",
+    "tashahhud-text",
+    "tashahhud-salat-ibrahimiyya",
+    "tashahhud-dua-before-taslim"
+  ],
+  "detailIds": ["tashahhud-sitting", "tashahhud-hands", "tashahhud-index"],
   "variantIds": [],
   "defaultVariantId": null,
   "status": "research",
@@ -15,55 +87,20 @@
   "reviewPass2": false,
   "approved": false,
   "audioId": null,
-  "modules": [
-    "tashahhud",
-    "salat-ibrahimiyya",
-    "dua-before-taslim"
-  ],
-  "revision": 1,
+  "audioEnabled": false,
+  "audioVisible": false,
+  "audioPreload": false,
+  "revision": 3,
   "contentHash": null,
-  "review": {
-    "contentReview": {
-      "status": "pending",
-      "reviewedAt": null,
-      "reviewer": null
-    },
-    "sourceReview": {
-      "status": "pending",
-      "reviewedAt": null,
-      "reviewer": null
-    },
-    "poseReview": {
-      "status": "pending",
-      "reviewedAt": null,
-      "reviewer": null
-    },
-    "reviewPass1": {
-      "passed": false,
-      "reviewedAt": null,
-      "reviewer": null
-    },
-    "reviewPass2": {
-      "passed": false,
-      "reviewedAt": null,
-      "reviewer": null
-    }
-  },
-  "claimMappings": {
-    "instructionDe": null,
-    "arabic": null,
-    "transliteration": null,
-    "meaningDe": null,
-    "poseDetails": []
-  },
   "selfApproved": false,
   "aiGenerated": false,
-  "relatedClaimSlotIds": [
-    "tashahhud-sitting",
-    "tashahhud-hands",
-    "tashahhud-index",
-    "tashahhud-text",
-    "salat-ibrahimiyya",
-    "dua-before-taslim"
-  ]
+  "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+  "phase": 11,
+  "notes": "Phase 11: Module getrennt. Fingerposition/Bewegung/Timing nicht aus Mockups – nur mit Quelle. Keine Text-Duplikate.",
+  "review": {
+    "contentReview": { "status": "pending", "reviewedAt": null, "reviewer": null },
+    "sourceReview": { "status": "pending", "reviewedAt": null, "reviewer": null },
+    "reviewPass1": { "passed": false, "reviewedAt": null, "reviewer": null },
+    "reviewPass2": { "passed": false, "reviewedAt": null, "reviewer": null }
+  }
 }

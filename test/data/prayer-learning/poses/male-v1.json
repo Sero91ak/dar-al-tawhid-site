@@ -442,7 +442,8 @@
         "sameKufi": null,
         "sameClothing": null,
         "faceless": null,
-        "noCharacterDrift": null
+        "noCharacterDrift": null,
+        "sameDarkThobe": null
       },
       "review": {
         "sourceReview": {
@@ -465,7 +466,11 @@
           "reviewedAt": null,
           "reviewer": null
         }
-      }
+      },
+      "phase": 11,
+      "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+      "fingerDetailsRequireSource": true,
+      "noInventedFingerBehavior": true
     },
     "taslim-right": {
       "assetId": "male-v1-taslim-right-v1",
@@ -496,7 +501,9 @@
         "sameKufi": null,
         "sameClothing": null,
         "faceless": null,
-        "noCharacterDrift": null
+        "noCharacterDrift": null,
+        "sameDarkThobe": null,
+        "beardConsistentOnHeadTurn": null
       },
       "review": {
         "sourceReview": {
@@ -519,7 +526,9 @@
           "reviewedAt": null,
           "reviewer": null
         }
-      }
+      },
+      "phase": 11,
+      "integrationBlock": "RakAh 2 + Tashahhud + Taslim"
     },
     "taslim-left": {
       "assetId": "male-v1-taslim-left-v1",
@@ -550,7 +559,9 @@
         "sameKufi": null,
         "sameClothing": null,
         "faceless": null,
-        "noCharacterDrift": null
+        "noCharacterDrift": null,
+        "sameDarkThobe": null,
+        "beardConsistentOnHeadTurn": null
       },
       "review": {
         "sourceReview": {
@@ -573,7 +584,9 @@
           "reviewedAt": null,
           "reviewer": null
         }
-      }
+      },
+      "phase": 11,
+      "integrationBlock": "RakAh 2 + Tashahhud + Taslim"
     }
   },
   "rejectIf": [
@@ -585,5 +598,5 @@
     "thawb-changed",
     "different-character"
   ],
-  "phase": 10
+  "phase": 11
 }

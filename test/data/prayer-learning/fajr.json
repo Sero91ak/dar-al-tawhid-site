@@ -5,9 +5,9 @@
   "rakAhCount": 2,
   "rakat": 2,
   "audioEnabled": false,
-  "phase": 10,
+  "phase": 11,
   "engine": "compose-from-templates",
-  "verificationNote": "Phase-10: Integrationsblock Suǧūd + Sitzen + Suǧūd 2 + Aufstehen. research. productionEnabled=false.",
+  "verificationNote": "Phase-11: Technische Fajr-Sequenz bis Taslīm vollständig. Content/Posen research. productionEnabled=false. religiousFajrApproved=false.",
   "sequence": [
     "fajr-r1-takbir",
     "fajr-r1-qiyam",
@@ -23,7 +23,7 @@
     "fajr-r2-ruku",
     "fajr-r2-standing-after-ruku",
     "fajr-r2-sujud-1",
-    "fajr-r2-sitting",
+    "fajr-r2-sitting-between-sujud",
     "fajr-r2-sujud-2",
     "fajr-r2-tashahhud",
     "fajr-r2-taslim-right",
@@ -267,7 +267,10 @@
         "qiyam-foot-position",
         "qiyam-gaze",
         "qiyam-transition-to-recitation"
-      ]
+      ],
+      "poseReuse": true,
+      "contentReuse": true,
+      "integrationBlock": "RakAh 2 + Tashahhud + Taslim"
     },
     {
       "id": "fajr-r2-recitation",
@@ -276,7 +279,7 @@
       "templateId": "recitation",
       "deepLink": "recitation",
       "poseReuseFrom": "qiyam",
-      "contentId": "fajr-r1-recitation-v1",
+      "contentId": "fajr-r2-recitation-v1",
       "status": "research",
       "sourceClaimIds": [],
       "poseId": "qiyam",
@@ -289,8 +292,8 @@
         "recitation-order",
         "recitation-transition-ruku"
       ],
-      "integrationBlock": "Recitation + Ruku + Standing After Ruku",
-      "note": "Rakʿah-2 reuse: gleiche Content-/Pose-Registry, mapping über prayerId+rakAh"
+      "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+      "note": "Rakʿah-spezifisches Mapping (nicht automatisch = R1)"
     },
     {
       "id": "fajr-r2-ruku",
@@ -317,7 +320,9 @@
         "ruku-transition-out"
       ],
       "integrationBlock": "Recitation + Ruku + Standing After Ruku",
-      "note": "Rakʿah-2 reuse: gleiche Rukūʿ-Pose-Registry"
+      "note": "Rakʿah-2 reuse: gleiche Rukūʿ-Pose-Registry",
+      "poseReuse": true,
+      "contentReuse": true
     },
     {
       "id": "fajr-r2-standing-after-ruku",
@@ -340,7 +345,9 @@
         "standing-transition-to-sujud"
       ],
       "integrationBlock": "Recitation + Ruku + Standing After Ruku",
-      "note": "Rakʿah-2 reuse: gleiche Aufrichten-Pose-Registry"
+      "note": "Rakʿah-2 reuse: gleiche Aufrichten-Pose-Registry",
+      "poseReuse": true,
+      "contentReuse": true
     },
     {
       "id": "fajr-r2-sujud-1",
@@ -370,10 +377,12 @@
         "sujud-dhikr",
         "sujud-transition-to-sitting"
       ],
-      "integrationBlock": "Sujud + Sitting + Sujud + Rise"
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise",
+      "poseReuse": true,
+      "contentReuse": true
     },
     {
-      "id": "fajr-r2-sitting",
+      "id": "fajr-r2-sitting-between-sujud",
       "rakAh": 2,
       "order": 15,
       "templateId": "sitting-between-sujud",
@@ -395,7 +404,9 @@
         "sitting-dhikr",
         "sitting-transition-second-sujud"
       ],
-      "integrationBlock": "Sujud + Sitting + Sujud + Rise"
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise",
+      "poseReuse": true,
+      "contentReuse": true
     },
     {
       "id": "fajr-r2-sujud-2",
@@ -436,24 +447,53 @@
       "order": 17,
       "templateId": "tashahhud",
       "deepLink": "tashahhud",
-      "contentId": "tashahhud-main-v1",
+      "contentId": "tashahhud-final-v1",
       "status": "research",
       "sourceClaimIds": [],
-      "poseId": "tashahhud"
+      "poseId": "tashahhud",
+      "prayerId": "fajr",
+      "claimSlotIds": [
+        "tashahhud-general-sitting",
+        "tashahhud-left-leg",
+        "tashahhud-right-leg",
+        "tashahhud-left-foot",
+        "tashahhud-right-foot",
+        "tashahhud-left-hand",
+        "tashahhud-right-hand",
+        "tashahhud-finger-shape",
+        "tashahhud-index-finger",
+        "tashahhud-index-finger-timing",
+        "tashahhud-gaze",
+        "tashahhud-text",
+        "tashahhud-salat-ibrahimiyya",
+        "tashahhud-dua-before-taslim"
+      ],
+      "integrationBlock": "RakAh 2 + Tashahhud + Taslim"
     },
     {
       "id": "fajr-r2-taslim-right",
       "rakAh": 2,
       "order": 18,
       "templateId": "taslim",
-      "deepLink": "taslim",
+      "deepLink": "taslim-right",
       "side": "right",
       "malePoseId": "taslim-right",
       "femalePoseId": "taslim-right",
       "contentId": "taslim-main-v1",
       "status": "research",
       "sourceClaimIds": [],
-      "poseId": "taslim-right"
+      "poseId": "taslim-right",
+      "prayerId": "fajr",
+      "claimSlotIds": [
+        "taslim-general",
+        "taslim-head-turn-right",
+        "taslim-head-turn-left",
+        "taslim-right-end-position",
+        "taslim-left-end-position",
+        "taslim-spoken-wording",
+        "taslim-order"
+      ],
+      "integrationBlock": "RakAh 2 + Tashahhud + Taslim"
     },
     {
       "id": "fajr-r2-taslim-left",
@@ -467,7 +507,19 @@
       "contentId": "taslim-main-v1",
       "status": "research",
       "sourceClaimIds": [],
-      "poseId": "taslim-left"
+      "poseId": "taslim-left",
+      "prayerId": "fajr",
+      "claimSlotIds": [
+        "taslim-general",
+        "taslim-head-turn-right",
+        "taslim-head-turn-left",
+        "taslim-right-end-position",
+        "taslim-left-end-position",
+        "taslim-spoken-wording",
+        "taslim-order"
+      ],
+      "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+      "isFinalStep": true
     }
   ],
   "stepAliases": {
@@ -480,7 +532,9 @@
     "sitting": "fajr-r1-sitting-between-sujud",
     "rise": "fajr-r1-rise-to-rakah-2",
     "rise-to-rakah-2": "fajr-r1-rise-to-rakah-2",
-    "sitting-between-sujud": "fajr-r1-sitting-between-sujud"
+    "sitting-between-sujud": "fajr-r1-sitting-between-sujud",
+    "fajr-r2-sitting": "fajr-r2-sitting-between-sujud",
+    "sitting-r2": "fajr-r2-sitting-between-sujud"
   },
   "transitions": [
     {
@@ -526,26 +580,33 @@
     }
   ],
   "completion": {
-    "labelDe": "Fajr abgeschlossen",
+    "labelDe": "Fajr-Lernablauf beendet.",
     "options": [
       "retry",
       "overview"
     ],
     "noGamification": true,
-    "noReligiousJudgement": true
+    "noReligiousJudgement": true,
+    "noLoopToTakbir": true,
+    "finalStepId": "fajr-r2-taslim-left",
+    "learningSequenceCompletedOnlyAfterFinal": true
   },
   "readyForApprovedContent": true,
   "integrationBlocks": {
-    "current": "Sujud + Sitting + Sujud + Rise",
+    "current": "RakAh 2 + Tashahhud + Taslim",
     "completed": [
       "Takbir + Qiyam",
-      "Recitation + Ruku + Standing After Ruku"
+      "Recitation + Ruku + Standing After Ruku",
+      "Sujud + Sitting + Sujud + Rise"
     ],
     "next": [
-      "RakAh 2 completion",
-      "Tashahhud",
-      "Taslim"
+      "Fajr quality review",
+      "Maghrib composition"
     ]
   },
-  "integrationBlock": "Sujud + Sitting + Sujud + Rise"
+  "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+  "technicalFajrComplete": true,
+  "religiousFajrApproved": false,
+  "productionEnabled": false,
+  "requiredSteps": 19
 }

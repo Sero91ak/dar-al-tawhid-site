@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "phase": 10,
+  "phase": 11,
   "prayerId": "fajr",
   "statusValues": [
     "draft",
@@ -676,7 +676,7 @@
       "id": "tashahhud",
       "titleDe": "Tašahhud",
       "titleAr": "التشهد",
-      "contentId": "tashahhud-main-v1",
+      "contentId": "tashahhud-final-v1",
       "poseId": "tashahhud",
       "status": "research",
       "contentApproved": false,
@@ -748,7 +748,25 @@
       ],
       "detailClaimIds": [],
       "notesInternal": null,
-      "audioId": null
+      "audioId": null,
+      "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+      "details": [
+        {
+          "id": "tashahhud-sitting",
+          "label": "Sitzposition",
+          "approved": false
+        },
+        {
+          "id": "tashahhud-hands",
+          "label": "Hände",
+          "approved": false
+        },
+        {
+          "id": "tashahhud-index",
+          "label": "Zeigefinger",
+          "approved": false
+        }
+      ]
     },
     {
       "id": "taslim",
@@ -823,8 +841,9 @@
       ],
       "detailClaimIds": [],
       "notesInternal": null,
-      "audioId": null
+      "audioId": null,
+      "integrationBlock": "RakAh 2 + Tashahhud + Taslim"
     }
   ],
-  "integrationBlock": "Sujud + Sitting + Sujud + Rise"
+  "integrationBlock": "RakAh 2 + Tashahhud + Taslim"
 }
