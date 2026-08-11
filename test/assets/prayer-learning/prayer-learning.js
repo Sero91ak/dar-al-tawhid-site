@@ -1,8 +1,8 @@
 /**
- * DAR AL TAWḤĪD — Gebet erlernen (Test · Final Ultimatum / Phase 13)
- * Fünf Gebete: Fajr 19 · Maġrib 28 · Ẓuhr/ʿAṣr/ʿIšāʾ 36 (shared 4-rakʿah model)
+ * DAR AL TAWḤĪD — Gebet erlernen (Test · Premium Immersive Surface v646)
+ * Eigenständige Lernwelt · Fajr 19 · Maġrib 28 · 4-Rakʿah 36
  * productionEnabled = false | audioVisible = false | TEST ONLY
- * releaseCandidateReady computed · keine erfundenen religiösen Inhalte
+ * Keine erfundenen religiösen Inhalte · keine Fake-Pose-Assets
  */
 (function (global) {
   "use strict";
@@ -18,7 +18,7 @@
   var AUDIO_PRELOAD = false;
   var AUDIO_AUTOPLAY = false;
   var CONTENT_PENDING_LABEL = "Inhalt wird quellengeprüft.";
-  var POSE_PENDING_LABEL = "Pose wird geprüft";
+  var POSE_PENDING_LABEL = "Lehrfigur wird vorbereitet.";
   var TEXTS_EMPTY_LABEL = "Noch keine geprüften Texte verfügbar.";
   var OFFLINE_EVIDENCE_LABEL = "Direktnachweis benötigt eine Internetverbindung.";
   var PHASE = 13;
@@ -26,6 +26,66 @@
   var CHAR_MALE = "dar-prayer-male-v1";
   var CHAR_FEMALE = "dar-prayer-female-v1";
   var CHAR_VERSION = 1;
+  var IMMERSIVE_CLASS = "prl-immersive";
+
+  function setImmersiveMode(on) {
+    try {
+      var root = document.documentElement;
+      if (!root) return;
+      if (on) root.classList.add(IMMERSIVE_CLASS);
+      else root.classList.remove(IMMERSIVE_CLASS);
+    } catch (e) {}
+  }
+
+  function silhouetteSvg(character) {
+    var female = character === "female" || character === CHAR_FEMALE;
+    // Abstract Lehrfigur-Silhouette — kein Pose-Foto, keine fremde Figur
+    if (female) {
+      return (
+        '<svg class="prl-sil" viewBox="0 0 120 220" aria-hidden="true" focusable="false">' +
+        '<path fill="currentColor" opacity=".88" d="M60 18c-9 0-16 6-16 15v8c0 4 2 7 5 9l-3 10c-10 6-18 20-18 38v18c0 6 4 10 9 10h4v64c0 8 5 14 12 14h14c7 0 12-6 12-14v-64h4c5 0 9-4 9-10v-18c0-18-8-32-18-38l-3-10c3-2 5-5 5-9v-8c0-9-7-15-16-15zm0 10c4 0 7 2 7 5v6H53v-6c0-3 3-5 7-5zm-22 70c0-14 8-26 16-31 2 8 6 14 14 14s12-6 14-14c8 5 16 17 16 31v12H38v-12z"/>' +
+        "</svg>"
+      );
+    }
+    return (
+      '<svg class="prl-sil" viewBox="0 0 120 220" aria-hidden="true" focusable="false">' +
+      '<path fill="currentColor" opacity=".88" d="M60 14c-11 0-20 8-20 20 0 7 3 12 8 16-2 3-4 7-4 12v8c-12 8-20 24-20 44v14c0 6 4 10 9 10h5v58c0 8 5 14 12 14h20c7 0 12-6 12-14v-58h5c5 0 9-4 9-10v-14c0-20-8-36-20-44v-8c0-5-2-9-4-12 5-4 8-9 8-16 0-12-9-20-20-20zm0 12c5 0 9 3 9 8s-4 8-9 8-9-3-9-8 4-8 9-8zm-18 78c0-16 8-28 18-34 2 7 6 12 12 12s10-5 12-12c10 6 18 18 18 34v8H42v-8z"/>' +
+      "</svg>"
+    );
+  }
+
+  function topbarHtml(opts) {
+    opts = opts || {};
+    var back = opts.backValue;
+    var backAttr =
+      back == null
+        ? ' data-prl-go=""'
+        : back === "__app_more__"
+          ? ' data-nav="more"'
+          : ' data-prl-go="' + esc(back) + '"';
+    var title = opts.title || "Gebet erlernen";
+    var kicker = opts.kicker || "DAR AL TAWḤĪD";
+    return (
+      '<header class="prl-topbar">' +
+      '<button type="button" class="prl-topbar-back"' +
+      backAttr +
+      ' aria-label="Zurück">←</button>' +
+      '<div class="prl-topbar-center">' +
+      '<span class="prl-topbar-kicker">' +
+      esc(kicker) +
+      "</span>" +
+      '<p class="prl-topbar-title">' +
+      esc(title) +
+      "</p>" +
+      "</div>" +
+      '<div class="prl-topbar-spacer" aria-hidden="true"></div>' +
+      "</header>"
+    );
+  }
+
+  function wrapSurface(inner) {
+    return '<div class="prl-surface" data-prl-surface="1">' + inner + "</div>";
+  }
 
   var cache = { index: null, prayers: null, masters: {}, composed: {}, steps: {}, texts: null, claims: null, claimsById: null, registry: null, poses: { male: null, female: null }, poseSlots: { male: null, female: null }, poseIndex: null, contentIndex: null, contentById: {}, variantsIndex: null, searchIndex: null, validationDash: null, manifest: null, reviewIndex: null, reviewSteps: null, readiness: null, auditLog: null, dependencies: null, characters: {}, quranBySurah: {} };
   var listenersBound = false;
@@ -1375,9 +1435,9 @@
       '<div class="prl-stage" aria-label="Lehrfigur">' +
       '<div class="prl-figure">' +
       '<div class="prl-figure-pending" data-prl-pose-placeholder="1">' +
+      silhouetteSvg(character) +
       "<b>" + esc(title || poseKey) + "</b>" +
       "<span>" + esc(POSE_PENDING_LABEL) + "</span>" +
-      (isTestEnv() ? '<span class="prl-test-marker">TEST</span>' : "") +
       "</div></div>" +
       '<div class="prl-stage-floor" aria-hidden="true"></div></div>'
     );
@@ -1397,13 +1457,12 @@
       return (
         '<div class="prl-stage" role="img" aria-label="' + esc(label) + '" data-prl-character-id="' + esc(cid) + '" data-prl-pose-id="' + esc(poseKey) + '" data-prl-pose-status="' + esc(status) + '">' +
         '<div class="prl-figure"><div class="prl-figure-pending" data-prl-pose-placeholder="1">' +
+        silhouetteSvg(character) +
         "<b>" + esc(step.titleDe || poseKey) + "</b>" +
         "<span>" + esc(POSE_PENDING_LABEL) + "</span>" +
-        (isTestEnv() ? '<span class="prl-test-marker">TEST</span>' : "") +
         '</div></div><div class="prl-stage-floor" aria-hidden="true"></div></div>'
       );
     }
-    var marker = resolved.meta && resolved.meta.approved ? "" : (isTestEnv() ? '<span class="prl-test-marker">TEST</span>' : "");
     var srcset = "";
     if (resolved.srcset && resolved.srcset.length) {
       srcset = ' srcset="' + esc(resolved.srcset.join(", ")) + '"';
@@ -1415,7 +1474,7 @@
       (resolved.srcAvif ? '<source type="image/avif" srcset="' + esc(resolved.srcAvif) + '">' : "") +
       (resolved.srcWebp ? '<source type="image/webp" srcset="' + esc(resolved.srcWebp) + '">' : "") +
       '<img src="' + esc(resolved.url) + '"' + srcset + ' alt="' + esc(label) + '" loading="lazy" decoding="async" data-prl-pose-img>' +
-      "</picture>" + marker + "</div>" +
+      "</picture></div>" +
       '<div class="prl-stage-floor" aria-hidden="true"></div></div>'
     );
   }
@@ -1440,14 +1499,8 @@
 
   function controlsHtml(state, opts) {
     opts = opts || {};
-    var charHint =
-      '<div class="prl-char-lock" aria-hidden="true">' +
-      '<span class="' + (state.character === "male" ? "is-active" : "") + '">Männer · ' + esc(CHAR_MALE) + "</span>" +
-      '<span class="' + (state.character === "female" ? "is-active" : "") + '">Frauen · ' + esc(CHAR_FEMALE) + "</span>" +
-      "</div>";
     return (
-      '<div class="prl-controls">' +
-      (isTestEnv() ? '<div class="prl-test-badge" aria-hidden="true">TEST</div>' : "") +
+      '<div class="prl-controls" data-prl-char-male="' + esc(CHAR_MALE) + '" data-prl-char-female="' + esc(CHAR_FEMALE) + '">' +
       '<div class="prl-controls-label" id="prlCharLabel">Darstellung</div>' +
       '<div class="prl-segment" role="group" aria-labelledby="prlCharLabel">' +
       '<button type="button" data-prl-character="male" aria-pressed="' + (state.character === "male" ? "true" : "false") + '" class="' +
@@ -1457,7 +1510,6 @@
       (state.character === "female" ? "is-active" : "") +
       '">Frauen</button>' +
       "</div>" +
-      (opts.compact ? "" : charHint) +
       '<div class="prl-controls-label" id="prlViewLabel">Lernmodus</div>' +
       '<div class="prl-segment" role="group" aria-labelledby="prlViewLabel">' +
       '<button type="button" data-prl-view="swipe" aria-pressed="' + (state.viewMode === "swipe" ? "true" : "false") + '" class="' +
@@ -1472,30 +1524,41 @@
   }
 
   function progressHtml(prayer, step, index, total) {
-    var inR2 = Number(step.rakAh) === 2;
+    var rakTotal = Number(prayer.rakat || prayer.rakAhCount || 2);
+    var cur = Number(step.rakAh) || 1;
+    var segs = "";
+    for (var r = 1; r <= rakTotal; r++) {
+      segs +=
+        '<span class="' +
+        (r === cur ? "is-active" : "") +
+        '">' +
+        r +
+        ".</span>";
+    }
+    var pct = total > 0 ? Math.round(((index + 1) / total) * 100) : 0;
     return (
       '<div class="prl-progress">' +
       '<div class="prl-progress-title">' +
       esc(prayer.titleDe) +
       " · " +
-      esc(String(prayer.rakat)) +
+      esc(String(rakTotal)) +
       " Rakʿāt</div>" +
       '<div class="prl-progress-rail" aria-hidden="true">' +
-      "<span class=\"" +
-      (inR2 ? "" : "is-active") +
-      '">1. Rakʿah</span>' +
+      '<span class="is-active">' +
+      esc(String(cur)) +
+      ". Rakʿah</span>" +
       '<span class="prl-progress-dots">' +
-      (inR2 ? "○━━━━━━●" : "●━━━━━━○") +
+      segs +
       "</span>" +
-      "<span class=\"" +
-      (inR2 ? "is-active" : "") +
-      '">2. Rakʿah</span>' +
-      "</div>" +
-      "<div>Schritt " +
+      "<span>Schritt " +
       (index + 1) +
-      " von " +
+      " / " +
       total +
+      "</span>" +
       "</div>" +
+      '<div class="prl-progress-bar" aria-hidden="true"><i style="width:' +
+      pct +
+      '%"></i></div>' +
       "</div>"
     );
   }
@@ -1911,13 +1974,13 @@
       }
     });
     return (
+      topbarHtml({ backValue: "", title: "Was sage ich?", kicker: "Gebet erlernen" }) +
       '<section class="prl-shell" data-prl-root="texts">' +
-      '<header class="prl-hero prl-hero--compact"><h2>Was sage ich im Gebet?</h2><p>Nur freigegebene Content-Module · keine zweite Textdatenbank.</p></header>' +
+      '<header class="prl-hero prl-hero--compact"><h2>Was sage ich im Gebet?</h2><p>Nur freigegebene Content-Module.</p></header>' +
       controlsHtml(state) +
       '<div class="prl-paths">' +
       (approvedRows.length ? approvedRows.join("") : '<div class="prl-research">' + esc(TEXTS_EMPTY_LABEL) + "</div>") +
       "</div>" +
-      '<div class="prl-btn-row"><button type="button" class="prl-btn" data-prl-go="">Zurück</button></div>' +
       "</section>"
     );
   }
@@ -2011,23 +2074,20 @@
   }
 
   function hubHtml(state, index, currentPrayer) {
-    var lastNote = "";
-    if (state.lastPrayerId) {
-      lastNote = '<p class="prl-last-viewed" data-prl-last-viewed>' + esc(String(state.lastPrayerId)) + " zuletzt angesehen</p>";
-    }
     return (
+      topbarHtml({ backValue: "__app_more__", title: "Gebet erlernen", kicker: "DAR AL TAWḤĪD" }) +
       '<section class="prl-shell prl-shell--hub" data-prl-root="hub">' +
-      '<header class="prl-hero prl-hero--compact">' +
+      '<header class="prl-hero">' +
       "<h2>Gebet erlernen</h2>" +
       '<p class="prl-ar" lang="ar" dir="rtl">الصلاة</p>' +
       "<p>Schritt für Schritt sehen und lernen.</p>" +
-      lastNote +
+      '<div class="prl-hero-ornament" aria-hidden="true"><i></i><span>Ṣalāh</span><i></i></div>' +
       "</header>" +
       controlsHtml(state) +
       resumeCard(state, currentPrayer) +
       '<div class="prl-paths">' +
-      '<button type="button" class="prl-path" data-prl-go="gebet"><b>Gebet Schritt für Schritt</b><span>Fajr · Maġrib · Ẓuhr · ʿAṣr · ʿIšāʾ</span></button>' +
-      '<button type="button" class="prl-path" data-prl-go="gebet"><b>Ein bestimmtes Gebet</b><span>Alle fünf Gebete · technische Testversion</span></button>' +
+      '<button type="button" class="prl-path" data-prl-go="gebet"><b>Gebet Schritt für Schritt</b><span>Vom Takbīr bis zum Taslīm</span></button>' +
+      '<button type="button" class="prl-path" data-prl-go="gebet"><b>Ein bestimmtes Gebet</b><span>Fajr · Maġrib · Ẓuhr · ʿAṣr · ʿIšāʾ</span></button>' +
       '<button type="button" class="prl-path" data-prl-go="stellung"><b>Eine Stellung nachsehen</b><span>Takbīr, Rukūʿ, Suǧūd und mehr</span></button>' +
       '<button type="button" class="prl-path" data-prl-go="texte"><b>Was sage ich im Gebet?</b><span>Nur geprüfte Textmodule</span></button>' +
       "</div>" +
@@ -2041,7 +2101,8 @@
   function prayersHtml(state, index) {
     var cards = (index.prayers || [])
       .map(function (p) {
-        var ready = p.status === "prototype" || p.status === "ready";
+        var ready = p.status === "prototype" || p.status === "ready" || p.status === "test";
+        var badge = ready ? p.rakat + " Rakʿāt" : "In Vorbereitung";
         return (
           '<button type="button" class="prl-prayer-card" data-prl-prayer="' +
           esc(p.id) +
@@ -2050,23 +2111,23 @@
           ">" +
           "<span><b>" +
           esc(p.titleDe) +
-          '</b><div class="prl-ar">' +
+          '</b><div class="prl-ar" lang="ar" dir="rtl">' +
           esc(p.titleAr || "") +
           "</div></span>" +
           '<span class="prl-badge">' +
-          (ready ? p.rakat + " Rakʿāt" : "In Vorbereitung") +
+          badge +
           "</span></button>"
         );
       })
       .join("");
     return (
+      topbarHtml({ backValue: "", title: "Gebete", kicker: "Gebet erlernen" }) +
       '<section class="prl-shell">' +
       '<header class="prl-hero prl-hero--compact"><h2>Ein bestimmtes Gebet</h2><p>Wähle das Gebet, das du lernen möchtest.</p></header>' +
       controlsHtml(state) +
       '<div class="prl-prayer-list">' +
       cards +
       "</div>" +
-      '<div class="prl-btn-row"><button type="button" class="prl-btn" data-prl-go="">Zurück</button></div>' +
       "</section>"
     );
   }
@@ -2087,13 +2148,13 @@
       })
       .join("");
     return (
+      topbarHtml({ backValue: "", title: "Stellungen", kicker: "Gebet erlernen" }) +
       '<section class="prl-shell">' +
-      '<header class="prl-hero prl-hero--compact"><h2>Stellung nachsehen</h2><p>Springe direkt zur gewünschten Haltung in Fajr.</p></header>' +
+      '<header class="prl-hero prl-hero--compact"><h2>Stellung nachsehen</h2><p>Springe direkt zur gewünschten Haltung.</p></header>' +
       controlsHtml(state) +
       '<div class="prl-quick-grid">' +
       buttons +
       "</div>" +
-      '<div class="prl-btn-row"><button type="button" class="prl-btn" data-prl-go="">Zurück</button></div>' +
       "</section>"
     );
   }
@@ -2170,6 +2231,7 @@
           "</article>";
       }
       return (
+        topbarHtml({ backValue: "gebet", title: prayer.titleDe || "Lernen", kicker: "Gebet erlernen" }) +
         '<section class="prl-shell prl-shell--' + esc(detectContainerMode()) + '" data-prl-root="learn" data-prl-mode="scroll" data-prl-index="' +
         idx +
         '" data-prl-final-step="' + esc(finalStepId) + '" data-prl-container="' + esc(detectContainerMode()) + '">' +
@@ -2179,7 +2241,6 @@
         items +
         "</div>" +
         complete +
-        '<div class="prl-btn-row"><button type="button" class="prl-btn" data-prl-go="">Übersicht</button></div>' +
         sourceSheetShell() +
         "</section>"
       );
@@ -2216,6 +2277,7 @@
     }
 
     return (
+      topbarHtml({ backValue: "gebet", title: prayer.titleDe || "Lernen", kicker: "Gebet erlernen" }) +
       '<section class="prl-shell" data-prl-root="learn" data-prl-mode="swipe" data-prl-index="' +
       idx +
       '" data-prl-final-step="' + esc(finalStepId) + '">' +
@@ -2227,7 +2289,6 @@
       "</div>" +
       nav +
       complete +
-      '<div class="prl-btn-row"><button type="button" class="prl-btn" data-prl-go="">Übersicht</button></div>' +
       sourceSheetShell() +
       "</section>"
     );
@@ -2347,14 +2408,8 @@
   }
 
   function headerFor(parsed) {
-    if (typeof global.setPageHeader !== "function") return "";
-    if (parsed.mode === "hub") return global.setPageHeader("Gebet erlernen", "Schritt für Schritt sehen und lernen.", "Lernen");
-    if (parsed.mode === "prayers") return global.setPageHeader("Gebete", "Ein bestimmtes Gebet wählen", "Gebet erlernen");
-    if (parsed.mode === "positions") return global.setPageHeader("Stellungen", "Direkt nachschlagen", "Gebet erlernen");
-    if (parsed.mode === "texts") return global.setPageHeader("Was sage ich?", "Texte aus Content-Modulen", "Gebet erlernen");
-    if (parsed.mode === "review") return global.setPageHeader("Prayer Learning Review", "Intern · Zero-Trust", "Gebet erlernen");
-    if (parsed.mode === "debug") return global.setPageHeader("Prayer Learning Debug", "Nur Test", "Gebet erlernen");
-    return global.setPageHeader("Fajr", "صلاة الفجر · 2 Rakʿāt", "Gebet erlernen");
+    // Immersive surface: eigene Topbar statt App-Page-Header
+    return "";
   }
 
   function deepLinkForStep(prayerId, step) {
@@ -2450,12 +2505,14 @@
       html += hubHtml(state, index, currentPrayer);
     }
 
-    return html;
+    return wrapSurface(html);
     } catch (err) {
       console.warn("[prayer-learning] render error", err);
       validationErrors.push(String(err && err.message || err));
-      var header = typeof global.setPageHeader === "function" ? global.setPageHeader("Gebet erlernen", "Technischer Hinweis", "Lernen") : "";
-      return header + '<section class="prl-shell"><div class="prl-research">Der Lernbereich konnte diesen Schritt nicht laden. Die restliche App bleibt nutzbar.</div><div class="prl-btn-row"><button type="button" class="prl-btn" data-prl-go="">Zur Übersicht</button></div></section>';
+      return wrapSurface(
+        topbarHtml({ backValue: "__app_more__", title: "Gebet erlernen" }) +
+        '<section class="prl-shell"><div class="prl-research">Der Lernbereich konnte diesen Schritt nicht laden. Die restliche App bleibt nutzbar.</div><div class="prl-btn-row"><button type="button" class="prl-btn" data-prl-go="">Zur Übersicht</button></div></section>'
+      );
     }
   }
 
@@ -2721,10 +2778,14 @@
 
   function afterRender() {
     try {
+      setImmersiveMode(true);
+      bindListeners();
       var root = document.querySelector("[data-prl-root]");
       if (!root) return;
       if (root.getAttribute("data-prl-root") === "learn") restoreLearnPosition(root);
       bindPoseImgFallback(root);
+      var learn = document.querySelector("[data-prl-root='learn']");
+      if (learn) learn.classList.toggle("is-dual-shell", isDualLayout());
     } catch (err) {
       console.warn("[prayer-learning] afterRender error", err);
     }
@@ -2913,6 +2974,13 @@
       return;
     }
 
+    var exitMore = t.closest(".prl-topbar-back[data-nav='more'], [data-prl-exit='more']");
+    if (exitMore) {
+      setImmersiveMode(false);
+      if (typeof global.navigate === "function") global.navigate("more", "");
+      return;
+    }
+
     var resume = t.closest("[data-prl-resume]");
     if (resume) {
       var st3 = loadState();
@@ -2984,6 +3052,7 @@
     VIEW: VIEW,
     render: render,
     afterRender: afterRender,
+    setImmersiveMode: setImmersiveMode,
     loadState: loadState,
     saveState: saveState,
     getControllerState: getControllerState,
