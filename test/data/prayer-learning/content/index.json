@@ -1,0 +1,96 @@
+{
+  "version": 2,
+  "phase": 11,
+  "modules": [
+    {
+      "stepId": "takbir",
+      "contentId": "takbir-main-v1",
+      "file": "takbir.json",
+      "status": "research",
+      "approved": false
+    },
+    {
+      "stepId": "qiyam",
+      "contentId": "qiyam-main-v1",
+      "file": "qiyam.json",
+      "status": "research",
+      "approved": false
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "fajr-r1-recitation-v1",
+      "file": "recitation.json",
+      "status": "research",
+      "approved": false,
+      "poseReuse": true,
+      "poseId": "qiyam"
+    },
+    {
+      "stepId": "ruku",
+      "contentId": "ruku-main-v1",
+      "file": "ruku.json",
+      "status": "research",
+      "approved": false
+    },
+    {
+      "stepId": "standing-after-ruku",
+      "contentId": "standing-after-ruku-v1",
+      "file": "standing-after-ruku.json",
+      "status": "research",
+      "approved": false
+    },
+    {
+      "stepId": "sujud",
+      "contentId": "sujud-main-v1",
+      "file": "sujud.json",
+      "status": "research",
+      "approved": false
+    },
+    {
+      "stepId": "sitting-between-sujud",
+      "contentId": "sitting-between-sujud-v1",
+      "file": "sitting-between-sujud.json",
+      "status": "research",
+      "approved": false
+    },
+    {
+      "stepId": "standing-next-rakah",
+      "contentId": "rise-next-rakah-v1",
+      "file": "standing-next-rakah.json",
+      "status": "research",
+      "approved": false
+    },
+    {
+      "stepId": "tashahhud",
+      "contentId": "tashahhud-final-v1",
+      "file": "tashahhud.json",
+      "status": "research",
+      "approved": false
+    },
+    {
+      "stepId": "taslim",
+      "contentId": "taslim-main-v1",
+      "file": "taslim.json",
+      "status": "research",
+      "approved": false
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "fajr-r2-recitation-v1",
+      "file": "recitation-r2.json",
+      "status": "research",
+      "approved": false,
+      "rakAh": 2,
+      "prayerId": "fajr"
+    }
+  ],
+  "gates": {
+    "canPublishRequires": [
+      "status=approved",
+      "reviewPass1",
+      "reviewPass2",
+      "sourceClaimIds.length>0"
+    ]
+  },
+  "integrationBlock": "RakAh 2 + Tashahhud + Taslim"
+}

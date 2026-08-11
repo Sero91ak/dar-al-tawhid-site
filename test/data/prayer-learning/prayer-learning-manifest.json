@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "phase": 11,
+  "prayers": [
+    "fajr"
+  ],
+  "characters": [
+    "dar-prayer-male-v1",
+    "dar-prayer-female-v1"
+  ],
+  "assets": [],
+  "content": [
+    "content/takbir.json",
+    "content/qiyam.json",
+    "content/recitation.json",
+    "content/ruku.json",
+    "content/standing-after-ruku.json",
+    "content/sujud.json",
+    "content/sitting-between-sujud.json",
+    "content/standing-next-rakah.json",
+    "content/tashahhud.json",
+    "content/taslim.json",
+    "content/recitation-r2.json"
+  ],
+  "poses": [
+    "poses/male-v1.json",
+    "poses/female-v1.json",
+    "poses/index.json"
+  ],
+  "sources": [
+    "sources/claims.json",
+    "sources/references.json"
+  ],
+  "cachePolicy": {
+    "removeObsoletePoseVersionsAfterConfirm": true
+  },
+  "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+  "quranReuse": [
+    "content/quran/001.json"
+  ],
+  "audioEnabled": false,
+  "requiredSteps": 19
+}

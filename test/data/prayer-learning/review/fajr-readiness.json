@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "phase": 11,
+  "computed": true,
+  "note": "releaseReady is computed only — never set manually to true. Phase 9 block still research.",
+  "fajr": {
+    "sequenceValid": true,
+    "contentCoverage": false,
+    "sourceCoverage": false,
+    "malePoseCoverage": false,
+    "femalePoseCoverage": false,
+    "reviewPass1": false,
+    "reviewPass2": false,
+    "releaseReady": false,
+    "requiredSteps": 19,
+    "technicalSequenceComplete": true
+  },
+  "productionEnabled": false,
+  "updatedAt": null,
+  "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+  "technicalFajrComplete": true,
+  "religiousFajrApproved": false
+}
