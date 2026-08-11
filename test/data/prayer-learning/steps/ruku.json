@@ -1,0 +1,74 @@
+{
+  "id": "ruku",
+  "titleDe": "Rukūʿ",
+  "titleAr": "الركوع",
+  "category": "bowing",
+  "poseReuseAllowed": false,
+  "malePoseId": "ruku",
+  "femalePoseId": "ruku",
+  "femalePoseStatus": "pending_review",
+  "detailSlots": [
+    "ruku-hands",
+    "ruku-back",
+    "ruku-legs"
+  ],
+  "checkAreas": [
+    "body-position",
+    "back",
+    "head",
+    "hands-on-knees",
+    "fingers",
+    "arms",
+    "legs",
+    "feet",
+    "dhikr",
+    "transition-out"
+  ],
+  "textModuleIds": [
+    "ruku-dhikr"
+  ],
+  "claimSlotIds": [
+    "ruku-body-position",
+    "ruku-back-position",
+    "ruku-head-position",
+    "ruku-hands-on-knees",
+    "ruku-finger-position",
+    "ruku-arm-position",
+    "ruku-leg-position",
+    "ruku-foot-position",
+    "ruku-dhikr",
+    "ruku-transition-out"
+  ],
+  "variants": [],
+  "verificationStatus": "research",
+  "audioId": null,
+  "details": [
+    {
+      "id": "ruku-hands",
+      "poseId": "ruku",
+      "label": "Hände",
+      "assetId": null,
+      "sourceClaimIds": [],
+      "approved": false,
+      "status": "research"
+    },
+    {
+      "id": "ruku-back",
+      "poseId": "ruku",
+      "label": "Rücken",
+      "assetId": null,
+      "sourceClaimIds": [],
+      "approved": false,
+      "status": "research"
+    },
+    {
+      "id": "ruku-legs",
+      "poseId": "ruku",
+      "label": "Beine",
+      "assetId": null,
+      "sourceClaimIds": [],
+      "approved": false,
+      "status": "research"
+    }
+  ]
+}
