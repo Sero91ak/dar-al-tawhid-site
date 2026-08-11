@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "phase": 6,
+  "computed": true,
+  "note": "releaseReady is computed only — never set manually to true",
+  "fajr": {
+    "sequenceValid": false,
+    "contentCoverage": false,
+    "sourceCoverage": false,
+    "malePoseCoverage": false,
+    "femalePoseCoverage": false,
+    "reviewPass1": false,
+    "reviewPass2": false,
+    "releaseReady": false
+  },
+  "productionEnabled": false,
+  "updatedAt": null
+}

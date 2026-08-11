@@ -1,0 +1,35 @@
+{
+  "id": "taslim",
+  "titleDe": "Taslīm",
+  "titleAr": "التسليم",
+  "category": "closing",
+  "poseReuseAllowed": false,
+  "malePoseId": "taslim",
+  "femalePoseId": "taslim",
+  "femalePoseStatus": "pending_review",
+  "sides": [
+    "right",
+    "left"
+  ],
+  "detailSlots": [],
+  "checkAreas": [
+    "head-turn",
+    "end-position",
+    "direction",
+    "wording",
+    "right-side",
+    "left-side"
+  ],
+  "textModuleIds": [
+    "taslim-wording"
+  ],
+  "claimSlotIds": [
+    "taslim-head",
+    "taslim-wording",
+    "taslim-sides"
+  ],
+  "variants": [],
+  "verificationStatus": "research",
+  "audioId": null,
+  "note": "Rechts/Links: gleiches Character-Modell, keine zwei Figuren."
+}

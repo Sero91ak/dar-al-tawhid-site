@@ -1,0 +1,46 @@
+{
+  "modules": [
+    {
+      "id": "tashahhud",
+      "type": "tashahhud",
+      "stepTemplateIds": [
+        "tashahhud"
+      ],
+      "arabic": null,
+      "transliteration": null,
+      "translationDe": null,
+      "verificationStatus": "research",
+      "sourceClaimIds": [
+        "tashahhud-text"
+      ]
+    },
+    {
+      "id": "salat-ibrahimiyya",
+      "type": "salawat",
+      "stepTemplateIds": [
+        "tashahhud"
+      ],
+      "arabic": null,
+      "transliteration": null,
+      "translationDe": null,
+      "verificationStatus": "research",
+      "sourceClaimIds": [
+        "salat-ibrahimiyya"
+      ]
+    },
+    {
+      "id": "dua-before-taslim",
+      "type": "dua",
+      "stepTemplateIds": [
+        "tashahhud"
+      ],
+      "arabic": null,
+      "transliteration": null,
+      "translationDe": null,
+      "verificationStatus": "research",
+      "sourceClaimIds": [
+        "dua-before-taslim"
+      ]
+    }
+  ]
+}
