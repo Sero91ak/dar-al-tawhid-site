@@ -1,5 +1,5 @@
 /**
- * DAR AL TAWḤĪD — Gebet erlernen (Test · Noble Compact + Ayah Deck v650)
+ * DAR AL TAWḤĪD — Gebet erlernen (Test · KI-Figuren Qiyām v651)
  * Eigenständige Lernwelt · Figure Stage Pflicht · 3D-Ansicht ein/aus
  * productionEnabled = false | audioVisible = false | TEST ONLY
  * Keine erfundenen religiösen Inhalte · keine Fake-/Silhouette-Ersatzfiguren
@@ -21,7 +21,7 @@
   var POSE_PENDING_LABEL = "Lehrfigur folgt";
   var TEXTS_EMPTY_LABEL = "Noch keine geprüften Texte verfügbar.";
   var OFFLINE_EVIDENCE_LABEL = "Direktnachweis benötigt eine Internetverbindung.";
-  var PHASE = 16;
+  var PHASE = 17;
   var FIGURE_STAGE_REQUIRED = true;
   var THREE_D_ENABLED = true;
   var AYAH_DECK_ENABLED = true;
@@ -1073,7 +1073,14 @@
       // Pose reuse: middle/final tashahhud may share approved tashahhud master until separate asset
       if (poseEntry && !(canPublishPose(poseEntry) && poseEntry.src) && poseEntry.poseReuseFrom) {
         var reused = slotReg.poses[poseEntry.poseReuseFrom];
-        if (reused && canPublishPose(reused) && reused.src && reused.characterId === expected) {
+        var reusedOk =
+          reused &&
+          reused.src &&
+          reused.characterId === expected &&
+          (canPublishPose(reused) ||
+            (environment === "test" &&
+              (reused.status === "test-delivered" || reused.testOnly === true)));
+        if (reusedOk) {
           poseEntry = reused;
           activeId = slotReg.activeAssets ? slotReg.activeAssets[poseEntry.poseId] : reused.assetId;
         }
@@ -1091,6 +1098,27 @@
           meta: poseEntry,
           status: "approved",
           from: "pose-registry"
+        };
+      }
+      /* Dar Test: KI-/Test-Figuren mit src dürfen laden, ohne Live-Freigabe */
+      if (
+        environment === "test" &&
+        poseEntry &&
+        poseEntry.src &&
+        (poseEntry.status === "test-delivered" || poseEntry.testOnly === true)
+      ) {
+        return {
+          ok: true,
+          characterId: characterId,
+          poseId: poseId,
+          assetId: activeId || poseEntry.assetId,
+          url: poseEntry.src,
+          srcWebp: poseEntry.srcWebp || poseEntry.src,
+          srcAvif: poseEntry.srcAvif || null,
+          srcset: poseEntry.srcset || [poseEntry.src],
+          meta: poseEntry,
+          status: "test-delivered",
+          from: "pose-registry-test"
         };
       }
       if (environment === "test") {

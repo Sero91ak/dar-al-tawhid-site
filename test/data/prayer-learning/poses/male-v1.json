@@ -2,7 +2,7 @@
   "characterId": "dar-prayer-male-v1",
   "activeAssets": {
     "takbir": null,
-    "qiyam": null,
+    "qiyam": "male-v1-qiyam-v1",
     "ruku": null,
     "standing-after-ruku": null,
     "sujud": null,
@@ -78,19 +78,21 @@
       "characterId": "dar-prayer-male-v1",
       "poseId": "qiyam",
       "assetType": "image",
-      "src": null,
-      "srcWebp": null,
+      "src": "/test/assets/prayer-learning/characters/male/poses/male-v1-qiyam.webp",
+      "srcWebp": "/test/assets/prayer-learning/characters/male/poses/male-v1-qiyam.webp",
       "srcAvif": null,
-      "srcset": [],
+      "srcset": [
+        "/test/assets/prayer-learning/characters/male/poses/male-v1-qiyam.webp"
+      ],
       "sourceClaimIds": [],
-      "status": "MISSING",
+      "status": "test-delivered",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
       "reviewPass1": false,
       "reviewPass2": false,
       "approved": false,
-      "active": false,
+      "active": true,
       "versions": [
         "male-v1-qiyam-v1"
       ],
@@ -129,7 +131,12 @@
       "integrationBlock": "Takbir + Qiyam",
       "phase": 8,
       "expectedFile": "male-v1-qiyam.webp",
-      "expectedAvif": "male-v1-qiyam.avif"
+      "expectedAvif": "male-v1-qiyam.avif",
+      "filePresent": true,
+      "testOnly": true,
+      "aiGenerated": true,
+      "aiConstraint": "no-eyes",
+      "notes": "User-authorized AI figure for Dar Test only. No eyes. Not production-approved."
     },
     "ruku": {
       "assetId": "male-v1-ruku-v1",
