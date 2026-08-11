@@ -1,0 +1,25 @@
+{
+  "id": "standing-next-rakah",
+  "titleDe": "Aufstehen zur nächsten Rakʿah",
+  "titleAr": "القيام للركعة التالية",
+  "category": "transition",
+  "poseReuseAllowed": true,
+  "malePoseId": "qiyam",
+  "femalePoseId": "qiyam",
+  "femalePoseStatus": "pending_review",
+  "preferredPoseId": "rise-next-rakah",
+  "poseFallbackId": "qiyam",
+  "detailSlots": [],
+  "checkAreas": [
+    "rise-motion",
+    "transition-sequence"
+  ],
+  "textModuleIds": [],
+  "claimSlotIds": [
+    "rise-next-rakah-motion"
+  ],
+  "variants": [],
+  "verificationStatus": "research",
+  "audioId": null,
+  "note": "Übergangsbewegung erst visualisieren nach Quellenprüfung."
+}

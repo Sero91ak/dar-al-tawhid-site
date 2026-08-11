@@ -1,0 +1,64 @@
+{
+  "id": "ruku-main-v1",
+  "stepId": "ruku",
+  "titleDe": "Rukūʿ",
+  "instructionDe": null,
+  "arabic": null,
+  "transliteration": null,
+  "meaningDe": null,
+  "spokenText": null,
+  "sourceClaimIds": [],
+  "variantIds": [],
+  "defaultVariantId": null,
+  "status": "research",
+  "reviewPass1": false,
+  "reviewPass2": false,
+  "approved": false,
+  "audioId": null,
+  "revision": 1,
+  "contentHash": null,
+  "review": {
+    "contentReview": {
+      "status": "pending",
+      "reviewedAt": null,
+      "reviewer": null
+    },
+    "sourceReview": {
+      "status": "pending",
+      "reviewedAt": null,
+      "reviewer": null
+    },
+    "poseReview": {
+      "status": "pending",
+      "reviewedAt": null,
+      "reviewer": null
+    },
+    "reviewPass1": {
+      "passed": false,
+      "reviewedAt": null,
+      "reviewer": null
+    },
+    "reviewPass2": {
+      "passed": false,
+      "reviewedAt": null,
+      "reviewer": null
+    }
+  },
+  "claimMappings": {
+    "instructionDe": null,
+    "arabic": null,
+    "transliteration": null,
+    "meaningDe": null,
+    "poseDetails": []
+  },
+  "selfApproved": false,
+  "aiGenerated": false,
+  "relatedClaimSlotIds": [
+    "ruku-body-bending",
+    "ruku-hands-knees",
+    "ruku-back",
+    "ruku-head",
+    "ruku-dhikr",
+    "ruku-transition"
+  ]
+}

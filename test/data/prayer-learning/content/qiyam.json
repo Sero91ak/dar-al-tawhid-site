@@ -1,0 +1,63 @@
+{
+  "id": "qiyam-main-v1",
+  "stepId": "qiyam",
+  "titleDe": "Qiyām",
+  "instructionDe": null,
+  "arabic": null,
+  "transliteration": null,
+  "meaningDe": null,
+  "spokenText": null,
+  "sourceClaimIds": [],
+  "variantIds": [],
+  "defaultVariantId": null,
+  "status": "research",
+  "reviewPass1": false,
+  "reviewPass2": false,
+  "approved": false,
+  "audioId": null,
+  "revision": 1,
+  "contentHash": null,
+  "review": {
+    "contentReview": {
+      "status": "pending",
+      "reviewedAt": null,
+      "reviewer": null
+    },
+    "sourceReview": {
+      "status": "pending",
+      "reviewedAt": null,
+      "reviewer": null
+    },
+    "poseReview": {
+      "status": "pending",
+      "reviewedAt": null,
+      "reviewer": null
+    },
+    "reviewPass1": {
+      "passed": false,
+      "reviewedAt": null,
+      "reviewer": null
+    },
+    "reviewPass2": {
+      "passed": false,
+      "reviewedAt": null,
+      "reviewer": null
+    }
+  },
+  "claimMappings": {
+    "instructionDe": null,
+    "arabic": null,
+    "transliteration": null,
+    "meaningDe": null,
+    "poseDetails": []
+  },
+  "selfApproved": false,
+  "aiGenerated": false,
+  "relatedClaimSlotIds": [
+    "qiyam-body-posture",
+    "qiyam-gaze",
+    "qiyam-hand-position",
+    "qiyam-foot-stance",
+    "qiyam-transition"
+  ]
+}
