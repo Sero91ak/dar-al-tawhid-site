@@ -84,6 +84,15 @@
   ],
   "unlockedScopes": [
     {
+      "id": "gebet-erlernen-4rakah-gate-stop-v645-2026-08-11",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "4-Rakʿah-Auftrag Gate-Stop: Vorbedingungen (Maghrib QA + HIGH-Bugs) nicht erfüllt. Nur Audit-Report.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/data/prayer-learning/audit/"
+      ]
+    },
+    {
       "id": "gebet-erlernen-maghrib-gate-stop-v645-2026-08-11",
       "approvedBy": "user-explicit-test-only",
       "reason": "Maghrib-Auftrag Gate-Stop: Fajr HIGH-Bugs → kein Maghrib-Bau. Nur Audit-Report + Scope.",
