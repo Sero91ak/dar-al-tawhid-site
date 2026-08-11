@@ -1,6 +1,6 @@
 {
-  "version": 4,
-  "phase": 11,
+  "version": 5,
+  "phase": 13,
   "audioEnabled": false,
   "characters": {
     "male": "dar-prayer-male-v1",
@@ -13,39 +13,47 @@
       "titleAr": "صلاة الفجر",
       "rakat": 2,
       "status": "prototype",
-      "masterFile": "fajr.json"
-    },
-    {
-      "id": "dhuhr",
-      "titleDe": "Ẓuhr",
-      "titleAr": "الظهر",
-      "rakat": 4,
-      "status": "planned",
-      "masterFile": null
-    },
-    {
-      "id": "asr",
-      "titleDe": "ʿAṣr",
-      "titleAr": "العصر",
-      "rakat": 4,
-      "status": "planned",
-      "masterFile": null
+      "masterFile": "fajr.json",
+      "configuredSteps": 19
     },
     {
       "id": "maghrib",
       "titleDe": "Maġrib",
-      "titleAr": "المغرب",
+      "titleAr": "صلاة المغرب",
       "rakat": 3,
-      "status": "planned",
-      "masterFile": null
+      "status": "prototype",
+      "masterFile": "maghrib.json",
+      "configuredSteps": 28
+    },
+    {
+      "id": "dhuhr",
+      "titleDe": "Ẓuhr",
+      "titleAr": "صلاة الظهر",
+      "rakat": 4,
+      "status": "prototype",
+      "masterFile": "dhuhr.json",
+      "configuredSteps": 36,
+      "sharedModel": "four-rakah"
+    },
+    {
+      "id": "asr",
+      "titleDe": "ʿAṣr",
+      "titleAr": "صلاة العصر",
+      "rakat": 4,
+      "status": "prototype",
+      "masterFile": "asr.json",
+      "configuredSteps": 36,
+      "sharedModel": "four-rakah"
     },
     {
       "id": "isha",
       "titleDe": "ʿIšāʾ",
-      "titleAr": "العشاء",
+      "titleAr": "صلاة العشاء",
       "rakat": 4,
-      "status": "planned",
-      "masterFile": null
+      "status": "prototype",
+      "masterFile": "isha.json",
+      "configuredSteps": 36,
+      "sharedModel": "four-rakah"
     }
   ],
   "quickPositions": [

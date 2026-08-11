@@ -1,26 +1,55 @@
 {
-  "version": 1,
-  "phase": 11,
+  "version": 2,
+  "phase": 13,
   "prayers": [
-    "fajr"
+    "fajr",
+    "maghrib",
+    "dhuhr",
+    "asr",
+    "isha"
   ],
   "characters": [
     "dar-prayer-male-v1",
     "dar-prayer-female-v1"
   ],
   "assets": [],
+  "masters": [
+    "fajr.json",
+    "maghrib.json",
+    "dhuhr.json",
+    "asr.json",
+    "isha.json",
+    "models/four-rakah.json"
+  ],
   "content": [
     "content/takbir.json",
     "content/qiyam.json",
     "content/recitation.json",
+    "content/recitation-r2.json",
     "content/ruku.json",
     "content/standing-after-ruku.json",
     "content/sujud.json",
     "content/sitting-between-sujud.json",
     "content/standing-next-rakah.json",
     "content/tashahhud.json",
+    "content/middle-tashahhud.json",
+    "content/final-tashahhud.json",
     "content/taslim.json",
-    "content/recitation-r2.json"
+    "content/maghrib-r1-recitation.json",
+    "content/maghrib-r2-recitation.json",
+    "content/maghrib-r3-recitation.json",
+    "content/dhuhr-r1-recitation.json",
+    "content/dhuhr-r2-recitation.json",
+    "content/dhuhr-r3-recitation.json",
+    "content/dhuhr-r4-recitation.json",
+    "content/asr-r1-recitation.json",
+    "content/asr-r2-recitation.json",
+    "content/asr-r3-recitation.json",
+    "content/asr-r4-recitation.json",
+    "content/isha-r1-recitation.json",
+    "content/isha-r2-recitation.json",
+    "content/isha-r3-recitation.json",
+    "content/isha-r4-recitation.json"
   ],
   "poses": [
     "poses/male-v1.json",
@@ -32,12 +61,22 @@
     "sources/references.json"
   ],
   "cachePolicy": {
-    "removeObsoletePoseVersionsAfterConfirm": true
+    "removeObsoletePoseVersionsAfterConfirm": true,
+    "preload": "current-and-next-pose-only"
   },
-  "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+  "integrationBlock": "Final multi-prayer technical sequences (ultimatum)",
   "quranReuse": [
     "content/quran/001.json"
   ],
   "audioEnabled": false,
-  "requiredSteps": 19
+  "audioVisible": false,
+  "requiredSteps": {
+    "fajr": 19,
+    "maghrib": 28,
+    "dhuhr": 36,
+    "asr": 36,
+    "isha": 36
+  },
+  "productionEnabled": false,
+  "releaseCandidateReady": false
 }

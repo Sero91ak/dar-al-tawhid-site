@@ -185,6 +185,37 @@ try {
   const fajr = readJson("fajr.json");
   const seq = fajr.sequenceSteps || [];
   if (seq.length !== 19) fail("expected 19 fajr steps, got " + seq.length);
+
+  const EXPECTED_PRAYERS = { fajr: 19, maghrib: 28, dhuhr: 36, asr: 36, isha: 36 };
+  Object.keys(EXPECTED_PRAYERS).forEach((pid) => {
+    if (!exists(pid + ".json")) {
+      fail("prayer master missing: " + pid + ".json");
+      return;
+    }
+    const master = readJson(pid + ".json");
+    const steps = master.sequenceSteps || [];
+    if (steps.length !== EXPECTED_PRAYERS[pid]) {
+      fail(pid + " expected " + EXPECTED_PRAYERS[pid] + " steps, got " + steps.length);
+    }
+    if (Number(master.requiredSteps) !== EXPECTED_PRAYERS[pid]) {
+      fail(pid + " requiredSteps mismatch");
+    }
+    const last = steps[steps.length - 1];
+    if (!last || last.isFinalStep !== true || String(last.deepLink) !== "taslim-left") {
+      fail(pid + " final step must be taslim-left with isFinalStep");
+    }
+    const orders = {};
+    steps.forEach((s) => {
+      if (orders[s.order]) fail(pid + " duplicate order " + s.order);
+      orders[s.order] = true;
+      if (!s.contentId) fail(pid + " step missing contentId " + s.id);
+      if (!s.poseId) fail(pid + " step missing poseId " + s.id);
+    });
+    ok(pid + " sequence " + steps.length);
+  });
+  if (!exists("models/four-rakah.json")) fail("four-rakah shared model missing");
+  else ok("four-rakah model");
+
   const orders = new Set();
   const ids = new Set();
   let approvedSteps = 0;

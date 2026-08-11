@@ -1,6 +1,6 @@
 {
-  "version": 5,
-  "phase": 11,
+  "version": 6,
+  "phase": 13,
   "audioEnabled": false,
   "environment": "test",
   "characters": {
@@ -20,7 +20,15 @@
     "poses": "poses/",
     "search": "search/index.json",
     "manifest": "prayer-learning-manifest.json",
-    "review": "review/"
+    "review": "review/",
+    "prayerMasters": [
+      "fajr.json",
+      "maghrib.json",
+      "dhuhr.json",
+      "asr.json",
+      "isha.json"
+    ],
+    "models": "models/"
   },
   "engine": {
     "composeFromSequence": true,
@@ -38,7 +46,9 @@
     "route": "gebet-lernen/review",
     "zeroTrust": true
   },
-  "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+  "integrationBlock": "Final multi-prayer technical sequences",
   "technicalFajrComplete": true,
-  "religiousFajrApproved": false
+  "religiousFajrApproved": false,
+  "technicalAllPrayersConfigured": true,
+  "religiousApproved": false
 }

@@ -366,6 +366,19 @@
 }
 .prl-learn-layout.is-dual .prl-step-copy{text-align:left}
 .prl-learn-layout.is-dual .prl-detail-slots{justify-content:flex-start}
+.prl-step-head{
+  display:grid;
+  gap:4px;
+  text-align:center;
+  margin:2px 0 8px;
+}
+.prl-step-head h3{
+  margin:0;
+  font-family:var(--serif,Georgia,"Times New Roman",serif);
+  font-size:clamp(20px,5vw,26px);
+  line-height:1.15;
+}
+.prl-learn-layout.is-dual .prl-step-head{text-align:left}
 .prl-step-copy{min-width:0}
 .prl-sheet[hidden]{display:none!important}
 .prl-sheet{

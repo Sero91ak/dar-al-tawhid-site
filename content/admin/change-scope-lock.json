@@ -84,6 +84,34 @@
   ],
   "unlockedScopes": [
     {
+      "id": "gebet-erlernen-final-ultimatum-v645-2026-08-11",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Finaler Ultimativ-Auftrag Gebet erlernen: Fünf-Gebete-Engine (Fajr 19 / Maghrib 28 / 4-Rakʿah 36), Test only. Keine erfundenen religiösen Inhalte. Keine Produktionsfreigabe. technical≠religious≠RC.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/",
+        "scripts/generate-prayer-learning-sequences.js",
+        "scripts/prayer-learning-final-check.js",
+        "scripts/prayer-learning-phase1-check.js",
+        "scripts/prayer-learning-phase2-check.js",
+        "scripts/prayer-learning-phase3-check.js",
+        "scripts/prayer-learning-phase4-check.js",
+        "scripts/prayer-learning-phase5-check.js",
+        "scripts/prayer-learning-phase6-check.js",
+        "scripts/prayer-learning-phase7-check.js",
+        "scripts/prayer-learning-phase8-check.js",
+        "scripts/prayer-learning-phase9-check.js",
+        "scripts/prayer-learning-phase10-check.js",
+        "scripts/prayer-learning-phase11-check.js",
+        "scripts/prayer-learning-phase12-check.js",
+        "scripts/validate-prayer-learning.js"
+      ]
+    },
+    {
       "id": "gebet-erlernen-phase12-fajr-qa-v644-2026-08-11",
       "approvedBy": "user-explicit-test-only",
       "reason": "Phase 12 Gebet erlernen: Full Fajr QA / UX audit / stabilize. Keine neue Architektur. Keine Produktionsfreigabe. technical≠religious.",

@@ -10,7 +10,9 @@
     "rise-next-rakah": null,
     "tashahhud": null,
     "taslim-right": null,
-    "taslim-left": null
+    "taslim-left": null,
+    "middle-tashahhud": null,
+    "final-tashahhud": null
   },
   "poses": {
     "takbir": {
@@ -23,7 +25,7 @@
       "srcAvif": null,
       "srcset": [],
       "sourceClaimIds": [],
-      "status": "pending",
+      "status": "MISSING",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
@@ -67,7 +69,9 @@
         }
       },
       "integrationBlock": "Takbir + Qiyam",
-      "phase": 8
+      "phase": 8,
+      "expectedFile": "male-v1-takbir.webp",
+      "expectedAvif": "male-v1-takbir.avif"
     },
     "qiyam": {
       "assetId": "male-v1-qiyam-v1",
@@ -79,7 +83,7 @@
       "srcAvif": null,
       "srcset": [],
       "sourceClaimIds": [],
-      "status": "pending",
+      "status": "MISSING",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
@@ -123,7 +127,9 @@
         }
       },
       "integrationBlock": "Takbir + Qiyam",
-      "phase": 8
+      "phase": 8,
+      "expectedFile": "male-v1-qiyam.webp",
+      "expectedAvif": "male-v1-qiyam.avif"
     },
     "ruku": {
       "assetId": "male-v1-ruku-v1",
@@ -135,7 +141,7 @@
       "srcAvif": null,
       "srcset": [],
       "sourceClaimIds": [],
-      "status": "pending",
+      "status": "MISSING",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
@@ -181,7 +187,9 @@
         }
       },
       "phase": 9,
-      "integrationBlock": "Recitation + Ruku + Standing After Ruku"
+      "integrationBlock": "Recitation + Ruku + Standing After Ruku",
+      "expectedFile": "male-v1-ruku.webp",
+      "expectedAvif": "male-v1-ruku.avif"
     },
     "standing-after-ruku": {
       "assetId": "male-v1-standing-after-ruku-v1",
@@ -193,7 +201,7 @@
       "srcAvif": null,
       "srcset": [],
       "sourceClaimIds": [],
-      "status": "pending",
+      "status": "MISSING",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
@@ -237,7 +245,9 @@
         }
       },
       "phase": 9,
-      "integrationBlock": "Recitation + Ruku + Standing After Ruku"
+      "integrationBlock": "Recitation + Ruku + Standing After Ruku",
+      "expectedFile": "male-v1-standing-after-ruku.webp",
+      "expectedAvif": "male-v1-standing-after-ruku.avif"
     },
     "sujud": {
       "assetId": "male-v1-sujud-v1",
@@ -249,7 +259,7 @@
       "srcAvif": null,
       "srcset": [],
       "sourceClaimIds": [],
-      "status": "pending",
+      "status": "MISSING",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
@@ -295,7 +305,9 @@
         }
       },
       "phase": 10,
-      "integrationBlock": "Sujud + Sitting + Sujud + Rise"
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise",
+      "expectedFile": "male-v1-sujud.webp",
+      "expectedAvif": "male-v1-sujud.avif"
     },
     "sitting-between-sujud": {
       "assetId": "male-v1-sitting-between-sujud-v1",
@@ -307,7 +319,7 @@
       "srcAvif": null,
       "srcset": [],
       "sourceClaimIds": [],
-      "status": "pending",
+      "status": "MISSING",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
@@ -353,7 +365,9 @@
         }
       },
       "phase": 10,
-      "integrationBlock": "Sujud + Sitting + Sujud + Rise"
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise",
+      "expectedFile": "male-v1-sitting-between-sujud.webp",
+      "expectedAvif": "male-v1-sitting-between-sujud.avif"
     },
     "rise-next-rakah": {
       "assetId": "male-v1-rise-next-rakah-v1",
@@ -365,7 +379,7 @@
       "srcAvif": null,
       "srcset": [],
       "sourceClaimIds": [],
-      "status": "pending",
+      "status": "MISSING",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
@@ -411,7 +425,9 @@
         }
       },
       "phase": 10,
-      "integrationBlock": "Sujud + Sitting + Sujud + Rise"
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise",
+      "expectedFile": "male-v1-rise-next-rakah.webp",
+      "expectedAvif": "male-v1-rise-next-rakah.avif"
     },
     "tashahhud": {
       "assetId": "male-v1-tashahhud-v1",
@@ -423,7 +439,7 @@
       "srcAvif": null,
       "srcset": [],
       "sourceClaimIds": [],
-      "status": "pending",
+      "status": "MISSING",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
@@ -470,7 +486,9 @@
       "phase": 11,
       "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
       "fingerDetailsRequireSource": true,
-      "noInventedFingerBehavior": true
+      "noInventedFingerBehavior": true,
+      "expectedFile": "male-v1-tashahhud.webp",
+      "expectedAvif": "male-v1-tashahhud.avif"
     },
     "taslim-right": {
       "assetId": "male-v1-taslim-right-v1",
@@ -482,7 +500,7 @@
       "srcAvif": null,
       "srcset": [],
       "sourceClaimIds": [],
-      "status": "pending",
+      "status": "MISSING",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
@@ -528,7 +546,9 @@
         }
       },
       "phase": 11,
-      "integrationBlock": "RakAh 2 + Tashahhud + Taslim"
+      "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+      "expectedFile": "male-v1-taslim-right.webp",
+      "expectedAvif": "male-v1-taslim-right.avif"
     },
     "taslim-left": {
       "assetId": "male-v1-taslim-left-v1",
@@ -540,7 +560,7 @@
       "srcAvif": null,
       "srcset": [],
       "sourceClaimIds": [],
-      "status": "pending",
+      "status": "MISSING",
       "characterConsistency": false,
       "clothingReview": false,
       "poseReview": false,
@@ -586,7 +606,55 @@
         }
       },
       "phase": 11,
-      "integrationBlock": "RakAh 2 + Tashahhud + Taslim"
+      "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+      "expectedFile": "male-v1-taslim-left.webp",
+      "expectedAvif": "male-v1-taslim-left.avif"
+    },
+    "middle-tashahhud": {
+      "assetId": "male-v1-middle-tashahhud-v1",
+      "characterId": "dar-prayer-male-v1",
+      "poseId": "middle-tashahhud",
+      "assetType": "image",
+      "src": null,
+      "srcWebp": null,
+      "srcAvif": null,
+      "srcset": [],
+      "sourceClaimIds": [],
+      "status": "MISSING",
+      "characterConsistency": false,
+      "clothingReview": false,
+      "poseReview": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "active": false,
+      "poseReuseFrom": "tashahhud",
+      "expectedFile": "male-v1-middle-tashahhud.webp",
+      "expectedAvif": "male-v1-middle-tashahhud.avif",
+      "note": "Slot · may reuse tashahhud master until separate approved asset"
+    },
+    "final-tashahhud": {
+      "assetId": "male-v1-final-tashahhud-v1",
+      "characterId": "dar-prayer-male-v1",
+      "poseId": "final-tashahhud",
+      "assetType": "image",
+      "src": null,
+      "srcWebp": null,
+      "srcAvif": null,
+      "srcset": [],
+      "sourceClaimIds": [],
+      "status": "MISSING",
+      "characterConsistency": false,
+      "clothingReview": false,
+      "poseReview": false,
+      "reviewPass1": false,
+      "reviewPass2": false,
+      "approved": false,
+      "active": false,
+      "poseReuseFrom": "tashahhud",
+      "expectedFile": "male-v1-final-tashahhud.webp",
+      "expectedAvif": "male-v1-final-tashahhud.avif",
+      "note": "Slot · may reuse tashahhud master until separate approved asset"
     }
   },
   "rejectIf": [
@@ -598,5 +666,6 @@
     "thawb-changed",
     "different-character"
   ],
-  "phase": 11
+  "phase": 13,
+  "note": "Phase 13: No approved runtime assets present. Placeholders remain until reviewed AVIF/WebP intake."
 }
