@@ -104,7 +104,8 @@
   background:color-mix(in srgb,var(--surface,transparent) 85%,transparent);
   color:inherit;
   border-radius:12px;
-  min-height:42px;
+  min-height:44px;
+  min-width:44px;
   padding:0 16px;
   font:inherit;
   font-weight:700;
@@ -197,12 +198,24 @@
 .prl-block{display:grid;gap:6px}
 .prl-block .prl-label{font-size:12px;font-weight:800;opacity:.65;letter-spacing:.04em}
 .prl-block .prl-ar-text{
-  font-size:clamp(20px,5.2vw,28px);
+  font-size:clamp(22px,5.6vw,30px);
   direction:rtl;
-  line-height:1.55;
+  line-height:1.6;
+  font-weight:600;
+  overflow-wrap:anywhere;
 }
-.prl-block .prl-tr,
-.prl-block .prl-de{font-size:15px;line-height:1.55;opacity:.9}
+.prl-block .prl-tr{
+  font-size:13px;
+  line-height:1.5;
+  opacity:.62;
+  overflow-wrap:anywhere;
+}
+.prl-block .prl-de{
+  font-size:14px;
+  line-height:1.55;
+  opacity:.82;
+  overflow-wrap:anywhere;
+}
 .prl-research{
   font-size:13px;
   opacity:.75;
@@ -333,16 +346,27 @@
 .prl-quick-grid button span{font-size:13px;opacity:.75;direction:rtl}
 .prl-learn-layout.is-dual{
   display:grid;
-  grid-template-columns:minmax(0,46%) minmax(0,54%);
+  grid-template-columns:minmax(0,45%) minmax(0,55%);
   gap:18px;
   align-items:start;
 }
 .prl-quran{margin-top:6px}
 .prl-quran .quran-ayah{margin-bottom:8px}
 .prl-stage--loading .prl-figure-pending{opacity:.72}
-.prl-learn-layout.is-dual .prl-stage{min-height:min(62vh,520px)}
+.prl-learn-layout.is-dual .prl-stage{
+  min-height:min(62vh,520px);
+  position:sticky;
+  top:calc(12px + env(safe-area-inset-top,0px));
+}
+.prl-learn-layout.is-dual .prl-step-panel{
+  min-width:0;
+  max-height:min(72vh,640px);
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+}
 .prl-learn-layout.is-dual .prl-step-copy{text-align:left}
 .prl-learn-layout.is-dual .prl-detail-slots{justify-content:flex-start}
+.prl-step-copy{min-width:0}
 .prl-sheet[hidden]{display:none!important}
 .prl-sheet{
   position:fixed;

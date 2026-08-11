@@ -1,8 +1,8 @@
 /**
- * DAR AL TAWḤĪD — Gebet erlernen (Test Phase 11)
- * Integration: Rakʿah 2 + Tašahhud + Taslīm · bestehende Engine
+ * DAR AL TAWḤĪD — Gebet erlernen (Test Phase 12)
+ * Full Fajr QA / UX audit / stabilize · keine neue Architektur
  * productionEnabled = false | audioVisible = false | TEST ONLY
- * technicalFajrComplete ≠ religiousFajrApproved
+ * technicalFajrComplete ≠ religiousFajrApproved · fajrPreReleasePass computed
  */
 (function (global) {
   "use strict";
@@ -19,7 +19,8 @@
   var CONTENT_PENDING_LABEL = "Inhalt wird quellengeprüft.";
   var POSE_PENDING_LABEL = "Pose wird geprüft";
   var TEXTS_EMPTY_LABEL = "Noch keine geprüften Texte verfügbar.";
-  var PHASE = 11;
+  var OFFLINE_EVIDENCE_LABEL = "Direktnachweis benötigt eine Internetverbindung.";
+  var PHASE = 12;
   var CHAR_MALE = "dar-prayer-male-v1";
   var CHAR_FEMALE = "dar-prayer-female-v1";
   var CHAR_VERSION = 1;
@@ -35,8 +36,12 @@
   var resizeTimer = 0;
   var pointerSwipe = null;
   var characterSwitchPending = false;
+  var stepNavBusyUntil = 0;
+  var lastAppliedStepId = "";
+  var deepLinkRecoveryNotice = "";
   var SWIPE_THRESHOLD_PX = 56;
   var SWIPE_RATIO = 1.35;
+  var STEP_NAV_LOCK_MS = 160;
   var productionEnabled = false;
   var controllerRuntime = {
     orientation: "portrait",
@@ -1128,15 +1133,21 @@
   }
 
   function goToNextStep(opts) {
+    opts = opts || {};
+    if (isStepNavBusy() && !opts.force) return Promise.resolve();
+    beginStepNavLock();
     var root = document.querySelector("[data-prl-root='learn']");
     var idx = Number((root && root.getAttribute("data-prl-index")) || loadState().stepIndex || 0);
-    return jumpToIndex(idx + 1, opts || {});
+    return jumpToIndex(idx + 1, opts);
   }
 
   function goToPreviousStep(opts) {
+    opts = opts || {};
+    if (isStepNavBusy() && !opts.force) return Promise.resolve();
+    beginStepNavLock();
     var root = document.querySelector("[data-prl-root='learn']");
     var idx = Number((root && root.getAttribute("data-prl-index")) || loadState().stepIndex || 0);
-    return jumpToIndex(idx - 1, opts || {});
+    return jumpToIndex(idx - 1, opts);
   }
 
   function showCompletionIfNeeded(root, idx, total) {
@@ -1233,18 +1244,30 @@
     }
     if (rakAh && stepKey) {
       var key = String(stepKey).toLowerCase();
+      // Exact matches only — no fuzzy indexOf (invalid deep links must recover controlled)
       var byDeep = steps.findIndex(function (s) {
         return (
           Number(s.rakAh) === Number(rakAh) &&
-          (s.malePose === key ||
+          (s.deepLink === key ||
             s.id === key ||
-            String(s.id).indexOf(key) >= 0 ||
-            String(s.malePose || "").indexOf(key) >= 0)
+            s.templateId === key ||
+            s.poseId === key ||
+            s.malePoseId === key ||
+            s.malePose === key ||
+            s.femalePoseId === key)
         );
       });
       if (byDeep >= 0) return byDeep;
     }
-    return 0;
+    return -1;
+  }
+
+  function beginStepNavLock(ms) {
+    stepNavBusyUntil = Date.now() + (ms == null ? STEP_NAV_LOCK_MS : ms);
+  }
+
+  function isStepNavBusy() {
+    return Date.now() < stepNavBusyUntil;
   }
 
   function poseMeta(posesMap, poseKey) {
@@ -2005,6 +2028,11 @@
     var idx = Math.max(0, Math.min(steps.length - 1, focusIndex | 0));
     var step = steps[idx];
     var dual = isDualLayout();
+    var recovery =
+      deepLinkRecoveryNotice
+        ? '<div class="prl-research" data-prl-deeplink-recovery role="status">' + esc(deepLinkRecoveryNotice) + "</div>"
+        : "";
+    deepLinkRecoveryNotice = "";
     var nav =
       '<div class="prl-nav" role="navigation" aria-label="Schrittnavigation">' +
       '<button type="button" class="prl-btn" data-prl-prev aria-label="Vorheriger Schritt" ' +
@@ -2051,6 +2079,7 @@
         idx +
         '" data-prl-container="' + esc(detectContainerMode()) + '">' +
         controlsHtml(state, { compact: true }) +
+        recovery +
         '<div class="prl-scroll-list">' +
         items +
         "</div>" +
@@ -2081,7 +2110,7 @@
             (sj.poseId === "sujud" || sj.templateId === "sujud" ? " is-dual-sujud" : "") +
             '">' +
             figj +
-            "<div>" +
+            '<div class="prl-step-panel">' +
             progressHtml(prayer, sj, j, steps.length) +
             copyj +
             "</div></div>"
@@ -2094,6 +2123,7 @@
       idx +
       '">' +
       controlsHtml(state, { compact: true }) +
+      recovery +
       swipeHintHtml() +
       '<div class="prl-swipe-track" data-prl-track>' +
       slides +
@@ -2130,7 +2160,7 @@
     else if (claim.sourceType) lines.push("<div><b>Status</b> · " + esc(claim.sourceType) + "</div>");
     if (claim.directEvidenceUrl) {
       if (typeof navigator !== "undefined" && navigator.onLine === false) {
-        lines.push('<div class="prl-research">Direktnachweis benötigt Internet.</div>');
+        lines.push('<div class="prl-research">' + esc(OFFLINE_EVIDENCE_LABEL) + "</div>");
       } else {
         lines.push('<div><a href="' + esc(claim.directEvidenceUrl) + '" target="_blank" rel="noopener noreferrer">Direktnachweis</a></div>');
       }
@@ -2153,7 +2183,7 @@
       if (meta.length) lines.push("<div>" + esc(meta.join(" · ")) + "</div>");
       if (claim.directEvidenceUrl) {
         if (typeof navigator !== "undefined" && navigator.onLine === false) {
-          lines.push('<div class="prl-research">Direktnachweis benötigt Internet.</div>');
+          lines.push('<div class="prl-research">' + esc(OFFLINE_EVIDENCE_LABEL) + "</div>");
         } else {
           lines.push('<div><a href="' + esc(claim.directEvidenceUrl) + '" target="_blank" rel="noopener noreferrer">Direktnachweis</a></div>');
         }
@@ -2206,10 +2236,12 @@
     var sheet = document.getElementById("prlSourceSheet");
     if (sheet) sheet.hidden = true;
     var wasOpen = sourceSheetOpen;
+    var keepStepId = sourceSheetStepId || loadState().stepId;
     sourceSheetOpen = false;
     sourceSheetStepId = "";
     controllerRuntime.sourcePanelOpen = false;
-    saveState({ sourcePanelOpen: false });
+    // Source panel must not change currentStep
+    saveState({ sourcePanelOpen: false, stepId: keepStepId });
     if (wasOpen && !fromPop) {
       try {
         if (history.state && history.state.prlSource) history.back();
@@ -2280,10 +2312,24 @@
       } else {
         var steps = sortedSteps(prayer);
         var focus = 0;
-        if (parsed.stepKey || parsed.rakAh) {
+        deepLinkRecoveryNotice = "";
+        if (parsed.stepKey) {
           focus = findStepIndex(steps, "", parsed.rakAh || 1, parsed.stepKey || "");
+          if (focus < 0) {
+            focus = 0;
+            deepLinkRecoveryNotice = "Ungültiger Link – zurück zum ersten Schritt.";
+          }
+        } else if (parsed.rakAh) {
+          focus = steps.findIndex(function (s) {
+            return Number(s.rakAh) === Number(parsed.rakAh);
+          });
+          if (focus < 0) {
+            focus = 0;
+            deepLinkRecoveryNotice = "Ungültiger Link – zurück zum ersten Schritt.";
+          }
         } else if (state.stepId && state.prayerId === prayer.id) {
           focus = findStepIndex(steps, state.stepId);
+          if (focus < 0) focus = nearestValidStepIndex(steps, state.stepId, state.stepIndex);
         }
         var step = steps[focus] || steps[0];
         state = saveState({
@@ -2293,6 +2339,7 @@
           stepId: step.id,
           stepIndex: focus
         });
+        lastAppliedStepId = step.id;
         html += await learnHtml(state, prayer, focus);
       }
     } else {
@@ -2334,6 +2381,8 @@
     if (idx > steps.length - 1) idx = steps.length - 1;
     var step = steps[idx];
     var reduced = prefersReducedMotion() || opts.instant;
+    lastAppliedStepId = step.id;
+    beginStepNavLock(STEP_NAV_LOCK_MS);
     saveState({
       prayer: prayer.id,
       prayerId: prayer.id,
@@ -2380,6 +2429,11 @@
   function applyStepFromIndex(root, best, prayer, steps) {
     var step = steps[best];
     if (!step) return;
+    if (lastAppliedStepId === step.id && String(root.getAttribute("data-prl-index")) === String(best)) {
+      return;
+    }
+    lastAppliedStepId = step.id;
+    beginStepNavLock(120);
     saveState({
       stepId: step.id,
       rakAh: step.rakAh,
@@ -2483,7 +2537,12 @@
             bestId = id;
           }
         });
-        if (!bestId || best < 0.35) return;
+        if (!bestId || best < 0.4) return;
+        var currentId = String(loadState().stepId || "");
+        var currentRatio = ratios[currentId] || 0;
+        // Hysteresis: avoid thrashing between two adjacent steps
+        if (bestId !== currentId && currentRatio > 0 && best < currentRatio + 0.14) return;
+        if (bestId !== currentId && best < 0.5 && currentRatio >= 0.35) return;
         ensurePrayer(loadState().prayerId || "fajr").then(function (prayer) {
           if (!prayer) return;
           var steps = sortedSteps(prayer);
@@ -2496,7 +2555,7 @@
           applyStepFromIndex(root, idx, prayer, steps);
         });
       },
-      { root: null, threshold: [0.35, 0.55, 0.75] }
+      { root: null, threshold: [0.35, 0.45, 0.55, 0.7, 0.85] }
     );
     items.forEach(function (el) { scrollObserver.observe(el); });
   }

@@ -5,9 +5,9 @@
   "rakAhCount": 2,
   "rakat": 2,
   "audioEnabled": false,
-  "phase": 11,
+  "phase": 12,
   "engine": "compose-from-templates",
-  "verificationNote": "Phase-11: Technische Fajr-Sequenz bis Taslīm vollständig. Content/Posen research. productionEnabled=false. religiousFajrApproved=false.",
+  "verificationNote": "Phase-12: Full Fajr QA/stabilize. Sequence 19 complete. Content/Posen still research. productionEnabled=false. religiousFajrApproved=false. fajrPreReleasePass computed.",
   "sequence": [
     "fajr-r1-takbir",
     "fajr-r1-qiyam",
@@ -593,20 +593,22 @@
   },
   "readyForApprovedContent": true,
   "integrationBlocks": {
-    "current": "RakAh 2 + Tashahhud + Taslim",
+    "current": "Full Fajr QA",
     "completed": [
       "Takbir + Qiyam",
       "Recitation + Ruku + Standing After Ruku",
-      "Sujud + Sitting + Sujud + Rise"
+      "Sujud + Sitting + Sujud + Rise",
+      "RakAh 2 + Tashahhud + Taslim"
     ],
     "next": [
-      "Fajr quality review",
-      "Maghrib composition"
+      "Final approved pose assets + reviewed content",
+      "Maghrib composition (only after fajrPreReleasePass)"
     ]
   },
-  "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+  "integrationBlock": "Full Fajr QA",
   "technicalFajrComplete": true,
   "religiousFajrApproved": false,
   "productionEnabled": false,
-  "requiredSteps": 19
+  "requiredSteps": 19,
+  "fajrPreReleasePass": false
 }

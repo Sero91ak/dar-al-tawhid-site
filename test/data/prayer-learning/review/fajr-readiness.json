@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "phase": 11,
+  "phase": 12,
   "computed": true,
-  "note": "releaseReady is computed only — never set manually to true. Phase 9 block still research.",
+  "note": "releaseReady / fajrPreReleasePass computed by phase12-check — never set manually to true.",
   "fajr": {
     "sequenceValid": true,
     "contentCoverage": false,
@@ -13,11 +13,20 @@
     "reviewPass2": false,
     "releaseReady": false,
     "requiredSteps": 19,
-    "technicalSequenceComplete": true
+    "technicalSequenceComplete": true,
+    "swipeStable": true,
+    "scrollStable": true,
+    "stateStable": true,
+    "characterStable": true,
+    "responsiveStable": false,
+    "offlineStable": false,
+    "religiousReviewComplete": false
   },
   "productionEnabled": false,
-  "updatedAt": null,
-  "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+  "updatedAt": "2026-08-11T10:00:02.055Z",
+  "integrationBlock": "Full Fajr QA",
   "technicalFajrComplete": true,
-  "religiousFajrApproved": false
+  "religiousFajrApproved": false,
+  "fajrPreReleasePass": false,
+  "technicalFajrReady": true
 }

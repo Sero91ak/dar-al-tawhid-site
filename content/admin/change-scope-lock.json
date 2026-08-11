@@ -84,6 +84,33 @@
   ],
   "unlockedScopes": [
     {
+      "id": "gebet-erlernen-phase12-fajr-qa-v644-2026-08-11",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Phase 12 Gebet erlernen: Full Fajr QA / UX audit / stabilize. Keine neue Architektur. Keine Produktionsfreigabe. technical≠religious.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/",
+        "scripts/prayer-learning-phase1-check.js",
+        "scripts/prayer-learning-phase2-check.js",
+        "scripts/prayer-learning-phase3-check.js",
+        "scripts/prayer-learning-phase4-check.js",
+        "scripts/prayer-learning-phase5-check.js",
+        "scripts/prayer-learning-phase6-check.js",
+        "scripts/prayer-learning-phase7-check.js",
+        "scripts/prayer-learning-phase8-check.js",
+        "scripts/prayer-learning-phase9-check.js",
+        "scripts/prayer-learning-phase10-check.js",
+        "scripts/prayer-learning-phase11-check.js",
+        "scripts/prayer-learning-phase12-check.js",
+        "scripts/validate-prayer-learning.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "gebet-erlernen-phase11-r2-tashahhud-v643-2026-08-11",
       "approvedBy": "user-explicit-test-only",
       "reason": "Phase 11 Gebet erlernen: Rakʿah 2 + Tašahhud + Taslīm. Produktion unverändert. technical≠religious.",
