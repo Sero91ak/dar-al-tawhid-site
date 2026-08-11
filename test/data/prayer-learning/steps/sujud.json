@@ -7,53 +7,60 @@
   "malePoseId": "sujud",
   "femalePoseId": "sujud",
   "femalePoseStatus": "pending_review",
-  "detailSlots": [
-    "hands",
-    "knees",
-    "feet"
-  ],
+  "detailSlots": ["sujud-hands", "sujud-knees", "sujud-feet"],
   "checkAreas": [
+    "general-position",
     "forehead",
     "nose",
     "hands",
+    "fingers",
     "knees",
     "feet",
     "toes",
     "arms",
-    "elbows",
-    "belly",
-    "thighs",
-    "body-distance",
-    "gaze",
-    "dhikr"
+    "body-spacing",
+    "head-related",
+    "dhikr",
+    "transition-sitting"
   ],
-  "textModuleIds": [
-    "sujud-dhikr"
-  ],
+  "textModuleIds": ["sujud-dhikr"],
   "claimSlotIds": [
-    "sujud-forehead-nose",
+    "sujud-general-position",
+    "sujud-forehead",
+    "sujud-nose",
     "sujud-hands",
+    "sujud-fingers",
     "sujud-knees",
     "sujud-feet",
-    "sujud-arms",
-    "sujud-dhikr"
+    "sujud-toes",
+    "sujud-arm-position",
+    "sujud-body-spacing",
+    "sujud-head-related-detail",
+    "sujud-dhikr",
+    "sujud-transition-to-sitting"
   ],
   "femaleAssetRules": [
     "wide-cloth",
     "no-chest-contour",
-    "no-back-contour",
+    "no-back-contour-body-accent",
     "no-waist-contour",
     "no-hip-contour",
     "no-buttock-contour",
-    "niqab-correct",
-    "sleeves-closed"
+    "no-thigh-contour",
+    "niqab-identical",
+    "sleeves-closed",
+    "no-forearms",
+    "same-master-figure"
   ],
   "variants": [],
   "verificationStatus": "research",
   "audioId": null,
+  "audioEnabled": false,
+  "audioVisible": false,
   "details": [
     {
-      "id": "hands",
+      "id": "sujud-hands",
+      "poseId": "sujud",
       "label": "Hände",
       "assetId": null,
       "sourceClaimIds": [],
@@ -61,7 +68,8 @@
       "status": "research"
     },
     {
-      "id": "knees",
+      "id": "sujud-knees",
+      "poseId": "sujud",
       "label": "Knie",
       "assetId": null,
       "sourceClaimIds": [],
@@ -69,7 +77,8 @@
       "status": "research"
     },
     {
-      "id": "feet",
+      "id": "sujud-feet",
+      "poseId": "sujud",
       "label": "Füße",
       "assetId": null,
       "sourceClaimIds": [],

@@ -84,6 +84,31 @@
   ],
   "unlockedScopes": [
     {
+      "id": "gebet-erlernen-phase10-sujud-rise-v642-2026-08-11",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Phase 10 Gebet erlernen: Suǧūd + Sitzen + Suǧūd 2 + Aufstehen. Produktion unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/",
+        "scripts/prayer-learning-phase1-check.js",
+        "scripts/prayer-learning-phase2-check.js",
+        "scripts/prayer-learning-phase3-check.js",
+        "scripts/prayer-learning-phase4-check.js",
+        "scripts/prayer-learning-phase5-check.js",
+        "scripts/prayer-learning-phase6-check.js",
+        "scripts/prayer-learning-phase7-check.js",
+        "scripts/prayer-learning-phase8-check.js",
+        "scripts/prayer-learning-phase9-check.js",
+        "scripts/prayer-learning-phase10-check.js",
+        "scripts/validate-prayer-learning.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "gebet-erlernen-phase9-recitation-ruku-v641-2026-08-10",
       "approvedBy": "user-explicit-test-only",
       "reason": "Phase 9 Gebet erlernen: Rezitation + Rukūʿ + Aufrichten Integrationsblock. Produktion unverändert.",

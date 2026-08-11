@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "phase": 9,
+  "phase": 10,
   "prayerId": "fajr",
   "statusValues": [
     "draft",
@@ -501,13 +501,31 @@
       ],
       "detailClaimIds": [],
       "notesInternal": null,
-      "audioId": null
+      "audioId": null,
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise",
+      "details": [
+        {
+          "id": "sujud-hands",
+          "label": "Hände",
+          "approved": false
+        },
+        {
+          "id": "sujud-knees",
+          "label": "Knie",
+          "approved": false
+        },
+        {
+          "id": "sujud-feet",
+          "label": "Füße",
+          "approved": false
+        }
+      ]
     },
     {
       "id": "sitting-between-sujud",
       "titleDe": "Sitzen",
       "titleAr": "الجلسة",
-      "contentId": "sitting-between-sujud-main-v1",
+      "contentId": "sitting-between-sujud-v1",
       "poseId": "sitting-between-sujud",
       "status": "research",
       "contentApproved": false,
@@ -577,13 +595,14 @@
       ],
       "detailClaimIds": [],
       "notesInternal": null,
-      "audioId": null
+      "audioId": null,
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise"
     },
     {
-      "id": "rise-next-rakah",
-      "titleDe": "Aufstehen",
+      "id": "standing-next-rakah",
+      "titleDe": "Aufstehen zur zweiten Rakʿah",
       "titleAr": "القيام للركعة",
-      "contentId": "rise-next-rakah-main-v1",
+      "contentId": "rise-next-rakah-v1",
       "poseId": "rise-next-rakah",
       "status": "research",
       "contentApproved": false,
@@ -650,7 +669,8 @@
       ],
       "detailClaimIds": [],
       "notesInternal": null,
-      "audioId": null
+      "audioId": null,
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise"
     },
     {
       "id": "tashahhud",
@@ -806,5 +826,5 @@
       "audioId": null
     }
   ],
-  "integrationBlock": "Recitation + Ruku + Standing After Ruku"
+  "integrationBlock": "Sujud + Sitting + Sujud + Rise"
 }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "phase": 9,
+  "phase": 10,
   "modules": [
     {
       "stepId": "takbir",
@@ -48,14 +48,14 @@
     },
     {
       "stepId": "sitting-between-sujud",
-      "contentId": "sitting-between-sujud-main-v1",
+      "contentId": "sitting-between-sujud-v1",
       "file": "sitting-between-sujud.json",
       "status": "research",
       "approved": false
     },
     {
       "stepId": "standing-next-rakah",
-      "contentId": "rise-next-rakah-main-v1",
+      "contentId": "rise-next-rakah-v1",
       "file": "standing-next-rakah.json",
       "status": "research",
       "approved": false
@@ -83,5 +83,5 @@
       "sourceClaimIds.length>0"
     ]
   },
-  "integrationBlock": "Recitation + Ruku + Standing After Ruku"
+  "integrationBlock": "Sujud + Sitting + Sujud + Rise"
 }

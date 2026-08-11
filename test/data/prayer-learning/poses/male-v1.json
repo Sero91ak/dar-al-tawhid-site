@@ -268,7 +268,9 @@
         "sameKufi": null,
         "sameClothing": null,
         "faceless": null,
-        "noCharacterDrift": null
+        "noCharacterDrift": null,
+        "sameDarkThobe": null,
+        "beardMayBePartiallyOccluded": null
       },
       "review": {
         "sourceReview": {
@@ -291,7 +293,9 @@
           "reviewedAt": null,
           "reviewer": null
         }
-      }
+      },
+      "phase": 10,
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise"
     },
     "sitting-between-sujud": {
       "assetId": "male-v1-sitting-between-sujud-v1",
@@ -322,7 +326,9 @@
         "sameKufi": null,
         "sameClothing": null,
         "faceless": null,
-        "noCharacterDrift": null
+        "noCharacterDrift": null,
+        "sameDarkThobe": null,
+        "beardMayBePartiallyOccluded": null
       },
       "review": {
         "sourceReview": {
@@ -345,7 +351,9 @@
           "reviewedAt": null,
           "reviewer": null
         }
-      }
+      },
+      "phase": 10,
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise"
     },
     "rise-next-rakah": {
       "assetId": "male-v1-rise-next-rakah-v1",
@@ -376,7 +384,9 @@
         "sameKufi": null,
         "sameClothing": null,
         "faceless": null,
-        "noCharacterDrift": null
+        "noCharacterDrift": null,
+        "sameDarkThobe": null,
+        "beardMayBePartiallyOccluded": null
       },
       "review": {
         "sourceReview": {
@@ -399,7 +409,9 @@
           "reviewedAt": null,
           "reviewer": null
         }
-      }
+      },
+      "phase": 10,
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise"
     },
     "tashahhud": {
       "assetId": "male-v1-tashahhud-v1",
@@ -573,5 +585,5 @@
     "thawb-changed",
     "different-character"
   ],
-  "phase": 9
+  "phase": 10
 }

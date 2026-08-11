@@ -294,7 +294,12 @@
         "looseGarment": null,
         "sleevesClosed": null,
         "noForearmsVisible": null,
-        "sameMasterFigure": null
+        "sameMasterFigure": null,
+        "noIndividualFacialFeatures": null,
+        "noThighContour": null,
+        "noBodyAccentBack": null,
+        "noClothTensionOverBody": null,
+        "sameMaterialToneStyle": null
       },
       "review": {
         "sourceReview": {
@@ -317,7 +322,11 @@
           "reviewedAt": null,
           "reviewer": null
         }
-      }
+      },
+      "phase": 10,
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise",
+      "modestyPrecedence": true,
+      "fiqhIndependentOfGarmentFall": true
     },
     "sitting-between-sujud": {
       "assetId": "female-v1-sitting-between-sujud-v1",
@@ -351,7 +360,12 @@
         "looseGarment": null,
         "sleevesClosed": null,
         "noForearmsVisible": null,
-        "sameMasterFigure": null
+        "sameMasterFigure": null,
+        "noIndividualFacialFeatures": null,
+        "noThighContour": null,
+        "noBodyAccentBack": null,
+        "noClothTensionOverBody": null,
+        "sameMaterialToneStyle": null
       },
       "review": {
         "sourceReview": {
@@ -374,7 +388,11 @@
           "reviewedAt": null,
           "reviewer": null
         }
-      }
+      },
+      "phase": 10,
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise",
+      "modestyPrecedence": true,
+      "fiqhIndependentOfGarmentFall": true
     },
     "rise-next-rakah": {
       "assetId": "female-v1-rise-next-rakah-v1",
@@ -408,7 +426,12 @@
         "looseGarment": null,
         "sleevesClosed": null,
         "noForearmsVisible": null,
-        "sameMasterFigure": null
+        "sameMasterFigure": null,
+        "noIndividualFacialFeatures": null,
+        "noThighContour": null,
+        "noBodyAccentBack": null,
+        "noClothTensionOverBody": null,
+        "sameMaterialToneStyle": null
       },
       "review": {
         "sourceReview": {
@@ -431,7 +454,11 @@
           "reviewedAt": null,
           "reviewer": null
         }
-      }
+      },
+      "phase": 10,
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise",
+      "modestyPrecedence": true,
+      "fiqhIndependentOfGarmentFall": true
     },
     "tashahhud": {
       "assetId": "female-v1-tashahhud-v1",
@@ -618,5 +645,5 @@
     "inconsistent-niqab",
     "character-drift"
   ],
-  "phase": 9
+  "phase": 10
 }

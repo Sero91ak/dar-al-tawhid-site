@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "phase": 9,
+  "phase": 10,
   "audioEnabled": false,
   "characters": {
     "male": "dar-prayer-male-v1",
@@ -87,11 +87,12 @@
       "defaultSequenceId": "fajr-r1-sujud-1"
     },
     {
-      "id": "sitting",
-      "titleDe": "Sitzen",
+      "id": "sitting-between-sujud",
+      "titleDe": "Sitzen zwischen den Suǧūd",
       "titleAr": "الجلسة",
       "stepTemplateId": "sitting-between-sujud",
-      "defaultSequenceId": "fajr-r1-sitting"
+      "defaultSequenceId": "fajr-r1-sitting-between-sujud",
+      "optionalUntilApproved": true
     },
     {
       "id": "tashahhud",

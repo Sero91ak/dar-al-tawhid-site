@@ -9,25 +9,43 @@
   "femalePoseStatus": "pending_review",
   "detailSlots": [],
   "checkAreas": [
+    "general-position",
     "leg-position",
-    "foot-position",
-    "sitting-posture",
-    "hands",
-    "fingers",
-    "back",
-    "gaze",
-    "dhikr-dua"
+    "left-foot",
+    "right-foot",
+    "hand-position",
+    "finger-position",
+    "back-position",
+    "dhikr",
+    "transition-second-sujud"
   ],
-  "textModuleIds": [
-    "sitting-between-sujud-dhikr"
-  ],
+  "textModuleIds": ["sitting-between-sujud-dhikr"],
   "claimSlotIds": [
-    "sitting-legs",
-    "sitting-feet",
-    "sitting-hands",
-    "sitting-dhikr"
+    "sitting-general-position",
+    "sitting-leg-position",
+    "sitting-left-foot",
+    "sitting-right-foot",
+    "sitting-hand-position",
+    "sitting-finger-position",
+    "sitting-back-position",
+    "sitting-dhikr",
+    "sitting-transition-second-sujud"
   ],
+  "femaleAssetRules": [
+    "wide-cloth-over-legs",
+    "no-knee-thigh-contour",
+    "no-hip-contour",
+    "no-buttock-contour",
+    "no-waist-contour",
+    "no-chest-contour",
+    "niqab-identical",
+    "sleeves-closed",
+    "hands-only-as-needed"
+  ],
+  "note": "different visual garment behavior != different fiqh ruling",
   "variants": [],
   "verificationStatus": "research",
-  "audioId": null
+  "audioId": null,
+  "audioEnabled": false,
+  "audioVisible": false
 }

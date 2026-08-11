@@ -367,7 +367,7 @@ try {
   if (js.includes("AUDIO_VISIBLE = false") && !js.includes("audioVisible = true") && js.includes("canPublishPrayerContent") && js.includes("resolvePrayerPose") && js.includes("CONTENT_PENDING_LABEL")) {
     ok("engine gates present");
   } else fail("engine missing phase5 gates");
-  if (js.includes("computeFajrReadiness") && js.includes("appendAuditEntry") && js.includes("reviewOverviewHtml") && js.includes('mode = "review"') && js.includes("invalidateClaimApproval") && /PHASE = [6-9]/.test(js)) {
+  if (js.includes("computeFajrReadiness") && js.includes("appendAuditEntry") && js.includes("reviewOverviewHtml") && js.includes('mode = "review"') && js.includes("invalidateClaimApproval") && /PHASE = (?:[6-9]|1[0-9])/.test(js)) {
     ok("phase6 review engine present");
   } else fail("phase6 review engine missing");
   if (js.includes("data-prl-preview-deep") && js.includes("preview must NOT change approval")) ok("preview≠approve");

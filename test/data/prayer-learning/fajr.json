@@ -5,9 +5,9 @@
   "rakAhCount": 2,
   "rakat": 2,
   "audioEnabled": false,
-  "phase": 9,
+  "phase": 10,
   "engine": "compose-from-templates",
-  "verificationNote": "Phase-9: Integrationsblock Rezitation + Rukūʿ + Aufrichten. Content/Claims/Posen research. productionEnabled=false. Kein Audio.",
+  "verificationNote": "Phase-10: Integrationsblock Suǧūd + Sitzen + Suǧūd 2 + Aufstehen. research. productionEnabled=false.",
   "sequence": [
     "fajr-r1-takbir",
     "fajr-r1-qiyam",
@@ -15,9 +15,9 @@
     "fajr-r1-ruku",
     "fajr-r1-standing-after-ruku",
     "fajr-r1-sujud-1",
-    "fajr-r1-sitting",
+    "fajr-r1-sitting-between-sujud",
     "fajr-r1-sujud-2",
-    "fajr-r1-rise",
+    "fajr-r1-rise-to-rakah-2",
     "fajr-r2-qiyam",
     "fajr-r2-recitation",
     "fajr-r2-ruku",
@@ -151,18 +151,48 @@
       "contentId": "sujud-main-v1",
       "status": "research",
       "sourceClaimIds": [],
-      "poseId": "sujud"
+      "poseId": "sujud",
+      "prayerId": "fajr",
+      "claimSlotIds": [
+        "sujud-general-position",
+        "sujud-forehead",
+        "sujud-nose",
+        "sujud-hands",
+        "sujud-fingers",
+        "sujud-knees",
+        "sujud-feet",
+        "sujud-toes",
+        "sujud-arm-position",
+        "sujud-body-spacing",
+        "sujud-head-related-detail",
+        "sujud-dhikr",
+        "sujud-transition-to-sitting"
+      ],
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise"
     },
     {
-      "id": "fajr-r1-sitting",
+      "id": "fajr-r1-sitting-between-sujud",
       "rakAh": 1,
       "order": 7,
       "templateId": "sitting-between-sujud",
-      "deepLink": "sitting",
-      "contentId": "sitting-between-sujud-main-v1",
+      "deepLink": "sitting-between-sujud",
+      "contentId": "sitting-between-sujud-v1",
       "status": "research",
       "sourceClaimIds": [],
-      "poseId": "sitting-between-sujud"
+      "poseId": "sitting-between-sujud",
+      "prayerId": "fajr",
+      "claimSlotIds": [
+        "sitting-general-position",
+        "sitting-leg-position",
+        "sitting-left-foot",
+        "sitting-right-foot",
+        "sitting-hand-position",
+        "sitting-finger-position",
+        "sitting-back-position",
+        "sitting-dhikr",
+        "sitting-transition-second-sujud"
+      ],
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise"
     },
     {
       "id": "fajr-r1-sujud-2",
@@ -175,18 +205,48 @@
       "contentId": "sujud-main-v1",
       "status": "research",
       "sourceClaimIds": [],
-      "poseId": "sujud"
+      "poseId": "sujud",
+      "prayerId": "fajr",
+      "claimSlotIds": [
+        "sujud-general-position",
+        "sujud-forehead",
+        "sujud-nose",
+        "sujud-hands",
+        "sujud-fingers",
+        "sujud-knees",
+        "sujud-feet",
+        "sujud-toes",
+        "sujud-arm-position",
+        "sujud-body-spacing",
+        "sujud-head-related-detail",
+        "sujud-dhikr",
+        "sujud-transition-to-sitting"
+      ],
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise",
+      "poseReuse": true,
+      "contentReuse": true,
+      "claimReuse": true
     },
     {
-      "id": "fajr-r1-rise",
+      "id": "fajr-r1-rise-to-rakah-2",
       "rakAh": 1,
       "order": 9,
       "templateId": "standing-next-rakah",
-      "deepLink": "rise",
-      "contentId": "rise-next-rakah-main-v1",
+      "deepLink": "rise-to-rakah-2",
+      "contentId": "rise-next-rakah-v1",
       "status": "research",
       "sourceClaimIds": [],
-      "poseId": "qiyam"
+      "poseId": "rise-next-rakah",
+      "prayerId": "fajr",
+      "claimSlotIds": [
+        "rise-start-position",
+        "rise-support-related-detail",
+        "rise-body-movement",
+        "rise-hand-related-detail",
+        "rise-final-standing-position"
+      ],
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise",
+      "transitionStyle": "simple-pose-change"
     },
     {
       "id": "fajr-r2-qiyam",
@@ -293,19 +353,49 @@
       "contentId": "sujud-main-v1",
       "status": "research",
       "sourceClaimIds": [],
-      "poseId": "sujud"
+      "poseId": "sujud",
+      "prayerId": "fajr",
+      "claimSlotIds": [
+        "sujud-general-position",
+        "sujud-forehead",
+        "sujud-nose",
+        "sujud-hands",
+        "sujud-fingers",
+        "sujud-knees",
+        "sujud-feet",
+        "sujud-toes",
+        "sujud-arm-position",
+        "sujud-body-spacing",
+        "sujud-head-related-detail",
+        "sujud-dhikr",
+        "sujud-transition-to-sitting"
+      ],
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise"
     },
     {
       "id": "fajr-r2-sitting",
       "rakAh": 2,
       "order": 15,
       "templateId": "sitting-between-sujud",
-      "deepLink": "sitting",
+      "deepLink": "sitting-between-sujud",
       "poseReuseFrom": "sitting-between-sujud",
-      "contentId": "sitting-between-sujud-main-v1",
+      "contentId": "sitting-between-sujud-v1",
       "status": "research",
       "sourceClaimIds": [],
-      "poseId": "sitting-between-sujud"
+      "poseId": "sitting-between-sujud",
+      "prayerId": "fajr",
+      "claimSlotIds": [
+        "sitting-general-position",
+        "sitting-leg-position",
+        "sitting-left-foot",
+        "sitting-right-foot",
+        "sitting-hand-position",
+        "sitting-finger-position",
+        "sitting-back-position",
+        "sitting-dhikr",
+        "sitting-transition-second-sujud"
+      ],
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise"
     },
     {
       "id": "fajr-r2-sujud-2",
@@ -318,7 +408,27 @@
       "contentId": "sujud-main-v1",
       "status": "research",
       "sourceClaimIds": [],
-      "poseId": "sujud"
+      "poseId": "sujud",
+      "prayerId": "fajr",
+      "claimSlotIds": [
+        "sujud-general-position",
+        "sujud-forehead",
+        "sujud-nose",
+        "sujud-hands",
+        "sujud-fingers",
+        "sujud-knees",
+        "sujud-feet",
+        "sujud-toes",
+        "sujud-arm-position",
+        "sujud-body-spacing",
+        "sujud-head-related-detail",
+        "sujud-dhikr",
+        "sujud-transition-to-sitting"
+      ],
+      "integrationBlock": "Sujud + Sitting + Sujud + Rise",
+      "poseReuse": true,
+      "contentReuse": true,
+      "claimReuse": true
     },
     {
       "id": "fajr-r2-tashahhud",
@@ -364,7 +474,13 @@
     "takbirat-al-ihram": "fajr-r1-takbir",
     "ruku-1": "fajr-r1-ruku",
     "sujud-1a": "fajr-r1-sujud-1",
-    "old-ruku-id": "fajr-r1-ruku"
+    "old-ruku-id": "fajr-r1-ruku",
+    "fajr-r1-sitting": "fajr-r1-sitting-between-sujud",
+    "fajr-r1-rise": "fajr-r1-rise-to-rakah-2",
+    "sitting": "fajr-r1-sitting-between-sujud",
+    "rise": "fajr-r1-rise-to-rakah-2",
+    "rise-to-rakah-2": "fajr-r1-rise-to-rakah-2",
+    "sitting-between-sujud": "fajr-r1-sitting-between-sujud"
   },
   "transitions": [
     {
@@ -396,6 +512,17 @@
       "from": "qiyam",
       "to": "qiyam",
       "transitionType": "content-only"
+    },
+    {
+      "from": "sujud",
+      "to": "rise-next-rakah",
+      "transitionType": "simple-pose-change"
+    },
+    {
+      "from": "rise-next-rakah",
+      "to": "qiyam",
+      "transitionType": "rakah-advance",
+      "note": "Rakʿah 2 begins at Qiyām without full reload"
     }
   ],
   "completion": {
@@ -409,13 +536,16 @@
   },
   "readyForApprovedContent": true,
   "integrationBlocks": {
-    "current": "Takbir + Qiyam",
-    "completed": [],
+    "current": "Sujud + Sitting + Sujud + Rise",
+    "completed": [
+      "Takbir + Qiyam",
+      "Recitation + Ruku + Standing After Ruku"
+    ],
     "next": [
-      "Recitation",
-      "Ruku",
-      "Standing after Ruku"
+      "RakAh 2 completion",
+      "Tashahhud",
+      "Taslim"
     ]
   },
-  "integrationBlock": "Recitation + Ruku + Standing After Ruku"
+  "integrationBlock": "Sujud + Sitting + Sujud + Rise"
 }

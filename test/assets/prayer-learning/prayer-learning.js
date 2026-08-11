@@ -1,6 +1,6 @@
 /**
- * DAR AL TAWḤĪD — Gebet erlernen (Test Phase 9)
- * Integration: Rezitation + Rukūʿ + Aufrichten · bestehende Engine
+ * DAR AL TAWḤĪD — Gebet erlernen (Test Phase 10)
+ * Integration: Suǧūd + Sitzen + Suǧūd 2 + Aufstehen · bestehende Engine
  * productionEnabled = false | audioVisible = false | TEST ONLY
  */
 (function (global) {
@@ -18,7 +18,7 @@
   var CONTENT_PENDING_LABEL = "Inhalt wird quellengeprüft.";
   var POSE_PENDING_LABEL = "Pose wird geprüft";
   var TEXTS_EMPTY_LABEL = "Noch keine geprüften Texte verfügbar.";
-  var PHASE = 9;
+  var PHASE = 10;
   var CHAR_MALE = "dar-prayer-male-v1";
   var CHAR_FEMALE = "dar-prayer-female-v1";
   var CHAR_VERSION = 1;
@@ -55,10 +55,15 @@
     itidal: "fajr-r1-standing-after-ruku",
     "sujud-1": "fajr-r1-sujud-1",
     sujud: "fajr-r1-sujud-1",
-    sitting: "fajr-r1-sitting",
-    jalsa: "fajr-r1-sitting",
+    sitting: "fajr-r1-sitting-between-sujud",
+    "sitting-between-sujud": "fajr-r1-sitting-between-sujud",
+    jalsa: "fajr-r1-sitting-between-sujud",
+    "fajr-r1-sitting": "fajr-r1-sitting-between-sujud",
     "sujud-2": "fajr-r1-sujud-2",
-    rise: "fajr-r1-rise",
+    rise: "fajr-r1-rise-to-rakah-2",
+    "rise-to-rakah-2": "fajr-r1-rise-to-rakah-2",
+    "fajr-r1-rise": "fajr-r1-rise-to-rakah-2",
+    "rise-next-rakah": "fajr-r1-rise-to-rakah-2",
     tashahhud: "fajr-r2-tashahhud",
     taslim: "fajr-r2-taslim-right",
     "taslim-right": "fajr-r2-taslim-right",
@@ -683,7 +688,9 @@
     var pose = (step && (step.templateId || step.poseId)) || "";
     if (pose === "recitation") return "fajr-r1-recitation-v1";
     if (pose === "standing-after-ruku") return "standing-after-ruku-v1";
-    if (pose === "standing-next-rakah" || pose === "rise-next-rakah") return "rise-next-rakah-main-v1";
+    if (pose === "sitting-between-sujud") return "sitting-between-sujud-v1";
+    if (pose === "standing-next-rakah" || pose === "rise-next-rakah") return "rise-next-rakah-v1";
+    if (pose === "sujud") return "sujud-main-v1";
     if (pose) return pose + "-main-v1";
     return null;
   }
@@ -919,6 +926,8 @@
       var contentEarly = getContentById(contentIdEarly);
       if (contentEarly && contentEarly.titleDe) titles.titleDe = contentEarly.titleDe;
       if (contentEarly && contentEarly.titleAr) titles.titleAr = contentEarly.titleAr;
+      if (tpl.id === "sujud" && s.instance === 1) titles.titleDe = "Erster Suǧūd";
+      if (tpl.id === "sujud" && s.instance === 2) titles.titleDe = "Zweiter Suǧūd";
       var poses = resolvePoseId(tpl, s);
       if (tpl.preferredPoseId && tpl.poseFallbackId) {
         var reg = await ensureRegistry();
@@ -1150,7 +1159,7 @@
       if (key === "standing-after-ruku" || key === "itidal") return "fajr-r2-standing-after-ruku";
       if (key === "sujud" || key === "sujud-1") return "fajr-r2-sujud-1";
       if (key === "sujud-2") return "fajr-r2-sujud-2";
-      if (key === "sitting" || key === "jalsa") return "fajr-r2-sitting";
+      if (key === "sitting" || key === "jalsa" || key === "sitting-between-sujud") return "fajr-r2-sitting";
       if (key === "tashahhud") return "fajr-r2-tashahhud";
       if (key === "taslim" || key === "taslim-right") return "fajr-r2-taslim-right";
       if (key === "taslim-left") return "fajr-r2-taslim-left";
@@ -1494,9 +1503,10 @@
     if (!prevStep || !nextStep) return "";
     if (Number(prevStep.rakAh) === 1 && Number(nextStep.rakAh) === 2) {
       return (
-        '<div class="prl-rakah-mark" data-prl-rakah-mark>' +
+        '<div class="prl-rakah-mark" data-prl-rakah-mark role="separator" aria-label="Zweite Rakʿah">' +
+        "<span class=\"prl-rakah-mark-line\" aria-hidden=\"true\"></span>" +
         "<b>2. Rakʿah</b>" +
-        "<span>Fortfahren →</span>" +
+        "<span class=\"prl-rakah-mark-line\" aria-hidden=\"true\"></span>" +
         "</div>"
       );
     }
@@ -1626,7 +1636,11 @@
       );
     }
 
-    var deep = "fajr/1/" + (st.id === "rise-next-rakah" ? "rise" : st.id);
+    var deep = "fajr/1/" + (
+      st.id === "standing-next-rakah" || st.id === "rise-next-rakah"
+        ? "rise-to-rakah-2"
+        : (st.id === "sujud" ? "sujud-1" : st.id)
+    );
     return (
       '<section class="prl-shell prl-shell--review" data-prl-root="review-step" data-prl-review-step-id="' + esc(st.id) + '">' +
       '<header class="prl-hero prl-hero--compact"><h2>STEP · ' + esc(st.titleDe) + '</h2>' +
@@ -1959,7 +1973,9 @@
         '">' +
         mark +
         (dual
-          ? '<div class="prl-learn-layout is-dual">' +
+          ? '<div class="prl-learn-layout is-dual' +
+            (sj.poseId === "sujud" || sj.templateId === "sujud" ? " is-dual-sujud" : "") +
+            '">' +
             figj +
             "<div>" +
             progressHtml(prayer, sj, j, steps.length) +

@@ -1,25 +1,36 @@
 {
   "id": "standing-next-rakah",
-  "titleDe": "Aufstehen zur nächsten Rakʿah",
+  "titleDe": "Aufstehen zur zweiten Rakʿah",
   "titleAr": "القيام للركعة التالية",
   "category": "transition",
-  "poseReuseAllowed": true,
-  "malePoseId": "qiyam",
-  "femalePoseId": "qiyam",
+  "poseReuseAllowed": false,
+  "poseId": "rise-next-rakah",
+  "malePoseId": "rise-next-rakah",
+  "femalePoseId": "rise-next-rakah",
   "femalePoseStatus": "pending_review",
   "preferredPoseId": "rise-next-rakah",
-  "poseFallbackId": "qiyam",
+  "poseFallbackId": null,
   "detailSlots": [],
   "checkAreas": [
-    "rise-motion",
-    "transition-sequence"
+    "rise-start",
+    "support-related",
+    "body-movement",
+    "hand-related",
+    "final-standing"
   ],
   "textModuleIds": [],
   "claimSlotIds": [
-    "rise-next-rakah-motion"
+    "rise-start-position",
+    "rise-support-related-detail",
+    "rise-body-movement",
+    "rise-hand-related-detail",
+    "rise-final-standing-position"
   ],
   "variants": [],
   "verificationStatus": "research",
   "audioId": null,
-  "note": "Übergangsbewegung erst visualisieren nach Quellenprüfung."
+  "audioEnabled": false,
+  "audioVisible": false,
+  "transitionStyle": "simple-pose-change",
+  "note": "Übergang: statische freigegebene Pose oder einfacher Wechsel – keine erfundene Bewegungsbahn."
 }

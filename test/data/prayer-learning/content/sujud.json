@@ -1,13 +1,47 @@
 {
   "id": "sujud-main-v1",
   "stepId": "sujud",
+  "prayerId": null,
+  "reusableAcrossPrayers": true,
   "titleDe": "Suǧūd",
+  "titleAr": "السجود",
   "instructionDe": null,
+  "instructionText": null,
   "arabic": null,
   "transliteration": null,
   "meaningDe": null,
   "spokenText": null,
-  "sourceClaimIds": [],
+  "sourceClaimIds": [
+    "sujud-general-position",
+    "sujud-forehead",
+    "sujud-nose",
+    "sujud-hands",
+    "sujud-fingers",
+    "sujud-knees",
+    "sujud-feet",
+    "sujud-toes",
+    "sujud-arm-position",
+    "sujud-body-spacing",
+    "sujud-head-related-detail",
+    "sujud-dhikr",
+    "sujud-transition-to-sitting"
+  ],
+  "relatedClaimSlotIds": [
+    "sujud-general-position",
+    "sujud-forehead",
+    "sujud-nose",
+    "sujud-hands",
+    "sujud-fingers",
+    "sujud-knees",
+    "sujud-feet",
+    "sujud-toes",
+    "sujud-arm-position",
+    "sujud-body-spacing",
+    "sujud-head-related-detail",
+    "sujud-dhikr",
+    "sujud-transition-to-sitting"
+  ],
+  "detailIds": ["sujud-hands", "sujud-knees", "sujud-feet"],
   "variantIds": [],
   "defaultVariantId": null,
   "status": "research",
@@ -15,50 +49,20 @@
   "reviewPass2": false,
   "approved": false,
   "audioId": null,
-  "revision": 1,
+  "audioEnabled": false,
+  "audioVisible": false,
+  "audioPreload": false,
+  "revision": 3,
   "contentHash": null,
-  "review": {
-    "contentReview": {
-      "status": "pending",
-      "reviewedAt": null,
-      "reviewer": null
-    },
-    "sourceReview": {
-      "status": "pending",
-      "reviewedAt": null,
-      "reviewer": null
-    },
-    "poseReview": {
-      "status": "pending",
-      "reviewedAt": null,
-      "reviewer": null
-    },
-    "reviewPass1": {
-      "passed": false,
-      "reviewedAt": null,
-      "reviewer": null
-    },
-    "reviewPass2": {
-      "passed": false,
-      "reviewedAt": null,
-      "reviewer": null
-    }
-  },
-  "claimMappings": {
-    "instructionDe": null,
-    "arabic": null,
-    "transliteration": null,
-    "meaningDe": null,
-    "poseDetails": []
-  },
   "selfApproved": false,
   "aiGenerated": false,
-  "relatedClaimSlotIds": [
-    "sujud-forehead-nose",
-    "sujud-hands",
-    "sujud-knees",
-    "sujud-feet",
-    "sujud-arms",
-    "sujud-dhikr"
-  ]
+  "integrationBlock": "Sujud + Sitting + Sujud + Rise",
+  "phase": 10,
+  "notes": "Phase 10: Ein Content für Suǧūd 1/2 und spätere Gebete/Quick Look. Keine erfundenen Dhikr-Texte. Claims nicht pauschal zusammenfassen.",
+  "review": {
+    "contentReview": { "status": "pending", "reviewedAt": null, "reviewer": null },
+    "sourceReview": { "status": "pending", "reviewedAt": null, "reviewer": null },
+    "reviewPass1": { "passed": false, "reviewedAt": null, "reviewer": null },
+    "reviewPass2": { "passed": false, "reviewedAt": null, "reviewer": null }
+  }
 }
