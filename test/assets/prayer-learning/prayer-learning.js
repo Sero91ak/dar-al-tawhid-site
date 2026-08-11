@@ -1,6 +1,6 @@
 /**
- * DAR AL TAWḤĪD — Gebet erlernen (Test · Premium Immersive Surface v646)
- * Eigenständige Lernwelt · Fajr 19 · Maġrib 28 · 4-Rakʿah 36
+ * DAR AL TAWḤĪD — Gebet erlernen (Test · Atelier Identity v647)
+ * Eigenständige visuelle Welt · Fajr 19 · Maġrib 28 · 4-Rakʿah 36
  * productionEnabled = false | audioVisible = false | TEST ONLY
  * Keine erfundenen religiösen Inhalte · keine Fake-Pose-Assets
  */
@@ -2075,12 +2075,13 @@
 
   function hubHtml(state, index, currentPrayer) {
     return (
-      topbarHtml({ backValue: "__app_more__", title: "Gebet erlernen", kicker: "DAR AL TAWḤĪD" }) +
+      topbarHtml({ backValue: "__app_more__", title: "Gebet erlernen", kicker: "ATELIER" }) +
       '<section class="prl-shell prl-shell--hub" data-prl-root="hub">' +
       '<header class="prl-hero">' +
+      '<p class="prl-brand">DAR AL TAWḤĪD</p>' +
       "<h2>Gebet erlernen</h2>" +
       '<p class="prl-ar" lang="ar" dir="rtl">الصلاة</p>' +
-      "<p>Schritt für Schritt sehen und lernen.</p>" +
+      "<p>Eine eigenständige Lernwelt — Haltung für Haltung, in ruhiger Präzision.</p>" +
       '<div class="prl-hero-ornament" aria-hidden="true"><i></i><span>Ṣalāh</span><i></i></div>' +
       "</header>" +
       controlsHtml(state) +
