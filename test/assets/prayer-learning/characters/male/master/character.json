@@ -1,0 +1,21 @@
+{
+  "id": "dar-prayer-male-v1",
+  "gender": "male",
+  "label": "DAR Prayer Male v1",
+  "locked": true,
+  "masterAsset": null,
+  "masterAssetStatus": "awaiting-delivery",
+  "notes": [
+    "Nur diese Character-ID verwenden.",
+    "Keine Ersatzfigur erzeugen.",
+    "Pose-Dateien unter ../poses/ einspielen.",
+    "v654: Alle Figuren-Dateien entfernt (Nutzerauftrag)."
+  ],
+  "locks": {
+    "faceless": true,
+    "beard": "full-black-with-mustache",
+    "clothing": "dark-blue-long-noble",
+    "headwear": "fixed",
+    "proportions": "fixed-muscular"
+  }
+}

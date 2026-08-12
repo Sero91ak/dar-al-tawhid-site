@@ -1,0 +1,16 @@
+{
+  "id": "gebet-erlernen-ki-figuren-v651",
+  "build": "app-shell-v651",
+  "scope": "test-only",
+  "userAuthorization": "explicit AI figures allowed, no eyes",
+  "assets": [
+    "test/assets/prayer-learning/characters/male/poses/male-v1-qiyam.webp",
+    "test/assets/prayer-learning/characters/female/poses/female-v1-qiyam.webp"
+  ],
+  "constraints": [
+    "no-eyes",
+    "not-production-approved",
+    "qiyam-standing-only"
+  ],
+  "note": "Other poses remain MISSING until delivered/generated with user approval."
+}

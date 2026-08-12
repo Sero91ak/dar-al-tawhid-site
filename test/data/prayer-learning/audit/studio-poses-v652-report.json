@@ -1,0 +1,30 @@
+{
+  "id": "gebet-erlernen-studio-poses-v652",
+  "build": "app-shell-v652",
+  "scope": "test-only",
+  "studioChamber": true,
+  "threeD": true,
+  "posesDeliveredTest": [
+    "takbir",
+    "qiyam",
+    "ruku",
+    "standing-after-ruku",
+    "sujud",
+    "sitting-between-sujud",
+    "tashahhud",
+    "taslim-right",
+    "taslim-left"
+  ],
+  "reuse": [
+    "recitation->qiyam",
+    "rise-next-rakah->qiyam",
+    "middle/final-tashahhud->tashahhud"
+  ],
+  "constraints": [
+    "no-eyes",
+    "ai-generated",
+    "religious-review-pending",
+    "not-live"
+  ],
+  "honestNote": "Poses are AI-assisted for Dar Test orientation. Religious accuracy vs Quran/Sunnah requires explicit scholar/admin review before live approval."
+}

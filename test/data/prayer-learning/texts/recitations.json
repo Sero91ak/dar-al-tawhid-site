@@ -1,0 +1,22 @@
+{
+  "modules": [
+    {
+      "id": "fatiha-ref",
+      "type": "quran-reference",
+      "titleDe": "Sūrat al-Fātiḥah",
+      "titleAr": "سورة الفاتحة",
+      "source": "existing-quran-db",
+      "surah": 1,
+      "ayahFrom": 1,
+      "ayahTo": 7,
+      "doNotDuplicateText": true,
+      "verificationStatus": "research",
+      "sourceClaimIds": [
+        "recitation-al-fatihah"
+      ],
+      "arabic": null,
+      "transliteration": null,
+      "translationDe": null
+    }
+  ]
+}

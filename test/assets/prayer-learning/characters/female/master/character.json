@@ -1,0 +1,23 @@
+{
+  "id": "dar-prayer-female-v1",
+  "gender": "female",
+  "label": "DAR Prayer Female v1",
+  "locked": true,
+  "masterAsset": null,
+  "masterAssetStatus": "awaiting-delivery",
+  "notes": [
+    "Nur diese Character-ID verwenden.",
+    "Keine Ersatzfigur erzeugen.",
+    "Niqāb mit offenem Augenbereich ohne Gesichtsidentität.",
+    "Pose-Dateien unter ../poses/ einspielen.",
+    "v654: Alle Figuren-Dateien entfernt (Nutzerauftrag)."
+  ],
+  "locks": {
+    "niqab": true,
+    "noFacialIdentity": true,
+    "jilbab": "wide-floor-length",
+    "noBodyContours": true,
+    "sleeves": "cuffed-closed",
+    "proportions": "fixed"
+  }
+}
