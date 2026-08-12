@@ -1,0 +1,89 @@
+{
+  "id": "sujud",
+  "titleDe": "Suǧūd",
+  "titleAr": "السجود",
+  "category": "prostration",
+  "poseReuseAllowed": true,
+  "malePoseId": "sujud",
+  "femalePoseId": "sujud",
+  "femalePoseStatus": "pending_review",
+  "detailSlots": ["sujud-hands", "sujud-knees", "sujud-feet"],
+  "checkAreas": [
+    "general-position",
+    "forehead",
+    "nose",
+    "hands",
+    "fingers",
+    "knees",
+    "feet",
+    "toes",
+    "arms",
+    "body-spacing",
+    "head-related",
+    "dhikr",
+    "transition-sitting"
+  ],
+  "textModuleIds": ["sujud-dhikr"],
+  "claimSlotIds": [
+    "sujud-general-position",
+    "sujud-forehead",
+    "sujud-nose",
+    "sujud-hands",
+    "sujud-fingers",
+    "sujud-knees",
+    "sujud-feet",
+    "sujud-toes",
+    "sujud-arm-position",
+    "sujud-body-spacing",
+    "sujud-head-related-detail",
+    "sujud-dhikr",
+    "sujud-transition-to-sitting"
+  ],
+  "femaleAssetRules": [
+    "wide-cloth",
+    "no-chest-contour",
+    "no-back-contour-body-accent",
+    "no-waist-contour",
+    "no-hip-contour",
+    "no-buttock-contour",
+    "no-thigh-contour",
+    "niqab-identical",
+    "sleeves-closed",
+    "no-forearms",
+    "same-master-figure"
+  ],
+  "variants": [],
+  "verificationStatus": "research",
+  "audioId": null,
+  "audioEnabled": false,
+  "audioVisible": false,
+  "details": [
+    {
+      "id": "sujud-hands",
+      "poseId": "sujud",
+      "label": "Hände",
+      "assetId": null,
+      "sourceClaimIds": [],
+      "approved": false,
+      "status": "research"
+    },
+    {
+      "id": "sujud-knees",
+      "poseId": "sujud",
+      "label": "Knie",
+      "assetId": null,
+      "sourceClaimIds": [],
+      "approved": false,
+      "status": "research"
+    },
+    {
+      "id": "sujud-feet",
+      "poseId": "sujud",
+      "label": "Füße",
+      "assetId": null,
+      "sourceClaimIds": [],
+      "approved": false,
+      "status": "research"
+    }
+  ]
+}
