@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-12T20:37:45.782Z",
+  "generated": "2026-08-12T20:38:02.725Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -503,13 +503,13 @@
       "pdfUrl": "/assets/library/pdfs/pub-20260812-001-v1-0.pdf",
       "catalogPath": "data/library-publications.json",
       "publishedAt": "2026-08-12",
-      "status": "processing",
+      "status": "sent",
       "pushApproved": true,
       "pushApprovedAt": "2026-08-12T20:37:41.799Z",
       "postId": "lib:pub-20260812-001",
-      "updatedAt": "2026-08-12T20:37:45.782Z",
-      "processingToken": "library:1786567064026:9y27zufd",
-      "processingStartedAt": "2026-08-12T20:37:44.206Z",
+      "updatedAt": "2026-08-12T20:38:02.725Z",
+      "processingToken": null,
+      "processingStartedAt": null,
       "lastCheckAt": "2026-08-12T20:37:45.565Z",
       "liveCheck": {
         "ok": true,
@@ -525,7 +525,12 @@
         "attempt": 1
       },
       "attempts": 1,
-      "lastError": ""
+      "lastError": "",
+      "sentAt": "2026-08-12T20:38:02.539Z",
+      "pushResult": {
+        "target": "supabase-subscriptions:27",
+        "targetUrl": "https://dar-al-tawhid.de/?v=1786567082302#bibliothek/taarud-al-adillah"
+      }
     }
   }
 }
