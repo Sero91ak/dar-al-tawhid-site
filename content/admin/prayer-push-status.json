@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-12T13:21:03.671Z",
+  "updatedAt": "2026-08-12T13:26:03.561Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-12T13:21:03.671Z",
+  "lastCronRun": "2026-08-12T13:26:03.561Z",
   "nextPlannedPush": {
     "prayer": "ʿAṣr",
     "key": "asr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-12T15:22:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-12T13:05:59.632Z",
-  "windowEnd": "2026-08-13T15:20:59.632Z",
+  "windowStart": "2026-08-12T13:10:59.038Z",
+  "windowEnd": "2026-08-13T15:25:59.038Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 27,
@@ -28,10 +28,10 @@
   "usersWithLocation": 27,
   "usersWithActivePush": 27,
   "locationGroups": 5,
-  "scheduled": 50,
-  "recipients": 270,
+  "scheduled": 54,
+  "recipients": 296,
   "skippedPast": 70,
-  "skippedWindow": 80,
+  "skippedWindow": 76,
   "duplicates": 1,
   "errors": 0,
   "lastError": null,
@@ -68,7 +68,7 @@
         "time": "17:38",
         "advance": {
           "status": "geplant",
-          "recipients": 27
+          "recipients": 53
         },
         "entry": {
           "status": "geplant",
@@ -145,7 +145,7 @@
       "time": "17:38",
       "advance": {
         "status": "geplant",
-        "recipients": 27
+        "recipients": 53
       },
       "entry": {
         "status": "geplant",
@@ -293,6 +293,15 @@
     {
       "prayer": "ʿAṣr",
       "key": "asr",
+      "mode": "advance",
+      "time": "17:36",
+      "sendAfter": "2026-08-13T15:21:00.000Z",
+      "recipients": 19,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "ʿAṣr",
+      "key": "asr",
       "mode": "entry",
       "time": "17:37",
       "sendAfter": "2026-08-12T15:37:00.000Z",
@@ -377,6 +386,15 @@
       "mode": "advance",
       "time": "13:36",
       "sendAfter": "2026-08-13T11:21:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "ʿAṣr",
+      "key": "asr",
+      "mode": "advance",
+      "time": "17:36",
+      "sendAfter": "2026-08-13T15:21:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin"
     },
@@ -473,6 +491,15 @@
     {
       "prayer": "ʿAṣr",
       "key": "asr",
+      "mode": "advance",
+      "time": "17:36",
+      "sendAfter": "2026-08-13T15:21:00.000Z",
+      "recipients": 5,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "ʿAṣr",
+      "key": "asr",
       "mode": "entry",
       "time": "17:37",
       "sendAfter": "2026-08-12T15:37:00.000Z",
@@ -557,6 +584,15 @@
       "mode": "advance",
       "time": "13:36",
       "sendAfter": "2026-08-13T11:21:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "ʿAṣr",
+      "key": "asr",
+      "mode": "advance",
+      "time": "17:36",
+      "sendAfter": "2026-08-13T15:21:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin"
     },
@@ -996,6 +1032,12 @@
     },
     {
       "prayer": "asr",
+      "mode": "advance",
+      "recipients": 19,
+      "response": "{\"id\":\"a2144864-e6ed-412f-8c66-09d415cf19fb\",\"external_id\":\"726ffc6f-9631-41f2-908c-dff92c38e3fc\",\"errors\":{\"invalid_player_ids\":[\"0b13265d-3f34-4c9c-bcaf-85743bb8a7db\",\"19ab451c-bf40-4b43-a99e-2cef48"
+    },
+    {
+      "prayer": "asr",
       "mode": "entry",
       "recipients": 1,
       "response": "{\"id\":\"\",\"errors\":{\"invalid_player_ids\":[\"e67e4b16-6faf-4f42-9569-38e915259e79\"]}}"
@@ -1045,12 +1087,6 @@
     {
       "prayer": "dhuhr",
       "mode": "entry",
-      "recipients": 1,
-      "response": "{\"id\":\"\",\"errors\":{\"invalid_player_ids\":[\"e67e4b16-6faf-4f42-9569-38e915259e79\"]}}"
-    },
-    {
-      "prayer": "dhuhr",
-      "mode": "advance",
       "recipients": 1,
       "response": "{\"id\":\"\",\"errors\":{\"invalid_player_ids\":[\"e67e4b16-6faf-4f42-9569-38e915259e79\"]}}"
     }
