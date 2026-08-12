@@ -45,8 +45,8 @@ export const PRAYER_ADVANCE_PUSH_VARIANTS = {
 
 export const PRAYER_ENTRY_PUSH_VARIANTS = {
   fajr: [
-    { title: "✨ Fajr-Zeit ist eingetreten", body: "Beginne deinen Tag mit dem Gebet. Wer den Morgen mit Allah beginnt, verliert nicht." },
-    { title: "✨ Zeit für Fajr", body: "Steh auf für dein Gebet. Der Schlaf vergeht, aber die Pflicht vor Allah bleibt." },
+    { title: "✨ Fajr-Zeit ist eingetreten", body: "Beginne deinen Tag mit dem Gebet für Allah. Wer Fajr bewahrt, verliert nicht." },
+    { title: "✨ Zeit für Fajr", body: "Steh auf für Allah und verrichte dein Fajr-Gebet. Der Schlaf vergeht, die Pflicht bleibt." },
     { title: "✨ Fajr erinnert dich", body: "Qurʾān al-Fajr ist bezeugt — verliere dieses Gebet nicht." }
   ],
   dhuhr: [
