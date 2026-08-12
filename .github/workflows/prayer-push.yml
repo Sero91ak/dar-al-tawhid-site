@@ -85,3 +85,54 @@ jobs:
           done
           echo "::error::Gebets-Push-Status blieb nach autonomer Reparatur veraltet"
           exit 1
+
+      - name: Send admin/test alarm push on failure
+        if: failure()
+        env:
+          ONESIGNAL_APP_ID: "786d7cd6-0455-4434-ab14-0c10a7bc6b1e"
+          ONESIGNAL_API_KEY_NEW: ${{ secrets.ONESIGNAL_API_KEY_NEW }}
+          ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+          ALARM_PUSH_SUBSCRIPTION_IDS: ${{ secrets.ALARM_PUSH_SUBSCRIPTION_IDS }}
+        run: |
+          if [ -z "${ALARM_PUSH_SUBSCRIPTION_IDS:-}" ]; then
+            echo "::warning::Kein ALARM_PUSH_SUBSCRIPTION_IDS gesetzt – kein Admin/Test-Alarm-Push gesendet"
+            exit 0
+          fi
+
+          API_KEY="${ONESIGNAL_API_KEY_NEW:-${ONESIGNAL_API_KEY:-}}"
+          API_KEY="$(printf "%s" "$API_KEY" | tr -d '[:space:]' | sed -E 's/^(Key|Basic)//I')"
+          if [ -z "$API_KEY" ]; then
+            echo "::warning::Kein OneSignal API Key vorhanden – kein Admin/Test-Alarm-Push gesendet"
+            exit 0
+          fi
+
+          IDS_JSON="$(node -e 'const raw=process.env.ALARM_PUSH_SUBSCRIPTION_IDS||""; const ids=raw.split(",").map(s=>s.trim()).filter(Boolean); process.stdout.write(JSON.stringify(ids));')"
+          IDS_COUNT="$(node -e 'const ids=JSON.parse(process.env.IDS_JSON||"[]"); process.stdout.write(String(ids.length));' )"
+          if [ "$IDS_COUNT" -eq 0 ]; then
+            echo "::warning::ALARM_PUSH_SUBSCRIPTION_IDS ist leer nach Parsing – kein Push gesendet"
+            exit 0
+          fi
+
+          BODY="$(node -e '
+            const ids = JSON.parse(process.env.IDS_JSON || "[]");
+            const payload = {
+              app_id: process.env.ONESIGNAL_APP_ID,
+              target_channel: "push",
+              include_subscription_ids: ids,
+              headings: { de: "🚨 Prayer-Push Alarm", en: "🚨 Prayer Push Alarm" },
+              contents: {
+                de: "Autoreparatur war nicht erfolgreich. Bitte Admin-Status prüfen: /api/prayer/status",
+                en: "Auto-repair failed. Please check admin status: /api/prayer/status"
+              },
+              url: "https://dar-al-tawhid.de/admin/",
+              data: { type: "prayer-watchdog-alarm", severity: "critical" },
+              name: `prayer-watchdog-alarm-${Date.now()}`
+            };
+            process.stdout.write(JSON.stringify(payload));
+          ')"
+
+          curl -fsS -X POST "https://api.onesignal.com/notifications" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -H "Authorization: Key ${API_KEY}" \
+            -d "$BODY"
+          echo "Admin/Test-Alarm-Push gesendet an ${IDS_COUNT} Subscription(s)."
