@@ -1,0 +1,277 @@
+{
+  "version": 3,
+  "phase": 13,
+  "modules": [
+    {
+      "stepId": "takbir",
+      "contentId": "takbir-main-v1",
+      "file": "takbir.json",
+      "status": "research",
+      "approved": false
+    },
+    {
+      "stepId": "qiyam",
+      "contentId": "qiyam-main-v1",
+      "file": "qiyam.json",
+      "status": "research",
+      "approved": false
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "fajr-r1-recitation-v1",
+      "file": "recitation.json",
+      "status": "research",
+      "approved": false,
+      "poseReuse": true,
+      "poseId": "qiyam"
+    },
+    {
+      "stepId": "ruku",
+      "contentId": "ruku-main-v1",
+      "file": "ruku.json",
+      "status": "research",
+      "approved": false
+    },
+    {
+      "stepId": "standing-after-ruku",
+      "contentId": "standing-after-ruku-v1",
+      "file": "standing-after-ruku.json",
+      "status": "research",
+      "approved": false
+    },
+    {
+      "stepId": "sujud",
+      "contentId": "sujud-main-v1",
+      "file": "sujud.json",
+      "status": "research",
+      "approved": false
+    },
+    {
+      "stepId": "sitting-between-sujud",
+      "contentId": "sitting-between-sujud-v1",
+      "file": "sitting-between-sujud.json",
+      "status": "research",
+      "approved": false
+    },
+    {
+      "stepId": "standing-next-rakah",
+      "contentId": "rise-next-rakah-v1",
+      "file": "standing-next-rakah.json",
+      "status": "research",
+      "approved": false
+    },
+    {
+      "stepId": "tashahhud",
+      "contentId": "tashahhud-final-v1",
+      "file": "tashahhud.json",
+      "status": "research",
+      "approved": false
+    },
+    {
+      "stepId": "taslim",
+      "contentId": "taslim-main-v1",
+      "file": "taslim.json",
+      "status": "research",
+      "approved": false
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "fajr-r2-recitation-v1",
+      "file": "recitation-r2.json",
+      "status": "research",
+      "approved": false,
+      "rakAh": 2,
+      "prayerId": "fajr"
+    },
+    {
+      "stepId": "tashahhud",
+      "contentId": "middle-tashahhud-v1",
+      "file": "middle-tashahhud.json",
+      "status": "research",
+      "approved": false,
+      "tashahhudKind": "middle"
+    },
+    {
+      "stepId": "tashahhud",
+      "contentId": "final-tashahhud-v1",
+      "file": "final-tashahhud.json",
+      "status": "research",
+      "approved": false,
+      "tashahhudKind": "final"
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "maghrib-r1-recitation-v1",
+      "file": "maghrib-r1-recitation.json",
+      "status": "research",
+      "approved": false,
+      "prayerId": "maghrib",
+      "rakAh": 1,
+      "poseReuse": true,
+      "poseId": "qiyam"
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "maghrib-r2-recitation-v1",
+      "file": "maghrib-r2-recitation.json",
+      "status": "research",
+      "approved": false,
+      "prayerId": "maghrib",
+      "rakAh": 2,
+      "poseReuse": true,
+      "poseId": "qiyam"
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "maghrib-r3-recitation-v1",
+      "file": "maghrib-r3-recitation.json",
+      "status": "research",
+      "approved": false,
+      "prayerId": "maghrib",
+      "rakAh": 3,
+      "poseReuse": true,
+      "poseId": "qiyam"
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "dhuhr-r1-recitation-v1",
+      "file": "dhuhr-r1-recitation.json",
+      "status": "research",
+      "approved": false,
+      "prayerId": "dhuhr",
+      "rakAh": 1,
+      "poseReuse": true,
+      "poseId": "qiyam"
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "dhuhr-r2-recitation-v1",
+      "file": "dhuhr-r2-recitation.json",
+      "status": "research",
+      "approved": false,
+      "prayerId": "dhuhr",
+      "rakAh": 2,
+      "poseReuse": true,
+      "poseId": "qiyam"
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "dhuhr-r3-recitation-v1",
+      "file": "dhuhr-r3-recitation.json",
+      "status": "research",
+      "approved": false,
+      "prayerId": "dhuhr",
+      "rakAh": 3,
+      "poseReuse": true,
+      "poseId": "qiyam"
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "dhuhr-r4-recitation-v1",
+      "file": "dhuhr-r4-recitation.json",
+      "status": "research",
+      "approved": false,
+      "prayerId": "dhuhr",
+      "rakAh": 4,
+      "poseReuse": true,
+      "poseId": "qiyam"
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "asr-r1-recitation-v1",
+      "file": "asr-r1-recitation.json",
+      "status": "research",
+      "approved": false,
+      "prayerId": "asr",
+      "rakAh": 1,
+      "poseReuse": true,
+      "poseId": "qiyam"
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "asr-r2-recitation-v1",
+      "file": "asr-r2-recitation.json",
+      "status": "research",
+      "approved": false,
+      "prayerId": "asr",
+      "rakAh": 2,
+      "poseReuse": true,
+      "poseId": "qiyam"
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "asr-r3-recitation-v1",
+      "file": "asr-r3-recitation.json",
+      "status": "research",
+      "approved": false,
+      "prayerId": "asr",
+      "rakAh": 3,
+      "poseReuse": true,
+      "poseId": "qiyam"
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "asr-r4-recitation-v1",
+      "file": "asr-r4-recitation.json",
+      "status": "research",
+      "approved": false,
+      "prayerId": "asr",
+      "rakAh": 4,
+      "poseReuse": true,
+      "poseId": "qiyam"
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "isha-r1-recitation-v1",
+      "file": "isha-r1-recitation.json",
+      "status": "research",
+      "approved": false,
+      "prayerId": "isha",
+      "rakAh": 1,
+      "poseReuse": true,
+      "poseId": "qiyam"
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "isha-r2-recitation-v1",
+      "file": "isha-r2-recitation.json",
+      "status": "research",
+      "approved": false,
+      "prayerId": "isha",
+      "rakAh": 2,
+      "poseReuse": true,
+      "poseId": "qiyam"
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "isha-r3-recitation-v1",
+      "file": "isha-r3-recitation.json",
+      "status": "research",
+      "approved": false,
+      "prayerId": "isha",
+      "rakAh": 3,
+      "poseReuse": true,
+      "poseId": "qiyam"
+    },
+    {
+      "stepId": "recitation",
+      "contentId": "isha-r4-recitation-v1",
+      "file": "isha-r4-recitation.json",
+      "status": "research",
+      "approved": false,
+      "prayerId": "isha",
+      "rakAh": 4,
+      "poseReuse": true,
+      "poseId": "qiyam"
+    }
+  ],
+  "gates": {
+    "canPublishRequires": [
+      "status=approved",
+      "reviewPass1",
+      "reviewPass2",
+      "sourceClaimIds.length>0"
+    ]
+  },
+  "integrationBlock": "RakAh 2 + Tashahhud + Taslim"
+}
