@@ -1,0 +1,118 @@
+{
+  "feature": "Gebet erlernen",
+  "scope": "Shared 4-RakAh Model",
+  "environment": "test",
+  "auftrag": "Gemeinsames 4-Rakʿah-Modell für Ẓuhr, ʿAṣr und ʿIšāʾ",
+  "gateEvaluatedAt": "2026-08-11T10:58:00.000Z",
+  "decision": "STOP",
+  "reason": "Vorbedingung nicht erfüllt: Maġrib technical QA nicht freigegeben (Maghrib-Auftrag per Gate gestoppt) und highBugs.length > 0. Kein 4-Rakʿah-Ausbau in diesem Lauf.",
+  "preconditions": {
+    "fajrTechnicalQA": "PASS",
+    "maghribTechnicalQA": "FAIL",
+    "maghribNote": "Maghrib-Auftrag wurde per Fajr-HIGH-Gate gestoppt (audit/maghrib-gate-stop-report.json). Offizielle Maghrib technical QA daher nicht PASS.",
+    "blockerBugs": [],
+    "highBugs": [
+      "visual-assets-missing",
+      "religious-content-pending",
+      "source-coverage-pending"
+    ],
+    "allPreconditionsMet": false
+  },
+  "sharedSequenceModel": "NOT_RUN",
+  "sharedStepCount": 36,
+  "dhuhr": "NOT_RUN",
+  "asr": "NOT_RUN",
+  "isha": "NOT_RUN",
+  "sharedPoseReuse": "NOT_RUN",
+  "sharedContentReuse": "NOT_RUN",
+  "prayerSpecificMappings": "NOT_RUN",
+  "middleTashahhud": "NOT_RUN",
+  "finalTashahhud": "NOT_RUN",
+  "rakAh3To4Transition": "NOT_RUN",
+  "swipe36Steps": "NOT_RUN",
+  "scroll36Steps": "NOT_RUN",
+  "modeStatePreservation": "NOT_RUN",
+  "characterStatePreservation": "NOT_RUN",
+  "phone": "NOT_RUN",
+  "fold": "NOT_RUN",
+  "tablet": "NOT_RUN",
+  "offline": "NOT_RUN",
+  "fajrRegression": "NOT_RUN",
+  "maghribRegression": "NOT_RUN",
+  "wrongCharacterAssets": 0,
+  "femaleModestyFailures": 0,
+  "visibleAudioControls": 0,
+  "blockerBugs": [],
+  "highBugs": [
+    {
+      "id": "visual-assets-missing",
+      "severity": "HIGH",
+      "detail": "0 approved Male/Female pose image assets (src=null for master poses)."
+    },
+    {
+      "id": "religious-content-pending",
+      "severity": "HIGH",
+      "detail": "No Fajr/Maghrib step content has publish gate (approved + reviewPass1/2 + claims)."
+    },
+    {
+      "id": "source-coverage-pending",
+      "severity": "HIGH",
+      "detail": "Source claims not approved for publish."
+    },
+    {
+      "id": "maghrib-technical-qa-not-passed",
+      "severity": "HIGH",
+      "detail": "Maghrib-Auftrag Gate-Stop: Maghrib technical QA was not executed/passed as an official QA gate."
+    }
+  ],
+  "productionChanged": false,
+  "productionEnabled": false,
+  "existingPrematureDataNote": "Ultimatum-Branch enthält bereits dhuhr/asr/isha.json und models/four-rakah.json. Dieser Auftrag baut darauf NICHT weiter auf und setzt technicalReady für 4-Rakʿah nicht auf true, bis Vorbedingungen erfüllt sind.",
+  "mustCloseFirst": [
+    "Fajr HIGH schließen: Pose-Assets + Content/Quellen + visuelle Character-Audits",
+    "Maghrib-Auftrag erneut ausführen und Maghrib technical QA = PASS erreichen",
+    "blockerBugs.length === 0 und highBugs.length === 0 bestätigen",
+    "Dann: Shared 4-rakah-prayer-sequence-v1 + prayer-specific mappings (ohne Dreifach-Sequenzkopie)"
+  ],
+  "reports": {
+    "dhuhr": {
+      "prayer": "dhuhr",
+      "rakAhCount": 4,
+      "configuredLearningSteps": 36,
+      "route": "NOT_RUN",
+      "sequence": "NOT_RUN",
+      "swipe": "NOT_RUN",
+      "scroll": "NOT_RUN",
+      "characterSwitch": "NOT_RUN",
+      "offline": "NOT_RUN",
+      "technicalReady": false,
+      "religiousReady": false
+    },
+    "asr": {
+      "prayer": "asr",
+      "rakAhCount": 4,
+      "configuredLearningSteps": 36,
+      "route": "NOT_RUN",
+      "sequence": "NOT_RUN",
+      "swipe": "NOT_RUN",
+      "scroll": "NOT_RUN",
+      "characterSwitch": "NOT_RUN",
+      "offline": "NOT_RUN",
+      "technicalReady": false,
+      "religiousReady": false
+    },
+    "isha": {
+      "prayer": "isha",
+      "rakAhCount": 4,
+      "configuredLearningSteps": 36,
+      "route": "NOT_RUN",
+      "sequence": "NOT_RUN",
+      "swipe": "NOT_RUN",
+      "scroll": "NOT_RUN",
+      "characterSwitch": "NOT_RUN",
+      "offline": "NOT_RUN",
+      "technicalReady": false,
+      "religiousReady": false
+    }
+  }
+}

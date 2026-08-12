@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "claimsFile": "claims.json",
+  "referencesFile": "references.json",
+  "directEvidenceFormats": [
+    "web-text-fragment",
+    "pdf-page",
+    "hadith-page",
+    "quran-ayah"
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "id": "tashahhud",
+  "titleDe": "Tašahhud",
+  "titleAr": "التشهد",
+  "category": "sitting",
+  "poseReuseAllowed": false,
+  "malePoseId": "tashahhud",
+  "femalePoseId": "tashahhud",
+  "femalePoseStatus": "pending_review",
+  "detailSlots": ["tashahhud-sitting", "tashahhud-hands", "tashahhud-index"],
+  "checkAreas": [
+    "general-sitting",
+    "left-leg",
+    "right-leg",
+    "left-foot",
+    "right-foot",
+    "left-hand",
+    "right-hand",
+    "finger-shape",
+    "index-finger",
+    "index-finger-timing",
+    "gaze",
+    "tashahhud-text",
+    "salat-ibrahimiyya",
+    "dua-before-taslim"
+  ],
+  "textModuleIds": ["tashahhud-text", "salat-ibrahimiyya", "dua-before-taslim"],
+  "claimSlotIds": [
+    "tashahhud-general-sitting",
+    "tashahhud-left-leg",
+    "tashahhud-right-leg",
+    "tashahhud-left-foot",
+    "tashahhud-right-foot",
+    "tashahhud-left-hand",
+    "tashahhud-right-hand",
+    "tashahhud-finger-shape",
+    "tashahhud-index-finger",
+    "tashahhud-index-finger-timing",
+    "tashahhud-gaze",
+    "tashahhud-text",
+    "tashahhud-salat-ibrahimiyya",
+    "tashahhud-dua-before-taslim"
+  ],
+  "femaleAssetRules": [
+    "niqab-identical",
+    "no-recognizable-face",
+    "no-chest-contour",
+    "no-waist",
+    "no-hip",
+    "no-buttock",
+    "no-thigh-through-cloth",
+    "loose-floor-length",
+    "sleeves-closed",
+    "no-forearms",
+    "hands-only-as-needed"
+  ],
+  "note": "Fingerposition/-bewegung/-timing nicht ohne Quelle freigeben.",
+  "variants": [],
+  "verificationStatus": "research",
+  "audioId": null,
+  "audioEnabled": false,
+  "audioVisible": false,
+  "details": [
+    {
+      "id": "tashahhud-sitting",
+      "poseId": "tashahhud",
+      "label": "Sitzposition",
+      "assetId": null,
+      "sourceClaimIds": [],
+      "approved": false,
+      "status": "research"
+    },
+    {
+      "id": "tashahhud-hands",
+      "poseId": "tashahhud",
+      "label": "Hände",
+      "assetId": null,
+      "sourceClaimIds": [],
+      "approved": false,
+      "status": "research"
+    },
+    {
+      "id": "tashahhud-index",
+      "poseId": "tashahhud",
+      "label": "Zeigefinger",
+      "assetId": null,
+      "sourceClaimIds": [],
+      "approved": false,
+      "status": "research",
+      "requiresSourceBeforeVisual": true
+    }
+  ]
+}
