@@ -16,6 +16,7 @@ on:
       - data/scholar-history-curated.json
       - wrangler.toml
       - _headers
+      - _redirects
       - .assetsignore
       - package.json
       - scripts/cf-pages-build.js
