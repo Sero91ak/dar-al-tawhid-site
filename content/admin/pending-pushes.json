@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-12T20:33:56.046Z",
+  "generated": "2026-08-12T20:34:17.543Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -507,9 +507,26 @@
       "pushApproved": true,
       "pushApprovedAt": "2026-08-12T20:33:54.173Z",
       "postId": "lib:pub-20260812-001",
-      "updatedAt": "2026-08-12T20:33:56.046Z",
+      "updatedAt": "2026-08-12T20:34:17.543Z",
       "processingToken": "library:1786566835778:fosapseo",
-      "processingStartedAt": "2026-08-12T20:33:56.046Z"
+      "processingStartedAt": "2026-08-12T20:33:56.046Z",
+      "lastCheckAt": "2026-08-12T20:34:17.329Z",
+      "liveCheck": {
+        "ok": false,
+        "diagnosis": "PDF noch nicht im Live-Katalog enthalten.",
+        "site": "https://dar-al-tawhid.de",
+        "publicationId": "pub-20260812-001",
+        "slug": "taarud-al-adillah",
+        "catalogFoundPublic": true,
+        "publicationInCatalog": false,
+        "pdfFilePublic": false,
+        "visitorUrlOk": true,
+        "visitorUrl": "https://dar-al-tawhid.de/?v=1786566857271#bibliothek/taarud-al-adillah",
+        "pdfHttpStatus": 404,
+        "attempt": 5
+      },
+      "attempts": 5,
+      "lastError": "PDF noch nicht im Live-Katalog enthalten."
     }
   }
 }
