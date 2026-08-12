@@ -84,6 +84,340 @@
   ],
   "unlockedScopes": [
     {
+      "id": "gebet-erlernen-noble-compact-v650-2026-08-11",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Noble Kompakt-UI wie Duʿāʾ-Flächen: weniger Rahmen-Labyrinth, kleinere Figure Stage, Glow, Ladeleiste, Vers-Überblendung. Test only.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "gebet-erlernen-3d-view-v649-2026-08-11",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "3D-Ansicht Button + Asset-Ladeprobe + View-Vervollständigung Gebet erlernen. Test only. Keine Fake-Posen erfinden.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "gebet-erlernen-visual-step-fix-v648-2026-08-11",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Sofort-Korrektur Visual Learning UI: Figure Stage Pflicht, Step-Struktur, Qurʾān-kompakt, Scroll-Header, Bottom-Nav. Test only. Keine Fake-Posen, keine erfundenen religiösen Texte.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "gebet-erlernen-atelier-identity-v647-2026-08-11",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Gebet erlernen Atelier-Identität v647: extreme visuelle Abgrenzung von der Haupt-App (Farben, Typo, Atmosphäre). Test only. Keine Fake-Posen. Keine Live-Freigabe.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "gebet-erlernen-premium-surface-v646-2026-08-11",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Premium Immersive Surface für Gebet erlernen (Test): eigenständige edle Lernwelt, keine Produktionsfreigabe, keine Fake-Posen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/"
+      ]
+    },
+    {
+      "id": "gebet-erlernen-final-ultimatum-v645-2026-08-11",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Finaler Ultimativ-Auftrag Gebet erlernen: Fünf-Gebete-Engine (Fajr 19 / Maghrib 28 / 4-Rakʿah 36), Test only. Keine erfundenen religiösen Inhalte. Keine Produktionsfreigabe. technical≠religious≠RC.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/",
+        "scripts/generate-prayer-learning-sequences.js",
+        "scripts/prayer-learning-final-check.js",
+        "scripts/prayer-learning-phase1-check.js",
+        "scripts/prayer-learning-phase2-check.js",
+        "scripts/prayer-learning-phase3-check.js",
+        "scripts/prayer-learning-phase4-check.js",
+        "scripts/prayer-learning-phase5-check.js",
+        "scripts/prayer-learning-phase6-check.js",
+        "scripts/prayer-learning-phase7-check.js",
+        "scripts/prayer-learning-phase8-check.js",
+        "scripts/prayer-learning-phase9-check.js",
+        "scripts/prayer-learning-phase10-check.js",
+        "scripts/prayer-learning-phase11-check.js",
+        "scripts/prayer-learning-phase12-check.js",
+        "scripts/validate-prayer-learning.js"
+      ]
+    },
+    {
+      "id": "gebet-erlernen-phase12-fajr-qa-v644-2026-08-11",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Phase 12 Gebet erlernen: Full Fajr QA / UX audit / stabilize. Keine neue Architektur. Keine Produktionsfreigabe. technical≠religious.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/",
+        "scripts/prayer-learning-phase1-check.js",
+        "scripts/prayer-learning-phase2-check.js",
+        "scripts/prayer-learning-phase3-check.js",
+        "scripts/prayer-learning-phase4-check.js",
+        "scripts/prayer-learning-phase5-check.js",
+        "scripts/prayer-learning-phase6-check.js",
+        "scripts/prayer-learning-phase7-check.js",
+        "scripts/prayer-learning-phase8-check.js",
+        "scripts/prayer-learning-phase9-check.js",
+        "scripts/prayer-learning-phase10-check.js",
+        "scripts/prayer-learning-phase11-check.js",
+        "scripts/prayer-learning-phase12-check.js",
+        "scripts/validate-prayer-learning.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "gebet-erlernen-phase11-r2-tashahhud-v643-2026-08-11",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Phase 11 Gebet erlernen: Rakʿah 2 + Tašahhud + Taslīm. Produktion unverändert. technical≠religious.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/",
+        "scripts/prayer-learning-phase1-check.js",
+        "scripts/prayer-learning-phase2-check.js",
+        "scripts/prayer-learning-phase3-check.js",
+        "scripts/prayer-learning-phase4-check.js",
+        "scripts/prayer-learning-phase5-check.js",
+        "scripts/prayer-learning-phase6-check.js",
+        "scripts/prayer-learning-phase7-check.js",
+        "scripts/prayer-learning-phase8-check.js",
+        "scripts/prayer-learning-phase9-check.js",
+        "scripts/prayer-learning-phase10-check.js",
+        "scripts/prayer-learning-phase11-check.js",
+        "scripts/validate-prayer-learning.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "gebet-erlernen-phase10-sujud-rise-v642-2026-08-11",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Phase 10 Gebet erlernen: Suǧūd + Sitzen + Suǧūd 2 + Aufstehen. Produktion unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/",
+        "scripts/prayer-learning-phase1-check.js",
+        "scripts/prayer-learning-phase2-check.js",
+        "scripts/prayer-learning-phase3-check.js",
+        "scripts/prayer-learning-phase4-check.js",
+        "scripts/prayer-learning-phase5-check.js",
+        "scripts/prayer-learning-phase6-check.js",
+        "scripts/prayer-learning-phase7-check.js",
+        "scripts/prayer-learning-phase8-check.js",
+        "scripts/prayer-learning-phase9-check.js",
+        "scripts/prayer-learning-phase10-check.js",
+        "scripts/validate-prayer-learning.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "gebet-erlernen-phase9-recitation-ruku-v641-2026-08-10",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Phase 9 Gebet erlernen: Rezitation + Rukūʿ + Aufrichten Integrationsblock. Produktion unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/",
+        "scripts/prayer-learning-phase1-check.js",
+        "scripts/prayer-learning-phase2-check.js",
+        "scripts/prayer-learning-phase3-check.js",
+        "scripts/prayer-learning-phase4-check.js",
+        "scripts/prayer-learning-phase5-check.js",
+        "scripts/prayer-learning-phase6-check.js",
+        "scripts/prayer-learning-phase7-check.js",
+        "scripts/prayer-learning-phase8-check.js",
+        "scripts/prayer-learning-phase9-check.js",
+        "scripts/validate-prayer-learning.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "gebet-erlernen-phase8-takbir-qiyam-v640-2026-08-10",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Phase 8 Gebet erlernen: Takbīr + Qiyām echte Befüllung/Slots. Produktion unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/",
+        "scripts/prayer-learning-phase1-check.js",
+        "scripts/prayer-learning-phase2-check.js",
+        "scripts/prayer-learning-phase3-check.js",
+        "scripts/prayer-learning-phase4-check.js",
+        "scripts/prayer-learning-phase5-check.js",
+        "scripts/prayer-learning-phase6-check.js",
+        "scripts/prayer-learning-phase7-check.js",
+        "scripts/prayer-learning-phase8-check.js",
+        "scripts/validate-prayer-learning.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "gebet-erlernen-phase7-testversion-v639-2026-08-10",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Phase 7 Gebet erlernen: bedienbare Testversion. Produktion unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/",
+        "scripts/prayer-learning-phase1-check.js",
+        "scripts/prayer-learning-phase2-check.js",
+        "scripts/prayer-learning-phase3-check.js",
+        "scripts/prayer-learning-phase4-check.js",
+        "scripts/prayer-learning-phase5-check.js",
+        "scripts/prayer-learning-phase6-check.js",
+        "scripts/prayer-learning-phase7-check.js",
+        "scripts/validate-prayer-learning.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "gebet-erlernen-phase6-review-v638-2026-08-10",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Phase 6 Gebet erlernen: Review/Freigabe-System, Audit, Readiness. Produktion unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/",
+        "scripts/prayer-learning-phase1-check.js",
+        "scripts/prayer-learning-phase2-check.js",
+        "scripts/prayer-learning-phase3-check.js",
+        "scripts/prayer-learning-phase4-check.js",
+        "scripts/prayer-learning-phase5-check.js",
+        "scripts/prayer-learning-phase6-check.js",
+        "scripts/validate-prayer-learning.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "gebet-erlernen-phase5-content-v637-2026-08-10",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Phase 5 Gebet erlernen: Content/Claim/Pose Registries, Gates, Validator. Produktion unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/",
+        "scripts/prayer-learning-phase1-check.js",
+        "scripts/prayer-learning-phase2-check.js",
+        "scripts/prayer-learning-phase3-check.js",
+        "scripts/prayer-learning-phase4-check.js",
+        "scripts/prayer-learning-phase5-check.js",
+        "scripts/validate-prayer-learning.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "gebet-erlernen-phase4-engine-v636-2026-08-10",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Phase 4 Gebet erlernen: Interaction/Swipe/Scroll/Responsive Engine. Produktion unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/",
+        "scripts/prayer-learning-phase1-check.js",
+        "scripts/prayer-learning-phase2-check.js",
+        "scripts/prayer-learning-phase3-check.js",
+        "scripts/prayer-learning-phase4-check.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "gebet-erlernen-phase3-master-v635-2026-08-10",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Phase 3 Gebet erlernen: Fajr-Master, Steps/Texts/Sources/Pose-Registry. Produktion unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/",
+        "scripts/prayer-learning-phase1-check.js",
+        "scripts/prayer-learning-phase2-check.js",
+        "scripts/prayer-learning-phase3-check.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "gebet-erlernen-phase2-test-v634-2026-08-10",
+      "approvedBy": "user-explicit-test-only",
+      "reason": "Phase 2 Gebet erlernen: bedienbarer Fajr-Prototyp, Character-Lock, Swipe/Scroll. Produktion unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/prayer-learning/",
+        "test/data/prayer-learning/",
+        "scripts/prayer-learning-phase1-check.js",
+        "scripts/prayer-learning-phase2-check.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "prophets-instant-open-v630-2026-08-09",
       "approvedBy": "user-explicit-live-push",
       "reason": "Propheten öffnen noch immer zu langsam / Zweitklick nötig. Root-cause: let currentRoute nicht auf window — Paint tot. Sofort-Fix + Hintergrund-Vorladen; Live+Test",

@@ -1,0 +1,44 @@
+{
+  "id": "taslim",
+  "titleDe": "Taslīm",
+  "titleAr": "التسليم",
+  "category": "closing",
+  "poseReuseAllowed": false,
+  "malePoseId": "taslim",
+  "femalePoseId": "taslim",
+  "femalePoseStatus": "pending_review",
+  "sides": ["right", "left"],
+  "detailSlots": [],
+  "checkAreas": [
+    "general",
+    "head-turn-right",
+    "head-turn-left",
+    "right-end",
+    "left-end",
+    "spoken-wording",
+    "order"
+  ],
+  "textModuleIds": ["taslim-wording"],
+  "claimSlotIds": [
+    "taslim-general",
+    "taslim-head-turn-right",
+    "taslim-head-turn-left",
+    "taslim-right-end-position",
+    "taslim-left-end-position",
+    "taslim-spoken-wording",
+    "taslim-order"
+  ],
+  "femaleAssetRules": [
+    "niqab-identical",
+    "head-turn-no-face-exposure",
+    "no-facial-identity",
+    "loose-garment",
+    "no-body-contours"
+  ],
+  "variants": [],
+  "verificationStatus": "research",
+  "audioId": null,
+  "audioEnabled": false,
+  "audioVisible": false,
+  "note": "Rechts/Links: gleiches Character-Modell. Keine übertriebene KI-Kopfdrehung."
+}

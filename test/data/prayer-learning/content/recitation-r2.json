@@ -1,0 +1,68 @@
+{
+  "id": "fajr-r2-recitation-v1",
+  "stepId": "recitation",
+  "prayerId": "fajr",
+  "rakAh": 2,
+  "poseId": "qiyam",
+  "poseReuse": true,
+  "titleDe": "Rezitation",
+  "titleAr": "القراءة",
+  "instructionDe": null,
+  "arabic": null,
+  "transliteration": null,
+  "meaningDe": null,
+  "spokenText": null,
+  "doNotDuplicateQuranText": true,
+  "quranDatabaseReuse": true,
+  "quranRef": {
+    "type": "quran",
+    "surah": 1,
+    "ayahStart": 1,
+    "ayahEnd": 7
+  },
+  "quranSourcePath": "content/quran/001.json",
+  "relatedRecitationContentId": "fajr-r1-recitation-v1",
+  "modules": {
+    "alFatihah": {
+      "id": "fajr-r2-recitation-al-fatihah-ref",
+      "status": "research",
+      "approved": false,
+      "quranRef": { "type": "quran", "surah": 1, "ayahStart": 1, "ayahEnd": 7 },
+      "sourceClaimIds": ["recitation-al-fatihah"]
+    },
+    "additionalRecitation": {
+      "id": "fajr-r2-recitation-additional",
+      "status": "research",
+      "approved": false,
+      "note": "Rakʿah-2-spezifisches Mapping – nicht automatisch identisch mit R1 erzwingen",
+      "quranRef": null,
+      "sourceClaimIds": ["recitation-additional-quran"]
+    }
+  },
+  "sourceClaimIds": [
+    "recitation-standing",
+    "recitation-al-fatihah",
+    "recitation-additional-quran",
+    "recitation-order",
+    "recitation-transition-ruku"
+  ],
+  "relatedClaimSlotIds": [
+    "recitation-standing",
+    "recitation-al-fatihah",
+    "recitation-additional-quran",
+    "recitation-order",
+    "recitation-transition-ruku"
+  ],
+  "variantIds": [],
+  "status": "research",
+  "reviewPass1": false,
+  "reviewPass2": false,
+  "approved": false,
+  "audioEnabled": false,
+  "audioVisible": false,
+  "audioPreload": false,
+  "revision": 1,
+  "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+  "phase": 11,
+  "notes": "Eigenes R2-Mapping; Qurʾān weiterhin aus bestehender DB, keine Textkopie."
+}
