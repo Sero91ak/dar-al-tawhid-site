@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "characters": {
+    "dar-prayer-male-v1": "male-v1.json",
+    "dar-prayer-female-v1": "female-v1.json"
+  },
+  "approvalGate": [
+    "characterConsistency",
+    "clothingReview",
+    "poseReview",
+    "reviewPass1",
+    "reviewPass2",
+    "sourceClaimIds.length>0"
+  ],
+  "visitorRequiresApproved": true,
+  "testPendingPlaceholderAllowed": true
+}
