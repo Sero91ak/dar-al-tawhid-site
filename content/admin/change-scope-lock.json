@@ -3186,6 +3186,17 @@
         "test/service-worker.js"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prayer-push-autonomous-repair-v1-2026-08-12",
+      "approvedBy": "user-explicit-push-autonomous-repair",
+      "note": "Regelauftrag: Push-Ausfall autonom reparieren (Selbstheilung <3min, Watchdog enger) für Prayer-Push",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "cloudflare/prayer-push-admin.js",
+        ".github/workflows/prayer-push.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

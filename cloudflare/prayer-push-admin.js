@@ -146,6 +146,62 @@ function schedulerDeps(githubGet, githubPut, base64ToUtf8, utf8ToBase64) {
   return { githubGet, githubPut, base64ToUtf8, utf8ToBase64 };
 }
 
+function waitMs(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function runPrayerSchedulerWithAutoRepair(env, deps, options = {}) {
+  const maxAttempts = Math.max(1, Number(options.maxAttempts || 3));
+  const retryDelaysMs = Array.isArray(options.retryDelaysMs) ? options.retryDelaysMs : [25000, 85000];
+  const force = options.force !== false;
+  const subscriptionId = options.subscriptionId || "";
+  const attempts = [];
+  let lastResult = null;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    lastResult = await runPrayerPushScheduler(
+      env,
+      { force, subscriptionId },
+      schedulerDeps(deps.githubGet, deps.githubPut, deps.base64ToUtf8, deps.utf8ToBase64)
+    );
+
+    attempts.push({
+      attempt,
+      ok: Boolean(lastResult?.ok),
+      schedulerStatus: lastResult?.schedulerStatus || null,
+      reason: lastResult?.reason || null,
+      lastError: lastResult?.lastError || null,
+      scheduled: Number(lastResult?.scheduled || 0),
+      usersWithLocation: Number(lastResult?.usersWithLocation || 0)
+    });
+
+    if (lastResult?.ok) {
+      break;
+    }
+
+    if (attempt < maxAttempts) {
+      const delayMs = Math.max(0, Number(retryDelaysMs[attempt - 1] || 0));
+      if (delayMs > 0) {
+        await waitMs(delayMs);
+      }
+    }
+  }
+
+  return {
+    ...(lastResult || { ok: false, schedulerStatus: "error", reason: "Prayer-Scheduler ohne Ergebnis beendet" }),
+    autonomousRepair: {
+      enabled: true,
+      maxAttempts,
+      attemptsUsed: attempts.length,
+      recovered: Boolean(lastResult?.ok),
+      totalDurationMs: retryDelaysMs
+        .slice(0, Math.max(0, attempts.length - 1))
+        .reduce((sum, delay) => sum + Math.max(0, Number(delay || 0)), 0),
+      attempts
+    }
+  };
+}
+
 export async function triggerPrayerWorkflowForSubscription(env, subscriptionId, deps = {}) {
   const sid = String(subscriptionId || "").trim();
   if (!sid) return { triggered: false, reason: "Subscription-ID fehlt" };
@@ -177,9 +233,11 @@ export async function runPrayerSchedulerNow(env, deps = {}, options = {}) {
 }
 
 export async function ensurePrayerSchedulerFresh(env, githubGet, base64ToUtf8, githubPut, utf8ToBase64, options = {}) {
-  if (options.force) {
-    return runPrayerSchedulerNow(env, { githubGet, githubPut, base64ToUtf8, utf8ToBase64 }, { force: true });
-  }
-
-  return runPrayerSchedulerNow(env, { githubGet, githubPut, base64ToUtf8, utf8ToBase64 }, { force: true });
+  const deps = { githubGet, githubPut, base64ToUtf8, utf8ToBase64 };
+  return runPrayerSchedulerWithAutoRepair(env, deps, {
+    force: true,
+    maxAttempts: 3,
+    retryDelaysMs: [25000, 85000],
+    ...options
+  });
 }
