@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-12T13:26:03.561Z",
+  "updatedAt": "2026-08-12T13:31:06.921Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-12T13:26:03.561Z",
+  "lastCronRun": "2026-08-12T13:31:06.921Z",
   "nextPlannedPush": {
     "prayer": "ʿAṣr",
     "key": "asr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-12T15:22:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-12T13:10:59.038Z",
-  "windowEnd": "2026-08-13T15:25:59.038Z",
+  "windowStart": "2026-08-12T13:16:02.585Z",
+  "windowEnd": "2026-08-13T15:31:02.585Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 27,
@@ -28,10 +28,10 @@
   "usersWithLocation": 27,
   "usersWithActivePush": 27,
   "locationGroups": 5,
-  "scheduled": 54,
-  "recipients": 296,
+  "scheduled": 55,
+  "recipients": 297,
   "skippedPast": 70,
-  "skippedWindow": 76,
+  "skippedWindow": 75,
   "duplicates": 1,
   "errors": 0,
   "lastError": null,
@@ -68,7 +68,7 @@
         "time": "17:38",
         "advance": {
           "status": "geplant",
-          "recipients": 53
+          "recipients": 54
         },
         "entry": {
           "status": "geplant",
@@ -145,7 +145,7 @@
       "time": "17:38",
       "advance": {
         "status": "geplant",
-        "recipients": 53
+        "recipients": 54
       },
       "entry": {
         "status": "geplant",
@@ -685,6 +685,15 @@
       "sendAfter": "2026-08-13T11:31:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "ʿAṣr",
+      "key": "asr",
+      "mode": "advance",
+      "time": "17:36",
+      "sendAfter": "2026-08-13T15:31:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
     }
   ],
   "skippedPastDetails": [
@@ -1034,7 +1043,7 @@
       "prayer": "asr",
       "mode": "advance",
       "recipients": 19,
-      "response": "{\"id\":\"a2144864-e6ed-412f-8c66-09d415cf19fb\",\"external_id\":\"726ffc6f-9631-41f2-908c-dff92c38e3fc\",\"errors\":{\"invalid_player_ids\":[\"0b13265d-3f34-4c9c-bcaf-85743bb8a7db\",\"19ab451c-bf40-4b43-a99e-2cef48"
+      "response": "{\"id\":\"a2144864-e6ed-412f-8c66-09d415cf19fb\",\"external_id\":\"726ffc6f-9631-41f2-908c-dff92c38e3fc\"}"
     },
     {
       "prayer": "asr",
