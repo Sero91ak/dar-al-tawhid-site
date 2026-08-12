@@ -1,16 +1,16 @@
 {
-  "ok": false,
+  "ok": true,
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "worker-local",
-  "schedulerStatus": "error",
-  "updatedAt": "2026-08-12T10:00:59.696Z",
+  "schedulerStatus": "success",
+  "updatedAt": "2026-08-12T10:11:02.186Z",
   "usersChecked": 12,
   "duaCandidates": 0,
-  "recCandidates": 11,
+  "recCandidates": 0,
   "sent": 0,
   "skipped": 0,
-  "duplicates": 12,
-  "errors": 11,
+  "duplicates": 23,
+  "errors": 0,
   "dailyContentDate": "2026-08-12",
   "currentRecommendation": {
     "id": "hukm-muhakamah-verpflichtende-verse-422",
@@ -24,15 +24,5 @@
     "category": "Guter Tod & Rechtschaffene"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "recommendation",
-      "batch": true,
-      "count": 11,
-      "contentId": "hukm-muhakamah-verpflichtende-verse-422",
-      "recipients": "819f6c23-7c33-43e2-8204-2c2e8bd1ac90",
-      "ok": false,
-      "invalid": 2
-    }
-  ]
+  "responses": []
 }
