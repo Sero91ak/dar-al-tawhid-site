@@ -1,0 +1,71 @@
+{
+  "id": "taslim-main-v1",
+  "stepId": "taslim",
+  "prayerId": null,
+  "reusableAcrossPrayers": true,
+  "titleDe": "Taslīm",
+  "titleAr": "التسليم",
+  "instructionDe": null,
+  "instructionText": null,
+  "arabic": null,
+  "transliteration": null,
+  "meaningDe": null,
+  "spokenText": null,
+  "sides": {
+    "right": {
+      "titleDe": "Taslīm nach rechts",
+      "titleAr": "التسليم",
+      "poseId": "taslim-right",
+      "status": "research",
+      "approved": false
+    },
+    "left": {
+      "titleDe": "Taslīm nach links",
+      "titleAr": "التسليم",
+      "poseId": "taslim-left",
+      "status": "research",
+      "approved": false
+    }
+  },
+  "sourceClaimIds": [
+    "taslim-general",
+    "taslim-head-turn-right",
+    "taslim-head-turn-left",
+    "taslim-right-end-position",
+    "taslim-left-end-position",
+    "taslim-spoken-wording",
+    "taslim-order"
+  ],
+  "relatedClaimSlotIds": [
+    "taslim-general",
+    "taslim-head-turn-right",
+    "taslim-head-turn-left",
+    "taslim-right-end-position",
+    "taslim-left-end-position",
+    "taslim-spoken-wording",
+    "taslim-order"
+  ],
+  "variantIds": [],
+  "defaultVariantId": null,
+  "status": "research",
+  "reviewPass1": false,
+  "reviewPass2": false,
+  "approved": false,
+  "audioId": null,
+  "audioEnabled": false,
+  "audioVisible": false,
+  "audioPreload": false,
+  "revision": 3,
+  "contentHash": null,
+  "selfApproved": false,
+  "aiGenerated": false,
+  "integrationBlock": "RakAh 2 + Tashahhud + Taslim",
+  "phase": 11,
+  "notes": "Phase 11: Ein Content für rechts/links und spätere Gebete. Keine übertriebene Kopfdrehung ohne Quelle.",
+  "review": {
+    "contentReview": { "status": "pending", "reviewedAt": null, "reviewer": null },
+    "sourceReview": { "status": "pending", "reviewedAt": null, "reviewer": null },
+    "reviewPass1": { "passed": false, "reviewedAt": null, "reviewer": null },
+    "reviewPass2": { "passed": false, "reviewedAt": null, "reviewer": null }
+  }
+}
