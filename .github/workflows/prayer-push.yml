@@ -3,7 +3,7 @@ name: Prayer Push Watchdog
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "*/5 * * * *"
 
 permissions:
   contents: read
@@ -60,15 +60,28 @@ jobs:
       - name: Verify fresh status after watchdog
         if: steps.status.outputs.fresh != 'true'
         run: |
-          sleep 5
-          STATUS="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/api/prayer/status")"
-          echo "$STATUS"
-          STATUS_JSON="$STATUS" node <<'NODE'
-          const response = JSON.parse(process.env.STATUS_JSON || "{}");
-          const updatedAt = Date.parse(response?.status?.updatedAt || "");
-          const ageMinutes = Number.isFinite(updatedAt) ? (Date.now() - updatedAt) / 60000 : Infinity;
-          if (response?.ok !== true || ageMinutes > 12) {
-            throw new Error(`Gebets-Push-Status weiterhin veraltet: ${ageMinutes.toFixed(1)} Minuten`);
-          }
-          console.log(`Gebets-Push-Status aktuell: ${response.status.updatedAt} (${response.source || "unbekannte Quelle"})`);
-          NODE
+          ATTEMPT=1
+          MAX_ATTEMPTS=6
+          while [ "$ATTEMPT" -le "$MAX_ATTEMPTS" ]; do
+            STATUS="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/api/prayer/status" || true)"
+            echo "$STATUS"
+            STATUS_JSON="$STATUS" node <<'NODE'
+            const response = JSON.parse(process.env.STATUS_JSON || "{}");
+            const updatedAt = Date.parse(response?.status?.updatedAt || "");
+            const ageMinutes = Number.isFinite(updatedAt) ? (Date.now() - updatedAt) / 60000 : Infinity;
+            const healthy = response?.ok === true && ageMinutes <= 12 && String(response?.status?.schedulerStatus || "") !== "error";
+            if (!healthy) {
+              process.exit(1);
+            }
+            console.log(`Gebets-Push-Status aktuell: ${response.status.updatedAt} (${response.source || "unbekannte Quelle"})`);
+            NODE
+            if [ $? -eq 0 ]; then
+              exit 0
+            fi
+            if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then
+              sleep 30
+            fi
+            ATTEMPT=$((ATTEMPT + 1))
+          done
+          echo "::error::Gebets-Push-Status blieb nach autonomer Reparatur veraltet"
+          exit 1
