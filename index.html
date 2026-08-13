@@ -25694,7 +25694,7 @@ function bindEvents(){
     window.__darQuranFocusSearchPending=false;
     setTimeout(()=>{const input=$("quranSearchInput");if(!input)return;try{input.focus();if(typeof input.setSelectionRange==="function")input.setSelectionRange(input.value.length,input.value.length)}catch(e){}},80);
   }
-  document.querySelectorAll("[data-quran-open-font]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();ev.stopPropagation();const toggle=document.querySelector("[data-reading-panel-toggle]");const target=toggle||document.querySelector(".quran-translit-picker");if(toggle)toggle.click();if(target){requestAnimationFrame(()=>{const top=Math.max(0,target.getBoundingClientRect().top+window.scrollY-scrollChromeOffset()-12);if(window.DARScrollManager?.stableScrollTo)window.DARScrollManager.stableScrollTo(top,{force:true});else window.scrollTo({top,behavior:"auto"})})}}});
+  document.querySelectorAll("[data-quran-open-font]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();ev.stopPropagation();openQuranDisplaySheet()}});
   if(currentRoute.view==="quran-surah"){
     const parts=String(currentRoute.value||"").split("/");
     const sid=Number(parts[0]);
@@ -25828,6 +25828,27 @@ const NAV_LONGPRESS_MENU_HTML={
 };
 
 function triggerLightHapticFeedback(){
+  try{
+    const tg=window?.Telegram?.WebApp?.HapticFeedback;
+    if(tg&&typeof tg.impactOccurred==="function"){
+      tg.impactOccurred("light");
+      return;
+    }
+  }catch(e){}
+  try{
+    const cap=window?.Capacitor?.Plugins?.Haptics;
+    if(cap&&typeof cap.impact==="function"){
+      cap.impact({style:"LIGHT"});
+      return;
+    }
+  }catch(e){}
+  try{
+    const wk=window?.webkit?.messageHandlers?.haptic;
+    if(wk&&typeof wk.postMessage==="function"){
+      wk.postMessage({style:"light"});
+      return;
+    }
+  }catch(e){}
   try{
     if(typeof navigator.vibrate==="function"){
       navigator.vibrate(12);
