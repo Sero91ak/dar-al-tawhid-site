@@ -2430,6 +2430,82 @@ function suggestFilename(markdown, nextNumber) {
   return `${slugify(category)}-${String(nextNumber).padStart(3, "0")}-${slugify(title)}.md`;
 }
 
+const HASHTAG_CATEGORY_RULES = [
+  { tags: ["aqida", "aqidah", "akida", "iman"], category: "ʿAqīdah", topic: "ʿAqīdah" },
+  { tags: ["tawhid", "tauhid"], category: "Tawḥīd", topic: "Tawḥīd" },
+  { tags: ["sunnah", "sunna"], category: "Sunnah", topic: "Sunnah" },
+  { tags: ["quran", "quranwissen", "tafsir"], category: "Qurʾān", topic: "Qurʾān" },
+  { tags: ["hadith", "hadithe", "athar"], category: "Hadith", topic: "Hadith" },
+  { tags: ["fiqh", "fatwa"], category: "Fiqh", topic: "Fiqh" },
+  { tags: ["dua", "dua", "adhkar", "dhikr"], category: "Duʿāʾ", topic: "Duʿāʾ" },
+  { tags: ["adab", "akhlaq"], category: "Adab", topic: "Adab" },
+  { tags: ["manhaj", "salaf"], category: "Manhaj", topic: "Manhaj" },
+  { tags: ["familie", "ehe", "kinder"], category: "Familie", topic: "Familie" },
+  { tags: ["bibliothek", "buch", "books"], category: "Bibliothek", topic: "Bibliothek" },
+  { tags: ["quelle", "quellen", "quellenbibliothek"], category: "Quellenbibliothek", topic: "Quellenbibliothek" }
+];
+
+function normalizeHashtagToken(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "")
+    .trim();
+}
+
+function extractHashtagTokens(markdown) {
+  const src = String(markdown || "");
+  const out = new Set();
+  const re = /(^|[\s(])#([^\s#()[\]{}"'`.,;:!?/\\]+)/g;
+  let match;
+  while ((match = re.exec(src))) {
+    const token = normalizeHashtagToken(match[2]);
+    if (token) out.add(token);
+  }
+  return out;
+}
+
+function inferCategoryTopicFromHashtags(markdown) {
+  const tokens = extractHashtagTokens(markdown);
+  if (!tokens.size) return null;
+  for (const rule of HASHTAG_CATEGORY_RULES) {
+    for (const tag of rule.tags) {
+      if (tokens.has(normalizeHashtagToken(tag))) {
+        return { category: rule.category, topic: rule.topic };
+      }
+    }
+  }
+  return null;
+}
+
+function upsertFrontmatterValue(head, key, value) {
+  const safe = String(value || "").trim();
+  if (!safe) return head;
+  const lineRe = new RegExp(`^${key}:\\s*(.*)$`, "m");
+  const match = String(head || "").match(lineRe);
+  if (!match) return `${String(head || "").trimEnd()}\n${key}: "${safe}"`.trim();
+  const current = String(match[1] || "").replace(/^["']|["']$/g, "").trim();
+  if (current) return head;
+  return String(head).replace(lineRe, `${key}: "${safe}"`);
+}
+
+function applyHashtagCategoryInference(markdown) {
+  const out = String(markdown || "");
+  const fm = out.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+  if (!fm) return out;
+  const existingCategory = frontmatterValue(out, "category");
+  const existingTopic = frontmatterValue(out, "topic");
+  if (existingCategory && existingTopic) return out;
+  const inferred = inferCategoryTopicFromHashtags(out);
+  if (!inferred) return out;
+  let head = String(fm[1] || "");
+  if (!existingCategory) head = upsertFrontmatterValue(head, "category", inferred.category);
+  if (!existingTopic) head = upsertFrontmatterValue(head, "topic", inferred.topic);
+  const body = String(fm[2] || "").trimStart();
+  return `---\n${head}\n---\n\n${body}`.trimEnd() + "\n";
+}
+
 function sanitizeFilename(filename) {
   const clean = slugify(String(filename || "").replace(/\.md$/i, ""));
   const finalName = `${clean}.md`;
@@ -2445,6 +2521,7 @@ function sanitizeUpdateId(value) {
 
 function normalizeMarkdownForUpload(markdown, nextNumber) {
   let out = repairYamlFrontmatter(repairMarkdownStructure(markdown));
+  out = applyHashtagCategoryInference(out);
   const iso = new Date().toISOString().replace(/\.\d{3}Z$/, ".000Z");
   if (/^date:\s*.*$/m.test(out)) out = out.replace(/^date:\s*.*$/m, `date: "${iso}"`);
   let id = stripYamlQuotes(frontmatterValue(out, "id"));
