@@ -12,6 +12,7 @@ Dieser Ordner ist die zentrale Ablage für alle nummerierten Quellen-Kurzlinks.
 - `shortlinks.json` → alle bisherigen Zuordnungen (`/q/<n>` -> Zielseite)
 - `next-number.txt` → nächste freie Nummer
 - `shortlink-template.html` → Vorlage für neue `q/<n>/index.html`
+- `register-shortlink.mjs` → erstellt automatisch neuen Kurzlink + Registry-Eintrag
 
 ## Pflichtdaten pro Linkeintrag (`shortlinks.json`)
 - `number` → fortlaufende Nummer
@@ -25,12 +26,22 @@ Dieser Ordner ist die zentrale Ablage für alle nummerierten Quellen-Kurzlinks.
 - `createdAt` → UTC-Zeitstempel
 
 ## Standardablauf für neuen Link
-1. Nummer aus `next-number.txt` nehmen (z. B. `2`).
-2. Neue Datei anlegen: `q/2/index.html` (auf Basis `shortlink-template.html`).
-3. `__NUMBER__` und `__TARGET_PATH__` ersetzen.
-4. Eintrag in `shortlinks.json` unter `links` ergänzen (inkl. Pflichtdaten).
-5. `next-number.txt` auf nächste Zahl setzen (`3`).
-6. Optional `q/index.html` auf den neuesten Link umstellen (falls gewünscht).
+1. Befehl ausführen:
+
+```bash
+node q/_registry/register-shortlink.mjs \
+  --target /quelle/meine-quellenseite/ \
+  --title "Kurztitel zur Aussage" \
+  --postReference statement-00X \
+  --summary "Kernaussage in 1 Satz" \
+  --source "Primärquelle in Kurzform"
+```
+
+2. Script erzeugt automatisch:
+   - `q/<nummer>/index.html`
+   - neuen Eintrag in `shortlinks.json`
+   - `next-number.txt` +1
+   - `q/index.html` zeigt auf den neuesten Kurzlink
 
 ## Kurzformat für Posts
 - Immer ohne Schema schreiben:
