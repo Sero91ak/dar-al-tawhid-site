@@ -77,18 +77,23 @@ Geschützt durch `content/admin/change-scope-lock.json` und `scripts/change-scop
 
 ## Quellenprüfung & DAR-AL-TAWḤĪD-Kurzlinks (streng – global und ohne Ausnahmen)
 
-Diese Regel ersetzt alle früheren Regeln, nach denen im veröffentlichten Inhalt einzelne Fremdquellen-Links oder der lange interne `/quelle/...`-Pfad sichtbar ausgegeben wurden.
+Diese Regel ersetzt alle früheren Regeln zu sichtbaren Quellenlinks in veröffentlichten DAR-AL-TAWḤĪD-Inhalten.
 
-- Die **strenge Quellenprüfung gilt überall**: WhatsApp, Telegram, Instagram, Bildbeiträge, normale Textbeiträge, Website-/GitHub-Beiträge, Kommentare/Widerlegungen und PDFs. Aussage, Zuschreibung, Werk, Fundstelle, Überlieferungsstatus und Direktbelege sind vor Veröffentlichung so streng wie für das jeweilige Format erforderlich zu prüfen.
-- Im **veröffentlichten, für Leser sichtbaren Inhalt** wird als anklickbarer Direktnachweis ausschließlich der kürzeste verifizierte DAR-AL-TAWḤĪD-Kurzlink unter `https://dar-al-tawhid.de/q...` verwendet.
-- Für den aktuell eingerichteten Ibn-Masʿūd-Nachweis ist der kürzeste öffentliche Link `https://dar-al-tawhid.de/q`.
+- Die **strenge Quellenprüfung gilt überall**: WhatsApp, Telegram, Instagram, Bildbeiträge, normale Textbeiträge, Website-/GitHub-Beiträge, Kommentare/Widerlegungen und PDFs. Aussage, Zuschreibung, Werk, Fundstelle, Überlieferungsstatus und Direktbelege sind vor Veröffentlichung streng zu prüfen.
+- Für sichtbare Quellen-Kurzlinks gilt ausschließlich das Schema `dar-al-tawhid.de/q/<nummer>`.
+- `https://` wird im veröffentlichten Beitrag **niemals ausgeschrieben**.
+- Die Nummerierung ist **streng fortlaufend**: `/q/1`, `/q/2`, `/q/3`, ...
+- Bereits vergebene Nummern werden **niemals wiederverwendet, überschrieben oder einer anderen Quelle/Aussage zugeordnet**.
+- Der aktuell bestehende Ibn-Masʿūd-Nachweis ist `dar-al-tawhid.de/q/1`. Der nächste neu anzulegende Quellen-Kurzlink beginnt daher mit `/q/2`, sofern nicht im Repository bereits eine höhere Nummer vergeben wurde; vor jeder Vergabe ist der tatsächliche höchste vorhandene `/q/<nummer>`-Eintrag zu prüfen.
+- In jedem Quellen-Post wird der passende Kurzlink direkt mit ausgegeben.
+- Bei genau einer Quelle lautet die Ausgabe exakt: `Kurzlink: dar-al-tawhid.de/q/<nummer>`.
+- Bei mehreren getrennten Quellen in einem Post werden fortlaufende Nummern vergeben und sichtbar so ausgegeben: `Quelle 1: dar-al-tawhid.de/q/<n>`, `Quelle 2: dar-al-tawhid.de/q/<n+1>` usw. Jede Nummer gehört dauerhaft genau zu ihrem jeweiligen Nachweis.
 - **Keine sichtbaren Fremd-URLs** im Beitrag oder sonstigen veröffentlichten Lesertext: keine Dorar-, Islamweb-, Shamela-, al-Maktaba-, Ketabonline-, Waqfeya-, Archive.org-, Turāth-, Tafsir.app-, PDF-/Scan- oder sonstigen externen URLs.
-- Auch der lange interne Pfad `https://dar-al-tawhid.de/quelle/<slug>/` wird im veröffentlichten Beitrag nicht mehr ausgegeben. Er bleibt die interne DAR-AL-TAWḤĪD-Quellenseite hinter dem kurzen `/q...`-Alias.
-- Die Quellenzeile darf und soll weiterhin Werk, Band, Seite, Kapitel, Nummer, Überlieferungsstatus und sonstige genaue bibliographische Angaben nennen; die sichtbare anklickbare URL bleibt aber ausschließlich der eigene `/q...`-Kurzlink.
-- Der `/q...`-Kurzlink darf intern auf die eigene DAR-AL-TAWḤĪD-Quellenseite weiterleiten. Er darf **nicht direkt auf eine externe Quelle** umleiten.
-- Die interne DAR-AL-TAWḤĪD-Quellenseite ist die edle, kompakte Quellenkarte im freigegebenen gemeinsamen Design. Dort stehen Aussage, Sprecher/Überlieferer, genaue Fundstelle, Status, Isnād soweit vorgesehen, Branding, `by Serhat Abu Malik` sowie die Social-Verknüpfungen.
+- Auch der lange interne Pfad `dar-al-tawhid.de/quelle/<slug>/` wird im veröffentlichten Beitrag nicht ausgegeben. Er bleibt nur die interne DAR-AL-TAWḤĪD-Quellenseite hinter dem nummerierten `/q/<nummer>`-Alias.
+- Die Quellenzeile darf und soll Werk, Band, Seite, Kapitel, Nummer, Überlieferungsstatus und sonstige genaue bibliographische Angaben nennen; die sichtbare anklickbare URL bleibt ausschließlich der eigene nummerierte `/q/<nummer>`-Kurzlink.
+- Der `/q/<nummer>`-Kurzlink darf intern nur auf die eigene DAR-AL-TAWḤĪD-Quellenseite führen und **nicht direkt auf eine externe Quelle**.
+- Die interne DAR-AL-TAWḤĪD-Quellenseite bleibt die edle, kompakte Quellenkarte im freigegebenen gemeinsamen Design mit Aussage, Sprecher/Überlieferer, genauer Fundstelle, Status, Isnād soweit vorgesehen, Branding, `by Serhat Abu Malik` und Social-Verknüpfungen.
 - Erst auf dieser eigenen Quellenseite befinden sich die geprüften externen Nachweise als Buttons, z. B. Originalnachweis mit Textmarkierung, weiterer Textnachweis und PDF/Scan.
 - Externe Nachweise müssen nach Möglichkeit direkt auf die konkrete belegte Stelle führen (`#:~:text=…` bzw. `#page=…`). Allgemeine Start-, Such- oder Werkseiten gelten nicht als vollwertiger Direktnachweis, wenn eine genaue Stelle verfügbar ist.
-- Für **jeden neuen Inhalt** wird ein eigener, möglichst kurzer und eindeutiger `/q...`-Alias angelegt. Kein bestehender Kurzlink darf für eine andere Aussage wiederverwendet oder überschrieben werden.
-- Ein Kurzlink darf erst als fertig ausgegeben werden, wenn die zugrunde liegende Quellenseite erstellt, die Inhalte und Originalbelege geprüft und der öffentliche `/q...`-Link technisch verifiziert wurden.
+- Ein nummerierter Kurzlink darf erst als fertig ausgegeben werden, wenn seine Quellenseite erstellt, Inhalte und Originalbelege geprüft und der öffentliche `/q/<nummer>`-Link technisch verifiziert wurden.
 - Diese Regel ist **kanal-, format- und chatübergreifend** verbindlich und ersetzt ältere Beitrags- und Linkregeln, soweit sie ihr widersprechen.
