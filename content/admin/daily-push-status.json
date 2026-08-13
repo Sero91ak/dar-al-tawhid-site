@@ -3,11 +3,11 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-13T09:55:47.143Z",
+  "updatedAt": "2026-08-13T10:05:46.541Z",
   "usersChecked": 12,
   "duaCandidates": 0,
-  "recCandidates": 0,
-  "sent": 0,
+  "recCandidates": 11,
+  "sent": 11,
   "skipped": 0,
   "duplicates": 12,
   "errors": 0,
@@ -24,5 +24,15 @@
     "category": "Vergebung & Reue"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "recommendation",
+      "batch": true,
+      "count": 11,
+      "contentId": "malik-adab-vor-wissen-396",
+      "recipients": "7dc86290-0ad3-4ba0-9673-97b21d46bdef",
+      "ok": true,
+      "invalid": 0
+    }
+  ]
 }
