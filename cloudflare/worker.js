@@ -3374,6 +3374,36 @@ function parseTelegramTopicMap(env) {
   return out;
 }
 
+const TELEGRAM_TOPIC_ALIAS_GROUPS = (() => {
+  const groups = [];
+  for (const rule of HASHTAG_CATEGORY_RULES || []) {
+    const normalized = [...new Set((rule?.tags || []).map((tag) => normalizeTelegramTag(tag)).filter(Boolean))];
+    if (normalized.length > 1) groups.push(normalized);
+  }
+  // Zusätzliche häufige Schreibweisen/Transliterationen für stabile Zuordnung.
+  groups.push(["hadith", "hadithe", "hadit"]);
+  groups.push(["athar", "asar", "atar"]);
+  groups.push(["aqida", "aqidah", "akida"]);
+  groups.push(["tawhid", "tauhid"]);
+  groups.push(["dua", "dua", "adhkar", "dhikr"]);
+  return groups.map((group) => [...new Set(group.map((tag) => normalizeTelegramTag(tag)).filter(Boolean))]);
+})();
+
+function buildTelegramAliasLookup() {
+  const lookup = {};
+  for (const group of TELEGRAM_TOPIC_ALIAS_GROUPS) {
+    for (const tag of group) {
+      if (!lookup[tag]) lookup[tag] = [];
+      for (const alt of group) {
+        if (alt !== tag && !lookup[tag].includes(alt)) lookup[tag].push(alt);
+      }
+    }
+  }
+  return lookup;
+}
+
+const TELEGRAM_TOPIC_ALIAS_LOOKUP = buildTelegramAliasLookup();
+
 function extractHashtagsFromTelegramText(text) {
   const value = String(text || "");
   const tags = new Set();
@@ -3388,15 +3418,9 @@ function extractHashtagsFromTelegramText(text) {
 
 function resolveTelegramTopicThreadId(tags, topicMap, env) {
   const map = topicMap || {};
-  const aliases = {
-    hadith: ["athar", "atar", "hadit"],
-    hadit: ["hadith", "athar", "atar"],
-    athar: ["hadith", "hadit", "atar"],
-    atar: ["athar", "hadith", "hadit"]
-  };
   for (const tag of tags || []) {
     if (map[tag]) return map[tag];
-    for (const alt of aliases[tag] || []) {
+    for (const alt of TELEGRAM_TOPIC_ALIAS_LOOKUP[tag] || []) {
       if (map[alt]) return map[alt];
     }
   }
