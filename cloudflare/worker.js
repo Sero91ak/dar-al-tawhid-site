@@ -625,7 +625,8 @@ export default {
         "/api/admin/telegram/preview",
         "/api/admin/telegram/test",
         "/api/admin/telegram/send",
-        "/api/admin/telegram/status"
+        "/api/admin/telegram/status",
+        "/api/admin/telegram/route-last"
       ]);
       const pushPaths = new Set([
         "/api/admin/push/retry",
@@ -667,6 +668,14 @@ export default {
         const postId = String(url.searchParams.get("postId") || "").trim();
         const registry = await readTelegramPostsRegistry(env);
         return json({ ok: true, postId, status: postId ? registry.posts?.[postId] || null : registry }, cors);
+      }
+      if (url.pathname === "/api/admin/telegram/route-last") {
+        if (request.method !== "GET" && request.method !== "POST") return json({ ok: false, error: "GET oder POST required" }, cors, 405);
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const body = request.method === "POST" ? await request.json().catch(() => ({})) : {};
+        const result = await routeLatestTelegramChannelPost(env, { force: Boolean(body?.force) });
+        return json(result, cors, result.ok ? 200 : 503);
       }
 
       if (url.pathname === "/api/admin/push/status") {
@@ -848,6 +857,7 @@ export default {
     ctx.waitUntil(ensureZakatPricesFresh(env, { githubGet, githubPut, githubCommitBatch, base64ToUtf8 }));
     ctx.waitUntil(ensureFeedBackgroundsFresh(env, { githubGet, githubPut, githubCommitBatch, base64ToUtf8 }, { staging: true }));
     ctx.waitUntil(resumeStuckVideoStudioJobs(env, { githubGet, githubPut, githubCommitBatch, base64ToUtf8, utf8ToBase64 }));
+    ctx.waitUntil(routeLatestTelegramChannelPost(env, { silent: true }));
   }
 };
 
@@ -3313,6 +3323,78 @@ function telegramChannelId(env) {
   return String(env.TELEGRAM_CHANNEL_USERNAME || env.TELEGRAM_CHANNEL_ID || "@dar_al_tauhid").trim();
 }
 
+function telegramTopicsChatId(env) {
+  return String(
+    env.TELEGRAM_TOPICS_CHAT_ID ||
+      env.TELEGRAM_FORUM_CHAT_ID ||
+      env.TELEGRAM_TOPIC_CHAT_ID ||
+      ""
+  ).trim();
+}
+
+function isTelegramTopicRoutingEnabled(env) {
+  const raw = String(env.TELEGRAM_TOPIC_ROUTING_ENABLED || "1").trim().toLowerCase();
+  return raw === "1" || raw === "true" || raw === "yes" || raw === "on";
+}
+
+function normalizeTelegramTag(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "")
+    .trim();
+}
+
+function parseTelegramTopicMap(env) {
+  const defaults = {
+    athar: Number(env.TELEGRAM_TOPIC_ATHAR_THREAD_ID || 0),
+    hadith: Number(env.TELEGRAM_TOPIC_HADITH_THREAD_ID || 0),
+    aqidah: Number(env.TELEGRAM_TOPIC_AQIDAH_THREAD_ID || 0),
+    tawhid: Number(env.TELEGRAM_TOPIC_TAWHID_THREAD_ID || 0),
+    manhaj: Number(env.TELEGRAM_TOPIC_MANHAJ_THREAD_ID || 0),
+    adab: Number(env.TELEGRAM_TOPIC_ADAB_THREAD_ID || 0),
+    quran: Number(env.TELEGRAM_TOPIC_QURAN_THREAD_ID || 0),
+    fiqh: Number(env.TELEGRAM_TOPIC_FIQH_THREAD_ID || 0),
+    dua: Number(env.TELEGRAM_TOPIC_DUA_THREAD_ID || 0),
+    bibliothek: Number(env.TELEGRAM_TOPIC_LIBRARY_THREAD_ID || 0)
+  };
+  let parsed = {};
+  try {
+    parsed = JSON.parse(String(env.TELEGRAM_TOPIC_MAP_JSON || "{}")) || {};
+  } catch (_) {
+    parsed = {};
+  }
+  const out = {};
+  for (const [k, v] of Object.entries({ ...defaults, ...parsed })) {
+    const key = normalizeTelegramTag(k);
+    const threadId = Number(v);
+    if (key && Number.isFinite(threadId) && threadId > 0) out[key] = threadId;
+  }
+  return out;
+}
+
+function extractHashtagsFromTelegramText(text) {
+  const value = String(text || "");
+  const tags = new Set();
+  const re = /(^|[\s(])#([^\s#()[\]{}"'`.,;:!?/\\]+)/g;
+  let match;
+  while ((match = re.exec(value))) {
+    const token = normalizeTelegramTag(match[2]);
+    if (token) tags.add(token);
+  }
+  return [...tags];
+}
+
+function resolveTelegramTopicThreadId(tags, topicMap, env) {
+  const map = topicMap || {};
+  for (const tag of tags || []) {
+    if (map[tag]) return map[tag];
+  }
+  const fallback = Number(env.TELEGRAM_TOPIC_DEFAULT_THREAD_ID || 0);
+  return Number.isFinite(fallback) && fallback > 0 ? fallback : 0;
+}
+
 function siteOrigin(env) {
   return String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
 }
@@ -3606,5 +3688,79 @@ async function sendTelegramPost(env, input) {
     };
     if (postId) await writeTelegramPostStatus(env, postId, fail).catch(() => null);
     return { sent: false, skipped: false, ...fail };
+  }
+}
+
+async function routeLatestTelegramChannelPost(env, { force = false, silent = false } = {}) {
+  try {
+    if (!isTelegramTopicRoutingEnabled(env)) {
+      return { ok: true, skipped: true, reason: "Telegram-Topic-Routing deaktiviert" };
+    }
+    if (!telegramBotToken(env)) {
+      return { ok: false, skipped: true, reason: "TELEGRAM_BOT_TOKEN fehlt" };
+    }
+    const targetChatId = telegramTopicsChatId(env);
+    if (!targetChatId) {
+      return { ok: false, skipped: true, reason: "TELEGRAM_TOPICS_CHAT_ID fehlt" };
+    }
+
+    const updates = await telegramApiCall(env, "getUpdates", {
+      limit: 100,
+      allowed_updates: ["channel_post"]
+    });
+    const list = Array.isArray(updates) ? updates : [];
+    const latest = [...list]
+      .reverse()
+      .find((u) => u && u.channel_post && (u.channel_post.text || u.channel_post.caption));
+    if (!latest?.channel_post) {
+      return { ok: true, skipped: true, reason: "Kein channel_post gefunden" };
+    }
+
+    const post = latest.channel_post;
+    const sourceChatId = post.chat?.id;
+    const messageId = post.message_id;
+    const text = String(post.text || post.caption || "").trim();
+    const tags = extractHashtagsFromTelegramText(text);
+    const topicMap = parseTelegramTopicMap(env);
+    const threadId = resolveTelegramTopicThreadId(tags, topicMap, env);
+    if (!threadId) {
+      return { ok: false, skipped: true, reason: "Kein Thread-Mapping für Hashtag", tags };
+    }
+    const routeKey = `route:${sourceChatId}:${messageId}:${threadId}`;
+    const registry = await readTelegramPostsRegistry(env);
+    if (!force && registry.posts?.[routeKey]?.status === "sent") {
+      return { ok: true, skipped: true, reason: "Bereits geroutet", routeKey, tags, threadId };
+    }
+
+    const copied = await telegramApiCall(env, "copyMessage", {
+      chat_id: targetChatId,
+      from_chat_id: sourceChatId,
+      message_id: messageId,
+      message_thread_id: threadId
+    });
+    await writeTelegramPostStatus(env, routeKey, {
+      status: "sent",
+      telegramStatus: "sent",
+      sourceChatId,
+      sourceMessageId: messageId,
+      targetChatId,
+      targetThreadId: threadId,
+      copiedMessageId: copied?.message_id || null,
+      hashtags: tags
+    });
+    return {
+      ok: true,
+      sent: true,
+      routeKey,
+      sourceChatId,
+      sourceMessageId: messageId,
+      targetChatId,
+      targetThreadId: threadId,
+      hashtags: tags
+    };
+  } catch (error) {
+    if (!silent) return { ok: false, sent: false, error: error?.message || String(error) };
+    console.error("telegram topic routing failed:", error?.message || error);
+    return { ok: false, sent: false, error: error?.message || String(error) };
   }
 }
