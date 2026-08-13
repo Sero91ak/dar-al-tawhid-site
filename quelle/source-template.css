@@ -56,8 +56,8 @@ body{
   z-index:1;
 }
 .brand-logo{
-  width:60px;
-  height:60px;
+  width:68px;
+  height:68px;
   border-radius:50%;
   border:1px solid var(--line);
   background:#f9f2e6;
@@ -249,6 +249,7 @@ body{
 @media (min-width:560px){
   .source-page{padding-left:18px;padding-right:18px}
   .source-header,.source-card,.social{border-radius:24px}
+  .brand-logo{width:74px;height:74px}
   .source-speaker{font-size:20px}
   .source-quote{font-size:22px}
 }
