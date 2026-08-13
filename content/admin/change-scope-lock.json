@@ -3219,6 +3219,17 @@
         "quelle/source-template.css"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "quelle-shortlink-q-v1-2026-08-13",
+      "approvedBy": "user-explicit-quelle-short-link",
+      "note": "Sehr kurze interne Quellenseiten-Links über /q und /q/i bereitstellen",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "q/index.html",
+        "q/i/index.html"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
