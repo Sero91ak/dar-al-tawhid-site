@@ -268,12 +268,15 @@ body{
 .social-link.insta{
   background:radial-gradient(circle at 30% 110%,#fdf497 0,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285AEB 90%);
 }
-.social-link.wa{background:#25D366}
+.social-link.wa{
+  background:linear-gradient(180deg,#5cf06b 0%,#25D366 100%);
+  border-color:rgba(37,211,102,.75);
+}
 .social-link.web{background:#5f5f5f}
 .social-link.web svg{display:none}
 .social-link.web .web-emoji{
   display:block;
-  font-size:20px;
+  font-size:21px;
   line-height:1;
 }
 .source-footnote{
