@@ -25824,11 +25824,25 @@ let quickAccessDocListenersBound=false;
 
 const NAV_LONGPRESS_MENU_HTML={
   more:`<button type="button" id="quickAccessOrientBtn" class="quick-action" role="menuitem" data-qa-action="orient" aria-label="Orientierung" title="Orientierung"><span class="quick-action-emoji" aria-hidden="true">🧭</span></button><button type="button" id="quickAccessSavedBtn" class="quick-action" role="menuitem" data-qa-action="saved" aria-label="Merkliste" title="Merkliste"><span class="quick-action-emoji" aria-hidden="true">❤️</span><span id="quickAccessSavedBadge" class="quick-action-badge" hidden>0</span></button><button type="button" id="quickAccessRemindBtn" class="quick-action" role="menuitem" data-qa-action="remind" aria-label="Erinnerungen" title="Erinnerungen"><span class="quick-action-emoji" aria-hidden="true">🔔</span><span id="quickAccessRemindStatus" class="quick-action-dot" hidden></span></button>`,
-  quran:`<button type="button" id="quickAccessQuranContinueBtn" class="quick-action" role="menuitem" data-qa-action="continue-reading" aria-label="Weiterlesen" title="Weiterlesen"><span class="quick-action-emoji" aria-hidden="true">📖</span></button><button type="button" id="quickAccessQuranSearchBtn" class="quick-action" role="menuitem" data-qa-action="quran-search" aria-label="Durchsuchen" title="Durchsuchen"><span class="quick-action-emoji" aria-hidden="true">🔍</span></button><button type="button" id="quickAccessQuranBookmarksBtn" class="quick-action" role="menuitem" data-qa-action="quran-bookmarks" aria-label="Lesezeichen" title="Lesezeichen"><span class="quick-action-emoji" aria-hidden="true">🔖</span></button>`
+  quran:`<button type="button" id="quickAccessQuranContinueBtn" class="quick-action" role="menuitem" data-qa-action="continue-reading" aria-label="Weiterlesen" title="Weiterlesen"><span class="quick-action-emoji" aria-hidden="true">📖</span></button><button type="button" id="quickAccessQuranTopicsBtn" class="quick-action" role="menuitem" data-qa-action="quran-topics" aria-label="Themen" title="Themen"><span class="quick-action-emoji" aria-hidden="true">🗂️</span></button><button type="button" id="quickAccessQuranSearchBtn" class="quick-action" role="menuitem" data-qa-action="quran-search" aria-label="Durchsuchen" title="Durchsuchen"><span class="quick-action-emoji" aria-hidden="true">🔍</span></button>`
 };
 
 function triggerLightHapticFeedback(){
-  try{if(navigator.vibrate)navigator.vibrate(12)}catch(e){}
+  try{
+    if(typeof navigator.vibrate==="function"){
+      navigator.vibrate(12);
+      return;
+    }
+  }catch(e){}
+}
+
+function triggerHoldHapticFeedback(){
+  triggerLightHapticFeedback();
+  try{
+    if(typeof navigator.vibrate==="function"){
+      setTimeout(()=>{try{navigator.vibrate(8)}catch(e){}},40);
+    }
+  }catch(e){}
 }
 
 function navLongPressHintKey(profile){
@@ -26013,6 +26027,10 @@ function openQuranBookmarksFromQuickAccess(){
   navigate("quran");
 }
 
+function openQuranTopicsFromQuickAccess(){
+  navigate("quran-topic");
+}
+
 function openQuranContinueFromQuickAccess(){
   const preferred=typeof getPreferredQuranProgress==="function"?getPreferredQuranProgress():null;
   if(preferred&&preferred.surahNumber){
@@ -26034,6 +26052,7 @@ function runQuickAccessAction(kind,btn){
     if(kind==="saved"){navigate("saved");return}
     if(kind==="remind"){navigate("more");setTimeout(()=>{try{document.getElementById("prayerPushAccordionToggle")?.click()}catch(e){}},180);return}
     if(kind==="continue-reading"){openQuranContinueFromQuickAccess();return}
+    if(kind==="quran-topics"){openQuranTopicsFromQuickAccess();return}
     if(kind==="quran-search"){focusQuranSearchFromQuickAccess();return}
     if(kind==="quran-bookmarks"){openQuranBookmarksFromQuickAccess();return}
   };
@@ -26076,6 +26095,7 @@ function bindNavLongPressTrigger(btn,profile){
     localLongPress=true;
     longPressTriggered=true;
     suppressNextClick();
+    triggerHoldHapticFeedback();
     openQuickAccessMenu(btn,menuProfile);
   };
 
