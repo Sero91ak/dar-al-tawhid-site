@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-13T04:30:48.493Z",
+  "updatedAt": "2026-08-13T04:50:50.345Z",
   "provider": "aurumrates.com",
   "active": true,
   "gold": {
     "metal": "gold",
     "currency": "EUR",
-    "pricePerOunce": 3856.58,
-    "pricePerGram": 123.99,
+    "pricePerOunce": 3859.01,
+    "pricePerGram": 124.07,
     "nisabGrams": 85,
-    "nisabEur": 10539.15,
+    "nisabEur": 10545.95,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-08-13T04:30:48.493Z",
+    "fetchedAt": "2026-08-13T04:50:50.345Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
@@ -21,23 +21,33 @@
   "silver": {
     "metal": "silver",
     "currency": "EUR",
-    "pricePerOunce": 56.65,
+    "pricePerOunce": 56.7,
     "pricePerGram": 1.82,
     "nisabGrams": 595,
     "nisabEur": 1082.9,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-08-13T04:30:48.493Z",
+    "fetchedAt": "2026-08-13T04:50:50.345Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
     "adminNote": ""
   },
   "standardNisabEur": 1082.9,
-  "lastSuccessAt": "2026-08-13T04:30:48.493Z",
+  "lastSuccessAt": "2026-08-13T04:50:50.345Z",
   "lastError": "",
-  "lastFetchAt": "2026-08-13T04:30:48.493Z",
+  "lastFetchAt": "2026-08-13T04:50:50.345Z",
   "fetchLogs": [
+    {
+      "id": "log-1786596650345",
+      "provider": "aurumrates.com",
+      "status": "ok",
+      "errorMessage": "",
+      "fetchedAt": "2026-08-13T04:50:50.345Z",
+      "durationMs": 544,
+      "goldPerGram": 124.07,
+      "silverPerGram": 1.82
+    },
     {
       "id": "log-1786595448493",
       "provider": "aurumrates.com",
@@ -526,16 +536,6 @@
       "fetchedAt": "2026-08-12T12:01:02.835Z",
       "durationMs": 551,
       "goldPerGram": 124.61,
-      "silverPerGram": 1.85
-    },
-    {
-      "id": "log-1786534263217",
-      "provider": "aurumrates.com",
-      "status": "ok",
-      "errorMessage": "",
-      "fetchedAt": "2026-08-12T11:31:03.217Z",
-      "durationMs": 537,
-      "goldPerGram": 124.53,
       "silverPerGram": 1.85
     }
   ]
