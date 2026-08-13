@@ -3230,6 +3230,17 @@
         "q/_registry/"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "last-post-theme-athar-v1-2026-08-13",
+      "approvedBy": "user-explicit-last-post-to-themes",
+      "note": "Letzten Beitrag in Themenbereich einsortieren (Āthār) und Index live aktualisieren",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/posts/athar-459-wissen-verlangt-handeln.md",
+        "content/posts/posts-index.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
