@@ -9270,10 +9270,19 @@ body.quick-menu-open .view{
   35%{box-shadow:0 0 0 2px rgba(239,215,142,.38),0 0 16px 3px rgba(239,215,142,.24)}
   100%{box-shadow:0 0 0 0 rgba(239,215,142,.00),0 0 0 0 rgba(239,215,142,.00)}
 }
+.bottom-nav-btn.is-hold-arming{
+  border-radius:14px!important;
+  transform:scale(1.02)!important;
+  filter:brightness(1.12)!important;
+  box-shadow:0 0 0 1px rgba(239,215,142,.36),0 0 14px 2px rgba(239,215,142,.20)!important;
+  transition:transform .16s ease,filter .16s ease,box-shadow .16s ease!important;
+}
 .bottom-nav-btn.is-hold-feedback{
   border-radius:14px!important;
-  animation:bottomNavHoldPulse .34s ease-out 1!important;
-  filter:brightness(1.16)!important;
+  transform:scale(1.06)!important;
+  animation:bottomNavHoldPulse .62s ease-out 2!important;
+  filter:brightness(1.26)!important;
+  box-shadow:0 0 0 3px rgba(239,215,142,.52),0 0 24px 6px rgba(239,215,142,.34)!important;
 }
 
 /* MEHR_LONGPRESS_QUICKACCESS_CSS_END */
@@ -26131,6 +26140,7 @@ function bindNavLongPressTrigger(btn,profile){
   const cancelLongPress=()=>{
     if(longPressTimer){clearTimeout(longPressTimer);longPressTimer=null}
     btn.classList.remove("is-pressed");
+    btn.classList.remove("is-hold-arming");
     btn.classList.remove("is-hold-feedback");
   };
 
@@ -26143,8 +26153,9 @@ function bindNavLongPressTrigger(btn,profile){
     localLongPress=true;
     longPressTriggered=true;
     suppressNextClick();
+    btn.classList.remove("is-hold-arming");
     btn.classList.add("is-hold-feedback");
-    setTimeout(()=>btn.classList.remove("is-hold-feedback"),360);
+    setTimeout(()=>btn.classList.remove("is-hold-feedback"),760);
     triggerHoldHapticFeedback();
     openQuickAccessMenu(btn,menuProfile);
   };
@@ -26159,6 +26170,7 @@ function bindNavLongPressTrigger(btn,profile){
     activePointerId=ev.pointerId;
     if(longPressTimer){clearTimeout(longPressTimer);longPressTimer=null}
     btn.classList.add("is-pressed");
+    btn.classList.add("is-hold-arming");
     longPressTimer=window.setTimeout(()=>{
       longPressTimer=null;
       fireLongPressMenu();
