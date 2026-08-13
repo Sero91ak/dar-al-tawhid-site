@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-13T01:10:48.367Z",
+  "updatedAt": "2026-08-13T01:30:51.111Z",
   "provider": "aurumrates.com",
   "active": true,
   "gold": {
     "metal": "gold",
     "currency": "EUR",
-    "pricePerOunce": 3883.6,
-    "pricePerGram": 124.86,
+    "pricePerOunce": 3884.82,
+    "pricePerGram": 124.9,
     "nisabGrams": 85,
-    "nisabEur": 10613.1,
+    "nisabEur": 10616.5,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-08-13T01:10:48.367Z",
+    "fetchedAt": "2026-08-13T01:30:51.111Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
@@ -27,17 +27,27 @@
     "nisabEur": 1088.85,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-08-13T01:10:48.367Z",
+    "fetchedAt": "2026-08-13T01:30:51.111Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
     "adminNote": ""
   },
   "standardNisabEur": 1088.85,
-  "lastSuccessAt": "2026-08-13T01:10:48.367Z",
+  "lastSuccessAt": "2026-08-13T01:30:51.111Z",
   "lastError": "",
-  "lastFetchAt": "2026-08-13T01:10:48.367Z",
+  "lastFetchAt": "2026-08-13T01:30:51.111Z",
   "fetchLogs": [
+    {
+      "id": "log-1786584651111",
+      "provider": "aurumrates.com",
+      "status": "ok",
+      "errorMessage": "",
+      "fetchedAt": "2026-08-13T01:30:51.111Z",
+      "durationMs": 402,
+      "goldPerGram": 124.9,
+      "silverPerGram": 1.83
+    },
     {
       "id": "log-1786583448367",
       "provider": "aurumrates.com",
@@ -526,16 +536,6 @@
       "fetchedAt": "2026-08-12T08:35:59.510Z",
       "durationMs": 392,
       "goldPerGram": 124.48,
-      "silverPerGram": 1.85
-    },
-    {
-      "id": "log-1786522262078",
-      "provider": "aurumrates.com",
-      "status": "ok",
-      "errorMessage": "",
-      "fetchedAt": "2026-08-12T08:11:02.078Z",
-      "durationMs": 603,
-      "goldPerGram": 124.43,
       "silverPerGram": 1.85
     }
   ]
