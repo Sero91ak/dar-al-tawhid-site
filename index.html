@@ -9265,6 +9265,16 @@ body.quick-menu-open .view{
   user-select:none;
   touch-action:manipulation;
 }
+@keyframes bottomNavHoldPulse{
+  0%{box-shadow:0 0 0 0 rgba(239,215,142,.00),0 0 0 0 rgba(239,215,142,.00)}
+  35%{box-shadow:0 0 0 2px rgba(239,215,142,.38),0 0 16px 3px rgba(239,215,142,.24)}
+  100%{box-shadow:0 0 0 0 rgba(239,215,142,.00),0 0 0 0 rgba(239,215,142,.00)}
+}
+.bottom-nav-btn.is-hold-feedback{
+  border-radius:14px!important;
+  animation:bottomNavHoldPulse .34s ease-out 1!important;
+  filter:brightness(1.16)!important;
+}
 
 /* MEHR_LONGPRESS_QUICKACCESS_CSS_END */
 </style>
@@ -26117,6 +26127,7 @@ function bindNavLongPressTrigger(btn,profile){
   const cancelLongPress=()=>{
     if(longPressTimer){clearTimeout(longPressTimer);longPressTimer=null}
     btn.classList.remove("is-pressed");
+    btn.classList.remove("is-hold-feedback");
   };
 
   const openExistingTabPage=()=>{
@@ -26128,6 +26139,8 @@ function bindNavLongPressTrigger(btn,profile){
     localLongPress=true;
     longPressTriggered=true;
     suppressNextClick();
+    btn.classList.add("is-hold-feedback");
+    setTimeout(()=>btn.classList.remove("is-hold-feedback"),360);
     triggerHoldHapticFeedback();
     openQuickAccessMenu(btn,menuProfile);
   };
