@@ -16,6 +16,7 @@ on:
       - data/scholar-history-curated.json
       - wrangler.toml
       - _headers
+      - _redirects
       - .assetsignore
       - package.json
       - scripts/cf-pages-build.js
@@ -28,7 +29,97 @@ permissions:
   contents: read
 
 jobs:
+  classify:
+    runs-on: ubuntu-latest
+    outputs:
+      shortlinks_only: ${{ steps.scope.outputs.shortlinks_only }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - id: scope
+        name: Änderungstyp bestimmen
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" != "push" ]; then
+            echo "shortlinks_only=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          BASE="${{ github.event.before }}"
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
+            echo "shortlinks_only=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          CHANGED="$(git diff --name-only "$BASE" "$GITHUB_SHA")"
+          echo "$CHANGED"
+          if [ -n "$CHANGED" ] && [ -z "$(printf '%s\n' "$CHANGED" | grep -v '^_redirects$' || true)" ]; then
+            echo "shortlinks_only=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "shortlinks_only=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  deploy-shortlinks:
+    needs: classify
+    if: needs.classify.outputs.shortlinks_only == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Kurzlink-Regeln prüfen
+        shell: bash
+        run: |
+          test -s _redirects
+          while read -r source destination code; do
+            [ -z "$source" ] && continue
+            case "$source" in \#*) continue ;; esac
+            case "$source" in /quelle/*) ;; *) echo "Ungültiger Kurzlink-Pfad: $source"; exit 1 ;; esac
+            case "$destination" in *'#:~:text='*|*'#page='*) ;; *) echo "Direktmarkierung fehlt: $source"; exit 1 ;; esac
+            case "$code" in 301|302|303|307|308) ;; *) echo "Ungültiger Redirect-Code: $source $code"; exit 1 ;; esac
+          done < _redirects
+
+      - name: Kurze Quellenlinks direkt deployen
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+
+      - name: Live-Weiterleitungen prüfen
+        shell: bash
+        run: |
+          failed=0
+          while read -r source destination code; do
+            [ -z "$source" ] && continue
+            case "$source" in \#*) continue ;; esac
+            headers="$(curl -sS --max-redirs 0 -D - -o /dev/null "https://dar-al-tawhid.de${source}" || true)"
+            status="$(printf '%s\n' "$headers" | awk 'toupper($1) ~ /^HTTP\// {print $2; exit}')"
+            location="$(printf '%s\n' "$headers" | awk 'BEGIN{IGNORECASE=1} /^location:/ {sub(/^[^:]+:[[:space:]]*/, ""); sub(/\r$/, ""); print; exit}')"
+            if [ "$status" != "$code" ]; then
+              echo "FEHLER $source: HTTP $status statt $code"
+              failed=1
+            fi
+            if [ "$location" != "$destination" ]; then
+              echo "FEHLER $source: Location stimmt nicht"
+              echo "erwartet: $destination"
+              echo "erhalten: $location"
+              failed=1
+            fi
+          done < _redirects
+          exit "$failed"
+
   deploy:
+    needs: classify
+    if: needs.classify.outputs.shortlinks_only != 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

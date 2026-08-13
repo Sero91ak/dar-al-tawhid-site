@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-09T16:43:32.577Z",
+  "generated": "2026-08-12T20:38:02.725Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -493,6 +493,43 @@
       "pushResult": {
         "target": "supabase-subscriptions:25",
         "targetUrl": "https://dar-al-tawhid.de/?post=amanah-und-iman-gehoeren-zusammen-458&v=1786293812059#post/amanah-und-iman-gehoeren-zusammen-458"
+      }
+    },
+    "lib:pub-20260812-001": {
+      "kind": "library",
+      "publicationId": "pub-20260812-001",
+      "slug": "taarud-al-adillah",
+      "publicationTitle": "Taarud al Adillah",
+      "pdfUrl": "/assets/library/pdfs/pub-20260812-001-v1-0.pdf",
+      "catalogPath": "data/library-publications.json",
+      "publishedAt": "2026-08-12",
+      "status": "sent",
+      "pushApproved": true,
+      "pushApprovedAt": "2026-08-12T20:37:41.799Z",
+      "postId": "lib:pub-20260812-001",
+      "updatedAt": "2026-08-12T20:38:02.725Z",
+      "processingToken": null,
+      "processingStartedAt": null,
+      "lastCheckAt": "2026-08-12T20:37:45.565Z",
+      "liveCheck": {
+        "ok": true,
+        "diagnosis": "",
+        "site": "https://dar-al-tawhid.de",
+        "publicationId": "pub-20260812-001",
+        "slug": "taarud-al-adillah",
+        "catalogFoundPublic": true,
+        "publicationInCatalog": true,
+        "pdfFilePublic": true,
+        "visitorUrlOk": true,
+        "visitorUrl": "https://dar-al-tawhid.de/?v=1786567065211#bibliothek/taarud-al-adillah",
+        "attempt": 1
+      },
+      "attempts": 1,
+      "lastError": "",
+      "sentAt": "2026-08-12T20:38:02.539Z",
+      "pushResult": {
+        "target": "supabase-subscriptions:27",
+        "targetUrl": "https://dar-al-tawhid.de/?v=1786567082302#bibliothek/taarud-al-adillah"
       }
     }
   }

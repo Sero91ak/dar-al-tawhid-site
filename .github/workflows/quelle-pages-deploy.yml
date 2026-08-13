@@ -1,0 +1,111 @@
+name: Deploy Quellen-Seiten
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'quelle/**'
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-quellen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Geänderte Quellenseiten bestimmen
+        id: pages
+        shell: bash
+        run: |
+          BASE='${{ github.event.before }}'
+          if [ -z "$BASE" ] || [ "$BASE" = '0000000000000000000000000000000000000000' ]; then
+            FILES="$(find quelle -mindepth 2 -maxdepth 2 -name index.html -type f | sort)"
+          else
+            FILES="$(git diff --name-only "$BASE" "$GITHUB_SHA" | grep '^quelle/.*/index\.html$' || true)"
+          fi
+          printf '%s\n' "$FILES"
+          {
+            echo 'files<<EOF'
+            printf '%s\n' "$FILES"
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Quellenseiten validieren
+        if: steps.pages.outputs.files != ''
+        shell: bash
+        run: |
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            test -s "$file"
+            grep -q 'DAR AL TAWḤĪD' "$file"
+            grep -q 'Geprüfter Direktnachweis' "$file"
+            grep -q 'Originalnachweis' "$file"
+            if grep -Eq 'http-equiv="refresh"|location\.replace\(' "$file"; then
+              echo "Automatische externe Weiterleitung ist auf Quellenseiten nicht erlaubt: $file"
+              exit 1
+            fi
+          done <<< '${{ steps.pages.outputs.files }}'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Quellen-Seiten deployen
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+
+      - name: Live-Smoke-Test der Quellenseiten
+        if: steps.pages.outputs.files != ''
+        shell: bash
+        run: |
+          failed=0
+          check_body() {
+            local url="$1"
+            local body="$2"
+            local status="$3"
+            if [ "$status" != '200' ]; then
+              echo "FEHLER $url: HTTP $status statt 200"
+              return 1
+            fi
+            grep -q 'DAR AL TAWḤĪD' "$body" || { echo "FEHLER $url: Branding fehlt"; return 1; }
+            grep -q 'Originalnachweis' "$body" || { echo "FEHLER $url: Nachweis-Button fehlt"; return 1; }
+            return 0
+          }
+
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            slug="${file#quelle/}"
+            slug="${slug%/index.html}"
+
+            worker_url="https://dar-al-tawhid-site.sero91ak.workers.dev/quelle/${slug}/"
+            worker_body="$(mktemp)"
+            worker_status="$(curl -sS -L --retry 2 --retry-delay 2 --max-time 25 -o "$worker_body" -w '%{http_code}' "$worker_url" || true)"
+            check_body "$worker_url" "$worker_body" "$worker_status" || failed=1
+            rm -f "$worker_body"
+
+            custom_url="https://dar-al-tauhid.de/quelle/${slug}/"
+            custom_body="$(mktemp)"
+            custom_status="$(curl -sS -L --retry 2 --retry-delay 2 --max-time 25 -o "$custom_body" -w '%{http_code}' "$custom_url" || true)"
+
+            if [ "$custom_status" = '000' ]; then
+              ip="$(dig +short A dar-al-tauhid.de @1.1.1.1 | head -n 1 || true)"
+              if [ -n "$ip" ]; then
+                custom_status="$(curl -sS -L --resolve "dar-al-tauhid.de:443:${ip}" --max-time 25 -o "$custom_body" -w '%{http_code}' "$custom_url" || true)"
+              fi
+            fi
+
+            check_body "$custom_url" "$custom_body" "$custom_status" || failed=1
+            rm -f "$custom_body"
+          done <<< '${{ steps.pages.outputs.files }}'
+          exit "$failed"
