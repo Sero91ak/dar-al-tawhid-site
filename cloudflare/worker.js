@@ -3388,8 +3388,17 @@ function extractHashtagsFromTelegramText(text) {
 
 function resolveTelegramTopicThreadId(tags, topicMap, env) {
   const map = topicMap || {};
+  const aliases = {
+    hadith: ["athar", "atar", "hadit"],
+    hadit: ["hadith", "athar", "atar"],
+    athar: ["hadith", "hadit", "atar"],
+    atar: ["athar", "hadith", "hadit"]
+  };
   for (const tag of tags || []) {
     if (map[tag]) return map[tag];
+    for (const alt of aliases[tag] || []) {
+      if (map[alt]) return map[alt];
+    }
   }
   const fallback = Number(env.TELEGRAM_TOPIC_DEFAULT_THREAD_ID || 0);
   return Number.isFinite(fallback) && fallback > 0 ? fallback : 0;
@@ -3406,6 +3415,22 @@ function collectTopicMapFromTelegramUpdates(updates) {
     const tags = extractHashtagsFromTelegramText(text);
     for (const tag of tags) {
       if (!map[tag]) map[tag] = Number(msg.message_thread_id);
+    }
+  }
+  return map;
+}
+
+function collectTopicMapFromRouteHistory(registry) {
+  const map = {};
+  const posts = registry?.posts && typeof registry.posts === "object" ? registry.posts : {};
+  for (const value of Object.values(posts)) {
+    if (!value || String(value.status || "") !== "sent") continue;
+    const threadId = Number(value.targetThreadId || value.message_thread_id || 0);
+    if (!Number.isFinite(threadId) || threadId <= 0) continue;
+    const tags = Array.isArray(value.hashtags) ? value.hashtags : [];
+    for (const raw of tags) {
+      const tag = normalizeTelegramTag(raw);
+      if (tag && !map[tag]) map[tag] = threadId;
     }
   }
   return map;
@@ -3737,15 +3762,16 @@ async function routeLatestTelegramChannelPost(env, { force = false, silent = fal
     const messageId = post.message_id;
     const text = String(post.text || post.caption || "").trim();
     const tags = extractHashtagsFromTelegramText(text);
+    const registry = await readTelegramPostsRegistry(env);
+    const historyMap = collectTopicMapFromRouteHistory(registry);
     const configuredMap = parseTelegramTopicMap(env);
     const learnedMap = collectTopicMapFromTelegramUpdates(list);
-    const topicMap = { ...learnedMap, ...configuredMap };
+    const topicMap = { ...historyMap, ...learnedMap, ...configuredMap };
     const threadId = resolveTelegramTopicThreadId(tags, topicMap, env);
     if (!threadId) {
       return { ok: false, skipped: true, reason: "Kein Thread-Mapping für Hashtag", tags };
     }
     const routeKey = `route:${sourceChatId}:${messageId}:${threadId}`;
-    const registry = await readTelegramPostsRegistry(env);
     if (!force && registry.posts?.[routeKey]?.status === "sent") {
       return { ok: true, skipped: true, reason: "Bereits geroutet", routeKey, tags, threadId };
     }
