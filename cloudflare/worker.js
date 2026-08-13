@@ -3395,6 +3395,22 @@ function resolveTelegramTopicThreadId(tags, topicMap, env) {
   return Number.isFinite(fallback) && fallback > 0 ? fallback : 0;
 }
 
+function collectTopicMapFromTelegramUpdates(updates) {
+  const map = {};
+  const list = Array.isArray(updates) ? updates : [];
+  for (const item of list) {
+    const msg = item?.message;
+    if (!msg?.is_topic_message || !msg?.chat?.id || !msg?.message_thread_id) continue;
+    const text = String(msg.text || msg.caption || "").trim();
+    if (!text) continue;
+    const tags = extractHashtagsFromTelegramText(text);
+    for (const tag of tags) {
+      if (!map[tag]) map[tag] = Number(msg.message_thread_id);
+    }
+  }
+  return map;
+}
+
 function siteOrigin(env) {
   return String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
 }
@@ -3706,7 +3722,7 @@ async function routeLatestTelegramChannelPost(env, { force = false, silent = fal
 
     const updates = await telegramApiCall(env, "getUpdates", {
       limit: 100,
-      allowed_updates: ["channel_post"]
+      allowed_updates: ["channel_post", "message"]
     });
     const list = Array.isArray(updates) ? updates : [];
     const latest = [...list]
@@ -3721,7 +3737,9 @@ async function routeLatestTelegramChannelPost(env, { force = false, silent = fal
     const messageId = post.message_id;
     const text = String(post.text || post.caption || "").trim();
     const tags = extractHashtagsFromTelegramText(text);
-    const topicMap = parseTelegramTopicMap(env);
+    const configuredMap = parseTelegramTopicMap(env);
+    const learnedMap = collectTopicMapFromTelegramUpdates(list);
+    const topicMap = { ...learnedMap, ...configuredMap };
     const threadId = resolveTelegramTopicThreadId(tags, topicMap, env);
     if (!threadId) {
       return { ok: false, skipped: true, reason: "Kein Thread-Mapping für Hashtag", tags };
