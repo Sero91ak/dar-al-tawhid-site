@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-13T18:20:54.444Z",
+  "updatedAt": "2026-08-13T18:25:52.223Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-13T18:20:54.444Z",
+  "lastCronRun": "2026-08-13T18:25:52.223Z",
   "nextPlannedPush": {
     "prayer": "Maghrib",
     "key": "maghrib",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-13T18:42:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-13T18:05:49.312Z",
-  "windowEnd": "2026-08-14T20:20:49.312Z",
+  "windowStart": "2026-08-13T18:10:47.220Z",
+  "windowEnd": "2026-08-14T20:25:47.220Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 27,
@@ -1190,7 +1190,7 @@
       "prayer": "isha",
       "mode": "entry",
       "recipients": 19,
-      "response": "{\"id\":\"003707f2-89f3-4a4b-9eb5-a9defc433e59\",\"external_id\":\"38515241-b07a-4a48-8968-ba5ca518161c\",\"errors\":{\"invalid_player_ids\":[\"187b4bf7-9cb5-4ef3-8a2b-986b792a43c4\",\"2aa85538-0952-473d-a191-7474ce"
+      "response": "{\"id\":\"003707f2-89f3-4a4b-9eb5-a9defc433e59\",\"external_id\":\"38515241-b07a-4a48-8968-ba5ca518161c\"}"
     },
     {
       "prayer": "isha",
