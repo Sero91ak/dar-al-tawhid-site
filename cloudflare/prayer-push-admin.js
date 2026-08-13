@@ -2,7 +2,7 @@ import {
   runPrayerPushScheduler,
   readPrayerPushStatusFromKv
 } from "./prayer-push-scheduler.js";
-import { pickPrayerEntryVariant, buildAdvancePushBody, PRAYER_TITLE_EMOJI } from "./prayer-push-copy.js";
+import { pickPrayerEntryVariant, buildAdvancePushBody, PRAYER_TITLE_EMOJI, sanitizePrayerPushText } from "./prayer-push-copy.js";
 import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
 
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
@@ -27,10 +27,20 @@ export function buildPrayerTestCopy(prayerKey, mode, advanceMinutes = 15) {
   if (mode === "advance") {
     const rawTitle = key === "tahajjud" ? `Taḥajjud in ${minutes} Min` : `${name} in ${minutes} Min`;
     const title = emoji ? `${emoji} ${rawTitle}` : rawTitle;
-    return { title: `[Test] ${title}`, body: buildAdvancePushBody(key, minutes, timeLabel), key, mode };
+    return {
+      title: sanitizePrayerPushText(`[Test] ${title}`),
+      body: sanitizePrayerPushText(buildAdvancePushBody(key, minutes, timeLabel)),
+      key,
+      mode
+    };
   }
   const variant = pickPrayerEntryVariant(key, timeLabel);
-  return { title: `[Test] ${variant.title}`, body: variant.body, key, mode };
+  return {
+    title: sanitizePrayerPushText(`[Test] ${variant.title}`),
+    body: sanitizePrayerPushText(variant.body),
+    key,
+    mode
+  };
 }
 
 export async function readPrayerPushStatus(env, githubGet, base64ToUtf8) {

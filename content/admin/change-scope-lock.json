@@ -3230,6 +3230,17 @@
         "q/_registry/"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prayer-copy-sanitizer-v1-2026-08-13",
+      "approvedBy": "user-explicit-prayer-wording-fix",
+      "note": "Sicherheitsfix gegen alte Formulierung 'ruft dich' im Gebets-Push",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "cloudflare/prayer-push-copy.js",
+        "cloudflare/prayer-push-admin.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

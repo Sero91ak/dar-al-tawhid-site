@@ -61,10 +61,34 @@ export const PRAYER_TITLE_EMOJI = {
   tahajjud: "🌙"
 };
 
+const BLOCKED_PHRASES = [
+  { pattern: /\b(?:ʿ|')?a?sr\s+ruft\s+dich\b/gi, replacement: "ʿAṣr-Zeit ist eingetreten" },
+  { pattern: /\b(?:dhuhr|zuhr)\s+ruft\s+dich\b/gi, replacement: "Dhuhr-Zeit ist eingetreten" },
+  { pattern: /\b(?:fajr|maghrib|isha|ʿi(?:sh|š)aʾ?)\s+ruft\s+dich\b/gi, replacement: "Gebetszeit ist eingetreten" },
+  { pattern: /\bruft\s+dich\b/gi, replacement: "ist eingetreten" }
+];
+
+export function sanitizePrayerPushText(value) {
+  let text = String(value || "").trim();
+  for (const rule of BLOCKED_PHRASES) {
+    text = text.replace(rule.pattern, rule.replacement);
+  }
+  return text.replace(/\s{2,}/g, " ").trim();
+}
+
+export function sanitizePrayerPushCopy(copy) {
+  if (!copy || typeof copy !== "object") return copy;
+  return {
+    ...copy,
+    title: sanitizePrayerPushText(copy.title),
+    body: sanitizePrayerPushText(copy.body)
+  };
+}
+
 export function pickPrayerEntryVariant(prayerKey, seedExtra = "") {
   const key = String(prayerKey || "").toLowerCase();
   const list = PRAYER_ENTRY_PUSH_VARIANTS[key] || PRAYER_ENTRY_PUSH_VARIANTS.fajr;
-  return pickPrayerVariantByCycle(list, key, "entry", seedExtra);
+  return sanitizePrayerPushCopy(pickPrayerVariantByCycle(list, key, "entry", seedExtra));
 }
 
 function utcDaySerial() {
@@ -98,7 +122,9 @@ export function buildAdvancePushBody(prayerKey, advanceMinutes, timeLabel) {
   const m = Number(advanceMinutes) || 15;
   const time = String(timeLabel || "").trim();
   const template = pickPrayerAdvanceVariant(key, m, time);
-  return template
+  return sanitizePrayerPushText(
+    template
     .replaceAll("{minutes}", String(m))
-    .replaceAll("{time}", time || "--:--");
+    .replaceAll("{time}", time || "--:--")
+  );
 }
