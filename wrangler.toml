@@ -1,11 +1,9 @@
 # Cloudflare Workers Static Assets — Besucher-App (dar-al-tawhid.de)
 # Admin-Worker: cloudflare/wrangler.toml → dar-admin-publisher
-# Nur /quelle/* wird gezielt über diesen Worker geroutet; die übrige Website bleibt unberührt.
 
 name = "dar-al-tawhid-site"
 compatibility_date = "2026-06-14"
 compatibility_flags = ["nodejs_compat"]
-route = "dar-al-tauhid.de/quelle/*"
 
 [assets]
 directory = "."
