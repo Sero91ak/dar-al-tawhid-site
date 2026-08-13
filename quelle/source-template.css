@@ -34,20 +34,20 @@ body{
   border-radius:20px;
   background:linear-gradient(180deg,var(--paper),#f9f3e8);
   box-shadow:var(--shadow);
-  padding:10px 10px 8px;
+  padding:10px 10px 9px;
   overflow:hidden;
 }
 .source-header::after{
   content:"";
   position:absolute;
-  inset:auto -38px -54px auto;
-  width:210px;
-  height:210px;
+  inset:-22px -26px auto auto;
+  width:238px;
+  height:238px;
   background-image:url("/app-icon-512.png?v=onesignal-clean-reset");
   background-repeat:no-repeat;
   background-size:contain;
-  opacity:.09;
-  filter:saturate(.6);
+  opacity:.17;
+  filter:saturate(.7) contrast(.95);
   pointer-events:none;
 }
 .header-row{
@@ -58,8 +58,8 @@ body{
   z-index:1;
 }
 .brand-logo{
-  width:58px;
-  height:58px;
+  width:66px;
+  height:66px;
   border-radius:50%;
   border:1px solid var(--line);
   background:#f9f2e6;
@@ -81,7 +81,7 @@ body{
   text-transform:uppercase;
 }
 .brand-sign{
-  margin:-2px 0 0 70px;
+  margin:-2px 0 0 77px;
   font-family:"Brush Script MT","Segoe Script","Snell Roundhand",cursive;
   font-size:22px;
   line-height:1;
@@ -247,20 +247,20 @@ body{
 .social-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:7px;
+  gap:6px;
 }
 .social-link{
   text-decoration:none;
   color:#fff;
   border:1px solid rgba(174,132,66,.26);
   border-radius:10px;
-  padding:8px 6px;
+  padding:6px 5px;
   background:#f6f1e6;
   display:grid;
   justify-items:center;
   align-content:center;
   gap:0;
-  min-height:48px;
+  min-height:42px;
 }
 .social-link svg{width:22px;height:22px;fill:#fff}
 .social-link span{display:none}
@@ -270,6 +270,12 @@ body{
 }
 .social-link.wa{background:#25D366}
 .social-link.web{background:#5f5f5f}
+.social-link.web svg{display:none}
+.social-link.web .web-emoji{
+  display:block;
+  font-size:20px;
+  line-height:1;
+}
 .source-footnote{
   display:none;
 }
@@ -283,7 +289,7 @@ body{
 @media (min-width:560px){
   .source-page{padding-left:18px;padding-right:18px}
   .source-header,.source-card,.social{border-radius:24px}
-  .brand-logo{width:62px;height:62px}
+  .brand-logo{width:70px;height:70px}
   .source-speaker{font-size:20px}
   .source-quote{font-size:22px}
 }
