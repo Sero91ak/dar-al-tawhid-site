@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-13T16:35:50.260Z",
+  "updatedAt": "2026-08-13T16:40:52.131Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-13T16:35:50.260Z",
+  "lastCronRun": "2026-08-13T16:40:52.131Z",
   "nextPlannedPush": {
     "prayer": "Maghrib",
     "key": "maghrib",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-13T18:42:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-13T16:20:46.591Z",
-  "windowEnd": "2026-08-14T18:35:46.591Z",
+  "windowStart": "2026-08-13T16:25:47.218Z",
+  "windowEnd": "2026-08-14T18:40:47.218Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 27,
@@ -28,10 +28,10 @@
   "usersWithLocation": 27,
   "usersWithActivePush": 27,
   "locationGroups": 5,
-  "scheduled": 50,
-  "recipients": 270,
+  "scheduled": 54,
+  "recipients": 296,
   "skippedPast": 80,
-  "skippedWindow": 70,
+  "skippedWindow": 66,
   "duplicates": 1,
   "errors": 0,
   "lastError": null,
@@ -80,7 +80,7 @@
         "time": "20:57",
         "advance": {
           "status": "geplant",
-          "recipients": 27
+          "recipients": 53
         },
         "entry": {
           "status": "geplant",
@@ -158,7 +158,7 @@
       "time": "20:57",
       "advance": {
         "status": "geplant",
-        "recipients": 27
+        "recipients": 53
       },
       "entry": {
         "status": "geplant",
@@ -293,6 +293,15 @@
     {
       "prayer": "Maghrib",
       "key": "maghrib",
+      "mode": "advance",
+      "time": "20:55",
+      "sendAfter": "2026-08-14T18:40:00.000Z",
+      "recipients": 19,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Maghrib",
+      "key": "maghrib",
       "mode": "entry",
       "time": "20:57",
       "sendAfter": "2026-08-13T18:57:00.000Z",
@@ -377,6 +386,15 @@
       "mode": "advance",
       "time": "17:35",
       "sendAfter": "2026-08-14T15:20:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Maghrib",
+      "key": "maghrib",
+      "mode": "advance",
+      "time": "20:55",
+      "sendAfter": "2026-08-14T18:40:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin"
     },
@@ -473,6 +491,15 @@
     {
       "prayer": "Maghrib",
       "key": "maghrib",
+      "mode": "advance",
+      "time": "20:55",
+      "sendAfter": "2026-08-14T18:40:00.000Z",
+      "recipients": 5,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Maghrib",
+      "key": "maghrib",
       "mode": "entry",
       "time": "20:57",
       "sendAfter": "2026-08-13T18:57:00.000Z",
@@ -557,6 +584,15 @@
       "mode": "advance",
       "time": "17:35",
       "sendAfter": "2026-08-14T15:20:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Maghrib",
+      "key": "maghrib",
+      "mode": "advance",
+      "time": "20:55",
+      "sendAfter": "2026-08-14T18:40:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin"
     },
@@ -996,6 +1032,12 @@
     },
     {
       "prayer": "maghrib",
+      "mode": "advance",
+      "recipients": 19,
+      "response": "{\"id\":\"4ebf9142-f5aa-4ea9-bbfd-76505e28f434\",\"external_id\":\"4b232630-c91a-43e1-a35f-0e1bcd852375\",\"errors\":{\"invalid_player_ids\":[\"187b4bf7-9cb5-4ef3-8a2b-986b792a43c4\",\"2aa85538-0952-473d-a191-7474ce"
+    },
+    {
+      "prayer": "maghrib",
       "mode": "entry",
       "recipients": 1,
       "response": "{\"id\":\"\",\"errors\":{\"invalid_player_ids\":[\"e67e4b16-6faf-4f42-9569-38e915259e79\"]}}"
@@ -1045,12 +1087,6 @@
     {
       "prayer": "asr",
       "mode": "entry",
-      "recipients": 1,
-      "response": "{\"id\":\"\",\"errors\":{\"invalid_player_ids\":[\"e67e4b16-6faf-4f42-9569-38e915259e79\"]}}"
-    },
-    {
-      "prayer": "asr",
-      "mode": "advance",
       "recipients": 1,
       "response": "{\"id\":\"\",\"errors\":{\"invalid_player_ids\":[\"e67e4b16-6faf-4f42-9569-38e915259e79\"]}}"
     }
