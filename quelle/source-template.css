@@ -1,266 +1,239 @@
 :root{
-  --bg:#f4efe3;
-  --bg-soft:#fbf8f0;
-  --panel:#fffdf8;
-  --ink:#231e17;
-  --muted:#6f6658;
-  --line:#d9c8a5;
-  --line-strong:#c8ad79;
-  --gold:#9f7a3d;
-  --gold-soft:#e8dcc5;
-  --shadow:0 14px 40px rgba(66,45,14,.12);
+  --ivory:#f8f3e9;
+  --paper:#fffdf8;
+  --ink:#173334;
+  --gold:#ae8442;
+  --gold2:#d5b773;
+  --line:rgba(174,132,66,.28);
+  --green:#47745e;
+  --muted:#77736a;
+  --shadow:0 10px 28px rgba(78,57,25,.10);
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
+html{background:var(--ivory)}
 body{
   min-height:100vh;
-  font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   color:var(--ink);
   background:
-    radial-gradient(circle at 16% -10%, #fffef9 0, transparent 36%),
-    radial-gradient(circle at 85% -20%, #f0e4cd 0, transparent 38%),
-    var(--bg);
+    radial-gradient(circle at 92% 1%,rgba(213,183,115,.16),transparent 34%),
+    linear-gradient(180deg,#fbf8f1 0,#f5eee1 100%);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
 }
+a{-webkit-tap-highlight-color:transparent}
 .source-page{
-  width:min(100%,740px);
-  margin:0 auto;
-  padding:max(20px,env(safe-area-inset-top)) 14px max(26px,env(safe-area-inset-bottom));
-}
-.source-header{
   position:relative;
-  border:1px solid var(--line);
-  border-radius:22px;
-  background:linear-gradient(180deg,var(--panel),var(--bg-soft));
-  box-shadow:var(--shadow);
-  padding:16px 16px 14px;
+  isolation:isolate;
+  width:min(100%,650px);
+  min-height:100vh;
+  margin:0 auto;
+  padding:max(12px,env(safe-area-inset-top)) 10px max(14px,env(safe-area-inset-bottom));
   overflow:hidden;
 }
-.source-header::after{
+.source-page::before{
   content:"";
   position:absolute;
-  inset:auto -38px -54px auto;
-  width:220px;
-  height:220px;
-  background-image:url("/app-icon-512.png?v=onesignal-clean-reset");
-  background-repeat:no-repeat;
-  background-size:contain;
-  opacity:.08;
-  filter:grayscale(.1);
+  z-index:-1;
+  width:245px;
+  height:245px;
+  right:-72px;
+  top:-52px;
+  border-radius:50%;
+  background:url("/app-icon-512.png?v=onesignal-clean-reset") center/contain no-repeat;
+  opacity:.075;
+  filter:saturate(.55);
   pointer-events:none;
 }
-.header-row{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  position:relative;
-  z-index:1;
-}
+.source-header{padding:0 5px 8px;background:none;border:0;box-shadow:none;overflow:visible}
+.header-row{display:grid;grid-template-columns:82px minmax(0,1fr);align-items:center;gap:12px}
 .brand-logo{
-  width:48px;
-  height:48px;
+  width:82px;
+  height:82px;
   border-radius:50%;
-  border:1px solid var(--line);
-  background:#f9f2e6;
   object-fit:cover;
-  box-shadow:0 4px 14px rgba(120,88,34,.16);
+  box-shadow:0 5px 15px rgba(74,54,24,.10);
 }
 .brand-text h1{
   margin:0;
-  font-size:17px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:#2d2314;
+  color:var(--ink);
+  font:600 clamp(21px,6vw,31px)/1 Georgia,"Times New Roman",serif;
+  letter-spacing:.08em;
+  white-space:nowrap;
 }
 .brand-text p{
-  margin:3px 0 0;
-  font-size:12px;
-  color:var(--muted);
-  letter-spacing:.08em;
-  text-transform:uppercase;
-}
-.brand-sign{
-  margin:8px 0 0;
-  font-family:"Brush Script MT","Segoe Script","Snell Roundhand",cursive;
-  font-size:23px;
-  line-height:1;
-  color:#7f6332;
-  letter-spacing:.03em;
-}
-.source-card{
-  margin-top:10px;
-  border:1px solid var(--line);
-  border-radius:22px;
-  background:linear-gradient(180deg,var(--panel),#f8f2e7);
-  box-shadow:var(--shadow);
-  overflow:hidden;
-}
-.source-hero{
-  padding:16px 14px 12px;
-  border-bottom:1px solid #eadfc8;
-  text-align:left;
-}
-.source-kicker{
-  margin:0 0 7px;
-  font-size:11px;
+  margin:5px 0 0;
+  color:var(--gold);
+  font:600 10px/1.2 Georgia,"Times New Roman",serif;
   letter-spacing:.13em;
   text-transform:uppercase;
-  color:#846433;
-  font-weight:700;
+}
+.brand-text::after{
+  content:"❦";
+  display:flex;
+  align-items:center;
+  gap:7px;
+  width:76%;
+  margin-top:7px;
+  color:var(--gold2);
+  font:13px/1 Georgia,serif;
+}
+.brand-sign{
+  margin:-21px 0 0 94px;
+  color:#183838;
+  font:italic 22px/1 "Snell Roundhand","Segoe Script","Brush Script MT",cursive;
+  letter-spacing:.01em;
+}
+.source-card{
+  margin-top:8px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:rgba(255,253,248,.94);
+  box-shadow:var(--shadow);
+}
+.source-hero{padding:11px 14px 10px;text-align:center;border:0}
+.source-hero::before{content:"❦";display:block;color:var(--gold2);font:14px/1 Georgia,serif;margin-bottom:2px}
+.source-kicker{
+  margin:0;
+  color:var(--gold);
+  font:700 11px/1.2 Georgia,"Times New Roman",serif;
+  letter-spacing:.12em;
+  text-transform:uppercase;
 }
 .source-speaker{
-  margin:0 0 8px;
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:20px;
-  color:#2a1f12;
+  margin:8px 0 0;
+  color:var(--ink);
+  font:400 22px/1.15 Georgia,"Times New Roman",serif;
 }
 .source-quote{
-  margin:0;
-  padding:10px 12px;
-  border-left:3px solid var(--line-strong);
-  background:#fffaf0;
-  border-radius:12px;
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:22px;
-  line-height:1.45;
+  max-width:565px;
+  margin:8px auto 0;
+  padding:0;
+  border:0;
+  background:none;
+  color:#153233;
+  font:400 21px/1.26 Georgia,"Times New Roman",serif;
 }
-.source-meta{
-  padding:10px 14px 8px;
-  display:grid;
-  gap:8px;
-}
+.source-quote strong{font-weight:700}
+.source-hero::after{content:"";display:block;height:1px;margin-top:10px;background:linear-gradient(90deg,transparent,var(--gold2),transparent)}
+.source-meta{margin:0;padding:0 11px 5px;display:block}
 .meta-item{
   display:grid;
-  grid-template-columns:84px 1fr;
-  gap:10px;
-  align-items:flex-start;
+  grid-template-columns:31px 75px minmax(0,1fr);
+  align-items:center;
+  gap:7px;
+  min-height:44px;
+  padding:5px 0;
+  border-top:1px solid rgba(174,132,66,.16);
 }
+.meta-icon{
+  width:29px;
+  height:29px;
+  border:1px solid rgba(174,132,66,.25);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:var(--gold);
+  background:#fffbf3;
+}
+.meta-icon svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .meta-item dt{
   margin:0;
-  font-size:11px;
-  letter-spacing:.09em;
+  color:var(--gold);
+  font:700 9px/1 Georgia,"Times New Roman",serif;
+  letter-spacing:.05em;
   text-transform:uppercase;
-  color:#7a6e5d;
-  font-weight:700;
 }
 .meta-item dd{
   margin:0;
-  font-size:14px;
-  line-height:1.45;
+  color:#2d3d3c;
+  font:400 11.6px/1.25 Georgia,"Times New Roman",serif;
 }
-.meta-status{
-  color:#2f5a2f;
-  font-weight:700;
-}
-.source-actions{
-  padding:12px 14px 14px;
-  display:grid;
-  gap:8px;
-}
+.meta-status{color:var(--green)!important;font-weight:700!important}
+.inline-proof{color:#7c5e2d;text-decoration:underline;text-underline-offset:2px}
+.source-actions{padding:0;display:grid;gap:6px;margin-top:8px}
 .source-btn{
-  display:flex;
+  display:grid;
+  grid-template-columns:37px minmax(0,1fr) 12px;
   align-items:center;
-  gap:10px;
-  text-decoration:none;
-  color:#2b2217;
-  padding:11px 12px;
+  gap:9px;
+  min-height:51px;
+  padding:6px 9px 6px 7px;
+  border:1px solid rgba(174,132,66,.28);
   border-radius:13px;
-  border:1px solid #dbc7a1;
-  background:#fffaf1;
-  min-height:52px;
+  background:rgba(255,253,248,.90);
+  box-shadow:0 5px 13px rgba(78,57,25,.065);
+  text-decoration:none;
+  color:var(--ink);
 }
-.source-btn:active{transform:scale(.99)}
-.source-btn.primary{
-  border-color:#c8aa73;
-  background:linear-gradient(160deg,#f0dfbf,#e5c88d);
-}
+.source-btn.primary{background:linear-gradient(135deg,#f3dda9,#ead09a);border-color:rgba(168,120,43,.40)}
+.source-btn:active{transform:scale(.992)}
 .source-btn .ico{
-  width:32px;
-  height:32px;
-  border-radius:10px;
+  width:36px;
+  height:36px;
+  border-radius:50%;
   display:grid;
   place-items:center;
-  background:rgba(58,40,16,.08);
-  font-size:14px;
-  font-weight:700;
-  flex:0 0 32px;
+  background:#183a3a;
+  color:#f0d496;
+  box-shadow:0 3px 9px rgba(24,58,58,.14);
 }
-.source-btn .txt{
-  display:block;
-  min-width:0;
-}
-.source-btn .txt b{
-  display:block;
-  font-size:13px;
-  line-height:1.25;
-}
-.source-btn .txt span{
-  display:block;
-  margin-top:2px;
-  color:#675a49;
-  font-size:11px;
-  line-height:1.32;
-}
-.social{
-  margin-top:10px;
-  border:1px solid var(--line);
-  border-radius:18px;
-  background:linear-gradient(180deg,#fffdf9,#f8f1e4);
-  padding:12px 12px 10px;
-  box-shadow:var(--shadow);
-}
+.source-btn .ico svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round}
+.source-btn .txt{display:block;min-width:0}
+.source-btn .txt b{display:block;font:600 12.5px/1.16 Georgia,"Times New Roman",serif}
+.source-btn .txt span{display:block;margin-top:2px;color:#786645;font-size:9.8px;line-height:1.12}
+.source-btn .chev{color:#263f3e;font:26px/1 Georgia,"Times New Roman",serif}
+.social{margin-top:9px;padding:0;background:none;border:0;border-radius:0;box-shadow:none}
 .social h2{
-  margin:0 0 9px;
-  font-size:13px;
-  letter-spacing:.08em;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  margin:0;
+  color:var(--gold);
+  font:700 8.2px/1 Georgia,"Times New Roman",serif;
+  letter-spacing:.18em;
   text-transform:uppercase;
-  color:#725a30;
+  text-align:center;
 }
-.social-grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:8px;
-}
+.social h2::before,.social h2::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold2))}
+.social h2::after{background:linear-gradient(90deg,var(--gold2),transparent)}
+.social-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin-top:6px}
 .social-link{
+  min-width:0;
+  min-height:41px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  padding:4px;
+  border:1px solid rgba(174,132,66,.24);
+  border-radius:11px;
+  background:rgba(255,253,248,.78);
+  box-shadow:0 4px 10px rgba(78,57,25,.045);
   text-decoration:none;
-  color:#2b2114;
-  border:1px solid #ddccb0;
-  border-radius:12px;
-  padding:8px 7px;
-  background:#fffaf1;
-  display:grid;
-  justify-items:center;
-  align-content:center;
-  gap:6px;
-  min-height:78px;
+  color:#263b3a;
 }
-.social-link svg{
-  width:20px;
-  height:20px;
-  fill:#8a6933;
-}
-.social-link span{
-  font-size:11px;
-  line-height:1.25;
-  text-align:center;
-  word-break:break-word;
-}
-.source-footnote{
-  margin:10px 4px 0;
-  color:#766954;
-  font-size:11px;
-  line-height:1.45;
-  text-align:center;
-}
-.source-footer{
-  margin:12px 2px 0;
-  text-align:center;
-  color:#5f533f;
-  font-size:12px;
-  letter-spacing:.02em;
-}
-@media (min-width:560px){
-  .source-page{padding-left:18px;padding-right:18px}
-  .source-header,.source-card,.social{border-radius:24px}
-  .source-speaker{font-size:22px}
-  .source-quote{font-size:24px}
+.social-link svg{width:22px;height:22px;flex:0 0 22px}
+.social-link span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#263b3a;font:600 8.8px/1.1 Georgia,"Times New Roman",serif}
+.source-footnote{display:none}
+.source-footer{margin:7px 0 0;text-align:center;color:var(--muted);font-size:9.2px;line-height:1.25}
+.source-footer::after{content:"❦";display:block;margin-top:1px;color:var(--gold2);font:14px/1 Georgia,serif}
+@media(max-width:390px){
+  .source-page{padding-left:8px;padding-right:8px}
+  .header-row{grid-template-columns:70px minmax(0,1fr);gap:9px}
+  .brand-logo{width:70px;height:70px}
+  .brand-text h1{font-size:20px}
+  .brand-text p{font-size:8.3px}
+  .brand-sign{margin-left:79px;font-size:19px}
+  .source-page::before{width:210px;height:210px}
+  .source-speaker{font-size:19.5px}
+  .source-quote{font-size:18.5px}
+  .meta-item{grid-template-columns:29px 66px minmax(0,1fr);gap:5px;min-height:42px}
+  .meta-icon{width:27px;height:27px}
+  .meta-item dt{font-size:8px}
+  .meta-item dd{font-size:10.6px}
+  .source-btn .txt b{font-size:11.3px}
+  .source-btn .txt span{font-size:8.8px}
+  .social-link span{font-size:7.8px}
 }
