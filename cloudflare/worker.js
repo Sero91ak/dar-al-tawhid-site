@@ -2464,6 +2464,21 @@ function extractHashtagTokens(markdown) {
     const token = normalizeHashtagToken(match[2]);
     if (token) out.add(token);
   }
+  // Fallback: tags-Liste im Frontmatter (mit oder ohne #) ebenfalls berücksichtigen.
+  const fm = src.match(/^---\s*\n([\s\S]*?)\n---/);
+  if (fm) {
+    const tagsBlock = fm[1].match(/^tags:\s*\n([\s\S]*?)(?=\n[a-zA-Z0-9_-]+:\s|$)/m);
+    if (tagsBlock) {
+      for (const line of String(tagsBlock[1]).split(/\r?\n/)) {
+        const item = line.match(/^\s*-\s*["']?(.+?)["']?\s*$/);
+        if (!item) continue;
+        const raw = String(item[1] || "").trim();
+        if (!raw) continue;
+        const normalized = normalizeHashtagToken(raw.replace(/^#/, ""));
+        if (normalized) out.add(normalized);
+      }
+    }
+  }
   return out;
 }
 
