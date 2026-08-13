@@ -86,8 +86,12 @@ Diese Regel ersetzt alle früheren Regeln zu sichtbaren Quellenlinks in veröffe
 - Bereits vergebene Nummern werden **niemals wiederverwendet, überschrieben oder einer anderen Quelle/Aussage zugeordnet**.
 - Der aktuell bestehende Ibn-Masʿūd-Nachweis ist `dar-al-tawhid.de/q/1`. Der nächste neu anzulegende Quellen-Kurzlink beginnt daher mit `/q/2`, sofern nicht im Repository bereits eine höhere Nummer vergeben wurde; vor jeder Vergabe ist der tatsächliche höchste vorhandene `/q/<nummer>`-Eintrag zu prüfen.
 - In jedem Quellen-Post wird der passende Kurzlink direkt mit ausgegeben.
-- Bei genau einer Quelle lautet die Ausgabe exakt: `Kurzlink: dar-al-tawhid.de/q/<nummer>`.
-- Bei mehreren getrennten Quellen in einem Post werden fortlaufende Nummern vergeben und sichtbar so ausgegeben: `Quelle 1: dar-al-tawhid.de/q/<n>`, `Quelle 2: dar-al-tawhid.de/q/<n+1>` usw. Jede Nummer gehört dauerhaft genau zu ihrem jeweiligen Nachweis.
+- **Keine Textbeschriftung vor dem sichtbaren Link**: insbesondere niemals `Kurzlink:`, `Direktnachweis:`, `Link:` oder ähnliche Wörter verwenden.
+- Der Linkbereich steht **unmittelbar in der nächsten Zeile unter der Quellenzeile**, ohne Leerzeile oder sonstigen Abstand dazwischen.
+- Als einziges Kennzeichen des Linkbereichs wird das Symbol `🔗` verwendet. Standardformat bei genau einer Quelle:
+  `📝 … Quellenangabe …`
+  `🔗 dar-al-tawhid.de/q/<nummer>`
+- Bei mehreren getrennten Quellen erhält jeder Quellenblock seinen eigenen fortlaufenden Kurzlink. Auch dort steht jeweils direkt unter der zugehörigen Quellenzeile ohne Leerzeile nur `🔗 dar-al-tawhid.de/q/<nummer>`; keine Zusätze wie `Quelle 1:`, `Quelle 2:` oder `Kurzlink:` vor dem Link.
 - **Keine sichtbaren Fremd-URLs** im Beitrag oder sonstigen veröffentlichten Lesertext: keine Dorar-, Islamweb-, Shamela-, al-Maktaba-, Ketabonline-, Waqfeya-, Archive.org-, Turāth-, Tafsir.app-, PDF-/Scan- oder sonstigen externen URLs.
 - Auch der lange interne Pfad `dar-al-tawhid.de/quelle/<slug>/` wird im veröffentlichten Beitrag nicht ausgegeben. Er bleibt nur die interne DAR-AL-TAWḤĪD-Quellenseite hinter dem nummerierten `/q/<nummer>`-Alias.
 - Die Quellenzeile darf und soll Werk, Band, Seite, Kapitel, Nummer, Überlieferungsstatus und sonstige genaue bibliographische Angaben nennen; die sichtbare anklickbare URL bleibt ausschließlich der eigene nummerierte `/q/<nummer>`-Kurzlink.
