@@ -74,3 +74,16 @@ Geschützt durch `content/admin/change-scope-lock.json` und `scripts/change-scop
 - **Kein Agent darf** bei gesperrtem Zustand andere Dateien „nebenbei“ mitändern – nur der explizit beauftragte Bereich.
 
 **Vor jedem Merge:** `node scripts/change-scope-lock-guard.js` muss grün sein.
+
+## Beitrags-Quellenlinks (streng – global für alle Beiträge)
+
+Diese Regel ersetzt alle früheren Beitragsregeln, nach denen einzelne Fremdquellen-Links direkt im Beitrag sichtbar ausgegeben wurden.
+
+- Bei **jedem DAR-AL-TAWḤĪD-Beitrag** – insbesondere WhatsApp, Telegram, Instagram-Begleittext, normale Textbeiträge und Website-/GitHub-Beiträge – steht im veröffentlichten Beitrag als Direktnachweis **nur ein eigener DAR-AL-TAWḤĪD-Link** im Format `https://dar-al-tawhid.de/quelle/<slug>/`.
+- **Keine direkten Fremdlinks im Beitrag**: keine sichtbaren Dorar-, Islamweb-, Shamela-, al-Maktaba-, Ketabonline-, Waqfeya-, Archive.org-, Turāth-, Tafsir.app-, PDF-/Scan- oder sonstigen externen URLs.
+- Die Quellenzeile im Beitrag darf Werk, Band, Seite, Nummer, Kapitel und Authentizitätsstatus nennen, aber die anklickbare URL bleibt ausschließlich der eigene `/quelle/`-Link.
+- Der eigene `/quelle/`-Link öffnet eine **DAR-AL-TAWḤĪD-Quellenseite als HTTP-200-Zwischenseite** im gemeinsamen freigegebenen Quellen-Design; keine automatische externe 302-, Meta-Refresh- oder JavaScript-Weiterleitung als Hauptlösung.
+- Auf dieser Quellenseite stehen die geprüfte Aussage, Sprecher/Überlieferer, genaue Fundstelle und Authentizitätsstatus. Erst dort befinden sich die externen Nachweise als Buttons, z. B. exakter Originalnachweis mit Textmarkierung, zweiter Textnachweis und PDF/Scan.
+- Externe Nachweise müssen vor Veröffentlichung geprüft sein und nach Möglichkeit direkt auf die belegte Textstelle führen (`#:~:text=…` bzw. `#page=…`). Allgemeine Start-, Such- oder Werkseiten gelten nicht als vollwertiger Direktnachweis, wenn eine genaue Stelle verfügbar ist.
+- Ein neuer Beitrag darf den `/quelle/`-Link erst als fertig ausgeben, wenn die Quellenseite erstellt, die Inhalte geprüft und der Live-Link technisch verifiziert wurde.
+- Diese Regel gilt **beitragsübergreifend und kanalübergreifend**. Sie ändert nicht die gesonderten strengen Quellen- und Direktnachweisregeln für vollständige PDFs.
