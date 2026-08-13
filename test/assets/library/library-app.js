@@ -51,11 +51,12 @@
 
   function trackLibraryEvent(eventType, pub) {
     if (!pub) return;
+    const analyticsEventType = mapLibraryAnalyticsEvent(eventType);
     try {
-      const track = global.trackAnalytics
-        || (global.DarAnalytics && typeof global.DarAnalytics.track === "function" && global.DarAnalytics.track.bind(global.DarAnalytics));
+      const track = (global.DarAnalytics && typeof global.DarAnalytics.track === "function" && global.DarAnalytics.track.bind(global.DarAnalytics))
+        || global.trackAnalytics;
       if (typeof track === "function") {
-        track(eventType, {
+        track(analyticsEventType, {
           contentType: "library",
           contentId: String(pub.id || ""),
           contentTitle: pub.title || ""
@@ -66,6 +67,12 @@
     }
     bumpLibraryStatOptimistic(pub.id, eventType);
     scheduleLibraryStatsRefresh(pub.id);
+  }
+
+  function mapLibraryAnalyticsEvent(eventType) {
+    if (eventType === "library_read") return "post_share";
+    if (eventType === "library_download") return "post_save";
+    return "post_view";
   }
 
   function formatStatCount(value) {
@@ -966,9 +973,8 @@
   }
 
   function renderReaderNativeFallback(stage, page) {
-    const src = readerPdfDisplayUrl(page);
-    if (!stage || !src) return false;
-    stage.innerHTML = `<div class="lib-reader-native"><embed class="lib-reader-fallback lib-reader-native-embed" src="${src}" type="application/pdf" title="PDF"><object class="lib-reader-fallback lib-reader-native-object" data="${src}" type="application/pdf" title="PDF"><iframe class="lib-reader-fallback" src="${src}" title="PDF"></iframe></object></div>`;
+    if (!stage) return false;
+    stage.innerHTML = `<div class="lib-reader-msg">PDF-Ansicht wird vorbereitet…</div>`;
     return true;
   }
 
@@ -1044,7 +1050,7 @@
     if (!readerState.doc) {
       const stage = getReaderStage();
       readerState.page = page;
-      if (stage) renderReaderNativeFallback(stage, page);
+      if (stage) stage.innerHTML = `<div class="lib-reader-msg">PDF wird geladen…</div>`;
       const input = getReaderRoot()?.querySelector("[data-library-reader-input]");
       if (input) input.value = String(page);
       saveProgress(readerState.pub.id, page, readerState.total || 0);
@@ -1098,8 +1104,6 @@
         background: "#ffffff"
       }).promise;
       if (token !== readerRenderToken) return;
-      if (isCanvasLikelyBlank(canvas)) throw new Error("blank canvas");
-
       stage.innerHTML = "";
       const stack = document.createElement("div");
       stack.className = "lib-reader-stack lib-reader-stack-single";
@@ -1112,7 +1116,6 @@
       saveProgress(readerState.pub.id, page, readerState.total);
     } catch (e) {
       if (token !== readerRenderToken) return;
-      if (renderReaderIframeFallback(stage, page)) return;
       stage.innerHTML = `<div class="lib-reader-msg">Seite konnte nicht angezeigt werden. Bitte erneut versuchen oder die PDF herunterladen.</div>`;
     }
   }
@@ -1212,7 +1215,6 @@
       trackLibraryEvent("library_read", pub);
     } catch (e) {
       if (session !== readerSessionId) return;
-      if (renderReaderIframeFallback(stage)) return;
       stage.innerHTML = `<div class="lib-reader-msg">PDF konnte nicht geladen werden. Bitte versuche es erneut oder lade die Datei herunter.</div>`;
     }
   }
@@ -1437,7 +1439,7 @@
           const pageInput = reader?.querySelector("[data-library-reader-input]");
           if (pageInput && readerState?.page) pageInput.value = String(readerState.page);
         } else {
-          await initReaderNative(pub);
+          await initReader(pub);
           bindReaderControls(pub, getReaderRoot());
         }
       } else {
