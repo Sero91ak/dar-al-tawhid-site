@@ -11,6 +11,11 @@
   const OFFLINE_STORE = "pdfs";
   const PDFJS_URL = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
   const PDFJS_WORKER = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  const PDFJS_FALLBACK_URLS = [
+    PDFJS_URL,
+    "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js",
+    "https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.min.js"
+  ];
 
   const CATEGORIES = [
     "Alle",
@@ -839,19 +844,40 @@
     if (global.pdfjsLib) return Promise.resolve(global.pdfjsLib);
     if (global.__pdfJsLoading) return global.__pdfJsLoading;
     global.__pdfJsLoading = new Promise((resolve, reject) => {
-      const s = document.createElement("script");
-      s.src = PDFJS_URL;
-      s.async = true;
-      s.onload = () => {
-        try {
-          global.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER;
+      let idx = 0;
+      const tryLoad = () => {
+        if (global.pdfjsLib) {
+          try {
+            global.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER;
+          } catch (e) {
+            /* Worker ist optional, wir haben workerlosen Fallback */
+          }
           resolve(global.pdfjsLib);
-        } catch (e) {
-          reject(e);
+          return;
         }
+        if (idx >= PDFJS_FALLBACK_URLS.length) {
+          reject(new Error("PDF.js konnte nicht geladen werden"));
+          return;
+        }
+        const s = document.createElement("script");
+        s.src = PDFJS_FALLBACK_URLS[idx++];
+        s.async = true;
+        s.onload = () => {
+          if (global.pdfjsLib) {
+            try {
+              global.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER;
+            } catch (e) {
+              /* Worker ist optional, wir haben workerlosen Fallback */
+            }
+            resolve(global.pdfjsLib);
+            return;
+          }
+          tryLoad();
+        };
+        s.onerror = () => tryLoad();
+        document.head.appendChild(s);
       };
-      s.onerror = reject;
-      document.head.appendChild(s);
+      tryLoad();
     });
     return global.__pdfJsLoading;
   }
@@ -1133,7 +1159,12 @@
       readerState.blobUrl = URL.createObjectURL(blob);
       const data = await blob.arrayBuffer();
       if (session !== readerSessionId) return;
-      const doc = await pdfjs.getDocument({ data }).promise;
+      const doc = await pdfjs.getDocument({
+        data,
+        disableWorker: true,
+        isEvalSupported: false,
+        useSystemFonts: true
+      }).promise;
       if (session !== readerSessionId) return;
       readerState.doc = doc;
       readerState.total = doc.numPages;

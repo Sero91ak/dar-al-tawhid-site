@@ -3197,6 +3197,17 @@
         ".github/workflows/prayer-push.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "library-pdf-reader-repair-v1-2026-08-13",
+      "approvedBy": "user-explicit-pdf-reader-fix-or-remove",
+      "note": "Nutzer meldet unlesbare PDFs (schwarzer Screen) in Besucher/Test-App; gezielte Reparatur der Reader-Engine",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "assets/library/library-app.js",
+        "test/assets/library/library-app.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
