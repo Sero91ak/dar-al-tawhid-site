@@ -659,8 +659,8 @@ body.is-post-route .bottom-nav.post-nav-hidden{transform:translateY(120%);opacit
 
 .footer-actions{
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:10px;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
   max-width:560px;
   margin:12px auto 0;
   align-items:stretch;
@@ -670,15 +670,15 @@ body.is-post-route .bottom-nav.post-nav-hidden{transform:translateY(120%);opacit
   align-items:center;
   justify-content:center;
   gap:7px;
-  min-height:40px;
-  padding:8px 10px;
+  min-height:38px;
+  padding:7px 8px;
   color:var(--muted);
   text-decoration:none;
-  font-size:12px;
+  font-size:11px;
   font-weight:900;
   border:1px solid rgba(210,177,91,.24);
   background:rgba(239,215,142,.045);
-  border-radius:999px!important;
+  border-radius:16px!important;
   transition:transform .15s ease,border-color .15s ease,filter .15s ease;
   white-space:nowrap;
 }
@@ -692,6 +692,12 @@ body.is-post-route .bottom-nav.post-nav-hidden{transform:translateY(120%);opacit
   border:1px solid rgba(250,126,30,.32)!important;
   background:linear-gradient(160deg,rgba(250,126,30,.07),rgba(214,41,118,.03),rgba(8,8,6,.92))!important;
   color:#f2ebe6!important;
+  box-shadow:none!important;
+}
+.footer-action-wa{
+  border:1px solid rgba(37,211,102,.45)!important;
+  background:linear-gradient(160deg,rgba(37,211,102,.16),rgba(8,8,6,.92))!important;
+  color:#ecfff3!important;
   box-shadow:none!important;
 }
 .footer-action-save{
@@ -1529,7 +1535,7 @@ h1{font-family:var(--display)!important;color:var(--gold2)!important;text-shadow
 .badge,.folder-meta span,.status-chip,.search-match{border-color:rgba(214,183,106,.25)!important;background:rgba(214,183,106,.065)!important;color:#f5e8c8!important}
 .search,.direct-pick,.filter-select{border-color:rgba(214,183,106,.34)!important;background:rgba(3,5,4,.88)!important;color:#f7efd6!important}
 .search::placeholder{color:rgba(247,239,214,.58)!important}
-.social-link,.footer-action-btn:not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save),.footer-social-link:not(.footer-action-tg):not(.footer-action-ig),.action-btn,.advanced-toggle,.collapse-toggle,.back-btn,.home-btn,.hijri-header-pill,.footer-app-save:not(.footer-action-save){border-color:rgba(214,183,106,.30)!important;background:linear-gradient(135deg,rgba(214,183,106,.10),rgba(9,15,10,.72))!important;color:#f7efd6!important}
+.social-link,.footer-action-btn:not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-wa):not(.footer-action-save),.footer-social-link:not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-wa),.action-btn,.advanced-toggle,.collapse-toggle,.back-btn,.home-btn,.hijri-header-pill,.footer-app-save:not(.footer-action-save){border-color:rgba(214,183,106,.30)!important;background:linear-gradient(135deg,rgba(214,183,106,.10),rgba(9,15,10,.72))!important;color:#f7efd6!important}
 .footer-action-tg{border:1px solid rgba(42,171,238,.34)!important;background:linear-gradient(160deg,rgba(42,171,238,.07),rgba(8,8,6,.92))!important;box-shadow:none!important;color:#e8f4fc!important}
 .footer-action-ig{border:1px solid rgba(250,126,30,.32)!important;background:linear-gradient(160deg,rgba(250,126,30,.07),rgba(214,41,118,.03),rgba(8,8,6,.92))!important;box-shadow:none!important;color:#f2ebe6!important}
 .footer-action-save{border:1px solid rgba(214,183,106,.28)!important;background:linear-gradient(135deg,rgba(214,183,106,.08),rgba(9,15,10,.78))!important;box-shadow:none!important;color:#f7efd6!important}
@@ -2292,7 +2298,7 @@ body:before{
 .event-card{
   background:linear-gradient(145deg,rgba(255,255,255,.115),rgba(239,215,142,.055))!important;
 }
-.social-link,.footer-action-btn:not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save),.footer-social-link:not(.footer-action-tg):not(.footer-action-ig),.action-btn,.advanced-toggle,.collapse-toggle,.back-btn,.home-btn,.hijri-header-pill,.footer-app-save:not(.footer-action-save),.share-btn:not(.tg):not(.wa):not(.ig){
+.social-link,.footer-action-btn:not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-wa):not(.footer-action-save),.footer-social-link:not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-wa),.action-btn,.advanced-toggle,.collapse-toggle,.back-btn,.home-btn,.hijri-header-pill,.footer-app-save:not(.footer-action-save),.share-btn:not(.tg):not(.wa):not(.ig){
   background:rgba(239,215,142,.075)!important;
   border-color:var(--line)!important;
   color:var(--cream)!important;
@@ -3772,18 +3778,18 @@ html[data-theme="light"] .prayer-overview__time-hour{color:#3d2a12!important}
 }
 
 /* Dezenter Neutral-Glass für App-Controls – Tab-Buttons ausgenommen */
-:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save):not(.share-btn):not(.qov-btn-primary):not(.qov-btn-secondary):not(.qov-direct-go){
+:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-wa):not(.footer-action-save):not(.share-btn):not(.qov-btn-primary):not(.qov-btn-secondary):not(.qov-direct-go){
   border-color:rgba(255,255,255,.14)!important;
   background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03))!important;
   -webkit-backdrop-filter:blur(10px) saturate(1.12)!important;
   backdrop-filter:blur(10px) saturate(1.12)!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 4px 12px rgba(0,0,0,.10)!important;
 }
-:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save):not(.share-btn):hover{
+:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-wa):not(.footer-action-save):not(.share-btn):hover{
   border-color:rgba(255,255,255,.20)!important;
   filter:brightness(1.03);
 }
-:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-save):not(.share-btn):active{
+:where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-wa):not(.footer-action-save):not(.share-btn):active{
   transform:scale(.98);
 }
 :where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill,[data-nav]):not(.bottom-nav-btn):focus,
@@ -18994,7 +19000,7 @@ html[data-theme="light"] body.is-scholar-route{
   <div class="app-bar"><div class="app-actions"><button id="backBtn" class="back-btn" type="button">← Zurück</button><button id="homeBtn" class="home-btn" type="button">⌂ Startseite</button></div><div id="crumb" class="crumb">Startseite</div><div id="postReaderActions" class="post-reader-actions" hidden><button type="button" class="post-reader-top-btn" data-post-save aria-label="Beitrag speichern">♡</button><button type="button" class="post-reader-top-btn" data-post-share-open aria-label="Beitrag teilen">Teilen</button><button type="button" class="post-reader-top-btn" data-post-more-open aria-label="Weitere Aktionen">⋯</button></div></div>
   <main id="appView" class="view"><div class="loading">App wird geladen…</div></main>
   <div id="pwaInstallModal" class="pwa-modal-overlay" hidden aria-hidden="true"></div>
-  <footer class="footer"><strong>DAR AL TAWḤID</strong><br>Folgt für mehr Wissen aus Qurʾān & Sunnah<div class="footer-actions"><a class="footer-action-btn footer-action-tg footer-social-link" href="https://t.me/dar_al_tauhid" target="_blank" rel="noopener" aria-label="Telegram Kanal öffnen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span></a><a class="footer-action-btn footer-action-ig footer-social-link" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram Kanal öffnen"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igFoot" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igFoot)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>Instagram</span></a><button id="footerAppSave" class="footer-action-btn footer-action-save footer-app-save" type="button">📲 App speichern</button></div><span class="signature">by Serhat Abu Malik</span></footer>
+  <footer class="footer"><strong>DAR AL TAWḤID</strong><br>Folgt für mehr Wissen aus Qurʾān & Sunnah<div class="footer-actions"><a class="footer-action-btn footer-action-tg footer-social-link" href="https://t.me/dar_al_tauhid" target="_blank" rel="noopener" aria-label="Telegram Kanal öffnen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span></a><a class="footer-action-btn footer-action-wa footer-social-link" href="https://whatsapp.com/channel/0029VbBK0YaDp2Q8A0kW1F3g" target="_blank" rel="noopener" aria-label="WhatsApp Kanal öffnen"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#25D366" d="M12 1.8C6.37 1.8 1.8 6.37 1.8 12c0 1.79.47 3.54 1.35 5.07L1.8 22.2l5.28-1.39A10.16 10.16 0 0 0 12 22.2h.01c5.63 0 10.2-4.57 10.2-10.2 0-2.73-1.06-5.3-2.99-7.22A10.13 10.13 0 0 0 12 1.8Z"/><path fill="#fff" d="M9.87 7.55h-.56c-.18 0-.47.07-.72.34-.25.28-.96.94-.96 2.3s.98 2.67 1.11 2.85c.13.18 1.9 3.05 4.7 4.15.66.26 1.18.42 1.58.53.66.18 1.27.15 1.75.09.53-.07 1.64-.67 1.87-1.32.23-.66.23-1.22.16-1.33-.06-.11-.24-.17-.5-.3-.26-.13-1.54-.76-1.78-.85-.23-.09-.4-.13-.57.13-.17.25-.67.84-.82 1.01-.15.17-.31.2-.57.07-.26-.13-1.1-.41-2.1-1.31-.78-.7-1.31-1.57-1.46-1.84-.15-.26-.01-.41.11-.54.11-.11.25-.28.37-.42.12-.14.16-.23.25-.39.08-.16.04-.29-.02-.42-.07-.13-.57-1.43-.78-1.95-.2-.49-.41-.42-.57-.43Z"/></svg><span>WhatsApp</span></a><a class="footer-action-btn footer-action-ig footer-social-link" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram Kanal öffnen"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igFoot" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igFoot)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>Instagram</span></a><button id="footerAppSave" class="footer-action-btn footer-action-save footer-app-save" type="button">📲 App speichern</button></div><span class="signature">by Serhat Abu Malik</span></footer>
 </div>
 <div id="appChromeDock" class="app-chrome-dock" data-nav-dock="bottom">
 <nav id="bottomNav" class="bottom-nav" aria-label="Hauptnavigation">
