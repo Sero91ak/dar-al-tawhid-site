@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-13T14:50:30.285Z",
+  "generated": "2026-08-13T14:50:32.044Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -538,12 +538,12 @@
       "postTitle": "📖 Wissen verlangt Handeln",
       "publishedAt": "2026-08-13T14:50:25.218Z",
       "postPath": "content/posts/ilm-459-wissen-verlangt-handeln.md",
-      "status": "sending",
+      "status": "sent",
       "createdAt": "2026-08-13T14:50:25.218Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-08-13T14:50:25.218Z",
       "lastError": "",
-      "updatedAt": "2026-08-13T14:50:30.285Z",
+      "updatedAt": "2026-08-13T14:50:32.044Z",
       "lastCheckAt": "2026-08-13T14:50:27.296Z",
       "liveCheck": {
         "ok": true,
@@ -568,7 +568,12 @@
         "visitorUrl": "https://dar-al-tawhid.de/?post=ibn-masud-wissen-verlangt-handeln-459&v=1786632626775#post/ibn-masud-wissen-verlangt-handeln-459"
       },
       "attempts": 1,
-      "sendingAt": "2026-08-13T14:50:30.285Z"
+      "sendingAt": "2026-08-13T14:50:30.285Z",
+      "sentAt": "2026-08-13T14:50:31.801Z",
+      "pushResult": {
+        "target": "supabase-subscriptions:27",
+        "targetUrl": "https://dar-al-tawhid.de/?post=ibn-masud-wissen-verlangt-handeln-459&v=1786632631150#post/ibn-masud-wissen-verlangt-handeln-459"
+      }
     }
   }
 }
