@@ -1,18 +1,38 @@
 {
   "date": "2026-08-13",
   "timezone": "Europe/Berlin",
-  "generated": "2026-08-12T22:01:01.093Z",
-  "source": "dar-daily-scheduler-regenerated",
+  "generated": "2026-08-13T04:19:16.583Z",
+  "source": "dar-daily-no-repeat-rotation",
   "recommendation": {
-    "id": "hukm-muhakamah-bund-und-gehorchen-425",
-    "title": "Der Bund verlangt Gehorsam",
-    "file": "hukm-muhakamah-bund-und-gehorchen-425.md",
-    "category": "Hukm & Muḥākamah",
-    "scholar": "aṭ-Ṭabarī / Ibn Kathīr",
-    "snippet": "„Allah nahm den Bund der Kinder Israels und verband ihn mit Gebet, Zakāh, Glauben an die Gesandten und Unterstützung des offenbarten Weges.“"
+    "id": "malik-adab-vor-wissen-396",
+    "title": "Adab vor dem Wissen",
+    "file": "adab-396-adab-vor-dem-wissen.md",
+    "category": "Adab",
+    "scholar": "Mālik ibn Anas",
+    "snippet": "🖋️ Mālik ibn Anas sagte zu einem jungen Mann von Quraysh:"
   },
   "dua": {
-    "snippet": "",
-    "category": ""
+    "id": "dua-082-allahumma-inni-zalamtu-nafsi-kathiran",
+    "title": "Umfassende Bitte um Vergebung",
+    "snippet": "O Allah, ich habe mir selbst viel Unrecht getan, und niemand vergibt die Sünden außer Dir. So vergib mir mit einer Vergebung von Dir und erbarme Dich meiner. Du bist wahrlich der Allvergebende, der Barmherzige.",
+    "category": "Vergebung & Reue"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 458,
+      "remaining": 443
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 83,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
