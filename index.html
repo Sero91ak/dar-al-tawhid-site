@@ -25860,6 +25860,18 @@ function triggerLightHapticFeedback(){
 function triggerHoldHapticFeedback(){
   triggerLightHapticFeedback();
   try{
+    const tg=window?.Telegram?.WebApp?.HapticFeedback;
+    if(tg){
+      if(typeof tg.impactOccurred==="function")tg.impactOccurred("medium");
+      if(typeof tg.notificationOccurred==="function")tg.notificationOccurred("success");
+      if(typeof tg.selectionChanged==="function")tg.selectionChanged();
+    }
+  }catch(e){}
+  try{
+    const cap=window?.Capacitor?.Plugins?.Haptics;
+    if(cap&&typeof cap.impact==="function")cap.impact({style:"MEDIUM"});
+  }catch(e){}
+  try{
     if(typeof navigator.vibrate==="function"){
       setTimeout(()=>{try{navigator.vibrate(8)}catch(e){}},40);
     }

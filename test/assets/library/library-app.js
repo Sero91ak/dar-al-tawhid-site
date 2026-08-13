@@ -470,6 +470,34 @@
     return canRead(pub) && pub.offlineEnabled !== false;
   }
 
+  function publicationPdfUrl(pub) {
+    const raw = String(pub?.pdfUrl || "").trim();
+    if (!raw) return "";
+    return raw.startsWith("/") ? `${LIB_BASE}${raw}` : raw;
+  }
+
+  function openPublicationPdf(pub, options = {}) {
+    const url = publicationPdfUrl(pub);
+    if (!url) return false;
+    const track = options.track !== false;
+    if (track) {
+      trackLibraryEvent("library_read", pub);
+      scheduleLibraryStatsRefresh(pub.id);
+    }
+    try {
+      const popup = global.open(url, "_blank", "noopener,noreferrer");
+      if (popup) return true;
+    } catch (e) {
+      /* Fallback unten */
+    }
+    try {
+      global.location.href = url;
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   function badgeHtml(pub) {
     const badges = [];
     if (pub.isNew) badges.push('<span class="lib-badge">Neu</span>');
@@ -1298,7 +1326,9 @@
       detail.querySelectorAll("[data-library-read]").forEach((btn) => {
         btn.onclick = () => {
           if (!canRead(pub)) return;
-          navigateReader(pub.slug);
+          if (!openPublicationPdf(pub)) {
+            alert("PDF konnte nicht geöffnet werden. Bitte nutze den PDF-Button zum Download.");
+          }
         };
       });
 
@@ -1367,18 +1397,12 @@
       document.body.classList.add("is-library-reader-route");
       const pub = findPublication(route.value);
       if (pub && canRead(pub)) {
-        if (isReaderActive(pub.slug)) {
-          const reader = getReaderRoot();
-          scrubDuplicateReaders(reader);
-          bindReaderControls(pub, reader);
-          const totalEl = reader?.querySelector("[data-library-reader-total]");
-          if (totalEl && readerState?.total) totalEl.textContent = String(readerState.total);
-          const pageInput = reader?.querySelector("[data-library-reader-input]");
-          if (pageInput && readerState?.page) pageInput.value = String(readerState.page);
-        } else {
-          await initReader(pub);
-          bindReaderControls(pub, getReaderRoot());
+        const opened = openPublicationPdf(pub);
+        navigateDetail(pub.slug);
+        if (!opened) {
+          alert("PDF konnte nicht geöffnet werden. Bitte nutze den PDF-Button zum Download.");
         }
+        return;
       }
     } else {
       readerSessionId += 1;
