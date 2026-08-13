@@ -154,6 +154,37 @@ body{
   color:#9adf9a;
   font-weight:700;
 }
+.isnad-box{
+  margin:2px 12px 6px;
+  padding:8px 10px;
+  border:1px solid #8f6f3f;
+  border-radius:12px;
+  background:#2d2013;
+}
+.isnad-box h3{
+  margin:0 0 6px;
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#e0c38b;
+}
+.isnad-list{
+  margin:0;
+  padding-left:18px;
+  display:grid;
+  gap:3px;
+}
+.isnad-list li{
+  color:#fff;
+  font-size:12px;
+  line-height:1.35;
+}
+.isnad-note{
+  margin:6px 0 0;
+  font-size:10px;
+  line-height:1.3;
+  color:#d8c8ab;
+}
 .source-actions{
   padding:10px 12px 10px;
   display:grid;
