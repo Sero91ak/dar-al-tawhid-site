@@ -1041,6 +1041,15 @@
   function scrollToReaderPage(pageNum, behavior) {
     if (!readerState) return;
     const page = Math.max(1, Math.min(readerState.total || 1, Number(pageNum) || 1));
+    if (!readerState.doc) {
+      const stage = getReaderStage();
+      readerState.page = page;
+      if (stage) renderReaderNativeFallback(stage, page);
+      const input = getReaderRoot()?.querySelector("[data-library-reader-input]");
+      if (input) input.value = String(page);
+      saveProgress(readerState.pub.id, page, readerState.total || 0);
+      return;
+    }
     renderReaderPage(page);
   }
 
@@ -1208,6 +1217,30 @@
     }
   }
 
+  async function initReaderNative(pub) {
+    const root = mountReaderOverlay() || getReaderRoot();
+    const stage = root?.querySelector("[data-library-reader-stage]");
+    if (!root || !stage) return;
+    scrubDuplicateReaders(root);
+    const lastPage = Math.max(1, Number(getProgress(pub.id)?.lastPage || 1));
+    const total = Math.max(0, Number(pub.pageCount || 0));
+    readerState = {
+      pub,
+      page: lastPage,
+      total,
+      doc: null,
+      blobUrl: "",
+      useOfflineBlob: false
+    };
+    const totalEl = root.querySelector("[data-library-reader-total]");
+    if (totalEl) totalEl.textContent = String(total || "—");
+    const pageInput = root.querySelector("[data-library-reader-input]");
+    if (pageInput) pageInput.value = String(lastPage);
+    renderReaderNativeFallback(stage, lastPage);
+    saveProgress(pub.id, lastPage, total || 0);
+    trackLibraryEvent("library_read", pub);
+  }
+
   function findPublication(slug) {
     return (catalog?.publications || []).find((p) => p.slug === slug || p.id === slug);
   }
@@ -1326,9 +1359,7 @@
       detail.querySelectorAll("[data-library-read]").forEach((btn) => {
         btn.onclick = () => {
           if (!canRead(pub)) return;
-          if (!openPublicationPdf(pub)) {
-            alert("PDF konnte nicht geöffnet werden. Bitte nutze den PDF-Button zum Download.");
-          }
+          navigateReader(pub.slug);
         };
       });
 
@@ -1397,12 +1428,20 @@
       document.body.classList.add("is-library-reader-route");
       const pub = findPublication(route.value);
       if (pub && canRead(pub)) {
-        const opened = openPublicationPdf(pub);
-        navigateDetail(pub.slug);
-        if (!opened) {
-          alert("PDF konnte nicht geöffnet werden. Bitte nutze den PDF-Button zum Download.");
+        if (isReaderActive(pub.slug)) {
+          const reader = getReaderRoot();
+          scrubDuplicateReaders(reader);
+          bindReaderControls(pub, reader);
+          const totalEl = reader?.querySelector("[data-library-reader-total]");
+          if (totalEl) totalEl.textContent = String(readerState?.total || pub.pageCount || "—");
+          const pageInput = reader?.querySelector("[data-library-reader-input]");
+          if (pageInput && readerState?.page) pageInput.value = String(readerState.page);
+        } else {
+          await initReaderNative(pub);
+          bindReaderControls(pub, getReaderRoot());
         }
-        return;
+      } else {
+        navigateDetail(route?.value || "");
       }
     } else {
       readerSessionId += 1;
