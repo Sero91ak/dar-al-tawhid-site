@@ -973,9 +973,8 @@
   }
 
   function renderReaderNativeFallback(stage, page) {
-    const src = readerPdfDisplayUrl(page);
-    if (!stage || !src) return false;
-    stage.innerHTML = `<div class="lib-reader-native"><embed class="lib-reader-fallback lib-reader-native-embed" src="${src}" type="application/pdf" title="PDF"><object class="lib-reader-fallback lib-reader-native-object" data="${src}" type="application/pdf" title="PDF"><iframe class="lib-reader-fallback" src="${src}" title="PDF"></iframe></object></div>`;
+    if (!stage) return false;
+    stage.innerHTML = `<div class="lib-reader-msg">PDF-Ansicht wird vorbereitet…</div>`;
     return true;
   }
 
@@ -1051,7 +1050,7 @@
     if (!readerState.doc) {
       const stage = getReaderStage();
       readerState.page = page;
-      if (stage) renderReaderNativeFallback(stage, page);
+      if (stage) stage.innerHTML = `<div class="lib-reader-msg">PDF wird geladen…</div>`;
       const input = getReaderRoot()?.querySelector("[data-library-reader-input]");
       if (input) input.value = String(page);
       saveProgress(readerState.pub.id, page, readerState.total || 0);
