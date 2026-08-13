@@ -2435,7 +2435,8 @@ const HASHTAG_CATEGORY_RULES = [
   { tags: ["tawhid", "tauhid"], category: "Tawḥīd", topic: "Tawḥīd" },
   { tags: ["sunnah", "sunna"], category: "Sunnah", topic: "Sunnah" },
   { tags: ["quran", "quranwissen", "tafsir"], category: "Qurʾān", topic: "Qurʾān" },
-  { tags: ["hadith", "hadithe", "athar"], category: "Hadith", topic: "Hadith" },
+  { tags: ["hadith", "hadithe"], category: "Hadith", topic: "Hadith" },
+  { tags: ["athar", "asar"], category: "Āthār", topic: "Āthār" },
   { tags: ["fiqh", "fatwa"], category: "Fiqh", topic: "Fiqh" },
   { tags: ["dua", "dua", "adhkar", "dhikr"], category: "Duʿāʾ", topic: "Duʿāʾ" },
   { tags: ["adab", "akhlaq"], category: "Adab", topic: "Adab" },
@@ -2496,12 +2497,22 @@ function applyHashtagCategoryInference(markdown) {
   if (!fm) return out;
   const existingCategory = frontmatterValue(out, "category");
   const existingTopic = frontmatterValue(out, "topic");
-  if (existingCategory && existingTopic) return out;
+  const categoryKey = normalizeHashtagToken(existingCategory);
+  const isPlaceholderCategory = categoryKey === "beitrag" || categoryKey === "allgemein";
+  const shouldFillCategory = !existingCategory || isPlaceholderCategory;
+  const shouldFillTopic = !existingTopic;
+  if (!shouldFillCategory && !shouldFillTopic) return out;
   const inferred = inferCategoryTopicFromHashtags(out);
   if (!inferred) return out;
   let head = String(fm[1] || "");
-  if (!existingCategory) head = upsertFrontmatterValue(head, "category", inferred.category);
-  if (!existingTopic) head = upsertFrontmatterValue(head, "topic", inferred.topic);
+  if (shouldFillCategory) {
+    if (existingCategory && isPlaceholderCategory) {
+      head = String(head).replace(/^category:\s*.*$/im, `category: "${inferred.category}"`);
+    } else {
+      head = upsertFrontmatterValue(head, "category", inferred.category);
+    }
+  }
+  if (shouldFillTopic) head = upsertFrontmatterValue(head, "topic", inferred.topic);
   const body = String(fm[2] || "").trimStart();
   return `---\n${head}\n---\n\n${body}`.trimEnd() + "\n";
 }
