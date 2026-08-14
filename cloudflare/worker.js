@@ -3357,7 +3357,13 @@ function parseTelegramTopicMap(env) {
     quran: Number(env.TELEGRAM_TOPIC_QURAN_THREAD_ID || 0),
     fiqh: Number(env.TELEGRAM_TOPIC_FIQH_THREAD_ID || 0),
     dua: Number(env.TELEGRAM_TOPIC_DUA_THREAD_ID || 0),
-    bibliothek: Number(env.TELEGRAM_TOPIC_LIBRARY_THREAD_ID || 0)
+    bibliothek: Number(env.TELEGRAM_TOPIC_LIBRARY_THREAD_ID || 0),
+    sirah: Number(env.TELEGRAM_TOPIC_SIRAH_THREAD_ID || 0),
+    geschichte: Number(env.TELEGRAM_TOPIC_HISTORY_THREAD_ID || 0),
+    widerlegungen: Number(env.TELEGRAM_TOPIC_WIDERLEGUNGEN_THREAD_ID || 0),
+    takfir: Number(env.TELEGRAM_TOPIC_TAKFIR_THREAD_ID || 0),
+    kufr: Number(env.TELEGRAM_TOPIC_KUFR_THREAD_ID || 0),
+    nawaqid: Number(env.TELEGRAM_TOPIC_NAWAQID_THREAD_ID || 0)
   };
   let parsed = {};
   try {
@@ -3386,6 +3392,11 @@ const TELEGRAM_TOPIC_ALIAS_GROUPS = (() => {
   groups.push(["aqida", "aqidah", "akida"]);
   groups.push(["tawhid", "tauhid"]);
   groups.push(["dua", "dua", "adhkar", "dhikr"]);
+  groups.push(["salaf", "sahaba", "ahlalhadith", "ahlalhadit", "manhaj"]);
+  groups.push(["fiqh", "usul", "usulalfiqh", "salam"]);
+  groups.push(["sirah", "seerah", "geschichte", "tarikh"]);
+  groups.push(["widerlegung", "widerlegungen", "rad", "shubuhat"]);
+  groups.push(["takfir", "kufr", "nawaqid", "murjia", "khawarij"]);
   return groups.map((group) => [...new Set(group.map((tag) => normalizeTelegramTag(tag)).filter(Boolean))]);
 })();
 
@@ -3403,6 +3414,37 @@ function buildTelegramAliasLookup() {
 }
 
 const TELEGRAM_TOPIC_ALIAS_LOOKUP = buildTelegramAliasLookup();
+const TELEGRAM_TOPIC_PRIORITY = [
+  "fiqh",
+  "aqidah",
+  "tawhid",
+  "quran",
+  "sirah",
+  "geschichte",
+  "hadith",
+  "athar",
+  "manhaj",
+  "adab",
+  "widerlegungen",
+  "takfir",
+  "kufr",
+  "nawaqid",
+  "bibliothek",
+  "quelle",
+  "dua"
+];
+
+function resolveTopicByPriority(tags, map) {
+  const tagSet = new Set((tags || []).map((tag) => normalizeTelegramTag(tag)).filter(Boolean));
+  for (const preferred of TELEGRAM_TOPIC_PRIORITY) {
+    if (!tagSet.has(preferred)) continue;
+    if (map[preferred]) return Number(map[preferred]);
+    for (const alt of TELEGRAM_TOPIC_ALIAS_LOOKUP[preferred] || []) {
+      if (map[alt]) return Number(map[alt]);
+    }
+  }
+  return 0;
+}
 
 function extractHashtagsFromTelegramText(text) {
   const value = String(text || "");
@@ -3418,6 +3460,8 @@ function extractHashtagsFromTelegramText(text) {
 
 function resolveTelegramTopicThreadId(tags, topicMap, env) {
   const map = topicMap || {};
+  const byPriority = resolveTopicByPriority(tags, map);
+  if (byPriority) return byPriority;
   for (const tag of tags || []) {
     if (map[tag]) return map[tag];
     for (const alt of TELEGRAM_TOPIC_ALIAS_LOOKUP[tag] || []) {
