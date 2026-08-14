@@ -3425,7 +3425,13 @@ function resolveTelegramTopicThreadId(tags, topicMap, env) {
     }
   }
   const fallback = Number(env.TELEGRAM_TOPIC_DEFAULT_THREAD_ID || 0);
-  return Number.isFinite(fallback) && fallback > 0 ? fallback : 0;
+  if (Number.isFinite(fallback) && fallback > 0) return fallback;
+  // Letzter Schutz: lieber in einen bekannten Themen-Thread pushen als komplett verlieren.
+  for (const value of Object.values(map)) {
+    const threadId = Number(value);
+    if (Number.isFinite(threadId) && threadId > 0) return threadId;
+  }
+  return 0;
 }
 
 function collectTopicMapFromTelegramUpdates(updates) {
