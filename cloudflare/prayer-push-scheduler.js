@@ -4,7 +4,7 @@
  * Kein OneSignal-User-Scan (verursachte „Too many subrequests“).
  */
 
-import { pickPrayerEntryVariant, buildAdvancePushBody, PRAYER_TITLE_EMOJI } from "./prayer-push-copy.js";
+import { pickPrayerEntryVariant, buildAdvancePushBody, PRAYER_TITLE_EMOJI, sanitizePrayerPushText } from "./prayer-push-copy.js";
 
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de/#prayer";
@@ -245,12 +245,21 @@ function notifyCopy(prayer, mode, group) {
   if (mode === "advance") {
     const title = notifyTitle(prayer, mode, group);
     const body = buildAdvancePushBody(prayer.key, m, timeLabel);
-    return { headings: { de: title, en: title }, contents: { de: body, en: body } };
+    return {
+      headings: { de: sanitizePrayerPushText(title), en: sanitizePrayerPushText(title) },
+      contents: { de: sanitizePrayerPushText(body), en: sanitizePrayerPushText(body) }
+    };
   }
   const variant = pickPrayerEntryVariant(prayer.key, timeLabel);
   return {
-    headings: { de: variant.title, en: variant.title },
-    contents: { de: variant.body, en: variant.body }
+    headings: {
+      de: sanitizePrayerPushText(variant.title),
+      en: sanitizePrayerPushText(variant.title)
+    },
+    contents: {
+      de: sanitizePrayerPushText(variant.body),
+      en: sanitizePrayerPushText(variant.body)
+    }
   };
 }
 

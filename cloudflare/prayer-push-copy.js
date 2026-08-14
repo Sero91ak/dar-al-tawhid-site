@@ -62,7 +62,7 @@ export const PRAYER_TITLE_EMOJI = {
 };
 
 const BLOCKED_PHRASES = [
-  { pattern: /\b(?:ʿ|')?a?sr\s+ruft\s+dich\b/gi, replacement: "ʿAṣr-Zeit ist eingetreten" },
+  { pattern: /(?:[ʿ'‘’`]\s*)?a?sr\s+ruft\s+dich\b/gi, replacement: "ʿAṣr-Zeit ist eingetreten" },
   { pattern: /\b(?:dhuhr|zuhr)\s+ruft\s+dich\b/gi, replacement: "Dhuhr-Zeit ist eingetreten" },
   { pattern: /\b(?:fajr|maghrib|isha|ʿi(?:sh|š)aʾ?)\s+ruft\s+dich\b/gi, replacement: "Gebetszeit ist eingetreten" },
   { pattern: /\bruft\s+dich\b/gi, replacement: "ist eingetreten" }
