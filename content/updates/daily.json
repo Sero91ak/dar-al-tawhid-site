@@ -1,18 +1,38 @@
 {
   "date": "2026-08-14",
   "timezone": "Europe/Berlin",
-  "generated": "2026-08-13T22:05:46.776Z",
-  "source": "dar-daily-scheduler-regenerated",
+  "generated": "2026-08-14T04:16:24.158Z",
+  "source": "dar-daily-no-repeat-rotation",
   "recommendation": {
-    "id": "hukm-muhakamah-folge-der-shariah-nicht-hawa-402",
-    "title": "Folge der Scharīʿah, nicht den Begierden",
-    "file": "hukm-muhakamah-folge-der-shariah-nicht-hawa-402.md",
-    "category": "Hukm & Muḥākamah",
-    "scholar": "aṭ-Ṭabarī / Ibn Kathīr",
-    "snippet": "„Allah setzte den Propheten ﷺ auf eine Scharīʿah des Befehls und gebot ihm, ihr zu folgen und nicht den Begierden der Unwissenden.“"
+    "id": "ahmad-lob-kann-herz-verderben-001",
+    "title": "Lob kann das Herz verderben",
+    "file": "2026-06-05-ahmad-lob-kann-herz-verderben.md",
+    "category": "Tazkiyah",
+    "scholar": "Aḥmad ibn Ḥanbal",
+    "snippet": "🖋️ Aḥmad ibn Ḥanbal sagte, als jemandem ins Gesicht gesagt wurde: „Du hast die Sunnah belebt“:"
   },
   "dua": {
-    "snippet": "",
-    "category": ""
+    "id": "dua-113-audhu-biridaka",
+    "title": "Zuflucht bei Allahs Wohlgefallen vor Seinem Zorn",
+    "snippet": "O Allah, ich suche Zuflucht bei Deinem Wohlgefallen vor Deinem Zorn und bei Deiner Verschonung vor Deiner Strafe. Ich suche Zuflucht bei Dir vor Dir. Ich vermag Dein Lob nicht vollständig aufzuzählen. Du bist so, wie Du Dich selbst gelobt hast.",
+    "category": "Suǧūd & Allahs Wohlgefallen"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 459,
+      "remaining": 443
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 82,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
