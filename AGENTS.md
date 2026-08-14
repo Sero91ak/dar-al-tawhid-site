@@ -84,7 +84,7 @@ Diese Regel ersetzt alle früheren Regeln zu sichtbaren Quellenlinks in veröffe
 - `https://` wird im veröffentlichten Beitrag **niemals ausgeschrieben**.
 - Die Nummerierung ist **streng fortlaufend**: `/q/1`, `/q/2`, `/q/3`, ...
 - Bereits vergebene Nummern werden **niemals wiederverwendet, überschrieben oder einer anderen Quelle/Aussage zugeordnet**.
-- Der aktuell bestehende Ibn-Masʿūd-Nachweis ist `dar-al-tawhid.de/q/1`. Der nächste neu anzulegende Quellen-Kurzlink beginnt daher mit `/q/2`, sofern nicht im Repository bereits eine höhere Nummer vergeben wurde; vor jeder Vergabe ist der tatsächliche höchste vorhandene `/q/<nummer>`-Eintrag zu prüfen.
+- Vor jeder Vergabe ist der tatsächliche höchste vorhandene `/q/<nummer>`-Eintrag im Repository zu prüfen.
 - In jedem Quellen-Post wird der passende Kurzlink direkt mit ausgegeben.
 - **Keine Textbeschriftung vor dem sichtbaren Link**: insbesondere niemals `Kurzlink:`, `Direktnachweis:`, `Link:` oder ähnliche Wörter verwenden.
 - Der Linkbereich steht **unmittelbar in der nächsten Zeile unter der Quellenzeile**, ohne Leerzeile oder sonstigen Abstand dazwischen.
@@ -97,7 +97,10 @@ Diese Regel ersetzt alle früheren Regeln zu sichtbaren Quellenlinks in veröffe
 - Die Quellenzeile darf und soll Werk, Band, Seite, Kapitel, Nummer, Überlieferungsstatus und sonstige genaue bibliographische Angaben nennen; die sichtbare anklickbare URL bleibt ausschließlich der eigene nummerierte `/q/<nummer>`-Kurzlink.
 - Der `/q/<nummer>`-Kurzlink darf intern nur auf die eigene DAR-AL-TAWḤĪD-Quellenseite führen und **nicht direkt auf eine externe Quelle**.
 - Die interne DAR-AL-TAWḤĪD-Quellenseite bleibt die edle, kompakte Quellenkarte im freigegebenen gemeinsamen Design mit Aussage, Sprecher/Überlieferer, genauer Fundstelle, Status, Isnād soweit vorgesehen, Branding, `by Serhat Abu Malik` und Social-Verknüpfungen.
-- Erst auf dieser eigenen Quellenseite befinden sich die geprüften externen Nachweise als Buttons, z. B. Originalnachweis mit Textmarkierung, weiterer Textnachweis und PDF/Scan.
-- Externe Nachweise müssen nach Möglichkeit direkt auf die konkrete belegte Stelle führen (`#:~:text=…` bzw. `#page=…`). Allgemeine Start-, Such- oder Werkseiten gelten nicht als vollwertiger Direktnachweis, wenn eine genaue Stelle verfügbar ist.
+- Erst auf dieser eigenen Quellenseite befinden sich die geprüften externen Nachweise als Buttons.
+- **PDF/Scan ist Pflicht:** Sobald zu Werk/Fundstelle ein öffentlich zugänglicher PDF- oder Scan-Nachweis existiert, muss die Quellenseite immer einen eigenen `PDF / Scan`-Button enthalten. Ein vorhandener Scan darf nicht aus Platz-, Design- oder Kürzungsgründen weggelassen werden.
+- **Textnachweise müssen direkt zur Aussage führen:** Web-/Textnachweise sind mit einer exakten Textfragment-Markierung `#:~:text=…` oder einer technisch gleichwertigen Direktmarkierung auf die belegte Aussage zu setzen. Allgemeine Start-, Such-, Kapitel- oder Werkseiten sind nur Fallback und ersetzen keinen verfügbaren Direktnachweis.
+- **PDFs müssen möglichst direkt zur belegten Seite führen:** Wenn die tatsächliche PDF-Seite verifiziert ist, wird `#page=<pdf-seite>` verwendet. Die PDF-Seite darf nicht geschätzt werden. Ist die technische PDF-Seite trotz vorhandenem Scan noch nicht sicher verifiziert, bleibt der PDF/Scan-Button trotzdem Pflicht; die genaue gedruckte Fundstelle wird dann zusätzlich in der Quellenangabe genannt und der Seitenanker erst nach Verifizierung ergänzt.
+- Bei mehreren belastbaren Nachweisen soll die Quellenseite mindestens enthalten: primärer Direktnachweis mit Markierung, weiterer unabhängiger Textnachweis soweit vorhanden und PDF/Scan.
 - Ein nummerierter Kurzlink darf erst als fertig ausgegeben werden, wenn seine Quellenseite erstellt, Inhalte und Originalbelege geprüft und der öffentliche `/q/<nummer>`-Link technisch verifiziert wurden.
 - Diese Regel ist **kanal-, format- und chatübergreifend** verbindlich und ersetzt ältere Beitrags- und Linkregeln, soweit sie ihr widersprechen.
