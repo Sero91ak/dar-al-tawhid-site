@@ -3446,6 +3446,38 @@ function resolveTopicByPriority(tags, map) {
   return 0;
 }
 
+function resolveTelegramTopicThreadIds(tags, topicMap, env) {
+  const map = topicMap || {};
+  const out = [];
+  const seen = new Set();
+  const pushThread = (value) => {
+    const threadId = Number(value);
+    if (!Number.isFinite(threadId) || threadId <= 0 || seen.has(threadId)) return;
+    seen.add(threadId);
+    out.push(threadId);
+  };
+
+  const tagSet = new Set((tags || []).map((tag) => normalizeTelegramTag(tag)).filter(Boolean));
+  for (const preferred of TELEGRAM_TOPIC_PRIORITY) {
+    if (!tagSet.has(preferred)) continue;
+    pushThread(map[preferred]);
+    for (const alt of TELEGRAM_TOPIC_ALIAS_LOOKUP[preferred] || []) pushThread(map[alt]);
+  }
+
+  for (const rawTag of tags || []) {
+    const tag = normalizeTelegramTag(rawTag);
+    if (!tag) continue;
+    pushThread(map[tag]);
+    for (const alt of TELEGRAM_TOPIC_ALIAS_LOOKUP[tag] || []) pushThread(map[alt]);
+  }
+
+  if (!out.length) {
+    const fallback = Number(env.TELEGRAM_TOPIC_DEFAULT_THREAD_ID || 0);
+    if (Number.isFinite(fallback) && fallback > 0) out.push(fallback);
+  }
+  return out;
+}
+
 function extractHashtagsFromTelegramText(text) {
   const value = String(text || "");
   const tags = new Set();
@@ -3459,17 +3491,7 @@ function extractHashtagsFromTelegramText(text) {
 }
 
 function resolveTelegramTopicThreadId(tags, topicMap, env) {
-  const map = topicMap || {};
-  const byPriority = resolveTopicByPriority(tags, map);
-  if (byPriority) return byPriority;
-  for (const tag of tags || []) {
-    if (map[tag]) return map[tag];
-    for (const alt of TELEGRAM_TOPIC_ALIAS_LOOKUP[tag] || []) {
-      if (map[alt]) return map[alt];
-    }
-  }
-  const fallback = Number(env.TELEGRAM_TOPIC_DEFAULT_THREAD_ID || 0);
-  return Number.isFinite(fallback) && fallback > 0 ? fallback : 0;
+  return resolveTelegramTopicThreadIds(tags, topicMap, env)[0] || 0;
 }
 
 function collectTopicMapFromTelegramUpdates(updates) {
@@ -3835,8 +3857,8 @@ async function routeLatestTelegramChannelPost(env, { force = false, silent = fal
     const configuredMap = parseTelegramTopicMap(env);
     const learnedMap = collectTopicMapFromTelegramUpdates(list);
     const topicMap = { ...historyMap, ...learnedMap, ...configuredMap };
-    const threadId = resolveTelegramTopicThreadId(tags, topicMap, env);
-    if (!threadId) {
+    const threadIds = resolveTelegramTopicThreadIds(tags, topicMap, env);
+    if (!threadIds.length) {
       const routeKey = `route:${sourceChatId}:${messageId}:unmapped`;
       await writeTelegramPostStatus(env, routeKey, {
         status: "failed",
@@ -3848,36 +3870,46 @@ async function routeLatestTelegramChannelPost(env, { force = false, silent = fal
       });
       return { ok: false, skipped: true, reason: "Kein Thread-Mapping für Hashtag", tags };
     }
-    const routeKey = `route:${sourceChatId}:${messageId}:${threadId}`;
-    if (!force && registry.posts?.[routeKey]?.status === "sent") {
-      return { ok: true, skipped: true, reason: "Bereits geroutet", routeKey, tags, threadId };
-    }
+    const sentTo = [];
+    const skippedTo = [];
+    for (const threadId of threadIds) {
+      const routeKey = `route:${sourceChatId}:${messageId}:${threadId}`;
+      if (!force && registry.posts?.[routeKey]?.status === "sent") {
+        skippedTo.push({ routeKey, threadId });
+        continue;
+      }
 
-    const copied = await telegramApiCall(env, "copyMessage", {
-      chat_id: targetChatId,
-      from_chat_id: sourceChatId,
-      message_id: messageId,
-      message_thread_id: threadId
-    });
-    await writeTelegramPostStatus(env, routeKey, {
-      status: "sent",
-      telegramStatus: "sent",
-      sourceChatId,
-      sourceMessageId: messageId,
-      targetChatId,
-      targetThreadId: threadId,
-      copiedMessageId: copied?.message_id || null,
-      hashtags: tags
-    });
+      const copied = await telegramApiCall(env, "copyMessage", {
+        chat_id: targetChatId,
+        from_chat_id: sourceChatId,
+        message_id: messageId,
+        message_thread_id: threadId
+      });
+      await writeTelegramPostStatus(env, routeKey, {
+        status: "sent",
+        telegramStatus: "sent",
+        sourceChatId,
+        sourceMessageId: messageId,
+        targetChatId,
+        targetThreadId: threadId,
+        copiedMessageId: copied?.message_id || null,
+        hashtags: tags
+      });
+      sentTo.push({ routeKey, threadId, copiedMessageId: copied?.message_id || null });
+    }
+    if (!sentTo.length && skippedTo.length) {
+      return { ok: true, skipped: true, reason: "Bereits geroutet", tags, threadIds, skippedTo };
+    }
     return {
       ok: true,
-      sent: true,
-      routeKey,
+      sent: sentTo.length > 0,
       sourceChatId,
       sourceMessageId: messageId,
       targetChatId,
-      targetThreadId: threadId,
-      hashtags: tags
+      targetThreadIds: threadIds,
+      hashtags: tags,
+      sentTo,
+      skippedTo
     };
   } catch (error) {
     if (!silent) return { ok: false, sent: false, error: error?.message || String(error) };
