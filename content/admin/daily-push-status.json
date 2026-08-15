@@ -3,11 +3,11 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-15T11:46:00.026Z",
-  "usersChecked": 12,
-  "duaCandidates": 0,
-  "recCandidates": 0,
-  "sent": 0,
+  "updatedAt": "2026-08-15T11:56:00.918Z",
+  "usersChecked": 13,
+  "duaCandidates": 1,
+  "recCandidates": 1,
+  "sent": 2,
   "skipped": 0,
   "duplicates": 23,
   "errors": 0,
@@ -24,5 +24,24 @@
     "category": "Dankbarkeit & Familie"
   },
   "configAutomatic": true,
-  "responses": []
+  "responses": [
+    {
+      "kind": "dua",
+      "batch": true,
+      "count": 1,
+      "contentId": "dua-057-rabbi-awzini-an-ashkura",
+      "recipients": "a0390efa-7361-4b60-946d-fea2508e3476",
+      "ok": true,
+      "invalid": 0
+    },
+    {
+      "kind": "recommendation",
+      "batch": true,
+      "count": 1,
+      "contentId": "hukm-muhakamah-abwendung-vom-herabgesandten-395",
+      "recipients": "534cd5a0-43ec-46bc-8273-e0a3c44a1401",
+      "ok": true,
+      "invalid": 0
+    }
+  ]
 }
