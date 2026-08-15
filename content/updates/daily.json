@@ -1,18 +1,38 @@
 {
   "date": "2026-08-15",
   "timezone": "Europe/Berlin",
-  "generated": "2026-08-14T22:00:49.005Z",
-  "source": "dar-daily-scheduler-regenerated",
+  "generated": "2026-08-15T03:00:17.307Z",
+  "source": "dar-daily-no-repeat-rotation",
   "recommendation": {
-    "id": "hukm-muhakamah-glaeubige-brueder-im-streit-409",
-    "title": "Auch im Streit bleiben Gläubige Brüder",
-    "file": "hukm-muhakamah-glaeubige-brueder-im-streit-409.md",
+    "id": "hukm-muhakamah-abwendung-vom-herabgesandten-395",
+    "title": "Wenn sie zum Herabgesandten gerufen werden",
+    "file": "hukm-muhakamah-abwendung-vom-herabgesandten-395.md",
     "category": "Hukm & Muḥākamah",
     "scholar": "aṭ-Ṭabarī / Ibn Kathīr",
-    "snippet": "„Die Gläubigen sind Brüder; darum stiftet Frieden zwischen euren Brüdern und fürchtet Allah.“"
+    "snippet": "🖋️ Allah ʿazza wa jalla:"
   },
   "dua": {
-    "snippet": "",
-    "category": ""
+    "id": "dua-057-rabbi-awzini-an-ashkura",
+    "title": "Duʿāʾ um Dankbarkeit und rechtschaffenes Handeln",
+    "snippet": "Mein Herr, gib mir ein, für Deine Gunst dankbar zu sein, die Du mir und meinen Eltern erwiesen hast, und rechtschaffen zu handeln, womit Du zufrieden bist.",
+    "category": "Dankbarkeit & Familie"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 459,
+      "remaining": 442
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 81,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
