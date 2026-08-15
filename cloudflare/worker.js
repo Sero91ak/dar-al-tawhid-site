@@ -3392,7 +3392,7 @@ const TELEGRAM_TOPIC_ALIAS_GROUPS = (() => {
   groups.push(["aqida", "aqidah", "akida"]);
   groups.push(["tawhid", "tauhid"]);
   groups.push(["dua", "dua", "adhkar", "dhikr"]);
-  groups.push(["salaf", "sahaba", "ahlalhadith", "ahlalhadit", "manhaj"]);
+  groups.push(["salaf", "sahaba", "ahlalhadith", "ahlalhadit", "manhaj", "sunnah", "sunna", "alsunnah", "alawzai", "awzai"]);
   groups.push(["fiqh", "usul", "usulalfiqh", "salam"]);
   groups.push(["sirah", "seerah", "geschichte", "tarikh"]);
   groups.push(["widerlegung", "widerlegungen", "rad", "shubuhat"]);
