@@ -18,10 +18,10 @@ export const PRAYER_ADVANCE_PUSH_VARIANTS = {
     "In {minutes} Min · {time} Uhr. Dhuhr naht — unterbrich deinen Tag und verrichte das Gebet für Allah."
   ],
   asr: [
-    "In {minutes} Min · {time} Uhr. ʿAṣr naht — bewahre dieses Gebet und verrichte es rechtzeitig."
+    "In {minutes} Min · {time} Uhr. ʿAṣr naht — bewahre dieses Gebet und verrichte es rechtzeitig für Allah."
   ],
   maghrib: [
-    "In {minutes} Min · {time} Uhr. Maghrib naht — verrichte das Gebet ohne Aufschub."
+    "In {minutes} Min · {time} Uhr. Maghrib naht — verrichte das Gebet ohne Aufschub für Allah."
   ],
   isha: [
     "In {minutes} Min · {time} Uhr. ʿIshāʾ naht — beende deinen Tag mit dem Gebet für Allah."
@@ -65,10 +65,19 @@ const BLOCKED_PHRASES = [
   { pattern: /ʿasr\b/gi, replacement: "ʿAṣr" },
   { pattern: /(?:['‘’`]\s*)asr\b/gi, replacement: "ʿAṣr" },
   { pattern: /\basr\b/gi, replacement: "ʿAṣr" },
+  { pattern: /wer\s+die\s+beiden\s+kühlen\s+gebete\s+bewahrt\b/gi, replacement: "Bewahre besonders Fajr und ʿAṣr" },
+  { pattern: /verliere\s+['‘’`ʿ]?\s*a(?:s|ṣ)r\s+nicht\b/gi, replacement: "bewahre dein ʿAṣr-Gebet" },
+  { pattern: /\bsteh(?:e)?\s+(?:für|zum)\s+den?\s+morgen\b/gi, replacement: "Steh auf für Allah" },
   { pattern: /ʿaṣr\s+ruft\s+dich\b/gi, replacement: "ʿAṣr-Zeit ist eingetreten" },
   { pattern: /\b(?:dhuhr|zuhr)\s+ruft\s+dich\b/gi, replacement: "Dhuhr-Zeit ist eingetreten" },
   { pattern: /\b(?:fajr|maghrib|isha|ʿi(?:sh|š)aʾ?)\s+ruft\s+dich\b/gi, replacement: "Gebetszeit ist eingetreten" },
   { pattern: /\bruft\s+dich\b/gi, replacement: "ist eingetreten" }
+];
+
+const HARD_BLOCK_PATTERNS = [
+  /\bruft\s+dich\b/i,
+  /wer\s+die\s+beiden\s+kühlen\s+gebete\s+bewahrt\b/i,
+  /verliere\s+['‘’`ʿ]?\s*a(?:s|ṣ)r\s+nicht\b/i
 ];
 
 export function sanitizePrayerPushText(value) {
@@ -77,6 +86,11 @@ export function sanitizePrayerPushText(value) {
     text = text.replace(rule.pattern, rule.replacement);
   }
   return text.replace(/\s{2,}/g, " ").trim();
+}
+
+export function hasBlockedPrayerPhrase(value) {
+  const text = String(value || "");
+  return HARD_BLOCK_PATTERNS.some((pattern) => pattern.test(text));
 }
 
 export function sanitizePrayerPushCopy(copy) {
