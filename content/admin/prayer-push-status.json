@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-15T09:15:52.198Z",
+  "updatedAt": "2026-08-15T09:20:50.376Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-15T09:15:52.198Z",
+  "lastCronRun": "2026-08-15T09:20:50.376Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-15T11:21:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-15T09:00:48.358Z",
-  "windowEnd": "2026-08-16T11:15:48.358Z",
+  "windowStart": "2026-08-15T09:05:46.682Z",
+  "windowEnd": "2026-08-16T11:20:46.682Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 27,
@@ -28,10 +28,10 @@
   "usersWithLocation": 27,
   "usersWithActivePush": 27,
   "locationGroups": 5,
-  "scheduled": 50,
-  "recipients": 270,
+  "scheduled": 51,
+  "recipients": 271,
   "skippedPast": 60,
-  "skippedWindow": 90,
+  "skippedWindow": 89,
   "duplicates": 1,
   "errors": 0,
   "lastError": null,
@@ -56,7 +56,7 @@
         "time": "13:36",
         "advance": {
           "status": "geplant",
-          "recipients": 27
+          "recipients": 28
         },
         "entry": {
           "status": "geplant",
@@ -132,7 +132,7 @@
       "time": "13:36",
       "advance": {
         "status": "geplant",
-        "recipients": 27
+        "recipients": 28
       },
       "entry": {
         "status": "geplant",
@@ -557,6 +557,15 @@
       "mode": "advance",
       "time": "04:57",
       "sendAfter": "2026-08-16T02:42:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Dhuhr",
+      "key": "dhuhr",
+      "mode": "advance",
+      "time": "13:35",
+      "sendAfter": "2026-08-16T11:20:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin"
     },
