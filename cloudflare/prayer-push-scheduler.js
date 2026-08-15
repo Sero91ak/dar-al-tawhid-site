@@ -263,6 +263,23 @@ function notifyCopy(prayer, mode, group) {
   };
 }
 
+function enforcePrayerCopyGuard(copy) {
+  const title = sanitizePrayerPushText(copy?.headings?.de || "");
+  const body = sanitizePrayerPushText(copy?.contents?.de || "");
+  const blocked = /\bruft\s+dich\b/i.test(title) || /\bruft\s+dich\b/i.test(body);
+  return {
+    headings: {
+      de: title,
+      en: sanitizePrayerPushText(copy?.headings?.en || title)
+    },
+    contents: {
+      de: body,
+      en: sanitizePrayerPushText(copy?.contents?.en || body)
+    },
+    blocked
+  };
+}
+
 async function uuidFrom(seed) {
   const hash = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(seed));
   const b = new Uint8Array(hash.slice(0, 16));
@@ -316,7 +333,10 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
   }
   sentInRun.add(idKey);
 
-  const copy = notifyCopy(prayer, mode, group);
+  const copy = enforcePrayerCopyGuard(notifyCopy(prayer, mode, group));
+  if (copy.blocked) {
+    throw new Error(`Push-Text blockiert (${prayer.key}/${mode}): enthält verbotene Formulierung`);
+  }
 
   const body = withIcons({
     app_id: String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim(),
