@@ -1,16 +1,16 @@
 {
-  "ok": false,
+  "ok": true,
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "worker-local",
-  "schedulerStatus": "error",
-  "updatedAt": "2026-08-15T07:00:49.639Z",
+  "schedulerStatus": "success",
+  "updatedAt": "2026-08-15T07:05:45.636Z",
   "usersChecked": 12,
   "duaCandidates": 12,
   "recCandidates": 0,
-  "sent": 0,
+  "sent": 12,
   "skipped": 0,
   "duplicates": 0,
-  "errors": 12,
+  "errors": 0,
   "dailyContentDate": "2026-08-15",
   "currentRecommendation": {
     "id": "hukm-muhakamah-abwendung-vom-herabgesandten-395",
@@ -31,8 +31,8 @@
       "count": 12,
       "contentId": "dua-057-rabbi-awzini-an-ashkura",
       "recipients": "a0390efa-7361-4b60-946d-fea2508e3476",
-      "ok": false,
-      "invalid": 2
+      "ok": true,
+      "invalid": 0
     }
   ]
 }
