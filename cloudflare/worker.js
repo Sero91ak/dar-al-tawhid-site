@@ -3840,24 +3840,56 @@ async function routeLatestTelegramChannelPost(env, { force = false, silent = fal
       allowed_updates: ["channel_post", "message"]
     });
     const list = Array.isArray(updates) ? updates : [];
-    const latest = [...list]
+    const channelPosts = [...list]
       .reverse()
-      .find((u) => u && u.channel_post && (u.channel_post.text || u.channel_post.caption));
-    if (!latest?.channel_post) {
+      .map((u) => u?.channel_post)
+      .filter((post) => post && (post.text || post.caption));
+    if (!channelPosts.length) {
       return { ok: true, skipped: true, reason: "Kein channel_post gefunden" };
     }
 
-    const post = latest.channel_post;
-    const sourceChatId = post.chat?.id;
-    const messageId = post.message_id;
-    const text = String(post.text || post.caption || "").trim();
-    const tags = extractHashtagsFromTelegramText(text);
     const registry = await readTelegramPostsRegistry(env);
     const historyMap = collectTopicMapFromRouteHistory(registry);
     const configuredMap = parseTelegramTopicMap(env);
     const learnedMap = collectTopicMapFromTelegramUpdates(list);
     const topicMap = { ...historyMap, ...learnedMap, ...configuredMap };
-    const threadIds = resolveTelegramTopicThreadIds(tags, topicMap, env);
+
+    let selectedPost = null;
+    let selectedTags = [];
+    let threadIds = [];
+
+    for (const candidate of channelPosts) {
+      const sourceChatId = candidate.chat?.id;
+      const messageId = candidate.message_id;
+      const text = String(candidate.text || candidate.caption || "").trim();
+      const tags = extractHashtagsFromTelegramText(text);
+      if (!tags.length) continue;
+
+      const candidateThreadIds = resolveTelegramTopicThreadIds(tags, topicMap, env);
+      if (!candidateThreadIds.length) continue;
+
+      if (!force) {
+        const fullySent = candidateThreadIds.every((threadId) => {
+          const routeKey = `route:${sourceChatId}:${messageId}:${threadId}`;
+          return registry.posts?.[routeKey]?.status === "sent";
+        });
+        if (fullySent) continue;
+      }
+
+      selectedPost = candidate;
+      selectedTags = tags;
+      threadIds = candidateThreadIds;
+      break;
+    }
+
+    if (!selectedPost) {
+      return { ok: true, skipped: true, reason: "Kein neuer passender Hashtag-Post für Themenrouting gefunden" };
+    }
+
+    const sourceChatId = selectedPost.chat?.id;
+    const messageId = selectedPost.message_id;
+    const tags = selectedTags;
+
     if (!threadIds.length) {
       const routeKey = `route:${sourceChatId}:${messageId}:unmapped`;
       await writeTelegramPostStatus(env, routeKey, {
