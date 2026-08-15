@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-15T16:41:07.273Z",
+  "updatedAt": "2026-08-15T16:46:05.558Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-15T16:41:07.273Z",
+  "lastCronRun": "2026-08-15T16:46:05.558Z",
   "nextPlannedPush": {
     "prayer": "Maghrib",
     "key": "maghrib",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-15T18:38:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-15T16:26:02.795Z",
-  "windowEnd": "2026-08-16T18:41:02.795Z",
+  "windowStart": "2026-08-15T16:31:01.284Z",
+  "windowEnd": "2026-08-16T18:46:01.284Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 28,
@@ -28,10 +28,10 @@
   "usersWithLocation": 28,
   "usersWithActivePush": 28,
   "locationGroups": 5,
-  "scheduled": 54,
-  "recipients": 307,
+  "scheduled": 55,
+  "recipients": 308,
   "skippedPast": 80,
-  "skippedWindow": 66,
+  "skippedWindow": 65,
   "duplicates": 1,
   "errors": 0,
   "lastError": null,
@@ -80,7 +80,7 @@
         "time": "20:53",
         "advance": {
           "status": "geplant",
-          "recipients": 55
+          "recipients": 56
         },
         "entry": {
           "status": "geplant",
@@ -158,7 +158,7 @@
       "time": "20:53",
       "advance": {
         "status": "geplant",
-        "recipients": 55
+        "recipients": 56
       },
       "entry": {
         "status": "geplant",
@@ -685,6 +685,15 @@
       "sendAfter": "2026-08-16T15:28:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin"
+    },
+    {
+      "prayer": "Maghrib",
+      "key": "maghrib",
+      "mode": "advance",
+      "time": "20:51",
+      "sendAfter": "2026-08-16T18:46:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin"
     }
   ],
   "skippedPastDetails": [
@@ -1034,7 +1043,7 @@
       "prayer": "maghrib",
       "mode": "advance",
       "recipients": 20,
-      "response": "{\"id\":\"120ad811-235c-4c86-8e31-0177bdc306b4\",\"external_id\":\"1abc3faf-d0d8-40ba-9ca8-4ef38e1e727c\",\"errors\":{\"invalid_player_ids\":[\"0b13265d-3f34-4c9c-bcaf-85743bb8a7db\",\"19ab451c-bf40-4b43-a99e-2cef48"
+      "response": "{\"id\":\"120ad811-235c-4c86-8e31-0177bdc306b4\",\"external_id\":\"1abc3faf-d0d8-40ba-9ca8-4ef38e1e727c\"}"
     },
     {
       "prayer": "maghrib",
