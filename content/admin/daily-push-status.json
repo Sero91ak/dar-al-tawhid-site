@@ -3,13 +3,13 @@
   "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-15T07:05:45.636Z",
+  "updatedAt": "2026-08-15T07:10:48.328Z",
   "usersChecked": 12,
-  "duaCandidates": 12,
+  "duaCandidates": 0,
   "recCandidates": 0,
-  "sent": 12,
+  "sent": 0,
   "skipped": 0,
-  "duplicates": 0,
+  "duplicates": 12,
   "errors": 0,
   "dailyContentDate": "2026-08-15",
   "currentRecommendation": {
@@ -24,15 +24,5 @@
     "category": "Dankbarkeit & Familie"
   },
   "configAutomatic": true,
-  "responses": [
-    {
-      "kind": "dua",
-      "batch": true,
-      "count": 12,
-      "contentId": "dua-057-rabbi-awzini-an-ashkura",
-      "recipients": "a0390efa-7361-4b60-946d-fea2508e3476",
-      "ok": true,
-      "invalid": 0
-    }
-  ]
+  "responses": []
 }
