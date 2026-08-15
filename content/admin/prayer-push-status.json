@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-15T03:10:49.663Z",
+  "updatedAt": "2026-08-15T03:15:49.831Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-15T03:10:49.663Z",
+  "lastCronRun": "2026-08-15T03:15:49.831Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-15T11:21:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-15T02:55:45.981Z",
-  "windowEnd": "2026-08-16T05:10:45.981Z",
+  "windowStart": "2026-08-15T03:00:46.275Z",
+  "windowEnd": "2026-08-16T05:15:46.275Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 27,
@@ -28,9 +28,9 @@
   "usersWithLocation": 27,
   "usersWithActivePush": 27,
   "locationGroups": 5,
-  "scheduled": 53,
-  "recipients": 295,
-  "skippedPast": 57,
+  "scheduled": 50,
+  "recipients": 270,
+  "skippedPast": 60,
   "skippedWindow": 90,
   "duplicates": 1,
   "errors": 0,
@@ -48,7 +48,7 @@
         },
         "entry": {
           "status": "geplant",
-          "recipients": 52
+          "recipients": 27
         }
       },
       "dhuhr": {
@@ -123,7 +123,7 @@
       },
       "entry": {
         "status": "geplant",
-        "recipients": 52
+        "recipients": 27
       },
       "answer": "Fajr 04:56: Vorab und Gebetszeit geplant."
     },
@@ -201,15 +201,6 @@
   },
   "planned": [
     {
-      "prayer": "Fajr",
-      "key": "fajr",
-      "mode": "entry",
-      "time": "04:56",
-      "sendAfter": "2026-08-15T02:56:00.000Z",
-      "recipients": 19,
-      "timeZone": "Europe/Berlin"
-    },
-    {
       "prayer": "Dhuhr",
       "key": "dhuhr",
       "mode": "entry",
@@ -390,15 +381,6 @@
       "timeZone": "Europe/Berlin"
     },
     {
-      "prayer": "Fajr",
-      "key": "fajr",
-      "mode": "entry",
-      "time": "04:56",
-      "sendAfter": "2026-08-15T02:56:00.000Z",
-      "recipients": 5,
-      "timeZone": "Europe/Berlin"
-    },
-    {
       "prayer": "Dhuhr",
       "key": "dhuhr",
       "mode": "entry",
@@ -575,15 +557,6 @@
       "mode": "advance",
       "time": "04:57",
       "sendAfter": "2026-08-16T02:42:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "prayer": "Fajr",
-      "key": "fajr",
-      "mode": "entry",
-      "time": "04:56",
-      "sendAfter": "2026-08-15T02:56:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin"
     },
@@ -751,6 +724,13 @@
     },
     {
       "key": "fajr",
+      "mode": "entry",
+      "sendAfter": "2026-08-15T02:56:00.000Z",
+      "time": "04:56",
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "key": "fajr",
       "mode": "advance",
       "sendAfter": "2026-08-15T02:41:00.000Z",
       "time": "04:56",
@@ -912,6 +892,13 @@
     },
     {
       "key": "fajr",
+      "mode": "entry",
+      "sendAfter": "2026-08-15T02:56:00.000Z",
+      "time": "04:56",
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "key": "fajr",
       "mode": "advance",
       "sendAfter": "2026-08-15T02:41:00.000Z",
       "time": "04:56",
@@ -944,29 +931,9 @@
       "sendAfter": "2026-08-14T11:21:00.000Z",
       "time": "13:36",
       "timeZone": "Europe/Berlin"
-    },
-    {
-      "key": "asr",
-      "mode": "entry",
-      "sendAfter": "2026-08-14T15:35:00.000Z",
-      "time": "17:35",
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "key": "asr",
-      "mode": "advance",
-      "sendAfter": "2026-08-14T15:20:00.000Z",
-      "time": "17:35",
-      "timeZone": "Europe/Berlin"
     }
   ],
   "oneSignalResponses": [
-    {
-      "prayer": "fajr",
-      "mode": "entry",
-      "recipients": 19,
-      "response": "{\"id\":\"b9f295af-c07b-4a3d-ba63-99628fa141b9\",\"external_id\":\"c2ebf232-37e4-48b0-b819-1c9cacfa090f\"}"
-    },
     {
       "prayer": "dhuhr",
       "mode": "entry",
@@ -1078,6 +1045,12 @@
     {
       "prayer": "fajr",
       "mode": "entry",
+      "recipients": 1,
+      "response": "{\"id\":\"\",\"errors\":{\"invalid_player_ids\":[\"e67e4b16-6faf-4f42-9569-38e915259e79\"]}}"
+    },
+    {
+      "prayer": "fajr",
+      "mode": "advance",
       "recipients": 1,
       "response": "{\"id\":\"\",\"errors\":{\"invalid_player_ids\":[\"e67e4b16-6faf-4f42-9569-38e915259e79\"]}}"
     }
