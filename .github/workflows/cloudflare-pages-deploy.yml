@@ -12,6 +12,7 @@ on:
       - service-worker.js
       - manifest.json
       - assets/**
+      - links/**
       - data/scholar-index-meta.json
       - data/scholar-history-curated.json
       - wrangler.toml
@@ -54,7 +55,11 @@ jobs:
           CHANGED="$(git diff --name-only "$BASE" "$GITHUB_SHA")"
           echo "$CHANGED"
           if [ -n "$CHANGED" ] && [ -z "$(printf '%s\n' "$CHANGED" | grep -v '^_redirects$' || true)" ]; then
-            echo "shortlinks_only=true" >> "$GITHUB_OUTPUT"
+            if awk 'NF && $1 !~ /^#/ && $1 !~ /^\/quelle\// { bad=1 } END { exit bad }' _redirects; then
+              echo "shortlinks_only=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "shortlinks_only=false" >> "$GITHUB_OUTPUT"
+            fi
           else
             echo "shortlinks_only=false" >> "$GITHUB_OUTPUT"
           fi
