@@ -84,6 +84,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "welcome-push-server-sync-v632-2026-08-09",
+      "approvedBy": "user-explicit-emergency-live-push",
+      "reason": "Notfall: Neue App ohne Willkommens-Push; SERVER VERBUNDEN fehlt trotz Erlaubnis. optIn+Sync+Welcome Live+Test",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "prophets-instant-open-v630-2026-08-09",
       "approvedBy": "user-explicit-live-push",
       "reason": "Propheten öffnen noch immer zu langsam / Zweitklick nötig. Root-cause: let currentRoute nicht auf window — Paint tot. Sofort-Fix + Hintergrund-Vorladen; Live+Test",
