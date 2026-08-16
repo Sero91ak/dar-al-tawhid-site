@@ -1,18 +1,38 @@
 {
   "date": "2026-08-16",
   "timezone": "Europe/Berlin",
-  "generated": "2026-08-15T22:10:59.372Z",
-  "source": "dar-daily-scheduler-regenerated",
+  "generated": "2026-08-16T03:09:00.917Z",
+  "source": "dar-daily-no-repeat-rotation",
   "recommendation": {
-    "id": "hukm-muhakamah-islam-ganz-annehmen-424",
-    "title": "Tretet vollständig in den Islām ein",
-    "file": "hukm-muhakamah-islam-ganz-annehmen-424.md",
-    "category": "Hukm & Muḥākamah",
-    "scholar": "aṭ-Ṭabarī / Ibn Kathīr",
-    "snippet": "„Allah befiehlt den Gläubigen, vollständig in den Islām einzutreten und nicht den Fußstapfen des Shayṭān zu folgen.“"
+    "id": "tarbiyah-jeder-traegt-verantwortung-254",
+    "title": "Tarbiyah: Jeder trägt Verantwortung",
+    "file": "tarbiyah-jeder-traegt-verantwortung-254.md",
+    "category": "Tarbiyah",
+    "scholar": "Der Prophet ﷺ",
+    "snippet": "🖋️ Der Prophet ﷺ sagte:"
   },
   "dua": {
-    "snippet": "",
-    "category": ""
+    "id": "dua-072-wajalna-muslimayni-lak",
+    "title": "Bitte um vollständige Hingabe an Allah",
+    "snippet": "Unser Herr, mache uns Dir ergeben und aus unserer Nachkommenschaft eine Dir ergebene Gemeinschaft. Zeige uns unsere Gottesdienste und nimm unsere Reue an. Du bist wahrlich der Reue-Annehmende, der Barmherzige.",
+    "category": "Hingabe & Nachkommen"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 459,
+      "remaining": 441
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 80,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
