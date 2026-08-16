@@ -15,201 +15,146 @@
   <style>
     :root{
       --bg:#02070a;
-      --bg2:#071118;
-      --ink:#f7efdf;
-      --muted:#c8b99c;
-      --gold:#d9b86f;
-      --gold2:#f3d88e;
-      --line:rgba(217,184,111,.38);
-      --line-soft:rgba(217,184,111,.16);
+      --ink:#f8efe0;
+      --muted:#c7b89a;
+      --gold:#d5ad64;
+      --gold2:#f3d996;
+      --line:rgba(213,173,100,.54);
+      --soft:rgba(255,255,255,.035);
       --shadow:rgba(0,0,0,.48);
       --serif:Georgia,"Times New Roman",serif;
-      --ui:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-      --script:"Snell Roundhand","Segoe Script","Brush Script MT",cursive;
+      --script:"Snell Roundhand","Brush Script MT","Segoe Script",cursive;
+      --ui:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     }
+
     *{box-sizing:border-box}
-    html,body{min-height:100%;margin:0;background:var(--bg);color:var(--ink)}
-    body{
-      font-family:var(--ui);
-      overflow-x:hidden;
-      background:
-        radial-gradient(760px 500px at 86% -8%,rgba(230,196,119,.12),transparent 58%),
-        radial-gradient(650px 420px at -16% 82%,rgba(29,76,91,.18),transparent 64%),
-        linear-gradient(145deg,#02070a 0%,#07131a 48%,#020609 100%);
-    }
-    .poster{
+    html,body{margin:0;width:100%;height:100%;background:var(--bg);overflow:hidden;color:var(--ink)}
+    body{font-family:var(--ui)}
+
+    .stage{
       position:relative;
-      min-height:100svh;
-      width:100%;
-      max-width:760px;
+      width:100vw;
+      height:100dvh;
+      min-height:560px;
+      max-width:620px;
       margin:0 auto;
       overflow:hidden;
-      padding:calc(env(safe-area-inset-top,0px) + 18px) clamp(18px,5vw,54px) calc(env(safe-area-inset-bottom,0px) + 18px);
       background:
-        radial-gradient(420px 350px at 74% 15%,rgba(219,184,111,.10),transparent 68%),
-        radial-gradient(320px 280px at 18% 54%,rgba(24,80,96,.10),transparent 70%);
+        radial-gradient(540px 360px at 94% 0%,rgba(239,208,139,.20),transparent 63%),
+        radial-gradient(440px 330px at 0% 58%,rgba(32,104,128,.13),transparent 70%),
+        linear-gradient(145deg,#040b10 0%,#0b171d 42%,#03080c 100%);
+      isolation:isolate;
     }
-    .poster::before{
-      content:"";
-      position:absolute;
-      inset:10px;
-      border:1px solid rgba(217,184,111,.16);
-      border-radius:26px;
-      pointer-events:none;
-      z-index:3;
+    .stage:before{
+      content:"";position:absolute;inset:10px 12px;border:1px solid rgba(213,173,100,.18);border-radius:28px;pointer-events:none;z-index:5;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.026),0 0 50px rgba(213,173,100,.05)
     }
-    .poster::after{
-      content:"";
-      position:absolute;
-      inset:0;
+    .stage:after{
+      content:"";position:absolute;inset:-24% -30%;pointer-events:none;z-index:1;opacity:.46;
       background:
-        linear-gradient(112deg,transparent 0 31%,rgba(242,216,142,.095) 31.3%,transparent 32.1% 67%,rgba(242,216,142,.06) 67.3%,transparent 68.2%),
-        radial-gradient(900px 620px at 108% 62%,transparent 0 52%,rgba(217,184,111,.08) 52.2%,transparent 52.7%,transparent 59%,rgba(217,184,111,.055) 59.2%,transparent 59.7%);
-      pointer-events:none;
-      z-index:1;
+        repeating-radial-gradient(ellipse at 100% 60%,transparent 0 35px,rgba(213,173,100,.07) 36px,transparent 38px),
+        linear-gradient(112deg,transparent 0 43%,rgba(241,211,143,.11) 44%,transparent 46%),
+        linear-gradient(105deg,transparent 0 64%,rgba(241,211,143,.08) 65%,transparent 66%);
+      transform:rotate(-2deg)
     }
-    .grain{
-      position:absolute;
-      inset:0;
-      opacity:.34;
-      pointer-events:none;
-      z-index:0;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.13'/%3E%3C/svg%3E");
-      mix-blend-mode:soft-light;
-    }
-    .watermark-wrap{
-      position:absolute;
-      z-index:1;
-      width:min(68vw,430px);
-      aspect-ratio:1;
-      top:18%;
-      left:43%;
-      border-radius:50%;
-      overflow:hidden;
-      opacity:.20;
-      transform:rotate(-4deg);
-      filter:sepia(.35) saturate(.55) brightness(.62) contrast(1.18) drop-shadow(0 18px 44px rgba(0,0,0,.42));
-      -webkit-mask-image:radial-gradient(circle at 50% 50%,#000 0 43%,rgba(0,0,0,.72) 49%,transparent 57%);
-      mask-image:radial-gradient(circle at 50% 50%,#000 0 43%,rgba(0,0,0,.72) 49%,transparent 57%);
-      mix-blend-mode:luminosity;
-    }
-    .watermark-wrap::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      border-radius:50%;
-      background:radial-gradient(circle,transparent 0 51%,rgba(2,7,10,.88) 63%,transparent 76%);
-      pointer-events:none;
-    }
-    .watermark-wrap img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;transform:scale(1.18)}
-    .content{position:relative;z-index:2;width:100%}
-    .ornament{height:1px;width:min(320px,54vw);margin:0 auto 14px;background:linear-gradient(90deg,transparent,var(--gold),transparent);position:relative;opacity:.75}
-    .ornament::after{content:"";position:absolute;left:50%;top:-5px;width:10px;height:10px;border:1px solid var(--gold);background:#071118;transform:translateX(-50%) rotate(45deg)}
-    .quote{margin:0 auto 18px;text-align:left;max-width:610px;padding:0 6px}
-    .quote-mark{display:block;text-align:center;color:var(--gold2);font-family:var(--serif);font-size:26px;line-height:.55;margin:0 0 5px;text-shadow:0 0 16px rgba(242,216,142,.32)}
-    .quote-text{margin:0;color:var(--ink);font-family:var(--serif);font-size:clamp(27px,8.2vw,54px);line-height:.98;letter-spacing:-.02em;text-shadow:0 8px 24px rgba(0,0,0,.62);max-width:570px}
-    .quote-text .script{font-family:var(--script);font-weight:400;color:var(--gold2);font-size:1.12em;line-height:.82;display:inline-block;border-bottom:1px solid rgba(243,216,142,.72);padding:0 .03em;text-shadow:0 0 18px rgba(242,216,142,.22),0 8px 24px rgba(0,0,0,.6)}
-    .quote-source{margin:10px 0 0;color:#efe4cf;font-family:var(--serif);font-size:clamp(15px,4.1vw,24px);font-style:italic;line-height:1.18;text-shadow:0 8px 20px rgba(0,0,0,.5)}
-    .quote-ref{margin:7px 0 0;color:var(--gold);font-size:clamp(11px,3.2vw,15px);line-height:1.25;letter-spacing:.015em}
-    .brand{text-align:center;margin:16px auto 13px}
-    .brand h1{margin:0;white-space:nowrap;font-family:var(--serif);font-size:clamp(26px,7.3vw,48px);line-height:1;letter-spacing:.11em;font-weight:700;text-shadow:0 10px 26px rgba(0,0,0,.58)}
-    .brand p{margin:9px 0 0;color:var(--gold2);font-size:clamp(10px,2.7vw,14px);line-height:1;letter-spacing:.32em;text-transform:uppercase;font-weight:800}
-    .brand-line{width:min(360px,72vw);height:1px;margin:13px auto 0;background:linear-gradient(90deg,transparent,var(--line),transparent);position:relative}
-    .brand-line::after{content:"";position:absolute;left:50%;top:-5px;width:10px;height:10px;border:1px solid var(--gold);background:#071118;transform:translateX(-50%) rotate(45deg)}
-    .links{display:grid;gap:0;width:100%;max-width:620px;margin:0 auto 16px}
-    .link-row{--accent:var(--gold);position:relative;display:grid;grid-template-columns:62px minmax(0,1fr) 36px;gap:14px;align-items:center;min-height:66px;padding:7px 0;text-decoration:none;color:var(--ink);border-top:1px solid rgba(217,184,111,.25);-webkit-tap-highlight-color:transparent;overflow:visible;isolation:isolate}
-    .link-row:last-child{border-bottom:1px solid rgba(217,184,111,.18)}
-    .link-row::before{content:"";position:absolute;z-index:-1;inset:5px 5px 5px 70px;border-radius:0 999px 999px 0;background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 10%,transparent),rgba(255,255,255,.018) 48%,transparent);box-shadow:inset 0 -1px 0 rgba(217,184,111,.14);opacity:.55;transition:opacity .2s ease,box-shadow .2s ease,transform .2s ease}
-    .link-row::after{content:"";position:absolute;left:76px;right:44px;bottom:5px;height:1px;background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 70%,#fff 15%),transparent 72%);opacity:.44;transition:opacity .22s ease,box-shadow .22s ease}
-    .link-row:hover::before,.link-row:focus-visible::before,.link-row:active::before{opacity:.92;box-shadow:0 0 28px color-mix(in srgb,var(--accent) 38%,transparent),inset 0 0 0 1px color-mix(in srgb,var(--accent) 28%,transparent);transform:translateX(2px)}
-    .link-row:hover::after,.link-row:focus-visible::after,.link-row:active::after{opacity:.95;box-shadow:0 0 16px color-mix(in srgb,var(--accent) 55%,transparent)}
-    .icon{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;color:#fff;position:relative;background:radial-gradient(circle at 28% 21%,rgba(255,255,255,.72),transparent 22%),linear-gradient(145deg,color-mix(in srgb,var(--accent) 94%,white 6%),color-mix(in srgb,var(--accent) 54%,black 46%));box-shadow:0 0 0 1px rgba(243,216,142,.88),0 0 0 4px rgba(217,184,111,.16),inset 0 0 0 2px rgba(255,255,255,.22),0 10px 24px color-mix(in srgb,var(--accent) 28%,transparent);transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
-    .icon::after{content:"";position:absolute;inset:4px;border-radius:50%;border:1px solid rgba(255,255,255,.25);box-shadow:inset 0 -10px 22px rgba(0,0,0,.20)}
-    .link-row:hover .icon,.link-row:focus-visible .icon,.link-row:active .icon{transform:translateY(-1px) scale(1.035);filter:saturate(1.08);box-shadow:0 0 0 1px rgba(243,216,142,.95),0 0 0 4px rgba(217,184,111,.20),inset 0 0 0 2px rgba(255,255,255,.25),0 0 30px color-mix(in srgb,var(--accent) 45%,transparent)}
-    .icon svg{width:28px;height:28px;display:block;filter:drop-shadow(0 3px 5px rgba(0,0,0,.28));position:relative;z-index:1}
-    .copy{min-width:0}.copy b{display:block;color:var(--gold2);font-size:clamp(10px,2.55vw,13px);line-height:1;letter-spacing:.22em;text-transform:uppercase;font-weight:800;margin:0 0 5px;text-shadow:0 6px 12px rgba(0,0,0,.45)}
-    .copy span{display:block;color:#fff7e7;font-family:var(--serif);font-size:clamp(17px,5.15vw,28px);line-height:1.04;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 8px 18px rgba(0,0,0,.58)}
-    .chev{width:34px;height:34px;border-radius:50%;border:1px solid rgba(217,184,111,.50);display:grid;place-items:center;color:var(--gold2);font-family:var(--serif);font-size:30px;line-height:0;background:rgba(255,255,255,.025);box-shadow:inset 0 0 0 1px rgba(0,0,0,.16);transition:box-shadow .18s ease,transform .18s ease,background .18s ease}
-    .link-row:hover .chev,.link-row:focus-visible .chev,.link-row:active .chev{transform:translateX(2px);background:rgba(217,184,111,.09);box-shadow:0 0 18px rgba(217,184,111,.36),inset 0 0 0 1px rgba(217,184,111,.18)}
-    .telegram{--accent:#24a7e8}.instagram{--accent:#e23a88}.website{--accent:#6f89ad}.library{--accent:#ba842d}.community{--accent:#7d4ad3}.app{--accent:#76c955}
-    button.link-row{width:100%;border-left:0;border-right:0;border-bottom:0;background:transparent;text-align:left;font:inherit;cursor:pointer}.links button.link-row:last-child{border-bottom:1px solid rgba(217,184,111,.18)}
-    .footer{text-align:center;margin:14px auto 0;max-width:620px}.tags{margin:0 0 10px;color:var(--gold2);font-size:clamp(9px,2.5vw,12px);letter-spacing:.23em;text-transform:uppercase;white-space:nowrap;opacity:.92}.url{display:inline-flex;align-items:center;gap:12px;max-width:100%;font-family:var(--serif);font-size:clamp(18px,5.1vw,27px);line-height:1;white-space:nowrap;color:#fff7e8;text-decoration:none;letter-spacing:.01em;text-shadow:0 8px 20px rgba(0,0,0,.58)}
-    .url::before,.url::after{content:"";width:min(84px,20vw);height:1px;background:linear-gradient(90deg,transparent,var(--line))}.url::after{background:linear-gradient(90deg,var(--line),transparent)}
-    .modal{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.68);backdrop-filter:blur(12px)}.modal.open{display:flex}.sheet{width:min(100%,680px);max-height:calc(100svh - 36px);overflow:auto;border:1px solid rgba(217,184,111,.32);border-radius:26px;background:radial-gradient(520px 260px at 50% -70px,rgba(217,184,111,.12),transparent 70%),linear-gradient(180deg,#0a1720,#03080c);box-shadow:0 28px 90px rgba(0,0,0,.65);padding:22px}.sheet-head{display:flex;align-items:start;justify-content:space-between;gap:14px;border-bottom:1px solid rgba(217,184,111,.18);padding-bottom:14px;margin-bottom:16px}.sheet h2{margin:0;font-family:var(--serif);font-size:28px;line-height:1.05}.sheet p{margin:8px 0 0;color:#cdbf9e;line-height:1.55}.close{width:40px;height:40px;border-radius:50%;border:1px solid rgba(217,184,111,.35);background:rgba(255,255,255,.04);color:var(--gold2);font-size:24px;cursor:pointer}.install-grid{display:grid;gap:13px}.install-card{border:1px solid rgba(217,184,111,.12);border-radius:18px;background:rgba(255,255,255,.035);padding:16px}.install-card h3{margin:0 0 10px;color:var(--gold2);font-size:13px;letter-spacing:.16em;text-transform:uppercase}.install-card ol{margin:0;padding-left:20px;color:#f7efdf}.install-card li{margin:8px 0;line-height:1.42}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.actions a,.actions button{border:1px solid rgba(217,184,111,.28);border-radius:999px;background:rgba(217,184,111,.08);color:#f7efdf;text-decoration:none;padding:10px 14px;font:inherit;font-size:13px;cursor:pointer}.toast{position:fixed;left:50%;bottom:18px;z-index:50;transform:translate(-50%,14px);opacity:0;pointer-events:none;padding:10px 13px;border-radius:13px;background:#0b151d;border:1px solid rgba(217,184,111,.30);box-shadow:0 18px 45px rgba(0,0,0,.44);font-size:13px;transition:.2s ease}.toast.show{opacity:1;transform:translate(-50%,0)}
-    @media (min-width:700px){.install-grid{grid-template-columns:1fr 1fr}.poster{display:flex;align-items:center}.content{margin:auto}.quote{text-align:center}.quote-text{margin-inline:auto}}
+
+    .beam{position:absolute;right:-5%;top:-12%;width:28%;height:48%;background:linear-gradient(160deg,rgba(255,227,164,.42),rgba(255,227,164,.07) 40%,transparent 78%);filter:blur(9px);transform:rotate(17deg);opacity:.40;z-index:2}
+    .watermark{position:absolute;right:-18%;top:10.5%;width:min(56vw,330px);aspect-ratio:1;border-radius:50%;overflow:hidden;z-index:2;opacity:.24;filter:sepia(1) saturate(.75) hue-rotate(345deg) brightness(.62) contrast(1.22);mix-blend-mode:screen;pointer-events:none}
+    .watermark img{width:100%;height:100%;object-fit:cover;display:block;clip-path:circle(46% at 50% 50%);-webkit-mask-image:radial-gradient(circle at 50% 50%,#000 0 42%,rgba(0,0,0,.82) 47%,transparent 57%);mask-image:radial-gradient(circle at 50% 50%,#000 0 42%,rgba(0,0,0,.82) 47%,transparent 57%)}
+
+    .inner{position:relative;z-index:4;height:100%;display:grid;grid-template-rows:auto auto 1fr auto;gap:clamp(6px,1.2dvh,12px);padding:calc(env(safe-area-inset-top,0px) + 12px) clamp(18px,5.6vw,36px) calc(env(safe-area-inset-bottom,0px) + 13px)}
+    .orn{height:15px;margin:1px auto 0;width:min(190px,48vw);position:relative;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+    .orn:before{content:"";position:absolute;left:50%;top:-5px;width:10px;height:10px;border:1px solid var(--gold);background:#061016;transform:translateX(-50%) rotate(45deg)}
+
+    .quote{text-align:center;padding:0 clamp(4px,2vw,14px);margin:0 auto;width:100%}
+    .qmark{display:block;color:var(--gold2);font-family:var(--serif);font-size:clamp(20px,5vw,30px);line-height:.65;margin:0 0 2px;text-shadow:0 0 18px rgba(243,217,150,.26)}
+    .qtext{margin:0 auto;color:#f7f0e3;font-family:var(--serif);font-size:clamp(22px,7.2vw,37px);line-height:1.03;letter-spacing:.005em;text-shadow:0 7px 22px rgba(0,0,0,.52)}
+    .qtext .script{font-family:var(--script);font-size:1.08em;color:#f0cd7c;font-weight:400;border-bottom:1px solid rgba(240,205,124,.67);padding:0 .04em;text-shadow:0 0 18px rgba(240,205,124,.24),0 7px 19px rgba(0,0,0,.45)}
+    .quote small{display:block;margin-top:clamp(5px,1dvh,9px);color:#e8d7b0;font-family:var(--serif);font-size:clamp(10px,3.1vw,15px);line-height:1.35;text-shadow:0 4px 13px rgba(0,0,0,.48)}
+    .quote .src{display:block;color:#d9ba73;font-family:var(--ui);font-size:clamp(9px,2.45vw,12px);letter-spacing:.01em;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+    .brand{text-align:center;margin:0 auto;width:100%;padding-top:clamp(1px,.7dvh,6px)}
+    .brand h1{margin:0;white-space:nowrap;font-family:var(--serif);font-size:clamp(24px,8vw,43px);letter-spacing:.12em;font-weight:650;color:#fff4e3;text-shadow:0 9px 24px rgba(0,0,0,.55)}
+    .brand .sub{margin:clamp(2px,.8dvh,6px) 0 0;color:var(--gold2);font-size:clamp(8px,2.7vw,12px);letter-spacing:.35em;font-weight:800;text-transform:uppercase}
+    .by{display:block;margin:clamp(2px,.7dvh,5px) auto 0;font-family:var(--script);font-size:clamp(16px,5.2vw,29px);line-height:1;color:#ead49b;text-shadow:0 0 16px rgba(234,212,155,.23),0 6px 18px rgba(0,0,0,.5);opacity:.95;transform:rotate(-1.2deg)}
+    .midline{height:13px;margin:clamp(5px,1.1dvh,10px) auto 0;width:min(270px,70vw);position:relative;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+    .midline:before{content:"";position:absolute;left:50%;top:-5px;width:10px;height:10px;border:1px solid var(--gold);background:#071118;transform:translateX(-50%) rotate(45deg)}
+
+    .links{display:grid;align-content:center;gap:clamp(5px,1dvh,9px);min-height:0;margin-top:clamp(1px,.3dvh,4px)}
+    .row{--c:#d5ad64;position:relative;display:grid;grid-template-columns:clamp(43px,12vw,58px) 1fr clamp(28px,7.6vw,38px);align-items:center;gap:clamp(10px,3vw,18px);min-height:clamp(49px,9.1dvh,70px);padding:0 clamp(4px,1.5vw,10px) 0 clamp(4px,1.5vw,9px);color:var(--ink);text-decoration:none;background:linear-gradient(90deg,rgba(255,255,255,.012),rgba(255,255,255,.030) 49%,rgba(0,0,0,.07));border-top:1px solid rgba(213,173,100,.42);border-bottom:1px solid rgba(213,173,100,.26);-webkit-tap-highlight-color:transparent;transition:filter .18s ease,transform .18s ease,background .18s ease}
+    .row:before{content:"";position:absolute;left:clamp(43px,12vw,58px);right:clamp(28px,7.6vw,38px);top:-1px;height:1px;background:linear-gradient(90deg,color-mix(in srgb,var(--c) 78%,white),rgba(213,173,100,.12),transparent);opacity:.52;transition:.2s ease}
+    .row:after{content:"";position:absolute;left:clamp(34px,10vw,52px);top:50%;width:40%;height:22%;transform:translateY(-50%);background:linear-gradient(90deg,color-mix(in srgb,var(--c) 26%,transparent),transparent);filter:blur(15px);opacity:.15;transition:.18s ease}
+    .row:is(:hover,:focus-visible,.touching){background:linear-gradient(90deg,color-mix(in srgb,var(--c) 11%,transparent),rgba(255,255,255,.026),transparent);filter:drop-shadow(0 0 13px color-mix(in srgb,var(--c) 30%,transparent));transform:translateY(-1px);outline:0}
+    .row:is(:hover,:focus-visible,.touching):after{opacity:.36;width:62%}
+    .row:is(:hover,:focus-visible,.touching):before{opacity:1}
+
+    .emblem{width:clamp(42px,11.6vw,56px);height:clamp(42px,11.6vw,56px);border-radius:50%;display:grid;place-items:center;color:#fff;background:radial-gradient(circle at 32% 25%,rgba(255,255,255,.48),transparent 26%),linear-gradient(145deg,color-mix(in srgb,var(--c) 92%,white),color-mix(in srgb,var(--c) 62%,black));box-shadow:0 0 0 1px rgba(255,236,185,.62),0 0 0 3px rgba(213,173,100,.24),inset 0 0 0 1px rgba(255,255,255,.22),inset 0 -12px 22px rgba(0,0,0,.20),0 0 18px color-mix(in srgb,var(--c) 32%,transparent);transition:.2s ease}
+    .row:is(:hover,:focus-visible,.touching) .emblem{box-shadow:0 0 0 1px rgba(255,238,190,.92),0 0 0 4px rgba(213,173,100,.34),inset 0 0 0 1px rgba(255,255,255,.28),0 0 28px color-mix(in srgb,var(--c) 45%,transparent)}
+    .emblem svg{width:54%;height:54%;filter:drop-shadow(0 2px 4px rgba(0,0,0,.36))}
+    .copy{min-width:0}.copy b{display:block;color:var(--gold2);font-size:clamp(8px,2.5vw,12px);font-weight:850;letter-spacing:.22em;text-transform:uppercase;line-height:1.05}.copy span{display:block;margin-top:clamp(2px,.5dvh,4px);font-family:var(--serif);font-size:clamp(16px,5.25vw,29px);line-height:1.06;color:#fff2df;text-shadow:0 5px 14px rgba(0,0,0,.48);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chev{justify-self:end;width:clamp(27px,7.4vw,37px);height:clamp(27px,7.4vw,37px);border-radius:50%;display:grid;place-items:center;color:#f4d382;border:1px solid rgba(213,173,100,.55);font:700 clamp(20px,5.6vw,29px)/1 var(--serif);background:rgba(255,255,255,.018);transition:.18s ease}.row:is(:hover,:focus-visible,.touching) .chev{background:rgba(213,173,100,.10);box-shadow:0 0 18px color-mix(in srgb,var(--c) 30%,transparent)}
+    .telegram{--c:#28a9e8}.instagram{--c:#e24794}.website{--c:#738aa9}.library{--c:#b78332}.community{--c:#8a56cf}.app{--c:#72be4a;border-bottom-color:rgba(213,173,100,.38)}
+
+    .footer{text-align:center;min-height:0}.tags{margin:clamp(4px,.8dvh,8px) 0 clamp(3px,.6dvh,6px);color:#d7b76f;font-size:clamp(7px,2.05vw,10px);letter-spacing:.31em;text-transform:uppercase;white-space:nowrap}.domain{display:flex;align-items:center;justify-content:center;gap:clamp(10px,3.2vw,20px);white-space:nowrap;color:#fff1db;text-decoration:none;font-family:var(--serif);font-size:clamp(15px,4.5vw,24px);line-height:1;letter-spacing:.01em;text-shadow:0 5px 18px rgba(0,0,0,.55)}.domain:before,.domain:after{content:"";height:1px;width:min(22vw,90px);background:linear-gradient(90deg,transparent,var(--line))}.domain:after{background:linear-gradient(90deg,var(--line),transparent)}
+
+    .modal{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.62);backdrop-filter:blur(10px);padding:18px}.modal.open{display:flex}.sheet{width:min(100%,620px);max-height:92dvh;overflow:auto;border-radius:24px;border:1px solid rgba(213,173,100,.35);background:linear-gradient(180deg,#0d1a22,#050b10);box-shadow:0 26px 70px rgba(0,0,0,.65);padding:22px;color:var(--ink)}.sheet-head{display:flex;justify-content:space-between;gap:14px;border-bottom:1px solid rgba(213,173,100,.18);padding-bottom:14px;margin-bottom:14px}.sheet h2{margin:0;font:600 25px/1.1 var(--serif);color:#fff2df}.sheet p,.sheet li{color:#d9ccb2;line-height:1.55}.close{width:40px;height:40px;border-radius:50%;border:1px solid rgba(213,173,100,.35);background:rgba(255,255,255,.04);color:var(--gold2);font-size:24px}.install{display:grid;gap:12px}.install-card{border:1px solid rgba(255,255,255,.08);border-radius:17px;padding:14px;background:rgba(255,255,255,.035)}.install-card h3{margin:0 0 8px;color:var(--gold2);font-size:13px;letter-spacing:.12em;text-transform:uppercase}.install-card ol{margin:0;padding-left:19px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.actions a,.actions button{border:1px solid rgba(213,173,100,.30);border-radius:999px;background:rgba(213,173,100,.08);color:#fff0d9;text-decoration:none;padding:11px 14px;font:inherit}
+    .toast{position:fixed;left:50%;bottom:16px;z-index:30;transform:translate(-50%,14px);opacity:0;pointer-events:none;padding:10px 14px;border-radius:13px;background:#0e1920;border:1px solid rgba(213,173,100,.3);transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}
+
     @media (max-width:430px){
-      .poster{padding:calc(env(safe-area-inset-top,0px) + 12px) 26px calc(env(safe-area-inset-bottom,0px) + 16px)}
-      .poster::before{inset:7px;border-radius:22px}.ornament{margin-bottom:10px}.quote{margin-bottom:12px;padding:0}.quote-mark{font-size:22px;margin-bottom:3px}.quote-text{font-size:clamp(24px,7.2vw,31px);line-height:1.02;max-width:330px}.quote-source{font-size:clamp(13px,3.55vw,16px);margin-top:8px}.quote-ref{font-size:clamp(10.5px,3vw,13px);margin-top:6px}.brand{margin:13px auto 11px}.brand h1{font-size:clamp(24px,6.35vw,29px);letter-spacing:.07em}.brand p{font-size:9.5px;letter-spacing:.28em;margin-top:8px}.brand-line{margin-top:11px;width:72vw}.links{margin-bottom:12px}.link-row{grid-template-columns:52px minmax(0,1fr) 30px;gap:12px;min-height:57px;padding:6px 0}.link-row::before{inset:4px 0 4px 59px}.link-row::after{left:64px;right:38px;bottom:4px}.icon{width:48px;height:48px}.icon svg{width:24px;height:24px}.copy b{font-size:9.4px;letter-spacing:.19em;margin-bottom:4px}.copy span{font-size:clamp(16px,4.65vw,20px)}.chev{width:29px;height:29px;font-size:25px}.tags{font-size:8.5px;letter-spacing:.19em}.url{font-size:clamp(17px,4.6vw,20px)}.url::before,.url::after{width:min(52px,15vw)}.watermark-wrap{width:74vw;top:18%;left:35%;opacity:.15}.sheet{padding:18px;border-radius:22px}.sheet h2{font-size:24px}}
-    @media (max-width:370px){.poster{padding-left:20px;padding-right:20px}.quote-text{font-size:24px}.brand h1{font-size:24px;letter-spacing:.055em}.copy span{font-size:16px}.icon{width:46px;height:46px}.link-row{grid-template-columns:50px minmax(0,1fr) 28px;gap:10px}.tags{letter-spacing:.15em}.url{font-size:16px}.url::before,.url::after{width:34px}}
-    @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
+      .stage{min-height:0;max-width:none}.inner{padding:calc(env(safe-area-inset-top,0px) + 9px) 18px calc(env(safe-area-inset-bottom,0px) + 10px);gap:5px}.stage:before{inset:7px 8px;border-radius:23px}.watermark{width:62vw;right:-21%;top:12%;opacity:.20}.orn{height:10px;margin-top:0}.qmark{font-size:18px}.qtext{font-size:clamp(18px,6vw,25px);line-height:1.0}.quote small{font-size:clamp(9px,2.7vw,12px);margin-top:4px}.quote .src{font-size:clamp(8px,2.1vw,10px)}.brand h1{font-size:clamp(22px,6.9vw,30px);letter-spacing:.095em}.brand .sub{font-size:8px;letter-spacing:.28em}.by{font-size:clamp(15px,4.8vw,21px)}.midline{height:10px;margin-top:4px}.links{gap:4px}.row{grid-template-columns:42px 1fr 28px;gap:10px;min-height:49px;padding-left:0;padding-right:2px}.row:before{left:42px;right:30px}.emblem{width:40px;height:40px}.copy b{font-size:7.8px;letter-spacing:.20em}.copy span{font-size:clamp(15px,4.7vw,20px)}.chev{width:27px;height:27px;font-size:20px}.tags{font-size:7px;letter-spacing:.22em}.domain{font-size:clamp(14px,4.1vw,18px)}.domain:before,.domain:after{width:17vw}
+    }
+    @media (max-height:650px){.inner{gap:4px;padding-top:8px;padding-bottom:8px}.qtext{font-size:clamp(17px,5.4vw,23px)}.quote small{display:none}.brand h1{font-size:clamp(21px,6.3vw,28px)}.by{font-size:17px}.row{min-height:45px}.emblem{width:38px;height:38px}.copy span{font-size:16px}.tags{display:none}.domain{font-size:15px}}
   </style>
 </head>
 <body>
-  <main class="poster">
-    <div class="grain" aria-hidden="true"></div>
-    <div class="watermark-wrap" aria-hidden="true"><img src="/app-icon-512.png" alt="" /></div>
-    <section class="content" aria-label="DAR AL TAWḤĪD offizielle Kanäle">
-      <div class="ornament" aria-hidden="true"></div>
-      <section class="quote" aria-label="Aussage über Wissen">
-        <span class="quote-mark" aria-hidden="true">“</span>
-        <p class="quote-text">Das <span class="script">Wissen</span> ist das <span class="script">Licht</span> des Herzens.</p>
-        <p class="quote-source">– ʿAlī ibn al-Ḥusayn al-Zaynī</p>
-        <p class="quote-ref">Quelle: Siyar Aʿlām an-Nubalāʾ 5/348</p>
-      </section>
+  <main class="stage" aria-label="DAR AL TAWḤĪD Linkzentrale">
+    <div class="beam"></div>
+    <div class="watermark" aria-hidden="true"><img src="/app-icon-512.png" alt="" /></div>
+    <div class="inner">
+      <div>
+        <div class="orn"></div>
+        <section class="quote">
+          <span class="qmark">“</span>
+          <p class="qtext">Das <span class="script">Wissen</span> ist das <span class="script">Licht</span> des Herzens.</p>
+          <small>– ʿAlī ibn al-Ḥusayn al-Zaynī<span class="src">Quelle: Siyar Aʿlām an-Nubalāʾ 5/348</span></small>
+        </section>
+      </div>
       <header class="brand">
         <h1>DAR AL TAWḤĪD</h1>
-        <p>Offizielle Kanäle</p>
-        <div class="brand-line" aria-hidden="true"></div>
+        <div class="sub">Offizielle Kanäle</div>
+        <span class="by">by Serhat Abu Malik</span>
+        <div class="midline"></div>
       </header>
       <nav class="links" aria-label="Offizielle Links">
-        <a class="link-row telegram" href="https://t.me/dar_al_tauhid" target="_blank" rel="noopener">
-          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M21.7 3.7 18.6 18.5c-.24 1.08-.9 1.34-1.82.83l-5-3.69-2.42 2.33c-.27.27-.49.49-1.01.49l.37-5.13 9.34-8.44c.41-.37-.09-.57-.63-.2L5.88 12.2 1.03 10.68c-1.06-.34-1.08-1.07.22-1.58L20.1 1.82c.89-.33 1.67.21 1.6 1.88Z" fill="currentColor"/></svg></span>
-          <span class="copy"><b>Telegram</b><span>@dar_al_tauhid</span></span><span class="chev" aria-hidden="true">›</span>
-        </a>
-        <a class="link-row instagram" href="https://www.instagram.com/dar_at_tawhid/" target="_blank" rel="noopener">
-          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.25" cy="6.75" r="1.15" fill="currentColor"/></svg></span>
-          <span class="copy"><b>Instagram</b><span>@dar_at_tawhid</span></span><span class="chev" aria-hidden="true">›</span>
-        </a>
-        <a class="link-row website" href="https://dar-al-tauhid.de" target="_blank" rel="noopener">
-          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.6" stroke="currentColor" stroke-width="2"/><path d="M3.8 12h16.4M12 3.4c2.05 2.34 3.08 5.2 3.08 8.6S14.05 18.26 12 20.6M12 3.4C9.95 5.74 8.92 8.6 8.92 12S9.95 18.26 12 20.6" stroke="currentColor" stroke-width="1.65" stroke-linecap="round"/></svg></span>
-          <span class="copy"><b>Website</b><span>dar-al-tauhid.de</span></span><span class="chev" aria-hidden="true">›</span>
-        </a>
-        <a class="link-row library" href="https://t.me/dar_al_tauhid1" target="_blank" rel="noopener">
-          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4.2 5.8c2.72 0 5.15.46 7.8 2.02 2.65-1.56 5.08-2.02 7.8-2.02v12.5c-2.72 0-5.15.42-7.8 2-2.65-1.58-5.08-2-7.8-2V5.8Z" stroke="currentColor" stroke-width="1.85" stroke-linejoin="round"/><path d="M12 7.82v12.1M7.15 9.55c1.35.18 2.6.54 3.72 1.09M16.85 9.55c-1.35.18-2.6.54-3.72 1.09" stroke="currentColor" stroke-width="1.45" stroke-linecap="round"/></svg></span>
-          <span class="copy"><b>Bibliothek</b><span>Wissen &amp; Sammlung</span></span><span class="chev" aria-hidden="true">›</span>
-        </a>
-        <a class="link-row community" href="https://t.me/dar_al_tauhid1" target="_blank" rel="noopener">
-          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="8" cy="9" r="2.55" fill="currentColor"/><circle cx="16" cy="9" r="2.55" fill="currentColor" opacity=".86"/><circle cx="12" cy="7" r="2.8" fill="currentColor" opacity=".96"/><path d="M4.2 19c.45-3.02 2.18-4.64 4.95-4.64 1.2 0 2.17.29 2.85.86.68-.57 1.65-.86 2.85-.86 2.77 0 4.5 1.62 4.95 4.64H4.2Z" fill="currentColor"/></svg></span>
-          <span class="copy"><b>Community</b><span>Gemeinsam lernen</span></span><span class="chev" aria-hidden="true">›</span>
-        </a>
-        <button class="link-row app" id="openApp" type="button" aria-haspopup="dialog" aria-controls="appModal">
-          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="7" y="2.8" width="10" height="18.4" rx="2.1" stroke="currentColor" stroke-width="2"/><path d="M10.5 5h3M11.5 18.3h1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-          <span class="copy"><b>App</b><span>Dar al Tawḥīd App</span></span><span class="chev" aria-hidden="true">›</span>
-        </button>
+        <a class="row telegram" href="https://t.me/dar_al_tauhid" target="_blank" rel="noopener"><span class="emblem" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path fill="currentColor" d="M21.7 3.7 18.6 18.5c-.24 1.08-.9 1.34-1.82.83l-5-3.69-2.42 2.33c-.27.27-.49.49-1.01.49l.37-5.13 9.34-8.44c.41-.37-.09-.57-.63-.2L5.88 12.2 1.03 10.68c-1.06-.34-1.08-1.07.22-1.58L20.1 1.82c.89-.33 1.67.21 1.6 1.88Z"/></svg></span><span class="copy"><b>Telegram</b><span>@dar_al_tauhid</span></span><span class="chev">›</span></a>
+        <a class="row instagram" href="https://www.instagram.com/dar_at_tawhid/" target="_blank" rel="noopener"><span class="emblem" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.25" cy="6.75" r="1.15" fill="currentColor"/></svg></span><span class="copy"><b>Instagram</b><span>@dar_at_tawhid</span></span><span class="chev">›</span></a>
+        <a class="row website" href="https://dar-al-tauhid.de" target="_blank" rel="noopener"><span class="emblem" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="2"/><path d="M3.7 12h16.6M12 3.5c2.05 2.35 3.08 5.18 3.08 8.5S14.05 18.15 12 20.5M12 3.5C9.95 5.85 8.92 8.68 8.92 12s1.03 6.15 3.08 8.5" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"/></svg></span><span class="copy"><b>Website</b><span>dar-al-tauhid.de</span></span><span class="chev">›</span></a>
+        <a class="row library" href="https://t.me/dar_al_tauhid1" target="_blank" rel="noopener"><span class="emblem" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4.5 5.4c2.75.08 5.1.55 7.5 2.08 2.4-1.53 4.75-2 7.5-2.08v12.7c-2.75.08-5.1.55-7.5 2.08-2.4-1.53-4.75-2-7.5-2.08V5.4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 7.5v12.2M7.4 9.4c1.25.18 2.32.5 3.35.98M16.6 9.4c-1.25.18-2.32.5-3.35.98" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/></svg></span><span class="copy"><b>Bibliothek</b><span>Wissen aus Qurʾān & Sunnah</span></span><span class="chev">›</span></a>
+        <a class="row community" href="https://t.me/dar_al_tauhid1" target="_blank" rel="noopener"><span class="emblem" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="8" cy="9" r="2.3" fill="currentColor" opacity=".92"/><circle cx="16" cy="9" r="2.3" fill="currentColor" opacity=".78"/><circle cx="12" cy="7.3" r="2.55" fill="currentColor"/><path d="M4.25 19c.45-2.72 2.14-4.12 4.75-4.12 1.22 0 2.2.28 3 .82.8-.54 1.78-.82 3-.82 2.61 0 4.3 1.4 4.75 4.12H4.25Z" fill="currentColor"/></svg></span><span class="copy"><b>Community</b><span>Gemeinsam lernen</span></span><span class="chev">›</span></a>
+        <button class="row app" id="openApp" type="button"><span class="emblem" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="7.4" y="2.8" width="9.2" height="18.4" rx="2" stroke="currentColor" stroke-width="2"/><path d="M10.5 5h3M11.5 18.2h1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span class="copy"><b>App</b><span>Dar al Tawḥīd App</span></span><span class="chev">›</span></button>
       </nav>
-      <footer class="footer">
-        <p class="tags">Qurʾān · Sunnah · Salaf · ʿIlm · Manhaj</p>
-        <a class="url" href="https://dar-al-tauhid.de/links" id="copyLink">dar-al-tauhid.de/links</a>
-      </footer>
-    </section>
+      <footer class="footer"><div class="tags">Qurʾān · Sunnah · Salaf · ʿIlm · Manhaj</div><a class="domain" href="https://dar-al-tauhid.de/links" id="copyLink">dar-al-tauhid.de/links</a></footer>
+    </div>
   </main>
+
   <div class="modal" id="appModal" role="dialog" aria-modal="true" aria-labelledby="appTitle" aria-hidden="true">
     <div class="sheet" role="document">
-      <div class="sheet-head"><div><h2 id="appTitle">DAR AL TAWḤĪD App installieren</h2><p>Öffne zuerst <strong>dar-al-tauhid.de</strong> im passenden Browser und folge dann den Schritten für dein Gerät.</p></div><button class="close" id="closeApp" type="button" aria-label="Schließen">×</button></div>
-      <div class="install-grid"><section class="install-card"><h3>iPhone / iPad</h3><ol><li>Öffne <strong>dar-al-tauhid.de</strong> in <strong>Safari</strong>.</li><li>Tippe auf das <strong>Teilen-Symbol</strong>.</li><li>Wähle <strong>Zum Home-Bildschirm</strong>.</li><li>Bestätige mit <strong>Hinzufügen</strong>.</li></ol></section><section class="install-card"><h3>Android</h3><ol><li>Öffne <strong>dar-al-tauhid.de</strong> in <strong>Chrome</strong>.</li><li>Tippe oben rechts auf <strong>⋮</strong>.</li><li>Wähle <strong>App installieren</strong> oder <strong>Zum Startbildschirm hinzufügen</strong>.</li><li>Bestätige die Installation.</li></ol></section></div>
+      <div class="sheet-head"><div><h2 id="appTitle">DAR AL TAWḤĪD App installieren</h2><p>Öffne zuerst <strong>dar-al-tauhid.de</strong> im passenden Browser und folge dann den Schritten.</p></div><button class="close" id="closeApp" type="button" aria-label="Schließen">×</button></div>
+      <div class="install"><section class="install-card"><h3>iPhone / iPad</h3><ol><li>In Safari <strong>dar-al-tauhid.de</strong> öffnen.</li><li>Teilen-Symbol antippen.</li><li><strong>Zum Home-Bildschirm</strong> wählen.</li><li>Mit <strong>Hinzufügen</strong> bestätigen.</li></ol></section><section class="install-card"><h3>Android</h3><ol><li>In Chrome <strong>dar-al-tauhid.de</strong> öffnen.</li><li>Menü <strong>⋮</strong> öffnen.</li><li><strong>App installieren</strong> oder <strong>Zum Startbildschirm hinzufügen</strong> wählen.</li><li>Bestätigen.</li></ol></section></div>
       <div class="actions"><a href="https://dar-al-tauhid.de" target="_blank" rel="noopener">Website öffnen</a><button type="button" id="copyMain">Link kopieren</button></div>
     </div>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script>
     const canonical="https://dar-al-tauhid.de/links";
-    const appModal=document.getElementById("appModal"),openApp=document.getElementById("openApp"),closeApp=document.getElementById("closeApp"),toast=document.getElementById("toast");
-    function showToast(text){toast.textContent=text;toast.classList.add("show");clearTimeout(window.__toastTimer);window.__toastTimer=setTimeout(()=>toast.classList.remove("show"),1700)}
-    function openModal(){appModal.classList.add("open");appModal.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";closeApp.focus()}
-    function closeModal(){appModal.classList.remove("open");appModal.setAttribute("aria-hidden","true");document.body.style.overflow="";openApp.focus()}
-    openApp.addEventListener("click",openModal);closeApp.addEventListener("click",closeModal);appModal.addEventListener("click",e=>{if(e.target===appModal)closeModal()});document.addEventListener("keydown",e=>{if(e.key==="Escape"&&appModal.classList.contains("open"))closeModal()});
-    async function copyCanonical(e){if(e)e.preventDefault();try{await navigator.clipboard.writeText(canonical);showToast("Link kopiert")}catch(error){showToast("dar-al-tauhid.de/links")}}
-    document.getElementById("copyLink").addEventListener("click",copyCanonical);document.getElementById("copyMain").addEventListener("click",copyCanonical);
+    const modal=document.getElementById("appModal"), openBtn=document.getElementById("openApp"), closeBtn=document.getElementById("closeApp"), toast=document.getElementById("toast");
+    function flash(el){el.classList.add("touching");setTimeout(()=>el.classList.remove("touching"),210)}
+    document.querySelectorAll(".row").forEach(el=>{el.addEventListener("pointerdown",()=>flash(el),{passive:true})});
+    function showToast(t){toast.textContent=t;toast.classList.add("show");clearTimeout(window.__t);window.__t=setTimeout(()=>toast.classList.remove("show"),1600)}
+    function openModal(){modal.classList.add("open");modal.setAttribute("aria-hidden","false");closeBtn.focus()}
+    function closeModal(){modal.classList.remove("open");modal.setAttribute("aria-hidden","true");openBtn.focus()}
+    openBtn.addEventListener("click",openModal);closeBtn.addEventListener("click",closeModal);modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});document.addEventListener("keydown",e=>{if(e.key==="Escape"&&modal.classList.contains("open"))closeModal()});
+    async function copy(e){e&&e.preventDefault();try{await navigator.clipboard.writeText(canonical);showToast("Link kopiert")}catch(_){showToast("dar-al-tauhid.de/links")}}
+    document.getElementById("copyLink").addEventListener("click",copy);document.getElementById("copyMain").addEventListener("click",copy);
   </script>
 </body>
 </html>
