@@ -3309,6 +3309,17 @@
         ".github/workflows/deploy-admin-publisher.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "telegram-worker-builds-guard-2026-08-16",
+      "approvedBy": "user-explicit-restore-secrets-help",
+      "reason": "Workers Builds überschreibt Admin-Worker mit Besucher-App; Reclaim + korrekte Secret-Version-ID + Anleitung",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "cloudflare/",
+        ".github/workflows/deploy-admin-publisher.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
