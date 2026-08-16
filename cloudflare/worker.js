@@ -1,5 +1,6 @@
 /* PUSH_SYSTEM_GUARD: Gebets-Push + Tages-Duʿāʾ/Empfehlung + Willkommens-Push.
-   Nicht entfernen oder vereinfachen – CI blockiert sonst (scripts/push-system-guard.js). */
+   Nicht entfernen oder vereinfachen – CI blockiert sonst (scripts/push-system-guard.js).
+   Deploy-Marker: telegram-topics-route-last-v2 */
 import {
   parsePostForTelegram,
   validateTelegramPost,
