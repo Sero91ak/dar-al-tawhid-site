@@ -84,6 +84,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "telegram-worker-redeploy-fix-2026-08-16",
+      "approvedBy": "user-explicit-check-telegram",
+      "reason": "Telegram-Routing prüfen: Worker-Deploy scheitert an R2-Auth → /health 404. R2-Bindung entkoppeln, Telegram-Health härten.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "cloudflare/",
+        ".github/workflows/deploy-admin-publisher.yml",
+        "test/data/prayer-learning/audit/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "prophets-instant-open-v630-2026-08-09",
       "approvedBy": "user-explicit-live-push",
       "reason": "Propheten öffnen noch immer zu langsam / Zweitklick nötig. Root-cause: let currentRoute nicht auf window — Paint tot. Sofort-Fix + Hintergrund-Vorladen; Live+Test",

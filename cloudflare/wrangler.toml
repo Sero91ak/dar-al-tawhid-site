@@ -32,10 +32,14 @@ new_sqlite_classes = ["PrayerStatusStore"]
 tag = "v2_video_studio_store"
 new_sqlite_classes = ["VideoStudioStore"]
 
-[[r2_buckets]]
-binding = "VIDEO_STUDIO_R2"
-bucket_name = "dar-video-studio"
-preview_bucket_name = "dar-video-studio"
+# R2 absichtlich entfernt (2026-08-16):
+# Deploy scheiterte mit Auth error code 10000 auf /r2/buckets/dar-video-studio.
+# Telegram-/Push-Worker muss wieder deploybar sein. Video-Studio R2 später
+# mit Token-Recht "Workers R2 Storage Write" erneut anbinden.
+# [[r2_buckets]]
+# binding = "VIDEO_STUDIO_R2"
+# bucket_name = "dar-video-studio"
+# preview_bucket_name = "dar-video-studio"
 
 [triggers]
 crons = ["*/5 * * * *"]

@@ -1,6 +1,6 @@
 /* PUSH_SYSTEM_GUARD: Gebets-Push + Tages-Duʿāʾ/Empfehlung + Willkommens-Push.
    Nicht entfernen oder vereinfachen – CI blockiert sonst (scripts/push-system-guard.js).
-   Deploy-Marker: telegram-topics-route-last-v2 */
+   Deploy-Marker: telegram-topics-route-last-v3-redeploy-fix */
 import {
   parsePostForTelegram,
   validateTelegramPost,
@@ -136,6 +136,15 @@ export default {
           hasOneSignalKey: Boolean(oneSignalApiKey(env)),
           hasTelegramToken: Boolean(telegramBotToken(env)),
           telegramChannel: telegramChannelId(env),
+          telegramTopicsChatId: telegramTopicsChatId(env) || null,
+          telegramEndpoints: [
+            "/api/admin/telegram/health",
+            "/api/admin/telegram/status",
+            "/api/admin/telegram/preview",
+            "/api/admin/telegram/test",
+            "/api/admin/telegram/send",
+            "/api/admin/telegram/route-last"
+          ],
           newsPath: env.UPDATES_PATH || DEFAULT_UPDATES_PATH,
           schedulePath: env.SCHEDULE_PATH || DEFAULT_SCHEDULE_PATH,
           prayerScheduler: "cloudflare-worker-cron-v3",
@@ -627,6 +636,7 @@ export default {
         "/api/admin/telegram/test",
         "/api/admin/telegram/send",
         "/api/admin/telegram/status",
+        "/api/admin/telegram/health",
         "/api/admin/telegram/route-last"
       ]);
       const pushPaths = new Set([
@@ -662,6 +672,30 @@ export default {
         return json({ ok: false, error: "Not found" }, cors, 404);
       }
 
+      if (url.pathname === "/api/admin/telegram/health") {
+        if (request.method !== "GET") return json({ ok: false, error: "GET required" }, cors, 405);
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        let registry = { posts: {} };
+        try { registry = await readTelegramPostsRegistry(env); } catch (_e) {}
+        const posts = registry && registry.posts && typeof registry.posts === "object" ? registry.posts : {};
+        return json({
+          ok: true,
+          service: "telegram-routing",
+          hasTelegramToken: Boolean(telegramBotToken(env)),
+          channel: telegramChannelId(env),
+          topicsChatId: telegramTopicsChatId(env) || null,
+          registryCount: Object.keys(posts).length,
+          endpoints: [
+            "/api/admin/telegram/health",
+            "/api/admin/telegram/status",
+            "/api/admin/telegram/preview",
+            "/api/admin/telegram/test",
+            "/api/admin/telegram/send",
+            "/api/admin/telegram/route-last"
+          ]
+        }, cors);
+      }
       if (url.pathname === "/api/admin/telegram/status") {
         if (request.method !== "GET") return json({ ok: false, error: "GET required" }, cors, 405);
         assertConfigured(env);
