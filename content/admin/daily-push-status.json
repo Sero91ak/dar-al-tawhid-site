@@ -1,26 +1,38 @@
 {
   "ok": true,
-  "schedulerEngine": "cloudflare-worker-daily-v3-catchup",
+  "schedulerEngine": "cloudflare-worker-daily-v4-isolated",
+  "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-15T23:20:58.613Z",
-  "usersChecked": 13,
+  "updatedAt": "2026-08-16T18:15:24.127Z",
+  "usersChecked": 12,
+  "registrationsRead": 13,
+  "uniqueSubscriptions": 12,
+  "duplicateRegistrationsDropped": 1,
+  "appEnvironment": "production",
   "duaCandidates": 0,
   "recCandidates": 0,
   "sent": 0,
+  "accepted": {
+    "dua": 0,
+    "recommendation": 0
+  },
+  "invalidSubscriptionsDisabled": 0,
   "skipped": 0,
   "duplicates": 0,
   "errors": 0,
+  "forceSend": null,
   "dailyContentDate": "2026-08-16",
   "currentRecommendation": {
-    "id": "hukm-muhakamah-islam-ganz-annehmen-424",
-    "title": "Tretet vollständig in den Islām ein",
-    "category": "Hukm & Muḥākamah",
-    "scholar": "aṭ-Ṭabarī / Ibn Kathīr"
+    "id": "tarbiyah-jeder-traegt-verantwortung-254",
+    "title": "Tarbiyah: Jeder trägt Verantwortung",
+    "category": "Tarbiyah",
+    "scholar": "Der Prophet ﷺ"
   },
   "currentDua": {
-    "category": ""
+    "id": "dua-072-wajalna-muslimayni-lak",
+    "title": "Bitte um vollständige Hingabe an Allah",
+    "category": "Hingabe & Nachkommen"
   },
-  "configAutomatic": true,
-  "responses": []
+  "configAutomatic": true
 }
