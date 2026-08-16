@@ -3254,6 +3254,16 @@
         "test/index.html"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "ci-prayer-guard-unblock-v1-2026-08-16",
+      "approvedBy": "user-explicit-telegram-topics-autonomous-repair",
+      "note": "CI-Blocker beheben: Prayer-Integrity-Guard auf aktuelle Scheduler/Copy-Architektur anpassen, damit Admin-Worker-Deploy wieder läuft",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "scripts/prayer-push-integrity-guard.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

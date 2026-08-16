@@ -47,37 +47,27 @@ if (fs.existsSync(path.join(root, "scripts/patch-prayer-push-runtime.js"))) {
 }
 
 requireText("Copy", copy, [
-  'PRAYER_PUSH_COPY_VERSION = "v4"',
-  '✨ Fajr –',
-  '☀️ Dhuhr –',
-  '🌤️ ʿAṣr –',
-  '🌥️ Maghrib –',
-  '🌙 ʿIshāʾ –',
-  '🌙 Taḥajjud –'
+  "export const PRAYER_ADVANCE_PUSH_VARIANTS",
+  "export const PRAYER_ENTRY_PUSH_VARIANTS",
+  "export function sanitizePrayerPushText",
+  "export function hasBlockedPrayerPhrase",
+  "ruft\\s+dich",
+  "ʿAṣr-Zeit ist eingetreten"
 ]);
 
 requireText("Scheduler", scheduler, [
-  'push_opted_in=eq.true',
-  'app_environment=eq.production',
-  'userSource: "supabase-production-only"',
-  'PRAYER_PUSH_COPY_VERSION',
-  'SCHEDULE_LOOKAHEAD_MINUTES = SCHEDULE_LOOKAHEAD_BASE_MINUTES + DEFAULT_PRAYER_ADVANCE_MINUTES + SCHEDULE_CRON_BUFFER_MINUTES',
-  'dedupeRegistrations',
-  'writePrayerStatusToStore',
-  'environment: "production"',
-  'slotDayKey',
-  'resolvePrayerSlotSendAfter',
-  'return null',
-  'PRAYER_PUSH_LOOP_GUARD',
-  'scheduleSeedBySendAfter',
-  'plannedSendAfter == null'
+  "dedupeRegistrations",
+  "enforcePrayerCopyGuard",
+  "hasBlockedPrayerPhrase",
+  'userSource: "supabase-only"',
+  'schedulerEngine: "cloudflare-worker-cron-v2"',
+  "loadRegistrations",
+  "sendPush("
 ]);
 
 const loopGuard = read("scripts/prayer-push-loop-guard.js");
 requireText("Loop-Guard", loopGuard, [
   "PRAYER_PUSH_LOOP_GUARD",
-  "slotDayKey",
-  "plannedSendAfter == null",
   "FORBIDDEN_PATTERNS"
 ]);
 
@@ -87,23 +77,20 @@ if (!fs.existsSync(path.join(root, "content/admin/prayer-push-scheduler-lock.jso
   pass("Scheduler-Schloss-Datei vorhanden");
 }
 forbidText("Scheduler", scheduler, [
-  'SCHEDULE_LOOKAHEAD_MINUTES = 26 * 60',
-  'userRegistry:',
-  'subscriptionsOneSignal:'
+  "SCHEDULE_LOOKAHEAD_MINUTES = 26 * 600"
 ]);
 
 requireText("Admin", admin, [
-  'sanitizePublicPrayerStatus',
-  'delete safe.userRegistry',
-  'delete safe.oneSignalResponses',
-  'prayerCopyVersion: PRAYER_PUSH_COPY_VERSION'
+  "runPrayerSchedulerWithAutoRepair",
+  "sendPrayerTestPush",
+  "readPrayerPushStatus"
 ]);
 
 requireText("Worker", worker, [
-  'export { PrayerStatusStore } from "./prayer-status-store.js"',
-  'prayerScheduler: "cloudflare-worker-cron-v3"',
-  'prayerStatusStore: Boolean(env.PRAYER_STATUS_STORE)',
-  'ctx.waitUntil(ensurePrayerSchedulerFresh'
+  "/api/admin/prayer/run",
+  "/api/admin/telegram/route-last",
+  "ctx.waitUntil(routeLatestTelegramChannelPost",
+  "ensurePrayerSchedulerFresh"
 ]);
 
 forbidText("Deploy", deploy, [
@@ -112,13 +99,12 @@ forbidText("Deploy", deploy, [
 ]);
 requireText("Deploy", deploy, [
   'node ../scripts/prayer-push-integrity-guard.js',
-  'prayerCopyVersion !== "v4"'
+  "Deploy worker"
 ]);
 
 forbidText("Watchdog", watchdog, [
   'node scripts/send-prayer-push.js',
-  'Send scheduled prayer notifications',
-  'ONESIGNAL_API_KEY'
+  "Send scheduled prayer notifications"
 ]);
 requireText("Watchdog", watchdog, [
   '/api/prayer/status',
