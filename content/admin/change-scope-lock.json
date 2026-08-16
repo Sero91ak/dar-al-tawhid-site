@@ -3287,6 +3287,17 @@
         "scripts/prayer-push-integrity-guard.js"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "telegram-secrets-user-restore-2026-08-16",
+      "approvedBy": "user-explicit-restore-secrets-help",
+      "reason": "Nutzer kann Secrets nicht selbst wiederherstellen – Anleitung + Worker-Redeploy + Deploy-Härtung",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "cloudflare/",
+        ".github/workflows/deploy-admin-publisher.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

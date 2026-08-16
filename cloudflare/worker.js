@@ -1,6 +1,6 @@
 /* PUSH_SYSTEM_GUARD: Gebets-Push + Tages-Duʿāʾ/Empfehlung + Willkommens-Push.
    Nicht entfernen oder vereinfachen – CI blockiert sonst (scripts/push-system-guard.js).
-   Deploy-Marker: telegram-topics-route-last-v3-redeploy-fix */
+   Deploy-Marker: telegram-secrets-user-restore-v4 */
 import {
   parsePostForTelegram,
   validateTelegramPost,
@@ -129,6 +129,7 @@ export default {
         return json({
           ok: true,
           service: "dar-admin-publisher",
+          deployMarker: "telegram-secrets-user-restore-v4",
           repo: `${env.GITHUB_OWNER || DEFAULT_OWNER}/${env.GITHUB_REPO || DEFAULT_REPO}`,
           branch: env.GITHUB_BRANCH || DEFAULT_BRANCH,
           hasGithubToken: Boolean(env.GITHUB_TOKEN),
