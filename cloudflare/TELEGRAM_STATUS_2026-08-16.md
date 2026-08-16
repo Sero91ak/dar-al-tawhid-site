@@ -50,11 +50,8 @@ Erwartung:
 - `"hasAdminSecret": true`
 - `"deployMarker": "telegram-secrets-user-restore-v4"` (nach diesem Redeploy)
 
-## Alternative nur in Cloudflare
-Workers & Pages → `dar-admin-publisher` → Settings → Variables and Secrets → Encrypt:
+## Zusätzlicher Hinweis (Workers Builds)
+Cloudflare **Workers Builds** kann bei Git-Pushes eine neue Worker-Version ohne die zuletzt gesetzten Secrets aktivieren. Deshalb synct der Deploy-Workflow die Secrets per `wrangler versions secret bulk` und aktiviert danach die Version.
 
-- `TELEGRAM_BOT_TOKEN`
-- `ADMIN_PUBLISH_SECRET`
-- `GITHUB_TOKEN`
+Optional im Cloudflare Dashboard: für `dar-admin-publisher` automatische Builds aus GitHub nur auf `main` / nach dem Secrets-Workflow – oder Builds deaktivieren und nur GitHub Action „Deploy Admin Publisher Worker“ nutzen.
 
-Ohne die gleichen Namen in GitHub Actions gehen die Werte beim nächsten Sync/Deploy wieder verloren, wenn die GH-Secrets leer bleiben.

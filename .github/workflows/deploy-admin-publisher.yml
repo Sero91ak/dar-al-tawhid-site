@@ -71,7 +71,7 @@ jobs:
         run: node ../scripts/prayer-push-loop-guard.js
 
       - name: Install Wrangler
-        run: npm install -g wrangler
+        run: npm install -g wrangler@4.86.0
 
       - name: Push system guard
         run: node ../scripts/push-system-guard.js
@@ -107,36 +107,56 @@ jobs:
           TELEGRAM_TOPICS_CHAT_ID: ${{ secrets.TELEGRAM_TOPICS_CHAT_ID }}
           TELEGRAM_FORUM_CHAT_ID: ${{ secrets.TELEGRAM_FORUM_CHAT_ID }}
         run: |
-          put_secret() {
-            local name="$1"
-            local val="$2"
-            if [ -n "$val" ]; then
-              printf '%s' "$val" | wrangler secret put "$name" --name dar-admin-publisher
-              echo "Secret gesetzt: $name"
-            else
-              echo "Secret übersprungen (leer): $name"
-              echo "$name" >> "$RUNNER_TEMP/missing-core-secrets.txt"
-            fi
-          }
+          # Workers Builds kann eine neuere, undeployte Version erzeugen.
+          # Deshalb: secrets per "versions secret bulk", danach neueste Version aktiv deployen.
           : > "$RUNNER_TEMP/missing-core-secrets.txt"
-          # GitHub token aliases → Worker secret GITHUB_TOKEN
-          GH_TOK="${WORKER_GITHUB_TOKEN:-${DAR_GITHUB_TOKEN:-${REPO_GITHUB_TOKEN:-}}}"
-          put_secret GITHUB_TOKEN "$GH_TOK"
-          put_secret ADMIN_PUBLISH_SECRET "$ADMIN_PUBLISH_SECRET"
-          put_secret ONESIGNAL_API_KEY_NEW "${ONESIGNAL_API_KEY_NEW:-$ONESIGNAL_API_KEY}"
-          put_secret TELEGRAM_BOT_TOKEN "$TELEGRAM_BOT_TOKEN"
-          put_secret TELEGRAM_CHANNEL_ID "$TELEGRAM_CHANNEL_ID"
-          put_secret TELEGRAM_CHANNEL_USERNAME "$TELEGRAM_CHANNEL_USERNAME"
-          put_secret TELEGRAM_TOPICS_CHAT_ID "${TELEGRAM_TOPICS_CHAT_ID:-$TELEGRAM_FORUM_CHAT_ID}"
-          echo "::notice::Fehlende GitHub-Actions-Secrets (Werte manuell nachtragen):"
-          if [ -s "$RUNNER_TEMP/missing-core-secrets.txt" ]; then
-            sort -u "$RUNNER_TEMP/missing-core-secrets.txt" | while read -r n; do
-              echo "::warning::GitHub Secret fehlt/leer: $n – siehe cloudflare/TELEGRAM_STATUS_2026-08-16.md"
-            done
+          SECRETS_JSON="$RUNNER_TEMP/core-secrets.json"
+          node <<'NODE'
+          const fs = require("fs");
+          const out = process.env.RUNNER_TEMP + "/core-secrets.json";
+          const missing = process.env.RUNNER_TEMP + "/missing-core-secrets.txt";
+          const pick = (...vals) => {
+            for (const v of vals) {
+              const s = String(v || "").trim();
+              if (s) return s;
+            }
+            return "";
+          };
+          const wanted = {
+            GITHUB_TOKEN: pick(process.env.WORKER_GITHUB_TOKEN, process.env.DAR_GITHUB_TOKEN, process.env.REPO_GITHUB_TOKEN),
+            ADMIN_PUBLISH_SECRET: pick(process.env.ADMIN_PUBLISH_SECRET),
+            ONESIGNAL_API_KEY_NEW: pick(process.env.ONESIGNAL_API_KEY_NEW, process.env.ONESIGNAL_API_KEY),
+            TELEGRAM_BOT_TOKEN: pick(process.env.TELEGRAM_BOT_TOKEN),
+            TELEGRAM_CHANNEL_ID: pick(process.env.TELEGRAM_CHANNEL_ID),
+            TELEGRAM_CHANNEL_USERNAME: pick(process.env.TELEGRAM_CHANNEL_USERNAME),
+            TELEGRAM_TOPICS_CHAT_ID: pick(process.env.TELEGRAM_TOPICS_CHAT_ID, process.env.TELEGRAM_FORUM_CHAT_ID)
+          };
+          const payload = {};
+          const miss = [];
+          for (const [k, v] of Object.entries(wanted)) {
+            if (v) payload[k] = v;
+            else miss.push(k);
+          }
+          fs.writeFileSync(out, JSON.stringify(payload));
+          fs.writeFileSync(missing, miss.join("\n") + (miss.length ? "\n" : ""));
+          console.log("Secrets bereit:", Object.keys(payload).join(", ") || "(keine)");
+          NODE
+          if [ -s "$SECRETS_JSON" ] && [ "$(node -e "const j=require(process.argv[1]);process.stdout.write(String(Object.keys(j).length))" "$SECRETS_JSON")" != "0" ]; then
+            wrangler versions secret bulk "$SECRETS_JSON" --name dar-admin-publisher --message "core-secrets-sync"
+            VERSION_ID="$(wrangler versions list --name dar-admin-publisher --json | node -e "let d='';process.stdin.on('data',c=>d+=c);process.stdin.on('end',()=>{const a=JSON.parse(d);const id=(a[0]&&(a[0].id||a[0].version_id))||''; if(!id) process.exit(2); process.stdout.write(id)})")"
+            echo "Aktiviere Version mit Secrets: $VERSION_ID"
+            wrangler versions deploy "${VERSION_ID}@100" --name dar-admin-publisher --yes --message "activate-core-secrets"
+            echo "Secret-Sync (versions) OK"
           else
-            echo "Alle Kern-Secrets aus GitHub Actions vorhanden."
+            echo "::warning::Keine Kern-Secrets in GitHub Actions vorhanden – Sync übersprungen"
           fi
-
+          if [ -s "$RUNNER_TEMP/missing-core-secrets.txt" ]; then
+            while read -r n; do
+              [ -z "$n" ] && continue
+              echo "::warning::GitHub Secret fehlt/leer: $n – siehe cloudflare/TELEGRAM_STATUS_2026-08-16.md"
+            done < "$RUNNER_TEMP/missing-core-secrets.txt"
+          fi
+          rm -f "$SECRETS_JSON"
       - name: Change scope lock guard (nur freigeschaltete Bereiche)
         env:
           INTEGRITY_BASE_REF: ${{ github.event.before || '' }}
@@ -327,13 +347,17 @@ jobs:
             local name="$1"
             local val="$2"
             if [ -n "$val" ]; then
-              echo "$val" | wrangler secret put "$name" --name dar-admin-publisher
-              echo "Secret gesetzt: $name"
+              printf '%s' "$val" | wrangler versions secret put "$name" --name dar-admin-publisher --message "feed-$name"
+              echo "Secret versioned: $name"
             fi
           }
           put_secret PEXELS_API_KEY "$PEXELS_API_KEY"
           put_secret UNSPLASH_ACCESS_KEY "$UNSPLASH_ACCESS_KEY"
           put_secret PIXABAY_API_KEY "$PIXABAY_API_KEY"
+          if [ -n "${PEXELS_API_KEY}${UNSPLASH_ACCESS_KEY}${PIXABAY_API_KEY}" ]; then
+            VERSION_ID="$(wrangler versions list --name dar-admin-publisher --json | node -e "let d='';process.stdin.on('data',c=>d+=c);process.stdin.on('end',()=>{const a=JSON.parse(d);const id=(a[0]&&(a[0].id||a[0].version_id))||''; if(!id) process.exit(2); process.stdout.write(id)})")"
+            wrangler versions deploy "${VERSION_ID}@100" --name dar-admin-publisher --yes --message "activate-feed-secrets"
+          fi
 
       - name: Trigger feed background sync (staging)
         env:
