@@ -84,6 +84,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "telegram-worker-secrets-sync-2026-08-16",
+      "approvedBy": "user-explicit-autonomous-telegram-restore",
+      "reason": "Nach Redeploy fehlen Worker-Secrets (Telegram/GitHub/Admin). Sync-Schritt im Deploy-Workflow.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        ".github/workflows/deploy-admin-publisher.yml",
+        "cloudflare/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "telegram-worker-redeploy-fix-2026-08-16",
       "approvedBy": "user-explicit-check-telegram",
       "reason": "Telegram-Routing prüfen: Worker-Deploy scheitert an R2-Auth → /health 404. R2-Bindung entkoppeln, Telegram-Health härten.",

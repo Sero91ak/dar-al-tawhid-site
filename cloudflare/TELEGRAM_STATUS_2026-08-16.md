@@ -1,18 +1,20 @@
 # Telegram Status 2026-08-16
 
-## Befund
-- Live `https://dar-admin-publisher.sero91ak.workers.dev/health` → **HTTP 404**
-- GitHub Action `Deploy Admin Publisher Worker` schlägt seit mehreren Runs fehl
-- Fehler: Cloudflare API Auth `10000` beim Zugriff auf R2-Bucket `dar-video-studio`
-- Dadurch konnte der Worker (inkl. Telegram-Hashtag→Topic-Routing) nicht neu deployed werden
+## Erledigt
+- PR #568 gemerged
+- Worker wieder erreichbar: `/health` → ok
+- R2-Deploy-Blocker entfernt
 
-## Fix in diesem Branch
-- `[[r2_buckets]]` aus `wrangler.toml` entfernt (Deploy-Blocker)
-- Telegram-Health-Endpoint `/api/admin/telegram/health` ergänzt
-- `/health` listet Telegram-Endpunkte
+## Offen / kritisch
+Nach Redeploy meldet `/health`:
+- `hasTelegramToken: false`
+- `hasGithubToken: false`
+- `hasAdminSecret: false`
 
-## Nach Merge / Deploy
-1. Workflow „Deploy Admin Publisher Worker“ muss grün werden
-2. `/health` muss `hasTelegramToken: true` zeigen
-3. Optional: `/api/admin/telegram/route-last` mit Admin-Secret testen
-4. R2 später wieder anbinden, wenn API-Token R2-Rechte hat
+Ursache: Worker war 404/neu aufgesetzt → Cloudflare-Secrets waren leer.
+
+## Fix
+Deploy-Workflow synct Kern-Secrets (Admin, GitHub-Token-Aliase, OneSignal, Telegram) nach `wrangler deploy`.
+
+Wenn `TELEGRAM_BOT_TOKEN` nicht als GitHub Actions Secret existiert, muss er einmalig gesetzt werden:
+`wrangler secret put TELEGRAM_BOT_TOKEN`
