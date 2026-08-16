@@ -1,215 +1,67 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#02070a" />
-  <meta name="color-scheme" content="dark" />
-  <title>DAR AL TAWḤĪD · Offizielle Kanäle</title>
-  <meta name="description" content="Alle offiziellen DAR AL TAWḤĪD Kanäle an einem Ort." />
-  <meta property="og:title" content="DAR AL TAWḤĪD · Offizielle Kanäle" />
-  <meta property="og:description" content="Telegram, Instagram, Website, Bibliothek, Community und App – alle offiziellen Kanäle an einem Ort." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://dar-al-tauhid.de/links" />
-  <meta property="og:image" content="https://dar-al-tauhid.de/app-icon-512.png" />
-  <style>
-    :root{
-      --bg:#02070a;
-      --ink:#f8efe0;
-      --muted:#c7b89a;
-      --gold:#d5ad64;
-      --gold2:#f3dc9b;
-      --line:rgba(213,173,100,.48);
-      --line-soft:rgba(213,173,100,.16);
-      --blue:#24a8e7;
-      --pink:#e14593;
-      --steel:#7d93b3;
-      --amber:#b98636;
-      --violet:#8854ca;
-      --green:#73bf4f;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink)}
-    body{
-      font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-      overflow:hidden;
-      background:
-        radial-gradient(650px 520px at 96% -10%,rgba(230,190,108,.22),transparent 60%),
-        radial-gradient(450px 360px at 0% 64%,rgba(24,106,126,.15),transparent 74%),
-        linear-gradient(135deg,#02070a 0%,#071219 48%,#02070a 100%);
-    }
-    .stage{
-      position:relative;
-      width:100vw;
-      height:100svh;
-      min-height:620px;
-      overflow:hidden;
-      padding:calc(env(safe-area-inset-top,0px) + 14px) clamp(18px,5vw,48px) calc(env(safe-area-inset-bottom,0px) + 14px);
-      isolation:isolate;
-    }
-    .stage:before{
-      content:"";
-      position:absolute;inset:0;
-      background:
-        repeating-radial-gradient(ellipse at 102% 54%,rgba(213,173,100,.14) 0 1px,transparent 1px 18px),
-        linear-gradient(106deg,transparent 0 52%,rgba(243,220,155,.13) 52.4%,transparent 54%),
-        linear-gradient(108deg,transparent 0 63%,rgba(243,220,155,.09) 63.35%,transparent 65%);
-      opacity:.45;
-      pointer-events:none;
-      z-index:-3;
-    }
-    .stage:after{
-      content:"";
-      position:absolute;right:-18vw;top:-4vh;width:42vw;height:78vh;
-      background:radial-gradient(ellipse at top,rgba(255,232,170,.26),transparent 58%);
-      transform:rotate(16deg);
-      filter:blur(5px);
-      pointer-events:none;
-      z-index:-3;
-    }
-    .wm-wrap{
-      position:absolute;
-      top:11.4vh;
-      left:54vw;
-      width:min(47vw,390px);
-      aspect-ratio:1;
-      border-radius:50%;
-      overflow:hidden;
-      opacity:.48;
-      filter:drop-shadow(0 0 35px rgba(213,173,100,.12));
-      z-index:-2;
-      pointer-events:none;
-      -webkit-mask-image:radial-gradient(circle at center,#000 0 56%,rgba(0,0,0,.78) 66%,transparent 82%);
-      mask-image:radial-gradient(circle at center,#000 0 56%,rgba(0,0,0,.78) 66%,transparent 82%);
-    }
-    .wm-wrap img{
-      width:100%;height:100%;object-fit:cover;display:block;
-      transform:scale(1.18);
-      opacity:.72;
-      mix-blend-mode:multiply;
-      filter:sepia(.95) saturate(.65) hue-rotate(350deg) brightness(.72) contrast(1.22);
-    }
-    .top-mark,.mid-mark,.bottom-mark{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--gold2)}
-    .top-mark:before,.top-mark:after,.mid-mark:before,.mid-mark:after,.bottom-mark:before,.bottom-mark:after{content:"";height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
-    .top-mark:before,.top-mark:after{width:min(20vw,118px)}
-    .mid-mark:before,.mid-mark:after{width:min(24vw,150px)}
-    .bottom-mark:before,.bottom-mark:after{width:min(20vw,118px)}
-    .diamond{width:14px;height:14px;border:1px solid var(--gold);transform:rotate(45deg);box-shadow:0 0 14px rgba(213,173,100,.22)}
-    .hero{text-align:center;margin-top:clamp(3px,1.5vh,16px)}
-    .quote-icon{font-family:Georgia,serif;font-size:clamp(16px,3vw,27px);line-height:.6;color:var(--gold2);margin:4px 0 8px;text-shadow:0 0 18px rgba(213,173,100,.24)}
-    .quote{
-      margin:0 auto;
-      max-width:850px;
-      font-family:Georgia,"Times New Roman",serif;
-      font-size:clamp(30px,7.2vw,56px);
-      line-height:1.02;
-      letter-spacing:.004em;
-      text-shadow:0 12px 28px rgba(0,0,0,.55);
-    }
-    .script{
-      position:relative;display:inline-block;
-      font-family:"Snell Roundhand","Segoe Script","Brush Script MT",cursive;
-      font-size:1.05em;font-weight:500;color:#f0d286;
-      padding:0 .04em .02em;
-      text-shadow:0 0 20px rgba(240,210,134,.16),0 12px 28px rgba(0,0,0,.48);
-    }
-    .script:after{
-      content:"";position:absolute;left:9%;right:9%;bottom:.02em;height:1px;
-      background:linear-gradient(90deg,transparent,rgba(240,210,134,.88),transparent);
-    }
-    .source{margin:10px 0 0;color:#f1e2bd;font-family:Georgia,"Times New Roman",serif;font-size:clamp(13px,2.6vw,22px);line-height:1.25;text-shadow:0 8px 18px rgba(0,0,0,.45)}
-    .source small{display:block;margin-top:4px;color:#d7b46b;font-family:Inter,system-ui,sans-serif;font-size:clamp(11px,2.2vw,15px);font-weight:600;letter-spacing:.01em}
-    .brand{text-align:center;margin:clamp(12px,2vh,20px) 0 clamp(10px,1.6vh,16px)}
-    .brand h1{margin:0;white-space:nowrap;font-family:Georgia,"Times New Roman",serif;font-size:clamp(30px,9vw,64px);line-height:1;letter-spacing:.14em;font-weight:700;text-shadow:0 14px 30px rgba(0,0,0,.6)}
-    .brand .sub{margin:8px 0 0;color:var(--gold2);font-size:clamp(10px,2.35vw,16px);letter-spacing:.34em;text-transform:uppercase;font-weight:800}
-    .brand .by{margin:5px 0 0;color:#ead19a;font-family:"Snell Roundhand","Segoe Script","Brush Script MT",cursive;font-size:clamp(19px,4.8vw,36px);line-height:1;text-shadow:0 0 16px rgba(234,209,154,.18)}
-    .links{width:100%;max-width:860px;margin:0 auto;display:grid;gap:0}
-    .row{
-      --accent:var(--gold);
-      min-height:clamp(64px,11.2vh,86px);
-      position:relative;display:grid;grid-template-columns:clamp(58px,13vw,78px) 1fr clamp(32px,7vw,44px);align-items:center;gap:clamp(10px,2.7vw,22px);
-      color:var(--ink);text-decoration:none;border:0;background:transparent;padding:0 clamp(8px,2vw,18px) 0 clamp(8px,2vw,18px);font:inherit;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent;
-      transition:filter .18s ease,transform .18s ease;
-    }
-    .row:before{
-      content:"";position:absolute;left:clamp(70px,17vw,106px);right:clamp(56px,13vw,88px);bottom:0;height:1px;
-      background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 54%,transparent),rgba(213,173,100,.28),transparent);
-      box-shadow:0 0 7px color-mix(in srgb,var(--accent) 18%,transparent);
-      opacity:.9;
-    }
-    .row:after{
-      content:"";position:absolute;left:clamp(72px,17vw,110px);right:clamp(56px,13vw,88px);top:50%;height:42%;transform:translateY(-50%) scaleX(.96);opacity:0;border-radius:999px;
-      background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 17%,transparent),rgba(255,255,255,.018),transparent);
-      box-shadow:0 0 22px color-mix(in srgb,var(--accent) 25%,transparent);
-      transition:opacity .18s ease,transform .18s ease;
-      pointer-events:none;
-    }
-    .row:hover:after,.row:focus-visible:after,.row:active:after{opacity:1;transform:translateY(-50%) scaleX(1)}
-    .row:hover,.row:focus-visible,.row:active{filter:drop-shadow(0 0 12px color-mix(in srgb,var(--accent) 20%,transparent));outline:none}
-    .icon{
-      width:clamp(52px,11.6vw,70px);height:clamp(52px,11.6vw,70px);border-radius:50%;display:grid;place-items:center;color:white;position:relative;z-index:1;
-      background:
-        radial-gradient(circle at 30% 22%,rgba(255,255,255,.38),transparent 25%),
-        linear-gradient(145deg,color-mix(in srgb,var(--accent) 78%,white),color-mix(in srgb,var(--accent) 72%,black));
-      box-shadow:
-        inset 0 0 0 1.5px rgba(255,255,255,.38),
-        inset 0 0 18px rgba(255,255,255,.08),
-        0 0 0 1px rgba(245,219,150,.75),
-        0 0 18px color-mix(in srgb,var(--accent) 35%,transparent);
-    }
-    .icon:after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid rgba(213,173,100,.55);box-shadow:0 0 18px color-mix(in srgb,var(--accent) 28%,transparent)}
-    .icon svg{width:48%;height:48%;filter:drop-shadow(0 2px 4px rgba(0,0,0,.35))}
-    .label{min-width:0;position:relative;z-index:1}
-    .label b{display:block;color:#f4d889;font-size:clamp(10px,2.3vw,14px);line-height:1;letter-spacing:.22em;text-transform:uppercase;font-weight:800;margin-bottom:4px}
-    .label span{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff3e0;font-family:Georgia,"Times New Roman",serif;font-size:clamp(21px,5.2vw,34px);line-height:1.05;text-shadow:0 8px 18px rgba(0,0,0,.45)}
-    .arrow{width:clamp(27px,6vw,38px);height:clamp(27px,6vw,38px);border-radius:50%;display:grid;place-items:center;color:#f4d889;border:1px solid rgba(213,173,100,.44);background:rgba(0,0,0,.12);font-family:Georgia,serif;font-size:clamp(20px,5vw,30px);line-height:1;box-shadow:0 0 10px rgba(213,173,100,.08);transition:.18s ease}
-    .row:hover .arrow,.row:focus-visible .arrow,.row:active .arrow{background:rgba(213,173,100,.08);box-shadow:0 0 20px color-mix(in srgb,var(--accent) 32%,transparent)}
-    .telegram{--accent:var(--blue)}.instagram{--accent:var(--pink)}.website{--accent:var(--steel)}.library{--accent:var(--amber)}.community{--accent:var(--violet)}.app{--accent:var(--green)}
-    .foot{text-align:center;margin-top:clamp(8px,1.6vh,16px)}
-    .keys{color:#d8b86f;font-size:clamp(9px,2vw,13px);letter-spacing:.28em;text-transform:uppercase;font-weight:600;white-space:nowrap}
-    .domain{display:flex;align-items:center;justify-content:center;gap:clamp(10px,3vw,24px);margin-top:6px;color:#fff1dc;text-decoration:none;font-family:Georgia,"Times New Roman",serif;font-size:clamp(18px,4.6vw,31px);line-height:1;white-space:nowrap;text-shadow:0 8px 20px rgba(0,0,0,.55)}
-    .domain:before,.domain:after{content:"";height:1px;width:clamp(40px,15vw,130px);background:linear-gradient(90deg,transparent,rgba(213,173,100,.65))}.domain:after{background:linear-gradient(90deg,rgba(213,173,100,.65),transparent)}
-    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.62);backdrop-filter:blur(10px);z-index:20}.modal.open{display:flex}.sheet{width:min(100%,640px);max-height:86svh;overflow:auto;border:1px solid rgba(213,173,100,.28);border-radius:22px;background:linear-gradient(180deg,#0d1a22,#050b10);box-shadow:0 24px 70px rgba(0,0,0,.6);padding:20px}.sheet-head{display:flex;justify-content:space-between;gap:14px;border-bottom:1px solid rgba(213,173,100,.16);padding-bottom:12px;margin-bottom:14px}.sheet h2{font-family:Georgia,"Times New Roman",serif;margin:0;color:#fff1dc}.sheet p,.sheet li{color:#d7c9b0;line-height:1.55}.close{width:38px;height:38px;border-radius:50%;border:1px solid rgba(213,173,100,.3);background:transparent;color:#f3dc9b;font-size:24px}.install-grid{display:grid;gap:12px}.install-card{border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.035);border-radius:16px;padding:14px}.install-card h3{margin:0 0 10px;color:#f3dc9b;text-transform:uppercase;letter-spacing:.08em;font-size:14px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.actions a,.actions button{border:1px solid rgba(213,173,100,.28);background:rgba(213,173,100,.08);color:#fff1dc;border-radius:999px;padding:10px 13px;text-decoration:none;font:inherit}
-    @media (max-width:480px){
-      .stage{padding-left:14px;padding-right:14px;min-height:610px}
-      .quote{font-size:clamp(31px,8vw,41px);max-width:100%;line-height:1.02}.source{font-size:14px}.source small{font-size:12px}.brand{margin:12px 0 8px}.brand h1{font-size:clamp(30px,8.6vw,42px);letter-spacing:.12em}.brand .sub{font-size:11px;letter-spacing:.32em}.brand .by{font-size:23px}.mid-mark{display:none}.row{min-height:70px;grid-template-columns:62px 1fr 34px;padding-left:0;padding-right:0}.row:before{left:72px;right:44px}.row:after{left:72px;right:44px}.icon{width:54px;height:54px}.label b{font-size:11px}.label span{font-size:24px}.arrow{width:31px;height:31px}.wm-wrap{left:50vw;top:16vh;width:62vw;opacity:.42}.top-mark{display:none}.keys{font-size:10px;letter-spacing:.22em}.domain{font-size:22px}.quote-icon{margin-top:2px}
-    }
-    @media (max-height:720px){.stage{padding-top:10px;padding-bottom:10px}.quote{font-size:clamp(27px,6.6vw,42px)}.source{margin-top:6px}.brand{margin:8px 0 6px}.brand .by{font-size:20px}.row{min-height:58px}.icon{width:48px;height:48px}.label b{font-size:9px;margin-bottom:2px}.label span{font-size:20px}.foot{margin-top:6px}.keys{font-size:9px}.domain{font-size:19px}}
-    @media (min-width:720px){.install-grid{grid-template-columns:1fr 1fr}.stage{padding-left:10vw;padding-right:10vw}.wm-wrap{left:58vw}}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#010407" />
+<meta name="color-scheme" content="dark" />
+<title>DAR AL TAWḤĪD · Offizielle Kanäle</title>
+<meta name="description" content="Alle offiziellen DAR AL TAWḤĪD Kanäle an einem Ort." />
+<meta property="og:title" content="DAR AL TAWḤĪD · Offizielle Kanäle" />
+<meta property="og:description" content="Telegram, Instagram, Website, WhatsApp, Bibliothek, Community und App – alle offiziellen Kanäle an einem Ort." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://dar-al-tauhid.de/links" />
+<meta property="og:image" content="https://dar-al-tauhid.de/app-icon-512.png" />
+<style>
+:root{
+  --bg:#010407;--bg2:#061016;--ink:#f6eedf;--muted:#bdaE92;--gold:#d7af64;--gold2:#f1d58c;
+  --line:rgba(215,175,100,.35);--line-soft:rgba(215,175,100,.16);
+  --serif:Georgia,'Times New Roman',serif;--script:'Snell Roundhand','Brush Script MT','Segoe Script',cursive;--sans:Inter,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+}
+*{box-sizing:border-box}html{background:#010407}body{margin:0;height:100svh;overflow:hidden;color:var(--ink);font-family:var(--sans);background:#010407}
+.page{position:relative;height:100svh;width:100%;overflow:hidden;padding:calc(env(safe-area-inset-top,0px) + 18px) clamp(16px,4vw,42px) calc(env(safe-area-inset-bottom,0px) + 12px);background:
+ radial-gradient(760px 460px at 85% -4%,rgba(215,175,100,.16),transparent 57%),
+ radial-gradient(520px 420px at -8% 72%,rgba(13,96,108,.13),transparent 64%),
+ linear-gradient(145deg,#02070b 0%,#071119 52%,#020507 100%)}
+.page::before{content:"";position:absolute;inset:-18%;background:repeating-radial-gradient(circle at 88% 48%,rgba(215,175,100,.08) 0 1px,transparent 1px 18px);opacity:.34;pointer-events:none}.page::after{content:"";position:absolute;top:-8%;right:15%;width:160px;height:120%;transform:rotate(16deg);background:linear-gradient(90deg,transparent,rgba(255,232,171,.11),transparent);filter:blur(1px);pointer-events:none}
+.watermark{position:absolute;z-index:0;width:min(58vw,430px);height:min(58vw,430px);right:-7vw;top:22.5vh;border-radius:50%;overflow:hidden;opacity:.22;filter:sepia(.32) saturate(.82) brightness(.72) contrast(1.08);mix-blend-mode:screen;box-shadow:0 0 0 1px rgba(215,175,100,.12),0 0 70px rgba(215,175,100,.10)}
+.watermark img{width:100%;height:100%;object-fit:cover;object-position:center;border-radius:50%;transform:scale(1.16);-webkit-mask-image:radial-gradient(circle,#000 0 55%,rgba(0,0,0,.55) 67%,transparent 78%);mask-image:radial-gradient(circle,#000 0 55%,rgba(0,0,0,.55) 67%,transparent 78%)}
+.content{position:relative;z-index:1;height:100%;display:grid;grid-template-rows:auto auto 1fr auto;max-width:760px;margin:0 auto}.orn{height:18px;margin:0 auto 4px;width:230px;background:linear-gradient(90deg,transparent,var(--line),transparent);position:relative}.orn::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:14px;transform:translate(-50%,-50%) rotate(45deg);border:1px solid var(--gold);background:#061016}
+.quote{text-align:center;margin:0 auto 10px;width:min(100%,680px);text-shadow:0 6px 18px rgba(0,0,0,.7)}.qm{display:block;font-family:var(--serif);font-size:24px;line-height:.8;color:var(--gold2);margin-bottom:2px}.qtext{margin:0;font-family:var(--serif);font-size:clamp(30px,8.1vw,56px);line-height:.96;font-weight:700;letter-spacing:.005em}.qtext .script{font-family:var(--script);font-size:1.03em;font-weight:400;color:#e5c070;text-decoration:underline;text-underline-offset:.13em;text-decoration-thickness:1px;text-decoration-color:rgba(229,192,112,.72)}.src{margin:10px 0 0;font-family:var(--serif);font-size:clamp(14px,3.7vw,22px);line-height:1.25;color:#eadfcb}.src strong{display:block;margin-top:3px;color:var(--gold2);font-family:var(--sans);font-size:clamp(11px,2.95vw,16px);letter-spacing:.02em}.brand{text-align:center;margin:0 0 8px}.brand h1{margin:0;font-family:var(--serif);font-size:clamp(36px,10.3vw,82px);line-height:.96;letter-spacing:.12em;white-space:nowrap;text-shadow:0 10px 28px rgba(0,0,0,.65)}.brand .sub{margin:9px 0 0;color:var(--gold2);font-weight:800;font-size:clamp(10px,2.7vw,15px);letter-spacing:.36em}.brand .by{margin:5px 0 0;font-family:var(--script);font-size:clamp(22px,6vw,40px);color:#e3c57c;text-shadow:0 0 19px rgba(215,175,100,.18)}
+.links{display:grid;align-content:center;gap:0;min-height:0}.row{--accent:#d7af64;position:relative;display:grid;grid-template-columns:58px 1fr 34px;align-items:center;gap:14px;min-height:58px;padding:3px 7px 4px 0;color:var(--ink);text-decoration:none;border:0;background:transparent;font:inherit;text-align:left;cursor:pointer;isolation:isolate;-webkit-tap-highlight-color:transparent;transition:background .22s ease,filter .22s ease}.row::before{content:"";position:absolute;left:88px;right:55px;bottom:0;height:1px;background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 55%,transparent),rgba(215,175,100,.22),transparent);opacity:.75}.row::after{content:"";position:absolute;inset:4px 40px 4px 72px;border-radius:18px;background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 18%,transparent),rgba(255,255,255,.018),transparent);box-shadow:0 0 0 transparent;opacity:0;transition:opacity .22s ease,box-shadow .22s ease;z-index:-1}.row:hover::after,.row:focus-visible::after,.row:active::after,.row.is-lit::after{opacity:1;box-shadow:0 0 24px color-mix(in srgb,var(--accent) 34%,transparent),inset 0 0 22px color-mix(in srgb,var(--accent) 12%,transparent)}.row:hover .emblem,.row:focus-visible .emblem,.row:active .emblem,.row.is-lit .emblem{box-shadow:0 0 0 1px rgba(241,213,140,.9),0 0 20px color-mix(in srgb,var(--accent) 52%,transparent),inset 0 0 0 2px rgba(255,255,255,.22)}.row:hover .go,.row:focus-visible .go,.row:active .go,.row.is-lit .go{background:rgba(215,175,100,.10);box-shadow:0 0 18px rgba(215,175,100,.28);color:#ffe49c}.emblem{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:#fff;background:radial-gradient(circle at 28% 22%,rgba(255,255,255,.48),transparent 30%),linear-gradient(145deg,var(--accent),color-mix(in srgb,var(--accent) 52%,#05070a));box-shadow:0 0 0 1px rgba(241,213,140,.76),0 0 0 4px rgba(215,175,100,.10),inset 0 0 0 2px rgba(255,255,255,.18),0 9px 20px rgba(0,0,0,.28);transition:box-shadow .22s ease}.emblem svg{width:27px;height:27px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.38))}.label{display:block;color:var(--gold2);font-size:clamp(10px,2.7vw,14px);font-weight:800;letter-spacing:.24em;text-transform:uppercase;line-height:1.08}.value{display:block;margin-top:4px;font-family:var(--serif);font-size:clamp(22px,6vw,34px);line-height:1.02;letter-spacing:.005em;text-shadow:0 5px 12px rgba(0,0,0,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.go{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(215,175,100,.50);color:#f3d58b;font-size:25px;font-family:var(--serif);transition:.22s ease}.telegram{--accent:#2ba9df}.instagram{--accent:#d83f8e}.website{--accent:#607895}.whatsapp{--accent:#25d366}.library{--accent:#b88335}.community{--accent:#8b55c7}.app{--accent:#6dbf4d}.footer{text-align:center;margin-top:7px}.tags{margin:0 0 5px;color:var(--gold2);font-size:clamp(9px,2.35vw,12px);letter-spacing:.24em;white-space:nowrap}.domain{font-family:var(--serif);font-size:clamp(20px,5.7vw,31px);line-height:1;color:var(--ink);white-space:nowrap;text-decoration:none;text-shadow:0 6px 16px rgba(0,0,0,.62)}
+.modal{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.66);backdrop-filter:blur(12px)}.modal.open{display:flex}.sheet{width:min(100%,640px);max-height:calc(100svh - 36px);overflow:auto;border:1px solid rgba(215,175,100,.28);border-radius:24px;background:linear-gradient(180deg,#0a161e,#04090d);box-shadow:0 28px 80px rgba(0,0,0,.7);padding:20px}.sheet-head{display:flex;justify-content:space-between;gap:15px;border-bottom:1px solid rgba(215,175,100,.16);padding-bottom:14px}.sheet h2{margin:0;font-family:var(--serif);font-size:28px}.sheet p,.sheet li{color:#d8ccb4;line-height:1.52}.close{width:40px;height:40px;border-radius:50%;border:1px solid rgba(215,175,100,.28);background:rgba(255,255,255,.04);color:#f1d58c;font-size:24px}.install{display:grid;gap:12px;margin-top:15px}.box{border:1px solid rgba(255,255,255,.07);border-radius:17px;padding:14px;background:rgba(255,255,255,.035)}.box h3{margin:0 0 8px;color:#f1d58c;letter-spacing:.13em;font-size:13px}.actions{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}.actions a,.actions button{border:1px solid rgba(215,175,100,.24);border-radius:999px;background:rgba(215,175,100,.08);color:#f6eedf;padding:10px 14px;text-decoration:none;font:inherit}
+@media(max-height:760px){.page{padding-top:12px;padding-bottom:8px}.orn{height:12px}.quote{margin-bottom:6px}.qtext{font-size:clamp(25px,7.2vw,42px)}.src{margin-top:6px}.brand h1{font-size:clamp(31px,9vw,58px)}.brand .sub{margin-top:5px}.brand .by{font-size:clamp(19px,5vw,30px)}.row{min-height:50px;grid-template-columns:50px 1fr 30px;gap:12px}.emblem{width:46px;height:46px}.emblem svg{width:24px;height:24px}.value{font-size:clamp(19px,5.2vw,27px)}.go{width:29px;height:29px}.footer{margin-top:3px}.domain{font-size:clamp(18px,5.1vw,25px)}}
+@media(max-width:390px){.page{padding-left:12px;padding-right:12px}.row{gap:10px}.value{font-size:clamp(18px,5vw,25px)}.brand h1{letter-spacing:.09em}.watermark{right:-18vw;width:72vw;height:72vw}}
+</style>
 </head>
 <body>
-  <main class="stage">
-    <div class="wm-wrap" aria-hidden="true"><img src="/app-icon-512.png" alt="" /></div>
-    <div class="top-mark"><span></span><i class="diamond"></i><span></span></div>
-    <section class="hero" aria-label="Aussage über Wissen">
-      <div class="quote-icon">“</div>
-      <h1 class="quote">Das <span class="script">Wissen</span> ist das <span class="script">Licht</span> des Herzens.</h1>
-      <p class="source">– ʿAlī ibn al-Ḥusayn al-Zaynī<small>Quelle: Siyar Aʿlām an-Nubalāʾ 5/348</small></p>
-    </section>
-    <section class="brand" aria-label="DAR AL TAWḤĪD">
-      <h1>DAR AL TAWḤĪD</h1>
-      <div class="sub">Offizielle Kanäle</div>
-      <div class="by">by Serhat Abu Malik</div>
-    </section>
-    <div class="mid-mark"><span></span><i class="diamond"></i><span></span></div>
+<main class="page">
+  <div class="watermark" aria-hidden="true"><img src="/app-icon-512.png" alt="" /></div>
+  <section class="content" aria-label="Offizielle DAR AL TAWḤĪD Kanäle">
+    <div class="orn" aria-hidden="true"></div>
+    <header>
+      <div class="quote"><span class="qm">“</span><p class="qtext">Das <span class="script">Wissen</span> ist das <span class="script">Licht</span> des Herzens.</p><p class="src">– ʿAlī ibn al-Ḥusayn al-Zaynī <strong>Quelle: Siyar Aʿlām an-Nubalāʾ 5/348</strong></p></div>
+      <div class="brand"><h1>DAR AL TAWḤĪD</h1><p class="sub">OFFIZIELLE KANÄLE</p><p class="by">by Serhat Abu Malik</p></div>
+    </header>
     <nav class="links" aria-label="Offizielle Links">
-      <a class="row telegram" href="https://t.me/dar_al_tauhid" target="_blank" rel="noopener"><span class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M21.7 3.7 18.6 18.5c-.24 1.08-.9 1.34-1.82.83l-5-3.69-2.42 2.33c-.27.27-.49.49-1.01.49l.37-5.13 9.34-8.44c.41-.37-.09-.57-.63-.2L5.88 12.2 1.03 10.68c-1.06-.34-1.08-1.07.22-1.58L20.1 1.82c.89-.33 1.67.21 1.6 1.88Z" fill="currentColor"/></svg></span><span class="label"><b>Telegram</b><span>@dar_al_tauhid</span></span><span class="arrow">›</span></a>
-      <a class="row instagram" href="https://www.instagram.com/dar_at_tawhid/" target="_blank" rel="noopener"><span class="icon"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/></svg></span><span class="label"><b>Instagram</b><span>@dar_at_tawhid</span></span><span class="arrow">›</span></a>
-      <a class="row website" href="https://dar-al-tauhid.de" target="_blank" rel="noopener"><span class="icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.6" stroke="currentColor" stroke-width="2"/><path d="M3.8 12h16.4M12 3.4c2.05 2.34 3.08 5.2 3.08 8.6S14.05 18.26 12 20.6M12 3.4C9.95 5.74 8.92 8.6 8.92 12s1.03 6.26 3.08 8.6" stroke="currentColor" stroke-width="1.65" stroke-linecap="round"/></svg></span><span class="label"><b>Website</b><span>dar-al-tauhid.de</span></span><span class="arrow">›</span></a>
-      <a class="row library" href="https://t.me/dar_al_tauhid1" target="_blank" rel="noopener"><span class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4.2 5.8c2.72 0 5.15.46 7.8 2.02 2.65-1.56 5.08-2.02 7.8-2.02v12.5c-2.72 0-5.15.42-7.8 2-2.65-1.58-5.08-2-7.8-2V5.8Z" stroke="currentColor" stroke-width="1.85" stroke-linejoin="round"/><path d="M12 7.82v12.1M7.15 9.55c1.35.18 2.6.54 3.72 1.09M16.85 9.55c-1.35.18-2.6.54-3.72 1.09" stroke="currentColor" stroke-width="1.45" stroke-linecap="round"/></svg></span><span class="label"><b>Bibliothek</b><span>Wissen aus Qurʾān & Sunnah</span></span><span class="arrow">›</span></a>
-      <a class="row community" href="https://t.me/dar_al_tauhid1" target="_blank" rel="noopener"><span class="icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="8" cy="9" r="2.6" fill="currentColor"/><circle cx="16" cy="9" r="2.6" fill="currentColor" opacity=".86"/><circle cx="12" cy="7" r="2.8" fill="currentColor" opacity=".96"/><path d="M4.2 19c.45-3.02 2.18-4.64 4.95-4.64 1.2 0 2.17.29 2.85.86.68-.57 1.65-.86 2.85-.86 2.77 0 4.5 1.62 4.95 4.64H4.2Z" fill="currentColor"/></svg></span><span class="label"><b>Community</b><span>Gemeinsam lernen</span></span><span class="arrow">›</span></a>
-      <button class="row app" id="openApp" type="button"><span class="icon"><svg viewBox="0 0 24 24" fill="none"><rect x="7" y="2.8" width="10" height="18.4" rx="2.1" stroke="currentColor" stroke-width="2"/><path d="M10.5 5h3M11.5 18.3h1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span class="label"><b>App</b><span>Dar al Tawḥīd App</span></span><span class="arrow">›</span></button>
+      <a class="row telegram" href="https://t.me/dar_al_tauhid" target="_blank" rel="noopener"><span class="emblem" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M21.7 3.7 18.6 18.5c-.24 1.08-.9 1.34-1.82.83l-5-3.69-2.42 2.33c-.27.27-.49.49-1.01.49l.37-5.13 9.34-8.44c.41-.37-.09-.57-.63-.2L5.88 12.2 1.03 10.68c-1.06-.34-1.08-1.07.22-1.58L20.1 1.82c.89-.33 1.67.21 1.6 1.88Z" fill="currentColor"/></svg></span><span><span class="label">Telegram</span><span class="value">@dar_al_tauhid</span></span><span class="go">›</span></a>
+      <a class="row instagram" href="https://www.instagram.com/dar_at_tawhid/" target="_blank" rel="noopener"><span class="emblem" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg></span><span><span class="label">Instagram</span><span class="value">@dar_at_tawhid</span></span><span class="go">›</span></a>
+      <a class="row website" href="https://dar-al-tauhid.de" target="_blank" rel="noopener"><span class="emblem" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="2"/><path d="M3.8 12h16.4M12 3.5c2 2.4 3 5.25 3 8.5s-1 6.1-3 8.5M12 3.5c-2 2.4-3 5.25-3 8.5s1 6.1 3 8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span><span class="label">Website</span><span class="value">dar-al-tauhid.de</span></span><span class="go">›</span></a>
+      <a class="row whatsapp" href="https://wa.me/?text=https%3A%2F%2Fdar-al-tauhid.de%2Flinks" target="_blank" rel="noopener"><span class="emblem" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12.04 3.2A8.7 8.7 0 0 0 4.6 16.4l-1 3.7 3.85-1.01a8.7 8.7 0 1 0 4.59-15.89Z" stroke="currentColor" stroke-width="1.8"/><path d="M9.15 7.8c-.2-.48-.42-.5-.62-.5h-.54c-.19 0-.5.07-.76.36-.26.28-1 1-1 2.4s1.03 2.78 1.17 2.97c.15.2 1.99 3.19 4.9 4.34 2.42.96 2.92.77 3.44.72.53-.05 1.7-.7 1.94-1.37.24-.67.24-1.25.17-1.37-.07-.12-.26-.2-.55-.34l-1.62-.8c-.29-.15-.5-.22-.71.11-.22.33-.82 1.03-1.01 1.24-.19.22-.38.24-.67.1-.29-.15-1.22-.45-2.32-1.43-.86-.76-1.44-1.7-1.61-1.99-.17-.29-.02-.45.13-.59.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.2.05-.36-.02-.5l-.74-1.78Z" fill="currentColor"/></svg></span><span><span class="label">WhatsApp</span><span class="value">dar-al-tauhid.de/links teilen</span></span><span class="go">›</span></a>
+      <a class="row library" href="https://t.me/dar_al_tauhid1" target="_blank" rel="noopener"><span class="emblem" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4.5 5.8c2.5 0 4.9.45 7.5 2.05 2.6-1.6 5-2.05 7.5-2.05v12.4c-2.5 0-4.9.42-7.5 2-2.6-1.58-5-2-7.5-2V5.8Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M12 7.85v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span><span><span class="label">Bibliothek</span><span class="value">Wissen aus Qurʾān & Sunnah</span></span><span class="go">›</span></a>
+      <a class="row community" href="https://t.me/dar_al_tauhid1" target="_blank" rel="noopener"><span class="emblem" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="8" cy="9" r="2.4" fill="currentColor"/><circle cx="16" cy="9" r="2.4" fill="currentColor" opacity=".88"/><circle cx="12" cy="7" r="2.65" fill="currentColor"/><path d="M4.4 19c.5-3 2.25-4.55 4.9-4.55 1.12 0 2.03.26 2.7.78.67-.52 1.58-.78 2.7-.78 2.65 0 4.4 1.55 4.9 4.55H4.4Z" fill="currentColor"/></svg></span><span><span class="label">Community</span><span class="value">Gemeinsam lernen</span></span><span class="go">›</span></a>
+      <button class="row app" id="openApp" type="button"><span class="emblem" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="7" y="3" width="10" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M10.5 5.2h3M11.5 18.2h1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span><span class="label">App</span><span class="value">Dar al Tawḥīd App</span></span><span class="go">›</span></button>
     </nav>
-    <footer class="foot"><div class="keys">Qurʾān · Sunnah · Salaf · ʿIlm · Manhaj</div><a class="domain" href="https://dar-al-tauhid.de/links">dar-al-tauhid.de/links</a></footer>
-  </main>
-  <div class="modal" id="appModal" role="dialog" aria-modal="true" aria-labelledby="appTitle" aria-hidden="true"><div class="sheet"><div class="sheet-head"><div><h2 id="appTitle">DAR AL TAWḤĪD App installieren</h2><p>Öffne zuerst <strong>dar-al-tauhid.de</strong> im passenden Browser und folge den Schritten für dein Gerät.</p></div><button class="close" id="closeApp" type="button" aria-label="Schließen">×</button></div><div class="install-grid"><section class="install-card"><h3>iPhone / iPad</h3><ol><li>Öffne <strong>dar-al-tauhid.de</strong> in <strong>Safari</strong>.</li><li>Tippe auf das <strong>Teilen-Symbol</strong>.</li><li>Wähle <strong>Zum Home-Bildschirm</strong>.</li><li>Bestätige mit <strong>Hinzufügen</strong>.</li></ol></section><section class="install-card"><h3>Android</h3><ol><li>Öffne <strong>dar-al-tauhid.de</strong> in <strong>Chrome</strong>.</li><li>Tippe oben rechts auf <strong>⋮</strong>.</li><li>Wähle <strong>App installieren</strong> oder <strong>Zum Startbildschirm hinzufügen</strong>.</li><li>Bestätige die Installation.</li></ol></section></div><div class="actions"><a href="https://dar-al-tauhid.de" target="_blank" rel="noopener">Website öffnen</a><button type="button" id="copyMain">Link kopieren</button></div></div></div>
-  <script>
-    const modal=document.getElementById('appModal'),openBtn=document.getElementById('openApp'),closeBtn=document.getElementById('closeApp');
-    function openModal(){modal.classList.add('open');modal.setAttribute('aria-hidden','false');closeBtn.focus()}
-    function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');openBtn.focus()}
-    openBtn.addEventListener('click',openModal);closeBtn.addEventListener('click',closeModal);modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))closeModal()});
-    document.getElementById('copyMain').addEventListener('click',async()=>{try{await navigator.clipboard.writeText('https://dar-al-tauhid.de/links')}catch(e){}});
-  </script>
+    <footer class="footer"><p class="tags">QURʾĀN · SUNNAH · SALAF · ʿILM · MANHAJ</p><a class="domain" href="https://dar-al-tauhid.de/links">dar-al-tauhid.de/links</a></footer>
+  </section>
+</main>
+<div class="modal" id="appModal" role="dialog" aria-modal="true" aria-labelledby="appTitle"><div class="sheet"><div class="sheet-head"><div><h2 id="appTitle">App installieren</h2><p>Öffne dar-al-tauhid.de im passenden Browser und füge die App zum Startbildschirm hinzu.</p></div><button class="close" id="closeApp" type="button" aria-label="Schließen">×</button></div><div class="install"><div class="box"><h3>iPhone / iPad</h3><ol><li>In Safari öffnen.</li><li>Teilen-Symbol antippen.</li><li>„Zum Home-Bildschirm“ wählen.</li><li>Mit „Hinzufügen“ bestätigen.</li></ol></div><div class="box"><h3>Android</h3><ol><li>In Chrome öffnen.</li><li>Menü ⋮ antippen.</li><li>„App installieren“ oder „Zum Startbildschirm hinzufügen“ wählen.</li><li>Bestätigen.</li></ol></div></div><div class="actions"><a href="https://dar-al-tauhid.de" target="_blank" rel="noopener">Website öffnen</a></div></div></div>
+<script>
+const modal=document.getElementById('appModal'),openApp=document.getElementById('openApp'),closeApp=document.getElementById('closeApp');
+function openModal(){modal.classList.add('open');closeApp.focus();document.body.style.overflow='hidden'}
+function closeModal(){modal.classList.remove('open');document.body.style.overflow=''}
+openApp.addEventListener('click',openModal);closeApp.addEventListener('click',closeModal);modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+document.querySelectorAll('.row').forEach(row=>{let t;function lit(){row.classList.add('is-lit');clearTimeout(t);t=setTimeout(()=>row.classList.remove('is-lit'),1100)}row.addEventListener('pointerdown',lit,{passive:true});row.addEventListener('touchstart',lit,{passive:true});row.addEventListener('focus',lit)});
+</script>
 </body>
 </html>
