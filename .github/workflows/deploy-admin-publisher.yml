@@ -91,6 +91,30 @@ jobs:
           grep -q '^name = "dar-admin-publisher"$' wrangler.toml
           wrangler deploy --name dar-admin-publisher
 
+      # Workers Builds für dar-admin-publisher ist oft falsch auf Root-wrangler.toml
+      # (Besucher-App) konfiguriert und überschreibt den API-Worker ~30–90s später
+      # mit Static Assets via WRANGLER_CI_OVERRIDE_NAME. Deshalb: warten + erneut deployen.
+      - name: Reclaim worker after Workers Builds race
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          echo "Warte auf möglichen Workers-Builds-Overwrite…"
+          sleep 70
+          for attempt in 1 2 3 4 5; do
+            HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true)"
+            if printf '%s' "$HEALTH" | grep -q '"service":"dar-admin-publisher"'; then
+              echo "Admin-Worker noch aktiv (Versuch $attempt)"
+              break
+            fi
+            echo "Overwrite erkannt (Versuch $attempt) – redeploy cloudflare/wrangler.toml"
+            wrangler deploy --name dar-admin-publisher
+            sleep 15
+          done
+          HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true)"
+          echo "Nach Reclaim: $HEALTH"
+          printf '%s' "$HEALTH" | grep -q '"service":"dar-admin-publisher"'
+
       - name: Sync core worker secrets
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -107,8 +131,6 @@ jobs:
           TELEGRAM_TOPICS_CHAT_ID: ${{ secrets.TELEGRAM_TOPICS_CHAT_ID }}
           TELEGRAM_FORUM_CHAT_ID: ${{ secrets.TELEGRAM_FORUM_CHAT_ID }}
         run: |
-          # Workers Builds kann eine neuere, undeployte Version erzeugen.
-          # Deshalb: secrets per "versions secret bulk", danach neueste Version aktiv deployen.
           : > "$RUNNER_TEMP/missing-core-secrets.txt"
           SECRETS_JSON="$RUNNER_TEMP/core-secrets.json"
           node <<'NODE'
@@ -142,9 +164,21 @@ jobs:
           console.log("Secrets bereit:", Object.keys(payload).join(", ") || "(keine)");
           NODE
           if [ -s "$SECRETS_JSON" ] && [ "$(node -e "const j=require(process.argv[1]);process.stdout.write(String(Object.keys(j).length))" "$SECRETS_JSON")" != "0" ]; then
-            wrangler versions secret bulk "$SECRETS_JSON" --name dar-admin-publisher --message "core-secrets-sync"
-            VERSION_ID="$(wrangler versions list --name dar-admin-publisher --json | node -e "let d='';process.stdin.on('data',c=>d+=c);process.stdin.on('end',()=>{const a=JSON.parse(d);const id=(a[0]&&(a[0].id||a[0].version_id))||''; if(!id) process.exit(2); process.stdout.write(id)})")"
-            echo "Aktiviere Version mit Secrets: $VERSION_ID"
+            BULK_LOG="$RUNNER_TEMP/secret-bulk.log"
+            set +e
+            wrangler versions secret bulk "$SECRETS_JSON" --name dar-admin-publisher --message "core-secrets-sync" 2>&1 | tee "$BULK_LOG"
+            BULK_RC=${PIPESTATUS[0]}
+            set -e
+            if [ "$BULK_RC" != "0" ]; then
+              echo "::error::versions secret bulk fehlgeschlagen"
+              exit "$BULK_RC"
+            fi
+            VERSION_ID="$(sed -n 's/.*Created version \([0-9a-f-]\{36\}\).*/\1/p' "$BULK_LOG" | tail -n 1)"
+            if [ -z "$VERSION_ID" ]; then
+              echo "::error::Konnte Version-ID aus secret bulk Output nicht lesen"
+              exit 1
+            fi
+            echo "Aktiviere Secret-Version: $VERSION_ID"
             wrangler versions deploy "${VERSION_ID}@100" --name dar-admin-publisher --yes --message "activate-core-secrets"
             echo "Secret-Sync (versions) OK"
           else
@@ -157,6 +191,7 @@ jobs:
             done < "$RUNNER_TEMP/missing-core-secrets.txt"
           fi
           rm -f "$SECRETS_JSON"
+
       - name: Change scope lock guard (nur freigeschaltete Bereiche)
         env:
           INTEGRITY_BASE_REF: ${{ github.event.before || '' }}
@@ -191,13 +226,23 @@ jobs:
           exit 1
 
       - name: Delayed health recheck (Overwrite-Schutz)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          sleep 45
+          sleep 40
           HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true)"
           echo "Delayed: $HEALTH"
+          if ! printf '%s' "$HEALTH" | grep -q '"service":"dar-admin-publisher"'; then
+            echo "::warning::Overwrite nach Verify – letzter Reclaim"
+            wrangler deploy --name dar-admin-publisher
+            sleep 10
+            HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true)"
+            echo "Nach Final-Reclaim: $HEALTH"
+          fi
           if ! printf '%s' "$HEALTH" | grep -q '"ok":true' \
             || ! printf '%s' "$HEALTH" | grep -q '"service":"dar-admin-publisher"'; then
-            echo "::error::Admin-Worker /health nach Deploy wieder weg (möglicher Overwrite). Erneut Deploy Admin Publisher Worker ausführen."
+            echo "::error::Admin-Worker /health weg. Cloudflare → dar-admin-publisher → Settings → Builds: Root Directory auf cloudflare setzen oder Builds deaktivieren."
             exit 1
           fi
           echo "Delayed health OK"
@@ -347,15 +392,22 @@ jobs:
             local name="$1"
             local val="$2"
             if [ -n "$val" ]; then
-              printf '%s' "$val" | wrangler versions secret put "$name" --name dar-admin-publisher --message "feed-$name"
-              echo "Secret versioned: $name"
+              LOG="$RUNNER_TEMP/feed-secret-$name.log"
+              printf '%s' "$val" | wrangler versions secret put "$name" --name dar-admin-publisher --message "feed-$name" 2>&1 | tee "$LOG"
+              VID="$(sed -n 's/.*Created version \([0-9a-f-]\{36\}\).*/\1/p' "$LOG" | tail -n 1)"
+              if [ -n "$VID" ]; then
+                echo "$VID" > "$RUNNER_TEMP/feed-secret-version.txt"
+                echo "Secret versioned: $name → $VID"
+              else
+                echo "Secret versioned: $name (keine Version-ID gelesen)"
+              fi
             fi
           }
           put_secret PEXELS_API_KEY "$PEXELS_API_KEY"
           put_secret UNSPLASH_ACCESS_KEY "$UNSPLASH_ACCESS_KEY"
           put_secret PIXABAY_API_KEY "$PIXABAY_API_KEY"
-          if [ -n "${PEXELS_API_KEY}${UNSPLASH_ACCESS_KEY}${PIXABAY_API_KEY}" ]; then
-            VERSION_ID="$(wrangler versions list --name dar-admin-publisher --json | node -e "let d='';process.stdin.on('data',c=>d+=c);process.stdin.on('end',()=>{const a=JSON.parse(d);const id=(a[0]&&(a[0].id||a[0].version_id))||''; if(!id) process.exit(2); process.stdout.write(id)})")"
+          if [ -f "$RUNNER_TEMP/feed-secret-version.txt" ]; then
+            VERSION_ID="$(cat "$RUNNER_TEMP/feed-secret-version.txt")"
             wrangler versions deploy "${VERSION_ID}@100" --name dar-admin-publisher --yes --message "activate-feed-secrets"
           fi
 
