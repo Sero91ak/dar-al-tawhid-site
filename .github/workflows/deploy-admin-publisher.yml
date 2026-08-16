@@ -86,7 +86,10 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: wrangler deploy
+        run: |
+          test -f wrangler.toml
+          grep -q '^name = "dar-admin-publisher"$' wrangler.toml
+          wrangler deploy --name dar-admin-publisher
 
       - name: Sync core worker secrets
         env:
@@ -108,12 +111,14 @@ jobs:
             local name="$1"
             local val="$2"
             if [ -n "$val" ]; then
-              printf '%s' "$val" | wrangler secret put "$name"
+              printf '%s' "$val" | wrangler secret put "$name" --name dar-admin-publisher
               echo "Secret gesetzt: $name"
             else
               echo "Secret übersprungen (leer): $name"
+              echo "$name" >> "$RUNNER_TEMP/missing-core-secrets.txt"
             fi
           }
+          : > "$RUNNER_TEMP/missing-core-secrets.txt"
           # GitHub token aliases → Worker secret GITHUB_TOKEN
           GH_TOK="${WORKER_GITHUB_TOKEN:-${DAR_GITHUB_TOKEN:-${REPO_GITHUB_TOKEN:-}}}"
           put_secret GITHUB_TOKEN "$GH_TOK"
@@ -123,7 +128,14 @@ jobs:
           put_secret TELEGRAM_CHANNEL_ID "$TELEGRAM_CHANNEL_ID"
           put_secret TELEGRAM_CHANNEL_USERNAME "$TELEGRAM_CHANNEL_USERNAME"
           put_secret TELEGRAM_TOPICS_CHAT_ID "${TELEGRAM_TOPICS_CHAT_ID:-$TELEGRAM_FORUM_CHAT_ID}"
-
+          echo "::notice::Fehlende GitHub-Actions-Secrets (Werte manuell nachtragen):"
+          if [ -s "$RUNNER_TEMP/missing-core-secrets.txt" ]; then
+            sort -u "$RUNNER_TEMP/missing-core-secrets.txt" | while read -r n; do
+              echo "::warning::GitHub Secret fehlt/leer: $n – siehe cloudflare/TELEGRAM_STATUS_2026-08-16.md"
+            done
+          else
+            echo "Alle Kern-Secrets aus GitHub Actions vorhanden."
+          fi
 
       - name: Change scope lock guard (nur freigeschaltete Bereiche)
         env:
@@ -137,20 +149,38 @@ jobs:
             HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true)"
             echo "Versuch ${attempt}: $HEALTH"
             if printf '%s' "$HEALTH" | grep -q '"ok":true' \
+              && printf '%s' "$HEALTH" | grep -q '"service":"dar-admin-publisher"' \
               && printf '%s' "$HEALTH" | grep -q '"prayerStatusStore":true' \
               && printf '%s' "$HEALTH" | grep -q '"prayerScheduler":"cloudflare-worker-cron-v3"' \
               && printf '%s' "$HEALTH" | grep -q '"libraryApi":"v3-split-push"'; then
               if printf '%s' "$HEALTH" | grep -q '"hasTelegramToken":true'; then
                 echo "Telegram-Token aktiv"
               else
-                echo "::warning::hasTelegramToken=false – TELEGRAM_BOT_TOKEN Secret prüfen"
+                echo "::warning::hasTelegramToken=false – TELEGRAM_BOT_TOKEN in GitHub Actions Secrets setzen (Anleitung: cloudflare/TELEGRAM_STATUS_2026-08-16.md)"
+              fi
+              if printf '%s' "$HEALTH" | grep -q '"hasAdminSecret":true'; then
+                echo "Admin-Secret aktiv"
+              else
+                echo "::warning::hasAdminSecret=false – ADMIN_PUBLISH_SECRET in GitHub Actions Secrets setzen"
               fi
               exit 0
             fi
             sleep 12
           done
-          echo "::error::Worker-Binding nach Deploy nicht aktiv"
+          echo "::error::Worker-Binding nach Deploy nicht aktiv ( /health nicht ok )"
           exit 1
+
+      - name: Delayed health recheck (Overwrite-Schutz)
+        run: |
+          sleep 45
+          HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true)"
+          echo "Delayed: $HEALTH"
+          if ! printf '%s' "$HEALTH" | grep -q '"ok":true' \
+            || ! printf '%s' "$HEALTH" | grep -q '"service":"dar-admin-publisher"'; then
+            echo "::error::Admin-Worker /health nach Deploy wieder weg (möglicher Overwrite). Erneut Deploy Admin Publisher Worker ausführen."
+            exit 1
+          fi
+          echo "Delayed health OK"
 
       - name: Flush stuck approved library pushes
         continue-on-error: true
@@ -297,7 +327,7 @@ jobs:
             local name="$1"
             local val="$2"
             if [ -n "$val" ]; then
-              echo "$val" | wrangler secret put "$name"
+              echo "$val" | wrangler secret put "$name" --name dar-admin-publisher
               echo "Secret gesetzt: $name"
             fi
           }
