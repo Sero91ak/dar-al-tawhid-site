@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-17T11:45:54.390Z",
+  "updatedAt": "2026-08-17T11:50:30.944Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-17T11:45:54.390Z",
+  "lastCronRun": "2026-08-17T11:50:30.944Z",
   "nextPlannedPush": {
     "prayer": "ʿAṣr",
     "key": "asr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-17T15:17:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-17T11:30:42.949Z",
-  "windowEnd": "2026-08-18T13:45:42.949Z",
+  "windowStart": "2026-08-17T11:35:09.602Z",
+  "windowEnd": "2026-08-18T13:50:09.602Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 28,
@@ -28,9 +28,9 @@
   "usersWithLocation": 28,
   "usersWithActivePush": 28,
   "locationGroups": 5,
-  "scheduled": 56,
-  "recipients": 309,
-  "skippedPast": 64,
+  "scheduled": 54,
+  "recipients": 307,
+  "skippedPast": 66,
   "skippedWindow": 80,
   "duplicates": 1,
   "errors": 0,
@@ -56,11 +56,11 @@
         "time": "13:36",
         "advance": {
           "status": "geplant",
-          "recipients": 29
+          "recipients": 28
         },
         "entry": {
           "status": "geplant",
-          "recipients": 56
+          "recipients": 55
         }
       },
       "asr": {
@@ -132,11 +132,11 @@
       "time": "13:36",
       "advance": {
         "status": "geplant",
-        "recipients": 29
+        "recipients": 28
       },
       "entry": {
         "status": "geplant",
-        "recipients": 56
+        "recipients": 55
       },
       "answer": "Dhuhr 13:36: Vorab und Gebetszeit geplant."
     },
@@ -498,15 +498,6 @@
       "timeZone": "Europe/Berlin"
     },
     {
-      "prayer": "Dhuhr",
-      "key": "dhuhr",
-      "mode": "entry",
-      "time": "13:35",
-      "sendAfter": "2026-08-17T11:35:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin"
-    },
-    {
       "prayer": "ʿAṣr",
       "key": "asr",
       "mode": "entry",
@@ -602,15 +593,6 @@
       "mode": "entry",
       "time": "13:36",
       "sendAfter": "2026-08-17T11:36:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "prayer": "Dhuhr",
-      "key": "dhuhr",
-      "mode": "advance",
-      "time": "13:36",
-      "sendAfter": "2026-08-17T11:31:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin"
     },
