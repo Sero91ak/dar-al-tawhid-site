@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-17T11:15:36.935Z",
+  "generated": "2026-08-17T11:15:38.585Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -585,8 +585,32 @@
       "createdAt": "2026-08-17T11:15:36.719Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-08-17T11:15:36.719Z",
-      "lastError": "Push wartet auf Live-Verfügbarkeit",
-      "updatedAt": "2026-08-17T11:15:36.935Z"
+      "lastError": "",
+      "updatedAt": "2026-08-17T11:15:38.585Z",
+      "lastCheckAt": "2026-08-17T11:15:38.377Z",
+      "liveCheck": {
+        "ok": true,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": true,
+          "postFilePublic": true,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": true
+        },
+        "diagnosis": "",
+        "indexOk": true,
+        "postOk": true,
+        "visitorUrlOk": true,
+        "attempts": 1,
+        "site": "https://dar-al-tawhid.de",
+        "postId": "hadith-0004-ad-din-an-nasihah-460",
+        "indexGenerated": "2026-08-17T11:15:31.572Z",
+        "indexCount": 460,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=hadith-0004-ad-din-an-nasihah-460&v=1786965337936#post/hadith-0004-ad-din-an-nasihah-460"
+      },
+      "attempts": 1
     }
   }
 }
