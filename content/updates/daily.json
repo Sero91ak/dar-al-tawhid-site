@@ -16,5 +16,23 @@
     "title": "Duʿāʾ um Zugehörigkeit zu den Bezeugenden",
     "snippet": "Unser Herr, wir glauben an das, was Du herabgesandt hast, und folgen dem Gesandten; so schreibe uns unter die Bezeugenden.",
     "category": "Īmān & Zeugenschaft"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 459,
+      "remaining": 441
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 80,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
