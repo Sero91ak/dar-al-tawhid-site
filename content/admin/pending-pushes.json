@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-17T21:40:53.331Z",
+  "generated": "2026-08-17T21:41:09.844Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -626,11 +626,11 @@
       "pdfUrl": "/assets/library/pdfs/pub-20260817-001-v1-0.pdf",
       "catalogPath": "data/library-publications.json",
       "publishedAt": "2026-08-17",
-      "status": "pending",
+      "status": "sent",
       "pushApproved": true,
       "pushApprovedAt": "2026-08-17T21:39:31.869Z",
       "postId": "lib:pub-20260817-001",
-      "updatedAt": "2026-08-17T21:40:53.331Z",
+      "updatedAt": "2026-08-17T21:41:09.844Z",
       "lastCheckAt": "2026-08-17T21:40:53.127Z",
       "liveCheck": {
         "ok": true,
@@ -646,7 +646,12 @@
         "attempt": 1
       },
       "attempts": 1,
-      "lastError": ""
+      "lastError": "",
+      "sentAt": "2026-08-17T21:41:09.334Z",
+      "pushResult": {
+        "target": "supabase-subscriptions:28",
+        "targetUrl": "https://dar-al-tawhid.de/?v=1787002869139#bibliothek/al-ijtihad-wa-taqlid"
+      }
     }
   }
 }
