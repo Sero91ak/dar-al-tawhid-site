@@ -34,7 +34,7 @@ body{
   border-radius:20px;
   background:linear-gradient(180deg,var(--paper),#f9f3e8);
   box-shadow:var(--shadow);
-  padding:10px 10px 9px;
+  padding:13px 12px 15px;
   overflow:hidden;
 }
 .source-header::after{
@@ -60,7 +60,7 @@ body{
 .brand-logo{
   width:72px;
   height:72px;
-  margin-top:14px;
+  margin-top:6px;
   margin-bottom:0;
   border-radius:50%;
   border:1px solid var(--line);
@@ -76,19 +76,19 @@ body{
   color:var(--ink);
 }
 .brand-text p{
-  margin:4px 0 0;
-  color:var(--gold);
-  font:600 10px/1.2 Georgia,"Times New Roman",serif;
-  letter-spacing:.12em;
-  text-transform:uppercase;
+  display:none;
 }
 .brand-sign{
-  margin:-2px 0 0 77px;
-  font-family:"Brush Script MT","Segoe Script","Snell Roundhand",cursive;
-  font-size:22px;
-  line-height:1;
-  color:#183838;
-  letter-spacing:.01em;
+  position:relative;
+  z-index:1;
+  margin:7px 0 0 84px;
+  font-family:"Snell Roundhand","Brush Script MT","Segoe Script",cursive;
+  font-size:clamp(23px,5.3vw,31px);
+  line-height:.95;
+  color:#173b39;
+  letter-spacing:.015em;
+  transform:rotate(-1.5deg);
+  text-shadow:0 1px 0 rgba(255,255,255,.65);
 }
 .source-card{
   margin-top:8px;
@@ -295,6 +295,7 @@ body{
   .source-page{padding-left:18px;padding-right:18px}
   .source-header,.source-card,.social{border-radius:24px}
   .brand-logo{width:76px;height:76px}
+  .brand-sign{margin-left:88px;font-size:30px}
   .source-speaker{font-size:20px}
   .source-quote{font-size:22px}
 }
