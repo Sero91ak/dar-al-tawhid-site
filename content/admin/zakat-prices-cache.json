@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-18T18:35:41.672Z",
+  "updatedAt": "2026-08-18T18:55:40.927Z",
   "provider": "aurumrates.com",
   "active": true,
   "gold": {
     "metal": "gold",
     "currency": "EUR",
-    "pricePerOunce": 3811.78,
-    "pricePerGram": 122.55,
+    "pricePerOunce": 3809.28,
+    "pricePerGram": 122.47,
     "nisabGrams": 85,
-    "nisabEur": 10416.75,
+    "nisabEur": 10409.95,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-08-18T18:35:41.672Z",
+    "fetchedAt": "2026-08-18T18:55:40.927Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
@@ -21,23 +21,33 @@
   "silver": {
     "metal": "silver",
     "currency": "EUR",
-    "pricePerOunce": 55.18,
+    "pricePerOunce": 55.2,
     "pricePerGram": 1.77,
     "nisabGrams": 595,
     "nisabEur": 1053.15,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-08-18T18:35:41.672Z",
+    "fetchedAt": "2026-08-18T18:55:40.927Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
     "adminNote": ""
   },
   "standardNisabEur": 1053.15,
-  "lastSuccessAt": "2026-08-18T18:35:41.672Z",
+  "lastSuccessAt": "2026-08-18T18:55:40.927Z",
   "lastError": "",
-  "lastFetchAt": "2026-08-18T18:35:41.672Z",
+  "lastFetchAt": "2026-08-18T18:55:40.927Z",
   "fetchLogs": [
+    {
+      "id": "log-1787079340927",
+      "provider": "aurumrates.com",
+      "status": "ok",
+      "errorMessage": "",
+      "fetchedAt": "2026-08-18T18:55:40.927Z",
+      "durationMs": 1131,
+      "goldPerGram": 122.47,
+      "silverPerGram": 1.77
+    },
     {
       "id": "log-1787078141672",
       "provider": "aurumrates.com",
@@ -526,16 +536,6 @@
       "fetchedAt": "2026-08-17T20:25:11.069Z",
       "durationMs": 910,
       "goldPerGram": 124.09,
-      "silverPerGram": 1.83
-    },
-    {
-      "id": "log-1786997410413",
-      "provider": "aurumrates.com",
-      "status": "ok",
-      "errorMessage": "",
-      "fetchedAt": "2026-08-17T20:10:10.413Z",
-      "durationMs": 736,
-      "goldPerGram": 124.15,
       "silverPerGram": 1.83
     }
   ]
