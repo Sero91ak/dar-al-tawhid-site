@@ -84,6 +84,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "push-watchdog-yaml-fix-2026-08-19",
+      "approvedBy": "user-explicit-autonomous-execute-all",
+      "reason": "Watchdog-YAML war ungueltig (ScannerError). Fix + OneSignal-fokussierte Autonomie.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/admin/push-autonomous-heal-lock.json",
+        ".github/workflows/push-worker-secret-watchdog.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "push-autonomous-heal-lock-2026-08-19",
       "approvedBy": "user-explicit-push-many-devices-autonomous",
       "reason": "Viele Geräte ohne Push (Android/iOS). Sofort-Fix + Lock + autonome Selbstheilung (Client + Worker-Secret-Watchdog).",
