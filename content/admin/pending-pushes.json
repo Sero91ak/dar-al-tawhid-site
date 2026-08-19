@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-19T07:12:01.453Z",
+  "generated": "2026-08-19T07:12:03.193Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -663,8 +663,32 @@
       "createdAt": "2026-08-19T07:12:01.236Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-08-19T07:12:01.236Z",
-      "lastError": "Push wartet auf Live-Verfügbarkeit",
-      "updatedAt": "2026-08-19T07:12:01.453Z"
+      "lastError": "",
+      "updatedAt": "2026-08-19T07:12:03.193Z",
+      "lastCheckAt": "2026-08-19T07:12:02.995Z",
+      "liveCheck": {
+        "ok": true,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": true,
+          "postFilePublic": true,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": true
+        },
+        "diagnosis": "",
+        "indexOk": true,
+        "postOk": true,
+        "visitorUrlOk": true,
+        "attempts": 1,
+        "site": "https://dar-al-tawhid.de",
+        "postId": "statement-0005-imam-malik-ummah-salaf-461",
+        "indexGenerated": "2026-08-19T07:11:55.659Z",
+        "indexCount": 461,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=statement-0005-imam-malik-ummah-salaf-461&v=1787123522575#post/statement-0005-imam-malik-ummah-salaf-461"
+      },
+      "attempts": 1
     }
   }
 }
