@@ -84,6 +84,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "push-post-home-nav-2026-08-19",
+      "approvedBy": "user-explicit-push-beitrag-start-stuck",
+      "reason": "Push öffnet Beitrag, Start-Tab kehrt nicht zur Startseite zurück (sticky ?post=). Fix für iOS+Android.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "telegram-worker-secrets-sync-2026-08-16",
       "approvedBy": "user-explicit-autonomous-telegram-restore",
       "reason": "Nach Redeploy fehlen Worker-Secrets (Telegram/GitHub/Admin). Sync-Schritt im Deploy-Workflow.",
