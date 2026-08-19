@@ -16,5 +16,23 @@
     "title": "Duʿāʾ beim Nachdenken über die Schöpfung",
     "snippet": "Unser Herr, Du hast dies nicht sinnlos erschaffen. Gepriesen seist Du; so schütze uns vor der Strafe des Feuers.",
     "category": "Tafakkur & Schutz"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 460,
+      "remaining": 442
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 80,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
