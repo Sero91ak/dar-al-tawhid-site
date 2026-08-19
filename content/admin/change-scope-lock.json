@@ -93,7 +93,10 @@
         "test/index.html",
         "manifest.json",
         "test/manifest.json",
+        "version.json",
         "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
         "cloudflare/prayer-push-scheduler.js"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
