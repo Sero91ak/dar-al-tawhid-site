@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "id": "push-autonomous-heal-lock",
+  "lockedAt": "2026-08-19T11:55:00.000Z",
+  "reason": "Push-Zustellung (Android/iOS) muss selbstheilend bleiben: absoluter OneSignal-SW, gcm_sender_id, durable sub.id, Client-Autorepair, Worker-Secret-Watchdog.",
+  "requiredMarkers": {
+    "index.html": [
+      "darInitOneSignal",
+      "serviceWorkerPath:swPath",
+      "/push/onesignal/OneSignalSDKWorker.js",
+      "shouldRunPushAutorepair",
+      "clearStickyPushLaunchParams",
+      "function repairPushConnection",
+      "function maintainPushHealth",
+      "function startPushHealthMonitor"
+    ],
+    "test/index.html": [
+      "darInitOneSignal",
+      "serviceWorkerPath:swPath",
+      "/push/onesignal/OneSignalSDKWorker.js",
+      "shouldRunPushAutorepair",
+      "clearStickyPushLaunchParams",
+      "function repairPushConnection",
+      "function maintainPushHealth",
+      "function startPushHealthMonitor"
+    ],
+    "manifest.json": [
+      "\"gcm_sender_id\": \"482941809286\""
+    ],
+    "test/manifest.json": [
+      "\"gcm_sender_id\": \"482941809286\""
+    ],
+    "cloudflare/prayer-push-scheduler.js": [
+      "function invalidSubscriptionIds",
+      "disableInvalidRegistrations"
+    ],
+    ".github/workflows/push-worker-secret-watchdog.yml": [
+      "Push Worker Secret Watchdog",
+      "hasOneSignalKey",
+      "Deploy Admin Publisher Worker"
+    ]
+  },
+  "forbiddenPatterns": {
+    "index.html": [
+      "serviceWorkerPath:\"push/onesignal/OneSignalSDKWorker.js\""
+    ],
+    "test/index.html": [
+      "serviceWorkerPath:\"push/onesignal/OneSignalSDKWorker.js\""
+    ]
+  }
+}

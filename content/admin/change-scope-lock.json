@@ -84,6 +84,28 @@
   ],
   "unlockedScopes": [
     {
+      "id": "push-autonomous-heal-lock-2026-08-19",
+      "approvedBy": "user-explicit-push-many-devices-autonomous",
+      "reason": "Viele Geräte ohne Push (Android/iOS). Sofort-Fix + Lock + autonome Selbstheilung (Client + Worker-Secret-Watchdog).",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/admin/push-autonomous-heal-lock.json",
+        "scripts/push-autonomous-heal-guard.js",
+        "scripts/app-health-check.js",
+        ".github/workflows/push-worker-secret-watchdog.yml",
+        "index.html",
+        "test/index.html",
+        "manifest.json",
+        "test/manifest.json",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "cloudflare/prayer-push-scheduler.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "telegram-worker-secrets-sync-2026-08-16",
       "approvedBy": "user-explicit-autonomous-telegram-restore",
       "reason": "Nach Redeploy fehlen Worker-Secrets (Telegram/GitHub/Admin). Sync-Schritt im Deploy-Workflow.",

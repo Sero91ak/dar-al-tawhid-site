@@ -118,6 +118,8 @@ if (!worker.includes("sendNewPostPush")) fail("worker.js: post push fehlt");
 
 // Push-System (streng – blockiert Deploy bei fehlendem Scheduler)
 const pushGuardFails = require("./push-system-guard.js").runPushSystemGuard();
+const pushHealGuardFails = require("./push-autonomous-heal-guard.js").runPushAutonomousHealGuard();
+if (pushHealGuardFails) failed += pushHealGuardFails;
 if (pushGuardFails) failed += pushGuardFails;
 
 // App-Update + Willkommens-Push-Schutz (Versions-Banner-Schleife)
