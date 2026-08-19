@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v630";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v633";</script>
 <script>/* VISUAL_PAST_PURGE_V588: alte Optik-Caches löschen – aktuelle Darstellung bleibt Autorität */(function(){var BUILD=String(window.__DAR_EXPECTED_BUILD||"");var KEY="dar_visual_authority_build_v1";var ONCE="dar_visual_past_purge_once_v588";function num(id){var m=String(id||"").match(/v(\d+)/);return m?parseInt(m[1],10):0}function wipe(){if(!("caches"in window))return Promise.resolve();return caches.keys().then(function(keys){return Promise.all(keys.filter(function(k){return /^dar-al-tawhid-offline-light-/i.test(k)}).map(function(k){return caches.delete(k)}))})}function bustReload(tag){try{if(sessionStorage.getItem(ONCE)===BUILD+"|"+tag)return;sessionStorage.setItem(ONCE,BUILD+"|"+tag)}catch(e){}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?"+tag+"="+Date.now()+h)}try{var prev=localStorage.getItem(KEY)||"";var localN=num(BUILD);var prevN=num(prev);if(prevN>localN&&localN>0){wipe().then(function(){if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){try{g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}catch(e){}}).catch(function(){})}bustReload("visual-stale")}).catch(function(){bustReload("visual-stale")});return}if(localN>prevN){wipe().then(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}bustReload("visual-new")}).catch(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}});return}if(!prev&&BUILD){try{localStorage.setItem(KEY,BUILD)}catch(e){}}if(localN>0&&"caches"in window){caches.keys().then(function(keys){keys.forEach(function(k){if(!/^dar-al-tawhid-offline-light-/i.test(k))return;var kn=num(k);if(kn&&kn<localN)caches.delete(k)})}).catch(function(){})}}catch(e){}try{var path=String(location.pathname||"");var ver=path.indexOf("/test")===0?"/test/version.json":"/version.json";fetch(ver,{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(remote){if(!remote||!remote.buildId)return;var remoteN=num(remote.buildId);if(remoteN>localN&&localN>0){wipe().then(function(){bustReload("visual-remote")}).catch(function(){bustReload("visual-remote")})}}).catch(function(){})}catch(e){}})();</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
@@ -9760,18 +9760,45 @@ html[data-theme="bordeaux"] .quiz-shell.quiz-shell-pro{
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
 window.OneSignalDeferred = window.OneSignalDeferred || [];
+window.__darOneSignalInitErrors=[];
 OneSignalDeferred.push(async function(OneSignal){
-  await OneSignal.init({
-    appId:"786d7cd6-0455-4434-ab14-0c10a7bc6b1e",
-    serviceWorkerPath:"push/onesignal/OneSignalSDKWorker.js",
-    serviceWorkerParam:{scope:"/push/onesignal/"},
-    safari_web_id:"web.onesignal.auto.5a33fe23-ccc7-4feb-afe0-cf26b0b7b29c",
-    notifyButton:{enable:false},
-    autoResubscribe:true,
-    welcomeNotification:{disable:true}
-  });
-  window.OneSignal=OneSignal;
-  window.DAR_ONE_SIGNAL_READY=true;
+  async function darInitOneSignal(attempt){
+    const swPath="/push/onesignal/OneSignalSDKWorker.js";
+    try{
+      if("serviceWorker" in navigator){
+        await navigator.serviceWorker.register(swPath,{scope:"/push/onesignal/",updateViaCache:"none"});
+        await navigator.serviceWorker.ready.catch(()=>null);
+      }
+    }catch(e){window.__darOneSignalInitErrors.push("sw:"+String(e&&e.message||e))}
+    try{
+      await OneSignal.init({
+        appId:"786d7cd6-0455-4434-ab14-0c10a7bc6b1e",
+        serviceWorkerPath:swPath,
+        serviceWorkerParam:{scope:"/push/onesignal/"},
+        safari_web_id:"web.onesignal.auto.5a33fe23-ccc7-4feb-afe0-cf26b0b7b29c",
+        notifyButton:{enable:false},
+        autoResubscribe:true,
+        welcomeNotification:{disable:true}
+      });
+      window.OneSignal=OneSignal;
+      window.DAR_ONE_SIGNAL_READY=true;
+      window.__darOneSignalInitOk=true;
+      return true;
+    }catch(err){
+      window.__darOneSignalInitErrors.push(String(err&&err.message||err));
+      console.warn("OneSignal-Init Versuch",attempt,err);
+      if(attempt<3){
+        await new Promise(r=>setTimeout(r,700*attempt));
+        return darInitOneSignal(attempt+1);
+      }
+      window.DAR_ONE_SIGNAL_READY=false;
+      return false;
+    }
+  }
+  if(!(await darInitOneSignal(1))){
+    try{setTimeout(function(){try{if(typeof autonomousOneSignalBootRepair==="function")autonomousOneSignalBootRepair()}catch(e){}},4500)}catch(e){}
+    return;
+  }
   try{await ensurePushUserLogin(OneSignal)}catch(e){}
   try{OneSignal.User?.PushSubscription?.addEventListener?.("change",()=>{syncPushRegistrationOnly().catch(()=>{});try{refreshPushConnectionStatusUI()}catch(e){}try{updatePushFloatButton()}catch(e){}})}catch(e){}
   try{if(getPrayerSettings().reminder)syncPrayerPushTags().catch(()=>{})}catch(e){}
@@ -20305,12 +20332,14 @@ async function openPostFromPush(postId,url){
     if(await loadSinglePostFresh(id)||posts.some(p=>String(p.id)===id)){
       clearPostRouteState();
       navigate("post",id,{skipPush:true});
+      clearStickyPushLaunchParams();
       return;
     }
     await refreshContent({forceRender:false});
     if(posts.some(p=>String(p.id)===id)){
       clearPostRouteState();
       navigate("post",id,{skipPush:true});
+      clearStickyPushLaunchParams();
       return;
     }
   }
@@ -20318,6 +20347,7 @@ async function openPostFromPush(postId,url){
   postRouteFailedId=id;
   postRouteError="Beitrag noch nicht abrufbar. Bitte aktualisieren.";
   navigate("post",id,{skipPush:true});
+  clearStickyPushLaunchParams();
 }
 function openDailyPushTarget(data,url){const type=String(data?.type||"").trim();const contentId=String(data?.content_id||data?.contentId||"").trim();if(type==="daily_dua"&&contentId){navigate("dua",contentId);return true}if(type==="daily_recommendation"&&contentId){openPostFromPush(contentId,url);return true}return false}
 function routeUrl(view,value=""){const url=new URL(location.origin+location.pathname);url.hash=value?`${view}/${encodeURIComponent(value)}`:`${view}`;return url.toString()}
@@ -20404,7 +20434,7 @@ function rememberPostBrowseFromRoute(fromRoute){
 function getPostBrowseIds(){
   try{const raw=sessionStorage.getItem(POST_BROWSE_KEY);const ctx=raw?JSON.parse(raw):null;return Array.isArray(ctx?.ids)?ctx.ids.map(String):[]}catch(e){return[]}
 }
-function navigate(view,value="",opts={}){if(isVisitorTestOnlyView(view)){view="more";value=""}const from=currentRoute&&currentRoute.view?{...currentRoute}:readRoute();const to={view,value};const skipPush=!!opts.skipPush;if(!routeEqual(from,to))saveNavScroll(from);if(from.view==="feed"&&!routeEqual(from,to)&&window.DAR_PREMIUM_FEED?.saveState)window.DAR_PREMIUM_FEED.saveState();if(view==="post"&&value&&from.view!=="post")rememberPostBrowseFromRoute(from);if(!skipPush&&!routeEqual(from,to)){const keepReturn=isDetailRoute(from)&&isDetailRoute(to)&&from.view===to.view;if(!keepReturn)pushNavState(from);if(view==="home")clearNavStack()}if(view==="quran-surah"&&from.view==="quran")saveQuranListScroll();if(view==="home"||(view==="quran"&&from.view==="home"))clearQuranReturnState();if(!routeEqual(from,to)&&!skipPush&&!opts.noAnim)window.__pageNavDir="forward";window.__smoothNav=!isDetailRoute(to)||routeEqual(from,to);location.hash=routeToHash(view,value)}
+function navigate(view,value="",opts={}){if(isVisitorTestOnlyView(view)){view="more";value=""}const from=currentRoute&&currentRoute.view?{...currentRoute}:readRoute();const to={view,value};const skipPush=!!opts.skipPush;if(!routeEqual(from,to))saveNavScroll(from);if(from.view==="feed"&&!routeEqual(from,to)&&window.DAR_PREMIUM_FEED?.saveState)window.DAR_PREMIUM_FEED.saveState();if(view==="post"&&value&&from.view!=="post")rememberPostBrowseFromRoute(from);if(!skipPush&&!routeEqual(from,to)){const keepReturn=isDetailRoute(from)&&isDetailRoute(to)&&from.view===to.view;if(!keepReturn)pushNavState(from);if(view==="home"){clearStickyPushLaunchParams();clearNavStack()}}if(view==="home")clearStickyPushLaunchParams();if(view==="quran-surah"&&from.view==="quran")saveQuranListScroll();if(view==="home"||(view==="quran"&&from.view==="home"))clearQuranReturnState();if(!routeEqual(from,to)&&!skipPush&&!opts.noAnim)window.__pageNavDir="forward";window.__smoothNav=!isDetailRoute(to)||routeEqual(from,to);location.hash=routeToHash(view,value)}
 function goBack(){if(currentRoute.view==="home")return;window.__pageNavDir="back";const stack=getNavStack();if(stack.length){const prev=stack.pop();setNavStack(stack);window.__restoreScrollY=Number(prev?.scroll!=null?prev.scroll:getNavScroll(prev))||0;navigate(prev.view,prev.value||"",{skipPush:true,noAnim:true});return}const parent=parentRoute(currentRoute);window.__restoreScrollY=getNavScroll(parent);navigate(parent.view,parent.value||"",{skipPush:true,noAnim:true})}
 function readRoute(){
   migrateLegacyTopicsRoute();
@@ -20473,17 +20503,18 @@ function verifyBottomNavDock(){if(document.body.classList.contains("is-ilm-chat-
 function initBottomNavGuard(){if(window.__bottomNavGuardBound)return;window.__bottomNavGuardBound=true;ensureBottomNavDock();let scrollTimer=0,mutTimer=0,lastCheck=0;const check=(force)=>{if(window.__bottomNavDockBusy)return;const now=Date.now();if(!force&&now-lastCheck<500)return;lastCheck=now;verifyBottomNavDock();updatePostNavVisibility()};const onScroll=()=>{updatePostNavVisibility();clearTimeout(scrollTimer);scrollTimer=setTimeout(()=>check(false),120)};window.addEventListener("scroll",onScroll,{passive:true});window.addEventListener("resize",()=>check(true),{passive:true});if(window.visualViewport){window.visualViewport.addEventListener("resize",()=>check(true),{passive:true})}try{const obs=new MutationObserver(muts=>{if(window.__bottomNavDockBusy)return;if(!muts.some(m=>Array.from(m.addedNodes).some(n=>n.nodeType===1&&(n.id==="bottomNav"||n.id==="appChromeDock"))||Array.from(m.removedNodes).some(n=>n.nodeType===1&&(n.id==="bottomNav"||n.id==="appChromeDock"))))return;clearTimeout(mutTimer);mutTimer=setTimeout(()=>check(true),180)});obs.observe(document.body,{childList:true})}catch(e){}setTimeout(()=>check(true),1200)}
 function resetTabSwipePreview(){const view=$("appView");if(view){view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right");view.style.transition="";view.style.transform="";view.style.opacity=""}const nav=$("bottomNav");if(nav){nav.classList.remove("is-pill-dragging");nav.style.removeProperty("--nav-pill-left");nav.style.removeProperty("--nav-pill-width")}if(!document.body.classList.contains("is-ilm-chat-route"))ensureBottomNavDock();updateBottomNav(currentRoute)}
 function cleanRefreshQueryParam(){try{if(!/[?&](r|repair)=/.test(location.search))return;const u=new URL(location.href);u.searchParams.delete("r");u.searchParams.delete("repair");history.replaceState(null,"",u.pathname+(u.search||"")+(location.hash||""))}catch(e){}}
+function clearStickyPushLaunchParams(){try{const search=String(location.search||"");if(!/[?&]post=/.test(search))return false;const u=new URL(location.href);u.searchParams.delete("post");const q=u.searchParams.toString();history.replaceState(null,"",u.pathname+(q?`?${q}`:"")+(location.hash||""));return true}catch(e){return false}}
 function bottomNavMetrics(){const nav=$("bottomNav");if(!nav)return[];const navRect=nav.getBoundingClientRect();return[...nav.querySelectorAll("[data-bottom-nav]")].map(btn=>{const r=btn.getBoundingClientRect();return{left:r.left-navRect.left,width:r.width,center:r.left-navRect.left+r.width/2,tab:btn.getAttribute("data-bottom-nav")}})}
 function setBottomNavPill(left,width,dragging){const nav=$("bottomNav");if(!nav)return;nav.classList.toggle("is-pill-dragging",!!dragging);nav.style.setProperty("--nav-pill-left",`${left}px`);nav.style.setProperty("--nav-pill-width",`${width}px`)}
 function highlightBottomNavIndex(idx){document.querySelectorAll("[data-bottom-nav]").forEach((btn,i)=>btn.classList.toggle("active",i===idx))}
 function nearestBottomNavIndex(pillCenter,metrics){let best=0,d=Infinity;metrics.forEach((m,i)=>{const dist=Math.abs(m.center-pillCenter);if(dist<d){d=dist;best=i}});return best}
-function hardGoHome(){clearQuranReturnState();clearNavStack();try{sessionStorage.removeItem(NAV_SCROLL_KEY);sessionStorage.removeItem(QURAN_SCROLL_KEY);sessionStorage.removeItem(QURAN_RETURN_KEY)}catch(e){}window.__restoreScrollY=0;window.__smoothNav=false;window.DARScrollManager?.markScrollToTop?.();if((location.hash||"#home")!=="#home"){location.hash="#home"}else{currentRoute={view:"home",value:""};render()}requestAnimationFrame(()=>requestAnimationFrame(()=>window.DARScrollManager?.stableScrollTo?.(0)||window.scrollTo({top:0,behavior:"auto"})))}
+function hardGoHome(){clearQuranReturnState();clearNavStack();try{sessionStorage.removeItem(NAV_SCROLL_KEY);sessionStorage.removeItem(QURAN_SCROLL_KEY);sessionStorage.removeItem(QURAN_RETURN_KEY)}catch(e){}window.__restoreScrollY=0;window.__smoothNav=false;window.DARScrollManager?.markScrollToTop?.();clearStickyPushLaunchParams();if((location.hash||"#home")!=="#home"){location.hash="#home"}else{currentRoute={view:"home",value:""};render()}requestAnimationFrame(()=>requestAnimationFrame(()=>window.DARScrollManager?.stableScrollTo?.(0)||window.scrollTo({top:0,behavior:"auto"})))}
 const BOTTOM_TAB_ROOTS={home:{view:"home",value:""},ilm:{view:"ilm",value:""},quiz:{view:"quiz",value:""},feed:{view:"feed",value:""},quran:{view:"quran",value:""},more:{view:"more",value:""}};
 function bottomTabRootRoute(tab){return BOTTOM_TAB_ROOTS[tab]?{view:BOTTOM_TAB_ROOTS[tab].view,value:BOTTOM_TAB_ROOTS[tab].value||""}:null}
 function isExactBottomTabRoot(tab,route=currentRoute){const r=route||readRoute();if(bottomNavTabForRoute(r)!==tab)return false;if(tab==="home")return r.view==="home"&&!r.value;if(tab==="quiz"){if(r.view!=="quiz")return false;const mode=String(r.value||"").trim().toLowerCase();return !mode||mode==="home"}const root=bottomTabRootRoute(tab);return !!(root&&routeEqual(r,root))}
 function closeTransientNavOverlays(){try{if(typeof closeQuickAccessMenu==='function')closeQuickAccessMenu()}catch(e){}try{if(typeof closeQuranExplanationPanel==="function"&&quranExplanationState)closeQuranExplanationPanel({fromPop:true})}catch(e){}try{if(typeof closeIlmSheet==="function")closeIlmSheet()}catch(e){}const hist=$("ilmHistoryDrawer");if(hist)hist.setAttribute("hidden","");const menu=$("ilmMenuPopover");if(menu)menu.setAttribute("hidden","");if(typeof syncIlmOverlayState==="function")syncIlmOverlayState();document.querySelectorAll(".cal-tl-info-sheet").forEach(el=>{el.hidden=true;el.classList.remove("is-open")})}
 function scrollTabRootToTop(tab){window.__smoothNav=false;window.DARScrollManager?.markScrollToTop?.();const run=()=>{if(window.DARScrollManager?.stableScrollTo)window.DARScrollManager.stableScrollTo(0,{force:true});else window.scrollTo({top:0,behavior:"auto"})};requestAnimationFrame(()=>requestAnimationFrame(run))}
-function navigateToTabRootReplace(view,value=""){const from=readRoute();const to={view,value:value||""};if(view==="quran"){if(typeof resetQuranOverviewToStart==="function")resetQuranOverviewToStart();if(typeof clearQuranReturnState==="function")clearQuranReturnState();}if(from.view==="feed"&&!routeEqual(from,to)&&window.DAR_PREMIUM_FEED?.saveState)window.DAR_PREMIUM_FEED.saveState();if(from.view==="quran-surah"&&view==="quran"&&typeof saveQuranAutoFromVisible==="function")saveQuranAutoFromVisible(true);saveNavScroll(from);clearNavStack();window.__restoreScrollY=0;window.__smoothNav=false;window.__pageNavDir=null;const hash=routeToHash(view,value);try{history.replaceState(null,"",location.pathname+(location.search||"")+hash)}catch(e){location.replace(hash);return}render();scrollTabRootToTop(bottomNavTabForRoute(to))}
+function navigateToTabRootReplace(view,value=""){const from=readRoute();const to={view,value:value||""};if(view==="quran"){if(typeof resetQuranOverviewToStart==="function")resetQuranOverviewToStart();if(typeof clearQuranReturnState==="function")clearQuranReturnState();}if(from.view==="feed"&&!routeEqual(from,to)&&window.DAR_PREMIUM_FEED?.saveState)window.DAR_PREMIUM_FEED.saveState();if(from.view==="quran-surah"&&view==="quran"&&typeof saveQuranAutoFromVisible==="function")saveQuranAutoFromVisible(true);saveNavScroll(from);clearNavStack();window.__restoreScrollY=0;window.__smoothNav=false;window.__pageNavDir=null;if(view==="home")clearStickyPushLaunchParams();const hash=routeToHash(view,value);try{history.replaceState(null,"",location.pathname+(location.search||"")+hash)}catch(e){location.replace(hash);return}render();scrollTabRootToTop(bottomNavTabForRoute(to))}
 function rememberIlmReturnRoute(route=currentRoute,scroll=window.scrollY||0){try{if(route&&route.view&&route.view!=="ilm")sessionStorage.setItem("darIlmReturnRouteV1",JSON.stringify({route,scroll:Number(scroll)||0,at:Date.now()}))}catch(e){}}
 function getIlmReturnRoute(){try{const saved=JSON.parse(sessionStorage.getItem("darIlmReturnRouteV1")||"null");if(saved&&saved.route&&saved.route.view&&saved.route.view!=="ilm")return saved}catch(e){}return {route:{view:"home",value:""},scroll:0}}
 function exitIlmChat(){const saved=getIlmReturnRoute();const target=saved.route||{view:"home",value:""};const y=Number(saved.scroll)||0;window.__restoreScrollY=y;navigate(target.view,target.value||"",{skipPush:true,noAnim:true});requestAnimationFrame(()=>requestAnimationFrame(()=>{try{window.DARScrollManager?.stableScrollTo?.(y,{force:true})}catch(e){window.scrollTo({top:y,behavior:"auto"})}}))}
@@ -22228,9 +22259,15 @@ const DAR_SITE_ORIGIN=(location.origin&&location.origin.startsWith("http"))?loca
 const DAR_NOTIFICATION_ICON_ABS=`${DAR_SITE_ORIGIN}${DAR_NOTIFICATION_ICON}`;
 const DAR_NOTIFICATION_BADGE_ABS=`${DAR_SITE_ORIGIN}${DAR_NOTIFICATION_BADGE}`;
 const PUSH_HEALTH_INTERVAL_MS=20*60*1000;
+const PUSH_AUTOREPAIR_STAMP_KEY="darPushAutorepairStampV1";
+const ANDROID_PUSH_AUTOREPAIR_COOLDOWN_MS=3*60*60*1000;
+const PUSH_AUTOREPAIR_COOLDOWN_MS=12*60*60*1000;
 const LEGACY_PRAYER_TAGS=["prayer_location_mode","prayer_site","prayer_source","prayer_version","push_site"];
 let pushHealthTimer=null;
 let pushHealthRunning=false;
+function readPushAutorepairStamp(){try{return Number(localStorage.getItem(PUSH_AUTOREPAIR_STAMP_KEY)||0)||0}catch(e){return 0}}
+function markPushAutorepairAttempt(){try{localStorage.setItem(PUSH_AUTOREPAIR_STAMP_KEY,String(Date.now()))}catch(e){}}
+function shouldRunPushAutorepair(){const last=readPushAutorepairStamp();const cool=ANDROID_PUSH_AUTOREPAIR_COOLDOWN_MS;return !last||(Date.now()-last)>=cool}
 function darNotificationPayload(options={}){const base={icon:options.icon||DAR_NOTIFICATION_ICON,badge:options.badge||DAR_NOTIFICATION_BADGE,...options};if(isAndroidDevice()){delete base.image;delete base.largeIcon}return base}
 function isAndroidDevice(){return/Android/i.test(navigator.userAgent||"")}
 function hasNotificationApi(){return typeof window!=="undefined"&&"Notification" in window}
@@ -22388,8 +22425,9 @@ function updatePushFloatButton(){const state=readOneSignalPushSubscriptionState(
 function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
 async function addOneSignalTagsCompat(OS,tags){const os=OS||await waitForOneSignalReady();if(!os||!tags)return false;let ok=false;if(os.User&&typeof os.User.addTags==="function"){await os.User.addTags(tags);ok=true}if(typeof os.sendTags==="function"){await os.sendTags(tags);ok=true}else if(typeof os.sendTag==="function"){for(const [key,value]of Object.entries(tags)){await os.sendTag(key,String(value));ok=true}}return ok}
 async function ensurePostPushTags(OS){const os=OS||await waitForOneSignalReady();if(!os)return false;try{await addOneSignalTagsCompat(os,{dar_push:"true",post_notifications:"true",push_version:"7"});return true}catch(e){console.warn("Beitrags-Push-Tags:",e);return false}}
-async function maintainPushHealth({silent=true}={}){if(pushHealthRunning)return false;pushHealthRunning=true;let ok=true;try{if(!hasNotificationApi())return false;if(getNotificationPermission()!=="granted")return false;await ensureOneSignalServiceWorkerReady();const OS=await waitForOneSignalReady(15000);if(OS?.User?.PushSubscription?.optedIn){await syncPushRegistrationOnly(OS);const welcomed=await sendWelcomePushIfNeeded(OS);if(!welcomed)scheduleWelcomePushRetries(OS)}const s=getPrayerSettings();if(s.reminder&&hasPrayerLocation(s)){const synced=await syncPrayerPushTags(s,{retries:5});if(!synced)ok=false;await scheduleLocalPrayerRemindersIfNeeded({silent:true,serverSynced:synced})}else if(s.reminder&&!hasPrayerLocation(s)&&!silent){ok=false}if(s.jummahNotifications){const jOk=await syncJummahPushTags(s,{retries:3});if(!jOk)ok=false}else{await syncJummahPushTags(s,{retries:2}).catch(()=>{})}updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();return ok}catch(e){console.warn("Push-Wartung:",e);return false}finally{pushHealthRunning=false}}
-function startPushHealthMonitor(){if(pushHealthTimer)clearInterval(pushHealthTimer);maintainPushHealth({silent:true}).catch(()=>{});pushHealthTimer=setInterval(()=>{maintainPushHealth({silent:true}).catch(()=>{})},PUSH_HEALTH_INTERVAL_MS);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")maintainPushHealth({silent:true}).catch(()=>{})});window.addEventListener("online",()=>{maintainPushHealth({silent:true}).catch(()=>{})})}
+async function autonomousOneSignalBootRepair(){if(window.DAR_ONE_SIGNAL_READY&&window.OneSignal&&window.OneSignal.User)return true;const key="darOsBootRepairV633";try{const last=Number(localStorage.getItem(key)||0)||0;if(last&&Date.now()-last<6*60*60*1000)return false;localStorage.setItem(key,String(Date.now()))}catch(e){}try{if("serviceWorker"in navigator){await navigator.serviceWorker.register("/push/onesignal/OneSignalSDKWorker.js",{scope:"/push/onesignal/",updateViaCache:"none"});await navigator.serviceWorker.ready.catch(()=>null)}}catch(e){}try{location.reload()}catch(e){}return false}
+async function maintainPushHealth({silent=true}={}){if(pushHealthRunning)return false;pushHealthRunning=true;let ok=true;try{if(!hasNotificationApi())return false;if(getNotificationPermission()!=="granted")return false;await ensureOneSignalServiceWorkerReady();const OS=await waitForOneSignalReady(15000);const state=readOneSignalPushSubscriptionState(OS);const broken=!state.ready||!state.subscriptionId||!state.optedIn;let repairedThisRun=false;if(broken&&shouldRunPushAutorepair()){markPushAutorepairAttempt();repairedThisRun=true;try{const repaired=await repairPushConnection({silent:true});setPrayerPushDebug({pushAutorepairAt:new Date().toISOString(),pushAutorepairOk:Boolean(repaired?.ok),pushAutorepairPlatform:isAndroidDevice()?"android":"other"});if(!repaired?.ok)ok=false}catch(e){ok=false;console.warn("Push-Autorepair:",e)}}const OS2=await waitForOneSignalReady(8000);if(OS2?.User?.PushSubscription?.optedIn){await syncPushRegistrationOnly(OS2);const welcomed=await sendWelcomePushIfNeeded(OS2);if(!welcomed)scheduleWelcomePushRetries(OS2)}const s=getPrayerSettings();if(s.reminder&&hasPrayerLocation(s)){let synced=await syncPrayerPushTags(s,{retries:5});if(!synced){ok=false;if(isAndroidDevice()&&(!repairedThisRun||shouldRunPushAutorepair())){markPushAutorepairAttempt();try{await repairPushConnection({silent:true});synced=await syncPrayerPushTags(s,{retries:3});if(synced)ok=true}catch(e){console.warn("Android-Push-Nachrepair:",e)}}}await scheduleLocalPrayerRemindersIfNeeded({silent:true,serverSynced:synced})}else if(s.reminder&&!hasPrayerLocation(s)&&!silent){ok=false}if(s.jummahNotifications){const jOk=await syncJummahPushTags(s,{retries:3});if(!jOk)ok=false}else{await syncJummahPushTags(s,{retries:2}).catch(()=>{})}updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();return ok}catch(e){console.warn("Push-Wartung:",e);return false}finally{pushHealthRunning=false}}
+function startPushHealthMonitor(){if(pushHealthTimer)clearInterval(pushHealthTimer);const tick=()=>{if(!(window.DAR_ONE_SIGNAL_READY&&window.OneSignal&&window.OneSignal.User)){autonomousOneSignalBootRepair().catch(()=>{});return}maintainPushHealth({silent:true}).catch(()=>{})};setTimeout(tick,2500);maintainPushHealth({silent:true}).catch(()=>{});pushHealthTimer=setInterval(tick,PUSH_HEALTH_INTERVAL_MS);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")tick()});window.addEventListener("online",()=>tick());window.addEventListener("pageshow",()=>tick())}
 let prayerCountdownTimer=null;
 let headerPrayerDisplayKey="";
 let headerPrayerStatusMinuteKey="";
@@ -22475,7 +22513,7 @@ function getPrayerSettings(){const saved=getJson(PRAYER_SETTINGS_KEY,null);const
 function clearPrayerReminders(){prayerReminderTimeouts.forEach(clearTimeout);prayerReminderTimeouts=[];}
 async function waitForOneSignalReady(timeoutMs=15000){const start=Date.now();while(Date.now()-start<timeoutMs){if(window.OneSignal&&window.DAR_ONE_SIGNAL_READY&&window.OneSignal.User)return window.OneSignal;await new Promise(r=>setTimeout(r,200))}return window.OneSignal&&window.OneSignal.User?window.OneSignal:null}
 async function ensurePushUserLogin(OS){const os=OS||await waitForOneSignalReady();if(!os||typeof os.login!=="function")return null;let id=localStorage.getItem(PUSH_USER_KEY);if(!id){id="dar-"+(crypto.randomUUID?crypto.randomUUID():String(Date.now()));try{localStorage.setItem(PUSH_USER_KEY,id)}catch(e){}}try{await os.login(id)}catch(e){console.warn("Push login:",e)}return id}
-async function ensureOneSignalPushSubscription(OS,{timeoutMs=30000,request=true}={}){const os=OS||await waitForOneSignalReady();const sub=os?.User?.PushSubscription;if(!os||!sub)return false;if(request&&os.Notifications&&typeof os.Notifications.requestPermission==="function"&&getNotificationPermission()!=="granted"){try{await os.Notifications.requestPermission()}catch(e){}}if(request&&typeof sub.optIn==="function"){try{await sub.optIn()}catch(e){}}const start=Date.now();while(Date.now()-start<timeoutMs){if(sub.optedIn&&(sub.id||sub.token))return true;if(!request&&sub.optedIn)return true;await sleep(350)}return Boolean(sub.optedIn&&(sub.id||sub.token))}
+async function ensureOneSignalPushSubscription(OS,{timeoutMs=30000,request=true}={}){const os=OS||await waitForOneSignalReady();const sub=os?.User?.PushSubscription;if(!os||!sub)return false;if(request&&os.Notifications&&typeof os.Notifications.requestPermission==="function"&&getNotificationPermission()!=="granted"){try{await os.Notifications.requestPermission()}catch(e){}}if(request&&typeof sub.optIn==="function"){try{await sub.optIn()}catch(e){}}const start=Date.now();while(Date.now()-start<timeoutMs){if(sub.optedIn&&String(sub.id||"").trim())return true;await sleep(350)}return Boolean(sub.optedIn&&String(sub.id||"").trim())}
 async function waitForPushOptIn(OS,timeoutMs=25000){return ensureOneSignalPushSubscription(OS,{timeoutMs,request:true})}
 function normalizeAdvanceMinutes(value){const n=Number(value);return[5,10,15].includes(n)?n:15}
 function normalizeTahajjudMode(value){const v=String(value||"off");return["off","before30","before60","before90","lastThird"].includes(v)?v:"off"}
@@ -24954,7 +24992,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v630";
+const APP_BUILD_ID="app-shell-v633";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
