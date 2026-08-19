@@ -84,6 +84,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "android-push-autorepair-2026-08-19",
+      "approvedBy": "user-explicit-android-push-fix-autonomous",
+      "reason": "Android-Nutzer erhalten keine Pushs (Gebet/Duʿāʾ/allgemein). Fix: absolute OneSignal-SW, gcm_sender_id, durable sub.id, autonome Push-Reparatur, Prayer-Invalid-ID-Purge.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "manifest.json",
+        "test/manifest.json",
+        "test/version.json",
+        "cloudflare/prayer-push-scheduler.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "telegram-worker-secrets-sync-2026-08-16",
       "approvedBy": "user-explicit-autonomous-telegram-restore",
       "reason": "Nach Redeploy fehlen Worker-Secrets (Telegram/GitHub/Admin). Sync-Schritt im Deploy-Workflow.",

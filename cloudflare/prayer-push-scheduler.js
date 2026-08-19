@@ -323,6 +323,39 @@ async function postOneSignal(env, body) {
   return { text, parsed, recipients: parsed.recipients ?? parsed.id ?? null };
 }
 
+function invalidSubscriptionIds(parsed = {}) {
+  const errors = parsed?.errors;
+  const ids = errors?.invalid_subscription_ids || errors?.invalid_player_ids || [];
+  return new Set((Array.isArray(ids) ? ids : []).map((id) => String(id || "").trim()).filter(Boolean));
+}
+
+async function disableInvalidRegistrations(invalidIds) {
+  const ids = Array.from(invalidIds || []).map((id) => String(id || "").trim()).filter(Boolean);
+  let disabled = 0;
+  for (const subscriptionId of ids) {
+    try {
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/prayer_push_registrations?subscription_id=eq.${encodeURIComponent(subscriptionId)}`,
+        {
+          method: "PATCH",
+          headers: {
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            "Content-Type": "application/json",
+            Prefer: "return=minimal"
+          },
+          body: JSON.stringify({
+            enabled: false,
+            last_synced_at: new Date().toISOString()
+          })
+        }
+      );
+      if (res.ok) disabled += 1;
+    } catch (e) {}
+  }
+  return disabled;
+}
+
 async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
   const ids = group.subscriptionIds.slice(0, 2000);
   if (!ids.length) return;
@@ -354,6 +387,12 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
   }
 
   const result = await postOneSignal(env, body);
+  const invalid = invalidSubscriptionIds(result.parsed);
+  if (invalid.size) {
+    stats.invalid = (stats.invalid || 0) + invalid.size;
+    const disabled = await disableInvalidRegistrations(invalid);
+    stats.invalidDisabled = (stats.invalidDisabled || 0) + disabled;
+  }
   stats.scheduled += 1;
   stats.recipients += ids.length;
   stats.planned.push({
@@ -363,12 +402,14 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
     time: prayer.time == null ? formatHour(0) : formatHour(prayer.time),
     sendAfter: sendAfter.toISOString(),
     recipients: ids.length,
-    timeZone: group.timeZone
+    timeZone: group.timeZone,
+    invalid: invalid.size || 0
   });
   stats.oneSignalResponses.push({
     prayer: prayer.key,
     mode,
     recipients: ids.length,
+    invalid: invalid.size || 0,
     response: String(result.text || "").slice(0, 200)
   });
 }
@@ -473,6 +514,7 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
   const windowEnd = new Date(now.getTime() + lookahead * 60000);
   const stats = {
     scheduled: 0, skippedPast: 0, skippedWindow: 0, duplicates: 0, recipients: 0, errors: 0,
+    invalid: 0, invalidDisabled: 0,
     planned: [], skippedPastDetails: [], oneSignalResponses: [], errorDetails: []
   };
   const sentInRun = new Set();
@@ -559,6 +601,8 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
     locationGroups: groups.length,
     scheduled: stats.scheduled,
     recipients: stats.recipients,
+    invalid: stats.invalid || 0,
+    invalidDisabled: stats.invalidDisabled || 0,
     skippedPast: stats.skippedPast,
     skippedWindow: stats.skippedWindow,
     duplicates: stats.duplicates,
@@ -594,7 +638,7 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
     ? `Fehler: ${stats.errorDetails[0]} (${stats.scheduled} geplant, ${stats.errors} Fehler)`
     : userCount === 0
       ? "Keine aktiven Registrierungen in Supabase gefunden."
-      : `Erfolgreich: ${stats.scheduled} Pushs für ${stats.recipients} Empfänger in ${groups.length} Gruppen geplant.`;
+      : `Erfolgreich: ${stats.scheduled} Pushs für ${stats.recipients} Empfänger in ${groups.length} Gruppen geplant${stats.invalid ? ` · ${stats.invalid} ungültige IDs deaktiviert` : ""}.`;
 
   return {
     ok: stats.errors === 0 && userCount > 0,
