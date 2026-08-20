@@ -207,12 +207,12 @@ html[data-theme="light"] .theme-switch-btn.is-active{border-color:rgba(155,122,6
 .first-visit-panel .hint-banner-actions{flex:0 0 auto}
 @media(max-width:680px){.first-visit-panel{align-items:flex-start}.first-visit-grid{justify-content:flex-start}.first-visit-theme{width:100%;justify-content:space-between}.first-visit-theme .theme-switch-row{flex:1}.first-visit-theme .theme-switch-btn{flex:1}.first-visit-panel .hint-banner-actions{width:100%}.first-visit-panel .hint-btn{flex:1 1 120px}}
 *{box-sizing:border-box}
-html{min-height:100%;height:auto;background:var(--bg);overflow-x:hidden;overflow-y:auto;-webkit-text-size-adjust:100%;scroll-behavior:auto;-webkit-tap-highlight-color:transparent;touch-action:pan-y;overscroll-behavior-x:none;max-width:100vw}
-body{-webkit-tap-highlight-color:transparent;touch-action:pan-y;overscroll-behavior-x:none;max-width:100vw}
-body{margin:0;min-height:100dvh;height:auto;color:var(--text);font-family:var(--sans);overflow-x:hidden;overflow-y:auto;background:radial-gradient(circle at 12% 0%,rgba(239,215,142,.13),transparent 34%),radial-gradient(circle at 88% 8%,rgba(155,122,60,.09),transparent 32%),linear-gradient(180deg,#060604 0%,#0b0a07 42%,#050504 100%);padding:max(10px,var(--safe-top)) max(10px,env(safe-area-inset-right,0px)) max(18px,var(--safe-bottom)) max(10px,env(safe-area-inset-left,0px))}
+html{min-height:100%;height:auto;background:var(--bg);overflow-x:hidden;overflow-y:scroll;-webkit-text-size-adjust:100%;scroll-behavior:auto;-webkit-tap-highlight-color:transparent;touch-action:manipulation;overscroll-behavior-x:none;overscroll-behavior-y:auto;max-width:100vw}
+body{-webkit-tap-highlight-color:transparent;touch-action:manipulation;overscroll-behavior-x:none;overscroll-behavior-y:auto;max-width:100vw}
+body{margin:0;min-height:100dvh;height:auto;color:var(--text);font-family:var(--sans);overflow-x:hidden;overflow-y:visible;background:radial-gradient(circle at 12% 0%,rgba(239,215,142,.13),transparent 34%),radial-gradient(circle at 88% 8%,rgba(155,122,60,.09),transparent 32%),linear-gradient(180deg,#060604 0%,#0b0a07 42%,#050504 100%);padding:max(10px,var(--safe-top)) max(10px,env(safe-area-inset-right,0px)) max(18px,var(--safe-bottom)) max(10px,env(safe-area-inset-left,0px))}
 body:before{content:"";position:fixed;inset:0;pointer-events:none;background:url("/watermark-circle-soft.png") center 44%/min(620px,58vw) auto no-repeat;opacity:.055;z-index:0}
 a{color:inherit}button,input,select{font:inherit}
-.app{width:min(1180px,100%);max-width:100%;margin:0 auto;position:relative;z-index:1;min-height:100%;touch-action:pan-y;overflow-x:hidden}
+.app{width:min(1180px,100%);max-width:100%;margin:0 auto;position:relative;z-index:1;min-height:100%;touch-action:manipulation;overflow-x:hidden;overflow-y:visible}
 .top-shell{position:relative;border:1px solid var(--line);border-radius:28px;background:linear-gradient(135deg,rgba(18,16,12,.94),rgba(6,6,5,.92)),radial-gradient(circle at 20% 0%,rgba(239,215,142,.12),transparent 45%);box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px}
 .top-shell:before{content:"";position:absolute;inset:0;background:var(--theme-deck-aura);opacity:.9;pointer-events:none}
 .header{padding:22px 24px 18px}
@@ -236,7 +236,7 @@ body.is-area-route .view-desc{font-size:12px;line-height:1.55;margin-top:6px}
 .view.page-enter-back{animation:pageEnterBack .36s cubic-bezier(.25,.82,.22,1) both}
 @keyframes pageEnterForward{from{opacity:.9;transform:translate3d(9%,0,0)}to{opacity:1;transform:translate3d(0,0,0)}}
 @keyframes pageEnterBack{from{opacity:.9;transform:translate3d(-9%,0,0)}to{opacity:1;transform:translate3d(0,0,0)}}
-#appView{touch-action:pan-y;max-width:100%;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+#appView{touch-action:manipulation;max-width:100%;overflow-x:hidden;overflow-y:visible;-webkit-overflow-scrolling:touch}
 .view{border:1px solid var(--line);border-radius:28px;background:linear-gradient(180deg,rgba(18,16,12,.88),rgba(7,7,5,.92));box-shadow:var(--shadow);padding:20px;min-height:430px}
 .view.is-tab-swiping{transition:none!important;user-select:none;-webkit-user-select:none}
 .view.tab-swipe-left{animation:tabSwipeFromRight .44s cubic-bezier(.25,.82,.22,1) both}
@@ -3969,7 +3969,8 @@ html[data-theme="light"] .app{
   border:1px solid var(--premium-border)!important;
   border-radius:28px!important;
   box-shadow:var(--premium-shadow)!important;
-  overflow:hidden!important;
+  overflow-x:hidden!important;
+  overflow-y:visible!important;
 }
 html[data-theme="light"] .top-shell,
 html[data-theme="light"] .view{
@@ -4560,7 +4561,8 @@ html[data-theme="soft"] .app{
   border:1px solid var(--premium-border)!important;
   border-radius:28px!important;
   box-shadow:var(--premium-shadow)!important;
-  overflow:hidden!important;
+  overflow-x:hidden!important;
+  overflow-y:visible!important;
 }
 html[data-theme="soft"] .top-shell,
 html[data-theme="soft"] .view{
@@ -5003,7 +5005,8 @@ html[data-theme="royal"] .app{
   border:1px solid var(--premium-border)!important;
   border-radius:28px!important;
   box-shadow:var(--premium-shadow)!important;
-  overflow:hidden!important;
+  overflow-x:hidden!important;
+  overflow-y:visible!important;
 }
 html[data-theme="royal"] .top-shell,
 html[data-theme="royal"] .view{
@@ -13933,7 +13936,7 @@ html[data-theme="light"] .qov-btn-primary,html[data-theme="light"] .qov-direct-g
   .qov-jump-wrap--compact .qov-jump-bar{grid-template-columns:minmax(48px,.32fr) minmax(0,1fr) minmax(48px,.32fr) auto!important}
 }
 /* v465 · Globaler Overscroll-Schutz: kein Hintergrund über Schrift bei Ziehen */
-html.dar-scroll-guard,html.dar-scroll-guard body{overscroll-behavior-y:none!important;-webkit-overflow-scrolling:touch}
+html.dar-scroll-guard,html.dar-scroll-guard body{overscroll-behavior-y:auto!important;-webkit-overflow-scrolling:touch}
 /* v624 · Android: contain statt none — Chrome/WebView sticky-scroll-Bug */
 html.is-android.dar-scroll-guard,html.is-android.dar-scroll-guard body{overscroll-behavior-y:contain!important}
 html[data-theme] .top-edge-fade,html[data-theme] .top-swim-aura{z-index:-1}
@@ -19429,7 +19432,7 @@ function renderQuranOverviewSearch(){const recent=getQuranSearchRecent();const q
 function renderQuranOverviewFilters(){const f=getQuranOverviewFilter();const chips=[["all","Alle"],["meccan","Mekkanisch"],["medinan","Medinensisch"],["favorites","Favoriten"]];return `<div class="qov-filter-bar"><div class="qov-segment-bar" role="tablist" aria-label="Sūren filtern">${chips.map(([id,label])=>`<button type="button" class="qov-segment-btn${f===id?" active":""}" data-qov-filter="${id}" role="tab" aria-selected="${f===id?"true":"false"}">${label}</button>`).join("")}</div><button type="button" class="qov-sort-btn" id="qovSortBtn" aria-label="Sortierung wechseln">⇅</button></div>`}
 function renderQuran(){quranOverviewFilter=getQuranOverviewFilter();quranOverviewSort=getQuranOverviewSort();applyQuranLineSpacing(getQuranLineSpacing());if(!quranMeta)return `<div class="qov-page"><div class="qov-skeleton"></div><div class="loading">Qurʾān wird geladen…</div></div>`;const total=quranMeta.surahs.reduce((sum,s)=>sum+(s.total_verses||0),0);const list=quranOverviewFilteredSurahs();const favFilter=getQuranOverviewFilter()==="favorites";const listHtml=list.length?list.map(quranSurahCard).join(""):favFilter?`<div class="qov-empty">Noch keine Favoriten gespeichert.<br><br>Tippe bei einer Sūrah auf das Lesezeichen, um sie hier schneller wiederzufinden.</div>`:`<div class="qov-empty">Keine Sūren für diesen Filter.</div>`;return `<div class="qov-page"><div class="qov-main">${renderQuranOverviewHeader(total)}<div class="qov-sticky-tools" id="qovStickyTools">${renderQuranOverviewNavBlock()}${renderQuranOverviewFilters()}</div>${renderQuranResumeCard()}<div class="qov-list-head">Suren</div><section class="qov-surah-list quran-surah-grid" id="quranSurahGrid">${listHtml}</section></div><div id="qovDisplayMount"></div><div id="qovDirectMount"></div><div id="qovToolsMount"></div></div>`}
 function openQuranDirectSheet(){qovLastFocusEl=document.activeElement;qovDirectSheetDraft=qovDirectSheetDraft||{surah:"",ayah:"",ref:""};const mount=$("qovDirectMount");if(!mount)return;mount.innerHTML=renderQuranDirectOpenSheet();bindQuranDirectSheet();document.body.style.overflow="hidden"}
-function closeQuranDirectSheet(){const mount=$("qovDirectMount");if(mount)mount.innerHTML="";qovDirectSheetDraft=null;if(qovLastFocusEl&&typeof qovLastFocusEl.focus==="function")qovLastFocusEl.focus()}
+function closeQuranDirectSheet(){const mount=$("qovDirectMount");if(mount)mount.innerHTML="";qovDirectSheetDraft=null;document.body.style.overflow="";if(qovLastFocusEl&&typeof qovLastFocusEl.focus==="function")qovLastFocusEl.focus()}
 function bindQuranDirectSheet(){const backdrop=$("qovDirectBackdrop");const close=()=>closeQuranDirectSheet();backdrop?.addEventListener("click",e=>{if(e.target===backdrop)close()});backdrop?.querySelectorAll("[data-qov-direct-close]").forEach(btn=>btn.addEventListener("click",close));const surah=$("quranQuickSurah");const ayah=$("quranQuickAyah");const ref=$("qovDirectRef");const go=$("quranQuickGo");const sync=()=>{const sid=Number(surah?.value);const meta=sid?quranSurahMeta(sid):null;if(ayah&&meta)ayah.innerHTML=quranAyahOptions(meta.total_verses,ayah.value);if(ayah)ayah.disabled=!meta;const ay=Number(ayah?.value)||0;const ok=sid>=1&&sid<=114&&(!ay||meta&&ay>=1&&ay<=meta.total_verses);if(go)go.disabled=!ok};if(surah){surah.onchange=()=>{qovDirectSheetDraft={surah:surah.value,ayah:"",ref:ref?.value||""};sync()};sync()}if(ayah)ayah.onchange=sync;if(ref){ref.oninput=()=>{const parsed=quranSearchParseRef(ref.value);if(parsed){surah.value=String(parsed.surah);sync();if(ayah)ayah.value=String(parsed.ayah||"")}sync()}}if(go){go.onclick=()=>{const sid=Number(surah?.value);if(!sid)return;const ay=Number(ayah?.value)||1;const meta=quranSurahMeta(sid);if(meta&&ay>meta.total_verses)return;closeQuranDirectSheet();openQuranSurah(sid,ay)}};backdrop?.querySelector("#qovDirectSheet")?.focus();const escFn=e=>{if(e.key==="Escape"){close();window.removeEventListener("keydown",escFn)}};window.addEventListener("keydown",escFn)}
 function openQuranToolsSheet(){qovLastFocusEl=document.activeElement;const mount=$("qovToolsMount");if(!mount)return;mount.innerHTML=renderQuranToolsSheet();const close=()=>{mount.innerHTML="";if(qovLastFocusEl&&typeof qovLastFocusEl.focus==="function")qovLastFocusEl.focus()};$("qovToolsBackdrop")?.addEventListener("click",e=>{if(e.target===$("qovToolsBackdrop"))close()});mount.querySelectorAll("[data-qov-tools-close]").forEach(btn=>btn.addEventListener("click",close));mount.querySelector("[data-qov-tools-display]")?.addEventListener("click",()=>{close();openQuranDisplaySheet()});mount.querySelector("[data-qov-tools-favorites]")?.addEventListener("click",()=>{close();setQuranOverviewFilter("favorites");render()});mount.querySelectorAll("[data-nav]").forEach(btn=>btn.addEventListener("click",()=>{close();navigate(btn.getAttribute("data-nav"),btn.getAttribute("data-value")||"")}));const escFn=e=>{if(e.key==="Escape"){close();window.removeEventListener("keydown",escFn)}};window.addEventListener("keydown",escFn)}
 function syncQovHeaderHeight(){const header=$("qovHeader");if(!header)return;const h=Math.ceil(header.getBoundingClientRect().height);document.documentElement.style.setProperty("--qov-header-h",h+"px")}
@@ -19796,7 +19799,9 @@ function hideQrcJumpVeil(){clearQrcJumpVeilFailsafe();const v=document.getElemen
 function scheduleHideQrcJumpVeil(){requestAnimationFrame(()=>{requestAnimationFrame(()=>{setTimeout(hideQrcJumpVeil,40)})})}
 let qrcSheetLockScrollY=0;let qrcSheetLockCount=0;window.__qrcPickerSession=window.__qrcPickerSession||0;window.__qrcPickerClosing=false;
 const QRC_OVERLAY_LOCK_KINDS=["qrc-sheet-open","quran-panel-open","qov-sheet-open"];
-function forceResetQrcOverlayLocks(){const html=document.documentElement;const body=document.body;qrcSheetLockCount=0;QRC_OVERLAY_LOCK_KINDS.forEach(function(kind){html.classList.remove(kind);if(body)body.classList.remove(kind)});if(body){body.style.top="";body.style.overflow=""}html.style.overflow=""}
+function forceResetQrcOverlayLocks(){const html=document.documentElement;const body=document.body;qrcSheetLockCount=0;QRC_OVERLAY_LOCK_KINDS.forEach(function(kind){html.classList.remove(kind);if(body)body.classList.remove(kind)});if(body){body.style.top="";body.style.overflow="";body.style.removeProperty("position");body.style.removeProperty("width");body.style.removeProperty("left");body.style.removeProperty("right")}html.style.overflow="";html.style.removeProperty("height")}
+function pageScrollOverlayActive(){const html=document.documentElement;const body=document.body;if(!body)return false;return body.classList.contains("is-ilm-chat-route")||html.classList.contains("story-viewer-open")||QRC_OVERLAY_LOCK_KINDS.some(function(kind){return html.classList.contains(kind)||body.classList.contains(kind)})}
+function ensurePageDocumentScroll(){if(pageScrollOverlayActive())return;try{forceResetQrcOverlayLocks()}catch(e){}}
 function forceResetQrcUiState(){window.__qrcHideJumpVeilAfterRender=false;window.__qrcPickerApplying=false;window.__qrcPickerClosing=false;hideQrcJumpVeil();try{["qrcSettingsMount","qrcPickerMount","qrcInfoMount","qrcAyahMenuMount","qovDisplayMount"].forEach(function(id){const el=$(id);if(el)el.innerHTML=""})}catch(e){}forceResetQrcOverlayLocks()}
 function lockAppOverlayScroll(kind){kind=kind||"qrc-sheet-open";const html=document.documentElement;const body=document.body;if(!body)return;if(qrcSheetLockCount<=0){qrcSheetLockScrollY=window.scrollY||document.documentElement.scrollTop||0;body.style.top="-"+qrcSheetLockScrollY+"px"}qrcSheetLockCount+=1;html.classList.add(kind);body.classList.add(kind);html.style.overflow="hidden";body.style.overflow="hidden"}
 function unlockAppOverlayScroll(kind){kind=kind||"qrc-sheet-open";const html=document.documentElement;const body=document.body;if(!body)return;qrcSheetLockCount=Math.max(0,qrcSheetLockCount-1);html.classList.remove(kind);body.classList.remove(kind);if(qrcSheetLockCount<=0){forceResetQrcOverlayLocks();const y=Number(qrcSheetLockScrollY)||0;requestAnimationFrame(()=>{window.scrollTo(0,y)})}}
@@ -25285,6 +25290,7 @@ function updateChrome(route){
   document.documentElement.classList.toggle("is-quran-reader-route",route.view==="quran-surah");
   document.documentElement.classList.toggle("is-ilm-chat-route",isIlm);
   document.documentElement.classList.toggle("dar-scroll-guard",true);
+  if(route.view!=="quran-surah"&&route.view!=="quran")ensurePageDocumentScroll();
   document.body.classList.toggle("is-library-route",["bibliothek","bibliothek-detail","bibliothek-reader"].includes(route.view));
   document.body.classList.toggle("is-dua-route",["duas","dua-cat","dua"].includes(route.view));
   document.body.classList.toggle("is-topics-route",route.view==="topics");
@@ -28317,6 +28323,40 @@ html.is-android .prophets-pane{
   -webkit-overflow-scrolling:touch!important;
   overscroll-behavior:contain!important;
   touch-action:pan-y!important;
+}
+</style>
+
+<style id="global-page-scroll-fix-v626">
+/* GLOBAL_PAGE_SCROLL_FIX_V626 · ein Document-Scroller für Safari/Windows/Mac */
+html:not(.qrc-sheet-open):not(.quran-panel-open):not(.qov-sheet-open):not(.story-viewer-open):not(:has(body.is-ilm-chat-route)){
+  height:auto!important;
+  min-height:100%!important;
+  overflow-x:hidden!important;
+  overflow-y:scroll!important;
+  overscroll-behavior-y:auto!important;
+  overscroll-behavior-x:none!important;
+  touch-action:manipulation!important;
+  -webkit-overflow-scrolling:touch!important;
+}
+html:not(.qrc-sheet-open):not(.quran-panel-open):not(.qov-sheet-open):not(.story-viewer-open) body:not(.is-ilm-chat-route):not(.qrc-sheet-open):not(.quran-panel-open):not(.qov-sheet-open){
+  height:auto!important;
+  min-height:100%!important;
+  overflow-x:hidden!important;
+  overflow-y:visible!important;
+  overscroll-behavior-y:auto!important;
+  touch-action:manipulation!important;
+  -webkit-overflow-scrolling:touch!important;
+}
+html:not(:has(body.is-ilm-chat-route)):not(:has(body.is-feed-fullscreen)) #appView,
+html:not(:has(body.is-ilm-chat-route)):not(:has(body.is-feed-fullscreen)) #appView.view,
+html:not(:has(body.is-ilm-chat-route)) .app{
+  overflow-x:hidden!important;
+  overflow-y:visible!important;
+  touch-action:manipulation!important;
+}
+html.dar-scroll-guard:not(.qrc-sheet-open):not(.quran-panel-open):not(.qov-sheet-open),
+html.dar-scroll-guard:not(.qrc-sheet-open):not(.quran-panel-open):not(.qov-sheet-open) body:not(.is-ilm-chat-route){
+  overscroll-behavior-y:auto!important;
 }
 </style>
 
