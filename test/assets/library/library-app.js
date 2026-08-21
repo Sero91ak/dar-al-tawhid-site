@@ -1134,82 +1134,123 @@
       saveProgress(readerState.pub.id, page, readerState.total || 0);
       return;
     }
-    renderReaderPage(page);
+    const stage = getReaderStage();
+    const target = stage?.querySelector(`[data-page="${page}"]`);
+    if (target) {
+      readerState.page = page;
+      const input = getReaderRoot()?.querySelector("[data-library-reader-input]");
+      if (input) input.value = String(page);
+      saveProgress(readerState.pub.id, page, readerState.total || 0);
+      target.scrollIntoView({ behavior: behavior || "smooth", block: "start" });
+      return;
+    }
+    renderReaderScroll({ page });
   }
 
   async function renderReaderPage(pageNum) {
+    await renderReaderScroll({ page: pageNum });
+  }
+
+  function setupReaderScrollTracking(stack, stage) {
+    if (readerPageObserver) readerPageObserver.disconnect();
+    readerPageObserver = new IntersectionObserver((entries) => {
+      if (!readerState) return;
+      let best = null;
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        if (!best || entry.intersectionRatio > best.intersectionRatio) best = entry;
+      });
+      if (!best) return;
+      const page = Math.max(1, Number(best.target?.dataset?.page) || 1);
+      if (readerState.page === page) return;
+      readerState.page = page;
+      const input = getReaderRoot()?.querySelector("[data-library-reader-input]");
+      if (input) input.value = String(page);
+      saveProgress(readerState.pub.id, page, readerState.total || 0);
+    }, {
+      root: stage,
+      threshold: [0.35, 0.55, 0.75, 0.92]
+    });
+    stack.querySelectorAll("[data-page]").forEach((pageEl) => readerPageObserver.observe(pageEl));
+  }
+
+  async function renderReaderScroll(options) {
     if (!readerState || !readerState.doc) return;
     const stage = getReaderStage();
     if (!stage) return;
 
     const token = ++readerRenderToken;
-    const page = Math.max(1, Math.min(readerState.total || 1, Number(pageNum) || 1));
-    readerState.page = page;
-    stage.innerHTML = '<div class="lib-reader-msg">Seite wird geladen…</div>';
+    const startPage = Math.max(1, Math.min(readerState.total || 1, Number(options?.page) || readerState.page || 1));
+    readerState.page = startPage;
+    stage.innerHTML = '<div class="lib-reader-msg">PDF wird aufgebaut…</div>';
 
     try {
       const layoutWidth = await waitForReaderLayout(stage);
       if (token !== readerRenderToken) return;
 
       const width = Math.max(280, layoutWidth - 12);
-      const pdfPage = await readerState.doc.getPage(page);
-      if (token !== readerRenderToken) return;
-
-      const baseViewport = pdfPage.getViewport({ scale: 1 });
-      const scale = baseViewport.width > 0 ? width / baseViewport.width : 1;
-      const viewport = pdfPage.getViewport({ scale: Math.max(scale, 0.1) });
-
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-      if (!ctx) throw new Error("canvas unavailable");
-
-      const cssWidth = Math.max(1, Math.floor(viewport.width));
-      const cssHeight = Math.max(1, Math.floor(viewport.height));
-      canvas.width = cssWidth;
-      canvas.height = cssHeight;
-      canvas.style.width = `${cssWidth}px`;
-      canvas.style.height = `${cssHeight}px`;
-      canvas.className = "lib-reader-page-canvas";
-
-      const wrap = document.createElement("div");
-      wrap.className = "lib-reader-sheet";
-      wrap.dataset.page = String(page);
-      wrap.appendChild(canvas);
-
-      await pdfPage.render({
-        canvasContext: ctx,
-        viewport,
-        background: "#ffffff"
-      }).promise;
-      if (token !== readerRenderToken) return;
-      if (isCanvasLikelyBlank(canvas)) throw new Error("blank canvas");
-
-      stage.innerHTML = "";
       const stack = document.createElement("div");
-      stack.className = "lib-reader-stack lib-reader-stack-single";
-      stack.appendChild(wrap);
+      stack.className = "lib-reader-stack";
+      stack.style.alignItems = "center";
+      stack.style.paddingBottom = "12px";
+      stage.innerHTML = "";
       stage.appendChild(stack);
-      stage.scrollTop = 0;
+
+      for (let page = 1; page <= readerState.total; page += 1) {
+        const pdfPage = await readerState.doc.getPage(page);
+        if (token !== readerRenderToken) return;
+
+        const baseViewport = pdfPage.getViewport({ scale: 1 });
+        const scale = baseViewport.width > 0 ? width / baseViewport.width : 1;
+        const viewport = pdfPage.getViewport({ scale: Math.max(scale, 0.1) });
+
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        if (!ctx) throw new Error("canvas unavailable");
+
+        const cssWidth = Math.max(1, Math.floor(viewport.width));
+        const cssHeight = Math.max(1, Math.floor(viewport.height));
+        canvas.width = cssWidth;
+        canvas.height = cssHeight;
+        canvas.style.width = `${cssWidth}px`;
+        canvas.style.height = `${cssHeight}px`;
+        canvas.className = "lib-reader-page-canvas";
+
+        const wrap = document.createElement("div");
+        wrap.className = "lib-reader-sheet";
+        wrap.dataset.page = String(page);
+        if (page === startPage) wrap.setAttribute("data-reader-start-page", "1");
+        wrap.appendChild(canvas);
+        stack.appendChild(wrap);
+
+        await pdfPage.render({
+          canvasContext: ctx,
+          viewport,
+          background: "#ffffff"
+        }).promise;
+        if (token !== readerRenderToken) return;
+        if (isCanvasLikelyBlank(canvas)) throw new Error("blank canvas");
+      }
+
+      if (token !== readerRenderToken) return;
+      setupReaderScrollTracking(stack, stage);
 
       const input = getReaderRoot()?.querySelector("[data-library-reader-input]");
-      if (input) input.value = String(page);
-      saveProgress(readerState.pub.id, page, readerState.total);
+      if (input) input.value = String(startPage);
+      saveProgress(readerState.pub.id, startPage, readerState.total);
+
+      const startEl = stack.querySelector('[data-reader-start-page="1"]');
+      if (startEl) {
+        requestAnimationFrame(() => {
+          startEl.scrollIntoView({ behavior: "auto", block: "start" });
+          startEl.removeAttribute("data-reader-start-page");
+        });
+      }
     } catch (e) {
       if (token !== readerRenderToken) return;
-      if (renderReaderIframeFallback(stage, page)) return;
-      stage.innerHTML = `<div class="lib-reader-msg">Seite konnte nicht angezeigt werden. Bitte erneut versuchen oder die PDF herunterladen.</div>`;
+      if (renderReaderIframeFallback(stage, startPage)) return;
+      stage.innerHTML = `<div class="lib-reader-msg">PDF konnte nicht geladen werden. Bitte versuche es erneut oder lade die Datei herunter.</div>`;
     }
-  }
-
-  function setupReaderScrollTracking(stack, stage) {
-    if (readerPageObserver) readerPageObserver.disconnect();
-    readerPageObserver = null;
-  }
-
-  async function renderReaderScroll(options) {
-    if (!readerState || !readerState.doc) return;
-    const startPage = options?.page || readerState.page || 1;
-    await renderReaderPage(startPage);
   }
 
   function bindReaderControls(pub, reader) {
@@ -1521,11 +1562,7 @@
           const pageInput = reader?.querySelector("[data-library-reader-input]");
           if (pageInput && readerState?.page) pageInput.value = String(readerState.page);
         } else {
-          if (shouldForceRenderedPdfReader() || !shouldUseNativePdfViewer()) {
-            await initReader(pub);
-          } else {
-            await initReaderNative(pub);
-          }
+          await initReader(pub);
           bindReaderControls(pub, getReaderRoot());
         }
       } else {
