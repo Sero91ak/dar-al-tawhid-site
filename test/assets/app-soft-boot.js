@@ -92,14 +92,10 @@
     if (finished) return;
     var elapsed = Date.now() - startedAt;
     if (elapsed < MIN_SHOW_MS) {
-      if (!finishScheduled) {
-        finishScheduled = true;
-        setTimeout(finish, MIN_SHOW_MS - elapsed);
-      }
+      setTimeout(finish, MIN_SHOW_MS - elapsed);
       return;
     }
     finished = true;
-    finishScheduled = false;
     clearRamp();
     if (hardTimer) {
       clearTimeout(hardTimer);

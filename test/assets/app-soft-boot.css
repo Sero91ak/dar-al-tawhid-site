@@ -1,0 +1,61 @@
+/* Soft boot overlay — iOS-parity first paint (visitor + test) */
+#dar-soft-boot{
+  position:fixed;
+  inset:0;
+  z-index:2147483000;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  padding:max(24px,env(safe-area-inset-top,0px)) 24px max(24px,env(safe-area-inset-bottom,0px));
+  background:
+    radial-gradient(120% 80% at 50% 0%, color-mix(in srgb, var(--gold2, #c9a86a) 14%, transparent), transparent 55%),
+    var(--theme-page-bg, var(--outer-bg-flat, var(--outer-bg, var(--bg, #05080f))));
+  color:var(--cream, #f4ead2);
+  font-family:Manrope,Inter,system-ui,sans-serif;
+  transition:opacity .28s ease, visibility .28s ease;
+}
+#dar-soft-boot.is-done{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+#dar-soft-boot .dar-soft-boot__mark{
+  width:72px;
+  height:72px;
+  border-radius:50%;
+  object-fit:cover;
+  box-shadow:0 10px 28px rgba(0,0,0,.35);
+  border:1px solid color-mix(in srgb, var(--gold2, #c9a86a) 45%, transparent);
+}
+#dar-soft-boot .dar-soft-boot__title{
+  margin:0;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:.04em;
+  color:var(--gold2, #d4b56a);
+  text-align:center;
+}
+#dar-soft-boot .dar-soft-boot__track{
+  width:min(220px,62vw);
+  height:6px;
+  border-radius:999px;
+  background:color-mix(in srgb, #fff 10%, transparent);
+  overflow:hidden;
+}
+#dar-soft-boot .dar-soft-boot__bar{
+  height:100%;
+  width:0%;
+  border-radius:inherit;
+  background:linear-gradient(90deg, color-mix(in srgb, var(--gold2,#c9a86a) 70%, #fff), var(--gold2,#d4b56a));
+  transition:width .08s linear;
+}
+#dar-soft-boot .dar-soft-boot__pct{
+  margin:0;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.08em;
+  color:color-mix(in srgb, var(--cream,#f4ead2) 78%, transparent);
+}
