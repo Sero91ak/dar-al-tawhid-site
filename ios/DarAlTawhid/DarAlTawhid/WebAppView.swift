@@ -10,11 +10,6 @@ final class InsetAwareWebView: WKWebView {
         super.safeAreaInsetsDidChange()
         onInsetsChange?()
     }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        onInsetsChange?()
-    }
 }
 
 final class GradientBackdropView: UIView {
@@ -28,19 +23,49 @@ final class GradientBackdropView: UIView {
         super.init(frame: frame)
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
-        gradientLayer.locations = [0.0, 1.0]
-        updateColors(
-            top: UIColor(red: 0.22, green: 0.30, blue: 0.40, alpha: 1.0),
-            bottom: UIColor(red: 0.04, green: 0.08, blue: 0.14, alpha: 1.0)
-        )
+        gradientLayer.locations = [0.0, 0.22, 0.62, 1.0]
+        let boot = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
+        updateColors(top: boot, mid: boot, bottom: boot)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func updateColors(top: UIColor, bottom: UIColor) {
-        gradientLayer.colors = [top.cgColor, bottom.cgColor]
+    func updateColors(top: UIColor, mid: UIColor? = nil, bottom: UIColor) {
+        // Theme-only gradient: no foreign navy/blue blend tints.
+        let resolvedMid = mid ?? blendedColor(from: top, to: bottom, ratio: 0.45)
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        gradientLayer.locations = [0.0, 0.22, 0.62, 1.0]
+        gradientLayer.colors = [
+            top.cgColor,
+            top.cgColor,
+            resolvedMid.cgColor,
+            bottom.cgColor
+        ]
+    }
+
+    private func blendedColor(from: UIColor, to: UIColor, ratio: CGFloat) -> UIColor {
+        var fromRed: CGFloat = 0
+        var fromGreen: CGFloat = 0
+        var fromBlue: CGFloat = 0
+        var fromAlpha: CGFloat = 0
+        var toRed: CGFloat = 0
+        var toGreen: CGFloat = 0
+        var toBlue: CGFloat = 0
+        var toAlpha: CGFloat = 0
+        guard from.getRed(&fromRed, green: &fromGreen, blue: &fromBlue, alpha: &fromAlpha),
+              to.getRed(&toRed, green: &toGreen, blue: &toBlue, alpha: &toAlpha) else {
+            return from
+        }
+        let clampedRatio = min(1, max(0, ratio))
+        return UIColor(
+            red: fromRed + (toRed - fromRed) * clampedRatio,
+            green: fromGreen + (toGreen - fromGreen) * clampedRatio,
+            blue: fromBlue + (toBlue - fromBlue) * clampedRatio,
+            alpha: fromAlpha + (toAlpha - fromAlpha) * clampedRatio
+        )
     }
 }
 
@@ -50,6 +75,7 @@ struct WebAppView: UIViewRepresentable {
         case live
     }
 
+    // Always the visitor app (live). Staging/test is not used for this Xcode wrapper.
     private static let environment: AppEnvironment = .live
     private static let stagingURL = URL(string: "https://dar-al-tawhid.de/test/?env=staging&source=ios-testflight#home")!
     private static let liveURL = URL(string: "https://dar-al-tawhid.de/#home")!
@@ -74,176 +100,268 @@ struct WebAppView: UIViewRepresentable {
         let configuration = WKWebViewConfiguration()
         configuration.allowsInlineMediaPlayback = true
         configuration.defaultWebpagePreferences.allowsContentJavaScript = true
+        // Do not wipe WKWebsiteDataStore on launch — that cancels/breaks the first page load.
         let userContentController = WKUserContentController()
         userContentController.add(context.coordinator, name: "darLibraryReader")
         userContentController.add(context.coordinator, name: "darAppearance")
         let iosViewportPolish = """
         (function(){
-          if(window.__darIosViewportPolishInstalled){
-            var existing=document.getElementById("dar-ios-viewport-polish");
-            if(existing&&document.head)document.head.appendChild(existing);
-            if(document.documentElement)document.documentElement.classList.add("dar-ios-native-app");
-            if(document.body)document.body.classList.add("dar-ios-native-app");
-            return;
-          }
+          if(window.__darIosViewportPolishInstalled)return;
           window.__darIosViewportPolishInstalled=true;
+          window.__DAR_IOS_BUILD__="0.16-feed-pin";
+          function cssText(){
+            return [
+              "html.dar-ios-native-app{",
+              "  --layout-content-max:100% !important;",
+              "  --layout-reader-max:100% !important;",
+              "  --layout-shell-max:100% !important;",
+              "  --layout-feed-max:100% !important;",
+              "  --layout-navigation-max:100% !important;",
+              "  --layout-page-gutter:max(12px,env(safe-area-inset-left,0px)) !important;",
+              "  --feed-col-max:100% !important;",
+              "  --sf-feed-col-max:100% !important;",
+              "  --dar-ios-theme-bg:var(--theme-page-bg,var(--theme-feed-bg,var(--quran-page-bg,var(--page-cover,var(--outer-bg-flat,var(--bg,#050504))))));",
+              "}",
+              "html.dar-ios-native-app,html.dar-ios-native-app body{",
+              "  width:100% !important;max-width:100% !important;margin:0 !important;",
+              "  padding-left:0 !important;padding-right:0 !important;",
+              "  background:var(--dar-ios-theme-bg) !important;",
+              "  background-color:var(--dar-ios-theme-bg) !important;",
+              "  background-attachment:fixed !important;",
+              "  min-height:100% !important;min-height:100dvh !important;",
+              "}",
+              "html.dar-ios-native-app .app,html.dar-ios-native-app #appShell,html.dar-ios-native-app #appRoot,",
+              "html.dar-ios-native-app #appView,html.dar-ios-native-app #appView.view,html.dar-ios-native-app .view,",
+              "html.dar-ios-native-app .top-shell,html.dar-ios-native-app .qov-page,html.dar-ios-native-app .more-page,",
+              "html.dar-ios-native-app .quiz-home,html.dar-ios-native-app .quiz-shell,html.dar-ios-native-app .account-page,",
+              "html.dar-ios-native-app .lib-page,html.dar-ios-native-app .books-library-shell{",
+              "  width:100% !important;max-width:100% !important;",
+              "  margin-left:0 !important;margin-right:0 !important;",
+              "  border-radius:0 !important;box-shadow:none !important;",
+              "}",
+              "html.dar-ios-native-app .app,html.dar-ios-native-app #appShell,html.dar-ios-native-app #appRoot,",
+              "html.dar-ios-native-app .top-shell{",
+              "  background:transparent !important;",
+              "}",
+              "html.dar-ios-native-app body.is-area-route:not(.is-quran-overview):not(.is-quran-reader-route):not(.is-feed-fullscreen):not(.is-ilm-chat-route){",
+              "  padding-top:max(10px,var(--safe-top),var(--dar-native-safe-top,0px)) !important;",
+              "}",
+              "html.dar-ios-native-app body.is-area-route:not(.is-quran-overview):not(.is-quran-reader-route):not(.is-feed-fullscreen) #appView,",
+              "html.dar-ios-native-app body.is-area-route:not(.is-quran-overview):not(.is-quran-reader-route):not(.is-feed-fullscreen) #appView.view,",
+              "html.dar-ios-native-app body.is-area-route:not(.is-quran-overview):not(.is-quran-reader-route):not(.is-feed-fullscreen) .view{",
+              "  padding-left:max(12px,env(safe-area-inset-left,0px)) !important;",
+              "  padding-right:max(12px,env(safe-area-inset-right,0px)) !important;",
+              "  box-sizing:border-box !important;",
+              "  background:transparent !important;",
+              "}",
+              "html.dar-ios-native-app body.is-feed-fullscreen{",
+              "  --sf-feed-col-max:100% !important;",
+              "  --feed-col-max:100% !important;",
+              "  --layout-feed-max:100% !important;",
+              "  --sf-shell-pad:0px !important;",
+              "  --sf-gutter-left:max(8px,env(safe-area-inset-left,0px)) !important;",
+              "  --sf-gutter-right:max(8px,env(safe-area-inset-right,0px)) !important;",
+              "  --sf-card-radius:16px !important;",
+              "  --sf-card-gap:12px !important;",
+              "  padding-top:max(0px,var(--safe-top),var(--dar-native-safe-top,0px)) !important;",
+              "  padding-left:0 !important;padding-right:0 !important;",
+              "  background:var(--theme-feed-bg,var(--dar-ios-theme-bg)) !important;",
+              "}",
+              "html.dar-ios-native-app body.is-feed-fullscreen #appView,",
+              "html.dar-ios-native-app body.is-feed-fullscreen #appView.view,",
+              "html.dar-ios-native-app body.is-feed-fullscreen .view,",
+              "html.dar-ios-native-app body.is-feed-fullscreen #premiumFeedMount,",
+              "html.dar-ios-native-app body.is-feed-fullscreen .pf-mount-root{",
+              "  width:100% !important;max-width:100% !important;margin:0 !important;",
+              "  padding-left:0 !important;padding-right:0 !important;",
+              "  border-radius:0 !important;background:var(--theme-feed-bg,var(--dar-ios-theme-bg)) !important;",
+              "}",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-app{",
+              "  display:flex !important;flex-direction:column !important;align-items:stretch !important;",
+              "  width:100% !important;max-width:100% !important;margin:0 !important;",
+              "  padding-left:0 !important;padding-right:0 !important;",
+              "  border-radius:0 !important;background:var(--theme-feed-bg,var(--dar-ios-theme-bg)) !important;",
+              "}",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-top,",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-filters,",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-feed,",
+              "html.dar-ios-native-app body.is-feed-fullscreen .feed-list,",
+              "html.dar-ios-native-app body.is-feed-fullscreen .pf-feed{",
+              "  width:100% !important;max-width:100% !important;",
+              "  margin-left:0 !important;margin-right:0 !important;",
+              "  padding-left:var(--sf-gutter-left) !important;",
+              "  padding-right:var(--sf-gutter-right) !important;",
+              "  box-sizing:border-box !important;",
+              "}",
+              "@media(min-width:600px){",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-top,",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-filters,",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-feed{",
+              "  max-width:100% !important;width:100% !important;",
+              "  margin-left:0 !important;margin-right:0 !important;",
+              "}",
+              "}",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-top{",
+              "  left:0 !important;right:0 !important;top:0 !important;",
+              "  padding-top:8px !important;",
+              "  background:var(--theme-feed-top,var(--theme-feed-bg,var(--dar-ios-theme-bg))) !important;",
+              "  background-color:var(--theme-feed-bg,var(--dar-ios-theme-bg)) !important;",
+              "}",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-top-modes,",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-mode-switch,",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-segment,",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-tabs{",
+              "  width:100% !important;max-width:100% !important;",
+              "  background:color-mix(in srgb,var(--card) 62%,var(--theme-feed-bg,var(--bg)) 38%) !important;",
+              "  border-color:color-mix(in srgb,var(--line2) 70%,var(--gold2) 16%) !important;",
+              "}",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-post{",
+              "  width:100% !important;max-width:100% !important;",
+              "  margin-left:0 !important;margin-right:0 !important;",
+              "  border-radius:var(--sf-card-radius) !important;",
+              "  background:color-mix(in srgb,var(--card) 70%,var(--theme-feed-bg,var(--bg)) 30%) !important;",
+              "  border:1px solid color-mix(in srgb,var(--line2) 72%,var(--gold2) 14%) !important;",
+              "  box-shadow:0 10px 24px color-mix(in srgb,#000 18%,transparent) !important;",
+              "}",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-post__media,",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-post__scene,",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-post__bg,",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-post__img,",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-post__media--feed-img{",
+              "  width:100% !important;max-width:100% !important;",
+              "  margin:0 !important;border-radius:0 !important;",
+              "}",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-post__head,",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-post__footer,",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-post__actions{",
+              "  background:color-mix(in srgb,var(--card) 58%,var(--theme-feed-bg,var(--bg)) 42%) !important;",
+              "}",
+              "html.dar-ios-native-app body.is-feed-fullscreen .sf-feed{",
+              "  padding-bottom:calc(24px + var(--safe-bottom,env(safe-area-inset-bottom,0px))) !important;",
+              "}",
+              /* Quran overview: full-bleed page, content gutters only inside .qov-page */
+              "html.dar-ios-native-app body.is-quran-overview,",
+              "html.dar-ios-native-app.html.is-quran-overview{",
+              "  background:var(--quran-gradient-page,var(--quran-page-bg,var(--dar-ios-theme-bg))) !important;",
+              "  background-color:var(--quran-page-bg,var(--dar-ios-theme-bg)) !important;",
+              "}",
+              "html.dar-ios-native-app body.is-quran-overview #appView,",
+              "html.dar-ios-native-app body.is-quran-overview #appView.view{",
+              "  padding-left:0 !important;padding-right:0 !important;",
+              "  padding-top:max(6px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px)) !important;",
+              "  width:100% !important;max-width:100% !important;",
+              "  background:var(--quran-gradient-page,var(--quran-page-bg,var(--dar-ios-theme-bg))) !important;",
+              "}",
+              "html.dar-ios-native-app body.is-quran-overview .qov-page{",
+              "  width:100% !important;max-width:100% !important;margin:0 !important;",
+              "  padding-left:max(12px,env(safe-area-inset-left,0px)) !important;",
+              "  padding-right:max(12px,env(safe-area-inset-right,0px)) !important;",
+              "  box-sizing:border-box !important;",
+              "  background:transparent !important;",
+              "}",
+              "html.dar-ios-native-app body.is-quran-overview .qov-header{",
+              "  margin-left:0 !important;margin-right:0 !important;",
+              "  width:100% !important;max-width:100% !important;",
+              "  box-sizing:border-box !important;",
+              "}",
+              /* Surah / content boxes: lift dark surfaces for contrast after full-bleed (same theme hues). */
+              "html.dar-ios-native-app body.is-quran-overview #quranSurahGrid .quran-surah-card{",
+              "  background:color-mix(in srgb,var(--card) 72%,var(--bg) 28%) !important;",
+              "  border-color:color-mix(in srgb,var(--line2) 68%,var(--gold2) 20%) !important;",
+              "  box-shadow:0 8px 18px color-mix(in srgb,#000 18%,transparent),inset 0 1px 0 color-mix(in srgb,#fff 6%,transparent) !important;",
+              "}",
+              "html.dar-ios-native-app body.is-quran-overview #quranSurahGrid .quran-surah-card .quran-num,",
+              "html.dar-ios-native-app body.is-quran-overview #quranSurahGrid .quran-surah-card .qov-row-num{",
+              "  background:color-mix(in srgb,var(--gold2) 12%,var(--card)) !important;",
+              "  border-color:color-mix(in srgb,var(--gold2) 28%,var(--line2)) !important;",
+              "}",
+              "html.dar-ios-native-app body.is-quran-overview .qov-search-shell,",
+              "html.dar-ios-native-app body.is-quran-overview .qov-direct--compact,",
+              "html.dar-ios-native-app body.is-quran-overview .qov-segment-bar,",
+              "html.dar-ios-native-app body.is-quran-overview .qov-resume-card{",
+              "  background:color-mix(in srgb,var(--card) 58%,var(--bg) 42%) !important;",
+              "  border-color:color-mix(in srgb,var(--line2) 70%,var(--gold2) 16%) !important;",
+              "}",
+              /* Shared cards across app after edge-to-edge */
+              "html.dar-ios-native-app .folder-card,html.dar-ios-native-app .list-card,",
+              "html.dar-ios-native-app .post-card,html.dar-ios-native-app .info-card,",
+              "html.dar-ios-native-app .feature-card,html.dar-ios-native-app .feature-section,",
+              "html.dar-ios-native-app .quiz-home .quiz-card,html.dar-ios-native-app .account-card,",
+              "html.dar-ios-native-app .more-page .feature-section{",
+              "  background:color-mix(in srgb,var(--card) 78%,var(--bg) 22%) !important;",
+              "}",
+              "html.dar-ios-native-app body.has-bottom-nav{",
+              "  padding-bottom:calc(var(--bottom-navigation-height,64px) + max(var(--safe-bottom),env(safe-area-inset-bottom,0px),var(--dar-native-safe-bottom,0px)) + 28px) !important;",
+              "}",
+              "html.dar-ios-native-app #bottomNav.bottom-nav,html.dar-ios-native-app .bottom-nav{",
+              "  left:max(12px,env(safe-area-inset-left,0px)) !important;",
+              "  right:max(12px,env(safe-area-inset-right,0px)) !important;",
+              "  width:auto !important;max-width:none !important;",
+              "  bottom:max(14px,calc(max(var(--safe-bottom),env(safe-area-inset-bottom,0px),var(--dar-native-safe-bottom,0px)) + 8px)) !important;",
+              "}"
+            ].join("\\n");
+          }
           function ensureStyle(){
+            var root=document.documentElement;
             var style=document.getElementById("dar-ios-viewport-polish");
             if(!style){
               style=document.createElement("style");
               style.id="dar-ios-viewport-polish";
             }
-            style.textContent = [
-              "html.dar-ios-native-app,html.dar-ios-native-app body{",
-              "  background-color:var(--page-cover,var(--outer-bg-flat,var(--bg))) !important;",
-              "}",
-              "html.dar-ios-native-app body{",
-              "  padding-top:0 !important;",
-              "  padding-right:0 !important;",
-              "  padding-bottom:max(18px,var(--safe-bottom,0px)) !important;",
-              "  padding-left:0 !important;",
-              "}",
-              "html.dar-ios-native-app body.has-bottom-nav{",
-              "  padding-bottom:calc(84px + max(0px,calc(var(--safe-bottom,0px) - 22px))) !important;",
-              "}",
-              "html.dar-ios-native-app body.has-bottom-nav .float-actions{",
-              "  bottom:calc(64px + 0.5cm + max(0px,calc(var(--safe-bottom,0px) - 22px)) + 3mm) !important;",
-              "}",
-              "html.dar-ios-native-app #appChromeDock #bottomNav.bottom-nav,",
-              "html.dar-ios-native-app #bottomNav.bottom-nav{",
-              "  left:max(10px,var(--dar-ios-safe-left,0px)) !important;",
-              "  right:max(10px,var(--dar-ios-safe-right,0px)) !important;",
-              "  bottom:calc(max(7px,calc(var(--safe-bottom,0px) - 18px)) + 3mm) !important;",
-              "}",
-              "html.dar-ios-native-app #appView,",
-              "html.dar-ios-native-app #premiumFeedMount{",
-              "  padding-top:0 !important;",
-              "  box-sizing:border-box !important;",
-              "}",
-              "html.dar-ios-native-app body.is-area-route:not(.is-library-reader-route) #appView{",
-              "  padding-top:0 !important;",
-              "  box-sizing:border-box !important;",
-              "}",
-              "html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen):not(.is-library-reader-route) .view{",
-              "  padding-top:0 !important;",
-              "  padding-right:max(16px,calc(var(--dar-ios-safe-right,0px) + 10px)) !important;",
-              "  padding-bottom:max(18px,calc(var(--safe-bottom,0px) + 14px)) !important;",
-              "  padding-left:max(16px,calc(var(--dar-ios-safe-left,0px) + 10px)) !important;",
-              "}",
-              "html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen) .view-head{",
-              "  padding-top:0 !important;",
-              "  margin-top:0 !important;",
-              "}",
-              "html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen) #appView > .view-head{",
-              "  padding-top:0 !important;",
-              "  margin-top:0 !important;",
-              "  padding-left:max(4px,calc(var(--dar-ios-safe-left,0px) + 2px)) !important;",
-              "  padding-right:max(4px,calc(var(--dar-ios-safe-right,0px) + 2px)) !important;",
-              "}",
-              "html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen) .view h2,",
-              "html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen) .view-head h2,",
-              "html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen) .feature-head h3,",
-              "html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen) .more-group h3,",
-              "html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen) .lib-hero h2,",
-              "html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen) .quiz-home-title{",
-              "  line-height:1.08 !important;",
-              "  overflow-wrap:anywhere !important;",
-              "}",
-              "html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen) .view-head h2{",
-              "  font-size:clamp(24px,6.1vw,38px) !important;",
-              "}",
-              "html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen) .feature-head h3,",
-              "html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen) .more-group h3{",
-              "  font-size:clamp(20px,5.4vw,30px) !important;",
-              "}",
-              "html.dar-ios-native-app body.is-feed-fullscreen .sf-top{",
-              "  top:0 !important;",
-              "  padding-top:0 !important;",
-              "  padding-left:max(26px,calc(var(--dar-ios-safe-left,0px) + 22px)) !important;",
-              "  padding-right:max(20px,calc(var(--dar-ios-safe-right,0px) + 16px)) !important;",
-              "}",
-              "html.dar-ios-native-app body.is-feed-fullscreen .sf-top-row{",
-              "  align-items:flex-start !important;",
-              "}",
-              "html.dar-ios-native-app body.is-feed-fullscreen .sf-brand-title,",
-              "html.dar-ios-native-app body.is-feed-fullscreen .sf-brand h1{",
-              "  line-height:1.08 !important;",
-              "}",
-              "html.dar-ios-native-app body.is-feed-fullscreen .sf-feed{",
-              "  padding-bottom:calc(24px + var(--safe-bottom,0px)) !important;",
-              "}",
-              "html.dar-ios-native-app body.is-feed-fullscreen .sf-brand{",
-              "  min-width:0 !important;",
-              "}",
-              "html.dar-ios-native-app body.is-feed-fullscreen .sf-brand-title,",
-              "html.dar-ios-native-app body.is-feed-fullscreen .sf-brand h1,",
-              "html.dar-ios-native-app body.is-feed-fullscreen .sf-brand-sub{",
-              "  overflow-wrap:anywhere !important;",
-              "}",
-              "html.dar-ios-native-app body.is-catalog-route #appView > .view-head,",
-              "html.dar-ios-native-app body.is-dua-route #appView > .view-head,",
-              "html.dar-ios-native-app body.is-topics-route #appView > .view-head,",
-              "html.dar-ios-native-app body.is-topic-route #appView > .view-head,",
-              "html.dar-ios-native-app body.is-scholar-route #appView > .view-head{",
-              "  padding-top:0 !important;",
-              "  margin-top:0 !important;",
-              "  padding-left:max(4px,calc(var(--dar-ios-safe-left,0px) + 2px)) !important;",
-              "  padding-right:max(4px,calc(var(--dar-ios-safe-right,0px) + 2px)) !important;",
-              "}",
-              "@media (max-width: 700px){",
-              "  html.dar-ios-native-app #appView,",
-              "  html.dar-ios-native-app #premiumFeedMount{",
-              "    padding-top:0 !important;",
-              "  }",
-              "  html.dar-ios-native-app body.is-area-route:not(.is-library-reader-route) #appView{",
-              "    padding-top:0 !important;",
-              "  }",
-              "  html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen):not(.is-library-reader-route) .view{",
-              "    padding-top:0 !important;",
-              "  }",
-              "  html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen) .view-head{",
-              "    padding-top:0 !important;",
-              "  }",
-              "  html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen) #appView > .view-head{",
-              "    padding-top:0 !important;",
-              "  }",
-              "  html.dar-ios-native-app body.is-feed-fullscreen .sf-top{",
-              "    padding-top:0 !important;",
-              "  }",
-              "}",
-              "@media (orientation: landscape){",
-              "  html.dar-ios-native-app #appView,",
-              "  html.dar-ios-native-app #premiumFeedMount{",
-              "    padding-top:0 !important;",
-              "  }",
-              "  html.dar-ios-native-app body.is-area-route:not(.is-library-reader-route) #appView{",
-              "    padding-top:0 !important;",
-              "  }",
-              "  html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen):not(.is-library-reader-route) .view{",
-              "    padding-top:0 !important;",
-              "    padding-left:max(18px,calc(var(--dar-ios-safe-left,0px) + 12px)) !important;",
-              "    padding-right:max(18px,calc(var(--dar-ios-safe-right,0px) + 12px)) !important;",
-              "  }",
-              "  html.dar-ios-native-app body.is-feed-fullscreen .sf-top{",
-              "    padding-top:0 !important;",
-              "  }",
-              "}"
-            ].joined(separator: "\\n");
-            if(document.head)document.head.appendChild(style);
-          }
-          function applyClass(){
-            var root=document.documentElement;
-            if(root)root.classList.add("dar-ios-native-app");
+            style.textContent=cssText();
+            if(root){
+              root.classList.add("dar-ios-native-app");
+              /* Prefer compact phone layout in the wrapper so adaptive caps cannot shrink pages. */
+              if(root.getAttribute("data-layout")==="medium"||root.getAttribute("data-layout")==="expanded"){
+                root.setAttribute("data-layout","compact");
+              }
+            }
             if(document.body)document.body.classList.add("dar-ios-native-app");
+            if(document.head)document.head.appendChild(style);
+            var feedForce=document.getElementById("full-edge-feed-force-v643");
+            if(feedForce&&document.head)document.head.appendChild(feedForce);
           }
-          if(document.readyState === "loading"){
-            document.addEventListener("DOMContentLoaded", function(){ ensureStyle(); applyClass(); }, { once:true });
-          } else {
+          function pinFeedNodes(){
+            if(!document.body||!document.body.classList.contains("is-feed-fullscreen"))return;
+            var nodes=document.querySelectorAll(".sf-app,.sf-top,.sf-filters,.sf-feed,.sf-post,#premiumFeedMount,.pf-mount-root");
+            for(var i=0;i<nodes.length;i++){
+              var el=nodes[i];
+              el.style.setProperty("width","100%","important");
+              el.style.setProperty("max-width","100%","important");
+              el.style.setProperty("margin-left","0px","important");
+              el.style.setProperty("margin-right","0px","important");
+            }
+            var gutters=document.querySelectorAll(".sf-top,.sf-filters,.sf-feed");
+            for(var j=0;j<gutters.length;j++){
+              gutters[j].style.setProperty("padding-left","max(8px,env(safe-area-inset-left,0px))","important");
+              gutters[j].style.setProperty("padding-right","max(8px,env(safe-area-inset-right,0px))","important");
+            }
+          }
+          window.__darIosEnsureViewportPolish=function(){
             ensureStyle();
-            applyClass();
+            pinFeedNodes();
+          };
+          if(document.readyState==="loading"){
+            document.addEventListener("DOMContentLoaded", window.__darIosEnsureViewportPolish, {once:true});
+          } else {
+            window.__darIosEnsureViewportPolish();
           }
-          window.addEventListener("pageshow", function(){ ensureStyle(); applyClass(); });
-          window.addEventListener("hashchange", function(){ setTimeout(function(){ ensureStyle(); applyClass(); }, 30); });
+          window.addEventListener("pageshow", window.__darIosEnsureViewportPolish);
+          window.addEventListener("hashchange", function(){ setTimeout(window.__darIosEnsureViewportPolish, 30); });
+          try{
+            var mo=new MutationObserver(function(muts){
+              var need=false;
+              for(var i=0;i<muts.length;i++){
+                var m=muts[i];
+                if(m.type==="childList"){ need=true; break; }
+                if(m.type==="attributes"&&m.attributeName==="class"){ need=true; break; }
+              }
+              if(!need)return;
+              clearTimeout(window.__darIosFeedPinTimer);
+              window.__darIosFeedPinTimer=setTimeout(window.__darIosEnsureViewportPolish, 60);
+            });
+            mo.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:["class"]});
+          }catch(e){}
         })();
         """
         let libraryReaderBridge = """
@@ -310,32 +428,32 @@ struct WebAppView: UIViewRepresentable {
               style.id="dar-ios-library-detail-polish";
             }
             style.textContent = [
-              "html body .lib-page.lib-detail{",
+              "html.dar-ios-native-app body .lib-page.lib-detail{",
               "  padding-top: 0 !important;",
               "}",
-              "html body .lib-page.lib-detail .lib-detail-hero.lib-detail-hero-compact{",
+              "html.dar-ios-native-app body .lib-page.lib-detail .lib-detail-hero.lib-detail-hero-compact{",
               "  margin-top: 0 !important;",
-              "  padding-top: 34px !important;",
-              "  gap: 20px !important;",
+              "  padding-top: 8px !important;",
+              "  gap: 18px !important;",
               "}",
-              "html body .lib-page.lib-detail .lib-detail-cover{",
-              "  margin-top: 46px !important;",
+              "html.dar-ios-native-app body .lib-page.lib-detail .lib-detail-cover{",
+              "  margin-top: 18px !important;",
               "}",
-              "html body .lib-page.lib-detail .lib-detail-copy{",
-              "  padding-top: 10px !important;",
+              "html.dar-ios-native-app body .lib-page.lib-detail .lib-detail-copy{",
+              "  padding-top: 8px !important;",
               "}",
-              "html body .lib-page.lib-detail .lib-actions.lib-actions-compact{",
-              "  margin-top: 16px !important;",
+              "html.dar-ios-native-app body .lib-page.lib-detail .lib-actions.lib-actions-compact{",
+              "  margin-top: 14px !important;",
               "}",
               "@media (max-width: 520px){",
-              "  html body .lib-page.lib-detail .lib-detail-hero.lib-detail-hero-compact{",
-              "    padding-top: 28px !important;",
+              "  html.dar-ios-native-app body .lib-page.lib-detail .lib-detail-hero.lib-detail-hero-compact{",
+              "    padding-top: 6px !important;",
               "  }",
-              "  html body .lib-page.lib-detail .lib-detail-cover{",
-              "    margin-top: 28px !important;",
+              "  html.dar-ios-native-app body .lib-page.lib-detail .lib-detail-cover{",
+              "    margin-top: 14px !important;",
               "  }",
               "}"
-            ].joined(separator: "\\n");
+            ].join("\\n");
             if(document.head)document.head.appendChild(style);
           }
           if(document.readyState === "loading"){
@@ -347,13 +465,6 @@ struct WebAppView: UIViewRepresentable {
           window.addEventListener("hashchange", function(){ setTimeout(ensureStyle, 40); });
         })();
         """
-        userContentController.addUserScript(
-            WKUserScript(
-                source: iosViewportPolish,
-                injectionTime: .atDocumentStart,
-                forMainFrameOnly: true
-            )
-        )
         userContentController.addUserScript(
             WKUserScript(
                 source: iosViewportPolish,
@@ -395,7 +506,7 @@ struct WebAppView: UIViewRepresentable {
               if(!element)continue;
               var style=getComputedStyle(element);
               var color=toHex(style.backgroundColor);
-              if(color && color !== "#000000")return color;
+              if(color && color !== "#00000000")return color;
             }
             return "";
           }
@@ -406,17 +517,18 @@ struct WebAppView: UIViewRepresentable {
               var style=getComputedStyle(element);
               for(var j=0;j<names.length;j++){
                 var color=toHex(style.getPropertyValue(names[j]));
-                if(color && color !== "#000000")return color;
+                if(color)return color;
               }
             }
             return "";
           }
           function publishAppearance(){
-            var roots=[document.body, document.documentElement, document.querySelector('.app'), document.querySelector('#appShell')];
+            // Theme-only: never inject hardcoded navy/blue route palettes.
+            var roots=[document.body, document.documentElement, document.querySelector('.app'), document.querySelector('#appShell'), document.querySelector('#appView')];
             var topColor=firstVariableColor(roots, [
               "--theme-page-bg",
-              "--ilm-page-bg",
               "--theme-feed-bg",
+              "--ilm-page-bg",
               "--page-cover-mid",
               "--page-cover",
               "--outer-bg-flat",
@@ -425,6 +537,18 @@ struct WebAppView: UIViewRepresentable {
             ]);
             if(!topColor){
               topColor=firstSolidColor([".sf-top", ".lib-page", "#appView > .view-head", "#appView > .view", "body", "html"]);
+            }
+            var midColor=firstVariableColor(roots, [
+              "--theme-feed-bg",
+              "--page-cover-mid",
+              "--theme-page-bg",
+              "--ilm-page-bg",
+              "--page-cover",
+              "--bg2",
+              "--bg"
+            ]);
+            if(!midColor){
+              midColor=firstSolidColor(["#appView > .view-head", ".sf-top", ".lib-page", "#appView > .view", "body"]) || topColor;
             }
             var bottomColor=firstVariableColor(roots, [
               "--outer-bg-flat",
@@ -436,12 +560,14 @@ struct WebAppView: UIViewRepresentable {
               "--bg"
             ]);
             if(!bottomColor){
-              bottomColor=firstSolidColor(["#appView > .view", ".lib-page", "body", "html"]);
+              bottomColor=firstSolidColor(["#appView > .view", ".lib-page", "body", "html"]) || topColor;
             }
+            var boot="#050504";
             try{
               window.webkit.messageHandlers.darAppearance.postMessage({
-                top: topColor || "#31455f",
-                bottom: bottomColor || topColor || "#0a1320"
+                top: topColor || boot,
+                mid: midColor || topColor || boot,
+                bottom: bottomColor || topColor || boot
               });
             }catch(e){}
           }
@@ -462,14 +588,7 @@ struct WebAppView: UIViewRepresentable {
             window.__darPublishAppearance();
           }
           window.addEventListener("pageshow", window.__darPublishAppearance);
-          window.addEventListener("hashchange", window.__darPublishAppearance);
-          if(window.MutationObserver){
-            var observer=new MutationObserver(function(){ window.__darPublishAppearance(); });
-            var watchTarget=document.documentElement||document.body;
-            if(watchTarget){
-              observer.observe(watchTarget,{ attributes:true, childList:true, subtree:false, attributeFilter:["class","style"] });
-            }
-          }
+          window.addEventListener("hashchange", function(){ setTimeout(window.__darPublishAppearance, 60); });
         })();
         """
         userContentController.addUserScript(
@@ -481,11 +600,13 @@ struct WebAppView: UIViewRepresentable {
         )
         configuration.userContentController = userContentController
 
+        let bootInk = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
         let containerView = UIView(frame: .zero)
-        containerView.backgroundColor = UIColor(red: 0.22, green: 0.30, blue: 0.40, alpha: 1.0)
+        containerView.backgroundColor = bootInk
 
         let backdropView = GradientBackdropView(frame: .zero)
         backdropView.translatesAutoresizingMaskIntoConstraints = false
+        backdropView.updateColors(top: bootInk, mid: bootInk, bottom: bootInk)
         containerView.addSubview(backdropView)
 
         let webView = InsetAwareWebView(frame: .zero, configuration: configuration)
@@ -493,11 +614,11 @@ struct WebAppView: UIViewRepresentable {
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate = context.coordinator
         webView.scrollView.contentInsetAdjustmentBehavior = .never
-        webView.scrollView.backgroundColor = .clear
+        webView.scrollView.backgroundColor = bootInk
         webView.allowsBackForwardNavigationGestures = true
-        webView.isOpaque = false
-        webView.backgroundColor = .clear
-        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.1"
+        webView.isOpaque = true
+        webView.backgroundColor = bootInk
+        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.16-feed-pin"
         webView.onInsetsChange = { [weak coordinator = context.coordinator] in
             coordinator?.updateViewportInsets()
         }
@@ -512,7 +633,11 @@ struct WebAppView: UIViewRepresentable {
             webView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             webView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
         ])
-        context.coordinator.attach(webView, backdropView: backdropView, containerView: containerView)
+        context.coordinator.attach(
+            webView,
+            backdropView: backdropView,
+            containerView: containerView
+        )
         webView.load(URLRequest(url: Self.launchURL))
         return containerView
     }
@@ -531,6 +656,7 @@ struct WebAppView: UIViewRepresentable {
         private weak var backdropView: GradientBackdropView?
         private weak var containerView: UIView?
         private weak var loadingOverlay: UIView?
+        private var pageSurfaceColor = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
         private weak var loadingLabel: UILabel?
         private weak var loadingProgressFill: UIView?
         private weak var loadingProgressValueLabel: UILabel?
@@ -540,10 +666,15 @@ struct WebAppView: UIViewRepresentable {
         private var loadTimeoutWorkItem: DispatchWorkItem?
         private var loadingProgressTimer: Timer?
         private var loadingProgressValue: CGFloat = 0
+        private var isBootLoadingVisible = false
+        private var hideLoadingWorkItem: DispatchWorkItem?
         private var presentedLibrarySlug: String?
         private var libraryCatalogCache: [LibraryPublication] = []
         private var libraryCatalogTask: Task<[LibraryPublication], Error>?
         private var viewportInsets: UIEdgeInsets = .zero
+        private var viewportInsetWorkItem: DispatchWorkItem?
+        private var lastAppliedTopInset: CGFloat = -1
+        private var lastAppearanceKey: String = ""
         private let errorHTML = """
         <!doctype html>
         <html lang="de">
@@ -570,12 +701,24 @@ struct WebAppView: UIViewRepresentable {
         </html>
         """
 
-        func attach(_ webView: WKWebView, backdropView: GradientBackdropView, containerView: UIView) {
+        func attach(
+            _ webView: WKWebView,
+            backdropView: GradientBackdropView,
+            containerView: UIView
+        ) {
             self.webView = webView
             self.backdropView = backdropView
             self.containerView = containerView
-            installLoadingOverlay(on: webView)
+            installLoadingOverlay(on: containerView)
+            applySurfaceColor(pageSurfaceColor)
+            showLoadingOverlay(subtitle: "App wird geladen")
             updateViewportInsets()
+            DispatchQueue.main.async { [weak self] in
+                self?.updateViewportInsets()
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) { [weak self] in
+                self?.updateViewportInsets()
+            }
             NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(appDidBecomeActive),
@@ -596,6 +739,7 @@ struct WebAppView: UIViewRepresentable {
                 guard let body = message.body as? [String: Any] else { return }
                 applyAppearance(
                     topHex: body["top"] as? String,
+                    midHex: body["mid"] as? String,
                     bottomHex: body["bottom"] as? String
                 )
                 return
@@ -682,26 +826,41 @@ struct WebAppView: UIViewRepresentable {
             hasCompletedInitialLoad = true
             didShowErrorState = false
             hideLoadingOverlay()
+            lastAppliedTopInset = -1
             updateViewportInsets()
-            refreshAppearanceBridge()
+            // Appearance after overlay finishes, so boot screen stays visible until 100%.
             handlePossibleLibraryReaderRoute(currentURL)
         }
 
         func updateViewportInsets() {
+            viewportInsetWorkItem?.cancel()
+            let work = DispatchWorkItem { [weak self] in
+                self?.applyViewportInsetsNow()
+            }
+            viewportInsetWorkItem = work
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05, execute: work)
+        }
+
+        private func applyViewportInsetsNow() {
             guard let webView else { return }
             let resolvedInsets = resolvedSafeAreaInsets(for: webView)
             viewportInsets = resolvedInsets
-            let nativeTopInset = min(24, max(14, resolvedInsets.top * 0.36))
-            if abs(webView.scrollView.contentInset.top - nativeTopInset) > 0.5 {
-                var contentInset = webView.scrollView.contentInset
-                contentInset.top = nativeTopInset
-                webView.scrollView.contentInset = contentInset
 
-                var indicatorInsets = webView.scrollView.verticalScrollIndicatorInsets
-                indicatorInsets.top = nativeTopInset
-                webView.scrollView.verticalScrollIndicatorInsets = indicatorInsets
+            if webView.scrollView.contentInset != .zero {
+                webView.scrollView.contentInset = .zero
             }
-            let top = String(format: "%.2f", resolvedInsets.top)
+            if webView.scrollView.verticalScrollIndicatorInsets != .zero {
+                webView.scrollView.verticalScrollIndicatorInsets = .zero
+            }
+            webView.scrollView.backgroundColor = pageSurfaceColor
+
+            let topInset = max(resolvedInsets.top, 59)
+            if abs(topInset - lastAppliedTopInset) < 0.5, lastAppliedTopInset >= 0 {
+                return
+            }
+            lastAppliedTopInset = topInset
+
+            let top = String(format: "%.2f", topInset)
             let right = String(format: "%.2f", resolvedInsets.right)
             let bottom = String(format: "%.2f", resolvedInsets.bottom)
             let left = String(format: "%.2f", resolvedInsets.left)
@@ -711,15 +870,29 @@ struct WebAppView: UIViewRepresentable {
               var body=document.body;
               if(!root)return;
               root.classList.add("dar-ios-native-app");
+              root.style.setProperty("--dar-native-safe-top","\(top)px");
               root.style.setProperty("--safe-top","\(top)px");
-              root.style.setProperty("--safe-bottom","\(bottom)px");
+              var bottomNative=\(bottom);
+              if(bottomNative > 1){
+                root.style.setProperty("--dar-native-safe-bottom", bottomNative.toFixed(2) + "px");
+                root.style.setProperty("--safe-bottom", bottomNative.toFixed(2) + "px");
+              } else {
+                root.style.removeProperty("--dar-native-safe-bottom");
+                root.style.removeProperty("--safe-bottom");
+              }
               root.style.setProperty("--dar-ios-safe-left","\(left)px");
               root.style.setProperty("--dar-ios-safe-right","\(right)px");
               if(body)body.classList.add("dar-ios-native-app");
-              var polish=document.getElementById("dar-ios-viewport-polish");
-              if(polish&&document.head)document.head.appendChild(polish);
-              var detail=document.getElementById("dar-ios-library-detail-polish");
-              if(detail&&document.head)document.head.appendChild(detail);
+              if(typeof window.__darIosEnsureViewportPolish==="function"){
+                window.__darIosEnsureViewportPolish();
+              }
+              var meta=document.querySelector('meta[name="viewport"]');
+              if(meta){
+                var content=String(meta.getAttribute("content")||"");
+                if(content.indexOf("viewport-fit=cover")===-1){
+                  meta.setAttribute("content", content + (content?",":"") + "viewport-fit=cover");
+                }
+              }
             })();
             """
             webView.evaluateJavaScript(js, completionHandler: nil)
@@ -732,13 +905,32 @@ struct WebAppView: UIViewRepresentable {
             )
         }
 
-        private func applyAppearance(topHex: String?, bottomHex: String?) {
-            let topColor = color(from: topHex) ?? UIColor(red: 0.19, green: 0.27, blue: 0.37, alpha: 1.0)
-            let bottomColor = color(from: bottomHex) ?? UIColor(red: 0.04, green: 0.08, blue: 0.14, alpha: 1.0)
-            backdropView?.updateColors(top: topColor, bottom: bottomColor)
-            containerView?.backgroundColor = topColor
-            webView?.scrollView.backgroundColor = topColor
-            webView?.backgroundColor = topColor
+        private func applySurfaceColor(_ color: UIColor) {
+            pageSurfaceColor = color
+            backdropView?.updateColors(top: color, mid: color, bottom: color)
+            containerView?.backgroundColor = color
+            webView?.scrollView.backgroundColor = color
+            webView?.backgroundColor = color
+            webView?.isOpaque = true
+            if #available(iOS 15.0, *) {
+                webView?.underPageBackgroundColor = color
+            }
+            webView?.window?.backgroundColor = color
+            // Keep boot overlay ink while loading, otherwise theme updates hide the progress UI.
+            if !isBootLoadingVisible {
+                loadingOverlay?.backgroundColor = color
+            }
+        }
+
+        private func applyAppearance(topHex: String?, midHex: String?, bottomHex: String?) {
+            let key = "\(topHex ?? "")|\(midHex ?? "")|\(bottomHex ?? "")"
+            guard key != lastAppearanceKey else { return }
+            lastAppearanceKey = key
+            let topColor = color(from: topHex) ?? pageSurfaceColor
+            let midColor = color(from: midHex) ?? topColor
+            let bottomColor = color(from: bottomHex) ?? topColor
+            applySurfaceColor(topColor)
+            backdropView?.updateColors(top: topColor, mid: midColor, bottom: bottomColor)
         }
 
         private func color(from hex: String?) -> UIColor? {
@@ -923,6 +1115,19 @@ struct WebAppView: UIViewRepresentable {
             )
             let nav = UINavigationController(rootViewController: viewer)
             nav.modalPresentationStyle = .fullScreen
+            let pageBlue = UIColor(red: 0.04, green: 0.08, blue: 0.16, alpha: 1.0)
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = pageBlue
+            appearance.titleTextAttributes = [
+                .foregroundColor: UIColor(red: 0.96, green: 0.93, blue: 0.82, alpha: 1.0)
+            ]
+            nav.navigationBar.standardAppearance = appearance
+            nav.navigationBar.scrollEdgeAppearance = appearance
+            nav.navigationBar.compactAppearance = appearance
+            nav.navigationBar.tintColor = UIColor(red: 0.92, green: 0.84, blue: 0.62, alpha: 1.0)
+            nav.navigationBar.isTranslucent = false
+            nav.view.backgroundColor = pageBlue
             presentedLibrarySlug = slug
             presenter.present(nav, animated: true)
         }
@@ -970,22 +1175,11 @@ struct WebAppView: UIViewRepresentable {
         @objc
         private func appDidBecomeActive() {
             guard let webView else { return }
+            updateViewportInsets()
 
             if didShowErrorState {
                 showLoadingOverlay(subtitle: "Erneut laden")
                 webView.load(URLRequest(url: WebAppView.launchURL))
-                return
-            }
-
-            guard hasCompletedInitialLoad else { return }
-
-            guard let currentURL = webView.url else {
-                return
-            }
-
-            if isAllowedInternalURL(currentURL) {
-                showLoadingOverlay(subtitle: "Aktualisieren")
-                webView.reload()
             }
         }
 
@@ -1010,14 +1204,17 @@ struct WebAppView: UIViewRepresentable {
             }
 
             loadTimeoutWorkItem = workItem
-            DispatchQueue.main.asyncAfter(deadline: .now() + 12, execute: workItem)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 25, execute: workItem)
         }
 
-        private func installLoadingOverlay(on webView: WKWebView) {
-            let overlay = UIView(frame: webView.bounds)
+        private func installLoadingOverlay(on host: UIView) {
+            let overlay = UIView(frame: host.bounds)
             overlay.translatesAutoresizingMaskIntoConstraints = false
             overlay.backgroundColor = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
-            overlay.isUserInteractionEnabled = false
+            overlay.isUserInteractionEnabled = true
+            overlay.isHidden = true
+            overlay.alpha = 0
+            overlay.layer.zPosition = 10_000
 
             let stack = UIStackView()
             stack.translatesAutoresizingMaskIntoConstraints = false
@@ -1104,19 +1301,20 @@ struct WebAppView: UIViewRepresentable {
             stack.addArrangedSubview(progressValue)
 
             overlay.addSubview(stack)
-            webView.addSubview(overlay)
+            host.addSubview(overlay)
+            host.bringSubviewToFront(overlay)
 
             NSLayoutConstraint.activate([
-                overlay.leadingAnchor.constraint(equalTo: webView.leadingAnchor),
-                overlay.trailingAnchor.constraint(equalTo: webView.trailingAnchor),
-                overlay.topAnchor.constraint(equalTo: webView.topAnchor),
-                overlay.bottomAnchor.constraint(equalTo: webView.bottomAnchor),
+                overlay.topAnchor.constraint(equalTo: host.topAnchor),
+                overlay.leadingAnchor.constraint(equalTo: host.leadingAnchor),
+                overlay.trailingAnchor.constraint(equalTo: host.trailingAnchor),
+                overlay.bottomAnchor.constraint(equalTo: host.bottomAnchor),
+                emblem.widthAnchor.constraint(equalToConstant: 96),
+                emblem.heightAnchor.constraint(equalToConstant: 96),
                 stack.centerXAnchor.constraint(equalTo: overlay.centerXAnchor),
                 stack.centerYAnchor.constraint(equalTo: overlay.centerYAnchor),
                 stack.leadingAnchor.constraint(greaterThanOrEqualTo: overlay.leadingAnchor, constant: 24),
                 stack.trailingAnchor.constraint(lessThanOrEqualTo: overlay.trailingAnchor, constant: -24),
-                emblem.widthAnchor.constraint(equalToConstant: 96),
-                emblem.heightAnchor.constraint(equalToConstant: 96),
                 progressWrap.widthAnchor.constraint(equalToConstant: 224),
                 progressTrack.leadingAnchor.constraint(equalTo: progressWrap.leadingAnchor),
                 progressTrack.trailingAnchor.constraint(equalTo: progressWrap.trailingAnchor),
@@ -1141,21 +1339,34 @@ struct WebAppView: UIViewRepresentable {
         }
 
         private func showLoadingOverlay(subtitle: String) {
+            hideLoadingWorkItem?.cancel()
+            let bootInk = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
+            isBootLoadingVisible = true
             loadingLabel?.text = subtitle
             guard let overlay = loadingOverlay else { return }
-            overlay.alpha = 1
+            overlay.backgroundColor = bootInk
             overlay.isHidden = false
+            overlay.alpha = 1
+            containerView?.bringSubviewToFront(overlay)
             startLoadingProgress()
         }
 
         private func hideLoadingOverlay() {
             guard let overlay = loadingOverlay else { return }
+            hideLoadingWorkItem?.cancel()
             finishLoadingProgress()
-            UIView.animate(withDuration: 0.22, delay: 0, options: [.curveEaseOut]) {
-                overlay.alpha = 0
-            } completion: { _ in
-                overlay.isHidden = true
+            let work = DispatchWorkItem { [weak self] in
+                guard let self else { return }
+                UIView.animate(withDuration: 0.28, delay: 0, options: [.curveEaseOut]) {
+                    overlay.alpha = 0
+                } completion: { _ in
+                    overlay.isHidden = true
+                    self.isBootLoadingVisible = false
+                    self.refreshAppearanceBridge()
+                }
             }
+            hideLoadingWorkItem = work
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35, execute: work)
         }
 
         private func startLoadingProgress() {
@@ -1227,6 +1438,7 @@ private final class LibraryPDFViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0.04, green: 0.08, blue: 0.16, alpha: 1.0)
         title = titleText
+        overrideUserInterfaceStyle = .dark
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Zurueck",
@@ -1271,6 +1483,8 @@ private final class LibraryPDFViewController: UIViewController {
     deinit {
         loadTask?.cancel()
     }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
 
     @objc
     private func closeTapped() {
