@@ -51,20 +51,18 @@ body{
   pointer-events:none;
 }
 .header-row{
-  display:grid;
-  grid-template-columns:82px minmax(0,1fr) 82px;
-  align-items:center;
-  gap:10px;
+  display:block;
   position:relative;
   z-index:1;
+  min-height:78px;
 }
 .brand-logo{
+  position:absolute;
+  left:8px;
+  top:4px;
   width:72px;
   height:72px;
-  grid-column:1;
-  justify-self:center;
-  margin-top:4px;
-  margin-bottom:0;
+  margin:0;
   border-radius:50%;
   border:1px solid var(--line);
   background:#f9f2e6;
@@ -72,17 +70,17 @@ body{
   box-shadow:0 5px 15px rgba(74,54,24,.10);
 }
 .brand-text{
-  grid-column:2;
   text-align:center;
   min-width:0;
+  padding:0 14px 0 88px;
 }
 .brand-text h1{
   margin:0;
-  font:600 clamp(22px,6.2vw,34px)/1.02 Georgia,"Times New Roman",serif;
-  letter-spacing:.09em;
+  font:600 clamp(25px,6.05vw,40px)/1.02 Georgia,"Times New Roman",serif;
+  letter-spacing:.055em;
   text-transform:uppercase;
   color:var(--ink);
-  text-wrap:balance;
+  white-space:nowrap;
 }
 .brand-text p{
   display:none;
@@ -90,14 +88,15 @@ body{
 .brand-sign{
   position:relative;
   z-index:1;
-  margin:-6px 82px 0;
+  margin:-20px 18px 0 104px;
   text-align:center;
   font-family:"Snell Roundhand","Brush Script MT","Segoe Script",cursive;
-  font-size:clamp(25px,5.8vw,34px);
+  font-size:clamp(31px,8.2vw,48px);
   line-height:1;
   color:#173b39;
-  letter-spacing:.015em;
-  transform:rotate(-1.5deg);
+  letter-spacing:.035em;
+  transform:rotate(-1.5deg) scaleX(1.08);
+  transform-origin:center;
   text-shadow:0 1px 0 rgba(255,255,255,.65),0 8px 22px rgba(174,132,66,.13);
 }
 .source-card{
@@ -304,9 +303,11 @@ body{
 @media (min-width:560px){
   .source-page{padding-left:18px;padding-right:18px}
   .source-header,.source-card,.social{border-radius:24px}
-  .brand-logo{width:76px;height:76px}
-  .header-row{grid-template-columns:88px minmax(0,1fr) 88px}
-  .brand-sign{margin:-7px 88px 0;font-size:34px}
+  .header-row{min-height:84px}
+  .brand-logo{width:76px;height:76px;left:10px;top:4px}
+  .brand-text{padding-left:96px;padding-right:30px}
+  .brand-text h1{font-size:43px}
+  .brand-sign{margin:-18px 28px 0 116px;font-size:50px}
   .source-speaker{font-size:20px}
   .source-quote{font-size:22px}
 }
