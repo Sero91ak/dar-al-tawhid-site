@@ -84,6 +84,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "ios-testflight-wrapper-2026-08-20",
+      "approvedBy": "user-explicit-xcode-testflight-start",
+      "reason": "Nutzerauftrag: iOS/Xcode-App vorbereiten und zunaechst per TestFlight-Link verteilen; nur neuer ios-Bereich.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "ios/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "push-watchdog-yaml-fix-2026-08-19",
       "approvedBy": "user-explicit-autonomous-execute-all",
       "reason": "Watchdog-YAML war ungueltig (ScannerError). Fix + OneSignal-fokussierte Autonomie.",
