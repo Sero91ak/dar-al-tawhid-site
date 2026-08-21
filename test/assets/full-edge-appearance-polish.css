@@ -2,7 +2,7 @@
  * Full-edge appearance polish (visitor + test)
  * iOS-parity: continuous theme fill under status bar, safe-area content, feed full-bleed.
  * Layout / surface only — no theme hue swap (edge-to-edge theme lock stays authoritative).
- * v647 · top color fill + all routes
+ * v648 · iOS Mehr/top match + kill framed .app
  */
 
 :root,
@@ -360,4 +360,22 @@ html[data-theme] body.has-bottom-nav {
     max(env(safe-area-inset-bottom, 0px), var(--dar-native-safe-bottom, 0px)) +
     28px
   ) !important;
+}
+
+
+/* v648 mehr: hide top aura blur (iOS has clean fill) */
+html[data-theme] body.is-more-route .top-edge-fade,
+html[data-theme] body.is-more-route .top-swim-aura,
+html[data-theme] body.is-area-route .top-edge-fade,
+html[data-theme] body.is-area-route .top-swim-aura {
+  display: none !important;
+}
+html[data-theme="royal"] .app,
+html[data-theme="dark"] .app,
+html[data-theme="bordeaux"] .app,
+html[data-theme="dar-al-layl"] .app {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
 }
