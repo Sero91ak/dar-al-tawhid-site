@@ -954,6 +954,11 @@
     return mobile || (touch && narrow);
   }
 
+  function shouldForceRenderedPdfReader() {
+    const ua = String(navigator.userAgent || "");
+    return /DarAlTawhid-iOS-TestFlight/i.test(ua);
+  }
+
   function readerPdfDisplayUrl(page) {
     const pageHash = page ? `#page=${page}` : "";
     if (readerState?.blobUrl) return `${readerState.blobUrl}${pageHash}`;
@@ -1437,7 +1442,11 @@
           const pageInput = reader?.querySelector("[data-library-reader-input]");
           if (pageInput && readerState?.page) pageInput.value = String(readerState.page);
         } else {
-          await initReaderNative(pub);
+          if (shouldForceRenderedPdfReader() || !shouldUseNativePdfViewer()) {
+            await initReader(pub);
+          } else {
+            await initReaderNative(pub);
+          }
           bindReaderControls(pub, getReaderRoot());
         }
       } else {
