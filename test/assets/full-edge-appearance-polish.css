@@ -1,8 +1,8 @@
 /**
  * Full-edge appearance polish (visitor + test)
- * iOS-parity: edge-to-edge shell, safe-area gutters, feed full-bleed, card contrast.
+ * iOS-parity: continuous theme fill under status bar, safe-area content, feed full-bleed.
  * Layout / surface only — no theme hue swap (edge-to-edge theme lock stays authoritative).
- * v645 · home + all routes + feed
+ * v647 · top color fill + all routes
  */
 
 :root,
@@ -17,27 +17,42 @@ html[data-theme] {
   --content-inset: max(12px, env(safe-area-inset-left, 0px));
   --dar-edge-gutter: max(12px, env(safe-area-inset-left, 0px));
   --dar-edge-gutter-right: max(12px, env(safe-area-inset-right, 0px));
+  --dar-edge-fill: var(--theme-page-bg, var(--page-cover, var(--outer-bg-flat, var(--premium-bg, var(--outer-bg, var(--bg))))));
+  --dar-edge-fill-mid: var(--page-cover-mid, var(--dar-edge-fill));
 }
 
-/* Theme page fill — continuous behind safe areas */
+/* Continuous theme ink under status bar / overscroll (iOS backdrop parity) */
 html,
 html[data-theme],
 html body,
-html[data-theme] body {
+html[data-theme] body,
+html[data-theme] #appRoot,
+html[data-theme] #appShell {
   width: 100% !important;
   max-width: 100% !important;
   margin: 0 !important;
   padding-left: 0 !important;
   padding-right: 0 !important;
-  background: var(--theme-page-bg, var(--theme-feed-bg, var(--outer-bg-flat, var(--outer-bg, var(--bg))))) !important;
-  background-color: var(--theme-page-bg, var(--theme-feed-bg, var(--outer-bg-flat, var(--outer-bg, var(--bg))))) !important;
+  background: var(--dar-edge-fill) !important;
+  background-color: var(--dar-edge-fill) !important;
   background-attachment: fixed !important;
   min-height: 100% !important;
   min-height: 100dvh !important;
   box-sizing: border-box !important;
+  overscroll-behavior-y: none !important;
 }
 
-/* Shell: full bleed, no floating phone chrome */
+/* Top color grading plane (behind notch / status) */
+html[data-theme] .top-edge-fade,
+html[data-theme] .top-swim-aura {
+  display: block !important;
+  opacity: 1 !important;
+  background:
+    radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--gold2, #c9a86a) 16%, transparent), transparent 40%),
+    radial-gradient(circle at 88% 4%, color-mix(in srgb, var(--gold2, #c9a86a) 8%, transparent), transparent 36%),
+    linear-gradient(180deg, var(--dar-edge-fill) 0%, var(--dar-edge-fill-mid) 72%, transparent 100%) !important;
+}
+
 html[data-theme] .app,
 html[data-theme] #appShell,
 html[data-theme] #appRoot,
@@ -63,12 +78,35 @@ html[data-theme] .books-library-shell {
 
 html[data-theme] .app,
 html[data-theme] #appShell,
-html[data-theme] #appRoot,
-html[data-theme] .top-shell {
+html[data-theme] #appRoot {
   background: transparent !important;
 }
 
-/* Adaptive medium/expanded must not re-introduce letterbox columns */
+/* Hero shell: same fill as page, flush to top edges */
+html[data-theme] .top-shell,
+html[data-theme] .top-shell.theme-hero-shell {
+  margin: 0 !important;
+  margin-bottom: 4px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  overflow: visible !important;
+  clip-path: none !important;
+}
+
+html[data-theme] .top-shell:before {
+  opacity: 0.55 !important;
+}
+
+html[data-theme] .top-shell .header,
+html[data-theme] .header {
+  padding-top: max(14px, calc(env(safe-area-inset-top, 0px) + 10px)) !important;
+  padding-left: var(--dar-edge-gutter) !important;
+  padding-right: var(--dar-edge-gutter-right) !important;
+  box-sizing: border-box !important;
+}
+
 html[data-layout="medium"] .view,
 html[data-layout="expanded"] .view,
 html[data-layout="medium"] .qov-page,
@@ -91,7 +129,7 @@ html[data-layout="expanded"] .books-library-shell {
   margin-right: 0 !important;
 }
 
-/* ——— Home / Start (was missing) ——— */
+/* Home + generic content gutters */
 html[data-theme] body.is-home-route #appView,
 html[data-theme] body.is-home-route #appView.view,
 html[data-theme] body.is-home-route .view,
@@ -105,12 +143,13 @@ html[data-theme] body:not(.is-feed-fullscreen):not(.is-quran-overview):not(.is-q
   box-shadow: none !important;
 }
 
-/* Area / Quiz / Mehr / Account / Library content gutters */
+/* Mehr / Quiz / Account / Library / Beiträge */
 html[data-theme] body.is-area-route:not(.is-quran-overview):not(.is-quran-reader-route):not(.is-feed-fullscreen):not(.is-ilm-chat-route) #appView,
 html[data-theme] body.is-area-route:not(.is-quran-overview):not(.is-quran-reader-route):not(.is-feed-fullscreen):not(.is-ilm-chat-route) #appView.view,
 html[data-theme] body.is-area-route:not(.is-quran-overview):not(.is-quran-reader-route):not(.is-feed-fullscreen):not(.is-ilm-chat-route) .view,
 html[data-theme] body.is-more-route #appView,
 html[data-theme] body.is-more-route #appView.view,
+html[data-theme] body.is-more-route .more-page,
 html[data-theme] body.is-quiz-route #appView,
 html[data-theme] body.is-quiz-route #appView.view,
 html[data-theme] body.is-account-route #appView,
@@ -119,11 +158,11 @@ html[data-theme] body.is-library-route #appView,
 html[data-theme] body.is-library-route #appView.view {
   padding-left: var(--dar-edge-gutter) !important;
   padding-right: var(--dar-edge-gutter-right) !important;
+  padding-top: max(8px, env(safe-area-inset-top, 0px)) !important;
   box-sizing: border-box !important;
   background: transparent !important;
 }
 
-/* Shared card contrast after full-bleed (theme tokens only) */
 html[data-theme] body:not(.is-feed-fullscreen) .folder-card,
 html[data-theme] body:not(.is-feed-fullscreen) .list-card,
 html[data-theme] body:not(.is-feed-fullscreen) .post-card,
@@ -136,14 +175,20 @@ html[data-theme] body:not(.is-feed-fullscreen) .more-page .feature-section {
   background: color-mix(in srgb, var(--card) 78%, var(--bg) 22%) !important;
 }
 
-/* ——— Qurʾān overview ——— */
+/* Qurʾān overview */
+html[data-theme] body.is-quran-overview,
 html[data-theme] body.is-quran-overview #appView,
 html[data-theme] body.is-quran-overview #appView.view {
   padding-left: 0 !important;
   padding-right: 0 !important;
   width: 100% !important;
   max-width: 100% !important;
-  background: var(--quran-gradient-page, var(--quran-page-bg, var(--bg))) !important;
+  background: var(--quran-gradient-page, var(--quran-page-bg, var(--dar-edge-fill))) !important;
+  background-color: var(--quran-page-bg, var(--dar-edge-fill)) !important;
+}
+
+html[data-theme] body.is-quran-overview #appView.view {
+  padding-top: max(6px, env(safe-area-inset-top, 0px)) !important;
 }
 
 html[data-theme] body.is-quran-overview .qov-page {
@@ -178,7 +223,7 @@ html[data-theme] body.is-quran-overview .qov-resume-card {
   border-color: color-mix(in srgb, var(--line2) 70%, var(--gold2) 16%) !important;
 }
 
-/* ——— Feed fullscreen ——— */
+/* Feed fullscreen */
 html[data-theme] body.is-feed-fullscreen,
 body.is-feed-fullscreen {
   --sf-feed-col-max: 100% !important;
@@ -191,7 +236,9 @@ body.is-feed-fullscreen {
   --sf-card-gap: 12px !important;
   padding-left: 0 !important;
   padding-right: 0 !important;
-  background: var(--theme-feed-bg, var(--outer-bg, var(--bg))) !important;
+  padding-top: max(0px, env(safe-area-inset-top, 0px)) !important;
+  background: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
+  background-color: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
 }
 
 html[data-theme] body.is-feed-fullscreen #appView,
@@ -205,7 +252,7 @@ html[data-theme] body.is-feed-fullscreen .pf-mount-root {
   padding-left: 0 !important;
   padding-right: 0 !important;
   border-radius: 0 !important;
-  background: var(--theme-feed-bg, var(--outer-bg, var(--bg))) !important;
+  background: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
 }
 
 html[data-theme] body.is-feed-fullscreen .sf-app {
@@ -218,7 +265,7 @@ html[data-theme] body.is-feed-fullscreen .sf-app {
   padding-left: 0 !important;
   padding-right: 0 !important;
   border-radius: 0 !important;
-  background: var(--theme-feed-bg, var(--outer-bg, var(--bg))) !important;
+  background: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
 }
 
 html[data-theme] body.is-feed-fullscreen .sf-top,
@@ -238,8 +285,8 @@ html[data-theme] body.is-feed-fullscreen .pf-feed {
 html[data-theme] body.is-feed-fullscreen .sf-top {
   left: 0 !important;
   right: 0 !important;
-  background: var(--theme-feed-top, var(--theme-feed-bg, var(--bg))) !important;
-  background-color: var(--theme-feed-bg, var(--bg)) !important;
+  background: var(--theme-feed-top, var(--theme-feed-bg, var(--dar-edge-fill))) !important;
+  background-color: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
 }
 
 html[data-theme] body.is-feed-fullscreen .sf-top-modes,
@@ -296,7 +343,7 @@ html[data-theme] body.is-feed-fullscreen .feed-bar {
   }
 }
 
-/* Bottom nav: safe-area insets, no narrow centered column */
+/* Floating bottom nav like iOS (overrides full-bleed lock) */
 html[data-theme] #bottomNav.bottom-nav,
 html[data-theme] .bottom-nav {
   left: max(12px, env(safe-area-inset-left, 0px)) !important;
@@ -304,6 +351,7 @@ html[data-theme] .bottom-nav {
   width: auto !important;
   max-width: none !important;
   transform: none !important;
+  bottom: max(14px, calc(env(safe-area-inset-bottom, 0px) + 8px)) !important;
 }
 
 html[data-theme] body.has-bottom-nav {
