@@ -1,0 +1,206 @@
+/**
+ * Full-edge appearance polish (visitor + test)
+ * Matches iOS wrapper conversion: edge-to-edge layout + subtle card contrast lift.
+ * Layout only for shell; card surfaces use theme tokens (no theme hue swap).
+ * v643 · feed / quran / area routes
+ */
+
+:root,
+html[data-theme] {
+  --layout-content-max: 100%;
+  --layout-reader-max: 100%;
+  --layout-shell-max: 100%;
+  --layout-feed-max: 100%;
+  --layout-navigation-max: 100%;
+  --sf-feed-col-max: 100%;
+  --feed-col-max: 100%;
+}
+
+/* Adaptive caps must not shrink phone/tablet shells */
+html[data-layout="medium"] .view,
+html[data-layout="expanded"] .view,
+html[data-layout="medium"] .qov-page,
+html[data-layout="expanded"] .qov-page,
+html[data-layout="medium"] .more-page,
+html[data-layout="expanded"] .more-page,
+html[data-layout="medium"] .quiz-home,
+html[data-layout="expanded"] .quiz-home,
+html[data-layout="medium"] .quiz-shell,
+html[data-layout="expanded"] .quiz-shell,
+html[data-layout="medium"] .account-page,
+html[data-layout="expanded"] .account-page,
+html[data-layout="medium"] .lib-page,
+html[data-layout="expanded"] .lib-page,
+html[data-layout="medium"] .books-library-shell,
+html[data-layout="expanded"] .books-library-shell {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Area routes: content gutters = safe-area only */
+body.is-area-route:not(.is-quran-overview):not(.is-quran-reader-route):not(.is-feed-fullscreen):not(.is-ilm-chat-route) #appView,
+body.is-area-route:not(.is-quran-overview):not(.is-quran-reader-route):not(.is-feed-fullscreen):not(.is-ilm-chat-route) #appView.view,
+body.is-area-route:not(.is-quran-overview):not(.is-quran-reader-route):not(.is-feed-fullscreen):not(.is-ilm-chat-route) .view {
+  padding-left: max(12px, env(safe-area-inset-left, 0px)) !important;
+  padding-right: max(12px, env(safe-area-inset-right, 0px)) !important;
+  box-sizing: border-box !important;
+}
+
+/* Shared card contrast after full-bleed */
+body.is-area-route:not(.is-feed-fullscreen) .folder-card,
+body.is-area-route:not(.is-feed-fullscreen) .list-card,
+body.is-area-route:not(.is-feed-fullscreen) .post-card,
+body.is-area-route:not(.is-feed-fullscreen) .info-card,
+body.is-area-route:not(.is-feed-fullscreen) .feature-card,
+body.is-area-route:not(.is-feed-fullscreen) .feature-section {
+  background: color-mix(in srgb, var(--card) 78%, var(--bg) 22%) !important;
+}
+
+/* ——— Qurʾān overview ——— */
+body.is-quran-overview #appView,
+body.is-quran-overview #appView.view {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  background: var(--quran-gradient-page, var(--quran-page-bg, var(--bg))) !important;
+}
+
+body.is-quran-overview .qov-page {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding-left: max(12px, env(safe-area-inset-left, 0px)) !important;
+  padding-right: max(12px, env(safe-area-inset-right, 0px)) !important;
+  box-sizing: border-box !important;
+  background: transparent !important;
+}
+
+body.is-quran-overview #quranSurahGrid .quran-surah-card {
+  background: color-mix(in srgb, var(--card) 72%, var(--bg) 28%) !important;
+  border-color: color-mix(in srgb, var(--line2) 68%, var(--gold2) 20%) !important;
+  box-shadow:
+    0 8px 18px color-mix(in srgb, #000 18%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #fff 6%, transparent) !important;
+}
+
+body.is-quran-overview #quranSurahGrid .quran-surah-card .quran-num,
+body.is-quran-overview #quranSurahGrid .quran-surah-card .qov-row-num {
+  background: color-mix(in srgb, var(--gold2) 12%, var(--card)) !important;
+  border-color: color-mix(in srgb, var(--gold2) 28%, var(--line2)) !important;
+}
+
+body.is-quran-overview .qov-search-shell,
+body.is-quran-overview .qov-direct--compact,
+body.is-quran-overview .qov-segment-bar,
+body.is-quran-overview .qov-resume-card {
+  background: color-mix(in srgb, var(--card) 58%, var(--bg) 42%) !important;
+  border-color: color-mix(in srgb, var(--line2) 70%, var(--gold2) 16%) !important;
+}
+
+/* ——— Feed fullscreen ——— */
+html[data-theme] body.is-feed-fullscreen,
+body.is-feed-fullscreen {
+  --sf-feed-col-max: 100% !important;
+  --feed-col-max: 100% !important;
+  --layout-feed-max: 100% !important;
+  --sf-shell-pad: 0px !important;
+  --sf-gutter-left: max(8px, env(safe-area-inset-left, 0px)) !important;
+  --sf-gutter-right: max(8px, env(safe-area-inset-right, 0px)) !important;
+  --sf-card-radius: 16px !important;
+  --sf-card-gap: 12px !important;
+}
+
+html[data-theme] body.is-feed-fullscreen #appView,
+html[data-theme] body.is-feed-fullscreen #appView.view,
+html[data-theme] body.is-feed-fullscreen .view,
+html[data-theme] body.is-feed-fullscreen #premiumFeedMount,
+html[data-theme] body.is-feed-fullscreen .pf-mount-root,
+html[data-theme] body.is-feed-fullscreen .sf-app {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border-radius: 0 !important;
+  background: var(--theme-feed-bg, var(--outer-bg, var(--bg))) !important;
+}
+
+html[data-theme] body.is-feed-fullscreen .sf-top,
+html[data-theme] body.is-feed-fullscreen .sf-filters,
+html[data-theme] body.is-feed-fullscreen .sf-feed {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: var(--sf-gutter-left) !important;
+  padding-right: var(--sf-gutter-right) !important;
+  box-sizing: border-box !important;
+}
+
+html[data-theme] body.is-feed-fullscreen .sf-top {
+  background: var(--theme-feed-top, var(--theme-feed-bg, var(--bg))) !important;
+  background-color: var(--theme-feed-bg, var(--bg)) !important;
+}
+
+html[data-theme] body.is-feed-fullscreen .sf-top-modes,
+html[data-theme] body.is-feed-fullscreen .sf-mode-switch,
+html[data-theme] body.is-feed-fullscreen .sf-segment,
+html[data-theme] body.is-feed-fullscreen .sf-tabs {
+  width: 100% !important;
+  max-width: 100% !important;
+  background: color-mix(in srgb, var(--card) 62%, var(--theme-feed-bg, var(--bg)) 38%) !important;
+  border-color: color-mix(in srgb, var(--line2) 70%, var(--gold2) 16%) !important;
+}
+
+html[data-theme] body.is-feed-fullscreen .sf-post {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  border-radius: var(--sf-card-radius) !important;
+  background: color-mix(in srgb, var(--card) 70%, var(--theme-feed-bg, var(--bg)) 30%) !important;
+  border: 1px solid color-mix(in srgb, var(--line2) 72%, var(--gold2) 14%) !important;
+  box-shadow: 0 10px 24px color-mix(in srgb, #000 18%, transparent) !important;
+}
+
+html[data-theme] body.is-feed-fullscreen .sf-post__media,
+html[data-theme] body.is-feed-fullscreen .sf-post__scene,
+html[data-theme] body.is-feed-fullscreen .sf-post__bg,
+html[data-theme] body.is-feed-fullscreen .sf-post__img,
+html[data-theme] body.is-feed-fullscreen .sf-post__media--feed-img {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+html[data-theme] body.is-feed-fullscreen .sf-post__head,
+html[data-theme] body.is-feed-fullscreen .sf-post__footer,
+html[data-theme] body.is-feed-fullscreen .sf-post__actions {
+  background: color-mix(in srgb, var(--card) 58%, var(--theme-feed-bg, var(--bg)) 42%) !important;
+}
+
+/* Kill narrow centered feed column on all widths */
+@media (min-width: 600px) {
+  html[data-theme] body.is-feed-fullscreen .sf-feed,
+  html[data-theme] body.is-feed-fullscreen .sf-top,
+  html[data-theme] body.is-feed-fullscreen .sf-filters {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: var(--sf-gutter-left) !important;
+    padding-right: var(--sf-gutter-right) !important;
+  }
+
+  html[data-theme] body.is-feed-fullscreen #bottomNav.bottom-nav {
+    left: max(14px, env(safe-area-inset-left, 0px)) !important;
+    right: max(14px, env(safe-area-inset-right, 0px)) !important;
+    width: auto !important;
+    max-width: none !important;
+    transform: none !important;
+  }
+}

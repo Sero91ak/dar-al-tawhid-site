@@ -6,16 +6,16 @@
 
 :root,
 html[data-theme] {
-  --layout-content-max: 920px;
-  --layout-reader-max: 760px;
-  --layout-navigation-max: 800px;
+  --layout-content-max: 100%;
+  --layout-reader-max: 100%;
+  --layout-navigation-max: 100%;
   --layout-card-min: 250px;
   --layout-page-gutter: clamp(12px, 2.4vw, 28px);
   --layout-rail-width: 0px;
   --layout-shell-max: 100%;
   --layout-form-max: 640px;
   --layout-dialog-max: 560px;
-  --layout-feed-max: 680px;
+  --layout-feed-max: 100%;
   --library-card-min: 250px;
   --layout-vv-height: 100dvh;
   --layout-vv-offset-top: 0px;
@@ -34,9 +34,9 @@ html[data-theme] {
   :root,
   html[data-theme] {
     --layout-shell-max: 100%;
-    --layout-content-max: min(1080px, 100%);
-    --layout-reader-max: min(820px, 100%);
-    --layout-navigation-max: min(860px, calc(100vw - 28px));
+    --layout-content-max: 100%;
+    --layout-reader-max: 100%;
+    --layout-navigation-max: 100%;
     --layout-page-gutter: clamp(14px, 2.2vw, 28px);
   }
 }
@@ -53,9 +53,9 @@ html[data-layout="expanded"] {
   :root,
   html[data-theme],
   html[data-layout="expanded"] {
-    --layout-content-max: min(1180px, 100%);
-    --layout-reader-max: min(760px, 100%);
-    --layout-navigation-max: min(920px, calc(100vw - 28px));
+    --layout-content-max: 100%;
+    --layout-reader-max: 100%;
+    --layout-navigation-max: 100%;
   }
 }
 
@@ -282,7 +282,7 @@ html.is-layout-landscape[data-layout="medium"] .app {
   html[data-layout="medium"] .books-library-shell,
   html[data-layout="medium"] .more-page,
   html[data-layout="medium"] .account-page {
-    max-width: min(1080px, 100%);
+    max-width: 100%;
   }
 }
 

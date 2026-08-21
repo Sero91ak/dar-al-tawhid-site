@@ -5,13 +5,26 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v640";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v641";</script>
 <script>/* VISUAL_PAST_PURGE_V588: alte Optik-Caches löschen – aktuelle Darstellung bleibt Autorität */(function(){var BUILD=String(window.__DAR_EXPECTED_BUILD||"");var KEY="dar_visual_authority_build_v1";var ONCE="dar_visual_past_purge_once_v588";function num(id){var m=String(id||"").match(/v(\d+)/);return m?parseInt(m[1],10):0}function wipe(){if(!("caches"in window))return Promise.resolve();return caches.keys().then(function(keys){return Promise.all(keys.filter(function(k){return /^dar-al-tawhid-offline-light-/i.test(k)}).map(function(k){return caches.delete(k)}))})}function bustReload(tag){try{if(sessionStorage.getItem(ONCE)===BUILD+"|"+tag)return;sessionStorage.setItem(ONCE,BUILD+"|"+tag)}catch(e){}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?"+tag+"="+Date.now()+h)}try{var prev=localStorage.getItem(KEY)||"";var localN=num(BUILD);var prevN=num(prev);if(prevN>localN&&localN>0){wipe().then(function(){if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){try{g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}catch(e){}}).catch(function(){})}bustReload("visual-stale")}).catch(function(){bustReload("visual-stale")});return}if(localN>prevN){wipe().then(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}bustReload("visual-new")}).catch(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}});return}if(!prev&&BUILD){try{localStorage.setItem(KEY,BUILD)}catch(e){}}if(localN>0&&"caches"in window){caches.keys().then(function(keys){keys.forEach(function(k){if(!/^dar-al-tawhid-offline-light-/i.test(k))return;var kn=num(k);if(kn&&kn<localN)caches.delete(k)})}).catch(function(){})}}catch(e){}try{var path=String(location.pathname||"");var ver=path.indexOf("/test")===0?"/test/version.json":"/version.json";fetch(ver,{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(remote){if(!remote||!remote.buildId)return;var remoteN=num(remote.buildId);if(remoteN>localN&&localN>0){wipe().then(function(){bustReload("visual-remote")}).catch(function(){bustReload("visual-remote")})}}).catch(function(){})}catch(e){}})();</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="/assets/live-boot.js?v=590"></script>
 <script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
+<style id="dar-library-detail-v641">
+.lib-page.lib-detail .lib-detail-hero{
+  align-items:center;
+}
+.lib-page.lib-detail .lib-detail-cover{
+  margin-top:clamp(10px,2.4vw,20px);
+}
+@media (max-width: 520px){
+  .lib-page.lib-detail .lib-detail-cover{
+    margin-top:16px;
+  }
+}
+</style>
 
 <title>Dar Test</title>
 
@@ -8904,7 +8917,7 @@ html[data-theme] body.is-feed-fullscreen .sf-filters{
 }
 @media(min-width:600px){
   html[data-theme] body.is-feed-fullscreen :is(.sf-top,.sf-filters,.sf-feed){
-    max-width:var(--feed-col-max,520px)!important;
+    max-width:var(--feed-col-max,100%)!important;
     width:100%!important;
     margin-left:auto!important;
     margin-right:auto!important;
@@ -8912,8 +8925,8 @@ html[data-theme] body.is-feed-fullscreen .sf-filters{
   html[data-theme] body.is-feed-fullscreen #bottomNav.bottom-nav{
     left:50%!important;
     right:auto!important;
-    width:min(var(--feed-col-max,520px),calc(100% - 16px))!important;
-    max-width:min(var(--feed-col-max,520px),calc(100% - 16px))!important;
+    width:auto!important;
+    max-width:auto!important;
     transform:translateX(-50%)!important;
   }
 }
@@ -8940,18 +8953,18 @@ html[data-theme] body.is-feed-fullscreen .sf-post__textpanel{
   --feed-col-max:100%;
 }
 @media(min-width:600px) and (max-width:767px){
-  :root{--feed-col-max:min(100%,520px);}
+  :root{--feed-col-max:100%;}
 }
 @media(min-width:768px) and (max-width:1023px){
-  :root{--feed-col-max:min(100%,480px);}
+  :root{--feed-col-max:100%;}
 }
 @media(min-width:1024px){
-  :root{--feed-col-max:420px;}
+  :root{--feed-col-max:100%;}
 }
 html[data-theme] body.is-feed-fullscreen .sf-app{
   display:flex!important;
   flex-direction:column!important;
-  align-items:center!important;
+  align-items:stretch!important;
 }
 html[data-theme] body.is-feed-fullscreen .sf-feed{
   gap:12px!important;
@@ -9851,7 +9864,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-app.js?v=20" defer></script>
 <script src="/assets/focus-feed-app.js?v=6" defer></script>
 <script src="/assets/html2canvas.min.js" defer></script>
-<script src="/assets/premium-feed-app.js?v=92" defer></script>
+<script src="/assets/premium-feed-app.js?v=94" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <script src="/assets/adaptive-layout.js?v=8" defer></script>
 <script src="/assets/fold-split.js?v=2" defer></script>
@@ -11409,7 +11422,8 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/scholars-index.css?v=587">
 <link rel="preload" href="/test/data/prophets/index.json" as="fetch" crossorigin>
 <link rel="stylesheet" href="/test/assets/prophets/prophets.css?v=17">
-<link rel="stylesheet" href="/assets/adaptive-layout.css?v=627">
+<link rel="stylesheet" href="/assets/adaptive-layout.css?v=642">
+<link rel="stylesheet" href="/assets/full-edge-appearance-polish.css?v=643">
 <link rel="stylesheet" href="/assets/fold-split.css?v=2">
 <style id="typography-compact-fix-v310">
 /* Finale Typografie-Korrektur — gewinnt gegen Home-Compact-Overrides */
@@ -24997,7 +25011,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v640";
+const APP_BUILD_ID="app-shell-v641";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -25350,7 +25364,7 @@ function ensureLibraryModule(){
     }
     if(window.DARLibraryApp){window.__libraryAssetsReady=true;resolve(window.DARLibraryApp);return}
     const s=document.createElement("script");
-    s.src=`${base}/assets/library/library-app.js?v=29`;
+    s.src=`${base}/assets/library/library-app.js?v=30`;
     s.defer=true;
     s.onload=()=>{window.__libraryAssetsReady=true;resolve(window.DARLibraryApp)};
     s.onerror=reject;
@@ -26959,6 +26973,105 @@ document.addEventListener("DOMContentLoaded", function () {
     if (window.DARProphets && typeof DARProphets.prefetch === "function") DARProphets.prefetch();
   } catch (e) {}
 });
+</script>
+
+
+<style id="full-edge-feed-force-v643">
+/* v643 · Feed full-bleed force (wins over premium-feed runtime CSS) */
+html[data-theme] body.is-feed-fullscreen,
+html[data-theme] body.is-feed-fullscreen .sf-app,
+body.is-feed-fullscreen .sf-app{
+  align-items:stretch!important;
+  width:100%!important;
+  max-width:100%!important;
+}
+body.is-feed-fullscreen{
+  --sf-feed-col-max:100%!important;
+  --feed-col-max:100%!important;
+  --layout-feed-max:100%!important;
+  --sf-shell-pad:0px!important;
+  --sf-gutter-left:max(8px,env(safe-area-inset-left,0px))!important;
+  --sf-gutter-right:max(8px,env(safe-area-inset-right,0px))!important;
+  --sf-card-radius:16px!important;
+  --sf-card-gap:10px!important;
+}
+html[data-theme] body.is-feed-fullscreen .sf-top,
+html[data-theme] body.is-feed-fullscreen .sf-filters,
+html[data-theme] body.is-feed-fullscreen .sf-feed,
+body.is-feed-fullscreen .sf-top,
+body.is-feed-fullscreen .sf-filters,
+body.is-feed-fullscreen .sf-feed{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:var(--sf-gutter-left)!important;
+  padding-right:var(--sf-gutter-right)!important;
+  box-sizing:border-box!important;
+}
+@media(min-width:600px){
+  html[data-theme] body.is-feed-fullscreen :is(.sf-top,.sf-filters,.sf-feed),
+  body.is-feed-fullscreen :is(.sf-top,.sf-filters,.sf-feed){
+    max-width:100%!important;
+    width:100%!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    padding-left:var(--sf-gutter-left)!important;
+    padding-right:var(--sf-gutter-right)!important;
+  }
+  html[data-theme] body.is-feed-fullscreen #bottomNav.bottom-nav,
+  body.is-feed-fullscreen #bottomNav.bottom-nav{
+    left:max(14px,env(safe-area-inset-left,0px))!important;
+    right:max(14px,env(safe-area-inset-right,0px))!important;
+    width:auto!important;
+    max-width:none!important;
+    transform:none!important;
+  }
+}
+html[data-theme] body.is-feed-fullscreen .sf-post,
+html[data-theme] body.is-feed-fullscreen .feed-card,
+body.is-feed-fullscreen .sf-post,
+body.is-feed-fullscreen .feed-card{
+  width:100%!important;
+  max-width:100%!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  border-radius:var(--sf-card-radius,16px)!important;
+  background:color-mix(in srgb,var(--card) 70%,var(--theme-feed-bg,var(--bg)) 30%)!important;
+  border:1px solid color-mix(in srgb,var(--line2) 72%,var(--gold2) 14%)!important;
+  box-shadow:0 10px 24px color-mix(in srgb,#000 18%,transparent)!important;
+}
+html[data-theme] body.is-feed-fullscreen .sf-post__media,
+html[data-theme] body.is-feed-fullscreen .sf-post__media--feed-img,
+html[data-theme] body.is-feed-fullscreen .sf-post__img,
+body.is-feed-fullscreen .sf-post__media,
+body.is-feed-fullscreen .sf-post__media--feed-img,
+body.is-feed-fullscreen .sf-post__img{
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+  border-radius:0!important;
+}
+html[data-theme] body.is-feed-fullscreen .sf-post__head,
+html[data-theme] body.is-feed-fullscreen .sf-post__bar,
+html[data-theme] body.is-feed-fullscreen .feed-bar,
+body.is-feed-fullscreen .sf-post__head,
+body.is-feed-fullscreen .sf-post__bar,
+body.is-feed-fullscreen .feed-bar{
+  background:color-mix(in srgb,var(--card) 58%,var(--theme-feed-bg,var(--bg)) 42%)!important;
+}
+</style>
+<script>
+(function(){
+  function pinFeedForce(){
+    var s=document.getElementById("full-edge-feed-force-v643");
+    if(s && s.parentNode){ s.parentNode.appendChild(s); }
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", pinFeedForce);
+  else pinFeedForce();
+  window.addEventListener("hashchange", function(){ setTimeout(pinFeedForce, 50); });
+})();
 </script>
 
 </body>
