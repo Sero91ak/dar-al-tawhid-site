@@ -84,6 +84,26 @@
   ],
   "unlockedScopes": [
     {
+      "id": "ios-parity-web-edge-feed-load-2026-08-21",
+      "approvedBy": "user-explicit-plan-ios-parity-web-edge",
+      "reason": "Plan: iOS-Parity Edge/Feed/Soft-Load in Besucher+Test-Web-App uebernehmen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "assets/full-edge-appearance-polish.css",
+        "assets/premium-feed-app.js",
+        "assets/app-soft-boot.js",
+        "assets/app-soft-boot.css",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "ios/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "ios-testflight-wrapper-2026-08-20",
       "approvedBy": "user-explicit-xcode-testflight-start",
       "reason": "Nutzerauftrag: iOS/Xcode-App vorbereiten und zunaechst per TestFlight-Link verteilen; nur neuer ios-Bereich.",
