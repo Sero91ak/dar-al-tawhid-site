@@ -43,6 +43,7 @@
     overlayEl.innerHTML =
       '<img class="dar-soft-boot__mark" src="/watermark-my-logo-full.png" alt="" width="72" height="72" decoding="async">' +
       '<p class="dar-soft-boot__title">DAR AL TAWḤĪD</p>' +
+      '<p class="dar-soft-boot__sub">Qurʾān · Sunnah · Āthār</p>' +
       '<div class="dar-soft-boot__track" aria-hidden="true"><div class="dar-soft-boot__bar"></div></div>' +
       '<p class="dar-soft-boot__pct">0%</p>';
     var host = document.body || document.documentElement;

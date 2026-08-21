@@ -38,6 +38,15 @@
   color:var(--gold2, #d4b56a);
   text-align:center;
 }
+#dar-soft-boot .dar-soft-boot__sub{
+  margin:-8px 0 0;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:color-mix(in srgb, var(--cream,#f4ead2) 72%, transparent);
+  text-align:center;
+}
 #dar-soft-boot .dar-soft-boot__track{
   width:min(220px,62vw);
   height:6px;
