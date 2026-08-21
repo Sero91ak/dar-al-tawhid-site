@@ -1077,10 +1077,15 @@
     return navigator.standalone === true;
   }
 
-  function readerPdfDisplayUrl(page) {
+  function readerPdfDisplayUrl(page, options) {
+    const preferDirect = !!options?.preferDirect;
     const pageHash = page ? `#page=${page}` : "";
-    if (readerState?.blobUrl) return `${readerState.blobUrl}${pageHash}`;
     const pub = readerState?.pub;
+    if (preferDirect && pub?.pdfUrl) {
+      const path = String(pub.pdfUrl).startsWith("/") ? `${LIB_BASE}${pub.pdfUrl}` : pub.pdfUrl;
+      return `${path}${pageHash}`;
+    }
+    if (readerState?.blobUrl) return `${readerState.blobUrl}${pageHash}`;
     if (pub?.pdfUrl && !readerState?.useOfflineBlob) {
       const path = String(pub.pdfUrl).startsWith("/") ? `${LIB_BASE}${pub.pdfUrl}` : pub.pdfUrl;
       return `${path}${pageHash}`;
@@ -1088,8 +1093,16 @@
     return "";
   }
 
+  function shouldPreferDirectPdfFallback() {
+    if (!readerState?.pub?.pdfUrl) return false;
+    if (readerState?.useOfflineBlob) return false;
+    return shouldForceRenderedPdfReader() || shouldUseNativePdfViewer();
+  }
+
   function renderReaderNativeFallback(stage, page) {
-    const src = readerPdfDisplayUrl(page);
+    const src = readerPdfDisplayUrl(page, {
+      preferDirect: shouldPreferDirectPdfFallback()
+    });
     if (!stage || !src) return false;
     stage.innerHTML = `<div class="lib-reader-native"><iframe class="lib-reader-fallback lib-reader-native-frame" src="${src}" title="PDF" loading="eager" referrerpolicy="no-referrer"></iframe></div>`;
     return true;
