@@ -1038,23 +1038,6 @@
     return navigator.standalone === true;
   }
 
-  function shouldBypassInlineReader() {
-    const ua = String(navigator.userAgent || "");
-    const mobile = /iPhone|iPad|iPod|Android/i.test(ua);
-    const standalone = navigator.standalone === true;
-    let displayModeStandalone = false;
-    try {
-      displayModeStandalone = !!(window.matchMedia && (
-        window.matchMedia("(display-mode: standalone)").matches
-        || window.matchMedia("(display-mode: fullscreen)").matches
-        || window.matchMedia("(display-mode: minimal-ui)").matches
-      ));
-    } catch (e) {
-      /* Anzeige-Modus darf nie blockieren */
-    }
-    return mobile && (standalone || displayModeStandalone);
-  }
-
   function readerPdfDisplayUrl(page) {
     const pageHash = page ? `#page=${page}` : "";
     if (readerState?.blobUrl) return `${readerState.blobUrl}${pageHash}`;
@@ -1069,7 +1052,7 @@
   function renderReaderNativeFallback(stage, page) {
     const src = readerPdfDisplayUrl(page);
     if (!stage || !src) return false;
-    stage.innerHTML = `<div class="lib-reader-native"><embed class="lib-reader-fallback lib-reader-native-embed" src="${src}" type="application/pdf" title="PDF"><object class="lib-reader-fallback lib-reader-native-object" data="${src}" type="application/pdf" title="PDF"><iframe class="lib-reader-fallback" src="${src}" title="PDF"></iframe></object></div>`;
+    stage.innerHTML = `<div class="lib-reader-native"><iframe class="lib-reader-fallback lib-reader-native-frame" src="${src}" title="PDF" loading="eager" referrerpolicy="no-referrer"></iframe></div>`;
     return true;
   }
 
@@ -1460,10 +1443,6 @@
       detail.querySelectorAll("[data-library-read]").forEach((btn) => {
         btn.onclick = () => {
           if (!canRead(pub)) return;
-          if (shouldBypassInlineReader()) {
-            openPublicationPdf(pub);
-            return;
-          }
           navigateReader(pub.slug);
         };
       });
@@ -1533,10 +1512,6 @@
       document.body.classList.add("is-library-reader-route");
       const pub = findPublication(route.value);
       if (pub && canRead(pub)) {
-        if (shouldBypassInlineReader()) {
-          openPublicationPdf(pub);
-          return;
-        }
         if (isReaderActive(pub.slug)) {
           const reader = getReaderRoot();
           scrubDuplicateReaders(reader);
