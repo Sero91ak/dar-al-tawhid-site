@@ -956,7 +956,17 @@
 
   function shouldForceRenderedPdfReader() {
     const ua = String(navigator.userAgent || "");
-    return /DarAlTawhid-iOS-TestFlight/i.test(ua);
+    if (/DarAlTawhid-iOS-TestFlight/i.test(ua)) return true;
+    try {
+      if (window.matchMedia && (
+        window.matchMedia("(display-mode: standalone)").matches
+        || window.matchMedia("(display-mode: fullscreen)").matches
+        || window.matchMedia("(display-mode: minimal-ui)").matches
+      )) return true;
+    } catch (e) {
+      /* Anzeige-Modus darf nie blockieren */
+    }
+    return navigator.standalone === true;
   }
 
   function readerPdfDisplayUrl(page) {
