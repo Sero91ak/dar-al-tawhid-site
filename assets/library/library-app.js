@@ -910,6 +910,7 @@
     if (global.pdfjsLib) return global.pdfjsLib;
     if (global.__pdfJsLoading) return global.__pdfJsLoading;
     global.__pdfJsLoading = (async () => {
+      let embeddedModuleText = "";
       const assignPdfjs = (candidate) => {
         const lib = candidate || global.pdfjsLib;
         if (!lib) return null;
@@ -922,11 +923,17 @@
         return lib;
       };
 
-      const tryEmbeddedModule = async () => {
+      const decodeEmbeddedModule = () => {
+        if (embeddedModuleText) return embeddedModuleText;
         const binary = atob(PDFJS_EMBEDDED_MODULE_B64);
         const bytes = new Uint8Array(binary.length);
         for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
-        const moduleText = new TextDecoder().decode(bytes);
+        embeddedModuleText = new TextDecoder().decode(bytes);
+        return embeddedModuleText;
+      };
+
+      const tryEmbeddedModule = async () => {
+        const moduleText = decodeEmbeddedModule();
         const moduleUrl = URL.createObjectURL(new Blob([moduleText], { type: "text/javascript" }));
         try {
           const mod = await import(moduleUrl);
@@ -936,11 +943,43 @@
         }
       };
 
+      const tryEmbeddedClassicScript = async () => {
+        const moduleText = decodeEmbeddedModule();
+        const classicText = moduleText.replace(/export\s*\{[\s\S]*?\};?\s*$/, "");
+        const scriptUrl = URL.createObjectURL(new Blob([classicText], { type: "text/javascript" }));
+        try {
+          await new Promise((resolve, reject) => {
+            const script = document.createElement("script");
+            script.src = scriptUrl;
+            script.async = true;
+            script.onload = () => {
+              script.remove();
+              resolve();
+            };
+            script.onerror = () => {
+              script.remove();
+              reject(new Error("embedded classic script failed"));
+            };
+            document.head.appendChild(script);
+          });
+          return assignPdfjs(global.pdfjsLib);
+        } finally {
+          setTimeout(() => URL.revokeObjectURL(scriptUrl), 0);
+        }
+      };
+
       try {
         const embedded = await tryEmbeddedModule();
         if (embedded) return embedded;
       } catch (e) {
-        /* Lokales Modul fehlgeschlagen — wir versuchen externe Fallbacks */
+        /* Modul-Import fehlgeschlagen — wir versuchen klassisches Inline-Skript */
+      }
+
+      try {
+        const embeddedClassic = await tryEmbeddedClassicScript();
+        if (embeddedClassic) return embeddedClassic;
+      } catch (e) {
+        /* Lokale Einbettung fehlgeschlagen — wir versuchen externe Fallbacks */
       }
 
       let idx = 0;
