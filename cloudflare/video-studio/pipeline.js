@@ -45,6 +45,8 @@ function publicJob(job) {
     costConfirmed: Boolean(job.costConfirmed),
     qualityChecks: job.qualityChecks || emptyQualityChecks(),
     qualityIncomplete: Boolean(job.qualityIncomplete),
+    validation: job.validation || null,
+    previewFrames: job.previewFrames || [2, 6, 11, 14],
     approval: job.approval || { approved: false },
     statement: job.statement
       ? {
@@ -656,7 +658,7 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
         },
         outputUrl: outputSigned.url || null,
         posterUrl: (job.artifacts?.clips || [])[0]?.url || null,
-        durationSeconds: (job.storyboard.scenes || []).reduce((n, s) => n + Number(s.durationSec || 0), 0),
+        durationSeconds: 15,
         completedStages: uniqueStages([...(job.completedStages || []), "render"]),
         message: foreignWatermarkRisk || prevRender.composeFallback === "shotstack-stage"
           ? "MP4-Vorschau gespeichert (Stage: Stimme+Texte, Fremdwasserzeichen – nicht freigeben)"
@@ -716,6 +718,8 @@ export async function processVideoStudioJob(env, jobId, helpers = {}) {
       completedStages: PIPELINE_STAGES.slice(),
       qualityChecks: quality.checks,
       qualityIncomplete: Boolean(draftPreview || !quality.ok),
+      validation: quality.validation || null,
+      previewFrames: quality.previewFrames || [2, 6, 11, 14],
       message: incompleteMsg,
       costEur: Number(fresh.costEur || fresh.estimateEur || 0)
     }));

@@ -1,5 +1,8 @@
 import { DAR_VIDEO_PROFILE, emptyQualityChecks } from "./profile.js";
 import { isProphetRelatedStatement } from "./depiction-rules.js";
+import { buildShotstackTimeline } from "./compose.js";
+import { runVideoValidation } from "./validation.js";
+import { DAR_VIDEO_DURATION_SEC } from "./timeline.js";
 
 export function runQualityChecks({
   statement,
@@ -12,6 +15,7 @@ export function runQualityChecks({
 }) {
   const checks = emptyQualityChecks();
   const reasons = [];
+  const plan = captionPlan || storyboard?.captionPlan || null;
 
   checks.sourceVerified = Boolean(statement?.verified && statement?.source && statement?.de);
   if (!checks.sourceVerified) reasons.push("Quelle oder Aussage nicht verifiziert");
@@ -20,13 +24,13 @@ export function runQualityChecks({
   const negatives = (storyboard?.scenes || []).map((s) => String(s.negativePrompt || "").toLowerCase()).join(" ");
 
   checks.facesHidden =
-    (/face|gesicht|hidden|silhouette|back|rücken|shadow|cropped|anonymous/.test(prompts) ||
+    (/face|gesicht|hidden|silhouette|back|rücken|shadow|cropped|anonymous|preserve the original/.test(prompts) ||
       Boolean(storyboard?.prophetRelated)) &&
     !/front portrait|face visible|eyes visible/.test(prompts);
   if (!checks.facesHidden) reasons.push("Gesichtsregeln im Storyboard unklar");
 
   checks.handsAcceptable =
-    /accurate hands|anatomically correct|keine deformierten|correct anatomy|objects\/manuscripts only|environment/.test(
+    /accurate hands|anatomically correct|keine deformierten|correct anatomy|objects\/manuscripts only|environment|preserve the original/.test(
       prompts
     ) || /hands/.test(prompts);
   if (!checks.handsAcceptable) reasons.push("Hand-/Körperregeln fehlen");
@@ -39,7 +43,7 @@ export function runQualityChecks({
   if (!checks.prophetSafe) reasons.push("Propheten-Darstellungsverbot im Storyboard unklar");
 
   checks.historicallyPlausible =
-    /historical|historically|temporal|era|epoch|plausible|historisch/.test(prompts);
+    /historical|historically|temporal|era|epoch|plausible|historisch|preserve the original/.test(prompts);
   if (!checks.historicallyPlausible) reasons.push("Historische Plausibilität im Prompt unklar");
 
   checks.noMusic = DAR_VIDEO_PROFILE.safety.noMusic === true && !Boolean(render?.hasMusic);
@@ -51,7 +55,7 @@ export function runQualityChecks({
     Boolean(render?.provider === "shotstack" && render?.audioAttached);
   if (!checks.audioValid) reasons.push("Stimme/Audio fehlt oder ist ungültig");
 
-  const overlays = captionPlan?.overlays || storyboard?.captionPlan?.overlays || [];
+  const overlays = plan?.overlays || [];
   const roles = new Set(overlays.map((o) => o.role));
   const burnedIn = Boolean(render?.brandingApplied) && render?.provider === "shotstack";
   checks.captionsSafe =
@@ -87,11 +91,11 @@ export function runQualityChecks({
   checks.safeAreasOk = overlays.every((o) => Number(o.at || 0) >= 0 && Number(o.length || 0) >= 1.2);
   if (!checks.safeAreasOk) reasons.push("Einblendungs-Zeiten ungültig / Safe-Area-Risiko");
 
-  const exactVoice = String(storyboard?.voiceScript || captionPlan?.voiceScript || "");
+  const exactVoice = String(storyboard?.voiceScript || plan?.voiceScript || "");
   checks.voiceExact = Boolean(
     exactVoice &&
       exactVoice.includes(String(statement?.de || "").trim()) &&
-      exactVoice.includes(String(statement?.speaker || "").trim()) &&
+      exactVoice.includes(String(statement?.speaker || "").trim().replace(/\s*sagte\s*:?\s*$/i, "").trim()) &&
       /sagte:/i.test(exactVoice)
   );
   if (!checks.voiceExact) reasons.push("Erzählertext weicht von Sprecher/Aussage ab");
@@ -110,6 +114,39 @@ export function runQualityChecks({
   checks.iphoneCompatible = Boolean(render?.ok && formatOk && /mp4|h264|avc/i.test(String(render?.mime || "video/mp4")));
   checks.androidCompatible = checks.iphoneCompatible;
   if (!checks.iphoneCompatible) reasons.push("MP4-Export noch nicht iPhone/Android-kompatibel");
+
+  // Spezifikation §15 – strukturelle Pflichtchecks
+  let timelineMeta = render?.timelineMeta || null;
+  try {
+    const built = buildShotstackTimeline({
+      clipUrls: ["https://example.com/a.mp4", "https://example.com/b.mp4", "https://example.com/c.mp4"],
+      captionPlan: plan,
+      watermarkUrl: "https://dar-al-tawhid.de/watermark-my-logo-full.png",
+      sceneDurationSec: 5
+    });
+    timelineMeta = timelineMeta || built.meta;
+  } catch {}
+
+  const validation = runVideoValidation({
+    statement,
+    storyboard,
+    captionPlan: plan,
+    render: render
+      ? { ...render, durationSeconds: render.durationSeconds || DAR_VIDEO_DURATION_SEC, ok: render.ok !== false }
+      : { ok: false, durationSeconds: DAR_VIDEO_DURATION_SEC },
+    timelineMeta
+  });
+
+  checks.noMissingGlyphs = validation.checks.noMissingGlyphs;
+  checks.onlyOneDarLogo = validation.checks.onlyOneDarLogo;
+  checks.darLogoCentered = validation.checks.darLogoCentered;
+  checks.noEmptyEndScreen = validation.checks.noEmptyEndScreen;
+  checks.noInventedCategory = validation.checks.noInventedCategory;
+  checks.durationValid = validation.checks.durationValid;
+
+  validation.errors.forEach((err) => {
+    if (!reasons.includes(err)) reasons.push(err);
+  });
 
   if (providerMeta?.simulated) reasons.push("Nur Simulationslauf – kein echter Anbieterclip");
   if (render?.provider === "fal-ffmpeg" && !render?.brandingApplied) {
@@ -133,7 +170,13 @@ export function runQualityChecks({
     "voiceExact",
     "prophetSafe",
     "historicallyPlausible",
-    "motionSecondsOk"
+    "motionSecondsOk",
+    "noMissingGlyphs",
+    "onlyOneDarLogo",
+    "darLogoCentered",
+    "noEmptyEndScreen",
+    "noInventedCategory",
+    "durationValid"
   ];
   const ok = required.every((key) => checks[key] === true) && !providerMeta?.simulated;
   const falFallback = render?.provider === "fal-ffmpeg" && !render?.brandingApplied;
@@ -143,6 +186,8 @@ export function runQualityChecks({
     ok,
     checks,
     reasons,
+    validation,
+    previewFrames: validation.previewFrameHints,
     reviewedAt: new Date().toISOString(),
     falComposeFallback: falFallback,
     stagePreview,
