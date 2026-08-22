@@ -2,7 +2,7 @@
  * Full-edge appearance polish (visitor + test)
  * iOS-parity: continuous theme fill under status bar, safe-area content, feed full-bleed.
  * Layout / surface only — no theme hue swap (edge-to-edge theme lock stays authoritative).
- * v657 · Soft-boot black-screen fix + global solid fill
+ * v660 · solid fill via --dar-edge-fill only (no sticky inline / broken gradient feed fill)
  */
 
 :root,
@@ -241,8 +241,8 @@ body.is-feed-fullscreen {
   padding-left: 0 !important;
   padding-right: 0 !important;
   padding-top: max(0px, env(safe-area-inset-top, 0px)) !important;
-  background: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
-  background-color: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
+  background: var(--dar-edge-fill) !important;
+  background-color: var(--dar-edge-fill) !important;
 }
 
 html[data-theme] body.is-feed-fullscreen #appView,
@@ -256,7 +256,7 @@ html[data-theme] body.is-feed-fullscreen .pf-mount-root {
   padding-left: 0 !important;
   padding-right: 0 !important;
   border-radius: 0 !important;
-  background: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
+  background: var(--dar-edge-fill) !important;
 }
 
 html[data-theme] body.is-feed-fullscreen .sf-app {
@@ -269,7 +269,7 @@ html[data-theme] body.is-feed-fullscreen .sf-app {
   padding-left: 0 !important;
   padding-right: 0 !important;
   border-radius: 0 !important;
-  background: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
+  background: var(--dar-edge-fill) !important;
 }
 
 html[data-theme] body.is-feed-fullscreen .sf-top,
@@ -289,9 +289,9 @@ html[data-theme] body.is-feed-fullscreen .pf-feed {
 html[data-theme] body.is-feed-fullscreen .sf-top {
   left: 0 !important;
   right: 0 !important;
-  --theme-feed-top: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
-  background: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
-  background-color: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
+  --theme-feed-top: var(--dar-edge-fill) !important;
+  background: var(--dar-edge-fill) !important;
+  background-color: var(--dar-edge-fill) !important;
   background-image: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -337,8 +337,8 @@ html[data-theme] body.is-feed-fullscreen .sf-post__actions,
 html[data-theme] body.is-feed-fullscreen .sf-post__bar,
 html[data-theme] body.is-feed-fullscreen .feed-bar,
 html[data-theme] body.is-feed-fullscreen .sf-filters {
-  background: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
-  background-color: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
+  background: var(--dar-edge-fill) !important;
+  background-color: var(--dar-edge-fill) !important;
   background-image: none !important;
 }
 
@@ -453,9 +453,9 @@ html[data-theme] body.is-home-route .view {
 
 /* Feed: continuous fill like Mehr (solid, no transparent top fade / edge line) */
 html[data-theme] body.is-feed-fullscreen {
-  --theme-feed-top: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
-  background: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
-  background-color: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
+  --theme-feed-top: var(--dar-edge-fill) !important;
+  background: var(--dar-edge-fill) !important;
+  background-color: var(--dar-edge-fill) !important;
 }
 html[data-theme] body.is-feed-fullscreen .sf-app,
 html[data-theme] body.is-feed-fullscreen #premiumFeedMount,
@@ -465,12 +465,12 @@ html[data-theme] body.is-feed-fullscreen #appView.view {
   border-radius: 0 !important;
   outline: none !important;
   box-shadow: none !important;
-  background: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
-  background-color: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
+  background: var(--dar-edge-fill) !important;
+  background-color: var(--dar-edge-fill) !important;
 }
 html[data-theme] body.is-feed-fullscreen .sf-top {
-  background: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
-  background-color: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
+  background: var(--dar-edge-fill) !important;
+  background-color: var(--dar-edge-fill) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
@@ -594,7 +594,7 @@ html[data-theme="dar-al-layl"] body.is-home-route .isnad {
  */
 html[data-theme],
 html[data-theme] body {
-  --theme-feed-top: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
+  --theme-feed-top: var(--dar-edge-fill) !important;
   --theme-feed-aura: none !important;
   background: var(--dar-edge-fill) !important;
   background-color: var(--dar-edge-fill) !important;
@@ -609,10 +609,10 @@ html[data-theme="bordeaux"] body.is-feed-fullscreen,
 html[data-theme="aurora"] body.is-feed-fullscreen,
 html[data-theme="dar-al-layl"] body.is-feed-fullscreen,
 html[data-theme="dark"] body.is-feed-fullscreen {
-  --theme-feed-top: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
+  --theme-feed-top: var(--dar-edge-fill) !important;
   --theme-feed-aura: none !important;
-  background: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
-  background-color: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
+  background: var(--dar-edge-fill) !important;
+  background-color: var(--dar-edge-fill) !important;
   background-image: none !important;
 }
 
@@ -624,8 +624,8 @@ html[data-theme] body.is-feed-fullscreen #premiumFeedMount,
 html[data-theme] body.is-feed-fullscreen .pf-mount-root,
 html[data-theme] body.is-feed-fullscreen #appView,
 html[data-theme] body.is-feed-fullscreen #appView.view {
-  background: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
-  background-color: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
+  background: var(--dar-edge-fill) !important;
+  background-color: var(--dar-edge-fill) !important;
   background-image: none !important;
   box-shadow: none !important;
   border-radius: 0 !important;

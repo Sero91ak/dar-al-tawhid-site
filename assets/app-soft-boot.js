@@ -1,6 +1,6 @@
 /**
  * Soft boot overlay for visitor + test web apps (iOS parity).
- * v659 · Theme-Hauptfarbe: nie Blau erzwingen; Fill folgt data-theme / Originalfarbe.
+ * v660 · Theme-Hauptfarbe: nie Blau erzwingen; Fill folgt data-theme / Originalfarbe.
  */
 (function () {
   if (window.__darSoftBootInstalled) return;
@@ -13,7 +13,7 @@
   var HARD_TIMEOUT_MS = 6500;
   /* Original-Hauptfarben je Erscheinungsbild (THEME_META / theme-page-bg) */
   var THEME_FILLS = {
-    dark: "#080806",
+    dark: "#050706",
     light: "#f7f0df",
     soft: "#f2e6e2",
     royal: "#07162c",
