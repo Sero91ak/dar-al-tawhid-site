@@ -269,34 +269,40 @@ jobs:
             || ! printf '%s' "$HEALTH" | grep -q '"hasAdminSecret":true'; then
             echo "::warning::Secrets nach Delayed-Check weg – Sofort-Re-Sync"
             SECRETS_JSON="$RUNNER_TEMP/delayed-core-secrets.json"
-            node <<'NODE'
-            const fs = require("fs");
-            const pick = (...vals) => {
-              for (const v of vals) {
-                const s = String(v || "").trim();
-                if (s) return s;
-              }
-              return "";
-            };
-            const payload = {
-              GITHUB_TOKEN: pick(process.env.WORKER_GITHUB_TOKEN, process.env.DAR_GITHUB_TOKEN, process.env.REPO_GITHUB_TOKEN),
-              ADMIN_PUBLISH_SECRET: pick(process.env.ADMIN_PUBLISH_SECRET),
-              ONESIGNAL_API_KEY_NEW: pick(process.env.ONESIGNAL_API_KEY_NEW, process.env.ONESIGNAL_API_KEY),
-              TELEGRAM_BOT_TOKEN: pick(process.env.TELEGRAM_BOT_TOKEN)
-            };
-            const clean = {};
-            for (const [k, v] of Object.entries(payload)) if (v) clean[k] = v;
-            fs.writeFileSync(process.env.RUNNER_TEMP + "/delayed-core-secrets.json", JSON.stringify(clean));
-            console.log("Delayed re-sync keys:", Object.keys(clean).join(", "));
-            NODE
+            # node -e statt Heredoc (YAML-Einrueckung bricht <<'NODE')
+            node -e '
+              const fs = require("fs");
+              const pick = (...vals) => {
+                for (const v of vals) {
+                  const s = String(v || "").trim();
+                  if (s) return s;
+                }
+                return "";
+              };
+              const payload = {
+                GITHUB_TOKEN: pick(process.env.WORKER_GITHUB_TOKEN, process.env.DAR_GITHUB_TOKEN, process.env.REPO_GITHUB_TOKEN),
+                ADMIN_PUBLISH_SECRET: pick(process.env.ADMIN_PUBLISH_SECRET),
+                ONESIGNAL_API_KEY_NEW: pick(process.env.ONESIGNAL_API_KEY_NEW, process.env.ONESIGNAL_API_KEY),
+                TELEGRAM_BOT_TOKEN: pick(process.env.TELEGRAM_BOT_TOKEN)
+              };
+              const clean = {};
+              for (const [k, v] of Object.entries(payload)) if (v) clean[k] = v;
+              fs.writeFileSync(process.env.RUNNER_TEMP + "/delayed-core-secrets.json", JSON.stringify(clean));
+              console.log("Delayed re-sync keys:", Object.keys(clean).join(", "));
+            '
             BULK_LOG="$RUNNER_TEMP/delayed-secret-bulk.log"
             wrangler versions secret bulk "$SECRETS_JSON" --name dar-admin-publisher --message "delayed-core-secrets-resync" 2>&1 | tee "$BULK_LOG"
-            VERSION_ID="$(sed -n 's/.*Created version \([0-9a-f-]\{36\}\).*/\1/p' "$BULK_LOG" | tail -n 1)"
+            VERSION_ID="$(sed -n "s/.*Created version \([0-9a-f-]\{36\}\).*/\1/p" "$BULK_LOG" | tail -n 1)"
+            if [ -z "$VERSION_ID" ]; then
+              echo "::error::Keine Version-ID aus secret bulk"
+              exit 1
+            fi
             wrangler versions deploy "${VERSION_ID}@100" --name dar-admin-publisher --yes --message "activate-delayed-core-secrets"
+            sleep 5
             HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true)"
             echo "Nach Delayed-Resync: $HEALTH"
-            printf '%s' "$HEALTH" | grep -q '"hasGithubToken":true'
-            printf '%s' "$HEALTH" | grep -q '"hasAdminSecret":true'
+            printf "%s" "$HEALTH" | grep -q '"hasGithubToken":true'
+            printf "%s" "$HEALTH" | grep -q '"hasAdminSecret":true'
             rm -f "$SECRETS_JSON"
           fi
           echo "Delayed health OK"
