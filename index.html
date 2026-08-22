@@ -5,7 +5,44 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v644";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v658";</script>
+<script>
+/* v658 · Theme-Fill SOFORT (vor Soft-Boot) */
+(function(){
+  try{
+    var colors={dark:"#080806",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605"};
+    var names={dark:"Klassisch Dunkel",light:"Klassisch Hell",soft:"Sanft Elegant",royal:"Royal Nachtblau",bordeaux:"Bordeaux Royal Premium","dar-al-layl":"Dār al-Layl"};
+    var t=localStorage.getItem("darThemeV1")||"dark";
+    if(t==="emerald"||t==="smaragd"||t==="aurora"){t="dark";try{localStorage.setItem("darThemeV1",t)}catch(e){}}
+    else if(t!=="light"&&t!=="soft"&&t!=="royal"&&t!=="bordeaux"&&t!=="dar-al-layl")t="dark";
+    var c=colors[t]||colors.dark;
+    var root=document.documentElement;
+    root.setAttribute("data-theme",t);
+    root.setAttribute("data-theme-name",names[t]||names.dark);
+    root.classList.add("dar-soft-booting");
+    root.style.setProperty("--dar-boot-fill",c);
+    root.style.setProperty("--theme-page-bg",c);
+    root.style.backgroundColor=c;
+    window.__DAR_BOOT_FILL=c;
+    window.__DAR_INITIAL_THEME=t;
+  }catch(e){}
+})();
+</script>
+<style id="dar-soft-boot-inline-v658">
+html.dar-soft-booting,html.dar-soft-booting body{background-color:var(--dar-boot-fill,var(--theme-page-bg,#080806))!important}
+#dar-soft-boot{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;width:100dvw;height:100%;height:100vh;height:100dvh;height:-webkit-fill-available;min-height:100vh;min-height:100dvh;min-height:-webkit-fill-available;margin:0;box-sizing:border-box;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:max(24px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px)) 24px max(24px,env(safe-area-inset-bottom,0px),var(--dar-native-safe-bottom,0px));background-color:var(--dar-boot-fill,var(--theme-page-bg,var(--outer-bg-flat,var(--bg,#080806))))!important;background-image:radial-gradient(120% 80% at 50% 42%,rgba(201,168,106,.12),transparent 58%)!important;color:var(--cream,#f4ead2);font-family:Manrope,Inter,system-ui,sans-serif;transition:opacity .28s ease,visibility .28s ease;overscroll-behavior:none;transform:translateZ(0)}
+#dar-soft-boot.is-done{opacity:0;visibility:hidden;pointer-events:none}
+#dar-soft-boot .dar-soft-boot__mark{width:72px;height:72px;border-radius:50%;object-fit:cover;box-shadow:0 10px 28px rgba(0,0,0,.35);border:1px solid rgba(201,168,106,.45)}
+#dar-soft-boot .dar-soft-boot__title{margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-size:22px;font-weight:700;letter-spacing:.04em;color:var(--gold2,#d4b56a);text-align:center}
+#dar-soft-boot .dar-soft-boot__sub{margin:-8px 0 0;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,234,210,.72);text-align:center}
+#dar-soft-boot .dar-soft-boot__track{width:min(236px,68vw);height:2px;border-radius:999px;margin-top:6px;background:rgba(201,168,106,.18);box-shadow:inset 0 0 0 1px rgba(201,168,106,.1);overflow:hidden}
+#dar-soft-boot .dar-soft-boot__bar{height:100%;width:0%;border-radius:inherit;background:linear-gradient(90deg,rgba(201,168,106,.55),#efd78e,#f4ead2);box-shadow:0 0 10px rgba(201,168,106,.45);transition:width .08s linear}
+#dar-soft-boot .dar-soft-boot__pct{margin:0;font-size:12px;font-weight:800;letter-spacing:.08em;color:rgba(244,234,210,.78)}
+html[data-theme="light"] #dar-soft-boot,html[data-theme="soft"] #dar-soft-boot{color:#3a2f24}
+html[data-theme="light"] #dar-soft-boot .dar-soft-boot__title,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__title{color:var(--gold2,#9b7a3c)}
+html[data-theme="light"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="light"] #dar-soft-boot .dar-soft-boot__pct,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__pct{color:rgba(58,47,36,.72)}
+</style>
+<script src="/assets/app-soft-boot.js?v=658"></script>
 <script>/* VISUAL_PAST_PURGE_V588: alte Optik-Caches löschen – aktuelle Darstellung bleibt Autorität */(function(){var BUILD=String(window.__DAR_EXPECTED_BUILD||"");var KEY="dar_visual_authority_build_v1";var ONCE="dar_visual_past_purge_once_v588";function num(id){var m=String(id||"").match(/v(\d+)/);return m?parseInt(m[1],10):0}function wipe(){if(!("caches"in window))return Promise.resolve();return caches.keys().then(function(keys){return Promise.all(keys.filter(function(k){return /^dar-al-tawhid-offline-light-/i.test(k)}).map(function(k){return caches.delete(k)}))})}function bustReload(tag){try{if(sessionStorage.getItem(ONCE)===BUILD+"|"+tag)return;sessionStorage.setItem(ONCE,BUILD+"|"+tag)}catch(e){}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?"+tag+"="+Date.now()+h)}try{var prev=localStorage.getItem(KEY)||"";var localN=num(BUILD);var prevN=num(prev);if(prevN>localN&&localN>0){wipe().then(function(){if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){try{g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}catch(e){}}).catch(function(){})}bustReload("visual-stale")}).catch(function(){bustReload("visual-stale")});return}if(localN>prevN){wipe().then(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}bustReload("visual-new")}).catch(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}});return}if(!prev&&BUILD){try{localStorage.setItem(KEY,BUILD)}catch(e){}}if(localN>0&&"caches"in window){caches.keys().then(function(keys){keys.forEach(function(k){if(!/^dar-al-tawhid-offline-light-/i.test(k))return;var kn=num(k);if(kn&&kn<localN)caches.delete(k)})}).catch(function(){})}}catch(e){}try{var path=String(location.pathname||"");var ver=path.indexOf("/test")===0?"/test/version.json":"/version.json";fetch(ver,{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(remote){if(!remote||!remote.buildId)return;var remoteN=num(remote.buildId);if(remoteN>localN&&localN>0){wipe().then(function(){bustReload("visual-remote")}).catch(function(){bustReload("visual-remote")})}}).catch(function(){})}catch(e){}})();</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
@@ -49,6 +86,7 @@
 <meta name="twitter:description" content="Geordnete Wissens-App mit Beitraegen aus Qurʾan, Sunnah und Athar.">
 <meta name="twitter:image" content="/app-icon-512.png?v=source-under-statement-v12">
 <meta name="theme-color" content="#080806">
+<script>(function(){try{var c=window.__DAR_BOOT_FILL;if(!c)return;var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=c;var tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=c}catch(e){}})();</script>
 <script>(function(){try{var p=new URLSearchParams(location.search);var wantStaging=p.get("env")==="staging"||location.hostname.indexOf("staging.")===0;var underTest=location.pathname.indexOf("/test/")===0||location.pathname==="/test";if(wantStaging&&!underTest){location.replace("/test/"+location.search+location.hash);return}}catch(e){}})();</script>
 <script>(function(){try{var params=new URLSearchParams(location.search);var underTest=location.pathname.indexOf("/test/")===0||location.pathname==="/test";var stagingHost=location.hostname.indexOf("staging.")===0;var staging=params.get("env")==="staging"||stagingHost||underTest;var manifest=document.getElementById("appManifestLink");var touch=document.getElementById("appleTouchIconLink");if(staging&&manifest)manifest.href="/manifest.json?v=source-under-statement-v12";if(staging&&touch)touch.href="/apple-touch-icon.png?v=source-under-statement-v12";if(staging){document.title="Dar Test";var app=document.querySelector('meta[name="application-name"]');if(app)app.content="DAR AL TAWḤID";var apple=document.querySelector('meta[name="apple-mobile-web-app-title"]');if(apple)apple.content="DAR AL TAWḤID"}var key="darThemeV1";var t=localStorage.getItem(key)||"dark";if(t==="emerald"||t==="smaragd"||t==="aurora"){t="dark";try{localStorage.setItem(key,t)}catch(e){}}else if(t!=="light"&&t!=="soft"&&t!=="royal"&&t!=="bordeaux"&&t!=="dar-al-layl")t="dark";var names={dark:"Klassisch Dunkel",light:"Klassisch Hell",soft:"Sanft Elegant",royal:"Royal Nachtblau",bordeaux:"Bordeaux Royal Premium","dar-al-layl":"Dār al-Layl"};var colors={dark:"#080806",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605"};document.documentElement.setAttribute("data-theme",t);document.documentElement.setAttribute("data-theme-name",names[t]||names.dark);if(/Android/i.test(navigator.userAgent||""))document.documentElement.classList.add("is-android");var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=(underTest||stagingHost)?"#061826":colors[t]||colors.dark;var tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=(underTest||stagingHost)?"#061826":colors[t]||colors.dark;var sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content="black-translucent";window.__DAR_INITIAL_THEME=t;window.__DAR_STAGING_APP=underTest||stagingHost}catch(e){}})();</script>
 <script>(function(){try{function clamp(v){v=Number(v);if(!Number.isFinite(v))return 5;v=Math.round(v);if(v<=0)v=1;return Math.max(1,Math.min(10,v))}function set(name,val){document.documentElement.style.setProperty(name,String(val))}var app=clamp(localStorage.getItem("appFontScale"));var qa=clamp(localStorage.getItem("quranArabicScale"));var qt=clamp(localStorage.getItem("quranTransliterationScale"));var qd=clamp(localStorage.getItem("quranGermanScale"));var da=clamp(localStorage.getItem("duaArabicScale"));var dt=clamp(localStorage.getItem("duaTransliterationScale"));var dd=clamp(localStorage.getItem("duaGermanScale"));var pt=clamp(localStorage.getItem("postTextScale"));var ps=clamp(localStorage.getItem("postSourceScale"));document.documentElement.setAttribute("data-app-font-scale",app);document.documentElement.setAttribute("data-reading-arabic-scale",qa);document.documentElement.setAttribute("data-reading-transliteration-scale",qt);document.documentElement.setAttribute("data-reading-translation-scale",qd);set("--text-xs",(9.4+app*.18)+"px");set("--text-sm",(11.2+app*.36)+"px");set("--text-base",(14.4+app*.32)+"px");set("--text-lg",(16.2+app*.38)+"px");set("--text-xl",(20+app*.64)+"px");set("--title-size",(27+app*1.0)+"px");set("--quran-arabic-size",(17+qa*3.3)+"px");set("--quran-trans-size",(12+qt*2.1)+"px");set("--quran-de-size",(12+qd*2.1)+"px");set("--dua-arabic-size",(16+da*3.1)+"px");set("--dua-trans-size",(12+dt*2.1)+"px");set("--dua-de-size",(12+dd*2.1)+"px");set("--post-text-size",(16.5+pt*.55)+"px");set("--post-source-size",(13.5+ps*.35)+"px")}catch(e){}})();</script>
@@ -9864,7 +9902,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-app.js?v=20" defer></script>
 <script src="/assets/focus-feed-app.js?v=6" defer></script>
 <script src="/assets/html2canvas.min.js" defer></script>
-<script src="/assets/premium-feed-app.js?v=94" defer></script>
+<script src="/assets/premium-feed-app.js?v=100" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <script src="/assets/adaptive-layout.js?v=7" defer></script>
 <script src="/assets/fold-split.js?v=1" defer></script>
@@ -11421,7 +11459,8 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/dar-account-visibility.css?v=11">
 <link rel="stylesheet" href="/assets/scholars-index.css?v=587">
 <link rel="stylesheet" href="/assets/adaptive-layout.css?v=642">
-<link rel="stylesheet" href="/assets/full-edge-appearance-polish.css?v=644">
+<link rel="stylesheet" href="/assets/app-soft-boot.css?v=658">
+<link rel="stylesheet" href="/assets/full-edge-appearance-polish.css?v=658">
 <link rel="stylesheet" href="/assets/fold-split.css?v=1">
 <style id="typography-compact-fix-v310">
 /* Finale Typografie-Korrektur — gewinnt gegen Home-Compact-Overrides */
@@ -25007,7 +25046,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v644";
+const APP_BUILD_ID="app-shell-v658";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -26972,105 +27011,6 @@ document.addEventListener("DOMContentLoaded", function () {
   } catch (e) {}
 });
 </script>
-
-<style id="full-edge-feed-force-v644">
-/* v643 · Feed full-bleed force (wins over premium-feed runtime CSS) */
-html[data-theme] body.is-feed-fullscreen,
-html[data-theme] body.is-feed-fullscreen .sf-app,
-body.is-feed-fullscreen .sf-app{
-  align-items:stretch!important;
-  width:100%!important;
-  max-width:100%!important;
-}
-body.is-feed-fullscreen{
-  --sf-feed-col-max:100%!important;
-  --feed-col-max:100%!important;
-  --layout-feed-max:100%!important;
-  --sf-shell-pad:0px!important;
-  --sf-gutter-left:max(8px,env(safe-area-inset-left,0px))!important;
-  --sf-gutter-right:max(8px,env(safe-area-inset-right,0px))!important;
-  --sf-card-radius:16px!important;
-  --sf-card-gap:10px!important;
-}
-html[data-theme] body.is-feed-fullscreen .sf-top,
-html[data-theme] body.is-feed-fullscreen .sf-filters,
-html[data-theme] body.is-feed-fullscreen .sf-feed,
-body.is-feed-fullscreen .sf-top,
-body.is-feed-fullscreen .sf-filters,
-body.is-feed-fullscreen .sf-feed{
-  width:100%!important;
-  max-width:100%!important;
-  min-width:0!important;
-  margin-left:0!important;
-  margin-right:0!important;
-  padding-left:var(--sf-gutter-left)!important;
-  padding-right:var(--sf-gutter-right)!important;
-  box-sizing:border-box!important;
-}
-@media(min-width:600px){
-  html[data-theme] body.is-feed-fullscreen :is(.sf-top,.sf-filters,.sf-feed),
-  body.is-feed-fullscreen :is(.sf-top,.sf-filters,.sf-feed){
-    max-width:100%!important;
-    width:100%!important;
-    margin-left:0!important;
-    margin-right:0!important;
-    padding-left:var(--sf-gutter-left)!important;
-    padding-right:var(--sf-gutter-right)!important;
-  }
-  html[data-theme] body.is-feed-fullscreen #bottomNav.bottom-nav,
-  body.is-feed-fullscreen #bottomNav.bottom-nav{
-    left:max(14px,env(safe-area-inset-left,0px))!important;
-    right:max(14px,env(safe-area-inset-right,0px))!important;
-    width:auto!important;
-    max-width:none!important;
-    transform:none!important;
-  }
-}
-html[data-theme] body.is-feed-fullscreen .sf-post,
-html[data-theme] body.is-feed-fullscreen .feed-card,
-body.is-feed-fullscreen .sf-post,
-body.is-feed-fullscreen .feed-card{
-  width:100%!important;
-  max-width:100%!important;
-  margin-left:0!important;
-  margin-right:0!important;
-  border-radius:var(--sf-card-radius,16px)!important;
-  background:color-mix(in srgb,var(--card) 70%,var(--theme-feed-bg,var(--bg)) 30%)!important;
-  border:1px solid color-mix(in srgb,var(--line2) 72%,var(--gold2) 14%)!important;
-  box-shadow:0 10px 24px color-mix(in srgb,#000 18%,transparent)!important;
-}
-html[data-theme] body.is-feed-fullscreen .sf-post__media,
-html[data-theme] body.is-feed-fullscreen .sf-post__media--feed-img,
-html[data-theme] body.is-feed-fullscreen .sf-post__img,
-body.is-feed-fullscreen .sf-post__media,
-body.is-feed-fullscreen .sf-post__media--feed-img,
-body.is-feed-fullscreen .sf-post__img{
-  width:100%!important;
-  max-width:100%!important;
-  margin:0!important;
-  border-radius:0!important;
-}
-html[data-theme] body.is-feed-fullscreen .sf-post__head,
-html[data-theme] body.is-feed-fullscreen .sf-post__bar,
-html[data-theme] body.is-feed-fullscreen .feed-bar,
-body.is-feed-fullscreen .sf-post__head,
-body.is-feed-fullscreen .sf-post__bar,
-body.is-feed-fullscreen .feed-bar{
-  background:color-mix(in srgb,var(--card) 58%,var(--theme-feed-bg,var(--bg)) 42%)!important;
-}
-</style>
-<script>
-(function(){
-  function pinFeedForce(){
-    var s=document.getElementById("full-edge-feed-force-v644");
-    if(s && s.parentNode){ s.parentNode.appendChild(s); }
-  }
-  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", pinFeedForce);
-  else pinFeedForce();
-  window.addEventListener("hashchange", function(){ setTimeout(pinFeedForce, 50); });
-})();
-</script>
-
 </body>
 
 <style id="quran-chrome-oval-v545">
@@ -28466,5 +28406,313 @@ html.dar-scroll-guard:not(.qrc-sheet-open):not(.quran-panel-open):not(.qov-sheet
   overscroll-behavior-y:auto!important;
 }
 </style>
+
+<style id="dar-ios-parity-edge-force-v658">
+/* v655 · GLOBAL: solid edge fill on every route — Feed/Home/Mehr/Areas alike. */
+html[data-theme],
+html[data-theme] body,
+html[data-theme] #appRoot,
+html[data-theme] #appShell{
+  --dar-edge-fill:var(--theme-page-bg,var(--page-cover,var(--outer-bg-flat,var(--premium-bg,var(--bg)))))!important;
+  --theme-feed-top:var(--theme-feed-bg,var(--dar-edge-fill))!important;
+  --theme-feed-aura:none!important;
+  background:var(--dar-edge-fill)!important;
+  background-color:var(--dar-edge-fill)!important;
+  background-image:none!important;
+  border:0!important;border-radius:0!important;box-shadow:none!important;
+  padding-left:0!important;padding-right:0!important;margin:0!important;
+  width:100%!important;max-width:100%!important;
+  overscroll-behavior-y:none!important;
+}
+html[data-theme] .app,
+html[data-theme="royal"] .app,
+html[data-theme="dark"] .app,
+html[data-theme="bordeaux"] .app,
+html[data-theme="dar-al-layl"] .app,
+html[data-theme="soft"] .app,
+html[data-theme="light"] .app,
+html[data-theme="aurora"] .app{
+  border:0!important;border-radius:0!important;box-shadow:none!important;
+  background:transparent!important;width:100%!important;max-width:100%!important;clip-path:none!important;
+}
+/* Kill aura / fade globally */
+html[data-theme] .top-edge-fade,
+html[data-theme] .top-swim-aura{
+  display:none!important;opacity:0!important;background:none!important;
+}
+html[data-theme] .top-shell:before,
+html[data-theme] .top-shell::before,
+html[data-theme] .top-shell:after,
+html[data-theme] .top-shell::after,
+html[data-theme] .top-shell.theme-hero-shell:before,
+html[data-theme] .top-shell.theme-hero-shell::before,
+html[data-theme] .top-shell.theme-hero-shell:after,
+html[data-theme] .top-shell.theme-hero-shell::after,
+html[data-theme="aurora"] .top-shell:before,
+html[data-theme="bordeaux"] .top-shell:before{
+  display:none!important;content:none!important;opacity:0!important;
+  background:none!important;background-image:none!important;
+}
+/* Mehr / Area / Quiz / Account — solid page fill (Mehr cards kept) */
+html[data-theme] body.is-more-route,
+html[data-theme] body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-reader-route),
+html[data-theme] body.is-quiz-route,
+html[data-theme] body.is-account-route,
+html[data-theme] body.is-home-route{
+  background:var(--dar-edge-fill)!important;
+  background-color:var(--dar-edge-fill)!important;
+  background-image:none!important;
+}
+html[data-theme] body.is-more-route #appView,
+html[data-theme] body.is-more-route #appView.view,
+html[data-theme] body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-overview):not(.is-quran-reader-route) #appView.view,
+html[data-theme] body.is-quiz-route #appView.view,
+html[data-theme] body.is-account-route #appView.view{
+  padding-top:max(10px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))!important;
+  padding-left:max(14px,env(safe-area-inset-left,0px))!important;
+  padding-right:max(14px,env(safe-area-inset-right,0px))!important;
+  background:var(--dar-edge-fill)!important;background-color:var(--dar-edge-fill)!important;
+  background-image:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+  width:100%!important;max-width:100%!important;box-sizing:border-box!important;
+}
+html[data-theme] body.is-more-route .view-head{
+  margin:0 0 12px!important;padding:0 0 10px!important;
+  border-bottom:1px solid color-mix(in srgb,var(--line2) 70%,transparent)!important;
+}
+html[data-theme] body.is-more-route .feature-section,
+html[data-theme] body.is-more-route .more-group,
+html[data-theme] body.is-more-route .account-card,
+html[data-theme] body.is-more-route .more-feature-row{
+  width:100%!important;max-width:100%!important;box-sizing:border-box!important;
+}
+html[data-theme] body.is-more-route .more-feature-row{
+  background:color-mix(in srgb,var(--card) 78%,var(--bg) 22%)!important;
+  border:1px solid color-mix(in srgb,var(--line2) 72%,var(--gold2) 12%)!important;
+}
+/* Home — solid continuous fill */
+html[data-theme] body.is-home-route{
+  padding-left:0!important;padding-right:0!important;padding-top:0!important;
+}
+html[data-theme] body.is-home-route .top-shell,
+html[data-theme] body.is-home-route .top-shell.theme-hero-shell,
+html[data-theme="royal"] body.is-home-route .top-shell.theme-hero-shell,
+html.is-standalone-pwa[data-theme] body.is-home-route .top-shell.theme-hero-shell,
+html[data-theme] body.is-home-route .header,
+html[data-theme] body.is-home-route .header.theme-hero-surface,
+html[data-theme] body.is-home-route .theme-hero-surface,
+html[data-theme] body.is-home-route .hero-text,
+html[data-theme] body.is-home-route .isnad,
+html[data-theme] body.is-home-route #appView.view,
+html[data-theme] body.is-home-route .view,
+html[data-theme="royal"] body.is-home-route .theme-hero-surface,
+html[data-theme="royal"] body.is-home-route .isnad,
+html[data-theme="royal"] body.is-home-route .hero-text,
+html[data-theme="light"] body.is-home-route .theme-hero-surface,
+html[data-theme="soft"] body.is-home-route .theme-hero-surface,
+html[data-theme="bordeaux"] body.is-home-route .theme-hero-surface,
+html[data-theme="aurora"] body.is-home-route .theme-hero-surface{
+  margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+  clip-path:none!important;overflow:visible!important;outline:none!important;
+  background:var(--dar-edge-fill)!important;background-color:var(--dar-edge-fill)!important;
+  background-image:none!important;filter:none!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+html[data-theme] body.is-home-route .top-shell.theme-hero-shell{padding:0!important}
+html[data-theme] body.is-home-route .header{
+  padding-top:max(14px,calc(env(safe-area-inset-top,0px) + 10px),calc(var(--dar-native-safe-top,0px) + 10px))!important;
+  padding-left:max(14px,env(safe-area-inset-left,0px))!important;
+  padding-right:max(14px,env(safe-area-inset-right,0px))!important;
+}
+html[data-theme] body.is-home-route #appView.view{
+  padding-left:max(14px,env(safe-area-inset-left,0px))!important;
+  padding-right:max(14px,env(safe-area-inset-right,0px))!important;
+}
+html[data-theme] body.is-home-route .hero-text,
+html[data-theme] body.is-home-route .top-shell.theme-hero-shell .hero-text,
+html[data-theme="royal"] body.is-home-route .hero-text,
+html[data-theme="light"] body.is-home-route .hero-text,
+html[data-theme="soft"] body.is-home-route .hero-text,
+html[data-theme="bordeaux"] body.is-home-route .hero-text,
+html[data-theme="aurora"] body.is-home-route .hero-text,
+html[data-theme="dark"] body.is-home-route .hero-text,
+html[data-theme="dar-al-layl"] body.is-home-route .hero-text{
+  border:0!important;border-top:0!important;border-top-color:transparent!important;border-top-width:0!important;
+  margin-top:10px!important;padding-top:12px!important;max-width:100%!important;
+}
+html[data-theme] body.is-home-route .isnad,
+html[data-theme] body.is-home-route .top-shell.theme-hero-shell .isnad,
+html[data-theme] body.is-home-route .theme-hero-shell .isnad,
+html[data-theme="royal"] body.is-home-route .isnad,
+html[data-theme="light"] body.is-home-route .isnad,
+html[data-theme="soft"] body.is-home-route .isnad,
+html[data-theme="bordeaux"] body.is-home-route .isnad,
+html[data-theme="aurora"] body.is-home-route .isnad,
+html[data-theme="dark"] body.is-home-route .isnad,
+html[data-theme="dar-al-layl"] body.is-home-route .isnad{
+  border:0!important;border-top:0!important;border-top-color:transparent!important;border-top-width:0!important;
+  margin-top:8px!important;padding-top:12px!important;
+}
+/* Quran */
+html[data-theme] body.is-quran-overview,
+html[data-theme] body.is-quran-overview #appView.view{
+  background:var(--quran-gradient-page,var(--quran-page-bg,var(--dar-edge-fill)))!important;
+  background-color:var(--quran-page-bg,var(--dar-edge-fill))!important;
+  padding-left:0!important;padding-right:0!important;
+}
+html[data-theme] body.is-quran-overview #appView.view{
+  padding-top:max(6px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))!important;
+}
+html[data-theme] body.is-quran-overview .qov-page{
+  padding-left:max(14px,env(safe-area-inset-left,0px))!important;
+  padding-right:max(14px,env(safe-area-inset-right,0px))!important;
+  width:100%!important;max-width:100%!important;background:transparent!important;
+}
+/* Feed — continuous solid fill (no gradient top fade / chrome bands) */
+html[data-theme] body.is-feed-fullscreen,
+html[data-theme="royal"] body.is-feed-fullscreen,
+html[data-theme="light"] body.is-feed-fullscreen,
+html[data-theme="soft"] body.is-feed-fullscreen,
+html[data-theme="bordeaux"] body.is-feed-fullscreen,
+html[data-theme="aurora"] body.is-feed-fullscreen,
+html[data-theme="dar-al-layl"] body.is-feed-fullscreen,
+html[data-theme="dark"] body.is-feed-fullscreen{
+  --theme-feed-top:var(--theme-feed-bg,var(--dar-edge-fill))!important;
+  --theme-feed-aura:none!important;
+  background:var(--theme-feed-bg,var(--dar-edge-fill))!important;
+  background-color:var(--theme-feed-bg,var(--dar-edge-fill))!important;
+  background-image:none!important;
+  padding-top:max(0px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))!important;
+  --sf-feed-col-max:100%!important;--feed-col-max:100%!important;--sf-shell-pad:0!important;
+}
+html[data-theme] body.is-feed-fullscreen .sf-app,
+html[data-theme] body.is-feed-fullscreen #premiumFeedMount,
+html[data-theme] body.is-feed-fullscreen .pf-mount-root,
+html[data-theme] body.is-feed-fullscreen #appView.view,
+html[data-theme] body.is-feed-fullscreen .sf-top,
+html[data-theme] body.is-feed-fullscreen .sf-filters,
+html[data-theme] body.is-feed-fullscreen .sf-feed,
+html[data-theme] body.is-feed-fullscreen .sf-post__head,
+html[data-theme] body.is-feed-fullscreen .sf-post__actions,
+html[data-theme] body.is-feed-fullscreen .sf-post__bar,
+html[data-theme] body.is-feed-fullscreen .sf-post--image-feed .sf-post__head,
+html[data-theme] body.is-feed-fullscreen .sf-post--image-feed .sf-post__bar{
+  align-items:stretch!important;width:100%!important;max-width:100%!important;
+  border-radius:0!important;box-shadow:none!important;outline:none!important;
+  background:var(--theme-feed-bg,var(--dar-edge-fill))!important;
+  background-color:var(--theme-feed-bg,var(--dar-edge-fill))!important;
+  background-image:none!important;margin-left:0!important;margin-right:0!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+html[data-theme] body.is-feed-fullscreen .sf-app,
+html[data-theme] body.is-feed-fullscreen #premiumFeedMount,
+html[data-theme] body.is-feed-fullscreen .pf-mount-root,
+html[data-theme] body.is-feed-fullscreen #appView.view{
+  border:0!important;margin:0!important;
+}
+html[data-theme] body.is-feed-fullscreen .sf-post--image-feed,
+html[data-theme] body.is-feed-fullscreen .sf-post{
+  width:100%!important;max-width:100%!important;margin-left:0!important;margin-right:0!important;
+}
+/* Bottom nav floating like iOS */
+html[data-theme] #bottomNav.bottom-nav,html[data-theme] .bottom-nav{
+  left:max(14px,env(safe-area-inset-left,0px))!important;
+  right:max(14px,env(safe-area-inset-right,0px))!important;
+  width:auto!important;max-width:none!important;transform:none!important;
+  bottom:max(14px,calc(env(safe-area-inset-bottom,0px) + 8px))!important;
+}
+</style>
+<script>
+(function(){
+  function fillColor(){
+    try{
+      var root=document.documentElement;if(!root)return "";
+      var cs=getComputedStyle(root);
+      var body=document.body;
+      if(body&&body.classList.contains("is-feed-fullscreen")){
+        return (cs.getPropertyValue("--theme-feed-bg")||cs.getPropertyValue("--theme-page-bg")||cs.getPropertyValue("--bg")||"").trim();
+      }
+      if(body&&body.classList.contains("is-quran-overview")){
+        return (cs.getPropertyValue("--quran-page-bg")||cs.getPropertyValue("--theme-page-bg")||cs.getPropertyValue("--bg")||"").trim();
+      }
+      return (cs.getPropertyValue("--theme-page-bg")||cs.getPropertyValue("--page-cover")||cs.getPropertyValue("--outer-bg-flat")||cs.getPropertyValue("--bg")||"").trim();
+    }catch(e){return ""}
+  }
+  function paintSolid(el,fill){
+    if(!el||!el.style)return;
+    el.style.setProperty("background",fill,"important");
+    el.style.setProperty("background-color",fill,"important");
+    el.style.setProperty("background-image","none","important");
+    el.style.setProperty("box-shadow","none","important");
+    el.style.setProperty("backdrop-filter","none","important");
+    el.style.setProperty("-webkit-backdrop-filter","none","important");
+  }
+  function pin(){
+    var s=document.getElementById("dar-ios-parity-edge-force-v658");
+    if(s&&s.parentNode){
+      (document.documentElement||s.parentNode).appendChild(s);
+    }
+    try{
+      var root=document.documentElement;
+      if(!root)return;
+      if(root.getAttribute("data-layout")==="medium"||root.getAttribute("data-layout")==="expanded"){
+        root.setAttribute("data-layout","compact");
+      }
+      root.style.setProperty("--theme-feed-top","var(--theme-feed-bg, var(--dar-edge-fill))","important");
+      root.style.setProperty("--theme-feed-aura","none","important");
+      var fill=fillColor();
+      if(fill){
+        root.style.setProperty("background",fill,"important");
+        root.style.setProperty("background-color",fill,"important");
+        root.style.setProperty("background-image","none","important");
+        if(document.body){
+          document.body.style.setProperty("background",fill,"important");
+          document.body.style.setProperty("background-color",fill,"important");
+          document.body.style.setProperty("background-image","none","important");
+          document.body.style.setProperty("padding-left","0px","important");
+          document.body.style.setProperty("padding-right","0px","important");
+        }
+        var hex=fill.match(/#[0-9a-fA-F]{3,8}/);
+        var meta=document.querySelector('meta[name="theme-color"]');
+        if(meta&&hex)meta.setAttribute("content",hex[0]);
+      }
+      var app=document.querySelector(".app");
+      if(app){
+        app.style.setProperty("border","0","important");
+        app.style.setProperty("border-radius","0","important");
+        app.style.setProperty("box-shadow","none","important");
+        app.style.setProperty("background","transparent","important");
+        app.style.setProperty("width","100%","important");
+        app.style.setProperty("max-width","100%","important");
+        app.style.setProperty("margin","0","important");
+      }
+      if(!document.body||!fill)return;
+      if(document.body.classList.contains("is-home-route")){
+        var hero=document.querySelector(".top-shell.theme-hero-shell")||document.querySelector(".top-shell");
+        if(hero){paintSolid(hero,fill);hero.style.setProperty("border","0","important");hero.style.setProperty("clip-path","none","important");}
+        ["header.theme-hero-surface",".theme-hero-surface",".hero-text",".isnad","#appView"].forEach(function(sel){
+          var el=document.querySelector(sel);if(el)paintSolid(el,fill);
+        });
+      }
+      if(document.body.classList.contains("is-feed-fullscreen")){
+        [".sf-app",".sf-top",".sf-filters",".sf-feed","#premiumFeedMount",".pf-mount-root","#appView"].forEach(function(sel){
+          var el=document.querySelector(sel);if(el)paintSolid(el,fill);
+        });
+      }
+      if(document.body.classList.contains("is-more-route")||document.body.classList.contains("is-quiz-route")||document.body.classList.contains("is-account-route")){
+        var view=document.querySelector("#appView");if(view)paintSolid(view,fill);
+      }
+    }catch(e){}
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",pin);
+  else pin();
+  window.addEventListener("hashchange",function(){setTimeout(pin,40)});
+  window.addEventListener("pageshow",function(){setTimeout(pin,40)});
+  try{
+    var mo=new MutationObserver(function(){clearTimeout(window.__darIosParityPinT);window.__darIosParityPinT=setTimeout(pin,80)});
+    mo.observe(document.documentElement,{attributes:true,attributeFilter:["data-theme","data-layout","class"]});
+    if(document.body)mo.observe(document.body,{attributes:true,attributeFilter:["class"]});
+  }catch(e){}
+})();
+</script>
 
 </html>

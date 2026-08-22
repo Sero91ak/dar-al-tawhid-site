@@ -1,0 +1,114 @@
+/* Soft boot overlay — iOS-parity first paint (visitor + test)
+ * v658 · Edel Ladezeile + boot fill only while .dar-soft-booting (no permanent html/body lock → black screen)
+ */
+html.dar-soft-booting,
+html.dar-soft-booting body{
+  background-color: var(--dar-boot-fill, var(--theme-page-bg, var(--outer-bg-flat, var(--bg, #080806)))) !important;
+}
+
+#dar-soft-boot{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  width:100%;
+  width:100dvw;
+  height:100%;
+  height:100vh;
+  height:100dvh;
+  height:-webkit-fill-available;
+  min-height:100vh;
+  min-height:100dvh;
+  min-height:-webkit-fill-available;
+  margin:0;
+  box-sizing:border-box;
+  z-index:2147483000;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  padding:max(24px, env(safe-area-inset-top, 0px), var(--dar-native-safe-top, 0px)) 24px max(24px, env(safe-area-inset-bottom, 0px), var(--dar-native-safe-bottom, 0px));
+  background-color: var(--dar-boot-fill, var(--theme-page-bg, var(--outer-bg-flat, var(--bg, #080806)))) !important;
+  background-image:
+    radial-gradient(120% 80% at 50% 42%, color-mix(in srgb, var(--gold2, #c9a86a) 12%, transparent), transparent 58%) !important;
+  background-repeat:no-repeat !important;
+  color:var(--cream, #f4ead2);
+  font-family:Manrope,Inter,system-ui,sans-serif;
+  transition:opacity .28s ease, visibility .28s ease;
+  overscroll-behavior:none;
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+  transform:translateZ(0);
+}
+#dar-soft-boot.is-done{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+#dar-soft-boot .dar-soft-boot__mark{
+  width:72px;
+  height:72px;
+  border-radius:50%;
+  object-fit:cover;
+  box-shadow:0 10px 28px rgba(0,0,0,.35);
+  border:1px solid color-mix(in srgb, var(--gold2, #c9a86a) 45%, transparent);
+}
+#dar-soft-boot .dar-soft-boot__title{
+  margin:0;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:.04em;
+  color:var(--gold2, #d4b56a);
+  text-align:center;
+}
+#dar-soft-boot .dar-soft-boot__sub{
+  margin:-8px 0 0;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:color-mix(in srgb, var(--cream,#f4ead2) 72%, transparent);
+  text-align:center;
+}
+#dar-soft-boot .dar-soft-boot__track{
+  width:min(236px,68vw);
+  height:2px;
+  border-radius:999px;
+  margin-top:6px;
+  background:color-mix(in srgb, var(--gold2, #c9a86a) 18%, transparent);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--gold2, #c9a86a) 10%, transparent);
+  overflow:hidden;
+}
+#dar-soft-boot .dar-soft-boot__bar{
+  height:100%;
+  width:0%;
+  border-radius:inherit;
+  background:linear-gradient(90deg, color-mix(in srgb, var(--gold2,#c9a86a) 55%, transparent), var(--gold2,#efd78e), color-mix(in srgb, #fff 55%, var(--gold2,#d4b56a)));
+  box-shadow:0 0 10px color-mix(in srgb, var(--gold2, #c9a86a) 45%, transparent);
+  transition:width .08s linear;
+}
+#dar-soft-boot .dar-soft-boot__pct{
+  margin:0;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.08em;
+  color:color-mix(in srgb, var(--cream,#f4ead2) 78%, transparent);
+}
+
+html[data-theme="light"] #dar-soft-boot,
+html[data-theme="soft"] #dar-soft-boot{
+  color:#3a2f24;
+}
+html[data-theme="light"] #dar-soft-boot .dar-soft-boot__title,
+html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__title{
+  color:var(--gold2, #9b7a3c);
+}
+html[data-theme="light"] #dar-soft-boot .dar-soft-boot__sub,
+html[data-theme="light"] #dar-soft-boot .dar-soft-boot__pct,
+html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__sub,
+html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__pct{
+  color:rgba(58,47,36,.72);
+}
