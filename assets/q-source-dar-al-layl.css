@@ -1,0 +1,380 @@
+/* DAR AL TAWḤĪD – globale Quellen-Seiten
+   Stil: App-nah, Dār al-Layl, weich, edel, edge-to-edge
+*/
+:root{
+  --q-bg:#050606;
+  --q-bg-2:#090b09;
+  --q-bg-3:#0d110e;
+  --q-surface:#0a0d0b;
+  --q-surface-2:#101511;
+  --q-surface-3:#131914;
+  --q-text:#f2eadc;
+  --q-text-soft:rgba(242,234,220,.82);
+  --q-text-muted:rgba(242,234,220,.60);
+  --q-gold:#d9c28b;
+  --q-gold-soft:#e9d8af;
+  --q-gold-deep:#a98a4d;
+  --q-line:rgba(169,138,77,.34);
+  --q-line-soft:rgba(169,138,77,.16);
+  --q-line-faint:rgba(169,138,77,.08);
+  --q-glow:rgba(217,194,139,.10);
+  --q-shadow:0 10px 26px rgba(0,0,0,.28);
+  --q-radius:26px;
+  --q-radius-lg:34px;
+  --q-logo:url('/app-icon-512.png?v=qsource-watermark-v2');
+}
+*{box-sizing:border-box;}
+html{
+  margin:0;
+  min-height:100%;
+  background:var(--q-bg);
+  color-scheme:dark;
+}
+body.qsource-body{
+  margin:0;
+  min-height:100dvh;
+  color:var(--q-text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  -webkit-text-size-adjust:100%;
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at top center, rgba(217,194,139,.08), transparent 24%),
+    radial-gradient(circle at 85% 20%, rgba(60,73,60,.12), transparent 22%),
+    linear-gradient(180deg, #070807 0%, #050606 18%, #050606 100%);
+}
+/* voller, ruhiger Gesamthintergrund */
+body.qsource-body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-2;
+  background:
+    linear-gradient(180deg, rgba(20,20,18,.18), transparent 16%),
+    linear-gradient(90deg, rgba(169,138,77,.05), transparent 14%, transparent 86%, rgba(169,138,77,.05));
+}
+body.qsource-body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  opacity:.10;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.018), transparent 55%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,.012) 0 1px, transparent 1px 10px);
+}
+.qsource-page{
+  width:min(100%,860px);
+  margin:0 auto;
+  padding:max(14px, env(safe-area-inset-top)) 14px max(22px, env(safe-area-inset-bottom));
+}
+/* Header viel ruhiger wie App */
+.qsource-header{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:16px 8px 14px;
+  border-bottom:1px solid var(--q-line);
+}
+.qsource-logo{
+  width:64px;
+  height:64px;
+  flex:0 0 64px;
+  object-fit:contain;
+  display:block;
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.20));
+}
+.qsource-header-text{
+  min-width:0;
+}
+.qsource-brand-top{
+  margin:0 0 4px;
+  color:var(--q-text-soft);
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.qsource-brand{
+  margin:0;
+  color:var(--q-gold-soft);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(32px,7vw,54px);
+  line-height:1;
+  letter-spacing:.08em;
+  font-weight:500;
+}
+.qsource-sign{
+  margin:6px 0 0;
+  color:var(--q-gold-soft);
+  font-family:"Snell Roundhand","Apple Chancery","Segoe Script",cursive;
+  font-size:clamp(20px,4.6vw,30px);
+  line-height:1;
+}
+/* Hero wie App-Karte */
+.qsource-hero{
+  position:relative;
+  margin-top:18px;
+  padding:18px 18px 20px;
+  border-radius:30px;
+  background:
+    radial-gradient(circle at 60% 40%, rgba(217,194,139,.05), transparent 38%),
+    linear-gradient(180deg, rgba(17,21,17,.96), rgba(8,11,9,.98));
+  border:1px solid var(--q-line);
+  box-shadow:var(--q-shadow);
+  overflow:hidden;
+}
+/* echtes Wasserzeichen – nicht als Bildbox */
+.qsource-hero::after{
+  content:"";
+  position:absolute;
+  inset:18% 12% 10% 12%;
+  pointer-events:none;
+  opacity:.045;
+  background:linear-gradient(180deg, var(--q-gold-soft), var(--q-gold));
+  -webkit-mask-image:var(--q-logo);
+  -webkit-mask-repeat:no-repeat;
+  -webkit-mask-position:center;
+  -webkit-mask-size:56%;
+  mask-image:var(--q-logo);
+  mask-repeat:no-repeat;
+  mask-position:center;
+  mask-size:56%;
+}
+.qsource-kicker{
+  position:relative;
+  z-index:1;
+  margin:0 0 12px;
+  color:var(--q-gold);
+  font-size:12px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:700;
+}
+.qsource-title{
+  position:relative;
+  z-index:1;
+  margin:0;
+  color:var(--q-text);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(28px,7vw,48px);
+  line-height:1.08;
+  font-weight:600;
+}
+.qsource-quote-line{
+  position:relative;
+  z-index:1;
+  height:1px;
+  margin:18px 0 18px;
+  background:linear-gradient(90deg, var(--q-gold-deep), rgba(169,138,77,.15) 72%, transparent);
+}
+.qsource-quote{
+  position:relative;
+  z-index:1;
+  margin:0;
+  color:var(--q-text);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(18px,5vw,24px);
+  line-height:1.55;
+}
+/* Info-Bereich wie App-Liste */
+.qsource-meta{
+  margin-top:18px;
+  border-top:1px solid var(--q-line-soft);
+}
+.qsource-meta-row{
+  display:grid;
+  grid-template-columns:120px 1fr;
+  gap:14px;
+  padding:16px 0;
+  border-bottom:1px solid var(--q-line-faint);
+}
+.qsource-meta-label{
+  color:var(--q-gold);
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-weight:800;
+}
+.qsource-meta-value{
+  color:var(--q-text-soft);
+  font-size:15px;
+  line-height:1.55;
+}
+/* Bereiche offener, weniger kastig */
+.qsource-section{
+  position:relative;
+  margin-top:20px;
+  padding:18px 18px 20px;
+  border-radius:30px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(217,194,139,.035), transparent 44%),
+    linear-gradient(180deg, rgba(14,18,15,.98), rgba(7,10,8,.98));
+  border:1px solid var(--q-line-soft);
+  box-shadow:var(--q-shadow);
+}
+.qsource-section-head{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:0 0 16px;
+}
+.qsource-num{
+  width:38px;
+  height:38px;
+  border-radius:999px;
+  flex:0 0 38px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(180deg, var(--q-gold-soft), var(--q-gold));
+  color:#111;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:20px;
+  font-weight:700;
+}
+.qsource-section-title{
+  margin:0;
+  color:var(--q-gold-soft);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(22px,5vw,34px);
+  line-height:1.15;
+  font-weight:600;
+}
+.qsource-section p,
+.qsource-section li{
+  color:var(--q-text-soft);
+  font-size:16px;
+  line-height:1.70;
+}
+.qsource-section ol{
+  margin:8px 0 0;
+  padding-left:24px;
+}
+.qsource-arabic{
+  direction:rtl;
+  text-align:right;
+  color:var(--q-text);
+  font-family:"Geeza Pro","Noto Naskh Arabic","Traditional Arabic",serif;
+  font-size:clamp(28px,7vw,40px);
+  line-height:1.95;
+  margin:0 0 14px;
+}
+/* Linkkarten – App-näher, nicht technischer Kastenlook */
+.qsource-links{
+  display:grid;
+  gap:14px;
+  margin-top:18px;
+}
+.qsource-link{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  min-height:88px;
+  padding:16px 18px;
+  border-radius:30px;
+  text-decoration:none;
+  color:inherit;
+  background:
+    radial-gradient(circle at 40% 50%, rgba(217,194,139,.05), transparent 38%),
+    linear-gradient(180deg, rgba(15,19,16,.98), rgba(8,11,9,.98));
+  border:1px solid var(--q-line);
+  box-shadow:var(--q-shadow);
+  transition:.18s ease;
+}
+.qsource-link:hover{
+  transform:translateY(-1px);
+  border-color:rgba(217,194,139,.44);
+}
+.qsource-link-icon{
+  width:58px;
+  height:58px;
+  border-radius:18px;
+  flex:0 0 58px;
+  display:grid;
+  place-items:center;
+  color:var(--q-gold-soft);
+  border:1px solid var(--q-line);
+  background:linear-gradient(180deg, rgba(24,29,24,.98), rgba(11,14,12,.98));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.02);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:26px;
+  font-weight:700;
+}
+.qsource-link.pdf .qsource-link-icon{
+  background:linear-gradient(180deg,#d04b43,#9b302c);
+  color:#fff;
+  border-color:rgba(255,255,255,.10);
+}
+.qsource-link.scan .qsource-link-icon{
+  background:linear-gradient(180deg,#ead6a2,#c9ab69);
+  color:#1a1710;
+  border-color:rgba(255,255,255,.10);
+}
+.qsource-link-body{
+  min-width:0;
+}
+.qsource-link-title{
+  display:block;
+  color:var(--q-text);
+  font-size:17px;
+  line-height:1.30;
+  font-weight:700;
+}
+.qsource-link-sub{
+  display:block;
+  margin-top:4px;
+  color:var(--q-text-muted);
+  font-size:14px;
+  line-height:1.40;
+}
+/* Social nur ruhig */
+.qsource-social{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  margin-top:24px;
+  padding-bottom:10px;
+}
+.qsource-social a{
+  width:50px;
+  height:50px;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(180deg, rgba(16,20,17,.98), rgba(8,10,9,.98));
+  border:1px solid var(--q-line-soft);
+  text-decoration:none;
+  box-shadow:var(--q-shadow);
+}
+.qsource-social svg{
+  width:22px;
+  height:22px;
+}
+.qsource-social .telegram svg{fill:#2AABEE;}
+.qsource-social .whatsapp svg{fill:#25D366;}
+.qsource-social .instagram svg{fill:#E8D8AF;}
+.qsource-social .web svg{fill:#E8D8AF;}
+/* Mobile */
+@media (max-width:640px){
+  .qsource-page{
+    padding:max(10px, env(safe-area-inset-top)) 10px max(18px, env(safe-area-inset-bottom));
+  }
+  .qsource-header{
+    gap:12px;
+    padding:14px 4px 12px;
+  }
+  .qsource-logo{
+    width:56px;
+    height:56px;
+    flex-basis:56px;
+  }
+  .qsource-meta-row{
+    grid-template-columns:1fr;
+    gap:7px;
+  }
+  .qsource-link{
+    min-height:82px;
+    padding:14px 15px;
+  }
+}

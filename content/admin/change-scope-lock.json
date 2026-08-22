@@ -3288,6 +3288,18 @@
       "expiresAt": "2026-12-31T23:59:00.000Z"
     },
     {
+      "id": "q-source-dar-al-layl-v1-2026-08-22",
+      "approvedBy": "user-explicit-q-source-dar-al-layl",
+      "note": "Globale /q/-Quellenseiten auf App-nahes Dār-al-Layl-Design umstellen",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "q/",
+        "q/_registry/",
+        "assets/q-source-dar-al-layl.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "prayer-copy-sanitizer-v1-2026-08-13",
       "approvedBy": "user-explicit-prayer-wording-fix",
       "note": "Sicherheitsfix gegen alte Formulierung 'ruft dich' im Gebets-Push",
