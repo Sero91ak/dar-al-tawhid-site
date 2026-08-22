@@ -26,7 +26,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v63-video-studio-voice-brand";
+  var ADMIN_SW_CACHE="dar-admin-stats-v66-video-touch-editor";
   var MIG_KEY="darAdminSwFixV27";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
@@ -611,7 +611,7 @@ const ADMIN_LAST_PUSH_CTX_KEY="darAdminLastPublishPushV1";
 const ADMIN_PUBLISH_TRACK_KEY="darAdminPublishTrackV1";
 const DEFAULT_ADMIN_TABS=[
   ["start","Start"],
-  ["video-studio","KI-Video-Studio"],
+  ["video-studio","Sprach-Bildbeitrag"],
   ["live-edit","Live-Bearbeitung"],
   ["quellen","Beiträge"],
   ["actions","Neuer Beitrag"],
@@ -2399,7 +2399,7 @@ function renderStart(ctx){
       <div class="cover-actions">
         <span class="signal"><span class="status-dot"></span>${Number(ctx.live.live_now||0)} jetzt online</span>
         <button class="btn primary" data-tab="actions" type="button">Beitrag vorbereiten</button>
-        <button class="btn" data-tab="video-studio" type="button">KI-Video-Studio</button>
+        <button class="btn" data-tab="video-studio" type="button">Sprach-Bildbeitrag</button>
         <button class="btn" data-tab="besucher" type="button">Besucher öffnen</button>
         <button class="btn" data-tab="settings" type="button">Technik prüfen</button>
               <button class="btn" data-tab="quiz-stats" type="button">Quiz-Statistik</button>
@@ -2407,7 +2407,7 @@ function renderStart(ctx){
     </div>
   </section>
   <section class="folder-grid">
-    ${folderCard("①","KI-Video-Studio","Autonomer Video-Beitrag · Aussage, Stimme, 9:16-Export.","video-studio","Öffnen")}
+    ${folderCard("①","Sprach-Bildbeitrag","Text + Bild · Stimme · 9:16-MP4","video-studio","Öffnen")}
     ${folderCard("②","Live-Bearbeitung","Besucheransicht mit kontextbezogenem Bearbeiten.","live-edit","Neu")}
     ${folderCard("③","Beiträge","Markdown bearbeiten · Feed-Bild hinzufügen · speichern.","quellen","Editor")}
     ${folderCard("④","Neuer Beitrag","Markdown einfügen, Bild hinzufügen, veröffentlichen.","actions","Veröffentlichen")}

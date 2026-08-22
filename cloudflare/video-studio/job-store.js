@@ -94,6 +94,27 @@ export class VideoStudioStore {
         return Response.json({ ok: true, bucket });
       }
 
+      if (method === "GET" && path === "/editor/templates") {
+        const templates = (await this.state.storage.get("editorTemplates")) || [];
+        return Response.json({ ok: true, templates });
+      }
+      if (method === "PUT" && path === "/editor/templates") {
+        const body = await request.json().catch(() => ({}));
+        const templates = Array.isArray(body.templates) ? body.templates.slice(0, 40) : [];
+        await this.state.storage.put("editorTemplates", templates);
+        return Response.json({ ok: true, templates });
+      }
+      if (method === "GET" && path === "/editor/pronunciation") {
+        const dict = (await this.state.storage.get("pronunciationDict")) || {};
+        return Response.json({ ok: true, dict });
+      }
+      if (method === "PUT" && path === "/editor/pronunciation") {
+        const body = await request.json().catch(() => ({}));
+        const dict = body.dict && typeof body.dict === "object" ? body.dict : {};
+        await this.state.storage.put("pronunciationDict", dict);
+        return Response.json({ ok: true, dict });
+      }
+
       return Response.json({ ok: false, error: "Not found" }, { status: 404 });
     } catch (error) {
       return Response.json({ ok: false, error: error.message || String(error) }, { status: 500 });
@@ -263,4 +284,46 @@ export async function assertVideoStudioRateLimit(env, request) {
     throw err;
   }
   return { ok: true };
+}
+
+export async function listEditorTemplates(env) {
+  const result = await storeFetch(env, "/editor/templates");
+  if (result.missingStore) return globalThis.__DAR_EDITOR_TEMPLATES__ || [];
+  return result.templates || [];
+}
+
+export async function saveEditorTemplates(env, templates) {
+  const list = Array.isArray(templates) ? templates.slice(0, 40) : [];
+  const result = await storeFetch(env, "/editor/templates", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ templates: list })
+  });
+  if (result.missingStore) {
+    globalThis.__DAR_EDITOR_TEMPLATES__ = list;
+    return list;
+  }
+  if (!result.ok) throw new Error(result.error || "Vorlagen speichern fehlgeschlagen");
+  return result.templates || list;
+}
+
+export async function readPronunciationDict(env) {
+  const result = await storeFetch(env, "/editor/pronunciation");
+  if (result.missingStore) return globalThis.__DAR_PRONUNCIATION__ || {};
+  return result.dict || {};
+}
+
+export async function savePronunciationDict(env, dict) {
+  const next = dict && typeof dict === "object" ? dict : {};
+  const result = await storeFetch(env, "/editor/pronunciation", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ dict: next })
+  });
+  if (result.missingStore) {
+    globalThis.__DAR_PRONUNCIATION__ = next;
+    return next;
+  }
+  if (!result.ok) throw new Error(result.error || "Aussprache speichern fehlgeschlagen");
+  return result.dict || next;
 }
