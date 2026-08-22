@@ -618,7 +618,7 @@ const DEFAULT_WORKER_PUBLISH_URL="https://dar-admin-publisher.sero91ak.workers.d
 const WORKER_PUBLISH_URL_KEY="darAdminWorkerPublishUrlV1";
 const WORKER_SECRET_KEY="darAdminWorkerSecretV1";
 const ADMIN_DRAFT_KEY="darAdminDraftV1";
-const ADMIN_BUILD="2026-06-18-no-stories";
+const ADMIN_BUILD="2026-08-22-worker-secret-save";
 const ADMIN_PLAN_KEY="darAdminPlannedPostsV1";
 const ADMIN_NEWS_KEY="darAdminNewsDraftsV1";
 const ADMIN_REPORTS_KEY="darAdminReportsV1";
@@ -867,8 +867,13 @@ function previewSize(){
 }
 function savePreviewSize(size){try{localStorage.setItem(ADMIN_PREVIEW_SIZE_KEY,JSON.stringify(size))}catch(e){}}
 function normalizeWorkerPublishUrl(url){
-  const raw=String(url||"").trim();
-  return(!raw||raw==="/api/admin/publish")?DEFAULT_WORKER_PUBLISH_URL:raw;
+  let raw=String(url||"").trim();
+  if(!raw||raw==="/api/admin/publish")||raw==="/publish")return DEFAULT_WORKER_PUBLISH_URL;
+  // Häufige Tippfehler aus Screenshots/Autokorrektur korrigieren
+  raw=raw.replace(/^https?:\/\/(?!dar-)([a-z0-9-]*admin-publisher\.sero91ak\.workers\.dev)/i,"https://dar-$1");
+  raw=raw.replace(/^https?:\/\/r-admin-publisher\.sero91ak\.workers\.dev/i,"https://dar-admin-publisher.sero91ak.workers.dev");
+  raw=raw.replace(/^https?:\/\/dar-admin-publisher\.sero91ak\.workers\.dev\/?$/i,DEFAULT_WORKER_PUBLISH_URL);
+  return raw;
 }
 function workerPublishUrl(){
   try{
@@ -876,6 +881,21 @@ function workerPublishUrl(){
   }catch(e){return normalizeWorkerPublishUrl(String((window.DAR_WORKER_CONFIG||{}).publishUrl||DEFAULT_WORKER_PUBLISH_URL))}
 }
 function saveWorkerPublishUrl(url){try{if(url)localStorage.setItem(WORKER_PUBLISH_URL_KEY,normalizeWorkerPublishUrl(url));else localStorage.removeItem(WORKER_PUBLISH_URL_KEY)}catch(e){}}
+function saveWorkerConnectionFromForm(opts={}){
+  const publishUrl=(document.getElementById("workerPublishUrlInput")?.value||workerPublishUrl()).trim();
+  const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
+  const rememberEl=document.getElementById("rememberWorkerSecret");
+  if(!publishUrl)throw new Error("Worker-URL fehlt");
+  if(!secret)throw new Error("Admin Worker Secret fehlt");
+  saveWorkerPublishUrl(publishUrl);
+  if(rememberEl)rememberEl.checked=true;
+  setSavedWorkerSecret(secret);
+  if(document.getElementById("workerPublishUrlInput"))document.getElementById("workerPublishUrlInput").value=normalizeWorkerPublishUrl(publishUrl);
+  if(document.getElementById("workerSecretInput"))document.getElementById("workerSecretInput").value=secret;
+  if(opts.silent)return{publishUrl:normalizeWorkerPublishUrl(publishUrl),secret};
+  setUploadStatus("Worker-Verbindung gespeichert. Bibliothek-Live-Push kann jetzt autorisieren.");
+  return{publishUrl:normalizeWorkerPublishUrl(publishUrl),secret};
+}
 function resolveWorkerUrl(url){const raw=normalizeWorkerPublishUrl(url);return /^https?:\/\//i.test(raw)?raw:new URL(raw,SITE_ORIGIN).toString()}
 function workerHealthUrl(){
   const url=new URL(resolveWorkerUrl(workerPublishUrl()));
@@ -2937,11 +2957,12 @@ function renderActions(rows){
           <input class="field" id="workerPublishUrlInput" value="${esc(workerPublishUrl())}" placeholder="${esc(DEFAULT_WORKER_PUBLISH_URL)}">
           <input class="field" id="workerSecretInput" type="password" autocomplete="off" value="${esc(savedWorkerSecret())}" placeholder="Admin Worker Secret" style="margin-top:8px">
           <label class="upload-status" style="display:flex;align-items:center;gap:8px;margin:8px 0 0;min-height:38px">
-            <input id="rememberWorkerSecret" type="checkbox" ${savedWorkerSecret()?"checked":""}>
+            <input id="rememberWorkerSecret" type="checkbox" checked>
             <span>Worker Secret auf diesem Gerät merken</span>
           </label>
+          <button class="btn primary" id="saveWorkerConnectionBtn" type="button" style="margin-top:8px;width:100%;justify-content:center">Worker-Verbindung speichern</button>
           <button class="btn" id="forgetWorkerSecretBtn" type="button" style="margin-top:8px">Worker Secret löschen</button>
-          <div class="upload-status" style="margin-top:10px">GitHub Token bleibt nur als Cloudflare Secret gespeichert. Die Admin-App sendet Markdown an den Worker; der Worker erstellt Beitrag und posts-index.json.</div>
+          <div class="upload-status" style="margin-top:10px">URL: <code>https://dar-admin-publisher.sero91ak.workers.dev</code> (mit/ohne <code>/publish</code>). Secret: <code>DarAdminLive2026Publish</code> — nicht GitHub-Token. Erst <b>speichern</b>, dann Bibliothek live pushen.</div>
         </div>
       </details>
       <details class="admin-fold">
@@ -3466,6 +3487,16 @@ function bindUi(){
   const jummahRunBtnActions=document.getElementById("adminJummahRunBtnActions");if(jummahRunBtnActions)jummahRunBtnActions.onclick=()=>runAdminJummahScheduler({live:false});
   const jummahLiveBtnActions=document.getElementById("adminJummahLiveBtnActions");if(jummahLiveBtnActions)jummahLiveBtnActions.onclick=()=>runAdminJummahScheduler({live:true});
   if(document.getElementById("adminJummahPushStatus")||document.getElementById("adminJummahPushStatusActions"))loadAdminJummahPushStatus();
+  const saveWorkerConnectionBtn=document.getElementById("saveWorkerConnectionBtn");
+  if(saveWorkerConnectionBtn)saveWorkerConnectionBtn.onclick=()=>{
+    try{saveWorkerConnectionFromForm()}catch(e){setUploadStatus(String(e.message||e))}
+  };
+  const workerSecretInput=document.getElementById("workerSecretInput");
+  if(workerSecretInput){
+    const persist=()=>{try{if((workerSecretInput.value||"").trim())saveWorkerConnectionFromForm({silent:true})}catch(e){}};
+    workerSecretInput.addEventListener("change",persist);
+    workerSecretInput.addEventListener("blur",persist);
+  }
   const forgetWorkerSecretBtn=document.getElementById("forgetWorkerSecretBtn");if(forgetWorkerSecretBtn)forgetWorkerSecretBtn.onclick=()=>{setSavedWorkerSecret("");const input=document.getElementById("workerSecretInput");if(input)input.value="";const remember=document.getElementById("rememberWorkerSecret");if(remember)remember.checked=false;setUploadStatus("Worker Secret wurde von diesem Gerät gelöscht.")};
   document.querySelectorAll("[data-scroll-upload]").forEach(btn=>btn.onclick=()=>document.getElementById("postMarkdownInput")?.scrollIntoView({behavior:"smooth",block:"center"}));
   bindCommandCenterForms();
