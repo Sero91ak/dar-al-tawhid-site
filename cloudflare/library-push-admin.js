@@ -44,6 +44,41 @@ function parseOneSignalAcceptedRecipients(raw) {
   return null;
 }
 
+function countOneSignalInvalidIds(raw) {
+  try {
+    const data = typeof raw === "string" ? JSON.parse(raw) : raw;
+    const errors = data?.errors || {};
+    const buckets = [
+      errors.invalid_player_ids,
+      errors.invalid_subscription_ids,
+      errors.invalid_aliases,
+      data?.invalid_player_ids,
+      data?.invalid_subscription_ids
+    ];
+    let total = 0;
+    for (const bucket of buckets) {
+      if (Array.isArray(bucket)) total += bucket.length;
+    }
+    return total;
+  } catch (error) {
+    return 0;
+  }
+}
+
+/** true = Versuch weiterprobieren (kein echter Besucher-Empfang) */
+function oneSignalResponseLooksEmpty(raw, requestedIdCount = 0) {
+  const accepted = parseOneSignalAcceptedRecipients(raw);
+  if (accepted !== null && accepted <= 0) return true;
+  const invalid = countOneSignalInvalidIds(raw);
+  if (accepted === null && invalid > 0) {
+    // Viele tote Supabase-IDs: OneSignal 200 ohne recipients → kein echter Versand
+    if (!requestedIdCount || invalid >= Math.max(1, Math.floor(requestedIdCount * 0.5))) {
+      return true;
+    }
+  }
+  return false;
+}
+
 function uniqueValues(values) {
   return [...new Set(values.map((value) => String(value || "").trim()).filter(Boolean))];
 }
@@ -98,15 +133,17 @@ async function loadLibraryPushSubscriptionIds(env) {
 
 function buildLibraryPushAttempts(basePayload, subscriptionIds) {
   const attempts = [];
-  for (const ids of chunkValues(subscriptionIds, ONESIGNAL_BATCH_SIZE)) {
-    attempts.push({ ...basePayload, include_subscription_ids: ids });
-  }
+  // Segmente zuerst: Besucher-Push muss an aktive OneSignal-Abos, nicht an tote Supabase-IDs.
   attempts.push(
-    { ...basePayload, included_segments: ["DAR_PUSH"] },
     { ...basePayload, included_segments: ["Subscribed Users"] },
+    { ...basePayload, included_segments: ["DAR_PUSH"] },
+    { ...basePayload, included_segments: ["Total Subscriptions"] },
     { ...basePayload, filters: [{ field: "tag", key: "dar_push", relation: "=", value: "true" }] },
     { ...basePayload, filters: [{ field: "tag", key: "post_notifications", relation: "=", value: "true" }] }
   );
+  for (const ids of chunkValues(subscriptionIds, ONESIGNAL_BATCH_SIZE)) {
+    attempts.push({ ...basePayload, include_subscription_ids: ids });
+  }
   return attempts;
 }
 
@@ -301,30 +338,35 @@ export async function sendLibraryPublicationPush(env, record) {
         });
         const text = await res.text();
         if (res.ok) {
+          const requestedIds = Array.isArray(payload.include_subscription_ids)
+            ? payload.include_subscription_ids.length
+            : 0;
           const accepted = parseOneSignalAcceptedRecipients(text);
-          if (accepted !== null && accepted <= 0) {
-            lastError = `OneSignal 200: keine Empfänger im Ziel ${payload.included_segments?.[0] || "tag-filter"}`;
+          const invalidCount = countOneSignalInvalidIds(text);
+          const targetLabel = requestedIds
+            ? `supabase-subscriptions:${requestedIds}`
+            : (payload.included_segments?.[0] || "tag-filter");
+          if (oneSignalResponseLooksEmpty(text, requestedIds)) {
+            lastError = `OneSignal 200 ohne Zustellung (${targetLabel}): recipients=${accepted ?? "null"}, invalid=${invalidCount}`;
             attemptLog.push({
-              target: payload.include_subscription_ids?.length
-                ? `supabase-subscriptions:${payload.include_subscription_ids.length}`
-                : (payload.included_segments?.[0] || "tag-filter"),
+              target: targetLabel,
               httpStatus: res.status,
               authMode,
               sent: false,
               recipients: accepted,
+              invalidIds: invalidCount,
               reason: lastError
             });
             continue;
           }
           return {
             sent: true,
-            target: payload.include_subscription_ids?.length
-              ? `supabase-subscriptions:${payload.include_subscription_ids.length}`
-              : (payload.included_segments?.[0] || "tag-filter"),
+            target: targetLabel,
             authMode,
             targetUrl: url,
             data: pushData,
             recipients: accepted,
+            invalidIds: invalidCount,
             response: text.slice(0, 400),
             subscriptionCount: subscriptionIds.length,
             attempts: attemptLog
