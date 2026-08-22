@@ -17,7 +17,7 @@ html[data-theme] {
   --content-inset: max(12px, env(safe-area-inset-left, 0px));
   --dar-edge-gutter: max(12px, env(safe-area-inset-left, 0px));
   --dar-edge-gutter-right: max(12px, env(safe-area-inset-right, 0px));
-  --dar-edge-fill: var(--theme-page-bg, var(--page-cover, var(--outer-bg-flat, var(--premium-bg, var(--outer-bg, var(--bg))))));
+  --dar-edge-fill: var(--outer-bg-flat, var(--theme-page-bg, var(--page-cover, var(--premium-bg, var(--outer-bg, var(--bg))))));
   --dar-edge-fill-mid: var(--page-cover-mid, var(--dar-edge-fill));
 }
 
