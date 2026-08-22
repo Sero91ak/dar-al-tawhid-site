@@ -22,3 +22,23 @@ Current modes:
 
 - `.staging` -> `https://dar-al-tawhid.de/test/?env=staging&source=ios-testflight#home`
 - `.live` -> `https://dar-al-tawhid.de/#home`
+
+## Home-Screen-Widgets (iPhone / iPad / Mac Catalyst)
+
+Nach dem ersten Archive mit aktiver Apple-Developer-Mitgliedschaft:
+
+1. App auf dem Gerät installieren (TestFlight Internal).
+2. Home-Bildschirm lange drücken → **+** → **DAR AL TAWḤĪD**.
+3. Widgets wählen:
+   - **Gebetszeiten** (klein / mittel / groß)
+   - **Qibla** (klein)
+   - **Heute** (klein / mittel)
+   - **Āyah und Duʿāʾ** (klein / mittel)
+
+Die App teilt Standort aus `darPrayerSettingsV1` über die App-Group `group.de.daraltawhid.app` mit den Widgets. Ohne Standort gilt Berlin als Standard. Tippen öffnet `daraltawhid://prayer|qibla|home|quran`.
+
+In Xcode unter Signing für **App und Widget** dieselbe Team-ID setzen und die App-Group aktivieren.
+
+## iPad und Mac
+
+Das Target ist `1,2` (iPhone + iPad) mit `SUPPORTS_MACCATALYST`. Alle Web-Funktionen laufen in der gleichen WKWebView. Mac: Destination „My Mac (Designed for iPad)“ oder Mac Catalyst. Android-Widgets folgen in einem späteren Schritt; zuerst iOS/TestFlight.

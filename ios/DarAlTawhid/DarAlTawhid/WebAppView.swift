@@ -70,6 +70,8 @@ final class GradientBackdropView: UIView {
 }
 
 struct WebAppView: UIViewRepresentable {
+    var destination: DarDeepLink.Destination? = nil
+
     private enum AppEnvironment {
         case staging
         case live
@@ -104,6 +106,7 @@ struct WebAppView: UIViewRepresentable {
         let userContentController = WKUserContentController()
         userContentController.add(context.coordinator, name: "darLibraryReader")
         userContentController.add(context.coordinator, name: "darAppearance")
+        userContentController.add(context.coordinator, name: "darWidgetSnapshot")
         let iosViewportPolish = """
         (function(){
           if(window.__darIosViewportPolishInstalled)return;
@@ -440,6 +443,34 @@ struct WebAppView: UIViewRepresentable {
                 forMainFrameOnly: true
             )
         )
+        let widgetBridge = """
+        (function(){
+          function send(){
+            try{
+              var raw=localStorage.getItem("darPrayerSettingsV1");
+              var s=raw?JSON.parse(raw):{};
+              if(window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.darWidgetSnapshot){
+                window.webkit.messageHandlers.darWidgetSnapshot.postMessage({
+                  lat:s.lat,
+                  lon:s.lon,
+                  city:s.city||""
+                });
+              }
+            }catch(e){}
+          }
+          send();
+          setTimeout(send,800);
+          setTimeout(send,2400);
+          setInterval(send,120000);
+        })();
+        """
+        userContentController.addUserScript(
+            WKUserScript(
+                source: widgetBridge,
+                injectionTime: .atDocumentEnd,
+                forMainFrameOnly: true
+            )
+        )
         configuration.userContentController = userContentController
 
         let bootInk = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
@@ -484,7 +515,11 @@ struct WebAppView: UIViewRepresentable {
         return containerView
     }
 
-    func updateUIView(_ view: UIView, context: Context) {}
+    func updateUIView(_ view: UIView, context: Context) {
+        if let destination {
+            context.coordinator.navigate(to: destination)
+        }
+    }
 
     final class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler {
         private struct LibraryPublication: Decodable {
@@ -518,6 +553,7 @@ struct WebAppView: UIViewRepresentable {
         private var viewportInsetWorkItem: DispatchWorkItem?
         private var lastAppliedTopInset: CGFloat = -1
         private var lastAppearanceKey: String = ""
+        private var lastOpenedDestination: DarDeepLink.Destination?
         private let errorHTML = """
         <!doctype html>
         <html lang="de">
@@ -574,10 +610,49 @@ struct WebAppView: UIViewRepresentable {
             loadingProgressTimer?.invalidate()
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darLibraryReader")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darAppearance")
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darWidgetSnapshot")
             NotificationCenter.default.removeObserver(self)
         }
 
+        func navigate(to destination: DarDeepLink.Destination, force: Bool = false) {
+            guard force || lastOpenedDestination != destination else { return }
+            lastOpenedDestination = destination
+            let hash = destination.webHash
+            webView?.evaluateJavaScript("location.hash=\(Self.jsString(hash));", completionHandler: nil)
+        }
+
+        private static func jsString(_ value: String) -> String {
+            let escaped = value
+                .replacingOccurrences(of: "\\", with: "\\\\")
+                .replacingOccurrences(of: "\"", with: "\\\"")
+            return "\"\(escaped)\""
+        }
+
+        func applyWidgetPayload(_ body: [String: Any]) {
+            var snap = DarWidgetStore.load()
+            if let lat = body["lat"] as? Double, let lon = body["lon"] as? Double,
+               lat.isFinite, lon.isFinite {
+                snap.latitude = lat
+                snap.longitude = lon
+            } else if let lat = (body["lat"] as? NSNumber)?.doubleValue,
+                      let lon = (body["lon"] as? NSNumber)?.doubleValue,
+                      lat.isFinite, lon.isFinite, abs(lat) > 0.01 {
+                snap.latitude = lat
+                snap.longitude = lon
+            }
+            if let city = body["city"] as? String, !city.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                snap.cityLabel = city
+            }
+            DarWidgetStore.save(DarDailyContent.refresh(snap))
+        }
+
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+            if message.name == "darWidgetSnapshot" {
+                if let body = message.body as? [String: Any] {
+                    applyWidgetPayload(body)
+                }
+                return
+            }
             if message.name == "darAppearance" {
                 guard let body = message.body as? [String: Any] else { return }
                 applyAppearance(
@@ -673,6 +748,9 @@ struct WebAppView: UIViewRepresentable {
             updateViewportInsets()
             // Appearance after overlay finishes, so boot screen stays visible until 100%.
             handlePossibleLibraryReaderRoute(currentURL)
+            if let pending = DarWidgetStore.consumePendingDestination() {
+                navigate(to: pending, force: true)
+            }
         }
 
         func updateViewportInsets() {

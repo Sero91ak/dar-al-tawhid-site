@@ -18,8 +18,25 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>de.daraltawhid.app</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>daraltawhid</string>
+			</array>
+		</dict>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+	<key>UIRequiresFullScreen</key>
+	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Der Standort wird nur genutzt, wenn du standortbezogene Gebetszeiten oder die Qibla-Funktion verwenden moechtest.</string>
 	<key>NSMotionUsageDescription</key>
