@@ -108,7 +108,7 @@ struct WebAppView: UIViewRepresentable {
         (function(){
           if(window.__darIosViewportPolishInstalled)return;
           window.__darIosViewportPolishInstalled=true;
-          window.__DAR_IOS_BUILD__="0.22-web-parity-v664";
+          window.__DAR_IOS_BUILD__="0.22-web-parity-v665";
           /* Web assets (full-edge-appearance-polish + parity force + soft-boot) own layout.
              iOS only supplies native safe-area vars, compact layout, and status-bar top inset. */
           function cssText(){
@@ -154,7 +154,7 @@ struct WebAppView: UIViewRepresentable {
             }
             if(document.body)document.body.classList.add("dar-ios-native-app");
             if(document.head)document.head.appendChild(style);
-            var feedForce=document.getElementById("dar-ios-parity-edge-force-v664")||document.getElementById("dar-ios-parity-edge-force-v659")||document.getElementById("dar-ios-parity-edge-force-v658")||document.getElementById("dar-ios-parity-edge-force-v657")||document.getElementById("dar-ios-parity-edge-force-v656")||document.getElementById("dar-ios-parity-edge-force-v655")||document.getElementById("dar-ios-parity-edge-force-v654")||document.getElementById("dar-ios-parity-edge-force-v653")||document.getElementById("dar-ios-parity-edge-force-v652")||document.getElementById("dar-ios-parity-edge-force-v651")||document.getElementById("dar-ios-parity-edge-force-v650")||document.getElementById("dar-ios-parity-edge-force-v649")||document.getElementById("dar-ios-parity-edge-force-v648")||document.getElementById("full-edge-feed-force-v645")||document.getElementById("full-edge-feed-force-v644");
+            var feedForce=document.getElementById("dar-ios-parity-edge-force-v665")||document.getElementById("dar-ios-parity-edge-force-v659")||document.getElementById("dar-ios-parity-edge-force-v658")||document.getElementById("dar-ios-parity-edge-force-v657")||document.getElementById("dar-ios-parity-edge-force-v656")||document.getElementById("dar-ios-parity-edge-force-v655")||document.getElementById("dar-ios-parity-edge-force-v654")||document.getElementById("dar-ios-parity-edge-force-v653")||document.getElementById("dar-ios-parity-edge-force-v652")||document.getElementById("dar-ios-parity-edge-force-v651")||document.getElementById("dar-ios-parity-edge-force-v650")||document.getElementById("dar-ios-parity-edge-force-v649")||document.getElementById("dar-ios-parity-edge-force-v648")||document.getElementById("full-edge-feed-force-v645")||document.getElementById("full-edge-feed-force-v644");
             if(feedForce&&document.head)document.head.appendChild(feedForce);
             try{
               var sb=document.getElementById("dar-soft-boot");
@@ -460,7 +460,7 @@ struct WebAppView: UIViewRepresentable {
         webView.allowsBackForwardNavigationGestures = true
         webView.isOpaque = true
         webView.backgroundColor = bootInk
-        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.22-web-parity-v664"
+        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.22-web-parity-v665"
         webView.onInsetsChange = { [weak coordinator = context.coordinator] in
             coordinator?.updateViewportInsets()
         }
@@ -501,6 +501,7 @@ struct WebAppView: UIViewRepresentable {
         private var pageSurfaceColor = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
         private weak var loadingLabel: UILabel?
         private weak var loadingProgressFill: UIView?
+        private weak var loadingProgressTrack: UIView?
         private weak var loadingProgressValueLabel: UILabel?
         private weak var loadingProgressWidthConstraint: NSLayoutConstraint?
         private var didShowErrorState = false
@@ -1098,17 +1099,17 @@ struct WebAppView: UIViewRepresentable {
             let progressTrack = UIView()
             progressTrack.translatesAutoresizingMaskIntoConstraints = false
             progressTrack.backgroundColor = UIColor(red: 0.19, green: 0.16, blue: 0.10, alpha: 0.95)
-            progressTrack.layer.cornerRadius = 1.5
-            progressTrack.layer.borderWidth = 0.5
-            progressTrack.layer.borderColor = UIColor(red: 0.83, green: 0.71, blue: 0.43, alpha: 0.18).cgColor
+            progressTrack.layer.cornerRadius = 0
+            progressTrack.layer.borderWidth = 0
+            progressTrack.backgroundColor = UIColor(red: 0.79, green: 0.66, blue: 0.42, alpha: 0.16)
 
             let progressGlow = UIView()
             progressGlow.translatesAutoresizingMaskIntoConstraints = false
             progressGlow.backgroundColor = UIColor(red: 0.92, green: 0.84, blue: 0.62, alpha: 1.0)
-            progressGlow.layer.cornerRadius = 1.5
+            progressGlow.layer.cornerRadius = 0
             progressGlow.layer.shadowColor = UIColor(red: 0.92, green: 0.84, blue: 0.62, alpha: 1.0).cgColor
-            progressGlow.layer.shadowOpacity = 0.52
-            progressGlow.layer.shadowRadius = 8
+            progressGlow.layer.shadowOpacity = 0.22
+            progressGlow.layer.shadowRadius = 3
             progressGlow.layer.shadowOffset = CGSize(width: 0, height: 0)
 
             let progressShine = UIView()
@@ -1155,7 +1156,7 @@ struct WebAppView: UIViewRepresentable {
                 emblem.widthAnchor.constraint(equalToConstant: 148),
                 emblem.heightAnchor.constraint(equalToConstant: 148),
                 stack.centerXAnchor.constraint(equalTo: overlay.centerXAnchor),
-                stack.centerYAnchor.constraint(equalTo: overlay.centerYAnchor),
+                stack.centerYAnchor.constraint(equalTo: overlay.centerYAnchor, constant: -36),
                 stack.leadingAnchor.constraint(greaterThanOrEqualTo: overlay.leadingAnchor, constant: 24),
                 stack.trailingAnchor.constraint(lessThanOrEqualTo: overlay.trailingAnchor, constant: -24),
                 progressWrap.widthAnchor.constraint(equalToConstant: 280),
@@ -1163,7 +1164,7 @@ struct WebAppView: UIViewRepresentable {
                 progressTrack.trailingAnchor.constraint(equalTo: progressWrap.trailingAnchor),
                 progressTrack.topAnchor.constraint(equalTo: progressWrap.topAnchor),
                 progressTrack.bottomAnchor.constraint(equalTo: progressWrap.bottomAnchor),
-                progressTrack.heightAnchor.constraint(equalToConstant: 5),
+                progressTrack.heightAnchor.constraint(equalToConstant: 6),
                 progressGlow.leadingAnchor.constraint(equalTo: progressTrack.leadingAnchor),
                 progressGlow.topAnchor.constraint(equalTo: progressTrack.topAnchor),
                 progressGlow.bottomAnchor.constraint(equalTo: progressTrack.bottomAnchor),
@@ -1177,6 +1178,7 @@ struct WebAppView: UIViewRepresentable {
             self.loadingOverlay = overlay
             self.loadingLabel = subtitle
             self.loadingProgressFill = progressGlow
+            self.loadingProgressTrack = progressTrack
             self.loadingProgressValueLabel = progressValue
             self.loadingProgressWidthConstraint = progressWidthConstraint
         }
@@ -1255,7 +1257,26 @@ struct WebAppView: UIViewRepresentable {
 
             UIView.animate(withDuration: 0.14, delay: 0, options: [.curveEaseOut, .beginFromCurrentState]) {
                 self.loadingOverlay?.layoutIfNeeded()
+            } completion: { _ in
+                self.applyNobleLineMask()
             }
+            applyNobleLineMask()
+        }
+
+        private func applyNobleLineMask() {
+            guard let track = loadingProgressTrack else { return }
+            track.layoutIfNeeded()
+            let size = track.bounds.size
+            guard size.width > 1, size.height > 1 else { return }
+            let path = UIBezierPath()
+            path.move(to: CGPoint(x: 0, y: size.height * 0.06))
+            path.addLine(to: CGPoint(x: size.width, y: size.height * 0.36))
+            path.addLine(to: CGPoint(x: size.width, y: size.height * 0.64))
+            path.addLine(to: CGPoint(x: 0, y: size.height * 0.94))
+            path.close()
+            let mask = CAShapeLayer()
+            mask.path = path.cgPath
+            track.layer.mask = mask
         }
     }
 }
