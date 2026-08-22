@@ -2,7 +2,7 @@
  * Full-edge appearance polish (visitor + test)
  * iOS-parity: continuous theme fill under status bar, safe-area content, feed full-bleed.
  * Layout / surface only — no theme hue swap (edge-to-edge theme lock stays authoritative).
- * v656 · Global solid fill + soft-boot edge under status bar
+ * v657 · Soft-boot black-screen fix + global solid fill
  */
 
 :root,

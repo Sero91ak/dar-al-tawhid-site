@@ -1,7 +1,6 @@
 /**
  * Soft boot overlay for visitor + test web apps (iOS parity).
- * v656 · Edge-up theme fill under status bar for every Erscheinungsbild.
- * Asymptotic 0→~94%, snaps to 100% when the first real view is ready, then fades.
+ * v657 · Fix black-screen: no style↔observer loop; boot fill only while overlay is up.
  */
 (function () {
   if (window.__darSoftBootInstalled) return;
@@ -9,9 +8,9 @@
 
   var OVERLAY_ID = "dar-soft-boot";
   var MAX_FAKE = 0.94;
-  var FADE_HOLD_MS = 350;
-  var MIN_SHOW_MS = 900;
-  var HARD_TIMEOUT_MS = 18000;
+  var FADE_HOLD_MS = 280;
+  var MIN_SHOW_MS = 700;
+  var HARD_TIMEOUT_MS = 6500;
   var THEME_FILLS = {
     dark: "#080806",
     light: "#f7f0df",
@@ -24,6 +23,7 @@
   var progress = 0;
   var finished = false;
   var finishScheduled = false;
+  var syncing = false;
   var timer = null;
   var hardTimer = null;
   var startedAt = Date.now();
@@ -54,6 +54,11 @@
 
   function resolveFill() {
     try {
+      if (window.__DAR_BOOT_FILL && /^#[0-9a-fA-F]{3,8}$/.test(window.__DAR_BOOT_FILL)) {
+        return window.__DAR_BOOT_FILL;
+      }
+      var mapped = THEME_FILLS[resolveThemeId()];
+      if (mapped) return mapped;
       var root = document.documentElement;
       if (root) {
         var cs = getComputedStyle(root);
@@ -61,7 +66,6 @@
           cs.getPropertyValue("--dar-boot-fill") ||
           cs.getPropertyValue("--theme-page-bg") ||
           cs.getPropertyValue("--outer-bg-flat") ||
-          cs.getPropertyValue("--page-cover") ||
           cs.getPropertyValue("--bg") ||
           ""
         ).trim();
@@ -69,22 +73,20 @@
         if (hex) return hex[0];
       }
     } catch (e) {}
-    return THEME_FILLS[resolveThemeId()] || THEME_FILLS.dark;
+    return THEME_FILLS.dark;
   }
 
   function syncEdgeFill() {
+    if (syncing || finished) return resolveFill();
+    syncing = true;
     try {
       var fill = resolveFill();
       var root = document.documentElement;
       if (!root) return fill;
       root.style.setProperty("--dar-boot-fill", fill);
-      root.style.setProperty("background", fill, "important");
-      root.style.setProperty("background-color", fill, "important");
-      root.style.setProperty("background-image", "none", "important");
-      if (document.body) {
-        document.body.style.setProperty("background", fill, "important");
-        document.body.style.setProperty("background-color", fill, "important");
-        document.body.style.setProperty("background-image", "none", "important");
+      if (!finished) {
+        root.classList.add("dar-soft-booting");
+        root.style.setProperty("background-color", fill, "important");
       }
       var meta = document.querySelector('meta[name="theme-color"]');
       if (!meta) {
@@ -96,23 +98,14 @@
       var tile = document.querySelector('meta[name="msapplication-TileColor"]');
       if (tile) tile.setAttribute("content", fill);
       if (overlayEl) {
-        overlayEl.style.setProperty("background-color", fill, "important");
-        overlayEl.style.setProperty(
-          "background-image",
-          "radial-gradient(120% 80% at 50% 42%, rgba(201,168,106,0.12), transparent 58%)",
-          "important"
-        );
-        overlayEl.style.setProperty("top", "0px", "important");
-        overlayEl.style.setProperty("left", "0px", "important");
-        overlayEl.style.setProperty("right", "0px", "important");
-        overlayEl.style.setProperty("bottom", "0px", "important");
-        overlayEl.style.setProperty("width", "100%", "important");
-        overlayEl.style.setProperty("height", "100%", "important");
-        overlayEl.style.setProperty("min-height", "100dvh", "important");
+        overlayEl.style.backgroundColor = fill;
       }
+      window.__DAR_BOOT_FILL = fill;
       return fill;
     } catch (e) {
       return THEME_FILLS.dark;
+    } finally {
+      syncing = false;
     }
   }
 
@@ -197,21 +190,30 @@
     }
     progress = 1;
     paint();
-    syncEdgeFill();
-    var el = ensureOverlay();
+    var el = overlayEl || document.getElementById(OVERLAY_ID);
+    try {
+      if (document.documentElement) {
+        document.documentElement.classList.remove("dar-soft-booting");
+        document.documentElement.style.removeProperty("background-color");
+        document.documentElement.style.removeProperty("background");
+        document.documentElement.style.removeProperty("background-image");
+      }
+    } catch (e) {}
+    if (!el) return;
     setTimeout(function () {
-      el.classList.add("is-done");
+      try { el.classList.add("is-done"); } catch (e) {}
       setTimeout(function () {
         try {
           if (el && el.parentNode) el.parentNode.removeChild(el);
         } catch (e) {}
-        syncEdgeFill();
-      }, 320);
+        overlayEl = null;
+      }, 300);
     }, FADE_HOLD_MS);
   }
 
   function viewLooksReady() {
     try {
+      if (window.__darAppBootOk) return true;
       var view = document.getElementById("appView");
       if (!view) return false;
       var text = (view.textContent || "").replace(/\s+/g, " ").trim();
@@ -240,13 +242,12 @@
       }
     } catch (e) {}
 
-    /* Paint html/theme-color before first overlay frame */
     try {
       var early = THEME_FILLS[resolveThemeId()] || THEME_FILLS.dark;
+      window.__DAR_BOOT_FILL = early;
       if (document.documentElement) {
         document.documentElement.style.setProperty("--dar-boot-fill", early);
-        document.documentElement.style.setProperty("background", early, "important");
-        document.documentElement.style.setProperty("background-color", early, "important");
+        document.documentElement.classList.add("dar-soft-booting");
       }
     } catch (e) {}
 
@@ -260,18 +261,21 @@
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", function () {
         if (overlayEl && document.body && overlayEl.parentNode !== document.body) {
-          document.body.appendChild(overlayEl);
+          try { document.body.appendChild(overlayEl); } catch (e) {}
         }
         syncEdgeFill();
-        setTimeout(maybeFinish, 80);
+        setTimeout(maybeFinish, 60);
       }, { once: true });
     } else {
       syncEdgeFill();
-      setTimeout(maybeFinish, 80);
+      setTimeout(maybeFinish, 60);
     }
 
+    window.addEventListener("load", function () {
+      setTimeout(maybeFinish, 40);
+      setTimeout(function () { if (!finished) finish(); }, 4000);
+    });
     window.addEventListener("pageshow", function () {
-      syncEdgeFill();
       setTimeout(maybeFinish, 40);
     });
     window.addEventListener("hashchange", function () {
@@ -279,15 +283,21 @@
     });
 
     try {
-      var mo = new MutationObserver(function () {
-        syncEdgeFill();
+      var mo = new MutationObserver(function (records) {
+        if (finished || syncing) return;
+        var themeChanged = false;
+        for (var i = 0; i < records.length; i++) {
+          if (records[i].attributeName === "data-theme") themeChanged = true;
+        }
+        if (themeChanged) syncEdgeFill();
         maybeFinish();
       });
       var startObserve = function () {
         var view = document.getElementById("appView");
         if (view) mo.observe(view, { childList: true, subtree: true, characterData: true });
         if (document.body) mo.observe(document.body, { attributes: true, attributeFilter: ["class"] });
-        mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "class", "style"] });
+        /* Never observe style — syncEdgeFill writes style and would loop forever (black screen). */
+        mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "class"] });
       };
       if (document.body) startObserve();
       else document.addEventListener("DOMContentLoaded", startObserve, { once: true });

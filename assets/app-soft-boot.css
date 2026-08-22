@@ -1,12 +1,9 @@
 /* Soft boot overlay — iOS-parity first paint (visitor + test)
- * v656 · Edge-up solid fill under status bar for every theme (no top Trennung)
+ * v657 · Boot fill only while .dar-soft-booting (no permanent html/body lock → black screen)
  */
-html,
-html[data-theme],
-html body{
-  background: var(--dar-boot-fill, var(--theme-page-bg, var(--outer-bg-flat, var(--bg, #080806)))) !important;
+html.dar-soft-booting,
+html.dar-soft-booting body{
   background-color: var(--dar-boot-fill, var(--theme-page-bg, var(--outer-bg-flat, var(--bg, #080806)))) !important;
-  background-image: none !important;
 }
 
 #dar-soft-boot{
@@ -33,7 +30,6 @@ html body{
   justify-content:center;
   gap:18px;
   padding:max(24px, env(safe-area-inset-top, 0px), var(--dar-native-safe-top, 0px)) 24px max(24px, env(safe-area-inset-bottom, 0px), var(--dar-native-safe-bottom, 0px));
-  /* Solid theme fill first — covers status bar; no fade-to-black seam */
   background-color: var(--dar-boot-fill, var(--theme-page-bg, var(--outer-bg-flat, var(--bg, #080806)))) !important;
   background-image:
     radial-gradient(120% 80% at 50% 42%, color-mix(in srgb, var(--gold2, #c9a86a) 12%, transparent), transparent 58%) !important;
