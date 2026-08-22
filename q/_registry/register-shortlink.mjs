@@ -36,6 +36,14 @@ function requireArg(args, name) {
   return value;
 }
 
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
 function utcNow() {
   return new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
 }
@@ -94,7 +102,11 @@ async function main() {
   const tpl = await fs.readFile(TEMPLATE_PATH, "utf8");
   const html = tpl
     .replaceAll("__NUMBER__", String(number))
-    .replaceAll("__TARGET_PATH__", targetPath);
+    .replaceAll("__TARGET_PATH__", escapeHtml(targetPath))
+    .replaceAll("__TITLE__", escapeHtml(title))
+    .replaceAll("__SUMMARY__", escapeHtml(statementSummary))
+    .replaceAll("__SOURCE_LABEL__", escapeHtml(sourceLabel))
+    .replaceAll("__POST_REFERENCE__", escapeHtml(postReference));
   await fs.writeFile(qIndex, html, "utf8");
 
   registry.links = Array.isArray(registry.links) ? registry.links : [];
