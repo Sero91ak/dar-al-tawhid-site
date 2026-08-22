@@ -1,29 +1,22 @@
 /* DAR AL TAWḤĪD – globale Quellen-Seiten
-   Stil: App-nah, Dār al-Layl, weich, edel, edge-to-edge
+   Dār al-Layl, kompakt, ovales Wasserzeichen, ohne Lichtfleck
 */
 :root{
-  --q-bg:#050606;
-  --q-bg-2:#090b09;
-  --q-bg-3:#0d110e;
-  --q-surface:#0a0d0b;
-  --q-surface-2:#101511;
-  --q-surface-3:#131914;
-  --q-text:#f2eadc;
-  --q-text-soft:rgba(242,234,220,.82);
-  --q-text-muted:rgba(242,234,220,.60);
-  --q-gold:#d9c28b;
-  --q-gold-soft:#e9d8af;
-  --q-gold-deep:#a98a4d;
-  --q-line:rgba(169,138,77,.34);
-  --q-line-soft:rgba(169,138,77,.16);
-  --q-line-faint:rgba(169,138,77,.08);
-  --q-glow:rgba(217,194,139,.10);
-  --q-shadow:0 10px 26px rgba(0,0,0,.28);
-  --q-radius:26px;
-  --q-radius-lg:34px;
-  --q-logo:url('/app-icon-512.png?v=qsource-watermark-v2');
+  --q-bg:#0c0e0d;
+  --q-bg-2:#111412;
+  --q-text:#f6f0e4;
+  --q-text-soft:rgba(246,240,228,.86);
+  --q-text-muted:rgba(246,240,228,.64);
+  --q-gold:#e0c994;
+  --q-gold-soft:#eedcb6;
+  --q-gold-deep:#b89654;
+  --q-line:rgba(184,150,84,.38);
+  --q-line-soft:rgba(184,150,84,.18);
+  --q-line-faint:rgba(184,150,84,.10);
+  --q-shadow:0 8px 20px rgba(0,0,0,.22);
+  --q-logo:url('/watermark-my-logo-full.png');
 }
-*{box-sizing:border-box;}
+*{box-sizing:border-box}
 html{
   margin:0;
   min-height:100%;
@@ -38,119 +31,91 @@ body.qsource-body{
   -webkit-text-size-adjust:100%;
   overflow-x:hidden;
   background:
-    radial-gradient(circle at top center, rgba(217,194,139,.08), transparent 24%),
-    radial-gradient(circle at 85% 20%, rgba(60,73,60,.12), transparent 22%),
-    linear-gradient(180deg, #070807 0%, #050606 18%, #050606 100%);
+    radial-gradient(ellipse at 50% -4%, rgba(224,201,148,.07), transparent 28%),
+    linear-gradient(180deg,#121512 0%,#0c0e0d 22%,#0b0d0c 100%);
 }
-/* voller, ruhiger Gesamthintergrund */
-body.qsource-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-2;
-  background:
-    linear-gradient(180deg, rgba(20,20,18,.18), transparent 16%),
-    linear-gradient(90deg, rgba(169,138,77,.05), transparent 14%, transparent 86%, rgba(169,138,77,.05));
-}
+body.qsource-body::before,
 body.qsource-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-1;
-  opacity:.10;
-  background:
-    radial-gradient(circle at 50% 50%, rgba(255,255,255,.018), transparent 55%),
-    repeating-linear-gradient(135deg, rgba(255,255,255,.012) 0 1px, transparent 1px 10px);
+  display:none;
 }
 .qsource-page{
-  width:min(100%,860px);
+  width:min(100%,760px);
   margin:0 auto;
-  padding:max(14px, env(safe-area-inset-top)) 14px max(22px, env(safe-area-inset-bottom));
+  padding:max(10px,env(safe-area-inset-top)) 12px max(18px,env(safe-area-inset-bottom));
 }
-/* Header viel ruhiger wie App */
 .qsource-header{
-  position:relative;
   display:flex;
   align-items:center;
-  gap:14px;
-  padding:16px 8px 14px;
+  gap:10px;
+  padding:10px 2px 10px;
   border-bottom:1px solid var(--q-line);
 }
 .qsource-logo{
-  width:64px;
-  height:64px;
-  flex:0 0 64px;
+  width:52px;
+  height:52px;
+  flex:0 0 52px;
   object-fit:contain;
   display:block;
-  filter:drop-shadow(0 4px 10px rgba(0,0,0,.20));
+  background:transparent;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.18));
 }
-.qsource-header-text{
-  min-width:0;
-}
+.qsource-header-text{min-width:0}
 .qsource-brand-top{
-  margin:0 0 4px;
-  color:var(--q-text-soft);
-  font-size:11px;
-  letter-spacing:.18em;
+  margin:0 0 2px;
+  color:var(--q-text-muted);
+  font-size:9px;
+  letter-spacing:.16em;
   text-transform:uppercase;
+  font-weight:700;
 }
 .qsource-brand{
   margin:0;
   color:var(--q-gold-soft);
   font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(32px,7vw,54px);
-  line-height:1;
-  letter-spacing:.08em;
-  font-weight:500;
+  font-size:clamp(24px,6.2vw,38px);
+  line-height:.95;
+  letter-spacing:.06em;
+  font-weight:600;
 }
 .qsource-sign{
-  margin:6px 0 0;
-  color:var(--q-gold-soft);
+  margin:3px 0 0;
+  color:var(--q-gold);
   font-family:"Snell Roundhand","Apple Chancery","Segoe Script",cursive;
-  font-size:clamp(20px,4.6vw,30px);
+  font-size:clamp(15px,3.6vw,22px);
   line-height:1;
 }
-/* Hero wie App-Karte */
 .qsource-hero{
   position:relative;
-  margin-top:18px;
-  padding:18px 18px 20px;
-  border-radius:30px;
-  background:
-    radial-gradient(circle at 60% 40%, rgba(217,194,139,.05), transparent 38%),
-    linear-gradient(180deg, rgba(17,21,17,.96), rgba(8,11,9,.98));
-  border:1px solid var(--q-line);
-  box-shadow:var(--q-shadow);
+  margin-top:12px;
+  padding:14px 14px 6px;
   overflow:hidden;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+  border-radius:0;
 }
-/* echtes Wasserzeichen – nicht als Bildbox */
 .qsource-hero::after{
   content:"";
   position:absolute;
-  inset:18% 12% 10% 12%;
+  left:50%;
+  top:42%;
+  width:min(220px,58%);
+  height:min(220px,58%);
+  transform:translate(-50%,-46%);
   pointer-events:none;
-  opacity:.045;
-  background:linear-gradient(180deg, var(--q-gold-soft), var(--q-gold));
-  -webkit-mask-image:var(--q-logo);
-  -webkit-mask-repeat:no-repeat;
-  -webkit-mask-position:center;
-  -webkit-mask-size:56%;
-  mask-image:var(--q-logo);
-  mask-repeat:no-repeat;
-  mask-position:center;
-  mask-size:56%;
+  opacity:.07;
+  background:var(--q-logo) center/contain no-repeat;
+  filter:none;
 }
 .qsource-kicker{
   position:relative;
   z-index:1;
-  margin:0 0 12px;
+  margin:0 0 7px;
   color:var(--q-gold);
-  font-size:12px;
-  letter-spacing:.16em;
+  font-size:10px;
+  letter-spacing:.15em;
   text-transform:uppercase;
-  font-weight:700;
+  font-weight:800;
 }
 .qsource-title{
   position:relative;
@@ -158,16 +123,16 @@ body.qsource-body::after{
   margin:0;
   color:var(--q-text);
   font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(28px,7vw,48px);
-  line-height:1.08;
-  font-weight:600;
+  font-size:clamp(22px,5.6vw,34px);
+  line-height:1.12;
+  font-weight:700;
 }
 .qsource-quote-line{
   position:relative;
   z-index:1;
   height:1px;
-  margin:18px 0 18px;
-  background:linear-gradient(90deg, var(--q-gold-deep), rgba(169,138,77,.15) 72%, transparent);
+  margin:12px 0;
+  background:linear-gradient(90deg,var(--q-gold-deep),rgba(184,150,84,.14) 70%,transparent);
 }
 .qsource-quote{
   position:relative;
@@ -175,206 +140,250 @@ body.qsource-body::after{
   margin:0;
   color:var(--q-text);
   font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(18px,5vw,24px);
-  line-height:1.55;
+  font-size:clamp(16px,4.2vw,20px);
+  line-height:1.48;
+  font-weight:500;
 }
-/* Info-Bereich wie App-Liste */
+.qsource-quote b,
+.qsource-section b,
+.qsource-meta-value b,
+.qsource-section strong{
+  color:var(--q-gold-soft);
+  font-weight:800;
+}
 .qsource-meta{
-  margin-top:18px;
+  position:relative;
+  z-index:1;
+  margin-top:12px;
   border-top:1px solid var(--q-line-soft);
 }
 .qsource-meta-row{
   display:grid;
-  grid-template-columns:120px 1fr;
-  gap:14px;
-  padding:16px 0;
+  grid-template-columns:92px 1fr;
+  gap:10px;
+  padding:9px 0;
   border-bottom:1px solid var(--q-line-faint);
 }
 .qsource-meta-label{
   color:var(--q-gold);
-  font-size:11px;
-  letter-spacing:.18em;
+  font-size:10px;
+  letter-spacing:.16em;
   text-transform:uppercase;
   font-weight:800;
+  padding-top:2px;
 }
 .qsource-meta-value{
   color:var(--q-text-soft);
-  font-size:15px;
-  line-height:1.55;
+  font-size:13.5px;
+  line-height:1.45;
 }
-/* Bereiche offener, weniger kastig */
+.qsource-curve{
+  height:18px;
+  margin:2px 0 4px;
+  border:0;
+  background:
+    radial-gradient(120% 18px at 50% 0, transparent 58%, var(--q-line-soft) 59%, transparent 61%);
+}
 .qsource-section{
   position:relative;
-  margin-top:20px;
-  padding:18px 18px 20px;
-  border-radius:30px;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(217,194,139,.035), transparent 44%),
-    linear-gradient(180deg, rgba(14,18,15,.98), rgba(7,10,8,.98));
-  border:1px solid var(--q-line-soft);
-  box-shadow:var(--q-shadow);
+  margin-top:14px;
+  padding:4px 2px 8px;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  transition:background .2s ease;
+}
+.qsource-section:hover{
+  background:linear-gradient(90deg,rgba(224,201,148,.07),transparent 70%);
+}
+.qsource-section:hover .qsource-num{
+  color:var(--q-gold-soft);
+  border-bottom-color:rgba(232,210,138,.85);
+}
+.qsource-section + .qsource-section{
+  margin-top:10px;
+  padding-top:12px;
+  border-top:1px solid var(--q-line-faint);
 }
 .qsource-section-head{
   display:flex;
-  align-items:center;
-  gap:12px;
-  margin:0 0 16px;
+  align-items:baseline;
+  gap:8px;
+  margin:0 0 8px;
 }
 .qsource-num{
-  width:38px;
-  height:38px;
-  border-radius:999px;
-  flex:0 0 38px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(180deg, var(--q-gold-soft), var(--q-gold));
-  color:#111;
+  width:auto;
+  height:auto;
+  min-width:0;
+  flex:0 0 auto;
+  display:inline;
+  place-items:unset;
+  border-radius:0;
+  background:none;
+  color:var(--q-gold);
   font-family:Georgia,"Times New Roman",serif;
-  font-size:20px;
+  font-size:18px;
   font-weight:700;
+  line-height:1;
+  padding:0 1px 1px;
+  border-bottom:1px solid var(--q-gold-deep);
 }
 .qsource-section-title{
   margin:0;
   color:var(--q-gold-soft);
   font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(22px,5vw,34px);
-  line-height:1.15;
-  font-weight:600;
+  font-size:clamp(17px,4.2vw,22px);
+  line-height:1.2;
+  font-weight:650;
 }
 .qsource-section p,
 .qsource-section li{
   color:var(--q-text-soft);
-  font-size:16px;
-  line-height:1.70;
+  font-size:14px;
+  line-height:1.58;
 }
 .qsource-section ol{
-  margin:8px 0 0;
-  padding-left:24px;
+  margin:4px 0 0;
+  padding-left:18px;
 }
 .qsource-arabic{
   direction:rtl;
   text-align:right;
   color:var(--q-text);
   font-family:"Geeza Pro","Noto Naskh Arabic","Traditional Arabic",serif;
-  font-size:clamp(28px,7vw,40px);
-  line-height:1.95;
-  margin:0 0 14px;
+  font-size:clamp(22px,5.6vw,30px);
+  line-height:1.85;
+  margin:0 0 8px;
 }
-/* Linkkarten – App-näher, nicht technischer Kastenlook */
 .qsource-links{
   display:grid;
-  gap:14px;
-  margin-top:18px;
+  gap:8px;
+  margin-top:12px;
 }
 .qsource-link{
   display:flex;
   align-items:center;
-  gap:14px;
-  min-height:88px;
-  padding:16px 18px;
-  border-radius:30px;
+  gap:11px;
+  min-height:62px;
+  padding:10px 8px;
+  border-radius:0;
   text-decoration:none;
   color:inherit;
-  background:
-    radial-gradient(circle at 40% 50%, rgba(217,194,139,.05), transparent 38%),
-    linear-gradient(180deg, rgba(15,19,16,.98), rgba(8,11,9,.98));
-  border:1px solid var(--q-line);
-  box-shadow:var(--q-shadow);
-  transition:.18s ease;
+  background:transparent;
+  border:0;
+  border-bottom:1px solid var(--q-line-faint);
+  box-shadow:none;
+  transition:background .18s ease,border-color .18s ease,color .18s ease;
 }
-.qsource-link:hover{
-  transform:translateY(-1px);
-  border-color:rgba(217,194,139,.44);
+.qsource-link:hover,
+.qsource-link:focus-visible{
+  background:linear-gradient(90deg,rgba(224,201,148,.10),transparent 78%);
+  border-bottom-color:rgba(224,201,148,.55);
+}
+.qsource-link:hover .qsource-link-title,
+.qsource-link:focus-visible .qsource-link-title{
+  color:var(--q-gold-soft);
 }
 .qsource-link-icon{
-  width:58px;
-  height:58px;
-  border-radius:18px;
-  flex:0 0 58px;
+  width:36px;
+  height:36px;
+  border-radius:8px;
+  flex:0 0 36px;
   display:grid;
   place-items:center;
-  color:var(--q-gold-soft);
-  border:1px solid var(--q-line);
-  background:linear-gradient(180deg, rgba(24,29,24,.98), rgba(11,14,12,.98));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.02);
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:26px;
-  font-weight:700;
+  color:transparent;
+  font-size:0;
+  border:0;
+  background:
+    linear-gradient(180deg,#1c4f8a,#163e6d)
+    center/cover no-repeat;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+  position:relative;
+}
+.qsource-link-icon::before{
+  content:"";
+  width:18px;
+  height:18px;
+  background:
+    radial-gradient(circle at 50% 50%,#fff 0 28%,transparent 30%),
+    conic-gradient(from 210deg,#7ec8ff,#1c4f8a 40%,#9ad0ff 70%,#1c4f8a);
+  border-radius:50%;
+  box-shadow:0 0 0 2px rgba(255,255,255,.18);
+}
+.qsource-link.web .qsource-link-icon{
+  background:linear-gradient(180deg,#1d4f86,#143a64);
 }
 .qsource-link.pdf .qsource-link-icon{
-  background:linear-gradient(180deg,#d04b43,#9b302c);
+  background:linear-gradient(180deg,#e24b42,#b3261e);
+}
+.qsource-link.pdf .qsource-link-icon::before{
+  content:"PDF";
+  width:auto;
+  height:auto;
+  border-radius:0;
+  background:none;
+  box-shadow:none;
   color:#fff;
-  border-color:rgba(255,255,255,.10);
+  font-family:Arial,sans-serif;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.04em;
 }
 .qsource-link.scan .qsource-link-icon{
-  background:linear-gradient(180deg,#ead6a2,#c9ab69);
-  color:#1a1710;
-  border-color:rgba(255,255,255,.10);
+  background:linear-gradient(180deg,#d8c08a,#b3924e);
 }
-.qsource-link-body{
-  min-width:0;
+.qsource-link.scan .qsource-link-icon::before{
+  content:"";
+  width:16px;
+  height:12px;
+  border-radius:2px;
+  background:
+    linear-gradient(#3a2d14,#3a2d14) center/10px 1px no-repeat,
+    linear-gradient(#3a2d14,#3a2d14) 50% 70%/10px 1px no-repeat,
+    linear-gradient(#fff8e6,#ead7a4);
+  box-shadow:0 0 0 1px rgba(58,45,20,.22);
 }
+.qsource-link-body{min-width:0}
 .qsource-link-title{
   display:block;
   color:var(--q-text);
-  font-size:17px;
-  line-height:1.30;
-  font-weight:700;
+  font-size:14.5px;
+  line-height:1.25;
+  font-weight:800;
 }
 .qsource-link-sub{
   display:block;
-  margin-top:4px;
+  margin-top:2px;
   color:var(--q-text-muted);
-  font-size:14px;
-  line-height:1.40;
+  font-size:12px;
+  line-height:1.35;
 }
-/* Social nur ruhig */
 .qsource-social{
   display:flex;
   justify-content:center;
-  gap:14px;
-  margin-top:24px;
-  padding-bottom:10px;
+  gap:10px;
+  margin-top:18px;
+  padding-bottom:8px;
 }
 .qsource-social a{
-  width:50px;
-  height:50px;
+  width:42px;
+  height:42px;
   border-radius:999px;
   display:grid;
   place-items:center;
-  background:linear-gradient(180deg, rgba(16,20,17,.98), rgba(8,10,9,.98));
+  background:rgba(255,255,255,.03);
   border:1px solid var(--q-line-soft);
   text-decoration:none;
-  box-shadow:var(--q-shadow);
 }
-.qsource-social svg{
-  width:22px;
-  height:22px;
-}
-.qsource-social .telegram svg{fill:#2AABEE;}
-.qsource-social .whatsapp svg{fill:#25D366;}
-.qsource-social .instagram svg{fill:#E8D8AF;}
-.qsource-social .web svg{fill:#E8D8AF;}
-/* Mobile */
+.qsource-social svg{width:18px;height:18px}
+.qsource-social .telegram svg{fill:#2AABEE}
+.qsource-social .whatsapp svg{fill:#25D366}
+.qsource-social .instagram svg{fill:#E8D8AF}
+.qsource-social .web svg{fill:#E8D8AF}
 @media (max-width:640px){
-  .qsource-page{
-    padding:max(10px, env(safe-area-inset-top)) 10px max(18px, env(safe-area-inset-bottom));
-  }
-  .qsource-header{
-    gap:12px;
-    padding:14px 4px 12px;
-  }
-  .qsource-logo{
-    width:56px;
-    height:56px;
-    flex-basis:56px;
-  }
-  .qsource-meta-row{
-    grid-template-columns:1fr;
-    gap:7px;
-  }
-  .qsource-link{
-    min-height:82px;
-    padding:14px 15px;
-  }
+  .qsource-page{padding:max(8px,env(safe-area-inset-top)) 10px max(16px,env(safe-area-inset-bottom))}
+  .qsource-logo{width:46px;height:46px;flex-basis:46px}
+  .qsource-meta-row{grid-template-columns:1fr;gap:3px;padding:8px 0}
+  .qsource-link{min-height:58px;padding:9px 4px}
 }
