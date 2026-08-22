@@ -2,7 +2,7 @@
   "version": 1,
   "globalLock": true,
   "lockedAt": "2026-07-23T19:30:00.000Z",
-  "lockedReason": "Nutzer-Freigabe: Nach Maghrib-Push-Reparatur keine Änderungen ohne ausdrücklichen Auftrag.",
+  "lockedReason": "Nutzer-Freigabe 2026-08-22: Worker-Secrets & Builds gesperrt (außer ausdrücklicher Auftrag). Library-Besucher-Push-Fix freigeschaltet.",
   "message": "GLOBAL GESPERRT: Nur freigeschaltete Bereiche dürfen geändert werden. Freischaltung nur nach ausdrücklichem Nutzer-Auftrag in unlockedScopes eintragen.",
   "alwaysAllowed": [
     "content/quran-tajweed/",
@@ -63,7 +63,10 @@
     "test/assets/prophets/",
     "test/data/prophets/",
     "assets/fold-split.js",
-    "assets/fold-split.css"
+    "assets/fold-split.css",
+    "content/admin/worker-secrets-safety-lock.json",
+    "cloudflare/WORKER_SECRETS_LOCK.md",
+    "cloudflare/library-push-admin.js"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -3398,6 +3401,22 @@
         "content/admin/change-scope-lock.json",
         "cloudflare/",
         ".github/workflows/deploy-admin-publisher.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "library-push-secret-lock-2026-08-22",
+      "approvedBy": "user-explicit-push-fix-and-safety-lock",
+      "reason": "Besucher-Push Library reparieren (tote OneSignal-IDs) + Worker-Secrets Sicherheitssperre setzen",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/admin/worker-secrets-safety-lock.json",
+        "cloudflare/library-push-admin.js",
+        "cloudflare/WORKER_SECRETS_LOCK.md",
+        "cloudflare/worker.js",
+        ".github/workflows/deploy-admin-publisher.yml",
+        ".github/workflows/sync-admin-publisher-secrets.yml",
+        ".github/workflows/push-worker-secret-watchdog.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     }
