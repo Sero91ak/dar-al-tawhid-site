@@ -46,12 +46,12 @@ body{
   width:min(100%,720px);
   min-height:100vh;
   margin:0 auto;
-  padding:max(8px,env(safe-area-inset-top)) 8px max(14px,env(safe-area-inset-bottom));
+  padding:max(6px,env(safe-area-inset-top)) 8px max(10px,env(safe-area-inset-bottom));
 }
 .source-header{
   position:relative;
-  min-height:78px;
-  padding:10px 12px;
+  min-height:68px;
+  padding:8px 10px;
   color:#f6eddb;
   background:linear-gradient(180deg,#203f3b,#13211f);
   border:1px solid rgba(222,196,138,.26);
@@ -65,9 +65,9 @@ body{
   min-width:0;
 }
 .brand-logo{
-  width:52px;
-  height:52px;
-  flex:0 0 52px;
+  width:46px;
+  height:46px;
+  flex:0 0 46px;
   border-radius:50%;
   display:block;
   object-fit:cover;
@@ -87,7 +87,7 @@ body{
 }
 .brand-text p{display:none}
 .brand-sign{
-  margin:1px 0 0 64px;
+  margin:0 0 0 58px;
   font-family:"DarSignature","Snell Roundhand","Brush Script MT","Segoe Script",cursive;
   font-size:clamp(20px,5.3vw,29px);
   line-height:1;
@@ -95,7 +95,7 @@ body{
   letter-spacing:0;
 }
 .source-card{
-  margin-top:8px;
+  margin-top:6px;
   overflow:hidden;
   background:var(--panel);
   border:1px solid var(--line);
@@ -108,7 +108,7 @@ body{
 .source-actions{
   position:relative;
   margin:0;
-  padding:12px 14px 12px 58px;
+  padding:9px 12px 9px 52px;
   border-top:1px solid rgba(104,79,40,.14);
 }
 .source-hero{border-top:0;background:#fffaf0}
@@ -117,10 +117,10 @@ body{
 .isnad-box::before,
 .source-actions::before{
   position:absolute;
-  left:14px;
-  top:13px;
-  width:30px;
-  height:30px;
+  left:12px;
+  top:10px;
+  width:28px;
+  height:28px;
   display:grid;
   place-items:center;
   border-radius:50%;
@@ -135,7 +135,7 @@ body{
 .isnad-box::before{content:"3"}
 .source-actions::before{content:"4"}
 .source-kicker{
-  margin:0 0 7px;
+  margin:0 0 5px;
   color:#866834;
   font-size:10px;
   line-height:1.25;
@@ -144,7 +144,7 @@ body{
   font-weight:800;
 }
 .source-speaker{
-  margin:0 0 8px;
+  margin:0 0 6px;
   font-family:Georgia,"Times New Roman",serif;
   font-size:clamp(18px,5vw,24px);
   line-height:1.15;
@@ -152,7 +152,7 @@ body{
 }
 .source-quote{
   margin:0;
-  padding-top:9px;
+  padding-top:7px;
   border-top:1px solid rgba(104,79,40,.18);
   font-family:Georgia,"Times New Roman",serif;
   font-size:clamp(17px,4.9vw,23px);
@@ -161,7 +161,7 @@ body{
 }
 .source-meta{
   display:grid;
-  gap:8px;
+  gap:6px;
   background:#f7ecd8;
 }
 .meta-item{
@@ -194,7 +194,7 @@ body{
 .meta-status{color:#2b615a;font-weight:800}
 .isnad-box{background:#fff7e8}
 .isnad-box h3{
-  margin:0 0 7px;
+  margin:0 0 5px;
   color:#856631;
   font-size:10px;
   line-height:1.25;
@@ -222,15 +222,15 @@ body{
 }
 .source-actions{
   display:grid;
-  gap:7px;
+  gap:5px;
   background:#fcf4e6;
 }
 .source-btn{
   display:flex;
   align-items:center;
   gap:10px;
-  min-height:50px;
-  padding:9px 10px;
+  min-height:42px;
+  padding:6px 8px;
   color:var(--ink);
   text-decoration:none;
   background:#fffaf0;
@@ -243,9 +243,9 @@ body{
   border-color:rgba(104,79,40,.34);
 }
 .source-btn .ico{
-  width:31px;
-  height:31px;
-  flex:0 0 31px;
+  width:29px;
+  height:29px;
+  flex:0 0 29px;
   display:grid;
   place-items:center;
   border-radius:7px;
@@ -264,18 +264,18 @@ body{
   display:block;
   color:#172423;
   font-size:12px;
-  line-height:1.25;
+  line-height:1.18;
 }
 .source-btn .txt span{
   display:block;
-  margin-top:3px;
+  margin-top:1px;
   color:#735f3b;
   font-size:10px;
   line-height:1.35;
   overflow-wrap:anywhere;
 }
 .social{
-  margin-top:8px;
+  margin-top:6px;
   padding:7px;
   background:#fffaf0;
   border:1px solid var(--line);
@@ -288,7 +288,7 @@ body{
   gap:6px;
 }
 .social-link{
-  min-height:40px;
+  min-height:38px;
   display:grid;
   place-items:center;
   color:#fff;
@@ -316,4 +316,69 @@ body{
   .source-hero,.source-meta,.isnad-box,.source-actions{padding-left:50px;padding-right:10px}
   .source-hero::before,.source-meta::before,.isnad-box::before,.source-actions::before{left:11px}
   .meta-item{grid-template-columns:1fr;gap:3px}
+}
+
+
+/* Compact library emphasis */
+.source-speaker,
+.source-meta dd b,
+.source-meta dd strong,
+.isnad-box b,
+.source-btn .txt b{
+  font-weight:850;
+}
+.source-meta dd i,
+.source-meta dd em,
+.isnad-box i,
+.isnad-box em,
+.source-btn .txt span{
+  font-family:Georgia,"Times New Roman",serif;
+  font-style:italic;
+}
+.source-meta dd,
+.isnad-list li,
+.isnad-note{
+  text-wrap:pretty;
+}
+.source-meta dt,
+.isnad-box h3{
+  color:#7b5d2d;
+}
+.social{
+  padding:8px;
+  background:#fff8ec;
+}
+.social-grid{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+}
+.social-link{
+  width:40px;
+  min-height:40px;
+  height:40px;
+  border-radius:8px;
+  flex:0 0 40px;
+  background:#203f3b;
+  border:1px solid rgba(104,79,40,.18);
+}
+.social-link svg{
+  width:22px;
+  height:22px;
+}
+.social-link.web{
+  color:#dfc487;
+  background:#203f3b;
+}
+.social-link.tele,
+.social-link.insta,
+.social-link.wa{
+  background:#203f3b;
+}
+.social-link.tele svg{fill:#2AABEE}
+.social-link.insta svg{fill:#d62976}
+.social-link.wa svg{fill:#25D366}
+
+.social-link.web svg{
+  fill:#dfc487;
 }
