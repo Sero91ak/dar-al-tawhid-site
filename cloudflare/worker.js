@@ -129,7 +129,7 @@ export default {
         return json({
           ok: true,
           service: "dar-admin-publisher",
-          deployMarker: "telegram-secrets-user-restore-v6",
+          deployMarker: "github-token-restore-watchdog-v7",
           repo: `${env.GITHUB_OWNER || DEFAULT_OWNER}/${env.GITHUB_REPO || DEFAULT_REPO}`,
           branch: env.GITHUB_BRANCH || DEFAULT_BRANCH,
           hasGithubToken: Boolean(env.GITHUB_TOKEN),

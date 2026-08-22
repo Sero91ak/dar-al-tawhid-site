@@ -188,6 +188,12 @@ jobs:
             while read -r n; do
               [ -z "$n" ] && continue
               echo "::warning::GitHub Secret fehlt/leer: $n – siehe cloudflare/TELEGRAM_STATUS_2026-08-16.md"
+              if [ "$n" = "GITHUB_TOKEN" ]; then
+                echo "::error::GITHUB_TOKEN fehlt – WORKER_GITHUB_TOKEN (PAT mit repo) in Actions Secrets setzen. Admin-App zeigt sonst „Cloudflare Secret GITHUB_TOKEN fehlt“."
+              fi
+              if [ "$n" = "ADMIN_PUBLISH_SECRET" ]; then
+                echo "::error::ADMIN_PUBLISH_SECRET fehlt – Admin-API Auth bricht sonst ab."
+              fi
             done < "$RUNNER_TEMP/missing-core-secrets.txt"
           fi
           rm -f "$SECRETS_JSON"
@@ -208,15 +214,25 @@ jobs:
               && printf '%s' "$HEALTH" | grep -q '"prayerStatusStore":true' \
               && printf '%s' "$HEALTH" | grep -q '"prayerScheduler":"cloudflare-worker-cron-v3"' \
               && printf '%s' "$HEALTH" | grep -q '"libraryApi":"v3-split-push"'; then
+              if printf '%s' "$HEALTH" | grep -q '"hasGithubToken":true'; then
+                echo "GITHUB_TOKEN aktiv"
+              else
+                echo "::warning::hasGithubToken=false – WORKER_GITHUB_TOKEN in GitHub Actions Secrets setzen (Admin Live-Publish). Hard-Check nach Delayed Recheck."
+              fi
+              if printf '%s' "$HEALTH" | grep -q '"hasAdminSecret":true'; then
+                echo "Admin-Secret aktiv"
+              else
+                echo "::warning::hasAdminSecret=false – ADMIN_PUBLISH_SECRET in GitHub Actions Secrets setzen. Hard-Check nach Delayed Recheck."
+              fi
               if printf '%s' "$HEALTH" | grep -q '"hasTelegramToken":true'; then
                 echo "Telegram-Token aktiv"
               else
                 echo "::warning::hasTelegramToken=false – TELEGRAM_BOT_TOKEN in GitHub Actions Secrets setzen (Anleitung: cloudflare/TELEGRAM_STATUS_2026-08-16.md)"
               fi
-              if printf '%s' "$HEALTH" | grep -q '"hasAdminSecret":true'; then
-                echo "Admin-Secret aktiv"
+              if printf '%s' "$HEALTH" | grep -q '"hasOneSignalKey":true'; then
+                echo "OneSignal-Key aktiv"
               else
-                echo "::warning::hasAdminSecret=false – ADMIN_PUBLISH_SECRET in GitHub Actions Secrets setzen"
+                echo "::warning::hasOneSignalKey=false – ONESIGNAL_API_KEY_NEW setzen"
               fi
               exit 0
             fi
@@ -245,7 +261,19 @@ jobs:
             echo "::error::Admin-Worker /health weg. Cloudflare → dar-admin-publisher → Settings → Builds: Root Directory auf cloudflare setzen oder Builds deaktivieren."
             exit 1
           fi
-          echo "Delayed health OK"
+          FAIL=0
+          if ! printf '%s' "$HEALTH" | grep -q '"hasGithubToken":true'; then
+            echo "::error::hasGithubToken=false – WORKER_GITHUB_TOKEN (PAT mit repo) in Actions Secrets setzen. Admin-App: Cloudflare Secret GITHUB_TOKEN fehlt."
+            FAIL=1
+          fi
+          if ! printf '%s' "$HEALTH" | grep -q '"hasAdminSecret":true'; then
+            echo "::error::hasAdminSecret=false – ADMIN_PUBLISH_SECRET in Actions Secrets setzen."
+            FAIL=1
+          fi
+          if [ "$FAIL" = "1" ]; then
+            exit 1
+          fi
+          echo "Delayed health OK (GITHUB_TOKEN + ADMIN_PUBLISH_SECRET aktiv)"
 
       - name: Flush stuck approved library pushes
         continue-on-error: true
