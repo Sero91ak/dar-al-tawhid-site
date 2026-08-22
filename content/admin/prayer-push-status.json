@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-22T14:43:09.276Z",
+  "updatedAt": "2026-08-22T14:43:18.146Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-22T14:43:09.276Z",
+  "lastCronRun": "2026-08-22T14:43:18.146Z",
   "nextPlannedPush": {
     "prayer": "ʿAṣr",
     "key": "asr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-22T15:11:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-22T14:28:08.059Z",
-  "windowEnd": "2026-08-23T16:43:08.059Z",
+  "windowStart": "2026-08-22T14:28:17.005Z",
+  "windowEnd": "2026-08-23T16:43:17.005Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 1,
@@ -30,8 +30,8 @@
   "locationGroups": 1,
   "scheduled": 12,
   "recipients": 12,
-  "invalid": 2,
-  "invalidDisabled": 2,
+  "invalid": 0,
+  "invalidDisabled": 0,
   "skippedPast": 14,
   "skippedWindow": 14,
   "duplicates": 1,
@@ -310,7 +310,7 @@
       "sendAfter": "2026-08-23T15:25:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
-      "invalid": 1
+      "invalid": 0
     },
     {
       "prayer": "ʿAṣr",
@@ -320,7 +320,7 @@
       "sendAfter": "2026-08-23T15:10:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
-      "invalid": 1
+      "invalid": 0
     }
   ],
   "skippedPastDetails": [
@@ -498,15 +498,15 @@
       "prayer": "asr",
       "mode": "entry",
       "recipients": 1,
-      "invalid": 1,
-      "response": "{\"id\":\"\",\"errors\":{\"invalid_player_ids\":[\"bee23f3e-b017-47ef-ac1d-1805119b2150\"]}}"
+      "invalid": 0,
+      "response": "{\"id\":\"bb53775b-e07f-4f3f-9e0d-ad9813b5f95d\",\"external_id\":\"bc73b600-5197-49af-b2f9-03a4cd2f44de\"}"
     },
     {
       "prayer": "asr",
       "mode": "advance",
       "recipients": 1,
-      "invalid": 1,
-      "response": "{\"id\":\"\",\"errors\":{\"invalid_player_ids\":[\"bee23f3e-b017-47ef-ac1d-1805119b2150\"]}}"
+      "invalid": 0,
+      "response": "{\"id\":\"72e7cefe-9f84-4483-ba44-5fa307e2b976\",\"external_id\":\"9049e625-1746-4c8a-80e0-c6088e40cdec\"}"
     }
   ],
   "userRegistry": [
@@ -523,16 +523,16 @@
       "lastSyncedAt": "2026-08-22T14:01:44.597+00:00"
     },
     {
-      "subscriptionId": "bee23f3e-b017-47ef-ac1d-1805119b2150",
-      "timezone": "Europe/Berlin",
-      "city": "Bonn",
-      "lastSyncedAt": "2026-08-22T14:43:07.821+00:00"
-    },
-    {
       "subscriptionId": "f5133294-c6c9-4aca-9511-a43d00374c62",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
       "lastSyncedAt": "2026-08-22T12:48:29.272+00:00"
+    },
+    {
+      "subscriptionId": "bee23f3e-b017-47ef-ac1d-1805119b2150",
+      "timezone": "Europe/Berlin",
+      "city": "Bonn",
+      "lastSyncedAt": "2026-08-22T14:43:16.768+00:00"
     },
     {
       "subscriptionId": "3a3b69ac-c2ea-4bf5-83d7-bd80ebb9f5e7",
