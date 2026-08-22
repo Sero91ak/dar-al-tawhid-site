@@ -108,7 +108,7 @@ struct WebAppView: UIViewRepresentable {
         (function(){
           if(window.__darIosViewportPolishInstalled)return;
           window.__darIosViewportPolishInstalled=true;
-          window.__DAR_IOS_BUILD__="0.22-web-parity-v662";
+          window.__DAR_IOS_BUILD__="0.22-web-parity-v664";
           /* Web assets (full-edge-appearance-polish + parity force + soft-boot) own layout.
              iOS only supplies native safe-area vars, compact layout, and status-bar top inset. */
           function cssText(){
@@ -154,7 +154,7 @@ struct WebAppView: UIViewRepresentable {
             }
             if(document.body)document.body.classList.add("dar-ios-native-app");
             if(document.head)document.head.appendChild(style);
-            var feedForce=document.getElementById("dar-ios-parity-edge-force-v662")||document.getElementById("dar-ios-parity-edge-force-v659")||document.getElementById("dar-ios-parity-edge-force-v658")||document.getElementById("dar-ios-parity-edge-force-v657")||document.getElementById("dar-ios-parity-edge-force-v656")||document.getElementById("dar-ios-parity-edge-force-v655")||document.getElementById("dar-ios-parity-edge-force-v654")||document.getElementById("dar-ios-parity-edge-force-v653")||document.getElementById("dar-ios-parity-edge-force-v652")||document.getElementById("dar-ios-parity-edge-force-v651")||document.getElementById("dar-ios-parity-edge-force-v650")||document.getElementById("dar-ios-parity-edge-force-v649")||document.getElementById("dar-ios-parity-edge-force-v648")||document.getElementById("full-edge-feed-force-v645")||document.getElementById("full-edge-feed-force-v644");
+            var feedForce=document.getElementById("dar-ios-parity-edge-force-v664")||document.getElementById("dar-ios-parity-edge-force-v659")||document.getElementById("dar-ios-parity-edge-force-v658")||document.getElementById("dar-ios-parity-edge-force-v657")||document.getElementById("dar-ios-parity-edge-force-v656")||document.getElementById("dar-ios-parity-edge-force-v655")||document.getElementById("dar-ios-parity-edge-force-v654")||document.getElementById("dar-ios-parity-edge-force-v653")||document.getElementById("dar-ios-parity-edge-force-v652")||document.getElementById("dar-ios-parity-edge-force-v651")||document.getElementById("dar-ios-parity-edge-force-v650")||document.getElementById("dar-ios-parity-edge-force-v649")||document.getElementById("dar-ios-parity-edge-force-v648")||document.getElementById("full-edge-feed-force-v645")||document.getElementById("full-edge-feed-force-v644");
             if(feedForce&&document.head)document.head.appendChild(feedForce);
             try{
               var sb=document.getElementById("dar-soft-boot");
@@ -460,7 +460,7 @@ struct WebAppView: UIViewRepresentable {
         webView.allowsBackForwardNavigationGestures = true
         webView.isOpaque = true
         webView.backgroundColor = bootInk
-        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.22-web-parity-v662"
+        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.22-web-parity-v664"
         webView.onInsetsChange = { [weak coordinator = context.coordinator] in
             coordinator?.updateViewportInsets()
         }
@@ -1063,13 +1063,13 @@ struct WebAppView: UIViewRepresentable {
             stack.translatesAutoresizingMaskIntoConstraints = false
             stack.axis = .vertical
             stack.alignment = .center
-            stack.spacing = 16
+            stack.spacing = 22
 
             let emblem = UIImageView(image: UIImage(named: "BrandMark"))
             emblem.translatesAutoresizingMaskIntoConstraints = false
             emblem.contentMode = .scaleAspectFit
             emblem.clipsToBounds = true
-            emblem.layer.cornerRadius = 48
+            emblem.layer.cornerRadius = 74
             emblem.layer.borderWidth = 1
             emblem.layer.borderColor = UIColor(red: 0.83, green: 0.71, blue: 0.43, alpha: 0.36).cgColor
             emblem.backgroundColor = UIColor(red: 0.98, green: 0.97, blue: 0.94, alpha: 0.98)
@@ -1082,14 +1082,14 @@ struct WebAppView: UIViewRepresentable {
             title.translatesAutoresizingMaskIntoConstraints = false
             title.text = "DAR AL TAWḤĪD"
             title.textColor = UIColor(red: 0.96, green: 0.93, blue: 0.82, alpha: 1.0)
-            title.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+            title.font = UIFont.systemFont(ofSize: 34, weight: .bold)
             title.textAlignment = .center
 
             let kicker = UILabel()
             kicker.translatesAutoresizingMaskIntoConstraints = false
             kicker.text = "Quran • Sunnah • Athar"
             kicker.textColor = UIColor(red: 0.80, green: 0.72, blue: 0.52, alpha: 1.0)
-            kicker.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+            kicker.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
             kicker.textAlignment = .center
 
             let progressWrap = UIView()
@@ -1120,14 +1120,14 @@ struct WebAppView: UIViewRepresentable {
             subtitle.translatesAutoresizingMaskIntoConstraints = false
             subtitle.text = "App wird geladen"
             subtitle.textColor = UIColor(red: 0.76, green: 0.74, blue: 0.68, alpha: 1.0)
-            subtitle.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+            subtitle.font = UIFont.systemFont(ofSize: 16, weight: .medium)
             subtitle.textAlignment = .center
 
             let progressValue = UILabel()
             progressValue.translatesAutoresizingMaskIntoConstraints = false
             progressValue.text = "0%"
             progressValue.textColor = UIColor(red: 0.88, green: 0.81, blue: 0.64, alpha: 0.96)
-            progressValue.font = UIFont.monospacedDigitSystemFont(ofSize: 12, weight: .semibold)
+            progressValue.font = UIFont.monospacedDigitSystemFont(ofSize: 16, weight: .semibold)
             progressValue.textAlignment = .center
 
             progressWrap.addSubview(progressTrack)
@@ -1152,18 +1152,18 @@ struct WebAppView: UIViewRepresentable {
                 overlay.leadingAnchor.constraint(equalTo: host.leadingAnchor),
                 overlay.trailingAnchor.constraint(equalTo: host.trailingAnchor),
                 overlay.bottomAnchor.constraint(equalTo: host.bottomAnchor, constant: 48),
-                emblem.widthAnchor.constraint(equalToConstant: 96),
-                emblem.heightAnchor.constraint(equalToConstant: 96),
+                emblem.widthAnchor.constraint(equalToConstant: 148),
+                emblem.heightAnchor.constraint(equalToConstant: 148),
                 stack.centerXAnchor.constraint(equalTo: overlay.centerXAnchor),
                 stack.centerYAnchor.constraint(equalTo: overlay.centerYAnchor),
                 stack.leadingAnchor.constraint(greaterThanOrEqualTo: overlay.leadingAnchor, constant: 24),
                 stack.trailingAnchor.constraint(lessThanOrEqualTo: overlay.trailingAnchor, constant: -24),
-                progressWrap.widthAnchor.constraint(equalToConstant: 224),
+                progressWrap.widthAnchor.constraint(equalToConstant: 280),
                 progressTrack.leadingAnchor.constraint(equalTo: progressWrap.leadingAnchor),
                 progressTrack.trailingAnchor.constraint(equalTo: progressWrap.trailingAnchor),
                 progressTrack.topAnchor.constraint(equalTo: progressWrap.topAnchor),
                 progressTrack.bottomAnchor.constraint(equalTo: progressWrap.bottomAnchor),
-                progressTrack.heightAnchor.constraint(equalToConstant: 3),
+                progressTrack.heightAnchor.constraint(equalToConstant: 5),
                 progressGlow.leadingAnchor.constraint(equalTo: progressTrack.leadingAnchor),
                 progressGlow.topAnchor.constraint(equalTo: progressTrack.topAnchor),
                 progressGlow.bottomAnchor.constraint(equalTo: progressTrack.bottomAnchor),
@@ -1249,7 +1249,7 @@ struct WebAppView: UIViewRepresentable {
 
         private func applyLoadingProgress(_ value: CGFloat) {
             let clamped = max(0, min(1, value))
-            let fullWidth: CGFloat = 224
+            let fullWidth: CGFloat = 280
             loadingProgressWidthConstraint?.constant = fullWidth * clamped
             loadingProgressValueLabel?.text = "\(Int(round(clamped * 100)))%"
 

@@ -142,7 +142,7 @@
     overlayEl.setAttribute("role", "status");
     overlayEl.setAttribute("aria-live", "polite");
     overlayEl.innerHTML =
-      '<img class="dar-soft-boot__mark" src="/watermark-my-logo-full.png" alt="" width="72" height="72" decoding="async">' +
+      '<img class="dar-soft-boot__mark" src="/watermark-my-logo-full.png" alt="" width="148" height="148" decoding="async">' +
       '<p class="dar-soft-boot__title">DAR AL TAWḤĪD</p>' +
       '<p class="dar-soft-boot__sub">Qurʾān · Sunnah · Āthār</p>' +
       '<div class="dar-soft-boot__track" aria-hidden="true"><div class="dar-soft-boot__bar"></div></div>' +
