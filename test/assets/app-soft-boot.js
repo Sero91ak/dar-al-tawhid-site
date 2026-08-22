@@ -1,6 +1,6 @@
 /**
  * Soft boot overlay for visitor + test web apps (iOS parity).
- * v657 · Fix black-screen: no style↔observer loop; boot fill only while overlay is up.
+ * v658 · Edel Ladezeile + black-screen fix: no style↔observer loop; boot fill only while overlay is up.
  */
 (function () {
   if (window.__darSoftBootInstalled) return;
