@@ -51,12 +51,14 @@ body{
 .source-header{
   position:relative;
   min-height:68px;
-  padding:8px 10px;
   color:#f6eddb;
-  background:linear-gradient(180deg,#203f3b,#13211f);
-  border:1px solid rgba(222,196,138,.26);
-  border-radius:8px;
-  box-shadow:var(--shadow);
+  background:
+    linear-gradient(135deg, rgba(7,37,28,.98), rgba(9,49,36,.96) 55%, rgba(5,26,20,.98));
+  border:0;
+  border-radius:0 0 8px 8px;
+  box-shadow:none;
+  padding:clamp(12px,2vw,18px) clamp(14px,3vw,22px) clamp(13px,2.1vw,19px);
+  overflow:visible;
 }
 .header-row{
   display:flex;
@@ -87,12 +89,12 @@ body{
 }
 .brand-text p{display:none}
 .brand-sign{
-  margin:0 0 0 58px;
-  font-family:"DarSignature","Snell Roundhand","Brush Script MT","Segoe Script",cursive;
-  font-size:clamp(20px,5.3vw,29px);
-  line-height:1;
-  color:#dfc487;
-  letter-spacing:0;
+  margin:3px 0 0 58px;
+  color:#f0dca8;
+  font-family:"Snell Roundhand","Segoe Script","Brush Script MT",cursive;
+  font-size:clamp(20px,4.8vw,30px);
+  line-height:1.22;
+  text-shadow:0 1px 0 rgba(0,0,0,.35);
 }
 .source-card{
   margin-top:6px;
@@ -311,6 +313,55 @@ body{
   line-height:1.35;
   text-align:center;
 }
+/* elegant emphasis system */
+.source-header::after{
+  content:"";
+  position:absolute;
+  left:clamp(14px,3vw,22px);
+  right:clamp(14px,3vw,22px);
+  bottom:0;
+  height:2px;
+  background:linear-gradient(90deg,#b7904d 0 74px,rgba(222,196,138,.54) 74px 42%,rgba(222,196,138,.08) 72%,transparent);
+}
+.source-kicker::after,
+.source-card h3::after{
+  content:"";
+  display:block;
+  width:min(230px,72%);
+  height:2px;
+  margin-top:7px;
+  background:linear-gradient(90deg,#9f7a35 0 52px,rgba(159,122,53,.34) 52px 63%,transparent);
+}
+.source-name,
+.source-work,
+.source-term{
+  border-radius:3px;
+  padding:0 .08em;
+}
+.source-name{
+  color:#123f31;
+  font-family:Georgia,"Times New Roman",serif;
+  font-weight:800;
+  background:linear-gradient(transparent 62%,rgba(183,144,77,.2) 0);
+}
+.source-work{
+  color:#6f4f18;
+  font-family:Georgia,"Times New Roman",serif;
+  font-weight:800;
+  font-style:italic;
+}
+.source-term{
+  color:#0f3b2e;
+  font-weight:800;
+  letter-spacing:.01em;
+}
+.source-card strong,
+.source-meta dd strong,
+.isnad-list strong{
+  color:#103d30;
+  font-weight:800;
+}
+
 @media (max-width:390px){
   .source-page{padding-left:6px;padding-right:6px}
   .source-hero,.source-meta,.isnad-box,.source-actions{padding-left:50px;padding-right:10px}
