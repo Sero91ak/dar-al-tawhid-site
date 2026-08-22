@@ -1,6 +1,6 @@
 /**
  * Soft boot overlay for visitor + test web apps (iOS parity).
- * v660 · Theme-Hauptfarbe: nie Blau erzwingen; Fill folgt data-theme / Originalfarbe.
+ * v661 · Theme-Fill + sichtbar 100% + Android/Web wie iOS-Start (kein Hängen auf Chrome-Splash).
  */
 (function () {
   if (window.__darSoftBootInstalled) return;
@@ -9,7 +9,8 @@
   var OVERLAY_ID = "dar-soft-boot";
   var MAX_FAKE = 0.94;
   var FADE_HOLD_MS = 280;
-  var MIN_SHOW_MS = 700;
+  var HUNDRED_HOLD_MS = 380;
+  var MIN_SHOW_MS = 900;
   var HARD_TIMEOUT_MS = 6500;
   /* Original-Hauptfarben je Erscheinungsbild (THEME_META / theme-page-bg) */
   var THEME_FILLS = {
@@ -195,32 +196,33 @@
     progress = 1;
     paint();
     var el = overlayEl || document.getElementById(OVERLAY_ID);
-    try {
-      if (document.documentElement) {
-        var root = document.documentElement;
-        root.classList.remove("dar-soft-booting");
-        root.style.removeProperty("background-color");
-        root.style.removeProperty("background");
-        root.style.removeProperty("background-image");
-        /* Theme-Tokens wieder dem CSS überlassen */
-        root.style.removeProperty("--theme-page-bg");
-        var live = resolveFill();
-        root.style.setProperty("--dar-boot-fill", live);
-        window.__DAR_BOOT_FILL = live;
-        var meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) meta.setAttribute("content", live);
-      }
-    } catch (e) {}
-    if (!el) return;
     setTimeout(function () {
-      try { el.classList.add("is-done"); } catch (e) {}
+      try {
+        if (document.documentElement) {
+          var root = document.documentElement;
+          root.classList.remove("dar-soft-booting");
+          root.style.removeProperty("background-color");
+          root.style.removeProperty("background");
+          root.style.removeProperty("background-image");
+          root.style.removeProperty("--theme-page-bg");
+          var live = resolveFill();
+          root.style.setProperty("--dar-boot-fill", live);
+          window.__DAR_BOOT_FILL = live;
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute("content", live);
+        }
+      } catch (e) {}
+      if (!el) return;
       setTimeout(function () {
-        try {
-          if (el && el.parentNode) el.parentNode.removeChild(el);
-        } catch (e) {}
-        overlayEl = null;
-      }, 300);
-    }, FADE_HOLD_MS);
+        try { el.classList.add("is-done"); } catch (e) {}
+        setTimeout(function () {
+          try {
+            if (el && el.parentNode) el.parentNode.removeChild(el);
+          } catch (e) {}
+          overlayEl = null;
+        }, 300);
+      }, FADE_HOLD_MS);
+    }, HUNDRED_HOLD_MS);
   }
 
   function viewLooksReady() {
@@ -288,7 +290,13 @@
       setTimeout(maybeFinish, 40);
       setTimeout(function () { if (!finished) finish(); }, 4000);
     });
-    window.addEventListener("pageshow", function () {
+    window.addEventListener("pageshow", function (ev) {
+      try {
+        if (ev && ev.persisted && /Android/i.test(String(navigator.userAgent || ""))) {
+          location.reload();
+          return;
+        }
+      } catch (e) {}
       setTimeout(maybeFinish, 40);
     });
     window.addEventListener("hashchange", function () {

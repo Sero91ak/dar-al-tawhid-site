@@ -2,7 +2,7 @@
  * Full-edge appearance polish (visitor + test)
  * iOS-parity: continuous theme fill under status bar, safe-area content, feed full-bleed.
  * Layout / surface only — no theme hue swap (edge-to-edge theme lock stays authoritative).
- * v660 · solid fill via --dar-edge-fill only (no sticky inline / broken gradient feed fill)
+ * v661 · Android: no background-attachment:fixed (black splash); theme fill only
  */
 
 :root,
@@ -35,7 +35,7 @@ html[data-theme] #appShell {
   padding-right: 0 !important;
   background: var(--dar-edge-fill) !important;
   background-color: var(--dar-edge-fill) !important;
-  background-attachment: fixed !important;
+  background-attachment: scroll !important;
   min-height: 100% !important;
   min-height: 100dvh !important;
   box-sizing: border-box !important;
