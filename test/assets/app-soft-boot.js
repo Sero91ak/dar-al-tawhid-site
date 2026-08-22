@@ -1,6 +1,6 @@
 /**
  * Soft boot overlay for visitor + test web apps (iOS parity).
- * v661 · Theme-Fill + sichtbar 100% + Android/Web wie iOS-Start (kein Hängen auf Chrome-Splash).
+ * v663 · Ein Overlay, nie auf <html>; alle Duplikate entfernen — Web-App hing bei 0%.
  */
 (function () {
   if (window.__darSoftBootInstalled) return;
@@ -114,9 +114,24 @@
     }
   }
 
+  function removeAllOverlays(keep) {
+    try {
+      var nodes = document.querySelectorAll("#" + OVERLAY_ID);
+      for (var i = 0; i < nodes.length; i++) {
+        if (keep && nodes[i] === keep) continue;
+        if (nodes[i].parentNode) nodes[i].parentNode.removeChild(nodes[i]);
+      }
+    } catch (e) {}
+  }
+
   function ensureOverlay() {
-    overlayEl = document.getElementById(OVERLAY_ID);
+    var existing = document.querySelectorAll("#" + OVERLAY_ID);
+    overlayEl = existing.length ? existing[existing.length - 1] : document.getElementById(OVERLAY_ID);
     if (overlayEl) {
+      removeAllOverlays(overlayEl);
+      if (overlayEl.parentNode === document.documentElement && document.body) {
+        try { document.body.appendChild(overlayEl); } catch (e) {}
+      }
       barEl = overlayEl.querySelector(".dar-soft-boot__bar");
       pctEl = overlayEl.querySelector(".dar-soft-boot__pct");
       syncEdgeFill();
@@ -132,7 +147,7 @@
       '<p class="dar-soft-boot__sub">Qurʾān · Sunnah · Āthār</p>' +
       '<div class="dar-soft-boot__track" aria-hidden="true"><div class="dar-soft-boot__bar"></div></div>' +
       '<p class="dar-soft-boot__pct">0%</p>';
-    var host = document.documentElement || document.body;
+    var host = document.body || document.documentElement;
     host.appendChild(overlayEl);
     barEl = overlayEl.querySelector(".dar-soft-boot__bar");
     pctEl = overlayEl.querySelector(".dar-soft-boot__pct");
@@ -195,7 +210,6 @@
     }
     progress = 1;
     paint();
-    var el = overlayEl || document.getElementById(OVERLAY_ID);
     setTimeout(function () {
       try {
         if (document.documentElement) {
@@ -212,13 +226,15 @@
           if (meta) meta.setAttribute("content", live);
         }
       } catch (e) {}
-      if (!el) return;
+      var all = [];
+      try { all = document.querySelectorAll("#" + OVERLAY_ID); } catch (e) {}
+      if (!all.length) return;
       setTimeout(function () {
-        try { el.classList.add("is-done"); } catch (e) {}
+        for (var i = 0; i < all.length; i++) {
+          try { all[i].classList.add("is-done"); } catch (e) {}
+        }
         setTimeout(function () {
-          try {
-            if (el && el.parentNode) el.parentNode.removeChild(el);
-          } catch (e) {}
+          removeAllOverlays(null);
           overlayEl = null;
         }, 300);
       }, FADE_HOLD_MS);
@@ -275,10 +291,9 @@
 
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", function () {
-        if (overlayEl && document.documentElement && overlayEl.parentNode !== document.documentElement) {
-          try { document.documentElement.appendChild(overlayEl); } catch (e) {}
-        }
+        ensureOverlay();
         syncEdgeFill();
+        paint();
         setTimeout(maybeFinish, 60);
       }, { once: true });
     } else {

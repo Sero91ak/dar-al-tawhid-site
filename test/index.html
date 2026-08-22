@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v662";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v663";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -28,7 +28,7 @@
   }catch(e){}
 })();
 </script>
-<style id="dar-soft-boot-inline-v662">
+<style id="dar-soft-boot-inline-v663">
 html.dar-soft-booting,html.dar-soft-booting body{background-color:var(--dar-boot-fill,var(--theme-page-bg,#080806))!important;overflow:hidden!important}
 html.dar-soft-booting #bottomNav,html.dar-soft-booting .bottom-nav,html.dar-soft-booting .footer,html.dar-soft-booting .home-discover,html.dar-soft-booting .home-v380{visibility:hidden!important;opacity:0!important;pointer-events:none!important}
 #dar-soft-boot{position:fixed;inset:0;top:0;left:0;right:0;bottom:0;width:100%;width:100vw;width:100dvw;height:100%;height:100lvh;min-height:100%;min-height:100lvh;min-height:calc(100dvh + env(safe-area-inset-bottom,0px) + 64px);margin:0;box-sizing:border-box;z-index:2147483646;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:max(24px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px)) 24px max(24px,env(safe-area-inset-bottom,0px),var(--dar-native-safe-bottom,0px));background-color:var(--dar-boot-fill,var(--theme-page-bg,var(--outer-bg-flat,var(--bg,#080806))))!important;background-image:radial-gradient(120% 80% at 50% 42%,rgba(201,168,106,.12),transparent 58%)!important;color:var(--cream,#f4ead2);font-family:Manrope,Inter,system-ui,sans-serif;transition:opacity .28s ease,visibility .28s ease;overscroll-behavior:none;transform:translateZ(0)}
@@ -43,8 +43,10 @@ html[data-theme="light"] #dar-soft-boot,html[data-theme="soft"] #dar-soft-boot{c
 html[data-theme="light"] #dar-soft-boot .dar-soft-boot__title,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__title{color:var(--gold2,#9b7a3c)}
 html[data-theme="light"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="light"] #dar-soft-boot .dar-soft-boot__pct,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__pct{color:rgba(58,47,36,.72)}
 </style>
-<script src="/test/assets/app-soft-boot.js?v=662"></script>
-<script>/* ANDROID_FULL_RELOAD_V662: PWA/Standalone wie iOS — kein Hängen auf Chrome-Splash */(function(){try{var ua=String(navigator.userAgent||"");if(!/Android/i.test(ua))return;document.documentElement.classList.add("is-android");window.addEventListener("pageshow",function(ev){if(ev&&ev.persisted)location.reload()});}catch(e){}})();</script>
+<script src="/test/assets/app-soft-boot.js?v=663"></script>
+<script>/* SOFTBOOT_UNSTICK_V663 */(function(){function wipe(){try{document.documentElement.classList.remove("dar-soft-booting");document.querySelectorAll("#dar-soft-boot").forEach(function(n){n.parentNode&&n.parentNode.removeChild(n)})}catch(e){}}setTimeout(function(){if(document.getElementById("dar-soft-boot"))wipe()},9000)})();</script>
+
+<script>/* ANDROID_FULL_RELOAD_V663: PWA/Standalone wie iOS — kein Hängen auf Chrome-Splash */(function(){try{var ua=String(navigator.userAgent||"");if(!/Android/i.test(ua))return;document.documentElement.classList.add("is-android");window.addEventListener("pageshow",function(ev){if(ev&&ev.persisted)location.reload()});}catch(e){}})();</script>
 
 <script>/* VISUAL_PAST_PURGE_V588: alte Optik-Caches löschen – aktuelle Darstellung bleibt Autorität */(function(){var BUILD=String(window.__DAR_EXPECTED_BUILD||"");var KEY="dar_visual_authority_build_v1";var ONCE="dar_visual_past_purge_once_v588";function num(id){var m=String(id||"").match(/v(\d+)/);return m?parseInt(m[1],10):0}function wipe(){if(!("caches"in window))return Promise.resolve();return caches.keys().then(function(keys){return Promise.all(keys.filter(function(k){return /^dar-al-tawhid-offline-light-/i.test(k)}).map(function(k){return caches.delete(k)}))})}function bustReload(tag){try{if(sessionStorage.getItem(ONCE)===BUILD+"|"+tag)return;sessionStorage.setItem(ONCE,BUILD+"|"+tag)}catch(e){}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?"+tag+"="+Date.now()+h)}try{var prev=localStorage.getItem(KEY)||"";var localN=num(BUILD);var prevN=num(prev);if(prevN>localN&&localN>0){wipe().then(function(){if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){try{g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}catch(e){}}).catch(function(){})}bustReload("visual-stale")}).catch(function(){bustReload("visual-stale")});return}if(localN>prevN){wipe().then(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}bustReload("visual-new")}).catch(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}});return}if(!prev&&BUILD){try{localStorage.setItem(KEY,BUILD)}catch(e){}}if(localN>0&&"caches"in window){caches.keys().then(function(keys){keys.forEach(function(k){if(!/^dar-al-tawhid-offline-light-/i.test(k))return;var kn=num(k);if(kn&&kn<localN)caches.delete(k)})}).catch(function(){})}}catch(e){}try{var path=String(location.pathname||"");var ver=path.indexOf("/test")===0?"/test/version.json":"/version.json";fetch(ver,{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(remote){if(!remote||!remote.buildId)return;var remoteN=num(remote.buildId);if(remoteN>localN&&localN>0){wipe().then(function(){bustReload("visual-remote")}).catch(function(){bustReload("visual-remote")})}}).catch(function(){})}catch(e){}})();</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
@@ -11464,8 +11466,8 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="preload" href="/test/data/prophets/index.json" as="fetch" crossorigin>
 <link rel="stylesheet" href="/test/assets/prophets/prophets.css?v=17">
 <link rel="stylesheet" href="/assets/adaptive-layout.css?v=642">
-<link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=662">
-<link rel="stylesheet" href="/test/assets/full-edge-appearance-polish.css?v=662">
+<link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=663">
+<link rel="stylesheet" href="/test/assets/full-edge-appearance-polish.css?v=663">
 <link rel="stylesheet" href="/assets/fold-split.css?v=2">
 <style id="typography-compact-fix-v310">
 /* Finale Typografie-Korrektur — gewinnt gegen Home-Compact-Overrides */
@@ -19051,14 +19053,6 @@ html[data-theme="light"] body.is-scholar-route{
 
 
 <body class="has-bottom-nav">
-<div id="dar-soft-boot" role="status" aria-live="polite">
-<img class="dar-soft-boot__mark" src="/watermark-my-logo-full.png" alt="" width="72" height="72" decoding="async">
-<p class="dar-soft-boot__title">DAR AL TAWḤĪD</p>
-<p class="dar-soft-boot__sub">Qurʾān · Sunnah · Āthār</p>
-<div class="dar-soft-boot__track" aria-hidden="true"><div class="dar-soft-boot__bar"></div></div>
-<p class="dar-soft-boot__pct">0%</p>
-</div>
-
 <div id="newPostsBanner" class="new-posts-banner hidden" role="button" tabindex="0" aria-label="Aktualisieren" style="display:none">
   <span class="new-posts-icon">&#x23F3;</span>
   <span class="new-posts-text">Neue Inhalte verfügbar</span>
@@ -25061,7 +25055,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v662";
+const APP_BUILD_ID="app-shell-v663";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -28423,7 +28417,7 @@ html.dar-scroll-guard:not(.qrc-sheet-open):not(.quran-panel-open):not(.qov-sheet
 }
 </style>
 
-<style id="dar-ios-parity-edge-force-v662">
+<style id="dar-ios-parity-edge-force-v663">
 /* v655 · GLOBAL: solid edge fill on every route — Feed/Home/Mehr/Areas alike. */
 html[data-theme],
 html[data-theme] body,
@@ -28727,7 +28721,7 @@ html[data-theme] #bottomNav.bottom-nav,html[data-theme] .bottom-nav{
     }catch(e){}
   }
   function pin(){
-    var s=document.getElementById("dar-ios-parity-edge-force-v662");
+    var s=document.getElementById("dar-ios-parity-edge-force-v663");
     if(s&&s.parentNode){
       (document.documentElement||s.parentNode).appendChild(s);
     }
