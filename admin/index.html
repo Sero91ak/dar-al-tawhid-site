@@ -26,8 +26,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v64-boot-guard";
-  var MIG_KEY="darAdminSwFixV28";
+  var ADMIN_SW_CACHE="dar-admin-stats-v65-hang-fix";
+  var MIG_KEY="darAdminSwFixV29";
   var RELOAD_KEY="darAdminSwReloadBudget";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
@@ -104,10 +104,9 @@
     return;
   }
   if("serviceWorker" in navigator&&localStorage.getItem(MIG_KEY)!=="done"){
-    dropAllWorkers().then(cleanCaches).then(function(){
-      try{localStorage.setItem(MIG_KEY,"done")}catch(e){}
-      location.replace("/admin/?swfix=1&t="+Date.now());
-    }).catch(function(){try{localStorage.setItem(MIG_KEY,"done")}catch(e){}});
+    // Nicht blockierend: Migration im Hintergrund, UI sofort weiterladen
+    try{localStorage.setItem(MIG_KEY,"done")}catch(e){}
+    dropAllWorkers().then(cleanCaches).then(registerAdmin).catch(function(){});
     return;
   }
   dropVisitorWorkers().then(cleanCaches).then(registerAdmin).catch(function(){});
@@ -618,7 +617,7 @@ const DEFAULT_WORKER_PUBLISH_URL="https://dar-admin-publisher.sero91ak.workers.d
 const WORKER_PUBLISH_URL_KEY="darAdminWorkerPublishUrlV1";
 const WORKER_SECRET_KEY="darAdminWorkerSecretV1";
 const ADMIN_DRAFT_KEY="darAdminDraftV1";
-const ADMIN_BUILD="2026-08-22-worker-secret-save";
+const ADMIN_BUILD="2026-08-22-admin-hang-fix";
 const ADMIN_PLAN_KEY="darAdminPlannedPostsV1";
 const ADMIN_NEWS_KEY="darAdminNewsDraftsV1";
 const ADMIN_REPORTS_KEY="darAdminReportsV1";
@@ -868,7 +867,7 @@ function previewSize(){
 function savePreviewSize(size){try{localStorage.setItem(ADMIN_PREVIEW_SIZE_KEY,JSON.stringify(size))}catch(e){}}
 function normalizeWorkerPublishUrl(url){
   let raw=String(url||"").trim();
-  if(!raw||raw==="/api/admin/publish")||raw==="/publish")return DEFAULT_WORKER_PUBLISH_URL;
+  if(!raw||raw==="/api/admin/publish"||raw==="/publish")return DEFAULT_WORKER_PUBLISH_URL;
   // Häufige Tippfehler aus Screenshots/Autokorrektur korrigieren
   raw=raw.replace(/^https?:\/\/(?!dar-)([a-z0-9-]*admin-publisher\.sero91ak\.workers\.dev)/i,"https://dar-$1");
   raw=raw.replace(/^https?:\/\/r-admin-publisher\.sero91ak\.workers\.dev/i,"https://dar-admin-publisher.sero91ak.workers.dev");
