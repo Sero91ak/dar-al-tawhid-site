@@ -1,5 +1,6 @@
 /**
  * Soft boot overlay for visitor + test web apps (iOS parity).
+ * v656 · Edge-up theme fill under status bar for every Erscheinungsbild.
  * Asymptotic 0→~94%, snaps to 100% when the first real view is ready, then fades.
  */
 (function () {
@@ -11,6 +12,15 @@
   var FADE_HOLD_MS = 350;
   var MIN_SHOW_MS = 900;
   var HARD_TIMEOUT_MS = 18000;
+  var THEME_FILLS = {
+    dark: "#080806",
+    light: "#f7f0df",
+    soft: "#f2e6e2",
+    royal: "#07162c",
+    bordeaux: "#140B0C",
+    "dar-al-layl": "#050605",
+    aurora: "#080806"
+  };
   var progress = 0;
   var finished = false;
   var finishScheduled = false;
@@ -29,11 +39,89 @@
     }
   }
 
+  function resolveThemeId() {
+    try {
+      var t = (document.documentElement && document.documentElement.getAttribute("data-theme")) || "";
+      if (t && THEME_FILLS[t]) return t;
+      t = localStorage.getItem("darThemeV1") || "dark";
+      if (t === "emerald" || t === "smaragd" || t === "aurora") t = "dark";
+      if (!THEME_FILLS[t]) t = "dark";
+      return t;
+    } catch (e) {
+      return "dark";
+    }
+  }
+
+  function resolveFill() {
+    try {
+      var root = document.documentElement;
+      if (root) {
+        var cs = getComputedStyle(root);
+        var live = (
+          cs.getPropertyValue("--dar-boot-fill") ||
+          cs.getPropertyValue("--theme-page-bg") ||
+          cs.getPropertyValue("--outer-bg-flat") ||
+          cs.getPropertyValue("--page-cover") ||
+          cs.getPropertyValue("--bg") ||
+          ""
+        ).trim();
+        var hex = live.match(/#[0-9a-fA-F]{3,8}/);
+        if (hex) return hex[0];
+      }
+    } catch (e) {}
+    return THEME_FILLS[resolveThemeId()] || THEME_FILLS.dark;
+  }
+
+  function syncEdgeFill() {
+    try {
+      var fill = resolveFill();
+      var root = document.documentElement;
+      if (!root) return fill;
+      root.style.setProperty("--dar-boot-fill", fill);
+      root.style.setProperty("background", fill, "important");
+      root.style.setProperty("background-color", fill, "important");
+      root.style.setProperty("background-image", "none", "important");
+      if (document.body) {
+        document.body.style.setProperty("background", fill, "important");
+        document.body.style.setProperty("background-color", fill, "important");
+        document.body.style.setProperty("background-image", "none", "important");
+      }
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (!meta) {
+        meta = document.createElement("meta");
+        meta.setAttribute("name", "theme-color");
+        (document.head || root).appendChild(meta);
+      }
+      meta.setAttribute("content", fill);
+      var tile = document.querySelector('meta[name="msapplication-TileColor"]');
+      if (tile) tile.setAttribute("content", fill);
+      if (overlayEl) {
+        overlayEl.style.setProperty("background-color", fill, "important");
+        overlayEl.style.setProperty(
+          "background-image",
+          "radial-gradient(120% 80% at 50% 42%, rgba(201,168,106,0.12), transparent 58%)",
+          "important"
+        );
+        overlayEl.style.setProperty("top", "0px", "important");
+        overlayEl.style.setProperty("left", "0px", "important");
+        overlayEl.style.setProperty("right", "0px", "important");
+        overlayEl.style.setProperty("bottom", "0px", "important");
+        overlayEl.style.setProperty("width", "100%", "important");
+        overlayEl.style.setProperty("height", "100%", "important");
+        overlayEl.style.setProperty("min-height", "100dvh", "important");
+      }
+      return fill;
+    } catch (e) {
+      return THEME_FILLS.dark;
+    }
+  }
+
   function ensureOverlay() {
     overlayEl = document.getElementById(OVERLAY_ID);
     if (overlayEl) {
       barEl = overlayEl.querySelector(".dar-soft-boot__bar");
       pctEl = overlayEl.querySelector(".dar-soft-boot__pct");
+      syncEdgeFill();
       return overlayEl;
     }
     overlayEl = document.createElement("div");
@@ -50,6 +138,7 @@
     host.appendChild(overlayEl);
     barEl = overlayEl.querySelector(".dar-soft-boot__bar");
     pctEl = overlayEl.querySelector(".dar-soft-boot__pct");
+    syncEdgeFill();
     return overlayEl;
   }
 
@@ -108,6 +197,7 @@
     }
     progress = 1;
     paint();
+    syncEdgeFill();
     var el = ensureOverlay();
     setTimeout(function () {
       el.classList.add("is-done");
@@ -115,6 +205,7 @@
         try {
           if (el && el.parentNode) el.parentNode.removeChild(el);
         } catch (e) {}
+        syncEdgeFill();
       }, 320);
     }, FADE_HOLD_MS);
   }
@@ -149,6 +240,16 @@
       }
     } catch (e) {}
 
+    /* Paint html/theme-color before first overlay frame */
+    try {
+      var early = THEME_FILLS[resolveThemeId()] || THEME_FILLS.dark;
+      if (document.documentElement) {
+        document.documentElement.style.setProperty("--dar-boot-fill", early);
+        document.documentElement.style.setProperty("background", early, "important");
+        document.documentElement.style.setProperty("background-color", early, "important");
+      }
+    } catch (e) {}
+
     ensureOverlay();
     paint();
     startRamp();
@@ -158,13 +259,19 @@
 
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", function () {
+        if (overlayEl && document.body && overlayEl.parentNode !== document.body) {
+          document.body.appendChild(overlayEl);
+        }
+        syncEdgeFill();
         setTimeout(maybeFinish, 80);
       }, { once: true });
     } else {
+      syncEdgeFill();
       setTimeout(maybeFinish, 80);
     }
 
     window.addEventListener("pageshow", function () {
+      syncEdgeFill();
       setTimeout(maybeFinish, 40);
     });
     window.addEventListener("hashchange", function () {
@@ -173,18 +280,21 @@
 
     try {
       var mo = new MutationObserver(function () {
+        syncEdgeFill();
         maybeFinish();
       });
       var startObserve = function () {
         var view = document.getElementById("appView");
         if (view) mo.observe(view, { childList: true, subtree: true, characterData: true });
         if (document.body) mo.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+        mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "class", "style"] });
       };
       if (document.body) startObserve();
       else document.addEventListener("DOMContentLoaded", startObserve, { once: true });
     } catch (e) {}
 
     window.__darSoftBootFinish = finish;
+    window.__darSoftBootSyncFill = syncEdgeFill;
   }
 
   install();

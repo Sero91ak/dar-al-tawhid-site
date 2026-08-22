@@ -2,7 +2,7 @@
  * Full-edge appearance polish (visitor + test)
  * iOS-parity: continuous theme fill under status bar, safe-area content, feed full-bleed.
  * Layout / surface only — no theme hue swap (edge-to-edge theme lock stays authoritative).
- * v655 · Global: solid edge fill all routes (Feed+Home+Mehr+Areas); no color Trennung
+ * v656 · Global solid fill + soft-boot edge under status bar
  */
 
 :root,

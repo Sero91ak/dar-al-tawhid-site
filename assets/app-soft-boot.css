@@ -1,20 +1,50 @@
-/* Soft boot overlay — iOS-parity first paint (visitor + test) */
+/* Soft boot overlay — iOS-parity first paint (visitor + test)
+ * v656 · Edge-up solid fill under status bar for every theme (no top Trennung)
+ */
+html,
+html[data-theme],
+html body{
+  background: var(--dar-boot-fill, var(--theme-page-bg, var(--outer-bg-flat, var(--bg, #080806)))) !important;
+  background-color: var(--dar-boot-fill, var(--theme-page-bg, var(--outer-bg-flat, var(--bg, #080806)))) !important;
+  background-image: none !important;
+}
+
 #dar-soft-boot{
   position:fixed;
-  inset:0;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  width:100%;
+  width:100dvw;
+  height:100%;
+  height:100vh;
+  height:100dvh;
+  height:-webkit-fill-available;
+  min-height:100vh;
+  min-height:100dvh;
+  min-height:-webkit-fill-available;
+  margin:0;
+  box-sizing:border-box;
   z-index:2147483000;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
   gap:18px;
-  padding:max(24px,env(safe-area-inset-top,0px)) 24px max(24px,env(safe-area-inset-bottom,0px));
-  background:
-    radial-gradient(120% 80% at 50% 0%, color-mix(in srgb, var(--gold2, #c9a86a) 14%, transparent), transparent 55%),
-    var(--theme-page-bg, var(--outer-bg-flat, var(--outer-bg, var(--bg, #05080f))));
+  padding:max(24px, env(safe-area-inset-top, 0px), var(--dar-native-safe-top, 0px)) 24px max(24px, env(safe-area-inset-bottom, 0px), var(--dar-native-safe-bottom, 0px));
+  /* Solid theme fill first — covers status bar; no fade-to-black seam */
+  background-color: var(--dar-boot-fill, var(--theme-page-bg, var(--outer-bg-flat, var(--bg, #080806)))) !important;
+  background-image:
+    radial-gradient(120% 80% at 50% 42%, color-mix(in srgb, var(--gold2, #c9a86a) 12%, transparent), transparent 58%) !important;
+  background-repeat:no-repeat !important;
   color:var(--cream, #f4ead2);
   font-family:Manrope,Inter,system-ui,sans-serif;
   transition:opacity .28s ease, visibility .28s ease;
+  overscroll-behavior:none;
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+  transform:translateZ(0);
 }
 #dar-soft-boot.is-done{
   opacity:0;
@@ -67,4 +97,19 @@
   font-weight:800;
   letter-spacing:.08em;
   color:color-mix(in srgb, var(--cream,#f4ead2) 78%, transparent);
+}
+
+html[data-theme="light"] #dar-soft-boot,
+html[data-theme="soft"] #dar-soft-boot{
+  color:#3a2f24;
+}
+html[data-theme="light"] #dar-soft-boot .dar-soft-boot__title,
+html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__title{
+  color:var(--gold2, #9b7a3c);
+}
+html[data-theme="light"] #dar-soft-boot .dar-soft-boot__sub,
+html[data-theme="light"] #dar-soft-boot .dar-soft-boot__pct,
+html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__sub,
+html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__pct{
+  color:rgba(58,47,36,.72);
 }
