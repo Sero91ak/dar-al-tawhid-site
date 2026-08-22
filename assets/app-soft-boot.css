@@ -1,5 +1,5 @@
 /* Soft boot overlay — iOS-parity first paint (visitor + test)
- * v664 · Größerer, zentrierter Start (Logo, Titel, Ladezeile) — Web/Android/iOS-Web
+ * v665 · Startblock etwas höher; edle Ladezeile: links kräftig, rechts dünner, dezentes Licht
  */
 html.dar-soft-booting,
 html.dar-soft-booting body{
@@ -40,7 +40,7 @@ html.dar-soft-booting .all-posts-link{
   align-items:center;
   justify-content:center;
   gap:22px;
-  padding:max(24px, env(safe-area-inset-top, 0px), var(--dar-native-safe-top, 0px)) 24px max(24px, env(safe-area-inset-bottom, 0px), var(--dar-native-safe-bottom, 0px));
+  padding:max(24px, env(safe-area-inset-top, 0px), var(--dar-native-safe-top, 0px)) 24px calc(16vh + env(safe-area-inset-bottom, 0px)) 24px;
   background-color: var(--dar-boot-fill, var(--theme-page-bg, var(--outer-bg-flat, var(--bg, #080806)))) !important;
   background-image:
     radial-gradient(120% 80% at 50% 42%, color-mix(in srgb, var(--gold2, #c9a86a) 12%, transparent), transparent 58%) !important;
@@ -86,19 +86,20 @@ html.dar-soft-booting .all-posts-link{
 }
 #dar-soft-boot .dar-soft-boot__track{
   width:min(300px,78vw);
-  height:4px;
-  border-radius:999px;
-  margin-top:6px;
-  background:color-mix(in srgb, var(--gold2, #c9a86a) 18%, transparent);
-  box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--gold2, #c9a86a) 10%, transparent);
+  height:6px;
+  border-radius:0;
+  margin-top:8px;
+  background:linear-gradient(90deg, color-mix(in srgb, var(--gold2, #c9a86a) 22%, transparent), color-mix(in srgb, var(--gold2, #c9a86a) 8%, transparent));
+  box-shadow:none;
   overflow:hidden;
+  clip-path:polygon(0 6%, 100% 36%, 100% 64%, 0 94%);
 }
 #dar-soft-boot .dar-soft-boot__bar{
   height:100%;
   width:0%;
-  border-radius:inherit;
-  background:linear-gradient(90deg, color-mix(in srgb, var(--gold2,#c9a86a) 55%, transparent), var(--gold2,#efd78e), color-mix(in srgb, #fff 55%, var(--gold2,#d4b56a)));
-  box-shadow:0 0 10px color-mix(in srgb, var(--gold2, #c9a86a) 45%, transparent);
+  border-radius:0;
+  background:linear-gradient(90deg, #c4a66a 0%, #efd78e 46%, rgba(239,215,142,.82) 100%);
+  box-shadow:0 0 5px color-mix(in srgb, var(--gold2, #c9a86a) 22%, transparent);
   transition:width .08s linear;
 }
 #dar-soft-boot .dar-soft-boot__pct{
