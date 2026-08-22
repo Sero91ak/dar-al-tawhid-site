@@ -19177,11 +19177,12 @@ function refreshQuranAyahArabicDom(){try{const sid=currentRoute&&currentRoute.vi
 function setQuranViewSettings(next){const merged={...getQuranViewSettings(),...(next||{})};try{localStorage.setItem(QURAN_VIEW_SETTINGS_KEY,JSON.stringify(merged))}catch(e){}applyQuranViewSettingsToDom();refreshQuranAyahArabicDom();return merged}
 function quranViewHiddenAttr(key){return getQuranViewSettings()[key]?"":" hidden"}
 function renderQuranViewControls(){const settings=getQuranViewSettings();const readingSettings=getQuranReadingSettings();return `<section class="font-slider-panel"><div class="font-slider-head"><div class="font-slider-title"><b>Ansicht</b><span>Wähle, welche Textarten im Qurʾān-Leser sichtbar bleiben.</span></div></div><div class="prayer-settings-grid prayer-push-settings-grid"><label><input type="checkbox" data-quran-view-toggle="showArabic"${settings.showArabic?" checked":""}> Arabisch anzeigen</label><label><input type="checkbox" data-quran-view-toggle="showTajweed"${settings.showTajweed?" checked":""}> Tajweed-Farben</label><label><input type="checkbox" data-quran-view-toggle="showGerman"${settings.showGerman?" checked":""}> Deutsch anzeigen</label><label><input type="checkbox" data-quran-view-toggle="showTransliteration"${settings.showTransliteration?" checked":""}> Lautschrift anzeigen</label><label><input type="checkbox" data-quran-progress-auto${readingSettings.automaticProgressEnabled?" checked":""}> Lesefortschritt automatisch speichern</label></div><p class="quran-tr-note">Speichert automatisch, wo du zuletzt gelesen hast.</p></section>`}
-function quranTajweedFile(id){return `/content/quran-tajweed/${String(id).padStart(3,"0")}.json`}
+function quranTajweedFile(id){return `/content/quran-tajweed/${String(id).padStart(3,"0")}.json?v=668`}
 const quranTajweedCache=new Map();const quranTajweedLoading=new Map();
 function applyQuranTajweedToSurah(surah,doc){if(!surah||!Array.isArray(surah.verses)||!doc)return surah;const map=new Map((doc.verses||[]).map(function(v){return [Number(v.id),String(v.tajweed||"")]}));surah.verses.forEach(function(v){const html=map.get(Number(v.id));if(html)v.ar_tajweed=html});return surah}
 async function loadQuranTajweed(id){const n=Number(id);if(!Number.isFinite(n)||n<1||n>114)return null;if(quranTajweedCache.has(n))return quranTajweedCache.get(n);if(quranTajweedLoading.has(n))return quranTajweedLoading.get(n);const job=(async()=>{try{let r=await fetch(quranTajweedFile(n),{cache:"force-cache"});if(!r.ok)r=await fetch(quranTajweedFile(n),{cache:"no-store"});if(!r.ok)return null;const doc=await r.json();quranTajweedCache.set(n,doc);const surah=quranSurahCache.get(n);if(surah)applyQuranTajweedToSurah(surah,doc);return doc}catch(e){console.warn("Tajweed laden:",e);return null}finally{quranTajweedLoading.delete(n)}})();quranTajweedLoading.set(n,job);return job}
-function sanitizeQuranTajweedHtml(html){let s=String(html||"");if(!s)return"";s=s.replace(/<\s*tajweed\s+class\s*=\s*"?([a-z0-9_]+)"?\s*>/gi,'<span class="tj tj-$1">').replace(/<\/\s*tajweed\s*>/gi,"</span>");s=s.replace(/<\s*span\s+class\s*=\s*"?end"?\s*>/gi,'<span class="tj tj-end" hidden>');s=s.replace(/<\/?(?!span\b)[a-zA-Z][^>]*>/g,"");s=s.replace(/<span([^>]*)>/gi,function(_,attrs){const m=/class\s*=\s*"([^"]+)"/.exec(attrs)||/class\s*=\s*'([^']+)'/.exec(attrs)||/class\s*=\s*([^\s>]+)/.exec(attrs);const hidden=/\bhidden\b/i.test(attrs)?" hidden":"";if(!m)return"<span"+hidden+">";const classes=m[1].split(/\s+/).filter(function(c){return c==="tj"||c.indexOf("tj-")===0}).join(" ");return '<span class="'+classes+'"'+hidden+">"});return s}
+function mapQuranTajweedClass(name){const n=String(name||"").toLowerCase().replace(/^tj-/,"");if(n==="qalaqah")return"qlqalah";if(n==="slnt")return"silent";return n}
+function sanitizeQuranTajweedHtml(html){let s=String(html||"");if(!s)return"";s=s.replace(/<\s*tajweed\s+class\s*=\s*"?([a-z0-9_]+)"?\s*>/gi,function(_,cls){return '<span class="tj tj-'+mapQuranTajweedClass(cls)+'">'}).replace(/<\/\s*tajweed\s*>/gi,"</span>");s=s.replace(/<\s*span\s+class\s*=\s*"?end"?\s*>/gi,'<span class="tj tj-end" hidden>');s=s.replace(/<\/?(?!span\b)[a-zA-Z][^>]*>/g,"");s=s.replace(/<span([^>]*)>/gi,function(_,attrs){const m=/class\s*=\s*"([^"]+)"/.exec(attrs)||/class\s*=\s*'([^']+)'/.exec(attrs)||/class\s*=\s*([^\s>]+)/.exec(attrs);const hidden=/\bhidden\b/i.test(attrs)?" hidden":"";if(!m)return"<span"+hidden+">";const classes=m[1].split(/\s+/).map(function(c){if(c==="tj")return"tj";const raw=c.indexOf("tj-")===0?c.slice(3):c;if(!/^[a-z0-9_]+$/i.test(raw))return"";return"tj-"+mapQuranTajweedClass(raw)}).filter(function(c){return c==="tj"||c.indexOf("tj-")===0});const uniq=[];classes.forEach(function(c){if(uniq.indexOf(c)<0)uniq.push(c)});if(uniq.indexOf("tj")<0)uniq.unshift("tj");return '<span class="'+uniq.join(" ")+'"'+hidden+">"});return s}
 function renderQuranAyahArHtml(v){const settings=getQuranViewSettings();const plain=esc(v&&v.ar||"");if(!settings.showTajweed)return plain;if(window.__quranDeferTajweedPaint)return plain;const raw=v&&v.ar_tajweed?String(v.ar_tajweed):"";const safe=sanitizeQuranTajweedHtml(raw);return safe||plain}
 function renderQuranAyahTr(v){const mode=getQuranTrMode();const text=quranVerseTr(v,mode);if(window.__quranDeferTajweedPaint)return `<div class="quran-ayah-tr-wrap" data-quran-view="showTransliteration"${quranViewHiddenAttr("showTransliteration")}><div class="quran-ayah-tr">${esc(text)}</div></div>`;return `<div class="quran-ayah-tr-wrap" data-quran-view="showTransliteration"${quranViewHiddenAttr("showTransliteration")}><div class="quran-ayah-tr" data-tr-tanzil="${esc(v.tr||"")}" data-tr-readable="${esc(v.tr_readable||v.tr||"")}" data-tr-academic="${esc(v.tr_academic||v.tr||"")}">${esc(text)}</div></div>`}
 function applyQuranTransliterationMode(){const mode=getQuranTrMode();document.querySelectorAll(".quran-ayah-tr").forEach(el=>{let text=el.getAttribute("data-tr-"+mode)||el.getAttribute("data-tr-tanzil")||"";if(!text){const art=el.closest(".quran-ayah");const aid=Number(String(art&&art.id||"").replace("ayah-",""));const sid=Number(String((currentRoute&&currentRoute.value)||"").split("/")[0]);const verse=(quranSurahCache.get(sid)?.verses||[]).find(function(v){return Number(v.id)===aid});text=quranVerseTr(verse,mode)}el.textContent=text});document.querySelectorAll(".quran-tr-btn").forEach(btn=>{btn.classList.toggle("active",btn.getAttribute("data-quran-tr")===mode)});const note=$("quranTrModeNote");if(note)note.textContent=QURAN_TR_MODES[mode]?.hint||""}
@@ -25075,7 +25076,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v667";
+const APP_BUILD_ID="app-shell-v668";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -27690,23 +27691,30 @@ body.is-quran-reader-route .qrc-body .quran-ayah-de{
 .quran-ayah-ar .tj{color:inherit}
 .quran-ayah-ar .tj-ham_wasl,
 .quran-ayah-ar .tj-laam_shamsiyah,
-.quran-ayah-ar .tj-silent{color:#9aa0a6!important}
+.quran-ayah-ar .tj-silent,
+.quran-ayah-ar .tj-slnt{color:#9aa0a6!important}
 .quran-ayah-ar .tj-madda_normal{color:#5b8cff!important}
 .quran-ayah-ar .tj-madda_permissible{color:#4d6bff!important}
 .quran-ayah-ar .tj-madda_necessary,
 .quran-ayah-ar .tj-madda_obligatory{color:#2f4ad8!important}
-.quran-ayah-ar .tj-qlqalah{color:#e23b3b!important}
+.quran-ayah-ar .tj-qlqalah,
+.quran-ayah-ar .tj-qalaqah{color:#e23b3b!important}
 .quran-ayah-ar .tj-ikhafa,
 .quran-ayah-ar .tj-ikhafa_shafawi{color:#b14ad4!important}
 .quran-ayah-ar .tj-idgham_ghunnah,
 .quran-ayah-ar .tj-idgham_shafawi{color:#2f9e5b!important}
-.quran-ayah-ar .tj-idgham_wo_ghunnah{color:#1f7a45!important}
+.quran-ayah-ar .tj-idgham_wo_ghunnah,
+.quran-ayah-ar .tj-idgham_mutajanisayn,
+.quran-ayah-ar .tj-idgham_mutaqaribayn{color:#1f7a45!important}
 .quran-ayah-ar .tj-iqlab{color:#d17a00!important}
 .quran-ayah-ar .tj-ghunnah{color:#ff8a1f!important}
 .quran-ayah-ar .tj-end{display:none!important}
 html[data-theme="light"] .quran-ayah-ar .tj-ham_wasl,
 html[data-theme="light"] .quran-ayah-ar .tj-laam_shamsiyah,
-html[data-theme="light"] .quran-ayah-ar .tj-silent{color:#6b7280!important}
+html[data-theme="light"] .quran-ayah-ar .tj-silent,
+html[data-theme="light"] .quran-ayah-ar .tj-slnt{color:#6b7280!important}
+html[data-theme="light"] .quran-ayah-ar .tj-qlqalah,
+html[data-theme="light"] .quran-ayah-ar .tj-qalaqah{color:#c41e1e!important}
 html[data-theme="light"] .quran-ayah-ar .tj-madda_normal,
 html[data-theme="light"] .quran-ayah-ar .tj-madda_permissible,
 html[data-theme="light"] .quran-ayah-ar .tj-madda_necessary,
