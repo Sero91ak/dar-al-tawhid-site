@@ -260,14 +260,29 @@
     if (viewLooksReady()) finish();
   }
 
+  function releaseChrome() {
+    try {
+      var root = document.documentElement;
+      if (root) {
+        root.classList.remove("dar-soft-booting");
+        root.style.removeProperty("background-color");
+        root.style.removeProperty("background");
+        root.style.removeProperty("background-image");
+      }
+      if (document.body) document.body.style.removeProperty("overflow");
+      removeAllOverlays(null);
+      overlayEl = null;
+    } catch (e) {}
+  }
+
   function install() {
     try {
-      if (document.documentElement && document.documentElement.classList.contains("dar-ios-native-app")) {
+      if (
+        (document.documentElement && document.documentElement.classList.contains("dar-ios-native-app")) ||
+        /DarAlTawhid-iOS/i.test(String(navigator.userAgent || ""))
+      ) {
         finished = true;
-        return;
-      }
-      if (/DarAlTawhid-iOS/i.test(String(navigator.userAgent || ""))) {
-        finished = true;
+        releaseChrome();
         return;
       }
     } catch (e) {}

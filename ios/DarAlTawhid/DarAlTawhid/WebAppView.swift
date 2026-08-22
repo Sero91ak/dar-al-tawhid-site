@@ -120,6 +120,21 @@ struct WebAppView: UIViewRepresentable {
               "  --dar-ios-theme-bg:var(--theme-page-bg,var(--theme-feed-bg,var(--quran-page-bg,var(--outer-bg-flat,var(--bg,#050504)))));",
               "}",
               "html.dar-ios-native-app #dar-soft-boot{display:none!important;visibility:hidden!important;}",
+              "html.dar-ios-native-app.dar-soft-booting,",
+              "html.dar-ios-native-app.dar-soft-booting body{overflow:visible!important;}",
+              "html.dar-ios-native-app #bottomNav,",
+              "html.dar-ios-native-app #bottomNav.bottom-nav,",
+              "html.dar-ios-native-app .bottom-nav,",
+              "html.dar-ios-native-app #appChromeDock #bottomNav.bottom-nav,",
+              "html.dar-ios-native-app.dar-soft-booting #bottomNav,",
+              "html.dar-ios-native-app.dar-soft-booting .bottom-nav,",
+              "html.dar-ios-native-app.dar-soft-booting .home-discover,",
+              "html.dar-ios-native-app.dar-soft-booting .home-v380{",
+              "  visibility:visible!important;",
+              "  opacity:1!important;",
+              "  pointer-events:auto!important;",
+              "  display:flex!important;",
+              "}",
               "html.dar-ios-native-app body.is-home-route,",
               "html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen),",
               "html.dar-ios-native-app body.is-more-route,",
@@ -151,6 +166,8 @@ struct WebAppView: UIViewRepresentable {
             style.textContent=cssText();
             if(root){
               root.classList.add("dar-ios-native-app");
+              root.classList.remove("dar-soft-booting");
+              root.style.removeProperty("background-color");
               if(root.getAttribute("data-layout")==="medium"||root.getAttribute("data-layout")==="expanded"){
                 root.setAttribute("data-layout","compact");
               }
@@ -1269,6 +1286,7 @@ struct WebAppView: UIViewRepresentable {
             guard let overlay = loadingOverlay else { return }
             overlay.backgroundColor = bootInk
             overlay.isHidden = false
+            overlay.isUserInteractionEnabled = true
             overlay.alpha = 1
             containerView?.bringSubviewToFront(overlay)
             webView?.alpha = 0.001
@@ -1279,6 +1297,8 @@ struct WebAppView: UIViewRepresentable {
             guard let overlay = loadingOverlay else { return }
             hideLoadingWorkItem?.cancel()
             finishLoadingProgress()
+            overlay.isUserInteractionEnabled = false
+            webView?.isUserInteractionEnabled = true
             let work = DispatchWorkItem { [weak self] in
                 guard let self else { return }
                 UIView.animate(withDuration: 0.28, delay: 0, options: [.curveEaseOut]) {
@@ -1286,6 +1306,8 @@ struct WebAppView: UIViewRepresentable {
                     self.webView?.alpha = 1
                 } completion: { _ in
                     overlay.isHidden = true
+                    overlay.isUserInteractionEnabled = false
+                    self.webView?.isUserInteractionEnabled = true
                     self.isBootLoadingVisible = false
                     self.refreshAppearanceBridge()
                 }
