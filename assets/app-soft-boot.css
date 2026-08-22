@@ -1,5 +1,5 @@
 /* Soft boot overlay — iOS-parity first paint (visitor + test)
- * v662 · Overlay deckt Home-Indicator / Android-Nav vollständig (kein Nav-Leak unten)
+ * v664 · Größerer, zentrierter Start (Logo, Titel, Ladezeile) — Web/Android/iOS-Web
  */
 html.dar-soft-booting,
 html.dar-soft-booting body{
@@ -39,7 +39,7 @@ html.dar-soft-booting .all-posts-link{
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:18px;
+  gap:22px;
   padding:max(24px, env(safe-area-inset-top, 0px), var(--dar-native-safe-top, 0px)) 24px max(24px, env(safe-area-inset-bottom, 0px), var(--dar-native-safe-bottom, 0px));
   background-color: var(--dar-boot-fill, var(--theme-page-bg, var(--outer-bg-flat, var(--bg, #080806)))) !important;
   background-image:
@@ -59,25 +59,25 @@ html.dar-soft-booting .all-posts-link{
   pointer-events:none;
 }
 #dar-soft-boot .dar-soft-boot__mark{
-  width:72px;
-  height:72px;
+  width:min(148px,38vw);
+  height:min(148px,38vw);
   border-radius:50%;
   object-fit:cover;
-  box-shadow:0 10px 28px rgba(0,0,0,.35);
+  box-shadow:0 14px 36px rgba(0,0,0,.38);
   border:1px solid color-mix(in srgb, var(--gold2, #c9a86a) 45%, transparent);
 }
 #dar-soft-boot .dar-soft-boot__title{
   margin:0;
   font-family:"Cormorant Garamond",Georgia,serif;
-  font-size:22px;
+  font-size:clamp(30px,7.4vw,38px);
   font-weight:700;
   letter-spacing:.04em;
   color:var(--gold2, #d4b56a);
   text-align:center;
 }
 #dar-soft-boot .dar-soft-boot__sub{
-  margin:-8px 0 0;
-  font-size:11px;
+  margin:0;
+  font-size:clamp(13px,3.6vw,16px);
   font-weight:800;
   letter-spacing:.14em;
   text-transform:uppercase;
@@ -85,8 +85,8 @@ html.dar-soft-booting .all-posts-link{
   text-align:center;
 }
 #dar-soft-boot .dar-soft-boot__track{
-  width:min(236px,68vw);
-  height:2px;
+  width:min(300px,78vw);
+  height:4px;
   border-radius:999px;
   margin-top:6px;
   background:color-mix(in srgb, var(--gold2, #c9a86a) 18%, transparent);
@@ -103,7 +103,7 @@ html.dar-soft-booting .all-posts-link{
 }
 #dar-soft-boot .dar-soft-boot__pct{
   margin:0;
-  font-size:12px;
+  font-size:16px;
   font-weight:800;
   letter-spacing:.08em;
   color:color-mix(in srgb, var(--cream,#f4ead2) 78%, transparent);
