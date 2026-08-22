@@ -2286,7 +2286,7 @@ function renderLogin(){
       <input id="pinInput" type="password" inputmode="text" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Admin-Passwort">
       <button class="btn primary" id="loginBtn" type="button">Dashboard öffnen</button>
       <button class="btn" id="adminRepairBtn" type="button" style="margin-top:10px">Admin-Cache reparieren</button>
-      <div class="hint"><strong>Als eigene Admin-App speichern:</strong><br>iPhone: Safari teilen, dann „Zum Home-Bildschirm“.<br>Android: Browser-Menü, dann „App installieren“.<br><br>URL: <strong>${esc(location.origin+"/admin/")}</strong></div>
+      <div class="hint"><strong>Als eigene Admin-App speichern:</strong><br>iPhone: Safari teilen, dann „Zum Home-Bildschirm“.<br>Android: Browser-Menü, dann „App installieren“.<br><br>URL: <strong>${esc(location.origin+"/admin/")}</strong><br><br>Falls die Admin-App weiß bleibt oder nicht öffnet: <a href="/admin/?repair=1" style="color:var(--gold);font-weight:900">Cache reparieren</a> tippen.</div>
     </section>`;
   const btn=document.getElementById("loginBtn"),input=document.getElementById("pinInput");
   btn.onclick=()=>{if(checkPin(input.value.trim())){setAuth(true);renderApp()}else alert("Falsches Passwort.")};
