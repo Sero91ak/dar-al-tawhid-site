@@ -79,72 +79,102 @@ function brandUrls(env) {
   };
 }
 
+function fontFaceCss() {
+  const fonts = DAR_VIDEO_PROFILE.fonts;
+  const base = fonts.base;
+  return fonts.faces
+    .map((f) => {
+      const style = f.style ? `font-style:${f.style};` : "font-style:normal;";
+      return `@font-face{font-family:'${f.family}';${style}font-weight:${f.weight};src:url('${base}/${f.file}') format('woff2');}`;
+    })
+    .join("");
+}
+
+function panelStyle(extra = "") {
+  const typo = DAR_VIDEO_PROFILE.typography;
+  return `background:${typo.panelBg};border:1px solid ${typo.panelBorder};border-radius:18px;box-shadow:0 18px 55px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.08);padding:22px 26px;box-sizing:border-box;${extra}`;
+}
+
 function htmlShell(inner, { width = 980, height = 280, align = "center" } = {}) {
-  return `<div style="width:${width}px;height:${height}px;display:flex;align-items:center;justify-content:${align};padding:18px 28px;box-sizing:border-box;">${inner}</div>`;
+  return `<div style="width:${width}px;height:${height}px;display:flex;align-items:center;justify-content:${align};padding:14px 22px;box-sizing:border-box;"><style>${fontFaceCss()}</style>${inner}</div>`;
+}
+
+function socialRowHtml(b, typo) {
+  /* Offizielle Markenfarben – klare Telegram-/Instagram-/Web-Erkennung wie Social-Original */
+  const tg = `<span style="display:inline-flex;align-items:center;gap:10px;margin:0 12px;white-space:nowrap"><svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#229ED9"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Z" fill="#fff"/></svg><span style="font-family:${typo.ui};font-size:24px;font-weight:600;color:${typo.cream}">${escapeHtml(b.telegram)}</span></span>`;
+  const ig = `<span style="display:inline-flex;align-items:center;gap:10px;margin:0 12px;white-space:nowrap"><svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igv" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f58529"/><stop offset="45%" stop-color="#dd2a7b"/><stop offset="100%" stop-color="#515bd4"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igv)"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.3" fill="#fff"/></svg><span style="font-family:${typo.ui};font-size:24px;font-weight:600;color:${typo.cream}">${escapeHtml(b.instagram)}</span></span>`;
+  const web = `<span style="display:inline-flex;align-items:center;gap:10px;margin:0 12px;white-space:nowrap"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="${typo.gold}" stroke-width="1.6"/><path d="M3 12h18M12 3c2.8 3 4.2 6 4.2 9s-1.4 6-4.2 9c-2.8-3-4.2-6-4.2-9s1.4-6 4.2-9Z" fill="none" stroke="${typo.gold}" stroke-width="1.4"/></svg><span style="font-family:${typo.ui};font-size:24px;font-weight:600;color:${typo.cream}">${escapeHtml(b.website)}</span></span>`;
+  return `${tg}${web}${ig}`;
 }
 
 function overlayHtml(overlay) {
   const typo = DAR_VIDEO_PROFILE.typography;
+  const b = DAR_VIDEO_PROFILE.branding;
+
   if (overlay.role === "brand") {
-    const topic = overlay.topic ? `<div style="margin-top:10px;font-family:${typo.ui};font-size:22px;letter-spacing:.08em;color:${typo.soft};text-shadow:0 2px 10px rgba(0,0,0,.5)">${escapeHtml(overlay.topic)}</div>` : "";
+    /* Nur dezente Markenzeile – kein Topic (Dhikr). Großes Logo läuft separat als Wasserzeichen. */
     return htmlShell(
-      `<div style="text-align:center;width:100%">
-        <div style="font-family:${typo.display};font-size:34px;letter-spacing:.18em;color:${typo.gold};font-weight:700;text-shadow:0 2px 14px rgba(0,0,0,.55)">DAR AL TAWḤĪD</div>
-        ${topic}
+      `<div style="${panelStyle("max-width:720px;text-align:center;padding:16px 28px")}">
+        <div style="font-family:${typo.display};font-size:28px;letter-spacing:.14em;color:${typo.gold};font-weight:700;line-height:1.15;text-shadow:0 2px 12px rgba(0,0,0,.55)">${escapeHtml(b.title)}</div>
       </div>`,
-      { height: topic ? 150 : 120 }
+      { height: 110 }
     );
   }
   if (overlay.role === "speaker") {
     return htmlShell(
-      `<div style="text-align:center;width:100%">
-        <div style="font-family:${typo.display};font-size:40px;line-height:1.35;color:${typo.cream};font-weight:600;text-shadow:0 3px 16px rgba(0,0,0,.65)">${escapeHtml(overlay.text)}</div>
+      `<div style="${panelStyle("max-width:900px;text-align:center")}">
+        <div style="font-family:${typo.display};font-size:42px;line-height:1.4;color:${typo.cream};font-weight:600;text-shadow:0 2px 14px rgba(0,0,0,.6)">
+          <span style="font-family:${typo.arabic};font-size:1.05em">${escapeHtml(overlay.text)}</span>
+        </div>
       </div>`,
-      { height: 200 }
+      { height: 220 }
     );
   }
   if (overlay.role === "statement") {
     const body = overlay.htmlEmphasis ? emphasizeHtml(overlay.text) : escapeHtml(overlay.text);
     return htmlShell(
-      `<div style="text-align:center;width:100%">
-        <div style="font-family:${typo.body};font-size:46px;line-height:1.38;color:${typo.cream};font-weight:500;text-shadow:0 4px 18px rgba(0,0,0,.7)">${body}</div>
+      `<div style="${panelStyle("max-width:920px;text-align:center")}">
+        <div style="font-family:${typo.body};font-size:48px;line-height:1.42;color:${typo.cream};font-weight:600;letter-spacing:.01em;text-shadow:0 3px 16px rgba(0,0,0,.65)">${body}</div>
       </div>`,
-      { height: 360 }
+      { height: 420 }
     );
   }
   if (overlay.role === "source") {
     return htmlShell(
-      `<div style="text-align:center;width:100%">
-        <div style="font-family:${typo.ui};font-size:28px;letter-spacing:.04em;color:${typo.soft};text-shadow:0 2px 12px rgba(0,0,0,.6)">${escapeHtml(overlay.text)}</div>
+      `<div style="${panelStyle("max-width:880px;text-align:center;padding:18px 26px")}">
+        <div style="height:1px;width:42%;margin:0 auto 14px;background:linear-gradient(90deg,transparent,${typo.gold},transparent);opacity:.85"></div>
+        <div style="font-family:${typo.source};font-size:30px;font-style:italic;letter-spacing:.02em;line-height:1.4;color:${typo.soft};text-shadow:0 2px 12px rgba(0,0,0,.55)">${escapeHtml(overlay.text)}</div>
       </div>`,
-      { height: 120 }
+      { height: 160 }
     );
   }
   if (overlay.role === "cta") {
-    const b = DAR_VIDEO_PROFILE.branding;
-    const tg = `<span style="display:inline-flex;align-items:center;gap:8px;margin:0 10px"><svg width="28" height="28" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Z" fill="#fff"/></svg><span>${escapeHtml(b.telegram)}</span></span>`;
-    const ig = `<span style="display:inline-flex;align-items:center;gap:8px;margin:0 10px"><svg width="28" height="28" viewBox="0 0 24 24"><defs><linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="50%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#ig)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>${escapeHtml(b.instagram)}</span></span>`;
-    const web = `<span style="margin:0 10px">${escapeHtml(b.website)}</span>`;
     return htmlShell(
-      `<div style="text-align:center;width:100%;color:${typo.cream}">
-        <div style="font-family:${typo.display};font-size:28px;line-height:1.35;margin-bottom:12px;text-shadow:0 2px 14px rgba(0,0,0,.65)">${escapeHtml(b.followLine)}</div>
-        <div style="font-family:${typo.ui};font-size:22px;display:flex;justify-content:center;flex-wrap:wrap;gap:8px;align-items:center;text-shadow:0 2px 10px rgba(0,0,0,.55);margin-bottom:12px">${tg}${web}${ig}</div>
-        <div style="font-family:${typo.display};font-size:20px;letter-spacing:.06em;color:${typo.soft};text-shadow:0 2px 10px rgba(0,0,0,.55)">${escapeHtml(b.credit)}</div>
+      `<div style="${panelStyle("max-width:940px;text-align:center;padding:26px 28px")}">
+        <div style="font-family:${typo.display};font-size:34px;line-height:1.35;margin-bottom:18px;color:${typo.cream};font-weight:600;text-shadow:0 2px 14px rgba(0,0,0,.6)">${escapeHtml(b.followLine)}</div>
+        <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px">${socialRowHtml(b, typo)}</div>
+        <div style="font-family:${typo.display};font-size:22px;letter-spacing:.05em;color:${typo.gold};text-shadow:0 2px 10px rgba(0,0,0,.5)">${escapeHtml(b.credit)}</div>
       </div>`,
-      { height: 300 }
+      { height: 340 }
     );
   }
   return htmlShell(`<div style="color:#fff;font-size:36px;text-align:center">${escapeHtml(overlay.text || "")}</div>`);
 }
 
 function positionForRole(role) {
-  // Safe areas: avoid extreme edges (Shotstack offset y: positive moves up from bottom / down from top depending on position)
-  if (role === "brand") return { position: "top", offset: { x: 0, y: -0.06 } };
-  if (role === "speaker") return { position: "center", offset: { x: 0, y: -0.18 } };
-  if (role === "statement") return { position: "center", offset: { x: 0, y: 0.02 } };
-  if (role === "source") return { position: "center", offset: { x: 0, y: 0.22 } };
-  if (role === "cta") return { position: "bottom", offset: { x: 0, y: 0.12 } };
+  if (role === "brand") return { position: "top", offset: { x: 0, y: -0.04 } };
+  if (role === "speaker") return { position: "center", offset: { x: 0, y: -0.16 } };
+  if (role === "statement") return { position: "center", offset: { x: 0, y: 0.04 } };
+  if (role === "source") return { position: "center", offset: { x: 0, y: 0.24 } };
+  if (role === "cta") return { position: "center", offset: { x: 0, y: 0.12 } };
   return { position: "center", offset: { x: 0, y: 0 } };
+}
+
+function overlayEnd(overlays) {
+  return (overlays || []).reduce((max, o) => {
+    const end = Number(o.at || 0) + Number(o.length || 0);
+    return Math.max(max, end);
+  }, 0);
 }
 
 export function buildShotstackTimeline({
@@ -163,7 +193,6 @@ export function buildShotstackTimeline({
     length: sceneLen,
     fit: "cover"
   }));
-  const totalDuration = Math.max(sceneLen * Math.max(1, videoClips.length), 15);
 
   const overlays = captionPlan?.overlays?.length
     ? captionPlan.overlays
@@ -175,13 +204,26 @@ export function buildShotstackTimeline({
         htmlEmphasis: i === 1
       }));
 
+  const contentEnd = Math.max(
+    sceneLen * Math.max(1, videoClips.length),
+    overlayEnd(overlays),
+    15
+  );
+  /* Letzter Clip hält bis Ende – kein schwarzes Restbild hinter CTA */
+  if (videoClips.length) {
+    const last = videoClips[videoClips.length - 1];
+    last.length = Math.max(last.length, contentEnd - last.start);
+  }
+  const totalDuration = contentEnd;
+
   const textClips = overlays.map((overlay) => {
     const pos = positionForRole(overlay.role);
     const height =
-      overlay.role === "statement" ? 360 :
-      overlay.role === "cta" ? 300 :
-      overlay.role === "speaker" ? 200 :
-      overlay.role === "brand" ? 120 : 140;
+      overlay.role === "statement" ? 420 :
+      overlay.role === "cta" ? 340 :
+      overlay.role === "speaker" ? 220 :
+      overlay.role === "source" ? 160 :
+      overlay.role === "brand" ? 110 : 140;
     return {
       asset: {
         type: "html",
@@ -190,10 +232,12 @@ export function buildShotstackTimeline({
         height
       },
       start: Math.max(0, Number(overlay.at || 0)),
-      length: Math.max(1.5, Number(overlay.length || 3.5)),
+      length: Math.max(2.0, Number(overlay.length || 3.5)),
       position: pos.position,
       offset: pos.offset,
-      transition: { in: "fade", out: "fade" }
+      /* Sanfter Einblend – kein schnelles Flash-Out */
+      transition: { in: "fade", out: "fade" },
+      opacity: overlay.role === "brand" ? 0.92 : 1
     };
   });
 
@@ -202,7 +246,7 @@ export function buildShotstackTimeline({
     { clips: videoClips }
   ];
 
-  // Dezentes DAR-Wasserzeichen (oben rechts), kein Fremdlogo
+  const brand = DAR_VIDEO_PROFILE.branding;
   const markUrl = watermarkUrl || logoUrl;
   if (markUrl) {
     tracks.unshift({
@@ -210,17 +254,18 @@ export function buildShotstackTimeline({
         asset: { type: "image", src: markUrl },
         start: 0,
         length: totalDuration,
-        position: "topRight",
-        opacity: 0.55,
-        scale: 0.11,
-        offset: { x: -0.045, y: -0.055 }
+        position: "center",
+        opacity: Number(brand.watermarkOpacity) || 0.28,
+        scale: Number(brand.watermarkScale) || 0.42,
+        offset: { x: 0, y: 0 }
       }]
     });
   }
 
   return {
     timeline: {
-      background: "#070b14",
+      /* Warmer Bildbeitrag-Ton statt kaltem Schwarz */
+      background: "#1a1814",
       soundtrack: voiceUrl
         ? { src: voiceUrl, effect: "fadeOut", volume: 1 }
         : undefined,
@@ -231,42 +276,32 @@ export function buildShotstackTimeline({
       size: { width: DAR_VIDEO_PROFILE.width, height: DAR_VIDEO_PROFILE.height },
       fps: DAR_VIDEO_PROFILE.fps,
       quality: "high",
-      // Fast-start friendly progressive MP4
       destinations: []
     }
   };
 }
 
 export async function composeFinalVideo(env, payload = {}) {
-  const final = payload.final !== false; // Endfassung standardmäßig Production
+  const final = payload.final !== false;
   if (shotstackKey(env)) {
     const shot = await composeWithShotstack(env, payload, { final });
     if (shot.ok) return shot;
     const code = Number(shot.httpStatus || 0);
     const authFail = code === 401 || code === 403 || /HTTP 401|HTTP 403/i.test(String(shot.reason || ""));
-    // Production gesperrt → Stage-Vorschau MIT Stimme + DAR-Texten (Fremdwasserzeichen, keine Freigabe)
-    if (final && authFail) {
-      const stage = await composeWithShotstack(env, payload, { final: false });
-      if (stage.ok) {
+    /*
+     * Production gesperrt → KEIN Stage-Fallback (Shotstack-Wasserzeichen verboten).
+     * Stattdessen fal-Merge als unvollständige Vorschau ohne Fremdwasserzeichen.
+     */
+    if (final && authFail && falKey(env)) {
+      const fal = await composeWithFalFfmpeg(env, payload);
+      if (fal.ok) {
         return {
-          ...stage,
-          composeFallback: "shotstack-stage",
+          ...fal,
+          composeFallback: "fal-ffmpeg",
           shotstackBlocked: shot.reason || `Shotstack HTTP ${code || "?"} (v1)`,
-          note: "Shotstack Production gesperrt – Stage-Vorschau mit Stimme/Texten (Fremdwasserzeichen, nicht freigabefähig)"
+          note: "Shotstack Production gesperrt – fal-Merge ohne Shotstack-Wasserzeichen; DAR-Texte fehlen bis Production frei"
         };
       }
-      if (falKey(env)) {
-        const fal = await composeWithFalFfmpeg(env, payload);
-        if (fal.ok) {
-          return {
-            ...fal,
-            composeFallback: "fal-ffmpeg",
-            shotstackBlocked: shot.reason || `Shotstack HTTP ${code || "?"} (v1)`,
-            note: "Shotstack Production/Stage nicht nutzbar – fal-Merge; Stimme wird gemuxt, DAR-Texte fehlen"
-          };
-        }
-      }
-      return stage.ok === false ? stage : shot;
     }
     return shot;
   }

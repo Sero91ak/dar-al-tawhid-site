@@ -17,6 +17,7 @@ export function buildSceneImagePrompt(statement) {
     "Leave calm negative space in the center and lower third for later text overlays.",
     depictionPromptBlock(statement),
     `Thematic mood related to: ${de}`,
+    "Absolutely no cars, automobiles, trucks, vans, buses, motorcycles, scooters, traffic, or modern vehicles.",
     "Absolutely no text, no letters, no calligraphy overlays, no logos, no watermarks, no social icons, no UI."
   ].join(" ");
 }
