@@ -132,7 +132,7 @@
       '<p class="dar-soft-boot__sub">Qurʾān · Sunnah · Āthār</p>' +
       '<div class="dar-soft-boot__track" aria-hidden="true"><div class="dar-soft-boot__bar"></div></div>' +
       '<p class="dar-soft-boot__pct">0%</p>';
-    var host = document.body || document.documentElement;
+    var host = document.documentElement || document.body;
     host.appendChild(overlayEl);
     barEl = overlayEl.querySelector(".dar-soft-boot__bar");
     pctEl = overlayEl.querySelector(".dar-soft-boot__pct");
@@ -275,8 +275,8 @@
 
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", function () {
-        if (overlayEl && document.body && overlayEl.parentNode !== document.body) {
-          try { document.body.appendChild(overlayEl); } catch (e) {}
+        if (overlayEl && document.documentElement && overlayEl.parentNode !== document.documentElement) {
+          try { document.documentElement.appendChild(overlayEl); } catch (e) {}
         }
         syncEdgeFill();
         setTimeout(maybeFinish, 60);

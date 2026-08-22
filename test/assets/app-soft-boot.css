@@ -1,29 +1,40 @@
 /* Soft boot overlay — iOS-parity first paint (visitor + test)
- * v658 · Edel Ladezeile + boot fill only while .dar-soft-booting (no permanent html/body lock → black screen)
+ * v662 · Overlay deckt Home-Indicator / Android-Nav vollständig (kein Nav-Leak unten)
  */
 html.dar-soft-booting,
 html.dar-soft-booting body{
   background-color: var(--dar-boot-fill, var(--theme-page-bg, var(--outer-bg-flat, var(--bg, #080806)))) !important;
+  overflow:hidden !important;
+}
+html.dar-soft-booting #bottomNav,
+html.dar-soft-booting .bottom-nav,
+html.dar-soft-booting .footer,
+html.dar-soft-booting .home-discover,
+html.dar-soft-booting .home-v380,
+html.dar-soft-booting .all-posts-link{
+  visibility:hidden !important;
+  opacity:0 !important;
+  pointer-events:none !important;
 }
 
 #dar-soft-boot{
   position:fixed;
+  inset:0;
   top:0;
   left:0;
   right:0;
   bottom:0;
   width:100%;
+  width:100vw;
   width:100dvw;
   height:100%;
-  height:100vh;
-  height:100dvh;
-  height:-webkit-fill-available;
-  min-height:100vh;
-  min-height:100dvh;
-  min-height:-webkit-fill-available;
+  height:100lvh;
+  min-height:100%;
+  min-height:100lvh;
+  min-height:calc(100dvh + env(safe-area-inset-bottom, 0px) + 64px);
   margin:0;
   box-sizing:border-box;
-  z-index:2147483000;
+  z-index:2147483646;
   display:flex;
   flex-direction:column;
   align-items:center;
