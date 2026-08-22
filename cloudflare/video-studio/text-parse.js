@@ -207,13 +207,15 @@ export function parseContributionText(raw) {
 
 function guessTopic(de) {
   const t = String(de || "").toLowerCase();
-  if (/dhikr|gedenken|herz|taqw/.test(t)) return "Dhikr";
-  if (/zuhd|duny|ākhir|akhir|jenzeit/.test(t)) return "Zuhd";
-  if (/sunnah|manhaj|glauben|aqidah|ʿaq/.test(t)) return "Sunnah";
+  /* Verbotene Auto-Labels nur bei ausdrücklichem Vorkommen im Beitragstext */
+  if (/\bdhikr\b/.test(t)) return "Dhikr";
+  if (/\bhadith\b|\baḥādīṯ\b|\bahadith\b/.test(t)) return "Hadith";
+  if (/zuhd|dunyā|dunya|ākhirah|akhirah|jenzeit/.test(t)) return "Zuhd";
+  if (/sunnah|manhaj|ʿaqīdah|aqidah/.test(t)) return "Sunnah";
   if (/familie|adab|kind/.test(t)) return "Adab";
-  if (/fasten|gebet|ṣalāh|salah/.test(t)) return "Ibadah";
+  if (/fasten|ṣalāh|salah|gebet/.test(t)) return "Ibadah";
   if (/wissen|gelehrt|lernen/.test(t)) return "Wissen";
-  return "Wissen";
+  return "";
 }
 
 export function estimateVideoCost({ clipCount = 3, durationSec = 15, voiceChars = 400 } = {}) {

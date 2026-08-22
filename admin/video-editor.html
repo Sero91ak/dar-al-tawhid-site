@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
+<meta name="theme-color" content="#05080f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>DAR Admin · Touch-Videoeditor</title>
+<link rel="stylesheet" href="/assets/fonts/feed-fonts.css">
+<link rel="stylesheet" href="/admin/video-editor.css">
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <button type="button" class="ghost" id="btnBack">Zurück</button>
+    <input class="name" id="projName" aria-label="Projektname" value="DAR Video">
+    <span class="chip" id="modeChip">Schnell</span>
+    <span class="chip" id="durChip">15s</span>
+    <span class="chip" id="saveChip">—</span>
+    <button type="button" id="btnUndo" title="Rückgängig">↶</button>
+    <button type="button" id="btnRedo" title="Wiederholen">↷</button>
+    <button type="button" id="btnSave">Speichern</button>
+    <button type="button" id="btnPreview">Vorschau</button>
+    <button type="button" id="btnCheck">Prüfen</button>
+    <button type="button" class="primary" id="btnExport">Export</button>
+  </header>
+  <div class="multi-bar" id="multiBar">
+    <span id="multiCount">0 ausgewählt</span>
+    <button type="button" id="btnAlignC">Zentrieren</button>
+    <button type="button" id="btnGroup">Gruppieren</button>
+    <button type="button" id="btnUngroup">Auflösen</button>
+    <button type="button" id="btnDupMulti">Duplizieren</button>
+    <button type="button" id="btnLockMulti">Sperren</button>
+    <button type="button" id="btnClearMulti">Fertig</button>
+  </div>
+  <aside class="layers" id="layers"></aside>
+  <main class="workspace" id="workspace">
+    <div class="stage-wrap" id="stageWrap">
+      <div class="stage-bg" id="stageBg"></div>
+      <div class="stage-dim" id="stageDim"></div>
+      <div class="guides" id="guides"><i class="v"></i><i class="h"></i></div>
+      <div class="safe" id="safe"></div>
+      <div id="stage" style="position:absolute;inset:0"></div>
+    </div>
+  </main>
+  <aside class="props" id="props"></aside>
+  <section class="timeline">
+    <div class="tl-head">
+      <button type="button" id="btnPlay">▶</button>
+      <span id="tlTime">0.0 / 15.0s</span>
+      <button type="button" class="ghost" id="btnGuides">Hilfslinien</button>
+      <button type="button" class="ghost" id="btnSafe">Safe Area</button>
+      <button type="button" class="ghost" id="btnMode">Schnell/Profi</button>
+      <button type="button" class="ghost" id="btnKeyframe">Keyframe</button>
+      <button type="button" class="ghost" id="btnSnap">Einrasten</button>
+    </div>
+    <div style="overflow:auto"><div class="tl-track" id="tlTrack"></div></div>
+  </section>
+  <nav class="tools">
+    <div class="tool-scroll" id="toolScroll">
+      <button type="button" data-tool="text">Text</button>
+      <button type="button" data-tool="font">Schrift</button>
+      <button type="button" data-tool="style">Stil</button>
+      <button type="button" data-tool="color">Farbe</button>
+      <button type="button" data-tool="position">Position</button>
+      <button type="button" data-tool="animation">Animation</button>
+      <button type="button" data-tool="time">Zeit & Dauer</button>
+      <button type="button" data-tool="bg">Hintergrund</button>
+      <button type="button" data-tool="voice">Stimme</button>
+      <button type="button" data-tool="audio">Audio</button>
+      <button type="button" data-tool="logo">Logo</button>
+      <button type="button" data-tool="source">Quelle</button>
+      <button type="button" data-tool="social">Social</button>
+      <button type="button" data-tool="layers">Ebenen</button>
+      <button type="button" data-tool="templates">Vorlagen</button>
+      <button type="button" data-tool="check">Prüfen</button>
+      <button type="button" class="primary" data-tool="export">Export</button>
+    </div>
+    <div class="notice" id="notice">Lade Projekt…</div>
+  </nav>
+</div>
+<div class="backdrop" id="backdrop"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+    <h3 id="sheetTitle">Bearbeiten</h3>
+    <button type="button" class="ghost" id="sheetClose">Schließen</button>
+  </div>
+  <div id="sheetBody"></div>
+</div>
+<script src="/admin/video-editor.js"></script>
+</body>
+</html>
