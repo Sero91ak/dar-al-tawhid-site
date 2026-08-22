@@ -87,6 +87,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-settings-sheet-open-2026-08-22",
+      "approvedBy": "user-explicit-quran-settings-button",
+      "reason": "Einstellungen oben rechts im Qurʾān öffnen das Sheet nicht; Buttons im Qurʾān-Bereich müssen funktionieren.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "contact-email-dal-al-tauhid91-2026-08-22",
       "approvedBy": "user-explicit-email-change",
       "reason": "Nutzerauftrag: Kontakt-E-Mail auf dal.al.tauhid91@gmail.com aendern.",
