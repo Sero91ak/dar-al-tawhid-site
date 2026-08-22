@@ -107,6 +107,24 @@ struct WebAppView: UIViewRepresentable {
         userContentController.add(context.coordinator, name: "darLibraryReader")
         userContentController.add(context.coordinator, name: "darAppearance")
         userContentController.add(context.coordinator, name: "darWidgetSnapshot")
+        let iosNativeTabsBoot = """
+        (function(){
+          try{
+            var root=document.documentElement;
+            if(!root)return;
+            root.classList.add("dar-ios-native-app");
+            root.classList.add("dar-ios-native-tabs");
+            root.classList.remove("dar-soft-booting");
+          }catch(e){}
+        })();
+        """
+        userContentController.addUserScript(
+            WKUserScript(
+                source: iosNativeTabsBoot,
+                injectionTime: .atDocumentStart,
+                forMainFrameOnly: true
+            )
+        )
         let iosViewportPolish = """
         (function(){
           if(window.__darIosViewportPolishInstalled)return;
@@ -153,6 +171,13 @@ struct WebAppView: UIViewRepresentable {
               "}",
               "html.dar-ios-native-app #bottomNav.bottom-nav,html.dar-ios-native-app .bottom-nav{",
               "  bottom:max(14px,calc(max(var(--safe-bottom),env(safe-area-inset-bottom,0px),var(--dar-native-safe-bottom,0px)) + 8px)) !important;",
+              "}",
+              "html.dar-ios-native-tabs #bottomNav,",
+              "html.dar-ios-native-tabs #bottomNav.bottom-nav,",
+              "html.dar-ios-native-tabs .bottom-nav,",
+              "html.dar-ios-native-tabs #appChromeDock #bottomNav.bottom-nav{",
+              "  display:none!important;",
+              "  visibility:hidden!important;",
               "}"
             ].join("\\n");
           }
@@ -508,11 +533,19 @@ struct WebAppView: UIViewRepresentable {
         webView.allowsBackForwardNavigationGestures = true
         webView.isOpaque = true
         webView.backgroundColor = bootInk
-        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.22-web-parity-v665"
+        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.23-native-tabs"
         webView.onInsetsChange = { [weak coordinator = context.coordinator] in
             coordinator?.updateViewportInsets()
         }
         containerView.addSubview(webView)
+
+        let tabBar = DarNativeTabBar()
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
+        tabBar.onSelect = { [weak coordinator = context.coordinator] id in
+            coordinator?.openNativeTab(id)
+        }
+        containerView.addSubview(tabBar)
+
         NSLayoutConstraint.activate([
             backdropView.topAnchor.constraint(equalTo: containerView.topAnchor),
             backdropView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
@@ -521,12 +554,17 @@ struct WebAppView: UIViewRepresentable {
             webView.topAnchor.constraint(equalTo: containerView.topAnchor),
             webView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             webView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            webView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+            webView.bottomAnchor.constraint(equalTo: tabBar.topAnchor, constant: -8),
+            tabBar.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor, constant: 12),
+            tabBar.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor, constant: -12),
+            tabBar.bottomAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.bottomAnchor, constant: -8),
+            tabBar.heightAnchor.constraint(equalToConstant: 62)
         ])
         context.coordinator.attach(
             webView,
             backdropView: backdropView,
-            containerView: containerView
+            containerView: containerView,
+            tabBar: tabBar
         )
         webView.load(URLRequest(url: Self.launchURL))
         return containerView
@@ -549,6 +587,7 @@ struct WebAppView: UIViewRepresentable {
         private weak var webView: WKWebView?
         private weak var backdropView: GradientBackdropView?
         private weak var containerView: UIView?
+        private weak var tabBar: DarNativeTabBar?
         private weak var loadingOverlay: UIView?
         private var pageSurfaceColor = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
         private weak var loadingLabel: UILabel?
@@ -600,12 +639,17 @@ struct WebAppView: UIViewRepresentable {
         func attach(
             _ webView: WKWebView,
             backdropView: GradientBackdropView,
-            containerView: UIView
+            containerView: UIView,
+            tabBar: DarNativeTabBar
         ) {
             self.webView = webView
             self.backdropView = backdropView
             self.containerView = containerView
+            self.tabBar = tabBar
             installLoadingOverlay(on: containerView)
+            if let tabBar {
+                containerView.bringSubviewToFront(tabBar)
+            }
             applySurfaceColor(pageSurfaceColor)
             showLoadingOverlay(subtitle: "App wird geladen")
             updateViewportInsets()
@@ -629,6 +673,28 @@ struct WebAppView: UIViewRepresentable {
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darAppearance")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darWidgetSnapshot")
             NotificationCenter.default.removeObserver(self)
+        }
+
+        func openNativeTab(_ id: String) {
+            let dest: DarDeepLink.Destination
+            switch id {
+            case "quiz": dest = .home
+            case "feed": dest = .home
+            case "quran": dest = .quran
+            case "more": dest = .more
+            default: dest = .home
+            }
+            let hash: String
+            switch id {
+            case "quiz": hash = "#quiz"
+            case "feed": hash = "#feed"
+            case "quran": hash = "#quran"
+            case "more": hash = "#more"
+            default: hash = "#home"
+            }
+            lastOpenedDestination = dest
+            webView?.evaluateJavaScript("location.hash=\(Self.jsString(hash));", completionHandler: nil)
+            tabBar?.select(id: id)
         }
 
         func navigate(to destination: DarDeepLink.Destination, force: Bool = false) {
@@ -1289,6 +1355,9 @@ struct WebAppView: UIViewRepresentable {
             overlay.isUserInteractionEnabled = true
             overlay.alpha = 1
             containerView?.bringSubviewToFront(overlay)
+            if let tabBar {
+                containerView?.bringSubviewToFront(tabBar)
+            }
             webView?.alpha = 0.001
             startLoadingProgress()
         }

@@ -12,6 +12,7 @@
 		A10000000000000000000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000013 /* Assets.xcassets */; };
 		A10000000000000000000004 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A10000000000000000000014 /* WebKit.framework */; };
 		A10000000000000000000005 /* DarAppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000016 /* DarAppRouter.swift */; };
+		A1000000000000000000000B /* DarNativeTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000018 /* DarNativeTabBar.swift */; };
 		A10000000000000000000006 /* DarDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000011 /* DarDeepLink.swift */; };
 		A10000000000000000000007 /* DarWidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000012 /* DarWidgetSnapshot.swift */; };
 		A10000000000000000000008 /* DarWidgetStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000013 /* DarWidgetStore.swift */; };
@@ -60,6 +61,7 @@
 		A10000000000000000000014 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		A10000000000000000000015 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A10000000000000000000016 /* DarAppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAppRouter.swift; sourceTree = "<group>"; };
+		A10000000000000000000018 /* DarNativeTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarNativeTabBar.swift; sourceTree = "<group>"; };
 		A10000000000000000000017 /* DarAlTawhid.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DarAlTawhid.entitlements; sourceTree = "<group>"; };
 		A20000000000000000000010 /* DarAlTawhidWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DarAlTawhidWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A20000000000000000000011 /* DarAlTawhidWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAlTawhidWidgets.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			children = (
 				A10000000000000000000011 /* DarAlTawhidApp.swift */,
 				A10000000000000000000016 /* DarAppRouter.swift */,
+				A10000000000000000000018 /* DarNativeTabBar.swift */,
 				A10000000000000000000012 /* WebAppView.swift */,
 				A10000000000000000000013 /* Assets.xcassets */,
 				A10000000000000000000015 /* Info.plist */,
@@ -261,6 +264,7 @@
 			files = (
 				A10000000000000000000001 /* DarAlTawhidApp.swift in Sources */,
 				A10000000000000000000005 /* DarAppRouter.swift in Sources */,
+				A1000000000000000000000B /* DarNativeTabBar.swift in Sources */,
 				A10000000000000000000002 /* WebAppView.swift in Sources */,
 				A10000000000000000000006 /* DarDeepLink.swift in Sources */,
 				A10000000000000000000007 /* DarWidgetSnapshot.swift in Sources */,
