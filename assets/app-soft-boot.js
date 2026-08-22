@@ -1,6 +1,6 @@
 /**
  * Soft boot overlay for visitor + test web apps (iOS parity).
- * v658 · Edel Ladezeile + black-screen fix: no style↔observer loop; boot fill only while overlay is up.
+ * v659 · Theme-Hauptfarbe: nie Blau erzwingen; Fill folgt data-theme / Originalfarbe.
  */
 (function () {
   if (window.__darSoftBootInstalled) return;
@@ -11,6 +11,7 @@
   var FADE_HOLD_MS = 280;
   var MIN_SHOW_MS = 700;
   var HARD_TIMEOUT_MS = 6500;
+  /* Original-Hauptfarben je Erscheinungsbild (THEME_META / theme-page-bg) */
   var THEME_FILLS = {
     dark: "#080806",
     light: "#f7f0df",
@@ -52,25 +53,26 @@
     }
   }
 
+  function hexFromCssValue(raw) {
+    if (!raw) return "";
+    var m = String(raw).trim().match(/#[0-9a-fA-F]{3,8}/);
+    return m ? m[0] : "";
+  }
+
   function resolveFill() {
+    /* Immer zuerst aktuelles Erscheinungsbild — kein festgeklebtes Boot-Blau. */
+    var mapped = THEME_FILLS[resolveThemeId()];
+    if (mapped) return mapped;
     try {
-      if (window.__DAR_BOOT_FILL && /^#[0-9a-fA-F]{3,8}$/.test(window.__DAR_BOOT_FILL)) {
-        return window.__DAR_BOOT_FILL;
-      }
-      var mapped = THEME_FILLS[resolveThemeId()];
-      if (mapped) return mapped;
       var root = document.documentElement;
       if (root) {
         var cs = getComputedStyle(root);
-        var live = (
-          cs.getPropertyValue("--dar-boot-fill") ||
-          cs.getPropertyValue("--theme-page-bg") ||
-          cs.getPropertyValue("--outer-bg-flat") ||
-          cs.getPropertyValue("--bg") ||
-          ""
-        ).trim();
-        var hex = live.match(/#[0-9a-fA-F]{3,8}/);
-        if (hex) return hex[0];
+        var live =
+          hexFromCssValue(cs.getPropertyValue("--outer-bg-flat")) ||
+          hexFromCssValue(cs.getPropertyValue("--theme-page-bg")) ||
+          hexFromCssValue(cs.getPropertyValue("--dar-boot-fill")) ||
+          hexFromCssValue(cs.getPropertyValue("--bg"));
+        if (live) return live;
       }
     } catch (e) {}
     return THEME_FILLS.dark;
@@ -83,7 +85,9 @@
       var fill = resolveFill();
       var root = document.documentElement;
       if (!root) return fill;
+      /* Nur Boot-Fill setzen — --theme-page-bg NIEMALS inline (blockiert Theme-CSS). */
       root.style.setProperty("--dar-boot-fill", fill);
+      root.style.removeProperty("--theme-page-bg");
       if (!finished) {
         root.classList.add("dar-soft-booting");
         root.style.setProperty("background-color", fill, "important");
@@ -193,10 +197,18 @@
     var el = overlayEl || document.getElementById(OVERLAY_ID);
     try {
       if (document.documentElement) {
-        document.documentElement.classList.remove("dar-soft-booting");
-        document.documentElement.style.removeProperty("background-color");
-        document.documentElement.style.removeProperty("background");
-        document.documentElement.style.removeProperty("background-image");
+        var root = document.documentElement;
+        root.classList.remove("dar-soft-booting");
+        root.style.removeProperty("background-color");
+        root.style.removeProperty("background");
+        root.style.removeProperty("background-image");
+        /* Theme-Tokens wieder dem CSS überlassen */
+        root.style.removeProperty("--theme-page-bg");
+        var live = resolveFill();
+        root.style.setProperty("--dar-boot-fill", live);
+        window.__DAR_BOOT_FILL = live;
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute("content", live);
       }
     } catch (e) {}
     if (!el) return;
@@ -247,6 +259,7 @@
       window.__DAR_BOOT_FILL = early;
       if (document.documentElement) {
         document.documentElement.style.setProperty("--dar-boot-fill", early);
+        document.documentElement.style.removeProperty("--theme-page-bg");
         document.documentElement.classList.add("dar-soft-booting");
       }
     } catch (e) {}
