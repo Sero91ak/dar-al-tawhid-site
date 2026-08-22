@@ -103,7 +103,7 @@ body.qsource-body::after{
   height:min(220px,58%);
   transform:translate(-50%,-46%);
   pointer-events:none;
-  opacity:.07;
+  opacity:.10;
   background:var(--q-logo) center/contain no-repeat;
   filter:none;
 }
