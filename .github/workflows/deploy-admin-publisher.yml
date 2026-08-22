@@ -213,10 +213,22 @@ jobs:
               else
                 echo "::warning::hasTelegramToken=false – TELEGRAM_BOT_TOKEN in GitHub Actions Secrets setzen (Anleitung: cloudflare/TELEGRAM_STATUS_2026-08-16.md)"
               fi
+              if printf '%s' "$HEALTH" | grep -q '"hasGithubToken":true'; then
+                echo "GITHUB_TOKEN aktiv"
+              else
+                echo "::error::hasGithubToken=false – WORKER_GITHUB_TOKEN in GitHub Actions Secrets setzen (Library Live-Publish)"
+                exit 1
+              fi
               if printf '%s' "$HEALTH" | grep -q '"hasAdminSecret":true'; then
                 echo "Admin-Secret aktiv"
               else
-                echo "::warning::hasAdminSecret=false – ADMIN_PUBLISH_SECRET in GitHub Actions Secrets setzen"
+                echo "::error::hasAdminSecret=false – ADMIN_PUBLISH_SECRET in GitHub Actions Secrets setzen"
+                exit 1
+              fi
+              if printf '%s' "$HEALTH" | grep -q '"hasOneSignalKey":true'; then
+                echo "OneSignal-Key aktiv"
+              else
+                echo "::warning::hasOneSignalKey=false – ONESIGNAL_API_KEY_NEW in GitHub Actions Secrets setzen"
               fi
               exit 0
             fi
