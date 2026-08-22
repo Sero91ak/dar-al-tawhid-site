@@ -3,7 +3,7 @@
  * iOS App Store shell 1:1 — entire app, including Startseite in every theme:
  * continuous theme fill, edge-to-edge, side gutters ~16px, floating bottom nav, feed full-bleed.
  * Layout / surface only — no theme hue swap (edge-to-edge theme lock stays authoritative).
- * v650 · Startseite / theme-hero-shell parity across all Erscheinungsbilder
+ * v651 · Global Edge-up-Edge: Home+Feed+Mehr same fill; kill .app gold frame
  */
 
 :root,
@@ -423,8 +423,12 @@ html[data-theme] body.is-feed-fullscreen .sf-app {
   margin: 0 !important;
   padding-left: 0 !important;
   padding-right: 0 !important;
+  border: 0 !important;
   border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
   background: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
+  background-color: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
 }
 
 html[data-theme] body.is-feed-fullscreen .sf-top,
@@ -444,8 +448,13 @@ html[data-theme] body.is-feed-fullscreen .pf-feed {
 html[data-theme] body.is-feed-fullscreen .sf-top {
   left: 0 !important;
   right: 0 !important;
-  background: var(--theme-feed-top, var(--theme-feed-bg, var(--dar-edge-fill))) !important;
+  /* Continuous theme fill under status — no fade-to-transparent seam (Mehr parity) */
+  --theme-feed-top: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
+  background: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
   background-color: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
+  border-bottom-color: color-mix(in srgb, var(--line2) 55%, transparent) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 html[data-theme] body.is-feed-fullscreen .sf-top-modes,
@@ -538,4 +547,73 @@ html[data-theme] body.has-bottom-nav {
   html[data-theme] #appView.view {
     border-radius: 0 !important;
   }
+}
+
+/*
+ * v651 GLOBAL — same Edge-up-Edge fill as Mehr for Home + Feed + all shells.
+ * Kill theme .app gold frame (royal/bordeaux/…) that still boxed Start/Feed.
+ */
+html[data-theme] body.is-home-route,
+html[data-theme] body.is-feed-fullscreen,
+html[data-theme] body.is-more-route,
+html[data-theme] body.is-area-route:not(.is-quran-reader-route):not(.is-ilm-chat-route),
+html[data-theme] body.is-quiz-route,
+html[data-theme] body.is-account-route,
+html[data-theme] body.is-library-route,
+html[data-theme] body.is-quran-overview {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  background-color: var(--dar-edge-fill) !important;
+  background:
+    radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--gold2, #c9a86a) 14%, transparent), transparent 36%),
+    radial-gradient(circle at 88% 6%, color-mix(in srgb, var(--gold2, #c9a86a) 8%, transparent), transparent 34%),
+    var(--outer-bg, var(--theme-page-bg, var(--dar-edge-fill))) !important;
+}
+
+html[data-theme] body.is-feed-fullscreen {
+  background: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
+  background-color: var(--theme-feed-bg, var(--dar-edge-fill)) !important;
+}
+
+/* Nuclear: no gold/premium .app phone-frame on ANY route / ANY theme */
+html[data-theme] .app,
+html[data-theme="dark"] .app,
+html[data-theme="light"] .app,
+html[data-theme="soft"] .app,
+html[data-theme="royal"] .app,
+html[data-theme="bordeaux"] .app,
+html[data-theme="dar-al-layl"] .app,
+html[data-theme="aurora"] .app,
+html[data-theme] body.is-home-route .app,
+html[data-theme] body.is-feed-fullscreen .app,
+html[data-theme] body.is-more-route .app,
+html[data-theme] body.is-area-route .app,
+html[data-theme] body.is-quiz-route .app,
+html[data-theme] body.is-quran-overview .app,
+html.is-standalone-pwa[data-theme] .app,
+html.is-standalone-pwa[data-theme="royal"] .app {
+  border: 0 !important;
+  border-width: 0 !important;
+  border-color: transparent !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  clip-path: none !important;
+}
+
+html[data-theme] body.is-home-route .header-prayer-status,
+html[data-theme] body.is-home-route .account-panel,
+html[data-theme] body.is-home-route .feature-section,
+html[data-theme] body.is-more-route .account-card,
+html[data-theme] body.is-more-route .feature-section,
+html[data-theme] body.is-more-route .more-group {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
 }

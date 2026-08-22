@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v650";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v651";</script>
 <style id="dar-soft-boot-inline-v647">
 #dar-soft-boot{position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:max(24px,env(safe-area-inset-top,0px)) 24px max(24px,env(safe-area-inset-bottom,0px));background:radial-gradient(120% 80% at 50% 0%,rgba(201,168,106,.14),transparent 55%),var(--theme-page-bg,var(--outer-bg-flat,var(--bg,#05080f)));color:var(--cream,#f4ead2);font-family:Manrope,Inter,system-ui,sans-serif;transition:opacity .28s ease,visibility .28s ease}
 #dar-soft-boot.is-done{opacity:0;visibility:hidden;pointer-events:none}
@@ -15,7 +15,7 @@
 #dar-soft-boot .dar-soft-boot__bar{height:100%;width:0%;border-radius:inherit;background:linear-gradient(90deg,#c9a86a,#d4b56a);transition:width .08s linear}
 #dar-soft-boot .dar-soft-boot__pct{margin:0;font-size:12px;font-weight:800;letter-spacing:.08em;color:rgba(244,234,210,.78)}
 </style>
-<script src="/assets/app-soft-boot.js?v=650"></script>
+<script src="/assets/app-soft-boot.js?v=651"></script>
 <script>/* VISUAL_PAST_PURGE_V588: alte Optik-Caches löschen – aktuelle Darstellung bleibt Autorität */(function(){var BUILD=String(window.__DAR_EXPECTED_BUILD||"");var KEY="dar_visual_authority_build_v1";var ONCE="dar_visual_past_purge_once_v588";function num(id){var m=String(id||"").match(/v(\d+)/);return m?parseInt(m[1],10):0}function wipe(){if(!("caches"in window))return Promise.resolve();return caches.keys().then(function(keys){return Promise.all(keys.filter(function(k){return /^dar-al-tawhid-offline-light-/i.test(k)}).map(function(k){return caches.delete(k)}))})}function bustReload(tag){try{if(sessionStorage.getItem(ONCE)===BUILD+"|"+tag)return;sessionStorage.setItem(ONCE,BUILD+"|"+tag)}catch(e){}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?"+tag+"="+Date.now()+h)}try{var prev=localStorage.getItem(KEY)||"";var localN=num(BUILD);var prevN=num(prev);if(prevN>localN&&localN>0){wipe().then(function(){if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){try{g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}catch(e){}}).catch(function(){})}bustReload("visual-stale")}).catch(function(){bustReload("visual-stale")});return}if(localN>prevN){wipe().then(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}bustReload("visual-new")}).catch(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}});return}if(!prev&&BUILD){try{localStorage.setItem(KEY,BUILD)}catch(e){}}if(localN>0&&"caches"in window){caches.keys().then(function(keys){keys.forEach(function(k){if(!/^dar-al-tawhid-offline-light-/i.test(k))return;var kn=num(k);if(kn&&kn<localN)caches.delete(k)})}).catch(function(){})}}catch(e){}try{var path=String(location.pathname||"");var ver=path.indexOf("/test")===0?"/test/version.json":"/version.json";fetch(ver,{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(remote){if(!remote||!remote.buildId)return;var remoteN=num(remote.buildId);if(remoteN>localN&&localN>0){wipe().then(function(){bustReload("visual-remote")}).catch(function(){bustReload("visual-remote")})}}).catch(function(){})}catch(e){}})();</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
@@ -9874,7 +9874,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-app.js?v=20" defer></script>
 <script src="/assets/focus-feed-app.js?v=6" defer></script>
 <script src="/assets/html2canvas.min.js" defer></script>
-<script src="/assets/premium-feed-app.js?v=98" defer></script>
+<script src="/assets/premium-feed-app.js?v=99" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <script src="/assets/adaptive-layout.js?v=7" defer></script>
 <script src="/assets/fold-split.js?v=1" defer></script>
@@ -11431,8 +11431,8 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/dar-account-visibility.css?v=11">
 <link rel="stylesheet" href="/assets/scholars-index.css?v=587">
 <link rel="stylesheet" href="/assets/adaptive-layout.css?v=642">
-<link rel="stylesheet" href="/assets/app-soft-boot.css?v=650">
-<link rel="stylesheet" href="/assets/full-edge-appearance-polish.css?v=650">
+<link rel="stylesheet" href="/assets/app-soft-boot.css?v=651">
+<link rel="stylesheet" href="/assets/full-edge-appearance-polish.css?v=651">
 <link rel="stylesheet" href="/assets/fold-split.css?v=1">
 <style id="typography-compact-fix-v310">
 /* Finale Typografie-Korrektur — gewinnt gegen Home-Compact-Overrides */
@@ -25018,7 +25018,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v650";
+const APP_BUILD_ID="app-shell-v651";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -26987,46 +26987,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-<style id="dar-ios-parity-edge-force-v650">
-/* v650 · Whole-app + Startseite theme-hero kill in every Erscheinungsbild */
+<style id="dar-ios-parity-edge-force-v651">
+/* v651 · Global Edge-up-Edge: Home+Feed+Mehr same fill; kill .app gold frame everywhere */
 html[data-theme],
 html[data-theme] body,
 html[data-theme] #appRoot,
-html[data-theme] #appShell,
-html[data-theme] .app,
-html[data-theme="dark"] .app,
-html[data-theme="light"] .app,
-html[data-theme="soft"] .app,
-html[data-theme="royal"] .app,
-html[data-theme="bordeaux"] .app,
-html[data-theme="dar-al-layl"] .app,
-html[data-theme="aurora"] .app{
+html[data-theme] #appShell{
   --dar-edge-fill:var(--theme-page-bg,var(--page-cover,var(--outer-bg-flat,var(--premium-bg,var(--bg)))))!important;
   --dar-edge-gutter:max(16px,env(safe-area-inset-left,0px))!important;
   --dar-edge-gutter-right:max(16px,env(safe-area-inset-right,0px))!important;
   --page-gutter-x:0px!important;--page-gutter-y:0px!important;--app-frame-inset-x:0px!important;
   --layout-content-max:100%!important;--layout-feed-max:100%!important;--sf-feed-col-max:100%!important;--feed-col-max:100%!important;
+  --theme-feed-top:var(--theme-feed-bg,var(--dar-edge-fill))!important;
   background-color:var(--dar-edge-fill)!important;
-  border:0!important;border-radius:0!important;box-shadow:none!important;clip-path:none!important;
-  padding-left:0!important;padding-right:0!important;margin-left:0!important;margin-right:0!important;
+  padding-left:0!important;padding-right:0!important;margin:0!important;
   width:100%!important;max-width:100%!important;overscroll-behavior-y:none!important;
 }
-html[data-theme] .app,html[data-theme="royal"] .app,html[data-theme="dark"] .app,html[data-theme="bordeaux"] .app,html[data-theme="dar-al-layl"] .app,html[data-theme="soft"] .app,html[data-theme="light"] .app,html[data-theme="aurora"] .app{
-  background:transparent!important;overflow-x:hidden!important;overflow-y:visible!important;
+html[data-theme] .app,
+html[data-theme="dark"] .app,html[data-theme="light"] .app,html[data-theme="soft"] .app,
+html[data-theme="royal"] .app,html[data-theme="bordeaux"] .app,html[data-theme="dar-al-layl"] .app,html[data-theme="aurora"] .app,
+html[data-theme] body.is-home-route .app,html[data-theme] body.is-feed-fullscreen .app,
+html[data-theme] body.is-more-route .app,html[data-theme] body.is-area-route .app,
+html[data-theme] body.is-quiz-route .app,html[data-theme] body.is-quran-overview .app,
+html.is-standalone-pwa[data-theme] .app,html.is-standalone-pwa[data-theme="royal"] .app{
+  border:0!important;border-width:0!important;border-color:transparent!important;
+  border-radius:0!important;outline:none!important;box-shadow:none!important;clip-path:none!important;
+  background:transparent!important;width:100%!important;max-width:100%!important;margin:0!important;
+  overflow-x:hidden!important;overflow-y:visible!important;
 }
 html[data-theme] .app:after,html[data-theme] .top-shell:after{display:none!important}
 html[data-theme] .top-shell,html[data-theme] .top-shell.theme-hero-shell,html[data-theme] #appView,html[data-theme] #appView.view,html[data-theme] .view{
   border:0!important;border-radius:0!important;box-shadow:none!important;clip-path:none!important;width:100%!important;max-width:100%!important;
 }
-/* Startseite: no framed hero card — all themes + standalone PWA */
+/* Same atmospheric Edge-up fill as Mehr — Home + Feed + areas */
 html[data-theme] body.is-home-route,
-html[data-theme="dark"] body.is-home-route,
-html[data-theme="light"] body.is-home-route,
-html[data-theme="soft"] body.is-home-route,
-html[data-theme="royal"] body.is-home-route,
-html[data-theme="bordeaux"] body.is-home-route,
-html[data-theme="dar-al-layl"] body.is-home-route,
-html[data-theme="aurora"] body.is-home-route{
+html[data-theme] body.is-more-route,
+html[data-theme] body.is-area-route:not(.is-quran-reader-route):not(.is-ilm-chat-route),
+html[data-theme] body.is-quiz-route,html[data-theme] body.is-account-route,html[data-theme] body.is-library-route{
   padding-top:0!important;padding-left:0!important;padding-right:0!important;
   background-color:var(--dar-edge-fill)!important;
   background:
@@ -27034,39 +27031,44 @@ html[data-theme="aurora"] body.is-home-route{
     radial-gradient(circle at 88% 6%,color-mix(in srgb,var(--gold2,#c9a86a) 8%,transparent),transparent 34%),
     var(--outer-bg,var(--theme-page-bg,var(--dar-edge-fill)))!important;
 }
+html[data-theme] body.is-feed-fullscreen,html[data-theme] body.is-quran-overview{
+  padding-left:0!important;padding-right:0!important;
+  background:var(--theme-feed-bg,var(--dar-edge-fill))!important;
+  background-color:var(--theme-feed-bg,var(--quran-page-bg,var(--dar-edge-fill)))!important;
+}
+html[data-theme] body.is-quran-overview{
+  background:var(--quran-gradient-page,var(--quran-page-bg,var(--dar-edge-fill)))!important;
+  background-color:var(--quran-page-bg,var(--dar-edge-fill))!important;
+}
+/* Startseite: no framed hero */
 html[data-theme] body.is-home-route .top-shell,
 html[data-theme] body.is-home-route .top-shell.theme-hero-shell,
-html[data-theme="dark"] body.is-home-route .top-shell.theme-hero-shell,
-html[data-theme="light"] body.is-home-route .top-shell.theme-hero-shell,
-html[data-theme="soft"] body.is-home-route .top-shell.theme-hero-shell,
 html[data-theme="royal"] body.is-home-route .top-shell.theme-hero-shell,
-html[data-theme="bordeaux"] body.is-home-route .top-shell.theme-hero-shell,
-html[data-theme="dar-al-layl"] body.is-home-route .top-shell.theme-hero-shell,
-html[data-theme="aurora"] body.is-home-route .top-shell.theme-hero-shell,
-html.is-standalone-pwa[data-theme] body.is-home-route .top-shell,
 html.is-standalone-pwa[data-theme] body.is-home-route .top-shell.theme-hero-shell{
   margin:0!important;padding:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;
-  clip-path:none!important;background:transparent!important;overflow:visible!important;isolation:auto!important;
+  clip-path:none!important;background:transparent!important;overflow:visible!important;
 }
 html[data-theme] body.is-home-route .top-shell.theme-hero-shell::before,
-html[data-theme] body.is-home-route .top-shell.theme-hero-shell::after,
-html[data-theme] body.is-home-route .top-shell:before,
-html[data-theme] body.is-home-route .top-shell:after{display:none!important;content:none!important;opacity:0!important}
-html[data-theme] body.is-home-route .top-shell.theme-hero-shell .header,
+html[data-theme] body.is-home-route .top-shell.theme-hero-shell::after{display:none!important;content:none!important}
 html[data-theme] body.is-home-route .header{
   padding-top:max(14px,calc(env(safe-area-inset-top,0px) + 10px),calc(var(--dar-native-safe-top,0px) + 10px))!important;
   padding-left:var(--dar-edge-gutter)!important;padding-right:var(--dar-edge-gutter-right)!important;
-  padding-bottom:18px!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important;
+  padding-bottom:18px!important;width:100%!important;box-sizing:border-box!important;
 }
 html[data-theme] body.is-home-route .header-prayer-status,
-html[data-theme] body.is-home-route .header-prayer-track{width:100%!important;max-width:100%!important;box-sizing:border-box!important}
+html[data-theme] body.is-home-route .header-prayer-track,
+html[data-theme] body.is-home-route .account-panel,
+html[data-theme] body.is-more-route .account-card,
+html[data-theme] body.is-more-route .feature-section,
+html[data-theme] body.is-more-route .more-group,
+html[data-theme] body.is-more-route .more-feature-row{width:100%!important;max-width:100%!important;box-sizing:border-box!important}
 html[data-theme] body.is-home-route .top-edge-fade,html[data-theme] body.is-home-route .top-swim-aura,
 html[data-theme] body.is-more-route .top-edge-fade,html[data-theme] body.is-more-route .top-swim-aura,
 html[data-theme] body.is-area-route .top-edge-fade,html[data-theme] body.is-area-route .top-swim-aura,
 html[data-theme] body.is-quran-overview .top-edge-fade,html[data-theme] body.is-quran-overview .top-swim-aura,
 html[data-theme] body.is-feed-fullscreen .top-edge-fade,html[data-theme] body.is-feed-fullscreen .top-swim-aura{display:none!important}
 html[data-theme] body.is-home-route #appView.view,
-html[data-theme] body.is-more-route #appView,html[data-theme] body.is-more-route #appView.view,
+html[data-theme] body.is-more-route #appView.view,
 html[data-theme] body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-overview):not(.is-quran-reader-route):not(.is-ilm-chat-route) #appView.view,
 html[data-theme] body.is-quiz-route #appView.view,html[data-theme] body.is-account-route #appView.view,html[data-theme] body.is-library-route #appView.view{
   padding-left:var(--dar-edge-gutter)!important;padding-right:var(--dar-edge-gutter-right)!important;
@@ -27078,28 +27080,38 @@ html[data-theme] body.is-quiz-route #appView.view,html[data-theme] body.is-accou
   padding-top:max(10px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))!important;
 }
 html[data-theme] body.is-more-route .view-head{margin:0 0 12px!important;padding:0 0 10px!important;border-bottom:1px solid color-mix(in srgb,var(--line2) 70%,transparent)!important}
-html[data-theme] body.is-more-route .more-feature-row,html[data-theme] body.is-more-route .feature-section,html[data-theme] body.is-more-route .account-card{
-  width:100%!important;max-width:100%!important;box-sizing:border-box!important;
-}
 html[data-theme] body.is-more-route .more-feature-row{
   background:color-mix(in srgb,var(--card) 78%,var(--bg) 22%)!important;
   border:1px solid color-mix(in srgb,var(--line2) 72%,var(--gold2) 12%)!important;
 }
-html[data-theme] body.is-quran-overview,html[data-theme] body.is-quran-overview #appView.view{
-  background:var(--quran-gradient-page,var(--quran-page-bg,var(--dar-edge-fill)))!important;
-  background-color:var(--quran-page-bg,var(--dar-edge-fill))!important;padding-left:0!important;padding-right:0!important;
-}
-html[data-theme] body.is-quran-overview #appView.view{padding-top:max(6px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))!important}
+html[data-theme] body.is-quran-overview #appView.view{padding-top:max(6px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))!important;padding-left:0!important;padding-right:0!important}
 html[data-theme] body.is-quran-overview .qov-page{
   padding-left:var(--dar-edge-gutter)!important;padding-right:var(--dar-edge-gutter-right)!important;width:100%!important;max-width:100%!important;background:transparent!important;
 }
+/* Feed: continuous fill, no side letterbox, no vertical edge line */
 html[data-theme] body.is-feed-fullscreen{
-  background:var(--theme-feed-bg,var(--dar-edge-fill))!important;
   padding-top:max(0px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))!important;
   --sf-feed-col-max:100%!important;--feed-col-max:100%!important;--sf-shell-pad:0!important;
+  --sf-gutter-left:max(8px,env(safe-area-inset-left,0px))!important;
+  --sf-gutter-right:max(8px,env(safe-area-inset-right,0px))!important;
+  --theme-feed-top:var(--theme-feed-bg,var(--dar-edge-fill))!important;
 }
-html[data-theme] body.is-feed-fullscreen .sf-app{align-items:stretch!important;width:100%!important;max-width:100%!important}
-html[data-theme] body.is-feed-fullscreen .sf-top,html[data-theme] body.is-feed-fullscreen .sf-filters,html[data-theme] body.is-feed-fullscreen .sf-feed,html[data-theme] body.is-feed-fullscreen .sf-post--image-feed{
+html[data-theme] body.is-feed-fullscreen #appView,html[data-theme] body.is-feed-fullscreen #appView.view,
+html[data-theme] body.is-feed-fullscreen .view,html[data-theme] body.is-feed-fullscreen #premiumFeedMount,
+html[data-theme] body.is-feed-fullscreen .pf-mount-root,html[data-theme] body.is-feed-fullscreen .sf-app{
+  width:100%!important;max-width:100%!important;margin:0!important;padding-left:0!important;padding-right:0!important;
+  border:0!important;border-radius:0!important;outline:none!important;box-shadow:none!important;
+  background:var(--theme-feed-bg,var(--dar-edge-fill))!important;background-color:var(--theme-feed-bg,var(--dar-edge-fill))!important;
+  align-items:stretch!important;
+}
+html[data-theme] body.is-feed-fullscreen .sf-top{
+  left:0!important;right:0!important;width:100%!important;max-width:100%!important;margin:0!important;
+  background:var(--theme-feed-bg,var(--dar-edge-fill))!important;background-color:var(--theme-feed-bg,var(--dar-edge-fill))!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+  padding-left:var(--sf-gutter-left)!important;padding-right:var(--sf-gutter-right)!important;box-sizing:border-box!important;
+}
+html[data-theme] body.is-feed-fullscreen .sf-filters,html[data-theme] body.is-feed-fullscreen .sf-feed,
+html[data-theme] body.is-feed-fullscreen .sf-post--image-feed{
   width:100%!important;max-width:100%!important;margin-left:0!important;margin-right:0!important;
 }
 html[data-theme] #bottomNav.bottom-nav,html[data-theme] .bottom-nav,html[data-theme] #appChromeDock #bottomNav.bottom-nav{
@@ -27114,21 +27126,24 @@ html[data-theme] #bottomNav.bottom-nav,html[data-theme] .bottom-nav,html[data-th
     try{
       var root=document.documentElement;if(!root)return "";
       var cs=getComputedStyle(root);
+      var body=document.body;
+      if(body&&body.classList.contains("is-feed-fullscreen")){
+        return (cs.getPropertyValue("--theme-feed-bg")||cs.getPropertyValue("--theme-page-bg")||cs.getPropertyValue("--bg")||"").trim();
+      }
       return (cs.getPropertyValue("--theme-page-bg")||cs.getPropertyValue("--page-cover")||cs.getPropertyValue("--outer-bg-flat")||cs.getPropertyValue("--bg")||"").trim();
     }catch(e){return ""}
   }
-  function clearHeroFrame(el){
-    if(!el)return;
+  function clearFrame(el){
+    if(!el||!el.style)return;
     el.style.setProperty("border","0","important");
+    el.style.setProperty("border-width","0","important");
     el.style.setProperty("border-radius","0","important");
     el.style.setProperty("box-shadow","none","important");
+    el.style.setProperty("outline","none","important");
     el.style.setProperty("clip-path","none","important");
-    el.style.setProperty("background","transparent","important");
-    el.style.setProperty("margin","0","important");
-    el.style.setProperty("overflow","visible","important");
   }
   function pin(){
-    var s=document.getElementById("dar-ios-parity-edge-force-v650");
+    var s=document.getElementById("dar-ios-parity-edge-force-v651");
     if(s&&s.parentNode)s.parentNode.appendChild(s);
     try{
       var root=document.documentElement;
@@ -27137,19 +27152,22 @@ html[data-theme] #bottomNav.bottom-nav,html[data-theme] .bottom-nav,html[data-th
         root.setAttribute("data-layout","compact");
       }
       var fill=fillColor();
+      var body=document.body;
       if(fill){
         root.style.setProperty("background-color",fill,"important");
-        if(document.body){
-          document.body.style.setProperty("background-color",fill,"important");
-          document.body.style.setProperty("padding-left","0px","important");
-          document.body.style.setProperty("padding-right","0px","important");
-          /* Do not flatten home atmosphere with a solid background override. */
-          if(!document.body.classList.contains("is-home-route")){
-            document.body.style.setProperty("background",fill,"important");
+        if(body){
+          body.style.setProperty("background-color",fill,"important");
+          body.style.setProperty("padding-left","0px","important");
+          body.style.setProperty("padding-right","0px","important");
+          if(body.classList.contains("is-feed-fullscreen")){
+            body.style.setProperty("background",fill,"important");
             root.style.setProperty("background",fill,"important");
-          } else {
-            document.body.style.removeProperty("background");
+          } else if(body.classList.contains("is-home-route")||body.classList.contains("is-more-route")||body.classList.contains("is-area-route")){
+            body.style.removeProperty("background");
             root.style.removeProperty("background");
+          } else {
+            body.style.setProperty("background",fill,"important");
+            root.style.setProperty("background",fill,"important");
           }
         }
         var hex=fill.match(/#[0-9a-fA-F]{3,8}/);
@@ -27157,21 +27175,29 @@ html[data-theme] #bottomNav.bottom-nav,html[data-theme] .bottom-nav,html[data-th
         if(meta&&hex)meta.setAttribute("content",hex[0]);
       }
       var app=document.querySelector(".app");
+      clearFrame(app);
       if(app){
-        clearHeroFrame(app);
         app.style.setProperty("width","100%","important");
         app.style.setProperty("max-width","100%","important");
         app.style.setProperty("margin","0","important");
         app.style.setProperty("background","transparent","important");
       }
-      if(document.body&&document.body.classList.contains("is-home-route")){
-        clearHeroFrame(document.querySelector(".top-shell.theme-hero-shell"));
-        clearHeroFrame(document.querySelector(".top-shell"));
-        var hdr=document.querySelector("body.is-home-route .header");
-        if(hdr){
-          hdr.style.setProperty("padding-left","max(16px, env(safe-area-inset-left, 0px))","important");
-          hdr.style.setProperty("padding-right","max(16px, env(safe-area-inset-right, 0px))","important");
-        }
+      if(body&&body.classList.contains("is-home-route")){
+        clearFrame(document.querySelector(".top-shell.theme-hero-shell"));
+        clearFrame(document.querySelector(".top-shell"));
+      }
+      if(body&&body.classList.contains("is-feed-fullscreen")){
+        [" .sf-app"," .sf-top"," #premiumFeedMount"," .pf-mount-root"," #appView"].forEach(function(sel){
+          var el=document.querySelector(sel.trim());
+          clearFrame(el);
+          if(el){
+            el.style.setProperty("width","100%","important");
+            el.style.setProperty("max-width","100%","important");
+            el.style.setProperty("margin-left","0","important");
+            el.style.setProperty("margin-right","0","important");
+            if(fill){el.style.setProperty("background",fill,"important");el.style.setProperty("background-color",fill,"important");}
+          }
+        });
       }
       var nav=document.getElementById("bottomNav");
       if(nav){
@@ -27192,7 +27218,7 @@ html[data-theme] #bottomNav.bottom-nav,html[data-theme] .bottom-nav,html[data-th
     mo.observe(document.documentElement,{attributes:true,attributeFilter:["data-theme","data-layout","class"]});
     if(document.body)mo.observe(document.body,{attributes:true,attributeFilter:["class"]});
   }catch(e){}
-  setInterval(pin,2500);
+  setInterval(pin,2000);
 })();
 </script>
 
