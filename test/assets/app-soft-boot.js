@@ -125,6 +125,7 @@
   }
 
   function ensureOverlay() {
+    if (finished) return overlayEl;
     var existing = document.querySelectorAll("#" + OVERLAY_ID);
     overlayEl = existing.length ? existing[existing.length - 1] : document.getElementById(OVERLAY_ID);
     if (overlayEl) {
@@ -202,6 +203,8 @@
       return;
     }
     finished = true;
+    window.__darSoftBootLocked = true;
+    window.__darAppBootPainted = true;
     finishScheduled = false;
     clearRamp();
     if (hardTimer) {
@@ -256,8 +259,10 @@
   }
 
   function maybeFinish() {
-    if (finished) return;
-    if (viewLooksReady()) finish();
+    if (finished || window.__darSoftBootLocked) return;
+    if (!window.__darAppBootOk && !viewLooksReady()) return;
+    if (!window.__darAppBootOk) return;
+    finish();
   }
 
   function releaseChrome() {
@@ -330,6 +335,7 @@
       setTimeout(maybeFinish, 40);
     });
     window.addEventListener("hashchange", function () {
+      if (finished || window.__darSoftBootLocked) return;
       setTimeout(maybeFinish, 60);
     });
 
