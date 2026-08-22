@@ -1,9 +1,9 @@
 /**
  * Full-edge appearance polish (visitor + test)
- * iOS App Store shell 1:1 — entire app, not only Mehr:
+ * iOS App Store shell 1:1 — entire app, including Startseite in every theme:
  * continuous theme fill, edge-to-edge, side gutters ~16px, floating bottom nav, feed full-bleed.
  * Layout / surface only — no theme hue swap (edge-to-edge theme lock stays authoritative).
- * v649 · whole-app parity
+ * v650 · Startseite / theme-hero-shell parity across all Erscheinungsbilder
  */
 
 :root,
@@ -177,8 +177,93 @@ html[data-theme] body:not(.is-feed-fullscreen):not(.is-quran-overview):not(.is-q
 
 html[data-theme] body.is-home-route {
   padding-top: 0 !important;
-  background: var(--dar-edge-fill) !important;
   background-color: var(--dar-edge-fill) !important;
+  /* Keep theme atmosphere (gradients) — do not flatten to a dead solid. */
+  background:
+    radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--gold2, #c9a86a) 14%, transparent), transparent 36%),
+    radial-gradient(circle at 88% 6%, color-mix(in srgb, var(--gold2, #c9a86a) 8%, transparent), transparent 34%),
+    var(--outer-bg, var(--theme-page-bg, var(--dar-edge-fill))) !important;
+}
+
+/*
+ * Startseite: kill framed theme-hero-shell in EVERY Erscheinungsbild.
+ * iOS puts branding + prayer card on full-bleed page fill — not inside a rounded outer card.
+ */
+html[data-theme] body.is-home-route .top-shell,
+html[data-theme] body.is-home-route .top-shell.theme-hero-shell,
+html[data-theme="dark"] body.is-home-route .top-shell.theme-hero-shell,
+html[data-theme="light"] body.is-home-route .top-shell.theme-hero-shell,
+html[data-theme="soft"] body.is-home-route .top-shell.theme-hero-shell,
+html[data-theme="royal"] body.is-home-route .top-shell.theme-hero-shell,
+html[data-theme="bordeaux"] body.is-home-route .top-shell.theme-hero-shell,
+html[data-theme="dar-al-layl"] body.is-home-route .top-shell.theme-hero-shell,
+html[data-theme="aurora"] body.is-home-route .top-shell.theme-hero-shell,
+html.is-standalone-pwa[data-theme] body.is-home-route .top-shell,
+html.is-standalone-pwa[data-theme] body.is-home-route .top-shell.theme-hero-shell {
+  margin: 0 !important;
+  margin-bottom: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  clip-path: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  overflow: visible !important;
+  isolation: auto !important;
+}
+
+html[data-theme] body.is-home-route .top-shell.theme-hero-shell::before,
+html[data-theme] body.is-home-route .top-shell.theme-hero-shell::after,
+html[data-theme] body.is-home-route .top-shell:before,
+html[data-theme] body.is-home-route .top-shell:after {
+  display: none !important;
+  content: none !important;
+  opacity: 0 !important;
+}
+
+/* Home header gutters = iOS ~16px (override home-header-compact 20–24px clamp) */
+html[data-theme] body.is-home-route .top-shell.theme-hero-shell .header,
+html[data-theme] body.is-home-route .header {
+  padding-top: max(14px, calc(env(safe-area-inset-top, 0px) + 10px), calc(var(--dar-native-safe-top, 0px) + 10px)) !important;
+  padding-left: var(--dar-edge-gutter) !important;
+  padding-right: var(--dar-edge-gutter-right) !important;
+  padding-bottom: 18px !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Prayer widget + home cards: full content width, card radius only on the widget itself */
+html[data-theme] body.is-home-route .header-prayer-status,
+html[data-theme] body.is-home-route .header-prayer-track {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+html[data-theme] body.is-home-route #appView.view,
+html[data-theme] body.is-home-route .view {
+  padding-left: var(--dar-edge-gutter) !important;
+  padding-right: var(--dar-edge-gutter-right) !important;
+  padding-top: 8px !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+@media (max-width: 700px) {
+  html[data-theme] body.is-home-route .top-shell.theme-hero-shell,
+  html[data-theme] body.is-home-route .top-shell {
+    border-radius: 0 !important;
+    clip-path: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
 }
 
 /* Mehr / Quiz / Account / Library / Beiträge / Prophets */
