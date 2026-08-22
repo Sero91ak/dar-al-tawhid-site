@@ -1,7 +1,7 @@
 /**
  * DAR AL TAWḤĪD — Fold / Tablet Master-Detail (verbindliche Regel)
  * LINKS ≈ 34 % finden/auswählen · RECHTS ≈ 66 % öffnen/lesen
- * Dual: Tablet Querformat (≥700) ODER große Portrait-Breite (≥900, Fold offen)
+ * Dual: Tablet Querformat (≥700) ODER große Portrait-Breite (≥840, Fold offen)
  * Compact: Smartphone, Fold zu, Tablet Hochformat — Zustand bleibt in der Route.
  * Bottom-Nav bleibt unten (kein Left-Rail).
  */
@@ -9,7 +9,7 @@
   "use strict";
 
   var DUAL_MIN = 700;
-  var DUAL_PORTRAIT_MIN = 900;
+  var DUAL_PORTRAIT_MIN = 840;
   var RAIL_MIN = 320;
   var RAIL_MAX = 380;
 
