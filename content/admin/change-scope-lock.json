@@ -84,6 +84,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "contact-email-dal-al-tauhid91-2026-08-22",
+      "approvedBy": "user-explicit-email-change",
+      "reason": "Nutzerauftrag: Kontakt-E-Mail auf dal.al.tauhid91@gmail.com aendern.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "impressum/",
+        "privacy/",
+        "ios/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "ios-parity-web-edge-feed-load-2026-08-21",
       "approvedBy": "user-explicit-plan-ios-parity-web-edge",
       "reason": "Plan: iOS-Parity Edge/Feed/Soft-Load in Besucher+Test-Web-App uebernehmen.",
@@ -3385,18 +3397,6 @@
         "content/admin/change-scope-lock.json",
         "cloudflare/",
         ".github/workflows/deploy-admin-publisher.yml"
-      ],
-      "expiresAt": "2026-12-31T23:59:00.000Z"
-    },
-    {
-      "id": "q-source-dar-al-layl-v1-2026-08-22",
-      "approvedBy": "user-explicit-q-source-dar-al-layl",
-      "note": "Globale /q/-Quellenseiten auf App-nahes Dār-al-Layl-Design umstellen",
-      "paths": [
-        "content/admin/change-scope-lock.json",
-        "q/",
-        "q/_registry/",
-        "assets/q-source-dar-al-layl.css"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     }
