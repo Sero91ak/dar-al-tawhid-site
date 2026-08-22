@@ -659,6 +659,12 @@ struct WebAppView: UIViewRepresentable {
         }
 
         func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+            let query = webView.url?.query ?? ""
+            let isHardRefresh = query.contains("r=") || query.contains("repair=")
+            if hasCompletedInitialLoad && !isHardRefresh {
+                loadTimeoutWorkItem?.cancel()
+                return
+            }
             showLoadingOverlay(subtitle: "App wird geladen")
             scheduleLoadTimeout(for: webView)
         }

@@ -1,17 +1,17 @@
 /**
  * Soft boot overlay for visitor + test web apps (iOS parity).
- * v663 · Ein Overlay, nie auf <html>; alle Duplikate entfernen — Web-App hing bei 0%.
+ * v666 · Balken folgt echter Bereitschaft; kein zweiter Splash durch Reload.
  */
 (function () {
   if (window.__darSoftBootInstalled) return;
   window.__darSoftBootInstalled = true;
 
   var OVERLAY_ID = "dar-soft-boot";
-  var MAX_FAKE = 0.94;
+  var MAX_FAKE = 0.90;
   var FADE_HOLD_MS = 280;
   var HUNDRED_HOLD_MS = 380;
   var MIN_SHOW_MS = 900;
-  var HARD_TIMEOUT_MS = 6500;
+  var HARD_TIMEOUT_MS = 12000;
   /* Original-Hauptfarben je Erscheinungsbild (THEME_META / theme-page-bg) */
   var THEME_FILLS = {
     dark: "#050706",
@@ -161,16 +161,28 @@
     if (pctEl) pctEl.textContent = pct + "%";
   }
 
+  function targetProgress() {
+    var t = MAX_FAKE;
+    try {
+      if (document.readyState === "interactive" || document.readyState === "complete") t = Math.max(t, 0.42);
+      if (document.readyState === "complete") t = Math.max(t, 0.58);
+      if (window.__darAppBootOk) t = Math.max(t, 0.86);
+      if (window.__darBootUpdateChecked) t = Math.max(t, 0.96);
+    } catch (e) {}
+    return Math.min(0.96, t);
+  }
+
   function tick() {
     if (finished) return;
-    var remain = MAX_FAKE - progress;
+    var cap = targetProgress();
+    var remain = cap - progress;
     if (remain <= 0.002) {
-      progress = MAX_FAKE;
+      progress = cap;
       paint();
       return;
     }
-    progress += remain * 0.045;
-    if (progress > MAX_FAKE) progress = MAX_FAKE;
+    progress += remain * 0.08;
+    if (progress > cap) progress = cap;
     paint();
   }
 
@@ -255,9 +267,17 @@
     }
   }
 
+  function bootSettledEnough() {
+    var elapsed = Date.now() - startedAt;
+    if (window.__darAppBootOk && window.__darBootUpdateChecked) return true;
+    if (window.__darAppBootOk && elapsed > 2800) return true;
+    if (viewLooksReady() && window.__darBootUpdateChecked) return true;
+    return false;
+  }
+
   function maybeFinish() {
     if (finished) return;
-    if (viewLooksReady()) finish();
+    if (bootSettledEnough()) finish();
   }
 
   function install() {
@@ -303,15 +323,9 @@
 
     window.addEventListener("load", function () {
       setTimeout(maybeFinish, 40);
-      setTimeout(function () { if (!finished) finish(); }, 4000);
+      setTimeout(function () { if (!finished && bootSettledEnough()) finish(); }, 4000);
     });
-    window.addEventListener("pageshow", function (ev) {
-      try {
-        if (ev && ev.persisted && /Android/i.test(String(navigator.userAgent || ""))) {
-          location.reload();
-          return;
-        }
-      } catch (e) {}
+    window.addEventListener("pageshow", function () {
       setTimeout(maybeFinish, 40);
     });
     window.addEventListener("hashchange", function () {
