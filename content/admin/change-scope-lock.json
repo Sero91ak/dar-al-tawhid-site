@@ -84,6 +84,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "contact-email-dal-al-tauhid91-2026-08-22",
+      "approvedBy": "user-explicit-email-change",
+      "reason": "Nutzerauftrag: Kontakt-E-Mail auf dal.al.tauhid91@gmail.com aendern.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "impressum/",
+        "privacy/",
+        "ios/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "ios-parity-web-edge-feed-load-2026-08-21",
       "approvedBy": "user-explicit-plan-ios-parity-web-edge",
       "reason": "Plan: iOS-Parity Edge/Feed/Soft-Load in Besucher+Test-Web-App uebernehmen.",

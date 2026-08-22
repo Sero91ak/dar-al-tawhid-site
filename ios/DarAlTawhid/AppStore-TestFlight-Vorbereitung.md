@@ -18,7 +18,7 @@ Support-URL:
 https://dar-al-tawhid.de/
 
 Support-E-Mail:
-dar.at.tawhid.91@gmail.com
+dal.al.tauhid91@gmail.com
 
 Marketing-URL:
 https://dar-al-tawhid.de/

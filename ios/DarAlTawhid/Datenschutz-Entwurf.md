@@ -13,7 +13,7 @@ Kontakt:
 https://dar-al-tawhid.de/
 
 E-Mail:
-dar.at.tawhid.91@gmail.com
+dal.al.tauhid91@gmail.com
 
 ## Zweck der App
 

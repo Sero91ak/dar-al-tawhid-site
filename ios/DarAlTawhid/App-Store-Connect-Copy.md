@@ -55,7 +55,7 @@ Support URL:
 https://dar-al-tawhid.de/
 
 Support Email:
-dar.at.tawhid.91@gmail.com
+dal.al.tauhid91@gmail.com
 
 Marketing URL:
 https://dar-al-tawhid.de/
@@ -82,7 +82,7 @@ Public Link Details:
 Teste die erste iPhone-Version von DAR AL TAWḤĪD. Bitte achte besonders auf Startverhalten, Lesbarkeit, Navigation, Suche, Beitraege, Quellen, Gebetszeiten und allgemeine Stabilitaet.
 
 Feedback Email:
-dar.at.tawhid.91@gmail.com
+dal.al.tauhid91@gmail.com
 
 ## Review Notes
 
@@ -95,7 +95,7 @@ The content is presented for reading, study, and reference. The app does not pro
 Religious terminology may appear within educational source material and explanatory content. The app is not intended for applying religious judgments to specific persons or groups.
 
 Support contact:
-dar.at.tawhid.91@gmail.com
+dal.al.tauhid91@gmail.com
 
 ## Immediate Values After Apple Approval
 
@@ -114,4 +114,4 @@ URLs:
 
 Support:
 
-- Contact Email: dar.at.tawhid.91@gmail.com
+- Contact Email: dal.al.tauhid91@gmail.com

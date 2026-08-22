@@ -34,7 +34,7 @@ Privacy Policy URL:
 https://dar-al-tawhid.de/privacy
 
 Contact Email:
-dar.at.tawhid.91@gmail.com
+dal.al.tauhid91@gmail.com
 
 ## TestFlight Gruppe
 
@@ -62,7 +62,7 @@ This build is intended for TestFlight testing. It does not include purchases, ga
 The content is presented for reading, study, and reference. Religious terminology may appear within educational source material and explanatory content, not as functionality for applying judgments to specific persons or groups.
 
 Support contact:
-dar.at.tawhid.91@gmail.com
+dal.al.tauhid91@gmail.com
 
 ## App Privacy Kurzfassung
 
