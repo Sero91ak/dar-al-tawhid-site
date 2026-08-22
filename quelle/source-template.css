@@ -20,141 +20,87 @@
   font-display:swap;
 }
 :root{
-  --layl-night:#101918;
-  --layl-deep:#172827;
-  --layl-reef:#1f4f49;
-  --layl-ivory:#f5eddd;
-  --layl-paper:#fff9ee;
-  --layl-paper-soft:#f8edd9;
-  --layl-gold:#c8a45e;
-  --layl-gold-dark:#81612d;
-  --layl-amber:#e2c886;
-  --layl-sage:#6f8d72;
-  --layl-ink:#182423;
-  --layl-muted:#756b5c;
-  --layl-line:rgba(129,97,45,.23);
-  --layl-line-strong:rgba(129,97,45,.36);
-  --layl-shadow:0 16px 42px rgba(12,24,23,.18);
+  --ink:#172423;
+  --deep:#0f1918;
+  --green:#203f3b;
+  --paper:#fbf6ea;
+  --panel:#fffaf0;
+  --line:rgba(104,79,40,.24);
+  --line-strong:rgba(104,79,40,.38);
+  --gold:#b8924d;
+  --gold-soft:#dec48a;
+  --muted:#6f6658;
+  --shadow:0 12px 30px rgba(15,25,24,.12);
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
-html{
-  min-height:100%;
-  background:var(--layl-night);
-}
+html{min-height:100%;background:#efe5d4}
 body{
   min-height:100vh;
   font-family:"DarText",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  color:var(--layl-ink);
-  background:
-    linear-gradient(180deg,rgba(16,25,24,.98) 0,rgba(24,41,39,.96) 32%,#eadfc9 32%,#f6efdf 100%);
+  color:var(--ink);
+  background:linear-gradient(180deg,#182725 0,#182725 118px,#efe5d4 118px,#f7efdf 100%);
   -webkit-font-smoothing:antialiased;
 }
-body::before{
-  content:"DAR AL TAWḤĪD";
-  position:fixed;
-  inset:auto -34px 12vh auto;
-  z-index:0;
-  pointer-events:none;
-  font-family:"DarSerif",Georgia,serif;
-  font-size:clamp(54px,18vw,168px);
-  line-height:.82;
-  letter-spacing:.08em;
-  color:rgba(129,97,45,.12);
-  writing-mode:vertical-rl;
-  transform:rotate(180deg);
-  text-shadow:0 1px 0 rgba(255,249,238,.12);
-}
 .source-page{
-  position:relative;
-  z-index:1;
   width:min(100%,720px);
   min-height:100vh;
   margin:0 auto;
-  padding:max(8px,env(safe-area-inset-top)) 8px max(12px,env(safe-area-inset-bottom));
-  overflow:hidden;
+  padding:max(8px,env(safe-area-inset-top)) 8px max(14px,env(safe-area-inset-bottom));
 }
 .source-header{
   position:relative;
-  min-height:84px;
-  padding:12px 14px 10px;
-  overflow:hidden;
-  color:var(--layl-ivory);
-  background:
-    linear-gradient(135deg,rgba(31,79,73,.84),rgba(16,25,24,.96) 62%),
-    radial-gradient(circle at 88% 12%,rgba(226,200,134,.2),transparent 30%);
-  border:1px solid rgba(226,200,134,.22);
+  min-height:78px;
+  padding:10px 12px;
+  color:#f6eddb;
+  background:linear-gradient(180deg,#203f3b,#13211f);
+  border:1px solid rgba(222,196,138,.26);
   border-radius:8px;
-  box-shadow:var(--layl-shadow);
-}
-.source-header::before{
-  content:"";
-  position:absolute;
-  inset:8px;
-  border:1px solid rgba(245,237,221,.10);
-  border-radius:6px;
-  pointer-events:none;
-}
-.source-header::after{
-  content:"توحيد";
-  position:absolute;
-  right:14px;
-  bottom:-13px;
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:62px;
-  line-height:1;
-  color:rgba(226,200,134,.13);
-  letter-spacing:0;
-  pointer-events:none;
+  box-shadow:var(--shadow);
 }
 .header-row{
-  position:relative;
-  z-index:1;
   display:flex;
-  align-items:flex-start;
-  gap:10px;
+  align-items:center;
+  gap:12px;
+  min-width:0;
 }
-.header-row::before{
-  content:"";
-  width:9px;
-  height:54px;
-  flex:0 0 9px;
-  margin-top:3px;
-  border-radius:999px;
-  background:linear-gradient(180deg,var(--layl-amber),rgba(111,141,114,.55));
-  box-shadow:0 0 0 1px rgba(255,249,238,.16);
+.brand-logo{
+  width:52px;
+  height:52px;
+  flex:0 0 52px;
+  border-radius:50%;
+  display:block;
+  object-fit:cover;
+  background:#f6eddb;
+  border:1px solid rgba(222,196,138,.55);
+  box-shadow:0 4px 14px rgba(0,0,0,.22);
 }
-.brand-logo{display:none}
 .brand-text{min-width:0}
 .brand-text h1{
   margin:0;
   font-family:"DarSerif",Georgia,"Times New Roman",serif;
-  font-size:clamp(24px,7vw,37px);
-  line-height:1;
+  font-size:clamp(20px,5.4vw,30px);
+  line-height:1.04;
   letter-spacing:.08em;
   text-transform:uppercase;
-  color:var(--layl-ivory);
+  color:#f8f0df;
 }
 .brand-text p{display:none}
 .brand-sign{
-  position:relative;
-  z-index:1;
-  margin:3px 0 0 19px;
+  margin:1px 0 0 64px;
   font-family:"DarSignature","Snell Roundhand","Brush Script MT","Segoe Script",cursive;
-  font-size:clamp(26px,7vw,36px);
-  line-height:.95;
-  color:#ead39b;
+  font-size:clamp(20px,5.3vw,29px);
+  line-height:1;
+  color:#dfc487;
   letter-spacing:0;
-  transform:rotate(-1.4deg);
-  text-shadow:0 1px 0 rgba(0,0,0,.28);
 }
 .source-card{
   margin-top:8px;
   overflow:hidden;
-  background:linear-gradient(180deg,rgba(255,249,238,.98),rgba(247,237,218,.98));
-  border:1px solid var(--layl-line);
+  background:var(--panel);
+  border:1px solid var(--line);
   border-radius:8px;
-  box-shadow:0 10px 30px rgba(18,36,34,.13);
+  box-shadow:var(--shadow);
 }
 .source-hero,
 .source-meta,
@@ -163,9 +109,9 @@ body::before{
   position:relative;
   margin:0;
   padding:12px 14px 12px 58px;
-  border-top:1px solid rgba(129,97,45,.16);
+  border-top:1px solid rgba(104,79,40,.14);
 }
-.source-hero{border-top:0}
+.source-hero{border-top:0;background:#fffaf0}
 .source-hero::before,
 .source-meta::before,
 .isnad-box::before,
@@ -178,46 +124,45 @@ body::before{
   display:grid;
   place-items:center;
   border-radius:50%;
-  font-family:"DarSerif",Georgia,serif;
+  font-family:Georgia,"Times New Roman",serif;
   font-size:13px;
-  line-height:1;
-  color:#3b2a11;
-  background:linear-gradient(180deg,#e8cf91,#b68a43);
-  box-shadow:0 0 0 1px rgba(92,64,25,.18), inset 0 1px 0 rgba(255,249,238,.45);
+  color:#2c210f;
+  background:linear-gradient(180deg,#e4ca8d,#b8924d);
+  box-shadow:0 0 0 1px rgba(104,79,40,.22);
 }
 .source-hero::before{content:"1"}
 .source-meta::before{content:"2"}
 .isnad-box::before{content:"3"}
 .source-actions::before{content:"4"}
 .source-kicker{
-  margin:0 0 6px;
+  margin:0 0 7px;
+  color:#866834;
   font-size:10px;
-  line-height:1.2;
+  line-height:1.25;
   letter-spacing:.13em;
   text-transform:uppercase;
-  color:var(--layl-gold-dark);
-  font-weight:700;
+  font-weight:800;
 }
 .source-speaker{
   margin:0 0 8px;
   font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(18px,5.2vw,25px);
-  line-height:1.12;
-  color:var(--layl-ink);
+  font-size:clamp(18px,5vw,24px);
+  line-height:1.15;
+  color:var(--ink);
 }
 .source-quote{
   margin:0;
-  padding:10px 0 0;
-  border-top:1px solid rgba(129,97,45,.18);
+  padding-top:9px;
+  border-top:1px solid rgba(104,79,40,.18);
   font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(18px,5.1vw,24px);
-  line-height:1.34;
-  color:#172b29;
+  font-size:clamp(17px,4.9vw,23px);
+  line-height:1.38;
+  color:#172423;
 }
 .source-meta{
   display:grid;
   gap:8px;
-  background:linear-gradient(180deg,rgba(248,237,217,.76),rgba(255,249,238,.56));
+  background:#f7ecd8;
 }
 .meta-item{
   display:grid;
@@ -227,19 +172,18 @@ body::before{
 }
 .meta-item dt{
   margin:0;
-  padding-top:1px;
+  color:#6b5d46;
   font-size:10px;
   line-height:1.25;
   letter-spacing:.09em;
   text-transform:uppercase;
-  color:#6a5b43;
   font-weight:800;
 }
 .meta-item dd{
   margin:0;
-  color:#263c39;
+  color:#263b38;
   font-size:13px;
-  line-height:1.42;
+  line-height:1.43;
   word-break:break-word;
 }
 .meta-item dd[dir="rtl"]{
@@ -247,20 +191,15 @@ body::before{
   font-size:18px;
   line-height:1.55;
 }
-.meta-status{
-  color:#2c665e;
-  font-weight:800;
-}
-.isnad-box{
-  background:rgba(255,249,238,.62);
-}
+.meta-status{color:#2b615a;font-weight:800}
+.isnad-box{background:#fff7e8}
 .isnad-box h3{
   margin:0 0 7px;
+  color:#856631;
   font-size:10px;
   line-height:1.25;
   letter-spacing:.1em;
   text-transform:uppercase;
-  color:var(--layl-gold-dark);
 }
 .isnad-list{
   margin:0;
@@ -269,22 +208,22 @@ body::before{
   gap:4px;
 }
 .isnad-list li{
-  color:#223936;
+  color:#233936;
   font-size:12px;
-  line-height:1.38;
+  line-height:1.4;
 }
 .isnad-note{
   margin:7px 0 0;
   padding-top:7px;
-  border-top:1px solid rgba(129,97,45,.14);
-  color:#6c604e;
+  border-top:1px solid rgba(104,79,40,.14);
+  color:#665c4d;
   font-size:11px;
-  line-height:1.35;
+  line-height:1.38;
 }
 .source-actions{
   display:grid;
   gap:7px;
-  background:linear-gradient(180deg,rgba(19,37,35,.035),rgba(255,249,238,.74));
+  background:#fcf4e6;
 }
 .source-btn{
   display:flex;
@@ -292,16 +231,16 @@ body::before{
   gap:10px;
   min-height:50px;
   padding:9px 10px;
-  color:var(--layl-ink);
+  color:var(--ink);
   text-decoration:none;
-  background:rgba(255,249,238,.86);
-  border:1px solid rgba(129,97,45,.22);
+  background:#fffaf0;
+  border:1px solid rgba(104,79,40,.22);
   border-radius:8px;
 }
 .source-btn:active{transform:scale(.99)}
 .source-btn.primary{
-  background:linear-gradient(135deg,#f0d691,#d0aa5a 58%,#f7e7bb);
-  border-color:rgba(129,97,45,.34);
+  background:linear-gradient(180deg,#ead7a8,#d4b66f);
+  border-color:rgba(104,79,40,.34);
 }
 .source-btn .ico{
   width:31px;
@@ -310,33 +249,27 @@ body::before{
   display:grid;
   place-items:center;
   border-radius:7px;
-  font-family:"DarSerif",Georgia,serif;
-  font-size:12px;
-  line-height:1;
-  color:#f9efd9;
-  background:linear-gradient(180deg,#1f4f49,#152625);
-  box-shadow:inset 0 0 0 1px rgba(226,200,134,.18);
+  color:#f8efdd;
+  background:#203f3b;
+  font:800 12px/1 Georgia,"Times New Roman",serif;
 }
 .source-btn[href*=".pdf"] .ico,
 .source-btn[href*="archive.org"] .ico,
 .source-btn[href*="wikisource.org/wiki/%D9%85%D9%84%D9%81"] .ico{
   color:#2a1f0f;
-  background:linear-gradient(180deg,#e8cc85,#b38942);
+  background:linear-gradient(180deg,#e4ca8d,#b8924d);
 }
-.source-btn .txt{
-  display:block;
-  min-width:0;
-}
+.source-btn .txt{display:block;min-width:0}
 .source-btn .txt b{
   display:block;
-  color:#172b29;
+  color:#172423;
   font-size:12px;
   line-height:1.25;
 }
 .source-btn .txt span{
   display:block;
   margin-top:3px;
-  color:#756748;
+  color:#735f3b;
   font-size:10px;
   line-height:1.35;
   overflow-wrap:anywhere;
@@ -344,10 +277,10 @@ body::before{
 .social{
   margin-top:8px;
   padding:7px;
-  background:rgba(255,249,238,.9);
-  border:1px solid var(--layl-line);
+  background:#fffaf0;
+  border:1px solid var(--line);
   border-radius:8px;
-  box-shadow:0 8px 24px rgba(18,36,34,.1);
+  box-shadow:0 8px 22px rgba(15,25,24,.08);
 }
 .social-grid{
   display:grid;
@@ -361,57 +294,26 @@ body::before{
   color:#fff;
   text-decoration:none;
   border-radius:8px;
-  border:1px solid rgba(255,249,238,.14);
-  background:#223936;
+  background:#203f3b;
 }
-.social-link svg{
-  width:21px;
-  height:21px;
-  fill:currentColor;
-}
+.social-link svg{width:21px;height:21px;fill:currentColor}
 .social-link span:not(.web-emoji){display:none}
 .social-link.tele{background:#229ed9}
-.social-link.insta{
-  background:radial-gradient(circle at 30% 110%,#fdf497 0,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285AEB 90%);
-}
-.social-link.wa{background:linear-gradient(180deg,#5cf06b 0%,#25D366 100%)}
-.social-link.web{
-  color:#ead39b;
-  background:linear-gradient(180deg,#1f4f49,#172827);
-}
-.web-emoji{
-  display:block;
-  font-size:20px;
-  line-height:1;
-}
+.social-link.insta{background:radial-gradient(circle at 30% 110%,#fdf497 0,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285AEB 90%)}
+.social-link.wa{background:#25D366}
+.social-link.web{color:#dfc487;background:#203f3b}
+.web-emoji{display:block;font-size:20px;line-height:1}
 .source-footnote{display:none}
 .source-footer{
   margin:8px 4px 0;
-  color:rgba(16,25,24,.68);
+  color:rgba(23,36,35,.68);
   font-size:11px;
   line-height:1.35;
   text-align:center;
-  letter-spacing:.02em;
 }
 @media (max-width:390px){
   .source-page{padding-left:6px;padding-right:6px}
-  .source-header{padding-left:12px;padding-right:12px}
-  .source-hero,
-  .source-meta,
-  .isnad-box,
-  .source-actions{padding-left:50px;padding-right:10px}
-  .source-hero::before,
-  .source-meta::before,
-  .isnad-box::before,
-  .source-actions::before{left:11px}
+  .source-hero,.source-meta,.isnad-box,.source-actions{padding-left:50px;padding-right:10px}
+  .source-hero::before,.source-meta::before,.isnad-box::before,.source-actions::before{left:11px}
   .meta-item{grid-template-columns:1fr;gap:3px}
-}
-@media (min-width:640px){
-  .source-page{padding-left:14px;padding-right:14px}
-  .source-header{min-height:92px;padding:14px 16px 12px}
-  .brand-sign{margin-left:21px}
-  .source-hero,
-  .source-meta,
-  .isnad-box,
-  .source-actions{padding-right:18px}
 }
