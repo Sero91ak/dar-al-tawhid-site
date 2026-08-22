@@ -108,7 +108,7 @@ struct WebAppView: UIViewRepresentable {
         (function(){
           if(window.__darIosViewportPolishInstalled)return;
           window.__darIosViewportPolishInstalled=true;
-          window.__DAR_IOS_BUILD__="0.22-web-parity-v661";
+          window.__DAR_IOS_BUILD__="0.22-web-parity-v662";
           /* Web assets (full-edge-appearance-polish + parity force + soft-boot) own layout.
              iOS only supplies native safe-area vars, compact layout, and status-bar top inset. */
           function cssText(){
@@ -154,7 +154,7 @@ struct WebAppView: UIViewRepresentable {
             }
             if(document.body)document.body.classList.add("dar-ios-native-app");
             if(document.head)document.head.appendChild(style);
-            var feedForce=document.getElementById("dar-ios-parity-edge-force-v661")||document.getElementById("dar-ios-parity-edge-force-v659")||document.getElementById("dar-ios-parity-edge-force-v658")||document.getElementById("dar-ios-parity-edge-force-v657")||document.getElementById("dar-ios-parity-edge-force-v656")||document.getElementById("dar-ios-parity-edge-force-v655")||document.getElementById("dar-ios-parity-edge-force-v654")||document.getElementById("dar-ios-parity-edge-force-v653")||document.getElementById("dar-ios-parity-edge-force-v652")||document.getElementById("dar-ios-parity-edge-force-v651")||document.getElementById("dar-ios-parity-edge-force-v650")||document.getElementById("dar-ios-parity-edge-force-v649")||document.getElementById("dar-ios-parity-edge-force-v648")||document.getElementById("full-edge-feed-force-v645")||document.getElementById("full-edge-feed-force-v644");
+            var feedForce=document.getElementById("dar-ios-parity-edge-force-v662")||document.getElementById("dar-ios-parity-edge-force-v659")||document.getElementById("dar-ios-parity-edge-force-v658")||document.getElementById("dar-ios-parity-edge-force-v657")||document.getElementById("dar-ios-parity-edge-force-v656")||document.getElementById("dar-ios-parity-edge-force-v655")||document.getElementById("dar-ios-parity-edge-force-v654")||document.getElementById("dar-ios-parity-edge-force-v653")||document.getElementById("dar-ios-parity-edge-force-v652")||document.getElementById("dar-ios-parity-edge-force-v651")||document.getElementById("dar-ios-parity-edge-force-v650")||document.getElementById("dar-ios-parity-edge-force-v649")||document.getElementById("dar-ios-parity-edge-force-v648")||document.getElementById("full-edge-feed-force-v645")||document.getElementById("full-edge-feed-force-v644");
             if(feedForce&&document.head)document.head.appendChild(feedForce);
             try{
               var sb=document.getElementById("dar-soft-boot");
@@ -460,7 +460,7 @@ struct WebAppView: UIViewRepresentable {
         webView.allowsBackForwardNavigationGestures = true
         webView.isOpaque = true
         webView.backgroundColor = bootInk
-        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.22-web-parity-v661"
+        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.22-web-parity-v662"
         webView.onInsetsChange = { [weak coordinator = context.coordinator] in
             coordinator?.updateViewportInsets()
         }
@@ -1057,6 +1057,7 @@ struct WebAppView: UIViewRepresentable {
             overlay.isHidden = true
             overlay.alpha = 0
             overlay.layer.zPosition = 10_000
+            overlay.clipsToBounds = false
 
             let stack = UIStackView()
             stack.translatesAutoresizingMaskIntoConstraints = false
@@ -1150,7 +1151,7 @@ struct WebAppView: UIViewRepresentable {
                 overlay.topAnchor.constraint(equalTo: host.topAnchor),
                 overlay.leadingAnchor.constraint(equalTo: host.leadingAnchor),
                 overlay.trailingAnchor.constraint(equalTo: host.trailingAnchor),
-                overlay.bottomAnchor.constraint(equalTo: host.bottomAnchor),
+                overlay.bottomAnchor.constraint(equalTo: host.bottomAnchor, constant: 48),
                 emblem.widthAnchor.constraint(equalToConstant: 96),
                 emblem.heightAnchor.constraint(equalToConstant: 96),
                 stack.centerXAnchor.constraint(equalTo: overlay.centerXAnchor),
@@ -1190,6 +1191,7 @@ struct WebAppView: UIViewRepresentable {
             overlay.isHidden = false
             overlay.alpha = 1
             containerView?.bringSubviewToFront(overlay)
+            webView?.alpha = 0.001
             startLoadingProgress()
         }
 
@@ -1201,6 +1203,7 @@ struct WebAppView: UIViewRepresentable {
                 guard let self else { return }
                 UIView.animate(withDuration: 0.28, delay: 0, options: [.curveEaseOut]) {
                     overlay.alpha = 0
+                    self.webView?.alpha = 1
                 } completion: { _ in
                     overlay.isHidden = true
                     self.isBootLoadingVisible = false
