@@ -3419,6 +3419,17 @@
         ".github/workflows/push-worker-secret-watchdog.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "library-push-visitor-fix-2026-08-22",
+      "approvedBy": "user-explicit-push-fix-and-safety-lock",
+      "reason": "Besucher-Push Library: leere OneSignal-Antworten nicht als Erfolg werten; enabled prayer subscriptions nutzen",
+      "paths": [
+        "cloudflare/library-push-admin.js",
+        "cloudflare/worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
