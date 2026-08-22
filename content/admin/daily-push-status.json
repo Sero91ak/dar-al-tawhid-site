@@ -1,38 +1,38 @@
 {
-  "ok": true,
+  "ok": false,
   "schedulerEngine": "cloudflare-worker-daily-v4-isolated",
   "idVersion": "v4",
   "deliveryMode": "worker-local",
-  "schedulerStatus": "success",
-  "updatedAt": "2026-08-19T07:15:51.483Z",
-  "usersChecked": 10,
-  "registrationsRead": 11,
-  "uniqueSubscriptions": 10,
+  "schedulerStatus": "error",
+  "updatedAt": "2026-08-22T08:40:01.892Z",
+  "usersChecked": 12,
+  "registrationsRead": 13,
+  "uniqueSubscriptions": 12,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
-  "duaCandidates": 0,
+  "duaCandidates": 12,
   "recCandidates": 0,
-  "sent": 0,
+  "sent": 11,
   "accepted": {
-    "dua": 0,
+    "dua": 11,
     "recommendation": 0
   },
-  "invalidSubscriptionsDisabled": 0,
+  "invalidSubscriptionsDisabled": 1,
   "skipped": 0,
-  "duplicates": 10,
-  "errors": 0,
+  "duplicates": 0,
+  "errors": 1,
   "forceSend": null,
-  "dailyContentDate": "2026-08-19",
+  "dailyContentDate": "2026-08-22",
   "currentRecommendation": {
-    "id": "hukm-muhakamah-qurtubi-zwei-faelle-357",
-    "title": "al-Qurṭubī: Tabdīl ist nicht wie Sünde aus Begierde",
-    "category": "Hukm & Muḥākamah",
-    "scholar": "al-Qurṭubī"
+    "id": "abu-ubaid-hayaa-keine-ausrede-gutes-zu-verlassen-160",
+    "title": "Ḥayāʾ ist Pflicht – aber keine Ausrede, Gutes zu verlassen",
+    "category": "Adab",
+    "scholar": "Abū ʿUbaid al-Qāsim b. Sallām"
   },
   "currentDua": {
-    "id": "dua-038-rabbana-ma-khalaqta-hadha-batilan",
-    "title": "Duʿāʾ beim Nachdenken über die Schöpfung",
-    "category": "Tafakkur & Schutz"
+    "id": "dua-043-rabbi-jalni-muqimas-salati",
+    "title": "Duʿāʾ um beständiges Gebet",
+    "category": "Gebet & Nachkommen"
   },
   "configAutomatic": true
 }
