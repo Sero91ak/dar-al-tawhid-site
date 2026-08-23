@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-23T20:10:22.915Z",
+  "updatedAt": "2026-08-23T20:15:21.831Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-23T20:10:22.915Z",
+  "lastCronRun": "2026-08-23T20:15:21.831Z",
   "nextPlannedPush": {
     "prayer": "Fajr",
     "key": "fajr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-24T02:58:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-23T19:55:08.918Z",
-  "windowEnd": "2026-08-24T22:10:08.918Z",
+  "windowStart": "2026-08-23T20:00:08.997Z",
+  "windowEnd": "2026-08-24T22:15:08.997Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 11,
@@ -28,11 +28,11 @@
   "usersWithLocation": 11,
   "usersWithActivePush": 11,
   "locationGroups": 3,
-  "scheduled": 33,
-  "recipients": 121,
+  "scheduled": 30,
+  "recipients": 110,
   "invalid": 0,
   "invalidDisabled": 0,
-  "skippedPast": 57,
+  "skippedPast": 60,
   "skippedWindow": 30,
   "duplicates": 1,
   "errors": 0,
@@ -98,7 +98,7 @@
         },
         "entry": {
           "status": "geplant",
-          "recipients": 22
+          "recipients": 11
         }
       },
       "tahajjud": {
@@ -177,7 +177,7 @@
       },
       "entry": {
         "status": "geplant",
-        "recipients": 22
+        "recipients": 11
       },
       "answer": "ʿIshāʾ 21:57: Vorab und Gebetszeit geplant."
     },
@@ -202,16 +202,6 @@
     "answer": "Maghrib 20:37: Vorab und Gebetszeit geplant."
   },
   "planned": [
-    {
-      "prayer": "ʿIshāʾ",
-      "key": "isha",
-      "mode": "entry",
-      "time": "21:56",
-      "sendAfter": "2026-08-23T19:56:00.000Z",
-      "recipients": 9,
-      "timeZone": "Europe/Berlin",
-      "invalid": 0
-    },
     {
       "prayer": "Fajr",
       "key": "fajr",
@@ -313,16 +303,6 @@
       "invalid": 0
     },
     {
-      "prayer": "ʿIshāʾ",
-      "key": "isha",
-      "mode": "entry",
-      "time": "21:57",
-      "sendAfter": "2026-08-23T19:57:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin",
-      "invalid": 0
-    },
-    {
       "prayer": "Fajr",
       "key": "fajr",
       "mode": "entry",
@@ -418,16 +398,6 @@
       "mode": "advance",
       "time": "21:54",
       "sendAfter": "2026-08-24T19:39:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin",
-      "invalid": 0
-    },
-    {
-      "prayer": "ʿIshāʾ",
-      "key": "isha",
-      "mode": "entry",
-      "time": "21:56",
-      "sendAfter": "2026-08-23T19:56:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
       "invalid": 0
@@ -662,6 +632,13 @@
     },
     {
       "key": "isha",
+      "mode": "entry",
+      "sendAfter": "2026-08-23T19:56:00.000Z",
+      "time": "21:56",
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "key": "isha",
       "mode": "advance",
       "sendAfter": "2026-08-23T19:41:00.000Z",
       "time": "21:56",
@@ -795,34 +772,20 @@
     },
     {
       "key": "isha",
-      "mode": "advance",
-      "sendAfter": "2026-08-23T19:42:00.000Z",
+      "mode": "entry",
+      "sendAfter": "2026-08-23T19:57:00.000Z",
       "time": "21:57",
       "timeZone": "Europe/Berlin"
     },
     {
-      "key": "fajr",
-      "mode": "entry",
-      "sendAfter": "2026-08-22T03:10:00.000Z",
-      "time": "05:10",
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "key": "fajr",
+      "key": "isha",
       "mode": "advance",
-      "sendAfter": "2026-08-22T02:55:00.000Z",
-      "time": "05:10",
+      "sendAfter": "2026-08-23T19:42:00.000Z",
+      "time": "21:57",
       "timeZone": "Europe/Berlin"
     }
   ],
   "oneSignalResponses": [
-    {
-      "prayer": "isha",
-      "mode": "entry",
-      "recipients": 9,
-      "invalid": 0,
-      "response": "{\"id\":\"01cfaf4d-14ed-48dd-be19-2ccffaf5e231\",\"external_id\":\"96ee7b6a-32be-4d60-b7fc-41533d83150f\"}"
-    },
     {
       "prayer": "fajr",
       "mode": "entry",
@@ -894,13 +857,6 @@
       "response": "{\"id\":\"4b572a5d-19e0-4c23-9ac6-8469bc479572\",\"external_id\":\"8ff45d07-406f-4c24-9b67-5b968c465f49\"}"
     },
     {
-      "prayer": "isha",
-      "mode": "entry",
-      "recipients": 1,
-      "invalid": 0,
-      "response": "{\"id\":\"d2bfa6d9-efb2-41b2-a966-aa305b4d3ecd\",\"external_id\":\"e87584e5-08d8-4ec4-a48f-ca30529f6ce2\"}"
-    },
-    {
       "prayer": "fajr",
       "mode": "entry",
       "recipients": 1,
@@ -955,6 +911,20 @@
       "recipients": 1,
       "invalid": 0,
       "response": "{\"id\":\"6f93e30b-1b00-4c02-95fe-b50b99ab3bd5\",\"external_id\":\"b078afcf-8cc0-4159-9469-2f5abc17ade8\"}"
+    },
+    {
+      "prayer": "isha",
+      "mode": "entry",
+      "recipients": 1,
+      "invalid": 0,
+      "response": "{\"id\":\"37d7039f-7a4b-4074-b9d2-0bfce0a4d3a5\",\"external_id\":\"9ad270eb-78c9-423d-9ce5-b5081d9ef351\"}"
+    },
+    {
+      "prayer": "isha",
+      "mode": "advance",
+      "recipients": 1,
+      "invalid": 0,
+      "response": "{\"id\":\"61bfa518-da56-4fd9-9512-537e43605977\",\"external_id\":\"06e46f5b-5283-46b9-bcce-82819da8fcf9\"}"
     }
   ],
   "userRegistry": [
