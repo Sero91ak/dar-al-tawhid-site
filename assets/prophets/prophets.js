@@ -83,7 +83,7 @@
     );
   }
   var DUAL_MIN = 700;
-  var DUAL_PORTRAIT_MIN = 900;
+  var DUAL_PORTRAIT_MIN = 840;
   var STATE_KEY = "dar_prophets_ui_v1";
   var LAST_READ_KEY = "dar_prophets_last_read_v1";
   var INDEX_STORE_KEY = "dar_prophets_index_cache_v2";

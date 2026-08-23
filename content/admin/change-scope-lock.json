@@ -87,6 +87,31 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-strict-android-fold-2026-08-22",
+      "approvedBy": "user-explicit-quran-arabic-german-android-fold",
+      "reason": "Nutzerauftrag: Qurʾān Arabisch+Deutsch streng gegen Online-Original, Android-Einstellungen wie iOS, Fold/Fold-Funktionen anpassen. Zuerst Dar Test.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/quran/",
+        "content/quran/surahs.json",
+        "data/quran-search-index.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/fold-split.js",
+        "assets/fold-split.css",
+        "assets/adaptive-layout.js",
+        "assets/prophets/prophets.js",
+        "assets/prophets/prophets.css",
+        "test/assets/prophets/prophets.js",
+        "test/assets/prophets/prophets.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-text-tajweed-letter-audit-2026-08-22",
       "approvedBy": "user-explicit-quran-arabic-german-tajweed-audit",
       "reason": "Nutzerauftrag: Qurʾān 1–114 streng prüfen (Deutsch, Arabisch, Tajweed, drei Buchstaben-Typen). Nur belegte Buchstaben-/Wortfehler und fehlende Tajweed-Klassen korrigieren. Zuerst Dar Test.",
