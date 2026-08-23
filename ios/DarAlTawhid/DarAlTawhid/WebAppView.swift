@@ -70,6 +70,8 @@ final class GradientBackdropView: UIView {
 }
 
 struct WebAppView: UIViewRepresentable {
+    var destination: DarDeepLink.Destination? = nil
+
     private enum AppEnvironment {
         case staging
         case live
@@ -104,6 +106,25 @@ struct WebAppView: UIViewRepresentable {
         let userContentController = WKUserContentController()
         userContentController.add(context.coordinator, name: "darLibraryReader")
         userContentController.add(context.coordinator, name: "darAppearance")
+        userContentController.add(context.coordinator, name: "darWidgetSnapshot")
+        let iosNativeTabsBoot = """
+        (function(){
+          try{
+            var root=document.documentElement;
+            if(!root)return;
+            root.classList.add("dar-ios-native-app");
+            root.classList.add("dar-ios-native-tabs");
+            root.classList.remove("dar-soft-booting");
+          }catch(e){}
+        })();
+        """
+        userContentController.addUserScript(
+            WKUserScript(
+                source: iosNativeTabsBoot,
+                injectionTime: .atDocumentStart,
+                forMainFrameOnly: true
+            )
+        )
         let iosViewportPolish = """
         (function(){
           if(window.__darIosViewportPolishInstalled)return;
@@ -117,6 +138,21 @@ struct WebAppView: UIViewRepresentable {
               "  --dar-ios-theme-bg:var(--theme-page-bg,var(--theme-feed-bg,var(--quran-page-bg,var(--outer-bg-flat,var(--bg,#050504)))));",
               "}",
               "html.dar-ios-native-app #dar-soft-boot{display:none!important;visibility:hidden!important;}",
+              "html.dar-ios-native-app.dar-soft-booting,",
+              "html.dar-ios-native-app.dar-soft-booting body{overflow:visible!important;}",
+              "html.dar-ios-native-app #bottomNav,",
+              "html.dar-ios-native-app #bottomNav.bottom-nav,",
+              "html.dar-ios-native-app .bottom-nav,",
+              "html.dar-ios-native-app #appChromeDock #bottomNav.bottom-nav,",
+              "html.dar-ios-native-app.dar-soft-booting #bottomNav,",
+              "html.dar-ios-native-app.dar-soft-booting .bottom-nav,",
+              "html.dar-ios-native-app.dar-soft-booting .home-discover,",
+              "html.dar-ios-native-app.dar-soft-booting .home-v380{",
+              "  visibility:visible!important;",
+              "  opacity:1!important;",
+              "  pointer-events:auto!important;",
+              "  display:flex!important;",
+              "}",
               "html.dar-ios-native-app body.is-home-route,",
               "html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen),",
               "html.dar-ios-native-app body.is-more-route,",
@@ -135,6 +171,13 @@ struct WebAppView: UIViewRepresentable {
               "}",
               "html.dar-ios-native-app #bottomNav.bottom-nav,html.dar-ios-native-app .bottom-nav{",
               "  bottom:max(14px,calc(max(var(--safe-bottom),env(safe-area-inset-bottom,0px),var(--dar-native-safe-bottom,0px)) + 8px)) !important;",
+              "}",
+              "html.dar-ios-native-tabs #bottomNav,",
+              "html.dar-ios-native-tabs #bottomNav.bottom-nav,",
+              "html.dar-ios-native-tabs .bottom-nav,",
+              "html.dar-ios-native-tabs #appChromeDock #bottomNav.bottom-nav{",
+              "  display:none!important;",
+              "  visibility:hidden!important;",
               "}"
             ].join("\\n");
           }
@@ -148,6 +191,8 @@ struct WebAppView: UIViewRepresentable {
             style.textContent=cssText();
             if(root){
               root.classList.add("dar-ios-native-app");
+              root.classList.remove("dar-soft-booting");
+              root.style.removeProperty("background-color");
               if(root.getAttribute("data-layout")==="medium"||root.getAttribute("data-layout")==="expanded"){
                 root.setAttribute("data-layout","compact");
               }
@@ -440,6 +485,34 @@ struct WebAppView: UIViewRepresentable {
                 forMainFrameOnly: true
             )
         )
+        let widgetBridge = """
+        (function(){
+          function send(){
+            try{
+              var raw=localStorage.getItem("darPrayerSettingsV1");
+              var s=raw?JSON.parse(raw):{};
+              if(window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.darWidgetSnapshot){
+                window.webkit.messageHandlers.darWidgetSnapshot.postMessage({
+                  lat:s.lat,
+                  lon:s.lon,
+                  city:s.city||""
+                });
+              }
+            }catch(e){}
+          }
+          send();
+          setTimeout(send,800);
+          setTimeout(send,2400);
+          setInterval(send,120000);
+        })();
+        """
+        userContentController.addUserScript(
+            WKUserScript(
+                source: widgetBridge,
+                injectionTime: .atDocumentEnd,
+                forMainFrameOnly: true
+            )
+        )
         configuration.userContentController = userContentController
 
         let bootInk = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
@@ -460,11 +533,19 @@ struct WebAppView: UIViewRepresentable {
         webView.allowsBackForwardNavigationGestures = true
         webView.isOpaque = true
         webView.backgroundColor = bootInk
-        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.22-web-parity-v665"
+        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.23-native-tabs"
         webView.onInsetsChange = { [weak coordinator = context.coordinator] in
             coordinator?.updateViewportInsets()
         }
         containerView.addSubview(webView)
+
+        let tabBar = DarNativeTabBar()
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
+        tabBar.onSelect = { [weak coordinator = context.coordinator] id in
+            coordinator?.openNativeTab(id)
+        }
+        containerView.addSubview(tabBar)
+
         NSLayoutConstraint.activate([
             backdropView.topAnchor.constraint(equalTo: containerView.topAnchor),
             backdropView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
@@ -473,18 +554,27 @@ struct WebAppView: UIViewRepresentable {
             webView.topAnchor.constraint(equalTo: containerView.topAnchor),
             webView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             webView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            webView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+            webView.bottomAnchor.constraint(equalTo: tabBar.topAnchor, constant: -8),
+            tabBar.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor, constant: 12),
+            tabBar.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor, constant: -12),
+            tabBar.bottomAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.bottomAnchor, constant: -8),
+            tabBar.heightAnchor.constraint(equalToConstant: 62)
         ])
         context.coordinator.attach(
             webView,
             backdropView: backdropView,
-            containerView: containerView
+            containerView: containerView,
+            tabBar: tabBar
         )
         webView.load(URLRequest(url: Self.launchURL))
         return containerView
     }
 
-    func updateUIView(_ view: UIView, context: Context) {}
+    func updateUIView(_ view: UIView, context: Context) {
+        if let destination {
+            context.coordinator.navigate(to: destination)
+        }
+    }
 
     final class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler {
         private struct LibraryPublication: Decodable {
@@ -497,6 +587,7 @@ struct WebAppView: UIViewRepresentable {
         private weak var webView: WKWebView?
         private weak var backdropView: GradientBackdropView?
         private weak var containerView: UIView?
+        private weak var tabBar: DarNativeTabBar?
         private weak var loadingOverlay: UIView?
         private var pageSurfaceColor = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
         private weak var loadingLabel: UILabel?
@@ -518,6 +609,7 @@ struct WebAppView: UIViewRepresentable {
         private var viewportInsetWorkItem: DispatchWorkItem?
         private var lastAppliedTopInset: CGFloat = -1
         private var lastAppearanceKey: String = ""
+        private var lastOpenedDestination: DarDeepLink.Destination?
         private let errorHTML = """
         <!doctype html>
         <html lang="de">
@@ -547,12 +639,17 @@ struct WebAppView: UIViewRepresentable {
         func attach(
             _ webView: WKWebView,
             backdropView: GradientBackdropView,
-            containerView: UIView
+            containerView: UIView,
+            tabBar: DarNativeTabBar
         ) {
             self.webView = webView
             self.backdropView = backdropView
             self.containerView = containerView
+            self.tabBar = tabBar
             installLoadingOverlay(on: containerView)
+            if let tabBar {
+                containerView.bringSubviewToFront(tabBar)
+            }
             applySurfaceColor(pageSurfaceColor)
             showLoadingOverlay(subtitle: "App wird geladen")
             updateViewportInsets()
@@ -574,10 +671,71 @@ struct WebAppView: UIViewRepresentable {
             loadingProgressTimer?.invalidate()
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darLibraryReader")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darAppearance")
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darWidgetSnapshot")
             NotificationCenter.default.removeObserver(self)
         }
 
+        func openNativeTab(_ id: String) {
+            let dest: DarDeepLink.Destination
+            switch id {
+            case "quiz": dest = .home
+            case "feed": dest = .home
+            case "quran": dest = .quran
+            case "more": dest = .more
+            default: dest = .home
+            }
+            let hash: String
+            switch id {
+            case "quiz": hash = "#quiz"
+            case "feed": hash = "#feed"
+            case "quran": hash = "#quran"
+            case "more": hash = "#more"
+            default: hash = "#home"
+            }
+            lastOpenedDestination = dest
+            webView?.evaluateJavaScript("location.hash=\(Self.jsString(hash));", completionHandler: nil)
+            tabBar?.select(id: id)
+        }
+
+        func navigate(to destination: DarDeepLink.Destination, force: Bool = false) {
+            guard force || lastOpenedDestination != destination else { return }
+            lastOpenedDestination = destination
+            let hash = destination.webHash
+            webView?.evaluateJavaScript("location.hash=\(Self.jsString(hash));", completionHandler: nil)
+        }
+
+        private static func jsString(_ value: String) -> String {
+            let escaped = value
+                .replacingOccurrences(of: "\\", with: "\\\\")
+                .replacingOccurrences(of: "\"", with: "\\\"")
+            return "\"\(escaped)\""
+        }
+
+        func applyWidgetPayload(_ body: [String: Any]) {
+            var snap = DarWidgetStore.load()
+            if let lat = body["lat"] as? Double, let lon = body["lon"] as? Double,
+               lat.isFinite, lon.isFinite {
+                snap.latitude = lat
+                snap.longitude = lon
+            } else if let lat = (body["lat"] as? NSNumber)?.doubleValue,
+                      let lon = (body["lon"] as? NSNumber)?.doubleValue,
+                      lat.isFinite, lon.isFinite, abs(lat) > 0.01 {
+                snap.latitude = lat
+                snap.longitude = lon
+            }
+            if let city = body["city"] as? String, !city.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                snap.cityLabel = city
+            }
+            DarWidgetStore.save(DarDailyContent.refresh(snap))
+        }
+
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+            if message.name == "darWidgetSnapshot" {
+                if let body = message.body as? [String: Any] {
+                    applyWidgetPayload(body)
+                }
+                return
+            }
             if message.name == "darAppearance" {
                 guard let body = message.body as? [String: Any] else { return }
                 applyAppearance(
@@ -673,6 +831,9 @@ struct WebAppView: UIViewRepresentable {
             updateViewportInsets()
             // Appearance after overlay finishes, so boot screen stays visible until 100%.
             handlePossibleLibraryReaderRoute(currentURL)
+            if let pending = DarWidgetStore.consumePendingDestination() {
+                navigate(to: pending, force: true)
+            }
         }
 
         func updateViewportInsets() {
@@ -1191,8 +1352,12 @@ struct WebAppView: UIViewRepresentable {
             guard let overlay = loadingOverlay else { return }
             overlay.backgroundColor = bootInk
             overlay.isHidden = false
+            overlay.isUserInteractionEnabled = true
             overlay.alpha = 1
             containerView?.bringSubviewToFront(overlay)
+            if let tabBar {
+                containerView?.bringSubviewToFront(tabBar)
+            }
             webView?.alpha = 0.001
             startLoadingProgress()
         }
@@ -1201,6 +1366,8 @@ struct WebAppView: UIViewRepresentable {
             guard let overlay = loadingOverlay else { return }
             hideLoadingWorkItem?.cancel()
             finishLoadingProgress()
+            overlay.isUserInteractionEnabled = false
+            webView?.isUserInteractionEnabled = true
             let work = DispatchWorkItem { [weak self] in
                 guard let self else { return }
                 UIView.animate(withDuration: 0.28, delay: 0, options: [.curveEaseOut]) {
@@ -1208,6 +1375,8 @@ struct WebAppView: UIViewRepresentable {
                     self.webView?.alpha = 1
                 } completion: { _ in
                     overlay.isHidden = true
+                    overlay.isUserInteractionEnabled = false
+                    self.webView?.isUserInteractionEnabled = true
                     self.isBootLoadingVisible = false
                     self.refreshAppearanceBridge()
                 }
