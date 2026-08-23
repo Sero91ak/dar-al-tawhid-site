@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-23T17:35:24.296Z",
+  "updatedAt": "2026-08-23T17:40:25.568Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-23T17:35:24.296Z",
+  "lastCronRun": "2026-08-23T17:40:25.568Z",
   "nextPlannedPush": {
     "prayer": "Maghrib",
     "key": "maghrib",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-23T18:22:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-23T17:20:09.088Z",
-  "windowEnd": "2026-08-24T19:35:09.088Z",
+  "windowStart": "2026-08-23T17:25:09.055Z",
+  "windowEnd": "2026-08-24T19:40:09.055Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 11,
@@ -28,12 +28,12 @@
   "usersWithLocation": 11,
   "usersWithActivePush": 11,
   "locationGroups": 3,
-  "scheduled": 36,
-  "recipients": 132,
+  "scheduled": 39,
+  "recipients": 143,
   "invalid": 0,
   "invalidDisabled": 0,
   "skippedPast": 48,
-  "skippedWindow": 36,
+  "skippedWindow": 33,
   "duplicates": 1,
   "errors": 0,
   "lastError": null,
@@ -94,7 +94,7 @@
         "time": "21:57",
         "advance": {
           "status": "geplant",
-          "recipients": 11
+          "recipients": 22
         },
         "entry": {
           "status": "geplant",
@@ -173,7 +173,7 @@
       "time": "21:57",
       "advance": {
         "status": "geplant",
-        "recipients": 11
+        "recipients": 22
       },
       "entry": {
         "status": "geplant",
@@ -323,6 +323,16 @@
       "invalid": 0
     },
     {
+      "prayer": "ʿIshāʾ",
+      "key": "isha",
+      "mode": "advance",
+      "time": "21:54",
+      "sendAfter": "2026-08-24T19:39:00.000Z",
+      "recipients": 9,
+      "timeZone": "Europe/Berlin",
+      "invalid": 0
+    },
+    {
       "prayer": "Maghrib",
       "key": "maghrib",
       "mode": "entry",
@@ -443,6 +453,16 @@
       "invalid": 0
     },
     {
+      "prayer": "ʿIshāʾ",
+      "key": "isha",
+      "mode": "advance",
+      "time": "21:54",
+      "sendAfter": "2026-08-24T19:39:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin",
+      "invalid": 0
+    },
+    {
       "prayer": "Maghrib",
       "key": "maghrib",
       "mode": "entry",
@@ -558,6 +578,16 @@
       "mode": "advance",
       "time": "20:35",
       "sendAfter": "2026-08-24T18:20:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin",
+      "invalid": 0
+    },
+    {
+      "prayer": "ʿIshāʾ",
+      "key": "isha",
+      "mode": "advance",
+      "time": "21:54",
+      "sendAfter": "2026-08-24T19:39:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
       "invalid": 0
@@ -931,6 +961,13 @@
       "response": "{\"id\":\"b45ac1ce-9c5d-46e8-9ea3-301d77480f55\",\"external_id\":\"f0611a9f-a311-4c6a-853c-85614d0a0b7f\"}"
     },
     {
+      "prayer": "isha",
+      "mode": "advance",
+      "recipients": 9,
+      "invalid": 0,
+      "response": "{\"id\":\"4b572a5d-19e0-4c23-9ac6-8469bc479572\",\"external_id\":\"8ff45d07-406f-4c24-9b67-5b968c465f49\"}"
+    },
+    {
       "prayer": "maghrib",
       "mode": "entry",
       "recipients": 1,
@@ -978,13 +1015,6 @@
       "recipients": 1,
       "invalid": 0,
       "response": "{\"id\":\"7f643d92-6678-4268-a8a1-2a39321c8b89\",\"external_id\":\"62bfa387-a43c-4310-97c1-35081eb56c64\"}"
-    },
-    {
-      "prayer": "dhuhr",
-      "mode": "advance",
-      "recipients": 1,
-      "invalid": 0,
-      "response": "{\"id\":\"5d91049f-c556-479e-ab4a-87650f5e5aca\",\"external_id\":\"cad0ab26-423b-46f0-936b-8aa74fff6fae\"}"
     }
   ],
   "userRegistry": [
