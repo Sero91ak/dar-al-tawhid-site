@@ -364,20 +364,18 @@ async function writeStatusGithub(env, report, deps) {
   const path = env.JUMMAH_STATUS_PATH || DEFAULT_JUMMAH_STATUS_PATH;
   try {
     const existing = await deps.githubGet(env, owner, repo, path, branch);
-    let existingData = null;
-    try {
-      existingData = existing?.content ? JSON.parse(existing.content) : null;
-    } catch (_) {}
-    const strip = (value) => {
-      const copy = { ...(value || {}) };
-      delete copy.updatedAt;
-      delete copy.statusWrite;
-      return JSON.stringify(copy);
-    };
-    if (existingData && strip(existingData) === strip(report)) {
-      return { saved: false, skipped: true, path };
-    }
-    await deps.githubPut(env, owner, repo, path, `${JSON.stringify(report, null, 2)}\n`, `Jumuʿah push ${report.updatedAt}`, branch, existing?.sha);
+    // Immer schreiben (wie Gebets-Status) – Skip-Vergleich auf Roh-Base64 war fehlerhaft und
+    // ließ den Status nach Deploys hängen bleiben.
+    await deps.githubPut(
+      env,
+      owner,
+      repo,
+      path,
+      `${JSON.stringify(report, null, 2)}\n`,
+      `Jumuʿah push ${report.updatedAt}`,
+      branch,
+      existing?.sha
+    );
     return { saved: true, path };
   } catch (err) {
     return { saved: false, reason: err.message || String(err) };
@@ -414,11 +412,33 @@ export async function runJummahPushScheduler(env, options = {}, deps = {}) {
     rows = Array.isArray(loaded?.rows) ? loaded.rows : (Array.isArray(loaded) ? loaded : []);
     usedFallback = !!loaded?.usedFallback;
   } catch (err) {
+    const message = err.message || String(err);
+    const statusReport = {
+      updatedAt: new Date().toISOString(),
+      ok: false,
+      schedulerStatus: "error",
+      schedulerEngine: "cloudflare-worker-jummah-v2",
+      dryRun,
+      userSource: "supabase-only",
+      lastCronRun: new Date().toISOString(),
+      subscriptionsTotal: 0,
+      usersWithJummah: 0,
+      jummahTagFallback: false,
+      locationGroups: 0,
+      scheduled: 0,
+      recipients: 0,
+      errors: 1,
+      lastError: message,
+      errorDetails: [message]
+    };
+    lastJummahStatusReport = statusReport;
+    await writeStatusGithub(env, statusReport, deps).catch(() => null);
     return {
       ok: false, triggered: true, schedulerStatus: "error",
-      reason: `Supabase nicht lesbar: ${err.message || err}`,
-      lastError: err.message || String(err),
-      usersWithJummah: 0, scheduled: 0, jummahTagFallback: false
+      reason: `Supabase nicht lesbar: ${message}`,
+      lastError: message,
+      usersWithJummah: 0, scheduled: 0, jummahTagFallback: false,
+      status: statusReport
     };
   }
 
