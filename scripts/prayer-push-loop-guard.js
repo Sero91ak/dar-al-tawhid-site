@@ -105,7 +105,14 @@ function runPrayerPushLoopGuard() {
 
   const touchesScheduler = diffFiles.includes(SCHEDULER);
   const unlockEnv = String(process.env.PRAYER_PUSH_SCHEDULER_UNLOCK || "").trim() === "approved";
-  const commitMsg = String(process.env.GITHUB_COMMIT_MESSAGE || process.env.COMMIT_MESSAGE || "").toLowerCase();
+  let commitMsg = String(process.env.GITHUB_COMMIT_MESSAGE || process.env.COMMIT_MESSAGE || "").toLowerCase();
+  if (!commitMsg) {
+    try {
+      commitMsg = execSync("git log -1 --pretty=%B", { cwd: ROOT, encoding: "utf8" }).toLowerCase();
+    } catch (e) {
+      commitMsg = "";
+    }
+  }
   const unlockCommit = commitMsg.includes("prayer-push-scheduler-freigabe");
 
   if (touchesScheduler && !unlockEnv && !unlockCommit) {

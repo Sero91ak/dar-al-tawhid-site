@@ -625,7 +625,7 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
     updatedAt: new Date().toISOString(),
     ok: stats.errors === 0 && userCount > 0,
     schedulerStatus: stats.errors ? "error" : userCount ? "success" : "warning",
-    schedulerEngine: "cloudflare-worker-cron-v3",
+    schedulerEngine: "cloudflare-worker-cron-v2",
     userSource: "supabase-only",
     cronIntervalMinutes: 5,
     lastCronRun: new Date().toISOString(),
