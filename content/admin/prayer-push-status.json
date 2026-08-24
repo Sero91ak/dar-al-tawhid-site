@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-24T03:50:40.085Z",
+  "updatedAt": "2026-08-24T03:54:57.228Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-24T03:50:40.085Z",
+  "lastCronRun": "2026-08-24T03:54:57.228Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-24T11:19:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-24T03:35:37.335Z",
-  "windowEnd": "2026-08-25T05:50:37.335Z",
+  "windowStart": "2026-08-24T03:39:50.557Z",
+  "windowEnd": "2026-08-25T05:54:50.557Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 11,
@@ -34,6 +34,8 @@
   "invalidDisabled": 0,
   "skippedPast": 36,
   "skippedWindow": 54,
+  "advanceCatchups": 0,
+  "entryCatchups": 0,
   "duplicates": 1,
   "errors": 0,
   "lastError": null,
@@ -45,12 +47,12 @@
         "name": "Fajr",
         "time": "05:14",
         "advance": {
-          "status": "geplant",
-          "recipients": 11
+          "status": "übersprungen",
+          "recipients": 0
         },
         "entry": {
-          "status": "geplant",
-          "recipients": 11
+          "status": "übersprungen",
+          "recipients": 0
         }
       },
       "dhuhr": {
@@ -120,14 +122,14 @@
       "name": "Fajr",
       "time": "05:14",
       "advance": {
-        "status": "geplant",
-        "recipients": 11
+        "status": "übersprungen",
+        "recipients": 0
       },
       "entry": {
-        "status": "geplant",
-        "recipients": 11
+        "status": "übersprungen",
+        "recipients": 0
       },
-      "answer": "Fajr 05:14: Vorab und Gebetszeit geplant."
+      "answer": "Fajr 05:14: übersprungen – Fenster vorbei."
     },
     "dhuhr": {
       "name": "Dhuhr",
