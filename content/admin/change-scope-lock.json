@@ -87,6 +87,25 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-arabic-letter-100-2026-08-23",
+      "approvedBy": "user-explicit-quran-arabic-100-percent-letter-audit",
+      "reason": "Nutzer: Arabisches Qurʾān-Wörterbuch noch viele Fehler auf Android+iOS; 100% Vers für Vers, Buchstabe für Buchstabe korrigieren. Zuerst Dar Test.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/quran/",
+        "content/quran/surahs.json",
+        "content/quran-tajweed/",
+        "data/quran-search-index.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-strict-android-fold-2026-08-22",
       "approvedBy": "user-explicit-quran-arabic-german-android-fold",
       "reason": "Nutzerauftrag: Qurʾān Arabisch+Deutsch streng gegen Online-Original, Android-Einstellungen wie iOS, Fold/Fold-Funktionen anpassen. Zuerst Dar Test.",
