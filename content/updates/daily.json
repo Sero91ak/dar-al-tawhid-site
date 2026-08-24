@@ -16,5 +16,23 @@
     "title": "Duʿāʾ um beständiges Gebet",
     "snippet": "Mein Herr, mache mich zu einem, der das Gebet verrichtet, und auch aus meiner Nachkommenschaft. Unser Herr, und nimm mein Bittgebet an.",
     "category": "Gebet & Nachkommen"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 461,
+      "remaining": 440
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 77,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
