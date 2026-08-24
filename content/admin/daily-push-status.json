@@ -4,12 +4,26 @@
   "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-24T04:00:36.950Z",
+  "updatedAt": "2026-08-24T04:05:36.944Z",
   "usersChecked": 11,
   "registrationsRead": 12,
   "uniqueSubscriptions": 11,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
+  "localTimeBerlin": "06:05",
+  "dateKeyBerlin": "2026-08-24",
+  "duaWindow": {
+    "hour": 9,
+    "open": false,
+    "catchupUntilHour": 14,
+    "alreadySentToday": 0
+  },
+  "recommendationWindow": {
+    "hour": 12,
+    "open": false,
+    "catchupUntilHour": 20,
+    "alreadySentToday": 0
+  },
   "duaCandidates": 0,
   "recCandidates": 0,
   "sent": 0,
@@ -34,5 +48,6 @@
     "title": "Duʿāʾ um beständiges Gebet",
     "category": "Gebet & Nachkommen"
   },
-  "configAutomatic": true
+  "configAutomatic": true,
+  "lastError": "Außerhalb der Tagesfenster (Duʿāʾ ab 09:00, Empfehlung ab 12:00 Europe/Berlin)."
 }
