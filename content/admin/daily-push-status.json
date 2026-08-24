@@ -4,25 +4,25 @@
   "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-24T21:55:33.253Z",
+  "updatedAt": "2026-08-24T22:00:38.374Z",
   "usersChecked": 11,
   "registrationsRead": 12,
   "uniqueSubscriptions": 11,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
-  "localTimeBerlin": "23:55",
-  "dateKeyBerlin": "2026-08-24",
+  "localTimeBerlin": "00:00",
+  "dateKeyBerlin": "2026-08-25",
   "duaWindow": {
     "hour": 9,
     "open": false,
     "catchupUntilHour": 14,
-    "alreadySentToday": 11
+    "alreadySentToday": 0
   },
   "recommendationWindow": {
     "hour": 12,
     "open": false,
     "catchupUntilHour": 20,
-    "alreadySentToday": 11
+    "alreadySentToday": 0
   },
   "duaCandidates": 0,
   "recCandidates": 0,
@@ -36,17 +36,17 @@
   "duplicates": 0,
   "errors": 0,
   "forceSend": null,
-  "dailyContentDate": "2026-08-24",
+  "dailyContentDate": "2026-08-25",
   "currentRecommendation": {
-    "id": "hukm-muhakamah-vergessen-des-geoffenbarten-427",
-    "title": "Wer einen Anteil der Ermahnung vergisst",
+    "id": "hukm-muhakamah-zwei-wege-glaube-und-ablehnung-432",
+    "title": "Glaube und Ablehnung haben verschiedene Enden",
     "category": "Hukm & Muḥākamah",
-    "scholar": "aṭ-Ṭabarī / Ibn Kathīr"
+    "scholar": "aṭ-Ṭabarī"
   },
   "currentDua": {
-    "id": "dua-043-rabbi-jalni-muqimas-salati",
-    "title": "Duʿāʾ um beständiges Gebet",
-    "category": "Gebet & Nachkommen"
+    "id": "dua-044-rabbana-ghfir-li-wa-li-walidayya",
+    "title": "Duʿāʾ um Vergebung für sich, Eltern und Gläubige",
+    "category": "Vergebung & Eltern"
   },
   "configAutomatic": true,
   "lastError": "Außerhalb der Tagesfenster (Duʿāʾ ab 09:00, Empfehlung ab 12:00 Europe/Berlin)."
