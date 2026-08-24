@@ -3499,6 +3499,7 @@
         "cloudflare/daily-push-scheduler.js",
         "cloudflare/worker.js",
         ".github/workflows/sync-admin-publisher-secrets.yml",
+        ".github/workflows/deploy-admin-publisher.yml",
         "content/admin/change-scope-lock.json",
         "content/admin/prayer-push-scheduler-lock.json",
         "scripts/prayer-push-loop-guard.js"
