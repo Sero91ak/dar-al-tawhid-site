@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-24T14:20:40.204Z",
+  "updatedAt": "2026-08-24T14:40:40.466Z",
   "provider": "aurumrates.com",
   "active": true,
   "gold": {
     "metal": "gold",
     "currency": "EUR",
-    "pricePerOunce": 4053.93,
+    "pricePerOunce": 4054.1,
     "pricePerGram": 130.34,
     "nisabGrams": 85,
     "nisabEur": 11078.9,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-08-24T14:20:40.204Z",
+    "fetchedAt": "2026-08-24T14:40:40.466Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
@@ -27,17 +27,27 @@
     "nisabEur": 1130.5,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-08-24T14:20:40.204Z",
+    "fetchedAt": "2026-08-24T14:40:40.466Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
     "adminNote": ""
   },
   "standardNisabEur": 1130.5,
-  "lastSuccessAt": "2026-08-24T14:20:40.204Z",
+  "lastSuccessAt": "2026-08-24T14:40:40.466Z",
   "lastError": "",
-  "lastFetchAt": "2026-08-24T14:20:40.204Z",
+  "lastFetchAt": "2026-08-24T14:40:40.466Z",
   "fetchLogs": [
+    {
+      "id": "log-1787582440466",
+      "provider": "aurumrates.com",
+      "status": "ok",
+      "errorMessage": "",
+      "fetchedAt": "2026-08-24T14:40:40.466Z",
+      "durationMs": 1622,
+      "goldPerGram": 130.34,
+      "silverPerGram": 1.9
+    },
     {
       "id": "log-1787581240204",
       "provider": "aurumrates.com",
@@ -525,16 +535,6 @@
       "errorMessage": "",
       "fetchedAt": "2026-08-23T16:10:11.535Z",
       "durationMs": 1557,
-      "goldPerGram": 128.63,
-      "silverPerGram": 1.91
-    },
-    {
-      "id": "log-1787500210576",
-      "provider": "aurumrates.com",
-      "status": "ok",
-      "errorMessage": "",
-      "fetchedAt": "2026-08-23T15:50:10.576Z",
-      "durationMs": 1300,
       "goldPerGram": 128.63,
       "silverPerGram": 1.91
     }
