@@ -673,6 +673,14 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
     forceClear = await clearForceSend(env, deps, force.token);
   }
 
+  const berlin = getLocalParts(now, canonicalTimeZone);
+  const duaHour = Number(config?.dailyDua?.hour ?? DUA_HOUR);
+  const recommendationHour = Number(config?.recommendation?.hour ?? REC_HOUR);
+  const duaWindowOpen = duaDeliveryWindow(berlin, duaHour, config);
+  const recWindowOpen = recDeliveryWindow(berlin, recommendationHour, config);
+  const duaAlreadySent = rows.filter((r) => r.last_dua_push_date === canonicalDateKey).length;
+  const recAlreadySent = rows.filter((r) => r.last_recommendation_push_date === canonicalDateKey).length;
+
   const status = {
     ok: stats.errors === 0,
     schedulerEngine: DAILY_PUSH_ENGINE,
@@ -685,6 +693,20 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
     uniqueSubscriptions: rows.length,
     duplicateRegistrationsDropped: Math.max(0, rawRows.length - rows.length),
     appEnvironment: "production",
+    localTimeBerlin: `${String(berlin.hour).padStart(2, "0")}:${String(berlin.minute).padStart(2, "0")}`,
+    dateKeyBerlin: canonicalDateKey,
+    duaWindow: {
+      hour: duaHour,
+      open: duaWindowOpen,
+      catchupUntilHour: DUA_CATCHUP_UNTIL_HOUR,
+      alreadySentToday: duaAlreadySent
+    },
+    recommendationWindow: {
+      hour: recommendationHour,
+      open: recWindowOpen,
+      catchupUntilHour: REC_CATCHUP_UNTIL_HOUR,
+      alreadySentToday: recAlreadySent
+    },
     duaCandidates: stats.duaCandidates,
     recCandidates: stats.recCandidates,
     sent: stats.sent,
@@ -706,7 +728,12 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
       title: duaItem.title,
       category: duaItem.category || ""
     } : null,
-    configAutomatic: config?.automatic !== false
+    configAutomatic: config?.automatic !== false,
+    lastError: stats.errors
+      ? `${stats.errors} Fehler beim Tages-Push`
+      : (!duaWindowOpen && !recWindowOpen && stats.duaCandidates === 0 && stats.recCandidates === 0
+        ? `Außerhalb der Tagesfenster (Duʿāʾ ab ${String(duaHour).padStart(2, "0")}:00, Empfehlung ab ${String(recommendationHour).padStart(2, "0")}:00 Europe/Berlin).`
+        : null)
   };
 
   lastDailyStatusReport = status;

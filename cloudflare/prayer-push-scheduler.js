@@ -15,6 +15,10 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const DEFAULT_PRAYER_ADVANCE_MINUTES = 15;
 const SCHEDULE_LOOKAHEAD_MINUTES = 26 * 60;
 const SCHEDULE_GRACE_MINUTES = 15;
+/** Vorab-Push darf nachgeholt werden, solange Entry noch mind. so viele Sekunden entfernt ist. */
+const ADVANCE_CATCHUP_MIN_REMAINING_MS = 90 * 1000;
+/** Gebetszeit-Push darf kurz nach Eintritt nachgeholt werden (Cron-/Grace-Lücke), ohne sendAfter zu mutieren. */
+const ENTRY_CATCHUP_MAX_LATE_MS = 12 * 60 * 1000;
 const REFERENCE = { lat: 50.6256, lon: 6.9491, city: "Rheinbach", timeZone: "Europe/Berlin" };
 
 let lastStatusReport = null;
@@ -231,19 +235,23 @@ function groupRegistrations(rows, onlySubId = "") {
   return Array.from(map.values());
 }
 
-function notifyTitle(prayer, mode, group) {
+function notifyTitle(prayer, mode, group, remainingMinutes = null) {
   const emoji = PRAYER_TITLE_EMOJI[prayer.key] || "";
   if (prayer.key === "tahajjud") return emoji ? `${emoji} Taḥajjud-Erinnerung` : "Taḥajjud-Erinnerung";
-  const m = normAdvance(group.advanceMinutes);
+  const m = Number.isFinite(remainingMinutes) && remainingMinutes > 0
+    ? Math.round(remainingMinutes)
+    : normAdvance(group.advanceMinutes);
   const baseTitle = mode === "advance" ? `${prayer.name} in ${m} Min` : `${prayer.name} ist eingetreten`;
   return emoji ? `${emoji} ${baseTitle}` : baseTitle;
 }
 
-function notifyCopy(prayer, mode, group) {
+function notifyCopy(prayer, mode, group, remainingMinutes = null) {
   const timeLabel = prayer.time == null ? "" : formatHour(prayer.time);
-  const m = normAdvance(group.advanceMinutes);
+  const m = Number.isFinite(remainingMinutes) && remainingMinutes > 0
+    ? Math.round(remainingMinutes)
+    : normAdvance(group.advanceMinutes);
   if (mode === "advance") {
-    const title = notifyTitle(prayer, mode, group);
+    const title = notifyTitle(prayer, mode, group, m);
     const body = buildAdvancePushBody(prayer.key, m, timeLabel);
     return {
       headings: { de: sanitizePrayerPushText(title), en: sanitizePrayerPushText(title) },
@@ -366,7 +374,12 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
   }
   sentInRun.add(idKey);
 
-  const copy = enforcePrayerCopyGuard(notifyCopy(prayer, mode, group));
+  const plannedAdvance = normAdvance(group.advanceMinutes);
+  const entryGuessMs = sendAfter.getTime() + plannedAdvance * 60000;
+  const remainingMinutes = mode === "advance"
+    ? Math.max(1, Math.round((entryGuessMs - Date.now()) / 60000))
+    : null;
+  const copy = enforcePrayerCopyGuard(notifyCopy(prayer, mode, group, remainingMinutes));
   if (copy.blocked) {
     throw new Error(`Push-Text blockiert (${prayer.key}/${mode}): enthält verbotene Formulierung`);
   }
@@ -419,13 +432,22 @@ function buildOverview(planned, skippedPast, ref = REFERENCE) {
   const dateKey = `${local.year}-${String(local.month).padStart(2, "0")}-${String(local.day).padStart(2, "0")}`;
   const times = prayerTimes(local, ref.lat, ref.lon, ref.timeZone, 12, 1, "off");
   const keys = ["fajr", "dhuhr", "asr", "maghrib", "isha", "tahajjud"];
+  const sameLocalDay = (iso) => {
+    try {
+      const p = getLocalParts(new Date(iso), ref.timeZone);
+      const key = `${p.year}-${String(p.month).padStart(2, "0")}-${String(p.day).padStart(2, "0")}`;
+      return key === dateKey;
+    } catch (e) {
+      return false;
+    }
+  };
   const prayers = {};
   for (const key of keys) {
     const refP = times.find((p) => p.key === key);
     const time = refP?.time == null ? null : formatHour(refP.time);
-    const adv = planned.filter((p) => p.key === key && p.mode === "advance");
-    const ent = planned.filter((p) => p.key === key && p.mode === "entry");
-    const sk = skippedPast.filter((p) => p.key === key);
+    const adv = planned.filter((p) => p.key === key && p.mode === "advance" && sameLocalDay(p.sendAfter));
+    const ent = planned.filter((p) => p.key === key && p.mode === "entry" && sameLocalDay(p.sendAfter));
+    const sk = skippedPast.filter((p) => p.key === key && sameLocalDay(p.sendAfter));
     prayers[key] = {
       name: refP?.name || key,
       time,
@@ -556,9 +578,29 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
 
         for (const slot of slots) {
           if (slot.sendAfter < windowStart) {
-            stats.skippedPast += 1;
-            stats.skippedPastDetails.push({ key: prayer.key, mode: slot.mode, sendAfter: slot.sendAfter.toISOString(), time: formatHour(prayer.time), timeZone: group.timeZone });
-            continue;
+            // Nachholen ohne sendAfter-Mutation (Idempotency stabil, kein Maghrib-Loop).
+            const msToEntry = entryAt.getTime() - now.getTime();
+            const msSinceEntry = now.getTime() - entryAt.getTime();
+            const catchupAdvance =
+              slot.mode === "advance" &&
+              msToEntry > ADVANCE_CATCHUP_MIN_REMAINING_MS;
+            const catchupEntry =
+              slot.mode === "entry" &&
+              msSinceEntry >= 0 &&
+              msSinceEntry <= ENTRY_CATCHUP_MAX_LATE_MS;
+            if (!catchupAdvance && !catchupEntry) {
+              stats.skippedPast += 1;
+              stats.skippedPastDetails.push({
+                key: prayer.key,
+                mode: slot.mode,
+                sendAfter: slot.sendAfter.toISOString(),
+                time: formatHour(prayer.time),
+                timeZone: group.timeZone
+              });
+              continue;
+            }
+            if (catchupAdvance) stats.advanceCatchups = (stats.advanceCatchups || 0) + 1;
+            if (catchupEntry) stats.entryCatchups = (stats.entryCatchups || 0) + 1;
           }
           if (slot.sendAfter > windowEnd) {
             stats.skippedWindow += 1;
@@ -583,7 +625,7 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
     updatedAt: new Date().toISOString(),
     ok: stats.errors === 0 && userCount > 0,
     schedulerStatus: stats.errors ? "error" : userCount ? "success" : "warning",
-    schedulerEngine: "cloudflare-worker-cron-v2",
+    schedulerEngine: "cloudflare-worker-cron-v3",
     userSource: "supabase-only",
     cronIntervalMinutes: 5,
     lastCronRun: new Date().toISOString(),
@@ -605,6 +647,8 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
     invalidDisabled: stats.invalidDisabled || 0,
     skippedPast: stats.skippedPast,
     skippedWindow: stats.skippedWindow,
+    advanceCatchups: stats.advanceCatchups || 0,
+    entryCatchups: stats.entryCatchups || 0,
     duplicates: stats.duplicates,
     errors: stats.errors,
     lastError: stats.errors

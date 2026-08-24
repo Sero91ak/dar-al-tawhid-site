@@ -170,26 +170,43 @@ async function loadJummahRegistrations() {
   const select = [
     "device_id", "subscription_id", "lat", "lon", "timezone", "method_angle",
     "jummah_notifications", "jummah_use_manual_time", "jummah_manual_time",
-    "jummah_morning_time", "jummah_advance_minutes", "city", "last_synced_at"
+    "jummah_morning_time", "jummah_advance_minutes", "city", "last_synced_at", "enabled"
   ].join(",");
-  const url = `${SUPABASE_URL}/rest/v1/prayer_push_registrations?jummah_notifications=eq.true&subscription_id=not.is.null&select=${select}`;
-  const res = await fetch(url, {
-    headers: {
-      apikey: SUPABASE_ANON_KEY,
-      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-      Accept: "application/json"
+  // Primär: explizit aktivierte Jumuʿah-Nutzer.
+  // Fallback: aktive Gebets-Push-Nutzer (enabled=true) – sonst bleibt Freitag leer,
+  // weil jummah_notifications historisch default false war.
+  const urls = [
+    `${SUPABASE_URL}/rest/v1/prayer_push_registrations?jummah_notifications=eq.true&subscription_id=not.is.null&select=${select}`,
+    `${SUPABASE_URL}/rest/v1/prayer_push_registrations?enabled=eq.true&subscription_id=not.is.null&select=${select}`
+  ];
+  let rows = [];
+  let usedFallback = false;
+  for (let i = 0; i < urls.length; i += 1) {
+    const res = await fetch(urls[i], {
+      headers: {
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        Accept: "application/json"
+      }
+    });
+    const text = await res.text();
+    if (!res.ok) {
+      if (res.status === 400 && /column/i.test(text)) {
+        throw new Error("Supabase-Spalten fehlen – bitte jummah-push-schema.sql ausführen");
+      }
+      throw new Error(`Supabase ${res.status}: ${text.slice(0, 200)}`);
     }
-  });
-  const text = await res.text();
-  if (!res.ok) {
-    if (res.status === 400 && /column/i.test(text)) {
-      throw new Error("Supabase-Spalten fehlen – bitte jummah-push-schema.sql ausführen");
+    const parsed = text ? JSON.parse(text) : [];
+    rows = Array.isArray(parsed) ? parsed : [];
+    if (rows.length) {
+      usedFallback = i > 0;
+      break;
     }
-    throw new Error(`Supabase ${res.status}: ${text.slice(0, 200)}`);
   }
-  const rows = text ? JSON.parse(text) : [];
-  if (!Array.isArray(rows)) return [];
-  return rows.filter((r) => r.subscription_id);
+  return {
+    rows: rows.filter((r) => r.subscription_id && Number.isFinite(+r.lat) && Number.isFinite(+r.lon)),
+    usedFallback
+  };
 }
 
 function groupJummahRegistrations(rows, onlySubId = "") {
@@ -391,14 +408,17 @@ export async function runJummahPushScheduler(env, options = {}, deps = {}) {
   const sentInRun = new Set();
 
   let rows = [];
+  let usedFallback = false;
   try {
-    rows = await loadJummahRegistrations();
+    const loaded = await loadJummahRegistrations();
+    rows = Array.isArray(loaded?.rows) ? loaded.rows : (Array.isArray(loaded) ? loaded : []);
+    usedFallback = !!loaded?.usedFallback;
   } catch (err) {
     return {
       ok: false, triggered: true, schedulerStatus: "error",
       reason: `Supabase nicht lesbar: ${err.message || err}`,
       lastError: err.message || String(err),
-      usersWithJummah: 0, scheduled: 0
+      usersWithJummah: 0, scheduled: 0, jummahTagFallback: false
     };
   }
 
@@ -410,11 +430,23 @@ export async function runJummahPushScheduler(env, options = {}, deps = {}) {
     const days = [addDays(local, -1), local, addDays(local, 1), addDays(local, 2)];
 
     for (const day of days) {
-      for (const slot of jummahSlotsForDay(day, group)) {
+      const daySlots = jummahSlotsForDay(day, group);
+      const mainAt = daySlots.find((s) => s.mode === "entry")?.sendAfter || null;
+      for (const slot of daySlots) {
         if (slot.sendAfter < windowStart) {
-          stats.skippedPast += 1;
-          stats.skippedPastDetails.push({ mode: slot.mode, sendAfter: slot.sendAfter.toISOString(), timeZone: group.timeZone });
-          continue;
+          // Kurz nachholen ohne sendAfter zu mutieren (stabile Idempotency).
+          const msToMain = mainAt ? mainAt.getTime() - now.getTime() : -1;
+          const msSinceSlot = now.getTime() - slot.sendAfter.getTime();
+          const catchup =
+            (slot.mode === "advance" && msToMain > 90 * 1000) ||
+            (slot.mode === "morning" && msToMain > 90 * 1000 && msSinceSlot < 3 * 60 * 60 * 1000) ||
+            (slot.mode === "entry" && msSinceSlot >= 0 && msSinceSlot <= 12 * 60 * 1000);
+          if (!catchup) {
+            stats.skippedPast += 1;
+            stats.skippedPastDetails.push({ mode: slot.mode, sendAfter: slot.sendAfter.toISOString(), timeZone: group.timeZone });
+            continue;
+          }
+          stats.catchups = (stats.catchups || 0) + 1;
         }
         if (slot.sendAfter > windowEnd) {
           stats.skippedWindow += 1;
@@ -456,13 +488,14 @@ export async function runJummahPushScheduler(env, options = {}, deps = {}) {
     updatedAt: new Date().toISOString(),
     ok: stats.errors === 0 && userCount > 0,
     schedulerStatus: stats.errors ? "error" : userCount ? "success" : "warning",
-    schedulerEngine: "cloudflare-worker-jummah-v1",
+    schedulerEngine: "cloudflare-worker-jummah-v2",
     dryRun,
     userSource: "supabase-only",
     cronIntervalMinutes: 5,
     lastCronRun: new Date().toISOString(),
     subscriptionsTotal: userCount,
     usersWithJummah: userCount,
+    jummahTagFallback: usedFallback,
     locationGroups: groups.length,
     timeSource: groups.some((g) => g.jummahUseManualTime) && groups.some((g) => !g.jummahUseManualTime)
       ? "mixed"
@@ -479,6 +512,7 @@ export async function runJummahPushScheduler(env, options = {}, deps = {}) {
     recipients: stats.recipients,
     skippedPast: stats.skippedPast,
     skippedWindow: stats.skippedWindow,
+    catchups: stats.catchups || 0,
     duplicates: stats.duplicates,
     errors: stats.errors,
     lastPush: lastPlanned,
