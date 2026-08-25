@@ -148,6 +148,215 @@
     };
   }
 
+  function yamlQuote(value) {
+    return '"' + String(value || "").replace(/\\/g, "\\\\").replace(/"/g, '\\"') + '"';
+  }
+
+  function slugifyAdminTitle(value) {
+    return String(value || "beitrag")
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 80) || "beitrag";
+  }
+
+  function setYamlField(yaml, key, value) {
+    const line = `${key}: ${yamlQuote(value)}`;
+    const re = new RegExp(`^${key}:\\s*.*$`, "m");
+    if (re.test(yaml)) return yaml.replace(re, line);
+    return (String(yaml || "").trimEnd() + "\n" + line).trim();
+  }
+
+  function removeYamlField(yaml, key) {
+    return String(yaml || "")
+      .split(/\r?\n/)
+      .filter((line) => !new RegExp(`^${key}:\\s*`).test(line.trim()))
+      .join("\n")
+      .trim();
+  }
+
+  function ensureSlideFrontmatter(markdown, fallback) {
+    const raw = sanitizeSlideMarkdownBody(markdown);
+    const match = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+    let yaml = match ? match[1] || "" : "";
+    const body = match ? match[2] || "" : raw;
+    const id = frontmatterField(yaml, "id") || fallback?.id || fallback?.slug || slugifyAdminTitle(fallback?.title || "beitrag");
+    const title = frontmatterField(yaml, "title") || fallback?.title || id;
+    yaml = setYamlField(yaml, "id", id);
+    yaml = setYamlField(yaml, "title", title);
+    yaml = setYamlField(yaml, "type", "slide");
+    yaml = setYamlField(yaml, "layout", "slides");
+    if (!frontmatterField(yaml, "status")) yaml = setYamlField(yaml, "status", fallback?.status || "published");
+    return `---\n${yaml.trim()}\n---\n\n${body.trim()}\n`;
+  }
+
+  function ensureSingleFrontmatter(markdown, fallback) {
+    const raw = sanitizeSlideMarkdownBody(markdown);
+    const match = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+    if (!match) return raw;
+    let yaml = match[1] || "";
+    yaml = removeYamlField(removeYamlField(yaml, "type"), "layout");
+    if (!frontmatterField(yaml, "status")) yaml = setYamlField(yaml, "status", fallback?.status || "published");
+    return `---\n${yaml.trim()}\n---\n\n${String(match[2] || "").trim()}\n`;
+  }
+
+  function adminFallbackFromPanel(panel) {
+    const q = (name) => panel?.querySelector(`[data-live-field="${name}"]`)?.value || "";
+    return {
+      title: q("title"),
+      id: q("id") || q("slug"),
+      slug: q("slug") || q("id"),
+      status: q("status") || "published"
+    };
+  }
+
+  function adminAnalyzeStatus(markdown, mode) {
+    const audit = analyzeSlideMarkdown(markdown);
+    if (mode === "slide") {
+      if (audit.errors.length) return "Fehler: " + audit.errors.join(" · ");
+      if (audit.slideCount) return `Slide-Modus erkannt · ${audit.slideCount} Slides`;
+      if (!audit.hasBodyMarkers) return "Slide-Modus gewählt · bitte <!-- slide: 1 --> Marker einfügen";
+      return "Slide-Modus vorbereitet";
+    }
+    if (audit.isSlide || audit.hasBodyMarkers) return "Achtung: Markdown enthält Slide-Marker";
+    return "Einzelbeitrag vorbereitet";
+  }
+
+  function enhanceAdminPostEditor() {
+    if (typeof document === "undefined") return;
+    const panel = document.getElementById("liveEditEditorPanel");
+    const markdown = panel?.querySelector('[data-live-field="markdown"]');
+    const title = panel?.querySelector('[data-live-field="title"]');
+    if (!panel || !markdown || !title) return;
+
+    if (!panel.querySelector("[data-dar-post-mode-box]")) {
+      const audit = analyzeSlideMarkdown(markdown.value || "");
+      const inferred = audit.isSlide || audit.hasBodyMarkers ? "slide" : "single";
+      const box = document.createElement("div");
+      box.className = "live-edit-field dar-post-mode-box";
+      box.setAttribute("data-dar-post-mode-box", "1");
+      box.innerHTML = `
+        <label>Post-Art</label>
+        <div class="live-edit-devices" aria-label="Post-Art">
+          <label class="btn" style="gap:7px"><input type="radio" name="darPostMode" value="single" ${inferred === "single" ? "checked" : ""}> Einzelbeitrag</label>
+          <label class="btn primary" style="gap:7px"><input type="radio" name="darPostMode" value="slide" ${inferred === "slide" ? "checked" : ""}> Slide-Modus</label>
+        </div>
+        <p class="hint" data-dar-post-mode-status style="margin-top:8px">${adminAnalyzeStatus(markdown.value || "", inferred)}</p>`;
+      const markdownField = markdown.closest(".live-edit-field") || markdown;
+      markdownField.parentNode.insertBefore(box, markdownField);
+    }
+
+    const foot = panel.querySelector(".live-edit-editor-foot > div:last-child");
+    if (foot && !foot.querySelector("[data-dar-post-publish-mode]")) {
+      const single = document.createElement("button");
+      single.type = "button";
+      single.className = "btn";
+      single.setAttribute("data-dar-post-publish-mode", "single");
+      single.textContent = "Einzelbeitrag posten";
+      const slide = document.createElement("button");
+      slide.type = "button";
+      slide.className = "btn primary";
+      slide.setAttribute("data-dar-post-publish-mode", "slide");
+      slide.textContent = "Slide-Modus posten";
+      foot.insertBefore(single, foot.querySelector("[data-live-editor-publish]"));
+      foot.insertBefore(slide, foot.querySelector("[data-live-editor-publish]"));
+      const original = foot.querySelector("[data-live-editor-publish]");
+      if (original) original.textContent = "Auswahl veröffentlichen";
+    }
+
+    panel.querySelectorAll('input[name="darPostMode"]').forEach((radio) => {
+      radio.onchange = () => updateAdminPostModeStatus(panel);
+    });
+    markdown.oninput = () => updateAdminPostModeStatus(panel);
+    updateAdminPostModeStatus(panel);
+  }
+
+  function selectedAdminPostMode(panel) {
+    return panel?.querySelector('input[name="darPostMode"]:checked')?.value === "slide" ? "slide" : "single";
+  }
+
+  function updateAdminPostModeStatus(panel) {
+    const markdown = panel?.querySelector('[data-live-field="markdown"]');
+    const status = panel?.querySelector("[data-dar-post-mode-status]");
+    if (!markdown || !status) return;
+    status.textContent = adminAnalyzeStatus(markdown.value || "", selectedAdminPostMode(panel));
+  }
+
+  function prepareAdminPostMarkdown(panel, forcedMode) {
+    const markdown = panel?.querySelector('[data-live-field="markdown"]');
+    if (!markdown) return true;
+    const mode = forcedMode || selectedAdminPostMode(panel);
+    const fallback = adminFallbackFromPanel(panel);
+    let next = markdown.value || "";
+
+    if (mode === "slide") {
+      next = ensureSlideFrontmatter(next, fallback);
+      const check = validateSlideMarkdown(next);
+      if (!check.ok) {
+        alert("Slide-Modus blockiert:\n\n" + check.errors.join("\n"));
+        return false;
+      }
+      if (!check.info.slideCount && !check.info.hasBodyMarkers) {
+        alert("Slide-Modus blockiert: Es wurden keine <!-- slide: N --> Marker erkannt. Bitte den Markdown in Slides trennen.");
+        return false;
+      }
+      if (check.warnings.length && !confirm("Slide-Modus mit Warnung veröffentlichen?\n\n" + check.warnings.join("\n"))) {
+        return false;
+      }
+    } else {
+      const audit = analyzeSlideMarkdown(next);
+      if ((audit.isSlide || audit.hasBodyMarkers) && !confirm("Markdown enthält Slide-Marker oder Slide-Frontmatter. Wirklich als Einzelbeitrag posten?")) {
+        return false;
+      }
+      next = ensureSingleFrontmatter(next, fallback);
+    }
+
+    markdown.value = next;
+    markdown.dispatchEvent(new Event("input", { bubbles: true }));
+    updateAdminPostModeStatus(panel);
+    return true;
+  }
+
+  function installAdminPostModeEnhancer() {
+    if (typeof document === "undefined" || global.__DAR_ADMIN_POST_MODE_ENHANCER__) return;
+    global.__DAR_ADMIN_POST_MODE_ENHANCER__ = true;
+
+    document.addEventListener(
+      "click",
+      function (event) {
+        const custom = event.target?.closest?.("[data-dar-post-publish-mode]");
+        if (custom) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          const panel = document.getElementById("liveEditEditorPanel");
+          const mode = custom.getAttribute("data-dar-post-publish-mode") === "slide" ? "slide" : "single";
+          const radio = panel?.querySelector(`input[name="darPostMode"][value="${mode}"]`);
+          if (radio) radio.checked = true;
+          if (!prepareAdminPostMarkdown(panel, mode)) return;
+          panel?.querySelector("[data-live-editor-publish]")?.click();
+          return;
+        }
+
+        const publish = event.target?.closest?.("[data-live-editor-publish]");
+        if (publish) {
+          const panel = document.getElementById("liveEditEditorPanel");
+          if (panel?.querySelector("[data-dar-post-mode-box]") && !prepareAdminPostMarkdown(panel)) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+          }
+        }
+      },
+      true
+    );
+
+    const mo = new MutationObserver(() => enhanceAdminPostEditor());
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    document.addEventListener("DOMContentLoaded", enhanceAdminPostEditor);
+    setTimeout(enhanceAdminPostEditor, 250);
+  }
+
   global.DARSlidePostParser = {
     parseValue,
     normalizeSlideEntry,
@@ -156,7 +365,15 @@
     isSlidePostMode,
     isSlidePostRecord,
     parseSlidesFromBody,
+    splitFrontmatter,
+    frontmatterField,
     analyzeSlideMarkdown,
-    validateSlideMarkdown
+    validateSlideMarkdown,
+    ensureSlideFrontmatter,
+    ensureSingleFrontmatter,
+    prepareAdminPostMarkdown,
+    installAdminPostModeEnhancer
   };
+
+  installAdminPostModeEnhancer();
 })(typeof window !== "undefined" ? window : global);
