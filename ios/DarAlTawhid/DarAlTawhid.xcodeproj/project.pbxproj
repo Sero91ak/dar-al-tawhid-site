@@ -30,7 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A10000000000000000000010 /* DAR AL TAWḤID.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DAR AL TAWḤID.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A10000000000000000000010 /* DarAlTawhid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarAlTawhid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A10000000000000000000011 /* DarAlTawhidApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAlTawhidApp.swift; sourceTree = "<group>"; };
 		A10000000000000000000012 /* WebAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAppView.swift; sourceTree = "<group>"; };
 		A10000000000000000000013 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 		A10000000000000000000033 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A10000000000000000000010 /* DAR AL TAWḤID.app */,
+				A10000000000000000000010 /* DarAlTawhid.app */,
 				A20000000000000000000010 /* DarAlTawhidWidgets.appex */,
 			);
 			name = Products;
@@ -157,7 +157,7 @@
 			);
 			name = DarAlTawhid;
 			productName = DarAlTawhid;
-			productReference = A10000000000000000000010 /* DAR AL TAWḤID.app */;
+			productReference = A10000000000000000000010 /* DarAlTawhid.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A20000000000000000000040 /* DarAlTawhidWidgets */ = {
@@ -326,7 +326,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app;
-				PRODUCT_NAME = "DAR AL TAWḤID";
+				PRODUCT_NAME = DarAlTawhid;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -390,7 +390,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app;
-				PRODUCT_NAME = "DAR AL TAWḤID";
+				PRODUCT_NAME = DarAlTawhid;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -409,7 +409,7 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DarAlTawhid/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app;
-				PRODUCT_NAME = "DAR AL TAWḤID";
+				PRODUCT_NAME = DarAlTawhid;
 				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -423,7 +423,7 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DarAlTawhid/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app;
-				PRODUCT_NAME = "DAR AL TAWḤID";
+				PRODUCT_NAME = DarAlTawhid;
 				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
