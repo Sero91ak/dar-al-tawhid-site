@@ -4,25 +4,25 @@
   "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-25T21:55:23.659Z",
+  "updatedAt": "2026-08-25T22:00:23.665Z",
   "usersChecked": 11,
   "registrationsRead": 12,
   "uniqueSubscriptions": 11,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
-  "localTimeBerlin": "23:55",
-  "dateKeyBerlin": "2026-08-25",
+  "localTimeBerlin": "00:00",
+  "dateKeyBerlin": "2026-08-26",
   "duaWindow": {
     "hour": 9,
     "open": false,
     "catchupUntilHour": 14,
-    "alreadySentToday": 11
+    "alreadySentToday": 0
   },
   "recommendationWindow": {
     "hour": 12,
     "open": false,
     "catchupUntilHour": 20,
-    "alreadySentToday": 11
+    "alreadySentToday": 0
   },
   "duaCandidates": 0,
   "recCandidates": 0,
@@ -36,17 +36,17 @@
   "duplicates": 0,
   "errors": 0,
   "forceSend": null,
-  "dailyContentDate": "2026-08-25",
+  "dailyContentDate": "2026-08-26",
   "currentRecommendation": {
-    "id": "hukm-muhakamah-zwei-wege-glaube-und-ablehnung-432",
-    "title": "Glaube und Ablehnung haben verschiedene Enden",
-    "category": "Hukm & Muḥākamah",
-    "scholar": "aṭ-Ṭabarī"
+    "id": "ibn-qutaybah-ahl-al-hadith-bewahren-die-uberlieferung-296",
+    "title": "Ibn Qutaybah: Ahl al-Ḥadīth bewahren die Überlieferung",
+    "category": "Manhaj",
+    "scholar": "Ibn Qutaybah"
   },
   "currentDua": {
-    "id": "dua-044-rabbana-ghfir-li-wa-li-walidayya",
-    "title": "Duʿāʾ um Vergebung für sich, Eltern und Gläubige",
-    "category": "Vergebung & Eltern"
+    "id": "dua-045-ala-allahi-tawakkalna-rabbana-la-tajalna-fitnah",
+    "title": "Duʿāʾ nicht zur Prüfung für Ungerechte zu werden",
+    "category": "Tawakkul & Schutz vor Fitnah"
   },
   "configAutomatic": true,
   "lastError": "Außerhalb der Tagesfenster (Duʿāʾ ab 09:00, Empfehlung ab 12:00 Europe/Berlin)."
