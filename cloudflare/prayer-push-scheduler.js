@@ -15,8 +15,9 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const DEFAULT_PRAYER_ADVANCE_MINUTES = 15;
 const SCHEDULE_LOOKAHEAD_MINUTES = 26 * 60;
 const SCHEDULE_GRACE_MINUTES = 15;
-/** Vorab-Push darf nachgeholt werden, solange Entry noch mind. so viele Sekunden entfernt ist. */
+/** Vorab-Push nur nachholen, wenn das Gebet noch in der gewählten Vorwarnzeit liegt (5/10/15 Min), nicht für morgen (~26h). */
 const ADVANCE_CATCHUP_MIN_REMAINING_MS = 90 * 1000;
+const ADVANCE_CATCHUP_MAX_REMAINING_MS = 20 * 60 * 1000;
 /** Gebetszeit-Push darf kurz nach Eintritt nachgeholt werden (Cron-/Grace-Lücke), ohne sendAfter zu mutieren. */
 const ENTRY_CATCHUP_MAX_LATE_MS = 12 * 60 * 1000;
 const REFERENCE = { lat: 50.6256, lon: 6.9491, city: "Rheinbach", timeZone: "Europe/Berlin" };
@@ -377,7 +378,7 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
   const plannedAdvance = normAdvance(group.advanceMinutes);
   const entryGuessMs = sendAfter.getTime() + plannedAdvance * 60000;
   const remainingMinutes = mode === "advance"
-    ? Math.max(1, Math.round((entryGuessMs - Date.now()) / 60000))
+    ? Math.max(1, Math.min(plannedAdvance, Math.round((entryGuessMs - Date.now()) / 60000)))
     : null;
   const copy = enforcePrayerCopyGuard(notifyCopy(prayer, mode, group, remainingMinutes));
   if (copy.blocked) {
@@ -583,7 +584,8 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
             const msSinceEntry = now.getTime() - entryAt.getTime();
             const catchupAdvance =
               slot.mode === "advance" &&
-              msToEntry > ADVANCE_CATCHUP_MIN_REMAINING_MS;
+              msToEntry > ADVANCE_CATCHUP_MIN_REMAINING_MS &&
+              msToEntry <= ADVANCE_CATCHUP_MAX_REMAINING_MS;
             const catchupEntry =
               slot.mode === "entry" &&
               msSinceEntry >= 0 &&

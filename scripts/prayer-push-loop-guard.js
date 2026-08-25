@@ -22,6 +22,8 @@ const REQUIRED_STRINGS = [
   'const slots = [{ mode: "entry", sendAfter: entryAt }];',
   'slots.push({ mode: "advance", sendAfter: new Date(entryAt.getTime() - normAdvance(group.advanceMinutes) * 60000) });',
   "if (slot.sendAfter < windowStart)",
+  "ADVANCE_CATCHUP_MAX_REMAINING_MS",
+  "Math.min(plannedAdvance, Math.round((entryGuessMs - Date.now()) / 60000))",
   "if (slot.sendAfter > windowEnd)",
   "await sendPush(env, group, prayer, slot.sendAfter, slot.mode, stats, sentInRun);"
 ];
