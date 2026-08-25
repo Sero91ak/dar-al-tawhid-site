@@ -1341,6 +1341,11 @@ struct WebAppView: UIViewRepresentable {
             self.loadingProgressWidthConstraint = progressWidthConstraint
         }
 
+        private func raiseNativeChrome() {
+            guard let host = containerView, let bar = nativeChromeBar else { return }
+            host.bringSubviewToFront(bar)
+        }
+
         private func showLoadingOverlay(subtitle: String) {
             hideLoadingWorkItem?.cancel()
             let bootInk = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
@@ -1352,9 +1357,7 @@ struct WebAppView: UIViewRepresentable {
             overlay.isUserInteractionEnabled = true
             overlay.alpha = 1
             containerView?.bringSubviewToFront(overlay)
-            if let bar = nativeChromeBar {
-                containerView?.bringSubviewToFront(bar)
-            }
+            raiseNativeChrome()
             webView?.alpha = 0.001
             startLoadingProgress()
         }
