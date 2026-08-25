@@ -18,6 +18,8 @@ const SCHEDULE_GRACE_MINUTES = 15;
 /** Vorab-Push nur nachholen, wenn das Gebet noch in der gewählten Vorwarnzeit liegt (5/10/15 Min), nicht für morgen (~26h). */
 const ADVANCE_CATCHUP_MIN_REMAINING_MS = 90 * 1000;
 const ADVANCE_CATCHUP_MAX_REMAINING_MS = 20 * 60 * 1000;
+/** Bump: alte OneSignal-Pushes mit „in 1573 Min“ nicht per Idempotency wiederverwenden. */
+const ADVANCE_COPY_VERSION = "fixed-min-v2";
 /** Gebetszeit-Push darf kurz nach Eintritt nachgeholt werden (Cron-/Grace-Lücke), ohne sendAfter zu mutieren. */
 const ENTRY_CATCHUP_MAX_LATE_MS = 12 * 60 * 1000;
 const REFERENCE = { lat: 50.6256, lon: 6.9491, city: "Rheinbach", timeZone: "Europe/Berlin" };
@@ -236,23 +238,19 @@ function groupRegistrations(rows, onlySubId = "") {
   return Array.from(map.values());
 }
 
-function notifyTitle(prayer, mode, group, remainingMinutes = null) {
+function notifyTitle(prayer, mode, group) {
   const emoji = PRAYER_TITLE_EMOJI[prayer.key] || "";
   if (prayer.key === "tahajjud") return emoji ? `${emoji} Taḥajjud-Erinnerung` : "Taḥajjud-Erinnerung";
-  const m = Number.isFinite(remainingMinutes) && remainingMinutes > 0
-    ? Math.round(remainingMinutes)
-    : normAdvance(group.advanceMinutes);
+  const m = normAdvance(group.advanceMinutes);
   const baseTitle = mode === "advance" ? `${prayer.name} in ${m} Min` : `${prayer.name} ist eingetreten`;
   return emoji ? `${emoji} ${baseTitle}` : baseTitle;
 }
 
-function notifyCopy(prayer, mode, group, remainingMinutes = null) {
+function notifyCopy(prayer, mode, group) {
   const timeLabel = prayer.time == null ? "" : formatHour(prayer.time);
-  const m = Number.isFinite(remainingMinutes) && remainingMinutes > 0
-    ? Math.round(remainingMinutes)
-    : normAdvance(group.advanceMinutes);
+  const m = normAdvance(group.advanceMinutes);
   if (mode === "advance") {
-    const title = notifyTitle(prayer, mode, group, m);
+    const title = notifyTitle(prayer, mode, group);
     const body = buildAdvancePushBody(prayer.key, m, timeLabel);
     return {
       headings: { de: sanitizePrayerPushText(title), en: sanitizePrayerPushText(title) },
@@ -310,7 +308,8 @@ function schedId(group, prayer, sendAfter, mode) {
     group.methodAngle,
     group.asrFactor,
     group.advanceMinutes,
-    group.tahajjudMode
+    group.tahajjudMode,
+    mode === "advance" ? ADVANCE_COPY_VERSION : "entry-v1"
   ].join("|");
 }
 
@@ -330,6 +329,63 @@ async function postOneSignal(env, body) {
   let parsed = {};
   try { parsed = text ? JSON.parse(text) : {}; } catch (e) {}
   return { text, parsed, recipients: parsed.recipients ?? parsed.id ?? null };
+}
+
+function prayerAdvanceQueuedMinutes(notification) {
+  const text = [
+    notification?.headings?.de,
+    notification?.headings?.en,
+    notification?.contents?.de,
+    notification?.contents?.en
+  ].filter(Boolean).join(" ");
+  if (!/Fajr|Dhuhr|ʿAṣr|Maghrib|ʿIshā|Isha|Taḥajjud|\bAsr\b/i.test(text)) return null;
+  const matches = [...String(text).matchAll(/\bin (\d+) Min\b/gi)];
+  if (!matches.length) return null;
+  return Math.max(...matches.map((row) => Number(row[1])));
+}
+
+function isUnsentOneSignalNotification(notification) {
+  if (!notification || notification.canceled) return false;
+  const completed = notification.completed_at;
+  if (completed && completed !== 0) return false;
+  const remaining = Number(notification.remaining);
+  if (Number.isFinite(remaining) && remaining <= 0) return false;
+  return true;
+}
+
+async function cancelQueuedBadAdvancePushes(env, stats) {
+  const key = oneSignalApiKey(env);
+  const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
+  if (!key || !appId) return;
+  stats.cancelledBadAdvance = stats.cancelledBadAdvance || 0;
+  try {
+    for (const offset of [0, 50]) {
+      const res = await fetch(
+        `https://api.onesignal.com/notifications?app_id=${encodeURIComponent(appId)}&limit=50&offset=${offset}&kind=1`,
+        { headers: { Authorization: `Key ${key}` } }
+      );
+      const data = await res.json().catch(() => ({}));
+      const list = Array.isArray(data.notifications) ? data.notifications : [];
+      for (const item of list) {
+        const minutes = prayerAdvanceQueuedMinutes(item);
+        if (minutes == null || !Number.isFinite(minutes) || minutes <= 15) continue;
+        if (!isUnsentOneSignalNotification(item)) continue;
+        const id = String(item.id || "").trim();
+        if (!id) continue;
+        const cancelRes = await fetch(
+          `https://api.onesignal.com/notifications/${encodeURIComponent(id)}?app_id=${encodeURIComponent(appId)}`,
+          { method: "DELETE", headers: { Authorization: `Key ${key}` } }
+        );
+        if (cancelRes.ok) {
+          stats.cancelledBadAdvance += 1;
+          stats.cancelledBadAdvanceIds = (stats.cancelledBadAdvanceIds || []).concat(id).slice(0, 20);
+        }
+      }
+      if (list.length < 50) break;
+    }
+  } catch (err) {
+    stats.cancelledBadAdvanceError = err.message || String(err);
+  }
 }
 
 function invalidSubscriptionIds(parsed = {}) {
@@ -375,12 +431,7 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
   }
   sentInRun.add(idKey);
 
-  const plannedAdvance = normAdvance(group.advanceMinutes);
-  const entryGuessMs = sendAfter.getTime() + plannedAdvance * 60000;
-  const remainingMinutes = mode === "advance"
-    ? Math.max(1, Math.min(plannedAdvance, Math.round((entryGuessMs - Date.now()) / 60000)))
-    : null;
-  const copy = enforcePrayerCopyGuard(notifyCopy(prayer, mode, group, remainingMinutes));
+  const copy = enforcePrayerCopyGuard(notifyCopy(prayer, mode, group));
   if (copy.blocked) {
     throw new Error(`Push-Text blockiert (${prayer.key}/${mode}): enthält verbotene Formulierung`);
   }
@@ -538,9 +589,12 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
   const stats = {
     scheduled: 0, skippedPast: 0, skippedWindow: 0, duplicates: 0, recipients: 0, errors: 0,
     invalid: 0, invalidDisabled: 0,
-    planned: [], skippedPastDetails: [], oneSignalResponses: [], errorDetails: []
+    planned: [], skippedPastDetails: [], oneSignalResponses: [], errorDetails: [],
+    cancelledBadAdvance: 0
   };
   const sentInRun = new Set();
+
+  await cancelQueuedBadAdvancePushes(env, stats);
 
   let rows = [];
   let supabaseError = null;
@@ -652,6 +706,8 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
     advanceCatchups: stats.advanceCatchups || 0,
     entryCatchups: stats.entryCatchups || 0,
     duplicates: stats.duplicates,
+    cancelledBadAdvance: stats.cancelledBadAdvance || 0,
+    advanceCopyVersion: ADVANCE_COPY_VERSION,
     errors: stats.errors,
     lastError: stats.errors
       ? stats.errorDetails[0]

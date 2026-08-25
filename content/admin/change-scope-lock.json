@@ -89,11 +89,16 @@
     {
       "id": "prayer-advance-countdown-1573-2026-08-25",
       "approvedBy": "user-explicit-prayer-push-error-screenshot",
-      "reason": "Nutzer: Push „Dhuhr in 1573 Min“ / falscher Countdown. Catch-up und Anzeige auf 5/10/15 Min begrenzen.",
+      "reason": "Nutzer: Push „Dhuhr in 1573 Min“ / ʿAṣr erneut falsch. Vorwarn-Text immer 5/10/15 Min, alte OneSignal-Queue mit falschem Countdown stornieren.",
       "paths": [
         "content/admin/change-scope-lock.json",
         "cloudflare/prayer-push-scheduler.js",
-        "scripts/prayer-push-loop-guard.js"
+        "cloudflare/prayer-push-copy.js",
+        "cloudflare/worker.js",
+        "scripts/prayer-push-loop-guard.js",
+        "scripts/prayer-push-integrity-guard.js",
+        "index.html",
+        "test/index.html"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     },
