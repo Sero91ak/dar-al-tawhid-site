@@ -647,9 +647,7 @@ struct WebAppView: UIViewRepresentable {
             self.containerView = containerView
             self.tabBar = tabBar
             installLoadingOverlay(on: containerView)
-            if let tabBar {
-                containerView.bringSubviewToFront(tabBar)
-            }
+            containerView.bringSubviewToFront(tabBar)
             applySurfaceColor(pageSurfaceColor)
             showLoadingOverlay(subtitle: "App wird geladen")
             updateViewportInsets()
