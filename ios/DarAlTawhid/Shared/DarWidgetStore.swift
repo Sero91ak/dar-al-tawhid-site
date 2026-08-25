@@ -1,5 +1,4 @@
 import Foundation
-import WidgetKit
 
 enum DarWidgetStore {
     static var defaults: UserDefaults {
@@ -18,7 +17,7 @@ enum DarWidgetStore {
         if let data = try? JSONEncoder().encode(snapshot) {
             defaults.set(data, forKey: DarWidgetKeys.snapshot)
         }
-        WidgetCenter.shared.reloadAllTimelines()
+        // Widget extension is not embedded in the TestFlight app; skip timeline reloads.
     }
 
     static func setPendingDestination(_ dest: DarDeepLink.Destination) {

@@ -153,19 +153,6 @@ struct WebAppView: UIViewRepresentable {
               "  pointer-events:auto!important;",
               "  display:flex!important;",
               "}",
-              "html.dar-ios-native-app body.is-home-route,",
-              "html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen),",
-              "html.dar-ios-native-app body.is-more-route,",
-              "html.dar-ios-native-app body.is-quiz-route{",
-              "  padding-top:max(8px,var(--safe-top),var(--dar-native-safe-top,0px)) !important;",
-              "}",
-              "html.dar-ios-native-app body.is-feed-fullscreen{",
-              "  padding-top:max(0px,var(--safe-top),var(--dar-native-safe-top,0px)) !important;",
-              "}",
-              "html.dar-ios-native-app body.is-quran-overview #appView,",
-              "html.dar-ios-native-app body.is-quran-overview #appView.view{",
-              "  padding-top:max(6px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px)) !important;",
-              "}",
               "html.dar-ios-native-app body.has-bottom-nav{",
               "  padding-bottom:calc(var(--bottom-navigation-height,64px) + max(var(--safe-bottom),env(safe-area-inset-bottom,0px),var(--dar-native-safe-bottom,0px)) + 28px) !important;",
               "}",
@@ -529,11 +516,14 @@ struct WebAppView: UIViewRepresentable {
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate = context.coordinator
         webView.scrollView.contentInsetAdjustmentBehavior = .never
-        webView.scrollView.backgroundColor = bootInk
+        webView.scrollView.backgroundColor = .clear
         webView.allowsBackForwardNavigationGestures = true
-        webView.isOpaque = true
-        webView.backgroundColor = bootInk
+        webView.isOpaque = false
+        webView.backgroundColor = .clear
         webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.24-native-tabs"
+        if #available(iOS 15.0, *) {
+            webView.underPageBackgroundColor = .clear
+        }
         webView.onInsetsChange = { [weak coordinator = context.coordinator] in
             coordinator?.updateViewportInsets()
         }
@@ -853,9 +843,9 @@ struct WebAppView: UIViewRepresentable {
             if webView.scrollView.verticalScrollIndicatorInsets != .zero {
                 webView.scrollView.verticalScrollIndicatorInsets = .zero
             }
-            webView.scrollView.backgroundColor = pageSurfaceColor
+            webView.scrollView.backgroundColor = .clear
 
-            let topInset = max(resolvedInsets.top, 59)
+            let topInset = max(0, resolvedInsets.top)
             if abs(topInset - lastAppliedTopInset) < 0.5, lastAppliedTopInset >= 0 {
                 return
             }
@@ -872,14 +862,11 @@ struct WebAppView: UIViewRepresentable {
               if(!root)return;
               root.classList.add("dar-ios-native-app");
               root.style.setProperty("--dar-native-safe-top","\(top)px");
-              root.style.setProperty("--safe-top","\(top)px");
               var bottomNative=\(bottom);
               if(bottomNative > 1){
                 root.style.setProperty("--dar-native-safe-bottom", bottomNative.toFixed(2) + "px");
-                root.style.setProperty("--safe-bottom", bottomNative.toFixed(2) + "px");
               } else {
                 root.style.removeProperty("--dar-native-safe-bottom");
-                root.style.removeProperty("--safe-bottom");
               }
               root.style.setProperty("--dar-ios-safe-left","\(left)px");
               root.style.setProperty("--dar-ios-safe-right","\(right)px");
@@ -908,16 +895,16 @@ struct WebAppView: UIViewRepresentable {
 
         private func applySurfaceColor(_ color: UIColor) {
             pageSurfaceColor = color
-            backdropView?.updateColors(top: color, mid: color, bottom: color)
-            containerView?.backgroundColor = color
-            webView?.scrollView.backgroundColor = color
-            webView?.backgroundColor = color
-            webView?.isOpaque = true
+            // Keep the native chrome clear after boot so the web glass/status area
+            // is not covered by a pinned opaque field.
+            backdropView?.isHidden = true
+            containerView?.backgroundColor = .clear
+            webView?.scrollView.backgroundColor = .clear
+            webView?.backgroundColor = .clear
+            webView?.isOpaque = false
             if #available(iOS 15.0, *) {
-                webView?.underPageBackgroundColor = color
+                webView?.underPageBackgroundColor = .clear
             }
-            webView?.window?.backgroundColor = color
-            // Keep boot overlay ink while loading, otherwise theme updates hide the progress UI.
             if !isBootLoadingVisible {
                 loadingOverlay?.backgroundColor = color
             }
@@ -931,7 +918,6 @@ struct WebAppView: UIViewRepresentable {
             let midColor = color(from: midHex) ?? topColor
             let bottomColor = color(from: bottomHex) ?? topColor
             applySurfaceColor(topColor)
-            backdropView?.updateColors(top: topColor, mid: midColor, bottom: bottomColor)
         }
 
         private func color(from hex: String?) -> UIColor? {

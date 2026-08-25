@@ -41,6 +41,10 @@
 	<string>Der Standort wird nur genutzt, wenn du standortbezogene Gebetszeiten oder die Qibla-Funktion verwenden moechtest.</string>
 	<key>NSMotionUsageDescription</key>
 	<string>Bewegungsdaten werden nur genutzt, wenn du den Qibla-Kompass auf dem Geraet verwenden moechtest.</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIColorName</key>
