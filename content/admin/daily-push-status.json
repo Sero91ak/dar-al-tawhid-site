@@ -4,19 +4,19 @@
   "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-25T06:55:19.614Z",
+  "updatedAt": "2026-08-25T07:05:19.632Z",
   "usersChecked": 11,
   "registrationsRead": 12,
   "uniqueSubscriptions": 11,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
-  "localTimeBerlin": "08:55",
+  "localTimeBerlin": "09:05",
   "dateKeyBerlin": "2026-08-25",
   "duaWindow": {
     "hour": 9,
-    "open": false,
+    "open": true,
     "catchupUntilHour": 14,
-    "alreadySentToday": 0
+    "alreadySentToday": 11
   },
   "recommendationWindow": {
     "hour": 12,
@@ -33,7 +33,7 @@
   },
   "invalidSubscriptionsDisabled": 0,
   "skipped": 0,
-  "duplicates": 0,
+  "duplicates": 11,
   "errors": 0,
   "forceSend": null,
   "dailyContentDate": "2026-08-25",
@@ -49,5 +49,5 @@
     "category": "Vergebung & Eltern"
   },
   "configAutomatic": true,
-  "lastError": "Außerhalb der Tagesfenster (Duʿāʾ ab 09:00, Empfehlung ab 12:00 Europe/Berlin)."
+  "lastError": null
 }
