@@ -51,6 +51,7 @@ requireText("Copy", copy, [
   "export const PRAYER_ENTRY_PUSH_VARIANTS",
   "export function sanitizePrayerPushText",
   "export function hasBlockedPrayerPhrase",
+  "export function clampPrayerAdvanceMinutes",
   "ruft\\s+dich",
   "ʿAṣr-Zeit ist eingetreten"
 ]);
@@ -62,7 +63,9 @@ requireText("Scheduler", scheduler, [
   'userSource: "supabase-only"',
   'schedulerEngine: "cloudflare-worker-cron-v2"',
   "loadRegistrations",
-  "sendPush("
+  "sendPush(",
+  "ADVANCE_COPY_VERSION",
+  "cancelQueuedBadAdvancePushes"
 ]);
 
 const loopGuard = read("scripts/prayer-push-loop-guard.js");

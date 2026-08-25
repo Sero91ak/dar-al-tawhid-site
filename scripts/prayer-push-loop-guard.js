@@ -23,7 +23,8 @@ const REQUIRED_STRINGS = [
   'slots.push({ mode: "advance", sendAfter: new Date(entryAt.getTime() - normAdvance(group.advanceMinutes) * 60000) });',
   "if (slot.sendAfter < windowStart)",
   "ADVANCE_CATCHUP_MAX_REMAINING_MS",
-  "Math.min(plannedAdvance, Math.round((entryGuessMs - Date.now()) / 60000))",
+  "ADVANCE_COPY_VERSION",
+  "cancelQueuedBadAdvancePushes",
   "if (slot.sendAfter > windowEnd)",
   "await sendPush(env, group, prayer, slot.sendAfter, slot.mode, stats, sentInRun);"
 ];
@@ -40,6 +41,10 @@ const FORBIDDEN_PATTERNS = [
   {
     re: /scheduleSeed\([^)]*sendAfter\.toISOString\(\)/,
     reason: "scheduleSeed muss slotDay verwenden, nicht sendAfter.toISOString()"
+  },
+  {
+    re: /entryGuessMs\s*-\s*Date\.now\(\)/,
+    reason: "Vorwarn-Minuten dürfen nicht aus Date.now() berechnet und in den Push-Text gebacken werden"
   }
 ];
 
