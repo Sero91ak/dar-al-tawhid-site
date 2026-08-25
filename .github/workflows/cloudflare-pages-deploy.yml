@@ -150,20 +150,16 @@ jobs:
           failed=0
           while IFS= read -r file; do
             [ -z "$file" ] && continue
-            case "$file" in
-              q/[0-9]*/index.html)
-                test -s "$file" || { echo "FEHLER $file: leer oder fehlt"; failed=1; continue; }
-                grep -q 'DAR AL TAWḤĪD' "$file" || { echo "FEHLER $file: Branding fehlt"; failed=1; }
-                grep -q 'property="og:image"' "$file" || { echo "FEHLER $file: og:image fehlt"; failed=1; }
-                grep -q 'name="twitter:image"' "$file" || { echo "FEHLER $file: twitter:image fehlt"; failed=1; }
-                grep -q 'property="og:site_name" content="DAR AL TAWḤĪD"' "$file" || { echo "FEHLER $file: og:site_name fehlt"; failed=1; }
-                if grep -q 'file://' "$file"; then
-                  echo "FEHLER $file: file:// darf nicht in öffentlichen Quellenlinks stehen"
-                  failed=1
-                fi
-                ;;
-            esac
-          done < <(find q -mindepth 2 -maxdepth 2 -name index.html -type f | sort)
+            test -s "$file" || { echo "FEHLER $file: leer oder fehlt"; failed=1; continue; }
+            grep -q 'DAR AL TAWḤĪD' "$file" || { echo "FEHLER $file: Branding fehlt"; failed=1; }
+            grep -q 'property="og:image"' "$file" || { echo "FEHLER $file: og:image fehlt"; failed=1; }
+            grep -q 'name="twitter:image"' "$file" || { echo "FEHLER $file: twitter:image fehlt"; failed=1; }
+            grep -q 'property="og:site_name" content="DAR AL TAWḤĪD"' "$file" || { echo "FEHLER $file: og:site_name fehlt"; failed=1; }
+            if grep -q 'file://' "$file"; then
+              echo "FEHLER $file: file:// darf nicht in öffentlichen Quellenlinks stehen"
+              failed=1
+            fi
+          done < <(find q -mindepth 2 -maxdepth 2 -name index.html -type f | grep -E '^q/[0-9]+/index\.html$' | sort)
           exit "$failed"
 
       - name: Quellenlinks direkt deployen
@@ -181,9 +177,9 @@ jobs:
           if [ -n "$BASE" ] && [ "$BASE" != '0000000000000000000000000000000000000000' ]; then
             FILES="$(git diff --name-only "$BASE" "$GITHUB_SHA" | grep '^q/[0-9]\+/index\.html$' || true)"
           else
-            FILES="$(find q -mindepth 2 -maxdepth 2 -name index.html -type f | sort)"
+            FILES="$(find q -mindepth 2 -maxdepth 2 -name index.html -type f | grep -E '^q/[0-9]+/index\.html$' | sort)"
           fi
-          [ -n "$FILES" ] || FILES="$(find q -mindepth 2 -maxdepth 2 -name index.html -type f | sort)"
+          [ -n "$FILES" ] || FILES="$(find q -mindepth 2 -maxdepth 2 -name index.html -type f | grep -E '^q/[0-9]+/index\.html$' | sort)"
           while IFS= read -r file; do
             [ -z "$file" ] && continue
             num="${file#q/}"
