@@ -7,7 +7,7 @@ final class DarNativeTabBar: UIView {
     private var buttons: [UIButton] = []
     private let items: [(id: String, title: String, symbol: String)] = [
         ("home", "Start", "house.fill"),
-        ("quiz", "Quiz", "brain.head.profile"),
+        ("quiz", "Quiz", "brain"),
         ("feed", "Feed", "sparkles"),
         ("quran", "Qurʾān", "book.fill"),
         ("more", "Mehr", "line.3.horizontal")

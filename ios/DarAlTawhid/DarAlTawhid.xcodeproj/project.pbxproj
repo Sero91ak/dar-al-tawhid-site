@@ -13,6 +13,7 @@
 		A10000000000000000000004 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A10000000000000000000014 /* WebKit.framework */; };
 		A10000000000000000000005 /* DarAppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000016 /* DarAppRouter.swift */; };
 		A1000000000000000000000B /* DarNativeTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000018 /* DarNativeTabBar.swift */; };
+		A1000000000000000000000C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000000000000000000014 /* WidgetKit.framework */; };
 		A10000000000000000000006 /* DarDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000011 /* DarDeepLink.swift */; };
 		A10000000000000000000007 /* DarWidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000012 /* DarWidgetSnapshot.swift */; };
 		A10000000000000000000008 /* DarWidgetStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000013 /* DarWidgetStore.swift */; };
@@ -82,6 +83,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A10000000000000000000004 /* WebKit.framework in Frameworks */,
+				A1000000000000000000000C /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
