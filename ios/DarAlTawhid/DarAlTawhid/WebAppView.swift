@@ -533,7 +533,7 @@ struct WebAppView: UIViewRepresentable {
         webView.allowsBackForwardNavigationGestures = true
         webView.isOpaque = true
         webView.backgroundColor = bootInk
-        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.23-native-tabs"
+        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.24-native-tabs"
         webView.onInsetsChange = { [weak coordinator = context.coordinator] in
             coordinator?.updateViewportInsets()
         }
