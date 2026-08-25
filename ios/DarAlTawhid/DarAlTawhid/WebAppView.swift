@@ -571,9 +571,8 @@ struct WebAppView: UIViewRepresentable {
     }
 
     func updateUIView(_ view: UIView, context: Context) {
-        if let destination {
-            context.coordinator.navigate(to: destination)
-        }
+        guard let route = destination else { return }
+        context.coordinator.navigate(to: route)
     }
 
     final class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler {
@@ -587,7 +586,7 @@ struct WebAppView: UIViewRepresentable {
         private weak var webView: WKWebView?
         private weak var backdropView: GradientBackdropView?
         private weak var containerView: UIView?
-        private weak var tabBar: DarNativeTabBar?
+        private weak var nativeChromeBar: DarNativeTabBar?
         private weak var loadingOverlay: UIView?
         private var pageSurfaceColor = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
         private weak var loadingLabel: UILabel?
@@ -645,7 +644,7 @@ struct WebAppView: UIViewRepresentable {
             self.webView = webView
             self.backdropView = backdropView
             self.containerView = containerView
-            self.tabBar = tabBar
+            self.nativeChromeBar = tabBar
             installLoadingOverlay(on: containerView)
             containerView.bringSubviewToFront(tabBar)
             applySurfaceColor(pageSurfaceColor)
@@ -692,7 +691,7 @@ struct WebAppView: UIViewRepresentable {
             }
             lastOpenedDestination = dest
             webView?.evaluateJavaScript("location.hash=\(Self.jsString(hash));", completionHandler: nil)
-            tabBar?.select(id: id)
+            nativeChromeBar?.select(id: id)
         }
 
         func navigate(to destination: DarDeepLink.Destination, force: Bool = false) {
@@ -1353,8 +1352,8 @@ struct WebAppView: UIViewRepresentable {
             overlay.isUserInteractionEnabled = true
             overlay.alpha = 1
             containerView?.bringSubviewToFront(overlay)
-            if let tabBar {
-                containerView?.bringSubviewToFront(tabBar)
+            if let bar = nativeChromeBar {
+                containerView?.bringSubviewToFront(bar)
             }
             webView?.alpha = 0.001
             startLoadingProgress()
