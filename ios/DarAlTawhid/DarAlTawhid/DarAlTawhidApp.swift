@@ -8,8 +8,7 @@ struct DarAlTawhidApp: App {
     init() {
         // Boot surface = loading theme ink until live page theme arrives.
         // Architecture: ThemeBackground ignoresSafeArea; content stays inset in WebAppView.
-        let bootInk = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
-        UIWindow.appearance().backgroundColor = bootInk
+        UIWindow.appearance().backgroundColor = .black
         let snap = DarDailyContent.refresh(DarWidgetStore.load())
         DarWidgetStore.save(snap)
     }
@@ -17,8 +16,8 @@ struct DarAlTawhidApp: App {
     var body: some Scene {
         WindowGroup {
             WebAppView(destination: router.destination)
-                .ignoresSafeArea() // theme/webview chrome only; content padded via global iOS scaffold CSS
-                .background(Color(red: 0.02, green: 0.02, blue: 0.01))
+                .ignoresSafeArea()
+                .background(Color.clear)
                 .onOpenURL { url in
                     router.open(url)
                 }
