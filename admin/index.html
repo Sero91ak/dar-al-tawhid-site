@@ -26,8 +26,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v63-video-studio-voice-brand";
-  var MIG_KEY="darAdminSwFixV27";
+  var ADMIN_SW_CACHE="dar-admin-stats-v65-hang-fix";
+  var MIG_KEY="darAdminSwFixV29";
+  var RELOAD_KEY="darAdminSwReloadBudget";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
     if(!("caches" in window))return Promise.resolve();
@@ -35,6 +36,12 @@
       return Promise.all(keys.filter(function(k){
         return (k.indexOf("dar-admin-stats-")===0&&k!==ADMIN_SW_CACHE)||k.indexOf("dar-al-tawhid-offline-light-")===0;
       }).map(function(k){return caches.delete(k)}));
+    });
+  }
+  function dropAllWorkers(){
+    if(!("serviceWorker" in navigator))return Promise.resolve();
+    return navigator.serviceWorker.getRegistrations().then(function(regs){
+      return Promise.all(regs.map(function(reg){return reg.unregister().catch(function(){})}));
     });
   }
   function dropVisitorWorkers(){
@@ -47,49 +54,59 @@
       }));
     });
   }
+  function reloadBudgetOk(){
+    try{
+      var n=Number(sessionStorage.getItem(RELOAD_KEY)||"0")||0;
+      if(n>=2)return false;
+      sessionStorage.setItem(RELOAD_KEY,String(n+1));
+      return true;
+    }catch(e){return false}
+  }
+  function softReload(){
+    if(!reloadBudgetOk())return;
+    location.reload();
+  }
   function registerAdmin(){
     if(!("serviceWorker" in navigator))return Promise.resolve();
+    // Nach Reload-Budget: kein SW mehr registrieren (bricht Endlosschleifen).
+    try{if(Number(sessionStorage.getItem(RELOAD_KEY)||"0")>=2)return Promise.resolve()}catch(e){}
     return navigator.serviceWorker.register("/admin/sw.js",{scope:"/admin/",updateViaCache:"none"}).then(function(reg){
       reg.update().catch(function(){});
       if(reg.waiting&&navigator.serviceWorker.controller){
         reg.waiting.postMessage({type:"SKIP_WAITING"});
       }
-      reg.addEventListener("updatefound",function(){
-        var worker=reg.installing;
-        if(!worker)return;
-        worker.addEventListener("statechange",function(){
-          if(worker.state==="installed"&&navigator.serviceWorker.controller){
-            location.reload();
-          }
+      // Nur ein Reload über controllerchange — kein zweites reload in updatefound.
+      if(!window.__darAdminSwCtrlHook){
+        window.__darAdminSwCtrlHook=true;
+        navigator.serviceWorker.addEventListener("controllerchange",function(){
+          softReload();
         });
-      });
-      navigator.serviceWorker.addEventListener("controllerchange",function(){
-        if(sessionStorage.getItem("darAdminSwReloaded")!=="1"){
-          sessionStorage.setItem("darAdminSwReloaded","1");
-          location.reload();
-        }
-      });
+      }
     });
   }
   window.__DAR_ADMIN_REPAIR__=function(){
-    if(!("serviceWorker" in navigator))return cleanCaches().then(function(){location.replace("/admin/?repair=1")});
-    return navigator.serviceWorker.getRegistrations().then(function(regs){
-      return Promise.all(regs.map(function(reg){return reg.unregister().catch(function(){})}));
-    }).then(cleanCaches).then(function(){
-      try{localStorage.removeItem(MIG_KEY)}catch(e){}
-      location.replace("/admin/?repair=1");
+    try{sessionStorage.removeItem(RELOAD_KEY);localStorage.removeItem(MIG_KEY)}catch(e){}
+    return dropAllWorkers().then(cleanCaches).then(function(){
+      location.replace("/admin/?repair=1&t="+Date.now());
     });
   };
+  // Sofort-Reparatur-URL: bricht SW-Schleifen auf dem Gerät.
+  if(/[?&](repair|swfix)=1\b/.test(location.search||"")){
+    dropAllWorkers().then(cleanCaches).then(function(){
+      try{localStorage.setItem(MIG_KEY,"done");sessionStorage.removeItem(RELOAD_KEY)}catch(e){}
+      if(/[?&]repair=1\b/.test(location.search||"")){
+        // Einmalig ohne Query neu öffnen, damit die App normal startet.
+        location.replace("/admin/?boot=1&t="+Date.now());
+        return;
+      }
+      registerAdmin().catch(function(){});
+    }).catch(function(){});
+    return;
+  }
   if("serviceWorker" in navigator&&localStorage.getItem(MIG_KEY)!=="done"){
-    navigator.serviceWorker.getRegistrations().then(function(regs){
-      if(!regs.length){localStorage.setItem(MIG_KEY,"done");return registerAdmin()}
-      return Promise.all(regs.map(function(reg){return reg.unregister().catch(function(){})}))
-        .then(cleanCaches)
-        .then(function(){
-          localStorage.setItem(MIG_KEY,"done");
-          location.replace("/admin/?swfix=1");
-        });
-    }).catch(function(){localStorage.setItem(MIG_KEY,"done")});
+    // Nicht blockierend: Migration im Hintergrund, UI sofort weiterladen
+    try{localStorage.setItem(MIG_KEY,"done")}catch(e){}
+    dropAllWorkers().then(cleanCaches).then(registerAdmin).catch(function(){});
     return;
   }
   dropVisitorWorkers().then(cleanCaches).then(registerAdmin).catch(function(){});
@@ -600,7 +617,7 @@ const DEFAULT_WORKER_PUBLISH_URL="https://dar-admin-publisher.sero91ak.workers.d
 const WORKER_PUBLISH_URL_KEY="darAdminWorkerPublishUrlV1";
 const WORKER_SECRET_KEY="darAdminWorkerSecretV1";
 const ADMIN_DRAFT_KEY="darAdminDraftV1";
-const ADMIN_BUILD="2026-06-18-no-stories";
+const ADMIN_BUILD="2026-08-22-admin-hang-fix";
 const ADMIN_PLAN_KEY="darAdminPlannedPostsV1";
 const ADMIN_NEWS_KEY="darAdminNewsDraftsV1";
 const ADMIN_REPORTS_KEY="darAdminReportsV1";
@@ -849,8 +866,13 @@ function previewSize(){
 }
 function savePreviewSize(size){try{localStorage.setItem(ADMIN_PREVIEW_SIZE_KEY,JSON.stringify(size))}catch(e){}}
 function normalizeWorkerPublishUrl(url){
-  const raw=String(url||"").trim();
-  return(!raw||raw==="/api/admin/publish")?DEFAULT_WORKER_PUBLISH_URL:raw;
+  let raw=String(url||"").trim();
+  if(!raw||raw==="/api/admin/publish"||raw==="/publish")return DEFAULT_WORKER_PUBLISH_URL;
+  // Häufige Tippfehler aus Screenshots/Autokorrektur korrigieren
+  raw=raw.replace(/^https?:\/\/(?!dar-)([a-z0-9-]*admin-publisher\.sero91ak\.workers\.dev)/i,"https://dar-$1");
+  raw=raw.replace(/^https?:\/\/r-admin-publisher\.sero91ak\.workers\.dev/i,"https://dar-admin-publisher.sero91ak.workers.dev");
+  raw=raw.replace(/^https?:\/\/dar-admin-publisher\.sero91ak\.workers\.dev\/?$/i,DEFAULT_WORKER_PUBLISH_URL);
+  return raw;
 }
 function workerPublishUrl(){
   try{
@@ -858,6 +880,21 @@ function workerPublishUrl(){
   }catch(e){return normalizeWorkerPublishUrl(String((window.DAR_WORKER_CONFIG||{}).publishUrl||DEFAULT_WORKER_PUBLISH_URL))}
 }
 function saveWorkerPublishUrl(url){try{if(url)localStorage.setItem(WORKER_PUBLISH_URL_KEY,normalizeWorkerPublishUrl(url));else localStorage.removeItem(WORKER_PUBLISH_URL_KEY)}catch(e){}}
+function saveWorkerConnectionFromForm(opts={}){
+  const publishUrl=(document.getElementById("workerPublishUrlInput")?.value||workerPublishUrl()).trim();
+  const secret=(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()).trim();
+  const rememberEl=document.getElementById("rememberWorkerSecret");
+  if(!publishUrl)throw new Error("Worker-URL fehlt");
+  if(!secret)throw new Error("Admin Worker Secret fehlt");
+  saveWorkerPublishUrl(publishUrl);
+  if(rememberEl)rememberEl.checked=true;
+  setSavedWorkerSecret(secret);
+  if(document.getElementById("workerPublishUrlInput"))document.getElementById("workerPublishUrlInput").value=normalizeWorkerPublishUrl(publishUrl);
+  if(document.getElementById("workerSecretInput"))document.getElementById("workerSecretInput").value=secret;
+  if(opts.silent)return{publishUrl:normalizeWorkerPublishUrl(publishUrl),secret};
+  setUploadStatus("Worker-Verbindung gespeichert. Bibliothek-Live-Push kann jetzt autorisieren.");
+  return{publishUrl:normalizeWorkerPublishUrl(publishUrl),secret};
+}
 function resolveWorkerUrl(url){const raw=normalizeWorkerPublishUrl(url);return /^https?:\/\//i.test(raw)?raw:new URL(raw,SITE_ORIGIN).toString()}
 function workerHealthUrl(){
   const url=new URL(resolveWorkerUrl(workerPublishUrl()));
@@ -2268,7 +2305,7 @@ function renderLogin(){
       <input id="pinInput" type="password" inputmode="text" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Admin-Passwort">
       <button class="btn primary" id="loginBtn" type="button">Dashboard öffnen</button>
       <button class="btn" id="adminRepairBtn" type="button" style="margin-top:10px">Admin-Cache reparieren</button>
-      <div class="hint"><strong>Als eigene Admin-App speichern:</strong><br>iPhone: Safari teilen, dann „Zum Home-Bildschirm“.<br>Android: Browser-Menü, dann „App installieren“.<br><br>URL: <strong>${esc(location.origin+"/admin/")}</strong></div>
+      <div class="hint"><strong>Als eigene Admin-App speichern:</strong><br>iPhone: Safari teilen, dann „Zum Home-Bildschirm“.<br>Android: Browser-Menü, dann „App installieren“.<br><br>URL: <strong>${esc(location.origin+"/admin/")}</strong><br><br>Falls die Admin-App weiß bleibt oder nicht öffnet: <a href="/admin/?repair=1" style="color:var(--gold);font-weight:900">Cache reparieren</a> tippen.</div>
     </section>`;
   const btn=document.getElementById("loginBtn"),input=document.getElementById("pinInput");
   btn.onclick=()=>{if(checkPin(input.value.trim())){setAuth(true);renderApp()}else alert("Falsches Passwort.")};
@@ -2919,11 +2956,12 @@ function renderActions(rows){
           <input class="field" id="workerPublishUrlInput" value="${esc(workerPublishUrl())}" placeholder="${esc(DEFAULT_WORKER_PUBLISH_URL)}">
           <input class="field" id="workerSecretInput" type="password" autocomplete="off" value="${esc(savedWorkerSecret())}" placeholder="Admin Worker Secret" style="margin-top:8px">
           <label class="upload-status" style="display:flex;align-items:center;gap:8px;margin:8px 0 0;min-height:38px">
-            <input id="rememberWorkerSecret" type="checkbox" ${savedWorkerSecret()?"checked":""}>
+            <input id="rememberWorkerSecret" type="checkbox" checked>
             <span>Worker Secret auf diesem Gerät merken</span>
           </label>
+          <button class="btn primary" id="saveWorkerConnectionBtn" type="button" style="margin-top:8px;width:100%;justify-content:center">Worker-Verbindung speichern</button>
           <button class="btn" id="forgetWorkerSecretBtn" type="button" style="margin-top:8px">Worker Secret löschen</button>
-          <div class="upload-status" style="margin-top:10px">GitHub Token bleibt nur als Cloudflare Secret gespeichert. Die Admin-App sendet Markdown an den Worker; der Worker erstellt Beitrag und posts-index.json.</div>
+          <div class="upload-status" style="margin-top:10px">URL: <code>https://dar-admin-publisher.sero91ak.workers.dev</code> (mit/ohne <code>/publish</code>). Secret: <code>DarAdminLive2026Publish</code> — nicht GitHub-Token. Erst <b>speichern</b>, dann Bibliothek live pushen.</div>
         </div>
       </details>
       <details class="admin-fold">
@@ -3448,6 +3486,16 @@ function bindUi(){
   const jummahRunBtnActions=document.getElementById("adminJummahRunBtnActions");if(jummahRunBtnActions)jummahRunBtnActions.onclick=()=>runAdminJummahScheduler({live:false});
   const jummahLiveBtnActions=document.getElementById("adminJummahLiveBtnActions");if(jummahLiveBtnActions)jummahLiveBtnActions.onclick=()=>runAdminJummahScheduler({live:true});
   if(document.getElementById("adminJummahPushStatus")||document.getElementById("adminJummahPushStatusActions"))loadAdminJummahPushStatus();
+  const saveWorkerConnectionBtn=document.getElementById("saveWorkerConnectionBtn");
+  if(saveWorkerConnectionBtn)saveWorkerConnectionBtn.onclick=()=>{
+    try{saveWorkerConnectionFromForm()}catch(e){setUploadStatus(String(e.message||e))}
+  };
+  const workerSecretInput=document.getElementById("workerSecretInput");
+  if(workerSecretInput){
+    const persist=()=>{try{if((workerSecretInput.value||"").trim())saveWorkerConnectionFromForm({silent:true})}catch(e){}};
+    workerSecretInput.addEventListener("change",persist);
+    workerSecretInput.addEventListener("blur",persist);
+  }
   const forgetWorkerSecretBtn=document.getElementById("forgetWorkerSecretBtn");if(forgetWorkerSecretBtn)forgetWorkerSecretBtn.onclick=()=>{setSavedWorkerSecret("");const input=document.getElementById("workerSecretInput");if(input)input.value="";const remember=document.getElementById("rememberWorkerSecret");if(remember)remember.checked=false;setUploadStatus("Worker Secret wurde von diesem Gerät gelöscht.")};
   document.querySelectorAll("[data-scroll-upload]").forEach(btn=>btn.onclick=()=>document.getElementById("postMarkdownInput")?.scrollIntoView({behavior:"smooth",block:"center"}));
   bindCommandCenterForms();

@@ -12,6 +12,7 @@ on:
       - service-worker.js
       - manifest.json
       - assets/**
+      - q/**
       - links/**
       - data/scholar-index-meta.json
       - data/scholar-history-curated.json
@@ -34,6 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       shortlinks_only: ${{ steps.scope.outputs.shortlinks_only }}
+      qsource_only: ${{ steps.scope.outputs.qsource_only }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -45,11 +47,13 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" != "push" ]; then
             echo "shortlinks_only=false" >> "$GITHUB_OUTPUT"
+            echo "qsource_only=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           BASE="${{ github.event.before }}"
           if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
             echo "shortlinks_only=false" >> "$GITHUB_OUTPUT"
+            echo "qsource_only=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           CHANGED="$(git diff --name-only "$BASE" "$GITHUB_SHA")"
@@ -62,6 +66,11 @@ jobs:
             fi
           else
             echo "shortlinks_only=false" >> "$GITHUB_OUTPUT"
+          fi
+          if [ -n "$CHANGED" ] && [ -z "$(printf '%s\n' "$CHANGED" | grep -Ev '^(q/|assets/q-source-dar-al-layl\.css$)' || true)" ]; then
+            echo "qsource_only=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "qsource_only=false" >> "$GITHUB_OUTPUT"
           fi
 
   deploy-shortlinks:
@@ -122,9 +131,76 @@ jobs:
           done < _redirects
           exit "$failed"
 
+  deploy-qsource:
+    needs: classify
+    if: needs.classify.outputs.qsource_only == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Quellenlink-Seiten prüfen
+        shell: bash
+        run: |
+          failed=0
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            test -s "$file" || { echo "FEHLER $file: leer oder fehlt"; failed=1; continue; }
+            grep -q 'DAR AL TAWḤĪD' "$file" || { echo "FEHLER $file: Branding fehlt"; failed=1; }
+            grep -q 'property="og:image"' "$file" || { echo "FEHLER $file: og:image fehlt"; failed=1; }
+            grep -q 'name="twitter:image"' "$file" || { echo "FEHLER $file: twitter:image fehlt"; failed=1; }
+            grep -q 'property="og:site_name" content="DAR AL TAWḤĪD"' "$file" || { echo "FEHLER $file: og:site_name fehlt"; failed=1; }
+            if grep -q 'file://' "$file"; then
+              echo "FEHLER $file: file:// darf nicht in öffentlichen Quellenlinks stehen"
+              failed=1
+            fi
+          done < <(find q -mindepth 2 -maxdepth 2 -name index.html -type f | grep -E '^q/[0-9]+/index\.html$' | sort)
+          exit "$failed"
+
+      - name: Quellenlinks direkt deployen
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+
+      - name: Quellenlink-Live-Smoke-Test
+        shell: bash
+        run: |
+          failed=0
+          BASE='${{ github.event.before }}'
+          if [ -n "$BASE" ] && [ "$BASE" != '0000000000000000000000000000000000000000' ]; then
+            FILES="$(git diff --name-only "$BASE" "$GITHUB_SHA" | grep '^q/[0-9]\+/index\.html$' || true)"
+          else
+            FILES="$(find q -mindepth 2 -maxdepth 2 -name index.html -type f | grep -E '^q/[0-9]+/index\.html$' | sort)"
+          fi
+          [ -n "$FILES" ] || FILES="$(find q -mindepth 2 -maxdepth 2 -name index.html -type f | grep -E '^q/[0-9]+/index\.html$' | sort)"
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            num="${file#q/}"
+            num="${num%/index.html}"
+            path="/q/${num}/"
+            body="$(mktemp)"
+            status="$(curl -sS -L --retry 2 --retry-delay 2 --max-time 25 -o "$body" -w '%{http_code}' "https://dar-al-tawhid.de${path}" || true)"
+            if [ "$status" != "200" ]; then
+              echo "FEHLER ${path}: HTTP $status statt 200"
+              failed=1
+            fi
+            grep -q 'property="og:image"' "$body" || { echo "FEHLER ${path}: og:image live fehlt"; failed=1; }
+            grep -q 'name="twitter:image"' "$body" || { echo "FEHLER ${path}: twitter:image live fehlt"; failed=1; }
+            grep -q 'DAR AL TAWḤĪD' "$body" || { echo "FEHLER ${path}: Branding live fehlt"; failed=1; }
+            rm -f "$body"
+          done <<< "$FILES"
+          exit "$failed"
+
   deploy:
     needs: classify
-    if: needs.classify.outputs.shortlinks_only != 'true'
+    if: needs.classify.outputs.shortlinks_only != 'true' && needs.classify.outputs.qsource_only != 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

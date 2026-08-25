@@ -8,7 +8,12 @@
  * - Sahih-Hadith zu Fajr/ʿAṣr ("من صلى البردين دخل الجنة")
  * - Sahih-Hadith zu ʿIshāʾ und Fajr in Jamaʿah
  * - Sahih-Hadith zum letzten Drittel der Nacht
+ *
+ * {minutes} in Vorwarn-Texten ist immer die Nutzer-Vorwarnzeit 5, 10 oder 15 —
+ * niemals die Restminuten bis zum Gebet (sonst „ʿAṣr in 1573 Min“).
  */
+
+const DEFAULT_ADVANCE_MINUTES = 15;
 
 export const PRAYER_ADVANCE_PUSH_VARIANTS = {
   fajr: [
@@ -134,9 +139,15 @@ function pickPrayerAdvanceVariant(prayerKey, advanceMinutes, timeLabel = "") {
   return pickPrayerVariantByCycle(list, key, "advance", `${advanceMinutes}-${timeLabel}`);
 }
 
+/** Vorwarn-Text nutzt nur die gewählte Vorwarnzeit (5/10/15), nie die Restzeit bis zum Gebet. */
+export function clampPrayerAdvanceMinutes(value) {
+  const n = Number(value);
+  return [5, 10, 15].includes(n) ? n : DEFAULT_ADVANCE_MINUTES;
+}
+
 export function buildAdvancePushBody(prayerKey, advanceMinutes, timeLabel) {
   const key = String(prayerKey || "").toLowerCase();
-  const m = Number(advanceMinutes) || 15;
+  const m = clampPrayerAdvanceMinutes(advanceMinutes);
   const time = String(timeLabel || "").trim();
   const template = pickPrayerAdvanceVariant(key, m, time);
   return sanitizePrayerPushText(

@@ -2,7 +2,7 @@
   "version": 1,
   "globalLock": true,
   "lockedAt": "2026-07-23T19:30:00.000Z",
-  "lockedReason": "Nutzer-Freigabe: Nach Maghrib-Push-Reparatur keine Änderungen ohne ausdrücklichen Auftrag.",
+  "lockedReason": "Nutzer-Freigabe 2026-08-22: Worker-Secrets & Builds gesperrt (außer ausdrücklicher Auftrag). Library-Besucher-Push-Fix freigeschaltet.",
   "message": "GLOBAL GESPERRT: Nur freigeschaltete Bereiche dürfen geändert werden. Freischaltung nur nach ausdrücklichem Nutzer-Auftrag in unlockedScopes eintragen.",
   "alwaysAllowed": [
     "content/quran-tajweed/",
@@ -63,7 +63,10 @@
     "test/assets/prophets/",
     "test/data/prophets/",
     "assets/fold-split.js",
-    "assets/fold-split.css"
+    "assets/fold-split.css",
+    "content/admin/worker-secrets-safety-lock.json",
+    "cloudflare/WORKER_SECRETS_LOCK.md",
+    "cloudflare/library-push-admin.js"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -83,6 +86,110 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "prayer-advance-countdown-1573-2026-08-25",
+      "approvedBy": "user-explicit-prayer-push-error-screenshot",
+      "reason": "Nutzer: Push „Dhuhr in 1573 Min“ / ʿAṣr erneut falsch. Vorwarn-Text immer 5/10/15 Min, alte OneSignal-Queue mit falschem Countdown stornieren.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "cloudflare/prayer-push-scheduler.js",
+        "cloudflare/prayer-push-copy.js",
+        "cloudflare/worker.js",
+        "scripts/prayer-push-loop-guard.js",
+        "scripts/prayer-push-integrity-guard.js",
+        "index.html",
+        "test/index.html"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "q-source-github-overview-rule-2026-08-25",
+      "approvedBy": "user-explicit-q-source-github-overview-cross-chat-rule",
+      "reason": "Nutzerauftrag: Quellenlinks muessen chatuebergreifend immer im einzigen q/<nummer>-Ordner mit GitHub-Uebersicht, Thema, Sprecher/Ueberlieferer, Registry und fortlaufender Nummerierung aufgebaut werden.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "AGENTS.md",
+        "q/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "quran-arabic-letter-100-2026-08-23",
+      "approvedBy": "user-explicit-quran-arabic-100-percent-letter-audit",
+      "reason": "Nutzer: Arabisches Qurʾān-Wörterbuch noch viele Fehler auf Android+iOS; 100% Vers für Vers, Buchstabe für Buchstabe korrigieren. Zuerst Dar Test.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/quran/",
+        "content/quran/surahs.json",
+        "content/quran-tajweed/",
+        "data/quran-search-index.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "quran-strict-android-fold-2026-08-22",
+      "approvedBy": "user-explicit-quran-arabic-german-android-fold",
+      "reason": "Nutzerauftrag: Qurʾān Arabisch+Deutsch streng gegen Online-Original, Android-Einstellungen wie iOS, Fold/Fold-Funktionen anpassen. Zuerst Dar Test.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/quran/",
+        "content/quran/surahs.json",
+        "data/quran-search-index.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/fold-split.js",
+        "assets/fold-split.css",
+        "assets/adaptive-layout.js",
+        "assets/prophets/prophets.js",
+        "assets/prophets/prophets.css",
+        "test/assets/prophets/prophets.js",
+        "test/assets/prophets/prophets.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "quran-text-tajweed-letter-audit-2026-08-22",
+      "approvedBy": "user-explicit-quran-arabic-german-tajweed-audit",
+      "reason": "Nutzerauftrag: Qurʾān 1–114 streng prüfen (Deutsch, Arabisch, Tajweed, drei Buchstaben-Typen). Nur belegte Buchstaben-/Wortfehler und fehlende Tajweed-Klassen korrigieren. Zuerst Dar Test.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/quran/",
+        "content/quran-tajweed/",
+        "data/quran-search-index.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "scripts/quran-stability-tajweed-guard.js",
+        "content/admin/quran-stability-tajweed-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "quran-settings-sheet-open-2026-08-22",
+      "approvedBy": "user-explicit-quran-settings-button",
+      "reason": "Einstellungen oben rechts im Qurʾān öffnen das Sheet nicht; Buttons im Qurʾān-Bereich müssen funktionieren.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
     {
       "id": "contact-email-dal-al-tauhid91-2026-08-22",
       "approvedBy": "user-explicit-email-change",
@@ -3329,7 +3436,8 @@
       "paths": [
         "content/admin/change-scope-lock.json",
         "q/",
-        "q/_registry/"
+        "q/_registry/",
+        "assets/q-source-dar-al-layl.css"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     },
@@ -3397,6 +3505,51 @@
         "content/admin/change-scope-lock.json",
         "cloudflare/",
         ".github/workflows/deploy-admin-publisher.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "library-push-secret-lock-2026-08-22",
+      "approvedBy": "user-explicit-push-fix-and-safety-lock",
+      "reason": "Besucher-Push Library reparieren (tote OneSignal-IDs) + Worker-Secrets Sicherheitssperre setzen",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/admin/worker-secrets-safety-lock.json",
+        "cloudflare/library-push-admin.js",
+        "cloudflare/WORKER_SECRETS_LOCK.md",
+        "cloudflare/worker.js",
+        ".github/workflows/deploy-admin-publisher.yml",
+        ".github/workflows/sync-admin-publisher-secrets.yml",
+        ".github/workflows/push-worker-secret-watchdog.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "library-push-visitor-fix-2026-08-22",
+      "approvedBy": "user-explicit-push-fix-and-safety-lock",
+      "reason": "Besucher-Push Library: leere OneSignal-Antworten nicht als Erfolg werten; enabled prayer subscriptions nutzen",
+      "paths": [
+        "cloudflare/library-push-admin.js",
+        "cloudflare/worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prayer-timing-jummah-daily-2026-08-24",
+      "approvedBy": "user-explicit-prayer-push-audit",
+      "reason": "Gebets-Push Timing (Vorab-Nachholen vor Entry), Jummah 0 Nutzer, Status-Korrekturen — prayer-push-scheduler-freigabe",
+      "paths": [
+        "cloudflare/prayer-push-scheduler.js",
+        "cloudflare/jummah-push-scheduler.js",
+        "cloudflare/daily-push-scheduler.js",
+        "cloudflare/worker.js",
+        ".github/workflows/sync-admin-publisher-secrets.yml",
+        ".github/workflows/deploy-admin-publisher.yml",
+        ".github/workflows/prayer-push.yml",
+        "content/admin/change-scope-lock.json",
+        "content/admin/prayer-push-scheduler-lock.json",
+        "scripts/prayer-push-loop-guard.js"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     }

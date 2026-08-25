@@ -4,12 +4,26 @@
   "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-19T07:15:51.483Z",
-  "usersChecked": 10,
-  "registrationsRead": 11,
-  "uniqueSubscriptions": 10,
+  "updatedAt": "2026-08-25T19:00:17.669Z",
+  "usersChecked": 11,
+  "registrationsRead": 12,
+  "uniqueSubscriptions": 11,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
+  "localTimeBerlin": "21:00",
+  "dateKeyBerlin": "2026-08-25",
+  "duaWindow": {
+    "hour": 9,
+    "open": false,
+    "catchupUntilHour": 14,
+    "alreadySentToday": 11
+  },
+  "recommendationWindow": {
+    "hour": 12,
+    "open": false,
+    "catchupUntilHour": 20,
+    "alreadySentToday": 11
+  },
   "duaCandidates": 0,
   "recCandidates": 0,
   "sent": 0,
@@ -19,20 +33,21 @@
   },
   "invalidSubscriptionsDisabled": 0,
   "skipped": 0,
-  "duplicates": 10,
+  "duplicates": 0,
   "errors": 0,
   "forceSend": null,
-  "dailyContentDate": "2026-08-19",
+  "dailyContentDate": "2026-08-25",
   "currentRecommendation": {
-    "id": "hukm-muhakamah-qurtubi-zwei-faelle-357",
-    "title": "al-Qurṭubī: Tabdīl ist nicht wie Sünde aus Begierde",
+    "id": "hukm-muhakamah-zwei-wege-glaube-und-ablehnung-432",
+    "title": "Glaube und Ablehnung haben verschiedene Enden",
     "category": "Hukm & Muḥākamah",
-    "scholar": "al-Qurṭubī"
+    "scholar": "aṭ-Ṭabarī"
   },
   "currentDua": {
-    "id": "dua-038-rabbana-ma-khalaqta-hadha-batilan",
-    "title": "Duʿāʾ beim Nachdenken über die Schöpfung",
-    "category": "Tafakkur & Schutz"
+    "id": "dua-044-rabbana-ghfir-li-wa-li-walidayya",
+    "title": "Duʿāʾ um Vergebung für sich, Eltern und Gläubige",
+    "category": "Vergebung & Eltern"
   },
-  "configAutomatic": true
+  "configAutomatic": true,
+  "lastError": "Außerhalb der Tagesfenster (Duʿāʾ ab 09:00, Empfehlung ab 12:00 Europe/Berlin)."
 }

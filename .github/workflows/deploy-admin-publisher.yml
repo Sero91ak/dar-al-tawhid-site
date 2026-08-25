@@ -116,6 +116,7 @@ jobs:
           printf '%s' "$HEALTH" | grep -q '"service":"dar-admin-publisher"'
 
       - name: Sync core worker secrets
+        continue-on-error: true
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -213,10 +214,22 @@ jobs:
               else
                 echo "::warning::hasTelegramToken=false – TELEGRAM_BOT_TOKEN in GitHub Actions Secrets setzen (Anleitung: cloudflare/TELEGRAM_STATUS_2026-08-16.md)"
               fi
+              if printf '%s' "$HEALTH" | grep -q '"hasGithubToken":true'; then
+                echo "GITHUB_TOKEN aktiv"
+              else
+                echo "::error::hasGithubToken=false – WORKER_GITHUB_TOKEN in GitHub Actions Secrets setzen (Library Live-Publish)"
+                exit 1
+              fi
               if printf '%s' "$HEALTH" | grep -q '"hasAdminSecret":true'; then
                 echo "Admin-Secret aktiv"
               else
-                echo "::warning::hasAdminSecret=false – ADMIN_PUBLISH_SECRET in GitHub Actions Secrets setzen"
+                echo "::error::hasAdminSecret=false – ADMIN_PUBLISH_SECRET in GitHub Actions Secrets setzen"
+                exit 1
+              fi
+              if printf '%s' "$HEALTH" | grep -q '"hasOneSignalKey":true'; then
+                echo "OneSignal-Key aktiv"
+              else
+                echo "::warning::hasOneSignalKey=false – ONESIGNAL_API_KEY_NEW in GitHub Actions Secrets setzen"
               fi
               exit 0
             fi
@@ -229,6 +242,13 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+          WORKER_GITHUB_TOKEN: ${{ secrets.WORKER_GITHUB_TOKEN }}
+          DAR_GITHUB_TOKEN: ${{ secrets.DAR_GITHUB_TOKEN }}
+          REPO_GITHUB_TOKEN: ${{ secrets.REPO_GITHUB_TOKEN }}
+          ONESIGNAL_API_KEY_NEW: ${{ secrets.ONESIGNAL_API_KEY_NEW }}
+          ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         run: |
           sleep 40
           HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true)"
@@ -244,6 +264,47 @@ jobs:
             || ! printf '%s' "$HEALTH" | grep -q '"service":"dar-admin-publisher"'; then
             echo "::error::Admin-Worker /health weg. Cloudflare → dar-admin-publisher → Settings → Builds: Root Directory auf cloudflare setzen oder Builds deaktivieren."
             exit 1
+          fi
+          # Builds wipen oft Secrets kurz nach Sync – bei Wipe sofort erneut setzen
+          if ! printf '%s' "$HEALTH" | grep -q '"hasGithubToken":true' \
+            || ! printf '%s' "$HEALTH" | grep -q '"hasAdminSecret":true'; then
+            echo "::warning::Secrets nach Delayed-Check weg – Sofort-Re-Sync"
+            SECRETS_JSON="$RUNNER_TEMP/delayed-core-secrets.json"
+            # node -e statt Heredoc (YAML-Einrueckung bricht <<'NODE')
+            node -e '
+              const fs = require("fs");
+              const pick = (...vals) => {
+                for (const v of vals) {
+                  const s = String(v || "").trim();
+                  if (s) return s;
+                }
+                return "";
+              };
+              const payload = {
+                GITHUB_TOKEN: pick(process.env.WORKER_GITHUB_TOKEN, process.env.DAR_GITHUB_TOKEN, process.env.REPO_GITHUB_TOKEN),
+                ADMIN_PUBLISH_SECRET: pick(process.env.ADMIN_PUBLISH_SECRET),
+                ONESIGNAL_API_KEY_NEW: pick(process.env.ONESIGNAL_API_KEY_NEW, process.env.ONESIGNAL_API_KEY),
+                TELEGRAM_BOT_TOKEN: pick(process.env.TELEGRAM_BOT_TOKEN)
+              };
+              const clean = {};
+              for (const [k, v] of Object.entries(payload)) if (v) clean[k] = v;
+              fs.writeFileSync(process.env.RUNNER_TEMP + "/delayed-core-secrets.json", JSON.stringify(clean));
+              console.log("Delayed re-sync keys:", Object.keys(clean).join(", "));
+            '
+            BULK_LOG="$RUNNER_TEMP/delayed-secret-bulk.log"
+            wrangler versions secret bulk "$SECRETS_JSON" --name dar-admin-publisher --message "delayed-core-secrets-resync" 2>&1 | tee "$BULK_LOG"
+            VERSION_ID="$(sed -n "s/.*Created version \([0-9a-f-]\{36\}\).*/\1/p" "$BULK_LOG" | tail -n 1)"
+            if [ -z "$VERSION_ID" ]; then
+              echo "::error::Keine Version-ID aus secret bulk"
+              exit 1
+            fi
+            wrangler versions deploy "${VERSION_ID}@100" --name dar-admin-publisher --yes --message "activate-delayed-core-secrets"
+            sleep 5
+            HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true)"
+            echo "Nach Delayed-Resync: $HEALTH"
+            printf "%s" "$HEALTH" | grep -q '"hasGithubToken":true'
+            printf "%s" "$HEALTH" | grep -q '"hasAdminSecret":true'
+            rm -f "$SECRETS_JSON"
           fi
           echo "Delayed health OK"
 

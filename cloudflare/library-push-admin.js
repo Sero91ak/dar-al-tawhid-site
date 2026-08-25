@@ -44,6 +44,66 @@ function parseOneSignalAcceptedRecipients(raw) {
   return null;
 }
 
+function countOneSignalInvalidIds(raw) {
+  try {
+    const data = typeof raw === "string" ? JSON.parse(raw) : raw;
+    const errors = data?.errors || {};
+    const buckets = [
+      errors.invalid_player_ids,
+      errors.invalid_subscription_ids,
+      errors.invalid_aliases,
+      data?.invalid_player_ids,
+      data?.invalid_subscription_ids
+    ];
+    let total = 0;
+    for (const bucket of buckets) {
+      if (Array.isArray(bucket)) total += bucket.length;
+    }
+    return total;
+  } catch (error) {
+    return 0;
+  }
+}
+
+/** true = Versuch weiterprobieren (kein echter Besucher-Empfang) */
+function oneSignalResponseLooksEmpty(raw, requestedIdCount = 0) {
+  let data = null;
+  try {
+    data = typeof raw === "string" ? JSON.parse(raw) : raw;
+  } catch (error) {
+    data = null;
+  }
+  const accepted = parseOneSignalAcceptedRecipients(raw);
+  if (accepted !== null && accepted <= 0) return true;
+  const invalid = countOneSignalInvalidIds(raw);
+  if (accepted === null && invalid > 0) {
+    // Viele tote Supabase-IDs: OneSignal 200 ohne recipients → kein echter Versand
+    if (!requestedIdCount || invalid >= Math.max(1, Math.floor(requestedIdCount * 0.5))) {
+      return true;
+    }
+  }
+  const errors = data?.errors;
+  if (Array.isArray(errors) && errors.length) {
+    const joined = errors.map((e) => String(e || "").toLowerCase()).join(" | ");
+    if (
+      joined.includes("not subscribed") ||
+      joined.includes("no subscribed") ||
+      joined.includes("all included players") ||
+      joined.includes("no push tokens") ||
+      !String(data?.id || "").trim()
+    ) {
+      return true;
+    }
+  } else if (errors && typeof errors === "object") {
+    // z.B. { invalid_player_ids: [...] } bereits über invalid abgedeckt
+  }
+  // Leere Notification-ID ohne Empfängerzahl = kein echter Versand
+  if (accepted === null && data && !String(data.id || "").trim() && (invalid > 0 || requestedIdCount > 0 || Array.isArray(errors))) {
+    return true;
+  }
+  return false;
+}
+
 function uniqueValues(values) {
   return [...new Set(values.map((value) => String(value || "").trim()).filter(Boolean))];
 }
@@ -67,9 +127,11 @@ async function loadLibraryPushSubscriptionIds(env) {
   const key = supabaseApiKey(env);
   if (!key) return [];
   const base = `${SUPABASE_URL}/rest/v1/prayer_push_registrations`;
+  // Gleiche Quelle wie Gebets-Push (enabled=true) – dort funktionieren die IDs.
   const queries = [
-    "subscription_id=not.is.null&push_opted_in=eq.true&select=subscription_id,last_synced_at",
-    "subscription_id=not.is.null&select=subscription_id,last_synced_at"
+    "enabled=eq.true&subscription_id=not.is.null&select=subscription_id,last_synced_at&order=last_synced_at.desc.nullslast",
+    "subscription_id=not.is.null&push_opted_in=eq.true&select=subscription_id,last_synced_at&order=last_synced_at.desc.nullslast",
+    "subscription_id=not.is.null&select=subscription_id,last_synced_at&order=last_synced_at.desc.nullslast"
   ];
 
   for (const query of queries) {
@@ -83,13 +145,14 @@ async function loadLibraryPushSubscriptionIds(env) {
       });
       const text = await res.text();
       if (!res.ok) {
-        if (res.status === 400 && query.includes("push_opted_in")) continue;
+        if (res.status === 400 && (query.includes("push_opted_in") || query.includes("enabled="))) continue;
         throw new Error(`Supabase ${res.status}: ${text.slice(0, 200)}`);
       }
       const rows = text ? JSON.parse(text) : [];
-      return uniqueValues((Array.isArray(rows) ? rows : []).map((row) => row.subscription_id));
+      const ids = uniqueValues((Array.isArray(rows) ? rows : []).map((row) => row.subscription_id));
+      if (ids.length) return ids;
     } catch (error) {
-      if (!query.includes("push_opted_in")) return [];
+      if (!query.includes("push_opted_in") && !query.includes("enabled=")) return [];
     }
   }
 
@@ -98,12 +161,14 @@ async function loadLibraryPushSubscriptionIds(env) {
 
 function buildLibraryPushAttempts(basePayload, subscriptionIds) {
   const attempts = [];
+  // Zuerst bekannte aktive Gebets-Push-Abos (funktionieren live), dann Segmente.
   for (const ids of chunkValues(subscriptionIds, ONESIGNAL_BATCH_SIZE)) {
     attempts.push({ ...basePayload, include_subscription_ids: ids });
   }
   attempts.push(
-    { ...basePayload, included_segments: ["DAR_PUSH"] },
     { ...basePayload, included_segments: ["Subscribed Users"] },
+    { ...basePayload, included_segments: ["DAR_PUSH"] },
+    { ...basePayload, included_segments: ["Total Subscriptions"] },
     { ...basePayload, filters: [{ field: "tag", key: "dar_push", relation: "=", value: "true" }] },
     { ...basePayload, filters: [{ field: "tag", key: "post_notifications", relation: "=", value: "true" }] }
   );
@@ -301,30 +366,35 @@ export async function sendLibraryPublicationPush(env, record) {
         });
         const text = await res.text();
         if (res.ok) {
+          const requestedIds = Array.isArray(payload.include_subscription_ids)
+            ? payload.include_subscription_ids.length
+            : 0;
           const accepted = parseOneSignalAcceptedRecipients(text);
-          if (accepted !== null && accepted <= 0) {
-            lastError = `OneSignal 200: keine Empfänger im Ziel ${payload.included_segments?.[0] || "tag-filter"}`;
+          const invalidCount = countOneSignalInvalidIds(text);
+          const targetLabel = requestedIds
+            ? `supabase-subscriptions:${requestedIds}`
+            : (payload.included_segments?.[0] || "tag-filter");
+          if (oneSignalResponseLooksEmpty(text, requestedIds)) {
+            lastError = `OneSignal 200 ohne Zustellung (${targetLabel}): recipients=${accepted ?? "null"}, invalid=${invalidCount}`;
             attemptLog.push({
-              target: payload.include_subscription_ids?.length
-                ? `supabase-subscriptions:${payload.include_subscription_ids.length}`
-                : (payload.included_segments?.[0] || "tag-filter"),
+              target: targetLabel,
               httpStatus: res.status,
               authMode,
               sent: false,
               recipients: accepted,
+              invalidIds: invalidCount,
               reason: lastError
             });
             continue;
           }
           return {
             sent: true,
-            target: payload.include_subscription_ids?.length
-              ? `supabase-subscriptions:${payload.include_subscription_ids.length}`
-              : (payload.included_segments?.[0] || "tag-filter"),
+            target: targetLabel,
             authMode,
             targetUrl: url,
             data: pushData,
             recipients: accepted,
+            invalidIds: invalidCount,
             response: text.slice(0, 400),
             subscriptionCount: subscriptionIds.length,
             attempts: attemptLog

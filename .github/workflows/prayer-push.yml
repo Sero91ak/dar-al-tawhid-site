@@ -86,6 +86,33 @@ jobs:
           echo "::error::Gebets-Push-Status blieb nach autonomer Reparatur veraltet"
           exit 1
 
+      - name: Refresh Jumuʿah scheduler status (dry-run write)
+        env:
+          ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+        run: |
+          if [ -z "$ADMIN_PUBLISH_SECRET" ]; then
+            echo "::warning::ADMIN_PUBLISH_SECRET fehlt – Jumuʿah-Refresh übersprungen"
+            exit 0
+          fi
+          RESULT="$(curl -fsS -X POST "https://dar-admin-publisher.sero91ak.workers.dev/api/admin/jummah/run" \
+            -H "Authorization: Bearer ${ADMIN_PUBLISH_SECRET}" \
+            -H "Content-Type: application/json" \
+            -d '{}')"
+          echo "$RESULT"
+          RESULT_JSON="$RESULT" node <<'NODE'
+          const result = JSON.parse(process.env.RESULT_JSON || "{}");
+          const status = result?.status || {};
+          if (!status.updatedAt) {
+            throw new Error(result?.reason || result?.error || "Jumuʿah ohne Status");
+          }
+          console.log(JSON.stringify({
+            updatedAt: status.updatedAt,
+            usersWithJummah: status.usersWithJummah,
+            jummahTagFallback: status.jummahTagFallback,
+            schedulerEngine: status.schedulerEngine
+          }));
+          NODE
+
       - name: Send admin/test alarm push on failure
         if: failure()
         env:

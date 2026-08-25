@@ -8,6 +8,7 @@ const NEXT_PATH = path.join(ROOT, "q", "_registry", "next-number.txt");
 const TEMPLATE_PATH = path.join(ROOT, "q", "_registry", "shortlink-template.html");
 const Q_ROOT = path.join(ROOT, "q");
 const Q_INDEX_PATH = path.join(ROOT, "q", "index.html");
+const Q_README_PATH = path.join(ROOT, "q", "README.md");
 
 function parseArgs(argv) {
   const args = { updateEntry: true };
@@ -34,6 +35,14 @@ function requireArg(args, name) {
   const value = String(args[name] || "").trim();
   if (!value) throw new Error(`Pflichtparameter fehlt: --${name}`);
   return value;
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
 }
 
 function utcNow() {
@@ -67,15 +76,60 @@ async function updateQIndex(shortPath) {
   await fs.writeFile(Q_INDEX_PATH, html, "utf8");
 }
 
+function readmeTopic(entry) {
+  return entry.topic || entry.title || `Quelle ${entry.number}`;
+}
+
+function readmeSpeaker(entry) {
+  return entry.speaker || "siehe Titel";
+}
+
+async function updateQReadme(registry) {
+  const activeLinks = [...(registry.links || [])]
+    .filter((entry) => entry && entry.status !== "archived")
+    .sort((a, b) => Number(a.number) - Number(b.number));
+  const rows = activeLinks.map((entry) => {
+    return `| \`q/${entry.number}\` | ${readmeTopic(entry)} | \`${readmeSpeaker(entry)}\` | ${entry.statementSummary || ""} |`;
+  });
+  const readme = `# DAR AL TAWḤĪD Quellenlinks
+
+Dieser Ordner ist die zentrale Ablage für alle nummerierten Quellenlinks.
+
+## Regel
+
+- Öffentlich sichtbar bleibt immer nur: \`dar-al-tawhid.de/q/<nummer>\`
+- Die Ordnernamen bleiben technisch kurz: \`q/1\`, \`q/2\`, \`q/3\`, ...
+- Die GitHub-Uebersicht steht hier in dieser Datei: Nummer, Thema, Sprecher und Kernaussage.
+- Neue Quellenlinks werden immer fortlaufend angelegt und in \`q/_registry/shortlinks.json\` eingetragen.
+
+## Aktuelle Quellenlinks
+
+| Nummer | Thema | Sprecher / Überlieferer | Kernaussage |
+| --- | --- | --- | --- |
+${rows.join("\n")}
+
+## Sonderbereiche
+
+- \`q/_registry/\` ist nur Verwaltung: Nummerierung, Vorlage und Registry.
+- \`q/i/\` ist ein alter technischer Kurzlink und kein nummerierter Quellenlink.
+- \`q/mawlid-bidah/\` ist ein Themen-Hub und kein nummerierter Quellenlink.
+
+Neue nummerierte Quellenlinks gehören immer in \`q/<nummer>/\`.
+`;
+  await fs.writeFile(Q_README_PATH, readme, "utf8");
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (args.help) {
-    console.log("Nutzung: node q/_registry/register-shortlink.mjs --target /quelle/.../ --title \"...\" --postReference statement-002 --summary \"...\" --source \"...\"");
+    console.log("Nutzung: node q/_registry/register-shortlink.mjs --target /quelle/.../ --title \"...\" --topic \"...\" --speaker \"...\" --postReference statement-002 --summary \"...\" --source \"...\"");
     return;
   }
 
   const targetPath = requireArg(args, "target");
   const title = requireArg(args, "title");
+  const topic = requireArg(args, "topic");
+  const speaker = requireArg(args, "speaker");
   const postReference = requireArg(args, "postReference");
   const statementSummary = requireArg(args, "summary");
   const sourceLabel = requireArg(args, "source");
@@ -94,7 +148,11 @@ async function main() {
   const tpl = await fs.readFile(TEMPLATE_PATH, "utf8");
   const html = tpl
     .replaceAll("__NUMBER__", String(number))
-    .replaceAll("__TARGET_PATH__", targetPath);
+    .replaceAll("__TARGET_PATH__", escapeHtml(targetPath))
+    .replaceAll("__TITLE__", escapeHtml(title))
+    .replaceAll("__SUMMARY__", escapeHtml(statementSummary))
+    .replaceAll("__SOURCE_LABEL__", escapeHtml(sourceLabel))
+    .replaceAll("__POST_REFERENCE__", escapeHtml(postReference));
   await fs.writeFile(qIndex, html, "utf8");
 
   registry.links = Array.isArray(registry.links) ? registry.links : [];
@@ -103,6 +161,8 @@ async function main() {
     shortPath,
     targetPath,
     title,
+    topic,
+    speaker,
     postReference,
     statementSummary,
     sourceLabel,
@@ -115,6 +175,7 @@ async function main() {
   await fs.writeFile(NEXT_PATH, `${number + 1}\n`, "utf8");
 
   if (args.updateEntry) await updateQIndex(shortPath);
+  await updateQReadme(registry);
 
   console.log(`OK: ${shortPath} -> ${targetPath}`);
 }

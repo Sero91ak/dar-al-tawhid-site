@@ -12,7 +12,7 @@
   /* Ab dieser Breite + Querformat: Dual (Tablet landscape, Fold landscape) */
   var EXPANDED_MIN = 700;
   /* Portrait mit sehr großer Breite: Fold offen / Desktop (nicht Tablet-Hochformat ~768–834) */
-  var EXPANDED_PORTRAIT_MIN = 900;
+  var EXPANDED_PORTRAIT_MIN = 840;
   var EXPANDED_MIN_HEIGHT = 480;
   var currentMode = "";
   var rafId = 0;
@@ -42,7 +42,7 @@
   /**
    * Verbindliche Dual-Regel (Breite + Orientierung, kein reiner Gerätetyp):
    * - Compact/Einspalte: Phone, Fold zu, Tablet Hochformat
-   * - Dual: Tablet Querformat (≥700), Fold offen / große Breite (≥900 Portrait)
+   * - Dual: Tablet Querformat (≥700), Fold offen / große Breite (≥840 Portrait)
    */
   function isDualViewport(width, height) {
     var w = Number(width);

@@ -1,0 +1,430 @@
+/* DAR AL TAWḤĪD – globale Quellen-Seiten
+   Dār al-Layl, kompakt, ovales Wasserzeichen, ohne Lichtfleck
+   Live-Deploy-Trigger: /q Open-Graph-Logo-Fix 2026-08-24
+*/
+:root{
+  --q-bg:#0c0e0d;
+  --q-bg-2:#111412;
+  --q-text:#f6f0e4;
+  --q-text-soft:rgba(246,240,228,.86);
+  --q-text-muted:rgba(246,240,228,.64);
+  --q-gold:#e0c994;
+  --q-gold-soft:#eedcb6;
+  --q-gold-deep:#b89654;
+  --q-line:rgba(184,150,84,.38);
+  --q-line-soft:rgba(184,150,84,.18);
+  --q-line-faint:rgba(184,150,84,.10);
+  --q-shadow:0 8px 20px rgba(0,0,0,.22);
+  --q-logo:url('/watermark-my-logo-full.png');
+}
+*{box-sizing:border-box}
+html{
+  margin:0;
+  min-height:100%;
+  background:var(--q-bg);
+  color-scheme:dark;
+}
+body.qsource-body{
+  margin:0;
+  min-height:100dvh;
+  color:var(--q-text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  -webkit-text-size-adjust:100%;
+  overflow-x:hidden;
+  background:
+    radial-gradient(ellipse at 50% -4%, rgba(224,201,148,.07), transparent 28%),
+    linear-gradient(180deg,#121512 0%,#0c0e0d 22%,#0b0d0c 100%);
+}
+body.qsource-body::before,
+body.qsource-body::after{
+  display:none;
+}
+.qsource-page{
+  width:min(100%,760px);
+  margin:0 auto;
+  padding:max(10px,env(safe-area-inset-top)) 12px max(18px,env(safe-area-inset-bottom));
+}
+.qsource-header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 2px 10px;
+  border-bottom:1px solid var(--q-line);
+}
+.qsource-logo{
+  width:52px;
+  height:52px;
+  flex:0 0 52px;
+  object-fit:contain;
+  display:block;
+  background:transparent;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.18));
+}
+.qsource-header-text{min-width:0}
+.qsource-brand-top{
+  margin:0 0 2px;
+  color:var(--q-text-muted);
+  font-size:9px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:700;
+}
+.qsource-brand{
+  margin:0;
+  color:var(--q-gold-soft);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(24px,6.2vw,38px);
+  line-height:.95;
+  letter-spacing:.06em;
+  font-weight:600;
+}
+.qsource-sign{
+  margin:3px 0 0;
+  color:var(--q-gold);
+  font-family:"Snell Roundhand","Apple Chancery","Segoe Script",cursive;
+  font-size:clamp(15px,3.6vw,22px);
+  line-height:1;
+}
+.qsource-hero{
+  position:relative;
+  margin-top:12px;
+  padding:14px 14px 6px;
+  overflow:hidden;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+  border-radius:0;
+}
+.qsource-hero::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:42%;
+  width:min(220px,58%);
+  height:min(220px,58%);
+  transform:translate(-50%,-46%);
+  pointer-events:none;
+  opacity:.07;
+  background:var(--q-logo) center/contain no-repeat;
+  filter:none;
+}
+.qsource-kicker{
+  position:relative;
+  z-index:1;
+  margin:0 0 7px;
+  color:var(--q-gold);
+  font-size:10px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  font-weight:800;
+}
+.qsource-title{
+  position:relative;
+  z-index:1;
+  margin:0;
+  color:var(--q-text);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(22px,5.6vw,34px);
+  line-height:1.12;
+  font-weight:700;
+}
+.qsource-quote-line{
+  position:relative;
+  z-index:1;
+  height:1px;
+  margin:12px 0;
+  background:linear-gradient(90deg,var(--q-gold-deep),rgba(184,150,84,.14) 70%,transparent);
+}
+.qsource-quote{
+  position:relative;
+  z-index:1;
+  margin:0;
+  color:var(--q-text);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(16px,4.2vw,20px);
+  line-height:1.48;
+  font-weight:500;
+}
+.qsource-quote b,
+.qsource-section b,
+.qsource-meta-value b,
+.qsource-section strong{
+  color:var(--q-gold-soft);
+  font-weight:800;
+}
+.qsource-meta{
+  position:relative;
+  z-index:1;
+  margin-top:12px;
+  border-top:1px solid var(--q-line-soft);
+}
+.qsource-meta-row{
+  display:grid;
+  grid-template-columns:92px 1fr;
+  gap:10px;
+  padding:9px 0;
+  border-bottom:1px solid var(--q-line-faint);
+}
+.qsource-meta-label{
+  color:var(--q-gold);
+  font-size:10px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:800;
+  padding-top:2px;
+}
+.qsource-meta-value{
+  color:var(--q-text-soft);
+  font-size:13.5px;
+  line-height:1.45;
+}
+.qsource-curve{
+  height:18px;
+  margin:2px 0 4px;
+  border:0;
+  background:
+    radial-gradient(120% 18px at 50% 0, transparent 58%, var(--q-line-soft) 59%, transparent 61%);
+}
+.qsource-section{
+  position:relative;
+  margin-top:14px;
+  padding:4px 2px 8px;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  transition:background .2s ease;
+}
+.qsource-section:hover{
+  background:linear-gradient(90deg,rgba(224,201,148,.07),transparent 70%);
+}
+.qsource-section:hover .qsource-num{
+  color:var(--q-gold-soft);
+  border-bottom-color:rgba(232,210,138,.85);
+}
+.qsource-section + .qsource-section{
+  margin-top:10px;
+  padding-top:12px;
+  border-top:1px solid var(--q-line-faint);
+}
+.qsource-section-head{
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+  margin:0 0 8px;
+}
+.qsource-num{
+  width:auto;
+  height:auto;
+  min-width:0;
+  flex:0 0 auto;
+  display:inline;
+  place-items:unset;
+  border-radius:0;
+  background:none;
+  color:var(--q-gold);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:18px;
+  font-weight:700;
+  line-height:1;
+  padding:0 1px 1px;
+  border-bottom:1px solid var(--q-gold-deep);
+}
+.qsource-section-title{
+  margin:0;
+  color:var(--q-gold-soft);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(17px,4.2vw,22px);
+  line-height:1.2;
+  font-weight:650;
+}
+.qsource-section p,
+.qsource-section li{
+  color:var(--q-text-soft);
+  font-size:14px;
+  line-height:1.58;
+}
+.qsource-section ol{
+  margin:4px 0 0;
+  padding-left:18px;
+}
+.qsource-arabic{
+  direction:rtl;
+  text-align:right;
+  color:var(--q-text);
+  font-family:"Geeza Pro","Noto Naskh Arabic","Traditional Arabic",serif;
+  font-size:clamp(22px,5.6vw,30px);
+  line-height:1.85;
+  margin:0 0 8px;
+}
+.qsource-links{
+  display:grid;
+  gap:8px;
+  margin-top:12px;
+}
+.qsource-link{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  min-height:62px;
+  padding:10px 8px;
+  border-radius:0;
+  text-decoration:none;
+  color:inherit;
+  background:transparent;
+  border:0;
+  border-bottom:1px solid var(--q-line-faint);
+  box-shadow:none;
+  transition:background .18s ease,border-color .18s ease,color .18s ease;
+}
+.qsource-link:hover,
+.qsource-link:focus-visible{
+  background:linear-gradient(90deg,rgba(224,201,148,.10),transparent 78%);
+  border-bottom-color:rgba(224,201,148,.55);
+}
+.qsource-link:hover .qsource-link-title,
+.qsource-link:focus-visible .qsource-link-title{
+  color:var(--q-gold-soft);
+}
+.qsource-link-icon{
+  width:36px;
+  height:36px;
+  border-radius:8px;
+  flex:0 0 36px;
+  display:grid;
+  place-items:center;
+  color:transparent;
+  font-size:0;
+  border:0;
+  background:
+    linear-gradient(180deg,#1c4f8a,#163e6d)
+    center/cover no-repeat;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+  position:relative;
+}
+.qsource-link-icon::before{
+  content:"";
+  width:18px;
+  height:18px;
+  background:
+    radial-gradient(circle at 50% 50%,#fff 0 28%,transparent 30%),
+    conic-gradient(from 210deg,#7ec8ff,#1c4f8a 40%,#9ad0ff 70%,#1c4f8a);
+  border-radius:50%;
+  box-shadow:0 0 0 2px rgba(255,255,255,.18);
+}
+.qsource-link.web .qsource-link-icon{
+  background:linear-gradient(180deg,#1d4f86,#143a64);
+}
+.qsource-link.pdf .qsource-link-icon{
+  background:linear-gradient(180deg,#e24b42,#b3261e);
+}
+.qsource-link.pdf .qsource-link-icon::before{
+  content:"PDF";
+  width:auto;
+  height:auto;
+  border-radius:0;
+  background:none;
+  box-shadow:none;
+  color:#fff;
+  font-family:Arial,sans-serif;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.04em;
+}
+.qsource-link.scan .qsource-link-icon{
+  background:linear-gradient(180deg,#d8c08a,#b3924e);
+}
+.qsource-link.scan .qsource-link-icon::before{
+  content:"";
+  width:16px;
+  height:12px;
+  border-radius:2px;
+  background:
+    linear-gradient(#3a2d14,#3a2d14) center/10px 1px no-repeat,
+    linear-gradient(#3a2d14,#3a2d14) 50% 70%/10px 1px no-repeat,
+    linear-gradient(#fff8e6,#ead7a4);
+  box-shadow:0 0 0 1px rgba(58,45,20,.22);
+}
+.qsource-link-body{min-width:0}
+.qsource-link-title{
+  display:block;
+  color:var(--q-text);
+  font-size:14.5px;
+  line-height:1.25;
+  font-weight:800;
+}
+.qsource-link-sub{
+  display:block;
+  margin-top:2px;
+  color:var(--q-text-muted);
+  font-size:12px;
+  line-height:1.35;
+}
+.qsource-social{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:18px;
+  padding-bottom:8px;
+}
+.qsource-social a{
+  --social-icon:none;
+  width:42px;
+  height:42px;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--q-line-soft);
+  text-decoration:none;
+  color:transparent;
+  font-size:0;
+  line-height:0;
+  overflow:hidden;
+  position:relative;
+  transition:background .18s ease,border-color .18s ease,transform .18s ease;
+}
+.qsource-social a:hover,
+.qsource-social a:focus-visible{
+  background:rgba(224,201,148,.08);
+  border-color:rgba(224,201,148,.46);
+  transform:translateY(-1px);
+}
+.qsource-social svg{
+  display:none!important;
+}
+.qsource-social a::before{
+  content:"";
+  width:22px;
+  height:22px;
+  display:block;
+  background:var(--q-gold-soft);
+  -webkit-mask:var(--social-icon) center/contain no-repeat;
+  mask:var(--social-icon) center/contain no-repeat;
+}
+.qsource-social .telegram{
+  --social-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21.5 3.8 18.3 20a1.4 1.4 0 0 1-2 1l-4.6-3.3-2.3 2.2a1 1 0 0 1-1.7-.6l.2-4 8-7.2c.4-.4-.1-.6-.6-.3L5.2 14l-4-1.3a1.1 1.1 0 0 1 0-2.1L20 3.3c.8-.3 1.7.4 1.5 1.2z'/%3E%3C/svg%3E");
+}
+.qsource-social .telegram::before{
+  background:#2AABEE;
+}
+.qsource-social .instagram{
+  --social-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7zm5 3.1a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4zm0 2.2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm5.3-2.6a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z'/%3E%3C/svg%3E");
+}
+.qsource-social .whatsapp{
+  --social-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.999-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.002-5.45 4.436-9.884 9.889-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.887 9.884M20.52 3.449C18.259 1.188 15.253 0 12.052 0 5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.946L.057 24l6.304-1.654a11.88 11.88 0 0 0 5.69 1.448h.005c6.557 0 11.892-5.335 11.895-11.893a11.82 11.82 0 0 0-3.431-8.452z'/%3E%3C/svg%3E");
+}
+.qsource-social .whatsapp::before{
+  width:24px;
+  height:24px;
+  background:#25D366;
+}
+.qsource-social .web{
+  --social-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 9h-3.1a15.7 15.7 0 0 0-1.08-5.02A8.02 8.02 0 0 1 18.93 11ZM12 4.04c.83 1.2 1.46 3.03 1.67 4.96h-3.34C10.54 7.07 11.17 5.24 12 4.04ZM4.26 13h3.9c.1 1.72.47 3.34 1.08 4.74A8.03 8.03 0 0 1 4.26 13Zm3.9-2h-3.9a8.03 8.03 0 0 1 4.98-4.74A15.8 15.8 0 0 0 8.16 11ZM12 19.96c-.83-1.2-1.46-3.03-1.67-4.96h3.34c-.21 1.93-.84 3.76-1.67 4.96ZM13.9 13h-3.8a14.6 14.6 0 0 1 0-2h3.8a14.6 14.6 0 0 1 0 2Zm.86 4.74c.61-1.4.98-3.02 1.08-4.74h3.9a8.03 8.03 0 0 1-4.98 4.74Z'/%3E%3C/svg%3E");
+}
+@media (max-width:640px){
+  .qsource-page{padding:max(8px,env(safe-area-inset-top)) 10px max(16px,env(safe-area-inset-bottom))}
+  .qsource-logo{width:46px;height:46px;flex-basis:46px}
+  .qsource-meta-row{grid-template-columns:1fr;gap:3px;padding:8px 0}
+  .qsource-link{min-height:58px;padding:9px 4px}
+}

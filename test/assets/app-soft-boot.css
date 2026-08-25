@@ -16,22 +16,6 @@ html.dar-soft-booting .all-posts-link{
   opacity:0 !important;
   pointer-events:none !important;
 }
-html.dar-ios-native-app.dar-soft-booting,
-html.dar-ios-native-app.dar-soft-booting body{
-  overflow:visible !important;
-}
-html.dar-ios-native-app #bottomNav,
-html.dar-ios-native-app #bottomNav.bottom-nav,
-html.dar-ios-native-app .bottom-nav,
-html.dar-ios-native-app.dar-soft-booting #bottomNav,
-html.dar-ios-native-app.dar-soft-booting .bottom-nav,
-html.dar-ios-native-app.dar-soft-booting .home-discover,
-html.dar-ios-native-app.dar-soft-booting .home-v380,
-html.dar-ios-native-app.dar-soft-booting .all-posts-link{
-  visibility:visible !important;
-  opacity:1 !important;
-  pointer-events:auto !important;
-}
 
 #dar-soft-boot{
   position:fixed;

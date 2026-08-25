@@ -21,6 +21,7 @@ const REQUIRED = [
   "forceResetQrcOverlayLocks",
   "renderQuranAyahArHtml",
   "loadQuranTajweed",
+  "mapQuranTajweedClass",
   "showTajweed",
   "quran-stability-tajweed-v574",
   "Noto Naskh Arabic",
@@ -78,6 +79,17 @@ function run() {
   const sample = JSON.parse(fs.readFileSync(path.join(dir, "001.json"), "utf8"));
   if (!sample.verses || !sample.verses[0] || !String(sample.verses[0].tajweed || "").includes("tj-")) {
     fail(`${TAJWEED_DIR}/001.json: Tajweed-Markup fehlt`);
+  }
+  const baqarah = JSON.parse(fs.readFileSync(path.join(dir, "002.json"), "utf8"));
+  const baqarahHtml = (baqarah.verses || []).map((v) => String(v.tajweed || "")).join("\n");
+  if (!baqarahHtml.includes("tj-qlqalah")) {
+    fail(`${TAJWEED_DIR}/002.json: Qalqalah-Buchstaben (tj-qlqalah) fehlen`);
+  }
+  if (!baqarahHtml.includes("tj-silent")) {
+    fail(`${TAJWEED_DIR}/002.json: stumme Buchstaben (tj-silent) fehlen`);
+  }
+  if (/<span(?![^>]*class=)/.test(baqarahHtml)) {
+    fail(`${TAJWEED_DIR}/002.json: nackte span ohne Klasse — Buchstaben-Typ verloren`);
   }
 
   // Veil must clear on route leave via forceReset

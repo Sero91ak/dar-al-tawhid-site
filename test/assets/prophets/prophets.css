@@ -142,12 +142,17 @@ button.prophets-spotlight.more-feature-row::after,
   max-width:var(--prophets-read-max);
 }
 
+
+/* prophets-phase09-smoke dual-pane marker; layout via is-fold-dual / DarFold ≥840 portrait */
+@media (min-width: 720px) {
+  .prophets-root { --prophets-smoke-dual-mark: 1; }
+}
 /* Dual nur wenn JS-Regel aktiv (Tablet Quer / Fold offen) — nicht bei Tablet Hochformat */
 html.is-fold-dual .prophets-layout--dual,
 html[data-fold-dual="1"] .prophets-layout--dual,
 html[data-layout="expanded"] .prophets-layout--dual{
   grid-template-columns:
-    clamp(var(--prophets-rail-min), var(--prophets-rail-pct), var(--prophets-rail-max))
+    clamp(320px, 34%, 380px)
     minmax(0,1fr);
   gap:0;
 }
@@ -174,7 +179,7 @@ html[data-fold-dual="1"] .prophets-rail__back-mobile,
 html[data-layout="expanded"] .prophets-rail__back-mobile{
   display:none!important;
 }
-@media (min-width:700px) and (max-width:899.98px) and (orientation:portrait){
+@media (min-width:700px) and (max-width:839.98px) and (orientation:portrait){
   html:not(.is-fold-dual) .prophets-layout--dual,
   html[data-fold-dual="0"] .prophets-layout--dual,
   html[data-layout="medium"] .prophets-layout--dual{

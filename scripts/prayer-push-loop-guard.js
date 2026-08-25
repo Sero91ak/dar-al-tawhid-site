@@ -22,6 +22,9 @@ const REQUIRED_STRINGS = [
   'const slots = [{ mode: "entry", sendAfter: entryAt }];',
   'slots.push({ mode: "advance", sendAfter: new Date(entryAt.getTime() - normAdvance(group.advanceMinutes) * 60000) });',
   "if (slot.sendAfter < windowStart)",
+  "ADVANCE_CATCHUP_MAX_REMAINING_MS",
+  "ADVANCE_COPY_VERSION",
+  "cancelQueuedBadAdvancePushes",
   "if (slot.sendAfter > windowEnd)",
   "await sendPush(env, group, prayer, slot.sendAfter, slot.mode, stats, sentInRun);"
 ];
@@ -38,6 +41,10 @@ const FORBIDDEN_PATTERNS = [
   {
     re: /scheduleSeed\([^)]*sendAfter\.toISOString\(\)/,
     reason: "scheduleSeed muss slotDay verwenden, nicht sendAfter.toISOString()"
+  },
+  {
+    re: /entryGuessMs\s*-\s*Date\.now\(\)/,
+    reason: "Vorwarn-Minuten dürfen nicht aus Date.now() berechnet und in den Push-Text gebacken werden"
   }
 ];
 
@@ -105,7 +112,14 @@ function runPrayerPushLoopGuard() {
 
   const touchesScheduler = diffFiles.includes(SCHEDULER);
   const unlockEnv = String(process.env.PRAYER_PUSH_SCHEDULER_UNLOCK || "").trim() === "approved";
-  const commitMsg = String(process.env.GITHUB_COMMIT_MESSAGE || process.env.COMMIT_MESSAGE || "").toLowerCase();
+  let commitMsg = String(process.env.GITHUB_COMMIT_MESSAGE || process.env.COMMIT_MESSAGE || "").toLowerCase();
+  if (!commitMsg) {
+    try {
+      commitMsg = execSync("git log -1 --pretty=%B", { cwd: ROOT, encoding: "utf8" }).toLowerCase();
+    } catch (e) {
+      commitMsg = "";
+    }
+  }
   const unlockCommit = commitMsg.includes("prayer-push-scheduler-freigabe");
 
   if (touchesScheduler && !unlockEnv && !unlockCommit) {
