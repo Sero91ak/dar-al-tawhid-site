@@ -87,6 +87,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "q-source-github-overview-rule-2026-08-25",
+      "approvedBy": "user-explicit-q-source-github-overview-cross-chat-rule",
+      "reason": "Nutzerauftrag: Quellenlinks muessen chatuebergreifend immer im einzigen q/<nummer>-Ordner mit GitHub-Uebersicht, Thema, Sprecher/Ueberlieferer, Registry und fortlaufender Nummerierung aufgebaut werden.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "AGENTS.md",
+        "q/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-arabic-letter-100-2026-08-23",
       "approvedBy": "user-explicit-quran-arabic-100-percent-letter-audit",
       "reason": "Nutzer: Arabisches Qurʾān-Wörterbuch noch viele Fehler auf Android+iOS; 100% Vers für Vers, Buchstabe für Buchstabe korrigieren. Zuerst Dar Test.",
