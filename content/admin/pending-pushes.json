@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-26T11:39:28.539Z",
+  "generated": "2026-08-26T11:39:30.828Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -706,8 +706,32 @@
       "createdAt": "2026-08-26T11:39:28.241Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-08-26T11:39:28.241Z",
-      "lastError": "Push wartet auf Live-Verfügbarkeit",
-      "updatedAt": "2026-08-26T11:39:28.539Z"
+      "lastError": "",
+      "updatedAt": "2026-08-26T11:39:30.828Z",
+      "lastCheckAt": "2026-08-26T11:39:30.539Z",
+      "liveCheck": {
+        "ok": true,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": true,
+          "postFilePublic": true,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": true
+        },
+        "diagnosis": "",
+        "indexOk": true,
+        "postOk": true,
+        "visitorUrlOk": true,
+        "attempts": 1,
+        "site": "https://dar-al-tawhid.de",
+        "postId": "imam-shafii-wahrheit-vor-meinung-462",
+        "indexGenerated": "2026-08-26T11:39:25.514Z",
+        "indexCount": 462,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=imam-shafii-wahrheit-vor-meinung-462&v=1787744369962#post/imam-shafii-wahrheit-vor-meinung-462"
+      },
+      "attempts": 1
     }
   }
 }
