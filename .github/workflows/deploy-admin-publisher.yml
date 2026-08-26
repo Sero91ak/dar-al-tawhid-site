@@ -99,25 +99,47 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           EXPECT_DEPLOY_MARKER: welcome-push-autorepair-v1
+        working-directory: cloudflare
         run: |
-          echo "Warte auf möglichen Workers-Builds-Overwrite…"
-          sleep 70
-          for attempt in 1 2 3 4 5 6 7 8; do
-            HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true)"
-            if printf '%s' "$HEALTH" | grep -q '"service":"dar-admin-publisher"' \
-              && printf '%s' "$HEALTH" | grep -q "\"deployMarker\":\"$EXPECT_DEPLOY_MARKER\""; then
-              echo "Admin-Worker korrekt aktiv (Versuch $attempt, Marker $EXPECT_DEPLOY_MARKER)"
-              break
-            fi
-            echo "Overwrite/falscher Marker (Versuch $attempt) – redeploy cloudflare/wrangler.toml"
-            echo "Health: $HEALTH"
+          set -euo pipefail
+          echo "Source-Marker in worker.js:"
+          grep -n "deployMarker" worker.js | head -5
+          grep -q "deployMarker: \"$EXPECT_DEPLOY_MARKER\"" worker.js
+          hold_ok=0
+          for attempt in $(seq 1 30); do
+            echo "=== Reclaim attempt $attempt ==="
             wrangler deploy --name dar-admin-publisher
-            sleep 20
+            for wait in 1 2 4 8; do
+              sleep "$wait"
+              HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health?ts=$(date +%s%N)" || true)"
+              MARK="$(printf '%s' "$HEALTH" | sed -n 's/.*"deployMarker":"\([^"]*\)".*/\1/p')"
+              echo "t+${wait}s marker=$MARK"
+              if printf '%s' "$HEALTH" | grep -q "\"deployMarker\":\"$EXPECT_DEPLOY_MARKER\""; then
+                echo "Marker OK after ${wait}s"
+                hold_ok=1
+                break
+              fi
+            done
+            if [ "$hold_ok" = "1" ]; then
+              for hold in $(seq 1 18); do
+                sleep 5
+                HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health?ts=$(date +%s%N)" || true)"
+                if ! printf '%s' "$HEALTH" | grep -q "\"deployMarker\":\"$EXPECT_DEPLOY_MARKER\""; then
+                  echo "Overwrite during hold $hold — redeploy"
+                  hold_ok=0
+                  break
+                fi
+                echo "Hold $hold/18 OK"
+              done
+            fi
+            if [ "$hold_ok" = "1" ]; then
+              echo "Reclaim stable: $EXPECT_DEPLOY_MARKER"
+              exit 0
+            fi
           done
-          HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true)"
-          echo "Nach Reclaim: $HEALTH"
-          printf '%s' "$HEALTH" | grep -q '"service":"dar-admin-publisher"'
-          printf '%s' "$HEALTH" | grep -q "\"deployMarker\":\"$EXPECT_DEPLOY_MARKER\""
+          echo "::error::Could not hold deployMarker=$EXPECT_DEPLOY_MARKER"
+          curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true
+          exit 1
 
       - name: Sync core worker secrets
         continue-on-error: true
@@ -486,24 +508,35 @@ jobs:
             -d '{"staging":true,"force":false,"maxDownloads":20}' || echo "::warning::Feed-BG Sync nach Deploy fehlgeschlagen"
 
       - name: Final reclaim deploy marker
-        if: always() && job.status != 'cancelled'
+        if: always() && !cancelled()
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           EXPECT_DEPLOY_MARKER: welcome-push-autorepair-v1
         working-directory: cloudflare
         run: |
-          for attempt in 1 2 3 4 5; do
-            HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true)"
-            if printf '%s' "$HEALTH" | grep -q "\"deployMarker\":\"$EXPECT_DEPLOY_MARKER\""; then
-              echo "Final OK: $HEALTH"
-              exit 0
-            fi
-            echo "Final reclaim Versuch $attempt"
+          set -euo pipefail
+          for attempt in $(seq 1 15); do
             wrangler deploy --name dar-admin-publisher
-            sleep 15
+            sleep 2
+            HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health?ts=$(date +%s%N)" || true)"
+            MARK="$(printf '%s' "$HEALTH" | sed -n 's/.*"deployMarker":"\([^"]*\)".*/\1/p')"
+            echo "Final $attempt marker=$MARK"
+            if printf '%s' "$HEALTH" | grep -q "\"deployMarker\":\"$EXPECT_DEPLOY_MARKER\""; then
+              ok=1
+              for i in 1 2 3 4 5 6; do
+                sleep 10
+                HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health?ts=$(date +%s%N)" || true)"
+                if ! printf '%s' "$HEALTH" | grep -q "\"deployMarker\":\"$EXPECT_DEPLOY_MARKER\""; then
+                  ok=0
+                  break
+                fi
+              done
+              if [ "$ok" = "1" ]; then
+                echo "Final stable OK"
+                exit 0
+              fi
+            fi
           done
-          HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true)"
-          echo "Final Health: $HEALTH"
-          printf '%s' "$HEALTH" | grep -q "\"deployMarker\":\"$EXPECT_DEPLOY_MARKER\""
-
+          echo "::error::Final reclaim could not hold marker"
+          exit 1
