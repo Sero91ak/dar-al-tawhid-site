@@ -87,6 +87,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "welcome-push-live-force-deploy-2026-08-26",
+      "approvedBy": "user-explicit-welcome-push-fix-push-live-now",
+      "reason": "Force-Deploy Willkommens-Push v674 nach CDN/Workers-Race; Nutzer verlangt sofort live.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "cloudflare/worker.js",
+        "cloudflare/daily-push-admin.js",
+        "cloudflare/onesignal-delivery.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "welcome-push-autorepair-live-2026-08-26",
       "approvedBy": "user-explicit-welcome-push-fix-push-live-now",
       "reason": "Nutzer: Neu-Installationen bekommen keinen Willkommens-Push (Assalamu alaikum). Fix + autonome Reparatur, sofort live inkl. Admin/Worker.",

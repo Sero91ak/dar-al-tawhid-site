@@ -1,6 +1,6 @@
 /* PUSH_SYSTEM_GUARD: Gebets-Push + Tages-Duʿāʾ/Empfehlung + Willkommens-Push.
    Nicht entfernen oder vereinfachen – CI blockiert sonst (scripts/push-system-guard.js).
-   Deploy-Marker: library-push-visitor-fix-v8 */
+   Deploy-Marker: welcome-push-autorepair-v1*/
 import {
   parsePostForTelegram,
   validateTelegramPost,
@@ -129,7 +129,7 @@ export default {
         return json({
           ok: true,
           service: "dar-admin-publisher",
-          deployMarker: "prayer-advance-fixed-min-v10",
+          deployMarker: "welcome-push-autorepair-v1",
           repo: `${env.GITHUB_OWNER || DEFAULT_OWNER}/${env.GITHUB_REPO || DEFAULT_REPO}`,
           branch: env.GITHUB_BRANCH || DEFAULT_BRANCH,
           hasGithubToken: Boolean(env.GITHUB_TOKEN),
