@@ -118,7 +118,17 @@ export async function sendWelcomePush(env, input = {}) {
   const title = "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh";
   const body = "Willkommen bei DAR AL TAWḤID. Du erhältst neue Beiträge aus Qurʾān, Sunnah und Āthār direkt als Benachrichtigung.";
   const url = `${site}/#home`;
-  const idempotencyKey = await deterministicUuid(`welcome:${subscriptionId}`);
+  // Zeitfenster-Idempotenz (2 Min): verhindert Doppel-Push bei Parallel-Requests,
+  // erlaubt aber echte Retries wenn das Gerät beim ersten Versuch noch nicht ready war
+  // (fester Key welcome:subId würde 0-Empfänger-Erfolge dauerhaft blockieren).
+  const attemptRaw = String(input.attempt || input.nonce || "").trim();
+  const attemptBucket = attemptRaw || String(Math.floor(Date.now() / (2 * 60 * 1000)));
+  const force = input.force === true || input.force === "1" || input.force === 1;
+  const idempotencyKey = await deterministicUuid(
+    force
+      ? `welcome:${subscriptionId}:force:${Date.now()}`
+      : `welcome:${subscriptionId}:${attemptBucket}`
+  );
 
   const payload = {
     app_id: appId,
@@ -128,7 +138,7 @@ export async function sendWelcomePush(env, input = {}) {
     contents: { de: body, en: body },
     url,
     idempotency_key: idempotencyKey,
-    data: { type: "welcome", source: "dar-welcome-push" },
+    data: { type: "welcome", source: "dar-welcome-push", attempt: attemptBucket },
     chrome_web_icon: `${site}/notification-icon-192.png?v=2`,
     chrome_web_badge: `${site}/notification-badge-96.png?v=2`
   };
@@ -143,6 +153,8 @@ export async function sendWelcomePush(env, input = {}) {
       subscriptionId,
       notificationId: delivery.notificationId || null,
       reason: delivery.reason || null,
+      recipients: delivery.recipients ?? null,
+      attempt: attemptBucket,
       oneSignal: result
     };
   } catch (err) {
