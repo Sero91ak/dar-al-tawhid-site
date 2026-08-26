@@ -22780,8 +22780,10 @@ function welcomePushStorageKey(subId){return "dar_welcome_push_v3_"+String(subId
 function welcomePushAlreadySent(subId){if(!subId)return true;try{const v=localStorage.getItem(welcomePushStorageKey(subId));if(v&&v!=="0")return true}catch(e){}return false}
 function markWelcomePushSent(subId,notificationId){if(!subId)return;try{localStorage.setItem(welcomePushStorageKey(subId),String(notificationId||"1"));localStorage.setItem(WELCOME_PUSH_SENT_KEY,"1");localStorage.removeItem(welcomePushPendingKey(subId))}catch(e){}}
 function welcomePushPendingKey(subId){return "dar_welcome_push_pending_v1_"+String(subId||"").trim()}
-function markWelcomePushPending(subId){if(!subId)return;try{localStorage.setItem(welcomePushPendingKey(subId),"1")}catch(e){}}
-function welcomePushIsPending(subId){if(!subId)return false;try{return localStorage.getItem(welcomePushPendingKey(subId))==="1"}catch(e){return false}}
+function welcomePushPendingSince(subId){if(!subId)return 0;try{const raw=Number(localStorage.getItem(welcomePushPendingKey(subId))||0);return Number.isFinite(raw)&&raw>0?raw:0}catch(e){return 0}}
+function markWelcomePushPending(subId){if(!subId)return;try{localStorage.setItem(welcomePushPendingKey(subId),String(Date.now()))}catch(e){}}
+function welcomePushIsPending(subId){return welcomePushPendingSince(subId)>0}
+function welcomePushPendingStale(subId,maxAgeMs=120000){const ts=welcomePushPendingSince(subId);if(!ts)return false;return(Date.now()-ts)>=Math.max(30000,Number(maxAgeMs)||120000)}
 function clearWelcomePushRetries(){if(welcomePushRetryTimer){clearTimeout(welcomePushRetryTimer);welcomePushRetryTimer=null}}
 function scheduleWelcomePushRetries(OS){
   try{
@@ -22821,7 +22823,8 @@ async function sendWelcomePushIfNeeded(OS,opts={}){
     markWelcomePushPending(subId);
     welcomePushAttempt+=1;
     const payload={subscriptionId:subId,attempt:String(welcomePushAttempt)};
-    if(opts.force)payload.force=true;
+    const forceWelcome=Boolean(opts.force||welcomePushPendingStale(subId,120000));
+    if(forceWelcome)payload.force=true;
     const r=await fetch(`${PRAYER_PUSH_WORKER_URL}/api/push/welcome`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
     const data=await r.json().catch(()=>({}));
     const recipients=Number(data.recipients);
@@ -22943,6 +22946,7 @@ async function repairPushConnection({silent=false}={}){
     const freshOS=await waitForOneSignalReady(8000);
     if(!silent){try{const repairSub=String(freshOS?.User?.PushSubscription?.id||ids.subscriptionId||"").trim();if(repairSub){localStorage.removeItem(welcomePushStorageKey(repairSub));localStorage.removeItem(welcomePushPendingKey(repairSub));localStorage.removeItem(WELCOME_PUSH_SENT_KEY)}}catch(e){}}
     welcomed=await sendWelcomePushIfNeeded(freshOS||OS);
+    if(!welcomed)scheduleWelcomePushRetries(freshOS||OS);
   }
   if(!silent){
     if(ok&&welcomed)alert("✓ Push-Verbindung repariert – Willkommens-Nachricht wurde gesendet.\n\nBitte Sperrbildschirm prüfen.");
@@ -23402,7 +23406,8 @@ async function activatePrayerReminder(){
         await ensurePostPushTags(OS);
         await syncDailyPushTags(getPrayerSettings(),{ensureOptIn:false});
         await savePushRegistration(getPrayerSettings(),OS);
-        await sendWelcomePushIfNeeded(OS);
+        const welcomed=await sendWelcomePushIfNeeded(OS);
+        if(!welcomed)scheduleWelcomePushRetries(OS);
       }
     }
     const ok=await syncPrayerPushTags(getPrayerSettings(),{retries:5});
