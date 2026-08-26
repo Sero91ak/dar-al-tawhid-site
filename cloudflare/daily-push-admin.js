@@ -109,25 +109,59 @@ async function postOneSignal(env, payload) {
   return { text, parsed, recipients: parsed.recipients ?? parsed.id ?? null };
 }
 
+const welcomeDeliveredBySub = new Map();
+const welcomeInflightBySub = new Map();
+
+function welcomeAlreadyDelivered(record) {
+  return Boolean(record?.delivered && record?.notificationId);
+}
+
 export async function sendWelcomePush(env, input = {}) {
   const subscriptionId = String(input.subscriptionId || input.subscription_id || "").trim();
   if (!subscriptionId) return { ok: true, sent: false, reason: "Subscription-ID fehlt" };
 
+  const cached = welcomeDeliveredBySub.get(subscriptionId);
+  if (welcomeAlreadyDelivered(cached)) {
+    return {
+      ok: true,
+      sent: true,
+      delivered: true,
+      skipped: true,
+      reason: "Willkommens-Push bereits zugestellt",
+      subscriptionId,
+      notificationId: cached.notificationId,
+      recipients: cached.recipients ?? null,
+      attempt: "once"
+    };
+  }
+
+  if (welcomeInflightBySub.has(subscriptionId)) {
+    return welcomeInflightBySub.get(subscriptionId);
+  }
+
+  const job = sendWelcomePushOnce(env, subscriptionId, cached);
+  welcomeInflightBySub.set(subscriptionId, job);
+  try {
+    return await job;
+  } finally {
+    welcomeInflightBySub.delete(subscriptionId);
+  }
+}
+
+async function sendWelcomePushOnce(env, subscriptionId, cached) {
   const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
   const appId = String(env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e").trim();
   const title = "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh";
   const body = "Willkommen bei DAR AL TAWḤID. Du erhältst neue Beiträge aus Qurʾān, Sunnah und Āthār direkt als Benachrichtigung.";
   const url = `${site}/#home`;
-  // Zeitfenster-Idempotenz (2 Min): verhindert Doppel-Push bei Parallel-Requests,
-  // erlaubt aber echte Retries wenn das Gerät beim ersten Versuch noch nicht ready war
-  // (fester Key welcome:subId würde 0-Empfänger-Erfolge dauerhaft blockieren).
-  const attemptRaw = String(input.attempt || input.nonce || "").trim();
-  const attemptBucket = attemptRaw || String(Math.floor(Date.now() / (2 * 60 * 1000)));
-  const force = input.force === true || input.force === "1" || input.force === 1;
+  // Einmal pro Subscription: Client-attempt/force dürfen keine Extra-Pushs erzeugen.
+  // Nur wenn der letzte Versuch 0 Empfänger hatte, öffnet ein 10-Min-Fenster einen Retry.
+  const lastFailed = cached && cached.delivered === false;
+  const attemptBucket = lastFailed
+    ? String(Math.floor(Date.now() / (10 * 60 * 1000)))
+    : "once";
   const idempotencyKey = await deterministicUuid(
-    force
-      ? `welcome:${subscriptionId}:force:${Date.now()}`
-      : `welcome:${subscriptionId}:${attemptBucket}`
+    `welcome:${subscriptionId}:${attemptBucket}`
   );
 
   const payload = {
@@ -137,6 +171,7 @@ export async function sendWelcomePush(env, input = {}) {
     headings: { de: title, en: title },
     contents: { de: body, en: body },
     url,
+    collapse_id: `dar-welcome-${subscriptionId}`.slice(0, 64),
     idempotency_key: idempotencyKey,
     data: { type: "welcome", source: "dar-welcome-push", attempt: attemptBucket },
     chrome_web_icon: `${site}/notification-icon-192.png?v=2`,
@@ -146,6 +181,21 @@ export async function sendWelcomePush(env, input = {}) {
   try {
     const result = await postOneSignal(env, payload);
     const delivery = evaluateOneSignalDelivery(result.parsed);
+    if (delivery.delivered) {
+      welcomeDeliveredBySub.set(subscriptionId, {
+        delivered: true,
+        notificationId: delivery.notificationId || null,
+        recipients: delivery.recipients ?? null,
+        at: Date.now()
+      });
+    } else {
+      welcomeDeliveredBySub.set(subscriptionId, {
+        delivered: false,
+        notificationId: delivery.notificationId || null,
+        recipients: delivery.recipients ?? null,
+        at: Date.now()
+      });
+    }
     return {
       ok: true,
       sent: delivery.delivered,
@@ -158,6 +208,12 @@ export async function sendWelcomePush(env, input = {}) {
       oneSignal: result
     };
   } catch (err) {
+    welcomeDeliveredBySub.set(subscriptionId, {
+      delivered: false,
+      notificationId: null,
+      recipients: null,
+      at: Date.now()
+    });
     return { ok: true, sent: false, delivered: false, subscriptionId, reason: err.message || String(err) };
   }
 }
