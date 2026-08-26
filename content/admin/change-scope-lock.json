@@ -87,6 +87,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "welcome-push-workers-builds-reclaim-2026-08-26",
+      "approvedBy": "user-explicit-welcome-push-fix-push-live-now",
+      "reason": "Workers Builds überschreibt Deploy; Reclaim muss deployMarker/Build-ID erzwingen für Willkommens-Push live.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        ".github/workflows/deploy-admin-publisher.yml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "cloudflare/worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "welcome-push-live-force-deploy-2026-08-26",
       "approvedBy": "user-explicit-welcome-push-fix-push-live-now",
       "reason": "Force-Deploy Willkommens-Push v674 nach CDN/Workers-Race; Nutzer verlangt sofort live.",
