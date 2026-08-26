@@ -22781,59 +22781,55 @@ let welcomePushRetryTimer=null;
 let welcomePushAttempt=0;
 const WELCOME_PUSH_RETRY_DELAYS_MS=[5000,12000,25000,45000,90000,180000,300000,600000];
 function welcomePushStorageKey(subId){return "dar_welcome_push_v3_"+String(subId||"").trim()}
-function welcomePushAlreadySent(subId){if(!subId)return true;try{const v=localStorage.getItem(welcomePushStorageKey(subId));if(v&&v!=="0")return true}catch(e){}return false}
+function welcomePushAlreadySent(subId){try{if(localStorage.getItem(WELCOME_PUSH_SENT_KEY)==="1")return true;if(!subId)return true;const v=localStorage.getItem(welcomePushStorageKey(subId));if(v&&v!=="0")return true}catch(e){}return !subId}
 function markWelcomePushSent(subId,notificationId){if(!subId)return;try{localStorage.setItem(welcomePushStorageKey(subId),String(notificationId||"1"));localStorage.setItem(WELCOME_PUSH_SENT_KEY,"1");localStorage.removeItem(welcomePushPendingKey(subId))}catch(e){}}
 function welcomePushPendingKey(subId){return "dar_welcome_push_pending_v1_"+String(subId||"").trim()}
 function welcomePushPendingSince(subId){if(!subId)return 0;try{const raw=Number(localStorage.getItem(welcomePushPendingKey(subId))||0);return Number.isFinite(raw)&&raw>0?raw:0}catch(e){return 0}}
-function markWelcomePushPending(subId){if(!subId)return;try{localStorage.setItem(welcomePushPendingKey(subId),String(Date.now()))}catch(e){}}
+function markWelcomePushPending(subId){if(!subId)return;try{if(!welcomePushPendingSince(subId))localStorage.setItem(welcomePushPendingKey(subId),String(Date.now()))}catch(e){}}
 function welcomePushIsPending(subId){return welcomePushPendingSince(subId)>0}
-function welcomePushPendingStale(subId,maxAgeMs=120000){const ts=welcomePushPendingSince(subId);if(!ts)return false;return(Date.now()-ts)>=Math.max(30000,Number(maxAgeMs)||120000)}
+function welcomePushPendingStale(subId,maxAgeMs=600000){const ts=welcomePushPendingSince(subId);if(!ts)return false;return(Date.now()-ts)>=Math.max(120000,Number(maxAgeMs)||600000)}
 function clearWelcomePushRetries(){if(welcomePushRetryTimer){clearTimeout(welcomePushRetryTimer);welcomePushRetryTimer=null}}
 function scheduleWelcomePushRetries(OS){
   try{
     const state=readOneSignalPushSubscriptionState(OS||window.OneSignal);
     if(!state.subscriptionId)return;
-    if(welcomePushAlreadySent(state.subscriptionId)&&!welcomePushIsPending(state.subscriptionId))return;
+    if(welcomePushAlreadySent(state.subscriptionId)){clearWelcomePushRetries();return}
     markWelcomePushPending(state.subscriptionId);
-    clearWelcomePushRetries();
+    if(welcomePushRetryTimer)return;
     let step=0;
     const run=async()=>{
       const os=OS||await waitForOneSignalReady(12000);
       const current=readOneSignalPushSubscriptionState(os);
       if(!current.optedIn||!current.subscriptionId){scheduleNext();return}
-      if(welcomePushAlreadySent(current.subscriptionId)&&!welcomePushIsPending(current.subscriptionId)){clearWelcomePushRetries();return}
-      const sent=await sendWelcomePushIfNeeded(os,{force:step>2});
-      if(sent){clearWelcomePushRetries();return}
+      if(welcomePushAlreadySent(current.subscriptionId)){clearWelcomePushRetries();return}
+      const sent=await sendWelcomePushIfNeeded(os,{force:welcomePushPendingStale(current.subscriptionId,600000)});
+      if(sent||welcomePushAlreadySent(current.subscriptionId)){clearWelcomePushRetries();return}
       scheduleNext();
     };
     const scheduleNext=()=>{
       const delay=WELCOME_PUSH_RETRY_DELAYS_MS[Math.min(step,WELCOME_PUSH_RETRY_DELAYS_MS.length-1)];
       step+=1;
-      // Autonom: nach der Liste weiter mit letztem Intervall (max 10 Min), bis zugestellt
       welcomePushRetryTimer=setTimeout(run,delay);
     };
     run();
   }catch(e){console.warn("Willkommens-Push Retry:",e)}
 }
 async function sendWelcomePushIfNeeded(OS,opts={}){
+  if(welcomePushInFlight)return false;
+  welcomePushInFlight=true;
   try{
     const resolved=await waitForPushSubscriptionReady(OS,{timeoutMs:20000,request:false});
     const subId=resolved.subscriptionId;
     if(!subId||!resolved.optedIn)return false;
-    const os=resolved.os;
-    if(welcomePushAlreadySent(subId)&&!opts.force){try{localStorage.removeItem(welcomePushPendingKey(subId))}catch(e){}return true;}
-    if(welcomePushInFlight)return false;
-    welcomePushInFlight=true;
+    if(welcomePushAlreadySent(subId)){try{localStorage.removeItem(welcomePushPendingKey(subId))}catch(e){}return true;}
     markWelcomePushPending(subId);
     welcomePushAttempt+=1;
-    const payload={subscriptionId:subId,attempt:String(welcomePushAttempt)};
-    const forceWelcome=Boolean(opts.force||welcomePushPendingStale(subId,120000));
+    const payload={subscriptionId:subId,attempt:"once"};
+    const forceWelcome=Boolean(opts.force&&welcomePushPendingStale(subId,600000)&&!welcomePushAlreadySent(subId));
     if(forceWelcome)payload.force=true;
     const r=await fetch(`${PRAYER_PUSH_WORKER_URL}/api/push/welcome`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
     const data=await r.json().catch(()=>({}));
-    const recipients=Number(data.recipients);
-    const recipientsOk=!Number.isFinite(recipients)||recipients>0;
-    if(r.ok&&data.sent&&data.delivered!==false&&recipientsOk){
+    if(r.ok&&(data.sent||data.skipped)&&data.delivered!==false){
       markWelcomePushSent(subId,data.notificationId||data.id||"1");
       clearWelcomePushRetries();
       return true;
