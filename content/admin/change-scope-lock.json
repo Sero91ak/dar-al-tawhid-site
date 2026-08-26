@@ -3586,6 +3586,23 @@
         "version.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "admin-mobile-compact-layout-2026-08-26",
+      "approvedBy": "user-explicit-admin-mobile-layout",
+      "reason": "Admin App Smartphone-Seitenverhältnis: Quellen/Beiträge + globale Mobile-Optik",
+      "paths": [
+        "admin/index.html",
+        "admin/sw.js",
+        "admin/live-edit.css",
+        "version.json",
+        "index.html",
+        "test/version.json",
+        "test/index.html",
+        "content/admin/change-scope-lock.json",
+        ".github/workflows/deploy-live-admin-app.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

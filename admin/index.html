@@ -304,16 +304,65 @@ button{cursor:pointer}
 .source-library-item b{color:var(--ink);font-size:11px}
 .source-library-item span{color:var(--muted);line-height:1.35}
 .source-library-item .btn{min-height:32px;padding:6px 10px;font-size:10px}
-.quellen-studio{display:grid;gap:12px}
-.quellen-grid{display:grid;grid-template-columns:minmax(260px,.9fr) minmax(320px,1.1fr);gap:12px;align-items:start}
-.quellen-search-panel,.quellen-editor-panel{min-height:min(72vh,680px);display:flex;flex-direction:column;gap:8px}
-.quellen-result-list{display:flex;flex-direction:column;gap:6px;flex:1;max-height:min(52vh,440px);overflow:auto}
-.quellen-result-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start;padding:8px 10px;border:1px solid var(--line2);border-radius:12px;background:rgba(0,0,0,.08);cursor:pointer;text-align:left;width:100%;font:inherit;color:inherit}
+.quellen-studio{display:grid;gap:12px;min-width:0;max-width:100%}
+.quellen-grid{display:grid;grid-template-columns:minmax(260px,.9fr) minmax(320px,1.1fr);gap:12px;align-items:start;min-width:0}
+.quellen-search-panel,.quellen-editor-panel{min-height:min(72vh,680px);display:flex;flex-direction:column;gap:8px;min-width:0;overflow:hidden}
+.quellen-result-list{display:flex;flex-direction:column;gap:6px;flex:1;max-height:min(52vh,440px);overflow:auto;-webkit-overflow-scrolling:touch}
+.quellen-result-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start;padding:8px 10px;border:1px solid var(--line2);border-radius:12px;background:rgba(0,0,0,.08);cursor:pointer;text-align:left;width:100%;font:inherit;color:inherit;min-width:0}
 .quellen-result-row.is-active{border-color:rgba(140,190,255,.5);background:rgba(90,140,220,.08)}
-.quellen-result-title{font-size:11px;font-weight:900;color:var(--ink);line-height:1.35}
-.quellen-result-meta{font-size:9px;color:var(--soft);margin-top:2px;line-height:1.4}
-.quellen-badges{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end}
-.quellen-badge{border:1px solid rgba(239,215,142,.22);border-radius:999px;padding:2px 6px;font-size:8px;font-weight:900;color:var(--gold);background:rgba(239,215,142,.06)}
+.quellen-result-title{font-size:11px;font-weight:900;color:var(--ink);line-height:1.35;overflow-wrap:anywhere;word-break:break-word}
+.quellen-result-meta{font-size:9px;color:var(--soft);margin-top:2px;line-height:1.4;overflow-wrap:anywhere;word-break:break-word}
+.quellen-badges{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end;min-width:0}
+.quellen-badge{border:1px solid rgba(239,215,142,.22);border-radius:999px;padding:2px 6px;font-size:8px;font-weight:900;color:var(--gold);background:rgba(239,215,142,.06);white-space:nowrap}
+.ordner-lead,.quellen-lead{margin:0;color:var(--soft);font-size:12px;line-height:1.5;overflow-wrap:anywhere;word-break:break-word;max-width:100%}
+/* Mobile-first Admin: Smartphone-Seitenverhältnis, lesbar, tippbar */
+@media(max-width:980px){
+  .quellen-grid,.ordner-grid,.admin-editor-grid,.quellen-editor-stack,.quellen-kurzlink-grid{grid-template-columns:1fr!important}
+  .quellen-search-panel,.quellen-editor-panel{min-height:0;max-height:none}
+  .quellen-grid.has-editor .quellen-editor-panel{order:-1}
+  .quellen-result-list{max-height:min(38vh,320px)}
+  .quellen-result-row{grid-template-columns:1fr;gap:8px;padding:12px;min-height:52px}
+  .quellen-badges{justify-content:flex-start}
+  .quellen-result-title{font-size:14.5px;line-height:1.35;font-weight:800}
+  .quellen-result-meta{font-size:11px;line-height:1.45;margin-top:4px}
+  .quellen-badge{font-size:10px;padding:5px 9px;min-height:28px;display:inline-flex;align-items:center}
+  .quellen-overview{font-size:12px;max-height:none}
+  .quellen-link-row{grid-template-columns:1fr;gap:8px;padding:10px}
+  .quellen-link-row b{font-size:12.5px}
+  .quellen-link-row span{font-size:11px}
+  .quellen-editor-panel .paste-area,.quellen-editor-panel .markdown-editor,.ordner-editor-area{min-height:min(42vh,360px);font-size:13.5px;line-height:1.55;padding:12px}
+  .ordner-editor-actions,.quellen-editor-panel .ordner-editor-actions{display:grid;grid-template-columns:1fr;gap:8px}
+  .ordner-editor-actions .btn,.quellen-editor-panel .ordner-editor-actions .btn{width:100%;justify-content:center;min-height:44px;font-size:12.5px}
+  .section-head{flex-wrap:wrap;align-items:flex-start;gap:6px}
+  .section-head h3{font-size:18px;line-height:1.2;overflow-wrap:anywhere}
+  .section-head span{white-space:normal;font-size:11px;line-height:1.35}
+  .ordner-lead,.quellen-lead{font-size:12.5px;line-height:1.5}
+  .field,.paste-area{font-size:14px}
+  .btn{min-height:42px}
+}
+@media(max-width:640px){
+  .quellen-studio,.ordner-studio,.admin-actions-layout,.split{width:100%;max-width:100%}
+  .panel{padding:12px;border-radius:14px}
+  .quellen-search-panel .field{min-height:44px;font-size:15px}
+  .quellen-result-list{max-height:min(34vh,280px);gap:8px}
+  .quellen-result-row{padding:13px 12px;border-radius:14px}
+  .quellen-result-title{font-size:15px}
+  .quellen-result-meta{font-size:11.5px}
+  .admin-action-summary{grid-template-columns:1fr;gap:8px;padding:12px}
+  .admin-action-summary h4{font-size:17px}
+  .admin-action-summary p{font-size:11.5px;line-height:1.4}
+  .admin-post-mode-row{gap:10px}
+  .admin-post-mode-row label{min-height:48px;font-size:13px}
+  .admin-post-quick-actions{grid-template-columns:1fr 1fr!important;gap:8px}
+  .admin-post-quick-actions .btn{min-height:44px;font-size:12px}
+  .publish-meta-row{grid-template-columns:1fr;gap:8px}
+  .topbar{gap:8px}
+  .brand h1{font-size:20px;line-height:1.15}
+  .brand p{font-size:10.5px;line-height:1.35;overflow-wrap:anywhere}
+  .toolbar{gap:8px}
+  .toolbar .btn{min-height:42px;font-size:12px}
+  #adminTabSelect,.field{min-height:44px}
+}
 .quellen-overview{border:1px solid rgba(140,190,255,.16);border-radius:14px;padding:10px;background:rgba(0,0,0,.18);font-size:10.5px;line-height:1.45;color:var(--soft);max-height:min(28vh,220px);overflow:auto;white-space:pre-wrap;word-break:break-word}
 .quellen-link-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;align-items:center;padding:6px 8px;border:1px solid rgba(239,215,142,.12);border-radius:10px;background:rgba(0,0,0,.12);font-size:10px;margin-bottom:6px}
 .quellen-link-row b{color:var(--ink);display:block;font-size:10.5px}
@@ -2611,12 +2660,12 @@ function renderQuellen(){
   const workerReady=!!(savedWorkerSecret()||(document.getElementById("workerSecretInput")?.value||"").trim());
   return `<section class="quellen-studio">
     <div class="panel">
-      <div class="section-head"><h3>Beiträge bearbeiten · PDF &amp; Bild</h3><span>${busy?"lädt…":`${list.length} Treffer`}</span></div>
-      <p class="ordner-lead">Links Beitrag suchen und öffnen. Rechts Markdown ansehen, <strong>PDF oder Bild per Drag &amp; Drop</strong> hinzufügen, bestehende Anhänge mit <strong>Entfernen</strong> löschen, dann <strong>Speichern &amp; veröffentlichen</strong>.${workerReady?"":" Worker Secret unter Aktionen hinterlegen."}</p>
+      <div class="section-head"><h3>Beiträge bearbeiten</h3><span>${busy?"lädt…":`${list.length} Treffer`}</span></div>
+      <p class="quellen-lead">Beitrag suchen, öffnen, PDF/Bild hinzufügen, speichern.${workerReady?"":" Worker Secret unter Aktionen hinterlegen."}</p>
     </div>
-    <div class="quellen-grid">
+    <div class="quellen-grid${quellenEdit.filename?" has-editor":""}">
       <aside class="panel quellen-search-panel">
-        <input class="field" id="quellenSearchInput" type="search" placeholder="z. B. 351, ibn-abd-al-barr, Nuzūl, Aqidah, al-Istidhkār…" value="${esc(quellenSearchQuery)}">
+        <input class="field" id="quellenSearchInput" type="search" placeholder="Suchen: Nummer, Titel, Gelehrter…" value="${esc(quellenSearchQuery)}" autocomplete="off">
         <div class="quellen-result-list">${rows||`<div class="empty">${busy?"Lade Beiträge…":"Keine Treffer."}</div>`}</div>
         <button class="btn" id="quellenReloadBtn" type="button">Katalog neu laden</button>
       </aside>
@@ -2624,18 +2673,18 @@ function renderQuellen(){
         <div class="section-head"><h3>Beitrag</h3><span>${quellenEdit.filename?esc(quellenEdit.filename):"Beitrag wählen"}</span></div>
         ${quellenEdit.filename?`<div class="quellen-editor-stack">
           <section class="editor-card editor-card-main">
-            <label class="field-label" for="quellenEditor">Markdown-Beitrag</label>
+            <label class="field-label" for="quellenEditor">Markdown</label>
             <textarea class="paste-area ordner-editor-area markdown-editor" id="quellenEditor" spellcheck="false">${esc(quellenEdit.markdown)}</textarea>
             ${renderSourceFilesPanel("quellen")}
             ${window.DARAdminFeedImage?DARAdminFeedImage.renderPanel("quellen"):""}
           </section>
         </div>
         <div class="ordner-editor-actions">
-          <button class="btn" id="quellenEditorReloadBtn" type="button">Verwerfen &amp; neu laden</button>
-          <a class="btn" href="${SITE_ORIGIN}/#post/${encodeURIComponent(quellenEdit.postId||quellenEdit.filename.replace(/\.md$/i,""))}" target="_blank" rel="noopener">In App öffnen</a>
           <button class="btn primary" id="quellenSaveBtn" type="button">Beitrag speichern</button>
+          <a class="btn" href="${SITE_ORIGIN}/#post/${encodeURIComponent(quellenEdit.postId||quellenEdit.filename.replace(/\.md$/i,""))}" target="_blank" rel="noopener">In App öffnen</a>
+          <button class="btn" id="quellenEditorReloadBtn" type="button">Verwerfen</button>
         </div>
-        <div class="upload-status" id="quellenEditorStatus">${esc(quellenEditorStatus||"Markdown + Feed-Bild werden gemeinsam gespeichert.")}</div>`:`<div class="empty">Links einen Beitrag aus der Suche wählen.</div>`}
+        <div class="upload-status" id="quellenEditorStatus">${esc(quellenEditorStatus||"Markdown + Anhänge speichern.")}</div>`:`<div class="empty">Oben oder unten einen Beitrag aus der Liste wählen.</div>`}
       </div>
     </div>
   </section>`;
