@@ -18,15 +18,15 @@ links:
 logo: "logo-black.png"
 status: "published"
 feed:
-  enabled: false
+  enabled: true
   image: ""
   originalImage: ""
-  alt: ""
-  shareEnabled: false
+  alt: "Die Wahrheit vor der eigenen Meinung"
+  shareEnabled: true
 ---
 
 🖋️ **Imām ash-Shāfiʿī** رحمه الله sagte:
 
-**"Ich habe mit niemandem diskutiert, außer dass ich mir wünschte, dass die Wahrheit durch seine Zunge oder durch meine Zunge erscheint."**
+**„Ich habe mit niemandem diskutiert, außer dass ich mir wünschte, dass die Wahrheit durch seine Zunge oder durch meine Zunge erscheint.“**
 
 🌙 **Fazit:** Wahre Suche nach Wissen bedeutet nicht, die eigene Meinung gewinnen zu lassen, sondern dass die Wahrheit erkannt wird, selbst wenn sie durch den anderen sichtbar wird.
