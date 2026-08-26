@@ -87,6 +87,28 @@
   ],
   "unlockedScopes": [
     {
+      "id": "welcome-push-autorepair-live-2026-08-26",
+      "approvedBy": "user-explicit-welcome-push-fix-push-live-now",
+      "reason": "Nutzer: Neu-Installationen bekommen keinen Willkommens-Push (Assalamu alaikum). Fix + autonome Reparatur, sofort live inkl. Admin/Worker.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/admin/push-autonomous-heal-lock.json",
+        "cloudflare/daily-push-admin.js",
+        "cloudflare/onesignal-delivery.js",
+        "cloudflare/worker.js",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "scripts/push-autonomous-heal-guard.js",
+        "scripts/apply-welcome-push-delivery-fix.js",
+        "admin/index.html"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "prayer-advance-countdown-1573-2026-08-25",
       "approvedBy": "user-explicit-prayer-push-error-screenshot",
       "reason": "Nutzer: Push „Dhuhr in 1573 Min“ / ʿAṣr erneut falsch. Vorwarn-Text immer 5/10/15 Min, alte OneSignal-Queue mit falschem Countdown stornieren.",

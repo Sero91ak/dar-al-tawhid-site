@@ -2,7 +2,7 @@
   "version": 1,
   "id": "push-autonomous-heal-lock",
   "lockedAt": "2026-08-19T11:55:00.000Z",
-  "reason": "Push-Zustellung (Android/iOS) muss selbstheilend bleiben: absoluter OneSignal-SW, gcm_sender_id, durable sub.id, Client-Autorepair, Worker-Secret-Watchdog.",
+  "reason": "Push-Zustellung (Android/iOS) muss selbstheilend bleiben: absoluter OneSignal-SW, gcm_sender_id, durable sub.id, Client-Autorepair, Worker-Secret-Watchdog. | Willkommens-Push Autorepair v3 (0-Empfänger + Retry-Idempotenz).",
   "requiredMarkers": {
     "index.html": [
       "darInitOneSignal",
@@ -12,7 +12,14 @@
       "clearStickyPushLaunchParams",
       "function repairPushConnection",
       "function maintainPushHealth",
-      "function startPushHealthMonitor"
+      "function startPushHealthMonitor",
+      "dar_welcome_push_v3_",
+      "dar_welcome_push_pending_v1_",
+      "scheduleWelcomePushRetries",
+      "sendWelcomePushIfNeeded",
+      "syncPushRegistrationAndWelcome",
+      "payload.force=true",
+      "WELCOME_PUSH_RETRY_DELAYS_MS"
     ],
     "test/index.html": [
       "darInitOneSignal",
@@ -22,7 +29,14 @@
       "clearStickyPushLaunchParams",
       "function repairPushConnection",
       "function maintainPushHealth",
-      "function startPushHealthMonitor"
+      "function startPushHealthMonitor",
+      "dar_welcome_push_v3_",
+      "dar_welcome_push_pending_v1_",
+      "scheduleWelcomePushRetries",
+      "sendWelcomePushIfNeeded",
+      "syncPushRegistrationAndWelcome",
+      "payload.force=true",
+      "WELCOME_PUSH_RETRY_DELAYS_MS"
     ],
     "manifest.json": [
       "\"gcm_sender_id\": \"482941809286\""
@@ -38,6 +52,16 @@
       "Push Worker Secret Watchdog",
       "hasOneSignalKey",
       "Deploy Admin Publisher Worker"
+    ],
+    "cloudflare/daily-push-admin.js": [
+      "export async function sendWelcomePush",
+      "welcome:${subscriptionId}:${attemptBucket}",
+      "recipients: delivery.recipients"
+    ],
+    "cloudflare/onesignal-delivery.js": [
+      "parseAcceptedRecipientCount",
+      "accepted <= 0",
+      "0 Empfänger"
     ]
   },
   "forbiddenPatterns": {
@@ -47,5 +71,6 @@
     "test/index.html": [
       "serviceWorkerPath:\"push/onesignal/OneSignalSDKWorker.js\""
     ]
-  }
+  },
+  "updatedAt": "2026-08-26T19:40:00.000Z"
 }

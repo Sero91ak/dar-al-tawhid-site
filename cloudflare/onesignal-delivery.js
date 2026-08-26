@@ -42,10 +42,24 @@ export function evaluateOneSignalDelivery(parsed = {}) {
     };
   }
 
+  const accepted = parseAcceptedRecipientCount(parsed);
+  // Gezielte Pushs (Willkommen/Test): 0 Empfänger = noch nicht zustellbar.
+  // Fehlendes recipients-Feld darf eine gültige Notification-ID nicht verwerfen.
+  if (Number.isFinite(accepted) && accepted <= 0) {
+    return {
+      delivered: false,
+      notificationId: parsed.id,
+      reason:
+        "OneSignal meldet 0 Empfänger – Gerät noch nicht bereit. Willkommens-Push wird automatisch erneut versucht.",
+      recipients: accepted
+    };
+  }
+
   return {
     delivered: true,
     notificationId: parsed.id,
-    reason: null
+    reason: null,
+    recipients: Number.isFinite(accepted) ? accepted : null
   };
 }
 
