@@ -253,6 +253,28 @@ jobs:
         run: node scripts/purge-cloudflare-cache.js
         continue-on-error: true
 
+      - name: Reclaim visitor assets after Workers Builds race
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          EXPECT="$(node -e "console.log(require('./version.json').buildId||require('./version.json').appBuildId||'')")"
+          echo "Erwarte Build $EXPECT"
+          for attempt in 1 2 3 4 5 6; do
+            LIVE="$(curl -fsS "https://dar-al-tawhid-site.sero91ak.workers.dev/version.json" || true)"
+            echo "workers.dev version: $LIVE"
+            if printf '%s' "$LIVE" | grep -q "\"buildId\":\"$EXPECT\""; then
+              echo "Visitor-Worker Build OK (Versuch $attempt)"
+              break
+            fi
+            echo "Visitor overwrite/stale (Versuch $attempt) – wrangler deploy"
+            npx wrangler deploy
+            sleep 20
+          done
+          # CDN purge aggressively
+          node scripts/purge-cloudflare-cache.js || true
+          sleep 5
+
       - name: Live-Deploy verifizieren (nur Besucher-App)
         env:
           SITE_URL: "https://dar-al-tawhid.de"

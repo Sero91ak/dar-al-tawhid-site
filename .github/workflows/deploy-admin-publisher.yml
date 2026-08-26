@@ -98,22 +98,26 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          EXPECT_DEPLOY_MARKER: welcome-push-autorepair-v1
         run: |
           echo "Warte auf möglichen Workers-Builds-Overwrite…"
           sleep 70
-          for attempt in 1 2 3 4 5; do
+          for attempt in 1 2 3 4 5 6 7 8; do
             HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true)"
-            if printf '%s' "$HEALTH" | grep -q '"service":"dar-admin-publisher"'; then
-              echo "Admin-Worker noch aktiv (Versuch $attempt)"
+            if printf '%s' "$HEALTH" | grep -q '"service":"dar-admin-publisher"' \
+              && printf '%s' "$HEALTH" | grep -q "\"deployMarker\":\"$EXPECT_DEPLOY_MARKER\""; then
+              echo "Admin-Worker korrekt aktiv (Versuch $attempt, Marker $EXPECT_DEPLOY_MARKER)"
               break
             fi
-            echo "Overwrite erkannt (Versuch $attempt) – redeploy cloudflare/wrangler.toml"
+            echo "Overwrite/falscher Marker (Versuch $attempt) – redeploy cloudflare/wrangler.toml"
+            echo "Health: $HEALTH"
             wrangler deploy --name dar-admin-publisher
-            sleep 15
+            sleep 20
           done
           HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true)"
           echo "Nach Reclaim: $HEALTH"
           printf '%s' "$HEALTH" | grep -q '"service":"dar-admin-publisher"'
+          printf '%s' "$HEALTH" | grep -q "\"deployMarker\":\"$EXPECT_DEPLOY_MARKER\""
 
       - name: Sync core worker secrets
         continue-on-error: true
@@ -480,3 +484,26 @@ jobs:
             -H "Authorization: Bearer ${ADMIN_PUBLISH_SECRET}" \
             -H "Content-Type: application/json" \
             -d '{"staging":true,"force":false,"maxDownloads":20}' || echo "::warning::Feed-BG Sync nach Deploy fehlgeschlagen"
+
+      - name: Final reclaim deploy marker
+        if: always() && job.status != 'cancelled'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          EXPECT_DEPLOY_MARKER: welcome-push-autorepair-v1
+        working-directory: cloudflare
+        run: |
+          for attempt in 1 2 3 4 5; do
+            HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true)"
+            if printf '%s' "$HEALTH" | grep -q "\"deployMarker\":\"$EXPECT_DEPLOY_MARKER\""; then
+              echo "Final OK: $HEALTH"
+              exit 0
+            fi
+            echo "Final reclaim Versuch $attempt"
+            wrangler deploy --name dar-admin-publisher
+            sleep 15
+          done
+          HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true)"
+          echo "Final Health: $HEALTH"
+          printf '%s' "$HEALTH" | grep -q "\"deployMarker\":\"$EXPECT_DEPLOY_MARKER\""
+
