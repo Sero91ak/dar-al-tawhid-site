@@ -166,6 +166,33 @@ function run() {
     }
   }
 
+
+  if (!adminIndex.includes("UI-Auswahl hat Vorrang") && !adminIndex.includes("checked.value===\"slide\"?\"slide\":\"single\"")) {
+    // selectedNewPostMode must trust radio when present
+  }
+  if (!adminIndex.includes('if(checked)return checked.value==="slide"?"slide":"single"') && !adminIndex.includes("if(checked)return checked.value===\"slide\"")) {
+    fail('admin/index.html selectedNewPostMode muss Radio-Auswahl priorisieren', failures);
+  } else {
+    ok('admin/index.html selectedNewPostMode priorisiert Radio');
+  }
+
+  if (P) {
+    const typed = [
+      "---",
+      'title: "X"',
+      'type: "slide"',
+      'layout: "slides"',
+      "---",
+      "Nur Text"
+    ].join("\n");
+    const asSingle = P.prepareMarkdownForMode(typed, "single", { id: "x", title: "X" });
+    if (!asSingle.ok || /type:\s*["']?slide/m.test(asSingle.markdown)) {
+      fail("Einzelbeitrag muss type:slide ohne Marker normalisieren", failures);
+    } else {
+      ok("Einzelbeitrag normalisiert type:slide ohne Marker");
+    }
+  }
+
   if (failures.count) {
     console.error(`\n${failures.count} Admin-Slide-Mode-Prüfung(en) fehlgeschlagen.`);
     process.exit(1);

@@ -693,17 +693,43 @@ function checkPin(pin){const want=String(cfg().adminPin||"").trim();const got=St
 function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),1800)}
 function loadLocalDraft(){try{const d=JSON.parse(localStorage.getItem(ADMIN_DRAFT_KEY)||"{}");draftMarkdown=d.markdown||draftMarkdown;draftFilename=d.filename||draftFilename;draftStatus=d.status||draftStatus;draftPostMode=d.postMode==="slide"?"slide":"single"}catch(e){}}
 function saveLocalDraft(note="Entwurf lokal gespeichert."){try{localStorage.setItem(ADMIN_DRAFT_KEY,JSON.stringify({markdown:draftMarkdown,filename:draftFilename,status:draftStatus,postMode:draftPostMode,updatedAt:new Date().toISOString()}))}catch(e){}draftStatus=note;addAdminLog("Entwurf",note,draftFilename||"Lokaler Admin-Entwurf");toast(note)}
-function selectedNewPostMode(){const checked=document.querySelector('input[name="newPostMode"]:checked');return checked?.value==="slide"?"slide":(draftPostMode==="slide"?"slide":"single")}
-function syncNewPostModeFromUi(){draftPostMode=selectedNewPostMode();updateNewPostModeStatus()}
+function selectedNewPostMode(){
+  const checked=document.querySelector('input[name="newPostMode"]:checked');
+  // UI-Auswahl hat Vorrang — sonst springt Einzelbeitrag zurück auf Slide (draftPostMode).
+  if(checked)return checked.value==="slide"?"slide":"single";
+  return draftPostMode==="slide"?"slide":"single";
+}
+function applyNewPostModeToMarkdown(mode){
+  const ta=document.getElementById("postMarkdownInput");
+  const raw=ta?.value||draftMarkdown||"";
+  if(!raw.trim()||!window.DARSlidePostParser?.prepareMarkdownForMode)return;
+  if(mode!=="single")return;
+  const prepared=DARSlidePostParser.prepareMarkdownForMode(raw,"single",{
+    title:frontmatterValue(raw,"title"),
+    id:frontmatterValue(raw,"id"),
+    status:frontmatterValue(raw,"status")||"draft"
+  });
+  // Nur Frontmatter-Typ ohne Slide-Marker → still auf Einzelbeitrag normalisieren
+  if(prepared.ok&&prepared.markdown&&prepared.markdown!==raw){
+    draftMarkdown=prepared.markdown;
+    if(ta)ta.value=draftMarkdown;
+  }
+}
+function syncNewPostModeFromUi(){
+  draftPostMode=selectedNewPostMode();
+  applyNewPostModeToMarkdown(draftPostMode);
+  updateNewPostModeStatus();
+}
 function updateNewPostModeStatus(){
   const markdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown||"";
   const mode=selectedNewPostMode();
+  draftPostMode=mode;
   const el=document.getElementById("newPostModeStatus");
   if(!el)return;
   if(window.DARSlidePostParser?.formatSlideStatusLine)el.textContent=DARSlidePostParser.formatSlideStatusLine(markdown,mode);
   else el.textContent=mode==="slide"?"Slide-Modus":"Einzelbeitrag";
   const preview=document.getElementById("slideDraftPreview");
-  const html=renderSlideDraftPreview(markdown);
+  const html=mode==="slide"?renderSlideDraftPreview(markdown):"";
   if(preview){if(html)preview.outerHTML=html;else preview.remove()}
   else if(html){const ta=document.getElementById("postMarkdownInput");if(ta)ta.insertAdjacentHTML("afterend",html)}
 }
@@ -718,7 +744,7 @@ function checkNewPostMarkdown(){
     id:frontmatterValue(draftMarkdown,"id"),
     status:"draft"
   });
-  if(prepared.markdown&&draftPostMode==="slide"){
+  if(prepared.markdown&&(draftPostMode==="slide"||draftPostMode==="single")){
     draftMarkdown=prepared.markdown;
     const ta=document.getElementById("postMarkdownInput");
     if(ta)ta.value=draftMarkdown;

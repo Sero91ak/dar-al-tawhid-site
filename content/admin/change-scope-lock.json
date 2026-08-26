@@ -3586,6 +3586,20 @@
         "version.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "admin-single-mode-stick-2026-08-26",
+      "approvedBy": "user-explicit-admin-single-mode-jump-fix",
+      "reason": "Einzelbeitrag springt zu Slide: selectedNewPostMode Bug + Frontmatter-Normalisierung",
+      "paths": [
+        "admin/index.html",
+        "assets/slide-post-parser.js",
+        "scripts/admin-slide-mode-ui-guard.js",
+        "content/admin/change-scope-lock.json",
+        "admin/sw.js",
+        ".github/workflows/deploy-live-admin-app.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

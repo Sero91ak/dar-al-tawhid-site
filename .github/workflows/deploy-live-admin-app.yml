@@ -58,7 +58,7 @@ jobs:
             echo "$html" | grep -F "checkNewPostBtn" >/dev/null || { echo "retry $i: admin check button"; sleep 8; continue; }
             echo "$html" | grep -F 'id="uploadPostBtn"' >/dev/null || { echo "retry $i: admin publish button"; sleep 8; continue; }
             echo "$html" | grep -F "KI-Video-Studio" >/dev/null || { echo "retry $i: menu"; sleep 8; continue; }
-            echo "$html$sw" | grep -F "dar-admin-stats-v65-hang-fix" >/dev/null || { echo "retry $i: sw"; sleep 8; continue; }
+            echo "$html$sw" | grep -F "dar-admin-single-mode-v67" >/dev/null || { echo "retry $i: sw"; sleep 8; continue; }
             echo "$studio" | grep -F "Textbeitrag einfügen" >/dev/null || { echo "retry $i: studio text"; sleep 8; continue; }
             echo "$studio" | grep -F "Bild hochladen" >/dev/null || { echo "retry $i: upload"; sleep 8; continue; }
             echo "$studio" | grep -F "Video-Beitrag erstellen" >/dev/null || { echo "retry $i: create"; sleep 8; continue; }

@@ -169,12 +169,22 @@
         errors.push("Keine <!-- slide: N --> Marker erkannt — bitte Aussagen als Slides trennen");
       }
       if (!info.hasTypeSlide && info.hasBodyMarkers) {
-        // Frontmatter wird beim Prepare gesetzt — hier nur Hinweis
         warnings.push('Frontmatter type/layout wird beim Veröffentlichen auf Slide gesetzt');
       }
     }
-    if (mode === "single" && (info.isSlide || info.hasBodyMarkers || info.hasTypeSlide)) {
-      errors.push("Dieser Beitrag enthält Slide-Struktur. Bitte Slide-Modus wählen oder Marker entfernen.");
+    if (mode === "single") {
+      // Nur echte Body-Marker blockieren. type/layout: slide ohne Marker wird normalisiert.
+      if (info.hasBodyMarkers) {
+        errors.push("Dieser Beitrag enthält Slide-Struktur. Bitte Slide-Modus wählen oder Marker entfernen.");
+      } else if (info.hasTypeSlide) {
+        warnings.push('type/layout „slide“ wird für Einzelbeitrag entfernt');
+      }
+      // analyze-Fehler wie „type slide ohne Slides“ gelten nicht im Einzelmodus
+      for (let i = errors.length - 1; i >= 0; i--) {
+        if (/type:\s*["']?slide/i.test(errors[i]) || /keine Slides erkannt/i.test(errors[i])) {
+          errors.splice(i, 1);
+        }
+      }
     }
 
     return {
@@ -193,7 +203,7 @@
       return { ok: check.ok, markdown: next, errors: check.errors, warnings: check.warnings, info: check.info };
     }
     const audit = analyzeSlideMarkdown(raw);
-    if (audit.isSlide || audit.hasBodyMarkers || audit.hasTypeSlide) {
+    if (audit.hasBodyMarkers) {
       return {
         ok: false,
         markdown: raw,
@@ -202,8 +212,12 @@
         info: audit
       };
     }
+    // Einzelbeitrag: type/layout slide ohne Marker → entfernen und speichern
     const next = ensureSingleFrontmatter(raw, fallback);
-    return { ok: true, markdown: next, errors: [], warnings: [], info: analyzeSlideMarkdown(next) };
+    const warnings = audit.hasTypeSlide
+      ? ['type/layout „slide“ entfernt — als Einzelbeitrag gespeichert']
+      : [];
+    return { ok: true, markdown: next, errors: [], warnings, info: analyzeSlideMarkdown(next) };
   }
 
   function formatSlideStatusLine(markdown, mode) {
@@ -214,8 +228,11 @@
       if (!audit.hasBodyMarkers) return "Slide-Modus · bitte <!-- slide: 1 --> Marker einfügen";
       return "Slide-Modus vorbereitet";
     }
-    if (audit.isSlide || audit.hasBodyMarkers || audit.hasTypeSlide) {
-      return "Achtung: Markdown enthält Slide-Struktur — bitte Slide-Modus wählen";
+    if (audit.hasBodyMarkers) {
+      return "Achtung: Markdown enthält Slide-Marker — bitte Slide-Modus wählen oder Marker entfernen";
+    }
+    if (audit.hasTypeSlide) {
+      return "Einzelbeitrag · type/layout „slide“ wird beim Speichern entfernt";
     }
     return "✓ Einzelbeitrag vorbereitet";
   }
