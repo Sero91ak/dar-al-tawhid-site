@@ -8,13 +8,30 @@ const GLOBAL_API_KEY = process.env.CLOUDFLARE_GLOBAL_API_KEY || process.env.CLOU
 const GLOBAL_EMAIL = process.env.CLOUDFLARE_EMAIL || "";
 const ZONE_ID = process.env.CLOUDFLARE_ZONE_ID || "0e4c0fdfaca4f3fa137de3a67ac8a68b";
 const ENABLE_DEV_MODE = String(process.env.CLOUDFLARE_DEV_MODE || "1").trim() !== "0";
+const VERIFY_ATTEMPTS = Math.max(1, Number(process.env.PURGE_VERIFY_ATTEMPTS || 5));
+const VERIFY_DELAY_MS = Math.max(500, Number(process.env.PURGE_VERIFY_DELAY_MS || 3000));
+
+function noCacheHeaders() {
+  return {
+    "Cache-Control": "no-cache, no-store, must-revalidate",
+    Pragma: "no-cache",
+    "User-Agent": "dar-purge-verify/1.1"
+  };
+}
+
+function withCacheBust(url) {
+  const u = new URL(url);
+  u.searchParams.set("purge_cb", `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`);
+  return u.toString();
+}
 
 async function readExpectedBuild(path) {
   const fallback = path.includes("/test/") ? "app-shell-v234" : "app-shell-v229";
   try {
-    const res = await fetch(`${SITE_URL}${path}`, {
+    const res = await fetch(withCacheBust(`${SITE_URL}${path}`), {
       cache: "no-store",
-      headers: { "Cache-Control": "no-cache", Pragma: "no-cache" }
+      redirect: "follow",
+      headers: noCacheHeaders()
     });
     const data = await res.json();
     return String(data?.buildId || fallback);
@@ -95,28 +112,43 @@ async function setDevelopmentMode(zoneId, on) {
   return result;
 }
 
-async function verifyLiveHtml() {
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+async function fetchHtmlForVerify(url) {
+  // /index.html is a 307→/ on the Worker; verify the canonical document URL.
+  const canonical = String(url).replace(/\/index\.html$/i, "/");
+  const res = await fetch(withCacheBust(canonical), {
+    cache: "no-store",
+    redirect: "follow",
+    headers: noCacheHeaders()
+  });
+  const html = await res.text();
+  const cf = res.headers.get("cf-cache-status") || "?";
+  return { html, cf, status: res.status, finalUrl: String(res.url || canonical) };
+}
+
+async function verifyLiveHtmlOnce() {
   const rootBuild = process.env.EXPECT_BUILD_ROOT || process.env.EXPECT_BUILD || await readExpectedBuild("/version.json");
   const testBuild = process.env.EXPECT_BUILD_TEST || process.env.EXPECT_TEST_BUILD || await readExpectedBuild("/test/version.json");
   const checks = [];
   if (PURGE_SCOPE === "both" || PURGE_SCOPE === "visitor") {
-    checks.push({ label: "Besucher-App", expected: rootBuild, urls: [`${SITE_URL}/`, `${SITE_URL}/index.html`] });
+    // Root document only — /index.html 307s to / and is not a separate asset.
+    checks.push({ label: "Besucher-App", expected: rootBuild, urls: [`${SITE_URL}/`] });
   }
   if (PURGE_SCOPE === "both" || PURGE_SCOPE === "test") {
-    checks.push({ label: "Dar Test", expected: testBuild, urls: [`${SITE_URL}/test/`, `${SITE_URL}/test/index.html`] });
+    checks.push({ label: "Dar Test", expected: testBuild, urls: [`${SITE_URL}/test/`] });
   }
   let allOk = true;
   for (const check of checks) {
     let ok = false;
     for (const url of check.urls) {
-    const res = await fetch(url, {
-      cache: "no-store",
-      headers: { "Cache-Control": "no-cache", Pragma: "no-cache" }
-    });
-    const html = await res.text();
-    const cf = res.headers.get("cf-cache-status") || "?";
+      const { html, cf, status, finalUrl } = await fetchHtmlForVerify(url);
       const hasBuild = html.includes(check.expected);
-      console.log(`Verify ${url} (${check.label}) → cf-cache=${cf}, expected=${check.expected}, build=${hasBuild}`);
+      console.log(
+        `Verify ${url} (${check.label}) → status=${status}, cf-cache=${cf}, expected=${check.expected}, build=${hasBuild}, final=${finalUrl}`
+      );
       ok = ok || hasBuild;
     }
     allOk = allOk && ok;
@@ -124,8 +156,17 @@ async function verifyLiveHtml() {
   return allOk;
 }
 
-function sleep(ms) {
-  return new Promise((r) => setTimeout(r, ms));
+async function verifyLiveHtml() {
+  for (let attempt = 1; attempt <= VERIFY_ATTEMPTS; attempt++) {
+    const ok = await verifyLiveHtmlOnce();
+    if (ok) return true;
+    if (attempt < VERIFY_ATTEMPTS) {
+      const wait = VERIFY_DELAY_MS * attempt;
+      console.warn(`Verify Versuch ${attempt}/${VERIFY_ATTEMPTS} fehlgeschlagen — warte ${wait}ms…`);
+      await sleep(wait);
+    }
+  }
+  return false;
 }
 
 function testPurgeFiles() {
