@@ -1,0 +1,33 @@
+---
+id: "imam-shafii-wahrheit-vor-meinung-462"
+date: "2026-08-26T11:39:25.000Z"
+title: "📖 Die Wahrheit vor der eigenen Meinung"
+category: "Adab"
+topic: "Wahrheitssuche und Diskussion"
+scholar: "Imām ash-Shāfiʿī"
+book: "Manāqib ash-Shāfiʿī"
+tags:
+  - "#DarAlTawhid"
+  - "#ImamShafi"
+  - "#Adab"
+  - "#Sunnah"
+source: "📝 al-Bayhaqī, Manāqib ash-Shāfiʿī, Bd. 1, S. 174–175."
+links:
+  - label: "🔗 dar-al-tawhid.de/q/12"
+    url: "/q/12"
+logo: "logo-black.png"
+status: "published"
+feed:
+  enabled: false
+  image: ""
+  originalImage: ""
+  alt: ""
+  shareEnabled: false
+---
+
+🖋️ **Imām ash-Shāfiʿī** رحمه الله sagte:
+
+**"Ich habe mit niemandem diskutiert, außer dass ich mir wünschte, dass die Wahrheit durch seine Zunge oder durch meine Zunge erscheint."**
+
+🌙 **Fazit:** Wahre Suche nach Wissen bedeutet nicht, die eigene Meinung gewinnen zu lassen, sondern dass die Wahrheit erkannt wird, selbst wenn sie durch den anderen sichtbar wird.
+
