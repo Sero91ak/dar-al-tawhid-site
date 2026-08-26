@@ -87,6 +87,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "welcome-push-build-id-sync-v675-2026-08-26",
+      "approvedBy": "user-explicit-welcome-push-fix-push-live-now",
+      "reason": "VERSION-GUARD: APP_BUILD_ID v674 vs version.json v675 nach Welcome-Push-Live synchronisieren.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "welcome-push-reclaim-hammer-2026-08-26",
       "approvedBy": "user-explicit-welcome-push-fix-push-live-now",
       "reason": "Workers Builds überschreibt jeden Deploy in <20s; aggressiver Reclaim-Hammer für Willkommens-Push live.",
