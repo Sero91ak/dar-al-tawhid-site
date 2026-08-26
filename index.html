@@ -25316,7 +25316,7 @@ function updatePostAfterSlidePanel(carousel,index){
 
 function renderPost(id){
   const post=posts.find(p=>String(p.id)===String(id));
-  if(!post&&postRouteLoadingId===String(id))return `${setHeader("Beitrag wird geladen","Der neue Beitrag wird direkt aus dem aktuellen Index geladen.","Laden")}<div class="loading">Beitrag wird aktualisiert…</div>`;
+  if(!post&&postRouteLoadingId===String(id))return `${setHeader("Beitrag wird geladen","Einen Moment – der Beitrag wird vorbereitet.","Laden")}<div class="loading">Beitrag wird aktualisiert…</div>`;
   if(!post&&postRouteFailedId===String(id))return `${setHeader("Beitrag nicht verfügbar","Der Beitrag ist noch nicht erreichbar oder wurde noch nicht synchronisiert.","Fehler")}<div class="empty">${esc(postRouteError||"Beitrag konnte noch nicht geladen werden. Bitte erneut versuchen.")}</div><div class="article-actions"><button id="postRetryBtn" class="action-btn" type="button">Erneut laden</button><button id="postHardRefreshBtn" class="action-btn" type="button">App aktualisieren</button></div>`;
   if(!post)return `${setHeader("Beitrag nicht gefunden","Dieser Beitrag konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe, ob die Datei noch in content/posts vorhanden ist.</div><div class="article-actions"><button id="postRetryBtn" class="action-btn" type="button">Erneut laden</button><button id="postHardRefreshBtn" class="action-btn" type="button">App aktualisieren</button></div>`;
   const related=getRelatedPosts(post);

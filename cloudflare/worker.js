@@ -1261,9 +1261,13 @@ async function publishPostFromMarkdown(env, input, ctx, options = {}) {
     };
     if (ctx && postId) {
       ctx.waitUntil((async () => {
-        const quick = await processPendingPushUntilLive(env, pendingRecord, { schedule: "quick" });
-        if (!quick.sent && quick.pending) {
-          await processPendingPushUntilLive(env, pendingRecord, { schedule: "cron" });
+        // Regel: Push erst wenn Index+Datei öffentlich online – dann sofort; sonst reparieren bis es klappt.
+        let result = await processPendingPushUntilLive(env, pendingRecord, { schedule: "quick" });
+        if (!result.sent && result.pending) {
+          result = await processPendingPushUntilLive(env, pendingRecord, { schedule: "cron" });
+        }
+        if (!result.sent && result.pending) {
+          await processPendingPushUntilLive(env, pendingRecord, { schedule: "full" });
         }
       })());
     }
@@ -1409,7 +1413,17 @@ async function publishBulkPostsFromMarkdown(env, input, ctx, options = {}) {
       liveCheck,
       targetUrl: buildPostPushUrl(env, lastPost.postId, Date.now())
     };
-    if (ctx) ctx.waitUntil(processPendingPushUntilLive(env, pendingRecord));
+    if (ctx) {
+      ctx.waitUntil((async () => {
+        let result = await processPendingPushUntilLive(env, pendingRecord, { schedule: "quick" });
+        if (!result.sent && result.pending) {
+          result = await processPendingPushUntilLive(env, pendingRecord, { schedule: "cron" });
+        }
+        if (!result.sent && result.pending) {
+          await processPendingPushUntilLive(env, pendingRecord, { schedule: "full" });
+        }
+      })());
+    }
   } else if (skipPush) {
     push = { sent: false, skipped: true, reason: "Push übersprungen", liveCheck };
   }
@@ -2733,14 +2747,18 @@ function isPostPushApproved(item) {
 }
 
 function diagnoseLiveFailure(steps, live = {}) {
-  if (!steps.githubFileCreated) return "GitHub-Datei wurde nicht erstellt.";
-  if (!steps.indexUpdatedGithub) return "Indexdatei wurde auf GitHub nicht aktualisiert.";
+  if (!steps.githubFileCreated && live.githubPostExists === false) return "GitHub-Datei wurde nicht erstellt.";
+  if (!steps.indexUpdatedGithub && live.githubIndexHasPost === false) return "Indexdatei wurde auf GitHub nicht aktualisiert.";
   if (!steps.indexFoundPublic) {
     if (live.indexHttpStatus === 404) return "Indexdatei öffentlich nicht gefunden.";
     return "GitHub Commit erfolgreich, aber Cloudflare Deployment noch nicht fertig.";
   }
-  if (!steps.postInIndex) return "Beitrag ist nicht im öffentlichen Index enthalten.";
+  if (!steps.postInIndex) {
+    if (live.githubIndexHasPost) return "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.";
+    return "Beitrag ist nicht im öffentlichen Index enthalten.";
+  }
   if (!steps.postFilePublic) {
+    if (live.githubPostExists) return "Datei auf GitHub ok, aber öffentlich noch nicht erreichbar – Deployment/Cache.";
     if (live.postHttpStatus === 404) return "Beitrag-Datei öffentlich nicht erreichbar.";
     return "Cloudflare liefert noch alte Cache-Version.";
   }
@@ -2749,16 +2767,19 @@ function diagnoseLiveFailure(steps, live = {}) {
 }
 
 function buildLiveCheckResult(githubSteps, live, attempts) {
+  // STRICT: Push nur wenn Index + Datei öffentlich online sind (kein GitHub-Fallback).
   const steps = {
-    githubFileCreated: !!githubSteps?.postCreated,
-    indexUpdatedGithub: !!githubSteps?.indexUpdated,
+    githubFileCreated: !!githubSteps?.postCreated || !!live.githubPostExists,
+    indexUpdatedGithub: !!githubSteps?.indexUpdated || !!live.githubIndexHasPost,
     indexFoundPublic: !!live.indexFoundPublic,
-    postInIndex: !!live.postInIndex,
+    postInIndex: !!live.postInIndexPublic,
     postFilePublic: !!live.postFilePublic,
     visitorUrlOk: !!live.visitorUrlOk,
-    cloudflareDeployed: !!(live.indexFoundPublic && live.postFilePublic)
+    cloudflareDeployed: !!(live.indexFoundPublic && live.postInIndexPublic && live.postFilePublic),
+    githubIndexHasPost: !!live.githubIndexHasPost,
+    githubPostExists: !!live.githubPostExists
   };
-  const ok = steps.postInIndex && steps.postFilePublic;
+  const ok = steps.indexFoundPublic && steps.postInIndex && steps.postFilePublic;
   const diagnosis = ok ? "" : diagnoseLiveFailure(steps, live);
   return {
     ok,
@@ -2775,7 +2796,11 @@ function buildLiveCheckResult(githubSteps, live, attempts) {
     visitorUrl: live.visitorUrl,
     indexError: live.indexError,
     postError: live.postError,
-    visitorError: live.visitorError
+    visitorError: live.visitorError,
+    githubIndexHasPost: steps.githubIndexHasPost,
+    githubPostExists: steps.githubPostExists,
+    needsIndexRepair: !steps.postInIndex && !!live.githubPostExists && !live.githubIndexHasPost,
+    needsDeployWait: (!!live.githubIndexHasPost || !!live.githubPostExists) && !ok
   };
 }
 
@@ -2787,9 +2812,11 @@ async function fetchLiveResources(env, { filename, postId, postPath }) {
     site,
     postId: String(postId || ""),
     indexFoundPublic: false,
-    postInIndex: false,
+    postInIndexPublic: false,
     postFilePublic: false,
     visitorUrlOk: false,
+    githubIndexHasPost: false,
+    githubPostExists: false,
     indexGenerated: null,
     indexCount: null,
     visitorUrl: postId ? buildPostPushUrl(env, postId, bust) : null
@@ -2803,9 +2830,9 @@ async function fetchLiveResources(env, { filename, postId, postPath }) {
       result.indexGenerated = indexData.generated || null;
       result.indexCount = Number(indexData.count ?? (indexData.files?.length ?? 0)) || 0;
       const files = listPostFiles(indexData.files || []);
-      result.postInIndex = files.some((file) => file.name === filename);
-      if (!result.postInIndex && postId) {
-        result.postInIndex = files.some((file) => String(file.name).replace(/\.md$/, "") === String(postId));
+      result.postInIndexPublic = files.some((file) => file.name === filename);
+      if (!result.postInIndexPublic && postId) {
+        result.postInIndexPublic = files.some((file) => String(file.name).replace(/\.md$/, "") === String(postId));
       }
     } else {
       result.indexHttpStatus = indexRes.status;
@@ -2832,29 +2859,24 @@ async function fetchLiveResources(env, { filename, postId, postPath }) {
     }
   }
 
-  if ((!result.postInIndex || !result.postFilePublic) && String(env.GITHUB_TOKEN || "").trim()) {
+  // GitHub nur Diagnose/Reparatur – niemals als „öffentlich online“ werten.
+  if (String(env.GITHUB_TOKEN || "").trim()) {
     try {
       const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
       const repo = env.GITHUB_REPO || DEFAULT_REPO;
       const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
-      if (!result.postInIndex) {
-        const indexFile = await githubGet(env, owner, repo, `${postsDir}/posts-index.json`, branch);
-        if (indexFile?.content) {
-          const indexData = JSON.parse(base64ToUtf8(indexFile.content));
-          result.indexGenerated = indexData.generated || result.indexGenerated;
-          result.indexCount = Number(indexData.count ?? (indexData.files?.length ?? 0)) || result.indexCount;
-          const files = listPostFiles(indexData.files || []);
-          result.postInIndex = files.some((file) => file.name === filename)
-            || (postId && files.some((file) => String(file.name).replace(/\.md$/, "") === String(postId)));
-          if (result.postInIndex) result.githubIndexVerified = true;
-        }
+      const indexFile = await githubGet(env, owner, repo, `${postsDir}/posts-index.json`, branch);
+      if (indexFile?.content) {
+        const indexData = JSON.parse(base64ToUtf8(indexFile.content));
+        const files = listPostFiles(indexData.files || []);
+        result.githubIndexHasPost = files.some((file) => file.name === filename)
+          || (postId && files.some((file) => String(file.name).replace(/\.md$/, "") === String(postId)));
+        if (!result.indexGenerated) result.indexGenerated = indexData.generated || null;
+        if (!result.indexCount) result.indexCount = Number(indexData.count ?? (indexData.files?.length ?? 0)) || 0;
       }
-      if (!result.postFilePublic && postPath) {
+      if (postPath) {
         const ghPost = await githubGet(env, owner, repo, postPath, branch);
-        if (ghPost?.content) {
-          result.postFilePublic = true;
-          result.githubPostVerified = true;
-        }
+        result.githubPostExists = Boolean(ghPost?.content);
       }
     } catch (error) {
       result.githubVerifyError = error.message || String(error);
@@ -2886,6 +2908,91 @@ async function verifyPostLiveAvailability(env, opts, { schedule = "full" } = {})
   }
 
   return lastResult;
+}
+
+/**
+ * Index/Datei-Reparatur vor Push:
+ * - Datei auf GitHub, aber nicht im Index → Index ergänzen
+ * - Index hat Beitrag, öffentlich noch alt → generated bump (Deploy anstoßen, rate-limited)
+ */
+async function repairPostIndexForPush(env, record, liveCheck) {
+  const filename = String(record?.filename || "").trim();
+  const postId = String(record?.postId || "").trim();
+  const postPath = String(record?.postPath || "").trim()
+    || (filename ? `${trimSlashes(env.POSTS_DIR || DEFAULT_POSTS_DIR)}/${filename}` : "");
+  if (!filename || !postPath) {
+    return { repaired: false, reason: "filename/postPath fehlen" };
+  }
+
+  const owner = env.GITHUB_OWNER || DEFAULT_OWNER;
+  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  const branch = env.GITHUB_BRANCH || DEFAULT_BRANCH;
+  const postsDir = trimSlashes(env.POSTS_DIR || DEFAULT_POSTS_DIR);
+  const indexPath = `${postsDir}/posts-index.json`;
+
+  try {
+    const postFile = await githubGet(env, owner, repo, postPath, branch);
+    if (!postFile?.content) {
+      return { repaired: false, reason: "Beitrag-Datei fehlt auf GitHub" };
+    }
+
+    const indexFile = await githubGet(env, owner, repo, indexPath, branch);
+    const indexData = indexFile?.content
+      ? JSON.parse(base64ToUtf8(indexFile.content))
+      : { version: 1, files: [] };
+    let files = listPostFiles(indexData.files || []);
+    const inIndex = files.some((f) => f.name === filename)
+      || (postId && files.some((f) => String(f.name).replace(/\.md$/, "") === postId));
+
+    if (!inIndex) {
+      files = files.filter((f) => f.name !== filename);
+      files.push({ name: filename, sha: postFile.sha || "" });
+      const next = {
+        version: Number(indexData.version || 1) || 1,
+        generated: new Date().toISOString(),
+        count: files.length,
+        files
+      };
+      await githubPut(
+        env,
+        owner,
+        repo,
+        indexPath,
+        `${JSON.stringify(next, null, 2)}\n`,
+        `Repair posts-index for push ${filename}`,
+        branch,
+        indexFile?.sha
+      );
+      return { repaired: true, action: "index-add", at: new Date().toISOString(), reason: `Index um ${filename} ergänzt` };
+    }
+
+    // Öffentlich noch nicht sichtbar → Index-Touch höchstens alle 3 Min.
+    const lastTouch = Date.parse(record?.lastRepair?.at || "");
+    if (Number.isFinite(lastTouch) && Date.now() - lastTouch < 3 * 60 * 1000) {
+      return { repaired: false, reason: "Index-Touch rate-limit (3 Min)" };
+    }
+
+    const next = {
+      ...indexData,
+      version: Number(indexData.version || 1) || 1,
+      generated: new Date().toISOString(),
+      count: files.length,
+      files
+    };
+    await githubPut(
+      env,
+      owner,
+      repo,
+      indexPath,
+      `${JSON.stringify(next, null, 2)}\n`,
+      `Refresh posts-index for live push ${filename}`,
+      branch,
+      indexFile?.sha
+    );
+    return { repaired: true, action: "index-touch", at: new Date().toISOString(), reason: "Index aktualisiert (Deploy/Cache)" };
+  } catch (error) {
+    return { repaired: false, reason: error?.message || String(error) };
+  }
 }
 
 
@@ -2968,6 +3075,15 @@ async function processPendingPushUntilLive(env, record, options = {}) {
     }
   }
 
+  // failed → automatisch wieder pending (Reparatur-Schleife)
+  if (existing?.status === "failed" || existing?.status === "sending") {
+    await writePendingPushStatus(env, postId, {
+      status: "pending",
+      lastError: existing?.lastError || "Auto-Repair: erneuter Versuch",
+      repairAttemptAt: new Date().toISOString()
+    });
+  }
+
   const liveCheck = await verifyPostLiveAvailability(
     env,
     {
@@ -2979,15 +3095,48 @@ async function processPendingPushUntilLive(env, record, options = {}) {
     { schedule }
   );
 
+  let repair = null;
+  if (!liveCheck.ok) {
+    repair = await repairPostIndexForPush(env, {
+      ...existing,
+      ...record,
+      filename: record.filename || existing?.filename,
+      postId,
+      postPath: record.postPath || existing?.postPath
+    }, liveCheck);
+    if (repair?.repaired) {
+      const again = await verifyPostLiveAvailability(
+        env,
+        {
+          filename: record.filename || existing?.filename,
+          postId,
+          postPath: record.postPath || existing?.postPath,
+          githubSteps: { postCreated: true, indexUpdated: true }
+        },
+        { schedule: "quick" }
+      );
+      if (again?.ok) {
+        Object.assign(liveCheck, again);
+      } else {
+        liveCheck.repair = repair;
+        liveCheck.diagnosis = again?.diagnosis || liveCheck.diagnosis;
+      }
+    } else if (repair) {
+      liveCheck.repair = repair;
+    }
+  }
+
   await writePendingPushStatus(env, postId, {
     lastCheckAt: new Date().toISOString(),
     liveCheck,
     attempts: liveCheck.attempts,
-    lastError: liveCheck.ok ? "" : liveCheck.diagnosis
+    lastError: liveCheck.ok ? "" : liveCheck.diagnosis,
+    lastRepair: repair || existing?.lastRepair || null,
+    status: "pending"
   });
 
   if (!liveCheck.ok) {
-    return { sent: false, pending: true, waitingForLive: true, liveCheck, reason: liveCheck.diagnosis };
+    return { sent: false, pending: true, waitingForLive: true, liveCheck, repair, reason: liveCheck.diagnosis };
   }
 
   const freshRegistry = await readPendingPushesRegistry(env);
@@ -3028,24 +3177,29 @@ async function processPendingPushUntilLive(env, record, options = {}) {
       pushResult: { target: push.target, targetUrl: push.targetUrl }
     });
   } else {
+    // Nicht „failed“ begraben – bleibt pending für Cron-Auto-Repair
     await writePendingPushStatus(env, postId, {
-      status: "failed",
-      lastError: push.reason || "OneSignal Push fehlgeschlagen"
+      status: "pending",
+      lastError: push.reason || "OneSignal Push fehlgeschlagen – Auto-Retry",
+      pushFailAt: new Date().toISOString()
     });
   }
 
-  return { ...push, liveCheck, pending: !push.sent };
+  return { ...push, liveCheck, repair, pending: !push.sent };
 }
 
 async function processAllPendingPushes(env) {
   const registry = await readPendingPushesRegistry(env);
   const pending = Object.values(registry.pushes || {}).filter(
-    (item) => item?.status === "pending" && isPostPushApproved(item)
+    (item) =>
+      item
+      && isPostPushApproved(item)
+      && (item.status === "pending" || item.status === "failed" || item.status === "sending")
   ).sort((a, b) => {
     const aTime = Date.parse(a.updatedAt || a.createdAt || a.publishedAt || "");
     const bTime = Date.parse(b.updatedAt || b.createdAt || b.publishedAt || "");
     return (Number.isFinite(bTime) ? bTime : 0) - (Number.isFinite(aTime) ? aTime : 0);
-  }).slice(0, Number(env.PENDING_PUSH_CRON_BATCH_SIZE || 5));
+  }).slice(0, Number(env.PENDING_PUSH_CRON_BATCH_SIZE || 8));
   const results = [];
   for (const record of pending) {
     try {
