@@ -1,6 +1,6 @@
 /* PUSH_SYSTEM_GUARD: Gebets-Push + Tages-Duʿāʾ/Empfehlung + Willkommens-Push.
    Nicht entfernen oder vereinfachen – CI blockiert sonst (scripts/push-system-guard.js).
-   Deploy-Marker: library-push-visitor-fix-v8 */
+   Deploy-Marker: welcome-push-autorepair-v1*/
 import {
   parsePostForTelegram,
   validateTelegramPost,
