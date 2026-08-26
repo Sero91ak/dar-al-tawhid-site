@@ -87,6 +87,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "welcome-push-reclaim-hammer-2026-08-26",
+      "approvedBy": "user-explicit-welcome-push-fix-push-live-now",
+      "reason": "Workers Builds überschreibt jeden Deploy in <20s; aggressiver Reclaim-Hammer für Willkommens-Push live.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        ".github/workflows/deploy-admin-publisher.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "welcome-push-workers-builds-reclaim-2026-08-26",
       "approvedBy": "user-explicit-welcome-push-fix-push-live-now",
       "reason": "Workers Builds überschreibt Deploy; Reclaim muss deployMarker/Build-ID erzwingen für Willkommens-Push live.",
