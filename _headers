@@ -4,6 +4,22 @@
 /index.html
   Cache-Control: no-cache, must-revalidate, max-age=0
 
+/q/
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  Pragma: no-cache
+
+/q/*
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  Pragma: no-cache
+
+/content/posts/*
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  Pragma: no-cache
+
+/content/posts/posts-index.json
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  Pragma: no-cache
+
 /content/updates/*
   Cache-Control: no-cache, must-revalidate, max-age=0
 
