@@ -4,25 +4,25 @@
   "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-26T20:15:00.503Z",
+  "updatedAt": "2026-08-26T22:24:35.178Z",
   "usersChecked": 11,
   "registrationsRead": 12,
   "uniqueSubscriptions": 11,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
-  "localTimeBerlin": "22:15",
-  "dateKeyBerlin": "2026-08-26",
+  "localTimeBerlin": "00:24",
+  "dateKeyBerlin": "2026-08-27",
   "duaWindow": {
     "hour": 9,
     "open": false,
     "catchupUntilHour": 14,
-    "alreadySentToday": 11
+    "alreadySentToday": 0
   },
   "recommendationWindow": {
     "hour": 12,
     "open": false,
     "catchupUntilHour": 20,
-    "alreadySentToday": 11
+    "alreadySentToday": 0
   },
   "duaCandidates": 0,
   "recCandidates": 0,
@@ -36,17 +36,17 @@
   "duplicates": 0,
   "errors": 0,
   "forceSend": null,
-  "dailyContentDate": "2026-08-26",
+  "dailyContentDate": "2026-08-27",
   "currentRecommendation": {
-    "id": "ibn-qutaybah-ahl-al-hadith-bewahren-die-uberlieferung-296",
-    "title": "Ibn Qutaybah: Ahl al-Ḥadīth bewahren die Überlieferung",
-    "category": "Manhaj",
-    "scholar": "Ibn Qutaybah"
+    "id": "ijma-auch-einzeln-uberlieferter-konsens-hat-beweiskraft-217",
+    "title": "Ijmāʿ: Auch einzeln überlieferter Konsens hat Beweiskraft",
+    "category": "Ijmāʿ",
+    "scholar": "aš-Šawkānī"
   },
   "currentDua": {
-    "id": "dua-045-ala-allahi-tawakkalna-rabbana-la-tajalna-fitnah",
-    "title": "Duʿāʾ nicht zur Prüfung für Ungerechte zu werden",
-    "category": "Tawakkul & Schutz vor Fitnah"
+    "id": "dua-046-rabbi-inni-audhu-bika-an-asalaka",
+    "title": "Duʿāʾ nicht unwissend zu bitten",
+    "category": "Wissen & Schutz"
   },
   "configAutomatic": true,
   "lastError": "Außerhalb der Tagesfenster (Duʿāʾ ab 09:00, Empfehlung ab 12:00 Europe/Berlin)."
