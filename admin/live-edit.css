@@ -117,6 +117,14 @@
 .live-edit-menu button:hover,.live-edit-menu button:focus-visible{background:color-mix(in srgb,var(--le-accent) 12%,transparent);outline:none}
 .live-edit-menu button.is-danger{color:var(--le-danger)}
 @media(max-width:720px){
-  .live-edit-frame{height:min(70vh,720px);border-radius:14px}
-  .live-edit-editor{border-radius:12px}
+  .live-edit-frame{height:min(58vh,560px);border-radius:14px}
+  .live-edit-editor{border-radius:12px;padding:10px}
+  .live-edit-layout.is-split{grid-template-columns:1fr!important}
+  .live-edit-field label{font-size:12px}
+  .live-edit-field input,.live-edit-field textarea,.live-edit-field select{min-height:42px;font-size:14px}
+  .live-edit-field textarea.tall{min-height:min(40vh,320px)}
+  .live-edit-editor-foot{display:grid;grid-template-columns:1fr;gap:8px}
+  .live-edit-editor-foot .btn{width:100%;justify-content:center;min-height:44px}
+  .dar-post-mode-box .live-edit-devices{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .dar-post-mode-box .btn{min-height:44px;justify-content:center}
 }

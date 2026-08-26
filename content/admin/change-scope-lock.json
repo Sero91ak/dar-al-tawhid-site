@@ -3588,6 +3588,23 @@
       "expiresAt": "2026-12-31T23:59:00.000Z"
     },
     {
+      "id": "admin-mobile-compact-layout-2026-08-26",
+      "approvedBy": "user-explicit-admin-mobile-layout",
+      "reason": "Admin App Smartphone-Seitenverhältnis: Quellen/Beiträge + globale Mobile-Optik",
+      "paths": [
+        "admin/index.html",
+        "admin/sw.js",
+        "admin/live-edit.css",
+        "version.json",
+        "index.html",
+        "test/version.json",
+        "test/index.html",
+        "content/admin/change-scope-lock.json",
+        ".github/workflows/deploy-live-admin-app.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "admin-single-mode-stick-2026-08-26",
       "approvedBy": "user-explicit-admin-single-mode-jump-fix",
       "reason": "Einzelbeitrag springt zu Slide: selectedNewPostMode Bug + Frontmatter-Normalisierung",
