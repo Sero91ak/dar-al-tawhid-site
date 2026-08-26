@@ -3570,6 +3570,22 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "post-push-index-live-repair-2026-08-26",
+      "approvedBy": "user-explicit-post-push-index-online-rule",
+      "reason": "Push erst wenn Index+Beitrag öffentlich online; Auto-Repair bis Push klappt; Lade-Text ohne Index-Hinweis",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "cloudflare/worker.js",
+        "scripts/push-system-guard.js",
+        "scripts/publish-isolation-guard.js",
+        "content/admin/change-scope-lock.json",
+        "test/version.json",
+        "version.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

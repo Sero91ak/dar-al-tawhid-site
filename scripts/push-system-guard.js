@@ -116,8 +116,12 @@ function runPushSystemGuard() {
     "function isPostPushApproved",
     "processAllPendingPushes",
     "processPendingPushUntilLive",
+    "repairPostIndexForPush",
+    "postInIndexPublic",
     'status === "pending"',
-    'sendNewPostPush'
+    'status === "failed"',
+    "sendNewPostPush",
+    "STRICT: Push nur wenn Index + Datei öffentlich online"
   ]);
 
   const wrangler = read("cloudflare/wrangler.toml");
