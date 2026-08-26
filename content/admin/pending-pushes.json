@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-26T11:39:32.497Z",
+  "generated": "2026-08-26T11:39:33.859Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -702,12 +702,12 @@
       "postTitle": "📖 Die Wahrheit vor der eigenen Meinung",
       "publishedAt": "2026-08-26T11:39:28.241Z",
       "postPath": "content/posts/adab-462-die-wahrheit-vor-der-eigenen-meinung.md",
-      "status": "sending",
+      "status": "sent",
       "createdAt": "2026-08-26T11:39:28.241Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-08-26T11:39:28.241Z",
       "lastError": "",
-      "updatedAt": "2026-08-26T11:39:32.497Z",
+      "updatedAt": "2026-08-26T11:39:33.859Z",
       "lastCheckAt": "2026-08-26T11:39:30.539Z",
       "liveCheck": {
         "ok": true,
@@ -732,7 +732,12 @@
         "visitorUrl": "https://dar-al-tawhid.de/?post=imam-shafii-wahrheit-vor-meinung-462&v=1787744369962#post/imam-shafii-wahrheit-vor-meinung-462"
       },
       "attempts": 1,
-      "sendingAt": "2026-08-26T11:39:32.497Z"
+      "sendingAt": "2026-08-26T11:39:32.497Z",
+      "sentAt": "2026-08-26T11:39:33.629Z",
+      "pushResult": {
+        "target": "supabase-subscriptions:31",
+        "targetUrl": "https://dar-al-tawhid.de/?post=imam-shafii-wahrheit-vor-meinung-462&v=1787744373332#post/imam-shafii-wahrheit-vor-meinung-462"
+      }
     }
   }
 }
