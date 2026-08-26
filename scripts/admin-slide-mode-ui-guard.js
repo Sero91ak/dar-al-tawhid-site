@@ -49,13 +49,29 @@ function run() {
     "ensureSlideFrontmatter",
     "ensureSingleFrontmatter",
     "prepareAdminPostMarkdown",
-    "validateSlideMarkdown(next)",
+    "prepareMarkdownForMode",
+    "formatSlideStatusLine",
+    'validateSlideMarkdown(next, { mode: "slide" })',
     "installAdminPostModeEnhancer"
   ];
 
   requiredParserSnippets.forEach((snippet) => {
     if (!parser.includes(snippet)) fail(`Parser/Admin-Enhancer fehlt: ${snippet}`, failures);
     else ok(`Parser/Admin-Enhancer enthält: ${snippet}`);
+  });
+
+  const requiredAdminSnippets = [
+    'name="newPostMode"',
+    "Komplettes Markdown einfügen",
+    "checkNewPostBtn",
+    "previewNewPostBtn",
+    "Erweitert",
+    "prepareMarkdownForMode",
+    "selectedNewPostMode"
+  ];
+  requiredAdminSnippets.forEach((snippet) => {
+    if (!adminIndex.includes(snippet)) fail(`admin/index.html fehlt: ${snippet}`, failures);
+    else ok(`admin/index.html enthält: ${snippet}`);
   });
 
   if (!adminIndex.includes("slide-post-parser.js")) {
@@ -68,6 +84,12 @@ function run() {
     fail("admin/live-edit.js besitzt keinen Publish-Button-Hook", failures);
   } else {
     ok("admin/live-edit.js Publish-Button-Hook vorhanden");
+  }
+
+  if (!liveEdit.includes("prepareMarkdownForMode") || !liveEdit.includes("selectedLivePostMode")) {
+    fail("admin/live-edit.js buildPostMarkdown berücksichtigt den Modus nicht", failures);
+  } else {
+    ok("admin/live-edit.js buildPostMarkdown ist modus-bewusst");
   }
 
   const sandbox = {
@@ -107,11 +129,33 @@ function run() {
     else ok("Slide-Frontmatter setzt type");
     if (!preparedSlide.includes('layout: "slides"')) fail("Slide-Frontmatter setzt layout nicht", failures);
     else ok("Slide-Frontmatter setzt layout");
-    const validation = P.validateSlideMarkdown(preparedSlide);
+    const validation = P.validateSlideMarkdown(preparedSlide, { mode: "slide" });
     if (!validation.ok || validation.info.slideCount !== 2) {
       fail(`Prepared Slide sollte 2 Slides validieren, bekam ${validation.info?.slideCount}`, failures);
     } else {
       ok("Prepared Slide validiert 2 Slides");
+    }
+
+    const modePrepared = P.prepareMarkdownForMode(rawSlide, "slide", {
+      id: "qiyas-test",
+      title: "Qiyās Test",
+      status: "published"
+    });
+    if (!modePrepared.ok || modePrepared.info.slideCount !== 2) {
+      fail("prepareMarkdownForMode(slide) sollte 2 Slides liefern", failures);
+    } else {
+      ok("prepareMarkdownForMode(slide) liefert 2 Slides");
+    }
+
+    const blockedSingle = P.prepareMarkdownForMode(rawSlide, "single", {});
+    if (blockedSingle.ok) fail("Einzelbeitrag blockiert Slide-Marker nicht", failures);
+    else ok("Einzelbeitrag blockiert Slide-Marker");
+
+    const status = P.formatSlideStatusLine(preparedSlide, "slide");
+    if (!/✓ Slide-Beitrag erkannt · 2 Slides/.test(status)) {
+      fail(`formatSlideStatusLine falsch: ${status}`, failures);
+    } else {
+      ok("formatSlideStatusLine meldet Slide-Anzahl");
     }
 
     const single = P.ensureSingleFrontmatter(preparedSlide, { status: "published" });

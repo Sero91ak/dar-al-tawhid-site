@@ -53,7 +53,10 @@ jobs:
             html="$(curl -fsSL "https://dar-al-tawhid.de/admin/?t=$(date +%s)$i")"
             sw="$(curl -fsSL "https://dar-al-tawhid.de/admin/sw.js?t=$(date +%s)$i")"
             studio="$(curl -fsSL "https://dar-al-tawhid.de/admin/video-studio?t=$(date +%s)$i")"
-            echo "$html" | grep -F "Veröffentlichen & Live-Push" >/dev/null || { echo "retry $i: admin shell"; sleep 8; continue; }
+            echo "$html" | grep -F 'name="newPostMode"' >/dev/null || { echo "retry $i: admin mode radios"; sleep 8; continue; }
+            echo "$html" | grep -F "Komplettes Markdown einfügen" >/dev/null || { echo "retry $i: admin markdown field"; sleep 8; continue; }
+            echo "$html" | grep -F "checkNewPostBtn" >/dev/null || { echo "retry $i: admin check button"; sleep 8; continue; }
+            echo "$html" | grep -F 'id="uploadPostBtn"' >/dev/null || { echo "retry $i: admin publish button"; sleep 8; continue; }
             echo "$html" | grep -F "KI-Video-Studio" >/dev/null || { echo "retry $i: menu"; sleep 8; continue; }
             echo "$html$sw" | grep -F "dar-admin-stats-v65-hang-fix" >/dev/null || { echo "retry $i: sw"; sleep 8; continue; }
             echo "$studio" | grep -F "Textbeitrag einfügen" >/dev/null || { echo "retry $i: studio text"; sleep 8; continue; }
