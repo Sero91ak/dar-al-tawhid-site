@@ -530,11 +530,21 @@ main#panel.panel{
 .switch-compact{width:42px;height:26px;flex:0 0 auto}
 .switch-compact span::after{width:20px;height:20px;top:2px;left:2px}
 .switch-compact input:checked+span::after{transform:translateX(16px)}
+.admin-post-mode-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 10px}
+.admin-post-mode-row label{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border:1px solid rgba(239,215,142,.22);border-radius:12px;background:rgba(0,0,0,.22);cursor:pointer;font-size:12px;font-weight:800;color:#fff4cc}
+.admin-post-mode-row label:has(input:checked){border-color:rgba(239,215,142,.55);background:linear-gradient(150deg,rgba(80,58,20,.45),rgba(20,16,10,.85));box-shadow:inset 0 0 0 1px rgba(239,215,142,.18)}
+.admin-post-mode-status{margin:0 0 10px;padding:9px 11px;border-radius:12px;border:1px solid rgba(239,215,142,.18);background:rgba(0,0,0,.2);font-size:11px;line-height:1.45;color:var(--soft)}
+.admin-post-quick-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.admin-post-quick-actions .btn{min-height:40px;justify-content:center;font-size:11.5px;font-weight:850}
+.admin-post-preview-box{margin-top:8px;padding:12px;border-radius:14px;border:1px solid rgba(239,215,142,.2);background:rgba(0,0,0,.24)}
+.admin-post-preview-box h4{margin:0 0 6px;font-family:var(--serif);color:#fff4cc;font-size:17px}
+.admin-post-preview-box p{margin:0;color:var(--soft);font-size:11.5px;line-height:1.45}
+@media(min-width:640px){.admin-post-quick-actions{grid-template-columns:repeat(4,minmax(0,1fr))}.publish-action-bar{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}}
 @media(max-width:768px){
 .upload-grid{grid-template-columns:1fr;gap:12px}
 .upload-stack{order:2}
 .markdown-upload-col{order:1}
-.paste-area.markdown-editor{min-height:min(38vh,320px);max-height:min(46vh,420px)}
+.paste-area.markdown-editor{min-height:min(42vh,380px);max-height:min(56vh,560px)}
 .feed-image-thumb{max-height:96px}
 .feed-image-dropzone{padding:12px 10px}
 .feed-post-list{display:grid;gap:8px}
@@ -645,7 +655,7 @@ const ADMIN_REFRESH_MS=30000;
 const VISITOR_REFRESH_MS=15000;
 const DEFAULT_CATEGORY_MAIN=["Aqīdah","Tawḥīd","Sunnah","Adab","Akhlaq","Fiqh","Qurʾān & Tafsīr","Hadith","Manhaj","Duʿāʾ","Widerlegungen","Takfīr bi'l-ʿUmūm","Bidʿah","Āthār","Ṣaḥābah","Tābiʿīn","Tarbiyyah","Tazkiyah","Tawakkul","Zuhd","Wissen"];
 let refreshTimer=null,authed=false,lastData=null,currentTab="start",adminNavStack=[],query="",typeFilter="all",sortMode="score",lastAdminFormPointerAt=0;
-let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,uploadBusy=false,bulkPackBusy=false,lastPublishPushContext=null,publishTrack=null;
+let draftMarkdown="",draftFilename="",draftStatus="",draftNextNumber=null,draftPostMode="single",uploadBusy=false,bulkPackBusy=false,lastPublishPushContext=null,publishTrack=null;
 let sourceLibraryCache=null,sourceLibraryBusy=false,sourceDraftPending=null,sourceUploadQueue=[],sourceEditorContext="draft";
 let categoryLayoutDraft={main:[],order:[]},categoryLayoutCounts={},categoryLayoutBusy=false,categoryLayoutLoaded=false;
 let ordnerCatalog=[],ordnerCatalogBusy=false,ordnerCatalogLoaded=false;
@@ -681,14 +691,68 @@ function readAuth(){try{const raw=localStorage.getItem(AUTH_KEY);if(!raw)return 
 function setAuth(on){authed=!!on;try{if(on)localStorage.setItem(AUTH_KEY,JSON.stringify({ok:true,ts:Date.now()}));else localStorage.removeItem(AUTH_KEY)}catch(e){}}
 function checkPin(pin){const want=String(cfg().adminPin||"").trim();const got=String(pin||"").trim();return want&&got.toLowerCase()===want.toLowerCase()}
 function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),1800)}
-function loadLocalDraft(){try{const d=JSON.parse(localStorage.getItem(ADMIN_DRAFT_KEY)||"{}");draftMarkdown=d.markdown||draftMarkdown;draftFilename=d.filename||draftFilename;draftStatus=d.status||draftStatus}catch(e){}}
-function saveLocalDraft(note="Entwurf lokal gespeichert."){try{localStorage.setItem(ADMIN_DRAFT_KEY,JSON.stringify({markdown:draftMarkdown,filename:draftFilename,status:draftStatus,updatedAt:new Date().toISOString()}))}catch(e){}draftStatus=note;addAdminLog("Entwurf",note,draftFilename||"Lokaler Admin-Entwurf");toast(note)}
+function loadLocalDraft(){try{const d=JSON.parse(localStorage.getItem(ADMIN_DRAFT_KEY)||"{}");draftMarkdown=d.markdown||draftMarkdown;draftFilename=d.filename||draftFilename;draftStatus=d.status||draftStatus;draftPostMode=d.postMode==="slide"?"slide":"single"}catch(e){}}
+function saveLocalDraft(note="Entwurf lokal gespeichert."){try{localStorage.setItem(ADMIN_DRAFT_KEY,JSON.stringify({markdown:draftMarkdown,filename:draftFilename,status:draftStatus,postMode:draftPostMode,updatedAt:new Date().toISOString()}))}catch(e){}draftStatus=note;addAdminLog("Entwurf",note,draftFilename||"Lokaler Admin-Entwurf");toast(note)}
+function selectedNewPostMode(){const checked=document.querySelector('input[name="newPostMode"]:checked');return checked?.value==="slide"?"slide":(draftPostMode==="slide"?"slide":"single")}
+function syncNewPostModeFromUi(){draftPostMode=selectedNewPostMode();updateNewPostModeStatus()}
+function updateNewPostModeStatus(){
+  const markdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown||"";
+  const mode=selectedNewPostMode();
+  const el=document.getElementById("newPostModeStatus");
+  if(!el)return;
+  if(window.DARSlidePostParser?.formatSlideStatusLine)el.textContent=DARSlidePostParser.formatSlideStatusLine(markdown,mode);
+  else el.textContent=mode==="slide"?"Slide-Modus":"Einzelbeitrag";
+  const preview=document.getElementById("slideDraftPreview");
+  const html=renderSlideDraftPreview(markdown);
+  if(preview){if(html)preview.outerHTML=html;else preview.remove()}
+  else if(html){const ta=document.getElementById("postMarkdownInput");if(ta)ta.insertAdjacentHTML("afterend",html)}
+}
+function checkNewPostMarkdown(){
+  draftMarkdown=document.getElementById("postMarkdownInput")?.value||"";
+  draftFilename=(document.getElementById("postFilenameInput")?.value||"").trim();
+  draftPostMode=selectedNewPostMode();
+  if(!draftMarkdown.trim()){setUploadStatus("Bitte Markdown-Beitrag einfügen.");toast("Markdown fehlt");return false}
+  if(!window.DARSlidePostParser){setUploadStatus("Slide-Parser fehlt — Seite neu laden.");return false}
+  const prepared=DARSlidePostParser.prepareMarkdownForMode(draftMarkdown,draftPostMode,{
+    title:frontmatterValue(draftMarkdown,"title"),
+    id:frontmatterValue(draftMarkdown,"id"),
+    status:"draft"
+  });
+  if(prepared.markdown&&draftPostMode==="slide"){
+    draftMarkdown=prepared.markdown;
+    const ta=document.getElementById("postMarkdownInput");
+    if(ta)ta.value=draftMarkdown;
+  }
+  updateNewPostModeStatus();
+  if(!prepared.ok){
+    setUploadStatus(`<span style="color:#f87171"><strong>Prüfung fehlgeschlagen:</strong> ${esc(prepared.errors.join(" · "))}</span>`);
+    toast("Prüfung fehlgeschlagen");
+    return false;
+  }
+  const status=DARSlidePostParser.formatSlideStatusLine(draftMarkdown,draftPostMode);
+  const warn=prepared.warnings?.length?`<br><span style="color:#fbbf24">${esc(prepared.warnings.join(" · "))}</span>`:"";
+  setUploadStatus(`<strong>${esc(status)}</strong>${warn}`);
+  toast(draftPostMode==="slide"?"Slide geprüft":"Einzelbeitrag geprüft");
+  return true;
+}
+function previewNewPostMarkdown(){
+  draftMarkdown=document.getElementById("postMarkdownInput")?.value||"";
+  draftPostMode=selectedNewPostMode();
+  const box=document.getElementById("newPostPreviewBox");
+  if(!box){toast("Vorschau nicht verfügbar");return}
+  if(!draftMarkdown.trim()){box.hidden=false;box.innerHTML="<p>Bitte zuerst Markdown einfügen.</p>";return}
+  const p=markdownPreviewData(draftMarkdown);
+  const modeLine=window.DARSlidePostParser?DARSlidePostParser.formatSlideStatusLine(draftMarkdown,draftPostMode):(draftPostMode==="slide"?"Slide-Modus":"Einzelbeitrag");
+  box.hidden=false;
+  box.innerHTML=`<h4>${esc(p.title)}</h4><p>${esc(p.quote)}</p><p style="margin-top:8px"><strong>${esc(modeLine)}</strong></p><p style="margin-top:6px">${esc(p.category)} · ${esc(p.scholar)} · ${esc(p.source)}</p>`;
+  toast("Vorschau aktualisiert");
+}
 function readLocalDraftRecord(){try{const d=JSON.parse(localStorage.getItem(ADMIN_DRAFT_KEY)||"null");return d&&typeof d==="object"?d:null}catch(e){return null}}
-function clearLocalDraft(note="Entwurf gelöscht."){draftMarkdown="";draftFilename="";draftStatus="";draftNextNumber=null;try{localStorage.removeItem(ADMIN_DRAFT_KEY)}catch(e){}const text=document.getElementById("postMarkdownInput");if(text)text.value="";const filenameInput=document.getElementById("postFilenameInput");if(filenameInput)filenameInput.value="";toast(note);addAdminLog("Entwurf",note,"—");renderShell()}
+function clearLocalDraft(note="Entwurf gelöscht."){draftMarkdown="";draftFilename="";draftStatus="";draftNextNumber=null;draftPostMode="single";try{localStorage.removeItem(ADMIN_DRAFT_KEY)}catch(e){}const text=document.getElementById("postMarkdownInput");if(text)text.value="";const filenameInput=document.getElementById("postFilenameInput");if(filenameInput)filenameInput.value="";toast(note);addAdminLog("Entwurf",note,"—");renderShell()}
 function loadLocalDraftIntoEditor(){
   const d=readLocalDraftRecord();
   if(!d?.markdown?.trim()){toast("Kein gespeicherter Entwurf vorhanden");return}
-  draftMarkdown=d.markdown||"";draftFilename=d.filename||"";draftStatus=d.status||"Entwurf geladen.";
+  draftMarkdown=d.markdown||"";draftFilename=d.filename||"";draftStatus=d.status||"Entwurf geladen.";draftPostMode=d.postMode==="slide"?"slide":"single";
   const text=document.getElementById("postMarkdownInput");if(text)text.value=draftMarkdown;
   const filenameInput=document.getElementById("postFilenameInput");if(filenameInput)filenameInput.value=draftFilename;
   toast("Entwurf geladen");renderShell();
@@ -2921,32 +2985,47 @@ function renderActions(rows){
         <button class="btn" type="button" data-tab="quellen">Bestehenden Beitrag bearbeiten</button>
       </div>
       <details class="admin-action-card" id="singlePostAction" open>
-        <summary class="admin-action-summary"><div><h4>Neuer Beitrag</h4><p>Markdown einfügen · veröffentlichen · Live-Push automatisch</p></div><span class="status-pill">${uploadBusy?"läuft":draftMarkdown?"Entwurf":"bereit"}</span></summary>
+        <summary class="admin-action-summary"><div><h4>Neuer Beitrag</h4><p>Markdown einfügen · Einzelbeitrag oder Slide · prüfen · veröffentlichen</p></div><span class="status-pill">${uploadBusy?"läuft":draftMarkdown?"Entwurf":"bereit"}</span></summary>
         <div class="admin-action-body admin-publish-body">
-          <div class="upload-status publish-compact-status" id="uploadStatus">${pushHint||draftStatus||"Markdown einfügen, Dateiname prüfen, dann <strong>Veröffentlichen &amp; Live-Push</strong>."}</div>
-          <label class="field-label" for="postMarkdownInput">Markdown</label>
-          <textarea class="paste-area markdown-editor" id="postMarkdownInput" spellcheck="false" placeholder="Markdown-Beitrag hier einfügen...">${esc(draftMarkdown)}</textarea>
+          <div class="upload-status publish-compact-status" id="uploadStatus">${pushHint||draftStatus||"Markdown einfügen, Modus wählen, prüfen, dann <strong>Veröffentlichen</strong>."}</div>
+          <div class="admin-post-mode-row" role="radiogroup" aria-label="Beitragsmodus">
+            <label><input type="radio" name="newPostMode" value="single" ${draftPostMode==="slide"?"":"checked"}> Einzelbeitrag</label>
+            <label><input type="radio" name="newPostMode" value="slide" ${draftPostMode==="slide"?"checked":""}> Slide-Modus</label>
+          </div>
+          <div class="admin-post-mode-status" id="newPostModeStatus">${esc(window.DARSlidePostParser?DARSlidePostParser.formatSlideStatusLine(draftMarkdown,draftPostMode==="slide"?"slide":"single"):(draftPostMode==="slide"?"Slide-Modus":"Einzelbeitrag"))}</div>
+          <label class="field-label" for="postMarkdownInput">Komplettes Markdown einfügen</label>
+          <textarea class="paste-area markdown-editor" id="postMarkdownInput" spellcheck="false" placeholder="Kompletten Markdown-Beitrag hier einfügen…">${esc(draftMarkdown)}</textarea>
           ${renderSlideDraftPreview(draftMarkdown)}
-          <div class="publish-meta-row">
-            <input class="field" id="postFilenameInput" value="${esc(draftFilename)}" placeholder="dateiname-351-titel.md" aria-label="Dateiname">
-            <button class="btn" id="nextNumberBtn" type="button">Nr.</button>
+          <div class="admin-post-quick-actions">
+            <button class="btn" id="checkNewPostBtn" type="button">Prüfen</button>
+            <button class="btn" id="previewNewPostBtn" type="button">Vorschau</button>
+            <button class="btn" id="saveDraftBtn" type="button">Als Entwurf speichern</button>
+            <button class="btn primary" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Veröffentliche…":"Veröffentlichen"}</button>
           </div>
-          <div class="publish-action-bar">
-            <button class="btn primary publish-primary-btn" id="uploadPostBtn" type="button" ${uploadBusy?"disabled":""}>${uploadBusy?"Veröffentliche &amp; pushe…":"Veröffentlichen & Live-Push"}</button>
-            <button class="btn publish-secondary-btn" id="adminRetryPushBtn" type="button" title="Nur für den zuletzt veröffentlichten Beitrag">Push erneut</button>
-          </div>
-          <details class="admin-fold">
-            <summary>Anhänge · PDF · Feed-Bild</summary>
-            <div class="admin-fold-body">${renderSourceFilesPanel("draft")}${window.DARAdminFeedImage?DARAdminFeedImage.renderPanel("draft"):""}</div>
-          </details>
-          <details class="admin-fold"${draftFold?" open":""}>
-            <summary>Entwurf · lokal speichern</summary>
+          <div class="admin-post-preview-box" id="newPostPreviewBox" hidden></div>
+          <details class="admin-fold" id="newPostAdvancedFold">
+            <summary>Erweitert</summary>
             <div class="admin-fold-body">
-              <button class="btn" id="saveDraftBtn" type="button" style="width:100%;justify-content:center">Als Entwurf speichern</button>
-              ${draftFold||`<div class="upload-status" style="margin-top:8px">Kein gespeicherter Entwurf auf diesem Gerät.</div>`}
+              <div class="publish-meta-row">
+                <input class="field" id="postFilenameInput" value="${esc(draftFilename)}" placeholder="dateiname-351-titel.md" aria-label="Dateiname">
+                <button class="btn" id="nextNumberBtn" type="button">Nr.</button>
+              </div>
+              <div class="publish-action-bar" style="margin-top:8px">
+                <button class="btn publish-secondary-btn" id="adminRetryPushBtn" type="button" title="Nur für den zuletzt veröffentlichten Beitrag">Push erneut</button>
+              </div>
+              <details class="admin-fold" style="margin-top:8px">
+                <summary>Anhänge · PDF · Feed-Bild · Kategorie · Quelle</summary>
+                <div class="admin-fold-body">${renderSourceFilesPanel("draft")}${window.DARAdminFeedImage?DARAdminFeedImage.renderPanel("draft"):""}${validationList(draftMarkdown)}</div>
+              </details>
+              <details class="admin-fold"${draftFold?" open":""} style="margin-top:8px">
+                <summary>Lokaler Entwurf</summary>
+                <div class="admin-fold-body">
+                  ${draftFold||`<div class="upload-status" style="margin-top:8px">Kein gespeicherter Entwurf auf diesem Gerät.</div>`}
+                </div>
+              </details>
+              ${renderPublishTracker("single",{foldable:true,hideActions:true})}
             </div>
           </details>
-          ${renderPublishTracker("single",{foldable:true,hideActions:true})}
         </div>
       </details>
       ${renderBulkPackPanel()}
@@ -3463,9 +3542,12 @@ function bindUi(){
   const type=document.getElementById("typeFilter");if(type)type.onchange=e=>{typeFilter=e.target.value;renderShell()};
   const sort=document.getElementById("sortMode");if(sort)sort.onchange=e=>{sortMode=e.target.value;renderShell()};
   const clear=document.getElementById("clearFilters");if(clear)clear.onclick=()=>{query="";typeFilter="all";sortMode="score";renderShell()};
-  const postMarkdownInput=document.getElementById("postMarkdownInput");if(postMarkdownInput)postMarkdownInput.oninput=e=>{draftMarkdown=e.target.value;const preview=document.getElementById("slideDraftPreview");if(preview){const html=renderSlideDraftPreview(draftMarkdown);if(html)preview.outerHTML=html;else preview.remove()}else if(renderSlideDraftPreview(draftMarkdown)){postMarkdownInput.insertAdjacentHTML("afterend",renderSlideDraftPreview(draftMarkdown))}};
+  const postMarkdownInput=document.getElementById("postMarkdownInput");if(postMarkdownInput)postMarkdownInput.oninput=e=>{draftMarkdown=e.target.value;updateNewPostModeStatus()};
+  document.querySelectorAll('input[name="newPostMode"]').forEach(radio=>radio.onchange=()=>{syncNewPostModeFromUi();try{localStorage.setItem(ADMIN_DRAFT_KEY,JSON.stringify({markdown:document.getElementById("postMarkdownInput")?.value||draftMarkdown,filename:(document.getElementById("postFilenameInput")?.value||draftFilename).trim(),status:draftStatus,postMode:draftPostMode,updatedAt:new Date().toISOString()}))}catch(e){}});
+  const checkNewPostBtn=document.getElementById("checkNewPostBtn");if(checkNewPostBtn)checkNewPostBtn.onclick=()=>checkNewPostMarkdown();
+  const previewNewPostBtn=document.getElementById("previewNewPostBtn");if(previewNewPostBtn)previewNewPostBtn.onclick=()=>previewNewPostMarkdown();
   const postFilenameInput=document.getElementById("postFilenameInput");if(postFilenameInput)postFilenameInput.oninput=e=>{draftFilename=e.target.value.trim()};
-  const saveDraftBtn=document.getElementById("saveDraftBtn");if(saveDraftBtn)saveDraftBtn.onclick=()=>{draftMarkdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown;draftFilename=(document.getElementById("postFilenameInput")?.value||draftFilename).trim();saveLocalDraft()};
+  const saveDraftBtn=document.getElementById("saveDraftBtn");if(saveDraftBtn)saveDraftBtn.onclick=()=>{draftMarkdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown;draftFilename=(document.getElementById("postFilenameInput")?.value||draftFilename).trim();draftPostMode=selectedNewPostMode();saveLocalDraft()};
   const nextNumberBtn=document.getElementById("nextNumberBtn");if(nextNumberBtn)nextNumberBtn.onclick=prepareNextPostNumber;
   const uploadPostBtn=document.getElementById("uploadPostBtn");if(uploadPostBtn)uploadPostBtn.onclick=uploadPostViaWorker;
   const bulkCountBtn=document.getElementById("bulkCountBtn");if(bulkCountBtn)bulkCountBtn.onclick=()=>{const n=countBulkMarkdownPosts(document.getElementById("bulkPackMarkdownInput")?.value||"");const label=document.getElementById("bulkPackCountLabel");if(label)label.textContent=n?`${n} Beiträge erkannt`:"";setBulkPackStatus(n?`${n} Beiträge im Paket erkannt.`:"Keine Beiträge erkannt — mit === trennen oder Frontmatter-Blöcke nutzen.")};
@@ -3761,20 +3843,30 @@ async function uploadPostViaWorker(){
   if(uploadBusy)return;
   draftMarkdown=document.getElementById("postMarkdownInput")?.value||"";
   draftFilename=(document.getElementById("postFilenameInput")?.value||"").trim();
+  draftPostMode=selectedNewPostMode();
   if(!draftMarkdown.trim()){setUploadStatus("Bitte Markdown-Beitrag einfügen.");return}
-  const slideCheck=window.DARSlidePostParser?window.DARSlidePostParser.validateSlideMarkdown(draftMarkdown):{ok:true,errors:[],warnings:[]};
-  if(slideCheck.errors?.length){setUploadStatus(`Slide-Fehler: ${esc(slideCheck.errors.join(" · "))}`);finishPublishTrack("error",slideCheck.errors.join(" · "));return}
-  if(slideCheck.warnings?.length)addAdminLog("Slide","Hinweise",slideCheck.warnings.join(" · "));
+  const prepared=window.DARSlidePostParser
+    ? DARSlidePostParser.prepareMarkdownForMode(draftMarkdown,draftPostMode,{
+        title:frontmatterValue(draftMarkdown,"title"),
+        id:frontmatterValue(draftMarkdown,"id"),
+        status:"published"
+      })
+    : {ok:true,markdown:draftMarkdown,errors:[],warnings:[]};
+  if(!prepared.ok){setUploadStatus(`<span style="color:#f87171"><strong>${draftPostMode==="slide"?"Slide-Fehler":"Einzelbeitrag-Fehler"}:</strong> ${esc(prepared.errors.join(" · "))}</span>`);finishPublishTrack("error",prepared.errors.join(" · "));return}
+  if(prepared.warnings?.length)addAdminLog("Slide","Hinweise",prepared.warnings.join(" · "));
+  draftMarkdown=prepared.markdown||draftMarkdown;
+  const mdInput=document.getElementById("postMarkdownInput");if(mdInput)mdInput.value=draftMarkdown;
+  updateNewPostModeStatus();
   const preview=markdownPreviewData(draftMarkdown);
   startPublishTrack("single",{title:preview.title,filename:draftFilename||"wird automatisch erzeugt"});
-  if(!confirm(`Markdown und Slides prüfen und veröffentlichen?\n\nDu bestätigst im nächsten Schritt die genaue Push-ID.`)){finishPublishTrack("error","Veröffentlichung abgebrochen");setUploadStatus("Veröffentlichung abgebrochen. Der Entwurf bleibt lokal vorbereitet.");addAdminLog("Abgebrochen","Veröffentlichung bewusst abgebrochen",draftFilename||preview.title);return}
+  if(!confirm(`${draftPostMode==="slide"?"Slide-Beitrag":"Einzelbeitrag"} prüfen und veröffentlichen?\n\n${draftPostMode==="slide"?`Slides: ${prepared.info?.slideCount||preview.slideCount||"?"}\n`:""}Du bestätigst im nächsten Schritt die genaue Push-ID.`)){finishPublishTrack("error","Veröffentlichung abgebrochen");setUploadStatus("Veröffentlichung abgebrochen. Der Entwurf bleibt lokal vorbereitet.");addAdminLog("Abgebrochen","Veröffentlichung bewusst abgebrochen",draftFilename||preview.title);return}
   try{
     uploadBusy=true;setUploadStatus("Prüfe aktuelle Nummer und bereite Worker-Veröffentlichung vor...");
-    updatePublishStep("markdown","ok","Markdown vorhanden");
+    updatePublishStep("markdown","ok",draftPostMode==="slide"?`Slide · ${prepared.info?.slideCount||0}`:"Markdown vorhanden");
     const info=await resolveNextPostNumberInfo();
-    if(info.duplicateGlobal){updatePublishStep("number","error",`Nr. ${info.postCount} doppelt`);finishPublishTrack("error","Doppelte Beitragsnummer im Index");setUploadStatus(`<span style="color:#f87171"><strong>Veröffentlichung blockiert:</strong> Beitrags-Nr. ${info.postCount} ist mehrfach im Index. Bitte zuerst das Duplikat löschen.</span>`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen & Live-Push"}return}
+    if(info.duplicateGlobal){updatePublishStep("number","error",`Nr. ${info.postCount} doppelt`);finishPublishTrack("error","Doppelte Beitragsnummer im Index");setUploadStatus(`<span style="color:#f87171"><strong>Veröffentlichung blockiert:</strong> Beitrags-Nr. ${info.postCount} ist mehrfach im Index. Bitte zuerst das Duplikat löschen.</span>`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen"}return}
     const blockedTitle=await assertNotDeletedDraft(draftMarkdown);
-    if(blockedTitle){updatePublishStep("number","error","Gelöschter Beitrag");finishPublishTrack("error","Gelöschter Beitrag");setUploadStatus(`<span style="color:#f87171"><strong>Veröffentlichung blockiert:</strong> „${esc(blockedTitle)}“ wurde gelöscht und darf nicht erneut online gestellt werden.</span>`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen & Live-Push"}return}
+    if(blockedTitle){updatePublishStep("number","error","Gelöschter Beitrag");finishPublishTrack("error","Gelöschter Beitrag");setUploadStatus(`<span style="color:#f87171"><strong>Veröffentlichung blockiert:</strong> „${esc(blockedTitle)}“ wurde gelöscht und darf nicht erneut online gestellt werden.</span>`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen"}return}
     const next=info.nextNumber;
     updatePublishStep("number","ok",`Nr. ${next}`);
     if(!draftFilename)draftFilename=suggestFilename(draftMarkdown,next);
@@ -3783,14 +3875,23 @@ async function uploadPostViaWorker(){
     updatePublishStep("filename","ok",draftFilename);
     const filenameInput=document.getElementById("postFilenameInput");if(filenameInput)filenameInput.value=draftFilename;
     let markdown=normalizeMarkdownForUpload(draftMarkdown,next);
+    if(window.DARSlidePostParser){
+      const again=DARSlidePostParser.prepareMarkdownForMode(markdown,draftPostMode,{
+        title:frontmatterValue(markdown,"title"),
+        id:frontmatterValue(markdown,"id"),
+        status:"published"
+      });
+      if(!again.ok){finishPublishTrack("error",again.errors.join(" · "));setUploadStatus(`<span style="color:#f87171">${esc(again.errors.join(" · "))}</span>`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen"}return}
+      markdown=again.markdown;
+    }
     const postId=frontmatterValue(markdown,"id")||draftFilename.replace(/\.md$/i,"");
     const postTitle=frontmatterValue(markdown,"title")||preview.title||"Beitrag";
-    const ok=confirm(`Möchtest du diese Änderung wirklich veröffentlichen?\n\nTitel: ${postTitle}\nDatei: ${draftFilename}\nPush-ID: ${postId}\n\nDer Push an alle Nutzer wird automatisch gesendet, sobald der Beitrag live ist.`);
-    if(!ok){finishPublishTrack("error","Veröffentlichung abgebrochen");setUploadStatus("Veröffentlichung abgebrochen.");uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen & Live-Push"}return}
+    const ok=confirm(`Möchtest du diese Änderung wirklich veröffentlichen?\n\nModus: ${draftPostMode==="slide"?"Slide":"Einzelbeitrag"}\nTitel: ${postTitle}\nDatei: ${draftFilename}\nPush-ID: ${postId}\n\nDer Push an alle Nutzer wird automatisch gesendet, sobald der Beitrag live ist.`);
+    if(!ok){finishPublishTrack("error","Veröffentlichung abgebrochen");setUploadStatus("Veröffentlichung abgebrochen.");uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen"}return}
     if(window.DARAdminFeedImage)markdown=DARAdminFeedImage.applyFeedToMarkdown(markdown,postId,postTitle,"draft",{sourceQueue:sourceUploadQueue});
     const sourceCheck=validateBeforeSourceSave("draft");
     if(sourceCheck.warnings?.length)addAdminLog("Quellen","Hinweise",sourceCheck.warnings.join(" · "));
-    if(!sourceCheck.ok){finishPublishTrack("error",sourceCheck.errors.join(" · "));setUploadStatus(`Quellen-Fehler: ${esc(sourceCheck.errors.join(" · "))}`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen & Live-Push"}return}
+    if(!sourceCheck.ok){finishPublishTrack("error",sourceCheck.errors.join(" · "));setUploadStatus(`Quellen-Fehler: ${esc(sourceCheck.errors.join(" · "))}`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen"}return}
     if(sourceUploadQueue.length)updatePublishStep("created","ok",`${sourceUploadQueue.length} Quellen-Datei(en) bereit`);
     const audit=auditPostMarkdown(markdown);
     if(audit.warnings.length)addAdminLog("Frontmatter","Automatisch repariert",audit.warnings.join(" · "));
@@ -3802,10 +3903,10 @@ async function uploadPostViaWorker(){
     const sourceFiles=collectSourceFilesForWorker();
     let feedImageFiles=[];
     if(window.DARAdminFeedImage){
-      try{feedImageFiles=await DARAdminFeedImage.collectUploadFiles(postId,"draft")}catch(e){finishPublishTrack("error",e.message||"Feed-Bild");setUploadStatus(`Feed-Bild-Fehler: ${esc(e.message||e)}`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen & Live-Push"}return}
+      try{feedImageFiles=await DARAdminFeedImage.collectUploadFiles(postId,"draft")}catch(e){finishPublishTrack("error",e.message||"Feed-Bild");setUploadStatus(`Feed-Bild-Fehler: ${esc(e.message||e)}`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen"}return}
       if(feedImageFiles.length)updatePublishStep("created","ok",`${sourceFiles.length?sourceFiles.length+" Quellen + ":""}Feed-Bild bereit`);
     }
-    const result=await publishPostViaWorkerRequest(markdown,draftFilename,{sourceFiles,feedImageFiles});
+    const result=await publishPostViaWorkerRequest(markdown,draftFilename,{sourceFiles,feedImageFiles,skipPush:false});
     const uploadedFilename=result.filename||draftFilename;
     const uploadedNumber=result.number||next;
     const uploadedPostId=result.postId||postId||uploadedFilename.replace(/\.md$/i,"");
@@ -3853,11 +3954,12 @@ async function uploadPostViaWorker(){
     updatePublishMeta({pushStatus:push&&push.sent?"gesendet":push?.pending?"wartet auf Live (Hintergrund)":push?`nicht gesendet: ${push.reason||push.message||"unbekannt"}`:"kein Push-Status"});
     // Beitrag erstellt + Push im Hintergrund = kein „Fehler“-Status (hängte die UI sonst als Fehler fest)
     finishPublishTrack(live.file||push?.pending||result.commitSha?"ok":"error",live.file||push?.pending||result.commitSha?"":live.reason||"Live-Datei noch nicht erreichbar");
-    setUploadStatus(`${result.updated?"Beitrag aktualisiert":"Veröffentlicht"}: <strong>${esc(uploadedFilename)}</strong> · Nr. <strong>${esc(uploadedNumber)}</strong>${formatPushStatusLine(push||result.push)}${push?.pending?" · <span style=\"color:#f0d98f\">Push wartet — „Push erneut“ nutzen.</span>":""}`);
+    setUploadStatus(`${result.updated?"Beitrag aktualisiert":"Veröffentlicht"}: <strong>${esc(uploadedFilename)}</strong> · Nr. <strong>${esc(uploadedNumber)}</strong>${draftPostMode==="slide"?` · <strong>Slide</strong>`:""}${formatPushStatusLine(push||result.push)}${push?.pending?" · <span style=\"color:#f0d98f\">Push wartet — „Push erneut“ nutzen.</span>":""}`);
     addAdminLog("Veröffentlicht","Beitrag über Cloudflare Worker veröffentlicht",uploadedFilename);
     draftMarkdown="";
     draftFilename="";
     draftNextNumber=null;
+    draftPostMode="single";
     sourceDraftPending=null;
     sourceUploadQueue=[];
     if(window.DARAdminFeedImage)DARAdminFeedImage.resetState("draft");
@@ -3871,7 +3973,7 @@ async function uploadPostViaWorker(){
     setUploadStatus(`Fehler: ${esc(e.message||e)}<br>Bitte Worker URL, Admin Worker Secret und Cloudflare Secrets prüfen.`);
   }finally{
     uploadBusy=false;
-    const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen & Live-Push"}
+    const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen"}
   }
 }
 function setBulkPackStatus(html){const el=document.getElementById("bulkPackStatus");if(el)el.innerHTML=html}

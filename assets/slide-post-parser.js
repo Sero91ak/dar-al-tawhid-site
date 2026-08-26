@@ -84,9 +84,10 @@
     const clean = sanitizeSlideMarkdownBody(body);
     if (!bodyHasSlideMarkers(clean)) return [];
     const parts = clean.split(SLIDE_MARKER_RE);
+    // Inhalt vor dem ersten <!-- slide: N --> ist Intro, kein eigener Slide
     const slides = [];
-    for (const part of parts) {
-      const slide = splitSlideChunk(part);
+    for (let i = 1; i < parts.length; i++) {
+      const slide = splitSlideChunk(parts[i]);
       if (slide && (slide.title || slide.text)) slides.push(slide);
     }
     return slides;
@@ -117,7 +118,7 @@
     if (/^```(?:markdown|md)?/m.test(body)) {
       warnings.push("Markdown-Codeblock erkannt — vor dem Speichern entfernen");
     }
-    if (hasTypeSlide && !slides.length && !/^slides:\s*$/m.test(yaml)) {
+    if (hasTypeSlide && !slides.length && !/^slides:\s*$/m.test(yaml) && !/^slides:\s*\n/m.test(yaml)) {
       errors.push('type: "slide" gesetzt, aber keine Slides erkannt (<!-- slide: N --> fehlt?)');
     }
     if (!hasTypeSlide && hasBodyMarkers) {
@@ -125,6 +126,25 @@
     }
     if (hasTypeSlide && /^slides:\s*$/m.test(yaml) && !slides.length) {
       errors.push("Slide-Frontmatter ohne gültigen slides:-Block und ohne Body-Marker");
+    }
+
+    // 1 Aussage = 1 Slide: leere Slides blockieren
+    slides.forEach((slide, index) => {
+      const n = index + 1;
+      if (!String(slide.text || "").trim() && !String(slide.title || "").trim()) {
+        errors.push(`Slide ${n} leer`);
+      } else if (!String(slide.text || "").trim()) {
+        warnings.push(`Slide ${n}: Aussage/Text fehlt`);
+      }
+      const hasSource = Boolean(String(slide.source || "").trim());
+      const hasLinks = Array.isArray(slide.links) && slide.links.some((l) => String(l?.url || "").trim());
+      if (!hasSource && !hasLinks) {
+        warnings.push(`Slide ${n}: eigene Quelle fehlt (Quelle oder Link empfehlenswert)`);
+      }
+    });
+
+    if ((hasTypeSlide || hasBodyMarkers) && slides.length === 1) {
+      warnings.push("Nur 1 Slide erkannt — bei mehreren Aussagen bitte trennen (1 Aussage = 1 Slide)");
     }
 
     return {
@@ -138,14 +158,66 @@
     };
   }
 
-  function validateSlideMarkdown(markdown) {
+  function validateSlideMarkdown(markdown, options) {
     const info = analyzeSlideMarkdown(markdown);
+    const mode = String(options?.mode || "").toLowerCase();
+    const errors = info.errors.slice();
+    const warnings = info.warnings.slice();
+
+    if (mode === "slide") {
+      if (!info.slideCount && !info.hasBodyMarkers) {
+        errors.push("Keine <!-- slide: N --> Marker erkannt — bitte Aussagen als Slides trennen");
+      }
+      if (!info.hasTypeSlide && info.hasBodyMarkers) {
+        // Frontmatter wird beim Prepare gesetzt — hier nur Hinweis
+        warnings.push('Frontmatter type/layout wird beim Veröffentlichen auf Slide gesetzt');
+      }
+    }
+    if (mode === "single" && (info.isSlide || info.hasBodyMarkers || info.hasTypeSlide)) {
+      errors.push("Dieser Beitrag enthält Slide-Struktur. Bitte Slide-Modus wählen oder Marker entfernen.");
+    }
+
     return {
-      ok: !info.errors.length,
-      errors: info.errors,
-      warnings: info.warnings,
+      ok: !errors.length,
+      errors,
+      warnings,
       info
     };
+  }
+
+  function prepareMarkdownForMode(markdown, mode, fallback) {
+    const raw = String(markdown || "");
+    if (mode === "slide") {
+      const next = ensureSlideFrontmatter(raw, fallback);
+      const check = validateSlideMarkdown(next, { mode: "slide" });
+      return { ok: check.ok, markdown: next, errors: check.errors, warnings: check.warnings, info: check.info };
+    }
+    const audit = analyzeSlideMarkdown(raw);
+    if (audit.isSlide || audit.hasBodyMarkers || audit.hasTypeSlide) {
+      return {
+        ok: false,
+        markdown: raw,
+        errors: ["Dieser Beitrag enthält Slide-Struktur. Bitte Slide-Modus wählen oder Marker entfernen."],
+        warnings: audit.warnings,
+        info: audit
+      };
+    }
+    const next = ensureSingleFrontmatter(raw, fallback);
+    return { ok: true, markdown: next, errors: [], warnings: [], info: analyzeSlideMarkdown(next) };
+  }
+
+  function formatSlideStatusLine(markdown, mode) {
+    const audit = analyzeSlideMarkdown(markdown);
+    if (mode === "slide") {
+      if (audit.errors.length) return "Fehler: " + audit.errors.join(" · ");
+      if (audit.slideCount) return `✓ Slide-Beitrag erkannt · ${audit.slideCount} Slides`;
+      if (!audit.hasBodyMarkers) return "Slide-Modus · bitte <!-- slide: 1 --> Marker einfügen";
+      return "Slide-Modus vorbereitet";
+    }
+    if (audit.isSlide || audit.hasBodyMarkers || audit.hasTypeSlide) {
+      return "Achtung: Markdown enthält Slide-Struktur — bitte Slide-Modus wählen";
+    }
+    return "✓ Einzelbeitrag vorbereitet";
   }
 
   function yamlQuote(value) {
@@ -213,15 +285,7 @@
   }
 
   function adminAnalyzeStatus(markdown, mode) {
-    const audit = analyzeSlideMarkdown(markdown);
-    if (mode === "slide") {
-      if (audit.errors.length) return "Fehler: " + audit.errors.join(" · ");
-      if (audit.slideCount) return `Slide-Modus erkannt · ${audit.slideCount} Slides`;
-      if (!audit.hasBodyMarkers) return "Slide-Modus gewählt · bitte <!-- slide: 1 --> Marker einfügen";
-      return "Slide-Modus vorbereitet";
-    }
-    if (audit.isSlide || audit.hasBodyMarkers) return "Achtung: Markdown enthält Slide-Marker";
-    return "Einzelbeitrag vorbereitet";
+    return formatSlideStatusLine(markdown, mode);
   }
 
   function enhanceAdminPostEditor() {
@@ -289,31 +353,15 @@
     if (!markdown) return true;
     const mode = forcedMode || selectedAdminPostMode(panel);
     const fallback = adminFallbackFromPanel(panel);
-    let next = markdown.value || "";
-
-    if (mode === "slide") {
-      next = ensureSlideFrontmatter(next, fallback);
-      const check = validateSlideMarkdown(next);
-      if (!check.ok) {
-        alert("Slide-Modus blockiert:\n\n" + check.errors.join("\n"));
-        return false;
-      }
-      if (!check.info.slideCount && !check.info.hasBodyMarkers) {
-        alert("Slide-Modus blockiert: Es wurden keine <!-- slide: N --> Marker erkannt. Bitte den Markdown in Slides trennen.");
-        return false;
-      }
-      if (check.warnings.length && !confirm("Slide-Modus mit Warnung veröffentlichen?\n\n" + check.warnings.join("\n"))) {
-        return false;
-      }
-    } else {
-      const audit = analyzeSlideMarkdown(next);
-      if ((audit.isSlide || audit.hasBodyMarkers) && !confirm("Markdown enthält Slide-Marker oder Slide-Frontmatter. Wirklich als Einzelbeitrag posten?")) {
-        return false;
-      }
-      next = ensureSingleFrontmatter(next, fallback);
+    const prepared = prepareMarkdownForMode(markdown.value || "", mode, fallback);
+    if (!prepared.ok) {
+      alert((mode === "slide" ? "Slide-Modus blockiert:\n\n" : "Einzelbeitrag blockiert:\n\n") + prepared.errors.join("\n"));
+      return false;
     }
-
-    markdown.value = next;
+    if (prepared.warnings.length && !confirm((mode === "slide" ? "Slide-Modus" : "Einzelbeitrag") + " mit Warnung fortsetzen?\n\n" + prepared.warnings.join("\n"))) {
+      return false;
+    }
+    markdown.value = prepared.markdown;
     markdown.dispatchEvent(new Event("input", { bubbles: true }));
     updateAdminPostModeStatus(panel);
     return true;
@@ -369,6 +417,8 @@
     frontmatterField,
     analyzeSlideMarkdown,
     validateSlideMarkdown,
+    prepareMarkdownForMode,
+    formatSlideStatusLine,
     ensureSlideFrontmatter,
     ensureSingleFrontmatter,
     prepareAdminPostMarkdown,

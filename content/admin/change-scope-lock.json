@@ -3552,6 +3552,23 @@
         "scripts/prayer-push-loop-guard.js"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "admin-post-slide-simple-2026-08-26",
+      "approvedBy": "user-explicit-admin-post-simplify",
+      "reason": "Admin Beitragserstellung vereinfachen: Einzelbeitrag/Slide-Modus, Markdown einfügen, Prüfen/Vorschau/Publish",
+      "paths": [
+        "admin/index.html",
+        "admin/live-edit.js",
+        "admin/live-edit.css",
+        "assets/slide-post-parser.js",
+        "admin/quellen-manager.js",
+        "scripts/admin-slide-mode-ui-guard.js",
+        "scripts/slide-post-guard.js",
+        "scripts/post-markdown-guard.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

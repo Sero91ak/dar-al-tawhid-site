@@ -410,9 +410,11 @@
     if (ed.kind === "post") {
       if (tab === "content") {
         return (
+          field("markdown", "Komplettes Markdown einfügen", d.markdown || "", "tall") +
+          `<details class="live-edit-advanced" open style="margin-top:10px"><summary style="cursor:pointer;font-weight:800;color:var(--gold,#d4af37)">Erweitert</summary><div style="margin-top:10px;display:grid;gap:10px">` +
           field("title", "Titel", d.title) +
           field("slug", "ID / Slug", d.id || d.slug) +
-          field("markdown", "Markdown / Haupttext", d.markdown || "", "tall")
+          `</div></details>`
         );
       }
       if (tab === "source") {
@@ -482,25 +484,47 @@
     return out;
   }
 
+  function selectedLivePostMode() {
+    const checked = document.querySelector('input[name="darPostMode"]:checked');
+    return checked?.value === "slide" ? "slide" : "single";
+  }
+
   function buildPostMarkdown(data) {
-    if (data.markdown && String(data.markdown).trim().startsWith("---")) return data.markdown;
-    const fm = [
-      "---",
-      `id: "${String(data.id || data.slug || "").replace(/"/g, "")}"`,
-      `title: "${String(data.title || "").replace(/"/g, '\\"')}"`,
-      `category: "${String(data.category || "").replace(/"/g, '\\"')}"`,
-      `topic: "${String(data.topic || "").replace(/"/g, '\\"')}"`,
-      `scholar: "${String(data.scholar || "").replace(/"/g, '\\"')}"`,
-      `book: "${String(data.book || "").replace(/"/g, '\\"')}"`,
-      `tags: "${String(data.tags || "").replace(/"/g, '\\"')}"`,
-      `source: "${String(data.source || "").replace(/"/g, '\\"')}"`,
-      `status: "${String(data.status || "draft").replace(/"/g, "")}"`,
-      "---",
-      "",
-      String(data.markdown || data.body || "").trim(),
-      data.fazit ? "\n\n## Fazit\n\n" + data.fazit : ""
-    ];
-    return fm.join("\n");
+    let markdown;
+    if (data.markdown && String(data.markdown).trim().startsWith("---")) {
+      markdown = String(data.markdown);
+    } else {
+      const fm = [
+        "---",
+        `id: "${String(data.id || data.slug || "").replace(/"/g, "")}"`,
+        `title: "${String(data.title || "").replace(/"/g, '\\"')}"`,
+        `category: "${String(data.category || "").replace(/"/g, '\\"')}"`,
+        `topic: "${String(data.topic || "").replace(/"/g, '\\"')}"`,
+        `scholar: "${String(data.scholar || "").replace(/"/g, '\\"')}"`,
+        `book: "${String(data.book || "").replace(/"/g, '\\"')}"`,
+        `tags: "${String(data.tags || "").replace(/"/g, '\\"')}"`,
+        `source: "${String(data.source || "").replace(/"/g, '\\"')}"`,
+        `status: "${String(data.status || "draft").replace(/"/g, "")}"`,
+        "---",
+        "",
+        String(data.markdown || data.body || "").trim(),
+        data.fazit ? "\n\n## Fazit\n\n" + data.fazit : ""
+      ];
+      markdown = fm.join("\n");
+    }
+    const mode = data.postMode === "slide" || selectedLivePostMode() === "slide" ? "slide" : "single";
+    if (typeof window !== "undefined" && window.DARSlidePostParser?.prepareMarkdownForMode) {
+      const prepared = window.DARSlidePostParser.prepareMarkdownForMode(markdown, mode, {
+        title: data.title,
+        id: data.id || data.slug,
+        status: data.status || "draft"
+      });
+      if (!prepared.ok) {
+        throw new Error(prepared.errors.join(" · ") || "Markdown-Prüfung fehlgeschlagen");
+      }
+      return prepared.markdown;
+    }
+    return markdown;
   }
 
   async function saveEditor({ publish }) {
@@ -515,7 +539,14 @@
     setSaveStatus("Speichert …");
     try {
       if (state.editor.kind === "post") {
-        const markdown = buildPostMarkdown(data);
+        let markdown;
+        try {
+          markdown = buildPostMarkdown(data);
+        } catch (err) {
+          setSaveStatus(String(err.message || err));
+          alert(String(err.message || err));
+          return;
+        }
         const filename = String(data.filename || (data.id || data.slug || "entwurf") + ".md").replace(/\.md$/i, "") + ".md";
         if (publish) {
           if (typeof publishPostViaWorkerRequest === "function") {
