@@ -137,6 +137,25 @@
     };
   }
 
+  async function fetchLibraryStatsFromEvents(publicationId, baseUrl, key) {
+    const id = String(publicationId || "").trim();
+    if (!id || !baseUrl || !key) return emptyLibraryStats();
+    const res = await fetch(
+      `${baseUrl}/rest/v1/site_events?content_type=eq.library&content_id=eq.${encodeURIComponent(id)}&event_type=in.(library_click,library_view,library_read,library_download)&select=event_type&limit=5000&_ts=${Date.now()}`,
+      { headers: { apikey: key, Authorization: `Bearer ${key}` }, cache: "no-store" }
+    );
+    if (!res.ok) throw new Error("site_events " + res.status);
+    const rows = await res.json();
+    const stats = emptyLibraryStats();
+    (Array.isArray(rows) ? rows : []).forEach((row) => {
+      const eventType = String(row?.event_type || "");
+      if (eventType === "library_click" || eventType === "library_view") stats.clicks += 1;
+      else if (eventType === "library_read") stats.reads += 1;
+      else if (eventType === "library_download") stats.downloads += 1;
+    });
+    return stats;
+  }
+
   async function fetchLibraryStats(publicationId, options) {
     const id = String(publicationId || "").trim();
     if (!id) return emptyLibraryStats();
@@ -159,7 +178,15 @@
       const rows = await res.json();
       const row = Array.isArray(rows) ? rows[0] : null;
       const remote = parseLibraryStatsRow(row);
-      const stats = mergeLibraryStats(LIBRARY_STATS_CACHE.get(id), remote);
+      let stats = mergeLibraryStats(LIBRARY_STATS_CACHE.get(id), remote);
+      if (!row || (!remote.clicks && !remote.reads && !remote.downloads)) {
+        try {
+          const eventStats = await fetchLibraryStatsFromEvents(id, baseUrl, key);
+          stats = mergeLibraryStats(stats, eventStats);
+        } catch (eventErr) {
+          /* Event-Fallback darf Bibliothek nie blockieren */
+        }
+      }
       LIBRARY_STATS_CACHE.set(id, stats);
       return stats;
     } catch (e) {
