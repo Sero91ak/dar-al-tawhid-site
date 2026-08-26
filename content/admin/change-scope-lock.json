@@ -104,7 +104,8 @@
         "test/service-worker.js",
         "scripts/push-autonomous-heal-guard.js",
         "scripts/apply-welcome-push-delivery-fix.js",
-        "admin/index.html"
+        "admin/index.html",
+        "admin/sw.js"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     },
