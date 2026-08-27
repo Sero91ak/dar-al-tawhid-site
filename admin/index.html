@@ -3030,8 +3030,11 @@ function markdownPreviewData(markdown){
   const source=frontmatterValue(text,"source")||frontmatterValue(text,"quelle")||"Quelle prüfen";
   const slideAudit=window.DARSlidePostParser?window.DARSlidePostParser.analyzeSlideMarkdown(text):null;
   const body=text.replace(/^---[\s\S]*?---/,"").trim();
-  const quote=(body.match(/>+\s*(.+)/)||body.match(/(?:quote|aussage):\s*[\"']?(.+?)[\"']?\s*$/mi)||[])[1]||body.split(/\n\s*\n/).find(Boolean)||"Markdown einfügen, dann erscheint hier die Vorschau.";
-  return{title,category,scholar,book,source,quote:String(quote).replace(/^#+\s*/,"").trim().slice(0,420),slideRecognized:!!slideAudit?.isSlide,slideCount:slideAudit?.slideCount||0,slideWarnings:slideAudit?.warnings||[],slideErrors:slideAudit?.errors||[]};
+  const fazitSplit=body.split(/(?:^|\n)\s*(?:🌙\s*)?(?:\*\*)?Fazit(?:\*\*)?\s*:/i);
+  const quoteBlock=(fazitSplit[0]||"").trim();
+  const fazitBlock=String(frontmatterValue(text,"fazit")||frontmatterValue(text,"conclusion")||(fazitSplit[1]||"")).trim();
+  const quote=(frontmatterValue(text,"quote")||quoteBlock.match(/>+\s*(.+)/)?.[1]||quoteBlock.split(/\n\s*\n/).find(Boolean)||"Markdown einfügen, dann erscheint hier die Vorschau.");
+  return{title,category,scholar,book,source,fazit:fazitBlock.replace(/\*\*/g,"").slice(0,420),quote:String(quote).replace(/^#+\s*/,"").trim().slice(0,420),slideRecognized:!!slideAudit?.isSlide,slideCount:slideAudit?.slideCount||0,slideWarnings:slideAudit?.warnings||[],slideErrors:slideAudit?.errors||[]};
 }
 function validationList(markdown){
   const p=markdownPreviewData(markdown);
@@ -3041,6 +3044,8 @@ function validationList(markdown){
     ["Gelehrter",p.scholar!=="Gelehrter offen"],
     ["Werk",p.book!=="Werk offen"],
     ["Quelle",p.source!=="Quelle prüfen"],
+    ["Aussage",!!String(p.quote||"").trim()&&p.quote!=="Markdown einfügen, dann erscheint hier die Vorschau."],
+    ["Fazit getrennt",!/🌙|\bFazit:/i.test(String(p.quote||""))],
     ["Dateiname",!!draftFilename],
     ["Slide erkannt",!p.slideRecognized||p.slideCount>0]
   ];
@@ -3089,6 +3094,7 @@ function renderActions(rows){
           </div>
           <div class="admin-post-mode-status" id="newPostModeStatus">${esc(window.DARSlidePostParser?DARSlidePostParser.formatSlideStatusLine(draftMarkdown,draftPostMode==="slide"?"slide":"single"):(draftPostMode==="slide"?"Slide-Modus":"Einzelbeitrag"))}</div>
           <label class="field-label" for="postMarkdownInput">Komplettes Markdown einfügen</label>
+          <p class="upload-status" style="margin:0 0 8px">Getrennt halten: <b>Aussage</b> und eigene Zeile <code>🌙 Fazit:</code>. Teilen nutzt standardmäßig nur Aussage + Quelle, nicht das Fazit.</p>
           <textarea class="paste-area markdown-editor" id="postMarkdownInput" spellcheck="false" placeholder="Kompletten Markdown-Beitrag hier einfügen…">${esc(draftMarkdown)}</textarea>
           ${renderSlideDraftPreview(draftMarkdown)}
           <div class="admin-post-quick-actions">
