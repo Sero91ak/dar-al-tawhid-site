@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v671";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v672";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -19181,7 +19181,7 @@ function dailyContentToday(){return (darDailyContent&&darDailyContent.date===dar
 function dailyJsonDuaFallback(entry){if(!entry?.id)return null;return{id:entry.id,title:entry.title||"Duʿāʾ des Tages",de:entry.snippet||"",cat:entry.category||"",type:"Duʿāʾ"}}
 function dailyJsonPostFallback(entry){if(!entry?.id)return null;return{id:entry.id,title:entry.title||"Beitrag",category:entry.category||"",scholar:entry.scholar||"",file:entry.file||""}}
 const QURAN_TR_MODES={readable:{label:"Lesbar",short:"Einfach · latin",hint:"Einfache lateinische Umschrift zum lauten Lesen."},tanzil:{label:"Tanzil",short:"Standard",hint:"Standard-Umschrift mit Doppellauten (Tanzil.net)."},academic:{label:"Wissenschaftlich",short:"Mit Diakritika",hint:"Akademische Umschrift mit ḥ, ʿ, ā und weiteren Zeichen."}};
-const QURAN_TR_PREVIEW_SAMPLE={tr:"al-ḥamdu lillāhi rabbi l-'ālamīna",tr_readable:"al-hamdu lillahi rabbi l-alamina",tr_academic:"al-ḥamdu lillahi rabbi l-ʿālamīna"};
+const QURAN_TR_PREVIEW_SAMPLE={tr:"al-ḥamdu lillāhi rabbi l-ʿālamīna",tr_readable:"al-hamdu lillahi rabbi l-'aalameen",tr_academic:"al-ḥamdu lillāhi rabbi l-ʿālamīna"};
 const QURAN_TR_PREVIEW_DE="(Alles) Lob gehört Allah, dem Herrn der Welten";
 const QURAN_TR_PREVIEW_AR="الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ";
 function quranTrPreviewText(mode){return quranVerseTr(QURAN_TR_PREVIEW_SAMPLE,mode||"readable")}
@@ -25102,7 +25102,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v671";
+const APP_BUILD_ID="app-shell-v672";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
