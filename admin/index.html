@@ -26,8 +26,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v69";
-  var MIG_KEY="darAdminSwFixV29";
+  var ADMIN_SW_CACHE="dar-admin-stats-v70";
+  var MIG_KEY="darAdminSwFixV30";
   var RELOAD_KEY="darAdminSwReloadBudget";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
@@ -131,7 +131,7 @@ body{margin:0;min-height:100dvh;height:auto;color:var(--ink);font-family:var(--s
 button,input,select{font:inherit}
 button{cursor:pointer}
 .app{width:min(1460px,100%);margin:0 auto;min-height:100%;touch-action:pan-y pinch-zoom}
-.topbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;margin-bottom:14px}
+.topbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;margin-bottom:14px;position:sticky;top:0;z-index:40;padding:8px 0 10px;background:linear-gradient(180deg,rgba(5,8,15,.98),rgba(5,8,15,.92) 70%,transparent);backdrop-filter:blur(10px)}
 .brand{display:flex;align-items:center;gap:12px;min-width:0}
 .brand img{width:48px;height:48px;border-radius:14px;box-shadow:0 12px 28px rgba(0,0,0,.28),0 0 0 1px rgba(140,190,255,.22);flex:0 0 48px}
 .brand h1{margin:0;font-family:var(--serif);font-size:23px;line-height:1.03;color:var(--gold)}
@@ -143,7 +143,7 @@ button{cursor:pointer}
 .btn.primary{background:linear-gradient(135deg,rgba(239,215,142,.20),rgba(90,140,220,.10));border-color:rgba(239,215,142,.38)}
 .btn.danger{color:#ffe0dc;border-color:rgba(225,125,115,.28);background:rgba(225,125,115,.08)}
 .btn:active,.chip:active{transform:scale(.98)}
-.panel{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(10,17,28,.94),rgba(5,8,15,.96));box-shadow:var(--shadow);padding:15px;overflow:hidden;min-width:0}
+.panel{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(10,17,28,.94),rgba(5,8,15,.96));box-shadow:var(--shadow);padding:15px;overflow:visible;min-width:0}
 .login{max-width:420px;margin:42px auto 20px;text-align:center}
 .login-logo{width:74px;height:74px;border-radius:20px;margin:0 auto 14px;display:block;box-shadow:0 16px 42px rgba(0,0,0,.34),0 0 34px rgba(90,140,220,.22)}
 .login h2{margin:0 0 6px;font-family:var(--serif);font-size:28px;color:var(--gold)}
@@ -168,7 +168,7 @@ button{cursor:pointer}
 .folder-card{border:1px solid var(--line);border-radius:14px;background:linear-gradient(145deg,rgba(12,24,39,.90),rgba(8,10,9,.94));padding:10px;color:var(--ink);text-align:left;min-height:74px;box-shadow:0 10px 24px rgba(0,0,0,.18)}
 .folder-card:hover{border-color:rgba(140,190,255,.52)}
 .folder-icon{display:none}
-.folder-card h3{font-family:var(--serif);font-size:18px;line-height:1.05;color:var(--gold);margin:0 0 7px}
+.folder-card h3{font-family:var(--serif);font-size:18px;line-height:1.25;color:var(--gold);margin:0 0 7px;overflow-wrap:anywhere}
 .folder-card p{display:none}
 .folder-card small{display:block;color:var(--muted);font-size:9.5px;font-weight:900;margin-top:0;text-transform:uppercase;line-height:1.25}
 .hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:12px;margin-bottom:12px}
@@ -306,27 +306,27 @@ button{cursor:pointer}
 .source-library-item .btn{min-height:32px;padding:6px 10px;font-size:10px}
 .quellen-studio{display:grid;gap:12px;min-width:0;max-width:100%}
 .quellen-grid{display:grid;grid-template-columns:minmax(260px,.9fr) minmax(320px,1.1fr);gap:12px;align-items:start;min-width:0}
-.quellen-search-panel,.quellen-editor-panel{min-height:min(72vh,680px);display:flex;flex-direction:column;gap:8px;min-width:0;overflow:hidden}
-.quellen-result-list{display:flex;flex-direction:column;gap:10px;flex:1;max-height:min(52vh,440px);overflow:auto;-webkit-overflow-scrolling:touch}
-.quellen-result-row{display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:12px 14px;border:1px solid var(--line2);border-radius:14px;background:rgba(0,0,0,.08);cursor:pointer;text-align:left;width:100%;font:inherit;color:inherit;min-width:0;isolation:isolate;overflow:hidden}
+.quellen-search-panel,.quellen-editor-panel{min-height:min(72vh,680px);display:flex;flex-direction:column;gap:10px;min-width:0;overflow:visible}
+.quellen-result-list{display:flex;flex-direction:column;gap:8px;flex:0 0 auto;max-height:min(58vh,560px);overflow:auto;-webkit-overflow-scrolling:touch;padding:2px 1px 8px}
+.quellen-result-row{display:flex;flex-direction:column;align-items:stretch;flex:0 0 auto;gap:8px;padding:14px 14px 12px;border:1px solid var(--line2);border-radius:14px;background:rgba(0,0,0,.08);cursor:pointer;text-align:left;width:100%;font:inherit;color:inherit;min-width:0;min-height:unset;overflow:visible;height:auto}
 .quellen-result-row.is-active{border-color:rgba(140,190,255,.5);background:rgba(90,140,220,.08)}
-.quellen-result-copy{display:flex;flex-direction:column;gap:6px;min-width:0;position:relative;z-index:1}
-.quellen-result-title{display:block;font-size:14px;font-weight:800;color:var(--ink);line-height:1.35;overflow-wrap:anywhere;word-break:break-word}
-.quellen-result-meta{display:block;font-size:11px;color:var(--soft);line-height:1.45;overflow-wrap:anywhere;word-break:break-word}
-.quellen-badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-start;min-width:0;position:relative;z-index:1;margin-top:2px}
-.quellen-badge{border:1px solid rgba(239,215,142,.22);border-radius:999px;padding:4px 8px;font-size:10px;font-weight:900;color:var(--gold);background:rgba(239,215,142,.06);white-space:nowrap;line-height:1.2}
+.quellen-result-copy{display:flex;flex-direction:column;gap:6px;min-width:0;overflow:visible}
+.quellen-result-title{display:block;font-size:15px;font-weight:750;color:var(--ink);line-height:1.5;overflow:visible;overflow-wrap:anywhere;word-break:break-word;white-space:normal;max-height:none}
+.quellen-result-meta{display:block;font-size:12px;color:var(--soft);line-height:1.5;overflow:visible;overflow-wrap:anywhere;word-break:break-word;white-space:normal;max-height:none}
+.quellen-badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-start;min-width:0;overflow:visible}
+.quellen-badge{border:1px solid rgba(239,215,142,.22);border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800;color:var(--gold);background:rgba(239,215,142,.06);white-space:nowrap;line-height:1.3}
 .ordner-lead,.quellen-lead{margin:0;color:var(--soft);font-size:12px;line-height:1.5;overflow-wrap:anywhere;word-break:break-word;max-width:100%}
 /* Mobile-first Admin: Smartphone-Seitenverhältnis, lesbar, tippbar */
 @media(max-width:980px){
   .quellen-grid,.ordner-grid,.admin-editor-grid,.quellen-editor-stack,.quellen-kurzlink-grid{grid-template-columns:1fr!important}
-  .quellen-search-panel,.quellen-editor-panel{min-height:0;max-height:none}
+  .quellen-search-panel,.quellen-editor-panel{min-height:0;max-height:none;overflow:visible}
   .quellen-grid.has-editor .quellen-editor-panel{order:-1}
-  .quellen-result-list{max-height:min(42vh,360px);gap:10px}
-  .quellen-result-row{gap:10px;padding:14px;min-height:0}
+  .quellen-result-list{max-height:min(52vh,480px);gap:8px}
+  .quellen-result-row{gap:8px;padding:14px 13px;flex:0 0 auto;overflow:visible}
   .quellen-badges{justify-content:flex-start}
-  .quellen-result-title{font-size:15px;line-height:1.4;font-weight:800}
-  .quellen-result-meta{font-size:11.5px;line-height:1.45}
-  .quellen-badge{font-size:10.5px;padding:5px 9px;min-height:28px;display:inline-flex;align-items:center}
+  .quellen-result-title{font-size:16px;line-height:1.5;font-weight:750}
+  .quellen-result-meta{font-size:12.5px;line-height:1.5}
+  .quellen-badge{font-size:11px;padding:6px 10px;min-height:28px;display:inline-flex;align-items:center}
   .quellen-overview{font-size:12px;max-height:none}
   .quellen-link-row{grid-template-columns:1fr;gap:8px;padding:10px}
   .quellen-link-row b{font-size:12.5px}
@@ -345,10 +345,13 @@ button{cursor:pointer}
   .quellen-studio,.ordner-studio,.admin-actions-layout,.split{width:100%;max-width:100%}
   .panel{padding:12px;border-radius:14px}
   .quellen-search-panel .field{min-height:44px;font-size:15px}
-  .quellen-result-list{max-height:min(40vh,340px);gap:10px}
-  .quellen-result-row{padding:14px 13px;border-radius:16px}
-  .quellen-result-title{font-size:15.5px}
-  .quellen-result-meta{font-size:12px}
+  .quellen-result-list{max-height:min(50vh,460px);gap:8px}
+  .quellen-result-row{padding:14px 12px;border-radius:16px;overflow:visible}
+  .quellen-result-title{font-size:16px;line-height:1.5}
+  .quellen-result-meta{font-size:12.5px;line-height:1.5}
+  .topbar{grid-template-columns:1fr;gap:10px}
+  .toolbar{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:8px}
+  .toolbar .back-btn.show{grid-column:1/-1;justify-content:center}
   .admin-action-summary{grid-template-columns:1fr;gap:8px;padding:12px}
   .admin-action-summary h4{font-size:17px}
   .admin-action-summary p{font-size:11.5px;line-height:1.4}
@@ -357,11 +360,9 @@ button{cursor:pointer}
   .admin-post-quick-actions{grid-template-columns:1fr 1fr!important;gap:8px}
   .admin-post-quick-actions .btn{min-height:44px;font-size:12px}
   .publish-meta-row{grid-template-columns:1fr;gap:8px}
-  .topbar{gap:8px}
-  .brand h1{font-size:20px;line-height:1.15}
-  .brand p{font-size:10.5px;line-height:1.35;overflow-wrap:anywhere}
-  .toolbar{gap:8px}
-  .toolbar .btn{min-height:42px;font-size:12px}
+  .brand h1{font-size:20px;line-height:1.2}
+  .brand p{font-size:11px;line-height:1.4;overflow-wrap:anywhere}
+  .toolbar .btn{min-height:44px;font-size:12px;justify-content:center}
   #adminTabSelect,.field{min-height:44px}
 }
 .quellen-overview{border:1px solid rgba(140,190,255,.16);border-radius:14px;padding:10px;background:rgba(0,0,0,.18);font-size:10.5px;line-height:1.45;color:var(--soft);max-height:min(28vh,220px);overflow:auto;white-space:pre-wrap;word-break:break-word}
@@ -449,7 +450,7 @@ button{cursor:pointer}
 .toast.show{opacity:1}
 @media(min-width:1250px){.hero{grid-template-columns:minmax(0,1.2fr) minmax(340px,.8fr)}.split{grid-template-columns:minmax(0,1fr) minmax(330px,380px)}}
 @media(max-width:950px){.hero,.split,.upload-grid,.live-preview-shell,.visitor-grid,.ordner-grid{grid-template-columns:1fr}.metric-grid,.command-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.controls{grid-template-columns:1fr 1fr}.controls .btn{justify-content:center}.live-preview-device{width:100%;resize:vertical}.publish-step-grid{grid-template-columns:1fr}}
-@media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar .btn{flex:1;justify-content:center}.toolbar .back-btn.show{flex:0 0 100%}.panel{padding:11px;border-radius:16px}.admin-cover{padding:21px 19px}.admin-cover:before{inset:11px;border-radius:16px}.admin-cover-text{padding:2px 3px}.admin-kicker{font-size:9px;letter-spacing:.10em;margin-bottom:9px;line-height:1.35}.admin-cover h2{font-size:29px;line-height:1.02}.admin-cover p{font-size:11.8px;line-height:1.48;margin-top:11px}.cover-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:none}.cover-actions .btn,.cover-actions .signal{min-height:36px;font-size:10.8px;justify-content:center;padding:8px 10px}.cover-actions .btn:last-child{grid-column:1/-1}.folder-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.folder-card{min-height:68px;padding:9px 7px}.folder-card h3{font-size:clamp(13px,3.4vw,16px);overflow-wrap:normal}.folder-card small{font-size:8px}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px}.mini-grid{grid-template-columns:1fr}.quick-grid,.preview-tools,.admin-form-grid,.planner-grid{grid-template-columns:1fr;gap:8px}.command-grid{grid-template-columns:1fr}.workflow-grid{grid-template-columns:1fr}.quick{min-height:118px;padding:10px}.quick b{font-size:9.2px}.quick small{font-size:9.8px}.push-test-card{min-height:auto}.push-test-controls{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px}.live-preview-frame{min-height:460px}}
+@media(max-width:640px){body{padding-left:10px;padding-right:10px}.topbar{grid-template-columns:1fr}.toolbar{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:8px}.toolbar .btn{justify-content:center}.toolbar .back-btn.show{grid-column:1/-1}.panel{padding:11px;border-radius:16px}.admin-cover{padding:18px 14px}.admin-cover:before{inset:11px;border-radius:16px}.admin-cover-text{padding:2px 3px}.admin-kicker{font-size:10px;letter-spacing:.10em;margin-bottom:9px;line-height:1.4}.admin-cover h2{font-size:28px;line-height:1.15}.admin-cover p{font-size:13px;line-height:1.5;margin-top:11px}.cover-actions{display:grid;grid-template-columns:1fr;gap:8px;max-width:none}.cover-actions .btn,.cover-actions .signal{min-height:44px;font-size:13px;justify-content:center;padding:10px 12px;white-space:normal;line-height:1.35}.cover-actions .btn:last-child{grid-column:auto}.folder-grid{grid-template-columns:1fr 1fr;gap:8px}.folder-card{min-height:auto;padding:12px 10px;overflow:visible}.folder-card h3{font-size:16px;line-height:1.35;overflow-wrap:anywhere;margin-bottom:6px}.folder-card p{display:block;font-size:12px;line-height:1.45;color:var(--soft);margin:0 0 6px}.folder-card small{font-size:10px;line-height:1.35}.hero-card{padding:13px}.hero-title{display:block}.signal{display:inline-flex;margin-top:10px;white-space:normal;line-height:1.35}.mini-grid{grid-template-columns:1fr}.quick-grid,.preview-tools,.admin-form-grid,.planner-grid{grid-template-columns:1fr;gap:8px}.command-grid{grid-template-columns:1fr}.workflow-grid{grid-template-columns:1fr}.quick{min-height:118px;padding:10px}.quick b{font-size:11px;line-height:1.35}.quick small{font-size:11px;line-height:1.4}.push-test-card{min-height:auto}.push-test-controls{grid-template-columns:1fr}.rank-card{grid-template-columns:34px minmax(0,1fr);align-items:start}.score{grid-column:2;text-align:left;font-size:18px}.controls{grid-template-columns:1fr}.brand h1{font-size:21px;line-height:1.2}.live-preview-frame{min-height:460px}}
 
 /* Final admin-frame correction: the whole admin app should not sit in a thick outer box. */
 .app{width:min(1540px,100%)}
@@ -481,7 +482,7 @@ main#panel.panel{
   .tag{font-size:8.8px;padding:3px 6px}
   .score{grid-column:2;text-align:left;font-size:18px}
   .section-head h3{font-size:20px}
-  .section-head span{font-size:9.5px}
+  .section-head span{font-size:12px;line-height:1.4}
   .controls{grid-template-columns:repeat(2,minmax(0,1fr))}
   .controls .field:first-child,.controls .btn{grid-column:1/-1}
 }
@@ -637,7 +638,7 @@ main#panel.panel{
       <img src="/admin/admin-icon-192.png" alt="" width="48" height="48">
       <div>
         <h1>DAR Admin</h1>
-        <p><span class="status-dot"></span>Command Center · Admin v55</p>
+        <p><span class="status-dot"></span>Command Center · Admin v56</p>
       </div>
     </div>
     <div class="toolbar">
@@ -682,24 +683,24 @@ const ADMIN_PLAN_KEY="darAdminPlannedPostsV1";
 const ADMIN_NEWS_KEY="darAdminNewsDraftsV1";
 const ADMIN_REPORTS_KEY="darAdminReportsV1";
 const ADMIN_USERS_KEY="darAdminUsersV1";
-const ADMIN_TAB_ORDER_KEY="darAdminTabOrderV1";
+const ADMIN_TAB_ORDER_KEY="darAdminTabOrderV2";
 const ADMIN_PREVIEW_SIZE_KEY="darAdminPreviewSizeV1";
 const ADMIN_LAST_PUSH_CTX_KEY="darAdminLastPublishPushV1";
 const ADMIN_PUBLISH_TRACK_KEY="darAdminPublishTrackV1";
 const DEFAULT_ADMIN_TABS=[
   ["start","Start"],
-  ["video-studio","KI-Video-Studio"],
-  ["live-edit","Live-Bearbeitung"],
   ["quellen","Beiträge"],
   ["actions","Neuer Beitrag"],
   ["news","News"],
-  ["besucher","Besucher"],
-  ["quiz-stats","Quiz-Statistik"],
-  ["settings","Einstellungen"],
-  ["ordner","Ordner (Studio)"],
+  ["video-studio","KI-Video-Studio"],
+  ["ordner","Ordner"],
   ["feed","Feed / Im Fokus"],
-  ["bibliothek","Bibliothek verwalten"],
-  ["tech","Technik"]
+  ["bibliothek","Bibliothek"],
+  ["kurzlinks","Kurzlinks"],
+  ["settings","Einstellungen"],
+  ["tech","Technik"],
+  ["besucher","Besucher"],
+  ["quiz-stats","Quiz-Statistik"]
 ];
 const ADMIN_REFRESH_MS=30000;
 const VISITOR_REFRESH_MS=15000;
@@ -965,7 +966,7 @@ function normalizeAdminTab(tab){
   if(id==="stats"||id==="overview")return"besucher";
   if(id==="preview")return"actions";
   if(id==="stories")return"start";
-  if(id==="live"||id==="live-bearbeitung"||id==="livebearbeitung")return"live-edit";
+  if(id==="live"||id==="live-bearbeitung"||id==="livebearbeitung"||id==="live-edit")return"quellen";
   if(id==="ki-video"||id==="video"||id==="videostudio"||id==="ki-video-studio")return"video-studio";
   if(id==="schedule"||id==="actions-bulk")return id==="actions-bulk"?"actions-bulk":"actions";
   return id||"start";
@@ -1044,13 +1045,16 @@ function workerHealthUrl(){
   return url.toString();
 }
 let workerPublishHealth=null;
-async function refreshWorkerPublishHealth(){
+let workerPublishHealthAt=0;
+async function refreshWorkerPublishHealth(force){
+  if(!force&&workerPublishHealth&&(Date.now()-workerPublishHealthAt)<20000)return workerPublishHealth;
   try{
     const r=await fetch(`${workerHealthUrl()}?t=${Date.now()}`,{cache:"no-store"});
     workerPublishHealth=await r.json().catch(()=>({ok:false}));
   }catch(e){
     workerPublishHealth={ok:false,error:String(e.message||e)};
   }
+  workerPublishHealthAt=Date.now();
   return workerPublishHealth;
 }
 async function checkVisitorAppHealth(){
@@ -1177,8 +1181,10 @@ function rankCard(row,idx,mode="score"){
 }
 function bindRankCards(){document.querySelectorAll(".rank-card[data-href]").forEach(card=>{card.onclick=()=>window.open(card.getAttribute("data-href"),"_blank","noopener")})}
 function enhanceAdminCollapsibles(){
+  if(currentTab==="quellen"||currentTab==="ordner")return;
   document.querySelectorAll("#panel .panel,#panel .hero-card,#panel .preview-box").forEach((card,index)=>{
     if(card.dataset.collapseReady==="1")return;
+    if(card.hasAttribute("data-no-collapse"))return;
     const head=card.querySelector(":scope > .section-head");
     if(!head)return;
     const children=[...card.children].filter(child=>child!==head);
@@ -2512,7 +2518,7 @@ function renderShell(){
   if(currentTab==="live-edit"&&window.DARLiveEdit)window.DARLiveEdit.bindLiveEditTab();
   if(currentTab==="ordner"&&!ordnerCatalogLoaded&&!ordnerBusy)ensureOrdnerData(false).then(()=>{if(currentTab==="ordner")renderShell()});
   if(currentTab==="quellen"&&!quellenCatalogLoaded&&!quellenCatalogBusy)ensureQuellenCatalog(false).then(()=>{if(currentTab==="quellen")renderShell()});
-  if(currentTab==="quellen"&&!workerPublishHealth)refreshWorkerPublishHealth().then(()=>{if(currentTab==="quellen")renderShell()});
+  if(currentTab==="quellen"&&!workerPublishHealth)refreshWorkerPublishHealth(true).then(()=>{if(currentTab==="quellen")renderShell()});
   if(currentTab==="kurzlinks"&&!shortlinksRegistryLoaded&&!shortlinksRegistryBusy)ensureShortlinksRegistry(false).then(()=>{if(currentTab==="kurzlinks"){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
   if(currentTab==="zakat"&&!zakatAdminLoaded)ensureZakatAdminReady().then(()=>{if(currentTab==="zakat")renderShell()}).catch(()=>{});
   if(currentTab==="feed"&&window.DARFeedAdmin&&!feedLoadedFlag())ensureFeedAdminData(false).then(()=>{if(currentTab==="feed")renderShell()}).catch(()=>{});
@@ -2546,7 +2552,7 @@ function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
   if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"||tab==="ordner"||tab==="quellen"||tab==="kurzlinks"||tab==="zakat"||tab==="feed"||tab==="quiz-stats"){
     if(tab==="ordner")ensureOrdnerData(false).then(()=>{if(currentTab===tab)renderShell()});
     if(tab==="quellen"){
-      refreshWorkerPublishHealth().then(()=>{if(currentTab===tab)renderShell()});
+      refreshWorkerPublishHealth(true).then(()=>{if(currentTab===tab)renderShell()});
       ensureQuellenCatalog(false).then(()=>{if(currentTab===tab)renderShell()});
     }
     if(tab==="kurzlinks")ensureShortlinksRegistry(false).then(()=>{if(currentTab===tab){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
@@ -2587,26 +2593,26 @@ function renderStart(ctx){
     <div class="admin-cover-text">
       <div class="admin-kicker">DAR AL TAWḤID · Verwaltung</div>
       <h2>DAR Admin</h2>
-      <p>Geordnete Verwaltung für Besucher, Ordner und Veröffentlichung. Im Ordner-Studio sortierst du Kategorien, verschiebst Beiträge und korrigierst Texte live ohne Push.</p>
+      <p>Arbeitsfläche für Beiträge, Veröffentlichung und Video. Statistik liegt hinten im Menü.</p>
       <div class="cover-actions">
         <span class="signal"><span class="status-dot"></span>${Number(ctx.live.live_now||0)} jetzt online</span>
-        <button class="btn primary" data-tab="actions" type="button">Beitrag vorbereiten</button>
+        <button class="btn primary" data-tab="quellen" type="button">Beiträge bearbeiten</button>
+        <button class="btn" data-tab="actions" type="button">Neuer Beitrag</button>
         <button class="btn" data-tab="video-studio" type="button">KI-Video-Studio</button>
-        <button class="btn" data-tab="besucher" type="button">Besucher öffnen</button>
-        <button class="btn" data-tab="settings" type="button">Technik prüfen</button>
-              <button class="btn" data-tab="quiz-stats" type="button">Quiz-Statistik</button>
       </div>
     </div>
   </section>
   <section class="folder-grid">
-    ${folderCard("①","KI-Video-Studio","Autonomer Video-Beitrag · Aussage, Stimme, 9:16-Export.","video-studio","Öffnen")}
-    ${folderCard("②","Live-Bearbeitung","Besucheransicht mit kontextbezogenem Bearbeiten.","live-edit","Neu")}
-    ${folderCard("③","Beiträge","Markdown bearbeiten · Feed-Bild hinzufügen · speichern.","quellen","Editor")}
-    ${folderCard("④","Neuer Beitrag","Markdown einfügen, Bild hinzufügen, veröffentlichen.","actions","Veröffentlichen")}
-    ${folderCard("⑤","News","24–72-Stunden-Hinweise für Besucher.","news",newsSummaryLabel())}
-    ${folderCard("⑥","Besucher","Live, Aufrufe, Shares und Installationen.","besucher",`${Number(ctx.live.live_now||0)} live`)}
-    ${folderCard("⑦","Einstellungen","Tab-Reihenfolge und Worker-Verbindung.","settings","Admin")}
-    ${folderCard("📊","Quiz-Statistik","Nutzer, Fragen, Kategorien und Auffälligkeiten.","quiz-stats","Admin")}
+    ${folderCard("①","Beiträge","Suchen, öffnen, speichern.","quellen","Editor")}
+    ${folderCard("②","Neuer Beitrag","Markdown einfügen und veröffentlichen.","actions","Veröffentlichen")}
+    ${folderCard("③","News","Kurzhinweise für Besucher.","news",newsSummaryLabel())}
+    ${folderCard("④","KI-Video-Studio","Text, Bild, 9:16-Video.","video-studio","Öffnen")}
+    ${folderCard("⑤","Ordner","Kategorien sortieren und Texte korrigieren.","ordner","Studio")}
+    ${folderCard("⑥","Feed / Im Fokus","Fokus-Inhalte steuern.","feed","Feed")}
+    ${folderCard("⑦","Bibliothek","PDFs und Titel verwalten.","bibliothek","Bibliothek")}
+    ${folderCard("⑧","Einstellungen","Worker und Technik.","settings","Admin")}
+    ${folderCard("⑨","Besucher","Live-Zahlen und Aufrufe.","besucher",`${Number(ctx.live.live_now||0)} live`)}
+    ${folderCard("⑩","Quiz-Statistik","Nutzer und Fragen.","quiz-stats","Hinten")}
   </section>
   <section class="command-grid">
     <div class="command-card"><b>Letzte Veröffentlichung</b><span>${esc(lastPublishLabel())}</span><small>Lokales Admin-Protokoll</small></div>
@@ -2704,23 +2710,23 @@ function renderQuellen(){
   const tokenOk=healthKnown?!!workerPublishHealth.hasGithubToken:null;
   const secretOk=healthKnown?!!workerPublishHealth.hasAdminSecret:null;
   const saveBlocked=healthKnown&&(tokenOk===false||secretOk===false);
-  const healthNote=saveBlocked?" Speichern wartet auf den Server-Token. Lesen geht trotzdem.":tokenOk?" Speichern ist mit dem Server verbunden.":"";
+  const healthNote=saveBlocked?" Speichern wartet auf den Server-Token.":tokenOk?" Speichern verbunden.":"";
   return `<section class="quellen-studio">
-    <div class="panel">
+    <div class="panel" data-no-collapse>
       <div class="section-head"><h3>Beiträge bearbeiten</h3><span>${busy?"lädt…":`${list.length} Treffer`}</span></div>
-      <p class="quellen-lead">Beitrag suchen, öffnen, PDF/Bild hinzufügen, speichern.${workerReady?"":" Worker Secret unter Aktionen hinterlegen."}${healthNote}</p>
+      <p class="quellen-lead">${workerReady?"Suchen, öffnen, speichern.":"Worker Secret unter Einstellungen hinterlegen."}${healthNote}</p>
     </div>
     <div class="quellen-grid${quellenEdit.filename?" has-editor":""}">
-      <aside class="panel quellen-search-panel">
+      <aside class="panel quellen-search-panel" data-no-collapse>
         <input class="field" id="quellenSearchInput" type="search" placeholder="Suchen: Nummer, Titel, Gelehrter…" value="${esc(quellenSearchQuery)}" autocomplete="off">
         <div class="quellen-result-list">${rows||`<div class="empty">${busy?"Lade Beiträge…":"Keine Treffer."}</div>`}</div>
         <button class="btn" id="quellenReloadBtn" type="button">Katalog neu laden</button>
       </aside>
-      <div class="panel quellen-editor-panel">
-        <div class="section-head"><h3>${quellenEdit.filename?esc(cleanTitle(quellenEdit.title||quellenEdit.filename)):"Beitrag"}</h3><span>${quellenEdit.filename?esc(quellenEdit.filename):"Beitrag wählen"}</span></div>
+      <div class="panel quellen-editor-panel" data-no-collapse>
+        <div class="section-head"><h3>${quellenEdit.filename?esc(cleanTitle(quellenEdit.title||quellenEdit.filename)):"Beitrag"}</h3><span>${quellenEdit.filename?esc(quellenEdit.filename):"wählen"}</span></div>
         ${quellenEdit.filename?`<div class="quellen-editor-stack">
           <section class="editor-card editor-card-main">
-            <label class="field-label" for="quellenEditor">Markdown bearbeiten</label>
+            <label class="field-label" for="quellenEditor">Markdown</label>
             <textarea class="paste-area ordner-editor-area markdown-editor" id="quellenEditor" spellcheck="false">${esc(quellenEdit.markdown)}</textarea>
             ${renderSourceFilesPanel("quellen")}
             ${window.DARAdminFeedImage?DARAdminFeedImage.renderPanel("quellen"):""}
@@ -2731,7 +2737,7 @@ function renderQuellen(){
           <a class="btn" href="${SITE_ORIGIN}/#post/${encodeURIComponent(quellenEdit.postId||quellenEdit.filename.replace(/\.md$/i,""))}" target="_blank" rel="noopener">In App öffnen</a>
           <button class="btn" id="quellenEditorReloadBtn" type="button">Verwerfen</button>
         </div>
-        <div class="upload-status" id="quellenEditorStatus">${esc(quellenEditorStatus||(saveBlocked?"Lesen geht. Speichern startet, sobald der Server-Token aktiv ist.":"Markdown + Anhänge speichern."))}</div>`:`<div class="empty" style="padding:22px 14px;line-height:1.55">In der Liste oben einen Beitrag antippen. Der Text öffnet sich hier zum Bearbeiten.</div>`}
+        <div class="upload-status" id="quellenEditorStatus">${esc(quellenEditorStatus||(saveBlocked?"Lesen geht. Speichern wartet auf den Server.":"Markdown + Anhänge speichern."))}</div>`:`<div class="empty" style="padding:18px 12px;line-height:1.55">Einen Beitrag in der Liste antippen — der Text erscheint hier vollständig.</div>`}
       </div>
     </div>
   </section>`;

@@ -84,6 +84,24 @@ details.box summary::-webkit-details-marker{display:none}
 .cost{border:1px solid var(--line2);border-radius:12px;padding:10px;font-size:11px;line-height:1.45;color:var(--soft);background:rgba(239,215,142,.04)}
 .loader{width:14px;height:14px;border:2px solid rgba(239,215,142,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;display:inline-block;vertical-align:-2px;margin-right:6px}
 @keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:720px){
+  .steps{grid-template-columns:1fr 1fr;gap:8px}
+  .step{min-height:56px;padding:10px 8px;font-size:11px;line-height:1.4;overflow:visible}
+  .step b{font-size:13px;line-height:1.35;margin-bottom:4px}
+  .top{flex-wrap:wrap}
+  .brand h1{font-size:18px;line-height:1.25}
+  textarea{min-height:140px;font-size:15px;line-height:1.5}
+  .job-line{grid-template-columns:minmax(0,1fr);gap:8px}
+  .job-actions{justify-content:flex-start}
+  .actions{grid-template-columns:1fr}
+  .label{font-size:12px;line-height:1.4}
+  .btn{font-size:13px;line-height:1.35;white-space:normal}
+}
+@media(min-width:721px) and (max-width:1100px){
+  .steps{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .step{min-height:52px;line-height:1.35;overflow:visible}
+}
+
 </style>
 </head>
 <body>

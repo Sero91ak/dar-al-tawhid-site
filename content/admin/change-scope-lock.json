@@ -87,6 +87,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "admin-workspace-layout-2026-08-27",
+      "approvedBy": "user-explicit-admin-professional-rebuild-remove-live-edit",
+      "reason": "Nutzer: Admin komplett auf Smartphone/Tablet/Web lesbar; Live-Bearbeitung entfernen; KI-Video-Studio Design; wichtige Bereiche zuerst, Statistik hinten.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "admin/index.html",
+        "admin/sw.js",
+        "admin/video-studio.html"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "admin-quellen-layout-secrets-2026-08-27",
       "approvedBy": "user-explicit-admin-quellen-cramped-github-token-error",
       "reason": "Nutzer: Beiträge-Liste eingequetscht; Klick zeigt GITHUB_TOKEN fehlt obwohl Secret da ist; Speichern geht nicht live.",
