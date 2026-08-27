@@ -87,6 +87,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "admin-remove-video-studio-ui-2026-08-27",
+      "approvedBy": "user-explicit-remove-ki-video-studio-from-admin-app",
+      "reason": "Nutzer: KI-Video-Studio aus der DAR Admin App entfernen (Menü/Start), Datei bleibt für Deploy-Verify.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "admin/index.html",
+        "admin/sw.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "admin-workspace-layout-2026-08-27",
       "approvedBy": "user-explicit-admin-professional-rebuild-remove-live-edit",
       "reason": "Nutzer: Admin komplett auf Smartphone/Tablet/Web lesbar; Live-Bearbeitung entfernen; KI-Video-Studio Design; wichtige Bereiche zuerst, Statistik hinten.",

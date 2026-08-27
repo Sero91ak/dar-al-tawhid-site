@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'dar-admin-stats-v70';
+const CACHE_VERSION = 'dar-admin-stats-v71';
 /* live-verify: dar-admin-single-mode-v67 */
 const SHELL = [
   '/admin/manifest.json',

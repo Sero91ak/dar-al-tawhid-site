@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>DAR Admin · Command Center</title>
+<!-- KI-Video-Studio -->
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/admin/admin-icon-192.png">
 <link rel="manifest" href="/admin/manifest.json">
@@ -26,8 +27,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v70";
-  var MIG_KEY="darAdminSwFixV30";
+  var ADMIN_SW_CACHE="dar-admin-stats-v71";
+  var MIG_KEY="darAdminSwFixV31";
   var RELOAD_KEY="darAdminSwReloadBudget";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
@@ -638,7 +639,7 @@ main#panel.panel{
       <img src="/admin/admin-icon-192.png" alt="" width="48" height="48">
       <div>
         <h1>DAR Admin</h1>
-        <p><span class="status-dot"></span>Command Center · Admin v56</p>
+        <p><span class="status-dot"></span>Command Center · Admin v57</p>
       </div>
     </div>
     <div class="toolbar">
@@ -683,7 +684,7 @@ const ADMIN_PLAN_KEY="darAdminPlannedPostsV1";
 const ADMIN_NEWS_KEY="darAdminNewsDraftsV1";
 const ADMIN_REPORTS_KEY="darAdminReportsV1";
 const ADMIN_USERS_KEY="darAdminUsersV1";
-const ADMIN_TAB_ORDER_KEY="darAdminTabOrderV2";
+const ADMIN_TAB_ORDER_KEY="darAdminTabOrderV3";
 const ADMIN_PREVIEW_SIZE_KEY="darAdminPreviewSizeV1";
 const ADMIN_LAST_PUSH_CTX_KEY="darAdminLastPublishPushV1";
 const ADMIN_PUBLISH_TRACK_KEY="darAdminPublishTrackV1";
@@ -692,7 +693,6 @@ const DEFAULT_ADMIN_TABS=[
   ["quellen","Beiträge"],
   ["actions","Neuer Beitrag"],
   ["news","News"],
-  ["video-studio","KI-Video-Studio"],
   ["ordner","Ordner"],
   ["feed","Feed / Im Fokus"],
   ["bibliothek","Bibliothek"],
@@ -967,7 +967,7 @@ function normalizeAdminTab(tab){
   if(id==="preview")return"actions";
   if(id==="stories")return"start";
   if(id==="live"||id==="live-bearbeitung"||id==="livebearbeitung"||id==="live-edit")return"quellen";
-  if(id==="ki-video"||id==="video"||id==="videostudio"||id==="ki-video-studio")return"video-studio";
+  if(id==="ki-video"||id==="video"||id==="videostudio"||id==="ki-video-studio"||id==="video-studio")return"start";
   if(id==="schedule"||id==="actions-bulk")return id==="actions-bulk"?"actions-bulk":"actions";
   return id||"start";
 }
@@ -2540,10 +2540,6 @@ function tabButton(id,label){return `<button class="tab ${currentTab===id?"activ
 function quizStatsLoadedFlag(){return window.__darQuizStatsLoaded===true||Boolean(window.DARQuizStatsAdmin?.isQuizStatsInitialLoaded?.())}
 function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
   tab=normalizeAdminTab(tab);
-  if(tab==="video-studio"){
-    location.assign("/admin/video-studio.html");
-    return;
-  }
   if(tab==="actions-bulk"){tab="actions";scrollToBulk=true}
   if(!tab||tab===currentTab&&!scrollToBulk)return;
   if(!skipStack)adminNavStack.push(currentTab);
@@ -2593,12 +2589,11 @@ function renderStart(ctx){
     <div class="admin-cover-text">
       <div class="admin-kicker">DAR AL TAWḤID · Verwaltung</div>
       <h2>DAR Admin</h2>
-      <p>Arbeitsfläche für Beiträge, Veröffentlichung und Video. Statistik liegt hinten im Menü.</p>
+      <p>Arbeitsfläche für Beiträge und Veröffentlichung. Statistik liegt hinten im Menü.</p>
       <div class="cover-actions">
         <span class="signal"><span class="status-dot"></span>${Number(ctx.live.live_now||0)} jetzt online</span>
         <button class="btn primary" data-tab="quellen" type="button">Beiträge bearbeiten</button>
         <button class="btn" data-tab="actions" type="button">Neuer Beitrag</button>
-        <button class="btn" data-tab="video-studio" type="button">KI-Video-Studio</button>
       </div>
     </div>
   </section>
@@ -2606,13 +2601,12 @@ function renderStart(ctx){
     ${folderCard("①","Beiträge","Suchen, öffnen, speichern.","quellen","Editor")}
     ${folderCard("②","Neuer Beitrag","Markdown einfügen und veröffentlichen.","actions","Veröffentlichen")}
     ${folderCard("③","News","Kurzhinweise für Besucher.","news",newsSummaryLabel())}
-    ${folderCard("④","KI-Video-Studio","Text, Bild, 9:16-Video.","video-studio","Öffnen")}
-    ${folderCard("⑤","Ordner","Kategorien sortieren und Texte korrigieren.","ordner","Studio")}
-    ${folderCard("⑥","Feed / Im Fokus","Fokus-Inhalte steuern.","feed","Feed")}
-    ${folderCard("⑦","Bibliothek","PDFs und Titel verwalten.","bibliothek","Bibliothek")}
-    ${folderCard("⑧","Einstellungen","Worker und Technik.","settings","Admin")}
-    ${folderCard("⑨","Besucher","Live-Zahlen und Aufrufe.","besucher",`${Number(ctx.live.live_now||0)} live`)}
-    ${folderCard("⑩","Quiz-Statistik","Nutzer und Fragen.","quiz-stats","Hinten")}
+    ${folderCard("④","Ordner","Kategorien sortieren und Texte korrigieren.","ordner","Studio")}
+    ${folderCard("⑤","Feed / Im Fokus","Fokus-Inhalte steuern.","feed","Feed")}
+    ${folderCard("⑥","Bibliothek","PDFs und Titel verwalten.","bibliothek","Bibliothek")}
+    ${folderCard("⑦","Einstellungen","Worker und Technik.","settings","Admin")}
+    ${folderCard("⑧","Besucher","Live-Zahlen und Aufrufe.","besucher",`${Number(ctx.live.live_now||0)} live`)}
+    ${folderCard("⑨","Quiz-Statistik","Nutzer und Fragen.","quiz-stats","Hinten")}
   </section>
   <section class="command-grid">
     <div class="command-card"><b>Letzte Veröffentlichung</b><span>${esc(lastPublishLabel())}</span><small>Lokales Admin-Protokoll</small></div>
