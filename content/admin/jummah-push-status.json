@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-08-27T04:58:48.439Z",
+  "updatedAt": "2026-08-27T05:00:11.550Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-jummah-v2",
-  "dryRun": true,
+  "dryRun": false,
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-27T04:58:48.439Z",
+  "lastCronRun": "2026-08-27T05:00:11.550Z",
   "subscriptionsTotal": 12,
   "usersWithJummah": 12,
   "jummahTagFallback": true,
@@ -40,21 +40,81 @@
     "timeZone": "Europe/Berlin",
     "timeSource": "dhuhr-auto"
   },
-  "windowStart": "2026-08-27T04:43:47.341Z",
-  "windowEnd": "2026-08-28T06:58:47.341Z",
-  "scheduled": 0,
-  "recipients": 0,
+  "windowStart": "2026-08-27T04:45:10.945Z",
+  "windowEnd": "2026-08-28T07:00:10.945Z",
+  "scheduled": 3,
+  "recipients": 11,
   "skippedPast": 0,
-  "skippedWindow": 9,
+  "skippedWindow": 6,
   "catchups": 0,
   "duplicates": 0,
   "errors": 0,
-  "lastPush": null,
-  "lastRecipients": 0,
-  "lastOneSignalResponse": null,
+  "lastPush": {
+    "prayer": "Jumuʿah",
+    "key": "jummah",
+    "mode": "morning",
+    "time": "09:00",
+    "sendAfter": "2026-08-28T07:00:00.000Z",
+    "recipients": 1,
+    "timeZone": "Europe/Berlin",
+    "timeSource": "dhuhr-auto"
+  },
+  "lastRecipients": 1,
+  "lastOneSignalResponse": {
+    "mode": "morning",
+    "recipients": 1,
+    "response": "{\"id\":\"c6468aa3-5230-4c55-9dd5-12d8c272f84a\",\"external_id\":\"e7cbec44-613d-4452-a258-4274ad97da19\"}"
+  },
   "lastError": null,
-  "planned": [],
+  "planned": [
+    {
+      "prayer": "Jumuʿah",
+      "key": "jummah",
+      "mode": "morning",
+      "time": "09:00",
+      "sendAfter": "2026-08-28T07:00:00.000Z",
+      "recipients": 9,
+      "timeZone": "Europe/Berlin",
+      "timeSource": "dhuhr-auto"
+    },
+    {
+      "prayer": "Jumuʿah",
+      "key": "jummah",
+      "mode": "morning",
+      "time": "09:00",
+      "sendAfter": "2026-08-28T07:00:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin",
+      "timeSource": "dhuhr-auto"
+    },
+    {
+      "prayer": "Jumuʿah",
+      "key": "jummah",
+      "mode": "morning",
+      "time": "09:00",
+      "sendAfter": "2026-08-28T07:00:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin",
+      "timeSource": "dhuhr-auto"
+    }
+  ],
   "skippedPastDetails": [],
-  "oneSignalResponses": [],
+  "oneSignalResponses": [
+    {
+      "mode": "morning",
+      "recipients": 9,
+      "response": "{\"id\":\"a9f5d1c3-016f-497f-9d88-f494ce01d1ec\",\"external_id\":\"4b628ac0-1e7c-46b0-8a36-9e259aa072ef\"}"
+    },
+    {
+      "mode": "morning",
+      "recipients": 1,
+      "response": "{\"id\":\"72868be1-bbef-4bf9-8f00-877581ebcc80\",\"external_id\":\"aaeefb87-58a8-4456-b1e1-d1b98ff5ac4a\"}"
+    },
+    {
+      "mode": "morning",
+      "recipients": 1,
+      "response": "{\"id\":\"c6468aa3-5230-4c55-9dd5-12d8c272f84a\",\"external_id\":\"e7cbec44-613d-4452-a258-4274ad97da19\"}"
+    }
+  ],
   "errorDetails": []
 }
