@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v677";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v684";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -19087,6 +19087,246 @@ html[data-theme="light"] body.is-scholar-route{
 
 
 
+<style id="post-structure-v681">
+/* Bibliothek: Aussage als Zitat-Hauptstück, Quelle/Fazit sekundär. Kein Extra-Kasten. */
+.post-reader-main .statement.post-aussage,
+.post-reader .post-reader-main .statement.post-aussage,
+html[data-theme] .post-reader-main .statement.post-aussage{
+  position:relative!important;
+  display:block!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  margin:0 0 4px!important;
+  padding:6px 0 14px 16px!important;
+  text-align:left!important;
+  color:var(--cream,#fff6e4)!important;
+  font-family:var(--serif)!important;
+  font-size:clamp(23px,5.6vw,31px)!important;
+  line-height:1.42!important;
+  letter-spacing:.012em!important;
+  font-weight:650!important;
+}
+.post-reader-main .statement.post-aussage:before{
+  content:"";
+  position:absolute;
+  left:0;top:8px;bottom:10px;
+  width:2.5px;
+  border-radius:99px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--gold2,#efd78e) 92%,#fff 8%),color-mix(in srgb,var(--gold2,#efd78e) 18%,transparent));
+  box-shadow:0 0 12px color-mix(in srgb,var(--gold2,#efd78e) 35%,transparent);
+}
+.post-aussage-kicker{
+  display:block;
+  position:relative;
+  z-index:1;
+  margin:0 0 8px 0;
+  font-family:var(--font-ui,var(--sans));
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--gold2,#efd78e);
+}
+.post-aussage-text{
+  position:relative;
+  z-index:1;
+  padding-left:18px;
+  color:var(--cream,#fff8e8);
+  text-wrap:balance;
+}
+.post-reader-main .statement.post-aussage p{margin:0 0 .55em!important}
+.post-reader-main .statement.post-aussage p:last-child{margin-bottom:0!important}
+.post-reader-main .post-reader-cite{
+  margin:2px 0 0;
+  padding:10px 0 0 16px;
+  border-top:1px solid color-mix(in srgb,var(--gold2,var(--theme-accent)) 18%,transparent);
+  color:color-mix(in srgb,var(--gold2,#d4c08a) 70%,var(--muted,#b8ae96) 30%);
+  font-family:var(--serif);
+  font-size:clamp(12.5px,3.2vw,14.5px);
+  line-height:1.45;
+  font-weight:500;
+  font-style:italic;
+}
+.post-reader-main .post-reader-cite b{
+  display:block;
+  font-family:var(--font-ui,var(--sans));
+  font-size:9px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--muted2);
+  font-weight:900;
+  font-style:normal;
+  margin-bottom:4px;
+}
+.post-reader-main .post-key-message{
+  margin-top:10px!important;
+  padding:10px 0 0 16px!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  border-top:1px solid color-mix(in srgb,var(--gold2,var(--theme-accent)) 14%,transparent)!important;
+}
+.post-reader-main .post-key-message h3{
+  font-size:10px!important;
+  letter-spacing:.14em!important;
+  text-transform:uppercase!important;
+  color:var(--muted2)!important;
+  margin:0 0 6px!important;
+  font-weight:800!important;
+}
+.post-reader-main .post-key-message p,
+.post-reader-main .post-key-message .post-fazit-body{
+  color:var(--muted,#a9a18c);
+  font-size:14px;
+  line-height:1.52;
+  margin:0;
+  font-weight:500;
+  font-family:var(--font-ui,var(--sans));
+}
+.post-reader-main .post-after-links-wrap{margin-top:8px;padding-left:16px}
+</style>
+<style id="post-structure-v682">
+/* Katalog: Titel leiser, Aussage allein groß, Nachweise ohne Gold-Kachel */
+.post-reader-title{
+  gap:4px!important;
+  padding:2px 2px 0!important;
+}
+.post-reader-title .kicker{
+  font-size:9px!important;
+  letter-spacing:.18em!important;
+  opacity:.85;
+}
+.post-reader-title h2{
+  font-size:clamp(18px,4.4vw,24px)!important;
+  line-height:1.22!important;
+  font-weight:650!important;
+  letter-spacing:.01em!important;
+  color:color-mix(in srgb,var(--premium-title,var(--cream)) 72%,var(--muted2) 28%)!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:unset!important;
+  display:block!important;
+  -webkit-line-clamp:unset!important;
+}
+.post-reader-title.is-echo h2{
+  position:absolute!important;
+  width:1px!important;height:1px!important;
+  padding:0!important;margin:-1px!important;
+  overflow:hidden!important;clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;border:0!important;
+}
+.post-reader-speaker{
+  font-size:clamp(12.5px,3vw,14.5px)!important;
+  font-weight:600!important;
+  margin:4px 2px 12px!important;
+  gap:6px 8px!important;
+  color:var(--muted,#c9c0a8)!important;
+}
+.post-reader-speaker__label{
+  font-size:9px!important;
+  letter-spacing:.16em!important;
+}
+.post-reader-speaker__name{
+  font-size:clamp(13px,3.2vw,15px)!important;
+  font-weight:650!important;
+  color:color-mix(in srgb,var(--gold2,#efd78e) 55%,var(--cream) 45%)!important;
+}
+.post-reader-speaker__said{display:none!important}
+.post-reader-main .post-after-links-wrap.is-quiet{
+  margin-top:6px;
+  padding-left:16px;
+}
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-toggle{
+  display:inline-flex!important;
+  width:auto!important;
+  max-width:100%!important;
+  align-items:center!important;
+  gap:4px!important;
+  min-height:0!important;
+  padding:2px 0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  color:var(--muted2)!important;
+  font-size:11px!important;
+  font-weight:650!important;
+  letter-spacing:.04em!important;
+  text-transform:none!important;
+  text-decoration:underline;
+  text-underline-offset:3px;
+  text-decoration-color:color-mix(in srgb,var(--gold2) 28%,transparent);
+}
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-toggle-icon{
+  display:none!important;
+}
+</style>
+<style id="post-structure-v683">
+/* Katalog-Trennung ohne Kästen: Ornamentlinie, mehr Luft, Aussage größer */
+.post-reader-main{
+  padding:clamp(16px,4vw,22px)!important;
+}
+.post-reader-main > .post-reader-speaker{
+  margin:0 0 14px 16px!important;
+  padding:0!important;
+}
+.post-reader-main .statement.post-aussage,
+.post-reader .post-reader-main .statement.post-aussage,
+html[data-theme] .post-reader-main .statement.post-aussage{
+  font-size:clamp(25px,6.2vw,34px)!important;
+  line-height:1.38!important;
+  font-weight:680!important;
+  padding:2px 0 6px 16px!important;
+  margin:0!important;
+}
+.post-aussage-text{
+  padding-left:0!important;
+  color:#fff8e6!important;
+}
+.post-reader-sep{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:16px 0 4px;
+  padding-left:16px;
+  color:color-mix(in srgb,var(--gold2,#efd78e) 55%,transparent);
+  pointer-events:none;
+}
+.post-reader-sep:before,
+.post-reader-sep:after{
+  content:"";
+  height:1px;
+  flex:1;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--gold2,#efd78e) 38%,transparent),transparent);
+}
+.post-reader-sep:after{background:linear-gradient(90deg,color-mix(in srgb,var(--gold2,#efd78e) 38%,transparent),transparent)}
+.post-reader-sep:before{background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--gold2,#efd78e) 38%,transparent))}
+.post-reader-sep i{
+  font-style:normal;
+  font-size:9px;
+  letter-spacing:0;
+  color:color-mix(in srgb,var(--gold2,#efd78e) 72%,transparent);
+  line-height:1;
+}
+.post-reader-main .post-reader-cite{
+  margin:8px 0 0!important;
+  padding:2px 0 0 16px!important;
+  border-top:0!important;
+}
+.post-reader-main .post-key-message{
+  margin-top:8px!important;
+  padding:2px 0 0 16px!important;
+  border-top:0!important;
+}
+.post-reader-main .post-key-message h3{
+  font-size:9px!important;
+  letter-spacing:.16em!important;
+}
+</style>
+
 <body class="has-bottom-nav">
 <div id="newPostsBanner" class="new-posts-banner hidden" role="button" tabindex="0" aria-label="Aktualisieren" style="display:none">
   <span class="new-posts-icon">&#x23F3;</span>
@@ -19166,7 +19406,7 @@ html[data-theme="light"] body.is-scholar-route{
 <script>
 
 /* PUBLISH ISOLATION GUARD FINAL: stale index, incremental sync, render caps */
-const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const IS_TEST_PATH=location.pathname.indexOf("/test/")===0||location.pathname==="/test";function isTestAppPath(){return IS_TEST_PATH}function isVisitorTestOnlyView(view){const v=String(view||"");return!isTestAppPath()&&(v==="hadith"||v==="ilm")}const IS_STAGING_HOST=location.hostname.startsWith("staging.");const IS_STAGING_ENV=new URLSearchParams(location.search).get("env")==="staging";const CONTENT_ENV=IS_TEST_PATH||IS_STAGING_ENV||IS_STAGING_HOST?"staging":"production";const IS_STAGING_APP=IS_TEST_PATH||IS_STAGING_HOST;const POSTS_DIR=IS_STAGING_APP?"content/staging/posts":"content/posts";const BRANCH="main";const CACHE_KEY=IS_STAGING_APP?"darCachedPostsStagingV3":"darCachedPostsV12";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY=IS_STAGING_APP?"darPostFileMapStagingV3":"darPostFileMapV10";const POST_PARSE_VERSION=13;const FEED_MIN_POST_NUM=431;const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_TOPICS_PATH="/data/quran-topics.json";const QURAN_TOPICS_CACHE_KEY="darQuranTopicsV2";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV2";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="darQuranTrModeV1";const QURAN_VIEW_SETTINGS_KEY="darQuranViewSettingsV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";const POST_BROWSE_KEY="darPostBrowseV1";const ILM_CHAT_STORE_KEY=IS_STAGING_APP?"darIlmChatStoreStagingV1":"darIlmChatStoreV1";const ILM_ADMIN_STORE_KEY=IS_STAGING_APP?"darIlmAdminStoreStagingV1":"darIlmAdminStoreV1";const ILM_QUIZ_PATH="/data/quiz-questions.json";const ILM_KNOWLEDGE_INDEX_PATH="/data/ilm-knowledge-index.json";const ILM_QUIZ_CACHE_KEY=IS_STAGING_APP?"darIlmQuizStagingV1":"darIlmQuizV1";const ILM_KNOWLEDGE_CACHE_KEY=IS_STAGING_APP?"darIlmKnowledgeIndexStagingV1":"darIlmKnowledgeIndexV1";const ILM_MAX_CHAT_MESSAGES=120;const ILM_MAX_MATCHES=10;const ILM_MIN_SCORE=4;const ILM_STRONG_SCORE=12;const CONTENT_REFRESH_MS=60000;const POSTS_FETCH_BATCH=8;const FILTER_RENDER_LIMIT=80;const POSTS_CACHE_QUOTA_MAX=300;const POSTS_INDEX_STALE_KEY=IS_STAGING_APP?"darPostsIndexStaleStagingV2":"darPostsIndexStaleV2";const POSTS_FETCH_TIMEOUT_MS=12000;let postsSyncBusy=false;let postsSyncSilent=false;let postsSyncLabel="";let refreshContentPromise=null;let refreshContentQueued=false;let refreshContentDebTimer=null;let postsRenderTimer=null;
+const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const IS_TEST_PATH=location.pathname.indexOf("/test/")===0||location.pathname==="/test";function isTestAppPath(){return IS_TEST_PATH}function isVisitorTestOnlyView(view){const v=String(view||"");return!isTestAppPath()&&(v==="hadith"||v==="ilm")}const IS_STAGING_HOST=location.hostname.startsWith("staging.");const IS_STAGING_ENV=new URLSearchParams(location.search).get("env")==="staging";const CONTENT_ENV=IS_TEST_PATH||IS_STAGING_ENV||IS_STAGING_HOST?"staging":"production";const IS_STAGING_APP=IS_TEST_PATH||IS_STAGING_HOST;const POSTS_DIR=IS_STAGING_APP?"content/staging/posts":"content/posts";const BRANCH="main";const CACHE_KEY=IS_STAGING_APP?"darCachedPostsStagingV3":"darCachedPostsV12";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY=IS_STAGING_APP?"darPostFileMapStagingV3":"darPostFileMapV10";const POST_PARSE_VERSION=14;const FEED_MIN_POST_NUM=431;const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_TOPICS_PATH="/data/quran-topics.json";const QURAN_TOPICS_CACHE_KEY="darQuranTopicsV2";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV2";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="darQuranTrModeV1";const QURAN_VIEW_SETTINGS_KEY="darQuranViewSettingsV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";const POST_BROWSE_KEY="darPostBrowseV1";const ILM_CHAT_STORE_KEY=IS_STAGING_APP?"darIlmChatStoreStagingV1":"darIlmChatStoreV1";const ILM_ADMIN_STORE_KEY=IS_STAGING_APP?"darIlmAdminStoreStagingV1":"darIlmAdminStoreV1";const ILM_QUIZ_PATH="/data/quiz-questions.json";const ILM_KNOWLEDGE_INDEX_PATH="/data/ilm-knowledge-index.json";const ILM_QUIZ_CACHE_KEY=IS_STAGING_APP?"darIlmQuizStagingV1":"darIlmQuizV1";const ILM_KNOWLEDGE_CACHE_KEY=IS_STAGING_APP?"darIlmKnowledgeIndexStagingV1":"darIlmKnowledgeIndexV1";const ILM_MAX_CHAT_MESSAGES=120;const ILM_MAX_MATCHES=10;const ILM_MIN_SCORE=4;const ILM_STRONG_SCORE=12;const CONTENT_REFRESH_MS=60000;const POSTS_FETCH_BATCH=8;const FILTER_RENDER_LIMIT=80;const POSTS_CACHE_QUOTA_MAX=300;const POSTS_INDEX_STALE_KEY=IS_STAGING_APP?"darPostsIndexStaleStagingV2":"darPostsIndexStaleV2";const POSTS_FETCH_TIMEOUT_MS=12000;let postsSyncBusy=false;let postsSyncSilent=false;let postsSyncLabel="";let refreshContentPromise=null;let refreshContentQueued=false;let refreshContentDebTimer=null;let postsRenderTimer=null;
 const CURRENT_UPDATES_PATH=IS_STAGING_APP?"/content/staging/updates/current.json":"/content/updates/current.json";const CURRENT_UPDATES_CACHE_KEY=IS_STAGING_APP?"darCurrentUpdatesStagingV1":"darCurrentUpdatesV1";let currentUpdates=[];
 const DAILY_CONTENT_PATH="/content/updates/daily.json";let darDailyContent=null;
 const HADITH_BOOKS_PATH="/data/hadith/books.json";const HADITH_SEARCH_PATH="/data/hadith/search-index.json";const HADITH_CACHE_KEY="darHadithLibraryV2";const HADITH_FILTER_KEY="darHadithFiltersV2";const HADITH_FAV_KEY="darHadithFavoritesV1";const HADITH_MACHINE_CACHE_KEY="darHadithMachineTranslationsV1";const HADITH_DAILY_KEY="darHadithDailySettingsV1";let hadithBooks=[];let hadithSearchIndex=[];let hadithCollections=new Map();let hadithLoading=null;let hadithActiveBook="";let hadithActiveChapter="";let hadithActiveSection="";let hadithFilters={status:"",grade:"",language:"german"};
@@ -20268,7 +20508,7 @@ function ensurePostSlidesHydrated(post){if(!post||!window.DARSlidePostParser)ret
 function ensurePostSlidesArray(slides){if(Array.isArray(slides))return slides;if(slides&&typeof slides==="object")return [slides];return[]}
 function parseSlidesFromYaml(yaml){const lines=yamlTopLevelBlock(yaml,"slides");if(!lines.length)return[];let listIndent=null;lines.forEach(line=>{const m=line.match(/^(\s*)-\s/);if(m&&m[1].length>=1)listIndent=listIndent===null?m[1].length:Math.min(listIndent,m[1].length)});if(listIndent===null)return[];const slideStartRe=new RegExp(`^\\s{${listIndent}}-\\s*(.*)$`);const slides=[];let current=null;for(let i=0;i<lines.length;i++){const line=lines[i];const start=line.match(slideStartRe);if(start){if(current)slides.push(current);current={title:"",text:"",quote:"",explanation:"",source:"",links:[]};const inline=start[1].match(/^([A-Za-z0-9_-]+):\s*(.*)$/);if(inline)current[inline[1]]=parseValue(inline[2]);continue}if(!current)continue;const key=line.match(/^(\s+)([A-Za-z0-9_-]+):\s*(.*)$/);if(!key)continue;const indent=key[1].length,name=key[2],raw=key[3].trim();if(name==="links"){const parsed=parseYamlLinks(lines,i,indent,listIndent);current.links=parsed.links;i=parsed.next;continue}if(raw==="|"||raw===">"){const scalar=readYamlScalar(lines,i,indent,raw===">");current[name]=scalar.value;i=scalar.next;continue}current[name]=parseValue(raw)}if(current)slides.push(current);return slides.map(normalizeSlideEntry).filter(slide=>slide.title||slide.text||slide.quote||slide.explanation||slide.source||slide.links.length)}
 function parseFeedFromYaml(yaml){const lines=yamlTopLevelBlock(yaml,"feed");const empty={enabled:false,image:"",originalImage:"",alt:"",shareEnabled:false,_explicit:false};if(!lines.length)return empty;const feed={...empty};lines.forEach(line=>{const m=line.match(/^\s{2}([A-Za-z0-9_-]+):\s*(.*)$/);if(!m)return;const key=m[1],val=parseValue(m[2]);if(key==="enabled"||key==="shareEnabled")feed[key]=val===true||val==="true";else feed[key]=val});const image=String(feed.image||"").trim();feed._explicit=(feed.enabled===true||feed.enabled==="true")&&!!image;return feed}
-function parseFrontMatter(md,filename){md=String(md||"").replace(/^\uFEFF/,"");let fm={},body=md,yaml="";const match=md.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);if(match){body=match[2]||"";yaml=match[1]||"";const lines=yaml.split(/\r?\n/);let current=null;for(let i=0;i<lines.length;i++){const line=lines[i];const keyMatch=line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);if(keyMatch){current=keyMatch[1];const val=keyMatch[2].trim();if(val==="|"||val===">"){const block=[];i++;for(;i<lines.length;i++){if(/^[A-Za-z0-9_-]+:\s*/.test(lines[i])){i--;break}block.push(lines[i].replace(/^\s{2}/,""))}fm[current]=val===">"?block.join(" ").replace(/\s+/g," ").trim():block.join("\n").trim();continue}fm[current]=val===""?[]:parseValue(val);continue}const arrayMatch=line.match(/^\s*-\s*(.*)$/);if(arrayMatch&&current&&current!=="slides"){if(!Array.isArray(fm[current]))fm[current]=[];fm[current].push(parseValue(arrayMatch[1]))}}const linksBlock=yaml.match(/links:\s*\n([\s\S]*?)(?:\n[A-Za-z0-9_-]+:|$)/);if(linksBlock){const links=[];let item=null;linksBlock[1].split(/\r?\n/).forEach(line=>{let labelMatch=line.match(/^\s*-\s*label:\s*(.*)$/);if(labelMatch){item={label:parseValue(labelMatch[1]),url:""};links.push(item);return}let urlMatch=line.match(/^\s*url:\s*(.*)$/);if(urlMatch&&item){item.url=parseValue(urlMatch[1])}});if(links.length)fm.links=links}}const tags=Array.isArray(fm.tags)?fm.tags:fm.tags?String(fm.tags).split(/[ ,]+/).filter(Boolean):[];const introPack=postIntroFromFrontmatter(fm);const slidesYaml=parseSlidesFromYaml(yaml);const slidesBody=(!slidesYaml.length&&window.DARSlidePostParser)?window.DARSlidePostParser.parseSlidesFromBody(body):[];const slides=slidesYaml.length?slidesYaml:slidesBody;const slideMode=window.DARSlidePostParser?window.DARSlidePostParser.isSlidePostMode(fm.layout,fm.type,body):(/^slides?$/i.test(String(fm.layout||fm.type||"").trim())||/<!--\s*slide:/i.test(body));const slideSearch=slides.map(s=>[s.title,s.text,s.quote,s.explanation,s.source].filter(Boolean).join("\n")).join("\n\n");const statement=slideMode&&slides.length?"":(cleanBodyText(body)||cleanBodyText(slideSearch));const layout=String(fm.layout||fm.type||"").trim().toLowerCase();const feedParsed=parseFeedFromYaml(yaml);return{id:fm.id||filename.replace(/\.md$/,""),date:fm.date||"",title:fm.title||filename.replace(/\.md$/,""),category:fm.category||"Beiträge",topic:fm.topic||fm.category||"Allgemein",scholar:fm.scholar||"",book:fm.book||"",author:fm.author||fm.bookAuthor||"",tags,source:fm.source||"",links:Array.isArray(fm.links)?fm.links:[],introTitle:introPack.introTitle,intro:introPack.intro,layout,type:String(fm.type||"").trim().toLowerCase(),slides:ensurePostSlidesArray(slides),statement,feed:feedParsed,_feedExplicit:feedParsed._explicit===true,_rawBody:body,_sourceFile:filename||""}}
+function parseFrontMatter(md,filename){md=String(md||"").replace(/^\uFEFF/,"");let fm={},body=md,yaml="";const match=md.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);if(match){body=match[2]||"";yaml=match[1]||"";const lines=yaml.split(/\r?\n/);let current=null;for(let i=0;i<lines.length;i++){const line=lines[i];const keyMatch=line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);if(keyMatch){current=keyMatch[1];const val=keyMatch[2].trim();if(val==="|"||val===">"){const block=[];i++;for(;i<lines.length;i++){if(/^[A-Za-z0-9_-]+:\s*/.test(lines[i])){i--;break}block.push(lines[i].replace(/^\s{2}/,""))}fm[current]=val===">"?block.join(" ").replace(/\s+/g," ").trim():block.join("\n").trim();continue}fm[current]=val===""?[]:parseValue(val);continue}const arrayMatch=line.match(/^\s*-\s*(.*)$/);if(arrayMatch&&current&&current!=="slides"){if(!Array.isArray(fm[current]))fm[current]=[];fm[current].push(parseValue(arrayMatch[1]))}}const linksBlock=yaml.match(/links:\s*\n([\s\S]*?)(?:\n[A-Za-z0-9_-]+:|$)/);if(linksBlock){const links=[];let item=null;linksBlock[1].split(/\r?\n/).forEach(line=>{let labelMatch=line.match(/^\s*-\s*label:\s*(.*)$/);if(labelMatch){item={label:parseValue(labelMatch[1]),url:""};links.push(item);return}let urlMatch=line.match(/^\s*url:\s*(.*)$/);if(urlMatch&&item){item.url=parseValue(urlMatch[1])}});if(links.length)fm.links=links}}const tags=Array.isArray(fm.tags)?fm.tags:fm.tags?String(fm.tags).split(/[ ,]+/).filter(Boolean):[];const introPack=postIntroFromFrontmatter(fm);const slidesYaml=parseSlidesFromYaml(yaml);const slidesBody=(!slidesYaml.length&&window.DARSlidePostParser)?window.DARSlidePostParser.parseSlidesFromBody(body):[];const slides=slidesYaml.length?slidesYaml:slidesBody;const slideMode=window.DARSlidePostParser?window.DARSlidePostParser.isSlidePostMode(fm.layout,fm.type,body):(/^slides?$/i.test(String(fm.layout||fm.type||"").trim())||/<!--\s*slide:/i.test(body));const slideSearch=slides.map(s=>[s.title,s.text,s.quote,s.explanation,s.source].filter(Boolean).join("\n")).join("\n\n");const statement=slideMode&&slides.length?"":(cleanBodyText(body)||cleanBodyText(slideSearch));const layout=String(fm.layout||fm.type||"").trim().toLowerCase();const feedParsed=parseFeedFromYaml(yaml);return{id:fm.id||filename.replace(/\.md$/,""),date:fm.date||"",title:fm.title||filename.replace(/\.md$/,""),category:fm.category||"Beiträge",topic:fm.topic||fm.category||"Allgemein",scholar:fm.scholar||"",book:fm.book||"",author:fm.author||fm.bookAuthor||"",tags,source:fm.source||"",links:Array.isArray(fm.links)?fm.links:[],introTitle:introPack.introTitle,intro:introPack.intro,layout,type:String(fm.type||"").trim().toLowerCase(),slides:ensurePostSlidesArray(slides),quote:String(fm.quote||fm.aussage||"").trim(),fazit:String(fm.fazit||fm.conclusion||fm.summary||"").trim(),status:String(fm.status||"").trim(),speaker:String(fm.speaker||"").trim(),statement,feed:feedParsed,_feedExplicit:feedParsed._explicit===true,_rawBody:body,_sourceFile:filename||""}}
 function mergePostFileLists(...lists){const map=new Map();lists.flat().filter(Boolean).forEach(file=>{const name=String(file.name||file||"").trim();if(!name||!name.endsWith(".md"))return;const sha=String(file.sha||"");const prev=map.get(name);if(!prev||sha)map.set(name,{name,sha:sha||prev?.sha||""})});return Array.from(map.values()).sort((a,b)=>a.name.localeCompare(b.name,"de"))}
 async function fetchPostFile(file){const local=`/${POSTS_DIR}/${encodeURIComponent(file.name)}?v=${encodeURIComponent(file.sha||Date.now())}`;const raw=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/${encodeURIComponent(file.name)}?v=${encodeURIComponent(file.sha||Date.now())}`;for(const url of[local,raw]){try{const r=await fetch(url,{cache:"no-store"});if(!r.ok)continue;return{sha:file.sha||"",name:file.name,post:parseFrontMatter(await r.text(),file.name)}}catch(e){}}throw new Error("Beitragsdatei konnte nicht geladen werden: "+file.name)}
 async function fetchWithTimeout(url,ms=POSTS_FETCH_TIMEOUT_MS){const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),ms);try{return await fetch(url,{cache:"no-store",signal:ctrl.signal})}finally{clearTimeout(timer)}}
@@ -25116,7 +25356,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v677";
+const APP_BUILD_ID="app-shell-v684";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -25155,15 +25395,12 @@ function getAdjacentPosts(post){const i=posts.findIndex(p=>String(p.id)===String
 
 
 
-function buildShareText(post){
-  const title=stripMd(post&&post.title?post.title:"DAR AL TAWḤID").trim();
-  const body=stripMd(post&&post.statement?post.statement:"").replace(/\n{3,}/g,"\n\n").trim();
-  const source=stripMd(post&&post.source?post.source:"").trim();
-  return `${title}\n\n${body}${source?`\n\n${source}`:""}\n\nDAR AL TAWḤID`;
+function buildShareText(post,mode){
+  return postShareModeText(post,mode||"quote-source");
 }
-function buildPostShareMessage(post){
+function buildPostShareMessage(post,mode){
   const url=postUrl(post);
-  return `${buildShareText(post)}\n\n🔗 Beitrag öffnen:\n${url}`;
+  return `${buildShareText(post,mode)}\n\n🔗 Beitrag öffnen:\n${url}`;
 }
 
 function buildAreaShareText(title,description,url){return `${title}\n\n${description||""}\n\n🔗 Öffnen:\n${url}\n\nDAR AL TAWḤID`}
@@ -25186,11 +25423,79 @@ function sharePanel(panelTitle,title,text,url,copyLabel="Link kopieren",helpText
   return `<section class="share-panel share-panel-v11"><div class="share-panel-title">${esc(panelTitle||"Weitergeben")}</div><div class="share-flat-v410">${igBtn}${waBtn}${tgBtn}${nativeBtn}${copyBtn}${extraAction}</div>${helpText?`<div class="share-help">${esc(helpText)}</div>`:""}</section>`;
 }
 
+function splitPostQuoteFazit(raw){
+  const text=String(raw||"").replace(/\r\n/g,"\n").replace(/^---[\s\S]*?---\s*/m,"").trim();
+  if(!text)return{quote:"",fazit:"",speaker:""};
+  const fazitRe=/(?:^|\n)\s*(?:🌙\s*)?(?:\*\*)?Fazit(?:\*\*)?\s*:\s*/i;
+  let quotePart=text,fazitPart="";
+  const hit=text.search(fazitRe);
+  if(hit>=0){
+    quotePart=text.slice(0,hit).trim();
+    fazitPart=text.slice(hit).replace(/^\s*(?:🌙\s*)?(?:\*\*)?Fazit(?:\*\*)?\s*:\s*/i,"").trim();
+  }
+  const lines=quotePart.split("\n");
+  let speaker="";
+  const body=[];
+  lines.forEach(line=>{
+    const t=String(line||"").trim();
+    if(!t){if(body.length)body.push("");return}
+    if(/^👉/.test(t)||/^Erklärung/i.test(t)||/^Einordnung/i.test(t))return;
+    const said=t.replace(/^🖋️\s*/,"").replace(/\*\*/g,"").match(/^(.+?)\s+sagte\s*:?\s*(.*)$/i);
+    if(said&&!speaker){
+      speaker=said[1].replace(/^#+\s*/,"").trim();
+      if(said[2])body.push(said[2]);
+      return;
+    }
+    body.push(t);
+  });
+  let quote=body.join("\n").replace(/^>\s?/gm,"").replace(/\n{3,}/g,"\n\n").trim();
+  quote=quote.replace(/^(?:🖋️\s*)?[^\n]+?\s+sagte\s*:?\s*/i,"").trim();
+  const fazit=fazitPart.replace(/^🌙\s*/,"").replace(/^\*\*?Fazit\*\*?\s*:\s*/i,"").replace(/^\*+\s*/,"").replace(/\n{3,}/g,"\n\n").trim();
+  return{quote,fazit,speaker};
+}
+function postDisplayParts(post){
+  const parsed=splitPostQuoteFazit(post&&post.statement?post.statement:"");
+  const speaker=String(post?.speaker||parsed.speaker||post?.scholar||"").trim();
+  let quote=String(post?.quote||post?.aussage||"").trim()||parsed.quote;
+  if(!quote)quote=String(findQuote(post)||"").trim();
+  if(!quote)quote=normalizeStatementText(post?.statement||"");
+  const fazit=String(post?.fazit||post?.conclusion||post?.fazitText||post?.summary||"").trim()||parsed.fazit;
+  quote=quote.replace(/(?:^|\n)\s*(?:🌙\s*)?(?:\*\*)?Fazit(?:\*\*)?\s*:[\s\S]*$/i,"").trim();
+  return{speaker,quote:normalizeStatementText(quote),fazit:normalizeStatementText(fazit)};
+}
+function postShareModeText(post,mode){
+  const parts=postDisplayParts(post);
+  const speaker=parts.speaker||"Überlieferung";
+  const quote=stripMd(parts.quote||"").trim();
+  const source=stripMd(post&&post.source?post.source:"").trim();
+  const fazit=stripMd(parts.fazit||"").trim();
+  const m=String(mode||"quote-source");
+  if(m==="quote")return quote?`${speaker} sagte:\n\n„${quote.replace(/^[„"]|[”"]$/g,"")}“`:stripMd(post?.title||"");
+  if(m==="quote-fazit")return [`${speaker} sagte:`,quote?`„${quote.replace(/^[„"]|[”"]$/g,"")}“`:"",fazit?`🌙 Fazit: ${fazit}`:"",source?`Quelle: ${source}`:""].filter(Boolean).join("\n\n");
+  return [`${speaker} sagte:`,quote?`„${quote.replace(/^[„"]|[”"]$/g,"")}“`:"",source?`Quelle: ${source}`:""].filter(Boolean).join("\n\n");
+}
+function postTitleEchoesQuote(title,quote){
+  const n=s=>String(s||"").normalize("NFKD").replace(/<[^>]+>/g,"").replace(/[„“”"«»‹›'.,:;!?()\[\]]/g,"").replace(/\s+/g," ").trim().toLowerCase();
+  const t=n(title),q=n(quote);
+  if(!t||t.length<8||!q)return false;
+  return t===q||q.startsWith(t)||t.startsWith(q);
+}
+function renderPostQuoteCard(post,parts){
+  return `<section id="postStatement" class="statement post-aussage"><div class="post-aussage-kicker">Aussage</div><div class="post-aussage-text">${formatText(parts.quote||"")}</div></section>`;
+}
+function renderPostSourceCite(post,sourceText,links,hasScan){
+  const src=String(sourceText||post.source||"").trim()||"Keine Quelle hinterlegt.";
+  return `<div class="post-reader-cite"><b>Quelle</b><div data-post-after-source>${esc(src)}</div></div>${renderPostSourceLinksSection(links,hasScan,{quiet:true})}`;
+}
+function renderPostFazitCard(parts){
+  if(!parts.fazit)return"";
+  return `<section class="post-key-message" data-post-fazit><h3>Fazit</h3><div class="post-fazit-body">${formatText(parts.fazit)}</div></section>`;
+}
 function postNarratorLine(post){
   const raw=String(post?.scholar||post?.speaker||"").trim();
   if(!raw)return "";
   const honorific=/رضي الله عنه|رضي الله عنها|رحمه الله|حفظه الله/.test(raw)?"":"<span class='honorific'>رضي الله عنه</span>";
-  return `<div class="post-reader-speaker"><span class="post-reader-speaker__label">Überliefert von</span><span class="post-reader-speaker__rule" aria-hidden="true"></span><span class="post-reader-speaker__name">${esc(raw)} ${honorific}</span><span class="post-reader-speaker__said">sagte:</span></div>`;
+  return `<div class="post-reader-speaker"><span class="post-reader-speaker__label">Überliefert von</span><span class="post-reader-speaker__rule" aria-hidden="true"></span><span class="post-reader-speaker__name">${esc(raw)} ${honorific}</span></div>`;
 }
 function normalizeStatementText(value){
   return String(value||"").replace(/\n{3,}/g,"\n\n").trim();
@@ -25248,13 +25553,15 @@ function renderPostNavigation(post){
   const nextPost=posts.find(p=>String(p.id)===String(next));
   return `<div class="post-nav-preview"><button type="button" class="post-nav-card" ${prevPost?`data-nav="post" data-value="${esc(prevPost.id)}"`:"disabled"}><b>← Vorheriger Beitrag</b><span>${esc(prevPost?.title||"Kein vorheriger Beitrag")}</span></button><button type="button" class="post-nav-card" ${nextPost?`data-nav="post" data-value="${esc(nextPost.id)}"`:"disabled"}><b>Nächster Beitrag →</b><span>${esc(nextPost?.title||"Kein nächster Beitrag")}</span></button></div>`;
 }
-function bindPostAfterLinksToggles(){document.querySelectorAll("[data-post-after-links-toggle]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();const wrap=btn.closest(".post-after-links-wrap");const body=wrap?.querySelector(".post-after-links-body");if(!body)return;const open=body.hasAttribute("hidden");if(open)body.removeAttribute("hidden");else body.setAttribute("hidden","");btn.setAttribute("aria-expanded",open?"true":"false");const label=btn.querySelector(".post-after-links-toggle-label");if(label)label.textContent=open?"Quelllinks schließen":"Quelllinks öffnen"}})}
-function collapsePostAfterLinks(root){const scope=root||document;const body=scope.querySelector?.(".post-after-links-body")||document.querySelector(".post-after-links-body");const btn=(scope.querySelector?.("[data-post-after-links-toggle]")||document.querySelector("[data-post-after-links-toggle]"));if(body)body.setAttribute("hidden","");if(btn){btn.setAttribute("aria-expanded","false");const label=btn.querySelector(".post-after-links-toggle-label");if(label)label.textContent="Quelllinks öffnen"}}
-function renderPostSourceLinksSection(links,hasScan){
+function bindPostAfterLinksToggles(){document.querySelectorAll("[data-post-after-links-toggle]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();const wrap=btn.closest(".post-after-links-wrap");const body=wrap?.querySelector(".post-after-links-body");if(!body)return;const quiet=wrap?.classList.contains("is-quiet");const open=body.hasAttribute("hidden");if(open)body.removeAttribute("hidden");else body.setAttribute("hidden","");btn.setAttribute("aria-expanded",open?"true":"false");const label=btn.querySelector(".post-after-links-toggle-label");if(label)label.textContent=open?(quiet?"Nachweise schließen":"Quelllinks schließen"):(quiet?"Nachweise":"Quelllinks öffnen")}})}
+function collapsePostAfterLinks(root){const scope=root||document;const body=scope.querySelector?.(".post-after-links-body")||document.querySelector(".post-after-links-body");const btn=(scope.querySelector?.("[data-post-after-links-toggle]")||document.querySelector("[data-post-after-links-toggle]"));if(body)body.setAttribute("hidden","");if(btn){btn.setAttribute("aria-expanded","false");const label=btn.querySelector(".post-after-links-toggle-label");if(label){const quiet=btn.closest(".post-after-links-wrap")?.classList.contains("is-quiet");label.textContent=quiet?"Nachweise":"Quelllinks öffnen"}}}
+function renderPostSourceLinksSection(links,hasScan,opts){
   if(!links.length&&!hasScan)return"";
+  const quiet=!!(opts&&opts.quiet);
+  const openLabel=quiet?"Nachweise":"Quelllinks öffnen";
   const linksHtml=links.length?renderAfterPanelLinks(links):'<span class="post-after-links-empty">Kein Direktlink hinterlegt.</span>';
   const scanHtml=hasScan?'<div class="post-after-scan-note" data-post-after-scan>Scan/PDF in den Quelllinks enthalten</div>':"";
-  return `<div class="post-after-links-wrap"><button type="button" class="post-after-links-toggle" data-post-after-links-toggle aria-expanded="false"><span class="post-after-links-toggle-label">Quelllinks öffnen</span><span class="post-after-links-toggle-icon" aria-hidden="true"></span></button><div class="post-after-links-body" hidden><div class="post-after-links" data-post-after-links>${linksHtml}</div>${scanHtml}</div></div>`;
+  return `<div class="post-after-links-wrap${quiet?" is-quiet":""}"${quiet?' data-quiet-links="1"':""}><button type="button" class="post-after-links-toggle" data-post-after-links-toggle aria-expanded="false"><span class="post-after-links-toggle-label">${openLabel}</span><span class="post-after-links-toggle-icon" aria-hidden="true"></span></button><div class="post-after-links-body" hidden><div class="post-after-links" data-post-after-links>${linksHtml}</div>${scanHtml}</div></div>`;
 }
 function renderContentSourcePanel(sourceText,links){
   const linkList=Array.isArray(links)?links:[];
@@ -25263,21 +25570,15 @@ function renderContentSourcePanel(sourceText,links){
   return `<section class="post-after-panel source-area-panel"><div class="post-after-head"><div class="post-after-kicker">Quellenbereich</div><span class="post-after-state">✓ Quelle</span></div><div class="post-after-source" data-post-after-source>${esc(source)}</div>${renderPostSourceLinksSection(linkList,hasScan)}</section>`;
 }
 function renderPostAfterPanel(post,{slideIndex=0}={}){
-  const slide=isSlidePost(post)?activeSlideForPost(post,slideIndex):null;
-  const sourceText=(slide?.source||post.source||"Keine Quelle hinterlegt.").trim();
-  const links=mergeSlideAndPostLinks(slide?.links,post.links||[]);
-  const hasScan=links.some(link=>/scan|pdf/i.test(String(link.label||""))||/\.pdf|#page=/i.test(String(link.url||link)));
-  const s=sourceStatus(post);
   const url=postUrl(post);
-  const text=buildShareText(post);
-  const message=buildPostShareMessage(post);
+  const text=buildShareText(post,"quote-source");
+  const message=buildPostShareMessage(post,"quote-source");
   const shareTitle=post.title||"DAR AL TAWḤID";
   const shareUrl=encodeURIComponent(url);
   const shareText=encodeURIComponent(message);
   const imageAction=`<button class="share-btn image-post" data-image-post-open="${esc(post.id)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="3" fill="none" stroke="#f0d98f" stroke-width="2"/><path d="M7 15l3.1-3.2 2.4 2.5 1.7-1.8L18 16" fill="none" stroke="#f0d98f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.25" fill="#f0d98f"/></svg><span>Bild</span></button>`;
   const nav=renderPostNavigation(post).replace('class="nav-posts"','class="post-after-nav"').replace('class="post-nav-preview"','class="post-after-nav"');
-  const slideAttrs=isSlidePost(post)?` data-slide-after-panel data-active-slide="${slideIndex}"`:"";
-  return `<section class="post-after-panel"${slideAttrs}><div class="post-after-head"><div class="post-after-kicker">Quellenbereich</div><span class="post-after-state">${s.sourceOk?"✓":"!"} Quelle</span></div><div class="post-after-source" data-post-after-source>${esc(sourceText)}</div>${renderPostSourceLinksSection(links,hasScan)}<div class="post-after-share-title">Beitrag weitergeben</div><div class="share-panel post-after-share"><button class="share-btn native" data-share-native data-share-title="${esc(shareTitle)}" data-share-text="${esc(text)}" data-share-url="${esc(url)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg><span>Teilen</span></button><a class="share-btn tg" href="https://t.me/share/url?url=${shareUrl}&text=${shareText}" target="_blank" rel="noopener">${compactShareIcon("telegram")}<span>Telegram</span></a><a class="share-btn wa" href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener">${compactShareIcon("whatsapp")}<span>WhatsApp</span></a><button class="share-btn ig" data-share-instagram data-share-text="${esc(message)}" type="button">${compactShareIcon("instagram")}<span>Instagram</span></button>${imageAction}<button class="share-btn link" data-share-copy data-share-text="${esc(url)}" type="button"><span>Kopieren</span></button></div><div class="post-after-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${nav}</section>`;
+  return `<section class="post-after-panel"><div class="post-after-share-title">Beitrag weitergeben</div><div class="share-panel post-after-share"><button class="share-btn native" data-share-native data-share-title="${esc(shareTitle)}" data-share-text="${esc(text)}" data-share-url="${esc(url)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg><span>Teilen</span></button><a class="share-btn tg" href="https://t.me/share/url?url=${shareUrl}&text=${shareText}" target="_blank" rel="noopener">${compactShareIcon("telegram")}<span>Telegram</span></a><a class="share-btn wa" href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener">${compactShareIcon("whatsapp")}<span>WhatsApp</span></a><button class="share-btn ig" data-share-instagram data-share-text="${esc(message)}" type="button">${compactShareIcon("instagram")}<span>Instagram</span></button>${imageAction}<button class="share-btn link" data-share-copy data-share-text="${esc(text)}" type="button"><span>Kopieren</span></button></div><div class="post-after-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${nav}</section>`;
 }
 function shareLinksForPost(post){
   // Layout-Regel: Teilen-Panel immer direkt nach Quellenbereich platzieren.
@@ -25339,11 +25640,20 @@ function renderPost(id){
   if(!post)return `${setHeader("Beitrag nicht gefunden","Dieser Beitrag konnte nicht geladen werden.","Fehler")}<div class="empty">Prüfe, ob die Datei noch in content/posts vorhanden ist.</div><div class="article-actions"><button id="postRetryBtn" class="action-btn" type="button">Erneut laden</button><button id="postHardRefreshBtn" class="action-btn" type="button">App aktualisieren</button></div>`;
   const related=getRelatedPosts(post);
   const narrator=postNarratorLine(post);
-  const body=isSlidePost(post)?renderPostSlides(post):`<section id="postStatement" class="statement">${formatText(normalizeStatementText(post.statement||""))}</section>`;
-  const keyMessage=String(post.summary||post.fazit||post.fazitText||post.conclusion||"").trim();
-  const keyBlock=keyMessage?`<section class="post-key-message"><h3>Kerngedanke</h3><p>${esc(keyMessage)}</p></section>`:"";
+  const parts=postDisplayParts(post);
+  const slide=isSlidePost(post)?activeSlideForPost(post,0):null;
+  const sourceText=(slide?.source||post.source||"Keine Quelle hinterlegt.").trim();
+  const links=mergeSlideAndPostLinks(slide?.links,post.links||[]);
+  const hasScan=links.some(link=>/scan|pdf/i.test(String(link.label||""))||/\.pdf|#page=/i.test(String(link.url||link)));
+  const body=isSlidePost(post)?renderPostSlides(post):renderPostQuoteCard(post,parts);
+  const cite=renderPostSourceCite(post,sourceText,links,hasScan);
+  const fazitBlock=isSlidePost(post)?"":renderPostFazitCard(parts);
   const intro=renderPostIntroButton(post);
-  return `<article class="article post-reader"><header id="postReadStart" class="post-reader-title"><div class="kicker">Beitrag</div><h2>${esc(post.title)}</h2></header>${narrator}${intro}<section class="post-reader-main">${body}${keyBlock}</section>${renderPostAfterPanel(post)}${renderRelatedCompact(related,"Ähnliche Beiträge")}</article>`;
+  const slideAttrs=isSlidePost(post)?` data-slide-after-panel data-active-slide="0"`:"";
+  const echo=postTitleEchoesQuote(post.title,parts.quote);
+  const sepQuelle=`<div class="post-reader-sep" aria-hidden="true"><i>◆</i></div>`;
+  const sepFazit=fazitBlock?`<div class="post-reader-sep" aria-hidden="true"><i>◆</i></div>`:"";
+  return `<article class="article post-reader"><header id="postReadStart" class="post-reader-title${echo?" is-echo":""}"><div class="kicker">Beitrag</div><h2>${esc(post.title)}</h2></header>${intro}<section class="post-reader-main"${slideAttrs}>${narrator}${body}${sepQuelle}${cite}${sepFazit}${fazitBlock}</section>${renderPostAfterPanel(post)}${renderRelatedCompact(related,"Ähnliche Beiträge")}</article>`;
 }
 function applyHomeFilters(){const run=()=>{const q=($("homeSearchInput")?.value||"").trim().toLowerCase();const cat=$("homeFilterCat")?.value||"";const scholar=$("homeFilterScholar")?.value||"";const book=$("homeFilterBook")?.value||"";const typ=$("homeFilterType")?.value||"";const block=$("homeSearchBlock"),results=$("homeSearchResults"),count=$("homeSearchCount");if(!block||!results||!count)return;const btn=$("advancedFilterBtn"),panel=$("homeFilterPanel");if(panel&&(cat||scholar||book||typ)){panel.classList.add("advanced-visible");panel.classList.remove("advanced-hidden");if(btn){btn.classList.add("active");btn.textContent="Filter ausblenden"}}const active=q||cat||scholar||book||typ;if(!active){block.style.display="none";results.innerHTML="";count.textContent="0 Treffer";homeSearchPostIds=[];if(typeof updateHomeActiveFilterChips==="function")updateHomeActiveFilterChips();return}const filteredPosts=posts.filter(post=>{const hay=[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ").toLowerCase();return(!q||hay.includes(q))&&(!cat||normalizePostCategory(post.category)===normalizePostCategory(cat))&&(!scholar||postMatchesScholarKey(post,scholar))&&(!book||post.book===book)&&(!typ||sourceType(post)===typ)});homeSearchPostIds=filteredPosts.map(p=>String(p.id));const filteredDuas=(!cat&&!scholar&&!book&&!typ)?DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q)):[];block.style.display="block";count.textContent=`${filteredPosts.length+filteredDuas.length} Treffer`;results.innerHTML=(filteredPosts.map(p=>filteredPostCard(p,q)).join("")+filteredDuas.map(duaCard).join(""))||`<div class="empty">Keine passenden Treffer gefunden.</div>`;if(typeof updateHomeActiveFilterChips==="function")updateHomeActiveFilterChips();bindEvents()};if(window.DARScrollManager?.withScrollPreserved)window.DARScrollManager.withScrollPreserved(run);else run()}
 function resolveRenderScroll(scrollBefore,sameRoute,fromGesture,ayahJump){
