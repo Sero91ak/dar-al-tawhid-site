@@ -16,5 +16,23 @@
     "title": "Duʿāʾ nicht unwissend zu bitten",
     "snippet": "Mein Herr, ich suche Zuflucht bei Dir davor, Dich um etwas zu bitten, worüber ich kein Wissen habe. Wenn Du mir nicht vergibst und Dich meiner erbarmst, werde ich zu den Verlierern gehören.",
     "category": "Wissen & Schutz"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 463,
+      "remaining": 442
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 77,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
