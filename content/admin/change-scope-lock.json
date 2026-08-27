@@ -87,6 +87,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "restore-publisher-github-token-2026-08-27",
+      "approvedBy": "user-explicit-cloudflare-worker-publish-not-working",
+      "reason": "Nutzer: Beitrag-Push geht nicht, Cloudflare Secret GITHUB_TOKEN fehlt. Bestehende GitHub-Actions-Secrets wieder an den Worker anbinden (kein neues Passwort).",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "cloudflare/worker.js",
+        ".github/workflows/deploy-admin-publisher.yml",
+        ".github/workflows/sync-admin-publisher-secrets.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "admin-remove-video-studio-ui-2026-08-27",
       "approvedBy": "user-explicit-remove-ki-video-studio-from-admin-app",
       "reason": "Nutzer: KI-Video-Studio vollständig aus der DAR Admin App entfernen (kein Menü, keine Studio-Seite, Deploy-Verify ohne Studio).",

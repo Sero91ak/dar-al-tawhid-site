@@ -2,7 +2,8 @@
    Nicht entfernen oder vereinfachen – CI blockiert sonst (scripts/push-system-guard.js).
    Deploy-Marker: welcome-push-once-v676
    Secret-Resync nach Reclaim: 2026-08-27
-   Admin-UI v56: Secret-Resync nach Static-Deploy */
+   Admin-UI v56: Secret-Resync nach Static-Deploy
+   Secret put fallback 2026-08-27T09:15: GITHUB_TOKEN wieder anbinden */
 import {
   parsePostForTelegram,
   validateTelegramPost,

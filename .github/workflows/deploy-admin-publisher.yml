@@ -191,24 +191,34 @@ jobs:
           fs.writeFileSync(missing, miss.join("\n") + (miss.length ? "\n" : ""));
           console.log("Secrets bereit:", Object.keys(payload).join(", ") || "(keine)");
           NODE
-          if [ -s "$SECRETS_JSON" ] && [ "$(node -e "const j=require(process.argv[1]);process.stdout.write(String(Object.keys(j).length))" "$SECRETS_JSON")" != "0" ]; then
-            BULK_LOG="$RUNNER_TEMP/secret-bulk.log"
+          apply_worker_secrets() {
+            local json="$1"
+            local msg="$2"
+            local log="$RUNNER_TEMP/secret-apply-${msg}.log"
             set +e
-            wrangler versions secret bulk "$SECRETS_JSON" --name dar-admin-publisher --message "core-secrets-sync" 2>&1 | tee "$BULK_LOG"
-            BULK_RC=${PIPESTATUS[0]}
+            wrangler versions secret bulk "$json" --name dar-admin-publisher --message "$msg" 2>&1 | tee "$log"
+            local rc=${PIPESTATUS[0]}
             set -e
-            if [ "$BULK_RC" != "0" ]; then
-              echo "::error::versions secret bulk fehlgeschlagen"
-              exit "$BULK_RC"
+            local version_id
+            version_id="$(sed -n 's/.*Created version \([0-9a-f-]\{36\}\).*/\1/p' "$log" | tail -n 1)"
+            if [ "$rc" = "0" ] && [ -n "$version_id" ]; then
+              echo "Aktiviere Secret-Version: $version_id"
+              wrangler versions deploy "${version_id}@100" --name dar-admin-publisher --yes --message "activate-$msg"
+              return 0
             fi
-            VERSION_ID="$(sed -n 's/.*Created version \([0-9a-f-]\{36\}\).*/\1/p' "$BULK_LOG" | tail -n 1)"
-            if [ -z "$VERSION_ID" ]; then
-              echo "::error::Konnte Version-ID aus secret bulk Output nicht lesen"
-              exit 1
-            fi
-            echo "Aktiviere Secret-Version: $VERSION_ID"
-            wrangler versions deploy "${VERSION_ID}@100" --name dar-admin-publisher --yes --message "activate-core-secrets"
-            echo "Secret-Sync (versions) OK"
+            echo "Fallback wrangler secret put (bulk content-type Fehler)"
+            node -e '
+              const j = require(process.argv[1]);
+              for (const k of Object.keys(j)) process.stdout.write(k + "\n");
+            ' "$json" | while IFS= read -r name; do
+              [ -z "$name" ] && continue
+              node -e "process.stdout.write(require(process.argv[1])[process.argv[2]])" "$json" "$name" \
+                | wrangler secret put "$name" --name dar-admin-publisher
+            done
+          }
+          if [ -s "$SECRETS_JSON" ] && [ "$(node -e "const j=require(process.argv[1]);process.stdout.write(String(Object.keys(j).length))" "$SECRETS_JSON")" != "0" ]; then
+            apply_worker_secrets "$SECRETS_JSON" "core-secrets-sync"
+            echo "Secret-Sync OK"
           else
             echo "::warning::Keine Kern-Secrets in GitHub Actions vorhanden – Sync übersprungen"
           fi
@@ -590,23 +600,33 @@ jobs:
           fs.writeFileSync(missing, miss.join("\n") + (miss.length ? "\n" : ""));
           console.log("Secrets bereit:", Object.keys(payload).join(", ") || "(keine)");
           NODE
-          if [ -s "$SECRETS_JSON" ] && [ "$(node -e "const j=require(process.argv[1]);process.stdout.write(String(Object.keys(j).length))" "$SECRETS_JSON")" != "0" ]; then
-            BULK_LOG="$RUNNER_TEMP/secret-bulk-final.log"
+          apply_worker_secrets() {
+            local json="$1"
+            local msg="$2"
+            local log="$RUNNER_TEMP/secret-apply-${msg}.log"
             set +e
-            wrangler versions secret bulk "$SECRETS_JSON" --name dar-admin-publisher --message "core-secrets-sync-final" 2>&1 | tee "$BULK_LOG"
-            BULK_RC=${PIPESTATUS[0]}
+            wrangler versions secret bulk "$json" --name dar-admin-publisher --message "$msg" 2>&1 | tee "$log"
+            local rc=${PIPESTATUS[0]}
             set -e
-            if [ "$BULK_RC" != "0" ]; then
-              echo "::error::versions secret bulk (final) fehlgeschlagen"
-              exit "$BULK_RC"
+            local version_id
+            version_id="$(sed -n 's/.*Created version \([0-9a-f-]\{36\}\).*/\1/p' "$log" | tail -n 1)"
+            if [ "$rc" = "0" ] && [ -n "$version_id" ]; then
+              echo "Aktiviere Secret-Version: $version_id"
+              wrangler versions deploy "${version_id}@100" --name dar-admin-publisher --yes --message "activate-$msg"
+              return 0
             fi
-            VERSION_ID="$(sed -n 's/.*Created version \([0-9a-f-]\{36\}\).*/\1/p' "$BULK_LOG" | tail -n 1)"
-            if [ -z "$VERSION_ID" ]; then
-              echo "::error::Konnte Version-ID aus secret bulk Output nicht lesen"
-              exit 1
-            fi
-            echo "Aktiviere Secret-Version: $VERSION_ID"
-            wrangler versions deploy "${VERSION_ID}@100" --name dar-admin-publisher --yes --message "activate-core-secrets-final"
+            echo "Fallback wrangler secret put (bulk content-type Fehler)"
+            node -e '
+              const j = require(process.argv[1]);
+              for (const k of Object.keys(j)) process.stdout.write(k + "\n");
+            ' "$json" | while IFS= read -r name; do
+              [ -z "$name" ] && continue
+              node -e "process.stdout.write(require(process.argv[1])[process.argv[2]])" "$json" "$name" \
+                | wrangler secret put "$name" --name dar-admin-publisher
+            done
+          }
+          if [ -s "$SECRETS_JSON" ] && [ "$(node -e "const j=require(process.argv[1]);process.stdout.write(String(Object.keys(j).length))" "$SECRETS_JSON")" != "0" ]; then
+            apply_worker_secrets "$SECRETS_JSON" "core-secrets-sync-final"
             echo "Secret-Sync final OK"
           else
             echo "::warning::Keine Kern-Secrets in GitHub Actions vorhanden – finaler Sync übersprungen"
