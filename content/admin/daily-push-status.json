@@ -4,25 +4,25 @@
   "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-27T21:55:59.303Z",
+  "updatedAt": "2026-08-27T22:10:59.343Z",
   "usersChecked": 10,
   "registrationsRead": 11,
   "uniqueSubscriptions": 10,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
-  "localTimeBerlin": "23:55",
-  "dateKeyBerlin": "2026-08-27",
+  "localTimeBerlin": "00:10",
+  "dateKeyBerlin": "2026-08-28",
   "duaWindow": {
     "hour": 9,
     "open": false,
     "catchupUntilHour": 14,
-    "alreadySentToday": 10
+    "alreadySentToday": 0
   },
   "recommendationWindow": {
     "hour": 12,
     "open": false,
     "catchupUntilHour": 20,
-    "alreadySentToday": 10
+    "alreadySentToday": 0
   },
   "duaCandidates": 0,
   "recCandidates": 0,
@@ -36,17 +36,17 @@
   "duplicates": 0,
   "errors": 0,
   "forceSend": null,
-  "dailyContentDate": "2026-08-27",
+  "dailyContentDate": "2026-08-28",
   "currentRecommendation": {
-    "id": "ijma-auch-einzeln-uberlieferter-konsens-hat-beweiskraft-217",
-    "title": "Ijmāʿ: Auch einzeln überlieferter Konsens hat Beweiskraft",
-    "category": "Ijmāʿ",
-    "scholar": "aš-Šawkānī"
+    "id": "ibn-taymiyyah-mittler-zur-anrufung-gemacht-164",
+    "title": "Wenn der Mittler zur Anrufung gemacht wird",
+    "category": "Tawḥīd",
+    "scholar": "Ibn Taymiyyah"
   },
   "currentDua": {
-    "id": "dua-046-rabbi-inni-audhu-bika-an-asalaka",
-    "title": "Duʿāʾ nicht unwissend zu bitten",
-    "category": "Wissen & Schutz"
+    "id": "dua-047-rabbi-qad-ataytani-min-al-mulk",
+    "title": "Duʿāʾ von Yūsuf um guten Abschluss",
+    "category": "Guter Tod & Rechtschaffene"
   },
   "configAutomatic": true,
   "lastError": "Außerhalb der Tagesfenster (Duʿāʾ ab 09:00, Empfehlung ab 12:00 Europe/Berlin)."
