@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-08-27T09:30:46.707Z",
+  "updatedAt": "2026-08-27T09:35:47.796Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-jummah-v2",
   "dryRun": false,
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-27T09:30:46.707Z",
+  "lastCronRun": "2026-08-27T09:35:47.796Z",
   "subscriptionsTotal": 12,
   "usersWithJummah": 12,
   "jummahTagFallback": true,
@@ -40,30 +40,30 @@
     "timeZone": "Europe/Berlin",
     "timeSource": "dhuhr-auto"
   },
-  "windowStart": "2026-08-27T09:15:45.217Z",
-  "windowEnd": "2026-08-28T11:30:45.217Z",
-  "scheduled": 6,
-  "recipients": 22,
+  "windowStart": "2026-08-27T09:20:45.221Z",
+  "windowEnd": "2026-08-28T11:35:45.221Z",
+  "scheduled": 9,
+  "recipients": 33,
   "skippedPast": 0,
-  "skippedWindow": 3,
+  "skippedWindow": 0,
   "catchups": 0,
   "duplicates": 0,
   "errors": 0,
   "lastPush": {
     "prayer": "Jumuʿah",
     "key": "jummah",
-    "mode": "advance",
-    "time": "13:03",
-    "sendAfter": "2026-08-28T11:03:00.000Z",
+    "mode": "entry",
+    "time": "13:33",
+    "sendAfter": "2026-08-28T11:33:00.000Z",
     "recipients": 1,
     "timeZone": "Europe/Berlin",
     "timeSource": "dhuhr-auto"
   },
   "lastRecipients": 1,
   "lastOneSignalResponse": {
-    "mode": "advance",
+    "mode": "entry",
     "recipients": 1,
-    "response": "{\"id\":\"06ed2c62-6510-4bf2-9916-c0f5f86ed6b5\",\"external_id\":\"aad0bace-d13c-42be-9a22-f2d28b040b4d\"}"
+    "response": "{\"id\":\"5aa9237d-c2be-437f-a011-a237297212ef\",\"external_id\":\"cb0120e7-95d9-4594-b8db-0a3798c8c9f1\"}"
   },
   "lastError": null,
   "planned": [
@@ -90,6 +90,46 @@
     {
       "prayer": "Jumuʿah",
       "key": "jummah",
+      "mode": "entry",
+      "time": "13:33",
+      "sendAfter": "2026-08-28T11:33:00.000Z",
+      "recipients": 9,
+      "timeZone": "Europe/Berlin",
+      "timeSource": "dhuhr-auto"
+    },
+    {
+      "prayer": "Jumuʿah",
+      "key": "jummah",
+      "mode": "morning",
+      "time": "09:00",
+      "sendAfter": "2026-08-28T07:00:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin",
+      "timeSource": "dhuhr-auto"
+    },
+    {
+      "prayer": "Jumuʿah",
+      "key": "jummah",
+      "mode": "advance",
+      "time": "13:03",
+      "sendAfter": "2026-08-28T11:03:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin",
+      "timeSource": "dhuhr-auto"
+    },
+    {
+      "prayer": "Jumuʿah",
+      "key": "jummah",
+      "mode": "entry",
+      "time": "13:33",
+      "sendAfter": "2026-08-28T11:33:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin",
+      "timeSource": "dhuhr-auto"
+    },
+    {
+      "prayer": "Jumuʿah",
+      "key": "jummah",
       "mode": "morning",
       "time": "09:00",
       "sendAfter": "2026-08-28T07:00:00.000Z",
@@ -110,19 +150,9 @@
     {
       "prayer": "Jumuʿah",
       "key": "jummah",
-      "mode": "morning",
-      "time": "09:00",
-      "sendAfter": "2026-08-28T07:00:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin",
-      "timeSource": "dhuhr-auto"
-    },
-    {
-      "prayer": "Jumuʿah",
-      "key": "jummah",
-      "mode": "advance",
-      "time": "13:03",
-      "sendAfter": "2026-08-28T11:03:00.000Z",
+      "mode": "entry",
+      "time": "13:33",
+      "sendAfter": "2026-08-28T11:33:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
       "timeSource": "dhuhr-auto"
@@ -141,6 +171,11 @@
       "response": "{\"id\":\"c4b827b8-e667-4b7d-b79f-68e81deee5f3\",\"external_id\":\"92b6f714-1f31-41e7-8285-5fe0a45930a8\"}"
     },
     {
+      "mode": "entry",
+      "recipients": 9,
+      "response": "{\"id\":\"742b91c4-67bc-447e-90c4-3caa85992441\",\"external_id\":\"6a33118d-34eb-459b-94b3-268b19e559f7\"}"
+    },
+    {
       "mode": "morning",
       "recipients": 1,
       "response": "{\"id\":\"72868be1-bbef-4bf9-8f00-877581ebcc80\",\"external_id\":\"aaeefb87-58a8-4456-b1e1-d1b98ff5ac4a\"}"
@@ -151,6 +186,11 @@
       "response": "{\"id\":\"010f0b43-a99c-46c3-b834-9586366d5c9b\",\"external_id\":\"302ab942-3ae8-4d08-8298-4aa908434465\"}"
     },
     {
+      "mode": "entry",
+      "recipients": 1,
+      "response": "{\"id\":\"b85590ca-d646-486f-90cb-1aa3265cff7a\",\"external_id\":\"8491976a-480a-4417-9349-4600b0aa6553\"}"
+    },
+    {
       "mode": "morning",
       "recipients": 1,
       "response": "{\"id\":\"c6468aa3-5230-4c55-9dd5-12d8c272f84a\",\"external_id\":\"e7cbec44-613d-4452-a258-4274ad97da19\"}"
@@ -159,6 +199,11 @@
       "mode": "advance",
       "recipients": 1,
       "response": "{\"id\":\"06ed2c62-6510-4bf2-9916-c0f5f86ed6b5\",\"external_id\":\"aad0bace-d13c-42be-9a22-f2d28b040b4d\"}"
+    },
+    {
+      "mode": "entry",
+      "recipients": 1,
+      "response": "{\"id\":\"5aa9237d-c2be-437f-a011-a237297212ef\",\"external_id\":\"cb0120e7-95d9-4594-b8db-0a3798c8c9f1\"}"
     }
   ],
   "errorDetails": []
