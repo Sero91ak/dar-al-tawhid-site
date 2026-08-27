@@ -4,13 +4,13 @@
   "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-27T17:55:21.136Z",
+  "updatedAt": "2026-08-27T18:00:21.149Z",
   "usersChecked": 10,
   "registrationsRead": 11,
   "uniqueSubscriptions": 10,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
-  "localTimeBerlin": "19:55",
+  "localTimeBerlin": "20:00",
   "dateKeyBerlin": "2026-08-27",
   "duaWindow": {
     "hour": 9,
@@ -20,7 +20,7 @@
   },
   "recommendationWindow": {
     "hour": 12,
-    "open": true,
+    "open": false,
     "catchupUntilHour": 20,
     "alreadySentToday": 10
   },
@@ -33,7 +33,7 @@
   },
   "invalidSubscriptionsDisabled": 0,
   "skipped": 0,
-  "duplicates": 10,
+  "duplicates": 0,
   "errors": 0,
   "forceSend": null,
   "dailyContentDate": "2026-08-27",
@@ -49,5 +49,5 @@
     "category": "Wissen & Schutz"
   },
   "configAutomatic": true,
-  "lastError": null
+  "lastError": "Außerhalb der Tagesfenster (Duʿāʾ ab 09:00, Empfehlung ab 12:00 Europe/Berlin)."
 }
