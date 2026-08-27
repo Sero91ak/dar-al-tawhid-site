@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v689";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v690";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -19503,6 +19503,117 @@ html body .post-reader-main .post-after-links-wrap.is-quiet > .post-after-links-
   font-size:16px!important;
 }
 </style>
+<style id="post-structure-v690">
+/* v690 · Belege wie QUELLE/FAZIT: Kicker + Text, keine Rechtecke */
+.post-reader-main .post-after-links-wrap.is-quiet,
+html[data-theme] .post-reader-main .post-after-links-wrap.is-quiet{
+  display:block!important;
+  margin:10px 0 2px 16px!important;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-toggle,
+html body .post-reader-main .post-after-links-wrap.is-quiet > .post-after-links-toggle{
+  -webkit-appearance:none!important;
+  appearance:none!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:flex-start!important;
+  gap:5px!important;
+  width:auto!important;
+  max-width:100%!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+  text-decoration:none!important;
+  cursor:pointer!important;
+}
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-toggle-row{
+  display:inline-flex!important;
+  align-items:baseline!important;
+  gap:2px!important;
+}
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-kicker{
+  display:block!important;
+  font-family:var(--font-ui,var(--sans))!important;
+  font-size:9px!important;
+  font-weight:900!important;
+  letter-spacing:.16em!important;
+  text-transform:uppercase!important;
+  color:var(--gold2,#efd78e)!important;
+  line-height:1!important;
+}
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-toggle-label{
+  display:inline!important;
+  font-family:var(--serif)!important;
+  font-size:13.5px!important;
+  font-weight:600!important;
+  letter-spacing:.01em!important;
+  color:color-mix(in srgb,var(--gold2,#efd78e) 72%,var(--cream,#fff8e8) 28%)!important;
+  -webkit-text-fill-color:color-mix(in srgb,var(--gold2,#efd78e) 72%,var(--cream,#fff8e8) 28%)!important;
+  text-decoration:none!important;
+  white-space:normal!important;
+}
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-toggle-icon{
+  display:inline!important;
+  margin:0!important;
+  width:auto!important;
+  height:auto!important;
+  border:0!important;
+  background:none!important;
+  padding:0!important;
+  color:var(--gold2,#efd78e)!important;
+}
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-toggle[aria-expanded="false"] .post-after-links-toggle-icon::before,
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-toggle:not([aria-expanded="true"]) .post-after-links-toggle-icon::before{
+  content:" ›"!important;
+  font-size:14px!important;
+  font-weight:500!important;
+}
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-toggle[aria-expanded="true"] .post-after-links-toggle-icon::before{
+  content:" ›"!important;
+  font-size:14px!important;
+}
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-body{
+  padding:6px 0 0!important;
+  margin:0!important;
+  background:transparent!important;
+  border:0!important;
+}
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  gap:6px!important;
+  background:transparent!important;
+}
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links a,
+html[data-theme] .post-reader-main .post-after-links-wrap.is-quiet .post-after-links a{
+  display:inline!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:var(--gold2,#efd78e)!important;
+  font-family:var(--serif)!important;
+  font-size:13px!important;
+  font-weight:600!important;
+  text-decoration:none!important;
+}
+</style>
+
 
 
 
@@ -25537,7 +25648,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v689";
+const APP_BUILD_ID="app-shell-v690";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -25734,15 +25845,15 @@ function renderPostNavigation(post){
   const nextPost=posts.find(p=>String(p.id)===String(next));
   return `<div class="post-nav-preview"><button type="button" class="post-nav-card" ${prevPost?`data-nav="post" data-value="${esc(prevPost.id)}"`:"disabled"}><b>← Vorheriger Beitrag</b><span>${esc(prevPost?.title||"Kein vorheriger Beitrag")}</span></button><button type="button" class="post-nav-card" ${nextPost?`data-nav="post" data-value="${esc(nextPost.id)}"`:"disabled"}><b>Nächster Beitrag →</b><span>${esc(nextPost?.title||"Kein nächster Beitrag")}</span></button></div>`;
 }
-function bindPostAfterLinksToggles(){document.querySelectorAll("[data-post-after-links-toggle]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();const wrap=btn.closest(".post-after-links-wrap");const body=wrap?.querySelector(".post-after-links-body");if(!body)return;const quiet=wrap?.classList.contains("is-quiet");const open=body.hasAttribute("hidden");if(open)body.removeAttribute("hidden");else body.setAttribute("hidden","");btn.setAttribute("aria-expanded",open?"true":"false");const label=btn.querySelector(".post-after-links-toggle-label");if(label)label.textContent=open?(quiet?"Nachweise schließen":"Quelllinks schließen"):(quiet?"Nachweise anzeigen":"Quelllinks öffnen")}})}
-function collapsePostAfterLinks(root){const scope=root||document;const body=scope.querySelector?.(".post-after-links-body")||document.querySelector(".post-after-links-body");const btn=(scope.querySelector?.("[data-post-after-links-toggle]")||document.querySelector("[data-post-after-links-toggle]"));if(body)body.setAttribute("hidden","");if(btn){btn.setAttribute("aria-expanded","false");const label=btn.querySelector(".post-after-links-toggle-label");if(label){const quiet=btn.closest(".post-after-links-wrap")?.classList.contains("is-quiet");label.textContent=quiet?"Nachweise anzeigen":"Quelllinks öffnen"}}}
+function bindPostAfterLinksToggles(){document.querySelectorAll("[data-post-after-links-toggle]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();const wrap=btn.closest(".post-after-links-wrap");const body=wrap?.querySelector(".post-after-links-body");if(!body)return;const quiet=wrap?.classList.contains("is-quiet");const open=body.hasAttribute("hidden");if(open)body.removeAttribute("hidden");else body.setAttribute("hidden","");btn.setAttribute("aria-expanded",open?"true":"false");const label=btn.querySelector(".post-after-links-toggle-label");if(label)label.textContent=open?(quiet?"Quellen schließen":"Quelllinks schließen"):(quiet?"Quellen öffnen":"Quelllinks öffnen")}})}
+function collapsePostAfterLinks(root){const scope=root||document;const body=scope.querySelector?.(".post-after-links-body")||document.querySelector(".post-after-links-body");const btn=(scope.querySelector?.("[data-post-after-links-toggle]")||document.querySelector("[data-post-after-links-toggle]"));if(body)body.setAttribute("hidden","");if(btn){btn.setAttribute("aria-expanded","false");const label=btn.querySelector(".post-after-links-toggle-label");if(label){const quiet=btn.closest(".post-after-links-wrap")?.classList.contains("is-quiet");label.textContent=quiet?"Quellen öffnen":"Quelllinks öffnen"}}}
 function renderPostSourceLinksSection(links,hasScan,opts){
   if(!links.length&&!hasScan)return"";
   const quiet=!!(opts&&opts.quiet);
-  const openLabel=quiet?"Nachweise anzeigen":"Quelllinks öffnen";
+  const openLabel=quiet?"Quellen öffnen":"Quelllinks öffnen";
   const linksHtml=links.length?renderAfterPanelLinks(links):'<span class="post-after-links-empty">Kein Direktlink hinterlegt.</span>';
   const scanHtml=hasScan?'<div class="post-after-scan-note" data-post-after-scan>Scan/PDF in den Quelllinks enthalten</div>':"";
-  return `<div class="post-after-links-wrap${quiet?" is-quiet":""}"${quiet?' data-quiet-links="1"':""}><button type="button" class="post-after-links-toggle" data-post-after-links-toggle aria-expanded="false" aria-label="Nachweise und Belege öffnen"><span class="post-after-links-toggle-label">${openLabel}</span><span class="post-after-links-toggle-icon" aria-hidden="true"></span></button><div class="post-after-links-body" hidden><div class="post-after-links" data-post-after-links>${linksHtml}</div>${scanHtml}</div></div>`;
+  return `<div class="post-after-links-wrap${quiet?" is-quiet":""}"${quiet?' data-quiet-links="1"':""}><button type="button" class="post-after-links-toggle" data-post-after-links-toggle aria-expanded="false" aria-label="Quellen und Belege öffnen">${quiet?`<span class="post-after-links-kicker">Belege</span>`:""}<span class="post-after-links-toggle-row"><span class="post-after-links-toggle-label">${openLabel}</span><span class="post-after-links-toggle-icon" aria-hidden="true"></span></span></button><div class="post-after-links-body" hidden><div class="post-after-links" data-post-after-links>${linksHtml}</div>${scanHtml}</div></div>`;
 }
 function renderContentSourcePanel(sourceText,links){
   const linkList=Array.isArray(links)?links:[];
