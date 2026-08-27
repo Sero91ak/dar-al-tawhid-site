@@ -19181,7 +19181,7 @@ function dailyContentToday(){return (darDailyContent&&darDailyContent.date===dar
 function dailyJsonDuaFallback(entry){if(!entry?.id)return null;return{id:entry.id,title:entry.title||"Duʿāʾ des Tages",de:entry.snippet||"",cat:entry.category||"",type:"Duʿāʾ"}}
 function dailyJsonPostFallback(entry){if(!entry?.id)return null;return{id:entry.id,title:entry.title||"Beitrag",category:entry.category||"",scholar:entry.scholar||"",file:entry.file||""}}
 const QURAN_TR_MODES={readable:{label:"Lesbar",short:"Einfach · latin",hint:"Einfache lateinische Umschrift zum lauten Lesen."},tanzil:{label:"Tanzil",short:"Standard",hint:"Standard-Umschrift mit Doppellauten (Tanzil.net)."},academic:{label:"Wissenschaftlich",short:"Mit Diakritika",hint:"Akademische Umschrift mit ḥ, ʿ, ā und weiteren Zeichen."}};
-const QURAN_TR_PREVIEW_SAMPLE={tr:"al-ḥamdu lillāhi rabbi l-'ālamīna",tr_readable:"al-hamdu lillahi rabbi l-alamina",tr_academic:"al-ḥamdu lillahi rabbi l-ʿālamīna"};
+const QURAN_TR_PREVIEW_SAMPLE={tr:"al-ḥamdu lillāhi rabbi l-ʿālamīna",tr_readable:"al-hamdu lillahi rabbi l-'aalameen",tr_academic:"al-ḥamdu lillāhi rabbi l-ʿālamīna"};
 const QURAN_TR_PREVIEW_DE="(Alles) Lob gehört Allah, dem Herrn der Welten";
 const QURAN_TR_PREVIEW_AR="الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ";
 function quranTrPreviewText(mode){return quranVerseTr(QURAN_TR_PREVIEW_SAMPLE,mode||"readable")}
