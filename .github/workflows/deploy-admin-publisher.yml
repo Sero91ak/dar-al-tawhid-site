@@ -95,10 +95,11 @@ jobs:
       # (Besucher-App) konfiguriert und überschreibt den API-Worker ~30–90s später
       # mit Static Assets via WRANGLER_CI_OVERRIDE_NAME. Deshalb: warten + erneut deployen.
       - name: Reclaim worker after Workers Builds race
+        continue-on-error: true
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          EXPECT_DEPLOY_MARKER: welcome-push-autorepair-v1
+          EXPECT_DEPLOY_MARKER: welcome-push-once-v676
         working-directory: cloudflare
         run: |
           set -euo pipefail
@@ -512,7 +513,7 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          EXPECT_DEPLOY_MARKER: welcome-push-autorepair-v1
+          EXPECT_DEPLOY_MARKER: welcome-push-once-v676
         working-directory: cloudflare
         run: |
           set -euo pipefail
@@ -540,3 +541,86 @@ jobs:
           done
           echo "::error::Final reclaim could not hold marker"
           exit 1
+
+      - name: Resync core worker secrets after reclaim
+        if: always() && !cancelled()
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+          WORKER_GITHUB_TOKEN: ${{ secrets.WORKER_GITHUB_TOKEN }}
+          DAR_GITHUB_TOKEN: ${{ secrets.DAR_GITHUB_TOKEN }}
+          REPO_GITHUB_TOKEN: ${{ secrets.REPO_GITHUB_TOKEN }}
+          ONESIGNAL_API_KEY_NEW: ${{ secrets.ONESIGNAL_API_KEY_NEW }}
+          ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+          TELEGRAM_CHANNEL_USERNAME: ${{ secrets.TELEGRAM_CHANNEL_USERNAME }}
+          TELEGRAM_TOPICS_CHAT_ID: ${{ secrets.TELEGRAM_TOPICS_CHAT_ID }}
+          TELEGRAM_FORUM_CHAT_ID: ${{ secrets.TELEGRAM_FORUM_CHAT_ID }}
+        run: |
+          : > "$RUNNER_TEMP/missing-core-secrets-final.txt"
+          SECRETS_JSON="$RUNNER_TEMP/core-secrets-final.json"
+          node <<'NODE'
+          const fs = require("fs");
+          const out = process.env.RUNNER_TEMP + "/core-secrets-final.json";
+          const missing = process.env.RUNNER_TEMP + "/missing-core-secrets-final.txt";
+          const pick = (...vals) => {
+            for (const v of vals) {
+              const s = String(v || "").trim();
+              if (s) return s;
+            }
+            return "";
+          };
+          const wanted = {
+            GITHUB_TOKEN: pick(process.env.WORKER_GITHUB_TOKEN, process.env.DAR_GITHUB_TOKEN, process.env.REPO_GITHUB_TOKEN),
+            ADMIN_PUBLISH_SECRET: pick(process.env.ADMIN_PUBLISH_SECRET),
+            ONESIGNAL_API_KEY_NEW: pick(process.env.ONESIGNAL_API_KEY_NEW, process.env.ONESIGNAL_API_KEY),
+            TELEGRAM_BOT_TOKEN: pick(process.env.TELEGRAM_BOT_TOKEN),
+            TELEGRAM_CHANNEL_ID: pick(process.env.TELEGRAM_CHANNEL_ID),
+            TELEGRAM_CHANNEL_USERNAME: pick(process.env.TELEGRAM_CHANNEL_USERNAME),
+            TELEGRAM_TOPICS_CHAT_ID: pick(process.env.TELEGRAM_TOPICS_CHAT_ID, process.env.TELEGRAM_FORUM_CHAT_ID)
+          };
+          const payload = {};
+          const miss = [];
+          for (const [k, v] of Object.entries(wanted)) {
+            if (v) payload[k] = v;
+            else miss.push(k);
+          }
+          fs.writeFileSync(out, JSON.stringify(payload));
+          fs.writeFileSync(missing, miss.join("\n") + (miss.length ? "\n" : ""));
+          console.log("Secrets bereit:", Object.keys(payload).join(", ") || "(keine)");
+          NODE
+          if [ -s "$SECRETS_JSON" ] && [ "$(node -e "const j=require(process.argv[1]);process.stdout.write(String(Object.keys(j).length))" "$SECRETS_JSON")" != "0" ]; then
+            BULK_LOG="$RUNNER_TEMP/secret-bulk-final.log"
+            set +e
+            wrangler versions secret bulk "$SECRETS_JSON" --name dar-admin-publisher --message "core-secrets-sync-final" 2>&1 | tee "$BULK_LOG"
+            BULK_RC=${PIPESTATUS[0]}
+            set -e
+            if [ "$BULK_RC" != "0" ]; then
+              echo "::error::versions secret bulk (final) fehlgeschlagen"
+              exit "$BULK_RC"
+            fi
+            VERSION_ID="$(sed -n 's/.*Created version \([0-9a-f-]\{36\}\).*/\1/p' "$BULK_LOG" | tail -n 1)"
+            if [ -z "$VERSION_ID" ]; then
+              echo "::error::Konnte Version-ID aus secret bulk Output nicht lesen"
+              exit 1
+            fi
+            echo "Aktiviere Secret-Version: $VERSION_ID"
+            wrangler versions deploy "${VERSION_ID}@100" --name dar-admin-publisher --yes --message "activate-core-secrets-final"
+            echo "Secret-Sync final OK"
+          else
+            echo "::warning::Keine Kern-Secrets in GitHub Actions vorhanden – finaler Sync übersprungen"
+          fi
+          rm -f "$SECRETS_JSON"
+          sleep 8
+          HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health?ts=$(date +%s%N)" || true)"
+          echo "Nach Reclaim-Resync: $HEALTH"
+          if ! printf '%s' "$HEALTH" | grep -q '"hasGithubToken":true'; then
+            echo "::error::hasGithubToken=false nach finalem Secret-Resync"
+            exit 1
+          fi
+          if ! printf '%s' "$HEALTH" | grep -q '"hasAdminSecret":true'; then
+            echo "::error::hasAdminSecret=false nach finalem Secret-Resync"
+            exit 1
+          fi

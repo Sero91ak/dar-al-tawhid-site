@@ -1,6 +1,7 @@
 /* PUSH_SYSTEM_GUARD: Gebets-Push + Tages-Duʿāʾ/Empfehlung + Willkommens-Push.
    Nicht entfernen oder vereinfachen – CI blockiert sonst (scripts/push-system-guard.js).
-   Deploy-Marker: welcome-push-once-v676*/
+   Deploy-Marker: welcome-push-once-v676
+   Secret-Resync nach Reclaim: 2026-08-27 */
 import {
   parsePostForTelegram,
   validateTelegramPost,

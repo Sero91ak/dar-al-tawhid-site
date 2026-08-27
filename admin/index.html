@@ -26,7 +26,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v65-hang-fix";
+  var ADMIN_SW_CACHE="dar-admin-stats-v69";
   var MIG_KEY="darAdminSwFixV29";
   var RELOAD_KEY="darAdminSwReloadBudget";
   if(!location.pathname.startsWith("/admin"))return;
@@ -307,30 +307,31 @@ button{cursor:pointer}
 .quellen-studio{display:grid;gap:12px;min-width:0;max-width:100%}
 .quellen-grid{display:grid;grid-template-columns:minmax(260px,.9fr) minmax(320px,1.1fr);gap:12px;align-items:start;min-width:0}
 .quellen-search-panel,.quellen-editor-panel{min-height:min(72vh,680px);display:flex;flex-direction:column;gap:8px;min-width:0;overflow:hidden}
-.quellen-result-list{display:flex;flex-direction:column;gap:6px;flex:1;max-height:min(52vh,440px);overflow:auto;-webkit-overflow-scrolling:touch}
-.quellen-result-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start;padding:8px 10px;border:1px solid var(--line2);border-radius:12px;background:rgba(0,0,0,.08);cursor:pointer;text-align:left;width:100%;font:inherit;color:inherit;min-width:0}
+.quellen-result-list{display:flex;flex-direction:column;gap:10px;flex:1;max-height:min(52vh,440px);overflow:auto;-webkit-overflow-scrolling:touch}
+.quellen-result-row{display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:12px 14px;border:1px solid var(--line2);border-radius:14px;background:rgba(0,0,0,.08);cursor:pointer;text-align:left;width:100%;font:inherit;color:inherit;min-width:0;isolation:isolate;overflow:hidden}
 .quellen-result-row.is-active{border-color:rgba(140,190,255,.5);background:rgba(90,140,220,.08)}
-.quellen-result-title{font-size:11px;font-weight:900;color:var(--ink);line-height:1.35;overflow-wrap:anywhere;word-break:break-word}
-.quellen-result-meta{font-size:9px;color:var(--soft);margin-top:2px;line-height:1.4;overflow-wrap:anywhere;word-break:break-word}
-.quellen-badges{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end;min-width:0}
-.quellen-badge{border:1px solid rgba(239,215,142,.22);border-radius:999px;padding:2px 6px;font-size:8px;font-weight:900;color:var(--gold);background:rgba(239,215,142,.06);white-space:nowrap}
+.quellen-result-copy{display:flex;flex-direction:column;gap:6px;min-width:0;position:relative;z-index:1}
+.quellen-result-title{display:block;font-size:14px;font-weight:800;color:var(--ink);line-height:1.35;overflow-wrap:anywhere;word-break:break-word}
+.quellen-result-meta{display:block;font-size:11px;color:var(--soft);line-height:1.45;overflow-wrap:anywhere;word-break:break-word}
+.quellen-badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-start;min-width:0;position:relative;z-index:1;margin-top:2px}
+.quellen-badge{border:1px solid rgba(239,215,142,.22);border-radius:999px;padding:4px 8px;font-size:10px;font-weight:900;color:var(--gold);background:rgba(239,215,142,.06);white-space:nowrap;line-height:1.2}
 .ordner-lead,.quellen-lead{margin:0;color:var(--soft);font-size:12px;line-height:1.5;overflow-wrap:anywhere;word-break:break-word;max-width:100%}
 /* Mobile-first Admin: Smartphone-Seitenverhältnis, lesbar, tippbar */
 @media(max-width:980px){
   .quellen-grid,.ordner-grid,.admin-editor-grid,.quellen-editor-stack,.quellen-kurzlink-grid{grid-template-columns:1fr!important}
   .quellen-search-panel,.quellen-editor-panel{min-height:0;max-height:none}
   .quellen-grid.has-editor .quellen-editor-panel{order:-1}
-  .quellen-result-list{max-height:min(38vh,320px)}
-  .quellen-result-row{grid-template-columns:1fr;gap:8px;padding:12px;min-height:52px}
+  .quellen-result-list{max-height:min(42vh,360px);gap:10px}
+  .quellen-result-row{gap:10px;padding:14px;min-height:0}
   .quellen-badges{justify-content:flex-start}
-  .quellen-result-title{font-size:14.5px;line-height:1.35;font-weight:800}
-  .quellen-result-meta{font-size:11px;line-height:1.45;margin-top:4px}
-  .quellen-badge{font-size:10px;padding:5px 9px;min-height:28px;display:inline-flex;align-items:center}
+  .quellen-result-title{font-size:15px;line-height:1.4;font-weight:800}
+  .quellen-result-meta{font-size:11.5px;line-height:1.45}
+  .quellen-badge{font-size:10.5px;padding:5px 9px;min-height:28px;display:inline-flex;align-items:center}
   .quellen-overview{font-size:12px;max-height:none}
   .quellen-link-row{grid-template-columns:1fr;gap:8px;padding:10px}
   .quellen-link-row b{font-size:12.5px}
   .quellen-link-row span{font-size:11px}
-  .quellen-editor-panel .paste-area,.quellen-editor-panel .markdown-editor,.ordner-editor-area{min-height:min(42vh,360px);font-size:13.5px;line-height:1.55;padding:12px}
+  .quellen-editor-panel .paste-area,.quellen-editor-panel .markdown-editor,.ordner-editor-area{min-height:min(48vh,420px);font-size:14px;line-height:1.6;padding:14px}
   .ordner-editor-actions,.quellen-editor-panel .ordner-editor-actions{display:grid;grid-template-columns:1fr;gap:8px}
   .ordner-editor-actions .btn,.quellen-editor-panel .ordner-editor-actions .btn{width:100%;justify-content:center;min-height:44px;font-size:12.5px}
   .section-head{flex-wrap:wrap;align-items:flex-start;gap:6px}
@@ -344,10 +345,10 @@ button{cursor:pointer}
   .quellen-studio,.ordner-studio,.admin-actions-layout,.split{width:100%;max-width:100%}
   .panel{padding:12px;border-radius:14px}
   .quellen-search-panel .field{min-height:44px;font-size:15px}
-  .quellen-result-list{max-height:min(34vh,280px);gap:8px}
-  .quellen-result-row{padding:13px 12px;border-radius:14px}
-  .quellen-result-title{font-size:15px}
-  .quellen-result-meta{font-size:11.5px}
+  .quellen-result-list{max-height:min(40vh,340px);gap:10px}
+  .quellen-result-row{padding:14px 13px;border-radius:16px}
+  .quellen-result-title{font-size:15.5px}
+  .quellen-result-meta{font-size:12px}
   .admin-action-summary{grid-template-columns:1fr;gap:8px;padding:12px}
   .admin-action-summary h4{font-size:17px}
   .admin-action-summary p{font-size:11.5px;line-height:1.4}
@@ -636,7 +637,7 @@ main#panel.panel{
       <img src="/admin/admin-icon-192.png" alt="" width="48" height="48">
       <div>
         <h1>DAR Admin</h1>
-        <p><span class="status-dot"></span>Command Center · Admin v54</p>
+        <p><span class="status-dot"></span>Command Center · Admin v55</p>
       </div>
     </div>
     <div class="toolbar">
@@ -1041,6 +1042,16 @@ function workerHealthUrl(){
   else if(url.pathname.endsWith("/publish"))url.pathname=url.pathname.replace(/\/publish$/,"/health");
   else url.pathname="/health";
   return url.toString();
+}
+let workerPublishHealth=null;
+async function refreshWorkerPublishHealth(){
+  try{
+    const r=await fetch(`${workerHealthUrl()}?t=${Date.now()}`,{cache:"no-store"});
+    workerPublishHealth=await r.json().catch(()=>({ok:false}));
+  }catch(e){
+    workerPublishHealth={ok:false,error:String(e.message||e)};
+  }
+  return workerPublishHealth;
 }
 async function checkVisitorAppHealth(){
   const checks=await Promise.allSettled([
@@ -1844,11 +1855,12 @@ async function fetchPostMarkdownForAdmin(filename){
       return await workerGetRequest(`post?filename=${encodeURIComponent(filename)}`,{admin:true});
     }catch(e){
       const msg=String(e.message||e);
-      if(!/autorisiert|401|Secret fehlt/i.test(msg))throw e;
+      if(!/autorisiert|401|secret|token|github|konfigur|fehlt|500/i.test(msg)){
+        try{return await fetchPostMarkdownPublic(filename)}catch(_){throw e}
+      }
     }
   }
   const data=await fetchPostMarkdownPublic(filename);
-  toast("Beitrag über Live-Quelle geladen — zum Speichern Worker Secret unter Einstellungen prüfen");
   return data;
 }
 window.fetchPostMarkdownForAdmin=fetchPostMarkdownForAdmin;
@@ -2373,7 +2385,7 @@ async function loadQuellenPost(filename){
       const panel=document.querySelector('[data-feed-image-context="quellen"]');
       if(panel&&typeof DARAdminFeedImage.bindRoot==="function")DARAdminFeedImage.bindRoot(panel,"quellen",SITE_ORIGIN);
     }
-    setQuellenEditorStatus(data.loadedVia==="public"?"Geladen (Live) — PDF/Bild & Feed bearbeiten. Zum Speichern Worker Secret prüfen.":"Bereit — PDF/Bild per Drag & Drop hinzufügen oder Anhänge entfernen.");
+    setQuellenEditorStatus(data.loadedVia==="public"?"Beitrag geladen. Speichern geht, sobald der Server-Token wieder aktiv ist.":"Bereit — PDF/Bild per Drag & Drop hinzufügen oder Anhänge entfernen.");
   }catch(e){
     quellenEdit={filename:"",markdown:"",sha:"",postId:"",title:"",dirty:false};
     setQuellenEditorStatus(`Fehler: ${e.message||e}`);
@@ -2500,6 +2512,7 @@ function renderShell(){
   if(currentTab==="live-edit"&&window.DARLiveEdit)window.DARLiveEdit.bindLiveEditTab();
   if(currentTab==="ordner"&&!ordnerCatalogLoaded&&!ordnerBusy)ensureOrdnerData(false).then(()=>{if(currentTab==="ordner")renderShell()});
   if(currentTab==="quellen"&&!quellenCatalogLoaded&&!quellenCatalogBusy)ensureQuellenCatalog(false).then(()=>{if(currentTab==="quellen")renderShell()});
+  if(currentTab==="quellen"&&!workerPublishHealth)refreshWorkerPublishHealth().then(()=>{if(currentTab==="quellen")renderShell()});
   if(currentTab==="kurzlinks"&&!shortlinksRegistryLoaded&&!shortlinksRegistryBusy)ensureShortlinksRegistry(false).then(()=>{if(currentTab==="kurzlinks"){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
   if(currentTab==="zakat"&&!zakatAdminLoaded)ensureZakatAdminReady().then(()=>{if(currentTab==="zakat")renderShell()}).catch(()=>{});
   if(currentTab==="feed"&&window.DARFeedAdmin&&!feedLoadedFlag())ensureFeedAdminData(false).then(()=>{if(currentTab==="feed")renderShell()}).catch(()=>{});
@@ -2532,7 +2545,10 @@ function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
   restartRefreshInterval();
   if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"||tab==="ordner"||tab==="quellen"||tab==="kurzlinks"||tab==="zakat"||tab==="feed"||tab==="quiz-stats"){
     if(tab==="ordner")ensureOrdnerData(false).then(()=>{if(currentTab===tab)renderShell()});
-    if(tab==="quellen")ensureQuellenCatalog(false).then(()=>{if(currentTab===tab)renderShell()});
+    if(tab==="quellen"){
+      refreshWorkerPublishHealth().then(()=>{if(currentTab===tab)renderShell()});
+      ensureQuellenCatalog(false).then(()=>{if(currentTab===tab)renderShell()});
+    }
     if(tab==="kurzlinks")ensureShortlinksRegistry(false).then(()=>{if(currentTab===tab){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
     if(tab==="zakat")ensureZakatAdminReady().then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
     if(tab==="feed")ensureFeedAdminData(true).then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
@@ -2682,12 +2698,17 @@ function renderVisitors(ctx){
 function renderQuellen(){
   const busy=quellenCatalogBusy;
   const list=window.DARQuellen?DARQuellen.filterQuellenCatalog(quellenCatalogMeta,quellenSearchQuery):quellenCatalogMeta.filter(p=>!quellenSearchQuery.trim()||JSON.stringify(p).toLowerCase().includes(quellenSearchQuery.trim().toLowerCase()));
-  const rows=list.slice(0,120).map(p=>`<button class="quellen-result-row ${quellenEdit.filename===p.filename?"is-active":""}" data-quellen-post="${esc(p.filename)}" type="button"><span><span class="quellen-result-title">${esc(cleanTitle(p.title))}</span><span class="quellen-result-meta">${esc(p.filename)} · ${esc(p.category||"")} · ${esc(p.id||"")}${p.date?` · ${esc(String(p.date).slice(0,10))}`:""}</span></span><span class="quellen-badges">${p.hasFeedInApp?`<span class="quellen-badge">Feed</span>`:""}${p.isSlide?`<span class="quellen-badge">Slide</span>`:""}${p.hasLinks?`<span class="quellen-badge">Links</span>`:""}${p.hasPdfImage?`<span class="quellen-badge">PDF/Bild</span>`:""}${p.hasLocalSources?`<span class="quellen-badge">Lokal</span>`:""}</span></button>`).join("");
+  const rows=list.slice(0,120).map(p=>`<button class="quellen-result-row ${quellenEdit.filename===p.filename?"is-active":""}" data-quellen-post="${esc(p.filename)}" type="button"><span class="quellen-result-copy"><span class="quellen-result-title">${esc(cleanTitle(p.title))}</span><span class="quellen-result-meta">${esc(p.filename)}</span><span class="quellen-result-meta">${esc(p.category||"")} · ${esc(p.id||"")}${p.date?` · ${esc(String(p.date).slice(0,10))}`:""}</span></span><span class="quellen-badges">${p.hasFeedInApp?`<span class="quellen-badge">Feed</span>`:""}${p.isSlide?`<span class="quellen-badge">Slide</span>`:""}${p.hasLinks?`<span class="quellen-badge">Links</span>`:""}${p.hasPdfImage?`<span class="quellen-badge">PDF/Bild</span>`:""}${p.hasLocalSources?`<span class="quellen-badge">Lokal</span>`:""}</span></button>`).join("");
   const workerReady=!!(savedWorkerSecret()||(document.getElementById("workerSecretInput")?.value||"").trim());
+  const healthKnown=!!(workerPublishHealth&&workerPublishHealth.service==="dar-admin-publisher");
+  const tokenOk=healthKnown?!!workerPublishHealth.hasGithubToken:null;
+  const secretOk=healthKnown?!!workerPublishHealth.hasAdminSecret:null;
+  const saveBlocked=healthKnown&&(tokenOk===false||secretOk===false);
+  const healthNote=saveBlocked?" Speichern wartet auf den Server-Token. Lesen geht trotzdem.":tokenOk?" Speichern ist mit dem Server verbunden.":"";
   return `<section class="quellen-studio">
     <div class="panel">
       <div class="section-head"><h3>Beiträge bearbeiten</h3><span>${busy?"lädt…":`${list.length} Treffer`}</span></div>
-      <p class="quellen-lead">Beitrag suchen, öffnen, PDF/Bild hinzufügen, speichern.${workerReady?"":" Worker Secret unter Aktionen hinterlegen."}</p>
+      <p class="quellen-lead">Beitrag suchen, öffnen, PDF/Bild hinzufügen, speichern.${workerReady?"":" Worker Secret unter Aktionen hinterlegen."}${healthNote}</p>
     </div>
     <div class="quellen-grid${quellenEdit.filename?" has-editor":""}">
       <aside class="panel quellen-search-panel">
@@ -2696,21 +2717,21 @@ function renderQuellen(){
         <button class="btn" id="quellenReloadBtn" type="button">Katalog neu laden</button>
       </aside>
       <div class="panel quellen-editor-panel">
-        <div class="section-head"><h3>Beitrag</h3><span>${quellenEdit.filename?esc(quellenEdit.filename):"Beitrag wählen"}</span></div>
+        <div class="section-head"><h3>${quellenEdit.filename?esc(cleanTitle(quellenEdit.title||quellenEdit.filename)):"Beitrag"}</h3><span>${quellenEdit.filename?esc(quellenEdit.filename):"Beitrag wählen"}</span></div>
         ${quellenEdit.filename?`<div class="quellen-editor-stack">
           <section class="editor-card editor-card-main">
-            <label class="field-label" for="quellenEditor">Markdown</label>
+            <label class="field-label" for="quellenEditor">Markdown bearbeiten</label>
             <textarea class="paste-area ordner-editor-area markdown-editor" id="quellenEditor" spellcheck="false">${esc(quellenEdit.markdown)}</textarea>
             ${renderSourceFilesPanel("quellen")}
             ${window.DARAdminFeedImage?DARAdminFeedImage.renderPanel("quellen"):""}
           </section>
         </div>
         <div class="ordner-editor-actions">
-          <button class="btn primary" id="quellenSaveBtn" type="button">Beitrag speichern</button>
+          <button class="btn primary" id="quellenSaveBtn" type="button"${saveBlocked?" disabled":""}>Beitrag speichern</button>
           <a class="btn" href="${SITE_ORIGIN}/#post/${encodeURIComponent(quellenEdit.postId||quellenEdit.filename.replace(/\.md$/i,""))}" target="_blank" rel="noopener">In App öffnen</a>
           <button class="btn" id="quellenEditorReloadBtn" type="button">Verwerfen</button>
         </div>
-        <div class="upload-status" id="quellenEditorStatus">${esc(quellenEditorStatus||"Markdown + Anhänge speichern.")}</div>`:`<div class="empty">Oben oder unten einen Beitrag aus der Liste wählen.</div>`}
+        <div class="upload-status" id="quellenEditorStatus">${esc(quellenEditorStatus||(saveBlocked?"Lesen geht. Speichern startet, sobald der Server-Token aktiv ist.":"Markdown + Anhänge speichern."))}</div>`:`<div class="empty" style="padding:22px 14px;line-height:1.55">In der Liste oben einen Beitrag antippen. Der Text öffnet sich hier zum Bearbeiten.</div>`}
       </div>
     </div>
   </section>`;

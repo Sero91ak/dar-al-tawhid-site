@@ -87,6 +87,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "admin-quellen-layout-secrets-2026-08-27",
+      "approvedBy": "user-explicit-admin-quellen-cramped-github-token-error",
+      "reason": "Nutzer: Beiträge-Liste eingequetscht; Klick zeigt GITHUB_TOKEN fehlt obwohl Secret da ist; Speichern geht nicht live.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "admin/index.html",
+        "admin/sw.js",
+        "cloudflare/worker.js",
+        ".github/workflows/deploy-admin-publisher.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "welcome-push-build-id-sync-v675-2026-08-26",
       "approvedBy": "user-explicit-welcome-push-fix-push-live-now",
       "reason": "VERSION-GUARD: APP_BUILD_ID v674 vs version.json v675 nach Welcome-Push-Live synchronisieren.",
