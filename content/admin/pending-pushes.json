@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-27T09:45:53.085Z",
+  "generated": "2026-08-27T09:46:15.593Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -749,8 +749,50 @@
       "createdAt": "2026-08-27T09:45:52.777Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-08-27T09:45:52.777Z",
-      "lastError": "Push wartet auf Live-Verfügbarkeit",
-      "updatedAt": "2026-08-27T09:45:53.085Z"
+      "lastError": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
+      "updatedAt": "2026-08-27T09:46:15.593Z",
+      "lastCheckAt": "2026-08-27T09:46:15.388Z",
+      "liveCheck": {
+        "ok": false,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": false,
+          "postFilePublic": false,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": false,
+          "githubIndexHasPost": true,
+          "githubPostExists": true
+        },
+        "diagnosis": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
+        "indexOk": false,
+        "postOk": false,
+        "visitorUrlOk": true,
+        "attempts": 3,
+        "site": "https://dar-al-tawhid.de",
+        "postId": "prophet-hochmut-wahrheit-ablehnen-463",
+        "indexGenerated": "2026-08-26T11:39:25.514Z",
+        "indexCount": 462,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=prophet-hochmut-wahrheit-ablehnen-463&v=1787823963765#post/prophet-hochmut-wahrheit-ablehnen-463",
+        "githubIndexHasPost": true,
+        "githubPostExists": true,
+        "needsIndexRepair": false,
+        "needsDeployWait": true,
+        "repair": {
+          "repaired": true,
+          "action": "index-touch",
+          "at": "2026-08-27T09:46:05.584Z",
+          "reason": "Index aktualisiert (Deploy/Cache)"
+        }
+      },
+      "attempts": 3,
+      "lastRepair": {
+        "repaired": true,
+        "action": "index-touch",
+        "at": "2026-08-27T09:46:05.584Z",
+        "reason": "Index aktualisiert (Deploy/Cache)"
+      }
     }
   }
 }
