@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v691";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v692";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -19724,6 +19724,75 @@ html[data-theme] .post-reader-main .post-after-links-wrap.is-quiet .post-after-l
   content:none!important;
 }
 </style>
+<style id="post-structure-v692">
+/* v692 · Quellen oval, transparent, Goldglanz; Links klar als Öffnen */
+.post-slide-source,.post-slide-links{display:none!important}
+.post-source-oval,
+html[data-theme] .post-reader-main .post-source-oval{
+  display:block!important;
+  margin:8px 12px 6px 16px!important;
+  padding:12px 14px 12px!important;
+  border-radius:28px!important;
+  border:1px solid rgba(239,215,142,.34)!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  box-shadow:0 0 0 1px rgba(239,215,142,.08),0 0 16px rgba(239,215,142,.18)!important;
+}
+.post-source-oval .post-reader-cite,
+.post-source-oval [data-post-after-source],
+.post-source-oval .post-after-links-wrap,
+.post-source-oval .post-after-links-body,
+.post-source-oval .post-after-links{
+  background:transparent!important;
+  background-color:transparent!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+}
+.post-source-oval .post-reader-cite{
+  margin:0 0 8px!important;
+  padding:0!important;
+  border:0!important;
+  font-style:italic!important;
+}
+.post-source-oval .post-reader-cite b{
+  display:block!important;
+  margin:0 0 6px!important;
+  font-style:normal!important;
+}
+.post-source-oval .post-after-links-wrap.is-quiet{
+  margin:8px 0 0!important;
+  padding:0!important;
+}
+.post-source-oval .post-after-links-kicker{display:none!important}
+.post-source-oval .post-beleg-link,
+html[data-theme] .post-source-oval .post-beleg-link,
+.post-reader-main .post-after-links a.post-beleg-link{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:6px!important;
+  min-height:0!important;
+  margin:0 0 6px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:var(--gold2,#efd78e)!important;
+  font-family:var(--serif)!important;
+  font-size:13.5px!important;
+  font-weight:650!important;
+  text-decoration:underline!important;
+  text-decoration-thickness:1px!important;
+  text-underline-offset:4px!important;
+  text-decoration-color:rgba(239,215,142,.55)!important;
+}
+.post-source-oval .post-beleg-link::after{
+  content:" ›"!important;
+  text-decoration:none!important;
+  font-style:normal!important;
+}
+</style>
+
 
 
 
@@ -20986,7 +21055,7 @@ function renderPostQuoteCard(post,parts){
 }
 function renderPostSourceCite(post,sourceText,links,hasScan){
   const src=String(sourceText||post.source||"").trim()||"Keine Quelle hinterlegt.";
-  return `<div class="post-reader-cite"><b>Quelle</b><div data-post-after-source>${esc(src)}</div></div>${renderPostSourceLinksSection(links,hasScan,{quiet:true})}`;
+  return `<div class="post-source-oval"><div class="post-reader-cite"><b>Quelle</b><div data-post-after-source>${esc(src)}</div></div>${renderPostSourceLinksSection(links,hasScan,{quiet:true})}</div>`;
 }
 function renderPostFazitCard(parts){
   if(!parts.fazit)return"";
@@ -25870,7 +25939,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v691";
+const APP_BUILD_ID="app-shell-v692";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -25999,15 +26068,15 @@ function renderPostNavigation(post){
   const nextPost=posts.find(p=>String(p.id)===String(next));
   return `<div class="post-nav-preview"><button type="button" class="post-nav-card" ${prevPost?`data-nav="post" data-value="${esc(prevPost.id)}"`:"disabled"}><b>← Vorheriger Beitrag</b><span>${esc(prevPost?.title||"Kein vorheriger Beitrag")}</span></button><button type="button" class="post-nav-card" ${nextPost?`data-nav="post" data-value="${esc(nextPost.id)}"`:"disabled"}><b>Nächster Beitrag →</b><span>${esc(nextPost?.title||"Kein nächster Beitrag")}</span></button></div>`;
 }
-function bindPostAfterLinksToggles(){document.querySelectorAll("[data-post-after-links-toggle]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();const wrap=btn.closest(".post-after-links-wrap");const body=wrap?.querySelector(".post-after-links-body");if(!body)return;const quiet=wrap?.classList.contains("is-quiet");const open=body.hasAttribute("hidden");if(open)body.removeAttribute("hidden");else body.setAttribute("hidden","");btn.setAttribute("aria-expanded",open?"true":"false");const label=btn.querySelector(".post-after-links-toggle-label");if(label)label.textContent=open?(quiet?"Quellen schließen":"Quelllinks schließen"):(quiet?"Quellen öffnen":"Quelllinks öffnen")}})}
-function collapsePostAfterLinks(root){const scope=root||document;const body=scope.querySelector?.(".post-after-links-body")||document.querySelector(".post-after-links-body");const btn=(scope.querySelector?.("[data-post-after-links-toggle]")||document.querySelector("[data-post-after-links-toggle]"));if(body)body.setAttribute("hidden","");if(btn){btn.setAttribute("aria-expanded","false");const label=btn.querySelector(".post-after-links-toggle-label");if(label){const quiet=btn.closest(".post-after-links-wrap")?.classList.contains("is-quiet");label.textContent=quiet?"Quellen öffnen":"Quelllinks öffnen"}}}
+function bindPostAfterLinksToggles(){document.querySelectorAll("[data-post-after-links-toggle]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();const wrap=btn.closest(".post-after-links-wrap");const body=wrap?.querySelector(".post-after-links-body");if(!body)return;const quiet=wrap?.classList.contains("is-quiet");const open=body.hasAttribute("hidden");if(open)body.removeAttribute("hidden");else body.setAttribute("hidden","");btn.setAttribute("aria-expanded",open?"true":"false");const label=btn.querySelector(".post-after-links-toggle-label");if(label)label.textContent=open?(quiet?"Belege":"Quelllinks schließen"):(quiet?"Belege":"Quelllinks öffnen")}})}
+function collapsePostAfterLinks(root){const scope=root||document;const body=scope.querySelector?.(".post-after-links-body")||document.querySelector(".post-after-links-body");const btn=(scope.querySelector?.("[data-post-after-links-toggle]")||document.querySelector("[data-post-after-links-toggle]"));if(body)body.setAttribute("hidden","");if(btn){btn.setAttribute("aria-expanded","false");const label=btn.querySelector(".post-after-links-toggle-label");if(label){const quiet=btn.closest(".post-after-links-wrap")?.classList.contains("is-quiet");label.textContent=quiet?"Belege":"Quelllinks öffnen"}}}
 function renderPostSourceLinksSection(links,hasScan,opts){
   if(!links.length&&!hasScan)return"";
   const quiet=!!(opts&&opts.quiet);
-  const openLabel=quiet?"Quellen öffnen":"Quelllinks öffnen";
+  const openLabel=quiet?"Belege":"Quelllinks öffnen";
   const linksHtml=links.length?renderAfterPanelLinks(links):'<span class="post-after-links-empty">Kein Direktlink hinterlegt.</span>';
   const scanHtml=hasScan?'<div class="post-after-scan-note" data-post-after-scan>Scan/PDF in den Quelllinks enthalten</div>':"";
-  return `<div class="post-after-links-wrap${quiet?" is-quiet":""}"${quiet?' data-quiet-links="1"':""}><button type="button" class="post-after-links-toggle" data-post-after-links-toggle aria-expanded="false" aria-label="Quellen und Belege öffnen">${quiet?`<span class="post-after-links-kicker">Belege</span>`:""}<span class="post-after-links-toggle-row"><span class="post-after-links-toggle-label">${openLabel}</span><span class="post-after-links-toggle-icon" aria-hidden="true"></span></span></button><div class="post-after-links-body" hidden><div class="post-after-links" data-post-after-links>${linksHtml}</div>${scanHtml}</div></div>`;
+  return `<div class="post-after-links-wrap${quiet?" is-quiet":""}"${quiet?' data-quiet-links="1"':""}><button type="button" class="post-after-links-toggle" data-post-after-links-toggle aria-expanded="false" aria-label="Quellen und Belege öffnen"><span class="post-after-links-toggle-row"><span class="post-after-links-toggle-label">${openLabel}</span><span class="post-after-links-toggle-icon" aria-hidden="true"></span></span></button><div class="post-after-links-body" hidden><div class="post-after-links" data-post-after-links>${linksHtml}</div>${scanHtml}</div></div>`;
 }
 function renderContentSourcePanel(sourceText,links){
   const linkList=Array.isArray(links)?links:[];
@@ -26043,7 +26112,7 @@ function isSlidePost(post){return window.DARSlidePostParser?window.DARSlidePostP
 function getPostSlides(post){ensurePostSlidesHydrated(post);return ensurePostSlidesArray(post?.slides).map(normalizeSlideEntry).filter(s=>s&&(s.title||s.text||s.quote||s.explanation||s.source||Array.isArray(s.links)&&s.links.length))}
 function mergeSlideAndPostLinks(slideLinks,postLinks){const seen=new Set();const out=[];[...(Array.isArray(slideLinks)?slideLinks:[]),...(Array.isArray(postLinks)?postLinks:[])].forEach(link=>{const url=String(link?.url||link||"").trim();if(!url||seen.has(url))return;seen.add(url);out.push({label:String(link?.label||"Quelle").trim()||"Quelle",url})});return out}
 function activeSlideForPost(post,index=0){const slides=getPostSlides(post);if(!slides.length)return null;const idx=Math.max(0,Math.min(slides.length-1,Number(index)||0));return slides[idx]||null}
-function renderAfterPanelLinks(links){return (links||[]).map(link=>{const label=link.label||"Quelle";const url=link.url||link;return `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(label)}</a>`}).join("")}
+function renderAfterPanelLinks(links){return (links||[]).map(link=>{const raw=String(link.label||"").trim();const generic=!raw||/^quelle$/i.test(raw)||/^→\s*quelle$/i.test(raw);const label=generic?"Direktnachweis öffnen":( /öffnen/i.test(raw)?raw:raw+" öffnen");const url=link.url||link;return `<a class="post-beleg-link" href="${esc(url)}" target="_blank" rel="noopener">${esc(label)}</a>`}).join("")}
 function renderSlideMedia(slide){const img=String(slide?.image||"").trim();const pdf=String(slide?.pdf||"").trim();let html="";if(img)html+=`<div class="post-slide-media"><img src="${esc(img)}" alt="Quellen-Scan" loading="lazy"></div>`;if(pdf)html+=`<div class="post-slide-media"><a class="post-slide-pdf-link" href="${esc(pdf)}" target="_blank" rel="noopener">→ PDF-Seite öffnen</a></div>`;return html}
 function renderSlideLinks(slide){const links=Array.isArray(slide?.links)?slide.links:[];const clean=links.filter(link=>link&&String(link.url||"").trim());if(!clean.length)return"";return `<div class="post-slide-links">${clean.map(link=>`<a href="${esc(link.url)}" target="_blank" rel="noopener">${esc(link.label||"→ Quelle")}</a>`).join("")}</div>`}
 function renderPostSlides(post){
@@ -26051,7 +26120,7 @@ function renderPostSlides(post){
   if(!slides.length){
     return `<div class="post-slide-fallback">Dieser Slide-Beitrag konnte nicht vollständig geladen werden. Bitte App aktualisieren.</div><div class="article-actions"><button id="postRetryBtn" class="action-btn" type="button">Erneut laden</button><button id="postHardRefreshBtn" class="action-btn" type="button">App aktualisieren</button></div>`;
   }
-  const slideArticles=slides.map((slide,idx)=>`<article class="post-slide" data-slide-index="${idx}" data-slide-source="${esc(slide.source||"")}" data-slide-links="${esc(encodeURIComponent(JSON.stringify(slide.links||[])))}"><div class="post-slide-kicker">Slide ${idx+1} von ${slides.length}</div>${slide.title?`<h3>${esc(slide.title)}</h3>`:""}${slide.text?`<div class="post-slide-quote">${formatText(slide.text)}</div>`:""}${slide.explanation?`<div class="post-slide-explanation">${formatText(slide.explanation)}</div>`:""}${renderSlideMedia(slide)}${slide.source?`<div class="post-slide-source"><b>Quelle:</b> ${esc(slide.source)}</div>`:""}${renderSlideLinks(slide)}</article>`).join("");
+  const slideArticles=slides.map((slide,idx)=>`<article class="post-slide" data-slide-index="${idx}" data-slide-source="${esc(slide.source||"")}" data-slide-links="${esc(encodeURIComponent(JSON.stringify(slide.links||[])))}"><div class="post-slide-kicker">Slide ${idx+1} von ${slides.length}</div>${slide.title?`<h3>${esc(slide.title)}</h3>`:""}${slide.text?`<div class="post-slide-quote">${formatText(slide.text)}</div>`:""}${slide.explanation?`<div class="post-slide-explanation">${formatText(slide.explanation)}</div>`:""}${renderSlideMedia(slide)}</article>`).join("");
   return `<section class="post-slides" data-slide-carousel data-post-id="${esc(post.id)}" data-active="0" aria-label="Beitrags-Slides"><div class="post-slide-window"><div class="post-slide-track">${slideArticles}</div></div><div class="post-slide-footer"><button class="post-slide-nav" type="button" data-slide-prev aria-label="Vorherige Slide">← Zurück</button><div><div class="post-slide-count" data-slide-count>Slide 1 von ${slides.length}</div><div class="post-slide-dots">${slides.map((_,idx)=>`<span class="post-slide-dot${idx===0?" active":""}" data-slide-dot="${idx}"></span>`).join("")}</div></div><button class="post-slide-nav" type="button" data-slide-next aria-label="Nächste Slide">Weiter →</button></div></section>`;
 }
 function updatePostAfterSlidePanel(carousel,index){
