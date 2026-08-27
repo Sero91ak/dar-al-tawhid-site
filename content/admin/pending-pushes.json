@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-27T21:53:14.522Z",
+  "generated": "2026-08-27T21:56:00.804Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -804,44 +804,38 @@
       "createdAt": "2026-08-27T21:42:36.992Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-08-27T21:42:36.992Z",
-      "lastError": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
-      "updatedAt": "2026-08-27T21:53:14.522Z",
-      "lastCheckAt": "2026-08-27T21:53:14.225Z",
+      "lastError": "",
+      "updatedAt": "2026-08-27T21:56:00.804Z",
+      "lastCheckAt": "2026-08-27T21:56:00.565Z",
       "liveCheck": {
-        "ok": false,
+        "ok": true,
         "steps": {
           "githubFileCreated": true,
           "indexUpdatedGithub": true,
           "indexFoundPublic": true,
-          "postInIndex": false,
-          "postFilePublic": false,
+          "postInIndex": true,
+          "postFilePublic": true,
           "visitorUrlOk": true,
-          "cloudflareDeployed": false,
+          "cloudflareDeployed": true,
           "githubIndexHasPost": true,
           "githubPostExists": true
         },
-        "diagnosis": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
-        "indexOk": false,
-        "postOk": false,
+        "diagnosis": "",
+        "indexOk": true,
+        "postOk": true,
         "visitorUrlOk": true,
-        "attempts": 6,
+        "attempts": 1,
         "site": "https://dar-al-tawhid.de",
         "postId": "recht-zurueckholen-nicht-automatisch-shirk-akbar-slides-464",
-        "indexGenerated": "2026-08-27T09:46:04.574Z",
-        "indexCount": 463,
-        "visitorUrl": "https://dar-al-tawhid.de/?post=recht-zurueckholen-nicht-automatisch-shirk-akbar-slides-464&v=1787867582533#post/recht-zurueckholen-nicht-automatisch-shirk-akbar-slides-464",
+        "indexGenerated": "2026-08-27T21:53:03.560Z",
+        "indexCount": 464,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=recht-zurueckholen-nicht-automatisch-shirk-akbar-slides-464&v=1787867759812#post/recht-zurueckholen-nicht-automatisch-shirk-akbar-slides-464",
         "githubIndexHasPost": true,
         "githubPostExists": true,
         "needsIndexRepair": false,
-        "needsDeployWait": true,
-        "repair": {
-          "repaired": true,
-          "action": "index-touch",
-          "at": "2026-08-27T21:53:04.624Z",
-          "reason": "Index aktualisiert (Deploy/Cache)"
-        }
+        "needsDeployWait": false
       },
-      "attempts": 6,
+      "attempts": 1,
       "lastRepair": {
         "repaired": true,
         "action": "index-touch",
