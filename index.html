@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v688";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v689";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -19437,6 +19437,73 @@ html[data-theme] .post-reader-main .post-after-links-wrap.is-quiet .post-after-l
   opacity:.82;
 }
 </style>
+<style id="post-structure-v689">
+/* v689 · Nachweise ohne Kasten: iOS-Button-Grau und volle Breite weg */
+.post-reader-main .post-after-links-wrap.is-quiet,
+html[data-theme] .post-reader-main .post-after-links-wrap.is-quiet{
+  display:block!important;
+  width:auto!important;
+  max-width:100%!important;
+  margin:8px 0 4px 16px!important;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-toggle,
+html[data-theme] .post-reader-main .post-after-links-wrap.is-quiet .post-after-links-toggle,
+html body .post-reader-main .post-after-links-wrap.is-quiet > .post-after-links-toggle{
+  -webkit-appearance:none!important;
+  appearance:none!important;
+  display:inline-flex!important;
+  width:max-content!important;
+  max-width:100%!important;
+  align-items:baseline!important;
+  justify-content:flex-start!important;
+  gap:6px!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:none!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+  color:var(--gold2,#efd78e)!important;
+  font-family:var(--serif)!important;
+  font-size:13px!important;
+  font-weight:600!important;
+  letter-spacing:.02em!important;
+  text-decoration:none!important;
+  -webkit-text-fill-color:var(--gold2,#efd78e)!important;
+}
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-toggle::after,
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-toggle::before{
+  display:none!important;
+  content:none!important;
+}
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-toggle-icon{
+  margin:0!important;
+  width:auto!important;
+  height:auto!important;
+  border:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  flex:0 0 auto!important;
+}
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-toggle[aria-expanded="false"] .post-after-links-toggle-icon::before,
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-toggle:not([aria-expanded="true"]) .post-after-links-toggle-icon::before{
+  content:"›"!important;
+  font-size:16px!important;
+}
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-toggle[aria-expanded="true"] .post-after-links-toggle-icon::before{
+  content:"‹"!important;
+  font-size:16px!important;
+}
+</style>
+
 
 
 
@@ -25470,7 +25537,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v688";
+const APP_BUILD_ID="app-shell-v689";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -25538,7 +25605,7 @@ function sharePanel(panelTitle,title,text,url,copyLabel="Link kopieren",helpText
 }
 
 function splitPostQuoteFazit(raw){
-  const text=String(raw||"").replace(/\r\n/g,"\n").replace(/^---[\s\S]*?---\s*/m,"").trim();
+  const text=String(raw||"").replace(/\r\n/g,"\n").replace(/<!--\s*QUELLEN_IMPORT[\s\S]*?-->/gi,"").replace(/<!--[\s\S]*?-->/g,"").replace(/^---[\s\S]*?---\s*/m,"").trim();
   if(!text)return{quote:"",fazit:"",speaker:""};
   const fazitRe=/(?:^|\n)\s*(?:🌙\s*)?(?:\*\*)?Fazit(?:\*\*)?\s*:\s*/i;
   let quotePart=text,fazitPart="";
@@ -25573,7 +25640,7 @@ function postDisplayParts(post){
   let quote=String(post?.quote||post?.aussage||"").trim()||parsed.quote;
   if(!quote)quote=String(findQuote(post)||"").trim();
   if(!quote)quote=normalizeStatementText(post?.statement||"");
-  const fazit=String(post?.fazit||post?.conclusion||post?.fazitText||post?.summary||"").trim()||parsed.fazit;
+  const fazit=String(post?.fazit||post?.conclusion||post?.fazitText||post?.summary||"").replace(/<!--\s*QUELLEN_IMPORT[\s\S]*?-->/gi,"").replace(/<!--[\s\S]*?-->/g,"").trim()||parsed.fazit;
   quote=quote.replace(/(?:^|\n)\s*(?:🌙\s*)?(?:\*\*)?Fazit(?:\*\*)?\s*:[\s\S]*$/i,"").trim();
   return{speaker,quote:normalizeStatementText(quote),fazit:normalizeStatementText(fazit)};
 }
