@@ -14,21 +14,12 @@ tags:
   - "#Wahrheit"
 source: "📝 Ṣaḥīḥ Muslim, Kitāb al-Īmān, Bāb Taḥrīm al-Kibr wa-Bayānuh, Ḥadīṯ Nr. 91."
 links:
-  - label: "Quelle Nr. 14"
+  - label: "Quelle"
     url: "https://dar-al-tawhid.de/q/14/"
-  - label: "Islamweb"
-    url: "https://www.islamweb.net/ar/library/content/1/202/"
-  - label: "Dorar"
-    url: "https://dorar.net/hadith/sharh/7763"
 logo: "logo-black.png"
 ---
 
-🖋️ **Der Prophet ﷺ sagte:**
+🖋️ 𝐃𝐄𝐑 𝐏𝐑𝐎𝐏𝐇𝐄𝐓 ﷺ 𝐬𝐚𝐠𝐭𝐞:
+„𝐇𝐨𝐜𝐡𝐦𝐮𝐭 ist, die 𝐖𝐚𝐡𝐫𝐡𝐞𝐢𝐭 𝐚𝐛𝐳𝐮𝐥𝐞𝐡𝐧𝐞𝐧 und die Menschen 𝐠𝐞𝐫𝐢𝐧𝐠 𝐳𝐮 𝐬𝐜𝐡ä𝐭𝐳𝐞𝐧.“
 
-„**Hochmut** ist, die **Wahrheit abzulehnen** und die Menschen **gering zu schätzen**.“
-
-📝 **Quelle:** Ṣaḥīḥ Muslim, Kitāb al-Īmān, Ḥadīṯ Nr. 91.
-
-🔗 **Quelle:** dar-al-tawhid.de/q/14
-
-🌙 **Fazit:** Wer die Wahrheit erkennt und sie wegen Ego ablehnt, trägt Hochmut im Herzen.
+🌙 𝐅𝐚𝐳𝐢𝐭: Wer die Wahrheit erkennt und sie wegen Ego ablehnt, trägt Hochmut im Herzen.
