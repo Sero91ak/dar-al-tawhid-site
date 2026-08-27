@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v678";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v680";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -19089,38 +19089,63 @@ html[data-theme="light"] body.is-scholar-route{
 }
 </style>
 
-<style id="post-structure-v678">
-.post-reader{display:flex;flex-direction:column;gap:12px;padding-bottom:8px}
-.post-quote-card{border:1px solid color-mix(in srgb,var(--gold2,var(--theme-accent)) 34%,transparent);border-radius:22px;background:linear-gradient(180deg,color-mix(in srgb,var(--card,#12100c) 88%,#000 12%),color-mix(in srgb,var(--bg,#080806) 86%,#050504 14%));box-shadow:inset 0 1px 0 rgba(255,248,220,.08),0 10px 28px rgba(0,0,0,.22);padding:clamp(16px,4.2vw,22px)}
-.post-quote-card__inner{display:grid;gap:12px}
-.post-quote-speaker{display:flex;align-items:center;gap:8px;color:var(--gold2);font-family:var(--font-ui,var(--sans));font-size:12.5px;font-weight:750}
-.post-quote-card .statement,.post-reader .post-quote-card .statement{border:none!important;background:transparent!important;box-shadow:none!important;padding:0!important;margin:0!important;font-family:var(--serif)!important;font-size:clamp(18.5px,4.6vw,23px)!important;line-height:1.58!important;color:var(--cream,#f4ead2)!important}
-.post-fazit-card{border:1px solid color-mix(in srgb,var(--gold2) 18%,transparent);border-radius:18px;background:rgba(255,255,255,.03);padding:10px 12px 12px}
-.post-fazit-toggle{width:100%;display:flex;align-items:center;gap:8px;border:0;background:transparent;color:var(--gold2);font-family:var(--font-ui,var(--sans));font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:4px 0 8px;cursor:pointer}
-.post-fazit-toggle i{margin-left:auto;font-style:normal;opacity:.7}
-.post-fazit-body{color:var(--muted,#c9c0a8);font-size:14.5px;line-height:1.55;font-weight:550}
-.post-source-meta{display:grid;gap:8px;margin:4px 0 10px}
-.post-source-meta dt{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted2);margin:0}
-.post-source-meta dd{margin:2px 0 0;color:var(--cream);font-size:14px;line-height:1.45}
-.post-after-links{display:grid!important;gap:0!important}
-.post-after-links a.post-source-link-row{display:grid!important;grid-template-columns:28px minmax(0,1fr) 18px;align-items:center;gap:10px;width:100%;border:0!important;border-radius:0!important;border-bottom:1px solid color-mix(in srgb,var(--gold2) 16%,transparent)!important;background:transparent!important;padding:11px 2px!important;min-height:52px!important;font-weight:650!important}
-.post-after-links a.post-source-link-row:last-child{border-bottom:0!important}
-.post-source-link-ico{display:grid;place-items:center;width:28px;height:28px;border-radius:9px;border:1px solid color-mix(in srgb,var(--gold2) 28%,transparent);color:var(--gold2);font-size:10px;font-weight:900}
-.post-source-link-txt{display:grid;gap:2px;min-width:0}
-.post-source-link-txt b{font-size:13.5px;color:var(--cream);font-weight:750;line-height:1.2}
-.post-source-link-txt small{font-size:11px;color:var(--muted);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.post-source-link-chev{color:var(--gold2);opacity:.7;font-size:18px}
-.post-share-deck{margin-top:14px;padding-top:12px;border-top:1px solid color-mix(in srgb,var(--gold2) 14%,transparent)}
-.post-share-deck-title{font-size:9px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);text-align:center;margin:0 0 10px}
-.post-share-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;justify-items:center}
-.post-share-ico{width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);display:grid;place-items:center;padding:0;cursor:pointer;box-shadow:none}
-.post-share-ico svg{width:22px;height:22px}
-.post-share-ico.ig,.post-share-ico.tg,.post-share-ico.wa{border:0;background:transparent}
-.post-share-ico.ig svg,.post-share-ico.tg svg,.post-share-ico.wa svg{width:28px;height:28px;filter:none!important}
-.post-meta-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-.post-meta-actions .action-btn{min-height:40px;border-radius:14px;font-size:13px;font-weight:700}
-.post-after-nav{margin-top:8px;margin-bottom:calc(12px + env(safe-area-inset-bottom,0px))}
-@media(max-width:700px){.post-share-grid{gap:8px}.post-quote-card{padding:15px 14px}}
+<style id="post-structure-v680">
+/* Ein Rahmen: Aussage, direkt darunter Quelle, dann Fazit. Teilen unverändert kompakt. */
+.post-reader-main .post-reader-cite{
+  margin:12px 0 0;
+  padding-top:10px;
+  border-top:1px solid color-mix(in srgb,var(--gold2,var(--theme-accent)) 28%,transparent);
+  color:var(--gold2);
+  font-family:var(--serif);
+  font-size:clamp(13.5px,3.5vw,15.5px);
+  line-height:1.48;
+  font-weight:650;
+}
+.post-reader-main .post-reader-cite b{
+  display:block;
+  font-family:var(--font-ui,var(--sans));
+  font-size:9px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--muted2);
+  font-weight:900;
+  margin-bottom:4px;
+}
+.post-reader-main .post-key-message{
+  margin-top:12px!important;
+  padding:10px 0 0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  border-top:1px solid color-mix(in srgb,var(--gold2,var(--theme-accent)) 22%,transparent)!important;
+}
+.post-reader-main .post-key-message h3{
+  font-size:11px!important;
+  letter-spacing:.14em!important;
+  text-transform:uppercase!important;
+  color:var(--gold2)!important;
+  margin:0 0 6px!important;
+  font-weight:800!important;
+}
+.post-reader-main .post-key-message p,
+.post-reader-main .post-key-message .post-fazit-body{
+  color:var(--muted,#c9c0a8);
+  font-size:14.5px;
+  line-height:1.5;
+  margin:0;
+  font-weight:550;
+}
+.post-reader-main .post-after-links-wrap{margin-top:8px}
+.post-reader-main .statement,
+.post-reader .post-reader-main .statement{
+  border:none!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:0!important;
+  margin:0!important;
+  border-radius:0!important;
+}
 </style>
 
 
@@ -20366,14 +20391,15 @@ function postSourceLinkMeta(link){
   return{label,url,sub:host||(isPdf?"Scan-Datei":"Nachweis"),icon};
 }
 function renderPostQuoteCard(post,parts){
-  const speaker=parts.speaker||post.scholar||"";
-  const speakerHtml=speaker?`<div class="post-quote-speaker"><span class="post-quote-pen" aria-hidden="true">🖋️</span><span>${esc(speaker)} sagte:</span></div>`:"";
-  return `<section id="postStatement" class="post-quote-card"><div class="post-quote-card__inner">${speakerHtml}<div class="statement">${formatText(parts.quote||"")}</div></div></section>`;
+  return `<section id="postStatement" class="statement">${formatText(parts.quote||"")}</section>`;
+}
+function renderPostSourceCite(post,sourceText,links,hasScan){
+  const src=String(sourceText||post.source||"").trim()||"Keine Quelle hinterlegt.";
+  return `<div class="post-reader-cite"><b>Quelle</b><div data-post-after-source>${esc(src)}</div></div>${renderPostSourceLinksSection(links,hasScan)}`;
 }
 function renderPostFazitCard(parts){
   if(!parts.fazit)return"";
-  const open=!POST_FAZIT_START_COLLAPSED;
-  return `<section class="post-fazit-card" data-post-fazit ${open?"":"data-collapsed=\"true\""}><button type="button" class="post-fazit-toggle" data-post-fazit-toggle aria-expanded="${open?"true":"false"}"><span aria-hidden="true">🌙</span><b>Fazit</b><i data-post-fazit-chev>${open?"−":"+"}</i></button><div class="post-fazit-body" ${open?"":"hidden"}>${formatText(parts.fazit)}</div></section>`;
+  return `<section class="post-key-message" data-post-fazit><h3>🌙 Fazit</h3><div class="post-fazit-body">${formatText(parts.fazit)}</div></section>`;
 }
 function bindPostFazitToggle(){
   document.querySelectorAll("[data-post-fazit-toggle]").forEach(btn=>{
@@ -25253,7 +25279,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v678";
+const APP_BUILD_ID="app-shell-v680";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -25397,24 +25423,15 @@ function renderContentSourcePanel(sourceText,links){
   return `<section class="post-after-panel source-area-panel"><div class="post-after-head"><div class="post-after-kicker">Quellenbereich</div><span class="post-after-state">✓ Quelle</span></div><div class="post-after-source" data-post-after-source>${esc(source)}</div>${renderPostSourceLinksSection(linkList,hasScan)}</section>`;
 }
 function renderPostAfterPanel(post,{slideIndex=0}={}){
-  const slide=isSlidePost(post)?activeSlideForPost(post,slideIndex):null;
-  const sourceText=(slide?.source||post.source||"Keine Quelle hinterlegt.").trim();
-  const links=mergeSlideAndPostLinks(slide?.links,post.links||[]);
-  const hasScan=links.some(link=>/scan|pdf/i.test(String(link.label||""))||/\.pdf|#page=/i.test(String(link.url||link)));
-  const s=sourceStatus(post);
   const url=postUrl(post);
   const text=buildShareText(post,"quote-source");
   const message=buildPostShareMessage(post,"quote-source");
   const shareTitle=post.title||"DAR AL TAWḤID";
-  const encTitle=encodeURIComponent(shareTitle);
-  const encUrl=encodeURIComponent(url);
-  const encText=encodeURIComponent(text);
-  const encMessage=encodeURIComponent(message);
-  const status=postStatusCopy(post);
-  const imageAction=`<button class="post-share-ico image-post" data-image-post-open="${esc(post.id)}" type="button" aria-label="Bildbeitrag" title="Bild">${compactShareIcon("image")||`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="3" fill="none" stroke="#f0d98f" stroke-width="2"/><path d="M7 15l3.1-3.2 2.4 2.5 1.7-1.8L18 16" fill="none" stroke="#f0d98f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.25" fill="#f0d98f"/></svg>`}</button>`;
+  const shareUrl=encodeURIComponent(url);
+  const shareText=encodeURIComponent(message);
+  const imageAction=`<button class="share-btn image-post" data-image-post-open="${esc(post.id)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="3" fill="none" stroke="#f0d98f" stroke-width="2"/><path d="M7 15l3.1-3.2 2.4 2.5 1.7-1.8L18 16" fill="none" stroke="#f0d98f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.25" fill="#f0d98f"/></svg><span>Bild</span></button>`;
   const nav=renderPostNavigation(post).replace('class="nav-posts"','class="post-after-nav"').replace('class="post-nav-preview"','class="post-after-nav"');
-  const slideAttrs=isSlidePost(post)?` data-slide-after-panel data-active-slide="${slideIndex}"`:"";
-  return `<section class="post-after-panel post-source-stack"${slideAttrs}><div class="post-after-head"><div class="post-after-kicker">Quellenbereich</div><span class="post-after-state">${s.sourceOk?"✓":"!"} Quelle</span></div><dl class="post-source-meta"><div><dt>Quelle</dt><dd class="post-after-source" data-post-after-source>${esc(sourceText)}</dd></div><div><dt>Status</dt><dd>${esc(status)}</dd></div></dl>${renderPostSourceLinksSection(links,hasScan)}</section><section class="post-share-deck share-panel"><div class="post-share-deck-title">Beitrag weitergeben</div><div class="post-share-grid post-after-share"><button class="post-share-ico share-btn ig" data-share-instagram data-share-text="${esc(encMessage)}" type="button" aria-label="Instagram" title="Instagram">${compactShareIcon("instagram")}</button><a class="post-share-ico share-btn tg" href="https://t.me/share/url?url=${encUrl}&text=${encText}" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">${compactShareIcon("telegram")}</a><a class="post-share-ico share-btn wa" href="https://wa.me/?text=${encMessage}" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">${compactShareIcon("whatsapp")}</a><button class="post-share-ico native" data-share-native data-share-title="${esc(encTitle)}" data-share-text="${esc(encText)}" data-share-url="${esc(encUrl)}" type="button" aria-label="Teilen" title="Teilen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg></button>${imageAction}<button class="post-share-ico link" data-share-copy data-share-text="${esc(encText)}" type="button" aria-label="Kopieren" title="Kopieren"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="7" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2"/><rect x="5" y="4" width="11" height="13" rx="2" fill="none" stroke="#f0d98f" stroke-width="2" opacity=".7"/></svg></button></div></section><div class="post-meta-actions post-after-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${nav}`;
+  return `<section class="post-after-panel"><div class="post-after-share-title">Beitrag weitergeben</div><div class="share-panel post-after-share"><button class="share-btn native" data-share-native data-share-title="${esc(shareTitle)}" data-share-text="${esc(text)}" data-share-url="${esc(url)}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .17 1L8.9 8.6a3 3 0 1 0 0 6.8l6.27 3.6A3 3 0 1 0 16 17.7l-6.2-3.56a3.1 3.1 0 0 0 0-4.28L16 6.3c.53.97 1.56 1.7 2 1.7Z" fill="#d8e7ff"/></svg><span>Teilen</span></button><a class="share-btn tg" href="https://t.me/share/url?url=${shareUrl}&text=${shareText}" target="_blank" rel="noopener">${compactShareIcon("telegram")}<span>Telegram</span></a><a class="share-btn wa" href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener">${compactShareIcon("whatsapp")}<span>WhatsApp</span></a><button class="share-btn ig" data-share-instagram data-share-text="${esc(message)}" type="button">${compactShareIcon("instagram")}<span>Instagram</span></button>${imageAction}<button class="share-btn link" data-share-copy data-share-text="${esc(text)}" type="button"><span>Kopieren</span></button></div><div class="post-after-actions"><button id="saveBtn" class="action-btn ${isSaved(post.id)?"active":""}" type="button">${isSaved(post.id)?"♥ Gespeichert":"♡ Speichern"}</button><button id="reportBtn" class="action-btn" type="button">Fehler melden</button></div>${nav}</section>`;
 }
 function shareLinksForPost(post){
   // Layout-Regel: Teilen-Panel immer direkt nach Quellenbereich platzieren.
@@ -25433,7 +25450,7 @@ function isSlidePost(post){return window.DARSlidePostParser?window.DARSlidePostP
 function getPostSlides(post){ensurePostSlidesHydrated(post);return ensurePostSlidesArray(post?.slides).map(normalizeSlideEntry).filter(s=>s&&(s.title||s.text||s.quote||s.explanation||s.source||Array.isArray(s.links)&&s.links.length))}
 function mergeSlideAndPostLinks(slideLinks,postLinks){const seen=new Set();const out=[];[...(Array.isArray(slideLinks)?slideLinks:[]),...(Array.isArray(postLinks)?postLinks:[])].forEach(link=>{const url=String(link?.url||link||"").trim();if(!url||seen.has(url))return;seen.add(url);out.push({label:String(link?.label||"Quelle").trim()||"Quelle",url})});return out}
 function activeSlideForPost(post,index=0){const slides=getPostSlides(post);if(!slides.length)return null;const idx=Math.max(0,Math.min(slides.length-1,Number(index)||0));return slides[idx]||null}
-function renderAfterPanelLinks(links){return (links||[]).map(link=>{const meta=postSourceLinkMeta(link);if(!meta.url)return"";return `<a class="post-source-link-row" href="${esc(meta.url)}" target="_blank" rel="noopener"><span class="post-source-link-ico" aria-hidden="true">${esc(meta.icon)}</span><span class="post-source-link-txt"><b>${esc(meta.label)}</b><small>${esc(meta.sub)}</small></span><span class="post-source-link-chev" aria-hidden="true">›</span></a>`}).join("")}
+function renderAfterPanelLinks(links){return (links||[]).map(link=>{const label=link.label||"Quelle";const url=link.url||link;return `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(label)}</a>`}).join("")}
 function renderSlideMedia(slide){const img=String(slide?.image||"").trim();const pdf=String(slide?.pdf||"").trim();let html="";if(img)html+=`<div class="post-slide-media"><img src="${esc(img)}" alt="Quellen-Scan" loading="lazy"></div>`;if(pdf)html+=`<div class="post-slide-media"><a class="post-slide-pdf-link" href="${esc(pdf)}" target="_blank" rel="noopener">→ PDF-Seite öffnen</a></div>`;return html}
 function renderSlideLinks(slide){const links=Array.isArray(slide?.links)?slide.links:[];const clean=links.filter(link=>link&&String(link.url||"").trim());if(!clean.length)return"";return `<div class="post-slide-links">${clean.map(link=>`<a href="${esc(link.url)}" target="_blank" rel="noopener">${esc(link.label||"→ Quelle")}</a>`).join("")}</div>`}
 function renderPostSlides(post){
@@ -25477,10 +25494,16 @@ function renderPost(id){
   const related=getRelatedPosts(post);
   const narrator=postNarratorLine(post);
   const parts=postDisplayParts(post);
+  const slide=isSlidePost(post)?activeSlideForPost(post,0):null;
+  const sourceText=(slide?.source||post.source||"Keine Quelle hinterlegt.").trim();
+  const links=mergeSlideAndPostLinks(slide?.links,post.links||[]);
+  const hasScan=links.some(link=>/scan|pdf/i.test(String(link.label||""))||/\.pdf|#page=/i.test(String(link.url||link)));
   const body=isSlidePost(post)?renderPostSlides(post):renderPostQuoteCard(post,parts);
+  const cite=renderPostSourceCite(post,sourceText,links,hasScan);
   const fazitBlock=isSlidePost(post)?"":renderPostFazitCard(parts);
   const intro=renderPostIntroButton(post);
-  return `<article class="article post-reader"><header id="postReadStart" class="post-reader-title"><div class="kicker">Beitrag</div><h2>${esc(post.title)}</h2></header>${narrator}${intro}<section class="post-reader-main">${body}</section>${fazitBlock}${renderPostAfterPanel(post)}${renderRelatedCompact(related,"Ähnliche Beiträge")}</article>`;
+  const slideAttrs=isSlidePost(post)?` data-slide-after-panel data-active-slide="0"`:"";
+  return `<article class="article post-reader"><header id="postReadStart" class="post-reader-title"><div class="kicker">Beitrag</div><h2>${esc(post.title)}</h2></header>${narrator}${intro}<section class="post-reader-main"${slideAttrs}>${body}${cite}${fazitBlock}</section>${renderPostAfterPanel(post)}${renderRelatedCompact(related,"Ähnliche Beiträge")}</article>`;
 }
 function applyHomeFilters(){const run=()=>{const q=($("homeSearchInput")?.value||"").trim().toLowerCase();const cat=$("homeFilterCat")?.value||"";const scholar=$("homeFilterScholar")?.value||"";const book=$("homeFilterBook")?.value||"";const typ=$("homeFilterType")?.value||"";const block=$("homeSearchBlock"),results=$("homeSearchResults"),count=$("homeSearchCount");if(!block||!results||!count)return;const btn=$("advancedFilterBtn"),panel=$("homeFilterPanel");if(panel&&(cat||scholar||book||typ)){panel.classList.add("advanced-visible");panel.classList.remove("advanced-hidden");if(btn){btn.classList.add("active");btn.textContent="Filter ausblenden"}}const active=q||cat||scholar||book||typ;if(!active){block.style.display="none";results.innerHTML="";count.textContent="0 Treffer";homeSearchPostIds=[];if(typeof updateHomeActiveFilterChips==="function")updateHomeActiveFilterChips();return}const filteredPosts=posts.filter(post=>{const hay=[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ").toLowerCase();return(!q||hay.includes(q))&&(!cat||normalizePostCategory(post.category)===normalizePostCategory(cat))&&(!scholar||postMatchesScholarKey(post,scholar))&&(!book||post.book===book)&&(!typ||sourceType(post)===typ)});homeSearchPostIds=filteredPosts.map(p=>String(p.id));const filteredDuas=(!cat&&!scholar&&!book&&!typ)?DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q)):[];block.style.display="block";count.textContent=`${filteredPosts.length+filteredDuas.length} Treffer`;results.innerHTML=(filteredPosts.map(p=>filteredPostCard(p,q)).join("")+filteredDuas.map(duaCard).join(""))||`<div class="empty">Keine passenden Treffer gefunden.</div>`;if(typeof updateHomeActiveFilterChips==="function")updateHomeActiveFilterChips();bindEvents()};if(window.DARScrollManager?.withScrollPreserved)window.DARScrollManager.withScrollPreserved(run);else run()}
 function resolveRenderScroll(scrollBefore,sameRoute,fromGesture,ayahJump){
