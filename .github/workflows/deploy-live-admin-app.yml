@@ -57,13 +57,9 @@ jobs:
             echo "$html" | grep -F "Komplettes Markdown einfügen" >/dev/null || { echo "retry $i: admin markdown field"; sleep 8; continue; }
             echo "$html" | grep -F "checkNewPostBtn" >/dev/null || { echo "retry $i: admin check button"; sleep 8; continue; }
             echo "$html" | grep -F 'id="uploadPostBtn"' >/dev/null || { echo "retry $i: admin publish button"; sleep 8; continue; }
-            echo "$html" | grep -F "KI-Video-Studio" >/dev/null || { echo "retry $i: menu"; sleep 8; continue; }
+            echo "$html" | grep -F "KI-Video-Studio" >/dev/null && { echo "retry $i: studio still in admin html"; sleep 8; continue; }
             echo "$html$sw" | grep -F "dar-admin-single-mode-v67" >/dev/null || { echo "retry $i: sw"; sleep 8; continue; }
-            echo "$studio" | grep -F "Textbeitrag einfügen" >/dev/null || { echo "retry $i: studio text"; sleep 8; continue; }
-            echo "$studio" | grep -F "Bild hochladen" >/dev/null || { echo "retry $i: upload"; sleep 8; continue; }
-            echo "$studio" | grep -F "Video-Beitrag erstellen" >/dev/null || { echo "retry $i: create"; sleep 8; continue; }
-            echo "$studio" | grep -F "Server-Aufträge" >/dev/null || { echo "retry $i: jobs"; sleep 8; continue; }
-            echo "$studio" | grep -F "resumeJobBtn" >/dev/null || { echo "retry $i: resume"; sleep 8; continue; }
+            echo "$studio" | grep -F "Dieser Bereich wurde entfernt" >/dev/null || { echo "retry $i: studio removed page"; sleep 8; continue; }
             ok=1
             break
           done
@@ -71,4 +67,4 @@ jobs:
             echo "::error::Live Admin UI verify failed after retries"
             exit 1
           fi
-          echo "Live Admin v61 + KI-Video-Studio Resume/Compose-Fallback verified."
+          echo "Live Admin verified (KI-Video-Studio entfernt)."

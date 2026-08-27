@@ -89,11 +89,13 @@
     {
       "id": "admin-remove-video-studio-ui-2026-08-27",
       "approvedBy": "user-explicit-remove-ki-video-studio-from-admin-app",
-      "reason": "Nutzer: KI-Video-Studio aus der DAR Admin App entfernen (Menü/Start), Datei bleibt für Deploy-Verify.",
+      "reason": "Nutzer: KI-Video-Studio vollständig aus der DAR Admin App entfernen (kein Menü, keine Studio-Seite, Deploy-Verify ohne Studio).",
       "paths": [
         "content/admin/change-scope-lock.json",
         "admin/index.html",
-        "admin/sw.js"
+        "admin/sw.js",
+        "admin/video-studio.html",
+        ".github/workflows/deploy-live-admin-app.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     },
