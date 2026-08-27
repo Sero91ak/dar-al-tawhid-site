@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v680";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v681";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -19089,17 +19089,67 @@ html[data-theme="light"] body.is-scholar-route{
 }
 </style>
 
-<style id="post-structure-v680">
-/* Ein Rahmen: Aussage, direkt darunter Quelle, dann Fazit. Teilen unverändert kompakt. */
+<style id="post-structure-v681">
+/* Bibliothek: Aussage als Zitat-Hauptstück, Quelle/Fazit sekundär. Kein Extra-Kasten. */
+.post-reader-main .statement.post-aussage,
+.post-reader .post-reader-main .statement.post-aussage,
+html[data-theme] .post-reader-main .statement.post-aussage{
+  position:relative!important;
+  display:block!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  margin:0 0 4px!important;
+  padding:6px 0 14px 16px!important;
+  text-align:left!important;
+  color:var(--cream,#fff6e4)!important;
+  font-family:var(--serif)!important;
+  font-size:clamp(23px,5.6vw,31px)!important;
+  line-height:1.42!important;
+  letter-spacing:.012em!important;
+  font-weight:650!important;
+}
+.post-reader-main .statement.post-aussage:before{
+  content:"";
+  position:absolute;
+  left:0;top:8px;bottom:10px;
+  width:2.5px;
+  border-radius:99px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--gold2,#efd78e) 92%,#fff 8%),color-mix(in srgb,var(--gold2,#efd78e) 18%,transparent));
+  box-shadow:0 0 12px color-mix(in srgb,var(--gold2,#efd78e) 35%,transparent);
+}
+.post-aussage-kicker{
+  display:block;
+  position:relative;
+  z-index:1;
+  margin:0 0 8px 0;
+  font-family:var(--font-ui,var(--sans));
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--gold2,#efd78e);
+}
+.post-aussage-text{
+  position:relative;
+  z-index:1;
+  padding-left:18px;
+  color:var(--cream,#fff8e8);
+  text-wrap:balance;
+}
+.post-reader-main .statement.post-aussage p{margin:0 0 .55em!important}
+.post-reader-main .statement.post-aussage p:last-child{margin-bottom:0!important}
 .post-reader-main .post-reader-cite{
-  margin:12px 0 0;
-  padding-top:10px;
-  border-top:1px solid color-mix(in srgb,var(--gold2,var(--theme-accent)) 28%,transparent);
-  color:var(--gold2);
+  margin:2px 0 0;
+  padding:10px 0 0 16px;
+  border-top:1px solid color-mix(in srgb,var(--gold2,var(--theme-accent)) 18%,transparent);
+  color:color-mix(in srgb,var(--gold2,#d4c08a) 70%,var(--muted,#b8ae96) 30%);
   font-family:var(--serif);
-  font-size:clamp(13.5px,3.5vw,15.5px);
-  line-height:1.48;
-  font-weight:650;
+  font-size:clamp(12.5px,3.2vw,14.5px);
+  line-height:1.45;
+  font-weight:500;
+  font-style:italic;
 }
 .post-reader-main .post-reader-cite b{
   display:block;
@@ -19109,43 +19159,36 @@ html[data-theme="light"] body.is-scholar-route{
   text-transform:uppercase;
   color:var(--muted2);
   font-weight:900;
+  font-style:normal;
   margin-bottom:4px;
 }
 .post-reader-main .post-key-message{
-  margin-top:12px!important;
-  padding:10px 0 0!important;
+  margin-top:10px!important;
+  padding:10px 0 0 16px!important;
   border:0!important;
   background:transparent!important;
   box-shadow:none!important;
   border-radius:0!important;
-  border-top:1px solid color-mix(in srgb,var(--gold2,var(--theme-accent)) 22%,transparent)!important;
+  border-top:1px solid color-mix(in srgb,var(--gold2,var(--theme-accent)) 14%,transparent)!important;
 }
 .post-reader-main .post-key-message h3{
-  font-size:11px!important;
+  font-size:10px!important;
   letter-spacing:.14em!important;
   text-transform:uppercase!important;
-  color:var(--gold2)!important;
+  color:var(--muted2)!important;
   margin:0 0 6px!important;
   font-weight:800!important;
 }
 .post-reader-main .post-key-message p,
 .post-reader-main .post-key-message .post-fazit-body{
-  color:var(--muted,#c9c0a8);
-  font-size:14.5px;
-  line-height:1.5;
+  color:var(--muted,#a9a18c);
+  font-size:14px;
+  line-height:1.52;
   margin:0;
-  font-weight:550;
+  font-weight:500;
+  font-family:var(--font-ui,var(--sans));
 }
-.post-reader-main .post-after-links-wrap{margin-top:8px}
-.post-reader-main .statement,
-.post-reader .post-reader-main .statement{
-  border:none!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  padding:0!important;
-  margin:0!important;
-  border-radius:0!important;
-}
+.post-reader-main .post-after-links-wrap{margin-top:8px;padding-left:16px}
 </style>
 
 
@@ -20391,7 +20434,7 @@ function postSourceLinkMeta(link){
   return{label,url,sub:host||(isPdf?"Scan-Datei":"Nachweis"),icon};
 }
 function renderPostQuoteCard(post,parts){
-  return `<section id="postStatement" class="statement">${formatText(parts.quote||"")}</section>`;
+  return `<section id="postStatement" class="statement post-aussage"><div class="post-aussage-kicker">Aussage</div><div class="post-aussage-text">${formatText(parts.quote||"")}</div></section>`;
 }
 function renderPostSourceCite(post,sourceText,links,hasScan){
   const src=String(sourceText||post.source||"").trim()||"Keine Quelle hinterlegt.";
@@ -25279,7 +25322,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v680";
+const APP_BUILD_ID="app-shell-v681";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
