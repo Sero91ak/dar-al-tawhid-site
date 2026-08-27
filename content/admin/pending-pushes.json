@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-08-27T21:42:37.376Z",
+  "generated": "2026-08-27T21:43:00.544Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -804,8 +804,50 @@
       "createdAt": "2026-08-27T21:42:36.992Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-08-27T21:42:36.992Z",
-      "lastError": "Push wartet auf Live-Verfügbarkeit",
-      "updatedAt": "2026-08-27T21:42:37.376Z"
+      "lastError": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
+      "updatedAt": "2026-08-27T21:43:00.544Z",
+      "lastCheckAt": "2026-08-27T21:43:00.243Z",
+      "liveCheck": {
+        "ok": false,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": false,
+          "postFilePublic": false,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": false,
+          "githubIndexHasPost": true,
+          "githubPostExists": true
+        },
+        "diagnosis": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
+        "indexOk": false,
+        "postOk": false,
+        "visitorUrlOk": true,
+        "attempts": 3,
+        "site": "https://dar-al-tawhid.de",
+        "postId": "recht-zurueckholen-nicht-automatisch-shirk-akbar-slides-464",
+        "indexGenerated": "2026-08-27T09:46:04.574Z",
+        "indexCount": 463,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=recht-zurueckholen-nicht-automatisch-shirk-akbar-slides-464&v=1787866967546#post/recht-zurueckholen-nicht-automatisch-shirk-akbar-slides-464",
+        "githubIndexHasPost": true,
+        "githubPostExists": true,
+        "needsIndexRepair": false,
+        "needsDeployWait": true,
+        "repair": {
+          "repaired": true,
+          "action": "index-touch",
+          "at": "2026-08-27T21:42:49.716Z",
+          "reason": "Index aktualisiert (Deploy/Cache)"
+        }
+      },
+      "attempts": 3,
+      "lastRepair": {
+        "repaired": true,
+        "action": "index-touch",
+        "at": "2026-08-27T21:42:49.716Z",
+        "reason": "Index aktualisiert (Deploy/Cache)"
+      }
     }
   }
 }
