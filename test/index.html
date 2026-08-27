@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v681";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v682";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -19190,6 +19190,83 @@ html[data-theme] .post-reader-main .statement.post-aussage{
 }
 .post-reader-main .post-after-links-wrap{margin-top:8px;padding-left:16px}
 </style>
+<style id="post-structure-v682">
+/* Katalog: Titel leiser, Aussage allein groß, Nachweise ohne Gold-Kachel */
+.post-reader-title{
+  gap:4px!important;
+  padding:2px 2px 0!important;
+}
+.post-reader-title .kicker{
+  font-size:9px!important;
+  letter-spacing:.18em!important;
+  opacity:.85;
+}
+.post-reader-title h2{
+  font-size:clamp(18px,4.4vw,24px)!important;
+  line-height:1.22!important;
+  font-weight:650!important;
+  letter-spacing:.01em!important;
+  color:color-mix(in srgb,var(--premium-title,var(--cream)) 72%,var(--muted2) 28%)!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:unset!important;
+  display:block!important;
+  -webkit-line-clamp:unset!important;
+}
+.post-reader-title.is-echo h2{
+  position:absolute!important;
+  width:1px!important;height:1px!important;
+  padding:0!important;margin:-1px!important;
+  overflow:hidden!important;clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;border:0!important;
+}
+.post-reader-speaker{
+  font-size:clamp(12.5px,3vw,14.5px)!important;
+  font-weight:600!important;
+  margin:4px 2px 12px!important;
+  gap:6px 8px!important;
+  color:var(--muted,#c9c0a8)!important;
+}
+.post-reader-speaker__label{
+  font-size:9px!important;
+  letter-spacing:.16em!important;
+}
+.post-reader-speaker__name{
+  font-size:clamp(13px,3.2vw,15px)!important;
+  font-weight:650!important;
+  color:color-mix(in srgb,var(--gold2,#efd78e) 55%,var(--cream) 45%)!important;
+}
+.post-reader-speaker__said{display:none!important}
+.post-reader-main .post-after-links-wrap.is-quiet{
+  margin-top:6px;
+  padding-left:16px;
+}
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-toggle{
+  display:inline-flex!important;
+  width:auto!important;
+  max-width:100%!important;
+  align-items:center!important;
+  gap:4px!important;
+  min-height:0!important;
+  padding:2px 0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  color:var(--muted2)!important;
+  font-size:11px!important;
+  font-weight:650!important;
+  letter-spacing:.04em!important;
+  text-transform:none!important;
+  text-decoration:underline;
+  text-underline-offset:3px;
+  text-decoration-color:color-mix(in srgb,var(--gold2) 28%,transparent);
+}
+.post-reader-main .post-after-links-wrap.is-quiet .post-after-links-toggle-icon{
+  display:none!important;
+}
+</style>
+
 
 
 <body class="has-bottom-nav">
@@ -20433,12 +20510,18 @@ function postSourceLinkMeta(link){
   const icon=isPdf?"PDF":(isInternal?"⌂":"⌖");
   return{label,url,sub:host||(isPdf?"Scan-Datei":"Nachweis"),icon};
 }
+function postTitleEchoesQuote(title,quote){
+  const n=s=>String(s||"").normalize("NFKD").replace(/<[^>]+>/g,"").replace(/[„“”"«»‹›'.,:;!?()\[\]]/g,"").replace(/\s+/g," ").trim().toLowerCase();
+  const t=n(title),q=n(quote);
+  if(!t||t.length<8||!q)return false;
+  return t===q||q.startsWith(t)||t.startsWith(q);
+}
 function renderPostQuoteCard(post,parts){
   return `<section id="postStatement" class="statement post-aussage"><div class="post-aussage-kicker">Aussage</div><div class="post-aussage-text">${formatText(parts.quote||"")}</div></section>`;
 }
 function renderPostSourceCite(post,sourceText,links,hasScan){
   const src=String(sourceText||post.source||"").trim()||"Keine Quelle hinterlegt.";
-  return `<div class="post-reader-cite"><b>Quelle</b><div data-post-after-source>${esc(src)}</div></div>${renderPostSourceLinksSection(links,hasScan)}`;
+  return `<div class="post-reader-cite"><b>Quelle</b><div data-post-after-source>${esc(src)}</div></div>${renderPostSourceLinksSection(links,hasScan,{quiet:true})}`;
 }
 function renderPostFazitCard(parts){
   if(!parts.fazit)return"";
@@ -25322,7 +25405,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v681";
+const APP_BUILD_ID="app-shell-v682";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -25393,7 +25476,7 @@ function postNarratorLine(post){
   const raw=String(post?.scholar||post?.speaker||"").trim();
   if(!raw)return "";
   const honorific=/رضي الله عنه|رضي الله عنها|رحمه الله|حفظه الله/.test(raw)?"":"<span class='honorific'>رضي الله عنه</span>";
-  return `<div class="post-reader-speaker"><span class="post-reader-speaker__label">Überliefert von</span><span class="post-reader-speaker__rule" aria-hidden="true"></span><span class="post-reader-speaker__name">${esc(raw)} ${honorific}</span><span class="post-reader-speaker__said">sagte:</span></div>`;
+  return `<div class="post-reader-speaker"><span class="post-reader-speaker__label">Überliefert von</span><span class="post-reader-speaker__rule" aria-hidden="true"></span><span class="post-reader-speaker__name">${esc(raw)} ${honorific}</span></div>`;
 }
 function normalizeStatementText(value){
   return String(value||"").replace(/\n{3,}/g,"\n\n").trim();
@@ -25451,13 +25534,15 @@ function renderPostNavigation(post){
   const nextPost=posts.find(p=>String(p.id)===String(next));
   return `<div class="post-nav-preview"><button type="button" class="post-nav-card" ${prevPost?`data-nav="post" data-value="${esc(prevPost.id)}"`:"disabled"}><b>← Vorheriger Beitrag</b><span>${esc(prevPost?.title||"Kein vorheriger Beitrag")}</span></button><button type="button" class="post-nav-card" ${nextPost?`data-nav="post" data-value="${esc(nextPost.id)}"`:"disabled"}><b>Nächster Beitrag →</b><span>${esc(nextPost?.title||"Kein nächster Beitrag")}</span></button></div>`;
 }
-function bindPostAfterLinksToggles(){document.querySelectorAll("[data-post-after-links-toggle]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();const wrap=btn.closest(".post-after-links-wrap");const body=wrap?.querySelector(".post-after-links-body");if(!body)return;const open=body.hasAttribute("hidden");if(open)body.removeAttribute("hidden");else body.setAttribute("hidden","");btn.setAttribute("aria-expanded",open?"true":"false");const label=btn.querySelector(".post-after-links-toggle-label");if(label)label.textContent=open?"Quelllinks schließen":"Quelllinks öffnen"}})}
-function collapsePostAfterLinks(root){const scope=root||document;const body=scope.querySelector?.(".post-after-links-body")||document.querySelector(".post-after-links-body");const btn=(scope.querySelector?.("[data-post-after-links-toggle]")||document.querySelector("[data-post-after-links-toggle]"));if(body)body.setAttribute("hidden","");if(btn){btn.setAttribute("aria-expanded","false");const label=btn.querySelector(".post-after-links-toggle-label");if(label)label.textContent="Quelllinks öffnen"}}
-function renderPostSourceLinksSection(links,hasScan){
+function bindPostAfterLinksToggles(){document.querySelectorAll("[data-post-after-links-toggle]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();const wrap=btn.closest(".post-after-links-wrap");const body=wrap?.querySelector(".post-after-links-body");if(!body)return;const quiet=wrap?.classList.contains("is-quiet");const open=body.hasAttribute("hidden");if(open)body.removeAttribute("hidden");else body.setAttribute("hidden","");btn.setAttribute("aria-expanded",open?"true":"false");const label=btn.querySelector(".post-after-links-toggle-label");if(label)label.textContent=open?(quiet?"Nachweise schließen":"Quelllinks schließen"):(quiet?"Nachweise":"Quelllinks öffnen")}})}
+function collapsePostAfterLinks(root){const scope=root||document;const body=scope.querySelector?.(".post-after-links-body")||document.querySelector(".post-after-links-body");const btn=(scope.querySelector?.("[data-post-after-links-toggle]")||document.querySelector("[data-post-after-links-toggle]"));if(body)body.setAttribute("hidden","");if(btn){btn.setAttribute("aria-expanded","false");const label=btn.querySelector(".post-after-links-toggle-label");if(label){const quiet=btn.closest(".post-after-links-wrap")?.classList.contains("is-quiet");label.textContent=quiet?"Nachweise":"Quelllinks öffnen"}}}
+function renderPostSourceLinksSection(links,hasScan,opts){
   if(!links.length&&!hasScan)return"";
+  const quiet=!!(opts&&opts.quiet);
+  const openLabel=quiet?"Nachweise":"Quelllinks öffnen";
   const linksHtml=links.length?renderAfterPanelLinks(links):'<span class="post-after-links-empty">Kein Direktlink hinterlegt.</span>';
   const scanHtml=hasScan?'<div class="post-after-scan-note" data-post-after-scan>Scan/PDF in den Quelllinks enthalten</div>':"";
-  return `<div class="post-after-links-wrap"><button type="button" class="post-after-links-toggle" data-post-after-links-toggle aria-expanded="false"><span class="post-after-links-toggle-label">Quelllinks öffnen</span><span class="post-after-links-toggle-icon" aria-hidden="true"></span></button><div class="post-after-links-body" hidden><div class="post-after-links" data-post-after-links>${linksHtml}</div>${scanHtml}</div></div>`;
+  return `<div class="post-after-links-wrap${quiet?" is-quiet":""}"${quiet?' data-quiet-links="1"':""}><button type="button" class="post-after-links-toggle" data-post-after-links-toggle aria-expanded="false"><span class="post-after-links-toggle-label">${openLabel}</span><span class="post-after-links-toggle-icon" aria-hidden="true"></span></button><div class="post-after-links-body" hidden><div class="post-after-links" data-post-after-links>${linksHtml}</div>${scanHtml}</div></div>`;
 }
 function renderContentSourcePanel(sourceText,links){
   const linkList=Array.isArray(links)?links:[];
@@ -25546,7 +25631,8 @@ function renderPost(id){
   const fazitBlock=isSlidePost(post)?"":renderPostFazitCard(parts);
   const intro=renderPostIntroButton(post);
   const slideAttrs=isSlidePost(post)?` data-slide-after-panel data-active-slide="0"`:"";
-  return `<article class="article post-reader"><header id="postReadStart" class="post-reader-title"><div class="kicker">Beitrag</div><h2>${esc(post.title)}</h2></header>${narrator}${intro}<section class="post-reader-main"${slideAttrs}>${body}${cite}${fazitBlock}</section>${renderPostAfterPanel(post)}${renderRelatedCompact(related,"Ähnliche Beiträge")}</article>`;
+  const echo=postTitleEchoesQuote(post.title,parts.quote);
+  return `<article class="article post-reader"><header id="postReadStart" class="post-reader-title${echo?" is-echo":""}"><div class="kicker">Beitrag</div><h2>${esc(post.title)}</h2></header>${narrator}${intro}<section class="post-reader-main"${slideAttrs}>${body}${cite}${fazitBlock}</section>${renderPostAfterPanel(post)}${renderRelatedCompact(related,"Ähnliche Beiträge")}</article>`;
 }
 function applyHomeFilters(){const run=()=>{const q=($("homeSearchInput")?.value||"").trim().toLowerCase();const cat=$("homeFilterCat")?.value||"";const scholar=$("homeFilterScholar")?.value||"";const book=$("homeFilterBook")?.value||"";const typ=$("homeFilterType")?.value||"";const block=$("homeSearchBlock"),results=$("homeSearchResults"),count=$("homeSearchCount");if(!block||!results||!count)return;const btn=$("advancedFilterBtn"),panel=$("homeFilterPanel");if(panel&&(cat||scholar||book||typ)){panel.classList.add("advanced-visible");panel.classList.remove("advanced-hidden");if(btn){btn.classList.add("active");btn.textContent="Filter ausblenden"}}const active=q||cat||scholar||book||typ;if(!active){block.style.display="none";results.innerHTML="";count.textContent="0 Treffer";homeSearchPostIds=[];if(typeof updateHomeActiveFilterChips==="function")updateHomeActiveFilterChips();return}const filteredPosts=posts.filter(post=>{const hay=[post.title,post.category,post.topic,post.scholar,post.book,post.source,post.statement,(post.tags||[]).join(" ")].join(" ").toLowerCase();return(!q||hay.includes(q))&&(!cat||normalizePostCategory(post.category)===normalizePostCategory(cat))&&(!scholar||postMatchesScholarKey(post,scholar))&&(!book||post.book===book)&&(!typ||sourceType(post)===typ)});homeSearchPostIds=filteredPosts.map(p=>String(p.id));const filteredDuas=(!cat&&!scholar&&!book&&!typ)?DUAS.filter(d=>[d.title,d.cat,d.occasion,d.ar,d.tr,d.de,d.src,d.type].join(" ").toLowerCase().includes(q)):[];block.style.display="block";count.textContent=`${filteredPosts.length+filteredDuas.length} Treffer`;results.innerHTML=(filteredPosts.map(p=>filteredPostCard(p,q)).join("")+filteredDuas.map(duaCard).join(""))||`<div class="empty">Keine passenden Treffer gefunden.</div>`;if(typeof updateHomeActiveFilterChips==="function")updateHomeActiveFilterChips();bindEvents()};if(window.DARScrollManager?.withScrollPreserved)window.DARScrollManager.withScrollPreserved(run);else run()}
 function resolveRenderScroll(scrollBefore,sameRoute,fromGesture,ayahJump){
