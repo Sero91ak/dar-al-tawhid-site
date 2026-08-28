@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v702";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v703";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -9956,7 +9956,7 @@ window.DAR_ANALYTICS_CONFIG={
 <noscript><link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Elsie+Swash+Caps:wght@400;900&family=Inter:wght@400;600;700;800;900&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="/assets/app-card-layout.css?v=4">
 <link rel="stylesheet" href="/assets/app-theme-surfaces.css?v=587">
-<link rel="stylesheet" href="/assets/theme-eisgold.css?v=4">
+<link rel="stylesheet" href="/assets/theme-eisgold.css?v=5">
 
 
 <style id="feature-final-v202">
@@ -11846,6 +11846,7 @@ html[data-theme="soft"]{--glow-accent:#c49aaa}
 html[data-theme="royal"]{--glow-accent:#efd78e}
 html[data-theme="bordeaux"]{--glow-accent:#d6be84}
 html[data-theme="dar-al-layl"]{--glow-accent:#d8c18b}
+html[data-theme="eisgold"]{--glow-accent:#b8963a}
 
 /* Karten & Menüzeilen — voller leuchtender Rand statt nur linker Akzent */
 .popular-row,.folder-card,.post-card,.list-card,.dua-card,.series-card,.pinned-card,
@@ -26184,7 +26185,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v702";
+const APP_BUILD_ID="app-shell-v703";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -29641,6 +29642,7 @@ html[data-theme="bordeaux"] .app,
 html[data-theme="dar-al-layl"] .app,
 html[data-theme="soft"] .app,
 html[data-theme="light"] .app,
+html[data-theme="eisgold"] .app,
 html[data-theme="aurora"] .app{
   border:0!important;border-radius:0!important;box-shadow:none!important;
   background:transparent!important;width:100%!important;max-width:100%!important;clip-path:none!important;
@@ -29830,11 +29832,102 @@ html[data-theme] #bottomNav.bottom-nav,html[data-theme] .bottom-nav{
   width:auto!important;max-width:none!important;transform:none!important;
   bottom:max(14px,calc(env(safe-area-inset-bottom,0px) + 8px))!important;
 }
+
+<style id="eisgold-parity-v703">
+/* Eisgold = gleiches Theme-System wie Nachtblau/Layl: volle Tokens, Overscroll-Solid, Tinte statt Goldschrift. Gold nur Linien. */
+html[data-theme="eisgold"]{
+  color-scheme:light!important;
+  --bg:#e8f3fb!important;--bg2:#dceaf6!important;--panel:#f5fbff!important;--card:#f7fbff!important;
+  --page-cover:#e8f3fb!important;--page-cover-mid:#dceaf6!important;
+  --outer-bg-flat:#e8f3fb!important;
+  --theme-page-bg:#e8f3fb!important;
+  --dar-edge-fill:#e8f3fb!important;
+  --dar-boot-fill:#e8f3fb!important;
+  --gold:#b8963a!important;
+  --gold2:#142033!important;
+  --bronze:#3d4c60!important;
+  --cream:#142033!important;
+  --text:#142033!important;
+  --muted:#3d4c60!important;
+  --muted2:#5a6a7c!important;
+  --line:rgba(184,150,58,.34)!important;
+  --line2:rgba(184,150,58,.18)!important;
+  --premium-label:#142033!important;
+  --premium-title:#142033!important;
+  --premium-body:#142033!important;
+  --premium-pill-text:#142033!important;
+  --premium-border:rgba(184,150,58,.34)!important;
+  --premium-pill-border:rgba(184,150,58,.36)!important;
+  --premium-pill-bg:linear-gradient(135deg,rgba(255,255,255,.96),rgba(232,244,255,.88))!important;
+  --premium-bg:linear-gradient(180deg,#f5fbff 0%,#e8f3fb 70%,#d5e6f4 100%)!important;
+  --outer-bg:linear-gradient(180deg,#f5fbff 0%,#e8f3fb 70%,#d5e6f4 100%)!important;
+  --theme-text:#142033!important;
+  --theme-muted:#3d4c60!important;
+  --theme-accent:#142033!important;
+  --theme-hero-glow:rgba(20,32,51,.08)!important;
+  --theme-hero-blend-top:rgba(232,243,251,1)!important;
+  --theme-hero-blend-bottom:rgba(232,243,251,0)!important;
+  --slide-title:#142033!important;
+  --slide-text:#142033!important;
+  --slide-count:#142033!important;
+  --slide-nav-text:#142033!important;
+  --glow-accent:#b8963a!important;
+  --quran-page-bg:#e8f3fb!important;
+  --quran-text:#142033!important;
+}
+html[data-theme="eisgold"],
+html[data-theme="eisgold"] body,
+html[data-theme="eisgold"].is-standalone-pwa,
+html[data-theme="eisgold"].is-standalone-pwa body,
+html[data-theme="eisgold"] #appRoot,
+html[data-theme="eisgold"] #appShell{
+  background:#e8f3fb!important;
+  background-color:#e8f3fb!important;
+  background-image:none!important;
+  color:#142033!important;
+}
+html[data-theme="eisgold"] .app{background:transparent!important;color:#142033!important}
+html[data-theme="eisgold"] .prayer-overview__time-hour,
+html[data-theme="eisgold"] .prayer-overview__time-line,
+html[data-theme="eisgold"] .prayer-overview__time-label,
+html[data-theme="eisgold"] .prayer-overview__today-label,
+html[data-theme="eisgold"] .header-prayer-hour,
+html[data-theme="eisgold"] .header-prayer-name,
+html[data-theme="eisgold"] .isnad-label,
+html[data-theme="eisgold"] .daily-label,
+html[data-theme="eisgold"] .recommended-label,
+html[data-theme="eisgold"] .quran-home-teaser-label,
+html[data-theme="eisgold"] .eyebrow,
+html[data-theme="eisgold"] .kicker,
+html[data-theme="eisgold"] .section-kicker,
+html[data-theme="eisgold"] .brand small,
+html[data-theme="eisgold"] .gold,
+html[data-theme="eisgold"] .statement,
+html[data-theme="eisgold"] .statement em,
+html[data-theme="eisgold"] .statement strong,
+html[data-theme="eisgold"] .script-accent,
+html[data-theme="eisgold"] .dua-arabic,
+html[data-theme="eisgold"] .dua-trans,
+html[data-theme="eisgold"] .dua-de,
+html[data-theme="eisgold"] .source-row,
+html[data-theme="eisgold"] .source-strong h3,
+html[data-theme="eisgold"] .source-strong h4,
+html[data-theme="eisgold"] .premium-title,
+html[data-theme="eisgold"] .premium-label{
+  color:#142033!important;
+  -webkit-text-fill-color:#142033!important;
+}
+html[data-theme="eisgold"] .isnad-label:after,
+html[data-theme="eisgold"] .gold-divider,
+html[data-theme="eisgold"] .brand-main h1.brand-title-refined::after{
+  background:linear-gradient(90deg,transparent,#b8963a,#d4b060,#b8963a,transparent)!important;
+}
 </style>
+
 <script>
 (function(){
   /* v661 · Keine Inline-Hintergrundfarben mehr — die klebten (z.B. Royal-Blau) über Theme-Wechsel. */
-  var THEME_SOLID={dark:"#050706",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605"};
+  var THEME_SOLID={dark:"#050706",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605",eisgold:"#e8f3fb"};
   var CLEAR_PROPS=["background","background-color","background-image","backdrop-filter","-webkit-backdrop-filter"];
   var CLEAR_SELS=[
     "html",
@@ -29861,7 +29954,9 @@ html[data-theme] #bottomNav.bottom-nav,html[data-theme] .bottom-nav{
   ];
   function hexOf(raw){
     if(!raw)return "";
-    var m=String(raw).trim().match(/#[0-9a-fA-F]{3,8}/);
+    var s=String(raw).trim();
+    if(/gradient/i.test(s))return "";
+    var m=s.match(/^#[0-9a-fA-F]{3,8}$/);
     return m?m[0]:"";
   }
   function fillColor(){
