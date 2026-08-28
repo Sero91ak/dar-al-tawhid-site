@@ -20267,26 +20267,13 @@ function bindThemeControls(){document.querySelectorAll("[data-theme-select]").fo
 
 const DAR_APP_ICON_KEY="darAppIconV1";
 const DAR_APP_ICONS=[
-  {id:"creme-navy",label:"Creme & Navy",ios:""},
-  {id:"emblem-nachtblau",label:"Emblem Nachtblau",ios:"AppIconEmblemNachtblau"},
-  {id:"emblem-schwarzgold",label:"Emblem Schwarzgold",ios:"AppIconEmblemSchwarzgold"},
-  {id:"emblem-creme-petrol",label:"Emblem Creme Petrol",ios:"AppIconEmblemCremePetrol"},
-  {id:"minimal-creme",label:"Minimal Creme",ios:"AppIconMinimalCreme"},
-  {id:"graphit-silber",label:"Graphit Silber",ios:"AppIconGraphitSilber"},
-  {id:"schwarz-gold",label:"Schwarz & Gold",ios:"AppIconSchwarzGold"},
-  {id:"stein-optik",label:"Stein Optik",ios:"AppIconSteinOptik"},
-  {id:"tiefes-gruen",label:"Tiefes Grün",ios:"AppIconTiefesGruen"},
-  {id:"bordeaux",label:"Bordeaux",ios:"AppIconBordeaux"},
-  {id:"elfenbein",label:"Elfenbein",ios:"AppIconElfenbein"},
-  {id:"mitternacht-blau",label:"Mitternacht Blau",ios:"AppIconMitternachtBlau"},
-  {id:"modern-name-focus-dark",label:"Name Focus Dark",ios:"AppIconModernNameFocusDark"},
-  {id:"modern-name-focus-light",label:"Name Focus Light",ios:"AppIconModernNameFocusLight"},
-  {id:"modern-elegant-neutral",label:"Elegant Neutral",ios:"AppIconModernElegantNeutral"},
-  {id:"modern-premium-gold-dark",label:"Premium Gold Dark",ios:"AppIconModernPremiumGoldDark"}
+  {id:"seal-creme",label:"Siegel Creme",ios:""},
+  {id:"seal-navy",label:"Siegel Navy",ios:"AppIconSealNavy"},
+  {id:"seal-schwarz",label:"Siegel Schwarz",ios:"AppIconSealSchwarz"}
 ];
-function getDarAppIcon(){try{const v=localStorage.getItem(DAR_APP_ICON_KEY);if(DAR_APP_ICONS.some(x=>x.id===v))return v}catch(e){}return"creme-navy"}
+function getDarAppIcon(){try{const v=localStorage.getItem(DAR_APP_ICON_KEY);if(DAR_APP_ICONS.some(x=>x.id===v))return v}catch(e){}return"seal-creme"}
 function applyDarAppIcon(id,{save=true}={}){const icon=DAR_APP_ICONS.find(x=>x.id===id)||DAR_APP_ICONS[0];if(save){try{localStorage.setItem(DAR_APP_ICON_KEY,icon.id)}catch(e){}}document.querySelectorAll("[data-app-icon-select]").forEach(btn=>{const on=btn.getAttribute("data-app-icon-select")===icon.id;btn.classList.toggle("is-active",on);btn.setAttribute("aria-pressed",on?"true":"false")});try{if(window.webkit&&webkit.messageHandlers&&webkit.messageHandlers.darAppIcon)webkit.messageHandlers.darAppIcon.postMessage({id:icon.id,name:icon.ios||""})}catch(e){}return icon.id}
-function renderAppIconPanel(){const cur=getDarAppIcon();return `<section class="app-icon-panel premium-surface" id="darAppIconPanel"><div class="theme-switch-head"><h3>App-Icon</h3><p class="theme-switch-note">Standard ist Creme &amp; Navy. Nach links oder rechts wischen.</p></div><div class="app-icon-rail">${DAR_APP_ICONS.map(icon=>`<button type="button" class="app-icon-choice${cur===icon.id?" is-active":""}" data-app-icon-select="${icon.id}" aria-pressed="${cur===icon.id?"true":"false"}"><img src="/assets/app-icons/${icon.id}/icon-64.png" srcset="/assets/app-icons/${icon.id}/icon-64.png 1x, /assets/app-icons/${icon.id}/icon-192.png 2x" width="56" height="56" alt=""><span>${esc(icon.label)}</span></button>`).join("")}</div></section>`}
+function renderAppIconPanel(){const cur=getDarAppIcon();return `<section class="app-icon-panel premium-surface" id="darAppIconPanel"><div class="theme-switch-head"><h3>App-Icon</h3><p class="theme-switch-note">Standard ist Siegel Creme. Nach links oder rechts wischen.</p></div><div class="app-icon-rail">${DAR_APP_ICONS.map(icon=>`<button type="button" class="app-icon-choice${cur===icon.id?" is-active":""}" data-app-icon-select="${icon.id}" aria-pressed="${cur===icon.id?"true":"false"}"><img src="/assets/app-icons/${icon.id}/icon-64.png" srcset="/assets/app-icons/${icon.id}/icon-64.png 1x, /assets/app-icons/${icon.id}/icon-192.png 2x" width="56" height="56" alt=""><span>${esc(icon.label)}</span></button>`).join("")}</div></section>`}
 function bindAppIconPicker(){document.querySelectorAll("[data-app-icon-select]").forEach(btn=>{btn.onclick=()=>applyDarAppIcon(btn.getAttribute("data-app-icon-select"))});applyDarAppIcon(getDarAppIcon(),{save:false})}
 function themeButton(key){const cur=getTheme();const info=THEME_META[key]||THEME_META.dark;return `<button type="button" class="theme-switch-btn${cur===key?" is-active":""}" data-theme-select="${key}" aria-pressed="${cur===key?"true":"false"}"><span class="theme-preview"><i class="theme-preview-logo"></i><span class="theme-preview-lines"><i></i><i></i></span></span><span>${esc(info.label)}</span></button>`}
 function renderThemeSwitchPanel(){return `<section class="theme-switch-panel premium-surface"><div class="theme-switch-head"><h3>Erscheinungsbild</h3><p class="theme-switch-note">Die Auswahl wird dauerhaft auf diesem Gerät gespeichert.</p></div><div class="theme-switch-row">${themeButton("light")}${themeButton("eisgold")}${themeButton("dark")}${themeButton("soft")}${themeButton("royal")}${themeButton("bordeaux")}${themeButton("dar-al-layl")}</div></section>`}
