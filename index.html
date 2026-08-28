@@ -5,12 +5,12 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v700";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v701";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
   try{
-    var colors={dark:"#050706",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605",eisgold:"#e6dcc0"};
+    var colors={dark:"#050706",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605",eisgold:"#e8f3fb"};
     var names={dark:"Klassisch Dunkel",light:"Klassisch Hell",soft:"Sanft Elegant",royal:"Royal Nachtblau",bordeaux:"Bordeaux Royal Premium","dar-al-layl":"Dār al-Layl",eisgold:"Eisgold"};
     var t=localStorage.getItem("darThemeV1")||"dark";
     if(t==="emerald"||t==="smaragd"||t==="aurora"){t="dark";try{localStorage.setItem("darThemeV1",t)}catch(e){}}
@@ -47,7 +47,7 @@ html[data-theme="light"] #dar-soft-boot,html[data-theme="soft"] #dar-soft-boot,h
 html[data-theme="light"] #dar-soft-boot .dar-soft-boot__title,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__title{color:var(--gold2,#9b7a3c)}
 html[data-theme="light"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="light"] #dar-soft-boot .dar-soft-boot__pct,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__pct{color:rgba(58,47,36,.72)}
 </style>
-<script src="/assets/app-soft-boot.js?v=668"></script>
+<script src="/assets/app-soft-boot.js?v=669"></script>
 <script>/* SOFTBOOT_UNSTICK_V665 */(function(){function wipe(){try{document.documentElement.classList.remove("dar-soft-booting");document.querySelectorAll("#dar-soft-boot").forEach(function(n){n.parentNode&&n.parentNode.removeChild(n)})}catch(e){}}setTimeout(function(){if(document.getElementById("dar-soft-boot"))wipe()},9000)})();</script>
 
 <script>/* ANDROID_FULL_RELOAD_V665: PWA/Standalone wie iOS — kein Hängen auf Chrome-Splash */(function(){try{var ua=String(navigator.userAgent||"");if(!/Android/i.test(ua))return;document.documentElement.classList.add("is-android");window.addEventListener("pageshow",function(ev){if(ev&&ev.persisted)location.reload()});}catch(e){}})();</script>
@@ -97,7 +97,7 @@ html[data-theme="light"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="lig
 <meta name="theme-color" content="#080806">
 <script>(function(){try{var c=window.__DAR_BOOT_FILL;if(!c)return;var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=c;var tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=c}catch(e){}})();</script>
 <script>(function(){try{var p=new URLSearchParams(location.search);var wantStaging=p.get("env")==="staging"||location.hostname.indexOf("staging.")===0;var underTest=location.pathname.indexOf("/test/")===0||location.pathname==="/test";if(wantStaging&&!underTest){location.replace("/test/"+location.search+location.hash);return}}catch(e){}})();</script>
-<script>(function(){try{var params=new URLSearchParams(location.search);var underTest=location.pathname.indexOf("/test/")===0||location.pathname==="/test";var stagingHost=location.hostname.indexOf("staging.")===0;var staging=params.get("env")==="staging"||stagingHost||underTest;var manifest=document.getElementById("appManifestLink");var touch=document.getElementById("appleTouchIconLink");if(staging&&manifest)manifest.href="/manifest.json?v=source-under-statement-v12";if(staging&&touch)touch.href="/apple-touch-icon.png?v=source-under-statement-v12";if(staging){document.title="Dar Test";var app=document.querySelector('meta[name="application-name"]');if(app)app.content="DAR AL TAWḤID";var apple=document.querySelector('meta[name="apple-mobile-web-app-title"]');if(apple)apple.content="DAR AL TAWḤID"}var key="darThemeV1";var t=localStorage.getItem(key)||"dark";if(t==="emerald"||t==="smaragd"||t==="aurora"){t="dark";try{localStorage.setItem(key,t)}catch(e){}}else if(t!=="light"&&t!=="soft"&&t!=="royal"&&t!=="bordeaux"&&t!=="dar-al-layl"&&t!=="eisgold")t="dark";var names={dark:"Klassisch Dunkel",light:"Klassisch Hell",soft:"Sanft Elegant",royal:"Royal Nachtblau",bordeaux:"Bordeaux Royal Premium","dar-al-layl":"Dār al-Layl",eisgold:"Eisgold"};var colors={dark:"#050706",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605",eisgold:"#e6dcc0"};document.documentElement.setAttribute("data-theme",t);document.documentElement.setAttribute("data-theme-name",names[t]||names.dark);if(/Android/i.test(navigator.userAgent||""))document.documentElement.classList.add("is-android");var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=colors[t]||colors.dark;var tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=colors[t]||colors.dark;var sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content="black-translucent";window.__DAR_INITIAL_THEME=t;window.__DAR_STAGING_APP=underTest||stagingHost}catch(e){}})();</script>
+<script>(function(){try{var params=new URLSearchParams(location.search);var underTest=location.pathname.indexOf("/test/")===0||location.pathname==="/test";var stagingHost=location.hostname.indexOf("staging.")===0;var staging=params.get("env")==="staging"||stagingHost||underTest;var manifest=document.getElementById("appManifestLink");var touch=document.getElementById("appleTouchIconLink");if(staging&&manifest)manifest.href="/manifest.json?v=source-under-statement-v12";if(staging&&touch)touch.href="/apple-touch-icon.png?v=source-under-statement-v12";if(staging){document.title="Dar Test";var app=document.querySelector('meta[name="application-name"]');if(app)app.content="DAR AL TAWḤID";var apple=document.querySelector('meta[name="apple-mobile-web-app-title"]');if(apple)apple.content="DAR AL TAWḤID"}var key="darThemeV1";var t=localStorage.getItem(key)||"dark";if(t==="emerald"||t==="smaragd"||t==="aurora"){t="dark";try{localStorage.setItem(key,t)}catch(e){}}else if(t!=="light"&&t!=="soft"&&t!=="royal"&&t!=="bordeaux"&&t!=="dar-al-layl"&&t!=="eisgold")t="dark";var names={dark:"Klassisch Dunkel",light:"Klassisch Hell",soft:"Sanft Elegant",royal:"Royal Nachtblau",bordeaux:"Bordeaux Royal Premium","dar-al-layl":"Dār al-Layl",eisgold:"Eisgold"};var colors={dark:"#050706",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605",eisgold:"#e8f3fb"};document.documentElement.setAttribute("data-theme",t);document.documentElement.setAttribute("data-theme-name",names[t]||names.dark);if(/Android/i.test(navigator.userAgent||""))document.documentElement.classList.add("is-android");var m=document.querySelector('meta[name="theme-color"]');if(m)m.content=colors[t]||colors.dark;var tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=colors[t]||colors.dark;var sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content="black-translucent";window.__DAR_INITIAL_THEME=t;window.__DAR_STAGING_APP=underTest||stagingHost}catch(e){}})();</script>
 <script>(function(){try{function clamp(v){v=Number(v);if(!Number.isFinite(v))return 5;v=Math.round(v);if(v<=0)v=1;return Math.max(1,Math.min(10,v))}function set(name,val){document.documentElement.style.setProperty(name,String(val))}var app=clamp(localStorage.getItem("appFontScale"));var qa=clamp(localStorage.getItem("quranArabicScale"));var qt=clamp(localStorage.getItem("quranTransliterationScale"));var qd=clamp(localStorage.getItem("quranGermanScale"));var da=clamp(localStorage.getItem("duaArabicScale"));var dt=clamp(localStorage.getItem("duaTransliterationScale"));var dd=clamp(localStorage.getItem("duaGermanScale"));var pt=clamp(localStorage.getItem("postTextScale"));var ps=clamp(localStorage.getItem("postSourceScale"));document.documentElement.setAttribute("data-app-font-scale",app);document.documentElement.setAttribute("data-reading-arabic-scale",qa);document.documentElement.setAttribute("data-reading-transliteration-scale",qt);document.documentElement.setAttribute("data-reading-translation-scale",qd);set("--text-xs",(9.4+app*.18)+"px");set("--text-sm",(11.2+app*.36)+"px");set("--text-base",(14.4+app*.32)+"px");set("--text-lg",(16.2+app*.38)+"px");set("--text-xl",(20+app*.64)+"px");set("--title-size",(27+app*1.0)+"px");set("--quran-arabic-size",(17+qa*3.3)+"px");set("--quran-trans-size",(12+qt*2.1)+"px");set("--quran-de-size",(12+qd*2.1)+"px");set("--dua-arabic-size",(16+da*3.1)+"px");set("--dua-trans-size",(12+dt*2.1)+"px");set("--dua-de-size",(12+dd*2.1)+"px");set("--post-text-size",(16.5+pt*.55)+"px");set("--post-source-size",(13.5+ps*.35)+"px")}catch(e){}})();</script>
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -7594,13 +7594,13 @@ html[data-theme="bordeaux"]{
   --theme-muted:rgba(247,238,216,.70);
 }
 html[data-theme="eisgold"]{
-  --theme-page-bg:#e6dcc0;
-  --theme-hero-bg:linear-gradient(180deg,#e6dcc0 0%,#efe8d4 48%,#e6dcc0 100%);
-  --theme-hero-surface:radial-gradient(circle at 16% 0%,rgba(255,255,255,.72),transparent 40%),radial-gradient(circle at 86% 8%,rgba(184,150,58,.16),transparent 36%),linear-gradient(180deg,#f4efe0 0%,#e6dcc0 100%);
+  --theme-page-bg:#e8f3fb;
+  --theme-hero-bg:linear-gradient(180deg,#f5fbff 0%,#e8f3fb 48%,#dceaf6 100%);
+  --theme-hero-surface:radial-gradient(circle at 16% 0%,rgba(255,255,255,.72),transparent 40%),radial-gradient(circle at 86% 8%,rgba(184,150,58,.16),transparent 36%),linear-gradient(180deg,#f5fbff 0%,#e8f3fb 82%,rgba(0,0,0,.08) 100%);
   --theme-hero-glow:rgba(184,150,58,.18);
   --theme-hero-border:rgba(184,150,58,.28);
-  --theme-hero-blend-top:rgba(230,220,192,1);
-  --theme-hero-blend-bottom:rgba(230,220,192,0);
+  --theme-hero-blend-top:rgba(232,243,251,1);
+  --theme-hero-blend-bottom:rgba(232,243,251,0);
   --theme-accent:#7a5c22;
   --theme-text:#1c1812;
   --theme-muted:rgba(28,24,18,.68);
@@ -9948,7 +9948,7 @@ window.DAR_ANALYTICS_CONFIG={
 <noscript><link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Elsie+Swash+Caps:wght@400;900&family=Inter:wght@400;600;700;800;900&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="/assets/app-card-layout.css?v=4">
 <link rel="stylesheet" href="/assets/app-theme-surfaces.css?v=587">
-<link rel="stylesheet" href="/assets/theme-eisgold.css?v=2">
+<link rel="stylesheet" href="/assets/theme-eisgold.css?v=3">
 
 
 <style id="feature-final-v202">
@@ -20248,7 +20248,7 @@ document.addEventListener("pointerdown",e=>{if(isEditableTarget(e.target))lastFo
 const THEME_KEY="darThemeV1";
 const THEME_SETTINGS_KEY="darThemeSettingsV1";
 /* EDGE_TO_EDGE_THEME_LOCK · Format: Edge-to-Edge Erscheinungsbild — jedes Theme inkl. künftiger: --outer-bg-flat/--outer-bg/--page-cover/--premium-bg + THEME_META/normalizeTheme; Rahmenrandlos. */
-const THEME_META={dark:{label:"Klassisch Dunkel",color:"#050706",status:"black-translucent",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"black-translucent",asset:"light"},eisgold:{label:"Eisgold",color:"#e6dcc0",status:"black-translucent",asset:"eisgold"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"black-translucent",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black-translucent",asset:"royal"},bordeaux:{label:"Bordeaux Royal Premium",color:"#140B0C",status:"black-translucent",asset:"bordeaux"},"dar-al-layl":{label:"Dār al-Layl",color:"#050605",status:"black-translucent",asset:"dar-al-layl"}};
+const THEME_META={dark:{label:"Klassisch Dunkel",color:"#050706",status:"black-translucent",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"black-translucent",asset:"light"},eisgold:{label:"Eisgold",color:"#e8f3fb",status:"black-translucent",asset:"eisgold"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"black-translucent",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black-translucent",asset:"royal"},bordeaux:{label:"Bordeaux Royal Premium",color:"#140B0C",status:"black-translucent",asset:"bordeaux"},"dar-al-layl":{label:"Dār al-Layl",color:"#050605",status:"black-translucent",asset:"dar-al-layl"}};
 function normalizeTheme(theme){if(theme==="emerald"||theme==="smaragd"||theme==="aurora")return"dark";return theme==="light"||theme==="eisgold"||theme==="soft"||theme==="royal"||theme==="bordeaux"||theme==="dar-al-layl"?theme:"dark"}
 function getTheme(){try{return normalizeTheme(localStorage.getItem(THEME_KEY))}catch(e){return"dark"}}
 function applyTheme(theme){const next=normalizeTheme(theme);const info=THEME_META[next]||THEME_META.dark;const root=document.documentElement;root.classList.add("theme-switching");try{if(typeof window.__darClearStickyThemeFills==="function")window.__darClearStickyThemeFills();root.style.removeProperty("background");root.style.removeProperty("background-color");root.style.removeProperty("background-image");root.style.removeProperty("--theme-page-bg");if(document.body){document.body.style.removeProperty("background");document.body.style.removeProperty("background-color");document.body.style.removeProperty("background-image")}root.style.setProperty("--dar-boot-fill",info.color);window.__DAR_BOOT_FILL=info.color}catch(e){}root.setAttribute("data-theme",next);root.setAttribute("data-theme-name",info.label);try{localStorage.setItem(THEME_KEY,next);localStorage.setItem(THEME_SETTINGS_KEY,JSON.stringify({theme:next,label:info.label,assetVariant:info.asset,updatedAt:Date.now()}))}catch(e){}const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=info.color;const tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=info.color;const sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content="black-translucent";const logo=document.querySelector(".logo");if(logo){logo.title="DAR AL TAWḤID";if(!logo.getAttribute("data-logo-ready")){logo.setAttribute("data-logo-ready","1");logo.onerror=function(){this.onerror=null;this.src="/watermark-my-logo-full.png?v=fallback"};if(!logo.getAttribute("src")||logo.getAttribute("src").indexOf("watermark-my-logo")<0)logo.src="/watermark-my-logo-full.png"}}document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.classList.toggle("is-active",btn.getAttribute("data-theme-select")===next);btn.setAttribute("aria-pressed",btn.getAttribute("data-theme-select")===next?"true":"false")});try{window.dispatchEvent(new CustomEvent("dar-theme-change",{detail:{theme:next,...info}}))}catch(e){}requestAnimationFrame(()=>requestAnimationFrame(()=>{root.classList.remove("theme-switching");try{if(typeof window.__darSyncThemeFillMeta==="function")window.__darSyncThemeFillMeta();if(typeof window.__darClearStickyThemeFills==="function")window.__darClearStickyThemeFills()}catch(e){}}))}
@@ -26176,7 +26176,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v700";
+const APP_BUILD_ID="app-shell-v701";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}

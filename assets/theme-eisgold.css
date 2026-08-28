@@ -1,8 +1,8 @@
 /* Eisgold — ice-white / ice-blue field, gold lines, near-black ink. Not cream, not charcoal. */
 html[data-theme="eisgold"]{
   color-scheme:light!important;
-  --bg:#e6dcc0!important;
-  --bg2:#efe8d4!important;
+  --bg:#e8f3fb!important;
+  --bg2:#dceaf6!important;
   --panel:rgba(255,255,255,.90)!important;
   --card:rgba(255,255,255,.86)!important;
   --page-cover:#f8fcff!important;
@@ -40,8 +40,8 @@ html[data-theme="eisgold"]{
   --theme-text:#142033!important;
   --theme-muted:#637083!important;
   --theme-surface:rgba(255,255,255,.86)!important;
-  --outer-bg-flat:#e6dcc0;
-  --outer-bg:radial-gradient(circle at 16% 0%,rgba(200,169,90,.20),transparent 42%),radial-gradient(circle at 84% 8%,rgba(168,210,238,.42),transparent 36%),linear-gradient(180deg,#f8fcff 0%,#edf6ff 48%,#e4f0fb 100%);
+  --outer-bg-flat:#e8f3fb;
+  --outer-bg:radial-gradient(circle at 16% 0%,rgba(200,169,90,.16),transparent 42%),radial-gradient(circle at 84% 8%,rgba(150,198,230,.48),transparent 38%),linear-gradient(180deg,#f5fbff 0%,#e8f3fb 46%,#d5e6f4 100%);
   --cover-edge-bg:linear-gradient(180deg,#f8fcff 0%,#edf6ff 48%,rgba(237,246,255,0) 100%);
   --cover-panel-bg:linear-gradient(180deg,rgba(255,255,255,.92),rgba(237,246,255,.90));
   --cover-panel-border:rgba(200,169,90,.34);
@@ -73,11 +73,11 @@ html[data-theme="eisgold"],
 html[data-theme="eisgold"] body{
   color:#142033!important;
   background:var(--outer-bg)!important;
-  background-color:#e6dcc0!important;
+  background-color:#e8f3fb!important;
 }
 html[data-theme="eisgold"] body:before{
-  opacity:.10!important;
-  background:#0a121c!important;
+  opacity:.08!important;
+  background:#000000!important;
   filter:none!important;
 }
 html[data-theme="eisgold"] #dar-soft-boot{color:#142033}
@@ -133,10 +133,10 @@ html[data-theme="eisgold"] .share-panel,
 html[data-theme="eisgold"] .share-panel-v2,
 html[data-theme="eisgold"] .share-panel-v9,
 html[data-theme="eisgold"] .share-panel-v11{
-  background:linear-gradient(145deg,rgba(255,255,255,.90),rgba(237,246,255,.82))!important;
+  background:linear-gradient(180deg,rgba(245,251,255,.94) 0%,rgba(220,234,246,.88) 78%,rgba(0,0,0,.08) 100%)!important;
   border-color:rgba(200,169,90,.34)!important;
   color:#142033!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.86),0 8px 20px rgba(20,32,51,.06)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.86),0 8px 20px rgba(20,32,51,.08)!important;
 }
 html[data-theme="eisgold"] .bottom-nav{
   background:rgba(248,252,255,.42)!important;
@@ -214,7 +214,7 @@ html[data-theme="eisgold"] .view-desc,
 html[data-theme="eisgold"] .folder-card p,
 html[data-theme="eisgold"] .info-card p,
 html[data-theme="eisgold"] .dua-card p{
-  color:#4a453c!important;
+  color:#3d4c60!important;
 }
 html[data-theme="eisgold"] .quran-continue,
 html[data-theme="eisgold"] .quran-resume,
@@ -271,7 +271,7 @@ html[data-theme="eisgold"] .quiz-card,
 html[data-theme="eisgold"] .qibla-panel,
 html[data-theme="eisgold"] .qibla-box,
 html[data-theme="eisgold"] .qibla-compass-wrap{
-  background:linear-gradient(145deg,#f7f3e8,#efe8d4)!important;
+  background:linear-gradient(180deg,#f5fbff 0%,#e8f3fb 72%,rgba(0,0,0,.07) 100%)!important;
   color:#1c1812!important;
   border-color:rgba(184,150,58,.42)!important;
 }
@@ -295,7 +295,7 @@ html[data-theme="eisgold"] .quiz-shell input,
 html[data-theme="eisgold"] select.filter-select,
 html[data-theme="eisgold"] .direct-pick,
 html[data-theme="eisgold"] .search{
-  background:#fffdf6!important;
+  background:#f5fbff!important;
   color:#1c1812!important;
   -webkit-text-fill-color:#1c1812!important;
   border-color:rgba(184,150,58,.45)!important;
