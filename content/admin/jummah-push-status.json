@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-08-28T09:55:22.653Z",
+  "updatedAt": "2026-08-28T10:00:22.623Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-jummah-v2",
   "dryRun": false,
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-28T09:55:22.653Z",
+  "lastCronRun": "2026-08-28T10:00:22.623Z",
   "subscriptionsTotal": 1,
   "usersWithJummah": 1,
   "jummahTagFallback": false,
@@ -34,13 +34,13 @@
     "timeZone": "Europe/Berlin",
     "timeSource": "dhuhr-auto"
   },
-  "windowStart": "2026-08-28T09:40:21.846Z",
-  "windowEnd": "2026-08-29T11:55:21.846Z",
-  "scheduled": 3,
-  "recipients": 3,
-  "skippedPast": 0,
+  "windowStart": "2026-08-28T09:45:21.955Z",
+  "windowEnd": "2026-08-29T12:00:21.955Z",
+  "scheduled": 2,
+  "recipients": 2,
+  "skippedPast": 1,
   "skippedWindow": 0,
-  "catchups": 1,
+  "catchups": 0,
   "duplicates": 0,
   "errors": 0,
   "lastPush": {
@@ -64,16 +64,6 @@
     {
       "prayer": "Jumuʿah",
       "key": "jummah",
-      "mode": "morning",
-      "time": "09:00",
-      "sendAfter": "2026-08-28T07:00:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin",
-      "timeSource": "dhuhr-auto"
-    },
-    {
-      "prayer": "Jumuʿah",
-      "key": "jummah",
       "mode": "advance",
       "time": "13:03",
       "sendAfter": "2026-08-28T11:03:00.000Z",
@@ -92,13 +82,14 @@
       "timeSource": "dhuhr-auto"
     }
   ],
-  "skippedPastDetails": [],
-  "oneSignalResponses": [
+  "skippedPastDetails": [
     {
       "mode": "morning",
-      "recipients": 1,
-      "response": "{\"id\":\"a9f5d1c3-016f-497f-9d88-f494ce01d1ec\",\"external_id\":\"4b628ac0-1e7c-46b0-8a36-9e259aa072ef\"}"
-    },
+      "sendAfter": "2026-08-28T07:00:00.000Z",
+      "timeZone": "Europe/Berlin"
+    }
+  ],
+  "oneSignalResponses": [
     {
       "mode": "advance",
       "recipients": 1,
