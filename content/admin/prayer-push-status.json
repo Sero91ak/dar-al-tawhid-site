@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-28T09:16:26.322Z",
+  "updatedAt": "2026-08-28T09:17:34.228Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-28T09:16:26.322Z",
+  "lastCronRun": "2026-08-28T09:17:34.228Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-28T11:18:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-28T09:01:25.015Z",
-  "windowEnd": "2026-08-29T11:16:25.015Z",
+  "windowStart": "2026-08-28T09:02:32.614Z",
+  "windowEnd": "2026-08-29T11:17:32.614Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 1,
@@ -28,12 +28,12 @@
   "usersWithLocation": 1,
   "usersWithActivePush": 1,
   "locationGroups": 1,
-  "scheduled": 10,
-  "recipients": 10,
+  "scheduled": 11,
+  "recipients": 11,
   "invalid": 0,
   "invalidDisabled": 0,
   "skippedPast": 12,
-  "skippedWindow": 18,
+  "skippedWindow": 17,
   "advanceCatchups": 0,
   "entryCatchups": 0,
   "duplicates": 1,
@@ -305,6 +305,16 @@
       "recipients": 1,
       "timeZone": "Europe/Berlin",
       "invalid": 0
+    },
+    {
+      "prayer": "Dhuhr",
+      "key": "dhuhr",
+      "mode": "advance",
+      "time": "13:32",
+      "sendAfter": "2026-08-29T11:17:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin",
+      "invalid": 0
     }
   ],
   "skippedPastDetails": [
@@ -463,6 +473,13 @@
       "recipients": 1,
       "invalid": 0,
       "response": "{\"id\":\"9692ec5a-4723-45eb-bd30-dd6f7e2d8fe7\",\"external_id\":\"c5572b56-803d-484e-ab35-06b8a05dafbc\"}"
+    },
+    {
+      "prayer": "dhuhr",
+      "mode": "advance",
+      "recipients": 1,
+      "invalid": 0,
+      "response": "{\"id\":\"028ee391-3f1e-4424-9d19-acd5565c3b91\",\"external_id\":\"6184a4e6-95f8-4fb4-b6f8-d352b9468884\"}"
     }
   ],
   "userRegistry": [
@@ -488,7 +505,7 @@
       "subscriptionId": "91d254cd-2590-4ad6-88b0-3932888ed472",
       "timezone": "Europe/Berlin",
       "city": "Meckenheim",
-      "lastSyncedAt": "2026-08-28T09:16:24+00:00"
+      "lastSyncedAt": "2026-08-28T09:17:31+00:00"
     },
     {
       "subscriptionId": "c5e307a6-9c0e-435b-9e6e-7382dde53756",
