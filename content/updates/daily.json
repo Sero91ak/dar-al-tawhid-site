@@ -16,5 +16,23 @@
     "title": "Duʿāʾ von Yūsuf um guten Abschluss",
     "snippet": "Mein Herr, Du hast mir von der Herrschaft gegeben und mich von der Deutung der Ereignisse gelehrt. Schöpfer der Himmel und der Erde, Du bist mein Schutzherr im Diesseits und Jenseits. Lass mich als Muslim sterben und schließe mich den Rechtschaffenen an.",
     "category": "Guter Tod & Rechtschaffene"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 464,
+      "remaining": 443
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 77,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
