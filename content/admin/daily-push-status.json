@@ -4,25 +4,25 @@
   "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-28T21:50:11.214Z",
+  "updatedAt": "2026-08-28T22:00:13.221Z",
   "usersChecked": 12,
   "registrationsRead": 13,
   "uniqueSubscriptions": 12,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
-  "localTimeBerlin": "23:50",
-  "dateKeyBerlin": "2026-08-28",
+  "localTimeBerlin": "00:00",
+  "dateKeyBerlin": "2026-08-29",
   "duaWindow": {
     "hour": 9,
     "open": false,
     "catchupUntilHour": 14,
-    "alreadySentToday": 12
+    "alreadySentToday": 0
   },
   "recommendationWindow": {
     "hour": 12,
     "open": false,
     "catchupUntilHour": 20,
-    "alreadySentToday": 12
+    "alreadySentToday": 0
   },
   "duaCandidates": 0,
   "recCandidates": 0,
@@ -36,17 +36,17 @@
   "duplicates": 0,
   "errors": 0,
   "forceSend": null,
-  "dailyContentDate": "2026-08-28",
+  "dailyContentDate": "2026-08-29",
   "currentRecommendation": {
-    "id": "ibn-taymiyyah-mittler-zur-anrufung-gemacht-164",
-    "title": "Wenn der Mittler zur Anrufung gemacht wird",
-    "category": "Tawḥīd",
-    "scholar": "Ibn Taymiyyah"
+    "id": "ibn-masud-wissen-verlangt-handeln-459",
+    "title": "Wissen verlangt Handeln",
+    "category": "ʿIlm",
+    "scholar": "ʿAbdullāh ibn Masʿūd"
   },
   "currentDua": {
-    "id": "dua-047-rabbi-qad-ataytani-min-al-mulk",
-    "title": "Duʿāʾ von Yūsuf um guten Abschluss",
-    "category": "Guter Tod & Rechtschaffene"
+    "id": "dua-048-rabbi-adkhilni-mudkhala-sidq",
+    "title": "Duʿāʾ um ehrlichen Eintritt und Ausgang",
+    "category": "Hilfe & Aufrichtigkeit"
   },
   "configAutomatic": true,
   "lastError": "Außerhalb der Tagesfenster (Duʿāʾ ab 09:00, Empfehlung ab 12:00 Europe/Berlin)."
