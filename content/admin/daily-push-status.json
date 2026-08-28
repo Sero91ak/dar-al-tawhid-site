@@ -4,19 +4,19 @@
   "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-28T07:00:21.535Z",
+  "updatedAt": "2026-08-28T07:05:21.504Z",
   "usersChecked": 13,
   "registrationsRead": 14,
   "uniqueSubscriptions": 13,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
-  "localTimeBerlin": "09:00",
+  "localTimeBerlin": "09:05",
   "dateKeyBerlin": "2026-08-28",
   "duaWindow": {
     "hour": 9,
     "open": true,
     "catchupUntilHour": 14,
-    "alreadySentToday": 0
+    "alreadySentToday": 13
   },
   "recommendationWindow": {
     "hour": 12,
@@ -24,16 +24,16 @@
     "catchupUntilHour": 20,
     "alreadySentToday": 0
   },
-  "duaCandidates": 13,
+  "duaCandidates": 0,
   "recCandidates": 0,
-  "sent": 13,
+  "sent": 0,
   "accepted": {
-    "dua": 13,
+    "dua": 0,
     "recommendation": 0
   },
   "invalidSubscriptionsDisabled": 0,
   "skipped": 0,
-  "duplicates": 0,
+  "duplicates": 13,
   "errors": 0,
   "forceSend": null,
   "dailyContentDate": "2026-08-28",
