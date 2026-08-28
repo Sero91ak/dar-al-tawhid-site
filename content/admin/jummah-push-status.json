@@ -1,46 +1,46 @@
 {
-  "updatedAt": "2026-08-28T07:15:24.951Z",
+  "updatedAt": "2026-08-28T07:20:22.643Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-jummah-v2",
   "dryRun": false,
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-28T07:15:24.951Z",
-  "subscriptionsTotal": 14,
-  "usersWithJummah": 14,
-  "jummahTagFallback": true,
-  "locationGroups": 4,
+  "lastCronRun": "2026-08-28T07:20:22.643Z",
+  "subscriptionsTotal": 1,
+  "usersWithJummah": 1,
+  "jummahTagFallback": false,
+  "locationGroups": 1,
   "timeSource": "dhuhr-auto",
   "nextMorningPush": null,
   "nextAdvancePush": {
     "mode": "advance",
-    "sendAfter": "2026-08-28T07:41:00.000Z",
-    "time": "09:41",
+    "sendAfter": "2026-08-28T11:03:00.000Z",
+    "time": "13:03",
     "timeZone": "Europe/Berlin",
     "timeSource": "dhuhr-auto"
   },
   "nextMainPush": {
     "mode": "entry",
-    "sendAfter": "2026-08-28T08:11:00.000Z",
-    "time": "10:11",
+    "sendAfter": "2026-08-28T11:33:00.000Z",
+    "time": "13:33",
     "timeZone": "Europe/Berlin",
     "timeSource": "dhuhr-auto"
   },
   "nextPlannedPush": {
     "mode": "advance",
-    "sendAfter": "2026-08-28T07:41:00.000Z",
-    "time": "09:41",
+    "sendAfter": "2026-08-28T11:03:00.000Z",
+    "time": "13:03",
     "timeZone": "Europe/Berlin",
     "timeSource": "dhuhr-auto"
   },
-  "windowStart": "2026-08-28T07:00:21.735Z",
-  "windowEnd": "2026-08-29T09:15:21.735Z",
-  "scheduled": 12,
-  "recipients": 39,
+  "windowStart": "2026-08-28T07:05:21.722Z",
+  "windowEnd": "2026-08-29T09:20:21.722Z",
+  "scheduled": 3,
+  "recipients": 3,
   "skippedPast": 0,
   "skippedWindow": 0,
-  "catchups": 4,
+  "catchups": 1,
   "duplicates": 0,
   "errors": 0,
   "lastPush": {
@@ -49,14 +49,14 @@
     "mode": "entry",
     "time": "13:33",
     "sendAfter": "2026-08-28T11:33:00.000Z",
-    "recipients": 2,
+    "recipients": 1,
     "timeZone": "Europe/Berlin",
     "timeSource": "dhuhr-auto"
   },
-  "lastRecipients": 2,
+  "lastRecipients": 1,
   "lastOneSignalResponse": {
     "mode": "entry",
-    "recipients": 2,
+    "recipients": 1,
     "response": "{\"id\":\"5aa9237d-c2be-437f-a011-a237297212ef\",\"external_id\":\"cb0120e7-95d9-4594-b8db-0a3798c8c9f1\"}"
   },
   "lastError": null,
@@ -67,66 +67,6 @@
       "mode": "morning",
       "time": "09:00",
       "sendAfter": "2026-08-28T07:00:00.000Z",
-      "recipients": 9,
-      "timeZone": "Europe/Berlin",
-      "timeSource": "dhuhr-auto"
-    },
-    {
-      "prayer": "Jumuʿah",
-      "key": "jummah",
-      "mode": "advance",
-      "time": "13:03",
-      "sendAfter": "2026-08-28T11:03:00.000Z",
-      "recipients": 9,
-      "timeZone": "Europe/Berlin",
-      "timeSource": "dhuhr-auto"
-    },
-    {
-      "prayer": "Jumuʿah",
-      "key": "jummah",
-      "mode": "entry",
-      "time": "13:33",
-      "sendAfter": "2026-08-28T11:33:00.000Z",
-      "recipients": 9,
-      "timeZone": "Europe/Berlin",
-      "timeSource": "dhuhr-auto"
-    },
-    {
-      "prayer": "Jumuʿah",
-      "key": "jummah",
-      "mode": "morning",
-      "time": "09:00",
-      "sendAfter": "2026-08-28T07:00:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin",
-      "timeSource": "dhuhr-auto"
-    },
-    {
-      "prayer": "Jumuʿah",
-      "key": "jummah",
-      "mode": "advance",
-      "time": "09:41",
-      "sendAfter": "2026-08-28T07:41:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin",
-      "timeSource": "dhuhr-auto"
-    },
-    {
-      "prayer": "Jumuʿah",
-      "key": "jummah",
-      "mode": "entry",
-      "time": "10:11",
-      "sendAfter": "2026-08-28T08:11:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin",
-      "timeSource": "dhuhr-auto"
-    },
-    {
-      "prayer": "Jumuʿah",
-      "key": "jummah",
-      "mode": "morning",
-      "time": "09:00",
-      "sendAfter": "2026-08-28T07:00:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
       "timeSource": "dhuhr-auto"
@@ -148,36 +88,6 @@
       "time": "13:33",
       "sendAfter": "2026-08-28T11:33:00.000Z",
       "recipients": 1,
-      "timeZone": "Europe/Berlin",
-      "timeSource": "dhuhr-auto"
-    },
-    {
-      "prayer": "Jumuʿah",
-      "key": "jummah",
-      "mode": "morning",
-      "time": "09:00",
-      "sendAfter": "2026-08-28T07:00:00.000Z",
-      "recipients": 2,
-      "timeZone": "Europe/Berlin",
-      "timeSource": "dhuhr-auto"
-    },
-    {
-      "prayer": "Jumuʿah",
-      "key": "jummah",
-      "mode": "advance",
-      "time": "13:03",
-      "sendAfter": "2026-08-28T11:03:00.000Z",
-      "recipients": 2,
-      "timeZone": "Europe/Berlin",
-      "timeSource": "dhuhr-auto"
-    },
-    {
-      "prayer": "Jumuʿah",
-      "key": "jummah",
-      "mode": "entry",
-      "time": "13:33",
-      "sendAfter": "2026-08-28T11:33:00.000Z",
-      "recipients": 2,
       "timeZone": "Europe/Berlin",
       "timeSource": "dhuhr-auto"
     }
@@ -186,62 +96,17 @@
   "oneSignalResponses": [
     {
       "mode": "morning",
-      "recipients": 9,
-      "response": "{\"id\":\"a9f5d1c3-016f-497f-9d88-f494ce01d1ec\",\"external_id\":\"4b628ac0-1e7c-46b0-8a36-9e259aa072ef\"}"
-    },
-    {
-      "mode": "advance",
-      "recipients": 9,
-      "response": "{\"id\":\"c4b827b8-e667-4b7d-b79f-68e81deee5f3\",\"external_id\":\"92b6f714-1f31-41e7-8285-5fe0a45930a8\"}"
-    },
-    {
-      "mode": "entry",
-      "recipients": 9,
-      "response": "{\"id\":\"742b91c4-67bc-447e-90c4-3caa85992441\",\"external_id\":\"6a33118d-34eb-459b-94b3-268b19e559f7\"}"
-    },
-    {
-      "mode": "morning",
       "recipients": 1,
-      "response": "{\"id\":\"fbfeb364-0565-4247-956b-ff2a053375c9\",\"external_id\":\"e5e76250-48c0-433e-a97f-8888a487b0fd\"}"
-    },
-    {
-      "mode": "advance",
-      "recipients": 1,
-      "response": "{\"id\":\"253dfec9-abf2-4482-bc27-3cef1c2de7ce\",\"external_id\":\"caed2071-8737-4a0f-a2ff-8638fb23bcdc\"}"
-    },
-    {
-      "mode": "entry",
-      "recipients": 1,
-      "response": "{\"id\":\"4a6f6590-8419-443d-b3ec-25fb0db3e44f\",\"external_id\":\"5630af9d-cd54-4e12-925b-9f6760445269\"}"
-    },
-    {
-      "mode": "morning",
-      "recipients": 1,
-      "response": "{\"id\":\"72868be1-bbef-4bf9-8f00-877581ebcc80\",\"external_id\":\"aaeefb87-58a8-4456-b1e1-d1b98ff5ac4a\"}"
-    },
-    {
-      "mode": "advance",
-      "recipients": 1,
-      "response": "{\"id\":\"010f0b43-a99c-46c3-b834-9586366d5c9b\",\"external_id\":\"302ab942-3ae8-4d08-8298-4aa908434465\"}"
-    },
-    {
-      "mode": "entry",
-      "recipients": 1,
-      "response": "{\"id\":\"b85590ca-d646-486f-90cb-1aa3265cff7a\",\"external_id\":\"8491976a-480a-4417-9349-4600b0aa6553\"}"
-    },
-    {
-      "mode": "morning",
-      "recipients": 2,
       "response": "{\"id\":\"c6468aa3-5230-4c55-9dd5-12d8c272f84a\",\"external_id\":\"e7cbec44-613d-4452-a258-4274ad97da19\"}"
     },
     {
       "mode": "advance",
-      "recipients": 2,
+      "recipients": 1,
       "response": "{\"id\":\"06ed2c62-6510-4bf2-9916-c0f5f86ed6b5\",\"external_id\":\"aad0bace-d13c-42be-9a22-f2d28b040b4d\"}"
     },
     {
       "mode": "entry",
-      "recipients": 2,
+      "recipients": 1,
       "response": "{\"id\":\"5aa9237d-c2be-437f-a011-a237297212ef\",\"external_id\":\"cb0120e7-95d9-4594-b8db-0a3798c8c9f1\"}"
     }
   ],
