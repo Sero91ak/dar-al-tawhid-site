@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-28T00:16:02.448Z",
+  "updatedAt": "2026-08-28T00:21:02.416Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-28T00:16:02.448Z",
+  "lastCronRun": "2026-08-28T00:21:02.416Z",
   "nextPlannedPush": {
     "prayer": "Maghrib",
     "key": "maghrib",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-28T02:30:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-28T00:00:59.552Z",
-  "windowEnd": "2026-08-29T02:15:59.552Z",
+  "windowStart": "2026-08-28T00:05:59.619Z",
+  "windowEnd": "2026-08-29T02:20:59.619Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 12,
