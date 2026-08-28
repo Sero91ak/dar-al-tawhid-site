@@ -1,25 +1,19 @@
 {
-  "updatedAt": "2026-08-28T10:40:22.311Z",
+  "updatedAt": "2026-08-28T11:10:22.738Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-jummah-v2",
   "dryRun": false,
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-28T10:40:22.311Z",
+  "lastCronRun": "2026-08-28T11:10:22.738Z",
   "subscriptionsTotal": 1,
   "usersWithJummah": 1,
   "jummahTagFallback": false,
   "locationGroups": 1,
   "timeSource": "dhuhr-auto",
   "nextMorningPush": null,
-  "nextAdvancePush": {
-    "mode": "advance",
-    "sendAfter": "2026-08-28T11:03:00.000Z",
-    "time": "13:03",
-    "timeZone": "Europe/Berlin",
-    "timeSource": "dhuhr-auto"
-  },
+  "nextAdvancePush": null,
   "nextMainPush": {
     "mode": "entry",
     "sendAfter": "2026-08-28T11:33:00.000Z",
@@ -28,14 +22,14 @@
     "timeSource": "dhuhr-auto"
   },
   "nextPlannedPush": {
-    "mode": "advance",
-    "sendAfter": "2026-08-28T11:03:00.000Z",
-    "time": "13:03",
+    "mode": "entry",
+    "sendAfter": "2026-08-28T11:33:00.000Z",
+    "time": "13:33",
     "timeZone": "Europe/Berlin",
     "timeSource": "dhuhr-auto"
   },
-  "windowStart": "2026-08-28T10:25:21.727Z",
-  "windowEnd": "2026-08-29T12:40:21.727Z",
+  "windowStart": "2026-08-28T10:55:21.835Z",
+  "windowEnd": "2026-08-29T13:10:21.835Z",
   "scheduled": 2,
   "recipients": 2,
   "skippedPast": 1,
