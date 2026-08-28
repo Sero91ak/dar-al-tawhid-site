@@ -207,8 +207,8 @@ async function buildPostPushPayload(env, { postTitle, postId, filename, publishe
   const subscriptionKey = String(subscriptionId || "").trim();
   const version = cacheVersion || Date.now();
   const url = slug ? buildPostPushUrl(env, slug, version) : `${site}/#recent`;
-  const icon = `${site}/notification-icon-192.png?v=2`;
-  const badge = `${site}/notification-badge-96.png?v=2`;
+  const icon = `${site}/notification-icon-192.png?v=3`;
+  const badge = `${site}/notification-badge-96.png?v=3`;
   const idempotencySeed = test
     ? `post-test:${slug || fileKey || message}:${subscriptionKey || "unknown"}:${publishedKey || "draft"}`
     : `post-live:${slug || fileKey || message}:${publishedKey || "draft"}`;

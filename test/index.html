@@ -20269,6 +20269,9 @@ function bindThemeControls(){document.querySelectorAll("[data-theme-select]").fo
 
 const DAR_APP_ICON_KEY="darAppIconV1";
 const DAR_APP_ICONS=[
+  {id:"emblem-nachtblau",label:"Emblem Nachtblau",ios:"AppIconEmblemNachtblau"},
+  {id:"emblem-schwarzgold",label:"Emblem Schwarzgold",ios:"AppIconEmblemSchwarzgold"},
+  {id:"emblem-creme-petrol",label:"Emblem Creme Petrol",ios:"AppIconEmblemCremePetrol"},
   {id:"type-creme-ar",label:"Creme",ios:""},
   {id:"type-creme",label:"Creme Name",ios:"AppIconTypeCreme"},
   {id:"type-schwarz-ar",label:"Schwarz",ios:"AppIconTypeSchwarzAr"},
@@ -23526,8 +23529,8 @@ function searchMatchLabel(post,q){
 const PRAYER_SETTINGS_KEY="darPrayerSettingsV1";
 const PUSH_USER_KEY="darPushExternalIdV1";
 const PRAYER_PUSH_DEBUG_KEY="darPrayerPushDebugV1";
-const DAR_NOTIFICATION_ICON="/notification-icon-192.png?v=2";
-const DAR_NOTIFICATION_BADGE="/notification-badge-96.png?v=2";
+const DAR_NOTIFICATION_ICON="/notification-icon-192.png?v=3";
+const DAR_NOTIFICATION_BADGE="/notification-badge-96.png?v=3";
 const DAR_SITE_ORIGIN=(location.origin&&location.origin.startsWith("http"))?location.origin:"https://dar-al-tawhid.de";
 const DAR_NOTIFICATION_ICON_ABS=`${DAR_SITE_ORIGIN}${DAR_NOTIFICATION_ICON}`;
 const DAR_NOTIFICATION_BADGE_ABS=`${DAR_SITE_ORIGIN}${DAR_NOTIFICATION_BADGE}`;

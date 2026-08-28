@@ -8,8 +8,8 @@ function siteOriginFromEnv(siteUrl) {
 
 function notificationAssets(siteUrl) {
   const origin = siteOriginFromEnv(siteUrl);
-  const icon = `${origin}/notification-icon-192.png?v=2`;
-  const badge = `${origin}/notification-badge-96.png?v=2`;
+  const icon = `${origin}/notification-icon-192.png?v=3`;
+  const badge = `${origin}/notification-badge-96.png?v=3`;
   return { origin, icon, badge };
 }
 

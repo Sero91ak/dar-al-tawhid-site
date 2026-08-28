@@ -315,8 +315,8 @@ export async function sendLibraryPublicationPush(env, record) {
   const message = String(record?.publicationTitle || "Neue Veröffentlichung").trim();
   const version = Date.now();
   const url = buildLibraryPushUrl(env, slug, version);
-  const icon = `${site}/notification-icon-192.png?v=2`;
-  const badge = `${site}/notification-badge-96.png?v=2`;
+  const icon = `${site}/notification-icon-192.png?v=3`;
+  const badge = `${site}/notification-badge-96.png?v=3`;
   const pushData = {
     type: "library",
     nav: "bibliothek",

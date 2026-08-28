@@ -123,9 +123,9 @@ function payload(kind, item, subscriptionId) {
       source: "github-daily-live-repair",
       repair_token: TOKEN
     },
-    chrome_web_icon: `${SITE_URL}/notification-icon-192.png?v=2`,
-    chrome_web_badge: `${SITE_URL}/notification-badge-96.png?v=2`,
-    firefox_icon: `${SITE_URL}/notification-icon-192.png?v=2`
+    chrome_web_icon: `${SITE_URL}/notification-icon-192.png?v=3`,
+    chrome_web_badge: `${SITE_URL}/notification-badge-96.png?v=3`,
+    firefox_icon: `${SITE_URL}/notification-icon-192.png?v=3`
   };
 }
 

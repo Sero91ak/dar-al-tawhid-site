@@ -107,8 +107,8 @@ export async function sendPrayerTestPush(env, input = {}) {
   const copy = buildPrayerTestCopy(prayerKey, mode, advanceMinutes);
   const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
   const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
-  const icon = `${site}/notification-icon-192.png?v=2`;
-  const badge = `${site}/notification-badge-96.png?v=2`;
+  const icon = `${site}/notification-icon-192.png?v=3`;
+  const badge = `${site}/notification-badge-96.png?v=3`;
 
   const payload = {
     app_id: appId,

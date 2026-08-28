@@ -43,9 +43,9 @@ function withIcons(payload, env) {
   const origin = siteOrigin(env);
   return {
     ...payload,
-    chrome_web_icon: `${origin}/notification-icon-192.png?v=2`,
-    chrome_web_badge: `${origin}/notification-badge-96.png?v=2`,
-    firefox_icon: `${origin}/notification-icon-192.png?v=2`
+    chrome_web_icon: `${origin}/notification-icon-192.png?v=3`,
+    chrome_web_badge: `${origin}/notification-badge-96.png?v=3`,
+    firefox_icon: `${origin}/notification-icon-192.png?v=3`
   };
 }
 

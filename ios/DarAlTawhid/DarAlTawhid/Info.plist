@@ -31,74 +31,405 @@
 	</array>
 	<key>CFBundleIcons</key>
 	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconName</key>
+			<string>AppIcon</string>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>AppIcon</string>
+			</array>
+		</dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
 			<key>AppIconEmblemNachtblau</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconEmblemNachtblau</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconEmblemNachtblau</string>
+					<string>AppIconEmblemNachtblau-83.5</string>
 				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
 			</dict>
 			<key>AppIconEmblemSchwarzgold</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconEmblemSchwarzgold</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconEmblemSchwarzgold</string>
+					<string>AppIconEmblemSchwarzgold-83.5</string>
 				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
 			</dict>
 			<key>AppIconEmblemCremePetrol</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconEmblemCremePetrol</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconEmblemCremePetrol</string>
+					<string>AppIconEmblemCremePetrol-83.5</string>
 				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeCreme</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeCreme</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeCreme</string>
+					<string>AppIconTypeCreme-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeSchwarzAr</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeSchwarzAr</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeSchwarzAr</string>
+					<string>AppIconTypeSchwarzAr-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeSchwarz</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeSchwarz</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeSchwarz</string>
+					<string>AppIconTypeSchwarz-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeNavyAr</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeNavyAr</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeNavyAr</string>
+					<string>AppIconTypeNavyAr-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeNavy</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeNavy</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeNavy</string>
+					<string>AppIconTypeNavy-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeBordeauxAr</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeBordeauxAr</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeBordeauxAr</string>
+					<string>AppIconTypeBordeauxAr-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeBordeaux</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeBordeaux</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeBordeaux</string>
+					<string>AppIconTypeBordeaux-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeGruenAr</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeGruenAr</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeGruenAr</string>
+					<string>AppIconTypeGruenAr-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeGruen</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeGruen</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeGruen</string>
+					<string>AppIconTypeGruen-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeSchwarzAr2</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeSchwarzAr2</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeSchwarzAr2</string>
+					<string>AppIconTypeSchwarzAr2-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
 			</dict>
 		</dict>
 	</dict>
 	<key>CFBundleIcons~ipad</key>
 	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconName</key>
+			<string>AppIcon</string>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>AppIcon</string>
+			</array>
+		</dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
 			<key>AppIconEmblemNachtblau</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconEmblemNachtblau</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconEmblemNachtblau</string>
+					<string>AppIconEmblemNachtblau-83.5</string>
 				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
 			</dict>
 			<key>AppIconEmblemSchwarzgold</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconEmblemSchwarzgold</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconEmblemSchwarzgold</string>
+					<string>AppIconEmblemSchwarzgold-83.5</string>
 				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
 			</dict>
 			<key>AppIconEmblemCremePetrol</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconEmblemCremePetrol</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconEmblemCremePetrol</string>
+					<string>AppIconEmblemCremePetrol-83.5</string>
 				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeCreme</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeCreme</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeCreme</string>
+					<string>AppIconTypeCreme-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeSchwarzAr</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeSchwarzAr</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeSchwarzAr</string>
+					<string>AppIconTypeSchwarzAr-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeSchwarz</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeSchwarz</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeSchwarz</string>
+					<string>AppIconTypeSchwarz-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeNavyAr</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeNavyAr</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeNavyAr</string>
+					<string>AppIconTypeNavyAr-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeNavy</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeNavy</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeNavy</string>
+					<string>AppIconTypeNavy-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeBordeauxAr</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeBordeauxAr</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeBordeauxAr</string>
+					<string>AppIconTypeBordeauxAr-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeBordeaux</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeBordeaux</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeBordeaux</string>
+					<string>AppIconTypeBordeaux-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeGruenAr</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeGruenAr</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeGruenAr</string>
+					<string>AppIconTypeGruenAr-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeGruen</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeGruen</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeGruen</string>
+					<string>AppIconTypeGruen-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIconTypeSchwarzAr2</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeSchwarzAr2</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconTypeSchwarzAr2</string>
+					<string>AppIconTypeSchwarzAr2-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
 			</dict>
 		</dict>
 	</dict>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>de.daraltawhid.app.prayer</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Gebetszeiten</string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>Nächstes Gebet</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeTime</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>de.daraltawhid.app.qibla</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Qibla</string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>Richtung Mekka</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeLocation</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>de.daraltawhid.app.quran</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Qurʾān</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeBookmark</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>de.daraltawhid.app.duas</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Duʿāʾ</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeLove</string>
+		</dict>
+	</array>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-	<key>UIRequiresFullScreen</key>
+	<key>NSSupportsLiveActivities</key>
+	<true/>
+	<key>NSSupportsLiveActivitiesFrequentUpdates</key>
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Der Standort wird nur genutzt, wenn du standortbezogene Gebetszeiten oder die Qibla-Funktion verwenden moechtest.</string>
 	<key>NSMotionUsageDescription</key>
 	<string>Bewegungsdaten werden nur genutzt, wenn du den Qibla-Kompass auf dem Geraet verwenden moechtest.</string>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleLightContent</string>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIColorName</key>

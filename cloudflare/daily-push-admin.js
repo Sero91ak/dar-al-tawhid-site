@@ -175,8 +175,8 @@ async function sendWelcomePushOnce(env, subscriptionId, cached) {
     collapse_id: `dar-welcome-${subscriptionId}`.slice(0, 64),
     idempotency_key: idempotencyKey,
     data: { type: "welcome", source: "dar-welcome-push", attempt: attemptBucket },
-    chrome_web_icon: `${site}/notification-icon-192.png?v=2`,
-    chrome_web_badge: `${site}/notification-badge-96.png?v=2`
+    chrome_web_icon: `${site}/notification-icon-192.png?v=3`,
+    chrome_web_badge: `${site}/notification-badge-96.png?v=3`
   };
 
   try {
@@ -265,8 +265,8 @@ export async function sendDailyTestPush(env, input = {}) {
       test: true,
       source: "admin-test"
     },
-    chrome_web_icon: `${site}/notification-icon-192.png?v=2`,
-    chrome_web_badge: `${site}/notification-badge-96.png?v=2`
+    chrome_web_icon: `${site}/notification-icon-192.png?v=3`,
+    chrome_web_badge: `${site}/notification-badge-96.png?v=3`
   };
 
   try {

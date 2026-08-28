@@ -3428,8 +3428,8 @@ async function sendNewsPush(env, { newsId, title, text, nav, value }) {
   const pushMessage = newsPushBody(text);
   const url = buildNewsPushUrl(env, { newsId, nav, value });
   const site = siteOrigin(env);
-  const icon = `${site}/notification-icon-192.png?v=2`;
-  const badge = `${site}/notification-badge-96.png?v=2`;
+  const icon = `${site}/notification-icon-192.png?v=3`;
+  const badge = `${site}/notification-badge-96.png?v=3`;
   const pushData = {
     type: "news",
     newsId: String(newsId || "").trim(),
