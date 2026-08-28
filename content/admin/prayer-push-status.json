@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-28T01:06:02.476Z",
+  "updatedAt": "2026-08-28T01:11:03.438Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-28T01:06:02.476Z",
+  "lastCronRun": "2026-08-28T01:11:03.438Z",
   "nextPlannedPush": {
     "prayer": "Maghrib",
     "key": "maghrib",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-28T02:30:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-28T00:50:59.569Z",
-  "windowEnd": "2026-08-29T03:05:59.569Z",
+  "windowStart": "2026-08-28T00:55:59.574Z",
+  "windowEnd": "2026-08-29T03:10:59.574Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 12,
@@ -28,12 +28,12 @@
   "usersWithLocation": 12,
   "usersWithActivePush": 12,
   "locationGroups": 3,
-  "scheduled": 32,
-  "recipients": 122,
+  "scheduled": 34,
+  "recipients": 133,
   "invalid": 0,
   "invalidDisabled": 0,
   "skippedPast": 30,
-  "skippedWindow": 58,
+  "skippedWindow": 56,
   "advanceCatchups": 0,
   "entryCatchups": 0,
   "duplicates": 1,
@@ -309,6 +309,16 @@
     {
       "prayer": "Fajr",
       "key": "fajr",
+      "mode": "advance",
+      "time": "05:24",
+      "sendAfter": "2026-08-29T03:09:00.000Z",
+      "recipients": 10,
+      "timeZone": "Europe/Berlin",
+      "invalid": 0
+    },
+    {
+      "prayer": "Fajr",
+      "key": "fajr",
       "mode": "entry",
       "time": "14:37",
       "sendAfter": "2026-08-28T12:37:00.000Z",
@@ -522,6 +532,16 @@
       "mode": "advance",
       "time": "21:44",
       "sendAfter": "2026-08-28T19:29:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin",
+      "invalid": 0
+    },
+    {
+      "prayer": "Fajr",
+      "key": "fajr",
+      "mode": "advance",
+      "time": "05:23",
+      "sendAfter": "2026-08-29T03:08:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
       "invalid": 0
@@ -812,6 +832,13 @@
     },
     {
       "prayer": "fajr",
+      "mode": "advance",
+      "recipients": 10,
+      "invalid": 0,
+      "response": "{\"id\":\"9383a4a0-03c9-409d-8632-b5328416931f\",\"external_id\":\"ef2b59d8-e6d0-4a0b-a33a-0d51fe493238\"}"
+    },
+    {
+      "prayer": "fajr",
       "mode": "entry",
       "recipients": 1,
       "invalid": 0,
@@ -872,13 +899,6 @@
       "recipients": 1,
       "invalid": 0,
       "response": "{\"id\":\"3522ba08-8523-4cad-a69a-f08c15dd915a\",\"external_id\":\"71b76d1b-a830-44a8-ba48-46424595d02d\"}"
-    },
-    {
-      "prayer": "isha",
-      "mode": "advance",
-      "recipients": 1,
-      "invalid": 0,
-      "response": "{\"id\":\"1dfa1133-f389-4efe-99b1-12f0f987b2b7\",\"external_id\":\"e693c394-0f3d-44ba-8a94-3f3067bba842\"}"
     }
   ],
   "userRegistry": [
