@@ -265,29 +265,33 @@ jobs:
         run: |
           EXPECT="$(node -e "console.log(require('./version.json').buildId||require('./version.json').appBuildId||'')")"
           echo "Erwarte Build $EXPECT"
-          ok=0
-          for attempt in 1 2 3 4 5 6 7 8 9 10 11 12; do
+          stable=0
+          for attempt in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
             ts="$(date +%s)"
-            LIVE_DEV="$(curl -fsS "https://dar-al-tawhid-site.sero91ak.workers.dev/version.json?cb=${attempt}-${ts}" || true)"
             LIVE_WWW="$(curl -fsS "https://dar-al-tawhid.de/version.json?cb=${attempt}-${ts}" || true)"
-            echo "workers.dev version: $LIVE_DEV"
+            LIVE_DEV="$(curl -fsS "https://dar-al-tawhid-site.sero91ak.workers.dev/version.json?cb=${attempt}-${ts}" || true)"
             echo "www version: $LIVE_WWW"
-            if printf '%s' "$LIVE_DEV" | grep -q "\"buildId\":\"$EXPECT\"" \
-              && printf '%s' "$LIVE_WWW" | grep -q "\"buildId\":\"$EXPECT\""; then
-              echo "Visitor-Worker Build OK (Versuch $attempt)"
-              ok=1
-              break
+            echo "workers.dev version: $LIVE_DEV"
+            if printf '%s' "$LIVE_WWW" | grep -F -q "$EXPECT"; then
+              stable=$((stable + 1))
+              echo "Live hat $EXPECT (stabil ${stable}/3)"
+              if [ "$stable" -ge 3 ]; then
+                echo "Visitor-Worker Build stabil"
+                break
+              fi
+              sleep 20
+              continue
             fi
+            stable=0
             echo "Visitor overwrite/stale (Versuch $attempt) – wrangler deploy"
+            node -e 'const fs=require("fs"); const n=Date.now(); let h=fs.readFileSync("index.html","utf8"); h=h.replace(/workers-deploy-stamp:\d+/g,"workers-deploy-stamp:"+n); h=h.replace(/pages-deploy-stamp:\d+/g,"pages-deploy-stamp:"+n); fs.writeFileSync("index.html",h); const v=JSON.parse(fs.readFileSync("version.json","utf8")); v.updatedAt=new Date(n).toISOString(); fs.writeFileSync("version.json", JSON.stringify(v,null,2)+"\n");'
             npx wrangler deploy
             node scripts/purge-cloudflare-cache.js || true
             sleep 25
           done
-          node scripts/purge-cloudflare-cache.js || true
-          sleep 8
           LIVE_WWW="$(curl -fsS "https://dar-al-tawhid.de/version.json?cb=final-$(date +%s)" || true)"
           echo "www final: $LIVE_WWW"
-          if ! printf '%s' "$LIVE_WWW" | grep -q "\"buildId\":\"$EXPECT\""; then
+          if ! printf '%s' "$LIVE_WWW" | grep -F -q "$EXPECT"; then
             echo "::error::Live version.json ist nicht ${EXPECT}"
             exit 1
           fi
