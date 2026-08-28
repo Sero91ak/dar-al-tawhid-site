@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-28T06:55:32.302Z",
+  "updatedAt": "2026-08-28T07:00:34.944Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-28T06:55:32.302Z",
+  "lastCronRun": "2026-08-28T07:00:34.944Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-28T07:56:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-28T06:40:21.677Z",
-  "windowEnd": "2026-08-29T08:55:21.677Z",
+  "windowStart": "2026-08-28T06:45:21.872Z",
+  "windowEnd": "2026-08-29T09:00:21.872Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 13,
@@ -1056,37 +1056,37 @@
       "subscriptionId": "a201efd5-20de-4ba4-a60b-3ddf0a7556c1",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-27T20:39:33.511+00:00"
+      "lastSyncedAt": "2026-08-28T07:00:22.276+00:00"
     },
     {
       "subscriptionId": "b729a7b9-32dd-473b-a474-2c5b22b1a346",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-27T10:00:45.822+00:00"
+      "lastSyncedAt": "2026-08-28T07:00:22.852+00:00"
     },
     {
       "subscriptionId": "3e57b75c-3491-46e0-91a3-5c4c349056c8",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-27T10:00:46.256+00:00"
+      "lastSyncedAt": "2026-08-28T07:00:23.382+00:00"
     },
     {
       "subscriptionId": "c5e307a6-9c0e-435b-9e6e-7382dde53756",
       "timezone": "Europe/Berlin",
       "city": "San Francisco",
-      "lastSyncedAt": "2026-08-27T23:27:47.399+00:00"
-    },
-    {
-      "subscriptionId": "f5133294-c6c9-4aca-9511-a43d00374c62",
-      "timezone": "Europe/Berlin",
-      "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-27T10:00:47.826+00:00"
+      "lastSyncedAt": "2026-08-28T07:00:23.888+00:00"
     },
     {
       "subscriptionId": "bee23f3e-b017-47ef-ac1d-1805119b2150",
       "timezone": "Europe/Berlin",
       "city": "Bonn",
-      "lastSyncedAt": "2026-08-28T05:34:12.298+00:00"
+      "lastSyncedAt": "2026-08-28T07:00:24.983+00:00"
+    },
+    {
+      "subscriptionId": "f5133294-c6c9-4aca-9511-a43d00374c62",
+      "timezone": "Europe/Berlin",
+      "city": "Rheinbach",
+      "lastSyncedAt": "2026-08-28T07:00:24.397+00:00"
     },
     {
       "subscriptionId": "5d891600-4c4a-4d49-8774-74cb23deb64c",
