@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-28T08:50:57.202Z",
+  "updatedAt": "2026-08-28T08:50:59.410Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-28T08:50:57.202Z",
+  "lastCronRun": "2026-08-28T08:50:59.410Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-28T11:18:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-28T08:35:56.431Z",
-  "windowEnd": "2026-08-29T10:50:56.431Z",
+  "windowStart": "2026-08-28T08:35:58.521Z",
+  "windowEnd": "2026-08-29T10:50:58.521Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 1,
@@ -399,70 +399,70 @@
       "mode": "entry",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"46d0169c-642d-4249-9516-6a2764c7eba2\",\"external_id\":\"6ab50bf2-468a-4199-ad10-983b68545c24\"}"
+      "response": "{\"id\":\"901470ce-0f4e-4aa4-89fd-86626cdd83ec\",\"external_id\":\"7e542569-09af-4dc2-8b31-457eca9e2f23\"}"
     },
     {
       "prayer": "dhuhr",
       "mode": "advance",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"ac6d67f0-0051-4516-ac0e-0c63dfd1d543\",\"external_id\":\"fa42147c-871b-482e-8b55-1bbe86f3423f\"}"
+      "response": "{\"id\":\"a5314512-3466-48d5-896b-3faca94c17c0\",\"external_id\":\"230139b3-c5b4-4c87-b950-7ec6a8f4de1a\"}"
     },
     {
       "prayer": "asr",
       "mode": "entry",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"160c981e-5764-434d-9b56-cb0147fe94cf\",\"external_id\":\"4fc873cc-7340-48a8-941a-a00ad5cdb97a\"}"
+      "response": "{\"id\":\"87bf8a0c-4743-45ea-9499-9e1cb449a8e8\",\"external_id\":\"3d520c16-a63c-40b3-8bd7-c3578b88394e\"}"
     },
     {
       "prayer": "asr",
       "mode": "advance",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"c3a51867-6fc6-4b17-a2c4-04baeb40706e\",\"external_id\":\"25da2442-38dd-44eb-90d7-13cdb51d57cb\"}"
+      "response": "{\"id\":\"bbf2582c-cc93-4b55-adf1-439425e1059f\",\"external_id\":\"09623fda-a734-4d1f-92cd-551bc0b56a25\"}"
     },
     {
       "prayer": "maghrib",
       "mode": "entry",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"ba618079-ed25-4621-b610-494801f7b0a9\",\"external_id\":\"4fc90ea8-a306-40d9-bb62-71459ff741d9\"}"
+      "response": "{\"id\":\"08161ff0-c928-4f11-8c25-59862d321121\",\"external_id\":\"d007e5a9-59b7-4c94-acc3-88a6b0d398a9\"}"
     },
     {
       "prayer": "maghrib",
       "mode": "advance",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"ad2f807b-d85a-4336-b021-ac07c7e62b10\",\"external_id\":\"198941b6-e6f4-420d-8557-15c95b169e0b\"}"
+      "response": "{\"id\":\"03d36136-9390-499b-a9d2-d23aeb029c81\",\"external_id\":\"3ec84d75-0255-45c8-a42b-520e50efe826\"}"
     },
     {
       "prayer": "isha",
       "mode": "entry",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"43005ce4-cfa5-46c9-8938-38e9f1601d55\",\"external_id\":\"e8fc2902-b46a-45f7-928d-88c21d14dee4\"}"
+      "response": "{\"id\":\"28d054b3-3632-44ed-af39-4b57fe8cf068\",\"external_id\":\"4067a1e9-3548-47c8-9d19-10a3ad106b3c\"}"
     },
     {
       "prayer": "isha",
       "mode": "advance",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"751246d8-05eb-4764-a3d4-b6d9b38f4c6b\",\"external_id\":\"42d882cd-d063-4d4e-89fe-0a5c7fdf044d\"}"
+      "response": "{\"id\":\"a465bf17-0fe2-4a0f-94c4-8a707ac43e96\",\"external_id\":\"a399c6bd-f205-4907-9171-8be11a8a072f\"}"
     },
     {
       "prayer": "fajr",
       "mode": "entry",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"4e57b4ea-fd33-4608-98a2-146e2acfb4f7\",\"external_id\":\"1bba16c2-89bf-4251-9ad3-10fc8bf93b8e\"}"
+      "response": "{\"id\":\"bfa9fbfb-963e-4aed-95f7-be2facb3c30d\",\"external_id\":\"5c3dcf26-405c-45cd-b6b1-04591852ba90\"}"
     },
     {
       "prayer": "fajr",
       "mode": "advance",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"894f8a76-cd69-43b9-80f8-a71e22eaf367\",\"external_id\":\"00ffe260-71aa-49a8-b3ca-c66cf17eee6f\"}"
+      "response": "{\"id\":\"9692ec5a-4723-45eb-bd30-dd6f7e2d8fe7\",\"external_id\":\"c5572b56-803d-484e-ab35-06b8a05dafbc\"}"
     }
   ],
   "userRegistry": [
@@ -488,7 +488,7 @@
       "subscriptionId": "91d254cd-2590-4ad6-88b0-3932888ed472",
       "timezone": "Europe/Berlin",
       "city": "Meckenheim",
-      "lastSyncedAt": "2026-08-28T08:50:56+00:00"
+      "lastSyncedAt": "2026-08-28T08:50:58+00:00"
     },
     {
       "subscriptionId": "c5e307a6-9c0e-435b-9e6e-7382dde53756",
