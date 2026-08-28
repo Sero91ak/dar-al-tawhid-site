@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-28T09:45:34.475Z",
+  "updatedAt": "2026-08-28T09:50:33.948Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-28T09:45:34.475Z",
+  "lastCronRun": "2026-08-28T09:50:33.948Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-28T11:18:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-28T09:30:21.877Z",
-  "windowEnd": "2026-08-29T11:45:21.877Z",
+  "windowStart": "2026-08-28T09:35:21.735Z",
+  "windowEnd": "2026-08-29T11:50:21.735Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 13,
@@ -28,12 +28,12 @@
   "usersWithLocation": 13,
   "usersWithActivePush": 13,
   "locationGroups": 4,
-  "scheduled": 47,
-  "recipients": 155,
+  "scheduled": 48,
+  "recipients": 156,
   "invalid": 0,
   "invalidDisabled": 0,
   "skippedPast": 52,
-  "skippedWindow": 61,
+  "skippedWindow": 60,
   "advanceCatchups": 0,
   "entryCatchups": 0,
   "duplicates": 1,
@@ -382,6 +382,16 @@
       "mode": "advance",
       "time": "10:10",
       "sendAfter": "2026-08-29T07:55:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin",
+      "invalid": 0
+    },
+    {
+      "prayer": "ʿAṣr",
+      "key": "asr",
+      "mode": "entry",
+      "time": "13:50",
+      "sendAfter": "2026-08-29T11:50:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
       "invalid": 0
@@ -1088,17 +1098,17 @@
     },
     {
       "prayer": "asr",
+      "mode": "entry",
+      "recipients": 1,
+      "invalid": 0,
+      "response": "{\"id\":\"d2d7019e-879f-4888-8c1a-8264dd5ffd85\",\"external_id\":\"7eb5dfb7-0cb9-4feb-8154-e062a5dbf51c\"}"
+    },
+    {
+      "prayer": "asr",
       "mode": "advance",
       "recipients": 1,
       "invalid": 0,
       "response": "{\"id\":\"3d8f2b8c-97f0-4c03-b4c2-deb26ef3fd76\",\"external_id\":\"28b61568-3dd5-4d6f-8593-d1b69bb783cc\"}"
-    },
-    {
-      "prayer": "maghrib",
-      "mode": "entry",
-      "recipients": 1,
-      "invalid": 0,
-      "response": "{\"id\":\"aa66e715-e97d-46aa-87e0-5187869790ab\",\"external_id\":\"3986d9ab-6dd9-4787-a319-ef2c5812e668\"}"
     }
   ],
   "userRegistry": [
