@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-08-28T07:05:24.963Z",
+  "updatedAt": "2026-08-28T07:10:24.743Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-jummah-v2",
   "dryRun": false,
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-28T07:05:24.963Z",
+  "lastCronRun": "2026-08-28T07:10:24.743Z",
   "subscriptionsTotal": 14,
   "usersWithJummah": 14,
   "jummahTagFallback": true,
@@ -34,8 +34,8 @@
     "timeZone": "Europe/Berlin",
     "timeSource": "dhuhr-auto"
   },
-  "windowStart": "2026-08-28T06:50:21.958Z",
-  "windowEnd": "2026-08-29T09:05:21.958Z",
+  "windowStart": "2026-08-28T06:55:21.734Z",
+  "windowEnd": "2026-08-29T09:10:21.734Z",
   "scheduled": 12,
   "recipients": 39,
   "skippedPast": 0,
@@ -49,14 +49,14 @@
     "mode": "entry",
     "time": "13:33",
     "sendAfter": "2026-08-28T11:33:00.000Z",
-    "recipients": 1,
+    "recipients": 2,
     "timeZone": "Europe/Berlin",
     "timeSource": "dhuhr-auto"
   },
-  "lastRecipients": 1,
+  "lastRecipients": 2,
   "lastOneSignalResponse": {
     "mode": "entry",
-    "recipients": 1,
+    "recipients": 2,
     "response": "{\"id\":\"5aa9237d-c2be-437f-a011-a237297212ef\",\"external_id\":\"cb0120e7-95d9-4594-b8db-0a3798c8c9f1\"}"
   },
   "lastError": null,
@@ -67,7 +67,7 @@
       "mode": "morning",
       "time": "09:00",
       "sendAfter": "2026-08-28T07:00:00.000Z",
-      "recipients": 10,
+      "recipients": 9,
       "timeZone": "Europe/Berlin",
       "timeSource": "dhuhr-auto"
     },
@@ -77,7 +77,7 @@
       "mode": "advance",
       "time": "13:03",
       "sendAfter": "2026-08-28T11:03:00.000Z",
-      "recipients": 10,
+      "recipients": 9,
       "timeZone": "Europe/Berlin",
       "timeSource": "dhuhr-auto"
     },
@@ -87,7 +87,7 @@
       "mode": "entry",
       "time": "13:33",
       "sendAfter": "2026-08-28T11:33:00.000Z",
-      "recipients": 10,
+      "recipients": 9,
       "timeZone": "Europe/Berlin",
       "timeSource": "dhuhr-auto"
     },
@@ -157,7 +157,7 @@
       "mode": "morning",
       "time": "09:00",
       "sendAfter": "2026-08-28T07:00:00.000Z",
-      "recipients": 1,
+      "recipients": 2,
       "timeZone": "Europe/Berlin",
       "timeSource": "dhuhr-auto"
     },
@@ -167,7 +167,7 @@
       "mode": "advance",
       "time": "13:03",
       "sendAfter": "2026-08-28T11:03:00.000Z",
-      "recipients": 1,
+      "recipients": 2,
       "timeZone": "Europe/Berlin",
       "timeSource": "dhuhr-auto"
     },
@@ -177,7 +177,7 @@
       "mode": "entry",
       "time": "13:33",
       "sendAfter": "2026-08-28T11:33:00.000Z",
-      "recipients": 1,
+      "recipients": 2,
       "timeZone": "Europe/Berlin",
       "timeSource": "dhuhr-auto"
     }
@@ -186,17 +186,17 @@
   "oneSignalResponses": [
     {
       "mode": "morning",
-      "recipients": 10,
+      "recipients": 9,
       "response": "{\"id\":\"a9f5d1c3-016f-497f-9d88-f494ce01d1ec\",\"external_id\":\"4b628ac0-1e7c-46b0-8a36-9e259aa072ef\"}"
     },
     {
       "mode": "advance",
-      "recipients": 10,
+      "recipients": 9,
       "response": "{\"id\":\"c4b827b8-e667-4b7d-b79f-68e81deee5f3\",\"external_id\":\"92b6f714-1f31-41e7-8285-5fe0a45930a8\"}"
     },
     {
       "mode": "entry",
-      "recipients": 10,
+      "recipients": 9,
       "response": "{\"id\":\"742b91c4-67bc-447e-90c4-3caa85992441\",\"external_id\":\"6a33118d-34eb-459b-94b3-268b19e559f7\"}"
     },
     {
@@ -231,17 +231,17 @@
     },
     {
       "mode": "morning",
-      "recipients": 1,
+      "recipients": 2,
       "response": "{\"id\":\"c6468aa3-5230-4c55-9dd5-12d8c272f84a\",\"external_id\":\"e7cbec44-613d-4452-a258-4274ad97da19\"}"
     },
     {
       "mode": "advance",
-      "recipients": 1,
+      "recipients": 2,
       "response": "{\"id\":\"06ed2c62-6510-4bf2-9916-c0f5f86ed6b5\",\"external_id\":\"aad0bace-d13c-42be-9a22-f2d28b040b4d\"}"
     },
     {
       "mode": "entry",
-      "recipients": 1,
+      "recipients": 2,
       "response": "{\"id\":\"5aa9237d-c2be-437f-a011-a237297212ef\",\"external_id\":\"cb0120e7-95d9-4594-b8db-0a3798c8c9f1\"}"
     }
   ],
