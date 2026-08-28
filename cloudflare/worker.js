@@ -4,7 +4,8 @@
    Secret-Resync nach Reclaim: 2026-08-27
    Admin-UI v56: Secret-Resync nach Static-Deploy
    Secret put fallback 2026-08-27T09:15: GITHUB_TOKEN wieder anbinden
-   Secret-Resync 2026-08-27T20:55: Publish GITHUB_TOKEN fehlt — Reclaim */
+   Secret-Resync 2026-08-27T20:55: Publish GITHUB_TOKEN fehlt — Reclaim
+   Jummah opt-out 2026-08-28: Scheduler nur jummah_notifications=true */
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
 import {
   parsePostForTelegram,
