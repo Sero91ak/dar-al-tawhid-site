@@ -20266,13 +20266,21 @@ function bindThemeControls(){document.querySelectorAll("[data-theme-select]").fo
 
 const DAR_APP_ICON_KEY="darAppIconV1";
 const DAR_APP_ICONS=[
-  {id:"seal-creme",label:"Siegel Creme",ios:""},
-  {id:"seal-navy",label:"Siegel Navy",ios:"AppIconSealNavy"},
-  {id:"seal-schwarz",label:"Siegel Schwarz",ios:"AppIconSealSchwarz"}
+  {id:"type-creme-ar",label:"Creme",ios:""},
+  {id:"type-creme",label:"Creme Name",ios:"AppIconTypeCreme"},
+  {id:"type-schwarz-ar",label:"Schwarz",ios:"AppIconTypeSchwarzAr"},
+  {id:"type-schwarz",label:"Schwarz Name",ios:"AppIconTypeSchwarz"},
+  {id:"type-navy-ar",label:"Navy",ios:"AppIconTypeNavyAr"},
+  {id:"type-navy",label:"Navy Name",ios:"AppIconTypeNavy"},
+  {id:"type-bordeaux-ar",label:"Bordeaux",ios:"AppIconTypeBordeauxAr"},
+  {id:"type-bordeaux",label:"Bordeaux Name",ios:"AppIconTypeBordeaux"},
+  {id:"type-gruen-ar",label:"Grün",ios:"AppIconTypeGruenAr"},
+  {id:"type-gruen",label:"Grün Name",ios:"AppIconTypeGruen"},
+  {id:"type-schwarz-ar2",label:"Schwarz Fein",ios:"AppIconTypeSchwarzAr2"}
 ];
-function getDarAppIcon(){try{const v=localStorage.getItem(DAR_APP_ICON_KEY);if(DAR_APP_ICONS.some(x=>x.id===v))return v}catch(e){}return"seal-creme"}
+function getDarAppIcon(){try{const v=localStorage.getItem(DAR_APP_ICON_KEY);if(DAR_APP_ICONS.some(x=>x.id===v))return v}catch(e){}return"type-creme-ar"}
 function applyDarAppIcon(id,{save=true}={}){const icon=DAR_APP_ICONS.find(x=>x.id===id)||DAR_APP_ICONS[0];if(save){try{localStorage.setItem(DAR_APP_ICON_KEY,icon.id)}catch(e){}}document.querySelectorAll("[data-app-icon-select]").forEach(btn=>{const on=btn.getAttribute("data-app-icon-select")===icon.id;btn.classList.toggle("is-active",on);btn.setAttribute("aria-pressed",on?"true":"false")});try{if(window.webkit&&webkit.messageHandlers&&webkit.messageHandlers.darAppIcon)webkit.messageHandlers.darAppIcon.postMessage({id:icon.id,name:icon.ios||""})}catch(e){}return icon.id}
-function renderAppIconPanel(){const cur=getDarAppIcon();return `<section class="app-icon-panel premium-surface" id="darAppIconPanel"><div class="theme-switch-head"><h3>App-Icon</h3><p class="theme-switch-note">Standard ist Siegel Creme. Nach links oder rechts wischen.</p></div><div class="app-icon-rail">${DAR_APP_ICONS.map(icon=>`<button type="button" class="app-icon-choice${cur===icon.id?" is-active":""}" data-app-icon-select="${icon.id}" aria-pressed="${cur===icon.id?"true":"false"}"><img src="/assets/app-icons/${icon.id}/icon-64.png" srcset="/assets/app-icons/${icon.id}/icon-64.png 1x, /assets/app-icons/${icon.id}/icon-192.png 2x" width="56" height="56" alt=""><span>${esc(icon.label)}</span></button>`).join("")}</div></section>`}
+function renderAppIconPanel(){const cur=getDarAppIcon();return `<section class="app-icon-panel premium-surface" id="darAppIconPanel"><div class="theme-switch-head"><h3>App-Icon</h3><p class="theme-switch-note">Standard ist Creme. Nach links oder rechts wischen.</p></div><div class="app-icon-rail">${DAR_APP_ICONS.map(icon=>`<button type="button" class="app-icon-choice${cur===icon.id?" is-active":""}" data-app-icon-select="${icon.id}" aria-pressed="${cur===icon.id?"true":"false"}"><img src="/assets/app-icons/${icon.id}/icon-64.png" srcset="/assets/app-icons/${icon.id}/icon-64.png 1x, /assets/app-icons/${icon.id}/icon-192.png 2x" width="56" height="56" alt=""><span>${esc(icon.label)}</span></button>`).join("")}</div></section>`}
 function bindAppIconPicker(){document.querySelectorAll("[data-app-icon-select]").forEach(btn=>{btn.onclick=()=>applyDarAppIcon(btn.getAttribute("data-app-icon-select"))});applyDarAppIcon(getDarAppIcon(),{save:false})}
 function themeButton(key){const cur=getTheme();const info=THEME_META[key]||THEME_META.dark;return `<button type="button" class="theme-switch-btn${cur===key?" is-active":""}" data-theme-select="${key}" aria-pressed="${cur===key?"true":"false"}"><span class="theme-preview"><i class="theme-preview-logo"></i><span class="theme-preview-lines"><i></i><i></i></span></span><span>${esc(info.label)}</span></button>`}
 function renderThemeSwitchPanel(){return `<section class="theme-switch-panel premium-surface"><div class="theme-switch-head"><h3>Erscheinungsbild</h3><p class="theme-switch-note">Die Auswahl wird dauerhaft auf diesem Gerät gespeichert.</p></div><div class="theme-switch-row">${themeButton("light")}${themeButton("eisgold")}${themeButton("dark")}${themeButton("soft")}${themeButton("royal")}${themeButton("bordeaux")}${themeButton("dar-al-layl")}</div></section>`}
