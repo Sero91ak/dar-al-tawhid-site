@@ -23,6 +23,16 @@ function withNotificationIcons(payload, siteUrl) {
   };
 }
 
+function separatePushLaunchUrls(payload = {}) {
+  const web = String(payload.web_url || payload.url || "").trim();
+  const next = { ...payload };
+  delete next.url;
+  if (!web) return next;
+  next.web_url = web;
+  next.app_url = `daraltawhid://in-app?src=${encodeURIComponent(web)}`;
+  return next;
+}
+
 async function postOneSignalNotification(body, apiKey, { retries = 3 } = {}) {
   const cleanKey = String(apiKey || process.env.ONESIGNAL_API_KEY_NEW || process.env.ONESIGNAL_API_KEY || "")
     .replace(/\s+/g, "")
@@ -44,7 +54,7 @@ async function postOneSignalNotification(body, apiKey, { retries = 3 } = {}) {
             "Content-Type": "application/json; charset=utf-8",
             Authorization: `${authMode} ${cleanKey}`
           },
-          body: JSON.stringify(body)
+          body: JSON.stringify(separatePushLaunchUrls(body))
         });
 
         const text = await res.text();
@@ -84,5 +94,6 @@ module.exports = {
   siteOriginFromEnv,
   notificationAssets,
   withNotificationIcons,
+  separatePushLaunchUrls,
   postOneSignalNotification
 };

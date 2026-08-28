@@ -4,6 +4,8 @@
  * Versand wird pro Subscription isoliert, damit ein ungültiges Abo niemals den ganzen Batch blockiert.
  */
 
+import { separatePushLaunchUrls } from "./push-launch-urls.js";
+
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_DAILY_STATUS_PATH = "content/admin/daily-push-status.json";
@@ -372,7 +374,7 @@ async function postOneSignal(env, payload) {
       "Content-Type": "application/json; charset=utf-8",
       Authorization: `Key ${key}`
     },
-    body: JSON.stringify(payload)
+    body: JSON.stringify(separatePushLaunchUrls(payload))
   });
   const text = await response.text();
   let parsed = {};

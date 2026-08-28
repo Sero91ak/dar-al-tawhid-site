@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v696";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v697";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -9825,6 +9825,10 @@ html[data-theme="bordeaux"] .quiz-shell.quiz-shell-pro{
 window.OneSignalDeferred = window.OneSignalDeferred || [];
 window.__darOneSignalInitErrors=[];
 OneSignalDeferred.push(async function(OneSignal){
+  if(window.DAR_IOS_NATIVE_APP){
+    window.DAR_ONE_SIGNAL_READY=false;
+    return;
+  }
   async function darInitOneSignal(attempt){
     const swPath="/push/onesignal/OneSignalSDKWorker.js";
     try{
@@ -23530,9 +23534,12 @@ function updatePrayerReminderButtons(){const s=getPrayerSettings();document.quer
 function updateHighlightPushButtons(){const s=getPrayerSettings();document.querySelectorAll('[data-daily-push="dailyDua"]').forEach(btn=>{const active=dailyPushPref(s,"dailyDua");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Push · Duʿāʾ des Tages · 09:00"});document.querySelectorAll('[data-daily-push="dailyRecommendation"]').forEach(btn=>{const active=dailyPushPref(s,"dailyRecommendation");btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");btn.textContent=(active?"✓ ":"○ ")+"Push · Heute empfohlen · 12:00"})}
 function updatePushFloatButton(){const state=readOneSignalPushSubscriptionState(window.OneSignal);const active=state.ready;const btn=$("pushFloat");if(btn){btn.classList.toggle("push-active",active);btn.title=active?"Push aktiv":"Benachrichtigungen aktivieren"}}
 function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
-async function addOneSignalTagsCompat(OS,tags){const os=OS||await waitForOneSignalReady();if(!os||!tags)return false;let ok=false;if(os.User&&typeof os.User.addTags==="function"){await os.User.addTags(tags);ok=true}if(typeof os.sendTags==="function"){await os.sendTags(tags);ok=true}else if(typeof os.sendTag==="function"){for(const [key,value]of Object.entries(tags)){await os.sendTag(key,String(value));ok=true}}return ok}
+function isDarNativeIosApp(){return !!window.DAR_IOS_NATIVE_APP}
+function isDarTestWebApp(){try{return /(^|\/)test(\/|$)/.test(location.pathname)}catch(e){return false}}
+function darPushSurfaceTags(){return{dar_client:isDarNativeIosApp()?"native_ios":"web",dar_env:isDarTestWebApp()?"test":"live",dar_surface:isDarNativeIosApp()?"native":(isDarTestWebApp()?"test":"web"),push_site:"dar-al-tawhid"}}
+async function addOneSignalTagsCompat(OS,tags){if(isDarNativeIosApp())return false;const os=OS||await waitForOneSignalReady();if(!os||!tags)return false;const merged=Object.assign({},darPushSurfaceTags(),tags);let ok=false;if(os.User&&typeof os.User.addTags==="function"){await os.User.addTags(merged);ok=true}if(typeof os.sendTags==="function"){await os.sendTags(merged);ok=true}else if(typeof os.sendTag==="function"){for(const [key,value]of Object.entries(merged)){await os.sendTag(key,String(value));ok=true}}return ok}
 async function ensurePostPushTags(OS){const os=OS||await waitForOneSignalReady();if(!os)return false;try{await addOneSignalTagsCompat(os,{dar_push:"true",post_notifications:"true",push_version:"7"});return true}catch(e){console.warn("Beitrags-Push-Tags:",e);return false}}
-async function autonomousOneSignalBootRepair(){if(window.DAR_ONE_SIGNAL_READY&&window.OneSignal&&window.OneSignal.User)return true;const key="darOsBootRepairV633";try{const last=Number(localStorage.getItem(key)||0)||0;if(last&&Date.now()-last<6*60*60*1000)return false;localStorage.setItem(key,String(Date.now()))}catch(e){}try{if("serviceWorker"in navigator){await navigator.serviceWorker.register("/push/onesignal/OneSignalSDKWorker.js",{scope:"/push/onesignal/",updateViaCache:"none"});await navigator.serviceWorker.ready.catch(()=>null)}}catch(e){}try{location.reload()}catch(e){}return false}
+async function autonomousOneSignalBootRepair(){if(window.DAR_IOS_NATIVE_APP)return true;if(window.DAR_ONE_SIGNAL_READY&&window.OneSignal&&window.OneSignal.User)return true;const key="darOsBootRepairV633";try{const last=Number(localStorage.getItem(key)||0)||0;if(last&&Date.now()-last<6*60*60*1000)return false;localStorage.setItem(key,String(Date.now()))}catch(e){}try{if("serviceWorker"in navigator){await navigator.serviceWorker.register("/push/onesignal/OneSignalSDKWorker.js",{scope:"/push/onesignal/",updateViaCache:"none"});await navigator.serviceWorker.ready.catch(()=>null)}}catch(e){}try{location.reload()}catch(e){}return false}
 async function maintainPushHealth({silent=true}={}){if(pushHealthRunning)return false;pushHealthRunning=true;let ok=true;try{if(!hasNotificationApi())return false;if(getNotificationPermission()!=="granted")return false;await ensureOneSignalServiceWorkerReady();const OS=await waitForOneSignalReady(15000);const state=readOneSignalPushSubscriptionState(OS);const broken=!state.ready||!state.subscriptionId||!state.optedIn;let repairedThisRun=false;if(broken&&shouldRunPushAutorepair()){markPushAutorepairAttempt();repairedThisRun=true;try{const repaired=await repairPushConnection({silent:true});setPrayerPushDebug({pushAutorepairAt:new Date().toISOString(),pushAutorepairOk:Boolean(repaired?.ok),pushAutorepairPlatform:isAndroidDevice()?"android":"other"});if(!repaired?.ok)ok=false}catch(e){ok=false;console.warn("Push-Autorepair:",e)}}const OS2=await waitForOneSignalReady(8000);if(OS2?.User?.PushSubscription?.optedIn){await syncPushRegistrationOnly(OS2);const welcomed=await sendWelcomePushIfNeeded(OS2);if(!welcomed){scheduleWelcomePushRetries(OS2)}else{try{const sid=String(OS2?.User?.PushSubscription?.id||"").trim();if(sid)localStorage.removeItem(welcomePushPendingKey(sid))}catch(e){}}}const s=getPrayerSettings();if(s.reminder&&hasPrayerLocation(s)){let synced=await syncPrayerPushTags(s,{retries:5});if(!synced){ok=false;if(isAndroidDevice()&&(!repairedThisRun||shouldRunPushAutorepair())){markPushAutorepairAttempt();try{await repairPushConnection({silent:true});synced=await syncPrayerPushTags(s,{retries:3});if(synced)ok=true}catch(e){console.warn("Android-Push-Nachrepair:",e)}}}await scheduleLocalPrayerRemindersIfNeeded({silent:true,serverSynced:synced})}else if(s.reminder&&!hasPrayerLocation(s)&&!silent){ok=false}if(s.jummahNotifications){const jOk=await syncJummahPushTags(s,{retries:3});if(!jOk)ok=false}else{await syncJummahPushTags(s,{retries:2}).catch(()=>{})}updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();return ok}catch(e){console.warn("Push-Wartung:",e);return false}finally{pushHealthRunning=false}}
 function startPushHealthMonitor(){if(pushHealthTimer)clearInterval(pushHealthTimer);const tick=()=>{if(!(window.DAR_ONE_SIGNAL_READY&&window.OneSignal&&window.OneSignal.User)){autonomousOneSignalBootRepair().catch(()=>{});return}maintainPushHealth({silent:true}).catch(()=>{})};setTimeout(tick,2500);maintainPushHealth({silent:true}).catch(()=>{});pushHealthTimer=setInterval(tick,PUSH_HEALTH_INTERVAL_MS);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")tick()});window.addEventListener("online",()=>tick());window.addEventListener("pageshow",()=>tick())}
 let prayerCountdownTimer=null;
@@ -23667,6 +23674,7 @@ async function waitForPushSubscriptionReady(OS,{timeoutMs=25000,request=false}={
 }
 function currentOneSignalPushIds(OS){const state=readOneSignalPushSubscriptionState(OS);return{externalId:localStorage.getItem(PUSH_USER_KEY)||"",subscriptionId:state.subscriptionId,token:state.token}}
 async function savePushRegistration(settings,OS){
+  if(isDarNativeIosApp()||isDarTestWebApp())return false;
   if(!hasSupabaseCfg())return false;
   const ids=currentOneSignalPushIds(OS);
   if(!ids.externalId||!ids.subscriptionId)return false;
@@ -26121,7 +26129,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v696";
+const APP_BUILD_ID="app-shell-v697";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}

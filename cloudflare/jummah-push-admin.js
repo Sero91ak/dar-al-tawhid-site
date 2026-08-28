@@ -4,6 +4,7 @@ import {
 } from "./jummah-push-scheduler.js";
 import { jummahCopyForMode } from "./jummah-push-copy.js";
 import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
+import { separatePushLaunchUrls } from "./push-launch-urls.js";
 
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de/#prayer";
 const DEFAULT_JUMMAH_STATUS_PATH = "content/admin/jummah-push-status.json";
@@ -97,7 +98,7 @@ export async function sendJummahTestPush(env, input = {}) {
       "Content-Type": "application/json; charset=utf-8",
       Authorization: `Key ${key}`
     },
-    body: JSON.stringify(body)
+    body: JSON.stringify(separatePushLaunchUrls(body))
   });
   const text = await res.text();
   if (!res.ok) {

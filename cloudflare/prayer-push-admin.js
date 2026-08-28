@@ -4,6 +4,7 @@ import {
 } from "./prayer-push-scheduler.js";
 import { pickPrayerEntryVariant, buildAdvancePushBody, PRAYER_TITLE_EMOJI, sanitizePrayerPushText } from "./prayer-push-copy.js";
 import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
+import { separatePushLaunchUrls } from "./push-launch-urls.js";
 
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de/#prayer";
@@ -81,7 +82,7 @@ async function postOneSignal(env, payload) {
         "Content-Type": "application/json; charset=utf-8",
         Authorization: `${authMode} ${apiKey}`
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(separatePushLaunchUrls(payload))
     });
     const text = await res.text();
     if (res.ok) {

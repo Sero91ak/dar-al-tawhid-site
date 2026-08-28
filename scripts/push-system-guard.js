@@ -134,8 +134,19 @@ function runPushSystemGuard() {
     "cloudflare/daily-push-scheduler.js",
     "cloudflare/daily-push-admin.js",
     "cloudflare/jummah-push-scheduler.js",
-    "cloudflare/jummah-push-admin.js"
+    "cloudflare/jummah-push-admin.js",
+    "cloudflare/push-launch-urls.js"
   ].forEach((file) => mustExist(file));
+
+  mustInclude("iOS-Push bleibt in der App", read("cloudflare/push-launch-urls.js"), [
+    "separatePushLaunchUrls",
+    "daraltawhid://in-app",
+    "web_url"
+  ]);
+
+  ["cloudflare/prayer-push-scheduler.js", "cloudflare/daily-push-scheduler.js", "cloudflare/post-push-admin.js"].forEach((file) => {
+    mustInclude(`${file} Launch-URLs getrennt`, read(file), ["separatePushLaunchUrls"]);
+  });
 
   mustInclude("prayer-push-scheduler.js", read("cloudflare/prayer-push-scheduler.js"), [
     "export async function runPrayerPushScheduler"

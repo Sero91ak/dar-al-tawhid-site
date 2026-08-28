@@ -3,6 +3,7 @@ import {
   readDailyPushStatusFromKv
 } from "./daily-push-scheduler.js";
 import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
+import { separatePushLaunchUrls } from "./push-launch-urls.js";
 
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_DAILY_STATUS_PATH = "content/admin/daily-push-status.json";
@@ -100,7 +101,7 @@ async function postOneSignal(env, payload) {
       "Content-Type": "application/json; charset=utf-8",
       Authorization: `Key ${apiKey}`
     },
-    body: JSON.stringify(payload)
+    body: JSON.stringify(separatePushLaunchUrls(payload))
   });
   const text = await res.text();
   if (!res.ok) throw new Error(`OneSignal ${res.status}: ${text.slice(0, 240)}`);

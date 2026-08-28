@@ -5,6 +5,7 @@
    Admin-UI v56: Secret-Resync nach Static-Deploy
    Secret put fallback 2026-08-27T09:15: GITHUB_TOKEN wieder anbinden
    Secret-Resync 2026-08-27T20:55: Publish GITHUB_TOKEN fehlt — Reclaim */
+import { separatePushLaunchUrls } from "./push-launch-urls.js";
 import {
   parsePostForTelegram,
   validateTelegramPost,
@@ -3474,7 +3475,7 @@ async function sendNewsPush(env, { newsId, title, text, nav, value }) {
             "Content-Type": "application/json; charset=utf-8",
             Authorization: `${authMode} ${apiKey}`
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(separatePushLaunchUrls(payload))
         });
         const textResp = await res.text();
         if (res.ok) {

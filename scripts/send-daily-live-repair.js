@@ -2,6 +2,7 @@
 
 const fs = require("node:fs");
 const crypto = require("node:crypto");
+const { separatePushLaunchUrls } = require("./lib/onesignal-push");
 
 const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const API_KEY = String(
@@ -135,7 +136,7 @@ async function sendOne(kind, item, row) {
       "Content-Type": "application/json; charset=utf-8",
       Authorization: `Key ${API_KEY}`
     },
-    body: JSON.stringify(payload(kind, item, row.subscription_id))
+    body: JSON.stringify(separatePushLaunchUrls(payload(kind, item, row.subscription_id)))
   });
   const text = await response.text();
   let data = {};

@@ -2,6 +2,8 @@
  * DAR AL TAWḤĪD Bibliothek — Besucher-Push bei Live-PDF-Veröffentlichung
  */
 
+import { separatePushLaunchUrls } from "./push-launch-urls.js";
+
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const SUPABASE_URL = "https://djyfkttjbdraynuxrzno.supabase.co";
@@ -362,7 +364,7 @@ export async function sendLibraryPublicationPush(env, record) {
             "Content-Type": "application/json; charset=utf-8",
             Authorization: `${authMode} ${apiKey}`
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(separatePushLaunchUrls(payload))
         });
         const text = await res.text();
         if (res.ok) {

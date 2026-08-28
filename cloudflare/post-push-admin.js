@@ -1,3 +1,5 @@
+import { separatePushLaunchUrls } from "./push-launch-urls.js";
+
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_POST_PUSH_LOG_PATH = "content/admin/post-push-log.json";
@@ -156,7 +158,7 @@ async function postOneSignalAttempt(env, payload) {
           "Content-Type": "application/json; charset=utf-8",
           Authorization: `${authMode} ${apiKey}`
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(separatePushLaunchUrls(payload))
       });
       const text = await res.text();
       const oneSignal = parseOneSignalResponse(text, res.status);
