@@ -117,6 +117,17 @@
   box-shadow:none;
 }
 .scholars-index__search::placeholder{color:color-mix(in srgb,var(--scholars-text-secondary) 80%,transparent)}
+html[data-theme="eisgold"]{
+  --scholars-search-bg:#ffffff;
+  --scholars-text-primary:#142033;
+  --scholars-header-text:#142033;
+  --scholars-accent:#8a6e28;
+}
+html[data-theme="eisgold"] .scholars-index__search,
+html[data-theme="eisgold"] .scholars-index select{
+  background:#ffffff!important;
+  color:#142033!important;
+}
 .scholars-index__search:focus{
   outline:none;
   border-color:color-mix(in srgb,var(--scholars-accent) 44%,var(--scholars-line));

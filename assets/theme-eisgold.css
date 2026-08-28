@@ -395,3 +395,19 @@ html[data-theme="eisgold"].is-standalone-pwa body{
   background-color:#e8f3fb!important;
 }
 
+html[data-theme="eisgold"] .quiz-shell.quiz-shell-pro,
+html[data-theme="eisgold"] .qibla-pro-section,
+html[data-theme="eisgold"] .qibla-panel{
+  background:#e8f3fb!important;
+  color:#142033!important;
+}
+html[data-theme="eisgold"] .quiz-control,
+html[data-theme="eisgold"] .quiz-control select,
+html[data-theme="eisgold"] .scholars-index__search,
+html[data-theme="eisgold"] .qov-direct-go,
+html[data-theme="eisgold"] .prayer-action-btn{
+  background:#ffffff!important;
+  color:#142033!important;
+  -webkit-text-fill-color:#142033!important;
+}
+

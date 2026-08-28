@@ -87,6 +87,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-surfaces-live-2026-08-28",
+      "approvedBy": "user-explicit-eisgold-meerbereich-global-live",
+      "reason": "Nutzer: Eisgold wie Meerbereich oben durchgehend; dunkle unlesbare Flächen Quiz/Quran/Gelehrte/Qibla global reparieren. Web+iOS live.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "assets/theme-eisgold.css",
+        "assets/scholars-index.css",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "visitor-live-emblem-icons-reclaim-2026-08-28",
       "approvedBy": "user-explicit-push-live",
       "reason": "Nutzer: push live. Besucher-Deploy wird von Workers Builds auf v702 zurückgeschrieben; Reclaim und Live-Rollout der Emblem-Icons.",
