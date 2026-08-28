@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-28T05:50:31.552Z",
+  "updatedAt": "2026-08-28T05:55:32.199Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-28T05:50:31.552Z",
+  "lastCronRun": "2026-08-28T05:55:32.199Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-28T07:56:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-28T05:35:21.782Z",
-  "windowEnd": "2026-08-29T07:50:21.782Z",
+  "windowStart": "2026-08-28T05:40:21.760Z",
+  "windowEnd": "2026-08-29T07:55:21.760Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 13,
@@ -28,12 +28,12 @@
   "usersWithLocation": 13,
   "usersWithActivePush": 13,
   "locationGroups": 4,
-  "scheduled": 40,
-  "recipients": 130,
+  "scheduled": 41,
+  "recipients": 131,
   "invalid": 0,
   "invalidDisabled": 0,
   "skippedPast": 50,
-  "skippedWindow": 70,
+  "skippedWindow": 69,
   "advanceCatchups": 0,
   "entryCatchups": 0,
   "duplicates": 1,
@@ -362,6 +362,16 @@
       "mode": "advance",
       "time": "13:51",
       "sendAfter": "2026-08-28T11:36:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin",
+      "invalid": 0
+    },
+    {
+      "prayer": "Dhuhr",
+      "key": "dhuhr",
+      "mode": "advance",
+      "time": "10:10",
+      "sendAfter": "2026-08-29T07:55:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
       "invalid": 0
@@ -1003,6 +1013,13 @@
       "response": "{\"id\":\"4731f7a9-462a-4c79-b38f-6e1cc803e6b0\",\"external_id\":\"cb3b6923-a9fd-48cd-8e29-4591802ad38d\"}"
     },
     {
+      "prayer": "dhuhr",
+      "mode": "advance",
+      "recipients": 1,
+      "invalid": 0,
+      "response": "{\"id\":\"3c2702a7-de1b-4282-b84c-e59c52001383\",\"external_id\":\"8696210a-79fb-4e93-9c73-15e6f156dff1\"}"
+    },
+    {
       "prayer": "maghrib",
       "mode": "entry",
       "recipients": 1,
@@ -1022,13 +1039,6 @@
       "recipients": 1,
       "invalid": 0,
       "response": "{\"id\":\"8f71a64a-acee-4d12-a1c8-9b4407316ecd\",\"external_id\":\"668b2ef8-c64b-4f4c-8c61-48057a250902\"}"
-    },
-    {
-      "prayer": "isha",
-      "mode": "advance",
-      "recipients": 1,
-      "invalid": 0,
-      "response": "{\"id\":\"b6bc1c26-fe74-465d-bd11-8c96b7b5b52c\",\"external_id\":\"b37adfc1-1ad0-433b-9dc9-c723ba405f80\"}"
     }
   ],
   "userRegistry": [
