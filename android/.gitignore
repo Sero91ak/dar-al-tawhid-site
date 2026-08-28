@@ -1,0 +1,24 @@
+# Local Android SDK
+local.properties
+
+# Gradle
+.gradle/
+**/build/
+.idea/
+*.iml
+
+# Signing — never commit the upload key
+keystore.properties
+*.jks
+*.keystore
+*.pepk
+
+# Play / Firebase secrets
+google-services.json
+app/google-services.json
+
+# Build outputs
+*.apk
+*.aab
+*.ap_
+captures/

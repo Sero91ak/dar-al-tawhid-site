@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.DarAlTawhid" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/dar_bg</item>
+        <item name="android:navigationBarColor">@color/dar_bg</item>
+        <item name="android:windowBackground">@color/dar_bg</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="colorPrimary">@color/dar_gold</item>
+    </style>
+</resources>

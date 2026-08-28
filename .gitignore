@@ -6,3 +6,10 @@ node_modules/
 Thumbs.db
 *.log
 .cursor/
+android/.gradle/
+android/**/build/
+android/local.properties
+android/keystore.properties
+android/*.jks
+android/*.keystore
+android/app/google-services.json
