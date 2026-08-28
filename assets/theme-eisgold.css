@@ -1,17 +1,17 @@
 /* Eisgold — ice-white / ice-blue field, gold lines, near-black ink. Not cream, not charcoal. */
 html[data-theme="eisgold"]{
   color-scheme:light!important;
-  --bg:#edf6ff!important;
-  --bg2:#e4f0fb!important;
+  --bg:#e6dcc0!important;
+  --bg2:#efe8d4!important;
   --panel:rgba(255,255,255,.90)!important;
   --card:rgba(255,255,255,.86)!important;
   --page-cover:#f8fcff!important;
   --page-cover-mid:#edf6ff!important;
-  --gold:#c8a95a!important;
-  --gold2:#142033!important;
-  --bronze:#a9852f!important;
-  --cream:#142033!important;
-  --text:#142033!important;
+  --gold:#7a5c22!important;
+  --gold2:#1c1812!important;
+  --bronze:#6e5220!important;
+  --cream:#1c1812!important;
+  --text:#1c1812!important;
   --muted:#637083!important;
   --muted2:#7a8798!important;
   --line:rgba(200,169,90,.34)!important;
@@ -20,8 +20,8 @@ html[data-theme="eisgold"]{
   --premium-border:rgba(200,169,90,.34)!important;
   --premium-bg:radial-gradient(circle at 16% 0%,rgba(200,169,90,.20),transparent 42%),radial-gradient(circle at 86% 12%,rgba(168,210,238,.38),transparent 36%),linear-gradient(180deg,#f8fcff 0%,#edf6ff 52%,#e4f0fb 100%)!important;
   --premium-shadow:0 14px 32px rgba(20,32,51,.08),inset 0 1px 0 rgba(255,255,255,.82)!important;
-  --premium-label:#a9852f!important;
-  --premium-title:#142033!important;
+  --premium-label:#6e5220!important;
+  --premium-title:#1c1812!important;
   --premium-body:#3d4c60!important;
   --premium-pill-border:rgba(200,169,90,.36)!important;
   --premium-pill-bg:linear-gradient(135deg,rgba(255,255,255,.96),rgba(232,244,255,.88))!important;
@@ -40,7 +40,7 @@ html[data-theme="eisgold"]{
   --theme-text:#142033!important;
   --theme-muted:#637083!important;
   --theme-surface:rgba(255,255,255,.86)!important;
-  --outer-bg-flat:#edf6ff;
+  --outer-bg-flat:#e6dcc0;
   --outer-bg:radial-gradient(circle at 16% 0%,rgba(200,169,90,.20),transparent 42%),radial-gradient(circle at 84% 8%,rgba(168,210,238,.42),transparent 36%),linear-gradient(180deg,#f8fcff 0%,#edf6ff 48%,#e4f0fb 100%);
   --cover-edge-bg:linear-gradient(180deg,#f8fcff 0%,#edf6ff 48%,rgba(237,246,255,0) 100%);
   --cover-panel-bg:linear-gradient(180deg,rgba(255,255,255,.92),rgba(237,246,255,.90));
@@ -73,7 +73,7 @@ html[data-theme="eisgold"],
 html[data-theme="eisgold"] body{
   color:#142033!important;
   background:var(--outer-bg)!important;
-  background-color:#edf6ff!important;
+  background-color:#e6dcc0!important;
 }
 html[data-theme="eisgold"] body:before{
   opacity:.10!important;
@@ -158,8 +158,14 @@ html[data-theme="eisgold"] .theme-switch-note{
 html[data-theme="eisgold"] .gold,
 html[data-theme="eisgold"] .brand-title,
 html[data-theme="eisgold"] .logo-word,
-html[data-theme="eisgold"] .premium-title{
-  color:#a9852f!important;
+html[data-theme="eisgold"] .premium-title,
+html[data-theme="eisgold"] .brand-main h1,
+html[data-theme="eisgold"] .brand-main h1.brand-title-refined,
+html[data-theme="eisgold"] h1.brand-title-refined,
+html[data-theme="eisgold"] .salam{
+  color:#1c1812!important;
+  -webkit-text-fill-color:#1c1812!important;
+  text-shadow:none!important;
 }
 html[data-theme="eisgold"] .action-btn,
 html[data-theme="eisgold"] .premium-pill,
@@ -200,4 +206,128 @@ html[data-theme="eisgold"] body.is-ilm-chat-route{
   --theme-preview-logo:radial-gradient(circle,#fff 0 30%,#c8a95a 32% 34%,#d7ebf8 36% 100%);
   --theme-preview-shadow:rgba(20,32,51,.12);
   --theme-preview-line:linear-gradient(90deg,#c8a95a,#7eb7d8);
+}
+
+/* v2 · Lesbarkeit: Tinte statt Blassgold, edle Goldlinien, Overscroll = Eisgold-Fläche */
+html[data-theme="eisgold"] .intro,
+html[data-theme="eisgold"] .view-desc,
+html[data-theme="eisgold"] .folder-card p,
+html[data-theme="eisgold"] .info-card p,
+html[data-theme="eisgold"] .dua-card p{
+  color:#4a453c!important;
+}
+html[data-theme="eisgold"] .quran-continue,
+html[data-theme="eisgold"] .quran-resume,
+html[data-theme="eisgold"] [data-quran-continue],
+html[data-theme="eisgold"] .home-quran-continue,
+html[data-theme="eisgold"] .quran-progress-bar,
+html[data-theme="eisgold"] .quran-progress-chip{
+  color:#1c1812!important;
+}
+html[data-theme="eisgold"] .quran-wake-btn,
+html[data-theme="eisgold"] .quran-wake-btn.is-off,
+html[data-theme="eisgold"] .quran-tr-btn,
+html[data-theme="eisgold"] .quran-jump-btn,
+html[data-theme="eisgold"] .qov-surah-btn,
+html[data-theme="eisgold"] .quran-surah-select,
+html[data-theme="eisgold"] .quran-picker,
+html[data-theme="eisgold"] .quran-header-title,
+html[data-theme="eisgold"] .quran-current-surah,
+html[data-theme="eisgold"] .quran-toolbar,
+html[data-theme="eisgold"] .quran-toolbar button,
+html[data-theme="eisgold"] .quran-reader-head,
+html[data-theme="eisgold"] .quran-reader-head b,
+html[data-theme="eisgold"] .quran-reader-head span,
+html[data-theme="eisgold"] .quran-nav-label,
+html[data-theme="eisgold"] .quran-mini-bar,
+html[data-theme="eisgold"] .quran-mini-bar b{
+  color:#1c1812!important;
+  -webkit-text-fill-color:#1c1812!important;
+}
+html[data-theme="eisgold"] .quran-latin,
+html[data-theme="eisgold"] .quran-translit,
+html[data-theme="eisgold"] .ayah-transliteration,
+html[data-theme="eisgold"] .quran-ayah-tr,
+html[data-theme="eisgold"] .quran-tr-line,
+html[data-theme="eisgold"] .quran-ayah .tr,
+html[data-theme="eisgold"] .quran-ayah .latin{
+  color:#3a3428!important;
+}
+html[data-theme="eisgold"] .quran-ayah,
+html[data-theme="eisgold"] .quran-verse,
+html[data-theme="eisgold"] .quran-surah-card,
+html[data-theme="eisgold"] .isnad,
+html[data-theme="eisgold"] .hero-text,
+html[data-theme="eisgold"] .post-reader-sep{
+  border-color:rgba(184,150,58,.52)!important;
+}
+html[data-theme="eisgold"] .quran-ayah{
+  border-top:1px solid rgba(184,150,58,.55)!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] .quiz-shell,
+html[data-theme="eisgold"] .quiz-panel,
+html[data-theme="eisgold"] .quiz-card,
+html[data-theme="eisgold"] .qibla-panel,
+html[data-theme="eisgold"] .qibla-box,
+html[data-theme="eisgold"] .qibla-compass-wrap{
+  background:linear-gradient(145deg,#f7f3e8,#efe8d4)!important;
+  color:#1c1812!important;
+  border-color:rgba(184,150,58,.42)!important;
+}
+html[data-theme="eisgold"] .quiz-shell h2,
+html[data-theme="eisgold"] .quiz-shell h3,
+html[data-theme="eisgold"] .quiz-shell b,
+html[data-theme="eisgold"] .qibla-panel h3,
+html[data-theme="eisgold"] .qibla-panel h4,
+html[data-theme="eisgold"] .qibla-heading,
+html[data-theme="eisgold"] .qibla-deg,
+html[data-theme="eisgold"] .qibla-meta b,
+html[data-theme="eisgold"] .qibla-meta span,
+html[data-theme="eisgold"] #startQiblaBtn,
+html[data-theme="eisgold"] #stopQiblaBtn{
+  color:#1c1812!important;
+  -webkit-text-fill-color:#1c1812!important;
+}
+html[data-theme="eisgold"] .quiz-shell select,
+html[data-theme="eisgold"] .quiz-shell .filter-select,
+html[data-theme="eisgold"] .quiz-shell input,
+html[data-theme="eisgold"] select.filter-select,
+html[data-theme="eisgold"] .direct-pick,
+html[data-theme="eisgold"] .search{
+  background:#fffdf6!important;
+  color:#1c1812!important;
+  -webkit-text-fill-color:#1c1812!important;
+  border-color:rgba(184,150,58,.45)!important;
+}
+html[data-theme="eisgold"] .bottom-nav-btn span,
+html[data-theme="eisgold"] .bottom-nav-btn{
+  color:#2a2418!important;
+}
+html[data-theme="eisgold"] .bottom-nav-btn.is-active,
+html[data-theme="eisgold"] .bottom-nav-btn[aria-current="page"]{
+  color:#1c1812!important;
+}
+html[data-theme="eisgold"] .isnad-label,
+html[data-theme="eisgold"] .section-kicker,
+html[data-theme="eisgold"] .kicker{
+  color:#6e5220!important;
+}
+html[data-theme="eisgold"] .quran-ayah-tr,
+html[data-theme="eisgold"] .quran-ayah-tr-wrap,
+html[data-theme="eisgold"] .qov-resume-line,
+html[data-theme="eisgold"] .qov-resume-card,
+html[data-theme="eisgold"] .home-v380-quran-hero__title,
+html[data-theme="eisgold"] .home-v380-quran-hero__meta,
+html[data-theme="eisgold"] .quran-home-teaser h3,
+html[data-theme="eisgold"] .qov-jump-pick,
+html[data-theme="eisgold"] .qov-jump-label{
+  color:#1c1812!important;
+  -webkit-text-fill-color:#1c1812!important;
+}
+html[data-theme="eisgold"] .brand-main h1.brand-title-refined::after{
+  height:1.5px!important;
+  background:linear-gradient(90deg,transparent 0%,#b8963a 12%,#d4b060 50%,#b8963a 88%,transparent 100%)!important;
+  box-shadow:0 1px 8px rgba(184,150,58,.35)!important;
+  opacity:1!important;
 }
