@@ -257,23 +257,40 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CLOUDFLARE_GLOBAL_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
+          SITE_URL: "https://dar-al-tawhid.de"
+          PURGE_SCOPE: "visitor"
         run: |
           EXPECT="$(node -e "console.log(require('./version.json').buildId||require('./version.json').appBuildId||'')")"
           echo "Erwarte Build $EXPECT"
-          for attempt in 1 2 3 4 5 6; do
-            LIVE="$(curl -fsS "https://dar-al-tawhid-site.sero91ak.workers.dev/version.json" || true)"
-            echo "workers.dev version: $LIVE"
-            if printf '%s' "$LIVE" | grep -q "\"buildId\":\"$EXPECT\""; then
+          ok=0
+          for attempt in 1 2 3 4 5 6 7 8 9 10 11 12; do
+            ts="$(date +%s)"
+            LIVE_DEV="$(curl -fsS "https://dar-al-tawhid-site.sero91ak.workers.dev/version.json?cb=${attempt}-${ts}" || true)"
+            LIVE_WWW="$(curl -fsS "https://dar-al-tawhid.de/version.json?cb=${attempt}-${ts}" || true)"
+            echo "workers.dev version: $LIVE_DEV"
+            echo "www version: $LIVE_WWW"
+            if printf '%s' "$LIVE_DEV" | grep -q "\"buildId\":\"$EXPECT\"" \
+              && printf '%s' "$LIVE_WWW" | grep -q "\"buildId\":\"$EXPECT\""; then
               echo "Visitor-Worker Build OK (Versuch $attempt)"
+              ok=1
               break
             fi
             echo "Visitor overwrite/stale (Versuch $attempt) – wrangler deploy"
             npx wrangler deploy
-            sleep 20
+            node scripts/purge-cloudflare-cache.js || true
+            sleep 25
           done
-          # CDN purge aggressively
           node scripts/purge-cloudflare-cache.js || true
-          sleep 5
+          sleep 8
+          LIVE_WWW="$(curl -fsS "https://dar-al-tawhid.de/version.json?cb=final-$(date +%s)" || true)"
+          echo "www final: $LIVE_WWW"
+          if ! printf '%s' "$LIVE_WWW" | grep -q "\"buildId\":\"$EXPECT\""; then
+            echo "::error::Live version.json ist nicht ${EXPECT}"
+            exit 1
+          fi
 
       - name: Live-Deploy verifizieren (nur Besucher-App)
         env:

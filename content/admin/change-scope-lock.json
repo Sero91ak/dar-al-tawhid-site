@@ -87,6 +87,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "visitor-live-emblem-icons-reclaim-2026-08-28",
+      "approvedBy": "user-explicit-push-live",
+      "reason": "Nutzer: push live. Besucher-Deploy wird von Workers Builds auf v702 zurückgeschrieben; Reclaim und Live-Rollout der Emblem-Icons.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        ".assetsignore",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/app-icons/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "emblem-app-icons-ios-2026-08-28",
       "approvedBy": "user-explicit-three-icons-ios-app-icon-picker-live",
       "reason": "Nutzer: Die drei Medaillon-Icons auch bei App-Icons für iOS mit reinnehmen, Besucher können auswählen. Sofort live.",
