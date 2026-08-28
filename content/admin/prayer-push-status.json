@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-28T11:45:34.275Z",
+  "updatedAt": "2026-08-28T11:50:41.041Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-28T11:45:34.275Z",
+  "lastCronRun": "2026-08-28T11:50:41.041Z",
   "nextPlannedPush": {
     "prayer": "ʿAṣr",
     "key": "asr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-28T11:51:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-28T11:30:21.766Z",
-  "windowEnd": "2026-08-29T13:45:21.766Z",
+  "windowStart": "2026-08-28T11:35:25.379Z",
+  "windowEnd": "2026-08-29T13:50:25.379Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 13,
@@ -28,11 +28,11 @@
   "usersWithLocation": 13,
   "usersWithActivePush": 13,
   "locationGroups": 4,
-  "scheduled": 47,
-  "recipients": 146,
+  "scheduled": 44,
+  "recipients": 134,
   "invalid": 0,
   "invalidDisabled": 0,
-  "skippedPast": 55,
+  "skippedPast": 58,
   "skippedWindow": 58,
   "advanceCatchups": 0,
   "entryCatchups": 0,
@@ -65,8 +65,8 @@
           "recipients": 0
         },
         "entry": {
-          "status": "geplant",
-          "recipients": 12
+          "status": "übersprungen",
+          "recipients": 0
         }
       },
       "asr": {
@@ -141,10 +141,10 @@
         "recipients": 0
       },
       "entry": {
-        "status": "geplant",
-        "recipients": 12
+        "status": "übersprungen",
+        "recipients": 0
       },
-      "answer": "Dhuhr 13:33: Gebetszeit geplant."
+      "answer": "Dhuhr 13:33: übersprungen – Fenster vorbei."
     },
     "asr": {
       "name": "ʿAṣr",
@@ -206,16 +206,6 @@
     "answer": "Maghrib 20:27: Vorab und Gebetszeit geplant."
   },
   "planned": [
-    {
-      "prayer": "Dhuhr",
-      "key": "dhuhr",
-      "mode": "entry",
-      "time": "13:33",
-      "sendAfter": "2026-08-28T11:33:00.000Z",
-      "recipients": 10,
-      "timeZone": "Europe/Berlin",
-      "invalid": 0
-    },
     {
       "prayer": "ʿAṣr",
       "key": "asr",
@@ -457,16 +447,6 @@
       "invalid": 0
     },
     {
-      "prayer": "Dhuhr",
-      "key": "dhuhr",
-      "mode": "entry",
-      "time": "13:33",
-      "sendAfter": "2026-08-28T11:33:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin",
-      "invalid": 0
-    },
-    {
       "prayer": "ʿAṣr",
       "key": "asr",
       "mode": "entry",
@@ -562,16 +542,6 @@
       "mode": "advance",
       "time": "13:32",
       "sendAfter": "2026-08-29T11:17:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin",
-      "invalid": 0
-    },
-    {
-      "prayer": "Dhuhr",
-      "key": "dhuhr",
-      "mode": "entry",
-      "time": "13:33",
-      "sendAfter": "2026-08-28T11:33:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
       "invalid": 0
@@ -764,6 +734,13 @@
     },
     {
       "key": "dhuhr",
+      "mode": "entry",
+      "sendAfter": "2026-08-28T11:33:00.000Z",
+      "time": "13:33",
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "key": "dhuhr",
       "mode": "advance",
       "sendAfter": "2026-08-28T11:18:00.000Z",
       "time": "13:33",
@@ -950,23 +927,9 @@
       "sendAfter": "2026-08-27T19:32:00.000Z",
       "time": "21:47",
       "timeZone": "Europe/Berlin"
-    },
-    {
-      "key": "fajr",
-      "mode": "entry",
-      "sendAfter": "2026-08-28T03:21:00.000Z",
-      "time": "05:21",
-      "timeZone": "Europe/Berlin"
     }
   ],
   "oneSignalResponses": [
-    {
-      "prayer": "dhuhr",
-      "mode": "entry",
-      "recipients": 10,
-      "invalid": 0,
-      "response": "{\"id\":\"8c4a3a5b-4db7-4dda-bdee-947bce50d9cb\",\"external_id\":\"f643e74b-b58b-412e-bf87-57a6f16ed0a0\"}"
-    },
     {
       "prayer": "asr",
       "mode": "entry",
@@ -1099,6 +1062,13 @@
       "recipients": 1,
       "invalid": 0,
       "response": "{\"id\":\"d2d7019e-879f-4888-8c1a-8264dd5ffd85\",\"external_id\":\"7eb5dfb7-0cb9-4feb-8154-e062a5dbf51c\"}"
+    },
+    {
+      "prayer": "asr",
+      "mode": "advance",
+      "recipients": 1,
+      "invalid": 0,
+      "response": "{\"id\":\"3d8f2b8c-97f0-4c03-b4c2-deb26ef3fd76\",\"external_id\":\"28b61568-3dd5-4d6f-8593-d1b69bb783cc\"}"
     }
   ],
   "userRegistry": [
