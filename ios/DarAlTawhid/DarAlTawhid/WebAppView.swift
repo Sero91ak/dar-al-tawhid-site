@@ -107,6 +107,7 @@ struct WebAppView: UIViewRepresentable {
         userContentController.add(context.coordinator, name: "darLibraryReader")
         userContentController.add(context.coordinator, name: "darAppearance")
         userContentController.add(context.coordinator, name: "darWidgetSnapshot")
+        userContentController.add(context.coordinator, name: "darAppIcon")
         let iosNativeTabsBoot = """
         (function(){
           try{
@@ -776,6 +777,17 @@ struct WebAppView: UIViewRepresentable {
                     midHex: body["mid"] as? String,
                     bottomHex: body["bottom"] as? String
                 )
+                return
+            }
+            if message.name == "darAppIcon" {
+                let name = ((message.body as? [String: Any])?["name"] as? String)?
+                    .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+                let resolved: String? = name.isEmpty ? nil : name
+                DispatchQueue.main.async {
+                    guard UIApplication.shared.supportsAlternateIcons else { return }
+                    if UIApplication.shared.alternateIconName == resolved { return }
+                    UIApplication.shared.setAlternateIconName(resolved, completionHandler: { _ in })
+                }
                 return
             }
 

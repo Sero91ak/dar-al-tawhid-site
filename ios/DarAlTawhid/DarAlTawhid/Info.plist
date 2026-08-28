@@ -29,6 +29,60 @@
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundleAlternateIcons</key>
+		<dict>
+			<key>AppIconEmblemNachtblau</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconEmblemNachtblau</string>
+				</array>
+			</dict>
+			<key>AppIconEmblemSchwarzgold</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconEmblemSchwarzgold</string>
+				</array>
+			</dict>
+			<key>AppIconEmblemCremePetrol</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconEmblemCremePetrol</string>
+				</array>
+			</dict>
+		</dict>
+	</dict>
+	<key>CFBundleIcons~ipad</key>
+	<dict>
+		<key>CFBundleAlternateIcons</key>
+		<dict>
+			<key>AppIconEmblemNachtblau</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconEmblemNachtblau</string>
+				</array>
+			</dict>
+			<key>AppIconEmblemSchwarzgold</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconEmblemSchwarzgold</string>
+				</array>
+			</dict>
+			<key>AppIconEmblemCremePetrol</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIconEmblemCremePetrol</string>
+				</array>
+			</dict>
+		</dict>
+	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>LSSupportsOpeningDocumentsInPlace</key>

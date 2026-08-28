@@ -87,6 +87,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "emblem-app-icons-ios-2026-08-28",
+      "approvedBy": "user-explicit-three-icons-ios-app-icon-picker-live",
+      "reason": "Nutzer: Die drei Medaillon-Icons auch bei App-Icons für iOS mit reinnehmen, Besucher können auswählen. Sofort live.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "assets/app-icons/",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "ios/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-ink-overscroll-2026-08-28",
       "approvedBy": "user-explicit-eisgold-dark-text-overscroll-live",
       "reason": "Nutzer: Goldschrift auf hellen Flächen dunkel; Overscroll wie Nachtblau/Layl. Web/Test/iOS sofort.",
