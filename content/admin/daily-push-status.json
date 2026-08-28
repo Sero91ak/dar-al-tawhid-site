@@ -4,17 +4,17 @@
   "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-28T06:55:21.499Z",
+  "updatedAt": "2026-08-28T07:00:21.535Z",
   "usersChecked": 13,
   "registrationsRead": 14,
   "uniqueSubscriptions": 13,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
-  "localTimeBerlin": "08:55",
+  "localTimeBerlin": "09:00",
   "dateKeyBerlin": "2026-08-28",
   "duaWindow": {
     "hour": 9,
-    "open": false,
+    "open": true,
     "catchupUntilHour": 14,
     "alreadySentToday": 0
   },
@@ -24,11 +24,11 @@
     "catchupUntilHour": 20,
     "alreadySentToday": 0
   },
-  "duaCandidates": 0,
+  "duaCandidates": 13,
   "recCandidates": 0,
-  "sent": 0,
+  "sent": 13,
   "accepted": {
-    "dua": 0,
+    "dua": 13,
     "recommendation": 0
   },
   "invalidSubscriptionsDisabled": 0,
@@ -49,5 +49,5 @@
     "category": "Guter Tod & Rechtschaffene"
   },
   "configAutomatic": true,
-  "lastError": "Außerhalb der Tagesfenster (Duʿāʾ ab 09:00, Empfehlung ab 12:00 Europe/Berlin)."
+  "lastError": null
 }
