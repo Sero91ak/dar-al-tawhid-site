@@ -122,6 +122,30 @@ html[data-theme="bordeaux"] {
   --theme-share-btn-border: rgba(214, 190, 132, 0.24);
 }
 
+html[data-theme="eisgold"] {
+  --theme-surface-elevated: linear-gradient(145deg, rgba(255, 255, 255, 0.90), rgba(237, 246, 255, 0.82));
+  --theme-surface-elevated-text: #142033;
+  --theme-surface-elevated-label: #a9852f;
+  --theme-surface-elevated-muted: #637083;
+  --theme-surface-elevated-accent: #c8a95a;
+  --theme-chip-ok-bg: rgba(40, 120, 60, 0.12);
+  --theme-chip-ok-text: #1f6b34;
+  --theme-chip-ok-border: rgba(40, 120, 60, 0.28);
+  --theme-chip-warn-bg: rgba(255, 248, 228, 0.88);
+  --theme-chip-warn-text: #6b4e20;
+  --theme-chip-warn-border: rgba(200, 169, 90, 0.32);
+  --theme-chip-miss-bg: rgba(255, 255, 255, 0.52);
+  --theme-chip-miss-text: #637083;
+  --theme-chip-miss-border: rgba(200, 169, 90, 0.24);
+  --theme-chip-default-bg: rgba(255, 255, 255, 0.48);
+  --theme-chip-default-text: #142033;
+  --theme-chip-default-border: rgba(200, 169, 90, 0.22);
+  --theme-share-panel-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.90), rgba(237, 246, 255, 0.86));
+  --theme-share-btn-bg: var(--premium-pill-bg, linear-gradient(135deg, rgba(200, 169, 90, 0.16), rgba(255, 255, 255, 0.88)));
+  --theme-share-btn-text: #142033;
+  --theme-share-btn-border: rgba(200, 169, 90, 0.34);
+}
+
 html[data-theme="dar-al-layl"] {
   --theme-surface-elevated: radial-gradient(circle at 18% 0%, rgba(216, 193, 139, 0.08), transparent 38%), linear-gradient(145deg, rgba(20, 25, 22, 0.94), rgba(8, 11, 10, 0.96));
   --theme-surface-elevated-text: #f1ede3;

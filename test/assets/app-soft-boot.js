@@ -20,6 +20,7 @@
     royal: "#07162c",
     bordeaux: "#140B0C",
     "dar-al-layl": "#050605",
+    eisgold: "#edf6ff",
     aurora: "#080806"
   };
   var progress = 0;
