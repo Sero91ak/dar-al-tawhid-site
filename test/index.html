@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v706";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v707";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -7344,7 +7344,7 @@ html[data-theme="dar-al-layl"]{
 html[data-theme="eisgold"]{
   --outer-bg-flat:#e8f3fb;
   --theme-page-bg:#e8f3fb;
-  --outer-bg:radial-gradient(circle at 84% 8%,rgba(150,198,230,.40),transparent 38%),linear-gradient(180deg,#f5fbff 0%,#e8f3fb 46%,#d5e6f4 92%,rgba(0,0,0,.08) 100%);
+  --outer-bg:radial-gradient(ellipse 160% 78% at 50% -22%,rgba(255,255,255,.96) 0%,transparent 58%),radial-gradient(ellipse 92% 62% at 6% -10%,rgba(184,150,58,.22) 0%,transparent 56%),radial-gradient(ellipse 96% 64% at 96% -6%,rgba(132,186,226,.40) 0%,transparent 58%),radial-gradient(ellipse 140% 70% at 50% 118%,rgba(184,150,58,.14) 0%,transparent 60%),linear-gradient(180deg,#f7fcff 0%,#e8f3fb 46%,#dceaf6 100%);
   --cover-edge-bg:linear-gradient(180deg,#e8f3fb 0%,#f5fbff 48%,rgba(232,243,251,0) 100%);
   --cover-panel-bg:linear-gradient(180deg,rgba(245,251,255,.96),rgba(232,243,251,.94));
   --cover-panel-border:rgba(200,169,90,.28);
@@ -26292,7 +26292,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v706";
+const APP_BUILD_ID="app-shell-v707";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -30124,6 +30124,146 @@ html[data-theme="eisgold"] .quiz-shell .quiz-btn{
   color:#142033!important;
 }
 </style>
+<style id="eisgold-oval-wash-v707">
+/* Eisgold: Seitenfarbe wie die anderen Erscheinungsbilder — oval, oversize, seitenfüllend. Kein abgeschnittener Schattenkasten. */
+html[data-theme="eisgold"]{
+  --outer-bg:
+    radial-gradient(ellipse 160% 78% at 50% -22%,rgba(255,255,255,.96) 0%,transparent 58%),
+    radial-gradient(ellipse 92% 62% at 6% -10%,rgba(184,150,58,.22) 0%,transparent 56%),
+    radial-gradient(ellipse 96% 64% at 96% -6%,rgba(132,186,226,.40) 0%,transparent 58%),
+    radial-gradient(ellipse 140% 70% at 50% 118%,rgba(184,150,58,.14) 0%,transparent 60%),
+    linear-gradient(180deg,#f7fcff 0%,#e8f3fb 46%,#dceaf6 100%)!important;
+  --premium-bg:var(--outer-bg)!important;
+  --theme-hero-glow:rgba(184,150,58,.24)!important;
+  --theme-hero-blend-top:rgba(247,252,255,1)!important;
+  --theme-hero-blend-bottom:rgba(232,243,251,0)!important;
+  --theme-hero-surface:
+    radial-gradient(ellipse 150% 90% at 50% -28%,rgba(255,255,255,.92),transparent 58%),
+    radial-gradient(ellipse 80% 55% at 10% -8%,rgba(184,150,58,.16),transparent 52%),
+    linear-gradient(180deg,#f7fcff 0%,#e8f3fb 72%,rgba(232,243,251,.0) 100%)!important;
+  --theme-hero-bg:transparent!important;
+}
+html[data-theme="eisgold"],
+html[data-theme="eisgold"] body,
+html[data-theme="eisgold"] body.is-more-route,
+html[data-theme="eisgold"] body.is-area-route,
+html[data-theme="eisgold"] body.is-quiz-route,
+html[data-theme="eisgold"] body.is-account-route,
+html[data-theme="eisgold"] body.is-home-route,
+html[data-theme="eisgold"] body.is-quran-overview,
+html[data-theme="eisgold"] body.is-feed-fullscreen,
+html[data-theme="eisgold"] body.is-dua-route,
+html[data-theme="eisgold"] body.is-catalog-route,
+html[data-theme="eisgold"] body.is-topics-route,
+html[data-theme="eisgold"] body.is-topic-route,
+html[data-theme="eisgold"] body.is-scholars-route,
+html[data-theme="eisgold"] body.is-scholar-route,
+html[data-theme="eisgold"] body.is-hadith-route,
+html[data-theme="eisgold"] body.is-post-route,
+html[data-theme="eisgold"] #appRoot,
+html[data-theme="eisgold"] #appShell,
+html[data-theme="eisgold"] #appView,
+html[data-theme="eisgold"] #appView.view,
+html[data-theme="eisgold"] body.is-more-route #appView.view,
+html[data-theme="eisgold"] body.is-quiz-route #appView.view,
+html[data-theme="eisgold"] body.is-account-route #appView.view,
+html[data-theme="eisgold"] body.is-area-route #appView.view,
+html[data-theme="eisgold"] body.is-home-route #appView.view,
+html[data-theme="eisgold"] body.is-home-route .top-shell,
+html[data-theme="eisgold"] body.is-home-route .top-shell.theme-hero-shell,
+html[data-theme="eisgold"] body.is-home-route .header,
+html[data-theme="eisgold"] body.is-home-route .theme-hero-surface,
+html[data-theme="eisgold"] body.is-home-route .hero-text,
+html[data-theme="eisgold"] body.is-home-route .isnad{
+  background:var(--outer-bg)!important;
+  background-color:#e8f3fb!important;
+  background-attachment:fixed!important;
+}
+html[data-theme="eisgold"] body.is-more-route .view-head,
+html[data-theme="eisgold"] body.is-quiz-route .view-head,
+html[data-theme="eisgold"] body.is-account-route .view-head,
+html[data-theme="eisgold"] body.is-area-route .view-head,
+html[data-theme="eisgold"] body.is-hadith-route .view-head{
+  position:relative!important;
+  overflow:visible!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] body.is-more-route .view-head::before,
+html[data-theme="eisgold"] body.is-quiz-route .view-head::before,
+html[data-theme="eisgold"] body.is-account-route .view-head::before,
+html[data-theme="eisgold"] body.is-area-route:not(.is-catalog-route):not(.is-dua-route):not(.is-topics-route):not(.is-topic-route):not(.is-scholar-route) .view-head::before{
+  display:block!important;
+  content:""!important;
+  opacity:1!important;
+  position:absolute!important;
+  inset:-48% -38% 8% -38%!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  border-radius:50%!important;
+  background:
+    radial-gradient(ellipse 72% 58% at 50% 32%,rgba(255,255,255,.90) 0%,transparent 70%),
+    radial-gradient(ellipse 50% 44% at 16% 24%,rgba(184,150,58,.20) 0%,transparent 68%),
+    radial-gradient(ellipse 50% 44% at 86% 18%,rgba(140,190,230,.36) 0%,transparent 68%)!important;
+}
+html[data-theme="eisgold"] body.is-more-route .view-head > *,
+html[data-theme="eisgold"] body.is-quiz-route .view-head > *,
+html[data-theme="eisgold"] body.is-account-route .view-head > *,
+html[data-theme="eisgold"] body.is-area-route .view-head > *{
+  position:relative!important;
+  z-index:1!important;
+}
+html[data-theme="eisgold"] .app{background:transparent!important}
+html[data-theme="eisgold"] .top-shell.theme-hero-shell::before,
+html[data-theme="eisgold"] .top-shell::before{
+  display:block!important;
+  content:""!important;
+  opacity:1!important;
+  position:absolute!important;
+  inset:-32% -24% 36% -24%!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  border-radius:50%!important;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 30%,rgba(255,255,255,.88) 0%,transparent 70%),
+    radial-gradient(ellipse 48% 42% at 18% 22%,rgba(184,150,58,.20) 0%,transparent 68%),
+    radial-gradient(ellipse 48% 42% at 84% 18%,rgba(140,190,230,.34) 0%,transparent 68%)!important;
+  background-image:
+    radial-gradient(ellipse 70% 55% at 50% 30%,rgba(255,255,255,.88) 0%,transparent 70%),
+    radial-gradient(ellipse 48% 42% at 18% 22%,rgba(184,150,58,.20) 0%,transparent 68%),
+    radial-gradient(ellipse 48% 42% at 84% 18%,rgba(140,190,230,.34) 0%,transparent 68%)!important;
+}
+html[data-theme="eisgold"] .theme-hero-shell::after,
+html[data-theme="eisgold"] .top-shell.theme-hero-shell::after{
+  display:none!important;
+  content:none!important;
+  background:none!important;
+  box-shadow:none!important;
+  opacity:0!important;
+  mix-blend-mode:normal!important;
+}
+html[data-theme="eisgold"] .theme-hero-shell{
+  overflow:visible!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  border-color:transparent!important;
+}
+html[data-theme="eisgold"] .account-card,
+html[data-theme="eisgold"] .more-group,
+html[data-theme="eisgold"] .premium-surface,
+html[data-theme="eisgold"] .feature-section,
+html[data-theme="eisgold"] .quiz-home-panel,
+html[data-theme="eisgold"] .qibla-pro-section{
+  box-shadow:0 18px 44px rgba(20,32,51,.06),0 0 0 1px rgba(184,150,58,.16)!important;
+}
+html[data-theme="eisgold"] #bottomNav.bottom-nav,
+html[data-theme="eisgold"] .bottom-nav{
+  background:linear-gradient(180deg,rgba(255,252,247,.86),rgba(245,236,214,.72))!important;
+  border-color:rgba(184,150,58,.28)!important;
+  box-shadow:0 10px 28px rgba(20,32,51,.08),inset 0 1px 0 rgba(255,255,255,.7)!important;
+}
+</style>
 
 <script>
 (function(){
@@ -30218,9 +30358,10 @@ html[data-theme="eisgold"] .quiz-shell .quiz-btn{
   }
   function pin(){
     var s=document.getElementById("dar-ios-parity-edge-force-v665");
-    if(s&&s.parentNode){
-      (document.documentElement||s.parentNode).appendChild(s);
-    }
+    var ice=document.getElementById("eisgold-oval-wash-v707");
+    var host=document.documentElement||(s&&s.parentNode);
+    if(s&&host) host.appendChild(s);
+    if(ice&&host) host.appendChild(ice);
     try{
       var root=document.documentElement;
       if(!root)return;

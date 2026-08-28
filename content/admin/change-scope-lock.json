@@ -87,7 +87,23 @@
   ],
   "unlockedScopes": [
     {
-      "id": "eisgold-surfaces-live-2026-08-28",
+      "id": "eisgold-oval-wash-live-2026-08-28",
+      "approvedBy": "user-explicit-eisgold-oversize-oval-page-wash-live",
+      "reason": "Nutzer: Schattierung oben oversize, oval, seitenverhältnismäßig wie andere Erscheinungsbilder. Jede Eisgold-Seite. Live alle Apps.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "assets/theme-eisgold.css",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "eisgold-meerbereich-global-live-2026-08-28",
       "approvedBy": "user-explicit-eisgold-meerbereich-global-live",
       "reason": "Nutzer: Eisgold wie Meerbereich oben durchgehend; dunkle unlesbare Flächen Quiz/Quran/Gelehrte/Qibla global reparieren. Web+iOS live.",
       "paths": [
