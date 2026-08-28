@@ -10,6 +10,9 @@ struct DarWidgetPalette {
     var muted: Color
     var line: Color
     var darkText: Bool
+
+    var brandInk: Color { darkText ? cream : gold }
+    var timeInk: Color { darkText ? cream : gold }
 }
 
 enum DarWidgetTheme {

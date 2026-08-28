@@ -31,8 +31,8 @@ struct WidgetChrome<Content: View>: View {
 
     var body: some View {
         content
-            .padding(.horizontal, 9)
-            .padding(.vertical, 8)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 7)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .widgetBackground(palette)
             .widgetURL(dest.url)
@@ -44,23 +44,18 @@ struct BrandLine: View {
     let title: String
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
+        VStack(alignment: .leading, spacing: 3) {
             Text(DarWidgetTheme.brandName)
-                .font(Face.brand(10))
-                .tracking(0.6)
-                .foregroundStyle(palette.gold)
+                .font(Face.brand(13))
+                .tracking(0.4)
+                .foregroundStyle(palette.brandInk)
                 .lineLimit(1)
-                .minimumScaleFactor(0.7)
-            HStack(spacing: 5) {
-                Rectangle()
-                    .fill(palette.gold.opacity(0.45))
-                    .frame(width: 14, height: 0.5)
-                Text(title)
-                    .font(.system(size: 8.5, weight: .semibold, design: .serif))
-                    .foregroundStyle(palette.muted)
-                    .lineLimit(1)
-                Spacer(minLength: 0)
-            }
+                .minimumScaleFactor(0.72)
+            Text(title)
+                .font(.system(size: 11, weight: .semibold, design: .serif))
+                .foregroundStyle(palette.muted)
+                .lineLimit(1)
+                .minimumScaleFactor(0.75)
         }
     }
 }
@@ -140,18 +135,18 @@ private struct PrayerChip: View {
     var body: some View {
         HStack(spacing: 6) {
             Text(slot.name)
-                .font(Face.ui(12))
+                .font(Face.ui(13))
                 .lineLimit(1)
-                .minimumScaleFactor(0.8)
+                .minimumScaleFactor(0.82)
                 .allowsTightening(true)
             Spacer(minLength: 6)
             Text(slot.time)
-                .font(Face.ui(13).monospacedDigit())
+                .font(Face.ui(14).monospacedDigit())
                 .lineLimit(1)
                 .minimumScaleFactor(0.85)
                 .layoutPriority(1)
         }
-        .foregroundStyle(active ? palette.gold : palette.cream)
+        .foregroundStyle(active ? palette.timeInk : palette.cream)
         .padding(.horizontal, active ? 6 : 0)
         .padding(.vertical, active ? 3 : 1)
         .background(active ? palette.gold.opacity(0.14) : Color.clear)
@@ -312,51 +307,51 @@ struct PrayerTimerView: View {
             let slots = snap.prayers.filter { $0.id != "sunrise" }
             let progress = DarPrayerEngine.intervalProgress(from: snap.prayers, now: entry.date)
             WidgetChrome(palette: p, dest: .prayer) {
-                VStack(alignment: .leading, spacing: 6) {
+                VStack(alignment: .leading, spacing: 8) {
                     BrandLine(palette: p, title: DarPrayerEngine.hijriShort(for: entry.date))
                     if family == .systemSmall {
                         HStack(alignment: .center, spacing: 8) {
                             ZStack {
-                                CountdownRing(progress: progress, palette: p, size: 46)
+                                CountdownRing(progress: progress, palette: p, size: 52)
                                 VStack(spacing: 0) {
                                     Text(snap.nextPrayerName)
-                                        .font(.system(size: 8, weight: .semibold))
+                                        .font(.system(size: 10, weight: .semibold))
                                         .foregroundStyle(p.muted)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.7)
                                     Text(snap.nextPrayerTime)
-                                        .font(Face.hero(13))
-                                        .foregroundStyle(p.gold)
+                                        .font(Face.hero(15))
+                                        .foregroundStyle(p.timeInk)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.7)
                                 }
                             }
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(snap.nextPrayerRemaining)
-                                    .font(Face.ui(11))
+                                    .font(Face.ui(13))
                                     .foregroundStyle(p.cream)
                                     .lineLimit(1)
-                                    .minimumScaleFactor(0.65)
+                                    .minimumScaleFactor(0.7)
                                 Text(snap.cityLabel)
-                                    .font(.system(size: 9, weight: .medium, design: .serif))
+                                    .font(.system(size: 11, weight: .medium, design: .serif))
                                     .foregroundStyle(p.muted)
                                     .lineLimit(1)
-                                    .minimumScaleFactor(0.65)
+                                    .minimumScaleFactor(0.7)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                         }
                     } else {
                         HStack(alignment: .center, spacing: 12) {
                             ZStack {
-                                CountdownRing(progress: progress, palette: p, size: extraLarge || family == .systemLarge ? 92 : 80)
+                                CountdownRing(progress: progress, palette: p, size: extraLarge || family == .systemLarge ? 96 : 86)
                                 VStack(spacing: 1) {
                                     Text(snap.nextPrayerName)
-                                        .font(Face.ui(11))
+                                        .font(Face.ui(12))
                                         .foregroundStyle(p.muted)
                                         .lineLimit(1)
                                     Text(snap.nextPrayerTime)
-                                        .font(Face.hero(extraLarge || family == .systemLarge ? 22 : 18))
-                                        .foregroundStyle(p.gold)
+                                        .font(Face.hero(extraLarge || family == .systemLarge ? 24 : 20))
+                                        .foregroundStyle(p.timeInk)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.75)
                                 }
@@ -406,7 +401,7 @@ struct PrayerListView: View {
                     if family != .systemSmall {
                         Spacer(minLength: 2)
                         Text("\(snap.nextPrayerRemaining) · \(snap.cityLabel)")
-                            .font(.system(size: 10, weight: .medium))
+                            .font(.system(size: 12, weight: .medium))
                             .foregroundStyle(p.muted)
                             .lineLimit(1)
                             .minimumScaleFactor(0.7)
@@ -429,8 +424,8 @@ struct PrayerDayView: View {
                 BrandLine(palette: p, title: snap.cityLabel)
                 if family != .systemSmall {
                     Text("\(snap.nextPrayerName)  \(snap.nextPrayerTime)")
-                        .font(Face.hero(20))
-                        .foregroundStyle(p.gold)
+                        .font(Face.hero(22))
+                        .foregroundStyle(p.timeInk)
                     Text(snap.nextPrayerRemaining)
                         .font(Face.ui(12))
                         .foregroundStyle(p.muted)
@@ -444,7 +439,7 @@ struct PrayerDayView: View {
                                 .foregroundStyle(p.muted)
                             Text(slot.time)
                                 .font(Face.hero(family == .systemSmall ? 17 : 19))
-                                .foregroundStyle(slot.name == snap.nextPrayerName ? p.gold : p.cream)
+                                .foregroundStyle(slot.name == snap.nextPrayerName ? p.timeInk : p.cream)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.8)
                         }
@@ -481,15 +476,15 @@ struct QiblaCompassView: View {
                         ZStack {
                             Circle().stroke(p.gold.opacity(0.22), lineWidth: 0.8)
                             Image(systemName: "location.north.fill")
-                                .font(.system(size: 13, weight: .semibold))
+                                .font(.system(size: 15, weight: .semibold))
                                 .foregroundStyle(p.gold)
                                 .rotationEffect(.degrees(deg))
                         }
-                        .frame(width: 36, height: 36)
+                        .frame(width: 42, height: 42)
                         VStack(alignment: .leading, spacing: 1) {
                             Text(String(format: "%.0f°", deg))
-                                .font(Face.hero(family == .systemSmall ? 20 : 24))
-                                .foregroundStyle(p.gold)
+                                .font(Face.hero(family == .systemSmall ? 22 : 26))
+                                .foregroundStyle(p.timeInk)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.7)
                             Text("Mekka")
@@ -533,7 +528,7 @@ struct TodayContentView: View {
                 Spacer(minLength: 0)
                 Text(snap.postSourceLine.isEmpty ? snap.postCategory : snap.postSourceLine)
                     .font(.system(size: 9, weight: .medium, design: .serif))
-                    .foregroundStyle(p.gold)
+                    .foregroundStyle(p.muted)
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
             }
@@ -565,7 +560,7 @@ struct AyahContentView: View {
                 Spacer(minLength: 0)
                 Text(snap.ayahRef)
                     .font(Face.micro())
-                    .foregroundStyle(p.gold)
+                    .foregroundStyle(p.muted)
             }
         }
     }
@@ -595,7 +590,7 @@ struct DuaContentView: View {
                 Spacer(minLength: 0)
                 Text(snap.duaSourceLine.isEmpty ? snap.duaCategory : snap.duaSourceLine)
                     .font(.system(size: 9, weight: .medium, design: .serif))
-                    .foregroundStyle(p.gold)
+                    .foregroundStyle(p.muted)
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
             }
