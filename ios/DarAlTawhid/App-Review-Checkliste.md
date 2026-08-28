@@ -42,7 +42,8 @@ Gruppenname:
 DAR AL TAWḤĪD Beta
 
 Public Link:
-Aktivieren, sobald Apple externes Testing freigegeben hat.
+Aktivieren, sobald Apple das erste externe Testing freigegeben hat.
+Kein App-Store-Listing. Bis zu 10.000 externe Tester. Jeder Build laeuft 90 Tage.
 
 Testerzahl am Anfang:
 50 bis 100
@@ -55,9 +56,9 @@ Teste die erste iOS-Version der DAR AL TAWḤĪD App. Bitte achte auf Start, Les
 
 ## Apple Review Notes
 
-The app is an iOS WebKit wrapper for the DAR AL TAWḤĪD web application. It provides Islamic educational and reference content, including articles, sources, prayer times, search, and reading tools.
+The app is a native iOS client for DAR AL TAWḤĪD. It includes Home Screen widgets (prayer times with countdown, qibla, daily ayah, daily duʿāʾ, recommended article), a local prayer-time engine, and a WKWebView content shell for the educational library. Widgets and prayer/qibla data work on the Home Screen without opening Safari.
 
-This build is intended for TestFlight testing. It does not include purchases, gambling, financial products, social networking features, or public user-generated content.
+This build is for TestFlight only and is not a request for App Store release. There are no In-App Purchases, gambling, financial products, or public user-generated posting.
 
 The content is presented for reading, study, and reference. Religious terminology may appear within educational source material and explanatory content, not as functionality for applying judgments to specific persons or groups.
 

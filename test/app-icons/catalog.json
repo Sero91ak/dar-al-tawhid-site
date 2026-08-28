@@ -1,0 +1,69 @@
+{
+  "key": "darAppIconV1",
+  "default": "creme-navy",
+  "icons": [
+    {
+      "id": "creme-navy",
+      "label": "Creme & Navy",
+      "ios": null,
+      "primary": true,
+      "preview": "/test/app-icons/creme-navy/icon-192.png"
+    },
+    {
+      "id": "minimal-creme",
+      "label": "Minimal Creme",
+      "ios": "AppIconMinimalCreme",
+      "primary": false,
+      "preview": "/test/app-icons/minimal-creme/icon-192.png"
+    },
+    {
+      "id": "graphit-silber",
+      "label": "Graphit Silber",
+      "ios": "AppIconGraphitSilber",
+      "primary": false,
+      "preview": "/test/app-icons/graphit-silber/icon-192.png"
+    },
+    {
+      "id": "schwarz-gold",
+      "label": "Schwarz & Gold",
+      "ios": "AppIconSchwarzGold",
+      "primary": false,
+      "preview": "/test/app-icons/schwarz-gold/icon-192.png"
+    },
+    {
+      "id": "stein-optik",
+      "label": "Stein Optik",
+      "ios": "AppIconSteinOptik",
+      "primary": false,
+      "preview": "/test/app-icons/stein-optik/icon-192.png"
+    },
+    {
+      "id": "tiefes-gruen",
+      "label": "Tiefes Grün",
+      "ios": "AppIconTiefesGruen",
+      "primary": false,
+      "preview": "/test/app-icons/tiefes-gruen/icon-192.png"
+    },
+    {
+      "id": "bordeaux",
+      "label": "Bordeaux",
+      "ios": "AppIconBordeaux",
+      "primary": false,
+      "preview": "/test/app-icons/bordeaux/icon-192.png"
+    },
+    {
+      "id": "elfenbein",
+      "label": "Elfenbein",
+      "ios": "AppIconElfenbein",
+      "primary": false,
+      "preview": "/test/app-icons/elfenbein/icon-192.png"
+    },
+    {
+      "id": "mitternacht-blau",
+      "label": "Mitternacht Blau",
+      "ios": "AppIconMitternachtBlau",
+      "primary": false,
+      "preview": "/test/app-icons/mitternacht-blau/icon-192.png"
+    }
+  ]
+}

@@ -33,16 +33,20 @@ final class GradientBackdropView: UIView {
     }
 
     func updateColors(top: UIColor, mid: UIColor? = nil, bottom: UIColor) {
-        // Theme-only gradient: no foreign navy/blue blend tints.
-        let resolvedMid = mid ?? blendedColor(from: top, to: bottom, ratio: 0.45)
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
-        gradientLayer.locations = [0.0, 0.22, 0.62, 1.0]
+        gradientLayer.startPoint = CGPoint(x: 0.12, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 0.88, y: 1.0)
+        gradientLayer.locations = [0.0, 0.18, 0.55, 1.0] as [NSNumber]
+        let ice = UIColor(red: 0.86, green: 0.91, blue: 0.97, alpha: 1.0)
+        let gold = UIColor(red: 0.84, green: 0.75, blue: 0.52, alpha: 1.0)
+        let topMist = blendedColor(from: top, to: ice, ratio: 0.11)
+        let resolvedMid = mid ?? blendedColor(from: top, to: bottom, ratio: 0.42)
+        let midPearl = blendedColor(from: resolvedMid, to: ice, ratio: 0.05)
+        let bottomGold = blendedColor(from: bottom, to: gold, ratio: 0.07)
         gradientLayer.colors = [
+            topMist.cgColor,
             top.cgColor,
-            top.cgColor,
-            resolvedMid.cgColor,
-            bottom.cgColor
+            midPearl.cgColor,
+            bottomGold.cgColor
         ]
     }
 
@@ -71,14 +75,16 @@ final class GradientBackdropView: UIView {
 
 struct WebAppView: UIViewRepresentable {
     var destination: DarDeepLink.Destination? = nil
+    var openURL: URL? = nil
+    var openNonce: UUID = UUID()
 
     private enum AppEnvironment {
         case staging
         case live
     }
 
-    // Always the visitor app (live). Staging/test is not used for this Xcode wrapper.
-    private static let environment: AppEnvironment = .live
+    // TestFlight / this branch loads Dar Test. Switch to .live only after explicit release approval.
+    private static let environment: AppEnvironment = .staging
     private static let stagingURL = URL(string: "https://dar-al-tawhid.de/test/?env=staging&source=ios-testflight#home")!
     private static let liveURL = URL(string: "https://dar-al-tawhid.de/#home")!
     private static let launchURL: URL = {
@@ -107,15 +113,108 @@ struct WebAppView: UIViewRepresentable {
         userContentController.add(context.coordinator, name: "darLibraryReader")
         userContentController.add(context.coordinator, name: "darAppearance")
         userContentController.add(context.coordinator, name: "darWidgetSnapshot")
+        userContentController.add(context.coordinator, name: "darPushSettings")
+        userContentController.add(context.coordinator, name: "darHaptic")
+        userContentController.add(context.coordinator, name: "darPushTest")
+        userContentController.add(context.coordinator, name: "darAppIcon")
+        let deviceId = DarPushNotifications.deviceId()
+        let escapedDevice = deviceId
+            .replacingOccurrences(of: "\\", with: "\\\\")
+            .replacingOccurrences(of: "\"", with: "\\\"")
+        let iosNativePushBridge = """
+        (function(){
+          try{
+            window.DAR_IOS_NATIVE_PUSH=true;
+            window.DAR_IOS_DEVICE_ID="\(escapedDevice)";
+            try{localStorage.setItem("darPushExternalIdV1", window.DAR_IOS_DEVICE_ID)}catch(e){}
+            window.Notification=window.Notification||function(){};
+            try{
+              Object.defineProperty(window.Notification,"permission",{configurable:true,get:function(){return "granted"}});
+            }catch(e){window.Notification.permission="granted"}
+            window.Notification.requestPermission=function(){return Promise.resolve("granted")};
+          }catch(e){}
+        })();
+        """
+        userContentController.addUserScript(
+            WKUserScript(
+                source: iosNativePushBridge,
+                injectionTime: .atDocumentStart,
+                forMainFrameOnly: true
+            )
+        )
+        let iosHapticBridge = """
+        (function(){
+          if(window.__darIosHapticInstalled)return;
+          window.__darIosHapticInstalled=true;
+          var holdTimer=null,holdFired=false,startX=0,startY=0;
+          function send(style){
+            try{webkit.messageHandlers.darHaptic.postMessage({style:style||"medium"})}catch(e){}
+          }
+          function isNav(t){
+            return t&&t.closest&&t.closest("#bottomNav a,#bottomNav button,[data-nav],.footer-action-btn");
+          }
+          document.addEventListener("touchstart",function(e){
+            var t=e.target&&isNav(e.target);
+            if(!t)return;
+            holdFired=false;
+            startX=(e.touches[0]&&e.touches[0].clientX)||0;
+            startY=(e.touches[0]&&e.touches[0].clientY)||0;
+            clearTimeout(holdTimer);
+            holdTimer=setTimeout(function(){holdFired=true;send("medium")},420);
+          },{passive:true,capture:true});
+          document.addEventListener("touchmove",function(e){
+            if(!holdTimer)return;
+            var x=(e.touches[0]&&e.touches[0].clientX)||0;
+            var y=(e.touches[0]&&e.touches[0].clientY)||0;
+            if(Math.abs(x-startX)>10||Math.abs(y-startY)>10){clearTimeout(holdTimer);holdTimer=null;}
+          },{passive:true,capture:true});
+          document.addEventListener("touchend",function(){clearTimeout(holdTimer);holdTimer=null;},{passive:true,capture:true});
+          document.addEventListener("input",function(e){
+            var el=e.target;
+            if(!el)return;
+            var now=Date.now();
+            if(now-(window.__darHapticInputAt||0)<90)return;
+            window.__darHapticInputAt=now;
+            var tag=String(el.tagName||"").toLowerCase();
+            if(tag==="input"||tag==="textarea"||el.isContentEditable) send("selection");
+          },true);
+        })();
+        """
+        userContentController.addUserScript(
+            WKUserScript(
+                source: iosHapticBridge,
+                injectionTime: .atDocumentEnd,
+                forMainFrameOnly: true
+            )
+        )
         let iosNativeTabsBoot = """
         (function(){
           try{
             var root=document.documentElement;
             if(!root)return;
             root.classList.add("dar-ios-native-app");
-            root.classList.add("dar-ios-native-tabs");
+            root.classList.remove("dar-ios-native-tabs");
             root.classList.remove("dar-soft-booting");
           }catch(e){}
+          function brand(){
+            try{
+              var nodes=document.querySelectorAll("h1,h2,.footer strong,.hero-text,.more-title,.brand-title,.app-title,title");
+              for(var i=0;i<nodes.length;i++){
+                var el=nodes[i];
+                if(!el||!el.childNodes)continue;
+                for(var j=0;j<el.childNodes.length;j++){
+                  var n=el.childNodes[j];
+                  if(n.nodeType===3 && n.nodeValue && n.nodeValue.indexOf("TAWḤID")>=0){
+                    n.nodeValue=n.nodeValue.replace(/TAWḤID/g,"TAWḤĪD");
+                  }
+                }
+              }
+            }catch(e){}
+          }
+          brand();
+          setTimeout(brand,400);
+          setTimeout(brand,1200);
+          window.addEventListener("hashchange", function(){ setTimeout(brand,80); });
         })();
         """
         userContentController.addUserScript(
@@ -129,84 +228,32 @@ struct WebAppView: UIViewRepresentable {
         (function(){
           if(window.__darIosViewportPolishInstalled)return;
           window.__darIosViewportPolishInstalled=true;
-          window.__DAR_IOS_BUILD__="0.25-glass-status";
-          /* Restore glassy status area. Live v665 paints a solid --dar-edge-fill strip. */
+          window.__DAR_IOS_BUILD__="0.25-watch-push";
+          /* Web owns the glassy floating #bottomNav. iOS must not hide or restyle it. */
           function cssText(){
             return [
               "html.dar-ios-native-app{",
-              "  --dar-ios-theme-bg:var(--premium-bg,var(--theme-page-bg,var(--outer-bg,var(--bg,#050504))));",
-              "}",
-              "html.dar-ios-native-app[data-theme],",
-              "html.dar-ios-native-app[data-theme] body,",
-              "html.dar-ios-native-app[data-theme] #appRoot,",
-              "html.dar-ios-native-app[data-theme] #appShell,",
-              "html.dar-ios-native-app[data-theme] body.is-more-route,",
-              "html.dar-ios-native-app[data-theme] body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-reader-route),",
-              "html.dar-ios-native-app[data-theme] body.is-quiz-route,",
-              "html.dar-ios-native-app[data-theme] body.is-account-route,",
-              "html.dar-ios-native-app[data-theme] body.is-home-route{",
-              "  background:var(--premium-bg,var(--outer-bg,var(--bg)))!important;",
-              "}",
-              "html.dar-ios-native-app[data-theme] body.is-more-route #appView,",
-              "html.dar-ios-native-app[data-theme] body.is-more-route #appView.view,",
-              "html.dar-ios-native-app[data-theme] body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-overview):not(.is-quran-reader-route) #appView.view,",
-              "html.dar-ios-native-app[data-theme] body.is-quiz-route #appView.view,",
-              "html.dar-ios-native-app[data-theme] body.is-account-route #appView.view,",
-              "html.dar-ios-native-app[data-theme] body.is-home-route .top-shell,",
-              "html.dar-ios-native-app[data-theme] body.is-home-route .header,",
-              "html.dar-ios-native-app[data-theme] body.is-home-route #appView.view{",
-              "  background:transparent!important;",
-              "  background-color:transparent!important;",
-              "  background-image:none!important;",
-              "}",
-              "html.dar-ios-native-app::before{",
-              "  content:'';",
-              "  position:fixed;",
-              "  top:0;left:0;right:0;",
-              "  height:max(12px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px));",
-              "  z-index:2147483000;",
-              "  pointer-events:none;",
-              "  background:color-mix(in srgb,var(--page-cover,var(--outer-bg-flat,#07162c)) 28%,transparent);",
-              "  -webkit-backdrop-filter:blur(22px) saturate(1.18);",
-              "  backdrop-filter:blur(22px) saturate(1.18);",
-              "}",
-              "html.dar-ios-native-app .top-edge-fade,",
-              "html.dar-ios-native-app .top-swim-aura{",
-              "  display:block!important;",
-              "  opacity:.55!important;",
-              "  background:linear-gradient(180deg,color-mix(in srgb,var(--page-cover) 22%,transparent),transparent)!important;",
-              "  -webkit-backdrop-filter:blur(16px) saturate(1.1)!important;",
-              "  backdrop-filter:blur(16px) saturate(1.1)!important;",
-              "  z-index:4!important;",
+              "  --dar-ios-theme-bg:var(--theme-page-bg,var(--theme-feed-bg,var(--quran-page-bg,var(--outer-bg-flat,var(--bg,#050504)))));",
               "}",
               "html.dar-ios-native-app #dar-soft-boot{display:none!important;visibility:hidden!important;}",
+              "html.dar-ios-native-app #footerAppSave,html.dar-ios-native-app .footer-app-save,html.dar-ios-native-app .footer-action-save{display:none!important;}",
+              "html.dar-ios-native-app .footer-actions,html.dar-ios-native-app .footer-social,html.dar-ios-native-app .footer-links,html.dar-ios-native-app .app-footer .actions,html.dar-ios-native-app .footer-row{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;align-items:center!important;grid-template-columns:none!important;gap:10px!important;max-width:100%!important;margin:12px auto 0!important;text-align:center!important;}",
+              "html.dar-ios-native-app .footer-actions .footer-action-btn,html.dar-ios-native-app .footer-actions .footer-social-link,html.dar-ios-native-app .footer-social a{flex:0 1 auto!important;min-width:96px!important;margin-left:auto!important;margin-right:auto!important;}",
+              "html.dar-ios-native-app button,html.dar-ios-native-app a,html.dar-ios-native-app [role=button],html.dar-ios-native-app [data-nav],html.dar-ios-native-app .prayer-action-btn,html.dar-ios-native-app input,html.dar-ios-native-app label{touch-action:manipulation!important;cursor:pointer!important;-webkit-tap-highlight-color:rgba(212,175,55,0.18)!important;}",
               "html.dar-ios-native-app.dar-soft-booting,",
               "html.dar-ios-native-app.dar-soft-booting body{overflow:visible!important;}",
-              "html.dar-ios-native-app #bottomNav,",
-              "html.dar-ios-native-app #bottomNav.bottom-nav,",
-              "html.dar-ios-native-app .bottom-nav,",
-              "html.dar-ios-native-app #appChromeDock #bottomNav.bottom-nav,",
-              "html.dar-ios-native-app.dar-soft-booting #bottomNav,",
-              "html.dar-ios-native-app.dar-soft-booting .bottom-nav,",
-              "html.dar-ios-native-app.dar-soft-booting .home-discover,",
-              "html.dar-ios-native-app.dar-soft-booting .home-v380{",
-              "  visibility:visible!important;",
-              "  opacity:1!important;",
-              "  pointer-events:auto!important;",
-              "  display:flex!important;",
+              "html.dar-ios-native-app body.is-home-route,",
+              "html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen),",
+              "html.dar-ios-native-app body.is-more-route,",
+              "html.dar-ios-native-app body.is-quiz-route{",
+              "  padding-top:max(8px,var(--safe-top),var(--dar-native-safe-top,0px)) !important;",
               "}",
-              "html.dar-ios-native-app body.has-bottom-nav{",
-              "  padding-bottom:calc(var(--bottom-navigation-height,64px) + max(var(--safe-bottom),env(safe-area-inset-bottom,0px),var(--dar-native-safe-bottom,0px)) + 28px) !important;",
+              "html.dar-ios-native-app body.is-feed-fullscreen{",
+              "  padding-top:max(0px,var(--safe-top),var(--dar-native-safe-top,0px)) !important;",
               "}",
-              "html.dar-ios-native-app #bottomNav.bottom-nav,html.dar-ios-native-app .bottom-nav{",
-              "  bottom:max(14px,calc(max(var(--safe-bottom),env(safe-area-inset-bottom,0px),var(--dar-native-safe-bottom,0px)) + 8px)) !important;",
-              "}",
-              "html.dar-ios-native-tabs #bottomNav,",
-              "html.dar-ios-native-tabs #bottomNav.bottom-nav,",
-              "html.dar-ios-native-tabs .bottom-nav,",
-              "html.dar-ios-native-tabs #appChromeDock #bottomNav.bottom-nav{",
-              "  display:none!important;",
-              "  visibility:hidden!important;",
+              "html.dar-ios-native-app body.is-quran-overview #appView,",
+              "html.dar-ios-native-app body.is-quran-overview #appView.view{",
+              "  padding-top:max(6px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px)) !important;",
               "}"
             ].join("\\n");
           }
@@ -227,12 +274,9 @@ struct WebAppView: UIViewRepresentable {
               }
             }
             if(document.body)document.body.classList.add("dar-ios-native-app");
-            var forceIds=["dar-ios-parity-edge-force-v665","dar-ios-parity-edge-force-v659","dar-ios-parity-edge-force-v658","dar-ios-parity-edge-force-v657","dar-ios-parity-edge-force-v656","dar-ios-parity-edge-force-v655","dar-ios-parity-edge-force-v654","dar-ios-parity-edge-force-v653","dar-ios-parity-edge-force-v652","dar-ios-parity-edge-force-v651","dar-ios-parity-edge-force-v650","dar-ios-parity-edge-force-v649","dar-ios-parity-edge-force-v648","full-edge-feed-force-v645","full-edge-feed-force-v644"];
-            for(var fi=0;fi<forceIds.length;fi++){
-              var forceEl=document.getElementById(forceIds[fi]);
-              if(forceEl)forceEl.disabled=true;
-            }
             if(document.head)document.head.appendChild(style);
+            var feedForce=document.getElementById("dar-ios-parity-edge-force-v665")||document.getElementById("dar-ios-parity-edge-force-v659")||document.getElementById("dar-ios-parity-edge-force-v658")||document.getElementById("dar-ios-parity-edge-force-v657")||document.getElementById("dar-ios-parity-edge-force-v656")||document.getElementById("dar-ios-parity-edge-force-v655")||document.getElementById("dar-ios-parity-edge-force-v654")||document.getElementById("dar-ios-parity-edge-force-v653")||document.getElementById("dar-ios-parity-edge-force-v652")||document.getElementById("dar-ios-parity-edge-force-v651")||document.getElementById("dar-ios-parity-edge-force-v650")||document.getElementById("dar-ios-parity-edge-force-v649")||document.getElementById("dar-ios-parity-edge-force-v648")||document.getElementById("full-edge-feed-force-v645")||document.getElementById("full-edge-feed-force-v644");
+            if(feedForce&&document.head)document.head.appendChild(feedForce);
             try{
               var sb=document.getElementById("dar-soft-boot");
               if(sb&&sb.parentNode)sb.parentNode.removeChild(sb);
@@ -486,7 +530,11 @@ struct WebAppView: UIViewRepresentable {
               window.webkit.messageHandlers.darAppearance.postMessage({
                 top: topColor || boot,
                 mid: midColor || topColor || boot,
-                bottom: bottomColor || topColor || boot
+                bottom: bottomColor || topColor || boot,
+                theme: String((document.documentElement&&document.documentElement.getAttribute("data-theme"))||"dark"),
+                gold: firstVariableColor(roots, ["--gold2","--theme-accent","--gold"]) || "",
+                cream: firstVariableColor(roots, ["--text","--cream","--theme-text"]) || "",
+                muted: firstVariableColor(roots, ["--muted","--theme-muted","--muted2"]) || ""
               });
             }catch(e){}
           }
@@ -523,11 +571,38 @@ struct WebAppView: UIViewRepresentable {
             try{
               var raw=localStorage.getItem("darPrayerSettingsV1");
               var s=raw?JSON.parse(raw):{};
+              var theme=String((document.documentElement&&document.documentElement.getAttribute("data-theme"))||"dark");
+              var dua=null, rec=null, daily=null, times=[];
+              try{ if(typeof dailyContentToday==="function") daily=dailyContentToday(); }catch(e){}
+              try{ if(typeof dailyDua==="function") dua=dailyDua(); }catch(e){}
+              try{ if(typeof recommendedPost==="function") rec=recommendedPost(); }catch(e){}
+              try{
+                if(typeof calculatePrayerTimes==="function" && typeof getPrayerSettings==="function"){
+                  times=calculatePrayerTimes(new Date(), getPrayerSettings()).map(function(p){
+                    var clock=p.time;
+                    if(typeof formatPrayerHour==="function" && typeof clock==="number") clock=formatPrayerHour(clock);
+                    return {id:p.key||"",name:p.name||"",time:String(clock||"")};
+                  });
+                }
+              }catch(e){}
               if(window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.darWidgetSnapshot){
                 window.webkit.messageHandlers.darWidgetSnapshot.postMessage({
                   lat:s.lat,
                   lon:s.lon,
-                  city:s.city||""
+                  city:s.city||"",
+                  angle:s.angle||12,
+                  asrFactor:s.asrFactor||1,
+                  theme:theme,
+                  times:times,
+                  duaTitle:dua&&dua.title||daily&&daily.dua&&daily.dua.title||"",
+                  duaDe:dua&&(dua.de||dua.snippet)||daily&&daily.dua&&daily.dua.snippet||"",
+                  duaTr:dua&&dua.tr||"",
+                  duaCat:dua&&(dua.cat||dua.category)||daily&&daily.dua&&daily.dua.category||"",
+                  postTitle:rec&&rec.title||daily&&daily.recommendation&&daily.recommendation.title||"",
+                  postSnippet:daily&&daily.recommendation&&daily.recommendation.snippet||"",
+                  postCategory:[rec&&rec.category,rec&&rec.scholar].filter(Boolean).join(" · "),
+                  postSource:rec&&rec.source||daily&&daily.recommendation&&daily.recommendation.source||"",
+                  duaSource:dua&&dua.source||daily&&daily.dua&&daily.dua.source||"",
                 });
               }
             }catch(e){}
@@ -561,25 +636,17 @@ struct WebAppView: UIViewRepresentable {
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate = context.coordinator
         webView.scrollView.contentInsetAdjustmentBehavior = .never
-        webView.scrollView.backgroundColor = .clear
+        webView.scrollView.delaysContentTouches = false
+        webView.scrollView.canCancelContentTouches = true
+        webView.scrollView.backgroundColor = bootInk
         webView.allowsBackForwardNavigationGestures = true
-        webView.isOpaque = false
-        webView.backgroundColor = .clear
-        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.25-glass-status"
-        if #available(iOS 15.0, *) {
-            webView.underPageBackgroundColor = .clear
-        }
+        webView.isOpaque = true
+        webView.backgroundColor = bootInk
+        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.25-watch-push"
         webView.onInsetsChange = { [weak coordinator = context.coordinator] in
             coordinator?.updateViewportInsets()
         }
         containerView.addSubview(webView)
-
-        let tabBar = DarNativeTabBar()
-        tabBar.translatesAutoresizingMaskIntoConstraints = false
-        tabBar.onSelect = { [weak coordinator = context.coordinator] id in
-            coordinator?.openNativeTab(id)
-        }
-        containerView.addSubview(tabBar)
 
         NSLayoutConstraint.activate([
             backdropView.topAnchor.constraint(equalTo: containerView.topAnchor),
@@ -589,25 +656,24 @@ struct WebAppView: UIViewRepresentable {
             webView.topAnchor.constraint(equalTo: containerView.topAnchor),
             webView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             webView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            webView.bottomAnchor.constraint(equalTo: tabBar.topAnchor, constant: -8),
-            tabBar.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor, constant: 12),
-            tabBar.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor, constant: -12),
-            tabBar.bottomAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.bottomAnchor, constant: -8),
-            tabBar.heightAnchor.constraint(equalToConstant: 62)
+            webView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
         ])
         context.coordinator.attach(
             webView,
             backdropView: backdropView,
-            containerView: containerView,
-            tabBar: tabBar
+            containerView: containerView
         )
         webView.load(URLRequest(url: Self.launchURL))
         return containerView
     }
 
     func updateUIView(_ view: UIView, context: Context) {
-        guard let route = destination else { return }
-        context.coordinator.navigate(to: route)
+        if let openURL {
+            context.coordinator.loadPushURL(openURL)
+        }
+        if let route = destination {
+            context.coordinator.navigate(to: route, force: true)
+        }
     }
 
     final class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler {
@@ -621,7 +687,6 @@ struct WebAppView: UIViewRepresentable {
         private weak var webView: WKWebView?
         private weak var backdropView: GradientBackdropView?
         private weak var containerView: UIView?
-        private weak var nativeChromeBar: DarNativeTabBar?
         private weak var loadingOverlay: UIView?
         private var pageSurfaceColor = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
         private weak var loadingLabel: UILabel?
@@ -644,6 +709,7 @@ struct WebAppView: UIViewRepresentable {
         private var lastAppliedTopInset: CGFloat = -1
         private var lastAppearanceKey: String = ""
         private var lastOpenedDestination: DarDeepLink.Destination?
+        private var lastLoadedPushURL: URL?
         private let errorHTML = """
         <!doctype html>
         <html lang="de">
@@ -673,15 +739,12 @@ struct WebAppView: UIViewRepresentable {
         func attach(
             _ webView: WKWebView,
             backdropView: GradientBackdropView,
-            containerView: UIView,
-            tabBar: DarNativeTabBar
+            containerView: UIView
         ) {
             self.webView = webView
             self.backdropView = backdropView
             self.containerView = containerView
-            self.nativeChromeBar = tabBar
             installLoadingOverlay(on: containerView)
-            containerView.bringSubviewToFront(tabBar)
             applySurfaceColor(pageSurfaceColor)
             showLoadingOverlay(subtitle: "App wird geladen")
             updateViewportInsets()
@@ -697,6 +760,12 @@ struct WebAppView: UIViewRepresentable {
                 name: UIApplication.didBecomeActiveNotification,
                 object: nil
             )
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(injectNativePushBridge),
+                name: .darNativePushReady,
+                object: nil
+            )
         }
 
         deinit {
@@ -704,36 +773,49 @@ struct WebAppView: UIViewRepresentable {
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darLibraryReader")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darAppearance")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darWidgetSnapshot")
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushSettings")
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darHaptic")
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushTest")
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darAppIcon")
             NotificationCenter.default.removeObserver(self)
         }
 
-        func openNativeTab(_ id: String) {
-            let dest: DarDeepLink.Destination
-            switch id {
-            case "quiz": dest = .home
-            case "feed": dest = .home
-            case "quran": dest = .quran
-            case "more": dest = .more
-            default: dest = .home
-            }
-            let hash: String
-            switch id {
-            case "quiz": hash = "#quiz"
-            case "feed": hash = "#feed"
-            case "quran": hash = "#quran"
-            case "more": hash = "#more"
-            default: hash = "#home"
-            }
-            lastOpenedDestination = dest
-            webView?.evaluateJavaScript("location.hash=\(Self.jsString(hash));", completionHandler: nil)
-            nativeChromeBar?.select(id: id)
-        }
-
         func navigate(to destination: DarDeepLink.Destination, force: Bool = false) {
-            guard force || lastOpenedDestination != destination else { return }
+            if !force && lastOpenedDestination == destination { return }
             lastOpenedDestination = destination
             let hash = destination.webHash
-            webView?.evaluateJavaScript("location.hash=\(Self.jsString(hash));", completionHandler: nil)
+            let hint = destination.openHint
+            let js = """
+            (function(){
+              var hash=\(Self.jsString(hash));
+              var hint=\(Self.jsString(hint));
+              try{
+                var view=String(hash||"").replace(/^#/,"");
+                if(typeof navigateToTabRootReplace==="function"){navigateToTabRootReplace(view);}
+                else {location.hash=hash;}
+              }catch(e){location.hash=hash;}
+              if(hint==="qibla"){
+                setTimeout(function(){
+                  var el=document.getElementById("qiblaCompassWrap");
+                  if(el) el.scrollIntoView({behavior:"smooth",block:"center"});
+                },400);
+              }
+              if(hint==="search"){
+                setTimeout(function(){
+                  var inp=document.querySelector('input[placeholder*="Suche nach Beitrag"],input[placeholder*="Sūrah, Āyah"]');
+                  if(inp){try{inp.focus()}catch(e){}}
+                },400);
+              }
+            })();
+            """
+            webView?.evaluateJavaScript(js, completionHandler: nil)
+        }
+
+        func loadPushURL(_ url: URL) {
+            guard url.host?.contains("dar-al-tawhid.de") == true else { return }
+            if lastLoadedPushURL == url { return }
+            lastLoadedPushURL = url
+            webView?.load(URLRequest(url: url))
         }
 
         private static func jsString(_ value: String) -> String {
@@ -758,10 +840,71 @@ struct WebAppView: UIViewRepresentable {
             if let city = body["city"] as? String, !city.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 snap.cityLabel = city
             }
+            if let angle = body["angle"] as? Double { snap.fajrAngle = angle }
+            else if let angle = (body["angle"] as? NSNumber)?.doubleValue { snap.fajrAngle = angle }
+            if let asr = body["asrFactor"] as? Double { snap.asrFactor = asr }
+            else if let asr = (body["asrFactor"] as? NSNumber)?.doubleValue { snap.asrFactor = asr }
+            if let rows = body["times"] as? [[String: Any]], !rows.isEmpty {
+                let parsed: [DarPrayerSlot] = rows.compactMap { row in
+                    let id = String(describing: row["id"] ?? "")
+                    let name = String(describing: row["name"] ?? "")
+                    let time = String(describing: row["time"] ?? "")
+                    guard !id.isEmpty, time.contains(":") else { return nil }
+                    return DarPrayerSlot(id: id, name: name, time: time)
+                }
+                if parsed.count >= 5 { snap.prayers = parsed }
+            }
+            if let theme = body["theme"] as? String, !theme.isEmpty {
+                snap.themeId = theme
+            }
+            if let title = body["duaTitle"] as? String, !title.isEmpty { snap.duaTitle = title }
+            if let de = body["duaDe"] as? String, !de.isEmpty { snap.duaGerman = de }
+            if let tr = body["duaTr"] as? String, !tr.isEmpty { snap.duaTranslit = tr }
+            if let cat = body["duaCat"] as? String { snap.duaCategory = cat }
+            if let post = body["postTitle"] as? String, !post.isEmpty {
+                snap.postTitle = post
+                snap.recommendationTitle = "Heute empfohlen"
+            }
+            if let snippet = body["postSnippet"] as? String, !snippet.isEmpty {
+                snap.postSnippet = snippet
+                snap.recommendationBody = snippet
+            }
+            if let pcat = body["postCategory"] as? String { snap.postCategory = pcat }
+            if let src = body["postSource"] as? String, !src.isEmpty { snap.postSource = src }
+            if let dsrc = body["duaSource"] as? String, !dsrc.isEmpty { snap.duaSource = dsrc }
             DarWidgetStore.save(DarDailyContent.refresh(snap))
         }
 
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+            if message.name == "darPushTest" {
+                let body = message.body as? [String: Any] ?? [:]
+                DarPushNotifications.showTest(
+                    title: String(describing: body["title"] ?? "[Test] DAR AL TAWḤĪD"),
+                    body: String(describing: body["body"] ?? "Test-Benachrichtigung"),
+                    type: String(describing: body["type"] ?? "prayer"),
+                    prayer: String(describing: body["prayer"] ?? "dhuhr"),
+                    mode: String(describing: body["mode"] ?? "entry")
+                )
+                return
+            }
+            if message.name == "darAppIcon" {
+                let body = message.body as? [String: Any] ?? [:]
+                let name = body["name"] as? String ?? ""
+                let id = body["id"] as? String ?? ""
+                DarAppIcons.set(name.isEmpty ? id : name)
+                return
+            }
+            if message.name == "darHaptic" {
+                let style = (message.body as? [String: Any])?["style"] as? String ?? "light"
+                DarHaptics.play(raw: style)
+                return
+            }
+            if message.name == "darPushSettings" {
+                if let body = message.body as? [String: Any] {
+                    DarPushNotifications.applyWebPrayerSettings(body)
+                }
+                return
+            }
             if message.name == "darWidgetSnapshot" {
                 if let body = message.body as? [String: Any] {
                     applyWidgetPayload(body)
@@ -775,6 +918,31 @@ struct WebAppView: UIViewRepresentable {
                     midHex: body["mid"] as? String,
                     bottomHex: body["bottom"] as? String
                 )
+                var snap = DarWidgetStore.load()
+                var changed = false
+                if let theme = body["theme"] as? String, !theme.isEmpty, snap.themeId != theme {
+                    snap.themeId = theme
+                    changed = true
+                }
+                if let ink = body["top"] as? String, !ink.isEmpty, snap.inkHex != ink {
+                    snap.inkHex = ink
+                    changed = true
+                }
+                if let gold = body["gold"] as? String, !gold.isEmpty, snap.goldHex != gold {
+                    snap.goldHex = gold
+                    changed = true
+                }
+                if let cream = body["cream"] as? String, !cream.isEmpty, snap.textHex != cream {
+                    snap.textHex = cream
+                    changed = true
+                }
+                if let muted = body["muted"] as? String, !muted.isEmpty, snap.mutedHex != muted {
+                    snap.mutedHex = muted
+                    changed = true
+                }
+                if changed {
+                    DarWidgetStore.save(DarDailyContent.refresh(snap))
+                }
                 return
             }
 
@@ -866,6 +1034,131 @@ struct WebAppView: UIViewRepresentable {
             if let pending = DarWidgetStore.consumePendingDestination() {
                 navigate(to: pending, force: true)
             }
+            injectNativePushBridge()
+        }
+
+        @objc func injectNativePushBridge() {
+            let sub = DarPushNotifications.lastSubscriptionId()
+            let token = DarPushNotifications.pushToken()
+            let device = DarPushNotifications.deviceId()
+            let js = """
+            (function(){
+              window.DAR_IOS_NATIVE_PUSH=true;
+              window.DAR_IOS_ONESIGNAL_ID=\(Self.jsString(sub));
+              window.DAR_IOS_PUSH_TOKEN=\(Self.jsString(token));
+              window.DAR_IOS_DEVICE_ID=\(Self.jsString(device));
+              try{if(window.DAR_IOS_DEVICE_ID)localStorage.setItem("darPushExternalIdV1", window.DAR_IOS_DEVICE_ID)}catch(e){}
+              function patch(){
+                if(typeof readOneSignalPushSubscriptionState==="function"){
+                  readOneSignalPushSubscriptionState=function(){
+                    return {subscriptionId:window.DAR_IOS_ONESIGNAL_ID||"",token:window.DAR_IOS_PUSH_TOKEN||"",optedIn:!!window.DAR_IOS_ONESIGNAL_ID,ready:!!window.DAR_IOS_ONESIGNAL_ID};
+                  };
+                }
+                if(typeof currentOneSignalPushIds==="function"){
+                  currentOneSignalPushIds=function(){
+                    return {externalId:localStorage.getItem("darPushExternalIdV1")||window.DAR_IOS_DEVICE_ID||"",subscriptionId:window.DAR_IOS_ONESIGNAL_ID||"",token:window.DAR_IOS_PUSH_TOKEN||""};
+                  };
+                }
+              function nativeReady(){
+                return {
+                  ready:true,
+                  optedIn:true,
+                  subscriptionId:window.DAR_IOS_ONESIGNAL_ID||"",
+                  token:window.DAR_IOS_PUSH_TOKEN||"",
+                  os:window.OneSignal||{}
+                };
+              }
+              window.hasNotificationApi=function(){return true};
+              window.getNotificationPermission=function(){return "granted"};
+              window.requestNotificationPermission=function(){return Promise.resolve("granted")};
+              window.waitForPushSubscriptionReady=function(){return Promise.resolve(nativeReady())};
+              window.waitForPushOptIn=function(){return Promise.resolve(true)};
+              window.ensureOneSignalPushSubscription=function(){return Promise.resolve(true)};
+              window.ensureOneSignalServiceWorkerReady=function(){return Promise.resolve(null)};
+              window.getOneSignalServiceWorkerRegistration=function(){return Promise.resolve(null)};
+              try{
+                if(window.Notification){
+                  Object.defineProperty(window.Notification,"permission",{configurable:true,get:function(){return "granted"}});
+                  window.Notification.requestPermission=function(){return Promise.resolve("granted")};
+                }
+              }catch(e){}
+              window.showPrayerNotification=function(title,options){
+                try{
+                  webkit.messageHandlers.darPushTest.postMessage({
+                    title:String(title||"[Test] DAR AL TAWḤĪD"),
+                    body:String((options&&options.body)||""),
+                    type:"prayer"
+                  });
+                }catch(e){}
+                return Promise.resolve(true);
+              };
+              if(!window.__darIosTapBridge){
+                window.__darIosTapBridge=true;
+                document.addEventListener("click",function(ev){
+                  var el=ev.target&&ev.target.closest&&ev.target.closest("button,a,[role=button],[role=switch],input,label,.toggle,[data-nav]");
+                  if(!el)return;
+                  var txt=String((el.innerText||el.textContent||el.getAttribute("aria-label")||el.id||el.className||"")).toLowerCase();
+                  if(/test/.test(txt)&&( /send/.test(txt)||/push/.test(txt)||/senden/.test(txt)||/benachricht/.test(txt)||/probe/.test(txt) )){
+                    try{webkit.messageHandlers.darPushTest.postMessage({title:"[Test] DAR AL TAWḤĪD",body:"Test-Benachrichtigung",type:"prayer"});}catch(e){}
+                  }
+                  if(/jumu|jumma|juma|freitag/.test(txt)){
+                    try{
+                      var raw=localStorage.getItem("darPrayerSettingsV1");
+                      var s=raw?JSON.parse(raw):{};
+                      if(typeof getPrayerSettings==="function") s=Object.assign(s,getPrayerSettings());
+                      var turningOn=!!s.jummahNotifications;
+                      if(el.tagName==="INPUT"&&el.type==="checkbox") turningOn=!!el.checked;
+                      else if(el.getAttribute("aria-pressed")==="true") turningOn=false;
+                      else if(el.getAttribute("aria-pressed")==="false") turningOn=true;
+                      else turningOn=!s.jummahNotifications;
+                      s.jummahNotifications=turningOn;
+                      localStorage.setItem("darPrayerSettingsV1",JSON.stringify(s));
+                      webkit.messageHandlers.darPushSettings.postMessage(s);
+                    }catch(e){}
+                  }
+                  if((el.getAttribute("href")||"").indexOf("jummah")>=0||(el.getAttribute("data-nav")||"")==="jummah"){
+                    try{location.hash="#jummah";}catch(e){}
+                  }
+                },true);
+              }
+              if(typeof requestServerPrayerTest==="function"){
+                var _req=requestServerPrayerTest;
+                requestServerPrayerTest=async function(subId,prayerKey,mode,settings){
+                  try{
+                    webkit.messageHandlers.darPushTest.postMessage({
+                      title:"[Test] Gebet",
+                      body:String(prayerKey||"prayer")+" · "+String(mode||"entry"),
+                      type:"prayer",
+                      prayer:String(prayerKey||""),
+                      mode:String(mode||"")
+                    });
+                  }catch(e){}
+                  var id=subId||window.DAR_IOS_ONESIGNAL_ID||"";
+                  if(!id) return {ok:true,reason:"local"};
+                  return _req(id,prayerKey,mode,settings);
+                };
+              }
+                try{
+                  if(typeof getPrayerSettings==="function" && window.webkit&&webkit.messageHandlers&&webkit.messageHandlers.darPushSettings){
+                    webkit.messageHandlers.darPushSettings.postMessage(getPrayerSettings());
+                  }
+                }catch(e){}
+                try{
+                  if(window.DAR_IOS_ONESIGNAL_ID && typeof savePushRegistration==="function"){
+                    var os=window.OneSignal||{};
+                    savePushRegistration(typeof getPrayerSettings==="function"?getPrayerSettings():{},os);
+                  }
+                  if(window.DAR_IOS_ONESIGNAL_ID && typeof getPrayerSettings==="function" && getPrayerSettings().reminder && typeof syncPrayerPushTags==="function"){
+                    syncPrayerPushTags().catch(function(){});
+                  }
+                }catch(e){}
+              }
+              patch();
+              setTimeout(patch,400);
+              setTimeout(patch,1200);
+            })();
+            """
+            webView?.evaluateJavaScript(js, completionHandler: nil)
         }
 
         func updateViewportInsets() {
@@ -888,9 +1181,9 @@ struct WebAppView: UIViewRepresentable {
             if webView.scrollView.verticalScrollIndicatorInsets != .zero {
                 webView.scrollView.verticalScrollIndicatorInsets = .zero
             }
-            webView.scrollView.backgroundColor = .clear
+            webView.scrollView.backgroundColor = pageSurfaceColor
 
-            let topInset = max(0, resolvedInsets.top)
+            let topInset = max(resolvedInsets.top, 59)
             if abs(topInset - lastAppliedTopInset) < 0.5, lastAppliedTopInset >= 0 {
                 return
             }
@@ -907,11 +1200,14 @@ struct WebAppView: UIViewRepresentable {
               if(!root)return;
               root.classList.add("dar-ios-native-app");
               root.style.setProperty("--dar-native-safe-top","\(top)px");
+              root.style.setProperty("--safe-top","\(top)px");
               var bottomNative=\(bottom);
               if(bottomNative > 1){
                 root.style.setProperty("--dar-native-safe-bottom", bottomNative.toFixed(2) + "px");
+                root.style.setProperty("--safe-bottom", bottomNative.toFixed(2) + "px");
               } else {
                 root.style.removeProperty("--dar-native-safe-bottom");
+                root.style.removeProperty("--safe-bottom");
               }
               root.style.setProperty("--dar-ios-safe-left","\(left)px");
               root.style.setProperty("--dar-ios-safe-right","\(right)px");
@@ -940,16 +1236,16 @@ struct WebAppView: UIViewRepresentable {
 
         private func applySurfaceColor(_ color: UIColor) {
             pageSurfaceColor = color
-            // Keep the native chrome clear after boot so the web glass/status area
-            // is not covered by a pinned opaque field.
-            backdropView?.isHidden = true
-            containerView?.backgroundColor = .clear
-            webView?.scrollView.backgroundColor = .clear
-            webView?.backgroundColor = .clear
-            webView?.isOpaque = false
+            backdropView?.updateColors(top: color, mid: color, bottom: color)
+            containerView?.backgroundColor = color
+            webView?.scrollView.backgroundColor = color
+            webView?.backgroundColor = color
+            webView?.isOpaque = true
             if #available(iOS 15.0, *) {
-                webView?.underPageBackgroundColor = .clear
+                webView?.underPageBackgroundColor = color
             }
+            webView?.window?.backgroundColor = color
+            // Keep boot overlay ink while loading, otherwise theme updates hide the progress UI.
             if !isBootLoadingVisible {
                 loadingOverlay?.backgroundColor = color
             }
@@ -959,7 +1255,11 @@ struct WebAppView: UIViewRepresentable {
             let key = "\(topHex ?? "")|\(midHex ?? "")|\(bottomHex ?? "")"
             guard key != lastAppearanceKey else { return }
             lastAppearanceKey = key
-            applySurfaceColor(color(from: topHex) ?? pageSurfaceColor)
+            let topColor = color(from: topHex) ?? pageSurfaceColor
+            let midColor = color(from: midHex) ?? topColor
+            let bottomColor = color(from: bottomHex) ?? topColor
+            applySurfaceColor(topColor)
+            backdropView?.updateColors(top: topColor, mid: midColor, bottom: bottomColor)
         }
 
         private func color(from hex: String?) -> UIColor? {
@@ -1369,11 +1669,6 @@ struct WebAppView: UIViewRepresentable {
             self.loadingProgressWidthConstraint = progressWidthConstraint
         }
 
-        private func raiseNativeChrome() {
-            guard let host = containerView, let bar = nativeChromeBar else { return }
-            host.bringSubviewToFront(bar)
-        }
-
         private func showLoadingOverlay(subtitle: String) {
             hideLoadingWorkItem?.cancel()
             let bootInk = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
@@ -1385,7 +1680,6 @@ struct WebAppView: UIViewRepresentable {
             overlay.isUserInteractionEnabled = true
             overlay.alpha = 1
             containerView?.bringSubviewToFront(overlay)
-            raiseNativeChrome()
             webView?.alpha = 0.001
             startLoadingProgress()
         }

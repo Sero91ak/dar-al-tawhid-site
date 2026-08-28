@@ -10,15 +10,26 @@ enum DarDeepLink {
         case quran
         case duas
         case more
+        case search
+        case jummah
 
         var webHash: String {
             switch self {
             case .home: return "#home"
-            case .prayer: return "#prayer"
-            case .qibla: return "#prayer"
+            case .prayer, .qibla: return "#prayer"
             case .quran: return "#quran"
             case .duas: return "#duas"
             case .more: return "#more"
+            case .search: return "#home"
+            case .jummah: return "#jummah"
+            }
+        }
+
+        var openHint: String {
+            switch self {
+            case .qibla: return "qibla"
+            case .search: return "search"
+            default: return ""
             }
         }
 

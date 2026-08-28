@@ -12,11 +12,9 @@ Native iOS wrapper for TestFlight distribution.
 6. Distribute App > App Store Connect > Upload.
 7. In App Store Connect, create a TestFlight external group and public invite link.
 
-The first build loads:
+The wrapper loads the live visitor app:
 
-`https://dar-al-tawhid.de/test/?env=staging&source=ios-testflight#home`
-
-Before the first real live release, change `environment` in `DarAlTawhid/WebAppView.swift` from `.staging` to `.live`.
+`https://dar-al-tawhid.de/#home`
 
 Current modes:
 
@@ -30,12 +28,15 @@ Nach dem ersten Archive mit aktiver Apple-Developer-Mitgliedschaft:
 1. App auf dem Gerät installieren (TestFlight Internal).
 2. Home-Bildschirm lange drücken → **+** → **DAR AL TAWḤĪD**.
 3. Widgets wählen:
-   - **Gebetszeiten** (klein / mittel / groß)
+   - **Nächstes Gebet** (klein, mit Timer)
+   - **Gebetszeiten Liste** (klein)
+   - **Tagesgebetszeiten** (klein / mittel / groß)
    - **Qibla** (klein)
-   - **Heute** (klein / mittel)
-   - **Āyah und Duʿāʾ** (klein / mittel)
+   - **Heute empfohlen** (mittel / groß)
+   - **Āyah des Tages** (mittel / groß, Deutsch + Lautschrift)
+   - **Duʿāʾ des Tages** (mittel / groß, Deutsch + Lautschrift)
 
-Die App teilt Standort aus `darPrayerSettingsV1` über die App-Group `group.de.daraltawhid.app` mit den Widgets. Ohne Standort gilt Berlin als Standard. Tippen öffnet `daraltawhid://prayer|qibla|home|quran`.
+Die Widgets folgen dem aktuellen Erscheinungsbild der App (Dunkel, Hell, Sanft, Royal, Layl, Aurora, Bordeaux). Ohne Standort gilt Berlin als Standard. Inhalte (Beitrag, Duʿāʾ) kommen aus der App bzw. `content/updates/daily.json`.
 
 In Xcode unter Signing für **App und Widget** dieselbe Team-ID setzen und die App-Group aktivieren.
 

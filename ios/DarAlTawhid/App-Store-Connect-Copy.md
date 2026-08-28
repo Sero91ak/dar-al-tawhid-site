@@ -47,7 +47,11 @@ Eine ruhige App für geprüfte Beiträge, Quellen, Gebetszeiten und praktische i
 
 ## Keywords
 
-Dar Al Tawhid, Daral Tawhid, DAR AL TAWḤĪD, Tawhid, Tawheed, Tauhid, Islam, Quran, Qur'an, Sunnah, Athar, Hadith, Gebetszeiten, Qibla, Wissen, Salaf
+Max. 100 Zeichen, Komma ohne Leerzeichen. Wörter aus Name/Untertitel nicht wiederholen.
+
+Paste in App Store Connect (93 Zeichen):
+
+tawhid,tawheed,tauhid,tauheed,islam,quran,sunnah,athar,hadith,gebetszeiten,qibla,wissen,salaf
 
 ## Support
 

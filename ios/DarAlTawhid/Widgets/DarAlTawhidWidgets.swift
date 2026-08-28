@@ -1,9 +1,6 @@
 import SwiftUI
 import WidgetKit
-
-private let ink = Color(red: 0.02, green: 0.03, blue: 0.02)
-private let gold = Color(red: 0.85, green: 0.72, blue: 0.42)
-private let cream = Color(red: 0.96, green: 0.94, blue: 0.86)
+import AppIntents
 
 struct DarTimelineProvider: TimelineProvider {
     func placeholder(in context: Context) -> DarEntry {
@@ -15,209 +12,178 @@ struct DarTimelineProvider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<DarEntry>) -> Void) {
-        let snap = DarDailyContent.refresh(DarWidgetStore.load())
-        DarWidgetStore.save(snap)
-        let entry = DarEntry(date: Date(), snapshot: snap)
-        let next = Calendar.current.date(byAdding: .minute, value: 15, to: Date()) ?? Date().addingTimeInterval(900)
-        completion(Timeline(entries: [entry], policy: .after(next)))
-    }
-}
-
-struct DarEntry: TimelineEntry {
-    let date: Date
-    let snapshot: DarWidgetSnapshot
-}
-
-struct PrayerWidgetView: View {
-    let entry: DarEntry
-    @Environment(\.widgetFamily) private var family
-
-    var body: some View {
-        let snap = entry.snapshot
-        VStack(alignment: .leading, spacing: 6) {
-            Text("DAR AL TAWḤĪD")
-                .font(.system(size: 9, weight: .bold))
-                .foregroundStyle(gold)
-            Text(snap.nextPrayerName)
-                .font(.system(size: family == .systemSmall ? 20 : 24, weight: .semibold))
-                .foregroundStyle(cream)
-            Text(snap.nextPrayerTime)
-                .font(.system(size: family == .systemSmall ? 28 : 34, weight: .bold, design: .rounded))
-                .foregroundStyle(gold)
-            if family != .systemSmall {
-                HStack(spacing: 8) {
-                    ForEach(snap.prayers.filter { $0.id != "sunrise" }.prefix(5)) { slot in
-                        VStack(spacing: 2) {
-                            Text(slot.name)
-                                .font(.system(size: 9, weight: .semibold))
-                                .foregroundStyle(cream.opacity(0.7))
-                            Text(slot.time)
-                                .font(.system(size: 11, weight: .bold, design: .rounded))
-                                .foregroundStyle(cream)
-                        }
-                        .frame(maxWidth: .infinity)
-                    }
-                }
-            }
-            Text(snap.cityLabel)
-                .font(.system(size: 10, weight: .medium))
-                .foregroundStyle(cream.opacity(0.55))
-        }
-        .padding(14)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .widgetBackground()
-        .widgetURL(DarDeepLink.Destination.prayer.url)
-    }
-}
-
-struct QiblaWidgetView: View {
-    let entry: DarEntry
-
-    var body: some View {
-        let deg = entry.snapshot.qiblaDegrees
-        VStack(spacing: 8) {
-            Text("Qibla")
-                .font(.system(size: 12, weight: .bold))
-                .foregroundStyle(gold)
-            ZStack {
-                Circle()
-                    .stroke(gold.opacity(0.35), lineWidth: 2)
-                Image(systemName: "location.north.fill")
-                    .font(.system(size: 28, weight: .semibold))
-                    .foregroundStyle(gold)
-                    .rotationEffect(.degrees(deg))
-            }
-            .frame(width: 72, height: 72)
-            Text(String(format: "%.1f°", deg))
-                .font(.system(size: 20, weight: .bold, design: .rounded))
-                .foregroundStyle(cream)
-            Text(entry.snapshot.cityLabel)
-                .font(.system(size: 10))
-                .foregroundStyle(cream.opacity(0.55))
-        }
-        .padding(12)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .widgetBackground()
-        .widgetURL(DarDeepLink.Destination.qibla.url)
-    }
-}
-
-struct DailyWidgetView: View {
-    let entry: DarEntry
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(entry.snapshot.recommendationTitle.uppercased())
-                .font(.system(size: 10, weight: .bold))
-                .foregroundStyle(gold)
-            Text(entry.snapshot.recommendationBody)
-                .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(cream)
-                .lineLimit(5)
-            Spacer(minLength: 0)
-            Text("Tippen öffnet die App")
-                .font(.system(size: 10))
-                .foregroundStyle(cream.opacity(0.5))
-        }
-        .padding(14)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .widgetBackground()
-        .widgetURL(DarDeepLink.Destination.home.url)
-    }
-}
-
-struct AyahDuaWidgetView: View {
-    let entry: DarEntry
-    @Environment(\.widgetFamily) private var family
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Āyah · Duʿāʾ")
-                .font(.system(size: 10, weight: .bold))
-                .foregroundStyle(gold)
-            Text(entry.snapshot.ayahArabic)
-                .font(.system(size: family == .systemSmall ? 16 : 20))
-                .foregroundStyle(cream)
-                .multilineTextAlignment(.trailing)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-            Text(entry.snapshot.ayahRef)
-                .font(.system(size: 11, weight: .semibold))
-                .foregroundStyle(gold.opacity(0.85))
-            if family != .systemSmall {
-                Text(entry.snapshot.duaTitle + " — " + entry.snapshot.duaText)
-                    .font(.system(size: 12))
-                    .foregroundStyle(cream.opacity(0.8))
-                    .lineLimit(3)
-            }
-        }
-        .padding(14)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .widgetBackground()
-        .widgetURL(DarDeepLink.Destination.quran.url)
-    }
-}
-
-private extension View {
-    @ViewBuilder
-    func widgetBackground() -> some View {
-        if #available(iOSApplicationExtension 17.0, *) {
-            containerBackground(for: .widget) { ink }
-        } else {
-            background(ink)
+        Task {
+            completion(await Self.makeTimeline(look: .eisgold))
         }
     }
+
+    static func makeTimeline(look: DarWidgetLook) async -> Timeline<DarEntry> {
+        var snap = DarWidgetStore.load()
+        if let live = await DarWidgetRemote.fetchDaily() {
+            snap = DarWidgetRemote.applyLive(live, to: snap)
+        }
+        snap = DarDailyContent.refresh(snap)
+        DarWidgetStore.save(snap, reload: false)
+        let now = Date()
+        var entries: [DarEntry] = []
+        for minute in 0..<30 {
+            let date = now.addingTimeInterval(Double(minute * 60))
+            let liveSnap = DarDailyContent.refresh(snap, date: date)
+            entries.append(DarEntry(date: date, snapshot: liveSnap, look: look))
+        }
+        let next = Calendar.current.date(byAdding: .minute, value: 30, to: now) ?? now.addingTimeInterval(1800)
+        return Timeline(entries: entries, policy: .after(next))
+    }
 }
 
-struct PrayerTimesWidget: Widget {
+struct DarIntentProvider: AppIntentTimelineProvider {
+    func placeholder(in context: Context) -> DarEntry {
+        DarEntry(date: Date(), snapshot: DarDailyContent.refresh(DarWidgetStore.load()), look: .eisgold)
+    }
+
+    func snapshot(for configuration: DarWidgetColorIntent, in context: Context) async -> DarEntry {
+        DarEntry(date: Date(), snapshot: DarDailyContent.refresh(DarWidgetStore.load()), look: configuration.look)
+    }
+
+    func timeline(for configuration: DarWidgetColorIntent, in context: Context) async -> Timeline<DarEntry> {
+        await DarTimelineProvider.makeTimeline(look: configuration.look)
+    }
+}
+
+struct PrayerTimerWidget: Widget {
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "de.daraltawhid.widget.prayer", provider: DarTimelineProvider()) { entry in
-            PrayerWidgetView(entry: entry)
+        AppIntentConfiguration(kind: "de.daraltawhid.widget.prayer.timer", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
+            PrayerTimerView(entry: entry)
+        }
+        .configurationDisplayName("Nächstes Gebet")
+        .description("Homescreen und Sperrbildschirm. Farbe unter Bearbeiten wählen.")
+        .supportedFamilies(Self.timerFamilies)
+    }
+
+    private static var timerFamilies: [WidgetFamily] {
+        var families: [WidgetFamily] = [.systemSmall, .systemMedium, .accessoryCircular, .accessoryRectangular, .accessoryInline]
+        if #available(iOSApplicationExtension 17.0, *) {
+            families.append(.systemExtraLarge)
+        }
+        return families
+    }
+}
+
+struct PrayerListWidget: Widget {
+    var body: some WidgetConfiguration {
+        AppIntentConfiguration(kind: "de.daraltawhid.widget.prayer.list", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
+            PrayerListView(entry: entry)
         }
         .configurationDisplayName("Gebetszeiten")
-        .description("Nächstes Gebet und die Zeiten des Tages auf dem Home-Bildschirm.")
-        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+        .description("Fajr bis ʿIshāʾ — gleiche Zeiten wie in der App.")
+        .supportedFamilies(Self.listFamilies)
+    }
+
+    private static var listFamilies: [WidgetFamily] {
+        var families: [WidgetFamily] = [.systemMedium, .systemLarge, .accessoryRectangular, .accessoryInline]
+        if #available(iOSApplicationExtension 17.0, *) {
+            families.append(.systemExtraLarge)
+        }
+        return families
+    }
+}
+
+struct PrayerDayWidget: Widget {
+    var body: some WidgetConfiguration {
+        AppIntentConfiguration(kind: "de.daraltawhid.widget.prayer.day", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
+            PrayerDayView(entry: entry)
+        }
+        .configurationDisplayName("Tagesgebetszeiten")
+        .description("Alle Gebetszeiten des Tages.")
+        .supportedFamilies(Self.dayFamilies)
+    }
+
+    private static var dayFamilies: [WidgetFamily] {
+        var families: [WidgetFamily] = [.systemLarge]
+        if #available(iOSApplicationExtension 17.0, *) {
+            families.append(.systemExtraLarge)
+        }
+        return families
     }
 }
 
 struct QiblaWidget: Widget {
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "de.daraltawhid.widget.qibla", provider: DarTimelineProvider()) { entry in
-            QiblaWidgetView(entry: entry)
+        AppIntentConfiguration(kind: "de.daraltawhid.widget.qibla", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
+            QiblaCompassView(entry: entry)
         }
         .configurationDisplayName("Qibla")
-        .description("Qibla-Richtung vom zuletzt genutzten Standort.")
-        .supportedFamilies([.systemSmall])
+        .description("Öffnet den Kompass in der App.")
+        .supportedFamilies([.systemSmall, .accessoryCircular])
     }
 }
 
-struct DailyWidget: Widget {
+struct TodayWidget: Widget {
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "de.daraltawhid.widget.daily", provider: DarTimelineProvider()) { entry in
-            DailyWidgetView(entry: entry)
+        AppIntentConfiguration(kind: "de.daraltawhid.widget.today", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
+            TodayContentView(entry: entry)
         }
-        .configurationDisplayName("Heute")
-        .description("Tagesempfehlung aus DAR AL TAWḤĪD.")
+        .configurationDisplayName("Heute empfohlen")
+        .description("Aktueller Beitrag.")
+        .supportedFamilies([.systemMedium, .systemLarge])
+    }
+}
+
+struct AyahWidget: Widget {
+    var body: some WidgetConfiguration {
+        AppIntentConfiguration(kind: "de.daraltawhid.widget.ayah", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
+            AyahContentView(entry: entry)
+        }
+        .configurationDisplayName("Āyah des Tages")
+        .description("Deutscher Wortlaut.")
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
 
-struct AyahDuaWidget: Widget {
+struct DuaWidget: Widget {
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "de.daraltawhid.widget.ayah", provider: DarTimelineProvider()) { entry in
-            AyahDuaWidgetView(entry: entry)
+        AppIntentConfiguration(kind: "de.daraltawhid.widget.dua", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
+            DuaContentView(entry: entry)
         }
-        .configurationDisplayName("Āyah und Duʿāʾ")
-        .description("Täglicher Qurʾān-Vers und ein kurzes Bittgebet.")
+        .configurationDisplayName("Duʿāʾ des Tages")
+        .description("Aktuelles Bittgebet.")
         .supportedFamilies([.systemSmall, .systemMedium])
+    }
+}
+
+struct LockDatePrayerWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "de.daraltawhid.widget.lock.date", provider: DarTimelineProvider()) { entry in
+            LockDatePrayerView(entry: entry)
+        }
+        .configurationDisplayName("Datum und Gebet")
+        .description("Über der Uhr: Datum und nächstes Gebet.")
+        .supportedFamilies([.accessoryRectangular, .accessoryInline])
+    }
+}
+
+struct LockHijriPrayerWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "de.daraltawhid.widget.lock.hijri", provider: DarTimelineProvider()) { entry in
+            LockHijriPrayerView(entry: entry)
+        }
+        .configurationDisplayName("Hidschra und Gebet")
+        .description("Hidschra nach Umm al-Qura und nächstes Gebet.")
+        .supportedFamilies([.accessoryRectangular, .accessoryInline])
     }
 }
 
 @main
 struct DarAlTawhidWidgets: WidgetBundle {
     var body: some Widget {
-        PrayerTimesWidget()
+        PrayerTimerWidget()
+        PrayerListWidget()
+        PrayerDayWidget()
+        LockDatePrayerWidget()
+        LockHijriPrayerWidget()
         QiblaWidget()
-        DailyWidget()
-        AyahDuaWidget()
+        TodayWidget()
+        AyahWidget()
+        DuaWidget()
     }
 }

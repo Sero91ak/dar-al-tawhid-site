@@ -46,6 +46,14 @@ html.dar-ios-native-app #bottomNav,html.dar-ios-native-app #bottomNav.bottom-nav
 html[data-theme="light"] #dar-soft-boot,html[data-theme="soft"] #dar-soft-boot{color:#3a2f24}
 html[data-theme="light"] #dar-soft-boot .dar-soft-boot__title,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__title{color:var(--gold2,#9b7a3c)}
 html[data-theme="light"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="light"] #dar-soft-boot .dar-soft-boot__pct,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__pct{color:rgba(58,47,36,.72)}
+
+.app-icon-panel{padding:14px 15px;margin:0 0 13px;border-radius:22px}
+.app-icon-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
+.app-icon-choice{display:flex;flex-direction:column;align-items:center;gap:7px;padding:10px 6px 9px;border-radius:16px;border:1px solid rgba(239,215,142,.18);background:transparent;color:inherit;font:inherit;cursor:pointer}
+.app-icon-choice img{width:64px;height:64px;border-radius:14px;display:block}
+.app-icon-choice span{font-size:11px;line-height:1.25;text-align:center}
+.app-icon-choice.is-active{border-color:rgba(212,175,55,.85);box-shadow:0 0 0 1px rgba(212,175,55,.35)}
+@media (max-width:420px){.app-icon-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 <script src="/test/assets/app-soft-boot.js?v=668"></script>
 <script>/* SOFTBOOT_UNSTICK_V665 */(function(){function wipe(){try{document.documentElement.classList.remove("dar-soft-booting");document.querySelectorAll("#dar-soft-boot").forEach(function(n){n.parentNode&&n.parentNode.removeChild(n)})}catch(e){}}setTimeout(function(){if(document.getElementById("dar-soft-boot"))wipe()},9000)})();</script>
@@ -20232,6 +20240,23 @@ function applyTheme(theme){const next=normalizeTheme(theme);const info=THEME_MET
 function initTheme(){applyTheme(getTheme())}
 function bindThemeControls(){document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.onclick=()=>{const apply=()=>applyTheme(btn.getAttribute("data-theme-select"));if(window.DARScrollManager?.withScrollPreserved)window.DARScrollManager.withScrollPreserved(apply);else apply()}})}
 function themeButton(key){const cur=getTheme();const info=THEME_META[key]||THEME_META.dark;return `<button type="button" class="theme-switch-btn${cur===key?" is-active":""}" data-theme-select="${key}" aria-pressed="${cur===key?"true":"false"}"><span class="theme-preview"><i class="theme-preview-logo"></i><span class="theme-preview-lines"><i></i><i></i></span></span><span>${esc(info.label)}</span></button>`}
+
+const DAR_APP_ICON_KEY="darAppIconV1";
+const DAR_APP_ICONS=[
+  {id:"creme-navy",label:"Creme & Navy",ios:""},
+  {id:"minimal-creme",label:"Minimal Creme",ios:"AppIconMinimalCreme"},
+  {id:"graphit-silber",label:"Graphit Silber",ios:"AppIconGraphitSilber"},
+  {id:"schwarz-gold",label:"Schwarz & Gold",ios:"AppIconSchwarzGold"},
+  {id:"stein-optik",label:"Stein Optik",ios:"AppIconSteinOptik"},
+  {id:"tiefes-gruen",label:"Tiefes Grün",ios:"AppIconTiefesGruen"},
+  {id:"bordeaux",label:"Bordeaux",ios:"AppIconBordeaux"},
+  {id:"elfenbein",label:"Elfenbein",ios:"AppIconElfenbein"},
+  {id:"mitternacht-blau",label:"Mitternacht Blau",ios:"AppIconMitternachtBlau"}
+];
+function getDarAppIcon(){try{const v=localStorage.getItem(DAR_APP_ICON_KEY);if(DAR_APP_ICONS.some(x=>x.id===v))return v}catch(e){}return"creme-navy"}
+function applyDarAppIcon(id,{save=true}={}){const icon=DAR_APP_ICONS.find(x=>x.id===id)||DAR_APP_ICONS[0];if(save){try{localStorage.setItem(DAR_APP_ICON_KEY,icon.id)}catch(e){}}document.querySelectorAll("[data-app-icon-select]").forEach(btn=>{const on=btn.getAttribute("data-app-icon-select")===icon.id;btn.classList.toggle("is-active",on);btn.setAttribute("aria-pressed",on?"true":"false")});try{if(window.webkit&&webkit.messageHandlers&&webkit.messageHandlers.darAppIcon)webkit.messageHandlers.darAppIcon.postMessage({id:icon.id,name:icon.ios||""})}catch(e){}return icon.id}
+function renderAppIconPanel(){const cur=getDarAppIcon();return `<section class="app-icon-panel premium-surface" id="darAppIconPanel"><div class="theme-switch-head"><h3>App-Icon</h3><p class="theme-switch-note">Standard ist Creme &amp; Navy. Die Auswahl wird lokal als darAppIconV1 gespeichert.</p></div><div class="app-icon-grid">${DAR_APP_ICONS.map(icon=>`<button type="button" class="app-icon-choice${cur===icon.id?" is-active":""}" data-app-icon-select="${icon.id}" aria-pressed="${cur===icon.id?"true":"false"}"><img src="/test/app-icons/${icon.id}/icon-64.png" srcset="/test/app-icons/${icon.id}/icon-64.png 1x, /test/app-icons/${icon.id}/icon-192.png 2x" width="64" height="64" alt=""><span>${esc(icon.label)}</span></button>`).join("")}</div></section>`}
+function bindAppIconPicker(){document.querySelectorAll("[data-app-icon-select]").forEach(btn=>{btn.onclick=()=>applyDarAppIcon(btn.getAttribute("data-app-icon-select"))});applyDarAppIcon(getDarAppIcon(),{save:false})}
 function renderThemeSwitchPanel(){return `<section class="theme-switch-panel premium-surface"><div class="theme-switch-head"><h3>Erscheinungsbild</h3><p class="theme-switch-note">Die Auswahl wird dauerhaft auf diesem Gerät gespeichert.</p></div><div class="theme-switch-row">${themeButton("light")}${themeButton("dark")}${themeButton("soft")}${themeButton("royal")}${themeButton("bordeaux")}${themeButton("dar-al-layl")}</div></section>`}
 const FONT_SCALE_DEFAULTS={appFontScale:5,quranArabicScale:5,quranTransliterationScale:5,quranGermanScale:5,duaArabicScale:5,duaTransliterationScale:5,duaGermanScale:5,postTextScale:5,postSourceScale:5};
 function clampFontScale(v){v=Number(v);if(!Number.isFinite(v))return 5;v=Math.round(v);if(v<=0)v=1;return Math.max(1,Math.min(10,v))}
@@ -25443,7 +25468,7 @@ function closeImageEditorTextExpand(save){const modal=$("imageEditorTextModal"),
 function updateImageEditorTextModalHint(){const hint=$("imageEditorTextModalHint"),area=$("imageEditorTextModalArea"),block=imageEditorState.textExpandBlock;if(!hint||!area||!block)return;const lines=String(area.value||"").split(/\n/).length;hint.textContent=`${lines} Zeile${lines===1?"":"n"} · Speichern übernimmt den Text direkt in die Vorschau.`;const canvas=$("imageEditorCanvas"),ctx=canvas?.getContext("2d");if(!ctx)return;const font=imageEditorFontCss(block==="source"?"source":imageEditorState.font);const fit=fitImageEditorText(ctx,area.value,imageEditorInnerBox(imageEditorBlockBox(block)),font,imageEditorBlockSize(block),block==="source"?1.16:imageEditorState.lineHeight,block==="source"?12:16);}
 function renderNewsListRow(item,idx){const newsId=item.id||String(idx);const rowClass=item.type==="zakat"||item.nav==="zakat"?"current-focus-row current-focus-row--zakat":item.type==="library"||item.nav==="bibliothek"?"current-focus-row current-focus-row--library":"current-focus-row";return `<article class="${rowClass}" data-nav="news-detail" data-value="${esc(newsId)}" tabindex="0" role="button"><div class="current-focus-icon">${currentUpdateIcon(item)}</div><div class="current-focus-text"><b>${esc(item.title||"Neue Inhalte")}</b><p>${esc(item.text||item.description||"Gerade neu auf DAR AL TAWḤID.")}</p><small>${esc(currentUpdateMeta(item))}</small></div><span class="current-focus-arrow">→</span></article>`}
 function renderNews(){const items=activeCurrentUpdates();return `${setPageHeader("Neu im Fokus","Aktuelle Meldungen und Highlights","News")}<section class="current-focus premium-surface"><div class="current-focus-list">${items.length?items.map(renderNewsListRow).join(""):`<div class="empty">Derzeit keine aktiven Meldungen.</div>`}</section>`}
-function renderSettings(){return `${setPageHeader("Einstellungen","Erscheinungsbild und Schriftgröße","Einstellungen")}${renderThemeSwitchPanel()}${renderFontSettingsPanel()}`}
+function renderSettings(){return `${setPageHeader("Einstellungen","Erscheinungsbild und Schriftgröße","Einstellungen")}${renderThemeSwitchPanel()}${renderAppIconPanel()}${renderFontSettingsPanel()}`}
 function renderJummah(){return `${setPageHeader("Jumuʿah","Freitagsgebet · Erinnerung und Moschee-Zeit","Jumuʿah")}<section class="prayer-panel premium-surface">${renderJummahPushPanel()}<div class="prayer-action-row" style="margin-top:12px"><button class="prayer-action-btn" type="button" data-nav="prayer">🕌 Gebetszeiten öffnen</button></div></section>`}
 function normalizeHadithSearch(text){return String(text||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[ʿʾ'`´]/g,"").replace(/ḥ/g,"h").replace(/ṣ/g,"s").replace(/ā/g,"a").replace(/ī/g,"i").replace(/ū/g,"u").replace(/[^a-z0-9\u0600-\u06ffäöüß]+/g," ").trim()}
 function hadithCollectionHadiths(collection){return (collection?.chapters||[]).flatMap(ch=>(ch.hadiths||[]).map(h=>({...h,chapterTitle:h.chapterTitle||ch.title,chapterId:h.chapterId||ch.id})))}
@@ -26963,7 +26988,7 @@ function bindEvents(){
   if(currentRoute.view==="hadith")bindHadithLibraryEvents();
   if(currentRoute.view==="propheten"&&window.DARProphets&&typeof window.DARProphets.bind==="function"){window.DARProphets.bind();}
   if(currentRoute.view==="scholars"&&window.DARScholarsIndex&&typeof window.DARScholarsIndex.bindScholars==="function"){window.DARScholarsIndex.bindScholars(buildScholarCatalog(),esc);const polish=()=>polishScholarsOvalGlyphs();requestAnimationFrame(()=>{polish();setTimeout(polish,120);setTimeout(polish,400)});const root=document.querySelector(".scholars-index");if(root&&!root.dataset.glyphObserver){root.dataset.glyphObserver="1";new MutationObserver(()=>polish()).observe(root,{childList:true})}}
-  bindThemeControls();
+  bindThemeControls(); bindAppIconPicker();
   bindFontControls();
   bindImageEditor();
   const offlinePrepareBtn=$("offlinePrepareBtn");if(offlinePrepareBtn)offlinePrepareBtn.onclick=()=>startOfflinePreparation();
