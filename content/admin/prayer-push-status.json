@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-28T06:05:32.831Z",
+  "updatedAt": "2026-08-28T06:10:32.240Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-28T06:05:32.831Z",
+  "lastCronRun": "2026-08-28T06:10:32.240Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-28T07:56:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-28T05:50:21.903Z",
-  "windowEnd": "2026-08-29T08:05:21.903Z",
+  "windowStart": "2026-08-28T05:55:21.724Z",
+  "windowEnd": "2026-08-29T08:10:21.724Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 13,
@@ -28,12 +28,12 @@
   "usersWithLocation": 13,
   "usersWithActivePush": 13,
   "locationGroups": 4,
-  "scheduled": 41,
-  "recipients": 131,
+  "scheduled": 42,
+  "recipients": 132,
   "invalid": 0,
   "invalidDisabled": 0,
   "skippedPast": 50,
-  "skippedWindow": 69,
+  "skippedWindow": 68,
   "advanceCatchups": 0,
   "entryCatchups": 0,
   "duplicates": 1,
@@ -362,6 +362,16 @@
       "mode": "advance",
       "time": "13:51",
       "sendAfter": "2026-08-28T11:36:00.000Z",
+      "recipients": 1,
+      "timeZone": "Europe/Berlin",
+      "invalid": 0
+    },
+    {
+      "prayer": "Dhuhr",
+      "key": "dhuhr",
+      "mode": "entry",
+      "time": "10:10",
+      "sendAfter": "2026-08-29T08:10:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
       "invalid": 0
@@ -1014,6 +1024,13 @@
     },
     {
       "prayer": "dhuhr",
+      "mode": "entry",
+      "recipients": 1,
+      "invalid": 0,
+      "response": "{\"id\":\"79f77ea3-60b3-45cd-ba8c-ebad0b3239e0\",\"external_id\":\"06177895-bfa6-41a7-8c1f-6a0494bdc2dc\"}"
+    },
+    {
+      "prayer": "dhuhr",
       "mode": "advance",
       "recipients": 1,
       "invalid": 0,
@@ -1032,13 +1049,6 @@
       "recipients": 1,
       "invalid": 0,
       "response": "{\"id\":\"0d1255a8-9e59-476c-b569-2b7422f49540\",\"external_id\":\"8b5bddfc-2f2a-401c-b827-924bbcad9a7a\"}"
-    },
-    {
-      "prayer": "isha",
-      "mode": "entry",
-      "recipients": 1,
-      "invalid": 0,
-      "response": "{\"id\":\"8f71a64a-acee-4d12-a1c8-9b4407316ecd\",\"external_id\":\"668b2ef8-c64b-4f4c-8c61-48057a250902\"}"
     }
   ],
   "userRegistry": [
