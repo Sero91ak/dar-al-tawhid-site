@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-08-28T09:15:22.786Z",
+  "updatedAt": "2026-08-28T09:25:22.980Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-jummah-v2",
   "dryRun": false,
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-28T09:15:22.786Z",
+  "lastCronRun": "2026-08-28T09:25:22.980Z",
   "subscriptionsTotal": 1,
   "usersWithJummah": 1,
   "jummahTagFallback": false,
@@ -34,8 +34,8 @@
     "timeZone": "Europe/Berlin",
     "timeSource": "dhuhr-auto"
   },
-  "windowStart": "2026-08-28T09:00:21.970Z",
-  "windowEnd": "2026-08-29T11:15:21.970Z",
+  "windowStart": "2026-08-28T09:10:21.825Z",
+  "windowEnd": "2026-08-29T11:25:21.825Z",
   "scheduled": 3,
   "recipients": 3,
   "skippedPast": 0,
@@ -57,7 +57,7 @@
   "lastOneSignalResponse": {
     "mode": "entry",
     "recipients": 1,
-    "response": "{\"id\":\"06de1531-6145-41fc-950e-dcaf38bd8600\",\"external_id\":\"4a9da498-ce15-41a7-ad7d-6448f837c383\"}"
+    "response": "{\"id\":\"742b91c4-67bc-447e-90c4-3caa85992441\",\"external_id\":\"6a33118d-34eb-459b-94b3-268b19e559f7\"}"
   },
   "lastError": null,
   "planned": [
@@ -97,17 +97,17 @@
     {
       "mode": "morning",
       "recipients": 1,
-      "response": "{\"id\":\"f6ed3338-93bb-4e2d-a1cf-2d3f06bb94e0\",\"external_id\":\"e55f5ebf-317c-4d42-bed2-9ac07bdf5d49\"}"
+      "response": "{\"id\":\"a9f5d1c3-016f-497f-9d88-f494ce01d1ec\",\"external_id\":\"4b628ac0-1e7c-46b0-8a36-9e259aa072ef\"}"
     },
     {
       "mode": "advance",
       "recipients": 1,
-      "response": "{\"id\":\"26bce209-095a-40a6-9908-ab365a22251f\",\"external_id\":\"1090f77c-5ad3-4c02-9375-d40d5328bf0b\"}"
+      "response": "{\"id\":\"c4b827b8-e667-4b7d-b79f-68e81deee5f3\",\"external_id\":\"92b6f714-1f31-41e7-8285-5fe0a45930a8\"}"
     },
     {
       "mode": "entry",
       "recipients": 1,
-      "response": "{\"id\":\"06de1531-6145-41fc-950e-dcaf38bd8600\",\"external_id\":\"4a9da498-ce15-41a7-ad7d-6448f837c383\"}"
+      "response": "{\"id\":\"742b91c4-67bc-447e-90c4-3caa85992441\",\"external_id\":\"6a33118d-34eb-459b-94b3-268b19e559f7\"}"
     }
   ],
   "errorDetails": []
