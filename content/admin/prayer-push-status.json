@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-28T09:18:47.873Z",
+  "updatedAt": "2026-08-28T09:18:51.212Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-28T09:18:47.873Z",
+  "lastCronRun": "2026-08-28T09:18:51.212Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-28T11:18:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-28T09:03:46.572Z",
-  "windowEnd": "2026-08-29T11:18:46.572Z",
+  "windowStart": "2026-08-28T09:03:49.831Z",
+  "windowEnd": "2026-08-29T11:18:49.831Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 1,
@@ -290,8 +290,8 @@
       "prayer": "Fajr",
       "key": "fajr",
       "mode": "entry",
-      "time": "05:23",
-      "sendAfter": "2026-08-29T03:23:00.000Z",
+      "time": "05:24",
+      "sendAfter": "2026-08-29T03:24:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
       "invalid": 0
@@ -300,8 +300,8 @@
       "prayer": "Fajr",
       "key": "fajr",
       "mode": "advance",
-      "time": "05:23",
-      "sendAfter": "2026-08-29T03:08:00.000Z",
+      "time": "05:24",
+      "sendAfter": "2026-08-29T03:09:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
       "invalid": 0
@@ -310,8 +310,8 @@
       "prayer": "Dhuhr",
       "key": "dhuhr",
       "mode": "advance",
-      "time": "13:32",
-      "sendAfter": "2026-08-29T11:17:00.000Z",
+      "time": "13:33",
+      "sendAfter": "2026-08-29T11:18:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
       "invalid": 0
@@ -409,77 +409,77 @@
       "mode": "entry",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"901470ce-0f4e-4aa4-89fd-86626cdd83ec\",\"external_id\":\"7e542569-09af-4dc2-8b31-457eca9e2f23\"}"
+      "response": "{\"id\":\"8c4a3a5b-4db7-4dda-bdee-947bce50d9cb\",\"external_id\":\"f643e74b-b58b-412e-bf87-57a6f16ed0a0\"}"
     },
     {
       "prayer": "dhuhr",
       "mode": "advance",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"a5314512-3466-48d5-896b-3faca94c17c0\",\"external_id\":\"230139b3-c5b4-4c87-b950-7ec6a8f4de1a\"}"
+      "response": "{\"id\":\"fd583c00-b6bc-4826-a148-35a810bf7f96\",\"external_id\":\"6d8a05bf-d308-4838-b3a3-b6982f3d3a35\"}"
     },
     {
       "prayer": "asr",
       "mode": "entry",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"87bf8a0c-4743-45ea-9499-9e1cb449a8e8\",\"external_id\":\"3d520c16-a63c-40b3-8bd7-c3578b88394e\"}"
+      "response": "{\"id\":\"618260da-42cf-4904-8372-0c939faa2011\",\"external_id\":\"a744a5c0-de83-4a8f-bb71-4676d5c177c9\"}"
     },
     {
       "prayer": "asr",
       "mode": "advance",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"bbf2582c-cc93-4b55-adf1-439425e1059f\",\"external_id\":\"09623fda-a734-4d1f-92cd-551bc0b56a25\"}"
+      "response": "{\"id\":\"4d46765e-79cc-4796-b46f-ccb7efe23bec\",\"external_id\":\"47655b29-42b9-4fb4-9124-6cb8b34e69b6\"}"
     },
     {
       "prayer": "maghrib",
       "mode": "entry",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"08161ff0-c928-4f11-8c25-59862d321121\",\"external_id\":\"d007e5a9-59b7-4c94-acc3-88a6b0d398a9\"}"
+      "response": "{\"id\":\"f29c4f0d-8ed6-4056-8727-4f9c0bc394ed\",\"external_id\":\"cbfa3011-5918-44ef-8b55-e87f6a1bf0d5\"}"
     },
     {
       "prayer": "maghrib",
       "mode": "advance",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"03d36136-9390-499b-a9d2-d23aeb029c81\",\"external_id\":\"3ec84d75-0255-45c8-a42b-520e50efe826\"}"
+      "response": "{\"id\":\"7f19f5c5-eef0-4d44-b702-680e47b1ff8e\",\"external_id\":\"b3795ecd-ddcc-4a44-8fe3-f5eb39b4aaa4\"}"
     },
     {
       "prayer": "isha",
       "mode": "entry",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"28d054b3-3632-44ed-af39-4b57fe8cf068\",\"external_id\":\"4067a1e9-3548-47c8-9d19-10a3ad106b3c\"}"
+      "response": "{\"id\":\"a9e2d02d-696e-43d9-b911-9420a400b144\",\"external_id\":\"251917b2-f4f2-4a44-81a2-4b6a25ebc74b\"}"
     },
     {
       "prayer": "isha",
       "mode": "advance",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"a465bf17-0fe2-4a0f-94c4-8a707ac43e96\",\"external_id\":\"a399c6bd-f205-4907-9171-8be11a8a072f\"}"
+      "response": "{\"id\":\"bb21f65d-04dd-4a8b-9c6a-537bacfafd99\",\"external_id\":\"0ceaceb4-b412-4060-838e-b38e98ffe3c6\"}"
     },
     {
       "prayer": "fajr",
       "mode": "entry",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"bfa9fbfb-963e-4aed-95f7-be2facb3c30d\",\"external_id\":\"5c3dcf26-405c-45cd-b6b1-04591852ba90\"}"
+      "response": "{\"id\":\"467151c5-4eeb-42e5-bcb5-c5f657b18ba2\",\"external_id\":\"95168063-ca0f-4f37-810a-9b38e513e501\"}"
     },
     {
       "prayer": "fajr",
       "mode": "advance",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"9692ec5a-4723-45eb-bd30-dd6f7e2d8fe7\",\"external_id\":\"c5572b56-803d-484e-ab35-06b8a05dafbc\"}"
+      "response": "{\"id\":\"9383a4a0-03c9-409d-8632-b5328416931f\",\"external_id\":\"ef2b59d8-e6d0-4a0b-a33a-0d51fe493238\"}"
     },
     {
       "prayer": "dhuhr",
       "mode": "advance",
       "recipients": 1,
       "invalid": 0,
-      "response": "{\"id\":\"028ee391-3f1e-4424-9d19-acd5565c3b91\",\"external_id\":\"6184a4e6-95f8-4fb4-b6f8-d352b9468884\"}"
+      "response": "{\"id\":\"65ed0a46-193f-49fc-a31a-9255b1b9c373\",\"external_id\":\"ed9f9580-6fdc-4105-8723-86be1da676af\"}"
     }
   ],
   "userRegistry": [
@@ -504,8 +504,8 @@
     {
       "subscriptionId": "91d254cd-2590-4ad6-88b0-3932888ed472",
       "timezone": "Europe/Berlin",
-      "city": "Meckenheim",
-      "lastSyncedAt": "2026-08-28T09:18:45+00:00"
+      "city": "Rheinbach",
+      "lastSyncedAt": "2026-08-28T09:18:50.396+00:00"
     },
     {
       "subscriptionId": "c5e307a6-9c0e-435b-9e6e-7382dde53756",
