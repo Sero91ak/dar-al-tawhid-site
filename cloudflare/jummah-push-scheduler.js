@@ -173,40 +173,31 @@ async function loadJummahRegistrations() {
     "jummah_notifications", "jummah_use_manual_time", "jummah_manual_time",
     "jummah_morning_time", "jummah_advance_minutes", "city", "last_synced_at", "enabled"
   ].join(",");
-  // Primär: explizit aktivierte Jumuʿah-Nutzer.
-  // Fallback: aktive Gebets-Push-Nutzer (enabled=true) – sonst bleibt Freitag leer,
-  // weil jummah_notifications historisch default false war.
-  const urls = [
-    `${SUPABASE_URL}/rest/v1/prayer_push_registrations?jummah_notifications=eq.true&subscription_id=not.is.null&select=${select}`,
-    `${SUPABASE_URL}/rest/v1/prayer_push_registrations?enabled=eq.true&subscription_id=not.is.null&select=${select}`
-  ];
-  let rows = [];
-  let usedFallback = false;
-  for (let i = 0; i < urls.length; i += 1) {
-    const res = await fetch(urls[i], {
-      headers: {
-        apikey: SUPABASE_ANON_KEY,
-        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-        Accept: "application/json"
-      }
-    });
-    const text = await res.text();
-    if (!res.ok) {
-      if (res.status === 400 && /column/i.test(text)) {
-        throw new Error("Supabase-Spalten fehlen – bitte jummah-push-schema.sql ausführen");
-      }
-      throw new Error(`Supabase ${res.status}: ${text.slice(0, 200)}`);
+  // Nur Nutzer mit explizit aktivierter Jumuʿah. Kein Fallback auf enabled=true,
+  // sonst bleibt Jumuʿah nach dem Ausschalten aktiv.
+  const url = `${SUPABASE_URL}/rest/v1/prayer_push_registrations?jummah_notifications=eq.true&subscription_id=not.is.null&select=${select}`;
+  const res = await fetch(url, {
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+      Accept: "application/json"
     }
-    const parsed = text ? JSON.parse(text) : [];
-    rows = Array.isArray(parsed) ? parsed : [];
-    if (rows.length) {
-      usedFallback = i > 0;
-      break;
+  });
+  const text = await res.text();
+  if (!res.ok) {
+    if (res.status === 400 && /column/i.test(text)) {
+      throw new Error("Supabase-Spalten fehlen – bitte jummah-push-schema.sql ausführen");
     }
+    throw new Error(`Supabase ${res.status}: ${text.slice(0, 200)}`);
   }
+  const parsed = text ? JSON.parse(text) : [];
+  const rows = Array.isArray(parsed) ? parsed : [];
+  const jummahOn = (r) => r?.jummah_notifications === true || r?.jummah_notifications === "true";
   return {
-    rows: rows.filter((r) => r.subscription_id && Number.isFinite(+r.lat) && Number.isFinite(+r.lon)),
-    usedFallback
+    rows: rows.filter((r) => jummahOn(r) && r.subscription_id && (
+      Boolean(r.jummah_use_manual_time) || (Number.isFinite(+r.lat) && Number.isFinite(+r.lon))
+    )),
+    usedFallback: false
   };
 }
 
