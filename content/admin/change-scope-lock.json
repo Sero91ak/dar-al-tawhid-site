@@ -87,6 +87,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-ink-overscroll-2026-08-28",
+      "approvedBy": "user-explicit-eisgold-dark-text-overscroll-live",
+      "reason": "Nutzer: Goldschrift auf hellen Flächen dunkel; Overscroll wie Nachtblau/Layl. Web/Test/iOS sofort.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "assets/theme-eisgold.css",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-readability-2026-08-28",
       "approvedBy": "user-explicit-eisgold-global-fix-live",
       "reason": "Nutzer: Eisgold Lesbarkeit, Goldlinien, Overscroll, Test/Web/iOS live.",

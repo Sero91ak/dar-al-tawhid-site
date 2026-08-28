@@ -411,6 +411,7 @@ struct WebAppView: UIViewRepresentable {
             if(!value)return "";
             var raw=String(value).trim();
             if(!raw)return "";
+            if(/gradient/i.test(raw))return "";
             if(raw.charAt(0)==="#")return raw;
             var match=raw.match(/rgba?\\((\\d+),\\s*(\\d+),\\s*(\\d+)/i);
             if(!match)return "";

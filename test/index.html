@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v701";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v702";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -7341,6 +7341,14 @@ html[data-theme="dar-al-layl"]{
   --cover-panel-bg:radial-gradient(circle at 16% 0%,rgba(168,139,79,.06),transparent 36%),linear-gradient(180deg,#0C0F0D 0%,#060807 58%,rgba(3,4,3,.96) 100%);
   --cover-panel-border:rgba(168,139,79,.16);
 }
+html[data-theme="eisgold"]{
+  --outer-bg-flat:#e8f3fb;
+  --theme-page-bg:#e8f3fb;
+  --outer-bg:radial-gradient(circle at 84% 8%,rgba(150,198,230,.40),transparent 38%),linear-gradient(180deg,#f5fbff 0%,#e8f3fb 46%,#d5e6f4 92%,rgba(0,0,0,.08) 100%);
+  --cover-edge-bg:linear-gradient(180deg,#e8f3fb 0%,#f5fbff 48%,rgba(232,243,251,0) 100%);
+  --cover-panel-bg:linear-gradient(180deg,rgba(245,251,255,.96),rgba(232,243,251,.94));
+  --cover-panel-border:rgba(200,169,90,.28);
+}
 html[data-theme],
 html[data-theme].is-standalone-pwa{
   height:auto;
@@ -7597,7 +7605,7 @@ html[data-theme="eisgold"]{
   --theme-page-bg:#e8f3fb;
   --theme-hero-bg:linear-gradient(180deg,#f5fbff 0%,#e8f3fb 48%,#dceaf6 100%);
   --theme-hero-surface:radial-gradient(circle at 16% 0%,rgba(255,255,255,.72),transparent 40%),radial-gradient(circle at 86% 8%,rgba(184,150,58,.16),transparent 36%),linear-gradient(180deg,#f5fbff 0%,#e8f3fb 82%,rgba(0,0,0,.08) 100%);
-  --theme-hero-glow:rgba(184,150,58,.18);
+  --theme-hero-glow:rgba(20,32,51,.08);
   --theme-hero-border:rgba(184,150,58,.28);
   --theme-hero-blend-top:rgba(232,243,251,1);
   --theme-hero-blend-bottom:rgba(232,243,251,0);
@@ -9945,7 +9953,7 @@ window.DAR_ANALYTICS_CONFIG={
 <noscript><link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Elsie+Swash+Caps:wght@400;900&family=Inter:wght@400;600;700;800;900&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="/assets/app-card-layout.css?v=4">
 <link rel="stylesheet" href="/assets/app-theme-surfaces.css?v=587">
-<link rel="stylesheet" href="/assets/theme-eisgold.css?v=3">
+<link rel="stylesheet" href="/assets/theme-eisgold.css?v=4">
 
 
 <style id="feature-final-v202">
@@ -26280,7 +26288,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v701";
+const APP_BUILD_ID="app-shell-v702";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
