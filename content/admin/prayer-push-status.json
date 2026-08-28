@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-28T10:00:35.273Z",
+  "updatedAt": "2026-08-28T10:05:34.598Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-28T10:00:35.273Z",
+  "lastCronRun": "2026-08-28T10:05:34.598Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-28T11:18:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-28T09:45:21.955Z",
-  "windowEnd": "2026-08-29T12:00:21.955Z",
+  "windowStart": "2026-08-28T09:50:21.814Z",
+  "windowEnd": "2026-08-29T12:05:21.814Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 13,
@@ -1113,18 +1113,6 @@
   ],
   "userRegistry": [
     {
-      "subscriptionId": "3e57b75c-3491-46e0-91a3-5c4c349056c8",
-      "timezone": "Europe/Berlin",
-      "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-28T07:00:23.382+00:00"
-    },
-    {
-      "subscriptionId": "91d254cd-2590-4ad6-88b0-3932888ed472",
-      "timezone": "Europe/Berlin",
-      "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-28T09:54:14+00:00"
-    },
-    {
       "subscriptionId": "a201efd5-20de-4ba4-a60b-3ddf0a7556c1",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
@@ -1137,58 +1125,70 @@
       "lastSyncedAt": "2026-08-28T10:00:23.08+00:00"
     },
     {
+      "subscriptionId": "3e57b75c-3491-46e0-91a3-5c4c349056c8",
+      "timezone": "Europe/Berlin",
+      "city": "Rheinbach",
+      "lastSyncedAt": "2026-08-28T10:00:23.662+00:00"
+    },
+    {
+      "subscriptionId": "91d254cd-2590-4ad6-88b0-3932888ed472",
+      "timezone": "Europe/Berlin",
+      "city": "Rheinbach",
+      "lastSyncedAt": "2026-08-28T10:00:24.372+00:00"
+    },
+    {
       "subscriptionId": "c5e307a6-9c0e-435b-9e6e-7382dde53756",
       "timezone": "Europe/Berlin",
       "city": "San Francisco",
-      "lastSyncedAt": "2026-08-28T07:00:23.888+00:00"
+      "lastSyncedAt": "2026-08-28T10:00:24.968+00:00"
     },
     {
       "subscriptionId": "bee23f3e-b017-47ef-ac1d-1805119b2150",
       "timezone": "Europe/Berlin",
       "city": "Bonn",
-      "lastSyncedAt": "2026-08-28T07:00:24.983+00:00"
+      "lastSyncedAt": "2026-08-28T10:00:25.474+00:00"
     },
     {
       "subscriptionId": "f5133294-c6c9-4aca-9511-a43d00374c62",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-28T07:00:24.397+00:00"
+      "lastSyncedAt": "2026-08-28T10:00:25.99+00:00"
     },
     {
       "subscriptionId": "5d891600-4c4a-4d49-8774-74cb23deb64c",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-28T07:01:24.778+00:00"
+      "lastSyncedAt": "2026-08-28T10:00:26.482+00:00"
     },
     {
       "subscriptionId": "f52729ba-399c-4c71-8699-c5f9bb2e5f04",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-28T07:00:26.475+00:00"
+      "lastSyncedAt": "2026-08-28T10:00:27.054+00:00"
     },
     {
       "subscriptionId": "10fc63c1-bad4-4f09-a0c0-9cc45b6cae1f",
       "timezone": "Europe/Berlin",
       "city": "Meckenheim",
-      "lastSyncedAt": "2026-08-28T07:00:27.008+00:00"
+      "lastSyncedAt": "2026-08-28T10:00:27.507+00:00"
     },
     {
       "subscriptionId": "2c445e0f-e9f0-4534-ac56-00cf1ea2bdad",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-28T07:00:27.474+00:00"
+      "lastSyncedAt": "2026-08-28T10:00:27.973+00:00"
     },
     {
       "subscriptionId": "5ac92c0e-645d-4f93-b45d-e3d27031fca6",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-28T07:00:27.927+00:00"
+      "lastSyncedAt": "2026-08-28T10:00:28.435+00:00"
     },
     {
       "subscriptionId": "ea1b5873-995f-43f9-85ff-156420a03ae8",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-28T07:00:28.402+00:00"
+      "lastSyncedAt": "2026-08-28T10:00:28.873+00:00"
     }
   ],
   "rawRegistrations": 14,
