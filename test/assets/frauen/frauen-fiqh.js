@@ -12,6 +12,8 @@
   var HIJAB_SLUG = "hijab-schamhaftigkeit";
   var WISSEN_URL = "/test/data/frauen-wissen-lernen.json";
   var WISSEN_SLUG = "wissen-lernen";
+  var FAQ_URL = "/test/data/frauen-fragen-antworten.json";
+  var FAQ_SLUG = "fragen-antworten";
   var ERLAUBTE_QUELLENART = {
     quran: 1,
     sahih: 1,
@@ -179,6 +181,29 @@
     "frauen-der-ersten-generation": "Frauen der ersten Generation",
     "in-pruefung": "In Prüfung"
   };
+  var FAQ_THEMEN = [
+    { id: "alle", label: "Alle" },
+    { id: "reinigung", label: "Reinigung" },
+    { id: "gebet", label: "Gebet" },
+    { id: "fasten", label: "Fasten" },
+    { id: "wissen", label: "Wissen" },
+    { id: "moschee", label: "Moschee" },
+    { id: "eid", label: "Eid" },
+    { id: "kleidung-im-gebet", label: "Kleidung im Gebet" },
+    { id: "hijab-schamhaftigkeit", label: "Ḥijāb & Schamhaftigkeit" },
+    { id: "in-pruefung", label: "In Prüfung" }
+  ];
+  var FAQ_BEREICH_LABEL = {
+    reinigung: "Reinigung",
+    gebet: "Gebet",
+    fasten: "Fasten",
+    wissen: "Wissen",
+    moschee: "Moschee",
+    eid: "Eid",
+    "kleidung-im-gebet": "Kleidung im Gebet",
+    "hijab-schamhaftigkeit": "Ḥijāb & Schamhaftigkeit",
+    "in-pruefung": "In Prüfung"
+  };
 
   var fiqhCache = null;
   var sahabCache = null;
@@ -187,6 +212,7 @@
   var eheCache = null;
   var hijabCache = null;
   var wissenCache = null;
+  var faqCache = null;
   var loadPromise = null;
   var fiqhQ = "";
   var sahabQ = "";
@@ -195,6 +221,7 @@
   var eheQ = "";
   var hijabQ = "";
   var wissenQ = "";
+  var faqQ = "";
   var fiqhThema = "alle";
   var sahabThema = "alle";
   var tabiiThema = "alle";
@@ -202,6 +229,7 @@
   var eheThema = "alle";
   var hijabThema = "alle";
   var wissenThema = "alle";
+  var faqThema = "alle";
   var currentAbschnitt = "hub";
 
   function esc(s) {
@@ -212,16 +240,20 @@
       .replace(/"/g, "&quot;");
   }
 
+  function istFaq(abschnitt) {
+    return abschnitt === FAQ_SLUG;
+  }
+
   function titelVon(e) {
-    return e.titel || e.titel_de || "";
+    return e.frage || e.titel || e.titel_de || "";
   }
 
   function vorschauVon(e) {
-    return e.kurzvorschau || e.kurzbeschreibung || "";
+    return e.kurzantwort || e.kurzvorschau || e.kurzbeschreibung || "";
   }
 
   function aussageVon(e) {
-    return e.vollstaendigeAussage || e.inhalt || "";
+    return e.vollstaendigeAntwort || e.vollstaendigeAussage || e.inhalt || "";
   }
 
   function quellenstatusSicht(e) {
@@ -277,7 +309,7 @@
   }
 
   function load() {
-    if (fiqhCache && sahabCache && tabiiCache && muetterCache && eheCache && hijabCache && wissenCache)
+    if (fiqhCache && sahabCache && tabiiCache && muetterCache && eheCache && hijabCache && wissenCache && faqCache)
       return Promise.resolve();
     if (loadPromise) return loadPromise;
     loadPromise = Promise.all([
@@ -287,7 +319,8 @@
       fetchJson(MUETTER_URL),
       fetchJson(EHE_URL),
       fetchJson(HIJAB_URL),
-      fetchJson(WISSEN_URL)
+      fetchJson(WISSEN_URL),
+      fetchJson(FAQ_URL)
     ])
       .then(function (pair) {
         fiqhCache = pair[0];
@@ -297,6 +330,7 @@
         eheCache = pair[4];
         hijabCache = pair[5];
         wissenCache = pair[6];
+        faqCache = pair[7];
       })
       .catch(function (err) {
         loadPromise = null;
@@ -334,6 +368,10 @@
     if (v.indexOf(WISSEN_SLUG + "/") === 0) {
       return { page: "detail", abschnitt: WISSEN_SLUG, kennung: v.slice(WISSEN_SLUG.length + 1) };
     }
+    if (v === FAQ_SLUG) return { page: "list", abschnitt: FAQ_SLUG, kennung: "" };
+    if (v.indexOf(FAQ_SLUG + "/") === 0) {
+      return { page: "detail", abschnitt: FAQ_SLUG, kennung: v.slice(FAQ_SLUG.length + 1) };
+    }
     return { page: "hub", abschnitt: "", kennung: "" };
   }
 
@@ -344,6 +382,7 @@
     if (abschnitt === EHE_SLUG) return eheCache;
     if (abschnitt === HIJAB_SLUG) return hijabCache;
     if (abschnitt === WISSEN_SLUG) return wissenCache;
+    if (abschnitt === FAQ_SLUG) return faqCache;
     return fiqhCache;
   }
 
@@ -354,6 +393,7 @@
     if (abschnitt === EHE_SLUG) return eheThema;
     if (abschnitt === HIJAB_SLUG) return hijabThema;
     if (abschnitt === WISSEN_SLUG) return wissenThema;
+    if (abschnitt === FAQ_SLUG) return faqThema;
     return fiqhThema;
   }
 
@@ -364,6 +404,7 @@
     else if (abschnitt === EHE_SLUG) eheThema = id;
     else if (abschnitt === HIJAB_SLUG) hijabThema = id;
     else if (abschnitt === WISSEN_SLUG) wissenThema = id;
+    else if (abschnitt === FAQ_SLUG) faqThema = id;
     else fiqhThema = id;
   }
 
@@ -374,6 +415,7 @@
     if (abschnitt === EHE_SLUG) return eheQ;
     if (abschnitt === HIJAB_SLUG) return hijabQ;
     if (abschnitt === WISSEN_SLUG) return wissenQ;
+    if (abschnitt === FAQ_SLUG) return faqQ;
     return fiqhQ;
   }
 
@@ -384,6 +426,7 @@
     else if (abschnitt === EHE_SLUG) eheQ = v;
     else if (abschnitt === HIJAB_SLUG) hijabQ = v;
     else if (abschnitt === WISSEN_SLUG) wissenQ = v;
+    else if (abschnitt === FAQ_SLUG) faqQ = v;
     else fiqhQ = v;
   }
 
@@ -400,7 +443,7 @@
           e.thema !== "sensible-fragen"
         )
           return false;
-      } else if (abschnitt === HIJAB_SLUG || abschnitt === WISSEN_SLUG) {
+      } else if (abschnitt === HIJAB_SLUG || abschnitt === WISSEN_SLUG || abschnitt === FAQ_SLUG) {
         if (chip !== thema && e.thema !== thema) return false;
       } else if (chip !== thema) return false;
     }
@@ -409,6 +452,9 @@
       e.name,
       titelVon(e),
       vorschauVon(e),
+      e.frage,
+      e.kurzantwort,
+      e.vollstaendigeAntwort,
       e.vollstaendigeAussage,
       e.inhalt,
       lehreVon(e),
@@ -494,7 +540,14 @@
         WISSEN_SLUG,
         "Bereich öffnen"
       ) +
-      hubRow("08", "Frauen der Salaf", "In Prüfung", "", "") +
+      hubRow(
+        "08",
+        "Fragen & Antworten",
+        "Kurze geprüfte Antworten zu häufigen Fragen – mit Quelle und Direktnachweis.",
+        FAQ_SLUG,
+        "Bereich öffnen"
+      ) +
+      hubRow("09", "Frauen der Salaf", "In Prüfung", "", "") +
       "</div></section>"
     );
   }
@@ -514,13 +567,17 @@
       })
       .join("");
     var suchePlatz =
-      abschnitt === EHE_SLUG || abschnitt === HIJAB_SLUG || abschnitt === WISSEN_SLUG
+      abschnitt === FAQ_SLUG
+        ? "Frage oder Thema suchen"
+        : abschnitt === EHE_SLUG || abschnitt === HIJAB_SLUG || abschnitt === WISSEN_SLUG
         ? "Thema suchen"
         : abschnitt === "fiqh"
           ? "Thema oder Begriff suchen"
           : "Name oder Thema suchen";
     var sucheLabel =
-      abschnitt === WISSEN_SLUG
+      abschnitt === FAQ_SLUG
+        ? '<span class="frauen-filter__search-label">Frage oder Thema suchen</span>'
+        : abschnitt === WISSEN_SLUG
         ? '<span class="frauen-filter__search-label">Thema suchen</span>'
         : '<span class="visually-hidden">Suchen</span>';
     return (
@@ -557,6 +614,8 @@
                 ? HIJAB_BEREICH_LABEL
                 : abschnitt === WISSEN_SLUG
                   ? WISSEN_BEREICH_LABEL
+                  : abschnitt === FAQ_SLUG
+                    ? FAQ_BEREICH_LABEL
                   : FIQH_BEREICH_LABEL;
     var bereich = labelMap[e.bereich] || e.bereich || "";
     var name =
@@ -587,7 +646,9 @@
       esc(quelleKurz(e)) +
       "</p>" +
       hair +
-      '<span class="frauen-open-btn">Aussage öffnen</span>' +
+      '<span class="frauen-open-btn">' +
+      (istFaq(abschnitt) ? "Antwort öffnen" : "Aussage öffnen") +
+      "</span>" +
       "</article>"
     );
   }
@@ -607,6 +668,8 @@
                 ? HIJAB_THEMEN
                 : abschnitt === WISSEN_SLUG
                   ? WISSEN_THEMEN
+                  : abschnitt === FAQ_SLUG
+                    ? FAQ_THEMEN
                   : FIQH_THEMEN;
     var q = currentQ(abschnitt);
     var thema = currentThema(abschnitt);
@@ -620,13 +683,16 @@
       : abschnitt === MUETTER_SLUG ||
           abschnitt === EHE_SLUG ||
           abschnitt === HIJAB_SLUG ||
-          abschnitt === WISSEN_SLUG
+          abschnitt === WISSEN_SLUG ||
+          abschnitt === FAQ_SLUG
         ? '<p class="frauen-empty">Noch keine geprüften Inhalte vorhanden.</p>'
         : '<p class="frauen-empty">Keine sichtbare Aussage zu dieser Auswahl.</p>';
     var hint =
       leerBereich
         ? ""
-        : abschnitt === WISSEN_SLUG
+        : abschnitt === FAQ_SLUG
+          ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Antworten. Sensible Detailfragen bleiben verborgen, bis sie einzeln mit Quellen und Meinungsunterschieden geprüft wurden.</p></div>'
+          : abschnitt === WISSEN_SLUG
           ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Moderne Aussagen, ungeprüfte Motivationssprüche und schwache Berichte werden nicht angezeigt.</p></div>'
           : abschnitt === HIJAB_SLUG
           ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Detailfragen wie Niqāb, Gesicht, Hände, Füße, Stimme, Farben und Kleidung im Einzelnen werden erst sichtbar, wenn sie separat geprüft wurden.</p></div>'
@@ -638,7 +704,9 @@
             ? '<div class="frauen-hint"><p>Dieser Bereich enthält nur Berichte mit geprüfter Quelle. Schwache, ausgeschmückte oder nicht belegte Geschichten werden nicht angezeigt.</p></div>'
             : "";
     var lede =
-      abschnitt === WISSEN_SLUG
+      abschnitt === FAQ_SLUG
+        ? '<p class="lede">Kurze geprüfte Antworten zu Reinigung, Gebet, Fasten, Wissen und Alltag – mit Quelle und Direktnachweis.</p>'
+        : abschnitt === WISSEN_SLUG
         ? '<p class="lede">Geprüfte Grundlagen aus Qurʾān und authentischer Sunnah über Wissen, Fragenstellen und Lernen mit Adab.</p>'
         : abschnitt === HIJAB_SLUG
         ? '<p class="lede">Geprüfte Grundlagen zu Bedeckung, Adab und Schamhaftigkeit.</p>'
@@ -668,6 +736,7 @@
   }
 
   function bereichKicker(abschnitt) {
+    if (abschnitt === FAQ_SLUG) return "Fragen & Antworten";
     if (abschnitt === WISSEN_SLUG) return "Wissen & Lernen";
     if (abschnitt === HIJAB_SLUG) return "Ḥijāb & Schamhaftigkeit";
     if (abschnitt === EHE_SLUG) return "Ehe & Familie";
@@ -721,7 +790,9 @@
       return x.kennung === kennung && istSichtbar(x);
     });
     if (!e) {
-      return '<p class="frauen-empty">Diese Aussage ist nicht sichtbar.</p>';
+      return istFaq(abschnitt)
+        ? '<p class="frauen-empty">Diese Antwort ist nicht sichtbar.</p>'
+        : '<p class="frauen-empty">Diese Aussage ist nicht sichtbar.</p>';
     }
     var lehre = lehreVon(e);
     var sep = '<div class="post-reader-sep" aria-hidden="true"><i>◆</i></div>';
@@ -740,7 +811,9 @@
       "</h2></header>" +
       '<section class="post-reader-main">' +
       narratorLine(e, abschnitt) +
-      '<section class="statement post-aussage"><div class="post-aussage-kicker">Aussage</div>' +
+      '<section class="statement post-aussage"><div class="post-aussage-kicker">' +
+      (istFaq(abschnitt) ? "Antwort" : "Aussage") +
+      "</div>" +
       '<div class="post-aussage-text">' +
       esc(aussageVon(e)) +
       "</div></section>" +
@@ -771,6 +844,12 @@
 
   function pageMeta(value) {
     var parsed = parseValue(value);
+    if (parsed.abschnitt === FAQ_SLUG && parsed.page === "list") {
+      return {
+        title: "Fragen & Antworten",
+        subtitle: "Kurze geprüfte Antworten zu Reinigung, Gebet, Fasten, Wissen und Alltag – mit Quelle und Direktnachweis."
+      };
+    }
     if (parsed.abschnitt === WISSEN_SLUG && parsed.page === "list") {
       return {
         title: "Wissen & Lernen",
@@ -816,7 +895,9 @@
     if (parsed.page === "detail") {
       return {
         title:
-          parsed.abschnitt === WISSEN_SLUG
+          parsed.abschnitt === FAQ_SLUG
+            ? "Fragen & Antworten"
+            : parsed.abschnitt === WISSEN_SLUG
             ? "Wissen & Lernen"
             : parsed.abschnitt === HIJAB_SLUG
             ? "Ḥijāb & Schamhaftigkeit"
@@ -829,7 +910,9 @@
               : parsed.abschnitt === "sahabiyyat"
                 ? "Ṣaḥābiyyāt"
                 : "Fiqh der Frauen",
-        subtitle: "Aussage · Quelle und Direktnachweis"
+        subtitle: parsed.abschnitt === FAQ_SLUG
+          ? "Antwort · Quelle und Direktnachweis"
+          : "Aussage · Quelle und Direktnachweis"
       };
     }
     return {
@@ -848,7 +931,8 @@
       !muetterCache ||
       !eheCache ||
       !hijabCache ||
-      !wissenCache
+      !wissenCache ||
+      !faqCache
     ) {
       load().then(refreshIfFrauen).catch(refreshIfFrauen);
       return '<p class="frauen-empty">Bereich wird geladen…</p>';
@@ -861,6 +945,7 @@
       eheQ = "";
       hijabQ = "";
       wissenQ = "";
+      faqQ = "";
       fiqhThema = "alle";
       sahabThema = "alle";
       tabiiThema = "alle";
@@ -868,6 +953,7 @@
       eheThema = "alle";
       hijabThema = "alle";
       wissenThema = "alle";
+      faqThema = "alle";
       return renderHub();
     }
     if (parsed.page === "detail") return renderDetail(parsed.abschnitt, parsed.kennung);
