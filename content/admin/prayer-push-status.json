@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-29T02:55:16.234Z",
+  "updatedAt": "2026-08-29T03:00:18.525Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-29T02:55:16.234Z",
+  "lastCronRun": "2026-08-29T03:00:18.525Z",
   "nextPlannedPush": {
     "prayer": "Fajr",
     "key": "fajr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-29T03:08:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-29T02:40:11.366Z",
-  "windowEnd": "2026-08-30T04:55:11.366Z",
+  "windowStart": "2026-08-29T02:45:13.471Z",
+  "windowEnd": "2026-08-30T05:00:13.471Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 12,
@@ -28,11 +28,11 @@
   "usersWithLocation": 12,
   "usersWithActivePush": 12,
   "locationGroups": 5,
-  "scheduled": 61,
-  "recipients": 145,
+  "scheduled": 60,
+  "recipients": 144,
   "invalid": 0,
   "invalidDisabled": 0,
-  "skippedPast": 51,
+  "skippedPast": 52,
   "skippedWindow": 88,
   "advanceCatchups": 0,
   "entryCatchups": 0,
@@ -90,7 +90,7 @@
         },
         "entry": {
           "status": "geplant",
-          "recipients": 12
+          "recipients": 11
         }
       },
       "isha": {
@@ -168,7 +168,7 @@
       },
       "entry": {
         "status": "geplant",
-        "recipients": 12
+        "recipients": 11
       },
       "answer": "Maghrib 20:25: Vorab und Gebetszeit geplant."
     },
@@ -502,16 +502,6 @@
       "mode": "advance",
       "time": "13:50",
       "sendAfter": "2026-08-29T11:35:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin",
-      "invalid": 0
-    },
-    {
-      "prayer": "Maghrib",
-      "key": "maghrib",
-      "mode": "entry",
-      "time": "04:43",
-      "sendAfter": "2026-08-29T02:43:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
       "invalid": 0
@@ -1030,6 +1020,13 @@
     },
     {
       "key": "maghrib",
+      "mode": "entry",
+      "sendAfter": "2026-08-29T02:43:00.000Z",
+      "time": "04:43",
+      "timeZone": "Europe/Berlin"
+    },
+    {
+      "key": "maghrib",
       "mode": "advance",
       "sendAfter": "2026-08-29T02:28:00.000Z",
       "time": "04:43",
@@ -1089,13 +1086,6 @@
       "mode": "advance",
       "sendAfter": "2026-08-28T18:11:00.000Z",
       "time": "20:26",
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "key": "isha",
-      "mode": "entry",
-      "sendAfter": "2026-08-28T19:44:00.000Z",
-      "time": "21:44",
       "timeZone": "Europe/Berlin"
     }
   ],
