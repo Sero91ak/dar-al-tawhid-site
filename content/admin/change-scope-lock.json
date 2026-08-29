@@ -87,6 +87,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-light-theme-fix-test-2026-08-29",
+      "approvedBy": "user-explicit-eisgold-light-fix-test-first",
+      "reason": "Nutzer: Eisgold globaler Hintergrund/Header/Overscroll + helle Themes dunkle Schrift. Nur Test-App, keine Besucher-/iOS-Production.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/app-soft-boot.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "classic-light-parchment-test-2026-08-29",
       "approvedBy": "user-explicit-classic-light-parchment-test-first",
       "reason": "Nutzer: Klassisch Hell von Gelb auf Pergament-Creme. Zuerst nur Test-App, Besucher/iOS erst nach Prüfung.",
