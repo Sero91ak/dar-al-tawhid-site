@@ -423,6 +423,52 @@
     );
   }
 
+  function bereichKicker(abschnitt) {
+    if (abschnitt === "tabiiyyat") return "Tābiʿiyyāt";
+    if (abschnitt === "sahabiyyat") return "Ṣaḥābiyyāt";
+    return "Fiqh der Frauen";
+  }
+
+  function narratorLine(e) {
+    var raw = String(e.name || e.ueberliefertVon || e.sprecher || "").trim();
+    if (!raw) return "";
+    var honorific = /رضي الله/.test(raw)
+      ? ""
+      : "<span class='honorific'>رضي الله عنها</span>";
+    return (
+      '<div class="post-reader-speaker">' +
+      '<span class="post-reader-speaker__label">Überliefert von</span>' +
+      '<span class="post-reader-speaker__rule" aria-hidden="true"></span>' +
+      '<span class="post-reader-speaker__name">' +
+      esc(raw) +
+      " " +
+      honorific +
+      "</span></div>"
+    );
+  }
+
+  function quelleText(e) {
+    return String(e.quellenanzeige || "").replace(/^Quelle:\s*/i, "").trim() || "Keine Quelle hinterlegt.";
+  }
+
+  function nachweiseBlock(e) {
+    var url = String(e.direktnachweisUrl || "").trim();
+    if (!url) return "";
+    var label = String(e.direktnachweisText || "Quelle öffnen").replace(/^→\s*/, "").trim() || "Quelle öffnen";
+    return (
+      '<div class="post-after-links-wrap is-quiet" data-quiet-links="1">' +
+      '<button type="button" class="post-after-links-toggle" data-post-after-links-toggle aria-expanded="false" aria-label="Quellen und Belege öffnen">' +
+      '<span class="post-after-links-toggle-row"><span class="post-after-links-toggle-label">Nachweise</span>' +
+      '<span class="post-after-links-toggle-icon" aria-hidden="true"></span></span></button>' +
+      '<div class="post-after-links-body" hidden><div class="post-after-links" data-post-after-links>' +
+      '<a class="post-beleg-link" href="' +
+      esc(url) +
+      '" target="_blank" rel="noopener noreferrer">' +
+      esc(label) +
+      "</a></div></div></div>"
+    );
+  }
+
   function renderDetail(abschnitt, kennung) {
     var data = cacheFor(abschnitt);
     var e = (data.eintraege || []).find(function (x) {
@@ -431,50 +477,35 @@
     if (!e) {
       return '<p class="frauen-empty">Diese Aussage ist nicht sichtbar.</p>';
     }
-    var kicker =
-      abschnitt === "tabiiyyat" ? "Tābiʿiyyāt" : abschnitt === "sahabiyyat" ? "Ṣaḥābiyyāt" : "Fiqh der Frauen";
-    var nameLine =
-      (abschnitt === "sahabiyyat" || abschnitt === "tabiiyyat") && e.name
-        ? '<p class="frauen-oval__kicker">' + esc(e.name) + "</p>"
-        : '<p class="frauen-oval__kicker">' + kicker + "</p>";
-    var linkText = e.direktnachweisText || "→ Quelle öffnen";
     var lehre = lehreVon(e);
-    var hair = '<span class="frauen-hairline" aria-hidden="true"></span>';
+    var sep = '<div class="post-reader-sep" aria-hidden="true"><i>◆</i></div>';
+    var fazit = lehre
+      ? sep +
+        '<section class="post-key-message" data-post-fazit><h3>Fazit</h3><div class="post-fazit-body">' +
+        esc(lehre) +
+        "</div></section>"
+      : "";
     return (
-      '<article class="frauen-post-reader">' +
-      '<header class="frauen-oval frauen-oval--titel">' +
-      nameLine +
-      '<h2 class="frauen-oval__title">' +
+      '<article class="article post-reader">' +
+      '<header class="post-reader-title"><div class="kicker">' +
+      esc(bereichKicker(abschnitt)) +
+      "</div><h2>" +
       esc(titelVon(e)) +
-      "</h2>" +
-      "</header>" +
-      hair +
-      '<section class="frauen-oval frauen-oval--aussage">' +
-      '<p class="frauen-oval__kicker">Aussage</p>' +
-      '<p class="frauen-oval__body">' +
+      "</h2></header>" +
+      '<section class="post-reader-main">' +
+      narratorLine(e) +
+      '<section class="statement post-aussage"><div class="post-aussage-kicker">Aussage</div>' +
+      '<div class="post-aussage-text">' +
       esc(aussageVon(e)) +
-      "</p>" +
-      (lehre
-        ? hair +
-          '<p class="frauen-oval__kicker">Lehre / Nutzen</p>' +
-          '<p class="frauen-oval__nutzen">' +
-          esc(lehre) +
-          "</p>"
-        : "") +
-      "</section>" +
-      hair +
-      '<section class="frauen-oval frauen-oval--quelle">' +
-      '<p class="frauen-oval__kicker">Quelle</p>' +
-      '<p class="frauen-oval__cite">' +
-      esc(e.quellenanzeige) +
-      "</p>" +
-      hair +
-      '<p class="frauen-oval__kicker">Direktnachweis</p>' +
-      '<a class="frauen-direktnachweis" href="' +
-      esc(e.direktnachweisUrl) +
-      '" target="_blank" rel="noopener noreferrer">' +
-      esc(linkText) +
-      "</a>" +
+      "</div></section>" +
+      sep +
+      '<div class="post-source-oval post-source-module"><div class="post-reader-cite"><b>Quelle</b>' +
+      '<div data-post-after-source>' +
+      esc(quelleText(e)) +
+      "</div></div>" +
+      nachweiseBlock(e) +
+      "</div>" +
+      fazit +
       "</section>" +
       '<button type="button" class="frauen-open-btn" data-nav="frauen" data-value="' +
       esc(abschnitt) +

@@ -87,6 +87,22 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-frauen-beitrag-aufbau-v745-2026-08-29",
+      "approvedBy": "user-explicit-test-frauen-beitrag-aufbau",
+      "reason": "Nutzer: Frauen-Aussage genau wie Beitragsleser aufbauen (Titel, Überliefert von, Aussage, ◆, Quellenoval, Nachweise, Fazit). Nur Test-App.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/frauen/",
+        "test/data/frauen-fiqh.json",
+        "test/data/frauen-sahabiyyat.json",
+        "test/data/frauen-tabiiyyat.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "test-frauen-linien-edler-v743-2026-08-29",
       "approvedBy": "user-explicit-test-frauen-linien-edler",
       "reason": "Nutzer: Frauen-Linien zu markant; senkrechte Seitenleiste entfernen; Oval- und Trennlinien dünner und edler. Nur Test-App.",

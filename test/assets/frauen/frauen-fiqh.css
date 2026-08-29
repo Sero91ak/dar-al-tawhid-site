@@ -243,8 +243,12 @@
   opacity:.25;
 }
 .frauen-article .frauen-open-btn,
-.frauen-post-reader .frauen-open-btn{
+.frauen-post-reader .frauen-open-btn,
+body.is-frauen-route .post-reader > .frauen-open-btn{
   margin-top:16px;
+}
+body.is-frauen-route .article.post-reader{
+  margin-top:2px;
 }
 .frauen-open-btn{
   margin-top:8px;
