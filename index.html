@@ -30998,6 +30998,69 @@ html[data-theme="eisgold"] body.is-more-route #bottomNav.bottom-nav{
 }
 </style>
 
+<style id="eisgold-quran-sheet-v719">
+/* Eisgold Qurʾān: kein dunkler Kopfkasten — eine Eisfäche bis in die Statusleiste. */
+html[data-theme="eisgold"]{
+  --quran-page-bg:#d8eefb!important;
+  --quran-header-bg:#d8eefb!important;
+  --quran-gradient-page:#d8eefb!important;
+  --quran-gradient-header:#d8eefb!important;
+}
+html[data-theme="eisgold"] body.is-quran-overview,
+html[data-theme="eisgold"] body.is-quran-overview #appView,
+html[data-theme="eisgold"] body.is-quran-overview #appView.view,
+html[data-theme="eisgold"] body.is-quran-overview .view,
+html[data-theme="eisgold"] body.is-quran-overview .qov-page,
+html[data-theme="eisgold"] body.is-quran-overview .qov-header,
+html[data-theme="eisgold"] body.is-quran-overview .qov-sticky-tools,
+html[data-theme="eisgold"] body.is-quran-overview .qov-layout,
+html[data-theme="eisgold"] body.is-quran-overview .qov-main{
+  background:#d8eefb!important;
+  background-color:#d8eefb!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  border:0!important;
+  border-radius:0!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html[data-theme="eisgold"] body.is-quran-overview .qov-header,
+html[data-theme="eisgold"] body.is-quran-overview .qov-header.is-compact{
+  margin:0!important;
+  border-bottom:0!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] body.is-quran-overview .qov-header::before,
+html[data-theme="eisgold"] body.is-quran-overview .qov-header::after{
+  display:none!important;
+  content:none!important;
+}
+html[data-theme="eisgold"] body.is-quran-overview .qov-nav-stack,
+html[data-theme="eisgold"] body.is-quran-overview .qov-nav-stack .qov-nav-stack-search,
+html[data-theme="eisgold"] body.is-quran-overview .qov-search-shell{
+  background:#d8eefb!important;
+  background-image:none!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] body.is-quran-overview .qov-back,
+html[data-theme="eisgold"] body.is-quran-overview .qov-wake-labeled-btn,
+html[data-theme="eisgold"] body.is-quran-overview .qov-icon-btn{
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] body.is-quran-reader-route .qrc-chrome,
+html[data-theme="eisgold"] body.is-quran-reader-route .qrc-chrome::before,
+html[data-theme="eisgold"] body.is-quran-reader-route .qrc-chrome::after{
+  background:#d8eefb!important;
+  background-color:#d8eefb!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  border-bottom:0!important;
+}
+</style>
+
 <script>
 (function(){
   /* v661 · Keine Inline-Hintergrundfarben mehr — die klebten (z.B. Royal-Blau) über Theme-Wechsel. */
@@ -31101,6 +31164,7 @@ html[data-theme="eisgold"] body.is-more-route #bottomNav.bottom-nav{
     var over=document.getElementById("eisgold-oversize-routes-v716");
     var uni=document.getElementById("eisgold-unified-field-v717");
     var sheet=document.getElementById("eisgold-one-sheet-v718");
+    var quran=document.getElementById("eisgold-quran-sheet-v719");
     var host=document.documentElement||(s&&s.parentNode);
     if(s&&host) host.appendChild(s);
     if(ice&&host) host.appendChild(ice);
@@ -31113,6 +31177,7 @@ html[data-theme="eisgold"] body.is-more-route #bottomNav.bottom-nav{
     if(over&&host) host.appendChild(over);
     if(uni&&host) host.appendChild(uni);
     if(sheet&&host) host.appendChild(sheet);
+    if(quran&&host) host.appendChild(quran);
     try{
       var root=document.documentElement;
       if(!root)return;

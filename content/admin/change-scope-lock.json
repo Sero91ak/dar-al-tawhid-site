@@ -87,6 +87,22 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-quran-header-v719-2026-08-29",
+      "approvedBy": "user-explicit-eisgold-quran-kasten",
+      "reason": "Nutzer: dunklen blauen Qurʾān-Kasten entfernen, Farbe einheitlich oversize bis oben.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/theme-eisgold.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-one-sheet-v718-2026-08-29",
       "approvedBy": "user-explicit-eisgold-getrennt-fix",
       "reason": "Nutzer: sieht wieder getrennt/Katastrophe. Eine Farbe bis oben, keine Karteninseln, Nav gleiche Eisfarbe.",
