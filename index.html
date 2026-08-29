@@ -5,12 +5,12 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v712";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v713";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
   try{
-    var colors={dark:"#050706",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605",eisgold:"#edf7ff"};
+    var colors={dark:"#050706",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605",eisgold:"#d8eefb"};
     var names={dark:"Klassisch Dunkel",light:"Klassisch Hell",soft:"Sanft Elegant",royal:"Royal Nachtblau",bordeaux:"Bordeaux Royal Premium","dar-al-layl":"Dār al-Layl",eisgold:"Eisgold"};
     var t=localStorage.getItem("darThemeV1")||"dark";
     if(t==="emerald"||t==="smaragd"||t==="aurora"){t="dark";try{localStorage.setItem("darThemeV1",t)}catch(e){}}
@@ -7342,11 +7342,13 @@ html[data-theme="dar-al-layl"]{
   --cover-panel-border:rgba(168,139,79,.16);
 }
 html[data-theme="eisgold"]{
-  --outer-bg-flat:#e8f3fb;
-  --theme-page-bg:#e8f3fb;
-  --outer-bg:radial-gradient(ellipse 160% 78% at 50% -22%,rgba(255,255,255,.96) 0%,transparent 58%),radial-gradient(ellipse 92% 62% at 6% -10%,rgba(184,150,58,.22) 0%,transparent 56%),radial-gradient(ellipse 96% 64% at 96% -6%,rgba(132,186,226,.40) 0%,transparent 58%),radial-gradient(ellipse 140% 70% at 50% 118%,rgba(184,150,58,.14) 0%,transparent 60%),linear-gradient(180deg,#f7fcff 0%,#e8f3fb 46%,#dceaf6 100%);
-  --cover-edge-bg:linear-gradient(180deg,#e8f3fb 0%,#f5fbff 48%,rgba(232,243,251,0) 100%);
-  --cover-panel-bg:linear-gradient(180deg,rgba(245,251,255,.96),rgba(232,243,251,.94));
+  --outer-bg-flat:#d8eefb;
+  --theme-page-bg:#d8eefb;
+  --dar-edge-fill:#d8eefb;
+  --dar-boot-fill:#d8eefb;
+  --outer-bg:radial-gradient(circle at 14% 0%,rgba(184,150,58,.16),transparent 38%),radial-gradient(circle at 86% 9%,rgba(132,186,226,.28),transparent 34%),linear-gradient(180deg,#d8eefb 0%,#e2f3fc 42%,#d8eefb 72%,#cde6f6 100%);
+  --cover-edge-bg:linear-gradient(180deg,#d8eefb 0%,#d8eefb 50%,rgba(216,238,251,0) 100%);
+  --cover-panel-bg:linear-gradient(180deg,rgba(226,243,252,.96),rgba(216,238,251,.94));
   --cover-panel-border:rgba(200,169,90,.28);
 }
 html[data-theme],
@@ -20259,7 +20261,7 @@ document.addEventListener("pointerdown",e=>{if(isEditableTarget(e.target))lastFo
 const THEME_KEY="darThemeV1";
 const THEME_SETTINGS_KEY="darThemeSettingsV1";
 /* EDGE_TO_EDGE_THEME_LOCK · Format: Edge-to-Edge Erscheinungsbild — jedes Theme inkl. künftiger: --outer-bg-flat/--outer-bg/--page-cover/--premium-bg + THEME_META/normalizeTheme; Rahmenrandlos. */
-const THEME_META={dark:{label:"Klassisch Dunkel",color:"#050706",status:"black-translucent",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"black-translucent",asset:"light"},eisgold:{label:"Eisgold",color:"#edf7ff",status:"black-translucent",asset:"eisgold"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"black-translucent",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black-translucent",asset:"royal"},bordeaux:{label:"Bordeaux Royal Premium",color:"#140B0C",status:"black-translucent",asset:"bordeaux"},"dar-al-layl":{label:"Dār al-Layl",color:"#050605",status:"black-translucent",asset:"dar-al-layl"}};
+const THEME_META={dark:{label:"Klassisch Dunkel",color:"#050706",status:"black-translucent",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"black-translucent",asset:"light"},eisgold:{label:"Eisgold",color:"#d8eefb",status:"black-translucent",asset:"eisgold"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"black-translucent",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black-translucent",asset:"royal"},bordeaux:{label:"Bordeaux Royal Premium",color:"#140B0C",status:"black-translucent",asset:"bordeaux"},"dar-al-layl":{label:"Dār al-Layl",color:"#050605",status:"black-translucent",asset:"dar-al-layl"}};
 function normalizeTheme(theme){if(theme==="emerald"||theme==="smaragd"||theme==="aurora")return"dark";return theme==="light"||theme==="eisgold"||theme==="soft"||theme==="royal"||theme==="bordeaux"||theme==="dar-al-layl"?theme:"dark"}
 function getTheme(){try{return normalizeTheme(localStorage.getItem(THEME_KEY))}catch(e){return"dark"}}
 function applyTheme(theme){const next=normalizeTheme(theme);const info=THEME_META[next]||THEME_META.dark;const root=document.documentElement;root.classList.add("theme-switching");try{if(typeof window.__darClearStickyThemeFills==="function")window.__darClearStickyThemeFills();root.style.removeProperty("background");root.style.removeProperty("background-color");root.style.removeProperty("background-image");root.style.removeProperty("--theme-page-bg");if(document.body){document.body.style.removeProperty("background");document.body.style.removeProperty("background-color");document.body.style.removeProperty("background-image")}root.style.setProperty("--dar-boot-fill",info.color);window.__DAR_BOOT_FILL=info.color}catch(e){}root.setAttribute("data-theme",next);root.setAttribute("data-theme-name",info.label);try{localStorage.setItem(THEME_KEY,next);localStorage.setItem(THEME_SETTINGS_KEY,JSON.stringify({theme:next,label:info.label,assetVariant:info.asset,updatedAt:Date.now()}))}catch(e){}const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=info.color;const tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=info.color;const sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content="black-translucent";const logo=document.querySelector(".logo");if(logo){logo.title="DAR AL TAWḤID";if(!logo.getAttribute("data-logo-ready")){logo.setAttribute("data-logo-ready","1");logo.onerror=function(){this.onerror=null;this.src="/watermark-my-logo-full.png?v=fallback"};if(!logo.getAttribute("src")||logo.getAttribute("src").indexOf("watermark-my-logo")<0)logo.src="/watermark-my-logo-full.png"}}document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.classList.toggle("is-active",btn.getAttribute("data-theme-select")===next);btn.setAttribute("aria-pressed",btn.getAttribute("data-theme-select")===next?"true":"false")});try{window.dispatchEvent(new CustomEvent("dar-theme-change",{detail:{theme:next,...info}}))}catch(e){}requestAnimationFrame(()=>requestAnimationFrame(()=>{root.classList.remove("theme-switching");try{if(typeof window.__darSyncThemeFillMeta==="function")window.__darSyncThemeFillMeta();if(typeof window.__darClearStickyThemeFills==="function")window.__darClearStickyThemeFills()}catch(e){}}))}
@@ -26190,7 +26192,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v712";
+const APP_BUILD_ID="app-shell-v713";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -30514,10 +30516,99 @@ html[data-theme="eisgold"] body::before{
 }
 </style>
 
+<style id="eisgold-royal-wash-v713">
+/* Eisgold wie Royal Nachtblau: html = eine durchgehende Fläche in derselben Eisfarbe.
+   Overscroll zeigt diese Fläche, nicht Weiß. Verlauf nur auf body, Schalen transparent. */
+html[data-theme="eisgold"]{
+  --outer-bg-flat:#d8eefb!important;
+  --dar-edge-fill:#d8eefb!important;
+  --dar-boot-fill:#d8eefb!important;
+  --theme-page-bg:#d8eefb!important;
+  --theme-feed-bg:#d8eefb!important;
+  --app-bg-color:#d8eefb!important;
+  --bg:#d8eefb!important;
+  --page-cover:#d8eefb!important;
+  --page-cover-mid:#cfe8f6!important;
+  --quran-page-bg:#d8eefb!important;
+  --outer-bg:radial-gradient(circle at 14% 0%,rgba(184,150,58,.16),transparent 38%),radial-gradient(circle at 86% 9%,rgba(132,186,226,.28),transparent 34%),linear-gradient(180deg,#d8eefb 0%,#e2f3fc 42%,#d8eefb 72%,#cde6f6 100%)!important;
+  --premium-bg:var(--outer-bg)!important;
+  --app-bg:var(--outer-bg)!important;
+  --cover-edge-bg:linear-gradient(180deg,#d8eefb 0%,#d8eefb 50%,rgba(216,238,251,0) 100%)!important;
+  --theme-hero-bg:transparent!important;
+  --theme-hero-surface:transparent!important;
+  --theme-hero-blend-top:#d8eefb!important;
+  --theme-hero-blend-bottom:rgba(216,238,251,0)!important;
+}
+html[data-theme="eisgold"],
+html[data-theme="eisgold"].is-standalone-pwa,
+html[data-theme="eisgold"].dar-ios-native-app{
+  background:none!important;
+  background-image:none!important;
+  background-color:#d8eefb!important;
+  background-attachment:scroll!important;
+}
+html[data-theme="eisgold"]::before,
+html[data-theme="eisgold"]::after{
+  display:none!important;
+  content:none!important;
+  background:none!important;
+  opacity:0!important;
+}
+html[data-theme="eisgold"] body,
+html[data-theme="eisgold"].is-standalone-pwa body,
+html[data-theme="eisgold"].dar-ios-native-app body,
+html[data-theme="eisgold"] body.is-home-route,
+html[data-theme="eisgold"] body.is-more-route,
+html[data-theme="eisgold"] body.is-area-route,
+html[data-theme="eisgold"] body.is-quiz-route,
+html[data-theme="eisgold"] body.is-account-route,
+html[data-theme="eisgold"] body.is-feed-fullscreen,
+html[data-theme="eisgold"] body.is-quran-overview,
+html[data-theme="eisgold"] body.has-bottom-nav{
+  background:var(--outer-bg)!important;
+  background-color:#d8eefb!important;
+  background-attachment:scroll!important;
+}
+html[data-theme="eisgold"] #appRoot,
+html[data-theme="eisgold"] #appShell,
+html[data-theme="eisgold"] .app,
+html[data-theme="eisgold"] #appView,
+html[data-theme="eisgold"] #appView.view,
+html[data-theme="eisgold"] .view,
+html[data-theme="eisgold"] .top-shell,
+html[data-theme="eisgold"] .top-shell.theme-hero-shell,
+html[data-theme="eisgold"] .header,
+html[data-theme="eisgold"] .theme-hero-surface,
+html[data-theme="eisgold"] header.theme-hero-surface,
+html[data-theme="eisgold"] .hero-text,
+html[data-theme="eisgold"] .isnad,
+html[data-theme="eisgold"] .sf-app,
+html[data-theme="eisgold"] .sf-top,
+html[data-theme="eisgold"] .sf-feed,
+html[data-theme="eisgold"] .qov-page,
+html[data-theme="eisgold"] .more-page,
+html[data-theme="eisgold"] .quiz-home,
+html[data-theme="eisgold"] .account-page{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+}
+html[data-theme="eisgold"] body.is-home-route .top-shell.theme-hero-shell .brand-main h1.brand-title-refined,
+html[data-theme="eisgold"] body.is-home-route .top-shell.theme-hero-shell .brand-main h1.brand-title-refined.refined-gold-fill,
+html[data-theme="eisgold"] .brand-main h1.brand-title-refined{
+  color:#0a1628!important;
+  -webkit-text-fill-color:#0a1628!important;
+  background:none!important;
+  background-image:none!important;
+  -webkit-background-clip:border-box!important;
+  background-clip:border-box!important;
+}
+</style>
+
 <script>
 (function(){
   /* v661 · Keine Inline-Hintergrundfarben mehr — die klebten (z.B. Royal-Blau) über Theme-Wechsel. */
-  var THEME_SOLID={dark:"#050706",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605",eisgold:"#edf7ff"};
+  var THEME_SOLID={dark:"#050706",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605",eisgold:"#d8eefb"};
   var CLEAR_PROPS=["background","background-color","background-image","backdrop-filter","-webkit-backdrop-filter"];
   var CLEAR_SELS=[
     "html",
@@ -30611,12 +30702,14 @@ html[data-theme="eisgold"] body::before{
     var ov=document.getElementById("eisgold-overscroll-v708");
     var iceFix=document.getElementById("eisgold-header-overscroll-v711");
     var ink=document.getElementById("eisgold-ink-v712");
+    var royal=document.getElementById("eisgold-royal-wash-v713");
     var host=document.documentElement||(s&&s.parentNode);
     if(s&&host) host.appendChild(s);
     if(ice&&host) host.appendChild(ice);
     if(ov&&host) host.appendChild(ov);
     if(iceFix&&host) host.appendChild(iceFix);
     if(ink&&host) host.appendChild(ink);
+    if(royal&&host) host.appendChild(royal);
     try{
       var root=document.documentElement;
       if(!root)return;
@@ -30645,11 +30738,18 @@ html[data-theme="eisgold"] body::before{
     try{
       var root=document.documentElement;
       if(!root||root.getAttribute("data-theme")!=="eisgold")return;
-      var ice="#edf7ff";
-      var ink="#111827";
-      [root,document.body,document.getElementById("appRoot"),document.getElementById("appShell"),document.getElementById("appView")].forEach(function(el){
+      var ice="#d8eefb";
+      var ink="#0a1628";
+      root.style.setProperty("background-color",ice,"important");
+      root.style.setProperty("background-image","none","important");
+      if(document.body){
+        document.body.style.setProperty("background-color",ice,"important");
+      }
+      [document.getElementById("appRoot"),document.getElementById("appShell"),document.getElementById("appView")].forEach(function(el){
         if(!el||!el.style)return;
-        el.style.setProperty("background-color",ice,"important");
+        el.style.setProperty("background","transparent","important");
+        el.style.setProperty("background-color","transparent","important");
+        el.style.setProperty("background-image","none","important");
       });
       document.querySelectorAll("h1.brand-title-refined,.sf-brand-title,.sf-brand h1,.sf-read-more").forEach(function(el){
         el.style.setProperty("color",ink,"important");

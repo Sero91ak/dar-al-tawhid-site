@@ -463,7 +463,7 @@ struct WebAppView: UIViewRepresentable {
             }
             try{
               if(!topColor && (document.documentElement.getAttribute("data-theme")||"")==="eisgold"){
-                topColor="#eef7ff";
+                topColor="#d8eefb";
               }
             }catch(e){}
             var midColor=firstVariableColor(roots, [
