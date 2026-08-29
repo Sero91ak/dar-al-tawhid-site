@@ -87,6 +87,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-quran-hairline-v732-2026-08-29",
+      "approvedBy": "user-explicit-quran-gold-lines-thinner",
+      "reason": "Nutzer: Qurʾān Goldlinien zu dick, müssen dünner/edler — Suche, JUZ/SURA/AYAH, äußerer Kasten.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-more-hairline-v730-2026-08-29",
       "approvedBy": "user-explicit-propheten-distinct-thin-gold-live",
       "reason": "Nutzer: Propheten muss eigene volle Goldlinie haben (kein Streich), sich von den anderen abheben, Linien dünner/edler — sofort live.",
