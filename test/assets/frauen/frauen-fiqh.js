@@ -856,27 +856,14 @@
   }
 
   function markSvg(kind) {
-    var inner =
-      kind === "book"
-        ? '<path d="M6 5.6h12v12.8H6z"/><path d="M12 5.6v12.8"/>'
-        : kind === "person"
-          ? '<circle cx="12" cy="8.1" r="2.5"/><path d="M6.8 18.4c.8-3 2.9-4.7 5.2-4.7s4.4 1.7 5.2 4.7"/>'
-          : kind === "people"
-            ? '<circle cx="9" cy="8.2" r="2.1"/><circle cx="15.1" cy="8.5" r="1.9"/><path d="M5.8 18.2c.7-2.5 2.3-3.8 4.1-3.8s3.4 1.2 4.1 3.3"/>'
-            : kind === "home"
-              ? '<path d="M5.2 11.5 12 5.6l6.8 5.9"/><path d="M7.4 11V18.4h9.2V11"/>'
-              : kind === "ring"
-                ? '<circle cx="12" cy="12" r="5.8"/><circle cx="12" cy="12" r="1.8"/>'
-                : kind === "veil"
-                  ? '<path d="M7.4 18.6c0-4.4 2-8 4.6-8s4.6 3.6 4.6 8"/><path d="M8.6 11.2C9.2 8.8 10.4 7.2 12 7.2s2.8 1.6 3.4 4"/>'
-                  : kind === "lamp"
-                    ? '<path d="M9.1 10.2h5.8l-.6 5H9.7z"/><path d="M10.6 8.1h2.8"/><path d="M12 5.6V8.1"/>'
-                    : '<circle cx="12" cy="12" r="5.2"/>';
-    return (
-      '<svg class="frauen-mark" viewBox="-2 -2 28 28" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-      inner +
-      "</svg>"
-    );
+    var glyph = "📚";
+    if (kind === "book") glyph = "📖";
+    else if (kind === "person" || kind === "veil") glyph = "🧕";
+    else if (kind === "people") glyph = "🌙";
+    else if (kind === "home") glyph = "🏠";
+    else if (kind === "ring") glyph = "💫";
+    else if (kind === "lamp") glyph = "🪔";
+    return '<span class="emoji-emblem frauen-emblem" aria-hidden="true">' + glyph + "</span>";
   }
 
   function markForAbschnitt(abschnitt) {
@@ -1157,14 +1144,10 @@
         ? '<p class="frauen-row__sprecher">' + esc(person) + (abschnitt === SALAF_SLUG || abschnitt === KURZ_SLUG || abschnitt === MUETTER_SLUG || filterOben(abschnitt) ? "" : " sagte:") + "</p>"
         : "") +
       (aussageText
-        ? '<p class="frauen-row__kicker">Aussage</p><p class="frauen-row__aussage">' +
-          esc(aussageText) +
-          "</p>"
+        ? '<p class="frauen-row__aussage">' + esc(aussageText) + "</p>"
         : "") +
       (quelleKurz(e)
-        ? '<p class="frauen-row__kicker frauen-row__kicker--quelle">Quelle</p><p class="frauen-row__quelle">' +
-          esc(quelleKurz(e)) +
-          "</p>"
+        ? '<p class="frauen-row__quelle">' + esc(quelleKurz(e)) + "</p>"
         : "") +
       '<div class="post-row__meta dua-row__meta">' +
       (bereich ? "<span>" + esc(bereich) + "</span>" : "") +

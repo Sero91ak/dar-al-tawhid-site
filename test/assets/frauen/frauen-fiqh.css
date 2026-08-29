@@ -525,7 +525,7 @@ body.is-frauen-route .frauen-post-row{
   grid-template-columns:30px minmax(0,1fr)!important;
   column-gap:10px!important;
   align-items:start!important;
-  padding:9px 12px 10px 12px!important;
+  padding:8px 12px 8px 12px!important;
 }
 body.is-frauen-route .topics-theme-card.is-featured{
   background:radial-gradient(ellipse 96% 86% at 42% 50%,color-mix(in srgb,var(--gold2) 5%,transparent),transparent 76%)!important;
@@ -571,6 +571,30 @@ body.is-frauen-route .topics-theme-card__icon .emoji-emblem,
 body.is-frauen-route .dua-theme-card__icon .emoji-emblem,
 body.is-frauen-route .frauen-post-row .emoji-emblem,
 body.is-frauen-route .frauen-emblem{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:18px!important;
+  height:18px!important;
+  font-size:16px!important;
+  line-height:1!important;
+  overflow:visible!important;
+  filter:none!important;
+  margin:0!important;
+}
+body.is-frauen-route #appView > .view-head::before{
+  content:"🧕"!important;
+  width:auto!important;
+  height:auto!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  font-size:15px!important;
+  line-height:1!important;
+  bottom:-11px!important;
+  margin-left:-8px!important;
+}
+body.is-frauen-route .frauen-row__kicker{
   display:none!important;
 }
 body.is-frauen-route .frauen-row__kicker{
@@ -599,22 +623,20 @@ body.is-frauen-route .frauen-row__sprecher{
   color:var(--muted,#b8ae96);
 }
 body.is-frauen-route .frauen-row__aussage{
-  margin:0;
+  margin:2px 0 0;
   font-family:var(--sans,system-ui);
   font-size:13px;
-  line-height:1.42;
+  line-height:1.38;
   font-style:normal;
   color:var(--cream,#fff8e8);
 }
 body.is-frauen-route .frauen-row__quelle{
-  margin:0;
-  padding-top:3px;
-  border-top:1px solid color-mix(in srgb,var(--gold2,#efd78e) 16%,transparent);
+  margin:3px 0 0;
   font-family:var(--serif);
   font-size:12px;
-  line-height:1.4;
+  line-height:1.35;
   font-style:italic;
-  color:color-mix(in srgb,var(--gold2,#d4c08a) 58%,var(--muted,#b8ae96) 42%);
+  color:color-mix(in srgb,var(--gold2,#d4c08a) 70%,var(--muted,#b8ae96) 30%);
 }
 @media (max-width:700px){
   body.is-frauen-route .topics-theme-card,

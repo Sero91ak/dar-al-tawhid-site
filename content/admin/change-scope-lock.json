@@ -87,6 +87,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-frauen-emojis-zurueck-karten-kompakt-v763-2026-08-29",
+      "approvedBy": "user-explicit-test-frauen-hijab-emoji-karten-kompakt",
+      "reason": "Nutzer: Emojis im Frauen-Hauptbereich zurück, nur unbedeckter Frauenkopf weg, 🧕 stattdessen. Labels Aussage/Quelle weg, kompakter. Nur Test-App.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/frauen/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "test-frauen-edel-keine-frauen-emojis-v759-2026-08-29",
       "approvedBy": "user-explicit-test-frauen-edel-keine-offenen-frauen-emojis",
       "reason": "Nutzer: Frauen-Themen kompakt und edel, keine Emojis in Themenbereichen, keine unbedeckten Frauen-Emojis. Nur Test-App.",
