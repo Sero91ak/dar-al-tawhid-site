@@ -4,6 +4,8 @@
   var FIQH_URL = "/test/data/frauen-fiqh.json";
   var SAHAB_URL = "/test/data/frauen-sahabiyyat.json";
   var TABII_URL = "/test/data/frauen-tabiiyyat.json";
+  var MUETTER_URL = "/test/data/frauen-muetter-der-glaeubigen.json";
+  var MUETTER_SLUG = "muetter-der-glaeubigen";
   var ERLAUBTE_QUELLENART = {
     quran: 1,
     sahih: 1,
@@ -90,17 +92,41 @@
     erziehung: "Erziehung",
     "historisch-in-pruefung": "Historisch in Prüfung"
   };
+  var MUETTER_THEMEN = [
+    { id: "alle", label: "Alle" },
+    { id: "grundlage", label: "Grundlage" },
+    { id: "vorzueglichkeit", label: "Vorzüglichkeit" },
+    { id: "wissen", label: "Wissen" },
+    { id: "beratung", label: "Beratung" },
+    { id: "quran", label: "Qurʾān" },
+    { id: "sadaqah", label: "Ṣadaqah" },
+    { id: "adab", label: "Adab" },
+    { id: "familie", label: "Familie" }
+  ];
+  var MUETTER_BEREICH_LABEL = {
+    grundlage: "Grundlage",
+    vorzueglichkeit: "Vorzüglichkeit",
+    wissen: "Wissen",
+    beratung: "Beratung",
+    quran: "Qurʾān",
+    sadaqah: "Ṣadaqah",
+    adab: "Adab",
+    familie: "Familie"
+  };
 
   var fiqhCache = null;
   var sahabCache = null;
   var tabiiCache = null;
+  var muetterCache = null;
   var loadPromise = null;
   var fiqhQ = "";
   var sahabQ = "";
   var tabiiQ = "";
+  var muetterQ = "";
   var fiqhThema = "alle";
   var sahabThema = "alle";
   var tabiiThema = "alle";
+  var muetterThema = "alle";
   var currentAbschnitt = "hub";
 
   function esc(s) {
@@ -176,13 +202,19 @@
   }
 
   function load() {
-    if (fiqhCache && sahabCache && tabiiCache) return Promise.resolve();
+    if (fiqhCache && sahabCache && tabiiCache && muetterCache) return Promise.resolve();
     if (loadPromise) return loadPromise;
-    loadPromise = Promise.all([fetchJson(FIQH_URL), fetchJson(SAHAB_URL), fetchJson(TABII_URL)])
+    loadPromise = Promise.all([
+      fetchJson(FIQH_URL),
+      fetchJson(SAHAB_URL),
+      fetchJson(TABII_URL),
+      fetchJson(MUETTER_URL)
+    ])
       .then(function (pair) {
         fiqhCache = pair[0];
         sahabCache = pair[1];
         tabiiCache = pair[2];
+        muetterCache = pair[3];
       })
       .catch(function (err) {
         loadPromise = null;
@@ -204,36 +236,45 @@
     if (v.indexOf("tabiiyyat/") === 0) {
       return { page: "detail", abschnitt: "tabiiyyat", kennung: v.slice(10) };
     }
+    if (v === MUETTER_SLUG) return { page: "list", abschnitt: MUETTER_SLUG, kennung: "" };
+    if (v.indexOf(MUETTER_SLUG + "/") === 0) {
+      return { page: "detail", abschnitt: MUETTER_SLUG, kennung: v.slice(MUETTER_SLUG.length + 1) };
+    }
     return { page: "hub", abschnitt: "", kennung: "" };
   }
 
   function cacheFor(abschnitt) {
     if (abschnitt === "sahabiyyat") return sahabCache;
     if (abschnitt === "tabiiyyat") return tabiiCache;
+    if (abschnitt === MUETTER_SLUG) return muetterCache;
     return fiqhCache;
   }
 
   function currentThema(abschnitt) {
     if (abschnitt === "sahabiyyat") return sahabThema;
     if (abschnitt === "tabiiyyat") return tabiiThema;
+    if (abschnitt === MUETTER_SLUG) return muetterThema;
     return fiqhThema;
   }
 
   function setThema(abschnitt, id) {
     if (abschnitt === "sahabiyyat") sahabThema = id;
     else if (abschnitt === "tabiiyyat") tabiiThema = id;
+    else if (abschnitt === MUETTER_SLUG) muetterThema = id;
     else fiqhThema = id;
   }
 
   function currentQ(abschnitt) {
     if (abschnitt === "sahabiyyat") return sahabQ;
     if (abschnitt === "tabiiyyat") return tabiiQ;
+    if (abschnitt === MUETTER_SLUG) return muetterQ;
     return fiqhQ;
   }
 
   function setQ(abschnitt, v) {
     if (abschnitt === "sahabiyyat") sahabQ = v;
     else if (abschnitt === "tabiiyyat") tabiiQ = v;
+    else if (abschnitt === MUETTER_SLUG) muetterQ = v;
     else fiqhQ = v;
   }
 
@@ -307,8 +348,14 @@
         "tabiiyyat",
         "Bereich öffnen"
       ) +
-      hubRow("04", "Frauen der Salaf", "In Prüfung", "", "") +
-      hubRow("05", "Mütter der Gläubigen", "In Prüfung", "", "") +
+      hubRow(
+        "04",
+        "Mütter der Gläubigen",
+        "Geprüfte Berichte über die Ehefrauen des Propheten ﷺ – mit Quelle und Direktnachweis.",
+        MUETTER_SLUG,
+        "Bereich öffnen"
+      ) +
+      hubRow("05", "Frauen der Salaf", "In Prüfung", "", "") +
       "</div></section>"
     );
   }
@@ -327,8 +374,7 @@
         );
       })
       .join("");
-    var suchePlatz =
-      abschnitt === "fiqh" ? "Thema oder Begriff suchen" : "Name oder Thema suchen";
+    var suchePlatz = abschnitt === "fiqh" ? "Thema oder Begriff suchen" : "Name oder Thema suchen";
     return (
       '<div class="frauen-filter is-open" data-frauen-abschnitt="' +
       esc(abschnitt) +
@@ -355,10 +401,12 @@
         ? SAHAB_BEREICH_LABEL
         : abschnitt === "tabiiyyat"
           ? TABII_BEREICH_LABEL
-          : FIQH_BEREICH_LABEL;
+          : abschnitt === MUETTER_SLUG
+            ? MUETTER_BEREICH_LABEL
+            : FIQH_BEREICH_LABEL;
     var bereich = labelMap[e.bereich] || e.bereich || "";
     var name =
-      (abschnitt === "sahabiyyat" || abschnitt === "tabiiyyat") && e.name
+      (abschnitt === "sahabiyyat" || abschnitt === "tabiiyyat" || abschnitt === MUETTER_SLUG) && e.name
         ? '<p class="frauen-statement-card__name">' + esc(e.name) + "</p>"
         : "";
     var hair = '<span class="frauen-hairline" aria-hidden="true"></span>';
@@ -393,7 +441,13 @@
   function renderList(abschnitt) {
     var data = cacheFor(abschnitt);
     var themen =
-      abschnitt === "sahabiyyat" ? SAHAB_THEMEN : abschnitt === "tabiiyyat" ? TABII_THEMEN : FIQH_THEMEN;
+      abschnitt === "sahabiyyat"
+        ? SAHAB_THEMEN
+        : abschnitt === "tabiiyyat"
+          ? TABII_THEMEN
+          : abschnitt === MUETTER_SLUG
+            ? MUETTER_THEMEN
+            : FIQH_THEMEN;
     var q = currentQ(abschnitt);
     var thema = currentThema(abschnitt);
     var geprueft = sichtbare(data.eintraege);
@@ -403,19 +457,25 @@
     var leerBereich = !geprueft.length;
     var emptyHtml = leerBereich
       ? '<div class="frauen-empty"><p>Noch keine geprüften Inhalte vorhanden.</p><p>Dieser Bereich wird mit belastbaren Quellen Schritt für Schritt erweitert.</p></div>'
-      : '<p class="frauen-empty">Keine sichtbare Aussage zu dieser Auswahl.</p>';
+      : abschnitt === MUETTER_SLUG
+        ? '<p class="frauen-empty">Noch keine geprüften Inhalte vorhanden.</p>'
+        : '<p class="frauen-empty">Keine sichtbare Aussage zu dieser Auswahl.</p>';
     var hint =
       leerBereich
         ? ""
-        : abschnitt === "sahabiyyat"
-          ? '<div class="frauen-hint"><p>Dieser Bereich enthält nur Berichte mit geprüfter Quelle. Schwache, ausgeschmückte oder nicht belegte Geschichten werden nicht angezeigt.</p></div>'
-          : "";
+        : abschnitt === MUETTER_SLUG
+          ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Berichte ohne belastbaren Nachweis werden nicht angezeigt.</p></div>'
+          : abschnitt === "sahabiyyat"
+            ? '<div class="frauen-hint"><p>Dieser Bereich enthält nur Berichte mit geprüfter Quelle. Schwache, ausgeschmückte oder nicht belegte Geschichten werden nicht angezeigt.</p></div>'
+            : "";
     var lede =
-      abschnitt === "tabiiyyat"
-        ? '<p class="lede">Frauen aus der Generation nach den Ṣaḥābah – mit geprüfter Quelle und Direktnachweis.</p>'
-        : abschnitt === "sahabiyyat"
-          ? '<p class="lede">Kurze geprüfte Berichte über Frauen der Ṣaḥābah – mit Quelle und Direktnachweis.</p>'
-          : '<p class="lede">Nur geprüfte Aussagen mit Direktnachweis. Die volle Aussage öffnet sich nach dem Tippen.</p>';
+      abschnitt === MUETTER_SLUG
+        ? '<p class="lede">Geprüfte Berichte über die Ehefrauen des Propheten ﷺ – mit Quelle und Direktnachweis.</p>'
+        : abschnitt === "tabiiyyat"
+          ? '<p class="lede">Frauen aus der Generation nach den Ṣaḥābah – mit geprüfter Quelle und Direktnachweis.</p>'
+          : abschnitt === "sahabiyyat"
+            ? '<p class="lede">Kurze geprüfte Berichte über Frauen der Ṣaḥābah – mit Quelle und Direktnachweis.</p>'
+            : '<p class="lede">Nur geprüfte Aussagen mit Direktnachweis. Die volle Aussage öffnet sich nach dem Tippen.</p>';
     return (
       '<section class="stack">' +
       lede +
@@ -433,14 +493,18 @@
   }
 
   function bereichKicker(abschnitt) {
+    if (abschnitt === MUETTER_SLUG) return "Mütter der Gläubigen";
     if (abschnitt === "tabiiyyat") return "Tābiʿiyyāt";
     if (abschnitt === "sahabiyyat") return "Ṣaḥābiyyāt";
     return "Fiqh der Frauen";
   }
 
-  function narratorLine(e) {
+  function narratorLine(e, abschnitt) {
     var raw = String(e.name || e.ueberliefertVon || e.sprecher || "").trim();
     if (!raw) return "";
+    if (abschnitt === MUETTER_SLUG) {
+      return '<p class="frauen-oval__kicker">' + esc(raw) + "</p>";
+    }
     var honorific = /رضي الله/.test(raw)
       ? ""
       : "<span class='honorific'>رضي الله عنها</span>";
@@ -497,12 +561,11 @@
       esc(titelVon(e)) +
       "</h2></header>" +
       '<section class="post-reader-main">' +
-      narratorLine(e) +
+      narratorLine(e, abschnitt) +
       '<section class="statement post-aussage"><div class="post-aussage-kicker">Aussage</div>' +
       '<div class="post-aussage-text">' +
       esc(aussageVon(e)) +
       "</div></section>" +
-      lehreHtml +
       sep +
       '<div class="post-source-oval post-source-module"><div class="post-reader-cite"><b>Quelle</b>' +
       '<div data-post-after-source>' +
@@ -510,6 +573,7 @@
       "</div></div>" +
       nachweiseDirekt(e) +
       "</div>" +
+      lehreHtml +
       "</section>" +
       '<button type="button" class="frauen-open-btn" data-nav="frauen" data-value="' +
       esc(abschnitt) +
@@ -529,6 +593,12 @@
 
   function pageMeta(value) {
     var parsed = parseValue(value);
+    if (parsed.abschnitt === MUETTER_SLUG && parsed.page === "list") {
+      return {
+        title: "Mütter der Gläubigen",
+        subtitle: "Der Rang, die Vorzüge und ausgewählte geprüfte Berichte über die Ehefrauen des Propheten ﷺ."
+      };
+    }
     if (parsed.abschnitt === "tabiiyyat" && parsed.page === "list") {
       return {
         title: "Tābiʿiyyāt",
@@ -550,11 +620,13 @@
     if (parsed.page === "detail") {
       return {
         title:
-          parsed.abschnitt === "tabiiyyat"
-            ? "Tābiʿiyyāt"
-            : parsed.abschnitt === "sahabiyyat"
-              ? "Ṣaḥābiyyāt"
-              : "Fiqh der Frauen",
+          parsed.abschnitt === MUETTER_SLUG
+            ? "Mütter der Gläubigen"
+            : parsed.abschnitt === "tabiiyyat"
+              ? "Tābiʿiyyāt"
+              : parsed.abschnitt === "sahabiyyat"
+                ? "Ṣaḥābiyyāt"
+                : "Fiqh der Frauen",
         subtitle: "Aussage · Quelle und Direktnachweis"
       };
     }
@@ -567,7 +639,7 @@
   function render(value) {
     var parsed = parseValue(value);
     currentAbschnitt = parsed.abschnitt || "hub";
-    if (!fiqhCache || !sahabCache || !tabiiCache) {
+    if (!fiqhCache || !sahabCache || !tabiiCache || !muetterCache) {
       load().then(refreshIfFrauen).catch(refreshIfFrauen);
       return '<p class="frauen-empty">Bereich wird geladen…</p>';
     }
@@ -575,9 +647,11 @@
       fiqhQ = "";
       sahabQ = "";
       tabiiQ = "";
+      muetterQ = "";
       fiqhThema = "alle";
       sahabThema = "alle";
       tabiiThema = "alle";
+      muetterThema = "alle";
       return renderHub();
     }
     if (parsed.page === "detail") return renderDetail(parsed.abschnitt, parsed.kennung);
