@@ -87,6 +87,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-feed-top-no-blue-v724-2026-08-29",
+      "approvedBy": "user-explicit-remove-blue-feed-header",
+      "reason": "Nutzer: Oben das Blaue komplett entfernen (Feed-Tab, Refresh, Header).",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/premium-feed-app.js",
+        "test/assets/premium-feed-app.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-quran-no-navy-v723-2026-08-29",
       "approvedBy": "user-explicit-remove-dark-blue",
       "reason": "Nutzer: dunkles Blau komplett von der Qurʾān-Seite entfernen (Ränder/oben).",

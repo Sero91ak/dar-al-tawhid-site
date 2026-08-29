@@ -31578,6 +31578,49 @@ html[data-theme="eisgold"] .top-swim-aura::before{
 }
 </style>
 
+<style id="eisgold-feed-top-no-blue-v724">
+/* Eisgold Feed-Kopf: kein Eisblau an Tab, Refresh und sf-top. */
+html[data-theme="eisgold"]{
+  --theme-feed-top:#fcfeff!important;
+  --theme-feed-act-bg:#ffffff!important;
+  --theme-feed-switch-bg:#ffffff!important;
+  --theme-feed-switch-active:rgba(200,169,90,.18)!important;
+  --theme-feed-switch-border:rgba(200,169,90,.32)!important;
+}
+html[data-theme="eisgold"] .sf-top,
+html[data-theme="eisgold"] body.is-feed-fullscreen .sf-top,
+html[data-theme="eisgold"] .sf-filters,
+html[data-theme="eisgold"] body.is-feed-fullscreen .sf-filters{
+  background:#fcfeff!important;
+  background-color:#fcfeff!important;
+  background-image:none!important;
+}
+html[data-theme="eisgold"] .sf-switch,
+html[data-theme="eisgold"] body.is-feed-fullscreen .sf-switch{
+  background:#ffffff!important;
+  background-color:#ffffff!important;
+  border:1px solid rgba(200,169,90,.32)!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] .sf-switch-btn.is-active{
+  background:rgba(200,169,90,.18)!important;
+  background-image:none!important;
+  color:#142033!important;
+  -webkit-text-fill-color:#142033!important;
+  border:1px solid rgba(200,169,90,.28)!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] .sf-refresh,
+html[data-theme="eisgold"] body.is-feed-fullscreen .sf-refresh{
+  background:#ffffff!important;
+  background-color:#ffffff!important;
+  background-image:none!important;
+  border:1px solid rgba(200,169,90,.35)!important;
+  color:#142033!important;
+  box-shadow:none!important;
+}
+</style>
+
 <script>
 (function(){
   /* v661 · Keine Inline-Hintergrundfarben mehr — die klebten (z.B. Royal-Blau) über Theme-Wechsel. */
@@ -31687,6 +31730,7 @@ html[data-theme="eisgold"] .top-swim-aura::before{
     var icegold=document.getElementById("eisgold-oversize-icegold-v721");
     var quizPlay=document.getElementById("quiz-session-fullpage-v722");
     var noNavy=document.getElementById("eisgold-quran-no-navy-v723");
+    var noBlue=document.getElementById("eisgold-feed-top-no-blue-v724");
     var host=document.documentElement||(s&&s.parentNode);
     if(s&&host) host.appendChild(s);
     if(ice&&host) host.appendChild(ice);
@@ -31705,6 +31749,7 @@ html[data-theme="eisgold"] .top-swim-aura::before{
     if(icegold&&host) host.appendChild(icegold);
     if(quizPlay&&host) host.appendChild(quizPlay);
     if(noNavy&&host) host.appendChild(noNavy);
+    if(noBlue&&host) host.appendChild(noBlue);
     try{
       var root=document.documentElement;
       if(!root)return;
@@ -31716,9 +31761,12 @@ html[data-theme="eisgold"] .top-swim-aura::before{
       root.style.setProperty("--theme-feed-top","var(--dar-edge-fill)","important");
       root.style.setProperty("--theme-feed-aura","none","important");
       if(root.getAttribute("data-theme")==="eisgold"){
-        root.style.setProperty("--theme-feed-top","transparent","important");
+        root.style.setProperty("--theme-feed-top","#fcfeff","important");
         root.style.setProperty("--theme-feed-bg","transparent","important");
         root.style.setProperty("--theme-feed-aura","none","important");
+        root.style.setProperty("--theme-feed-act-bg","#ffffff","important");
+        root.style.setProperty("--theme-feed-switch-bg","#ffffff","important");
+        root.style.setProperty("--theme-feed-switch-active","rgba(200,169,90,.18)","important");
       }
       var app=document.querySelector(".app");
       if(app){
