@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-29T11:50:12.730Z",
+  "updatedAt": "2026-08-29T11:55:37.801Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-29T11:50:12.730Z",
+  "lastCronRun": "2026-08-29T11:55:37.801Z",
   "nextPlannedPush": {
     "prayer": "Fajr",
     "key": "fajr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-29T12:23:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-29T11:35:02.743Z",
-  "windowEnd": "2026-08-30T13:50:02.743Z",
+  "windowStart": "2026-08-29T11:40:18.996Z",
+  "windowEnd": "2026-08-30T13:55:18.996Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 14,
@@ -28,11 +28,12 @@
   "usersWithLocation": 14,
   "usersWithActivePush": 14,
   "locationGroups": 5,
-  "scheduled": 53,
-  "recipients": 143,
+  "scheduled": 52,
+  "recipients": 142,
   "invalid": 0,
   "invalidDisabled": 0,
-  "skippedPast": 73,
+  "skippedPast": 74,
+  "skippedAlreadyQueued": 1,
   "skippedWindow": 74,
   "advanceCatchups": 0,
   "entryCatchups": 0,
@@ -78,7 +79,7 @@
         },
         "entry": {
           "status": "geplant",
-          "recipients": 14
+          "recipients": 13
         }
       },
       "maghrib": {
@@ -155,7 +156,7 @@
       },
       "entry": {
         "status": "geplant",
-        "recipients": 14
+        "recipients": 13
       },
       "answer": "ʿAṣr 17:18: Vorab und Gebetszeit geplant."
     },
@@ -422,16 +423,6 @@
       "mode": "advance",
       "time": "14:38",
       "sendAfter": "2026-08-29T12:23:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin",
-      "invalid": 0
-    },
-    {
-      "prayer": "ʿAṣr",
-      "key": "asr",
-      "mode": "entry",
-      "time": "13:50",
-      "sendAfter": "2026-08-29T11:50:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
       "invalid": 0
