@@ -246,8 +246,62 @@
     return !!(status && DISPUTED_STATUSES[String(status)]);
   }
 
+  function visitorGermanText(raw) {
+    if (raw == null) return "";
+    var s = String(raw).trim();
+    if (!s || s === "null" || s === "undefined") return "Nicht authentisch belegt";
+    var exact = {
+      scholarly_disputed: "unter den Gelehrten umstritten",
+      "scholarly_disputed / research": "unter den Gelehrten umstritten · in Prüfung",
+      scholarly_disputed_or_inferred: "unter den Gelehrten umstritten oder erschlossen",
+      scholarly_source_correlation: "über Quellenabgleich der Gelehrten",
+      quran_explicit: "im Qurʾān ausdrücklich genannt",
+      quran_named_status_under_review: "im Qurʾān genannt · Einordnung in Prüfung",
+      quran_named_wise_person: "im Qurʾān genannte weise Person",
+      approved: "geprüft",
+      research: "nicht sicher überliefert",
+      research_preview: "Vorschau · nicht freigegeben",
+      approved_existence: "Existenz belegt",
+      approved_existence_name_research: "Existenz belegt; Name nicht sicher überliefert",
+      name_research: "Name nicht sicher überliefert",
+      "Name research": "Name nicht sicher überliefert",
+      "Existenz approved; Name research": "Existenz belegt; Name nicht sicher überliefert",
+      "research (Existenz approved)": "Existenz belegt; Name nicht sicher überliefert",
+      not_established: "nicht authentisch belegt",
+      not_established_in_reviewed_sources: "in den geprüften Quellen nicht belegt",
+      unattested: "nicht authentisch belegt",
+      disputed: "umstritten",
+      "Ikhtilāf / scholarly_disputed": "Ikhtilāf / unter den Gelehrten umstritten"
+    };
+    if (exact[s]) return exact[s];
+    var lower = s.toLowerCase();
+    if (exact[lower]) return exact[lower];
+    s = s.replace(/Existenz approved;\s*Name research/gi, "Existenz belegt; Name nicht sicher überliefert");
+    s = s.replace(/research\s*\(Existenz approved\)/gi, "Existenz belegt; Name nicht sicher überliefert");
+    s = s.replace(/Existenz approved/gi, "Existenz belegt");
+    s = s.replace(/Name research/gi, "Name nicht sicher überliefert");
+    s = s.replace(/scholarly_disputed_or_inferred/gi, "unter den Gelehrten umstritten oder erschlossen");
+    s = s.replace(/scholarly_source_correlation/gi, "über Quellenabgleich der Gelehrten");
+    s = s.replace(/scholarly_disputed/gi, "unter den Gelehrten umstritten");
+    s = s.replace(/quran_explicit/gi, "im Qurʾān ausdrücklich genannt");
+    s = s.replace(/quran_named_status_under_review/gi, "im Qurʾān genannt · Einordnung in Prüfung");
+    s = s.replace(/not_established_in_reviewed_sources/gi, "in den geprüften Quellen nicht belegt");
+    s = s.replace(/not_established/gi, "nicht authentisch belegt");
+    s = s.replace(/approved_existence/gi, "Existenz belegt");
+    s = s.replace(/\bresearch_preview\b/gi, "Vorschau · nicht freigegeben");
+    s = s.replace(/\bresearch\b/gi, "nicht sicher überliefert");
+    s = s.replace(/\bapproved\b/gi, "geprüft");
+    s = s.replace(/\bunattested\b/gi, "nicht authentisch belegt");
+    s = s.replace(/\bdisputed\b/gi, "umstritten");
+    if (/^[a-z]+(?:[A-Z][a-z]+)+$/.test(s) || /^[a-z]+_[a-z0-9_]+$/i.test(s)) {
+      return "In Prüfung";
+    }
+    return s;
+  }
+
   function publicStatusLabel(gradingOrStatus) {
-    var g = String(gradingOrStatus || "").toLowerCase();
+    var raw = String(gradingOrStatus || "");
+    var g = raw.toLowerCase();
     if (g === "quran" || g === "qurʾān") return "Qurʾān";
     if (g.indexOf("sahih") >= 0 || g.indexOf("ṣaḥīḥ") >= 0) return "Ṣaḥīḥ";
     if (g.indexOf("hasan") >= 0 || g.indexOf("ḥasan") >= 0) return "Ḥasan";
@@ -262,7 +316,7 @@
     ) {
       return "Nicht authentisch belegt";
     }
-    return gradingOrStatus || "";
+    return visitorGermanText(raw);
   }
 
   function absenceVisitorNote(status) {
@@ -1222,11 +1276,11 @@
     var research = profile.profileStatus && profile.profileStatus !== "approved";
     var fields = (profile.overviewFields || [])
       .map(function (f) {
-        var showValue = f.value;
+        var showValue = visitorGermanText(f.value);
         if (showValue == null || showValue === "" || showValue === "null" || showValue === "undefined") {
           showValue = "Nicht authentisch belegt";
         }
-        var st = f.status || "";
+        var st = visitorGermanText(f.status || "");
         var ids = f.claimIds || [];
         var ok = !ids.length
           ? /nicht authentisch|nicht bestimmbar|nicht belegt|in prüfung/i.test(String(st))
@@ -1234,7 +1288,7 @@
         /* Positive Werte ohne freigegebene Claims: im Lesertext nicht als Tatsache. */
         if (ids.length && !ok && f.displayMode === "research_preview") {
           if (research && isTest()) {
-            showValue = String(f.value || "") + " (Vorschau · nicht freigegeben)";
+            showValue = visitorGermanText(f.value || "") + " (Vorschau · nicht freigegeben)";
           } else {
             showValue = "In Prüfung — noch nicht freigegeben";
           }
@@ -1533,13 +1587,13 @@
       .map(function (f) {
         var ok = claimsApproved(profile, f.claimIds || []);
         var linkId = f.relatedProphetId || f.prophetId || "";
-        var nameHtml = esc(f.name);
+        var nameHtml = esc(visitorGermanText(f.name));
         if (ok && linkId) {
           nameHtml =
             '<button type="button" class="prophets-inline-link" data-prophet-id="' +
             esc(linkId) +
             '">' +
-            esc(f.name) +
+            esc(visitorGermanText(f.name)) +
             "</button>";
         } else if (ok) {
           // best-effort cross-link by known names in index
@@ -1549,7 +1603,7 @@
               '<button type="button" class="prophets-inline-link" data-prophet-id="' +
               esc(hit) +
               '">' +
-              esc(f.name) +
+              esc(visitorGermanText(f.name)) +
               "</button>";
           }
         }
@@ -1568,7 +1622,7 @@
           '<span class="prophets-status ' +
           statusClass(f.nameStatus) +
           '">' +
-          esc(publicStatusLabel(f.nameStatus) || f.nameStatus || "") +
+          esc(publicStatusLabel(f.nameStatus) || visitorGermanText(f.nameStatus) || "") +
           (!ok ? " · nicht als gesichert dargestellt" : "") +
           "</span>" +
           (absNote ? '<p class="prophets-note">' + esc(absNote) + "</p>" : "") +
@@ -1669,7 +1723,7 @@
       { key: "early", title: "Frühe Quellen", match: function (c) {
           return c.evidenceType === "early" || /sīrah|ibn.?ish[āa]q|ṭabarī|tabari|ibn.?saʿd/i.test(String(c.source || ""));
         } },
-      { key: "research", title: "Qualifizierte Research-Einordnung", match: function (c) {
+      { key: "research", title: "Qualifizierte Einordnung", match: function (c) {
           return c.evidenceType === "editorial" || c.evidenceType === "research" || /isolation|not_established|research/i.test(String(c.category || c.id || ""));
         } }
     ];
@@ -1737,7 +1791,7 @@
       .join("");
 
     var researchNote =
-      '<details class="prophets-research-fold"><summary>Research / umstritten (bewusst öffnen)</summary>' +
+      '<details class="prophets-research-fold"><summary>Umstrittene Angaben (bewusst öffnen)</summary>' +
       '<p class="prophets-note">Schwache, isrāʾīliyyāt- oder ungeprüfte Berichte gehören nicht zur Hauptbiografie und erscheinen hier nicht als sichere Tatsachen.</p>' +
       ((profile.weakReports || []).length
         ? '<ul class="prophets-weak-list">' +
@@ -1754,7 +1808,7 @@
             })
             .join("") +
           "</ul>"
-        : "<p>Keine zusätzlichen Research-Einträge in diesem Profil.</p>") +
+        : "<p>Keine zusätzlichen ungeprüften Einträge in diesem Profil.</p>") +
       "</details>";
 
     return (
