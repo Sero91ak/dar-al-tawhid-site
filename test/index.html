@@ -9957,7 +9957,7 @@ window.DAR_ANALYTICS_CONFIG={
 <noscript><link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Elsie+Swash+Caps:wght@400;900&family=Inter:wght@400;600;700;800;900&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="/assets/app-card-layout.css?v=4">
 <link rel="stylesheet" href="/assets/app-theme-surfaces.css?v=587">
-<link rel="stylesheet" href="/assets/theme-eisgold.css?v=6">
+<link rel="stylesheet" href="/assets/theme-eisgold.css?v=7">
 
 
 <style id="feature-final-v202">
@@ -31621,6 +31621,111 @@ html[data-theme="eisgold"] body.is-feed-fullscreen .sf-refresh{
 }
 </style>
 
+<style id="eisgold-ink-gold-frame-v725">
+/* Eisgold: Feed ohne Blau, Tinte schwarz, Gold+Schwarz-Linie. Banner bleibt, nur Eisgold-Farben. */
+html[data-theme="eisgold"]{
+  --text:#111111!important;
+  --muted:#1a1a1a!important;
+  --theme-text:#111111!important;
+  --theme-muted:#1a1a1a!important;
+  --theme-feed-panel-text:#111111!important;
+  --outer-bg-flat:#fcfeff!important;
+  --dar-edge-fill:#fcfeff!important;
+  --dar-boot-fill:#fcfeff!important;
+  --outer-bg:
+    radial-gradient(ellipse 160% 78% at 50% -22%,rgba(255,255,255,.96) 0%,transparent 58%),
+    radial-gradient(ellipse 92% 62% at 6% -10%,rgba(200,169,90,.14) 0%,transparent 56%),
+    linear-gradient(180deg,#fcfeff 0%,#fafafa 100%)!important;
+}
+html[data-theme="eisgold"] .new-posts-banner,
+html[data-theme="eisgold"] .new-posts-banner.is-app-version,
+html[data-theme="eisgold"] .new-posts-banner.is-app-repair{
+  background:#fcfeff!important;
+  background-image:none!important;
+  color:#111111!important;
+  border:1px solid rgba(200,169,90,.58)!important;
+  border-bottom:1px solid rgba(200,169,90,.58)!important;
+  box-shadow:0 0 0 1px rgba(18,18,18,.30)!important;
+}
+html[data-theme="eisgold"] .new-posts-banner .new-posts-text,
+html[data-theme="eisgold"] .new-posts-banner .new-posts-icon,
+html[data-theme="eisgold"] .new-posts-banner.is-app-version .new-posts-text,
+html[data-theme="eisgold"] .new-posts-banner.is-app-version .new-posts-icon{
+  color:#111111!important;
+}
+html[data-theme="eisgold"] .new-posts-banner .new-posts-refresh,
+html[data-theme="eisgold"] .new-posts-banner.is-app-version .new-posts-refresh{
+  color:#111111!important;
+  background:#ffffff!important;
+  border:1px solid rgba(200,169,90,.55)!important;
+  box-shadow:0 0 0 1px rgba(18,18,18,.28)!important;
+}
+html[data-theme="eisgold"] body.is-feed-fullscreen,
+html[data-theme="eisgold"] .sf-app,
+html[data-theme="eisgold"] .sf-feed,
+html[data-theme="eisgold"] .sf-post__head,
+html[data-theme="eisgold"] .sf-post--image-feed .sf-post__bar,
+html[data-theme="eisgold"] .sf-post--image-feed .sf-post__head{
+  background:#fcfeff!important;
+  background-color:#fcfeff!important;
+  color:#111111!important;
+}
+html[data-theme="eisgold"] .sf-switch-btn{
+  background:#ffffff!important;
+  color:#111111!important;
+  -webkit-text-fill-color:#111111!important;
+}
+html[data-theme="eisgold"] .sf-user,
+html[data-theme="eisgold"] .sf-sub,
+html[data-theme="eisgold"] .sf-read-more,
+html[data-theme="eisgold"] .sf-brand-title,
+html[data-theme="eisgold"] .sf-brand-kicker,
+html[data-theme="eisgold"] .sf-act-label,
+html[data-theme="eisgold"] .sf-bar-stats,
+html[data-theme="eisgold"] .bottom-nav-btn,
+html[data-theme="eisgold"] .bottom-nav-btn span{
+  color:#111111!important;
+  -webkit-text-fill-color:#111111!important;
+  opacity:1!important;
+}
+html[data-theme="eisgold"] #bottomNav.bottom-nav,
+html[data-theme="eisgold"] .bottom-nav{
+  background:#ffffff!important;
+  background-color:#ffffff!important;
+  background-image:none!important;
+}
+html[data-theme="eisgold"] .sf-switch,
+html[data-theme="eisgold"] .sf-refresh,
+html[data-theme="eisgold"] .sf-act,
+html[data-theme="eisgold"] #bottomNav.bottom-nav,
+html[data-theme="eisgold"] .bottom-nav,
+html[data-theme="eisgold"] .more-group,
+html[data-theme="eisgold"] .feature-section,
+html[data-theme="eisgold"] .premium-surface,
+html[data-theme="eisgold"] .account-hub-card,
+html[data-theme="eisgold"] .folder-card,
+html[data-theme="eisgold"] .post-card,
+html[data-theme="eisgold"] .prayer-panel,
+html[data-theme="eisgold"] .qibla-panel,
+html[data-theme="eisgold"] .daily-box,
+html[data-theme="eisgold"] .recommended-box,
+html[data-theme="eisgold"] .theme-switch-btn,
+html[data-theme="eisgold"] .action-btn,
+html[data-theme="eisgold"] .premium-pill,
+html[data-theme="eisgold"] .qov-resume-card,
+html[data-theme="eisgold"] .quiz-home-panel,
+html[data-theme="eisgold"] .quiz-shell.quiz-shell-pro{
+  border:1px solid rgba(200,169,90,.55)!important;
+  box-shadow:0 0 0 1px rgba(18,18,18,.28)!important;
+}
+html[data-theme="eisgold"] .quiz-shell.quiz-shell-pro .quiz-session,
+html[data-theme="eisgold"] .quiz-shell.quiz-shell-pro .quiz-question-panel,
+html[data-theme="eisgold"] .quiz-shell.quiz-shell-pro .quiz-option{
+  border:0!important;
+  box-shadow:none!important;
+}
+</style>
+
 <script>
 (function(){
   /* v661 · Keine Inline-Hintergrundfarben mehr — die klebten (z.B. Royal-Blau) über Theme-Wechsel. */
@@ -31731,6 +31836,7 @@ html[data-theme="eisgold"] body.is-feed-fullscreen .sf-refresh{
     var quizPlay=document.getElementById("quiz-session-fullpage-v722");
     var noNavy=document.getElementById("eisgold-quran-no-navy-v723");
     var noBlue=document.getElementById("eisgold-feed-top-no-blue-v724");
+    var noble=document.getElementById("eisgold-ink-gold-frame-v725");
     var host=document.documentElement||(s&&s.parentNode);
     if(s&&host) host.appendChild(s);
     if(ice&&host) host.appendChild(ice);
@@ -31750,6 +31856,7 @@ html[data-theme="eisgold"] body.is-feed-fullscreen .sf-refresh{
     if(quizPlay&&host) host.appendChild(quizPlay);
     if(noNavy&&host) host.appendChild(noNavy);
     if(noBlue&&host) host.appendChild(noBlue);
+    if(noble&&host) host.appendChild(noble);
     try{
       var root=document.documentElement;
       if(!root)return;
@@ -31787,22 +31894,26 @@ html[data-theme="eisgold"] body.is-feed-fullscreen .sf-refresh{
       var root=document.documentElement;
       if(!root||root.getAttribute("data-theme")!=="eisgold")return;
       var ice="#fcfeff";
-      var ink="#142033";
+      var ink="#111111";
       root.style.setProperty("background","var(--outer-bg)","important");
       root.style.setProperty("background-color",ice,"important");
       if(document.body){
         document.body.style.setProperty("background","var(--outer-bg)","important");
         document.body.style.setProperty("background-color",ice,"important");
       }
-      root.style.setProperty("--theme-feed-top","transparent","important");
-      root.style.setProperty("--theme-feed-bg","transparent","important");
+      root.style.setProperty("--theme-feed-top",ice,"important");
+      root.style.setProperty("--theme-feed-bg",ice,"important");
+      root.style.setProperty("--text",ink,"important");
+      root.style.setProperty("--muted","#1a1a1a","important");
+      root.style.setProperty("--theme-text",ink,"important");
+      root.style.setProperty("--theme-muted","#1a1a1a","important");
       [document.getElementById("appRoot"),document.getElementById("appShell"),document.getElementById("appView")].forEach(function(el){
         if(!el||!el.style)return;
         el.style.setProperty("background","transparent","important");
         el.style.setProperty("background-color","transparent","important");
         el.style.setProperty("background-image","none","important");
       });
-      document.querySelectorAll("h1.brand-title-refined,.sf-brand-title,.sf-brand h1,.sf-read-more").forEach(function(el){
+      document.querySelectorAll("h1.brand-title-refined,.sf-brand-title,.sf-brand h1,.sf-read-more,.sf-user,.sf-sub,.sf-switch-btn,.bottom-nav-btn,.bottom-nav-btn span").forEach(function(el){
         el.style.setProperty("color",ink,"important");
         el.style.setProperty("-webkit-text-fill-color",ink,"important");
         el.style.setProperty("background-image","none","important");

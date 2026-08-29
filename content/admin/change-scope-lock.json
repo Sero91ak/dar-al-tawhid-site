@@ -87,6 +87,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-ink-gold-frame-v725-2026-08-29",
+      "approvedBy": "user-explicit-eisgold-feed-ink-frame",
+      "reason": "Nutzer: Feed-Blau weg, Schrift schwarz lesbar, edle gold-schwarze Linie durch Eisgold.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/theme-eisgold.css",
+        "assets/premium-feed-app.js",
+        "test/assets/premium-feed-app.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-feed-top-no-blue-v724-2026-08-29",
       "approvedBy": "user-explicit-remove-blue-feed-header",
       "reason": "Nutzer: Oben das Blaue komplett entfernen (Feed-Tab, Refresh, Header).",
