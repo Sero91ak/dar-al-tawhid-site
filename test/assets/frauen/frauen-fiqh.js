@@ -143,11 +143,21 @@
     return s.slice(0, 108).replace(/\s+\S*$/, "") + "…";
   }
 
+  function hatDirektnachweis(e) {
+    return /^https?:\/\//i.test(String(e && e.direktnachweisUrl ? e.direktnachweisUrl : "").trim());
+  }
+
+  function hatGenaueQuelle(e) {
+    var q = String(e && e.quellenanzeige ? e.quellenanzeige : "").trim();
+    if (!q || /^In Prüfung\.?$/i.test(q)) return false;
+    return /Quelle:/i.test(q) || /Qur[ʾ']?ān|Ṣaḥīḥ|Sunan|Sūrah|Bukhārī|Muslim/i.test(q);
+  }
+
   function istSichtbar(e) {
     if (!e) return false;
     if (e.quellenstatus !== "geprueft") return false;
-    if (!String(e.quellenanzeige || "").trim() || /^In Prüfung/i.test(String(e.quellenanzeige))) return false;
-    if (!String(e.direktnachweisUrl || "").trim()) return false;
+    if (!hatGenaueQuelle(e)) return false;
+    if (!hatDirektnachweis(e)) return false;
     if (!String(aussageVon(e) || "").trim()) return false;
     if (e.quellenart === "historischer-bericht") return e.freigabeDurchSerhat === true;
     if (!ERLAUBTE_QUELLENART[e.quellenart]) return false;
@@ -386,18 +396,17 @@
       abschnitt === "sahabiyyat" ? SAHAB_THEMEN : abschnitt === "tabiiyyat" ? TABII_THEMEN : FIQH_THEMEN;
     var q = currentQ(abschnitt);
     var thema = currentThema(abschnitt);
-    var items = sichtbare(data.eintraege).filter(function (e) {
+    var geprueft = sichtbare(data.eintraege);
+    var items = geprueft.filter(function (e) {
       return matches(e, abschnitt);
     });
-    var emptyMsg =
-      abschnitt === "tabiiyyat"
-        ? "Noch keine geprüften Inhalte vorhanden. Dieser Bereich wird mit belastbaren Quellen Schritt für Schritt erweitert."
-        : abschnitt === "sahabiyyat"
-          ? "Noch keine geprüften Inhalte vorhanden."
-          : "Keine sichtbare Aussage zu dieser Auswahl.";
+    var leerBereich = !geprueft.length;
+    var emptyHtml = leerBereich
+      ? '<div class="frauen-empty"><p>Noch keine geprüften Inhalte vorhanden.</p><p>Dieser Bereich wird mit belastbaren Quellen Schritt für Schritt erweitert.</p></div>'
+      : '<p class="frauen-empty">Keine sichtbare Aussage zu dieser Auswahl.</p>';
     var hint =
-      abschnitt === "tabiiyyat"
-        ? '<div class="frauen-hint"><p>Dieser Bereich enthält nur geprüfte Berichte. Historische Berichte aus Biografie- und Geschichtswerken bleiben verborgen, bis sie einzeln geprüft und freigegeben sind.</p></div>'
+      leerBereich
+        ? ""
         : abschnitt === "sahabiyyat"
           ? '<div class="frauen-hint"><p>Dieser Bereich enthält nur Berichte mit geprüfter Quelle. Schwache, ausgeschmückte oder nicht belegte Geschichten werden nicht angezeigt.</p></div>'
           : "";
@@ -418,7 +427,7 @@
             return listCard(e, abschnitt);
           }).join("") +
           "</div>"
-        : '<p class="frauen-empty">' + emptyMsg + "</p>") +
+        : emptyHtml) +
       "</section>"
     );
   }
@@ -451,21 +460,16 @@
     return String(e.quellenanzeige || "").replace(/^Quelle:\s*/i, "").trim() || "Keine Quelle hinterlegt.";
   }
 
-  function nachweiseBlock(e) {
+  function nachweiseDirekt(e) {
     var url = String(e.direktnachweisUrl || "").trim();
-    if (!url) return "";
-    var label = String(e.direktnachweisText || "Quelle öffnen").replace(/^→\s*/, "").trim() || "Quelle öffnen";
+    var label = e.direktnachweisText || "→ Quelle öffnen";
     return (
-      '<div class="post-after-links-wrap is-quiet" data-quiet-links="1">' +
-      '<button type="button" class="post-after-links-toggle" data-post-after-links-toggle aria-expanded="false" aria-label="Quellen und Belege öffnen">' +
-      '<span class="post-after-links-toggle-row"><span class="post-after-links-toggle-label">Nachweise</span>' +
-      '<span class="post-after-links-toggle-icon" aria-hidden="true"></span></span></button>' +
-      '<div class="post-after-links-body" hidden><div class="post-after-links" data-post-after-links>' +
-      '<a class="post-beleg-link" href="' +
+      '<p class="frauen-oval__kicker">Direktnachweis</p>' +
+      '<a class="frauen-direktnachweis" href="' +
       esc(url) +
       '" target="_blank" rel="noopener noreferrer">' +
       esc(label) +
-      "</a></div></div></div>"
+      "</a>"
     );
   }
 
@@ -479,9 +483,9 @@
     }
     var lehre = lehreVon(e);
     var sep = '<div class="post-reader-sep" aria-hidden="true"><i>◆</i></div>';
-    var fazit = lehre
+    var lehreHtml = lehre
       ? sep +
-        '<section class="post-key-message" data-post-fazit><h3>Fazit</h3><div class="post-fazit-body">' +
+        '<section class="post-key-message" data-post-fazit><h3>Lehre / Nutzen</h3><div class="post-fazit-body">' +
         esc(lehre) +
         "</div></section>"
       : "";
@@ -498,14 +502,14 @@
       '<div class="post-aussage-text">' +
       esc(aussageVon(e)) +
       "</div></section>" +
+      lehreHtml +
       sep +
       '<div class="post-source-oval post-source-module"><div class="post-reader-cite"><b>Quelle</b>' +
       '<div data-post-after-source>' +
       esc(quelleText(e)) +
       "</div></div>" +
-      nachweiseBlock(e) +
+      nachweiseDirekt(e) +
       "</div>" +
-      fazit +
       "</section>" +
       '<button type="button" class="frauen-open-btn" data-nav="frauen" data-value="' +
       esc(abschnitt) +

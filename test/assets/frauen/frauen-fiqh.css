@@ -227,6 +227,10 @@
   text-decoration:none;
   width:fit-content;
 }
+.post-source-module .frauen-direktnachweis{
+  display:block;
+  margin-top:8px;
+}
 .frauen-direktnachweis:hover,
 .frauen-direktnachweis:focus-visible{
   border-bottom-color:color-mix(in srgb,var(--gold2) 55%,transparent);
