@@ -63,9 +63,13 @@ final class DarNativeTabBar: UIView {
         color.getWhite(&white, alpha: nil)
         let light = white > 0.62
         if light {
-            backgroundColor = UIColor(red: 0.97, green: 0.98, blue: 1.0, alpha: 0.94)
-            layer.borderColor = UIColor(red: 0.78, green: 0.66, blue: 0.35, alpha: 0.28).cgColor
+            backgroundColor = color.withAlphaComponent(1)
+            layer.borderWidth = 0
+            layer.borderColor = UIColor.clear.cgColor
+            layer.cornerRadius = 0
         } else {
+            layer.borderWidth = 1
+            layer.cornerRadius = 22
             backgroundColor = UIColor(red: 0.06, green: 0.07, blue: 0.05, alpha: 0.96)
             layer.borderColor = UIColor(red: 0.83, green: 0.71, blue: 0.43, alpha: 0.28).cgColor
         }

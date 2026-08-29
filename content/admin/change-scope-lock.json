@@ -87,6 +87,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-one-sheet-v718-2026-08-29",
+      "approvedBy": "user-explicit-eisgold-getrennt-fix",
+      "reason": "Nutzer: sieht wieder getrennt/Katastrophe. Eine Farbe bis oben, keine Karteninseln, Nav gleiche Eisfarbe.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/theme-eisgold.css",
+        "assets/dar-bottom-nav-glass.css",
+        "ios/DarAlTawhid/DarAlTawhid/DarNativeTabBar.swift"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-unified-field-v717-2026-08-29",
       "approvedBy": "user-explicit-eisgold-getrennt-fix",
       "reason": "Nutzer: Feed/Mehr sieht getrennt/Katastrophe aus. Eine einheitliche Eisfäche bis oben, keine weißen Inseln.",

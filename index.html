@@ -30917,6 +30917,87 @@ html[data-theme="eisgold"] .quiz-hero{
 }
 </style>
 
+<style id="eisgold-one-sheet-v718">
+/* Eisgold: eine durchgehende Eisfäche — keine Karteninseln, keine weiße Kopf-/Nav-Platte. */
+html[data-theme="eisgold"]{
+  --card:#d8eefb!important;
+  --panel:#d8eefb!important;
+  --theme-surface:#d8eefb!important;
+  --theme-feed-top:#d8eefb!important;
+  --theme-feed-panel:#d8eefb!important;
+  --depth-surface-area:#d8eefb!important;
+  --depth-surface-page:#d8eefb!important;
+  --depth-surface-card:#d8eefb!important;
+  --depth-surface-raised:#d8eefb!important;
+  --app-shadow-card:none!important;
+  --app-shadow-inset-top:none!important;
+  --premium-shadow:none!important;
+}
+html[data-theme="eisgold"] .feature-section,
+html[data-theme="eisgold"] .more-group,
+html[data-theme="eisgold"] .more-search,
+html[data-theme="eisgold"] .account-card,
+html[data-theme="eisgold"] .account-hub-card,
+html[data-theme="eisgold"] .account-home-hint,
+html[data-theme="eisgold"] .premium-surface,
+html[data-theme="eisgold"] body.is-more-route .feature-section,
+html[data-theme="eisgold"] body.is-more-route .more-group,
+html[data-theme="eisgold"] body.is-more-route .more-search,
+html[data-theme="eisgold"] body.is-more-route .account-hub-card,
+html[data-theme="eisgold"] body.is-more-route .account-home-hint,
+html[data-theme="eisgold"] body.is-more-route .premium-surface{
+  background:#d8eefb!important;
+  background-color:#d8eefb!important;
+  background-image:none!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] body.is-more-route .more-feature-row,
+html[data-theme="eisgold"] .more-feature-row{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  border-bottom:1px solid rgba(184,150,58,.22)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  color:#0a1628!important;
+}
+html[data-theme="eisgold"] .sf-switch,
+html[data-theme="eisgold"] body.is-feed-fullscreen .sf-switch{
+  background:#d8eefb!important;
+  background-color:#d8eefb!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] .sf-switch-btn.is-active{
+  background:rgba(184,150,58,.16)!important;
+  color:#0a1628!important;
+}
+html[data-theme="eisgold"] .sf-top,
+html[data-theme="eisgold"] body.is-feed-fullscreen .sf-top,
+html[data-theme="eisgold"] body.is-more-route .view-head{
+  background:#d8eefb!important;
+  background-color:#d8eefb!important;
+  background-image:none!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] #bottomNav.bottom-nav,
+html[data-theme="eisgold"] .bottom-nav,
+html[data-theme="eisgold"] body.is-feed-fullscreen #bottomNav.bottom-nav,
+html[data-theme="eisgold"] body.is-more-route #bottomNav.bottom-nav{
+  background:#d8eefb!important;
+  background-color:#d8eefb!important;
+  background-image:none!important;
+  border:0!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+</style>
+
 <script>
 (function(){
   /* v661 · Keine Inline-Hintergrundfarben mehr — die klebten (z.B. Royal-Blau) über Theme-Wechsel. */
@@ -31019,6 +31100,7 @@ html[data-theme="eisgold"] .quiz-hero{
     var ink2=document.getElementById("eisgold-ink-surfaces-v715");
     var over=document.getElementById("eisgold-oversize-routes-v716");
     var uni=document.getElementById("eisgold-unified-field-v717");
+    var sheet=document.getElementById("eisgold-one-sheet-v718");
     var host=document.documentElement||(s&&s.parentNode);
     if(s&&host) host.appendChild(s);
     if(ice&&host) host.appendChild(ice);
@@ -31030,6 +31112,7 @@ html[data-theme="eisgold"] .quiz-hero{
     if(ink2&&host) host.appendChild(ink2);
     if(over&&host) host.appendChild(over);
     if(uni&&host) host.appendChild(uni);
+    if(sheet&&host) host.appendChild(sheet);
     try{
       var root=document.documentElement;
       if(!root)return;
