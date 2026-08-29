@@ -28,6 +28,8 @@
   var ADAB_SLUG = "adab-charakter";
   var KINDER_URL = "/test/data/frauen-kinder-erziehung.json";
   var KINDER_SLUG = "kinder-erziehung";
+  var MUSLIMAH_URL = "/test/data/frauen-rechtschaffene-muslimah.json";
+  var MUSLIMAH_SLUG = "rechtschaffene-muslimah";
   var ERLAUBTE_QUELLENART = {
     quran: 1,
     sahih: 1,
@@ -363,6 +365,27 @@
     familie: "Familie",
     "in-pruefung": "In Prüfung"
   };
+  var MUSLIMAH_THEMEN = [
+    { id: "alle", label: "Alle" },
+    { id: "din", label: "Dīn" },
+    { id: "rechtschaffenheit", label: "Rechtschaffenheit" },
+    { id: "ehe", label: "Ehe" },
+    { id: "verantwortung", label: "Verantwortung" },
+    { id: "gehorsam-im-guten", label: "Gehorsam im Guten" },
+    { id: "charakter", label: "Charakter" },
+    { id: "schamhaftigkeit", label: "Schamhaftigkeit" },
+    { id: "in-pruefung", label: "In Prüfung" }
+  ];
+  var MUSLIMAH_BEREICH_LABEL = {
+    din: "Dīn",
+    rechtschaffenheit: "Rechtschaffenheit",
+    ehe: "Ehe",
+    verantwortung: "Verantwortung",
+    "gehorsam-im-guten": "Gehorsam im Guten",
+    charakter: "Charakter",
+    schamhaftigkeit: "Schamhaftigkeit",
+    "in-pruefung": "In Prüfung"
+  };
   var fiqhCache = null;
   var sahabCache = null;
   var tabiiCache = null;
@@ -378,6 +401,7 @@
   var sadaqahCache = null;
   var adabCache = null;
   var kinderCache = null;
+  var muslimahCache = null;
   var loadPromise = null;
   var fiqhQ = "";
   var sahabQ = "";
@@ -394,6 +418,7 @@
   var sadaqahQ = "";
   var adabQ = "";
   var kinderQ = "";
+  var muslimahQ = "";
   var fiqhThema = "alle";
   var sahabThema = "alle";
   var tabiiThema = "alle";
@@ -409,6 +434,7 @@
   var sadaqahThema = "alle";
   var adabThema = "alle";
   var kinderThema = "alle";
+  var muslimahThema = "alle";
   var hubQ = "";
   var hubThema = "alle";
   var filterOpen = true;
@@ -428,7 +454,8 @@
       abschnitt === HAJJ_SLUG ||
       abschnitt === SADAQAH_SLUG ||
       abschnitt === ADAB_SLUG ||
-      abschnitt === KINDER_SLUG
+      abschnitt === KINDER_SLUG ||
+      abschnitt === MUSLIMAH_SLUG
     );
   }
 
@@ -517,7 +544,7 @@
   }
 
   function load() {
-    if (fiqhCache && sahabCache && tabiiCache && muetterCache && eheCache && hijabCache && wissenCache && faqCache && kurzCache && salafCache && moscheeCache && hajjCache && sadaqahCache && adabCache && kinderCache)
+    if (fiqhCache && sahabCache && tabiiCache && muetterCache && eheCache && hijabCache && wissenCache && faqCache && kurzCache && salafCache && moscheeCache && hajjCache && sadaqahCache && adabCache && kinderCache && muslimahCache)
       return Promise.resolve();
     if (loadPromise) return loadPromise;
     loadPromise = Promise.all([
@@ -535,7 +562,8 @@
       fetchJson(HAJJ_URL),
       fetchJson(SADAQAH_URL),
       fetchJson(ADAB_URL),
-      fetchJson(KINDER_URL)
+      fetchJson(KINDER_URL),
+      fetchJson(MUSLIMAH_URL)
     ])
       .then(function (pair) {
         fiqhCache = pair[0];
@@ -553,6 +581,7 @@
         sadaqahCache = pair[12];
         adabCache = pair[13];
         kinderCache = pair[14];
+        muslimahCache = pair[15];
       })
       .catch(function (err) {
         loadPromise = null;
@@ -622,6 +651,10 @@
     if (v.indexOf(KINDER_SLUG + "/") === 0) {
       return { page: "detail", abschnitt: KINDER_SLUG, kennung: v.slice(KINDER_SLUG.length + 1) };
     }
+    if (v === MUSLIMAH_SLUG) return { page: "list", abschnitt: MUSLIMAH_SLUG, kennung: "" };
+    if (v.indexOf(MUSLIMAH_SLUG + "/") === 0) {
+      return { page: "detail", abschnitt: MUSLIMAH_SLUG, kennung: v.slice(MUSLIMAH_SLUG.length + 1) };
+    }
     return { page: "hub", abschnitt: "", kennung: "" };
   }
 
@@ -640,6 +673,7 @@
     if (abschnitt === SADAQAH_SLUG) return sadaqahCache;
     if (abschnitt === ADAB_SLUG) return adabCache;
     if (abschnitt === KINDER_SLUG) return kinderCache;
+    if (abschnitt === MUSLIMAH_SLUG) return muslimahCache;
     return fiqhCache;
   }
 
@@ -659,6 +693,7 @@
     if (abschnitt === SADAQAH_SLUG) return sadaqahThema;
     if (abschnitt === ADAB_SLUG) return adabThema;
     if (abschnitt === KINDER_SLUG) return kinderThema;
+    if (abschnitt === MUSLIMAH_SLUG) return muslimahThema;
     return fiqhThema;
   }
 
@@ -678,6 +713,7 @@
     else if (abschnitt === SADAQAH_SLUG) sadaqahThema = id;
     else if (abschnitt === ADAB_SLUG) adabThema = id;
     else if (abschnitt === KINDER_SLUG) kinderThema = id;
+    else if (abschnitt === MUSLIMAH_SLUG) muslimahThema = id;
     else fiqhThema = id;
   }
 
@@ -697,6 +733,7 @@
     if (abschnitt === SADAQAH_SLUG) return sadaqahQ;
     if (abschnitt === ADAB_SLUG) return adabQ;
     if (abschnitt === KINDER_SLUG) return kinderQ;
+    if (abschnitt === MUSLIMAH_SLUG) return muslimahQ;
     return fiqhQ;
   }
 
@@ -716,6 +753,7 @@
     else if (abschnitt === SADAQAH_SLUG) sadaqahQ = v;
     else if (abschnitt === ADAB_SLUG) adabQ = v;
     else if (abschnitt === KINDER_SLUG) kinderQ = v;
+    else if (abschnitt === MUSLIMAH_SLUG) muslimahQ = v;
     else fiqhQ = v;
   }
 
@@ -742,7 +780,8 @@
         abschnitt === HAJJ_SLUG ||
         abschnitt === SADAQAH_SLUG ||
         abschnitt === ADAB_SLUG ||
-        abschnitt === KINDER_SLUG
+        abschnitt === KINDER_SLUG ||
+        abschnitt === MUSLIMAH_SLUG
       ) {
         if (chip !== thema && e.thema !== thema) return false;
       } else if (chip !== thema) return false;
@@ -771,7 +810,7 @@
   }
 
   function offeneAbschnitte() {
-    return ["fiqh", "sahabiyyat", "tabiiyyat", MUETTER_SLUG, EHE_SLUG, HIJAB_SLUG, WISSEN_SLUG, FAQ_SLUG, KURZ_SLUG, SALAF_SLUG, MOSCHEE_SLUG, HAJJ_SLUG, SADAQAH_SLUG, ADAB_SLUG, KINDER_SLUG];
+    return ["fiqh", "sahabiyyat", "tabiiyyat", MUETTER_SLUG, EHE_SLUG, HIJAB_SLUG, WISSEN_SLUG, FAQ_SLUG, KURZ_SLUG, SALAF_SLUG, MOSCHEE_SLUG, HAJJ_SLUG, SADAQAH_SLUG, ADAB_SLUG, KINDER_SLUG, MUSLIMAH_SLUG];
   }
 
   function countSichtbare(abschnitt) {
@@ -816,6 +855,7 @@
     if (abschnitt === SADAQAH_SLUG) return "lamp";
     if (abschnitt === ADAB_SLUG) return "book";
     if (abschnitt === KINDER_SLUG) return "home";
+    if (abschnitt === MUSLIMAH_SLUG) return "book";
     return "book";
   }
 
@@ -904,7 +944,8 @@
       { nr: "12", title: "Ḥajj & ʿUmrah", id: HAJJ_SLUG, mark: "ring", lede: "Geprüfte Grundlagen zu Iḥrām, Ḥayḍ, Ṭawāf und Pilgerreise." },
       { nr: "13", title: "Ṣadaqah & Wohltätigkeit", id: SADAQAH_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zu Spenden, Fürsorge, Familie und Wohltätigkeit." },
       { nr: "14", title: "Adab & Charakter", id: ADAB_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu Benehmen, Sprache, Sanftmut, Geduld und gutem Umgang." },
-      { nr: "15", title: "Kinder & Erziehung", id: KINDER_SLUG, mark: "home", lede: "Geprüfte Grundlagen zu Verantwortung, Barmherzigkeit, Gerechtigkeit und Fürsorge." }
+      { nr: "15", title: "Kinder & Erziehung", id: KINDER_SLUG, mark: "home", lede: "Geprüfte Grundlagen zu Verantwortung, Barmherzigkeit, Gerechtigkeit und Fürsorge." },
+      { nr: "16", title: "Rechtschaffene Muslimah", id: MUSLIMAH_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu Dīn, Charakter, Verantwortung und Grenzen des Gehorsams." }
     ];
   }
 
@@ -1053,6 +1094,8 @@
                                 ? ADAB_BEREICH_LABEL
                                 : abschnitt === KINDER_SLUG
                                   ? KINDER_BEREICH_LABEL
+                                  : abschnitt === MUSLIMAH_SLUG
+                                    ? MUSLIMAH_BEREICH_LABEL
                   : FIQH_BEREICH_LABEL;
     var bereich = labelMap[e.bereich] || e.bereich || "";
     var person = e.person || e.name;
@@ -1121,6 +1164,8 @@
                                 ? ADAB_THEMEN
                                 : abschnitt === KINDER_SLUG
                                   ? KINDER_THEMEN
+                                  : abschnitt === MUSLIMAH_SLUG
+                                    ? MUSLIMAH_THEMEN
                   : FIQH_THEMEN;
     var q = currentQ(abschnitt);
     var thema = currentThema(abschnitt);
@@ -1142,7 +1187,8 @@
           abschnitt === HAJJ_SLUG ||
           abschnitt === SADAQAH_SLUG ||
           abschnitt === ADAB_SLUG ||
-          abschnitt === KINDER_SLUG
+          abschnitt === KINDER_SLUG ||
+          abschnitt === MUSLIMAH_SLUG
         ? '<p class="frauen-empty">Noch keine geprüften Inhalte vorhanden.</p>'
         : '<p class="frauen-empty">Keine sichtbare Aussage zu dieser Auswahl.</p>';
     var hint =
@@ -1160,6 +1206,8 @@
           ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Moderne Motivationssprüche, persönliche Meinungen und ungeprüfte Zitate werden nicht angezeigt.</p></div>'
           : abschnitt === KINDER_SLUG
           ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Moderne Erziehungsmodelle, psychologische Ratschläge und ungeprüfte Aussagen werden nicht angezeigt.</p></div>'
+          : abschnitt === MUSLIMAH_SLUG
+          ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Moderne Frauenbilder, ungeprüfte Ratschläge und schwache Berichte werden nicht angezeigt.</p></div>'
           : abschnitt === KURZ_SLUG
           ? '<div class="frauen-hint"><p>Dieser Bereich enthält keine ausgeschmückten Geschichten. Sichtbar sind nur Kurzberichte mit geprüfter Quelle und Direktnachweis. Alles Unsichere bleibt verborgen.</p></div>'
           : abschnitt === FAQ_SLUG
@@ -1188,6 +1236,8 @@
         ? '<p class="lede">Geprüfte Grundlagen aus authentischer Sunnah über gutes Benehmen, Sprache, Sanftmut und Selbstbeherrschung.</p>'
         : abschnitt === KINDER_SLUG
         ? '<p class="lede">Geprüfte Grundlagen aus authentischer Sunnah über Verantwortung, Fürsorge und gerechten Umgang mit Kindern.</p>'
+        : abschnitt === MUSLIMAH_SLUG
+        ? '<p class="lede">Geprüfte Grundlagen aus Qurʾān und authentischer Sunnah über Dīn, Verantwortung, Charakter und rechtschaffenen Umgang.</p>'
         : abschnitt === KURZ_SLUG
         ? '<p class="lede">Kurze belegte Ereignisse aus dem Leben rechtschaffener Frauen – mit Quelle und Direktnachweis.</p>'
         : abschnitt === FAQ_SLUG
@@ -1227,6 +1277,7 @@
     if (abschnitt === SADAQAH_SLUG) return "Ṣadaqah & Wohltätigkeit";
     if (abschnitt === ADAB_SLUG) return "Adab & Charakter";
     if (abschnitt === KINDER_SLUG) return "Kinder & Erziehung";
+    if (abschnitt === MUSLIMAH_SLUG) return "Rechtschaffene Muslimah";
     if (abschnitt === KURZ_SLUG) return "Geprüfte Kurzberichte";
     if (abschnitt === FAQ_SLUG) return "Fragen & Antworten";
     if (abschnitt === WISSEN_SLUG) return "Wissen & Lernen";
@@ -1374,6 +1425,12 @@
         subtitle: "Geprüfte Grundlagen aus authentischer Sunnah über Verantwortung, Fürsorge und gerechten Umgang mit Kindern."
       };
     }
+    if (parsed.abschnitt === MUSLIMAH_SLUG && parsed.page === "list") {
+      return {
+        title: "Rechtschaffene Muslimah",
+        subtitle: "Geprüfte Grundlagen aus Qurʾān und authentischer Sunnah über Dīn, Verantwortung, Charakter und rechtschaffenen Umgang."
+      };
+    }
     if (parsed.abschnitt === KURZ_SLUG && parsed.page === "list") {
       return {
         title: "Geprüfte Kurzberichte",
@@ -1443,6 +1500,8 @@
             ? "Adab & Charakter"
             : parsed.abschnitt === KINDER_SLUG
             ? "Kinder & Erziehung"
+            : parsed.abschnitt === MUSLIMAH_SLUG
+            ? "Rechtschaffene Muslimah"
             : parsed.abschnitt === KURZ_SLUG
             ? "Geprüfte Kurzberichte"
             : parsed.abschnitt === FAQ_SLUG
@@ -1491,7 +1550,8 @@
       !hajjCache ||
       !sadaqahCache ||
       !adabCache ||
-      !kinderCache
+      !kinderCache ||
+      !muslimahCache
     ) {
       load().then(refreshIfFrauen).catch(refreshIfFrauen);
       return '<p class="frauen-empty">Bereich wird geladen…</p>';
