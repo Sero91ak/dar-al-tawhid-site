@@ -40,52 +40,15 @@
 }
 
 .frauen-filter{
-  margin:4px 0 10px;
+  margin:4px 0 14px;
 }
-.frauen-filter__toggle{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  width:100%;
-  min-height:46px;
-  padding:10px 16px 10px 18px;
-  border-radius:999px;
-  border:1px solid var(--cat-line-soft);
-  background:color-mix(in srgb,var(--gold2) 3.5%,transparent);
-  color:var(--cat-ink);
-  font:inherit;
-  font-size:13.5px;
-  font-weight:650;
-  letter-spacing:.01em;
-  cursor:pointer;
-  box-shadow:none;
-}
-.frauen-filter__toggle::after{
-  content:"";
-  width:7px;
-  height:7px;
-  border-right:1.5px solid color-mix(in srgb,var(--gold2) 55%,var(--muted));
-  border-bottom:1.5px solid color-mix(in srgb,var(--gold2) 55%,var(--muted));
-  transform:rotate(45deg);
-  margin-top:-4px;
-  flex:0 0 auto;
-  opacity:.7;
-}
-.frauen-filter.is-open .frauen-filter__toggle::after{
-  transform:rotate(-135deg);
-  margin-top:3px;
-}
-.frauen-filter__panel{
-  display:none;
-  margin-top:8px;
-  padding:12px 12px 10px;
-  border-radius:18px;
-  border:1px solid var(--cat-line-soft);
-  background:color-mix(in srgb,var(--gold2) 2.5%,transparent);
-}
-.frauen-filter.is-open .frauen-filter__panel{
-  display:block;
+.frauen-filter__label{
+  margin:0 2px 8px;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--cat-muted,var(--muted));
 }
 .frauen-filter__search{
   width:100%;
@@ -124,14 +87,13 @@
   line-height:1.55;
   color:var(--muted);
 }
-.frauen-filter__chips{
+.frauen-filter__search-wrap{display:block;margin:10px 0 0}
+.frauen-filter__chips,
+.frauen-filter__chips--always{
   display:flex;
   flex-wrap:wrap;
-  gap:6px;
-  margin-top:10px;
-}
-.frauen-filter__chips--top{
-  margin:2px 0 10px;
+  gap:8px;
+  margin:0;
 }
 .frauen-statement-card__name{
   margin:0;
@@ -144,20 +106,21 @@
 }
 .frauen-chip{
   appearance:none;
-  border:1px solid var(--cat-line-soft);
+  border:1px solid color-mix(in srgb,var(--gold2,var(--gold,#d8c18b)) 42%,transparent);
   background:transparent;
-  color:var(--muted);
+  color:var(--cat-ink,var(--cream,var(--text)));
   border-radius:999px;
-  padding:7px 12px;
-  font-size:11.5px;
+  min-height:36px;
+  padding:7px 13px;
+  font-size:12.5px;
   font-weight:700;
-  letter-spacing:.04em;
+  letter-spacing:.03em;
   cursor:pointer;
 }
 .frauen-chip.is-on{
-  border-color:var(--cat-line-strong);
-  color:var(--cat-ink);
-  background:color-mix(in srgb,var(--gold2) 8%,transparent);
+  border-color:color-mix(in srgb,var(--gold2,var(--gold,#d8c18b)) 72%,transparent);
+  color:var(--cat-ink,var(--cream,var(--text)));
+  background:color-mix(in srgb,var(--gold2) 14%,transparent);
 }
 
 .frauen-statement-list{
@@ -357,4 +320,43 @@
 
 @media (max-width:420px){
   .frauen-hub-grid{ grid-template-columns:1fr; }
+}
+
+/* Immer sichtbare Duʿāʾ-Ovale — feine Goldlinie, auch ohne Hover */
+body.is-frauen-route .frauen-fiqh-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+body.is-frauen-route .frauen-fiqh-list .dua-theme-card,
+body.is-frauen-route .frauen-statement-card{
+  border:0!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--gold2,var(--gold,#d8c18b)) 5%,transparent)!important;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2,var(--gold,#d8c18b)) 40%,transparent)!important;
+}
+body.is-frauen-route .frauen-fiqh-list .dua-theme-card.is-pending{
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2,var(--gold,#d8c18b)) 26%,transparent)!important;
+  opacity:1;
+}
+body.is-frauen-route .frauen-fiqh-list .dua-theme-card.is-pending h3,
+body.is-frauen-route .frauen-fiqh-list .dua-theme-card.is-pending .dua-theme-card__count{
+  color:var(--cat-muted,var(--muted));
+}
+body.is-frauen-route .frauen-statement-card{
+  border-radius:28px!important;
+}
+body.is-frauen-route .frauen-statement-card:hover,
+body.is-frauen-route .frauen-statement-card:focus-visible,
+body.is-frauen-route .frauen-fiqh-list .dua-theme-card:hover,
+body.is-frauen-route .frauen-fiqh-list .dua-theme-card:focus-visible{
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2,var(--gold,#d8c18b)) 62%,transparent)!important;
+}
+html[data-theme="eisgold"] body.is-frauen-route .frauen-fiqh-list .dua-theme-card,
+html[data-theme="eisgold"] body.is-frauen-route .frauen-statement-card,
+html[data-theme="light"] body.is-frauen-route .frauen-fiqh-list .dua-theme-card,
+html[data-theme="light"] body.is-frauen-route .frauen-statement-card{
+  background:#fff!important;
+  box-shadow:inset 0 0 0 1px #cfc4a4!important;
+  color:#111;
 }

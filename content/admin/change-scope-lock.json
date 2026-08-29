@@ -87,6 +87,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-frauen-ovale-filter-v740-2026-08-29",
+      "approvedBy": "user-explicit-test-frauen-ovale-filter",
+      "reason": "Nutzer: Frauen-Bereich — fehlende Oval-Linien wie Duʿāʾ und sichtbare Themen-Filterchips. Nur Test-App.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/frauen/",
+        "test/data/frauen-fiqh.json",
+        "test/data/frauen-sahabiyyat.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "darule-text-restore-v737-2026-08-29",
       "approvedBy": "user-explicit-revert-theme-bleed",
       "reason": "Nutzer: Erscheinungsbilder ohne Auftrag verändert; Darule-Schriften unlesbar. Sofort Fix zurück: Eisgold-Tinte nicht in andere Themes kleben. Kein Theme-Umbau.",

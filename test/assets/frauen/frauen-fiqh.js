@@ -72,7 +72,6 @@
   var sahabQ = "";
   var fiqhThema = "alle";
   var sahabThema = "alle";
-  var filterOpen = false;
   var currentAbschnitt = "hub";
 
   function esc(s) {
@@ -234,21 +233,21 @@
         );
       })
       .join("");
-    var chipsAlways = abschnitt === "sahabiyyat";
     return (
-      (chipsAlways ? '<div class="frauen-filter__chips frauen-filter__chips--top">' + chips + "</div>" : "") +
-      '<div class="frauen-filter' +
-      (filterOpen ? " is-open" : "") +
-      '" data-frauen-abschnitt="' +
+      '<div class="frauen-filter is-open" data-frauen-abschnitt="' +
       esc(abschnitt) +
       '">' +
-      '<button type="button" class="frauen-filter__toggle" data-frauen-filter-toggle="1">Suche und Filter · Schnellauswahl</button>' +
-      '<div class="frauen-filter__panel">' +
-      '<input class="frauen-filter__search" type="search" placeholder="Thema oder Begriff suchen…" value="' +
+      '<p class="frauen-filter__label">Themen</p>' +
+      '<div class="frauen-filter__chips frauen-filter__chips--always" role="tablist" aria-label="Themenfilter">' +
+      chips +
+      "</div>" +
+      '<label class="frauen-filter__search-wrap">' +
+      '<span class="visually-hidden">Aussagen suchen</span>' +
+      '<input class="frauen-filter__search" type="search" placeholder="Suchen: Ḥayḍ, Ghusl, Fasten…" value="' +
       esc(q) +
-      '" data-frauen-q>' +
-      (chipsAlways ? "" : '<div class="frauen-filter__chips">' + chips + "</div>") +
-      "</div></div>"
+      '" data-frauen-q autocomplete="off" spellcheck="false">' +
+      "</label>" +
+      "</div>"
     );
   }
 
@@ -422,7 +421,6 @@
       sahabQ = "";
       fiqhThema = "alle";
       sahabThema = "alle";
-      filterOpen = false;
       return renderHub();
     }
     if (parsed.page === "detail") return renderDetail(parsed.abschnitt, parsed.kennung);
@@ -451,21 +449,12 @@
   }
 
   document.addEventListener("click", function (ev) {
-    var t = ev.target && ev.target.closest ? ev.target.closest("[data-frauen-filter-toggle]") : null;
-    if (t) {
-      ev.preventDefault();
-      filterOpen = !filterOpen;
-      var panel = t.closest(".frauen-filter");
-      if (panel) panel.classList.toggle("is-open", filterOpen);
-      return;
-    }
     var chip = ev.target && ev.target.closest ? ev.target.closest("[data-frauen-thema]") : null;
     if (!chip) return;
     ev.preventDefault();
     var id = chip.getAttribute("data-frauen-thema") || "alle";
     if (currentAbschnitt === "sahabiyyat") sahabThema = id;
     else fiqhThema = id;
-    filterOpen = currentAbschnitt !== "sahabiyyat" ? true : filterOpen;
     refreshIfFrauen();
   });
 
