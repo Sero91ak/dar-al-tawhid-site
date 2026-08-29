@@ -3,6 +3,7 @@
 
   var FIQH_URL = "/test/data/frauen-fiqh.json";
   var SAHAB_URL = "/test/data/frauen-sahabiyyat.json";
+  var TABII_URL = "/test/data/frauen-tabiiyyat.json";
   var ERLAUBTE_QUELLENART = {
     quran: 1,
     sahih: 1,
@@ -66,14 +67,40 @@
     ueberlieferung: "Überlieferung",
     "fiqh-bezug": "Fiqh-Bezug"
   };
+  var TABII_THEMEN = [
+    { id: "alle", label: "Alle" },
+    { id: "wissen", label: "Wissen" },
+    { id: "ibadah", label: "ʿIbādah" },
+    { id: "zuhd", label: "Zuhd" },
+    { id: "adab", label: "Adab" },
+    { id: "geduld", label: "Geduld" },
+    { id: "ueberlieferung", label: "Überlieferung" },
+    { id: "familie", label: "Familie" },
+    { id: "erziehung", label: "Erziehung" },
+    { id: "historisch-in-pruefung", label: "Historisch in Prüfung" }
+  ];
+  var TABII_BEREICH_LABEL = {
+    wissen: "Wissen",
+    ibadah: "ʿIbādah",
+    zuhd: "Zuhd",
+    adab: "Adab",
+    geduld: "Geduld",
+    ueberlieferung: "Überlieferung",
+    familie: "Familie",
+    erziehung: "Erziehung",
+    "historisch-in-pruefung": "Historisch in Prüfung"
+  };
 
   var fiqhCache = null;
   var sahabCache = null;
+  var tabiiCache = null;
   var loadPromise = null;
   var fiqhQ = "";
   var sahabQ = "";
+  var tabiiQ = "";
   var fiqhThema = "alle";
   var sahabThema = "alle";
+  var tabiiThema = "alle";
   var currentAbschnitt = "hub";
 
   function esc(s) {
@@ -101,6 +128,8 @@
     if (e.quellenart === "sahih") return "Geprüft · ṣaḥīḥ";
     if (e.quellenart === "hasan") return "Geprüft · ḥasan";
     if (e.quellenart === "zuverlaessiger-athar") return "Geprüft · zuverlässiger Athar";
+    if (e.quellenart === "historischer-bericht" && e.freigabeDurchSerhat)
+      return "historischer Bericht – geprüft und freigegeben";
     return "Geprüft";
   }
 
@@ -117,10 +146,11 @@
   function istSichtbar(e) {
     if (!e) return false;
     if (e.quellenstatus !== "geprueft") return false;
-    if (!ERLAUBTE_QUELLENART[e.quellenart]) return false;
     if (!String(e.quellenanzeige || "").trim() || /^In Prüfung/i.test(String(e.quellenanzeige))) return false;
     if (!String(e.direktnachweisUrl || "").trim()) return false;
     if (!String(aussageVon(e) || "").trim()) return false;
+    if (e.quellenart === "historischer-bericht") return e.freigabeDurchSerhat === true;
+    if (!ERLAUBTE_QUELLENART[e.quellenart]) return false;
     return true;
   }
 
@@ -136,12 +166,13 @@
   }
 
   function load() {
-    if (fiqhCache && sahabCache) return Promise.resolve();
+    if (fiqhCache && sahabCache && tabiiCache) return Promise.resolve();
     if (loadPromise) return loadPromise;
-    loadPromise = Promise.all([fetchJson(FIQH_URL), fetchJson(SAHAB_URL)])
+    loadPromise = Promise.all([fetchJson(FIQH_URL), fetchJson(SAHAB_URL), fetchJson(TABII_URL)])
       .then(function (pair) {
         fiqhCache = pair[0];
         sahabCache = pair[1];
+        tabiiCache = pair[2];
       })
       .catch(function (err) {
         loadPromise = null;
@@ -159,18 +190,49 @@
     if (v.indexOf("sahabiyyat/") === 0) {
       return { page: "detail", abschnitt: "sahabiyyat", kennung: v.slice(11) };
     }
+    if (v === "tabiiyyat") return { page: "list", abschnitt: "tabiiyyat", kennung: "" };
+    if (v.indexOf("tabiiyyat/") === 0) {
+      return { page: "detail", abschnitt: "tabiiyyat", kennung: v.slice(10) };
+    }
     return { page: "hub", abschnitt: "", kennung: "" };
   }
 
   function cacheFor(abschnitt) {
-    return abschnitt === "sahabiyyat" ? sahabCache : fiqhCache;
+    if (abschnitt === "sahabiyyat") return sahabCache;
+    if (abschnitt === "tabiiyyat") return tabiiCache;
+    return fiqhCache;
+  }
+
+  function currentThema(abschnitt) {
+    if (abschnitt === "sahabiyyat") return sahabThema;
+    if (abschnitt === "tabiiyyat") return tabiiThema;
+    return fiqhThema;
+  }
+
+  function setThema(abschnitt, id) {
+    if (abschnitt === "sahabiyyat") sahabThema = id;
+    else if (abschnitt === "tabiiyyat") tabiiThema = id;
+    else fiqhThema = id;
+  }
+
+  function currentQ(abschnitt) {
+    if (abschnitt === "sahabiyyat") return sahabQ;
+    if (abschnitt === "tabiiyyat") return tabiiQ;
+    return fiqhQ;
+  }
+
+  function setQ(abschnitt, v) {
+    if (abschnitt === "sahabiyyat") sahabQ = v;
+    else if (abschnitt === "tabiiyyat") tabiiQ = v;
+    else fiqhQ = v;
   }
 
   function matches(e, abschnitt) {
-    var thema = abschnitt === "sahabiyyat" ? sahabThema : fiqhThema;
-    var q = abschnitt === "sahabiyyat" ? sahabQ : fiqhQ;
+    var thema = currentThema(abschnitt);
+    var q = currentQ(abschnitt);
     if (thema !== "alle") {
-      var chip = abschnitt === "sahabiyyat" ? e.bereich : FIQH_BEREICH_CHIP[e.bereich] || e.bereich;
+      var chip = abschnitt === "fiqh" ? FIQH_BEREICH_CHIP[e.bereich] || e.bereich : e.bereich;
+      if (thema === "historisch-in-pruefung") return false;
       if (chip !== thema) return false;
     }
     if (!q) return true;
@@ -228,7 +290,13 @@
         "sahabiyyat",
         "Bereich öffnen"
       ) +
-      hubRow("03", "Tābiʿiyyāt", "In Prüfung", "", "") +
+      hubRow(
+        "03",
+        "Tābiʿiyyāt",
+        "Geprüfte Berichte und Lehren über Frauen aus der Generation nach den Ṣaḥābah.",
+        "tabiiyyat",
+        "Bereich öffnen"
+      ) +
       hubRow("04", "Frauen der Salaf", "In Prüfung", "", "") +
       hubRow("05", "Mütter der Gläubigen", "In Prüfung", "", "") +
       "</div></section>"
@@ -250,7 +318,7 @@
       })
       .join("");
     var suchePlatz =
-      abschnitt === "sahabiyyat" ? "Thema oder Name suchen" : "Thema oder Begriff suchen";
+      abschnitt === "fiqh" ? "Thema oder Begriff suchen" : "Name oder Thema suchen";
     return (
       '<div class="frauen-filter is-open" data-frauen-abschnitt="' +
       esc(abschnitt) +
@@ -272,9 +340,17 @@
   }
 
   function listCard(e, abschnitt) {
-    var labelMap = abschnitt === "sahabiyyat" ? SAHAB_BEREICH_LABEL : FIQH_BEREICH_LABEL;
+    var labelMap =
+      abschnitt === "sahabiyyat"
+        ? SAHAB_BEREICH_LABEL
+        : abschnitt === "tabiiyyat"
+          ? TABII_BEREICH_LABEL
+          : FIQH_BEREICH_LABEL;
     var bereich = labelMap[e.bereich] || e.bereich || "";
-    var name = abschnitt === "sahabiyyat" && e.name ? '<p class="frauen-statement-card__name">' + esc(e.name) + "</p>" : "";
+    var name =
+      (abschnitt === "sahabiyyat" || abschnitt === "tabiiyyat") && e.name
+        ? '<p class="frauen-statement-card__name">' + esc(e.name) + "</p>"
+        : "";
     var hair = '<span class="frauen-hairline" aria-hidden="true"></span>';
     return (
       '<article class="frauen-statement-card" data-nav="frauen" data-value="' +
@@ -306,24 +382,31 @@
 
   function renderList(abschnitt) {
     var data = cacheFor(abschnitt);
-    var themen = abschnitt === "sahabiyyat" ? SAHAB_THEMEN : FIQH_THEMEN;
-    var q = abschnitt === "sahabiyyat" ? sahabQ : fiqhQ;
-    var thema = abschnitt === "sahabiyyat" ? sahabThema : fiqhThema;
+    var themen =
+      abschnitt === "sahabiyyat" ? SAHAB_THEMEN : abschnitt === "tabiiyyat" ? TABII_THEMEN : FIQH_THEMEN;
+    var q = currentQ(abschnitt);
+    var thema = currentThema(abschnitt);
     var items = sichtbare(data.eintraege).filter(function (e) {
       return matches(e, abschnitt);
     });
     var emptyMsg =
-      abschnitt === "sahabiyyat"
-        ? "Noch keine geprüften Inhalte vorhanden."
-        : "Keine sichtbare Aussage zu dieser Auswahl.";
+      abschnitt === "tabiiyyat"
+        ? "Noch keine geprüften Inhalte vorhanden. Dieser Bereich wird mit belastbaren Quellen Schritt für Schritt erweitert."
+        : abschnitt === "sahabiyyat"
+          ? "Noch keine geprüften Inhalte vorhanden."
+          : "Keine sichtbare Aussage zu dieser Auswahl.";
     var hint =
-      abschnitt === "sahabiyyat"
-        ? '<div class="frauen-hint"><p>Dieser Bereich enthält nur Berichte mit geprüfter Quelle. Schwache, ausgeschmückte oder nicht belegte Geschichten werden nicht angezeigt.</p></div>'
-        : "";
+      abschnitt === "tabiiyyat"
+        ? '<div class="frauen-hint"><p>Dieser Bereich enthält nur geprüfte Berichte. Historische Berichte aus Biografie- und Geschichtswerken bleiben verborgen, bis sie einzeln geprüft und freigegeben sind.</p></div>'
+        : abschnitt === "sahabiyyat"
+          ? '<div class="frauen-hint"><p>Dieser Bereich enthält nur Berichte mit geprüfter Quelle. Schwache, ausgeschmückte oder nicht belegte Geschichten werden nicht angezeigt.</p></div>'
+          : "";
     var lede =
-      abschnitt === "sahabiyyat"
-        ? '<p class="lede">Kurze geprüfte Berichte über Frauen der Ṣaḥābah – mit Quelle und Direktnachweis.</p>'
-        : '<p class="lede">Nur geprüfte Aussagen mit Direktnachweis. Die volle Aussage öffnet sich nach dem Tippen.</p>';
+      abschnitt === "tabiiyyat"
+        ? '<p class="lede">Frauen aus der Generation nach den Ṣaḥābah – mit geprüfter Quelle und Direktnachweis.</p>'
+        : abschnitt === "sahabiyyat"
+          ? '<p class="lede">Kurze geprüfte Berichte über Frauen der Ṣaḥābah – mit Quelle und Direktnachweis.</p>'
+          : '<p class="lede">Nur geprüfte Aussagen mit Direktnachweis. Die volle Aussage öffnet sich nach dem Tippen.</p>';
     return (
       '<section class="stack">' +
       lede +
@@ -348,9 +431,10 @@
     if (!e) {
       return '<p class="frauen-empty">Diese Aussage ist nicht sichtbar.</p>';
     }
-    var kicker = abschnitt === "sahabiyyat" ? "Ṣaḥābiyyāt" : "Fiqh der Frauen";
+    var kicker =
+      abschnitt === "tabiiyyat" ? "Tābiʿiyyāt" : abschnitt === "sahabiyyat" ? "Ṣaḥābiyyāt" : "Fiqh der Frauen";
     var nameLine =
-      abschnitt === "sahabiyyat" && e.name
+      (abschnitt === "sahabiyyat" || abschnitt === "tabiiyyat") && e.name
         ? '<p class="frauen-oval__kicker">' + esc(e.name) + "</p>"
         : '<p class="frauen-oval__kicker">' + kicker + "</p>";
     var linkText = e.direktnachweisText || "→ Quelle öffnen";
@@ -385,11 +469,6 @@
       esc(e.quellenanzeige) +
       "</p>" +
       hair +
-      '<p class="frauen-oval__kicker">Quellenstatus</p>' +
-      '<p class="frauen-oval__cite">' +
-      esc(quellenstatusSicht(e)) +
-      "</p>" +
-      hair +
       '<p class="frauen-oval__kicker">Direktnachweis</p>' +
       '<a class="frauen-direktnachweis" href="' +
       esc(e.direktnachweisUrl) +
@@ -415,6 +494,12 @@
 
   function pageMeta(value) {
     var parsed = parseValue(value);
+    if (parsed.abschnitt === "tabiiyyat" && parsed.page === "list") {
+      return {
+        title: "Tābiʿiyyāt",
+        subtitle: "Frauen aus der Generation nach den Ṣaḥābah – mit geprüfter Quelle und Direktnachweis."
+      };
+    }
     if (parsed.abschnitt === "sahabiyyat" && parsed.page === "list") {
       return {
         title: "Ṣaḥābiyyāt",
@@ -429,7 +514,12 @@
     }
     if (parsed.page === "detail") {
       return {
-        title: parsed.abschnitt === "sahabiyyat" ? "Ṣaḥābiyyāt" : "Fiqh der Frauen",
+        title:
+          parsed.abschnitt === "tabiiyyat"
+            ? "Tābiʿiyyāt"
+            : parsed.abschnitt === "sahabiyyat"
+              ? "Ṣaḥābiyyāt"
+              : "Fiqh der Frauen",
         subtitle: "Aussage · Quelle und Direktnachweis"
       };
     }
@@ -442,15 +532,17 @@
   function render(value) {
     var parsed = parseValue(value);
     currentAbschnitt = parsed.abschnitt || "hub";
-    if (!fiqhCache || (parsed.abschnitt === "sahabiyyat" && !sahabCache) || !sahabCache) {
+    if (!fiqhCache || !sahabCache || !tabiiCache) {
       load().then(refreshIfFrauen).catch(refreshIfFrauen);
       return '<p class="frauen-empty">Bereich wird geladen…</p>';
     }
     if (parsed.page === "hub") {
       fiqhQ = "";
       sahabQ = "";
+      tabiiQ = "";
       fiqhThema = "alle";
       sahabThema = "alle";
+      tabiiThema = "alle";
       return renderHub();
     }
     if (parsed.page === "detail") return renderDetail(parsed.abschnitt, parsed.kennung);
@@ -463,8 +555,7 @@
       input.dataset.bound = "1";
       input.addEventListener("input", function () {
         var v = (input.value || "").trim().toLowerCase();
-        if (currentAbschnitt === "sahabiyyat") sahabQ = v;
-        else fiqhQ = v;
+        setQ(currentAbschnitt, v);
         refreshIfFrauen();
         requestAnimationFrame(function () {
           var again = document.querySelector("[data-frauen-q]");
@@ -483,8 +574,7 @@
     if (!chip) return;
     ev.preventDefault();
     var id = chip.getAttribute("data-frauen-thema") || "alle";
-    if (currentAbschnitt === "sahabiyyat") sahabThema = id;
-    else fiqhThema = id;
+    setThema(currentAbschnitt, id);
     refreshIfFrauen();
   });
 
