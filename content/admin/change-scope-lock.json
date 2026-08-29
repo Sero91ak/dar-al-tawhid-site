@@ -87,6 +87,25 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-ink-surfaces-v715-2026-08-29",
+      "approvedBy": "user-explicit-eisgold-feed-quiz-quran-mehr-live",
+      "reason": "Nutzer: Feed/Quiz/Qurʾān/Mehr wie Startseite, goldene Verslinien, dunkle Schrift auf hell, push live.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/theme-eisgold.css",
+        "assets/dar-bottom-nav-glass.css",
+        "assets/premium-feed-app.js",
+        "test/assets/premium-feed-app.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-home-head-v714-2026-08-29",
       "approvedBy": "user-explicit-eisgold-startleiste-live",
       "reason": "Nutzer: weiße eckige Startleiste und Hijri-Hintergrund sofort live entfernen bzw. oval mit Goldlinie.",

@@ -152,6 +152,27 @@ html[data-theme="aurora"] {
   --bottom-tab-inactive-text: rgba(246, 241, 227, 0.68);
 }
 
+/* —— Eisgold —— */
+html[data-theme="eisgold"] {
+  --bottom-nav-bg: rgba(232, 244, 252, 0.94);
+  --bottom-nav-bg-glass: rgba(216, 238, 251, 0.72);
+  --bottom-nav-border: rgba(184, 150, 58, 0.32);
+  --bottom-nav-highlight: rgba(255, 255, 255, 0.45);
+  --bottom-nav-shadow: 0 8px 24px rgba(20, 32, 51, 0.08);
+  --bottom-nav-blur: 22px;
+  --bottom-nav-saturation: 1.12;
+
+  --bottom-tab-active-bg: rgba(184, 150, 58, 0.22);
+  --bottom-tab-active-border: rgba(184, 150, 58, 0.38);
+  --bottom-tab-active-highlight: rgba(255, 255, 255, 0.5);
+  --bottom-tab-active-shadow: rgba(20, 32, 51, 0.08);
+  --bottom-tab-active-icon: #0a1628;
+  --bottom-tab-active-text: #0a1628;
+  --bottom-tab-active-indicator: rgba(184, 150, 58, 0.88);
+  --bottom-tab-inactive-icon: #1f2937;
+  --bottom-tab-inactive-text: #0a1628;
+}
+
 /* —— iOS frosted glass surface —— */
 html[data-theme] #bottomNav.bottom-nav,
 html[data-theme] #appChromeDock #bottomNav.bottom-nav,
