@@ -15,7 +15,7 @@
   /* Original-Hauptfarben je Erscheinungsbild (THEME_META / theme-page-bg) */
   var THEME_FILLS = {
     dark: "#050706",
-    light: "#f7f0df",
+    light: "#F2EEE3",
     soft: "#f2e6e2",
     royal: "#07162c",
     bordeaux: "#140B0C",
