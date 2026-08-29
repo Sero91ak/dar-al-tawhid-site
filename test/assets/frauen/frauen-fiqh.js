@@ -336,7 +336,7 @@
   var hajjThema = "alle";
   var hubQ = "";
   var hubThema = "alle";
-  var filterOpen = false;
+  var filterOpen = true;
   var currentAbschnitt = "hub";
 
   function esc(s) {
@@ -659,30 +659,58 @@
   }
 
   function markSvg(kind) {
-    var inner =
-      kind === "book"
-        ? '<path d="M6 5.5h12v13H6z"/><path d="M12 5.5v13"/>'
-        : kind === "person"
-          ? '<circle cx="12" cy="8" r="2.6"/><path d="M6.5 18.5c.9-3.2 3.2-5 5.5-5s4.6 1.8 5.5 5"/>'
-          : kind === "people"
-            ? '<circle cx="9" cy="8" r="2.2"/><circle cx="15.2" cy="8.4" r="2"/><path d="M5.6 18.2c.7-2.6 2.4-4 4.3-4s3.5 1.3 4.2 3.5"/>'
-            : kind === "home"
-              ? '<path d="M5 11.6 12 5.4l7 6.2"/><path d="M7.2 10.9V19h9.6v-8.1"/>'
-              : kind === "ring"
-                ? '<circle cx="12" cy="12" r="6.2"/><circle cx="12" cy="12" r="2"/>'
-                : kind === "veil"
-                  ? '<path d="M7.2 19c0-4.8 2.1-8.6 4.8-8.6S16.8 14.2 16.8 19"/><path d="M8.4 11C9.1 8.4 10.4 6.7 12 6.7s2.9 1.7 3.6 4.3"/>'
-                  : kind === "lamp"
-                    ? '<path d="M9 10.4h6l-.7 5.2H9.7z"/><path d="M10.6 8h2.8"/><path d="M12 5.4V8"/>'
-                    : '<circle cx="12" cy="12" r="5.4"/>';
     return (
-      '<svg class="frauen-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">' +
-      inner +
-      "</svg>"
+      '<span class="emoji-emblem frauen-emblem" aria-hidden="true">' +
+      markGlyph(kind) +
+      "</span>"
     );
   }
 
+  function markGlyph(kind) {
+    if (kind === "book") return "📖";
+    if (kind === "person") return "👩";
+    if (kind === "people") return "🌙";
+    if (kind === "home") return "🏠";
+    if (kind === "ring") return "💫";
+    if (kind === "veil") return "🧕";
+    if (kind === "lamp") return "🪔";
+    return "📚";
+  }
+
+  function markForAbschnitt(abschnitt) {
+    if (abschnitt === "sahabiyyat") return "person";
+    if (abschnitt === "tabiiyyat") return "people";
+    if (abschnitt === MUETTER_SLUG) return "ring";
+    if (abschnitt === EHE_SLUG) return "home";
+    if (abschnitt === HIJAB_SLUG) return "veil";
+    if (abschnitt === WISSEN_SLUG || abschnitt === FAQ_SLUG) return "lamp";
+    if (abschnitt === KURZ_SLUG || abschnitt === SALAF_SLUG) return "people";
+    if (abschnitt === MOSCHEE_SLUG) return "home";
+    if (abschnitt === HAJJ_SLUG) return "ring";
+    return "book";
+  }
+
+  function areaJumpChips(activeId) {
+    return hubAreas()
+      .filter(function (a) {
+        return a.id;
+      })
+      .map(function (a) {
+        return (
+          '<button type="button" class="frauen-chip' +
+          (activeId === a.id ? " is-on" : "") +
+          '" data-nav="frauen" data-value="' +
+          esc(a.id) +
+          '">' +
+          esc(a.title) +
+          "</button>"
+        );
+      })
+      .join("");
+  }
+
   function searchPanel(abschnitt, themen, q, thema, placeholder) {
+    var isHub = abschnitt === "hub" || !abschnitt;
     var chips = (themen || [])
       .map(function (t) {
         return (
@@ -707,19 +735,27 @@
       esc(q) +
       '" data-frauen-q autocomplete="off" spellcheck="false" enterkeyhint="search">' +
       "</div>" +
-      (abschnitt === MOSCHEE_SLUG || abschnitt === HAJJ_SLUG
-        ? ""
-        : '<button type="button" class="advanced-toggle' +
-          (filterOpen ? " active" : "") +
-          '" data-frauen-filter-toggle>' +
-          (filterOpen ? "Filter ausblenden" : "Filter anzeigen") +
-          "</button>") +
+      '<button type="button" class="advanced-toggle' +
+      (filterOpen ? " active" : "") +
+      '" data-frauen-filter-toggle>' +
+      (filterOpen ? "Filter ausblenden" : "Filter anzeigen") +
+      "</button></div>" +
+      '<div class="frauen-filter-panel' +
+      (filterOpen ? " is-open" : "") +
+      '"' +
+      (filterOpen ? "" : " hidden") +
+      ">" +
+      '<p class="frauen-filter-panel__label">Bereiche</p>' +
+      '<div class="frauen-filter-grid">' +
+      areaJumpChips(isHub ? "" : abschnitt) +
       "</div>" +
-      '<div class="filter-panel' +
-      (filterOpen || abschnitt === MOSCHEE_SLUG || abschnitt === HAJJ_SLUG ? " advanced-visible" : " advanced-hidden") +
-      '"><div class="frauen-filter-grid">' +
-      chips +
-      "</div></div></section>"
+      (isHub
+        ? ""
+        : '<p class="frauen-filter-panel__label frauen-filter-panel__label--sub">Themen in diesem Bereich</p>' +
+          '<div class="frauen-filter-grid">' +
+          chips +
+          "</div>") +
+      "</div></section>"
     );
   }
 
@@ -807,9 +843,6 @@
     );
     var q = currentQ("hub");
     var thema = currentThema("hub");
-    var sichtbareAreas = areas.filter(function (a) {
-      return thema === "alle" || a.id === thema;
-    });
     var treffer = q ? sucheUeberall(q) : [];
     var liste = q
       ? treffer.length
@@ -825,11 +858,11 @@
           "</section>"
         : '<p class="frauen-empty">Keine passende Aussage.</p>'
       : '<div class="topics-hub__label"><b>Themen</b><span>' +
-        sichtbareAreas.length +
+        areas.length +
         " Bereiche</span></div>" +
         '<section class="category-cluster"><h3>Hauptbereiche</h3>' +
         '<div class="topics-theme-grid grid-list frauen-fiqh-list" aria-label="Hauptbereiche">' +
-        sichtbareAreas
+        areas
           .map(function (a) {
             return hubRow(a);
           })
@@ -886,27 +919,33 @@
                   : FIQH_BEREICH_LABEL;
     var bereich = labelMap[e.bereich] || e.bereich || "";
     var person = e.person || e.name;
-    var sub =
-      abschnitt === MOSCHEE_SLUG || abschnitt === HAJJ_SLUG
-        ? vorschauVon(e)
-        : abschnitt === SALAF_SLUG
-        ? [person, vorschauVon(e)].filter(Boolean).join(" · ")
-        : person
-          ? person + " sagte:"
-          : vorschauVon(e);
+    var aussageText = vorschauVon(e) || String(aussageVon(e) || "").replace(/\s+/g, " ").trim();
+    if (aussageText.length > 140) aussageText = aussageText.slice(0, 138).replace(/\s+\S*$/, "") + "…";
     return (
       '<article class="post-row dua-row frauen-post-row" data-nav="frauen" data-value="' +
       esc(abschnitt + "/" + e.kennung) +
       '">' +
       '<div class="post-row__icon dua-row__icon" aria-hidden="true">' +
-      markSvg("book") +
+      markSvg(markForAbschnitt(abschnitt)) +
       "</div>" +
       '<div class="post-row__body dua-row__body">' +
+      '<p class="frauen-row__kicker frauen-row__kicker--titel">Titel</p>' +
       "<h3>" +
       esc(titelVon(e)) +
       "</h3>" +
-      (sub ? '<p class="post-row__sub dua-row__sub">' + esc(sub) + "</p>" : "") +
-      (quelleKurz(e) ? '<p class="frauen-row__quelle">' + esc(quelleKurz(e)) + "</p>" : "") +
+      (person
+        ? '<p class="frauen-row__sprecher">' + esc(person) + (abschnitt === SALAF_SLUG || abschnitt === KURZ_SLUG || abschnitt === MUETTER_SLUG || abschnitt === MOSCHEE_SLUG || abschnitt === HAJJ_SLUG ? "" : " sagte:") + "</p>"
+        : "") +
+      (aussageText
+        ? '<p class="frauen-row__kicker">Aussage</p><p class="frauen-row__aussage">' +
+          esc(aussageText) +
+          "</p>"
+        : "") +
+      (quelleKurz(e)
+        ? '<p class="frauen-row__kicker frauen-row__kicker--quelle">Quelle</p><p class="frauen-row__quelle">' +
+          esc(quelleKurz(e)) +
+          "</p>"
+        : "") +
       '<div class="post-row__meta dua-row__meta">' +
       (bereich ? "<span>" + esc(bereich) + "</span>" : "") +
       "<span>" +
