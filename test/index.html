@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v734";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v736";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -11503,6 +11503,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/scholars-index.css?v=588">
 <link rel="preload" href="/test/data/prophets/index.json" as="fetch" crossorigin>
 <link rel="preload" href="/test/data/frauen.json" as="fetch" crossorigin>
+<link rel="preload" href="/test/data/women-fiqh.json" as="fetch" crossorigin>
 <link rel="stylesheet" href="/test/assets/prophets/prophets.css?v=17">
 <link rel="stylesheet" href="/assets/adaptive-layout.css?v=642">
 <link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=668">
@@ -26296,7 +26297,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v734";
+const APP_BUILD_ID="app-shell-v736";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -26411,7 +26412,7 @@ function duaRelatedCompactCard(dua){
 }
 const FRAUEN_PUBLISHABLE={authentisch:1,"zuverlässig":1};
 const FRAUEN_SECTIONS_FALLBACK=[
-  {id:"fiqh",title:"Fiqh der Frau",description:"Reinigung, Gebet, Fasten, Ehe, Familie und Alltag."},
+  {id:"fiqh",title:"Fiqh der Frauen",description:"Geprüfte Themen zu Reinigung, Gebet, Fasten, Kleidung im Gebet, Wissen, Familie und Alltag – Schritt für Schritt mit Quellen."},
   {id:"sahabiyyat",title:"Ṣaḥābiyyāt",description:"Frauen aus der Zeit des Propheten ﷺ und der Ṣaḥābah."},
   {id:"tabiiyyat",title:"Tābiʿiyyāt",description:"Frauen aus der Generation nach den Ṣaḥābah."},
   {id:"frauen-der-salaf",title:"Frauen der Salaf",description:"Berichte und Lehren aus dem Leben rechtschaffener Frauen der frühen Generationen."},
@@ -26428,9 +26429,109 @@ function frauenSectionById(id){return frauenSections().find(s=>s.id===String(id|
 function frauenIsPublishable(status){const st=String(status||"");return !!FRAUEN_PUBLISHABLE[st]&&st!=="scholarly_disputed"&&st!=="offen"&&st!=="nicht veröffentlichen"}
 function frauenPublishedEntries(sectionId){const entries=Array.isArray(frauenCatalogCache?.entries)?frauenCatalogCache.entries:[];const section=frauenSectionById(sectionId);return entries.filter(e=>frauenIsPublishable(e.sourceStatus)&&(!sectionId||e.category===sectionId||e.category===section?.title||e.category===section?.id))}
 async function ensureFrauenCatalog(){if(frauenCatalogCache)return frauenCatalogCache;try{const r=await fetch("/test/data/frauen.json",{cache:"no-store"});if(r.ok)frauenCatalogCache=await r.json()}catch(e){}if(!frauenCatalogCache)frauenCatalogCache={sections:FRAUEN_SECTIONS_FALLBACK,entries:[],description:"Ein geordneter Bereich über Fiqh, Wissen, Vorbilder und Geschichten der frühen Musliminnen.",placeholder:"Dieser Bereich wird Schritt für Schritt mit geprüften Inhalten erweitert.",emptySection:"Noch keine geprüften Inhalte vorhanden."};return frauenCatalogCache}
+const FRAUEN_FIQH_VISIBLE={quran:1,sahih:1,hasan:1,reliable_athar:1};
+const FRAUEN_FIQH_STATUS_DE={quran:"Qurʾān",sahih:"ṣaḥīḥ",hasan:"ḥasan",reliable_athar:"zuverlässiger Athar"};
+const FRAUEN_FIQH_TOPICS_FALLBACK=[
+  {id:"grundlagen",label:"Grundlagen",description:"Wissen, Quellen, Schamhaftigkeit beim Fragen und Methodik."},
+  {id:"reinigung",label:"Reinigung",description:"Wuḍūʾ, Ghusl, Ḥayḍ, Nifās und Istihāḍah."},
+  {id:"gebet",label:"Gebet",description:"Gebetspflicht, Kleidung im Gebet, Gebet während Ḥayḍ/Nifās und Sonderfälle."},
+  {id:"fasten",label:"Fasten",description:"Fasten im Ramaḍān, Nachholen, Ḥayḍ, Nifās, Schwangerschaft und Stillzeit."},
+  {id:"kleidung",label:"Kleidung im Gebet",description:"Bedeckung im Gebet und Mindestanforderungen mit Quellen."},
+  {id:"ehe",label:"Ehe & Familie",description:"Rechte, Pflichten, Umgang und Verantwortung."},
+  {id:"hijab",label:"Ḥijāb & Schamhaftigkeit",description:"Grundlagen, Adab, Grenzen und Ikhtilāf sauber kennzeichnen."},
+  {id:"fragen",label:"Fragen & Antworten",description:"Kurze geprüfte Antworten zu häufigen Themen."}
+];
+let frauenFiqhCache=null;
+let frauenFiqhFilter="alle";
+let frauenFiqhQuery="";
+function frauenFiqhTopics(){return (frauenFiqhCache&&Array.isArray(frauenFiqhCache.topics)&&frauenFiqhCache.topics.length)?frauenFiqhCache.topics:FRAUEN_FIQH_TOPICS_FALLBACK}
+function frauenFiqhTopicById(id){return frauenFiqhTopics().find(t=>t.id===String(id||""))||null}
+function frauenFiqhNorm(s){return String(s||"").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/ʿ|ʾ|ʼ/g,"").trim()}
+function frauenFiqhItemTopics(item){
+  const out=[];
+  const push=v=>{const x=frauenFiqhNorm(v);if(x&&out.indexOf(x)<0)out.push(x)};
+  (item.topics||[]).forEach(push);
+  push(item.topic);
+  (item.categories||[]).forEach(v=>{
+    push(v);
+    const hit=frauenFiqhTopics().find(t=>frauenFiqhNorm(t.label)===frauenFiqhNorm(v)||t.id===frauenFiqhNorm(v));
+    if(hit)push(hit.id);
+  });
+  push(item.category);
+  const hit=frauenFiqhTopics().find(t=>frauenFiqhNorm(t.label)===frauenFiqhNorm(item.category));
+  if(hit)push(hit.id);
+  return out;
+}
+function frauenFiqhIsVisible(item){
+  if(!item||typeof item!=="object")return false;
+  if(String(item.sourceStatus||"")!=="visible")return false;
+  if(!FRAUEN_FIQH_VISIBLE[String(item.sourceType||"")])return false;
+  if(!String(item.displayReference||item.reference||"").trim())return false;
+  if(!String(item.title||"").trim())return false;
+  if(!String(item.content||item.summary||"").trim())return false;
+  return true;
+}
+function frauenFiqhVisibleItems(){return (Array.isArray(frauenFiqhCache?.items)?frauenFiqhCache.items:[]).filter(frauenFiqhIsVisible)}
+function frauenFiqhSearchBlob(item){
+  return [item.title,item.summary,item.content,item.benefit,item.category,(item.categories||[]).join(" "),item.topic,(item.topics||[]).join(" "),(item.searchTerms||[]).join(" "),item.displayReference].map(frauenFiqhNorm).join(" ");
+}
+function frauenFiqhMatches(item,filterId,query){
+  const topics=frauenFiqhItemTopics(item);
+  if(filterId&&filterId!=="alle"&&topics.indexOf(frauenFiqhNorm(filterId))<0)return false;
+  const q=frauenFiqhNorm(query);
+  if(q&&frauenFiqhSearchBlob(item).indexOf(q)<0)return false;
+  return true;
+}
+async function ensureFrauenFiqhCatalog(){if(frauenFiqhCache)return frauenFiqhCache;try{const r=await fetch("/test/data/women-fiqh.json",{cache:"no-store"});if(r.ok)frauenFiqhCache=await r.json()}catch(e){}if(!frauenFiqhCache)frauenFiqhCache={topics:FRAUEN_FIQH_TOPICS_FALLBACK,items:[],subtitle:"Geprüfte Grundlagen aus Qurʾān, Sunnah und zuverlässigen Quellen.",notice:"Dieser Bereich wird schrittweise erweitert. Sichtbar sind nur geprüfte Inhalte."};return frauenFiqhCache}
+function renderFrauenFiqhCard(item){
+  const cat=esc((item.categories&&item.categories.length?item.categories.join(" · "):item.category)||"");
+  const status=FRAUEN_FIQH_STATUS_DE[item.sourceType]||"";
+  const src=esc(item.displayReference||item.reference||"");
+  const paras=[item.content,item.summary].filter((t,i,a)=>t&&a.indexOf(t)===i).slice(0,2);
+  const body=paras.map(p=>`<p>${esc(p)}</p>`).join("");
+  const benefit=item.benefit?`<p class="women-fiqh-card__benefit">${esc(item.benefit)}</p>`:"";
+  return `<article class="women-fiqh-card" data-fiqh-id="${esc(item.id||"")}" data-fiqh-topics="${esc(frauenFiqhItemTopics(item).join(" "))}" data-fiqh-search="${esc(frauenFiqhSearchBlob(item))}"><div class="women-fiqh-card__top"><h3>${esc(item.title||"")}</h3><span class="women-fiqh-card__cat">${cat}</span></div>${body}${benefit}<div class="women-fiqh-card__source"><span>Quelle: ${src}</span><span>Status: ${esc(status)}</span></div></article>`;
+}
+function renderFrauenFiqh(topicSlug){
+  const wanted=String(topicSlug||"").trim();
+  if(wanted&&frauenFiqhTopicById(wanted))frauenFiqhFilter=wanted;
+  else if(!wanted)frauenFiqhFilter=frauenFiqhFilter||"alle";
+  const topics=frauenFiqhTopics();
+  const visible=frauenFiqhVisibleItems().filter(it=>frauenFiqhMatches(it,frauenFiqhFilter,frauenFiqhQuery));
+  const chips=[{id:"alle",label:"Alle"}].concat(topics).map(t=>`<button type="button" class="women-fiqh-chip${frauenFiqhFilter===t.id?" is-active":""}" data-fiqh-filter="${esc(t.id)}" aria-pressed="${frauenFiqhFilter===t.id?"true":"false"}">${esc(t.label)}</button>`).join("");
+  const cards=visible.length?visible.map(renderFrauenFiqhCard).join(""):`<div class="empty">Noch keine geprüften Inhalte in diesem Thema.</div>`;
+  const notice=frauenFiqhCache?.notice||"Dieser Bereich wird schrittweise erweitert. Sichtbar sind nur geprüfte Inhalte. Themen mit offenem Quellenstatus werden nicht angezeigt.";
+  const intro=frauenFiqhCache?.subtitle||"Geprüfte Grundlagen aus Qurʾān, Sunnah und zuverlässigen Quellen.";
+  const activeTopic=frauenFiqhTopicById(frauenFiqhFilter);
+  const topicHint=activeTopic&&frauenFiqhFilter!=="alle"?`<p class="women-fiqh-topic-hint">${esc(activeTopic.description||"")}</p>`:"";
+  return `<div class="dua-collection-page women-section women-fiqh-page">${setPageHeader("Fiqh der Frauen",intro,"Frauen im Islam")}<p class="women-hub__note">Nur geprüfte Inhalte werden angezeigt. Unsichere oder schwache Aussagen bleiben verborgen, bis sie geprüft sind.</p><aside class="women-fiqh-note" role="note">${esc(notice)}</aside><label class="women-fiqh-search"><span class="visually-hidden">Im Fiqh der Frauen suchen</span><input id="womenFiqhSearch" type="search" placeholder="Suchen: Ḥayḍ, Ghusl, Fasten…" value="${esc(frauenFiqhQuery)}" autocomplete="off" spellcheck="false"></label><div class="women-fiqh-chips" role="tablist" aria-label="Themen Fiqh der Frauen">${chips}</div>${topicHint}<section class="women-fiqh-list" aria-label="Geprüfte Fiqh-Inhalte">${cards}</section></div>`;
+}
+function bindFrauenFiqhEvents(){
+  const root=document.querySelector(".women-fiqh-page");
+  if(!root)return;
+  root.querySelectorAll("[data-fiqh-filter]").forEach(btn=>{
+    btn.onclick=ev=>{
+      ev.preventDefault();
+      frauenFiqhFilter=btn.getAttribute("data-fiqh-filter")||"alle";
+      const topic=frauenFiqhFilter==="alle"?"":frauenFiqhFilter;
+      if(typeof navigate==="function")navigate("frauen",topic?"fiqh/"+topic:"fiqh");
+      else render();
+    };
+  });
+  const input=$("womenFiqhSearch");
+  if(input){
+    input.oninput=()=>{
+      frauenFiqhQuery=input.value||"";
+      const list=root.querySelector(".women-fiqh-list");
+      if(!list)return;
+      const items=frauenFiqhVisibleItems().filter(it=>frauenFiqhMatches(it,frauenFiqhFilter,frauenFiqhQuery));
+      list.innerHTML=items.length?items.map(renderFrauenFiqhCard).join(""):`<div class="empty">Keine geprüften Inhalte zu dieser Suche.</div>`;
+    };
+  }
+}
 function renderFrauenHub(){const sections=frauenSections();const intro=frauenCatalogCache?.description||"Ein geordneter Bereich über Fiqh, Wissen, Vorbilder und Geschichten der frühen Musliminnen.";const note=frauenCatalogCache?.placeholder||"Dieser Bereich wird Schritt für Schritt mit geprüften Inhalten erweitert.";const cards=sections.map((s,i)=>`<article class="dua-theme-card" data-nav="frauen" data-value="${esc(s.id)}"><span class="dua-theme-card__idx" aria-hidden="true">${String(i+1).padStart(2,"0")}</span><div class="dua-theme-card__icon" aria-hidden="true"><span class="frauen-mark"></span></div><div class="dua-theme-card__body"><h3>${esc(s.title)}</h3><p class="dua-theme-card__count">${esc(s.description)}</p></div><span class="dua-theme-card__chev" aria-hidden="true">›</span></article>`).join("");return `<div class="dua-hub women-hub">${setPageHeader("Frauen im Islam",intro,"Wissen")}<p class="women-hub__note">${esc(note)}</p><div class="dua-hub__label"><b>Themen</b><span>${sections.length} Bereiche</span></div><section class="dua-theme-grid" aria-label="Themen Frauen im Islam">${cards}</section></div>`}
 function renderFrauenSection(slug){const section=frauenSectionById(slug);if(!section)return `${setPageHeader("Frauen im Islam","Dieser Themenbereich wurde nicht gefunden.","Wissen")}<div class="empty">Zurück zur Übersicht.</div><p><button type="button" class="quran-topic-back-btn" data-nav="frauen">← Alle Themen</button></p>`;const items=frauenPublishedEntries(section.id);const empty=frauenCatalogCache?.emptySection||"Noch keine geprüften Inhalte vorhanden.";const rows=items.length?items.map(e=>`<article class="dua-row"><div class="dua-row__body"><h3>${esc(e.title||"")}</h3><p class="dua-row__sub">${esc(e.summary||"")}</p></div></article>`).join(""):`<div class="empty">${esc(empty)}</div>`;return `<div class="dua-collection-page women-section">${setPageHeader(section.title,section.description,"Frauen im Islam")}<section class="dua-collection" aria-label="${esc(section.title)}">${rows}</section></div>`}
-function renderFrauen(value){const slug=String(value||"").split("/").filter(Boolean)[0]||"";return slug?renderFrauenSection(slug):renderFrauenHub()}
+function renderFrauen(value){const parts=String(value||"").split("/").filter(Boolean);const slug=parts[0]||"";if(slug==="fiqh")return renderFrauenFiqh(parts[1]||"");return slug?renderFrauenSection(slug):renderFrauenHub()}
 function renderDuaRelatedCompact(dua){
   const related=getRelatedDuas(dua);
   if(!related.length)return"";
@@ -26850,11 +26951,17 @@ function render(){
         }).catch(()=>{});
       }
     }
-    if(currentRoute.view==="frauen"&&!frauenCatalogCache){
-      ensureFrauenCatalog().then(()=>{
-        const r=readRoute();
-        if(r.view==="frauen")render();
-      }).catch(()=>{});
+    if(currentRoute.view==="frauen"){
+      const frauenSlug=String(currentRoute.value||"").split("/").filter(Boolean)[0]||"";
+      const boot=[];
+      if(!frauenCatalogCache)boot.push(ensureFrauenCatalog());
+      if(frauenSlug==="fiqh"&&!frauenFiqhCache)boot.push(ensureFrauenFiqhCatalog());
+      if(boot.length){
+        Promise.all(boot).then(()=>{
+          const r=readRoute();
+          if(r.view==="frauen")render();
+        }).catch(()=>{});
+      }
     }
     if(["books","quellen-book","quellen-scholar"].includes(currentRoute.view)&&IS_TEST_PATH){
       const needsCanonicalBoot=!window.DARCanonicalSourceLibrary||(!window.DARCanonicalSourceLibrary.isReady()&&!window.DARCanonicalSourceLibrary.hasError());
@@ -27055,6 +27162,7 @@ function bindEvents(){
   bindHighlightDailyPush();
   if(currentRoute.view==="hadith")bindHadithLibraryEvents();
   if(currentRoute.view==="propheten"&&window.DARProphets&&typeof window.DARProphets.bind==="function"){window.DARProphets.bind();}
+  if(currentRoute.view==="frauen")bindFrauenFiqhEvents();
   if(currentRoute.view==="scholars"&&window.DARScholarsIndex&&typeof window.DARScholarsIndex.bindScholars==="function"){window.DARScholarsIndex.bindScholars(buildScholarCatalog(),esc);const polish=()=>polishScholarsOvalGlyphs();requestAnimationFrame(()=>{polish();setTimeout(polish,120);setTimeout(polish,400)});const root=document.querySelector(".scholars-index");if(root&&!root.dataset.glyphObserver){root.dataset.glyphObserver="1";new MutationObserver(()=>polish()).observe(root,{childList:true})}}
   bindThemeControls();
   bindAppIconPicker();
@@ -32330,6 +32438,124 @@ html[data-theme="eisgold"] body.is-frauen-route .dua-theme-card__count{
 html[data-theme="light"] body.is-frauen-route .view-head h2,
 html[data-theme="soft"] body.is-frauen-route .view-head h2{
   color:var(--text)!important;
+}
+.women-fiqh-note{
+  margin:0 0 16px;
+  padding:13px 14px;
+  border:1px solid color-mix(in srgb,var(--gold2,var(--cream)) 26%,transparent);
+  border-radius:16px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--gold2,var(--cream)) 8%,transparent),transparent 78%);
+  color:var(--cat-muted,var(--muted));
+  font-size:13.2px;
+  line-height:1.55;
+}
+.women-fiqh-search{display:block;margin:0 0 12px}
+.women-fiqh-search input{
+  width:100%;
+  min-height:44px;
+  border:1px solid color-mix(in srgb,var(--gold2,var(--line)) 28%,var(--line));
+  border-radius:14px;
+  background:color-mix(in srgb,var(--gold2,var(--cream)) 6%,transparent);
+  color:var(--text);
+  padding:10px 14px;
+  font:inherit;
+  font-size:15px;
+}
+.women-fiqh-chips{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  margin:0 0 16px;
+  padding:2px 0 8px;
+}
+.women-fiqh-chips::-webkit-scrollbar{display:none}
+.women-fiqh-chip{
+  flex:0 0 auto;
+  min-height:36px;
+  padding:7px 13px;
+  border:1px solid color-mix(in srgb,var(--gold2,var(--line)) 30%,var(--line));
+  border-radius:999px;
+  background:transparent;
+  color:var(--text);
+  font:inherit;
+  font-size:13px;
+  font-weight:650;
+  white-space:nowrap;
+}
+.women-fiqh-chip.is-active{
+  border-color:color-mix(in srgb,var(--gold2,var(--cream)) 55%,var(--line));
+  background:color-mix(in srgb,var(--gold2,var(--cream)) 16%,transparent);
+}
+.women-fiqh-topic-hint{
+  margin:-4px 2px 14px;
+  font-size:13px;
+  line-height:1.5;
+  color:var(--cat-muted,var(--muted));
+}
+.women-fiqh-list{display:grid;gap:12px}
+.women-fiqh-card{
+  margin:0;
+  padding:16px 16px 14px;
+  border:1px solid color-mix(in srgb,var(--gold2,var(--line)) 24%,var(--line));
+  border-radius:18px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--gold2,var(--cream)) 7%,transparent),transparent 70%);
+}
+.women-fiqh-card__top{display:grid;gap:6px;margin:0 0 10px}
+.women-fiqh-card h3{
+  margin:0;
+  font-family:var(--serif,Georgia,serif);
+  font-size:1.22rem;
+  line-height:1.28;
+  font-weight:650;
+  color:var(--cat-title,var(--text));
+}
+.women-fiqh-card__cat{
+  font-size:11.5px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--cat-muted,var(--muted));
+}
+.women-fiqh-card p{
+  margin:0 0 8px;
+  font-size:14.5px;
+  line-height:1.6;
+  color:var(--text);
+}
+.women-fiqh-card__benefit{
+  color:var(--cat-muted,var(--muted))!important;
+}
+.women-fiqh-card__source{
+  display:grid;
+  gap:3px;
+  margin-top:12px;
+  padding-top:10px;
+  border-top:1px solid color-mix(in srgb,var(--gold2,var(--line)) 20%,transparent);
+  font-size:12.5px;
+  line-height:1.45;
+  color:var(--cat-muted,var(--muted));
+}
+html[data-theme="eisgold"] body.is-frauen-route .women-fiqh-note,
+html[data-theme="eisgold"] body.is-frauen-route .women-fiqh-card,
+html[data-theme="eisgold"] body.is-frauen-route .women-fiqh-search input,
+html[data-theme="eisgold"] body.is-frauen-route .women-fiqh-chip{
+  border-color:#cfc4a4;
+  background:#fff;
+  color:#111111;
+}
+html[data-theme="eisgold"] body.is-frauen-route .women-fiqh-chip.is-active{
+  background:#f4efe0;
+  border-color:#b7a56a;
+  color:#111111;
+}
+html[data-theme="eisgold"] body.is-frauen-route .women-fiqh-card h3,
+html[data-theme="eisgold"] body.is-frauen-route .women-fiqh-card p,
+html[data-theme="eisgold"] body.is-frauen-route .women-fiqh-card__source,
+html[data-theme="eisgold"] body.is-frauen-route .women-fiqh-note,
+html[data-theme="eisgold"] body.is-frauen-route .women-fiqh-topic-hint,
+html[data-theme="eisgold"] body.is-frauen-route .women-fiqh-card__cat{
+  color:#111111!important;
 }
 </style>
 

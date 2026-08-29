@@ -1,0 +1,162 @@
+{
+  "version": 1,
+  "updatedAt": "2026-08-29",
+  "section": "fiqh-der-frauen",
+  "env": "test",
+  "title": "Fiqh der Frauen",
+  "subtitle": "Geprüfte Grundlagen aus Qurʾān, Sunnah und zuverlässigen Quellen.",
+  "notice": "Dieser Bereich wird schrittweise erweitert. Sichtbar sind nur geprüfte Inhalte. Themen mit offenem Quellenstatus werden nicht angezeigt.",
+  "visibleSourceTypes": ["quran", "sahih", "hasan", "reliable_athar"],
+  "topics": [
+    {
+      "id": "grundlagen",
+      "label": "Grundlagen",
+      "description": "Wissen, Quellen, Schamhaftigkeit beim Fragen und Methodik."
+    },
+    {
+      "id": "reinigung",
+      "label": "Reinigung",
+      "description": "Wuḍūʾ, Ghusl, Ḥayḍ, Nifās und Istihāḍah."
+    },
+    {
+      "id": "gebet",
+      "label": "Gebet",
+      "description": "Gebetspflicht, Kleidung im Gebet, Gebet während Ḥayḍ/Nifās und Sonderfälle."
+    },
+    {
+      "id": "fasten",
+      "label": "Fasten",
+      "description": "Fasten im Ramaḍān, Nachholen, Ḥayḍ, Nifās, Schwangerschaft und Stillzeit."
+    },
+    {
+      "id": "kleidung",
+      "label": "Kleidung im Gebet",
+      "description": "Bedeckung im Gebet und Mindestanforderungen mit Quellen."
+    },
+    {
+      "id": "ehe",
+      "label": "Ehe & Familie",
+      "description": "Rechte, Pflichten, Umgang und Verantwortung."
+    },
+    {
+      "id": "hijab",
+      "label": "Ḥijāb & Schamhaftigkeit",
+      "description": "Grundlagen, Adab, Grenzen und Ikhtilāf sauber kennzeichnen."
+    },
+    {
+      "id": "fragen",
+      "label": "Fragen & Antworten",
+      "description": "Kurze geprüfte Antworten zu häufigen Themen."
+    }
+  ],
+  "items": [
+    {
+      "id": "fiqh-wissen-fragen-ansaar",
+      "title": "Frauen fragen nach Wissen",
+      "category": "Grundlagen",
+      "categories": ["Grundlagen"],
+      "topic": "grundlagen",
+      "topics": ["grundlagen"],
+      "level": "grundlage",
+      "summary": "Schamhaftigkeit hinderte die Frauen der Anṣār nicht daran, nach ihrer Religion zu fragen.",
+      "content": "ʿĀʾišah رضي الله عنها rühmte die Frauen der Anṣār: Ihre Schamhaftigkeit hielt sie nicht davon ab, nach der Religion zu fragen und zu lernen. Wissen zu erfragen ist Teil der Religion; Schamhaftigkeit steht dem nicht entgegen.",
+      "benefit": "Die Muslimah darf und soll nach dem lernen, was sie für ihre ʿIbādah braucht.",
+      "sourceType": "sahih",
+      "sourceStatus": "visible",
+      "displayReference": "Ṣaḥīḥ al-Bukhārī 130; Ṣaḥīḥ Muslim 332",
+      "reference": "Sahih al-Bukhari 130; Sahih Muslim 332 — ʿĀʾišah über die Frauen der Anṣār",
+      "searchTerms": ["Wissen", "Fragen", "Anṣār", "ʿĀʾišah", "Schamhaftigkeit", "Lernen"],
+      "notes": "Nur der Grundsatz. Keine Ausschmückung, keine modernen Fatwas."
+    },
+    {
+      "id": "fiqh-hayd-fasten-nachholen-gebet-nicht",
+      "title": "Ḥayḍ: Fasten wird nachgeholt, Gebet nicht",
+      "category": "Fasten",
+      "categories": ["Fasten", "Gebet", "Reinigung"],
+      "topic": "fasten",
+      "topics": ["fasten", "gebet", "reinigung"],
+      "level": "grundlage",
+      "summary": "Die menstruierende Frau holt das Fasten nach, nicht aber die Gebete der Ḥayḍ-Tage.",
+      "content": "ʿĀʾišah رضي الله عنها berichtete: In der Zeit des Gesandten Allahs ﷺ wurden die Frauen angewiesen, das Fasten nachzuholen, nicht aber die Gebete. Das ist die klare Grundlage zu Ḥayḍ im Ramaḍān und im Alltag.",
+      "benefit": "Während der Ḥayḍ wird nicht gebetet und nicht gefastet. Das Fasten wird später nachgeholt.",
+      "sourceType": "sahih",
+      "sourceStatus": "visible",
+      "displayReference": "Ṣaḥīḥ Muslim 335; Ṣaḥīḥ al-Bukhārī 321",
+      "reference": "Sahih Muslim 335; Sahih al-Bukhari 321 — ʿĀʾišah",
+      "searchTerms": ["Ḥayḍ", "Hayd", "Menstruation", "Fasten", "Gebet", "Nachholen", "Ramaḍān"],
+      "notes": "Keine Detail-Fatwa. Keine Berechnung der Ḥayḍ-Tage."
+    },
+    {
+      "id": "fiqh-istihadah-nicht-hayd",
+      "title": "Istihāḍah ist nicht wie Ḥayḍ",
+      "category": "Reinigung",
+      "categories": ["Reinigung", "Gebet"],
+      "topic": "reinigung",
+      "topics": ["reinigung", "gebet"],
+      "level": "grundlage",
+      "summary": "Dauerblutung ist nicht Menstruation. Nach dem Ende der Ḥayḍ wird gereinigt und gebetet.",
+      "content": "Fāṭimah bint Abī Ḥubayš رضي الله عنها fragte nach anhaltender Blutung. Der Gesandte Allahs ﷺ unterschied: Das ist eine Ader, nicht Ḥayḍ. Wenn die Ḥayḍ-Tage enden, wird gereinigt und das Gebet wieder aufgenommen. Weitere Einzelfälle werden hier nicht ausgebreitet.",
+      "benefit": "Ḥayḍ und Istihāḍah sind nicht dasselbe. Nach dem Ende der Ḥayḍ kehrt die Gebetspflicht zurück.",
+      "sourceType": "sahih",
+      "sourceStatus": "visible",
+      "displayReference": "Ṣaḥīḥ al-Bukhārī 306; Ṣaḥīḥ Muslim 333",
+      "reference": "Sahih al-Bukhari 306; Sahih Muslim 333 — Fāṭimah bint Abī Ḥubayš",
+      "searchTerms": ["Istihāḍah", "Istihadah", "Ḥayḍ", "Hayd", "Reinigung", "Gebet", "Dauerblutung"],
+      "notes": "Nur das Grundprinzip. Keine Fallunterscheidung aller Blutungsarten."
+    },
+    {
+      "id": "fiqh-ghusl-hayd-janabah",
+      "title": "Ghusl nach Ḥayḍ und Janābah",
+      "category": "Reinigung",
+      "categories": ["Reinigung"],
+      "topic": "reinigung",
+      "topics": ["reinigung"],
+      "level": "grundlage",
+      "summary": "Nach Ḥayḍ und nach Janābah ist die Ganzkörperreinigung vorgeschrieben.",
+      "content": "Nach Ḥayḍ und nach Janābah ist Ghusl erforderlich. Die Frauen der Gefährten fragten nach der Art der Waschung. Die Antworten sind in den Ṣaḥīḥ-Sammlungen festgehalten. Hier wird nur diese Grundlage genannt, ohne technische Einzelfälle.",
+      "benefit": "Wer Ḥayḍ oder Janābah beendet, wäscht sich vollständig, bevor das Gebet wieder aufgenommen wird.",
+      "sourceType": "sahih",
+      "sourceStatus": "visible",
+      "displayReference": "Ṣaḥīḥ Muslim 332; Ṣaḥīḥ al-Bukhārī 248",
+      "reference": "Sahih Muslim 332 (Frage nach Ghusl nach Ḥayḍ); Sahih al-Bukhari 248 (Ghusl bei Janābah)",
+      "searchTerms": ["Ghusl", "Ḥayḍ", "Hayd", "Janābah", "Janabah", "Reinigung", "Waschung"],
+      "notes": "Keine langen technischen Anleitungen. Respektvoll und knapp."
+    },
+    {
+      "id": "fiqh-kleidung-gebet-khimar",
+      "title": "Kleidung im Gebet",
+      "category": "Kleidung im Gebet",
+      "categories": ["Kleidung im Gebet", "Gebet"],
+      "topic": "kleidung",
+      "topics": ["kleidung", "gebet"],
+      "level": "grundlage",
+      "summary": "Die erwachsene Frau betet mit angemessener Bedeckung; in diesem Ḥadīṯ wird der Khimār genannt.",
+      "content": "Der Ḥadīṯ lautet sinngemäß: Es gibt keine Ṣalāh einer Frau im Alter des Ḥayḍ außer mit Khimār. Das betrifft die Bedeckung im Gebet. Fragen zu Gesicht, Händen und Füßen sowie zum Niqāb werden hier nicht entschieden; sie brauchen eine eigene, geprüfte Darstellung mit Ikhtilāf.",
+      "benefit": "Die erwachsene Frau betet nicht ohne angemessene Bedeckung.",
+      "sourceType": "hasan",
+      "sourceStatus": "visible",
+      "displayReference": "Sunan at-Tirmiḏī 377, Einstufung: ḥasan",
+      "reference": "Jami at-Tirmidhi 377 — ḥasan laut at-Tirmiḏī",
+      "searchTerms": ["Kleidung", "Gebet", "Khimār", "Khimar", "Ḥayḍ", "Bedeckung", "Ṣalāh"],
+      "notes": "Nicht auf Niqāb oder Gesicht/Hände/Füße ausweiten."
+    },
+    {
+      "id": "fiqh-hidden-needs-review-placeholder",
+      "title": "Platzhalter — nicht anzeigen",
+      "category": "Fragen & Antworten",
+      "categories": ["Fragen & Antworten"],
+      "topic": "fragen",
+      "topics": ["fragen"],
+      "level": "grundlage",
+      "summary": "Interner Prüfplatz. Darf in der App nicht erscheinen.",
+      "content": "Dieser Eintrag hat keinen freigegebenen Quellenstatus.",
+      "benefit": "",
+      "sourceType": "needs_review",
+      "sourceStatus": "hidden",
+      "displayReference": "",
+      "reference": "",
+      "searchTerms": [],
+      "notes": "Absichtlich verborgen. Prüft die Sichtbarkeitsregel."
+    }
+  ]
+}
