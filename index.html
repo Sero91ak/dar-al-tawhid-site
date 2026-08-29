@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v713";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v714";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -26192,7 +26192,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v713";
+const APP_BUILD_ID="app-shell-v714";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -30605,6 +30605,56 @@ html[data-theme="eisgold"] .brand-main h1.brand-title-refined{
 }
 </style>
 
+<style id="eisgold-home-head-v714">
+/* Eisgold Startleiste: keine weiße eckige Fläche. Titel auf der Eisfäche; Hijri oval mit Goldlinie. */
+html[data-theme="eisgold"] body.is-home-route .view-head,
+html[data-theme="eisgold"] body.is-home-route .view-head.view-head-home,
+html[data-theme="eisgold"] body.is-home-route .view-head.view-head-home--v380,
+html[data-theme="eisgold"] body.is-home-route .view-head-home-row,
+html[data-theme="eisgold"] body.is-home-route .view-head-home-row--v475,
+html[data-theme="eisgold"] body.is-home-route .view-head-home-leading,
+html[data-theme="eisgold"] body.is-home-route .view-head-home-hijri-end,
+html[data-theme="eisgold"] body.is-home-route .view-head-home-chips{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  border-color:transparent!important;
+  border-radius:0!important;
+}
+html[data-theme="eisgold"] body.is-home-route .home-start-title{
+  background:none!important;
+  background-color:transparent!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] body.is-home-route .home-hijri-dayframe,
+html[data-theme="eisgold"] body.is-home-route .home-hijri-dayframe.dar-click-glow{
+  border-radius:999px!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:1px solid rgba(184,150,58,.36)!important;
+  box-shadow:none!important;
+  color:#0a1628!important;
+}
+html[data-theme="eisgold"] body.is-home-route .home-hijri-dayframe [data-hijri-date-text]{
+  color:#0a1628!important;
+  -webkit-text-fill-color:#0a1628!important;
+  text-shadow:none!important;
+}
+html[data-theme="eisgold"] body.is-home-route .home-refresh-icon-btn--header{
+  border-radius:999px!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  border:1px solid rgba(184,150,58,.30)!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] body.is-home-route .home-start-rule{
+  background:linear-gradient(90deg,transparent,rgba(184,150,58,.55),transparent)!important;
+  box-shadow:none!important;
+}
+</style>
+
 <script>
 (function(){
   /* v661 · Keine Inline-Hintergrundfarben mehr — die klebten (z.B. Royal-Blau) über Theme-Wechsel. */
@@ -30703,6 +30753,7 @@ html[data-theme="eisgold"] .brand-main h1.brand-title-refined{
     var iceFix=document.getElementById("eisgold-header-overscroll-v711");
     var ink=document.getElementById("eisgold-ink-v712");
     var royal=document.getElementById("eisgold-royal-wash-v713");
+    var head=document.getElementById("eisgold-home-head-v714");
     var host=document.documentElement||(s&&s.parentNode);
     if(s&&host) host.appendChild(s);
     if(ice&&host) host.appendChild(ice);
@@ -30710,6 +30761,7 @@ html[data-theme="eisgold"] .brand-main h1.brand-title-refined{
     if(iceFix&&host) host.appendChild(iceFix);
     if(ink&&host) host.appendChild(ink);
     if(royal&&host) host.appendChild(royal);
+    if(head&&host) host.appendChild(head);
     try{
       var root=document.documentElement;
       if(!root)return;

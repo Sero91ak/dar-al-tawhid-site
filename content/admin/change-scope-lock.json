@@ -87,6 +87,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-home-head-v714-2026-08-29",
+      "approvedBy": "user-explicit-eisgold-startleiste-live",
+      "reason": "Nutzer: weiße eckige Startleiste und Hijri-Hintergrund sofort live entfernen bzw. oval mit Goldlinie.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-royal-wash-v713-2026-08-29",
       "approvedBy": "user-explicit-eisgold-white-overscroll-facade",
       "reason": "Nutzer: Eisgold Overscroll schneidet blau ab und zeigt Weiß darunter. Aufbau wie Royal Nachtblau kopieren.",
