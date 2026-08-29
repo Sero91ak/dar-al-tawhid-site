@@ -25,10 +25,11 @@
     { id: "wissen", label: "Wissen" },
     { id: "standhaftigkeit", label: "Standhaftigkeit" },
     { id: "geduld", label: "Geduld" },
-    { id: "ehe-familie", label: "Ehe & Familie" },
     { id: "mut", label: "Mut" },
+    { id: "ehe-familie", label: "Ehe & Familie" },
     { id: "adab", label: "Adab" },
-    { id: "ueberlieferung", label: "Überlieferung" }
+    { id: "ueberlieferung", label: "Überlieferung" },
+    { id: "fiqh-bezug", label: "Fiqh-Bezug" }
   ];
   var FIQH_BEREICH_LABEL = {
     grundlagen: "Grundlagen",
@@ -62,7 +63,8 @@
     "ehe-familie": "Ehe & Familie",
     mut: "Mut",
     adab: "Adab",
-    ueberlieferung: "Überlieferung"
+    ueberlieferung: "Überlieferung",
+    "fiqh-bezug": "Fiqh-Bezug"
   };
 
   var fiqhCache = null;
@@ -90,6 +92,18 @@
     return e.kurzvorschau || e.kurzbeschreibung || "";
   }
 
+  function aussageVon(e) {
+    return e.vollstaendigeAussage || e.inhalt || "";
+  }
+
+  function quellenstatusSicht(e) {
+    if (e.quellenart === "quran") return "Geprüft";
+    if (e.quellenart === "sahih") return "Geprüft · ṣaḥīḥ";
+    if (e.quellenart === "hasan") return "Geprüft · ḥasan";
+    if (e.quellenart === "zuverlaessiger-athar") return "Geprüft · zuverlässiger Athar";
+    return "Geprüft";
+  }
+
   function lehreVon(e) {
     return e.lehre || e.nutzen || "";
   }
@@ -104,8 +118,9 @@
     if (!e) return false;
     if (e.quellenstatus !== "geprueft") return false;
     if (!ERLAUBTE_QUELLENART[e.quellenart]) return false;
-    if (!String(e.quellenanzeige || "").trim()) return false;
+    if (!String(e.quellenanzeige || "").trim() || /^In Prüfung/i.test(String(e.quellenanzeige))) return false;
     if (!String(e.direktnachweisUrl || "").trim()) return false;
+    if (!String(aussageVon(e) || "").trim()) return false;
     return true;
   }
 
@@ -163,6 +178,7 @@
       e.name,
       titelVon(e),
       vorschauVon(e),
+      e.vollstaendigeAussage,
       e.inhalt,
       lehreVon(e),
       e.quellenanzeige,
@@ -233,17 +249,21 @@
         );
       })
       .join("");
+    var suchePlatz =
+      abschnitt === "sahabiyyat" ? "Thema oder Name suchen" : "Thema oder Begriff suchen";
     return (
       '<div class="frauen-filter is-open" data-frauen-abschnitt="' +
       esc(abschnitt) +
       '">' +
       '<p class="frauen-filter__label">Themen</p>' +
-      '<div class="frauen-filter__chips frauen-filter__chips--always" role="tablist" aria-label="Themenfilter">' +
+      '<div class="frauen-filter__chips frauen-filter__chips--always">' +
       chips +
       "</div>" +
       '<label class="frauen-filter__search-wrap">' +
-      '<span class="visually-hidden">Aussagen suchen</span>' +
-      '<input class="frauen-filter__search" type="search" placeholder="Suchen: Ḥayḍ, Ghusl, Fasten…" value="' +
+      '<span class="visually-hidden">Suchen</span>' +
+      '<input class="frauen-filter__search" type="search" placeholder="' +
+      esc(suchePlatz) +
+      '" value="' +
       esc(q) +
       '" data-frauen-q autocomplete="off" spellcheck="false">' +
       "</label>" +
@@ -267,7 +287,8 @@
       "</h3>" +
       '<p class="frauen-statement-card__meta">' +
       esc(bereich ? bereich + " · " : "") +
-      "Geprüft</p>" +
+      esc(quellenstatusSicht(e)) +
+      "</p>" +
       "</div>" +
       hair +
       '<p class="frauen-statement-card__preview">' +
@@ -301,7 +322,7 @@
         : "";
     var lede =
       abschnitt === "sahabiyyat"
-        ? '<p class="lede">Kurze, geprüfte Berichte. Die volle Aussage öffnet sich nach dem Tippen — mit Quelle und Direktnachweis.</p>'
+        ? '<p class="lede">Kurze geprüfte Berichte über Frauen der Ṣaḥābah – mit Quelle und Direktnachweis.</p>'
         : '<p class="lede">Nur geprüfte Aussagen mit Direktnachweis. Die volle Aussage öffnet sich nach dem Tippen.</p>';
     return (
       '<section class="stack">' +
@@ -325,12 +346,12 @@
       return x.kennung === kennung && istSichtbar(x);
     });
     if (!e) {
-      return '<p class="frauen-empty">Diese Aussage ist nicht sichtbar oder noch in Prüfung.</p>';
+      return '<p class="frauen-empty">Diese Aussage ist nicht sichtbar.</p>';
     }
     var kicker = abschnitt === "sahabiyyat" ? "Ṣaḥābiyyāt" : "Fiqh der Frauen";
     var nameLine =
       abschnitt === "sahabiyyat" && e.name
-        ? '<p class="frauen-oval__kicker">' + esc(e.name) + " · " + kicker + "</p>"
+        ? '<p class="frauen-oval__kicker">' + esc(e.name) + "</p>"
         : '<p class="frauen-oval__kicker">' + kicker + "</p>";
     var linkText = e.direktnachweisText || "→ Quelle öffnen";
     var lehre = lehreVon(e);
@@ -342,17 +363,16 @@
       '<h2 class="frauen-oval__title">' +
       esc(titelVon(e)) +
       "</h2>" +
-      '<p class="frauen-oval__meta">Titel · geprüfte Aussage</p>' +
       "</header>" +
       hair +
       '<section class="frauen-oval frauen-oval--aussage">' +
       '<p class="frauen-oval__kicker">Aussage</p>' +
       '<p class="frauen-oval__body">' +
-      esc(e.inhalt) +
+      esc(aussageVon(e)) +
       "</p>" +
       (lehre
         ? hair +
-          '<p class="frauen-oval__kicker">Nutzen / Lehre</p>' +
+          '<p class="frauen-oval__kicker">Lehre / Nutzen</p>' +
           '<p class="frauen-oval__nutzen">' +
           esc(lehre) +
           "</p>"
@@ -363,6 +383,11 @@
       '<p class="frauen-oval__kicker">Quelle</p>' +
       '<p class="frauen-oval__cite">' +
       esc(e.quellenanzeige) +
+      "</p>" +
+      hair +
+      '<p class="frauen-oval__kicker">Quellenstatus</p>' +
+      '<p class="frauen-oval__cite">' +
+      esc(quellenstatusSicht(e)) +
       "</p>" +
       hair +
       '<p class="frauen-oval__kicker">Direktnachweis</p>' +
@@ -393,7 +418,7 @@
     if (parsed.abschnitt === "sahabiyyat" && parsed.page === "list") {
       return {
         title: "Ṣaḥābiyyāt",
-        subtitle: "Kurze, geprüfte Berichte über Frauen der frühen Generation – mit Quelle und Direktnachweis."
+        subtitle: "Kurze geprüfte Berichte über Frauen der Ṣaḥābah – mit Quelle und Direktnachweis."
       };
     }
     if (parsed.abschnitt === "fiqh" && parsed.page === "list") {
