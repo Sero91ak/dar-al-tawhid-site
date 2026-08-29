@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v736";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v737";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -9950,7 +9950,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/fold-split.js?v=3" defer></script>
 <script src="/assets/scholars-index.js?v=587" defer></script>
 <script src="/test/assets/prophets/prophets.js?v=33" defer></script>
-<script src="/test/assets/frauen/frauen-fiqh.js?v=1" defer></script>
+<script src="/test/assets/frauen/frauen-fiqh.js?v=737" defer></script>
 <link rel="preload" href="/assets/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11504,7 +11504,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/scholars-index.css?v=588">
 <link rel="preload" href="/test/data/prophets/index.json" as="fetch" crossorigin>
 <link rel="stylesheet" href="/test/assets/prophets/prophets.css?v=17">
-<link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=1">
+<link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=737">
 <link rel="stylesheet" href="/assets/adaptive-layout.css?v=642">
 <link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=668">
 <link rel="stylesheet" href="/test/assets/full-edge-appearance-polish.css?v=665">
@@ -21728,7 +21728,7 @@ function readRoute(){
   else if(head==="feed"&&bare.startsWith("feed/topics"))canonicalizeRouteHash(route);
   return route;
 }
-function parentRoute(route){if(route&&route.view==="frauen"&&route.value)return{view:"frauen",value:""};if(route&&route.view==="frauen")return{view:"more",value:""};if(route&&route.view==="propheten"&&route.value){const parts=String(route.value||"").split("/").filter(Boolean);if(parts.length>1)return{view:"propheten",value:parts[0]};return{view:"propheten",value:""}}if(route&&route.view==="propheten")return{view:"more",value:""};
+function parentRoute(route){if(route&&route.view==="frauen"){const parts=String(route.value||"").split("/").filter(Boolean);if(parts.length>1)return{view:"frauen",value:parts[0]};if(parts.length===1)return{view:"frauen",value:""};return{view:"more",value:""}}if(route&&route.view==="propheten"&&route.value){const parts=String(route.value||"").split("/").filter(Boolean);if(parts.length>1)return{view:"propheten",value:parts[0]};return{view:"propheten",value:""}}if(route&&route.view==="propheten")return{view:"more",value:""};
   if(route.view==="news-detail")return{view:"news"};
   if(route.view==="news")return{view:"home"};
   if(route.view==="ilm")return{view:"home"};
@@ -26300,7 +26300,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v736";
+const APP_BUILD_ID="app-shell-v737";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -26791,6 +26791,13 @@ function renderScholarsFoldRoute(view,value){
   return DarFold.shell(renderScholars(),renderFiltered("scholar",value),{family:"scholars",compactMode:"pane"});
 }
 
+function renderFrauenRoute(){
+  const api=window.DARFrauenFiqh;
+  const meta=api&&typeof api.pageMeta==="function"?api.pageMeta(currentRoute.value):{title:"Frauen im Islam",subtitle:"Bereich wird geladen…"};
+  const body=api&&typeof api.render==="function"?api.render(currentRoute.value):`<div class="empty">Bereich wird geladen…</div>`;
+  return `${setPageHeader(meta.title,meta.subtitle,"Frauen")}${body}`;
+}
+
 function render(){
   try{
     const routeBefore=readRoute();
@@ -26849,7 +26856,7 @@ function render(){
     else if(currentRoute.view==="topics")html=renderTopicsFoldRoute("topics");
     else if(currentRoute.view==="scholars")html=renderScholarsFoldRoute("scholars");
     else if(currentRoute.view==="propheten")html=(window.DARProphets&&typeof window.DARProphets.render==="function"?window.DARProphets.render(currentRoute.value):`<div class="empty">Prophetenbibliothek wird geladen…</div>`);
-    else if(currentRoute.view==="frauen")html=(window.DARFrauenFiqh&&typeof window.DARFrauenFiqh.render==="function"?window.DARFrauenFiqh.render(currentRoute.value):`<div class="empty">Bereich wird geladen…</div>`);
+    else if(currentRoute.view==="frauen")html=renderFrauenRoute();
     else if(currentRoute.view==="books")html=renderQuellenFoldRoute("books");
     else if(currentRoute.view==="quellen-book")html=renderQuellenFoldRoute("quellen-book",currentRoute.value);
     else if(currentRoute.view==="quellen-scholar")html=renderQuellenFoldRoute("quellen-scholar",currentRoute.value);
