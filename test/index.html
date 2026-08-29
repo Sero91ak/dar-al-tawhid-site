@@ -31477,6 +31477,64 @@ html[data-theme="eisgold"] .top-shell.theme-hero-shell{
 }
 </style>
 
+<style id="quiz-session-fullpage-v722">
+/* Quiz-Runde: volle Seitenbreite, keine Goldrahmen um Frage/Antwort. */
+html[data-theme] body.is-quiz-route:has(.quiz-shell-session) #appView.view{
+  padding-left:max(10px,env(safe-area-inset-left,0px))!important;
+  padding-right:max(10px,env(safe-area-inset-right,0px))!important;
+}
+.quiz-shell.quiz-shell-session,
+body.is-quiz-route .quiz-shell.quiz-shell-session{
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+  --quiz-border:transparent!important;
+  --quiz-line:transparent!important;
+  --quiz-border-active:rgba(20,32,51,.16)!important;
+}
+.quiz-shell-session .quiz-session,
+.quiz-shell.quiz-shell-pro.quiz-shell-session .quiz-session{
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  background-image:none!important;
+  padding:6px 2px 14px!important;
+}
+.quiz-shell-session .quiz-question-panel,
+.quiz-shell.quiz-shell-pro .quiz-question-panel,
+.quiz-shell.quiz-shell-pro.quiz-shell-session .quiz-question-panel{
+  border:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  background-image:none!important;
+  border-radius:0!important;
+  padding:2px 0 8px!important;
+  margin:0 0 6px!important;
+}
+.quiz-shell-session .quiz-answer,
+.quiz-shell.quiz-shell-pro .quiz-session .quiz-answer{
+  border:1px solid color-mix(in srgb,var(--quiz-text-primary,#142033) 10%,transparent)!important;
+  box-shadow:none!important;
+}
+.quiz-shell-session .quiz-answer.selected,
+.quiz-shell.quiz-shell-pro .quiz-session .quiz-answer.selected{
+  border-color:color-mix(in srgb,var(--quiz-text-primary,#142033) 22%,transparent)!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] .quiz-shell-session .quiz-session,
+html[data-theme="eisgold"] .quiz-shell-session .quiz-question-panel,
+html[data-theme="eisgold"] .quiz-shell.quiz-shell-pro .quiz-session,
+html[data-theme="eisgold"] .quiz-shell.quiz-shell-pro .quiz-question-panel{
+  border:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+}
+</style>
+
 <script>
 (function(){
   /* v661 · Keine Inline-Hintergrundfarben mehr — die klebten (z.B. Royal-Blau) über Theme-Wechsel. */
@@ -31584,6 +31642,7 @@ html[data-theme="eisgold"] .top-shell.theme-hero-shell{
     var quran=document.getElementById("eisgold-quran-sheet-v719");
     var glacier=document.getElementById("eisgold-glacier-v720");
     var icegold=document.getElementById("eisgold-oversize-icegold-v721");
+    var quizPlay=document.getElementById("quiz-session-fullpage-v722");
     var host=document.documentElement||(s&&s.parentNode);
     if(s&&host) host.appendChild(s);
     if(ice&&host) host.appendChild(ice);
@@ -31600,6 +31659,7 @@ html[data-theme="eisgold"] .top-shell.theme-hero-shell{
     if(quran&&host) host.appendChild(quran);
     if(glacier&&host) host.appendChild(glacier);
     if(icegold&&host) host.appendChild(icegold);
+    if(quizPlay&&host) host.appendChild(quizPlay);
     try{
       var root=document.documentElement;
       if(!root)return;
