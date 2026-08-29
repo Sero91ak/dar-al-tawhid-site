@@ -87,6 +87,26 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-frauen-beitrag-listen-v750-2026-08-29",
+      "approvedBy": "user-explicit-test-frauen-beitrag-listen",
+      "reason": "Nutzer: Frauen-Hub und Aussagenlisten wie Beiträge, Suche/Filter aufklappbar, keine Emojis. Quellen bleiben. Nur Test-App.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/frauen/",
+        "test/data/frauen-fiqh.json",
+        "test/data/frauen-sahabiyyat.json",
+        "test/data/frauen-tabiiyyat.json",
+        "test/data/frauen-muetter-der-glaeubigen.json",
+        "test/data/frauen-ehe-familie.json",
+        "test/data/frauen-hijab-schamhaftigkeit.json",
+        "test/data/frauen-wissen-lernen.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "test-frauen-beitrag-aufbau-v745-2026-08-29",
       "approvedBy": "user-explicit-test-frauen-beitrag-aufbau",
       "reason": "Nutzer: Frauen-Aussage genau wie Beitragsleser aufbauen (Titel, Überliefert von, Aussage, ◆, Quellenoval, Nachweise, Fazit). Nur Test-App.",

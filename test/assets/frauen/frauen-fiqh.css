@@ -419,44 +419,75 @@ body.is-frauen-route .article.post-reader{
   .frauen-hub-grid{ grid-template-columns:1fr; }
 }
 
-/* Immer sichtbare Duʿāʾ-Ovale — feine Goldlinie, auch ohne Hover */
-body.is-frauen-route .frauen-fiqh-list{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
+/* v750 · Frauen wie Beiträge: Themenliste, Post-Zeilen, Suche/Filter */
+body.is-frauen-route .frauen-hub,
+body.is-frauen-route .frauen-list-page{
+  margin-top:2px;
 }
-body.is-frauen-route .frauen-fiqh-list .dua-theme-card{
+body.is-frauen-route .frauen-search-pro{
   border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:0 0 8px!important;
+  margin:0 0 16px!important;
+}
+body.is-frauen-route .frauen-search-pro .advanced-toggle{
   border-radius:999px!important;
-  background:color-mix(in srgb,var(--gold2,var(--gold,#d8c18b)) 5%,transparent)!important;
-  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2,var(--gold,#d8c18b)) 22%,transparent)!important;
+  border:1px solid var(--cat-line,color-mix(in srgb,var(--gold2) 28%,transparent))!important;
+  background:transparent!important;
 }
-body.is-frauen-route .frauen-fiqh-list .dua-theme-card.is-pending{
-  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2,var(--gold,#d8c18b)) 16%,transparent)!important;
-  opacity:1;
+body.is-frauen-route .frauen-filter-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:10px;
 }
-body.is-frauen-route .frauen-fiqh-list .dua-theme-card.is-pending h3,
-body.is-frauen-route .frauen-fiqh-list .dua-theme-card.is-pending .dua-theme-card__count{
+body.is-frauen-route .frauen-filter-grid .frauen-chip{
+  width:100%;
+  border-radius:14px;
+  min-height:42px;
+  justify-content:center;
+}
+body.is-frauen-route .topics-theme-grid,
+body.is-frauen-route .frauen-post-list{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:4px!important;
+}
+body.is-frauen-route .frauen-fiqh-list .dua-theme-card,
+body.is-frauen-route .topics-theme-card{
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-frauen-route .topics-theme-card.is-featured{
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2,#efd78e) 28%,transparent)!important;
+  background:radial-gradient(ellipse 96% 86% at 38% 50%,color-mix(in srgb,var(--gold2) 7%,transparent),transparent 76%)!important;
+}
+body.is-frauen-route .topics-theme-card.is-pending{
+  opacity:.62;
+  cursor:default;
+}
+body.is-frauen-route .topics-theme-card:before,
+body.is-frauen-route .dua-theme-card:before,
+body.is-frauen-route .frauen-post-row:before,
+body.is-frauen-route .post-row:before{
+  display:none!important;
+}
+body.is-frauen-route .frauen-mark{
+  width:18px;
+  height:18px;
+  display:block;
+  color:var(--gold2,var(--gold,#efd78e));
+}
+body.is-frauen-route .frauen-row__quelle{
+  margin:0;
+  font-family:var(--serif);
+  font-size:12.5px;
+  line-height:1.4;
+  font-style:italic;
   color:var(--cat-muted,var(--muted));
 }
-body.is-frauen-route .frauen-statement-card:hover,
-body.is-frauen-route .frauen-statement-card:focus-visible,
-body.is-frauen-route .frauen-fiqh-list .dua-theme-card:hover,
-body.is-frauen-route .frauen-fiqh-list .dua-theme-card:focus-visible{
-  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2,var(--gold,#d8c18b)) 32%,transparent)!important;
-}
-html[data-theme="eisgold"] body.is-frauen-route .frauen-fiqh-list .dua-theme-card,
-html[data-theme="light"] body.is-frauen-route .frauen-fiqh-list .dua-theme-card{
-  background:#fff!important;
-  box-shadow:inset 0 0 0 1px #cfc4a4!important;
-  color:#111;
-}
-html[data-theme="eisgold"] body.is-frauen-route .frauen-statement-card,
-html[data-theme="eisgold"] body.is-frauen-route .frauen-oval,
-html[data-theme="eisgold"] body.is-frauen-route .frauen-post-reader,
-html[data-theme="light"] body.is-frauen-route .frauen-statement-card,
-html[data-theme="light"] body.is-frauen-route .frauen-oval,
-html[data-theme="light"] body.is-frauen-route .frauen-post-reader{
-  background:#fff;
-  color:#111;
+body.is-frauen-route .topics-theme-card .frauen-open-btn,
+body.is-frauen-route .frauen-post-row .frauen-open-btn{
+  display:none;
 }

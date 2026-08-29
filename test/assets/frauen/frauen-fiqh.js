@@ -258,6 +258,9 @@
   var wissenThema = "alle";
   var faqThema = "alle";
   var kurzThema = "alle";
+  var hubQ = "";
+  var hubThema = "alle";
+  var filterOpen = false;
   var currentAbschnitt = "hub";
 
   function esc(s) {
@@ -438,6 +441,7 @@
   }
 
   function currentThema(abschnitt) {
+    if (abschnitt === "hub" || !abschnitt) return hubThema;
     if (abschnitt === "sahabiyyat") return sahabThema;
     if (abschnitt === "tabiiyyat") return tabiiThema;
     if (abschnitt === MUETTER_SLUG) return muetterThema;
@@ -450,7 +454,8 @@
   }
 
   function setThema(abschnitt, id) {
-    if (abschnitt === "sahabiyyat") sahabThema = id;
+    if (abschnitt === "hub" || !abschnitt) hubThema = id;
+    else if (abschnitt === "sahabiyyat") sahabThema = id;
     else if (abschnitt === "tabiiyyat") tabiiThema = id;
     else if (abschnitt === MUETTER_SLUG) muetterThema = id;
     else if (abschnitt === EHE_SLUG) eheThema = id;
@@ -462,6 +467,7 @@
   }
 
   function currentQ(abschnitt) {
+    if (abschnitt === "hub" || !abschnitt) return hubQ;
     if (abschnitt === "sahabiyyat") return sahabQ;
     if (abschnitt === "tabiiyyat") return tabiiQ;
     if (abschnitt === MUETTER_SLUG) return muetterQ;
@@ -474,7 +480,8 @@
   }
 
   function setQ(abschnitt, v) {
-    if (abschnitt === "sahabiyyat") sahabQ = v;
+    if (abschnitt === "hub" || !abschnitt) hubQ = v;
+    else if (abschnitt === "sahabiyyat") sahabQ = v;
     else if (abschnitt === "tabiiyyat") tabiiQ = v;
     else if (abschnitt === MUETTER_SLUG) muetterQ = v;
     else if (abschnitt === EHE_SLUG) eheQ = v;
@@ -529,100 +536,41 @@
     return hay.indexOf(q) !== -1;
   }
 
-  function hubRow(nr, title, meta, value, openLabel) {
-    var nav = value ? ' data-nav="frauen" data-value="' + esc(value) + '"' : "";
+  function offeneAbschnitte() {
+    return ["fiqh", "sahabiyyat", "tabiiyyat", MUETTER_SLUG, EHE_SLUG, HIJAB_SLUG, WISSEN_SLUG, FAQ_SLUG, KURZ_SLUG];
+  }
+
+  function countSichtbare(abschnitt) {
+    var data = cacheFor(abschnitt);
+    return sichtbare(data && data.eintraege).length;
+  }
+
+  function markSvg(kind) {
+    var inner =
+      kind === "book"
+        ? '<path d="M6 5.5h12v13H6z"/><path d="M12 5.5v13"/>'
+        : kind === "person"
+          ? '<circle cx="12" cy="8" r="2.6"/><path d="M6.5 18.5c.9-3.2 3.2-5 5.5-5s4.6 1.8 5.5 5"/>'
+          : kind === "people"
+            ? '<circle cx="9" cy="8" r="2.2"/><circle cx="15.2" cy="8.4" r="2"/><path d="M5.6 18.2c.7-2.6 2.4-4 4.3-4s3.5 1.3 4.2 3.5"/>'
+            : kind === "home"
+              ? '<path d="M5 11.6 12 5.4l7 6.2"/><path d="M7.2 10.9V19h9.6v-8.1"/>'
+              : kind === "ring"
+                ? '<circle cx="12" cy="12" r="6.2"/><circle cx="12" cy="12" r="2"/>'
+                : kind === "veil"
+                  ? '<path d="M7.2 19c0-4.8 2.1-8.6 4.8-8.6S16.8 14.2 16.8 19"/><path d="M8.4 11C9.1 8.4 10.4 6.7 12 6.7s2.9 1.7 3.6 4.3"/>'
+                  : kind === "lamp"
+                    ? '<path d="M9 10.4h6l-.7 5.2H9.7z"/><path d="M10.6 8h2.8"/><path d="M12 5.4V8"/>'
+                    : '<circle cx="12" cy="12" r="5.4"/>';
     return (
-      '<article class="dua-theme-card' +
-      (value ? "" : " is-pending") +
-      '"' +
-      nav +
-      ">" +
-      '<span class="dua-theme-card__idx" aria-hidden="true">' +
-      nr +
-      "</span>" +
-      '<div class="dua-theme-card__icon" aria-hidden="true"><span class="emoji-emblem">✦</span></div>' +
-      '<div class="dua-theme-card__body"><h3>' +
-      esc(title) +
-      "</h3>" +
-      '<p class="dua-theme-card__count">' +
-      esc(meta) +
-      "</p>" +
-      (openLabel ? '<span class="frauen-open-btn">' + esc(openLabel) + "</span>" : "") +
-      "</div>" +
-      '<span class="dua-theme-card__chev" aria-hidden="true">›</span>' +
-      "</article>"
+      '<svg class="frauen-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">' +
+      inner +
+      "</svg>"
     );
   }
 
-  function renderHub() {
-    return (
-      '<section class="stack">' +
-      '<p class="lede">Geprüfte Aussagen. Kompakt wählen, dann die volle Aussage mit Quelle und Direktnachweis.</p>' +
-      '<div class="dua-theme-grid frauen-fiqh-list">' +
-      hubRow("01", "Fiqh der Frauen", "Reinigung · Gebet · Fasten · Ḥidschāb", "fiqh", "Bereich öffnen") +
-      hubRow(
-        "02",
-        "Ṣaḥābiyyāt",
-        "Geprüfte Ereignisse und Lehren aus dem Leben der Frauen der Ṣaḥābah.",
-        "sahabiyyat",
-        "Bereich öffnen"
-      ) +
-      hubRow(
-        "03",
-        "Tābiʿiyyāt",
-        "Geprüfte Berichte und Lehren über Frauen aus der Generation nach den Ṣaḥābah.",
-        "tabiiyyat",
-        "Bereich öffnen"
-      ) +
-      hubRow(
-        "04",
-        "Mütter der Gläubigen",
-        "Geprüfte Berichte über die Ehefrauen des Propheten ﷺ – mit Quelle und Direktnachweis.",
-        MUETTER_SLUG,
-        "Bereich öffnen"
-      ) +
-      hubRow(
-        "05",
-        "Ehe & Familie",
-        "Geprüfte Grundlagen zu gutem Umgang, Verantwortung, Rechten und Familie.",
-        EHE_SLUG,
-        "Bereich öffnen"
-      ) +
-      hubRow(
-        "06",
-        "Ḥijāb & Schamhaftigkeit",
-        "Geprüfte Grundlagen zu Bedeckung, Adab und Schamhaftigkeit.",
-        HIJAB_SLUG,
-        "Bereich öffnen"
-      ) +
-      hubRow(
-        "07",
-        "Wissen & Lernen",
-        "Geprüfte Grundlagen zum Lernen der Religion, Fragenstellen und Weitergeben von Wissen.",
-        WISSEN_SLUG,
-        "Bereich öffnen"
-      ) +
-      hubRow(
-        "08",
-        "Fragen & Antworten",
-        "Kurze geprüfte Antworten zu häufigen Fragen – mit Quelle und Direktnachweis.",
-        FAQ_SLUG,
-        "Bereich öffnen"
-      ) +
-      hubRow(
-        "09",
-        "Geprüfte Kurzberichte",
-        "Kurze belegte Ereignisse und Lehren – ohne schwache oder ausgeschmückte Geschichten.",
-        KURZ_SLUG,
-        "Bereich öffnen"
-      ) +
-      hubRow("10", "Frauen der Salaf", "In Prüfung", "", "") +
-      "</div></section>"
-    );
-  }
-
-  function filterBlock(abschnitt, themen, q, thema) {
-    var chips = themen
+  function searchPanel(abschnitt, themen, q, thema, placeholder) {
+    var chips = (themen || [])
       .map(function (t) {
         return (
           '<button type="button" class="frauen-chip' +
@@ -635,6 +583,147 @@
         );
       })
       .join("");
+    return (
+      '<section class="search-pro-panel frauen-search-pro">' +
+      '<div class="search-line">' +
+      '<div class="search-input-shell">' +
+      '<span class="search-input-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span>' +
+      '<input class="search search-input-field" type="search" placeholder="' +
+      esc(placeholder) +
+      '" value="' +
+      esc(q) +
+      '" data-frauen-q autocomplete="off" spellcheck="false" enterkeyhint="search">' +
+      "</div>" +
+      '<button type="button" class="advanced-toggle' +
+      (filterOpen ? " active" : "") +
+      '" data-frauen-filter-toggle>' +
+      (filterOpen ? "Filter ausblenden" : "Filter anzeigen") +
+      "</button></div>" +
+      '<div class="filter-panel' +
+      (filterOpen ? "" : " advanced-hidden") +
+      '"><div class="frauen-filter-grid">' +
+      chips +
+      "</div></div></section>"
+    );
+  }
+
+  function hubAreas() {
+    return [
+      { nr: "01", title: "Fiqh der Frauen", id: "fiqh", mark: "book", featured: true },
+      { nr: "02", title: "Ṣaḥābiyyāt", id: "sahabiyyat", mark: "person" },
+      { nr: "03", title: "Tābiʿiyyāt", id: "tabiiyyat", mark: "people" },
+      { nr: "04", title: "Mütter der Gläubigen", id: MUETTER_SLUG, mark: "ring" },
+      { nr: "05", title: "Ehe & Familie", id: EHE_SLUG, mark: "home" },
+      { nr: "06", title: "Ḥijāb & Schamhaftigkeit", id: HIJAB_SLUG, mark: "veil" },
+      { nr: "07", title: "Wissen & Lernen", id: WISSEN_SLUG, mark: "lamp" },
+      { nr: "08", title: "Fragen & Antworten", id: FAQ_SLUG, mark: "book" },
+      { nr: "09", title: "Geprüfte Kurzberichte", id: KURZ_SLUG, mark: "people" },
+      { nr: "10", title: "Frauen der Salaf", id: "", mark: "ring", pending: true }
+    ];
+  }
+
+  function hubRow(area) {
+    var n = area.id ? countSichtbare(area.id) : 0;
+    var meta = area.pending ? "In Prüfung" : n === 1 ? "1 Aussage" : n + " Aussagen";
+    var nav = area.id ? ' data-nav="frauen" data-value="' + esc(area.id) + '"' : "";
+    return (
+      '<article class="topics-theme-card dua-theme-card' +
+      (area.featured && area.id ? " is-featured" : "") +
+      (area.pending ? " is-pending" : "") +
+      '"' +
+      nav +
+      ">" +
+      '<span class="topics-theme-card__idx dua-theme-card__idx" aria-hidden="true">' +
+      area.nr +
+      "</span>" +
+      '<div class="topics-theme-card__icon dua-theme-card__icon" aria-hidden="true">' +
+      markSvg(area.mark) +
+      "</div>" +
+      '<div class="topics-theme-card__body dua-theme-card__body"><h3>' +
+      esc(area.title) +
+      "</h3>" +
+      '<p class="topics-theme-card__count dua-theme-card__count">' +
+      esc(meta) +
+      "</p></div>" +
+      '<span class="topics-theme-card__chev dua-theme-card__chev" aria-hidden="true">›</span>' +
+      "</article>"
+    );
+  }
+
+  function sucheUeberall(q) {
+    if (!q) return [];
+    var out = [];
+    offeneAbschnitte().forEach(function (ab) {
+      sichtbare((cacheFor(ab) || {}).eintraege).forEach(function (e) {
+        var hay = [
+          e.name,
+          titelVon(e),
+          vorschauVon(e),
+          e.vollstaendigeAussage,
+          e.inhalt,
+          lehreVon(e),
+          e.quellenanzeige,
+          e.bereich,
+          (e.schlagwoerter || []).join(" ")
+        ]
+          .join(" ")
+          .toLowerCase();
+        if (hay.indexOf(q) !== -1) out.push({ e: e, abschnitt: ab });
+      });
+    });
+    return out;
+  }
+
+  function renderHub() {
+    var areas = hubAreas();
+    var themen = [{ id: "alle", label: "Alle" }].concat(
+      areas
+        .filter(function (a) {
+          return a.id;
+        })
+        .map(function (a) {
+          return { id: a.id, label: a.title };
+        })
+    );
+    var q = currentQ("hub");
+    var thema = currentThema("hub");
+    var sichtbareAreas = areas.filter(function (a) {
+      return thema === "alle" || a.id === thema;
+    });
+    var treffer = q ? sucheUeberall(q) : [];
+    var liste = q
+      ? treffer.length
+        ? '<div class="topics-hub__label"><b>Treffer</b><span>' +
+          treffer.length +
+          "</span></div>" +
+          '<section class="post-grid topic-collection frauen-post-list">' +
+          treffer
+            .map(function (t) {
+              return listCard(t.e, t.abschnitt);
+            })
+            .join("") +
+          "</section>"
+        : '<p class="frauen-empty">Keine passende Aussage.</p>'
+      : '<div class="topics-hub__label"><b>Themen</b><span>' +
+        sichtbareAreas.length +
+        " Bereiche</span></div>" +
+        '<section class="category-cluster"><h3>Hauptbereiche</h3>' +
+        '<div class="topics-theme-grid grid-list frauen-fiqh-list" aria-label="Hauptbereiche">' +
+        sichtbareAreas
+          .map(function (a) {
+            return hubRow(a);
+          })
+          .join("") +
+        "</div></section>";
+    return (
+      '<div class="topics-hub frauen-hub">' +
+      searchPanel("hub", themen, q, thema, "Suche nach Aussage, Thema oder Quelle…") +
+      liste +
+      "</div>"
+    );
+  }
+
+  function filterBlock(abschnitt, themen, q, thema) {
     var suchePlatz =
       abschnitt === FAQ_SLUG
         ? "Frage oder Thema suchen"
@@ -645,32 +734,7 @@
         : abschnitt === "fiqh"
           ? "Thema oder Begriff suchen"
           : "Name oder Thema suchen";
-    var sucheLabel =
-      abschnitt === FAQ_SLUG
-        ? '<span class="frauen-filter__search-label">Frage oder Thema suchen</span>'
-        : abschnitt === KURZ_SLUG
-        ? '<span class="frauen-filter__search-label">Name oder Thema suchen</span>'
-        : abschnitt === WISSEN_SLUG
-        ? '<span class="frauen-filter__search-label">Thema suchen</span>'
-        : '<span class="visually-hidden">Suchen</span>';
-    return (
-      '<div class="frauen-filter is-open" data-frauen-abschnitt="' +
-      esc(abschnitt) +
-      '">' +
-      '<p class="frauen-filter__label">Themen</p>' +
-      '<div class="frauen-filter__chips frauen-filter__chips--always">' +
-      chips +
-      "</div>" +
-      '<label class="frauen-filter__search-wrap">' +
-      sucheLabel +
-      '<input class="frauen-filter__search" type="search" placeholder="' +
-      esc(suchePlatz) +
-      '" value="' +
-      esc(q) +
-      '" data-frauen-q autocomplete="off" spellcheck="false">' +
-      "</label>" +
-      "</div>"
-    );
+    return searchPanel(abschnitt, themen, q, thema, suchePlatz);
   }
 
   function listCard(e, abschnitt) {
@@ -694,42 +758,25 @@
                   : FIQH_BEREICH_LABEL;
     var bereich = labelMap[e.bereich] || e.bereich || "";
     var person = e.person || e.name;
-    var name =
-      (abschnitt === "sahabiyyat" ||
-        abschnitt === "tabiiyyat" ||
-        abschnitt === MUETTER_SLUG ||
-        abschnitt === KURZ_SLUG) &&
-      person
-        ? '<p class="frauen-statement-card__name">' + esc(person) + "</p>"
-        : "";
-    var hair = '<span class="frauen-hairline" aria-hidden="true"></span>';
+    var sub = person ? person + " sagte:" : vorschauVon(e);
     return (
-      '<article class="frauen-statement-card" data-nav="frauen" data-value="' +
+      '<article class="post-row dua-row frauen-post-row" data-nav="frauen" data-value="' +
       esc(abschnitt + "/" + e.kennung) +
       '">' +
-      '<div class="frauen-statement-card__titel">' +
-      name +
+      '<div class="post-row__icon dua-row__icon" aria-hidden="true">' +
+      markSvg("book") +
+      "</div>" +
+      '<div class="post-row__body dua-row__body">' +
       "<h3>" +
       esc(titelVon(e)) +
       "</h3>" +
-      '<p class="frauen-statement-card__meta">' +
-      esc(bereich ? bereich + " · " : "") +
+      (sub ? '<p class="post-row__sub dua-row__sub">' + esc(sub) + "</p>" : "") +
+      (quelleKurz(e) ? '<p class="frauen-row__quelle">' + esc(quelleKurz(e)) + "</p>" : "") +
+      '<div class="post-row__meta dua-row__meta">' +
+      (bereich ? "<span>" + esc(bereich) + "</span>" : "") +
+      "<span>" +
       esc(quellenstatusSicht(e)) +
-      "</p>" +
-      "</div>" +
-      hair +
-      '<p class="frauen-statement-card__preview">' +
-      esc(vorschauVon(e)) +
-      "</p>" +
-      hair +
-      '<p class="frauen-statement-card__quelle">' +
-      esc(quelleKurz(e)) +
-      "</p>" +
-      hair +
-      '<span class="frauen-open-btn">' +
-      (oeffnenLabel(abschnitt)) +
-      "</span>" +
-      "</article>"
+      "</span></div></div></article>"
     );
   }
 
@@ -807,18 +854,17 @@
             ? '<p class="lede">Kurze geprüfte Berichte über Frauen der Ṣaḥābah – mit Quelle und Direktnachweis.</p>'
             : '<p class="lede">Nur geprüfte Aussagen mit Direktnachweis. Die volle Aussage öffnet sich nach dem Tippen.</p>';
     return (
-      '<section class="stack">' +
-      lede +
+      '<div class="topic-collection-page frauen-list-page">' +
       hint +
       filterBlock(abschnitt, themen, q, thema) +
       (items.length
-        ? '<div class="frauen-statement-list">' +
+        ? '<section class="post-grid topic-collection frauen-post-list" aria-label="Aussagen">' +
           items.map(function (e) {
             return listCard(e, abschnitt);
           }).join("") +
-          "</div>"
+          "</section>"
         : emptyHtml) +
-      "</section>"
+      "</div>"
     );
   }
 
@@ -1084,6 +1130,13 @@
   }
 
   document.addEventListener("click", function (ev) {
+    var toggle = ev.target && ev.target.closest ? ev.target.closest("[data-frauen-filter-toggle]") : null;
+    if (toggle) {
+      ev.preventDefault();
+      filterOpen = !filterOpen;
+      refreshIfFrauen();
+      return;
+    }
     var chip = ev.target && ev.target.closest ? ev.target.closest("[data-frauen-thema]") : null;
     if (!chip) return;
     ev.preventDefault();
