@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v727";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v728";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -26192,7 +26192,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v727";
+const APP_BUILD_ID="app-shell-v728";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -31595,6 +31595,92 @@ html[data-theme="eisgold"] body.is-quran-overview .qov-direct-grid--compact .dir
 }
 </style>
 
+<style id="eisgold-more-page-oval-v728">
+/* Eisgold Mehr: keine Zeilen-Kästen. Gruppen oval, Goldlinie dick→dünn. */
+html[data-theme="eisgold"] body.is-more-route .more-group,
+html[data-theme="eisgold"] body.is-more-route .feature-section,
+html[data-theme="eisgold"] .more-group,
+html[data-theme="eisgold"] .feature-section{
+  position:relative!important;
+  background:#ffffff!important;
+  background-color:#ffffff!important;
+  background-image:none!important;
+  border:0!important;
+  border-radius:36px!important;
+  overflow:visible!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] body.is-more-route .more-group::before,
+html[data-theme="eisgold"] body.is-more-route .feature-section::before,
+html[data-theme="eisgold"] .more-group::before,
+html[data-theme="eisgold"] .feature-section::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  border-radius:inherit!important;
+  pointer-events:none!important;
+  z-index:2!important;
+  padding:2.8px 1.05px .65px 2.35px!important;
+  background:linear-gradient(135deg,#7a5c22 0%,#e8d08a 32%,#c8a95a 62%,rgba(200,169,90,.22) 100%)!important;
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0)!important;
+  -webkit-mask-composite:xor!important;
+  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0)!important;
+  mask-composite:exclude!important;
+}
+html[data-theme="eisgold"] body.is-more-route .more-group-grid,
+html[data-theme="eisgold"] .more-group-grid{
+  grid-template-columns:1fr!important;
+  gap:0!important;
+}
+html[data-theme="eisgold"] body.is-more-route .more-feature-row,
+html[data-theme="eisgold"] .more-feature-row,
+html[data-theme="eisgold"] body.is-more-route .prophets-spotlight.more-feature-row{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  border-bottom:1px solid rgba(200,169,90,.18)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] body.is-more-route .more-group-grid .more-feature-row:last-child,
+html[data-theme="eisgold"] .more-group-grid .more-feature-row:last-child{
+  border-bottom:0!important;
+}
+html[data-theme="eisgold"] body.is-more-route .more-search,
+html[data-theme="eisgold"] .more-search{
+  position:relative!important;
+  background:#ffffff!important;
+  background-color:#ffffff!important;
+  background-image:none!important;
+  border:0!important;
+  border-radius:999px!important;
+  box-shadow:none!important;
+  color:#111111!important;
+  -webkit-text-fill-color:#111111!important;
+}
+html[data-theme="eisgold"] body.is-more-route .more-search::placeholder,
+html[data-theme="eisgold"] .more-search::placeholder{
+  color:#1a1a1a!important;
+  opacity:.7!important;
+}
+html[data-theme="eisgold"] body.is-more-route .more-group h3,
+html[data-theme="eisgold"] body.is-more-route .feature-head h3,
+html[data-theme="eisgold"] body.is-more-route .feature-head span,
+html[data-theme="eisgold"] body.is-more-route .more-feature-row h4,
+html[data-theme="eisgold"] body.is-more-route .more-feature-row p,
+html[data-theme="eisgold"] body.is-more-route .view-head h2,
+html[data-theme="eisgold"] body.is-more-route .view-desc{
+  color:#111111!important;
+  -webkit-text-fill-color:#111111!important;
+}
+html[data-theme="eisgold"] body.is-more-route .more-feature-row p,
+html[data-theme="eisgold"] body.is-more-route .feature-head span,
+html[data-theme="eisgold"] body.is-more-route .view-desc{
+  color:#1a1a1a!important;
+}
+</style>
+
 <script>
 (function(){
   /* v661 · Keine Inline-Hintergrundfarben mehr — die klebten (z.B. Royal-Blau) über Theme-Wechsel. */
@@ -31707,6 +31793,7 @@ html[data-theme="eisgold"] body.is-quran-overview .qov-direct-grid--compact .dir
     var noble=document.getElementById("eisgold-ink-gold-frame-v725");
     var oval=document.getElementById("eisgold-quran-search-oval-v726");
     var cols=document.getElementById("eisgold-quran-jump-cols-v727");
+    var moreOval=document.getElementById("eisgold-more-page-oval-v728");
     var host=document.documentElement||(s&&s.parentNode);
     if(s&&host) host.appendChild(s);
     if(ice&&host) host.appendChild(ice);
@@ -31728,6 +31815,7 @@ html[data-theme="eisgold"] body.is-quran-overview .qov-direct-grid--compact .dir
     if(noble&&host) host.appendChild(noble);
     if(oval&&host) host.appendChild(oval);
     if(cols&&host) host.appendChild(cols);
+    if(moreOval&&host) host.appendChild(moreOval);
     try{
       var root=document.documentElement;
       if(!root)return;
