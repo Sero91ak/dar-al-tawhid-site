@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v729";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v730";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -26192,7 +26192,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v729";
+const APP_BUILD_ID="app-shell-v730";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -31748,6 +31748,82 @@ html[data-theme="eisgold"] .more-search{
 }
 </style>
 
+<style id="eisgold-more-hairline-v730">
+/* Eisgold Mehr: feine Gold-Ovale. Propheten voll umrandet und hervorgehoben — kein oberer Streich. */
+html[data-theme="eisgold"] body.is-more-route .more-feature-row::before,
+html[data-theme="eisgold"] .more-feature-row::before,
+html[data-theme="eisgold"] body.is-more-route .more-search::before,
+html[data-theme="eisgold"] body.is-more-route button.prophets-spotlight.more-feature-row::before,
+html[data-theme="eisgold"] body.is-more-route .prophets-spotlight.more-feature-row::before,
+html[data-theme="eisgold"] button.prophets-spotlight.more-feature-row::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  top:0!important;
+  right:0!important;
+  bottom:0!important;
+  left:0!important;
+  width:auto!important;
+  height:auto!important;
+  min-height:0!important;
+  border-radius:inherit!important;
+  pointer-events:none!important;
+  z-index:2!important;
+  opacity:1!important;
+  padding:.7px .4px .35px .55px!important;
+  background:linear-gradient(135deg,#8a6a2c 0%,#e8d08a 38%,#c8a95a 68%,rgba(200,169,90,.28) 100%)!important;
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0)!important;
+  -webkit-mask-composite:xor!important;
+  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0)!important;
+  mask-composite:exclude!important;
+}
+html[data-theme="eisgold"] body.is-more-route .more-group h3,
+html[data-theme="eisgold"] .more-group h3{
+  border:0!important;
+  border-bottom:0!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] body.is-more-route .more-group h3::before,
+html[data-theme="eisgold"] body.is-more-route .more-group h3::after,
+html[data-theme="eisgold"] .more-group h3::before,
+html[data-theme="eisgold"] .more-group h3::after{
+  display:none!important;
+  content:none!important;
+  background:none!important;
+  height:0!important;
+}
+html[data-theme="eisgold"] body.is-more-route button.prophets-spotlight.more-feature-row,
+html[data-theme="eisgold"] body.is-more-route .prophets-spotlight.more-feature-row,
+html[data-theme="eisgold"] button.prophets-spotlight.more-feature-row{
+  background:
+    radial-gradient(ellipse 90% 140% at 10% 0%,rgba(200,169,90,.18),transparent 58%),
+    linear-gradient(145deg,#fffdf6 0%,#ffffff 74%)!important;
+  background-color:#fffdf6!important;
+  min-height:74px!important;
+  box-shadow:0 10px 22px rgba(122,92,34,.07)!important;
+}
+html[data-theme="eisgold"] body.is-more-route button.prophets-spotlight.more-feature-row::before,
+html[data-theme="eisgold"] body.is-more-route .prophets-spotlight.more-feature-row::before,
+html[data-theme="eisgold"] button.prophets-spotlight.more-feature-row::before{
+  padding:1px .55px .45px .8px!important;
+  background:linear-gradient(135deg,#6f5218 0%,#f0d78c 36%,#c8a95a 64%,rgba(200,169,90,.38) 100%)!important;
+}
+html[data-theme="eisgold"] body.is-more-route button.prophets-spotlight.more-feature-row::after,
+html[data-theme="eisgold"] body.is-more-route .prophets-spotlight.more-feature-row::after,
+html[data-theme="eisgold"] button.prophets-spotlight.more-feature-row::after,
+html[data-theme="eisgold"] body.is-more-route .prophets-spotlight__edge,
+html[data-theme="eisgold"] .prophets-spotlight__edge{
+  display:none!important;
+  content:none!important;
+  background:none!important;
+  opacity:0!important;
+  width:0!important;
+  height:0!important;
+}
+</style>
+
 <script>
 (function(){
   /* v661 · Keine Inline-Hintergrundfarben mehr — die klebten (z.B. Royal-Blau) über Theme-Wechsel. */
@@ -31862,6 +31938,7 @@ html[data-theme="eisgold"] .more-search{
     var cols=document.getElementById("eisgold-quran-jump-cols-v727");
     var moreOval=document.getElementById("eisgold-more-page-oval-v728");
     var moreRows=document.getElementById("eisgold-more-row-frames-v729");
+    var moreHair=document.getElementById("eisgold-more-hairline-v730");
     var host=document.documentElement||(s&&s.parentNode);
     if(s&&host) host.appendChild(s);
     if(ice&&host) host.appendChild(ice);
@@ -31885,6 +31962,7 @@ html[data-theme="eisgold"] .more-search{
     if(cols&&host) host.appendChild(cols);
     if(moreOval&&host) host.appendChild(moreOval);
     if(moreRows&&host) host.appendChild(moreRows);
+    if(moreHair&&host) host.appendChild(moreHair);
     try{
       var root=document.documentElement;
       if(!root)return;
