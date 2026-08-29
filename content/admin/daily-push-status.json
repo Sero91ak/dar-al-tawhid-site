@@ -1,16 +1,16 @@
 {
-  "ok": false,
+  "ok": true,
   "schedulerEngine": "cloudflare-worker-daily-v4-isolated",
   "idVersion": "v4",
   "deliveryMode": "worker-local",
-  "schedulerStatus": "error",
-  "updatedAt": "2026-08-29T10:35:02.531Z",
-  "usersChecked": 13,
-  "registrationsRead": 14,
-  "uniqueSubscriptions": 13,
+  "schedulerStatus": "success",
+  "updatedAt": "2026-08-29T10:45:02.539Z",
+  "usersChecked": 12,
+  "registrationsRead": 13,
+  "uniqueSubscriptions": 12,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
-  "localTimeBerlin": "12:35",
+  "localTimeBerlin": "12:45",
   "dateKeyBerlin": "2026-08-29",
   "duaWindow": {
     "hour": 9,
@@ -24,17 +24,17 @@
     "catchupUntilHour": 20,
     "alreadySentToday": 12
   },
-  "duaCandidates": 1,
-  "recCandidates": 1,
+  "duaCandidates": 0,
+  "recCandidates": 0,
   "sent": 0,
   "accepted": {
     "dua": 0,
     "recommendation": 0
   },
-  "invalidSubscriptionsDisabled": 2,
+  "invalidSubscriptionsDisabled": 0,
   "skipped": 0,
   "duplicates": 24,
-  "errors": 2,
+  "errors": 0,
   "forceSend": null,
   "dailyContentDate": "2026-08-29",
   "currentRecommendation": {
@@ -49,5 +49,5 @@
     "category": "Hilfe & Aufrichtigkeit"
   },
   "configAutomatic": true,
-  "lastError": "2 Fehler beim Tages-Push"
+  "lastError": null
 }
