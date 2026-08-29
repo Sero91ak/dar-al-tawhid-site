@@ -87,6 +87,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-frauen-beitrag-trennung-v741-2026-08-29",
+      "approvedBy": "user-explicit-test-frauen-beitrag-trennung",
+      "reason": "Nutzer: Frauen-Liste und Aussage-Detail wie Beitragsbereich — Ovalfelder, Dick-auf-dünn-Linien, Titel/Aussage/Quelle getrennt. Nur Test-App.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/frauen/",
+        "test/data/frauen-fiqh.json",
+        "test/data/frauen-sahabiyyat.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "test-frauen-ovale-filter-v740-2026-08-29",
       "approvedBy": "user-explicit-test-frauen-ovale-filter",
       "reason": "Nutzer: Frauen-Bereich — fehlende Oval-Linien wie Duʿāʾ und sichtbare Themen-Filterchips. Nur Test-App.",

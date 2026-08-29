@@ -255,28 +255,29 @@
     var labelMap = abschnitt === "sahabiyyat" ? SAHAB_BEREICH_LABEL : FIQH_BEREICH_LABEL;
     var bereich = labelMap[e.bereich] || e.bereich || "";
     var name = abschnitt === "sahabiyyat" && e.name ? '<p class="frauen-statement-card__name">' + esc(e.name) + "</p>" : "";
-    var extra =
-      abschnitt === "fiqh" && lehreVon(e)
-        ? '<p class="frauen-statement-card__nutzen">' + esc(lehreVon(e).length > 92 ? lehreVon(e).slice(0, 90).replace(/\s+\S*$/, "") + "…" : lehreVon(e)) + "</p>"
-        : "";
+    var hair = '<span class="frauen-hairline" aria-hidden="true"></span>';
     return (
       '<article class="frauen-statement-card" data-nav="frauen" data-value="' +
       esc(abschnitt + "/" + e.kennung) +
       '">' +
+      '<div class="frauen-statement-card__titel">' +
       name +
       "<h3>" +
       esc(titelVon(e)) +
       "</h3>" +
-      '<p class="frauen-statement-card__preview">' +
-      esc(vorschauVon(e)) +
-      "</p>" +
       '<p class="frauen-statement-card__meta">' +
       esc(bereich ? bereich + " · " : "") +
       "Geprüft</p>" +
-      extra +
+      "</div>" +
+      hair +
+      '<p class="frauen-statement-card__preview">' +
+      esc(vorschauVon(e)) +
+      "</p>" +
+      hair +
       '<p class="frauen-statement-card__quelle">' +
       esc(quelleKurz(e)) +
       "</p>" +
+      hair +
       '<span class="frauen-open-btn">Aussage öffnen</span>' +
       "</article>"
     );
@@ -326,40 +327,51 @@
     if (!e) {
       return '<p class="frauen-empty">Diese Aussage ist nicht sichtbar oder noch in Prüfung.</p>';
     }
-    var kicker = abschnitt === "sahabiyyat" ? "Aussage · Ṣaḥābiyyāt" : "Aussage · Fiqh der Frauen";
+    var kicker = abschnitt === "sahabiyyat" ? "Ṣaḥābiyyāt" : "Fiqh der Frauen";
     var nameLine =
       abschnitt === "sahabiyyat" && e.name
-        ? '<p class="frauen-article__kicker">' + esc(e.name) + " · " + kicker.replace("Aussage · ", "") + "</p>"
-        : '<p class="frauen-article__kicker">' + kicker + "</p>";
+        ? '<p class="frauen-oval__kicker">' + esc(e.name) + " · " + kicker + "</p>"
+        : '<p class="frauen-oval__kicker">' + kicker + "</p>";
     var linkText = e.direktnachweisText || "→ Quelle öffnen";
     var lehre = lehreVon(e);
+    var hair = '<span class="frauen-hairline" aria-hidden="true"></span>';
     return (
-      '<article class="frauen-article">' +
+      '<article class="frauen-post-reader">' +
+      '<header class="frauen-oval frauen-oval--titel">' +
       nameLine +
-      '<h2 class="frauen-article__title">' +
+      '<h2 class="frauen-oval__title">' +
       esc(titelVon(e)) +
       "</h2>" +
-      '<p class="frauen-article__section">Aussage</p>' +
-      '<p class="frauen-article__body">' +
+      '<p class="frauen-oval__meta">Titel · geprüfte Aussage</p>' +
+      "</header>" +
+      hair +
+      '<section class="frauen-oval frauen-oval--aussage">' +
+      '<p class="frauen-oval__kicker">Aussage</p>' +
+      '<p class="frauen-oval__body">' +
       esc(e.inhalt) +
       "</p>" +
       (lehre
-        ? '<p class="frauen-article__section">Nutzen / Lehre</p><p class="frauen-article__nutzen">' +
+        ? hair +
+          '<p class="frauen-oval__kicker">Nutzen / Lehre</p>' +
+          '<p class="frauen-oval__nutzen">' +
           esc(lehre) +
           "</p>"
         : "") +
-      '<div class="frauen-source-card">' +
-      '<p class="frauen-source-card__title">Quelle</p>' +
-      "<p>" +
+      "</section>" +
+      hair +
+      '<section class="frauen-oval frauen-oval--quelle">' +
+      '<p class="frauen-oval__kicker">Quelle</p>' +
+      '<p class="frauen-oval__cite">' +
       esc(e.quellenanzeige) +
       "</p>" +
-      '<p class="frauen-source-card__title frauen-source-card__title--sub">Direktnachweis</p>' +
+      hair +
+      '<p class="frauen-oval__kicker">Direktnachweis</p>' +
       '<a class="frauen-direktnachweis" href="' +
       esc(e.direktnachweisUrl) +
       '" target="_blank" rel="noopener noreferrer">' +
       esc(linkText) +
       "</a>" +
-      "</div>" +
+      "</section>" +
       '<button type="button" class="frauen-open-btn" data-nav="frauen" data-value="' +
       esc(abschnitt) +
       '">Zurück zur Übersicht</button>' +
@@ -391,16 +403,9 @@
       };
     }
     if (parsed.page === "detail") {
-      var data = cacheFor(parsed.abschnitt);
-      var e = data && (data.eintraege || []).find(function (x) {
-        return x.kennung === parsed.kennung && istSichtbar(x);
-      });
       return {
-        title: e ? titelVon(e) : "Aussage",
-        subtitle:
-          parsed.abschnitt === "sahabiyyat"
-            ? "Ṣaḥābiyyāt · Quelle und Direktnachweis"
-            : "Fiqh der Frauen · Quelle und Direktnachweis"
+        title: parsed.abschnitt === "sahabiyyat" ? "Ṣaḥābiyyāt" : "Fiqh der Frauen",
+        subtitle: "Aussage · Quelle und Direktnachweis"
       };
     }
     return {
