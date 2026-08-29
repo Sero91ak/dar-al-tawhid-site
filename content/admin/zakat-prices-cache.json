@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T16:40:20.230Z",
+  "updatedAt": "2026-08-29T17:00:20.878Z",
   "provider": "aurumrates.com",
   "active": true,
   "gold": {
@@ -12,7 +12,7 @@
     "nisabEur": 10632.65,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-08-29T16:40:20.230Z",
+    "fetchedAt": "2026-08-29T17:00:20.878Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
@@ -27,17 +27,27 @@
     "nisabEur": 1112.65,
     "source": "COMEX Spot (Echtzeit) · AURUM · EUR via Frankfurter/ECB",
     "provider": "aurumrates.com",
-    "fetchedAt": "2026-08-29T16:40:20.230Z",
+    "fetchedAt": "2026-08-29T17:00:20.878Z",
     "validUntil": "",
     "status": "ok",
     "isManual": false,
     "adminNote": ""
   },
   "standardNisabEur": 1112.65,
-  "lastSuccessAt": "2026-08-29T16:40:20.230Z",
+  "lastSuccessAt": "2026-08-29T17:00:20.878Z",
   "lastError": "",
-  "lastFetchAt": "2026-08-29T16:40:20.230Z",
+  "lastFetchAt": "2026-08-29T17:00:20.878Z",
   "fetchLogs": [
+    {
+      "id": "log-1788022820878",
+      "provider": "aurumrates.com",
+      "status": "ok",
+      "errorMessage": "",
+      "fetchedAt": "2026-08-29T17:00:20.878Z",
+      "durationMs": 823,
+      "goldPerGram": 125.09,
+      "silverPerGram": 1.87
+    },
     {
       "id": "log-1788021620230",
       "provider": "aurumrates.com",
@@ -526,16 +536,6 @@
       "fetchedAt": "2026-08-27T17:45:22.681Z",
       "durationMs": 643,
       "goldPerGram": 128.75,
-      "silverPerGram": 1.94
-    },
-    {
-      "id": "log-1787851222501",
-      "provider": "aurumrates.com",
-      "status": "ok",
-      "errorMessage": "",
-      "fetchedAt": "2026-08-27T17:20:22.501Z",
-      "durationMs": 654,
-      "goldPerGram": 128.8,
       "silverPerGram": 1.94
     }
   ]
