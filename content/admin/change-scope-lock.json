@@ -87,6 +87,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-quran-search-oval-v726-2026-08-29",
+      "approvedBy": "user-explicit-quran-search-no-blue-oval-gold",
+      "reason": "Nutzer: Qurʾān Suchbereich Blau weg, ovale Goldlinie dick zu dünn.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-ink-gold-frame-v725-2026-08-29",
       "approvedBy": "user-explicit-eisgold-feed-ink-frame",
       "reason": "Nutzer: Feed-Blau weg, Schrift schwarz lesbar, edle gold-schwarze Linie durch Eisgold.",

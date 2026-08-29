@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v717";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v726";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -26192,7 +26192,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v717";
+const APP_BUILD_ID="app-shell-v726";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -31486,6 +31486,67 @@ html[data-theme="eisgold"] .quiz-shell.quiz-shell-pro .quiz-option{
 }
 </style>
 
+<style id="eisgold-quran-search-oval-v726">
+/* Eisgold Qurʾān-Suche: kein Eisblau, ovale Goldlinie dick→dünn. */
+html[data-theme="eisgold"] body.is-quran-overview .qov-title,
+html[data-theme="eisgold"] body.is-quran-overview .qov-subtitle{
+  color:#111111!important;
+  -webkit-text-fill-color:#111111!important;
+  text-shadow:none!important;
+}
+html[data-theme="eisgold"] body.is-quran-overview .qov-nav-stack,
+html[data-theme="eisgold"] body.is-quran-overview .qov-search-shell,
+html[data-theme="eisgold"] body.is-quran-overview .qov-nav-stack .qov-nav-stack-search,
+html[data-theme="eisgold"] body.is-quran-overview .qov-search-panel .qov-search-shell,
+html[data-theme="eisgold"] body.is-quran-overview .qov-search-wrap .qov-search-shell{
+  position:relative!important;
+  background:#ffffff!important;
+  background-color:#ffffff!important;
+  background-image:none!important;
+  border:0!important;
+  overflow:visible!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] body.is-quran-overview .qov-nav-stack{
+  border-radius:36px!important;
+  padding:10px 10px 12px!important;
+}
+html[data-theme="eisgold"] body.is-quran-overview .qov-search-shell,
+html[data-theme="eisgold"] body.is-quran-overview .qov-nav-stack .qov-nav-stack-search,
+html[data-theme="eisgold"] body.is-quran-overview .qov-search-panel .qov-search-shell,
+html[data-theme="eisgold"] body.is-quran-overview .qov-search-wrap .qov-search-shell{
+  border-radius:999px!important;
+}
+html[data-theme="eisgold"] body.is-quran-overview .qov-nav-stack::before,
+html[data-theme="eisgold"] body.is-quran-overview .qov-search-shell::before,
+html[data-theme="eisgold"] body.is-quran-overview .qov-nav-stack .qov-nav-stack-search::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  border-radius:inherit!important;
+  pointer-events:none!important;
+  z-index:2!important;
+  padding:2.8px 1.05px .65px 2.35px!important;
+  background:linear-gradient(135deg,#7a5c22 0%,#e8d08a 32%,#c8a95a 62%,rgba(200,169,90,.22) 100%)!important;
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0)!important;
+  -webkit-mask-composite:xor!important;
+  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0)!important;
+  mask-composite:exclude!important;
+}
+html[data-theme="eisgold"] body.is-quran-overview .qov-nav-stack .qov-nav-stack-jump{
+  border-top:0!important;
+  background:transparent!important;
+}
+html[data-theme="eisgold"] body.is-quran-overview .qov-search,
+html[data-theme="eisgold"] body.is-quran-overview .qov-search-icon{
+  color:#111111!important;
+}
+html[data-theme="eisgold"] body.is-quran-overview .qov-search::placeholder{
+  color:#1a1a1a!important;
+  opacity:.7!important;
+}
+</style>
+
 <script>
 (function(){
   /* v661 · Keine Inline-Hintergrundfarben mehr — die klebten (z.B. Royal-Blau) über Theme-Wechsel. */
@@ -31596,6 +31657,7 @@ html[data-theme="eisgold"] .quiz-shell.quiz-shell-pro .quiz-option{
     var noNavy=document.getElementById("eisgold-quran-no-navy-v723");
     var noBlue=document.getElementById("eisgold-feed-top-no-blue-v724");
     var noble=document.getElementById("eisgold-ink-gold-frame-v725");
+    var oval=document.getElementById("eisgold-quran-search-oval-v726");
     var host=document.documentElement||(s&&s.parentNode);
     if(s&&host) host.appendChild(s);
     if(ice&&host) host.appendChild(ice);
@@ -31615,6 +31677,7 @@ html[data-theme="eisgold"] .quiz-shell.quiz-shell-pro .quiz-option{
     if(noNavy&&host) host.appendChild(noNavy);
     if(noBlue&&host) host.appendChild(noBlue);
     if(noble&&host) host.appendChild(noble);
+    if(oval&&host) host.appendChild(oval);
     try{
       var root=document.documentElement;
       if(!root)return;
