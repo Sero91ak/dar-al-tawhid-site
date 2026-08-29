@@ -1,17 +1,17 @@
 /* Eisgold — ice-white / ice-blue field, gold lines, near-black ink. Not cream, not charcoal. */
 html[data-theme="eisgold"]{
   color-scheme:light!important;
-  --bg:#d8eefb!important;
-  --bg2:#dceaf6!important;
-  --panel:#d8eefb!important;
-  --card:#d8eefb!important;
-  --page-cover:#d8eefb!important;
-  --page-cover-mid:#cfe8f6!important;
-  --gold:#7a5c22!important;
-  --gold2:#1c1812!important;
-  --bronze:#6e5220!important;
-  --cream:#1c1812!important;
-  --text:#1c1812!important;
+  --bg:#f7fcff!important;
+  --bg2:#e8f3fb!important;
+  --panel:rgba(255,255,255,.90)!important;
+  --card:rgba(255,255,255,.86)!important;
+  --page-cover:#f8fcff!important;
+  --page-cover-mid:#edf6ff!important;
+  --gold:#c8a95a!important;
+  --gold2:#142033!important;
+  --bronze:#a9852f!important;
+  --cream:#142033!important;
+  --text:#142033!important;
   --muted:#637083!important;
   --muted2:#7a8798!important;
   --line:rgba(200,169,90,.34)!important;
@@ -19,40 +19,43 @@ html[data-theme="eisgold"]{
   --shadow:0 16px 36px rgba(20,32,51,.08)!important;
   --premium-border:rgba(200,169,90,.34)!important;
   --premium-bg:
-    radial-gradient(circle at 14% 0%,rgba(184,150,58,.16),transparent 38%),
-    radial-gradient(circle at 86% 9%,rgba(132,186,226,.28),transparent 34%),
-    linear-gradient(180deg,#d8eefb 0%,#e2f3fc 42%,#d8eefb 72%,#cde6f6 100%)!important;
+    radial-gradient(ellipse 160% 78% at 50% -22%,rgba(255,255,255,.96) 0%,transparent 58%),
+    radial-gradient(ellipse 92% 62% at 6% -10%,rgba(200,169,90,.22) 0%,transparent 56%),
+    radial-gradient(ellipse 96% 64% at 96% -6%,rgba(132,186,226,.40) 0%,transparent 58%),
+    linear-gradient(180deg,#f8fcff 0%,#edf6ff 48%,#e4f0fb 100%)!important;
   --premium-shadow:0 14px 32px rgba(20,32,51,.08),inset 0 1px 0 rgba(255,255,255,.82)!important;
-  --premium-label:#6e5220!important;
-  --premium-title:#1c1812!important;
+  --premium-label:#a9852f!important;
+  --premium-title:#142033!important;
   --premium-body:#3d4c60!important;
   --premium-pill-border:rgba(200,169,90,.36)!important;
-  --premium-pill-bg:#d8eefb!important;
+  --premium-pill-bg:linear-gradient(135deg,rgba(255,255,255,.96),rgba(232,244,255,.88))!important;
   --premium-pill-text:#142033!important;
   --theme-logo-ring:rgba(200,169,90,.42)!important;
   --theme-logo-glow:rgba(255,255,255,.70)!important;
-  --theme-page-bg:#d8eefb!important;
-  --theme-feed-bg:#d8eefb!important;
+  --theme-page-bg:#f7fcff!important;
+  --theme-feed-bg:transparent!important;
   --theme-feed-overlay:linear-gradient(180deg,rgba(20,32,51,.00) 0%,rgba(20,32,51,.10) 100%)!important;
-  --theme-feed-top:#d8eefb!important;
-  --theme-feed-panel:#d8eefb!important;
-  --theme-feed-panel-capture:#d8eefb!important;
+  --theme-feed-top:transparent!important;
+  --theme-feed-panel:rgba(255,255,255,.42)!important;
+  --theme-feed-panel-capture:rgba(255,255,255,.86)!important;
   --theme-feed-panel-text:#142033!important;
   --theme-feed-panel-border:rgba(200,169,90,.28)!important;
   --theme-accent:#c8a95a!important;
   --theme-text:#142033!important;
   --theme-muted:#637083!important;
-  --theme-surface:#d8eefb!important;
-  --outer-bg-flat:#d8eefb;
+  --theme-surface:rgba(255,255,255,.86)!important;
+  --outer-bg-flat:#f7fcff;
   --outer-bg:
-    radial-gradient(circle at 14% 0%,rgba(184,150,58,.16),transparent 38%),
-    radial-gradient(circle at 86% 9%,rgba(132,186,226,.28),transparent 34%),
-    linear-gradient(180deg,#d8eefb 0%,#e2f3fc 42%,#d8eefb 72%,#cde6f6 100%);
+    radial-gradient(ellipse 160% 78% at 50% -22%,rgba(255,255,255,.96) 0%,transparent 58%),
+    radial-gradient(ellipse 92% 62% at 6% -10%,rgba(200,169,90,.22) 0%,transparent 56%),
+    radial-gradient(ellipse 96% 64% at 96% -6%,rgba(132,186,226,.40) 0%,transparent 58%),
+    radial-gradient(ellipse 140% 70% at 50% 118%,rgba(200,169,90,.12) 0%,transparent 60%),
+    linear-gradient(180deg,#f8fcff 0%,#edf6ff 48%,#e4f0fb 100%);
   --cover-edge-bg:linear-gradient(180deg,#f8fcff 0%,#edf6ff 48%,rgba(237,246,255,0) 100%);
-  --cover-panel-bg:#d8eefb;
+  --cover-panel-bg:linear-gradient(180deg,rgba(255,255,255,.92),rgba(237,246,255,.90));
   --cover-panel-border:rgba(200,169,90,.34);
   --glow-accent:#c8a95a;
-  --quran-page-bg:#d8eefb;
+  --quran-page-bg:#f7fcff;
   --quran-text:#142033;
   --quran-text-muted:#637083;
   --slide-bg:linear-gradient(145deg,rgba(255,255,255,.88),rgba(237,246,255,.94))!important;
@@ -79,7 +82,7 @@ html[data-theme="eisgold"],
 html[data-theme="eisgold"] body{
   color:#142033!important;
   background:var(--outer-bg)!important;
-  background-color:#e8f3fb!important;
+  background-color:#f7fcff!important;
 }
 html[data-theme="eisgold"] body:before{
   opacity:1!important;

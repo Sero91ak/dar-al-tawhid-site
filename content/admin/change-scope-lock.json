@@ -87,6 +87,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-glacier-restore-v720-2026-08-29",
+      "approvedBy": "user-explicit-eisgold-look-broken",
+      "reason": "Nutzer: Eisgold hat nichts mehr mit Eisgold zu tun. Hell weiß-blau wie Gletscher/Ozean, leicht Gold. Seite kaputt.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/theme-eisgold.css",
+        "assets/dar-bottom-nav-glass.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-quran-header-v719-2026-08-29",
       "approvedBy": "user-explicit-eisgold-quran-kasten",
       "reason": "Nutzer: dunklen blauen Qurʾān-Kasten entfernen, Farbe einheitlich oversize bis oben.",

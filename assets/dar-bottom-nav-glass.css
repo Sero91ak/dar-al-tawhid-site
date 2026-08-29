@@ -154,13 +154,13 @@ html[data-theme="aurora"] {
 
 /* —— Eisgold —— */
 html[data-theme="eisgold"] {
-  --bottom-nav-bg: #d8eefb;
-  --bottom-nav-bg-glass: #d8eefb;
-  --bottom-nav-border: transparent;
-  --bottom-nav-highlight: transparent;
-  --bottom-nav-shadow: none;
-  --bottom-nav-blur: 0px;
-  --bottom-nav-saturation: 1;
+  --bottom-nav-bg: rgba(247, 252, 255, 0.94);
+  --bottom-nav-bg-glass: linear-gradient(180deg, rgba(255,255,255,.78), rgba(232,244,252,.62));
+  --bottom-nav-border: rgba(200, 169, 90, 0.34);
+  --bottom-nav-highlight: rgba(255, 255, 255, 0.82);
+  --bottom-nav-shadow: 0 8px 24px rgba(20, 32, 51, 0.08);
+  --bottom-nav-blur: 18px;
+  --bottom-nav-saturation: 1.12;
 
   --bottom-tab-active-bg: rgba(184, 150, 58, 0.22);
   --bottom-tab-active-border: rgba(184, 150, 58, 0.38);
@@ -201,12 +201,11 @@ html[data-theme] #appChromeDock #bottomNav.bottom-nav,
 html[data-theme="eisgold"] #bottomNav.bottom-nav,
 html[data-theme="eisgold"] #appChromeDock #bottomNav.bottom-nav,
 html[data-theme="eisgold"] .bottom-nav {
-  background: #d8eefb !important;
-  background-image: none !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
+  background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(232,244,252,.62)) !important;
+  border: 1px solid rgba(200, 169, 90, 0.34) !important;
+  box-shadow: 0 8px 24px rgba(20, 32, 51, 0.08), inset 0 1px 0 rgba(255,255,255,.82) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.12) !important;
+  backdrop-filter: blur(18px) saturate(1.12) !important;
 }
 
 @media (prefers-reduced-transparency: reduce) {

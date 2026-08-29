@@ -31061,10 +31061,118 @@ html[data-theme="eisgold"] body.is-quran-reader-route .qrc-chrome::after{
 }
 </style>
 
+<style id="eisgold-glacier-v720">
+/* Eisgold zurück: helles Gletscher-Weißblau + Ozean + leichtes Gold. Kein flacher Farbkasten. */
+html[data-theme="eisgold"]{
+  --bg:#f7fcff!important;
+  --bg2:#e8f3fb!important;
+  --card:rgba(255,255,255,.86)!important;
+  --panel:rgba(255,255,255,.90)!important;
+  --theme-surface:rgba(255,255,255,.86)!important;
+  --outer-bg-flat:#f7fcff!important;
+  --dar-edge-fill:#f7fcff!important;
+  --dar-boot-fill:#f7fcff!important;
+  --theme-page-bg:#f7fcff!important;
+  --quran-page-bg:#f7fcff!important;
+  --quran-header-bg:transparent!important;
+  --quran-gradient-page:transparent!important;
+  --quran-gradient-header:transparent!important;
+  --gold:#c8a95a!important;
+  --bronze:#a9852f!important;
+  --theme-accent:#c8a95a!important;
+  --outer-bg:
+    radial-gradient(ellipse 160% 78% at 50% -22%,rgba(255,255,255,.96) 0%,transparent 58%),
+    radial-gradient(ellipse 92% 62% at 6% -10%,rgba(200,169,90,.22) 0%,transparent 56%),
+    radial-gradient(ellipse 96% 64% at 96% -6%,rgba(132,186,226,.42) 0%,transparent 58%),
+    radial-gradient(ellipse 140% 70% at 50% 118%,rgba(200,169,90,.12) 0%,transparent 60%),
+    linear-gradient(180deg,#f8fcff 0%,#edf6ff 48%,#e4f0fb 100%)!important;
+  --premium-bg:var(--outer-bg)!important;
+  --app-bg:var(--outer-bg)!important;
+}
+html[data-theme="eisgold"],
+html[data-theme="eisgold"].is-standalone-pwa,
+html[data-theme="eisgold"].dar-ios-native-app{
+  background-color:#f7fcff!important;
+  background-image:none!important;
+}
+html[data-theme="eisgold"] body,
+html[data-theme="eisgold"] body.is-home-route,
+html[data-theme="eisgold"] body.is-more-route,
+html[data-theme="eisgold"] body.is-feed-fullscreen,
+html[data-theme="eisgold"] body.is-quran-overview,
+html[data-theme="eisgold"] body.is-quiz-route,
+html[data-theme="eisgold"] body.is-account-route,
+html[data-theme="eisgold"] body.is-area-route{
+  background:var(--outer-bg)!important;
+  background-color:#f7fcff!important;
+}
+html[data-theme="eisgold"] #appRoot,
+html[data-theme="eisgold"] #appShell,
+html[data-theme="eisgold"] .app,
+html[data-theme="eisgold"] #appView,
+html[data-theme="eisgold"] #appView.view,
+html[data-theme="eisgold"] .qov-page,
+html[data-theme="eisgold"] .qov-header,
+html[data-theme="eisgold"] .qov-sticky-tools,
+html[data-theme="eisgold"] .sf-app,
+html[data-theme="eisgold"] .sf-top,
+html[data-theme="eisgold"] .more-page{
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] .feature-section,
+html[data-theme="eisgold"] .more-group,
+html[data-theme="eisgold"] .premium-surface,
+html[data-theme="eisgold"] .account-hub-card,
+html[data-theme="eisgold"] .account-home-hint,
+html[data-theme="eisgold"] body.is-more-route .feature-section,
+html[data-theme="eisgold"] body.is-more-route .more-group,
+html[data-theme="eisgold"] body.is-more-route .premium-surface{
+  background:linear-gradient(180deg,rgba(255,255,255,.92) 0%,rgba(237,246,255,.78) 100%)!important;
+  border:1px solid rgba(200,169,90,.34)!important;
+  border-radius:22px!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 12px 28px rgba(20,32,51,.06)!important;
+}
+html[data-theme="eisgold"] .more-search,
+html[data-theme="eisgold"] body.is-more-route .more-search{
+  background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(232,244,255,.88))!important;
+  border:1px solid rgba(200,169,90,.32)!important;
+  border-radius:14px!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9)!important;
+}
+html[data-theme="eisgold"] .more-feature-row,
+html[data-theme="eisgold"] body.is-more-route .more-feature-row{
+  background:transparent!important;
+  border:0!important;
+  border-bottom:1px solid rgba(200,169,90,.18)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] body.is-quran-overview .qov-header,
+html[data-theme="eisgold"] body.is-quran-overview .qov-nav-stack,
+html[data-theme="eisgold"] body.is-quran-reader-route .qrc-chrome,
+html[data-theme="eisgold"] body.is-quran-reader-route .qrc-chrome::before,
+html[data-theme="eisgold"] body.is-quran-reader-route .qrc-chrome::after{
+  background:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] #bottomNav.bottom-nav,
+html[data-theme="eisgold"] .bottom-nav{
+  background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(232,244,252,.62))!important;
+  border:1px solid rgba(200,169,90,.34)!important;
+  box-shadow:0 8px 24px rgba(20,32,51,.08),inset 0 1px 0 rgba(255,255,255,.82)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(1.12)!important;
+  backdrop-filter:blur(18px) saturate(1.12)!important;
+}
+</style>
+
 <script>
 (function(){
   /* v661 · Keine Inline-Hintergrundfarben mehr — die klebten (z.B. Royal-Blau) über Theme-Wechsel. */
-  var THEME_SOLID={dark:"#050706",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605",eisgold:"#d8eefb"};
+  var THEME_SOLID={dark:"#050706",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605",eisgold:"#f7fcff"};
   var CLEAR_PROPS=["background","background-color","background-image","backdrop-filter","-webkit-backdrop-filter"];
   var CLEAR_SELS=[
     "html",
@@ -31165,6 +31273,7 @@ html[data-theme="eisgold"] body.is-quran-reader-route .qrc-chrome::after{
     var uni=document.getElementById("eisgold-unified-field-v717");
     var sheet=document.getElementById("eisgold-one-sheet-v718");
     var quran=document.getElementById("eisgold-quran-sheet-v719");
+    var glacier=document.getElementById("eisgold-glacier-v720");
     var host=document.documentElement||(s&&s.parentNode);
     if(s&&host) host.appendChild(s);
     if(ice&&host) host.appendChild(ice);
@@ -31178,6 +31287,7 @@ html[data-theme="eisgold"] body.is-quran-reader-route .qrc-chrome::after{
     if(uni&&host) host.appendChild(uni);
     if(sheet&&host) host.appendChild(sheet);
     if(quran&&host) host.appendChild(quran);
+    if(glacier&&host) host.appendChild(glacier);
     try{
       var root=document.documentElement;
       if(!root)return;
@@ -31211,8 +31321,8 @@ html[data-theme="eisgold"] body.is-quran-reader-route .qrc-chrome::after{
     try{
       var root=document.documentElement;
       if(!root||root.getAttribute("data-theme")!=="eisgold")return;
-      var ice="#d8eefb";
-      var ink="#0a1628";
+      var ice="#f7fcff";
+      var ink="#142033";
       root.style.setProperty("background-color",ice,"important");
       root.style.setProperty("background-image","none","important");
       if(document.body){
