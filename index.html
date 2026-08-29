@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v715";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v716";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -26192,7 +26192,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v715";
+const APP_BUILD_ID="app-shell-v716";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -30804,6 +30804,56 @@ html[data-theme="eisgold"] #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
 }
 </style>
 
+<style id="eisgold-oversize-routes-v716">
+/* Eisgold Feed/Mehr/Quiz: dieselbe oversize-Eisfäche wie Start — Schalen transparent, kein abgeschnittener Farbkasten. */
+html[data-theme="eisgold"]{
+  --theme-feed-bg:transparent!important;
+  --theme-feed-top:transparent!important;
+  --theme-feed-aura:none!important;
+}
+html[data-theme="eisgold"] body.is-feed-fullscreen,
+html[data-theme="eisgold"] body.is-feed-fullscreen.has-bottom-nav,
+html[data-theme="eisgold"] body.is-more-route,
+html[data-theme="eisgold"] body.is-quiz-route,
+html[data-theme="eisgold"] body.is-account-route,
+html[data-theme="eisgold"] body.is-area-route{
+  background:var(--outer-bg)!important;
+  background-color:#d8eefb!important;
+  background-image:var(--outer-bg)!important;
+}
+html[data-theme="eisgold"] body.is-feed-fullscreen .app,
+html[data-theme="eisgold"] body.is-feed-fullscreen #appView,
+html[data-theme="eisgold"] body.is-feed-fullscreen #appView.view,
+html[data-theme="eisgold"] body.is-feed-fullscreen .view,
+html[data-theme="eisgold"] body.is-feed-fullscreen #premiumFeedMount,
+html[data-theme="eisgold"] body.is-feed-fullscreen .pf-mount-root,
+html[data-theme="eisgold"] body.is-feed-fullscreen .sf-app,
+html[data-theme="eisgold"] body.is-feed-fullscreen .sf-top,
+html[data-theme="eisgold"] body.is-feed-fullscreen .sf-filters,
+html[data-theme="eisgold"] body.is-feed-fullscreen .sf-feed,
+html[data-theme="eisgold"] body.is-more-route #appView,
+html[data-theme="eisgold"] body.is-more-route #appView.view,
+html[data-theme="eisgold"] body.is-more-route .view,
+html[data-theme="eisgold"] body.is-more-route .view-head,
+html[data-theme="eisgold"] body.is-more-route .more-page,
+html[data-theme="eisgold"] body.is-quiz-route #appView.view,
+html[data-theme="eisgold"] body.is-quiz-route .view-head,
+html[data-theme="eisgold"] body.is-account-route #appView.view,
+html[data-theme="eisgold"] body.is-account-route .view-head,
+html[data-theme="eisgold"] body.is-area-route #appView.view{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] body.is-feed-fullscreen .sf-app:before,
+html[data-theme="eisgold"] body.is-feed-fullscreen .sf-app::before{
+  display:none!important;
+  content:none!important;
+  background:none!important;
+}
+</style>
+
 <script>
 (function(){
   /* v661 · Keine Inline-Hintergrundfarben mehr — die klebten (z.B. Royal-Blau) über Theme-Wechsel. */
@@ -30904,6 +30954,7 @@ html[data-theme="eisgold"] #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
     var royal=document.getElementById("eisgold-royal-wash-v713");
     var head=document.getElementById("eisgold-home-head-v714");
     var ink2=document.getElementById("eisgold-ink-surfaces-v715");
+    var over=document.getElementById("eisgold-oversize-routes-v716");
     var host=document.documentElement||(s&&s.parentNode);
     if(s&&host) host.appendChild(s);
     if(ice&&host) host.appendChild(ice);
@@ -30913,6 +30964,7 @@ html[data-theme="eisgold"] #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
     if(royal&&host) host.appendChild(royal);
     if(head&&host) host.appendChild(head);
     if(ink2&&host) host.appendChild(ink2);
+    if(over&&host) host.appendChild(over);
     try{
       var root=document.documentElement;
       if(!root)return;
@@ -30923,6 +30975,11 @@ html[data-theme="eisgold"] #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
       /* Nur CSS-Variablen — Farben folgen data-theme / --outer-bg-flat. */
       root.style.setProperty("--theme-feed-top","var(--dar-edge-fill)","important");
       root.style.setProperty("--theme-feed-aura","none","important");
+      if(root.getAttribute("data-theme")==="eisgold"){
+        root.style.setProperty("--theme-feed-top","transparent","important");
+        root.style.setProperty("--theme-feed-bg","transparent","important");
+        root.style.setProperty("--theme-feed-aura","none","important");
+      }
       var app=document.querySelector(".app");
       if(app){
         app.style.setProperty("border","0","important");
@@ -30946,8 +31003,11 @@ html[data-theme="eisgold"] #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
       root.style.setProperty("background-color",ice,"important");
       root.style.setProperty("background-image","none","important");
       if(document.body){
+        document.body.style.setProperty("background","var(--outer-bg)","important");
         document.body.style.setProperty("background-color",ice,"important");
       }
+      root.style.setProperty("--theme-feed-top","transparent","important");
+      root.style.setProperty("--theme-feed-bg","transparent","important");
       [document.getElementById("appRoot"),document.getElementById("appShell"),document.getElementById("appView")].forEach(function(el){
         if(!el||!el.style)return;
         el.style.setProperty("background","transparent","important");

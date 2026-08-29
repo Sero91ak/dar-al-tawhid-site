@@ -87,6 +87,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-oversize-feed-mehr-v716-2026-08-29",
+      "approvedBy": "user-explicit-eisgold-feed-oversize",
+      "reason": "Nutzer: Feed/Mehr sollen dieselbe oversize hintergrundfüllende Eisfäche wie Start haben.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-ink-surfaces-v715-2026-08-29",
       "approvedBy": "user-explicit-eisgold-feed-quiz-quran-mehr-live",
       "reason": "Nutzer: Feed/Quiz/Qurʾān/Mehr wie Startseite, goldene Verslinien, dunkle Schrift auf hell, push live.",
