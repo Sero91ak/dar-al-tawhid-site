@@ -23,6 +23,8 @@ const ADVANCE_CATCHUP_MAX_REMAINING_MS = 20 * 60 * 1000;
 const ADVANCE_COPY_VERSION = "fixed-min-v2";
 /** Gebetszeit-Push darf kurz nach Eintritt nachgeholt werden (Cron-/Grace-Lücke), ohne sendAfter zu mutieren. */
 const ENTRY_CATCHUP_MAX_LATE_MS = 12 * 60 * 1000;
+/** Im Grace-Fenster nicht nochmal sofort senden: send_after wurde schon geplant, iOS bekäme sonst ein Duplikat. */
+const PAST_SLOT_RESEND_SKIP_MS = 45 * 1000;
 const REFERENCE = { lat: 50.6256, lon: 6.9491, city: "Rheinbach", timeZone: "Europe/Berlin" };
 
 let lastStatusReport = null;
@@ -204,15 +206,29 @@ function syncedAtValue(value) {
   return Number.isFinite(ts) ? ts : 0;
 }
 
+function preferNewerRegistration(current, incoming) {
+  if (!current) return incoming;
+  return syncedAtValue(incoming?.last_synced_at) >= syncedAtValue(current?.last_synced_at)
+    ? incoming
+    : current;
+}
+
 function dedupeRegistrations(rows) {
-  const bySubscriptionId = new Map();
+  const byDeviceId = new Map();
+  const withoutDevice = [];
   for (const row of rows) {
+    const did = String(row?.device_id || "").trim();
+    if (!did) {
+      withoutDevice.push(row);
+      continue;
+    }
+    byDeviceId.set(did, preferNewerRegistration(byDeviceId.get(did), row));
+  }
+  const bySubscriptionId = new Map();
+  for (const row of [...byDeviceId.values(), ...withoutDevice]) {
     const sid = String(row?.subscription_id || "").trim();
     if (!sid) continue;
-    const existing = bySubscriptionId.get(sid);
-    if (!existing || syncedAtValue(row?.last_synced_at) >= syncedAtValue(existing?.last_synced_at)) {
-      bySubscriptionId.set(sid, row);
-    }
+    bySubscriptionId.set(sid, preferNewerRegistration(bySubscriptionId.get(sid), row));
   }
   return Array.from(bySubscriptionId.values());
 }
@@ -312,6 +328,12 @@ function schedId(group, prayer, sendAfter, mode) {
     group.tahajjudMode,
     mode === "advance" ? ADVANCE_COPY_VERSION : "entry-v1"
   ].join("|");
+}
+
+function prayerCollapseId(prayer, mode, sendAfter, timeZone) {
+  const parts = getLocalParts(sendAfter, timeZone || "Europe/Berlin");
+  const ymd = `${parts.year}${String(parts.month).padStart(2, "0")}${String(parts.day).padStart(2, "0")}`;
+  return `prayer-v1-${mode}-${prayer.key}-${ymd}`.slice(0, 64);
 }
 
 async function postOneSignal(env, body) {
@@ -437,6 +459,7 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
     throw new Error(`Push-Text blockiert (${prayer.key}/${mode}): enthält verbotene Formulierung`);
   }
 
+  const collapseId = prayerCollapseId(prayer, mode, sendAfter, group.timeZone);
   const body = withIcons({
     app_id: String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim(),
     target_channel: "push",
@@ -445,6 +468,8 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
     contents: copy.contents,
     url: String(env.SITE_URL || DEFAULT_SITE_URL),
     isAnyWeb: true,
+    collapse_id: collapseId,
+    web_push_topic: collapseId,
     idempotency_key: await uuidFrom(idKey)
   }, env);
 
@@ -588,7 +613,7 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
   const windowStart = new Date(now.getTime() - grace * 60000);
   const windowEnd = new Date(now.getTime() + lookahead * 60000);
   const stats = {
-    scheduled: 0, skippedPast: 0, skippedWindow: 0, duplicates: 0, recipients: 0, errors: 0,
+    scheduled: 0, skippedPast: 0, skippedAlreadyQueued: 0, skippedWindow: 0, duplicates: 0, recipients: 0, errors: 0,
     invalid: 0, invalidDisabled: 0,
     planned: [], skippedPastDetails: [], oneSignalResponses: [], errorDetails: [],
     cancelledBadAdvance: 0
@@ -659,6 +684,20 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
             if (catchupAdvance) stats.advanceCatchups = (stats.advanceCatchups || 0) + 1;
             if (catchupEntry) stats.entryCatchups = (stats.entryCatchups || 0) + 1;
           }
+          const alreadyDueMs = now.getTime() - slot.sendAfter.getTime();
+          if (alreadyDueMs > PAST_SLOT_RESEND_SKIP_MS && slot.sendAfter >= windowStart) {
+            stats.skippedAlreadyQueued = (stats.skippedAlreadyQueued || 0) + 1;
+            stats.skippedPast += 1;
+            stats.skippedPastDetails.push({
+              key: prayer.key,
+              mode: slot.mode,
+              sendAfter: slot.sendAfter.toISOString(),
+              time: formatHour(prayer.time),
+              timeZone: group.timeZone,
+              reason: "already-queued"
+            });
+            continue;
+          }
           if (slot.sendAfter > windowEnd) {
             stats.skippedWindow += 1;
             continue;
@@ -703,6 +742,7 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
     invalid: stats.invalid || 0,
     invalidDisabled: stats.invalidDisabled || 0,
     skippedPast: stats.skippedPast,
+    skippedAlreadyQueued: stats.skippedAlreadyQueued || 0,
     skippedWindow: stats.skippedWindow,
     advanceCatchups: stats.advanceCatchups || 0,
     entryCatchups: stats.entryCatchups || 0,
