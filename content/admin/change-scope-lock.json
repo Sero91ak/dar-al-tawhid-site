@@ -87,6 +87,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-frauen-islam-v734-2026-08-29",
+      "approvedBy": "user-explicit-test-app-frauen-bereich",
+      "reason": "Nutzer: Neuen Bereich Frauen im Islam nur in der Test-App aufbauen. Keine Besucher-App.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/data/frauen.json",
+        "test/data/frauen/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-picker-noble-v733-2026-08-29",
       "approvedBy": "user-explicit-quran-picker-noble-black-white-live",
       "reason": "Nutzer: Koran-Leser Juz/Sure/Aya-Waehler katastrophal, sofort edel — tiefschwarz, weisse Schrift, ovale Haarlinien, alle Themes.",

@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "feature": "frauenImIslam",
+  "env": "test",
+  "title": "Frauen im Islam",
+  "description": "Ein geordneter Bereich über Fiqh, Wissen, Vorbilder und Geschichten der frühen Musliminnen.",
+  "placeholder": "Dieser Bereich wird Schritt für Schritt mit geprüften Inhalten erweitert.",
+  "emptySection": "Noch keine geprüften Inhalte vorhanden.",
+  "generations": [
+    "Mutter der Gläubigen",
+    "Ṣaḥābiyyah",
+    "Tābiʿiyyah",
+    "Frau der Salaf"
+  ],
+  "sourceStatuses": [
+    "authentisch",
+    "zuverlässig",
+    "scholarly_disputed",
+    "offen",
+    "nicht veröffentlichen"
+  ],
+  "publishableStatuses": ["authentisch", "zuverlässig"],
+  "entrySchema": [
+    "id",
+    "title",
+    "category",
+    "generation",
+    "summary",
+    "body",
+    "lesson",
+    "source",
+    "sourceStatus"
+  ],
+  "sections": [
+    {
+      "id": "fiqh",
+      "title": "Fiqh der Frau",
+      "description": "Reinigung, Gebet, Fasten, Ehe, Familie und Alltag."
+    },
+    {
+      "id": "sahabiyyat",
+      "title": "Ṣaḥābiyyāt",
+      "description": "Frauen aus der Zeit des Propheten ﷺ und der Ṣaḥābah."
+    },
+    {
+      "id": "tabiiyyat",
+      "title": "Tābiʿiyyāt",
+      "description": "Frauen aus der Generation nach den Ṣaḥābah."
+    },
+    {
+      "id": "frauen-der-salaf",
+      "title": "Frauen der Salaf",
+      "description": "Berichte und Lehren aus dem Leben rechtschaffener Frauen der frühen Generationen."
+    },
+    {
+      "id": "muetter-der-glaeubigen",
+      "title": "Mütter der Gläubigen",
+      "description": "Profile, Ereignisse und Nutzen aus ihrem Leben."
+    },
+    {
+      "id": "ehe-familie",
+      "title": "Ehe & Familie",
+      "description": "Rechte, Pflichten, Umgang und islamische Ordnung."
+    },
+    {
+      "id": "hijab-schamhaftigkeit",
+      "title": "Schamhaftigkeit & Ḥijāb",
+      "description": "Adab, Kleidung, Grenzen und Umgang."
+    },
+    {
+      "id": "wissen",
+      "title": "Wissen & Lernen",
+      "description": "Warum Wissen für die Muslimah wichtig ist."
+    },
+    {
+      "id": "fragen",
+      "title": "Fragen & Antworten",
+      "description": "Geordnete Antworten zu häufigen Frauenthemen."
+    },
+    {
+      "id": "geschichten",
+      "title": "Kurze Geschichten",
+      "description": "Kurze, lehrreiche Ereignisse aus den Quellen."
+    }
+  ],
+  "entries": []
+}
