@@ -25672,7 +25672,7 @@ function featureCatalog(){
   if(typeof seasonalIslamicContext==="function"&&seasonalIslamicContext())items.push({id:"ramadan",title:"Ramaḍān & ʿĪd",icon:"🌙",desc:"Saisonale Beiträge und Zeiten.",button:"Öffnen",nav:"ramadan",group:"Alltag & Gebet",badge:"Saison"});
   {const qIdx=items.findIndex(x=>x.id==="quran");items.splice(qIdx>=0?qIdx+1:3,0,{id:"bibliothek",title:"DAR AL TAWḤĪD Bibliothek",icon:"📚",desc:"PDFs, Bücher und Themenhefte von DAR AL TAWḤĪD.",button:"Öffnen",nav:"bibliothek",group:"Lernen & Wissen",badge:"Neu"})}
   items.unshift({id:"propheten",title:"Die Propheten",icon:"",desc:"Qurʾān · Sunnah · authentische Überlieferungen",button:"Entdecken",nav:"propheten",group:"Lernen & Wissen",badge:"Wissen",premium:true});
-  if(testOnly){const dIdx=items.findIndex(x=>x.id==="duas");items.splice(dIdx>=0?dIdx+1:items.length,0,{id:"frauen",title:"Frauen im Islam",icon:"◈",desc:"Fiqh, Ṣaḥābiyyāt, Tābiʿiyyāt, Ehe, Familie und Wissen.",button:"Öffnen",nav:"frauen",group:"Lernen & Wissen"});}
+  if(testOnly){const pIdx=items.findIndex(x=>x.id==="propheten");items.splice(pIdx>=0?pIdx+1:1,0,{id:"frauen",title:"Frauen im Islam",icon:"◈",desc:"Fiqh, Ṣaḥābiyyāt, Tābiʿiyyāt, Ehe, Familie und Wissen.",button:"Öffnen",nav:"frauen",group:"Lernen & Wissen"});}
   if(!testOnly)return items.filter(item=>item.id!=="ilm"&&item.id!=="hadith");
   return items;
 }
