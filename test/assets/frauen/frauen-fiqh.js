@@ -24,6 +24,8 @@
   var HAJJ_SLUG = "hajj-umrah";
   var SADAQAH_URL = "/test/data/frauen-sadaqah-wohltatigkeit.json";
   var SADAQAH_SLUG = "sadaqah-wohltatigkeit";
+  var ADAB_URL = "/test/data/frauen-adab-charakter.json";
+  var ADAB_SLUG = "adab-charakter";
   var ERLAUBTE_QUELLENART = {
     quran: 1,
     sahih: 1,
@@ -319,6 +321,27 @@
     adab: "Adab",
     "in-pruefung": "In Prüfung"
   };
+  var ADAB_THEMEN = [
+    { id: "alle", label: "Alle" },
+    { id: "guter-charakter", label: "Guter Charakter" },
+    { id: "sprache", label: "Sprache" },
+    { id: "sanftmut", label: "Sanftmut" },
+    { id: "geduld", label: "Geduld" },
+    { id: "wut-beherrschen", label: "Wut beherrschen" },
+    { id: "familie", label: "Familie" },
+    { id: "adab", label: "Adab" },
+    { id: "in-pruefung", label: "In Prüfung" }
+  ];
+  var ADAB_BEREICH_LABEL = {
+    "guter-charakter": "Guter Charakter",
+    sprache: "Sprache",
+    sanftmut: "Sanftmut",
+    geduld: "Geduld",
+    "wut-beherrschen": "Wut beherrschen",
+    familie: "Familie",
+    adab: "Adab",
+    "in-pruefung": "In Prüfung"
+  };
 
   var fiqhCache = null;
   var sahabCache = null;
@@ -333,6 +356,7 @@
   var moscheeCache = null;
   var hajjCache = null;
   var sadaqahCache = null;
+  var adabCache = null;
   var loadPromise = null;
   var fiqhQ = "";
   var sahabQ = "";
@@ -347,6 +371,7 @@
   var moscheeQ = "";
   var hajjQ = "";
   var sadaqahQ = "";
+  var adabQ = "";
   var fiqhThema = "alle";
   var sahabThema = "alle";
   var tabiiThema = "alle";
@@ -360,6 +385,7 @@
   var moscheeThema = "alle";
   var hajjThema = "alle";
   var sadaqahThema = "alle";
+  var adabThema = "alle";
   var hubQ = "";
   var hubThema = "alle";
   var filterOpen = true;
@@ -371,6 +397,15 @@
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;");
+  }
+
+  function filterOben(abschnitt) {
+    return (
+      abschnitt === MOSCHEE_SLUG ||
+      abschnitt === HAJJ_SLUG ||
+      abschnitt === SADAQAH_SLUG ||
+      abschnitt === ADAB_SLUG
+    );
   }
 
   function istFaq(abschnitt) {
@@ -458,7 +493,7 @@
   }
 
   function load() {
-    if (fiqhCache && sahabCache && tabiiCache && muetterCache && eheCache && hijabCache && wissenCache && faqCache && kurzCache && salafCache && moscheeCache && hajjCache && sadaqahCache)
+    if (fiqhCache && sahabCache && tabiiCache && muetterCache && eheCache && hijabCache && wissenCache && faqCache && kurzCache && salafCache && moscheeCache && hajjCache && sadaqahCache && adabCache)
       return Promise.resolve();
     if (loadPromise) return loadPromise;
     loadPromise = Promise.all([
@@ -474,7 +509,8 @@
       fetchJson(SALAF_URL),
       fetchJson(MOSCHEE_URL),
       fetchJson(HAJJ_URL),
-      fetchJson(SADAQAH_URL)
+      fetchJson(SADAQAH_URL),
+      fetchJson(ADAB_URL)
     ])
       .then(function (pair) {
         fiqhCache = pair[0];
@@ -490,6 +526,7 @@
         moscheeCache = pair[10];
         hajjCache = pair[11];
         sadaqahCache = pair[12];
+        adabCache = pair[13];
       })
       .catch(function (err) {
         loadPromise = null;
@@ -551,6 +588,10 @@
     if (v.indexOf(SADAQAH_SLUG + "/") === 0) {
       return { page: "detail", abschnitt: SADAQAH_SLUG, kennung: v.slice(SADAQAH_SLUG.length + 1) };
     }
+    if (v === ADAB_SLUG) return { page: "list", abschnitt: ADAB_SLUG, kennung: "" };
+    if (v.indexOf(ADAB_SLUG + "/") === 0) {
+      return { page: "detail", abschnitt: ADAB_SLUG, kennung: v.slice(ADAB_SLUG.length + 1) };
+    }
     return { page: "hub", abschnitt: "", kennung: "" };
   }
 
@@ -567,6 +608,7 @@
     if (abschnitt === MOSCHEE_SLUG) return moscheeCache;
     if (abschnitt === HAJJ_SLUG) return hajjCache;
     if (abschnitt === SADAQAH_SLUG) return sadaqahCache;
+    if (abschnitt === ADAB_SLUG) return adabCache;
     return fiqhCache;
   }
 
@@ -584,6 +626,7 @@
     if (abschnitt === MOSCHEE_SLUG) return moscheeThema;
     if (abschnitt === HAJJ_SLUG) return hajjThema;
     if (abschnitt === SADAQAH_SLUG) return sadaqahThema;
+    if (abschnitt === ADAB_SLUG) return adabThema;
     return fiqhThema;
   }
 
@@ -601,6 +644,7 @@
     else if (abschnitt === MOSCHEE_SLUG) moscheeThema = id;
     else if (abschnitt === HAJJ_SLUG) hajjThema = id;
     else if (abschnitt === SADAQAH_SLUG) sadaqahThema = id;
+    else if (abschnitt === ADAB_SLUG) adabThema = id;
     else fiqhThema = id;
   }
 
@@ -618,6 +662,7 @@
     if (abschnitt === MOSCHEE_SLUG) return moscheeQ;
     if (abschnitt === HAJJ_SLUG) return hajjQ;
     if (abschnitt === SADAQAH_SLUG) return sadaqahQ;
+    if (abschnitt === ADAB_SLUG) return adabQ;
     return fiqhQ;
   }
 
@@ -635,6 +680,7 @@
     else if (abschnitt === MOSCHEE_SLUG) moscheeQ = v;
     else if (abschnitt === HAJJ_SLUG) hajjQ = v;
     else if (abschnitt === SADAQAH_SLUG) sadaqahQ = v;
+    else if (abschnitt === ADAB_SLUG) adabQ = v;
     else fiqhQ = v;
   }
 
@@ -659,7 +705,8 @@
         abschnitt === SALAF_SLUG ||
         abschnitt === MOSCHEE_SLUG ||
         abschnitt === HAJJ_SLUG ||
-        abschnitt === SADAQAH_SLUG
+        abschnitt === SADAQAH_SLUG ||
+        abschnitt === ADAB_SLUG
       ) {
         if (chip !== thema && e.thema !== thema) return false;
       } else if (chip !== thema) return false;
@@ -688,7 +735,7 @@
   }
 
   function offeneAbschnitte() {
-    return ["fiqh", "sahabiyyat", "tabiiyyat", MUETTER_SLUG, EHE_SLUG, HIJAB_SLUG, WISSEN_SLUG, FAQ_SLUG, KURZ_SLUG, SALAF_SLUG, MOSCHEE_SLUG, HAJJ_SLUG, SADAQAH_SLUG];
+    return ["fiqh", "sahabiyyat", "tabiiyyat", MUETTER_SLUG, EHE_SLUG, HIJAB_SLUG, WISSEN_SLUG, FAQ_SLUG, KURZ_SLUG, SALAF_SLUG, MOSCHEE_SLUG, HAJJ_SLUG, SADAQAH_SLUG, ADAB_SLUG];
   }
 
   function countSichtbare(abschnitt) {
@@ -726,6 +773,7 @@
     if (abschnitt === MOSCHEE_SLUG) return "home";
     if (abschnitt === HAJJ_SLUG) return "ring";
     if (abschnitt === SADAQAH_SLUG) return "lamp";
+    if (abschnitt === ADAB_SLUG) return "book";
     return "book";
   }
 
@@ -775,14 +823,14 @@
       '" data-frauen-q autocomplete="off" spellcheck="false" enterkeyhint="search">' +
       "</div>" +
       '<button type="button" class="advanced-toggle' +
-      (filterOpen || abschnitt === MOSCHEE_SLUG || abschnitt === HAJJ_SLUG || abschnitt === SADAQAH_SLUG ? " active" : "") +
+      (filterOpen || filterOben(abschnitt) ? " active" : "") +
       '" data-frauen-filter-toggle>' +
-      (filterOpen || abschnitt === MOSCHEE_SLUG || abschnitt === HAJJ_SLUG || abschnitt === SADAQAH_SLUG ? "Filter ausblenden" : "Filter anzeigen") +
+      (filterOpen || filterOben(abschnitt) ? "Filter ausblenden" : "Filter anzeigen") +
       "</button></div>" +
       '<div class="frauen-filter-panel' +
-      (filterOpen || abschnitt === MOSCHEE_SLUG || abschnitt === HAJJ_SLUG || abschnitt === SADAQAH_SLUG ? " is-open" : "") +
+      (filterOpen || filterOben(abschnitt) ? " is-open" : "") +
       '"' +
-      (filterOpen || abschnitt === MOSCHEE_SLUG || abschnitt === HAJJ_SLUG || abschnitt === SADAQAH_SLUG ? "" : " hidden") +
+      (filterOpen || filterOben(abschnitt) ? "" : " hidden") +
       ">" +
       '<p class="frauen-filter-panel__label">Bereiche</p>' +
       '<div class="frauen-filter-grid">' +
@@ -812,7 +860,8 @@
       { nr: "10", title: "Frauen der Salaf", id: SALAF_SLUG, mark: "ring" },
       { nr: "11", title: "Moschee & Gemeinschaft", id: MOSCHEE_SLUG, mark: "home", lede: "Geprüfte Grundlagen zu Moschee, Eid, Adab und Teilnahme am Guten." },
       { nr: "12", title: "Ḥajj & ʿUmrah", id: HAJJ_SLUG, mark: "ring", lede: "Geprüfte Grundlagen zu Iḥrām, Ḥayḍ, Ṭawāf und Pilgerreise." },
-      { nr: "13", title: "Ṣadaqah & Wohltätigkeit", id: SADAQAH_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zu Spenden, Fürsorge, Familie und Wohltätigkeit." }
+      { nr: "13", title: "Ṣadaqah & Wohltätigkeit", id: SADAQAH_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zu Spenden, Fürsorge, Familie und Wohltätigkeit." },
+      { nr: "14", title: "Adab & Charakter", id: ADAB_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu Benehmen, Sprache, Sanftmut, Geduld und gutem Umgang." }
     ];
   }
 
@@ -920,7 +969,7 @@
     var suchePlatz =
       abschnitt === FAQ_SLUG
         ? "Frage oder Thema suchen"
-        : abschnitt === MOSCHEE_SLUG || abschnitt === HAJJ_SLUG || abschnitt === SADAQAH_SLUG
+        : filterOben(abschnitt)
         ? "Thema suchen"
         : abschnitt === KURZ_SLUG || abschnitt === SALAF_SLUG
         ? "Name oder Thema suchen"
@@ -958,6 +1007,8 @@
                             ? HAJJ_BEREICH_LABEL
                             : abschnitt === SADAQAH_SLUG
                               ? SADAQAH_BEREICH_LABEL
+                              : abschnitt === ADAB_SLUG
+                                ? ADAB_BEREICH_LABEL
                   : FIQH_BEREICH_LABEL;
     var bereich = labelMap[e.bereich] || e.bereich || "";
     var person = e.person || e.name;
@@ -976,7 +1027,7 @@
       esc(titelVon(e)) +
       "</h3>" +
       (person
-        ? '<p class="frauen-row__sprecher">' + esc(person) + (abschnitt === SALAF_SLUG || abschnitt === KURZ_SLUG || abschnitt === MUETTER_SLUG || abschnitt === MOSCHEE_SLUG || abschnitt === HAJJ_SLUG || abschnitt === SADAQAH_SLUG ? "" : " sagte:") + "</p>"
+        ? '<p class="frauen-row__sprecher">' + esc(person) + (abschnitt === SALAF_SLUG || abschnitt === KURZ_SLUG || abschnitt === MUETTER_SLUG || filterOben(abschnitt) ? "" : " sagte:") + "</p>"
         : "") +
       (aussageText
         ? '<p class="frauen-row__kicker">Aussage</p><p class="frauen-row__aussage">' +
@@ -1023,6 +1074,8 @@
                             ? HAJJ_THEMEN
                             : abschnitt === SADAQAH_SLUG
                               ? SADAQAH_THEMEN
+                              : abschnitt === ADAB_SLUG
+                                ? ADAB_THEMEN
                   : FIQH_THEMEN;
     var q = currentQ(abschnitt);
     var thema = currentThema(abschnitt);
@@ -1042,7 +1095,8 @@
           abschnitt === SALAF_SLUG ||
           abschnitt === MOSCHEE_SLUG ||
           abschnitt === HAJJ_SLUG ||
-          abschnitt === SADAQAH_SLUG
+          abschnitt === SADAQAH_SLUG ||
+          abschnitt === ADAB_SLUG
         ? '<p class="frauen-empty">Noch keine geprüften Inhalte vorhanden.</p>'
         : '<p class="frauen-empty">Keine sichtbare Aussage zu dieser Auswahl.</p>';
     var hint =
@@ -1056,6 +1110,8 @@
           ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Sensible Detailfragen wie Reise ohne Maḥram, heutige Gruppenreisen, Medikamente, Sonderfälle bei Ṭawāf und individuelle Ḥayḍ-Fragen werden erst sichtbar, wenn sie einzeln geprüft wurden.</p></div>'
           : abschnitt === SADAQAH_SLUG
           ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Emotionale Geschichten, moderne Spendenaufrufe und ungeprüfte Berichte werden nicht angezeigt.</p></div>'
+          : abschnitt === ADAB_SLUG
+          ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Moderne Motivationssprüche, persönliche Meinungen und ungeprüfte Zitate werden nicht angezeigt.</p></div>'
           : abschnitt === KURZ_SLUG
           ? '<div class="frauen-hint"><p>Dieser Bereich enthält keine ausgeschmückten Geschichten. Sichtbar sind nur Kurzberichte mit geprüfter Quelle und Direktnachweis. Alles Unsichere bleibt verborgen.</p></div>'
           : abschnitt === FAQ_SLUG
@@ -1080,6 +1136,8 @@
         ? '<p class="lede">Geprüfte Grundlagen aus authentischer Sunnah über Frauen bei Ḥajj und ʿUmrah.</p>'
         : abschnitt === SADAQAH_SLUG
         ? '<p class="lede">Geprüfte Berichte aus authentischer Sunnah über Ṣadaqah, Fürsorge und wohltätiges Handeln.</p>'
+        : abschnitt === ADAB_SLUG
+        ? '<p class="lede">Geprüfte Grundlagen aus authentischer Sunnah über gutes Benehmen, Sprache, Sanftmut und Selbstbeherrschung.</p>'
         : abschnitt === KURZ_SLUG
         ? '<p class="lede">Kurze belegte Ereignisse aus dem Leben rechtschaffener Frauen – mit Quelle und Direktnachweis.</p>'
         : abschnitt === FAQ_SLUG
@@ -1117,6 +1175,7 @@
     if (abschnitt === MOSCHEE_SLUG) return "Moschee & Gemeinschaft";
     if (abschnitt === HAJJ_SLUG) return "Ḥajj & ʿUmrah";
     if (abschnitt === SADAQAH_SLUG) return "Ṣadaqah & Wohltätigkeit";
+    if (abschnitt === ADAB_SLUG) return "Adab & Charakter";
     if (abschnitt === KURZ_SLUG) return "Geprüfte Kurzberichte";
     if (abschnitt === FAQ_SLUG) return "Fragen & Antworten";
     if (abschnitt === WISSEN_SLUG) return "Wissen & Lernen";
@@ -1252,6 +1311,12 @@
         subtitle: "Geprüfte Berichte aus authentischer Sunnah über Ṣadaqah, Fürsorge und wohltätiges Handeln."
       };
     }
+    if (parsed.abschnitt === ADAB_SLUG && parsed.page === "list") {
+      return {
+        title: "Adab & Charakter",
+        subtitle: "Geprüfte Grundlagen aus authentischer Sunnah über gutes Benehmen, Sprache, Sanftmut und Selbstbeherrschung."
+      };
+    }
     if (parsed.abschnitt === KURZ_SLUG && parsed.page === "list") {
       return {
         title: "Geprüfte Kurzberichte",
@@ -1317,6 +1382,8 @@
             ? "Ḥajj & ʿUmrah"
             : parsed.abschnitt === SADAQAH_SLUG
             ? "Ṣadaqah & Wohltätigkeit"
+            : parsed.abschnitt === ADAB_SLUG
+            ? "Adab & Charakter"
             : parsed.abschnitt === KURZ_SLUG
             ? "Geprüfte Kurzberichte"
             : parsed.abschnitt === FAQ_SLUG
@@ -1363,7 +1430,8 @@
       !salafCache ||
       !moscheeCache ||
       !hajjCache ||
-      !sadaqahCache
+      !sadaqahCache ||
+      !adabCache
     ) {
       load().then(refreshIfFrauen).catch(refreshIfFrauen);
       return '<p class="frauen-empty">Bereich wird geladen…</p>';
