@@ -1,40 +1,40 @@
 {
-  "ok": true,
+  "ok": false,
   "schedulerEngine": "cloudflare-worker-daily-v4-isolated",
   "idVersion": "v4",
   "deliveryMode": "worker-local",
-  "schedulerStatus": "success",
-  "updatedAt": "2026-08-29T03:30:11.922Z",
-  "usersChecked": 12,
-  "registrationsRead": 13,
-  "uniqueSubscriptions": 12,
+  "schedulerStatus": "error",
+  "updatedAt": "2026-08-29T10:15:02.539Z",
+  "usersChecked": 14,
+  "registrationsRead": 15,
+  "uniqueSubscriptions": 14,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
-  "localTimeBerlin": "05:30",
+  "localTimeBerlin": "12:15",
   "dateKeyBerlin": "2026-08-29",
   "duaWindow": {
     "hour": 9,
-    "open": false,
+    "open": true,
     "catchupUntilHour": 14,
     "alreadySentToday": 0
   },
   "recommendationWindow": {
     "hour": 12,
-    "open": false,
+    "open": true,
     "catchupUntilHour": 20,
     "alreadySentToday": 0
   },
-  "duaCandidates": 0,
-  "recCandidates": 0,
-  "sent": 0,
+  "duaCandidates": 14,
+  "recCandidates": 14,
+  "sent": 24,
   "accepted": {
-    "dua": 0,
-    "recommendation": 0
+    "dua": 12,
+    "recommendation": 12
   },
-  "invalidSubscriptionsDisabled": 0,
+  "invalidSubscriptionsDisabled": 4,
   "skipped": 0,
   "duplicates": 0,
-  "errors": 0,
+  "errors": 4,
   "forceSend": null,
   "dailyContentDate": "2026-08-29",
   "currentRecommendation": {
@@ -49,5 +49,5 @@
     "category": "Hilfe & Aufrichtigkeit"
   },
   "configAutomatic": true,
-  "lastError": "Außerhalb der Tagesfenster (Duʿāʾ ab 09:00, Empfehlung ab 12:00 Europe/Berlin)."
+  "lastError": "4 Fehler beim Tages-Push"
 }
