@@ -87,6 +87,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-quran-jump-cols-v727-2026-08-29",
+      "approvedBy": "user-explicit-juz-sura-ayah-same-frame",
+      "reason": "Nutzer: gleiche Gold-Umrandung auch bei Juz, Sura, Ayat-Spalten.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-quran-search-oval-v726-2026-08-29",
       "approvedBy": "user-explicit-quran-search-no-blue-oval-gold",
       "reason": "Nutzer: Qurʾān Suchbereich Blau weg, ovale Goldlinie dick zu dünn.",
