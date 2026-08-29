@@ -447,18 +447,25 @@ struct WebAppView: UIViewRepresentable {
             // Theme-only: never inject hardcoded navy/blue route palettes.
             var roots=[document.body, document.documentElement, document.querySelector('.app'), document.querySelector('#appShell'), document.querySelector('#appView')];
             var topColor=firstVariableColor(roots, [
+              "--dar-edge-fill",
+              "--dar-boot-fill",
+              "--outer-bg-flat",
               "--theme-page-bg",
               "--theme-feed-bg",
               "--ilm-page-bg",
               "--page-cover-mid",
               "--page-cover",
-              "--outer-bg-flat",
               "--bg2",
               "--bg"
             ]);
             if(!topColor){
               topColor=firstSolidColor([".sf-top", ".lib-page", "#appView > .view-head", "#appView > .view", "body", "html"]);
             }
+            try{
+              if(!topColor && (document.documentElement.getAttribute("data-theme")||"")==="eisgold"){
+                topColor="#eef7ff";
+              }
+            }catch(e){}
             var midColor=firstVariableColor(roots, [
               "--theme-feed-bg",
               "--page-cover-mid",
@@ -472,6 +479,7 @@ struct WebAppView: UIViewRepresentable {
               midColor=firstSolidColor(["#appView > .view-head", ".sf-top", ".lib-page", "#appView > .view", "body"]) || topColor;
             }
             var bottomColor=firstVariableColor(roots, [
+              "--dar-edge-fill",
               "--outer-bg-flat",
               "--theme-page-bg",
               "--ilm-page-bg",
@@ -953,15 +961,15 @@ struct WebAppView: UIViewRepresentable {
 
         private func applySurfaceColor(_ color: UIColor) {
             pageSurfaceColor = color
-            // Keep the native chrome clear after boot so the web glass/status area
-            // is not covered by a pinned opaque field.
+            // Theme fill must remain behind the WKWebView for iOS rubber-band overscroll.
+            // Clear chrome here exposed the black UIWindow on light themes such as Eisgold.
             backdropView?.isHidden = true
-            containerView?.backgroundColor = .clear
-            webView?.scrollView.backgroundColor = .clear
-            webView?.backgroundColor = .clear
+            containerView?.backgroundColor = color
+            webView?.scrollView.backgroundColor = color
+            webView?.backgroundColor = color
             webView?.isOpaque = false
             if #available(iOS 15.0, *) {
-                webView?.underPageBackgroundColor = .clear
+                webView?.underPageBackgroundColor = color
             }
             if !isBootLoadingVisible {
                 loadingOverlay?.backgroundColor = color

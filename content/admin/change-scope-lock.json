@@ -87,6 +87,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-ios-overscroll-live-2026-08-29",
+      "approvedBy": "user-explicit-eisgold-global-bg-ios-overscroll",
+      "reason": "Nutzer: Eisgold globaler Theme-Hintergrund inkl. iOS Overscroll/Rubber-Band, Safe-Area und Bottom-Nav einheitlich.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "assets/theme-eisgold.css",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-oval-wash-live-2026-08-28",
       "approvedBy": "user-explicit-eisgold-oversize-oval-page-wash-live",
       "reason": "Nutzer: Schattierung oben oversize, oval, seitenverhältnismäßig wie andere Erscheinungsbilder. Jede Eisgold-Seite. Live alle Apps.",

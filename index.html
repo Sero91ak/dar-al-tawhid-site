@@ -5,12 +5,12 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v707";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v708";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
   try{
-    var colors={dark:"#050706",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605",eisgold:"#e8f3fb"};
+    var colors={dark:"#050706",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605",eisgold:"#eef7ff"};
     var names={dark:"Klassisch Dunkel",light:"Klassisch Hell",soft:"Sanft Elegant",royal:"Royal Nachtblau",bordeaux:"Bordeaux Royal Premium","dar-al-layl":"Dār al-Layl",eisgold:"Eisgold"};
     var t=localStorage.getItem("darThemeV1")||"dark";
     if(t==="emerald"||t==="smaragd"||t==="aurora"){t="dark";try{localStorage.setItem("darThemeV1",t)}catch(e){}}
@@ -20259,7 +20259,7 @@ document.addEventListener("pointerdown",e=>{if(isEditableTarget(e.target))lastFo
 const THEME_KEY="darThemeV1";
 const THEME_SETTINGS_KEY="darThemeSettingsV1";
 /* EDGE_TO_EDGE_THEME_LOCK · Format: Edge-to-Edge Erscheinungsbild — jedes Theme inkl. künftiger: --outer-bg-flat/--outer-bg/--page-cover/--premium-bg + THEME_META/normalizeTheme; Rahmenrandlos. */
-const THEME_META={dark:{label:"Klassisch Dunkel",color:"#050706",status:"black-translucent",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"black-translucent",asset:"light"},eisgold:{label:"Eisgold",color:"#e8f3fb",status:"black-translucent",asset:"eisgold"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"black-translucent",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black-translucent",asset:"royal"},bordeaux:{label:"Bordeaux Royal Premium",color:"#140B0C",status:"black-translucent",asset:"bordeaux"},"dar-al-layl":{label:"Dār al-Layl",color:"#050605",status:"black-translucent",asset:"dar-al-layl"}};
+const THEME_META={dark:{label:"Klassisch Dunkel",color:"#050706",status:"black-translucent",asset:"dark"},light:{label:"Klassisch Hell",color:"#f7f0df",status:"black-translucent",asset:"light"},eisgold:{label:"Eisgold",color:"#eef7ff",status:"black-translucent",asset:"eisgold"},soft:{label:"Sanft Elegant",color:"#f2e6e2",status:"black-translucent",asset:"soft"},royal:{label:"Royal Nachtblau",color:"#07162c",status:"black-translucent",asset:"royal"},bordeaux:{label:"Bordeaux Royal Premium",color:"#140B0C",status:"black-translucent",asset:"bordeaux"},"dar-al-layl":{label:"Dār al-Layl",color:"#050605",status:"black-translucent",asset:"dar-al-layl"}};
 function normalizeTheme(theme){if(theme==="emerald"||theme==="smaragd"||theme==="aurora")return"dark";return theme==="light"||theme==="eisgold"||theme==="soft"||theme==="royal"||theme==="bordeaux"||theme==="dar-al-layl"?theme:"dark"}
 function getTheme(){try{return normalizeTheme(localStorage.getItem(THEME_KEY))}catch(e){return"dark"}}
 function applyTheme(theme){const next=normalizeTheme(theme);const info=THEME_META[next]||THEME_META.dark;const root=document.documentElement;root.classList.add("theme-switching");try{if(typeof window.__darClearStickyThemeFills==="function")window.__darClearStickyThemeFills();root.style.removeProperty("background");root.style.removeProperty("background-color");root.style.removeProperty("background-image");root.style.removeProperty("--theme-page-bg");if(document.body){document.body.style.removeProperty("background");document.body.style.removeProperty("background-color");document.body.style.removeProperty("background-image")}root.style.setProperty("--dar-boot-fill",info.color);window.__DAR_BOOT_FILL=info.color}catch(e){}root.setAttribute("data-theme",next);root.setAttribute("data-theme-name",info.label);try{localStorage.setItem(THEME_KEY,next);localStorage.setItem(THEME_SETTINGS_KEY,JSON.stringify({theme:next,label:info.label,assetVariant:info.asset,updatedAt:Date.now()}))}catch(e){}const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=info.color;const tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=info.color;const sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content="black-translucent";const logo=document.querySelector(".logo");if(logo){logo.title="DAR AL TAWḤID";if(!logo.getAttribute("data-logo-ready")){logo.setAttribute("data-logo-ready","1");logo.onerror=function(){this.onerror=null;this.src="/watermark-my-logo-full.png?v=fallback"};if(!logo.getAttribute("src")||logo.getAttribute("src").indexOf("watermark-my-logo")<0)logo.src="/watermark-my-logo-full.png"}}document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.classList.toggle("is-active",btn.getAttribute("data-theme-select")===next);btn.setAttribute("aria-pressed",btn.getAttribute("data-theme-select")===next?"true":"false")});try{window.dispatchEvent(new CustomEvent("dar-theme-change",{detail:{theme:next,...info}}))}catch(e){}requestAnimationFrame(()=>requestAnimationFrame(()=>{root.classList.remove("theme-switching");try{if(typeof window.__darSyncThemeFillMeta==="function")window.__darSyncThemeFillMeta();if(typeof window.__darClearStickyThemeFills==="function")window.__darClearStickyThemeFills()}catch(e){}}))}
@@ -26190,7 +26190,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v707";
+const APP_BUILD_ID="app-shell-v708";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -30229,11 +30229,107 @@ html[data-theme="eisgold"] .bottom-nav{
   box-shadow:0 10px 28px rgba(20,32,51,.08),inset 0 1px 0 rgba(255,255,255,.7)!important;
 }
 </style>
+<style id="eisgold-overscroll-v708">
+/* Eisgold: globaler Theme-Hintergrund inkl. iOS Overscroll — html/body tragen die Farbe, Kinder transparent. */
+html[data-theme="eisgold"]{
+  --outer-bg-flat:#eef7ff!important;
+  --dar-edge-fill:#eef7ff!important;
+  --dar-boot-fill:#eef7ff!important;
+  --theme-page-bg:#eef7ff!important;
+  --theme-feed-bg:#eef7ff!important;
+  --page-cover:#eef7ff!important;
+  --page-cover-mid:#e8f2fb!important;
+  --bg:#eef7ff!important;
+  --quran-page-bg:#eef7ff!important;
+  --outer-bg:
+    radial-gradient(circle at 50% -12%,rgba(215,188,116,.14),transparent 34%),
+    linear-gradient(180deg,#f7fbff 0%,#eef7ff 44%,#e8f2fb 100%)!important;
+  --premium-bg:var(--outer-bg)!important;
+}
+html[data-theme="eisgold"],
+html[data-theme="eisgold"] body,
+html[data-theme="eisgold"].is-standalone-pwa,
+html[data-theme="eisgold"].is-standalone-pwa body,
+html[data-theme="eisgold"].dar-ios-native-app,
+html[data-theme="eisgold"].dar-ios-native-app body{
+  min-height:100%!important;
+  min-height:100dvh!important;
+  min-height:100lvh!important;
+  background:
+    radial-gradient(circle at 50% -12%,rgba(215,188,116,.14),transparent 34%),
+    linear-gradient(180deg,#f7fbff 0%,#eef7ff 44%,#e8f2fb 100%)!important;
+  background-color:#eef7ff!important;
+  background-image:
+    radial-gradient(circle at 50% -12%,rgba(215,188,116,.14),transparent 34%),
+    linear-gradient(180deg,#f7fbff 0%,#eef7ff 44%,#e8f2fb 100%)!important;
+  background-attachment:scroll!important;
+  overscroll-behavior-y:auto!important;
+}
+html[data-theme="eisgold"]::before{
+  content:""!important;
+  display:block!important;
+  position:fixed!important;
+  inset:0!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  background:
+    radial-gradient(circle at 50% -12%,rgba(215,188,116,.14),transparent 34%),
+    linear-gradient(180deg,#f7fbff 0%,#eef7ff 44%,#e8f2fb 100%)!important;
+  background-color:#eef7ff!important;
+}
+html[data-theme="eisgold"] #appRoot,
+html[data-theme="eisgold"] #appShell,
+html[data-theme="eisgold"] .app,
+html[data-theme="eisgold"] #appView,
+html[data-theme="eisgold"] #appView.view,
+html[data-theme="eisgold"] .view,
+html[data-theme="eisgold"] .top-shell,
+html[data-theme="eisgold"] .top-shell.theme-hero-shell,
+html[data-theme="eisgold"] .header,
+html[data-theme="eisgold"] .theme-hero-surface,
+html[data-theme="eisgold"] .hero-text,
+html[data-theme="eisgold"] .isnad,
+html[data-theme="eisgold"] body.is-more-route,
+html[data-theme="eisgold"] body.is-area-route,
+html[data-theme="eisgold"] body.is-quiz-route,
+html[data-theme="eisgold"] body.is-account-route,
+html[data-theme="eisgold"] body.is-home-route,
+html[data-theme="eisgold"] body.is-quran-overview,
+html[data-theme="eisgold"] body.is-feed-fullscreen,
+html[data-theme="eisgold"] body.is-dua-route,
+html[data-theme="eisgold"] body.is-catalog-route,
+html[data-theme="eisgold"] body.is-more-route #appView,
+html[data-theme="eisgold"] body.is-more-route #appView.view,
+html[data-theme="eisgold"] body.is-quiz-route #appView.view,
+html[data-theme="eisgold"] body.is-account-route #appView.view,
+html[data-theme="eisgold"] body.is-area-route #appView.view,
+html[data-theme="eisgold"] body.is-home-route #appView.view,
+html[data-theme="eisgold"] body.is-home-route .top-shell,
+html[data-theme="eisgold"] body.is-home-route .header,
+html[data-theme="eisgold"] .sf-app,
+html[data-theme="eisgold"] .sf-top,
+html[data-theme="eisgold"] .sf-feed,
+html[data-theme="eisgold"] .qov-page,
+html[data-theme="eisgold"] .more-page,
+html[data-theme="eisgold"] .quiz-home,
+html[data-theme="eisgold"] .account-page{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  background-attachment:scroll!important;
+}
+html[data-theme="eisgold"] #bottomNav.bottom-nav,
+html[data-theme="eisgold"] .bottom-nav{
+  background:linear-gradient(180deg,rgba(247,251,255,.94),rgba(238,247,255,.90))!important;
+  border-color:rgba(184,150,58,.28)!important;
+  box-shadow:none!important;
+}
+</style>
 
 <script>
 (function(){
   /* v661 · Keine Inline-Hintergrundfarben mehr — die klebten (z.B. Royal-Blau) über Theme-Wechsel. */
-  var THEME_SOLID={dark:"#050706",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605",eisgold:"#e8f3fb"};
+  var THEME_SOLID={dark:"#050706",light:"#f7f0df",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605",eisgold:"#eef7ff"};
   var CLEAR_PROPS=["background","background-color","background-image","backdrop-filter","-webkit-backdrop-filter"];
   var CLEAR_SELS=[
     "html",
@@ -30324,9 +30420,11 @@ html[data-theme="eisgold"] .bottom-nav{
   function pin(){
     var s=document.getElementById("dar-ios-parity-edge-force-v665");
     var ice=document.getElementById("eisgold-oval-wash-v707");
+    var ov=document.getElementById("eisgold-overscroll-v708");
     var host=document.documentElement||(s&&s.parentNode);
     if(s&&host) host.appendChild(s);
     if(ice&&host) host.appendChild(ice);
+    if(ov&&host) host.appendChild(ov);
     try{
       var root=document.documentElement;
       if(!root)return;
