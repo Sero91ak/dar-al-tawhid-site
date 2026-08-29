@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v750-fragen-antworten';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v751-gepruefte-kurzberichte';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -44,6 +44,7 @@ const APP_SHELL = [
   '/test/data/frauen-hijab-schamhaftigkeit.json',
   '/test/data/frauen-wissen-lernen.json',
   '/test/data/frauen-fragen-antworten.json',
+  '/test/data/frauen-gepruefte-kurzberichte.json',
   '/data/books-library.json',
   '/data/scholars-library.json',
   '/test-apple-touch-icon.png',
