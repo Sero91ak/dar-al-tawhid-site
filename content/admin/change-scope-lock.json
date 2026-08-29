@@ -87,6 +87,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-quran-no-navy-v723-2026-08-29",
+      "approvedBy": "user-explicit-remove-dark-blue",
+      "reason": "Nutzer: dunkles Blau komplett von der Qurʾān-Seite entfernen (Ränder/oben).",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quiz-session-fullpage-v722-2026-08-29",
       "approvedBy": "user-explicit-quiz-page-ratio-no-gold-lines",
       "reason": "Nutzer: Quiz Frage/Antwort Seitenverhältnis an Seite anpassen, goldene Linien drumherum weg, echte Quiz-Seite.",
