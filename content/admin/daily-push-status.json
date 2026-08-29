@@ -4,25 +4,25 @@
   "idVersion": "v4",
   "deliveryMode": "worker-local",
   "schedulerStatus": "success",
-  "updatedAt": "2026-08-29T21:50:54.374Z",
+  "updatedAt": "2026-08-29T22:00:54.364Z",
   "usersChecked": 12,
   "registrationsRead": 13,
   "uniqueSubscriptions": 12,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
-  "localTimeBerlin": "23:50",
-  "dateKeyBerlin": "2026-08-29",
+  "localTimeBerlin": "00:00",
+  "dateKeyBerlin": "2026-08-30",
   "duaWindow": {
     "hour": 9,
     "open": false,
     "catchupUntilHour": 14,
-    "alreadySentToday": 11
+    "alreadySentToday": 0
   },
   "recommendationWindow": {
     "hour": 12,
     "open": false,
     "catchupUntilHour": 20,
-    "alreadySentToday": 11
+    "alreadySentToday": 0
   },
   "duaCandidates": 0,
   "recCandidates": 0,
@@ -36,17 +36,17 @@
   "duplicates": 0,
   "errors": 0,
   "forceSend": null,
-  "dailyContentDate": "2026-08-29",
+  "dailyContentDate": "2026-08-30",
   "currentRecommendation": {
-    "id": "ibn-masud-wissen-verlangt-handeln-459",
-    "title": "Wissen verlangt Handeln",
-    "category": "ʿIlm",
-    "scholar": "ʿAbdullāh ibn Masʿūd"
+    "id": "imam-ash-shafii-weder-rafidi-noch-kafir-115",
+    "title": "Imām ash-Shāfiʿī: weder Rāfiḍī noch Kāfir",
+    "category": "Widerlegungen",
+    "scholar": "ash-Shāfiʿī, Aḥmad ibn Ḥanbal und adh-Dhahabī"
   },
   "currentDua": {
-    "id": "dua-048-rabbi-adkhilni-mudkhala-sidq",
-    "title": "Duʿāʾ um ehrlichen Eintritt und Ausgang",
-    "category": "Hilfe & Aufrichtigkeit"
+    "id": "dua-049-rabbi-shrah-li-sadri",
+    "title": "Duʿāʾ von Mūsā um Erleichterung und klare Rede",
+    "category": "Erleichterung & Rede"
   },
   "configAutomatic": true,
   "lastError": "Außerhalb der Tagesfenster (Duʿāʾ ab 09:00, Empfehlung ab 12:00 Europe/Berlin)."
