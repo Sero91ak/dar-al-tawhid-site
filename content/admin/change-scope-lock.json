@@ -87,6 +87,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-frauen-edel-keine-frauen-emojis-v759-2026-08-29",
+      "approvedBy": "user-explicit-test-frauen-edel-keine-offenen-frauen-emojis",
+      "reason": "Nutzer: Frauen-Themen kompakt und edel, keine Emojis in Themenbereichen, keine unbedeckten Frauen-Emojis. Nur Test-App.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/frauen/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "test-frauen-filter-icons-v756-2026-08-29",
       "approvedBy": "user-explicit-test-frauen-filter-themen-icons",
       "reason": "Nutzer: Filter mit direkten Themen, Oval/Icons nicht abschneiden, Titel/Aussage/Quelle unterscheiden. Nur Test-App, dann push.",

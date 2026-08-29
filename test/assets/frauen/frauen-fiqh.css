@@ -458,27 +458,38 @@ body.is-frauen-route .frauen-filter-grid{
   gap:8px;
   margin:0;
 }
-body.is-frauen-route .frauen-filter-grid .frauen-chip{
+body.is-frauen-route .frauen-filter-grid .frauen-chip,
+body.is-frauen-route .frauen-filter-grid .theme-chip{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  visibility:visible!important;
+  opacity:1!important;
   width:auto;
   min-width:calc(50% - 4px);
   flex:1 1 calc(50% - 8px);
   border-radius:999px;
-  min-height:40px;
-  justify-content:center;
-  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 32%,transparent);
-  background:color-mix(in srgb,var(--gold2,#efd78e) 6%,transparent);
-  color:var(--cat-ink,var(--cream,#fff6e4));
+  min-height:36px;
+  padding:7px 12px;
+  font-size:12.5px;
+  font-weight:700;
+  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 38%,transparent)!important;
+  background:color-mix(in srgb,var(--gold2,#efd78e) 8%,transparent)!important;
+  color:var(--cream,#fff6e4)!important;
+}
+body.is-frauen-route .frauen-search-pro{
+  overflow:visible!important;
 }
 body.is-frauen-route .frauen-hub,
 body.is-frauen-route .frauen-list-page{
-  padding-bottom:calc(120px + env(safe-area-inset-bottom,0px));
+  padding-bottom:calc(110px + env(safe-area-inset-bottom,0px));
 }
 body.is-frauen-route .topics-theme-grid,
 body.is-frauen-route .frauen-post-list,
 body.is-frauen-route .frauen-fiqh-list{
   display:flex!important;
   flex-direction:column!important;
-  gap:10px!important;
+  gap:6px!important;
   padding-bottom:8px;
 }
 body.is-frauen-route .frauen-fiqh-list .dua-theme-card,
@@ -488,24 +499,37 @@ body.is-frauen-route .frauen-post-row{
   contain:none!important;
   clip-path:none!important;
   background:transparent!important;
-  border-radius:999px!important;
-  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2,#efd78e) 22%,transparent)!important;
-  padding:13px 16px 13px 16px!important;
+  border-radius:22px!important;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2,#efd78e) 20%,transparent)!important;
+  padding:8px 12px 8px 12px!important;
+  min-height:0!important;
 }
 body.is-frauen-route .topics-theme-card,
 body.is-frauen-route .frauen-fiqh-list .dua-theme-card{
-  grid-template-columns:26px 48px minmax(0,1fr) auto!important;
-  column-gap:10px!important;
+  grid-template-columns:22px 30px minmax(0,1fr) auto!important;
+  column-gap:8px!important;
   align-items:center!important;
 }
+body.is-frauen-route .topics-theme-card h3,
+body.is-frauen-route .frauen-fiqh-list .dua-theme-card h3{
+  font-size:16px!important;
+  line-height:1.2!important;
+  margin:0!important;
+}
+body.is-frauen-route .topics-theme-card__count,
+body.is-frauen-route .dua-theme-card__count{
+  font-size:10px!important;
+  letter-spacing:.12em;
+}
 body.is-frauen-route .frauen-post-row{
-  grid-template-columns:48px minmax(0,1fr)!important;
-  column-gap:12px!important;
+  grid-template-columns:30px minmax(0,1fr)!important;
+  column-gap:10px!important;
   align-items:start!important;
+  padding:9px 12px 10px 12px!important;
 }
 body.is-frauen-route .topics-theme-card.is-featured{
-  background:radial-gradient(ellipse 96% 86% at 42% 50%,color-mix(in srgb,var(--gold2) 7%,transparent),transparent 76%)!important;
-  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2,#efd78e) 30%,transparent)!important;
+  background:radial-gradient(ellipse 96% 86% at 42% 50%,color-mix(in srgb,var(--gold2) 5%,transparent),transparent 76%)!important;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2,#efd78e) 26%,transparent)!important;
 }
 body.is-frauen-route .topics-theme-card.is-pending{
   opacity:.62;
@@ -521,101 +545,95 @@ body.is-frauen-route .topics-theme-card__icon,
 body.is-frauen-route .dua-theme-card__icon,
 body.is-frauen-route .frauen-post-row .post-row__icon,
 body.is-frauen-route .frauen-post-row .dua-row__icon{
-  width:46px!important;
-  height:46px!important;
-  max-width:46px!important;
-  min-width:46px!important;
-  flex:0 0 46px!important;
+  width:30px!important;
+  height:30px!important;
+  max-width:30px!important;
+  min-width:30px!important;
+  flex:0 0 30px!important;
   overflow:visible!important;
   box-sizing:border-box!important;
-  padding:0!important;
+  padding:4px!important;
   margin:0!important;
   border-radius:50%!important;
-  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 28%,transparent)!important;
-  background:color-mix(in srgb,var(--gold2,#efd78e) 5%,transparent)!important;
+  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 24%,transparent)!important;
+  background:transparent!important;
   display:grid!important;
   place-items:center!important;
 }
-body.is-frauen-route .frauen-emblem,
+body.is-frauen-route .frauen-mark{
+  width:18px;
+  height:18px;
+  display:block;
+  overflow:visible;
+  color:var(--gold2,var(--gold,#efd78e));
+}
 body.is-frauen-route .topics-theme-card__icon .emoji-emblem,
 body.is-frauen-route .dua-theme-card__icon .emoji-emblem,
-body.is-frauen-route .frauen-post-row .emoji-emblem{
-  width:24px!important;
-  height:24px!important;
-  max-width:24px!important;
-  max-height:24px!important;
-  font-size:20px!important;
-  line-height:1!important;
-  overflow:visible!important;
-  display:inline-flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  filter:none!important;
-  transform:none!important;
-  margin:0!important;
-  font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif!important;
+body.is-frauen-route .frauen-post-row .emoji-emblem,
+body.is-frauen-route .frauen-emblem{
+  display:none!important;
 }
 body.is-frauen-route .frauen-row__kicker{
-  margin:8px 0 3px;
-  font-size:9px;
+  margin:6px 0 2px;
+  font-size:8.5px;
   font-weight:900;
   letter-spacing:.16em;
   text-transform:uppercase;
   color:var(--gold2,var(--gold,#efd78e));
 }
-body.is-frauen-route .frauen-row__kicker--titel{
-  margin:0 0 2px;
-  color:color-mix(in srgb,var(--gold2,#efd78e) 72%,#fff);
-}
 body.is-frauen-route .frauen-row__kicker--quelle{
-  color:color-mix(in srgb,var(--gold2,#d4c08a) 55%,var(--muted,#b8ae96));
+  color:color-mix(in srgb,var(--gold2,#d4c08a) 48%,var(--muted,#b8ae96));
 }
 body.is-frauen-route .frauen-post-row h3{
   margin:0!important;
   color:var(--gold2,var(--cream,#fff6e4))!important;
   font-family:var(--serif)!important;
   font-weight:650!important;
+  font-size:15.5px!important;
+  line-height:1.25!important;
 }
 body.is-frauen-route .frauen-row__sprecher{
-  margin:2px 0 0;
-  font-size:12px;
+  margin:1px 0 0;
+  font-size:11.5px;
   font-style:italic;
   color:var(--muted,#b8ae96);
 }
 body.is-frauen-route .frauen-row__aussage{
   margin:0;
   font-family:var(--sans,system-ui);
-  font-size:13.5px;
-  line-height:1.5;
+  font-size:13px;
+  line-height:1.42;
   font-style:normal;
-  color:var(--cat-ink,var(--cream,#fff8e8));
+  color:var(--cream,#fff8e8);
 }
 body.is-frauen-route .frauen-row__quelle{
   margin:0;
+  padding-top:3px;
+  border-top:1px solid color-mix(in srgb,var(--gold2,#efd78e) 16%,transparent);
   font-family:var(--serif);
-  font-size:12.5px;
-  line-height:1.45;
+  font-size:12px;
+  line-height:1.4;
   font-style:italic;
-  color:color-mix(in srgb,var(--gold2,#d4c08a) 62%,var(--muted,#b8ae96) 38%);
+  color:color-mix(in srgb,var(--gold2,#d4c08a) 58%,var(--muted,#b8ae96) 42%);
 }
 @media (max-width:700px){
   body.is-frauen-route .topics-theme-card,
   body.is-frauen-route .frauen-fiqh-list .dua-theme-card{
-    grid-template-columns:24px 48px minmax(0,1fr) auto!important;
-    padding:13px 14px 13px 14px!important;
+    grid-template-columns:20px 30px minmax(0,1fr) auto!important;
+    padding:8px 12px!important;
   }
   body.is-frauen-route .frauen-post-row{
-    grid-template-columns:48px minmax(0,1fr)!important;
-    padding:13px 14px 13px 14px!important;
+    grid-template-columns:30px minmax(0,1fr)!important;
+    padding:9px 12px 10px!important;
   }
   body.is-frauen-route .topics-theme-card__icon,
   body.is-frauen-route .dua-theme-card__icon,
   body.is-frauen-route .frauen-post-row .post-row__icon,
   body.is-frauen-route .frauen-post-row .dua-row__icon{
-    width:46px!important;
-    height:46px!important;
-    max-width:46px!important;
-    min-width:46px!important;
+    width:30px!important;
+    height:30px!important;
+    max-width:30px!important;
+    min-width:30px!important;
   }
 }
 body.is-frauen-route .topics-theme-card__lede,

@@ -780,22 +780,27 @@
   }
 
   function markSvg(kind) {
+    var inner =
+      kind === "book"
+        ? '<path d="M6 5.6h12v12.8H6z"/><path d="M12 5.6v12.8"/>'
+        : kind === "person"
+          ? '<circle cx="12" cy="8.1" r="2.5"/><path d="M6.8 18.4c.8-3 2.9-4.7 5.2-4.7s4.4 1.7 5.2 4.7"/>'
+          : kind === "people"
+            ? '<circle cx="9" cy="8.2" r="2.1"/><circle cx="15.1" cy="8.5" r="1.9"/><path d="M5.8 18.2c.7-2.5 2.3-3.8 4.1-3.8s3.4 1.2 4.1 3.3"/>'
+            : kind === "home"
+              ? '<path d="M5.2 11.5 12 5.6l6.8 5.9"/><path d="M7.4 11V18.4h9.2V11"/>'
+              : kind === "ring"
+                ? '<circle cx="12" cy="12" r="5.8"/><circle cx="12" cy="12" r="1.8"/>'
+                : kind === "veil"
+                  ? '<path d="M7.4 18.6c0-4.4 2-8 4.6-8s4.6 3.6 4.6 8"/><path d="M8.6 11.2C9.2 8.8 10.4 7.2 12 7.2s2.8 1.6 3.4 4"/>'
+                  : kind === "lamp"
+                    ? '<path d="M9.1 10.2h5.8l-.6 5H9.7z"/><path d="M10.6 8.1h2.8"/><path d="M12 5.6V8.1"/>'
+                    : '<circle cx="12" cy="12" r="5.2"/>';
     return (
-      '<span class="emoji-emblem frauen-emblem" aria-hidden="true">' +
-      markGlyph(kind) +
-      "</span>"
+      '<svg class="frauen-mark" viewBox="-2 -2 28 28" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      inner +
+      "</svg>"
     );
-  }
-
-  function markGlyph(kind) {
-    if (kind === "book") return "📖";
-    if (kind === "person") return "👩";
-    if (kind === "people") return "🌙";
-    if (kind === "home") return "🏠";
-    if (kind === "ring") return "💫";
-    if (kind === "veil") return "🧕";
-    if (kind === "lamp") return "🪔";
-    return "📚";
   }
 
   function markForAbschnitt(abschnitt) {
@@ -821,8 +826,8 @@
       })
       .map(function (a) {
         return (
-          '<button type="button" class="frauen-chip' +
-          (activeId === a.id ? " is-on" : "") +
+          '<button type="button" class="theme-chip frauen-chip' +
+          (activeId === a.id ? " is-on is-active" : "") +
           '" data-nav="frauen" data-value="' +
           esc(a.id) +
           '">' +
@@ -838,8 +843,8 @@
     var chips = (themen || [])
       .map(function (t) {
         return (
-          '<button type="button" class="frauen-chip' +
-          (thema === t.id ? " is-on" : "") +
+          '<button type="button" class="theme-chip frauen-chip' +
+          (thema === t.id ? " is-on is-active" : "") +
           '" data-frauen-thema="' +
           esc(t.id) +
           '">' +
@@ -923,7 +928,6 @@
       '<div class="topics-theme-card__body dua-theme-card__body"><h3>' +
       esc(area.title) +
       "</h3>" +
-      (area.lede ? '<p class="topics-theme-card__lede dua-theme-card__lede">' + esc(area.lede) + "</p>" : "") +
       '<p class="topics-theme-card__count dua-theme-card__count">' +
       esc(meta) +
       "</p></div>" +
@@ -1062,7 +1066,6 @@
       markSvg(markForAbschnitt(abschnitt)) +
       "</div>" +
       '<div class="post-row__body dua-row__body">' +
-      '<p class="frauen-row__kicker frauen-row__kicker--titel">Titel</p>' +
       "<h3>" +
       esc(titelVon(e)) +
       "</h3>" +
