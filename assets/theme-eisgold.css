@@ -19,10 +19,10 @@ html[data-theme="eisgold"]{
   --shadow:0 16px 36px rgba(20,32,51,.08)!important;
   --premium-border:rgba(200,169,90,.34)!important;
   --premium-bg:
-    radial-gradient(ellipse 160% 78% at 50% -22%,rgba(255,255,255,.96) 0%,transparent 58%),
-    radial-gradient(ellipse 92% 62% at 6% -10%,rgba(200,169,90,.22) 0%,transparent 56%),
-    radial-gradient(ellipse 96% 64% at 96% -6%,rgba(132,186,226,.40) 0%,transparent 58%),
-    linear-gradient(180deg,#f8fcff 0%,#edf6ff 48%,#e4f0fb 100%)!important;
+    radial-gradient(ellipse 180% 95% at 50% -28%,rgba(255,255,255,1) 0%,transparent 64%),
+    radial-gradient(ellipse 120% 80% at 6% -12%,rgba(212,185,110,.18) 0%,transparent 60%),
+    radial-gradient(ellipse 120% 80% at 96% -8%,rgba(196,224,242,.20) 0%,transparent 60%),
+    linear-gradient(180deg,#fcfeff 0%,#f6fbff 52%,#f0f8fd 100%)!important;
   --premium-shadow:0 14px 32px rgba(20,32,51,.08),inset 0 1px 0 rgba(255,255,255,.82)!important;
   --premium-label:#a9852f!important;
   --premium-title:#142033!important;
@@ -32,7 +32,7 @@ html[data-theme="eisgold"]{
   --premium-pill-text:#142033!important;
   --theme-logo-ring:rgba(200,169,90,.42)!important;
   --theme-logo-glow:rgba(255,255,255,.70)!important;
-  --theme-page-bg:#f7fcff!important;
+  --theme-page-bg:#fcfeff!important;
   --theme-feed-bg:transparent!important;
   --theme-feed-overlay:linear-gradient(180deg,rgba(20,32,51,.00) 0%,rgba(20,32,51,.10) 100%)!important;
   --theme-feed-top:transparent!important;
@@ -44,13 +44,12 @@ html[data-theme="eisgold"]{
   --theme-text:#142033!important;
   --theme-muted:#637083!important;
   --theme-surface:rgba(255,255,255,.86)!important;
-  --outer-bg-flat:#f7fcff;
+  --outer-bg-flat:#fcfeff;
   --outer-bg:
-    radial-gradient(ellipse 160% 78% at 50% -22%,rgba(255,255,255,.96) 0%,transparent 58%),
-    radial-gradient(ellipse 92% 62% at 6% -10%,rgba(200,169,90,.22) 0%,transparent 56%),
-    radial-gradient(ellipse 96% 64% at 96% -6%,rgba(132,186,226,.40) 0%,transparent 58%),
-    radial-gradient(ellipse 140% 70% at 50% 118%,rgba(200,169,90,.12) 0%,transparent 60%),
-    linear-gradient(180deg,#f8fcff 0%,#edf6ff 48%,#e4f0fb 100%);
+    radial-gradient(ellipse 180% 95% at 50% -28%,rgba(255,255,255,1) 0%,transparent 64%),
+    radial-gradient(ellipse 120% 80% at 6% -12%,rgba(212,185,110,.18) 0%,transparent 60%),
+    radial-gradient(ellipse 120% 80% at 96% -8%,rgba(196,224,242,.20) 0%,transparent 60%),
+    linear-gradient(180deg,#fcfeff 0%,#f6fbff 52%,#f0f8fd 100%);
   --cover-edge-bg:linear-gradient(180deg,#f8fcff 0%,#edf6ff 48%,rgba(237,246,255,0) 100%);
   --cover-panel-bg:linear-gradient(180deg,rgba(255,255,255,.92),rgba(237,246,255,.90));
   --cover-panel-border:rgba(200,169,90,.34);
@@ -82,18 +81,18 @@ html[data-theme="eisgold"],
 html[data-theme="eisgold"] body{
   color:#142033!important;
   background:var(--outer-bg)!important;
-  background-color:#f7fcff!important;
+  background-color:#fcfeff!important;
 }
 html[data-theme="eisgold"] body:before{
   opacity:1!important;
-  inset:-36% -28% auto -28%!important;
-  height:78vh!important;
+  inset:-48% -40% auto -40%!important;
+  height:92vh!important;
   width:auto!important;
   border-radius:50%!important;
   background:
-    radial-gradient(ellipse 70% 55% at 50% 28%,rgba(255,255,255,.78) 0%,transparent 70%),
-    radial-gradient(ellipse 48% 42% at 16% 20%,rgba(184,150,58,.18) 0%,transparent 68%),
-    radial-gradient(ellipse 48% 42% at 86% 16%,rgba(140,190,230,.32) 0%,transparent 68%)!important;
+    radial-gradient(ellipse 78% 60% at 50% 28%,rgba(255,255,255,.92) 0%,transparent 72%),
+    radial-gradient(ellipse 52% 46% at 16% 20%,rgba(212,185,110,.16) 0%,transparent 70%),
+    radial-gradient(ellipse 52% 46% at 86% 16%,rgba(196,224,242,.18) 0%,transparent 70%)!important;
   filter:none!important;
 }
 html[data-theme="eisgold"] #dar-soft-boot{color:#142033}

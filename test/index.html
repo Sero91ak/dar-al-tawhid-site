@@ -31409,10 +31409,78 @@ html[data-theme="eisgold"] .bottom-nav{
 }
 </style>
 
+<style id="eisgold-oversize-icegold-v721">
+/* Eisgold: Oversize-Fläche ungeschnitten, helles Eisblau-Gold — kein dunkles Meeresblau, kein abgeschnittenes Deckblatt. */
+html[data-theme="eisgold"]{
+  --outer-bg-flat:#fcfeff!important;
+  --dar-edge-fill:#fcfeff!important;
+  --dar-boot-fill:#fcfeff!important;
+  --bg:#fcfeff!important;
+  --theme-page-bg:#fcfeff!important;
+  --quran-page-bg:#fcfeff!important;
+  --gold:#c8a95a!important;
+  --theme-accent:#c8a95a!important;
+  --outer-bg:
+    radial-gradient(ellipse 180% 95% at 50% -28%,rgba(255,255,255,1) 0%,transparent 64%),
+    radial-gradient(ellipse 120% 80% at 6% -12%,rgba(212,185,110,.18) 0%,transparent 60%),
+    radial-gradient(ellipse 120% 80% at 96% -8%,rgba(196,224,242,.20) 0%,transparent 60%),
+    linear-gradient(180deg,#fcfeff 0%,#f6fbff 52%,#f0f8fd 100%)!important;
+  --premium-bg:var(--outer-bg)!important;
+  --app-bg:var(--outer-bg)!important;
+}
+html[data-theme="eisgold"],
+html[data-theme="eisgold"] body,
+html[data-theme="eisgold"].is-standalone-pwa,
+html[data-theme="eisgold"].is-standalone-pwa body,
+html[data-theme="eisgold"].dar-ios-native-app,
+html[data-theme="eisgold"].dar-ios-native-app body,
+html[data-theme="eisgold"] body.is-home-route,
+html[data-theme="eisgold"] body.is-more-route,
+html[data-theme="eisgold"] body.is-feed-fullscreen,
+html[data-theme="eisgold"] body.is-quran-overview,
+html[data-theme="eisgold"] body.is-quiz-route,
+html[data-theme="eisgold"] body.is-account-route,
+html[data-theme="eisgold"] body.is-area-route{
+  background:var(--outer-bg)!important;
+  background-color:#fcfeff!important;
+  background-attachment:scroll!important;
+  overflow:visible!important;
+  overscroll-behavior-y:auto!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+html[data-theme="eisgold"] #appRoot,
+html[data-theme="eisgold"] #appShell,
+html[data-theme="eisgold"] .app,
+html[data-theme="eisgold"] #appView,
+html[data-theme="eisgold"] #appView.view,
+html[data-theme="eisgold"] .view,
+html[data-theme="eisgold"] .top-shell,
+html[data-theme="eisgold"] .top-shell.theme-hero-shell,
+html[data-theme="eisgold"] .header,
+html[data-theme="eisgold"] .theme-hero-surface,
+html[data-theme="eisgold"] .sf-app,
+html[data-theme="eisgold"] .sf-top,
+html[data-theme="eisgold"] .qov-page,
+html[data-theme="eisgold"] .qov-header,
+html[data-theme="eisgold"] .more-page{
+  background:transparent!important;
+  background-image:none!important;
+  overflow:visible!important;
+  clip-path:none!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] .top-shell,
+html[data-theme="eisgold"] .top-shell.theme-hero-shell{
+  overflow:visible!important;
+}
+</style>
+
 <script>
 (function(){
   /* v661 · Keine Inline-Hintergrundfarben mehr — die klebten (z.B. Royal-Blau) über Theme-Wechsel. */
-  var THEME_SOLID={dark:"#050706",light:"#F2EEE3",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605",eisgold:"#f7fcff"};
+  var THEME_SOLID={dark:"#050706",light:"#F2EEE3",soft:"#f2e6e2",royal:"#07162c",bordeaux:"#140B0C","dar-al-layl":"#050605",eisgold:"#fcfeff"};
   var CLEAR_PROPS=["background","background-color","background-image","backdrop-filter","-webkit-backdrop-filter"];
   var CLEAR_SELS=[
     "html",
@@ -31515,6 +31583,7 @@ html[data-theme="eisgold"] .bottom-nav{
     var sheet=document.getElementById("eisgold-one-sheet-v718");
     var quran=document.getElementById("eisgold-quran-sheet-v719");
     var glacier=document.getElementById("eisgold-glacier-v720");
+    var icegold=document.getElementById("eisgold-oversize-icegold-v721");
     var host=document.documentElement||(s&&s.parentNode);
     if(s&&host) host.appendChild(s);
     if(ice&&host) host.appendChild(ice);
@@ -31530,6 +31599,7 @@ html[data-theme="eisgold"] .bottom-nav{
     if(sheet&&host) host.appendChild(sheet);
     if(quran&&host) host.appendChild(quran);
     if(glacier&&host) host.appendChild(glacier);
+    if(icegold&&host) host.appendChild(icegold);
     try{
       var root=document.documentElement;
       if(!root)return;
@@ -31563,10 +31633,10 @@ html[data-theme="eisgold"] .bottom-nav{
     try{
       var root=document.documentElement;
       if(!root||root.getAttribute("data-theme")!=="eisgold")return;
-      var ice="#f7fcff";
+      var ice="#fcfeff";
       var ink="#142033";
+      root.style.setProperty("background","var(--outer-bg)","important");
       root.style.setProperty("background-color",ice,"important");
-      root.style.setProperty("background-image","none","important");
       if(document.body){
         document.body.style.setProperty("background","var(--outer-bg)","important");
         document.body.style.setProperty("background-color",ice,"important");

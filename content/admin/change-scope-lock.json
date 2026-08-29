@@ -87,6 +87,22 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-oversize-icegold-v721-2026-08-29",
+      "approvedBy": "user-explicit-eisgold-oversize-cut-dark",
+      "reason": "Nutzer: Oversize/Deckblatt überall abgeschnitten, zu dunkel Meeresblau. Muss Eisblau-Gold sein, ungeschnitten.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/theme-eisgold.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-glacier-restore-v720-2026-08-29",
       "approvedBy": "user-explicit-eisgold-look-broken",
       "reason": "Nutzer: Eisgold hat nichts mehr mit Eisgold zu tun. Hell weiß-blau wie Gletscher/Ozean, leicht Gold. Seite kaputt.",
