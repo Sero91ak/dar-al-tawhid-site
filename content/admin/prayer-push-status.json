@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-29T12:50:37.445Z",
+  "updatedAt": "2026-08-29T12:55:37.529Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-29T12:50:37.445Z",
+  "lastCronRun": "2026-08-29T12:55:37.529Z",
   "nextPlannedPush": {
     "prayer": "ʿAṣr",
     "key": "asr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-29T15:02:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-29T12:35:19.154Z",
-  "windowEnd": "2026-08-30T14:50:19.154Z",
+  "windowStart": "2026-08-29T12:40:19.281Z",
+  "windowEnd": "2026-08-30T14:55:19.281Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 14,
@@ -33,7 +33,7 @@
   "invalid": 0,
   "invalidDisabled": 0,
   "skippedPast": 76,
-  "skippedAlreadyQueued": 1,
+  "skippedAlreadyQueued": 0,
   "skippedWindow": 74,
   "advanceCatchups": 0,
   "entryCatchups": 0,
@@ -980,8 +980,7 @@
       "mode": "entry",
       "sendAfter": "2026-08-29T12:38:00.000Z",
       "time": "14:38",
-      "timeZone": "Europe/Berlin",
-      "reason": "already-queued"
+      "timeZone": "Europe/Berlin"
     },
     {
       "key": "fajr",
