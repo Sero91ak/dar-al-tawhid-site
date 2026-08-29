@@ -1085,24 +1085,6 @@
       return '<p class="frauen-empty">Bereich wird geladen…</p>';
     }
     if (parsed.page === "hub") {
-      fiqhQ = "";
-      sahabQ = "";
-      tabiiQ = "";
-      muetterQ = "";
-      eheQ = "";
-      hijabQ = "";
-      wissenQ = "";
-      faqQ = "";
-      kurzQ = "";
-      fiqhThema = "alle";
-      sahabThema = "alle";
-      tabiiThema = "alle";
-      muetterThema = "alle";
-      eheThema = "alle";
-      hijabThema = "alle";
-      wissenThema = "alle";
-      faqThema = "alle";
-      kurzThema = "alle";
       return renderHub();
     }
     if (parsed.page === "detail") return renderDetail(parsed.abschnitt, parsed.kennung);
