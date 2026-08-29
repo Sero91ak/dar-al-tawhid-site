@@ -87,6 +87,22 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-unified-field-v717-2026-08-29",
+      "approvedBy": "user-explicit-eisgold-getrennt-fix",
+      "reason": "Nutzer: Feed/Mehr sieht getrennt/Katastrophe aus. Eine einheitliche Eisfäche bis oben, keine weißen Inseln.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/theme-eisgold.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-oversize-feed-mehr-v716-2026-08-29",
       "approvedBy": "user-explicit-eisgold-feed-oversize",
       "reason": "Nutzer: Feed/Mehr sollen dieselbe oversize hintergrundfüllende Eisfäche wie Start haben.",

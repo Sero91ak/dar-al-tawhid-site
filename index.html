@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v716";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v717";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -26192,7 +26192,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v716";
+const APP_BUILD_ID="app-shell-v717";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -30854,6 +30854,69 @@ html[data-theme="eisgold"] body.is-feed-fullscreen .sf-app::before{
 }
 </style>
 
+<style id="eisgold-unified-field-v717">
+/* Eisgold: eine Eisfäche bis oben — keine weißen Inseln, keine fremde Nav-Platte. */
+html[data-theme="eisgold"]{
+  --card:#d8eefb!important;
+  --panel:#d8eefb!important;
+  --theme-surface:#d8eefb!important;
+  --quiz-card:#d8eefb!important;
+  --quiz-elev:#d8eefb!important;
+  --quiz-surface:#d8eefb!important;
+  --quiz-option-bg:#d8eefb!important;
+}
+html[data-theme="eisgold"] .account-card,
+html[data-theme="eisgold"] .more-group,
+html[data-theme="eisgold"] .feature-section,
+html[data-theme="eisgold"] .premium-surface,
+html[data-theme="eisgold"] body.is-more-route .account-card,
+html[data-theme="eisgold"] body.is-more-route .more-group,
+html[data-theme="eisgold"] body.is-more-route .feature-section{
+  background:transparent!important;
+  background-color:transparent!important;
+  box-shadow:none!important;
+  border:1px solid rgba(184,150,58,.28)!important;
+}
+html[data-theme="eisgold"] body.is-more-route .more-feature-row,
+html[data-theme="eisgold"] .more-feature-row,
+html[data-theme="eisgold"] .more-search,
+html[data-theme="eisgold"] body.is-more-route .more-search{
+  background:#d8eefb!important;
+  background-color:#d8eefb!important;
+  box-shadow:none!important;
+  border:1px solid rgba(184,150,58,.26)!important;
+  color:#0a1628!important;
+}
+html[data-theme="eisgold"] .sf-switch,
+html[data-theme="eisgold"] body.is-feed-fullscreen .sf-switch{
+  background:transparent!important;
+  background-color:transparent!important;
+  border:1px solid rgba(184,150,58,.34)!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] .sf-switch-btn.is-active{
+  background:rgba(184,150,58,.16)!important;
+  color:#0a1628!important;
+}
+html[data-theme="eisgold"] #bottomNav.bottom-nav,
+html[data-theme="eisgold"] .bottom-nav,
+html[data-theme="eisgold"] body.is-feed-fullscreen #bottomNav.bottom-nav,
+html[data-theme="eisgold"] body.is-more-route #bottomNav.bottom-nav{
+  background:#d8eefb!important;
+  background-color:#d8eefb!important;
+  background-image:none!important;
+  border:1px solid rgba(184,150,58,.28)!important;
+  box-shadow:none!important;
+}
+html[data-theme="eisgold"] .quiz-home-panel,
+html[data-theme="eisgold"] .quiz-card,
+html[data-theme="eisgold"] .quiz-hero{
+  background:transparent!important;
+  box-shadow:none!important;
+  border:1px solid rgba(184,150,58,.28)!important;
+}
+</style>
+
 <script>
 (function(){
   /* v661 · Keine Inline-Hintergrundfarben mehr — die klebten (z.B. Royal-Blau) über Theme-Wechsel. */
@@ -30955,6 +31018,7 @@ html[data-theme="eisgold"] body.is-feed-fullscreen .sf-app::before{
     var head=document.getElementById("eisgold-home-head-v714");
     var ink2=document.getElementById("eisgold-ink-surfaces-v715");
     var over=document.getElementById("eisgold-oversize-routes-v716");
+    var uni=document.getElementById("eisgold-unified-field-v717");
     var host=document.documentElement||(s&&s.parentNode);
     if(s&&host) host.appendChild(s);
     if(ice&&host) host.appendChild(ice);
@@ -30965,6 +31029,7 @@ html[data-theme="eisgold"] body.is-feed-fullscreen .sf-app::before{
     if(head&&host) host.appendChild(head);
     if(ink2&&host) host.appendChild(ink2);
     if(over&&host) host.appendChild(over);
+    if(uni&&host) host.appendChild(uni);
     try{
       var root=document.documentElement;
       if(!root)return;
