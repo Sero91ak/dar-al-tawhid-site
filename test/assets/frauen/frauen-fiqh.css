@@ -122,10 +122,121 @@
   background:color-mix(in srgb,var(--gold2) 8%,transparent);
 }
 
-.frauen-fiqh-list .frauen-open-btn{
+.frauen-statement-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-top:8px;
+}
+.frauen-statement-card{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:4px;
+  width:100%;
+  padding:14px 16px 14px 18px;
+  text-align:left;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  border:0;
+  border-radius:22px;
+  background:transparent;
+  color:inherit;
+  font:inherit;
+  box-shadow:inset 0 0 0 1px var(--cat-line-soft);
+}
+.frauen-statement-card:before{
+  content:"";
+  position:absolute;
+  left:10px;
+  top:22%;
+  bottom:22%;
+  width:2px;
+  border-radius:999px;
+  background:var(--cat-rail);
+  opacity:.55;
   pointer-events:none;
-  margin-top:5px;
+}
+.frauen-statement-card:hover,
+.frauen-statement-card:focus-visible{
+  outline:none;
+  background:radial-gradient(ellipse 96% 86% at 38% 50%,var(--cat-wash-strong),color-mix(in srgb,var(--gold2) 5%,transparent) 58%,transparent 76%);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2) 14%,transparent);
+}
+.frauen-statement-card h3{
+  margin:0;
+  padding-left:8px;
+  font-family:var(--serif);
+  font-size:16.5px;
+  font-weight:650;
+  line-height:1.28;
+  color:var(--cat-ink);
+}
+.frauen-statement-card__preview,
+.frauen-statement-card__nutzen,
+.frauen-statement-card__quelle{
+  margin:0;
+  padding-left:8px;
+  font-size:12.5px;
+  line-height:1.45;
+  color:var(--ink);
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+}
+.frauen-statement-card__meta{
+  margin:0;
+  padding-left:8px;
+  font-size:10.5px;
+  font-weight:750;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.frauen-statement-card__nutzen,
+.frauen-statement-card__quelle{
+  -webkit-line-clamp:1;
+  color:var(--muted);
+}
+.frauen-statement-card .frauen-open-btn{
+  pointer-events:none;
+  margin-top:6px;
+  margin-left:8px;
   padding:5px 11px;
+  text-transform:none;
+  letter-spacing:.04em;
+}
+.frauen-direktnachweis{
+  display:inline-flex;
+  align-items:center;
+  margin-top:4px;
+  padding:7px 0 2px;
+  border:0;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2) 28%,transparent);
+  background:none;
+  color:var(--cat-ink);
+  font-size:13.5px;
+  font-weight:650;
+  letter-spacing:.02em;
+  text-decoration:none;
+  width:fit-content;
+}
+.frauen-direktnachweis:hover,
+.frauen-direktnachweis:focus-visible{
+  border-bottom-color:color-mix(in srgb,var(--gold2) 55%,transparent);
+  outline:none;
+}
+.frauen-source-card__title--sub{
+  margin-top:12px;
+}
+.frauen-fiqh-list .dua-theme-card.is-pending{
+  cursor:default;
+  opacity:.72;
+}
+.frauen-fiqh-list .dua-theme-card.is-pending .dua-theme-card__chev{
+  opacity:.25;
 }
 .frauen-article .frauen-open-btn{
   margin-top:16px;

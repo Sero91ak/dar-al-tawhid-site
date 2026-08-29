@@ -11,6 +11,30 @@
     { id: "hidschab", label: "Ḥidschāb" },
     { id: "heirat", label: "Heirat" }
   ];
+  var BEREICH_LABEL = {
+    grundlagen: "Grundlagen",
+    reinigung: "Reinigung",
+    gebet: "Gebet",
+    fasten: "Fasten",
+    "hijab-schamhaftigkeit": "Ḥidschāb",
+    "ehe-familie": "Heirat",
+    "moschee-gemeinschaft": "Gebet",
+    "hajj-umrah": "Ḥajj",
+    "fragen-antworten": "Grundlagen",
+    "kleidung-im-gebet": "Gebet"
+  };
+  var BEREICH_CHIP = {
+    grundlagen: "grundlagen",
+    reinigung: "reinigung",
+    gebet: "gebet",
+    fasten: "fasten",
+    "hijab-schamhaftigkeit": "hidschab",
+    "ehe-familie": "heirat",
+    "moschee-gemeinschaft": "gebet",
+    "hajj-umrah": "gebet",
+    "fragen-antworten": "grundlagen",
+    "kleidung-im-gebet": "gebet"
+  };
 
   var cache = null;
   var cachePromise = null;
@@ -26,10 +50,36 @@
       .replace(/"/g, "&quot;");
   }
 
+  function titelVon(e) {
+    return e.titel || e.titel_de || "";
+  }
+
+  function vorschauVon(e) {
+    return e.kurzvorschau || e.kurzbeschreibung || "";
+  }
+
+  function nutzenKurz(e) {
+    var n = String(e.nutzen || "").trim();
+    if (n.length <= 92) return n;
+    return n.slice(0, 90).replace(/\s+\S*$/, "") + "…";
+  }
+
+  function quelleKurz(e) {
+    var s = String(e.quellenanzeige || "").replace(/^Quelle:\s*/i, "");
+    if (s.length <= 110) return s;
+    return s.slice(0, 108).replace(/\s+\S*$/, "") + "…";
+  }
+
+  function istSichtbar(e) {
+    if (!e) return false;
+    if (e.quellenstatus !== "geprueft") return false;
+    if (!String(e.quellenanzeige || "").trim()) return false;
+    if (!String(e.direktnachweisUrl || "").trim()) return false;
+    return true;
+  }
+
   function sichtbare(eintraege) {
-    return (eintraege || []).filter(function (e) {
-      return e.status_anzeige === "sichtbar";
-    });
+    return (eintraege || []).filter(istSichtbar);
   }
 
   function load() {
@@ -53,43 +103,60 @@
 
   function matches(e) {
     if (thema !== "alle") {
-      var themen = e.themen || [];
-      if (themen.indexOf(thema) === -1) return false;
+      var chip = BEREICH_CHIP[e.bereich] || e.bereich;
+      if (chip !== thema) return false;
     }
     if (!q) return true;
     var hay = [
-      e.titel_de,
-      e.kurzbeschreibung,
+      titelVon(e),
+      vorschauVon(e),
       e.inhalt,
       e.nutzen,
-      e.quelle_werk,
-      e.quelle_kapitel,
-      (e.quelle_ueberlieferer || []).join(" "),
-      (e.stichworte || []).join(" ")
-    ].join(" ").toLowerCase();
+      e.quellenanzeige,
+      e.bereich,
+      (e.schlagwoerter || []).join(" ")
+    ]
+      .join(" ")
+      .toLowerCase();
     return hay.indexOf(q) !== -1;
   }
 
-  function quelleKurz(e) {
-    var bits = [];
-    if (e.quelle_werk) bits.push(e.quelle_werk);
-    if (e.quelle_nummer) bits.push("Nr. " + e.quelle_nummer);
-    return bits.join(" · ");
+  function hubRow(nr, title, meta, value, openLabel) {
+    var nav = value ? ' data-nav="frauen" data-value="' + esc(value) + '"' : "";
+    return (
+      '<article class="dua-theme-card' +
+      (value ? "" : " is-pending") +
+      '"' +
+      nav +
+      ">" +
+      '<span class="dua-theme-card__idx" aria-hidden="true">' +
+      nr +
+      "</span>" +
+      '<div class="dua-theme-card__icon" aria-hidden="true"><span class="emoji-emblem">✦</span></div>' +
+      '<div class="dua-theme-card__body"><h3>' +
+      esc(title) +
+      "</h3>" +
+      '<p class="dua-theme-card__count">' +
+      esc(meta) +
+      "</p>" +
+      (openLabel ? '<span class="frauen-open-btn">' + esc(openLabel) + "</span>" : "") +
+      "</div>" +
+      '<span class="dua-theme-card__chev" aria-hidden="true">›</span>' +
+      "</article>"
+    );
   }
 
   function renderHub() {
     return (
       '<section class="stack">' +
-      '<p class="lede">Geprüfte Aussagen. Bereich wählen — kompakt, dann die volle Aussage mit Quelle.</p>' +
+      '<p class="lede">Geprüfte Aussagen. Kompakt wählen, dann die volle Aussage mit Quelle und Direktnachweis.</p>' +
       '<div class="dua-theme-grid frauen-fiqh-list">' +
-      '<article class="dua-theme-card" data-nav="frauen" data-value="fiqh">' +
-      '<span class="dua-theme-card__idx" aria-hidden="true">01</span>' +
-      '<div class="dua-theme-card__icon" aria-hidden="true"><span class="emoji-emblem">✦</span></div>' +
-      '<div class="dua-theme-card__body"><h3>Fiqh der Frauen</h3>' +
-      '<p class="dua-theme-card__count">Reinigung · Gebet · Fasten · Ḥidschāb</p>' +
-      '<span class="frauen-open-btn">Bereich öffnen</span></div>' +
-      '<span class="dua-theme-card__chev" aria-hidden="true">›</span>' +
-      "</article></div></section>"
+      hubRow("01", "Fiqh der Frauen", "Reinigung · Gebet · Fasten · Ḥidschāb", "fiqh", "Bereich öffnen") +
+      hubRow("02", "Ṣaḥābiyyāt", "In Prüfung", "", "") +
+      hubRow("03", "Tābiʿiyyāt", "In Prüfung", "", "") +
+      hubRow("04", "Frauen der Salaf", "In Prüfung", "", "") +
+      hubRow("05", "Mütter der Gläubigen", "In Prüfung", "", "") +
+      "</div></section>"
     );
   }
 
@@ -108,26 +175,28 @@
     }).join("");
 
     var rows = items
-      .map(function (e, i) {
+      .map(function (e) {
+        var bereich = BEREICH_LABEL[e.bereich] || e.bereich || "";
         return (
-          '<article class="dua-theme-card" data-nav="frauen" data-value="fiqh/' +
+          '<article class="frauen-statement-card" data-nav="frauen" data-value="fiqh/' +
           esc(e.kennung) +
           '">' +
-          '<span class="dua-theme-card__idx" aria-hidden="true">' +
-          String(i + 1).padStart(2, "0") +
-          "</span>" +
-          '<div class="dua-theme-card__icon" aria-hidden="true"><span class="emoji-emblem">✦</span></div>' +
-          '<div class="dua-theme-card__body">' +
           "<h3>" +
-          esc(e.titel_de) +
+          esc(titelVon(e)) +
           "</h3>" +
-          '<p class="dua-theme-card__count">' +
+          '<p class="frauen-statement-card__preview">' +
+          esc(vorschauVon(e)) +
+          "</p>" +
+          '<p class="frauen-statement-card__meta">' +
+          esc(bereich) +
+          " · Geprüft</p>" +
+          (e.nutzen
+            ? '<p class="frauen-statement-card__nutzen">' + esc(nutzenKurz(e)) + "</p>"
+            : "") +
+          '<p class="frauen-statement-card__quelle">' +
           esc(quelleKurz(e)) +
-          (e.hadith_grad ? " · " + e.hadith_grad : "") +
           "</p>" +
           '<span class="frauen-open-btn">Aussage öffnen</span>' +
-          "</div>" +
-          '<span class="dua-theme-card__chev" aria-hidden="true">›</span>' +
           "</article>"
         );
       })
@@ -135,7 +204,7 @@
 
     return (
       '<section class="stack">' +
-      '<p class="lede">Nur geprüfte Aussagen. Tippe eine Zeile — die volle Aussage öffnet sich mit Quelle.</p>' +
+      '<p class="lede">Nur geprüfte Aussagen mit Direktnachweis. Die volle Aussage öffnet sich nach dem Tippen.</p>' +
       '<div class="frauen-filter' +
       (filterOpen ? " is-open" : "") +
       '">' +
@@ -148,7 +217,7 @@
       chips +
       "</div></div></div>" +
       (rows
-        ? '<div class="dua-theme-grid frauen-fiqh-list">' + rows + "</div>"
+        ? '<div class="frauen-statement-list">' + rows + "</div>"
         : '<p class="frauen-empty">Keine sichtbare Aussage zu dieser Auswahl.</p>') +
       "</section>"
     );
@@ -156,40 +225,38 @@
 
   function renderDetail(data, kennung) {
     var e = (data.eintraege || []).find(function (x) {
-      return x.kennung === kennung && x.status_anzeige === "sichtbar";
+      return x.kennung === kennung && istSichtbar(x);
     });
     if (!e) {
       return '<p class="frauen-empty">Diese Aussage ist nicht sichtbar oder noch in Prüfung.</p>';
     }
-    var ueber = (e.quelle_ueberlieferer || []).join(" · ");
+    var linkText = e.direktnachweisText || "→ Quelle öffnen";
     return (
       '<article class="frauen-article">' +
       '<p class="frauen-article__kicker">Aussage · Fiqh der Frauen</p>' +
       '<h2 class="frauen-article__title">' +
-      esc(e.titel_de) +
+      esc(titelVon(e)) +
       "</h2>" +
-      (e.kurzbeschreibung
-        ? '<p class="frauen-article__lead">' + esc(e.kurzbeschreibung) + "</p>"
-        : "") +
-      '<p class="frauen-article__section">Inhalt</p>' +
+      '<p class="frauen-article__section">Aussage</p>' +
       '<p class="frauen-article__body">' +
       esc(e.inhalt) +
       "</p>" +
       (e.nutzen
-        ? '<p class="frauen-article__section">Nutzen</p><p class="frauen-article__nutzen">' +
+        ? '<p class="frauen-article__section">Nutzen / Lehre</p><p class="frauen-article__nutzen">' +
           esc(e.nutzen) +
           "</p>"
         : "") +
       '<div class="frauen-source-card">' +
-      '<p class="frauen-source-card__title">Quelle zum Nachprüfen</p>' +
-      "<p><strong>" +
-      esc(e.quelle_werk || "") +
-      "</strong>" +
-      (e.quelle_nummer ? " · Nr. " + esc(String(e.quelle_nummer)) : "") +
+      '<p class="frauen-source-card__title">Quelle</p>' +
+      "<p>" +
+      esc(e.quellenanzeige) +
       "</p>" +
-      (e.quelle_kapitel ? "<p>" + esc(e.quelle_kapitel) + "</p>" : "") +
-      (ueber ? "<p>Überliefert von: " + esc(ueber) + "</p>" : "") +
-      (e.hadith_grad ? "<p>Grad: " + esc(e.hadith_grad) + "</p>" : "") +
+      '<p class="frauen-source-card__title frauen-source-card__title--sub">Direktnachweis</p>' +
+      '<a class="frauen-direktnachweis" href="' +
+      esc(e.direktnachweisUrl) +
+      '" target="_blank" rel="noopener noreferrer">' +
+      esc(linkText) +
+      "</a>" +
       "</div>" +
       '<button type="button" class="frauen-open-btn" data-nav="frauen" data-value="fiqh">Zurück zur Übersicht</button>' +
       "</article>"
@@ -220,30 +287,28 @@
     if (parsed.page === "list") {
       return {
         title: "Fiqh der Frauen",
-        subtitle: "Suche und Filter · Zeile öffnet die Aussage mit Quelle."
+        subtitle: "Suche und Filter · Aussage öffnen · Quelle und Direktnachweis"
       };
     }
     if (parsed.page === "detail" && cache) {
       var e = (cache.eintraege || []).find(function (x) {
-        return x.kennung === parsed.kennung && x.status_anzeige === "sichtbar";
+        return x.kennung === parsed.kennung && istSichtbar(x);
       });
       return {
-        title: e ? e.titel_de : "Aussage",
-        subtitle: "Fiqh der Frauen · Quelle zum Nachprüfen"
+        title: e ? titelVon(e) : "Aussage",
+        subtitle: "Fiqh der Frauen · Quelle und Direktnachweis"
       };
     }
     return {
       title: "Frauen im Islam",
-      subtitle: "Geprüfte Aussagen. Kompakt wählen, dann die volle Aussage lesen."
+      subtitle: "Geprüfte Aussagen. Kompakt wählen, dann nachprüfen."
     };
   }
 
   function render(value) {
     var parsed = parseValue(value);
     if (!cache) {
-      load()
-        .then(refreshIfFrauen)
-        .catch(refreshIfFrauen);
+      load().then(refreshIfFrauen).catch(refreshIfFrauen);
       return '<p class="frauen-empty">Bereich wird geladen…</p>';
     }
     if (parsed.page === "hub") {
