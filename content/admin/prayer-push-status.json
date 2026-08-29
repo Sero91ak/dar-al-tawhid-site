@@ -1,20 +1,20 @@
 {
-  "updatedAt": "2026-08-29T02:40:16.392Z",
+  "updatedAt": "2026-08-29T02:50:16.057Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-29T02:40:16.392Z",
+  "lastCronRun": "2026-08-29T02:50:16.057Z",
   "nextPlannedPush": {
-    "prayer": "Maghrib",
-    "key": "maghrib",
-    "mode": "entry",
-    "sendAfter": "2026-08-29T02:43:00.000Z",
+    "prayer": "Fajr",
+    "key": "fajr",
+    "mode": "advance",
+    "sendAfter": "2026-08-29T03:08:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-29T02:25:11.705Z",
-  "windowEnd": "2026-08-30T04:40:11.705Z",
+  "windowStart": "2026-08-29T02:35:11.461Z",
+  "windowEnd": "2026-08-30T04:50:11.461Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 12,
@@ -28,11 +28,11 @@
   "usersWithLocation": 12,
   "usersWithActivePush": 12,
   "locationGroups": 5,
-  "scheduled": 62,
-  "recipients": 146,
+  "scheduled": 61,
+  "recipients": 145,
   "invalid": 0,
   "invalidDisabled": 0,
-  "skippedPast": 50,
+  "skippedPast": 51,
   "skippedWindow": 88,
   "advanceCatchups": 0,
   "entryCatchups": 0,
@@ -86,7 +86,7 @@
         "time": "20:25",
         "advance": {
           "status": "geplant",
-          "recipients": 12
+          "recipients": 11
         },
         "entry": {
           "status": "geplant",
@@ -164,7 +164,7 @@
       "time": "20:25",
       "advance": {
         "status": "geplant",
-        "recipients": 12
+        "recipients": 11
       },
       "entry": {
         "status": "geplant",
@@ -512,16 +512,6 @@
       "mode": "entry",
       "time": "04:43",
       "sendAfter": "2026-08-29T02:43:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin",
-      "invalid": 0
-    },
-    {
-      "prayer": "Maghrib",
-      "key": "maghrib",
-      "mode": "advance",
-      "time": "04:43",
-      "sendAfter": "2026-08-29T02:28:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
       "invalid": 0
@@ -1039,6 +1029,13 @@
       "timeZone": "Europe/Berlin"
     },
     {
+      "key": "maghrib",
+      "mode": "advance",
+      "sendAfter": "2026-08-29T02:28:00.000Z",
+      "time": "04:43",
+      "timeZone": "Europe/Berlin"
+    },
+    {
       "key": "fajr",
       "mode": "entry",
       "sendAfter": "2026-08-28T03:22:00.000Z",
@@ -1098,13 +1095,6 @@
       "key": "isha",
       "mode": "entry",
       "sendAfter": "2026-08-28T19:44:00.000Z",
-      "time": "21:44",
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "key": "isha",
-      "mode": "advance",
-      "sendAfter": "2026-08-28T19:29:00.000Z",
       "time": "21:44",
       "timeZone": "Europe/Berlin"
     }
