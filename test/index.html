@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v732";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v733";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -26294,7 +26294,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v732";
+const APP_BUILD_ID="app-shell-v733";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -32093,6 +32093,165 @@ html[data-theme="eisgold"] body.is-quran-overview .qov-nav-stack .qov-jump-field
 }
 </style>
 
+<style id="quran-picker-noble-v733">
+/* Leser Juz/Sure/Aya-Wähler: tiefschwarz, weiße Schrift, ovale Haarlinien — jedes Theme. */
+html .qrc-sheet.qrc-sheet--picker,
+html[data-theme] .qrc-sheet.qrc-sheet--picker,
+html[data-theme="eisgold"] .qrc-sheet.qrc-sheet--picker,
+body.qrc-sheet-open .qrc-sheet.qrc-sheet--picker,
+html[data-theme="eisgold"] body.qrc-sheet-open .qrc-sheet.qrc-sheet--picker{
+  --qrc-picker-bg:#050505!important;
+  --qrc-picker-hi:rgba(255,255,255,.08)!important;
+  --qrc-picker-muted:#f6f3ec!important;
+  background:#050505!important;
+  background-color:#050505!important;
+  background-image:none!important;
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+  border:0!important;
+  outline:0!important;
+  border-radius:28px 28px 0 0!important;
+  box-shadow:0 -16px 40px rgba(0,0,0,.55)!important;
+}
+html .qrc-sheet-backdrop.qrc-sheet-backdrop--picker,
+html[data-theme] .qrc-sheet-backdrop.qrc-sheet-backdrop--picker,
+html[data-theme="eisgold"] .qrc-sheet-backdrop.qrc-sheet-backdrop--picker{
+  background:rgba(0,0,0,.46)!important;
+}
+html .qrc-sheet.qrc-sheet--picker,
+html .qrc-sheet.qrc-sheet--picker *,
+html[data-theme] .qrc-sheet.qrc-sheet--picker,
+html[data-theme] .qrc-sheet.qrc-sheet--picker *,
+html[data-theme="eisgold"] .qrc-sheet.qrc-sheet--picker,
+html[data-theme="eisgold"] .qrc-sheet.qrc-sheet--picker *,
+html[data-theme="eisgold"] .qrc-sheet.qrc-sheet--picker button,
+html[data-theme="eisgold"] .qrc-sheet.qrc-sheet--picker span,
+html[data-theme="eisgold"] .qrc-sheet.qrc-sheet--picker .qrc-picker-item-name,
+html[data-theme="eisgold"] .qrc-sheet.qrc-sheet--picker .qrc-picker-col-head,
+html[data-theme="eisgold"] .qrc-sheet.qrc-sheet--picker .qrc-picker-apply-btn{
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+}
+html .qrc-sheet--picker .qrc-sheet-body,
+html[data-theme] .qrc-sheet--picker .qrc-sheet-body,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-sheet-body{
+  background:transparent!important;
+  border:0!important;
+}
+html .qrc-sheet--picker .qrc-picker-layout,
+html[data-theme] .qrc-sheet--picker .qrc-picker-layout{
+  background:transparent!important;
+}
+html .qrc-sheet--picker .qrc-picker-grid,
+html[data-theme] .qrc-sheet--picker .qrc-picker-grid,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-grid{
+  gap:8px!important;
+  padding:4px 10px 8px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  outline:0!important;
+}
+html .qrc-sheet--picker .qrc-picker-grid::before,
+html[data-theme] .qrc-sheet--picker .qrc-picker-grid::before,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-grid::before{
+  left:14px!important;
+  right:14px!important;
+  height:40px!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.08)!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:inset 0 0 0 .65px rgba(232,214,170,.46)!important;
+}
+html .qrc-sheet--picker .qrc-picker-col,
+html[data-theme] .qrc-sheet--picker .qrc-picker-col,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-col{
+  background:#0a0a0a!important;
+  background-color:#0a0a0a!important;
+  border:0!important;
+  border-right:0!important;
+  border-left:0!important;
+  border-top:0!important;
+  border-bottom:0!important;
+  outline:0!important;
+  border-radius:22px!important;
+  box-shadow:inset 0 0 0 .6px rgba(232,214,170,.40)!important;
+}
+html .qrc-sheet--picker .qrc-picker-col-head,
+html[data-theme] .qrc-sheet--picker .qrc-picker-col-head,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-col-head{
+  background:#0a0a0a!important;
+  background-color:#0a0a0a!important;
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+  border:0!important;
+  border-bottom:0!important;
+  box-shadow:none!important;
+  letter-spacing:.08em!important;
+}
+html .qrc-sheet--picker button.qrc-picker-item,
+html .qrc-sheet--picker .qrc-picker-item,
+html .qrc-sheet--picker .qrc-picker-item-name,
+html[data-theme] .qrc-sheet--picker button.qrc-picker-item,
+html[data-theme] .qrc-sheet--picker .qrc-picker-item,
+html[data-theme="eisgold"] .qrc-sheet--picker button.qrc-picker-item,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-item,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-item-name{
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+  background:transparent!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  border-radius:999px!important;
+  opacity:.78!important;
+}
+html .qrc-sheet--picker button.qrc-picker-item.is-active,
+html .qrc-sheet--picker .qrc-picker-item.is-active,
+html .qrc-sheet--picker .qrc-picker-item.is-active .qrc-picker-item-name,
+html[data-theme] .qrc-sheet--picker button.qrc-picker-item.is-active,
+html[data-theme="eisgold"] .qrc-sheet--picker button.qrc-picker-item.is-active,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-item.is-active,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-item.is-active .qrc-picker-item-name{
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+  opacity:1!important;
+  font-weight:750!important;
+}
+html .qrc-sheet--picker .qrc-picker-footer,
+html[data-theme] .qrc-sheet--picker .qrc-picker-footer,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-footer{
+  background:#050505!important;
+  background-color:#050505!important;
+  border:0!important;
+  border-top:0!important;
+  box-shadow:none!important;
+}
+html .qrc-sheet--picker .qrc-picker-apply-btn,
+html .qrc-sheet--picker button.qrc-picker-apply-btn,
+html[data-theme] .qrc-sheet--picker .qrc-picker-apply-btn,
+html[data-theme="eisgold"] .qrc-sheet--picker button.qrc-picker-apply-btn,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-apply-btn{
+  background:#0a0a0a!important;
+  background-color:#0a0a0a!important;
+  background-image:none!important;
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+  border:0!important;
+  outline:0!important;
+  border-radius:999px!important;
+  box-shadow:inset 0 0 0 .65px rgba(232,214,170,.50)!important;
+}
+@media(min-width:720px){
+  html .qrc-sheet.qrc-sheet--picker,
+  html[data-theme] .qrc-sheet.qrc-sheet--picker{
+    border-radius:28px 28px 0 0!important;
+  }
+}
+</style>
+
 <script>
 (function(){
   /* v661 · Keine Inline-Hintergrundfarben mehr — die klebten (z.B. Royal-Blau) über Theme-Wechsel. */
@@ -32210,6 +32369,7 @@ html[data-theme="eisgold"] body.is-quran-overview .qov-nav-stack .qov-jump-field
     var moreRows=document.getElementById("eisgold-more-row-frames-v729");
     var moreHair=document.getElementById("eisgold-more-hairline-v730");
     var quranHair=document.getElementById("eisgold-quran-hairline-v732");
+    var pickerNoble=document.getElementById("quran-picker-noble-v733");
     var host=document.documentElement||(s&&s.parentNode);
     if(s&&host) host.appendChild(s);
     if(ice&&host) host.appendChild(ice);
@@ -32236,6 +32396,7 @@ html[data-theme="eisgold"] body.is-quran-overview .qov-nav-stack .qov-jump-field
     if(moreRows&&host) host.appendChild(moreRows);
     if(moreHair&&host) host.appendChild(moreHair);
     if(quranHair&&host) host.appendChild(quranHair);
+    if(pickerNoble&&host) host.appendChild(pickerNoble);
     try{
       var root=document.documentElement;
       if(!root)return;

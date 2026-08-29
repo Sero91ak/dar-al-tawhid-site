@@ -87,6 +87,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-picker-noble-v733-2026-08-29",
+      "approvedBy": "user-explicit-quran-picker-noble-black-white-live",
+      "reason": "Nutzer: Koran-Leser Juz/Sure/Aya-Waehler katastrophal, sofort edel — tiefschwarz, weisse Schrift, ovale Haarlinien, alle Themes.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-quran-hairline-v732-2026-08-29",
       "approvedBy": "user-explicit-quran-gold-lines-thinner",
       "reason": "Nutzer: Qurʾān Goldlinien zu dick, müssen dünner/edler — Suche, JUZ/SURA/AYAH, äußerer Kasten.",
