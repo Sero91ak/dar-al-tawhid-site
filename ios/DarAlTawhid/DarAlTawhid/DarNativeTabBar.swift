@@ -58,12 +58,37 @@ final class DarNativeTabBar: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func applySurface(_ color: UIColor) {
+        var white: CGFloat = 0
+        color.getWhite(&white, alpha: nil)
+        let light = white > 0.62
+        if light {
+            backgroundColor = UIColor(red: 0.97, green: 0.98, blue: 1.0, alpha: 0.94)
+            layer.borderColor = UIColor(red: 0.78, green: 0.66, blue: 0.35, alpha: 0.28).cgColor
+        } else {
+            backgroundColor = UIColor(red: 0.06, green: 0.07, blue: 0.05, alpha: 0.96)
+            layer.borderColor = UIColor(red: 0.83, green: 0.71, blue: 0.43, alpha: 0.28).cgColor
+        }
+        chromeIsLight = light
+        select(id: lastSelectedId)
+    }
+
+    private var chromeIsLight = false
+    private var lastSelectedId = "home"
+
     func select(id: String) {
+        lastSelectedId = id
         for (index, item) in items.enumerated() {
             let active = item.id == id
-            buttons[index].configuration?.baseForegroundColor = active
-                ? UIColor(red: 0.92, green: 0.78, blue: 0.42, alpha: 1)
-                : UIColor(red: 0.96, green: 0.93, blue: 0.82, alpha: 0.78)
+            if chromeIsLight {
+                buttons[index].configuration?.baseForegroundColor = active
+                    ? UIColor(red: 0.07, green: 0.09, blue: 0.15, alpha: 1)
+                    : UIColor(red: 0.22, green: 0.26, blue: 0.32, alpha: 1)
+            } else {
+                buttons[index].configuration?.baseForegroundColor = active
+                    ? UIColor(red: 0.92, green: 0.78, blue: 0.42, alpha: 1)
+                    : UIColor(red: 0.96, green: 0.93, blue: 0.82, alpha: 0.78)
+            }
         }
     }
 

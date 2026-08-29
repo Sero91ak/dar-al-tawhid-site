@@ -87,6 +87,26 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-black-type-global-bg-v712-2026-08-29",
+      "approvedBy": "user-explicit-eisgold-still-broken",
+      "reason": "Nutzer: Eisgold große Probleme. Goldtitel DAR AL TAWHID, weiße Safe-Areas, html/body/root/overscroll. Schrift schwarz. Live+Test+iOS-Chrome.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/theme-eisgold.css",
+        "assets/premium-feed-app.js",
+        "test/assets/premium-feed-app.js",
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift",
+        "ios/DarAlTawhid/DarAlTawhid/DarNativeTabBar.swift"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-v711-visitor-header-overscroll-2026-08-29",
       "approvedBy": "user-explicit-eisgold",
       "reason": "Nutzer: Eisgold. Technischer Fix aus Test (Header/Overscroll/dunkle Schrift) in Besucher-App, damit iOS die gleiche Hülle lädt.",

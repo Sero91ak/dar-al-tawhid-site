@@ -974,6 +974,7 @@ struct WebAppView: UIViewRepresentable {
             if !isBootLoadingVisible {
                 loadingOverlay?.backgroundColor = color
             }
+            nativeChromeBar?.applySurface(color)
         }
 
         private func applyAppearance(topHex: String?, midHex: String?, bottomHex: String?) {
