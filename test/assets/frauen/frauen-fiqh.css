@@ -487,6 +487,13 @@ body.is-frauen-route .frauen-row__quelle{
   font-style:italic;
   color:var(--cat-muted,var(--muted));
 }
+body.is-frauen-route .topics-theme-card__lede,
+body.is-frauen-route .dua-theme-card__lede{
+  margin:2px 0 0;
+  font-size:12.5px;
+  line-height:1.35;
+  color:var(--cat-muted,var(--muted));
+}
 body.is-frauen-route .topics-theme-card .frauen-open-btn,
 body.is-frauen-route .frauen-post-row .frauen-open-btn{
   display:none;

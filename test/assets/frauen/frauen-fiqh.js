@@ -18,6 +18,8 @@
   var KURZ_SLUG = "gepruefte-kurzberichte";
   var SALAF_URL = "/test/data/frauen-der-salaf.json";
   var SALAF_SLUG = "frauen-der-salaf";
+  var MOSCHEE_URL = "/test/data/frauen-moschee-gemeinschaft.json";
+  var MOSCHEE_SLUG = "moschee-gemeinschaft";
   var ERLAUBTE_QUELLENART = {
     quran: 1,
     sahih: 1,
@@ -254,6 +256,25 @@
     familie: "Familie",
     "in-pruefung": "In Prüfung"
   };
+  var MOSCHEE_THEMEN = [
+    { id: "alle", label: "Alle" },
+    { id: "moschee", label: "Moschee" },
+    { id: "eid", label: "Eid" },
+    { id: "adab", label: "Adab" },
+    { id: "schamhaftigkeit", label: "Schamhaftigkeit" },
+    { id: "gemeinschaft", label: "Gemeinschaft" },
+    { id: "lernen", label: "Lernen" },
+    { id: "in-pruefung", label: "In Prüfung" }
+  ];
+  var MOSCHEE_BEREICH_LABEL = {
+    moschee: "Moschee",
+    eid: "Eid",
+    adab: "Adab",
+    schamhaftigkeit: "Schamhaftigkeit",
+    gemeinschaft: "Gemeinschaft",
+    lernen: "Lernen",
+    "in-pruefung": "In Prüfung"
+  };
 
   var fiqhCache = null;
   var sahabCache = null;
@@ -265,6 +286,7 @@
   var faqCache = null;
   var kurzCache = null;
   var salafCache = null;
+  var moscheeCache = null;
   var loadPromise = null;
   var fiqhQ = "";
   var sahabQ = "";
@@ -276,6 +298,7 @@
   var faqQ = "";
   var kurzQ = "";
   var salafQ = "";
+  var moscheeQ = "";
   var fiqhThema = "alle";
   var sahabThema = "alle";
   var tabiiThema = "alle";
@@ -286,6 +309,7 @@
   var faqThema = "alle";
   var kurzThema = "alle";
   var salafThema = "alle";
+  var moscheeThema = "alle";
   var hubQ = "";
   var hubThema = "alle";
   var filterOpen = false;
@@ -384,7 +408,7 @@
   }
 
   function load() {
-    if (fiqhCache && sahabCache && tabiiCache && muetterCache && eheCache && hijabCache && wissenCache && faqCache && kurzCache && salafCache)
+    if (fiqhCache && sahabCache && tabiiCache && muetterCache && eheCache && hijabCache && wissenCache && faqCache && kurzCache && salafCache && moscheeCache)
       return Promise.resolve();
     if (loadPromise) return loadPromise;
     loadPromise = Promise.all([
@@ -397,7 +421,8 @@
       fetchJson(WISSEN_URL),
       fetchJson(FAQ_URL),
       fetchJson(KURZ_URL),
-      fetchJson(SALAF_URL)
+      fetchJson(SALAF_URL),
+      fetchJson(MOSCHEE_URL)
     ])
       .then(function (pair) {
         fiqhCache = pair[0];
@@ -410,6 +435,7 @@
         faqCache = pair[7];
         kurzCache = pair[8];
         salafCache = pair[9];
+        moscheeCache = pair[10];
       })
       .catch(function (err) {
         loadPromise = null;
@@ -459,6 +485,10 @@
     if (v.indexOf(SALAF_SLUG + "/") === 0) {
       return { page: "detail", abschnitt: SALAF_SLUG, kennung: v.slice(SALAF_SLUG.length + 1) };
     }
+    if (v === MOSCHEE_SLUG) return { page: "list", abschnitt: MOSCHEE_SLUG, kennung: "" };
+    if (v.indexOf(MOSCHEE_SLUG + "/") === 0) {
+      return { page: "detail", abschnitt: MOSCHEE_SLUG, kennung: v.slice(MOSCHEE_SLUG.length + 1) };
+    }
     return { page: "hub", abschnitt: "", kennung: "" };
   }
 
@@ -472,6 +502,7 @@
     if (abschnitt === FAQ_SLUG) return faqCache;
     if (abschnitt === KURZ_SLUG) return kurzCache;
     if (abschnitt === SALAF_SLUG) return salafCache;
+    if (abschnitt === MOSCHEE_SLUG) return moscheeCache;
     return fiqhCache;
   }
 
@@ -486,6 +517,7 @@
     if (abschnitt === FAQ_SLUG) return faqThema;
     if (abschnitt === KURZ_SLUG) return kurzThema;
     if (abschnitt === SALAF_SLUG) return salafThema;
+    if (abschnitt === MOSCHEE_SLUG) return moscheeThema;
     return fiqhThema;
   }
 
@@ -500,6 +532,7 @@
     else if (abschnitt === FAQ_SLUG) faqThema = id;
     else if (abschnitt === KURZ_SLUG) kurzThema = id;
     else if (abschnitt === SALAF_SLUG) salafThema = id;
+    else if (abschnitt === MOSCHEE_SLUG) moscheeThema = id;
     else fiqhThema = id;
   }
 
@@ -514,6 +547,7 @@
     if (abschnitt === FAQ_SLUG) return faqQ;
     if (abschnitt === KURZ_SLUG) return kurzQ;
     if (abschnitt === SALAF_SLUG) return salafQ;
+    if (abschnitt === MOSCHEE_SLUG) return moscheeQ;
     return fiqhQ;
   }
 
@@ -528,6 +562,7 @@
     else if (abschnitt === FAQ_SLUG) faqQ = v;
     else if (abschnitt === KURZ_SLUG) kurzQ = v;
     else if (abschnitt === SALAF_SLUG) salafQ = v;
+    else if (abschnitt === MOSCHEE_SLUG) moscheeQ = v;
     else fiqhQ = v;
   }
 
@@ -549,7 +584,8 @@
         abschnitt === WISSEN_SLUG ||
         abschnitt === FAQ_SLUG ||
         abschnitt === KURZ_SLUG ||
-        abschnitt === SALAF_SLUG
+        abschnitt === SALAF_SLUG ||
+        abschnitt === MOSCHEE_SLUG
       ) {
         if (chip !== thema && e.thema !== thema) return false;
       } else if (chip !== thema) return false;
@@ -569,6 +605,7 @@
       lehreVon(e),
       e.quellenanzeige,
       e.bereich,
+      hatDirektnachweis(e) ? "direktnachweis" : "",
       (e.schlagwoerter || []).join(" ")
     ]
       .join(" ")
@@ -577,7 +614,7 @@
   }
 
   function offeneAbschnitte() {
-    return ["fiqh", "sahabiyyat", "tabiiyyat", MUETTER_SLUG, EHE_SLUG, HIJAB_SLUG, WISSEN_SLUG, FAQ_SLUG, KURZ_SLUG, SALAF_SLUG];
+    return ["fiqh", "sahabiyyat", "tabiiyyat", MUETTER_SLUG, EHE_SLUG, HIJAB_SLUG, WISSEN_SLUG, FAQ_SLUG, KURZ_SLUG, SALAF_SLUG, MOSCHEE_SLUG];
   }
 
   function countSichtbare(abschnitt) {
@@ -634,13 +671,16 @@
       esc(q) +
       '" data-frauen-q autocomplete="off" spellcheck="false" enterkeyhint="search">' +
       "</div>" +
-      '<button type="button" class="advanced-toggle' +
-      (filterOpen ? " active" : "") +
-      '" data-frauen-filter-toggle>' +
-      (filterOpen ? "Filter ausblenden" : "Filter anzeigen") +
-      "</button></div>" +
+      (abschnitt === MOSCHEE_SLUG
+        ? ""
+        : '<button type="button" class="advanced-toggle' +
+          (filterOpen ? " active" : "") +
+          '" data-frauen-filter-toggle>' +
+          (filterOpen ? "Filter ausblenden" : "Filter anzeigen") +
+          "</button>") +
+      "</div>" +
       '<div class="filter-panel' +
-      (filterOpen ? "" : " advanced-hidden") +
+      (filterOpen || abschnitt === MOSCHEE_SLUG ? " advanced-visible" : " advanced-hidden") +
       '"><div class="frauen-filter-grid">' +
       chips +
       "</div></div></section>"
@@ -658,7 +698,8 @@
       { nr: "07", title: "Wissen & Lernen", id: WISSEN_SLUG, mark: "lamp" },
       { nr: "08", title: "Fragen & Antworten", id: FAQ_SLUG, mark: "book" },
       { nr: "09", title: "Geprüfte Kurzberichte", id: KURZ_SLUG, mark: "people" },
-      { nr: "10", title: "Frauen der Salaf", id: SALAF_SLUG, mark: "ring" }
+      { nr: "10", title: "Frauen der Salaf", id: SALAF_SLUG, mark: "ring" },
+      { nr: "11", title: "Moschee & Gemeinschaft", id: MOSCHEE_SLUG, mark: "home", lede: "Geprüfte Grundlagen zu Moschee, Eid, Adab und Teilnahme am Guten." }
     ];
   }
 
@@ -682,6 +723,7 @@
       '<div class="topics-theme-card__body dua-theme-card__body"><h3>' +
       esc(area.title) +
       "</h3>" +
+      (area.lede ? '<p class="topics-theme-card__lede dua-theme-card__lede">' + esc(area.lede) + "</p>" : "") +
       '<p class="topics-theme-card__count dua-theme-card__count">' +
       esc(meta) +
       "</p></div>" +
@@ -704,6 +746,7 @@
           lehreVon(e),
           e.quellenanzeige,
           e.bereich,
+          hatDirektnachweis(e) ? "direktnachweis" : "",
           (e.schlagwoerter || []).join(" ")
         ]
           .join(" ")
@@ -767,6 +810,8 @@
     var suchePlatz =
       abschnitt === FAQ_SLUG
         ? "Frage oder Thema suchen"
+        : abschnitt === MOSCHEE_SLUG
+        ? "Thema suchen"
         : abschnitt === KURZ_SLUG || abschnitt === SALAF_SLUG
         ? "Name oder Thema suchen"
         : abschnitt === EHE_SLUG || abschnitt === HIJAB_SLUG || abschnitt === WISSEN_SLUG
@@ -797,11 +842,15 @@
                       ? KURZ_BEREICH_LABEL
                       : abschnitt === SALAF_SLUG
                         ? SALAF_BEREICH_LABEL
+                        : abschnitt === MOSCHEE_SLUG
+                          ? MOSCHEE_BEREICH_LABEL
                   : FIQH_BEREICH_LABEL;
     var bereich = labelMap[e.bereich] || e.bereich || "";
     var person = e.person || e.name;
     var sub =
-      abschnitt === SALAF_SLUG
+      abschnitt === MOSCHEE_SLUG
+        ? vorschauVon(e)
+        : abschnitt === SALAF_SLUG
         ? [person, vorschauVon(e)].filter(Boolean).join(" · ")
         : person
           ? person + " sagte:"
@@ -848,6 +897,8 @@
                       ? KURZ_THEMEN
                       : abschnitt === SALAF_SLUG
                         ? SALAF_THEMEN
+                        : abschnitt === MOSCHEE_SLUG
+                          ? MOSCHEE_THEMEN
                   : FIQH_THEMEN;
     var q = currentQ(abschnitt);
     var thema = currentThema(abschnitt);
@@ -864,7 +915,8 @@
           abschnitt === WISSEN_SLUG ||
           abschnitt === FAQ_SLUG ||
           abschnitt === KURZ_SLUG ||
-          abschnitt === SALAF_SLUG
+          abschnitt === SALAF_SLUG ||
+          abschnitt === MOSCHEE_SLUG
         ? '<p class="frauen-empty">Noch keine geprüften Inhalte vorhanden.</p>'
         : '<p class="frauen-empty">Keine sichtbare Aussage zu dieser Auswahl.</p>';
     var hint =
@@ -872,6 +924,8 @@
         ? ""
         : abschnitt === SALAF_SLUG
           ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte. Historische und biografische Berichte bleiben verborgen, bis sie einzeln geprüft und freigegeben wurden.</p></div>'
+          : abschnitt === MOSCHEE_SLUG
+          ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Fragen zu gemischten Orten, Reisen, Veranstaltungen, Arbeit, Studium und moderner Öffentlichkeit werden erst sichtbar, wenn sie einzeln geprüft wurden.</p></div>'
           : abschnitt === KURZ_SLUG
           ? '<div class="frauen-hint"><p>Dieser Bereich enthält keine ausgeschmückten Geschichten. Sichtbar sind nur Kurzberichte mit geprüfter Quelle und Direktnachweis. Alles Unsichere bleibt verborgen.</p></div>'
           : abschnitt === FAQ_SLUG
@@ -890,6 +944,8 @@
     var lede =
       abschnitt === SALAF_SLUG
         ? '<p class="lede">Geprüfte Aussagen, Berichte und Lehren über rechtschaffene Frauen der frühen Generationen – mit Quelle und Direktnachweis.</p>'
+        : abschnitt === MOSCHEE_SLUG
+        ? '<p class="lede">Geprüfte Grundlagen aus authentischer Sunnah über Moschee, Eid und Adab.</p>'
         : abschnitt === KURZ_SLUG
         ? '<p class="lede">Kurze belegte Ereignisse aus dem Leben rechtschaffener Frauen – mit Quelle und Direktnachweis.</p>'
         : abschnitt === FAQ_SLUG
@@ -924,6 +980,7 @@
 
   function bereichKicker(abschnitt) {
     if (abschnitt === SALAF_SLUG) return "Frauen der Salaf";
+    if (abschnitt === MOSCHEE_SLUG) return "Moschee & Gemeinschaft";
     if (abschnitt === KURZ_SLUG) return "Geprüfte Kurzberichte";
     if (abschnitt === FAQ_SLUG) return "Fragen & Antworten";
     if (abschnitt === WISSEN_SLUG) return "Wissen & Lernen";
@@ -1041,6 +1098,12 @@
         subtitle: "Geprüfte Aussagen, Berichte und Lehren über rechtschaffene Frauen der frühen Generationen – mit Quelle und Direktnachweis."
       };
     }
+    if (parsed.abschnitt === MOSCHEE_SLUG && parsed.page === "list") {
+      return {
+        title: "Moschee & Gemeinschaft",
+        subtitle: "Geprüfte Grundlagen aus authentischer Sunnah über Moschee, Eid und Adab."
+      };
+    }
     if (parsed.abschnitt === KURZ_SLUG && parsed.page === "list") {
       return {
         title: "Geprüfte Kurzberichte",
@@ -1100,6 +1163,8 @@
         title:
           parsed.abschnitt === SALAF_SLUG
             ? "Frauen der Salaf"
+            : parsed.abschnitt === MOSCHEE_SLUG
+            ? "Moschee & Gemeinschaft"
             : parsed.abschnitt === KURZ_SLUG
             ? "Geprüfte Kurzberichte"
             : parsed.abschnitt === FAQ_SLUG
@@ -1143,7 +1208,8 @@
       !wissenCache ||
       !faqCache ||
       !kurzCache ||
-      !salafCache
+      !salafCache ||
+      !moscheeCache
     ) {
       load().then(refreshIfFrauen).catch(refreshIfFrauen);
       return '<p class="frauen-empty">Bereich wird geladen…</p>';
