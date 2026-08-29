@@ -37,6 +37,7 @@ const APP_SHELL = [
   '/test/assets/frauen/frauen-fiqh.js',
   '/test/assets/frauen/frauen-fiqh.css',
   '/test/data/frauen-fiqh.json',
+  '/test/data/frauen-sahabiyyat.json',
   '/data/books-library.json',
   '/data/scholars-library.json',
   '/test-apple-touch-icon.png',
