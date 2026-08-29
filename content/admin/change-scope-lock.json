@@ -87,6 +87,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-more-row-frames-v729-2026-08-29",
+      "approvedBy": "user-explicit-more-per-field-border",
+      "reason": "Nutzer: keine Außenumrandung der Gruppe, einzelne Gold-Ovale um jedes anklickbare Feld.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-more-page-oval-v728-2026-08-29",
       "approvedBy": "user-explicit-more-page-no-boxes-oval-gold",
       "reason": "Nutzer: Mehr-Seite Rechteck-Kästen weg, ovale Goldlinie wie Feed/Qurʾān/Duʿāʾ.",
