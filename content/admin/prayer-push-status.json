@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-29T19:55:34.175Z",
+  "updatedAt": "2026-08-29T20:00:34.506Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-29T19:55:34.175Z",
+  "lastCronRun": "2026-08-29T20:00:34.506Z",
   "nextPlannedPush": {
     "prayer": "Maghrib",
     "key": "maghrib",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-30T02:27:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-29T19:40:19.110Z",
-  "windowEnd": "2026-08-30T21:55:19.110Z",
+  "windowStart": "2026-08-29T19:45:18.960Z",
+  "windowEnd": "2026-08-30T22:00:18.960Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 12,
@@ -33,7 +33,7 @@
   "invalid": 0,
   "invalidDisabled": 0,
   "skippedPast": 80,
-  "skippedAlreadyQueued": 3,
+  "skippedAlreadyQueued": 0,
   "skippedWindow": 40,
   "advanceCatchups": 0,
   "entryCatchups": 0,
@@ -740,8 +740,7 @@
       "mode": "entry",
       "sendAfter": "2026-08-29T19:41:00.000Z",
       "time": "21:41",
-      "timeZone": "Europe/Berlin",
-      "reason": "already-queued"
+      "timeZone": "Europe/Berlin"
     },
     {
       "key": "isha",
@@ -881,8 +880,7 @@
       "mode": "entry",
       "sendAfter": "2026-08-29T19:41:00.000Z",
       "time": "21:41",
-      "timeZone": "Europe/Berlin",
-      "reason": "already-queued"
+      "timeZone": "Europe/Berlin"
     },
     {
       "key": "isha",
@@ -1036,6 +1034,12 @@
   ],
   "userRegistry": [
     {
+      "subscriptionId": "c41bce09-bdd0-473b-89d8-5d783fcc59bc",
+      "timezone": "Europe/Berlin",
+      "city": "Rheinbach",
+      "lastSyncedAt": "2026-08-29T19:59:37.005+00:00"
+    },
+    {
       "subscriptionId": "a201efd5-20de-4ba4-a60b-3ddf0a7556c1",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
@@ -1058,12 +1062,6 @@
       "timezone": "Europe/Berlin",
       "city": "Meckenheim",
       "lastSyncedAt": "2026-08-29T19:12:05+00:00"
-    },
-    {
-      "subscriptionId": "c41bce09-bdd0-473b-89d8-5d783fcc59bc",
-      "timezone": "Europe/Berlin",
-      "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-29T19:12:06.426+00:00"
     },
     {
       "subscriptionId": "c5e307a6-9c0e-435b-9e6e-7382dde53756",
