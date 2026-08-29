@@ -87,6 +87,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "eisgold-v711-visitor-header-overscroll-2026-08-29",
+      "approvedBy": "user-explicit-eisgold",
+      "reason": "Nutzer: Eisgold. Technischer Fix aus Test (Header/Overscroll/dunkle Schrift) in Besucher-App, damit iOS die gleiche Hülle lädt.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "assets/theme-eisgold.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "eisgold-light-theme-fix-test-2026-08-29",
       "approvedBy": "user-explicit-eisgold-light-fix-test-first",
       "reason": "Nutzer: Eisgold globaler Hintergrund/Header/Overscroll + helle Themes dunkle Schrift. Nur Test-App, keine Besucher-/iOS-Production.",
