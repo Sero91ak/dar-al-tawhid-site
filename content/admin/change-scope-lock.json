@@ -87,6 +87,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "darule-text-restore-v737-2026-08-29",
+      "approvedBy": "user-explicit-revert-theme-bleed",
+      "reason": "Nutzer: Erscheinungsbilder ohne Auftrag verändert; Darule-Schriften unlesbar. Sofort Fix zurück: Eisgold-Tinte nicht in andere Themes kleben. Kein Theme-Umbau.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "propheten-deutsch-ui-v735-2026-08-29",
       "approvedBy": "user-explicit-english-terms-german-live",
       "reason": "Nutzer: Englische Fachbegriffe in der App entfernen, nur Deutsch, live Web+iOS.",

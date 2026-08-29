@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v735";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v737";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -7604,6 +7604,18 @@ html[data-theme="bordeaux"]{
   --theme-accent:#d6be84;
   --theme-text:#f7eed8;
   --theme-muted:rgba(247,238,216,.70);
+}
+html[data-theme="dar-al-layl"]{
+  --theme-page-bg:#050605;
+  --theme-hero-bg:linear-gradient(180deg,rgba(5,6,5,1) 0%,rgba(6,8,7,.98) 50%,rgba(3,4,3,.90) 100%);
+  --theme-hero-surface:radial-gradient(circle at 16% 0%,rgba(168,139,79,.08),transparent 38%),linear-gradient(180deg,rgba(12,15,13,.98) 0%,rgba(6,8,7,.96) 62%,rgba(3,4,3,.88) 100%);
+  --theme-hero-glow:rgba(168,139,79,.12);
+  --theme-hero-border:rgba(168,139,79,.16);
+  --theme-hero-blend-top:rgba(5,6,5,1);
+  --theme-hero-blend-bottom:rgba(5,6,5,0);
+  --theme-accent:#D8C18B;
+  --theme-text:#F1EDE3;
+  --theme-muted:rgba(241,237,227,.70);
 }
 html[data-theme="eisgold"]{
   --theme-page-bg:#e8f3fb;
@@ -26192,7 +26204,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v735";
+const APP_BUILD_ID="app-shell-v737";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -32187,10 +32199,37 @@ html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-apply-btn{
       paintEisgoldInk();
     }catch(e){}
   }
+  function clearEisgoldInk(){
+    try{
+      var root=document.documentElement;
+      if(!root)return;
+      ["--text","--muted","--theme-text","--theme-muted","--theme-feed-top","--theme-feed-bg","--theme-feed-act-bg","--theme-feed-switch-bg","--theme-feed-switch-active"].forEach(function(k){
+        try{root.style.removeProperty(k)}catch(e){}
+      });
+      try{
+        root.style.removeProperty("background");
+        root.style.removeProperty("background-color");
+      }catch(e){}
+      if(document.body){
+        try{
+          document.body.style.removeProperty("background");
+          document.body.style.removeProperty("background-color");
+        }catch(e){}
+      }
+      document.querySelectorAll("h1.brand-title-refined,.sf-brand-title,.sf-brand h1,.sf-read-more,.sf-user,.sf-sub,.sf-switch-btn,.bottom-nav-btn,.bottom-nav-btn span").forEach(function(el){
+        try{
+          el.style.removeProperty("color");
+          el.style.removeProperty("-webkit-text-fill-color");
+          el.style.removeProperty("background-image");
+          el.style.removeProperty("-webkit-background-clip");
+        }catch(e){}
+      });
+    }catch(e){}
+  }
   function paintEisgoldInk(){
     try{
       var root=document.documentElement;
-      if(!root||root.getAttribute("data-theme")!=="eisgold")return;
+      if(!root||root.getAttribute("data-theme")!=="eisgold"){clearEisgoldInk();return;}
       var ice="#fcfeff";
       var ink="#111111";
       root.style.setProperty("background","var(--outer-bg)","important");
