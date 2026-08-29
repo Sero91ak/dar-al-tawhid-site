@@ -725,6 +725,7 @@
     if (abschnitt === KURZ_SLUG || abschnitt === SALAF_SLUG) return "people";
     if (abschnitt === MOSCHEE_SLUG) return "home";
     if (abschnitt === HAJJ_SLUG) return "ring";
+    if (abschnitt === SADAQAH_SLUG) return "lamp";
     return "book";
   }
 
@@ -773,16 +774,15 @@
       esc(q) +
       '" data-frauen-q autocomplete="off" spellcheck="false" enterkeyhint="search">' +
       "</div>" +
-<<<<<<< Updated upstream
       '<button type="button" class="advanced-toggle' +
-      (filterOpen ? " active" : "") +
+      (filterOpen || abschnitt === MOSCHEE_SLUG || abschnitt === HAJJ_SLUG || abschnitt === SADAQAH_SLUG ? " active" : "") +
       '" data-frauen-filter-toggle>' +
-      (filterOpen ? "Filter ausblenden" : "Filter anzeigen") +
+      (filterOpen || abschnitt === MOSCHEE_SLUG || abschnitt === HAJJ_SLUG || abschnitt === SADAQAH_SLUG ? "Filter ausblenden" : "Filter anzeigen") +
       "</button></div>" +
       '<div class="frauen-filter-panel' +
-      (filterOpen ? " is-open" : "") +
+      (filterOpen || abschnitt === MOSCHEE_SLUG || abschnitt === HAJJ_SLUG || abschnitt === SADAQAH_SLUG ? " is-open" : "") +
       '"' +
-      (filterOpen ? "" : " hidden") +
+      (filterOpen || abschnitt === MOSCHEE_SLUG || abschnitt === HAJJ_SLUG || abschnitt === SADAQAH_SLUG ? "" : " hidden") +
       ">" +
       '<p class="frauen-filter-panel__label">Bereiche</p>' +
       '<div class="frauen-filter-grid">' +
@@ -795,21 +795,6 @@
           chips +
           "</div>") +
       "</div></section>"
-=======
-      (abschnitt === MOSCHEE_SLUG || abschnitt === HAJJ_SLUG || abschnitt === SADAQAH_SLUG
-        ? ""
-        : '<button type="button" class="advanced-toggle' +
-          (filterOpen ? " active" : "") +
-          '" data-frauen-filter-toggle>' +
-          (filterOpen ? "Filter ausblenden" : "Filter anzeigen") +
-          "</button>") +
-      "</div>" +
-      '<div class="filter-panel' +
-      (filterOpen || abschnitt === MOSCHEE_SLUG || abschnitt === HAJJ_SLUG || abschnitt === SADAQAH_SLUG ? " advanced-visible" : " advanced-hidden") +
-      '"><div class="frauen-filter-grid">' +
-      chips +
-      "</div></div></section>"
->>>>>>> Stashed changes
     );
   }
 
@@ -976,19 +961,8 @@
                   : FIQH_BEREICH_LABEL;
     var bereich = labelMap[e.bereich] || e.bereich || "";
     var person = e.person || e.name;
-<<<<<<< Updated upstream
     var aussageText = vorschauVon(e) || String(aussageVon(e) || "").replace(/\s+/g, " ").trim();
     if (aussageText.length > 140) aussageText = aussageText.slice(0, 138).replace(/\s+\S*$/, "") + "…";
-=======
-    var sub =
-      abschnitt === MOSCHEE_SLUG || abschnitt === HAJJ_SLUG || abschnitt === SADAQAH_SLUG
-        ? vorschauVon(e)
-        : abschnitt === SALAF_SLUG
-        ? [person, vorschauVon(e)].filter(Boolean).join(" · ")
-        : person
-          ? person + " sagte:"
-          : vorschauVon(e);
->>>>>>> Stashed changes
     return (
       '<article class="post-row dua-row frauen-post-row" data-nav="frauen" data-value="' +
       esc(abschnitt + "/" + e.kennung) +
@@ -1002,7 +976,7 @@
       esc(titelVon(e)) +
       "</h3>" +
       (person
-        ? '<p class="frauen-row__sprecher">' + esc(person) + (abschnitt === SALAF_SLUG || abschnitt === KURZ_SLUG || abschnitt === MUETTER_SLUG || abschnitt === MOSCHEE_SLUG || abschnitt === HAJJ_SLUG ? "" : " sagte:") + "</p>"
+        ? '<p class="frauen-row__sprecher">' + esc(person) + (abschnitt === SALAF_SLUG || abschnitt === KURZ_SLUG || abschnitt === MUETTER_SLUG || abschnitt === MOSCHEE_SLUG || abschnitt === HAJJ_SLUG || abschnitt === SADAQAH_SLUG ? "" : " sagte:") + "</p>"
         : "") +
       (aussageText
         ? '<p class="frauen-row__kicker">Aussage</p><p class="frauen-row__aussage">' +
