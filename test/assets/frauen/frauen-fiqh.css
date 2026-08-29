@@ -88,6 +88,15 @@
   color:var(--muted);
 }
 .frauen-filter__search-wrap{display:block;margin:10px 0 0}
+.frauen-filter__search-label{
+  display:block;
+  margin:0 0 6px 4px;
+  font-size:11.5px;
+  font-weight:750;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--cat-muted,var(--muted));
+}
 .frauen-filter__chips,
 .frauen-filter__chips--always{
   display:flex;
