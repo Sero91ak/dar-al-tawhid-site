@@ -51,7 +51,7 @@ jobs:
           if (!result?.status?.updatedAt) {
             throw new Error(result?.reason || result?.error || "Scheduler ohne aktuellen Status beendet");
           }
-          if (result?.statusWrite?.saved !== true) {
+          if (result?.statusWrite?.saved !== true || result?.statusWrite?.source !== "durable-object") {
             throw new Error(`Status nicht dauerhaft gespeichert: ${JSON.stringify(result?.statusWrite || null)}`);
           }
           console.log(`Scheduler wiederhergestellt: ${result.status.updatedAt}`);

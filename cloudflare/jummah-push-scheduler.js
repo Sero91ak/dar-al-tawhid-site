@@ -6,6 +6,7 @@
 
 import { jummahCopyForMode } from "./jummah-push-copy.js";
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
+import { writeNamedStatusToStore } from "./prayer-status-store.js";
 
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de/#prayer";
@@ -348,30 +349,8 @@ function nextJummahPlanned(groups, now = new Date()) {
   return out;
 }
 
-async function writeStatusGithub(env, report, deps) {
-  if (!env.GITHUB_TOKEN || !deps?.githubGet || !deps?.githubPut) return { saved: false };
-  const owner = env.GITHUB_OWNER || "Sero91ak";
-  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
-  const branch = env.GITHUB_BRANCH || "main";
-  const path = env.JUMMAH_STATUS_PATH || DEFAULT_JUMMAH_STATUS_PATH;
-  try {
-    const existing = await deps.githubGet(env, owner, repo, path, branch);
-    // Immer schreiben (wie Gebets-Status) – Skip-Vergleich auf Roh-Base64 war fehlerhaft und
-    // ließ den Status nach Deploys hängen bleiben.
-    await deps.githubPut(
-      env,
-      owner,
-      repo,
-      path,
-      `${JSON.stringify(report, null, 2)}\n`,
-      `Jumuʿah push ${report.updatedAt}`,
-      branch,
-      existing?.sha
-    );
-    return { saved: true, path };
-  } catch (err) {
-    return { saved: false, reason: err.message || String(err) };
-  }
+async function writeStatusGithub(env, report, _deps) {
+  return writeNamedStatusToStore(env, "jummah", report);
 }
 
 export function readJummahPushStatusFromKv() {

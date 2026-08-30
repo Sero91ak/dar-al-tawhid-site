@@ -2,6 +2,7 @@ import {
   runJummahPushScheduler,
   readJummahPushStatusFromKv
 } from "./jummah-push-scheduler.js";
+import { readNamedStatusFromStore } from "./prayer-status-store.js";
 import { jummahCopyForMode } from "./jummah-push-copy.js";
 import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
@@ -32,6 +33,11 @@ function withIcons(payload, env) {
 }
 
 export async function readJummahPushStatus(env, githubGet, base64ToUtf8) {
+  const stored = await readNamedStatusFromStore(env, "jummah");
+  if (stored?.ok && stored.status?.updatedAt) {
+    return { ok: true, status: stored.status, source: "durable-object" };
+  }
+
   const cached = readJummahPushStatusFromKv();
   if (cached?.updatedAt) {
     return { ok: true, status: cached, source: "worker" };

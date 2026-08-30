@@ -87,6 +87,26 @@
   ],
   "unlockedScopes": [
     {
+      "id": "stop-github-status-commits-cf-build-minutes-2026-08-30",
+      "approvedBy": "user-explicit-cloudflare-invoice-in-77249222-stop-prayer-git-pushes",
+      "reason": "Nutzer: Prayer/Jumuah Git-Pushes stoppen — sie lösen Cloudflare Workers Builds aus (Rechnung 92,26 $). Status nur Durable Object, Scheduler/Cron bleiben.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "cloudflare/prayer-status-store.js",
+        "cloudflare/prayer-push-scheduler.js",
+        "cloudflare/prayer-push-admin.js",
+        "cloudflare/jummah-push-scheduler.js",
+        "cloudflare/jummah-push-admin.js",
+        "cloudflare/daily-push-scheduler.js",
+        "cloudflare/daily-push-admin.js",
+        "cloudflare/worker.js",
+        ".github/workflows/prayer-push.yml",
+        ".github/workflows/sync-admin-publisher-secrets.yml",
+        "content/admin/worker-secrets-safety-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "brand-title-template-1-2026-08-30",
       "approvedBy": "user-explicit-brand-title-template-unicode-css",
       "reason": "Nutzer: Nummer 1 als feste App-Vorlage. Exakt DĀR AL TAWḤĪD (Ā Ḥ Ī). Edel über Cormorant/CSS, nicht über Sonderbuchstaben. Besucher- und Test-App.",

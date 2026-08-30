@@ -2,6 +2,7 @@ import {
   runDailyPushScheduler,
   readDailyPushStatusFromKv
 } from "./daily-push-scheduler.js";
+import { readNamedStatusFromStore } from "./prayer-status-store.js";
 import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
 
@@ -10,6 +11,11 @@ const DEFAULT_DAILY_STATUS_PATH = "content/admin/daily-push-status.json";
 const DEFAULT_DAILY_CONFIG_PATH = "content/admin/daily-push.json";
 
 export async function readDailyPushStatus(env, githubGet, base64ToUtf8) {
+  const stored = await readNamedStatusFromStore(env, "daily");
+  if (stored?.ok && stored.status?.updatedAt) {
+    return { ok: true, status: stored.status, source: "durable-object" };
+  }
+
   const cached = readDailyPushStatusFromKv();
   if (cached?.updatedAt) {
     return { ok: true, status: cached, source: "worker" };

@@ -6,6 +6,7 @@
 
 import { pickPrayerEntryVariant, buildAdvancePushBody, PRAYER_TITLE_EMOJI, sanitizePrayerPushText, hasBlockedPrayerPhrase } from "./prayer-push-copy.js";
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
+import { writePrayerStatusToStore } from "./prayer-status-store.js";
 
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de/#prayer";
@@ -581,21 +582,6 @@ function nextPush(groups, now = new Date()) {
   return next;
 }
 
-async function writeStatusGithub(env, report, deps) {
-  if (!env.GITHUB_TOKEN || !deps?.githubGet || !deps?.githubPut) return { saved: false };
-  const owner = env.GITHUB_OWNER || "Sero91ak";
-  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
-  const branch = env.GITHUB_BRANCH || "main";
-  const path = env.PRAYER_STATUS_PATH || DEFAULT_PRAYER_STATUS_PATH;
-  try {
-    const existing = await deps.githubGet(env, owner, repo, path, branch);
-    await deps.githubPut(env, owner, repo, path, `${JSON.stringify(report, null, 2)}\n`, `Prayer push ${report.updatedAt}`, branch, existing?.sha);
-    return { saved: true, path };
-  } catch (err) {
-    return { saved: false, reason: err.message || String(err) };
-  }
-}
-
 export function readPrayerPushStatusFromKv() {
   return lastStatusReport;
 }
@@ -775,7 +761,7 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
   };
 
   lastStatusReport = statusReport;
-  const statusWrite = await writeStatusGithub(env, statusReport, deps);
+  const statusWrite = await writePrayerStatusToStore(env, statusReport);
 
   const reason = stats.errors
     ? `Fehler: ${stats.errorDetails[0]} (${stats.scheduled} geplant, ${stats.errors} Fehler)`

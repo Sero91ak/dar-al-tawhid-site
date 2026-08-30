@@ -2,6 +2,7 @@ import {
   runPrayerPushScheduler,
   readPrayerPushStatusFromKv
 } from "./prayer-push-scheduler.js";
+import { readPrayerStatusFromStore } from "./prayer-status-store.js";
 import { pickPrayerEntryVariant, buildAdvancePushBody, PRAYER_TITLE_EMOJI, sanitizePrayerPushText } from "./prayer-push-copy.js";
 import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
@@ -45,6 +46,11 @@ export function buildPrayerTestCopy(prayerKey, mode, advanceMinutes = 15) {
 }
 
 export async function readPrayerPushStatus(env, githubGet, base64ToUtf8) {
+  const stored = await readPrayerStatusFromStore(env);
+  if (stored?.ok && stored.status?.updatedAt) {
+    return { ok: true, status: stored.status, source: "durable-object" };
+  }
+
   const cached = readPrayerPushStatusFromKv();
   if (cached?.updatedAt) {
     return { ok: true, status: cached, source: "worker" };
