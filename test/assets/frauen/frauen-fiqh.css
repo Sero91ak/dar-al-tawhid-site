@@ -521,6 +521,12 @@ body.is-frauen-route .dua-theme-card__count{
   font-size:10px!important;
   letter-spacing:.12em;
 }
+body.is-frauen-route .topics-theme-card__lede{
+  margin:4px 0 0!important;
+  font-size:12px!important;
+  line-height:1.35!important;
+  opacity:.82;
+}
 body.is-frauen-route .frauen-post-row{
   grid-template-columns:30px minmax(0,1fr)!important;
   column-gap:10px!important;
