@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-30T11:35:52.820Z",
+  "updatedAt": "2026-08-30T11:40:52.571Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-30T11:35:52.820Z",
+  "lastCronRun": "2026-08-30T11:40:52.571Z",
   "nextPlannedPush": {
     "prayer": "ʿAṣr",
     "key": "asr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-30T11:50:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-30T11:20:43.338Z",
-  "windowEnd": "2026-08-31T13:35:43.338Z",
+  "windowStart": "2026-08-30T11:25:43.343Z",
+  "windowEnd": "2026-08-31T13:40:43.343Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 11,
@@ -28,12 +28,12 @@
   "usersWithLocation": 11,
   "usersWithActivePush": 11,
   "locationGroups": 4,
-  "scheduled": 44,
-  "recipients": 114,
+  "scheduled": 43,
+  "recipients": 113,
   "invalid": 0,
   "invalidDisabled": 0,
-  "skippedPast": 58,
-  "skippedAlreadyQueued": 3,
+  "skippedPast": 59,
+  "skippedAlreadyQueued": 4,
   "skippedWindow": 58,
   "advanceCatchups": 0,
   "entryCatchups": 0,
@@ -75,7 +75,7 @@
         "time": "17:16",
         "advance": {
           "status": "geplant",
-          "recipients": 11
+          "recipients": 10
         },
         "entry": {
           "status": "geplant",
@@ -152,7 +152,7 @@
       "time": "17:16",
       "advance": {
         "status": "geplant",
-        "recipients": 11
+        "recipients": 10
       },
       "entry": {
         "status": "geplant",
@@ -433,16 +433,6 @@
       "mode": "entry",
       "time": "13:50",
       "sendAfter": "2026-08-30T11:50:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin",
-      "invalid": 0
-    },
-    {
-      "prayer": "ʿAṣr",
-      "key": "asr",
-      "mode": "advance",
-      "time": "13:50",
-      "sendAfter": "2026-08-30T11:35:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
       "invalid": 0
