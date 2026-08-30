@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v740";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v741";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -2990,6 +2990,103 @@ html[data-theme="light"] .prayer-overview__time-hour{color:#3d2a12!important}
 .qibla-direction-small{color:var(--gold2);font-size:13px;font-weight:950;margin-top:8px}
 
 /* QIBLA PRO: professioneller GPS-Kompass im Gebets-Ordner */
+.qibla-kaaba-core{
+  position:absolute;
+  left:50%;
+  top:50%;
+  z-index:7;
+  width:46px;
+  height:46px;
+  display:grid;
+  place-items:center;
+  transform:translate(-50%,-50%);
+  border-radius:999px;
+  border:1px solid rgba(239,215,142,.55);
+  background:radial-gradient(circle at 35% 30%,rgba(255,248,226,.2),rgba(12,10,7,.96));
+  box-shadow:0 0 0 4px rgba(239,215,142,.1),0 4px 14px rgba(0,0,0,.4);
+  font-size:22px;
+  line-height:1;
+  pointer-events:none;
+}
+.qibla-forward-pointer,.qibla-compass-center{display:none!important}
+.prayer-time-card--slim{min-height:58px;padding:8px 8px 7px}
+.prayer-time-grid--top{margin:0 0 10px;gap:6px}
+.qibla-heading-nock{
+  position:absolute;
+  top:7px;
+  left:50%;
+  z-index:8;
+  width:0;
+  height:0;
+  transform:translateX(-50%);
+  border-left:7px solid transparent;
+  border-right:7px solid transparent;
+  border-bottom:13px solid var(--gold2,#efd78e);
+  filter:drop-shadow(0 0 8px rgba(239,215,142,.55));
+  pointer-events:none;
+}
+.qibla-valid-arc{
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  z-index:2;
+  pointer-events:none;
+  background:conic-gradient(from 315deg,rgba(239,215,142,.26) 0deg 90deg,transparent 90deg 360deg);
+  -webkit-mask:radial-gradient(circle,transparent 56%,#000 57%,#000 90%,transparent 91%);
+  mask:radial-gradient(circle,transparent 56%,#000 57%,#000 90%,transparent 91%);
+}
+.qibla-gold-arrow{
+  position:absolute;
+  left:50%;
+  top:10%;
+  z-index:5;
+  width:16px;
+  height:34%;
+  transform:translateX(-50%);
+  background:linear-gradient(180deg,#fff8e4,var(--gold2,#efd78e) 38%,#8a6a28);
+  clip-path:polygon(50% 0,100% 40%,64% 36%,64% 100%,36% 100%,36% 36%,0 40%);
+  filter:drop-shadow(0 0 10px rgba(239,215,142,.5));
+}
+.qibla-fiqh-line{
+  margin:8px 0 0;
+  color:var(--gold2,#efd78e);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.qibla-compass-pro.qibla-in-range:not(.qibla-aligned) .qibla-compass-face{
+  border-color:rgba(239,215,142,.72);
+  box-shadow:inset 0 0 0 1px rgba(239,215,142,.18),0 0 22px rgba(239,215,142,.16);
+}
+@keyframes qiblaPulseGlow{
+  0%,100%{box-shadow:inset 0 0 0 1px rgba(255,236,180,.28),0 0 22px rgba(239,215,142,.32),0 0 0 3px rgba(239,215,142,.12)}
+  50%{box-shadow:inset 0 0 0 1px rgba(255,248,220,.5),0 0 42px rgba(239,215,142,.55),0 0 0 5px rgba(239,215,142,.2)}
+}
+.qibla-compass-pro.qibla-aligned .qibla-compass-face{
+  border-color:rgba(255,236,180,.95)!important;
+  animation:qiblaPulseGlow 1.7s ease-in-out infinite;
+}
+.qibla-compass-pro.qibla-aligned .qibla-gold-arrow{
+  filter:drop-shadow(0 0 16px rgba(255,236,180,.85));
+}
+.prayer-page-noble .prayer-time-card,
+.prayer-page-noble .prayer-summary-card,
+.prayer-page-noble .qibla-data-item{
+  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 30%,transparent);
+  border-radius:18px;
+  background:linear-gradient(168deg,color-mix(in srgb,var(--card,#16130e) 94%,transparent),color-mix(in srgb,var(--bg,#080806) 88%,var(--gold2,#efd78e) 5%));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.045);
+}
+.prayer-page-noble .qibla-pro-section,
+.prayer-page-noble .prayer-controls-compact{
+  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 28%,transparent);
+  border-radius:22px;
+  background:linear-gradient(168deg,color-mix(in srgb,var(--card,#16130e) 94%,transparent),color-mix(in srgb,var(--bg,#080806) 90%,var(--gold2,#efd78e) 4%));
+}
+.prayer-page-noble .prayer-controls-compact{padding:12px;margin-top:4px}
+.prayer-page-noble .prayer-time-grid--top{gap:8px}
+
 .qibla-pro-section{
   border:1px solid rgba(239,215,142,.38);
   border-radius:24px;
@@ -24127,6 +24224,7 @@ function prayerEventDate(base,p){return p.eventDate||prayerDateFromHour(base,p.t
 function formatPrayerTimeDisplay(t){if(t.key==="tahajjud"&&t.endTime!=null)return `${formatPrayerHour(t.time)} – ${formatPrayerHour(t.endTime)}`;return formatPrayerHour(t.time)}
 function isPrayerTimeActive(t,next,now){if(t.key==="tahajjud"&&t.eventDate&&t.endDate&&now>=t.eventDate&&now<t.endDate)return true;return t.key===next.key}
 function renderPrayerTimeCards(times,next,now){return times.map(t=>`<div class="prayer-time-card ${isPrayerTimeActive(t,next,now)?"active":""}${t.key==="tahajjud"?" tahajjud":""}"><b>${esc(t.name)}</b><span>${formatPrayerTimeDisplay(t)}</span><small>${esc(t.note)}</small></div>`).join("")}
+function renderPrayerTimeCardsSlim(times,next,now){return times.filter(t=>t.key!=="tahajjud").map(t=>`<div class="prayer-time-card prayer-time-card--slim ${isPrayerTimeActive(t,next,now)?"active":""}"><b>${esc(t.name)}</b><span>${formatPrayerTimeDisplay(t)}</span></div>`).join("")}
 function calculatePrayerTimes(date=new Date(),settings=getPrayerSettings()){
   if(!hasPrayerLocation(settings))return [];
   const lat=Number(settings.lat),lon=Number(settings.lon),angle=Number(settings.angle||12),asrFactor=Number(settings.asrFactor||1);
@@ -24154,7 +24252,7 @@ async function requestPrayerLocation(button){if(!navigator.geolocation){alert("S
 function qiblaCompassMarkup(bearing=0){
   const b=formatQiblaDegrees(bearing);
   const dir=qiblaDirectionNameDe(bearing);
-  return `<div class="qibla-compass-pro" id="qiblaCompassWrap" aria-label="Qibla-Kompass"><div class="qibla-compass-face"><div class="qibla-rose" id="qiblaRose"><div class="qibla-compass-dial"><span class="qibla-cardinal qibla-n">N<small>0°</small></span><span class="qibla-cardinal qibla-e">O<small>90°</small></span><span class="qibla-cardinal qibla-s">S<small>180°</small></span><span class="qibla-cardinal qibla-w">W<small>270°</small></span></div><div class="qibla-kaaba-marker" id="qiblaKaabaMarker" style="transform:rotate(${b}deg)" aria-hidden="true"><span class="qibla-kaaba-badge" title="Qibla ${b}° ${dir}">🕋</span></div></div><div class="qibla-forward-pointer" aria-hidden="true"></div><div class="qibla-compass-center"></div></div><div class="qibla-bearing-readout"><span id="qiblaBearingValue">${b}°</span><small>Qibla · ${dir}</small></div></div>`;
+  return `<div class="qibla-compass-pro" id="qiblaCompassWrap" aria-label="Qibla-Kompass"><div class="qibla-compass-face"><div class="qibla-rose" id="qiblaRose"><div class="qibla-compass-dial"><span class="qibla-cardinal qibla-n">N</span><span class="qibla-cardinal qibla-e">O</span><span class="qibla-cardinal qibla-s">S</span><span class="qibla-cardinal qibla-w">W</span></div><div class="qibla-kaaba-marker" id="qiblaKaabaMarker" style="transform:rotate(${b}deg)" aria-hidden="true"><span class="qibla-valid-arc"></span><span class="qibla-gold-arrow" title="Qibla ${b}° ${dir}"></span></div></div><div class="qibla-heading-nock" aria-hidden="true"></div><div class="qibla-kaaba-core" aria-hidden="true">🕋</div></div><div class="qibla-bearing-readout"><span id="qiblaBearingValue">${b}°</span><small>${dir}</small></div><p class="qibla-fiqh-line" id="qiblaRangeLive">90° gültig</p></div>`;
 }
 function renderQiblaProPanel(settings=getPrayerSettings()){
   const hasLoc=hasPrayerLocation(settings);
@@ -24162,7 +24260,7 @@ function renderQiblaProPanel(settings=getPrayerSettings()){
   const bearingText=hasLoc?formatQiblaDegrees(bearing):"—";
   const dirText=hasLoc?qiblaDirectionNameDe(bearing):"";
   const cityLabel=hasLoc?esc(settings.city||"Aktueller Standort"):"";
-  return `<section class="qibla-pro-section" aria-labelledby="qiblaProTitle"><div class="qibla-pro-head"><div class="prayer-small-label">Qibla-Richtung</div><h3 class="qibla-pro-title" id="qiblaProTitle">🕋 Kompass</h3><p class="qibla-pro-sub">Manuell starten · Richtung vor dem Gebet prüfen</p></div>${hasLoc?`<div class="qibla-layout qibla-layout-pro">${qiblaCompassMarkup(bearing)}<div class="qibla-info qibla-info-pro"><div class="qibla-data-grid"><div class="qibla-data-item"><b>Standort</b><span>${cityLabel}</span></div><div class="qibla-data-item"><b>Qibla</b><span id="qiblaBearingLive">${bearingText}° · ${dirText}</span></div><div class="qibla-data-item"><b>Ausrichtung</b><span id="qiblaHeadingLive">—</span></div><div class="qibla-data-item"><b>Abweichung</b><span id="qiblaDeltaLive">—</span></div></div><p id="qiblaStatus" class="qibla-status" aria-live="polite">Bereit. Tippe auf „Kompass starten“.</p><p class="qibla-instruction" id="qiblaInstruction">Handy flach halten und langsam drehen, bis 🕋 oben in der Mitte steht. Sensoren können abweichen.</p><div class="qibla-action-row"><button id="startQiblaBtn" class="qibla-btn-start prayer-action-btn" type="button">🧭 Kompass starten</button><button id="stopQiblaBtn" class="qibla-btn-stop prayer-action-btn" type="button" hidden>⏹ Kompass stoppen</button></div></div></div>`:`<p class="qibla-no-location">Für den Qibla-Kompass wird dein <strong>GPS-Standort</strong> benötigt. Bitte Standort freigeben oder Ort suchen.</p>`}</section>`;
+  return `<section class="qibla-pro-section" aria-labelledby="qiblaProTitle"><div class="qibla-pro-head"><h3 class="qibla-pro-title" id="qiblaProTitle">Kompass</h3></div>${hasLoc?`<div class="qibla-layout qibla-layout-pro">${qiblaCompassMarkup(bearing)}<div class="qibla-info qibla-info-pro"><div class="qibla-data-grid"><div class="qibla-data-item"><b>Ort</b><span>${cityLabel}</span></div><div class="qibla-data-item"><b>Qibla</b><span id="qiblaBearingLive">${bearingText}° · ${dirText}</span></div><div class="qibla-data-item"><b>Lage</b><span id="qiblaHeadingLive">—</span></div><div class="qibla-data-item"><b>Δ</b><span id="qiblaDeltaLive">—</span></div></div><p id="qiblaStatus" class="qibla-status" aria-live="polite">Bereit</p><p class="qibla-instruction" id="qiblaInstruction" hidden></p><div class="qibla-action-row"><button id="startQiblaBtn" class="qibla-btn-start prayer-action-btn" type="button">Start</button><button id="stopQiblaBtn" class="qibla-btn-stop prayer-action-btn" type="button" hidden>Stopp</button></div></div></div>`:`<p class="qibla-no-location">Standort</p>`}</section>`;
 }
 function getDeviceHeading(event){
   if(typeof event.webkitCompassHeading==="number"&&!Number.isNaN(event.webkitCompassHeading)&&event.webkitCompassHeading>=0)return event.webkitCompassHeading;
@@ -24231,11 +24329,13 @@ function attachQiblaOrientationListener(getBearing,status,wrap,rose,settings,sta
     rose.style.transform=`rotate(${-heading}deg)`;
     const off=Math.round(delta<=180?delta:360-delta);
     const aligned=off<=8;
-    if(wrap){wrap.classList.remove("qibla-static-mode");wrap.classList.toggle("qibla-aligned",aligned)}
+    const inRange=off<=45;
+    if(wrap){wrap.classList.remove("qibla-static-mode");wrap.classList.toggle("qibla-aligned",aligned);wrap.classList.toggle("qibla-in-range",inRange)}
     const hl=$("qiblaHeadingLive");if(hl)hl.textContent=Math.round(heading)+"°";
     const dl=$("qiblaDeltaLive");if(dl)dl.textContent=off+"°";
+    const rangeEl=$("qiblaRangeLive");if(rangeEl)rangeEl.textContent=aligned?"Qibla":(inRange?"90° gültig":"90°");
     if(status){
-      status.textContent=aligned?"✓ Richtung passt ungefähr — bitte trotzdem noch einmal prüfen, bevor du betest.":`Drehe das Handy langsam, bis 🕋 oben in der Mitte steht (noch ca. ${off}°).`;
+      status.textContent=aligned?"Qibla":(inRange?"gültig":`${off}°`);
       status.classList.toggle("qibla-status-ok",aligned);
     }
   };
@@ -24243,11 +24343,11 @@ function attachQiblaOrientationListener(getBearing,status,wrap,rose,settings,sta
   window.addEventListener("deviceorientationabsolute",qiblaOrientationHandler,true);
   qiblaStaticMode=false;
   qiblaCompassActive=true;
-  if(startBtn){startBtn.hidden=true;startBtn.disabled=false;startBtn.textContent="🧭 Kompass starten"}
+  if(startBtn){startBtn.hidden=true;startBtn.disabled=false;startBtn.textContent="Start"}
   if(stopBtn)stopBtn.hidden=false;
-  if(status){status.textContent="Kompass aktiv. Halte das Handy flach und bewege es langsam in einer ∞-Form zur Kalibrierung.";status.classList.remove("qibla-status-ok")}
+  if(status){status.textContent="Aktiv";status.classList.remove("qibla-status-ok")}
   const instr=$("qiblaInstruction");
-  if(instr)instr.textContent="Halte das Handy waagerecht. Drehe dich langsam, bis das 🕋-Symbol oben in der Mitte steht — dann noch einmal mit einer verlässlichen Quelle abgleichen.";
+  if(instr)instr.textContent="";
   clearQiblaSensorTimeout();
   qiblaSensorTimeout=setTimeout(()=>{
     if(!gotHeading)enableQiblaStaticFallback(getBearing(),settings,status,startBtn,stopBtn);
@@ -24263,15 +24363,15 @@ function stopQiblaCompass(){
   qiblaCompassActive=false;
   qiblaStaticMode=false;
   const wrap=$("qiblaCompassWrap");
-  if(wrap){wrap.classList.remove("qibla-aligned");wrap.classList.remove("qibla-static-mode")}
+  if(wrap){wrap.classList.remove("qibla-aligned");wrap.classList.remove("qibla-in-range");wrap.classList.remove("qibla-static-mode")}
   const rose=$("qiblaRose");
   if(rose)rose.style.transform="rotate(0deg)";
   const startBtn=$("startQiblaBtn");
   const stopBtn=$("stopQiblaBtn");
-  if(startBtn){startBtn.hidden=false;startBtn.disabled=false;startBtn.textContent="🧭 Kompass starten"}
+  if(startBtn){startBtn.hidden=false;startBtn.disabled=false;startBtn.textContent="Start"}
   if(stopBtn)stopBtn.hidden=true;
   const status=$("qiblaStatus");
-  if(status){status.textContent="Kompass gestoppt. Tippe erneut auf „Kompass starten“.";status.classList.remove("qibla-status-ok")}
+  if(status){status.textContent="Stopp";status.classList.remove("qibla-status-ok")}
   const hl=$("qiblaHeadingLive");if(hl)hl.textContent="—";
   const dl=$("qiblaDeltaLive");if(dl)dl.textContent="—";
 }
@@ -24322,12 +24422,12 @@ function renderPrayerQuickCard(){
 function renderPrayerTimes(){
   const settings=getPrayerSettings();
   if(!hasPrayerLocation(settings)){
-    return `${setPageHeader("Gebetszeiten","Die App fragt deinen Standort erst nach deiner Freigabe ab.","Gebetszeiten")}<section class="prayer-panel"><div class="prayer-panel-head"><div><div class="prayer-small-label">Standort erforderlich</div><h3 class="prayer-panel-title">Gebetszeiten für deine Gegend</h3><div class="prayer-quick-count">Noch kein Standort freigegeben</div></div></div>${renderQiblaProPanel(settings)}<div class="prayer-controls-compact"><button id="prayerDetailsToggle" class="prayer-detail-toggle" type="button" data-toggle-prayer-details>Berechnungsdetails anzeigen</button><div id="prayerQuickDetails" class="prayer-collapsible-body" hidden>${prayerCalculationTags(settings)}</div><div class="prayer-subsection-label">Standort &amp; Berechnung</div><div class="prayer-settings-grid"><select id="asrMethodSelect" class="filter-select"><option value="1" ${settings.asrFactor===1?"selected":""}>ʿAṣr: Standard</option><option value="2" ${settings.asrFactor===2?"selected":""}>ʿAṣr: Ḥanafī</option></select><input id="prayerCityInput" class="filter-select" value="" placeholder="Ort manuell eingeben" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button></div>${renderPrayerReminderControls({withLocationBtn:true,locationLabel:"📍 Standort freigeben"})}</div><div class="prayer-note">Nach Standortfreigabe oder Ortssuche werden Gebetszeiten und Qibla berechnet.</div></section>`;
+    return `${setPageHeader("Gebetszeiten","","Gebetszeiten")}<section class="prayer-panel prayer-page-noble"><div class="prayer-settings-grid"><select id="asrMethodSelect" class="filter-select"><option value="1" ${settings.asrFactor===1?"selected":""}>ʿAṣr: Standard</option><option value="2" ${settings.asrFactor===2?"selected":""}>ʿAṣr: Ḥanafī</option></select><input id="prayerCityInput" class="filter-select" value="" placeholder="Ort" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button></div>${renderQiblaProPanel(settings)}<div class="prayer-controls-compact">${renderPrayerReminderControls({withLocationBtn:true,locationLabel:"Standort"})}</div></section>`;
   }
   const times=calculatePrayerTimes(new Date(),settings);
   const next=nextPrayerInfo(settings);
   const current=currentPrayerInfo(settings);const now=new Date();
-  return `${setPageHeader("Gebetszeiten","Fajr 12°, Maghrib bei Sonnenuntergang, ʿIshāʾ 12° nautisch","Gebetszeiten")}<section class="prayer-panel"><div class="prayer-panel-head"><div><div class="prayer-small-label">Heute · ${esc(settings.city)}</div><h3 class="prayer-panel-title">Gebetszeiten für deinen Standort</h3></div></div><div class="prayer-compact-summary"><div class="prayer-summary-card"><b>Aktuell</b><span>${esc(current?current.name:"Gebet")} · ${esc(current?formatPrayerTimeDisplay(current):"--:--")}</span><small>${esc(settings.city||"dein Standort")}</small></div><div class="prayer-summary-card"><b>Nächstes</b><span>${esc(next.name)} · ${esc(next.key==="tahajjud"?formatPrayerTimeDisplay(next):formatPrayerHour(next.time))}</span><small id="prayerDetailCountdown">${esc(formatCountdown(next.date-new Date()))}</small></div></div>${renderQiblaProPanel(settings)}<div class="prayer-controls-compact"><button id="prayerDetailsToggle" class="prayer-detail-toggle" type="button" data-toggle-prayer-details>Alle Gebetszeiten öffnen</button><div id="prayerQuickDetails" class="prayer-collapsible-body" hidden>${prayerCalculationTags(settings)}<div class="prayer-time-grid">${renderPrayerTimeCards(times,next,now)}</div></div><div class="prayer-subsection-label">Standort &amp; Berechnung</div><div class="prayer-settings-grid"><select id="asrMethodSelect" class="filter-select"><option value="1" ${settings.asrFactor===1?"selected":""}>ʿAṣr: Standard</option><option value="2" ${settings.asrFactor===2?"selected":""}>ʿAṣr: Ḥanafī</option></select><input id="prayerCityInput" class="filter-select" value="${esc(settings.city)}" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button></div>${renderPrayerReminderControls({withLocationBtn:true,locationLabel:"📍 Standort neu freigeben"})}</div><div class="prayer-note">Qibla manuell starten.</div></section>`;
+  return `${setPageHeader("Gebetszeiten",esc(settings.city||""),"Gebetszeiten")}<section class="prayer-panel prayer-page-noble"><div class="prayer-time-grid prayer-time-grid--top">${renderPrayerTimeCardsSlim(times,next,now)}</div><div class="prayer-compact-summary"><div class="prayer-summary-card"><b>Jetzt</b><span>${esc(current?current.name:"Gebet")} · ${esc(current?formatPrayerTimeDisplay(current):"--:--")}</span></div><div class="prayer-summary-card"><b>Nächstes</b><span>${esc(next.name)} · ${esc(next.key==="tahajjud"?formatPrayerTimeDisplay(next):formatPrayerHour(next.time))}</span><small id="prayerDetailCountdown">${esc(formatCountdown(next.date-new Date()))}</small></div></div>${renderQiblaProPanel(settings)}<div class="prayer-controls-compact"><div class="prayer-settings-grid"><select id="asrMethodSelect" class="filter-select"><option value="1" ${settings.asrFactor===1?"selected":""}>ʿAṣr: Standard</option><option value="2" ${settings.asrFactor===2?"selected":""}>ʿAṣr: Ḥanafī</option></select><input id="prayerCityInput" class="filter-select" value="${esc(settings.city)}" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button></div>${renderPrayerReminderControls({withLocationBtn:true,locationLabel:"Standort"})}</div></section>`;
 }
 
 function currentPrayerInfo(settings=getPrayerSettings()){
@@ -26219,7 +26319,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v740";
+const APP_BUILD_ID="app-shell-v741";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
