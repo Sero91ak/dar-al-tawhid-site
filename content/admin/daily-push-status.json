@@ -1,16 +1,16 @@
 {
-  "ok": true,
+  "ok": false,
   "schedulerEngine": "cloudflare-worker-daily-v4-isolated",
   "idVersion": "v4",
   "deliveryMode": "worker-local",
-  "schedulerStatus": "success",
-  "updatedAt": "2026-08-30T12:09:28.322Z",
-  "usersChecked": 11,
-  "registrationsRead": 12,
-  "uniqueSubscriptions": 11,
+  "schedulerStatus": "error",
+  "updatedAt": "2026-08-30T12:15:14.626Z",
+  "usersChecked": 12,
+  "registrationsRead": 13,
+  "uniqueSubscriptions": 12,
   "duplicateRegistrationsDropped": 1,
   "appEnvironment": "production",
-  "localTimeBerlin": "14:09",
+  "localTimeBerlin": "14:15",
   "dateKeyBerlin": "2026-08-30",
   "duaWindow": {
     "hour": 9,
@@ -25,16 +25,16 @@
     "alreadySentToday": 11
   },
   "duaCandidates": 0,
-  "recCandidates": 0,
+  "recCandidates": 1,
   "sent": 0,
   "accepted": {
     "dua": 0,
     "recommendation": 0
   },
-  "invalidSubscriptionsDisabled": 0,
+  "invalidSubscriptionsDisabled": 1,
   "skipped": 0,
   "duplicates": 11,
-  "errors": 0,
+  "errors": 1,
   "forceSend": null,
   "dailyContentDate": "2026-08-30",
   "currentRecommendation": {
@@ -49,5 +49,5 @@
     "category": "Erleichterung & Rede"
   },
   "configAutomatic": true,
-  "lastError": null
+  "lastError": "1 Fehler beim Tages-Push"
 }
