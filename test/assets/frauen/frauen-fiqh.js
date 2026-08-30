@@ -56,6 +56,8 @@
   var TAWHID_SLUG = "tawhid-iman-ibadah";
   var GERECHT_URL = "/test/data/frauen-gerechtigkeit-guter-umgang-schutz.json";
   var GERECHT_SLUG = "gerechtigkeit-guter-umgang-schutz";
+  var DHIKR_URL = "/test/data/frauen-dhikr-dua-ibadah.json";
+  var DHIKR_SLUG = "dhikr-dua-ibadah";
   var ERLAUBTE_QUELLENART = {
     quran: 1,
     sahih: 1,
@@ -685,6 +687,29 @@
     "sahabah-athar": "Ṣaḥābah & Āthār",
     "in-pruefung": "In Prüfung"
   };
+  var DHIKR_THEMEN = [
+    { id: "alle", label: "Alle" },
+    { id: "dhikr", label: "Dhikr" },
+    { id: "dua", label: "Duʿāʾ" },
+    { id: "tasbih", label: "Tasbīḥ" },
+    { id: "schlaf-dhikr", label: "Schlaf-Dhikr" },
+    { id: "laylatul-qadr", label: "Laylat al-Qadr" },
+    { id: "taegliche-ibadah", label: "Tägliche ʿIbādah" },
+    { id: "sahabiyyat", label: "Ṣaḥābiyyāt" },
+    { id: "sahabah-athar", label: "Ṣaḥābah & Āthār" },
+    { id: "in-pruefung", label: "In Prüfung" }
+  ];
+  var DHIKR_BEREICH_LABEL = {
+    dhikr: "Dhikr",
+    dua: "Duʿāʾ",
+    tasbih: "Tasbīḥ",
+    "schlaf-dhikr": "Schlaf-Dhikr",
+    "laylatul-qadr": "Laylat al-Qadr",
+    "taegliche-ibadah": "Tägliche ʿIbādah",
+    sahabiyyat: "Ṣaḥābiyyāt",
+    "sahabah-athar": "Ṣaḥābah & Āthār",
+    "in-pruefung": "In Prüfung"
+  };
   var fiqhCache = null;
   var sahabCache = null;
   var tabiiCache = null;
@@ -714,6 +739,7 @@
   var verwandtCache = null;
   var tawhidCache = null;
   var gerechtCache = null;
+  var dhikrCache = null;
   var loadPromise = null;
   var fiqhQ = "";
   var sahabQ = "";
@@ -744,6 +770,7 @@
   var verwandtQ = "";
   var tawhidQ = "";
   var gerechtQ = "";
+  var dhikrQ = "";
   var fiqhThema = "alle";
   var sahabThema = "alle";
   var tabiiThema = "alle";
@@ -773,6 +800,7 @@
   var verwandtThema = "alle";
   var tawhidThema = "alle";
   var gerechtThema = "alle";
+  var dhikrThema = "alle";
   var hubQ = "";
   var hubThema = "alle";
   var filterOpen = true;
@@ -806,7 +834,8 @@
       abschnitt === PRIVAT_SLUG ||
       abschnitt === VERWANDT_SLUG ||
       abschnitt === TAWHID_SLUG ||
-      abschnitt === GERECHT_SLUG
+      abschnitt === GERECHT_SLUG ||
+      abschnitt === DHIKR_SLUG
     );
   }
 
@@ -896,7 +925,7 @@
   }
 
   function load() {
-    if (fiqhCache && sahabCache && tabiiCache && muetterCache && eheCache && hijabCache && wissenCache && faqCache && kurzCache && salafCache && moscheeCache && hajjCache && sadaqahCache && adabCache && kinderCache && muslimahCache && nifasCache && dienstCache && iddahCache && reinigungCache && nikahCache && zinahCache && umgangCache && reiseCache && krankheitCache && privatCache && verwandtCache && tawhidCache && gerechtCache)
+    if (fiqhCache && sahabCache && tabiiCache && muetterCache && eheCache && hijabCache && wissenCache && faqCache && kurzCache && salafCache && moscheeCache && hajjCache && sadaqahCache && adabCache && kinderCache && muslimahCache && nifasCache && dienstCache && iddahCache && reinigungCache && nikahCache && zinahCache && umgangCache && reiseCache && krankheitCache && privatCache && verwandtCache && tawhidCache && gerechtCache && dhikrCache)
       return Promise.resolve();
     if (loadPromise) return loadPromise;
     loadPromise = Promise.all([
@@ -928,7 +957,8 @@
       fetchJson(PRIVAT_URL),
       fetchJson(VERWANDT_URL),
       fetchJson(TAWHID_URL),
-      fetchJson(GERECHT_URL)
+      fetchJson(GERECHT_URL),
+      fetchJson(DHIKR_URL)
     ])
       .then(function (pair) {
         fiqhCache = pair[0];
@@ -960,6 +990,7 @@
         verwandtCache = pair[26];
         tawhidCache = pair[27];
         gerechtCache = pair[28];
+        dhikrCache = pair[29];
       })
       .catch(function (err) {
         loadPromise = null;
@@ -1085,6 +1116,10 @@
     if (v.indexOf(GERECHT_SLUG + "/") === 0) {
       return { page: "detail", abschnitt: GERECHT_SLUG, kennung: v.slice(GERECHT_SLUG.length + 1) };
     }
+    if (v === DHIKR_SLUG) return { page: "list", abschnitt: DHIKR_SLUG, kennung: "" };
+    if (v.indexOf(DHIKR_SLUG + "/") === 0) {
+      return { page: "detail", abschnitt: DHIKR_SLUG, kennung: v.slice(DHIKR_SLUG.length + 1) };
+    }
     return { page: "hub", abschnitt: "", kennung: "" };
   }
 
@@ -1117,6 +1152,7 @@
     if (abschnitt === VERWANDT_SLUG) return verwandtCache;
     if (abschnitt === TAWHID_SLUG) return tawhidCache;
     if (abschnitt === GERECHT_SLUG) return gerechtCache;
+    if (abschnitt === DHIKR_SLUG) return dhikrCache;
     return fiqhCache;
   }
 
@@ -1150,6 +1186,7 @@
     if (abschnitt === VERWANDT_SLUG) return verwandtThema;
     if (abschnitt === TAWHID_SLUG) return tawhidThema;
     if (abschnitt === GERECHT_SLUG) return gerechtThema;
+    if (abschnitt === DHIKR_SLUG) return dhikrThema;
     return fiqhThema;
   }
 
@@ -1183,6 +1220,7 @@
     else if (abschnitt === VERWANDT_SLUG) verwandtThema = id;
     else if (abschnitt === TAWHID_SLUG) tawhidThema = id;
     else if (abschnitt === GERECHT_SLUG) gerechtThema = id;
+    else if (abschnitt === DHIKR_SLUG) dhikrThema = id;
     else fiqhThema = id;
   }
 
@@ -1216,6 +1254,7 @@
     if (abschnitt === VERWANDT_SLUG) return verwandtQ;
     if (abschnitt === TAWHID_SLUG) return tawhidQ;
     if (abschnitt === GERECHT_SLUG) return gerechtQ;
+    if (abschnitt === DHIKR_SLUG) return dhikrQ;
     return fiqhQ;
   }
 
@@ -1249,6 +1288,7 @@
     else if (abschnitt === VERWANDT_SLUG) verwandtQ = v;
     else if (abschnitt === TAWHID_SLUG) tawhidQ = v;
     else if (abschnitt === GERECHT_SLUG) gerechtQ = v;
+    else if (abschnitt === DHIKR_SLUG) dhikrQ = v;
     else fiqhQ = v;
   }
 
@@ -1289,9 +1329,11 @@
         abschnitt === PRIVAT_SLUG ||
         abschnitt === VERWANDT_SLUG ||
         abschnitt === TAWHID_SLUG ||
-        abschnitt === GERECHT_SLUG
+        abschnitt === GERECHT_SLUG ||
+        abschnitt === DHIKR_SLUG
       ) {
-        if (chip !== thema && e.thema !== thema) return false;
+        var extraThemen = Array.isArray(e.themen) ? e.themen : [];
+        if (chip !== thema && e.thema !== thema && extraThemen.indexOf(thema) === -1) return false;
       } else if (chip !== thema) return false;
     }
     if (!q) return true;
@@ -1319,7 +1361,7 @@
   }
 
   function offeneAbschnitte() {
-    return ["fiqh", "sahabiyyat", "tabiiyyat", MUETTER_SLUG, EHE_SLUG, HIJAB_SLUG, WISSEN_SLUG, FAQ_SLUG, KURZ_SLUG, SALAF_SLUG, MOSCHEE_SLUG, HAJJ_SLUG, SADAQAH_SLUG, ADAB_SLUG, KINDER_SLUG, MUSLIMAH_SLUG, NIFAS_SLUG, DIENST_SLUG, IDDAH_SLUG, REINIGUNG_SLUG, NIKAH_SLUG, ZINAH_SLUG, UMGANG_SLUG, REISE_SLUG, KRANKHEIT_SLUG, PRIVAT_SLUG, VERWANDT_SLUG, TAWHID_SLUG, GERECHT_SLUG];
+    return ["fiqh", "sahabiyyat", "tabiiyyat", MUETTER_SLUG, EHE_SLUG, HIJAB_SLUG, WISSEN_SLUG, FAQ_SLUG, KURZ_SLUG, SALAF_SLUG, MOSCHEE_SLUG, HAJJ_SLUG, SADAQAH_SLUG, ADAB_SLUG, KINDER_SLUG, MUSLIMAH_SLUG, NIFAS_SLUG, DIENST_SLUG, IDDAH_SLUG, REINIGUNG_SLUG, NIKAH_SLUG, ZINAH_SLUG, UMGANG_SLUG, REISE_SLUG, KRANKHEIT_SLUG, PRIVAT_SLUG, VERWANDT_SLUG, TAWHID_SLUG, GERECHT_SLUG, DHIKR_SLUG];
   }
 
   function countSichtbare(abschnitt) {
@@ -1365,6 +1407,7 @@
     if (abschnitt === VERWANDT_SLUG) return "people";
     if (abschnitt === TAWHID_SLUG) return "book";
     if (abschnitt === GERECHT_SLUG) return "lamp";
+    if (abschnitt === DHIKR_SLUG) return "ring";
     return "book";
   }
 
@@ -1467,7 +1510,8 @@
       { nr: "26", title: "Privatsphäre, Erlaubnis & Haus-Adab", id: PRIVAT_SLUG, mark: "home", lede: "Geprüfte Grundlagen zu Erlaubnisbitten, Blickschutz, Besuch und Hausgrenzen." },
       { nr: "27", title: "Verwandtschaft, Nachbarschaft & Gastrecht", id: VERWANDT_SLUG, mark: "people", lede: "Geprüfte Grundlagen zu Familie, Nachbarn, Gästen und Verwandtschaftspflege." },
       { nr: "28", title: "Tawḥīd, Īmān & ʿIbādah", id: TAWHID_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu Tawḥīd, Īmān, Taqwā, Ikhlāṣ, Dhikr und rechtschaffener Tat." },
-      { nr: "29", title: "Gerechtigkeit, guter Umgang & Schutz vor Unrecht", id: GERECHT_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zu Maʿrūf, Iḥsān, Ẓulm, Ehe-Adab und Schutz vor Unrecht." }
+      { nr: "29", title: "Gerechtigkeit, guter Umgang & Schutz vor Unrecht", id: GERECHT_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zu Maʿrūf, Iḥsān, Ẓulm, Ehe-Adab und Schutz vor Unrecht." },
+      { nr: "30", title: "Dhikr, Duʿāʾ & tägliche ʿIbādah", id: DHIKR_SLUG, mark: "ring", lede: "Geprüfte Grundlagen zu Dhikr, Bittgebet, Tasbīḥ, Schlaf-Dhikr und Laylat al-Qadr." }
     ];
   }
 
@@ -1644,6 +1688,8 @@
                                         ? TAWHID_BEREICH_LABEL
                                       : abschnitt === GERECHT_SLUG
                                         ? GERECHT_BEREICH_LABEL
+                                      : abschnitt === DHIKR_SLUG
+                                        ? DHIKR_BEREICH_LABEL
                   : FIQH_BEREICH_LABEL;
     var bereich = labelMap[e.bereich] || e.bereich || "";
     var person = e.person || e.name;
@@ -1736,6 +1782,8 @@
                                         ? TAWHID_THEMEN
                                       : abschnitt === GERECHT_SLUG
                                         ? GERECHT_THEMEN
+                                      : abschnitt === DHIKR_SLUG
+                                        ? DHIKR_THEMEN
                   : FIQH_THEMEN;
     var q = currentQ(abschnitt);
     var thema = currentThema(abschnitt);
@@ -1771,7 +1819,8 @@
           abschnitt === PRIVAT_SLUG ||
           abschnitt === VERWANDT_SLUG ||
           abschnitt === TAWHID_SLUG ||
-          abschnitt === GERECHT_SLUG
+          abschnitt === GERECHT_SLUG ||
+          abschnitt === DHIKR_SLUG
         ? '<p class="frauen-empty">Noch keine geprüften Inhalte vorhanden.</p>'
         : '<p class="frauen-empty">Keine sichtbare Aussage zu dieser Auswahl.</p>';
     var hint =
@@ -1817,6 +1866,8 @@
           ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte religiöse Grundlagen mit Quelle und Direktnachweis. Moderne Gleichheitsdeutungen, Rollenbilder, Motivationssprüche und ungeprüfte Aussagen werden nicht angezeigt.</p></div>'
           : abschnitt === GERECHT_SLUG
           ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte religiöse Inhalte mit Quelle und Direktnachweis. Konkrete Ehekonflikte, Gewaltfragen, Nushūz, Scheidung, Gerichte, Schutzmaßnahmen, Unterhalt, Wohnrecht und heutige Streitfälle bleiben verborgen, bis sie einzeln streng geprüft wurden.</p></div>'
+          : abschnitt === DHIKR_SLUG
+          ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Persönliche Duʿāʾ-Listen, schwache Awrād, besondere Zahlen, moderne Routinen, Ruqyah-Details und ungeprüfte Tagespläne bleiben verborgen, bis sie einzeln geprüft wurden.</p></div>'
           : abschnitt === KURZ_SLUG
           ? '<div class="frauen-hint"><p>Dieser Bereich enthält keine ausgeschmückten Geschichten. Sichtbar sind nur Kurzberichte mit geprüfter Quelle und Direktnachweis. Alles Unsichere bleibt verborgen.</p></div>'
           : abschnitt === FAQ_SLUG
@@ -1873,6 +1924,8 @@
         ? '<p class="lede">Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne moderne Rollenbilder.</p>'
         : abschnitt === GERECHT_SLUG
         ? '<p class="lede">Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne moderne Ehe- oder Konfliktberatung.</p>'
+        : abschnitt === DHIKR_SLUG
+        ? '<p class="lede">Geprüfte Berichte aus Qurʾān, Sunnah und später ergänzten Āthār – ohne ungeprüfte Duʿāʾ-Listen.</p>'
         : abschnitt === KURZ_SLUG
         ? '<p class="lede">Kurze belegte Ereignisse aus dem Leben rechtschaffener Frauen – mit Quelle und Direktnachweis.</p>'
         : abschnitt === FAQ_SLUG
@@ -1926,6 +1979,7 @@
     if (abschnitt === VERWANDT_SLUG) return "Verwandtschaft, Nachbarschaft & Gastrecht";
     if (abschnitt === TAWHID_SLUG) return "Tawḥīd, Īmān & ʿIbādah";
     if (abschnitt === GERECHT_SLUG) return "Gerechtigkeit, guter Umgang & Schutz vor Unrecht";
+    if (abschnitt === DHIKR_SLUG) return "Dhikr, Duʿāʾ & tägliche ʿIbādah";
     if (abschnitt === KURZ_SLUG) return "Geprüfte Kurzberichte";
     if (abschnitt === FAQ_SLUG) return "Fragen & Antworten";
     if (abschnitt === WISSEN_SLUG) return "Wissen & Lernen";
@@ -2001,7 +2055,7 @@
       "</div></div>" +
       nachweiseDirekt(e) +
       "</div>";
-    var nachBericht = istKurz(abschnitt) || abschnitt === DIENST_SLUG || abschnitt === KRANKHEIT_SLUG || abschnitt === PRIVAT_SLUG || abschnitt === VERWANDT_SLUG || abschnitt === TAWHID_SLUG || abschnitt === GERECHT_SLUG ? lehreHtml + quelleBlock : quelleBlock + lehreHtml;
+    var nachBericht = istKurz(abschnitt) || abschnitt === DIENST_SLUG || abschnitt === KRANKHEIT_SLUG || abschnitt === PRIVAT_SLUG || abschnitt === VERWANDT_SLUG || abschnitt === TAWHID_SLUG || abschnitt === GERECHT_SLUG || abschnitt === DHIKR_SLUG ? lehreHtml + quelleBlock : quelleBlock + lehreHtml;
     return (
       '<article class="article post-reader">' +
       '<header class="post-reader-title"><div class="kicker">' +
@@ -2157,6 +2211,12 @@
         subtitle: "Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne moderne Ehe- oder Konfliktberatung."
       };
     }
+    if (parsed.abschnitt === DHIKR_SLUG && parsed.page === "list") {
+      return {
+        title: "Dhikr, Duʿāʾ & tägliche ʿIbādah",
+        subtitle: "Geprüfte Berichte aus Qurʾān, Sunnah und später ergänzten Āthār – ohne ungeprüfte Duʿāʾ-Listen."
+      };
+    }
     if (parsed.abschnitt === KURZ_SLUG && parsed.page === "list") {
       return {
         title: "Geprüfte Kurzberichte",
@@ -2254,6 +2314,8 @@
             ? "Tawḥīd, Īmān & ʿIbādah"
             : parsed.abschnitt === GERECHT_SLUG
             ? "Gerechtigkeit, guter Umgang & Schutz vor Unrecht"
+            : parsed.abschnitt === DHIKR_SLUG
+            ? "Dhikr, Duʿāʾ & tägliche ʿIbādah"
             : parsed.abschnitt === KURZ_SLUG
             ? "Geprüfte Kurzberichte"
             : parsed.abschnitt === FAQ_SLUG
@@ -2316,7 +2378,8 @@
       !privatCache ||
       !verwandtCache ||
       !tawhidCache ||
-      !gerechtCache
+      !gerechtCache ||
+      !dhikrCache
     ) {
       load().then(refreshIfFrauen).catch(refreshIfFrauen);
       return '<p class="frauen-empty">Bereich wird geladen…</p>';
