@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v772-frauen-tawhid';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v773-frauen-gerecht';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -64,6 +64,7 @@ const APP_SHELL = [
   '/test/data/frauen-privatsphaere-erlaubnis-haus-adab.json',
   '/test/data/frauen-verwandtschaft-nachbarschaft-gastrecht.json',
   '/test/data/frauen-tawhid-iman-ibadah.json',
+  '/test/data/frauen-gerechtigkeit-guter-umgang-schutz.json',
   '/data/books-library.json',
   '/data/scholars-library.json',
   '/test-apple-touch-icon.png',
