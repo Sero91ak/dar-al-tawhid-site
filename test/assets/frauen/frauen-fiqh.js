@@ -88,6 +88,8 @@
   var RAMADAN_SLUG = "ramadan-fasten-eid";
   var QIYAM_URL = "/test/data/frauen-ramadan-fasten-nachtgebet.json";
   var QIYAM_SLUG = "ramadan-fasten-nachtgebet";
+  var REUESCHUTZ_URL = "/test/data/frauen-reue-istighfar-schutz-suenden.json";
+  var REUESCHUTZ_SLUG = "reue-istighfar-schutz-suenden";
   var ERLAUBTE_QUELLENART = {
     quran: 1,
     sahih: 1,
@@ -1093,6 +1095,29 @@
     "sahabah-athar": "Ṣaḥābah & Āthār",
     "in-pruefung": "In Prüfung"
   };
+  var REUESCHUTZ_THEMEN = [
+    { id: "alle", label: "Alle" },
+    { id: "tawbah", label: "Tawbah" },
+    { id: "istighfar", label: "Istighfār" },
+    { id: "hoffnung", label: "Hoffnung" },
+    { id: "furcht", label: "Furcht" },
+    { id: "suendenvergebung", label: "Sündenvergebung" },
+    { id: "frauen-hinweis", label: "Frauen-Hinweis" },
+    { id: "schutz-vor-suenden", label: "Schutz vor Sünden" },
+    { id: "sahabah-athar", label: "Ṣaḥābah & Āthār" },
+    { id: "in-pruefung", label: "In Prüfung" }
+  ];
+  var REUESCHUTZ_BEREICH_LABEL = {
+    tawbah: "Tawbah",
+    istighfar: "Istighfār",
+    hoffnung: "Hoffnung",
+    furcht: "Furcht",
+    suendenvergebung: "Sündenvergebung",
+    "frauen-hinweis": "Frauen-Hinweis",
+    "schutz-vor-suenden": "Schutz vor Sünden",
+    "sahabah-athar": "Ṣaḥābah & Āthār",
+    "in-pruefung": "In Prüfung"
+  };
   var fiqhCache = null;
   var sahabCache = null;
   var tabiiCache = null;
@@ -1138,6 +1163,7 @@
   var janazahCache = null;
   var ramadanCache = null;
   var qiyamCache = null;
+  var reueschutzCache = null;
   var loadPromise = null;
   var fiqhQ = "";
   var sahabQ = "";
@@ -1184,6 +1210,7 @@
   var janazahQ = "";
   var ramadanQ = "";
   var qiyamQ = "";
+  var reueschutzQ = "";
   var fiqhThema = "alle";
   var sahabThema = "alle";
   var tabiiThema = "alle";
@@ -1229,6 +1256,7 @@
   var janazahThema = "alle";
   var ramadanThema = "alle";
   var qiyamThema = "alle";
+  var reueschutzThema = "alle";
   var hubQ = "";
   var hubThema = "alle";
   var pickSprecher = "";
@@ -1280,7 +1308,8 @@
       abschnitt === TOECHTER_SLUG ||
       abschnitt === JANAZAH_SLUG ||
       abschnitt === RAMADAN_SLUG ||
-      abschnitt === QIYAM_SLUG
+      abschnitt === QIYAM_SLUG ||
+      abschnitt === REUESCHUTZ_SLUG
     );
   }
 
@@ -1373,7 +1402,7 @@
   }
 
   function load() {
-    if (fiqhCache && sahabCache && tabiiCache && muetterCache && eheCache && hijabCache && wissenCache && faqCache && kurzCache && salafCache && moscheeCache && hajjCache && sadaqahCache && adabCache && kinderCache && muslimahCache && nifasCache && dienstCache && iddahCache && reinigungCache && nikahCache && zinahCache && umgangCache && reiseCache && krankheitCache && privatCache && verwandtCache && tawhidCache && gerechtCache && dhikrCache && geprueftCache && todCache && arbeitCache && medienCache && ruqyahCache && trauerCache && maedchenCache && bidahqCache && reueCache)
+    if (fiqhCache && sahabCache && tabiiCache && muetterCache && eheCache && hijabCache && wissenCache && faqCache && kurzCache && salafCache && moscheeCache && hajjCache && sadaqahCache && adabCache && kinderCache && muslimahCache && nifasCache && dienstCache && iddahCache && reinigungCache && nikahCache && zinahCache && umgangCache && reiseCache && krankheitCache && privatCache && verwandtCache && tawhidCache && gerechtCache && dhikrCache && geprueftCache && todCache && arbeitCache && medienCache && ruqyahCache && trauerCache && maedchenCache && bidahqCache && reueCache && janaizCache && tawbahCache && toechterCache && janazahCache && ramadanCache && qiyamCache && reueschutzCache)
       return Promise.resolve();
     if (loadPromise) return loadPromise;
     loadPromise = Promise.all([
@@ -1421,7 +1450,8 @@
       fetchJson(TOECHTER_URL),
       fetchJson(JANAZAH_URL),
       fetchJson(RAMADAN_URL),
-      fetchJson(QIYAM_URL)
+      fetchJson(QIYAM_URL),
+      fetchJson(REUESCHUTZ_URL)
     ])
       .then(function (pair) {
         fiqhCache = pair[0];
@@ -1469,6 +1499,7 @@
         janazahCache = pair[42];
         ramadanCache = pair[43];
         qiyamCache = pair[44];
+        reueschutzCache = pair[45];
       })
       .catch(function (err) {
         loadPromise = null;
@@ -1658,6 +1689,10 @@
     if (v.indexOf(QIYAM_SLUG + "/") === 0) {
       return { page: "detail", abschnitt: QIYAM_SLUG, kennung: v.slice(QIYAM_SLUG.length + 1) };
     }
+    if (v === REUESCHUTZ_SLUG) return { page: "list", abschnitt: REUESCHUTZ_SLUG, kennung: "" };
+    if (v.indexOf(REUESCHUTZ_SLUG + "/") === 0) {
+      return { page: "detail", abschnitt: REUESCHUTZ_SLUG, kennung: v.slice(REUESCHUTZ_SLUG.length + 1) };
+    }
     return { page: "hub", abschnitt: "", kennung: "" };
   }
 
@@ -1706,6 +1741,7 @@
     if (abschnitt === JANAZAH_SLUG) return janazahCache;
     if (abschnitt === RAMADAN_SLUG) return ramadanCache;
     if (abschnitt === QIYAM_SLUG) return qiyamCache;
+    if (abschnitt === REUESCHUTZ_SLUG) return reueschutzCache;
     return fiqhCache;
   }
 
@@ -1755,6 +1791,7 @@
     if (abschnitt === JANAZAH_SLUG) return janazahThema;
     if (abschnitt === RAMADAN_SLUG) return ramadanThema;
     if (abschnitt === QIYAM_SLUG) return qiyamThema;
+    if (abschnitt === REUESCHUTZ_SLUG) return reueschutzThema;
     return fiqhThema;
   }
 
@@ -1804,6 +1841,7 @@
     else if (abschnitt === JANAZAH_SLUG) janazahThema = id;
     else if (abschnitt === RAMADAN_SLUG) ramadanThema = id;
     else if (abschnitt === QIYAM_SLUG) qiyamThema = id;
+    else if (abschnitt === REUESCHUTZ_SLUG) reueschutzThema = id;
     else fiqhThema = id;
   }
 
@@ -1853,6 +1891,7 @@
     if (abschnitt === JANAZAH_SLUG) return janazahQ;
     if (abschnitt === RAMADAN_SLUG) return ramadanQ;
     if (abschnitt === QIYAM_SLUG) return qiyamQ;
+    if (abschnitt === REUESCHUTZ_SLUG) return reueschutzQ;
     return fiqhQ;
   }
 
@@ -1902,6 +1941,7 @@
     else if (abschnitt === JANAZAH_SLUG) janazahQ = v;
     else if (abschnitt === RAMADAN_SLUG) ramadanQ = v;
     else if (abschnitt === QIYAM_SLUG) qiyamQ = v;
+    else if (abschnitt === REUESCHUTZ_SLUG) reueschutzQ = v;
     else fiqhQ = v;
   }
 
@@ -1958,7 +1998,8 @@
         abschnitt === TOECHTER_SLUG ||
         abschnitt === JANAZAH_SLUG ||
         abschnitt === RAMADAN_SLUG ||
-        abschnitt === QIYAM_SLUG
+        abschnitt === QIYAM_SLUG ||
+        abschnitt === REUESCHUTZ_SLUG
       ) {
         var extraThemen = Array.isArray(e.themen) ? e.themen : [];
         if (chip !== thema && e.thema !== thema && extraThemen.indexOf(thema) === -1) return false;
@@ -1997,7 +2038,7 @@
   }
 
   function offeneAbschnitte() {
-    return ["fiqh", "sahabiyyat", "tabiiyyat", MUETTER_SLUG, EHE_SLUG, HIJAB_SLUG, WISSEN_SLUG, FAQ_SLUG, KURZ_SLUG, SALAF_SLUG, MOSCHEE_SLUG, HAJJ_SLUG, SADAQAH_SLUG, ADAB_SLUG, KINDER_SLUG, MUSLIMAH_SLUG, NIFAS_SLUG, DIENST_SLUG, IDDAH_SLUG, REINIGUNG_SLUG, NIKAH_SLUG, ZINAH_SLUG, UMGANG_SLUG, REISE_SLUG, KRANKHEIT_SLUG, PRIVAT_SLUG, VERWANDT_SLUG, TAWHID_SLUG, GERECHT_SLUG, DHIKR_SLUG, GEPRUEFT_SLUG, TOD_SLUG, ARBEIT_SLUG, MEDIEN_SLUG, RUQYAH_SLUG, TRAUER_SLUG, MAEDCHEN_SLUG, BIDAHQ_SLUG, REUE_SLUG, JANAIZ_SLUG, TAWBAH_SLUG, TOECHTER_SLUG, JANAZAH_SLUG, RAMADAN_SLUG, QIYAM_SLUG];
+    return ["fiqh", "sahabiyyat", "tabiiyyat", MUETTER_SLUG, EHE_SLUG, HIJAB_SLUG, WISSEN_SLUG, FAQ_SLUG, KURZ_SLUG, SALAF_SLUG, MOSCHEE_SLUG, HAJJ_SLUG, SADAQAH_SLUG, ADAB_SLUG, KINDER_SLUG, MUSLIMAH_SLUG, NIFAS_SLUG, DIENST_SLUG, IDDAH_SLUG, REINIGUNG_SLUG, NIKAH_SLUG, ZINAH_SLUG, UMGANG_SLUG, REISE_SLUG, KRANKHEIT_SLUG, PRIVAT_SLUG, VERWANDT_SLUG, TAWHID_SLUG, GERECHT_SLUG, DHIKR_SLUG, GEPRUEFT_SLUG, TOD_SLUG, ARBEIT_SLUG, MEDIEN_SLUG, RUQYAH_SLUG, TRAUER_SLUG, MAEDCHEN_SLUG, BIDAHQ_SLUG, REUE_SLUG, JANAIZ_SLUG, TAWBAH_SLUG, TOECHTER_SLUG, JANAZAH_SLUG, RAMADAN_SLUG, QIYAM_SLUG, REUESCHUTZ_SLUG];
   }
 
   function countSichtbare(abschnitt) {
@@ -2059,6 +2100,7 @@
     if (abschnitt === JANAZAH_SLUG) return "ring";
     if (abschnitt === RAMADAN_SLUG) return "lamp";
     if (abschnitt === QIYAM_SLUG) return "lamp";
+    if (abschnitt === REUESCHUTZ_SLUG) return "book";
     return "book";
   }
 
@@ -2178,7 +2220,8 @@
       { nr: "42", title: "Töchter, Mädchen & Fürsorge", id: TOECHTER_SLUG, mark: "home", lede: "Geprüfte Grundlagen zu Barmherzigkeit, Fürsorge, Gerechtigkeit und Schutz von Mädchen." },
       { nr: "43", title: "Janāzah, Tod & Trauer-Adab", id: JANAZAH_SLUG, mark: "ring", lede: "Geprüfte Grundlagen zu Tod, Trauer, Janāzah, Iḥdād und Adab bei Verlust." },
       { nr: "44", title: "Ramaḍān, Fasten & ʿĪd", id: RAMADAN_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zu Fasten, Ḥayḍ, Laylat al-Qadr, ʿĪd und Ṣadaqah." },
-      { nr: "45", title: "Ramaḍān, Fasten & Nachtgebet", id: QIYAM_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zu Ramaḍān, Fasten, Nachholen, Qiyām, Laylat al-Qadr und Iʿtikāf." }
+      { nr: "45", title: "Ramaḍān, Fasten & Nachtgebet", id: QIYAM_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zu Ramaḍān, Fasten, Nachholen, Qiyām, Laylat al-Qadr und Iʿtikāf." },
+      { nr: "46", title: "Reue, Istighfār & Schutz vor Sünden", id: REUESCHUTZ_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu Tawbah, Istighfār, Hoffnung, Furcht und Rückkehr zu Allah." }
     ];
   }
 
@@ -2501,6 +2544,8 @@
                                         ? RAMADAN_BEREICH_LABEL
                                       : abschnitt === QIYAM_SLUG
                                         ? QIYAM_BEREICH_LABEL
+                                      : abschnitt === REUESCHUTZ_SLUG
+                                        ? REUESCHUTZ_BEREICH_LABEL
                   : FIQH_BEREICH_LABEL;
     var bereich = labelMap[e.bereich] || e.bereich || "";
     var person = e.person || e.name;
@@ -2625,6 +2670,8 @@
                                         ? RAMADAN_THEMEN
                                       : abschnitt === QIYAM_SLUG
                                         ? QIYAM_THEMEN
+                                      : abschnitt === REUESCHUTZ_SLUG
+                                        ? REUESCHUTZ_THEMEN
                   : FIQH_THEMEN;
     var q = currentQ(abschnitt);
     var thema = currentThema(abschnitt);
@@ -2676,7 +2723,8 @@
           abschnitt === TOECHTER_SLUG ||
           abschnitt === JANAZAH_SLUG ||
           abschnitt === RAMADAN_SLUG ||
-          abschnitt === QIYAM_SLUG
+          abschnitt === QIYAM_SLUG ||
+          abschnitt === REUESCHUTZ_SLUG
         ? '<p class="frauen-empty">Noch keine geprüften Inhalte vorhanden.</p>'
         : '<p class="frauen-empty">Keine sichtbare Aussage zu dieser Auswahl.</p>';
     var hint =
@@ -2769,6 +2817,8 @@
       hint = '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Schwangerschaft, Stillzeit, Fidya, Tarāwīḥ, Iʿtikāf und moderne ʿĪd-Fragen bleiben verborgen, bis sie einzeln streng geprüft wurden.</p></div>';
     else if (abschnitt === QIYAM_SLUG)
       hint = '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Detailfragen zu Schwangerschaft, Stillzeit, Fidya, Krankheit, Reise, Ḥayḍ, Tarāwīḥ, Moschee, Iʿtikāf und individuellen Fällen bleiben verborgen, bis sie einzeln geprüft wurden.</p></div>';
+    else if (abschnitt === REUESCHUTZ_SLUG)
+      hint = '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Einzelne Sünden, große Sünden, Takfīr-Fragen, Verzweiflung, Waswās, psychische Krisen, öffentliche Sünden und konkrete Reue-Fälle bleiben verborgen, bis sie einzeln streng geprüft wurden.</p></div>';
     if (
       leerBereich &&
       (abschnitt === ARBEIT_SLUG ||
@@ -2854,6 +2904,8 @@
         ? '<p class="lede">Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne ungeprüfte Ramaḍān-Pläne.</p>'
         : abschnitt === QIYAM_SLUG
         ? '<p class="lede">Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne ungeprüfte Ramaḍān-Routinen.</p>'
+        : abschnitt === REUESCHUTZ_SLUG
+        ? '<p class="lede">Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne moderne Schuld- oder Motivationstexte.</p>'
         : abschnitt === KURZ_SLUG
         ? '<p class="lede">Kurze belegte Ereignisse aus dem Leben rechtschaffener Frauen – mit Quelle und Direktnachweis.</p>'
         : abschnitt === FAQ_SLUG
@@ -2923,6 +2975,7 @@
     if (abschnitt === JANAZAH_SLUG) return "Janāzah, Tod & Trauer-Adab";
     if (abschnitt === RAMADAN_SLUG) return "Ramaḍān, Fasten & ʿĪd";
     if (abschnitt === QIYAM_SLUG) return "Ramaḍān, Fasten & Nachtgebet";
+    if (abschnitt === REUESCHUTZ_SLUG) return "Reue, Istighfār & Schutz vor Sünden";
     if (abschnitt === KURZ_SLUG) return "Geprüfte Kurzberichte";
     if (abschnitt === FAQ_SLUG) return "Fragen & Antworten";
     if (abschnitt === WISSEN_SLUG) return "Wissen & Lernen";
@@ -2999,7 +3052,7 @@
       "</div></div>" +
       nachweiseDirekt(e) +
       "</div>";
-    var nachBericht = istKurz(abschnitt) || abschnitt === DIENST_SLUG || abschnitt === KRANKHEIT_SLUG || abschnitt === PRIVAT_SLUG || abschnitt === VERWANDT_SLUG || abschnitt === TAWHID_SLUG || abschnitt === GERECHT_SLUG || abschnitt === DHIKR_SLUG || abschnitt === GEPRUEFT_SLUG || abschnitt === TOD_SLUG || abschnitt === ARBEIT_SLUG || abschnitt === MEDIEN_SLUG || abschnitt === RUQYAH_SLUG || abschnitt === TRAUER_SLUG || abschnitt === MAEDCHEN_SLUG || abschnitt === BIDAHQ_SLUG || abschnitt === REUE_SLUG || abschnitt === JANAIZ_SLUG || abschnitt === TAWBAH_SLUG || abschnitt === TOECHTER_SLUG || abschnitt === JANAZAH_SLUG || abschnitt === RAMADAN_SLUG || abschnitt === QIYAM_SLUG ? lehreHtml + quelleBlock : quelleBlock + lehreHtml;
+    var nachBericht = istKurz(abschnitt) || abschnitt === DIENST_SLUG || abschnitt === KRANKHEIT_SLUG || abschnitt === PRIVAT_SLUG || abschnitt === VERWANDT_SLUG || abschnitt === TAWHID_SLUG || abschnitt === GERECHT_SLUG || abschnitt === DHIKR_SLUG || abschnitt === GEPRUEFT_SLUG || abschnitt === TOD_SLUG || abschnitt === ARBEIT_SLUG || abschnitt === MEDIEN_SLUG || abschnitt === RUQYAH_SLUG || abschnitt === TRAUER_SLUG || abschnitt === MAEDCHEN_SLUG || abschnitt === BIDAHQ_SLUG || abschnitt === REUE_SLUG || abschnitt === JANAIZ_SLUG || abschnitt === TAWBAH_SLUG || abschnitt === TOECHTER_SLUG || abschnitt === JANAZAH_SLUG || abschnitt === RAMADAN_SLUG || abschnitt === QIYAM_SLUG || abschnitt === REUESCHUTZ_SLUG ? lehreHtml + quelleBlock : quelleBlock + lehreHtml;
     return (
       '<article class="article post-reader">' +
       '<header class="post-reader-title"><div class="kicker">' +
@@ -3251,6 +3304,12 @@
         subtitle: "Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne ungeprüfte Ramaḍān-Routinen."
       };
     }
+    if (parsed.abschnitt === REUESCHUTZ_SLUG && parsed.page === "list") {
+      return {
+        title: "Reue, Istighfār & Schutz vor Sünden",
+        subtitle: "Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne moderne Schuld- oder Motivationstexte."
+      };
+    }
     if (parsed.abschnitt === KURZ_SLUG && parsed.page === "list") {
       return {
         title: "Geprüfte Kurzberichte",
@@ -3380,6 +3439,8 @@
             ? "Ramaḍān, Fasten & ʿĪd"
             : parsed.abschnitt === QIYAM_SLUG
             ? "Ramaḍān, Fasten & Nachtgebet"
+            : parsed.abschnitt === REUESCHUTZ_SLUG
+            ? "Reue, Istighfār & Schutz vor Sünden"
             : parsed.abschnitt === KURZ_SLUG
             ? "Geprüfte Kurzberichte"
             : parsed.abschnitt === FAQ_SLUG
