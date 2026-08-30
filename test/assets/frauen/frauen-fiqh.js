@@ -34,6 +34,18 @@
   var NIFAS_SLUG = "schwangerschaft-stillzeit-nifas";
   var DIENST_URL = "/test/data/frauen-dienst-pflege-hilfeleistung.json";
   var DIENST_SLUG = "dienst-pflege-hilfeleistung";
+  var IDDAH_URL = "/test/data/frauen-iddah-scheidung-trauerzeit.json";
+  var IDDAH_SLUG = "iddah-scheidung-trauerzeit";
+  var REINIGUNG_URL = "/test/data/frauen-reinigung-gebet-fasten.json";
+  var REINIGUNG_SLUG = "reinigung-gebet-fasten";
+  var NIKAH_URL = "/test/data/frauen-nikah-zustimmung-mahr.json";
+  var NIKAH_SLUG = "nikah-zustimmung-mahr";
+  var ZINAH_URL = "/test/data/frauen-zinah-schmuck-kleidung.json";
+  var ZINAH_SLUG = "zinah-schmuck-kleidung";
+  var UMGANG_URL = "/test/data/frauen-umgang-nicht-maharim.json";
+  var UMGANG_SLUG = "umgang-nicht-maharim";
+  var REISE_URL = "/test/data/frauen-reise-mahram-schutz.json";
+  var REISE_SLUG = "reise-mahram-schutz";
   var ERLAUBTE_QUELLENART = {
     quran: 1,
     sahih: 1,
@@ -432,6 +444,118 @@
     "sahabah-athar": "Ṣaḥābah & Āthār",
     "in-pruefung": "In Prüfung"
   };
+  var IDDAH_THEMEN = [
+    { id: "alle", label: "Alle" },
+    { id: "iddah", label: "ʿIddah" },
+    { id: "scheidung", label: "Scheidung" },
+    { id: "trauerzeit", label: "Trauerzeit" },
+    { id: "witwe", label: "Witwe" },
+    { id: "eheschliessung", label: "Eheschließung" },
+    { id: "adab", label: "Adab" },
+    { id: "in-pruefung", label: "In Prüfung" }
+  ];
+  var IDDAH_BEREICH_LABEL = {
+    iddah: "ʿIddah",
+    scheidung: "Scheidung",
+    trauerzeit: "Trauerzeit",
+    witwe: "Witwe",
+    eheschliessung: "Eheschließung",
+    adab: "Adab",
+    "in-pruefung": "In Prüfung"
+  };
+  var REINIGUNG_THEMEN = [
+    { id: "alle", label: "Alle" },
+    { id: "reinigung", label: "Reinigung" },
+    { id: "hayd", label: "Ḥayḍ" },
+    { id: "istihadah", label: "Istiḥāḍah" },
+    { id: "ghusl", label: "Ghusl" },
+    { id: "gebet", label: "Gebet" },
+    { id: "fasten", label: "Fasten" },
+    { id: "kleidung-im-gebet", label: "Kleidung im Gebet" },
+    { id: "in-pruefung", label: "In Prüfung" }
+  ];
+  var REINIGUNG_BEREICH_LABEL = {
+    reinigung: "Reinigung",
+    hayd: "Ḥayḍ",
+    istihadah: "Istiḥāḍah",
+    ghusl: "Ghusl",
+    gebet: "Gebet",
+    fasten: "Fasten",
+    "kleidung-im-gebet": "Kleidung im Gebet",
+    "in-pruefung": "In Prüfung"
+  };
+  var NIKAH_THEMEN = [
+    { id: "alle", label: "Alle" },
+    { id: "nikah", label: "Nikāḥ" },
+    { id: "zustimmung", label: "Zustimmung" },
+    { id: "mahr", label: "Mahr" },
+    { id: "deen", label: "Dīn" },
+    { id: "kein-zwang", label: "Kein Zwang" },
+    { id: "adab", label: "Adab" },
+    { id: "in-pruefung", label: "In Prüfung" }
+  ];
+  var NIKAH_BEREICH_LABEL = {
+    nikah: "Nikāḥ",
+    zustimmung: "Zustimmung",
+    mahr: "Mahr",
+    deen: "Dīn",
+    "kein-zwang": "Kein Zwang",
+    adab: "Adab",
+    "in-pruefung": "In Prüfung"
+  };
+  var ZINAH_THEMEN = [
+    { id: "alle", label: "Alle" },
+    { id: "hidschab", label: "Ḥidschāb" },
+    { id: "kleidung", label: "Kleidung" },
+    { id: "schmuck", label: "Schmuck" },
+    { id: "duft", label: "Duft" },
+    { id: "tabarrudsch", label: "Tabarrudsch" },
+    { id: "adab", label: "Adab" },
+    { id: "sahabah-athar", label: "Ṣaḥābah & Āthār" },
+    { id: "in-pruefung", label: "In Prüfung" }
+  ];
+  var ZINAH_BEREICH_LABEL = {
+    hidschab: "Ḥidschāb",
+    kleidung: "Kleidung",
+    schmuck: "Schmuck",
+    duft: "Duft",
+    tabarrudsch: "Tabarrudsch",
+    adab: "Adab",
+    "sahabah-athar": "Ṣaḥābah & Āthār",
+    "in-pruefung": "In Prüfung"
+  };
+  var UMGANG_THEMEN = [
+    { id: "alle", label: "Alle" },
+    { id: "khalwah", label: "Khalwah" },
+    { id: "blicken", label: "Blicken" },
+    { id: "rede", label: "Rede" },
+    { id: "haus", label: "Haus" },
+    { id: "adab", label: "Adab" },
+    { id: "in-pruefung", label: "In Prüfung" }
+  ];
+  var UMGANG_BEREICH_LABEL = {
+    khalwah: "Khalwah",
+    blicken: "Blicken",
+    rede: "Rede",
+    haus: "Haus",
+    adab: "Adab",
+    "in-pruefung": "In Prüfung"
+  };
+  var REISE_THEMEN = [
+    { id: "alle", label: "Alle" },
+    { id: "reise", label: "Reise" },
+    { id: "hajj", label: "Ḥajj" },
+    { id: "khalwah", label: "Khalwah" },
+    { id: "mahram", label: "Maḥram" },
+    { id: "in-pruefung", label: "In Prüfung" }
+  ];
+  var REISE_BEREICH_LABEL = {
+    reise: "Reise",
+    hajj: "Ḥajj",
+    khalwah: "Khalwah",
+    mahram: "Maḥram",
+    "in-pruefung": "In Prüfung"
+  };
   var fiqhCache = null;
   var sahabCache = null;
   var tabiiCache = null;
@@ -450,6 +574,12 @@
   var muslimahCache = null;
   var nifasCache = null;
   var dienstCache = null;
+  var iddahCache = null;
+  var reinigungCache = null;
+  var nikahCache = null;
+  var zinahCache = null;
+  var umgangCache = null;
+  var reiseCache = null;
   var loadPromise = null;
   var fiqhQ = "";
   var sahabQ = "";
@@ -469,6 +599,12 @@
   var muslimahQ = "";
   var nifasQ = "";
   var dienstQ = "";
+  var iddahQ = "";
+  var reinigungQ = "";
+  var nikahQ = "";
+  var zinahQ = "";
+  var umgangQ = "";
+  var reiseQ = "";
   var fiqhThema = "alle";
   var sahabThema = "alle";
   var tabiiThema = "alle";
@@ -487,6 +623,12 @@
   var muslimahThema = "alle";
   var nifasThema = "alle";
   var dienstThema = "alle";
+  var iddahThema = "alle";
+  var reinigungThema = "alle";
+  var nikahThema = "alle";
+  var zinahThema = "alle";
+  var umgangThema = "alle";
+  var reiseThema = "alle";
   var hubQ = "";
   var hubThema = "alle";
   var filterOpen = true;
@@ -509,7 +651,13 @@
       abschnitt === KINDER_SLUG ||
       abschnitt === MUSLIMAH_SLUG ||
       abschnitt === NIFAS_SLUG ||
-      abschnitt === DIENST_SLUG
+      abschnitt === DIENST_SLUG ||
+      abschnitt === IDDAH_SLUG ||
+      abschnitt === REINIGUNG_SLUG ||
+      abschnitt === NIKAH_SLUG ||
+      abschnitt === ZINAH_SLUG ||
+      abschnitt === UMGANG_SLUG ||
+      abschnitt === REISE_SLUG
     );
   }
 
@@ -599,7 +747,7 @@
   }
 
   function load() {
-    if (fiqhCache && sahabCache && tabiiCache && muetterCache && eheCache && hijabCache && wissenCache && faqCache && kurzCache && salafCache && moscheeCache && hajjCache && sadaqahCache && adabCache && kinderCache && muslimahCache && nifasCache && dienstCache)
+    if (fiqhCache && sahabCache && tabiiCache && muetterCache && eheCache && hijabCache && wissenCache && faqCache && kurzCache && salafCache && moscheeCache && hajjCache && sadaqahCache && adabCache && kinderCache && muslimahCache && nifasCache && dienstCache && iddahCache && reinigungCache && nikahCache && zinahCache && umgangCache && reiseCache)
       return Promise.resolve();
     if (loadPromise) return loadPromise;
     loadPromise = Promise.all([
@@ -620,7 +768,13 @@
       fetchJson(KINDER_URL),
       fetchJson(MUSLIMAH_URL),
       fetchJson(NIFAS_URL),
-      fetchJson(DIENST_URL)
+      fetchJson(DIENST_URL),
+      fetchJson(IDDAH_URL),
+      fetchJson(REINIGUNG_URL),
+      fetchJson(NIKAH_URL),
+      fetchJson(ZINAH_URL),
+      fetchJson(UMGANG_URL),
+      fetchJson(REISE_URL)
     ])
       .then(function (pair) {
         fiqhCache = pair[0];
@@ -641,6 +795,12 @@
         muslimahCache = pair[15];
         nifasCache = pair[16];
         dienstCache = pair[17];
+        iddahCache = pair[18];
+        reinigungCache = pair[19];
+        nikahCache = pair[20];
+        zinahCache = pair[21];
+        umgangCache = pair[22];
+        reiseCache = pair[23];
       })
       .catch(function (err) {
         loadPromise = null;
@@ -722,6 +882,30 @@
     if (v.indexOf(DIENST_SLUG + "/") === 0) {
       return { page: "detail", abschnitt: DIENST_SLUG, kennung: v.slice(DIENST_SLUG.length + 1) };
     }
+    if (v === IDDAH_SLUG) return { page: "list", abschnitt: IDDAH_SLUG, kennung: "" };
+    if (v.indexOf(IDDAH_SLUG + "/") === 0) {
+      return { page: "detail", abschnitt: IDDAH_SLUG, kennung: v.slice(IDDAH_SLUG.length + 1) };
+    }
+    if (v === REINIGUNG_SLUG) return { page: "list", abschnitt: REINIGUNG_SLUG, kennung: "" };
+    if (v.indexOf(REINIGUNG_SLUG + "/") === 0) {
+      return { page: "detail", abschnitt: REINIGUNG_SLUG, kennung: v.slice(REINIGUNG_SLUG.length + 1) };
+    }
+    if (v === NIKAH_SLUG) return { page: "list", abschnitt: NIKAH_SLUG, kennung: "" };
+    if (v.indexOf(NIKAH_SLUG + "/") === 0) {
+      return { page: "detail", abschnitt: NIKAH_SLUG, kennung: v.slice(NIKAH_SLUG.length + 1) };
+    }
+    if (v === ZINAH_SLUG) return { page: "list", abschnitt: ZINAH_SLUG, kennung: "" };
+    if (v.indexOf(ZINAH_SLUG + "/") === 0) {
+      return { page: "detail", abschnitt: ZINAH_SLUG, kennung: v.slice(ZINAH_SLUG.length + 1) };
+    }
+    if (v === UMGANG_SLUG) return { page: "list", abschnitt: UMGANG_SLUG, kennung: "" };
+    if (v.indexOf(UMGANG_SLUG + "/") === 0) {
+      return { page: "detail", abschnitt: UMGANG_SLUG, kennung: v.slice(UMGANG_SLUG.length + 1) };
+    }
+    if (v === REISE_SLUG) return { page: "list", abschnitt: REISE_SLUG, kennung: "" };
+    if (v.indexOf(REISE_SLUG + "/") === 0) {
+      return { page: "detail", abschnitt: REISE_SLUG, kennung: v.slice(REISE_SLUG.length + 1) };
+    }
     return { page: "hub", abschnitt: "", kennung: "" };
   }
 
@@ -743,6 +927,12 @@
     if (abschnitt === MUSLIMAH_SLUG) return muslimahCache;
     if (abschnitt === NIFAS_SLUG) return nifasCache;
     if (abschnitt === DIENST_SLUG) return dienstCache;
+    if (abschnitt === IDDAH_SLUG) return iddahCache;
+    if (abschnitt === REINIGUNG_SLUG) return reinigungCache;
+    if (abschnitt === NIKAH_SLUG) return nikahCache;
+    if (abschnitt === ZINAH_SLUG) return zinahCache;
+    if (abschnitt === UMGANG_SLUG) return umgangCache;
+    if (abschnitt === REISE_SLUG) return reiseCache;
     return fiqhCache;
   }
 
@@ -765,6 +955,12 @@
     if (abschnitt === MUSLIMAH_SLUG) return muslimahThema;
     if (abschnitt === NIFAS_SLUG) return nifasThema;
     if (abschnitt === DIENST_SLUG) return dienstThema;
+    if (abschnitt === IDDAH_SLUG) return iddahThema;
+    if (abschnitt === REINIGUNG_SLUG) return reinigungThema;
+    if (abschnitt === NIKAH_SLUG) return nikahThema;
+    if (abschnitt === ZINAH_SLUG) return zinahThema;
+    if (abschnitt === UMGANG_SLUG) return umgangThema;
+    if (abschnitt === REISE_SLUG) return reiseThema;
     return fiqhThema;
   }
 
@@ -787,6 +983,12 @@
     else if (abschnitt === MUSLIMAH_SLUG) muslimahThema = id;
     else if (abschnitt === NIFAS_SLUG) nifasThema = id;
     else if (abschnitt === DIENST_SLUG) dienstThema = id;
+    else if (abschnitt === IDDAH_SLUG) iddahThema = id;
+    else if (abschnitt === REINIGUNG_SLUG) reinigungThema = id;
+    else if (abschnitt === NIKAH_SLUG) nikahThema = id;
+    else if (abschnitt === ZINAH_SLUG) zinahThema = id;
+    else if (abschnitt === UMGANG_SLUG) umgangThema = id;
+    else if (abschnitt === REISE_SLUG) reiseThema = id;
     else fiqhThema = id;
   }
 
@@ -809,6 +1011,12 @@
     if (abschnitt === MUSLIMAH_SLUG) return muslimahQ;
     if (abschnitt === NIFAS_SLUG) return nifasQ;
     if (abschnitt === DIENST_SLUG) return dienstQ;
+    if (abschnitt === IDDAH_SLUG) return iddahQ;
+    if (abschnitt === REINIGUNG_SLUG) return reinigungQ;
+    if (abschnitt === NIKAH_SLUG) return nikahQ;
+    if (abschnitt === ZINAH_SLUG) return zinahQ;
+    if (abschnitt === UMGANG_SLUG) return umgangQ;
+    if (abschnitt === REISE_SLUG) return reiseQ;
     return fiqhQ;
   }
 
@@ -831,6 +1039,12 @@
     else if (abschnitt === MUSLIMAH_SLUG) muslimahQ = v;
     else if (abschnitt === NIFAS_SLUG) nifasQ = v;
     else if (abschnitt === DIENST_SLUG) dienstQ = v;
+    else if (abschnitt === IDDAH_SLUG) iddahQ = v;
+    else if (abschnitt === REINIGUNG_SLUG) reinigungQ = v;
+    else if (abschnitt === NIKAH_SLUG) nikahQ = v;
+    else if (abschnitt === ZINAH_SLUG) zinahQ = v;
+    else if (abschnitt === UMGANG_SLUG) umgangQ = v;
+    else if (abschnitt === REISE_SLUG) reiseQ = v;
     else fiqhQ = v;
   }
 
@@ -860,7 +1074,13 @@
         abschnitt === KINDER_SLUG ||
         abschnitt === MUSLIMAH_SLUG ||
         abschnitt === NIFAS_SLUG ||
-        abschnitt === DIENST_SLUG
+        abschnitt === DIENST_SLUG ||
+        abschnitt === IDDAH_SLUG ||
+        abschnitt === REINIGUNG_SLUG ||
+        abschnitt === NIKAH_SLUG ||
+        abschnitt === ZINAH_SLUG ||
+        abschnitt === UMGANG_SLUG ||
+        abschnitt === REISE_SLUG
       ) {
         if (chip !== thema && e.thema !== thema) return false;
       } else if (chip !== thema) return false;
@@ -889,7 +1109,7 @@
   }
 
   function offeneAbschnitte() {
-    return ["fiqh", "sahabiyyat", "tabiiyyat", MUETTER_SLUG, EHE_SLUG, HIJAB_SLUG, WISSEN_SLUG, FAQ_SLUG, KURZ_SLUG, SALAF_SLUG, MOSCHEE_SLUG, HAJJ_SLUG, SADAQAH_SLUG, ADAB_SLUG, KINDER_SLUG, MUSLIMAH_SLUG, NIFAS_SLUG, DIENST_SLUG];
+    return ["fiqh", "sahabiyyat", "tabiiyyat", MUETTER_SLUG, EHE_SLUG, HIJAB_SLUG, WISSEN_SLUG, FAQ_SLUG, KURZ_SLUG, SALAF_SLUG, MOSCHEE_SLUG, HAJJ_SLUG, SADAQAH_SLUG, ADAB_SLUG, KINDER_SLUG, MUSLIMAH_SLUG, NIFAS_SLUG, DIENST_SLUG, IDDAH_SLUG, REINIGUNG_SLUG, NIKAH_SLUG, ZINAH_SLUG, UMGANG_SLUG, REISE_SLUG];
   }
 
   function countSichtbare(abschnitt) {
@@ -924,6 +1144,12 @@
     if (abschnitt === MUSLIMAH_SLUG) return "book";
     if (abschnitt === NIFAS_SLUG) return "home";
     if (abschnitt === DIENST_SLUG) return "lamp";
+    if (abschnitt === IDDAH_SLUG) return "ring";
+    if (abschnitt === REINIGUNG_SLUG) return "book";
+    if (abschnitt === NIKAH_SLUG) return "home";
+    if (abschnitt === ZINAH_SLUG) return "veil";
+    if (abschnitt === UMGANG_SLUG) return "people";
+    if (abschnitt === REISE_SLUG) return "ring";
     return "book";
   }
 
@@ -1015,7 +1241,13 @@
       { nr: "15", title: "Kinder & Erziehung", id: KINDER_SLUG, mark: "home", lede: "Geprüfte Grundlagen zu Verantwortung, Barmherzigkeit, Gerechtigkeit und Fürsorge." },
       { nr: "16", title: "Rechtschaffene Muslimah", id: MUSLIMAH_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu Dīn, Charakter, Verantwortung und Grenzen des Gehorsams." },
       { nr: "17", title: "Schwangerschaft, Stillzeit & Nifās", id: NIFAS_SLUG, mark: "home", lede: "Geprüfte Grundlagen zu Stillzeit, Nifās, Fasten-Erleichterung und sensiblen Fragen." },
-      { nr: "18", title: "Dienst am Guten, Pflege & Hilfeleistung", id: DIENST_SLUG, mark: "lamp", lede: "Geprüfte Berichte zu Versorgung, Pflege, Wassergeben, Dienst und Hilfeleistung." }
+      { nr: "18", title: "Dienst am Guten, Pflege & Hilfeleistung", id: DIENST_SLUG, mark: "lamp", lede: "Geprüfte Berichte zu Versorgung, Pflege, Wassergeben, Dienst und Hilfeleistung." },
+      { nr: "19", title: "ʿIddah, Scheidung & Trauerzeit", id: IDDAH_SLUG, mark: "ring", lede: "Geprüfte Grundlagen zu ʿIddah, Scheidung, Trauerzeit und Eheschließung nach Wartezeit." },
+      { nr: "20", title: "Reinigung, Gebet & Fasten", id: REINIGUNG_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu Reinigung, Ḥayḍ, Ghusl, Gebet und Fasten." },
+      { nr: "21", title: "Nikāḥ, Zustimmung & Mahr", id: NIKAH_SLUG, mark: "home", lede: "Geprüfte Grundlagen zu Eheschließung, Zustimmung, Mitgift und Verbot der Zwangsehe." },
+      { nr: "22", title: "Zīnah, Schmuck & Kleidung", id: ZINAH_SLUG, mark: "veil", lede: "Geprüfte Grundlagen zu Ḥidschāb, Kleidung, Schmuck, Duft und Tabarrudsch." },
+      { nr: "23", title: "Umgang mit Nicht-Maḥārim", id: UMGANG_SLUG, mark: "people", lede: "Geprüfte Grundlagen zu Khalwah, Blick, Rede und Abstand." },
+      { nr: "24", title: "Reise, Maḥram & Schutz", id: REISE_SLUG, mark: "ring", lede: "Geprüfte Grundlagen zu Reise, Maḥram und Schutz – ohne moderne Flug-Fatwas." }
     ];
   }
 
@@ -1170,6 +1402,18 @@
                                       ? NIFAS_BEREICH_LABEL
                                       : abschnitt === DIENST_SLUG
                                         ? DIENST_BEREICH_LABEL
+                                      : abschnitt === IDDAH_SLUG
+                                        ? IDDAH_BEREICH_LABEL
+                                      : abschnitt === REINIGUNG_SLUG
+                                        ? REINIGUNG_BEREICH_LABEL
+                                      : abschnitt === NIKAH_SLUG
+                                        ? NIKAH_BEREICH_LABEL
+                                      : abschnitt === ZINAH_SLUG
+                                        ? ZINAH_BEREICH_LABEL
+                                      : abschnitt === UMGANG_SLUG
+                                        ? UMGANG_BEREICH_LABEL
+                                      : abschnitt === REISE_SLUG
+                                        ? REISE_BEREICH_LABEL
                   : FIQH_BEREICH_LABEL;
     var bereich = labelMap[e.bereich] || e.bereich || "";
     var person = e.person || e.name;
@@ -1240,6 +1484,18 @@
                                       ? NIFAS_THEMEN
                                       : abschnitt === DIENST_SLUG
                                         ? DIENST_THEMEN
+                                      : abschnitt === IDDAH_SLUG
+                                        ? IDDAH_THEMEN
+                                      : abschnitt === REINIGUNG_SLUG
+                                        ? REINIGUNG_THEMEN
+                                      : abschnitt === NIKAH_SLUG
+                                        ? NIKAH_THEMEN
+                                      : abschnitt === ZINAH_SLUG
+                                        ? ZINAH_THEMEN
+                                      : abschnitt === UMGANG_SLUG
+                                        ? UMGANG_THEMEN
+                                      : abschnitt === REISE_SLUG
+                                        ? REISE_THEMEN
                   : FIQH_THEMEN;
     var q = currentQ(abschnitt);
     var thema = currentThema(abschnitt);
@@ -1264,7 +1520,13 @@
           abschnitt === KINDER_SLUG ||
           abschnitt === MUSLIMAH_SLUG ||
           abschnitt === NIFAS_SLUG ||
-          abschnitt === DIENST_SLUG
+          abschnitt === DIENST_SLUG ||
+          abschnitt === IDDAH_SLUG ||
+          abschnitt === REINIGUNG_SLUG ||
+          abschnitt === NIKAH_SLUG ||
+          abschnitt === ZINAH_SLUG ||
+          abschnitt === UMGANG_SLUG ||
+          abschnitt === REISE_SLUG
         ? '<p class="frauen-empty">Noch keine geprüften Inhalte vorhanden.</p>'
         : '<p class="frauen-empty">Keine sichtbare Aussage zu dieser Auswahl.</p>';
     var hint =
@@ -1288,6 +1550,18 @@
           ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Medizinische Fragen, Einzelfälle, Fasten-Details, Fidya und Sonderfälle bleiben verborgen, bis sie einzeln geprüft wurden.</p></div>'
           : abschnitt === DIENST_SLUG
           ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Fragen zu heutigen Pflegeberufen, Krankenhäusern, Rettungsdienst, Arbeit mit Männern, Vereinen, Unterricht, Krieg, Politik und öffentlicher Tätigkeit bleiben verborgen, bis sie einzeln geprüft wurden.</p></div>'
+          : abschnitt === IDDAH_SLUG
+          ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Detailfragen zu Wohnung, Reise, Schwangerschaft in der ʿIddah, Unterhalt und heutiger Scheidungspraxis bleiben verborgen, bis sie einzeln geprüft wurden.</p></div>'
+          : abschnitt === REINIGUNG_SLUG
+          ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Intime Details, Medikamente, Sonderfälle bei Istiḥāḍah und moderne Produktfragen bleiben verborgen, bis sie einzeln geprüft wurden.</p></div>'
+          : abschnitt === NIKAH_SLUG
+          ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Fragen zu Walī, Standesamt, Zeugen, Mutʿah und Vertragsdetails bleiben verborgen, bis sie einzeln geprüft wurden.</p></div>'
+          : abschnitt === ZINAH_SLUG
+          ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Niqāb, Make-up, Fotos, Haarersatz und moderne Schmuckfragen bleiben verborgen, bis sie einzeln geprüft wurden.</p></div>'
+          : abschnitt === UMGANG_SLUG
+          ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Chat, Arbeit, Taxi, Arztbesuche und moderne Alltagssituationen bleiben verborgen, bis sie einzeln geprüft wurden.</p></div>'
+          : abschnitt === REISE_SLUG
+          ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Flug allein, Zug, Hotel, Dienstreise und Notfälle bleiben verborgen, bis sie einzeln geprüft wurden.</p></div>'
           : abschnitt === KURZ_SLUG
           ? '<div class="frauen-hint"><p>Dieser Bereich enthält keine ausgeschmückten Geschichten. Sichtbar sind nur Kurzberichte mit geprüfter Quelle und Direktnachweis. Alles Unsichere bleibt verborgen.</p></div>'
           : abschnitt === FAQ_SLUG
@@ -1322,6 +1596,18 @@
         ? '<p class="lede">Geprüfte Grundlagen aus Qurʾān und Sunnah – ohne medizinische Ratschläge und ohne ungeprüfte Detail-Fatwas.</p>'
         : abschnitt === DIENST_SLUG
         ? '<p class="lede">Geprüfte Berichte aus authentischer Sunnah und später ergänzten Āthār – ohne moderne Berufsurteile.</p>'
+        : abschnitt === IDDAH_SLUG
+        ? '<p class="lede">Geprüfte Grundlagen aus Qurʾān und Sunnah zu ʿIddah, Scheidung und Trauerzeit – ohne moderne Gerichts-Fatwas.</p>'
+        : abschnitt === REINIGUNG_SLUG
+        ? '<p class="lede">Geprüfte Grundlagen aus authentischer Sunnah zu Reinigung, Gebet und Fasten – ohne intime Details.</p>'
+        : abschnitt === NIKAH_SLUG
+        ? '<p class="lede">Geprüfte Grundlagen aus authentischer Sunnah zu Zustimmung, Mitgift und Verbot der Zwangsehe.</p>'
+        : abschnitt === ZINAH_SLUG
+        ? '<p class="lede">Geprüfte Grundlagen aus Qurʾān und Sunnah zu Ḥidschāb, Kleidung, Schmuck und Sittsamkeit.</p>'
+        : abschnitt === UMGANG_SLUG
+        ? '<p class="lede">Geprüfte Grundlagen zu Abstand, Blick, Rede und Khalwah – ohne moderne Chat-Fatwas.</p>'
+        : abschnitt === REISE_SLUG
+        ? '<p class="lede">Geprüfte Grundlagen aus authentischer Sunnah zu Reise und Maḥram – ohne moderne Flug-Fatwas.</p>'
         : abschnitt === KURZ_SLUG
         ? '<p class="lede">Kurze belegte Ereignisse aus dem Leben rechtschaffener Frauen – mit Quelle und Direktnachweis.</p>'
         : abschnitt === FAQ_SLUG
@@ -1364,6 +1650,12 @@
     if (abschnitt === MUSLIMAH_SLUG) return "Rechtschaffene Muslimah";
     if (abschnitt === NIFAS_SLUG) return "Schwangerschaft, Stillzeit & Nifās";
     if (abschnitt === DIENST_SLUG) return "Dienst am Guten, Pflege & Hilfeleistung";
+    if (abschnitt === IDDAH_SLUG) return "ʿIddah, Scheidung & Trauerzeit";
+    if (abschnitt === REINIGUNG_SLUG) return "Reinigung, Gebet & Fasten";
+    if (abschnitt === NIKAH_SLUG) return "Nikāḥ, Zustimmung & Mahr";
+    if (abschnitt === ZINAH_SLUG) return "Zīnah, Schmuck & Kleidung";
+    if (abschnitt === UMGANG_SLUG) return "Umgang mit Nicht-Maḥārim";
+    if (abschnitt === REISE_SLUG) return "Reise, Maḥram & Schutz";
     if (abschnitt === KURZ_SLUG) return "Geprüfte Kurzberichte";
     if (abschnitt === FAQ_SLUG) return "Fragen & Antworten";
     if (abschnitt === WISSEN_SLUG) return "Wissen & Lernen";
@@ -1529,6 +1821,42 @@
         subtitle: "Geprüfte Berichte aus authentischer Sunnah und später ergänzten Āthār – ohne moderne Berufsurteile."
       };
     }
+    if (parsed.abschnitt === IDDAH_SLUG && parsed.page === "list") {
+      return {
+        title: "ʿIddah, Scheidung & Trauerzeit",
+        subtitle: "Geprüfte Grundlagen aus Qurʾān und Sunnah zu ʿIddah, Scheidung und Trauerzeit – ohne moderne Gerichts-Fatwas."
+      };
+    }
+    if (parsed.abschnitt === REINIGUNG_SLUG && parsed.page === "list") {
+      return {
+        title: "Reinigung, Gebet & Fasten",
+        subtitle: "Geprüfte Grundlagen aus authentischer Sunnah zu Reinigung, Gebet und Fasten – ohne intime Details."
+      };
+    }
+    if (parsed.abschnitt === NIKAH_SLUG && parsed.page === "list") {
+      return {
+        title: "Nikāḥ, Zustimmung & Mahr",
+        subtitle: "Geprüfte Grundlagen aus authentischer Sunnah zu Zustimmung, Mitgift und Verbot der Zwangsehe."
+      };
+    }
+    if (parsed.abschnitt === ZINAH_SLUG && parsed.page === "list") {
+      return {
+        title: "Zīnah, Schmuck & Kleidung",
+        subtitle: "Geprüfte Grundlagen aus Qurʾān und Sunnah zu Ḥidschāb, Kleidung, Schmuck und Sittsamkeit."
+      };
+    }
+    if (parsed.abschnitt === UMGANG_SLUG && parsed.page === "list") {
+      return {
+        title: "Umgang mit Nicht-Maḥārim",
+        subtitle: "Geprüfte Grundlagen zu Abstand, Blick, Rede und Khalwah – ohne moderne Chat-Fatwas."
+      };
+    }
+    if (parsed.abschnitt === REISE_SLUG && parsed.page === "list") {
+      return {
+        title: "Reise, Maḥram & Schutz",
+        subtitle: "Geprüfte Grundlagen aus authentischer Sunnah zu Reise und Maḥram – ohne moderne Flug-Fatwas."
+      };
+    }
     if (parsed.abschnitt === KURZ_SLUG && parsed.page === "list") {
       return {
         title: "Geprüfte Kurzberichte",
@@ -1604,6 +1932,18 @@
             ? "Schwangerschaft, Stillzeit & Nifās"
             : parsed.abschnitt === DIENST_SLUG
             ? "Dienst am Guten, Pflege & Hilfeleistung"
+            : parsed.abschnitt === IDDAH_SLUG
+            ? "ʿIddah, Scheidung & Trauerzeit"
+            : parsed.abschnitt === REINIGUNG_SLUG
+            ? "Reinigung, Gebet & Fasten"
+            : parsed.abschnitt === NIKAH_SLUG
+            ? "Nikāḥ, Zustimmung & Mahr"
+            : parsed.abschnitt === ZINAH_SLUG
+            ? "Zīnah, Schmuck & Kleidung"
+            : parsed.abschnitt === UMGANG_SLUG
+            ? "Umgang mit Nicht-Maḥārim"
+            : parsed.abschnitt === REISE_SLUG
+            ? "Reise, Maḥram & Schutz"
             : parsed.abschnitt === KURZ_SLUG
             ? "Geprüfte Kurzberichte"
             : parsed.abschnitt === FAQ_SLUG
@@ -1655,7 +1995,13 @@
       !kinderCache ||
       !muslimahCache ||
       !nifasCache ||
-      !dienstCache
+      !dienstCache ||
+      !iddahCache ||
+      !reinigungCache ||
+      !nikahCache ||
+      !zinahCache ||
+      !umgangCache ||
+      !reiseCache
     ) {
       load().then(refreshIfFrauen).catch(refreshIfFrauen);
       return '<p class="frauen-empty">Bereich wird geladen…</p>';
