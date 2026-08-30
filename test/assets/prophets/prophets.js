@@ -1,5 +1,5 @@
 /**
- * DAR AL TAWḤĪD — Propheten Wissensbibliothek (Live + Test)
+ * DĀR AL TAWḤĪD — Propheten Wissensbibliothek (Live + Test)
  * Claim-based profiles · master-detail by viewport width · no UA detection.
  */
 (function (global) {

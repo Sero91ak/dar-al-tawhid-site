@@ -1,5 +1,5 @@
 /**
- * DAR AL TAWḤĪD Bibliothek — Test- und Besucher-App
+ * DĀR AL TAWḤĪD Bibliothek — Test- und Besucher-App
  */
 (function (global) {
   "use strict";
@@ -666,7 +666,7 @@
     return `<section class="lib-page" data-library-root>
       <header class="lib-hero" aria-label="Bibliothekskopf">
         <div class="lib-hero-inner">
-          <h2>DAR AL TAWḤĪD Bibliothek</h2>
+          <h2>DĀR AL TAWḤĪD Bibliothek</h2>
           <p class="lib-hero-lead">Bücher, Abhandlungen und Themenhefte von Serhat Abu Malik</p>
           <p class="lib-hero-note is-short">Veröffentlichungen zu Tawḥīd, ʿAqīdah, Qurʾān und Sunnah.</p>
           <p class="lib-hero-note is-full">Ausführliche Veröffentlichungen zu Tawḥīd, ʿAqīdah, Qurʾān, Sunnah und dem Verständnis der Salaf.</p>
@@ -894,7 +894,7 @@
   }
 
   function sharePublication(pub) {
-    const text = `${pub.title}\nEine Veröffentlichung von DAR AL TAWḤĪD\nZusammengestellt und herausgegeben von Serhat Abu Malik\ndar-al-tawhid.de`;
+    const text = `${pub.title}\nEine Veröffentlichung von DĀR AL TAWḤĪD\nZusammengestellt und herausgegeben von Serhat Abu Malik\ndar-al-tawhid.de`;
     const url = `${global.location.origin}${LIB_BASE}/#bibliothek/${encodeURIComponent(pub.slug)}`;
     if (navigator.share) {
       return navigator.share({ title: pub.title, text, url }).catch(() => {});

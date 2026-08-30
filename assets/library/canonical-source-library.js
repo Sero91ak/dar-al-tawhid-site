@@ -1,4 +1,4 @@
-/* DAR AL TAWḤĪD – geprüfte Quellenbibliothek (Test-App) */
+/* DĀR AL TAWḤĪD – geprüfte Quellenbibliothek (Test-App) */
 (function attachCanonicalSourceLibrary(global) {
   "use strict";
 

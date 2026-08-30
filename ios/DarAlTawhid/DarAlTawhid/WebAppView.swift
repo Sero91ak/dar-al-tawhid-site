@@ -673,7 +673,7 @@ struct WebAppView: UIViewRepresentable {
         <body>
           <main>
             <section>
-              <h1>DAR AL TAWḤĪD</h1>
+              <h1>DĀR AL TAWḤĪD</h1>
               <p>Die App konnte gerade nicht geladen werden. Bitte pruefe deine Internetverbindung und oeffne die App erneut.</p>
               <button type="button" onclick="window.location.href='\(WebAppView.launchURL.absoluteString)'">Erneut laden</button>
             </section>

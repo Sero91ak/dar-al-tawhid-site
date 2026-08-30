@@ -1,5 +1,5 @@
 /**
- * DAR AL TAWḤID — Premium-Feed (vertikal, Tab „Feed“)
+ * DĀR AL TAWḤĪD — Premium-Feed (vertikal, Tab „Feed“)
  */
 (function (global) {
   'use strict';
@@ -130,11 +130,11 @@
   }
 
   function publisherLabel() {
-    return 'DAR AL TAWḤID';
+    return 'DĀR AL TAWḤĪD';
   }
 
   function logoImgHtml(extraClass) {
-    return '<img class="sf-logo-img' + (extraClass ? ' ' + extraClass : '') + '" src="' + APP_LOGO + '" alt="DAR AL TAWḤID" loading="lazy" decoding="async">';
+    return '<img class="sf-logo-img' + (extraClass ? ' ' + extraClass : '') + '" src="' + APP_LOGO + '" alt="DĀR AL TAWḤĪD" loading="lazy" decoding="async">';
   }
 
   function cardSubline(item) {
@@ -3132,7 +3132,7 @@
   async function shareOriginalFeedImage(opts) {
     var postUrl = opts && opts.postUrl;
     var postId = opts && opts.postId;
-    var title = (opts && opts.title) || 'DAR AL TAWḤID';
+    var title = (opts && opts.title) || 'DĀR AL TAWḤĪD';
     var urls = Array.isArray(opts && opts.imageUrls) && opts.imageUrls.length
       ? opts.imageUrls.slice()
       : feedShareImageCandidates(opts && opts.imageUrl, opts && opts.previewUrl);
@@ -3222,7 +3222,7 @@
         imageUrls: urls,
         postId: postId,
         postUrl: btn.getAttribute('data-post-url'),
-        title: btn.getAttribute('data-post-title') || 'DAR AL TAWḤID'
+        title: btn.getAttribute('data-post-title') || 'DĀR AL TAWḤĪD'
       }).then(function (shared) {
         if (shared) {
           global.setTimeout(function () { refreshFeedStatsSoon(feed.closest('.sf-app') ? feed : global.document.getElementById(MOUNT_ID)); }, 3000);
@@ -3369,7 +3369,7 @@
             '<div class="sf-brand">' +
               '<div class="sf-brand-mark" aria-hidden="true">' + logoImgHtml() + '</div>' +
               '<div class="sf-brand-text">' +
-                '<span class="sf-brand-kicker sf-brand-title">DAR AL TAWḤID</span>' +
+                '<span class="sf-brand-kicker sf-brand-title">DĀR AL TAWḤĪD</span>' +
               '</div>' +
             '</div>' +
             '<button type="button" class="sf-refresh" data-sf-refresh aria-label="Feed aktualisieren">↻</button>' +

@@ -1,5 +1,5 @@
 /**
- * DAR AL TAWḤĪD — Zakāt-Rechner Engine (clientseitig, transparent)
+ * DĀR AL TAWḤĪD — Zakāt-Rechner Engine (clientseitig, transparent)
  */
 (function (global) {
   "use strict";
@@ -693,7 +693,7 @@ html,body{margin:0;padding:0;background:#f3ecdf}
     const wm = `${origin}/watermark-circle.png`;
     const disclaimer = w.disclaimer || w.privacy || "";
     const visitorName = String(meta.visitorName || meta.userName || "").trim() || "—";
-    const createdBy = meta.createdBy || "DAR AL TAWHID Zakāt-Rechner";
+    const createdBy = meta.createdBy || "DĀR AL TAWḤĪD Zakāt-Rechner";
     const zakatDuePlain = formatPdfMoneyPlain(result.zakatDue || 0, currency);
     const zakatObligatory = Boolean(result.zakatObligatory);
     const checkJa = zakatObligatory ? "on" : "";
@@ -782,8 +782,8 @@ html,body{margin:0;padding:0;background:#f3ecdf}
         <div class="zakat-pdf-corner br">${corner}</div>
         <div class="zakat-pdf-wm"><img src="${escapeHtml(wm)}" alt=""></div>
         <header class="zakat-pdf-hero">
-          <img class="zakat-pdf-logo" src="${escapeHtml(logo)}" alt="DAR AL TAWHID">
-          <h1>DAR AL TAWHID</h1>
+          <img class="zakat-pdf-logo" src="${escapeHtml(logo)}" alt="DĀR AL TAWḤĪD">
+          <h1>DĀR AL TAWḤĪD</h1>
           <div class="zakat-pdf-subtitle">Zakāt-Rechner Bericht</div>
         </header>
         <div class="zakat-pdf-infobox">

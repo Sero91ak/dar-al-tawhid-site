@@ -1,4 +1,4 @@
-// DAR AL TAWḤĪD – Standortbasierte Gebetszeiten-Tags für OneSignal
+// DĀR AL TAWḤĪD – Standortbasierte Gebetszeiten-Tags für OneSignal
 // Diese Datei verändert kein Layout.
 // Sie speichert pro Installation Push-Status, Standort und App-Umgebung.
 
@@ -19,7 +19,7 @@
   }
 
   function currentAppName() {
-    return currentEnvironment() === "test" ? "Dar Test" : "DAR AL TAWHID";
+    return currentEnvironment() === "test" ? "Dar Test" : "DĀR AL TAWḤĪD";
   }
 
   function getInstallationId() {

@@ -1,5 +1,5 @@
 /**
- * DAR AL TAWḤĪD — Zakāt PDF-Export (iOS/Android: Share + Blob, kein about:blank)
+ * DĀR AL TAWḤĪD — Zakāt PDF-Export (iOS/Android: Share + Blob, kein about:blank)
  */
 (function (global) {
   "use strict";

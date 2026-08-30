@@ -35,7 +35,7 @@ struct PrayerWidgetView: View {
     var body: some View {
         let snap = entry.snapshot
         VStack(alignment: .leading, spacing: 6) {
-            Text("DAR AL TAWḤĪD")
+            Text("DĀR AL TAWḤĪD")
                 .font(.system(size: 9, weight: .bold))
                 .foregroundStyle(gold)
             Text(snap.nextPrayerName)
@@ -199,7 +199,7 @@ struct DailyWidget: Widget {
             DailyWidgetView(entry: entry)
         }
         .configurationDisplayName("Heute")
-        .description("Tagesempfehlung aus DAR AL TAWḤĪD.")
+        .description("Tagesempfehlung aus DĀR AL TAWḤĪD.")
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }

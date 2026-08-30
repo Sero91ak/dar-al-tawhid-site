@@ -1,5 +1,5 @@
 /**
- * DAR AL TAWḤĪD — Adaptive Layout Controller
+ * DĀR AL TAWḤĪD — Adaptive Layout Controller
  * Compact: Smartphone, Fold geschlossen, Tablet Hochformat → Einspalte
  * Expanded: Fold geöffnet, Tablet Querformat, große Breite → Zwei-Bereichs-Modus
  * Bottom-Nav bleibt unten — KEIN Left-Rail-Nav.

@@ -16,7 +16,7 @@ struct DarWidgetPalette {
 }
 
 enum DarWidgetTheme {
-    static let brandName = "DAR AL TAWḤĪD"
+    static let brandName = "DĀR AL TAWḤĪD"
 
     static func palette(for snap: DarWidgetSnapshot, look: DarWidgetLook = .eisgold) -> DarWidgetPalette {
         switch look {
