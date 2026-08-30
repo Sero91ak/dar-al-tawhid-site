@@ -87,6 +87,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "ios-daily-push-widget-deeplink-2026-08-30",
+      "approvedBy": "user-explicit-ios-push-widget-open-statement",
+      "reason": "Nutzer: iOS Push (Duʿāʾ/Heute) und Widgets sollen direkt zur Aussage/Vers/Duʿāʾ führen, nicht nur die App öffnen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "ios/DarAlTawhid/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "test-frauen-emojis-zurueck-karten-kompakt-v763-2026-08-29",
       "approvedBy": "user-explicit-test-frauen-hijab-emoji-karten-kompakt",
       "reason": "Nutzer: Emojis im Frauen-Hauptbereich zurück, nur unbedeckter Frauenkopf weg, 🧕 stattdessen. Labels Aussage/Quelle weg, kompakter. Nur Test-App.",

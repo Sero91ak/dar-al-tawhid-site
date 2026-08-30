@@ -15,7 +15,7 @@ struct DarTimelineProvider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<DarEntry>) -> Void) {
-        let snap = DarDailyContent.refresh(DarWidgetStore.load())
+        let snap = DarDailyContent.refresh(DarWidgetStore.load(), fetchLiveDaily: true)
         DarWidgetStore.save(snap)
         let entry = DarEntry(date: Date(), snapshot: snap)
         let next = Calendar.current.date(byAdding: .minute, value: 15, to: Date()) ?? Date().addingTimeInterval(900)
@@ -115,14 +115,14 @@ struct DailyWidgetView: View {
                 .foregroundStyle(cream)
                 .lineLimit(5)
             Spacer(minLength: 0)
-            Text("Tippen öffnet die App")
+            Text("Tippen öffnet den Beitrag")
                 .font(.system(size: 10))
                 .foregroundStyle(cream.opacity(0.5))
         }
         .padding(14)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .widgetBackground()
-        .widgetURL(DarDeepLink.Destination.home.url)
+        .widgetURL(DarDeepLink.Destination.hash(entry.snapshot.dailyOpenHash).url)
     }
 }
 
@@ -144,16 +144,19 @@ struct AyahDuaWidgetView: View {
                 .font(.system(size: 11, weight: .semibold))
                 .foregroundStyle(gold.opacity(0.85))
             if family != .systemSmall {
-                Text(entry.snapshot.duaTitle + " — " + entry.snapshot.duaText)
-                    .font(.system(size: 12))
-                    .foregroundStyle(cream.opacity(0.8))
-                    .lineLimit(3)
+                Link(destination: DarDeepLink.Destination.hash(entry.snapshot.duaOpenHash).url) {
+                    Text(entry.snapshot.duaTitle + " — " + entry.snapshot.duaText)
+                        .font(.system(size: 12))
+                        .foregroundStyle(cream.opacity(0.8))
+                        .lineLimit(3)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
             }
         }
         .padding(14)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .widgetBackground()
-        .widgetURL(DarDeepLink.Destination.quran.url)
+        .widgetURL(DarDeepLink.Destination.hash(entry.snapshot.ayahOpenHash).url)
     }
 }
 

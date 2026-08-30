@@ -11,6 +11,10 @@ struct DarAlTawhidApp: App {
         UIWindow.appearance().backgroundColor = .black
         let snap = DarDailyContent.refresh(DarWidgetStore.load())
         DarWidgetStore.save(snap)
+        Task.detached {
+            let live = DarDailyContent.refresh(DarWidgetStore.load(), fetchLiveDaily: true)
+            DarWidgetStore.save(live)
+        }
     }
 
     var body: some Scene {

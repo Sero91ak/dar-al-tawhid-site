@@ -512,7 +512,7 @@ struct TodayContentView: View {
     var body: some View {
         let p = DarWidgetTheme.palette(for: entry.snapshot, look: entry.look)
         let snap = entry.snapshot
-        WidgetChrome(palette: p, dest: .home) {
+        WidgetChrome(palette: p, dest: .hash(snap.dailyOpenHash)) {
             VStack(alignment: .leading, spacing: 7) {
                 BrandLine(palette: p, title: "Heute")
                 Text(snap.postTitle.isEmpty ? "Tagesbeitrag" : snap.postTitle)
@@ -543,7 +543,7 @@ struct AyahContentView: View {
     var body: some View {
         let p = DarWidgetTheme.palette(for: entry.snapshot, look: entry.look)
         let snap = entry.snapshot
-        WidgetChrome(palette: p, dest: .quran) {
+        WidgetChrome(palette: p, dest: .hash(snap.ayahOpenHash)) {
             VStack(alignment: .leading, spacing: 7) {
                 BrandLine(palette: p, title: "Āyah")
                 Text(snap.ayahGerman)
@@ -573,7 +573,7 @@ struct DuaContentView: View {
     var body: some View {
         let p = DarWidgetTheme.palette(for: entry.snapshot, look: entry.look)
         let snap = entry.snapshot
-        WidgetChrome(palette: p, dest: .duas) {
+        WidgetChrome(palette: p, dest: .hash(snap.duaOpenHash)) {
             VStack(alignment: .leading, spacing: 7) {
                 BrandLine(palette: p, title: "Duʿāʾ")
                 if family != .systemSmall {

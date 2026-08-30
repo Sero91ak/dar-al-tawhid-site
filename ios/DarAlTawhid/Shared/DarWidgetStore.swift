@@ -17,16 +17,20 @@ enum DarWidgetStore {
         if let data = try? JSONEncoder().encode(snapshot) {
             defaults.set(data, forKey: DarWidgetKeys.snapshot)
         }
-        // Widget extension is not embedded in the TestFlight app; skip timeline reloads.
     }
 
     static func setPendingDestination(_ dest: DarDeepLink.Destination) {
-        defaults.set(dest.rawValue, forKey: DarWidgetKeys.pendingDestination)
+        defaults.set(dest.webHash, forKey: DarWidgetKeys.pendingDestination)
+    }
+
+    static func peekPendingDestination() -> DarDeepLink.Destination? {
+        guard let raw = defaults.string(forKey: DarWidgetKeys.pendingDestination), !raw.isEmpty else { return nil }
+        return .hash(raw)
     }
 
     static func consumePendingDestination() -> DarDeepLink.Destination? {
-        guard let raw = defaults.string(forKey: DarWidgetKeys.pendingDestination) else { return nil }
+        let dest = peekPendingDestination()
         defaults.removeObject(forKey: DarWidgetKeys.pendingDestination)
-        return DarDeepLink.Destination(rawValue: raw)
+        return dest
     }
 }

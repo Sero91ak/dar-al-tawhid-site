@@ -81,14 +81,16 @@ struct WebAppView: UIViewRepresentable {
     private static let environment: AppEnvironment = .live
     private static let stagingURL = URL(string: "https://dar-al-tawhid.de/test/?env=staging&source=ios-testflight#home")!
     private static let liveURL = URL(string: "https://dar-al-tawhid.de/#home")!
-    private static let launchURL: URL = {
+    private static func pageURL(hash: String) -> URL {
+        let normalized = hash.hasPrefix("#") ? hash : "#\(hash)"
         switch environment {
         case .staging:
-            return stagingURL
+            return URL(string: "https://dar-al-tawhid.de/test/?env=staging&source=ios-testflight\(normalized)") ?? stagingURL
         case .live:
-            return liveURL
+            return URL(string: "https://dar-al-tawhid.de/\(normalized)") ?? liveURL
         }
-    }()
+    }
+    private static var launchURL: URL { pageURL(hash: "#home") }
     private static let allowedHosts: Set<String> = [
         "dar-al-tawhid.de",
         "www.dar-al-tawhid.de"
@@ -611,7 +613,7 @@ struct WebAppView: UIViewRepresentable {
             containerView: containerView,
             tabBar: tabBar
         )
-        webView.load(URLRequest(url: Self.launchURL))
+        webView.load(URLRequest(url: Self.pageURL(hash: (destination ?? DarWidgetStore.peekPendingDestination())?.webHash ?? "#home")))
         return containerView
     }
 
