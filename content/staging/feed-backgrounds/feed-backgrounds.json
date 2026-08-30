@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T11:57:37.394Z",
-  "cacheVersion": 99,
+  "updatedAt": "2026-08-30T12:09:43.814Z",
+  "cacheVersion": 100,
   "settings": {
     "autoDownloadEnabled": true,
     "strictIslamicMode": true,
@@ -33,10 +33,10 @@
     ]
   },
   "syncState": {
-    "lastSyncAt": "2026-08-29T11:57:37.253Z",
-    "lastSyncStatus": "ok",
-    "lastSyncError": "",
-    "nextSyncAt": "2026-08-30T11:57:37.394Z",
+    "lastSyncAt": "2026-08-30T12:09:43.687Z",
+    "lastSyncStatus": "error",
+    "lastSyncError": "API-Keys fehlen: PEXELS_API_KEY, UNSPLASH_ACCESS_KEY, PIXABAY_API_KEY",
+    "nextSyncAt": "2026-08-31T12:09:43.814Z",
     "dailyDownloadDate": "2026-08-29",
     "dailyDownloadCount": 0,
     "lastRunDownloads": 20,
