@@ -8,7 +8,7 @@ export class PrayerStatusStore {
     const url = new URL(request.url);
     const raw = url.pathname.replace(/^\/+|\/+$/g, "") || "prayer";
     const key = raw === "latest" ? "prayer" : raw;
-    if (!["prayer", "jummah", "daily"].includes(key)) {
+    if (!["prayer", "jummah", "daily", "zakat"].includes(key)) {
       return Response.json({ ok: false, error: "Unbekannter Status-Schlüssel" }, { status: 400 });
     }
 

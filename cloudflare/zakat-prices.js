@@ -3,6 +3,7 @@
  * API-Keys nur in Worker-Secrets, niemals im Frontend.
  */
 import { readZakatConfig, saveZakatPrices } from "./zakat-admin.js";
+import { writeNamedStatusToStore, readNamedStatusFromStore } from "./prayer-status-store.js";
 
 export const TROY_OZ_TO_GRAM = 31.1034768;
 export const NISAB_GOLD_GRAMS = 85;
@@ -119,6 +120,10 @@ function emptyCache() {
 }
 
 export async function readPriceCache(env, githubGet, base64ToUtf8) {
+  const stored = await readNamedStatusFromStore(env, "zakat");
+  if (stored?.ok && stored.status && typeof stored.status === "object") {
+    return { cache: stored.status, sha: "", path: "durable-object" };
+  }
   const owner = env.GITHUB_OWNER || "Sero91ak";
   const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
   const branch = env.GITHUB_BRANCH || "main";
@@ -132,18 +137,13 @@ export async function readPriceCache(env, githubGet, base64ToUtf8) {
   }
 }
 
-async function writePriceCache(env, cache, sha, deps) {
-  const owner = env.GITHUB_OWNER || "Sero91ak";
-  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
-  const branch = env.GITHUB_BRANCH || "main";
-  const path = String(env.ZAKAT_PRICES_CACHE_PATH || DEFAULT_CACHE_PATH).replace(/^\/+/, "");
-  const content = `${JSON.stringify(cache, null, 2)}\n`;
-  if (deps.githubCommitBatch) {
-    const batch = await deps.githubCommitBatch(env, owner, repo, branch, [{ path, content }], "Zakāt-Preiscache aktualisiert");
-    return batch.commitSha || "";
+async function writePriceCache(env, cache, _sha, _deps) {
+  const payload = { ...cache, updatedAt: cache.updatedAt || nowIso() };
+  const result = await writeNamedStatusToStore(env, "zakat", payload);
+  if (!result?.saved) {
+    throw new Error(result?.reason || "Zakāt-Preiscache konnte nicht gespeichert werden");
   }
-  const saved = await deps.githubPut(env, owner, repo, path, content, "Zakāt-Preiscache", branch, sha || undefined);
-  return saved.commit?.sha || "";
+  return result.updatedAt || payload.updatedAt;
 }
 
 function appendFetchLog(cache, entry) {
@@ -503,7 +503,6 @@ export async function fetchAndStoreZakatPrices(env, deps, options = {}) {
   });
 
   await writePriceCache(env, cache, sha, deps);
-  await syncConfigPrices(env, gold.pricePerGram, silver.pricePerGram, { source: sourceLabel, provider: providerInfo.id }, deps);
 
   return {
     ok: true,
