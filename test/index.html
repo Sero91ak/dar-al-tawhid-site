@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v765";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v766";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -38,7 +38,7 @@ html.dar-ios-native-app #bottomNav,html.dar-ios-native-app #bottomNav.bottom-nav
 #dar-soft-boot{position:fixed;inset:0;top:0;left:0;right:0;bottom:0;width:100%;width:100vw;width:100dvw;height:100%;height:100lvh;min-height:100%;min-height:100lvh;min-height:calc(100dvh + env(safe-area-inset-bottom,0px) + 64px);margin:0;box-sizing:border-box;z-index:2147483646;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:max(24px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px)) 24px calc(16vh + env(safe-area-inset-bottom,0px)) 24px;background-color:var(--dar-boot-fill,var(--theme-page-bg,var(--outer-bg-flat,var(--bg,#080806))))!important;background-image:radial-gradient(120% 80% at 50% 42%,rgba(201,168,106,.12),transparent 58%)!important;color:var(--cream,#f4ead2);font-family:Manrope,Inter,system-ui,sans-serif;transition:opacity .28s ease,visibility .28s ease;overscroll-behavior:none;transform:translateZ(0)}
 #dar-soft-boot.is-done{opacity:0;visibility:hidden;pointer-events:none}
 #dar-soft-boot .dar-soft-boot__mark{width:min(148px,38vw);height:min(148px,38vw);border-radius:50%;object-fit:cover;box-shadow:0 14px 36px rgba(0,0,0,.38);border:1px solid rgba(201,168,106,.45)}
-#dar-soft-boot .dar-soft-boot__title{margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(32px,7.8vw,42px);font-weight:800;letter-spacing:.05em;color:var(--gold2,#d4b56a);text-align:center;-webkit-text-stroke:.4px currentColor}
+#dar-soft-boot .dar-soft-boot__title{margin:0;font-family:"Cormorant Garamond",Cinzel,"Times New Roman",serif;font-size:clamp(32px,7.8vw,42px);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold2,#d4b56a);text-align:center}
 #dar-soft-boot .dar-soft-boot__sub{margin:0;font-size:clamp(13px,3.6vw,16px);font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,234,210,.72);text-align:center}
 #dar-soft-boot .dar-soft-boot__track{width:min(300px,78vw);height:6px;border-radius:999px;margin-top:8px;background:linear-gradient(90deg,rgba(201,168,106,.22),rgba(201,168,106,.08));box-shadow:none;overflow:hidden}
 #dar-soft-boot .dar-soft-boot__bar{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg,#c4a66a 0%,#efd78e 46%,rgba(239,215,142,.82) 100%);box-shadow:0 0 5px rgba(201,168,106,.22);transition:width .08s linear}
@@ -11615,10 +11615,11 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 }
 body.is-home-route .top-shell.theme-hero-shell .brand-main h1.brand-title-refined,
 .top-shell.theme-hero-shell .brand-main h1.brand-title-refined,
-.brand-main h1.brand-title-refined{
-  font-family:var(--serif)!important;
-  font-weight:612!important;
-  letter-spacing:.11em!important;
+.brand-main h1.brand-title-refined,
+.brand-title{
+  font-family:"Cormorant Garamond",Cinzel,"Times New Roman",serif!important;
+  font-weight:700!important;
+  letter-spacing:.06em!important;
   text-shadow:none!important;
 }
 .section-head h3,
@@ -11717,11 +11718,11 @@ body.is-home-route .view-head h2.home-start-title,
 .brand-main h1.brand-title-refined{
   margin:0!important;
   padding:0!important;
-  font-family:var(--serif)!important;
-  font-weight:612!important;
+  font-family:"Cormorant Garamond",Cinzel,"Times New Roman",serif!important;
+  font-weight:700!important;
   font-size:clamp(24px,5.2vw,40px)!important;
   line-height:1.14!important;
-  letter-spacing:.11em!important;
+  letter-spacing:.06em!important;
   word-spacing:.04em!important;
   text-transform:uppercase;
   color:rgba(232,212,160,.92)!important;
@@ -11747,14 +11748,14 @@ body.is-home-route .view-head h2.home-start-title,
 @media(max-width:700px){
   .brand-main h1.brand-title-refined{
     font-size:clamp(22px,5vw,32px)!important;
-    letter-spacing:.09em!important;
+    letter-spacing:.06em!important;
   }
   .brand-main h1.brand-title-refined::after{width:min(100%,140px);margin-top:7px}
 }
 @media(max-width:430px){
   .brand-main h1.brand-title-refined{
     font-size:clamp(20px,4.8vw,28px)!important;
-    letter-spacing:.08em!important;
+    letter-spacing:.06em!important;
   }
 }
 </style>
@@ -11986,6 +11987,11 @@ html[data-theme="bordeaux"] .home-hijri-dayframe{
 /* Helle Erscheinungsbilder: Titel schwarz lesbar, goldene leuchtende Linie */
 html[data-theme="light"] .brand-main h1.brand-title-refined,
 html[data-theme="soft"] .brand-main h1.brand-title-refined,
+html[data-theme="light"] .brand-title,
+html[data-theme="soft"] .brand-title{
+  color:#071225!important;
+  -webkit-text-fill-color:#071225!important;
+}
 html[data-theme="eisgold"] .brand-main h1.brand-title-refined{
   color:#1a1410!important;
   -webkit-text-fill-color:#1a1410!important;
@@ -12005,6 +12011,15 @@ html[data-theme="eisgold"] .brand-main h1.brand-title-refined::after{
     width:min(100%,160px)!important;
     margin-top:8px!important;
   }
+}
+</style>
+<style id="brand-title-canonical-v739">
+/* Feste App-Vorlage Nr. 1: DĀR AL TAWḤĪD — Ā/Ḥ/Ī als Unicode, Edel über Schrift */
+.brand-title{
+  font-family:"Cormorant Garamond",Cinzel,"Times New Roman",serif;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
 }
 </style>
 <style id="theme-readability-v336">
@@ -20173,7 +20188,7 @@ html body .post-reader-main .post-source-oval.post-source-module .post-after-lin
           <div class="brand-kicker-row">
             <small>Beiträge nach Qurʾān, Sunnah & Āthār</small>
           </div>
-          <div class="brand-main"><img class="logo" src="/watermark-my-logo-full.png" alt="DĀR AL TAWḤĪD Logo"><h1 class="brand-title-refined">DĀR AL TAWḤĪD</h1></div>
+          <div class="brand-main"><img class="logo" src="/watermark-my-logo-full.png" alt="DĀR AL TAWḤĪD Logo"><h1 class="brand-title brand-title-refined">DĀR AL TAWḤĪD</h1></div>
         </div>
       </div>
       <div id="headerPrayerStatus" class="header-prayer-hub" data-nav="prayer" role="button" tabindex="0" aria-label="Gebetszeiten öffnen"></div>
@@ -26312,7 +26327,8 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v765";
+const BRAND_NAME="DĀR AL TAWḤĪD";
+const APP_BUILD_ID="app-shell-v766";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}

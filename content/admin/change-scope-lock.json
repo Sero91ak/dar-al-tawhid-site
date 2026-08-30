@@ -87,6 +87,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "brand-title-template-1-2026-08-30",
+      "approvedBy": "user-explicit-brand-title-template-unicode-css",
+      "reason": "Nutzer: Nummer 1 als feste App-Vorlage. Exakt DĀR AL TAWḤĪD (Ā Ḥ Ī). Edel über Cormorant/CSS, nicht über Sonderbuchstaben. Besucher- und Test-App.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/app-soft-boot.js",
+        "test/assets/app-soft-boot.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "visitor-test-dar-title-macron-everywhere-2026-08-30",
       "approvedBy": "user-explicit-visitor-and-test-app-dar-title-everywhere",
       "reason": "Nutzer: Besucher- und Test-App sollen den runden Ladebalken und den Titel DĀR AL TAWḤĪD bekommen; Schreibweise überall in der App.",
