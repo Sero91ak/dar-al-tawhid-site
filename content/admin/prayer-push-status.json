@@ -1,20 +1,20 @@
 {
-  "updatedAt": "2026-08-30T11:15:54.366Z",
+  "updatedAt": "2026-08-30T11:20:53.084Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-30T11:15:54.366Z",
+  "lastCronRun": "2026-08-30T11:20:53.084Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
-    "mode": "advance",
-    "sendAfter": "2026-08-30T11:17:00.000Z",
+    "mode": "entry",
+    "sendAfter": "2026-08-30T11:32:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-30T11:00:43.399Z",
-  "windowEnd": "2026-08-31T13:15:43.399Z",
+  "windowStart": "2026-08-30T11:05:43.330Z",
+  "windowEnd": "2026-08-31T13:20:43.330Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 11,
@@ -28,12 +28,12 @@
   "usersWithLocation": 11,
   "usersWithActivePush": 11,
   "locationGroups": 4,
-  "scheduled": 50,
-  "recipients": 134,
+  "scheduled": 47,
+  "recipients": 124,
   "invalid": 0,
   "invalidDisabled": 0,
-  "skippedPast": 52,
-  "skippedAlreadyQueued": 0,
+  "skippedPast": 55,
+  "skippedAlreadyQueued": 3,
   "skippedWindow": 58,
   "advanceCatchups": 0,
   "entryCatchups": 0,
@@ -62,8 +62,8 @@
         "name": "Dhuhr",
         "time": "13:32",
         "advance": {
-          "status": "geplant",
-          "recipients": 10
+          "status": "übersprungen",
+          "recipients": 0
         },
         "entry": {
           "status": "geplant",
@@ -138,14 +138,14 @@
       "name": "Dhuhr",
       "time": "13:32",
       "advance": {
-        "status": "geplant",
-        "recipients": 10
+        "status": "übersprungen",
+        "recipients": 0
       },
       "entry": {
         "status": "geplant",
         "recipients": 10
       },
-      "answer": "Dhuhr 13:32: Vorab und Gebetszeit geplant."
+      "answer": "Dhuhr 13:32: Gebetszeit geplant."
     },
     "asr": {
       "name": "ʿAṣr",
@@ -213,16 +213,6 @@
       "mode": "entry",
       "time": "13:32",
       "sendAfter": "2026-08-30T11:32:00.000Z",
-      "recipients": 8,
-      "timeZone": "Europe/Berlin",
-      "invalid": 0
-    },
-    {
-      "prayer": "Dhuhr",
-      "key": "dhuhr",
-      "mode": "advance",
-      "time": "13:32",
-      "sendAfter": "2026-08-30T11:17:00.000Z",
       "recipients": 8,
       "timeZone": "Europe/Berlin",
       "invalid": 0
@@ -333,16 +323,6 @@
       "mode": "entry",
       "time": "13:32",
       "sendAfter": "2026-08-30T11:32:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin",
-      "invalid": 0
-    },
-    {
-      "prayer": "Dhuhr",
-      "key": "dhuhr",
-      "mode": "advance",
-      "time": "13:32",
-      "sendAfter": "2026-08-30T11:17:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
       "invalid": 0
@@ -598,16 +578,6 @@
       "invalid": 0
     },
     {
-      "prayer": "Dhuhr",
-      "key": "dhuhr",
-      "mode": "advance",
-      "time": "13:32",
-      "sendAfter": "2026-08-30T11:17:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin",
-      "invalid": 0
-    },
-    {
       "prayer": "ʿAṣr",
       "key": "asr",
       "mode": "entry",
@@ -794,6 +764,14 @@
       "timeZone": "Europe/Berlin"
     },
     {
+      "key": "dhuhr",
+      "mode": "advance",
+      "sendAfter": "2026-08-30T11:17:00.000Z",
+      "time": "13:32",
+      "timeZone": "Europe/Berlin",
+      "reason": "already-queued"
+    },
+    {
       "key": "fajr",
       "mode": "entry",
       "sendAfter": "2026-08-29T03:23:00.000Z",
@@ -876,6 +854,14 @@
       "sendAfter": "2026-08-30T03:10:00.000Z",
       "time": "05:25",
       "timeZone": "Europe/Berlin"
+    },
+    {
+      "key": "dhuhr",
+      "mode": "advance",
+      "sendAfter": "2026-08-30T11:17:00.000Z",
+      "time": "13:32",
+      "timeZone": "Europe/Berlin",
+      "reason": "already-queued"
     },
     {
       "key": "fajr",
@@ -974,20 +960,6 @@
       "sendAfter": "2026-08-30T02:27:00.000Z",
       "time": "04:42",
       "timeZone": "Europe/Berlin"
-    },
-    {
-      "key": "isha",
-      "mode": "entry",
-      "sendAfter": "2026-08-30T03:41:00.000Z",
-      "time": "05:41",
-      "timeZone": "Europe/Berlin"
-    },
-    {
-      "key": "isha",
-      "mode": "advance",
-      "sendAfter": "2026-08-30T03:26:00.000Z",
-      "time": "05:41",
-      "timeZone": "Europe/Berlin"
     }
   ],
   "oneSignalResponses": [
@@ -997,13 +969,6 @@
       "recipients": 8,
       "invalid": 0,
       "response": "{\"id\":\"17c357af-f925-4c98-bce3-5097ca1ada39\",\"external_id\":\"c4d5331a-de0b-4411-a615-a84af6a8aa20\"}"
-    },
-    {
-      "prayer": "dhuhr",
-      "mode": "advance",
-      "recipients": 8,
-      "invalid": 0,
-      "response": "{\"id\":\"5a0c1de1-b09c-4536-9297-499ae6a253b9\",\"external_id\":\"ed0b62bd-2bc7-4e6c-85eb-3cffc01fc2bf\"}"
     },
     {
       "prayer": "asr",
@@ -1083,13 +1048,6 @@
       "response": "{\"id\":\"fbfd2f61-b578-470c-bcf0-0c4167f1f54a\",\"external_id\":\"6afb29f0-741f-4f57-9f59-5551e8513485\"}"
     },
     {
-      "prayer": "dhuhr",
-      "mode": "advance",
-      "recipients": 1,
-      "invalid": 0,
-      "response": "{\"id\":\"8e6e7cc4-5111-4ec4-a8c6-6b80dfbe0431\",\"external_id\":\"eff4312b-b541-40ac-abc1-2ea725717eb0\"}"
-    },
-    {
       "prayer": "asr",
       "mode": "entry",
       "recipients": 1,
@@ -1130,6 +1088,20 @@
       "recipients": 1,
       "invalid": 0,
       "response": "{\"id\":\"5e956380-854c-4840-a459-0a60cb99ac2c\",\"external_id\":\"ba4877e2-e277-4e6e-b9a8-5fcebccce608\"}"
+    },
+    {
+      "prayer": "fajr",
+      "mode": "entry",
+      "recipients": 1,
+      "invalid": 0,
+      "response": "{\"id\":\"9895695f-85af-4425-bae1-616f947b65fd\",\"external_id\":\"ba2555dd-5c3d-4eb2-a0da-ee4d164a8af4\"}"
+    },
+    {
+      "prayer": "fajr",
+      "mode": "advance",
+      "recipients": 1,
+      "invalid": 0,
+      "response": "{\"id\":\"5ccb9ca8-2dbf-47e6-8dc4-7e691d4b3fc3\",\"external_id\":\"5f3daf86-df12-4c17-affe-0c3c525f3797\"}"
     }
   ],
   "userRegistry": [
