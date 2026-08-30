@@ -16,5 +16,23 @@
     "title": "Duʿāʾ von Mūsā um Erleichterung und klare Rede",
     "snippet": "Mein Herr, weite mir meine Brust, erleichtere mir meine Angelegenheit und löse den Knoten von meiner Zunge, damit sie meine Worte verstehen.",
     "category": "Erleichterung & Rede"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 464,
+      "remaining": 443
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 77,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
