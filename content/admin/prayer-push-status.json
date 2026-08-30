@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-30T09:55:53.720Z",
+  "updatedAt": "2026-08-30T10:00:54.601Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-30T09:55:53.720Z",
+  "lastCronRun": "2026-08-30T10:00:54.601Z",
   "nextPlannedPush": {
     "prayer": "Dhuhr",
     "key": "dhuhr",
@@ -13,8 +13,8 @@
     "sendAfter": "2026-08-30T11:17:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-30T09:40:43.346Z",
-  "windowEnd": "2026-08-31T11:55:43.346Z",
+  "windowStart": "2026-08-30T09:45:43.377Z",
+  "windowEnd": "2026-08-31T12:00:43.377Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 11,
@@ -1114,28 +1114,28 @@
   ],
   "userRegistry": [
     {
+      "subscriptionId": "a201efd5-20de-4ba4-a60b-3ddf0a7556c1",
+      "timezone": "Europe/Berlin",
+      "city": "Rheinbach",
+      "lastSyncedAt": "2026-08-30T07:00:44.298+00:00"
+    },
+    {
       "subscriptionId": "b729a7b9-32dd-473b-a474-2c5b22b1a346",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-30T07:00:44.654+00:00"
+      "lastSyncedAt": "2026-08-30T10:00:43.622+00:00"
     },
     {
       "subscriptionId": "3e57b75c-3491-46e0-91a3-5c4c349056c8",
       "timezone": "Europe/Berlin",
       "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-30T07:00:45.013+00:00"
+      "lastSyncedAt": "2026-08-30T10:00:44.056+00:00"
     },
     {
       "subscriptionId": "91d254cd-2590-4ad6-88b0-3932888ed472",
       "timezone": "Europe/Berlin",
       "city": "Meckenheim",
-      "lastSyncedAt": "2026-08-30T07:48:38+00:00"
-    },
-    {
-      "subscriptionId": "a201efd5-20de-4ba4-a60b-3ddf0a7556c1",
-      "timezone": "Europe/Berlin",
-      "city": "Rheinbach",
-      "lastSyncedAt": "2026-08-30T07:00:44.298+00:00"
+      "lastSyncedAt": "2026-08-30T10:00:44.425+00:00"
     },
     {
       "subscriptionId": "f5133294-c6c9-4aca-9511-a43d00374c62",
