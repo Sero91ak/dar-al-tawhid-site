@@ -1031,6 +1031,8 @@
   var bidahqThema = "alle";
   var hubQ = "";
   var hubThema = "alle";
+  var pickSprecher = "";
+  var pickBuch = "";
   var filterOpen = true;
   var currentAbschnitt = "hub";
 
@@ -1671,6 +1673,14 @@
         if (chip !== thema && e.thema !== thema && extraThemen.indexOf(thema) === -1) return false;
       } else if (chip !== thema) return false;
     }
+    if (pickSprecher) {
+      var sp = String(e.person || e.name || e.ueberliefertVon || e.sprecher || "").trim();
+      if (sp !== pickSprecher) return false;
+    }
+    if (pickBuch) {
+      var src = String(e.quellenanzeige || "").replace(/^Quelle:\s*/i, "");
+      if (src.toLowerCase().indexOf(pickBuch.toLowerCase()) === -1) return false;
+    }
     if (!q) return true;
     var hay = [
       e.name,
@@ -1790,6 +1800,7 @@
       .join("");
     return (
       '<section class="search-pro-panel frauen-search-pro">' +
+      directPickPanel(isHub ? "" : abschnitt) +
       '<div class="search-line">' +
       '<div class="search-input-shell">' +
       '<span class="search-input-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span>' +
@@ -1898,30 +1909,139 @@
   }
 
   function sucheUeberall(q) {
-    if (!q) return [];
     var out = [];
+    var needle = String(q || "").toLowerCase();
+    if (!needle && !pickSprecher && !pickBuch) return [];
     offeneAbschnitte().forEach(function (ab) {
       sichtbare((cacheFor(ab) || {}).eintraege).forEach(function (e) {
-        var hay = [
-          e.name,
-          e.person,
-          titelVon(e),
-          vorschauVon(e),
-          e.vollstaendigeAussage,
-          e.inhalt,
-          lehreVon(e),
-          e.quellenanzeige,
-          e.bereich,
-          e.thema,
-          hatDirektnachweis(e) ? "direktnachweis" : "",
-          (e.schlagwoerter || []).join(" ")
-        ]
-          .join(" ")
-          .toLowerCase();
-        if (hay.indexOf(q) !== -1) out.push({ e: e, abschnitt: ab });
+        if (pickSprecher) {
+          var sp = String(e.person || e.name || e.ueberliefertVon || e.sprecher || "").trim();
+          if (sp !== pickSprecher) return;
+        }
+        if (pickBuch) {
+          var src = String(e.quellenanzeige || "").replace(/^Quelle:\s*/i, "");
+          if (src.toLowerCase().indexOf(pickBuch.toLowerCase()) === -1) return;
+        }
+        if (needle) {
+          var hay = [
+            e.name,
+            e.person,
+            titelVon(e),
+            vorschauVon(e),
+            e.vollstaendigeAussage,
+            e.inhalt,
+            lehreVon(e),
+            e.quellenanzeige,
+            e.bereich,
+            e.thema,
+            hatDirektnachweis(e) ? "direktnachweis" : "",
+            (e.schlagwoerter || []).join(" ")
+          ]
+            .join(" ")
+            .toLowerCase();
+          if (hay.indexOf(needle) === -1) return;
+        }
+        out.push({ e: e, abschnitt: ab });
       });
     });
     return out;
+  }
+
+  function uniqueSprecher() {
+    var seen = {};
+    var list = [];
+    offeneAbschnitte().forEach(function (ab) {
+      sichtbare((cacheFor(ab) || {}).eintraege).forEach(function (e) {
+        var sp = String(e.person || e.name || e.ueberliefertVon || e.sprecher || "").trim();
+        if (!sp || seen[sp]) return;
+        seen[sp] = true;
+        list.push(sp);
+      });
+    });
+    list.sort(function (a, b) {
+      return a.localeCompare(b, "de");
+    });
+    return list;
+  }
+
+  function uniqueBuecher() {
+    var seen = {};
+    var list = [];
+    offeneAbschnitte().forEach(function (ab) {
+      sichtbare((cacheFor(ab) || {}).eintraege).forEach(function (e) {
+        var src = String(e.quellenanzeige || "").replace(/^Quelle:\s*/i, "").trim();
+        var buch = src.split(",")[0].trim();
+        if (!buch || seen[buch]) return;
+        seen[buch] = true;
+        list.push(buch);
+      });
+    });
+    list.sort(function (a, b) {
+      return a.localeCompare(b, "de");
+    });
+    return list;
+  }
+
+  function directPickPanel(activeBereich) {
+    var themen = hubAreas()
+      .filter(function (a) {
+        return a.id;
+      })
+      .map(function (a) {
+        return (
+          '<option value="' +
+          esc(a.id) +
+          '"' +
+          (activeBereich === a.id ? " selected" : "") +
+          ">" +
+          esc(a.title) +
+          "</option>"
+        );
+      })
+      .join("");
+    var scholarOpts = uniqueSprecher()
+      .map(function (n) {
+        return (
+          '<option value="' +
+          esc(n) +
+          '"' +
+          (pickSprecher === n ? " selected" : "") +
+          ">" +
+          esc(n) +
+          "</option>"
+        );
+      })
+      .join("");
+    var bookOpts = uniqueBuecher()
+      .map(function (n) {
+        return (
+          '<option value="' +
+          esc(n) +
+          '"' +
+          (pickBuch === n ? " selected" : "") +
+          ">" +
+          esc(n) +
+          "</option>"
+        );
+      })
+      .join("");
+    return (
+      '<section class="direct-pick-panel home-direct-pick premium-surface frauen-direct-pick">' +
+      '<div class="direct-pick-title"><h3>Schnell auswählen</h3><span>Thema · Gelehrter · Buch</span></div>' +
+      '<div class="direct-pick-grid">' +
+      '<select class="direct-pick" data-frauen-pick="thema" aria-label="Thema">' +
+      '<option value="">📚 Thema</option>' +
+      themen +
+      "</select>" +
+      '<select class="direct-pick" data-frauen-pick="gelehrter" aria-label="Gelehrter">' +
+      '<option value="">👤 Gelehrter</option>' +
+      scholarOpts +
+      "</select>" +
+      '<select class="direct-pick" data-frauen-pick="buch" aria-label="Buch">' +
+      '<option value="">📖 Buch</option>' +
+      bookOpts +
+      "</select></div></section>"
+    );
   }
 
   function renderHub() {
@@ -1937,8 +2057,8 @@
     );
     var q = currentQ("hub");
     var thema = currentThema("hub");
-    var treffer = q ? sucheUeberall(q) : [];
-    var liste = q
+    var treffer = q || pickSprecher || pickBuch ? sucheUeberall(q) : [];
+    var liste = q || pickSprecher || pickBuch
       ? treffer.length
         ? '<div class="topics-hub__label"><b>Treffer</b><span>' +
           treffer.length +
@@ -1964,7 +2084,7 @@
         "</div></section>";
     return (
       '<div class="topics-hub frauen-hub">' +
-      searchPanel("hub", themen, q, thema, "Thema suchen") +
+      searchPanel("hub", themen, q, thema, "Suche nach Beitrag, Duʿāʾ, Thema, Gelehrten, Buch") +
       liste +
       "</div>"
     );
@@ -2928,6 +3048,23 @@
             again.setSelectionRange(again.value.length, again.value.length);
           } catch (err) {}
         });
+      });
+    }
+    var picks = document.querySelectorAll("[data-frauen-pick]");
+    for (var i = 0; i < picks.length; i++) {
+      if (picks[i].dataset.bound) continue;
+      picks[i].dataset.bound = "1";
+      picks[i].addEventListener("change", function (ev) {
+        var el = ev.target;
+        var kind = el.getAttribute("data-frauen-pick");
+        var val = el.value || "";
+        if (kind === "thema") {
+          if (val && typeof window.navigate === "function") window.navigate("frauen", val);
+          return;
+        }
+        if (kind === "gelehrter") pickSprecher = val;
+        if (kind === "buch") pickBuch = val;
+        refreshIfFrauen();
       });
     }
   }
