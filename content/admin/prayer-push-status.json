@@ -1,20 +1,20 @@
 {
-  "updatedAt": "2026-08-30T12:35:36.699Z",
+  "updatedAt": "2026-08-30T12:40:35.798Z",
   "ok": true,
   "schedulerStatus": "success",
   "schedulerEngine": "cloudflare-worker-cron-v2",
   "userSource": "supabase-only",
   "cronIntervalMinutes": 5,
-  "lastCronRun": "2026-08-30T12:35:36.699Z",
+  "lastCronRun": "2026-08-30T12:40:35.798Z",
   "nextPlannedPush": {
-    "prayer": "Fajr",
-    "key": "fajr",
-    "mode": "entry",
-    "sendAfter": "2026-08-30T12:39:00.000Z",
+    "prayer": "ʿAṣr",
+    "key": "asr",
+    "mode": "advance",
+    "sendAfter": "2026-08-30T15:01:00.000Z",
     "timeZone": "Europe/Berlin"
   },
-  "windowStart": "2026-08-30T12:20:15.298Z",
-  "windowEnd": "2026-08-31T14:35:15.298Z",
+  "windowStart": "2026-08-30T12:25:14.959Z",
+  "windowEnd": "2026-08-31T14:40:14.959Z",
   "graceMinutes": 15,
   "lookaheadMinutes": 1560,
   "subscriptionsTotal": 12,
@@ -28,11 +28,11 @@
   "usersWithLocation": 12,
   "usersWithActivePush": 12,
   "locationGroups": 4,
-  "scheduled": 41,
-  "recipients": 121,
+  "scheduled": 40,
+  "recipients": 120,
   "invalid": 0,
   "invalidDisabled": 0,
-  "skippedPast": 61,
+  "skippedPast": 62,
   "skippedAlreadyQueued": 1,
   "skippedWindow": 58,
   "advanceCatchups": 0,
@@ -54,8 +54,8 @@
           "recipients": 0
         },
         "entry": {
-          "status": "geplant",
-          "recipients": 1
+          "status": "übersprungen",
+          "recipients": 0
         }
       },
       "dhuhr": {
@@ -129,10 +129,10 @@
         "recipients": 0
       },
       "entry": {
-        "status": "geplant",
-        "recipients": 1
+        "status": "übersprungen",
+        "recipients": 0
       },
-      "answer": "Fajr 05:26: Gebetszeit geplant."
+      "answer": "Fajr 05:26: übersprungen – Fenster vorbei."
     },
     "dhuhr": {
       "name": "Dhuhr",
@@ -403,16 +403,6 @@
       "mode": "advance",
       "time": "13:32",
       "sendAfter": "2026-08-31T11:17:00.000Z",
-      "recipients": 1,
-      "timeZone": "Europe/Berlin",
-      "invalid": 0
-    },
-    {
-      "prayer": "Fajr",
-      "key": "fajr",
-      "mode": "entry",
-      "time": "14:39",
-      "sendAfter": "2026-08-30T12:39:00.000Z",
       "recipients": 1,
       "timeZone": "Europe/Berlin",
       "invalid": 0
@@ -887,17 +877,17 @@
     },
     {
       "key": "fajr",
-      "mode": "advance",
-      "sendAfter": "2026-08-30T12:24:00.000Z",
+      "mode": "entry",
+      "sendAfter": "2026-08-30T12:39:00.000Z",
       "time": "14:39",
       "timeZone": "Europe/Berlin",
       "reason": "already-queued"
     },
     {
-      "key": "dhuhr",
-      "mode": "entry",
-      "sendAfter": "2026-08-30T08:10:00.000Z",
-      "time": "10:10",
+      "key": "fajr",
+      "mode": "advance",
+      "sendAfter": "2026-08-30T12:24:00.000Z",
+      "time": "14:39",
       "timeZone": "Europe/Berlin"
     }
   ],
