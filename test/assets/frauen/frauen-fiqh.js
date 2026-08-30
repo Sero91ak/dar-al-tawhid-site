@@ -771,11 +771,11 @@
     { id: "alle", label: "Alle" },
     { id: "tod", label: "Tod" },
     { id: "janazah", label: "Janāzah" },
-    { id: "waschen-verstorbener", label: "Waschen Verstorbener" },
+    { id: "ghusl", label: "Ghusl" },
     { id: "trauer", label: "Trauer" },
-    { id: "ihdad", label: "Iḥdād" },
+    { id: "sabr", label: "Ṣabr" },
+    { id: "kinderverlust", label: "Kinderverlust" },
     { id: "friedhof", label: "Friedhof" },
-    { id: "geduld", label: "Geduld" },
     { id: "sahabiyyat", label: "Ṣaḥābiyyāt" },
     { id: "sahabah-athar", label: "Ṣaḥābah & Āthār" },
     { id: "in-pruefung", label: "In Prüfung" }
@@ -783,11 +783,11 @@
   var TOD_BEREICH_LABEL = {
     tod: "Tod",
     janazah: "Janāzah",
-    "waschen-verstorbener": "Waschen Verstorbener",
+    ghusl: "Ghusl",
     trauer: "Trauer",
-    ihdad: "Iḥdād",
+    sabr: "Ṣabr",
+    kinderverlust: "Kinderverlust",
     friedhof: "Friedhof",
-    geduld: "Geduld",
     sahabiyyat: "Ṣaḥābiyyāt",
     "sahabah-athar": "Ṣaḥābah & Āthār",
     "in-pruefung": "In Prüfung"
@@ -2207,7 +2207,7 @@
       { nr: "29", title: "Gerechtigkeit, guter Umgang & Schutz vor Unrecht", id: GERECHT_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zu Maʿrūf, Iḥsān, Ẓulm, Ehe-Adab und Schutz vor Unrecht." },
       { nr: "30", title: "Dhikr, Duʿāʾ & tägliche ʿIbādah", id: DHIKR_SLUG, mark: "ring", lede: "Geprüfte Grundlagen zu Dhikr, Bittgebet, Tasbīḥ, Schlaf-Dhikr und Laylat al-Qadr." },
       { nr: "31", title: "Geprüftes Wissen, Quellen & Weitergabe", id: GEPRUEFT_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zu Wissen, Quellen, Weitergabe, Sunnah, Bidʿah und Vorsicht im Zitieren." },
-      { nr: "32", title: "Tod, Janāzah & Trauer-Adab", id: TOD_SLUG, mark: "ring", lede: "Geprüfte Grundlagen zu Tod, Janāzah, Waschen Verstorbener, Trauer und Adab." },
+      { nr: "32", title: "Tod, Janāzah & Trauer-Adab", id: TOD_SLUG, mark: "ring", lede: "Geprüfte Grundlagen zu Tod, Janāzah, Ghusl, Trauer, Ṣabr und Iḥtisāb." },
       { nr: "33", title: "Arbeit, Studium & Öffentlichkeit", id: ARBEIT_SLUG, mark: "lamp", pending: true, lede: "Geprüfte Grundlagen zu öffentlicher Tätigkeit, Lernen, Grenzen, Nutzen und Schutz." },
       { nr: "34", title: "Medien, Bilder & öffentliche Darstellung", id: MEDIEN_SLUG, mark: "veil", pending: true, lede: "Geprüfte Grundlagen zu Darstellung, Fotos, Stimme, Schreiben, öffentlichem Auftreten und digitalen Grenzen." },
       { nr: "35", title: "Ruqyah, Schutz & Zuflucht", id: RUQYAH_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu al-Falaq, an-Nās, Muʿawwidhāt, Ruqyah und Zuflucht bei Allah." },
@@ -2775,7 +2775,7 @@
           : abschnitt === GEPRUEFT_SLUG
           ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Aussagen von Ṣaḥābah, Tābiʿīn und Salaf werden vorbereitet, aber erst nach strenger Endprüfung sichtbar gemacht. Social-Media-Zitate, Screenshots, unklare Sprüche und schwache Berichte bleiben verborgen.</p></div>'
           : abschnitt === TOD_SLUG
-          ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte religiöse Inhalte mit Quelle und Direktnachweis. Grabbesuch, Friedhofsregeln, Janāzah-Gebet, Waschen Verstorbener im Detail, Bestattungsabläufe, Trauerfeiern, heutige Bestattungsfragen und individuelle Todesfälle bleiben verborgen, bis sie einzeln streng geprüft wurden.</p></div>'
+          ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Fragen zu Friedhofsbesuch, Waschen der Verstorbenen im Detail, Leichentuch, Janāzah-Gebet, Trauerzeit, Iḥdād, Krankenhaus, heutiger Bestattung und Einzelfällen bleiben verborgen, bis sie einzeln streng geprüft wurden.</p></div>'
           : abschnitt === KURZ_SLUG
           ? '<div class="frauen-hint"><p>Dieser Bereich enthält keine ausgeschmückten Geschichten. Sichtbar sind nur Kurzberichte mit geprüfter Quelle und Direktnachweis. Alles Unsichere bleibt verborgen.</p></div>'
           : abschnitt === FAQ_SLUG
@@ -2877,7 +2877,7 @@
         : abschnitt === GEPRUEFT_SLUG
         ? '<p class="lede">Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne ungeprüfte Zitate.</p>'
         : abschnitt === TOD_SLUG
-        ? '<p class="lede">Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne ungeprüfte Grab- und Trauer-Fatwas.</p>'
+        ? '<p class="lede">Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne ungeprüfte Trauer- oder Friedhofsregeln.</p>'
         : abschnitt === ARBEIT_SLUG
         ? '<p class="lede">Geprüfte Grundlagen zu öffentlicher Tätigkeit, Lernen, Grenzen, Nutzen und Schutz.</p>'
         : abschnitt === MEDIEN_SLUG
@@ -3223,7 +3223,7 @@
     if (parsed.abschnitt === TOD_SLUG && parsed.page === "list") {
       return {
         title: "Tod, Janāzah & Trauer-Adab",
-        subtitle: "Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne ungeprüfte Grab- und Trauer-Fatwas."
+        subtitle: "Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne ungeprüfte Trauer- oder Friedhofsregeln."
       };
     }
     if (parsed.abschnitt === ARBEIT_SLUG && parsed.page === "list") {
