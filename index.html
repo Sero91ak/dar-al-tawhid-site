@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v741";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v742";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -3025,15 +3025,25 @@ html[data-theme="light"] .prayer-overview__time-hour{color:#3d2a12!important}
   filter:drop-shadow(0 0 8px rgba(239,215,142,.55));
   pointer-events:none;
 }
-.qibla-valid-arc{
+.qibla-valid-arc,.qibla-arc-wide{
   position:absolute;
   inset:0;
   border-radius:999px;
   z-index:2;
   pointer-events:none;
-  background:conic-gradient(from 315deg,rgba(239,215,142,.26) 0deg 90deg,transparent 90deg 360deg);
-  -webkit-mask:radial-gradient(circle,transparent 56%,#000 57%,#000 90%,transparent 91%);
-  mask:radial-gradient(circle,transparent 56%,#000 57%,#000 90%,transparent 91%);
+  background:conic-gradient(from 315deg,rgba(239,215,142,.11) 0deg 90deg,transparent 90deg 360deg);
+  -webkit-mask:radial-gradient(circle,transparent 58%,#000 59%,#000 88%,transparent 89%);
+  mask:radial-gradient(circle,transparent 58%,#000 59%,#000 88%,transparent 89%);
+}
+.qibla-arc-safe{
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  z-index:3;
+  pointer-events:none;
+  background:conic-gradient(from 345deg,rgba(46,255,164,.55) 0deg 30deg,transparent 30deg 360deg);
+  -webkit-mask:radial-gradient(circle,transparent 56%,#000 57%,#000 91%,transparent 92%);
+  mask:radial-gradient(circle,transparent 56%,#000 57%,#000 91%,transparent 92%);
 }
 .qibla-gold-arrow{
   position:absolute;
@@ -3055,37 +3065,91 @@ html[data-theme="light"] .prayer-overview__time-hour{color:#3d2a12!important}
   letter-spacing:.14em;
   text-transform:uppercase;
 }
-.qibla-compass-pro.qibla-in-range:not(.qibla-aligned) .qibla-compass-face{
-  border-color:rgba(239,215,142,.72);
-  box-shadow:inset 0 0 0 1px rgba(239,215,142,.18),0 0 22px rgba(239,215,142,.16);
+.qibla-orient-hint{
+  margin:7px 0 0;
+  color:var(--muted);
+  font-size:11.5px;
+  line-height:1.4;
+  font-weight:650;
 }
 @keyframes qiblaPulseGlow{
-  0%,100%{box-shadow:inset 0 0 0 1px rgba(255,236,180,.28),0 0 22px rgba(239,215,142,.32),0 0 0 3px rgba(239,215,142,.12)}
-  50%{box-shadow:inset 0 0 0 1px rgba(255,248,220,.5),0 0 42px rgba(239,215,142,.55),0 0 0 5px rgba(239,215,142,.2)}
+  0%,100%{box-shadow:inset 0 0 0 1px rgba(80,255,170,.32),0 0 26px rgba(46,255,164,.42),0 0 0 3px rgba(46,255,164,.18)}
+  50%{box-shadow:inset 0 0 0 1px rgba(180,255,220,.55),0 0 48px rgba(46,255,164,.7),0 0 0 6px rgba(46,255,164,.28)}
 }
 .qibla-compass-pro.qibla-aligned .qibla-compass-face{
-  border-color:rgba(255,236,180,.95)!important;
-  animation:qiblaPulseGlow 1.7s ease-in-out infinite;
+  border-color:rgba(70,255,176,.98)!important;
+  animation:qiblaPulseGlow 1.4s ease-in-out infinite;
 }
 .qibla-compass-pro.qibla-aligned .qibla-gold-arrow{
-  filter:drop-shadow(0 0 16px rgba(255,236,180,.85));
+  filter:drop-shadow(0 0 16px rgba(70,255,176,.9));
+}
+.qibla-compass-pro.qibla-safe:not(.qibla-aligned) .qibla-compass-face{
+  border-color:rgba(70,255,176,.62);
+  box-shadow:inset 0 0 0 1px rgba(70,255,176,.16),0 0 18px rgba(46,255,164,.22);
+}
+.qibla-compass-pro.qibla-orient:not(.qibla-safe):not(.qibla-aligned) .qibla-compass-face{
+  border-color:rgba(239,215,142,.38);
+  box-shadow:inset 0 0 0 1px rgba(239,215,142,.08);
+}
+.prayer-page-noble.prayer-panel{
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:2px 0 10px!important;
+  margin:0 0 8px!important;
+  border-radius:0!important;
+  width:100%;
+  max-width:none;
+}
+.prayer-page-noble .prayer-time-grid--top{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:8px;
+  width:100%;
+  margin:0 0 10px;
+}
+.prayer-page-noble .prayer-compact-summary{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  width:100%;
+  margin:0 0 12px;
 }
 .prayer-page-noble .prayer-time-card,
 .prayer-page-noble .prayer-summary-card,
 .prayer-page-noble .qibla-data-item{
-  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 30%,transparent);
-  border-radius:18px;
-  background:linear-gradient(168deg,color-mix(in srgb,var(--card,#16130e) 94%,transparent),color-mix(in srgb,var(--bg,#080806) 88%,var(--gold2,#efd78e) 5%));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.045);
+  position:relative;
+  overflow:hidden;
+  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 42%,transparent);
+  border-radius:16px;
+  background:radial-gradient(circle at 18% 0%,rgba(239,215,142,.12),transparent 42%),linear-gradient(168deg,color-mix(in srgb,var(--card,#16130e) 94%,transparent),color-mix(in srgb,var(--bg,#080806) 88%,var(--gold2,#efd78e) 5%));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 10px 22px rgba(0,0,0,.18);
 }
-.prayer-page-noble .qibla-pro-section,
+.prayer-page-noble .prayer-time-card:before,
+.prayer-page-noble .prayer-summary-card:before,
+.prayer-page-noble .qibla-data-item:before{
+  content:"";
+  position:absolute;
+  inset:5px;
+  border:1px solid rgba(239,215,142,.16);
+  border-radius:12px;
+  pointer-events:none;
+}
+.prayer-page-noble .qibla-pro-section{
+  width:100%;
+  margin:8px 0 12px;
+  padding:14px 12px 16px;
+}
 .prayer-page-noble .prayer-controls-compact{
-  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 28%,transparent);
-  border-radius:22px;
-  background:linear-gradient(168deg,color-mix(in srgb,var(--card,#16130e) 94%,transparent),color-mix(in srgb,var(--bg,#080806) 90%,var(--gold2,#efd78e) 4%));
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:4px 0 0!important;
+  margin-top:2px;
+  border-radius:0!important;
 }
-.prayer-page-noble .prayer-controls-compact{padding:12px;margin-top:4px}
-.prayer-page-noble .prayer-time-grid--top{gap:8px}
+.prayer-page-noble .qibla-compass-pro{width:min(100%,340px)}
+@media(max-width:420px){.prayer-page-noble .prayer-time-grid--top{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
 .qibla-pro-section{
   border:1px solid rgba(239,215,142,.38);
@@ -3252,8 +3316,8 @@ html[data-theme="light"] .prayer-overview__time-hour{color:#3d2a12!important}
   z-index:5;
 }
 .qibla-compass-pro.qibla-aligned .qibla-compass-face{
-  border-color:rgba(140,255,154,.72);
-  box-shadow:inset 0 0 0 1px rgba(140,255,154,.12),0 0 0 4px rgba(140,255,154,.10),0 20px 44px rgba(0,0,0,.32);
+  border-color:rgba(70,255,176,.9);
+  box-shadow:inset 0 0 0 1px rgba(70,255,176,.22),0 0 0 4px rgba(46,255,164,.16),0 20px 44px rgba(0,0,0,.32);
 }
 .qibla-compass-pro.qibla-static-mode .qibla-compass-face{
   border-color:rgba(255,196,120,.45);
@@ -6878,14 +6942,14 @@ html[data-theme="soft"] .qibla-btn-start{
   color:var(--premium-pill-text)!important;
 }
 html[data-theme="soft"] .qibla-compass-pro.qibla-aligned .qibla-kaaba-badge{
-  border-color:rgba(218,164,64,.88)!important;
-  background:radial-gradient(circle at 35% 25%,rgba(255,238,176,.55),rgba(255,248,230,.96))!important;
-  box-shadow:0 6px 16px rgba(96,62,78,.14),0 0 0 5px rgba(218,164,64,.22)!important;
+  border-color:rgba(22,168,110,.88)!important;
+  background:radial-gradient(circle at 35% 25%,rgba(180,255,220,.55),rgba(255,248,230,.96))!important;
+  box-shadow:0 6px 16px rgba(96,62,78,.14),0 0 0 5px rgba(46,255,164,.28)!important;
 }
 html[data-theme="soft"] .qibla-compass-pro.qibla-aligned .qibla-compass-face{
-  border-color:rgba(218,164,64,.78)!important;
-  background:radial-gradient(circle at center,rgba(255,252,238,.98),rgba(244,223,188,.72))!important;
-  box-shadow:inset 0 0 0 1px rgba(218,164,64,.16),0 0 0 5px rgba(218,164,64,.14),0 14px 30px rgba(96,62,78,.10)!important;
+  border-color:rgba(22,168,110,.86)!important;
+  background:radial-gradient(circle at center,rgba(232,255,244,.98),rgba(214,246,228,.72))!important;
+  box-shadow:inset 0 0 0 1px rgba(46,255,164,.22),0 0 0 5px rgba(46,255,164,.2),0 14px 30px rgba(96,62,78,.10)!important;
 }
 html[data-theme="soft"] .qibla-compass-pro.qibla-aligned .qibla-forward-pointer{
   background:linear-gradient(180deg,#ffe89a,#d9a33f)!important;
@@ -24252,7 +24316,7 @@ async function requestPrayerLocation(button){if(!navigator.geolocation){alert("S
 function qiblaCompassMarkup(bearing=0){
   const b=formatQiblaDegrees(bearing);
   const dir=qiblaDirectionNameDe(bearing);
-  return `<div class="qibla-compass-pro" id="qiblaCompassWrap" aria-label="Qibla-Kompass"><div class="qibla-compass-face"><div class="qibla-rose" id="qiblaRose"><div class="qibla-compass-dial"><span class="qibla-cardinal qibla-n">N</span><span class="qibla-cardinal qibla-e">O</span><span class="qibla-cardinal qibla-s">S</span><span class="qibla-cardinal qibla-w">W</span></div><div class="qibla-kaaba-marker" id="qiblaKaabaMarker" style="transform:rotate(${b}deg)" aria-hidden="true"><span class="qibla-valid-arc"></span><span class="qibla-gold-arrow" title="Qibla ${b}° ${dir}"></span></div></div><div class="qibla-heading-nock" aria-hidden="true"></div><div class="qibla-kaaba-core" aria-hidden="true">🕋</div></div><div class="qibla-bearing-readout"><span id="qiblaBearingValue">${b}°</span><small>${dir}</small></div><p class="qibla-fiqh-line" id="qiblaRangeLive">90° gültig</p></div>`;
+  return `<div class="qibla-compass-pro" id="qiblaCompassWrap" aria-label="Qibla-Kompass"><div class="qibla-compass-face"><div class="qibla-rose" id="qiblaRose"><div class="qibla-compass-dial"><span class="qibla-cardinal qibla-n">N</span><span class="qibla-cardinal qibla-e">O</span><span class="qibla-cardinal qibla-s">S</span><span class="qibla-cardinal qibla-w">W</span></div><div class="qibla-kaaba-marker" id="qiblaKaabaMarker" style="transform:rotate(${b}deg)" aria-hidden="true"><span class="qibla-valid-arc qibla-arc-wide"></span><span class="qibla-arc-safe"></span><span class="qibla-gold-arrow" title="Qibla ${b}° ${dir}"></span></div></div><div class="qibla-heading-nock" aria-hidden="true"></div><div class="qibla-kaaba-core" aria-hidden="true">🕋</div></div><div class="qibla-bearing-readout"><span id="qiblaBearingValue">${b}°</span><small>${dir}</small></div><p class="qibla-fiqh-line" id="qiblaRangeLive">Δ —</p><p class="qibla-orient-hint">Exakte Qiblah anpeilen. Der breite Bereich ist nur Orientierung.</p></div>`;
 }
 function renderQiblaProPanel(settings=getPrayerSettings()){
   const hasLoc=hasPrayerLocation(settings);
@@ -24305,7 +24369,7 @@ function enableQiblaStaticFallback(bearing,settings,status,startBtn,stopBtn){
     status.classList.remove("qibla-status-ok");
   }
   const wrap=$("qiblaCompassWrap");
-  if(wrap){wrap.classList.remove("qibla-aligned");wrap.classList.add("qibla-static-mode")}
+  if(wrap){wrap.classList.remove("qibla-aligned");wrap.classList.remove("qibla-safe");wrap.classList.remove("qibla-orient");wrap.classList.remove("qibla-in-range");wrap.classList.add("qibla-static-mode")}
   const hl=$("qiblaHeadingLive");if(hl)hl.textContent="—";
   const dl=$("qiblaDeltaLive");if(dl)dl.textContent="—";
   const instr=$("qiblaInstruction");
@@ -24329,14 +24393,15 @@ function attachQiblaOrientationListener(getBearing,status,wrap,rose,settings,sta
     rose.style.transform=`rotate(${-heading}deg)`;
     const off=Math.round(delta<=180?delta:360-delta);
     const aligned=off<=8;
-    const inRange=off<=45;
-    if(wrap){wrap.classList.remove("qibla-static-mode");wrap.classList.toggle("qibla-aligned",aligned);wrap.classList.toggle("qibla-in-range",inRange)}
+    const safe=off<=15;
+    const orient=off<=45;
+    if(wrap){wrap.classList.remove("qibla-static-mode");wrap.classList.toggle("qibla-aligned",aligned);wrap.classList.toggle("qibla-safe",safe);wrap.classList.toggle("qibla-orient",orient);wrap.classList.toggle("qibla-in-range",orient)}
     const hl=$("qiblaHeadingLive");if(hl)hl.textContent=Math.round(heading)+"°";
     const dl=$("qiblaDeltaLive");if(dl)dl.textContent=off+"°";
-    const rangeEl=$("qiblaRangeLive");if(rangeEl)rangeEl.textContent=aligned?"Qibla":(inRange?"90° gültig":"90°");
+    const rangeEl=$("qiblaRangeLive");if(rangeEl)rangeEl.textContent=aligned?"Sehr gut":(safe?"Sicher":(orient?"Nur Orientierung":"Abweichung"));
     if(status){
-      status.textContent=aligned?"Qibla":(inRange?"gültig":`${off}°`);
-      status.classList.toggle("qibla-status-ok",aligned);
+      status.textContent=aligned?`Sehr gut · Δ ${off}°`:(safe?`Sicher · Δ ${off}°`:(orient?`Nur Orientierung · Δ ${off}°`:`Abweichung · Δ ${off}°`));
+      status.classList.toggle("qibla-status-ok",aligned||safe);
     }
   };
   window.addEventListener("deviceorientation",qiblaOrientationHandler,true);
@@ -24363,7 +24428,7 @@ function stopQiblaCompass(){
   qiblaCompassActive=false;
   qiblaStaticMode=false;
   const wrap=$("qiblaCompassWrap");
-  if(wrap){wrap.classList.remove("qibla-aligned");wrap.classList.remove("qibla-in-range");wrap.classList.remove("qibla-static-mode")}
+  if(wrap){wrap.classList.remove("qibla-aligned");wrap.classList.remove("qibla-safe");wrap.classList.remove("qibla-orient");wrap.classList.remove("qibla-in-range");wrap.classList.remove("qibla-static-mode")}
   const rose=$("qiblaRose");
   if(rose)rose.style.transform="rotate(0deg)";
   const startBtn=$("startQiblaBtn");
@@ -26319,7 +26384,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v741";
+const APP_BUILD_ID="app-shell-v742";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
