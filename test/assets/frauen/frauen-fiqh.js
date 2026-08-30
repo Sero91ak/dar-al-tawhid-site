@@ -78,6 +78,8 @@
   var REUE_SLUG = "reue-istighfar-rueckkehr";
   var JANAIZ_URL = "/test/data/frauen-tod-janaiz-trauer-sabr.json";
   var JANAIZ_SLUG = "tod-janaiz-trauer-sabr";
+  var TAWBAH_URL = "/test/data/frauen-reue-tawbah-istighfar.json";
+  var TAWBAH_SLUG = "reue-tawbah-istighfar";
   var ERLAUBTE_QUELLENART = {
     quran: 1,
     sahih: 1,
@@ -964,6 +966,29 @@
     "sahabah-athar": "Ṣaḥābah & Āthār",
     "in-pruefung": "In Prüfung"
   };
+  var TAWBAH_THEMEN = [
+    { id: "alle", label: "Alle" },
+    { id: "tawbah", label: "Tawbah" },
+    { id: "istighfar", label: "Istighfār" },
+    { id: "barmherzigkeit", label: "Barmherzigkeit" },
+    { id: "tawbah-nasuh", label: "Tawbah Naṣūḥ" },
+    { id: "sayyid-al-istighfar", label: "Sayyid al-Istighfār" },
+    { id: "hoffnung", label: "Hoffnung" },
+    { id: "reue", label: "Reue" },
+    { id: "sahabah-athar", label: "Ṣaḥābah & Āthār" },
+    { id: "in-pruefung", label: "In Prüfung" }
+  ];
+  var TAWBAH_BEREICH_LABEL = {
+    tawbah: "Tawbah",
+    istighfar: "Istighfār",
+    barmherzigkeit: "Barmherzigkeit",
+    "tawbah-nasuh": "Tawbah Naṣūḥ",
+    "sayyid-al-istighfar": "Sayyid al-Istighfār",
+    hoffnung: "Hoffnung",
+    reue: "Reue",
+    "sahabah-athar": "Ṣaḥābah & Āthār",
+    "in-pruefung": "In Prüfung"
+  };
   var fiqhCache = null;
   var sahabCache = null;
   var tabiiCache = null;
@@ -1004,6 +1029,7 @@
   var bidahqCache = null;
   var reueCache = null;
   var janaizCache = null;
+  var tawbahCache = null;
   var loadPromise = null;
   var fiqhQ = "";
   var sahabQ = "";
@@ -1045,6 +1071,7 @@
   var bidahqQ = "";
   var reueQ = "";
   var janaizQ = "";
+  var tawbahQ = "";
   var fiqhThema = "alle";
   var sahabThema = "alle";
   var tabiiThema = "alle";
@@ -1085,6 +1112,7 @@
   var bidahqThema = "alle";
   var reueThema = "alle";
   var janaizThema = "alle";
+  var tawbahThema = "alle";
   var hubQ = "";
   var hubThema = "alle";
   var pickSprecher = "";
@@ -1131,7 +1159,8 @@
       abschnitt === MAEDCHEN_SLUG ||
       abschnitt === BIDAHQ_SLUG ||
       abschnitt === REUE_SLUG ||
-      abschnitt === JANAIZ_SLUG
+      abschnitt === JANAIZ_SLUG ||
+      abschnitt === TAWBAH_SLUG
     );
   }
 
@@ -1267,7 +1296,8 @@
       fetchJson(MAEDCHEN_URL),
       fetchJson(BIDAHQ_URL),
       fetchJson(REUE_URL),
-      fetchJson(JANAIZ_URL)
+      fetchJson(JANAIZ_URL),
+      fetchJson(TAWBAH_URL)
     ])
       .then(function (pair) {
         fiqhCache = pair[0];
@@ -1310,6 +1340,7 @@
         bidahqCache = pair[37];
         reueCache = pair[38];
         janaizCache = pair[39];
+        tawbahCache = pair[40];
       })
       .catch(function (err) {
         loadPromise = null;
@@ -1479,6 +1510,10 @@
     if (v.indexOf(JANAIZ_SLUG + "/") === 0) {
       return { page: "detail", abschnitt: JANAIZ_SLUG, kennung: v.slice(JANAIZ_SLUG.length + 1) };
     }
+    if (v === TAWBAH_SLUG) return { page: "list", abschnitt: TAWBAH_SLUG, kennung: "" };
+    if (v.indexOf(TAWBAH_SLUG + "/") === 0) {
+      return { page: "detail", abschnitt: TAWBAH_SLUG, kennung: v.slice(TAWBAH_SLUG.length + 1) };
+    }
     return { page: "hub", abschnitt: "", kennung: "" };
   }
 
@@ -1522,6 +1557,7 @@
     if (abschnitt === BIDAHQ_SLUG) return bidahqCache;
     if (abschnitt === REUE_SLUG) return reueCache;
     if (abschnitt === JANAIZ_SLUG) return janaizCache;
+    if (abschnitt === TAWBAH_SLUG) return tawbahCache;
     return fiqhCache;
   }
 
@@ -1566,6 +1602,7 @@
     if (abschnitt === BIDAHQ_SLUG) return bidahqThema;
     if (abschnitt === REUE_SLUG) return reueThema;
     if (abschnitt === JANAIZ_SLUG) return janaizThema;
+    if (abschnitt === TAWBAH_SLUG) return tawbahThema;
     return fiqhThema;
   }
 
@@ -1610,6 +1647,7 @@
     else if (abschnitt === BIDAHQ_SLUG) bidahqThema = id;
     else if (abschnitt === REUE_SLUG) reueThema = id;
     else if (abschnitt === JANAIZ_SLUG) janaizThema = id;
+    else if (abschnitt === TAWBAH_SLUG) tawbahThema = id;
     else fiqhThema = id;
   }
 
@@ -1654,6 +1692,7 @@
     if (abschnitt === BIDAHQ_SLUG) return bidahqQ;
     if (abschnitt === REUE_SLUG) return reueQ;
     if (abschnitt === JANAIZ_SLUG) return janaizQ;
+    if (abschnitt === TAWBAH_SLUG) return tawbahQ;
     return fiqhQ;
   }
 
@@ -1698,6 +1737,7 @@
     else if (abschnitt === BIDAHQ_SLUG) bidahqQ = v;
     else if (abschnitt === REUE_SLUG) reueQ = v;
     else if (abschnitt === JANAIZ_SLUG) janaizQ = v;
+    else if (abschnitt === TAWBAH_SLUG) tawbahQ = v;
     else fiqhQ = v;
   }
 
@@ -1749,7 +1789,8 @@
         abschnitt === MAEDCHEN_SLUG ||
         abschnitt === BIDAHQ_SLUG ||
         abschnitt === REUE_SLUG ||
-        abschnitt === JANAIZ_SLUG
+        abschnitt === JANAIZ_SLUG ||
+        abschnitt === TAWBAH_SLUG
       ) {
         var extraThemen = Array.isArray(e.themen) ? e.themen : [];
         if (chip !== thema && e.thema !== thema && extraThemen.indexOf(thema) === -1) return false;
@@ -1788,7 +1829,7 @@
   }
 
   function offeneAbschnitte() {
-    return ["fiqh", "sahabiyyat", "tabiiyyat", MUETTER_SLUG, EHE_SLUG, HIJAB_SLUG, WISSEN_SLUG, FAQ_SLUG, KURZ_SLUG, SALAF_SLUG, MOSCHEE_SLUG, HAJJ_SLUG, SADAQAH_SLUG, ADAB_SLUG, KINDER_SLUG, MUSLIMAH_SLUG, NIFAS_SLUG, DIENST_SLUG, IDDAH_SLUG, REINIGUNG_SLUG, NIKAH_SLUG, ZINAH_SLUG, UMGANG_SLUG, REISE_SLUG, KRANKHEIT_SLUG, PRIVAT_SLUG, VERWANDT_SLUG, TAWHID_SLUG, GERECHT_SLUG, DHIKR_SLUG, GEPRUEFT_SLUG, TOD_SLUG, ARBEIT_SLUG, MEDIEN_SLUG, RUQYAH_SLUG, TRAUER_SLUG, MAEDCHEN_SLUG, BIDAHQ_SLUG, REUE_SLUG, JANAIZ_SLUG];
+    return ["fiqh", "sahabiyyat", "tabiiyyat", MUETTER_SLUG, EHE_SLUG, HIJAB_SLUG, WISSEN_SLUG, FAQ_SLUG, KURZ_SLUG, SALAF_SLUG, MOSCHEE_SLUG, HAJJ_SLUG, SADAQAH_SLUG, ADAB_SLUG, KINDER_SLUG, MUSLIMAH_SLUG, NIFAS_SLUG, DIENST_SLUG, IDDAH_SLUG, REINIGUNG_SLUG, NIKAH_SLUG, ZINAH_SLUG, UMGANG_SLUG, REISE_SLUG, KRANKHEIT_SLUG, PRIVAT_SLUG, VERWANDT_SLUG, TAWHID_SLUG, GERECHT_SLUG, DHIKR_SLUG, GEPRUEFT_SLUG, TOD_SLUG, ARBEIT_SLUG, MEDIEN_SLUG, RUQYAH_SLUG, TRAUER_SLUG, MAEDCHEN_SLUG, BIDAHQ_SLUG, REUE_SLUG, JANAIZ_SLUG, TAWBAH_SLUG];
   }
 
   function countSichtbare(abschnitt) {
@@ -1845,6 +1886,7 @@
     if (abschnitt === BIDAHQ_SLUG) return "lamp";
     if (abschnitt === REUE_SLUG) return "book";
     if (abschnitt === JANAIZ_SLUG) return "ring";
+    if (abschnitt === TAWBAH_SLUG) return "book";
     return "book";
   }
 
@@ -1959,7 +2001,8 @@
       { nr: "37", title: "Mädchen, Pubertät & Pflichtwissen", id: MAEDCHEN_SLUG, mark: "home", pending: true, lede: "Geprüfte Grundlagen zu Reife, Pflichtwissen, Schamhaftigkeit, Gebet und religiöser Verantwortung." },
       { nr: "38", title: "Falsches Wissen, Bidʿah & Quellenprüfung", id: BIDAHQ_SLUG, mark: "lamp", pending: true, lede: "Geprüfte Grundlagen zum Schutz vor ungeprüften Aussagen, schwachen Quellen und erfundenen Inhalten." },
       { nr: "39", title: "Reue, Istighfār & Rückkehr zu Allah", id: REUE_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu Tawbah, Istighfār, Hoffnung, Schuld und Rückkehr zu Allah." },
-      { nr: "40", title: "Tod, Janāʾiz, Trauer & Ṣabr", id: JANAIZ_SLUG, mark: "ring", lede: "Geprüfte Grundlagen zu Muṣībah, erlaubter Trauer, Ṣabr und Janāʾiz." }
+      { nr: "40", title: "Tod, Janāʾiz, Trauer & Ṣabr", id: JANAIZ_SLUG, mark: "ring", lede: "Geprüfte Grundlagen zu Muṣībah, erlaubter Trauer, Ṣabr und Janāʾiz." },
+      { nr: "41", title: "Reue, Tawbah & Istighfār", id: TAWBAH_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu Reue, Vergebung, Tawbah Naṣūḥ und Sayyid al-Istighfār." }
     ];
   }
 
@@ -2272,6 +2315,8 @@
                                         ? REUE_BEREICH_LABEL
                                       : abschnitt === JANAIZ_SLUG
                                         ? JANAIZ_BEREICH_LABEL
+                                      : abschnitt === TAWBAH_SLUG
+                                        ? TAWBAH_BEREICH_LABEL
                   : FIQH_BEREICH_LABEL;
     var bereich = labelMap[e.bereich] || e.bereich || "";
     var person = e.person || e.name;
@@ -2386,6 +2431,8 @@
                                         ? REUE_THEMEN
                                       : abschnitt === JANAIZ_SLUG
                                         ? JANAIZ_THEMEN
+                                      : abschnitt === TAWBAH_SLUG
+                                        ? TAWBAH_THEMEN
                   : FIQH_THEMEN;
     var q = currentQ(abschnitt);
     var thema = currentThema(abschnitt);
@@ -2432,7 +2479,8 @@
           abschnitt === MAEDCHEN_SLUG ||
           abschnitt === BIDAHQ_SLUG ||
           abschnitt === REUE_SLUG ||
-          abschnitt === JANAIZ_SLUG
+          abschnitt === JANAIZ_SLUG ||
+          abschnitt === TAWBAH_SLUG
         ? '<p class="frauen-empty">Noch keine geprüften Inhalte vorhanden.</p>'
         : '<p class="frauen-empty">Keine sichtbare Aussage zu dieser Auswahl.</p>';
     var hint =
@@ -2515,6 +2563,8 @@
       hint = '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte religiöse Inhalte mit Quelle und Direktnachweis. Konkrete Sündenfälle, Rechte anderer Menschen, Rückgabe von Unrecht, Ehebruch, große Sünden, Verzweiflung, Waswās, psychische Krisen und Einzelfragen bleiben verborgen, bis sie einzeln streng geprüft wurden.</p></div>';
     else if (abschnitt === JANAIZ_SLUG)
       hint = '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte religiöse Inhalte mit Quelle und Direktnachweis. Fragen zu Frauen und Friedhofsbesuch, Janāzah-Gebet, Waschen der Verstorbenen, Iḥdād, ʿIddah der Witwe, Bestattung, Friedhof, lauter Trauer, kulturellen Bräuchen und heutigen Einzelfällen bleiben verborgen, bis sie einzeln streng geprüft wurden.</p></div>';
+    else if (abschnitt === TAWBAH_SLUG)
+      hint = '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Detailfragen zu großen Sünden, Rechten anderer Menschen, Ẓulm, Rückgabe von Rechten, Wiederholung von Sünden, Waswās, Verzweiflung, Heuchelei und einzelnen Fallurteilen bleiben verborgen, bis sie einzeln streng geprüft wurden.</p></div>';
     if (
       leerBereich &&
       (abschnitt === ARBEIT_SLUG ||
@@ -2590,6 +2640,8 @@
         ? '<p class="lede">Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne erfundene Trosttexte.</p>'
         : abschnitt === JANAIZ_SLUG
         ? '<p class="lede">Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne ungeprüfte Trauer- oder Friedhofs-Fatwas.</p>'
+        : abschnitt === TAWBAH_SLUG
+        ? '<p class="lede">Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne erfundene Trosttexte.</p>'
         : abschnitt === KURZ_SLUG
         ? '<p class="lede">Kurze belegte Ereignisse aus dem Leben rechtschaffener Frauen – mit Quelle und Direktnachweis.</p>'
         : abschnitt === FAQ_SLUG
@@ -2654,6 +2706,7 @@
     if (abschnitt === BIDAHQ_SLUG) return "Falsches Wissen, Bidʿah & Quellenprüfung";
     if (abschnitt === REUE_SLUG) return "Reue, Istighfār & Rückkehr zu Allah";
     if (abschnitt === JANAIZ_SLUG) return "Tod, Janāʾiz, Trauer & Ṣabr";
+    if (abschnitt === TAWBAH_SLUG) return "Reue, Tawbah & Istighfār";
     if (abschnitt === KURZ_SLUG) return "Geprüfte Kurzberichte";
     if (abschnitt === FAQ_SLUG) return "Fragen & Antworten";
     if (abschnitt === WISSEN_SLUG) return "Wissen & Lernen";
@@ -2730,7 +2783,7 @@
       "</div></div>" +
       nachweiseDirekt(e) +
       "</div>";
-    var nachBericht = istKurz(abschnitt) || abschnitt === DIENST_SLUG || abschnitt === KRANKHEIT_SLUG || abschnitt === PRIVAT_SLUG || abschnitt === VERWANDT_SLUG || abschnitt === TAWHID_SLUG || abschnitt === GERECHT_SLUG || abschnitt === DHIKR_SLUG || abschnitt === GEPRUEFT_SLUG || abschnitt === TOD_SLUG || abschnitt === ARBEIT_SLUG || abschnitt === MEDIEN_SLUG || abschnitt === RUQYAH_SLUG || abschnitt === TRAUER_SLUG || abschnitt === MAEDCHEN_SLUG || abschnitt === BIDAHQ_SLUG || abschnitt === REUE_SLUG || abschnitt === JANAIZ_SLUG ? lehreHtml + quelleBlock : quelleBlock + lehreHtml;
+    var nachBericht = istKurz(abschnitt) || abschnitt === DIENST_SLUG || abschnitt === KRANKHEIT_SLUG || abschnitt === PRIVAT_SLUG || abschnitt === VERWANDT_SLUG || abschnitt === TAWHID_SLUG || abschnitt === GERECHT_SLUG || abschnitt === DHIKR_SLUG || abschnitt === GEPRUEFT_SLUG || abschnitt === TOD_SLUG || abschnitt === ARBEIT_SLUG || abschnitt === MEDIEN_SLUG || abschnitt === RUQYAH_SLUG || abschnitt === TRAUER_SLUG || abschnitt === MAEDCHEN_SLUG || abschnitt === BIDAHQ_SLUG || abschnitt === REUE_SLUG || abschnitt === JANAIZ_SLUG || abschnitt === TAWBAH_SLUG ? lehreHtml + quelleBlock : quelleBlock + lehreHtml;
     return (
       '<article class="article post-reader">' +
       '<header class="post-reader-title"><div class="kicker">' +
@@ -2952,6 +3005,12 @@
         subtitle: "Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne ungeprüfte Trauer- oder Friedhofs-Fatwas."
       };
     }
+    if (parsed.abschnitt === TAWBAH_SLUG && parsed.page === "list") {
+      return {
+        title: "Reue, Tawbah & Istighfār",
+        subtitle: "Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne erfundene Trosttexte."
+      };
+    }
     if (parsed.abschnitt === KURZ_SLUG && parsed.page === "list") {
       return {
         title: "Geprüfte Kurzberichte",
@@ -3071,6 +3130,8 @@
             ? "Reue, Istighfār & Rückkehr zu Allah"
             : parsed.abschnitt === JANAIZ_SLUG
             ? "Tod, Janāʾiz, Trauer & Ṣabr"
+            : parsed.abschnitt === TAWBAH_SLUG
+            ? "Reue, Tawbah & Istighfār"
             : parsed.abschnitt === KURZ_SLUG
             ? "Geprüfte Kurzberichte"
             : parsed.abschnitt === FAQ_SLUG
