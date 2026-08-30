@@ -836,24 +836,28 @@
   };
   var RUQYAH_THEMEN = [
     { id: "alle", label: "Alle" },
-    { id: "schutz", label: "Schutz" },
     { id: "zuflucht", label: "Zuflucht" },
     { id: "ruqyah", label: "Ruqyah" },
-    { id: "dua", label: "Duʿāʾ" },
-    { id: "kinder", label: "Kinder" },
+    { id: "al-falaq", label: "al-Falaq" },
+    { id: "an-nas", label: "an-Nās" },
+    { id: "schlaf", label: "Schlaf" },
     { id: "krankheit", label: "Krankheit" },
-    { id: "angst", label: "Angst" },
+    { id: "schutz", label: "Schutz" },
+    { id: "shirk-grenze", label: "Širk-Grenze" },
+    { id: "sahabiyyat", label: "Ṣaḥābiyyāt" },
     { id: "sahabah-athar", label: "Ṣaḥābah & Āthār" },
     { id: "in-pruefung", label: "In Prüfung" }
   ];
   var RUQYAH_BEREICH_LABEL = {
-    schutz: "Schutz",
     zuflucht: "Zuflucht",
     ruqyah: "Ruqyah",
-    dua: "Duʿāʾ",
-    kinder: "Kinder",
+    "al-falaq": "al-Falaq",
+    "an-nas": "an-Nās",
+    schlaf: "Schlaf",
     krankheit: "Krankheit",
-    angst: "Angst",
+    schutz: "Schutz",
+    "shirk-grenze": "Širk-Grenze",
+    sahabiyyat: "Ṣaḥābiyyāt",
     "sahabah-athar": "Ṣaḥābah & Āthār",
     "in-pruefung": "In Prüfung"
   };
@@ -2118,7 +2122,7 @@
       { nr: "32", title: "Tod, Janāzah & Trauer-Adab", id: TOD_SLUG, mark: "ring", lede: "Geprüfte Grundlagen zu Tod, Janāzah, Waschen Verstorbener, Trauer und Adab." },
       { nr: "33", title: "Arbeit, Studium & Öffentlichkeit", id: ARBEIT_SLUG, mark: "lamp", pending: true, lede: "Geprüfte Grundlagen zu öffentlicher Tätigkeit, Lernen, Grenzen, Nutzen und Schutz." },
       { nr: "34", title: "Medien, Bilder & öffentliche Darstellung", id: MEDIEN_SLUG, mark: "veil", pending: true, lede: "Geprüfte Grundlagen zu Darstellung, Fotos, Stimme, Schreiben, öffentlichem Auftreten und digitalen Grenzen." },
-      { nr: "35", title: "Ruqyah, Schutz & Zuflucht", id: RUQYAH_SLUG, mark: "book", pending: true, lede: "Geprüfte Grundlagen zu Schutz, Zuflucht bei Allah, Ruqyah und erlaubten Bittgebeten." },
+      { nr: "35", title: "Ruqyah, Schutz & Zuflucht", id: RUQYAH_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu al-Falaq, an-Nās, Muʿawwidhāt, Ruqyah und Zuflucht bei Allah." },
       { nr: "36", title: "Tod, Janāzah & Trauer", id: TRAUER_SLUG, mark: "ring", pending: true, lede: "Geprüfte Grundlagen zu Tod, Trauer, Janāzah, Duʿāʾ und Grenzen der Klage." },
       { nr: "37", title: "Mädchen, Pubertät & Pflichtwissen", id: MAEDCHEN_SLUG, mark: "home", pending: true, lede: "Geprüfte Grundlagen zu Reife, Pflichtwissen, Schamhaftigkeit, Gebet und religiöser Verantwortung." },
       { nr: "38", title: "Falsches Wissen, Bidʿah & Quellenprüfung", id: BIDAHQ_SLUG, mark: "lamp", pending: true, lede: "Geprüfte Grundlagen zum Schutz vor ungeprüften Aussagen, schwachen Quellen und erfundenen Inhalten." },
@@ -2692,7 +2696,7 @@
     else if (abschnitt === MEDIEN_SLUG)
       hint = '<div class="frauen-hint"><p>Dieser Bereich ist in Prüfung. Fragen zu Bildern, Profilbildern, Videos, Stimme, Sprachnachrichten, sozialen Medien, Kommentaren, öffentlichem Schreiben und digitaler Darstellung bleiben verborgen, bis sie einzeln geprüft wurden.</p></div>';
     else if (abschnitt === RUQYAH_SLUG)
-      hint = '<div class="frauen-hint"><p>Dieser Bereich zeigt später nur geprüfte Inhalte zu Ruqyah, Schutz und Zuflucht bei Allah. Heilversprechen, Diagnosen, Siḥr-Fälle, Jinn-Fragen, psychische Krisen und persönliche Fälle bleiben verborgen, bis sie streng geprüft wurden.</p></div>';
+      hint = '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Magie, ʿAyn, Ḥasad, Krankheit, Ruqyah-Behandlung, Kinder-Ruqyah, Amulette, Talismane, Wasser-Ruqyah, digitale Ruqyah und Einzelfälle bleiben verborgen, bis sie einzeln streng geprüft wurden.</p></div>';
     else if (abschnitt === TRAUER_SLUG)
       hint = '<div class="frauen-hint"><p>Dieser Bereich ist sensibel. Trauer, Tod, Janāzah, Iḥdād, Weinen, Klage, Friedhofsbesuch und Todesfälle von Kindern oder Ehemännern werden nur angezeigt, wenn Quelle und Direktnachweis streng geprüft wurden.</p></div>';
     else if (abschnitt === MAEDCHEN_SLUG)
@@ -2775,7 +2779,7 @@
         : abschnitt === MEDIEN_SLUG
         ? '<p class="lede">Geprüfte Grundlagen zu Darstellung, Fotos, Stimme, Schreiben, öffentlichem Auftreten und digitalen Grenzen.</p>'
         : abschnitt === RUQYAH_SLUG
-        ? '<p class="lede">Geprüfte Grundlagen zu Schutz, Zuflucht bei Allah, Ruqyah und erlaubten Bittgebeten.</p>'
+        ? '<p class="lede">Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne ungeprüfte Ruqyah-Listen.</p>'
         : abschnitt === TRAUER_SLUG
         ? '<p class="lede">Geprüfte Grundlagen zu Tod, Trauer, Janāzah, Duʿāʾ und Grenzen der Klage.</p>'
         : abschnitt === MAEDCHEN_SLUG
@@ -3127,7 +3131,7 @@
     if (parsed.abschnitt === RUQYAH_SLUG && parsed.page === "list") {
       return {
         title: "Ruqyah, Schutz & Zuflucht",
-        subtitle: "Geprüfte Grundlagen zu Schutz, Zuflucht bei Allah, Ruqyah und erlaubten Bittgebeten."
+        subtitle: "Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne ungeprüfte Ruqyah-Listen."
       };
     }
     if (parsed.abschnitt === TRAUER_SLUG && parsed.page === "list") {
