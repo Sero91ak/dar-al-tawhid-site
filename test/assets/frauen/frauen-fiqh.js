@@ -46,6 +46,8 @@
   var UMGANG_SLUG = "umgang-nicht-maharim";
   var REISE_URL = "/test/data/frauen-reise-mahram-schutz.json";
   var REISE_SLUG = "reise-mahram-schutz";
+  var KRANKHEIT_URL = "/test/data/frauen-krankheit-pruefung-geduld.json";
+  var KRANKHEIT_SLUG = "krankheit-pruefung-geduld";
   var ERLAUBTE_QUELLENART = {
     quran: 1,
     sahih: 1,
@@ -556,6 +558,29 @@
     mahram: "Maḥram",
     "in-pruefung": "In Prüfung"
   };
+  var KRANKHEIT_THEMEN = [
+    { id: "alle", label: "Alle" },
+    { id: "pruefung", label: "Prüfung" },
+    { id: "krankheit", label: "Krankheit" },
+    { id: "geduld", label: "Geduld" },
+    { id: "duaa", label: "Duʿāʾ" },
+    { id: "suendenvergebung", label: "Sündenvergebung" },
+    { id: "hoffnung", label: "Hoffnung" },
+    { id: "dankbarkeit", label: "Dankbarkeit" },
+    { id: "sahabah-athar", label: "Ṣaḥābah & Āthār" },
+    { id: "in-pruefung", label: "In Prüfung" }
+  ];
+  var KRANKHEIT_BEREICH_LABEL = {
+    pruefung: "Prüfung",
+    krankheit: "Krankheit",
+    geduld: "Geduld",
+    duaa: "Duʿāʾ",
+    suendenvergebung: "Sündenvergebung",
+    hoffnung: "Hoffnung",
+    dankbarkeit: "Dankbarkeit",
+    "sahabah-athar": "Ṣaḥābah & Āthār",
+    "in-pruefung": "In Prüfung"
+  };
   var fiqhCache = null;
   var sahabCache = null;
   var tabiiCache = null;
@@ -580,6 +605,7 @@
   var zinahCache = null;
   var umgangCache = null;
   var reiseCache = null;
+  var krankheitCache = null;
   var loadPromise = null;
   var fiqhQ = "";
   var sahabQ = "";
@@ -605,6 +631,7 @@
   var zinahQ = "";
   var umgangQ = "";
   var reiseQ = "";
+  var krankheitQ = "";
   var fiqhThema = "alle";
   var sahabThema = "alle";
   var tabiiThema = "alle";
@@ -629,6 +656,7 @@
   var zinahThema = "alle";
   var umgangThema = "alle";
   var reiseThema = "alle";
+  var krankheitThema = "alle";
   var hubQ = "";
   var hubThema = "alle";
   var filterOpen = true;
@@ -657,7 +685,8 @@
       abschnitt === NIKAH_SLUG ||
       abschnitt === ZINAH_SLUG ||
       abschnitt === UMGANG_SLUG ||
-      abschnitt === REISE_SLUG
+      abschnitt === REISE_SLUG ||
+      abschnitt === KRANKHEIT_SLUG
     );
   }
 
@@ -747,7 +776,7 @@
   }
 
   function load() {
-    if (fiqhCache && sahabCache && tabiiCache && muetterCache && eheCache && hijabCache && wissenCache && faqCache && kurzCache && salafCache && moscheeCache && hajjCache && sadaqahCache && adabCache && kinderCache && muslimahCache && nifasCache && dienstCache && iddahCache && reinigungCache && nikahCache && zinahCache && umgangCache && reiseCache)
+    if (fiqhCache && sahabCache && tabiiCache && muetterCache && eheCache && hijabCache && wissenCache && faqCache && kurzCache && salafCache && moscheeCache && hajjCache && sadaqahCache && adabCache && kinderCache && muslimahCache && nifasCache && dienstCache && iddahCache && reinigungCache && nikahCache && zinahCache && umgangCache && reiseCache && krankheitCache)
       return Promise.resolve();
     if (loadPromise) return loadPromise;
     loadPromise = Promise.all([
@@ -774,7 +803,8 @@
       fetchJson(NIKAH_URL),
       fetchJson(ZINAH_URL),
       fetchJson(UMGANG_URL),
-      fetchJson(REISE_URL)
+      fetchJson(REISE_URL),
+      fetchJson(KRANKHEIT_URL)
     ])
       .then(function (pair) {
         fiqhCache = pair[0];
@@ -801,6 +831,7 @@
         zinahCache = pair[21];
         umgangCache = pair[22];
         reiseCache = pair[23];
+        krankheitCache = pair[24];
       })
       .catch(function (err) {
         loadPromise = null;
@@ -906,6 +937,10 @@
     if (v.indexOf(REISE_SLUG + "/") === 0) {
       return { page: "detail", abschnitt: REISE_SLUG, kennung: v.slice(REISE_SLUG.length + 1) };
     }
+    if (v === KRANKHEIT_SLUG) return { page: "list", abschnitt: KRANKHEIT_SLUG, kennung: "" };
+    if (v.indexOf(KRANKHEIT_SLUG + "/") === 0) {
+      return { page: "detail", abschnitt: KRANKHEIT_SLUG, kennung: v.slice(KRANKHEIT_SLUG.length + 1) };
+    }
     return { page: "hub", abschnitt: "", kennung: "" };
   }
 
@@ -933,6 +968,7 @@
     if (abschnitt === ZINAH_SLUG) return zinahCache;
     if (abschnitt === UMGANG_SLUG) return umgangCache;
     if (abschnitt === REISE_SLUG) return reiseCache;
+    if (abschnitt === KRANKHEIT_SLUG) return krankheitCache;
     return fiqhCache;
   }
 
@@ -961,6 +997,7 @@
     if (abschnitt === ZINAH_SLUG) return zinahThema;
     if (abschnitt === UMGANG_SLUG) return umgangThema;
     if (abschnitt === REISE_SLUG) return reiseThema;
+    if (abschnitt === KRANKHEIT_SLUG) return krankheitThema;
     return fiqhThema;
   }
 
@@ -989,6 +1026,7 @@
     else if (abschnitt === ZINAH_SLUG) zinahThema = id;
     else if (abschnitt === UMGANG_SLUG) umgangThema = id;
     else if (abschnitt === REISE_SLUG) reiseThema = id;
+    else if (abschnitt === KRANKHEIT_SLUG) krankheitThema = id;
     else fiqhThema = id;
   }
 
@@ -1017,6 +1055,7 @@
     if (abschnitt === ZINAH_SLUG) return zinahQ;
     if (abschnitt === UMGANG_SLUG) return umgangQ;
     if (abschnitt === REISE_SLUG) return reiseQ;
+    if (abschnitt === KRANKHEIT_SLUG) return krankheitQ;
     return fiqhQ;
   }
 
@@ -1045,6 +1084,7 @@
     else if (abschnitt === ZINAH_SLUG) zinahQ = v;
     else if (abschnitt === UMGANG_SLUG) umgangQ = v;
     else if (abschnitt === REISE_SLUG) reiseQ = v;
+    else if (abschnitt === KRANKHEIT_SLUG) krankheitQ = v;
     else fiqhQ = v;
   }
 
@@ -1080,7 +1120,8 @@
         abschnitt === NIKAH_SLUG ||
         abschnitt === ZINAH_SLUG ||
         abschnitt === UMGANG_SLUG ||
-        abschnitt === REISE_SLUG
+        abschnitt === REISE_SLUG ||
+        abschnitt === KRANKHEIT_SLUG
       ) {
         if (chip !== thema && e.thema !== thema) return false;
       } else if (chip !== thema) return false;
@@ -1100,6 +1141,7 @@
       lehreVon(e),
       e.quellenanzeige,
       e.bereich,
+      e.thema,
       hatDirektnachweis(e) ? "direktnachweis" : "",
       (e.schlagwoerter || []).join(" ")
     ]
@@ -1109,7 +1151,7 @@
   }
 
   function offeneAbschnitte() {
-    return ["fiqh", "sahabiyyat", "tabiiyyat", MUETTER_SLUG, EHE_SLUG, HIJAB_SLUG, WISSEN_SLUG, FAQ_SLUG, KURZ_SLUG, SALAF_SLUG, MOSCHEE_SLUG, HAJJ_SLUG, SADAQAH_SLUG, ADAB_SLUG, KINDER_SLUG, MUSLIMAH_SLUG, NIFAS_SLUG, DIENST_SLUG, IDDAH_SLUG, REINIGUNG_SLUG, NIKAH_SLUG, ZINAH_SLUG, UMGANG_SLUG, REISE_SLUG];
+    return ["fiqh", "sahabiyyat", "tabiiyyat", MUETTER_SLUG, EHE_SLUG, HIJAB_SLUG, WISSEN_SLUG, FAQ_SLUG, KURZ_SLUG, SALAF_SLUG, MOSCHEE_SLUG, HAJJ_SLUG, SADAQAH_SLUG, ADAB_SLUG, KINDER_SLUG, MUSLIMAH_SLUG, NIFAS_SLUG, DIENST_SLUG, IDDAH_SLUG, REINIGUNG_SLUG, NIKAH_SLUG, ZINAH_SLUG, UMGANG_SLUG, REISE_SLUG, KRANKHEIT_SLUG];
   }
 
   function countSichtbare(abschnitt) {
@@ -1150,6 +1192,7 @@
     if (abschnitt === ZINAH_SLUG) return "veil";
     if (abschnitt === UMGANG_SLUG) return "people";
     if (abschnitt === REISE_SLUG) return "ring";
+    if (abschnitt === KRANKHEIT_SLUG) return "lamp";
     return "book";
   }
 
@@ -1247,7 +1290,8 @@
       { nr: "21", title: "Nikāḥ, Zustimmung & Mahr", id: NIKAH_SLUG, mark: "home", lede: "Geprüfte Grundlagen zu Eheschließung, Zustimmung, Mitgift und Verbot der Zwangsehe." },
       { nr: "22", title: "Zīnah, Schmuck & Kleidung", id: ZINAH_SLUG, mark: "veil", lede: "Geprüfte Grundlagen zu Ḥidschāb, Kleidung, Schmuck, Duft und Tabarrudsch." },
       { nr: "23", title: "Umgang mit Nicht-Maḥārim", id: UMGANG_SLUG, mark: "people", lede: "Geprüfte Grundlagen zu Khalwah, Blick, Rede und Abstand." },
-      { nr: "24", title: "Reise, Maḥram & Schutz", id: REISE_SLUG, mark: "ring", lede: "Geprüfte Grundlagen zu Reise, Maḥram und Schutz – ohne moderne Flug-Fatwas." }
+      { nr: "24", title: "Reise, Maḥram & Schutz", id: REISE_SLUG, mark: "ring", lede: "Geprüfte Grundlagen zu Reise, Maḥram und Schutz – ohne moderne Flug-Fatwas." },
+      { nr: "25", title: "Krankheit, Prüfung & Geduld", id: KRANKHEIT_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zu Krankheit, Muṣībah, Ṣabr, Duʿāʾ und Hoffnung." }
     ];
   }
 
@@ -1414,6 +1458,8 @@
                                         ? UMGANG_BEREICH_LABEL
                                       : abschnitt === REISE_SLUG
                                         ? REISE_BEREICH_LABEL
+                                      : abschnitt === KRANKHEIT_SLUG
+                                        ? KRANKHEIT_BEREICH_LABEL
                   : FIQH_BEREICH_LABEL;
     var bereich = labelMap[e.bereich] || e.bereich || "";
     var person = e.person || e.name;
@@ -1496,6 +1542,8 @@
                                         ? UMGANG_THEMEN
                                       : abschnitt === REISE_SLUG
                                         ? REISE_THEMEN
+                                      : abschnitt === KRANKHEIT_SLUG
+                                        ? KRANKHEIT_THEMEN
                   : FIQH_THEMEN;
     var q = currentQ(abschnitt);
     var thema = currentThema(abschnitt);
@@ -1526,7 +1574,8 @@
           abschnitt === NIKAH_SLUG ||
           abschnitt === ZINAH_SLUG ||
           abschnitt === UMGANG_SLUG ||
-          abschnitt === REISE_SLUG
+          abschnitt === REISE_SLUG ||
+          abschnitt === KRANKHEIT_SLUG
         ? '<p class="frauen-empty">Noch keine geprüften Inhalte vorhanden.</p>'
         : '<p class="frauen-empty">Keine sichtbare Aussage zu dieser Auswahl.</p>';
     var hint =
@@ -1562,6 +1611,8 @@
           ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Chat, Arbeit, Taxi, Arztbesuche und moderne Alltagssituationen bleiben verborgen, bis sie einzeln geprüft wurden.</p></div>'
           : abschnitt === REISE_SLUG
           ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte Inhalte mit Quelle und Direktnachweis. Flug allein, Zug, Hotel, Dienstreise und Notfälle bleiben verborgen, bis sie einzeln geprüft wurden.</p></div>'
+          : abschnitt === KRANKHEIT_SLUG
+          ? '<div class="frauen-hint"><p>Dieser Bereich zeigt nur geprüfte religiöse Inhalte mit Quelle und Direktnachweis. Medizinische Fragen, psychologische Krisen, Diagnosen, Medikamente, Therapie, Schwangerschaftsrisiken und Einzelfälle bleiben verborgen, bis sie separat geprüft wurden.</p></div>'
           : abschnitt === KURZ_SLUG
           ? '<div class="frauen-hint"><p>Dieser Bereich enthält keine ausgeschmückten Geschichten. Sichtbar sind nur Kurzberichte mit geprüfter Quelle und Direktnachweis. Alles Unsichere bleibt verborgen.</p></div>'
           : abschnitt === FAQ_SLUG
@@ -1608,6 +1659,8 @@
         ? '<p class="lede">Geprüfte Grundlagen zu Abstand, Blick, Rede und Khalwah – ohne moderne Chat-Fatwas.</p>'
         : abschnitt === REISE_SLUG
         ? '<p class="lede">Geprüfte Grundlagen aus authentischer Sunnah zu Reise und Maḥram – ohne moderne Flug-Fatwas.</p>'
+        : abschnitt === KRANKHEIT_SLUG
+        ? '<p class="lede">Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne medizinische Ratschläge.</p>'
         : abschnitt === KURZ_SLUG
         ? '<p class="lede">Kurze belegte Ereignisse aus dem Leben rechtschaffener Frauen – mit Quelle und Direktnachweis.</p>'
         : abschnitt === FAQ_SLUG
@@ -1656,6 +1709,7 @@
     if (abschnitt === ZINAH_SLUG) return "Zīnah, Schmuck & Kleidung";
     if (abschnitt === UMGANG_SLUG) return "Umgang mit Nicht-Maḥārim";
     if (abschnitt === REISE_SLUG) return "Reise, Maḥram & Schutz";
+    if (abschnitt === KRANKHEIT_SLUG) return "Krankheit, Prüfung & Geduld";
     if (abschnitt === KURZ_SLUG) return "Geprüfte Kurzberichte";
     if (abschnitt === FAQ_SLUG) return "Fragen & Antworten";
     if (abschnitt === WISSEN_SLUG) return "Wissen & Lernen";
@@ -1731,7 +1785,7 @@
       "</div></div>" +
       nachweiseDirekt(e) +
       "</div>";
-    var nachBericht = istKurz(abschnitt) || abschnitt === DIENST_SLUG ? lehreHtml + quelleBlock : quelleBlock + lehreHtml;
+    var nachBericht = istKurz(abschnitt) || abschnitt === DIENST_SLUG || abschnitt === KRANKHEIT_SLUG ? lehreHtml + quelleBlock : quelleBlock + lehreHtml;
     return (
       '<article class="article post-reader">' +
       '<header class="post-reader-title"><div class="kicker">' +
@@ -1857,6 +1911,12 @@
         subtitle: "Geprüfte Grundlagen aus authentischer Sunnah zu Reise und Maḥram – ohne moderne Flug-Fatwas."
       };
     }
+    if (parsed.abschnitt === KRANKHEIT_SLUG && parsed.page === "list") {
+      return {
+        title: "Krankheit, Prüfung & Geduld",
+        subtitle: "Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne medizinische Ratschläge."
+      };
+    }
     if (parsed.abschnitt === KURZ_SLUG && parsed.page === "list") {
       return {
         title: "Geprüfte Kurzberichte",
@@ -1944,6 +2004,8 @@
             ? "Umgang mit Nicht-Maḥārim"
             : parsed.abschnitt === REISE_SLUG
             ? "Reise, Maḥram & Schutz"
+            : parsed.abschnitt === KRANKHEIT_SLUG
+            ? "Krankheit, Prüfung & Geduld"
             : parsed.abschnitt === KURZ_SLUG
             ? "Geprüfte Kurzberichte"
             : parsed.abschnitt === FAQ_SLUG
@@ -2001,7 +2063,8 @@
       !nikahCache ||
       !zinahCache ||
       !umgangCache ||
-      !reiseCache
+      !reiseCache ||
+      !krankheitCache
     ) {
       load().then(refreshIfFrauen).catch(refreshIfFrauen);
       return '<p class="frauen-empty">Bereich wird geladen…</p>';
