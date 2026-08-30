@@ -1291,9 +1291,9 @@ struct WebAppView: UIViewRepresentable {
 
             let title = UILabel()
             title.translatesAutoresizingMaskIntoConstraints = false
-            title.text = "DAR AL TAWḤĪD"
+            title.text = "DĀR AL TAWḤĪD"
             title.textColor = UIColor(red: 0.96, green: 0.93, blue: 0.82, alpha: 1.0)
-            title.font = UIFont.systemFont(ofSize: 34, weight: .bold)
+            title.font = UIFont.systemFont(ofSize: 34, weight: .heavy)
             title.textAlignment = .center
 
             let kicker = UILabel()
@@ -1309,14 +1309,16 @@ struct WebAppView: UIViewRepresentable {
             let progressTrack = UIView()
             progressTrack.translatesAutoresizingMaskIntoConstraints = false
             progressTrack.backgroundColor = UIColor(red: 0.19, green: 0.16, blue: 0.10, alpha: 0.95)
-            progressTrack.layer.cornerRadius = 0
+            progressTrack.layer.cornerRadius = 3
+            progressTrack.clipsToBounds = true
             progressTrack.layer.borderWidth = 0
             progressTrack.backgroundColor = UIColor(red: 0.79, green: 0.66, blue: 0.42, alpha: 0.16)
 
             let progressGlow = UIView()
             progressGlow.translatesAutoresizingMaskIntoConstraints = false
             progressGlow.backgroundColor = UIColor(red: 0.92, green: 0.84, blue: 0.62, alpha: 1.0)
-            progressGlow.layer.cornerRadius = 0
+            progressGlow.layer.cornerRadius = 3
+            progressGlow.clipsToBounds = true
             progressGlow.layer.shadowColor = UIColor(red: 0.92, green: 0.84, blue: 0.62, alpha: 1.0).cgColor
             progressGlow.layer.shadowOpacity = 0.22
             progressGlow.layer.shadowRadius = 3

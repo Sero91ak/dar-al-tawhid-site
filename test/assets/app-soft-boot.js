@@ -1,6 +1,6 @@
 /**
  * Soft boot overlay for visitor + test web apps (iOS parity).
- * v663 · Ein Overlay, nie auf <html>; alle Duplikate entfernen — Web-App hing bei 0%.
+ * v670 · Titel DĀR AL TAWḤĪD; Leiste rund (CSS in index). Overlay nie auf <html>.
  */
 (function () {
   if (window.__darSoftBootInstalled) return;
@@ -145,7 +145,7 @@
     overlayEl.setAttribute("aria-live", "polite");
     overlayEl.innerHTML =
       '<img class="dar-soft-boot__mark" src="/watermark-my-logo-full.png" alt="" width="148" height="148" decoding="async">' +
-      '<p class="dar-soft-boot__title">DAR AL TAWḤĪD</p>' +
+      '<p class="dar-soft-boot__title">DĀR AL TAWḤĪD</p>' +
       '<p class="dar-soft-boot__sub">Qurʾān · Sunnah · Āthār</p>' +
       '<div class="dar-soft-boot__track" aria-hidden="true"><div class="dar-soft-boot__bar"></div></div>' +
       '<p class="dar-soft-boot__pct">0%</p>';

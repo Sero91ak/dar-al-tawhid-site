@@ -87,6 +87,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "boot-loading-rounded-dar-macron-2026-08-30",
+      "approvedBy": "user-explicit-loading-bar-rounded-dar-al-tawhid-title",
+      "reason": "Nutzer: Loading-Leiste am Anfang rund (nicht eckig abgeschnitten), Titel DĀR AL TAWḤĪD mit Strich über Ā, etwas dickere Schrift. Globaler Start-Ladebereich: iOS-Overlay + Test-Boot.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "ios/DarAlTawhid/",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/app-soft-boot.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "ios-daily-push-widget-deeplink-2026-08-30",
       "approvedBy": "user-explicit-ios-push-widget-open-statement",
       "reason": "Nutzer: iOS Push (Duʿāʾ/Heute) und Widgets sollen direkt zur Aussage/Vers/Duʿāʾ führen, nicht nur die App öffnen.",
