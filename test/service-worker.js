@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v790-gebetszeiten';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v791-frauen-dawah';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -84,6 +84,7 @@ const APP_SHELL = [
   '/test/data/frauen-reue-istighfar-schutz-suenden.json',
   '/test/data/frauen-tawbah-istighfar-selbstpruefung.json',
   '/test/data/frauen-ramadan-fasten-itikaf.json',
+  '/test/data/frauen-dawah-lehren-weitergeben.json',
   '/data/books-library.json',
   '/data/scholars-library.json',
   '/test-apple-touch-icon.png',
