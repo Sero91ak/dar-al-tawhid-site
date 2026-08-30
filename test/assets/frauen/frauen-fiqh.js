@@ -2149,28 +2149,7 @@
       '" value="' +
       esc(q) +
       '" data-frauen-q autocomplete="off" spellcheck="false" enterkeyhint="search">' +
-      "</div>" +
-      '<button type="button" class="advanced-toggle' +
-      (filterOpen || filterOben(abschnitt) ? " active" : "") +
-      '" data-frauen-filter-toggle>' +
-      (filterOpen || filterOben(abschnitt) ? "Filter ausblenden" : "Filter anzeigen") +
-      "</button></div>" +
-      '<div class="frauen-filter-panel' +
-      (filterOpen || filterOben(abschnitt) ? " is-open" : "") +
-      '"' +
-      (filterOpen || filterOben(abschnitt) ? "" : " hidden") +
-      ">" +
-      '<p class="frauen-filter-panel__label">Bereiche</p>' +
-      '<div class="frauen-filter-grid">' +
-      areaJumpChips(isHub ? "" : abschnitt) +
-      "</div>" +
-      (isHub
-        ? ""
-        : '<p class="frauen-filter-panel__label frauen-filter-panel__label--sub">Themen in diesem Bereich</p>' +
-          '<div class="frauen-filter-grid">' +
-          chips +
-          "</div>") +
-      "</div></section>"
+      "</div></div></section>"
     );
   }
 
@@ -2408,10 +2387,7 @@
     var treffer = q || pickSprecher || pickBuch ? sucheUeberall(q) : [];
     var liste = q || pickSprecher || pickBuch
       ? treffer.length
-        ? '<div class="topics-hub__label"><b>Treffer</b><span>' +
-          treffer.length +
-          "</span></div>" +
-          '<section class="post-grid topic-collection frauen-post-list">' +
+        ? '<section class="post-grid topic-collection frauen-post-list">' +
           treffer
             .map(function (t) {
               return listCard(t.e, t.abschnitt);
@@ -2419,10 +2395,7 @@
             .join("") +
           "</section>"
         : '<p class="frauen-empty">Keine passende Aussage.</p>'
-      : '<div class="topics-hub__label"><b>Themen</b><span>' +
-        areas.length +
-        " Bereiche</span></div>" +
-        '<section class="category-cluster"><h3>Hauptbereiche</h3>' +
+      : '<section class="category-cluster">' +
         '<div class="topics-theme-grid grid-list frauen-fiqh-list" aria-label="Hauptbereiche">' +
         areas
           .map(function (a) {

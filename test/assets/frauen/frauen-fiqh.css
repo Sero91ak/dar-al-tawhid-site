@@ -474,10 +474,12 @@ body.is-frauen-route .frauen-search-pro{
   padding:0 0 8px!important;
   margin:0 0 16px!important;
 }
-body.is-frauen-route .frauen-search-pro .advanced-toggle{
-  border-radius:999px!important;
-  border:1px solid var(--cat-line,color-mix(in srgb,var(--gold2) 28%,transparent))!important;
-  background:transparent!important;
+body.is-frauen-route .frauen-search-pro .advanced-toggle,
+body.is-frauen-route .frauen-filter-panel,
+body.is-frauen-route .frauen-hub .topics-hub__label,
+body.is-frauen-route .frauen-list-page .topics-hub__label,
+body.is-frauen-route .frauen-hub .category-cluster > h3{
+  display:none!important;
 }
 body.is-frauen-route .frauen-filter-panel{
   margin:10px 0 4px;
