@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v742";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v743";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -3095,61 +3095,117 @@ html[data-theme="light"] .prayer-overview__time-hour{color:#3d2a12!important}
   border:0!important;
   background:transparent!important;
   box-shadow:none!important;
-  padding:2px 0 10px!important;
-  margin:0 0 8px!important;
+  padding:0!important;
+  margin:0 0 4px!important;
   border-radius:0!important;
   width:100%;
   max-width:none;
 }
 .prayer-page-noble .prayer-time-grid--top{
   display:grid;
-  grid-template-columns:repeat(5,minmax(0,1fr));
-  gap:8px;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:2px 12px;
   width:100%;
-  margin:0 0 10px;
+  margin:0 0 6px;
+  padding:0 0 8px;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2,#efd78e) 26%,transparent);
 }
 .prayer-page-noble .prayer-compact-summary{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:8px;
+  gap:6px 14px;
   width:100%;
-  margin:0 0 12px;
+  margin:0 0 8px;
+  padding:0 0 8px;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2,#efd78e) 22%,transparent);
 }
 .prayer-page-noble .prayer-time-card,
+.prayer-page-noble .prayer-time-card--slim,
 .prayer-page-noble .prayer-summary-card,
-.prayer-page-noble .qibla-data-item{
+.prayer-page-noble .qibla-data-item,
+.prayer-page-noble .qibla-status{
   position:relative;
-  overflow:hidden;
-  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 42%,transparent);
-  border-radius:16px;
-  background:radial-gradient(circle at 18% 0%,rgba(239,215,142,.12),transparent 42%),linear-gradient(168deg,color-mix(in srgb,var(--card,#16130e) 94%,transparent),color-mix(in srgb,var(--bg,#080806) 88%,var(--gold2,#efd78e) 5%));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 10px 22px rgba(0,0,0,.18);
+  overflow:visible;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  min-height:0!important;
+  padding:3px 0!important;
 }
 .prayer-page-noble .prayer-time-card:before,
 .prayer-page-noble .prayer-summary-card:before,
-.prayer-page-noble .qibla-data-item:before{
-  content:"";
-  position:absolute;
-  inset:5px;
-  border:1px solid rgba(239,215,142,.16);
-  border-radius:12px;
-  pointer-events:none;
+.prayer-page-noble .qibla-data-item:before{display:none!important;content:none!important}
+.prayer-page-noble .prayer-time-card b{
+  color:var(--muted)!important;
+  font-size:9.5px!important;
+  letter-spacing:.08em;
+  margin-bottom:2px!important;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
+.prayer-page-noble .prayer-time-card span{
+  color:var(--gold2)!important;
+  font-size:15px!important;
+  font-weight:800;
+}
+.prayer-page-noble .prayer-summary-card b{font-size:8.5px!important;letter-spacing:.14em}
+.prayer-page-noble .prayer-summary-card span{font-size:13px!important}
+.prayer-page-noble .prayer-summary-card small{font-size:10px!important;margin-top:2px}
 .prayer-page-noble .qibla-pro-section{
   width:100%;
-  margin:8px 0 12px;
-  padding:14px 12px 16px;
-}
-.prayer-page-noble .prayer-controls-compact{
+  margin:0!important;
+  padding:4px 0 0!important;
   border:0!important;
+  border-radius:0!important;
   background:transparent!important;
   box-shadow:none!important;
-  padding:4px 0 0!important;
-  margin-top:2px;
+}
+.prayer-page-noble .qibla-pro-head{margin:0 0 6px}
+.prayer-page-noble .qibla-pro-title{font-size:18px!important;line-height:1.1;margin:0!important}
+.prayer-page-noble .qibla-layout-pro{
+  display:grid!important;
+  grid-template-columns:minmax(128px,36%) minmax(0,1fr);
+  gap:8px 12px;
+  align-items:center;
+}
+.prayer-page-noble .qibla-compass-pro{width:100%!important;max-width:168px;margin:0 auto}
+.prayer-page-noble .qibla-compass-face{
+  border-width:1px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.prayer-page-noble .qibla-bearing-readout{font-size:18px;margin-top:4px}
+.prayer-page-noble .qibla-fiqh-line{margin:2px 0 0;font-size:9px;letter-spacing:.1em}
+.prayer-page-noble .qibla-orient-hint{font-size:10px;line-height:1.3;margin:4px 0 0}
+.prayer-page-noble .qibla-data-grid{gap:2px 12px;margin:0}
+.prayer-page-noble .qibla-data-item{
+  border-bottom:1px solid color-mix(in srgb,var(--gold2,#efd78e) 16%,transparent)!important;
+  padding:4px 0 6px!important;
+}
+.prayer-page-noble .qibla-status{padding:4px 0!important;min-height:0}
+.prayer-page-noble .qibla-btn-start,
+.prayer-page-noble .qibla-btn-stop{min-height:34px!important}
+.prayer-page-noble .prayer-controls-compact{
+  border:0!important;
+  border-top:1px solid color-mix(in srgb,var(--gold2,#efd78e) 22%,transparent)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:6px 0 0!important;
+  margin:8px 0 0!important;
   border-radius:0!important;
 }
-.prayer-page-noble .qibla-compass-pro{width:min(100%,340px)}
-@media(max-width:420px){.prayer-page-noble .prayer-time-grid--top{grid-template-columns:repeat(3,minmax(0,1fr))}}
+html[data-theme] .prayer-page-noble .qibla-compass-face,
+html[data-theme] .prayer-page-noble .qibla-pro-section,
+html[data-theme] .prayer-page-noble .prayer-time-card,
+html[data-theme] .prayer-page-noble .prayer-summary-card,
+html[data-theme] .prayer-page-noble .qibla-data-item,
+html[data-theme] .prayer-page-noble .prayer-controls-compact,
+html[data-theme] .prayer-page-noble .qibla-status{
+  background:transparent!important;
+  box-shadow:none!important;
+}
 
 .qibla-pro-section{
   border:1px solid rgba(239,215,142,.38);
@@ -26384,7 +26440,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v742";
+const APP_BUILD_ID="app-shell-v743";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
