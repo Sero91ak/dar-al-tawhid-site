@@ -3435,6 +3435,42 @@ html[data-theme] #appView.view:has(.prayer-page-noble){
   background:transparent!important;
   color:var(--muted)!important;
 }
+.jummah-hub-page .jummah-push-panel{margin:0 0 8px!important;padding:10px!important}
+.jummah-hub-page .jummah-push-panel h4{display:none}
+.jummah-hub-page .jummah-push-panel .prayer-action-btn,
+.jummah-hub-page .jummah-push-panel .filter-select,
+.jummah-hub-page .jummah-push-panel .field{min-height:38px!important}
+.jummah-hub-page .prayer-settings-grid{gap:6px;margin-top:6px}
+.jummah-hub-page .jummah-hub-meta{margin:8px 0!important}
+.jummah-hub-page .jummah-hub-nav{display:flex!important;justify-content:center;margin-top:8px!important;grid-template-columns:none!important}
+.jummah-hub-page .jummah-hub-nav .prayer-action-btn{min-width:min(52%,220px);min-height:38px!important}
+.qibla-hub-page .qibla-pro-head,.qibla-hub-page .qibla-pro-head + .prayer-noble-rule{display:none}
+.qibla-hub-page .qibla-layout-pro{gap:6px!important}
+.qibla-hub-page .qibla-compass-pro{width:min(58vw,188px)!important;max-width:188px!important}
+.qibla-hub-page .qibla-bearing-readout{font-size:18px;margin-top:4px}
+.qibla-hub-page .qibla-orient-hint{margin:4px auto 0;font-size:9.5px}
+.qibla-hub-page .qibla-data-item{padding:7px 10px!important}
+.qibla-hub-page .qibla-status{margin:4px 0 0!important;font-size:10.5px}
+.qibla-hub-page .qibla-action-row{grid-template-columns:1fr 1fr!important;gap:6px;margin-top:6px}
+.qibla-hub-page .qibla-btn-start,.qibla-hub-page .qibla-btn-stop{grid-column:auto!important;min-height:36px!important}
+.qibla-hub-page .qibla-btn-start:only-child,.qibla-hub-page .qibla-action-row:not(:has(#stopQiblaBtn:not([hidden]))) .qibla-btn-start{grid-column:1/-1!important}
+.qibla-hub-page .prayer-controls-compact{padding:6px 0 0!important;margin:6px 0 0!important}
+.qibla-hub-page .qibla-hub-tools .prayer-settings-grid{grid-template-columns:1fr 1fr;gap:6px;margin-top:0}
+.qibla-hub-page .qibla-hub-tools #prayerCityInput{grid-column:1/-1}
+.qibla-hub-page .qibla-hub-tools #savePrayerCityBtn{grid-column:auto!important}
+.qibla-hub-page .qibla-hub-tools .prayer-action-btn,.qibla-hub-page .qibla-hub-tools .filter-select{min-height:38px!important}
+body:has(.jummah-hub-page) .view-head,
+body:has(.qibla-hub-page) .view-head{padding-bottom:6px!important;margin-bottom:8px!important}
+body:has(.jummah-hub-page) .view-desc,
+body:has(.qibla-hub-page) .view-desc{margin-top:2px!important;font-size:12px!important}
+body:has(.jummah-hub-page) .footer,
+body:has(.qibla-hub-page) .footer{padding:10px 0 8px!important}
+body:has(.jummah-hub-page) .footer-actions,
+body:has(.qibla-hub-page) .footer-actions{margin-top:8px!important;gap:6px!important}
+body:has(.jummah-hub-page) .footer-action-btn,
+body:has(.qibla-hub-page) .footer-action-btn{min-height:32px!important;padding:5px 6px!important;border-radius:12px!important}
+body:has(.jummah-hub-page) .signature,
+body:has(.qibla-hub-page) .signature{font-size:18px!important;margin-top:4px!important}
 .qibla-pro-head{margin-bottom:12px}
 .qibla-disclaimer{
   border:1px solid rgba(255,196,120,.28);
@@ -25958,8 +25994,8 @@ function updateImageEditorTextModalHint(){const hint=$("imageEditorTextModalHint
 function renderNewsListRow(item,idx){const newsId=item.id||String(idx);const rowClass=item.type==="zakat"||item.nav==="zakat"?"current-focus-row current-focus-row--zakat":item.type==="library"||item.nav==="bibliothek"?"current-focus-row current-focus-row--library":"current-focus-row";return `<article class="${rowClass}" data-nav="news-detail" data-value="${esc(newsId)}" tabindex="0" role="button"><div class="current-focus-icon">${currentUpdateIcon(item)}</div><div class="current-focus-text"><b>${esc(item.title||"Neue Inhalte")}</b><p>${esc(item.text||item.description||"Gerade neu auf DĀR AL TAWḤĪD.")}</p><small>${esc(currentUpdateMeta(item))}</small></div><span class="current-focus-arrow">→</span></article>`}
 function renderNews(){const items=activeCurrentUpdates();return `${setPageHeader("Neu im Fokus","Aktuelle Meldungen und Highlights","News")}<section class="current-focus premium-surface"><div class="current-focus-list">${items.length?items.map(renderNewsListRow).join(""):`<div class="empty">Derzeit keine aktiven Meldungen.</div>`}</section>`}
 function renderSettings(){return `${setPageHeader("Einstellungen","Erscheinungsbild und Schriftgröße","Einstellungen")}${renderThemeSwitchPanel()}${renderAppIconPanel()}${renderFontSettingsPanel()}`}
-function renderJummah(){const s=getPrayerSettings();const manual=jummahPref(s,"jummahUseManualTime");const manualTime=normalizeTimeHHMM(s.jummahManualTime,"13:30");const advance=normalizeJummahAdvanceMinutes(s.jummahAdvanceMinutes);const on=jummahPref(s,"jummahNotifications");const timeLabel=manual?manualTime:(hasPrayerLocation(s)?jummahAutoDhuhrLabel(s):"Standort");return `${setPageHeader("Jumuʿah","Freitagsgebet und Erinnerung.","Jumuʿah")}<section class="prayer-panel prayer-page-noble">${renderJummahPushPanel()}<div class="prayer-compact-summary"><div class="prayer-summary-card"><b>Erinnerung</b><span>${on?"Aktiv":"Aus"}</span></div><div class="prayer-summary-card"><b>Zeit</b><span>${esc(timeLabel)}</span></div></div><div class="qibla-data-grid" style="margin:12px 0"><div class="qibla-data-item"><b>Modus</b><span>${manual?"Manuell":"Nach Dhuhr"}</span></div><div class="qibla-data-item"><b>Vorlauf</b><span>${advance} Min vorher</span></div><div class="qibla-data-item"><b>Moschee</b><span>${manual?manualTime:"Dhuhr"}</span></div><div class="qibla-data-item"><b>Ort</b><span>${esc(s.city||"—")}</span></div></div><div class="prayer-action-row"><button class="prayer-action-btn" type="button" data-nav="prayer">Gebetszeiten</button></div></section>`}
-function renderQiblaPage(){const settings=getPrayerSettings();return `${setPageHeader("Qibla","","Qibla")}<section class="prayer-panel prayer-page-noble">${renderQiblaProPanel(settings)}<div class="prayer-controls-compact"><div class="prayer-settings-grid"><input id="prayerCityInput" class="filter-select" value="${esc(settings.city||"")}" placeholder="Ort" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button></div><div class="prayer-action-row" style="margin-top:10px"><button id="useLocationBtn" class="prayer-action-btn" type="button">Standort</button></div></div></section>`}
+function renderJummah(){const s=getPrayerSettings();const manual=jummahPref(s,"jummahUseManualTime");const manualTime=normalizeTimeHHMM(s.jummahManualTime,"13:30");const advance=normalizeJummahAdvanceMinutes(s.jummahAdvanceMinutes);const on=jummahPref(s,"jummahNotifications");const timeLabel=manual?manualTime:(hasPrayerLocation(s)?jummahAutoDhuhrLabel(s):"Standort");return `${setPageHeader("Jumuʿah","Freitagsgebet und Erinnerung.","Jumuʿah")}<section class="prayer-panel prayer-page-noble jummah-hub-page">${renderJummahPushPanel()}<div class="qibla-data-grid jummah-hub-meta"><div class="qibla-data-item"><b>Erinnerung</b><span>${on?"Aktiv":"Aus"}</span></div><div class="qibla-data-item"><b>Vorlauf</b><span>${advance} Min</span></div><div class="qibla-data-item"><b>Zeit</b><span>${esc(timeLabel)}</span></div><div class="qibla-data-item"><b>Ort</b><span>${esc(s.city||"—")}</span></div></div><div class="prayer-action-row jummah-hub-nav"><button class="prayer-action-btn" type="button" data-nav="prayer">Gebetszeiten</button></div></section>`}
+function renderQiblaPage(){const settings=getPrayerSettings();return `${setPageHeader("Qibla","","Qibla")}<section class="prayer-panel prayer-page-noble qibla-hub-page">${renderQiblaProPanel(settings)}<div class="prayer-controls-compact qibla-hub-tools"><div class="prayer-settings-grid"><input id="prayerCityInput" class="filter-select" value="${esc(settings.city||"")}" placeholder="Ort" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button><button id="useLocationBtn" class="prayer-action-btn" type="button">Standort</button></div></div></section>`}
 function normalizeHadithSearch(text){return String(text||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[ʿʾ'`´]/g,"").replace(/ḥ/g,"h").replace(/ṣ/g,"s").replace(/ā/g,"a").replace(/ī/g,"i").replace(/ū/g,"u").replace(/[^a-z0-9\u0600-\u06ffäöüß]+/g," ").trim()}
 function hadithCollectionHadiths(collection){return (collection?.chapters||[]).flatMap(ch=>(ch.hadiths||[]).map(h=>({...h,chapterTitle:h.chapterTitle||ch.title,chapterId:h.chapterId||ch.id})))}
 async function ensureHadithLibrary(){if(hadithBooks.length)return true;if(hadithLoading)return hadithLoading;hadithLoading=(async()=>{try{const [booksRes,searchRes]=await Promise.all([fetch(HADITH_BOOKS_PATH+"?v="+Date.now(),{cache:"no-store"}),fetch(HADITH_SEARCH_PATH+"?v="+Date.now(),{cache:"no-store"})]);if(!booksRes.ok)throw new Error("Hadith-Bücher konnten nicht geladen werden");hadithBooks=await booksRes.json();hadithSearchIndex=searchRes.ok?await searchRes.json():[];try{localStorage.setItem(HADITH_CACHE_KEY,JSON.stringify({books:hadithBooks,search:hadithSearchIndex,at:Date.now()}))}catch(e){}return true}catch(e){const cached=getJson(HADITH_CACHE_KEY,null);if(cached?.books?.length){hadithBooks=cached.books;hadithSearchIndex=cached.search||[];return true}console.warn("Hadith-Bibliothek:",e);return false}finally{hadithLoading=null}})();return hadithLoading}
