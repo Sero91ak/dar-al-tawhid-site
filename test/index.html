@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v796";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v799";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -3290,7 +3290,187 @@ html[data-theme] #appView.view:has(.prayer-page-noble){
 .prayer-time-grid--top{margin:0 0 10px;gap:6px}
 .prayer-time-card--slim{min-height:58px;padding:8px 8px 7px}
 .prayer-time-card--slim small{display:none}
-.prayer-page-noble .prayer-subsection-label{letter-spacing:.12em;font-size:10px;margin:10px 0 6px}
+.prayer-page-noble .prayer-subsection-label{
+  letter-spacing:.14em;
+  font-size:9px;
+  font-weight:800;
+  text-transform:uppercase;
+  color:var(--muted2);
+  margin:14px 0 8px;
+  text-align:left;
+}
+.prayer-page-noble .prayer-push-accordion{
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  margin:8px 0 0!important;
+  overflow:visible!important;
+}
+.prayer-page-noble .prayer-push-accordion-toggle{
+  display:grid!important;
+  grid-template-columns:28px minmax(0,1fr);
+  grid-template-rows:auto auto;
+  align-items:center;
+  column-gap:10px;
+  row-gap:2px;
+  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 34%,transparent)!important;
+  border-radius:14px!important;
+  background:transparent!important;
+  min-height:52px;
+  padding:10px 12px!important;
+}
+.prayer-page-noble .prayer-push-accordion-toggle:hover{background:transparent!important;filter:brightness(1.06)}
+.prayer-page-noble .prayer-push-accordion-icon{
+  grid-row:1 / span 2;
+  width:26px;
+  height:26px;
+  border-color:color-mix(in srgb,var(--gold2,#efd78e) 40%,transparent);
+}
+.prayer-page-noble .prayer-push-accordion-title{
+  grid-column:2;
+  font-family:var(--serif,Georgia,serif)!important;
+  font-size:17px!important;
+  font-weight:700!important;
+  letter-spacing:0!important;
+  color:var(--gold2)!important;
+}
+.prayer-page-noble .prayer-push-accordion-summary{
+  grid-column:2;
+  max-width:none!important;
+  font-size:10.5px!important;
+  font-weight:650!important;
+  color:var(--muted)!important;
+  opacity:1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.prayer-page-noble .prayer-push-accordion-body{
+  padding:10px 0 0!important;
+  background:transparent!important;
+}
+.prayer-page-noble .prayer-action-btn,
+.prayer-page-noble .filter-select,
+.prayer-page-noble .field,
+.prayer-page-noble .prayer-controls-compact .filter-select{
+  border-radius:999px!important;
+  min-height:42px!important;
+  background:transparent!important;
+  background-image:none!important;
+  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 32%,transparent)!important;
+  box-shadow:none!important;
+  color:var(--cream)!important;
+}
+.prayer-page-noble .prayer-action-btn.active{
+  border-color:color-mix(in srgb,var(--gold2,#efd78e) 62%,transparent)!important;
+  background:transparent!important;
+  color:var(--gold2)!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--gold2,#efd78e) 16%,transparent)!important;
+}
+.prayer-page-noble .jummah-push-panel,
+.prayer-page-noble .daily-push-panel{
+  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 34%,transparent)!important;
+  border-radius:14px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:12px!important;
+  margin:12px 0 0!important;
+}
+.prayer-page-noble .jummah-push-panel h4,
+.prayer-page-noble .daily-push-panel h4{
+  font-family:var(--serif,Georgia,serif)!important;
+  color:var(--gold2)!important;
+  font-size:22px!important;
+  font-weight:700!important;
+  text-align:center!important;
+  margin:0 0 10px!important;
+}
+.prayer-page-noble .jummah-push-panel p,
+.prayer-page-noble .daily-push-panel p{display:none}
+.prayer-page-noble .prayer-push-status{
+  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 34%,transparent)!important;
+  border-radius:14px!important;
+  background:transparent!important;
+  margin-top:12px!important;
+}
+.prayer-page-noble .prayer-push-status summary{
+  min-height:44px;
+  padding:10px 12px;
+  font-family:var(--serif,Georgia,serif);
+  font-size:16px;
+  font-weight:700;
+  color:var(--gold2);
+}
+.prayer-page-noble .prayer-push-status summary:after{
+  border-color:color-mix(in srgb,var(--gold2,#efd78e) 36%,transparent);
+}
+.prayer-page-noble .prayer-push-status-grid{
+  gap:0!important;
+  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 28%,transparent);
+  border-radius:12px;
+  overflow:hidden;
+  grid-template-columns:1fr 1fr!important;
+}
+.prayer-page-noble .prayer-push-status-item{
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  padding:9px 12px!important;
+}
+.prayer-page-noble .prayer-push-status-item:nth-child(odd){
+  border-right:1px solid color-mix(in srgb,var(--gold2,#efd78e) 24%,transparent)!important;
+}
+.prayer-page-noble .prayer-push-status-item:nth-child(-n+2){
+  border-bottom:1px solid color-mix(in srgb,var(--gold2,#efd78e) 24%,transparent)!important;
+}
+.prayer-page-noble .prayer-push-status-item:nth-child(3){
+  grid-column:1 / -1;
+  border-right:0!important;
+}
+.prayer-page-noble .prayer-push-status-warn,
+.prayer-page-noble .prayer-push-hints > *{
+  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 28%,transparent)!important;
+  border-radius:14px!important;
+  background:transparent!important;
+  color:var(--muted)!important;
+}
+.jummah-hub-page .jummah-push-panel{margin:0 0 8px!important;padding:10px!important}
+.jummah-hub-page .jummah-push-panel h4{display:none}
+.jummah-hub-page .jummah-push-panel .prayer-action-btn,
+.jummah-hub-page .jummah-push-panel .filter-select,
+.jummah-hub-page .jummah-push-panel .field{min-height:38px!important}
+.jummah-hub-page .prayer-settings-grid{gap:6px;margin-top:6px}
+.jummah-hub-page .jummah-hub-meta{margin:8px 0!important}
+.jummah-hub-page .jummah-hub-nav{display:flex!important;justify-content:center;margin-top:8px!important;grid-template-columns:none!important}
+.jummah-hub-page .jummah-hub-nav .prayer-action-btn{min-width:min(52%,220px);min-height:38px!important}
+.qibla-hub-page .qibla-pro-head,.qibla-hub-page .qibla-pro-head + .prayer-noble-rule{display:none}
+.qibla-hub-page .qibla-layout-pro{gap:6px!important}
+.qibla-hub-page .qibla-compass-pro{width:min(58vw,188px)!important;max-width:188px!important}
+.qibla-hub-page .qibla-bearing-readout{font-size:18px;margin-top:4px}
+.qibla-hub-page .qibla-orient-hint{margin:4px auto 0;font-size:9.5px}
+.qibla-hub-page .qibla-data-item{padding:7px 10px!important}
+.qibla-hub-page .qibla-status{margin:4px 0 0!important;font-size:10.5px}
+.qibla-hub-page .qibla-action-row{grid-template-columns:1fr 1fr!important;gap:6px;margin-top:6px}
+.qibla-hub-page .qibla-btn-start,.qibla-hub-page .qibla-btn-stop{grid-column:auto!important;min-height:36px!important}
+.qibla-hub-page .qibla-btn-start:only-child,.qibla-hub-page .qibla-action-row:not(:has(#stopQiblaBtn:not([hidden]))) .qibla-btn-start{grid-column:1/-1!important}
+.qibla-hub-page .prayer-controls-compact{padding:6px 0 0!important;margin:6px 0 0!important}
+.qibla-hub-page .qibla-hub-tools .prayer-settings-grid{grid-template-columns:1fr 1fr;gap:6px;margin-top:0}
+.qibla-hub-page .qibla-hub-tools #prayerCityInput{grid-column:1/-1}
+.qibla-hub-page .qibla-hub-tools #savePrayerCityBtn{grid-column:auto!important}
+.qibla-hub-page .qibla-hub-tools .prayer-action-btn,.qibla-hub-page .qibla-hub-tools .filter-select{min-height:38px!important}
+body:has(.jummah-hub-page) .view-head,
+body:has(.qibla-hub-page) .view-head{padding-bottom:6px!important;margin-bottom:8px!important}
+body:has(.jummah-hub-page) .view-desc,
+body:has(.qibla-hub-page) .view-desc{margin-top:2px!important;font-size:12px!important}
+body:has(.jummah-hub-page) .footer,
+body:has(.qibla-hub-page) .footer{padding:10px 0 8px!important}
+body:has(.jummah-hub-page) .footer-actions,
+body:has(.qibla-hub-page) .footer-actions{margin-top:8px!important;gap:6px!important}
+body:has(.jummah-hub-page) .footer-action-btn,
+body:has(.qibla-hub-page) .footer-action-btn{min-height:32px!important;padding:5px 6px!important;border-radius:12px!important}
+body:has(.jummah-hub-page) .signature,
+body:has(.qibla-hub-page) .signature{font-size:18px!important;margin-top:4px!important}
 .qibla-pro-head{margin-bottom:12px}
 .qibla-disclaimer{
   border:1px solid rgba(255,196,120,.28);
@@ -10270,6 +10450,10 @@ window.DAR_ANALYTICS_CONFIG={
 .more-group h3{font-size:22px!important;line-height:1.12!important;margin-bottom:10px!important}
 .more-group-grid{display:grid!important;grid-template-columns:1fr!important;gap:8px!important}
 .more-feature-row{position:relative!important;display:grid!important;grid-template-columns:40px minmax(0,1fr)!important;align-items:center!important;gap:10px!important;min-height:62px!important;text-align:left!important;padding:10px!important;border-radius:17px!important;width:100%!important;max-width:100%!important;overflow:hidden!important}
+.more-feature-row--hub{grid-template-columns:48px minmax(0,1fr)!important;min-height:72px!important;padding:12px 14px!important;border-radius:18px!important;gap:12px!important;border:1px solid color-mix(in srgb,var(--line2) 70%,var(--gold2) 18%)!important;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2,#efd78e) 10%,transparent)!important;background:color-mix(in srgb,var(--card) 82%,var(--bg) 18%)!important}
+.more-feature-row--hub .feature-icon{width:48px!important;height:48px!important;border-radius:12px!important;border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 22%,transparent)!important;background:rgba(0,0,0,.22)!important;box-shadow:inset 0 2px 8px rgba(0,0,0,.28)!important;font-size:24px!important}
+.more-feature-row--hub h4{font-size:16px!important;font-weight:800!important;color:var(--text)!important}
+.more-feature-row--hub p{font-size:12px!important;color:var(--muted)!important;-webkit-line-clamp:2!important}
 .more-feature-row .feature-icon{width:40px!important;height:40px!important}
 .more-feature-row h4{font-size:15px!important;line-height:1.15!important;margin:0!important;padding-right:0!important;overflow-wrap:anywhere!important;word-break:normal!important}
 .more-feature-row p{font-size:11px!important;line-height:1.28!important;margin-top:3px!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
@@ -21939,7 +22123,7 @@ function isDetailRoute(route){return ["post","dua","quran-surah","news-detail"].
 function migrateLegacyTopicsRoute(){const hash=safeDecodeURIComponent((location.hash||"").replace(/^#/,""));if(hash==="feed/topics"||hash.startsWith("feed/topics/")){try{history.replaceState(null,"",routeToHash("topics",""))}catch(e){location.replace(routeToHash("topics",""))}return true}return false}
 function migrateTopicsScrollKey(){try{const map=JSON.parse(sessionStorage.getItem(NAV_SCROLL_KEY)||"{}");if(map["feed/topics"]!=null&&map.topics==null){map.topics=map["feed/topics"];sessionStorage.setItem(NAV_SCROLL_KEY,JSON.stringify(map))}}catch(e){}}
 function setPageHeader(title,subtitle="",eyebrow=""){return setHeader(title,subtitle,eyebrow||title)}
-const ROUTE_ALIASES={start:"home",home:"home",feed:"feed",ilm:"ilm",quiz:"quiz","din-quiz":"quiz",beitraege:"topics",topics:"topics",themen:"topics",quran:"quran",quran_themen:"quran-topic",themen_quran:"quran-topic","quran-topic":"quran-topic",dua:"duas",duas:"duas",mehr:"more",more:"more",hadith:"hadith",ahadith:"hadith",propheten:"propheten",prophets:"propheten",anbiya:"propheten",frauen:"frauen","frauen-im-islam":"frauen",gelehrte:"scholars",scholars:"scholars",buecher:"books",bucher:"books",books:"books",quellenbibliothek:"books",quellenbuch:"quellen-book","quellen-book":"quellen-book",quellengelehrter:"quellen-scholar","quellen-scholar":"quellen-scholar",bibliothek:"bibliothek",zakat:"zakat",kalender:"calendar",calendar:"calendar","mein-bereich":"account",account:"account",gebetszeiten:"prayer",prayer:"prayer",jumuah:"jummah",jummah:"jummah",einstellungen:"settings",settings:"settings",favoriten:"saved",saved:"saved",beitrag:"post",post:"post",news:"news",neu:"news"};
+const ROUTE_ALIASES={start:"home",home:"home",feed:"feed",ilm:"ilm",quiz:"quiz","din-quiz":"quiz",beitraege:"topics",topics:"topics",themen:"topics",quran:"quran",quran_themen:"quran-topic",themen_quran:"quran-topic","quran-topic":"quran-topic",dua:"duas",duas:"duas",mehr:"more",more:"more",hadith:"hadith",ahadith:"hadith",propheten:"propheten",prophets:"propheten",anbiya:"propheten",frauen:"frauen","frauen-im-islam":"frauen",gelehrte:"scholars",scholars:"scholars",buecher:"books",bucher:"books",books:"books",quellenbibliothek:"books",quellenbuch:"quellen-book","quellen-book":"quellen-book",quellengelehrter:"quellen-scholar","quellen-scholar":"quellen-scholar",bibliothek:"bibliothek",zakat:"zakat",kalender:"calendar",calendar:"calendar","mein-bereich":"account",account:"account",gebetszeiten:"prayer",prayer:"prayer",jumuah:"jummah",jummah:"jummah",qibla:"qibla",qiblah:"qibla",einstellungen:"settings",settings:"settings",favoriten:"saved",saved:"saved",beitrag:"post",post:"post",news:"news",neu:"news"};
 function normalizeRouteSlug(slug){return String(slug||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
 function looksLikePostId(val){if(!val)return false;const id=String(val).split("/")[0];if(posts.some(p=>String(p.id)===id))return true;if(/^\d+$/.test(id))return true;if(/^[a-z0-9][a-z0-9_-]*-\d{2,}$/i.test(id))return true;return false}
 function isLikelyPostId(val){return looksLikePostId(val)}
@@ -22032,6 +22216,7 @@ function parentRoute(route){if(route&&route.view==="frauen"){const parts=String(
   if(route.view==="ilm")return{view:"home"};
   if(route.view==="settings")return{view:"more"};
   if(route.view==="jummah")return{view:"more"};
+  if(route.view==="qibla")return{view:"more"};
   if(route.view==="topic")return{view:"topics"};
   if(route.view==="scholar")return{view:"scholars"};
   if(route.view==="book")return{view:"books"};
@@ -22066,7 +22251,7 @@ function parentRoute(route){if(route&&route.view==="frauen"){const parts=String(
   return{view:"home"};
 }
 function bottomNavSecondaryTab(){return isTestAppPath()?"ilm":"quiz"}
-function bottomNavTabForRoute(routeOrView){const route=typeof routeOrView==="string"?{view:routeOrView,value:""}:(routeOrView||{view:"",value:""});const view=route.view||"";if(view==="news-detail")return"home";if(view==="home")return"home";if(isTestAppPath()){if(view==="ilm")return"ilm"}else{if(view==="quiz"||view==="statistik")return"quiz"}if(view==="feed")return"feed";if(["quran","quran-surah","quran-topic"].includes(view))return"quran";if(["topics","topic","recent","series","post","more","scholars","scholar","books","book","quellen-book","quellen-scholar","calendar","saved","account","about","hadith","propheten","frauen","statistik","prayer","ramadan","zakat","bibliothek","bibliothek-detail","bibliothek-reader","image-editor","image-editor-test","duas","dua-cat","dua","settings","jummah","news","ilm","quiz"].includes(view))return"more";return""}
+function bottomNavTabForRoute(routeOrView){const route=typeof routeOrView==="string"?{view:routeOrView,value:""}:(routeOrView||{view:"",value:""});const view=route.view||"";if(view==="news-detail")return"home";if(view==="home")return"home";if(isTestAppPath()){if(view==="ilm")return"ilm"}else{if(view==="quiz"||view==="statistik")return"quiz"}if(view==="feed")return"feed";if(["quran","quran-surah","quran-topic"].includes(view))return"quran";if(["topics","topic","recent","series","post","more","scholars","scholar","books","book","quellen-book","quellen-scholar","calendar","saved","account","about","hadith","propheten","frauen","statistik","prayer","ramadan","zakat","bibliothek","bibliothek-detail","bibliothek-reader","image-editor","image-editor-test","duas","dua-cat","dua","settings","jummah","qibla","news","ilm","quiz"].includes(view))return"more";return""}
 const BOTTOM_NAV_TABS=["home",bottomNavSecondaryTab(),"feed","quran","more"];
 let bottomNavDrag=null;
 function bottomNavTabIndex(tab){const i=BOTTOM_NAV_TABS.indexOf(tab);return i>=0?i:0}
@@ -24999,8 +25184,8 @@ async function startQiblaCompass(){
 }
 function openQiblaFromFloat(){
   qiblaAutoStart=true;
-  if(readRoute().view==="prayer")render();
-  else navigate("prayer");
+  if(readRoute().view==="qibla"||readRoute().view==="prayer")render();
+  else navigate("qibla");
 }
 async function runQiblaAutoStart(){
   const panel=document.querySelector(".qibla-pro-section");
@@ -25809,7 +25994,8 @@ function updateImageEditorTextModalHint(){const hint=$("imageEditorTextModalHint
 function renderNewsListRow(item,idx){const newsId=item.id||String(idx);const rowClass=item.type==="zakat"||item.nav==="zakat"?"current-focus-row current-focus-row--zakat":item.type==="library"||item.nav==="bibliothek"?"current-focus-row current-focus-row--library":"current-focus-row";return `<article class="${rowClass}" data-nav="news-detail" data-value="${esc(newsId)}" tabindex="0" role="button"><div class="current-focus-icon">${currentUpdateIcon(item)}</div><div class="current-focus-text"><b>${esc(item.title||"Neue Inhalte")}</b><p>${esc(item.text||item.description||"Gerade neu auf DĀR AL TAWḤĪD.")}</p><small>${esc(currentUpdateMeta(item))}</small></div><span class="current-focus-arrow">→</span></article>`}
 function renderNews(){const items=activeCurrentUpdates();return `${setPageHeader("Neu im Fokus","Aktuelle Meldungen und Highlights","News")}<section class="current-focus premium-surface"><div class="current-focus-list">${items.length?items.map(renderNewsListRow).join(""):`<div class="empty">Derzeit keine aktiven Meldungen.</div>`}</section>`}
 function renderSettings(){return `${setPageHeader("Einstellungen","Erscheinungsbild und Schriftgröße","Einstellungen")}${renderThemeSwitchPanel()}${renderAppIconPanel()}${renderFontSettingsPanel()}`}
-function renderJummah(){return `${setPageHeader("Jumuʿah","Freitagsgebet · Erinnerung und Moschee-Zeit","Jumuʿah")}<section class="prayer-panel premium-surface">${renderJummahPushPanel()}<div class="prayer-action-row" style="margin-top:12px"><button class="prayer-action-btn" type="button" data-nav="prayer">🕌 Gebetszeiten öffnen</button></div></section>`}
+function renderJummah(){const s=getPrayerSettings();const manual=jummahPref(s,"jummahUseManualTime");const manualTime=normalizeTimeHHMM(s.jummahManualTime,"13:30");const advance=normalizeJummahAdvanceMinutes(s.jummahAdvanceMinutes);const on=jummahPref(s,"jummahNotifications");const timeLabel=manual?manualTime:(hasPrayerLocation(s)?jummahAutoDhuhrLabel(s):"Standort");return `${setPageHeader("Jumuʿah","Freitagsgebet und Erinnerung.","Jumuʿah")}<section class="prayer-panel prayer-page-noble jummah-hub-page">${renderJummahPushPanel()}<div class="qibla-data-grid jummah-hub-meta"><div class="qibla-data-item"><b>Erinnerung</b><span>${on?"Aktiv":"Aus"}</span></div><div class="qibla-data-item"><b>Vorlauf</b><span>${advance} Min</span></div><div class="qibla-data-item"><b>Zeit</b><span>${esc(timeLabel)}</span></div><div class="qibla-data-item"><b>Ort</b><span>${esc(s.city||"—")}</span></div></div><div class="prayer-action-row jummah-hub-nav"><button class="prayer-action-btn" type="button" data-nav="prayer">Gebetszeiten</button></div></section>`}
+function renderQiblaPage(){const settings=getPrayerSettings();return `${setPageHeader("Qibla","","Qibla")}<section class="prayer-panel prayer-page-noble qibla-hub-page">${renderQiblaProPanel(settings)}<div class="prayer-controls-compact qibla-hub-tools"><div class="prayer-settings-grid"><input id="prayerCityInput" class="filter-select" value="${esc(settings.city||"")}" placeholder="Ort" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button><button id="useLocationBtn" class="prayer-action-btn" type="button">Standort</button></div></div></section>`}
 function normalizeHadithSearch(text){return String(text||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[ʿʾ'`´]/g,"").replace(/ḥ/g,"h").replace(/ṣ/g,"s").replace(/ā/g,"a").replace(/ī/g,"i").replace(/ū/g,"u").replace(/[^a-z0-9\u0600-\u06ffäöüß]+/g," ").trim()}
 function hadithCollectionHadiths(collection){return (collection?.chapters||[]).flatMap(ch=>(ch.hadiths||[]).map(h=>({...h,chapterTitle:h.chapterTitle||ch.title,chapterId:h.chapterId||ch.id})))}
 async function ensureHadithLibrary(){if(hadithBooks.length)return true;if(hadithLoading)return hadithLoading;hadithLoading=(async()=>{try{const [booksRes,searchRes]=await Promise.all([fetch(HADITH_BOOKS_PATH+"?v="+Date.now(),{cache:"no-store"}),fetch(HADITH_SEARCH_PATH+"?v="+Date.now(),{cache:"no-store"})]);if(!booksRes.ok)throw new Error("Hadith-Bücher konnten nicht geladen werden");hadithBooks=await booksRes.json();hadithSearchIndex=searchRes.ok?await searchRes.json():[];try{localStorage.setItem(HADITH_CACHE_KEY,JSON.stringify({books:hadithBooks,search:hadithSearchIndex,at:Date.now()}))}catch(e){}return true}catch(e){const cached=getJson(HADITH_CACHE_KEY,null);if(cached?.books?.length){hadithBooks=cached.books;hadithSearchIndex=cached.search||[];return true}console.warn("Hadith-Bibliothek:",e);return false}finally{hadithLoading=null}})();return hadithLoading}
@@ -25960,7 +26146,7 @@ function featureCatalog(){
     {id:"books",title:"Quellenbibliothek",icon:"📘",desc:(()=>{const api=window.DARCanonicalSourceLibrary;const n=api&&typeof api.getReadyBookCount==="function"?api.getReadyBookCount():(api&&api.isReady&&api.isReady()?api.getBookCount():null);return n==null?"Geprüfte historische Werke und zitierte Gelehrte.":`${n} geprüfte Werke und zitierte Gelehrte.`})(),button:"Ansehen",nav:"books",group:"Lernen & Wissen",badge:"Geprüft"},
     {id:"prayer",title:"Gebetszeiten",icon:"🕌",desc:"Zeiten, Standort, Qibla und Erinnerungen.",button:"Öffnen",nav:"prayer",group:"Alltag & Gebet",badge:"Praktisch"},
     {id:"jummah",title:"Jumuʿah",icon:"🕌",desc:"Freitagsgebet und Erinnerung.",button:"Öffnen",nav:"jummah",group:"Alltag & Gebet"},
-    {id:"qibla",title:"Qibla",icon:"🕋",desc:"Qibla-Richtung im Gebetsbereich anzeigen.",button:"Starten",nav:"prayer",group:"Alltag & Gebet"},
+    {id:"qibla",title:"Qibla",icon:"🕋",desc:"Qibla-Richtung im Gebetsbereich anzeigen.",button:"Starten",nav:"qibla",group:"Alltag & Gebet"},
     {id:"calendar",title:"Islamischer Kalender",icon:"🗓️",desc:"Hijrī-Termine und wichtige Tage.",button:"Öffnen",nav:"calendar",group:"Alltag & Gebet"},
     {id:"zakat",title:"Zakāt-Rechner",icon:"🧾",desc:typeof isZakatFocusActive==="function"&&isZakatFocusActive()?"Im Fokus · Berechnung und Bericht.":"Berechnung, Niṣāb und Bericht.",button:"Ansehen",nav:"zakat",group:"Werkzeuge & Assistenten",badge:"Praktisch"},
     {id:"wasiyyah",title:"Testament",icon:"📜",desc:"Private islamische Wasiyyah-Erklärung mit Pflichtprüfung und PDF-Ausgabe.",button:"Öffnen",nav:"wasiyyah",group:"Werkzeuge & Assistenten",badge:"Wasiyyah"},
@@ -25992,7 +26178,7 @@ function renderFeatureHint(){return""}
 function renderPinnedFeaturesSection(){const pins=featurePins().map(featureById).filter(Boolean).slice(0,6);if(!pins.length)return"";return `<section class="feature-section"><div class="feature-head"><div><h3>Meine Schnellzugriffe</h3><span>Angepinnte Bereiche für schnellen Zugriff.</span></div></div><div class="feature-grid">${pins.map(renderFeatureCard).join("")}</div></section>`}
 function renderFeatureDiscoverySection(){return""}
 function renderTodayRecommendedFeatures(){return""}
-function renderMoreFeatureRow(item){if(item&&item.id==="propheten"&&window.DARProphets&&typeof window.DARProphets.renderSpotlight==="function"){let spot=window.DARProphets.renderSpotlight();if(spot.indexOf("more-feature-row")<0)spot=spot.replace('class="prophets-spotlight"','class="prophets-spotlight more-feature-row" data-feature-search="die propheten anbiya quran sunnah ueberlieferungen lernen wissen musa"');return spot}const search=[item.title,item.desc,item.group,item.badge].filter(Boolean).join(" ").toLowerCase();return `<button class="more-feature-row" type="button" data-nav="${esc(item.nav)}" ${item.value?`data-value="${esc(item.value)}"`:""} data-feature-search="${esc(search)}"><span class="feature-icon">${esc(item.icon||"✨")}</span><span><h4>${esc(item.title)} ${item.badge?`<span class="feature-badge">${esc(item.badge)}</span>`:""}</h4><p>${esc(item.desc||"")}</p></span></button>`}
+function renderMoreFeatureRow(item){if(item&&item.id==="propheten"&&window.DARProphets&&typeof window.DARProphets.renderSpotlight==="function"){let spot=window.DARProphets.renderSpotlight();if(spot.indexOf("more-feature-row")<0)spot=spot.replace('class="prophets-spotlight"','class="prophets-spotlight more-feature-row" data-feature-search="die propheten anbiya quran sunnah ueberlieferungen lernen wissen musa"');return spot}const search=[item.title,item.desc,item.group,item.badge].filter(Boolean).join(" ").toLowerCase();const hub=item.id==="jummah"||item.id==="qibla"?" more-feature-row--hub":"";return `<button class="more-feature-row${hub}" type="button" data-nav="${esc(item.nav)}" ${item.value?`data-value="${esc(item.value)}"`:""} data-feature-search="${esc(search)}"><span class="feature-icon">${esc(item.icon||"✨")}</span><span><h4>${esc(item.title)} ${item.badge?`<span class="feature-badge">${esc(item.badge)}</span>`:""}</h4><p>${esc(item.desc||"")}</p></span></button>`}
 function renderMoreGroup(title,items){if(!items.length)return"";return `<section class="more-group" data-more-group><h3>${esc(title)}</h3><div class="more-group-grid">${items.map(renderMoreFeatureRow).join("")}</div></section>`}
 function filterMoreFeatures(){const input=$("moreFeatureSearch");if(!input)return;const q=input.value.trim().toLowerCase();document.querySelectorAll(".more-feature-row").forEach(row=>{row.classList.toggle("is-hidden",!!q&&!String(row.getAttribute("data-feature-search")||"").includes(q))});document.querySelectorAll("[data-more-group]").forEach(group=>{group.classList.toggle("is-hidden",!group.querySelector(".more-feature-row:not(.is-hidden)"))})}
 
@@ -26603,7 +26789,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v796";
+const APP_BUILD_ID="app-shell-v799";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -26937,7 +27123,7 @@ function updateChrome(route){
   if(appBar)appBar.classList.remove("is-home");
   backBtn.classList.add("show");
   if(homeBtn)homeBtn.classList.add("show");
-  const labels={"news-detail":"Neu im Fokus",news:"Neu im Fokus",feed:"Feed",ilm:"ʿIlm",quiz:"Quiz-App",hadith:"Hadith",bibliothek:"Bibliothek","bibliothek-detail":"Bibliothek","bibliothek-reader":"Lesen",topics:"Beiträge",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",jummah:"Jumuʿah",settings:"Einstellungen",ramadan:"Ramaḍān & ʿĪd",zakat:"Zakāt-Rechner",series:"Serie",statistik:"Statistik",more:"","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:""};
+  const labels={"news-detail":"Neu im Fokus",news:"Neu im Fokus",feed:"Feed",ilm:"ʿIlm",quiz:"Quiz-App",hadith:"Hadith",bibliothek:"Bibliothek","bibliothek-detail":"Bibliothek","bibliothek-reader":"Lesen",topics:"Beiträge",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",jummah:"Jumuʿah",qibla:"Qibla",settings:"Einstellungen",ramadan:"Ramaḍān & ʿĪd",zakat:"Zakāt-Rechner",series:"Serie",statistik:"Statistik",more:"","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:""};
   let crumbLabel=labels[route.view]||"";
   if(isMore)crumbLabel="";
   if(isPost)crumbLabel="";
@@ -27184,6 +27370,7 @@ function render(){
     else if(currentRoute.view==="news")html=renderNews();
     else if(currentRoute.view==="settings")html=renderSettings();
     else if(currentRoute.view==="jummah")html=renderJummah();
+    else if(currentRoute.view==="qibla")html=renderQiblaPage();
     else if(currentRoute.view==="image-editor")html=renderImageEditor();
     else if(currentRoute.view==="image-editor-test")html=renderImageEditorTest();
     else if(currentRoute.view==="quran")html=renderQuranFoldRoute("quran");
@@ -27272,7 +27459,7 @@ function render(){
       }
     }
     stopStatsRefresh();
-    if(qiblaAutoStart&&currentRoute.view==="prayer"){
+    if(qiblaAutoStart&&(currentRoute.view==="qibla"||currentRoute.view==="prayer")){
       setTimeout(()=>runQiblaAutoStart(),200);
     }else{
       const ayahJump=currentRoute.view==="quran-surah"?Number(String(currentRoute.value||"").split("/")[1]):0;
@@ -30064,6 +30251,10 @@ html[data-theme] body.is-more-route .more-feature-row{
   background:color-mix(in srgb,var(--card) 78%,var(--bg) 22%)!important;
   border:1px solid color-mix(in srgb,var(--line2) 72%,var(--gold2) 12%)!important;
 }
+html[data-theme] .more-feature-row--hub{
+  background:color-mix(in srgb,var(--card) 82%,var(--bg) 18%)!important;
+  border:1px solid color-mix(in srgb,var(--line2) 70%,var(--gold2) 18%)!important;
+}
 /* Home — solid continuous fill */
 html[data-theme] body.is-home-route{
   padding-left:0!important;padding-right:0!important;padding-top:0!important;
@@ -32058,9 +32249,17 @@ html[data-theme="royal"] #appView.view:has(.prayer-page-noble){
 html[data-theme] .prayer-page-noble .qibla-pro-section,
 html[data-theme="royal"] .prayer-page-noble .qibla-pro-section,
 html[data-theme="eisgold"] .prayer-page-noble .qibla-pro-section,
+html[data-theme] .prayer-page-noble .prayer-controls-compact,
 html[data-theme="royal"] .prayer-page-noble .prayer-controls-compact,
+html[data-theme] .prayer-page-noble .prayer-push-accordion,
+html[data-theme] .prayer-page-noble .daily-push-panel,
+html[data-theme] .prayer-page-noble .jummah-push-panel,
+html[data-theme] .prayer-page-noble .prayer-push-status,
 html[data-theme="royal"] .prayer-page-noble .prayer-push-status,
-html[data-theme="royal"] .prayer-page-noble .prayer-push-status-item{
+html[data-theme] .prayer-page-noble .prayer-push-status-item,
+html[data-theme="royal"] .prayer-page-noble .prayer-push-status-item,
+html[data-theme] .prayer-page-noble .prayer-action-btn,
+html[data-theme] .prayer-page-noble .filter-select{
   background:transparent!important;
   background-image:none!important;
   box-shadow:none!important;
