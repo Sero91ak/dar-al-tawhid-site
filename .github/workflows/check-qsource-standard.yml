@@ -1,0 +1,32 @@
+name: Check Q-Source Standard
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'q/**'
+      - '.github/workflows/check-qsource-standard.yml'
+  pull_request:
+    paths:
+      - 'q/**'
+      - '.github/workflows/check-qsource-standard.yml'
+  workflow_dispatch:
+
+jobs:
+  qsource-standard:
+    name: Q-Source Standard
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Check numbered qsource pages
+        run: node q/_registry/check-qsource-standard.mjs
