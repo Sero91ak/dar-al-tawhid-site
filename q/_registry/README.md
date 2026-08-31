@@ -20,6 +20,18 @@ Diese Registry hier ist die technische Verwaltung fuer Nummern, Vorlage und Zuor
 - `shortlink-template.html` → Vorlage für neue `q/<n>/index.html`
 - `register-shortlink.mjs` → erstellt automatisch neuen Kurzlink + Registry-Eintrag
 
+## Pflichtstandard fuer jede `/q/<nummer>/index.html`-Quellenseite
+
+Jede nummerierte Quellenseite muss unten denselben Aufbau verwenden:
+
+1. Web-/Textnachweise ausschließlich als Linkkarten in `<div class="qsource-links">` mit `<a class="qsource-link web">`.
+2. PDF- und Scan-Nachweise, sobald vorhanden, zusätzlich als eigene Karten in `<div class="qsource-links">` mit `qsource-link pdf` oder `qsource-link scan`.
+3. Keine alten Listen wie `<ul class="qsource-link-list">` für Quellenlinks verwenden.
+4. Nach den Linkkarten steht immer die Social-Leiste `<nav class="qsource-social">` mit Telegram, Instagram, WhatsApp und Website.
+5. Interner Fallback bleibt als letzte Webkarte möglich: `/q/<nummer>/`.
+6. Direktlinks mit Textfragment (`#:~:text=`) oder PDF-Seitenanker (`#page=`) bevorzugen, wenn die Stelle sicher bestimmt ist.
+7. Quellenlinks werden nicht automatisch in Beiträgen veröffentlicht, sondern erst nach Freigabe des Nutzers; die `/q/<nummer>/`-Seite darf die vollständigen Direktnachweise enthalten.
+
 ## Pflichtdaten pro Linkeintrag (`shortlinks.json`)
 - `number` → fortlaufende Nummer
 - `shortPath` → z. B. `/q/2/`
