@@ -22,10 +22,12 @@ const ADVANCE_CATCHUP_MIN_REMAINING_MS = 90 * 1000;
 const ADVANCE_CATCHUP_MAX_REMAINING_MS = 20 * 60 * 1000;
 /** Bump: alte OneSignal-Pushes mit „in 1573 Min“ nicht per Idempotency wiederverwenden. */
 const ADVANCE_COPY_VERSION = "fixed-min-v2";
-/** Gebetszeit-Push darf kurz nach Eintritt nachgeholt werden (Cron-/Grace-Lücke), ohne sendAfter zu mutieren. */
-const ENTRY_CATCHUP_MAX_LATE_MS = 12 * 60 * 1000;
-/** Im Grace-Fenster nicht nochmal sofort senden: send_after wurde schon geplant, iOS bekäme sonst ein Duplikat. */
+/** Gebetszeit-Push darf im gesamten Grace-Fenster nachgeholt werden, ohne sendAfter zu mutieren. */
+const ENTRY_CATCHUP_MAX_LATE_MS = 15 * 60 * 1000;
+/** Vorab-Push im Grace-Fenster nicht nochmal sofort senden (send_after liegt schon bei OneSignal). */
 const PAST_SLOT_RESEND_SKIP_MS = 45 * 1000;
+/** Eintritt nach dieser Verspätung mit festem late-Key nachholen (Idempotency, kein 5-Min-Loop). */
+const ENTRY_LATE_IDEMPOTENCY_MS = 90 * 1000;
 const REFERENCE = { lat: 50.6256, lon: 6.9491, city: "Rheinbach", timeZone: "Europe/Berlin" };
 
 let lastStatusReport = null;
@@ -314,6 +316,10 @@ async function uuidFrom(seed) {
   return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
 }
 
+function uniqueSubscriptionIds(group) {
+  return [...new Set((group?.subscriptionIds || []).map((id) => String(id || "").trim()).filter(Boolean))];
+}
+
 function schedId(group, prayer, sendAfter, mode) {
   return [
     "prayer",
@@ -446,9 +452,10 @@ async function disableInvalidRegistrations(invalidIds) {
 }
 
 async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
-  const ids = group.subscriptionIds.slice(0, 2000);
+  const ids = uniqueSubscriptionIds(group).slice(0, 2000);
   if (!ids.length) return;
-  const idKey = schedId(group, prayer, sendAfter, mode);
+  const late = group.lateEntry === true;
+  const idKey = late ? `${schedId(group, prayer, sendAfter, mode)}|late-v1` : schedId(group, prayer, sendAfter, mode);
   if (sentInRun.has(idKey)) {
     stats.duplicates += 1;
     return;
@@ -502,6 +509,7 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
     mode,
     recipients: ids.length,
     invalid: invalid.size || 0,
+    late,
     response: String(result.text || "").slice(0, 200)
   });
 }
@@ -671,7 +679,11 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
             if (catchupEntry) stats.entryCatchups = (stats.entryCatchups || 0) + 1;
           }
           const alreadyDueMs = now.getTime() - slot.sendAfter.getTime();
-          if (alreadyDueMs > PAST_SLOT_RESEND_SKIP_MS && slot.sendAfter >= windowStart) {
+          if (
+            slot.mode === "advance" &&
+            alreadyDueMs > PAST_SLOT_RESEND_SKIP_MS &&
+            slot.sendAfter >= windowStart
+          ) {
             stats.skippedAlreadyQueued = (stats.skippedAlreadyQueued || 0) + 1;
             stats.skippedPast += 1;
             stats.skippedPastDetails.push({
@@ -688,6 +700,12 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
             stats.skippedWindow += 1;
             continue;
           }
+          const lateEntry =
+            slot.mode === "entry" &&
+            alreadyDueMs > ENTRY_LATE_IDEMPOTENCY_MS &&
+            alreadyDueMs <= ENTRY_CATCHUP_MAX_LATE_MS;
+          if (lateEntry) stats.entryCatchups = (stats.entryCatchups || 0) + 1;
+          group.lateEntry = lateEntry;
           try {
             await sendPush(env, group, prayer, slot.sendAfter, slot.mode, stats, sentInRun);
           } catch (err) {
