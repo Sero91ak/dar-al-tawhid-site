@@ -138,7 +138,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 2
 
       - uses: actions/setup-node@v4
         with:
@@ -148,6 +148,16 @@ jobs:
         shell: bash
         run: |
           failed=0
+          BASE='${{ github.event.before }}'
+          if [ -n "$BASE" ] && [ "$BASE" != '0000000000000000000000000000000000000000' ] && git cat-file -e "$BASE^{commit}" 2>/dev/null; then
+            FILES="$(git diff --name-only "$BASE" "$GITHUB_SHA" | grep '^q/[0-9]\+/index\.html$' || true)"
+          else
+            FILES="$(find q -mindepth 2 -maxdepth 2 -name index.html -type f | grep -E '^q/[0-9]+/index\.html$' | sort)"
+          fi
+          if [ -z "$FILES" ]; then
+            echo "Keine geänderten nummerierten Quellenlink-Seiten zu prüfen."
+            exit 0
+          fi
           while IFS= read -r file; do
             [ -z "$file" ] && continue
             test -s "$file" || { echo "FEHLER $file: leer oder fehlt"; failed=1; continue; }
@@ -159,7 +169,7 @@ jobs:
               echo "FEHLER $file: file:// darf nicht in öffentlichen Quellenlinks stehen"
               failed=1
             fi
-          done < <(find q -mindepth 2 -maxdepth 2 -name index.html -type f | grep -E '^q/[0-9]+/index\.html$' | sort)
+          done <<< "$FILES"
           exit "$failed"
 
       - name: Quellenlinks direkt deployen
@@ -174,12 +184,15 @@ jobs:
         run: |
           failed=0
           BASE='${{ github.event.before }}'
-          if [ -n "$BASE" ] && [ "$BASE" != '0000000000000000000000000000000000000000' ]; then
+          if [ -n "$BASE" ] && [ "$BASE" != '0000000000000000000000000000000000000000' ] && git cat-file -e "$BASE^{commit}" 2>/dev/null; then
             FILES="$(git diff --name-only "$BASE" "$GITHUB_SHA" | grep '^q/[0-9]\+/index\.html$' || true)"
           else
             FILES="$(find q -mindepth 2 -maxdepth 2 -name index.html -type f | grep -E '^q/[0-9]+/index\.html$' | sort)"
           fi
-          [ -n "$FILES" ] || FILES="$(find q -mindepth 2 -maxdepth 2 -name index.html -type f | grep -E '^q/[0-9]+/index\.html$' | sort)"
+          if [ -z "$FILES" ]; then
+            echo "Keine geänderten nummerierten Quellenlink-Seiten live zu prüfen."
+            exit 0
+          fi
           while IFS= read -r file; do
             [ -z "$file" ] && continue
             num="${file#q/}"
