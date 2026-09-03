@@ -1,0 +1,51 @@
+{
+  "fassung": 1,
+  "aktualisiertAm": "2026-09-03",
+  "bereich": "gesamtpruefung-quellen-audit",
+  "titel": "Gesamtprüfung & Quellen-Audit",
+  "beschreibung": "Strenge Prüfung aller Frauenbereiche, Quellen, Direktnachweise, Athār und sichtbaren Aussagen.",
+  "status": "vorbereitet",
+  "oeffentlicherHinweis": "Dieser Bereich befindet sich in Prüfung.",
+  "interneErfassung": [
+    "alle Frauenbereiche",
+    "Anzahl sichtbarer Einträge",
+    "Anzahl verborgener Einträge",
+    "Einträge ohne Direktlink",
+    "Einträge mit ḥasan-Status",
+    "Einträge mit Athar-Prüfung",
+    "Einträge mit fehlender Serhat-Freigabe",
+    "doppelte Aussagen",
+    "doppelte Quellen",
+    "sensible Themen",
+    "Bereiche mit 0 sichtbaren Einträgen",
+    "Bereiche, die noch Ṣaḥābah-/Salaf-/Athar-Ergänzung brauchen"
+  ],
+  "pruefregeln": [
+    "Keine sichtbare Aussage ohne Quelle.",
+    "Keine sichtbare Aussage ohne Direktnachweis.",
+    "Keine Athar-Aussage ohne Freigabe durch Serhat.",
+    "Keine schwachen Berichte sichtbar.",
+    "Keine Social-Media-Quellen sichtbar.",
+    "Keine modernen Ratschläge ohne Beleg.",
+    "Keine sensiblen Detail-Fatwas ohne Einzelprüfung.",
+    "Keine Quellen gesammelt am Seitenende.",
+    "Quelle direkt unter Aussage.",
+    "Direktnachweis direkt unter Quelle.",
+    "Alle sichtbaren App-Texte Deutsch."
+  ],
+  "pruefpunkteJeBereich": [
+    "Qurʾān-Beleg vorhanden?",
+    "Ṣaḥīḥer oder ḥasan Ḥadīṯ vorhanden?",
+    "Ṣaḥābī-Aussage vorhanden?",
+    "Ṣaḥābiyyah-Bericht vorhanden?",
+    "Tābiʿī-Aussage vorhanden?",
+    "Salaf-Athar vorhanden?",
+    "frühe Imām-Aussage vorhanden?",
+    "Direktnachweis vorhanden?",
+    "Aussage wird vom Nachweis wirklich getragen?",
+    "Sensible Themen verborgen?",
+    "Doppelte Inhalte vermieden?"
+  ],
+  "endpruefungFreigegeben": false,
+  "eintraege": []
+}

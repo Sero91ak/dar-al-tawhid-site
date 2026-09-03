@@ -1,75 +1,15 @@
 {
   "fassung": 1,
+  "aktualisiertAm": "2026-09-03",
   "bereich": "ruqyah-schutz-zuflucht",
+  "titel": "Athar-Prüfung – Ruqyah, Schutz & Zuflucht",
+  "status": "vorbereitet",
+  "freigabeDurchSerhatErforderlich": true,
+  "sichtbarkeit": "Keine Athar-/Salaf-Aussage sichtbar ohne genaue Quelle, Direktnachweis und Freigabe durch Serhat.",
   "pruefung": [
-    {
-      "thema": "Tafsīr von Sūrah al-Falaq",
-      "gesuchteAussagen": [
-        "Ibn ʿAbbās",
-        "Mujāhid",
-        "Qatādah",
-        "al-Ḥasan al-Baṣrī",
-        "frühe Tafsīr-Überlieferungen"
-      ],
-      "status": "in-pruefung",
-      "sichtbar": false,
-      "hinweis": "Nur mit Direktlink aus Islamweb, Shamela, Maktaba, Ketabonline, Turāth oder Scan sichtbar machen."
-    },
-    {
-      "thema": "Tafsīr von Sūrah an-Nās",
-      "gesuchteAussagen": [
-        "Ibn ʿAbbās",
-        "Mujāhid",
-        "Qatādah",
-        "frühe Tafsīr-Überlieferungen zu al-waswās al-khannās"
-      ],
-      "status": "in-pruefung",
-      "sichtbar": false,
-      "hinweis": "Keine psychologische oder medizinische Deutung ohne eigenes Kapitel."
-    },
-    {
-      "thema": "Muʿawwidhāt vor dem Schlafen",
-      "gesuchteAussagen": [
-        "ʿĀʾišah",
-        "frühe Hadith-Erklärer",
-        "Fassungen bei al-Bukhārī und anderen"
-      ],
-      "status": "in-pruefung",
-      "sichtbar": false,
-      "hinweis": "Keine zusätzlichen Zahlen oder Handlungen hinzufügen."
-    },
-    {
-      "thema": "Ruqyah bei Krankheit",
-      "gesuchteAussagen": [
-        "ʿĀʾišah",
-        "frühe Erklärungen zu Duʿāʾ bei Krankheit",
-        "Fassungen zu al-Muʿawwidhāt bei Krankheit"
-      ],
-      "status": "in-pruefung",
-      "sichtbar": false,
-      "hinweis": "Keine medizinische Beratung und keine Heilgarantie."
-    },
-    {
-      "thema": "Ruqyah ohne Širk",
-      "gesuchteAussagen": [
-        "ʿAwf ibn Mālik",
-        "frühe Erklärungen zu Muslim 2200",
-        "Aussagen zu klaren Wortlauten und Verbot von Širk"
-      ],
-      "status": "in-pruefung",
-      "sichtbar": false,
-      "hinweis": "Dies ist die Filtergrundlage für alle Ruqyah-Inhalte."
-    },
-    {
-      "thema": "Zuflucht mit Allahs vollkommenen Worten",
-      "gesuchteAussagen": [
-        "Ḫawlah bint Ḥakīm",
-        "frühe Erklärungen zu Muslim 2708",
-        "Aussagen zu Kalimāt Allāh"
-      ],
-      "status": "in-pruefung",
-      "sichtbar": false,
-      "hinweis": "Keine Amulett- oder Talisman-Deutung zulassen."
-    }
+    { "kennung": "ruqyah-athar-001", "thema": "Ṣaḥābah zu Ruqyah", "status": "in-pruefung", "sichtbar": false, "freigabeDurchSerhat": false },
+    { "kennung": "ruqyah-athar-002", "thema": "frühe Aussagen zu erlaubter Ruqyah", "status": "in-pruefung", "sichtbar": false, "freigabeDurchSerhat": false },
+    { "kennung": "ruqyah-athar-003", "thema": "frühe Warnungen vor Širk, Tamāʾim und Aberglauben", "status": "in-pruefung", "sichtbar": false, "freigabeDurchSerhat": false },
+    { "kennung": "ruqyah-athar-004", "thema": "frühe Erklärungen zu Muʿawwidhatayn", "status": "in-pruefung", "sichtbar": false, "freigabeDurchSerhat": false }
   ]
 }

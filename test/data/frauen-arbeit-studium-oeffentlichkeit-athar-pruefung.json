@@ -1,27 +1,17 @@
 {
   "fassung": 1,
+  "aktualisiertAm": "2026-09-03",
   "bereich": "arbeit-studium-oeffentlichkeit",
+  "titel": "Athar-Prüfung – Arbeit, Studium & Öffentlichkeit",
+  "status": "vorbereitet",
+  "freigabeDurchSerhatErforderlich": true,
+  "sichtbarkeit": "Keine Athar-/Salaf-Aussage sichtbar ohne genaue Quelle, Direktnachweis und Freigabe durch Serhat.",
   "pruefung": [
-    {
-      "status": "in-pruefung",
-      "sichtbar": false,
-      "thema": "Ṣaḥābiyyāt: Wissen, Dienst, Pflege und Nutzen",
-      "gesuchteAussagen": [
-        "Frauen der Anṣār beim Lernen",
-        "Umm ʿAṭiyyah bei Hilfeleistung",
-        "ar-Rubayyiʿ bei Versorgung"
-      ],
-      "hinweis": "Nur mit exaktem Direktnachweis sichtbar machen. Keine moderne Berufsfatwa."
-    },
-    {
-      "status": "in-pruefung",
-      "sichtbar": false,
-      "thema": "Lernen und Grenzen",
-      "gesuchteAussagen": [
-        "frühe Aussagen zu Lernen und Grenzen",
-        "frühe Fiqh-Aussagen zu Öffentlichkeit und Notwendigkeit"
-      ],
-      "hinweis": "Nichts automatisch sichtbar machen."
-    }
+    { "kennung": "arbeit-athar-001", "thema": "Ṣaḥābiyyāt beim Lernen", "status": "in-pruefung", "sichtbar": false, "freigabeDurchSerhat": false },
+    { "kennung": "arbeit-athar-002", "thema": "Frauen der Anṣār und Pflichtwissen", "status": "in-pruefung", "sichtbar": false, "freigabeDurchSerhat": false },
+    { "kennung": "arbeit-athar-003", "thema": "Umm ʿAṭiyyah und Dienst", "status": "in-pruefung", "sichtbar": false, "freigabeDurchSerhat": false },
+    { "kennung": "arbeit-athar-004", "thema": "ar-Rubayyiʿ und Hilfeleistung", "status": "in-pruefung", "sichtbar": false, "freigabeDurchSerhat": false },
+    { "kennung": "arbeit-athar-005", "thema": "frühe Aussagen zu Wissen, Adab und Grenzen", "status": "in-pruefung", "sichtbar": false, "freigabeDurchSerhat": false },
+    { "kennung": "arbeit-athar-006", "thema": "frühe Fiqh-Aussagen zu Öffentlichkeit und Fitnah", "status": "in-pruefung", "sichtbar": false, "freigabeDurchSerhat": false }
   ]
 }
