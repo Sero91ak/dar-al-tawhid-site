@@ -24,6 +24,13 @@ Dieser Ordner ist die zentrale Ablage für alle nummerierten Quellenlinks.
 | `q/9` | Jahmiyyah und Allahs Handeln | `al-Fuḍayl ibn ʿIyāḍ` | Antwort auf den Jahmī: Ich glaube an einen Herrn, der tut, was Er will. |
 | `q/10` | Allah tut, was Er will | `al-Fuḍayl ibn ʿIyāḍ` | Wenn Einwände gegen Nuzūl/Bewegung kommen: Allah tut, was Er will. |
 | `q/11` | Nuzūl und makān | `Hammād ibn Zayd` | Er ist an Seinem makān und nähert sich Seiner Schöpfung, wie Er will. |
+| `q/12` | Mawlid und Bidʿah | `Ibn Taymiyyah; Tāǧ ad-Dīn al-Fākihānī` | Die Salaf taten es nicht; wäre es reines oder überwiegendes Gutes gewesen, wären sie eher dazu berechtigt gewesen. |
+| `q/13` | Wahrheitssuche und Diskussion | `Imām ash-Shāfiʿī` | Er wünschte, dass die Wahrheit durch die Zunge seines Gegenübers oder durch seine eigene Zunge erscheint. |
+| `q/14` | Kibr, Wahrheit und Menschen | `Prophet ﷺ` | Hochmut ist, die Wahrheit abzulehnen und die Menschen gering zu schätzen. |
+| `q/15` | Taḥākum, Ṭāġūt und Rückholung des Rechts | `aṭ-Ṭabarī; al-Māwardī; Ibn Qudāmah; Ibn Taymiyyah; Prophet ﷺ` | Anzeige, Klage oder Rückforderung eines eigenen Rechts sind nicht automatisch Shirk Akbar. |
+| `q/16` | Wissen vor Reden und Handeln | `Imām al-Buḫārī` | Wissen kommt vor Wort und Tat; Beweis ist Qurʾān 47:19. |
+| `q/17` | Aufstehen im Gericht | `Ibn al-Humām; Ibn Nuǧaym; al-Mardāwī; Muʿāwiyah; Prophet ﷺ; Ibn Ḥaǧar; al-Bayhaqī` | Aufstehen wird als Frage von Adab, Gerichtsordnung, Ehrung, Hochmut und Bedarf behandelt; nicht automatisch als Kufr. |
+| `q/18` | al-Buḫārī, Ḥadīṯ-Wissen und Ḥifẓ | `Abū Ḥātim ar-Rāzī; Ḥāshid ibn Ismāʿīl` | Abū Ḥātim bezeugte al-Buḫārīs Vorrang im Ḥifẓ; Ḥāshid berichtete von mehr als 15.000 Ḥadīṯen, die al-Buḫārī auswendig vortrug. |
 
 ## Sonderbereiche
 
