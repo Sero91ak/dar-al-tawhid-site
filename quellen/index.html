@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#07100d">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Quellenbibliothek – DAR AL TAWḤĪD</title>
+  <meta name="description" content="Zentrale, durchsuchbare Quellenbibliothek von DAR AL TAWḤĪD: Quellenlinks nach Thema, Sprecher, Gelehrtem und Q-Nummer geordnet.">
+  <link rel="canonical" href="https://dar-al-tawhid.de/quellen/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="DAR AL TAWḤĪD">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="Quellenbibliothek – DAR AL TAWḤĪD">
+  <meta property="og:description" content="Alle Quellenlinks zentral nach Thema, Sprecher und Q-Nummer durchsuchen.">
+  <meta property="og:url" content="https://dar-al-tawhid.de/quellen/">
+  <meta property="og:image" content="https://dar-al-tawhid.de/app-icon-512.png?v=quellenbibliothek-20260904">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Quellenbibliothek – DAR AL TAWḤĪD">
+  <meta name="twitter:description" content="Alle Quellenlinks zentral nach Thema, Sprecher und Q-Nummer durchsuchen.">
+  <meta name="twitter:image" content="https://dar-al-tawhid.de/app-icon-512.png?v=quellenbibliothek-20260904">
+  <style>
+    :root{--bg:#06100d;--bg2:#0a1713;--card:#0d1c17;--card2:#10241d;--gold:#d5b56b;--gold2:#f0d999;--text:#f4f2e9;--muted:#a9b5ad;--line:rgba(213,181,107,.22);--green:#17372c;--shadow:0 18px 55px rgba(0,0,0,.32)}
+    *{box-sizing:border-box}
+    html{background:var(--bg);scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(circle at 50% -10%,#153328 0,#091713 36%,#06100d 72%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;min-height:100vh}
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(980px,calc(100% - 28px));margin:0 auto;padding:26px 0 70px}
+    .head{display:flex;align-items:center;gap:16px;padding:8px 2px 22px}
+    .logo{width:68px;height:68px;object-fit:contain;filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))}
+    .brand-small{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 4px}
+    .brand{font-family:Georgia,"Times New Roman",serif;font-size:24px;letter-spacing:.08em;margin:0;color:#fff}
+    .sign{font-family:"Snell Roundhand","Segoe Script",cursive;color:var(--gold2);font-size:15px;margin:3px 0 0}
+    .hero{border:1px solid var(--line);background:linear-gradient(145deg,rgba(18,43,34,.94),rgba(8,20,16,.96));border-radius:27px;padding:27px 22px 23px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .hero:before{content:"";position:absolute;inset:-1px;background:radial-gradient(circle at 85% 0,rgba(213,181,107,.13),transparent 38%);pointer-events:none}
+    .eyebrow{color:var(--gold2);font-size:12px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;margin:0 0 8px;position:relative}
+    h1{font-family:Georgia,"Times New Roman",serif;font-weight:600;font-size:clamp(28px,7vw,46px);line-height:1.07;margin:0;position:relative}
+    .intro{max-width:760px;color:#c7d0ca;line-height:1.55;font-size:15px;margin:13px 0 0;position:relative}
+    .stats{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px;position:relative}
+    .stat{border:1px solid var(--line);background:rgba(3,10,8,.38);border-radius:999px;padding:8px 12px;font-size:12px;color:#d8ded9}
+    .stat b{color:var(--gold2)}
+    .tools{position:sticky;top:0;z-index:5;padding:14px 0 10px;background:linear-gradient(to bottom,rgba(6,16,13,.98) 72%,rgba(6,16,13,0))}
+    .searchbox{display:flex;gap:8px;align-items:center;background:#0b1b16;border:1px solid var(--line);border-radius:16px;padding:0 13px;box-shadow:0 10px 30px rgba(0,0,0,.22)}
+    .searchbox svg{width:20px;fill:var(--gold)}
+    #search{appearance:none;border:0;outline:0;background:transparent;color:white;width:100%;font-size:16px;padding:14px 0;font-family:inherit}
+    #search::placeholder{color:#7f9187}
+    .filters{display:flex;gap:7px;overflow:auto;padding:10px 1px 2px;scrollbar-width:none}
+    .filters::-webkit-scrollbar{display:none}
+    .chip{flex:0 0 auto;border:1px solid var(--line);background:#0b1915;color:#b9c5be;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:650;cursor:pointer}
+    .chip.active{background:var(--gold);border-color:var(--gold);color:#152019}
+    .resultbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 2px 10px;color:var(--muted);font-size:12px}
+    .sort{border:0;background:transparent;color:var(--gold2);font:inherit;font-weight:700;padding:5px;cursor:pointer}
+    .list{display:grid;gap:11px}
+    .entry{display:grid;grid-template-columns:64px minmax(0,1fr);gap:14px;border:1px solid rgba(213,181,107,.17);background:linear-gradient(135deg,var(--card),#091712);border-radius:19px;padding:15px;box-shadow:0 10px 26px rgba(0,0,0,.16);transition:.18s ease}
+    .entry:hover{transform:translateY(-1px);border-color:rgba(213,181,107,.38)}
+    .qnum{width:56px;height:56px;border-radius:15px;background:linear-gradient(145deg,#1b3b30,#0e221b);border:1px solid rgba(213,181,107,.28);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--gold2);font-family:Georgia,serif;line-height:1}
+    .qnum span{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:9px;letter-spacing:.14em;color:#8fa397;margin-bottom:4px}
+    .qnum b{font-size:25px;font-weight:600}
+    .entry-main{min-width:0}
+    .topline{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+    .title{font-family:Georgia,"Times New Roman",serif;font-size:19px;line-height:1.2;margin:0;color:#fff}
+    .category{flex:0 0 auto;font-size:10px;text-transform:uppercase;letter-spacing:.09em;border:1px solid rgba(213,181,107,.22);color:var(--gold2);border-radius:999px;padding:5px 7px}
+    .speaker{color:var(--gold);font-weight:750;font-size:13px;margin-top:7px}
+    .desc{color:#b8c4bd;font-size:13px;line-height:1.45;margin-top:5px}
+    .tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}
+    .tag{font-size:10px;color:#8fa298;background:rgba(27,59,48,.48);padding:5px 7px;border-radius:7px}
+    .actions{display:flex;gap:8px;margin-top:11px;flex-wrap:wrap}
+    .open,.copy{display:inline-flex;align-items:center;justify-content:center;min-height:36px;border-radius:10px;font-size:12px;font-weight:750;padding:8px 11px}
+    .open{background:var(--gold);color:#152019}
+    .copy{border:1px solid var(--line);background:transparent;color:#c9d1cc;cursor:pointer;font-family:inherit}
+    .empty{display:none;text-align:center;border:1px dashed var(--line);border-radius:18px;padding:30px 18px;color:var(--muted)}
+    .foot{margin-top:25px;border-top:1px solid var(--line);padding:20px 3px;text-align:center;color:#7f9188;font-size:12px;line-height:1.5}
+    .foot strong{color:var(--gold2)}
+    @media(max-width:620px){.wrap{width:min(100% - 20px,980px);padding-top:16px}.head{padding-left:5px}.logo{width:57px;height:57px}.brand{font-size:20px}.hero{border-radius:22px;padding:23px 18px}.entry{grid-template-columns:50px minmax(0,1fr);gap:11px;padding:13px}.qnum{width:47px;height:50px;border-radius:13px}.qnum b{font-size:21px}.title{font-size:17px}.topline{display:block}.category{display:inline-block;margin-top:7px}.tools{padding-top:9px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="head">
+      <img class="logo" src="/watermark-my-logo-full.png" alt="DAR AL TAWḤĪD Logo">
+      <div><p class="brand-small">Quellen · Nachweise · Fundstellen</p><p class="brand">DAR AL TAWḤĪD</p><p class="sign">by Serhat Abu Malik</p></div>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">Zentrale Quellenbibliothek</p>
+      <h1>Alle Quellenlinks an einem Ort</h1>
+      <p class="intro">Durchsuche deine Quellen nach <b>Thema</b>, <b>Sprecher/Gelehrtem</b>, <b>Stichwort</b> oder direkt nach der <b>Q-Nummer</b>. Jede Karte führt zur vollständigen Quellenseite mit Textnachweisen, Fundstellen und vorhandenen PDF-/Scan-Direktlinks.</p>
+      <div class="stats"><span class="stat"><b>19</b> Quellenlinks</span><span class="stat">Q 01 – Q 19</span><span class="stat">Suche nach Person & Thema</span></div>
+    </section>
+
+    <section class="tools" aria-label="Quellen durchsuchen">
+      <div class="searchbox"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 1 0 4.63 13.4l4.73 4.74 1.28-1.28-4.74-4.73A7.5 7.5 0 0 0 10.5 3Zm0 1.8a5.7 5.7 0 1 1 0 11.4 5.7 5.7 0 0 1 0-11.4Z"/></svg><input id="search" type="search" inputmode="search" autocomplete="off" placeholder="z. B. Ibn Masʿūd, Ṭāġūt, Gericht, Mawlid, q/17 …"></div>
+      <div class="filters" id="filters">
+        <button class="chip active" data-filter="all">Alle</button>
+        <button class="chip" data-filter="aqidah">ʿAqīdah</button>
+        <button class="chip" data-filter="fiqh">Fiqh</button>
+        <button class="chip" data-filter="hadith">Ḥadīṯ</button>
+        <button class="chip" data-filter="manhaj">Manhaj</button>
+        <button class="chip" data-filter="adab">Adab</button>
+        <button class="chip" data-filter="wissen">Wissen</button>
+      </div>
+      <div class="resultbar"><span id="count">19 Einträge</span><button class="sort" id="sort">Neueste zuerst</button></div>
+    </section>
+
+    <section class="list" id="list">
+      <article class="entry" data-q="1" data-cat="wissen manhaj" data-search="q1 q/1 wissen handeln ilm amal abdullah ibn masud ibn masʿud lernt handelt">
+        <div class="qnum"><span>QUELLE</span><b>01</b></div><div class="entry-main"><div class="topline"><h2 class="title">Wissen verlangt Handeln</h2><span class="category">Wissen</span></div><div class="speaker">ʿAbdullāh ibn Masʿūd رضي الله عنه</div><div class="desc">Athar über Wissen, das durch Handlung bestätigt werden muss.</div><div class="tags"><span class="tag">ʿIlm</span><span class="tag">ʿAmal</span><span class="tag">Ṣaḥābī</span></div><div class="actions"><a class="open" href="/q/1/">Quelle öffnen</a><button class="copy" data-url="https://dar-al-tawhid.de/q/1/">Link kopieren</button></div></div>
+      </article>
+      <article class="entry" data-q="2" data-cat="hadith adab" data-search="q2 q/2 bestandigkeit taten beständig amal aisha prophet hadith liebsten taten">
+        <div class="qnum"><span>QUELLE</span><b>02</b></div><div class="entry-main"><div class="topline"><h2 class="title">Beständigkeit der Taten</h2><span class="category">Ḥadīṯ</span></div><div class="speaker">Der Prophet ﷺ · überliefert von ʿĀʾišah رضي الله عنها</div><div class="desc">Die Allah liebsten Taten sind die beständigsten, auch wenn sie gering sind.</div><div class="tags"><span class="tag">Mudāwamah</span><span class="tag">ʿAmal</span></div><div class="actions"><a class="open" href="/q/2/">Quelle öffnen</a><button class="copy" data-url="https://dar-al-tawhid.de/q/2/">Link kopieren</button></div></div>
+      </article>
+      <article class="entry" data-q="3" data-cat="manhaj" data-search="q3 q/3 awzai al-awzai salaf athar spuren meinungen menschen manhaj">
+        <div class="qnum"><span>QUELLE</span><b>03</b></div><div class="entry-main"><div class="topline"><h2 class="title">Halte dich an die Spuren der Salaf</h2><span class="category">Manhaj</span></div><div class="speaker">al-Awzāʿī رحمه الله</div><div class="desc">Festhalten an den Überlieferungen der Salaf und Warnung vor ausgeschmückten Meinungen.</div><div class="tags"><span class="tag">Salaf</span><span class="tag">Āthār</span><span class="tag">Manhaj</span></div><div class="actions"><a class="open" href="/q/3/">Quelle öffnen</a><button class="copy" data-url="https://dar-al-tawhid.de/q/3/">Link kopieren</button></div></div>
+      </article>
+      <article class="entry" data-q="4" data-cat="hadith adab" data-search="q4 q/4 din nasihah nasiha tamim dari prophet iman beratung">
+        <div class="qnum"><span>QUELLE</span><b>04</b></div><div class="entry-main"><div class="topline"><h2 class="title">Der Dīn ist Naṣīḥah</h2><span class="category">Ḥadīṯ</span></div><div class="speaker">Der Prophet ﷺ · überliefert von Tamīm ad-Dārī رضي الله عنه</div><div class="desc">Grundlegender Ḥadīṯ über Naṣīḥah als Kernbestandteil des Dīn.</div><div class="tags"><span class="tag">Īmān</span><span class="tag">Naṣīḥah</span></div><div class="actions"><a class="open" href="/q/4/">Quelle öffnen</a><button class="copy" data-url="https://dar-al-tawhid.de/q/4/">Link kopieren</button></div></div>
+      </article>
+      <article class="entry" data-q="5" data-cat="manhaj" data-search="q5 q/5 malik imam malik ummah erster teil letzter teil salaf reform gerade">
+        <div class="qnum"><span>QUELLE</span><b>05</b></div><div class="entry-main"><div class="topline"><h2 class="title">Wodurch die Ummah wieder gerade wird</h2><span class="category">Manhaj</span></div><div class="speaker">Imām Mālik ibn Anas رحمه الله</div><div class="desc">Die spätere Ummah wird nur durch das berichtigt, wodurch ihr erster Teil berichtigt wurde.</div><div class="tags"><span class="tag">Ummah</span><span class="tag">Salaf</span></div><div class="actions"><a class="open" href="/q/5/">Quelle öffnen</a><button class="copy" data-url="https://dar-al-tawhid.de/q/5/">Link kopieren</button></div></div>
+      </article>
+      <article class="entry" data-q="6" data-cat="manhaj adab" data-search="q6 q/6 fudayl ibn iyad aufrichtig richtig ikhlas sunnah tat angenommen">
+        <div class="qnum"><span>QUELLE</span><b>06</b></div><div class="entry-main"><div class="topline"><h2 class="title">Aufrichtig und richtig</h2><span class="category">Manhaj</span></div><div class="speaker">al-Fuḍayl ibn ʿIyāḍ رحمه الله</div><div class="desc">Annahme einer Tat durch Ikhlāṣ für Allah und Übereinstimmung mit der Sunnah.</div><div class="tags"><span class="tag">Ikhlāṣ</span><span class="tag">Sunnah</span></div><div class="actions"><a class="open" href="/q/6/">Quelle öffnen</a><button class="copy" data-url="https://dar-al-tawhid.de/q/6/">Link kopieren</button></div></div>
+      </article>
+      <article class="entry" data-q="7" data-cat="manhaj" data-search="q7 q/7 shafii ash-shafii sunnah eigene meinung buch widerspricht aussage">
+        <div class="qnum"><span>QUELLE</span><b>07</b></div><div class="entry-main"><div class="topline"><h2 class="title">Die Sunnah vor der eigenen Meinung</h2><span class="category">Manhaj</span></div><div class="speaker">Imām ash-Shāfiʿī رحمه الله</div><div class="desc">Wenn eine eigene Aussage der Sunnah widerspricht, wird die Sunnah genommen.</div><div class="tags"><span class="tag">Sunnah</span><span class="tag">Ittibāʿ</span></div><div class="actions"><a class="open" href="/q/7/">Quelle öffnen</a><button class="copy" data-url="https://dar-al-tawhid.de/q/7/">Link kopieren</button></div></div>
+      </article>
+      <article class="entry" data-q="8" data-cat="aqidah" data-search="q8 q/8 yazid ibn harun jahmiyyah jahmi istiwa thron aqidah umdeutung">
+        <div class="qnum"><span>QUELLE</span><b>08</b></div><div class="entry-main"><div class="topline"><h2 class="title">Yazīd ibn Hārūn über die Jahmiyyah</h2><span class="category">ʿAqīdah</span></div><div class="speaker">Yazīd ibn Hārūn رحمه الله</div><div class="desc">Quellenarchiv zur Aussage über Istiwaʾ und die Umdeutung der Jahmiyyah.</div><div class="tags"><span class="tag">Istiwaʾ</span><span class="tag">Jahmiyyah</span></div><div class="actions"><a class="open" href="/q/8/">Quelle öffnen</a><button class="copy" data-url="https://dar-al-tawhid.de/q/8/">Link kopieren</button></div></div>
+      </article>
+      <article class="entry" data-q="9" data-cat="aqidah" data-search="q9 q/9 fudayl ibn iyad jahmiyyah herr tut was er will aqidah">
+        <div class="qnum"><span>QUELLE</span><b>09</b></div><div class="entry-main"><div class="topline"><h2 class="title">al-Fuḍayl ibn ʿIyāḍ über die Jahmiyyah</h2><span class="category">ʿAqīdah</span></div><div class="speaker">al-Fuḍayl ibn ʿIyāḍ رحمه الله</div><div class="desc">Aussage zur Antwort auf die Jahmiyyah: Glaube an einen Herrn, der tut, was Er will.</div><div class="tags"><span class="tag">Jahmiyyah</span><span class="tag">Ṣifāt</span></div><div class="actions"><a class="open" href="/q/9/">Quelle öffnen</a><button class="copy" data-url="https://dar-al-tawhid.de/q/9/">Link kopieren</button></div></div>
+      </article>
+      <article class="entry" data-q="10" data-cat="aqidah" data-search="q10 q/10 fudayl ibn iyad allah tut was er will jahmiyyah aqidah sifat">
+        <div class="qnum"><span>QUELLE</span><b>10</b></div><div class="entry-main"><div class="topline"><h2 class="title">Allah tut, was Er will</h2><span class="category">ʿAqīdah</span></div><div class="speaker">al-Fuḍayl ibn ʿIyāḍ رحمه الله</div><div class="desc">Direktnachweise zur Aussage über Allahs Handeln und die Antwort an die Jahmiyyah.</div><div class="tags"><span class="tag">Ṣifāt</span><span class="tag">Jahmiyyah</span></div><div class="actions"><a class="open" href="/q/10/">Quelle öffnen</a><button class="copy" data-url="https://dar-al-tawhid.de/q/10/">Link kopieren</button></div></div>
+      </article>
+      <article class="entry" data-q="11" data-cat="aqidah" data-search="q11 q/11 hammad ibn zayd nuzul makaan makan sifat allah aqidah">
+        <div class="qnum"><span>QUELLE</span><b>11</b></div><div class="entry-main"><div class="topline"><h2 class="title">Hammād ibn Zayd über den Nuzūl</h2><span class="category">ʿAqīdah</span></div><div class="speaker">Hammād ibn Zayd رحمه الله</div><div class="desc">Athar zum Nuzūl und Erklärung der Formulierung „makān“ in diesem Zusammenhang.</div><div class="tags"><span class="tag">Nuzūl</span><span class="tag">Ṣifāt</span></div><div class="actions"><a class="open" href="/q/11/">Quelle öffnen</a><button class="copy" data-url="https://dar-al-tawhid.de/q/11/">Link kopieren</button></div></div>
+      </article>
+      <article class="entry" data-q="12" data-cat="fiqh manhaj" data-search="q12 q/12 mawlid bidah sunnah ibn taymiyyah taj ad-din al-fakihani fakihani fest">
+        <div class="qnum"><span>QUELLE</span><b>12</b></div><div class="entry-main"><div class="topline"><h2 class="title">Mawlid: Keine Sunnah, sondern Bidʿah</h2><span class="category">Bidʿah</span></div><div class="speaker">Ibn Taymiyyah · Tāj ad-Dīn al-Fākihānī رحمهما الله</div><div class="desc">Direktnachweise zur Einordnung des Mawlid als religiöses Fest und Bidʿah.</div><div class="tags"><span class="tag">Mawlid</span><span class="tag">Bidʿah</span></div><div class="actions"><a class="open" href="/q/12/">Quelle öffnen</a><button class="copy" data-url="https://dar-al-tawhid.de/q/12/">Link kopieren</button></div></div>
+      </article>
+      <article class="entry" data-q="13" data-cat="adab manhaj" data-search="q13 q/13 shafii ash-shafii wahrheit diskussion eigene meinung zunge adab debatte">
+        <div class="qnum"><span>QUELLE</span><b>13</b></div><div class="entry-main"><div class="topline"><h2 class="title">Die Wahrheit vor der eigenen Meinung</h2><span class="category">Adab</span></div><div class="speaker">Imām ash-Shāfiʿī رحمه الله</div><div class="desc">Aufrichtigkeit in der Diskussion: Entscheidend ist, dass die Wahrheit erscheint.</div><div class="tags"><span class="tag">Wahrheit</span><span class="tag">Diskussion</span></div><div class="actions"><a class="open" href="/q/13/">Quelle öffnen</a><button class="copy" data-url="https://dar-al-tawhid.de/q/13/">Link kopieren</button></div></div>
+      </article>
+      <article class="entry" data-q="14" data-cat="hadith adab" data-search="q14 q/14 prophet hochmut kibr wahrheit ablehnen menschen gering schätzen muslim 91">
+        <div class="qnum"><span>QUELLE</span><b>14</b></div><div class="entry-main"><div class="topline"><h2 class="title">Hochmut ist, die Wahrheit abzulehnen</h2><span class="category">Ḥadīṯ</span></div><div class="speaker">Der Prophet ﷺ</div><div class="desc">Ṣaḥīḥ Muslim Nr. 91 über Kibr: Wahrheit zurückweisen und Menschen geringschätzen.</div><div class="tags"><span class="tag">Kibr</span><span class="tag">Wahrheit</span></div><div class="actions"><a class="open" href="/q/14/">Quelle öffnen</a><button class="copy" data-url="https://dar-al-tawhid.de/q/14/">Link kopieren</button></div></div>
+      </article>
+      <article class="entry" data-q="15" data-cat="fiqh aqidah" data-search="q15 q/15 recht zurückholen schirk akbar taghut tahakum muhaakamah anzeige klage tabari mawardi ibn qudamah ibn taymiyyah ibn abd al-barr">
+        <div class="qnum"><span>QUELLE</span><b>15</b></div><div class="entry-main"><div class="topline"><h2 class="title">Recht zurückholen ist nicht automatisch Schirk Akbar</h2><span class="category">Fiqh / Ṭāġūt</span></div><div class="speaker">aṭ-Ṭabarī · al-Māwardī · Ibn Qudāmah · Ibn Taymiyyah · Ibn ʿAbd al-Barr</div><div class="desc">Taḥākum, Ṭāġūt und Rückholung eines verweigerten Rechts; Abgrenzung zwischen Rechtsrückforderung und Riḍā mit Bāṭil.</div><div class="tags"><span class="tag">Ṭāġūt</span><span class="tag">Taḥākum</span><span class="tag">Aḫḏ al-Ḥaqq</span></div><div class="actions"><a class="open" href="/q/15/">Quelle öffnen</a><button class="copy" data-url="https://dar-al-tawhid.de/q/15/">Link kopieren</button></div></div>
+      </article>
+      <article class="entry" data-q="16" data-cat="wissen manhaj" data-search="q16 q/16 bukhari al-bukhari wissen wort tat ilm qawl amal quran 47 19">
+        <div class="qnum"><span>QUELLE</span><b>16</b></div><div class="entry-main"><div class="topline"><h2 class="title">Wissen kommt vor Wort und Tat</h2><span class="category">Wissen</span></div><div class="speaker">Imām al-Buḫārī رحمه الله</div><div class="desc">Kapitelüberschrift „al-ʿIlm qabl al-Qawl wa-l-ʿAmal“ mit Qurʾān 47:19.</div><div class="tags"><span class="tag">ʿIlm</span><span class="tag">Qawl</span><span class="tag">ʿAmal</span></div><div class="actions"><a class="open" href="/q/16/">Quelle öffnen</a><button class="copy" data-url="https://dar-al-tawhid.de/q/16/">Link kopieren</button></div></div>
+      </article>
+      <article class="entry" data-q="17" data-cat="fiqh adab" data-search="q17 q/17 aufstehen gericht kufr qadi richter gerichtsordnung ibn al-humam ibn nujaym mardawi muawiyah sad ibn muadh ibn hajar bayhaqi">
+        <div class="qnum"><span>QUELLE</span><b>17</b></div><div class="entry-main"><div class="topline"><h2 class="title">Aufstehen im Gericht: kein automatischer Kufr</h2><span class="category">Fiqh / Gericht</span></div><div class="speaker">Ibn al-Humām · Ibn Nuǧaym · al-Mardāwī · Muʿāwiyah · Ibn Ḥaǧar · al-Bayhaqī</div><div class="desc">Gerichtsordnung, Qāḍī-Adab, Aufstehen, Ehrung, Hochmut und die Abgrenzung zum automatischen Kufr.</div><div class="tags"><span class="tag">Gericht</span><span class="tag">Qāḍī</span><span class="tag">Aufstehen</span></div><div class="actions"><a class="open" href="/q/17/">Quelle öffnen</a><button class="copy" data-url="https://dar-al-tawhid.de/q/17/">Link kopieren</button></div></div>
+      </article>
+      <article class="entry" data-q="18" data-cat="hadith wissen" data-search="q18 q/18 bukhari al-bukhari hifz 15000 15.000 hadithe abu hatim ar-razi hashid ibn ismail dhahabi ibn hajar">
+        <div class="qnum"><span>QUELLE</span><b>18</b></div><div class="entry-main"><div class="topline"><h2 class="title">Imām al-Buḫārī und die Stärke seines Ḥifẓ</h2><span class="category">Ḥadīṯ</span></div><div class="speaker">Abū Ḥātim ar-Rāzī · Ḥāshid ibn Ismāʿīl</div><div class="desc">Lob Abū Ḥātims über al-Buḫārī und Bericht über mehr als 15.000 Ḥadīṯe auswendig.</div><div class="tags"><span class="tag">al-Buḫārī</span><span class="tag">Ḥifẓ</span><span class="tag">15.000</span></div><div class="actions"><a class="open" href="/q/18/">Quelle öffnen</a><button class="copy" data-url="https://dar-al-tawhid.de/q/18/">Link kopieren</button></div></div>
+      </article>
+      <article class="entry" data-q="19" data-cat="fiqh aqidah" data-search="q19 q/19 recht zurückfordern nichtislamische autorität hakim dar al-harb aman sarakhsi al-sarakhsi shafii ibn qudamah ibn hisham hilf al-fudul bayhaqi ibn kathir taghut">
+        <div class="qnum"><span>QUELLE</span><b>19</b></div><div class="entry-main"><div class="topline"><h2 class="title">Recht zurückfordern bei nichtislamischer Autorität</h2><span class="category">Fiqh / Recht</span></div><div class="speaker">as-Saraḫsī · ash-Shāfiʿī · Ibn Qudāmah · Ibn Hishām · al-Bayhaqī · Ibn Kathīr</div><div class="desc">Genommenes Recht, Beweis vor deren ḥākim, Dār al-Ḥarb, Amān und Ḥilf al-Fuḍūl – mit Textmarkierungen und Scan-/PDF-Direktseiten.</div><div class="tags"><span class="tag">Rechtsrückforderung</span><span class="tag">deren ḥākim</span><span class="tag">Dār al-Ḥarb</span></div><div class="actions"><a class="open" href="/q/19/">Quelle öffnen</a><button class="copy" data-url="https://dar-al-tawhid.de/q/19/">Link kopieren</button></div></div>
+      </article>
+    </section>
+
+    <div class="empty" id="empty">Keine Quelle gefunden. Suche nach einem anderen Namen, Begriff oder einer Q-Nummer.</div>
+    <footer class="foot"><strong>DAR AL TAWḤĪD – Quellenbibliothek</strong><br>Diese Seite dient als Arbeitsindex. Die eigentlichen Textbelege, Fundstellen und Direktnachweise befinden sich auf den jeweiligen Q-Seiten.</footer>
+  </main>
+
+  <script>
+    const list=document.getElementById('list');
+    const entries=[...document.querySelectorAll('.entry')];
+    const search=document.getElementById('search');
+    const count=document.getElementById('count');
+    const empty=document.getElementById('empty');
+    const sortBtn=document.getElementById('sort');
+    const chips=[...document.querySelectorAll('.chip')];
+    let filter='all', newest=false;
+    const normalize=s=>s.toLocaleLowerCase('de-DE').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[ʿʾ‘’'`]/g,'').replace(/ṭ/g,'t').replace(/ḍ/g,'d').replace(/ḥ/g,'h').replace(/ṣ/g,'s').replace(/ẓ/g,'z').replace(/ġ/g,'g').replace(/ḫ/g,'kh').replace(/ā/g,'a').replace(/ī/g,'i').replace(/ū/g,'u');
+    function apply(){
+      const q=normalize(search.value.trim());let shown=0;
+      entries.forEach(el=>{const text=normalize(el.dataset.search+' '+el.innerText);const cat=el.dataset.cat.split(' ');const okText=!q||text.includes(q);const okCat=filter==='all'||cat.includes(filter);const show=okText&&okCat;el.style.display=show?'grid':'none';if(show)shown++;});
+      count.textContent=shown+(shown===1?' Eintrag':' Einträge');empty.style.display=shown?'none':'block';
+    }
+    search.addEventListener('input',apply);
+    chips.forEach(c=>c.addEventListener('click',()=>{chips.forEach(x=>x.classList.remove('active'));c.classList.add('active');filter=c.dataset.filter;apply();}));
+    sortBtn.addEventListener('click',()=>{newest=!newest;[...entries].sort((a,b)=>newest?Number(b.dataset.q)-Number(a.dataset.q):Number(a.dataset.q)-Number(b.dataset.q)).forEach(el=>list.appendChild(el));sortBtn.textContent=newest?'Älteste zuerst':'Neueste zuerst';});
+    document.addEventListener('click',async e=>{const b=e.target.closest('.copy');if(!b)return;const old=b.textContent;try{await navigator.clipboard.writeText(b.dataset.url);b.textContent='Kopiert ✓';setTimeout(()=>b.textContent=old,1400)}catch{b.textContent='Link: '+b.dataset.url;}});
+  </script>
+</body>
+</html>
