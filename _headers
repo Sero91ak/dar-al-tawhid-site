@@ -28,6 +28,10 @@
   Cache-Control: no-store, no-cache, must-revalidate, max-age=0
   Pragma: no-cache
 
+/assets/quellen-library.css
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  Pragma: no-cache
+
 /content/posts/*
   Cache-Control: no-store, no-cache, must-revalidate, max-age=0
   Pragma: no-cache
