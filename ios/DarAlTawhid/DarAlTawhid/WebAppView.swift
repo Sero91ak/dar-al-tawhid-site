@@ -1291,17 +1291,24 @@ struct WebAppView: UIViewRepresentable {
 
             let title = UILabel()
             title.translatesAutoresizingMaskIntoConstraints = false
-            title.text = "DĀR AL TAWḤĪD"
-            title.textColor = UIColor(red: 0.96, green: 0.93, blue: 0.82, alpha: 1.0)
-            title.font = UIFont.systemFont(ofSize: 34, weight: .heavy)
+            title.textColor = UIColor(red: 0.831, green: 0.710, blue: 0.416, alpha: 1.0)
+            title.font = UIFont(name: "Georgia-Bold", size: 36) ?? UIFont.systemFont(ofSize: 36, weight: .bold)
             title.textAlignment = .center
+            title.numberOfLines = 1
+            title.adjustsFontSizeToFitWidth = true
+            title.minimumScaleFactor = 0.72
+            let titleText = NSMutableAttributedString(string: "DĀR AL TAWḤĪD")
+            titleText.addAttribute(.kern, value: 2.2, range: NSRange(location: 0, length: titleText.length))
+            title.attributedText = titleText
 
             let kicker = UILabel()
             kicker.translatesAutoresizingMaskIntoConstraints = false
-            kicker.text = "Quran • Sunnah • Athar"
-            kicker.textColor = UIColor(red: 0.80, green: 0.72, blue: 0.52, alpha: 1.0)
-            kicker.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+            kicker.textColor = UIColor(red: 0.957, green: 0.918, blue: 0.824, alpha: 0.72)
+            kicker.font = UIFont(name: "Georgia", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .semibold)
             kicker.textAlignment = .center
+            let kickerText = NSMutableAttributedString(string: "QUR’ĀN  •  SUNNAH  •  ĀTHĀR")
+            kickerText.addAttribute(.kern, value: 2.0, range: NSRange(location: 0, length: kickerText.length))
+            kicker.attributedText = kickerText
 
             let progressWrap = UIView()
             progressWrap.translatesAutoresizingMaskIntoConstraints = false
@@ -1331,7 +1338,8 @@ struct WebAppView: UIViewRepresentable {
 
             let subtitle = UILabel()
             subtitle.translatesAutoresizingMaskIntoConstraints = false
-            subtitle.text = "App wird geladen"
+            subtitle.text = ""
+            subtitle.isHidden = true
             subtitle.textColor = UIColor(red: 0.76, green: 0.74, blue: 0.68, alpha: 1.0)
             subtitle.font = UIFont.systemFont(ofSize: 16, weight: .medium)
             subtitle.textAlignment = .center
@@ -1371,7 +1379,7 @@ struct WebAppView: UIViewRepresentable {
                 stack.centerYAnchor.constraint(equalTo: overlay.centerYAnchor, constant: -36),
                 stack.leadingAnchor.constraint(greaterThanOrEqualTo: overlay.leadingAnchor, constant: 24),
                 stack.trailingAnchor.constraint(lessThanOrEqualTo: overlay.trailingAnchor, constant: -24),
-                progressWrap.widthAnchor.constraint(equalToConstant: 280),
+                progressWrap.widthAnchor.constraint(equalToConstant: 300),
                 progressTrack.leadingAnchor.constraint(equalTo: progressWrap.leadingAnchor),
                 progressTrack.trailingAnchor.constraint(equalTo: progressWrap.trailingAnchor),
                 progressTrack.topAnchor.constraint(equalTo: progressWrap.topAnchor),
@@ -1404,7 +1412,8 @@ struct WebAppView: UIViewRepresentable {
             hideLoadingWorkItem?.cancel()
             let bootInk = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
             isBootLoadingVisible = true
-            loadingLabel?.text = subtitle
+            loadingLabel?.text = ""
+            loadingLabel?.isHidden = true
             guard let overlay = loadingOverlay else { return }
             overlay.backgroundColor = bootInk
             overlay.isHidden = false

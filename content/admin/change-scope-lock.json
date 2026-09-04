@@ -4513,6 +4513,23 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "ios-visitor-boot-screen-dar-al-tawhid-2026-09-04",
+      "approvedBy": "user-explicit-ios-visitor-startbildschirm",
+      "reason": "Startbildschirm iOS/Besucher wie Bild: Schrift DĀR AL TAWḤĪD gold/serif, Unterzeile QUR’ĀN • SUNNAH • ĀTHĀR",
+      "paths": [
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift",
+        "assets/app-soft-boot.js",
+        "test/assets/app-soft-boot.js",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
