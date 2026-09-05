@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v800";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v801";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -21270,6 +21270,8 @@ function renderQuranAyahActionsRow(surah,ayah,ayahData){
   const marked=!!(state.manual&&Number(state.manual.surahNumber)===Number(surah)&&Number(state.manual.ayahNumber)===Number(ayah));
   return '<footer class="quran-ayah-actions-row quran-ayah-actions-row--compact"><button type="button" class="quran-ayah-action-btn'+(marked?" is-saved":"")+'" data-quran-manual-mark="'+esc(surah)+":"+esc(ayah)+'" aria-label="Letzte Stelle markieren" aria-pressed="'+(marked?"true":"false")+'">✓ Letzte Stelle</button><button type="button" class="quran-ayah-action-btn" data-qrc-ayah-copy="'+esc(ayahData||"")+'" aria-label="Kopieren">Kopieren</button><button type="button" class="quran-ayah-action-btn quran-ayah-action-btn--share" data-qrc-ayah-share="'+esc(ayahData||"")+'" aria-label="Teilen">Teilen</button><button type="button" class="quran-ayah-action-btn quran-ayah-action-btn--tafsir" data-qrc-ayah-tafsir="'+esc(surah)+":"+esc(ayah)+'" aria-label="Tafsīr öffnen">Tafsīr</button><button type="button" class="quran-ayah-action-btn quran-ayah-action-btn--bookmark'+(saved?" is-saved":"")+'" data-qrc-ayah-bookmark="'+esc(surah)+":"+esc(ayah)+'" aria-label="'+(saved?"Markierung entfernen":"Merken")+'" aria-pressed="'+(saved?"true":"false")+'">Merken</button></footer>';
 }
+async function openQuranAyahTafsirDirect(surah,ayah){const sid=Number(surah),aid=Number(ayah);if(!Number.isFinite(sid)||!Number.isFinite(aid))return;await openQuranExplanationPanel(sid,aid,quranDefaultTafsirTab(sid,aid))}
+let qrcVisibleAyah={surah:0,ayah:0};let qrcVisibleAyahMap=new Map();let qrcVisibleAyahObserver=null;let qrcContextBarState={surahId:0,surahName:""};
 function getQrcContextBarBottomInset(){const nav=$("bottomNav");if(nav){const r=nav.getBoundingClientRect();const vh=window.innerHeight||document.documentElement.clientHeight||0;if(r.height>20&&vh>0)return Math.max(0,Math.round(vh-r.top))+"px"}const h=Number(String(getComputedStyle(document.documentElement).getPropertyValue("--bottom-navigation-height")).replace("px",""))||70;return"calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm + "+h+"px)"}
 function syncQrcContextBarDock(){const bar=$("qrcContextBar");const nav=$("bottomNav");if(!bar)return;bar.classList.add("qrc-context-bar--dock");bar.style.removeProperty("left");bar.style.removeProperty("right");bar.style.removeProperty("width");if(nav){const r=nav.getBoundingClientRect();const vh=window.innerHeight||document.documentElement.clientHeight||0;if(r.width>40&&r.height>20){const gap=Math.max(0,Math.round(vh-r.top));bar.style.setProperty("bottom",Math.max(0,gap-1)+"px","important");document.documentElement.style.setProperty("--qrc-dock-nav-h",Math.round(r.height)+"px");return}}bar.style.setProperty("bottom",getQrcContextBarBottomInset(),"important")}
 function renderQuranContextBar(surahId,meta,ayah){const name=meta?.transliteration||("Sūrah "+surahId);const ay=Number(ayah)||1;return '<nav class="qrc-context-bar qrc-context-bar--dock" id="qrcContextBar" aria-label="Qurʾān Lesedock"><button type="button" class="qrc-context-pos" id="qrcContextPosBtn" aria-label="Sūrah und Āyah wählen"><span id="qrcContextPosLabel">'+esc(name)+' · '+esc(surahId)+':'+esc(ay)+'</span><span class="qrc-context-chevron" aria-hidden="true">▾</span></button><div class="qrc-context-actions" role="group" aria-label="Schnellaktionen"><button type="button" class="qrc-context-btn" id="qrcContextSearchBtn" aria-label="Qurʾān durchsuchen">'+qrcBtnEmoji("search")+'</button><button type="button" class="qrc-context-btn" id="qrcContextTafsirBtn" aria-label="Tafsīr zur sichtbaren Āyah">'+qrcBtnEmoji("book")+'</button><button type="button" class="qrc-context-btn" id="qrcContextBookmarksBtn" aria-label="Merkliste öffnen">'+qrcBtnEmoji("bookmark")+'</button></div></nav>'}
@@ -26819,7 +26821,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v800";
+const APP_BUILD_ID="app-shell-v801";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
