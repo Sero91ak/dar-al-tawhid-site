@@ -232,9 +232,32 @@ jobs:
           git fetch origin test-library-canonical
           node scripts/overlay-test-staging-from-branch.js
           node scripts/app-stability-repair.js
+          # test-library-canonical überschreibt patch-test-canonical-library.js mit einer
+          # Variante, die den Live-Service-Worker auf …-vNNN-test setzt. Dann bleibt
+          # „Neue Version verfügbar“ dauerhaft. Haupt-Branch-Skripte wiederherstellen.
+          git checkout "${GITHUB_SHA}" -- scripts/patch-test-canonical-library.js scripts/cf-pages-build.js
 
       - name: Build + Build-IDs synchronisieren
         run: npm run build
+
+      - name: Visitor Service-Worker Cache-Version absichern
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const build = String(JSON.parse(fs.readFileSync('version.json', 'utf8')).buildId || '');
+          const match = build.match(/^app-shell-v(\d+)$/);
+          if (!match) throw new Error('version.json: ungültige visitor buildId: ' + build);
+          const next = "const CACHE_VERSION = 'dar-al-tawhid-offline-light-v" + match[1] + "';";
+          let sw = fs.readFileSync('service-worker.js', 'utf8');
+          const pattern = /const CACHE_VERSION = ['"]dar-al-tawhid-offline-light-[^'"]+['"];?/;
+          if (!pattern.test(sw)) throw new Error('service-worker.js: CACHE_VERSION fehlt');
+          sw = sw.replace(pattern, next);
+          if (/dar-al-tawhid-offline-light-v\d+-test/.test(sw)) {
+            throw new Error('visitor service-worker.js darf keine -test Cache-Version haben');
+          }
+          fs.writeFileSync('service-worker.js', sw);
+          console.log('visitor SW CACHE_VERSION →', next);
+          NODE
 
       - name: Health checks (Syntax, Push-Guard, Version, Scope-Lock)
         env:
