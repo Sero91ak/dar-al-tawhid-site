@@ -16,5 +16,23 @@
     "title": "Duʿāʾ der Gefährten der Höhle",
     "snippet": "Unser Herr, schenke uns von Dir aus Barmherzigkeit und bereite für uns Rechtleitung in unserer Angelegenheit.",
     "category": "Barmherzigkeit & Rechtleitung"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 464,
+      "remaining": 443
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 77,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
