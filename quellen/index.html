@@ -17,11 +17,11 @@
   <meta property="og:title" content="Quellenbibliothek – DAR AL TAWḤĪD">
   <meta property="og:description" content="Alle Q-Quellenlinks kompakt durchsuchen, filtern und öffnen.">
   <meta property="og:url" content="https://dar-al-tawhid.de/quellen/">
-  <meta property="og:image" content="https://dar-al-tawhid.de/app-icon-512.png?v=quellenbibliothek-compact-20260906">
+  <meta property="og:image" content="https://dar-al-tawhid.de/app-icon-512.png?v=quellenbibliothek-q21-20260907">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Quellenbibliothek – DAR AL TAWḤĪD">
   <meta name="twitter:description" content="Alle Q-Quellenlinks kompakt durchsuchen, filtern und öffnen.">
-  <meta name="twitter:image" content="https://dar-al-tawhid.de/app-icon-512.png?v=quellenbibliothek-compact-20260906">
+  <meta name="twitter:image" content="https://dar-al-tawhid.de/app-icon-512.png?v=quellenbibliothek-q21-20260907">
   <link rel="stylesheet" href="/assets/quellen-library.css?v=20260906-compact-tabs">
 </head>
 <body class="ql-body">
@@ -45,23 +45,18 @@
     <section class="ql-controls" aria-label="Suche, Tabs und Sortierung">
       <label class="ql-search" for="search">
         <span aria-hidden="true">⌕</span>
-        <input id="search" type="search" inputmode="search" autocomplete="off" placeholder="Suchen: q20, Abū al-ʿĀliyah, Ṭāġūt, Mawlid …">
+        <input id="search" type="search" inputmode="search" autocomplete="off" placeholder="Suchen: q21, Bidʿah, Ibn Baṭṭah, al-Buḫārī …">
       </label>
-
       <div id="categoryTabs" class="ql-tabs" role="tablist" aria-label="Kategorien"></div>
-
       <div class="ql-compact-row">
-        <label class="ql-select-wrap" for="scholarSelect">
-          <span>Sprecher</span>
-          <select id="scholarSelect"></select>
-        </label>
+        <label class="ql-select-wrap" for="scholarSelect"><span>Sprecher</span><select id="scholarSelect"></select></label>
         <button id="sortToggle" type="button" class="ql-sort" data-sort="desc">Q ↓</button>
         <button id="resetBtn" type="button" class="ql-reset">Reset</button>
       </div>
     </section>
 
     <section class="ql-list-head" aria-live="polite">
-      <span id="resultCount">20 Quellen</span>
+      <span id="resultCount">21 Quellen</span>
       <span id="activeInfo">Neueste zuerst</span>
     </section>
 
@@ -69,157 +64,54 @@
     <p id="emptyState" class="ql-empty">Keine passende Quelle gefunden. Suche mit anderem Namen, Thema oder Q‑Nummer.</p>
 
     <nav class="ql-social" aria-label="Social Links">
-      <a class="telegram" href="https://t.me/dar_al_tauhid" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.5 3.8 18.3 20a1.4 1.4 0 0 1-2 1l-4.6-3.3-2.3 2.2a1 1 0 0 1-1.7-.6l.2-4 8-7.2c.4-.4-.1-.6-.6-.3L5.2 14l-4-1.3a1.1 1.1 0 0 1 0-2.1L20 3.3c.8-.3 1.7.4 1.5 1.2z"/></svg>
-      </a>
-      <a class="instagram" href="https://www.instagram.com/dar_at_tawhid/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm5 3.1a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4Zm0 2.2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm5.3-2.6a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z"/></svg>
-      </a>
-      <a class="whatsapp" href="https://whatsapp.com/channel/0029VbBK0YaDp2Q8A0kW1F3g" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.03c-5.5 0-9.97 4.46-9.97 9.97 0 1.75.46 3.46 1.32 4.95L2 22l5.2-1.36a9.96 9.96 0 0 0 4.8 1.22h.01c5.5 0 9.97-4.47 9.97-9.98 0-2.66-1.04-5.15-2.92-7.03A9.91 9.91 0 0 0 12 2.03Z"/></svg>
-      </a>
-      <a class="web" href="/" aria-label="Website">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2.2a7.8 7.8 0 0 1 7.3 5h-4.7A16 16 0 0 0 12 4.2Zm-2.2.5A14 14 0 0 0 7.4 9.2H4.7A7.8 7.8 0 0 1 9.8 4.7Zm0 14.6A7.8 7.8 0 0 1 4.7 14.8h2.7a14 14 0 0 0 2.4 4.5ZM12 19.8a16 16 0 0 0 2.6-5h4.7A7.8 7.8 0 0 1 12 19.8Zm-3.3-6.6H4.4A7.8 7.8 0 0 1 4.4 11h4.3c-.1.8-.2 1.6-.2 2.2s.1 1.4.2 2.2Zm2.1 0c-.1-.8-.2-1.5-.2-2.2s.1-1.4.2-2.2h6.4c.1.8.2 1.5.2 2.2s-.1 1.4-.2 2.2h-6.4Z"/></svg>
-      </a>
+      <a class="telegram" href="https://t.me/dar_al_tauhid" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.5 3.8 18.3 20a1.4 1.4 0 0 1-2 1l-4.6-3.3-2.3 2.2a1 1 0 0 1-1.7-.6l.2-4 8-7.2c.4-.4-.1-.6-.6-.3L5.2 14l-4-1.3a1.1 1.1 0 0 1 0-2.1L20 3.3c.8-.3 1.7.4 1.5 1.2z"/></svg></a>
+      <a class="instagram" href="https://www.instagram.com/dar_at_tawhid/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm5 3.1a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4Zm0 2.2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm5.3-2.6a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z"/></svg></a>
+      <a class="whatsapp" href="https://whatsapp.com/channel/0029VbBK0YaDp2Q8A0kW1F3g" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.03c-5.5 0-9.97 4.46-9.97 9.97 0 1.75.46 3.46 1.32 4.95L2 22l5.2-1.36a9.96 9.96 0 0 0 4.8 1.22h.01c5.5 0 9.97-4.47 9.97-9.98 0-2.66-1.04-5.15-2.92-7.03A9.91 9.91 0 0 0 12 2.03Z"/></svg></a>
+      <a class="web" href="/" aria-label="Website"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2.2a7.8 7.8 0 0 1 7.3 5h-4.7A16 16 0 0 0 12 4.2Zm-2.2.5A14 14 0 0 0 7.4 9.2H4.7A7.8 7.8 0 0 1 9.8 4.7Zm0 14.6A7.8 7.8 0 0 1 4.7 14.8h2.7a14 14 0 0 0 2.4 4.5ZM12 19.8a16 16 0 0 0 2.6-5h4.7A7.8 7.8 0 0 1 12 19.8Zm-3.3-6.6H4.4A7.8 7.8 0 0 1 4.4 11h4.3c-.1.8-.2 1.6-.2 2.2s.1 1.4.2 2.2Zm2.1 0c-.1-.8-.2-1.5-.2-2.2s.1-1.4.2-2.2h6.4c.1.8.2 1.5.2 2.2s-.1 1.4-.2 2.2h-6.4Z"/></svg></a>
     </nav>
   </main>
 
 <script>
-const SOURCES = [
-  {q:20,cat:'Manhaj',cats:['manhaj'],title:'Der gerade Weg und die Warnung vor den Gelüsten',speaker:'Abū al-ʿĀliyah',desc:'Islam lernen, am Ṣirāṭ al-Mustaqīm festhalten, Sunnah und Weg der Ṣaḥābah bewahren und Ahwāʾ meiden.',tags:['Abū al-ʿĀliyah','Ṣirāṭ','Ahwāʾ','Sunnah']},
-  {q:19,cat:'Fiqh',cats:['fiqh'],title:'Recht zurückfordern bei nichtislamischer Autorität',speaker:'as-Saraḫsī · ash-Shāfiʿī · Ibn Qudāmah · Ibn Hishām',desc:'Beweisführung, deren ḥākim, Dār al-Ḥarb, Amān, keine Khiyānah und Ḥilf al-Fuḍūl.',tags:['Rechtsrückforderung','Dār al-Ḥarb','Amān','Ṭāġūt-Abgrenzung']},
-  {q:18,cat:'Ḥadīṯ',cats:['hadith','wissen'],title:'Imām al-Buḫārī und die Stärke seines Ḥifẓ',speaker:'Abū Ḥātim ar-Rāzī · Ḥāshid ibn Ismāʿīl',desc:'Lob über al-Buḫārīs Ḥadīṯ-Wissen und Bericht über mehr als 15.000 auswendig vorgetragene Ḥadīṯe.',tags:['al-Buḫārī','Ḥifẓ','Ahl al-Ḥadīṯ']},
-  {q:17,cat:'Fiqh',cats:['fiqh','adab'],title:'Aufstehen im Gericht: kein automatischer Kufr',speaker:'al-Mardāwī · Ibn Ḥaǧar · al-Bayhaqī · Ḥadīṯe',desc:'Gerichtsordnung, Aufstehen, Ehrung, Hochmut und Abgrenzung zum automatischen Kufr.',tags:['Gericht','Qāḍī-Adab','Aufstehen']},
-  {q:16,cat:'Wissen',cats:['wissen','manhaj','hadith'],title:'Wissen kommt vor Wort und Tat',speaker:'Imām al-Buḫārī',desc:'Kapitelprinzip: Wissen vor Rede und Handlung, gestützt auf Qurʾān 47:19.',tags:['ʿIlm','al-Buḫārī','Manhaj']},
-  {q:15,cat:'Fiqh',cats:['fiqh','aqidah'],title:'Recht zurückholen ist nicht automatisch Schirk Akbar',speaker:'aṭ-Ṭabarī · al-Māwardī · Ibn Qudāmah · Ibn Taymiyyah',desc:'Grundlagenkarte zu Taḥākum, Ṭāġūt, Aḫḏ al-Ḥaqq, Bāṭil und Abwehr von Ẓulm.',tags:['Ṭāġūt','Aḫḏ al-Ḥaqq','Schirk']},
-  {q:14,cat:'Adab',cats:['hadith','adab'],title:'Hochmut ist, die Wahrheit abzulehnen',speaker:'Der Prophet ﷺ',desc:'Ṣaḥīḥ-Muslim-Ḥadīṯ über Kibr: Wahrheit zurückweisen und Menschen gering schätzen.',tags:['Kibr','Wahrheit','Adab']},
-  {q:13,cat:'Adab',cats:['adab','manhaj'],title:'Die Wahrheit vor der eigenen Meinung',speaker:'Imām ash-Shāfiʿī',desc:'Aufrichtigkeit in der Diskussion: Die Wahrheit soll erscheinen, egal durch wessen Zunge.',tags:['Wahrheit','Diskussion','Ikhlāṣ']},
-  {q:12,cat:'Manhaj',cats:['manhaj','hadith'],title:'Mawlid: Keine Sunnah, sondern Bidʿah',speaker:'Ibn Taymiyyah · Tāǧ ad-Dīn al-Fākihānī',desc:'Direktnachweise zum Mawlid als religiöses Fest und Bidʿah, mit Web-, PDF- und Scan-Belegen.',tags:['Mawlid','Bidʿah','Sunnah']},
-  {q:11,cat:'ʿAqīdah',cats:['aqidah','hadith'],title:'Ḥammād ibn Zayd über den Nuzūl',speaker:'Ḥammād ibn Zayd',desc:'Athar zum Ḥadīṯ des Nuzūl und Erklärung zum Wort makān im Kontext der Ṣifāt.',tags:['Nuzūl','Ṣifāt','Athar']},
-  {q:10,cat:'ʿAqīdah',cats:['aqidah'],title:'Allah tut, was Er will',speaker:'al-Fuḍayl ibn ʿIyāḍ',desc:'Antwort an die Jahmiyyah: Glaube an einen Herrn, der tut, was Er will.',tags:['Jahmiyyah','Ṣifāt','al-Fuḍayl']},
-  {q:9,cat:'ʿAqīdah',cats:['aqidah'],title:'al-Fuḍayl ibn ʿIyāḍ über die Jahmiyyah',speaker:'al-Fuḍayl ibn ʿIyāḍ',desc:'Quellenarchiv zur Aussage gegen die Jahmiyyah: „Ich glaube an einen Herrn, der tut, was Er will.“',tags:['Jahmiyyah','Aqīdah','Salaf']},
-  {q:8,cat:'ʿAqīdah',cats:['aqidah'],title:'Yazīd ibn Hārūn über die Jahmiyyah',speaker:'Yazīd ibn Hārūn',desc:'Aussage über die Umdeutung des Istiwaʾ und die Grenze zur Jahmiyyah.',tags:['Istiwaʾ','Jahmiyyah','Ṣifāt']},
-  {q:7,cat:'Manhaj',cats:['manhaj','hadith'],title:'Die Sunnah vor der eigenen Meinung',speaker:'Imām ash-Shāfiʿī',desc:'Wenn eine Aussage der Sunnah widerspricht, wird die Sunnah genommen und die eigene Aussage verlassen.',tags:['Sunnah','ash-Shāfiʿī','Manhaj']},
-  {q:6,cat:'Manhaj',cats:['manhaj','adab'],title:'Aufrichtig und richtig',speaker:'al-Fuḍayl ibn ʿIyāḍ',desc:'Eine Tat wird erst angenommen, wenn sie aufrichtig für Allah und richtig gemäß der Sunnah ist.',tags:['Ikhlāṣ','Sunnah','ʿAmal']},
-  {q:5,cat:'Manhaj',cats:['manhaj'],title:'Wodurch die Ummah wieder gerade wird',speaker:'Imām Mālik ibn Anas',desc:'Der letzte Teil dieser Ummah wird nur durch das gerade, wodurch ihr erster Teil gerade wurde.',tags:['Ummah','Salaf','Mālik']},
-  {q:4,cat:'Ḥadīṯ',cats:['hadith','adab'],title:'Der Dīn ist Naṣīḥah',speaker:'Der Gesandte Allahs ﷺ · Tamīm ad-Dārī',desc:'Ṣaḥīḥ-Muslim-Ḥadīṯ über Naṣīḥah für Allah, Sein Buch, Seinen Gesandten und die Muslime.',tags:['Naṣīḥah','Īmān','Ḥadīṯ']},
-  {q:3,cat:'Manhaj',cats:['manhaj','adab'],title:'Halte dich an die Spuren der Salaf',speaker:'al-Awzāʿī',desc:'Festhalten an den Überlieferungen der Vorangegangenen und Warnung vor ausgeschmückten Meinungen.',tags:['Salaf','Athar','al-Awzāʿī']},
-  {q:2,cat:'Ḥadīṯ',cats:['hadith','adab'],title:'Beständigkeit der Taten',speaker:'Der Gesandte Allahs ﷺ · ʿĀʾishah',desc:'Die Allah liebsten Taten sind die beständigsten, auch wenn sie gering sind.',tags:['Mudāwamah','ʿAmal','Bukhārī/Muslim']},
-  {q:1,cat:'Wissen',cats:['wissen','manhaj'],title:'Wissen verlangt Handeln',speaker:'ʿAbdullāh ibn Masʿūd',desc:'Lernt, lernt — und wenn ihr Wissen erlangt habt, handelt danach.',tags:['ʿIlm','ʿAmal','Ibn Masʿūd']}
+const SOURCES=[
+{q:21,cat:'Manhaj',cats:['manhaj'],title:'Wer sein Ohr für Bidʿah öffnet',speaker:'Muḥammad ibn an-Naḍr al-Ḥārithī',desc:'Warnung vor bewusstem Zuhören bei Anhängern der Bidʿah und vor dem Aussetzen des Herzens gegenüber Shubuhāt.',tags:['Bidʿah','Shubuhāt','Ibn Baṭṭah','al-Mujālasah']},
+{q:20,cat:'Manhaj',cats:['manhaj'],title:'Der gerade Weg und die Warnung vor den Gelüsten',speaker:'Abū al-ʿĀliyah',desc:'Islam lernen, am Ṣirāṭ al-Mustaqīm festhalten, Sunnah und Weg der Ṣaḥābah bewahren und Ahwāʾ meiden.',tags:['Abū al-ʿĀliyah','Ṣirāṭ','Ahwāʾ','Sunnah']},
+{q:19,cat:'Fiqh',cats:['fiqh'],title:'Recht zurückfordern bei nichtislamischer Autorität',speaker:'as-Saraḫsī · ash-Shāfiʿī · Ibn Qudāmah · Ibn Hishām',desc:'Beweisführung, deren ḥākim, Dār al-Ḥarb, Amān, keine Khiyānah und Ḥilf al-Fuḍūl.',tags:['Rechtsrückforderung','Dār al-Ḥarb','Amān','Ṭāġūt-Abgrenzung']},
+{q:18,cat:'Ḥadīṯ',cats:['hadith','wissen'],title:'Imām al-Buḫārī und die Stärke seines Ḥifẓ',speaker:'Abū Ḥātim ar-Rāzī · Ḥāshid ibn Ismāʿīl',desc:'Lob über al-Buḫārīs Ḥadīṯ-Wissen und Bericht über mehr als 15.000 auswendig vorgetragene Ḥadīṯe.',tags:['al-Buḫārī','Ḥifẓ','Ahl al-Ḥadīṯ']},
+{q:17,cat:'Fiqh',cats:['fiqh','adab'],title:'Aufstehen im Gericht: kein automatischer Kufr',speaker:'al-Mardāwī · Ibn Ḥaǧar · al-Bayhaqī · Ḥadīṯe',desc:'Gerichtsordnung, Aufstehen, Ehrung, Hochmut und Abgrenzung zum automatischen Kufr.',tags:['Gericht','Qāḍī-Adab','Aufstehen']},
+{q:16,cat:'Wissen',cats:['wissen','manhaj','hadith'],title:'Wissen kommt vor Wort und Tat',speaker:'Imām al-Buḫārī',desc:'Kapitelprinzip: Wissen vor Rede und Handlung, gestützt auf Qurʾān 47:19.',tags:['ʿIlm','al-Buḫārī','Manhaj']},
+{q:15,cat:'Fiqh',cats:['fiqh','aqidah'],title:'Recht zurückholen ist nicht automatisch Schirk Akbar',speaker:'aṭ-Ṭabarī · al-Māwardī · Ibn Qudāmah · Ibn Taymiyyah',desc:'Grundlagenkarte zu Taḥākum, Ṭāġūt, Aḫḏ al-Ḥaqq, Bāṭil und Abwehr von Ẓulm.',tags:['Ṭāġūt','Aḫḏ al-Ḥaqq','Schirk']},
+{q:14,cat:'Adab',cats:['hadith','adab'],title:'Hochmut ist, die Wahrheit abzulehnen',speaker:'Der Prophet ﷺ',desc:'Ṣaḥīḥ-Muslim-Ḥadīṯ über Kibr: Wahrheit zurückweisen und Menschen gering schätzen.',tags:['Kibr','Wahrheit','Adab']},
+{q:13,cat:'Adab',cats:['adab','manhaj'],title:'Die Wahrheit vor der eigenen Meinung',speaker:'Imām ash-Shāfiʿī',desc:'Aufrichtigkeit in der Diskussion: Die Wahrheit soll erscheinen, egal durch wessen Zunge.',tags:['Wahrheit','Diskussion','Ikhlāṣ']},
+{q:12,cat:'Manhaj',cats:['manhaj','hadith'],title:'Mawlid: Keine Sunnah, sondern Bidʿah',speaker:'Ibn Taymiyyah · Tāǧ ad-Dīn al-Fākihānī',desc:'Direktnachweise zum Mawlid als religiöses Fest und Bidʿah.',tags:['Mawlid','Bidʿah','Sunnah']},
+{q:11,cat:'ʿAqīdah',cats:['aqidah','hadith'],title:'Ḥammād ibn Zayd über den Nuzūl',speaker:'Ḥammād ibn Zayd',desc:'Athar zum Ḥadīṯ des Nuzūl und Erklärung zum Wort makān im Kontext der Ṣifāt.',tags:['Nuzūl','Ṣifāt','Athar']},
+{q:10,cat:'ʿAqīdah',cats:['aqidah'],title:'Allah tut, was Er will',speaker:'al-Fuḍayl ibn ʿIyāḍ',desc:'Antwort an die Jahmiyyah: Glaube an einen Herrn, der tut, was Er will.',tags:['Jahmiyyah','Ṣifāt','al-Fuḍayl']},
+{q:9,cat:'ʿAqīdah',cats:['aqidah'],title:'al-Fuḍayl ibn ʿIyāḍ über die Jahmiyyah',speaker:'al-Fuḍayl ibn ʿIyāḍ',desc:'Quellenarchiv zur Aussage gegen die Jahmiyyah.',tags:['Jahmiyyah','ʿAqīdah','Salaf']},
+{q:8,cat:'ʿAqīdah',cats:['aqidah'],title:'Yazīd ibn Hārūn über die Jahmiyyah',speaker:'Yazīd ibn Hārūn',desc:'Aussage über die Umdeutung des Istiwaʾ und die Grenze zur Jahmiyyah.',tags:['Istiwaʾ','Jahmiyyah','Ṣifāt']},
+{q:7,cat:'Manhaj',cats:['manhaj','hadith'],title:'Die Sunnah vor der eigenen Meinung',speaker:'Imām ash-Shāfiʿī',desc:'Wenn eine Aussage der Sunnah widerspricht, wird die Sunnah genommen und die eigene Aussage verlassen.',tags:['Sunnah','ash-Shāfiʿī','Manhaj']},
+{q:6,cat:'Manhaj',cats:['manhaj','adab'],title:'Aufrichtig und richtig',speaker:'al-Fuḍayl ibn ʿIyāḍ',desc:'Eine Tat wird erst angenommen, wenn sie aufrichtig für Allah und richtig gemäß der Sunnah ist.',tags:['Ikhlāṣ','Sunnah','ʿAmal']},
+{q:5,cat:'Manhaj',cats:['manhaj'],title:'Wodurch die Ummah wieder gerade wird',speaker:'Imām Mālik ibn Anas',desc:'Der letzte Teil dieser Ummah wird nur durch das gerade, wodurch ihr erster Teil gerade wurde.',tags:['Ummah','Salaf','Mālik']},
+{q:4,cat:'Ḥadīṯ',cats:['hadith','adab'],title:'Der Dīn ist Naṣīḥah',speaker:'Der Gesandte Allahs ﷺ · Tamīm ad-Dārī',desc:'Ṣaḥīḥ-Muslim-Ḥadīṯ über Naṣīḥah für Allah, Sein Buch, Seinen Gesandten und die Muslime.',tags:['Naṣīḥah','Īmān','Ḥadīṯ']},
+{q:3,cat:'Manhaj',cats:['manhaj','adab'],title:'Halte dich an die Spuren der Salaf',speaker:'al-Awzāʿī',desc:'Festhalten an den Überlieferungen der Vorangegangenen und Warnung vor ausgeschmückten Meinungen.',tags:['Salaf','Athar','al-Awzāʿī']},
+{q:2,cat:'Ḥadīṯ',cats:['hadith','adab'],title:'Beständigkeit der Taten',speaker:'Der Gesandte Allahs ﷺ · ʿĀʾishah',desc:'Die Allah liebsten Taten sind die beständigsten, auch wenn sie gering sind.',tags:['Mudāwamah','ʿAmal','Bukhārī/Muslim']},
+{q:1,cat:'Wissen',cats:['wissen','manhaj'],title:'Wissen verlangt Handeln',speaker:'ʿAbdullāh ibn Masʿūd',desc:'Lernt, lernt — und wenn ihr Wissen erlangt habt, handelt danach.',tags:['ʿIlm','ʿAmal','Ibn Masʿūd']}
 ];
-const CATEGORY_ORDER = [
-  ['all','Alle'],
-  ['aqidah','ʿAqīdah'],
-  ['manhaj','Manhaj'],
-  ['fiqh','Fiqh'],
-  ['hadith','Ḥadīṯ'],
-  ['wissen','Wissen'],
-  ['adab','Adab']
-];
-let activeCategory = 'all';
-let activeScholar = 'all';
-let activeQuery = '';
-let sortOrder = 'desc';
-const list = document.getElementById('sourceList');
-const count = document.getElementById('resultCount');
-const empty = document.getElementById('emptyState');
-const search = document.getElementById('search');
-const tabs = document.getElementById('categoryTabs');
-const scholarSelect = document.getElementById('scholarSelect');
-const activeInfo = document.getElementById('activeInfo');
-function esc(value){return String(value || '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]));}
-function norm(value){return String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[ʾʿ’‘`´ˈˌː\-]/g,' ').replace(/[^a-z0-9\s\u0600-\u06ff]/gi,' ').replace(/\s+/g,' ').trim().toLowerCase();}
-function haystack(item){return norm(['q'+item.q,'q/'+item.q,item.q,item.cat,item.title,item.speaker,item.desc,...(item.tags || [])].join(' '));}
-function categoryCount(key){return key === 'all' ? SOURCES.length : SOURCES.filter(item => (item.cats || []).includes(key)).length;}
-function buildTabs(){
-  tabs.innerHTML = CATEGORY_ORDER.map(([key,label]) => `<button class="ql-tab ${key === activeCategory ? 'is-active' : ''}" type="button" role="tab" aria-selected="${key === activeCategory}" data-cat="${key}">${esc(label)} <small>${categoryCount(key)}</small></button>`).join('');
-}
-function buildScholars(){
-  const names = new Map();
-  SOURCES.forEach(item => String(item.speaker || '').split('·').map(v => v.trim()).filter(Boolean).forEach(name => names.set(norm(name), name)));
-  const opts = Array.from(names.entries()).sort((a,b) => a[1].localeCompare(b[1], 'de', {sensitivity:'base'}));
-  scholarSelect.innerHTML = '<option value="all">Alle Sprecher</option>' + opts.map(([key,label]) => `<option value="${esc(key)}">${esc(label)}</option>`).join('');
-}
-function filtered(){
-  const query = norm(activeQuery);
-  return SOURCES
-    .filter(item => activeCategory === 'all' || (item.cats || []).includes(activeCategory))
-    .filter(item => activeScholar === 'all' || norm(item.speaker).includes(activeScholar))
-    .filter(item => !query || haystack(item).includes(query))
-    .sort((a,b) => sortOrder === 'desc' ? b.q - a.q : a.q - b.q);
-}
-function renderCard(item){
-  const tags = (item.tags || []).map(tag => `<span>${esc(tag)}</span>`).join('');
-  return `<article class="ql-card">
-    <a class="ql-card-main" href="/q/${item.q}/" aria-label="Q${item.q} öffnen">
-      <div class="ql-qrow"><span class="ql-qmark">Q${item.q}</span><span class="ql-cat">${esc(item.cat)}</span></div>
-      <h3>${esc(item.title)}</h3>
-      <p class="ql-speaker">${esc(item.speaker)}</p>
-      <p class="ql-desc">${esc(item.desc)}</p>
-      <div class="ql-tags">${tags}</div>
-    </a>
-    <div class="ql-actions">
-      <a class="ql-open" href="/q/${item.q}/">Öffnen</a>
-      <button class="ql-copy" type="button" data-copy="/q/${item.q}/">Kopieren</button>
-    </div>
-  </article>`;
-}
-function render(){
-  const items = filtered();
-  list.innerHTML = items.map(renderCard).join('');
-  count.textContent = items.length === 1 ? '1 Quelle' : items.length + ' Quellen';
-  empty.hidden = items.length !== 0;
-  const catText = CATEGORY_ORDER.find(([key]) => key === activeCategory)?.[1] || 'Alle';
-  activeInfo.textContent = `${catText} · ${sortOrder === 'desc' ? 'Q ↓' : 'Q ↑'}`;
-}
-tabs.addEventListener('click', event => {
-  const btn = event.target.closest('[data-cat]');
-  if (!btn) return;
-  activeCategory = btn.dataset.cat || 'all';
-  buildTabs();
-  render();
-});
-search.addEventListener('input', event => {
-  activeQuery = event.target.value;
-  render();
-});
-scholarSelect.addEventListener('change', event => {
-  activeScholar = event.target.value || 'all';
-  render();
-});
-document.getElementById('sortToggle').addEventListener('click', event => {
-  sortOrder = sortOrder === 'desc' ? 'asc' : 'desc';
-  event.currentTarget.textContent = sortOrder === 'desc' ? 'Q ↓' : 'Q ↑';
-  event.currentTarget.dataset.sort = sortOrder;
-  render();
-});
-document.getElementById('resetBtn').addEventListener('click', () => {
-  activeCategory = 'all';
-  activeScholar = 'all';
-  activeQuery = '';
-  sortOrder = 'desc';
-  search.value = '';
-  scholarSelect.value = 'all';
-  document.getElementById('sortToggle').textContent = 'Q ↓';
-  buildTabs();
-  render();
-});
-document.addEventListener('click', async event => {
-  const copy = event.target.closest('[data-copy]');
-  if (!copy) return;
-  const url = new URL(copy.dataset.copy, location.origin).href;
-  try {
-    await navigator.clipboard.writeText(url);
-    copy.textContent = 'Kopiert';
-  } catch (_) {
-    copy.textContent = 'Link offen';
-    location.href = copy.dataset.copy;
-  }
-  setTimeout(() => { copy.textContent = 'Kopieren'; }, 1400);
-});
-buildTabs();
-buildScholars();
-render();
+const CATEGORIES=[['all','Alle'],['aqidah','ʿAqīdah'],['manhaj','Manhaj'],['fiqh','Fiqh'],['hadith','Ḥadīṯ'],['wissen','Wissen'],['adab','Adab']];
+let activeCategory='all', activeScholar='all', activeQuery='', sortOrder='desc';
+const list=document.getElementById('sourceList'),count=document.getElementById('resultCount'),empty=document.getElementById('emptyState'),search=document.getElementById('search'),tabs=document.getElementById('categoryTabs'),sel=document.getElementById('scholarSelect'),info=document.getElementById('activeInfo');
+function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+function fold(s){return String(s||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[ʾʿ’‘`´ˈˌː\-]/g,' ').replace(/[^a-z0-9\s\u00C0-\u024F\u0600-\u06FF]/gi,' ').replace(/\s+/g,' ').trim().toLowerCase();}
+function hay(s){return fold(['q/'+s.q,'q'+s.q,s.cat,s.title,s.speaker,s.desc,...(s.tags||[])].join(' '));}
+function choices(){tabs.innerHTML=CATEGORIES.map(([v,l])=>`<button type="button" class="ql-tab ${v==='all'?'is-active':''}" data-cat="${v}" role="tab">${l}</button>`).join('');const map=new Map();SOURCES.forEach(s=>String(s.speaker).split('·').map(x=>x.trim()).filter(Boolean).forEach(n=>map.set(fold(n),n)));sel.innerHTML='<option value="all">Alle Sprecher</option>'+Array.from(map).sort((a,b)=>a[1].localeCompare(b[1],'de')).map(([k,v])=>`<option value="${esc(k)}">${esc(v)}</option>`).join('');}
+function filtered(){const q=fold(activeQuery);return SOURCES.filter(s=>activeCategory==='all'||s.cats.includes(activeCategory)).filter(s=>activeScholar==='all'||fold(s.speaker).includes(activeScholar)).filter(s=>!q||hay(s).includes(q)).sort((a,b)=>sortOrder==='desc'?b.q-a.q:a.q-b.q);}
+function card(s){return `<article class="ql-card"><div class="ql-qline"><span class="ql-qmark">Q ${s.q}</span><span class="ql-cat">${esc(s.cat)}</span></div><a class="ql-card-link" href="/q/${s.q}/"><h3>${esc(s.title)}</h3><p class="ql-speaker">${esc(s.speaker)}</p><p class="ql-desc">${esc(s.desc)}</p></a><div class="ql-tags">${(s.tags||[]).map(t=>`<span>${esc(t)}</span>`).join('')}</div><div class="ql-actions"><a class="ql-open" href="/q/${s.q}/">Quelle öffnen</a><button class="ql-copy" type="button" data-copy="/q/${s.q}/">Link kopieren</button></div></article>`;}
+function render(){const rows=filtered();list.innerHTML=rows.map(card).join('');count.textContent=rows.length===1?'1 Quelle':rows.length+' Quellen';empty.style.display=rows.length?'none':'block';info.textContent=(sortOrder==='desc'?'Neueste zuerst':'Älteste zuerst')+(activeCategory==='all'?'':' · '+CATEGORIES.find(x=>x[0]===activeCategory)[1]);}
+choices();render();
+search.addEventListener('input',e=>{activeQuery=e.target.value;render();});
+tabs.addEventListener('click',e=>{const b=e.target.closest('[data-cat]');if(!b)return;activeCategory=b.dataset.cat;tabs.querySelectorAll('.ql-tab').forEach(x=>x.classList.toggle('is-active',x===b));render();});
+sel.addEventListener('change',e=>{activeScholar=e.target.value;render();});
+document.getElementById('sortToggle').addEventListener('click',e=>{sortOrder=sortOrder==='desc'?'asc':'desc';e.currentTarget.textContent=sortOrder==='desc'?'Q ↓':'Q ↑';render();});
+document.getElementById('resetBtn').addEventListener('click',()=>{activeCategory='all';activeScholar='all';activeQuery='';sortOrder='desc';search.value='';sel.value='all';document.getElementById('sortToggle').textContent='Q ↓';tabs.querySelectorAll('.ql-tab').forEach(x=>x.classList.toggle('is-active',x.dataset.cat==='all'));render();});
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-copy]');if(!b)return;const url=new URL(b.dataset.copy,location.origin).href;try{await navigator.clipboard.writeText(url);b.textContent='Kopiert';}catch(_){b.textContent=url;}setTimeout(()=>b.textContent='Link kopieren',1500);});
 </script>
 </body>
 </html>
