@@ -16,5 +16,23 @@
     "title": "Duʿāʾ um Dankbarkeit und rechtschaffenes Handeln",
     "snippet": "Mein Herr, gib mir ein, für Deine Gunst dankbar zu sein, die Du mir und meinen Eltern erwiesen hast, und rechtschaffen zu handeln, womit Du zufrieden bist.",
     "category": "Dankbarkeit & Familie"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 464,
+      "remaining": 443
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 77,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
