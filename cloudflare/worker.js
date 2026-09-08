@@ -1,6 +1,6 @@
 /* PUSH_SYSTEM_GUARD: Gebets-Push + Tages-Duʿāʾ/Empfehlung + Willkommens-Push.
    Nicht entfernen oder vereinfachen – CI blockiert sonst (scripts/push-system-guard.js).
-   Deploy-Marker: welcome-push-once-v676
+   Deploy-Marker: welcome-push-once-v677
    Secret-Resync nach Reclaim: 2026-08-27
    Admin-UI v56: Secret-Resync nach Static-Deploy
    Secret put fallback 2026-08-27T09:15: GITHUB_TOKEN wieder anbinden
@@ -135,7 +135,7 @@ export default {
         return json({
           ok: true,
           service: "dar-admin-publisher",
-          deployMarker: "welcome-push-once-v676",
+          deployMarker: "welcome-push-once-v677",
           repo: `${env.GITHUB_OWNER || DEFAULT_OWNER}/${env.GITHUB_REPO || DEFAULT_REPO}`,
           branch: env.GITHUB_BRANCH || DEFAULT_BRANCH,
           hasGithubToken: Boolean(env.GITHUB_TOKEN),
