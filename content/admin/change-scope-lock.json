@@ -87,6 +87,28 @@
   ],
   "unlockedScopes": [
     {
+      "id": "update-banner-loop-lock-ios-brand-2026-09-08",
+      "approvedBy": "user-explicit-ios-update-banner-loop-font-brand",
+      "reason": "Nutzer: Blauer Update-Banner kommt wieder; Sperre + autonome Erkennung. iOS-Ladeseeite Schrift wie Besucher-App. DĀR AL TAWḤĪD exakt überall. Live-Fix für App Store.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/admin/update-banner-loop-lock.json",
+        "content/admin/app-update-recovery-lock.json",
+        "scripts/sync-app-build-ids.js",
+        "scripts/version-update-guard.js",
+        "scripts/app-stability-repair.js",
+        "scripts/app-health-check.js",
+        "version.json",
+        "test/version.json",
+        "index.html",
+        "test/index.html",
+        "service-worker.js",
+        "test/service-worker.js",
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "admin-post-push-app-audience-2026-09-08",
       "approvedBy": "user-explicit-dar-admin-post-push-no-app-notification",
       "reason": "Nutzer: Beitrags-Push aus DAR-Admin kam nicht in der App an; viele iOS- und Android-Geräte ohne Push. Live-Beitrags-Push je Plattform (Android/iOS/Web) senden, nicht nach dem ersten OneSignal-Erfolg abbrechen.",

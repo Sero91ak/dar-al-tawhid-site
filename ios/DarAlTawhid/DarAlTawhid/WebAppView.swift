@@ -118,6 +118,12 @@ struct WebAppView: UIViewRepresentable {
             root.classList.add("dar-ios-native-app");
             root.classList.add("dar-ios-native-tabs");
             root.classList.remove("dar-soft-booting");
+            if(!document.getElementById("dar-ios-brand-type-lock")){
+              var s=document.createElement("style");
+              s.id="dar-ios-brand-type-lock";
+              s.textContent='.brand-title,.brand-title-refined,.home-start-title,.dar-soft-boot__title{font-family:"Cormorant Garamond",Cinzel,"Times New Roman",serif!important;text-transform:none!important}';
+              (document.head||root).appendChild(s);
+            }
           }catch(e){}
         })();
         """
@@ -1260,6 +1266,12 @@ struct WebAppView: UIViewRepresentable {
             DispatchQueue.main.asyncAfter(deadline: .now() + 25, execute: workItem)
         }
 
+        private func darBrandSerif(size: CGFloat, weight: UIFont.Weight) -> UIFont {
+            let base = UIFont.systemFont(ofSize: size, weight: weight)
+            guard let descriptor = base.fontDescriptor.withDesign(.serif) else { return base }
+            return UIFont(descriptor: descriptor, size: size)
+        }
+
         private func installLoadingOverlay(on host: UIView) {
             let overlay = UIView(frame: host.bounds)
             overlay.translatesAutoresizingMaskIntoConstraints = false
@@ -1292,7 +1304,7 @@ struct WebAppView: UIViewRepresentable {
             let title = UILabel()
             title.translatesAutoresizingMaskIntoConstraints = false
             title.textColor = UIColor(red: 0.831, green: 0.710, blue: 0.416, alpha: 1.0)
-            title.font = UIFont(name: "Georgia-Bold", size: 36) ?? UIFont.systemFont(ofSize: 36, weight: .bold)
+            title.font = darBrandSerif(size: 36, weight: .bold)
             title.textAlignment = .center
             title.numberOfLines = 1
             title.adjustsFontSizeToFitWidth = true
@@ -1304,7 +1316,7 @@ struct WebAppView: UIViewRepresentable {
             let kicker = UILabel()
             kicker.translatesAutoresizingMaskIntoConstraints = false
             kicker.textColor = UIColor(red: 0.957, green: 0.918, blue: 0.824, alpha: 0.72)
-            kicker.font = UIFont(name: "Georgia", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .semibold)
+            kicker.font = darBrandSerif(size: 14, weight: .semibold)
             kicker.textAlignment = .center
             let kickerText = NSMutableAttributedString(string: "QUR’ĀN  •  SUNNAH  •  ĀTHĀR")
             kickerText.addAttribute(.kern, value: 2.0, range: NSRange(location: 0, length: kickerText.length))

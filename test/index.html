@@ -12179,7 +12179,7 @@ body.is-home-route .view-head h2.home-start-title,
   line-height:1.14!important;
   letter-spacing:.06em!important;
   word-spacing:.04em!important;
-  text-transform:uppercase;
+  text-transform:none!important;
   color:rgba(232,212,160,.92)!important;
   -webkit-text-fill-color:rgba(232,212,160,.92)!important;
   text-shadow:none!important;
@@ -12474,7 +12474,7 @@ html[data-theme="eisgold"] .brand-main h1.brand-title-refined::after{
   font-family:"Cormorant Garamond",Cinzel,"Times New Roman",serif;
   font-weight:700;
   letter-spacing:.06em;
-  text-transform:uppercase;
+  text-transform:none;
 }
 </style>
 <style id="theme-readability-v336">
@@ -28381,6 +28381,11 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       var match = String(buildId || '').match(/app-shell-v(\d+)/);
       return match ? parseInt(match[1], 10) : 0;
     }
+    function isCanonicalShellBuildId(buildId) {
+      var id = String(buildId || '').trim();
+      var testApp = String(location.pathname || '').indexOf('/test') === 0;
+      return testApp ? /^app-shell-v\d+(?:-test)?$/.test(id) : /^app-shell-v\d+$/.test(id);
+    }
     function writeVersionState(patch) {
       try {
         var current = readVersionState();
@@ -28491,6 +28496,8 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     function shouldOfferShellUpdate(remoteBuildId) {
       var id = String(remoteBuildId || '').trim();
       if (!id || typeof APP_BUILD_ID !== 'string' || id === String(APP_BUILD_ID)) return false;
+      if (!isCanonicalShellBuildId(id)) return false;
+      if (parseShellBuildNum(id) === parseShellBuildNum(APP_BUILD_ID) && id !== String(APP_BUILD_ID)) return false;
       var state = readVersionState();
       /* Falsch gesetztes applied/ack bei alter Hülle zurücksetzen */
       if ((String(state.appliedBuildId || '') === id || String(state.acknowledgedBuildId || '') === id) && id !== String(APP_BUILD_ID)) {

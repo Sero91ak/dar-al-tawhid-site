@@ -36,17 +36,6 @@ function runDomainRepair(domain, snapshots) {
 function runBuildSyncRepair() {
   const { execFileSync } = require("child_process");
   try {
-    const visitor = JSON.parse(fs.readFileSync(path.join(ROOT, "version.json"), "utf8"));
-    const test = JSON.parse(fs.readFileSync(path.join(ROOT, "test/version.json"), "utf8"));
-    const indexHtml = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
-    const testHtml = fs.readFileSync(path.join(ROOT, "test/index.html"), "utf8");
-    const visitorOk = indexHtml.includes(visitor.buildId);
-    const testOk = testHtml.includes(test.buildId);
-    if (visitorOk && testOk) {
-      console.log(`${MARKER}: Build-IDs in HTML synchron`);
-      return 0;
-    }
-    console.log(`${MARKER}: Build-ID-Drift erkannt — sync-app-build-ids ausführen`);
     execFileSync("node", ["scripts/sync-app-build-ids.js"], { cwd: ROOT, stdio: "inherit" });
     return 1;
   } catch (e) {

@@ -119,6 +119,7 @@ function runVersionUpdateGuard() {
       "VERSION_UPDATE_GUARD",
       "showVersionBanner",
       "shouldSuppressVersionBanner",
+      "isCanonicalShellBuildId",
       "VERSION_UPDATE_KEY",
       "markVersionUpdatePending",
       "requestHardShellRefresh",
@@ -229,6 +230,12 @@ function runVersionUpdateGuard() {
   } catch (error) {
     fail("test/version.json fehlt oder ist ungültig");
   }
+  if (!/^app-shell-v\d+$/.test(String(version.buildId || ""))) {
+    fail(`version.json: visitor buildId muss kanonisch app-shell-vN sein (gefunden: ${version.buildId})`);
+  }
+  if (version.appBuildId && version.appBuildId !== version.buildId) {
+    fail(`version.json: appBuildId (${version.appBuildId}) weicht von buildId (${version.buildId}) ab`);
+  }
   if (!buildMatch) {
     fail("index.html: APP_BUILD_ID fehlt");
   } else if (buildMatch[1] !== version.buildId) {
@@ -250,6 +257,13 @@ function runVersionUpdateGuard() {
   } else {
     ok("service-worker.js: HARD_REFRESH Handler");
   }
+  const visitorNum = String(version.buildId || "").match(/app-shell-v(\d+)/)?.[1];
+  const swCache = sw.match(/const CACHE_VERSION = ['"]dar-al-tawhid-offline-light-([^'"]+)['"]/);
+  if (!visitorNum || !swCache || swCache[1] !== `v${visitorNum}`) {
+    fail(`service-worker.js CACHE_VERSION (${swCache ? swCache[1] : "?"}) muss v${visitorNum || "?"} zu version.json passen`);
+  } else {
+    ok(`service-worker.js CACHE_VERSION synchron: v${visitorNum}`);
+  }
 
   const admin = read("admin/index.html");
   mustInclude("admin/index.html Sammel-Paket ZIP", admin, [
@@ -258,6 +272,19 @@ function runVersionUpdateGuard() {
     "renderBulkPackPanel",
     "bulkPackPanel"
   ]);
+
+  const lockPath = "content/admin/update-banner-loop-lock.json";
+  if (!fs.existsSync(path.join(ROOT, lockPath))) {
+    fail("update-banner-loop-lock.json fehlt");
+  } else {
+    try {
+      const lock = JSON.parse(read(lockPath));
+      if (!lock.locked) fail("update-banner-loop-lock.json: locked muss true sein");
+      else ok("Update-Banner-Loop-Sperre aktiv");
+    } catch (error) {
+      fail(`update-banner-loop-lock.json ungültig: ${error.message || error}`);
+    }
+  }
 
   return failed;
 }
