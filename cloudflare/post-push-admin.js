@@ -211,7 +211,7 @@ async function buildPostPushPayload(env, { postTitle, postId, filename, publishe
   const badge = `${site}/notification-badge-96.png?v=3`;
   const idempotencySeed = test
     ? `post-test:${slug || fileKey || message}:${subscriptionKey || "unknown"}:${publishedKey || "draft"}`
-    : `post-live:${slug || fileKey || message}:${publishedKey || "draft"}`;
+    : `post-live:${slug || fileKey || message}:${publishedKey || "draft"}:audience-all-v1`;
   const idempotencyKey = await deterministicUuid(idempotencySeed);
   const pushData = {
     type: "post",
@@ -250,14 +250,16 @@ function buildPostPushAttempts(basePayload, subscriptionIds, { singleSubscriptio
     return [{ ...basePayload, include_subscription_ids: [sid] }];
   }
 
-  const attempts = [];
+  const attempts = [
+    { ...basePayload, included_segments: ["Subscribed Users"] },
+    { ...basePayload, included_segments: ["Total Subscriptions"] },
+    { ...basePayload, included_segments: ["DAR_PUSH"] },
+    { ...basePayload, filters: [{ field: "tag", key: "dar_push", relation: "=", value: "true" }] }
+  ];
   for (const ids of chunkValues(subscriptionIds, ONESIGNAL_BATCH_SIZE)) {
     attempts.push({ ...basePayload, include_subscription_ids: ids });
   }
   attempts.push(
-    { ...basePayload, included_segments: ["DAR_PUSH"] },
-    { ...basePayload, included_segments: ["Subscribed Users"] },
-    { ...basePayload, filters: [{ field: "tag", key: "dar_push", relation: "=", value: "true" }] },
     { ...basePayload, filters: [{ field: "tag", key: "post_notifications", relation: "=", value: "true" }] }
   );
   return attempts;

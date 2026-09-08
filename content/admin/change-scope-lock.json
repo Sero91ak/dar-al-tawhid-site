@@ -87,6 +87,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "admin-post-push-app-audience-2026-09-08",
+      "approvedBy": "user-explicit-dar-admin-post-push-no-app-notification",
+      "reason": "Nutzer: Beitrags-Push aus DAR-Admin kam nicht in der App an. Live-Beitrags-Push zuerst an OneSignal-Abonnenten (inkl. iOS-App), nicht nur an 33 Web-Subscription-IDs.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "cloudflare/post-push-admin.js",
+        "content/admin/pending-pushes.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "stop-github-status-commits-cf-build-minutes-2026-08-30",
       "approvedBy": "user-explicit-cloudflare-invoice-in-77249222-stop-prayer-git-pushes",
       "reason": "Nutzer: Prayer/Jumuah Git-Pushes stoppen — sie lösen Cloudflare Workers Builds aus (Rechnung 92,26 $). Status nur Durable Object, Scheduler/Cron bleiben.",
