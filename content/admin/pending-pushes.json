@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-09-08T10:18:05.293Z",
+  "generated": "2026-09-08T10:18:28.387Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -859,8 +859,50 @@
       "createdAt": "2026-09-08T10:18:05.081Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-09-08T10:18:05.081Z",
-      "lastError": "Push wartet auf Live-Verfügbarkeit",
-      "updatedAt": "2026-09-08T10:18:05.293Z"
+      "lastError": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
+      "updatedAt": "2026-09-08T10:18:28.387Z",
+      "lastCheckAt": "2026-09-08T10:18:27.993Z",
+      "liveCheck": {
+        "ok": false,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": false,
+          "postFilePublic": false,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": false,
+          "githubIndexHasPost": true,
+          "githubPostExists": true
+        },
+        "diagnosis": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
+        "indexOk": false,
+        "postOk": false,
+        "visitorUrlOk": true,
+        "attempts": 3,
+        "site": "https://dar-al-tawhid.de",
+        "postId": "bishr-al-hafi-wissen-handeln-465",
+        "indexGenerated": "2026-08-27T21:53:03.560Z",
+        "indexCount": 464,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=bishr-al-hafi-wissen-handeln-465&v=1788862695934#post/bishr-al-hafi-wissen-handeln-465",
+        "githubIndexHasPost": true,
+        "githubPostExists": true,
+        "needsIndexRepair": false,
+        "needsDeployWait": true,
+        "repair": {
+          "repaired": true,
+          "action": "index-touch",
+          "at": "2026-09-08T10:18:18.153Z",
+          "reason": "Index aktualisiert (Deploy/Cache)"
+        }
+      },
+      "attempts": 3,
+      "lastRepair": {
+        "repaired": true,
+        "action": "index-touch",
+        "at": "2026-09-08T10:18:18.153Z",
+        "reason": "Index aktualisiert (Deploy/Cache)"
+      }
     }
   }
 }
