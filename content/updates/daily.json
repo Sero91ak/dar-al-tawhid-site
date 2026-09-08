@@ -16,5 +16,23 @@
     "title": "Duʿāʾ um Aufzeichnung mit den Zeugen",
     "snippet": "Unser Herr, wir glauben, so schreibe uns zu den Zeugen.",
     "category": "Glaube & Zeugnis"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 464,
+      "remaining": 443
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 77,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
