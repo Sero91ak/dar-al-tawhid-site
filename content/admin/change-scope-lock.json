@@ -89,7 +89,7 @@
     {
       "id": "admin-post-push-app-audience-2026-09-08",
       "approvedBy": "user-explicit-dar-admin-post-push-no-app-notification",
-      "reason": "Nutzer: Beitrags-Push aus DAR-Admin kam nicht in der App an. Live-Beitrags-Push zuerst an OneSignal-Abonnenten (inkl. iOS-App), nicht nur an 33 Web-Subscription-IDs.",
+      "reason": "Nutzer: Beitrags-Push aus DAR-Admin kam nicht in der App an; viele iOS- und Android-Geräte ohne Push. Live-Beitrags-Push je Plattform (Android/iOS/Web) senden, nicht nach dem ersten OneSignal-Erfolg abbrechen.",
       "paths": [
         "content/admin/change-scope-lock.json",
         "cloudflare/post-push-admin.js",

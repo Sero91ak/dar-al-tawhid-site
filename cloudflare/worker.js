@@ -3180,7 +3180,11 @@ async function processPendingPushUntilLive(env, record, options = {}) {
       status: "sent",
       sentAt: new Date().toISOString(),
       lastError: "",
-      pushResult: { target: push.target, targetUrl: push.targetUrl }
+      pushResult: {
+        target: push.target,
+        targetUrl: push.targetUrl,
+        channelResults: push.channelResults || null
+      }
     });
   } else {
     // Nicht „failed“ begraben – bleibt pending für Cron-Auto-Repair

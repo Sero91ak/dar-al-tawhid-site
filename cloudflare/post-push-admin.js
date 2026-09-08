@@ -103,19 +103,36 @@ export function parseOneSignalResponse(text, httpStatus) {
   };
 }
 
+function platformLabel(payload) {
+  const parts = [];
+  if (payload.isAndroid) parts.push("android");
+  if (payload.isIos) parts.push("ios");
+  if (payload.isAnyWeb) parts.push("web");
+  return parts.length ? parts.join("+") : "all";
+}
+
 function describeTarget(payload) {
+  const platform = platformLabel(payload);
   if (payload.include_subscription_ids?.length) {
     const count = payload.include_subscription_ids.length;
-    return count === 1
+    const ids = count === 1
       ? `subscription:${payload.include_subscription_ids[0]}`
       : `supabase-subscriptions:${count}`;
+    return `${ids}|${platform}`;
   }
-  if (payload.included_segments?.length) return `segment:${payload.included_segments[0]}`;
+  if (payload.included_segments?.length) return `segment:${payload.included_segments[0]}|${platform}`;
   if (payload.filters?.length) {
     const filter = payload.filters[0];
-    return `tag:${filter.key}=${filter.value}`;
+    return `tag:${filter.key}=${filter.value}|${platform}`;
   }
-  return "unknown";
+  return `unknown|${platform}`;
+}
+
+function exclusivePlatformFlags(channel) {
+  const off = { isIos: false, isAndroid: false, isAnyWeb: false, isHuawei: false };
+  if (channel === "android") return { ...off, isAndroid: true };
+  if (channel === "ios") return { ...off, isIos: true };
+  return { ...off, isAnyWeb: true };
 }
 
 function classifyPushFailure(httpStatus, parsed, targetLabel) {
@@ -196,7 +213,7 @@ async function postOneSignalAttempt(env, payload) {
   return lastResult || { ok: false, sent: false, reason: "OneSignal-Aufruf fehlgeschlagen", target };
 }
 
-async function buildPostPushPayload(env, { postTitle, postId, filename, publishedAt, cacheVersion, test = false, subscriptionId = "" }) {
+async function buildPostPushPayload(env, { postTitle, postId, filename, publishedAt, cacheVersion, test = false, subscriptionId = "", audienceKey = "all-v1" }) {
   const site = siteOrigin(env);
   const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
   const title = test ? "[Test] Neuer Beitrag online" : "Neuer Beitrag online";
@@ -211,7 +228,7 @@ async function buildPostPushPayload(env, { postTitle, postId, filename, publishe
   const badge = `${site}/notification-badge-96.png?v=3`;
   const idempotencySeed = test
     ? `post-test:${slug || fileKey || message}:${subscriptionKey || "unknown"}:${publishedKey || "draft"}`
-    : `post-live:${slug || fileKey || message}:${publishedKey || "draft"}:audience-all-v1`;
+    : `post-live:${slug || fileKey || message}:${publishedKey || "draft"}:audience-${audienceKey}`;
   const idempotencyKey = await deterministicUuid(idempotencySeed);
   const pushData = {
     type: "post",
@@ -244,25 +261,38 @@ async function buildPostPushPayload(env, { postTitle, postId, filename, publishe
   };
 }
 
-function buildPostPushAttempts(basePayload, subscriptionIds, { singleSubscriptionId = "" } = {}) {
-  const sid = String(singleSubscriptionId || "").trim();
-  if (sid) {
-    return [{ ...basePayload, include_subscription_ids: [sid] }];
+const POST_PUSH_CHANNELS = [
+  {
+    id: "android",
+    tagFilters: [
+      [{ field: "tag", key: "dar_client", relation: "=", value: "native_android" }],
+      [{ field: "tag", key: "platform", relation: "=", value: "android" }]
+    ]
+  },
+  {
+    id: "ios",
+    tagFilters: [
+      [{ field: "tag", key: "dar_client", relation: "=", value: "native_ios" }]
+    ]
+  },
+  {
+    id: "web",
+    tagFilters: [
+      [{ field: "tag", key: "dar_client", relation: "=", value: "native_ios" }],
+      [{ field: "tag", key: "dar_push", relation: "=", value: "true" }]
+    ]
   }
+];
 
-  const attempts = [
-    { ...basePayload, included_segments: ["Subscribed Users"] },
-    { ...basePayload, included_segments: ["Total Subscriptions"] },
-    { ...basePayload, included_segments: ["DAR_PUSH"] },
-    { ...basePayload, filters: [{ field: "tag", key: "dar_push", relation: "=", value: "true" }] }
+function channelAttemptSpecs(channel) {
+  const specs = [
+    { audienceKey: `${channel.id}-subscribed-v2`, included_segments: ["Subscribed Users"] },
+    { audienceKey: `${channel.id}-total-v2`, included_segments: ["Total Subscriptions"] }
   ];
-  for (const ids of chunkValues(subscriptionIds, ONESIGNAL_BATCH_SIZE)) {
-    attempts.push({ ...basePayload, include_subscription_ids: ids });
-  }
-  attempts.push(
-    { ...basePayload, filters: [{ field: "tag", key: "post_notifications", relation: "=", value: "true" }] }
-  );
-  return attempts;
+  (channel.tagFilters || []).forEach((filters, index) => {
+    specs.push({ audienceKey: `${channel.id}-tag-${index}-v2`, filters });
+  });
+  return specs;
 }
 
 export async function sendNewPostPush(env, options = {}) {
@@ -281,59 +311,97 @@ export async function sendNewPostPush(env, options = {}) {
     return { sent: false, prepared: false, oneSignalCalled: false, reason: "OneSignal App-ID fehlt" };
   }
 
-  const { payload: basePayload, pushData, targetUrl } = await buildPostPushPayload(env, options);
-  const subscriptionIds = await loadPostPushSubscriptionIds(env);
-  const attempts = buildPostPushAttempts(basePayload, subscriptionIds);
   const attemptLog = [];
-  let lastFailure = "Kein Empfänger gefunden – alle Zielgruppen lieferten 0 Empfänger oder Fehler";
+  const channelResults = [];
+  let lastFailure = "Kein Empfänger gefunden – alle Plattformen lieferten 0 Empfänger oder Fehler";
+  let pushData = null;
+  let targetUrl = "";
+  let firstSuccess = null;
 
-  for (const attemptPayload of attempts) {
-    const result = await postOneSignalAttempt(env, attemptPayload);
-    attemptLog.push({
-      target: result.target,
-      httpStatus: result.httpStatus,
-      authMode: result.authMode,
-      sent: result.sent,
-      notificationId: result.oneSignal?.notificationId || null,
-      recipients: result.oneSignal?.recipients ?? null,
-      errors: result.oneSignal?.errors || null,
-      invalidSubscriptions: result.oneSignal?.invalidSubscriptions || null,
-      reason: result.reason || ""
-    });
+  for (const channel of POST_PUSH_CHANNELS) {
+    let channelSent = false;
+    for (const spec of channelAttemptSpecs(channel)) {
+      const built = await buildPostPushPayload(env, { ...options, audienceKey: spec.audienceKey });
+      pushData = built.pushData;
+      targetUrl = built.targetUrl;
+      const attemptPayload = {
+        ...built.payload,
+        ...exclusivePlatformFlags(channel.id)
+      };
+      if (spec.included_segments) attemptPayload.included_segments = spec.included_segments;
+      if (spec.filters) attemptPayload.filters = spec.filters;
 
-    if (result.sent) {
-      return {
-        sent: true,
-        prepared: true,
-        oneSignalCalled: true,
+      const result = await postOneSignalAttempt(env, attemptPayload);
+      attemptLog.push({
+        channel: channel.id,
         target: result.target,
+        httpStatus: result.httpStatus,
         authMode: result.authMode,
-        targetUrl,
-        data: pushData,
-        appId,
-        subscriptionCount: subscriptionIds.length,
-        oneSignal: result.oneSignal,
-        attempts: attemptLog,
-        sentAt: new Date().toISOString()
-      };
+        sent: result.sent,
+        notificationId: result.oneSignal?.notificationId || null,
+        recipients: result.oneSignal?.recipients ?? null,
+        errors: result.oneSignal?.errors || null,
+        invalidSubscriptions: result.oneSignal?.invalidSubscriptions || null,
+        reason: result.reason || ""
+      });
+
+      if (result.httpStatus === 401 || result.httpStatus === 403) {
+        return {
+          sent: false,
+          prepared: true,
+          oneSignalCalled: true,
+          reason: result.reason,
+          target: result.target,
+          targetUrl,
+          data: pushData,
+          appId,
+          channelResults,
+          oneSignal: result.oneSignal,
+          attempts: attemptLog
+        };
+      }
+
+      if (result.sent) {
+        channelSent = true;
+        if (!firstSuccess) firstSuccess = result;
+        channelResults.push({
+          channel: channel.id,
+          sent: true,
+          target: result.target,
+          recipients: result.oneSignal?.recipients ?? null,
+          notificationId: result.oneSignal?.notificationId || null
+        });
+        break;
+      }
+
+      if (result.reason) lastFailure = result.reason;
     }
 
-    if (result.reason) lastFailure = result.reason;
-    if (result.httpStatus === 401 || result.httpStatus === 403) {
-      return {
+    if (!channelSent) {
+      channelResults.push({
+        channel: channel.id,
         sent: false,
-        prepared: true,
-        oneSignalCalled: true,
-        reason: result.reason,
-        target: result.target,
-        targetUrl,
-        data: pushData,
-        appId,
-        subscriptionCount: subscriptionIds.length,
-        oneSignal: result.oneSignal,
-        attempts: attemptLog
-      };
+        reason: lastFailure
+      });
     }
+  }
+
+  const sentChannels = channelResults.filter((entry) => entry.sent).map((entry) => entry.channel);
+  if (sentChannels.length) {
+    return {
+      sent: true,
+      prepared: true,
+      oneSignalCalled: true,
+      target: sentChannels.join("+"),
+      authMode: firstSuccess?.authMode,
+      targetUrl,
+      data: pushData,
+      appId,
+      channelResults,
+      oneSignal: firstSuccess?.oneSignal,
+      attempts: attemptLog,
+      sentAt: new Date().toISOString()
+    };
   }
 
   return {
@@ -344,7 +412,7 @@ export async function sendNewPostPush(env, options = {}) {
     targetUrl,
     data: pushData,
     appId,
-    subscriptionCount: subscriptionIds.length,
+    channelResults,
     attempts: attemptLog,
     oneSignal: attemptLog.length ? { httpStatus: attemptLog[attemptLog.length - 1].httpStatus, recipients: 0 } : null
   };
