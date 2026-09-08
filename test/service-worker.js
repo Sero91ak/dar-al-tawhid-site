@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v800';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v801';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -106,7 +106,10 @@ const APP_SHELL = [
   '/content/duas/duas.json',
   '/content/quran/surahs.json',
   '/content/quran-athar/de/001.json',
-  '/assets/site-analytics.js'
+  '/assets/site-analytics.js',
+  '/test/assets/wissen-feed-app.js',
+  '/test/data/feed-posts.json',
+  '/test/data/daily-push-plan.json'
 ];
 
 let bypassPostCacheUntil = 0;
@@ -303,6 +306,9 @@ function refreshBypassActive() {
 
 function isFeedAssetRequest(url) {
   return url.pathname === '/assets/premium-feed-app.js'
+    || url.pathname === '/test/assets/wissen-feed-app.js'
+    || url.pathname === '/test/data/feed-posts.json'
+    || url.pathname === '/test/data/daily-push-plan.json'
     || url.pathname === '/assets/focus-feed-app.js'
     || url.pathname === '/assets/html2canvas.min.js'
     || url.pathname.startsWith('/assets/posts/');

@@ -87,6 +87,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-wissen-feed-examples-2026-09-08",
+      "approvedBy": "user-explicit-feed-bereich-beispiele-pruef-app",
+      "reason": "Nutzer: Im Feed-Bereich der Test-App Beispiele, Beiträge und Verse einfügen; der Bereich ist leer.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/wissen-feed-app.js",
+        "test/data/feed-posts.json",
+        "test/data/daily-push-plan.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "global-air-gap-collapse-live-2026-09-08",
       "approvedBy": "user-explicit-global-luft-luecken-jede-app-pushen",
       "reason": "Nutzer: Überall so viel Luft dazwischen; Lücken in jedem Bereich schließen; jede App pushen.",
