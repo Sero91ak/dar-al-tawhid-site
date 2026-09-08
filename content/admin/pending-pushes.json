@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-09-08T12:25:53.952Z",
+  "generated": "2026-09-08T12:26:00.561Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -855,12 +855,12 @@
       "postTitle": "📖 Wissen ist nicht zum Genießen",
       "publishedAt": "2026-09-08T10:18:05.081Z",
       "postPath": "content/posts/wissen-465-wissen-ist-nicht-zum-genie-en.md",
-      "status": "sending",
+      "status": "sent",
       "createdAt": "2026-09-08T10:18:05.081Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-09-08T10:18:05.081Z",
       "lastError": "",
-      "updatedAt": "2026-09-08T12:25:53.952Z",
+      "updatedAt": "2026-09-08T12:26:00.561Z",
       "lastCheckAt": "2026-09-08T12:25:51.507Z",
       "liveCheck": {
         "ok": true,
@@ -897,10 +897,31 @@
         "at": "2026-09-08T10:22:10.339Z",
         "reason": "Index aktualisiert (Deploy/Cache)"
       },
-      "sentAt": "2026-09-08T11:55:57.578Z",
+      "sentAt": "2026-09-08T12:26:00.039Z",
       "pushResult": {
-        "target": "segment:Total Subscriptions",
-        "targetUrl": "https://dar-al-tawhid.de/?post=bishr-al-hafi-wissen-handeln-465&v=1788868556128#post/bishr-al-hafi-wissen-handeln-465"
+        "target": "ios+web",
+        "targetUrl": "https://dar-al-tawhid.de/?post=bishr-al-hafi-wissen-handeln-465&v=1788870355041#post/bishr-al-hafi-wissen-handeln-465",
+        "channelResults": [
+          {
+            "channel": "android",
+            "sent": false,
+            "reason": "{\"id\":\"\",\"errors\":[\"All included players are not subscribed\"],\"warnings\":[\"You must configure Android notifications in your OneSignal settings if you wish to send messages to Android users.\",\"You must configure Android notifications in your"
+          },
+          {
+            "channel": "ios",
+            "sent": true,
+            "target": "segment:Total Subscriptions|ios",
+            "recipients": null,
+            "notificationId": "fb6d9146-1be1-432f-a623-40153c4172bb"
+          },
+          {
+            "channel": "web",
+            "sent": true,
+            "target": "segment:Total Subscriptions|web",
+            "recipients": null,
+            "notificationId": "bb4df964-b1a7-4376-bc57-70014b5758db"
+          }
+        ]
       },
       "sendingAt": "2026-09-08T12:25:53.952Z"
     }
