@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v760";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v761";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -13572,6 +13572,7 @@ body.home-push-sheet-open{overflow:hidden}
 :root{--bottom-navigation-height:70px}
 .home-v380-shell{display:flex;flex-direction:column;gap:0;min-width:0}
 .home-v380-shell > * + .home-v380-section{margin-top:clamp(28px,6vw,34px)}
+.home-v380-shell > .home-v380-section:last-child{margin-bottom:0}
 .view-head-home-row--v380{
   display:flex!important;align-items:center!important;justify-content:space-between!important;
   gap:10px!important;grid-template-columns:unset!important;
@@ -13732,12 +13733,21 @@ body.is-home-route .view-head.view-head-home--v380::after{display:none!important
 }
 .home-v380-search-panel .search-helper{display:none}
 body.is-home-route #appView.view{
-  padding-bottom:calc(var(--bottom-navigation-height) + env(safe-area-inset-bottom,0px) + 48px)!important;
+  padding-bottom:8px!important;
+  min-height:0!important;
 }
-body.is-home-route .footer{
-  margin-top:clamp(34px,7vw,42px);padding-top:16px;
-  padding-bottom:calc(var(--bottom-navigation-height,70px) + env(safe-area-inset-bottom,0px) + 18px)!important;
+body.has-bottom-nav.is-home-route{
+  padding-bottom:0!important;
+}
+body.is-home-route .footer,
+body.has-bottom-nav.is-home-route .footer{
+  margin-top:8px!important;
+  padding-top:8px!important;
+  padding-bottom:calc(var(--bottom-navigation-height,70px) + env(safe-area-inset-bottom,0px) + 8px)!important;
   border-top:1px solid color-mix(in srgb,var(--theme-accent) 22%,var(--theme-border) 78%);
+}
+html:has(body.is-home-route){
+  overflow-y:auto;
 }
 /* Typ A: Qurʾān Hero */
 .home-v380-quran-hero{
@@ -13900,7 +13910,7 @@ body.is-home-route .footer{
 .home-v380-filter-panel-wrap.advanced-visible{display:block}
 /* Footer kompakt */
 body.is-home-route .footer-actions{
-  gap:6px;margin-top:12px;max-width:100%!important;width:100%;
+  gap:6px;margin-top:8px;max-width:100%!important;width:100%;
   grid-template-columns:repeat(4,minmax(0,1fr))!important;
 }
 body.is-home-route #footerAppSave{
@@ -13910,7 +13920,7 @@ body.is-home-route .footer-action-btn,body.is-home-route .footer-social-link,bod
   min-height:36px;padding:6px 6px;font-size:clamp(8.4px,1.9vw,10px);border-radius:10px;
   min-width:0;overflow:hidden;text-overflow:ellipsis;
 }
-body.is-home-route .footer .signature{margin-top:10px;font-size:10px}
+body.is-home-route .footer .signature{margin-top:6px;font-size:10px}
 body.is-home-route .footer strong{font-size:14px}
 #footerAppSave[hidden]{display:none!important}
 @media(prefers-reduced-motion:reduce){
@@ -26688,7 +26698,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v760";
+const APP_BUILD_ID="app-shell-v761";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
