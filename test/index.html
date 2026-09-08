@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v799";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v800";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -20628,6 +20628,33 @@ html body .post-reader-main .post-source-oval.post-source-module .post-after-lin
 
 
 
+<style id="global-air-gap-collapse-v763">
+/* GLOBAL: Inhalt sitzt direkt über der Fußzeile. Nav-Luft nur einmal in der Fußzeile. */
+html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.reader-mode):not(.image-editor-mode):not(.image-editor-test-mode):not(.is-ilm-chat-route){
+  padding-bottom:0!important;
+}
+html[data-theme] body:not(.is-feed-fullscreen):not(.reader-mode):not(.is-ilm-chat-route) .view,
+html[data-theme] body:not(.is-feed-fullscreen):not(.reader-mode):not(.is-ilm-chat-route) #appView.view{
+  min-height:0!important;
+}
+html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.reader-mode):not(.image-editor-mode):not(.image-editor-test-mode):not(.is-ilm-chat-route) .footer{
+  margin-top:6px!important;
+  padding-top:8px!important;
+  padding-bottom:calc(var(--bottom-navigation-height,70px) + env(safe-area-inset-bottom,0px) + 6px)!important;
+}
+html[data-theme] body.is-quiz-route .view,
+html[data-theme] body.is-quiz-route #appView.view{
+  padding-bottom:8px!important;
+}
+.quiz-shell{padding-bottom:8px!important;gap:10px!important}
+body.is-quran-overview .qov-page{padding-bottom:10px!important}
+body.is-scholars-route .scholars-index{padding-bottom:10px!important}
+body.is-propheten-route .dar-fold__pane,
+body.is-frauen-route .dar-fold__pane,
+.dar-fold__pane{padding-bottom:8px!important}
+.footer-actions,.footer-socials{margin-top:8px!important}
+.signature{margin-top:4px!important}
+</style>
 <body class="has-bottom-nav">
 <div id="newPostsBanner" class="new-posts-banner hidden" role="button" tabindex="0" aria-label="Aktualisieren" style="display:none">
   <span class="new-posts-icon">&#x23F3;</span>
@@ -26799,7 +26826,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v799";
+const APP_BUILD_ID="app-shell-v800";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}

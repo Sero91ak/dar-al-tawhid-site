@@ -87,6 +87,22 @@
   ],
   "unlockedScopes": [
     {
+      "id": "global-air-gap-collapse-live-2026-09-08",
+      "approvedBy": "user-explicit-global-luft-luecken-jede-app-pushen",
+      "reason": "Nutzer: Überall so viel Luft dazwischen; Lücken in jedem Bereich schließen; jede App pushen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/fold-split.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "update-banner-loop-lock-ios-brand-2026-09-08",
       "approvedBy": "user-explicit-ios-update-banner-loop-font-brand",
       "reason": "Nutzer: Blauer Update-Banner kommt wieder; Sperre + autonome Erkennung. iOS-Ladeseeite Schrift wie Besucher-App. DĀR AL TAWḤĪD exakt überall. Live-Fix für App Store.",

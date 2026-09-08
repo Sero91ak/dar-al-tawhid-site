@@ -34,7 +34,7 @@ html[data-theme] {
 }
 
 .dar-fold__pane {
-  padding-bottom: calc(28px + var(--bottom-navigation-height, 64px) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: 8px;
 }
 
 .dar-fold__empty {
