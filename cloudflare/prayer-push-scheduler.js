@@ -482,7 +482,9 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
   }, env);
 
   if (sendAfter.getTime() - Date.now() > 30 * 1000) {
-    body.send_after = sendAfter.toISOString();
+    const iso = sendAfter.toISOString();
+    const stamp = iso.match(/^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})/);
+    body.send_after = stamp ? `${stamp[1]} ${stamp[2]} GMT+0000` : iso;
   }
 
   const result = await postOneSignal(env, body);
