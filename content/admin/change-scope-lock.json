@@ -87,6 +87,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-wissen-feed-pruef-2026-09-08",
+      "approvedBy": "user-explicit-pruef-app-wissen-post-feed",
+      "reason": "Nutzer: Feed der Prüf-App von Bild-Feed zu Wissens-Post-Feed umbauen; tägliche Erinnerung nur vorbereiten. Kein Live, keine Besucher-App.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/wissen-feed-app.js",
+        "test/data/feed-posts.json",
+        "test/data/daily-push-plan.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "update-banner-loop-lock-ios-brand-2026-09-08",
       "approvedBy": "user-explicit-ios-update-banner-loop-font-brand",
       "reason": "Nutzer: Blauer Update-Banner kommt wieder; Sperre + autonome Erkennung. iOS-Ladeseeite Schrift wie Besucher-App. DĀR AL TAWḤĪD exakt überall. Live-Fix für App Store.",

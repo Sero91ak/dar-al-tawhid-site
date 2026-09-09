@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v799";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v800";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -57,7 +57,7 @@ html[data-theme="light"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="lig
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="/assets/live-boot.js?v=590"></script>
-<script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
+<script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 <style id="dar-library-detail-v641">
 .lib-page.lib-detail .lib-detail-hero{
   align-items:center;
@@ -10407,7 +10407,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-app.js?v=20" defer></script>
 <script src="/assets/focus-feed-app.js?v=6" defer></script>
 <script src="/assets/html2canvas.min.js" defer></script>
-<script src="/test/assets/premium-feed-app.js?v=100" defer></script>
+<script src="/test/assets/wissen-feed-app.js?v=800" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <script src="/assets/adaptive-layout.js?v=8" defer></script>
 <script src="/assets/fold-split.js?v=3" defer></script>
@@ -10459,6 +10459,17 @@ window.DAR_ANALYTICS_CONFIG={
 .more-feature-row p{font-size:11px!important;line-height:1.28!important;margin-top:3px!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
 .more-feature-row .feature-badge{position:static!important;display:inline-flex!important;margin-left:6px!important;vertical-align:middle!important;padding:2px 6px!important;font-size:8px!important;line-height:1.1!important;white-space:nowrap!important;max-width:82px!important}
 .more-search{min-height:44px!important;font-size:15px!important}
+.wissen-erinnerung-card{margin:12px 0 4px;padding:14px;border:1px solid rgba(201,168,106,.28);border-radius:16px;background:linear-gradient(165deg,rgba(255,255,255,.055),rgba(255,255,255,.02))}
+.wissen-erinnerung-card h3{margin:0 0 6px;font-family:var(--serif);font-size:20px;color:var(--gold2);font-weight:600}
+.wissen-erinnerung-card p{margin:0 0 10px;color:var(--muted);font-size:13px;line-height:1.45}
+.wissen-erinnerung-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0}
+.wissen-erinnerung-row span{font-size:14px;font-weight:700}
+.wissen-erinnerung-cats{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 4px}
+.wissen-erinnerung-cats label{display:flex;align-items:center;gap:6px;font-size:12px;border:1px solid rgba(201,168,106,.28);border-radius:999px;padding:6px 10px}
+.wissen-iphone-hint{margin-top:10px;padding-top:10px;border-top:1px solid rgba(201,168,106,.18)}
+.wissen-iphone-hint h4{margin:0 0 6px;font-size:14px}
+.wissen-iphone-hint button{margin-top:6px;border:1px solid rgba(201,168,106,.4);background:transparent;color:var(--gold2);border-radius:10px;padding:8px 12px;font:inherit;font-size:13px;font-weight:700}
+.wissen-iphone-guide{margin-top:8px;font-size:12px;line-height:1.45;color:var(--muted)}
 @media(max-width:370px){.feature-section,.more-group{padding:11px!important}.feature-card{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"main" "actions"!important}.feature-card-actions{grid-template-columns:minmax(112px,1fr) 36px!important;justify-self:stretch!important}.feature-card p{-webkit-line-clamp:2!important}.more-group-grid{grid-template-columns:1fr!important}}
 @media(min-width:520px){.more-group-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.feature-card{grid-template-columns:minmax(0,1fr) auto!important}}
 </style>
@@ -22130,7 +22141,7 @@ function routeSig(route){return route&&route.value?`${route.view}/${route.value}
 function routeEqual(a,b){return String(a?.view||"")===String(b?.view||"")&&String(a?.value||"")===String(b?.value||"")}
 function isHomeRoute(route){return String(route?.view||"home")==="home"}
 function isDetailRoute(route){return ["post","dua","quran-surah","news-detail"].includes(String(route?.view||""))}
-function migrateLegacyTopicsRoute(){const hash=safeDecodeURIComponent((location.hash||"").replace(/^#/,""));if(hash==="feed/topics"||hash.startsWith("feed/topics/")){try{history.replaceState(null,"",routeToHash("topics",""))}catch(e){location.replace(routeToHash("topics",""))}return true}return false}
+function migrateLegacyTopicsRoute(){return false}
 function migrateTopicsScrollKey(){try{const map=JSON.parse(sessionStorage.getItem(NAV_SCROLL_KEY)||"{}");if(map["feed/topics"]!=null&&map.topics==null){map.topics=map["feed/topics"];sessionStorage.setItem(NAV_SCROLL_KEY,JSON.stringify(map))}}catch(e){}}
 function setPageHeader(title,subtitle="",eyebrow=""){return setHeader(title,subtitle,eyebrow||title)}
 const ROUTE_ALIASES={start:"home",home:"home",feed:"feed",ilm:"ilm",quiz:"quiz","din-quiz":"quiz",beitraege:"topics",topics:"topics",themen:"topics",quran:"quran",quran_themen:"quran-topic",themen_quran:"quran-topic","quran-topic":"quran-topic",dua:"duas",duas:"duas",mehr:"more",more:"more",hadith:"hadith",ahadith:"hadith",propheten:"propheten",prophets:"propheten",anbiya:"propheten",frauen:"frauen","frauen-im-islam":"frauen",gelehrte:"scholars",scholars:"scholars",buecher:"books",bucher:"books",books:"books",quellenbibliothek:"books",quellenbuch:"quellen-book","quellen-book":"quellen-book",quellengelehrter:"quellen-scholar","quellen-scholar":"quellen-scholar",bibliothek:"bibliothek",zakat:"zakat",kalender:"calendar",calendar:"calendar","mein-bereich":"account",account:"account",gebetszeiten:"prayer",prayer:"prayer",jumuah:"jummah",jummah:"jummah",qibla:"qibla",qiblah:"qibla",einstellungen:"settings",settings:"settings",favoriten:"saved",saved:"saved",beitrag:"post",post:"post",news:"news",neu:"news"};
@@ -22145,7 +22156,7 @@ function parseRouteFromHash(hashRaw){
   const slug=normalizeRouteSlug(parts[0]);
   let view=ROUTE_ALIASES[slug]||parts[0]||"home";
   let rest=parts.slice(1);
-  if(view==="feed"&&rest[0]==="topics"){view="topics";rest=[]}
+  if(view==="feed"&&rest[0]==="topics"){return{view:"feed",value:"alle"}}
   if(view==="quran"&&rest.length&&isQuranSurahPath(rest.join("/")))return{view:"quran-surah",value:rest.join("/")};
   if(view==="quran-topic")return{view:"quran-topic",value:safeDecodeURIComponent(rest.join("/"))};
   if(view==="topics"&&rest.length){
@@ -22256,6 +22267,7 @@ function parentRoute(route){if(route&&route.view==="frauen"){const parts=String(
   if(route.view==="post"){const from=getPostBrowseFrom();if(from?.view)return{view:from.view,value:from.value||""};return{view:"topics"}}
   if(route.view==="recent")return{view:"topics"};
   if(route.view==="topics")return{view:"home"};
+  if(route.view==="feed"&&route.value)return{view:"feed",value:""};
   if(route.view==="feed")return{view:"home"};
   if(route.view!=="home")return{view:"home"};
   return{view:"home"};
@@ -26145,7 +26157,7 @@ function featureCatalog(){
   const bookCount=typeof countBy==="function"?[...countBy("book").keys()].filter(x=>x&&x!=="Unbekannt").length:0;
   const newsCount=typeof activeCurrentUpdates==="function"?activeCurrentUpdates().length:0;
   const items=[
-    {id:"feed",title:"Feed",icon:"✦",desc:"Neue Bildbeiträge und ruhige Empfehlungen.",button:"Öffnen",nav:"feed",group:"Lernen & Wissen",badge:"Aktuell"},
+    {id:"feed",title:"Feed",icon:"✦",desc:"Geprüfte Wissensbeiträge zum Lesen.",button:"Öffnen",nav:"feed",group:"Lernen & Wissen",badge:"Aktuell"},
     {id:"ilm",title:"ʿIlm",icon:"📘",desc:"Wissensassistent mit belegten Antworten aus DĀR AL TAWḤĪD.",button:"Öffnen",nav:"ilm",group:"Lernen & Wissen",badge:"Neu"},
     {id:"quiz",title:"Din-Quiz",icon:"🧠",desc:"Strukturierte Wissensprüfung nach Themen und Stufen.",button:"Öffnen",nav:"quiz",group:"Lernen & Wissen",badge:"Lernen"},
     {id:"hadith",title:"Hadith-Bibliothek",icon:"📜",desc:"Hadith-Werke mit Büchern, Kapiteln und Filterung.",button:"Öffnen",nav:"hadith",group:"Lernen & Wissen",badge:"Hadith"},
@@ -26197,7 +26209,51 @@ function renderMoreQuickAccessSection(){
   return `<section class="more-quick-access" aria-label="Schnellzugriff"><div class="more-quick-access__list"><button type="button" class="more-quick-access__chip" data-more-quick="orient" aria-label="Orientierung" title="Orientierung"><span aria-hidden="true">🧭</span></button><button type="button" class="more-quick-access__chip" data-more-quick="saved" aria-label="Merkliste" title="Merkliste"><span aria-hidden="true">❤️</span></button><button type="button" class="more-quick-access__chip" data-more-quick="remind" aria-label="Erinnerungen" title="Erinnerungen"><span aria-hidden="true">🔔</span></button></div></section>`;
 }
 
-function renderMore(){const groups=["Lernen & Wissen","Alltag & Gebet","Werkzeuge & Assistenten","Persönlich","App"];const items=featureCatalog();return `${setPageHeader("Mehr","Funktionen geordnet nach Lernen, Alltag, Werkzeugen und Einstellungen","Mehr")}${renderMoreQuickAccessSection()}${renderZakatMoreFocus()}<section class="feature-section"><div class="feature-head"><div><h3>Funktion suchen</h3><span>Tippe z. B. Qibla, Rechner oder Qurʾān.</span></div></div><input id="moreFeatureSearch" class="more-search" type="search" placeholder="Funktion suchen…" autocomplete="off"></section>${groups.map(group=>renderMoreGroup(group,items.filter(item=>item.group===group))).join("")}`}
+function wissenDailyErinnerungPrefs(){
+  const def={aktiv:false,quran:true,dua:true,wissen:true,frauen:true,athar:true};
+  try{return Object.assign({},def,JSON.parse(localStorage.getItem("darDailyWissenErinnerungV1")||"{}"))}catch(e){return def}
+}
+function saveWissenDailyErinnerungPrefs(p){try{localStorage.setItem("darDailyWissenErinnerungV1",JSON.stringify(p))}catch(e){}}
+function isIphoneSafariHintNeeded(){
+  const ua=String(navigator.userAgent||"");
+  const ios=/iPad|iPhone|iPod/.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+  if(!ios)return false;
+  const standalone=window.matchMedia("(display-mode: standalone)").matches||!!window.navigator.standalone;
+  return !standalone;
+}
+function renderWissenDailyErinnerungCard(){
+  const p=wissenDailyErinnerungPrefs();
+  const cats=[["quran","Qurʾān"],["dua","Duʿāʾ"],["wissen","Wissen"],["frauen","Frauen im Islam"],["athar","Athār & Salaf"]];
+  return `<section class="wissen-erinnerung-card" id="wissenDailyErinnerungCard"><h3>Tägliche Erinnerung</h3><p>Erhalte täglich einen geprüften Vers, Duʿāʾ oder Beitrag.</p><div class="wissen-erinnerung-row"><span>Tägliche Erinnerung aktivieren</span><button type="button" id="wissenDailyErinnerungToggle" class="prayer-action-btn ${p.aktiv?"active":""}" aria-pressed="${p.aktiv?"true":"false"}">${p.aktiv?"✓ Aktiv":"Benachrichtigungen aktivieren"}</button></div><div class="wissen-erinnerung-cats">${cats.map(([id,lab])=>`<label><input type="checkbox" data-wissen-cat="${id}" ${p[id]!==false?"checked":""}> ${lab}</label>`).join("")}</div><div class="wissen-iphone-hint"><h4>Benachrichtigungen auf dem iPhone</h4><p>Damit Benachrichtigungen funktionieren, muss die App über Safari zum Home-Bildschirm hinzugefügt und anschließend geöffnet werden.</p><button type="button" id="wissenIphoneGuideBtn">Anleitung anzeigen</button><p class="wissen-iphone-guide" id="wissenIphoneGuide" hidden>1. In Safari öffnen.<br>2. Teilen-Symbol antippen.<br>3. „Zum Home-Bildschirm“ wählen.<br>4. Die App vom Home-Bildschirm aus öffnen und die tägliche Erinnerung aktivieren.</p></div></section>`
+}
+function bindWissenDailyErinnerung(){
+  const toggle=$("wissenDailyErinnerungToggle");
+  if(toggle){
+    toggle.onclick=async()=>{
+      const p=wissenDailyErinnerungPrefs();
+      if(!p.aktiv){
+        let perm="granted";
+        if(typeof requestNotificationPermission==="function")perm=await requestNotificationPermission();
+        if(perm!=="granted"){toggle.textContent="Bitte in den Einstellungen erlauben";return}
+        p.aktiv=true;
+      }else p.aktiv=false;
+      saveWissenDailyErinnerungPrefs(p);
+      toggle.classList.toggle("active",p.aktiv);
+      toggle.setAttribute("aria-pressed",p.aktiv?"true":"false");
+      toggle.textContent=p.aktiv?"✓ Aktiv":"Benachrichtigungen aktivieren";
+    };
+  }
+  document.querySelectorAll("[data-wissen-cat]").forEach(box=>{
+    box.onchange=()=>{
+      const p=wissenDailyErinnerungPrefs();
+      p[box.getAttribute("data-wissen-cat")]=box.checked;
+      saveWissenDailyErinnerungPrefs(p);
+    };
+  });
+  const guideBtn=$("wissenIphoneGuideBtn");
+  const guide=$("wissenIphoneGuide");
+  if(guideBtn&&guide)guideBtn.onclick=()=>{guide.hidden=!guide.hidden};
+}
 function renderRamadan(){const ctx=seasonalIslamicContext()||{phase:"countdown",title:"Ramaḍān & ʿĪd",subtitle:"Islamische Saison",daysLeft:nextHijriEvent(9,1)?.diff||null};const duas=ramadanDuas();const rPosts=ramadanPosts();const events=calendarEventsForYear().filter(ev=>ev.m===9||ev.m===10||(ev.m===12&&ev.d>=8));const countdown=ctx.phase==="countdown"&&ctx.daysLeft?`<div class="ramadan-countdown">Noch ${ctx.daysLeft} Tage</div><p class="ramadan-note">Geschätzter Beginn: ${formatGregDate(ctx.targetDate||nextHijriEvent(9,1)?.gDate||new Date())}. Lokale Mondsichtung kann abweichen.</p>`:ctx.phase==="ramadan"?`<div class="ramadan-countdown">Tag ${ctx.day}</div><p class="ramadan-note">${esc(ctx.subtitle)} · Möge Allah dein Fasten annehmen.</p>`:`<p class="ramadan-note">${esc(ctx.subtitle||"")}</p>`;return `${setHeader("Ramaḍān & ʿĪd","Suḥūr- und Iftār-Zeiten, passende Duʿāʾ und wichtige Beiträge für die Saison.","Saison")}<section class="ramadan-panel"><h3>${esc(ctx.title||"Ramaḍān & ʿĪd")}</h3>${countdown}${renderSuhurIftarRow(true)}<div class="prayer-action-row" style="margin-top:12px"><button class="prayer-action-btn" type="button" data-nav="prayer">🕌 Gebetszeiten & Standort</button><button class="prayer-action-btn" type="button" data-nav="calendar">🗓️ Kalender</button></div></section>${events.length?`<section class="calendar-panel"><div class="calendar-title"><div><h3>Termine in dieser Saison</h3></div></div><div class="event-list">${events.slice(0,4).map(ev=>`<article class="event-card ${ev.diff>=0&&ev.diff<=14?"event-soon":""}"><div class="event-date">${formatGregDate(ev.gDate)} · ${ev.d}. ${hijriMonthName(ev.m)}</div><div class="event-name">${esc(ev.name)}</div><div class="event-note">${ev.diff>=0?`Noch ca. ${ev.diff} Tage. `:""}${esc(ev.note)}</div></article>`).join("")}</div></section>`:""}<section class="section-block"><div class="section-head"><h3>Duʿāʾ für Ramaḍān & ʿĪd</h3><span>${duas.length} ausgewählt</span></div><div class="post-grid">${duas.map(duaCard).join("")}</div></section><section class="section-block"><div class="section-head"><h3>Wichtige Beiträge</h3><span>${rPosts.length} Empfehlungen</span></div><div class="post-grid">${rPosts.length?rPosts.map(postCard).join(""):`<div class="empty">Noch keine passenden Beiträge gefunden.</div>`}</div></section>`}
 function dailyDua(){const d=dailyContentToday();if(d?.dua?.id){const match=DUAS.find(x=>String(x.id)===String(d.dua.id));if(match)return match;return dailyJsonDuaFallback(d.dua)}if(!DUAS.length)return null;const day=darDayOfYearBerlin();return DUAS[Math.abs(day)%DUAS.length]}
 function renderDailyDua(){const d=dailyDua();if(!d)return"";return`<section class="daily-box premium-surface" data-nav="dua" data-value="${esc(d.id)}"><div class="daily-label">Duʿāʾ des Tages</div><h3 class="daily-title">${esc(d.title)}</h3><div class="daily-text">${esc(d.de||d.occasion||"")}</div><div class="folder-meta"><span>${esc(d.cat)}</span><span>${esc(d.type)}</span></div></section>`}
@@ -26799,7 +26855,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v799";
+const APP_BUILD_ID="app-shell-v800";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -27526,7 +27582,9 @@ function bindPostSlideCarousels(){
     setIndex(index);
   });
 }
+function renderMore(){const groups=["Lernen & Wissen","Alltag & Gebet","Werkzeuge & Assistenten","Persönlich","App"];const items=featureCatalog();return `${setPageHeader("Mehr","Funktionen geordnet nach Lernen, Alltag, Werkzeugen und Einstellungen","Mehr")}${renderMoreQuickAccessSection()}${renderWissenDailyErinnerungCard()}${renderZakatMoreFocus()}<section class="feature-section"><div class="feature-head"><div><h3>Funktion suchen</h3><span>Tippe z. B. Qibla, Rechner oder Qurʾān.</span></div></div><input id="moreFeatureSearch" class="more-search" type="search" placeholder="Funktion suchen…" autocomplete="off"></section>${groups.map(group=>renderMoreGroup(group,items.filter(item=>item.group===group))).join("")}`}
 function bindEvents(){
+  bindWissenDailyErinnerung();
   bindIlmEvents();
   bindQuizEvents();
   bindDirectPickPanel();
@@ -27977,7 +28035,7 @@ function runQuickAccessAction(kind,btn){
     closeQuickAccessMenu();
     if(kind==="orient"){openQiblaFromFloat();return}
     if(kind==="saved"){navigate("saved");return}
-    if(kind==="remind"){navigate("more");setTimeout(()=>{try{document.getElementById("prayerPushAccordionToggle")?.click()}catch(e){}},180);return}
+    if(kind==="remind"){navigate("more");setTimeout(()=>{try{document.getElementById("wissenDailyErinnerungCard")?.scrollIntoView({behavior:"smooth",block:"center"})}catch(e){}},180);return}
     if(kind==="continue-reading"){openQuranContinueFromQuickAccess();return}
     if(kind==="quran-topics"){openQuranTopicsFromQuickAccess();return}
     if(kind==="quran-search"){focusQuranSearchFromQuickAccess();return}
@@ -28128,7 +28186,7 @@ function bindMoreQuickAccessPageButtons(){
       const kind=btn.getAttribute("data-more-quick");
       if(kind==="orient"){openQiblaFromFloat();return}
       if(kind==="saved"){navigate("saved");return}
-      if(kind==="remind"){navigate("more");setTimeout(()=>{try{document.getElementById("prayerPushAccordionToggle")?.click()}catch(e){}},180)}
+      if(kind==="remind"){navigate("more");setTimeout(()=>{try{document.getElementById("wissenDailyErinnerungCard")?.scrollIntoView({behavior:"smooth",block:"center"})}catch(e){}},180)}
     });
   });
 }
