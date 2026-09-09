@@ -1,0 +1,20 @@
+{
+  "fassung": 1,
+  "aktiv": true,
+  "standardUhrzeit": "09:00",
+  "rotation": [
+    "quran",
+    "dua",
+    "beitrag",
+    "athar",
+    "salaf",
+    "frauenbereich"
+  ],
+  "regeln": {
+    "maxPushProTag": 1,
+    "keineUngeprueftenInhalte": true,
+    "direktlinkPflichtBeiReligion": true,
+    "duplikateVermeiden": true
+  },
+  "hinweis": "Nur Daten und Oberfläche. Es wird kein automatischer Versand ausgelöst."
+}

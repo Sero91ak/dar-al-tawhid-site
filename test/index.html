@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v799";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v801";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -57,7 +57,7 @@ html[data-theme="light"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="lig
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script defer src="/assets/live-boot.js?v=590"></script>
-<script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed"||p[1]==="topics")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
+<script>(function(){function f(){try{var p=String(location.hash||"").replace(/^#\/?/,"").split("/").filter(Boolean);if(!p.length||p[0].toLowerCase()!=="feed")return;document.body&&document.body.classList.add("is-feed-fullscreen");document.querySelectorAll("#appView>.view-head").forEach(function(el){el.remove()})}catch(e){}}f();window.addEventListener("hashchange",f);document.addEventListener("DOMContentLoaded",f);if(document.documentElement)new MutationObserver(f).observe(document.documentElement,{childList:true})})();</script>
 <style id="dar-library-detail-v641">
 .lib-page.lib-detail .lib-detail-hero{
   align-items:center;
@@ -10407,7 +10407,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/zakat-app.js?v=20" defer></script>
 <script src="/assets/focus-feed-app.js?v=6" defer></script>
 <script src="/assets/html2canvas.min.js" defer></script>
-<script src="/test/assets/premium-feed-app.js?v=100" defer></script>
+<script src="/test/assets/wissen-feed-app.js?v=801" defer></script>
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <script src="/assets/adaptive-layout.js?v=8" defer></script>
 <script src="/assets/fold-split.js?v=3" defer></script>
@@ -20628,6 +20628,33 @@ html body .post-reader-main .post-source-oval.post-source-module .post-after-lin
 
 
 
+<style id="global-air-gap-collapse-v763">
+/* GLOBAL: Inhalt sitzt direkt über der Fußzeile. Nav-Luft nur einmal in der Fußzeile. */
+html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.reader-mode):not(.image-editor-mode):not(.image-editor-test-mode):not(.is-ilm-chat-route){
+  padding-bottom:0!important;
+}
+html[data-theme] body:not(.is-feed-fullscreen):not(.reader-mode):not(.is-ilm-chat-route) .view,
+html[data-theme] body:not(.is-feed-fullscreen):not(.reader-mode):not(.is-ilm-chat-route) #appView.view{
+  min-height:0!important;
+}
+html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.reader-mode):not(.image-editor-mode):not(.image-editor-test-mode):not(.is-ilm-chat-route) .footer{
+  margin-top:6px!important;
+  padding-top:8px!important;
+  padding-bottom:calc(var(--bottom-navigation-height,70px) + env(safe-area-inset-bottom,0px) + 6px)!important;
+}
+html[data-theme] body.is-quiz-route .view,
+html[data-theme] body.is-quiz-route #appView.view{
+  padding-bottom:8px!important;
+}
+.quiz-shell{padding-bottom:8px!important;gap:10px!important}
+body.is-quran-overview .qov-page{padding-bottom:10px!important}
+body.is-scholars-route .scholars-index{padding-bottom:10px!important}
+body.is-propheten-route .dar-fold__pane,
+body.is-frauen-route .dar-fold__pane,
+.dar-fold__pane{padding-bottom:8px!important}
+.footer-actions,.footer-socials{margin-top:8px!important}
+.signature{margin-top:4px!important}
+</style>
 <body class="has-bottom-nav">
 <div id="newPostsBanner" class="new-posts-banner hidden" role="button" tabindex="0" aria-label="Aktualisieren" style="display:none">
   <span class="new-posts-icon">&#x23F3;</span>
@@ -22130,7 +22157,7 @@ function routeSig(route){return route&&route.value?`${route.view}/${route.value}
 function routeEqual(a,b){return String(a?.view||"")===String(b?.view||"")&&String(a?.value||"")===String(b?.value||"")}
 function isHomeRoute(route){return String(route?.view||"home")==="home"}
 function isDetailRoute(route){return ["post","dua","quran-surah","news-detail"].includes(String(route?.view||""))}
-function migrateLegacyTopicsRoute(){const hash=safeDecodeURIComponent((location.hash||"").replace(/^#/,""));if(hash==="feed/topics"||hash.startsWith("feed/topics/")){try{history.replaceState(null,"",routeToHash("topics",""))}catch(e){location.replace(routeToHash("topics",""))}return true}return false}
+function migrateLegacyTopicsRoute(){return false}
 function migrateTopicsScrollKey(){try{const map=JSON.parse(sessionStorage.getItem(NAV_SCROLL_KEY)||"{}");if(map["feed/topics"]!=null&&map.topics==null){map.topics=map["feed/topics"];sessionStorage.setItem(NAV_SCROLL_KEY,JSON.stringify(map))}}catch(e){}}
 function setPageHeader(title,subtitle="",eyebrow=""){return setHeader(title,subtitle,eyebrow||title)}
 const ROUTE_ALIASES={start:"home",home:"home",feed:"feed",ilm:"ilm",quiz:"quiz","din-quiz":"quiz",beitraege:"topics",topics:"topics",themen:"topics",quran:"quran",quran_themen:"quran-topic",themen_quran:"quran-topic","quran-topic":"quran-topic",dua:"duas",duas:"duas",mehr:"more",more:"more",hadith:"hadith",ahadith:"hadith",propheten:"propheten",prophets:"propheten",anbiya:"propheten",frauen:"frauen","frauen-im-islam":"frauen",gelehrte:"scholars",scholars:"scholars",buecher:"books",bucher:"books",books:"books",quellenbibliothek:"books",quellenbuch:"quellen-book","quellen-book":"quellen-book",quellengelehrter:"quellen-scholar","quellen-scholar":"quellen-scholar",bibliothek:"bibliothek",zakat:"zakat",kalender:"calendar",calendar:"calendar","mein-bereich":"account",account:"account",gebetszeiten:"prayer",prayer:"prayer",jumuah:"jummah",jummah:"jummah",qibla:"qibla",qiblah:"qibla",einstellungen:"settings",settings:"settings",favoriten:"saved",saved:"saved",beitrag:"post",post:"post",news:"news",neu:"news"};
@@ -22145,7 +22172,7 @@ function parseRouteFromHash(hashRaw){
   const slug=normalizeRouteSlug(parts[0]);
   let view=ROUTE_ALIASES[slug]||parts[0]||"home";
   let rest=parts.slice(1);
-  if(view==="feed"&&rest[0]==="topics"){view="topics";rest=[]}
+  if(view==="feed"&&rest[0]==="topics"){return{view:"feed",value:"alle"}}
   if(view==="quran"&&rest.length&&isQuranSurahPath(rest.join("/")))return{view:"quran-surah",value:rest.join("/")};
   if(view==="quran-topic")return{view:"quran-topic",value:safeDecodeURIComponent(rest.join("/"))};
   if(view==="topics"&&rest.length){
@@ -22256,6 +22283,7 @@ function parentRoute(route){if(route&&route.view==="frauen"){const parts=String(
   if(route.view==="post"){const from=getPostBrowseFrom();if(from?.view)return{view:from.view,value:from.value||""};return{view:"topics"}}
   if(route.view==="recent")return{view:"topics"};
   if(route.view==="topics")return{view:"home"};
+  if(route.view==="feed"&&route.value)return{view:"feed",value:""};
   if(route.view==="feed")return{view:"home"};
   if(route.view!=="home")return{view:"home"};
   return{view:"home"};
@@ -26145,7 +26173,7 @@ function featureCatalog(){
   const bookCount=typeof countBy==="function"?[...countBy("book").keys()].filter(x=>x&&x!=="Unbekannt").length:0;
   const newsCount=typeof activeCurrentUpdates==="function"?activeCurrentUpdates().length:0;
   const items=[
-    {id:"feed",title:"Feed",icon:"✦",desc:"Neue Bildbeiträge und ruhige Empfehlungen.",button:"Öffnen",nav:"feed",group:"Lernen & Wissen",badge:"Aktuell"},
+    {id:"feed",title:"Feed",icon:"✦",desc:"Geprüfte Wissensbeiträge zum Lesen.",button:"Öffnen",nav:"feed",group:"Lernen & Wissen",badge:"Aktuell"},
     {id:"ilm",title:"ʿIlm",icon:"📘",desc:"Wissensassistent mit belegten Antworten aus DĀR AL TAWḤĪD.",button:"Öffnen",nav:"ilm",group:"Lernen & Wissen",badge:"Neu"},
     {id:"quiz",title:"Din-Quiz",icon:"🧠",desc:"Strukturierte Wissensprüfung nach Themen und Stufen.",button:"Öffnen",nav:"quiz",group:"Lernen & Wissen",badge:"Lernen"},
     {id:"hadith",title:"Hadith-Bibliothek",icon:"📜",desc:"Hadith-Werke mit Büchern, Kapiteln und Filterung.",button:"Öffnen",nav:"hadith",group:"Lernen & Wissen",badge:"Hadith"},
@@ -26799,7 +26827,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v799";
+const APP_BUILD_ID="app-shell-v801";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -27425,7 +27453,7 @@ function render(){
     if(currentRoute.view==="home"&&Number.isFinite(window.__darPreserveHomeScrollY)){const y=window.__darPreserveHomeScrollY;window.__darPreserveHomeScrollY=null;requestAnimationFrame(()=>window.scrollTo(0,y))}
     if(currentRoute.view==="home"){loadPopularPostsBlock();hydrateHomeDiscoverLibrary()}
     if(currentRoute.view==="home"&&window.DAR_FOCUS_FEED){(window.DAR_FOCUS_FEED.onAppReady||window.DAR_FOCUS_FEED.refresh).call(window.DAR_FOCUS_FEED,{force:true})}
-    if(currentRoute.view==="feed"){const pfMount=document.getElementById("premiumFeedMount");if(pfMount&&!pfMount.querySelector(".sf-app"))initPremiumFeedTab(true)}
+    if(currentRoute.view==="feed"){const pfMount=document.getElementById("premiumFeedMount");if(pfMount&&!pfMount.querySelector(".sf-app")&&!pfMount.querySelector(".wf-app"))initPremiumFeedTab(true)}
     else if(window.DAR_PREMIUM_FEED&&typeof window.DAR_PREMIUM_FEED.destroy==="function")window.DAR_PREMIUM_FEED.destroy();
     if(currentRoute.view==="zakat"&&window.DARZakatApp){
       window.DARZakatApp.bindZakat();
