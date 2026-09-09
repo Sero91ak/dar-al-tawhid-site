@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "id": "push-lanes-lock",
+  "locked": true,
+  "lockedAt": "2026-09-09T14:15:00.000Z",
+  "lockedReason": "Nutzer 2026-09-09: Gebets-Push, Tages-Push, Jumuʿah, lokale Gebets-Erinnerungen und Willkommens-Push sind getrennte Systeme. Nie anfassen, außer mit ausdrücklichem Befehl. Bei Befehl: nur diese Spur korrigieren, sofort live, Sperre bleibt an.",
+  "unlockPolicy": "Nur Commit-Marker der betroffenen Spur. Eine Spur darf keine andere mitändern. Env-Unlock allein reicht nicht.",
+  "liveOnExplicitPushCommand": true,
+  "requiredGuardMarker": "PUSH_LANES_GUARD",
+  "lanes": {
+    "lock-meta": {
+      "label": "Push-Spuren-Sperre",
+      "unlockPhrases": ["push-lanes-freigabe"],
+      "paths": [
+        "content/admin/push-lanes-lock.json",
+        "scripts/push-lanes-guard.js"
+      ]
+    },
+    "prayer-server": {
+      "label": "Gebets-Push (Server/Cron/OneSignal)",
+      "unlockPhrases": ["prayer-push-scheduler-freigabe", "gebets-push freigeben"],
+      "paths": [
+        "cloudflare/prayer-push-scheduler.js",
+        "cloudflare/prayer-push-admin.js",
+        "cloudflare/prayer-push-copy.js",
+        "cloudflare/prayer-status-store.js",
+        "assets/prayer-push-tags.js",
+        "scripts/prayer-push-loop-guard.js",
+        "scripts/prayer-push-integrity-guard.js",
+        "scripts/send-prayer-push.js",
+        "content/admin/prayer-push-scheduler-lock.json",
+        ".github/workflows/prayer-push.yml"
+      ],
+      "diffMarkers": {
+        "cloudflare/worker.js": [
+          "ensurePrayerSchedulerFresh",
+          "/api/prayer/",
+          "runPrayerPushScheduler",
+          "readPrayerPushStatus"
+        ],
+        "cloudflare/wrangler.toml": [
+          "PRAYER_STATUS_PATH",
+          "PRAYER_STATUS_STORE"
+        ]
+      }
+    },
+    "prayer-local": {
+      "label": "Gebets-Erinnerungen (App-Uhr / lokal)",
+      "unlockPhrases": ["prayer-local-reminders-freigabe", "gebets-erinnerungen freigeben"],
+      "paths": [],
+      "diffMarkers": {
+        "index.html": [
+          "shouldUseLocalPrayerReminders",
+          "scheduleLocalPrayerReminders",
+          "restorePrayerRemindersOnLoad",
+          "syncPrayerPushTags",
+          "enablePrayerServerPush",
+          "disablePrayerServerPush",
+          "PRAYER_LOCAL_FALLBACK_GUARD",
+          "PUSH_LANES_GUARD_PRAYER_LOCAL"
+        ],
+        "test/index.html": [
+          "shouldUseLocalPrayerReminders",
+          "scheduleLocalPrayerReminders",
+          "restorePrayerRemindersOnLoad",
+          "syncPrayerPushTags",
+          "enablePrayerServerPush",
+          "disablePrayerServerPush",
+          "PRAYER_LOCAL_FALLBACK_GUARD",
+          "PUSH_LANES_GUARD_PRAYER_LOCAL"
+        ]
+      }
+    },
+    "daily": {
+      "label": "Tages-Push (Duʿāʾ / Empfehlung)",
+      "unlockPhrases": ["daily-push-freigabe", "tages-push freigeben"],
+      "paths": [
+        "cloudflare/daily-push-scheduler.js",
+        "cloudflare/daily-push-admin.js",
+        "scripts/send-daily-content-push.js",
+        "scripts/send-daily-live-repair.js",
+        ".github/workflows/daily-push-schedule.yml",
+        "content/admin/daily-push.json",
+        "content/admin/daily-push-schema.sql"
+      ],
+      "diffMarkers": {
+        "index.html": [
+          "syncDailyPushTags",
+          "daily-push-panel",
+          "setDailyPushPreference"
+        ],
+        "test/index.html": [
+          "syncDailyPushTags",
+          "daily-push-panel",
+          "setDailyPushPreference"
+        ],
+        "cloudflare/worker.js": [
+          "ensureDailyPushSchedulerFresh",
+          "/api/daily/"
+        ]
+      }
+    },
+    "jummah": {
+      "label": "Jumuʿah-Push",
+      "unlockPhrases": ["jummah-push-freigabe", "jumuah-push freigeben"],
+      "paths": [
+        "cloudflare/jummah-push-scheduler.js",
+        "cloudflare/jummah-push-admin.js"
+      ],
+      "diffMarkers": {
+        "index.html": [
+          "syncJummahPushTags",
+          "setJummahPushPreference"
+        ],
+        "test/index.html": [
+          "syncJummahPushTags",
+          "setJummahPushPreference"
+        ],
+        "cloudflare/worker.js": [
+          "ensureJummahPushSchedulerFresh",
+          "/api/jummah/"
+        ]
+      }
+    },
+    "welcome": {
+      "label": "Willkommens-Push",
+      "unlockPhrases": ["welcome-push-freigabe", "willkommens-push freigeben"],
+      "paths": [
+        "cloudflare/onesignal-delivery.js"
+      ],
+      "diffMarkers": {
+        "index.html": [
+          "sendWelcomePushIfNeeded",
+          "scheduleWelcomePushRetries",
+          "dar_welcome_push"
+        ],
+        "test/index.html": [
+          "sendWelcomePushIfNeeded",
+          "scheduleWelcomePushRetries",
+          "dar_welcome_push"
+        ],
+        "cloudflare/worker.js": [
+          "/api/push/welcome",
+          "sendWelcomePush"
+        ],
+        "cloudflare/daily-push-admin.js": [
+          "sendWelcomePush"
+        ]
+      }
+    },
+    "worker-cron": {
+      "label": "Worker-Cron (alle 5 Min)",
+      "unlockPhrases": ["push-cron-freigabe", "worker-cron freigeben"],
+      "paths": [
+        "cloudflare/wrangler.toml"
+      ],
+      "diffMarkers": {
+        "cloudflare/wrangler.toml": [
+          "crons",
+          "*/5 * * * *"
+        ],
+        "cloudflare/worker.js": [
+          "async scheduled(event, env, ctx)",
+          "PUSH_SYSTEM_GUARD: Cron"
+        ]
+      }
+    }
+  },
+  "requiredAppMarkers": {
+    "index.html": [
+      "PUSH_LANES_GUARD",
+      "PUSH_LANES_GUARD_PRAYER_LOCAL"
+    ],
+    "test/index.html": [
+      "PUSH_LANES_GUARD",
+      "PUSH_LANES_GUARD_PRAYER_LOCAL"
+    ]
+  }
+}

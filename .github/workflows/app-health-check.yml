@@ -56,6 +56,12 @@ jobs:
           INTEGRITY_BASE_REF: ${{ github.event.before }}
         run: node scripts/prayer-push-loop-guard.js
 
+      - name: Push lanes guard (Spuren getrennt, nie ohne Befehl)
+        env:
+          GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
+        run: node scripts/push-lanes-guard.js
+
       - name: Version update guard (Banner-Schleife + Willkommens-Push)
         run: node scripts/version-update-guard.js
 

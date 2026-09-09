@@ -70,6 +70,12 @@ jobs:
           INTEGRITY_BASE_REF: ${{ github.event.before }}
         run: node ../scripts/prayer-push-loop-guard.js
 
+      - name: Push lanes guard
+        env:
+          GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          INTEGRITY_BASE_REF: ${{ github.event.before }}
+        run: node ../scripts/push-lanes-guard.js
+
       - name: Install Wrangler
         run: npm install -g wrangler@4.86.0
 

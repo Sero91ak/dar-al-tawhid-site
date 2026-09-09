@@ -65,6 +65,8 @@
     "assets/fold-split.js",
     "assets/fold-split.css",
     "content/admin/worker-secrets-safety-lock.json",
+    "content/admin/push-lanes-lock.json",
+    "scripts/push-lanes-guard.js",
     "cloudflare/WORKER_SECRETS_LOCK.md",
     "cloudflare/library-push-admin.js"
   ],
@@ -86,6 +88,30 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "push-lanes-hard-lock-live-2026-09-09",
+      "approvedBy": "user-explicit-push-getrennt-sperre-sofort-live",
+      "reason": "Nutzer: Push-Systeme getrennt halten, harte Sperre, Gebets-Push nie ohne Befehl, bei Befehl korrigieren und sofort live.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/admin/push-lanes-lock.json",
+        "scripts/push-lanes-guard.js",
+        "scripts/app-health-check.js",
+        "AGENTS.md",
+        ".github/workflows/canonical-state-guard.yml",
+        ".github/workflows/app-health-check.yml",
+        ".github/workflows/deploy-admin-publisher.yml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "cloudflare/prayer-push-scheduler.js"
+      ],
+      "expiresAt": "2026-09-10T23:59:00.000Z"
+    },
     {
       "id": "prayer-push-clock-match-2026-09-09",
       "approvedBy": "user-explicit-gebetszeiten-push-uhrzeit",
