@@ -640,15 +640,23 @@ jobs:
           else
             echo "::warning::Keine Kern-Secrets in GitHub Actions vorhanden – finaler Sync übersprungen"
           fi
+          secrets_hold_ok=0
+          for attempt in $(seq 1 12); do
+            sleep 5
+            HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health?ts=$(date +%s%N)" || true)"
+            echo "Nach Reclaim-Resync Versuch $attempt: $HEALTH"
+            if printf '%s' "$HEALTH" | grep -q '"hasGithubToken":true' && printf '%s' "$HEALTH" | grep -q '"hasAdminSecret":true'; then
+              secrets_hold_ok=1
+              break
+            fi
+            echo "POST_PUSH_HANG_GUARD: Secrets nach Builds-Wipe erneut setzen (Versuch $attempt)"
+            wrangler deploy --name dar-admin-publisher
+            if [ -s "$SECRETS_JSON" ]; then
+              apply_worker_secrets "$SECRETS_JSON" "core-secrets-sync-retry-${attempt}"
+            fi
+          done
           rm -f "$SECRETS_JSON"
-          sleep 8
-          HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health?ts=$(date +%s%N)" || true)"
-          echo "Nach Reclaim-Resync: $HEALTH"
-          if ! printf '%s' "$HEALTH" | grep -q '"hasGithubToken":true'; then
-            echo "::error::hasGithubToken=false nach finalem Secret-Resync"
-            exit 1
-          fi
-          if ! printf '%s' "$HEALTH" | grep -q '"hasAdminSecret":true'; then
-            echo "::error::hasAdminSecret=false nach finalem Secret-Resync"
+          if [ "$secrets_hold_ok" != "1" ]; then
+            echo "::error::hasGithubToken/hasAdminSecret nach finalem Secret-Resync weiter false"
             exit 1
           fi
