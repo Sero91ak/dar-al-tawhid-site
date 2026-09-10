@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-09-10T08:27:56.043Z",
+  "generated": "2026-09-10T09:00:44.997Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -935,44 +935,38 @@
       "createdAt": "2026-09-10T08:25:34.004Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-09-10T08:25:34.004Z",
-      "lastError": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
-      "updatedAt": "2026-09-10T08:27:56.043Z",
-      "lastCheckAt": "2026-09-10T08:27:55.932Z",
+      "lastError": "",
+      "updatedAt": "2026-09-10T09:00:44.997Z",
+      "lastCheckAt": "2026-09-10T09:00:44.859Z",
       "liveCheck": {
-        "ok": false,
+        "ok": true,
         "steps": {
           "githubFileCreated": true,
           "indexUpdatedGithub": true,
           "indexFoundPublic": true,
-          "postInIndex": false,
-          "postFilePublic": false,
+          "postInIndex": true,
+          "postFilePublic": true,
           "visitorUrlOk": true,
-          "cloudflareDeployed": false,
+          "cloudflareDeployed": true,
           "githubIndexHasPost": true,
           "githubPostExists": true
         },
-        "diagnosis": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
-        "indexOk": false,
-        "postOk": false,
+        "diagnosis": "",
+        "indexOk": true,
+        "postOk": true,
         "visitorUrlOk": true,
-        "attempts": 6,
+        "attempts": 1,
         "site": "https://dar-al-tawhid.de",
         "postId": "ibn-masud-jamaah-wahrheit-466",
-        "indexGenerated": "2026-09-08T10:22:09.284Z",
-        "indexCount": 465,
-        "visitorUrl": "https://dar-al-tawhid.de/?post=ibn-masud-jamaah-wahrheit-466&v=1789028865794#post/ibn-masud-jamaah-wahrheit-466",
+        "indexGenerated": "2026-09-10T08:27:46.355Z",
+        "indexCount": 466,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=ibn-masud-jamaah-wahrheit-466&v=1789030844487#post/ibn-masud-jamaah-wahrheit-466",
         "githubIndexHasPost": true,
         "githubPostExists": true,
         "needsIndexRepair": false,
-        "needsDeployWait": true,
-        "repair": {
-          "repaired": true,
-          "action": "index-touch",
-          "at": "2026-09-10T08:27:47.064Z",
-          "reason": "Index aktualisiert (Deploy/Cache)"
-        }
+        "needsDeployWait": false
       },
-      "attempts": 6,
+      "attempts": 1,
       "lastRepair": {
         "repaired": true,
         "action": "index-touch",
