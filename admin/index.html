@@ -433,6 +433,13 @@ button{cursor:pointer}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:0 0 10px}
 .section-head h3{margin:0;font-family:var(--serif);font-size:22px;color:var(--gold)}
 .section-head span{color:var(--muted);font-size:11px;font-weight:850;white-space:nowrap}
+.kennwort-group{margin:0 0 16px;border:1px solid rgba(239,215,142,.16);border-radius:16px;padding:12px;background:rgba(0,0,0,.16)}
+.kennwort-group h4{margin:0 0 8px;font-size:14px;color:#fff4cc}
+.kennwort-row{display:grid;gap:8px;border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:10px;margin:0 0 8px;background:rgba(0,0,0,.18)}
+.kennwort-row b{color:#fff7df;font-size:13px}
+.kennwort-row small{display:block;color:var(--soft);font-size:11px;line-height:1.4;margin-top:3px}
+.kennwort-value{width:100%;min-height:40px;border-radius:10px;border:1px solid rgba(239,215,142,.18);background:rgba(0,0,0,.28);color:#fff7df;padding:8px 10px;font-size:12px}
+.kennwort-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .rank-list{display:grid;gap:9px}
 .rank-card{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:12px;align-items:center;border:1px solid var(--line2);border-radius:15px;padding:11px;background:linear-gradient(145deg,rgba(12,24,39,.90),rgba(6,8,10,.94));text-align:left;color:inherit;width:100%}
 .rank-num{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:rgba(239,215,142,.10);border:1px solid rgba(239,215,142,.20);color:var(--gold);font-weight:950}
@@ -638,7 +645,7 @@ main#panel.panel{
       <img src="/admin/admin-icon-192.png" alt="" width="48" height="48">
       <div>
         <h1>DAR Admin</h1>
-        <p><span class="status-dot"></span>Command Center · Admin v58</p>
+        <p><span class="status-dot"></span>Command Center · Admin v59</p>
       </div>
     </div>
     <div class="toolbar">
@@ -683,7 +690,8 @@ const ADMIN_PLAN_KEY="darAdminPlannedPostsV1";
 const ADMIN_NEWS_KEY="darAdminNewsDraftsV1";
 const ADMIN_REPORTS_KEY="darAdminReportsV1";
 const ADMIN_USERS_KEY="darAdminUsersV1";
-const ADMIN_TAB_ORDER_KEY="darAdminTabOrderV3";
+const ADMIN_TAB_ORDER_KEY="darAdminTabOrderV4";
+const ADMIN_KENNWORT_VAULT_KEY="darAdminKennwortVaultV1";
 const ADMIN_PREVIEW_SIZE_KEY="darAdminPreviewSizeV1";
 const ADMIN_LAST_PUSH_CTX_KEY="darAdminLastPublishPushV1";
 const ADMIN_PUBLISH_TRACK_KEY="darAdminPublishTrackV1";
@@ -696,6 +704,7 @@ const DEFAULT_ADMIN_TABS=[
   ["feed","Feed / Im Fokus"],
   ["bibliothek","Bibliothek"],
   ["kurzlinks","Kurzlinks"],
+  ["kennwoerter","Kennwörter"],
   ["settings","Einstellungen"],
   ["tech","Technik"],
   ["besucher","Besucher"],
@@ -726,7 +735,7 @@ let newsSearchQuery="",newsFilter="live",editingNewsId=null;
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function adminEditableTarget(target){return!!(target&&target.closest&&target.closest("input,textarea,select,button,a,label,[contenteditable='true'],.admin-form-grid,.upload-grid,.push-test-controls,.login"))}
 function adminIsEditing(){
-  if(currentTab==="bibliothek"||currentTab==="live-edit")return true;
+  if(currentTab==="bibliothek"||currentTab==="live-edit"||currentTab==="kennwoerter")return true;
   const active=document.activeElement;
   const tag=active&&active.tagName?active.tagName.toLowerCase():"";
   if(window.DARLibraryAdmin&&typeof window.DARLibraryAdmin.isLibraryBusy==="function"&&window.DARLibraryAdmin.isLibraryBusy())return true;
@@ -738,7 +747,69 @@ function cfg(){return window.DAR_ANALYTICS_CONFIG||{}}
 function hasSupabase(){const c=cfg();return !!(String(c.supabaseUrl||"").trim()&&String(c.supabaseKey||"").trim())}
 function headers(){const key=String(cfg().supabaseKey||"").trim();return{apikey:key,Authorization:"Bearer "+key}}
 function readAuth(){try{const raw=localStorage.getItem(AUTH_KEY);if(!raw)return false;const data=JSON.parse(raw);if(!data||!data.ok)return false;if(Date.now()-Number(data.ts||0)>AUTH_TTL_MS){localStorage.removeItem(AUTH_KEY);return false}return true}catch(e){return false}}
-function setAuth(on){authed=!!on;try{if(on)localStorage.setItem(AUTH_KEY,JSON.stringify({ok:true,ts:Date.now()}));else localStorage.removeItem(AUTH_KEY)}catch(e){}}
+let kennwortVaultUnlocked=false;
+let kennwortRevealIds=new Set();
+function setAuth(on){authed=!!on;if(!on){kennwortVaultUnlocked=false;kennwortRevealIds=new Set()}try{if(on)localStorage.setItem(AUTH_KEY,JSON.stringify({ok:true,ts:Date.now()}));else localStorage.removeItem(AUTH_KEY)}catch(e){}}
+function loadKennwortVault(){
+  try{
+    const data=JSON.parse(localStorage.getItem(ADMIN_KENNWORT_VAULT_KEY)||"{}");
+    return data&&typeof data==="object"?data:{entries:{}};
+  }catch(e){return{entries:{}}}
+}
+function saveKennwortVault(vault){
+  try{localStorage.setItem(ADMIN_KENNWORT_VAULT_KEY,JSON.stringify(vault||{entries:{}}))}catch(e){}
+}
+function kennwortBuiltinCatalog(){
+  const c=cfg();
+  return [
+    {id:"admin-pin",group:"Admin-App",label:"Admin-Login-Passwort",hint:"Öffnet das Command Center auf diesem Gerät.",builtin:true,get:()=>String(c.adminPin||"")},
+    {id:"worker-url",group:"Cloudflare Worker",label:"Worker-URL (Publish)",hint:"dar-admin-publisher · Veröffentlichen.",builtin:true,get:()=>workerPublishUrl()},
+    {id:"worker-health-url",group:"Cloudflare Worker",label:"Worker Health-URL",hint:"Status, ob Secrets am Worker gesetzt sind (ohne die Werte zu zeigen).",builtin:true,get:()=>"https://dar-admin-publisher.sero91ak.workers.dev/health"},
+    {id:"worker-secret",group:"Cloudflare Worker",label:"Admin Worker Secret",hint:"GitHub-Secret-Name: ADMIN_PUBLISH_SECRET. Wert nur, wenn du ihn auf diesem Gerät gespeichert hast.",builtin:true,get:()=>savedWorkerSecret()},
+    {id:"supabase-url",group:"Supabase",label:"Supabase URL",hint:"Statistik und Quiz.",builtin:true,get:()=>String(c.supabaseUrl||"")},
+    {id:"supabase-anon",group:"Supabase",label:"Supabase Anon-Key",hint:"Öffentlicher App-Key (kein Service-Role).",builtin:true,get:()=>String(c.supabaseKey||"")},
+    {id:"onesignal-app-id",group:"OneSignal Push",label:"OneSignal App-ID",hint:"Öffentliche App-ID der Besucher-Push.",builtin:true,get:()=>"786d7cd6-0455-4434-ab14-0c10a7bc6b1e"},
+    {id:"github-repo",group:"GitHub",label:"Repository",hint:"Code und Deploys.",builtin:true,get:()=>"Sero91ak/dar-al-tawhid-site"},
+    {id:"github-worker-token",group:"GitHub Actions Secrets",label:"WORKER_GITHUB_TOKEN / GITHUB_TOKEN",hint:"Worker schreibt pending-pushes. Wert nur lokal eintragen — nicht ins Repo.",githubName:"WORKER_GITHUB_TOKEN"},
+    {id:"github-onesignal-key",group:"GitHub Actions Secrets",label:"ONESIGNAL_API_KEY_NEW",hint:"Beitrags-Push über GitHub Action / Worker.",githubName:"ONESIGNAL_API_KEY_NEW"},
+    {id:"github-telegram-token",group:"GitHub Actions Secrets",label:"TELEGRAM_BOT_TOKEN",hint:"Telegram-Versand am Worker.",githubName:"TELEGRAM_BOT_TOKEN"},
+    {id:"github-cf-token",group:"Cloudflare Dashboard / GitHub",label:"CLOUDFLARE_API_TOKEN",hint:"Wrangler-Deploy. Nur lokal merken.",githubName:"CLOUDFLARE_API_TOKEN"},
+    {id:"github-cf-account",group:"Cloudflare Dashboard / GitHub",label:"CLOUDFLARE_ACCOUNT_ID",hint:"Cloudflare-Konto-ID. Nur lokal merken.",githubName:"CLOUDFLARE_ACCOUNT_ID"}
+  ];
+}
+function kennwortMergedRows(){
+  const vault=loadKennwortVault();
+  const entries=vault.entries&&typeof vault.entries==="object"?vault.entries:{};
+  const builtin=kennwortBuiltinCatalog().map(item=>{
+    const overlay=entries[item.id];
+    const builtinValue=typeof item.get==="function"?String(item.get()||""):"";
+    const value=overlay&&overlay.value!=null&&String(overlay.value)!==""?String(overlay.value):builtinValue;
+    return {...item,value,custom:false,hasValue:!!String(value||"").trim()};
+  });
+  const custom=Object.keys(entries).filter(id=>!builtin.some(item=>item.id===id)).map(id=>{
+    const row=entries[id]||{};
+    return{
+      id,
+      group:row.group||"Eigene Einträge",
+      label:row.label||id,
+      hint:row.hint||"Nur auf diesem Admin-Gerät gespeichert.",
+      value:String(row.value||""),
+      custom:true,
+      hasValue:!!String(row.value||"").trim()
+    };
+  });
+  return builtin.concat(custom);
+}
+function kennwortGroupedRows(){
+  const groups=[];
+  const map=new Map();
+  kennwortMergedRows().forEach(row=>{
+    const key=row.group||"Weitere";
+    if(!map.has(key)){map.set(key,[]);groups.push(key)}
+    map.get(key).push(row);
+  });
+  return groups.map(name=>({name,rows:map.get(name)}));
+}
 function checkPin(pin){const want=String(cfg().adminPin||"").trim();const got=String(pin||"").trim();return want&&got.toLowerCase()===want.toLowerCase()}
 function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),1800)}
 function loadLocalDraft(){try{const d=JSON.parse(localStorage.getItem(ADMIN_DRAFT_KEY)||"{}");draftMarkdown=d.markdown||draftMarkdown;draftFilename=d.filename||draftFilename;draftStatus=d.status||draftStatus;draftPostMode=d.postMode==="slide"?"slide":"single"}catch(e){}}
@@ -1123,7 +1194,7 @@ async function unlockAdminWorkerSecretView(){
     try{platform=await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable()}catch(e){platform=false}
   }
   if(!platform){
-    return confirm("Worker-Passwort auf diesem Gerät anzeigen oder kopieren?");
+    return confirm("Kennwort auf diesem Gerät anzeigen oder kopieren?");
   }
   const challenge=crypto.getRandomValues(new Uint8Array(32));
   const rpId=location.hostname;
@@ -1141,7 +1212,7 @@ async function unlockAdminWorkerSecretView(){
         publicKey:{
           challenge,
           rp:{name:"DAR Admin",id:rpId},
-          user:{id:adminSecretB64ToBytes(userId),name:"admin-worker-secret",displayName:"Worker-Passwort"},
+          user:{id:adminSecretB64ToBytes(userId),name:"admin-kennwort-vault",displayName:"Kennwörter"},
           pubKeyCredParams:[{type:"public-key",alg:-7},{type:"public-key",alg:-257}],
           authenticatorSelection:{authenticatorAttachment:"platform",userVerification:"required",residentKey:"preferred"},
           timeout:60000
@@ -1163,8 +1234,14 @@ async function unlockAdminWorkerSecretView(){
     return !!assertion;
   }catch(e){
     if(e&&(e.name==="NotAllowedError"||e.name==="AbortError"))return false;
-    return confirm("Face ID / Geräte-Code nicht verfügbar. Worker-Passwort trotzdem anzeigen?");
+    return confirm("Face ID / Geräte-Code nicht verfügbar. Kennwort trotzdem anzeigen?");
   }
+}
+async function ensureKennwortVaultUnlocked(){
+  if(kennwortVaultUnlocked)return true;
+  const ok=await unlockAdminWorkerSecretView();
+  if(ok)kennwortVaultUnlocked=true;
+  return ok;
 }
 function bindWorkerSecretReveal(){
   const input=document.getElementById("workerSecretInput");
@@ -1200,6 +1277,116 @@ function bindWorkerSecretReveal(){
       toast(copied?"Worker-Passwort kopiert":"Kopieren nicht möglich — bitte Anzeigen und markieren");
     };
   }
+}
+function renderKennwoerter(){
+  const groups=kennwortGroupedRows();
+  return `<section class="split">
+    <div class="panel">
+      <div class="section-head"><h3>Kennwörter &amp; Codes</h3><span>Face ID · dieses Gerät</span></div>
+      <p class="upload-status" style="margin:0 0 12px">Alles, was die Admin-App kennt oder du hier einträgst: sortiert nach Zugehörigkeit. Anzeigen und Kopieren nur nach <b>Face ID / Geräte-Code</b>. GitHub- und Cloudflare-Token liegen nicht im Repo — du trägst sie einmal lokal ein. Beim Abmelden wird die Anzeige wieder gesperrt.</p>
+      ${groups.map(group=>`<div class="kennwort-group"><h4>${esc(group.name)}</h4>${group.rows.map(row=>{
+        const shown=kennwortVaultUnlocked&&kennwortRevealIds.has(row.id);
+        const display=shown?(row.value||""):(row.hasValue?"••••••••••••":"");
+        return `<div class="kennwort-row" data-kennwort-id="${esc(row.id)}">
+          <div><b>${esc(row.label)}</b><small>${esc(row.hint||"")}${row.githubName?` · Secret-Name: ${esc(row.githubName)}`:""}${row.hasValue?"":" · noch kein Wert auf diesem Gerät"}</small></div>
+          <input class="kennwort-value" data-kennwort-input="${esc(row.id)}" type="${shown?"text":"password"}" value="${esc(display)}" ${shown||!row.hasValue?"":"readonly"} placeholder="${row.hasValue?"Nach Face ID sichtbar":"Wert hier eintragen und speichern"}" autocomplete="off">
+          <div class="kennwort-actions">
+            <button class="btn" type="button" data-kennwort-reveal="${esc(row.id)}">${shown?"Verbergen":"Anzeigen"}</button>
+            <button class="btn primary" type="button" data-kennwort-copy="${esc(row.id)}">Kopieren</button>
+          </div>
+          <div class="kennwort-actions">
+            <button class="btn" type="button" data-kennwort-save="${esc(row.id)}">Auf Gerät speichern</button>
+            ${row.custom?`<button class="btn" type="button" data-kennwort-delete="${esc(row.id)}">Eintrag löschen</button>`:`<span></span>`}
+          </div>
+        </div>`;
+      }).join("")}</div>`).join("")}
+      <div class="kennwort-group">
+        <h4>Eigenen Code hinzufügen</h4>
+        <input class="field" id="kennwortNewGroup" placeholder="Gruppe, z. B. Telegram" style="margin-bottom:8px">
+        <input class="field" id="kennwortNewLabel" placeholder="Name, z. B. Bot-Token" style="margin-bottom:8px">
+        <input class="field" id="kennwortNewValue" type="password" placeholder="Wert" autocomplete="off" style="margin-bottom:8px">
+        <button class="btn primary" id="kennwortAddBtn" type="button">Hinzufügen (nur dieses Gerät)</button>
+      </div>
+    </div>
+  </section>`;
+}
+function bindKennwoerter(){
+  if(currentTab!=="kennwoerter")return;
+  const persist=async(id,value)=>{
+    const vault=loadKennwortVault();
+    if(!vault.entries)vault.entries={};
+    const row=kennwortMergedRows().find(item=>item.id===id)||{};
+    vault.entries[id]={group:row.group||"Eigene Einträge",label:row.label||id,hint:row.hint||"",githubName:row.githubName||"",value:String(value||"")};
+    saveKennwortVault(vault);
+  };
+  document.querySelectorAll("[data-kennwort-reveal]").forEach(btn=>{
+    btn.onclick=async()=>{
+      const id=btn.getAttribute("data-kennwort-reveal");
+      if(kennwortRevealIds.has(id)){
+        kennwortRevealIds.delete(id);
+        renderShell();
+        return;
+      }
+      const ok=await ensureKennwortVaultUnlocked();
+      if(!ok){toast("Nicht entsperrt");return}
+      kennwortRevealIds.add(id);
+      renderShell();
+    };
+  });
+  document.querySelectorAll("[data-kennwort-copy]").forEach(btn=>{
+    btn.onclick=async()=>{
+      const id=btn.getAttribute("data-kennwort-copy");
+      const ok=await ensureKennwortVaultUnlocked();
+      if(!ok){toast("Nicht entsperrt");return}
+      const row=kennwortMergedRows().find(item=>item.id===id);
+      const value=String(row&&row.value||"").trim();
+      if(!value){toast("Kein Wert gespeichert");return}
+      const copied=await copyAdminText(value);
+      toast(copied?"Kopiert":"Kopieren nicht möglich");
+    };
+  });
+  document.querySelectorAll("[data-kennwort-save]").forEach(btn=>{
+    btn.onclick=async()=>{
+      const id=btn.getAttribute("data-kennwort-save");
+      const ok=await ensureKennwortVaultUnlocked();
+      if(!ok){toast("Nicht entsperrt");return}
+      const input=document.querySelector('[data-kennwort-input="'+String(id).replace(/"/g,"")+'"]');
+      const value=String(input&&input.value||"").trim();
+      if(!value||/^•+$/.test(value)){toast("Zuerst Anzeigen oder einen neuen Wert eintragen");return}
+      await persist(id,value);
+      if(id==="worker-secret")setSavedWorkerSecret(value);
+      toast("Auf diesem Gerät gespeichert");
+      renderShell();
+    };
+  });
+  document.querySelectorAll("[data-kennwort-delete]").forEach(btn=>{
+    btn.onclick=()=>{
+      const id=btn.getAttribute("data-kennwort-delete");
+      const vault=loadKennwortVault();
+      if(vault.entries)delete vault.entries[id];
+      saveKennwortVault(vault);
+      kennwortRevealIds.delete(id);
+      toast("Eintrag gelöscht");
+      renderShell();
+    };
+  });
+  const addBtn=document.getElementById("kennwortAddBtn");
+  if(addBtn)addBtn.onclick=async()=>{
+    const ok=await ensureKennwortVaultUnlocked();
+    if(!ok){toast("Nicht entsperrt");return}
+    const group=String(document.getElementById("kennwortNewGroup")?.value||"").trim()||"Eigene Einträge";
+    const label=String(document.getElementById("kennwortNewLabel")?.value||"").trim();
+    const value=String(document.getElementById("kennwortNewValue")?.value||"").trim();
+    if(!label||!value){toast("Name und Wert fehlen");return}
+    const id="custom-"+Date.now().toString(36);
+    const vault=loadKennwortVault();
+    if(!vault.entries)vault.entries={};
+    vault.entries[id]={group,label,hint:"Selbst angelegt auf diesem Gerät.",value};
+    saveKennwortVault(vault);
+    kennwortRevealIds.add(id);
+    toast("Eintrag gespeichert");
+    renderShell();
+  };
 }
 async function fetchDashboard(){
   if(!hasSupabase())throw new Error("Supabase nicht konfiguriert");
@@ -2591,7 +2778,7 @@ window.renderLibraryAdminPartial=function(){
   return true;
 };
 function renderShell(){
-  if(currentTab==="bibliothek"||currentTab==="live-edit")stopRefresh();
+  if(currentTab==="bibliothek"||currentTab==="live-edit"||currentTab==="kennwoerter")stopRefresh();
   if(currentTab==="bibliothek"&&window.DARLibraryAdmin&&typeof window.DARLibraryAdmin.isLibraryBusy==="function"&&window.DARLibraryAdmin.isLibraryBusy())return;
   const data=lastData||{live:{},totals:[],updated:new Date()};
   const live=data.live||{},rows=totals();
@@ -2604,7 +2791,7 @@ function renderShell(){
   currentTab=normalizeAdminTab(currentTab);
   if(currentTab==="schedule")currentTab="actions";
   const refreshSec=currentTab==="besucher"?15:30;
-  const body=currentTab==="live-edit"&&window.DARLiveEdit?window.DARLiveEdit.renderLiveEditTab():currentTab==="besucher"?renderVisitors(ctx):currentTab==="quiz-stats"&&window.DARQuizStatsAdmin?window.DARQuizStatsAdmin.renderQuizStatsTab():currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="bibliothek"?(window.DARLibraryAdmin?window.DARLibraryAdmin.renderLibraryTab():'<section class="lib-admin"><p class="lib-admin-category">Bibliothek-Modul wird geladen…</p></section>'):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  const body=currentTab==="kennwoerter"?renderKennwoerter():currentTab==="live-edit"&&window.DARLiveEdit?window.DARLiveEdit.renderLiveEditTab():currentTab==="besucher"?renderVisitors(ctx):currentTab==="quiz-stats"&&window.DARQuizStatsAdmin?window.DARQuizStatsAdmin.renderQuizStatsTab():currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="bibliothek"?(window.DARLibraryAdmin?window.DARLibraryAdmin.renderLibraryTab():'<section class="lib-admin"><p class="lib-admin-category">Bibliothek-Modul wird geladen…</p></section>'):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tab-picker" aria-label="Admin-Bereich wählen">
       <label class="tab-picker-label" for="adminTabSelect">Bereich</label>
@@ -2706,9 +2893,10 @@ function renderStart(ctx){
     ${folderCard("④","Ordner","Kategorien sortieren und Texte korrigieren.","ordner","Studio")}
     ${folderCard("⑤","Feed / Im Fokus","Fokus-Inhalte steuern.","feed","Feed")}
     ${folderCard("⑥","Bibliothek","PDFs und Titel verwalten.","bibliothek","Bibliothek")}
-    ${folderCard("⑦","Einstellungen","Worker und Technik.","settings","Admin")}
-    ${folderCard("⑧","Besucher","Live-Zahlen und Aufrufe.","besucher",`${Number(ctx.live.live_now||0)} live`)}
-    ${folderCard("⑨","Quiz-Statistik","Nutzer und Fragen.","quiz-stats","Hinten")}
+    ${folderCard("⑦","Kennwörter","Passwörter, Tokens, Codes.","kennwoerter","Face ID")}
+    ${folderCard("⑧","Einstellungen","Worker und Technik.","settings","Admin")}
+    ${folderCard("⑨","Besucher","Live-Zahlen und Aufrufe.","besucher",`${Number(ctx.live.live_now||0)} live`)}
+    ${folderCard("⑩","Quiz-Statistik","Nutzer und Fragen.","quiz-stats","Hinten")}
   </section>
   <section class="command-grid">
     <div class="command-card"><b>Letzte Veröffentlichung</b><span>${esc(lastPublishLabel())}</span><small>Lokales Admin-Protokoll</small></div>
@@ -3787,6 +3975,7 @@ function bindUi(){
     workerSecretInput.addEventListener("blur",persist);
   }
   bindWorkerSecretReveal();
+  bindKennwoerter();
   const forgetWorkerSecretBtn=document.getElementById("forgetWorkerSecretBtn");if(forgetWorkerSecretBtn)forgetWorkerSecretBtn.onclick=()=>{setSavedWorkerSecret("");const input=document.getElementById("workerSecretInput");if(input){input.value="";input.type="password"}const reveal=document.getElementById("revealWorkerSecretBtn");if(reveal)reveal.textContent="Anzeigen";const remember=document.getElementById("rememberWorkerSecret");if(remember)remember.checked=false;setUploadStatus("Worker Secret wurde von diesem Gerät gelöscht.")};
   document.querySelectorAll("[data-scroll-upload]").forEach(btn=>btn.onclick=()=>document.getElementById("postMarkdownInput")?.scrollIntoView({behavior:"smooth",block:"center"}));
   bindCommandCenterForms();
@@ -4306,7 +4495,7 @@ async function renderDashboard({force=false}={}){
 }
 function stopRefresh(){if(refreshTimer){clearInterval(refreshTimer);refreshTimer=null}}
 function refreshIntervalMs(){return currentTab==="besucher"?VISITOR_REFRESH_MS:ADMIN_REFRESH_MS}
-function restartRefreshInterval(){if(!authed)return;if(currentTab==="bibliothek"||currentTab==="live-edit")return;stopRefresh();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
+function restartRefreshInterval(){if(!authed)return;if(currentTab==="bibliothek"||currentTab==="live-edit"||currentTab==="kennwoerter")return;stopRefresh();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
 function startRefresh(){stopRefresh();renderDashboard();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
 function renderApp(){authed=readAuth()||authed;if(!authed){stopRefresh();renderLogin();return}document.getElementById("topbar").hidden=false;startRefresh()}
 document.getElementById("refreshBtn").onclick=()=>renderDashboard({force:true});
