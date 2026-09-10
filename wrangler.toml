@@ -1,5 +1,8 @@
 # Cloudflare Workers Static Assets — Besucher-App (dar-al-tawhid.de)
 # Admin-Worker: cloudflare/wrangler.toml → dar-admin-publisher
+#
+# POST_PUSH_NO_CF_POLL: Workers Builds nicht bei Admin-Status-JSON.
+# Echte App-Deploys laufen über GitHub Action „Deploy Besucher-App“.
 
 name = "dar-al-tawhid-site"
 compatibility_date = "2026-06-14"
@@ -7,3 +10,16 @@ compatibility_flags = ["nodejs_compat"]
 
 [assets]
 directory = "."
+
+[build]
+watch_paths = [
+  "index.html",
+  "service-worker.js",
+  "manifest.json",
+  "version.json",
+  "assets/**",
+  "content/posts/**",
+  "content/updates/daily.json",
+  "q/**",
+  "links/**"
+]

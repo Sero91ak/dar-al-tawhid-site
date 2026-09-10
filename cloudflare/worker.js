@@ -2037,8 +2037,26 @@ async function githubGet(env, owner, repo, path, branch) {
   return data;
 }
 
+const GITHUB_SKIP_CI_PATHS = [
+  "content/admin/pending-pushes.json",
+  "content/admin/prayer-push-status.json",
+  "content/admin/daily-push-status.json",
+  "content/admin/jummah-push-status.json",
+  "content/admin/post-push-log.json",
+  "content/admin/telegram-posts.json"
+];
+
+function githubCommitMessageForPath(filePath, message) {
+  const rel = trimSlashes(filePath);
+  const skip = GITHUB_SKIP_CI_PATHS.includes(rel) || rel.startsWith("content/admin/push-triggers/");
+  const text = String(message || "update").trim();
+  if (!skip || /\[skip ci\]/i.test(text)) return text;
+  return `${text} [skip ci]`;
+}
+
 async function githubPut(env, owner, repo, path, content, message, branch, sha) {
-  const body = { message, content: utf8ToBase64(content), branch };
+  const commitMessage = githubCommitMessageForPath(path, message);
+  const body = { message: commitMessage, content: utf8ToBase64(content), branch };
   if (sha) body.sha = sha;
   const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponentPath(path)}`, {
     method: "PUT",

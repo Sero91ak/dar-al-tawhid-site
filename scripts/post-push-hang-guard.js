@@ -80,7 +80,7 @@ function runPostPushHangGuard() {
   }
 
   const worker = read("cloudflare/worker.js");
-  for (const needle of [MARKER, "processPendingPushUntilLive", "processAllPendingPushes", "sendNewPostPush"]) {
+  for (const needle of [MARKER, "processPendingPushUntilLive", "processAllPendingPushes", "sendNewPostPush", "githubCommitMessageForPath", "[skip ci]"]) {
     if (!worker.includes(needle)) fail(`worker.js fehlt „${needle}“`);
   }
   ok("Worker-Pending-Pfad vorhanden");
@@ -102,7 +102,12 @@ function runPostPushHangGuard() {
   if (lock.autoHeal?.noCloudflarePoll !== true || lock.autoHeal?.noGithubIntervalCron !== true) {
     fail("Lock muss noCloudflarePoll + noGithubIntervalCron true haben");
   }
-  ok("Hang-Watchdog nur ereignisgesteuert");
+  const wrangler = read("wrangler.toml");
+  if (!wrangler.includes("POST_PUSH_NO_CF_POLL") || !wrangler.includes("watch_paths")) {
+    fail("wrangler.toml muss watch_paths haben, damit Admin-Status keine Workers Builds auslöst");
+  } else {
+    ok("Besucher-wrangler: keine Builds für Admin-Status-JSON");
+  }
 
   const scope = JSON.parse(read("content/admin/change-scope-lock.json"));
   const always = Array.isArray(scope.alwaysAllowed) ? scope.alwaysAllowed : [];

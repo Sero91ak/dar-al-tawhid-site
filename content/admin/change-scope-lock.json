@@ -94,6 +94,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "cloudflare-status-push-cost-trap-2026-09-10",
+      "approvedBy": "user-explicit-branche-cloudfare-aufloesen-kostenfalle",
+      "reason": "Nutzer: Cloudflare-Git-Branche/Minuten-Pushes sind Kostenfalle und durften nie passieren. Status-Commits dürfen keine CF-Builds auslösen; Secret-Watchdog nicht alle paar Minuten wrangler-deployen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "cloudflare/worker.js",
+        "wrangler.toml",
+        ".github/workflows/push-worker-secret-watchdog.yml",
+        "content/admin/post-push-hang-lock.json",
+        "scripts/post-push-hang-guard.js",
+        "AGENTS.md"
+      ],
+      "expiresAt": "2026-09-12T23:59:00.000Z"
+    },
+    {
       "id": "post-push-hang-lock-2026-09-10",
       "approvedBy": "user-explicit-nie-haengen-autonom-sofort-reparieren",
       "reason": "Nutzer: Beitrags-Push darf nie hängen oder beschädigt bleiben; bei Beschädigung autonom sofort reparieren. Zeiten in Europe/Berlin.",
