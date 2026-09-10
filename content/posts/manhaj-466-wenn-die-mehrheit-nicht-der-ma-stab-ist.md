@@ -1,5 +1,6 @@
 ---
 id: "ibn-masud-jamaah-wahrheit-466"
+# visitor-push-retry after live deploy 2026-09-10
 date: "2026-09-10T08:25:30.000Z"
 title: "📖 Wenn die Mehrheit nicht der Maßstab ist"
 category: "Manhaj"
