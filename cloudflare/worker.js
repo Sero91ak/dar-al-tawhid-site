@@ -3132,14 +3132,15 @@ async function processPendingPushUntilLive(env, record, options = {}) {
     }
   }
 
-  await writePendingPushStatus(env, postId, {
-    lastCheckAt: new Date().toISOString(),
-    liveCheck,
-    attempts: liveCheck.attempts,
-    lastError: liveCheck.ok ? "" : liveCheck.diagnosis,
-    lastRepair: repair || existing?.lastRepair || null,
-    status: "pending"
-  });
+    await writePendingPushStatus(env, postId, {
+      lastCheckAt: new Date().toISOString(),
+      liveCheck,
+      attempts: liveCheck.attempts,
+      lastError: liveCheck.ok ? "" : liveCheck.diagnosis,
+      lastRepair: repair || existing?.lastRepair || null,
+      status: "pending"
+    });
+    // POST_PUSH_HANG_GUARD: pending bleibt pending; Hang-Watchdog + Cron reparieren autonom.
 
   if (!liveCheck.ok) {
     return { sent: false, pending: true, waitingForLive: true, liveCheck, repair, reason: liveCheck.diagnosis };

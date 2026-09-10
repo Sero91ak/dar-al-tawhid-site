@@ -1,0 +1,102 @@
+name: Post Push Hang Watchdog
+
+# POST_PUSH_HANG_GUARD
+# Autonom: hängende Besucher-Beitrags-Pushes sofort nachsenden,
+# Worker-Secrets zurücksetzen, Besucher-Deploy anstoßen.
+# Zeiten für Logs: Europe/Berlin. Gebets-/Tages-/Jumuʿah-Push nicht anfassen.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+  push:
+    branches: [main]
+    paths:
+      - content/admin/pending-pushes.json
+      - scripts/send-post-push.js
+      - .github/workflows/post-push-hang-watchdog.yml
+      - content/admin/post-push-hang-lock.json
+  workflow_run:
+    workflows:
+      - Deploy Besucher-App (Cloudflare Workers)
+      - Deploy Admin Publisher Worker
+    types: [completed]
+
+concurrency:
+  group: post-push-hang-watchdog
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  repair-stuck-post-push:
+    name: POST_PUSH_HANG_GUARD repair
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          ref: main
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Reclaim worker secrets if wiped
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          HEALTH="$(curl -fsS --max-time 20 "https://dar-admin-publisher.sero91ak.workers.dev/health" 2>/dev/null || echo "{}")"
+          set -e
+          echo "$HEALTH"
+          SECRETS_OK="$(printf '%s' "$HEALTH" | node -e '
+            let d="";
+            process.stdin.on("data",c=>d+=c);
+            process.stdin.on("end",()=>{
+              try{
+                const j=JSON.parse(d||"{}");
+                const ok=!!(j&&j.ok===true&&j.hasGithubToken===true&&j.hasAdminSecret===true&&j.hasOneSignalKey===true);
+                process.stdout.write(ok?"true":"false");
+              }catch(e){process.stdout.write("false")}
+            });
+          ')"
+          echo "Berlin $(TZ=Europe/Berlin date '+%Y-%m-%d %H:%M:%S') secrets_ok=$SECRETS_OK"
+          if [ "$SECRETS_OK" != "true" ]; then
+            echo "POST_PUSH_HANG_GUARD: Worker-Secrets fehlen – Deploy Admin Publisher Worker"
+            gh workflow run "Deploy Admin Publisher Worker" --ref main
+          fi
+
+      - name: Send stuck approved post pushes
+        id: repair
+        env:
+          STUCK_REPAIR: "1"
+          SITE_URL: "https://dar-al-tawhid.de"
+          ONESIGNAL_APP_ID: "786d7cd6-0455-4434-ab14-0c10a7bc6b1e"
+          ONESIGNAL_API_KEY_NEW: ${{ secrets.ONESIGNAL_API_KEY_NEW }}
+          ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+        run: node scripts/send-post-push.js
+
+      - name: Deploy visitor app if post is still not live
+        if: steps.repair.outputs.need_visitor_deploy == 'true' && github.event_name != 'workflow_run'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "POST_PUSH_HANG_GUARD: öffentlicher Index ohne Beitrag – Deploy Besucher-App"
+          gh workflow run "Deploy Besucher-App (Cloudflare Workers)" --ref main
+
+      - name: Commit repaired pending-pushes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/admin/pending-pushes.json
+          if git diff --cached --quiet; then
+            echo "Keine pending-pushes Änderung."
+            exit 0
+          fi
+          git commit -m "POST_PUSH_HANG_GUARD: hängenden Beitrags-Push autonom repariert ($(TZ=Europe/Berlin date '+%Y-%m-%d %H:%M %Z'))"
+          git pull --rebase origin main || true
+          git push origin HEAD:main

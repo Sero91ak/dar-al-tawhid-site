@@ -19,6 +19,10 @@
     "test/assets/library/covers/",
     "content/admin/pending-pushes.json",
     "content/posts/",
+    "scripts/send-post-push.js",
+    "content/admin/post-push-hang-lock.json",
+    "scripts/post-push-hang-guard.js",
+    ".github/workflows/post-push-hang-watchdog.yml",
     "content/admin/push-triggers/",
     "admin/index.html",
     "admin/quiz-stats-manager.js",
@@ -89,6 +93,26 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "post-push-hang-lock-2026-09-10",
+      "approvedBy": "user-explicit-nie-haengen-autonom-sofort-reparieren",
+      "reason": "Nutzer: Beitrags-Push darf nie hängen oder beschädigt bleiben; bei Beschädigung autonom sofort reparieren. Zeiten in Europe/Berlin.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/admin/post-push-hang-lock.json",
+        "scripts/post-push-hang-guard.js",
+        "scripts/send-post-push.js",
+        ".github/workflows/post-push-hang-watchdog.yml",
+        "cloudflare/worker.js",
+        "scripts/push-system-guard.js",
+        "scripts/app-health-check.js",
+        ".github/workflows/canonical-state-guard.yml",
+        ".github/workflows/app-health-check.yml",
+        ".github/workflows/deploy-admin-publisher.yml",
+        "AGENTS.md"
+      ],
+      "expiresAt": "2026-09-12T23:59:00.000Z"
+    },
     {
       "id": "visitor-post-push-uuid-fix-2026-09-10",
       "approvedBy": "user-explicit-es-funktioniert-nichts-ausser-in-der-app",

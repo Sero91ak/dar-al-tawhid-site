@@ -62,6 +62,9 @@ jobs:
           INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
         run: node scripts/push-lanes-guard.js
 
+      - name: Post push hang guard (Beitrags-Push darf nicht hängen)
+        run: node scripts/post-push-hang-guard.js
+
       - name: Version update guard (Banner-Schleife + Willkommens-Push)
         run: node scripts/version-update-guard.js
 

@@ -112,6 +112,9 @@ jobs:
           INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
         run: node scripts/push-lanes-guard.js
 
+      - name: Post push hang guard (Beitrags-Push darf nicht hängen)
+        run: node scripts/post-push-hang-guard.js
+
       - name: App health check script
         run: node scripts/app-health-check.js
 

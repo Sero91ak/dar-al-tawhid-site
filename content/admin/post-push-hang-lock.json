@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "id": "post-push-hang-lock",
+  "locked": true,
+  "lockedAt": "2026-09-10T09:10:00.000Z",
+  "lockedBy": "user-explicit",
+  "title": "Beitrags-Push darf nicht hängen",
+  "message": "GESPERRT: Der Besucher-Beitrags-Push (pending-pushes → Live-Check → OneSignal) darf nicht hängen, ausdünnen oder beschädigt bleiben. Bei Beschädigung (Deploy-Block, Secret-Wipe, ungültige OneSignal-Keys) muss die Funktion autonom und sofort repariert werden.",
+  "timezone": "Europe/Berlin",
+  "hangMaxWaitMs": 120000,
+  "requiredGuardMarker": "POST_PUSH_HANG_GUARD",
+  "lanesNotTouched": ["prayer-server", "prayer-local", "daily", "jummah", "welcome", "worker-cron"],
+  "invariants": [
+    "Freigegebene Beitrags-Pushes bleiben pending bis sent – nie still begraben",
+    "Live-Check: öffentlicher Index + Beitragsdatei müssen online sein, dann sofort senden",
+    "OneSignal idempotency_key muss UUID sein",
+    "content/posts/ und pending-pushes.json bleiben alwaysAllowed, damit Deploy und Queue nicht an der Globalsperre hängen",
+    "Worker-Secrets (GitHub, Admin, OneSignal) werden bei Wipe sofort zurückgesetzt",
+    "Menschliche Zeiten für diesen Ablauf: Europe/Berlin"
+  ],
+  "autoHeal": {
+    "watchdogWorkflow": "Post Push Hang Watchdog",
+    "secretWatchdogWorkflow": "Push Worker Secret Watchdog",
+    "visitorDeployWorkflow": "Deploy Besucher-App (Cloudflare Workers)",
+    "publisherDeployWorkflow": "Deploy Admin Publisher Worker",
+    "intervalMinutes": 5
+  }
+}

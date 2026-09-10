@@ -76,6 +76,9 @@ jobs:
           INTEGRITY_BASE_REF: ${{ github.event.before }}
         run: node ../scripts/push-lanes-guard.js
 
+      - name: Post push hang guard
+        run: node ../scripts/post-push-hang-guard.js
+
       - name: Install Wrangler
         run: npm install -g wrangler@4.86.0
 

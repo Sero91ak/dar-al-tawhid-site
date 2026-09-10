@@ -59,6 +59,12 @@ Die Systeme sind **einzelne Spuren** und dürfen einander nicht überschreiben:
 
 **Wenn der Nutzer Push bewusst ändert:** nur diese Spur korrigieren, **sofort live** auf `main` (Worker + App), Sperre bleibt aktiv. Ohne solchen Befehl gilt: nicht anfassen.
 
+## Beitrags-Push (Hang-Sperre – autonom reparieren)
+
+Geschützt durch `content/admin/post-push-hang-lock.json` und `scripts/post-push-hang-guard.js`. Menschliche Zeiten: **Europe/Berlin**.
+
+Der Besucher-Beitrags-Push darf **nicht hängen** (Deploy-Block, Secret-Wipe, ungültige OneSignal-Keys). Bei Beschädigung repariert der Workflow **Post Push Hang Watchdog** autonom (alle 5 Minuten, bei `pending-pushes.json` und nach Besucher-/Publisher-Deploy). Gebets-/Tages-/Jumuʿah-Push bleiben getrennte Spuren.
+
 ## Repo-Integritäts-Schutz (streng – nicht verletzen)
 
 Geschützt durch `scripts/repo-integrity-guard.js` und CI (Canonical State Guard, App Health Check, Deploy).

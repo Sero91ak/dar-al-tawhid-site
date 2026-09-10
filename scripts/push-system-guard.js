@@ -121,7 +121,8 @@ function runPushSystemGuard() {
     'status === "pending"',
     'status === "failed"',
     "sendNewPostPush",
-    "STRICT: Push nur wenn Index + Datei öffentlich online"
+    "STRICT: Push nur wenn Index + Datei öffentlich online",
+    "POST_PUSH_HANG_GUARD"
   ]);
 
   const wrangler = read("cloudflare/wrangler.toml");
@@ -231,6 +232,15 @@ function runPushSystemGuard() {
     "cloudflare/daily-push-*.js",
     "cloudflare/jummah-push-*.js"
   ]);
+
+  [
+    "content/admin/post-push-hang-lock.json",
+    "scripts/post-push-hang-guard.js",
+    ".github/workflows/post-push-hang-watchdog.yml"
+  ].forEach((file) => {
+    if (!fs.existsSync(path.join(ROOT, file))) fail(`Datei fehlt: ${file}`);
+    else ok(`Datei vorhanden: ${file}`);
+  });
 
   return failed;
 }
