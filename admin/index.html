@@ -26,7 +26,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v72";
+  var ADMIN_SW_CACHE="dar-admin-stats-v73";
   var MIG_KEY="darAdminSwFixV31";
   var RELOAD_KEY="darAdminSwReloadBudget";
   if(!location.pathname.startsWith("/admin"))return;
@@ -1098,6 +1098,109 @@ function workerEndpoint(path){
 }
 function savedWorkerSecret(){try{return localStorage.getItem(WORKER_SECRET_KEY)||""}catch(e){return""}}
 function setSavedWorkerSecret(secret){try{if(secret)localStorage.setItem(WORKER_SECRET_KEY,secret);else localStorage.removeItem(WORKER_SECRET_KEY)}catch(e){}}
+const ADMIN_SECRET_UNLOCK_CRED_KEY="darAdminSecretUnlockCredV1";
+const ADMIN_SECRET_UNLOCK_USER_KEY="darAdminSecretUnlockUserV1";
+function adminSecretBytesToB64(bytes){const u=new Uint8Array(bytes);let s="";for(let i=0;i<u.length;i++)s+=String.fromCharCode(u[i]);return btoa(s)}
+function adminSecretB64ToBytes(s){const bin=atob(s);const out=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)out[i]=bin.charCodeAt(i);return out}
+function currentWorkerSecretValue(){return String(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()||"").trim()}
+async function copyAdminText(text){
+  const value=String(text||"");
+  if(!value)return false;
+  try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(value);return true}}catch(e){}
+  try{
+    const ta=document.createElement("textarea");
+    ta.value=value;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.left="-9999px";
+    document.body.appendChild(ta);ta.select();
+    const ok=document.execCommand("copy");
+    ta.remove();
+    return ok;
+  }catch(e){return false}
+}
+async function unlockAdminWorkerSecretView(){
+  const hasWebAuthn=typeof window.PublicKeyCredential==="function"&&window.isSecureContext&&location.protocol==="https:";
+  let platform=false;
+  if(hasWebAuthn){
+    try{platform=await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable()}catch(e){platform=false}
+  }
+  if(!platform){
+    return confirm("Worker-Passwort auf diesem Gerät anzeigen oder kopieren?");
+  }
+  const challenge=crypto.getRandomValues(new Uint8Array(32));
+  const rpId=location.hostname;
+  try{
+    let credId="";
+    try{credId=localStorage.getItem(ADMIN_SECRET_UNLOCK_CRED_KEY)||""}catch(e){}
+    if(!credId){
+      let userId;
+      try{userId=localStorage.getItem(ADMIN_SECRET_UNLOCK_USER_KEY)||""}catch(e){}
+      if(!userId){
+        userId=adminSecretBytesToB64(crypto.getRandomValues(new Uint8Array(16)));
+        try{localStorage.setItem(ADMIN_SECRET_UNLOCK_USER_KEY,userId)}catch(e){}
+      }
+      const cred=await navigator.credentials.create({
+        publicKey:{
+          challenge,
+          rp:{name:"DAR Admin",id:rpId},
+          user:{id:adminSecretB64ToBytes(userId),name:"admin-worker-secret",displayName:"Worker-Passwort"},
+          pubKeyCredParams:[{type:"public-key",alg:-7},{type:"public-key",alg:-257}],
+          authenticatorSelection:{authenticatorAttachment:"platform",userVerification:"required",residentKey:"preferred"},
+          timeout:60000
+        }
+      });
+      if(!cred||!cred.rawId)return false;
+      try{localStorage.setItem(ADMIN_SECRET_UNLOCK_CRED_KEY,adminSecretBytesToB64(cred.rawId))}catch(e){}
+      return true;
+    }
+    const assertion=await navigator.credentials.get({
+      publicKey:{
+        challenge,
+        rpId,
+        allowCredentials:[{type:"public-key",id:adminSecretB64ToBytes(credId),transports:["internal"]}],
+        userVerification:"required",
+        timeout:60000
+      }
+    });
+    return !!assertion;
+  }catch(e){
+    if(e&&(e.name==="NotAllowedError"||e.name==="AbortError"))return false;
+    return confirm("Face ID / Geräte-Code nicht verfügbar. Worker-Passwort trotzdem anzeigen?");
+  }
+}
+function bindWorkerSecretReveal(){
+  const input=document.getElementById("workerSecretInput");
+  const revealBtn=document.getElementById("revealWorkerSecretBtn");
+  const copyBtn=document.getElementById("copyWorkerSecretBtn");
+  if(revealBtn){
+    revealBtn.onclick=async()=>{
+      if(!input)return;
+      const showing=input.type==="text";
+      if(showing){
+        input.type="password";
+        revealBtn.textContent="Anzeigen";
+        return;
+      }
+      const ok=await unlockAdminWorkerSecretView();
+      if(!ok){toast("Nicht entsperrt");return}
+      const secret=currentWorkerSecretValue();
+      if(!secret){toast("Kein Worker-Passwort gespeichert");return}
+      input.value=secret;
+      input.type="text";
+      input.focus();
+      input.select();
+      revealBtn.textContent="Verbergen";
+    };
+  }
+  if(copyBtn){
+    copyBtn.onclick=async()=>{
+      const ok=await unlockAdminWorkerSecretView();
+      if(!ok){toast("Nicht entsperrt");return}
+      const secret=currentWorkerSecretValue();
+      if(!secret){toast("Kein Worker-Passwort gespeichert");return}
+      const copied=await copyAdminText(secret);
+      toast(copied?"Worker-Passwort kopiert":"Kopieren nicht möglich — bitte Anzeigen und markieren");
+    };
+  }
+}
 async function fetchDashboard(){
   if(!hasSupabase())throw new Error("Supabase nicht konfiguriert");
   const url=String(cfg().supabaseUrl||"").replace(/\/$/,"");
@@ -3135,13 +3238,17 @@ function renderActions(rows){
         <div class="admin-fold-body">
           <input class="field" id="workerPublishUrlInput" value="${esc(workerPublishUrl())}" placeholder="${esc(DEFAULT_WORKER_PUBLISH_URL)}">
           <input class="field" id="workerSecretInput" type="password" autocomplete="off" value="${esc(savedWorkerSecret())}" placeholder="Admin Worker Secret" style="margin-top:8px">
+          <div class="quick-grid" style="margin-top:8px;grid-template-columns:1fr 1fr">
+            <button class="btn" id="revealWorkerSecretBtn" type="button">Anzeigen</button>
+            <button class="btn primary" id="copyWorkerSecretBtn" type="button">Kopieren</button>
+          </div>
           <label class="upload-status" style="display:flex;align-items:center;gap:8px;margin:8px 0 0;min-height:38px">
             <input id="rememberWorkerSecret" type="checkbox" checked>
             <span>Worker Secret auf diesem Gerät merken</span>
           </label>
           <button class="btn primary" id="saveWorkerConnectionBtn" type="button" style="margin-top:8px;width:100%;justify-content:center">Worker-Verbindung speichern</button>
           <button class="btn" id="forgetWorkerSecretBtn" type="button" style="margin-top:8px">Worker Secret löschen</button>
-          <div class="upload-status" style="margin-top:10px">URL: <code>https://dar-admin-publisher.sero91ak.workers.dev</code> (mit/ohne <code>/publish</code>). Secret: <code>DarAdminLive2026Publish</code> — nicht GitHub-Token. Erst <b>speichern</b>, dann Bibliothek live pushen.</div>
+          <div class="upload-status" style="margin-top:10px">URL: <code>https://dar-admin-publisher.sero91ak.workers.dev</code> (mit/ohne <code>/publish</code>). Passwort mit <b>Anzeigen</b> oder <b>Kopieren</b> holen — Face ID / Geräte-Code, sonst Bestätigung. Nicht das GitHub-Token. Erst <b>speichern</b>, dann Bibliothek live pushen.</div>
         </div>
       </details>
       <details class="admin-fold">
@@ -3679,7 +3786,8 @@ function bindUi(){
     workerSecretInput.addEventListener("change",persist);
     workerSecretInput.addEventListener("blur",persist);
   }
-  const forgetWorkerSecretBtn=document.getElementById("forgetWorkerSecretBtn");if(forgetWorkerSecretBtn)forgetWorkerSecretBtn.onclick=()=>{setSavedWorkerSecret("");const input=document.getElementById("workerSecretInput");if(input)input.value="";const remember=document.getElementById("rememberWorkerSecret");if(remember)remember.checked=false;setUploadStatus("Worker Secret wurde von diesem Gerät gelöscht.")};
+  bindWorkerSecretReveal();
+  const forgetWorkerSecretBtn=document.getElementById("forgetWorkerSecretBtn");if(forgetWorkerSecretBtn)forgetWorkerSecretBtn.onclick=()=>{setSavedWorkerSecret("");const input=document.getElementById("workerSecretInput");if(input){input.value="";input.type="password"}const reveal=document.getElementById("revealWorkerSecretBtn");if(reveal)reveal.textContent="Anzeigen";const remember=document.getElementById("rememberWorkerSecret");if(remember)remember.checked=false;setUploadStatus("Worker Secret wurde von diesem Gerät gelöscht.")};
   document.querySelectorAll("[data-scroll-upload]").forEach(btn=>btn.onclick=()=>document.getElementById("postMarkdownInput")?.scrollIntoView({behavior:"smooth",block:"center"}));
   bindCommandCenterForms();
   bindRankCards();
