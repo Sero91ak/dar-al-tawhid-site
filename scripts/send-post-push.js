@@ -3,6 +3,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 const {
   withNotificationIcons,
   postOneSignalNotification,
@@ -273,7 +274,10 @@ async function sendWithFallbacks(basePayload) {
 
   for (const payload of attempts) {
     try {
-      const result = await postOneSignalNotification(payload, API_KEY, { retries: 2 });
+      const result = await postOneSignalNotification({
+        ...payload,
+        idempotency_key: crypto.randomUUID()
+      }, API_KEY, { retries: 2 });
       const target = payload.include_subscription_ids ? `supabase-subscriptions:${payload.include_subscription_ids.length}` : (payload.included_segments?.[0] || "tag-filter");
       console.log(`Post-Push gesendet (${target}):`, result.text);
       return result;
@@ -340,8 +344,7 @@ async function sendWithFallbacks(basePayload) {
     ...(collapse
       ? {
           collapse_id: collapse,
-          web_push_topic: collapse.slice(0, 32),
-          idempotency_key: collapse
+          web_push_topic: collapse.slice(0, 32)
         }
       : {})
   }, SITE_URL);

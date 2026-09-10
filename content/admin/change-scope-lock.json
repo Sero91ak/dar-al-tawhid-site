@@ -90,6 +90,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "visitor-post-push-uuid-fix-2026-09-10",
+      "approvedBy": "user-explicit-es-funktioniert-nichts-ausser-in-der-app",
+      "reason": "Nutzer: Nur der Beitrag ist in der App, Push kommt nicht. GitHub-Post-Push sendet ungültige OneSignal-idempotency_key (kein UUID).",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "scripts/send-post-push.js",
+        "content/posts/"
+      ],
+      "expiresAt": "2026-09-11T23:59:00.000Z"
+    },
+    {
       "id": "visitor-posts-deploy-unlock-2026-09-10",
       "approvedBy": "user-explicit-beitrag-gepostet-push-haengt",
       "reason": "Nutzer: Beitrag in der Besucher-App gepostet, Push kam nicht. Besucher-Deploy war an posts-index.json durch die globale Sperre blockiert.",
