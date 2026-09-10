@@ -26,8 +26,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v73";
-  var MIG_KEY="darAdminSwFixV31";
+  var ADMIN_SW_CACHE="dar-admin-stats-v75";
+  var MIG_KEY="darAdminSwFixV32";
   var RELOAD_KEY="darAdminSwReloadBudget";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
@@ -433,13 +433,27 @@ button{cursor:pointer}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:0 0 10px}
 .section-head h3{margin:0;font-family:var(--serif);font-size:22px;color:var(--gold)}
 .section-head span{color:var(--muted);font-size:11px;font-weight:850;white-space:nowrap}
-.kennwort-group{margin:0 0 16px;border:1px solid rgba(239,215,142,.16);border-radius:16px;padding:12px;background:rgba(0,0,0,.16)}
-.kennwort-group h4{margin:0 0 8px;font-size:14px;color:#fff4cc}
-.kennwort-row{display:grid;gap:8px;border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:10px;margin:0 0 8px;background:rgba(0,0,0,.18)}
-.kennwort-row b{color:#fff7df;font-size:13px}
-.kennwort-row small{display:block;color:var(--soft);font-size:11px;line-height:1.4;margin-top:3px}
-.kennwort-value{width:100%;min-height:40px;border-radius:10px;border:1px solid rgba(239,215,142,.18);background:rgba(0,0,0,.28);color:#fff7df;padding:8px 10px;font-size:12px}
-.kennwort-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.kennwort-page{display:grid;gap:10px}
+.kennwort-page .section-head{margin:0}
+.kennwort-intro{margin:0;color:var(--muted);font-size:11.5px;line-height:1.45}
+.kennwort-search{width:100%;min-height:40px;border-radius:12px;border:1px solid rgba(239,215,142,.18);background:rgba(0,0,0,.22);color:#fff7df;padding:0 12px;font-size:13px}
+.kennwort-list{border:1px solid rgba(239,215,142,.16);border-radius:16px;overflow:hidden;background:rgba(4,8,14,.55)}
+.kennwort-sec{padding:11px 14px 6px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:900}
+.kennwort-item{border-top:1px solid rgba(239,215,142,.08)}
+.kennwort-item:first-child{border-top:0}
+.kennwort-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;padding:11px 14px;margin:0;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer}
+.kennwort-head b{display:block;font-family:var(--serif);font-size:16px;line-height:1.2;color:#fff7df;font-weight:700}
+.kennwort-head small{display:block;margin-top:3px;color:var(--soft);font-size:10.5px;line-height:1.35;font-weight:700}
+.kennwort-meta{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.kennwort-dot{width:7px;height:7px;border-radius:99px;background:rgba(255,255,255,.18)}
+.kennwort-dot.on{background:var(--gold);box-shadow:0 0 10px rgba(239,215,142,.45)}
+.kennwort-chevron{color:var(--gold);font-size:12px;font-weight:900}
+.kennwort-item.is-open .kennwort-chevron{transform:rotate(90deg)}
+.kennwort-body{display:none;padding:0 14px 12px}
+.kennwort-item.is-open .kennwort-body{display:grid;gap:8px}
+.kennwort-value{width:100%;min-height:38px;border-radius:10px;border:1px solid rgba(239,215,142,.18);background:rgba(0,0,0,.28);color:#fff7df;padding:8px 10px;font-size:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.kennwort-tools{display:flex;gap:7px}
+.kennwort-tools .btn{flex:1;min-height:36px;font-size:11px}
 .rank-list{display:grid;gap:9px}
 .rank-card{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:12px;align-items:center;border:1px solid var(--line2);border-radius:15px;padding:11px;background:linear-gradient(145deg,rgba(12,24,39,.90),rgba(6,8,10,.94));text-align:left;color:inherit;width:100%}
 .rank-num{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:rgba(239,215,142,.10);border:1px solid rgba(239,215,142,.20);color:var(--gold);font-weight:950}
@@ -645,7 +659,7 @@ main#panel.panel{
       <img src="/admin/admin-icon-192.png" alt="" width="48" height="48">
       <div>
         <h1>DAR Admin</h1>
-        <p><span class="status-dot"></span>Command Center · Admin v59</p>
+        <p><span class="status-dot"></span>Command Center · Admin v60</p>
       </div>
     </div>
     <div class="toolbar">
@@ -685,7 +699,7 @@ const DEFAULT_WORKER_PUBLISH_URL="https://dar-admin-publisher.sero91ak.workers.d
 const WORKER_PUBLISH_URL_KEY="darAdminWorkerPublishUrlV1";
 const WORKER_SECRET_KEY="darAdminWorkerSecretV1";
 const ADMIN_DRAFT_KEY="darAdminDraftV1";
-const ADMIN_BUILD="2026-08-22-admin-hang-fix";
+const ADMIN_BUILD="2026-09-10-kennwort-list";
 const ADMIN_PLAN_KEY="darAdminPlannedPostsV1";
 const ADMIN_NEWS_KEY="darAdminNewsDraftsV1";
 const ADMIN_REPORTS_KEY="darAdminReportsV1";
@@ -748,67 +762,136 @@ function hasSupabase(){const c=cfg();return !!(String(c.supabaseUrl||"").trim()&
 function headers(){const key=String(cfg().supabaseKey||"").trim();return{apikey:key,Authorization:"Bearer "+key}}
 function readAuth(){try{const raw=localStorage.getItem(AUTH_KEY);if(!raw)return false;const data=JSON.parse(raw);if(!data||!data.ok)return false;if(Date.now()-Number(data.ts||0)>AUTH_TTL_MS){localStorage.removeItem(AUTH_KEY);return false}return true}catch(e){return false}}
 let kennwortVaultUnlocked=false;
-let kennwortRevealIds=new Set();
-function setAuth(on){authed=!!on;if(!on){kennwortVaultUnlocked=false;kennwortRevealIds=new Set()}try{if(on)localStorage.setItem(AUTH_KEY,JSON.stringify({ok:true,ts:Date.now()}));else localStorage.removeItem(AUTH_KEY)}catch(e){}}
+let kennwortOpenId="";
+let kennwortQuery="";
+let kennwortComposerOpen=false;
+const KENNWORT_VAULT_ALIASES={
+  "github-worker-token":"github-token",
+  "github-onesignal-key":"onesignal-api-key",
+  "github-telegram-token":"telegram-bot-token",
+  "github-cf-token":"cloudflare-api-token",
+  "github-cf-account":"cloudflare-account-id"
+};
+const KENNWORT_LIVE_IDS=new Set(["admin-pin","site-url","worker-url","worker-health-url","supabase-url","supabase-anon","onesignal-app-id","github-repo"]);
+function setAuth(on){authed=!!on;if(!on){kennwortVaultUnlocked=false;kennwortOpenId="";kennwortComposerOpen=false}try{if(on)localStorage.setItem(AUTH_KEY,JSON.stringify({ok:true,ts:Date.now()}));else localStorage.removeItem(AUTH_KEY)}catch(e){}}
 function loadKennwortVault(){
   try{
     const data=JSON.parse(localStorage.getItem(ADMIN_KENNWORT_VAULT_KEY)||"{}");
-    return data&&typeof data==="object"?data:{entries:{}};
+    const vault=data&&typeof data==="object"?data:{entries:{}};
+    if(!vault.entries||typeof vault.entries!=="object")vault.entries={};
+    let changed=false;
+    Object.keys(KENNWORT_VAULT_ALIASES).forEach(oldId=>{
+      const nextId=KENNWORT_VAULT_ALIASES[oldId];
+      if(!vault.entries[oldId])return;
+      if(!vault.entries[nextId]||!String(vault.entries[nextId].value||"").trim())vault.entries[nextId]=vault.entries[oldId];
+      delete vault.entries[oldId];
+      changed=true;
+    });
+    KENNWORT_LIVE_IDS.forEach(id=>{
+      if(vault.entries[id]){delete vault.entries[id];changed=true}
+    });
+    if(vault.entries["worker-secret"]){
+      const secret=String(vault.entries["worker-secret"].value||"").trim();
+      if(secret&&!savedWorkerSecret())setSavedWorkerSecret(secret);
+      delete vault.entries["worker-secret"];
+      changed=true;
+    }
+    if(changed)saveKennwortVault(vault);
+    return vault;
   }catch(e){return{entries:{}}}
 }
 function saveKennwortVault(vault){
   try{localStorage.setItem(ADMIN_KENNWORT_VAULT_KEY,JSON.stringify(vault||{entries:{}}))}catch(e){}
 }
+function kennwortHealthFlag(key){
+  const h=workerPublishHealth||{};
+  return h[key]===true;
+}
 function kennwortBuiltinCatalog(){
+  /* Agent: neue Passwörter, Tokens, IPs, Keywords nur hier — ein Slot, aktueller Wert, alten ersetzen. */
   const c=cfg();
   return [
-    {id:"admin-pin",group:"Admin-App",label:"Admin-Login-Passwort",hint:"Öffnet das Command Center auf diesem Gerät.",builtin:true,get:()=>String(c.adminPin||"")},
-    {id:"worker-url",group:"Cloudflare Worker",label:"Worker-URL (Publish)",hint:"dar-admin-publisher · Veröffentlichen.",builtin:true,get:()=>workerPublishUrl()},
-    {id:"worker-health-url",group:"Cloudflare Worker",label:"Worker Health-URL",hint:"Status, ob Secrets am Worker gesetzt sind (ohne die Werte zu zeigen).",builtin:true,get:()=>"https://dar-admin-publisher.sero91ak.workers.dev/health"},
-    {id:"worker-secret",group:"Cloudflare Worker",label:"Admin Worker Secret",hint:"GitHub-Secret-Name: ADMIN_PUBLISH_SECRET. Wert nur, wenn du ihn auf diesem Gerät gespeichert hast.",builtin:true,get:()=>savedWorkerSecret()},
-    {id:"supabase-url",group:"Supabase",label:"Supabase URL",hint:"Statistik und Quiz.",builtin:true,get:()=>String(c.supabaseUrl||"")},
-    {id:"supabase-anon",group:"Supabase",label:"Supabase Anon-Key",hint:"Öffentlicher App-Key (kein Service-Role).",builtin:true,get:()=>String(c.supabaseKey||"")},
-    {id:"onesignal-app-id",group:"OneSignal Push",label:"OneSignal App-ID",hint:"Öffentliche App-ID der Besucher-Push.",builtin:true,get:()=>"786d7cd6-0455-4434-ab14-0c10a7bc6b1e"},
-    {id:"github-repo",group:"GitHub",label:"Repository",hint:"Code und Deploys.",builtin:true,get:()=>"Sero91ak/dar-al-tawhid-site"},
-    {id:"github-worker-token",group:"GitHub Actions Secrets",label:"WORKER_GITHUB_TOKEN / GITHUB_TOKEN",hint:"Worker schreibt pending-pushes. Wert nur lokal eintragen — nicht ins Repo.",githubName:"WORKER_GITHUB_TOKEN"},
-    {id:"github-onesignal-key",group:"GitHub Actions Secrets",label:"ONESIGNAL_API_KEY_NEW",hint:"Beitrags-Push über GitHub Action / Worker.",githubName:"ONESIGNAL_API_KEY_NEW"},
-    {id:"github-telegram-token",group:"GitHub Actions Secrets",label:"TELEGRAM_BOT_TOKEN",hint:"Telegram-Versand am Worker.",githubName:"TELEGRAM_BOT_TOKEN"},
-    {id:"github-cf-token",group:"Cloudflare Dashboard / GitHub",label:"CLOUDFLARE_API_TOKEN",hint:"Wrangler-Deploy. Nur lokal merken.",githubName:"CLOUDFLARE_API_TOKEN"},
-    {id:"github-cf-account",group:"Cloudflare Dashboard / GitHub",label:"CLOUDFLARE_ACCOUNT_ID",hint:"Cloudflare-Konto-ID. Nur lokal merken.",githubName:"CLOUDFLARE_ACCOUNT_ID"}
+    {id:"admin-pin",group:"Admin-App",label:"Admin-Login",hint:"Aktuelles Command-Center-Passwort.",live:true,get:()=>String(c.adminPin||"")},
+    {id:"site-url",group:"Admin-App",label:"App-Adresse",hint:"Öffentliche Domain.",live:true,get:()=>SITE_ORIGIN},
+    {id:"worker-url",group:"Cloudflare Worker",label:"Publish-URL",hint:"Nur diese URL gilt zum Veröffentlichen.",live:true,get:()=>workerPublishUrl()},
+    {id:"worker-health-url",group:"Cloudflare Worker",label:"Health-URL",hint:"Zeigt, ob Secrets am Worker gesetzt sind.",live:true,get:()=>workerHealthUrl()},
+    {id:"worker-secret",group:"Cloudflare Worker",label:"ADMIN_PUBLISH_SECRET",hint:"Ein Worker-Passwort. GitHub-Secret gleichen Namens.",githubName:"ADMIN_PUBLISH_SECRET",workerFlag:"hasAdminSecret",get:()=>savedWorkerSecret()},
+    {id:"supabase-url",group:"Supabase",label:"Projekt-URL",hint:"Statistik und Quiz.",live:true,get:()=>String(c.supabaseUrl||"")},
+    {id:"supabase-anon",group:"Supabase",label:"Anon-Key",hint:"Öffentlicher App-Key, kein Service-Role.",live:true,get:()=>String(c.supabaseKey||"")},
+    {id:"onesignal-app-id",group:"OneSignal",label:"App-ID",hint:"Aktuelle Besucher-Push-App.",live:true,get:()=>"786d7cd6-0455-4434-ab14-0c10a7bc6b1e"},
+    {id:"onesignal-api-key",group:"OneSignal",label:"ONESIGNAL_API_KEY_NEW",hint:"Nur dieser Key gilt. Alter ONESIGNAL_API_KEY ist Fallback, nicht extra merken.",githubName:"ONESIGNAL_API_KEY_NEW",workerFlag:"hasOneSignalKey"},
+    {id:"github-repo",group:"GitHub",label:"Repository",hint:"Aktuelles Repo.",live:true,get:()=>"Sero91ak/dar-al-tawhid-site"},
+    {id:"github-token",group:"GitHub",label:"GITHUB_TOKEN",hint:"Ein Token: Actions-Name WORKER_GITHUB_TOKEN, am Worker GITHUB_TOKEN.",githubName:"WORKER_GITHUB_TOKEN",workerFlag:"hasGithubToken"},
+    {id:"telegram-bot-token",group:"Telegram",label:"TELEGRAM_BOT_TOKEN",hint:"Bot für Kanalversand.",githubName:"TELEGRAM_BOT_TOKEN",workerFlag:"hasTelegramToken"},
+    {id:"telegram-channel-id",group:"Telegram",label:"TELEGRAM_CHANNEL_ID",hint:"Aktueller Zielkanal.",githubName:"TELEGRAM_CHANNEL_ID",get:()=>String((workerPublishHealth&&workerPublishHealth.telegramChannel)||"")},
+    {id:"telegram-channel-username",group:"Telegram",label:"TELEGRAM_CHANNEL_USERNAME",hint:"Kanal-Benutzername.",githubName:"TELEGRAM_CHANNEL_USERNAME"},
+    {id:"telegram-topics-chat-id",group:"Telegram",label:"TELEGRAM_TOPICS_CHAT_ID",hint:"Forum/Topics. TELEGRAM_FORUM_CHAT_ID ist nur Fallback.",githubName:"TELEGRAM_TOPICS_CHAT_ID",get:()=>String((workerPublishHealth&&workerPublishHealth.telegramTopicsChatId)||"")},
+    {id:"cloudflare-api-token",group:"Cloudflare",label:"CLOUDFLARE_API_TOKEN",hint:"Wrangler-Deploy. Ein Token.",githubName:"CLOUDFLARE_API_TOKEN"},
+    {id:"cloudflare-account-id",group:"Cloudflare",label:"CLOUDFLARE_ACCOUNT_ID",hint:"Cloudflare-Konto.",githubName:"CLOUDFLARE_ACCOUNT_ID"},
+    {id:"video-fal-key",group:"KI-Video-Studio",label:"FAL_KEY",hint:"Bild/Video-Modell. FAL_API_KEY ist nur Fallback.",githubName:"FAL_KEY",workerFlag:"videoStudioFal"},
+    {id:"video-elevenlabs-key",group:"KI-Video-Studio",label:"ELEVENLABS_API_KEY",hint:"Stimme im Video-Studio.",githubName:"ELEVENLABS_API_KEY",workerFlag:"videoStudioVoice"},
+    {id:"video-elevenlabs-voice",group:"KI-Video-Studio",label:"ELEVENLABS_VOICE_ID",hint:"Aktuelle Stimme. DAR_MALE_VOICE_ID ist Fallback.",githubName:"ELEVENLABS_VOICE_ID"},
+    {id:"video-shotstack-key",group:"KI-Video-Studio",label:"SHOTSTACK_API_KEY",hint:"Schnitt am Worker.",githubName:"SHOTSTACK_API_KEY",workerFlag:"videoStudioShotstack"},
+    {id:"video-studio-signing",group:"KI-Video-Studio",label:"VIDEO_STUDIO_SIGNING_SECRET",hint:"Signatur der Studio-Jobs.",githubName:"VIDEO_STUDIO_SIGNING_SECRET",workerFlag:"videoStudioSigning"}
   ];
+}
+function kennwortMatchBuiltin(label,githubName){
+  const needle=String(label||"").trim().toLowerCase();
+  const gh=String(githubName||"").trim().toUpperCase();
+  return kennwortBuiltinCatalog().find(item=>{
+    if(gh&&String(item.githubName||"").toUpperCase()===gh)return true;
+    const names=[item.id,item.label,item.githubName].filter(Boolean).map(x=>String(x).toLowerCase());
+    return names.includes(needle);
+  })||null;
 }
 function kennwortMergedRows(){
   const vault=loadKennwortVault();
   const entries=vault.entries&&typeof vault.entries==="object"?vault.entries:{};
+  const builtinIds=new Set();
   const builtin=kennwortBuiltinCatalog().map(item=>{
-    const overlay=entries[item.id];
-    const builtinValue=typeof item.get==="function"?String(item.get()||""):"";
-    const value=overlay&&overlay.value!=null&&String(overlay.value)!==""?String(overlay.value):builtinValue;
-    return {...item,value,custom:false,hasValue:!!String(value||"").trim()};
+    builtinIds.add(item.id);
+    const live=typeof item.get==="function"?String(item.get()||"").trim():"";
+    const overlay=(!item.live&&entries[item.id]&&String(entries[item.id].value||"").trim())?String(entries[item.id].value).trim():"";
+    const value=live||overlay;
+    const workerSet=item.workerFlag?kennwortHealthFlag(item.workerFlag):false;
+    return {...item,value,custom:false,hasValue:!!value,workerSet};
   });
-  const custom=Object.keys(entries).filter(id=>!builtin.some(item=>item.id===id)).map(id=>{
+  const custom=Object.keys(entries).filter(id=>!builtinIds.has(id)&&!KENNWORT_VAULT_ALIASES[id]).map(id=>{
     const row=entries[id]||{};
+    const matched=kennwortMatchBuiltin(row.label,row.githubName);
+    if(matched)return null;
     return{
       id,
       group:row.group||"Eigene Einträge",
       label:row.label||id,
-      hint:row.hint||"Nur auf diesem Admin-Gerät gespeichert.",
+      hint:row.hint||"Nur auf diesem Gerät.",
       value:String(row.value||""),
       custom:true,
-      hasValue:!!String(row.value||"").trim()
+      hasValue:!!String(row.value||"").trim(),
+      workerSet:false
     };
-  });
+  }).filter(Boolean);
   return builtin.concat(custom);
 }
 function kennwortGroupedRows(){
+  const q=String(kennwortQuery||"").trim().toLowerCase();
   const groups=[];
   const map=new Map();
   kennwortMergedRows().forEach(row=>{
+    if(q){
+      const hay=[row.group,row.label,row.hint,row.githubName,row.id].filter(Boolean).join(" ").toLowerCase();
+      if(!hay.includes(q))return;
+    }
     const key=row.group||"Weitere";
     if(!map.has(key)){map.set(key,[]);groups.push(key)}
     map.get(key).push(row);
   });
   return groups.map(name=>({name,rows:map.get(name)}));
+}
+function applyKennwortLive(id,value){
+  const v=String(value||"").trim();
+  if(id==="worker-secret")setSavedWorkerSecret(v);
+  if(id==="worker-url")saveWorkerPublishUrl(v);
 }
 function checkPin(pin){const want=String(cfg().adminPin||"").trim();const got=String(pin||"").trim();return want&&got.toLowerCase()===want.toLowerCase()}
 function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),1800)}
@@ -1280,32 +1363,47 @@ function bindWorkerSecretReveal(){
 }
 function renderKennwoerter(){
   const groups=kennwortGroupedRows();
-  return `<section class="split">
-    <div class="panel">
-      <div class="section-head"><h3>Kennwörter &amp; Codes</h3><span>Face ID · dieses Gerät</span></div>
-      <p class="upload-status" style="margin:0 0 12px">Alles, was die Admin-App kennt oder du hier einträgst: sortiert nach Zugehörigkeit. Anzeigen und Kopieren nur nach <b>Face ID / Geräte-Code</b>. GitHub- und Cloudflare-Token liegen nicht im Repo — du trägst sie einmal lokal ein. Beim Abmelden wird die Anzeige wieder gesperrt.</p>
-      ${groups.map(group=>`<div class="kennwort-group"><h4>${esc(group.name)}</h4>${group.rows.map(row=>{
-        const shown=kennwortVaultUnlocked&&kennwortRevealIds.has(row.id);
+  const rows=kennwortMergedRows();
+  const known=rows.filter(r=>r.hasValue||r.workerSet).length;
+  return `<section class="kennwort-page">
+    <div class="section-head"><h3>Kennwörter</h3><span>Face ID · ${known} aktuell</span></div>
+    <p class="kennwort-intro">Eine Liste, ein gültiger Wert je Eintrag. Antippen öffnet. Anzeigen und Kopieren nach Face ID. Tokens aus GitHub/Cloudflare stehen nicht im Code — nur lokal, überschreibt den alten Wert.</p>
+    <input class="kennwort-search" id="kennwortSearch" type="search" placeholder="Suchen…" value="${esc(kennwortQuery)}" autocomplete="off">
+    <div class="kennwort-list">
+      ${groups.map(group=>`<div class="kennwort-sec">${esc(group.name)}</div>${group.rows.map(row=>{
+        const open=kennwortOpenId===row.id;
+        const shown=open&&kennwortVaultUnlocked;
+        const status=row.hasValue?"auf diesem Gerät":(row.workerSet?"am Worker gesetzt":"noch leer");
         const display=shown?(row.value||""):(row.hasValue?"••••••••••••":"");
-        return `<div class="kennwort-row" data-kennwort-id="${esc(row.id)}">
-          <div><b>${esc(row.label)}</b><small>${esc(row.hint||"")}${row.githubName?` · Secret-Name: ${esc(row.githubName)}`:""}${row.hasValue?"":" · noch kein Wert auf diesem Gerät"}</small></div>
-          <input class="kennwort-value" data-kennwort-input="${esc(row.id)}" type="${shown?"text":"password"}" value="${esc(display)}" ${shown||!row.hasValue?"":"readonly"} placeholder="${row.hasValue?"Nach Face ID sichtbar":"Wert hier eintragen und speichern"}" autocomplete="off">
-          <div class="kennwort-actions">
-            <button class="btn" type="button" data-kennwort-reveal="${esc(row.id)}">${shown?"Verbergen":"Anzeigen"}</button>
-            <button class="btn primary" type="button" data-kennwort-copy="${esc(row.id)}">Kopieren</button>
-          </div>
-          <div class="kennwort-actions">
-            <button class="btn" type="button" data-kennwort-save="${esc(row.id)}">Auf Gerät speichern</button>
-            ${row.custom?`<button class="btn" type="button" data-kennwort-delete="${esc(row.id)}">Eintrag löschen</button>`:`<span></span>`}
+        return `<div class="kennwort-item${open?" is-open":""}" data-kennwort-id="${esc(row.id)}">
+          <button class="kennwort-head" type="button" data-kennwort-open="${esc(row.id)}">
+            <span><b>${esc(row.label)}</b><small>${esc(status)}${row.githubName?" · "+row.githubName:""}</small></span>
+            <span class="kennwort-meta"><span class="kennwort-dot${row.hasValue||row.workerSet?" on":""}"></span><span class="kennwort-chevron">›</span></span>
+          </button>
+          <div class="kennwort-body">
+            <input class="kennwort-value" data-kennwort-input="${esc(row.id)}" type="${shown?"text":"password"}" value="${esc(display)}" ${row.live&&row.hasValue?"readonly":""} placeholder="${row.live?"Gilt in der laufenden App":"Aktuellen Wert eintragen"}" autocomplete="off">
+            <div class="kennwort-tools">
+              <button class="btn" type="button" data-kennwort-reveal="${esc(row.id)}">${shown?"Verbergen":"Anzeigen"}</button>
+              <button class="btn primary" type="button" data-kennwort-copy="${esc(row.id)}">Kopieren</button>
+            </div>
+            <div class="kennwort-tools">
+              ${row.live?`<span class="kennwort-intro">Nur der App-Wert gilt.</span>`:`<button class="btn" type="button" data-kennwort-save="${esc(row.id)}">Als aktuell speichern</button>`}
+              ${row.custom?`<button class="btn" type="button" data-kennwort-delete="${esc(row.id)}">Löschen</button>`:""}
+            </div>
           </div>
         </div>`;
-      }).join("")}</div>`).join("")}
-      <div class="kennwort-group">
-        <h4>Eigenen Code hinzufügen</h4>
-        <input class="field" id="kennwortNewGroup" placeholder="Gruppe, z. B. Telegram" style="margin-bottom:8px">
-        <input class="field" id="kennwortNewLabel" placeholder="Name, z. B. Bot-Token" style="margin-bottom:8px">
-        <input class="field" id="kennwortNewValue" type="password" placeholder="Wert" autocomplete="off" style="margin-bottom:8px">
-        <button class="btn primary" id="kennwortAddBtn" type="button">Hinzufügen (nur dieses Gerät)</button>
+      }).join("")}`).join("")}
+      <div class="kennwort-item${kennwortComposerOpen?" is-open":""}">
+        <button class="kennwort-head" type="button" id="kennwortComposerToggle">
+          <span><b>Neuer Eintrag</b><small>Gleicher Name überschreibt den alten Wert</small></span>
+          <span class="kennwort-meta"><span class="kennwort-chevron">›</span></span>
+        </button>
+        <div class="kennwort-body">
+          <input class="field" id="kennwortNewGroup" placeholder="Gruppe" style="margin-bottom:8px">
+          <input class="field" id="kennwortNewLabel" placeholder="Name oder Secret-Name" style="margin-bottom:8px">
+          <input class="field" id="kennwortNewValue" type="password" placeholder="Aktueller Wert" autocomplete="off" style="margin-bottom:8px">
+          <button class="btn primary" id="kennwortAddBtn" type="button">Speichern</button>
+        </div>
       </div>
     </div>
   </section>`;
@@ -1313,23 +1411,48 @@ function renderKennwoerter(){
 function bindKennwoerter(){
   if(currentTab!=="kennwoerter")return;
   const persist=async(id,value)=>{
+    const row=kennwortMergedRows().find(item=>item.id===id)||{};
+    if(row.live)return;
+    applyKennwortLive(id,value);
+    if(id==="worker-secret"||id==="worker-url")return;
     const vault=loadKennwortVault();
     if(!vault.entries)vault.entries={};
-    const row=kennwortMergedRows().find(item=>item.id===id)||{};
     vault.entries[id]={group:row.group||"Eigene Einträge",label:row.label||id,hint:row.hint||"",githubName:row.githubName||"",value:String(value||"")};
     saveKennwortVault(vault);
   };
+  const search=document.getElementById("kennwortSearch");
+  if(search){
+    search.oninput=()=>{
+      kennwortQuery=search.value;
+      const pos=search.selectionStart;
+      renderShell();
+      const next=document.getElementById("kennwortSearch");
+      if(next){next.focus();try{next.setSelectionRange(pos,pos)}catch(e){}}
+    };
+  }
+  document.querySelectorAll("[data-kennwort-open]").forEach(btn=>{
+    btn.onclick=async()=>{
+      const id=btn.getAttribute("data-kennwort-open");
+      if(kennwortOpenId===id){kennwortOpenId="";renderShell();return}
+      const row=kennwortMergedRows().find(item=>item.id===id);
+      if(row&&row.hasValue){
+        const ok=await ensureKennwortVaultUnlocked();
+        if(!ok){toast("Nicht entsperrt");return}
+      }
+      kennwortOpenId=id;
+      kennwortComposerOpen=false;
+      renderShell();
+    };
+  });
+  const composer=document.getElementById("kennwortComposerToggle");
+  if(composer)composer.onclick=()=>{kennwortComposerOpen=!kennwortComposerOpen;if(kennwortComposerOpen)kennwortOpenId="";renderShell()};
   document.querySelectorAll("[data-kennwort-reveal]").forEach(btn=>{
     btn.onclick=async()=>{
       const id=btn.getAttribute("data-kennwort-reveal");
-      if(kennwortRevealIds.has(id)){
-        kennwortRevealIds.delete(id);
-        renderShell();
-        return;
-      }
+      if(kennwortOpenId===id&&kennwortVaultUnlocked){kennwortOpenId="";renderShell();return}
       const ok=await ensureKennwortVaultUnlocked();
       if(!ok){toast("Nicht entsperrt");return}
-      kennwortRevealIds.add(id);
+      kennwortOpenId=id;
       renderShell();
     };
   });
@@ -1352,10 +1475,10 @@ function bindKennwoerter(){
       if(!ok){toast("Nicht entsperrt");return}
       const input=document.querySelector('[data-kennwort-input="'+String(id).replace(/"/g,"")+'"]');
       const value=String(input&&input.value||"").trim();
-      if(!value||/^•+$/.test(value)){toast("Zuerst Anzeigen oder einen neuen Wert eintragen");return}
+      if(!value||/^•+$/.test(value)){toast("Zuerst Anzeigen oder neuen Wert eintragen");return}
       await persist(id,value);
-      if(id==="worker-secret")setSavedWorkerSecret(value);
-      toast("Auf diesem Gerät gespeichert");
+      kennwortOpenId=id;
+      toast("Aktueller Wert gespeichert");
       renderShell();
     };
   });
@@ -1365,7 +1488,7 @@ function bindKennwoerter(){
       const vault=loadKennwortVault();
       if(vault.entries)delete vault.entries[id];
       saveKennwortVault(vault);
-      kennwortRevealIds.delete(id);
+      if(kennwortOpenId===id)kennwortOpenId="";
       toast("Eintrag gelöscht");
       renderShell();
     };
@@ -1378,13 +1501,19 @@ function bindKennwoerter(){
     const label=String(document.getElementById("kennwortNewLabel")?.value||"").trim();
     const value=String(document.getElementById("kennwortNewValue")?.value||"").trim();
     if(!label||!value){toast("Name und Wert fehlen");return}
-    const id="custom-"+Date.now().toString(36);
+    const matched=kennwortMatchBuiltin(label,label);
+    const id=matched?matched.id:"custom-"+label.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+    if(matched&&matched.live){toast("Dieser Wert gilt in der App — nicht doppelt anlegen");return}
     const vault=loadKennwortVault();
     if(!vault.entries)vault.entries={};
-    vault.entries[id]={group,label,hint:"Selbst angelegt auf diesem Gerät.",value};
+    const row=matched||{group,label,hint:"Nur aktueller Wert.",githubName:""};
+    vault.entries[id]={group:row.group||group,label:row.label||label,hint:row.hint||"",githubName:row.githubName||"",value};
+    applyKennwortLive(id,value);
+    if(id==="worker-secret")delete vault.entries[id];
     saveKennwortVault(vault);
-    kennwortRevealIds.add(id);
-    toast("Eintrag gespeichert");
+    kennwortOpenId=id;
+    kennwortComposerOpen=false;
+    toast(matched?"Überschrieben — nur dieser Wert gilt":"Gespeichert");
     renderShell();
   };
 }
@@ -1470,7 +1599,7 @@ function rankCard(row,idx,mode="score"){
 }
 function bindRankCards(){document.querySelectorAll(".rank-card[data-href]").forEach(card=>{card.onclick=()=>window.open(card.getAttribute("data-href"),"_blank","noopener")})}
 function enhanceAdminCollapsibles(){
-  if(currentTab==="quellen"||currentTab==="ordner")return;
+  if(currentTab==="quellen"||currentTab==="ordner"||currentTab==="kennwoerter")return;
   document.querySelectorAll("#panel .panel,#panel .hero-card,#panel .preview-box").forEach((card,index)=>{
     if(card.dataset.collapseReady==="1")return;
     if(card.hasAttribute("data-no-collapse"))return;
@@ -2807,7 +2936,7 @@ function renderShell(){
   if(currentTab==="live-edit"&&window.DARLiveEdit)window.DARLiveEdit.bindLiveEditTab();
   if(currentTab==="ordner"&&!ordnerCatalogLoaded&&!ordnerBusy)ensureOrdnerData(false).then(()=>{if(currentTab==="ordner")renderShell()});
   if(currentTab==="quellen"&&!quellenCatalogLoaded&&!quellenCatalogBusy)ensureQuellenCatalog(false).then(()=>{if(currentTab==="quellen")renderShell()});
-  if(currentTab==="quellen"&&!workerPublishHealth)refreshWorkerPublishHealth(true).then(()=>{if(currentTab==="quellen")renderShell()});
+  if((currentTab==="quellen"||currentTab==="kennwoerter")&&!workerPublishHealth)refreshWorkerPublishHealth(true).then(()=>{if(currentTab==="quellen"||currentTab==="kennwoerter")renderShell()});
   if(currentTab==="kurzlinks"&&!shortlinksRegistryLoaded&&!shortlinksRegistryBusy)ensureShortlinksRegistry(false).then(()=>{if(currentTab==="kurzlinks"){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
   if(currentTab==="zakat"&&!zakatAdminLoaded)ensureZakatAdminReady().then(()=>{if(currentTab==="zakat")renderShell()}).catch(()=>{});
   if(currentTab==="feed"&&window.DARFeedAdmin&&!feedLoadedFlag())ensureFeedAdminData(false).then(()=>{if(currentTab==="feed")renderShell()}).catch(()=>{});
@@ -2834,12 +2963,13 @@ function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
   if(!skipStack)adminNavStack.push(currentTab);
   currentTab=tab;
   restartRefreshInterval();
-  if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"||tab==="ordner"||tab==="quellen"||tab==="kurzlinks"||tab==="zakat"||tab==="feed"||tab==="quiz-stats"){
+  if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"||tab==="ordner"||tab==="quellen"||tab==="kurzlinks"||tab==="zakat"||tab==="feed"||tab==="quiz-stats"||tab==="kennwoerter"){
     if(tab==="ordner")ensureOrdnerData(false).then(()=>{if(currentTab===tab)renderShell()});
     if(tab==="quellen"){
       refreshWorkerPublishHealth(true).then(()=>{if(currentTab===tab)renderShell()});
       ensureQuellenCatalog(false).then(()=>{if(currentTab===tab)renderShell()});
     }
+    if(tab==="kennwoerter")refreshWorkerPublishHealth(true).then(()=>{if(currentTab===tab)renderShell()});
     if(tab==="kurzlinks")ensureShortlinksRegistry(false).then(()=>{if(currentTab===tab){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
     if(tab==="zakat")ensureZakatAdminReady().then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
     if(tab==="feed")ensureFeedAdminData(true).then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
@@ -2893,7 +3023,7 @@ function renderStart(ctx){
     ${folderCard("④","Ordner","Kategorien sortieren und Texte korrigieren.","ordner","Studio")}
     ${folderCard("⑤","Feed / Im Fokus","Fokus-Inhalte steuern.","feed","Feed")}
     ${folderCard("⑥","Bibliothek","PDFs und Titel verwalten.","bibliothek","Bibliothek")}
-    ${folderCard("⑦","Kennwörter","Passwörter, Tokens, Codes.","kennwoerter","Face ID")}
+    ${folderCard("⑦","Kennwörter","Liste · aktuell gültig.","kennwoerter","Face ID")}
     ${folderCard("⑧","Einstellungen","Worker und Technik.","settings","Admin")}
     ${folderCard("⑨","Besucher","Live-Zahlen und Aufrufe.","besucher",`${Number(ctx.live.live_now||0)} live`)}
     ${folderCard("⑩","Quiz-Statistik","Nutzer und Fragen.","quiz-stats","Hinten")}
