@@ -63,7 +63,7 @@ Die Systeme sind **einzelne Spuren** und dürfen einander nicht überschreiben:
 
 Geschützt durch `content/admin/post-push-hang-lock.json` und `scripts/post-push-hang-guard.js`. Menschliche Zeiten: **Europe/Berlin**.
 
-Der Besucher-Beitrags-Push darf **nicht hängen** (Deploy-Block, Secret-Wipe, ungültige OneSignal-Keys). Bei Beschädigung repariert der Workflow **Post Push Hang Watchdog** autonom (alle 5 Minuten, bei `pending-pushes.json` und nach Besucher-/Publisher-Deploy). Gebets-/Tages-/Jumuʿah-Push bleiben getrennte Spuren.
+Der Besucher-Beitrags-Push darf **nicht hängen**. Der Workflow **Post Push Hang Watchdog** läuft **nicht** alle 5 Minuten und stößt **keine** extra Cloudflare-Deploys an (Kostenfalle). Nachsenden nur nach erfolgreichem Besucher-Deploy oder manuell. Gebets-/Tages-/Jumuʿah-Push und der bestehende Worker-Cron bleiben getrennte Spuren.
 
 ## Repo-Integritäts-Schutz (streng – nicht verletzen)
 

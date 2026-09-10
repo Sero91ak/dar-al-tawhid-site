@@ -86,10 +86,23 @@ function runPostPushHangGuard() {
   ok("Worker-Pending-Pfad vorhanden");
 
   const workflow = read(".github/workflows/post-push-hang-watchdog.yml");
-  for (const needle of [MARKER, "STUCK_REPAIR", "*/5 * * * *", "Deploy Admin Publisher Worker", "Deploy Besucher-App"]) {
+  for (const needle of [MARKER, "STUCK_REPAIR", "POST_PUSH_NO_CF_POLL"]) {
     if (!workflow.includes(needle)) fail(`Watchdog-Workflow fehlt „${needle}“`);
   }
-  ok("Hang-Watchdog-Workflow vorhanden");
+  if (/\n\s+schedule:/.test(workflow) || workflow.includes("*/5 * * * *") || workflow.includes("cron:")) {
+    fail("Hang-Watchdog darf keinen GitHub-Cron haben (Cloudflare-Kostenfalle)");
+  } else {
+    ok("Kein 5-Minuten-GitHub-Cron");
+  }
+  if (workflow.includes("gh workflow run")) {
+    fail("Hang-Watchdog darf keine extra Cloudflare-Deploys auslösen");
+  } else {
+    ok("Kein extra Cloudflare-Deploy aus dem Hang-Watchdog");
+  }
+  if (lock.autoHeal?.noCloudflarePoll !== true || lock.autoHeal?.noGithubIntervalCron !== true) {
+    fail("Lock muss noCloudflarePoll + noGithubIntervalCron true haben");
+  }
+  ok("Hang-Watchdog nur ereignisgesteuert");
 
   const scope = JSON.parse(read("content/admin/change-scope-lock.json"));
   const always = Array.isArray(scope.alwaysAllowed) ? scope.alwaysAllowed : [];

@@ -15,14 +15,17 @@
     "Live-Check: öffentlicher Index + Beitragsdatei müssen online sein, dann sofort senden",
     "OneSignal idempotency_key muss UUID sein",
     "content/posts/ und pending-pushes.json bleiben alwaysAllowed, damit Deploy und Queue nicht an der Globalsperre hängen",
-    "Worker-Secrets (GitHub, Admin, OneSignal) werden bei Wipe sofort zurückgesetzt",
+    "Worker-Secrets nicht per 5-Minuten-GitHub-Cron auf Cloudflare neu deployen (Kostenfalle)",
     "Menschliche Zeiten für diesen Ablauf: Europe/Berlin"
   ],
   "autoHeal": {
     "watchdogWorkflow": "Post Push Hang Watchdog",
-    "secretWatchdogWorkflow": "Push Worker Secret Watchdog",
-    "visitorDeployWorkflow": "Deploy Besucher-App (Cloudflare Workers)",
-    "publisherDeployWorkflow": "Deploy Admin Publisher Worker",
-    "intervalMinutes": 5
+    "mode": "event-driven",
+    "noCloudflarePoll": true,
+    "noGithubIntervalCron": true,
+    "triggers": [
+      "workflow_dispatch",
+      "workflow_run: Deploy Besucher-App success"
+    ]
   }
 }
