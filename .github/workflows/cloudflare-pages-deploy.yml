@@ -10,6 +10,7 @@ on:
       - version.json
       - content/updates/daily.json
       - content/posts/**
+      - content/admin/change-scope-lock.json
       - service-worker.js
       - manifest.json
       - assets/**

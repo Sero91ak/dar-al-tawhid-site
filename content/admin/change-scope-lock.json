@@ -18,6 +18,7 @@
     "test/assets/library/pdfs/",
     "test/assets/library/covers/",
     "content/admin/pending-pushes.json",
+    "content/posts/",
     "content/admin/push-triggers/",
     "admin/index.html",
     "admin/quiz-stats-manager.js",
@@ -88,6 +89,16 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "visitor-posts-deploy-unlock-2026-09-10",
+      "approvedBy": "user-explicit-beitrag-gepostet-push-haengt",
+      "reason": "Nutzer: Beitrag in der Besucher-App gepostet, Push kam nicht. Besucher-Deploy war an posts-index.json durch die globale Sperre blockiert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        ".github/workflows/cloudflare-pages-deploy.yml"
+      ],
+      "expiresAt": "2026-09-11T23:59:00.000Z"
+    },
     {
       "id": "push-lanes-hard-lock-live-2026-09-09",
       "approvedBy": "user-explicit-push-getrennt-sperre-sofort-live",
