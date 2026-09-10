@@ -96,7 +96,8 @@
       "paths": [
         "content/admin/change-scope-lock.json",
         "scripts/send-post-push.js",
-        "content/posts/"
+        "content/posts/",
+        "cloudflare/post-push-admin.js"
       ],
       "expiresAt": "2026-09-11T23:59:00.000Z"
     },

@@ -1,4 +1,5 @@
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
+/* 2026-09-10 post-push: reclaim dar-admin-publisher secrets after Workers Builds wipe. */
 
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
