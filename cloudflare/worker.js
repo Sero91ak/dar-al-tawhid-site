@@ -3431,6 +3431,7 @@ function buildNewsPushUrl(env, { newsId, nav, value }) {
   const id = String(newsId || "").trim();
   const targetNav = String(nav || "").trim();
   const targetValue = String(value || "").trim();
+  if (targetNav === "appstore") return "https://apps.apple.com/de/app/id6805988753";
   if (targetNav && targetValue && targetNav !== "news-detail") {
     return `${site}/#${targetNav}/${encodeURIComponent(targetValue)}`;
   }
