@@ -23,6 +23,7 @@ function buildNewsPushUrl({ newsId, nav, value }) {
   const id = String(newsId || "").trim();
   const targetNav = String(nav || "").trim();
   const targetValue = String(value || "").trim();
+  if (targetNav === "appstore") return "https://apps.apple.com/de/app/id6805988753";
   if (targetNav === "zakat") return `${site}/#zakat`;
   if (targetNav === "bibliothek") return `${site}/#bibliothek`;
   if (targetNav === "propheten" || targetNav === "prophets") return `${site}/#propheten`;
