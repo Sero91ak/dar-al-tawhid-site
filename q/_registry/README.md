@@ -25,18 +25,19 @@ Diese Registry hier ist die technische Verwaltung für Nummern, Vorlage und Zuor
 
 Jede nummerierte Quellenseite muss diesen Aufbau verwenden:
 
-1. Die Seite ist erklärend aufgebaut: Aussage, Einordnung, Nutzen/Abgrenzung, direkte Quellenstellen und Kurzfazit.
-2. Quellenangaben nennen primär Originalwerke und frühe/klassische Quellen: Qurʾān, Sunnah, Ṣaḥābah, Tābiʿīn, Salaf, Hadithwerke, Tafsīrwerke, Atharwerke und anerkannte klassische Sharḥ-Werke.
-3. Fatwā-Seiten werden nicht als Quellenangabe geführt. Islamweb darf nur als Bibliotheksseite eines Originalwerks genutzt werden, nicht als Fatwā-Verweis.
-4. Web-/Textnachweise erscheinen ausschließlich als Linkkarten in `<div class="qsource-links">` mit `<a class="qsource-link web">`.
-5. PDF- und Scan-Nachweise dürfen nur eingebaut werden, wenn der Link direkt zur konkreten Seite der Aussage führt, z. B. mit einem geprüften PDF-Seitenanker `#page=<nummer>`.
-6. Keine PDF-/Scan-Karte darf nur auf eine allgemeine Buchseite, Downloadseite, Bandübersicht oder ungefähr passende Stelle führen. Wenn die konkrete PDF-Seite nicht sicher verifiziert ist, wird die PDF-/Scan-Karte nicht eingefügt, bis sie geprüft wurde.
-7. Direktlinks mit Textfragment (`#:~:text=`) oder geprüften PDF-Seitenankern (`#page=`) sind Pflicht, sobald die Stelle sicher bestimmt ist.
-8. Keine alten Listen wie `<ul class="qsource-link-list">` für Quellenlinks verwenden.
-9. Keine Text-Footer wie `Telegram Instagram WhatsApp Website` verwenden.
-10. Nach den Linkkarten steht immer die Social-Icon-Leiste `<nav class="qsource-social">` mit anklickbaren Icons für Telegram, Instagram, WhatsApp und Website.
-11. Interner Fallback bleibt als letzte Webkarte möglich: `/q/<nummer>/`.
-12. Quellenlinks werden nicht automatisch in Beiträgen veröffentlicht, sondern erst nach Freigabe des Nutzers; die `/q/<nummer>/`-Seite darf die vollständigen Direktnachweise enthalten.
+1. Die Seite ist für Besucher geschrieben: Aussage, Einordnung, Nutzen/Abgrenzung, direkte Quellenstellen und Kurzfazit.
+2. Besuchertexte dürfen keine internen Arbeitsnotizen enthalten, z. B. keine Hinweise wie „PDF wird erst eingefügt, wenn …“, keine Prüfhinweise an den Ersteller und keine Entschuldigungs- oder Arbeitsprozess-Sätze.
+3. Quellenangaben nennen primär Originalwerke und frühe/klassische Quellen: Qurʾān, Sunnah, Ṣaḥābah, Tābiʿīn, Salaf, Hadithwerke, Tafsīrwerke, Atharwerke und anerkannte klassische Sharḥ-Werke.
+4. Fatwā-Seiten werden nicht als Quellenangabe geführt. Islamweb darf nur als Bibliotheksseite eines Originalwerks genutzt werden, nicht als Fatwā-Verweis.
+5. Web-/Textnachweise erscheinen ausschließlich als Linkkarten in `<div class="qsource-links">` mit `<a class="qsource-link web">`.
+6. PDF- und Scan-Nachweise dürfen nur eingebaut werden, wenn der Link direkt zur konkreten Seite der Aussage führt, z. B. mit einem geprüften PDF-Seitenanker `#page=<nummer>`.
+7. Keine PDF-/Scan-Karte darf nur auf eine allgemeine Buchseite, Downloadseite, Bandübersicht oder ungefähr passende Stelle führen. Wenn die konkrete PDF-Seite nicht sicher verifiziert ist, bleibt die Besucher-Seite ohne PDF-/Scan-Karte.
+8. Direktlinks mit Textfragment (`#:~:text=`) oder geprüften PDF-Seitenankern (`#page=`) sind Pflicht, sobald die Stelle sicher bestimmt ist.
+9. Keine alten Listen wie `<ul class="qsource-link-list">` für Quellenlinks verwenden.
+10. Keine Text-Footer wie `Telegram Instagram WhatsApp Website` verwenden.
+11. Nach den Linkkarten steht immer die Social-Icon-Leiste `<nav class="qsource-social">` mit anklickbaren Icons für Telegram, Instagram, WhatsApp und Website.
+12. Interner Fallback bleibt als letzte Webkarte möglich: `/q/<nummer>/`.
+13. Quellenlinks werden nicht automatisch in Beiträgen veröffentlicht, sondern erst nach Freigabe des Nutzers; die `/q/<nummer>/`-Seite darf die vollständigen Direktnachweise enthalten.
 
 ## Standard-Social-Icon-Leiste
 
