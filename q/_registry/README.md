@@ -29,13 +29,14 @@ Jede nummerierte Quellenseite muss diesen Aufbau verwenden:
 2. Quellenangaben nennen primär Originalwerke und frühe/klassische Quellen: Qurʾān, Sunnah, Ṣaḥābah, Tābiʿīn, Salaf, Hadithwerke, Tafsīrwerke, Atharwerke und anerkannte klassische Sharḥ-Werke.
 3. Fatwā-Seiten werden nicht als Quellenangabe geführt. Islamweb darf nur als Bibliotheksseite eines Originalwerks genutzt werden, nicht als Fatwā-Verweis.
 4. Web-/Textnachweise erscheinen ausschließlich als Linkkarten in `<div class="qsource-links">` mit `<a class="qsource-link web">`.
-5. PDF- und Scan-Nachweise müssen, sobald auffindbar, zusätzlich als eigene Karten in `<div class="qsource-links">` eingebaut werden, mit `qsource-link pdf` oder `qsource-link scan`.
-6. Direktlinks mit Textfragment (`#:~:text=`) oder PDF-Seitenanker (`#page=`) werden bevorzugt, wenn die Stelle sicher bestimmt ist.
-7. Keine alten Listen wie `<ul class="qsource-link-list">` für Quellenlinks verwenden.
-8. Keine Text-Footer wie `Telegram Instagram WhatsApp Website` verwenden.
-9. Nach den Linkkarten steht immer die Social-Icon-Leiste `<nav class="qsource-social">` mit anklickbaren Icons für Telegram, Instagram, WhatsApp und Website.
-10. Interner Fallback bleibt als letzte Webkarte möglich: `/q/<nummer>/`.
-11. Quellenlinks werden nicht automatisch in Beiträgen veröffentlicht, sondern erst nach Freigabe des Nutzers; die `/q/<nummer>/`-Seite darf die vollständigen Direktnachweise enthalten.
+5. PDF- und Scan-Nachweise dürfen nur eingebaut werden, wenn der Link direkt zur konkreten Seite der Aussage führt, z. B. mit einem geprüften PDF-Seitenanker `#page=<nummer>`.
+6. Keine PDF-/Scan-Karte darf nur auf eine allgemeine Buchseite, Downloadseite, Bandübersicht oder ungefähr passende Stelle führen. Wenn die konkrete PDF-Seite nicht sicher verifiziert ist, wird die PDF-/Scan-Karte nicht eingefügt, bis sie geprüft wurde.
+7. Direktlinks mit Textfragment (`#:~:text=`) oder geprüften PDF-Seitenankern (`#page=`) sind Pflicht, sobald die Stelle sicher bestimmt ist.
+8. Keine alten Listen wie `<ul class="qsource-link-list">` für Quellenlinks verwenden.
+9. Keine Text-Footer wie `Telegram Instagram WhatsApp Website` verwenden.
+10. Nach den Linkkarten steht immer die Social-Icon-Leiste `<nav class="qsource-social">` mit anklickbaren Icons für Telegram, Instagram, WhatsApp und Website.
+11. Interner Fallback bleibt als letzte Webkarte möglich: `/q/<nummer>/`.
+12. Quellenlinks werden nicht automatisch in Beiträgen veröffentlicht, sondern erst nach Freigabe des Nutzers; die `/q/<nummer>/`-Seite darf die vollständigen Direktnachweise enthalten.
 
 ## Standard-Social-Icon-Leiste
 
