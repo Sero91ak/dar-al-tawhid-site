@@ -1,0 +1,134 @@
+/**
+ * Test-App only: thumb-reachable navigation for phone landscape / open fold.
+ * Tablets and portrait phones keep the regular bottom navigation.
+ */
+html.dar-test-thumb-nav {
+  --dar-thumb-nav-size: 68px;
+  --dar-thumb-nav-reserve: 78px;
+}
+
+html.dar-test-thumb-nav #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-thumb-nav #bottomNav.bottom-nav {
+  position: fixed !important;
+  left: auto !important;
+  right: max(8px, env(safe-area-inset-right, 0px)) !important;
+  top: 50% !important;
+  bottom: auto !important;
+  width: var(--dar-thumb-nav-size) !important;
+  min-width: var(--dar-thumb-nav-size) !important;
+  max-width: var(--dar-thumb-nav-size) !important;
+  height: min(390px, calc(100dvh - max(18px, env(safe-area-inset-top, 0px)) - max(18px, env(safe-area-inset-bottom, 0px)))) !important;
+  min-height: 272px !important;
+  max-height: 390px !important;
+  margin: 0 !important;
+  padding: 5px !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  align-items: stretch !important;
+  gap: 2px !important;
+  border-radius: 25px !important;
+  transform: translate3d(0, -50%, 0) !important;
+  -webkit-transform: translate3d(0, -50%, 0) !important;
+  contain: layout paint !important;
+  will-change: auto !important;
+  touch-action: manipulation !important;
+  transition: opacity .16s ease, border-color .16s ease, background-color .16s ease !important;
+}
+
+html.dar-test-thumb-nav #bottomNav.bottom-nav.post-nav-hidden {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translate3d(0, -50%, 0) !important;
+  -webkit-transform: translate3d(0, -50%, 0) !important;
+}
+
+html.dar-test-thumb-nav #bottomNav .bottom-nav-btn {
+  flex: 1 1 0 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: 48px !important;
+  max-height: 72px !important;
+  margin: 0 !important;
+  padding: 4px 2px !important;
+  gap: 2px !important;
+  border: 0 !important;
+  border-radius: 17px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  transition: color .14s ease, background-color .14s ease, filter .14s ease !important;
+}
+
+html.dar-test-thumb-nav #bottomNav .bottom-nav-btn .nav-icon,
+html.dar-test-thumb-nav #bottomNav .bottom-nav-btn.active .nav-icon,
+html.dar-test-thumb-nav #bottomNav .bottom-nav-btn.is-pressed .nav-icon,
+html.dar-test-thumb-nav #bottomNav .bottom-nav-btn:active .nav-icon {
+  width: 22px !important;
+  height: 22px !important;
+  font-size: 18px !important;
+  line-height: 22px !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  filter: none !important;
+}
+
+html.dar-test-thumb-nav #bottomNav .bottom-nav-btn > span:last-child {
+  font-size: 8px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+html.dar-test-thumb-nav #bottomNav .bottom-nav-btn.active {
+  color: var(--gold2, #efd78e) !important;
+  background: color-mix(in srgb, var(--gold2, #efd78e) 10%, transparent) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--gold2, #efd78e) 17%, transparent) !important;
+}
+
+html.dar-test-thumb-nav #bottomNav .bottom-nav-btn:active,
+html.dar-test-thumb-nav #bottomNav .bottom-nav-btn.is-pressed {
+  color: var(--gold2, #efd78e) !important;
+  background: color-mix(in srgb, var(--gold2, #efd78e) 14%, transparent) !important;
+  filter: brightness(1.08) !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+}
+
+html.dar-test-thumb-nav #bottomNav .bottom-nav-pill,
+html.dar-test-thumb-nav #bottomNav::before,
+html.dar-test-thumb-nav #bottomNav::after {
+  display: none !important;
+}
+
+html.dar-test-thumb-nav body.has-bottom-nav {
+  padding-right: calc(var(--dar-thumb-nav-reserve) + env(safe-area-inset-right, 0px)) !important;
+  padding-bottom: max(8px, env(safe-area-inset-bottom, 0px)) !important;
+}
+
+html.dar-test-thumb-nav body.is-feed-fullscreen {
+  padding-right: calc(var(--dar-thumb-nav-reserve) + env(safe-area-inset-right, 0px)) !important;
+}
+
+html.dar-test-thumb-nav body.has-bottom-nav .float-actions {
+  right: calc(var(--dar-thumb-nav-reserve) + env(safe-area-inset-right, 0px)) !important;
+  bottom: max(10px, env(safe-area-inset-bottom, 0px)) !important;
+}
+
+html.dar-test-thumb-nav .qrc-context-bar--dock {
+  right: calc(var(--dar-thumb-nav-reserve) + env(safe-area-inset-right, 0px)) !important;
+  bottom: max(8px, env(safe-area-inset-bottom, 0px)) !important;
+}
+
+html.dar-test-thumb-nav.adaptive-keyboard-open #bottomNav.bottom-nav {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.dar-test-thumb-nav #bottomNav.bottom-nav,
+  html.dar-test-thumb-nav #bottomNav .bottom-nav-btn {
+    transition: none !important;
+  }
+}
