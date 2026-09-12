@@ -2,6 +2,7 @@ import SwiftUI
 import UIKit
 import WebKit
 import PDFKit
+import SafariServices
 
 final class InsetAwareWebView: WKWebView {
     var onInsetsChange: (() -> Void)?
@@ -91,6 +92,7 @@ struct WebAppView: UIViewRepresentable {
         // Do not wipe WKWebsiteDataStore on launch — that cancels/breaks the first page load.
         let userContentController = WKUserContentController()
         userContentController.add(context.coordinator, name: "darLibraryReader")
+        userContentController.add(context.coordinator, name: "darOpenLink")
         userContentController.add(context.coordinator, name: "darAppearance")
         userContentController.add(context.coordinator, name: "darWidgetSnapshot")
         userContentController.add(context.coordinator, name: "darPushSettings")
@@ -202,6 +204,42 @@ struct WebAppView: UIViewRepresentable {
             WKUserScript(
                 source: iosHapticBridge,
                 injectionTime: .atDocumentEnd,
+                forMainFrameOnly: true
+            )
+        )
+
+        let iosOpenLinkBridge = """
+        (function(){
+          if(window.__darIosOpenLinkBridgeInstalled)return;
+          window.__darIosOpenLinkBridgeInstalled=true;
+          document.addEventListener("click",function(ev){
+            var node=ev.target&&ev.target.closest?ev.target.closest("a[href]"):null;
+            if(!node)return;
+            var raw=String(node.getAttribute("href")||"").trim();
+            if(!raw||raw.charAt(0)==="#"||/^javascript:/i.test(raw))return;
+            var isSource=!!(node.matches&&node.matches(".post-beleg-link,.post-slide-pdf-link,.post-slide-links a,.qsource-link,.source-btn,.ilm-source-open"));
+            var isPDF=/\\.pdf(?:$|[?#])/i.test(raw);
+            if(!isSource&&!isPDF)return;
+            var absolute="";
+            try{absolute=String(new URL(raw,window.location.href).href||"")}catch(e){return;}
+            if(!/^https?:\\/\\//i.test(absolute))return;
+            ev.preventDefault();
+            ev.stopPropagation();
+            if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();
+            try{
+              window.webkit.messageHandlers.darOpenLink.postMessage({
+                url:absolute,
+                pdf:isPDF,
+                source:isSource
+              });
+            }catch(e){}
+          },true);
+        })();
+        """
+        userContentController.addUserScript(
+            WKUserScript(
+                source: iosOpenLinkBridge,
+                injectionTime: .atDocumentStart,
                 forMainFrameOnly: true
             )
         )
@@ -708,6 +746,7 @@ struct WebAppView: UIViewRepresentable {
         deinit {
             loadingProgressTimer?.invalidate()
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darLibraryReader")
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darOpenLink")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darAppearance")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darWidgetSnapshot")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushSettings")
@@ -930,6 +969,17 @@ struct WebAppView: UIViewRepresentable {
                 if changed {
                     DarWidgetStore.save(DarDailyContent.refresh(snap))
                 }
+                return
+            }
+
+            if message.name == "darOpenLink" {
+                guard
+                    let body = message.body as? [String: Any],
+                    let rawURL = body["url"] as? String,
+                    let url = URL(string: rawURL),
+                    ["http", "https"].contains(url.scheme?.lowercased() ?? "")
+                else { return }
+                openTappedLink(url)
                 return
             }
 
@@ -1416,6 +1466,29 @@ struct WebAppView: UIViewRepresentable {
             let nav = UINavigationController(rootViewController: viewer)
             nav.modalPresentationStyle = .fullScreen
             presenter.present(nav, animated: true)
+        }
+
+        private func openTappedLink(_ url: URL) {
+            if url.path.lowercased().hasSuffix(".pdf") {
+                let slug = librarySlugFromPDFURL(url) ?? ""
+                if !slug.isEmpty {
+                    openLibraryPDF(slug: slug, sourceURL: url)
+                } else {
+                    presentRemotePDF(url)
+                }
+                return
+            }
+
+            guard let presenter = topViewController() else { return }
+            let browser = SFSafariViewController(url: url)
+            browser.preferredControlTintColor = UIColor(
+                red: 0.92,
+                green: 0.84,
+                blue: 0.62,
+                alpha: 1.0
+            )
+            browser.dismissButtonStyle = .close
+            presenter.present(browser, animated: true)
         }
 
         private func libraryReaderSlug(from url: URL) -> String? {
@@ -1938,19 +2011,49 @@ private final class LibraryPDFViewController: UIViewController {
 
     private func loadPDF() async {
         do {
-            let (data, _) = try await URLSession.shared.data(from: pdfURL)
+            var request = URLRequest(
+                url: pdfURL,
+                cachePolicy: .reloadRevalidatingCacheData,
+                timeoutInterval: 90
+            )
+            request.setValue("application/pdf,*/*;q=0.8", forHTTPHeaderField: "Accept")
+            request.setValue(
+                "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148 DARTawhid/1.0",
+                forHTTPHeaderField: "User-Agent"
+            )
+            let (data, response) = try await URLSession.shared.data(for: request)
             guard !Task.isCancelled else { return }
+            if let http = response as? HTTPURLResponse,
+               !(200...299).contains(http.statusCode) {
+                await MainActor.run { self.showFailure() }
+                return
+            }
             guard let document = PDFDocument(data: data) else {
                 await MainActor.run { self.showFailure() }
                 return
             }
             await MainActor.run {
                 self.pdfView.document = document
+                if let pageNumber = self.pdfPageNumber(),
+                   let page = document.page(at: max(0, min(document.pageCount - 1, pageNumber - 1))) {
+                    self.pdfView.go(to: page)
+                }
                 self.spinner.stopAnimating()
             }
         } catch {
             guard !Task.isCancelled else { return }
             await MainActor.run { self.showFailure() }
         }
+    }
+
+    private func pdfPageNumber() -> Int? {
+        guard let fragment = pdfURL.fragment else { return nil }
+        for item in fragment.split(separator: "&") {
+            let pair = item.split(separator: "=", maxSplits: 1).map(String.init)
+            if pair.count == 2, pair[0].lowercased() == "page" {
+                return Int(pair[1])
+            }
+        }
+        return nil
     }
 }
