@@ -11,6 +11,7 @@
 		A10000000000000000000002 /* WebAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000012 /* WebAppView.swift */; };
 		A60000000000000000000001 /* FreshWebAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60000000000000000000011 /* FreshWebAppView.swift */; };
 		A10000000000000000000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000013 /* Assets.xcassets */; };
+		A70000000000000000000001 /* DarAlTawhidWidgets.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A20000000000000000000010 /* DarAlTawhidWidgets.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A40000000000000000000001 /* AppIconEmblemNachtblau@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A40000000000000000000011 /* AppIconEmblemNachtblau@2x.png */; };
 		A40000000000000000000002 /* AppIconEmblemNachtblau@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A40000000000000000000012 /* AppIconEmblemNachtblau@3x.png */; };
 		A40000000000000000000003 /* AppIconEmblemSchwarzgold@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A40000000000000000000013 /* AppIconEmblemSchwarzgold@2x.png */; };
@@ -106,6 +107,30 @@
 		A20000000000000000000007 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000000000000000000014 /* WidgetKit.framework */; };
 		A20000000000000000000008 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000000000000000000015 /* SwiftUI.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A70000000000000000000002 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A10000000000000000000070 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A20000000000000000000040;
+			remoteInfo = DarAlTawhidWidgets;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A70000000000000000000003 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A70000000000000000000001 /* DarAlTawhidWidgets.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A10000000000000000000010 /* DarAlTawhid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarAlTawhid.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -393,10 +418,12 @@
 				A10000000000000000000050 /* Sources */,
 				A10000000000000000000020 /* Frameworks */,
 				A10000000000000000000060 /* Resources */,
+				A70000000000000000000003 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A70000000000000000000004 /* PBXTargetDependency */,
 			);
 			name = DarAlTawhid;
 			productName = DarAlTawhid;
@@ -583,6 +610,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A70000000000000000000004 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A20000000000000000000040 /* DarAlTawhidWidgets */;
+			targetProxy = A70000000000000000000002 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		A10000000000000000000100 /* Debug */ = {
