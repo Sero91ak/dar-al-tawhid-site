@@ -4683,6 +4683,16 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "knowledge-first-html-preview-2026-09-12",
+      "approvedBy": "user-explicit-preview-before-test-app",
+      "reason": "Eigenständige scrollbar-interaktive HTML-Vorschau für den wissensorientierten App-Umbau vor jeder Änderung an Test- oder Live-App",
+      "paths": [
+        "assets/previews/wissen-startseite.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
