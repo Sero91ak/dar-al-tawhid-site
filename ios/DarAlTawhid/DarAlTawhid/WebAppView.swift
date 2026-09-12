@@ -315,6 +315,26 @@ struct WebAppView: UIViewRepresentable {
           window.addEventListener("hashchange", function(){ setTimeout(ensureStyle, 40); });
         })();
         """
+        let iosFooterPolish = """
+        (function(){
+          if(document.getElementById("dar-ios-footer-polish"))return;
+          var style=document.createElement("style");
+          style.id="dar-ios-footer-polish";
+          style.textContent=[
+            "#footerAppSave,.footer-app-save,.footer-action-save{display:none!important;visibility:hidden!important;}",
+            ".footer-actions{",
+            "  display:grid!important;",
+            "  grid-template-columns:repeat(3,minmax(0,1fr))!important;",
+            "  width:min(430px,100%)!important;",
+            "  max-width:100%!important;",
+            "  margin-left:auto!important;",
+            "  margin-right:auto!important;",
+            "  justify-content:center!important;",
+            "}"
+          ].join("\\n");
+          (document.head||document.documentElement).appendChild(style);
+        })();
+        """
         userContentController.addUserScript(
             WKUserScript(
                 source: libraryReaderBridge,
@@ -325,6 +345,13 @@ struct WebAppView: UIViewRepresentable {
         userContentController.addUserScript(
             WKUserScript(
                 source: iosLibraryDetailPolish,
+                injectionTime: .atDocumentEnd,
+                forMainFrameOnly: true
+            )
+        )
+        userContentController.addUserScript(
+            WKUserScript(
+                source: iosFooterPolish,
                 injectionTime: .atDocumentEnd,
                 forMainFrameOnly: true
             )
@@ -1597,9 +1624,15 @@ struct WebAppView: UIViewRepresentable {
 
             let title = UILabel()
             title.translatesAutoresizingMaskIntoConstraints = false
-            title.text = "DĀR AL TAWḤĪD"
-            title.textColor = UIColor(red: 0.96, green: 0.93, blue: 0.82, alpha: 1.0)
-            title.font = UIFont.systemFont(ofSize: 34, weight: .bold)
+            title.attributedText = NSAttributedString(
+                string: "DĀR AL TAWḤĪD",
+                attributes: [
+                    .font: UIFont(name: "Georgia-Bold", size: 34)
+                        ?? UIFont.systemFont(ofSize: 34, weight: .bold),
+                    .foregroundColor: UIColor(red: 0.83, green: 0.71, blue: 0.42, alpha: 1.0),
+                    .kern: 2.04
+                ]
+            )
             title.textAlignment = .center
 
             let kicker = UILabel()
