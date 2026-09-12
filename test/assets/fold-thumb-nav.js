@@ -117,7 +117,7 @@
 
   function apply() {
     var nav = document.getElementById("bottomNav");
-    if (!nav) return;
+    if (!nav) return false;
     var next = shouldActivate();
 
     if (next) {
@@ -125,7 +125,7 @@
       root.setAttribute("data-test-thumb-nav", "right");
       setNavPosition(nav);
       active = true;
-      return;
+      return true;
     }
 
     root.classList.remove("dar-test-thumb-nav");
@@ -137,6 +137,16 @@
         global.DarAdaptiveLayout.syncNav();
       }
     }
+    return false;
+  }
+
+  /*
+   * The existing dock and adaptive controllers call this before writing their
+   * own bottom-nav position. Returning true gives this controller exclusive
+   * ownership while the right-side mode is required and prevents flicker.
+   */
+  function takeControl() {
+    return apply();
   }
 
   function schedule() {
@@ -162,6 +172,14 @@
     }
     document.addEventListener("click", schedule, true);
   }
+
+  global.DarTestThumbNav = {
+    takeControl: takeControl,
+    apply: apply,
+    isActive: function () {
+      return active;
+    }
+  };
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", start, { once: true });

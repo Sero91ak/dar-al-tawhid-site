@@ -72,6 +72,15 @@
   function applyNavLayout(mode) {
     var nav = document.getElementById("bottomNav");
     if (!nav) return;
+    try {
+      if (
+        global.DarTestThumbNav &&
+        typeof global.DarTestThumbNav.takeControl === "function" &&
+        global.DarTestThumbNav.takeControl()
+      ) {
+        return;
+      }
+    } catch (e0) {}
     if (document.body && document.body.classList.contains("is-ilm-chat-route")) {
       return;
     }
