@@ -90,8 +90,9 @@
   function trackLibraryEvent(eventType, pub) {
     if (!pub) return;
     try {
-      const track = global.trackAnalytics
-        || (global.DarAnalytics && typeof global.DarAnalytics.track === "function" && global.DarAnalytics.track.bind(global.DarAnalytics));
+      const track = (global.DarAnalytics && typeof global.DarAnalytics.track === "function"
+        && global.DarAnalytics.track.bind(global.DarAnalytics))
+        || global.trackAnalytics;
       if (typeof track === "function") {
         track(eventType, {
           contentType: "library",
@@ -521,6 +522,14 @@
     if (track) {
       trackLibraryEvent("library_read", pub);
       scheduleLibraryStatsRefresh(pub.id);
+    }
+    if (shouldUseNativePdfViewer()) {
+      try {
+        global.location.assign(url);
+        return true;
+      } catch (e) {
+        /* Fallback unten */
+      }
     }
     try {
       const popup = global.open(url, "_blank", "noopener,noreferrer");
@@ -1536,6 +1545,10 @@
       detail.querySelectorAll("[data-library-read]").forEach((btn) => {
         btn.onclick = () => {
           if (!canRead(pub)) return;
+          if (shouldUseNativePdfViewer()) {
+            openPublicationPdf(pub);
+            return;
+          }
           navigateReader(pub.slug);
         };
       });
@@ -1543,6 +1556,11 @@
       detail.querySelectorAll("[data-library-download]").forEach((btn) => {
         btn.onclick = async () => {
           if (!canDownload(pub)) return;
+          if (shouldUseNativePdfViewer()) {
+            trackLibraryEvent("library_download", pub);
+            openPublicationPdf(pub, { track: false });
+            return;
+          }
           try {
             const blob = await fetchPdfBlob(pub);
             const url = URL.createObjectURL(blob);
@@ -1614,7 +1632,8 @@
           const pageInput = reader?.querySelector("[data-library-reader-input]");
           if (pageInput && readerState?.page) pageInput.value = String(readerState.page);
         } else {
-          await initReader(pub);
+          if (shouldUseNativePdfViewer()) await initReaderNative(pub);
+          else await initReader(pub);
           bindReaderControls(pub, getReaderRoot());
         }
       } else {

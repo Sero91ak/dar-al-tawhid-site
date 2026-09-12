@@ -40,37 +40,4 @@
     document.addEventListener(name, prepareLink, true);
   });
 
-  document.addEventListener(
-    "click",
-    function (event) {
-      var target = event && event.target;
-      var button =
-        target && target.closest
-          ? target.closest("[data-library-read],[data-library-download]")
-          : null;
-      if (!button || button.disabled || button.hasAttribute("disabled")) return;
-
-      var handler =
-        window.webkit &&
-        window.webkit.messageHandlers &&
-        window.webkit.messageHandlers.darLibraryReader;
-      if (!handler || typeof handler.postMessage !== "function") return;
-
-      var slug =
-        button.getAttribute("data-library-read") ||
-        button.getAttribute("data-library-download") ||
-        "";
-      if (!slug) return;
-
-      event.preventDefault();
-      event.stopPropagation();
-      if (event.stopImmediatePropagation) event.stopImmediatePropagation();
-      handler.postMessage({
-        slug: String(slug),
-        href: String(window.location.href || ""),
-        source: "web-fallback"
-      });
-    },
-    true
-  );
 })();
