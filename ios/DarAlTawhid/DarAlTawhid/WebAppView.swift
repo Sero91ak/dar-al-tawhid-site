@@ -3,6 +3,7 @@ import UIKit
 import WebKit
 import PDFKit
 import SafariServices
+import WidgetKit
 
 final class InsetAwareWebView: WKWebView {
     var onInsetsChange: (() -> Void)?
@@ -895,6 +896,7 @@ struct WebAppView: UIViewRepresentable {
             if let src = body["postSource"] as? String, !src.isEmpty { snap.postSource = src }
             if let dsrc = body["duaSource"] as? String, !dsrc.isEmpty { snap.duaSource = dsrc }
             DarWidgetStore.save(DarDailyContent.refresh(snap))
+            WidgetCenter.shared.reloadAllTimelines()
         }
 
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {

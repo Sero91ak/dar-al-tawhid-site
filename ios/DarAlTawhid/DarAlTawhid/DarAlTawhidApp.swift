@@ -1,5 +1,6 @@
 import SwiftUI
 import UIKit
+import WidgetKit
 
 final class DarAppDelegate: NSObject, UIApplicationDelegate {
     func application(
@@ -68,6 +69,9 @@ struct DarAlTawhidApp: App {
         Task.detached {
             let live = DarDailyContent.refresh(DarWidgetStore.load(), fetchLiveDaily: true)
             DarWidgetStore.save(live)
+            await MainActor.run {
+                WidgetCenter.shared.reloadAllTimelines()
+            }
         }
     }
 

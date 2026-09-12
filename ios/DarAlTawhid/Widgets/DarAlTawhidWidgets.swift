@@ -21,7 +21,9 @@ struct DarTimelineProvider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<DarEntry>) -> Void) {
-        let snap = DarDailyContent.refresh(DarWidgetStore.load(), fetchLiveDaily: true)
+        // WidgetKit timelines must complete immediately. Live content is written
+        // to the shared App Group by the host app and refreshed locally here.
+        let snap = DarDailyContent.refresh(DarWidgetStore.load())
         DarWidgetStore.save(snap)
         let entry = DarEntry(date: Date(), snapshot: snap)
         let next = Calendar.current.date(byAdding: .minute, value: 15, to: Date())
@@ -593,7 +595,7 @@ private struct DarConfiguredProvider: AppIntentTimelineProvider {
     }
 
     func timeline(for configuration: DarWidgetSettingsIntent, in context: Context) async -> Timeline<DarConfiguredEntry> {
-        let snapshot = DarDailyContent.refresh(DarWidgetStore.load(), fetchLiveDaily: true)
+        let snapshot = DarDailyContent.refresh(DarWidgetStore.load())
         DarWidgetStore.save(snapshot)
         let now = Date()
         let entry = DarConfiguredEntry(date: now, snapshot: snapshot, appearance: configuration.appearance)

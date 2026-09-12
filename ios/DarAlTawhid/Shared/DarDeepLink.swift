@@ -73,7 +73,7 @@ enum DarDeepLink {
             var components = URLComponents()
             components.scheme = DarDeepLink.scheme
             components.host = "open"
-            let path = String(webHash.dropFirst())
+            let path = rawValue
             components.queryItems = [URLQueryItem(name: "h", value: path)]
             return components.url ?? URL(string: "\(DarDeepLink.scheme)://home")!
         }
@@ -86,6 +86,9 @@ enum DarDeepLink {
             }
             if url.host == "open" || url.path == "/open" {
                 if let hash = queryValue("h", in: url), !hash.isEmpty {
+                    if let semantic = Destination(rawValue: hash) {
+                        return semantic
+                    }
                     return .hash(hash)
                 }
             }
