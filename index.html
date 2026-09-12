@@ -20772,6 +20772,9 @@ html body .post-reader-main .post-source-oval.post-source-module .post-after-lin
       <span class="quick-action-emoji" aria-hidden="true">🔔</span>
       <span id="quickAccessRemindStatus" class="quick-action-dot" hidden></span>
     </button>
+    <button type="button" id="quickAccessSettingsBtn" class="quick-action" role="menuitem" data-qa-action="settings" aria-label="Einstellungen" title="Einstellungen">
+      <span class="quick-action-emoji" aria-hidden="true">⚙️</span>
+    </button>
   </div>
 </div>
 
@@ -26000,9 +26003,8 @@ function updateImageEditorTextModalHint(){const hint=$("imageEditorTextModalHint
 function renderNewsListRow(item,idx){const newsId=item.id||String(idx);const rowClass=item.type==="zakat"||item.nav==="zakat"?"current-focus-row current-focus-row--zakat":item.type==="library"||item.nav==="bibliothek"?"current-focus-row current-focus-row--library":"current-focus-row";return `<article class="${rowClass}" data-nav="news-detail" data-value="${esc(newsId)}" tabindex="0" role="button"><div class="current-focus-icon">${currentUpdateIcon(item)}</div><div class="current-focus-text"><b>${esc(item.title||"Neue Inhalte")}</b><p>${esc(item.text||item.description||"Gerade neu auf DĀR AL TAWḤĪD.")}</p><small>${esc(currentUpdateMeta(item))}</small></div><span class="current-focus-arrow">→</span></article>`}
 function renderNews(){const items=activeCurrentUpdates();return `${setPageHeader("Neu im Fokus","Aktuelle Meldungen und Highlights","News")}<section class="current-focus premium-surface"><div class="current-focus-list">${items.length?items.map(renderNewsListRow).join(""):`<div class="empty">Derzeit keine aktiven Meldungen.</div>`}</section>`}
 function renderSettings(){
-  if(!isTestAppPath())return `${setPageHeader("Einstellungen","Erscheinungsbild und Schriftgröße","Einstellungen")}${renderThemeSwitchPanel()}${renderAppIconPanel()}${renderFontSettingsPanel()}`;
   const liveActivity=`<section class="settings-live-row" aria-label="Live Activity"><span class="settings-live-icon" aria-hidden="true">◷</span><span><b>Live Activity</b><small>Gebets-Countdown auf Sperrbildschirm und Dynamic Island</small></span><span class="settings-off-badge">Aus</span></section>`;
-  return `${setPageHeader("Einstellungen","Alles kompakt an einem Ort.","Einstellungen")}<div class="settings-one-page"><section class="settings-hero"><span class="settings-hero-icon" aria-hidden="true">⚙</span><span><b>Deine App</b><small>Mitteilungen, Darstellung und Lesbarkeit persönlich einstellen.</small></span></section>${renderNotificationCenter({embedded:true})}<div class="settings-section-label"><b>Darstellung</b><span>Farben, Icon und Schrift</span></div>${renderThemeSwitchPanel()}${renderAppIconPanel()}${renderFontSettingsPanel()}<div class="settings-section-label"><b>Demnächst</b><span>Noch nicht aktiviert</span></div>${liveActivity}<p class="settings-save-note">Änderungen werden automatisch auf diesem Gerät gespeichert.</p></div>`
+  return `${setHeader("Einstellungen","Mitteilungen, Darstellung und Lesbarkeit.","","settings-page-head")}<div class="settings-one-page settings-flat-live-v1">${renderNotificationCenter({embedded:true})}<div class="settings-section-label"><b>Darstellung</b><span>Farben, Icon und Schrift</span></div>${renderThemeSwitchPanel()}${renderAppIconPanel()}${renderFontSettingsPanel()}<div class="settings-section-label"><b>Demnächst</b><span>Noch nicht aktiviert</span></div>${liveActivity}<p class="settings-save-note">Änderungen werden automatisch auf diesem Gerät gespeichert.</p></div>`
 }
 function renderJummah(){const s=getPrayerSettings();const manual=jummahPref(s,"jummahUseManualTime");const manualTime=normalizeTimeHHMM(s.jummahManualTime,"13:30");const advance=normalizeJummahAdvanceMinutes(s.jummahAdvanceMinutes);const on=jummahPref(s,"jummahNotifications");const timeLabel=manual?manualTime:(hasPrayerLocation(s)?jummahAutoDhuhrLabel(s):"Standort");return `${setPageHeader("Jumuʿah","Freitagsgebet und Erinnerung.","Jumuʿah")}<section class="prayer-panel prayer-page-noble jummah-hub-page">${renderJummahPushPanel()}<div class="qibla-data-grid jummah-hub-meta"><div class="qibla-data-item"><b>Erinnerung</b><span>${on?"Aktiv":"Aus"}</span></div><div class="qibla-data-item"><b>Vorlauf</b><span>${advance} Min</span></div><div class="qibla-data-item"><b>Zeit</b><span>${esc(timeLabel)}</span></div><div class="qibla-data-item"><b>Ort</b><span>${esc(s.city||"—")}</span></div></div><div class="prayer-action-row jummah-hub-nav"><button class="prayer-action-btn" type="button" data-nav="prayer">Gebetszeiten</button></div></section>`}
 function renderQiblaPage(){const settings=getPrayerSettings();return `${setPageHeader("Qibla","","Qibla")}<section class="prayer-panel prayer-page-noble qibla-hub-page">${renderQiblaProPanel(settings)}<div class="prayer-controls-compact qibla-hub-tools"><div class="prayer-settings-grid"><input id="prayerCityInput" class="filter-select" value="${esc(settings.city||"")}" placeholder="Ort" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button><button id="useLocationBtn" class="prayer-action-btn" type="button">Standort</button></div></div></section>`}
@@ -26896,7 +26898,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v786";
+const APP_BUILD_ID="app-shell-v787";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -27872,7 +27874,7 @@ let quickMenuOpenedAt=0;
 let quickAccessDocListenersBound=false;
 
 const NAV_LONGPRESS_MENU_HTML={
-  more:`<button type="button" id="quickAccessOrientBtn" class="quick-action" role="menuitem" data-qa-action="orient" aria-label="Orientierung" title="Orientierung"><span class="quick-action-emoji" aria-hidden="true">🧭</span></button><button type="button" id="quickAccessSavedBtn" class="quick-action" role="menuitem" data-qa-action="saved" aria-label="Merkliste" title="Merkliste"><span class="quick-action-emoji" aria-hidden="true">❤️</span><span id="quickAccessSavedBadge" class="quick-action-badge" hidden>0</span></button><button type="button" id="quickAccessRemindBtn" class="quick-action" role="menuitem" data-qa-action="remind" aria-label="Erinnerungen" title="Erinnerungen"><span class="quick-action-emoji" aria-hidden="true">🔔</span><span id="quickAccessRemindStatus" class="quick-action-dot" hidden></span></button>`,
+  more:`<button type="button" id="quickAccessOrientBtn" class="quick-action" role="menuitem" data-qa-action="orient" aria-label="Orientierung" title="Orientierung"><span class="quick-action-emoji" aria-hidden="true">🧭</span></button><button type="button" id="quickAccessSavedBtn" class="quick-action" role="menuitem" data-qa-action="saved" aria-label="Merkliste" title="Merkliste"><span class="quick-action-emoji" aria-hidden="true">❤️</span><span id="quickAccessSavedBadge" class="quick-action-badge" hidden>0</span></button><button type="button" id="quickAccessRemindBtn" class="quick-action" role="menuitem" data-qa-action="remind" aria-label="Erinnerungen" title="Erinnerungen"><span class="quick-action-emoji" aria-hidden="true">🔔</span><span id="quickAccessRemindStatus" class="quick-action-dot" hidden></span></button><button type="button" id="quickAccessSettingsBtn" class="quick-action" role="menuitem" data-qa-action="settings" aria-label="Einstellungen" title="Einstellungen"><span class="quick-action-emoji" aria-hidden="true">⚙️</span></button>`,
   quran:`<button type="button" id="quickAccessQuranContinueBtn" class="quick-action" role="menuitem" data-qa-action="continue-reading" aria-label="Weiterlesen" title="Weiterlesen"><span class="quick-action-emoji" aria-hidden="true">📖</span></button><button type="button" id="quickAccessQuranTopicsBtn" class="quick-action" role="menuitem" data-qa-action="quran-topics" aria-label="Themen" title="Themen"><span class="quick-action-emoji" aria-hidden="true">🗂️</span></button><button type="button" id="quickAccessQuranSearchBtn" class="quick-action" role="menuitem" data-qa-action="quran-search" aria-label="Durchsuchen" title="Durchsuchen"><span class="quick-action-emoji" aria-hidden="true">🔍</span></button>`
 };
 
@@ -28133,6 +28135,7 @@ function runQuickAccessAction(kind,btn){
     if(kind==="orient"){openQiblaFromFloat();return}
     if(kind==="saved"){navigate("saved");return}
     if(kind==="remind"){navigate("more");setTimeout(()=>{try{document.getElementById("prayerPushAccordionToggle")?.click()}catch(e){}},180);return}
+    if(kind==="settings"){navigate("settings");return}
     if(kind==="continue-reading"){openQuranContinueFromQuickAccess();return}
     if(kind==="quran-topics"){openQuranTopicsFromQuickAccess();return}
     if(kind==="quran-search"){focusQuranSearchFromQuickAccess();return}
@@ -33231,6 +33234,23 @@ html.dar-test-nav-v1.dar-original-nav-v2 #bottomNav .bottom-nav-btn.is-pressed,h
 html[data-theme="light"].dar-test-nav-v1.dar-original-nav-v2 #bottomNav.bottom-nav,html[data-theme="eisgold"].dar-test-nav-v1.dar-original-nav-v2 #bottomNav.bottom-nav{border-color:rgba(108,88,50,.14)!important;background:rgba(255,255,255,.68)!important}
 html[data-theme="light"].dar-test-nav-v1.dar-original-nav-v2 #bottomNav .bottom-nav-btn,html[data-theme="eisgold"].dar-test-nav-v1.dar-original-nav-v2 #bottomNav .bottom-nav-btn{color:rgba(49,42,30,.62)!important}
 html[data-theme="light"].dar-test-nav-v1.dar-original-nav-v2 #bottomNav .bottom-nav-btn.active,html[data-theme="eisgold"].dar-test-nav-v1.dar-original-nav-v2 #bottomNav .bottom-nav-btn.active{color:#6f5422!important}
+</style>
+<style id="dar-live-flat-settings-v1">
+.settings-page-head{margin-bottom:0!important;padding-bottom:14px!important;border-bottom:1px solid color-mix(in srgb,var(--gold2) 26%,var(--line2,var(--line)) 74%)!important}
+.settings-page-head h2{margin-bottom:3px!important}
+.settings-page-head .view-desc{margin-top:0!important}
+.settings-flat-live-v1,.settings-flat-live-v1 *{will-change:auto!important}
+.settings-flat-live-v1 :where(.notification-hero,.notification-section,.theme-switch-panel,.app-icon-panel,.app-font-panel,.font-slider-panel,.settings-live-row){border-radius:0!important;background:transparent!important;background-image:none!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.settings-flat-live-v1 :where(.notification-hero,.theme-switch-panel,.app-icon-panel,.app-font-panel,.settings-live-row){width:100%!important;margin:0!important;padding:15px 3px!important;border:0!important;border-bottom:1px solid color-mix(in srgb,var(--gold2) 24%,var(--line2,var(--line)) 76%)!important}
+.settings-flat-live-v1 .notification-section{width:100%!important;margin:0!important;padding:19px 2px 17px!important;border:0!important;border-bottom:1px solid color-mix(in srgb,var(--gold2) 24%,var(--line2,var(--line)) 76%)!important}
+.settings-flat-live-v1 .notification-section__head{margin:0 3px 12px!important}
+.settings-flat-live-v1 .settings-section-label{margin:15px 3px 5px!important;padding:0!important}
+.settings-flat-live-v1 .theme-switch-panel:before{display:none!important}
+.settings-flat-live-v1 .theme-switch-head{margin:0 0 10px!important;padding:0!important}
+.settings-flat-live-v1 .theme-switch-btn,.settings-flat-live-v1 .app-icon-choice{border-color:transparent!important;background:transparent!important;box-shadow:none!important}
+.settings-flat-live-v1 .theme-switch-btn.active,.settings-flat-live-v1 .app-icon-choice.is-active{border-color:color-mix(in srgb,var(--gold2) 52%,transparent)!important;background:color-mix(in srgb,var(--gold2) 5%,transparent)!important}
+.settings-flat-live-v1 .font-slider-panel{margin:8px 0 0!important;padding:12px 0 0!important;border:0!important;border-top:1px solid color-mix(in srgb,var(--line2,var(--line)) 44%,transparent)!important}
+.settings-flat-live-v1 .notification-saved{margin:10px 0 16px!important;box-shadow:none!important}
 </style>
 
 </html>
