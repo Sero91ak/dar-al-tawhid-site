@@ -6,6 +6,14 @@ struct DarPrayerSlot: Codable, Identifiable, Hashable {
     let time: String
 }
 
+struct DarIslamicEvent: Codable, Identifiable, Hashable {
+    let id: String
+    let title: String
+    let hijriDate: String
+    let gregorianDate: String
+    let daysUntil: Int
+}
+
 struct DarWidgetSnapshot: Codable, Equatable {
     var themeId: String
     var inkHex: String
@@ -42,6 +50,10 @@ struct DarWidgetSnapshot: Codable, Equatable {
     var updatedAt: Date
     var duaId: String
     var postId: String
+    var gregorianLabel: String
+    var hijriDay: String
+    var hijriMonthYear: String
+    var islamicEvents: [DarIslamicEvent]
 
     var dailyOpenHash: String {
         if postId.isEmpty { return "#home" }
@@ -56,6 +68,8 @@ struct DarWidgetSnapshot: Codable, Equatable {
     var ayahOpenHash: String {
         DarDeepLink.quranHash(fromRef: ayahRef) ?? "#quran"
     }
+
+    var calendarOpenHash: String { "#calendar" }
 
     static let empty = DarWidgetSnapshot(
         themeId: "dark",
@@ -92,7 +106,11 @@ struct DarWidgetSnapshot: Codable, Equatable {
         duaSource: "",
         updatedAt: Date(timeIntervalSince1970: 0),
         duaId: "",
-        postId: ""
+        postId: "",
+        gregorianLabel: "",
+        hijriDay: "",
+        hijriMonthYear: "",
+        islamicEvents: []
     )
 
     enum CodingKeys: String, CodingKey {
@@ -104,6 +122,7 @@ struct DarWidgetSnapshot: Codable, Equatable {
         case ayahArabic, ayahGerman, ayahTranslit, ayahRef
         case duaTitle, duaText, duaGerman, duaTranslit, duaCategory, duaSource
         case updatedAt, duaId, postId
+        case gregorianLabel, hijriDay, hijriMonthYear, islamicEvents
     }
 
     init(
@@ -115,7 +134,9 @@ struct DarWidgetSnapshot: Codable, Equatable {
         postTitle: String, postSnippet: String, postCategory: String, postSource: String,
         ayahArabic: String, ayahGerman: String, ayahTranslit: String, ayahRef: String,
         duaTitle: String, duaText: String, duaGerman: String, duaTranslit: String,
-        duaCategory: String, duaSource: String, updatedAt: Date, duaId: String, postId: String
+        duaCategory: String, duaSource: String, updatedAt: Date, duaId: String, postId: String,
+        gregorianLabel: String, hijriDay: String, hijriMonthYear: String,
+        islamicEvents: [DarIslamicEvent]
     ) {
         self.themeId = themeId
         self.inkHex = inkHex
@@ -152,6 +173,10 @@ struct DarWidgetSnapshot: Codable, Equatable {
         self.updatedAt = updatedAt
         self.duaId = duaId
         self.postId = postId
+        self.gregorianLabel = gregorianLabel
+        self.hijriDay = hijriDay
+        self.hijriMonthYear = hijriMonthYear
+        self.islamicEvents = islamicEvents
     }
 
     init(from decoder: Decoder) throws {
@@ -191,6 +216,10 @@ struct DarWidgetSnapshot: Codable, Equatable {
         updatedAt = try c.decodeIfPresent(Date.self, forKey: .updatedAt) ?? Date(timeIntervalSince1970: 0)
         duaId = try c.decodeIfPresent(String.self, forKey: .duaId) ?? ""
         postId = try c.decodeIfPresent(String.self, forKey: .postId) ?? ""
+        gregorianLabel = try c.decodeIfPresent(String.self, forKey: .gregorianLabel) ?? ""
+        hijriDay = try c.decodeIfPresent(String.self, forKey: .hijriDay) ?? ""
+        hijriMonthYear = try c.decodeIfPresent(String.self, forKey: .hijriMonthYear) ?? ""
+        islamicEvents = try c.decodeIfPresent([DarIslamicEvent].self, forKey: .islamicEvents) ?? []
     }
 }
 

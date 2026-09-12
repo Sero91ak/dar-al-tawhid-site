@@ -502,10 +502,12 @@ struct WebAppView: UIViewRepresentable {
                   theme:theme,
                   times:times,
                   duaTitle:dua&&dua.title||daily&&daily.dua&&daily.dua.title||"",
+                  duaId:dua&&dua.id||daily&&daily.dua&&daily.dua.id||"",
                   duaDe:dua&&(dua.de||dua.snippet)||daily&&daily.dua&&daily.dua.snippet||"",
                   duaTr:dua&&dua.tr||"",
                   duaCat:dua&&(dua.cat||dua.category)||daily&&daily.dua&&daily.dua.category||"",
                   postTitle:rec&&rec.title||daily&&daily.recommendation&&daily.recommendation.title||"",
+                  postId:rec&&rec.id||daily&&daily.recommendation&&daily.recommendation.id||"",
                   postSnippet:daily&&daily.recommendation&&daily.recommendation.snippet||"",
                   postCategory:[rec&&rec.category,rec&&rec.scholar].filter(Boolean).join(" · "),
                   postSource:rec&&rec.source||daily&&daily.recommendation&&daily.recommendation.source||"",
@@ -837,6 +839,7 @@ struct WebAppView: UIViewRepresentable {
                 snap.themeId = theme
             }
             if let title = body["duaTitle"] as? String, !title.isEmpty { snap.duaTitle = title }
+            if let id = body["duaId"] as? String, !id.isEmpty { snap.duaId = id }
             if let de = body["duaDe"] as? String, !de.isEmpty { snap.duaGerman = de }
             if let tr = body["duaTr"] as? String, !tr.isEmpty { snap.duaTranslit = tr }
             if let cat = body["duaCat"] as? String { snap.duaCategory = cat }
@@ -844,6 +847,7 @@ struct WebAppView: UIViewRepresentable {
                 snap.postTitle = post
                 snap.recommendationTitle = "Heute empfohlen"
             }
+            if let id = body["postId"] as? String, !id.isEmpty { snap.postId = id }
             if let snippet = body["postSnippet"] as? String, !snippet.isEmpty {
                 snap.postSnippet = snippet
                 snap.recommendationBody = snippet
