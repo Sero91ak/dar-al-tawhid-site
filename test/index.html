@@ -20748,6 +20748,7 @@ html body .post-reader-main .post-source-oval.post-source-module .post-after-lin
 </nav>
 </div>
 <script>!function(){try{var n=document.getElementById("bottomNav"),d=document.getElementById("appChromeDock"),q=document.getElementById("quickAccessLayer"),s=document.getElementById("bottomNavSecondary");var isTest=location.pathname.indexOf("/test/")===0||location.pathname==="/test";if(s){if(isTest){s.setAttribute("data-bottom-nav","ilm");s.setAttribute("aria-label","ʿIlm");s.innerHTML='<span class="nav-icon nav-icon--emoji" aria-hidden="true">📚</span><span>ʿIlm</span>'}else{s.setAttribute("data-bottom-nav","quiz");s.setAttribute("aria-label","Quiz");s.innerHTML='<span class="nav-icon nav-icon--emoji" aria-hidden="true">🧠</span><span>Quiz</span>'}}if(!n||!d)return;if(n.parentElement!==d)d.appendChild(n);if(d.parentElement!==document.body)document.body.appendChild(d);if(q&&q.parentElement!==document.body)document.body.appendChild(q);document.body.classList.add("has-bottom-nav")}catch(e){}}();</script>
+<script>document.documentElement.classList.add("dar-test-performance-v1");</script>
 <script>!function(){try{if(!/DarAlTawhid-iOS/i.test(String(navigator.userAgent||"")))return;if(document.documentElement.classList.contains("dar-ios-native-tabs"))return;function show(){try{document.documentElement.classList.remove("dar-soft-booting");var n=document.getElementById("bottomNav");if(!n)return;n.removeAttribute("hidden");n.style.setProperty("display","flex","important");n.style.setProperty("visibility","visible","important");n.style.setProperty("opacity","1","important");n.style.setProperty("pointer-events","auto","important");n.style.setProperty("z-index","80","important");document.body&&document.body.classList.add("has-bottom-nav")}catch(e){}}show();document.addEventListener("DOMContentLoaded",show);setTimeout(show,200);setTimeout(show,800);setTimeout(show,2000)}catch(e){}}();</script>
 <div class="float-actions" id="floatActions" hidden aria-hidden="true" data-mode="disabled">
   <div class="float-actions-panel" id="floatActionsPanel">
@@ -27004,7 +27005,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v825";
+const APP_BUILD_ID="app-shell-v826";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -33587,6 +33588,25 @@ html.dar-smooth-nav-v3 #bottomNav .bottom-nav-btn.active,html.dar-smooth-nav-v3 
 .settings-hero b,.settings-live-row b{display:block;color:var(--text);font-family:var(--serif);font-size:17px}.settings-hero small,.settings-live-row small{display:block;margin-top:3px;color:var(--muted);font-size:10px;line-height:1.35}
 .settings-section-label{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:15px 4px 7px}.settings-section-label b{color:var(--text);font-family:var(--serif);font-size:18px}.settings-section-label span{color:var(--muted);font-size:9px}
 .settings-off-badge{padding:6px 10px;border:1px solid var(--line2);border-radius:999px;color:var(--muted);font-size:10px;font-weight:800}.settings-save-note{color:var(--muted);font-size:9.5px;text-align:center}
+</style>
+<style id="dar-test-scroll-flat-settings-v1">
+html.dar-test-performance-v1,html.dar-test-performance-v1 body{scroll-behavior:auto!important;-webkit-overflow-scrolling:touch!important}
+html.dar-test-performance-v1 body:before{display:none!important}
+html.dar-test-performance-v1 #appView,html.dar-test-performance-v1 .app{will-change:auto!important;backface-visibility:visible!important;-webkit-backface-visibility:visible!important}
+html.dar-test-performance-v1 #bottomNav.bottom-nav{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:color-mix(in srgb,var(--bg) 96%,var(--card) 4%)!important}
+html.dar-test-performance-v1 .settings-one-page,html.dar-test-performance-v1 .settings-one-page *{will-change:auto!important}
+html.dar-test-performance-v1 .settings-one-page :where(.settings-hero,.notification-hero,.notification-section,.theme-switch-panel,.app-icon-panel,.app-font-panel,.font-slider-panel,.settings-live-row){border-radius:0!important;background:transparent!important;background-image:none!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+html.dar-test-performance-v1 .settings-one-page :where(.settings-hero,.notification-hero,.theme-switch-panel,.app-icon-panel,.app-font-panel,.settings-live-row){margin:0!important;padding:15px 3px!important;border:0!important;border-bottom:1px solid color-mix(in srgb,var(--line2,var(--line)) 58%,transparent)!important}
+html.dar-test-performance-v1 .settings-one-page .notification-section{margin:0!important;padding:19px 2px 17px!important;border:0!important;border-bottom:1px solid color-mix(in srgb,var(--line2,var(--line)) 58%,transparent)!important}
+html.dar-test-performance-v1 .settings-one-page .notification-section__head{margin:0 3px 12px!important}
+html.dar-test-performance-v1 .settings-one-page .settings-section-label{margin:20px 3px 5px!important;padding:0!important}
+html.dar-test-performance-v1 .settings-one-page .theme-switch-panel:before{display:none!important}
+html.dar-test-performance-v1 .settings-one-page .theme-switch-head{margin:0 0 10px!important;padding:0!important}
+html.dar-test-performance-v1 .settings-one-page .theme-switch-btn,html.dar-test-performance-v1 .settings-one-page .app-icon-choice{border-color:transparent!important;background:transparent!important;box-shadow:none!important}
+html.dar-test-performance-v1 .settings-one-page .theme-switch-btn.active,html.dar-test-performance-v1 .settings-one-page .app-icon-choice.is-active{border-color:color-mix(in srgb,var(--gold2) 52%,transparent)!important;background:color-mix(in srgb,var(--gold2) 5%,transparent)!important;box-shadow:none!important}
+html.dar-test-performance-v1 .settings-one-page .font-slider-panel{margin:8px 0 0!important;padding:12px 0 0!important;border:0!important;border-top:1px solid color-mix(in srgb,var(--line2,var(--line)) 44%,transparent)!important}
+html.dar-test-performance-v1 .settings-one-page .notification-saved{margin:10px 0 16px!important;box-shadow:none!important}
+@media(pointer:coarse){html.dar-test-performance-v1 :where(.premium-surface,.more-feature-row,.folder-card,.post-card,.list-card,.info-card,.dua-card){-webkit-backdrop-filter:none!important;backdrop-filter:none!important;will-change:auto!important}}
 </style>
 
 </html>
