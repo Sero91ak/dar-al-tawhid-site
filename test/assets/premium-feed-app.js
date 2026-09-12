@@ -11,7 +11,7 @@
   }
 
   var MOUNT_ID = 'premiumFeedMount';
-  var STYLES_ID = 'darPremiumFeedStylesV79';
+  var STYLES_ID = 'darPremiumFeedStylesV80';
   var FONTS_ID = 'darPremiumFeedFontsV73';
   var FEED_EXPORT_MIN_W = 1080;
   var FEED_EXPORT_RATIO = 1.08;
@@ -1348,6 +1348,7 @@
       app.style.setProperty('--sf-panel-inset-x', panelInset + 'px');
       app.style.setProperty('--sf-shell-pad', '0px');
       app.style.setProperty('--sf-feed-col-max', '100%');
+      app.style.setProperty('--feed-col-max', '100%');
       app.style.setProperty('--sf-gutter-left', 'max(8px, env(safe-area-inset-left, 0px))');
       app.style.setProperty('--sf-gutter-right', 'max(8px, env(safe-area-inset-right, 0px))');
       app.style.setProperty('--sf-card-gap', (fullscreen ? '12px' : (FEED_CARD_GAP + 'px')));

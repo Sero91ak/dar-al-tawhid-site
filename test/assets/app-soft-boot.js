@@ -1,6 +1,7 @@
 /**
  * Soft boot overlay for visitor + test web apps (iOS parity).
  * v670 · Titel DĀR AL TAWḤĪD; Leiste rund (CSS in index). Overlay nie auf <html>.
+ * v672 · Progress 0→100% + Fade; native iOS keeps Swift overlay.
  */
 (function () {
   if (window.__darSoftBootInstalled) return;

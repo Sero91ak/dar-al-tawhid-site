@@ -206,6 +206,8 @@ struct WebAppView: UIViewRepresentable {
                 forMainFrameOnly: true
             )
         )
+        // Layout/edge CSS comes from the live web assets (full-edge-appearance-polish).
+        // Native inject only publishes Safe-Area variables + dar-ios-native-app.
         let iosNativeTabsBoot = """
         (function(){
           try{
@@ -1158,6 +1160,8 @@ struct WebAppView: UIViewRepresentable {
               }
               root.style.setProperty("--dar-ios-safe-left","\(left)px");
               root.style.setProperty("--dar-ios-safe-right","\(right)px");
+              root.style.setProperty("--dar-native-safe-left","\(left)px");
+              root.style.setProperty("--dar-native-safe-right","\(right)px");
               if(body)body.classList.add("dar-ios-native-app");
               var meta=document.querySelector('meta[name="viewport"]');
               if(meta){

@@ -59,25 +59,19 @@ html[data-theme] body.is-feed-fullscreen .sf-filters{
   html[data-theme] body.is-feed-fullscreen .sf-feed,
   html[data-theme] body.is-feed-fullscreen .sf-top,
   html[data-theme] body.is-feed-fullscreen .sf-filters{
-    margin-left:auto!important;
-    margin-right:auto!important;
-    padding-left:8px!important;
-    padding-right:8px!important;
-  }
-}
-@media(min-width:600px){
-  html[data-theme] body.is-feed-fullscreen :is(.sf-top,.sf-filters,.sf-feed){
-    max-width:var(--feed-col-max,520px)!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    padding-left:var(--sf-gutter-left,max(8px,env(safe-area-inset-left,0px)))!important;
+    padding-right:var(--sf-gutter-right,max(8px,env(safe-area-inset-right,0px)))!important;
+    max-width:100%!important;
     width:100%!important;
-    margin-left:auto!important;
-    margin-right:auto!important;
   }
   html[data-theme] body.is-feed-fullscreen #bottomNav.bottom-nav{
-    left:50%!important;
-    right:auto!important;
-    width:min(var(--feed-col-max,520px),calc(100% - 16px))!important;
-    max-width:min(var(--feed-col-max,520px),calc(100% - 16px))!important;
-    transform:translateX(-50%)!important;
+    left:max(12px,env(safe-area-inset-left,0px))!important;
+    right:max(12px,env(safe-area-inset-right,0px))!important;
+    width:auto!important;
+    max-width:none!important;
+    transform:none!important;
   }
 }
 html[data-theme] body.is-feed-fullscreen .sf-post,
@@ -102,19 +96,10 @@ html[data-theme] body.is-feed-fullscreen .sf-post__textpanel{
 :root{
   --feed-col-max:100%;
 }
-@media(min-width:600px) and (max-width:767px){
-  :root{--feed-col-max:min(100%,520px);}
-}
-@media(min-width:768px) and (max-width:1023px){
-  :root{--feed-col-max:min(100%,480px);}
-}
-@media(min-width:1024px){
-  :root{--feed-col-max:420px;}
-}
 html[data-theme] body.is-feed-fullscreen .sf-app{
   display:flex!important;
   flex-direction:column!important;
-  align-items:center!important;
+  align-items:stretch!important;
 }
 html[data-theme] body.is-feed-fullscreen .sf-feed{
   gap:12px!important;
@@ -168,19 +153,10 @@ html[data-theme] body.is-feed-fullscreen .feed-image{
 :root{
   --feed-col-max:100%;
 }
-@media(min-width:600px) and (max-width:767px){
-  :root{--feed-col-max:min(100%,520px);}
-}
-@media(min-width:768px) and (max-width:1023px){
-  :root{--feed-col-max:min(100%,480px);}
-}
-@media(min-width:1024px){
-  :root{--feed-col-max:420px;}
-}
 html[data-theme] body.is-feed-fullscreen .sf-app{
   display:flex!important;
   flex-direction:column!important;
-  align-items:center!important;
+  align-items:stretch!important;
 }
 html[data-theme] body.is-feed-fullscreen .sf-feed{
   gap:12px!important;

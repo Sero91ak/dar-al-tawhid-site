@@ -94,6 +94,29 @@
   ],
   "unlockedScopes": [
     {
+      "id": "ios-parity-web-edge-feed-load-2026-09-12",
+      "approvedBy": "user-explicit-implement-plan-ios-parity-visitor-test",
+      "reason": "Plan: iOS-Parity Besucher+Test Edge/Feed/Soft-Load. Shared CSS/JS/Boot, Feed-Quelle, Wrapper entschlacken. Test zuerst, kein Live-Push.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "assets/full-edge-appearance-polish.css",
+        "test/assets/full-edge-appearance-polish.css",
+        "assets/premium-feed-app.js",
+        "test/assets/premium-feed-app.js",
+        "assets/feed-live-parity.css",
+        "assets/app-soft-boot.js",
+        "test/assets/app-soft-boot.js",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift"
+      ],
+      "expiresAt": "2026-09-14T23:59:00.000Z"
+    },
+    {
       "id": "ios-appstore-hang-scroll-2026-09-12",
       "approvedBy": "user-explicit-ios-appstore-sofort-fix-bugs-only",
       "reason": "Nutzer: iOS-App hängt weiter (Scroll/Tabs/Reload/schwarz). Sofort wie Besucher-App, live pushen. Kein Design/Schrift/Logo.",
