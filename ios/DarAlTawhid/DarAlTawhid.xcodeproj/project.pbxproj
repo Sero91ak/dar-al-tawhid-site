@@ -106,6 +106,7 @@
 		A20000000000000000000006 /* DarDailyContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000015 /* DarDailyContent.swift */; };
 		A20000000000000000000007 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000000000000000000014 /* WidgetKit.framework */; };
 		A20000000000000000000008 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000000000000000000015 /* SwiftUI.framework */; };
+		A20000000000000000000009 /* AppIntents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000000000000000000016 /* AppIntents.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -227,6 +228,7 @@
 		A20000000000000000000013 /* Widgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Widgets.entitlements; sourceTree = "<group>"; };
 		A20000000000000000000014 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		A20000000000000000000015 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		A20000000000000000000016 /* AppIntents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppIntents.framework; path = System/Library/Frameworks/AppIntents.framework; sourceTree = SDKROOT; };
 		A30000000000000000000011 /* DarDeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarDeepLink.swift; sourceTree = "<group>"; };
 		A30000000000000000000012 /* DarWidgetSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWidgetSnapshot.swift; sourceTree = "<group>"; };
 		A30000000000000000000013 /* DarWidgetStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWidgetStore.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 			files = (
 				A20000000000000000000007 /* WidgetKit.framework in Frameworks */,
 				A20000000000000000000008 /* SwiftUI.framework in Frameworks */,
+				A20000000000000000000009 /* AppIntents.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +398,7 @@
 				A10000000000000000000014 /* WebKit.framework */,
 				A20000000000000000000014 /* WidgetKit.framework */,
 				A20000000000000000000015 /* SwiftUI.framework */,
+				A20000000000000000000016 /* AppIntents.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

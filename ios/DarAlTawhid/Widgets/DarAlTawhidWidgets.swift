@@ -1,5 +1,6 @@
 import SwiftUI
 import WidgetKit
+import AppIntents
 
 private enum DarColors {
     static let navy = Color(red: 0.025, green: 0.075, blue: 0.125)
@@ -143,7 +144,7 @@ private struct DarCard<Content: View>: View {
 private extension View {
     @ViewBuilder
     func widgetSurface() -> some View {
-        if #available(iOSApplicationExtension 17.0, *) {
+        if #available(iOS 17.0, *) {
             containerBackground(for: .widget) { DarBackdrop() }
         } else {
             background(DarBackdrop())
@@ -537,6 +538,349 @@ struct IslamicCalendarWidgetView: View {
     }
 }
 
+@available(iOS 17.0, *)
+private enum DarWidgetAppearance: String, AppEnum {
+    case app
+    case creme
+    case navy
+    case green
+    case bordeaux
+    case black
+
+    static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Farbbereich")
+    static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
+        .app: "Wie in der App",
+        .creme: "Creme & Gold",
+        .navy: "Nachtblau & Gold",
+        .green: "Dunkelgrün & Creme",
+        .bordeaux: "Bordeaux & Gold",
+        .black: "Schwarz & Creme"
+    ]
+}
+
+@available(iOS 17.0, *)
+private struct DarWidgetSettingsIntent: WidgetConfigurationIntent {
+    static var title: LocalizedStringResource = "Widget gestalten"
+    static var description = IntentDescription("Wähle den Farbbereich passend zu deinem Erscheinungsbild.")
+
+    @Parameter(title: "Erscheinungsbild", default: .app)
+    var appearance: DarWidgetAppearance
+}
+
+@available(iOS 17.0, *)
+private struct DarConfiguredEntry: TimelineEntry {
+    let date: Date
+    let snapshot: DarWidgetSnapshot
+    let appearance: DarWidgetAppearance
+}
+
+@available(iOS 17.0, *)
+private struct DarConfiguredProvider: AppIntentTimelineProvider {
+    func placeholder(in context: Context) -> DarConfiguredEntry {
+        DarConfiguredEntry(
+            date: Date(),
+            snapshot: DarDailyContent.refresh(DarWidgetStore.load()),
+            appearance: .navy
+        )
+    }
+
+    func snapshot(for configuration: DarWidgetSettingsIntent, in context: Context) async -> DarConfiguredEntry {
+        DarConfiguredEntry(
+            date: Date(),
+            snapshot: DarDailyContent.refresh(DarWidgetStore.load()),
+            appearance: configuration.appearance
+        )
+    }
+
+    func timeline(for configuration: DarWidgetSettingsIntent, in context: Context) async -> Timeline<DarConfiguredEntry> {
+        let snapshot = DarDailyContent.refresh(DarWidgetStore.load(), fetchLiveDaily: true)
+        DarWidgetStore.save(snapshot)
+        let now = Date()
+        let entry = DarConfiguredEntry(date: now, snapshot: snapshot, appearance: configuration.appearance)
+        let next = Calendar.current.date(byAdding: .minute, value: 10, to: now)
+            ?? now.addingTimeInterval(600)
+        return Timeline(entries: [entry], policy: .after(next))
+    }
+}
+
+@available(iOS 17.0, *)
+private struct DarPremiumPalette {
+    let background: Color
+    let glow: Color
+    let panel: Color
+    let accent: Color
+    let primary: Color
+    let secondary: Color
+
+    static func resolve(_ appearance: DarWidgetAppearance, snapshot: DarWidgetSnapshot) -> Self {
+        let selected: DarWidgetAppearance
+        if appearance == .app {
+            switch snapshot.themeId {
+            case "light", "eisgold": selected = .creme
+            case "royal": selected = .navy
+            case "aurora", "dar-al-layl": selected = .green
+            case "bordeaux", "soft": selected = .bordeaux
+            default: selected = .black
+            }
+        } else {
+            selected = appearance
+        }
+        switch selected {
+        case .creme:
+            return Self(background: Color(red: 0.94, green: 0.88, blue: 0.72), glow: .white, panel: .white.opacity(0.22), accent: Color(red: 0.43, green: 0.31, blue: 0.13), primary: Color(red: 0.16, green: 0.12, blue: 0.07), secondary: Color(red: 0.35, green: 0.29, blue: 0.20))
+        case .navy:
+            return Self(background: Color(red: 0.025, green: 0.075, blue: 0.13), glow: Color(red: 0.16, green: 0.30, blue: 0.48), panel: .white.opacity(0.09), accent: Color(red: 0.94, green: 0.82, blue: 0.52), primary: Color(red: 0.98, green: 0.95, blue: 0.86), secondary: Color(red: 0.73, green: 0.75, blue: 0.72))
+        case .green:
+            return Self(background: Color(red: 0.025, green: 0.12, blue: 0.09), glow: Color(red: 0.12, green: 0.31, blue: 0.22), panel: .white.opacity(0.08), accent: Color(red: 0.91, green: 0.82, blue: 0.59), primary: Color(red: 0.97, green: 0.94, blue: 0.84), secondary: Color(red: 0.70, green: 0.76, blue: 0.68))
+        case .bordeaux:
+            return Self(background: Color(red: 0.19, green: 0.035, blue: 0.065), glow: Color(red: 0.40, green: 0.10, blue: 0.16), panel: .white.opacity(0.09), accent: Color(red: 0.93, green: 0.78, blue: 0.48), primary: Color(red: 1.0, green: 0.94, blue: 0.82), secondary: Color(red: 0.80, green: 0.70, blue: 0.64))
+        case .black, .app:
+            return Self(background: Color(red: 0.025, green: 0.025, blue: 0.022), glow: Color(red: 0.18, green: 0.15, blue: 0.09), panel: .white.opacity(0.07), accent: Color(red: 0.88, green: 0.76, blue: 0.49), primary: Color(red: 0.97, green: 0.94, blue: 0.84), secondary: Color(red: 0.70, green: 0.67, blue: 0.59))
+        }
+    }
+}
+
+@available(iOS 17.0, *)
+private struct DarPremiumBackground: View {
+    let palette: DarPremiumPalette
+
+    var body: some View {
+        ZStack {
+            palette.background
+            LinearGradient(
+                colors: [palette.glow.opacity(0.72), .clear, palette.background.opacity(0.92)],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            RadialGradient(
+                colors: [palette.accent.opacity(0.13), .clear],
+                center: .topTrailing,
+                startRadius: 2,
+                endRadius: 150
+            )
+        }
+    }
+}
+
+@available(iOS 17.0, *)
+private struct DarPremiumLogo: View {
+    let palette: DarPremiumPalette
+    var showName = true
+
+    var body: some View {
+        HStack(spacing: 7) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    .fill(palette.panel)
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    .stroke(palette.accent.opacity(0.55), lineWidth: 0.8)
+                Text("DĀR")
+                    .font(.system(size: 9, weight: .black, design: .rounded))
+                    .foregroundStyle(palette.primary)
+            }
+            .frame(width: 29, height: 29)
+            if showName {
+                Text("DĀR AL TAWḤĪD")
+                    .font(.system(size: 12, weight: .bold, design: .serif))
+                    .tracking(0.25)
+                    .foregroundStyle(palette.primary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.82)
+            }
+        }
+    }
+}
+
+private func darPrayerDate(time: String, after now: Date) -> Date {
+    let parts = time.split(separator: ":").compactMap { Int($0) }
+    guard parts.count == 2 else { return now.addingTimeInterval(3600) }
+    var calendar = Calendar.current
+    calendar.timeZone = .current
+    var components = calendar.dateComponents([.year, .month, .day], from: now)
+    components.hour = parts[0]
+    components.minute = parts[1]
+    components.second = 0
+    let today = calendar.date(from: components) ?? now.addingTimeInterval(3600)
+    return today > now ? today : (calendar.date(byAdding: .day, value: 1, to: today) ?? today.addingTimeInterval(86_400))
+}
+
+@available(iOS 17.0, *)
+private struct DarLivePrayerTimer: View {
+    let now: Date
+    let target: Date
+    let palette: DarPremiumPalette
+    let size: CGFloat
+
+    var body: some View {
+        Text(timerInterval: now...target, countsDown: true, showsHours: true)
+            .font(.system(size: size, weight: .bold, design: .rounded).monospacedDigit())
+            .foregroundStyle(palette.primary)
+            .lineLimit(1)
+            .minimumScaleFactor(0.72)
+            .allowsTightening(true)
+    }
+}
+
+@available(iOS 17.0, *)
+private struct DarPrayerCountdownPremiumView: View {
+    let entry: DarConfiguredEntry
+    @Environment(\.widgetFamily) private var family
+
+    var body: some View {
+        let palette = DarPremiumPalette.resolve(entry.appearance, snapshot: entry.snapshot)
+        let target = darPrayerDate(time: entry.snapshot.nextPrayerTime, after: entry.date)
+        VStack(alignment: .leading, spacing: 7) {
+            HStack {
+                DarPremiumLogo(palette: palette, showName: family != .systemSmall)
+                Spacer(minLength: 5)
+                VStack(alignment: .trailing, spacing: 0) {
+                    Text(entry.snapshot.nextPrayerName)
+                        .font(.system(size: 13, weight: .semibold, design: .serif))
+                    Text("als Nächstes")
+                        .font(.system(size: 9, weight: .medium))
+                        .foregroundStyle(palette.secondary)
+                }
+                .foregroundStyle(palette.primary)
+            }
+            HStack(spacing: 6) {
+                Label(entry.snapshot.cityLabel, systemImage: "location.fill")
+                Spacer(minLength: 3)
+                Text(entry.snapshot.hijriLabel)
+            }
+            .font(.system(size: 9.5, weight: .medium, design: .serif))
+            .foregroundStyle(palette.secondary)
+            .lineLimit(1)
+            .minimumScaleFactor(0.78)
+            Spacer(minLength: 0)
+            DarLivePrayerTimer(now: entry.date, target: target, palette: palette, size: family == .systemSmall ? 26 : 34)
+                .frame(maxWidth: .infinity, alignment: family == .systemSmall ? .center : .trailing)
+            HStack {
+                Text(entry.snapshot.nextPrayerTime)
+                    .font(.system(size: 14, weight: .bold, design: .rounded).monospacedDigit())
+                Spacer()
+                Text("Gebetszeiten öffnen  ↗")
+                    .font(.system(size: 9, weight: .semibold))
+            }
+            .foregroundStyle(palette.accent)
+        }
+        .padding(.horizontal, 11)
+        .padding(.vertical, 10)
+        .containerBackground(for: .widget) { DarPremiumBackground(palette: palette) }
+        .widgetURL(DarDeepLink.Destination.prayer.url)
+    }
+}
+
+@available(iOS 17.0, *)
+private struct DarPrayerOverviewPremiumView: View {
+    let entry: DarConfiguredEntry
+
+    var body: some View {
+        let palette = DarPremiumPalette.resolve(entry.appearance, snapshot: entry.snapshot)
+        let slots = entry.snapshot.prayers.filter { $0.id != "sunrise" }
+        let target = darPrayerDate(time: entry.snapshot.nextPrayerTime, after: entry.date)
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                DarPremiumLogo(palette: palette)
+                Spacer()
+                VStack(alignment: .trailing, spacing: 0) {
+                    Text("\(entry.snapshot.nextPrayerName) in")
+                        .font(.system(size: 10.5, weight: .medium, design: .serif))
+                        .foregroundStyle(palette.secondary)
+                    DarLivePrayerTimer(now: entry.date, target: target, palette: palette, size: 22)
+                }
+            }
+            HStack(spacing: 5) {
+                Label(entry.snapshot.cityLabel, systemImage: "location.fill")
+                Spacer(minLength: 4)
+                Text(entry.snapshot.hijriLabel)
+            }
+            .font(.system(size: 9.5, weight: .medium, design: .serif))
+            .foregroundStyle(palette.secondary)
+            .lineLimit(1)
+            HStack(spacing: 5) {
+                ForEach(slots.prefix(5)) { slot in
+                    VStack(spacing: 2) {
+                        Text(slot.name)
+                            .font(.system(size: 9.5, weight: .semibold, design: .serif))
+                        Text(slot.time)
+                            .font(.system(size: 12.5, weight: .bold, design: .rounded).monospacedDigit())
+                    }
+                    .foregroundStyle(slot.name == entry.snapshot.nextPrayerName ? palette.accent : palette.primary)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 5)
+                    .background(slot.name == entry.snapshot.nextPrayerName ? palette.panel : Color.clear)
+                    .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                }
+            }
+        }
+        .padding(.horizontal, 11)
+        .padding(.vertical, 9)
+        .containerBackground(for: .widget) { DarPremiumBackground(palette: palette) }
+        .widgetURL(DarDeepLink.Destination.prayer.url)
+    }
+}
+
+@available(iOS 17.0, *)
+private struct DarIslamicDayPremiumView: View {
+    let entry: DarConfiguredEntry
+
+    var body: some View {
+        let palette = DarPremiumPalette.resolve(entry.appearance, snapshot: entry.snapshot)
+        let events = Array(entry.snapshot.islamicEvents.prefix(3))
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                DarPremiumLogo(palette: palette)
+                Spacer()
+                Text("ISLAMISCHER TAG")
+                    .font(.system(size: 8.5, weight: .bold))
+                    .tracking(0.8)
+                    .foregroundStyle(palette.accent)
+            }
+            HStack(spacing: 10) {
+                VStack(spacing: 0) {
+                    Text(entry.snapshot.hijriDay)
+                        .font(.system(size: 33, weight: .bold, design: .serif))
+                    Text(entry.snapshot.hijriMonthYear)
+                        .font(.system(size: 9.5, weight: .semibold, design: .serif))
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                }
+                .foregroundStyle(palette.primary)
+                .frame(width: 76)
+                .padding(.vertical, 7)
+                .background(palette.panel)
+                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                VStack(alignment: .leading, spacing: 5) {
+                    if events.isEmpty {
+                        Text(entry.snapshot.hijriLabel)
+                            .font(.system(size: 15, weight: .semibold, design: .serif))
+                            .foregroundStyle(palette.primary)
+                        Text(entry.snapshot.gregorianLabel)
+                            .font(.system(size: 11, weight: .medium))
+                            .foregroundStyle(palette.secondary)
+                    } else {
+                        ForEach(events) { event in
+                            HStack(spacing: 5) {
+                                Text(event.title)
+                                    .lineLimit(1)
+                                Spacer(minLength: 4)
+                                Text(event.daysUntil == 0 ? "Heute" : "\(event.daysUntil) T.")
+                            }
+                            .font(.system(size: 10.5, weight: .semibold, design: .serif))
+                            .foregroundStyle(palette.primary)
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+        .padding(.horizontal, 11)
+        .padding(.vertical, 9)
+        .containerBackground(for: .widget) { DarPremiumBackground(palette: palette) }
+        .widgetURL(DarDeepLink.Destination.hash(entry.snapshot.calendarOpenHash).url)
+    }
+}
+
 private struct PrayerLockWidgetView: View {
     let entry: DarEntry
     @Environment(\.widgetFamily) private var family
@@ -714,8 +1058,60 @@ struct QiblaLockWidget: Widget {
     }
 }
 
+@available(iOS 17.0, *)
+struct DarPrayerCountdownPremiumWidget: Widget {
+    var body: some WidgetConfiguration {
+        AppIntentConfiguration(
+            kind: "de.daraltawhid.widget.premium.countdown",
+            intent: DarWidgetSettingsIntent.self,
+            provider: DarConfiguredProvider()
+        ) {
+            DarPrayerCountdownPremiumView(entry: $0)
+        }
+        .configurationDisplayName("DĀR Gebets-Countdown")
+        .description("Sekundengenauer Countdown zum nächsten Gebet.")
+        .supportedFamilies([.systemSmall, .systemMedium])
+        .contentMarginsDisabled()
+    }
+}
+
+@available(iOS 17.0, *)
+struct DarPrayerOverviewPremiumWidget: Widget {
+    var body: some WidgetConfiguration {
+        AppIntentConfiguration(
+            kind: "de.daraltawhid.widget.premium.overview",
+            intent: DarWidgetSettingsIntent.self,
+            provider: DarConfiguredProvider()
+        ) {
+            DarPrayerOverviewPremiumView(entry: $0)
+        }
+        .configurationDisplayName("DĀR Gebetsübersicht")
+        .description("Countdown und alle Gebetszeiten in einer breiten Übersicht.")
+        .supportedFamilies([.systemMedium])
+        .contentMarginsDisabled()
+    }
+}
+
+@available(iOS 17.0, *)
+struct DarIslamicDayPremiumWidget: Widget {
+    var body: some WidgetConfiguration {
+        AppIntentConfiguration(
+            kind: "de.daraltawhid.widget.premium.islamicday",
+            intent: DarWidgetSettingsIntent.self,
+            provider: DarConfiguredProvider()
+        ) {
+            DarIslamicDayPremiumView(entry: $0)
+        }
+        .configurationDisplayName("DĀR Islamischer Tag")
+        .description("Islamisches Datum und bevorstehende Termine.")
+        .supportedFamilies([.systemMedium])
+        .contentMarginsDisabled()
+    }
+}
+
 @main
 struct DarAlTawhidWidgets: WidgetBundle {
+    @WidgetBundleBuilder
     var body: some Widget {
         PrayerTimesWidget()
         IslamicCalendarWidget()
@@ -725,5 +1121,10 @@ struct DarAlTawhidWidgets: WidgetBundle {
         PrayerLockWidget()
         CalendarLockWidget()
         QiblaLockWidget()
+        if #available(iOS 17.0, *) {
+            DarPrayerCountdownPremiumWidget()
+            DarPrayerOverviewPremiumWidget()
+            DarIslamicDayPremiumWidget()
+        }
     }
 }
