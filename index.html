@@ -5,7 +5,8 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v780";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>/* IOS_RESTORE_V781: Native-Polish aus (Blackscreen/leere Flächen), Inhalt und Klicks wie gestern 18 Uhr */(function(){try{var w=window,n=w.webkit&&w.webkit.messageHandlers,ios=/DarAlTawhid-iOS/i.test(String(navigator.userAgent||""))||!!w.DAR_IOS_NATIVE_APP||!!(n&&(n.darNative||n.darHaptic||n.darAppearance));if(!ios)return;w.DAR_IOS_NATIVE_APP=true;var root=document.documentElement;if(root){root.classList.add("dar-ios-native-app");root.classList.remove("dar-soft-booting")}w.__darIosEnsureViewportPolish=function(){}}catch(e){}})();</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v781";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -19,7 +20,10 @@
     var root=document.documentElement;
     root.setAttribute("data-theme",t);
     root.setAttribute("data-theme-name",names[t]||names.dark);
-    if(!/DarAlTawhid-iOS/i.test(String(navigator.userAgent||""))){
+    if(/DarAlTawhid-iOS/i.test(String(navigator.userAgent||""))){
+      root.classList.add("dar-ios-native-app");
+      root.classList.remove("dar-soft-booting");
+    }else{
       root.classList.add("dar-soft-booting");
     }
     root.style.setProperty("--dar-boot-fill",c);
@@ -34,7 +38,7 @@
 html.dar-soft-booting,html.dar-soft-booting body{background-color:var(--dar-boot-fill,var(--theme-page-bg,#080806))!important;overflow:hidden!important}
 html.dar-soft-booting #bottomNav,html.dar-soft-booting .bottom-nav,html.dar-soft-booting .footer,html.dar-soft-booting .home-discover,html.dar-soft-booting .home-v380{visibility:hidden!important;opacity:0!important;pointer-events:none!important}
 html.dar-ios-native-app.dar-soft-booting,html.dar-ios-native-app.dar-soft-booting body{overflow:visible!important}
-html.dar-ios-native-app #bottomNav,html.dar-ios-native-app #bottomNav.bottom-nav,html.dar-ios-native-app .bottom-nav,html.dar-ios-native-app.dar-soft-booting #bottomNav,html.dar-ios-native-app.dar-soft-booting .bottom-nav,html.dar-ios-native-app.dar-soft-booting .home-discover,html.dar-ios-native-app.dar-soft-booting .home-v380{visibility:visible!important;opacity:1!important;pointer-events:auto!important}
+html.dar-ios-native-app #bottomNav,html.dar-ios-native-app #bottomNav.bottom-nav,html.dar-ios-native-app .bottom-nav,html.dar-ios-native-app .home-discover,html.dar-ios-native-app .home-v380,html.dar-ios-native-app .home-v380-section,html.dar-ios-native-app.dar-soft-booting #bottomNav,html.dar-ios-native-app.dar-soft-booting .bottom-nav,html.dar-ios-native-app.dar-soft-booting .home-discover,html.dar-ios-native-app.dar-soft-booting .home-v380{visibility:visible!important;opacity:1!important;pointer-events:auto!important}
 #dar-soft-boot{position:fixed;inset:0;top:0;left:0;right:0;bottom:0;width:100%;width:100vw;width:100dvw;height:100%;height:100lvh;min-height:100%;min-height:100lvh;min-height:calc(100dvh + env(safe-area-inset-bottom,0px) + 64px);margin:0;box-sizing:border-box;z-index:2147483646;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:max(24px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px)) 24px calc(16vh + env(safe-area-inset-bottom,0px)) 24px;background-color:var(--dar-boot-fill,var(--theme-page-bg,var(--outer-bg-flat,var(--bg,#080806))))!important;background-image:radial-gradient(120% 80% at 50% 42%,rgba(201,168,106,.12),transparent 58%)!important;color:var(--cream,#f4ead2);font-family:Manrope,Inter,system-ui,sans-serif;transition:opacity .28s ease,visibility .28s ease;overscroll-behavior:none;transform:translateZ(0)}
 #dar-soft-boot.is-done{opacity:0;visibility:hidden;pointer-events:none}
 #dar-soft-boot .dar-soft-boot__mark{width:min(148px,38vw);height:min(148px,38vw);border-radius:50%;object-fit:cover;box-shadow:0 14px 36px rgba(0,0,0,.38);border:1px solid rgba(201,168,106,.45)}
@@ -47,8 +51,49 @@ html[data-theme="light"] #dar-soft-boot,html[data-theme="soft"] #dar-soft-boot,h
 html[data-theme="light"] #dar-soft-boot .dar-soft-boot__title,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__title{color:var(--gold2,#9b7a3c)}
 html[data-theme="light"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="light"] #dar-soft-boot .dar-soft-boot__pct,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__pct{color:rgba(58,47,36,.72)}
 </style>
+<style id="dar-ios-restore-v781">
+html.dar-ios-native-app,html.dar-ios-native-app body{
+  background-color:var(--dar-boot-fill,var(--theme-page-bg,#050706))!important;
+}
+html.dar-ios-native-app #appView,html.dar-ios-native-app #appView.view,html.dar-ios-native-app .home-v380,html.dar-ios-native-app .home-discover,html.dar-ios-native-app #bottomNav,html.dar-ios-native-app .home-v380-section{
+  visibility:visible!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+}
+</style>
 <script src="/assets/app-soft-boot.js?v=671"></script>
-<script>/* SOFTBOOT_UNSTICK_V665 */(function(){function wipe(){try{document.documentElement.classList.remove("dar-soft-booting");document.querySelectorAll("#dar-soft-boot").forEach(function(n){n.parentNode&&n.parentNode.removeChild(n)})}catch(e){}}setTimeout(function(){if(document.getElementById("dar-soft-boot"))wipe()},9000)})();</script>
+<script>/* SOFTBOOT_UNSTICK_V781 */(function(){function wipe(){try{document.documentElement.classList.remove("dar-soft-booting");document.querySelectorAll("#dar-soft-boot").forEach(function(n){n.parentNode&&n.parentNode.removeChild(n)})}catch(e){}}if(/DarAlTawhid-iOS/i.test(String(navigator.userAgent||"")))wipe();setTimeout(wipe,2800)})();</script>
+<script>/* IOS_RESTORE_V781: Native Viewport-Polish entfernen — kein zweiter Scroller, keine touch-action:pan-y */(function(){
+  var n=window.webkit&&window.webkit.messageHandlers;
+  var ios=/DarAlTawhid-iOS/i.test(String(navigator.userAgent||""))||!!window.DAR_IOS_NATIVE_APP||!!(n&&(n.darNative||n.darHaptic||n.darAppearance));
+  if(!ios)return;
+  window.DAR_IOS_NATIVE_APP=true;
+  function dropNativeChrome(){
+    try{
+      var root=document.documentElement;
+      if(root){
+        root.classList.add("dar-ios-native-app");
+        root.classList.remove("dar-soft-booting");
+        if(window.__DAR_BOOT_FILL)root.style.backgroundColor=window.__DAR_BOOT_FILL;
+      }
+      ["dar-ios-viewport-polish"].forEach(function(id){
+        var el=document.getElementById(id);
+        if(el){el.disabled=true;if(el.parentNode)el.parentNode.removeChild(el)}
+      });
+      var view=document.getElementById("appView");
+      if(view){
+        view.style.removeProperty("opacity");
+        view.style.removeProperty("visibility");
+        view.style.removeProperty("pointer-events");
+      }
+    }catch(e){}
+  }
+  window.__darIosEnsureViewportPolish=dropNativeChrome;
+  dropNativeChrome();
+  [0,60,180,500,1200].forEach(function(ms){setTimeout(function(){window.__darIosEnsureViewportPolish=dropNativeChrome;dropNativeChrome()},ms)});
+  document.addEventListener("DOMContentLoaded",dropNativeChrome);
+  window.addEventListener("pageshow",dropNativeChrome);
+})();</script>
 
 <script>/* ANDROID_FULL_RELOAD_V665: PWA/Standalone wie iOS — kein Hängen auf Chrome-Splash */(function(){try{var ua=String(navigator.userAgent||"");if(!/Android/i.test(ua))return;document.documentElement.classList.add("is-android");window.addEventListener("pageshow",function(ev){if(ev&&ev.persisted)location.reload()});}catch(e){}})();</script>
 
@@ -26699,7 +26744,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v780";
+const APP_BUILD_ID="app-shell-v781";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -32649,31 +32694,10 @@ html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-apply-btn{
     var quranHair=document.getElementById("eisgold-quran-hairline-v732");
     var pickerNoble=document.getElementById("quran-picker-noble-v733");
     var host=document.documentElement||(s&&s.parentNode);
-    if(s&&host) host.appendChild(s);
-    if(ice&&host) host.appendChild(ice);
-    if(ov&&host) host.appendChild(ov);
-    if(iceFix&&host) host.appendChild(iceFix);
-    if(ink&&host) host.appendChild(ink);
-    if(royal&&host) host.appendChild(royal);
-    if(head&&host) host.appendChild(head);
-    if(ink2&&host) host.appendChild(ink2);
-    if(over&&host) host.appendChild(over);
-    if(uni&&host) host.appendChild(uni);
-    if(sheet&&host) host.appendChild(sheet);
-    if(quran&&host) host.appendChild(quran);
-    if(glacier&&host) host.appendChild(glacier);
-    if(icegold&&host) host.appendChild(icegold);
-    if(quizPlay&&host) host.appendChild(quizPlay);
-    if(noNavy&&host) host.appendChild(noNavy);
-    if(noBlue&&host) host.appendChild(noBlue);
-    if(noble&&host) host.appendChild(noble);
-    if(oval&&host) host.appendChild(oval);
-    if(cols&&host) host.appendChild(cols);
-    if(moreOval&&host) host.appendChild(moreOval);
-    if(moreRows&&host) host.appendChild(moreRows);
-    if(moreHair&&host) host.appendChild(moreHair);
-    if(quranHair&&host) host.appendChild(quranHair);
-    if(pickerNoble&&host) host.appendChild(pickerNoble);
+    if(window.__darParityPinLock)return;
+    window.__darParityPinLock=1;
+    function pinNode(el){ if(el&&host&&el.parentNode!==host) host.appendChild(el); }
+    pinNode(s);pinNode(ice);pinNode(ov);pinNode(iceFix);pinNode(ink);pinNode(royal);pinNode(head);pinNode(ink2);pinNode(over);pinNode(uni);pinNode(sheet);pinNode(quran);pinNode(glacier);pinNode(icegold);pinNode(quizPlay);pinNode(noNavy);pinNode(noBlue);pinNode(noble);pinNode(oval);pinNode(cols);pinNode(moreOval);pinNode(moreRows);pinNode(moreHair);pinNode(quranHair);pinNode(pickerNoble);
     try{
       var root=document.documentElement;
       if(!root)return;
@@ -32705,6 +32729,7 @@ html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-apply-btn{
       syncMeta(fillColor());
       paintEisgoldInk();
     }catch(e){}
+    setTimeout(function(){window.__darParityPinLock=0},180);
   }
   function clearEisgoldInk(){
     try{
