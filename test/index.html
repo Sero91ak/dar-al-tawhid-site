@@ -26106,7 +26106,7 @@ function renderNewsListRow(item,idx){const newsId=item.id||String(idx);const row
 function renderNews(){const items=activeCurrentUpdates();return `${setPageHeader("Neu im Fokus","Aktuelle Meldungen und Highlights","News")}<section class="current-focus premium-surface"><div class="current-focus-list">${items.length?items.map(renderNewsListRow).join(""):`<div class="empty">Derzeit keine aktiven Meldungen.</div>`}</section>`}
 function renderSettings(){
   const liveActivity=`<section class="settings-live-row" aria-label="Live Activity"><span class="settings-live-icon" aria-hidden="true">◷</span><span><b>Live Activity</b><small>Gebets-Countdown auf Sperrbildschirm und Dynamic Island</small></span><span class="settings-off-badge">Aus</span></section>`;
-  return `${setPageHeader("Einstellungen","Alles kompakt an einem Ort.","Einstellungen")}<div class="settings-one-page"><section class="settings-hero"><span class="settings-hero-icon" aria-hidden="true">⚙</span><span><b>Deine App</b><small>Mitteilungen, Darstellung und Lesbarkeit persönlich einstellen.</small></span></section>${renderNotificationCenter({embedded:true})}<div class="settings-section-label"><b>Darstellung</b><span>Farben, Icon und Schrift</span></div>${renderThemeSwitchPanel()}${renderAppIconPanel()}${renderFontSettingsPanel()}<div class="settings-section-label"><b>Demnächst</b><span>Noch nicht aktiviert</span></div>${liveActivity}<p class="settings-save-note">Änderungen werden automatisch auf diesem Gerät gespeichert.</p></div>`
+  return `${setHeader("Einstellungen","Mitteilungen, Darstellung und Lesbarkeit.","","settings-page-head")}<div class="settings-one-page">${renderNotificationCenter({embedded:true})}<div class="settings-section-label"><b>Darstellung</b><span>Farben, Icon und Schrift</span></div>${renderThemeSwitchPanel()}${renderAppIconPanel()}${renderFontSettingsPanel()}<div class="settings-section-label"><b>Demnächst</b><span>Noch nicht aktiviert</span></div>${liveActivity}<p class="settings-save-note">Änderungen werden automatisch auf diesem Gerät gespeichert.</p></div>`
 }
 function renderJummah(){const s=getPrayerSettings();const manual=jummahPref(s,"jummahUseManualTime");const manualTime=normalizeTimeHHMM(s.jummahManualTime,"13:30");const advance=normalizeJummahAdvanceMinutes(s.jummahAdvanceMinutes);const on=jummahPref(s,"jummahNotifications");const timeLabel=manual?manualTime:(hasPrayerLocation(s)?jummahAutoDhuhrLabel(s):"Standort");return `${setPageHeader("Jumuʿah","Freitagsgebet und Erinnerung.","Jumuʿah")}<section class="prayer-panel prayer-page-noble jummah-hub-page">${renderJummahPushPanel()}<div class="qibla-data-grid jummah-hub-meta"><div class="qibla-data-item"><b>Erinnerung</b><span>${on?"Aktiv":"Aus"}</span></div><div class="qibla-data-item"><b>Vorlauf</b><span>${advance} Min</span></div><div class="qibla-data-item"><b>Zeit</b><span>${esc(timeLabel)}</span></div><div class="qibla-data-item"><b>Ort</b><span>${esc(s.city||"—")}</span></div></div><div class="prayer-action-row jummah-hub-nav"><button class="prayer-action-btn" type="button" data-nav="prayer">Gebetszeiten</button></div></section>`}
 function renderQiblaPage(){const settings=getPrayerSettings();return `${setPageHeader("Qibla","","Qibla")}<section class="prayer-panel prayer-page-noble qibla-hub-page">${renderQiblaProPanel(settings)}<div class="prayer-controls-compact qibla-hub-tools"><div class="prayer-settings-grid"><input id="prayerCityInput" class="filter-select" value="${esc(settings.city||"")}" placeholder="Ort" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button><button id="useLocationBtn" class="prayer-action-btn" type="button">Standort</button></div></div></section>`}
@@ -27005,7 +27005,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v826";
+const APP_BUILD_ID="app-shell-v827";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -33607,6 +33607,12 @@ html.dar-test-performance-v1 .settings-one-page .theme-switch-btn.active,html.da
 html.dar-test-performance-v1 .settings-one-page .font-slider-panel{margin:8px 0 0!important;padding:12px 0 0!important;border:0!important;border-top:1px solid color-mix(in srgb,var(--line2,var(--line)) 44%,transparent)!important}
 html.dar-test-performance-v1 .settings-one-page .notification-saved{margin:10px 0 16px!important;box-shadow:none!important}
 @media(pointer:coarse){html.dar-test-performance-v1 :where(.premium-surface,.more-feature-row,.folder-card,.post-card,.list-card,.info-card,.dua-card){-webkit-backdrop-filter:none!important;backdrop-filter:none!important;will-change:auto!important}}
+html.dar-test-performance-v1 .settings-page-head{margin-bottom:0!important;padding-bottom:14px!important;border-bottom:1px solid color-mix(in srgb,var(--gold2) 26%,var(--line2,var(--line)) 74%)!important}
+html.dar-test-performance-v1 .settings-page-head h2{margin-bottom:3px!important}
+html.dar-test-performance-v1 .settings-page-head .view-desc{margin-top:0!important}
+html.dar-test-performance-v1 .settings-one-page :where(.notification-hero,.notification-section,.theme-switch-panel,.app-icon-panel,.app-font-panel,.settings-live-row){width:100%!important;border-bottom-color:color-mix(in srgb,var(--gold2) 24%,var(--line2,var(--line)) 76%)!important}
+html.dar-test-performance-v1 .settings-one-page .notification-hero{padding-top:16px!important}
+html.dar-test-performance-v1 .settings-one-page .settings-section-label{margin-top:15px!important}
 </style>
 
 </html>
