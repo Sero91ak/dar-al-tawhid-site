@@ -94,6 +94,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "ios-appstore-hang-scroll-2026-09-12",
+      "approvedBy": "user-explicit-ios-appstore-sofort-fix-bugs-only",
+      "reason": "Nutzer: aktuelle iOS App Store hängt, Seiten laden nicht, Scroll kaputt, Beschwerden. Sofort nur Bugs, kein Design/Schrift/Logo.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json"
+      ],
+      "expiresAt": "2026-09-14T23:59:00.000Z"
+    },
+    {
       "id": "cloudflare-status-push-cost-trap-2026-09-10",
       "approvedBy": "user-explicit-branche-cloudfare-aufloesen-kostenfalle",
       "reason": "Nutzer: Cloudflare-Git-Branche/Minuten-Pushes sind Kostenfalle und durften nie passieren. Status-Commits dürfen keine CF-Builds auslösen; Secret-Watchdog nicht alle paar Minuten wrangler-deployen.",

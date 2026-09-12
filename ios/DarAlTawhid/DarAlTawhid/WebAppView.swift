@@ -336,21 +336,25 @@ struct WebAppView: UIViewRepresentable {
           }
           window.addEventListener("pageshow", window.__darIosEnsureViewportPolish);
           window.addEventListener("hashchange", function(){ setTimeout(window.__darIosEnsureViewportPolish, 30); });
-          /* Nur beobachten, was der Feed braucht — sonst kostet jede DOM-Änderung Rechenzeit. */
+          /* Kein subtree/childList: appendChild an style-Tags würde die App sonst hängen. */
           try{
-            var mo=new MutationObserver(function(){
-              var needsStyle=!document.getElementById("dar-ios-viewport-polish");
-              var feedOpen=!!(document.body&&document.body.classList.contains("is-feed-fullscreen"));
-              if(!needsStyle&&!feedOpen)return;
-              clearTimeout(window.__darIosFeedPinTimer);
-              window.__darIosFeedPinTimer=setTimeout(window.__darIosEnsureViewportPolish, 140);
-            });
-            function startPolishObserver(){
-              if(!document.body)return;
-              mo.observe(document.body,{childList:true,subtree:true});
+            var polishTimer=null;
+            function schedulePolish(){
+              clearTimeout(polishTimer);
+              polishTimer=setTimeout(function(){
+                var fn=window.__darIosEnsureViewportPolish;
+                if(typeof fn==="function")fn();
+              },200);
             }
-            if(document.body)startPolishObserver();
-            else document.addEventListener("DOMContentLoaded",startPolishObserver,{once:true});
+            var htmlMo=new MutationObserver(schedulePolish);
+            htmlMo.observe(document.documentElement,{attributes:true,attributeFilter:["class","data-theme"]});
+            function watchBody(){
+              if(!document.body)return;
+              var bodyMo=new MutationObserver(schedulePolish);
+              bodyMo.observe(document.body,{attributes:true,attributeFilter:["class"]});
+            }
+            if(document.body)watchBody();
+            else document.addEventListener("DOMContentLoaded",watchBody,{once:true});
           }catch(e){}
         })();
         """
@@ -676,6 +680,7 @@ struct WebAppView: UIViewRepresentable {
         webView.scrollView.contentInsetAdjustmentBehavior = .never
         webView.scrollView.delaysContentTouches = false
         webView.scrollView.canCancelContentTouches = true
+        webView.scrollView.isScrollEnabled = true
         webView.scrollView.backgroundColor = bootInk
         webView.allowsBackForwardNavigationGestures = true
         webView.isOpaque = true
