@@ -16,5 +16,23 @@
     "title": "Duʿāʾ von Mūsā um Allahs Gutes",
     "snippet": "Mein Herr, ich bin dessen, was Du an Gutem zu mir herabsendest, bedürftig.",
     "category": "Versorgung & Bedürftigkeit"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 466,
+      "remaining": 444
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 76,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
