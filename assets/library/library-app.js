@@ -1431,6 +1431,28 @@
     return (catalog?.publications || []).find((p) => p.slug === slug || p.id === slug);
   }
 
+  function installMobilePdfCapture() {
+    if (global.__darLibraryMobilePdfCapture) return;
+    global.__darLibraryMobilePdfCapture = true;
+    global.addEventListener("click", (event) => {
+      if (!shouldUseNativePdfViewer()) return;
+      const target = event?.target;
+      const button = target?.closest?.("[data-library-read],[data-library-download]");
+      if (!button || button.disabled || button.hasAttribute("disabled")) return;
+      const isDownload = button.hasAttribute("data-library-download");
+      const slug = button.getAttribute(isDownload ? "data-library-download" : "data-library-read") || "";
+      const pub = findPublication(slug);
+      if (!pub || (isDownload ? !canDownload(pub) : !canRead(pub))) return;
+      const url = publicationPdfUrl(pub);
+      if (!url) return;
+      event.preventDefault();
+      event.stopPropagation();
+      if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+      trackLibraryEvent(isDownload ? "library_download" : "library_read", pub);
+      global.location.assign(url);
+    }, true);
+  }
+
   function restoreLibraryListUi() {
     if (libraryPreserveScroll) {
       const y = libraryListScrollY;
@@ -1686,4 +1708,5 @@
       uiState = { query: "", category: "Alle", catOpen: false };
     }
   };
+  installMobilePdfCapture();
 })(window);
