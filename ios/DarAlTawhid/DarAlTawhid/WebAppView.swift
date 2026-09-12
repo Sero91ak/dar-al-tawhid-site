@@ -706,7 +706,9 @@ struct WebAppView: UIViewRepresentable {
             backdropView: backdropView,
             containerView: containerView
         )
-        webView.load(URLRequest(url: Self.launchURL))
+        var launchRequest = URLRequest(url: Self.launchURL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 30)
+        launchRequest.setValue("no-cache", forHTTPHeaderField: "Cache-Control")
+        webView.load(launchRequest)
         return containerView
     }
 
@@ -1137,8 +1139,10 @@ struct WebAppView: UIViewRepresentable {
         }
 
         func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-            showLoadingOverlay(subtitle: "App wird geladen")
-            scheduleLoadTimeout(for: webView)
+            if !hasCompletedInitialLoad {
+                showLoadingOverlay(subtitle: "App wird geladen")
+                scheduleLoadTimeout(for: webView)
+            }
         }
 
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -1147,7 +1151,6 @@ struct WebAppView: UIViewRepresentable {
             hasCompletedInitialLoad = true
             didShowErrorState = false
             hideLoadingOverlay()
-            lastAppliedTopInset = -1
             updateViewportInsets()
             // Appearance after overlay finishes, so boot screen stays visible until 100%.
             handlePossibleLibraryReaderRoute(currentURL)
@@ -1325,7 +1328,7 @@ struct WebAppView: UIViewRepresentable {
             }
             webView.scrollView.backgroundColor = pageSurfaceColor
 
-            let topInset = max(resolvedInsets.top, 59)
+            let topInset = max(0, resolvedInsets.top)
             if abs(topInset - lastAppliedTopInset) < 0.5, lastAppliedTopInset >= 0 {
                 return
             }
@@ -1354,9 +1357,6 @@ struct WebAppView: UIViewRepresentable {
               root.style.setProperty("--dar-ios-safe-left","\(left)px");
               root.style.setProperty("--dar-ios-safe-right","\(right)px");
               if(body)body.classList.add("dar-ios-native-app");
-              if(typeof window.__darIosEnsureViewportPolish==="function"){
-                window.__darIosEnsureViewportPolish();
-              }
               var meta=document.querySelector('meta[name="viewport"]');
               if(meta){
                 var content=String(meta.getAttribute("content")||"");
