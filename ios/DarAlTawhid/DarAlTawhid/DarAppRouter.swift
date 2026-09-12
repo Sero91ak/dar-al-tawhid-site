@@ -14,6 +14,20 @@ final class DarAppRouter: ObservableObject {
         )
     }
 
+    func openShortcut(_ destination: DarDeepLink.Destination) {
+        _ = DarQuickActions.consume()
+        webURL = nil
+        self.destination = destination
+        openNonce = UUID()
+    }
+
+    func openPendingQuickAction() {
+        guard let destination = DarQuickActions.consume() else { return }
+        webURL = nil
+        self.destination = destination
+        openNonce = UUID()
+    }
+
     func openPush(type: String, postId: String, url: String) {
         let cleanType = type.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         let cleanPost = postId.trimmingCharacters(in: .whitespacesAndNewlines)

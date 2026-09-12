@@ -255,9 +255,31 @@ struct WebAppView: UIViewRepresentable {
                 return
             }
             pendingDestination = nil
-            webView.evaluateJavaScript(
-                "window.location.hash=\(Self.jsString(destination.webHash));"
-            )
+            let directHash = destination == .qibla ? "#qibla" : destination.webHash
+            let script = """
+            (function(){
+              var destination=\(Self.jsString(destination.rawValue));
+              var hash=\(Self.jsString(directHash));
+              try{
+                if(destination==="qibla"){
+                  if(typeof openQiblaFromFloat==="function"){
+                    openQiblaFromFloat();
+                    return;
+                  }
+                  if(typeof navigate==="function"){
+                    navigate("qibla");
+                    return;
+                  }
+                }
+                if(typeof navigate==="function"){
+                  navigate(destination);
+                  return;
+                }
+              }catch(e){}
+              window.location.hash=hash;
+            })();
+            """
+            webView.evaluateJavaScript(script)
         }
 
         func open(_ url: URL) {
