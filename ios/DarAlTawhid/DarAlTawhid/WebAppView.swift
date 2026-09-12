@@ -107,6 +107,7 @@ struct WebAppView: UIViewRepresentable {
           try{
             window.DAR_IOS_NATIVE_PUSH=true;
             window.DAR_IOS_NATIVE_APP=true;
+            window.__DAR_IOS_BUILD__="0.26-visitor-parity";
             window.DAR_IOS_DEVICE_ID="\(escapedDevice)";
             try{localStorage.setItem("darPushExternalIdV1", window.DAR_IOS_DEVICE_ID)}catch(e){}
             window.Notification=window.Notification||function(){};
@@ -485,7 +486,7 @@ struct WebAppView: UIViewRepresentable {
         webView.allowsBackForwardNavigationGestures = false
         webView.isOpaque = true
         webView.backgroundColor = bootInk
-        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.25-watch-push"
+        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.26-visitor-parity"
         webView.onInsetsChange = { [weak coordinator = context.coordinator] in
             coordinator?.updateViewportInsets()
         }
