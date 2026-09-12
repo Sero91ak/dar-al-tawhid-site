@@ -20771,6 +20771,9 @@ html body .post-reader-main .post-source-oval.post-source-module .post-after-lin
       <span class="quick-action-emoji" aria-hidden="true">🔔</span>
       <span id="quickAccessRemindStatus" class="quick-action-dot" hidden></span>
     </button>
+    <button type="button" id="quickAccessSettingsBtn" class="quick-action" role="menuitem" data-qa-action="settings" aria-label="Einstellungen" title="Einstellungen">
+      <span class="quick-action-emoji" aria-hidden="true">⚙️</span>
+    </button>
   </div>
 </div>
 
@@ -27001,7 +27004,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v824";
+const APP_BUILD_ID="app-shell-v825";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -27921,7 +27924,7 @@ let quickMenuOpenedAt=0;
 let quickAccessDocListenersBound=false;
 
 const NAV_LONGPRESS_MENU_HTML={
-  more:`<button type="button" id="quickAccessOrientBtn" class="quick-action" role="menuitem" data-qa-action="orient" aria-label="Orientierung" title="Orientierung"><span class="quick-action-emoji" aria-hidden="true">🧭</span></button><button type="button" id="quickAccessSavedBtn" class="quick-action" role="menuitem" data-qa-action="saved" aria-label="Merkliste" title="Merkliste"><span class="quick-action-emoji" aria-hidden="true">❤️</span><span id="quickAccessSavedBadge" class="quick-action-badge" hidden>0</span></button><button type="button" id="quickAccessRemindBtn" class="quick-action" role="menuitem" data-qa-action="remind" aria-label="Erinnerungen" title="Erinnerungen"><span class="quick-action-emoji" aria-hidden="true">🔔</span><span id="quickAccessRemindStatus" class="quick-action-dot" hidden></span></button>`,
+  more:`<button type="button" id="quickAccessOrientBtn" class="quick-action" role="menuitem" data-qa-action="orient" aria-label="Orientierung" title="Orientierung"><span class="quick-action-emoji" aria-hidden="true">🧭</span></button><button type="button" id="quickAccessSavedBtn" class="quick-action" role="menuitem" data-qa-action="saved" aria-label="Merkliste" title="Merkliste"><span class="quick-action-emoji" aria-hidden="true">❤️</span><span id="quickAccessSavedBadge" class="quick-action-badge" hidden>0</span></button><button type="button" id="quickAccessRemindBtn" class="quick-action" role="menuitem" data-qa-action="remind" aria-label="Erinnerungen" title="Erinnerungen"><span class="quick-action-emoji" aria-hidden="true">🔔</span><span id="quickAccessRemindStatus" class="quick-action-dot" hidden></span></button><button type="button" id="quickAccessSettingsBtn" class="quick-action" role="menuitem" data-qa-action="settings" aria-label="Einstellungen" title="Einstellungen"><span class="quick-action-emoji" aria-hidden="true">⚙️</span></button>`,
   quran:`<button type="button" id="quickAccessQuranContinueBtn" class="quick-action" role="menuitem" data-qa-action="continue-reading" aria-label="Weiterlesen" title="Weiterlesen"><span class="quick-action-emoji" aria-hidden="true">📖</span></button><button type="button" id="quickAccessQuranTopicsBtn" class="quick-action" role="menuitem" data-qa-action="quran-topics" aria-label="Themen" title="Themen"><span class="quick-action-emoji" aria-hidden="true">🗂️</span></button><button type="button" id="quickAccessQuranSearchBtn" class="quick-action" role="menuitem" data-qa-action="quran-search" aria-label="Durchsuchen" title="Durchsuchen"><span class="quick-action-emoji" aria-hidden="true">🔍</span></button>`
 };
 
@@ -28182,6 +28185,7 @@ function runQuickAccessAction(kind,btn){
     if(kind==="orient"){openQiblaFromFloat();return}
     if(kind==="saved"){navigate("saved");return}
     if(kind==="remind"){navigate("more");setTimeout(()=>{try{document.getElementById("prayerPushAccordionToggle")?.click()}catch(e){}},180);return}
+    if(kind==="settings"){navigate("settings");return}
     if(kind==="continue-reading"){openQuranContinueFromQuickAccess();return}
     if(kind==="quran-topics"){openQuranTopicsFromQuickAccess();return}
     if(kind==="quran-search"){focusQuranSearchFromQuickAccess();return}
