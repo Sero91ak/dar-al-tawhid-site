@@ -214,25 +214,6 @@ struct WebAppView: UIViewRepresentable {
             root.classList.remove("dar-ios-native-tabs");
             root.classList.remove("dar-soft-booting");
           }catch(e){}
-          function brand(){
-            try{
-              var nodes=document.querySelectorAll("h1,h2,.footer strong,.hero-text,.more-title,.brand-title,.app-title,title");
-              for(var i=0;i<nodes.length;i++){
-                var el=nodes[i];
-                if(!el||!el.childNodes)continue;
-                for(var j=0;j<el.childNodes.length;j++){
-                  var n=el.childNodes[j];
-                  if(n.nodeType===3 && n.nodeValue && n.nodeValue.indexOf("TAWḤID")>=0){
-                    n.nodeValue=n.nodeValue.replace(/TAWḤID/g,"TAWḤĪD");
-                  }
-                }
-              }
-            }catch(e){}
-          }
-          brand();
-          setTimeout(brand,400);
-          setTimeout(brand,1200);
-          window.addEventListener("hashchange", function(){ setTimeout(brand,80); });
         })();
         """
         userContentController.addUserScript(
@@ -242,103 +223,6 @@ struct WebAppView: UIViewRepresentable {
                 forMainFrameOnly: true
             )
         )
-        let iosViewportPolish = """
-        (function(){
-          if(window.__darIosViewportPolishInstalled)return;
-          window.__darIosViewportPolishInstalled=true;
-          window.__DAR_IOS_BUILD__="0.25-watch-push";
-          /* Web owns the glassy floating #bottomNav. iOS must not hide or restyle it. */
-          function cssText(){
-            return [
-              "html.dar-ios-native-app{",
-              "  --dar-ios-theme-bg:var(--theme-page-bg,var(--theme-feed-bg,var(--quran-page-bg,var(--outer-bg-flat,var(--bg,#050504)))));",
-              "}",
-              "html.dar-ios-native-app #dar-soft-boot{display:none!important;visibility:hidden!important;}",
-              "html.dar-ios-native-app #footerAppSave,html.dar-ios-native-app .footer-app-save,html.dar-ios-native-app .footer-action-save{display:none!important;}",
-              "html.dar-ios-native-app .footer-actions,html.dar-ios-native-app .footer-social,html.dar-ios-native-app .footer-links,html.dar-ios-native-app .app-footer .actions,html.dar-ios-native-app .footer-row{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;align-items:center!important;grid-template-columns:none!important;gap:10px!important;max-width:100%!important;margin:12px auto 0!important;text-align:center!important;}",
-              "html.dar-ios-native-app .footer-actions .footer-action-btn,html.dar-ios-native-app .footer-actions .footer-social-link,html.dar-ios-native-app .footer-social a{flex:0 1 auto!important;min-width:96px!important;margin-left:auto!important;margin-right:auto!important;}",
-              "html.dar-ios-native-app button,html.dar-ios-native-app a,html.dar-ios-native-app [role=button],html.dar-ios-native-app [data-nav],html.dar-ios-native-app .prayer-action-btn,html.dar-ios-native-app input,html.dar-ios-native-app label{touch-action:manipulation!important;cursor:pointer!important;-webkit-tap-highlight-color:rgba(212,175,55,0.18)!important;}",
-              "html.dar-ios-native-app.dar-soft-booting,",
-              "html.dar-ios-native-app.dar-soft-booting body{overflow:visible!important;}",
-              "html.dar-ios-native-app body.is-home-route,",
-              "html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen),",
-              "html.dar-ios-native-app body.is-more-route,",
-              "html.dar-ios-native-app body.is-quiz-route{",
-              "  padding-top:max(8px,var(--safe-top),var(--dar-native-safe-top,0px)) !important;",
-              "}",
-              "html.dar-ios-native-app body.is-feed-fullscreen{",
-              "  padding-top:max(0px,var(--safe-top),var(--dar-native-safe-top,0px)) !important;",
-              "}",
-              "html.dar-ios-native-app body.is-quran-overview #appView,",
-              "html.dar-ios-native-app body.is-quran-overview #appView.view{",
-              "  padding-top:max(6px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px)) !important;",
-              "}"
-            ].join("\\n");
-          }
-          function ensureStyle(){
-            var root=document.documentElement;
-            var style=document.getElementById("dar-ios-viewport-polish");
-            var fresh=false;
-            if(!style){
-              style=document.createElement("style");
-              style.id="dar-ios-viewport-polish";
-              style.textContent=cssText();
-              fresh=true;
-            }
-            if(root){
-              root.classList.add("dar-ios-native-app");
-              root.classList.remove("dar-soft-booting");
-              root.style.removeProperty("background-color");
-              if(root.getAttribute("data-layout")==="medium"||root.getAttribute("data-layout")==="expanded"){
-                root.setAttribute("data-layout","compact");
-              }
-            }
-            if(document.body)document.body.classList.add("dar-ios-native-app");
-            /* Nur einbauen, wenn nötig — sonst rechnet Safari die ganze Seite neu und die App hängt. */
-            if(document.head&&(fresh||!style.parentNode))document.head.appendChild(style);
-            try{
-              var sb0=document.getElementById("dar-soft-boot");
-              if(sb0&&sb0.parentNode)sb0.parentNode.removeChild(sb0);
-              if(!window.__darIosSoftBootFinished&&typeof window.__darSoftBootFinish==="function"){
-                window.__darIosSoftBootFinished=true;
-                window.__darSoftBootFinish();
-              }
-            }catch(e){}
-            if(window.__darIosFeedForcePinned)return;
-            window.__darIosFeedForcePinned=true;
-            var feedForce=document.getElementById("dar-ios-parity-edge-force-v665")||document.getElementById("dar-ios-parity-edge-force-v659")||document.getElementById("dar-ios-parity-edge-force-v658")||document.getElementById("dar-ios-parity-edge-force-v657")||document.getElementById("dar-ios-parity-edge-force-v656")||document.getElementById("dar-ios-parity-edge-force-v655")||document.getElementById("dar-ios-parity-edge-force-v654")||document.getElementById("dar-ios-parity-edge-force-v653")||document.getElementById("dar-ios-parity-edge-force-v652")||document.getElementById("dar-ios-parity-edge-force-v651")||document.getElementById("dar-ios-parity-edge-force-v650")||document.getElementById("dar-ios-parity-edge-force-v649")||document.getElementById("dar-ios-parity-edge-force-v648")||document.getElementById("full-edge-feed-force-v645")||document.getElementById("full-edge-feed-force-v644");
-            if(feedForce&&document.head)document.head.appendChild(feedForce);
-          }
-          function pinFeedNodes(){
-            if(!document.body||!document.body.classList.contains("is-feed-fullscreen"))return;
-            var nodes=document.querySelectorAll(".sf-app,.sf-top,.sf-filters,.sf-feed,.sf-post,.sf-post--image-feed,#premiumFeedMount,.pf-mount-root");
-            for(var i=0;i<nodes.length;i++){
-              var el=nodes[i];
-              el.style.setProperty("width","100%","important");
-              el.style.setProperty("max-width","100%","important");
-              el.style.setProperty("margin-left","0px","important");
-              el.style.setProperty("margin-right","0px","important");
-            }
-            var gutters=document.querySelectorAll(".sf-top,.sf-filters,.sf-feed");
-            for(var j=0;j<gutters.length;j++){
-              gutters[j].style.setProperty("padding-left","max(8px,env(safe-area-inset-left,0px))","important");
-              gutters[j].style.setProperty("padding-right","max(8px,env(safe-area-inset-right,0px))","important");
-            }
-          }
-          window.__darIosEnsureViewportPolish=function(){
-            ensureStyle();
-            pinFeedNodes();
-          };
-          if(document.readyState==="loading"){
-            document.addEventListener("DOMContentLoaded", window.__darIosEnsureViewportPolish, {once:true});
-          } else {
-            window.__darIosEnsureViewportPolish();
-          }
-          window.addEventListener("pageshow", window.__darIosEnsureViewportPolish);
-          window.addEventListener("hashchange", function(){ setTimeout(window.__darIosEnsureViewportPolish, 30); });
-        })();
-        """
-
         let libraryReaderBridge = """
         (function(){
           if(window.__darLibraryReaderBridgeInstalled)return;
@@ -400,73 +284,9 @@ struct WebAppView: UIViewRepresentable {
           setTimeout(postCurrent, 300);
         })();
         """
-        let iosLibraryDetailPolish = """
-        (function(){
-          if(window.__darIosLibraryDetailPolishInstalled)return;
-          window.__darIosLibraryDetailPolishInstalled=true;
-          function ensureStyle(){
-            var style=document.getElementById("dar-ios-library-detail-polish");
-            if(style){
-              if(!style.parentNode&&document.head)document.head.appendChild(style);
-              return;
-            }
-            style=document.createElement("style");
-            style.id="dar-ios-library-detail-polish";
-            style.textContent = [
-              "html.dar-ios-native-app body .lib-page.lib-detail{",
-              "  padding-top: 0 !important;",
-              "}",
-              "html.dar-ios-native-app body .lib-page.lib-detail .lib-detail-hero.lib-detail-hero-compact{",
-              "  margin-top: 0 !important;",
-              "  padding-top: 8px !important;",
-              "  gap: 18px !important;",
-              "}",
-              "html.dar-ios-native-app body .lib-page.lib-detail .lib-detail-cover{",
-              "  margin-top: 18px !important;",
-              "}",
-              "html.dar-ios-native-app body .lib-page.lib-detail .lib-detail-copy{",
-              "  padding-top: 8px !important;",
-              "}",
-              "html.dar-ios-native-app body .lib-page.lib-detail .lib-actions.lib-actions-compact{",
-              "  margin-top: 14px !important;",
-              "}",
-              "@media (max-width: 520px){",
-              "  html.dar-ios-native-app body .lib-page.lib-detail .lib-detail-hero.lib-detail-hero-compact{",
-              "    padding-top: 6px !important;",
-              "  }",
-              "  html.dar-ios-native-app body .lib-page.lib-detail .lib-detail-cover{",
-              "    margin-top: 14px !important;",
-              "  }",
-              "}"
-            ].join("\\n");
-            if(document.head)document.head.appendChild(style);
-          }
-          if(document.readyState === "loading"){
-            document.addEventListener("DOMContentLoaded", ensureStyle, { once:true });
-          } else {
-            ensureStyle();
-          }
-          window.addEventListener("pageshow", ensureStyle);
-          window.addEventListener("hashchange", function(){ setTimeout(ensureStyle, 40); });
-        })();
-        """
-        userContentController.addUserScript(
-            WKUserScript(
-                source: iosViewportPolish,
-                injectionTime: .atDocumentEnd,
-                forMainFrameOnly: true
-            )
-        )
         userContentController.addUserScript(
             WKUserScript(
                 source: libraryReaderBridge,
-                injectionTime: .atDocumentEnd,
-                forMainFrameOnly: true
-            )
-        )
-        userContentController.addUserScript(
-            WKUserScript(
-                source: iosLibraryDetailPolish,
                 injectionTime: .atDocumentEnd,
                 forMainFrameOnly: true
             )
@@ -662,7 +482,7 @@ struct WebAppView: UIViewRepresentable {
         webView.scrollView.canCancelContentTouches = true
         webView.scrollView.isScrollEnabled = true
         webView.scrollView.backgroundColor = bootInk
-        webView.allowsBackForwardNavigationGestures = true
+        webView.allowsBackForwardNavigationGestures = false
         webView.isOpaque = true
         webView.backgroundColor = bootInk
         webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.25-watch-push"
@@ -1126,11 +946,12 @@ struct WebAppView: UIViewRepresentable {
         }
 
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            guard let currentURL = webView.url, isAllowedInternalURL(currentURL) else { return }
             loadTimeoutWorkItem?.cancel()
             hasCompletedInitialLoad = true
             didShowErrorState = false
             hideLoadingOverlay()
+            webView.alpha = 1
+            guard let currentURL = webView.url, isAllowedInternalURL(currentURL) else { return }
             updateViewportInsets()
             // Appearance after overlay finishes, so boot screen stays visible until 100%.
             handlePossibleLibraryReaderRoute(currentURL)
@@ -1859,7 +1680,6 @@ struct WebAppView: UIViewRepresentable {
             overlay.isUserInteractionEnabled = true
             overlay.alpha = 1
             containerView?.bringSubviewToFront(overlay)
-            webView?.alpha = 0.001
             startLoadingProgress()
         }
 
