@@ -27001,7 +27001,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v822";
+const APP_BUILD_ID="app-shell-v823";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -33570,6 +33570,11 @@ html.dar-smooth-nav-v3 #bottomNav .bottom-nav-btn>span:last-child{display:block!
 html.dar-smooth-nav-v3 #appView.view.page-enter-forward,html.dar-smooth-nav-v3 #appView.view.page-enter-back,html.dar-smooth-nav-v3 #appView.view.tab-swipe-left,html.dar-smooth-nav-v3 #appView.view.tab-swipe-right{animation:darRouteRevealV3 .12s ease-out both!important;transform:none!important;-webkit-transform:none!important;will-change:opacity!important;backface-visibility:visible!important;-webkit-backface-visibility:visible!important}
 @keyframes darRouteRevealV3{from{opacity:.965}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){html.dar-smooth-nav-v3 #appView.view.page-enter-forward,html.dar-smooth-nav-v3 #appView.view.page-enter-back,html.dar-smooth-nav-v3 #appView.view.tab-swipe-left,html.dar-smooth-nav-v3 #appView.view.tab-swipe-right{animation:none!important}}
+html.dar-smooth-nav-v3 #bottomNav.bottom-nav{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:color-mix(in srgb,var(--bg) 96%,var(--card) 4%)!important;contain:none!important}
+html.dar-smooth-nav-v3 #bottomNav .bottom-nav-btn,html.dar-smooth-nav-v3 #bottomNav .bottom-nav-more{-webkit-appearance:none!important;appearance:none!important;gap:0!important;padding:0!important;overflow:hidden!important;outline:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;transform:none!important;-webkit-transform:none!important;filter:none!important;transition:color .1s linear!important;-webkit-tap-highlight-color:transparent!important}
+html.dar-smooth-nav-v3 #bottomNav .bottom-nav-btn>span:last-child{position:absolute!important;width:1px!important;height:1px!important;margin:-1px!important;padding:0!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important}
+html.dar-smooth-nav-v3 #bottomNav .bottom-nav-btn .nav-icon,html.dar-smooth-nav-v3 #bottomNav .bottom-nav-btn.active .nav-icon,html.dar-smooth-nav-v3 #bottomNav .bottom-nav-btn.is-pressed .nav-icon,html.dar-smooth-nav-v3 #bottomNav .bottom-nav-btn:active .nav-icon{display:grid!important;place-items:center!important;width:31px!important;height:31px!important;flex:0 0 31px!important;font-size:27px!important;line-height:31px!important;transform:none!important;-webkit-transform:none!important;filter:none!important}
+html.dar-smooth-nav-v3 #bottomNav .bottom-nav-btn.active,html.dar-smooth-nav-v3 #bottomNav .bottom-nav-btn.is-pressed,html.dar-smooth-nav-v3 #bottomNav .bottom-nav-btn:active,html.dar-smooth-nav-v3 #bottomNav .bottom-nav-btn:focus,html.dar-smooth-nav-v3 #bottomNav .bottom-nav-btn:focus-visible{transform:none!important;-webkit-transform:none!important;filter:none!important;background:transparent!important;box-shadow:none!important;outline:0!important}
 </style>
 
 </html>
