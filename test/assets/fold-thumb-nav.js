@@ -10,8 +10,7 @@
 
   var root = document.documentElement;
   var active = false;
-  var rafOne = 0;
-  var rafTwo = 0;
+  var rafId = 0;
   var navProperties = [
     "position", "left", "right", "top", "bottom", "width", "min-width",
     "max-width", "height", "min-height", "max-height", "margin", "padding",
@@ -150,13 +149,10 @@
   }
 
   function schedule() {
-    if (rafOne || rafTwo) return;
-    rafOne = global.requestAnimationFrame(function () {
-      rafOne = 0;
-      rafTwo = global.requestAnimationFrame(function () {
-        rafTwo = 0;
-        apply();
-      });
+    if (rafId) return;
+    rafId = global.requestAnimationFrame(function () {
+      rafId = 0;
+      apply();
     });
   }
 
