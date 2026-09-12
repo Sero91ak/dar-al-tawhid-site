@@ -1,310 +1,261 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" data-theme="layl">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#07100d">
-  <title>DĀR AL TAWḤĪD – Wissensstartseite Vorschau</title>
+  <meta name="theme-color" content="#070908">
+  <title>DĀR AL TAWḤĪD – Smart Knowledge Preview</title>
   <style>
     :root{
       color-scheme:dark;
-      --bg:#07100d;
-      --bg-deep:#030705;
-      --surface:rgba(18,30,25,.78);
-      --surface-strong:#13231d;
-      --line:rgba(236,207,137,.16);
-      --line-strong:rgba(236,207,137,.34);
-      --gold:#e4c579;
-      --gold-soft:#ad9257;
-      --cream:#f7efd9;
-      --muted:#a9b5ad;
-      --green:#14392e;
-      --shadow:0 24px 60px rgba(0,0,0,.38);
+      --bg:#060807;--bg2:#0c110e;--glass:rgba(18,23,20,.76);--glass2:rgba(28,34,30,.82);
+      --ink:#f3eee2;--muted:#9ea69f;--gold:#d8be82;--gold2:#f0d99b;--line:rgba(216,190,130,.16);
+      --accent:#315746;--accent2:#142a21;--glow:rgba(61,116,89,.26);--dark:#030504;
       --serif:"Iowan Old Style","Baskerville","Times New Roman",serif;
-      --sans:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+      --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display",Inter,"Segoe UI",sans-serif;
     }
+    html[data-theme="creme"]{color-scheme:light;--bg:#eee4ce;--bg2:#f8f2e7;--glass:rgba(255,252,244,.72);--glass2:rgba(255,253,247,.88);--ink:#18271f;--muted:#68746d;--gold:#8e6d30;--gold2:#70501d;--line:rgba(89,63,25,.15);--accent:#d7c08b;--accent2:#eadcbc;--glow:rgba(199,164,88,.22);--dark:#ddd0b5}
+    html[data-theme="navy"]{--bg:#050b16;--bg2:#081628;--glass:rgba(9,22,40,.76);--glass2:rgba(13,31,55,.86);--ink:#f6f0df;--muted:#9eabbc;--gold:#e3c778;--gold2:#f2daa0;--line:rgba(227,199,120,.17);--accent:#173e67;--accent2:#0b2643;--glow:rgba(41,106,163,.3);--dark:#020711}
     *{box-sizing:border-box}
-    html{background:#020403;scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
-    body{margin:0;min-height:100dvh;color:var(--cream);font-family:var(--sans);background:
-      radial-gradient(circle at 12% -8%,rgba(53,117,91,.18),transparent 34rem),
-      radial-gradient(circle at 88% 0%,rgba(228,197,121,.08),transparent 28rem),#020403}
-    button{font:inherit}
+    html{min-height:100%;background:var(--dark);scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
+    body{margin:0;min-height:100dvh;background:var(--dark);color:var(--ink);font-family:var(--sans)}
+    button{font:inherit;color:inherit}
     button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-    .stage{min-height:100dvh;display:grid;grid-template-columns:minmax(0,430px) minmax(250px,390px);gap:42px;justify-content:center;align-items:start;padding:38px 24px}
-    .phone{position:relative;isolation:isolate;min-height:860px;overflow:hidden;border:1px solid rgba(247,239,217,.13);border-radius:42px;background:var(--bg);box-shadow:0 36px 100px #000,0 0 0 8px #090b0a}
-    .phone:before{content:"";position:fixed;pointer-events:none;z-index:-1;width:430px;height:420px;background:
-      radial-gradient(circle at 18% 0%,rgba(70,142,112,.26),transparent 56%),
-      radial-gradient(circle at 86% 2%,rgba(228,197,121,.13),transparent 45%)}
-    .app{min-height:100%;padding:22px 17px 110px}
-    .topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:2px 2px 18px}
-    .brand{display:flex;align-items:center;gap:11px;min-width:0}
-    .mark{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;border:1px solid var(--line-strong);background:linear-gradient(145deg,rgba(228,197,121,.19),rgba(228,197,121,.035));box-shadow:inset 0 1px rgba(255,255,255,.08)}
-    .mark span{font:800 12px/1 var(--serif);letter-spacing:.06em;color:var(--gold)}
-    .brand-title{font:700 17px/1 var(--serif);letter-spacing:.055em;white-space:nowrap}
-    .brand-sub{margin-top:4px;color:var(--muted);font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
-    .icon-button{width:39px;height:39px;border:1px solid var(--line);border-radius:14px;background:rgba(247,239,217,.04);color:var(--cream);display:grid;place-items:center;cursor:pointer;transition:.18s ease}
-    .icon-button:active,.save:active,.chip:active,.nav-item:active{transform:scale(.94);filter:brightness(1.18)}
-    .prayer-strip{display:flex;align-items:center;gap:12px;padding:11px 13px;margin-bottom:17px;border:1px solid var(--line);border-radius:17px;background:rgba(9,20,16,.62);backdrop-filter:blur(18px)}
-    .prayer-symbol{width:33px;height:33px;border-radius:12px;display:grid;place-items:center;color:var(--gold);background:rgba(228,197,121,.09)}
-    .prayer-copy{min-width:0;flex:1}
-    .prayer-copy small{display:block;color:var(--muted);font-size:9px;font-weight:750;letter-spacing:.11em;text-transform:uppercase}
-    .prayer-copy strong{display:block;margin-top:3px;font:700 14px/1 var(--serif)}
-    .prayer-time{text-align:right}
-    .prayer-time b{font-size:16px;color:var(--gold)}
-    .prayer-time small{display:block;margin-top:2px;color:var(--muted);font-size:9px}
-    .welcome{margin:0 2px 18px}
-    .eyebrow{color:var(--gold-soft);font-size:9px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
-    h1{max-width:360px;margin:7px 0 7px;font:700 33px/.96 var(--serif);letter-spacing:-.025em}
-    .welcome p{max-width:350px;margin:0;color:var(--muted);font-size:12px;line-height:1.5}
-    .search{display:flex;align-items:center;gap:10px;height:47px;padding:0 14px;margin-bottom:15px;border:1px solid var(--line);border-radius:16px;background:rgba(247,239,217,.04);color:var(--muted)}
-    .search span{font-size:13px}
-    .tabs{display:flex;gap:7px;overflow:auto;padding:1px 1px 12px;scrollbar-width:none}
-    .tabs::-webkit-scrollbar{display:none}
-    .chip{border:1px solid var(--line);border-radius:999px;padding:8px 13px;background:rgba(247,239,217,.025);color:var(--muted);font-size:11px;font-weight:750;white-space:nowrap;cursor:pointer;transition:.18s ease}
-    .chip.active{border-color:var(--line-strong);background:rgba(228,197,121,.1);color:var(--cream)}
-    .feature{position:relative;overflow:hidden;min-height:276px;padding:19px;margin:1px 0 23px;border:1px solid var(--line-strong);border-radius:27px;background:
-      linear-gradient(180deg,rgba(5,15,11,.02),rgba(3,9,7,.92)),
-      radial-gradient(circle at 78% 10%,rgba(228,197,121,.16),transparent 34%),
-      linear-gradient(145deg,#285846,#0b1c16 64%);box-shadow:var(--shadow)}
-    .feature:before{content:"";position:absolute;inset:-40% -25% 35% 24%;border:1px solid rgba(228,197,121,.18);border-radius:50%;transform:rotate(-13deg)}
-    .feature:after{content:"التوحيد";position:absolute;right:17px;top:49px;color:rgba(247,239,217,.075);font:700 58px/1 var(--serif);transform:rotate(-5deg)}
-    .feature-top{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center}
-    .label{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border:1px solid rgba(247,239,217,.13);border-radius:999px;background:rgba(3,10,7,.27);font-size:9px;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
-    .save{width:34px;height:34px;border:1px solid rgba(247,239,217,.14);border-radius:12px;background:rgba(3,10,7,.25);color:var(--cream);cursor:pointer;transition:.18s ease}
-    .save.saved{color:var(--gold);background:rgba(228,197,121,.14)}
-    .feature-body{position:absolute;z-index:1;left:19px;right:19px;bottom:18px}
-    .feature h2{max-width:330px;margin:0 0 8px;font:700 27px/1.02 var(--serif)}
-    .feature p{max-width:320px;margin:0;color:#c3cec7;font-size:11.5px;line-height:1.5}
-    .meta{display:flex;align-items:center;gap:8px;margin-top:13px;color:var(--gold);font-size:10px;font-weight:750}
-    .meta i{width:3px;height:3px;border-radius:50%;background:currentColor}
-    .section{margin-bottom:24px}
+    .stage{min-height:100dvh;display:grid;grid-template-columns:430px minmax(280px,390px);justify-content:center;gap:48px;padding:38px 24px}
+    .device{position:relative;min-height:900px;overflow:hidden;border:1px solid rgba(255,255,255,.13);border-radius:44px;background:var(--bg);box-shadow:0 0 0 8px #101211,0 45px 120px #000}
+    .ambient{position:absolute;inset:0 0 auto;height:410px;overflow:hidden;pointer-events:none;background:
+      radial-gradient(ellipse at 5% 4%,var(--glow),transparent 48%),
+      radial-gradient(ellipse at 92% 0%,rgba(216,190,130,.16),transparent 44%),
+      linear-gradient(180deg,var(--accent2),transparent 88%)}
+    .ambient:before,.ambient:after{content:"";position:absolute;border:1px solid rgba(216,190,130,.11);border-radius:50%;filter:blur(.1px)}
+    .ambient:before{width:330px;height:330px;right:-165px;top:-165px}
+    .ambient:after{width:240px;height:240px;right:-120px;top:-120px}
+    .app{position:relative;z-index:1;padding:17px 16px 116px}
+    .system{height:16px;display:flex;justify-content:space-between;padding:0 7px;margin-bottom:13px;font-size:9px;font-weight:800;letter-spacing:.02em}
+    .system-icons{letter-spacing:.16em}
+    .header{display:flex;align-items:center;gap:12px;margin-bottom:15px}
+    .logo{width:58px;height:58px;object-fit:contain;border-radius:50%;filter:drop-shadow(0 12px 24px rgba(0,0,0,.28));flex:0 0 58px}
+    .identity{min-width:0;flex:1}
+    .identity b{display:block;font:700 18px/1 var(--serif);letter-spacing:.055em;white-space:nowrap}
+    .identity span{display:block;margin-top:5px;color:var(--gold);font-size:8.5px;font-weight:850;letter-spacing:.18em;text-transform:uppercase}
+    .head-actions{display:flex;gap:7px}
+    .round{width:38px;height:38px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.045);display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(18px);transition:transform .16s ease,background .16s ease}
+    .round:active,.tap:active,.save:active,.nav button:active{transform:scale(.95);background:rgba(216,190,130,.12)}
+    .smartbar{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;margin-bottom:17px;padding:10px 12px;border:1px solid var(--line);border-radius:18px;background:rgba(7,12,9,.28);backdrop-filter:blur(22px);box-shadow:inset 0 1px rgba(255,255,255,.04)}
+    html[data-theme="creme"] .smartbar{background:rgba(255,255,255,.32)}
+    .smart-prayer{display:flex;align-items:center;gap:10px;min-width:0}
+    .moon{width:33px;height:33px;display:grid;place-items:center;border-radius:12px;background:rgba(216,190,130,.1);color:var(--gold);font-size:16px}
+    .smart-prayer small{display:block;color:var(--muted);font-size:8px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+    .smart-prayer b{display:block;margin-top:3px;font:700 13px/1 var(--serif)}
+    .smart-time{text-align:right}
+    .smart-time b{display:block;color:var(--gold2);font-size:15px}
+    .smart-time small{display:block;margin-top:2px;color:var(--muted);font-size:8px}
+    .intro{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:0 2px 14px}
+    .intro small,.kicker{color:var(--gold);font-size:8.5px;font-weight:850;letter-spacing:.17em;text-transform:uppercase}
+    .intro h1{margin:6px 0 0;font:700 31px/.95 var(--serif);letter-spacing:-.025em}
+    .day-ring{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--gold) 0 38%,rgba(255,255,255,.08) 38%);box-shadow:0 10px 24px rgba(0,0,0,.16)}
+    .day-ring:after{content:"3/8";width:39px;height:39px;border-radius:50%;display:grid;place-items:center;background:var(--bg2);font-size:9px;font-weight:850}
+    .command{height:46px;display:flex;align-items:center;gap:10px;margin-bottom:17px;padding:0 13px;border:1px solid var(--line);border-radius:17px;background:var(--glass);backdrop-filter:blur(22px);box-shadow:0 14px 28px rgba(0,0,0,.12);cursor:pointer}
+    .command .search-icon{font-size:18px;color:var(--gold)}
+    .command span:nth-child(2){flex:1;color:var(--muted);font-size:11px}
+    .command kbd{border:1px solid var(--line);border-radius:7px;padding:3px 6px;background:rgba(255,255,255,.04);color:var(--muted);font:750 8px var(--sans)}
+    .focus{position:relative;overflow:hidden;min-height:310px;margin-bottom:23px;border:1px solid rgba(216,190,130,.27);border-radius:29px;background:
+      linear-gradient(180deg,transparent 7%,rgba(3,8,5,.08) 38%,rgba(3,7,5,.93) 100%),
+      radial-gradient(circle at 72% 17%,rgba(239,215,155,.18),transparent 26%),
+      linear-gradient(145deg,#365f4e,#142a21 56%,#0b1511);box-shadow:0 28px 55px rgba(0,0,0,.3)}
+    html[data-theme="creme"] .focus{background:linear-gradient(180deg,transparent,rgba(38,30,17,.77)),radial-gradient(circle at 72% 17%,rgba(255,255,255,.42),transparent 27%),linear-gradient(145deg,#c6aa6c,#80642f)}
+    html[data-theme="navy"] .focus{background:linear-gradient(180deg,transparent,rgba(2,7,17,.94)),radial-gradient(circle at 72% 17%,rgba(239,215,155,.16),transparent 27%),linear-gradient(145deg,#28577f,#102b4c 57%,#071321)}
+    .focus-pattern{position:absolute;right:-35px;top:-36px;width:210px;height:210px;border:1px solid rgba(240,217,155,.14);border-radius:50%;box-shadow:0 0 0 24px rgba(240,217,155,.025),0 0 0 52px rgba(240,217,155,.018)}
+    .focus-word{position:absolute;right:23px;top:51px;color:rgba(255,248,225,.12);font:700 60px/1 var(--serif);transform:rotate(-7deg)}
+    .focus-head{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:17px}
+    .badge{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border:1px solid rgba(255,255,255,.15);border-radius:999px;background:rgba(1,5,3,.18);font-size:8px;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
+    .save{width:35px;height:35px;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:rgba(1,5,3,.2);cursor:pointer;transition:.16s ease}
+    .save.saved{color:var(--gold2);background:rgba(216,190,130,.17)}
+    .focus-body{position:absolute;z-index:2;left:18px;right:18px;bottom:17px}
+    .focus h2{max-width:340px;margin:0 0 8px;font:700 28px/1.01 var(--serif);letter-spacing:-.015em;color:#fff9eb}
+    .focus p{max-width:330px;margin:0;color:rgba(245,240,226,.74);font-size:11px;line-height:1.48}
+    .focus-meta{display:flex;align-items:center;gap:7px;margin-top:13px;color:#ead59c;font-size:8.5px;font-weight:780}
+    .dot{width:3px;height:3px;border-radius:50%;background:currentColor}
+    .section{margin-bottom:23px}
     .section-head{display:flex;align-items:end;justify-content:space-between;margin:0 2px 12px}
-    .section h3{margin:0;font:700 22px/1 var(--serif)}
-    .section-head button{border:0;background:transparent;color:var(--gold);font-size:10px;font-weight:750;cursor:pointer}
-    .continue{padding:14px;border:1px solid var(--line);border-radius:21px;background:linear-gradient(145deg,rgba(25,48,39,.78),rgba(10,20,16,.84))}
-    .continue-row{display:grid;grid-template-columns:50px 1fr auto;align-items:center;gap:12px}
-    .book-cover{width:50px;height:62px;border:1px solid rgba(228,197,121,.31);border-radius:8px;display:grid;place-items:center;background:linear-gradient(160deg,#d9c596,#846d3b);color:#17251f;font:800 10px/1.1 var(--serif);text-align:center;box-shadow:0 8px 20px #0005}
-    .continue strong{font:700 15px/1.15 var(--serif)}
-    .continue small{display:block;margin-top:5px;color:var(--muted);font-size:9.5px}
-    .progress{height:3px;margin-top:10px;overflow:hidden;border-radius:999px;background:rgba(247,239,217,.1)}
-    .progress span{display:block;width:42%;height:100%;border-radius:inherit;background:var(--gold)}
-    .round-arrow{width:31px;height:31px;border-radius:50%;display:grid;place-items:center;background:rgba(228,197,121,.1);color:var(--gold)}
-    .topic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-    .topic{position:relative;overflow:hidden;min-height:104px;padding:13px;border:1px solid var(--line);border-radius:19px;background:linear-gradient(145deg,rgba(27,51,41,.7),rgba(9,18,14,.9));cursor:pointer}
-    .topic:nth-child(2){background:linear-gradient(145deg,rgba(54,40,24,.72),rgba(18,13,8,.92))}
-    .topic:nth-child(3){background:linear-gradient(145deg,rgba(31,38,59,.72),rgba(9,12,22,.92))}
-    .topic:nth-child(4){background:linear-gradient(145deg,rgba(55,25,31,.72),rgba(19,8,11,.92))}
-    .topic-icon{font-size:19px}
-    .topic strong{display:block;margin-top:17px;font:700 15px/1 var(--serif)}
-    .topic small{display:block;margin-top:4px;color:var(--muted);font-size:9px}
-    .post-list{display:grid;gap:9px}
-    .post{display:grid;grid-template-columns:62px 1fr auto;gap:12px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:18px;background:rgba(247,239,217,.025)}
-    .post-art{height:67px;border-radius:13px;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%,rgba(228,197,121,.2),transparent 42%),#142a22;color:var(--gold);font:700 25px/1 var(--serif)}
-    .post:nth-child(2) .post-art{background:radial-gradient(circle at 50% 35%,rgba(228,197,121,.2),transparent 42%),#292015}
-    .post:nth-child(3) .post-art{background:radial-gradient(circle at 50% 35%,rgba(228,197,121,.15),transparent 42%),#171c30}
-    .post strong{display:block;font:700 14px/1.15 var(--serif)}
-    .post small{display:block;margin-top:5px;color:var(--muted);font-size:9px;line-height:1.35}
-    .post .save{border:0;background:transparent;width:28px}
-    .daily{padding:17px;border:1px solid var(--line-strong);border-radius:23px;background:radial-gradient(circle at 100% 0%,rgba(228,197,121,.13),transparent 40%),rgba(22,29,25,.8)}
-    .daily blockquote{margin:10px 0 9px;font:600 17px/1.4 var(--serif);color:var(--cream)}
-    .daily cite{color:var(--gold-soft);font-size:9px;font-style:normal;line-height:1.4}
-    .bottom-nav{position:absolute;z-index:10;left:12px;right:12px;bottom:12px;display:grid;grid-template-columns:repeat(5,1fr);padding:8px 5px calc(8px + env(safe-area-inset-bottom));border:1px solid rgba(236,207,137,.18);border-radius:24px;background:rgba(7,14,11,.9);box-shadow:0 14px 40px #0009;backdrop-filter:blur(24px)}
-    .nav-item{border:0;background:transparent;color:#7e8d84;display:grid;place-items:center;gap:4px;padding:4px 0;cursor:pointer;transition:.18s ease}
-    .nav-item span:first-child{font-size:18px}
-    .nav-item span:last-child{font-size:8px;font-weight:750}
-    .nav-item.active{color:var(--gold)}
-    .notes{position:sticky;top:38px;padding-top:42px}
-    .notes .eyebrow{font-size:10px}
-    .notes h2{margin:9px 0 14px;font:700 35px/.98 var(--serif)}
-    .notes>p{color:#9baa9f;font-size:13px;line-height:1.65}
-    .note-list{display:grid;gap:9px;margin-top:20px}
-    .note{padding:13px 14px;border:1px solid rgba(236,207,137,.12);border-radius:17px;background:rgba(247,239,217,.025);color:#b8c3bc;font-size:11px;line-height:1.45}
-    .note b{display:block;margin-bottom:3px;color:var(--cream);font-size:12px}
-    .prototype-label{display:inline-flex;margin-top:18px;padding:7px 10px;border-radius:999px;background:rgba(228,197,121,.08);color:var(--gold);font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
-    .toast{position:fixed;z-index:30;left:50%;bottom:96px;transform:translate(-50%,18px);opacity:0;padding:10px 14px;border:1px solid var(--line-strong);border-radius:999px;background:#102019;color:var(--cream);font-size:11px;font-weight:750;pointer-events:none;transition:.25s ease;box-shadow:var(--shadow)}
+    .section-head h3{margin:4px 0 0;font:700 21px/1 var(--serif)}
+    .link{border:0;background:none;color:var(--gold);font-size:9px;font-weight:800;cursor:pointer}
+    .path{display:grid;grid-template-columns:52px minmax(0,1fr) 36px;gap:12px;align-items:center;padding:13px;border:1px solid var(--line);border-radius:21px;background:var(--glass);backdrop-filter:blur(22px);box-shadow:0 15px 34px rgba(0,0,0,.13)}
+    .path-icon{position:relative;width:52px;height:62px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(150deg,var(--gold2),#7a6334);color:#17251f;font:850 9px/1.05 var(--serif);text-align:center;box-shadow:0 10px 20px rgba(0,0,0,.24)}
+    .path-icon:after{content:"";position:absolute;inset:5px;border:1px solid rgba(20,34,27,.25);border-radius:8px}
+    .path-copy b{display:block;font:700 14px/1.15 var(--serif)}
+    .path-copy small{display:block;margin-top:4px;color:var(--muted);font-size:8.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .progress{height:4px;margin-top:10px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden}
+    .progress i{display:block;width:42%;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--gold),var(--gold2))}
+    .go{width:32px;height:32px;display:grid;place-items:center;border-radius:50%;background:rgba(216,190,130,.1);color:var(--gold);font-size:19px}
+    .smart-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:10px}
+    .smart-card{position:relative;overflow:hidden;min-height:134px;padding:13px;border:1px solid var(--line);border-radius:21px;background:var(--glass);cursor:pointer;text-align:left}
+    .smart-card:first-child{grid-row:span 2;min-height:278px;background:linear-gradient(160deg,var(--accent),var(--accent2))}
+    .smart-card .num{color:var(--gold);font-size:9px;font-weight:850;letter-spacing:.13em}
+    .smart-card .arabic{position:absolute;right:10px;top:14px;color:rgba(216,190,130,.16);font:700 30px/1 var(--serif)}
+    .smart-card .card-copy{position:absolute;left:13px;right:13px;bottom:13px}
+    .smart-card b{display:block;font:700 16px/1.05 var(--serif)}
+    .smart-card:first-child b{font-size:21px}
+    .smart-card small{display:block;margin-top:5px;color:var(--muted);font-size:8.5px;line-height:1.35}
+    .smart-card:first-child small{color:rgba(245,240,226,.67)}
+    .rail{display:flex;gap:9px;overflow:auto;margin:0 -16px;padding:0 16px 3px;scrollbar-width:none;scroll-snap-type:x mandatory}
+    .rail::-webkit-scrollbar{display:none}
+    .post{width:220px;min-height:180px;flex:0 0 220px;padding:13px;border:1px solid var(--line);border-radius:21px;background:var(--glass);scroll-snap-align:start;cursor:pointer}
+    .post-visual{height:85px;border-radius:15px;display:flex;align-items:flex-end;padding:10px;background:radial-gradient(circle at 75% 10%,rgba(216,190,130,.24),transparent 35%),linear-gradient(145deg,#23483a,#0d1d17);color:rgba(255,255,255,.25);font:700 36px/1 var(--serif)}
+    .post:nth-child(2) .post-visual{background:radial-gradient(circle at 75% 10%,rgba(216,190,130,.22),transparent 35%),linear-gradient(145deg,#4c381f,#1b1309)}
+    .post:nth-child(3) .post-visual{background:radial-gradient(circle at 75% 10%,rgba(216,190,130,.2),transparent 35%),linear-gradient(145deg,#293655,#0f1629)}
+    .post b{display:block;margin-top:11px;font:700 14px/1.15 var(--serif)}
+    .post small{display:block;margin-top:6px;color:var(--muted);font-size:8px}
+    .source-card{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid var(--line);border-radius:21px;background:linear-gradient(145deg,rgba(216,190,130,.1),var(--glass))}
+    .source-seal{width:49px;height:49px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--gold);font:700 18px/1 var(--serif)}
+    .source-card b{display:block;font:700 14px/1 var(--serif)}
+    .source-card small{display:block;margin-top:5px;color:var(--muted);font-size:8.5px;line-height:1.4}
+    .nav{position:absolute;z-index:10;left:12px;right:12px;bottom:12px;display:grid;grid-template-columns:repeat(5,1fr);padding:7px 5px calc(7px + env(safe-area-inset-bottom));border:1px solid var(--line);border-radius:24px;background:rgba(8,12,10,.87);backdrop-filter:blur(28px);box-shadow:0 17px 40px rgba(0,0,0,.45)}
+    html[data-theme="creme"] .nav{background:rgba(248,243,232,.88)}
+    .nav button{position:relative;border:0;background:none;color:var(--muted);display:grid;place-items:center;gap:3px;padding:4px 0;cursor:pointer;transition:.16s ease}
+    .nav button span:first-child{font-size:17px}
+    .nav button span:last-child{font-size:7.5px;font-weight:780}
+    .nav button.active{color:var(--gold2)}
+    .nav button.active:before{content:"";position:absolute;top:-7px;width:19px;height:2px;border-radius:99px;background:var(--gold)}
+    .brief{position:sticky;top:38px;padding-top:40px}
+    .brief h2{margin:8px 0 14px;font:700 38px/.97 var(--serif);letter-spacing:-.02em}
+    .brief>p{color:#9da8a1;font-size:13px;line-height:1.65}
+    .theme-row{display:flex;gap:8px;margin:18px 0 22px}
+    .theme{width:42px;height:42px;border:1px solid rgba(216,190,130,.22);border-radius:15px;cursor:pointer;box-shadow:inset 0 1px rgba(255,255,255,.08)}
+    .theme[data-set="layl"]{background:linear-gradient(145deg,#315746,#070908)}
+    .theme[data-set="creme"]{background:linear-gradient(145deg,#fff8e9,#b99b5d)}
+    .theme[data-set="navy"]{background:linear-gradient(145deg,#245c8e,#050b16)}
+    .theme.active{outline:2px solid #d8be82;outline-offset:3px}
+    .brief-grid{display:grid;gap:9px}
+    .brief-card{padding:13px 14px;border:1px solid rgba(216,190,130,.12);border-radius:17px;background:rgba(255,255,255,.025);color:#aeb8b1;font-size:11px;line-height:1.45}
+    .brief-card b{display:block;margin-bottom:3px;color:#eee8db;font-size:12px}
+    .status{display:inline-flex;margin-top:18px;padding:7px 10px;border-radius:999px;background:rgba(216,190,130,.09);color:#d8be82;font-size:8px;font-weight:850;letter-spacing:.11em;text-transform:uppercase}
+    .toast{position:fixed;z-index:30;left:50%;bottom:94px;opacity:0;transform:translate(-50%,15px);padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:var(--glass2);box-shadow:0 18px 42px rgba(0,0,0,.35);font-size:10px;font-weight:780;pointer-events:none;transition:.22s ease}
     .toast.show{opacity:1;transform:translate(-50%,0)}
-    [data-panel]{display:none;animation:reveal .35s ease both}
-    [data-panel].active{display:block}
-    @keyframes reveal{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
-    @media(max-width:820px){
-      body{background:var(--bg)}
-      .stage{display:block;padding:0}
-      .phone{min-height:100dvh;border:0;border-radius:0;box-shadow:none}
-      .app{padding-top:max(17px,env(safe-area-inset-top))}
-      .notes{display:none}
-      .bottom-nav{position:fixed;max-width:406px;margin:auto}
-      .phone:before{width:100vw}
+    @media(max-width:840px){
+      .stage{display:block;padding:0}.device{min-height:100dvh;border:0;border-radius:0;box-shadow:none}.brief{display:none}
+      .app{padding-top:max(11px,env(safe-area-inset-top))}.nav{position:fixed;max-width:406px;margin:auto}.system{display:none}
     }
-    @media(prefers-reduced-motion:reduce){
-      *{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}
-    }
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition-duration:.01ms!important}}
   </style>
 </head>
 <body>
   <main class="stage">
-    <section class="phone" aria-label="Interaktive App-Vorschau">
+    <section class="device" aria-label="DĀR App Designvorschau">
+      <div class="ambient"></div>
       <div class="app">
-        <header class="topbar">
-          <div class="brand">
-            <div class="mark"><span>DĀR</span></div>
-            <div>
-              <div class="brand-title">DĀR AL TAWḤĪD</div>
-              <div class="brand-sub">Wissen mit Quellen</div>
-            </div>
+        <div class="system"><span>23:58</span><span class="system-icons">● ◒ ▰</span></div>
+        <header class="header">
+          <img class="logo" src="/watermark-my-logo-full.png" alt="DĀR AL TAWḤĪD Logo">
+          <div class="identity"><b>DĀR AL TAWḤĪD</b><span>Qurʾān · Sunnah · Āthār</span></div>
+          <div class="head-actions">
+            <button class="round tap" aria-label="Suche">⌕</button>
+            <button class="round tap" aria-label="Benachrichtigungen">♧</button>
           </div>
-          <button class="icon-button action" aria-label="Benachrichtigungen">♧</button>
         </header>
 
-        <button class="prayer-strip action" style="width:100%;color:inherit;text-align:left;cursor:pointer">
-          <span class="prayer-symbol">☾</span>
-          <span class="prayer-copy"><small>Nächstes Gebet</small><strong>ʿIshāʾ in 01:24</strong></span>
-          <span class="prayer-time"><b>21:47</b><small>Berlin</small></span>
+        <button class="smartbar tap" style="width:100%;color:inherit;text-align:left">
+          <span class="smart-prayer"><span class="moon">☾</span><span><small>Nächstes Gebet</small><b>ʿIshāʾ in 01:24</b></span></span>
+          <span class="smart-time"><b>21:47</b><small>Berlin</small></span>
         </button>
 
-        <section class="welcome">
-          <div class="eyebrow">As-salāmu ʿalaykum</div>
-          <h1>Wissen, das dich<br>jeden Tag begleitet.</h1>
-          <p>Geordnete Beiträge aus Qurʾān, Sunnah und den Aussagen der Salaf – verständlich und mit Quellen.</p>
+        <section class="intro">
+          <div><small>Dein Wissensbereich</small><h1>As-salāmu<br>ʿalaykum.</h1></div>
+          <div class="day-ring" title="3 von 8 Tageszielen"></div>
         </section>
 
-        <button class="search action" style="width:100%;cursor:pointer"><span>⌕</span><span>Beiträge, Themen und Quellen durchsuchen</span></button>
+        <button class="command tap" style="width:100%;text-align:left"><span class="search-icon">⌕</span><span>Frag DĀR oder durchsuche 472 Beiträge</span><kbd>AI</kbd></button>
 
-        <nav class="tabs" aria-label="Inhaltsfilter">
-          <button class="chip active" data-tab="wissen">Für dich</button>
-          <button class="chip" data-tab="neu">Neu</button>
-          <button class="chip" data-tab="serien">Serien</button>
-          <button class="chip" data-tab="gespeichert">Gespeichert</button>
-        </nav>
-
-        <div data-panel="wissen" class="active">
-          <article class="feature action">
-            <div class="feature-top">
-              <span class="label">✦ Empfohlenes Wissen</span>
-              <button class="save" aria-label="Beitrag speichern">♧</button>
-            </div>
-            <div class="feature-body">
-              <h2>Was bedeutet Tawḥīd im täglichen Leben?</h2>
-              <p>Eine klare Einführung in die größte Grundlage des Islām – mit geordneten Belegen und Erläuterungen.</p>
-              <div class="meta"><span>8 Min. lesen</span><i></i><span>12 Quellen</span><i></i><span>Grundlagen</span></div>
-            </div>
-          </article>
-
-          <section class="section">
-            <div class="section-head"><h3>Weiterlernen</h3><button class="action">Verlauf öffnen</button></div>
-            <div class="continue action">
-              <div class="continue-row">
-                <div class="book-cover">KITĀB<br>AT-TAWḤĪD</div>
-                <div><strong>Die drei Grundlagen</strong><small>Kapitel 4 · Die Kenntnis des Gesandten</small><div class="progress"><span></span></div></div>
-                <span class="round-arrow">›</span>
-              </div>
-            </div>
-          </section>
-
-          <section class="section">
-            <div class="section-head"><h3>Themen entdecken</h3><button class="action">Alle Themen</button></div>
-            <div class="topic-grid">
-              <button class="topic action" style="color:inherit;text-align:left"><span class="topic-icon">◈</span><strong>ʿAqīdah</strong><small>128 Beiträge</small></button>
-              <button class="topic action" style="color:inherit;text-align:left"><span class="topic-icon">☼</span><strong>Manhaj</strong><small>76 Beiträge</small></button>
-              <button class="topic action" style="color:inherit;text-align:left"><span class="topic-icon">⌘</span><strong>Ḥadīth</strong><small>214 Beiträge</small></button>
-              <button class="topic action" style="color:inherit;text-align:left"><span class="topic-icon">❧</span><strong>Herzensbildung</strong><small>92 Beiträge</small></button>
-            </div>
-          </section>
-
-          <section class="section">
-            <div class="section-head"><h3>Neu für dich</h3><button class="action">Alle ansehen</button></div>
-            <div class="post-list">
-              <article class="post action"><div class="post-art">ق</div><div><strong>Die Bedeutung von Aufrichtigkeit</strong><small>Charakter · 6 Min. · 7 Quellen</small></div><button class="save" aria-label="Speichern">♧</button></article>
-              <article class="post action"><div class="post-art">س</div><div><strong>Geduld in Zeiten der Prüfung</strong><small>Herzensbildung · 9 Min. · 11 Quellen</small></div><button class="save" aria-label="Speichern">♧</button></article>
-              <article class="post action"><div class="post-art">ع</div><div><strong>Warum Wissen vor dem Handeln kommt</strong><small>Grundlagen · 5 Min. · 8 Quellen</small></div><button class="save" aria-label="Speichern">♧</button></article>
-            </div>
-          </section>
-
-          <section class="section daily">
-            <div class="eyebrow">Nutzen des Tages</div>
-            <blockquote>„Wissen ist das, was Nutzen bringt. Wissen ist nicht das, was lediglich auswendig gelernt wurde.“</blockquote>
-            <cite>Sinngemäß überliefert von Imām ash-Shāfiʿī · Quellenansicht öffnen</cite>
-          </section>
-        </div>
-
-        <div data-panel="neu">
-          <article class="feature" style="min-height:220px"><div class="feature-body"><div class="eyebrow">Heute veröffentlicht</div><h2>Neue Beiträge chronologisch und klar sortiert.</h2><p>Diese Vorschau zeigt später die echten Inhalte aus deinem Beitragssystem.</p></div></article>
-          <div class="post-list">
-            <article class="post action"><div class="post-art">١</div><div><strong>Die Vorzüge des Strebens nach Wissen</strong><small>Heute · Wissen · 8 Quellen</small></div><button class="save">♧</button></article>
-            <article class="post action"><div class="post-art">٢</div><div><strong>Das Folgen der authentischen Sunnah</strong><small>Gestern · Manhaj · 14 Quellen</small></div><button class="save">♧</button></article>
+        <article class="focus tap">
+          <div class="focus-pattern"></div><div class="focus-word">التوحيد</div>
+          <div class="focus-head"><span class="badge">✦ Für dich ausgewählt</span><button class="save" aria-label="Speichern">♧</button></div>
+          <div class="focus-body">
+            <h2>Warum Wissen vor dem Sprechen und Handeln kommt</h2>
+            <p>Ein geordneter Einstieg mit Belegen aus Qurʾān, Sunnah und den Aussagen der frühen Imāme.</p>
+            <div class="focus-meta"><span>7 Min.</span><i class="dot"></i><span>9 geprüfte Quellen</span><i class="dot"></i><span>Grundlagen</span></div>
           </div>
-        </div>
+        </article>
 
-        <div data-panel="serien">
-          <article class="feature" style="min-height:220px;background:linear-gradient(180deg,transparent,#080d0b),linear-gradient(145deg,#443519,#151007)"><div class="feature-body"><div class="eyebrow">Wissensreihen</div><h2>Schritt für Schritt lernen statt nur scrollen.</h2><p>Serien bündeln zusammengehörige Beiträge und speichern den persönlichen Fortschritt.</p></div></article>
-          <div class="topic-grid">
-            <button class="topic action" style="color:inherit;text-align:left"><span class="topic-icon">01</span><strong>Die drei Grundlagen</strong><small>4 von 12 gelesen</small></button>
-            <button class="topic action" style="color:inherit;text-align:left"><span class="topic-icon">02</span><strong>Nawāqiḍ al-Islām</strong><small>0 von 10 gelesen</small></button>
+        <section class="section">
+          <div class="section-head"><div><span class="kicker">Dein Fortschritt</span><h3>Wissensweg fortsetzen</h3></div><button class="link tap">Verlauf</button></div>
+          <button class="path tap" style="width:100%;color:inherit;text-align:left">
+            <span class="path-icon">DREI<br>GRUND-<br>LAGEN</span>
+            <span class="path-copy"><b>Die Kenntnis des Gesandten ﷺ</b><small>Kapitel 4 von 12 · zuletzt gestern</small><span class="progress"><i></i></span></span>
+            <span class="go">›</span>
+          </button>
+        </section>
+
+        <section class="section">
+          <div class="section-head"><div><span class="kicker">Intelligent geordnet</span><h3>Was möchtest du lernen?</h3></div><button class="link tap">Alle</button></div>
+          <div class="smart-grid">
+            <button class="smart-card tap"><span class="num">01 · GRUNDLAGEN</span><span class="arabic">عقيدة</span><span class="card-copy"><b>ʿAqīdah verständlich aufbauen</b><small>Ein geführter Lernweg in der richtigen Reihenfolge · 18 Lektionen</small></span></button>
+            <button class="smart-card tap"><span class="num">02</span><span class="arabic">حديث</span><span class="card-copy"><b>Ḥadīth</b><small>Quellen & Erklärungen</small></span></button>
+            <button class="smart-card tap"><span class="num">03</span><span class="arabic">منهج</span><span class="card-copy"><b>Manhaj</b><small>Methodik der Salaf</small></span></button>
           </div>
-        </div>
+        </section>
 
-        <div data-panel="gespeichert">
-          <article class="continue"><div class="continue-row"><div class="book-cover">DEINE<br>SAMMLUNG</div><div><strong>Gespeichertes Wissen</strong><small>3 Beiträge für später vorgemerkt</small><div class="progress"><span style="width:68%"></span></div></div><span class="round-arrow">›</span></div></article>
-        </div>
+        <section class="section">
+          <div class="section-head"><div><span class="kicker">Aktuell</span><h3>Neue Beiträge</h3></div><button class="link tap">Alle ansehen</button></div>
+          <div class="rail">
+            <article class="post tap"><div class="post-visual">علم</div><b>Die Vorzüge des Strebens nach Wissen</b><small>Heute · 8 Quellen · 6 Min.</small></article>
+            <article class="post tap"><div class="post-visual">صبر</div><b>Geduld in Zeiten der Prüfung</b><small>Gestern · 11 Quellen · 9 Min.</small></article>
+            <article class="post tap"><div class="post-visual">سنة</div><b>Das Festhalten an der Sunnah</b><small>Manhaj · 14 Quellen · 8 Min.</small></article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head"><div><span class="kicker">Vertrauen</span><h3>Wissen mit Herkunft</h3></div></div>
+          <button class="source-card tap" style="width:100%;color:inherit;text-align:left">
+            <span class="source-seal">إسناد</span>
+            <span><b>Jede Aussage bis zur Quelle</b><small>Qurʾān, authentische Sunnah und Werke der Gelehrten – transparent verknüpft.</small></span>
+            <span class="go">›</span>
+          </button>
+        </section>
       </div>
 
-      <nav class="bottom-nav" aria-label="Hauptnavigation">
-        <button class="nav-item active"><span>⌂</span><span>Start</span></button>
-        <button class="nav-item"><span>▤</span><span>Beiträge</span></button>
-        <button class="nav-item"><span>◫</span><span>Qurʾān</span></button>
-        <button class="nav-item"><span>◇</span><span>Quiz</span></button>
-        <button class="nav-item"><span>•••</span><span>Mehr</span></button>
+      <nav class="nav">
+        <button class="active"><span>⌂</span><span>Start</span></button>
+        <button><span>▤</span><span>Beiträge</span></button>
+        <button><span>◫</span><span>Qurʾān</span></button>
+        <button><span>◇</span><span>Quiz</span></button>
+        <button><span>•••</span><span>Mehr</span></button>
       </nav>
     </section>
 
-    <aside class="notes">
-      <div class="eyebrow">Interaktiver Entwurf</div>
-      <h2>Wissen zuerst.<br>Alles andere kompakt.</h2>
-      <p>Dieser Entwurf verändert keine bestehende App. Tippe auf Filter, Lesezeichen und Navigation und scrolle durch die vollständige Startseite.</p>
-      <div class="note-list">
-        <div class="note"><b>Beiträge sind der Mittelpunkt</b>Empfehlung, Lernfortschritt, Themen und neue Inhalte erhalten die größte Fläche.</div>
-        <div class="note"><b>Gebetszeiten bleiben erreichbar</b>Eine kompakte Zeile informiert, ohne den Wissensbereich zu verdrängen.</div>
-        <div class="note"><b>Ruhige eigene Gestaltung</b>DĀR-Farben, klare Typografie und dezente Reaktionen statt schwerer Daueranimationen.</div>
-        <div class="note"><b>Nur eine Design-Vorschau</b>Texte und Uhrzeiten sind Platzhalter. Später werden echte App-Daten verbunden.</div>
+    <aside class="brief">
+      <span class="kicker">Neuer Designansatz</span>
+      <h2>Deine Identität.<br>Dein Wissen.<br>Smarter geordnet.</h2>
+      <p>Die Vorschau nutzt jetzt dein echtes Logo, deine Markenbezeichnung und eine deutlich klarere DĀR-Struktur. Wähle hier auch verschiedene Erscheinungsbilder.</p>
+      <div class="theme-row">
+        <button class="theme active" data-set="layl" aria-label="DĀR al-Layl"></button>
+        <button class="theme" data-set="creme" aria-label="Creme"></button>
+        <button class="theme" data-set="navy" aria-label="Nachtblau"></button>
       </div>
-      <span class="prototype-label">Keine Änderung an Live- oder Test-App</span>
+      <div class="brief-grid">
+        <div class="brief-card"><b>Echtes DĀR-Branding</b>Originales Rundlogo, vollständige Wortmarke und Qurʾān–Sunnah–Āthār direkt im Kopfbereich.</div>
+        <div class="brief-card"><b>Smart statt überladen</b>Persönliche Auswahl, Wissensfortschritt, geführte Lernwege und intelligente Suche.</div>
+        <div class="brief-card"><b>Klare Inhaltsstruktur</b>Empfehlung → Fortschritt → Themen → neue Beiträge → Quellenvertrauen.</div>
+        <div class="brief-card"><b>Gebetszeit bleibt sekundär</b>Kompakt sichtbar, während Beiträge und Wissen bewusst die Hauptfläche erhalten.</div>
+      </div>
+      <span class="status">Nur Vorschau · keine App geändert</span>
     </aside>
   </main>
-  <div class="toast" role="status">Vorschau: Bereich wird später direkt geöffnet</div>
+  <div class="toast" role="status">Bereich wird später direkt geöffnet</div>
   <script>
-    const toast = document.querySelector(".toast");
-    let toastTimer;
-    function notify(message){
-      toast.textContent = message;
-      toast.classList.add("show");
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove("show"), 1500);
-    }
-    document.querySelectorAll("[data-tab]").forEach(button => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll("[data-tab]").forEach(item => item.classList.toggle("active", item === button));
-        document.querySelectorAll("[data-panel]").forEach(panel => panel.classList.toggle("active", panel.dataset.panel === button.dataset.tab));
-      });
-    });
-    document.querySelectorAll(".save").forEach(button => {
-      button.addEventListener("click", event => {
-        event.stopPropagation();
-        button.classList.toggle("saved");
-        button.textContent = button.classList.contains("saved") ? "◆" : "♧";
-        notify(button.classList.contains("saved") ? "Beitrag gespeichert" : "Aus Gespeichert entfernt");
-      });
-    });
-    document.querySelectorAll(".nav-item").forEach(button => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll(".nav-item").forEach(item => item.classList.toggle("active", item === button));
-        notify(button.textContent.trim() + " – Vorschau");
-      });
-    });
-    document.querySelectorAll(".action").forEach(item => {
-      item.addEventListener("click", event => {
-        if(event.target.closest(".save") || event.target.closest("[data-tab]")) return;
-        notify("Vorschau: direkte Navigation folgt nach Freigabe");
-      });
-    });
+    const toast=document.querySelector(".toast");let timer;
+    function show(text){toast.textContent=text;toast.classList.add("show");clearTimeout(timer);timer=setTimeout(()=>toast.classList.remove("show"),1400)}
+    document.querySelectorAll(".theme").forEach(button=>button.addEventListener("click",()=>{
+      document.documentElement.dataset.theme=button.dataset.set;
+      document.querySelectorAll(".theme").forEach(item=>item.classList.toggle("active",item===button));
+    }));
+    document.querySelectorAll(".save").forEach(button=>button.addEventListener("click",event=>{
+      event.stopPropagation();button.classList.toggle("saved");button.textContent=button.classList.contains("saved")?"◆":"♧";
+      show(button.classList.contains("saved")?"Beitrag gespeichert":"Speicherung entfernt");
+    }));
+    document.querySelectorAll(".nav button").forEach(button=>button.addEventListener("click",()=>{
+      document.querySelectorAll(".nav button").forEach(item=>item.classList.toggle("active",item===button));show(button.textContent.trim()+" · Vorschau");
+    }));
+    document.querySelectorAll(".tap").forEach(item=>item.addEventListener("click",event=>{if(!event.target.closest(".save"))show("Interaktive Designvorschau")}));
   </script>
 </body>
 </html>
