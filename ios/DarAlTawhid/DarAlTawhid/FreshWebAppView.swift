@@ -45,6 +45,13 @@ struct WebAppView: UIViewRepresentable {
                 forMainFrameOnly: true
             )
         )
+        contentController.addUserScript(
+            WKUserScript(
+                source: Self.nativeQuickAccessBridge,
+                injectionTime: .atDocumentEnd,
+                forMainFrameOnly: true
+            )
+        )
         configuration.userContentController = contentController
 
         let host = UIView()
@@ -127,10 +134,75 @@ struct WebAppView: UIViewRepresentable {
       var style=document.createElement("style");
       style.id="dar-ios-clean-shell-style";
       style.textContent=[
-        "#footerAppSave,.footer-app-save,.footer-action-save{display:none!important;visibility:hidden!important;}",
-        ".footer-actions{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;width:min(430px,100%)!important;max-width:100%!important;margin-left:auto!important;margin-right:auto!important;justify-content:center!important;}"
+        "html body #footerAppSave,html body .footer-app-save,html body .footer-action-save{display:none!important;visibility:hidden!important;}",
+        "html body .footer .footer-actions,html body.is-home-route .footer .footer-actions{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;width:min(430px,calc(100% - 16px))!important;max-width:430px!important;margin-left:auto!important;margin-right:auto!important;justify-content:center!important;}"
       ].join("\\n");
       (document.head||document.documentElement).appendChild(style);
+    })();
+    """
+
+    private static let nativeQuickAccessBridge = """
+    (function(){
+      if(window.__darIosDirectQuickAccess)return;
+      window.__darIosDirectQuickAccess=true;
+
+      function closeMenu(){
+        try{
+          if(typeof closeQuickAccessMenu==="function")closeQuickAccessMenu();
+        }catch(e){}
+      }
+
+      function openPushSettings(){
+        try{
+          if(typeof navigate==="function")navigate("more");
+          else location.hash="#more";
+        }catch(e){location.hash="#more"}
+
+        var attempts=0;
+        function reveal(){
+          attempts++;
+          var toggle=document.getElementById("prayerPushAccordionToggle");
+          var body=document.getElementById("prayerPushSettingsBody");
+          if(toggle){
+            try{
+              if(typeof setPrayerPushAccordionOpen==="function"){
+                setPrayerPushAccordionOpen(true);
+                if(typeof updatePrayerPushAccordionUi==="function")updatePrayerPushAccordionUi(true);
+              }else if(toggle.getAttribute("aria-expanded")!=="true"){
+                toggle.click();
+              }
+              (body||toggle).scrollIntoView({behavior:"smooth",block:"center"});
+            }catch(e){}
+            return;
+          }
+          if(attempts<12)setTimeout(reveal,80);
+        }
+        setTimeout(reveal,20);
+      }
+
+      document.addEventListener("click",function(event){
+        var button=event.target&&event.target.closest
+          ?event.target.closest("#quickAccessMenu [data-qa-action]")
+          :null;
+        if(!button)return;
+        var action=button.getAttribute("data-qa-action");
+        if(action!=="orient"&&action!=="saved"&&action!=="remind")return;
+        event.preventDefault();
+        event.stopPropagation();
+        if(event.stopImmediatePropagation)event.stopImmediatePropagation();
+        closeMenu();
+        try{
+          if(action==="orient"){
+            if(typeof openQiblaFromFloat==="function")openQiblaFromFloat();
+            else location.hash="#qibla";
+          }else if(action==="saved"){
+            if(typeof navigate==="function")navigate("saved");
+            else location.hash="#saved";
+          }else{
+            openPushSettings();
+          }
+        }catch(e){}
+      },true);
     })();
     """
 

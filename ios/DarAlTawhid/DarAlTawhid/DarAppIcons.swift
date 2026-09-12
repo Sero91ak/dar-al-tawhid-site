@@ -13,9 +13,12 @@ enum DarAppIcons {
 
     private static func resolve(_ name: String) -> String? {
         if name.isEmpty { return nil }
+        if name.caseInsensitiveCompare("AppIconTypeCreme") == .orderedSame {
+            return nil
+        }
         if alternateNames.contains(name) { return name }
         switch name.lowercased() {
-        case "type-creme-ar", "appicon", "creme-navy", "seal-creme", "default", "primary":
+        case "type-creme-ar", "type-creme", "appicontypecreme", "appicon", "creme-navy", "seal-creme", "default", "primary":
             return nil
         case "emblem-nachtblau", "appiconemblemnachtblau":
             return "AppIconEmblemNachtblau"
@@ -23,8 +26,6 @@ enum DarAppIcons {
             return "AppIconEmblemSchwarzgold"
         case "emblem-creme-petrol", "appiconemblemcremepetrol":
             return "AppIconEmblemCremePetrol"
-        case "type-creme", "appicontypecreme":
-            return "AppIconTypeCreme"
         case "type-schwarz-ar", "appicontypeschwarzar":
             return "AppIconTypeSchwarzAr"
         case "type-schwarz", "appicontypeschwarz":
