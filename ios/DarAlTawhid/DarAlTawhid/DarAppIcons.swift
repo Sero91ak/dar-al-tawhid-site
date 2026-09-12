@@ -23,6 +23,26 @@ enum DarAppIcons {
             return "AppIconEmblemSchwarzgold"
         case "emblem-creme-petrol", "appiconemblemcremepetrol":
             return "AppIconEmblemCremePetrol"
+        case "type-creme", "appicontypecreme":
+            return "AppIconTypeCreme"
+        case "type-schwarz-ar", "appicontypeschwarzar":
+            return "AppIconTypeSchwarzAr"
+        case "type-schwarz", "appicontypeschwarz":
+            return "AppIconTypeSchwarz"
+        case "type-navy-ar", "appicontypenavyar":
+            return "AppIconTypeNavyAr"
+        case "type-navy", "appicontypenavy":
+            return "AppIconTypeNavy"
+        case "type-bordeaux-ar", "appicontypebordeauxar":
+            return "AppIconTypeBordeauxAr"
+        case "type-bordeaux", "appicontypebordeaux":
+            return "AppIconTypeBordeaux"
+        case "type-gruen-ar", "appicontypegruenar":
+            return "AppIconTypeGruenAr"
+        case "type-gruen", "appicontypegruen":
+            return "AppIconTypeGruen"
+        case "type-schwarz-ar2", "appicontypeschwarzar2":
+            return "AppIconTypeSchwarzAr2"
         default:
             return nil
         }
@@ -31,6 +51,16 @@ enum DarAppIcons {
     private static let alternateNames: Set<String> = [
         "AppIconEmblemNachtblau",
         "AppIconEmblemSchwarzgold",
-        "AppIconEmblemCremePetrol"
+        "AppIconEmblemCremePetrol",
+        "AppIconTypeCreme",
+        "AppIconTypeSchwarzAr",
+        "AppIconTypeSchwarz",
+        "AppIconTypeNavyAr",
+        "AppIconTypeNavy",
+        "AppIconTypeBordeauxAr",
+        "AppIconTypeBordeaux",
+        "AppIconTypeGruenAr",
+        "AppIconTypeGruen",
+        "AppIconTypeSchwarzAr2"
     ]
 }
