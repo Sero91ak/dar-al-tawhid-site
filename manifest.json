@@ -1,46 +1,22 @@
 {
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
   "name": "DĀR AL TAWḤĪD",
   "short_name": "DĀR AL TAWḤĪD",
-  "start_url": "/?source=pwa&v=android-boot-v661",
-  "scope": "/",
   "display": "standalone",
+  "start_url": "/?homescreen=1#home",
+  "scope": "/",
+  "theme_color": "#000000",
   "background_color": "#050706",
-  "theme_color": "#050706",
   "description": "Beiträge aus Qurʾān, Sunnah und Āthār.",
   "orientation": "any",
   "icons": [
-    {
-      "src": "/favicon-16.png?v=onesignal-clean-reset",
-      "sizes": "16x16",
-      "type": "image/png"
-    },
-    {
-      "src": "/favicon-32.png?v=onesignal-clean-reset",
-      "sizes": "32x32",
-      "type": "image/png"
-    },
-    {
-      "src": "/favicon-48.png?v=onesignal-clean-reset",
-      "sizes": "48x48",
-      "type": "image/png"
-    },
-    {
-      "src": "/app-icon-192.png?v=onesignal-clean-reset",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/app-icon-512.png?v=onesignal-clean-reset",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
+    { "src": "/icon-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-256x256.png", "sizes": "256x256", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-384x384.png", "sizes": "384x384", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/app-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/app-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
-  "id": "/",
-  "gcm_sender_id": "482941809286",
-  "display_override": [
-    "standalone",
-    "fullscreen"
-  ]
+  "id": "/?homescreen=1",
+  "display_override": ["standalone", "fullscreen"]
 }

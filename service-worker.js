@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v769';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v770-web-push';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -49,6 +49,10 @@ const APP_SHELL = [
   '/favicon-48.png',
   '/apple-touch-icon.png',
   '/app-icon-192.png',
+  '/icon-192x192.png',
+  '/icon-256x256.png',
+  '/icon-384x384.png',
+  '/icon-512x512.png',
   '/app-icon-512.png',
   '/watermark-my-logo-full.png',
   '/watermark-circle-soft.png',

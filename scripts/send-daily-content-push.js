@@ -101,7 +101,6 @@ async function scheduleDailyNotification(kind, item, config, dateKey) {
     headings: { de: title, en: title },
     contents: { de: body, en: body },
     url,
-    isAnyWeb: true,
     delayed_option: "timezone",
     delivery_time_of_day: deliveryTime,
     idempotency_key: `dar-${kind}-${dateKey}`,

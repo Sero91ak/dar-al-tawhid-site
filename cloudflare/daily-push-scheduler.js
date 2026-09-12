@@ -424,7 +424,6 @@ function buildDailyPushPayload(env, kind, item, config, dateKey, subscriptionId,
     headings: { de: title, en: title },
     contents: { de: body, en: body },
     url,
-    isAnyWeb: true,
     data: {
       type: isDua ? "daily_dua" : "daily_recommendation",
       content_id: item.id,

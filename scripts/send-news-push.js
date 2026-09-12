@@ -65,16 +65,8 @@ function buildNewsPushUrl({ newsId, nav, value }) {
   }, SITE_URL);
 
   const attempts = [
-    { ...payload, included_segments: ["DAR_PUSH"] },
     { ...payload, included_segments: ["Subscribed Users"] },
-    {
-      ...payload,
-      filters: [{ field: "tag", key: "dar_push", relation: "=", value: "true" }]
-    },
-    {
-      ...payload,
-      filters: [{ field: "tag", key: "post_notifications", relation: "=", value: "true" }]
-    }
+    { ...payload, included_segments: ["DAR_PUSH"] }
   ];
 
   let lastError = null;

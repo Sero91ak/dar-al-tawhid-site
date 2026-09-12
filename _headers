@@ -52,6 +52,18 @@
 /version.json
   Cache-Control: no-cache, must-revalidate, max-age=0
 
+/manifest.json
+  Content-Type: application/manifest+json
+  Cache-Control: no-cache, must-revalidate, max-age=0
+
+/OneSignalSDKWorker.js
+  Content-Type: application/javascript
+  Cache-Control: no-cache, must-revalidate, max-age=0
+
+/push/onesignal/OneSignalSDKWorker.js
+  Content-Type: application/javascript
+  Cache-Control: no-cache, must-revalidate, max-age=0
+
 /test/
   Cache-Control: no-cache, must-revalidate, max-age=0
 

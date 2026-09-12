@@ -314,77 +314,81 @@ export async function sendNewPostPush(env, options = {}) {
 
   const attemptLog = [];
   const channelResults = [];
-  let lastFailure = "Kein Empfänger gefunden – alle Plattformen lieferten 0 Empfänger oder Fehler";
+  let lastFailure = "Kein Empfänger gefunden";
   let pushData = null;
   let targetUrl = "";
   let firstSuccess = null;
 
-  for (const channel of POST_PUSH_CHANNELS) {
-    let channelSent = false;
-    for (const spec of channelAttemptSpecs(channel)) {
-      const built = await buildPostPushPayload(env, { ...options, audienceKey: spec.audienceKey });
-      pushData = built.pushData;
-      targetUrl = built.targetUrl;
-      const attemptPayload = {
-        ...built.payload,
-        ...exclusivePlatformFlags(channel.id)
-      };
-      if (spec.included_segments) attemptPayload.included_segments = spec.included_segments;
-      if (spec.filters) attemptPayload.filters = spec.filters;
+  const attemptSpecs = [
+    { audienceKey: "all-subscribed-v3", included_segments: ["Subscribed Users"] },
+    { audienceKey: "all-dar-push-v3", included_segments: ["DAR_PUSH"] }
+  ];
 
-      const result = await postOneSignalAttempt(env, attemptPayload);
-      attemptLog.push({
-        channel: channel.id,
-        target: result.target,
-        httpStatus: result.httpStatus,
-        authMode: result.authMode,
-        sent: result.sent,
-        notificationId: result.oneSignal?.notificationId || null,
-        recipients: result.oneSignal?.recipients ?? null,
-        errors: result.oneSignal?.errors || null,
-        invalidSubscriptions: result.oneSignal?.invalidSubscriptions || null,
-        reason: result.reason || ""
-      });
+  for (const spec of attemptSpecs) {
+    const built = await buildPostPushPayload(env, { ...options, audienceKey: spec.audienceKey });
+    pushData = built.pushData;
+    targetUrl = built.targetUrl;
+    const attemptPayload = {
+      ...built.payload,
+      included_segments: spec.included_segments
+    };
 
-      if (result.httpStatus === 401 || result.httpStatus === 403) {
-        return {
-          sent: false,
-          prepared: true,
-          oneSignalCalled: true,
-          reason: result.reason,
-          target: result.target,
-          targetUrl,
-          data: pushData,
-          appId,
-          channelResults,
-          oneSignal: result.oneSignal,
-          attempts: attemptLog
-        };
-      }
+    const result = await postOneSignalAttempt(env, attemptPayload);
+    attemptLog.push({
+      channel: "all",
+      target: result.target,
+      httpStatus: result.httpStatus,
+      authMode: result.authMode,
+      sent: result.sent,
+      notificationId: result.oneSignal?.notificationId || null,
+      recipients: result.oneSignal?.recipients ?? null,
+      errors: result.oneSignal?.errors || null,
+      invalidSubscriptions: result.oneSignal?.invalidSubscriptions || null,
+      reason: result.reason || ""
+    });
 
-      if (result.sent) {
-        channelSent = true;
-        if (!firstSuccess) firstSuccess = result;
-        channelResults.push({
-          channel: channel.id,
-          sent: true,
-          target: result.target,
-          recipients: result.oneSignal?.recipients ?? null,
-          notificationId: result.oneSignal?.notificationId || null
-        });
-        break;
-      }
-
-      if (result.reason) lastFailure = result.reason;
-    }
-
-    if (!channelSent) {
-      channelResults.push({
-        channel: channel.id,
+    if (result.httpStatus === 401 || result.httpStatus === 403) {
+      return {
         sent: false,
-        reason: lastFailure
-      });
+        prepared: true,
+        oneSignalCalled: true,
+        reason: result.reason,
+        target: result.target,
+        targetUrl,
+        data: pushData,
+        appId,
+        channelResults,
+        oneSignal: result.oneSignal,
+        attempts: attemptLog
+      };
     }
+
+    if (result.sent) {
+      firstSuccess = result;
+      channelResults.push({
+        channel: "all",
+        sent: true,
+        target: result.target,
+        recipients: result.oneSignal?.recipients ?? null,
+        notificationId: result.oneSignal?.notificationId || null
+      });
+      return {
+        sent: true,
+        prepared: true,
+        oneSignalCalled: true,
+        target: result.target,
+        authMode: result.authMode,
+        targetUrl,
+        data: pushData,
+        appId,
+        channelResults,
+        oneSignal: result.oneSignal,
+        attempts: attemptLog,
+        sentAt: new Date().toISOString()
+      };
+    }
+
+    if (result.reason) lastFailure = result.reason;
   }
 
   const sentChannels = channelResults.filter((entry) => entry.sent).map((entry) => entry.channel);

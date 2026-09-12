@@ -475,7 +475,6 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
     headings: copy.headings,
     contents: copy.contents,
     url: String(env.SITE_URL || DEFAULT_SITE_URL),
-    isAnyWeb: true,
     collapse_id: collapseId,
     web_push_topic: collapseId,
     idempotency_key: await uuidFrom(idKey)

@@ -113,7 +113,6 @@ function payload(kind, item, subscriptionId) {
     headings: { de: title, en: title },
     contents: { de: body, en: body },
     url,
-    isAnyWeb: true,
     idempotency_key: idempotencyKey,
     name: `daily-emergency-${kind}-${dateKey}-${TOKEN}`.slice(0, 128),
     data: {

@@ -269,22 +269,9 @@ async function sendWithFallbacks(basePayload) {
     throw new Error("OneSignal API-Key fehlt (ONESIGNAL_API_KEY_NEW / ONESIGNAL_API_KEY / ONESIGNAL_APP_API_KEY)");
   }
 
-  const subscriptionIds = await fetchRegisteredSubscriptionIds();
   const attempts = [
-    ...chunk(subscriptionIds, ONESIGNAL_BATCH_SIZE).map((ids) => ({
-      ...basePayload,
-      include_subscription_ids: ids
-    })),
-    { ...basePayload, included_segments: ["DAR_PUSH"] },
     { ...basePayload, included_segments: ["Subscribed Users"] },
-    {
-      ...basePayload,
-      filters: [{ field: "tag", key: "dar_push", relation: "=", value: "true" }]
-    },
-    {
-      ...basePayload,
-      filters: [{ field: "tag", key: "post_notifications", relation: "=", value: "true" }]
-    }
+    { ...basePayload, included_segments: ["DAR_PUSH"] }
   ];
 
   let lastError = null;

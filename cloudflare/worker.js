@@ -3477,16 +3477,8 @@ async function sendNewsPush(env, { newsId, title, text, nav, value }) {
   };
 
   const attempts = [
-    { ...basePayload, included_segments: ["DAR_PUSH"] },
     { ...basePayload, included_segments: ["Subscribed Users"] },
-    {
-      ...basePayload,
-      filters: [{ field: "tag", key: "dar_push", relation: "=", value: "true" }]
-    },
-    {
-      ...basePayload,
-      filters: [{ field: "tag", key: "post_notifications", relation: "=", value: "true" }]
-    }
+    { ...basePayload, included_segments: ["DAR_PUSH"] }
   ];
 
   let lastError = "Kein Empfänger gefunden";
