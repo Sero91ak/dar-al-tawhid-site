@@ -336,26 +336,6 @@ struct WebAppView: UIViewRepresentable {
           }
           window.addEventListener("pageshow", window.__darIosEnsureViewportPolish);
           window.addEventListener("hashchange", function(){ setTimeout(window.__darIosEnsureViewportPolish, 30); });
-          /* Kein subtree/childList: appendChild an style-Tags würde die App sonst hängen. */
-          try{
-            var polishTimer=null;
-            function schedulePolish(){
-              clearTimeout(polishTimer);
-              polishTimer=setTimeout(function(){
-                var fn=window.__darIosEnsureViewportPolish;
-                if(typeof fn==="function")fn();
-              },200);
-            }
-            var htmlMo=new MutationObserver(schedulePolish);
-            htmlMo.observe(document.documentElement,{attributes:true,attributeFilter:["class","data-theme"]});
-            function watchBody(){
-              if(!document.body)return;
-              var bodyMo=new MutationObserver(schedulePolish);
-              bodyMo.observe(document.body,{attributes:true,attributeFilter:["class"]});
-            }
-            if(document.body)watchBody();
-            else document.addEventListener("DOMContentLoaded",watchBody,{once:true});
-          }catch(e){}
         })();
         """
 
