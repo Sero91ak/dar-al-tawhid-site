@@ -27005,7 +27005,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v827";
+const APP_BUILD_ID="app-shell-v828";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -33613,6 +33613,18 @@ html.dar-test-performance-v1 .settings-page-head .view-desc{margin-top:0!importa
 html.dar-test-performance-v1 .settings-one-page :where(.notification-hero,.notification-section,.theme-switch-panel,.app-icon-panel,.app-font-panel,.settings-live-row){width:100%!important;border-bottom-color:color-mix(in srgb,var(--gold2) 24%,var(--line2,var(--line)) 76%)!important}
 html.dar-test-performance-v1 .settings-one-page .notification-hero{padding-top:16px!important}
 html.dar-test-performance-v1 .settings-one-page .settings-section-label{margin-top:15px!important}
+html.dar-test-performance-v1 #appView.view.page-enter-forward,
+html.dar-test-performance-v1 #appView.view.page-enter-back,
+html.dar-test-performance-v1 #appView.view.tab-swipe-left,
+html.dar-test-performance-v1 #appView.view.tab-swipe-right{animation:none!important;transform:none!important;-webkit-transform:none!important;transition:none!important;will-change:auto!important}
+html.dar-test-performance-v1 #bottomNav.bottom-nav{transform:translate3d(0,0,0)!important;-webkit-transform:translate3d(0,0,0)!important;backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important;will-change:transform!important}
+html.dar-test-performance-v1 #bottomNav .bottom-nav-btn,
+html.dar-test-performance-v1 #bottomNav .bottom-nav-btn .nav-icon,
+html.dar-test-performance-v1 #bottomNav .bottom-nav-btn.active,
+html.dar-test-performance-v1 #bottomNav .bottom-nav-btn:active,
+html.dar-test-performance-v1 #bottomNav .bottom-nav-btn.is-pressed,
+html.dar-test-performance-v1 #bottomNav .bottom-nav-btn.is-hold-arming,
+html.dar-test-performance-v1 #bottomNav .bottom-nav-btn.is-hold-feedback{animation:none!important;transition:none!important;transform:none!important;-webkit-transform:none!important;filter:none!important;box-shadow:none!important;background:transparent!important}
 </style>
 
 </html>
