@@ -33282,4 +33282,233 @@ html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-apply-btn{
 })();
 </script>
 
+<script>
+(function(){
+  function syncDuoLayout(){
+    var viewport=window.visualViewport;
+    var width=Math.round((viewport&&viewport.width)||window.innerWidth||0);
+    var offsetLeft=Math.max(0,Math.round((viewport&&viewport.offsetLeft)||0));
+    var pageScrollLeft=Math.max(0,Math.round(window.scrollX||document.documentElement.scrollLeft||0));
+    var root=document.documentElement;
+    var wide=width>=700;
+    root.setAttribute("data-duo-layout",wide?"wide":"compact");
+    root.style.setProperty("--duo-viewport-width",width+"px");
+    root.style.setProperty("--duo-viewport-left",offsetLeft+"px");
+    root.style.setProperty("--duo-page-scroll-left",pageScrollLeft+"px");
+    var body=document.body;
+    if(body){
+      if(wide){
+        body.style.setProperty("padding-left","calc(max(14px,env(safe-area-inset-left,0px)) + 110px)","important");
+        body.style.setProperty("padding-right","max(18px,env(safe-area-inset-right,0px))","important");
+        body.style.setProperty("padding-bottom","max(18px,env(safe-area-inset-bottom,0px))","important");
+      }else{
+        body.style.removeProperty("padding-left");
+        body.style.removeProperty("padding-right");
+        body.style.removeProperty("padding-bottom");
+      }
+    }
+    var nav=document.getElementById("bottomNav");
+    if(nav){
+      if(wide){
+        nav.style.setProperty("top","max(18px,env(safe-area-inset-top,0px))","important");
+        nav.style.setProperty("left","calc(var(--duo-page-scroll-left,0px) + var(--duo-viewport-left,0px) + max(14px,env(safe-area-inset-left,0px)))","important");
+        nav.style.setProperty("right","auto","important");
+        nav.style.setProperty("bottom","max(18px,env(safe-area-inset-bottom,0px))","important");
+        nav.style.setProperty("width","var(--duo-nav-rail-width)","important");
+        nav.style.setProperty("height","auto","important");
+        nav.style.setProperty("flex-direction","column","important");
+        nav.style.setProperty("align-items","center","important");
+        nav.style.setProperty("justify-content","center","important");
+        nav.style.setProperty("gap","8px","important");
+        nav.style.setProperty("padding","10px","important");
+        nav.style.setProperty("border-radius","30px","important");
+        nav.style.setProperty("overflow","visible","important");
+        var railRect=nav.getBoundingClientRect();
+        if(railRect.left<14){
+          var computedLeft=parseFloat(getComputedStyle(nav).left)||0;
+          nav.style.setProperty("left",Math.round(computedLeft+(14-railRect.left))+"px","important");
+        }
+      }else{
+        nav.style.setProperty("top","auto","important");
+        nav.style.setProperty("left","max(14px,env(safe-area-inset-left))","important");
+        nav.style.setProperty("right","max(14px,env(safe-area-inset-right))","important");
+        nav.style.setProperty("bottom","calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm)","important");
+        nav.style.removeProperty("width");
+        nav.style.removeProperty("height");
+        nav.style.removeProperty("flex-direction");
+        nav.style.removeProperty("align-items");
+        nav.style.removeProperty("justify-content");
+        nav.style.removeProperty("gap");
+        nav.style.removeProperty("padding");
+        nav.style.removeProperty("border-radius");
+        nav.style.removeProperty("overflow");
+      }
+      nav.querySelectorAll(".bottom-nav-btn").forEach(function(btn){
+        if(wide){
+          btn.style.setProperty("flex","0 0 auto","important");
+          btn.style.setProperty("width","72px","important");
+          btn.style.setProperty("max-width","72px","important");
+          btn.style.setProperty("min-height","68px","important");
+          btn.style.setProperty("padding","8px 5px","important");
+          btn.style.setProperty("border-radius","20px","important");
+          btn.style.setProperty("gap","5px","important");
+          btn.style.setProperty("font-size","10px","important");
+        }else{
+          ["flex","width","max-width","min-height","padding","border-radius","gap","font-size"].forEach(function(prop){
+            btn.style.removeProperty(prop);
+          });
+        }
+      });
+    }
+    var appView=document.getElementById("appView");
+    if(appView){
+      if(wide&&body&&body.classList.contains("is-ilm-chat-route")){
+        appView.style.setProperty("left","124px","important");
+        appView.style.setProperty("right","max(18px,env(safe-area-inset-right,0px))","important");
+        appView.style.setProperty("width","auto","important");
+      }else{
+        appView.style.removeProperty("left");
+        appView.style.removeProperty("right");
+        appView.style.removeProperty("width");
+      }
+    }
+  }
+  syncDuoLayout();
+  window.addEventListener("resize",syncDuoLayout,{passive:true});
+  window.addEventListener("orientationchange",syncDuoLayout,{passive:true});
+  window.addEventListener("hashchange",function(){
+    setTimeout(syncDuoLayout,50);
+    setTimeout(syncDuoLayout,250);
+  },{passive:true});
+  if(window.visualViewport)window.visualViewport.addEventListener("resize",syncDuoLayout,{passive:true});
+  window.DarAdaptiveLayout=Object.assign(window.DarAdaptiveLayout||{},{syncNav:syncDuoLayout});
+  if(typeof window.ensureBottomNavDock==="function"&&!window.ensureBottomNavDock.__duoWrapped){
+    var originalDockSync=window.ensureBottomNavDock;
+    var wrappedDockSync=function(){
+      var result=originalDockSync.apply(this,arguments);
+      syncDuoLayout();
+      return result;
+    };
+    wrappedDockSync.__duoWrapped=true;
+    window.ensureBottomNavDock=wrappedDockSync;
+  }
+  var observedNav=document.getElementById("bottomNav");
+  if(observedNav&&!window.__duoNavStyleObserver){
+    var duoSyncQueued=false;
+    window.__duoNavStyleObserver=new MutationObserver(function(){
+      if(duoSyncQueued)return;
+      var currentWidth=Math.round((window.visualViewport&&window.visualViewport.width)||window.innerWidth||0);
+      var shouldBeWide=currentWidth>=700;
+      var right=observedNav.style.getPropertyValue("right");
+      var top=observedNav.style.getPropertyValue("top");
+      var outOfSync=shouldBeWide?(right!=="auto"||top==="auto"):right==="auto";
+      if(!outOfSync)return;
+      duoSyncQueued=true;
+      requestAnimationFrame(function(){
+        duoSyncQueued=false;
+        syncDuoLayout();
+      });
+    });
+    window.__duoNavStyleObserver.observe(observedNav,{attributes:true,attributeFilter:["style"]});
+  }
+  requestAnimationFrame(syncDuoLayout);
+  setTimeout(syncDuoLayout,250);
+  setTimeout(syncDuoLayout,900);
+  setTimeout(syncDuoLayout,1800);
+})();
+</script>
+
+<style id="iphone-duo-adaptive-test-v1">
+/*
+  Test-only adaptive layout for iPhone Duo and other resizable iOS scenes.
+  The available viewport controls the layout; no device-name or orientation
+  assumptions are used.
+*/
+html[data-duo-layout="wide"]{
+    --duo-nav-rail-width:92px;
+    --duo-content-gap:18px;
+}
+
+html[data-duo-layout="wide"] body.has-bottom-nav{
+    padding-left:calc(max(14px,env(safe-area-inset-left,0px)) + var(--duo-nav-rail-width) + var(--duo-content-gap))!important;
+    padding-right:max(18px,env(safe-area-inset-right,0px))!important;
+    padding-bottom:max(18px,env(safe-area-inset-bottom,0px))!important;
+}
+
+html[data-duo-layout="wide"] body.has-bottom-nav .app{
+    width:min(1280px,100%)!important;
+    max-width:100%!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+}
+
+html[data-duo-layout="wide"] #bottomNav.bottom-nav{
+    top:max(18px,env(safe-area-inset-top,0px))!important;
+    left:max(14px,env(safe-area-inset-left,0px))!important;
+    right:auto!important;
+    bottom:max(18px,env(safe-area-inset-bottom,0px))!important;
+    width:var(--duo-nav-rail-width)!important;
+    height:auto!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:8px!important;
+    padding:10px!important;
+    border-radius:30px!important;
+    overflow:visible!important;
+}
+
+html[data-duo-layout="wide"] #bottomNav .bottom-nav-btn{
+    flex:0 0 auto!important;
+    width:72px!important;
+    max-width:72px!important;
+    min-height:68px!important;
+    padding:8px 5px!important;
+    border-radius:20px!important;
+    gap:5px!important;
+    font-size:10px!important;
+}
+
+html[data-duo-layout="wide"] #bottomNav .bottom-nav-btn .nav-icon{
+    font-size:21px!important;
+}
+
+html[data-duo-layout="wide"] #bottomNav .bottom-nav-btn.active{
+    background:color-mix(in srgb,var(--gold2,#efd78e) 15%,transparent)!important;
+    box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2,#efd78e) 34%,transparent)!important;
+}
+
+html[data-duo-layout="wide"] body.has-bottom-nav .float-actions{
+    left:calc(max(14px,env(safe-area-inset-left,0px)) + var(--duo-nav-rail-width) + var(--duo-content-gap))!important;
+    right:auto!important;
+    bottom:max(18px,env(safe-area-inset-bottom,0px))!important;
+}
+
+html[data-duo-layout="wide"] body.has-bottom-nav .footer{
+    padding-bottom:max(24px,env(safe-area-inset-bottom,0px))!important;
+}
+
+html[data-duo-layout="wide"] body.is-feed-fullscreen.has-bottom-nav{
+    padding-left:calc(max(14px,env(safe-area-inset-left,0px)) + var(--duo-nav-rail-width) + var(--duo-content-gap))!important;
+    padding-right:max(18px,env(safe-area-inset-right,0px))!important;
+}
+
+html[data-duo-layout="wide"] body.is-feed-fullscreen.has-bottom-nav .app,
+html[data-duo-layout="wide"] body.is-feed-fullscreen.has-bottom-nav .view{
+    width:100%!important;
+    max-width:100%!important;
+}
+
+html[data-duo-layout="wide"] body.is-ilm-chat-route.has-bottom-nav #appView.view{
+    left:calc(max(14px,env(safe-area-inset-left,0px)) + var(--duo-nav-rail-width) + var(--duo-content-gap))!important;
+    right:max(18px,env(safe-area-inset-right,0px))!important;
+    width:auto!important;
+}
+
+html[data-duo-layout="compact"] #bottomNav.bottom-nav{
+    flex-direction:row!important;
+}
+</style>
+
 </html>
