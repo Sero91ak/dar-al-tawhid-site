@@ -63,6 +63,22 @@
 		A42000000000000000000026 /* AppIconTypeSchwarzAr2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A41000000000000000000026 /* AppIconTypeSchwarzAr2@3x.png */; };
 		A42000000000000000000027 /* AppIconTypeSchwarzAr2@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A41000000000000000000027 /* AppIconTypeSchwarzAr2@2x~ipad.png */; };
 		A42000000000000000000028 /* AppIconTypeSchwarzAr2-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A41000000000000000000028 /* AppIconTypeSchwarzAr2-83.5@2x~ipad.png */; };
+		A43000000000000000000001 /* AppIconTypeCremeAr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A44000000000000000000001 /* AppIconTypeCremeAr@2x.png */; };
+		A43000000000000000000002 /* AppIconTypeCremeAr@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A44000000000000000000002 /* AppIconTypeCremeAr@3x.png */; };
+		A43000000000000000000003 /* AppIconTypeCremeAr@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A44000000000000000000003 /* AppIconTypeCremeAr@2x~ipad.png */; };
+		A43000000000000000000004 /* AppIconTypeCremeAr-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A44000000000000000000004 /* AppIconTypeCremeAr-83.5@2x~ipad.png */; };
+		A43000000000000000000005 /* AppIconTypeWeissAr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A44000000000000000000005 /* AppIconTypeWeissAr@2x.png */; };
+		A43000000000000000000006 /* AppIconTypeWeissAr@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A44000000000000000000006 /* AppIconTypeWeissAr@3x.png */; };
+		A43000000000000000000007 /* AppIconTypeWeissAr@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A44000000000000000000007 /* AppIconTypeWeissAr@2x~ipad.png */; };
+		A43000000000000000000008 /* AppIconTypeWeissAr-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A44000000000000000000008 /* AppIconTypeWeissAr-83.5@2x~ipad.png */; };
+		A43000000000000000000009 /* AppIconTypeSchwarzRund@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A44000000000000000000009 /* AppIconTypeSchwarzRund@2x.png */; };
+		A4300000000000000000000A /* AppIconTypeSchwarzRund@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4400000000000000000000A /* AppIconTypeSchwarzRund@3x.png */; };
+		A4300000000000000000000B /* AppIconTypeSchwarzRund@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A4400000000000000000000B /* AppIconTypeSchwarzRund@2x~ipad.png */; };
+		A4300000000000000000000C /* AppIconTypeSchwarzRund-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A4400000000000000000000C /* AppIconTypeSchwarzRund-83.5@2x~ipad.png */; };
+		A4300000000000000000000D /* AppIconTypeAnthrazitFein@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4400000000000000000000D /* AppIconTypeAnthrazitFein@2x.png */; };
+		A4300000000000000000000E /* AppIconTypeAnthrazitFein@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4400000000000000000000E /* AppIconTypeAnthrazitFein@3x.png */; };
+		A4300000000000000000000F /* AppIconTypeAnthrazitFein@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A4400000000000000000000F /* AppIconTypeAnthrazitFein@2x~ipad.png */; };
+		A43000000000000000000010 /* AppIconTypeAnthrazitFein-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A44000000000000000000010 /* AppIconTypeAnthrazitFein-83.5@2x~ipad.png */; };
 		A10000000000000000000004 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A10000000000000000000014 /* WebKit.framework */; };
 		A10000000000000000000005 /* DarAppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000016 /* DarAppRouter.swift */; };
 		A1000000000000000000000D /* DarAppShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000019 /* DarAppShell.swift */; };
@@ -145,6 +161,22 @@
 		A41000000000000000000026 /* AppIconTypeSchwarzAr2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzAr2@3x.png"; sourceTree = "<group>"; };
 		A41000000000000000000027 /* AppIconTypeSchwarzAr2@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzAr2@2x~ipad.png"; sourceTree = "<group>"; };
 		A41000000000000000000028 /* AppIconTypeSchwarzAr2-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzAr2-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		A44000000000000000000001 /* AppIconTypeCremeAr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeCremeAr@2x.png"; sourceTree = "<group>"; };
+		A44000000000000000000002 /* AppIconTypeCremeAr@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeCremeAr@3x.png"; sourceTree = "<group>"; };
+		A44000000000000000000003 /* AppIconTypeCremeAr@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeCremeAr@2x~ipad.png"; sourceTree = "<group>"; };
+		A44000000000000000000004 /* AppIconTypeCremeAr-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeCremeAr-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		A44000000000000000000005 /* AppIconTypeWeissAr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeWeissAr@2x.png"; sourceTree = "<group>"; };
+		A44000000000000000000006 /* AppIconTypeWeissAr@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeWeissAr@3x.png"; sourceTree = "<group>"; };
+		A44000000000000000000007 /* AppIconTypeWeissAr@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeWeissAr@2x~ipad.png"; sourceTree = "<group>"; };
+		A44000000000000000000008 /* AppIconTypeWeissAr-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeWeissAr-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		A44000000000000000000009 /* AppIconTypeSchwarzRund@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzRund@2x.png"; sourceTree = "<group>"; };
+		A4400000000000000000000A /* AppIconTypeSchwarzRund@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzRund@3x.png"; sourceTree = "<group>"; };
+		A4400000000000000000000B /* AppIconTypeSchwarzRund@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzRund@2x~ipad.png"; sourceTree = "<group>"; };
+		A4400000000000000000000C /* AppIconTypeSchwarzRund-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzRund-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		A4400000000000000000000D /* AppIconTypeAnthrazitFein@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeAnthrazitFein@2x.png"; sourceTree = "<group>"; };
+		A4400000000000000000000E /* AppIconTypeAnthrazitFein@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeAnthrazitFein@3x.png"; sourceTree = "<group>"; };
+		A4400000000000000000000F /* AppIconTypeAnthrazitFein@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeAnthrazitFein@2x~ipad.png"; sourceTree = "<group>"; };
+		A44000000000000000000010 /* AppIconTypeAnthrazitFein-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeAnthrazitFein-83.5@2x~ipad.png"; sourceTree = "<group>"; };
 		A10000000000000000000014 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		A10000000000000000000015 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A10000000000000000000016 /* DarAppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAppRouter.swift; sourceTree = "<group>"; };
@@ -278,6 +310,22 @@
 				A41000000000000000000026 /* AppIconTypeSchwarzAr2@3x.png */,
 				A41000000000000000000027 /* AppIconTypeSchwarzAr2@2x~ipad.png */,
 				A41000000000000000000028 /* AppIconTypeSchwarzAr2-83.5@2x~ipad.png */,
+				A44000000000000000000001 /* AppIconTypeCremeAr@2x.png */,
+				A44000000000000000000002 /* AppIconTypeCremeAr@3x.png */,
+				A44000000000000000000003 /* AppIconTypeCremeAr@2x~ipad.png */,
+				A44000000000000000000004 /* AppIconTypeCremeAr-83.5@2x~ipad.png */,
+				A44000000000000000000005 /* AppIconTypeWeissAr@2x.png */,
+				A44000000000000000000006 /* AppIconTypeWeissAr@3x.png */,
+				A44000000000000000000007 /* AppIconTypeWeissAr@2x~ipad.png */,
+				A44000000000000000000008 /* AppIconTypeWeissAr-83.5@2x~ipad.png */,
+				A44000000000000000000009 /* AppIconTypeSchwarzRund@2x.png */,
+				A4400000000000000000000A /* AppIconTypeSchwarzRund@3x.png */,
+				A4400000000000000000000B /* AppIconTypeSchwarzRund@2x~ipad.png */,
+				A4400000000000000000000C /* AppIconTypeSchwarzRund-83.5@2x~ipad.png */,
+				A4400000000000000000000D /* AppIconTypeAnthrazitFein@2x.png */,
+				A4400000000000000000000E /* AppIconTypeAnthrazitFein@3x.png */,
+				A4400000000000000000000F /* AppIconTypeAnthrazitFein@2x~ipad.png */,
+				A44000000000000000000010 /* AppIconTypeAnthrazitFein-83.5@2x~ipad.png */,
 			);
 			path = AppIcons;
 			sourceTree = "<group>";
@@ -455,6 +503,22 @@
 				A42000000000000000000026 /* AppIconTypeSchwarzAr2@3x.png in Resources */,
 				A42000000000000000000027 /* AppIconTypeSchwarzAr2@2x~ipad.png in Resources */,
 				A42000000000000000000028 /* AppIconTypeSchwarzAr2-83.5@2x~ipad.png in Resources */,
+				A43000000000000000000001 /* AppIconTypeCremeAr@2x.png in Resources */,
+				A43000000000000000000002 /* AppIconTypeCremeAr@3x.png in Resources */,
+				A43000000000000000000003 /* AppIconTypeCremeAr@2x~ipad.png in Resources */,
+				A43000000000000000000004 /* AppIconTypeCremeAr-83.5@2x~ipad.png in Resources */,
+				A43000000000000000000005 /* AppIconTypeWeissAr@2x.png in Resources */,
+				A43000000000000000000006 /* AppIconTypeWeissAr@3x.png in Resources */,
+				A43000000000000000000007 /* AppIconTypeWeissAr@2x~ipad.png in Resources */,
+				A43000000000000000000008 /* AppIconTypeWeissAr-83.5@2x~ipad.png in Resources */,
+				A43000000000000000000009 /* AppIconTypeSchwarzRund@2x.png in Resources */,
+				A4300000000000000000000A /* AppIconTypeSchwarzRund@3x.png in Resources */,
+				A4300000000000000000000B /* AppIconTypeSchwarzRund@2x~ipad.png in Resources */,
+				A4300000000000000000000C /* AppIconTypeSchwarzRund-83.5@2x~ipad.png in Resources */,
+				A4300000000000000000000D /* AppIconTypeAnthrazitFein@2x.png in Resources */,
+				A4300000000000000000000E /* AppIconTypeAnthrazitFein@3x.png in Resources */,
+				A4300000000000000000000F /* AppIconTypeAnthrazitFein@2x~ipad.png in Resources */,
+				A43000000000000000000010 /* AppIconTypeAnthrazitFein-83.5@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,7 +604,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 49;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -611,7 +675,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 49;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -677,7 +741,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = Widgets/Widgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 49;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Widgets/Info.plist;
@@ -704,7 +768,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = Widgets/Widgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 49;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Widgets/Info.plist;
