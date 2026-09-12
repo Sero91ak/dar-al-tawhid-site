@@ -11,7 +11,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>DĀR AL TAWḤĪD</string>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -35,11 +35,17 @@
 		<dict>
 			<key>CFBundleIconName</key>
 			<string>AppIcon</string>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>AppIcon</string>
+			</array>
 		</dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
 			<key>AppIconEmblemNachtblau</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconEmblemNachtblau</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconEmblemNachtblau</string>
@@ -50,6 +56,8 @@
 			</dict>
 			<key>AppIconEmblemSchwarzgold</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconEmblemSchwarzgold</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconEmblemSchwarzgold</string>
@@ -60,6 +68,8 @@
 			</dict>
 			<key>AppIconEmblemCremePetrol</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconEmblemCremePetrol</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconEmblemCremePetrol</string>
@@ -70,6 +80,8 @@
 			</dict>
 			<key>AppIconTypeCreme</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeCreme</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeCreme</string>
@@ -80,6 +92,8 @@
 			</dict>
 			<key>AppIconTypeSchwarzAr</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeSchwarzAr</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeSchwarzAr</string>
@@ -90,6 +104,8 @@
 			</dict>
 			<key>AppIconTypeSchwarz</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeSchwarz</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeSchwarz</string>
@@ -100,6 +116,8 @@
 			</dict>
 			<key>AppIconTypeNavyAr</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeNavyAr</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeNavyAr</string>
@@ -110,6 +128,8 @@
 			</dict>
 			<key>AppIconTypeNavy</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeNavy</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeNavy</string>
@@ -120,6 +140,8 @@
 			</dict>
 			<key>AppIconTypeBordeauxAr</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeBordeauxAr</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeBordeauxAr</string>
@@ -130,6 +152,8 @@
 			</dict>
 			<key>AppIconTypeBordeaux</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeBordeaux</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeBordeaux</string>
@@ -140,6 +164,8 @@
 			</dict>
 			<key>AppIconTypeGruenAr</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeGruenAr</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeGruenAr</string>
@@ -150,6 +176,8 @@
 			</dict>
 			<key>AppIconTypeGruen</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeGruen</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeGruen</string>
@@ -160,6 +188,8 @@
 			</dict>
 			<key>AppIconTypeSchwarzAr2</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeSchwarzAr2</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeSchwarzAr2</string>
@@ -176,11 +206,17 @@
 		<dict>
 			<key>CFBundleIconName</key>
 			<string>AppIcon</string>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>AppIcon</string>
+			</array>
 		</dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
 			<key>AppIconEmblemNachtblau</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconEmblemNachtblau</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconEmblemNachtblau</string>
@@ -191,6 +227,8 @@
 			</dict>
 			<key>AppIconEmblemSchwarzgold</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconEmblemSchwarzgold</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconEmblemSchwarzgold</string>
@@ -201,6 +239,8 @@
 			</dict>
 			<key>AppIconEmblemCremePetrol</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconEmblemCremePetrol</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconEmblemCremePetrol</string>
@@ -211,6 +251,8 @@
 			</dict>
 			<key>AppIconTypeCreme</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeCreme</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeCreme</string>
@@ -221,6 +263,8 @@
 			</dict>
 			<key>AppIconTypeSchwarzAr</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeSchwarzAr</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeSchwarzAr</string>
@@ -231,6 +275,8 @@
 			</dict>
 			<key>AppIconTypeSchwarz</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeSchwarz</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeSchwarz</string>
@@ -241,6 +287,8 @@
 			</dict>
 			<key>AppIconTypeNavyAr</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeNavyAr</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeNavyAr</string>
@@ -251,6 +299,8 @@
 			</dict>
 			<key>AppIconTypeNavy</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeNavy</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeNavy</string>
@@ -261,6 +311,8 @@
 			</dict>
 			<key>AppIconTypeBordeauxAr</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeBordeauxAr</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeBordeauxAr</string>
@@ -271,6 +323,8 @@
 			</dict>
 			<key>AppIconTypeBordeaux</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeBordeaux</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeBordeaux</string>
@@ -281,6 +335,8 @@
 			</dict>
 			<key>AppIconTypeGruenAr</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeGruenAr</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeGruenAr</string>
@@ -291,6 +347,8 @@
 			</dict>
 			<key>AppIconTypeGruen</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeGruen</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeGruen</string>
@@ -301,6 +359,8 @@
 			</dict>
 			<key>AppIconTypeSchwarzAr2</key>
 			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIconTypeSchwarzAr2</string>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIconTypeSchwarzAr2</string>
