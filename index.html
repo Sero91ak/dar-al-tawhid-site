@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v783";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v784";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -10479,6 +10479,65 @@ window.DAR_ANALYTICS_CONFIG={
 .more-search{min-height:44px!important;font-size:15px!important}
 @media(max-width:370px){.feature-section,.more-group{padding:11px!important}.feature-card{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"main" "actions"!important}.feature-card-actions{grid-template-columns:minmax(112px,1fr) 36px!important;justify-self:stretch!important}.feature-card p{-webkit-line-clamp:2!important}.more-group-grid{grid-template-columns:1fr!important}}
 @media(min-width:520px){.more-group-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.feature-card{grid-template-columns:minmax(0,1fr) auto!important}}
+</style>
+
+<style id="notification-center-v782">
+.notification-center-page{display:block;width:100%;max-width:720px;margin:0 auto;padding:0 0 20px}
+.notification-hero{position:relative;isolation:isolate;overflow:hidden;margin:0 0 8px;border:0;border-radius:23px;padding:17px;background:radial-gradient(95% 140% at 0 0,color-mix(in srgb,var(--gold2) 9%,transparent),transparent 58%),linear-gradient(145deg,color-mix(in srgb,var(--card) 90%,transparent),color-mix(in srgb,var(--bg) 76%,var(--card) 24%));box-shadow:inset 0 1px 0 color-mix(in srgb,var(--text) 5%,transparent)}
+.notification-hero:after{content:"";position:absolute;z-index:-1;right:-64px;top:-88px;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--gold2) 14%,transparent),transparent 69%);pointer-events:none}
+.notification-hero__top{display:grid;grid-template-columns:52px minmax(0,1fr) auto;align-items:center;gap:13px}
+.notification-hero__icon{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;border:1px solid color-mix(in srgb,var(--gold2) 46%,transparent);background:linear-gradient(145deg,color-mix(in srgb,var(--gold2) 16%,var(--card)),color-mix(in srgb,var(--card) 94%,transparent));color:var(--gold2);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--text) 12%,transparent),0 8px 22px color-mix(in srgb,#000 15%,transparent)}
+.notification-hero__icon svg{width:22px;height:22px}
+.notification-hero h2{margin:0;color:var(--text);font-family:var(--serif);font-size:clamp(23px,5vw,29px);font-weight:650;line-height:1;letter-spacing:.005em}
+.notification-hero p{margin:5px 0 0;color:var(--muted);font-size:11px;line-height:1.4}
+.notification-hero__count{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;border:1px solid color-mix(in srgb,var(--gold2) 36%,var(--line2,var(--line)));background:color-mix(in srgb,var(--gold2) 8%,var(--card));font-size:9px;color:var(--muted);line-height:1.05;text-align:center}
+.notification-hero__count b{display:block;color:var(--gold2);font-family:var(--serif);font-size:20px;line-height:.8}
+.notification-hero__status{display:flex!important;flex-wrap:wrap;gap:6px;margin-top:14px;padding-top:12px;border-top:1px solid color-mix(in srgb,var(--line2,var(--line)) 43%,transparent)}
+.notification-status-chip{display:inline-flex!important;align-items:center;gap:6px;min-height:25px;padding:4px 9px;border:0;border-radius:999px;background:color-mix(in srgb,var(--card) 72%,transparent);color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.01em}
+.notification-status-chip:before{content:"";width:5px;height:5px;border-radius:50%;background:color-mix(in srgb,var(--muted) 65%,transparent)}
+.notification-status-chip.is-on{color:var(--text);background:color-mix(in srgb,var(--gold2) 8%,var(--card))}
+.notification-status-chip.is-on:before{background:var(--gold2);box-shadow:0 0 7px color-mix(in srgb,var(--gold2) 52%,transparent)}
+.notification-section{position:relative;overflow:visible;border:0;border-radius:0;padding:22px 2px 20px;background:transparent;box-shadow:none}
+.notification-section:before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--gold2) 42%,var(--line2,var(--line))) 12%,color-mix(in srgb,var(--line2,var(--line)) 58%,transparent) 50%,color-mix(in srgb,var(--gold2) 42%,var(--line2,var(--line))) 88%,transparent)}
+.notification-section__head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 10px 15px}
+.notification-section__kicker{display:block;margin:0 0 4px;color:var(--gold2);font-size:7.5px;font-weight:900;letter-spacing:.18em;text-transform:uppercase}
+.notification-section__head h3{margin:0;color:var(--text);font-family:var(--serif);font-size:clamp(21px,4.6vw,25px);font-weight:650;line-height:1}
+.notification-section__head p{margin:5px 0 0;color:var(--muted);font-size:10px;line-height:1.35}
+.notification-settings-list{overflow:visible;border:0;border-radius:0;background:transparent}
+.notification-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:11px;min-height:62px;padding:11px 10px;border:0;border-top:1px solid color-mix(in srgb,var(--line2,var(--line)) 38%,transparent)}
+.notification-row:first-child{border-top:0}
+.notification-row__copy{display:flex;align-items:center;gap:10px;min-width:0}
+.notification-row__glyph{display:grid;place-items:center;width:40px;height:40px;flex:0 0 40px;border:0;border-radius:50%;background:color-mix(in srgb,var(--gold2) 8%,var(--card));color:var(--gold2);font-family:var(--serif);font-size:19px}
+.notification-row strong{display:block;color:var(--text);font-size:12.5px;font-weight:820;line-height:1.2}
+.notification-row small{display:block;margin-top:3px;color:var(--muted);font-size:9.5px;line-height:1.3}
+.notification-toggle{position:relative;width:42px;height:24px;min-width:42px;padding:0;border:1px solid color-mix(in srgb,var(--line2,var(--line)) 52%,transparent);border-radius:999px;background:color-mix(in srgb,var(--muted) 7%,var(--bg));box-shadow:inset 0 1px 3px color-mix(in srgb,#000 13%,transparent);transition:border-color .18s ease,background .18s ease}
+.notification-toggle:after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:color-mix(in srgb,var(--muted) 72%,var(--text) 28%);transition:transform .2s cubic-bezier(.2,.8,.2,1),background .18s ease;box-shadow:0 2px 5px rgba(0,0,0,.2)}
+.notification-toggle.is-on{border-color:color-mix(in srgb,var(--gold2) 48%,var(--line2,var(--line)));background:color-mix(in srgb,var(--gold2) 18%,var(--bg))}
+.notification-toggle.is-on:after{transform:translateX(18px);background:var(--gold2)}
+.notification-toggle:focus-visible{outline:2px solid color-mix(in srgb,var(--gold2) 58%,transparent);outline-offset:3px}
+.notification-location{display:grid;grid-template-columns:38px minmax(0,1fr) auto;align-items:center;gap:10px;margin:0;padding:10px;border:0;border-top:1px solid color-mix(in srgb,var(--line2,var(--line)) 36%,transparent);border-radius:0;background:transparent}
+.notification-location__icon{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;color:var(--gold2);background:color-mix(in srgb,var(--gold2) 8%,var(--card))}
+.notification-location__icon svg{width:19px;height:19px}
+.notification-location span{min-width:0;color:var(--muted);font-size:9px;line-height:1.3}.notification-location b{display:block;color:var(--text);font-size:11px}
+.notification-action{min-height:30px;padding:5px 11px;border:1px solid color-mix(in srgb,var(--gold2) 24%,var(--line2,var(--line)));border-radius:999px;background:transparent;color:var(--text);font-size:9.5px;font-weight:850}
+.notification-prayer-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px;margin:2px 4px 12px;padding:0}
+.notification-prayer{position:relative;display:grid;place-items:center;gap:6px;min-height:77px;padding:8px 2px;border:0;border-radius:16px;background:transparent;color:var(--muted);text-align:center;transition:background .18s ease,transform .15s ease}
+.notification-prayer:active{transform:scale(.97)}
+.notification-prayer-index{display:grid;place-items:center;width:43px;height:43px;border-radius:50%;background:color-mix(in srgb,var(--muted) 6%,var(--card));color:var(--muted);font-family:var(--serif);font-size:21px;line-height:1}
+.notification-prayer b{display:block;color:var(--muted);font-size:10.5px;font-weight:850;line-height:1.1;white-space:nowrap}
+.notification-prayer small{display:none}
+.notification-prayer:after{content:"";position:absolute;right:8px;top:7px;width:5px;height:5px;border-radius:50%;background:color-mix(in srgb,var(--muted) 30%,transparent)}
+.notification-prayer.is-on{background:color-mix(in srgb,var(--gold2) 5%,transparent)}
+.notification-prayer.is-on .notification-prayer-index{background:color-mix(in srgb,var(--gold2) 11%,var(--card));color:var(--gold2);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2) 23%,transparent)}
+.notification-prayer.is-on b{color:var(--text)}
+.notification-prayer.is-on:after{background:var(--gold2);box-shadow:0 0 7px color-mix(in srgb,var(--gold2) 58%,transparent)}
+.notification-time{display:flex;align-items:center;gap:8px}
+.notification-time input,.notification-time select{width:78px;min-height:32px;padding:5px 7px;border:1px solid color-mix(in srgb,var(--line2,var(--line)) 42%,transparent)!important;border-radius:999px!important;background:transparent!important;color:var(--text)!important;font:850 11px/1 var(--font-ui)!important;text-align:center;color-scheme:dark;box-shadow:none}
+html[data-theme="light"] .notification-time input,html[data-theme="light"] .notification-time select,html[data-theme="soft"] .notification-time input,html[data-theme="soft"] .notification-time select,html[data-theme="eisgold"] .notification-time input,html[data-theme="eisgold"] .notification-time select{color-scheme:light}
+.notification-note{margin:10px;color:var(--muted);font-size:8.8px;line-height:1.45}
+.notification-saved{display:flex;align-items:center;justify-content:center;gap:6px;color:var(--muted);font-size:9px;font-weight:750}
+.notification-saved:before{content:"✓";display:grid;place-items:center;width:17px;height:17px;border-radius:50%;background:color-mix(in srgb,var(--gold2) 10%,var(--card));color:var(--gold2)}
+@media(max-width:390px){.notification-hero{padding:15px}.notification-hero__top{grid-template-columns:46px minmax(0,1fr) auto;gap:10px}.notification-hero__icon{width:46px;height:46px}.notification-hero__count{width:44px;height:44px}.notification-section{padding:20px 0 18px}.notification-section__head{margin-inline:8px}.notification-prayer-grid{gap:1px;margin-inline:0}.notification-prayer{min-height:73px;padding-inline:1px}.notification-prayer-index{width:39px;height:39px;font-size:19px}.notification-prayer b{font-size:9.4px}.notification-row{padding:10px 8px}.notification-row__glyph{width:36px;height:36px;flex-basis:36px}.notification-time{gap:6px}.notification-time input,.notification-time select{width:72px}.notification-location{grid-template-columns:36px minmax(0,1fr) auto;padding-inline:8px}}
 </style>
 
 <style id="home-compact-v205">
@@ -22167,7 +22226,7 @@ function parentRoute(route){if(route&&route.view==="propheten"&&route.value){con
   return{view:"home"};
 }
 function bottomNavSecondaryTab(){return isTestAppPath()?"ilm":"quiz"}
-function bottomNavTabForRoute(routeOrView){const route=typeof routeOrView==="string"?{view:routeOrView,value:""}:(routeOrView||{view:"",value:""});const view=route.view||"";if(view==="news-detail")return"home";if(view==="home")return"home";if(isTestAppPath()){if(view==="ilm")return"ilm"}else{if(view==="quiz"||view==="statistik")return"quiz"}if(view==="feed")return"feed";if(["quran","quran-surah","quran-topic"].includes(view))return"quran";if(["topics","topic","recent","series","post","more","scholars","scholar","books","book","quellen-book","quellen-scholar","calendar","saved","account","about","hadith","propheten","statistik","prayer","ramadan","zakat","bibliothek","bibliothek-detail","bibliothek-reader","image-editor","image-editor-test","duas","dua-cat","dua","settings","jummah","qibla","news","ilm","quiz"].includes(view))return"more";return""}
+function bottomNavTabForRoute(routeOrView){const route=typeof routeOrView==="string"?{view:routeOrView,value:""}:(routeOrView||{view:"",value:""});const view=route.view||"";if(view==="news-detail")return"home";if(view==="home")return"home";if(isTestAppPath()){if(view==="ilm")return"ilm"}else{if(view==="quiz"||view==="statistik")return"quiz"}if(view==="feed")return"feed";if(["quran","quran-surah","quran-topic"].includes(view))return"quran";if(["topics","topic","recent","series","post","more","notifications","scholars","scholar","books","book","quellen-book","quellen-scholar","calendar","saved","account","about","hadith","propheten","statistik","prayer","ramadan","zakat","bibliothek","bibliothek-detail","bibliothek-reader","image-editor","image-editor-test","duas","dua-cat","dua","settings","jummah","qibla","news","ilm","quiz"].includes(view))return"more";return""}
 const BOTTOM_NAV_TABS=["home",bottomNavSecondaryTab(),"feed","quran","more"];
 let bottomNavDrag=null;
 function bottomNavTabIndex(tab){const i=BOTTOM_NAV_TABS.indexOf(tab);return i>=0?i:0}
@@ -23968,7 +24027,7 @@ function persistJummahNotificationsNow(on){const next={...getPrayerSettings(),ju
 function bindJummahToggleDelegation(){if(window.__darJummahToggleDelegated)return;window.__darJummahToggleDelegated=true;document.addEventListener("click",function(ev){const t=ev.target;const btn=t&&t.closest?t.closest("[data-jummah-toggle]"):null;if(!btn)return;ev.preventDefault();ev.stopPropagation();const next=!jummahPref(getPrayerSettings(),"jummahNotifications");if(!next){persistJummahNotificationsNow(false);paintJummahToggleButtons(false);if(typeof updateHomePushRemindersSummary==="function")updateHomePushRemindersSummary();if(typeof updatePrayerPushAccordionUi==="function")updatePrayerPushAccordionUi();void setJummahPushPreference(false,{alreadyPersisted:true});return}void setJummahPushPreference(true)},true)}
 async function setJummahPushPreference(active,opts){const want=!!active;const already=!!(opts&&opts.alreadyPersisted);const token=(window.__darJummahPrefToken=(Number(window.__darJummahPrefToken||0)+1));if(!want){if(!already)persistJummahNotificationsNow(false);paintJummahToggleButtons(false);if(typeof updateHomePushRemindersSummary==="function")updateHomePushRemindersSummary();void (async()=>{try{await syncJummahPushTags(getPrayerSettings(),{retries:1,timeoutMs:2500})}catch(e){}try{const os=await waitForOneSignalReady(2500);await savePushRegistration(getPrayerSettings(),os)}catch(e){}})();return}if(want){if(!hasNotificationApi()){alert("Benachrichtigungen werden von diesem Browser nicht unterstützt.");persistJummahNotificationsNow(false);paintJummahToggleButtons(false);return}let permission=getNotificationPermission();if(permission!=="granted")permission=await requestNotificationPermission();if(token!==window.__darJummahPrefToken)return;if(permission!=="granted"){alert("Benachrichtigungen sind noch nicht erlaubt.");persistJummahNotificationsNow(false);paintJummahToggleButtons(false);return}const s=getPrayerSettings();if(!s.jummahUseManualTime&&!hasPrayerLocation(s)){alert("Für automatische Jumuʿah-Zeit bitte zuerst Standort freigeben – oder manuelle Moschee-Zeit wählen.");persistJummahNotificationsNow(false);paintJummahToggleButtons(false);return}const OS=await waitForOneSignalReady(8000);if(token!==window.__darJummahPrefToken)return;if(OS){await ensurePushUserLogin(OS);await waitForPushOptIn(OS)}if(token!==window.__darJummahPrefToken)return}persistJummahNotificationsNow(true);paintJummahToggleButtons(true);if(typeof updateHomePushRemindersSummary==="function")updateHomePushRemindersSummary();void (async()=>{if(token!==window.__darJummahPrefToken)return;try{const ok=await syncJummahPushTags(getPrayerSettings(),{retries:3,timeoutMs:8000});if(token!==window.__darJummahPrefToken)return;const osPref=await waitForOneSignalReady(5000);await savePushRegistration(getPrayerSettings(),osPref);paintJummahToggleButtons(jummahPref(getPrayerSettings(),"jummahNotifications"));if(want&&!ok)console.warn("Jumuʿah-Push-Tags nach Aktivierung noch nicht bestätigt")}catch(e){}})()}
 function renderHighlightPushButton(key,label){const active=dailyPushPref(getPrayerSettings(),key);return `<button type="button" class="prayer-action-btn highlight-push-btn ${active?"active":""}" data-daily-push="${key}" aria-pressed="${active?"true":"false"}">${active?"✓ ":"○ "}${label}</button>`}
-function buildDailyPushTags(settings=getPrayerSettings()){return{daily_dua_notifications:dailyPushPref(settings,"dailyDua")?"true":"false",daily_recommendation_notifications:dailyPushPref(settings,"dailyRecommendation")?"true":"false",push_timezone:(Intl.DateTimeFormat().resolvedOptions().timeZone)||"Europe/Berlin",dar_push:"true",post_notifications:"true",push_site:"dar-al-tawhid",push_version:"7"}}
+function buildDailyPushTags(settings=getPrayerSettings()){return{daily_dua_notifications:dailyPushPref(settings,"dailyDua")?"true":"false",daily_recommendation_notifications:dailyPushPref(settings,"dailyRecommendation")?"true":"false",daily_dua_time:normalizeTimeHHMM(settings.dailyDuaTime,"09:00"),daily_recommendation_time:normalizeTimeHHMM(settings.dailyRecommendationTime,"12:00"),push_timezone:(Intl.DateTimeFormat().resolvedOptions().timeZone)||"Europe/Berlin",dar_push:"true",post_notifications:"true",push_site:"dar-al-tawhid",push_version:"8"}}
 async function syncDailyPushTags(settings=getPrayerSettings(),{ensureOptIn=false}={}){const OS=await waitForOneSignalReady();if(!OS)return false;await ensurePushUserLogin(OS);if(ensureOptIn){const opted=await waitForPushOptIn(OS);if(!opted)return false}try{await addOneSignalTagsCompat(OS,buildDailyPushTags(settings));return true}catch(e){console.warn("Tages-Push-Tags:",e);return false}}
 async function setDailyPushPreference(key,active){const next={};next[key]=!!active;if(active){if(!hasNotificationApi()){alert("Benachrichtigungen werden von diesem Browser nicht unterstützt.");return}let permission=getNotificationPermission();if(permission!=="granted")permission=await requestNotificationPermission();if(permission!=="granted"){alert("Benachrichtigungen sind noch nicht erlaubt. Bitte in den Browser-/Geräte-Einstellungen erlauben.");return}const OS=await waitForOneSignalReady();if(OS){await ensurePushUserLogin(OS);await waitForPushOptIn(OS);await ensurePostPushTags(OS)}}setPrayerSettings(next);const ok=await syncDailyPushTags(getPrayerSettings(),{ensureOptIn:!!active});const osPref=await waitForOneSignalReady(8000);await savePushRegistration(getPrayerSettings(),osPref);if(active&&osPref){const welcomed=await sendWelcomePushIfNeeded(osPref);if(!welcomed)scheduleWelcomePushRetries(osPref)}updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();if(active&&!ok)alert("Einstellung gespeichert. Push wird im Hintergrund erneut verbunden.")}
 const PRAYER_PUSH_ACCORDION_KEY="darPrayerPushAccordionOpenV1";
@@ -24202,9 +24261,14 @@ let qiblaCompassActive=false;
 let qiblaSensorTimeout=null;
 let qiblaStaticMode=false;
 let qiblaAutoStart=false;
-function prayerDefaultSettings(){return{city:"Standort freigeben",lat:null,lon:null,angle:12,asrFactor:1,advanceMinutes:15,tahajjudMode:"off",reminder:false,dailyDua:true,dailyRecommendation:true,jummahNotifications:false,jummahUseManualTime:false,jummahManualTime:"13:30",jummahMorningTime:"09:00",jummahAdvanceMinutes:30,locationGranted:false}}
+function prayerDefaultSettings(){return{city:"Standort freigeben",lat:null,lon:null,angle:12,asrFactor:1,advanceMinutes:15,tahajjudMode:"off",reminder:false,prayerFajr:true,prayerDhuhr:true,prayerAsr:true,prayerMaghrib:true,prayerIsha:true,dailyDua:true,dailyDuaTime:"09:00",dailyRecommendation:true,dailyRecommendationTime:"12:00",jummahNotifications:false,jummahUseManualTime:false,jummahManualTime:"13:30",jummahMorningTime:"09:00",jummahAdvanceMinutes:30,locationGranted:false}}
 function hasPrayerLocation(settings=getPrayerSettings()){return Number.isFinite(Number(settings.lat))&&Number.isFinite(Number(settings.lon))&&settings.locationGranted===true}
 function getPrayerSettings(){const saved=getJson(PRAYER_SETTINGS_KEY,null);const base=prayerDefaultSettings();const merged=saved?{...base,...saved}:base;if(!merged.locationGranted&&String(merged.city||"").toLowerCase()==="rheinbach"){merged.city=base.city;merged.lat=null;merged.lon=null}return merged}
+const NOTIFICATION_PRAYER_KEYS=["fajr","dhuhr","asr","maghrib","isha"];
+function notificationPrayerSettingKey(key){return"prayer"+String(key||"").charAt(0).toUpperCase()+String(key||"").slice(1)}
+function notificationPrayerEnabled(settings,key){const prop=notificationPrayerSettingKey(key);return settings?.[prop]!==false}
+function notificationEnabledPrayerCount(settings=getPrayerSettings()){return NOTIFICATION_PRAYER_KEYS.filter(key=>notificationPrayerEnabled(settings,key)).length}
+function persistNotificationSettings(patch){const next={...getPrayerSettings(),...patch};setJson(PRAYER_SETTINGS_KEY,next);return next}
 function clearPrayerReminders(){prayerReminderTimeouts.forEach(clearTimeout);prayerReminderTimeouts=[];}
 async function waitForOneSignalReady(timeoutMs=15000){const start=Date.now();while(Date.now()-start<timeoutMs){if(window.OneSignal&&window.DAR_ONE_SIGNAL_READY&&window.OneSignal.User)return window.OneSignal;await new Promise(r=>setTimeout(r,200))}return window.OneSignal&&window.OneSignal.User?window.OneSignal:null}
 async function ensurePushUserLogin(OS){const os=OS||await waitForOneSignalReady();if(!os||typeof os.login!=="function")return null;let id=localStorage.getItem(PUSH_USER_KEY);if(!id){id="dar-"+(crypto.randomUUID?crypto.randomUUID():String(Date.now()));try{localStorage.setItem(PUSH_USER_KEY,id)}catch(e){}}try{await os.login(id)}catch(e){console.warn("Push login:",e)}return id}
@@ -24214,7 +24278,7 @@ function normalizeAdvanceMinutes(value){const n=Number(value);return[5,10,15].in
 function normalizeTahajjudMode(value){const v=String(value||"off");return["off","before30","before60","before90","lastThird"].includes(v)?v:"off"}
 function tahajjudModeLabel(value){const v=normalizeTahajjudMode(value);if(v==="before30")return"30 Min vor Fajr";if(v==="before60")return"60 Min vor Fajr";if(v==="before90")return"90 Min vor Fajr";if(v==="lastThird")return"Letztes Drittel";return"Aus"}
 function tahajjudNotificationsEnabled(settings=getPrayerSettings()){return normalizeTahajjudMode(settings.tahajjudMode)!=="off"}
-function buildPrayerPushTags(settings){const lat=Number(settings.lat),lon=Number(settings.lon);if(!Number.isFinite(lat)||!Number.isFinite(lon))return null;const advance=normalizeAdvanceMinutes(settings.advanceMinutes);const tahajjud=normalizeTahajjudMode(settings.tahajjudMode);return{prayer_notifications:"true",prayer_lat:lat.toFixed(5),prayer_lon:lon.toFixed(5),prayer_timezone:(Intl.DateTimeFormat().resolvedOptions().timeZone)||"Europe/Berlin",prayer_method:String(settings.angle||12),prayer_asr_factor:String(settings.asrFactor||1),prayer_advance_minutes:String(advance),prayer_tahajjud_mode:tahajjud}}
+function buildPrayerPushTags(settings){const lat=Number(settings.lat),lon=Number(settings.lon);if(!Number.isFinite(lat)||!Number.isFinite(lon))return null;const advance=normalizeAdvanceMinutes(settings.advanceMinutes);const tahajjud=normalizeTahajjudMode(settings.tahajjudMode);return{prayer_notifications:"true",prayer_lat:lat.toFixed(5),prayer_lon:lon.toFixed(5),prayer_timezone:(Intl.DateTimeFormat().resolvedOptions().timeZone)||"Europe/Berlin",prayer_method:String(settings.angle||12),prayer_asr_factor:String(settings.asrFactor||1),prayer_advance_minutes:String(advance),prayer_tahajjud_mode:tahajjud,...Object.fromEntries(NOTIFICATION_PRAYER_KEYS.map(key=>[`prayer_${key}_notifications`,notificationPrayerEnabled(settings,key)?"true":"false"]))}}
 function prayerPushDebug(){return getJson(PRAYER_PUSH_DEBUG_KEY,{})||{}}
 function setPrayerPushDebug(value){setJson(PRAYER_PUSH_DEBUG_KEY,{...prayerPushDebug(),...value,updatedAt:new Date().toISOString()})}
 function readOneSignalPushSubscriptionState(OS){
@@ -26082,6 +26146,7 @@ function featureCatalog(){
     {id:"scholars",title:"Gelehrte",icon:"👤",desc:scholarCount+" Namen und Zuordnungen.",button:"Ansehen",nav:"scholars",group:"Lernen & Wissen"},
     {id:"books",title:"Quellenbibliothek",icon:"📘",desc:(()=>{const api=window.DARCanonicalSourceLibrary;const n=api&&typeof api.getReadyBookCount==="function"?api.getReadyBookCount():(api&&api.isReady&&api.isReady()?api.getBookCount():null);return n==null?"Geprüfte historische Werke und zitierte Gelehrte.":`${n} geprüfte Werke und zitierte Gelehrte.`})(),button:"Ansehen",nav:"books",group:"Lernen & Wissen",badge:"Geprüft"},
     {id:"prayer",title:"Gebetszeiten",icon:"🕌",desc:"Zeiten, Standort, Qibla und Erinnerungen.",button:"Öffnen",nav:"prayer",group:"Alltag & Gebet",badge:"Praktisch"},
+    {id:"notifications",title:"Benachrichtigungen",icon:"🔔",desc:"Gebete, Duʿāʾ und Empfehlungen einzeln einstellen.",button:"Einstellen",nav:"notifications",group:"Alltag & Gebet"},
     {id:"jummah",title:"Jumuʿah",icon:"🕌",desc:"Freitagsgebet und Erinnerung.",button:"Öffnen",nav:"jummah",group:"Alltag & Gebet"},
     {id:"qibla",title:"Qibla",icon:"🕋",desc:"Qibla-Richtung im Gebetsbereich anzeigen.",button:"Starten",nav:"qibla",group:"Alltag & Gebet"},
     {id:"calendar",title:"Islamischer Kalender",icon:"🗓️",desc:"Hijrī-Termine und wichtige Tage.",button:"Öffnen",nav:"calendar",group:"Alltag & Gebet"},
@@ -26120,6 +26185,107 @@ function renderMoreQuickAccessSection(){
 }
 
 function renderMore(){const groups=["Lernen & Wissen","Alltag & Gebet","Werkzeuge & Assistenten","Persönlich","App"];const items=featureCatalog();return `${setPageHeader("Mehr","Funktionen geordnet nach Lernen, Alltag, Werkzeugen und Einstellungen","Mehr")}${renderMoreQuickAccessSection()}${renderZakatMoreFocus()}<section class="feature-section"><div class="feature-head"><div><h3>Funktion suchen</h3><span>Tippe z. B. Qibla, Rechner oder Qurʾān.</span></div></div><input id="moreFeatureSearch" class="more-search" type="search" placeholder="Funktion suchen…" autocomplete="off"></section>${groups.map(group=>renderMoreGroup(group,items.filter(item=>item.group===group))).join("")}`}
+function notificationToggleButton(id,on,label){return `<button type="button" id="${id}" class="notification-toggle ${on?"is-on":""}" role="switch" aria-checked="${on?"true":"false"}" aria-label="${esc(label)}"></button>`}
+function renderNotificationCenter(){
+  const s=getPrayerSettings();
+  const prayerOn=Boolean(s.reminder);
+  const prayerCount=notificationEnabledPrayerCount(s);
+  const duaOn=dailyPushPref(s,"dailyDua");
+  const recommendationOn=dailyPushPref(s,"dailyRecommendation");
+  const jummahOn=jummahPref(s,"jummahNotifications");
+  const permission=getNotificationPermission();
+  const native=isDarNativeApp();
+  const locationReady=hasPrayerLocation(s);
+  const prayerLabels={fajr:["Fajr","Morgengebet","☼"],dhuhr:["Dhuhr","Mittagsgebet","●"],asr:["ʿAṣr","Nachmittagsgebet","◐"],maghrib:["Maghrib","Sonnenuntergang","◒"],isha:["ʿIshāʾ","Nachtgebet","☾"]};
+  const prayerRows=NOTIFICATION_PRAYER_KEYS.map(key=>{const on=notificationPrayerEnabled(s,key);const item=prayerLabels[key];return `<button type="button" class="notification-prayer ${on?"is-on":""}" data-notification-prayer="${key}" aria-pressed="${on?"true":"false"}" aria-label="${item[0]} ${on?"aktiv":"aus"}"><span class="notification-prayer-index" aria-hidden="true">${item[2]}</span><b>${item[0]}</b><small>${item[1]}</small></button>`}).join("");
+  const activeCount=(prayerOn?1:0)+(duaOn?1:0)+(recommendationOn?1:0)+(jummahOn?1:0);
+  return `${setPageHeader("Benachrichtigungen","Ruhig, übersichtlich und für dich einstellbar.","Mehr")}
+  <main class="notification-center-page">
+    <section class="notification-hero">
+      <div class="notification-hero__top"><span class="notification-hero__icon" aria-hidden="true">${prayerOverviewBellIconSvg()}</span><div><h2>Deine Erinnerungen</h2><p>Nur das, was für dich wichtig ist.</p></div><span class="notification-hero__count"><span><b>${activeCount}</b>aktiv</span></span></div>
+      <div class="notification-hero__status">
+        <span class="notification-status-chip ${activeCount?"is-on":""}">${activeCount} Bereiche aktiv</span>
+        <span class="notification-status-chip ${native||permission==="granted"?"is-on":""}">${native?"iOS-App":permission==="granted"?"Mitteilungen erlaubt":"Erlaubnis ausstehend"}</span>
+        <span class="notification-status-chip ${locationReady?"is-on":""}">${locationReady?esc(s.city||"Standort aktiv"):"Standort fehlt"}</span>
+      </div>
+    </section>
+    <section class="notification-section" aria-labelledby="notificationPrayerTitle">
+      <header class="notification-section__head"><div><span class="notification-section__kicker">Gebet</span><h3 id="notificationPrayerTitle">Gebetszeiten</h3><p>${prayerCount} von 5 ausgewählt · ${prayerPushAdvanceMinutes(s)} Minuten vorher</p></div>${notificationToggleButton("notificationPrayerMaster",prayerOn,"Gebetsbenachrichtigungen")}</header>
+      <div class="notification-location"><span class="notification-location__icon" aria-hidden="true">${prayerOverviewLocationIconSvg()}</span><span><b>${locationReady?esc(s.city||"Standort aktiv"):"Standort erforderlich"}</b>${locationReady?"Zeiten werden für deinen Ort berechnet.":"Für genaue Zeiten Standort festlegen."}</span><button type="button" class="notification-action" data-nav="prayer">${locationReady?"Ändern":"Festlegen"}</button></div>
+      <div class="notification-prayer-grid">${prayerRows}</div>
+      <div class="notification-settings-list"><div class="notification-row"><div class="notification-row__copy"><span class="notification-row__glyph" aria-hidden="true">◷</span><span><strong>Vorlauf</strong><small>Erinnerung vor dem Gebet</small></span></div><label class="notification-time"><select id="notificationPrayerAdvance" class="filter-select" aria-label="Vorlauf Gebetsbenachrichtigung"><option value="5" ${prayerPushAdvanceMinutes(s)===5?"selected":""}>5 Min</option><option value="10" ${prayerPushAdvanceMinutes(s)===10?"selected":""}>10 Min</option><option value="15" ${prayerPushAdvanceMinutes(s)===15?"selected":""}>15 Min</option></select></label></div></div>
+    </section>
+    <section class="notification-section" aria-labelledby="notificationDailyTitle">
+      <header class="notification-section__head"><div><span class="notification-section__kicker">Täglich</span><h3 id="notificationDailyTitle">Tägliche Impulse</h3><p>Einzeln aktivieren und zeitlich anpassen.</p></div></header>
+      <div class="notification-settings-list">
+        <div class="notification-row"><div class="notification-row__copy"><span class="notification-row__glyph" aria-hidden="true">د</span><span><strong>Duʿāʾ des Tages</strong><small>Ein ruhiger täglicher Bittspruch</small></span></div><div class="notification-time"><input id="notificationDuaTime" type="time" value="${normalizeTimeHHMM(s.dailyDuaTime,"09:00")}" aria-label="Uhrzeit Duʿāʾ des Tages">${notificationToggleButton("notificationDuaToggle",duaOn,"Duʿāʾ des Tages")}</div></div>
+        <div class="notification-row"><div class="notification-row__copy"><span class="notification-row__glyph" aria-hidden="true">✦</span><span><strong>Heute empfohlen</strong><small>Ein ausgewählter Beitrag</small></span></div><div class="notification-time"><input id="notificationRecommendationTime" type="time" value="${normalizeTimeHHMM(s.dailyRecommendationTime,"12:00")}" aria-label="Uhrzeit Heute empfohlen">${notificationToggleButton("notificationRecommendationToggle",recommendationOn,"Heute empfohlen")}</div></div>
+      </div>
+    </section>
+    <section class="notification-section" aria-labelledby="notificationJummahTitle">
+      <header class="notification-section__head"><div><span class="notification-section__kicker">Freitag</span><h3 id="notificationJummahTitle">Jumuʿah</h3><p>Die Freitagserinnerung separat verwalten.</p></div>${notificationToggleButton("notificationJummahToggle",jummahOn,"Jumuʿah-Erinnerung")}</header>
+      <div class="notification-settings-list"><div class="notification-row"><div class="notification-row__copy"><span class="notification-row__glyph" aria-hidden="true">◈</span><span><strong>${s.jummahUseManualTime?"Manuelle Moschee-Zeit":"Automatisch nach Dhuhr"}</strong><small>${s.jummahUseManualTime?normalizeTimeHHMM(s.jummahManualTime,"13:30"):"Standortabhängige Zeit"} · ${normalizeJummahAdvanceMinutes(s.jummahAdvanceMinutes)} Min vorher</small></span></div><button type="button" class="notification-action" data-nav="jummah">Details</button></div></div>
+      <p class="notification-note">Deine Auswahl und Wunschzeiten werden auf diesem Gerät gespeichert.</p>
+    </section>
+    <div class="notification-saved">Änderungen werden automatisch gespeichert</div>
+  </main>`;
+}
+function bindNotificationCenter(){
+  const rerender=()=>{if(readRoute().view==="notifications")render()};
+  const syncPrayer=()=>{const s=getPrayerSettings();if(!isDarNativeApp()&&s.reminder&&hasPrayerLocation(s))syncPrayerPushTags(s,{retries:2}).catch(()=>{});scheduleLocalPrayerRemindersIfNeeded({silent:true}).catch(()=>{})};
+  const prayerMaster=$("notificationPrayerMaster");
+  if(prayerMaster)prayerMaster.onclick=async()=>{
+    const s=getPrayerSettings();
+    if(s.reminder){
+      persistNotificationSettings({reminder:false});
+      clearPrayerReminders();
+      if(!isDarNativeApp())await disablePrayerServerPush();
+      rerender();
+      return;
+    }
+    if(!hasPrayerLocation(s)){alert("Bitte zuerst den Standort für genaue Gebetszeiten festlegen.");navigate("prayer");return}
+    if(isDarNativeApp()){
+      persistNotificationSettings({reminder:true});
+      rerender();
+      return;
+    }
+    await activatePrayerReminder();
+    rerender();
+  };
+  document.querySelectorAll("[data-notification-prayer]").forEach(btn=>{btn.onclick=()=>{
+    const key=btn.getAttribute("data-notification-prayer")||"";
+    const prop=notificationPrayerSettingKey(key);
+    const s=getPrayerSettings();
+    persistNotificationSettings({[prop]:!notificationPrayerEnabled(s,key)});
+    syncPrayer();
+    rerender();
+  }});
+  const advance=$("notificationPrayerAdvance");
+  if(advance)advance.onchange=()=>{persistNotificationSettings({advanceMinutes:normalizeAdvanceMinutes(advance.value)});syncPrayer();rerender()};
+  const bindDaily=(id,key)=>{
+    const btn=$(id);
+    if(!btn)return;
+    btn.onclick=async()=>{
+      const next=!dailyPushPref(getPrayerSettings(),key);
+      if(isDarNativeApp())persistNotificationSettings({[key]:next});
+      else await setDailyPushPreference(key,next);
+      rerender();
+    };
+  };
+  bindDaily("notificationDuaToggle","dailyDua");
+  bindDaily("notificationRecommendationToggle","dailyRecommendation");
+  const duaTime=$("notificationDuaTime");
+  if(duaTime)duaTime.onchange=()=>{persistNotificationSettings({dailyDuaTime:normalizeTimeHHMM(duaTime.value,"09:00")});if(!isDarNativeApp())syncDailyPushTags(getPrayerSettings()).catch(()=>{})};
+  const recommendationTime=$("notificationRecommendationTime");
+  if(recommendationTime)recommendationTime.onchange=()=>{persistNotificationSettings({dailyRecommendationTime:normalizeTimeHHMM(recommendationTime.value,"12:00")});if(!isDarNativeApp())syncDailyPushTags(getPrayerSettings()).catch(()=>{})};
+  const jummah=$("notificationJummahToggle");
+  if(jummah)jummah.onclick=async()=>{
+    const next=!jummahPref(getPrayerSettings(),"jummahNotifications");
+    if(isDarNativeApp())persistNotificationSettings({jummahNotifications:next});
+    else await setJummahPushPreference(next);
+    rerender();
+  };
+}
 function renderRamadan(){const ctx=seasonalIslamicContext()||{phase:"countdown",title:"Ramaḍān & ʿĪd",subtitle:"Islamische Saison",daysLeft:nextHijriEvent(9,1)?.diff||null};const duas=ramadanDuas();const rPosts=ramadanPosts();const events=calendarEventsForYear().filter(ev=>ev.m===9||ev.m===10||(ev.m===12&&ev.d>=8));const countdown=ctx.phase==="countdown"&&ctx.daysLeft?`<div class="ramadan-countdown">Noch ${ctx.daysLeft} Tage</div><p class="ramadan-note">Geschätzter Beginn: ${formatGregDate(ctx.targetDate||nextHijriEvent(9,1)?.gDate||new Date())}. Lokale Mondsichtung kann abweichen.</p>`:ctx.phase==="ramadan"?`<div class="ramadan-countdown">Tag ${ctx.day}</div><p class="ramadan-note">${esc(ctx.subtitle)} · Möge Allah dein Fasten annehmen.</p>`:`<p class="ramadan-note">${esc(ctx.subtitle||"")}</p>`;return `${setHeader("Ramaḍān & ʿĪd","Suḥūr- und Iftār-Zeiten, passende Duʿāʾ und wichtige Beiträge für die Saison.","Saison")}<section class="ramadan-panel"><h3>${esc(ctx.title||"Ramaḍān & ʿĪd")}</h3>${countdown}${renderSuhurIftarRow(true)}<div class="prayer-action-row" style="margin-top:12px"><button class="prayer-action-btn" type="button" data-nav="prayer">🕌 Gebetszeiten & Standort</button><button class="prayer-action-btn" type="button" data-nav="calendar">🗓️ Kalender</button></div></section>${events.length?`<section class="calendar-panel"><div class="calendar-title"><div><h3>Termine in dieser Saison</h3></div></div><div class="event-list">${events.slice(0,4).map(ev=>`<article class="event-card ${ev.diff>=0&&ev.diff<=14?"event-soon":""}"><div class="event-date">${formatGregDate(ev.gDate)} · ${ev.d}. ${hijriMonthName(ev.m)}</div><div class="event-name">${esc(ev.name)}</div><div class="event-note">${ev.diff>=0?`Noch ca. ${ev.diff} Tage. `:""}${esc(ev.note)}</div></article>`).join("")}</div></section>`:""}<section class="section-block"><div class="section-head"><h3>Duʿāʾ für Ramaḍān & ʿĪd</h3><span>${duas.length} ausgewählt</span></div><div class="post-grid">${duas.map(duaCard).join("")}</div></section><section class="section-block"><div class="section-head"><h3>Wichtige Beiträge</h3><span>${rPosts.length} Empfehlungen</span></div><div class="post-grid">${rPosts.length?rPosts.map(postCard).join(""):`<div class="empty">Noch keine passenden Beiträge gefunden.</div>`}</div></section>`}
 function dailyDua(){const d=dailyContentToday();if(d?.dua?.id){const match=DUAS.find(x=>String(x.id)===String(d.dua.id));if(match)return match;return dailyJsonDuaFallback(d.dua)}if(!DUAS.length)return null;const day=darDayOfYearBerlin();return DUAS[Math.abs(day)%DUAS.length]}
 function renderDailyDua(){const d=dailyDua();if(!d)return"";return`<section class="daily-box premium-surface" data-nav="dua" data-value="${esc(d.id)}"><div class="daily-label">Duʿāʾ des Tages</div><h3 class="daily-title">${esc(d.title)}</h3><div class="daily-text">${esc(d.de||d.occasion||"")}</div><div class="folder-meta"><span>${esc(d.cat)}</span><span>${esc(d.type)}</span></div></section>`}
@@ -26721,7 +26887,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v783";
+const APP_BUILD_ID="app-shell-v784";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -27356,6 +27522,7 @@ function render(){
     else if(currentRoute.view==="bibliothek-detail")html=renderLibraryRoute("bibliothek-detail",currentRoute.value);
     else if(currentRoute.view==="bibliothek-reader")html=renderLibraryRoute("bibliothek-reader",currentRoute.value);
     else if(currentRoute.view==="more")html=renderMore();
+    else if(currentRoute.view==="notifications")html=renderNotificationCenter();
     else if(currentRoute.view==="news")html=renderNews();
     else if(currentRoute.view==="settings")html=renderSettings();
     else if(currentRoute.view==="jummah")html=renderJummah();
@@ -27544,6 +27711,7 @@ function bindEvents(){
   document.querySelectorAll("[data-feature-pin]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();ev.stopPropagation();toggleFeaturePin(btn.getAttribute("data-feature-pin")||"");render()}});
   document.querySelectorAll("[data-feature-hint-dismiss]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();ev.stopPropagation();const key="seenFeatureHint_"+(btn.getAttribute("data-feature-hint-dismiss")||"");try{localStorage.setItem(key,"true")}catch(e){}btn.closest(".feature-hint")?.remove()}});
   const moreFeatureSearch=$("moreFeatureSearch");if(moreFeatureSearch)moreFeatureSearch.oninput=filterMoreFeatures;
+  if(currentRoute.view==="notifications")bindNotificationCenter();
   const booksSearchInput=$("booksSearchInput");if(booksSearchInput)booksSearchInput.oninput=filterBooksLibrary;
   if(window.DARCanonicalSourceLibrary)DARCanonicalSourceLibrary.bind();
   if(currentRoute.view==="propheten"&&window.DARProphets&&typeof window.DARProphets.bind==="function"){window.DARProphets.bind();}
