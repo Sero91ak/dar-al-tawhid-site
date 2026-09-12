@@ -103,15 +103,18 @@ private struct DarHeader: View {
             DarMark(compact: compact)
             VStack(alignment: .leading, spacing: 1) {
                 Text("DĀR AL TAWḤĪD")
-                    .font(.system(size: compact ? 9 : 10.5, weight: .bold, design: .serif))
-                    .tracking(0.7)
+                    .font(.system(size: compact ? 10 : 12, weight: .bold, design: .serif))
+                    .tracking(0.45)
                     .foregroundStyle(DarColors.paleGold)
                     .lineLimit(1)
-                    .minimumScaleFactor(0.75)
+                    .minimumScaleFactor(0.86)
+                    .allowsTightening(true)
                 Text(section)
-                    .font(.system(size: compact ? 8 : 9.5, weight: .medium))
+                    .font(.system(size: compact ? 9 : 10.5, weight: .medium))
                     .foregroundStyle(DarColors.muted)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.86)
+                    .allowsTightening(true)
             }
             Spacer(minLength: 0)
         }
@@ -129,7 +132,8 @@ private struct DarCard<Content: View>: View {
 
     var body: some View {
         content
-            .padding(14)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 9)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .widgetSurface()
             .widgetURL(destination.url)
@@ -190,22 +194,25 @@ struct PrayerWidgetView: View {
                 if family == .systemSmall {
                     Spacer(minLength: 0)
                     Text("NÄCHSTES GEBET")
-                        .font(.system(size: 8, weight: .bold))
-                        .tracking(1.2)
+                        .font(.system(size: 9, weight: .bold))
+                        .tracking(0.8)
                         .foregroundStyle(DarColors.muted)
                     HStack(alignment: .firstTextBaseline, spacing: 7) {
                         Text(entry.snapshot.nextPrayerName)
-                            .font(.system(size: 17, weight: .semibold, design: .serif))
+                            .font(.system(size: 19, weight: .semibold, design: .serif))
                             .foregroundStyle(DarColors.cream)
                             .lineLimit(1)
-                            .minimumScaleFactor(0.72)
+                            .minimumScaleFactor(0.84)
+                            .allowsTightening(true)
                         Spacer(minLength: 2)
                         Text(entry.snapshot.nextPrayerTime)
-                            .font(.system(size: 23, weight: .bold, design: .rounded).monospacedDigit())
+                            .font(.system(size: 25, weight: .bold, design: .rounded).monospacedDigit())
                             .foregroundStyle(DarColors.paleGold)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.88)
                     }
                     Text(entry.snapshot.cityLabel)
-                        .font(.system(size: 9.5, weight: .medium))
+                        .font(.system(size: 10.5, weight: .medium))
                         .foregroundStyle(DarColors.muted)
                         .lineLimit(1)
                 } else {
@@ -272,8 +279,8 @@ struct QiblaWidgetView: View {
                             .rotationEffect(.degrees(degrees))
                     }
                     .frame(
-                        width: family == .systemSmall ? 70 : 88,
-                        height: family == .systemSmall ? 70 : 88
+                        width: family == .systemSmall ? 60 : 82,
+                        height: family == .systemSmall ? 60 : 82
                     )
                     VStack(alignment: .leading, spacing: 3) {
                         Text(String(format: "%.1f°", degrees))
@@ -424,7 +431,8 @@ struct AyahDuaWidgetView: View {
                 }
             }
         }
-        .padding(14)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 9)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .widgetSurface()
         .widgetURL(DarDeepLink.Destination.hash(entry.snapshot.ayahOpenHash).url)
@@ -529,6 +537,95 @@ struct IslamicCalendarWidgetView: View {
     }
 }
 
+private struct PrayerLockWidgetView: View {
+    let entry: DarEntry
+    @Environment(\.widgetFamily) private var family
+
+    var body: some View {
+        Group {
+            if family == .accessoryCircular {
+                VStack(spacing: 0) {
+                    Image(systemName: "moon.stars.fill")
+                        .font(.system(size: 11, weight: .semibold))
+                    Text(entry.snapshot.nextPrayerTime)
+                        .font(.system(size: 14, weight: .bold, design: .rounded).monospacedDigit())
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.82)
+                }
+            } else if family == .accessoryInline {
+                Text("\(entry.snapshot.nextPrayerName) \(entry.snapshot.nextPrayerTime)")
+                    .font(.system(size: 13, weight: .semibold, design: .rounded).monospacedDigit())
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.88)
+            } else {
+                VStack(alignment: .leading, spacing: 2) {
+                    HStack(spacing: 8) {
+                        Text(entry.snapshot.nextPrayerName)
+                            .font(.system(size: 15, weight: .semibold, design: .serif))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.86)
+                        Spacer(minLength: 4)
+                        Text(entry.snapshot.nextPrayerTime)
+                            .font(.system(size: 16, weight: .bold, design: .rounded).monospacedDigit())
+                            .lineLimit(1)
+                    }
+                    Text(entry.snapshot.nextPrayerRemaining)
+                        .font(.system(size: 12, weight: .medium))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.86)
+                }
+            }
+        }
+        .widgetAccentable()
+        .widgetURL(DarDeepLink.Destination.prayer.url)
+    }
+}
+
+private struct CalendarLockWidgetView: View {
+    let entry: DarEntry
+    @Environment(\.widgetFamily) private var family
+
+    var body: some View {
+        Group {
+            if family == .accessoryInline {
+                Text(entry.snapshot.hijriLabel)
+                    .font(.system(size: 13, weight: .semibold, design: .serif))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.88)
+            } else {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(entry.snapshot.hijriLabel)
+                        .font(.system(size: 14, weight: .semibold, design: .serif))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.86)
+                    Text(entry.snapshot.gregorianLabel)
+                        .font(.system(size: 12, weight: .medium))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.86)
+                }
+            }
+        }
+        .widgetAccentable()
+        .widgetURL(DarDeepLink.Destination.hash(entry.snapshot.calendarOpenHash).url)
+    }
+}
+
+private struct QiblaLockWidgetView: View {
+    let entry: DarEntry
+
+    var body: some View {
+        ZStack {
+            Circle().stroke(.primary.opacity(0.35), lineWidth: 1)
+            Image(systemName: "location.north.fill")
+                .font(.system(size: 25, weight: .semibold))
+                .rotationEffect(.degrees(entry.snapshot.qiblaDegrees))
+        }
+        .padding(4)
+        .widgetAccentable()
+        .widgetURL(DarDeepLink.Destination.qibla.url)
+    }
+}
+
 struct PrayerTimesWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "de.daraltawhid.widget.prayer", provider: DarTimelineProvider()) {
@@ -584,6 +681,39 @@ struct IslamicCalendarWidget: Widget {
     }
 }
 
+struct PrayerLockWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "de.daraltawhid.widget.lock.prayer", provider: DarTimelineProvider()) {
+            PrayerLockWidgetView(entry: $0)
+        }
+        .configurationDisplayName("Gebet am Sperrbildschirm")
+        .description("Nächstes Gebet direkt bei der Uhrzeit.")
+        .supportedFamilies([.accessoryCircular, .accessoryRectangular, .accessoryInline])
+    }
+}
+
+struct CalendarLockWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "de.daraltawhid.widget.lock.calendar", provider: DarTimelineProvider()) {
+            CalendarLockWidgetView(entry: $0)
+        }
+        .configurationDisplayName("Islamisches Datum")
+        .description("Islamisches Datum über oder unter der Uhrzeit.")
+        .supportedFamilies([.accessoryRectangular, .accessoryInline])
+    }
+}
+
+struct QiblaLockWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "de.daraltawhid.widget.lock.qibla", provider: DarTimelineProvider()) {
+            QiblaLockWidgetView(entry: $0)
+        }
+        .configurationDisplayName("Qibla am Sperrbildschirm")
+        .description("Qibla-Richtung direkt am Sperrbildschirm.")
+        .supportedFamilies([.accessoryCircular])
+    }
+}
+
 @main
 struct DarAlTawhidWidgets: WidgetBundle {
     var body: some Widget {
@@ -592,5 +722,8 @@ struct DarAlTawhidWidgets: WidgetBundle {
         QiblaWidget()
         DailyWidget()
         AyahDuaWidget()
+        PrayerLockWidget()
+        CalendarLockWidget()
+        QiblaLockWidget()
     }
 }
