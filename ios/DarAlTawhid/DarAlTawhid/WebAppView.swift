@@ -33,20 +33,16 @@ final class GradientBackdropView: UIView {
     }
 
     func updateColors(top: UIColor, mid: UIColor? = nil, bottom: UIColor) {
-        gradientLayer.startPoint = CGPoint(x: 0.12, y: 0.0)
-        gradientLayer.endPoint = CGPoint(x: 0.88, y: 1.0)
-        gradientLayer.locations = [0.0, 0.18, 0.55, 1.0] as [NSNumber]
-        let ice = UIColor(red: 0.86, green: 0.91, blue: 0.97, alpha: 1.0)
-        let gold = UIColor(red: 0.84, green: 0.75, blue: 0.52, alpha: 1.0)
-        let topMist = blendedColor(from: top, to: ice, ratio: 0.11)
-        let resolvedMid = mid ?? blendedColor(from: top, to: bottom, ratio: 0.42)
-        let midPearl = blendedColor(from: resolvedMid, to: ice, ratio: 0.05)
-        let bottomGold = blendedColor(from: bottom, to: gold, ratio: 0.07)
+        // Theme-only gradient: no foreign navy/blue blend tints.
+        let resolvedMid = mid ?? blendedColor(from: top, to: bottom, ratio: 0.45)
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        gradientLayer.locations = [0.0, 0.22, 0.62, 1.0]
         gradientLayer.colors = [
-            topMist.cgColor,
             top.cgColor,
-            midPearl.cgColor,
-            bottomGold.cgColor
+            top.cgColor,
+            resolvedMid.cgColor,
+            bottom.cgColor
         ]
     }
 
@@ -75,10 +71,30 @@ final class GradientBackdropView: UIView {
 
 struct WebAppView: UIViewRepresentable {
     var destination: DarDeepLink.Destination? = nil
-    var openURL: URL? = nil
-    var openNonce: UUID = UUID()
 
-    private static let launchURL = DarAppShell.launchURL
+    private enum AppEnvironment {
+        case staging
+        case live
+    }
+
+    // Always the visitor app (live). Staging/test is not used for this Xcode wrapper.
+    private static let environment: AppEnvironment = .live
+    private static let stagingURL = URL(string: "https://dar-al-tawhid.de/test/?env=staging&source=ios-testflight#home")!
+    private static let liveURL = URL(string: "https://dar-al-tawhid.de/#home")!
+    private static func pageURL(hash: String) -> URL {
+        let normalized = hash.hasPrefix("#") ? hash : "#\(hash)"
+        switch environment {
+        case .staging:
+            return URL(string: "https://dar-al-tawhid.de/test/?env=staging&source=ios-testflight\(normalized)") ?? stagingURL
+        case .live:
+            return URL(string: "https://dar-al-tawhid.de/\(normalized)") ?? liveURL
+        }
+    }
+    private static var launchURL: URL { pageURL(hash: "#home") }
+    private static let allowedHosts: Set<String> = [
+        "dar-al-tawhid.de",
+        "www.dar-al-tawhid.de"
+    ]
 
     func makeCoordinator() -> Coordinator {
         Coordinator()
@@ -93,127 +109,21 @@ struct WebAppView: UIViewRepresentable {
         userContentController.add(context.coordinator, name: "darLibraryReader")
         userContentController.add(context.coordinator, name: "darAppearance")
         userContentController.add(context.coordinator, name: "darWidgetSnapshot")
-        userContentController.add(context.coordinator, name: "darPushSettings")
-        userContentController.add(context.coordinator, name: "darHaptic")
-        userContentController.add(context.coordinator, name: "darPushTest")
         userContentController.add(context.coordinator, name: "darAppIcon")
-        userContentController.add(context.coordinator, name: "darNative")
-        let deviceId = DarPushNotifications.deviceId()
-        let escapedDevice = deviceId
-            .replacingOccurrences(of: "\\", with: "\\\\")
-            .replacingOccurrences(of: "\"", with: "\\\"")
-        let iosNativePushBridge = """
-        (function(){
-          try{
-            window.DAR_IOS_NATIVE_PUSH=true;
-            window.DAR_IOS_NATIVE_APP=true;
-            window.__DAR_IOS_BUILD__="0.26-visitor-parity";
-            window.DAR_IOS_DEVICE_ID="\(escapedDevice)";
-            try{localStorage.setItem("darPushExternalIdV1", window.DAR_IOS_DEVICE_ID)}catch(e){}
-            window.Notification=window.Notification||function(){};
-            window.__darPushPermission=window.__darPushPermission||"default";
-            try{
-              Object.defineProperty(window.Notification,"permission",{configurable:true,get:function(){return window.__darPushPermission||"default"}});
-            }catch(e){}
-            window.Notification.requestPermission=function(){
-              try{webkit.messageHandlers.darNative.postMessage({type:"notifications"})}catch(e){}
-              return new Promise(function(resolve){
-                var n=0,t=setInterval(function(){
-                  n+=1;
-                  var p=window.__darPushPermission||"default";
-                  if(p!=="default"||n>40){clearInterval(t);resolve(p)}
-                },250);
-              });
-            };
-          }catch(e){}
-        })();
-        """
-        userContentController.addUserScript(
-            WKUserScript(
-                source: iosNativePushBridge,
-                injectionTime: .atDocumentStart,
-                forMainFrameOnly: true
-            )
-        )
-        let iosGeoBridge = """
-        (function(){
-          try{
-            if(!navigator.geolocation||navigator.geolocation.__darWrapped)return;
-            var geo=navigator.geolocation;
-            geo.__darWrapped=true;
-            var origGet=geo.getCurrentPosition.bind(geo);
-            var origWatch=geo.watchPosition.bind(geo);
-            geo.getCurrentPosition=function(success,error,options){
-              try{webkit.messageHandlers.darNative.postMessage({type:"geolocation"})}catch(e){}
-              return origGet(success,error,options);
-            };
-            geo.watchPosition=function(success,error,options){
-              try{webkit.messageHandlers.darNative.postMessage({type:"geolocation"})}catch(e){}
-              return origWatch(success,error,options);
-            };
-          }catch(e){}
-        })();
-        """
-        userContentController.addUserScript(
-            WKUserScript(
-                source: iosGeoBridge,
-                injectionTime: .atDocumentStart,
-                forMainFrameOnly: false
-            )
-        )
-        let iosHapticBridge = """
-        (function(){
-          if(window.__darIosHapticInstalled)return;
-          window.__darIosHapticInstalled=true;
-          var holdTimer=null,holdFired=false,startX=0,startY=0;
-          function send(style){
-            try{webkit.messageHandlers.darHaptic.postMessage({style:style||"medium"})}catch(e){}
-          }
-          function isNav(t){
-            return t&&t.closest&&t.closest("#bottomNav a,#bottomNav button,[data-nav],.footer-action-btn");
-          }
-          document.addEventListener("touchstart",function(e){
-            var t=e.target&&isNav(e.target);
-            if(!t)return;
-            holdFired=false;
-            startX=(e.touches[0]&&e.touches[0].clientX)||0;
-            startY=(e.touches[0]&&e.touches[0].clientY)||0;
-            clearTimeout(holdTimer);
-            holdTimer=setTimeout(function(){holdFired=true;send("medium")},420);
-          },{passive:true,capture:true});
-          document.addEventListener("touchmove",function(e){
-            if(!holdTimer)return;
-            var x=(e.touches[0]&&e.touches[0].clientX)||0;
-            var y=(e.touches[0]&&e.touches[0].clientY)||0;
-            if(Math.abs(x-startX)>10||Math.abs(y-startY)>10){clearTimeout(holdTimer);holdTimer=null;}
-          },{passive:true,capture:true});
-          document.addEventListener("touchend",function(){clearTimeout(holdTimer);holdTimer=null;},{passive:true,capture:true});
-          document.addEventListener("input",function(e){
-            var el=e.target;
-            if(!el)return;
-            var now=Date.now();
-            if(now-(window.__darHapticInputAt||0)<90)return;
-            window.__darHapticInputAt=now;
-            var tag=String(el.tagName||"").toLowerCase();
-            if(tag==="input"||tag==="textarea"||el.isContentEditable) send("selection");
-          },true);
-        })();
-        """
-        userContentController.addUserScript(
-            WKUserScript(
-                source: iosHapticBridge,
-                injectionTime: .atDocumentEnd,
-                forMainFrameOnly: true
-            )
-        )
         let iosNativeTabsBoot = """
         (function(){
           try{
             var root=document.documentElement;
             if(!root)return;
             root.classList.add("dar-ios-native-app");
-            root.classList.remove("dar-ios-native-tabs");
+            root.classList.add("dar-ios-native-tabs");
             root.classList.remove("dar-soft-booting");
+            if(!document.getElementById("dar-ios-brand-type-lock")){
+              var s=document.createElement("style");
+              s.id="dar-ios-brand-type-lock";
+              s.textContent='.brand-title,.brand-title-refined,.home-start-title,.dar-soft-boot__title{font-family:"Cormorant Garamond",Cinzel,"Times New Roman",serif!important;text-transform:none!important}';
+              (document.head||root).appendChild(s);
+            }
           }catch(e){}
         })();
         """
@@ -224,6 +134,164 @@ struct WebAppView: UIViewRepresentable {
                 forMainFrameOnly: true
             )
         )
+        let iosViewportPolish = """
+        (function(){
+          if(window.__darIosViewportPolishInstalled)return;
+          window.__darIosViewportPolishInstalled=true;
+          window.__DAR_IOS_BUILD__="0.25-glass-status";
+          /* Restore glassy status area. Live v665 paints a solid --dar-edge-fill strip. */
+          function cssText(){
+            return [
+              "html.dar-ios-native-app{",
+              "  --dar-ios-theme-bg:var(--premium-bg,var(--theme-page-bg,var(--outer-bg,var(--bg,#050504))));",
+              "}",
+              "html.dar-ios-native-app[data-theme],",
+              "html.dar-ios-native-app[data-theme] body,",
+              "html.dar-ios-native-app[data-theme] #appRoot,",
+              "html.dar-ios-native-app[data-theme] #appShell,",
+              "html.dar-ios-native-app[data-theme] body.is-more-route,",
+              "html.dar-ios-native-app[data-theme] body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-reader-route),",
+              "html.dar-ios-native-app[data-theme] body.is-quiz-route,",
+              "html.dar-ios-native-app[data-theme] body.is-account-route,",
+              "html.dar-ios-native-app[data-theme] body.is-home-route{",
+              "  background:var(--premium-bg,var(--outer-bg,var(--bg)))!important;",
+              "}",
+              "html.dar-ios-native-app[data-theme] body.is-more-route #appView,",
+              "html.dar-ios-native-app[data-theme] body.is-more-route #appView.view,",
+              "html.dar-ios-native-app[data-theme] body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-overview):not(.is-quran-reader-route) #appView.view,",
+              "html.dar-ios-native-app[data-theme] body.is-quiz-route #appView.view,",
+              "html.dar-ios-native-app[data-theme] body.is-account-route #appView.view,",
+              "html.dar-ios-native-app[data-theme] body.is-home-route .top-shell,",
+              "html.dar-ios-native-app[data-theme] body.is-home-route .header,",
+              "html.dar-ios-native-app[data-theme] body.is-home-route #appView.view{",
+              "  background:transparent!important;",
+              "  background-color:transparent!important;",
+              "  background-image:none!important;",
+              "}",
+              "html.dar-ios-native-app::before{",
+              "  content:'';",
+              "  position:fixed;",
+              "  top:0;left:0;right:0;",
+              "  height:max(12px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px));",
+              "  z-index:2147483000;",
+              "  pointer-events:none;",
+              "  background:color-mix(in srgb,var(--page-cover,var(--outer-bg-flat,#07162c)) 28%,transparent);",
+              "  -webkit-backdrop-filter:blur(22px) saturate(1.18);",
+              "  backdrop-filter:blur(22px) saturate(1.18);",
+              "}",
+              "html.dar-ios-native-app .top-edge-fade,",
+              "html.dar-ios-native-app .top-swim-aura{",
+              "  display:block!important;",
+              "  opacity:.55!important;",
+              "  background:linear-gradient(180deg,color-mix(in srgb,var(--page-cover) 22%,transparent),transparent)!important;",
+              "  -webkit-backdrop-filter:blur(16px) saturate(1.1)!important;",
+              "  backdrop-filter:blur(16px) saturate(1.1)!important;",
+              "  z-index:4!important;",
+              "}",
+              "html.dar-ios-native-app #dar-soft-boot{display:none!important;visibility:hidden!important;}",
+              "html.dar-ios-native-app.dar-soft-booting,",
+              "html.dar-ios-native-app.dar-soft-booting body{overflow:visible!important;}",
+              "html.dar-ios-native-app #bottomNav,",
+              "html.dar-ios-native-app #bottomNav.bottom-nav,",
+              "html.dar-ios-native-app .bottom-nav,",
+              "html.dar-ios-native-app #appChromeDock #bottomNav.bottom-nav,",
+              "html.dar-ios-native-app.dar-soft-booting #bottomNav,",
+              "html.dar-ios-native-app.dar-soft-booting .bottom-nav,",
+              "html.dar-ios-native-app.dar-soft-booting .home-discover,",
+              "html.dar-ios-native-app.dar-soft-booting .home-v380{",
+              "  visibility:visible!important;",
+              "  opacity:1!important;",
+              "  pointer-events:auto!important;",
+              "  display:flex!important;",
+              "}",
+              "html.dar-ios-native-app body.has-bottom-nav{",
+              "  padding-bottom:calc(var(--bottom-navigation-height,64px) + max(var(--safe-bottom),env(safe-area-inset-bottom,0px),var(--dar-native-safe-bottom,0px)) + 28px) !important;",
+              "}",
+              "html.dar-ios-native-app #bottomNav.bottom-nav,html.dar-ios-native-app .bottom-nav{",
+              "  bottom:max(14px,calc(max(var(--safe-bottom),env(safe-area-inset-bottom,0px),var(--dar-native-safe-bottom,0px)) + 8px)) !important;",
+              "}",
+              "html.dar-ios-native-tabs #bottomNav,",
+              "html.dar-ios-native-tabs #bottomNav.bottom-nav,",
+              "html.dar-ios-native-tabs .bottom-nav,",
+              "html.dar-ios-native-tabs #appChromeDock #bottomNav.bottom-nav{",
+              "  display:none!important;",
+              "  visibility:hidden!important;",
+              "}"
+            ].join("\\n");
+          }
+          function ensureStyle(){
+            var root=document.documentElement;
+            var style=document.getElementById("dar-ios-viewport-polish");
+            if(!style){
+              style=document.createElement("style");
+              style.id="dar-ios-viewport-polish";
+            }
+            style.textContent=cssText();
+            if(root){
+              root.classList.add("dar-ios-native-app");
+              root.classList.remove("dar-soft-booting");
+              root.style.removeProperty("background-color");
+              if(root.getAttribute("data-layout")==="medium"||root.getAttribute("data-layout")==="expanded"){
+                root.setAttribute("data-layout","compact");
+              }
+            }
+            if(document.body)document.body.classList.add("dar-ios-native-app");
+            var forceIds=["dar-ios-parity-edge-force-v665","dar-ios-parity-edge-force-v659","dar-ios-parity-edge-force-v658","dar-ios-parity-edge-force-v657","dar-ios-parity-edge-force-v656","dar-ios-parity-edge-force-v655","dar-ios-parity-edge-force-v654","dar-ios-parity-edge-force-v653","dar-ios-parity-edge-force-v652","dar-ios-parity-edge-force-v651","dar-ios-parity-edge-force-v650","dar-ios-parity-edge-force-v649","dar-ios-parity-edge-force-v648","full-edge-feed-force-v645","full-edge-feed-force-v644"];
+            for(var fi=0;fi<forceIds.length;fi++){
+              var forceEl=document.getElementById(forceIds[fi]);
+              if(forceEl)forceEl.disabled=true;
+            }
+            if(document.head)document.head.appendChild(style);
+            try{
+              var sb=document.getElementById("dar-soft-boot");
+              if(sb&&sb.parentNode)sb.parentNode.removeChild(sb);
+              if(typeof window.__darSoftBootFinish==="function")window.__darSoftBootFinish();
+            }catch(e){}
+          }
+          function pinFeedNodes(){
+            if(!document.body||!document.body.classList.contains("is-feed-fullscreen"))return;
+            var nodes=document.querySelectorAll(".sf-app,.sf-top,.sf-filters,.sf-feed,.sf-post,.sf-post--image-feed,#premiumFeedMount,.pf-mount-root");
+            for(var i=0;i<nodes.length;i++){
+              var el=nodes[i];
+              el.style.setProperty("width","100%","important");
+              el.style.setProperty("max-width","100%","important");
+              el.style.setProperty("margin-left","0px","important");
+              el.style.setProperty("margin-right","0px","important");
+            }
+            var gutters=document.querySelectorAll(".sf-top,.sf-filters,.sf-feed");
+            for(var j=0;j<gutters.length;j++){
+              gutters[j].style.setProperty("padding-left","max(8px,env(safe-area-inset-left,0px))","important");
+              gutters[j].style.setProperty("padding-right","max(8px,env(safe-area-inset-right,0px))","important");
+            }
+          }
+          window.__darIosEnsureViewportPolish=function(){
+            ensureStyle();
+            pinFeedNodes();
+          };
+          if(document.readyState==="loading"){
+            document.addEventListener("DOMContentLoaded", window.__darIosEnsureViewportPolish, {once:true});
+          } else {
+            window.__darIosEnsureViewportPolish();
+          }
+          window.addEventListener("pageshow", window.__darIosEnsureViewportPolish);
+          window.addEventListener("hashchange", function(){ setTimeout(window.__darIosEnsureViewportPolish, 30); });
+          try{
+            var mo=new MutationObserver(function(muts){
+              var need=false;
+              for(var i=0;i<muts.length;i++){
+                var m=muts[i];
+                if(m.type==="childList"){ need=true; break; }
+                if(m.type==="attributes"&&m.attributeName==="class"){ need=true; break; }
+              }
+              if(!need)return;
+              clearTimeout(window.__darIosFeedPinTimer);
+              window.__darIosFeedPinTimer=setTimeout(window.__darIosEnsureViewportPolish, 60);
+            });
+            mo.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:["class"]});
+          }catch(e){}
+        })();
+        """
+
         let libraryReaderBridge = """
         (function(){
           if(window.__darLibraryReaderBridgeInstalled)return;
@@ -260,34 +328,88 @@ struct WebAppView: UIViewRepresentable {
           }
           window.addEventListener("hashchange", function(){ setTimeout(postCurrent, 30); });
           document.addEventListener("click", function(ev){
-            var node=ev.target&&ev.target.closest?ev.target.closest("[data-library-read],[data-library-download],a[href*='.pdf'],a[href*='.PDF']"):null;
-            if(!node){setTimeout(postCurrent, 80);return;}
-            if(node.disabled||node.getAttribute("disabled")!=null)return;
-            var slug=node.getAttribute("data-library-read")||node.getAttribute("data-library-download")||"";
-            if(!slug){
-              var href=node.getAttribute("href")||"";
-              var hash=href.indexOf("#")>=0?href.slice(href.indexOf("#")+1):"";
-              var parts=hash.split("/").filter(Boolean);
-              if(parts[0]==="bibliothek"&&parts.length>=2)slug=parts[1];
+            var btn=ev.target&&ev.target.closest?ev.target.closest("[data-library-read]"):null;
+            if(btn){
+              var slug=btn.getAttribute("data-library-read")||"";
+              if(slug){
+                ev.preventDefault();
+                ev.stopPropagation();
+                ev.stopImmediatePropagation&&ev.stopImmediatePropagation();
+                postSlug(slug);
+                return;
+              }
             }
-            if(!slug){
-              var detail=document.querySelector("[data-library-detail]");
-              if(detail)slug=detail.getAttribute("data-library-detail")||"";
-            }
-            if(slug){
-              ev.preventDefault();
-              ev.stopPropagation();
-              if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();
-              postSlug(slug);
-            }
+            setTimeout(postCurrent, 80);
           }, true);
           window.addEventListener("load", function(){ setTimeout(postCurrent, 120); });
           setTimeout(postCurrent, 300);
         })();
         """
+        let iosLibraryDetailPolish = """
+        (function(){
+          if(window.__darIosLibraryDetailPolishInstalled)return;
+          window.__darIosLibraryDetailPolishInstalled=true;
+          function ensureStyle(){
+            var style=document.getElementById("dar-ios-library-detail-polish");
+            if(!style){
+              style=document.createElement("style");
+              style.id="dar-ios-library-detail-polish";
+            }
+            style.textContent = [
+              "html.dar-ios-native-app body .lib-page.lib-detail{",
+              "  padding-top: 0 !important;",
+              "}",
+              "html.dar-ios-native-app body .lib-page.lib-detail .lib-detail-hero.lib-detail-hero-compact{",
+              "  margin-top: 0 !important;",
+              "  padding-top: 8px !important;",
+              "  gap: 18px !important;",
+              "}",
+              "html.dar-ios-native-app body .lib-page.lib-detail .lib-detail-cover{",
+              "  margin-top: 18px !important;",
+              "}",
+              "html.dar-ios-native-app body .lib-page.lib-detail .lib-detail-copy{",
+              "  padding-top: 8px !important;",
+              "}",
+              "html.dar-ios-native-app body .lib-page.lib-detail .lib-actions.lib-actions-compact{",
+              "  margin-top: 14px !important;",
+              "}",
+              "@media (max-width: 520px){",
+              "  html.dar-ios-native-app body .lib-page.lib-detail .lib-detail-hero.lib-detail-hero-compact{",
+              "    padding-top: 6px !important;",
+              "  }",
+              "  html.dar-ios-native-app body .lib-page.lib-detail .lib-detail-cover{",
+              "    margin-top: 14px !important;",
+              "  }",
+              "}"
+            ].join("\\n");
+            if(document.head)document.head.appendChild(style);
+          }
+          if(document.readyState === "loading"){
+            document.addEventListener("DOMContentLoaded", ensureStyle, { once:true });
+          } else {
+            ensureStyle();
+          }
+          window.addEventListener("pageshow", ensureStyle);
+          window.addEventListener("hashchange", function(){ setTimeout(ensureStyle, 40); });
+        })();
+        """
+        userContentController.addUserScript(
+            WKUserScript(
+                source: iosViewportPolish,
+                injectionTime: .atDocumentEnd,
+                forMainFrameOnly: true
+            )
+        )
         userContentController.addUserScript(
             WKUserScript(
                 source: libraryReaderBridge,
+                injectionTime: .atDocumentEnd,
+                forMainFrameOnly: true
+            )
+        )
+        userContentController.addUserScript(
+            WKUserScript(
+                source: iosLibraryDetailPolish,
                 injectionTime: .atDocumentEnd,
                 forMainFrameOnly: true
             )
@@ -298,6 +420,7 @@ struct WebAppView: UIViewRepresentable {
             if(!value)return "";
             var raw=String(value).trim();
             if(!raw)return "";
+            if(/gradient/i.test(raw))return "";
             if(raw.charAt(0)==="#")return raw;
             var match=raw.match(/rgba?\\((\\d+),\\s*(\\d+),\\s*(\\d+)/i);
             if(!match)return "";
@@ -332,18 +455,25 @@ struct WebAppView: UIViewRepresentable {
             // Theme-only: never inject hardcoded navy/blue route palettes.
             var roots=[document.body, document.documentElement, document.querySelector('.app'), document.querySelector('#appShell'), document.querySelector('#appView')];
             var topColor=firstVariableColor(roots, [
+              "--dar-edge-fill",
+              "--dar-boot-fill",
+              "--outer-bg-flat",
               "--theme-page-bg",
               "--theme-feed-bg",
               "--ilm-page-bg",
               "--page-cover-mid",
               "--page-cover",
-              "--outer-bg-flat",
               "--bg2",
               "--bg"
             ]);
             if(!topColor){
               topColor=firstSolidColor([".sf-top", ".lib-page", "#appView > .view-head", "#appView > .view", "body", "html"]);
             }
+            try{
+              if(!topColor && (document.documentElement.getAttribute("data-theme")||"")==="eisgold"){
+                topColor="#d8eefb";
+              }
+            }catch(e){}
             var midColor=firstVariableColor(roots, [
               "--theme-feed-bg",
               "--page-cover-mid",
@@ -357,6 +487,7 @@ struct WebAppView: UIViewRepresentable {
               midColor=firstSolidColor(["#appView > .view-head", ".sf-top", ".lib-page", "#appView > .view", "body"]) || topColor;
             }
             var bottomColor=firstVariableColor(roots, [
+              "--dar-edge-fill",
               "--outer-bg-flat",
               "--theme-page-bg",
               "--ilm-page-bg",
@@ -373,11 +504,7 @@ struct WebAppView: UIViewRepresentable {
               window.webkit.messageHandlers.darAppearance.postMessage({
                 top: topColor || boot,
                 mid: midColor || topColor || boot,
-                bottom: bottomColor || topColor || boot,
-                theme: String((document.documentElement&&document.documentElement.getAttribute("data-theme"))||"dark"),
-                gold: firstVariableColor(roots, ["--gold2","--theme-accent","--gold"]) || "",
-                cream: firstVariableColor(roots, ["--text","--cream","--theme-text"]) || "",
-                muted: firstVariableColor(roots, ["--muted","--theme-muted","--muted2"]) || ""
+                bottom: bottomColor || topColor || boot
               });
             }catch(e){}
           }
@@ -414,38 +541,11 @@ struct WebAppView: UIViewRepresentable {
             try{
               var raw=localStorage.getItem("darPrayerSettingsV1");
               var s=raw?JSON.parse(raw):{};
-              var theme=String((document.documentElement&&document.documentElement.getAttribute("data-theme"))||"dark");
-              var dua=null, rec=null, daily=null, times=[];
-              try{ if(typeof dailyContentToday==="function") daily=dailyContentToday(); }catch(e){}
-              try{ if(typeof dailyDua==="function") dua=dailyDua(); }catch(e){}
-              try{ if(typeof recommendedPost==="function") rec=recommendedPost(); }catch(e){}
-              try{
-                if(typeof calculatePrayerTimes==="function" && typeof getPrayerSettings==="function"){
-                  times=calculatePrayerTimes(new Date(), getPrayerSettings()).map(function(p){
-                    var clock=p.time;
-                    if(typeof formatPrayerHour==="function" && typeof clock==="number") clock=formatPrayerHour(clock);
-                    return {id:p.key||"",name:p.name||"",time:String(clock||"")};
-                  });
-                }
-              }catch(e){}
               if(window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.darWidgetSnapshot){
                 window.webkit.messageHandlers.darWidgetSnapshot.postMessage({
                   lat:s.lat,
                   lon:s.lon,
-                  city:s.city||"",
-                  angle:s.angle||12,
-                  asrFactor:s.asrFactor||1,
-                  theme:theme,
-                  times:times,
-                  duaTitle:dua&&dua.title||daily&&daily.dua&&daily.dua.title||"",
-                  duaDe:dua&&(dua.de||dua.snippet)||daily&&daily.dua&&daily.dua.snippet||"",
-                  duaTr:dua&&dua.tr||"",
-                  duaCat:dua&&(dua.cat||dua.category)||daily&&daily.dua&&daily.dua.category||"",
-                  postTitle:rec&&rec.title||daily&&daily.recommendation&&daily.recommendation.title||"",
-                  postSnippet:daily&&daily.recommendation&&daily.recommendation.snippet||"",
-                  postCategory:[rec&&rec.category,rec&&rec.scholar].filter(Boolean).join(" · "),
-                  postSource:rec&&rec.source||daily&&daily.recommendation&&daily.recommendation.source||"",
-                  duaSource:dua&&dua.source||daily&&daily.dua&&daily.dua.source||"",
+                  city:s.city||""
                 });
               }
             }catch(e){}
@@ -479,18 +579,25 @@ struct WebAppView: UIViewRepresentable {
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate = context.coordinator
         webView.scrollView.contentInsetAdjustmentBehavior = .never
-        webView.scrollView.delaysContentTouches = false
-        webView.scrollView.canCancelContentTouches = true
-        webView.scrollView.isScrollEnabled = true
-        webView.scrollView.backgroundColor = bootInk
-        webView.allowsBackForwardNavigationGestures = false
-        webView.isOpaque = true
-        webView.backgroundColor = bootInk
-        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.26-visitor-parity"
+        webView.scrollView.backgroundColor = .clear
+        webView.allowsBackForwardNavigationGestures = true
+        webView.isOpaque = false
+        webView.backgroundColor = .clear
+        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.25-glass-status"
+        if #available(iOS 15.0, *) {
+            webView.underPageBackgroundColor = .clear
+        }
         webView.onInsetsChange = { [weak coordinator = context.coordinator] in
             coordinator?.updateViewportInsets()
         }
         containerView.addSubview(webView)
+
+        let tabBar = DarNativeTabBar()
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
+        tabBar.onSelect = { [weak coordinator = context.coordinator] id in
+            coordinator?.openNativeTab(id)
+        }
+        containerView.addSubview(tabBar)
 
         NSLayoutConstraint.activate([
             backdropView.topAnchor.constraint(equalTo: containerView.topAnchor),
@@ -500,30 +607,25 @@ struct WebAppView: UIViewRepresentable {
             webView.topAnchor.constraint(equalTo: containerView.topAnchor),
             webView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             webView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            webView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+            webView.bottomAnchor.constraint(equalTo: tabBar.topAnchor, constant: -8),
+            tabBar.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor, constant: 12),
+            tabBar.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor, constant: -12),
+            tabBar.bottomAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.bottomAnchor, constant: -8),
+            tabBar.heightAnchor.constraint(equalToConstant: 62)
         ])
         context.coordinator.attach(
             webView,
             backdropView: backdropView,
-            containerView: containerView
+            containerView: containerView,
+            tabBar: tabBar
         )
-        var launchRequest = URLRequest(url: Self.launchURL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 30)
-        launchRequest.setValue("no-cache", forHTTPHeaderField: "Cache-Control")
-        webView.load(launchRequest)
+        webView.load(URLRequest(url: Self.pageURL(hash: (destination ?? DarWidgetStore.peekPendingDestination())?.webHash ?? "#home")))
         return containerView
     }
 
     func updateUIView(_ view: UIView, context: Context) {
-        if context.coordinator.lastOpenNonce != openNonce {
-            context.coordinator.lastOpenNonce = openNonce
-            if let openURL {
-                context.coordinator.loadPushURL(openURL)
-            }
-            if let route = destination {
-                context.coordinator.navigate(to: route, force: true)
-            }
-        }
-        context.coordinator.applyPendingQuickActionIfNeeded()
+        guard let route = destination else { return }
+        context.coordinator.navigate(to: route)
     }
 
     final class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler {
@@ -532,25 +634,12 @@ struct WebAppView: UIViewRepresentable {
             let slug: String?
             let title: String?
             let pdfUrl: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case id, slug, title, pdfUrl
-                case pdf_url
-            }
-
-            init(from decoder: Decoder) throws {
-                let c = try decoder.container(keyedBy: CodingKeys.self)
-                id = try c.decodeIfPresent(String.self, forKey: .id)
-                slug = try c.decodeIfPresent(String.self, forKey: .slug)
-                title = try c.decodeIfPresent(String.self, forKey: .title)
-                pdfUrl = try c.decodeIfPresent(String.self, forKey: .pdfUrl)
-                    ?? c.decodeIfPresent(String.self, forKey: .pdf_url)
-            }
         }
 
         private weak var webView: WKWebView?
         private weak var backdropView: GradientBackdropView?
         private weak var containerView: UIView?
+        private weak var nativeChromeBar: DarNativeTabBar?
         private weak var loadingOverlay: UIView?
         private var pageSurfaceColor = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
         private weak var loadingLabel: UILabel?
@@ -573,9 +662,6 @@ struct WebAppView: UIViewRepresentable {
         private var lastAppliedTopInset: CGFloat = -1
         private var lastAppearanceKey: String = ""
         private var lastOpenedDestination: DarDeepLink.Destination?
-        private var lastLoadedPushURL: URL?
-        var lastOpenNonce: UUID?
-        private var pendingRoute: DarDeepLink.Destination?
         private let errorHTML = """
         <!doctype html>
         <html lang="de">
@@ -605,12 +691,15 @@ struct WebAppView: UIViewRepresentable {
         func attach(
             _ webView: WKWebView,
             backdropView: GradientBackdropView,
-            containerView: UIView
+            containerView: UIView,
+            tabBar: DarNativeTabBar
         ) {
             self.webView = webView
             self.backdropView = backdropView
             self.containerView = containerView
+            self.nativeChromeBar = tabBar
             installLoadingOverlay(on: containerView)
+            containerView.bringSubviewToFront(tabBar)
             applySurfaceColor(pageSurfaceColor)
             showLoadingOverlay(subtitle: "App wird geladen")
             updateViewportInsets()
@@ -626,20 +715,6 @@ struct WebAppView: UIViewRepresentable {
                 name: UIApplication.didBecomeActiveNotification,
                 object: nil
             )
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(injectNativePushBridge),
-                name: .darNativePushReady,
-                object: nil
-            )
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(applyPushPermission(_:)),
-                name: .darNativePushPermission,
-                object: nil
-            )
-            DarNativePermissions.shared.attach(webView: webView)
-            DarPushNotifications.requestAuthorization()
         }
 
         deinit {
@@ -647,93 +722,36 @@ struct WebAppView: UIViewRepresentable {
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darLibraryReader")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darAppearance")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darWidgetSnapshot")
-            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushSettings")
-            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darHaptic")
-            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushTest")
-            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darAppIcon")
-            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darNative")
             NotificationCenter.default.removeObserver(self)
         }
 
+        func openNativeTab(_ id: String) {
+            let dest: DarDeepLink.Destination
+            switch id {
+            case "quiz": dest = .home
+            case "feed": dest = .home
+            case "quran": dest = .quran
+            case "more": dest = .more
+            default: dest = .home
+            }
+            let hash: String
+            switch id {
+            case "quiz": hash = "#quiz"
+            case "feed": hash = "#feed"
+            case "quran": hash = "#quran"
+            case "more": hash = "#more"
+            default: hash = "#home"
+            }
+            lastOpenedDestination = dest
+            webView?.evaluateJavaScript("location.hash=\(Self.jsString(hash));", completionHandler: nil)
+            nativeChromeBar?.select(id: id)
+        }
+
         func navigate(to destination: DarDeepLink.Destination, force: Bool = false) {
-            if !hasCompletedInitialLoad {
-                pendingRoute = destination
-                lastOpenedDestination = destination
-                return
-            }
-            if !force && lastOpenedDestination == destination { return }
+            guard force || lastOpenedDestination != destination else { return }
             lastOpenedDestination = destination
-            pendingRoute = nil
             let hash = destination.webHash
-            let hint = destination.openHint
-            let js = """
-            (function(){
-              var hash=\(Self.jsString(hash));
-              var hint=\(Self.jsString(hint));
-              var view=String(hash||"").replace(/^#/,"");
-              var views=view==="duas"?["duas","dua"]:view==="quran"?["quran"]:view==="prayer"?["prayer"]: [view];
-              var opened=false;
-              try{
-                if(typeof navigateToTabRootReplace==="function"){
-                  for(var i=0;i<views.length && !opened;i++){
-                    try{navigateToTabRootReplace(views[i]);opened=true;}catch(e){}
-                  }
-                }
-                if(!opened && typeof navigate==="function"){
-                  for(var j=0;j<views.length && !opened;j++){
-                    try{navigate(views[j]);opened=true;}catch(e){}
-                  }
-                }
-                if(!opened){location.hash=hash;}
-              }catch(e){location.hash=hash;}
-              if(hint==="qibla"){
-                setTimeout(function(){
-                  var el=document.getElementById("qiblaCompassWrap")||document.querySelector("[data-qibla],#qibla, .qibla-compass, .qibla-card");
-                  if(el) el.scrollIntoView({behavior:"smooth",block:"center"});
-                  var btn=document.querySelector('[href="#qibla"],[data-nav="qibla"],button[aria-label*="Qibla"]');
-                  if(btn){try{btn.click()}catch(e){}}
-                },450);
-              }
-              if(hint==="search"){
-                setTimeout(function(){
-                  var inp=document.querySelector('input[placeholder*="Suche nach Beitrag"],input[placeholder*="Sūrah, Āyah"]');
-                  if(inp){try{inp.focus()}catch(e){}}
-                },400);
-              }
-            })();
-            """
-            webView?.evaluateJavaScript(js, completionHandler: nil)
-        }
-
-        func applyPendingQuickActionIfNeeded() {
-            guard hasCompletedInitialLoad else { return }
-            if let pending = pendingRoute ?? DarQuickActions.peek() {
-                navigate(to: pending, force: true)
-                _ = DarQuickActions.consume()
-            }
-        }
-
-        func loadPushURL(_ url: URL) {
-            let target = DarAppShell.inAppURL(from: url)
-            guard DarAppShell.isOwnHost(target) else { return }
-            let dest = DarDeepLink.destination(from: target)
-            if dest == .qibla || dest == .prayer || dest == .quran || dest == .duas || dest == .jummah {
-                navigate(to: dest, force: true)
-                return
-            }
-            if let current = webView?.url, DarAppShell.isOwnHost(current) {
-                let currentPath = current.path.isEmpty ? "/" : current.path
-                let targetPath = target.path.isEmpty ? "/" : target.path
-                if currentPath == targetPath || (currentPath == "/" && targetPath.hasPrefix("/")) {
-                    if let fragment = target.fragment, !fragment.isEmpty {
-                        navigate(to: dest, force: true)
-                        return
-                    }
-                }
-            }
-            if lastLoadedPushURL == target { return }
-            lastLoadedPushURL = target
-            webView?.load(URLRequest(url: target))
+            webView?.evaluateJavaScript("location.hash=\(Self.jsString(hash));", completionHandler: nil)
         }
 
         private static func jsString(_ value: String) -> String {
@@ -758,75 +776,10 @@ struct WebAppView: UIViewRepresentable {
             if let city = body["city"] as? String, !city.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 snap.cityLabel = city
             }
-            if let angle = body["angle"] as? Double { snap.fajrAngle = angle }
-            else if let angle = (body["angle"] as? NSNumber)?.doubleValue { snap.fajrAngle = angle }
-            if let asr = body["asrFactor"] as? Double { snap.asrFactor = asr }
-            else if let asr = (body["asrFactor"] as? NSNumber)?.doubleValue { snap.asrFactor = asr }
-            if let rows = body["times"] as? [[String: Any]], !rows.isEmpty {
-                let parsed: [DarPrayerSlot] = rows.compactMap { row in
-                    let id = String(describing: row["id"] ?? "")
-                    let name = String(describing: row["name"] ?? "")
-                    let time = String(describing: row["time"] ?? "")
-                    guard !id.isEmpty, time.contains(":") else { return nil }
-                    return DarPrayerSlot(id: id, name: name, time: time)
-                }
-                if parsed.count >= 5 { snap.prayers = parsed }
-            }
-            if let theme = body["theme"] as? String, !theme.isEmpty {
-                snap.themeId = theme
-            }
-            if let title = body["duaTitle"] as? String, !title.isEmpty { snap.duaTitle = title }
-            if let de = body["duaDe"] as? String, !de.isEmpty { snap.duaGerman = de }
-            if let tr = body["duaTr"] as? String, !tr.isEmpty { snap.duaTranslit = tr }
-            if let cat = body["duaCat"] as? String { snap.duaCategory = cat }
-            if let post = body["postTitle"] as? String, !post.isEmpty {
-                snap.postTitle = post
-                snap.recommendationTitle = "Heute empfohlen"
-            }
-            if let snippet = body["postSnippet"] as? String, !snippet.isEmpty {
-                snap.postSnippet = snippet
-                snap.recommendationBody = snippet
-            }
-            if let pcat = body["postCategory"] as? String { snap.postCategory = pcat }
-            if let src = body["postSource"] as? String, !src.isEmpty { snap.postSource = src }
-            if let dsrc = body["duaSource"] as? String, !dsrc.isEmpty { snap.duaSource = dsrc }
             DarWidgetStore.save(DarDailyContent.refresh(snap))
         }
 
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-            if message.name == "darNative" {
-                DarNativePermissions.shared.handleWebMessage(message.body)
-                return
-            }
-            if message.name == "darPushTest" {
-                let body = message.body as? [String: Any] ?? [:]
-                DarPushNotifications.showTest(
-                    title: String(describing: body["title"] ?? "[Test] DĀR AL TAWḤĪD"),
-                    body: String(describing: body["body"] ?? "Test-Benachrichtigung"),
-                    type: String(describing: body["type"] ?? "prayer"),
-                    prayer: String(describing: body["prayer"] ?? "dhuhr"),
-                    mode: String(describing: body["mode"] ?? "entry")
-                )
-                return
-            }
-            if message.name == "darAppIcon" {
-                let body = message.body as? [String: Any] ?? [:]
-                let name = body["name"] as? String ?? ""
-                let id = body["id"] as? String ?? ""
-                DarAppIcons.set(name.isEmpty ? id : name)
-                return
-            }
-            if message.name == "darHaptic" {
-                let style = (message.body as? [String: Any])?["style"] as? String ?? "light"
-                DarHaptics.play(raw: style)
-                return
-            }
-            if message.name == "darPushSettings" {
-                if let body = message.body as? [String: Any] {
-                    DarPushNotifications.applyWebPrayerSettings(body)
-                }
-                return
-            }
             if message.name == "darWidgetSnapshot" {
                 if let body = message.body as? [String: Any] {
                     applyWidgetPayload(body)
@@ -840,30 +793,16 @@ struct WebAppView: UIViewRepresentable {
                     midHex: body["mid"] as? String,
                     bottomHex: body["bottom"] as? String
                 )
-                var snap = DarWidgetStore.load()
-                var changed = false
-                if let theme = body["theme"] as? String, !theme.isEmpty, snap.themeId != theme {
-                    snap.themeId = theme
-                    changed = true
-                }
-                if let ink = body["top"] as? String, !ink.isEmpty, snap.inkHex != ink {
-                    snap.inkHex = ink
-                    changed = true
-                }
-                if let gold = body["gold"] as? String, !gold.isEmpty, snap.goldHex != gold {
-                    snap.goldHex = gold
-                    changed = true
-                }
-                if let cream = body["cream"] as? String, !cream.isEmpty, snap.textHex != cream {
-                    snap.textHex = cream
-                    changed = true
-                }
-                if let muted = body["muted"] as? String, !muted.isEmpty, snap.mutedHex != muted {
-                    snap.mutedHex = muted
-                    changed = true
-                }
-                if changed {
-                    DarWidgetStore.save(DarDailyContent.refresh(snap))
+                return
+            }
+            if message.name == "darAppIcon" {
+                let name = ((message.body as? [String: Any])?["name"] as? String)?
+                    .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+                let resolved: String? = name.isEmpty ? nil : name
+                DispatchQueue.main.async {
+                    guard UIApplication.shared.supportsAlternateIcons else { return }
+                    if UIApplication.shared.alternateIconName == resolved { return }
+                    UIApplication.shared.setAlternateIconName(resolved, completionHandler: { _ in })
                 }
                 return
             }
@@ -873,13 +812,29 @@ struct WebAppView: UIViewRepresentable {
             guard let rawSlug = body["slug"] as? String else { return }
             let slug = rawSlug.trimmingCharacters(in: .whitespacesAndNewlines)
             guard !slug.isEmpty else { return }
-            if presentedLibrarySlug == slug, topViewController()?.presentedViewController is LibraryPDFViewController {
-                return
-            }
+            guard presentedLibrarySlug != slug else { return }
 
             let href = (body["href"] as? String).flatMap(URL.init(string:))
-            let sourceURL = href ?? webView?.url ?? DarAppShell.launchURL
-            openLibraryPDF(slug: slug, sourceURL: sourceURL)
+            let sourceURL = href ?? webView?.url
+            guard let sourceURL else { return }
+
+            Task { [weak self] in
+                guard let self else { return }
+                do {
+                    let publication = try await self.fetchLibraryPublication(slug: slug, from: sourceURL)
+                    guard let publication else { return }
+                    await MainActor.run {
+                        self.presentLibraryPDF(for: publication, slug: slug, sourceURL: sourceURL)
+                    }
+                } catch {
+                    await MainActor.run {
+                        self.presentSimpleAlert(
+                            title: "PDF konnte nicht geoeffnet werden",
+                            message: "Bitte versuche es erneut oder oeffne die PDF spaeter."
+                        )
+                    }
+                }
+            }
         }
 
         func webView(
@@ -892,31 +847,14 @@ struct WebAppView: UIViewRepresentable {
                 return
             }
 
-            if url.scheme?.lowercased() == DarDeepLink.scheme {
-                loadPushURL(url)
+            if shouldOpenExternally(url) {
+                UIApplication.shared.open(url)
                 decisionHandler(.cancel)
-                return
-            }
-
-            if url.path.lowercased().hasSuffix(".pdf") {
-                decisionHandler(.cancel)
-                let slug = librarySlugFromPDFURL(url) ?? DarAppShell.postId(from: url)
-                if !slug.isEmpty {
-                    openLibraryPDF(slug: slug, sourceURL: url)
-                } else {
-                    presentRemotePDF(url)
-                }
                 return
             }
 
             if isAllowedInternalURL(url) {
                 decisionHandler(.allow)
-                return
-            }
-
-            if shouldOpenExternally(url) {
-                UIApplication.shared.open(url)
-                decisionHandler(.cancel)
                 return
             }
 
@@ -926,7 +864,7 @@ struct WebAppView: UIViewRepresentable {
                 return
             }
 
-            decisionHandler(.cancel)
+            decisionHandler(.allow)
         }
 
         func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
@@ -940,172 +878,23 @@ struct WebAppView: UIViewRepresentable {
         }
 
         func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-            if !hasCompletedInitialLoad {
-                showLoadingOverlay(subtitle: "App wird geladen")
-                scheduleLoadTimeout(for: webView)
-            }
+            showLoadingOverlay(subtitle: "App wird geladen")
+            scheduleLoadTimeout(for: webView)
         }
 
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            guard let currentURL = webView.url, isAllowedInternalURL(currentURL) else { return }
             loadTimeoutWorkItem?.cancel()
             hasCompletedInitialLoad = true
             didShowErrorState = false
             hideLoadingOverlay()
-            webView.alpha = 1
-            guard let currentURL = webView.url, isAllowedInternalURL(currentURL) else { return }
+            lastAppliedTopInset = -1
             updateViewportInsets()
             // Appearance after overlay finishes, so boot screen stays visible until 100%.
             handlePossibleLibraryReaderRoute(currentURL)
-            applyPendingQuickActionIfNeeded()
-            injectNativePushBridge()
-            let path = (currentURL.absoluteString + (currentURL.fragment ?? "")).lowercased()
-            if path.contains("qibla") || path.contains("gebet") || path.contains("prayer") {
-                DarNativePermissions.shared.requestLocationIfNeeded()
+            if let pending = DarWidgetStore.consumePendingDestination() {
+                navigate(to: pending, force: true)
             }
-        }
-
-        @available(iOS 15.0, *)
-        func webView(
-            _ webView: WKWebView,
-            requestGeolocationPermissionFor origin: WKSecurityOrigin,
-            initiatedByFrame frame: WKFrameInfo,
-            decisionHandler: @escaping (WKPermissionDecision) -> Void
-        ) {
-            DarNativePermissions.shared.decideGeolocation(decisionHandler)
-        }
-
-        @objc func applyPushPermission(_ note: Notification) {
-            let status = String(describing: note.userInfo?["status"] ?? "default")
-            let js = "window.__darPushPermission=\(Self.jsString(status));"
-            webView?.evaluateJavaScript(js, completionHandler: nil)
-            injectNativePushBridge()
-        }
-
-        @objc func injectNativePushBridge() {
-            let sub = DarPushNotifications.lastSubscriptionId()
-            let token = DarPushNotifications.pushToken()
-            let device = DarPushNotifications.deviceId()
-            let js = """
-            (function(){
-              window.DAR_IOS_NATIVE_PUSH=true;
-              window.DAR_IOS_ONESIGNAL_ID=\(Self.jsString(sub));
-              window.DAR_IOS_PUSH_TOKEN=\(Self.jsString(token));
-              window.DAR_IOS_DEVICE_ID=\(Self.jsString(device));
-              try{if(window.DAR_IOS_DEVICE_ID)localStorage.setItem("darPushExternalIdV1", window.DAR_IOS_DEVICE_ID)}catch(e){}
-              function patch(){
-                if(typeof readOneSignalPushSubscriptionState==="function"){
-                  readOneSignalPushSubscriptionState=function(){
-                    return {subscriptionId:window.DAR_IOS_ONESIGNAL_ID||"",token:window.DAR_IOS_PUSH_TOKEN||"",optedIn:!!window.DAR_IOS_ONESIGNAL_ID,ready:!!window.DAR_IOS_ONESIGNAL_ID};
-                  };
-                }
-                if(typeof currentOneSignalPushIds==="function"){
-                  currentOneSignalPushIds=function(){
-                    return {externalId:localStorage.getItem("darPushExternalIdV1")||window.DAR_IOS_DEVICE_ID||"",subscriptionId:window.DAR_IOS_ONESIGNAL_ID||"",token:window.DAR_IOS_PUSH_TOKEN||""};
-                  };
-                }
-              function nativeReady(){
-                var granted=(window.__darPushPermission==="granted");
-                return {
-                  ready:true,
-                  optedIn:granted,
-                  subscriptionId:window.DAR_IOS_ONESIGNAL_ID||"",
-                  token:window.DAR_IOS_PUSH_TOKEN||"",
-                  os:window.OneSignal||{}
-                };
-              }
-              window.hasNotificationApi=function(){return true};
-              window.getNotificationPermission=function(){return window.__darPushPermission||"default"};
-              window.requestNotificationPermission=function(){
-                try{webkit.messageHandlers.darNative.postMessage({type:"notifications"})}catch(e){}
-                return window.Notification&&window.Notification.requestPermission?window.Notification.requestPermission():Promise.resolve(window.__darPushPermission||"default");
-              };
-              window.waitForPushSubscriptionReady=function(){return Promise.resolve(nativeReady())};
-              window.waitForPushOptIn=function(){return window.requestNotificationPermission().then(function(p){return p==="granted"})};
-              window.ensureOneSignalPushSubscription=function(){return window.requestNotificationPermission().then(function(p){return p==="granted"})};
-              window.ensureOneSignalServiceWorkerReady=function(){return Promise.resolve(null)};
-              window.getOneSignalServiceWorkerRegistration=function(){return Promise.resolve(null)};
-              try{
-                if(window.Notification){
-                  Object.defineProperty(window.Notification,"permission",{configurable:true,get:function(){return window.__darPushPermission||"default"}});
-                }
-              }catch(e){}
-              window.showPrayerNotification=function(title,options){
-                try{
-                  webkit.messageHandlers.darPushTest.postMessage({
-                    title:String(title||"[Test] DĀR AL TAWḤĪD"),
-                    body:String((options&&options.body)||""),
-                    type:"prayer"
-                  });
-                }catch(e){}
-                return Promise.resolve(true);
-              };
-              if(!window.__darIosTapBridge){
-                window.__darIosTapBridge=true;
-                document.addEventListener("click",function(ev){
-                  var el=ev.target&&ev.target.closest&&ev.target.closest("button,a,[role=button],[role=switch],input,label,.toggle,[data-nav]");
-                  if(!el)return;
-                  var txt=String((el.innerText||el.textContent||el.getAttribute("aria-label")||el.id||el.className||"")).toLowerCase();
-                  if(/test/.test(txt)&&( /send/.test(txt)||/push/.test(txt)||/senden/.test(txt)||/benachricht/.test(txt)||/probe/.test(txt) )){
-                    try{webkit.messageHandlers.darPushTest.postMessage({title:"[Test] DĀR AL TAWḤĪD",body:"Test-Benachrichtigung",type:"prayer"});}catch(e){}
-                  }
-                  if(/jumu|jumma|juma|freitag/.test(txt)){
-                    try{
-                      var raw=localStorage.getItem("darPrayerSettingsV1");
-                      var s=raw?JSON.parse(raw):{};
-                      if(typeof getPrayerSettings==="function") s=Object.assign(s,getPrayerSettings());
-                      var turningOn=!!s.jummahNotifications;
-                      if(el.tagName==="INPUT"&&el.type==="checkbox") turningOn=!!el.checked;
-                      else if(el.getAttribute("aria-pressed")==="true") turningOn=false;
-                      else if(el.getAttribute("aria-pressed")==="false") turningOn=true;
-                      else turningOn=!s.jummahNotifications;
-                      s.jummahNotifications=turningOn;
-                      localStorage.setItem("darPrayerSettingsV1",JSON.stringify(s));
-                      webkit.messageHandlers.darPushSettings.postMessage(s);
-                    }catch(e){}
-                  }
-                  if((el.getAttribute("href")||"").indexOf("jummah")>=0||(el.getAttribute("data-nav")||"")==="jummah"){
-                    try{location.hash="#jummah";}catch(e){}
-                  }
-                },true);
-              }
-              if(typeof requestServerPrayerTest==="function"){
-                var _req=requestServerPrayerTest;
-                requestServerPrayerTest=async function(subId,prayerKey,mode,settings){
-                  try{
-                    webkit.messageHandlers.darPushTest.postMessage({
-                      title:"[Test] Gebet",
-                      body:String(prayerKey||"prayer")+" · "+String(mode||"entry"),
-                      type:"prayer",
-                      prayer:String(prayerKey||""),
-                      mode:String(mode||"")
-                    });
-                  }catch(e){}
-                  var id=subId||window.DAR_IOS_ONESIGNAL_ID||"";
-                  if(!id) return {ok:true,reason:"local"};
-                  return _req(id,prayerKey,mode,settings);
-                };
-              }
-                try{
-                  if(typeof getPrayerSettings==="function" && window.webkit&&webkit.messageHandlers&&webkit.messageHandlers.darPushSettings){
-                    webkit.messageHandlers.darPushSettings.postMessage(getPrayerSettings());
-                  }
-                }catch(e){}
-                try{
-                  if(window.DAR_IOS_ONESIGNAL_ID && typeof savePushRegistration==="function"){
-                    var os=window.OneSignal||{};
-                    savePushRegistration(typeof getPrayerSettings==="function"?getPrayerSettings():{},os);
-                  }
-                  if(window.DAR_IOS_ONESIGNAL_ID && typeof getPrayerSettings==="function" && getPrayerSettings().reminder && typeof syncPrayerPushTags==="function"){
-                    syncPrayerPushTags().catch(function(){});
-                  }
-                }catch(e){}
-              }
-              patch();
-              setTimeout(patch,400);
-              setTimeout(patch,1200);
-            })();
-            """
-            webView?.evaluateJavaScript(js, completionHandler: nil)
         }
 
         func updateViewportInsets() {
@@ -1128,7 +917,7 @@ struct WebAppView: UIViewRepresentable {
             if webView.scrollView.verticalScrollIndicatorInsets != .zero {
                 webView.scrollView.verticalScrollIndicatorInsets = .zero
             }
-            webView.scrollView.backgroundColor = pageSurfaceColor
+            webView.scrollView.backgroundColor = .clear
 
             let topInset = max(0, resolvedInsets.top)
             if abs(topInset - lastAppliedTopInset) < 0.5, lastAppliedTopInset >= 0 {
@@ -1147,18 +936,18 @@ struct WebAppView: UIViewRepresentable {
               if(!root)return;
               root.classList.add("dar-ios-native-app");
               root.style.setProperty("--dar-native-safe-top","\(top)px");
-              root.style.setProperty("--safe-top","\(top)px");
               var bottomNative=\(bottom);
               if(bottomNative > 1){
                 root.style.setProperty("--dar-native-safe-bottom", bottomNative.toFixed(2) + "px");
-                root.style.setProperty("--safe-bottom", bottomNative.toFixed(2) + "px");
               } else {
                 root.style.removeProperty("--dar-native-safe-bottom");
-                root.style.removeProperty("--safe-bottom");
               }
               root.style.setProperty("--dar-ios-safe-left","\(left)px");
               root.style.setProperty("--dar-ios-safe-right","\(right)px");
               if(body)body.classList.add("dar-ios-native-app");
+              if(typeof window.__darIosEnsureViewportPolish==="function"){
+                window.__darIosEnsureViewportPolish();
+              }
               var meta=document.querySelector('meta[name="viewport"]');
               if(meta){
                 var content=String(meta.getAttribute("content")||"");
@@ -1180,30 +969,27 @@ struct WebAppView: UIViewRepresentable {
 
         private func applySurfaceColor(_ color: UIColor) {
             pageSurfaceColor = color
-            backdropView?.updateColors(top: color, mid: color, bottom: color)
+            // Theme fill must remain behind the WKWebView for iOS rubber-band overscroll.
+            // Clear chrome here exposed the black UIWindow on light themes such as Eisgold.
+            backdropView?.isHidden = true
             containerView?.backgroundColor = color
             webView?.scrollView.backgroundColor = color
             webView?.backgroundColor = color
-            webView?.isOpaque = true
+            webView?.isOpaque = false
             if #available(iOS 15.0, *) {
                 webView?.underPageBackgroundColor = color
             }
-            webView?.window?.backgroundColor = color
-            // Keep boot overlay ink while loading, otherwise theme updates hide the progress UI.
             if !isBootLoadingVisible {
                 loadingOverlay?.backgroundColor = color
             }
+            nativeChromeBar?.applySurface(color)
         }
 
         private func applyAppearance(topHex: String?, midHex: String?, bottomHex: String?) {
             let key = "\(topHex ?? "")|\(midHex ?? "")|\(bottomHex ?? "")"
             guard key != lastAppearanceKey else { return }
             lastAppearanceKey = key
-            let topColor = color(from: topHex) ?? pageSurfaceColor
-            let midColor = color(from: midHex) ?? topColor
-            let bottomColor = color(from: bottomHex) ?? topColor
-            applySurfaceColor(topColor)
-            backdropView?.updateColors(top: topColor, mid: midColor, bottom: bottomColor)
+            applySurfaceColor(color(from: topHex) ?? pageSurfaceColor)
         }
 
         private func color(from hex: String?) -> UIColor? {
@@ -1245,13 +1031,8 @@ struct WebAppView: UIViewRepresentable {
         ) -> WKWebView? {
             guard let url = navigationAction.request.url else { return nil }
 
-            if url.path.lowercased().hasSuffix(".pdf") {
-                let slug = librarySlugFromPDFURL(url) ?? ""
-                if !slug.isEmpty {
-                    openLibraryPDF(slug: slug, sourceURL: url)
-                } else {
-                    presentRemotePDF(url)
-                }
+            if shouldOpenExternally(url) {
+                UIApplication.shared.open(url)
                 return nil
             }
 
@@ -1260,19 +1041,7 @@ struct WebAppView: UIViewRepresentable {
                 return nil
             }
 
-            if DarAppShell.isOwnHost(url) {
-                loadPushURL(url)
-                return nil
-            }
-
-            if shouldOpenExternally(url) {
-                UIApplication.shared.open(url)
-                return nil
-            }
-
-            if !DarAppShell.isOwnHost(url) {
-                UIApplication.shared.open(url)
-            }
+            UIApplication.shared.open(url)
             return nil
         }
 
@@ -1288,7 +1057,7 @@ struct WebAppView: UIViewRepresentable {
                 return false
             }
 
-            return (scheme == "https" || scheme == "http") && DarAppShell.hosts.contains(host)
+            return (scheme == "https" || scheme == "http") && WebAppView.allowedHosts.contains(host)
         }
 
         private func shouldOpenExternally(_ url: URL) -> Bool {
@@ -1298,46 +1067,18 @@ struct WebAppView: UIViewRepresentable {
 
         private func handlePossibleLibraryReaderRoute(_ url: URL) {
             guard let slug = libraryReaderSlug(from: url) else { return }
-            openLibraryPDF(slug: slug, sourceURL: url)
-        }
+            guard presentedLibrarySlug != slug else { return }
 
-        private func librarySlugFromPDFURL(_ url: URL) -> String? {
-            let name = url.lastPathComponent
-            if name.lowercased().hasSuffix(".pdf") {
-                let stem = String(name.dropLast(4))
-                if stem.hasPrefix("pub-") {
-                    return stem.components(separatedBy: "-v").first
-                }
-            }
-            return nil
-        }
-
-        private func openLibraryPDF(slug: String, sourceURL: URL) {
-            let normalized = slug.trimmingCharacters(in: .whitespacesAndNewlines)
-            guard !normalized.isEmpty else { return }
-            if presentedLibrarySlug == normalized, topViewController()?.presentedViewController is LibraryPDFViewController {
-                return
-            }
             Task { [weak self] in
                 guard let self else { return }
                 do {
-                    let publication = try await self.fetchLibraryPublication(slug: normalized, from: sourceURL)
-                    guard let publication else {
-                        await MainActor.run {
-                            self.presentedLibrarySlug = nil
-                            self.presentSimpleAlert(
-                                title: "PDF nicht gefunden",
-                                message: "Diese Veroeffentlichung konnte in der Bibliothek nicht geladen werden."
-                            )
-                        }
-                        return
-                    }
+                    let publication = try await self.fetchLibraryPublication(slug: slug, from: url)
+                    guard let publication else { return }
                     await MainActor.run {
-                        self.presentLibraryPDF(for: publication, slug: normalized, sourceURL: sourceURL)
+                        self.presentLibraryPDF(for: publication, slug: slug, sourceURL: url)
                     }
                 } catch {
                     await MainActor.run {
-                        self.presentedLibrarySlug = nil
                         self.presentSimpleAlert(
                             title: "PDF konnte nicht geoeffnet werden",
                             message: "Bitte versuche es erneut oder oeffne die PDF spaeter."
@@ -1345,17 +1086,6 @@ struct WebAppView: UIViewRepresentable {
                     }
                 }
             }
-        }
-
-        private func presentRemotePDF(_ url: URL) {
-            guard let presenter = topViewController() else { return }
-            if presenter.presentedViewController is LibraryPDFViewController { return }
-            let viewer = LibraryPDFViewController(pdfURL: url, titleText: "PDF", onClose: { [weak self] in
-                self?.presentedLibrarySlug = nil
-            })
-            let nav = UINavigationController(rootViewController: viewer)
-            nav.modalPresentationStyle = .fullScreen
-            presenter.present(nav, animated: true)
         }
 
         private func libraryReaderSlug(from url: URL) -> String? {
@@ -1379,7 +1109,7 @@ struct WebAppView: UIViewRepresentable {
         private func fetchLibraryPublication(slug: String, from url: URL) async throws -> LibraryPublication? {
             let normalizedSlug = slug.trimmingCharacters(in: .whitespacesAndNewlines)
             if let cached = libraryCatalogCache.first(where: {
-                ($0.slug ?? $0.id ?? "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == normalizedSlug.lowercased()
+                ($0.slug ?? $0.id ?? "").trimmingCharacters(in: .whitespacesAndNewlines) == normalizedSlug
             }) {
                 return cached
             }
@@ -1402,8 +1132,7 @@ struct WebAppView: UIViewRepresentable {
             }
 
             return publications.first(where: {
-                let candidate = ($0.slug ?? $0.id ?? "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-                return candidate == normalizedSlug.lowercased()
+                ($0.slug ?? $0.id ?? "").trimmingCharacters(in: .whitespacesAndNewlines) == normalizedSlug
             })
         }
 
@@ -1506,7 +1235,7 @@ struct WebAppView: UIViewRepresentable {
         private func appDidBecomeActive() {
             guard let webView else { return }
             updateViewportInsets()
-            applyPendingQuickActionIfNeeded()
+
             if didShowErrorState {
                 showLoadingOverlay(subtitle: "Erneut laden")
                 webView.load(URLRequest(url: WebAppView.launchURL))
@@ -1535,6 +1264,12 @@ struct WebAppView: UIViewRepresentable {
 
             loadTimeoutWorkItem = workItem
             DispatchQueue.main.asyncAfter(deadline: .now() + 25, execute: workItem)
+        }
+
+        private func darBrandSerif(size: CGFloat, weight: UIFont.Weight) -> UIFont {
+            let base = UIFont.systemFont(ofSize: size, weight: weight)
+            guard let descriptor = base.fontDescriptor.withDesign(.serif) else { return base }
+            return UIFont(descriptor: descriptor, size: size)
         }
 
         private func installLoadingOverlay(on host: UIView) {
@@ -1568,17 +1303,24 @@ struct WebAppView: UIViewRepresentable {
 
             let title = UILabel()
             title.translatesAutoresizingMaskIntoConstraints = false
-            title.text = "DĀR AL TAWḤĪD"
-            title.textColor = UIColor(red: 0.96, green: 0.93, blue: 0.82, alpha: 1.0)
-            title.font = UIFont.systemFont(ofSize: 34, weight: .bold)
+            title.textColor = UIColor(red: 0.831, green: 0.710, blue: 0.416, alpha: 1.0)
+            title.font = darBrandSerif(size: 36, weight: .bold)
             title.textAlignment = .center
+            title.numberOfLines = 1
+            title.adjustsFontSizeToFitWidth = true
+            title.minimumScaleFactor = 0.72
+            let titleText = NSMutableAttributedString(string: "DĀR AL TAWḤĪD")
+            titleText.addAttribute(.kern, value: 2.2, range: NSRange(location: 0, length: titleText.length))
+            title.attributedText = titleText
 
             let kicker = UILabel()
             kicker.translatesAutoresizingMaskIntoConstraints = false
-            kicker.text = "Quran • Sunnah • Athar"
-            kicker.textColor = UIColor(red: 0.80, green: 0.72, blue: 0.52, alpha: 1.0)
-            kicker.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+            kicker.textColor = UIColor(red: 0.957, green: 0.918, blue: 0.824, alpha: 0.72)
+            kicker.font = darBrandSerif(size: 14, weight: .semibold)
             kicker.textAlignment = .center
+            let kickerText = NSMutableAttributedString(string: "QUR’ĀN  •  SUNNAH  •  ĀTHĀR")
+            kickerText.addAttribute(.kern, value: 2.0, range: NSRange(location: 0, length: kickerText.length))
+            kicker.attributedText = kickerText
 
             let progressWrap = UIView()
             progressWrap.translatesAutoresizingMaskIntoConstraints = false
@@ -1586,14 +1328,16 @@ struct WebAppView: UIViewRepresentable {
             let progressTrack = UIView()
             progressTrack.translatesAutoresizingMaskIntoConstraints = false
             progressTrack.backgroundColor = UIColor(red: 0.19, green: 0.16, blue: 0.10, alpha: 0.95)
-            progressTrack.layer.cornerRadius = 0
+            progressTrack.layer.cornerRadius = 3
+            progressTrack.clipsToBounds = true
             progressTrack.layer.borderWidth = 0
             progressTrack.backgroundColor = UIColor(red: 0.79, green: 0.66, blue: 0.42, alpha: 0.16)
 
             let progressGlow = UIView()
             progressGlow.translatesAutoresizingMaskIntoConstraints = false
             progressGlow.backgroundColor = UIColor(red: 0.92, green: 0.84, blue: 0.62, alpha: 1.0)
-            progressGlow.layer.cornerRadius = 0
+            progressGlow.layer.cornerRadius = 3
+            progressGlow.clipsToBounds = true
             progressGlow.layer.shadowColor = UIColor(red: 0.92, green: 0.84, blue: 0.62, alpha: 1.0).cgColor
             progressGlow.layer.shadowOpacity = 0.22
             progressGlow.layer.shadowRadius = 3
@@ -1606,7 +1350,8 @@ struct WebAppView: UIViewRepresentable {
 
             let subtitle = UILabel()
             subtitle.translatesAutoresizingMaskIntoConstraints = false
-            subtitle.text = "App wird geladen"
+            subtitle.text = ""
+            subtitle.isHidden = true
             subtitle.textColor = UIColor(red: 0.76, green: 0.74, blue: 0.68, alpha: 1.0)
             subtitle.font = UIFont.systemFont(ofSize: 16, weight: .medium)
             subtitle.textAlignment = .center
@@ -1646,7 +1391,7 @@ struct WebAppView: UIViewRepresentable {
                 stack.centerYAnchor.constraint(equalTo: overlay.centerYAnchor, constant: -36),
                 stack.leadingAnchor.constraint(greaterThanOrEqualTo: overlay.leadingAnchor, constant: 24),
                 stack.trailingAnchor.constraint(lessThanOrEqualTo: overlay.trailingAnchor, constant: -24),
-                progressWrap.widthAnchor.constraint(equalToConstant: 280),
+                progressWrap.widthAnchor.constraint(equalToConstant: 300),
                 progressTrack.leadingAnchor.constraint(equalTo: progressWrap.leadingAnchor),
                 progressTrack.trailingAnchor.constraint(equalTo: progressWrap.trailingAnchor),
                 progressTrack.topAnchor.constraint(equalTo: progressWrap.topAnchor),
@@ -1670,17 +1415,25 @@ struct WebAppView: UIViewRepresentable {
             self.loadingProgressWidthConstraint = progressWidthConstraint
         }
 
+        private func raiseNativeChrome() {
+            guard let host = containerView, let bar = nativeChromeBar else { return }
+            host.bringSubviewToFront(bar)
+        }
+
         private func showLoadingOverlay(subtitle: String) {
             hideLoadingWorkItem?.cancel()
             let bootInk = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
             isBootLoadingVisible = true
-            loadingLabel?.text = subtitle
+            loadingLabel?.text = ""
+            loadingLabel?.isHidden = true
             guard let overlay = loadingOverlay else { return }
             overlay.backgroundColor = bootInk
             overlay.isHidden = false
             overlay.isUserInteractionEnabled = true
             overlay.alpha = 1
             containerView?.bringSubviewToFront(overlay)
+            raiseNativeChrome()
+            webView?.alpha = 0.001
             startLoadingProgress()
         }
 
