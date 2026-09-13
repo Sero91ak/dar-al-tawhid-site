@@ -1,68 +1,77 @@
 name: App Health Check
 
 on:
+  pull_request:
+    branches: [main]
   push:
     branches: [main]
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  patch-links:
+  health:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
-          fetch-depth: 0
-      - name: Restore old link icons and only add App Store row
-        shell: bash
+          node-version: "20"
+
+      - name: Run app health check
+        run: node scripts/app-health-check.js
+
+      - name: Header prayer display guard (Maghrib/Zeit im Header)
+        run: node scripts/header-prayer-display-guard.js
+
+      - name: Qurʾān Tafsīr nav guard (kein Schwarzfeld/Hänger)
+        run: node scripts/quran-tafsir-nav-guard.js
+
+      - name: Qurʾān picker outside guard (kein Safari-Crash)
+        run: node scripts/quran-picker-outside-guard.js
+
+      - name: Qurʾān stability + Tajweed guard (Veil/Locks/Schrift)
+        run: node scripts/quran-stability-tajweed-guard.js
+
+      - name: App update recovery guard (Update-Banner nur bei echtem Fehler)
+        run: node scripts/app-update-recovery-guard.js
+
+      - name: Change scope lock guard (nur freigeschaltete Bereiche)
+        env:
+          INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
+        run: node scripts/change-scope-lock-guard.js
+
+      - name: Repo integrity guard (Massen-Löschung blockieren)
+        env:
+          INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
+        run: node scripts/repo-integrity-guard.js
+
+      - name: Push system guard
+        run: node scripts/push-system-guard.js
+
+      - name: Prayer push loop guard
+        env:
+          GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          INTEGRITY_BASE_REF: ${{ github.event.before }}
+        run: node scripts/prayer-push-loop-guard.js
+
+      - name: Push lanes guard (Spuren getrennt, nie ohne Befehl)
+        env:
+          GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
+        run: node scripts/push-lanes-guard.js
+
+      - name: Post push hang guard (Beitrags-Push darf nicht hängen)
+        run: node scripts/post-push-hang-guard.js
+
+      - name: Version update guard (Banner-Schleife + Willkommens-Push)
+        run: node scripts/version-update-guard.js
+
+      - name: Visitor SW must not touch admin
         run: |
-          set -euo pipefail
-          python3 <<'PY'
-          import pathlib, re, subprocess
-
-          old_links_ref = '39f09310a8848bb539aaf1c6bf6265832aa9a48d'
-          original_health_ref = '8ea3518001d241bdbd80fbfe7d136b64c93780d4'
-          text = subprocess.check_output(['git', 'show', f'{old_links_ref}:links/index.html'], text=True)
-
-          header_pattern = re.compile(
-              r'<header>\s*\n\s*(<div class="quote">.*?</div>)\s*\n\s*<div class="brand"><h1>DAR AL TAWḤĪD</h1><p class="by">by Serhat Abu Malik</p><p class="sub">OFFIZIELLE KANÄLE</p></div>\s*\n\s*</header>',
-              re.S,
-          )
-          m = header_pattern.search(text)
-          assert m, 'old header block not found'
-          quote = m.group(1)
-          new_header = '<header>\n      <div class="brand"><h1>DĀR AL TAWḤĪD</h1><p class="by">by Serhat Abu Malik</p><p class="sub">OFFIZIELLE KANÄLE</p></div>\n      ' + quote + '\n    </header>'
-          text = header_pattern.sub(new_header, text, count=1)
-
-          marker = '      <button class="row app" id="openApp" type="button">'
-          start = text.find(marker)
-          assert start != -1, 'Web-App button not found'
-          end = text.find('</button>', start)
-          assert end != -1, 'Web-App button end not found'
-          end += len('</button>')
-          appstore_row = '\n      <a class="row appstore" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD im Apple App Store öffnen"><span class="emblem" aria-hidden="true"><img class="emblem-img" src="/assets/app-store-icon-fixed.svg?v=20260913j" alt="" /></span><span class="text"><span class="label">App Store</span><span class="value">DĀR AL TAWḤĪD App</span></span><span class="go">›</span></a>'
-          text = text[:end] + appstore_row + text[end:]
-
-          css = '''
-/* only App Store row */
-.appstore{--accent:#2497e8}
-.appstore .emblem{background:#f7f1e5;color:#111;overflow:hidden}
-.appstore .emblem .emblem-img{width:100%;height:100%;border-radius:50%;object-fit:contain!important;display:block;padding:0;background:#fff;filter:drop-shadow(0 2px 4px rgba(0,0,0,.38))}
-'''
-          text = text.replace('</style>', css + '</style>', 1)
-          pathlib.Path('links/index.html').write_text(text, encoding='utf-8')
-
-          original_health = subprocess.check_output(['git', 'show', f'{original_health_ref}:.github/workflows/app-health-check.yml'], text=True)
-          pathlib.Path('.github/workflows/app-health-check.yml').write_text(original_health, encoding='utf-8')
-          PY
-
-          git config user.name "Serhat Abu Malik"
-          git config user.email "73606501+Sero91ak@users.noreply.github.com"
-          git rm -f .github/workflows/fix-links-appstore-only.yml || true
-          git rm -f .github/links-fix-trigger.txt || true
-          git rm -f visual-links-update.txt || true
-          git add links/index.html .github/workflows/app-health-check.yml
-          git diff --cached --quiet && exit 0
-          git commit -m "Links: restore old icons and keep App Store icon"
-          git push
+          if grep -E "'/admin|\"/admin" service-worker.js | grep -q APP_SHELL; then
+            echo "::error::service-worker.js must not cache /admin paths in APP_SHELL"
+            exit 1
+          fi
+          echo "SW isolation OK"
