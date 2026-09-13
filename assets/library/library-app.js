@@ -1646,8 +1646,7 @@
           const pageInput = reader?.querySelector("[data-library-reader-input]");
           if (pageInput && readerState?.page) pageInput.value = String(readerState.page);
         } else {
-          if (shouldUseNativePdfViewer()) await initReaderNative(pub);
-          else await initReader(pub);
+          await initReader(pub);
           bindReaderControls(pub, getReaderRoot());
         }
       } else {
