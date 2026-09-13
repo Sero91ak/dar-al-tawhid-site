@@ -393,16 +393,24 @@ struct WebAppView: UIViewRepresentable {
               window.DAR_IOS_PUSH_TOKEN=\(Self.jsString(token));
               window.DAR_IOS_DEVICE_ID=\(Self.jsString(device));
               try{if(window.DAR_IOS_DEVICE_ID)localStorage.setItem("darPushExternalIdV1",window.DAR_IOS_DEVICE_ID)}catch(e){}
+              function isOsId(v){return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(v||""));}
+              if(!isOsId(window.DAR_IOS_ONESIGNAL_ID))window.DAR_IOS_ONESIGNAL_ID="";
               function state(){
                 return {
-                  ready:true,
-                  optedIn:(window.__darPushPermission==="granted"),
-                  subscriptionId:window.DAR_IOS_ONESIGNAL_ID||"",
+                  ready:isOsId(window.DAR_IOS_ONESIGNAL_ID),
+                  optedIn:(window.__darPushPermission==="granted")&&isOsId(window.DAR_IOS_ONESIGNAL_ID),
+                  subscriptionId:isOsId(window.DAR_IOS_ONESIGNAL_ID)?window.DAR_IOS_ONESIGNAL_ID:"",
                   token:window.DAR_IOS_PUSH_TOKEN||"",
                   os:window.OneSignal||{}
                 };
               }
-              window.DAR_ONE_SIGNAL_READY=!!window.DAR_IOS_ONESIGNAL_ID;
+              window.DAR_ONE_SIGNAL_READY=isOsId(window.DAR_IOS_ONESIGNAL_ID);
+              try{
+                var health=document.getElementById("notificationHealthText");
+                if(health&&window.DAR_ONE_SIGNAL_READY&&window.__darPushPermission==="granted"){
+                  health.textContent="Push vollständig aktiv · iOS Native";
+                }
+              }catch(e){}
               window.waitForOneSignalReady=function(){
                 return Promise.resolve(window.DAR_IOS_ONESIGNAL_ID?{User:{PushSubscription:{id:window.DAR_IOS_ONESIGNAL_ID,token:window.DAR_IOS_PUSH_TOKEN,optedIn:true}}}:null);
               };
@@ -420,7 +428,7 @@ struct WebAppView: UIViewRepresentable {
                 currentOneSignalPushIds=function(){
                   return {
                     externalId:window.DAR_IOS_DEVICE_ID||"",
-                    subscriptionId:window.DAR_IOS_ONESIGNAL_ID||"",
+                    subscriptionId:isOsId(window.DAR_IOS_ONESIGNAL_ID)?window.DAR_IOS_ONESIGNAL_ID:"",
                     token:window.DAR_IOS_PUSH_TOKEN||""
                   };
                 };

@@ -94,6 +94,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "ios-onesignal-uuid-testflight-54-2026-09-13",
+      "approvedBy": "user-explicit-ios-onesignal-testflight-subscription-uuid",
+      "reason": "Nutzer: echte OneSignal-UUID statt APNs-Token, Server-Registrierung, TestFlight 54.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift",
+        "ios/DarAlTawhid/DarAlTawhid/FreshWebAppView.swift",
+        "ios/DarAlTawhid/DarAlTawhid.xcodeproj/project.pbxproj",
+        "ios/DarAlTawhid/ExportOptions.plist"
+      ],
+      "expiresAt": "2026-09-14T23:59:00.000Z"
+    },
+    {
       "id": "ios-onesignal-native-subscription-2026-09-13",
       "approvedBy": "user-explicit-ios-onesignal-subscription-fehlt",
       "reason": "Nutzer: iOS Native Diagnose fehlt OneSignal, keine Push-Subscription. Native SDK init + Opt-in, kein konkurrierendes APNs.",
