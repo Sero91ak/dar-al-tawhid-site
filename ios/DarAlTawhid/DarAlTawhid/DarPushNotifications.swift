@@ -568,13 +568,11 @@ enum DarPushNotifications {
 
     private static func enqueue(slot: DarPrayerSlot, fire: Date, advance: Bool, minutes: Int, into center: UNUserNotificationCenter) {
         let content = UNMutableNotificationContent()
-        if advance {
-            content.title = "\(slot.name) in \(minutes) Min"
-            content.body = "\(slot.name) um \(slot.time)."
-        } else {
-            content.title = "\(slot.name) ist eingetreten"
-            content.body = "Es ist Zeit für \(slot.name) (\(slot.time))."
-        }
+        let copy = advance
+            ? DarPrayerPushCopy.advanceNotification(slot: slot, advanceMinutes: minutes)
+            : DarPrayerPushCopy.entryNotification(slot: slot)
+        content.title = copy.title
+        content.body = copy.body
         content.sound = .default
         content.userInfo = ["dar": "prayer", "type": "prayer"]
         var comps = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: fire)

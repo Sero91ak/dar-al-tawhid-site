@@ -16,6 +16,7 @@
 		A10000000000000000000007 /* DarWidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000012 /* DarWidgetSnapshot.swift */; };
 		A10000000000000000000008 /* DarWidgetStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000013 /* DarWidgetStore.swift */; };
 		A10000000000000000000009 /* DarPrayerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000014 /* DarPrayerEngine.swift */; };
+		B50000000000000000000001 /* DarPrayerPushCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50000000000000000000002 /* DarPrayerPushCopy.swift */; };
 		A1000000000000000000000A /* DarDailyContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000015 /* DarDailyContent.swift */; };
 		A1000000000000000000000C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000000000000000000014 /* WidgetKit.framework */; };
 		A1000000000000000000000D /* DarWidgetTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000016 /* DarWidgetTheme.swift */; };
@@ -196,6 +197,7 @@
 		A30000000000000000000012 /* DarWidgetSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWidgetSnapshot.swift; sourceTree = "<group>"; };
 		A30000000000000000000013 /* DarWidgetStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWidgetStore.swift; sourceTree = "<group>"; };
 		A30000000000000000000014 /* DarPrayerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarPrayerEngine.swift; sourceTree = "<group>"; };
+		B50000000000000000000002 /* DarPrayerPushCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarPrayerPushCopy.swift; sourceTree = "<group>"; };
 		A30000000000000000000015 /* DarDailyContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarDailyContent.swift; sourceTree = "<group>"; };
 		A30000000000000000000016 /* DarWidgetTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWidgetTheme.swift; sourceTree = "<group>"; };
 		A30000000000000000000017 /* DarWidgetRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWidgetRemote.swift; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 				A30000000000000000000012 /* DarWidgetSnapshot.swift */,
 				A30000000000000000000013 /* DarWidgetStore.swift */,
 				A30000000000000000000014 /* DarPrayerEngine.swift */,
+				B50000000000000000000002 /* DarPrayerPushCopy.swift */,
 				A30000000000000000000015 /* DarDailyContent.swift */,
 			);
 			path = Shared;
@@ -714,6 +717,7 @@
 				A10000000000000000000007 /* DarWidgetSnapshot.swift in Sources */,
 				A10000000000000000000008 /* DarWidgetStore.swift in Sources */,
 				A10000000000000000000009 /* DarPrayerEngine.swift in Sources */,
+				B50000000000000000000001 /* DarPrayerPushCopy.swift in Sources */,
 				A1000000000000000000000A /* DarDailyContent.swift in Sources */,
 				A1000000000000000000000D /* DarWidgetTheme.swift in Sources */,
 				A1000000000000000000000E /* DarWidgetRemote.swift in Sources */,
@@ -801,7 +805,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 68;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -872,7 +876,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 68;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -910,7 +914,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = DarAlTawhid/DarAlTawhid.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 68;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -937,7 +941,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = DarAlTawhid/DarAlTawhid.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 68;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -963,7 +967,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "";
 				CODE_SIGN_ENTITLEMENTS = DarAlTawhid/Widgets/Widgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 68;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = DarAlTawhid/Widgets/Info.plist;
@@ -992,7 +996,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "";
 				CODE_SIGN_ENTITLEMENTS = DarAlTawhid/Widgets/Widgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 68;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = DarAlTawhid/Widgets/Info.plist;
@@ -1021,7 +1025,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 68;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1051,7 +1055,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 68;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
