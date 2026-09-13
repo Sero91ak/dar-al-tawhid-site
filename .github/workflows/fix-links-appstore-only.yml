@@ -2,8 +2,6 @@ name: Restore old links icons and keep App Store icon
 
 on:
   push:
-    paths:
-      - '.github/workflows/fix-links-appstore-only.yml'
 
 permissions:
   contents: write
@@ -16,15 +14,15 @@ jobs:
         with:
           fetch-depth: 0
       - name: Restore old icons; only add App Store icon row
-        shell: python
+        shell: bash
         run: |
+          set -euo pipefail
+          python3 <<'PY'
           import pathlib, re, subprocess
 
-          # Base = letzte saubere Links-Seite mit den alten Nutzer-Icons.
           base = '39f09310a8848bb539aaf1c6bf6265832aa9a48d'
           text = subprocess.check_output(['git', 'show', f'{base}:links/index.html'], text=True)
 
-          # Nur die bereits gewünschte Kopf-Reihenfolge beibehalten: Branding oben, Zitat darunter.
           header_pattern = re.compile(
               r'<header>\s*\n\s*(<div class="quote">.*?</div>)\s*\n\s*<div class="brand"><h1>DAR AL TAWḤĪD</h1><p class="by">by Serhat Abu Malik</p><p class="sub">OFFIZIELLE KANÄLE</p></div>\s*\n\s*</header>',
               re.S,
@@ -35,17 +33,15 @@ jobs:
           new_header = '<header>\n      <div class="brand"><h1>DĀR AL TAWḤĪD</h1><p class="by">by Serhat Abu Malik</p><p class="sub">OFFIZIELLE KANÄLE</p></div>\n      ' + quote + '\n    </header>'
           text = header_pattern.sub(new_header, text, count=1)
 
-          # App-Store-Zeile nur direkt nach dem bestehenden App/Web-App-Button einfügen.
           marker = '      <button class="row app" id="openApp" type="button">'
           start = text.find(marker)
           assert start != -1, 'Web-App button not found'
           end = text.find('</button>', start)
           assert end != -1, 'Web-App button end not found'
           end += len('</button>')
-          appstore_row = '\n      <a class="row appstore" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD im Apple App Store öffnen"><span class="emblem" aria-hidden="true"><img class="emblem-img" src="/assets/app-store-icon-fixed.svg?v=20260913d" alt="" /></span><span class="text"><span class="label">App Store</span><span class="value">DĀR AL TAWḤĪD App</span></span><span class="go">›</span></a>'
+          appstore_row = '\n      <a class="row appstore" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD im Apple App Store öffnen"><span class="emblem" aria-hidden="true"><img class="emblem-img" src="/assets/app-store-icon-fixed.svg?v=20260913e" alt="" /></span><span class="text"><span class="label">App Store</span><span class="value">DĀR AL TAWḤĪD App</span></span><span class="go">›</span></a>'
           text = text[:end] + appstore_row + text[end:]
 
-          # Nur App-Store-spezifische CSS-Regeln ergänzen; alte Icons/CSS bleiben unverändert.
           css = '''
 /* only App Store row */
 .appstore{--accent:#2497e8}
@@ -55,14 +51,16 @@ jobs:
           text = text.replace('</style>', css + '</style>', 1)
 
           pathlib.Path('links/index.html').write_text(text, encoding='utf-8')
-          pathlib.Path('.github/workflows/fix-links-appstore-only.yml').unlink()
+          PY
       - name: Commit restored icon correction and remove temporary workflow
         shell: bash
         run: |
-          set -e
+          set -euo pipefail
           git config user.name "Serhat Abu Malik"
           git config user.email "73606501+Sero91ak@users.noreply.github.com"
-          git add links/index.html .github/workflows/fix-links-appstore-only.yml
+          git rm -f .github/workflows/fix-links-appstore-only.yml || true
+          git rm -f .github/links-fix-trigger.txt || true
+          git add links/index.html
           git diff --cached --quiet && exit 0
           git commit -m "Links: restore old icons and keep App Store icon"
           git push
