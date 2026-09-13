@@ -13,3 +13,6 @@ android/keystore.properties
 android/*.jks
 android/*.keystore
 android/app/google-services.json
+*.p8
+ios/**/asc.env
+ios/**/AuthKey_*.p8
