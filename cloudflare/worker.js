@@ -1784,6 +1784,19 @@ async function publishNewsUpdate(env, input) {
     ttlHours: Number.isFinite(ttlHours) && ttlHours > 0 ? ttlHours : 24,
     visible: input.visible === false ? false : true
   };
+  if (item.nav === "appstore") {
+    item.type = item.type || "app";
+    item.badge = item.badge || "Update";
+    if (!/^https?:\/\//i.test(String(item.value || ""))) {
+      item.value = "https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753";
+    }
+    item.popup = input.popup !== false;
+    item.popupTitle = String(input.popupTitle || "App-Update bereit").trim();
+    item.popupButton = String(input.popupButton || "Jetzt aktualisieren").trim();
+    item.push = input.push !== false;
+    item.pushTitle = String(input.pushTitle || "DĀR AL TAWḤĪD Update bereit").trim();
+    item.pushText = String(input.pushText || "Die App wurde aktualisiert. Bitte jetzt im App Store updaten, damit alles wieder korrekt funktioniert.").trim();
+  }
   const freshItems = items
     .filter((entry) => entry && entry.id !== id)
     .filter((entry) => {
@@ -1814,7 +1827,9 @@ async function publishNewsUpdate(env, input) {
       title,
       text,
       nav: item.nav,
-      value: item.value || ""
+      value: item.value || "",
+      pushTitle: item.pushTitle || input.pushTitle || "",
+      pushText: item.pushText || input.pushText || ""
     });
   }
 
@@ -3431,14 +3446,18 @@ function buildNewsPushUrl(env, { newsId, nav, value }) {
   const id = String(newsId || "").trim();
   const targetNav = String(nav || "").trim();
   const targetValue = String(value || "").trim();
-  if (targetNav === "appstore") return "https://apps.apple.com/de/app/id6805988753";
+  if (/^https?:\/\//i.test(targetValue) && /apps\.apple\.com/i.test(targetValue)) return targetValue;
+  if (targetNav === "appstore") {
+    if (/^https?:\/\//i.test(targetValue)) return targetValue;
+    return "https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753";
+  }
   if (targetNav && targetValue && targetNav !== "news-detail") {
     return `${site}/#${targetNav}/${encodeURIComponent(targetValue)}`;
   }
   return `${site}/#news-detail/${encodeURIComponent(id || "news")}`;
 }
 
-async function sendNewsPush(env, { newsId, title, text, nav, value }) {
+async function sendNewsPush(env, { newsId, title, text, nav, value, pushTitle, pushText }) {
   const apiKey = oneSignalApiKey(env);
   const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
   if (!apiKey) {
@@ -3448,8 +3467,8 @@ async function sendNewsPush(env, { newsId, title, text, nav, value }) {
     return { sent: false, reason: "OneSignal App-ID fehlt" };
   }
 
-  const pushTitle = String(title || "Neu im Fokus").trim();
-  const pushMessage = newsPushBody(text);
+  const resolvedTitle = String(pushTitle || title || "Neu im Fokus").trim();
+  const pushMessage = newsPushBody(pushText || text);
   const url = buildNewsPushUrl(env, { newsId, nav, value });
   const site = siteOrigin(env);
   const icon = `${site}/notification-icon-192.png?v=3`;
@@ -3466,7 +3485,7 @@ async function sendNewsPush(env, { newsId, title, text, nav, value }) {
   const basePayload = {
     app_id: appId,
     target_channel: "push",
-    headings: { en: pushTitle, de: pushTitle },
+    headings: { en: resolvedTitle, de: resolvedTitle },
     contents: { en: pushMessage, de: pushMessage },
     url,
     data: pushData,

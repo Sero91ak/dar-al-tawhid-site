@@ -23,7 +23,11 @@ function buildNewsPushUrl({ newsId, nav, value }) {
   const id = String(newsId || "").trim();
   const targetNav = String(nav || "").trim();
   const targetValue = String(value || "").trim();
-  if (targetNav === "appstore") return "https://apps.apple.com/de/app/id6805988753";
+  if (/^https?:\/\//i.test(targetValue) && /apps\.apple\.com/i.test(targetValue)) return targetValue;
+  if (targetNav === "appstore") {
+    if (/^https?:\/\//i.test(targetValue)) return targetValue;
+    return "https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753";
+  }
   if (targetNav === "zakat") return `${site}/#zakat`;
   if (targetNav === "bibliothek") return `${site}/#bibliothek`;
   if (targetNav === "propheten" || targetNav === "prophets") return `${site}/#propheten`;
@@ -35,12 +39,12 @@ function buildNewsPushUrl({ newsId, nav, value }) {
 }
 
 (async function main() {
-  const title = String(process.env.NEWS_TITLE || "Neu im Fokus").trim();
-  const text = String(process.env.NEWS_TEXT || "").trim();
+  const title = String(process.env.NEWS_PUSH_TITLE || process.env.NEWS_TITLE || "Neu im Fokus").trim();
+  const text = String(process.env.NEWS_PUSH_TEXT || process.env.NEWS_TEXT || "").trim();
   const newsId = String(process.env.NEWS_ID || `news-${Date.now()}`).trim();
   const nav = String(process.env.NEWS_NAV || "news-detail").trim();
   const value = String(process.env.NEWS_VALUE || "").trim();
-  const pushType = nav === "zakat" ? "zakat" : "news";
+  const pushType = nav === "zakat" ? "zakat" : nav === "appstore" ? "news" : "news";
 
   if (!API_KEY) throw new Error("OneSignal API-Key fehlt");
 

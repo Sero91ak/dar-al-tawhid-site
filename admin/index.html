@@ -1052,11 +1052,13 @@ function newsItemExpiresAt(item){
 function newsDurationHours(value){
   const v=String(value||"72 Stunden");
   if(v.includes("manuell"))return 720;
+  if(v.includes("336")||v.includes("14 Tage"))return 336;
   if(v.includes("72"))return 72;
   return 24;
 }
 function newsDurationFromItem(item){
   if(!item)return "72 Stunden";
+  if(Number(item.ttlHours||0)===336)return "14 Tage / 336 Stunden";
   if(Number(item.ttlHours||0)>=168||String(item.until||"").includes("manuell"))return "bis manuell deaktiviert";
   if(Number(item.ttlHours||24)===72)return "72 Stunden";
   return "24 Stunden";
@@ -3321,14 +3323,15 @@ function renderNewsFormFields(compact){
   const editing=editingNewsId?` · Bearbeitung ${esc(editingNewsId)}`:"";
   return `<div class="admin-form-grid news-form-grid${compact?" news-compose-compact":""}">
       <input class="field" id="newsTitle" placeholder="Kurzer Titel" value="${esc(editItem?.title||"")}">
-      <select class="field" id="newsDuration"><option value="24 Stunden"${newsDurationFromItem(editItem)==="24 Stunden"?" selected":""}>24 Stunden</option><option value="72 Stunden"${newsDurationFromItem(editItem)==="72 Stunden"||!editItem?" selected":""}>72 Stunden</option><option value="bis manuell deaktiviert"${newsDurationFromItem(editItem)==="bis manuell deaktiviert"?" selected":""}>Dauerhaft / manuell</option></select>
+      <select class="field" id="newsDuration"><option value="24 Stunden"${newsDurationFromItem(editItem)==="24 Stunden"?" selected":""}>24 Stunden</option><option value="72 Stunden"${newsDurationFromItem(editItem)==="72 Stunden"||!editItem?" selected":""}>72 Stunden</option><option value="14 Tage / 336 Stunden"${newsDurationFromItem(editItem)==="14 Tage / 336 Stunden"?" selected":""}>14 Tage / 336 Stunden</option><option value="bis manuell deaktiviert"${newsDurationFromItem(editItem)==="bis manuell deaktiviert"?" selected":""}>Dauerhaft / manuell</option></select>
       <select class="field" id="newsNav">
-        <option value="recent"${(editItem?.nav||"appstore")==="recent"?" selected":""}>Neueste Beiträge</option>
-        <option value="appstore"${!editItem||editItem.nav==="appstore"?" selected":""}>App Store (iPhone-App)</option>
+        <option value="recent"${(editItem?.nav||"")==="recent"?" selected":""}>Neueste Beiträge</option>
+        <option value="appstore"${!editItem||editItem.nav==="appstore"?" selected":""}>App Store / App-Update</option>
         <option value="news-detail"${editItem?.nav==="news-detail"?" selected":""}>Nur Meldung</option>
         <option value="bibliothek"${editItem?.nav==="bibliothek"?" selected":""}>Bibliothek</option>
         <option value="propheten"${editItem?.nav==="propheten"?" selected":""}>Propheten</option>
       </select>
+      <input class="field wide" id="newsPopupButton" placeholder="Buttontext (App-Update), z. B. Jetzt aktualisieren" value="${esc(editItem?.popupButton||"Jetzt aktualisieren")}">
       <textarea class="admin-textarea wide" id="newsText" placeholder="Kurzer Hinweis für Besucher">${esc(editItem?.text||"")}</textarea>
       <button class="btn primary wide" id="publishNewsLiveBtn" type="button">${editingNewsId?"Änderung live speichern (ohne Push)":"Live posten"}</button>
       ${editingNewsId?`<button class="btn" id="cancelNewsEditBtn" type="button">Bearbeitung abbrechen</button>`:""}
@@ -4185,7 +4188,18 @@ function bindCommandCenterForms(){
     publishNewsLive.textContent=isEdit?"Speichere…":"Sende…";
     try{
       const nav=(document.getElementById("newsNav")?.value||"appstore").trim()||"recent";
-      const payload={title,text,ttlHours:hours,badge:nav==="appstore"?"App Store":"News",nav,type:nav==="appstore"?"app":"news"};
+      const isApp=nav==="appstore";
+      const popupButton=(document.getElementById("newsPopupButton")?.value||"").trim()||"Jetzt aktualisieren";
+      const payload={title,text,ttlHours:hours,badge:isApp?"Update":"News",nav,type:isApp?"app":"news"};
+      if(isApp){
+        payload.value="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753";
+        payload.popup=true;
+        payload.popupTitle="App-Update bereit";
+        payload.popupButton=popupButton;
+        payload.push=true;
+        payload.pushTitle="DĀR AL TAWḤĪD Update bereit";
+        payload.pushText="Die App wurde aktualisiert. Bitte jetzt im App Store updaten, damit alles wieder korrekt funktioniert.";
+      }
       if(isEdit){payload.id=editingNewsId;payload.skipPush=true}
       const result=await workerPostRequest("news",payload);
       await fetchLiveNewsItems({force:true});
@@ -4234,7 +4248,7 @@ function bindCommandCenterForms(){
     }
   });
   document.querySelectorAll("[data-news-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese News entfernen?")){removeStoreItem(ADMIN_NEWS_KEY,btn.dataset.newsRemove);addAdminLog("News","News entfernt","");renderShell()}});
-  document.querySelectorAll("[data-news-publish]").forEach(btn=>btn.onclick=async()=>{const item=newsItems().find(x=>String(x.id)===String(btn.dataset.newsPublish));if(!item){toast("News fehlt");return}if(!confirm("Diese News live veröffentlichen?\n\nSie erscheint unter „Neu im Fokus“ und wird als Push an Besucher mit aktivierten Benachrichtigungen gesendet (Titel und Kurztext wie eingegeben)."))return;btn.disabled=true;btn.textContent="Sende...";try{const hours=newsDurationHours(item.until||"24 Stunden");const result=await workerPostRequest("news",{id:item.id,title:item.title,text:item.text,ttlHours:hours,badge:item.nav==="appstore"?"App Store":"News",nav:item.nav||"recent",type:item.nav==="appstore"?"app":"news"});updateStoreItem(ADMIN_NEWS_KEY,item.id,{status:"Live",workerId:result.id,commitSha:result.commitSha});await fetchLiveNewsItems({force:true});const pushNote=result.push?.sent?" · Push gesendet":result.push?.reason?` · Push: ${result.push.reason}`:"";addAdminLog("News",`News live${result.push?.sent?" + Push":""}`,item.title+pushNote);toast(result.push?.sent?"News live · Push gesendet":"News live · Push nicht zugestellt");renderShell()}catch(e){btn.disabled=false;btn.textContent="Live veröffentlichen";addAdminLog("Fehler","News konnte nicht veröffentlicht werden",e.message||String(e));toast(e.message||"News-Veröffentlichung fehlgeschlagen")}});
+  document.querySelectorAll("[data-news-publish]").forEach(btn=>btn.onclick=async()=>{const item=newsItems().find(x=>String(x.id)===String(btn.dataset.newsPublish));if(!item){toast("News fehlt");return}if(!confirm("Diese News live veröffentlichen?\n\nSie erscheint unter „Neu im Fokus“ und wird als Push an Besucher mit aktivierten Benachrichtigungen gesendet (Titel und Kurztext wie eingegeben)."))return;btn.disabled=true;btn.textContent="Sende...";try{const hours=newsDurationHours(item.until||"24 Stunden");const result=await workerPostRequest("news",{id:item.id,title:item.title,text:item.text,ttlHours:hours,badge:item.nav==="appstore"?"Update":"News",nav:item.nav||"recent",type:item.nav==="appstore"?"app":"news",value:item.nav==="appstore"?"https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753":"",popup:item.nav==="appstore",popupTitle:item.nav==="appstore"?"App-Update bereit":"",popupButton:item.popupButton||"Jetzt aktualisieren",push:item.nav==="appstore",pushTitle:item.nav==="appstore"?"DĀR AL TAWḤĪD Update bereit":"",pushText:item.nav==="appstore"?"Die App wurde aktualisiert. Bitte jetzt im App Store updaten, damit alles wieder korrekt funktioniert.":""});updateStoreItem(ADMIN_NEWS_KEY,item.id,{status:"Live",workerId:result.id,commitSha:result.commitSha});await fetchLiveNewsItems({force:true});const pushNote=result.push?.sent?" · Push gesendet":result.push?.reason?` · Push: ${result.push.reason}`:"";addAdminLog("News",`News live${result.push?.sent?" + Push":""}`,item.title+pushNote);toast(result.push?.sent?"News live · Push gesendet":"News live · Push nicht zugestellt");renderShell()}catch(e){btn.disabled=false;btn.textContent="Live veröffentlichen";addAdminLog("Fehler","News konnte nicht veröffentlicht werden",e.message||String(e));toast(e.message||"News-Veröffentlichung fehlgeschlagen")}});
   const newsRefreshLive=document.getElementById("newsRefreshLiveBtn");if(newsRefreshLive)newsRefreshLive.onclick=async()=>{newsRefreshLive.disabled=true;newsRefreshLive.textContent="Lädt…";await fetchLiveNewsItems({force:true});toast(liveNewsError?"Live-News konnten nicht geladen werden":"Live-News aktualisiert");renderShell()};
   const addReport=document.getElementById("addReportBtn");if(addReport)addReport.onclick=()=>{const user=(document.getElementById("reportUser")?.value||"").trim()||"Admin";const area=document.getElementById("reportArea")?.value||"Technik";const text=(document.getElementById("reportText")?.value||"").trim();if(!text){toast("Meldung fehlt");return}addStoreItem(ADMIN_REPORTS_KEY,{user,area,text,status:"Neu"});addAdminLog("Fehler","Fehlermeldung erfasst",area);renderShell()};
   document.querySelectorAll("[data-report-progress]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_REPORTS_KEY,btn.dataset.reportProgress,{status:"In Bearbeitung"});renderShell()});
