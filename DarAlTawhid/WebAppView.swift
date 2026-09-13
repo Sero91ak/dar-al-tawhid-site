@@ -1140,6 +1140,47 @@ struct WebAppView: UIViewRepresentable {
                     return {externalId:localStorage.getItem("darPushExternalIdV1")||window.DAR_IOS_DEVICE_ID||"",subscriptionId:window.DAR_IOS_ONESIGNAL_ID||"",token:window.DAR_IOS_PUSH_TOKEN||""};
                   };
                 }
+                window.getDarPushLinkStatus=function(){
+                  var ext=localStorage.getItem("darPushExternalIdV1")||window.DAR_IOS_DEVICE_ID||"";
+                  var sub=window.DAR_IOS_ONESIGNAL_ID||"";
+                  return {externalId:ext,subscriptionId:sub,channel:"ios-native",linked:!!(ext&&sub),prefix:(ext||"").split("-")[0]||""};
+                };
+                window.getPushConnectionStatus=function(){
+                  var link=window.getDarPushLinkStatus();
+                  return {permission:"granted",optedIn:!!link.subscriptionId,subId:link.subscriptionId,pwa:true,ios:false,serverOk:!!link.subscriptionId,ready:!!link.subscriptionId,externalId:link.externalId,native:true};
+                };
+                function patchDarPushLinkStatusUI(){
+                  try{
+                    var link=window.getDarPushLinkStatus();
+                    if(!link.externalId)return;
+                    var shortId=link.externalId.length>18?link.externalId.slice(0,14)+"…":link.externalId;
+                    var line="Web+App-ID: "+shortId+(link.linked?" · verknüpft":"");
+                    var box=document.querySelector("[data-dar-push-link-status]");
+                    if(!box){
+                      var nodes=document.querySelectorAll("p,span,div,b,button");
+                      for(var i=0;i<nodes.length;i++){
+                        var t=String(nodes[i].textContent||"");
+                        if(/iOS Native aktiv|Gerät erkannt|Push vollständig aktiv/i.test(t)){
+                          box=nodes[i].parentElement||nodes[i];
+                          break;
+                        }
+                      }
+                    }
+                    if(box){
+                      var el=document.getElementById("darPushLinkStatusLine");
+                      if(!el){
+                        el=document.createElement("p");
+                        el.id="darPushLinkStatusLine";
+                        el.setAttribute("data-dar-push-link-status","1");
+                        el.style.fontSize="12px";
+                        el.style.opacity="0.82";
+                        el.style.marginTop="6px";
+                        box.appendChild(el);
+                      }
+                      el.textContent=line;
+                    }
+                  }catch(e){}
+                }
               function nativeReady(){
                 return {
                   ready:true,
@@ -1241,8 +1282,9 @@ struct WebAppView: UIViewRepresentable {
                 }catch(e){}
               }
               patch();
-              setTimeout(patch,400);
-              setTimeout(patch,1200);
+              patchDarPushLinkStatusUI();
+              setTimeout(function(){patch();patchDarPushLinkStatusUI();},400);
+              setTimeout(function(){patch();patchDarPushLinkStatusUI();},1200);
             })();
             """
             webView?.evaluateJavaScript(js, completionHandler: nil)
