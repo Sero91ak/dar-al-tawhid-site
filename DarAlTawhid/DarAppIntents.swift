@@ -1,9 +1,29 @@
 import AppIntents
 import Foundation
 
+enum DarWidgetLook: String, AppEnum {
+    case eisgold
+    case tinte
+    case pergament
+    case royal
+    case bordeaux
+    case app
+
+    static var typeDisplayRepresentation: TypeDisplayRepresentation = "Farbe"
+
+    static var caseDisplayRepresentations: [DarWidgetLook: DisplayRepresentation] = [
+        .eisgold: "Eisgold",
+        .tinte: "Tinte",
+        .pergament: "Pergament",
+        .royal: "Royal",
+        .bordeaux: "Bordeaux",
+        .app: "App-Thema"
+    ]
+}
+
 struct OpenPrayerIntent: AppIntent {
     static var title: LocalizedStringResource = "Gebetszeiten öffnen"
-    static var description = IntentDescription("Öffnet die Gebetszeiten in DAR AL TAWḤID.")
+    static var description = IntentDescription("Öffnet die Gebetszeiten in DĀR AL TAWḤĪD.")
     static var openAppWhenRun = true
 
     func perform() async throws -> some IntentResult {
@@ -39,6 +59,26 @@ struct OpenDuasIntent: AppIntent {
 
     func perform() async throws -> some IntentResult {
         DarWidgetStore.setPendingDestination(.duas)
+        return .result()
+    }
+}
+
+struct OpenHomeIntent: AppIntent {
+    static var title: LocalizedStringResource = "Start öffnen"
+    static var openAppWhenRun = true
+
+    func perform() async throws -> some IntentResult {
+        DarWidgetStore.setPendingDestination(.home)
+        return .result()
+    }
+}
+
+struct OpenJummahIntent: AppIntent {
+    static var title: LocalizedStringResource = "Jumuʿah öffnen"
+    static var openAppWhenRun = true
+
+    func perform() async throws -> some IntentResult {
+        DarWidgetStore.setPendingDestination(.jummah)
         return .result()
     }
 }

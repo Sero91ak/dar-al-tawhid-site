@@ -45,6 +45,62 @@
 		A70000000000000000000003 /* DarAppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70000000000000000000012 /* DarAppIntents.swift */; };
 		A70000000000000000000004 /* DarControlWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70000000000000000000013 /* DarControlWidgets.swift */; };
 		A70000000000000000000005 /* DarAppShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70000000000000000000014 /* DarAppShortcuts.swift */; };
+		A80000000000000000000001 /* DarWidgetConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80000000000000000000011 /* DarWidgetConfig.swift */; };
+		A90000000000000000000001 /* DarAppIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90000000000000000000011 /* DarAppIcons.swift */; };
+		A91000000000000000000001 /* DarAppShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91000000000000000000011 /* DarAppShell.swift */; };
+		A91100000000000000000001 /* DarInAppOpenGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91100000000000000000011 /* DarInAppOpenGuard.swift */; };
+		ICN20100000000000000000002 /* AppIconTypeCreme@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN20100000000000000000001 /* AppIconTypeCreme@2x.png */; };
+		ICN20200000000000000000002 /* AppIconTypeCreme@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN20200000000000000000001 /* AppIconTypeCreme@3x.png */; };
+		ICN20300000000000000000002 /* AppIconTypeCreme@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN20300000000000000000001 /* AppIconTypeCreme@2x~ipad.png */; };
+		ICN20400000000000000000002 /* AppIconTypeCreme-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN20400000000000000000001 /* AppIconTypeCreme-83.5@2x~ipad.png */; };
+		ICN20500000000000000000002 /* AppIconTypeSchwarzAr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN20500000000000000000001 /* AppIconTypeSchwarzAr@2x.png */; };
+		ICN20600000000000000000002 /* AppIconTypeSchwarzAr@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN20600000000000000000001 /* AppIconTypeSchwarzAr@3x.png */; };
+		ICN20700000000000000000002 /* AppIconTypeSchwarzAr@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN20700000000000000000001 /* AppIconTypeSchwarzAr@2x~ipad.png */; };
+		ICN20800000000000000000002 /* AppIconTypeSchwarzAr-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN20800000000000000000001 /* AppIconTypeSchwarzAr-83.5@2x~ipad.png */; };
+		ICN20900000000000000000002 /* AppIconTypeSchwarz@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN20900000000000000000001 /* AppIconTypeSchwarz@2x.png */; };
+		ICN21000000000000000000002 /* AppIconTypeSchwarz@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21000000000000000000001 /* AppIconTypeSchwarz@3x.png */; };
+		ICN21100000000000000000002 /* AppIconTypeSchwarz@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21100000000000000000001 /* AppIconTypeSchwarz@2x~ipad.png */; };
+		ICN21200000000000000000002 /* AppIconTypeSchwarz-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21200000000000000000001 /* AppIconTypeSchwarz-83.5@2x~ipad.png */; };
+		ICN21300000000000000000002 /* AppIconTypeNavyAr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21300000000000000000001 /* AppIconTypeNavyAr@2x.png */; };
+		ICN21400000000000000000002 /* AppIconTypeNavyAr@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21400000000000000000001 /* AppIconTypeNavyAr@3x.png */; };
+		ICN21500000000000000000002 /* AppIconTypeNavyAr@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21500000000000000000001 /* AppIconTypeNavyAr@2x~ipad.png */; };
+		ICN21600000000000000000002 /* AppIconTypeNavyAr-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21600000000000000000001 /* AppIconTypeNavyAr-83.5@2x~ipad.png */; };
+		ICN21700000000000000000002 /* AppIconTypeNavy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21700000000000000000001 /* AppIconTypeNavy@2x.png */; };
+		ICN21800000000000000000002 /* AppIconTypeNavy@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21800000000000000000001 /* AppIconTypeNavy@3x.png */; };
+		ICN21900000000000000000002 /* AppIconTypeNavy@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21900000000000000000001 /* AppIconTypeNavy@2x~ipad.png */; };
+		ICN22000000000000000000002 /* AppIconTypeNavy-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22000000000000000000001 /* AppIconTypeNavy-83.5@2x~ipad.png */; };
+		ICN22100000000000000000002 /* AppIconTypeBordeauxAr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22100000000000000000001 /* AppIconTypeBordeauxAr@2x.png */; };
+		ICN22200000000000000000002 /* AppIconTypeBordeauxAr@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22200000000000000000001 /* AppIconTypeBordeauxAr@3x.png */; };
+		ICN22300000000000000000002 /* AppIconTypeBordeauxAr@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22300000000000000000001 /* AppIconTypeBordeauxAr@2x~ipad.png */; };
+		ICN22400000000000000000002 /* AppIconTypeBordeauxAr-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22400000000000000000001 /* AppIconTypeBordeauxAr-83.5@2x~ipad.png */; };
+		ICN22500000000000000000002 /* AppIconTypeBordeaux@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22500000000000000000001 /* AppIconTypeBordeaux@2x.png */; };
+		ICN22600000000000000000002 /* AppIconTypeBordeaux@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22600000000000000000001 /* AppIconTypeBordeaux@3x.png */; };
+		ICN22700000000000000000002 /* AppIconTypeBordeaux@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22700000000000000000001 /* AppIconTypeBordeaux@2x~ipad.png */; };
+		ICN22800000000000000000002 /* AppIconTypeBordeaux-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22800000000000000000001 /* AppIconTypeBordeaux-83.5@2x~ipad.png */; };
+		ICN22900000000000000000002 /* AppIconTypeGruenAr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22900000000000000000001 /* AppIconTypeGruenAr@2x.png */; };
+		ICN23000000000000000000002 /* AppIconTypeGruenAr@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23000000000000000000001 /* AppIconTypeGruenAr@3x.png */; };
+		ICN23100000000000000000002 /* AppIconTypeGruenAr@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23100000000000000000001 /* AppIconTypeGruenAr@2x~ipad.png */; };
+		ICN23200000000000000000002 /* AppIconTypeGruenAr-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23200000000000000000001 /* AppIconTypeGruenAr-83.5@2x~ipad.png */; };
+		ICN23300000000000000000002 /* AppIconTypeGruen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23300000000000000000001 /* AppIconTypeGruen@2x.png */; };
+		ICN23400000000000000000002 /* AppIconTypeGruen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23400000000000000000001 /* AppIconTypeGruen@3x.png */; };
+		ICN23500000000000000000002 /* AppIconTypeGruen@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23500000000000000000001 /* AppIconTypeGruen@2x~ipad.png */; };
+		ICN23600000000000000000002 /* AppIconTypeGruen-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23600000000000000000001 /* AppIconTypeGruen-83.5@2x~ipad.png */; };
+		ICN23700000000000000000002 /* AppIconTypeSchwarzAr2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23700000000000000000001 /* AppIconTypeSchwarzAr2@2x.png */; };
+		ICN23800000000000000000002 /* AppIconTypeSchwarzAr2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23800000000000000000001 /* AppIconTypeSchwarzAr2@3x.png */; };
+		ICN23900000000000000000002 /* AppIconTypeSchwarzAr2@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23900000000000000000001 /* AppIconTypeSchwarzAr2@2x~ipad.png */; };
+		ICN24000000000000000000002 /* AppIconTypeSchwarzAr2-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN24000000000000000000001 /* AppIconTypeSchwarzAr2-83.5@2x~ipad.png */; };
+		ICN30100000000000000000002 /* AppIconEmblemNachtblau@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN30100000000000000000001 /* AppIconEmblemNachtblau@2x.png */; };
+		ICN30200000000000000000002 /* AppIconEmblemNachtblau@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN30200000000000000000001 /* AppIconEmblemNachtblau@3x.png */; };
+		ICN30300000000000000000002 /* AppIconEmblemNachtblau@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN30300000000000000000001 /* AppIconEmblemNachtblau@2x~ipad.png */; };
+		ICN30400000000000000000002 /* AppIconEmblemNachtblau-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN30400000000000000000001 /* AppIconEmblemNachtblau-83.5@2x~ipad.png */; };
+		ICN30500000000000000000002 /* AppIconEmblemSchwarzgold@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN30500000000000000000001 /* AppIconEmblemSchwarzgold@2x.png */; };
+		ICN30600000000000000000002 /* AppIconEmblemSchwarzgold@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN30600000000000000000001 /* AppIconEmblemSchwarzgold@3x.png */; };
+		ICN30700000000000000000002 /* AppIconEmblemSchwarzgold@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN30700000000000000000001 /* AppIconEmblemSchwarzgold@2x~ipad.png */; };
+		ICN30800000000000000000002 /* AppIconEmblemSchwarzgold-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN30800000000000000000001 /* AppIconEmblemSchwarzgold-83.5@2x~ipad.png */; };
+		ICN30900000000000000000002 /* AppIconEmblemCremePetrol@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN30900000000000000000001 /* AppIconEmblemCremePetrol@2x.png */; };
+		ICN31000000000000000000002 /* AppIconEmblemCremePetrol@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN31000000000000000000001 /* AppIconEmblemCremePetrol@3x.png */; };
+		ICN31100000000000000000002 /* AppIconEmblemCremePetrol@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN31100000000000000000001 /* AppIconEmblemCremePetrol@2x~ipad.png */; };
+		ICN31200000000000000000002 /* AppIconEmblemCremePetrol-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN31200000000000000000001 /* AppIconEmblemCremePetrol-83.5@2x~ipad.png */; };
 		OSB000000000000000000001 /* OneSignalFramework.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000001 /* OneSignalFramework.xcframework */; };
 		OSB000000000000000000002 /* OneSignalUser.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000002 /* OneSignalUser.xcframework */; };
 		OSB000000000000000000003 /* OneSignalNotifications.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000003 /* OneSignalNotifications.xcframework */; };
@@ -61,6 +117,9 @@
 		OSE000000000000000000006 /* OneSignalOutcomes.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000006 /* OneSignalOutcomes.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		OSE000000000000000000007 /* OneSignalOSCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000007 /* OneSignalOSCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		OSE000000000000000000008 /* OneSignalCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000008 /* OneSignalCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C90000000000000000000001 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90000000000000000000011 /* NotificationService.swift */; };
+		C90000000000000000000002 /* OneSignalExtension.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000005 /* OneSignalExtension.xcframework */; };
+		C90000000000000000000004 /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C90000000000000000000010 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +129,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = A20000000000000000000040;
 			remoteInfo = DarAlTawhidWidgets;
+		};
+		C90000000000000000000072 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A10000000000000000000070 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C90000000000000000000040;
+			remoteInfo = OneSignalNotificationServiceExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -81,6 +147,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				A20000000000000000000009 /* DarAlTawhidWidgets.appex in Embed Foundation Extensions */,
+				C90000000000000000000004 /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +205,62 @@
 		A70000000000000000000012 /* DarAppIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAppIntents.swift; sourceTree = "<group>"; };
 		A70000000000000000000013 /* DarControlWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarControlWidgets.swift; sourceTree = "<group>"; };
 		A70000000000000000000014 /* DarAppShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAppShortcuts.swift; sourceTree = "<group>"; };
+		A80000000000000000000011 /* DarWidgetConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWidgetConfig.swift; sourceTree = "<group>"; };
+		A90000000000000000000011 /* DarAppIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAppIcons.swift; sourceTree = "<group>"; };
+		A91000000000000000000011 /* DarAppShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAppShell.swift; sourceTree = "<group>"; };
+		A91100000000000000000011 /* DarInAppOpenGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarInAppOpenGuard.swift; sourceTree = "<group>"; };
+		ICN20100000000000000000001 /* AppIconTypeCreme@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeCreme@2x.png"; sourceTree = "<group>"; };
+		ICN20200000000000000000001 /* AppIconTypeCreme@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeCreme@3x.png"; sourceTree = "<group>"; };
+		ICN20300000000000000000001 /* AppIconTypeCreme@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeCreme@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN20400000000000000000001 /* AppIconTypeCreme-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeCreme-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN20500000000000000000001 /* AppIconTypeSchwarzAr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzAr@2x.png"; sourceTree = "<group>"; };
+		ICN20600000000000000000001 /* AppIconTypeSchwarzAr@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzAr@3x.png"; sourceTree = "<group>"; };
+		ICN20700000000000000000001 /* AppIconTypeSchwarzAr@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzAr@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN20800000000000000000001 /* AppIconTypeSchwarzAr-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzAr-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN20900000000000000000001 /* AppIconTypeSchwarz@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarz@2x.png"; sourceTree = "<group>"; };
+		ICN21000000000000000000001 /* AppIconTypeSchwarz@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarz@3x.png"; sourceTree = "<group>"; };
+		ICN21100000000000000000001 /* AppIconTypeSchwarz@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarz@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN21200000000000000000001 /* AppIconTypeSchwarz-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarz-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN21300000000000000000001 /* AppIconTypeNavyAr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeNavyAr@2x.png"; sourceTree = "<group>"; };
+		ICN21400000000000000000001 /* AppIconTypeNavyAr@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeNavyAr@3x.png"; sourceTree = "<group>"; };
+		ICN21500000000000000000001 /* AppIconTypeNavyAr@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeNavyAr@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN21600000000000000000001 /* AppIconTypeNavyAr-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeNavyAr-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN21700000000000000000001 /* AppIconTypeNavy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeNavy@2x.png"; sourceTree = "<group>"; };
+		ICN21800000000000000000001 /* AppIconTypeNavy@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeNavy@3x.png"; sourceTree = "<group>"; };
+		ICN21900000000000000000001 /* AppIconTypeNavy@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeNavy@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN22000000000000000000001 /* AppIconTypeNavy-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeNavy-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN22100000000000000000001 /* AppIconTypeBordeauxAr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeBordeauxAr@2x.png"; sourceTree = "<group>"; };
+		ICN22200000000000000000001 /* AppIconTypeBordeauxAr@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeBordeauxAr@3x.png"; sourceTree = "<group>"; };
+		ICN22300000000000000000001 /* AppIconTypeBordeauxAr@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeBordeauxAr@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN22400000000000000000001 /* AppIconTypeBordeauxAr-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeBordeauxAr-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN22500000000000000000001 /* AppIconTypeBordeaux@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeBordeaux@2x.png"; sourceTree = "<group>"; };
+		ICN22600000000000000000001 /* AppIconTypeBordeaux@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeBordeaux@3x.png"; sourceTree = "<group>"; };
+		ICN22700000000000000000001 /* AppIconTypeBordeaux@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeBordeaux@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN22800000000000000000001 /* AppIconTypeBordeaux-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeBordeaux-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN22900000000000000000001 /* AppIconTypeGruenAr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeGruenAr@2x.png"; sourceTree = "<group>"; };
+		ICN23000000000000000000001 /* AppIconTypeGruenAr@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeGruenAr@3x.png"; sourceTree = "<group>"; };
+		ICN23100000000000000000001 /* AppIconTypeGruenAr@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeGruenAr@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN23200000000000000000001 /* AppIconTypeGruenAr-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeGruenAr-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN23300000000000000000001 /* AppIconTypeGruen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeGruen@2x.png"; sourceTree = "<group>"; };
+		ICN23400000000000000000001 /* AppIconTypeGruen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeGruen@3x.png"; sourceTree = "<group>"; };
+		ICN23500000000000000000001 /* AppIconTypeGruen@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeGruen@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN23600000000000000000001 /* AppIconTypeGruen-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeGruen-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN23700000000000000000001 /* AppIconTypeSchwarzAr2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzAr2@2x.png"; sourceTree = "<group>"; };
+		ICN23800000000000000000001 /* AppIconTypeSchwarzAr2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzAr2@3x.png"; sourceTree = "<group>"; };
+		ICN23900000000000000000001 /* AppIconTypeSchwarzAr2@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzAr2@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN24000000000000000000001 /* AppIconTypeSchwarzAr2-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzAr2-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN30100000000000000000001 /* AppIconEmblemNachtblau@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemNachtblau@2x.png"; sourceTree = "<group>"; };
+		ICN30200000000000000000001 /* AppIconEmblemNachtblau@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemNachtblau@3x.png"; sourceTree = "<group>"; };
+		ICN30300000000000000000001 /* AppIconEmblemNachtblau@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemNachtblau@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN30400000000000000000001 /* AppIconEmblemNachtblau-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemNachtblau-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN30500000000000000000001 /* AppIconEmblemSchwarzgold@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemSchwarzgold@2x.png"; sourceTree = "<group>"; };
+		ICN30600000000000000000001 /* AppIconEmblemSchwarzgold@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemSchwarzgold@3x.png"; sourceTree = "<group>"; };
+		ICN30700000000000000000001 /* AppIconEmblemSchwarzgold@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemSchwarzgold@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN30800000000000000000001 /* AppIconEmblemSchwarzgold-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemSchwarzgold-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN30900000000000000000001 /* AppIconEmblemCremePetrol@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemCremePetrol@2x.png"; sourceTree = "<group>"; };
+		ICN31000000000000000000001 /* AppIconEmblemCremePetrol@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemCremePetrol@3x.png"; sourceTree = "<group>"; };
+		ICN31100000000000000000001 /* AppIconEmblemCremePetrol@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemCremePetrol@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN31200000000000000000001 /* AppIconEmblemCremePetrol-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemCremePetrol-83.5@2x~ipad.png"; sourceTree = "<group>"; };
 		OSF000000000000000000001 /* OneSignalFramework.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:J3J28YJX9L:OneSignal, Inc."; lastKnownFileType = wrapper.xcframework; name = OneSignalFramework.xcframework; path = Vendor/OneSignal/OneSignalFramework.xcframework; sourceTree = "<group>"; };
 		OSF000000000000000000002 /* OneSignalUser.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:J3J28YJX9L:OneSignal, Inc."; lastKnownFileType = wrapper.xcframework; name = OneSignalUser.xcframework; path = Vendor/OneSignal/OneSignalUser.xcframework; sourceTree = "<group>"; };
 		OSF000000000000000000003 /* OneSignalNotifications.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:J3J28YJX9L:OneSignal, Inc."; lastKnownFileType = wrapper.xcframework; name = OneSignalNotifications.xcframework; path = Vendor/OneSignal/OneSignalNotifications.xcframework; sourceTree = "<group>"; };
@@ -146,6 +269,20 @@
 		OSF000000000000000000006 /* OneSignalOutcomes.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:J3J28YJX9L:OneSignal, Inc."; lastKnownFileType = wrapper.xcframework; name = OneSignalOutcomes.xcframework; path = Vendor/OneSignal/OneSignalOutcomes.xcframework; sourceTree = "<group>"; };
 		OSF000000000000000000007 /* OneSignalOSCore.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:J3J28YJX9L:OneSignal, Inc."; lastKnownFileType = wrapper.xcframework; name = OneSignalOSCore.xcframework; path = Vendor/OneSignal/OneSignalOSCore.xcframework; sourceTree = "<group>"; };
 		OSF000000000000000000008 /* OneSignalCore.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:J3J28YJX9L:OneSignal, Inc."; lastKnownFileType = wrapper.xcframework; name = OneSignalCore.xcframework; path = Vendor/OneSignal/OneSignalCore.xcframework; sourceTree = "<group>"; };
+		W1A000000000000000000010 /* DarAlTawhidWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarAlTawhidWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		W1A000000000000000000011 /* DarAlTawhidWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAlTawhidWatchApp.swift; sourceTree = "<group>"; };
+		W1A000000000000000000012 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		W1A000000000000000000013 /* DarAlTawhidWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DarAlTawhidWatch.entitlements; sourceTree = "<group>"; };
+		W1A000000000000000000014 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		W1A000000000000000000015 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		W2A000000000000000000010 /* DarAlTawhidWatchWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DarAlTawhidWatchWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		W2A000000000000000000011 /* DarWatchWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWatchWidgets.swift; sourceTree = "<group>"; };
+		W2A000000000000000000012 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		W2A000000000000000000013 /* WatchWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WatchWidgets.entitlements; sourceTree = "<group>"; };
+		C90000000000000000000010 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C90000000000000000000011 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		C90000000000000000000012 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C90000000000000000000013 /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +314,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C90000000000000000000020 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C90000000000000000000002 /* OneSignalExtension.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -185,7 +330,9 @@
 			children = (
 				A10000000000000000000031 /* DarAlTawhid */,
 				A30000000000000000000030 /* Shared */,
-				A20000000000000000000031 /* Widgets */,
+				C90000000000000000000031 /* OneSignalNotificationServiceExtension */,
+				W1A000000000000000000030 /* Watch */,
+				W2A000000000000000000031 /* WatchWidgets */,
 				A10000000000000000000032 /* Frameworks */,
 				A10000000000000000000033 /* Products */,
 			);
@@ -198,9 +345,18 @@
 				A40000000000000000000011 /* DarPushNotifications.swift */,
 				A70000000000000000000011 /* DarHaptics.swift */,
 				A70000000000000000000014 /* DarAppShortcuts.swift */,
+				A30000000000000000000016 /* DarWidgetTheme.swift */,
+				A30000000000000000000017 /* DarWidgetRemote.swift */,
+				A20000000000000000000031 /* Widgets */,
+				A90000000000000000000011 /* DarAppIcons.swift */,
+				A70000000000000000000012 /* DarAppIntents.swift */,
+				A91000000000000000000011 /* DarAppShell.swift */,
+				A60000000000000000000011 /* DarPrayerLive.swift */,
+				A91100000000000000000011 /* DarInAppOpenGuard.swift */,
 				A10000000000000000000016 /* DarAppRouter.swift */,
 				A10000000000000000000012 /* WebAppView.swift */,
 				A10000000000000000000013 /* Assets.xcassets */,
+				ICN000000000000000000100 /* AppIcons */,
 				A10000000000000000000019 /* PrivacyInfo.xcprivacy */,
 				A10000000000000000000015 /* Info.plist */,
 				A10000000000000000000017 /* DarAlTawhid.entitlements */,
@@ -232,6 +388,9 @@
 			children = (
 				A10000000000000000000010 /* DAR AL TAWḤID.app */,
 				A20000000000000000000010 /* DarAlTawhidWidgets.appex */,
+				C90000000000000000000010 /* OneSignalNotificationServiceExtension.appex */,
+				W1A000000000000000000010 /* DarAlTawhidWatch.app */,
+				W2A000000000000000000010 /* DarAlTawhidWatchWidgets.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -241,6 +400,7 @@
 			children = (
 				A20000000000000000000011 /* DarAlTawhidWidgets.swift */,
 				A20000000000000000000016 /* DarWidgetViews.swift */,
+				A80000000000000000000011 /* DarWidgetConfig.swift */,
 				A60000000000000000000012 /* DarPrayerLiveActivityWidget.swift */,
 				A70000000000000000000013 /* DarControlWidgets.swift */,
 				A20000000000000000000012 /* Info.plist */,
@@ -258,12 +418,99 @@
 				A30000000000000000000013 /* DarWidgetStore.swift */,
 				A30000000000000000000014 /* DarPrayerEngine.swift */,
 				A30000000000000000000015 /* DarDailyContent.swift */,
-				A30000000000000000000016 /* DarWidgetTheme.swift */,
-				A30000000000000000000017 /* DarWidgetRemote.swift */,
-				A60000000000000000000011 /* DarPrayerLive.swift */,
-				A70000000000000000000012 /* DarAppIntents.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		C90000000000000000000031 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				C90000000000000000000011 /* NotificationService.swift */,
+				C90000000000000000000012 /* Info.plist */,
+				C90000000000000000000013 /* OneSignalNotificationServiceExtension.entitlements */,
+			);
+			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
+		ICN000000000000000000100 /* AppIcons */ = {
+			isa = PBXGroup;
+			children = (
+				ICN30100000000000000000001 /* AppIconEmblemNachtblau@2x.png */,
+				ICN30200000000000000000001 /* AppIconEmblemNachtblau@3x.png */,
+				ICN30300000000000000000001 /* AppIconEmblemNachtblau@2x~ipad.png */,
+				ICN30400000000000000000001 /* AppIconEmblemNachtblau-83.5@2x~ipad.png */,
+				ICN30500000000000000000001 /* AppIconEmblemSchwarzgold@2x.png */,
+				ICN30600000000000000000001 /* AppIconEmblemSchwarzgold@3x.png */,
+				ICN30700000000000000000001 /* AppIconEmblemSchwarzgold@2x~ipad.png */,
+				ICN30800000000000000000001 /* AppIconEmblemSchwarzgold-83.5@2x~ipad.png */,
+				ICN30900000000000000000001 /* AppIconEmblemCremePetrol@2x.png */,
+				ICN31000000000000000000001 /* AppIconEmblemCremePetrol@3x.png */,
+				ICN31100000000000000000001 /* AppIconEmblemCremePetrol@2x~ipad.png */,
+				ICN31200000000000000000001 /* AppIconEmblemCremePetrol-83.5@2x~ipad.png */,
+				ICN20100000000000000000001 /* AppIconTypeCreme@2x.png */,
+				ICN20200000000000000000001 /* AppIconTypeCreme@3x.png */,
+				ICN20300000000000000000001 /* AppIconTypeCreme@2x~ipad.png */,
+				ICN20400000000000000000001 /* AppIconTypeCreme-83.5@2x~ipad.png */,
+				ICN20500000000000000000001 /* AppIconTypeSchwarzAr@2x.png */,
+				ICN20600000000000000000001 /* AppIconTypeSchwarzAr@3x.png */,
+				ICN20700000000000000000001 /* AppIconTypeSchwarzAr@2x~ipad.png */,
+				ICN20800000000000000000001 /* AppIconTypeSchwarzAr-83.5@2x~ipad.png */,
+				ICN20900000000000000000001 /* AppIconTypeSchwarz@2x.png */,
+				ICN21000000000000000000001 /* AppIconTypeSchwarz@3x.png */,
+				ICN21100000000000000000001 /* AppIconTypeSchwarz@2x~ipad.png */,
+				ICN21200000000000000000001 /* AppIconTypeSchwarz-83.5@2x~ipad.png */,
+				ICN21300000000000000000001 /* AppIconTypeNavyAr@2x.png */,
+				ICN21400000000000000000001 /* AppIconTypeNavyAr@3x.png */,
+				ICN21500000000000000000001 /* AppIconTypeNavyAr@2x~ipad.png */,
+				ICN21600000000000000000001 /* AppIconTypeNavyAr-83.5@2x~ipad.png */,
+				ICN21700000000000000000001 /* AppIconTypeNavy@2x.png */,
+				ICN21800000000000000000001 /* AppIconTypeNavy@3x.png */,
+				ICN21900000000000000000001 /* AppIconTypeNavy@2x~ipad.png */,
+				ICN22000000000000000000001 /* AppIconTypeNavy-83.5@2x~ipad.png */,
+				ICN22100000000000000000001 /* AppIconTypeBordeauxAr@2x.png */,
+				ICN22200000000000000000001 /* AppIconTypeBordeauxAr@3x.png */,
+				ICN22300000000000000000001 /* AppIconTypeBordeauxAr@2x~ipad.png */,
+				ICN22400000000000000000001 /* AppIconTypeBordeauxAr-83.5@2x~ipad.png */,
+				ICN22500000000000000000001 /* AppIconTypeBordeaux@2x.png */,
+				ICN22600000000000000000001 /* AppIconTypeBordeaux@3x.png */,
+				ICN22700000000000000000001 /* AppIconTypeBordeaux@2x~ipad.png */,
+				ICN22800000000000000000001 /* AppIconTypeBordeaux-83.5@2x~ipad.png */,
+				ICN22900000000000000000001 /* AppIconTypeGruenAr@2x.png */,
+				ICN23000000000000000000001 /* AppIconTypeGruenAr@3x.png */,
+				ICN23100000000000000000001 /* AppIconTypeGruenAr@2x~ipad.png */,
+				ICN23200000000000000000001 /* AppIconTypeGruenAr-83.5@2x~ipad.png */,
+				ICN23300000000000000000001 /* AppIconTypeGruen@2x.png */,
+				ICN23400000000000000000001 /* AppIconTypeGruen@3x.png */,
+				ICN23500000000000000000001 /* AppIconTypeGruen@2x~ipad.png */,
+				ICN23600000000000000000001 /* AppIconTypeGruen-83.5@2x~ipad.png */,
+				ICN23700000000000000000001 /* AppIconTypeSchwarzAr2@2x.png */,
+				ICN23800000000000000000001 /* AppIconTypeSchwarzAr2@3x.png */,
+				ICN23900000000000000000001 /* AppIconTypeSchwarzAr2@2x~ipad.png */,
+				ICN24000000000000000000001 /* AppIconTypeSchwarzAr2-83.5@2x~ipad.png */,
+			);
+			path = AppIcons;
+			sourceTree = "<group>";
+		};
+		W1A000000000000000000030 /* Watch */ = {
+			isa = PBXGroup;
+			children = (
+				W1A000000000000000000011 /* DarAlTawhidWatchApp.swift */,
+				W1A000000000000000000014 /* Assets.xcassets */,
+				W1A000000000000000000015 /* PrivacyInfo.xcprivacy */,
+				W1A000000000000000000012 /* Info.plist */,
+				W1A000000000000000000013 /* DarAlTawhidWatch.entitlements */,
+			);
+			path = Watch;
+			sourceTree = "<group>";
+		};
+		W2A000000000000000000031 /* WatchWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				W2A000000000000000000011 /* DarWatchWidgets.swift */,
+				W2A000000000000000000012 /* Info.plist */,
+				W2A000000000000000000013 /* WatchWidgets.entitlements */,
+			);
+			path = WatchWidgets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,6 +530,7 @@
 			);
 			dependencies = (
 				A20000000000000000000071 /* PBXTargetDependency */,
+				C90000000000000000000071 /* PBXTargetDependency */,
 			);
 			name = DarAlTawhid;
 			productName = DarAlTawhid;
@@ -306,6 +554,23 @@
 			productReference = A20000000000000000000010 /* DarAlTawhidWidgets.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		C90000000000000000000040 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C90000000000000000000080 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
+			buildPhases = (
+				C90000000000000000000050 /* Sources */,
+				C90000000000000000000020 /* Frameworks */,
+				C90000000000000000000060 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneSignalNotificationServiceExtension;
+			productName = OneSignalNotificationServiceExtension;
+			productReference = C90000000000000000000010 /* OneSignalNotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -320,6 +585,9 @@
 						CreatedOnToolsVersion = 26.6;
 					};
 					A20000000000000000000040 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+					C90000000000000000000040 = {
 						CreatedOnToolsVersion = 26.6;
 					};
 				};
@@ -339,6 +607,7 @@
 			targets = (
 				A10000000000000000000040 /* DarAlTawhid */,
 				A20000000000000000000040 /* DarAlTawhidWidgets */,
+				C90000000000000000000040 /* OneSignalNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -349,6 +618,58 @@
 			buildActionMask = 2147483647;
 			files = (
 				A10000000000000000000003 /* Assets.xcassets in Resources */,
+				ICN30100000000000000000002 /* AppIconEmblemNachtblau@2x.png in Resources */,
+				ICN30200000000000000000002 /* AppIconEmblemNachtblau@3x.png in Resources */,
+				ICN30300000000000000000002 /* AppIconEmblemNachtblau@2x~ipad.png in Resources */,
+				ICN30400000000000000000002 /* AppIconEmblemNachtblau-83.5@2x~ipad.png in Resources */,
+				ICN30500000000000000000002 /* AppIconEmblemSchwarzgold@2x.png in Resources */,
+				ICN30600000000000000000002 /* AppIconEmblemSchwarzgold@3x.png in Resources */,
+				ICN30700000000000000000002 /* AppIconEmblemSchwarzgold@2x~ipad.png in Resources */,
+				ICN30800000000000000000002 /* AppIconEmblemSchwarzgold-83.5@2x~ipad.png in Resources */,
+				ICN30900000000000000000002 /* AppIconEmblemCremePetrol@2x.png in Resources */,
+				ICN31000000000000000000002 /* AppIconEmblemCremePetrol@3x.png in Resources */,
+				ICN31100000000000000000002 /* AppIconEmblemCremePetrol@2x~ipad.png in Resources */,
+				ICN31200000000000000000002 /* AppIconEmblemCremePetrol-83.5@2x~ipad.png in Resources */,
+				ICN20100000000000000000002 /* AppIconTypeCreme@2x.png in Resources */,
+				ICN20200000000000000000002 /* AppIconTypeCreme@3x.png in Resources */,
+				ICN20300000000000000000002 /* AppIconTypeCreme@2x~ipad.png in Resources */,
+				ICN20400000000000000000002 /* AppIconTypeCreme-83.5@2x~ipad.png in Resources */,
+				ICN20500000000000000000002 /* AppIconTypeSchwarzAr@2x.png in Resources */,
+				ICN20600000000000000000002 /* AppIconTypeSchwarzAr@3x.png in Resources */,
+				ICN20700000000000000000002 /* AppIconTypeSchwarzAr@2x~ipad.png in Resources */,
+				ICN20800000000000000000002 /* AppIconTypeSchwarzAr-83.5@2x~ipad.png in Resources */,
+				ICN20900000000000000000002 /* AppIconTypeSchwarz@2x.png in Resources */,
+				ICN21000000000000000000002 /* AppIconTypeSchwarz@3x.png in Resources */,
+				ICN21100000000000000000002 /* AppIconTypeSchwarz@2x~ipad.png in Resources */,
+				ICN21200000000000000000002 /* AppIconTypeSchwarz-83.5@2x~ipad.png in Resources */,
+				ICN21300000000000000000002 /* AppIconTypeNavyAr@2x.png in Resources */,
+				ICN21400000000000000000002 /* AppIconTypeNavyAr@3x.png in Resources */,
+				ICN21500000000000000000002 /* AppIconTypeNavyAr@2x~ipad.png in Resources */,
+				ICN21600000000000000000002 /* AppIconTypeNavyAr-83.5@2x~ipad.png in Resources */,
+				ICN21700000000000000000002 /* AppIconTypeNavy@2x.png in Resources */,
+				ICN21800000000000000000002 /* AppIconTypeNavy@3x.png in Resources */,
+				ICN21900000000000000000002 /* AppIconTypeNavy@2x~ipad.png in Resources */,
+				ICN22000000000000000000002 /* AppIconTypeNavy-83.5@2x~ipad.png in Resources */,
+				ICN22100000000000000000002 /* AppIconTypeBordeauxAr@2x.png in Resources */,
+				ICN22200000000000000000002 /* AppIconTypeBordeauxAr@3x.png in Resources */,
+				ICN22300000000000000000002 /* AppIconTypeBordeauxAr@2x~ipad.png in Resources */,
+				ICN22400000000000000000002 /* AppIconTypeBordeauxAr-83.5@2x~ipad.png in Resources */,
+				ICN22500000000000000000002 /* AppIconTypeBordeaux@2x.png in Resources */,
+				ICN22600000000000000000002 /* AppIconTypeBordeaux@3x.png in Resources */,
+				ICN22700000000000000000002 /* AppIconTypeBordeaux@2x~ipad.png in Resources */,
+				ICN22800000000000000000002 /* AppIconTypeBordeaux-83.5@2x~ipad.png in Resources */,
+				ICN22900000000000000000002 /* AppIconTypeGruenAr@2x.png in Resources */,
+				ICN23000000000000000000002 /* AppIconTypeGruenAr@3x.png in Resources */,
+				ICN23100000000000000000002 /* AppIconTypeGruenAr@2x~ipad.png in Resources */,
+				ICN23200000000000000000002 /* AppIconTypeGruenAr-83.5@2x~ipad.png in Resources */,
+				ICN23300000000000000000002 /* AppIconTypeGruen@2x.png in Resources */,
+				ICN23400000000000000000002 /* AppIconTypeGruen@3x.png in Resources */,
+				ICN23500000000000000000002 /* AppIconTypeGruen@2x~ipad.png in Resources */,
+				ICN23600000000000000000002 /* AppIconTypeGruen-83.5@2x~ipad.png in Resources */,
+				ICN23700000000000000000002 /* AppIconTypeSchwarzAr2@2x.png in Resources */,
+				ICN23800000000000000000002 /* AppIconTypeSchwarzAr2@3x.png in Resources */,
+				ICN23900000000000000000002 /* AppIconTypeSchwarzAr2@2x~ipad.png in Resources */,
+				ICN24000000000000000000002 /* AppIconTypeSchwarzAr2-83.5@2x~ipad.png in Resources */,
 				A1000000000000000000000F /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +679,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2000000000000000000000D /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C90000000000000000000060 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +699,9 @@
 				A10000000000000000000001 /* DarAlTawhidApp.swift in Sources */,
 				A40000000000000000000001 /* DarPushNotifications.swift in Sources */,
 				A70000000000000000000001 /* DarHaptics.swift in Sources */,
+				A90000000000000000000001 /* DarAppIcons.swift in Sources */,
+				A91000000000000000000001 /* DarAppShell.swift in Sources */,
+				A91100000000000000000001 /* DarInAppOpenGuard.swift in Sources */,
 				A70000000000000000000005 /* DarAppShortcuts.swift in Sources */,
 				A70000000000000000000002 /* DarAppIntents.swift in Sources */,
 				A10000000000000000000005 /* DarAppRouter.swift in Sources */,
@@ -392,6 +723,7 @@
 			files = (
 				A20000000000000000000001 /* DarAlTawhidWidgets.swift in Sources */,
 				A2000000000000000000000C /* DarWidgetViews.swift in Sources */,
+				A80000000000000000000001 /* DarWidgetConfig.swift in Sources */,
 				A60000000000000000000003 /* DarPrayerLiveActivityWidget.swift in Sources */,
 				A70000000000000000000004 /* DarControlWidgets.swift in Sources */,
 				A70000000000000000000003 /* DarAppIntents.swift in Sources */,
@@ -406,6 +738,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C90000000000000000000050 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C90000000000000000000001 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -413,6 +753,11 @@
 			isa = PBXTargetDependency;
 			target = A20000000000000000000040 /* DarAlTawhidWidgets */;
 			targetProxy = A20000000000000000000072 /* PBXContainerItemProxy */;
+		};
+		C90000000000000000000071 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C90000000000000000000040 /* OneSignalNotificationServiceExtension */;
+			targetProxy = C90000000000000000000072 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -452,7 +797,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 60;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -523,7 +868,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 60;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -556,9 +901,12 @@
 		A10000000000000000000102 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconEmblemNachtblau AppIconEmblemSchwarzgold AppIconEmblemCremePetrol AppIconTypeCreme AppIconTypeSchwarzAr AppIconTypeSchwarz AppIconTypeNavyAr AppIconTypeNavy AppIconTypeBordeauxAr AppIconTypeBordeaux AppIconTypeGruenAr AppIconTypeGruen AppIconTypeSchwarzAr2";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = DarAlTawhid/DarAlTawhid.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 60;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -580,9 +928,12 @@
 		A10000000000000000000103 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconEmblemNachtblau AppIconEmblemSchwarzgold AppIconEmblemCremePetrol AppIconTypeCreme AppIconTypeSchwarzAr AppIconTypeSchwarz AppIconTypeNavyAr AppIconTypeNavy AppIconTypeBordeauxAr AppIconTypeBordeaux AppIconTypeGruenAr AppIconTypeGruen AppIconTypeSchwarzAr2";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = DarAlTawhid/DarAlTawhid.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 60;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -605,13 +956,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_ENTITLEMENTS = Widgets/Widgets.entitlements;
+				CODE_SIGN_ENTITLEMENTS = DarAlTawhid/Widgets/Widgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 60;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = Widgets/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				INFOPLIST_FILE = DarAlTawhid/Widgets/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -633,13 +984,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_ENTITLEMENTS = Widgets/Widgets.entitlements;
+				CODE_SIGN_ENTITLEMENTS = DarAlTawhid/Widgets/Widgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 60;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = Widgets/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				INFOPLIST_FILE = DarAlTawhid/Widgets/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -652,6 +1003,67 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = WIDGET_EXTENSION;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C90000000000000000000102 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 60;
+				DEVELOPMENT_TEAM = ALVZ35NL2N;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/OneSignal",
+				);
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = OneSignalNotificationServiceExtension;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C90000000000000000000103 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 60;
+				DEVELOPMENT_TEAM = ALVZ35NL2N;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/OneSignal",
+				);
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = OneSignalNotificationServiceExtension;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -684,6 +1096,15 @@
 			buildConfigurations = (
 				A20000000000000000000102 /* Debug */,
 				A20000000000000000000103 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C90000000000000000000080 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C90000000000000000000102 /* Debug */,
+				C90000000000000000000103 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

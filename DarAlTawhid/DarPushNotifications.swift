@@ -13,42 +13,95 @@ enum DarPushNotifications {
 
     static let lastSubKey = "dar.ios.onesignal.subscription.id"
     static let settingsKey = "dar.ios.web.prayer.settings"
-    private static let welcomeSentKey = "dar.ios.welcome.push.v2"
+    private static let welcomeSentKey = "dar.ios.welcome.push.v3"
     private static let deviceIdKey = "dar.ios.push.device.id"
     private static let prayerPrefix = "dar.prayer."
+    private static let jummahPrefix = "dar.jummah."
     private static var didBoot = false
     private static let clickListener = DarOneSignalClickListener()
 
     static func bootstrap(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
-        #if !targetEnvironment(macCatalyst)
-        guard !didBoot else { return }
-        didBoot = true
-        OneSignal.Debug.setLogLevel(.LL_WARN)
-        OneSignal.initialize(oneSignalAppId, withLaunchOptions: launchOptions)
-        OneSignal.Notifications.addClickListener(clickListener)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            OneSignal.User.addTags([
-                "dar_push": "true",
-                "post_notifications": "true",
-                "platform": "ios",
-                "push_site": "dar-al-tawhid"
-            ])
-            OneSignal.Notifications.requestPermission({ granted in
-                guard granted else { return }
-                DispatchQueue.main.async {
-                    syncWithServerThenScheduleLocalFallback()
-                }
-            }, fallbackToSettings: false)
-        }
-        #else
+        #if targetEnvironment(macCatalyst)
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
-            guard granted else { return }
             DispatchQueue.main.async {
                 sendLocalWelcomeIfNeeded()
-                reschedulePrayers()
+                scheduleJummahLocal()
+                if granted {
+                    reschedulePrayers()
+                }
             }
         }
+        #else
+        guard !didBoot else { return }
+        didBoot = true
+        OneSignal.Debug.setLogLevel(.LL_VERBOSE)
+        OneSignal.initialize(oneSignalAppId, withLaunchOptions: launchOptions)
+        OneSignal.Notifications.addClickListener(clickListener)
+        OneSignal.login(deviceId())
+        OneSignal.User.addTags([
+            "dar_push": "true",
+            "post_notifications": "true",
+            "platform": "ios",
+            "dar_client": "native_ios",
+            "dar_env": DarAppShell.usesStagingWeb ? "test" : "live",
+            "dar_surface": "native",
+            "push_site": "dar-al-tawhid",
+            "watch_mirroring": "true"
+        ])
+        OneSignal.Notifications.requestPermission({ granted in
+            DispatchQueue.main.async {
+                if granted {
+                    OneSignal.User.pushSubscription.optIn()
+                }
+                sendLocalWelcomeIfNeeded()
+                scheduleJummahLocal()
+                if granted {
+                    syncWithServerThenScheduleLocalFallback()
+                } else {
+                    reschedulePrayers()
+                }
+            }
+        }, fallbackToSettings: true)
         #endif
+    }
+
+    /// Settings button „Benachrichtigungen erneut aktivieren“ — permission + optIn via OneSignal only.
+    static func reactivatePush() {
+        #if !targetEnvironment(macCatalyst)
+        OneSignal.Notifications.requestPermission({ accepted in
+            DispatchQueue.main.async {
+                if accepted {
+                    OneSignal.User.pushSubscription.optIn()
+                    syncWithServerThenScheduleLocalFallback()
+                }
+            }
+        }, fallbackToSettings: true)
+        #endif
+    }
+
+    static func showTest(title: String, body: String, type: String, prayer: String = "dhuhr", mode: String = "entry") {
+        let content = UNMutableNotificationContent()
+        content.title = title.isEmpty ? "[Test] DĀR AL TAWḤĪD" : title
+        content.body = body.isEmpty ? "Test-Benachrichtigung. Wenn du das siehst, sind Mitteilungen aktiv." : body
+        content.sound = .default
+        content.userInfo = ["dar": type, "type": type]
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.4, repeats: false)
+        UNUserNotificationCenter.current().add(
+            UNNotificationRequest(identifier: "dar.test.\(UUID().uuidString)", content: content, trigger: trigger)
+        )
+        Task {
+            #if !targetEnvironment(macCatalyst)
+            let sub = await waitForSubscriptionId() ?? lastSubscriptionId()
+            guard !sub.isEmpty else { return }
+            UserDefaults.standard.set(sub, forKey: lastSubKey)
+            _ = await postJSON("\(workerURL)/api/prayer/test", body: [
+                "subscriptionId": sub,
+                "prayer": prayer.isEmpty ? "dhuhr" : prayer,
+                "mode": mode.isEmpty ? "entry" : mode,
+                "advanceMinutes": "0"
+            ])
+            #endif
+        }
     }
 
     static func syncWithServerThenScheduleLocalFallback() {
@@ -56,12 +109,13 @@ enum DarPushNotifications {
             let registered = await registerWithDarPushPipeline()
             await MainActor.run {
                 NotificationCenter.default.post(name: .darNativePushReady, object: nil)
+                sendLocalWelcomeIfNeeded()
+                scheduleJummahLocal()
                 let settings = storedWebSettings()
                 let reminderOn = bool(settings["reminder"])
                 if registered, reminderOn {
                     cancelLocalPrayers()
                 } else if reminderOn {
-                    sendLocalWelcomeIfNeeded()
                     reschedulePrayers()
                 } else {
                     cancelLocalPrayers()
@@ -72,6 +126,7 @@ enum DarPushNotifications {
 
     static func reschedulePrayers() {
         let settings = storedWebSettings()
+        scheduleJummahLocal()
         guard bool(settings["reminder"]) else {
             cancelLocalPrayers()
             return
@@ -103,10 +158,25 @@ enum DarPushNotifications {
             if let v = userInfo[key] { return String(describing: v) }
             return ""
         }
+        let rawURL = val("url")
+        let launchURL = val("launchURL")
+        let chosen = rawURL.isEmpty ? launchURL : rawURL
+        let mappedURL: String
+        if let parsed = URL(string: chosen), DarAppShell.isOwnHost(parsed) {
+            mappedURL = DarAppShell.inAppURL(from: parsed).absoluteString
+        } else if let parsed = URL(string: chosen), parsed.scheme?.lowercased() == DarDeepLink.scheme {
+            mappedURL = DarAppShell.inAppURL(from: parsed).absoluteString
+        } else {
+            mappedURL = chosen
+        }
         NotificationCenter.default.post(
             name: .darOpenPush,
             object: nil,
-            userInfo: ["type": val("type"), "postId": val("postId").isEmpty ? val("slug") : val("postId"), "url": val("url")]
+            userInfo: [
+                "type": val("type"),
+                "postId": val("postId").isEmpty ? val("slug") : val("postId"),
+                "url": mappedURL
+            ]
         )
     }
 
@@ -121,10 +191,19 @@ enum DarPushNotifications {
 
     static func applyWebPrayerSettings(_ raw: [String: Any]) {
         let clean = plistDictionary(raw)
-        if NSDictionary(dictionary: clean).isEqual(to: storedWebSettings()) { return }
         if PropertyListSerialization.propertyList(clean, isValidFor: .binary) {
             UserDefaults.standard.set(clean, forKey: settingsKey)
         }
+        var snap = DarWidgetStore.load()
+        if let lat = number(clean["lat"]), let lon = number(clean["lon"]) {
+            snap.latitude = lat
+            snap.longitude = lon
+        }
+        if let city = clean["city"] as? String, !city.isEmpty { snap.cityLabel = city }
+        if let angle = number(clean["angle"]) { snap.fajrAngle = angle }
+        if let asr = number(clean["asrFactor"]) { snap.asrFactor = asr }
+        DarWidgetStore.save(DarDailyContent.refresh(snap))
+        scheduleJummahLocal()
         Task {
             let ok = await registerWithDarPushPipeline()
             await MainActor.run {
@@ -193,6 +272,7 @@ enum DarPushNotifications {
         if let s = value as? String { return Double(s) }
         return nil
     }
+
     private static func registerWithDarPushPipeline() async -> Bool {
         #if targetEnvironment(macCatalyst)
         return false
@@ -211,7 +291,11 @@ enum DarPushNotifications {
             "dar_push": "true",
             "post_notifications": "true",
             "platform": "ios",
+            "dar_client": "native_ios",
+            "dar_env": DarAppShell.usesStagingWeb ? "test" : "live",
+            "dar_surface": "native",
             "push_site": "dar-al-tawhid",
+            "watch_mirroring": "true",
             "daily_dua_notifications": bool(settings["dailyDua"] ?? true) ? "true" : "false",
             "daily_recommendation_notifications": bool(settings["dailyRecommendation"] ?? true) ? "true" : "false",
             "jummah_notifications": bool(settings["jummahNotifications"]) ? "true" : "false",
@@ -279,19 +363,25 @@ enum DarPushNotifications {
 
     #if !targetEnvironment(macCatalyst)
     private static func waitForSubscriptionId() async -> String? {
-        for _ in 0..<40 {
+        if let existing = UserDefaults.standard.string(forKey: lastSubKey), !existing.isEmpty {
+            if let live = OneSignal.User.pushSubscription.id, !live.isEmpty {
+                return live
+            }
+        }
+        for _ in 0..<20 {
             if let id = OneSignal.User.pushSubscription.id, !id.isEmpty {
                 return id
             }
-            try? await Task.sleep(nanoseconds: 400_000_000)
+            try? await Task.sleep(nanoseconds: 250_000_000)
         }
         return OneSignal.User.pushSubscription.id
     }
     #endif
 
     @discardableResult
-    private static func postJSON(_ url: String, body: [String: String]) async -> Bool {
-        guard let data = try? JSONSerialization.data(withJSONObject: body) else { return false }
+    private static func postJSON(_ url: String, body: [String: Any]) async -> Bool {
+        guard JSONSerialization.isValidJSONObject(body),
+              let data = try? JSONSerialization.data(withJSONObject: body) else { return false }
         var req = URLRequest(url: URL(string: url)!)
         req.httpMethod = "POST"
         req.httpBody = data
@@ -305,12 +395,12 @@ enum DarPushNotifications {
         if UserDefaults.standard.bool(forKey: welcomeSentKey) { return }
         let content = UNMutableNotificationContent()
         content.title = "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh"
-        content.body = "Willkommen bei DAR AL TAWḤID. Du erhältst neue Beiträge aus Qurʾān, Sunnah und Āthār direkt als Benachrichtigung."
+        content.body = "Willkommen bei DĀR AL TAWḤĪD. Neue Beiträge und Gebetszeiten kommen als Mitteilung — auch auf die Apple Watch."
         content.sound = .default
-        content.userInfo = ["dar": "welcome"]
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 4, repeats: false)
+        content.userInfo = ["dar": "welcome", "type": "welcome"]
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
         UNUserNotificationCenter.current().add(
-            UNNotificationRequest(identifier: "dar.welcome", content: content, trigger: trigger)
+            UNNotificationRequest(identifier: "dar.welcome.v3", content: content, trigger: trigger)
         )
         UserDefaults.standard.set(true, forKey: welcomeSentKey)
     }
@@ -320,6 +410,54 @@ enum DarPushNotifications {
             let ids = pending.filter { $0.identifier.hasPrefix(prayerPrefix) }.map(\.identifier)
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ids)
         }
+    }
+
+    private static func scheduleJummahLocal() {
+        let settings = storedWebSettings()
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: [
+            "\(jummahPrefix)khutbah",
+            "\(jummahPrefix)morning"
+        ])
+        guard bool(settings["jummahNotifications"]) else { return }
+        let advance = Int(number(settings["jummahAdvanceMinutes"]) ?? 30)
+        let khutbah = settings["jummahManualTime"] as? String ?? "13:30"
+        let morning = settings["jummahMorningTime"] as? String ?? "09:00"
+        enqueueWeekly(
+            weekday: 6,
+            hhmm: khutbah,
+            advanceMinutes: advance,
+            id: "\(jummahPrefix)khutbah",
+            title: "Jumuʿah",
+            body: "Die Freitagsgebetszeit nähert sich."
+        )
+        enqueueWeekly(
+            weekday: 6,
+            hhmm: morning,
+            advanceMinutes: 0,
+            id: "\(jummahPrefix)morning",
+            title: "Jumuʿah",
+            body: "Heute ist Freitag — gedenke der Jumuʿah."
+        )
+    }
+
+    private static func enqueueWeekly(weekday: Int, hhmm: String, advanceMinutes: Int, id: String, title: String, body: String) {
+        let parts = hhmm.split(separator: ":")
+        guard parts.count >= 2, let hour = Int(parts[0]), let minute = Int(parts[1]) else { return }
+        var total = hour * 60 + minute - advanceMinutes
+        while total < 0 { total += 24 * 60 }
+        var comps = DateComponents()
+        comps.weekday = weekday
+        comps.hour = total / 60
+        comps.minute = total % 60
+        comps.second = 0
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = .default
+        content.userInfo = ["dar": "jummah", "type": "jummah"]
+        let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: true)
+        UNUserNotificationCenter.current().add(UNNotificationRequest(identifier: id, content: content, trigger: trigger))
     }
 
     private static func schedulePrayers(from snap: DarWidgetSnapshot) {
@@ -356,7 +494,7 @@ enum DarPushNotifications {
             content.body = "Es ist Zeit für \(slot.name) (\(slot.time))."
         }
         content.sound = .default
-        content.userInfo = ["dar": "prayer"]
+        content.userInfo = ["dar": "prayer", "type": "prayer"]
         var comps = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: fire)
         comps.second = 0
         let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
@@ -377,6 +515,13 @@ final class DarOneSignalClickListener: NSObject, OSNotificationClickListener {
         let extra = event.notification.additionalData ?? [:]
         var info: [AnyHashable: Any] = [:]
         extra.forEach { info[$0] = $1 }
+        if let type = extra["type"] { info["type"] = type }
+        if let launch = event.notification.launchURL, info["url"] == nil {
+            info["url"] = launch
+        }
+        if let clickURL = event.result.url, info["url"] == nil {
+            info["url"] = clickURL
+        }
         DarPushNotifications.openFromNotification(userInfo: info)
     }
 }
