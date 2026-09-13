@@ -43,9 +43,13 @@ jobs:
         run: npm run build
 
       - name: Health checks (Syntax, Push-Guard)
+        env:
+          GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
         run: |
           node scripts/app-health-check.js
           node scripts/push-system-guard.js
+          node scripts/push-lanes-guard.js
           node scripts/version-update-guard.js
 
       - name: Deploy Test-App (Workers Static Assets)

@@ -51,11 +51,19 @@ Die Systeme sind **einzelne Spuren** und dürfen einander nicht überschreiben:
 - **Tages-Push:** Duʿāʾ 09:00 / Empfehlung 12:00
 - **Jumuʿah-Push**
 - **Willkommens-Push**
+- **Beitrags-Push**
+- **News-Push**
+- **Bibliotheks-/PDF-Push**
+- **Fokus-Push:** Quiz, Propheten und Zakāt
+- **OneSignal-Kern:** App-ID, API-Key, SDK-Worker und Öffnungsziele
+- **Native iOS-Push-Registrierung und Weiterleitung**
 - **Worker-Cron** `*/5 * * * *`
 
-**Verboten ohne ausdrücklichen Nutzer-Befehl** (Commit-Marker der Spur, z. B. `prayer-push-scheduler-freigabe`, `daily-push-freigabe`, `prayer-local-reminders-freigabe`):
+**Verboten ohne ausdrücklichen Nutzer-Befehl, Kennwort und Doppel-Freigabe:** Jeder Push-Eingriff braucht zuerst eine klare Anfrage des Nutzers. Zusätzlich muss der Commit `push-password:<Kennwort>`, `push-global-freigabe` und den Marker der konkreten Spur enthalten (z. B. `prayer-push-scheduler-freigabe`, `daily-push-freigabe`, `post-push-freigabe`). Ohne Anfrage, ohne Kennwort oder ohne Spur-Freigabe bleibt OneSignal/Gebet/Duʿāʾ des Tages/Empfehlung/Beiträge/News/Bibliothek/Fokus unverändert.
 - Diese Dateien oder Funktionen in `index.html` / `worker.js` mitändern, auch nicht „nebenbei“ bei Layout/Feed/Quiz.
 - Mehrere Spuren in einem Commit (außer `push-lanes-multi-freigabe`).
+- Eine allgemeine App-, Layout-, Build-, PDF- oder Content-Freigabe gilt niemals als Push-Freigabe.
+- Bei jeder unklaren Push-Auswirkung zuerst den Nutzer fragen; ohne Antwort bleibt der Push-Code unverändert.
 
 **Wenn der Nutzer Push bewusst ändert:** nur diese Spur korrigieren, **sofort live** auf `main` (Worker + App), Sperre bleibt aktiv. Ohne solchen Befehl gilt: nicht anfassen.
 

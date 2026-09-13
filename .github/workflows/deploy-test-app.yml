@@ -65,10 +65,15 @@ jobs:
         run: npm run build
 
       - name: Dar Test Health Check
+        env:
+          GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
         run: |
           node scripts/test-app-health-check.js
           node scripts/library-deploy-guard.js
           node scripts/app-stability-guard.js
+          node scripts/push-system-guard.js
+          node scripts/push-lanes-guard.js
 
       - name: Deploy Dar Test (separat + öffentliche /test/-Route)
         env:

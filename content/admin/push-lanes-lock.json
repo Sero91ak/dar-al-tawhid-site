@@ -1,10 +1,14 @@
 {
-  "version": 1,
+  "version": 2,
   "id": "push-lanes-lock",
   "locked": true,
-  "lockedAt": "2026-09-09T14:15:00.000Z",
-  "lockedReason": "Nutzer 2026-09-09: Gebets-Push, Tages-Push, Jumuʿah, lokale Gebets-Erinnerungen und Willkommens-Push sind getrennte Systeme. Nie anfassen, außer mit ausdrücklichem Befehl. Bei Befehl: nur diese Spur korrigieren, sofort live, Sperre bleibt an.",
-  "unlockPolicy": "Nur Commit-Marker der betroffenen Spur. Eine Spur darf keine andere mitändern. Env-Unlock allein reicht nicht.",
+  "lockedAt": "2026-09-13T09:05:00.000Z",
+  "lockedReason": "Nutzer 2026-09-13: Sämtliche OneSignal- und Push-Funktionen global sperren. Keine sonstige Änderung darf Beiträge, News, Bibliothek, Fokus, Gebet, Tages-Duʿāʾ, Empfehlung, Jumuʿah, Willkommen oder native iOS-Pushs mitändern.",
+  "unlockPolicy": "Strenge Dreifach-Sperre: 1) ausdrücklicher Nutzerauftrag in dieser Unterhaltung, 2) Kennwort push-password:… im Commit, 3) globale Freigabe plus Spur-Freigabe. Ohne Anfrage bleibt jeder Push-Code unverändert, auch bei Layout-, PDF-, Build- oder Inhaltsänderungen.",
+  "globalApprovalRequired": true,
+  "passwordRequired": true,
+  "unlockPasswordSha256": "88c5d00e83bd7611814a2ecaac762beeed85a518c2690eada74260e5cea9ccf7",
+  "globalUnlockPhrases": ["push-global-freigabe"],
   "liveOnExplicitPushCommand": true,
   "requiredGuardMarker": "PUSH_LANES_GUARD",
   "lanes": {
@@ -13,7 +17,13 @@
       "unlockPhrases": ["push-lanes-freigabe"],
       "paths": [
         "content/admin/push-lanes-lock.json",
-        "scripts/push-lanes-guard.js"
+        "scripts/push-lanes-guard.js",
+        "scripts/push-system-guard.js",
+        ".github/workflows/app-health-check.yml",
+        ".github/workflows/canonical-state-guard.yml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        ".github/workflows/deploy-test-app.yml",
+        ".github/workflows/deploy-test-library-canonical.yml"
       ]
     },
     "prayer-server": {
@@ -80,6 +90,9 @@
         "scripts/send-daily-content-push.js",
         "scripts/send-daily-live-repair.js",
         ".github/workflows/daily-push-schedule.yml",
+        ".github/workflows/daily-push-backup.yml",
+        ".github/workflows/daily-push-live-repair.yml",
+        "content/admin/daily-push-live-repair-trigger.json",
         "content/admin/daily-push.json",
         "content/admin/daily-push-schema.sql"
       ],
@@ -147,6 +160,119 @@
           "sendWelcomePush"
         ]
       }
+    },
+    "onesignal-core": {
+      "label": "OneSignal-Kern, Schlüssel und Öffnungsziele",
+      "unlockPhrases": ["onesignal-core-freigabe", "onesignal freigeben"],
+      "paths": [
+        "scripts/lib/onesignal-push.js",
+        "cloudflare/onesignal-delivery.js",
+        "cloudflare/push-launch-urls.js",
+        "OneSignalSDKWorker.js",
+        "OneSignalSDKUpdaterWorker.js",
+        "push/onesignal/",
+        "content/admin/worker-secrets-safety-lock.json",
+        "content/admin/push-autonomous-heal-lock.json",
+        "scripts/push-autonomous-heal-guard.js",
+        ".github/workflows/deploy-admin-publisher.yml",
+        ".github/workflows/push-worker-secret-watchdog.yml",
+        ".github/workflows/sync-admin-publisher-secrets.yml",
+        ".github/workflows/install-prayer-push-tags.yml"
+      ],
+      "diffMarkers": {
+        "index.html": [
+          "OneSignal.init",
+          "ONESIGNAL",
+          "repairPushConnection",
+          "savePushRegistration"
+        ],
+        "test/index.html": [
+          "OneSignal.init",
+          "ONESIGNAL",
+          "repairPushConnection",
+          "savePushRegistration"
+        ],
+        "cloudflare/worker.js": [
+          "oneSignalApiKey",
+          "ONESIGNAL_API_KEY_NEW",
+          "DEFAULT_ONESIGNAL_APP_ID"
+        ]
+      }
+    },
+    "post": {
+      "label": "Beitrags-Push",
+      "unlockPhrases": ["post-push-freigabe", "beitrags-push freigeben"],
+      "paths": [
+        "cloudflare/post-push-admin.js",
+        "scripts/send-post-push.js",
+        "scripts/post-push-hang-guard.js",
+        "content/admin/post-push-hang-lock.json",
+        ".github/workflows/onesignal-post-push.yml",
+        ".github/workflows/post-push-hang-watchdog.yml"
+      ],
+      "diffMarkers": {
+        "cloudflare/worker.js": [
+          "sendNewPostPush",
+          "processAllPendingPushes",
+          "processPendingPushUntilLive",
+          "isPostPushApproved"
+        ]
+      }
+    },
+    "news": {
+      "label": "News-Push",
+      "unlockPhrases": ["news-push-freigabe"],
+      "paths": [
+        "scripts/send-news-push.js",
+        ".github/workflows/news-push.yml"
+      ],
+      "diffMarkers": {
+        "cloudflare/worker.js": [
+          "sendNewsPush"
+        ]
+      }
+    },
+    "library": {
+      "label": "Bibliotheks- und PDF-Push",
+      "unlockPhrases": ["library-push-freigabe", "bibliotheks-push freigeben"],
+      "paths": [
+        "cloudflare/library-push-admin.js",
+        "scripts/send-library-publication-push.js",
+        "scripts/send-library-focus-push.js",
+        ".github/workflows/library-publication-push.yml",
+        ".github/workflows/library-focus-push.yml"
+      ],
+      "diffMarkers": {
+        "cloudflare/worker.js": [
+          "sendLibraryPublicationPush"
+        ]
+      }
+    },
+    "focus": {
+      "label": "Fokus-Push (Quiz, Propheten, Zakāt)",
+      "unlockPhrases": ["focus-push-freigabe"],
+      "paths": [
+        "scripts/send-quiz-focus-push.js",
+        "scripts/send-prophets-focus-push.js",
+        "scripts/send-zakat-focus-push.js",
+        ".github/workflows/quiz-focus-push.yml",
+        ".github/workflows/prophets-focus-push.yml",
+        ".github/workflows/zakat-focus-push.yml"
+      ]
+    },
+    "ios-native": {
+      "label": "Native iOS-Push-Registrierung und Weiterleitung",
+      "unlockPhrases": ["ios-push-freigabe", "native-push freigeben"],
+      "paths": [
+        "ios/DarAlTawhid/DarAlTawhid/DarAlTawhidApp.swift",
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift",
+        "ios/DarAlTawhid/DarAlTawhid/FreshWebAppView.swift",
+        "ios/DarAlTawhid/DarAlTawhid/DarAppRouter.swift",
+        "ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift",
+        "ios/DarAlTawhid/DarAlTawhid/DarNativePermissions.swift",
+        "ios/DarAlTawhid/DarAlTawhid/DarInAppOpenGuard.swift",
+        "android/app/src/main/java/de/daraltawhid/app/DarPush.kt"
+      ]
     },
     "worker-cron": {
       "label": "Worker-Cron (alle 5 Min)",

@@ -4727,6 +4727,22 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "global-push-double-lock-2026-09-13",
+      "approvedBy": "user-explicit-global-push-lock",
+      "reason": "Nutzer-Auftrag: OneSignal und sämtliche Push-Arten global prüfen und gegen jede unbeauftragte Codeänderung mit strenger Doppel-Freigabe sperren",
+      "paths": [
+        "AGENTS.md",
+        "content/admin/push-lanes-lock.json",
+        "scripts/push-lanes-guard.js",
+        "scripts/push-system-guard.js",
+        ".github/workflows/deploy-test-app.yml",
+        ".github/workflows/deploy-test-library-canonical.yml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

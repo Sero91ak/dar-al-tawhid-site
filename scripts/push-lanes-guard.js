@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 /**
  * PUSH_LANES_GUARD
- * Getrennte Push-Spuren. Eine Spur darf die andere nicht mitändern.
- * Änderungen nur mit ausdrücklichem Nutzer-Befehl im Commit-Text.
+ * Globale OneSignal-/Push-Sperre mit getrennten Push-Spuren.
+ * Jede Änderung braucht eine globale und eine spurbezogene Nutzer-Freigabe.
  */
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 const { execSync } = require("child_process");
 
 const ROOT = path.join(__dirname, "..");
@@ -83,11 +84,11 @@ function fileDiff(baseRef, file) {
   return chunks.filter(Boolean).join("\n");
 }
 
-function commitMessage() {
-  let msg = String(process.env.GITHUB_COMMIT_MESSAGE || process.env.COMMIT_MESSAGE || "").toLowerCase();
+function rawCommitMessage() {
+  let msg = String(process.env.GITHUB_COMMIT_MESSAGE || process.env.COMMIT_MESSAGE || "");
   if (!msg) {
     try {
-      msg = execSync("git log -1 --pretty=%B", { cwd: ROOT, encoding: "utf8" }).toLowerCase();
+      msg = execSync("git log -1 --pretty=%B", { cwd: ROOT, encoding: "utf8" });
     } catch (e) {
       msg = "";
     }
@@ -95,9 +96,34 @@ function commitMessage() {
   return msg;
 }
 
+function commitMessage() {
+  return rawCommitMessage().toLowerCase();
+}
+
 function laneUnlocked(lane, message) {
   const phrases = Array.isArray(lane.unlockPhrases) ? lane.unlockPhrases : [];
   return phrases.some((p) => message.includes(String(p).toLowerCase()));
+}
+
+function globalUnlocked(lock, message) {
+  const phrases = Array.isArray(lock.globalUnlockPhrases) ? lock.globalUnlockPhrases : [];
+  return phrases.some((p) => message.includes(String(p).toLowerCase()));
+}
+
+function extractUnlockPassword(message) {
+  const match = String(message || "").match(/push-password:([^\s]+)/i);
+  if (match && match[1]) return match[1];
+  return String(process.env.DAR_PUSH_UNLOCK_PASSWORD || "").trim();
+}
+
+function passwordUnlocked(lock, message) {
+  if (lock.passwordRequired !== true) return true;
+  const expected = String(lock.unlockPasswordSha256 || "").trim().toLowerCase();
+  if (!expected || expected.length < 64) return false;
+  const raw = extractUnlockPassword(message);
+  if (!raw) return false;
+  const hash = crypto.createHash("sha256").update(raw).digest("hex");
+  return hash === expected;
 }
 
 function pathInLane(file, lane) {
@@ -135,7 +161,7 @@ function runPushLanesGuard() {
   }
 
   if (lock.locked !== true) {
-    ok("Push-Spuren-Sperre ist deaktiviert");
+    fail("Globale Push-Sperre darf nicht deaktiviert werden");
     return failures;
   }
 
@@ -155,7 +181,8 @@ function runPushLanesGuard() {
   const lanes = lock.lanes || {};
   const baseRef = resolveBaseRef();
   const files = changedFiles(baseRef);
-  const message = commitMessage();
+  const rawMessage = rawCommitMessage();
+  const message = rawMessage.toLowerCase();
   const touched = [];
 
   for (const [id, lane] of Object.entries(lanes)) {
@@ -180,6 +207,24 @@ function runPushLanesGuard() {
   }
 
   ok(`Berührte Spuren: ${touched.join(", ")}`);
+
+  if (lock.passwordRequired === true && !passwordUnlocked(lock, rawMessage)) {
+    fail(
+      "Push-Kennwort fehlt oder ist falsch. Ohne Kennwort und ohne ausdrückliche Nutzer-Anfrage darf kein OneSignal-/Push-Code geändert werden. "
+      + "Commit muss enthalten: push-password:<Kennwort>"
+    );
+  } else if (lock.passwordRequired === true) {
+    ok("Push-Kennwort bestätigt");
+  }
+
+  if (lock.globalApprovalRequired === true && !globalUnlocked(lock, message)) {
+    fail(
+      "Globale Push-Sperre: Push-Code wurde geändert, aber die ausdrückliche globale Nutzer-Freigabe fehlt. "
+      + `Commit muss enthalten: ${(lock.globalUnlockPhrases || []).join(" / ")}`
+    );
+  } else if (lock.globalApprovalRequired === true) {
+    ok("Globale Push-Freigabe vorhanden");
+  }
 
   for (const id of touched) {
     const lane = lanes[id];

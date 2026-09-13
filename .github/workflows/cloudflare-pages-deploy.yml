@@ -265,6 +265,7 @@ jobs:
         env:
           INTEGRITY_BASE_REF: ${{ github.event.before || '' }}
           CHANGE_SCOPE_LOCK_COMMIT_ONLY: "1"
+          GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
           node scripts/app-health-check.js
           node scripts/change-scope-lock-guard.js
