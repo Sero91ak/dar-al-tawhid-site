@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1789288429577 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v832";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v834";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -20770,7 +20770,7 @@ html body .post-reader-main .post-source-oval.post-source-module .post-after-lin
       <span class="quick-action-emoji" aria-hidden="true">❤️</span>
       <span id="quickAccessSavedBadge" class="quick-action-badge" hidden>0</span>
     </button>
-    <button type="button" id="quickAccessRemindBtn" class="quick-action" role="menuitem" data-qa-action="remind" aria-label="Erinnerungen" title="Erinnerungen">
+    <button type="button" id="quickAccessRemindBtn" class="quick-action" role="menuitem" data-qa-action="notifications" aria-label="Erinnerungen" title="Erinnerungen">
       <span class="quick-action-emoji" aria-hidden="true">🔔</span>
       <span id="quickAccessRemindStatus" class="quick-action-dot" hidden></span>
     </button>
@@ -26322,7 +26322,7 @@ function filterMoreFeatures(){const input=$("moreFeatureSearch");if(!input)retur
 
 
 function renderMoreQuickAccessSection(){
-  return `<section class="more-quick-access" aria-label="Schnellzugriff"><div class="more-quick-access__list"><button type="button" class="more-quick-access__chip" data-more-quick="orient" aria-label="Orientierung" title="Orientierung"><span aria-hidden="true">🧭</span></button><button type="button" class="more-quick-access__chip" data-more-quick="saved" aria-label="Merkliste" title="Merkliste"><span aria-hidden="true">❤️</span></button><button type="button" class="more-quick-access__chip" data-more-quick="remind" aria-label="Erinnerungen" title="Erinnerungen"><span aria-hidden="true">🔔</span></button><button type="button" class="more-quick-access__chip" data-more-quick="settings" aria-label="Einstellungen" title="Einstellungen"><span aria-hidden="true">⚙️</span></button></div></section>`;
+  return `<section class="more-quick-access" aria-label="Schnellzugriff"><div class="more-quick-access__list"><button type="button" class="more-quick-access__chip" data-more-quick="orient" aria-label="Orientierung" title="Orientierung"><span aria-hidden="true">🧭</span></button><button type="button" class="more-quick-access__chip" data-more-quick="saved" aria-label="Merkliste" title="Merkliste"><span aria-hidden="true">❤️</span></button><button type="button" class="more-quick-access__chip" data-more-quick="notifications" aria-label="Erinnerungen" title="Erinnerungen"><span aria-hidden="true">🔔</span></button><button type="button" class="more-quick-access__chip" data-more-quick="settings" aria-label="Einstellungen" title="Einstellungen"><span aria-hidden="true">⚙️</span></button></div></section>`;
 }
 
 function renderMore(){const groups=["Lernen & Wissen","Alltag & Gebet","Werkzeuge & Assistenten","Persönlich","App"];const items=featureCatalog();return `${setPageHeader("Mehr","Funktionen geordnet nach Lernen, Alltag, Werkzeugen und Einstellungen","Mehr")}${renderMoreQuickAccessSection()}${renderZakatMoreFocus()}<section class="feature-section"><div class="feature-head"><div><h3>Funktion suchen</h3><span>Tippe z. B. Qibla, Rechner oder Qurʾān.</span></div></div><input id="moreFeatureSearch" class="more-search" type="search" placeholder="Funktion suchen…" autocomplete="off"></section>${groups.map(group=>renderMoreGroup(group,items.filter(item=>item.group===group))).join("")}`}
@@ -27028,7 +27028,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v832";
+const APP_BUILD_ID="app-shell-v834";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -27950,7 +27950,7 @@ let quickMenuOpenedAt=0;
 let quickAccessDocListenersBound=false;
 
 const NAV_LONGPRESS_MENU_HTML={
-  more:`<button type="button" id="quickAccessOrientBtn" class="quick-action" role="menuitem" data-qa-action="orient" aria-label="Orientierung" title="Orientierung"><span class="quick-action-emoji" aria-hidden="true">🧭</span></button><button type="button" id="quickAccessSavedBtn" class="quick-action" role="menuitem" data-qa-action="saved" aria-label="Merkliste" title="Merkliste"><span class="quick-action-emoji" aria-hidden="true">❤️</span><span id="quickAccessSavedBadge" class="quick-action-badge" hidden>0</span></button><button type="button" id="quickAccessRemindBtn" class="quick-action" role="menuitem" data-qa-action="remind" aria-label="Erinnerungen" title="Erinnerungen"><span class="quick-action-emoji" aria-hidden="true">🔔</span><span id="quickAccessRemindStatus" class="quick-action-dot" hidden></span></button><button type="button" id="quickAccessSettingsBtn" class="quick-action" role="menuitem" data-qa-action="settings" aria-label="Einstellungen" title="Einstellungen"><span class="quick-action-emoji" aria-hidden="true">⚙️</span></button>`,
+  more:`<button type="button" id="quickAccessOrientBtn" class="quick-action" role="menuitem" data-qa-action="orient" aria-label="Orientierung" title="Orientierung"><span class="quick-action-emoji" aria-hidden="true">🧭</span></button><button type="button" id="quickAccessSavedBtn" class="quick-action" role="menuitem" data-qa-action="saved" aria-label="Merkliste" title="Merkliste"><span class="quick-action-emoji" aria-hidden="true">❤️</span><span id="quickAccessSavedBadge" class="quick-action-badge" hidden>0</span></button><button type="button" id="quickAccessRemindBtn" class="quick-action" role="menuitem" data-qa-action="notifications" aria-label="Erinnerungen" title="Erinnerungen"><span class="quick-action-emoji" aria-hidden="true">🔔</span><span id="quickAccessRemindStatus" class="quick-action-dot" hidden></span></button><button type="button" id="quickAccessSettingsBtn" class="quick-action" role="menuitem" data-qa-action="settings" aria-label="Einstellungen" title="Einstellungen"><span class="quick-action-emoji" aria-hidden="true">⚙️</span></button>`,
   quran:`<button type="button" id="quickAccessQuranContinueBtn" class="quick-action" role="menuitem" data-qa-action="continue-reading" aria-label="Weiterlesen" title="Weiterlesen"><span class="quick-action-emoji" aria-hidden="true">📖</span></button><button type="button" id="quickAccessQuranTopicsBtn" class="quick-action" role="menuitem" data-qa-action="quran-topics" aria-label="Themen" title="Themen"><span class="quick-action-emoji" aria-hidden="true">🗂️</span></button><button type="button" id="quickAccessQuranSearchBtn" class="quick-action" role="menuitem" data-qa-action="quran-search" aria-label="Durchsuchen" title="Durchsuchen"><span class="quick-action-emoji" aria-hidden="true">🔍</span></button>`
 };
 
@@ -28211,7 +28211,7 @@ function runQuickAccessAction(kind,btn){
     closeQuickAccessMenu();
     if(kind==="orient"){openQiblaFromFloat();return}
     if(kind==="saved"){navigate("saved");return}
-    if(kind==="remind"){navigate("notifications");return}
+    if(kind==="remind"||kind==="notifications"){navigate("notifications");return}
     if(kind==="settings"){navigate("settings");return}
     if(kind==="continue-reading"){openQuranContinueFromQuickAccess();return}
     if(kind==="quran-topics"){openQuranTopicsFromQuickAccess();return}
@@ -28374,7 +28374,7 @@ function bindMoreQuickAccessPageButtons(){
       const kind=btn.getAttribute("data-more-quick");
       if(kind==="orient"){openQiblaFromFloat();return}
       if(kind==="saved"){navigate("saved");return}
-      if(kind==="remind"){navigate("notifications");return}
+      if(kind==="remind"||kind==="notifications"){navigate("notifications");return}
       if(kind==="settings"){navigate("settings");return}
     });
   });

@@ -165,7 +165,7 @@ struct WebAppView: UIViewRepresentable {
           :null;
         if(!button)return;
         var action=button.getAttribute("data-qa-action")||button.getAttribute("data-more-quick");
-        if(action!=="orient"&&action!=="saved"&&action!=="remind"&&action!=="settings")return;
+        if(action!=="orient"&&action!=="saved"&&action!=="remind"&&action!=="notifications"&&action!=="settings")return;
         event.preventDefault();
         event.stopPropagation();
         if(event.stopImmediatePropagation)event.stopImmediatePropagation();
@@ -176,7 +176,7 @@ struct WebAppView: UIViewRepresentable {
             else location.hash="#qibla";
           }else if(action==="saved"){
             openRoute("saved","#saved");
-          }else if(action==="remind"){
+          }else if(action==="remind"||action==="notifications"){
             openRoute("notifications","#notifications");
           }else if(action==="settings"){
             openRoute("settings","#settings");
