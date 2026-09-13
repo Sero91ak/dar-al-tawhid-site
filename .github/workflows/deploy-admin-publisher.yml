@@ -23,6 +23,7 @@ on:
       - .github/workflows/setup-feed-api-keys.yml
       - cloudflare/onesignal-delivery.js
       - cloudflare/post-push-admin.js
+      - cloudflare/push-launch-urls.js
       - cloudflare/kurzlink-admin.js
       - cloudflare/zakat-prices.js
       - cloudflare/zakat-admin.js

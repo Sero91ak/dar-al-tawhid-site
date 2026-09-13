@@ -21,9 +21,9 @@ export function separatePushLaunchUrls(payload = {}) {
   const web = String(payload.web_url || payload.url || "").trim();
   const next = { ...payload };
   if (web) {
-    next.url = web;
     next.web_url = web;
     if (!next.app_url) next.app_url = `daraltawhid://in-app?src=${encodeURIComponent(web)}`;
+    delete next.url;
   }
   return withReliableIosPush(next);
 }

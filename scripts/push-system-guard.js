@@ -143,7 +143,8 @@ function runPushSystemGuard() {
   mustInclude("iOS-Push bleibt in der App", read("cloudflare/push-launch-urls.js"), [
     "separatePushLaunchUrls",
     "daraltawhid://in-app",
-    "web_url"
+    "web_url",
+    "delete next.url"
   ]);
 
   ["cloudflare/prayer-push-scheduler.js", "cloudflare/daily-push-scheduler.js", "cloudflare/post-push-admin.js"].forEach((file) => {
