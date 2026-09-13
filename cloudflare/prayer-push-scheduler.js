@@ -19,7 +19,8 @@ const SCHEDULE_LOOKAHEAD_MINUTES = 26 * 60;
 const SCHEDULE_GRACE_MINUTES = 15;
 /** Vorab-Push nur nachholen, wenn das Gebet noch in der gewählten Vorwarnzeit liegt (5/10/15 Min), nicht für morgen (~26h). */
 const ADVANCE_CATCHUP_MIN_REMAINING_MS = 90 * 1000;
-const ADVANCE_CATCHUP_MAX_REMAINING_MS = 20 * 60 * 1000;
+const ADVANCE_CATCHUP_MAX_REMAINING_MS = 45 * 60 * 1000;
+const PRAYER_NOTIFICATION_KEYS = ["fajr", "dhuhr", "asr", "maghrib", "isha"];
 /** Bump: alte OneSignal-Pushes mit „in 1573 Min“ nicht per Idempotency wiederverwenden. */
 const ADVANCE_COPY_VERSION = "fixed-min-v2";
 /** Gebetszeit-Push darf im gesamten Grace-Fenster nachgeholt werden, ohne sendAfter zu mutieren. */
@@ -157,6 +158,23 @@ function normTahajjud(v) {
   return ["off", "before30", "before60", "before90", "lastThird"].includes(s) ? s : "off";
 }
 
+function prayerEnabledForRow(row, key) {
+  const col = `prayer_${String(key || "").toLowerCase()}_enabled`;
+  if (row?.[col] === false || row?.[col] === "false") return false;
+  return true;
+}
+
+function prayerEnabledForGroup(group, key) {
+  const prefs = String(group?.prayerPrefs || "11111");
+  const idx = PRAYER_NOTIFICATION_KEYS.indexOf(String(key || "").toLowerCase());
+  if (idx < 0) return true;
+  return prefs[idx] !== "0";
+}
+
+function prayerPrefsKey(row) {
+  return PRAYER_NOTIFICATION_KEYS.map((key) => (prayerEnabledForRow(row, key) ? "1" : "0")).join("");
+}
+
 function tahajjudUtc(maghribUtc, fajrUtc, mode) {
   if (mode === "off" || !(fajrUtc > maghribUtc)) return null;
   if (mode === "before30") return new Date(fajrUtc.getTime() - 30 * 60000);
@@ -193,14 +211,17 @@ function prayerTimes(localDate, lat, lon, tz, methodAngle, asrFactor, tahajjudMo
 }
 
 async function loadRegistrations() {
-  const url = `${SUPABASE_URL}/rest/v1/prayer_push_registrations?enabled=eq.true&select=device_id,subscription_id,lat,lon,timezone,method_angle,asr_factor,advance_minutes,tahajjud_mode,city,last_synced_at`;
-  const res = await fetch(url, {
-    headers: {
-      apikey: SUPABASE_ANON_KEY,
-      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-      Accept: "application/json"
-    }
-  });
+  const baseSelect = "device_id,subscription_id,lat,lon,timezone,method_angle,asr_factor,advance_minutes,tahajjud_mode,city,last_synced_at";
+  const fullSelect = `${baseSelect},prayer_fajr_enabled,prayer_dhuhr_enabled,prayer_asr_enabled,prayer_maghrib_enabled,prayer_isha_enabled`;
+  const headers = {
+    apikey: SUPABASE_ANON_KEY,
+    Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+    Accept: "application/json"
+  };
+  let res = await fetch(`${SUPABASE_URL}/rest/v1/prayer_push_registrations?enabled=eq.true&select=${fullSelect}`, { headers });
+  if (!res.ok) {
+    res = await fetch(`${SUPABASE_URL}/rest/v1/prayer_push_registrations?enabled=eq.true&select=${baseSelect}`, { headers });
+  }
   const text = await res.text();
   if (!res.ok) throw new Error(`Supabase ${res.status}: ${text.slice(0, 200)}`);
   const rows = text ? JSON.parse(text) : [];
@@ -253,9 +274,10 @@ function groupRegistrations(rows, onlySubId = "") {
     const asrFactor = Number(row.asr_factor || 1);
     const advanceMinutes = normAdvance(row.advance_minutes);
     const tahajjudMode = normTahajjud(row.tahajjud_mode);
-    const key = [lat.toFixed(3), lon.toFixed(3), tz, methodAngle, asrFactor, advanceMinutes, tahajjudMode].join("|");
+    const prayerPrefs = prayerPrefsKey(row);
+    const key = [lat.toFixed(3), lon.toFixed(3), tz, methodAngle, asrFactor, advanceMinutes, tahajjudMode, prayerPrefs].join("|");
     if (!map.has(key)) {
-      map.set(key, { lat, lon, timeZone: tz, methodAngle, asrFactor, advanceMinutes, tahajjudMode, subscriptionIds: [] });
+      map.set(key, { lat, lon, timeZone: tz, methodAngle, asrFactor, advanceMinutes, tahajjudMode, prayerPrefs, subscriptionIds: [] });
     }
     if (!map.get(key).subscriptionIds.includes(sid)) map.get(key).subscriptionIds.push(sid);
   }
@@ -665,6 +687,7 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
 
     for (const day of days) {
       for (const prayer of prayerTimes(day, group.lat, group.lon, group.timeZone, group.methodAngle, group.asrFactor, group.tahajjudMode)) {
+        if (prayer.key !== "tahajjud" && !prayerEnabledForGroup(group, prayer.key)) continue;
         const entryAt = prayer.sendAfter || (prayer.time == null ? null : utcFromLocal(day, prayer.time, group.timeZone));
         if (!entryAt) continue;
 
@@ -681,7 +704,7 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
             const catchupAdvance =
               slot.mode === "advance" &&
               msToEntry > ADVANCE_CATCHUP_MIN_REMAINING_MS &&
-              msToEntry <= ADVANCE_CATCHUP_MAX_REMAINING_MS;
+              msToEntry <= Math.max(ADVANCE_CATCHUP_MAX_REMAINING_MS, normAdvance(group.advanceMinutes) * 60000 + 20 * 60000);
             const catchupEntry =
               slot.mode === "entry" &&
               msSinceEntry >= 0 &&

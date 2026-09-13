@@ -323,7 +323,7 @@ enum DarPushNotifications {
         await saveSupabaseRegistration(subscriptionId: subscriptionId, token: token, settings: settings)
         await postJSON("\(workerURL)/api/push/welcome", body: ["subscriptionId": subscriptionId])
         if bool(settings["reminder"]) {
-            await postJSON("\(workerURL)/api/prayer/schedule-now", body: ["subscriptionId": subscriptionId])
+            _ = await postJSON("\(workerURL)/api/prayer/schedule-now", body: ["subscriptionId": subscriptionId], retries: 4)
         }
         let locOk = number(settings["lat"]) != nil && number(settings["lon"]) != nil && bool(settings["locationGranted"] ?? settings["reminder"])
         var tags: [String: String] = [
@@ -340,6 +340,9 @@ enum DarPushNotifications {
             "jummah_notifications": bool(settings["jummahNotifications"]) ? "true" : "false",
             "prayer_notifications": bool(settings["reminder"]) && locOk ? "true" : "false"
         ]
+        for key in ["fajr", "dhuhr", "asr", "maghrib", "isha"] {
+            tags["prayer_\(key)_notifications"] = notificationPrayerEnabled(key, settings: settings) ? "true" : "false"
+        }
         if locOk, let lat = number(settings["lat"]), let lon = number(settings["lon"]) {
             tags["prayer_lat"] = String(format: "%.5f", lat)
             tags["prayer_lon"] = String(format: "%.5f", lon)
@@ -380,6 +383,9 @@ enum DarPushNotifications {
             "jummah_morning_time": settings["jummahMorningTime"] as? String ?? "09:00",
             "jummah_advance_minutes": Int(number(settings["jummahAdvanceMinutes"]) ?? 30)
         ]
+        for key in ["fajr", "dhuhr", "asr", "maghrib", "isha"] {
+            body["prayer_\(key)_enabled"] = notificationPrayerEnabled(key, settings: settings)
+        }
         if let token, !token.isEmpty {
             body["push_token"] = token
         } else {
@@ -418,7 +424,18 @@ enum DarPushNotifications {
     #endif
 
     @discardableResult
-    private static func postJSON(_ url: String, body: [String: Any]) async -> Bool {
+    private static func postJSON(_ url: String, body: [String: Any], retries: Int = 1) async -> Bool {
+        for attempt in 0..<max(1, retries) {
+            if await postJSONOnce(url, body: body) { return true }
+            if attempt < retries - 1 {
+                try? await Task.sleep(nanoseconds: UInt64(600_000_000 + attempt * 400_000_000))
+            }
+        }
+        return false
+    }
+
+    @discardableResult
+    private static func postJSONOnce(_ url: String, body: [String: Any]) async -> Bool {
         guard JSONSerialization.isValidJSONObject(body),
               let data = try? JSONSerialization.data(withJSONObject: body) else { return false }
         var req = URLRequest(url: URL(string: url)!)
@@ -499,27 +516,53 @@ enum DarPushNotifications {
         UNUserNotificationCenter.current().add(UNNotificationRequest(identifier: id, content: content, trigger: trigger))
     }
 
+    private static func notificationPrayerSettingKey(_ key: String) -> String {
+        let cap = key.prefix(1).uppercased() + key.dropFirst()
+        return "prayer" + cap
+    }
+
+    private static func notificationPrayerEnabled(_ key: String, settings: [String: Any]) -> Bool {
+        let prop = notificationPrayerSettingKey(key)
+        if settings[prop] == nil { return true }
+        return bool(settings[prop])
+    }
+
+    private struct PrayerNotificationCandidate {
+        let slot: DarPrayerSlot
+        let fire: Date
+        let advance: Bool
+    }
+
     private static func schedulePrayers(from snap: DarWidgetSnapshot) {
-        let minutes = Int(number(storedWebSettings()["advanceMinutes"]) ?? 15)
-        let center = UNUserNotificationCenter.current()
+        let settings = storedWebSettings()
+        let minutes = Int(number(settings["advanceMinutes"]) ?? 15)
         let now = Date()
         let cal = Calendar.current
-        var queued = 0
+        var candidates: [PrayerNotificationCandidate] = []
         for dayOffset in 0..<4 {
             guard let day = cal.date(byAdding: .day, value: dayOffset, to: now) else { continue }
             let slots = DarPrayerEngine.times(for: day, lat: snap.latitude, lng: snap.longitude)
             for slot in slots where slot.id != "sunrise" {
-                guard let fire = DarPrayerEngine.date(for: slot, on: day) else { continue }
-                if fire > now, queued < 50 {
-                    enqueue(slot: slot, fire: fire, advance: false, minutes: minutes, into: center)
-                    queued += 1
+                if slot.id == "tahajjud" {
+                    let mode = settings["tahajjudMode"] as? String ?? "off"
+                    if mode == "off" { continue }
+                } else if !notificationPrayerEnabled(slot.id, settings: settings) {
+                    continue
                 }
-                let advance = fire.addingTimeInterval(TimeInterval(-minutes * 60))
-                if advance > now, queued < 50 {
-                    enqueue(slot: slot, fire: advance, advance: true, minutes: minutes, into: center)
-                    queued += 1
+                guard let fire = DarPrayerEngine.date(for: slot, on: day) else { continue }
+                if fire > now {
+                    candidates.append(.init(slot: slot, fire: fire, advance: false))
+                }
+                let advanceFire = fire.addingTimeInterval(TimeInterval(-minutes * 60))
+                if advanceFire > now, slot.id != "tahajjud" {
+                    candidates.append(.init(slot: slot, fire: advanceFire, advance: true))
                 }
             }
+        }
+        candidates.sort { $0.fire < $1.fire }
+        let center = UNUserNotificationCenter.current()
+        for item in candidates.prefix(50) {
+            enqueue(slot: item.slot, fire: item.fire, advance: item.advance, minutes: minutes, into: center)
         }
     }
 
