@@ -1610,25 +1610,9 @@
       });
 
       detail.querySelectorAll("[data-library-download]").forEach((btn) => {
-        btn.onclick = async () => {
+        btn.onclick = () => {
           if (!canDownload(pub)) return;
-          if (shouldUseNativePdfViewer()) {
-            navigateReader(pub.slug);
-            return;
-          }
-          try {
-            const blob = await fetchPdfBlob(pub);
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = `${pub.slug || pub.id}.pdf`;
-            a.click();
-            setTimeout(() => URL.revokeObjectURL(url), 4000);
-            trackLibraryEvent("library_download", pub);
-            scheduleLibraryStatsRefresh(pub.id);
-          } catch (e) {
-            alert("Der Download konnte nicht abgeschlossen werden. Bitte versuche es erneut.");
-          }
+          navigateReader(pub.slug);
         };
       });
 
