@@ -1770,4 +1770,17 @@
       uiState = { query: "", category: "Alle", catOpen: false };
     }
   };
+
+  if (!global.__darLibraryProgressRefreshInstalled) {
+    global.__darLibraryProgressRefreshInstalled = true;
+    const refreshLibraryIfVisible = () => {
+      if (typeof global.render !== "function") return;
+      if (isReaderHashActive()) return;
+      const hash = String(global.location.hash || "");
+      if (!/^#bibliothek\//i.test(hash)) return;
+      global.render();
+    };
+    global.addEventListener("pageshow", refreshLibraryIfVisible);
+    global.addEventListener("focus", refreshLibraryIfVisible);
+  }
 })(window);

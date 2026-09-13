@@ -1688,7 +1688,12 @@ struct WebAppView: UIViewRepresentable {
             let escapedSlug = slug
                 .replacingOccurrences(of: "\\", with: "\\\\")
                 .replacingOccurrences(of: "'", with: "\\'")
-            let js = "window.location.hash = '#bibliothek/\(escapedSlug)';"
+            let js = """
+            (function(){
+              window.location.hash = '#bibliothek/\(escapedSlug)';
+              if (typeof window.render === 'function') window.render();
+            })();
+            """
             webView.evaluateJavaScript(js, completionHandler: nil)
         }
 
