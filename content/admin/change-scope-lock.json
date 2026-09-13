@@ -94,6 +94,25 @@
   ],
   "unlockedScopes": [
     {
+      "id": "library-pdf-fullpage-hires-2026-09-13",
+      "approvedBy": "user-explicit-pdf-jetzt-lesen-volle-scharfe-seite-jede-app",
+      "reason": "Nutzer: PDF und Jetzt lesen öffnen abgeschnitten und unscharf. PDF-Button eigene volle, ungeschnittene, hochaufgelöste Seite, global jede App.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/library/library-app.js",
+        "assets/library/library-app.css",
+        "test/assets/library/library-app.js",
+        "test/assets/library/library-app.css"
+      ],
+      "expiresAt": "2026-09-14T23:59:00.000Z"
+    },
+    {
       "id": "quick-access-direct-notifications-settings-2026-09-13",
       "approvedBy": "user-explicit-glocke-einstellungen-direkt-jede-app",
       "reason": "Nutzer: Glocke muss Benachrichtigungen direkt öffnen, Zahnrad Einstellungen direkt, global jede App, nicht nur Mehr.",
