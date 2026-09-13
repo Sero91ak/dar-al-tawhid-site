@@ -1,4 +1,4 @@
-name: Fix links branding and App Store
+name: Fix links header and App Store icon
 
 on:
   push:
@@ -15,43 +15,51 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Rebuild links page with requested branding and App Store row
+      - name: Patch links page exactly as requested
         shell: python
         run: |
-          import subprocess, pathlib
+          import pathlib, subprocess
+
           base = '39f09310a8848bb539aaf1c6bf6265832aa9a48d'
-          original = subprocess.check_output(['git','show',f'{base}:links/index.html'], text=True)
-          text = original
+          text = subprocess.check_output(['git', 'show', f'{base}:links/index.html'], text=True)
 
-          old_header = '<header>\n      <div class="quote">'
-          new_header = '<header>\n      <div class="brand brand-top"><p class="by">by Serhat Abu Malik</p></div>\n      <div class="quote">'
-          assert old_header in text
-          text = text.replace(old_header, new_header, 1)
+          old_start = '<header>\n      <div class="quote">'
+          new_start = '<header>\n      <div class="brand"><h1>DĀR AL TAWḤĪD</h1><p class="by">by Serhat Abu Malik</p><p class="sub">OFFIZIELLE KANÄLE</p></div>\n      <div class="quote">'
+          assert old_start in text, 'header/quote start not found'
+          text = text.replace(old_start, new_start, 1)
 
-          old_brand = '<div class="brand"><h1>DAR AL TAWḤĪD</h1><p class="by">by Serhat Abu Malik</p><p class="sub">OFFIZIELLE KANÄLE</p></div>'
-          new_brand = '<div class="brand"><h1>DĀR AL TAWḤĪD</h1><p class="sub">OFFIZIELLE KANÄLE</p></div>'
-          assert old_brand in text
-          text = text.replace(old_brand, new_brand, 1)
-
-          css_anchor = '.brand .by{margin:5px 0 0;'
-          assert css_anchor in text
-          text = text.replace(css_anchor, '.brand-top{margin:0 0 7px}.brand-top .by{margin:0}' + css_anchor, 1)
+          old_brand = '\n      <div class="brand"><h1>DAR AL TAWḤĪD</h1><p class="by">by Serhat Abu Malik</p><p class="sub">OFFIZIELLE KANÄLE</p></div>'
+          assert old_brand in text, 'old brand block not found'
+          text = text.replace(old_brand, '', 1)
 
           marker = '      <button class="row app" id="openApp" type="button">'
           start = text.find(marker)
-          assert start != -1, 'Original Web-App row not found'
+          assert start != -1, 'Web-App button not found'
           end = text.find('</button>', start)
-          assert end != -1, 'Original Web-App row end not found'
+          assert end != -1, 'Web-App button end not found'
           end += len('</button>')
-          appstore = '\n      <a class="row" style="--accent:#2497e8" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD im Apple App Store öffnen"><span class="emblem" aria-hidden="true"><img class="emblem-img" src="/assets/app-store-icon-fixed.svg" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:contain" /></span><span class="text"><span class="label">App Store</span><span class="value">DĀR AL TAWḤĪD App</span></span><span class="go">›</span></a>'
+          appstore = '\n      <a class="row appstore" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD im Apple App Store öffnen"><span class="emblem" aria-hidden="true"><img class="emblem-img" src="/assets/app-store-icon-fixed.svg?v=20260913c" alt="" /></span><span class="text"><span class="label">App Store</span><span class="value">DĀR AL TAWḤĪD App</span></span><span class="go">›</span></a>'
           text = text[:end] + appstore + text[end:]
 
+          css = '''
+/* requested final header and App Store icon corrections */
+header>.brand{margin:0 0 7px;text-align:center}
+header>.brand h1{font-family:var(--serif);font-size:clamp(34px,8.7vw,62px);line-height:.98;letter-spacing:.055em;white-space:nowrap;text-shadow:0 10px 28px rgba(0,0,0,.65);overflow:hidden}
+header>.brand .by{margin:5px 0 0;font-family:var(--script);font-size:clamp(22px,5.3vw,34px);line-height:.96;color:#e3c57c;letter-spacing:.03em;white-space:nowrap;transform:scaleX(1.06);text-shadow:0 0 19px rgba(216,178,96,.18),0 8px 24px rgba(0,0,0,.34)}
+header>.quote{margin:0 auto 8px}
+.appstore{--accent:#2497e8}
+.appstore .emblem{background:#f7f1e5;color:#111;overflow:hidden}
+.appstore .emblem .emblem-img{width:100%;height:100%;border-radius:50%;object-fit:contain!important;display:block;padding:0;background:#fff;filter:drop-shadow(0 2px 4px rgba(0,0,0,.38))}
+'''
+          text = text.replace('</style>', css + '</style>', 1)
+
           pathlib.Path('links/index.html').write_text(text, encoding='utf-8')
-      - name: Commit links page correction
+          pathlib.Path('.github/workflows/fix-links-appstore-only.yml').unlink()
+      - name: Commit correction and remove temporary workflow
         run: |
           git config user.name "Serhat Abu Malik"
           git config user.email "73606501+Sero91ak@users.noreply.github.com"
-          git add links/index.html
+          git add links/index.html .github/workflows/fix-links-appstore-only.yml
           git diff --cached --quiet && exit 0
-          git commit -m "Links: move byline up, fix DĀR title and App Store icon"
+          git commit -m "Links: move brand header up and fix App Store icon"
           git push
