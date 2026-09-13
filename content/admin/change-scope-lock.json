@@ -94,6 +94,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "links-appstore-icon-only-2026-09-13",
+      "approvedBy": "user-explicit-links-appstore-icon-only",
+      "reason": "Nutzer: Nur das Apple App Store Icon im separaten App-Store-Link rund korrekt einbauen; alte Icons unverändert lassen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "links/index.html",
+        "assets/app-store-icon-fixed.svg",
+        "assets/app-store-icon.png"
+      ],
+      "expiresAt": "2026-09-14T23:59:00.000Z"
+    },
+    {
       "id": "ios-onesignal-uuid-testflight-54-2026-09-13",
       "approvedBy": "user-explicit-ios-onesignal-testflight-subscription-uuid",
       "reason": "Nutzer: echte OneSignal-UUID statt APNs-Token, Server-Registrierung, TestFlight 54.",
