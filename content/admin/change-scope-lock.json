@@ -94,6 +94,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "app-update-news-visible-berlin-time-2026-09-13",
+      "approvedBy": "user-explicit-app-update-zeiten-news-abgelaufen",
+      "reason": "Nutzer: App-Update-Uhrzeiten falsch, News in der App abgelaufen obwohl Admin LIVE.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/updates/current.json",
+        "content/staging/updates/current.json",
+        "index.html",
+        "test/index.html",
+        "admin/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-09-14T23:59:00.000Z"
+    },
+    {
       "id": "reminder-ios-push-visible-sound-2026-09-13",
       "approvedBy": "user-explicit-heute-empfohlen-ios-push-sound-data-banner",
       "reason": "Nutzer: Heute empfohlen/Duʿāʾ/Gebetszeiten als echte iOS-Push mit Ton, Datenpayload, Foreground-Banner und lokaler Zeit.",

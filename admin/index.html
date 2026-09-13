@@ -1041,6 +1041,13 @@ function newsSummaryLabel(){
   if(drafts)return `${drafts} Entwurf`;
   return "Keine Meldung";
 }
+function formatAdminBerlin(value, withYear=false){
+  const d=value instanceof Date?value:new Date(value);
+  if(!Number.isFinite(d.getTime()))return "—";
+  const opts={timeZone:"Europe/Berlin",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"};
+  if(withYear)opts.year="numeric";
+  return d.toLocaleString("de-DE",opts);
+}
 function newsItemExpiresAt(item){
   const expires=Date.parse(item?.expiresAt||"");
   if(Number.isFinite(expires))return expires;
@@ -1092,7 +1099,7 @@ function formatNewsUntil(item){
   const diff=exp-Date.now();
   if(diff<=0)return "abgelaufen";
   const hours=Math.ceil(diff/3600000);
-  if(hours>=48)return `bis ${new Date(exp).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}`;
+  if(hours>=48)return `bis ${formatAdminBerlin(exp)}`;
   return `noch ~${hours} Std.`;
 }
 async function fetchLiveNewsItems({force=false}={}){
@@ -2931,7 +2938,7 @@ function renderShell(){
       </select>
     </nav>
     ${body}
-    <div class="meta-line">Aktualisiert: ${esc(data.updated.toLocaleString("de-DE"))} · Auto-Refresh alle ${refreshSec} Sekunden${currentTab==="besucher"?" · Besucher-Live":""}</div>`;
+    <div class="meta-line">Aktualisiert (Europe/Berlin): ${esc(formatAdminBerlin(data.updated,true))} · Auto-Refresh alle ${refreshSec} Sekunden${currentTab==="besucher"?" · Besucher-Live":""}</div>`;
   bindUi();
   enhanceAdminCollapsibles();
   updateAdminBackButton();
@@ -3268,7 +3275,7 @@ function filteredNewsItems(){
 function newsManageRow(item){
   const status=newsItemStatus(item);
   const full=String(item.text||"").trim();
-  const created=item.createdAt?new Date(item.createdAt).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"—";
+  const created=item.createdAt?formatAdminBerlin(item.createdAt):"—";
   const canDelete=status!=="gelöscht";
   return `<details class="news-row">
     <summary>
@@ -3293,7 +3300,7 @@ function newsLiveCard(item){
     <div class="news-card-head">
       <span class="news-pill live">Live</span>
       <b>${esc(item.title||"News")}</b>
-      <span class="news-meta">${esc(formatNewsUntil(item))} · ${esc(new Date(item.createdAt||Date.now()).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}))}</span>
+      <span class="news-meta">${esc(formatAdminBerlin(item.createdAt||Date.now()))} · ${esc(formatNewsUntil(item))} · Europe/Berlin</span>
     </div>
     <p class="news-card-text" id="newsLiveText-${esc(item.id)}">${esc(short)}</p>
     ${needsMore?`<button class="btn news-expand-btn" type="button" data-news-live-expand="${esc(item.id)}">Mehr anzeigen</button>`:""}
@@ -3365,7 +3372,7 @@ function renderNewsManageSection(){
       <button class="btn" id="newsRefreshLiveBtn" type="button"${liveNewsLoading?" disabled":""}>${liveNewsLoading?"Lädt…":"Aktualisieren"}</button>
     </div>
     <div class="news-manage-list">${rows.length?rows.map(newsManageRow).join(""):`<div class="empty">${liveNewsLoading?"News werden geladen…":"Keine News in diesem Filter."}</div>`}</div>
-    <div class="news-sync-note" style="margin-top:8px">${liveNewsFetchedAt?`Zuletzt: ${liveNewsFetchedAt.toLocaleTimeString("de-DE")} · content/updates/current.json`:"Synchron mit dem Server"}</div>
+    <div class="news-sync-note" style="margin-top:8px">${liveNewsFetchedAt?`Stand (Europe/Berlin): ${formatAdminBerlin(liveNewsFetchedAt)} · content/updates/current.json`:"Synchron mit dem Server"}</div>
   </div>`;
 }
 function renderNews(){
