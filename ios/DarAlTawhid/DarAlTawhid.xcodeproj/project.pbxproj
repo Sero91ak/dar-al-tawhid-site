@@ -93,6 +93,7 @@
 		A1000000000000000000001E /* DarAppIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000001F /* DarAppIcons.swift */; };
 		A50000000000000000000001 /* DarNativePermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50000000000000000000011 /* DarNativePermissions.swift */; };
 		A1000000000000000000000C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000000000000000000014 /* WidgetKit.framework */; };
+		B80000000000000000000001 /* OneSignalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = B80000000000000000000002 /* OneSignalFramework */; };
 		A10000000000000000000006 /* DarDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000011 /* DarDeepLink.swift */; };
 		A10000000000000000000007 /* DarWidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000012 /* DarWidgetSnapshot.swift */; };
 		A10000000000000000000008 /* DarWidgetStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000013 /* DarWidgetStore.swift */; };
@@ -243,6 +244,7 @@
 			files = (
 				A10000000000000000000004 /* WebKit.framework in Frameworks */,
 				A1000000000000000000000C /* WidgetKit.framework in Frameworks */,
+				B80000000000000000000001 /* OneSignalFramework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +432,9 @@
 				A70000000000000000000004 /* PBXTargetDependency */,
 			);
 			name = DarAlTawhid;
+			packageProductDependencies = (
+				B80000000000000000000002 /* OneSignalFramework */,
+			);
 			productName = DarAlTawhid;
 			productReference = A10000000000000000000010 /* DarAlTawhid.app */;
 			productType = "com.apple.product-type.application";
@@ -467,6 +472,9 @@
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 						};
 					};
 					A20000000000000000000040 = {
@@ -488,6 +496,9 @@
 				Base,
 			);
 			mainGroup = A10000000000000000000030;
+			packageReferences = (
+				B80000000000000000000003 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
+			);
 			productRefGroup = A10000000000000000000033 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -669,7 +680,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 52;
+				CURRENT_PROJECT_VERSION = 53;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -740,7 +751,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 52;
+				CURRENT_PROJECT_VERSION = 53;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -806,7 +817,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = Widgets/Widgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 52;
+				CURRENT_PROJECT_VERSION = 53;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Widgets/Info.plist;
@@ -833,7 +844,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = Widgets/Widgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 52;
+				CURRENT_PROJECT_VERSION = 53;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Widgets/Info.plist;
@@ -886,6 +897,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B80000000000000000000003 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.10;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B80000000000000000000002 /* OneSignalFramework */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B80000000000000000000003 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignalFramework;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A10000000000000000000070 /* Project object */;
 }

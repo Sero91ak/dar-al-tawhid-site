@@ -402,6 +402,10 @@ struct WebAppView: UIViewRepresentable {
                   os:window.OneSignal||{}
                 };
               }
+              window.DAR_ONE_SIGNAL_READY=!!window.DAR_IOS_ONESIGNAL_ID;
+              window.waitForOneSignalReady=function(){
+                return Promise.resolve(window.DAR_IOS_ONESIGNAL_ID?{User:{PushSubscription:{id:window.DAR_IOS_ONESIGNAL_ID,token:window.DAR_IOS_PUSH_TOKEN,optedIn:true}}}:null);
+              };
               window.hasNotificationApi=function(){return true};
               window.getNotificationPermission=function(){return window.__darPushPermission||"default"};
               window.waitForPushSubscriptionReady=function(){return Promise.resolve(state())};
