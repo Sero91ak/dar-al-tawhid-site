@@ -20,6 +20,7 @@ import {
   ensurePrayerSchedulerFresh,
   triggerPrayerWorkflowForSubscription
 } from "./prayer-push-admin.js";
+import { registerNativeIosPush } from "./ios-native-push-register.js";
 import {
   readDailyPushStatus,
   readDailyPushConfig,
@@ -198,6 +199,12 @@ export default {
       if (url.pathname === "/api/jummah/status" && request.method === "GET") {
         const result = await readJummahPushStatus(env, githubGet, base64ToUtf8);
         return json(result, cors, 200);
+      }
+
+      if (url.pathname === "/api/prayer/register-native" && request.method === "POST") {
+        const input = await request.json().catch(() => ({}));
+        const result = await registerNativeIosPush(env, input);
+        return json(result, cors, result.ok ? 200 : 503);
       }
 
       if (url.pathname === "/api/prayer/schedule-now" && request.method === "POST") {

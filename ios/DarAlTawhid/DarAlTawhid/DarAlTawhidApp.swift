@@ -35,6 +35,12 @@ final class DarAppDelegate: NSObject, UIApplicationDelegate {
         completionHandler(true)
     }
 
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        DarPushNotifications.didRegister(deviceToken: deviceToken)
+    }
+
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {}
+
     private func shortcutDestination(for type: String) -> DarDeepLink.Destination? {
         switch type.lowercased().split(separator: ".").last.map(String.init) {
         case "prayer": return .prayer

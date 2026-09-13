@@ -1,9 +1,6 @@
 import Foundation
 import UIKit
 import UserNotifications
-#if !targetEnvironment(macCatalyst)
-import OneSignalFramework
-#endif
 
 enum DarPushNotifications {
     static let oneSignalAppId = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e"
@@ -18,40 +15,16 @@ enum DarPushNotifications {
     private static let staleTokenKey = "dar.push.token"
     private static var didBoot = false
     private static var lastScheduleAt: TimeInterval = 0
-    #if !targetEnvironment(macCatalyst)
-    private static let clickListener = DarOneSignalClickListener()
-    private static let foregroundListener = DarOneSignalForegroundListener()
-    private static let subscriptionObserver = DarOneSignalSubscriptionObserver()
-    #endif
+    private static var registerInFlight = false
 
     static func bootstrap(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         clearStaleApnsAsSubscriptionId()
-        #if targetEnvironment(macCatalyst)
-        syncPermissionToWeb()
-        #else
         guard !didBoot else {
             Task { await publishSubscriptionToWebAndServer() }
             return
         }
         didBoot = true
-        #if DEBUG
-        OneSignal.Debug.setLogLevel(.LL_VERBOSE)
-        #else
-        OneSignal.Debug.setLogLevel(.LL_WARN)
-        #endif
-        OneSignal.initialize(oneSignalAppId, withLaunchOptions: launchOptions)
-        OneSignal.Notifications.addClickListener(clickListener)
-        OneSignal.Notifications.addForegroundLifecycleListener(foregroundListener)
-        OneSignal.User.pushSubscription.addObserver(subscriptionObserver)
-        OneSignal.login(deviceId())
-        OneSignal.User.addTags([
-            "dar_push": "true",
-            "platform": "ios",
-            "dar_app": "true",
-            "dar_client": "native_ios",
-            "dar_surface": "native",
-            "push_site": "dar-al-tawhid"
-        ])
+        UNUserNotificationCenter.current().delegate = DarPushCenter.shared
         optInAfterPermission(fallbackToSettings: false)
         NotificationCenter.default.addObserver(
             forName: UIApplication.didBecomeActiveNotification,
@@ -60,7 +33,6 @@ enum DarPushNotifications {
         ) { _ in
             Task { await publishSubscriptionToWebAndServer() }
         }
-        #endif
     }
 
     static func requestAuthorization() {
@@ -72,19 +44,20 @@ enum DarPushNotifications {
     }
 
     private static func optInAfterPermission(fallbackToSettings: Bool) {
-        #if !targetEnvironment(macCatalyst)
-        OneSignal.Notifications.requestPermission({ granted in
-            if granted {
-                OneSignal.User.pushSubscription.optIn()
-            }
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
             DispatchQueue.main.async {
+                if granted {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
                 syncPermissionToWeb()
                 Task { await publishSubscriptionToWebAndServer() }
             }
-        }, fallbackToSettings: fallbackToSettings)
-        #else
-        syncPermissionToWeb()
-        #endif
+            if !granted, fallbackToSettings, let url = URL(string: UIApplication.openSettingsURLString) {
+                DispatchQueue.main.async {
+                    UIApplication.shared.open(url)
+                }
+            }
+        }
     }
 
     static func syncPermissionToWeb() {
@@ -148,6 +121,13 @@ enum DarPushNotifications {
         )
     }
 
+    static func didRegister(deviceToken: Data) {
+        let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        guard let clean = sanitizedApnsToken(token) else { return }
+        UserDefaults.standard.set(clean, forKey: lastTokenKey)
+        Task { await publishSubscriptionToWebAndServer() }
+    }
+
     static func deviceId() -> String {
         if let existing = UserDefaults.standard.string(forKey: deviceIdKey), !existing.isEmpty {
             return existing
@@ -158,21 +138,11 @@ enum DarPushNotifications {
     }
 
     static func lastSubscriptionId() -> String {
-        #if !targetEnvironment(macCatalyst)
-        if let live = sanitizedSubscriptionId(OneSignal.User.pushSubscription.id) {
-            return live
-        }
-        #endif
-        return sanitizedSubscriptionId(UserDefaults.standard.string(forKey: lastSubKey)) ?? ""
+        sanitizedSubscriptionId(UserDefaults.standard.string(forKey: lastSubKey)) ?? ""
     }
 
     static func pushToken() -> String {
-        #if !targetEnvironment(macCatalyst)
-        if let live = sanitizedApnsToken(OneSignal.User.pushSubscription.token) {
-            return live
-        }
-        #endif
-        return sanitizedApnsToken(UserDefaults.standard.string(forKey: lastTokenKey)) ?? ""
+        sanitizedApnsToken(UserDefaults.standard.string(forKey: lastTokenKey)) ?? ""
     }
 
     static func sanitizedSubscriptionId(_ raw: String?) -> String? {
@@ -213,20 +183,25 @@ enum DarPushNotifications {
     }
 
     static func publishSubscriptionToWebAndServer() async {
-        #if !targetEnvironment(macCatalyst)
-        guard let subscriptionId = await waitForSubscriptionId() else {
+        guard let token = sanitizedApnsToken(UserDefaults.standard.string(forKey: lastTokenKey)) else {
             await MainActor.run {
                 NotificationCenter.default.post(name: .darNativePushReady, object: nil)
                 syncPermissionToWeb()
             }
             return
         }
-        UserDefaults.standard.set(subscriptionId, forKey: lastSubKey)
-        let token = sanitizedApnsToken(OneSignal.User.pushSubscription.token)
-        if let token { UserDefaults.standard.set(token, forKey: lastTokenKey) }
+
         let settings = UserDefaults.standard.dictionary(forKey: settingsKey) ?? [:]
+        guard let subscriptionId = await ensureOneSignalSubscription(token: token, settings: settings) else {
+            await MainActor.run {
+                NotificationCenter.default.post(name: .darNativePushReady, object: nil)
+                syncPermissionToWeb()
+            }
+            return
+        }
+
+        UserDefaults.standard.set(subscriptionId, forKey: lastSubKey)
         await saveSupabaseRegistration(subscriptionId: subscriptionId, token: token, settings: settings)
-        applyReminderTags(settings)
         if bool(settings["reminder"]), number(settings["lat"]) != nil, number(settings["lon"]) != nil {
             let now = Date().timeIntervalSince1970
             if now - lastScheduleAt > 20 {
@@ -238,11 +213,40 @@ enum DarPushNotifications {
             NotificationCenter.default.post(name: .darNativePushReady, object: nil)
             syncPermissionToWeb()
         }
-        #endif
     }
 
-    private static func applyReminderTags(_ settings: [String: Any]) {
-        #if !targetEnvironment(macCatalyst)
+    private static func ensureOneSignalSubscription(token: String, settings: [String: Any]) async -> String? {
+        if let cached = sanitizedSubscriptionId(UserDefaults.standard.string(forKey: lastSubKey)) {
+            return cached
+        }
+        if registerInFlight {
+            return await waitForSubscriptionId()
+        }
+        registerInFlight = true
+        defer { registerInFlight = false }
+
+        let payload: [String: Any] = [
+            "deviceId": deviceId(),
+            "pushToken": token,
+            "tags": reminderTags(settings)
+        ]
+        guard let data = try? JSONSerialization.data(withJSONObject: payload),
+              let response = try? await URLSession.shared.data(for: {
+                  var req = URLRequest(url: URL(string: "\(workerURL)/api/prayer/register-native")!)
+                  req.httpMethod = "POST"
+                  req.httpBody = data
+                  req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                  return req
+              }()),
+              let json = try? JSONSerialization.jsonObject(with: response.0) as? [String: Any],
+              let subscriptionId = sanitizedSubscriptionId(json["subscriptionId"] as? String) else {
+            return sanitizedSubscriptionId(UserDefaults.standard.string(forKey: lastSubKey))
+        }
+        UserDefaults.standard.set(subscriptionId, forKey: lastSubKey)
+        return subscriptionId
+    }
+
+    private static func reminderTags(_ settings: [String: Any]) -> [String: String] {
         let locOk = number(settings["lat"]) != nil && number(settings["lon"]) != nil
         var tags: [String: String] = [
             "dar_push": "true",
@@ -261,8 +265,7 @@ enum DarPushNotifications {
             tags["prayer_lon"] = String(format: "%.5f", lon)
             tags["prayer_advance_minutes"] = String(Int(number(settings["advanceMinutes"]) ?? 15))
         }
-        OneSignal.User.addTags(tags)
-        #endif
+        return tags
     }
 
     private static func saveSupabaseRegistration(subscriptionId: String, token: String?, settings: [String: Any]) async {
@@ -307,16 +310,14 @@ enum DarPushNotifications {
         _ = try? await URLSession.shared.data(for: req)
     }
 
-    #if !targetEnvironment(macCatalyst)
     private static func waitForSubscriptionId() async -> String? {
-        if let id = sanitizedSubscriptionId(OneSignal.User.pushSubscription.id) { return id }
+        if let id = sanitizedSubscriptionId(UserDefaults.standard.string(forKey: lastSubKey)) { return id }
         for _ in 0..<40 {
             try? await Task.sleep(nanoseconds: 250_000_000)
-            if let id = sanitizedSubscriptionId(OneSignal.User.pushSubscription.id) { return id }
+            if let id = sanitizedSubscriptionId(UserDefaults.standard.string(forKey: lastSubKey)) { return id }
         }
-        return sanitizedSubscriptionId(OneSignal.User.pushSubscription.id)
+        return sanitizedSubscriptionId(UserDefaults.standard.string(forKey: lastSubKey))
     }
-    #endif
 
     @discardableResult
     private static func postJSON(_ url: String, body: [String: Any]) async -> Bool {
@@ -370,31 +371,23 @@ extension Notification.Name {
     static let darNativePushPermission = Notification.Name("darNativePushPermission")
 }
 
-#if !targetEnvironment(macCatalyst)
-final class DarOneSignalClickListener: NSObject, OSNotificationClickListener {
-    func onClick(event: OSNotificationClickEvent) {
-        let extra = event.notification.additionalData ?? [:]
-        var info: [AnyHashable: Any] = [:]
-        extra.forEach { info[$0] = $1 }
-        if let launch = event.notification.launchURL, info["url"] == nil {
-            info["url"] = launch
-        }
-        if let clickURL = event.result.url, info["url"] == nil {
-            info["url"] = clickURL
-        }
-        DarPushNotifications.openFromNotification(userInfo: info)
-    }
-}
+final class DarPushCenter: NSObject, UNUserNotificationCenterDelegate {
+    static let shared = DarPushCenter()
 
-final class DarOneSignalForegroundListener: NSObject, OSNotificationLifecycleListener {
-    func onWillDisplay(event: OSNotificationWillDisplayEvent) {
-        event.notification.display()
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        completionHandler([.banner, .sound, .badge])
     }
-}
 
-final class DarOneSignalSubscriptionObserver: NSObject, OSPushSubscriptionObserver {
-    func onPushSubscriptionDidChange(state: OSPushSubscriptionChangedState) {
-        Task { await DarPushNotifications.publishSubscriptionToWebAndServer() }
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
+        DarPushNotifications.openFromNotification(userInfo: response.notification.request.content.userInfo)
+        completionHandler()
     }
 }
-#endif
