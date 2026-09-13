@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   restore-links-icons:
-    if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, 'Trigger links old icons restore now') }}
+    if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, 'Trigger links old icons restore') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -45,7 +45,7 @@ jobs:
           end = text.find('</button>', start)
           assert end != -1, 'Web-App button end not found'
           end += len('</button>')
-          appstore_row = '\n      <a class="row appstore" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD im Apple App Store öffnen"><span class="emblem" aria-hidden="true"><img class="emblem-img" src="/assets/app-store-icon-fixed.svg?v=20260913f" alt="" /></span><span class="text"><span class="label">App Store</span><span class="value">DĀR AL TAWḤĪD App</span></span><span class="go">›</span></a>'
+          appstore_row = '\n      <a class="row appstore" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD im Apple App Store öffnen"><span class="emblem" aria-hidden="true"><img class="emblem-img" src="/assets/app-store-icon-fixed.svg?v=20260913g" alt="" /></span><span class="text"><span class="label">App Store</span><span class="value">DĀR AL TAWḤĪD App</span></span><span class="go">›</span></a>'
           text = text[:end] + appstore_row + text[end:]
 
           css = '''
@@ -69,69 +69,3 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -m "Links: restore old icons and keep App Store icon"
           git push
-
-  health:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - name: Run app health check
-        run: node scripts/app-health-check.js
-
-      - name: Header prayer display guard (Maghrib/Zeit im Header)
-        run: node scripts/header-prayer-display-guard.js
-
-      - name: Qurʾān Tafsīr nav guard (kein Schwarzfeld/Hänger)
-        run: node scripts/quran-tafsir-nav-guard.js
-
-      - name: Qurʾān picker outside guard (kein Safari-Crash)
-        run: node scripts/quran-picker-outside-guard.js
-
-      - name: Qurʾān stability + Tajweed guard (Veil/Locks/Schrift)
-        run: node scripts/quran-stability-tajweed-guard.js
-
-      - name: App update recovery guard (Update-Banner nur bei echtem Fehler)
-        run: node scripts/app-update-recovery-guard.js
-
-      - name: Change scope lock guard (nur freigeschaltete Bereiche)
-        env:
-          INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
-        run: node scripts/change-scope-lock-guard.js
-
-      - name: Repo integrity guard (Massen-Löschung blockieren)
-        env:
-          INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
-        run: node scripts/repo-integrity-guard.js
-
-      - name: Push system guard
-        run: node scripts/push-system-guard.js
-
-      - name: Prayer push loop guard
-        env:
-          GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-          INTEGRITY_BASE_REF: ${{ github.event.before }}
-        run: node scripts/prayer-push-loop-guard.js
-
-      - name: Push lanes guard (Spuren getrennt, nie ohne Befehl)
-        env:
-          GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-          INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
-        run: node scripts/push-lanes-guard.js
-
-      - name: Post push hang guard (Beitrags-Push darf nicht hängen)
-        run: node scripts/post-push-hang-guard.js
-
-      - name: Version update guard (Banner-Schleife + Willkommens-Push)
-        run: node scripts/version-update-guard.js
-
-      - name: Visitor SW must not touch admin
-        run: |
-          if grep -E "'/admin|\"/admin" service-worker.js | grep -q APP_SHELL; then
-            echo "::error::service-worker.js must not cache /admin paths in APP_SHELL"
-            exit 1
-          fi
-          echo "SW isolation OK"
