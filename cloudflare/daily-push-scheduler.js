@@ -15,8 +15,8 @@ const DAILY_CONTENT_PATH = "content/updates/daily.json";
 const SUPABASE_URL = "https://djyfkttjbdraynuxrzno.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqeWZrdHRqYmRyYXludXhyem5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjE1MTUsImV4cCI6MjA5NjQzNzUxNX0.PUzkuxpJVWeW64nSAVW61KqYDE5k1d4sAir2unXKjxw";
 
-const DAILY_PUSH_ENGINE = "cloudflare-worker-daily-v4-isolated";
-const DAILY_PUSH_ID_VERSION = "v4";
+const DAILY_PUSH_ENGINE = "cloudflare-worker-daily-v5-device-times";
+const DAILY_PUSH_ID_VERSION = "v5";
 const DUA_HOUR = 9;
 const REC_HOUR = 12;
 const SEND_WINDOW_MINUTES = 15;
@@ -83,14 +83,31 @@ function dayOfYearInTz(date, timeZone) {
   return Math.floor((Date.UTC(parts.year, parts.month - 1, parts.day) - Date.UTC(parts.year, 0, 0)) / 86400000);
 }
 
-function isSendWindow(localParts, hour) {
-  return localParts.hour === hour && localParts.minute < SEND_WINDOW_MINUTES;
+function parseDailyTime(value, fallbackHour) {
+  const match = String(value || "").trim().match(/^(\d{1,2}):(\d{2})$/);
+  const hour = match ? Number(match[1]) : Number(fallbackHour);
+  const minute = match ? Number(match[2]) : 0;
+  if (!Number.isInteger(hour) || hour < 0 || hour > 23 || !Number.isInteger(minute) || minute < 0 || minute > 59) {
+    return { hour: Number(fallbackHour), minute: 0 };
+  }
+  return { hour, minute };
 }
 
-function isCatchupWindow(localParts, hour, untilHour) {
-  if (localParts.hour < hour || localParts.hour >= untilHour) return false;
-  if (localParts.hour === hour) return localParts.minute >= SEND_WINDOW_MINUTES;
-  return true;
+function minutesOfDay(parts) {
+  return (Number(parts.hour) * 60) + Number(parts.minute);
+}
+
+function isSendWindowAt(localParts, scheduled) {
+  const now = minutesOfDay(localParts);
+  const target = (scheduled.hour * 60) + scheduled.minute;
+  return now >= target && now < target + SEND_WINDOW_MINUTES;
+}
+
+function isCatchupWindowAt(localParts, scheduled, untilHour) {
+  const now = minutesOfDay(localParts);
+  const target = (scheduled.hour * 60) + scheduled.minute;
+  const cutoff = Math.min(24 * 60, Math.max(untilHour * 60, target + (5 * 60)));
+  return now >= target + SEND_WINDOW_MINUTES && now < cutoff;
 }
 
 function deliveryMode(config) {
@@ -98,18 +115,18 @@ function deliveryMode(config) {
 }
 
 /** Marker für den bestehenden Push-System-Guard: onesignal-timezone */
-function duaDeliveryWindow(localParts, duaHour, config) {
+function duaDeliveryWindow(localParts, scheduled, config) {
   if (deliveryMode(config) === "onesignal-timezone") {
-    return isCatchupWindow(localParts, duaHour + 1, DUA_CATCHUP_UNTIL_HOUR);
+    return isCatchupWindowAt(localParts, scheduled, DUA_CATCHUP_UNTIL_HOUR);
   }
-  return isSendWindow(localParts, duaHour) || isCatchupWindow(localParts, duaHour, DUA_CATCHUP_UNTIL_HOUR);
+  return isSendWindowAt(localParts, scheduled) || isCatchupWindowAt(localParts, scheduled, DUA_CATCHUP_UNTIL_HOUR);
 }
 
-function recDeliveryWindow(localParts, recHour, config) {
+function recDeliveryWindow(localParts, scheduled, config) {
   if (deliveryMode(config) === "onesignal-timezone") {
-    return isCatchupWindow(localParts, recHour + 1, REC_CATCHUP_UNTIL_HOUR);
+    return isCatchupWindowAt(localParts, scheduled, REC_CATCHUP_UNTIL_HOUR);
   }
-  return isSendWindow(localParts, recHour) || isCatchupWindow(localParts, recHour, REC_CATCHUP_UNTIL_HOUR);
+  return isSendWindowAt(localParts, scheduled) || isCatchupWindowAt(localParts, scheduled, REC_CATCHUP_UNTIL_HOUR);
 }
 
 async function supabaseFetch(env, path, options = {}) {
@@ -151,6 +168,8 @@ async function loadDailyRegistrations(env) {
     "timezone",
     "daily_dua_enabled",
     "daily_recommendation_enabled",
+    "daily_dua_time",
+    "daily_recommendation_time",
     "last_dua_push_date",
     "last_recommendation_push_date",
     "push_opted_in",
@@ -160,7 +179,6 @@ async function loadDailyRegistrations(env) {
   ].join(",");
   const query = [
     "subscription_id=not.is.null",
-    "enabled=eq.true",
     "push_opted_in=eq.true",
     "app_environment=eq.production",
     "or=(daily_dua_enabled.eq.true,daily_recommendation_enabled.eq.true)",
@@ -614,12 +632,12 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
     if (onlySubscriptionId && subscriptionId !== onlySubscriptionId) continue;
     stats.checked += 1;
     const local = getLocalParts(now, String(row.timezone || canonicalTimeZone));
-    const duaHour = Number(config?.dailyDua?.hour ?? DUA_HOUR);
-    const recommendationHour = Number(config?.recommendation?.hour ?? REC_HOUR);
+    const duaTime = parseDailyTime(row.daily_dua_time, config?.dailyDua?.hour ?? DUA_HOUR);
+    const recommendationTime = parseDailyTime(row.daily_recommendation_time, config?.recommendation?.hour ?? REC_HOUR);
     const forceDua = force.active && force.kinds.has("dua");
     const forceRecommendation = force.active && force.kinds.has("recommendation");
-    const duaWindow = forceDua || duaDeliveryWindow(local, duaHour, config);
-    const recommendationWindow = forceRecommendation || recDeliveryWindow(local, recommendationHour, config);
+    const duaWindow = forceDua || duaDeliveryWindow(local, duaTime, config);
+    const recommendationWindow = forceRecommendation || recDeliveryWindow(local, recommendationTime, config);
 
     if (row.daily_dua_enabled !== false && duaItem && config?.dailyDua?.enabled !== false && duaWindow) {
       if (!forceDua && row.last_dua_push_date === canonicalDateKey) stats.duplicates += 1;
@@ -649,8 +667,10 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
   const berlin = getLocalParts(now, canonicalTimeZone);
   const duaHour = Number(config?.dailyDua?.hour ?? DUA_HOUR);
   const recommendationHour = Number(config?.recommendation?.hour ?? REC_HOUR);
-  const duaWindowOpen = duaDeliveryWindow(berlin, duaHour, config);
-  const recWindowOpen = recDeliveryWindow(berlin, recommendationHour, config);
+  const defaultDuaTime = parseDailyTime("", duaHour);
+  const defaultRecommendationTime = parseDailyTime("", recommendationHour);
+  const duaWindowOpen = duaDeliveryWindow(berlin, defaultDuaTime, config);
+  const recWindowOpen = recDeliveryWindow(berlin, defaultRecommendationTime, config);
   const duaAlreadySent = rows.filter((r) => r.last_dua_push_date === canonicalDateKey).length;
   const recAlreadySent = rows.filter((r) => r.last_recommendation_push_date === canonicalDateKey).length;
 
