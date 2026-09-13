@@ -15,6 +15,8 @@ enum DarPushNotifications {
     private static let staleTokenKey = "dar.push.token"
     private static var didBoot = false
     private static var lastScheduleAt: TimeInterval = 0
+    private static let lastRegisteredTokenKey = "dar.ios.registered.apns.token"
+    private static let welcomeSentForSub = "dar.ios.welcome.sent."
     private static var registerInFlight = false
 
     static func bootstrap(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
@@ -89,7 +91,8 @@ enum DarPushNotifications {
     static func showTest(title: String, body: String, type: String, prayer: String = "dhuhr", mode: String = "entry") {
         requestAuthorization()
         Task {
-            guard let sub = await waitForSubscriptionId() else { return }
+            await publishSubscriptionToWebAndServer(forceRegister: true)
+            guard let sub = await waitForSubscriptionId(timeoutSeconds: 30) else { return }
             _ = await postJSON("\(workerURL)/api/prayer/test", body: [
                 "subscriptionId": sub,
                 "prayer": prayer.isEmpty ? "dhuhr" : prayer,
@@ -182,7 +185,7 @@ enum DarPushNotifications {
         }
     }
 
-    static func publishSubscriptionToWebAndServer() async {
+    static func publishSubscriptionToWebAndServer(forceRegister: Bool = false) async {
         guard let token = sanitizedApnsToken(UserDefaults.standard.string(forKey: lastTokenKey)) else {
             await MainActor.run {
                 NotificationCenter.default.post(name: .darNativePushReady, object: nil)
@@ -192,7 +195,11 @@ enum DarPushNotifications {
         }
 
         let settings = UserDefaults.standard.dictionary(forKey: settingsKey) ?? [:]
-        guard let subscriptionId = await ensureOneSignalSubscription(token: token, settings: settings) else {
+        guard let subscriptionId = await ensureOneSignalSubscription(
+            token: token,
+            settings: settings,
+            forceRegister: forceRegister
+        ) else {
             await MainActor.run {
                 NotificationCenter.default.post(name: .darNativePushReady, object: nil)
                 syncPermissionToWeb()
@@ -202,6 +209,7 @@ enum DarPushNotifications {
 
         UserDefaults.standard.set(subscriptionId, forKey: lastSubKey)
         await saveSupabaseRegistration(subscriptionId: subscriptionId, token: token, settings: settings)
+        await sendWelcomePushIfNeeded(subscriptionId: subscriptionId)
         if bool(settings["reminder"]), number(settings["lat"]) != nil, number(settings["lon"]) != nil {
             let now = Date().timeIntervalSince1970
             if now - lastScheduleAt > 20 {
@@ -215,8 +223,14 @@ enum DarPushNotifications {
         }
     }
 
-    private static func ensureOneSignalSubscription(token: String, settings: [String: Any]) async -> String? {
-        if let cached = sanitizedSubscriptionId(UserDefaults.standard.string(forKey: lastSubKey)) {
+    private static func ensureOneSignalSubscription(
+        token: String,
+        settings: [String: Any],
+        forceRegister: Bool = false
+    ) async -> String? {
+        let cached = sanitizedSubscriptionId(UserDefaults.standard.string(forKey: lastSubKey))
+        let lastRegistered = UserDefaults.standard.string(forKey: lastRegisteredTokenKey)
+        if !forceRegister, let cached, lastRegistered == token {
             return cached
         }
         if registerInFlight {
@@ -228,22 +242,40 @@ enum DarPushNotifications {
         let payload: [String: Any] = [
             "deviceId": deviceId(),
             "pushToken": token,
+            "production": true,
+            "deviceOs": UIDevice.current.systemVersion,
             "tags": reminderTags(settings)
         ]
-        guard let data = try? JSONSerialization.data(withJSONObject: payload),
-              let response = try? await URLSession.shared.data(for: {
-                  var req = URLRequest(url: URL(string: "\(workerURL)/api/prayer/register-native")!)
-                  req.httpMethod = "POST"
-                  req.httpBody = data
-                  req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                  return req
-              }()),
-              let json = try? JSONSerialization.jsonObject(with: response.0) as? [String: Any],
+        guard JSONSerialization.isValidJSONObject(payload),
+              let bodyData = try? JSONSerialization.data(withJSONObject: payload) else {
+            return cached
+        }
+        var req = URLRequest(url: URL(string: "\(workerURL)/api/prayer/register-native")!)
+        req.httpMethod = "POST"
+        req.httpBody = bodyData
+        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        guard let (data, response) = try? await URLSession.shared.data(for: req),
+              let http = response as? HTTPURLResponse,
+              (200..<300).contains(http.statusCode),
+              let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
               let subscriptionId = sanitizedSubscriptionId(json["subscriptionId"] as? String) else {
             return sanitizedSubscriptionId(UserDefaults.standard.string(forKey: lastSubKey))
         }
         UserDefaults.standard.set(subscriptionId, forKey: lastSubKey)
+        UserDefaults.standard.set(token, forKey: lastRegisteredTokenKey)
         return subscriptionId
+    }
+
+    private static func sendWelcomePushIfNeeded(subscriptionId: String) async {
+        let key = welcomeSentForSub + subscriptionId
+        if UserDefaults.standard.bool(forKey: key) { return }
+        let ok = await postJSON("\(workerURL)/api/push/welcome", body: [
+            "subscriptionId": subscriptionId,
+            "attempt": "once"
+        ])
+        if ok {
+            UserDefaults.standard.set(true, forKey: key)
+        }
     }
 
     private static func reminderTags(_ settings: [String: Any]) -> [String: String] {
@@ -310,9 +342,10 @@ enum DarPushNotifications {
         _ = try? await URLSession.shared.data(for: req)
     }
 
-    private static func waitForSubscriptionId() async -> String? {
+    private static func waitForSubscriptionId(timeoutSeconds: Int = 10) async -> String? {
         if let id = sanitizedSubscriptionId(UserDefaults.standard.string(forKey: lastSubKey)) { return id }
-        for _ in 0..<40 {
+        let attempts = max(1, timeoutSeconds * 4)
+        for _ in 0..<attempts {
             try? await Task.sleep(nanoseconds: 250_000_000)
             if let id = sanitizedSubscriptionId(UserDefaults.standard.string(forKey: lastSubKey)) { return id }
         }

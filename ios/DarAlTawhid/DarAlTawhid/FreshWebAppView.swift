@@ -395,44 +395,118 @@ struct WebAppView: UIViewRepresentable {
               try{if(window.DAR_IOS_DEVICE_ID)localStorage.setItem("darPushExternalIdV1",window.DAR_IOS_DEVICE_ID)}catch(e){}
               function isOsId(v){return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(v||""));}
               if(!isOsId(window.DAR_IOS_ONESIGNAL_ID))window.DAR_IOS_ONESIGNAL_ID="";
-              function state(){
+              function nativeState(){
+                var granted=(window.__darPushPermission==="granted");
+                var subId=isOsId(window.DAR_IOS_ONESIGNAL_ID)?window.DAR_IOS_ONESIGNAL_ID:"";
                 return {
-                  ready:isOsId(window.DAR_IOS_ONESIGNAL_ID),
-                  optedIn:(window.__darPushPermission==="granted")&&isOsId(window.DAR_IOS_ONESIGNAL_ID),
-                  subscriptionId:isOsId(window.DAR_IOS_ONESIGNAL_ID)?window.DAR_IOS_ONESIGNAL_ID:"",
+                  ready:granted&&!!subId,
+                  optedIn:granted&&!!subId,
+                  subscriptionId:subId,
                   token:window.DAR_IOS_PUSH_TOKEN||"",
                   os:window.OneSignal||{}
                 };
               }
-              window.DAR_ONE_SIGNAL_READY=isOsId(window.DAR_IOS_ONESIGNAL_ID);
-              try{
-                var health=document.getElementById("notificationHealthText");
-                if(health&&window.DAR_ONE_SIGNAL_READY&&window.__darPushPermission==="granted"){
-                  health.textContent="Push vollständig aktiv · iOS Native";
+              function patch(){
+                if(typeof readOneSignalPushSubscriptionState==="function"){
+                  readOneSignalPushSubscriptionState=function(){return nativeState();};
                 }
-              }catch(e){}
-              window.waitForOneSignalReady=function(){
-                return Promise.resolve(window.DAR_IOS_ONESIGNAL_ID?{User:{PushSubscription:{id:window.DAR_IOS_ONESIGNAL_ID,token:window.DAR_IOS_PUSH_TOKEN,optedIn:true}}}:null);
-              };
-              window.hasNotificationApi=function(){return true};
-              window.getNotificationPermission=function(){return window.__darPushPermission||"default"};
-              window.waitForPushSubscriptionReady=function(){return Promise.resolve(state())};
-              window.waitForPushOptIn=function(){return window.Notification.requestPermission().then(function(p){return p==="granted"})};
-              window.ensureOneSignalPushSubscription=window.waitForPushOptIn;
-              window.ensureOneSignalServiceWorkerReady=function(){return Promise.resolve(null)};
-              window.getOneSignalServiceWorkerRegistration=function(){return Promise.resolve(null)};
-              if(typeof readOneSignalPushSubscriptionState==="function"){
-                readOneSignalPushSubscriptionState=state;
-              }
-              if(typeof currentOneSignalPushIds==="function"){
-                currentOneSignalPushIds=function(){
-                  return {
-                    externalId:window.DAR_IOS_DEVICE_ID||"",
-                    subscriptionId:isOsId(window.DAR_IOS_ONESIGNAL_ID)?window.DAR_IOS_ONESIGNAL_ID:"",
-                    token:window.DAR_IOS_PUSH_TOKEN||""
+                if(typeof currentOneSignalPushIds==="function"){
+                  currentOneSignalPushIds=function(){
+                    return {
+                      externalId:localStorage.getItem("darPushExternalIdV1")||window.DAR_IOS_DEVICE_ID||"",
+                      subscriptionId:isOsId(window.DAR_IOS_ONESIGNAL_ID)?window.DAR_IOS_ONESIGNAL_ID:"",
+                      token:window.DAR_IOS_PUSH_TOKEN||""
+                    };
                   };
+                }
+                window.DAR_ONE_SIGNAL_READY=isOsId(window.DAR_IOS_ONESIGNAL_ID);
+                window.hasNotificationApi=function(){return true};
+                window.getNotificationPermission=function(){return window.__darPushPermission||"default"};
+                window.requestNotificationPermission=function(){
+                  try{webkit.messageHandlers.darNative.postMessage({type:"notifications"})}catch(e){}
+                  return Promise.resolve(window.__darPushPermission||"default");
                 };
+                window.waitForOneSignalReady=function(){
+                  var s=nativeState();
+                  return Promise.resolve(s.subscriptionId?{User:{PushSubscription:{id:s.subscriptionId,token:s.token,optedIn:s.optedIn}}}:null);
+                };
+                window.waitForPushSubscriptionReady=function(opts){
+                  var timeout=(opts&&opts.timeoutMs)||25000;
+                  var request=!!(opts&&opts.request);
+                  if(request)window.requestNotificationPermission();
+                  var start=Date.now();
+                  return new Promise(function(resolve){
+                    function tick(){
+                      var s=nativeState();
+                      if(s.ready||Date.now()-start>timeout){
+                        resolve(Object.assign({os:{User:{PushSubscription:{id:s.subscriptionId,token:s.token,optedIn:s.optedIn}}},externalId:window.DAR_IOS_DEVICE_ID||""},s));
+                        return;
+                      }
+                      setTimeout(tick,300);
+                    }
+                    tick();
+                  });
+                };
+                window.waitForPushOptIn=function(){return window.requestNotificationPermission().then(function(p){return p==="granted"})};
+                window.ensureOneSignalPushSubscription=function(){return window.waitForPushSubscriptionReady({timeoutMs:25000,request:true}).then(function(s){return !!s.ready})};
+                window.ensureOneSignalServiceWorkerReady=function(){return Promise.resolve(null)};
+                window.getOneSignalServiceWorkerRegistration=function(){return Promise.resolve(null)};
+                if(typeof requestServerPrayerTest==="function"&&!window.__darIosPrayerTestPatched){
+                  window.__darIosPrayerTestPatched=true;
+                  var _req=requestServerPrayerTest;
+                  requestServerPrayerTest=async function(subId,prayerKey,mode,settings){
+                    try{
+                      webkit.messageHandlers.darPushTest.postMessage({
+                        title:"[Test] Gebet",
+                        body:String(prayerKey||"prayer")+" · "+String(mode||"entry"),
+                        type:"prayer",
+                        prayer:String(prayerKey||""),
+                        mode:String(mode||"")
+                      });
+                    }catch(e){}
+                    var id=subId||window.DAR_IOS_ONESIGNAL_ID||"";
+                    if(!id)return {ok:false,reason:"Keine Subscription-ID"};
+                    return _req(id,prayerKey,mode,settings);
+                  };
+                }
+                if(typeof persistNotificationSettings==="function"&&!window.__darIosPersistPatched){
+                  window.__darIosPersistPatched=true;
+                  var _persist=persistNotificationSettings;
+                  persistNotificationSettings=function(patch){
+                    var next=_persist(patch);
+                    try{webkit.messageHandlers.darPushSettings.postMessage(next)}catch(e){}
+                    return next;
+                  };
+                }
+                if(typeof setPrayerSettings==="function"&&!window.__darIosSetPrayerPatched){
+                  window.__darIosSetPrayerPatched=true;
+                  var _set=setPrayerSettings;
+                  setPrayerSettings=function(value){
+                    var next=_set(value);
+                    try{webkit.messageHandlers.darPushSettings.postMessage(typeof getPrayerSettings==="function"?getPrayerSettings():next)}catch(e){}
+                    return next;
+                  };
+                }
+                try{
+                  var health=document.getElementById("notificationHealthText");
+                  if(health&&nativeState().ready){
+                    health.textContent="Push vollständig aktiv · iOS Native";
+                  }
+                }catch(e){}
+                try{
+                  if(typeof getPrayerSettings==="function"&&window.webkit&&webkit.messageHandlers&&webkit.messageHandlers.darPushSettings){
+                    webkit.messageHandlers.darPushSettings.postMessage(getPrayerSettings());
+                  }
+                }catch(e){}
+                try{
+                  if(isOsId(window.DAR_IOS_ONESIGNAL_ID)&&typeof sendWelcomePushIfNeeded==="function"){
+                    sendWelcomePushIfNeeded({User:{PushSubscription:{id:window.DAR_IOS_ONESIGNAL_ID,optedIn:true}}}).catch(function(){});
+                  }
+                }catch(e){}
               }
+              patch();
+              setTimeout(patch,400);
+              setTimeout(patch,1200);
             })();
             """
             webView?.evaluateJavaScript(script, completionHandler: nil)

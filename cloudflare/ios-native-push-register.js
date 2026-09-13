@@ -50,7 +50,10 @@ export async function registerNativeIosPush(env, input = {}) {
         type: "iOSPush",
         token: pushToken,
         enabled: true,
-        notification_types: 1
+        notification_types: 1,
+        test_type: input.production === false || input.sandbox === true ? 1 : 0,
+        sdk: "050801",
+        device_os: String(input.deviceOs || input.device_os || "17.0").trim() || "17.0"
       }
     ],
     properties: {
