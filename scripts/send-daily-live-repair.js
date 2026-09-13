@@ -117,9 +117,13 @@ function payload(kind, item, subscriptionId) {
     name: `daily-emergency-${kind}-${dateKey}-${TOKEN}`.slice(0, 128),
     data: {
       type: isDua ? "daily_dua" : "daily_recommendation",
+      reminder_type: isDua ? "dua_daily" : "today_recommended",
+      source: "dar-reminder-scheduler",
+      target: isDua ? "dua" : "post",
       content_id: item.id,
+      nav: isDua ? "dua" : "post",
+      url,
       date: dateKey,
-      source: "github-daily-live-repair",
       repair_token: TOKEN
     },
     chrome_web_icon: `${SITE_URL}/notification-icon-192.png?v=3`,

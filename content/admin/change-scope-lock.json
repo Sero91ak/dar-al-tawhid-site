@@ -94,6 +94,30 @@
   ],
   "unlockedScopes": [
     {
+      "id": "reminder-ios-push-visible-sound-2026-09-13",
+      "approvedBy": "user-explicit-heute-empfohlen-ios-push-sound-data-banner",
+      "reason": "Nutzer: Heute empfohlen/Duʿāʾ/Gebetszeiten als echte iOS-Push mit Ton, Datenpayload, Foreground-Banner und lokaler Zeit.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "cloudflare/push-launch-urls.js",
+        "cloudflare/daily-push-scheduler.js",
+        "cloudflare/daily-push-admin.js",
+        "cloudflare/prayer-push-scheduler.js",
+        "cloudflare/prayer-push-admin.js",
+        "scripts/lib/onesignal-push.js",
+        "scripts/send-daily-content-push.js",
+        "scripts/send-daily-live-repair.js",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift"
+      ],
+      "expiresAt": "2026-09-14T23:59:00.000Z"
+    },
+    {
       "id": "app-update-news-popup-push-2026-09-13",
       "approvedBy": "user-explicit-app-update-news-popup-push-appstore",
       "reason": "Nutzer: App-Update autonom als News, Popup und Push; Klick öffnet App Store; einmal pro ID.",

@@ -70,6 +70,10 @@ function getLocalParts(date, timeZone) {
     hour: +o.hour, minute: +o.minute, second: +o.second
   };
 }
+function dayKey(date, timeZone) {
+  const p = getLocalParts(date, timeZone || "Europe/Berlin");
+  return `${p.year}-${String(p.month).padStart(2,"0")}-${String(p.day).padStart(2,"0")}`;
+}
 
 function tzOffsetMin(date, timeZone) {
   const l = getLocalParts(date, timeZone);
@@ -468,17 +472,34 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
   }
 
   const collapseId = prayerCollapseId(prayer, mode, sendAfter, group.timeZone);
+  const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "") || "https://dar-al-tawhid.de";
+  const prayerUrl = `${site.replace(/#.*$/, "")}/#prayer`;
+  const dateKey = dayKey(sendAfter, group.timeZone || "Europe/Berlin");
+  const offsetLabel = mode === "advance" ? `minus${normAdvance(group.advanceMinutes)}` : "time";
   const body = withIcons({
     app_id: String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim(),
     target_channel: "push",
     include_subscription_ids: ids,
     headings: copy.headings,
     contents: copy.contents,
-    url: String(env.SITE_URL || DEFAULT_SITE_URL),
+    ios_sound: "default",
+    ttl: 3600,
+    url: prayerUrl,
+    web_url: prayerUrl,
     collapse_id: collapseId,
     web_push_topic: collapseId,
-    idempotency_key: await uuidFrom(idKey)
+    idempotency_key: await uuidFrom(idKey),
+    data: {
+      type: "prayer",
+      reminder_type: mode === "advance" ? "prayer_advance" : "prayer_time",
+      source: "dar-prayer-scheduler",
+      prayer: String(prayer.name || prayer.key || ""),
+      prayer_key: String(prayer.key || ""),
+      nav: "prayer",
+      url: prayerUrl
+    }
   }, env);
+  body.name = `prayer-${dateKey}-${String(prayer.key || "prayer").toLowerCase()}-${offsetLabel}-v1`.slice(0, 128);
 
   if (sendAfter.getTime() - Date.now() > 30 * 1000) {
     const iso = sendAfter.toISOString();

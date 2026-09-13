@@ -62,13 +62,23 @@ enum DarPushNotifications {
     }
 
     static func openFromNotification(userInfo: [AnyHashable: Any]) {
+        let nested = (userInfo["custom"] as? [String: Any])?["a"] as? [String: Any]
+        let additional = userInfo["additionalData"] as? [String: Any]
+        func val(_ key: String) -> String {
+            if let v = nested?[key] { return String(describing: v) }
+            if let v = additional?[key] { return String(describing: v) }
+            if let v = userInfo[key] { return String(describing: v) }
+            return ""
+        }
+        let postId = [val("content_id"), val("postId"), val("slug")].first { !$0.isEmpty && $0 != "nil" } ?? ""
+        let url = [val("url"), val("launchURL")].first { !$0.isEmpty } ?? ""
         NotificationCenter.default.post(
             name: .darOpenPush,
             object: nil,
             userInfo: [
-                "type": String(describing: userInfo["type"] ?? ""),
-                "postId": String(describing: userInfo["postId"] ?? ""),
-                "url": String(describing: userInfo["url"] ?? "")
+                "type": val("type").isEmpty ? val("nav") : val("type"),
+                "postId": postId,
+                "url": url
             ]
         )
     }

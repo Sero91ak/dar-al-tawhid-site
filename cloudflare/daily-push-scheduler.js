@@ -435,18 +435,25 @@ function buildDailyPushPayload(env, kind, item, config, dateKey, subscriptionId,
     ? `${origin}/#dua/${encodeURIComponent(item.id)}`
     : `${origin}/#post/${encodeURIComponent(item.id)}`;
 
-  return withIcons({
+  return withNotificationIcons({
     app_id: String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim(),
     target_channel: "push",
     include_subscription_ids: [subscriptionId],
     headings: { de: title, en: title },
     contents: { de: body, en: body },
+    ios_sound: "default",
+    ttl: 3600,
     url,
+    web_url: url,
     data: {
       type: isDua ? "daily_dua" : "daily_recommendation",
+      reminder_type: isDua ? "dua_daily" : "today_recommended",
+      source: "dar-reminder-scheduler",
+      target: isDua ? "dua" : "post",
       content_id: item.id,
+      nav: isDua ? "dua" : "post",
+      url,
       date: dateKey,
-      source: "dar-daily-push-scheduler-v4",
       forceToken: forceToken || undefined
     }
   }, env);
@@ -500,18 +507,19 @@ export async function sendDailyPushBatch(env, rows, kind, item, config, dateKey,
   for (const row of rows) {
     const subscriptionId = String(row.subscription_id || "").trim();
     if (!subscriptionId) continue;
+    const localDateKey = String(row._localDateKey || dateKey);
     const idempotencyKey = await uuidFrom([
       "daily",
       DAILY_PUSH_ID_VERSION,
       kind,
-      dateKey,
+      localDateKey,
       item.id,
       subscriptionId,
       options.forceToken || "normal"
     ].join("|"));
-    const payload = buildDailyPushPayload(env, kind, item, config, dateKey, subscriptionId, options.forceToken || "");
+    const payload = buildDailyPushPayload(env, kind, item, config, localDateKey, subscriptionId, options.forceToken || "");
     payload.idempotency_key = idempotencyKey;
-    payload.name = `daily-${kind}-${dateKey}-${DAILY_PUSH_ID_VERSION}${options.forceToken ? "-force" : ""}`.slice(0, 128);
+    payload.name = `daily-${isDua ? "dua" : "recommendation"}-${localDateKey}-v1`.slice(0, 128);
 
     try {
       const result = await postOneSignal(env, payload);
@@ -533,8 +541,8 @@ export async function sendDailyPushBatch(env, rows, kind, item, config, dateKey,
       }
 
       const sentPatch = isDua
-        ? { last_dua_push_date: dateKey, last_dua_content_id: item.id, daily_push_error: null }
-        : { last_recommendation_push_date: dateKey, last_recommendation_content_id: item.id, daily_push_error: null };
+        ? { last_dua_push_date: localDateKey, last_dua_content_id: item.id, daily_push_error: null }
+        : { last_recommendation_push_date: localDateKey, last_recommendation_content_id: item.id, daily_push_error: null };
       await patchRegistration(env, row, sentPatch);
       stats.sent += 1;
       stats.accepted[kind] += 1;
@@ -631,7 +639,10 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
     const subscriptionId = String(row.subscription_id || "").trim();
     if (onlySubscriptionId && subscriptionId !== onlySubscriptionId) continue;
     stats.checked += 1;
-    const local = getLocalParts(now, String(row.timezone || canonicalTimeZone));
+    const tz = String(row.timezone || canonicalTimeZone || "Europe/Berlin");
+    const local = getLocalParts(now, tz);
+    const localDateKey = dayKey(now, tz);
+    row._localDateKey = localDateKey;
     const duaTime = parseDailyTime(row.daily_dua_time, config?.dailyDua?.hour ?? DUA_HOUR);
     const recommendationTime = parseDailyTime(row.daily_recommendation_time, config?.recommendation?.hour ?? REC_HOUR);
     const forceDua = force.active && force.kinds.has("dua");
@@ -640,7 +651,7 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
     const recommendationWindow = forceRecommendation || recDeliveryWindow(local, recommendationTime, config);
 
     if (row.daily_dua_enabled !== false && duaItem && config?.dailyDua?.enabled !== false && duaWindow) {
-      if (!forceDua && row.last_dua_push_date === canonicalDateKey) stats.duplicates += 1;
+      if (!forceDua && row.last_dua_push_date === localDateKey) stats.duplicates += 1;
       else {
         stats.duaCandidates += 1;
         duaQueue.push(row);
@@ -648,7 +659,7 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
     }
 
     if (row.daily_recommendation_enabled !== false && recommendationItem && config?.recommendation?.enabled !== false && recommendationWindow) {
-      if (!forceRecommendation && row.last_recommendation_push_date === canonicalDateKey) stats.duplicates += 1;
+      if (!forceRecommendation && row.last_recommendation_push_date === localDateKey) stats.duplicates += 1;
       else {
         stats.recCandidates += 1;
         recommendationQueue.push(row);
