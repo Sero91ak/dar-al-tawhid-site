@@ -1,0 +1,69 @@
+name: Links App Store Icon Apply
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - content/admin/push-triggers/links-appstore-icon-apply-*.json
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply App Store icon only
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const pagePath = 'links/index.html';
+          let html = fs.readFileSync(pagePath, 'utf8');
+          const oldSnippet = 'src="/assets/app-store-icon.png" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:cover"';
+          const newSnippet = 'src="/assets/app-store-icon-fixed.svg?v=appstore-round-20260913-1820" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:contain;background:#fff;padding:0;display:block"';
+          if (!html.includes(oldSnippet) && !html.includes(newSnippet)) {
+            throw new Error('App Store icon snippet not found; aborting without other changes');
+          }
+          if (html.includes(oldSnippet)) {
+            html = html.replace(oldSnippet, newSnippet);
+            fs.writeFileSync(pagePath, html);
+          }
+
+          const lockPath = 'content/admin/change-scope-lock.json';
+          const lock = JSON.parse(fs.readFileSync(lockPath, 'utf8'));
+          lock.unlockedScopes = Array.isArray(lock.unlockedScopes) ? lock.unlockedScopes : [];
+          const scope = {
+            id: 'links-appstore-icon-only-2026-09-13',
+            approvedBy: 'user-explicit-links-appstore-icon-only',
+            reason: 'Nutzer: Nur das Apple App Store Icon im separaten App-Store-Link rund korrekt einbauen; alte Icons unverändert lassen.',
+            paths: [
+              'content/admin/change-scope-lock.json',
+              'links/index.html',
+              'assets/app-store-icon-fixed.svg',
+              'assets/app-store-icon.png'
+            ],
+            expiresAt: '2026-09-14T23:59:00.000Z'
+          };
+          const index = lock.unlockedScopes.findIndex((entry) => entry && entry.id === scope.id);
+          if (index >= 0) lock.unlockedScopes[index] = scope;
+          else lock.unlockedScopes.unshift(scope);
+          fs.writeFileSync(lockPath, JSON.stringify(lock, null, 2) + '\n');
+          NODE
+      - name: Commit App Store icon page fix
+        shell: bash
+        run: |
+          git config user.name "Serhat Abu Malik"
+          git config user.email "73606501+Sero91ak@users.noreply.github.com"
+          git add links/index.html content/admin/change-scope-lock.json
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git commit -m "fix(links): App Store icon only"
+          git push
