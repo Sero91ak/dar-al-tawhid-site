@@ -1,4 +1,4 @@
-name: Fix links App Store only
+name: Fix links branding and App Store
 
 on:
   push:
@@ -15,29 +15,43 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Restore original links page and add only App Store row
+      - name: Rebuild links page with requested branding and App Store row
         shell: python
         run: |
           import subprocess, pathlib
           base = '39f09310a8848bb539aaf1c6bf6265832aa9a48d'
           original = subprocess.check_output(['git','show',f'{base}:links/index.html'], text=True)
           text = original
+
+          old_header = '<header>\n      <div class="quote">'
+          new_header = '<header>\n      <div class="brand brand-top"><p class="by">by Serhat Abu Malik</p></div>\n      <div class="quote">'
+          assert old_header in text
+          text = text.replace(old_header, new_header, 1)
+
+          old_brand = '<div class="brand"><h1>DAR AL TAWḤĪD</h1><p class="by">by Serhat Abu Malik</p><p class="sub">OFFIZIELLE KANÄLE</p></div>'
+          new_brand = '<div class="brand"><h1>DĀR AL TAWḤĪD</h1><p class="sub">OFFIZIELLE KANÄLE</p></div>'
+          assert old_brand in text
+          text = text.replace(old_brand, new_brand, 1)
+
+          css_anchor = '.brand .by{margin:5px 0 0;'
+          assert css_anchor in text
+          text = text.replace(css_anchor, '.brand-top{margin:0 0 7px}.brand-top .by{margin:0}' + css_anchor, 1)
+
           marker = '      <button class="row app" id="openApp" type="button">'
           start = text.find(marker)
           assert start != -1, 'Original Web-App row not found'
           end = text.find('</button>', start)
           assert end != -1, 'Original Web-App row end not found'
           end += len('</button>')
-          appstore = '\n      <a class="row" style="--accent:#2497e8" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD im Apple App Store öffnen"><span class="emblem" aria-hidden="true"><img class="emblem-img" src="/assets/app-store-icon.png" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:cover" /></span><span class="text"><span class="label">App Store</span><span class="value">DĀR AL TAWḤĪD App</span></span><span class="go">›</span></a>'
+          appstore = '\n      <a class="row" style="--accent:#2497e8" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD im Apple App Store öffnen"><span class="emblem" aria-hidden="true"><img class="emblem-img" src="/assets/app-store-icon-fixed.svg" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:contain" /></span><span class="text"><span class="label">App Store</span><span class="value">DĀR AL TAWḤĪD App</span></span><span class="go">›</span></a>'
           text = text[:end] + appstore + text[end:]
-          # Strict guard: removing the one added row must reproduce the original byte-for-byte.
-          assert text.replace(appstore, '', 1) == original
+
           pathlib.Path('links/index.html').write_text(text, encoding='utf-8')
-      - name: Commit only links page correction
+      - name: Commit links page correction
         run: |
           git config user.name "Serhat Abu Malik"
           git config user.email "73606501+Sero91ak@users.noreply.github.com"
           git add links/index.html
           git diff --cached --quiet && exit 0
-          git commit -m "Links: keep original page and add App Store row only"
+          git commit -m "Links: move byline up, fix DĀR title and App Store icon"
           git push
