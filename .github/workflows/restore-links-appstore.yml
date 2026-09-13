@@ -1,0 +1,54 @@
+name: Restore original links design and add App Store
+
+on:
+  push:
+    paths:
+      - '.github/workflows/restore-links-appstore.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restore original links page and patch only App Store entry
+        shell: python
+        run: |
+          import re, subprocess, pathlib
+          base = '39f09310a8848bb539aaf1c6bf6265832aa9a48d'
+          original = subprocess.check_output(['git','show',f'{base}:links/index.html'], text=True)
+          text = original
+          text = text.replace(
+              'Telegram, Instagram, Website, WhatsApp, Bibliothek & Community und App – alle offiziellen Kanäle an einem Ort.',
+              'Telegram, Instagram, Website, WhatsApp, Bibliothek & Community und App Store – alle offiziellen Kanäle an einem Ort.'
+          )
+          text = text.replace('.app{--accent:#61a846}', '.appstore{--accent:#0a84ff}')
+          text = text.replace(
+              '.website .emblem,.whatsapp .emblem,.app .emblem{background:#f7f1e5;color:#111}',
+              '.website .emblem,.whatsapp .emblem{background:#f7f1e5;color:#111}.appstore .emblem{background:linear-gradient(145deg,#36b7ff,#0878ef 68%,#075cc4);color:#fff}'
+          )
+          replacement = '''      <a class="row appstore" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD im Apple App Store öffnen"><span class="emblem" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8.1 16.8h7.8M9.5 14.2 13 8.1M7.2 12.3 10.4 6.7M14 6.7l3.2 5.6M6 17.7 4.9 19.6M18 17.7l1.1 1.9" fill="none" stroke="currentColor" stroke-width="2.15" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text"><span class="label">App Store</span><span class="value">DĀR AL TAWḤĪD App</span></span><span class="go">›</span></a>'''
+          text, n = re.subn(r'^\s*<button class="row app" id="openApp" type="button">.*?</button>\s*$', replacement, text, count=1, flags=re.M)
+          assert n == 1, f'Expected one old app button, found {n}'
+          # Keep the old modal CSS harmlessly, but remove the obsolete modal HTML and JS bindings.
+          text, n = re.subn(r'^<div class="modal" id="appModal".*?</div>\s*$', '', text, count=1, flags=re.M)
+          assert n == 1, f'Expected one app modal, found {n}'
+          script = '''<script>\ndocument.querySelectorAll('.row').forEach(row=>{row.addEventListener('pointerdown',()=>row.classList.add('is-lit'));['pointerup','pointercancel','pointerleave'].forEach(ev=>row.addEventListener(ev,()=>setTimeout(()=>row.classList.remove('is-lit'),420)))});\n</script>'''
+          text, n = re.subn(r'<script>\nconst modal=.*?</script>', script, text, count=1, flags=re.S)
+          assert n == 1, f'Expected one obsolete app script, found {n}'
+          assert 'apps.apple.com/de/app/' in text
+          assert 'class="row appstore"' in text
+          assert 'class="row telegram"' in text and 'data:image/png;base64' in text
+          pathlib.Path('links/index.html').write_text(text, encoding='utf-8')
+      - name: Commit exact App Store patch
+        run: |
+          git config user.name "Serhat Abu Malik"
+          git config user.email "73606501+Sero91ak@users.noreply.github.com"
+          git add links/index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Links: App Store button with original icon design preserved"
+          git push
