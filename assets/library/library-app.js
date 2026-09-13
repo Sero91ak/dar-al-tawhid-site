@@ -80,6 +80,8 @@
   let libraryPreserveFocus = false;
   let libraryListScrollY = 0;
   let librarySearchSelection = 0;
+  let libraryReaderReturnScrollY = null;
+  let libraryReaderReturnSlug = "";
   let readerState = null;
   const LIBRARY_STATS_CACHE = new Map();
   let libraryStatsPollTimer = null;
@@ -309,6 +311,8 @@
   }
 
   function navigateReader(slug) {
+    libraryReaderReturnScrollY = Math.max(0, Number(global.scrollY || 0));
+    libraryReaderReturnSlug = String(slug || "");
     global.location.hash = `#bibliothek/${encodeURIComponent(slug)}/lesen`;
   }
 
@@ -1431,28 +1435,6 @@
     return (catalog?.publications || []).find((p) => p.slug === slug || p.id === slug);
   }
 
-  function installMobilePdfCapture() {
-    if (global.__darLibraryMobilePdfCapture) return;
-    global.__darLibraryMobilePdfCapture = true;
-    global.addEventListener("click", (event) => {
-      if (!shouldUseNativePdfViewer()) return;
-      const target = event?.target;
-      const button = target?.closest?.("[data-library-read],[data-library-download]");
-      if (!button || button.disabled || button.hasAttribute("disabled")) return;
-      const isDownload = button.hasAttribute("data-library-download");
-      const slug = button.getAttribute(isDownload ? "data-library-download" : "data-library-read") || "";
-      const pub = findPublication(slug);
-      if (!pub || (isDownload ? !canDownload(pub) : !canRead(pub))) return;
-      const url = publicationPdfUrl(pub);
-      if (!url) return;
-      event.preventDefault();
-      event.stopPropagation();
-      if (event.stopImmediatePropagation) event.stopImmediatePropagation();
-      trackLibraryEvent(isDownload ? "library_download" : "library_read", pub);
-      global.location.assign(url);
-    }, true);
-  }
-
   function restoreLibraryListUi() {
     if (libraryPreserveScroll) {
       const y = libraryListScrollY;
@@ -1478,6 +1460,20 @@
       }
       libraryPreserveFocus = false;
     }
+  }
+
+  function restoreLibraryReaderReturnPosition(slug) {
+    if (libraryReaderReturnScrollY === null || libraryReaderReturnSlug !== String(slug || "")) return;
+    const y = libraryReaderReturnScrollY;
+    libraryReaderReturnScrollY = null;
+    libraryReaderReturnSlug = "";
+    requestAnimationFrame(() => {
+      if (global.DARScrollManager?.stableScrollTo) {
+        global.DARScrollManager.stableScrollTo(y, { force: true });
+      } else {
+        global.scrollTo({ top: y, behavior: "auto" });
+      }
+    });
   }
 
   async function bindLibrary(route) {
@@ -1567,10 +1563,6 @@
       detail.querySelectorAll("[data-library-read]").forEach((btn) => {
         btn.onclick = () => {
           if (!canRead(pub)) return;
-          if (shouldUseNativePdfViewer()) {
-            openPublicationPdf(pub);
-            return;
-          }
           navigateReader(pub.slug);
         };
       });
@@ -1579,8 +1571,7 @@
         btn.onclick = async () => {
           if (!canDownload(pub)) return;
           if (shouldUseNativePdfViewer()) {
-            trackLibraryEvent("library_download", pub);
-            openPublicationPdf(pub, { track: false });
+            navigateReader(pub.slug);
             return;
           }
           try {
@@ -1637,6 +1628,7 @@
       hydrateLibraryStats(pub.id);
       startLibraryStatsPolling(pub.id);
       trackLibraryDetailView(pub);
+      restoreLibraryReaderReturnPosition(pub.slug);
     } else {
       stopLibraryStatsPolling();
     }
@@ -1708,5 +1700,4 @@
       uiState = { query: "", category: "Alle", catOpen: false };
     }
   };
-  installMobilePdfCapture();
 })(window);
