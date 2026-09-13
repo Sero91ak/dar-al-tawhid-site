@@ -152,41 +152,20 @@ struct WebAppView: UIViewRepresentable {
         }catch(e){}
       }
 
-      function openPushSettings(){
+      function openRoute(view, hash){
         try{
-          if(typeof navigate==="function")navigate("more");
-          else location.hash="#more";
-        }catch(e){location.hash="#more"}
-
-        var attempts=0;
-        function reveal(){
-          attempts++;
-          var toggle=document.getElementById("prayerPushAccordionToggle");
-          var body=document.getElementById("prayerPushSettingsBody");
-          if(toggle){
-            try{
-              if(typeof setPrayerPushAccordionOpen==="function"){
-                setPrayerPushAccordionOpen(true);
-                if(typeof updatePrayerPushAccordionUi==="function")updatePrayerPushAccordionUi(true);
-              }else if(toggle.getAttribute("aria-expanded")!=="true"){
-                toggle.click();
-              }
-              (body||toggle).scrollIntoView({behavior:"smooth",block:"center"});
-            }catch(e){}
-            return;
-          }
-          if(attempts<12)setTimeout(reveal,80);
-        }
-        setTimeout(reveal,20);
+          if(typeof navigate==="function")navigate(view);
+          else location.hash=hash;
+        }catch(e){location.hash=hash}
       }
 
       document.addEventListener("click",function(event){
         var button=event.target&&event.target.closest
-          ?event.target.closest("#quickAccessMenu [data-qa-action]")
+          ?event.target.closest("#quickAccessMenu [data-qa-action], [data-more-quick]")
           :null;
         if(!button)return;
-        var action=button.getAttribute("data-qa-action");
-        if(action!=="orient"&&action!=="saved"&&action!=="remind")return;
+        var action=button.getAttribute("data-qa-action")||button.getAttribute("data-more-quick");
+        if(action!=="orient"&&action!=="saved"&&action!=="remind"&&action!=="settings")return;
         event.preventDefault();
         event.stopPropagation();
         if(event.stopImmediatePropagation)event.stopImmediatePropagation();
@@ -196,10 +175,11 @@ struct WebAppView: UIViewRepresentable {
             if(typeof openQiblaFromFloat==="function")openQiblaFromFloat();
             else location.hash="#qibla";
           }else if(action==="saved"){
-            if(typeof navigate==="function")navigate("saved");
-            else location.hash="#saved";
-          }else{
-            openPushSettings();
+            openRoute("saved","#saved");
+          }else if(action==="remind"){
+            openRoute("notifications","#notifications");
+          }else if(action==="settings"){
+            openRoute("settings","#settings");
           }
         }catch(e){}
       },true);
