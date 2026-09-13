@@ -94,6 +94,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "app-update-once-per-viewer-2026-09-13",
+      "approvedBy": "user-explicit-app-update-nur-einmal-sehen",
+      "reason": "Nutzer: App-Update nur einmal pro ID (Popup und Fokus); 14 Tage nur für noch nicht gesehene Nutzer.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-09-14T23:59:00.000Z"
+    },
+    {
       "id": "app-update-news-visible-berlin-time-2026-09-13",
       "approvedBy": "user-explicit-app-update-zeiten-news-abgelaufen",
       "reason": "Nutzer: App-Update-Uhrzeiten falsch, News in der App abgelaufen obwohl Admin LIVE.",
