@@ -7,9 +7,69 @@ on:
     branches: [main]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
+  restore-links-icons:
+    if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, 'Trigger links old icons restore now') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restore old link icons and only add App Store row
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          import pathlib, re, subprocess
+
+          old_links_ref = '39f09310a8848bb539aaf1c6bf6265832aa9a48d'
+          original_health_ref = '8ea3518001d241bdbd80fbfe7d136b64c93780d4'
+
+          text = subprocess.check_output(['git', 'show', f'{old_links_ref}:links/index.html'], text=True)
+
+          header_pattern = re.compile(
+              r'<header>\s*\n\s*(<div class="quote">.*?</div>)\s*\n\s*<div class="brand"><h1>DAR AL TAWḤĪD</h1><p class="by">by Serhat Abu Malik</p><p class="sub">OFFIZIELLE KANÄLE</p></div>\s*\n\s*</header>',
+              re.S,
+          )
+          m = header_pattern.search(text)
+          assert m, 'old header block not found'
+          quote = m.group(1)
+          new_header = '<header>\n      <div class="brand"><h1>DĀR AL TAWḤĪD</h1><p class="by">by Serhat Abu Malik</p><p class="sub">OFFIZIELLE KANÄLE</p></div>\n      ' + quote + '\n    </header>'
+          text = header_pattern.sub(new_header, text, count=1)
+
+          marker = '      <button class="row app" id="openApp" type="button">'
+          start = text.find(marker)
+          assert start != -1, 'Web-App button not found'
+          end = text.find('</button>', start)
+          assert end != -1, 'Web-App button end not found'
+          end += len('</button>')
+          appstore_row = '\n      <a class="row appstore" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD im Apple App Store öffnen"><span class="emblem" aria-hidden="true"><img class="emblem-img" src="/assets/app-store-icon-fixed.svg?v=20260913f" alt="" /></span><span class="text"><span class="label">App Store</span><span class="value">DĀR AL TAWḤĪD App</span></span><span class="go">›</span></a>'
+          text = text[:end] + appstore_row + text[end:]
+
+          css = '''
+/* only App Store row */
+.appstore{--accent:#2497e8}
+.appstore .emblem{background:#f7f1e5;color:#111;overflow:hidden}
+.appstore .emblem .emblem-img{width:100%;height:100%;border-radius:50%;object-fit:contain!important;display:block;padding:0;background:#fff;filter:drop-shadow(0 2px 4px rgba(0,0,0,.38))}
+'''
+          text = text.replace('</style>', css + '</style>', 1)
+          pathlib.Path('links/index.html').write_text(text, encoding='utf-8')
+
+          original_health = subprocess.check_output(['git', 'show', f'{original_health_ref}:.github/workflows/app-health-check.yml'], text=True)
+          pathlib.Path('.github/workflows/app-health-check.yml').write_text(original_health, encoding='utf-8')
+          PY
+
+          git config user.name "Serhat Abu Malik"
+          git config user.email "73606501+Sero91ak@users.noreply.github.com"
+          git rm -f .github/workflows/fix-links-appstore-only.yml || true
+          git rm -f .github/links-fix-trigger.txt || true
+          git add links/index.html .github/workflows/app-health-check.yml
+          git diff --cached --quiet && exit 0
+          git commit -m "Links: restore old icons and keep App Store icon"
+          git push
+
   health:
     runs-on: ubuntu-latest
     steps:
