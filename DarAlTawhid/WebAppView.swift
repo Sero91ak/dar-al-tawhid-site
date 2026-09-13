@@ -97,6 +97,7 @@ struct WebAppView: UIViewRepresentable {
         userContentController.add(context.coordinator, name: "darHaptic")
         userContentController.add(context.coordinator, name: "darPushTest")
         userContentController.add(context.coordinator, name: "darPushReactivate")
+        userContentController.add(context.coordinator, name: "darPushExternalId")
         userContentController.add(context.coordinator, name: "darAppIcon")
         let deviceId = DarPushNotifications.deviceId()
         let escapedDevice = deviceId
@@ -108,7 +109,14 @@ struct WebAppView: UIViewRepresentable {
             window.DAR_IOS_NATIVE_PUSH=true;
             window.DAR_IOS_NATIVE_APP=true;
             window.DAR_IOS_DEVICE_ID="\(escapedDevice)";
-            try{localStorage.setItem("darPushExternalIdV1", window.DAR_IOS_DEVICE_ID)}catch(e){}
+            var existingId="";
+            try{existingId=localStorage.getItem("darPushExternalIdV1")||""}catch(e){}
+            if(existingId){
+              window.DAR_IOS_DEVICE_ID=existingId;
+              try{webkit.messageHandlers.darPushExternalId.postMessage({id:existingId})}catch(e){}
+            }else{
+              try{localStorage.setItem("darPushExternalIdV1", window.DAR_IOS_DEVICE_ID)}catch(e){}
+            }
             window.Notification=window.Notification||function(){};
             try{
               Object.defineProperty(window.Notification,"permission",{configurable:true,get:function(){return "granted"}});
@@ -787,6 +795,7 @@ struct WebAppView: UIViewRepresentable {
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darHaptic")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushTest")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushReactivate")
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushExternalId")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darAppIcon")
             NotificationCenter.default.removeObserver(self)
         }
@@ -945,6 +954,13 @@ struct WebAppView: UIViewRepresentable {
                 DarPushNotifications.reactivatePush()
                 return
             }
+            if message.name == "darPushExternalId" {
+                if let body = message.body as? [String: Any],
+                   let id = body["id"] as? String {
+                    DarPushNotifications.adoptExternalId(id)
+                }
+                return
+            }
             if message.name == "darAppIcon" {
                 let body = message.body as? [String: Any] ?? [:]
                 let name = body["name"] as? String ?? ""
@@ -1097,14 +1113,22 @@ struct WebAppView: UIViewRepresentable {
         @objc func injectNativePushBridge() {
             let sub = DarPushNotifications.lastSubscriptionId()
             let token = DarPushNotifications.pushToken()
-            let device = DarPushNotifications.deviceId()
+            let device = DarPushNotifications.externalId()
             let js = """
             (function(){
               window.DAR_IOS_NATIVE_PUSH=true;
               window.DAR_IOS_ONESIGNAL_ID=\(Self.jsString(sub));
               window.DAR_IOS_PUSH_TOKEN=\(Self.jsString(token));
               window.DAR_IOS_DEVICE_ID=\(Self.jsString(device));
-              try{if(window.DAR_IOS_DEVICE_ID)localStorage.setItem("darPushExternalIdV1", window.DAR_IOS_DEVICE_ID)}catch(e){}
+              try{
+                var existing=localStorage.getItem("darPushExternalIdV1")||"";
+                if(existing && existing!==window.DAR_IOS_DEVICE_ID){
+                  window.DAR_IOS_DEVICE_ID=existing;
+                  try{webkit.messageHandlers.darPushExternalId.postMessage({id:existing})}catch(e){}
+                }else{
+                  localStorage.setItem("darPushExternalIdV1", window.DAR_IOS_DEVICE_ID);
+                }
+              }catch(e){}
               function patch(){
                 if(typeof readOneSignalPushSubscriptionState==="function"){
                   readOneSignalPushSubscriptionState=function(){

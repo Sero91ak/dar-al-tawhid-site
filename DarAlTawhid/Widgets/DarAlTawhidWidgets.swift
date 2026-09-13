@@ -60,7 +60,7 @@ struct PrayerTimerWidget: Widget {
         .supportedFamilies(Self.timerFamilies)
     }
 
-    private static var timerFamilies: [WidgetFamily] {
+    fileprivate static var timerFamilies: [WidgetFamily] {
         var families: [WidgetFamily] = [.systemSmall, .systemMedium, .accessoryCircular, .accessoryRectangular, .accessoryInline]
         if #available(iOSApplicationExtension 17.0, *) {
             families.append(.systemExtraLarge)
@@ -173,10 +173,23 @@ struct LockHijriPrayerWidget: Widget {
     }
 }
 
+/// Legacy kind from older builds — keeps existing home-screen widgets working after upgrades.
+struct LegacyPrayerWidget: Widget {
+    var body: some WidgetConfiguration {
+        AppIntentConfiguration(kind: "de.daraltawhid.widget.prayer", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
+            PrayerTimerView(entry: entry)
+        }
+        .configurationDisplayName("Nächstes Gebet")
+        .description("Homescreen und Sperrbildschirm.")
+        .supportedFamilies(PrayerTimerWidget.timerFamilies)
+    }
+}
+
 @main
 struct DarAlTawhidWidgets: WidgetBundle {
     var body: some Widget {
         PrayerTimerWidget()
+        LegacyPrayerWidget()
         PrayerListWidget()
         PrayerDayWidget()
         LockDatePrayerWidget()
@@ -185,5 +198,10 @@ struct DarAlTawhidWidgets: WidgetBundle {
         TodayWidget()
         AyahWidget()
         DuaWidget()
+        DarPrayerLiveActivityWidget()
+        if #available(iOSApplicationExtension 18.0, *) {
+            DarPrayerControlWidget()
+            DarQiblaControlWidget()
+        }
     }
 }

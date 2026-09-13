@@ -180,13 +180,54 @@ enum DarPushNotifications {
         )
     }
 
+    /// Canonical OneSignal external ID — same key as web (`darPushExternalIdV1`), prefix `dar-`.
     static func deviceId() -> String {
         if let existing = UserDefaults.standard.string(forKey: deviceIdKey), !existing.isEmpty {
-            return existing
+            let normalized = normalizeExternalId(existing)
+            if normalized != existing {
+                UserDefaults.standard.set(normalized, forKey: deviceIdKey)
+            }
+            return normalized
         }
-        let id = "ios-" + UUID().uuidString.lowercased()
+        let id = "dar-" + UUID().uuidString.lowercased()
         UserDefaults.standard.set(id, forKey: deviceIdKey)
         return id
+    }
+
+    static func externalId() -> String {
+        deviceId()
+    }
+
+    /// Adopt an existing web/app ID so browser + native share one OneSignal user.
+    static func adoptExternalId(_ raw: String) {
+        let normalized = normalizeExternalId(raw)
+        guard !normalized.isEmpty else { return }
+        let current = UserDefaults.standard.string(forKey: deviceIdKey) ?? ""
+        guard normalized != current else { return }
+        UserDefaults.standard.set(normalized, forKey: deviceIdKey)
+        #if !targetEnvironment(macCatalyst)
+        OneSignal.login(normalized)
+        OneSignal.User.addTags([
+            "dar_push": "true",
+            "post_notifications": "true",
+            "platform": "ios",
+            "dar_client": "native_ios",
+            "dar_env": DarAppShell.usesStagingWeb ? "test" : "live",
+            "dar_surface": "native",
+            "push_site": "dar-al-tawhid",
+            "watch_mirroring": "true"
+        ])
+        syncWithServerThenScheduleLocalFallback()
+        #endif
+    }
+
+    private static func normalizeExternalId(_ raw: String) -> String {
+        let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return "" }
+        if trimmed.hasPrefix("dar-") { return trimmed }
+        if trimmed.hasPrefix("ios-") { return "dar-" + trimmed.dropFirst(4) }
+        if trimmed.hasPrefix("android-") { return "dar-" + trimmed.dropFirst(8) }
+        return "dar-" + trimmed
     }
 
     static func applyWebPrayerSettings(_ raw: [String: Any]) {
