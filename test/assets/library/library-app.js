@@ -10,7 +10,7 @@
   const OFFLINE_DB = "darLibraryOfflineV1";
   const OFFLINE_STORE = "pdfs";
   const PDFJS_URL = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
-  const PDFJS_WORKER = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  const PDFJS_WORKER = "https://cdn.jsdelivr.net/npm/pdfjs-dist@5.6.205/build/pdf.worker.min.mjs";
   const PDFJS_FALLBACK_URLS = [
     PDFJS_URL,
     "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js",
@@ -309,6 +309,11 @@
 
   function navigateReader(slug) {
     global.location.hash = `#bibliothek/${encodeURIComponent(slug)}/lesen`;
+  }
+
+  function isReaderHashActive() {
+    const hash = String(global.location.hash || "");
+    return /^#bibliothek-reader\//i.test(hash) || /^#bibliothek\/.+\/lesen$/i.test(hash);
   }
 
   function normalizeSearchText(text) {
@@ -969,15 +974,15 @@
       };
 
       try {
-        const embedded = await tryEmbeddedModule();
-        if (embedded) return embedded;
+        const embeddedClassic = await tryEmbeddedClassicScript();
+        if (embeddedClassic) return embeddedClassic;
       } catch (e) {
-        /* Modul-Import fehlgeschlagen — wir versuchen klassisches Inline-Skript */
+        /* Klassische Einbettung fehlgeschlagen — wir versuchen das lokale Modul */
       }
 
       try {
-        const embeddedClassic = await tryEmbeddedClassicScript();
-        if (embeddedClassic) return embeddedClassic;
+        const embedded = await tryEmbeddedModule();
+        if (embedded) return embedded;
       } catch (e) {
         /* Lokale Einbettung fehlgeschlagen — wir versuchen externe Fallbacks */
       }
@@ -1021,6 +1026,8 @@
   let readerPageObserver = null;
   let readerRenderToken = 0;
   let readerSessionId = 0;
+  let readerInitPromise = null;
+  let readerInitSlug = "";
 
   function getReaderRoot() {
     return document.querySelector("[data-library-reader-portal]")
@@ -1029,7 +1036,19 @@
 
   function getReaderStage() {
     const root = getReaderRoot();
-    return root ? root.querySelector("[data-library-reader-stage]") : null;
+    if (!root) return null;
+    let stage = root.querySelector("#darLibraryPdfSurface");
+    if (!stage) {
+      const toolbar = root.querySelector(".lib-reader-toolbar");
+      if (!toolbar) return null;
+      stage = document.createElement("div");
+      stage.id = "darLibraryPdfSurface";
+      stage.className = "lib-pdf-surface";
+      stage.style.cssText = "position:fixed;z-index:121;inset:calc(env(safe-area-inset-top, 0px) + 48px) 0 0;overflow:auto;padding:6px;background:var(--bg);";
+      stage.innerHTML = '<div class="lib-reader-msg">PDF wird geladen…</div>';
+      toolbar.appendChild(stage);
+    }
+    return stage;
   }
 
   function readerPublicationSlug(root) {
@@ -1049,7 +1068,7 @@
     const root = getReaderRoot();
     if (!root || !root.hasAttribute("data-library-reader-portal")) return false;
     if (pubSlug !== key || readerPublicationSlug(root) !== key) return false;
-    const stage = root.querySelector("[data-library-reader-stage]");
+    const stage = getReaderStage();
     if (!stage) return false;
     return !!stage.querySelector(".lib-reader-page-canvas, .lib-reader-fallback, .lib-reader-native");
   }
@@ -1126,20 +1145,15 @@
   }
 
   function removeReaderOverlay() {
+    if (isReaderHashActive()) return;
     document.querySelectorAll("[data-library-reader-portal]").forEach((el) => el.remove());
+    document.getElementById("darLibraryPdfSurface")?.remove();
   }
 
   function mountReaderOverlay() {
-    const portal = document.querySelector("[data-library-reader-portal]");
-    if (portal) {
-      scrubDuplicateReaders(portal);
-      return portal;
-    }
     const reader = document.querySelector("[data-library-reader]");
     if (!reader) return null;
-    removeReaderOverlay();
     reader.setAttribute("data-library-reader-portal", "1");
-    document.body.appendChild(reader);
     scrubDuplicateReaders(reader);
     try {
       window.scrollTo(0, 0);
@@ -1300,6 +1314,7 @@
       }
     } catch (e) {
       if (token !== readerRenderToken) return;
+      console.error("PDF-Seitenrendering fehlgeschlagen", e);
       if (renderReaderIframeFallback(stage, startPage)) return;
       stage.innerHTML = `<div class="lib-reader-msg">PDF konnte nicht geladen werden. Bitte versuche es erneut oder lade die Datei herunter.</div>`;
     }
@@ -1344,6 +1359,7 @@
     const root = mountReaderOverlay() || getReaderRoot();
     const stage = root?.querySelector("[data-library-reader-stage]");
     if (!root || !stage) return;
+    setTimeout(() => getReaderStage(), 0);
     scrubDuplicateReaders(root);
 
     if (readerState?.blobUrl) {
@@ -1382,16 +1398,33 @@
       if (session !== readerSessionId) return;
       readerState.doc = doc;
       readerState.total = doc.numPages;
-      const totalEl = root.querySelector("[data-library-reader-total]");
+      const liveRoot = getReaderRoot();
+      const totalEl = liveRoot?.querySelector("[data-library-reader-total]");
       if (totalEl) totalEl.textContent = String(readerState.total);
       await renderReaderScroll({ page: readerState.page });
       if (session !== readerSessionId) return;
       trackLibraryEvent("library_read", pub);
     } catch (e) {
       if (session !== readerSessionId) return;
+      console.error("PDF-Reader-Initialisierung fehlgeschlagen", e);
       if (renderReaderIframeFallback(stage)) return;
       stage.innerHTML = `<div class="lib-reader-msg">PDF konnte nicht geladen werden. Bitte versuche es erneut oder lade die Datei herunter.</div>`;
     }
+  }
+
+  async function ensureReaderInitialized(pub) {
+    const slug = String(pub?.slug || pub?.id || "");
+    if (isReaderActive(slug)) return;
+    if (!readerInitPromise || readerInitSlug !== slug) {
+      readerInitSlug = slug;
+      readerInitPromise = initReader(pub).finally(() => {
+        if (readerInitSlug === slug) {
+          readerInitPromise = null;
+          readerInitSlug = "";
+        }
+      });
+    }
+    await readerInitPromise;
   }
 
   async function initReaderNative(pub) {
@@ -1604,6 +1637,13 @@
     if (route && route.view === "bibliothek-reader") {
       document.body.classList.add("is-library-reader-route");
       const pub = findPublication(route.value);
+      if (!pub && !catalog) {
+        ensureCatalog().then(() => {
+          const activeRoute = typeof global.readRoute === "function" ? global.readRoute() : route;
+          if (activeRoute?.view === "bibliothek-reader" && typeof global.render === "function") global.render();
+        }).catch(() => {});
+        return;
+      }
       if (pub && canRead(pub)) {
         if (isReaderActive(pub.slug)) {
           const reader = getReaderRoot();
@@ -1614,14 +1654,17 @@
           const pageInput = reader?.querySelector("[data-library-reader-input]");
           if (pageInput && readerState?.page) pageInput.value = String(readerState.page);
         } else {
-          await initReader(pub);
+          await ensureReaderInitialized(pub);
           bindReaderControls(pub, getReaderRoot());
         }
       } else {
         navigateDetail(route?.value || "");
       }
     } else {
+      if (isReaderHashActive()) return;
       readerSessionId += 1;
+      readerInitPromise = null;
+      readerInitSlug = "";
       removeReaderOverlay();
       if (readerState?.blobUrl) {
         try {

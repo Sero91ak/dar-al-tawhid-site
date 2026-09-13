@@ -4710,6 +4710,23 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "pdf-reader-immediate-repair-2026-09-13",
+      "approvedBy": "user-explicit-pdf-reader-immediate-fix",
+      "reason": "PDF- und Jetzt-lesen-Klicks in Besucher-, iOS- und Test-App wieder lesbar machen, Reader vor Hintergrund-Refresh schützen und Zurücknavigation erhalten",
+      "paths": [
+        "assets/library/library-app.js",
+        "test/assets/library/library-app.js",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

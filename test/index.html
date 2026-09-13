@@ -2,10 +2,10 @@
 <html lang="de">
 <head>
 <!-- pages-deploy-stamp:1786134093716 -->
-<!-- workers-deploy-stamp:1789285535191 -->
+<!-- workers-deploy-stamp:1789288429577 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v830";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v831";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -21059,7 +21059,7 @@ function postFromCachedFile(cached,fileName){if(!Array.isArray(cached)||!fileNam
 function postStillInIndex(post,names){if(!post||!names||!names.size)return false;const sf=String(post._sourceFile||"");if(sf&&names.has(sf))return true;const id=String(post.id||"");if(!id)return false;for(const n of names){if(n.replace(/\.md$/,"")===id)return true}return false}
 function filterPostsByFileIndex(list,names){return(Array.isArray(list)?list:[]).filter(p=>postStillInIndex(p,names))}
 function postFileIsFresh(file,fileMap,cached){const e=fileMap[file.name];if(!e||e.sha!==(file.sha||"")||e.parseVersion!==POST_PARSE_VERSION)return false;return!!postFromCachedFile(cached,file.name)}
-function schedulePostsRender(immediate=false){if(immediate){if(postsRenderTimer){clearTimeout(postsRenderTimer);postsRenderTimer=null}try{if(document.getElementById("appView")&&typeof render==="function")render()}catch(e){}return}if(postsRenderTimer)return;postsRenderTimer=setTimeout(()=>{postsRenderTimer=null;try{if(document.getElementById("appView")&&typeof render==="function")render()}catch(e){}},140)}
+function schedulePostsRender(immediate=false){const readerActive=()=>{try{return typeof readRoute==="function"&&readRoute().view==="bibliothek-reader"}catch(e){return false}};if(immediate){if(postsRenderTimer){clearTimeout(postsRenderTimer);postsRenderTimer=null}if(readerActive())return;try{if(document.getElementById("appView")&&typeof render==="function")render()}catch(e){}return}if(postsRenderTimer)return;postsRenderTimer=setTimeout(()=>{postsRenderTimer=null;if(readerActive())return;try{if(document.getElementById("appView")&&typeof render==="function")render()}catch(e){}},140)}
 function scheduleRefreshContent(opts={},delay=900){clearTimeout(refreshContentDebTimer);refreshContentDebTimer=setTimeout(()=>{refreshContentDebTimer=null;refreshContent(opts).catch(()=>{})},delay)}
 function renderPostsSyncBanner(){if(!postsSyncBusy||postsSyncSilent)return "";return `<div class="posts-sync-banner" role="status">${esc(postsSyncLabel||"Neue Beiträge werden synchronisiert…")}</div>`}
 function hydrateOfflineContent(){const cached=getCachedPosts();if(cached.length)applyPostsList(cached);const ids=new Set(DUAS.map(d=>String(d.id)));getJson(DUA_CACHE_KEY,[]).forEach(d=>{if(d&&d.id&&!ids.has(String(d.id))){DUAS.push(d);ids.add(String(d.id))}});normalizeLoadedDuas()}
@@ -26603,7 +26603,7 @@ function homeLibraryDiscoverDataUrl(){return (isTestAppPath()?"/test":"")+"/data
 function libraryCatalogSignature(pubs){return (pubs||[]).map(p=>`${p.id}|${p.updatedAt||""}|${p.pdfUrl||""}|${p.status||""}|${p.coverUrl||""}`).sort().join(";")}
 function invalidateHomeLibraryDiscoverCache(){window.__homeLibraryDiscoverPubs=null;try{sessionStorage.removeItem(HOME_LIBRARY_DISCOVER_CACHE_KEY)}catch(e){}}
 async function fetchLibraryCatalogRemote(){const res=await fetch(homeLibraryDiscoverDataUrl()+"?v="+Date.now(),{cache:"no-store"});if(!res.ok)throw new Error("catalog load failed");const data=await res.json();return homeLibraryVisiblePubs(data.publications||[])}
-async function refreshLibraryCatalog({force=false}={}){if(!navigator.onLine)return false;try{const pubs=await fetchLibraryCatalogRemote();const sig=libraryCatalogSignature(pubs);const prevSig=window.__libraryCatalogSig||"";const changed=force||!prevSig||prevSig!==sig;if(!changed)return false;window.__libraryCatalogSig=sig;window.__homeLibraryDiscoverPubs=pubs;try{sessionStorage.setItem(HOME_LIBRARY_DISCOVER_CACHE_KEY,JSON.stringify({ts:Date.now(),pubs}))}catch(e){}if(window.DARLibraryApp&&typeof window.DARLibraryApp.invalidateCatalog==="function")window.DARLibraryApp.invalidateCatalog();if(currentRoute.view==="home")fillHomeDiscoverLibraryBlock(pubs);else if(currentRoute.view==="bibliothek"&&typeof render==="function")render();return true}catch(e){return false}}
+async function refreshLibraryCatalog({force=false}={}){if(!navigator.onLine)return false;try{const pubs=await fetchLibraryCatalogRemote();const sig=libraryCatalogSignature(pubs);const prevSig=window.__libraryCatalogSig||"";const changed=force||!prevSig||prevSig!==sig;if(!changed)return false;window.__libraryCatalogSig=sig;window.__homeLibraryDiscoverPubs=pubs;try{sessionStorage.setItem(HOME_LIBRARY_DISCOVER_CACHE_KEY,JSON.stringify({ts:Date.now(),pubs}))}catch(e){}if(window.DARLibraryApp&&typeof window.DARLibraryApp.invalidateCatalog==="function"){window.DARLibraryApp.invalidateCatalog();if(typeof window.DARLibraryApp.ensureCatalog==="function"){await window.DARLibraryApp.ensureCatalog();window.__libraryCatalogReady=true}}if(currentRoute.view==="home")fillHomeDiscoverLibraryBlock(pubs);else if(["bibliothek","bibliothek-detail"].includes(currentRoute.view)&&typeof render==="function")render();return true}catch(e){return false}}
 function homeLibraryVisiblePubs(pubs){return (pubs||[]).filter(p=>!["archived","draft","error","preparing"].includes(String(p.status||""))&&p.pdfUrl)}
 function sortHomeLibraryPubs(pubs){return [...pubs].sort((a,b)=>String(b.updatedAt||b.publishedAt||"").localeCompare(String(a.updatedAt||a.publishedAt||"")))}
 function homeLibraryDiscoverKicker(pub,index){
@@ -27028,7 +27028,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v830";
+const APP_BUILD_ID="app-shell-v831";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -27384,7 +27384,7 @@ function ensureLibraryModule(){
     }
     if(window.DARLibraryApp){window.__libraryAssetsReady=true;resolve(window.DARLibraryApp);return}
     const s=document.createElement("script");
-    s.src=`${base}/assets/library/library-app.js?v=30`;
+    s.src=`${base}/assets/library/library-app.js?v=31`;
     s.defer=true;
     s.onload=()=>{window.__libraryAssetsReady=true;resolve(window.DARLibraryApp)};
     s.onerror=reject;
@@ -27536,6 +27536,8 @@ function render(){
     const sameRoute=window.__lastRenderSig===sigBefore;
     currentRoute=readRoute();
     try{window.currentRoute=currentRoute}catch(e){}
+    const activeLibraryReader=document.querySelector("[data-library-reader]");
+    if(currentRoute.view==="bibliothek-reader"&&activeLibraryReader&&String(activeLibraryReader.getAttribute("data-library-reader")||"")===String(currentRoute.value||""))return;
     if(quranLastRoute?.view==="quran-surah"&&currentRoute.view!=="quran-surah"){saveQuranAutoFromVisible(true);clearQuranProgressObserver()}
     if(currentRoute.view==="quran-surah")setQuranReadingSettings({lastOpenedAt:new Date().toISOString()});
     syncNavStackOnHashChange();
