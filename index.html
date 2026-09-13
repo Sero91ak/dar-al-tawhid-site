@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v798";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v799";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -983,8 +983,13 @@ body.is-post-route .bottom-nav.post-nav-hidden{transform:translateY(120%);opacit
 .dar-inapp-push-banner b{display:block;color:var(--gold2,#efd78e);font-size:15px;margin-bottom:4px}
 .dar-inapp-push-banner p{margin:0;color:var(--muted,#cfc6b4);font-size:12px;line-height:1.4}
 .dar-inapp-push-banner button{margin-left:auto;min-height:36px;border-radius:999px;border:1px solid rgba(239,215,142,.5);background:linear-gradient(135deg,rgba(239,215,142,.22),rgba(155,122,60,.16));color:var(--gold2,#efd78e);font-weight:850;padding:0 12px;white-space:nowrap}
-.notification-health{margin:0 0 12px;padding:12px;border:1px solid rgba(239,215,142,.22);border-radius:16px;background:rgba(9,13,10,.55)}
-.notification-health p{margin:0 0 8px;color:var(--muted);font-size:12px;line-height:1.4}
+.notification-health{margin:16px 0 0;padding:14px 14px 12px;border:1px solid color-mix(in srgb,var(--gold2) 30%,var(--line2,var(--line)) 70%);border-radius:18px;background:color-mix(in srgb,var(--card) 82%,transparent);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--text) 4%,transparent)}
+.notification-health p{margin:0 0 12px;color:var(--text);font-size:12.5px;line-height:1.5;letter-spacing:.01em}
+.notification-health__kind{display:block;color:var(--gold2);font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.notification-health__line{display:block;color:var(--muted);font-size:12.5px;line-height:1.45}
+.notification-health__line--warn{color:#ffe4a3}
+.notification-health .notification-action{display:flex;align-items:center;justify-content:center;width:100%;min-height:38px;margin-top:4px;padding:8px 14px}
+.notification-health .notification-action+.notification-action{margin-top:8px}
 
 
 .home-refresh-panel{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--premium-line);border-radius:18px;background:var(--premium-panel);box-shadow:var(--premium-shadow);padding:10px 12px;margin:0 0 13px}
@@ -26383,9 +26388,9 @@ function bindNotificationCenter(){
       else{if(!OS)missing.push("OneSignal");if(!sub)missing.push("Subscription")}
       if(!opted&&perm==="granted"&&!sub)missing.push("Aktivierung");
       const incomplete=missing.length>0;
-      healthText.textContent=incomplete
-        ?("Push nicht vollständig aktiv · "+kind+" · fehlt: "+missing.join(", "))
-        :(kind+" aktiv"+(sub?" · Gerät erkannt":""));
+      healthText.innerHTML=incomplete
+        ?(`<span class="notification-health__kind">${esc(kind)}</span><span class="notification-health__line notification-health__line--warn">Nicht vollständig aktiv · fehlt: ${esc(missing.join(", "))}</span>`)
+        :(`<span class="notification-health__kind">${esc(kind)}</span><span class="notification-health__line">${sub?"Gerät erkannt · Push bereit":"Push bereit"}</span>`);
       healthBox.hidden=false;
     })().catch(()=>{healthText.textContent="Push nicht vollständig aktiv";});
     if(reenable)reenable.onclick=async()=>{try{await requestNotificationPermission();if(isDarNativeApp()){await new Promise(r=>setTimeout(r,1200));rerender();return}const OS=await waitForOneSignalReady(8000);if(OS){await ensurePushUserLogin(OS);await waitForPushOptIn(OS);await syncDailyPushTags(getPrayerSettings(),{ensureOptIn:true});await savePushRegistration(getPrayerSettings(),OS)}rerender()}catch(e){if(healthText)healthText.textContent="Push nicht vollständig aktiv"}};
@@ -27000,7 +27005,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v798";
+const APP_BUILD_ID="app-shell-v799";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -33359,7 +33364,10 @@ html[data-theme="light"].dar-test-nav-v1.dar-original-nav-v2 #bottomNav .bottom-
 .settings-page-head .view-desc{margin-top:0!important}
 .settings-flat-live-v1,.settings-flat-live-v1 *{will-change:auto!important}
 .settings-flat-live-v1 :where(.notification-hero,.notification-section,.theme-switch-panel,.app-icon-panel,.app-font-panel,.font-slider-panel,.settings-live-row){border-radius:0!important;background:transparent!important;background-image:none!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
-.settings-flat-live-v1 :where(.notification-hero,.theme-switch-panel,.app-icon-panel,.app-font-panel,.settings-live-row){width:100%!important;margin:0!important;padding:15px 3px!important;border:0!important;border-bottom:1px solid color-mix(in srgb,var(--gold2) 24%,var(--line2,var(--line)) 76%)!important}
+.settings-flat-live-v1 :where(.notification-hero,.theme-switch-panel,.app-icon-panel,.app-font-panel,.settings-live-row){width:100%!important;margin:0!important;padding:18px 6px 20px!important;border:0!important;border-bottom:1px solid color-mix(in srgb,var(--gold2) 24%,var(--line2,var(--line)) 76%)!important}
+.settings-flat-live-v1 .notification-hero__top{margin-bottom:2px!important}
+.settings-flat-live-v1 .notification-health{margin:18px 2px 0!important;padding:15px 14px 13px!important;border:1px solid color-mix(in srgb,var(--gold2) 34%,var(--line2,var(--line)) 66%)!important;border-radius:18px!important;background:color-mix(in srgb,var(--card) 88%,transparent)!important;box-shadow:inset 0 1px 0 color-mix(in srgb,var(--text) 5%,transparent)!important}
+.settings-flat-live-v1 .notification-hero__status{margin-top:18px!important;padding-top:14px!important;border-top:1px solid color-mix(in srgb,var(--line2,var(--line)) 40%,transparent)!important;gap:8px!important}
 .settings-flat-live-v1 .notification-section{width:100%!important;margin:0!important;padding:19px 2px 17px!important;border:0!important;border-bottom:1px solid color-mix(in srgb,var(--gold2) 24%,var(--line2,var(--line)) 76%)!important}
 .settings-flat-live-v1 .notification-section__head{margin:0 3px 12px!important}
 .settings-flat-live-v1 .settings-section-label{margin:15px 3px 5px!important;padding:0!important}
