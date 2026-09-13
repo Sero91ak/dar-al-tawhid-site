@@ -1781,6 +1781,19 @@ struct WebAppView: UIViewRepresentable {
             guard let webView else { return }
             updateViewportInsets()
             applyPendingQuickActionIfNeeded()
+            DarPushNotifications.syncWithServerThenScheduleLocalFallback()
+            webView.evaluateJavaScript(
+                """
+                (function(){
+                  try{
+                    if(typeof getPrayerSettings!=='function')return;
+                    if(!window.webkit||!window.webkit.messageHandlers||!window.webkit.messageHandlers.darPushSettings)return;
+                    window.webkit.messageHandlers.darPushSettings.postMessage(getPrayerSettings());
+                  }catch(e){}
+                })();
+                """,
+                completionHandler: nil
+            )
             if didShowErrorState {
                 showLoadingOverlay(subtitle: "Erneut laden")
                 webView.load(URLRequest(url: WebAppView.launchURL))

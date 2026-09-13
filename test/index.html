@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1789319677748 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v841";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v842";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -24802,7 +24802,7 @@ async function requestServerPrayerTest(subId,prayerKey,mode,settings){
 async function getOneSignalServiceWorkerRegistration(){try{const regs=await navigator.serviceWorker?.getRegistrations?.();return (regs||[]).find(r=>String(r.scope||"").includes("/push/onesignal"))||null}catch(e){return null}}
 async function showPrayerNotification(title,options={}){const payload=darNotificationPayload(options);const osReg=await getOneSignalServiceWorkerRegistration();if(osReg?.showNotification){try{await osReg.showNotification(title,payload);return true}catch(e){}}try{const regs=await navigator.serviceWorker?.getRegistrations?.();for(const reg of(regs||[])){if(reg===osReg||!reg?.showNotification)continue;try{await reg.showNotification(title,payload);return true}catch(e){}}}catch(e){}if(hasNotificationApi()&&getNotificationPermission()==="granted"){try{const n=new window.Notification(title,payload);return Boolean(n)}catch(e){}}return false}
 async function restorePrayerRemindersOnLoad(){const s=getPrayerSettings();if(!s.reminder||!hasPrayerLocation(s))return;await scheduleLocalPrayerRemindersIfNeeded({silent:true})}
-function setPrayerSettings(value){const prev=getPrayerSettings();const next={...prev,...value};if(prev.reminder)next.reminder=true;if(value&&Object.prototype.hasOwnProperty.call(value,"jummahNotifications"))next.jummahNotifications=value.jummahNotifications===true||value.jummahNotifications==="true";setJson(PRAYER_SETTINGS_KEY,next);if(next.reminder&&hasPrayerLocation(next))syncPrayerPushTags(next).catch(()=>{});if(Object.prototype.hasOwnProperty.call(value||{},"jummahNotifications")||next.jummahNotifications||prev.jummahNotifications)syncJummahPushTags(next,{retries:next.jummahNotifications?3:1,timeoutMs:next.jummahNotifications?8000:2500}).catch(()=>{});if(getNotificationPermission()==="granted"){syncDailyPushTags(next,{ensureOptIn:false}).catch(()=>{});waitForOneSignalReady(5000).then(OS=>savePushRegistration(next,OS)).catch(()=>{})}}
+function setPrayerSettings(value){const prev=getPrayerSettings();const next={...prev,...value};if(prev.reminder)next.reminder=true;if(value&&Object.prototype.hasOwnProperty.call(value,"jummahNotifications"))next.jummahNotifications=value.jummahNotifications===true||value.jummahNotifications==="true";setJson(PRAYER_SETTINGS_KEY,next);try{if(typeof isDarNativeApp==="function"&&isDarNativeApp()&&window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.darPushSettings){window.webkit.messageHandlers.darPushSettings.postMessage(next)}}catch(e){}if(next.reminder&&hasPrayerLocation(next))syncPrayerPushTags(next).catch(()=>{});if(Object.prototype.hasOwnProperty.call(value||{},"jummahNotifications")||next.jummahNotifications||prev.jummahNotifications)syncJummahPushTags(next,{retries:next.jummahNotifications?3:1,timeoutMs:next.jummahNotifications?8000:2500}).catch(()=>{});if(getNotificationPermission()==="granted"){syncDailyPushTags(next,{ensureOptIn:false}).catch(()=>{});waitForOneSignalReady(5000).then(OS=>savePushRegistration(next,OS)).catch(()=>{})}}
 function toRad(d){return d*Math.PI/180}
 function toDeg(r){return r*180/Math.PI}
 function fixAngle(a){return ((a%360)+360)%360}
@@ -27107,7 +27107,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v841";
+const APP_BUILD_ID="app-shell-v842";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
