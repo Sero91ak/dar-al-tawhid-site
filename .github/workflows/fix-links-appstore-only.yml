@@ -1,0 +1,43 @@
+name: Fix links App Store only
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-links-appstore-only.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restore original links page and add only App Store row
+        shell: python
+        run: |
+          import subprocess, pathlib
+          base = '39f09310a8848bb539aaf1c6bf6265832aa9a48d'
+          original = subprocess.check_output(['git','show',f'{base}:links/index.html'], text=True)
+          text = original
+          marker = '      <button class="row app" id="openApp" type="button">'
+          start = text.find(marker)
+          assert start != -1, 'Original Web-App row not found'
+          end = text.find('</button>', start)
+          assert end != -1, 'Original Web-App row end not found'
+          end += len('</button>')
+          appstore = '\n      <a class="row" style="--accent:#2497e8" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD im Apple App Store öffnen"><span class="emblem" aria-hidden="true"><img class="emblem-img" src="/assets/app-store-icon.png" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:cover" /></span><span class="text"><span class="label">App Store</span><span class="value">DĀR AL TAWḤĪD App</span></span><span class="go">›</span></a>'
+          text = text[:end] + appstore + text[end:]
+          # Strict guard: removing the one added row must reproduce the original byte-for-byte.
+          assert text.replace(appstore, '', 1) == original
+          pathlib.Path('links/index.html').write_text(text, encoding='utf-8')
+      - name: Commit only links page correction
+        run: |
+          git config user.name "Serhat Abu Malik"
+          git config user.email "73606501+Sero91ak@users.noreply.github.com"
+          git add links/index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Links: keep original page and add App Store row only"
+          git push
