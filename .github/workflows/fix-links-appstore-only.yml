@@ -1,4 +1,4 @@
-name: Fix links header and App Store icon
+name: Restore old links icons and keep App Store icon
 
 on:
   push:
@@ -15,38 +15,39 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Patch links page exactly as requested
+      - name: Restore old icons; only add App Store icon row
         shell: python
         run: |
-          import pathlib, subprocess
+          import pathlib, re, subprocess
 
+          # Base = letzte saubere Links-Seite mit den alten Nutzer-Icons.
           base = '39f09310a8848bb539aaf1c6bf6265832aa9a48d'
           text = subprocess.check_output(['git', 'show', f'{base}:links/index.html'], text=True)
 
-          old_start = '<header>\n      <div class="quote">'
-          new_start = '<header>\n      <div class="brand"><h1>DĀR AL TAWḤĪD</h1><p class="by">by Serhat Abu Malik</p><p class="sub">OFFIZIELLE KANÄLE</p></div>\n      <div class="quote">'
-          assert old_start in text, 'header/quote start not found'
-          text = text.replace(old_start, new_start, 1)
+          # Nur die bereits gewünschte Kopf-Reihenfolge beibehalten: Branding oben, Zitat darunter.
+          header_pattern = re.compile(
+              r'<header>\s*\n\s*(<div class="quote">.*?</div>)\s*\n\s*<div class="brand"><h1>DAR AL TAWḤĪD</h1><p class="by">by Serhat Abu Malik</p><p class="sub">OFFIZIELLE KANÄLE</p></div>\s*\n\s*</header>',
+              re.S,
+          )
+          m = header_pattern.search(text)
+          assert m, 'old header block not found'
+          quote = m.group(1)
+          new_header = '<header>\n      <div class="brand"><h1>DĀR AL TAWḤĪD</h1><p class="by">by Serhat Abu Malik</p><p class="sub">OFFIZIELLE KANÄLE</p></div>\n      ' + quote + '\n    </header>'
+          text = header_pattern.sub(new_header, text, count=1)
 
-          old_brand = '\n      <div class="brand"><h1>DAR AL TAWḤĪD</h1><p class="by">by Serhat Abu Malik</p><p class="sub">OFFIZIELLE KANÄLE</p></div>'
-          assert old_brand in text, 'old brand block not found'
-          text = text.replace(old_brand, '', 1)
-
+          # App-Store-Zeile nur direkt nach dem bestehenden App/Web-App-Button einfügen.
           marker = '      <button class="row app" id="openApp" type="button">'
           start = text.find(marker)
           assert start != -1, 'Web-App button not found'
           end = text.find('</button>', start)
           assert end != -1, 'Web-App button end not found'
           end += len('</button>')
-          appstore = '\n      <a class="row appstore" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD im Apple App Store öffnen"><span class="emblem" aria-hidden="true"><img class="emblem-img" src="/assets/app-store-icon-fixed.svg?v=20260913c" alt="" /></span><span class="text"><span class="label">App Store</span><span class="value">DĀR AL TAWḤĪD App</span></span><span class="go">›</span></a>'
-          text = text[:end] + appstore + text[end:]
+          appstore_row = '\n      <a class="row appstore" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD im Apple App Store öffnen"><span class="emblem" aria-hidden="true"><img class="emblem-img" src="/assets/app-store-icon-fixed.svg?v=20260913d" alt="" /></span><span class="text"><span class="label">App Store</span><span class="value">DĀR AL TAWḤĪD App</span></span><span class="go">›</span></a>'
+          text = text[:end] + appstore_row + text[end:]
 
+          # Nur App-Store-spezifische CSS-Regeln ergänzen; alte Icons/CSS bleiben unverändert.
           css = '''
-/* requested final header and App Store icon corrections */
-header>.brand{margin:0 0 7px;text-align:center}
-header>.brand h1{font-family:var(--serif);font-size:clamp(34px,8.7vw,62px);line-height:.98;letter-spacing:.055em;white-space:nowrap;text-shadow:0 10px 28px rgba(0,0,0,.65);overflow:hidden}
-header>.brand .by{margin:5px 0 0;font-family:var(--script);font-size:clamp(22px,5.3vw,34px);line-height:.96;color:#e3c57c;letter-spacing:.03em;white-space:nowrap;transform:scaleX(1.06);text-shadow:0 0 19px rgba(216,178,96,.18),0 8px 24px rgba(0,0,0,.34)}
-header>.quote{margin:0 auto 8px}
+/* only App Store row */
 .appstore{--accent:#2497e8}
 .appstore .emblem{background:#f7f1e5;color:#111;overflow:hidden}
 .appstore .emblem .emblem-img{width:100%;height:100%;border-radius:50%;object-fit:contain!important;display:block;padding:0;background:#fff;filter:drop-shadow(0 2px 4px rgba(0,0,0,.38))}
@@ -55,11 +56,13 @@ header>.quote{margin:0 auto 8px}
 
           pathlib.Path('links/index.html').write_text(text, encoding='utf-8')
           pathlib.Path('.github/workflows/fix-links-appstore-only.yml').unlink()
-      - name: Commit correction and remove temporary workflow
+      - name: Commit restored icon correction and remove temporary workflow
+        shell: bash
         run: |
+          set -e
           git config user.name "Serhat Abu Malik"
           git config user.email "73606501+Sero91ak@users.noreply.github.com"
           git add links/index.html .github/workflows/fix-links-appstore-only.yml
           git diff --cached --quiet && exit 0
-          git commit -m "Links: move brand header up and fix App Store icon"
+          git commit -m "Links: restore old icons and keep App Store icon"
           git push
