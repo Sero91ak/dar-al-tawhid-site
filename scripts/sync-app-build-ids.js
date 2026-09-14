@@ -95,7 +95,7 @@ function syncServiceWorker(swFile, buildId) {
 
 const visitorBuild = canonicalizeVersionFile("version.json", { visitor: true });
 const testBuild = canonicalizeVersionFile("test/version.json", { visitor: false });
-syncHtml("index.html", visitorBuild);
+syncHtml("app/index.html", visitorBuild);
 syncHtml("test/index.html", testBuild);
 syncServiceWorker("service-worker.js", visitorBuild);
 syncServiceWorker("test/service-worker.js", testBuild);

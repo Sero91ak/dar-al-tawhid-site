@@ -19,7 +19,8 @@ const MIN_TRACKED_FILES = 2000;
 const MAX_DELETIONS_IN_DIFF = 80;
 
 const CRITICAL_FILES = [
-  { rel: "index.html", minBytes: 400_000 },
+  { rel: "index.html", minBytes: 5_000 },
+  { rel: "app/index.html", minBytes: 400_000 },
   { rel: "test/index.html", minBytes: 400_000 },
   { rel: "admin/index.html", minBytes: 80_000 },
   { rel: "assets/live-boot.js", minBytes: 500 },

@@ -92,7 +92,7 @@ html[data-theme="light"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="lig
 <meta property="og:title" content="DĀR AL TAWḤĪD">
 <meta property="og:description" content="Geordnete Wissens-App mit Beitraegen aus Qurʾan, Sunnah und Athar.">
 <meta property="og:image" content="/app-icon-512.png?v=source-under-statement-v12">
-<meta property="og:url" content="https://dar-al-tawhid.de/">
+<meta property="og:url" content="https://dar-al-tawhid.de/app/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DĀR AL TAWḤĪD">
 <meta name="twitter:description" content="Geordnete Wissens-App mit Beitraegen aus Qurʾan, Sunnah und Athar.">
@@ -10447,7 +10447,7 @@ window.DAR_ANALYTICS_CONFIG={
   adminPin:"Dawud26"
 };
 </script>
-<script src="assets/site-analytics.js?v=4" defer></script>
+<script src="/assets/site-analytics.js?v=4" defer></script>
 <script src="/assets/zakat-engine.js?v=11" defer></script>
 <script src="/assets/zakat-pdf.js?v=4" defer></script>
 <script src="/assets/zakat-app.js?v=20" defer></script>
@@ -21046,7 +21046,7 @@ async function loadExternalDuas(){
   }
   // Local JSON fallback
   try{
-    const response=await fetch("content/duas/duas.json?v="+Date.now(),{cache:"no-store"});
+    const response=await fetch("/content/duas/duas.json?v="+Date.now(),{cache:"no-store"});
     if(response.ok){
       const payload=await response.json();
       const extraDuas=Array.isArray(payload)?payload:(Array.isArray(payload?.items)?payload.items:[]);
@@ -23949,7 +23949,7 @@ async function estimateOfflineStorage(){let estimate=null;let persistent=false;t
 async function fetchOfflineContentManifest(){try{const r=await fetch(`/data/offline-content-manifest.json?v=${Date.now()}`,{cache:"no-store"});if(!r.ok)return null;return await r.json()}catch(e){return null}}
 function quranOfflineUrls(){if(!quranMeta||!Array.isArray(quranMeta.surahs))return[];const out=[];quranMeta.surahs.forEach(s=>{const id=Number(s?.id);if(!Number.isFinite(id)||id<1||id>114)return;out.push(quranSurahFile(id));out.push(quranTafsirFile(id));out.push(quranAtharFile(id))});return out}
 function postOfflineUrls(){const names=new Set();(posts||[]).forEach(p=>{const file=String(p?._sourceFile||"").trim();if(file.endsWith(".md"))names.add(file)});return[...names].map(name=>`/${POSTS_DIR}/${encodeURIComponent(name)}`)}
-async function buildOfflinePrepareUrls(){const manifest=await fetchOfflineContentManifest();const core=[];if(manifest){core.push(...(manifest.requiredStatic||[]),...(manifest.requiredData||[]))}else{core.push("/", "/index.html", "/test/", "/test/index.html", "/content/duas/duas.json", "/content/quran/surahs.json", "/data/quran-search-index.json", "/data/quran-search-keywords.json", "/data/quiz-questions.json")}if(typeof IS_TEST_PATH!=="undefined"&&IS_TEST_PATH)core.push("/test/version.json");core.push(...quranOfflineUrls(),...postOfflineUrls());return [...new Set(core.map(x=>String(x||"").trim()).filter(Boolean))]}
+async function buildOfflinePrepareUrls(){const manifest=await fetchOfflineContentManifest();const core=[];if(manifest){core.push(...(manifest.requiredStatic||[]),...(manifest.requiredData||[]))}else{core.push("/app/", "/app/index.html", "/test/", "/test/index.html", "/content/duas/duas.json", "/content/quran/surahs.json", "/data/quran-search-index.json", "/data/quran-search-keywords.json", "/data/quiz-questions.json")}if(typeof IS_TEST_PATH!=="undefined"&&IS_TEST_PATH)core.push("/test/version.json");core.push(...quranOfflineUrls(),...postOfflineUrls());return [...new Set(core.map(x=>String(x||"").trim()).filter(Boolean))]}
 function offlineProgressHtml(){const s=readOfflinePrepState();if(s.successPending){const failedNote=s.failed?`<small>${s.failed} Dateien konnten nicht geladen werden. Der Rest ist offline verfügbar.</small>`:"";return `<div class="offline-prep-progress offline-prep-success"><div class="offline-prep-head"><b>Offline-Download abgeschlossen</b><span>${s.loaded||0}/${s.total||0} Dateien · 100%</span></div>${failedNote}<button type="button" class="offline-resume-btn offline-success-ok" id="offlineSuccessOkBtn">OK</button></div>`}if(!s.running&&s.status!=="done"&&s.status!=="error"&&s.status!=="partial"&&!offlinePrepShouldShowResume())return"";const p=Math.max(0,Math.min(100,Number(s.percent||0)));const label=s.running?"Offline-Paket wird vorbereitet":s.status==="partial"?"Offline-Paket fast fertig":s.status==="error"?"Offline-Download unvollständig":"Offline-Paket Status";const resumeBlock=offlinePrepShouldShowResume()?`<button type="button" class="offline-resume-btn" id="offlineResumeBtn">Download fortsetzen</button>`:"";const failNote=s.failed&&offlinePrepShouldShowResume()?`<small>${s.failed} Dateien konnten nicht geladen werden. Tippe unten auf „Download fortsetzen“.</small>`:"";return `<div class="offline-prep-progress"><div class="offline-prep-head"><b>${label}</b><span>${s.loaded||0}/${s.total||0} Dateien · ${p}% · ${storageBytesLabel(s.bytes)}</span></div><div class="offline-prep-bar"><span style="width:${p}%"></span></div>${failNote}${resumeBlock}</div>`}
 function renderOfflineBox(){
   const summary=offlineLibrarySummary();

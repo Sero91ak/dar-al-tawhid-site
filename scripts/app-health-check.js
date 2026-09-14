@@ -60,17 +60,21 @@ function checkJson(label, file) {
   }
 }
 
-// Visitor app
-const indexHtml = read("index.html");
-if (!indexHtml.includes("function render(")) fail("index.html: render() fehlt");
-if (indexHtml.includes('App wird geladen') && !indexHtml.includes("function render(")) {
-  fail("index.html: Lade-Platzhalter ohne render()");
+// Visitor app shell lives under /app/
+const appIndexHtml = read("app/index.html");
+if (!appIndexHtml.includes("function render(")) fail("app/index.html: render() fehlt");
+if (appIndexHtml.includes('App wird geladen') && !appIndexHtml.includes("function render(")) {
+  fail("app/index.html: Lade-Platzhalter ohne render()");
 }
-checkJsSyntax("index.html", extractMainScript(indexHtml));
-if (/BYPASS_POST_CACHE"\)\}\}catch\(e\)\{\}/.test(extractMainScript(indexHtml)) &&
-    !/BYPASS_POST_CACHE"\)\}\}\}\}catch\(e\)\{\}/.test(extractMainScript(indexHtml))) {
-  fail("index.html: hardRefreshApp Klammerfehler");
+checkJsSyntax("app/index.html", extractMainScript(appIndexHtml));
+if (/BYPASS_POST_CACHE"\)\}\}catch\(e\)\{\}/.test(extractMainScript(appIndexHtml)) &&
+    !/BYPASS_POST_CACHE"\)\}\}\}\}catch\(e\)\{\}/.test(extractMainScript(appIndexHtml))) {
+  fail("app/index.html: hardRefreshApp Klammerfehler");
 }
+
+const websiteHtml = read("index.html");
+if (websiteHtml.includes('id="bottomNav"')) fail("index.html: klassische Webseite darf keine Bottom-Navigation haben");
+if (!websiteHtml.includes("site-header")) fail("index.html: klassische Webseiten-Struktur fehlt");
 
 // Admin app
 checkJsSyntax("admin/index.html", extractAdminMainScript(read("admin/index.html")));

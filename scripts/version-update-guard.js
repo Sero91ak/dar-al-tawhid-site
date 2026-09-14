@@ -9,7 +9,7 @@ const fs = require("fs");
 const path = require("path");
 
 const ROOT = path.join(__dirname, "..");
-const VISITOR_FILES = ["index.html", "test/index.html"];
+const VISITOR_FILES = ["app/index.html", "test/index.html"];
 
 function read(file) {
   return fs.readFileSync(path.join(ROOT, file), "utf8");
@@ -198,7 +198,7 @@ function runVersionUpdateGuard() {
     }
   }
 
-  const indexGuard = extractGuardBlock(visitorHtml["index.html"]);
+  const indexGuard = extractGuardBlock(visitorHtml["app/index.html"]);
   const testGuard = extractGuardBlock(visitorHtml["test/index.html"]);
   const parityKeys = [
     "VERSION_UPDATE_KEY",
@@ -213,14 +213,14 @@ function runVersionUpdateGuard() {
     const inIndex = indexGuard.includes(key);
     const inTest = testGuard.includes(key);
     if (inIndex !== inTest) {
-      fail(`index/test Parität: „${key}“ nur in ${inIndex ? "index.html" : "test/index.html"}`);
+      fail(`app/test Parität: „${key}“ nur in ${inIndex ? "app/index.html" : "test/index.html"}`);
     }
   }
   if (parityKeys.every((k) => indexGuard.includes(k) && testGuard.includes(k))) {
-    ok("index.html ↔ test/index.html: Update-Schutz parity");
+    ok("app/index.html ↔ test/index.html: Update-Schutz parity");
   }
 
-  const indexHtml = visitorHtml["index.html"];
+  const indexHtml = visitorHtml["app/index.html"];
   const buildMatch = indexHtml.match(/const APP_BUILD_ID="(app-shell-v\d+)"/);
   const testBuildMatch = visitorHtml["test/index.html"].match(/const APP_BUILD_ID="(app-shell-v\d+(?:-test)?)"/);
   const version = JSON.parse(read("version.json"));
@@ -237,7 +237,7 @@ function runVersionUpdateGuard() {
     fail(`version.json: appBuildId (${version.appBuildId}) weicht von buildId (${version.buildId}) ab`);
   }
   if (!buildMatch) {
-    fail("index.html: APP_BUILD_ID fehlt");
+    fail("app/index.html: APP_BUILD_ID fehlt");
   } else if (buildMatch[1] !== version.buildId) {
     fail(`APP_BUILD_ID (${buildMatch[1]}) stimmt nicht mit version.json (${version.buildId}) überein`);
   } else {

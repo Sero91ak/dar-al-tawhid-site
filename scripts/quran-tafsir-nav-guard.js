@@ -12,7 +12,7 @@ const path = require("path");
 const ROOT = path.join(__dirname, "..");
 const MARKER = "QURAN_TAFSIR_NAV_GUARD";
 const LOCK_FILE = "content/admin/quran-tafsir-nav-lock.json";
-const FILES = ["index.html", "test/index.html"];
+const FILES = ["app/index.html", "test/index.html"];
 
 const REQUIRED = [
   MARKER,

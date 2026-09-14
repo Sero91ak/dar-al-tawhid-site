@@ -4,23 +4,6 @@
   "lockedAt": "2026-08-19T11:55:00.000Z",
   "reason": "Push-Zustellung (Android/iOS) muss selbstheilend bleiben: absoluter OneSignal-SW, gcm_sender_id, durable sub.id, Client-Autorepair, Worker-Secret-Watchdog. | Willkommens-Push Autorepair v3 (0-Empfänger + Retry-Idempotenz).",
   "requiredMarkers": {
-    "index.html": [
-      "darInitOneSignal",
-      "serviceWorkerPath:swPath",
-      "/push/onesignal/OneSignalSDKWorker.js",
-      "shouldRunPushAutorepair",
-      "clearStickyPushLaunchParams",
-      "function repairPushConnection",
-      "function maintainPushHealth",
-      "function startPushHealthMonitor",
-      "dar_welcome_push_v3_",
-      "dar_welcome_push_pending_v1_",
-      "scheduleWelcomePushRetries",
-      "sendWelcomePushIfNeeded",
-      "syncPushRegistrationAndWelcome",
-      "payload.force=true",
-      "WELCOME_PUSH_RETRY_DELAYS_MS"
-    ],
     "test/index.html": [
       "darInitOneSignal",
       "serviceWorkerPath:swPath",
@@ -62,13 +45,30 @@
       "parseAcceptedRecipientCount",
       "accepted <= 0",
       "0 Empfänger"
+    ],
+    "app/index.html": [
+      "darInitOneSignal",
+      "serviceWorkerPath:swPath",
+      "/push/onesignal/OneSignalSDKWorker.js",
+      "shouldRunPushAutorepair",
+      "clearStickyPushLaunchParams",
+      "function repairPushConnection",
+      "function maintainPushHealth",
+      "function startPushHealthMonitor",
+      "dar_welcome_push_v3_",
+      "dar_welcome_push_pending_v1_",
+      "scheduleWelcomePushRetries",
+      "sendWelcomePushIfNeeded",
+      "syncPushRegistrationAndWelcome",
+      "payload.force=true",
+      "WELCOME_PUSH_RETRY_DELAYS_MS"
     ]
   },
   "forbiddenPatterns": {
-    "index.html": [
+    "test/index.html": [
       "serviceWorkerPath:\"push/onesignal/OneSignalSDKWorker.js\""
     ],
-    "test/index.html": [
+    "app/index.html": [
       "serviceWorkerPath:\"push/onesignal/OneSignalSDKWorker.js\""
     ]
   },

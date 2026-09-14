@@ -5,7 +5,7 @@
 */
 
 const CACHE_VERSION = 'dar-al-tawhid-offline-light-v801';
-const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
+const VISUAL_SHELL_KEYS = ['/', '/index.html', '/app/', '/app/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
 const OFFLINE_PREP_PROGRESS_KEY = '/__offline_prep_progress_v1__';
@@ -14,6 +14,8 @@ const OFFLINE_BATCH_SIZE = 10;
 const APP_SHELL = [
   '/',
   '/index.html',
+  '/app/',
+  '/app/index.html',
   '/test/',
   '/test/index.html',
   '/test/version.json',
@@ -260,6 +262,7 @@ function isFeedAssetRequest(url) {
 function isAppShellRequest(url) {
   if (url.origin !== self.location.origin) return false;
   if (url.pathname === '/' || url.pathname === '/index.html') return true;
+  if (url.pathname === '/app/' || url.pathname === '/app/index.html') return true;
   if (url.pathname === '/test/' || url.pathname === '/test/index.html') return true;
   if (url.pathname === '/version.json' || url.pathname === '/test/version.json') return true;
   return false;
@@ -297,7 +300,9 @@ function isProphetsCatalogRequest(url) {
 }
 
 function navigationShellKey(url) {
-  return url.pathname.startsWith('/test') ? '/test/index.html' : '/index.html';
+  if (url.pathname.startsWith('/test')) return '/test/index.html';
+  if (url.pathname.startsWith('/app')) return '/app/index.html';
+  return '/index.html';
 }
 
 function storeShellResponse(shellKey, response) {
@@ -546,6 +551,7 @@ self.addEventListener('fetch', (event) => {
       fetch(request, { cache: 'no-store' })
         .then((response) => storeShellResponse(shellKey, response))
         .catch(() => caches.match(shellKey))
+        .then((response) => response || caches.match('/app/index.html'))
         .then((response) => response || caches.match('/index.html'))
     );
     return;
@@ -558,6 +564,7 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetchNavigationShell(request, shellKey)
         .catch(() => caches.match(shellKey))
+        .then((response) => response || caches.match('/app/index.html'))
         .then((response) => response || caches.match('/index.html'))
     );
     return;

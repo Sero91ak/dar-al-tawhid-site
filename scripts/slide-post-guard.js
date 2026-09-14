@@ -238,27 +238,27 @@ function runSlidePostGuard() {
     ok("4-space YAML parsed 4 slides");
   }
 
-  const indexHtml = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
+  const indexHtml = fs.readFileSync(path.join(ROOT, "app/index.html"), "utf8");
   if (!indexHtml.includes("function parseSlidesFromYaml(yaml)")) {
-    fail("index.html ohne parseSlidesFromYaml");
+    fail("app/index.html ohne parseSlidesFromYaml");
   }
   if (!indexHtml.includes("--slide-bg:")) {
-    fail("index.html ohne Slide-Theme-Tokens");
+    fail("app/index.html ohne Slide-Theme-Tokens");
   }
   if (!indexHtml.includes("updatePostAfterSlidePanel")) {
-    fail("index.html ohne Slide-Quellen-Sync");
+    fail("app/index.html ohne Slide-Quellen-Sync");
   }
   if (indexHtml.includes("POST_PARSE_VERSION=6")) {
     fail("POST_PARSE_VERSION nicht erhöht (erwartet 7)");
   }
   if (!indexHtml.includes("ensurePostSlidesHydrated")) {
-    fail("index.html ohne ensurePostSlidesHydrated");
+    fail("app/index.html ohne ensurePostSlidesHydrated");
   }
   if (!indexHtml.includes("_rawBody:body")) {
-    fail("index.html speichert _rawBody nicht in parseFrontMatter");
+    fail("app/index.html speichert _rawBody nicht in parseFrontMatter");
   }
   if (!indexHtml.includes("slide-post-parser.js")) {
-    fail("index.html lädt slide-post-parser.js nicht");
+    fail("app/index.html lädt slide-post-parser.js nicht");
   }
 
   const parserJs = fs.readFileSync(path.join(ROOT, "assets/slide-post-parser.js"), "utf8");

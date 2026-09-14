@@ -59,7 +59,7 @@
       "unlockPhrases": ["prayer-local-reminders-freigabe", "gebets-erinnerungen freigeben"],
       "paths": [],
       "diffMarkers": {
-        "index.html": [
+        "app/index.html": [
           "shouldUseLocalPrayerReminders",
           "scheduleLocalPrayerReminders",
           "restorePrayerRemindersOnLoad",
@@ -97,7 +97,7 @@
         "content/admin/daily-push-schema.sql"
       ],
       "diffMarkers": {
-        "index.html": [
+        "app/index.html": [
           "syncDailyPushTags",
           "daily-push-panel",
           "setDailyPushPreference"
@@ -121,7 +121,7 @@
         "cloudflare/jummah-push-admin.js"
       ],
       "diffMarkers": {
-        "index.html": [
+        "app/index.html": [
           "syncJummahPushTags",
           "setJummahPushPreference"
         ],
@@ -142,7 +142,7 @@
         "cloudflare/onesignal-delivery.js"
       ],
       "diffMarkers": {
-        "index.html": [
+        "app/index.html": [
           "sendWelcomePushIfNeeded",
           "scheduleWelcomePushRetries",
           "dar_welcome_push"
@@ -180,7 +180,7 @@
         ".github/workflows/install-prayer-push-tags.yml"
       ],
       "diffMarkers": {
-        "index.html": [
+        "app/index.html": [
           "OneSignal.init",
           "ONESIGNAL",
           "repairPushConnection",
@@ -293,7 +293,7 @@
     }
   },
   "requiredAppMarkers": {
-    "index.html": [
+    "app/index.html": [
       "PUSH_LANES_GUARD",
       "PUSH_LANES_GUARD_PRAYER_LOCAL"
     ],
