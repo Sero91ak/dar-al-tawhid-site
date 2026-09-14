@@ -16,5 +16,23 @@
     "title": "Duʿāʾ von Zakariyyā um gute Nachkommenschaft",
     "snippet": "Mein Herr, schenke mir von Dir aus gute Nachkommenschaft. Du bist wahrlich der Erhörer des Bittgebets.",
     "category": "Kinder & Nachkommen"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 466,
+      "remaining": 443
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 75,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
