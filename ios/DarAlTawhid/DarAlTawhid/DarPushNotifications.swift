@@ -15,6 +15,11 @@ enum DarPushNotifications {
     static let settingsKey = "dar.ios.web.prayer.settings"
     private static let welcomeSentKey = "dar.ios.welcome.push.v3"
     private static let deviceIdKey = "dar.ios.push.device.id"
+    private static let serverLaneKey = "dar.ios.prayer.server.lane.v1"
+    private static let lastPipelineSyncKey = "dar.ios.prayer.pipeline.sync.at"
+    private static let lastScheduleNowKey = "dar.ios.prayer.schedule.now.at"
+    private static let pipelineSyncDebounce: TimeInterval = 180
+    private static let scheduleNowDebounce: TimeInterval = 300
     private static let prayerPrefix = "dar.prayer."
     private static let jummahPrefix = "dar.jummah."
     private static var didBoot = false
@@ -56,7 +61,7 @@ enum DarPushNotifications {
                 sendLocalWelcomeIfNeeded()
                 scheduleJummahLocal()
                 if granted {
-                    syncWithServerThenScheduleLocalFallback()
+                    syncWithServerThenScheduleLocalFallback(force: true)
                 } else {
                     reschedulePrayers()
                 }
@@ -67,7 +72,7 @@ enum DarPushNotifications {
             object: nil,
             queue: .main
         ) { _ in
-            syncWithServerThenScheduleLocalFallback()
+            syncWithServerThenScheduleLocalFallback(force: false)
         }
         #endif
     }
@@ -79,7 +84,7 @@ enum DarPushNotifications {
             DispatchQueue.main.async {
                 if accepted {
                     OneSignal.User.pushSubscription.optIn()
-                    syncWithServerThenScheduleLocalFallback()
+                    syncWithServerThenScheduleLocalFallback(force: true)
                 }
             }
         }, fallbackToSettings: true)
@@ -111,25 +116,27 @@ enum DarPushNotifications {
         }
     }
 
-    static func syncWithServerThenScheduleLocalFallback() {
+    static func syncWithServerThenScheduleLocalFallback(force: Bool = false) {
         Task {
-            _ = await registerWithDarPushPipeline()
+            if force || shouldRunPipelineSync() {
+                _ = await registerWithDarPushPipeline(forceSchedule: force)
+                markPipelineSyncRun()
+            }
             await MainActor.run {
                 NotificationCenter.default.post(name: .darNativePushReady, object: nil)
                 sendLocalWelcomeIfNeeded()
                 scheduleJummahLocal()
-                let settings = storedWebSettings()
-                if bool(settings["reminder"]) {
-                    reschedulePrayers()
-                } else {
-                    cancelLocalPrayers()
-                }
+                applyPrayerReminderLane(settings: storedWebSettings())
             }
         }
     }
 
     static func reschedulePrayers() {
         let settings = storedWebSettings()
+        if bool(settings["reminder"]), isServerLaneActive() {
+            cancelLocalPrayers()
+            return
+        }
         scheduleJummahLocal()
         guard bool(settings["reminder"]) else {
             cancelLocalPrayers()
@@ -246,13 +253,9 @@ enum DarPushNotifications {
         DarWidgetStore.save(DarDailyContent.refresh(snap))
         scheduleJummahLocal()
         Task {
-            _ = await registerWithDarPushPipeline()
+            _ = await registerWithDarPushPipeline(forceSchedule: true)
             await MainActor.run {
-                if bool(clean["reminder"]) {
-                    reschedulePrayers()
-                } else {
-                    cancelLocalPrayers()
-                }
+                applyPrayerReminderLane(settings: clean)
             }
         }
     }
@@ -312,20 +315,35 @@ enum DarPushNotifications {
         return nil
     }
 
-    private static func registerWithDarPushPipeline() async -> Bool {
+    private static func registerWithDarPushPipeline(forceSchedule: Bool = false) async -> Bool {
         #if targetEnvironment(macCatalyst)
         return false
         #else
-        guard let subscriptionId = await waitForSubscriptionId() else { return false }
+        guard let subscriptionId = await waitForSubscriptionId() else {
+            setServerLaneActive(false)
+            return false
+        }
         UserDefaults.standard.set(subscriptionId, forKey: lastSubKey)
         let token = OneSignal.User.pushSubscription.token
         let settings = storedWebSettings()
         await saveSupabaseRegistration(subscriptionId: subscriptionId, token: token, settings: settings)
         await postJSON("\(workerURL)/api/push/welcome", body: ["subscriptionId": subscriptionId])
-        if bool(settings["reminder"]) {
-            _ = await postJSON("\(workerURL)/api/prayer/schedule-now", body: ["subscriptionId": subscriptionId], retries: 4)
+        let reminder = bool(settings["reminder"])
+        let locOk = hasPrayerLocation(settings)
+        if reminder && locOk {
+            setServerLaneActive(true)
+            if shouldRunScheduleNow(force: forceSchedule) {
+                if await postJSON(
+                    "\(workerURL)/api/prayer/schedule-now",
+                    body: ["subscriptionId": subscriptionId],
+                    retries: 4
+                ) {
+                    markScheduleNowRun()
+                }
+            }
+        } else {
+            setServerLaneActive(false)
         }
-        let locOk = number(settings["lat"]) != nil && number(settings["lon"]) != nil && bool(settings["locationGranted"] ?? settings["reminder"])
         var tags: [String: String] = [
             "dar_push": "true",
             "post_notifications": "true",
@@ -459,6 +477,53 @@ enum DarPushNotifications {
             UNNotificationRequest(identifier: "dar.welcome.v3", content: content, trigger: trigger)
         )
         UserDefaults.standard.set(true, forKey: welcomeSentKey)
+    }
+
+    private static func hasPrayerLocation(_ settings: [String: Any]) -> Bool {
+        number(settings["lat"]) != nil
+            && number(settings["lon"]) != nil
+            && (bool(settings["locationGranted"]) || bool(settings["reminder"]))
+    }
+
+    private static func isServerLaneActive() -> Bool {
+        UserDefaults.standard.bool(forKey: serverLaneKey)
+    }
+
+    private static func setServerLaneActive(_ active: Bool) {
+        UserDefaults.standard.set(active, forKey: serverLaneKey)
+    }
+
+    private static func shouldRunPipelineSync() -> Bool {
+        let last = UserDefaults.standard.double(forKey: lastPipelineSyncKey)
+        guard last > 0 else { return true }
+        return Date().timeIntervalSince1970 - last >= pipelineSyncDebounce
+    }
+
+    private static func markPipelineSyncRun() {
+        UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: lastPipelineSyncKey)
+    }
+
+    private static func shouldRunScheduleNow(force: Bool) -> Bool {
+        if force { return true }
+        let last = UserDefaults.standard.double(forKey: lastScheduleNowKey)
+        guard last > 0 else { return true }
+        return Date().timeIntervalSince1970 - last >= scheduleNowDebounce
+    }
+
+    private static func markScheduleNowRun() {
+        UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: lastScheduleNowKey)
+    }
+
+    private static func applyPrayerReminderLane(settings: [String: Any]) {
+        guard bool(settings["reminder"]) else {
+            cancelLocalPrayers()
+            return
+        }
+        if isServerLaneActive() {
+            cancelLocalPrayers()
+        } else {
+            reschedulePrayers()
+        }
     }
 
     private static func cancelLocalPrayers() {

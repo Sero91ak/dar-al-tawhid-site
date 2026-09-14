@@ -1297,15 +1297,6 @@ struct WebAppView: UIViewRepresentable {
                     webkit.messageHandlers.darPushSettings.postMessage(getPrayerSettings());
                   }
                 }catch(e){}
-                try{
-                  if(window.DAR_IOS_ONESIGNAL_ID && typeof savePushRegistration==="function"){
-                    var os=window.OneSignal||{};
-                    savePushRegistration(typeof getPrayerSettings==="function"?getPrayerSettings():{},os);
-                  }
-                  if(window.DAR_IOS_ONESIGNAL_ID && typeof getPrayerSettings==="function" && getPrayerSettings().reminder && typeof syncPrayerPushTags==="function"){
-                    syncPrayerPushTags().catch(function(){});
-                  }
-                }catch(e){}
               }
               patch();
               patchDarPushLinkStatusUI();
