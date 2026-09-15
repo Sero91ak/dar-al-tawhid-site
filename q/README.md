@@ -49,6 +49,7 @@ Dieser Ordner ist die zentrale Ablage für alle nummerierten Quellenlinks.
 | `q/31` | Ahl al-Bidʿah, Ahl al-Ahwāʾ und Shubuhāt | `Sufyān ath-Thawrī` | Wer mit einem Anhänger der Bidʿah sitzt, bleibt nicht frei von einer von drei Gefahren. |
 | `q/32` | Khawārij, Ahl al-Ahwāʾ, Rezitation ohne Fahm und Manhaj | `Der Prophet ﷺ` | Die Khawārij rezitieren den Qurʾān, doch er geht nicht über ihre Kehlen hinaus. |
 | `q/33` | Iḥsān, Furcht vor Allah, Ikhlāṣ und Tazkiyah | `al-Ḥasan al-Baṣrī` | Der Muʾmin vereint Iḥsān und Furcht; der Munāfiq vereint schlechte Tat und Sicherheit. |
+| `q/34` | ʿAqīdah, Ṣifāt, Tašbīh und Taʿṭīl | `Nuʿaym ibn Ḥammād al-Khuzāʿī` | Wer Allah Seiner Schöpfung ähnlich macht, hat Kufr begangen; wer leugnet, womit Allah Sich selbst beschrieben hat, hat Kufr begangen; Allahs und Seines Gesandten Beschreibung ist kein Tašbīh. |
 
 ## Sonderbereiche
 
