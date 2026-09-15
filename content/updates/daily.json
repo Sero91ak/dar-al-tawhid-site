@@ -16,5 +16,23 @@
     "title": "Bitte um Vergebung und Wohlergehen",
     "snippet": "O Allah, ich bitte Dich um Vergebung und Wohlergehen im Diesseits und im Jenseits.",
     "category": "Vergebung & Wohlergehen"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 466,
+      "remaining": 443
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 75,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
