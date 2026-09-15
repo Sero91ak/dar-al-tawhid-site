@@ -10441,6 +10441,8 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/focus-feed-app.js?v=7" defer></script>
 <script src="/assets/html2canvas.min.js" defer></script>
 <script src="/test/assets/premium-feed-app.js?v=101" defer></script>
+<script src="/test/assets/location-access-push.js?v=2" defer></script><!-- DAR_TEST_LOCATION_ACCESS_V1 -->
+<script src="/test/assets/dar-setup-hub.js?v=4" defer></script><!-- DAR_SETUP_HUB_V1 -->
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <script src="/assets/adaptive-layout.js?v=8" defer></script>
 <script src="/assets/fold-split.js?v=3" defer></script>
@@ -12068,6 +12070,9 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=791">
 <link rel="stylesheet" href="/assets/adaptive-layout.css?v=642">
 <link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=668">
+<link rel="stylesheet" href="/test/assets/location-access-push.css?v=2"><!-- DAR_TEST_LOCATION_ACCESS_V1 -->
+<link rel="stylesheet" href="/test/assets/dar-setup-hub.css?v=4"><!-- DAR_SETUP_HUB_V1 -->
+<link rel="stylesheet" href="/test/assets/dar-top-chrome-fix.css?v=1"><!-- DAR_TOP_CHROME_FIX -->
 <link rel="stylesheet" href="/test/assets/full-edge-appearance-polish.css?v=665">
 <link rel="stylesheet" href="/assets/fold-split.css?v=2">
 <link rel="stylesheet" href="/test/assets/fold-thumb-nav.css?v=2">
@@ -24564,7 +24569,7 @@ function prayerAdvanceNotificationCopy(prayer,settings,eventDate){const timeLabe
 function prayerEntryNotificationCopy(prayer,settings=getPrayerSettings(),eventDate){const timeLabel=prayerTimeLabel(prayer,eventDate||prayerEventDate(new Date(),prayer));const variant=sanitizeLocalPrayerCopy(pickPrayerEntryVariant(prayer.key,timeLabel));return{title:variant.title,body:variant.body,tag:prayer.key==="tahajjud"?"prayer-tahajjud":`prayer-${prayer.key}`}}
 // PRAYER_LOCAL_FALLBACK_GUARD: Lokale Erinnerungen an den in der App gezeigten Gebetszeiten. OneSignal-Opt-in darf die Uhr nicht abschalten.
 /* PUSH_LANES_GUARD PUSH_LANES_GUARD_PRAYER_LOCAL */
-async function shouldUseLocalPrayerReminders(settings,serverSynced=false){const s=settings||getPrayerSettings();if(!s.reminder||!hasPrayerLocation(s))return false;if(isDarNativeApp()){if(String(window.DAR_IOS_ONESIGNAL_ID||readOneSignalPushSubscriptionState().subscriptionId||"").trim())return false;return true}if(serverSynced)return false;const dbg=prayerPushDebug();if(String(dbg.supabase||"")==="ok"&&dbg.subscriptionId)return false;return true}
+async function shouldUseLocalPrayerReminders(settings,serverSynced=false){const s=settings||getPrayerSettings();if(!s.reminder||!hasPrayerLocation(s))return false;if(isDarNativeApp()){if(String(window.DAR_IOS_ONESIGNAL_ID||readOneSignalPushSubscriptionState().subscriptionId||"").trim())return false;return true}if(serverSynced)return false;const dbg=prayerPushDebug();if(dbg.subscriptionId)return false;/* Web-Push aktiv: nur Server-Lane, keine lokalen Doppel-Timer */if(String(dbg.supabase||"")==="ok"&&dbg.subscriptionId)return false;return true}
 async function scheduleLocalPrayerRemindersIfNeeded({silent=false,serverSynced=false}={}){const settings=getPrayerSettings();if(!settings.reminder||!hasPrayerLocation(settings))return;if(await shouldUseLocalPrayerReminders(settings,serverSynced))scheduleLocalPrayerReminders({silent});else clearPrayerReminders()}
 function prayerByKey(key,settings=getPrayerSettings()){return calculatePrayerTimes(new Date(),settings).find(p=>p.key===key)||null}
 function nextPlannedPrayerNotification(settings=getPrayerSettings()){
@@ -26161,9 +26166,13 @@ function closeImageEditorTextExpand(save){const modal=$("imageEditorTextModal"),
 function updateImageEditorTextModalHint(){const hint=$("imageEditorTextModalHint"),area=$("imageEditorTextModalArea"),block=imageEditorState.textExpandBlock;if(!hint||!area||!block)return;const lines=String(area.value||"").split(/\n/).length;hint.textContent=`${lines} Zeile${lines===1?"":"n"} · Speichern übernimmt den Text direkt in die Vorschau.`;const canvas=$("imageEditorCanvas"),ctx=canvas?.getContext("2d");if(!ctx)return;const font=imageEditorFontCss(block==="source"?"source":imageEditorState.font);const fit=fitImageEditorText(ctx,area.value,imageEditorInnerBox(imageEditorBlockBox(block)),font,imageEditorBlockSize(block),block==="source"?1.16:imageEditorState.lineHeight,block==="source"?12:16);}
 function renderNewsListRow(item,idx){const newsId=item.id||String(idx);const isApp=item.nav==="appstore";const rowClass=isApp?"current-focus-row current-focus-row--app":item.type==="zakat"||item.nav==="zakat"?"current-focus-row current-focus-row--zakat":item.type==="library"||item.nav==="bibliothek"?"current-focus-row current-focus-row--library":"current-focus-row";const navView=isApp?"appstore":"news-detail";const navValue=isApp?appStoreUrlFromValue(item.value):newsId;const cta=isApp?(item.popupButton||"Jetzt aktualisieren"):"→";return `<article class="${rowClass}" data-nav="${esc(navView)}" data-value="${esc(navValue)}" tabindex="0" role="button"><div class="current-focus-icon">${currentUpdateIcon(item)}</div><div class="current-focus-text"><b>${esc(item.title||"Neue Inhalte")}</b><p>${esc(item.text||item.description||"Gerade neu auf DĀR AL TAWḤĪD.")}</p><small>${esc(currentUpdateMeta(item))}</small></div><span class="current-focus-arrow">${esc(cta)}</span></article>`}
 function renderNews(){const items=activeCurrentUpdates();return `${setPageHeader("Neu im Fokus","Aktuelle Meldungen und Highlights","News")}<section class="current-focus premium-surface"><div class="current-focus-list">${items.length?items.map(renderNewsListRow).join(""):`<div class="empty">Derzeit keine aktiven Meldungen.</div>`}</section>`}
+function renderDarSetupHubHtml(){
+  try{if(window.DARSetupHub&&typeof window.DARSetupHub.render==="function")return window.DARSetupHub.render()}catch(e){}
+  return '<section id="dar-setup-hub" class="dar-setup-hub" data-dar-setup="true" aria-label="Einrichtung"><header class="dar-setup-hub__head"><h2 class="dar-setup-hub__title">DĀR AL TAWḤĪD Einrichtung</h2><p class="dar-setup-hub__sub">Standort, Gebetszeiten, Mitteilungen und Widgets</p></header><div class="dar-setup-hub__list"><div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Standort</strong><span>Für genaue Gebetszeiten und Widgets</span></div><button type="button" class="dar-setup-hub__btn" data-dar-setup-action="location">Öffnen</button></div><div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Mitteilungen</strong><span>Für Gebets-Erinnerungen und Tests</span></div><button type="button" class="dar-setup-hub__btn" data-dar-setup-action="notifications">Öffnen</button></div><div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Gebetszeiten</strong><span>Daten für Widgets und Watch aktualisieren</span></div><button type="button" class="dar-setup-hub__btn is-active" data-dar-setup-action="sync">Sync</button></div><div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Widget-Ziele</strong><span>Öffnet direkt Gebetszeiten, Kalender, Qurʾān oder Duʿāʾ</span></div><button type="button" class="dar-setup-hub__btn is-active" data-dar-setup-action="widgets">Prüfen</button></div></div></section>';
+}
 function renderSettings(){
   const liveActivity=`<section class="settings-live-row" aria-label="Live Activity"><span class="settings-live-icon" aria-hidden="true">◷</span><span><b>Live Activity</b><small>Gebets-Countdown auf Sperrbildschirm und Dynamic Island</small></span><span class="settings-off-badge">Aus</span></section>`;
-  return `${setHeader("Einstellungen","Mitteilungen, Darstellung und Lesbarkeit.","","settings-page-head")}<div class="settings-one-page">${renderNotificationCenter({embedded:true})}<div class="settings-section-label"><b>Darstellung</b><span>Farben, Icon und Schrift</span></div>${renderThemeSwitchPanel()}${renderAppIconPanel()}${renderFontSettingsPanel()}<div class="settings-section-label"><b>Demnächst</b><span>Noch nicht aktiviert</span></div>${liveActivity}<p class="settings-save-note">Änderungen werden automatisch auf diesem Gerät gespeichert.</p></div>`
+  return `${renderDarSetupHubHtml()}${setHeader("Einstellungen","Mitteilungen, Darstellung und Lesbarkeit.","","settings-page-head")}<div class="settings-one-page settings-cards-hub-v1">${renderNotificationCenter({embedded:true})}<div class="settings-section-label"><b>Darstellung</b><span>Farben, Icon und Schrift</span></div>${renderThemeSwitchPanel()}${renderAppIconPanel()}${renderFontSettingsPanel()}<div class="settings-section-label"><b>Demnächst</b><span>Noch nicht aktiviert</span></div>${liveActivity}<p class="settings-save-note">Änderungen werden automatisch auf diesem Gerät gespeichert.</p></div>`
 }
 function renderJummah(){const s=getPrayerSettings();const manual=jummahPref(s,"jummahUseManualTime");const manualTime=normalizeTimeHHMM(s.jummahManualTime,"13:30");const advance=normalizeJummahAdvanceMinutes(s.jummahAdvanceMinutes);const on=jummahPref(s,"jummahNotifications");const timeLabel=manual?manualTime:(hasPrayerLocation(s)?jummahAutoDhuhrLabel(s):"Standort");return `${setPageHeader("Jumuʿah","Freitagsgebet und Erinnerung.","Jumuʿah")}<section class="prayer-panel prayer-page-noble jummah-hub-page">${renderJummahPushPanel()}<div class="qibla-data-grid jummah-hub-meta"><div class="qibla-data-item"><b>Erinnerung</b><span>${on?"Aktiv":"Aus"}</span></div><div class="qibla-data-item"><b>Vorlauf</b><span>${advance} Min</span></div><div class="qibla-data-item"><b>Zeit</b><span>${esc(timeLabel)}</span></div><div class="qibla-data-item"><b>Ort</b><span>${esc(s.city||"—")}</span></div></div><div class="prayer-action-row jummah-hub-nav"><button class="prayer-action-btn" type="button" data-nav="prayer">Gebetszeiten</button></div></section>`}
 function renderQiblaPage(){const settings=getPrayerSettings();return `${setPageHeader("Qibla","","Qibla")}<section class="prayer-panel prayer-page-noble qibla-hub-page">${renderQiblaProPanel(settings)}<div class="prayer-controls-compact qibla-hub-tools"><div class="prayer-settings-grid"><input id="prayerCityInput" class="filter-select" value="${esc(settings.city||"")}" placeholder="Ort" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button><button id="useLocationBtn" class="prayer-action-btn" type="button">Standort</button></div></div></section>`}
@@ -27865,7 +27874,7 @@ function bindEvents(){
   document.querySelectorAll("[data-feature-pin]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();ev.stopPropagation();toggleFeaturePin(btn.getAttribute("data-feature-pin")||"");render()}});
   document.querySelectorAll("[data-feature-hint-dismiss]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();ev.stopPropagation();const key="seenFeatureHint_"+(btn.getAttribute("data-feature-hint-dismiss")||"");try{localStorage.setItem(key,"true")}catch(e){}btn.closest(".feature-hint")?.remove()}});
   const moreFeatureSearch=$("moreFeatureSearch");if(moreFeatureSearch)moreFeatureSearch.oninput=filterMoreFeatures;
-  if(["notifications","settings"].includes(currentRoute.view))bindNotificationCenter();
+  if(["notifications","settings"].includes(currentRoute.view)){bindNotificationCenter();try{window.DARSetupHub?.bind?.(document.getElementById("dar-setup-hub"));window.DARSetupHub?.refresh?.()}catch(e){}}
   const booksSearchInput=$("booksSearchInput");if(booksSearchInput)booksSearchInput.oninput=filterBooksLibrary;
   if(window.DARCanonicalSourceLibrary)DARCanonicalSourceLibrary.bind();
   const advancedFilterBtn=$("advancedFilterBtn");const homeFilterPanel=$("homeFilterPanel");
@@ -33734,6 +33743,14 @@ html.dar-test-performance-v1 #appView *,
 html.dar-test-performance-v1 .top-shell *,
 html.dar-test-performance-v1 #bottomNav *{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background-attachment:scroll!important}
 html.dar-test-performance-v1 #bottomNav.bottom-nav{background:var(--bg)!important;box-shadow:0 2px 10px rgba(0,0,0,.12)!important}
+</style>
+
+
+<style id="dar-top-chrome-fix-final">
+html[data-theme] .top-edge-fade,html[data-theme] .top-swim-aura,.top-edge-fade,.top-swim-aura,#topEdgeFade,#topSwimAura{display:none!important;opacity:0!important;height:0!important;z-index:-2!important;pointer-events:none!important}
+.brand small,.eyebrow,.view-head .eyebrow{color:#e2d2a8!important;opacity:1!important;-webkit-text-fill-color:#e2d2a8!important;text-shadow:0 1px 2px rgba(0,0,0,.65)!important}
+.view-head h2,.view h2,.settings-page-head h2,.home-start-title{color:var(--gold2,#e8c96a)!important;opacity:1!important;visibility:visible!important}
+.top-shell,.header,.brand,.view-head,#appView>.view-head{position:relative!important;z-index:3!important}
 </style>
 
 </html>

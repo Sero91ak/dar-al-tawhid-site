@@ -1,0 +1,4 @@
+/* Admin top chrome readability */
+.topbar,.brand,.admin-cover,.hero-title,.login{position:relative!important;z-index:5!important}
+.brand h1,.login h2,.admin-cover h2,.hero-title h2{color:var(--gold,#efd78e)!important;opacity:1!important;visibility:visible!important;-webkit-text-fill-color:var(--gold,#efd78e)!important;text-shadow:0 1px 2px rgba(0,0,0,.55)!important}
+.brand p,.login p,.admin-cover p,.hero-title p,.hint{color:#d7c9a8!important;opacity:1!important}
