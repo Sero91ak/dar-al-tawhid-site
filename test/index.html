@@ -12070,8 +12070,9 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=791">
 <link rel="stylesheet" href="/assets/adaptive-layout.css?v=642">
 <link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=668">
-<link rel="stylesheet" href="/test/assets/dar-setup-hub.css?v=4"><!-- DAR_SETUP_HUB_V1 -->
-<link rel="stylesheet" href="/test/assets/dar-top-chrome-fix.css?v=1"><!-- DAR_TOP_CHROME_FIX -->
+<link rel="stylesheet" href="/test/assets/dar-setup-hub.css?v=5"><!-- DAR_SETUP_HUB_V1 -->
+<link rel="stylesheet" href="/test/assets/dar-top-chrome-fix.css?v=2"><!-- DAR_TOP_CHROME_FIX -->
+<link rel="stylesheet" href="/test/assets/dar-ios-oversize-copy.css?v=1"><!-- DAR_IOS_OVERSIZE_COPY -->
 <link rel="stylesheet" href="/test/assets/full-edge-appearance-polish.css?v=665">
 <link rel="stylesheet" href="/assets/fold-split.css?v=2">
 <link rel="stylesheet" href="/test/assets/fold-thumb-nav.css?v=2">
@@ -26171,7 +26172,7 @@ function renderDarSetupHubHtml(){
 }
 function renderSettings(){
   const liveActivity=`<section class="settings-live-row" aria-label="Live Activity"><span class="settings-live-icon" aria-hidden="true">◷</span><span><b>Live Activity</b><small>Gebets-Countdown auf Sperrbildschirm und Dynamic Island</small></span><span class="settings-off-badge">Aus</span></section>`;
-  return `${renderDarSetupHubHtml()}${setHeader("Einstellungen","Mitteilungen, Darstellung und Lesbarkeit.","","settings-page-head")}<div class="settings-one-page settings-cards-hub-v1">${renderNotificationCenter({embedded:true})}<div class="settings-section-label"><b>Darstellung</b><span>Farben, Icon und Schrift</span></div>${renderThemeSwitchPanel()}${renderAppIconPanel()}${renderFontSettingsPanel()}<div class="settings-section-label"><b>Demnächst</b><span>Noch nicht aktiviert</span></div>${liveActivity}<p class="settings-save-note">Änderungen werden automatisch auf diesem Gerät gespeichert.</p></div>`
+  return `${renderDarSetupHubHtml()}${setHeader("Einstellungen","Mitteilungen, Darstellung und Lesbarkeit.","","settings-page-head")}<div class="settings-one-page settings-flat-live-v1">${renderNotificationCenter({embedded:true})}<div class="settings-section-label"><b>Darstellung</b><span>Farben, Icon und Schrift</span></div>${renderThemeSwitchPanel()}${renderAppIconPanel()}${renderFontSettingsPanel()}<div class="settings-section-label"><b>Demnächst</b><span>Noch nicht aktiviert</span></div>${liveActivity}<p class="settings-save-note">Änderungen werden automatisch auf diesem Gerät gespeichert.</p></div>`
 }
 function renderJummah(){const s=getPrayerSettings();const manual=jummahPref(s,"jummahUseManualTime");const manualTime=normalizeTimeHHMM(s.jummahManualTime,"13:30");const advance=normalizeJummahAdvanceMinutes(s.jummahAdvanceMinutes);const on=jummahPref(s,"jummahNotifications");const timeLabel=manual?manualTime:(hasPrayerLocation(s)?jummahAutoDhuhrLabel(s):"Standort");return `${setPageHeader("Jumuʿah","Freitagsgebet und Erinnerung.","Jumuʿah")}<section class="prayer-panel prayer-page-noble jummah-hub-page">${renderJummahPushPanel()}<div class="qibla-data-grid jummah-hub-meta"><div class="qibla-data-item"><b>Erinnerung</b><span>${on?"Aktiv":"Aus"}</span></div><div class="qibla-data-item"><b>Vorlauf</b><span>${advance} Min</span></div><div class="qibla-data-item"><b>Zeit</b><span>${esc(timeLabel)}</span></div><div class="qibla-data-item"><b>Ort</b><span>${esc(s.city||"—")}</span></div></div><div class="prayer-action-row jummah-hub-nav"><button class="prayer-action-btn" type="button" data-nav="prayer">Gebetszeiten</button></div></section>`}
 function renderQiblaPage(){const settings=getPrayerSettings();return `${setPageHeader("Qibla","","Qibla")}<section class="prayer-panel prayer-page-noble qibla-hub-page">${renderQiblaProPanel(settings)}<div class="prayer-controls-compact qibla-hub-tools"><div class="prayer-settings-grid"><input id="prayerCityInput" class="filter-select" value="${esc(settings.city||"")}" placeholder="Ort" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button><button id="useLocationBtn" class="prayer-action-btn" type="button">Standort</button></div></div></section>`}
@@ -33749,6 +33750,6 @@ html.dar-test-performance-v1 #bottomNav.bottom-nav{background:var(--bg)!importan
 html[data-theme] .top-edge-fade,html[data-theme] .top-swim-aura,.top-edge-fade,.top-swim-aura,#topEdgeFade,#topSwimAura{display:none!important;opacity:0!important;height:0!important;z-index:-2!important;pointer-events:none!important}
 .brand small,.eyebrow,.view-head .eyebrow{color:#e2d2a8!important;opacity:1!important;-webkit-text-fill-color:#e2d2a8!important;text-shadow:0 1px 2px rgba(0,0,0,.65)!important}
 .view-head h2,.view h2,.settings-page-head h2,.home-start-title{color:var(--gold2,#e8c96a)!important;opacity:1!important;visibility:visible!important}
-.top-shell,.header,.brand,.view-head,#appView>.view-head{position:relative!important;z-index:3!important}
+.top-shell,.header,.brand,.view-head,#appView>.view-head{position:relative}
 </style>
 </html>

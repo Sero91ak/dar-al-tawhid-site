@@ -19,13 +19,9 @@ html .top-swim-aura,
 .top-shell,
 .header,
 .brand,
-.brand-kicker-row,
 .view-head,
-#appView > .view-head,
 .settings-page-head{
-  position:relative!important;
-  z-index:3!important;
-  isolation:isolate;
+  position:relative;
 }
 
 .brand small,

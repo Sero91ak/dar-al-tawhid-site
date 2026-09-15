@@ -85,7 +85,9 @@
     "assets/app-soft-boot.js",
     "assets/app-soft-boot.css",
     "test/assets/app-soft-boot.js",
-    "test/assets/app-soft-boot.css"
+    "test/assets/app-soft-boot.css",
+    "assets/dar-ios-oversize-copy.css",
+    "test/assets/dar-ios-oversize-copy.css"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -105,6 +107,27 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "settings-flat-ios-oversize-copy-2026-09-15",
+      "approvedBy": "user-explicit-settings-edel-ohne-kasten-oversize-copy-visitor-test-admin",
+      "reason": "Nutzer: Einstellungen global edel ohne Kasten wie Bild 2; iOS-Oversize unverändert kopieren auf Besucher, Test, Admin.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "assets/dar-setup-hub.css",
+        "assets/dar-setup-hub.js",
+        "assets/dar-top-chrome-fix.css",
+        "assets/dar-ios-oversize-copy.css",
+        "test/assets/dar-setup-hub.css",
+        "test/assets/dar-setup-hub.js",
+        "test/assets/dar-top-chrome-fix.css",
+        "test/assets/dar-ios-oversize-copy.css",
+        "admin/index.html",
+        "admin/dar-admin-top-chrome-fix.css"
+      ],
+      "expiresAt": "2026-09-17T23:59:00.000Z"
+    },
     {
       "id": "android-boot-logo-hang-2026-09-15",
       "approvedBy": "user-explicit-android-besucher-hangt-logo-sofort-fixen-push-live",

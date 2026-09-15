@@ -225,7 +225,7 @@
     link.id = "dar-setup-hub-style-link";
     link.rel = "stylesheet";
     var base = location.pathname.indexOf("/test/") === 0 ? "/test/assets/" : "/assets/";
-    link.href = base + "dar-setup-hub.css?v=3";
+    link.href = base + "dar-setup-hub.css?v=5";
     document.head.appendChild(link);
   }
 
@@ -233,8 +233,8 @@
     ensureCss();
     var page = document.querySelector(".settings-one-page");
     if (!page) return null;
-    page.classList.add("settings-cards-hub-v1");
-    page.classList.remove("settings-flat-live-v1");
+    page.classList.add("settings-flat-live-v1");
+    page.classList.remove("settings-cards-hub-v1");
     var existing = document.getElementById(ROOT_ID);
     if (existing) {
       bind(existing);

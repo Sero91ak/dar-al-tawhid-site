@@ -1,0 +1,73 @@
+/* Copy iOS oversize (content under status bar, no glass) onto visitor + test.
+   Does NOT apply to html.dar-ios-native-app — iOS oversize stays untouched. */
+html:not(.dar-ios-native-app){
+  --dar-oversize-top:max(8px, env(safe-area-inset-top, 0px));
+}
+html:not(.dar-ios-native-app),
+html:not(.dar-ios-native-app) body{
+  background:var(--outer-bg-flat,var(--theme-page-bg,var(--bg,#080806)))!important;
+  background-image:none!important;
+}
+html:not(.dar-ios-native-app) .top-edge-fade,
+html:not(.dar-ios-native-app) .top-swim-aura,
+html:not(.dar-ios-native-app) #topEdgeFade,
+html:not(.dar-ios-native-app) #topSwimAura{
+  display:none!important;
+  opacity:0!important;
+  height:0!important;
+  pointer-events:none!important;
+}
+html:not(.dar-ios-native-app) .top-shell,
+html:not(.dar-ios-native-app) .top-shell.theme-hero-shell,
+html:not(.dar-ios-native-app) .header,
+html:not(.dar-ios-native-app) .header.theme-hero-surface,
+html:not(.dar-ios-native-app) .theme-hero-surface{
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  border:0!important;
+  border-radius:0!important;
+  isolation:auto!important;
+  filter:none!important;
+}
+html:not(.dar-ios-native-app) body.is-home-route,
+html:not(.dar-ios-native-app) body.is-area-route:not(.is-feed-fullscreen),
+html:not(.dar-ios-native-app) body.is-more-route,
+html:not(.dar-ios-native-app) body.is-quiz-route{
+  padding-top:0!important;
+}
+html:not(.dar-ios-native-app) body.is-home-route .header{
+  padding-top:8px!important;
+  padding-left:max(14px, env(safe-area-inset-left, 0px))!important;
+  padding-right:max(14px, env(safe-area-inset-right, 0px))!important;
+}
+html:not(.dar-ios-native-app) body.is-home-route .brand small,
+html:not(.dar-ios-native-app) body.is-home-route .brand-kicker-row{
+  position:relative;
+  z-index:1;
+  opacity:.72;
+}
+html:not(.dar-ios-native-app) body.is-home-route .logo{
+  width:min(112px,28vw)!important;
+  height:min(112px,28vw)!important;
+  flex-basis:min(112px,28vw)!important;
+}
+html:not(.dar-ios-native-app) body.is-feed-fullscreen{
+  padding-top:0!important;
+}
+html:not(.dar-ios-native-app) body.is-more-route #appView.view,
+html:not(.dar-ios-native-app) body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-reader-route) #appView.view,
+html:not(.dar-ios-native-app) body.is-quiz-route #appView.view,
+html:not(.dar-ios-native-app) body.is-account-route #appView.view{
+  padding-top:var(--dar-oversize-top)!important;
+}
+html:not(.dar-ios-native-app) body.is-quran-overview #appView.view{
+  padding-top:max(6px, env(safe-area-inset-top, 0px))!important;
+}
+html:not(.dar-ios-native-app) .sf-top,
+html:not(.dar-ios-native-app) .view-head{
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}

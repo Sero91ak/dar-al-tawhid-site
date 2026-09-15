@@ -1,57 +1,93 @@
-/* DAR Setup Hub — scoped to settings only; do not touch global view headers */
+/* Setup + Einstellungen: edel, ohne Kasten, dünne Goldlinien (wie Gebetszeiten-Bild) */
 #dar-setup-hub,
 .dar-setup-hub{
-  margin:0 0 16px;
-  padding:18px 16px 16px;
-  border-radius:22px;
-  border:1px solid rgba(232,201,106,.28);
-  background:
-    radial-gradient(120% 90% at 0% 0%,rgba(232,201,106,.08),transparent 55%),
-    linear-gradient(160deg,rgba(18,18,16,.98),rgba(8,8,8,.96));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 14px 34px rgba(0,0,0,.28);
-  color:#f4efe3;
+  margin:0 0 8px;
+  padding:6px 2px 4px;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  color:var(--text,#f4efe3);
 }
-.dar-setup-hub__head{margin:0 0 14px}
+.dar-setup-hub__head{margin:0 2px 10px}
 .dar-setup-hub__title{
   margin:0;
   font-family:var(--serif,Georgia,"Times New Roman",serif);
-  font-size:clamp(20px,5.4vw,26px);
+  font-size:clamp(22px,5.6vw,28px);
   font-weight:650;
-  line-height:1.12;
-  color:#e8c96a;
+  line-height:1.08;
+  color:var(--gold2,#e8c96a);
 }
 .dar-setup-hub__sub{
   margin:6px 0 0;
-  font-size:12.5px;
+  font-size:12px;
   line-height:1.35;
-  color:rgba(232,226,210,.62);
+  color:var(--muted,rgba(232,226,210,.62));
 }
-.dar-setup-hub__list{display:grid;grid-template-columns:1fr;gap:10px}
+.dar-setup-hub__list{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  border:0;
+  background:transparent;
+}
 .dar-setup-hub__row{
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding:13px 14px;border-radius:16px;
-  border:1px solid rgba(255,255,255,.06);
-  background:rgba(20,20,20,.92);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  min-height:62px;
+  padding:12px 4px;
+  border:0;
+  border-top:1px solid color-mix(in srgb,var(--gold2,#e8c96a) 22%, var(--line2,rgba(255,255,255,.08)) 78%);
+  border-radius:0;
+  background:transparent;
 }
+.dar-setup-hub__row:first-child{border-top:0}
 .dar-setup-hub__copy{min-width:0;flex:1}
-.dar-setup-hub__copy strong{display:block;font-size:15px;font-weight:700;line-height:1.2;color:#fff8ea}
-.dar-setup-hub__copy span{display:block;margin-top:3px;font-size:12px;line-height:1.3;color:rgba(232,226,210,.62)}
+.dar-setup-hub__copy strong{
+  display:block;
+  font-size:15px;
+  font-weight:720;
+  line-height:1.2;
+  color:var(--text,#fff8ea);
+}
+.dar-setup-hub__copy span{
+  display:block;
+  margin-top:3px;
+  font-size:12px;
+  line-height:1.3;
+  color:var(--muted,rgba(232,226,210,.62));
+}
 .dar-setup-hub__btn{
-  appearance:none;border:1px solid rgba(255,255,255,.08);border-radius:14px;
-  min-height:36px;padding:8px 14px;background:#1a1a1a;color:#f3efe4;
-  font-size:13px;font-weight:750;white-space:nowrap;cursor:pointer;
+  appearance:none;
+  border:1px solid color-mix(in srgb,var(--gold2,#e8c96a) 28%, transparent);
+  border-radius:999px;
+  min-height:32px;
+  padding:6px 12px;
+  background:transparent;
+  color:var(--text,#f3efe4);
+  font-size:12px;
+  font-weight:800;
+  white-space:nowrap;
+  cursor:pointer;
 }
 .dar-setup-hub__btn.is-active,
 .dar-setup-hub__btn[data-dar-setup-action="sync"],
 .dar-setup-hub__btn[data-dar-setup-action="widgets"]{
-  border-color:rgba(232,201,106,.34);color:#e8c96a;background:rgba(26,26,26,.96);
+  border-color:color-mix(in srgb,var(--gold2,#e8c96a) 42%, transparent);
+  color:var(--gold2,#e8c96a);
+  background:transparent;
 }
 .dar-setup-hub__btn:active{transform:scale(.97)}
 .dar-setup-hub__btn.is-busy{opacity:.72;pointer-events:none}
 
-/* Settings cards only — never alter global .view-head */
+.settings-one-page.settings-flat-live-v1,
 .settings-one-page.settings-cards-hub-v1{
-  display:flex;flex-direction:column;gap:14px;padding-bottom:18px;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  padding-bottom:18px;
 }
 .settings-one-page.settings-cards-hub-v1 :where(
   .notification-hero,
@@ -60,34 +96,84 @@
   .app-icon-panel,
   .app-font-panel,
   .settings-live-row
+),
+.settings-one-page.settings-flat-live-v1 :where(
+  .notification-hero,
+  .notification-section,
+  .theme-switch-panel,
+  .app-icon-panel,
+  .app-font-panel,
+  .settings-live-row
 ){
   margin:0!important;
-  padding:16px!important;
-  border-radius:22px!important;
-  border:1px solid rgba(232,201,106,.28)!important;
-  background:
-    radial-gradient(110% 90% at 0% 0%,rgba(232,201,106,.07),transparent 58%),
-    linear-gradient(155deg,rgba(16,16,14,.96),rgba(8,8,8,.94))!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 12px 28px rgba(0,0,0,.22)!important;
+  padding:16px 2px 18px!important;
+  border:0!important;
+  border-radius:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2,#e8c96a) 24%, var(--line2,rgba(255,255,255,.1)) 76%)!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
   -webkit-backdrop-filter:none!important;
   backdrop-filter:none!important;
 }
-.settings-one-page.settings-cards-hub-v1 .notification-health{
-  margin:16px 0 0!important;padding:14px!important;border-radius:16px!important;
-  border:1px solid rgba(232,201,106,.3)!important;background:rgba(12,12,12,.88)!important;
+.settings-one-page.settings-cards-hub-v1 .notification-hero:after,
+.settings-one-page.settings-flat-live-v1 .notification-hero:after{display:none!important}
+.settings-one-page.settings-cards-hub-v1 .notification-health,
+.settings-one-page.settings-flat-live-v1 .notification-health{
+  margin:14px 0 0!important;
+  padding:12px 0 0!important;
+  border:0!important;
+  border-top:1px solid color-mix(in srgb,var(--line2,rgba(255,255,255,.1)) 50%, transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
 }
-.settings-one-page.settings-cards-hub-v1 .notification-health .notification-action{
-  border-radius:14px!important;background:#1a1a1a!important;
-  border:1px solid rgba(255,255,255,.08)!important;color:#f4efe3!important;
+.settings-one-page.settings-cards-hub-v1 .notification-health .notification-action,
+.settings-one-page.settings-flat-live-v1 .notification-health .notification-action{
+  border-radius:999px!important;
+  background:transparent!important;
+  border:1px solid color-mix(in srgb,var(--gold2,#e8c96a) 28%, transparent)!important;
+  color:var(--text,#f4efe3)!important;
 }
-.settings-one-page.settings-cards-hub-v1 .theme-switch-panel:before{display:none!important}
-.settings-one-page.settings-cards-hub-v1 .font-slider-panel{
-  margin:10px 0 0!important;padding:12px!important;border-radius:14px!important;
-  border:1px solid rgba(255,255,255,.07)!important;background:rgba(0,0,0,.22)!important;
+.settings-one-page.settings-cards-hub-v1 .theme-switch-panel:before,
+.settings-one-page.settings-flat-live-v1 .theme-switch-panel:before{display:none!important}
+.settings-one-page.settings-cards-hub-v1 .font-slider-panel,
+.settings-one-page.settings-flat-live-v1 .font-slider-panel{
+  margin:10px 0 0!important;
+  padding:12px 0 0!important;
+  border:0!important;
+  border-top:1px solid color-mix(in srgb,var(--line2,rgba(255,255,255,.1)) 44%, transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
 }
-.settings-one-page.settings-cards-hub-v1 .notification-center-page{
-  display:flex;flex-direction:column;gap:14px;
+.settings-one-page.settings-cards-hub-v1 .notification-center-page,
+.settings-one-page.settings-flat-live-v1 .notification-center-page{
+  display:flex;flex-direction:column;gap:0;max-width:none;
+}
+/* Glocke / Erinnerungen eigenständig — gleiche flache Optik */
+.notification-center-page .notification-hero,
+.notification-center-page .notification-section{
+  border-radius:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+.notification-center-page .notification-hero{
+  border:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2,#e8c96a) 24%, var(--line2,rgba(255,255,255,.1)) 76%)!important;
+  padding:8px 2px 18px!important;
+}
+.notification-center-page .notification-hero:after{display:none!important}
+.notification-center-page .notification-health{
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  border:0!important;
+  border-top:1px solid color-mix(in srgb,var(--line2,rgba(255,255,255,.1)) 50%, transparent)!important;
 }
 @media (min-width:720px){
-  .dar-setup-hub__list{grid-template-columns:1fr 1fr}
+  .dar-setup-hub__list{display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
+  .dar-setup-hub__row:nth-child(2){border-top:0}
 }
