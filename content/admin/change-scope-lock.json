@@ -108,6 +108,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "revert-visitor-header-smash-2026-09-16",
+      "approvedBy": "user-explicit-besucher-oben-falsch-zurueck",
+      "reason": "Nutzer: Besucher-App oben kaputt (Logo im Statusbalken). Safe-Area wiederherstellen, Glas weg, iOS unangetastet.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "assets/dar-ios-oversize-copy.css",
+        "test/assets/dar-ios-oversize-copy.css",
+        "admin/index.html",
+        "admin/dar-admin-top-chrome-fix.css"
+      ],
+      "expiresAt": "2026-09-17T23:59:00.000Z"
+    },
+    {
       "id": "ios-oversize-copy-win-2026-09-16",
       "approvedBy": "user-explicit-glass-oben-wie-ios-bild-1",
       "reason": "Nutzer: Bild 1 iOS Oversize, Bild 2/3 glasig. Visitor/Test wie iOS, iOS nicht ändern.",

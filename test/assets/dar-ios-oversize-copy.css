@@ -1,38 +1,5 @@
-/* Visitor + Test: same oversize as iOS native (content under status bar, no glass).
-   Never targets html.dar-ios-native-app. */
-html[data-theme]:not(.dar-ios-native-app),
-html:not(.dar-ios-native-app){
-  --dar-oversize-top:8px;
-}
-html[data-theme]:not(.dar-ios-native-app) body,
-html:not(.dar-ios-native-app) body,
-html[data-theme]:not(.dar-ios-native-app).is-standalone-pwa body,
-html:not(.dar-ios-native-app).is-standalone-pwa body,
-html[data-theme]:not(.dar-ios-native-app) body.is-home-route,
-html[data-theme]:not(.dar-ios-native-app) body.is-area-route,
-html[data-theme]:not(.dar-ios-native-app) body.is-more-route,
-html[data-theme]:not(.dar-ios-native-app) body.is-quiz-route,
-html[data-theme]:not(.dar-ios-native-app) body.is-feed-fullscreen{
-  padding-top:0!important;
-  margin-top:0!important;
-  background-image:none!important;
-  background-color:var(--dar-edge-fill,var(--outer-bg-flat,var(--theme-page-bg,var(--bg,#080806))))!important;
-  background:var(--dar-edge-fill,var(--outer-bg-flat,var(--theme-page-bg,var(--bg,#080806))))!important;
-}
-@media(max-width:700px){
-  html[data-theme]:not(.dar-ios-native-app).is-standalone-pwa body,
-  html:not(.dar-ios-native-app).is-standalone-pwa body{
-    padding-top:0!important;
-  }
-  html[data-theme]:not(.dar-ios-native-app).is-standalone-pwa .app:after,
-  html:not(.dar-ios-native-app).is-standalone-pwa .app:after{
-    content:none!important;
-    display:none!important;
-    background:none!important;
-    filter:none!important;
-    height:0!important;
-  }
-}
+/* Visitor + Test: no glass overlays. Keep safe-area so header is NOT under the clock.
+   Does not change html.dar-ios-native-app. */
 html[data-theme]:not(.dar-ios-native-app) .top-edge-fade,
 html[data-theme]:not(.dar-ios-native-app) .top-swim-aura,
 html:not(.dar-ios-native-app) .top-edge-fade,
@@ -46,37 +13,12 @@ html:not(.dar-ios-native-app) #topSwimAura{
   pointer-events:none!important;
 }
 html[data-theme]:not(.dar-ios-native-app) .top-shell,
-html[data-theme]:not(.dar-ios-native-app) .top-shell.theme-hero-shell,
 html[data-theme]:not(.dar-ios-native-app) .header,
-html[data-theme]:not(.dar-ios-native-app) .header.theme-hero-surface,
 html[data-theme]:not(.dar-ios-native-app) .theme-hero-surface,
 html[data-theme]:not(.dar-ios-native-app) .isnad,
-html[data-theme]:not(.dar-ios-native-app) .hero-text,
-html[data-theme]:not(.dar-ios-native-app) .prayer-overview,
 html[data-theme]:not(.dar-ios-native-app) .sf-top{
   backdrop-filter:none!important;
   -webkit-backdrop-filter:none!important;
-  filter:none!important;
-  box-shadow:none!important;
-}
-html[data-theme]:not(.dar-ios-native-app) body.is-home-route .header,
-html[data-theme]:not(.dar-ios-native-app) body.is-home-route .header.theme-hero-surface,
-html[data-theme]:not(.dar-ios-native-app) body.is-home-route .top-shell .header{
-  padding-top:8px!important;
-}
-html[data-theme]:not(.dar-ios-native-app) body.is-more-route #appView.view,
-html[data-theme]:not(.dar-ios-native-app) body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-reader-route) #appView.view,
-html[data-theme]:not(.dar-ios-native-app) body.is-quiz-route #appView.view,
-html[data-theme]:not(.dar-ios-native-app) body.is-account-route #appView.view,
-html[data-theme]:not(.dar-ios-native-app) body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
-  padding-top:8px!important;
-  margin-top:0!important;
-}
-html[data-theme]:not(.dar-ios-native-app) body.is-quran-overview #appView.view{
-  padding-top:6px!important;
-}
-html[data-theme]:not(.dar-ios-native-app) body.is-feed-fullscreen{
-  padding-top:0!important;
 }
 html[data-theme]:not(.dar-ios-native-app) .top-shell:before,
 html[data-theme]:not(.dar-ios-native-app) .top-shell:after,
@@ -85,4 +27,36 @@ html[data-theme]:not(.dar-ios-native-app) .top-shell.theme-hero-shell:after{
   display:none!important;
   content:none!important;
   background:none!important;
+  filter:none!important;
+}
+@media(max-width:700px){
+  html[data-theme]:not(.dar-ios-native-app).is-standalone-pwa .app:after,
+  html:not(.dar-ios-native-app).is-standalone-pwa .app:after{
+    content:none!important;
+    display:none!important;
+    height:0!important;
+    background:none!important;
+    filter:none!important;
+  }
+}
+/* Restore readable header below the status bar (undo 8px oversize smash) */
+html[data-theme]:not(.dar-ios-native-app) body.is-home-route .header,
+html[data-theme]:not(.dar-ios-native-app) body.is-home-route .header.theme-hero-surface,
+html[data-theme]:not(.dar-ios-native-app) body.is-home-route .top-shell .header{
+  padding-top:max(14px, calc(env(safe-area-inset-top, 0px) + 10px))!important;
+}
+html[data-theme]:not(.dar-ios-native-app) body.is-more-route #appView.view,
+html[data-theme]:not(.dar-ios-native-app) body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-reader-route) #appView.view,
+html[data-theme]:not(.dar-ios-native-app) body.is-quiz-route #appView.view,
+html[data-theme]:not(.dar-ios-native-app) body.is-account-route #appView.view{
+  padding-top:max(10px, env(safe-area-inset-top, 0px))!important;
+}
+html[data-theme]:not(.dar-ios-native-app) body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){
+  margin-top:max(8px, env(safe-area-inset-top, 0px))!important;
+}
+html[data-theme]:not(.dar-ios-native-app) body.is-quran-overview #appView.view{
+  padding-top:max(6px, env(safe-area-inset-top, 0px))!important;
+}
+html[data-theme]:not(.dar-ios-native-app) body.is-home-route .logo{
+  width:auto;
 }
