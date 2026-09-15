@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1789319677748 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v846";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v847";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -10442,7 +10442,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/focus-feed-app.js?v=7" defer></script>
 <script src="/assets/html2canvas.min.js" defer></script>
 <script src="/test/assets/premium-feed-app.js?v=101" defer></script>
-<script src="/test/assets/dar-setup-hub.js?v=4" defer></script><!-- DAR_SETUP_HUB_V1 -->
+<script src="/test/assets/dar-setup-hub.js?v=5" defer></script><!-- DAR_SETUP_HUB_V1 -->
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <script src="/assets/adaptive-layout.js?v=8" defer></script>
 <script src="/assets/fold-split.js?v=3" defer></script>
@@ -12070,9 +12070,9 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=791">
 <link rel="stylesheet" href="/assets/adaptive-layout.css?v=642">
 <link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=668">
-<link rel="stylesheet" href="/test/assets/dar-setup-hub.css?v=5"><!-- DAR_SETUP_HUB_V1 -->
+<link rel="stylesheet" href="/test/assets/dar-setup-hub.css?v=6"><!-- DAR_SETUP_HUB_V1 -->
 <link rel="stylesheet" href="/test/assets/dar-top-chrome-fix.css?v=2"><!-- DAR_TOP_CHROME_FIX -->
-<link rel="stylesheet" href="/test/assets/dar-ios-oversize-copy.css?v=4"><!-- DAR_IOS_OVERSIZE_COPY -->
+<link rel="stylesheet" href="/test/assets/dar-ios-oversize-copy.css?v=5"><!-- DAR_IOS_OVERSIZE_COPY -->
 <link rel="stylesheet" href="/test/assets/full-edge-appearance-polish.css?v=665">
 <link rel="stylesheet" href="/assets/fold-split.css?v=2">
 <link rel="stylesheet" href="/test/assets/fold-thumb-nav.css?v=2">
@@ -27102,7 +27102,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v846";
+const APP_BUILD_ID="app-shell-v847";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -33756,8 +33756,9 @@ html[data-theme] .top-edge-fade,html[data-theme] .top-swim-aura,.top-edge-fade,.
 html[data-theme]:not(.dar-ios-native-app) .top-edge-fade,html[data-theme]:not(.dar-ios-native-app) .top-swim-aura,.top-edge-fade,.top-swim-aura{display:none!important;height:0!important;background:none!important}
 @media(max-width:700px){html[data-theme]:not(.dar-ios-native-app).is-standalone-pwa .app:after,html:not(.dar-ios-native-app).is-standalone-pwa .app:after{content:none!important;display:none!important;height:0!important;filter:none!important}}
 html[data-theme]:not(.dar-ios-native-app) .top-shell,html[data-theme]:not(.dar-ios-native-app) .header,html[data-theme]:not(.dar-ios-native-app) .sf-top{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
-html[data-theme]:not(.dar-ios-native-app) body.is-home-route .header,html[data-theme]:not(.dar-ios-native-app) body.is-home-route .header.theme-hero-surface{padding-top:max(14px,calc(env(safe-area-inset-top,0px) + 10px))!important}
-html[data-theme]:not(.dar-ios-native-app) body.is-more-route #appView.view,html[data-theme]:not(.dar-ios-native-app) body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-reader-route) #appView.view,html[data-theme]:not(.dar-ios-native-app) body.is-quiz-route #appView.view{padding-top:max(10px,env(safe-area-inset-top,0px))!important}
+html:not(.dar-ios-native-app) body.is-home-route .header,html:not(.dar-ios-native-app) body.is-home-route .header.theme-hero-surface{padding-top:max(14px,calc(env(safe-area-inset-top,0px) + 12px))!important}
+html.is-standalone-pwa:not(.dar-ios-native-app) body.is-home-route .header,html.is-standalone-pwa:not(.dar-ios-native-app) .top-shell .header{padding-top:max(54px,calc(env(safe-area-inset-top,0px) + 14px))!important}
+@media (display-mode:standalone),(display-mode:fullscreen){html:not(.dar-ios-native-app) body.is-home-route .header,html:not(.dar-ios-native-app) .top-shell .header{padding-top:max(54px,calc(env(safe-area-inset-top,0px) + 14px))!important}html:not(.dar-ios-native-app) body:not(.is-home-route):not(.is-feed-fullscreen):not(.is-quran-reader-route) #appView.view{padding-top:max(50px,env(safe-area-inset-top,0px))!important}}
 </style>
 
 </html>
