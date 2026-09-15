@@ -10441,7 +10441,6 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/focus-feed-app.js?v=7" defer></script>
 <script src="/assets/html2canvas.min.js" defer></script>
 <script src="/test/assets/premium-feed-app.js?v=101" defer></script>
-<script src="/test/assets/location-access-push.js?v=2" defer></script><!-- DAR_TEST_LOCATION_ACCESS_V1 -->
 <script src="/test/assets/dar-setup-hub.js?v=4" defer></script><!-- DAR_SETUP_HUB_V1 -->
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <script src="/assets/adaptive-layout.js?v=8" defer></script>
@@ -12070,7 +12069,6 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=791">
 <link rel="stylesheet" href="/assets/adaptive-layout.css?v=642">
 <link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=668">
-<link rel="stylesheet" href="/test/assets/location-access-push.css?v=2"><!-- DAR_TEST_LOCATION_ACCESS_V1 -->
 <link rel="stylesheet" href="/test/assets/dar-setup-hub.css?v=4"><!-- DAR_SETUP_HUB_V1 -->
 <link rel="stylesheet" href="/test/assets/dar-top-chrome-fix.css?v=1"><!-- DAR_TOP_CHROME_FIX -->
 <link rel="stylesheet" href="/test/assets/full-edge-appearance-polish.css?v=665">
@@ -24569,7 +24567,7 @@ function prayerAdvanceNotificationCopy(prayer,settings,eventDate){const timeLabe
 function prayerEntryNotificationCopy(prayer,settings=getPrayerSettings(),eventDate){const timeLabel=prayerTimeLabel(prayer,eventDate||prayerEventDate(new Date(),prayer));const variant=sanitizeLocalPrayerCopy(pickPrayerEntryVariant(prayer.key,timeLabel));return{title:variant.title,body:variant.body,tag:prayer.key==="tahajjud"?"prayer-tahajjud":`prayer-${prayer.key}`}}
 // PRAYER_LOCAL_FALLBACK_GUARD: Lokale Erinnerungen an den in der App gezeigten Gebetszeiten. OneSignal-Opt-in darf die Uhr nicht abschalten.
 /* PUSH_LANES_GUARD PUSH_LANES_GUARD_PRAYER_LOCAL */
-async function shouldUseLocalPrayerReminders(settings,serverSynced=false){const s=settings||getPrayerSettings();if(!s.reminder||!hasPrayerLocation(s))return false;if(isDarNativeApp()){if(String(window.DAR_IOS_ONESIGNAL_ID||readOneSignalPushSubscriptionState().subscriptionId||"").trim())return false;return true}if(serverSynced)return false;const dbg=prayerPushDebug();if(dbg.subscriptionId)return false;/* Web-Push aktiv: nur Server-Lane, keine lokalen Doppel-Timer */if(String(dbg.supabase||"")==="ok"&&dbg.subscriptionId)return false;return true}
+async function shouldUseLocalPrayerReminders(settings,serverSynced=false){const s=settings||getPrayerSettings();if(!s.reminder||!hasPrayerLocation(s))return false;if(isDarNativeApp()){if(String(window.DAR_IOS_ONESIGNAL_ID||readOneSignalPushSubscriptionState().subscriptionId||"").trim())return false;return true}if(serverSynced)return false;const dbg=prayerPushDebug();if(String(dbg.supabase||"")==="ok"&&dbg.subscriptionId)return false;return true}
 async function scheduleLocalPrayerRemindersIfNeeded({silent=false,serverSynced=false}={}){const settings=getPrayerSettings();if(!settings.reminder||!hasPrayerLocation(settings))return;if(await shouldUseLocalPrayerReminders(settings,serverSynced))scheduleLocalPrayerReminders({silent});else clearPrayerReminders()}
 function prayerByKey(key,settings=getPrayerSettings()){return calculatePrayerTimes(new Date(),settings).find(p=>p.key===key)||null}
 function nextPlannedPrayerNotification(settings=getPrayerSettings()){
@@ -33752,5 +33750,4 @@ html[data-theme] .top-edge-fade,html[data-theme] .top-swim-aura,.top-edge-fade,.
 .view-head h2,.view h2,.settings-page-head h2,.home-start-title{color:var(--gold2,#e8c96a)!important;opacity:1!important;visibility:visible!important}
 .top-shell,.header,.brand,.view-head,#appView>.view-head{position:relative!important;z-index:3!important}
 </style>
-
 </html>
