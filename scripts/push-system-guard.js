@@ -189,7 +189,7 @@ function runPushSystemGuard() {
     "isFridayLocal"
   ]);
 
-  for (const htmlFile of ["index.html", "test/index.html"]) {
+  for (const htmlFile of ["app/index.html", "test/index.html"]) {
     const html = read(htmlFile);
     mustInclude(`${htmlFile} Push-Sync`, html, [
       "function syncPrayerPushTags",
@@ -245,7 +245,7 @@ function runPushSystemGuard() {
   });
 
   const oneSignalAppIdFiles = [
-    "index.html",
+    "app/index.html",
     "test/index.html",
     "cloudflare/worker.js",
     "cloudflare/prayer-push-scheduler.js",

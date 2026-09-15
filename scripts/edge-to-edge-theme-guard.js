@@ -13,7 +13,7 @@ const path = require("path");
 const ROOT = path.join(__dirname, "..");
 const MARKER = "EDGE_TO_EDGE_THEME_LOCK";
 const LOCK_FILE = "content/admin/edge-to-edge-theme-lock.json";
-const FILES = ["index.html", "test/index.html"];
+const FILES = ["app/index.html", "test/index.html"];
 
 function fail(msg) {
   console.error(`${MARKER} FAIL: ${msg}`);

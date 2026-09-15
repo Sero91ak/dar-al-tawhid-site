@@ -22,7 +22,7 @@ function runPostsLoadGuard() {
   };
   const ok = (msg) => console.log("POSTS-LOAD-GUARD OK:", msg);
 
-  for (const rel of ["index.html", "test/index.html"]) {
+  for (const rel of ["app/index.html", "test/index.html"]) {
     const html = read(rel);
     if (!html.includes("function postFileIsFresh(")) {
       fail(`${rel}: postFileIsFresh fehlt`);

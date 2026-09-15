@@ -12,7 +12,7 @@ const path = require("path");
 const ROOT = path.join(__dirname, "..");
 const MARKER = "HEADER_PRAYER_DISPLAY_GUARD";
 const LOCK_FILE = "content/admin/header-prayer-display-lock.json";
-const FILES = ["index.html", "test/index.html"];
+const FILES = ["app/index.html", "test/index.html"];
 
 const REQUIRED = [
   MARKER,

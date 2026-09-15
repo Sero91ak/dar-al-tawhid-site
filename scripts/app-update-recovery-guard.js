@@ -12,7 +12,7 @@ const path = require("path");
 const ROOT = path.join(__dirname, "..");
 const MARKER = "APP_UPDATE_RECOVERY_GUARD";
 const LOCK_FILE = "content/admin/app-update-recovery-lock.json";
-const FILES = ["index.html", "test/index.html"];
+const FILES = ["app/index.html", "test/index.html"];
 
 function fail(msg) {
   console.error(`${MARKER} FAIL: ${msg}`);

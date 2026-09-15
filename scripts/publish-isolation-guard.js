@@ -9,7 +9,7 @@ const fs = require("fs");
 const path = require("path");
 
 const ROOT = path.join(__dirname, "..");
-const VISITOR_FILES = ["index.html", "test/index.html"];
+const VISITOR_FILES = ["app/index.html", "test/index.html"];
 
 function read(file) {
   return fs.readFileSync(path.join(ROOT, file), "utf8");

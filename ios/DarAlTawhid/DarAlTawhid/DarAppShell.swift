@@ -1,7 +1,8 @@
 import Foundation
 
 enum DarAppShell {
-    /// Native iOS is the live shell. Test lives only at /test/ until explicitly released.
+    /// Native iOS is the live app shell. The public website lives at `/`,
+    /// while the app/PWA shell lives under `/app/`.
     static let usesStagingWeb = false
 
     static let hosts: Set<String> = [
@@ -9,7 +10,7 @@ enum DarAppShell {
         "www.dar-al-tawhid.de"
     ]
 
-    static let liveURL = URL(string: "https://dar-al-tawhid.de/#home")!
+    static let liveURL = URL(string: "https://dar-al-tawhid.de/app/#home")!
     static let stagingURL = URL(string: "https://dar-al-tawhid.de/test/?env=staging&source=ios-native#home")!
 
     static var launchURL: URL {
@@ -46,7 +47,8 @@ enum DarAppShell {
         return incoming
     }
 
-    /// Map any DAR URL onto this app's own web shell (never /test/ in the live native app).
+    /// Map any DAR URL onto this app's own web shell.
+    /// Live native app must never open the classical website root; it keeps `/app/`.
     static func inAppURL(from incoming: URL) -> URL {
         let source = sourceURL(from: incoming) ?? incoming
         if source.scheme == DarDeepLink.scheme {
@@ -64,13 +66,18 @@ enum DarAppShell {
             if !path.hasPrefix("/test") {
                 path = "/test" + (path == "/" || path.isEmpty ? "/" : path)
             }
-        } else if path.hasPrefix("/test/") {
-            path = String(path.dropFirst("/test".count))
-            if path.isEmpty { path = "/" }
-        } else if path == "/test" {
-            path = "/"
+        } else {
+            if path.hasPrefix("/test/") {
+                path = String(path.dropFirst("/test".count))
+                if path.isEmpty { path = "/" }
+            } else if path == "/test" {
+                path = "/"
+            }
+            if !path.hasPrefix("/app") {
+                path = "/app" + (path == "/" || path.isEmpty ? "/" : path)
+            }
         }
-        components.path = path.isEmpty ? "/" : path
+        components.path = path.isEmpty ? (usesStagingWeb ? "/" : "/app/") : path
         if let url = components.url { return url }
         return launchURL
     }

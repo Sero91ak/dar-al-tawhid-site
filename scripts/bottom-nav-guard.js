@@ -9,7 +9,7 @@ const fs = require("fs");
 const path = require("path");
 
 const ROOT = path.join(__dirname, "..");
-const VISITOR_FILES = ["index.html", "test/index.html"];
+const VISITOR_FILES = ["app/index.html", "test/index.html"];
 
 function read(file) {
   return fs.readFileSync(path.join(ROOT, file), "utf8");
@@ -282,13 +282,20 @@ function runBottomNavGuard() {
   }
 
   const version = JSON.parse(read("version.json"));
-  const buildMatch = read("index.html").match(/const APP_BUILD_ID="(app-shell-v\d+)"/);
+  const buildMatch = read("app/index.html").match(/const APP_BUILD_ID="(app-shell-v\d+)"/);
   if (!buildMatch) {
-    fail("index.html: APP_BUILD_ID fehlt");
+    fail("app/index.html: APP_BUILD_ID fehlt");
   } else if (buildMatch[1] !== version.buildId) {
     fail(`APP_BUILD_ID (${buildMatch[1]}) stimmt nicht mit version.json (${version.buildId}) überein`);
   } else {
     ok(`Build-ID synchron: ${version.buildId}`);
+  }
+
+  const websiteHtml = read("index.html");
+  if (websiteHtml.includes('id="bottomNav"')) {
+    fail("index.html: klassische Webseite darf keine App-Bottom-Navigation enthalten");
+  } else {
+    ok("index.html: keine App-Bottom-Navigation");
   }
 
   return failed;
