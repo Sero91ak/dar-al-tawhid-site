@@ -12080,7 +12080,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/app-soft-boot.css?v=668">
 <link rel="stylesheet" href="/assets/dar-setup-hub.css?v=5"><!-- DAR_SETUP_HUB_V1 -->
 <link rel="stylesheet" href="/assets/dar-top-chrome-fix.css?v=2"><!-- DAR_TOP_CHROME_FIX -->
-<link rel="stylesheet" href="/assets/dar-ios-oversize-copy.css?v=1"><!-- DAR_IOS_OVERSIZE_COPY -->
+<link rel="stylesheet" href="/assets/dar-ios-oversize-copy.css?v=2"><!-- DAR_IOS_OVERSIZE_COPY -->
 <link rel="stylesheet" href="/assets/full-edge-appearance-polish.css?v=665">
 <link rel="stylesheet" href="/assets/fold-split.css?v=1">
 <style id="typography-compact-fix-v310">
@@ -33401,6 +33401,16 @@ html[data-theme] .top-edge-fade,html[data-theme] .top-swim-aura,.top-edge-fade,.
 .brand small,.eyebrow,.view-head .eyebrow{color:#e2d2a8!important;opacity:1!important;-webkit-text-fill-color:#e2d2a8!important;text-shadow:0 1px 2px rgba(0,0,0,.65)!important}
 .view-head h2,.view h2,.settings-page-head h2,.home-start-title{color:var(--gold2,#e8c96a)!important;opacity:1!important;visibility:visible!important}
 .top-shell,.header,.brand,.view-head,#appView>.view-head{position:relative}
+</style>
+
+<style id="dar-ios-oversize-copy-final">
+html[data-theme]:not(.dar-ios-native-app) body,html:not(.dar-ios-native-app) body,html[data-theme]:not(.dar-ios-native-app).is-standalone-pwa body,html:not(.dar-ios-native-app).is-standalone-pwa body,html[data-theme]:not(.dar-ios-native-app) body.is-home-route,html[data-theme]:not(.dar-ios-native-app) body.is-feed-fullscreen{padding-top:0!important;margin-top:0!important;background-image:none!important}
+@media(max-width:700px){html[data-theme]:not(.dar-ios-native-app).is-standalone-pwa body,html:not(.dar-ios-native-app).is-standalone-pwa body{padding-top:0!important}html[data-theme]:not(.dar-ios-native-app).is-standalone-pwa .app:after,html:not(.dar-ios-native-app).is-standalone-pwa .app:after{content:none!important;display:none!important;height:0!important;background:none!important;filter:none!important}}
+html[data-theme]:not(.dar-ios-native-app) .top-edge-fade,html[data-theme]:not(.dar-ios-native-app) .top-swim-aura,.top-edge-fade,.top-swim-aura,#topEdgeFade,#topSwimAura{display:none!important;opacity:0!important;height:0!important;background:none!important}
+html[data-theme]:not(.dar-ios-native-app) .top-shell,html[data-theme]:not(.dar-ios-native-app) .header,html[data-theme]:not(.dar-ios-native-app) .theme-hero-surface,html[data-theme]:not(.dar-ios-native-app) .isnad,html[data-theme]:not(.dar-ios-native-app) .sf-top{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;filter:none!important}
+html[data-theme]:not(.dar-ios-native-app) body.is-home-route .header,html[data-theme]:not(.dar-ios-native-app) body.is-home-route .header.theme-hero-surface{padding-top:8px!important}
+html[data-theme]:not(.dar-ios-native-app) body.is-more-route #appView.view,html[data-theme]:not(.dar-ios-native-app) body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-reader-route) #appView.view,html[data-theme]:not(.dar-ios-native-app) body.is-quiz-route #appView.view{padding-top:8px!important;margin-top:0!important}
+html[data-theme]:not(.dar-ios-native-app) body.is-area-route:not(.is-feed-fullscreen) .app-bar:not(.is-home){margin-top:0!important}
 </style>
 
 </html>
