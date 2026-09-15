@@ -235,7 +235,9 @@
     if (!page) return null;
     page.classList.add("settings-flat-live-v1");
     page.classList.remove("settings-cards-hub-v1");
-    var existing = document.getElementById(ROOT_ID);
+    var hubs = document.querySelectorAll("#" + ROOT_ID + '[data-dar-setup="true"]');
+    for (var i = 1; i < hubs.length; i += 1) hubs[i].remove();
+    var existing = hubs[0] || document.getElementById(ROOT_ID);
     if (existing) {
       bind(existing);
       return existing;

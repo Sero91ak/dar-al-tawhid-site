@@ -173,6 +173,44 @@
   border:0!important;
   border-top:1px solid color-mix(in srgb,var(--line2,rgba(255,255,255,.1)) 50%, transparent)!important;
 }
+/* Die native iOS-App besitzt ihren eigenen Einrichtungsbereich. Im WebView darf
+   deshalb kein zweiter, vom Web gerenderter Hub darunter erscheinen. */
+html.dar-ios-native-app #dar-setup-hub[data-dar-setup="true"]{display:none!important}
+
+/* Besucher- und Test-App: ein ruhiger, durchgehender Einstellungsfluss.
+   Steuerungselemente bleiben bedienbar, die Bereiche selbst sind nie Karten. */
+.settings-one-page.settings-flat-live-v1 .notification-center-page,
+.settings-one-page.settings-flat-live-v1 .notification-settings-list{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.settings-one-page.settings-flat-live-v1 .notification-hero,
+.settings-one-page.settings-flat-live-v1 .notification-section,
+.settings-one-page.settings-flat-live-v1 .theme-switch-panel,
+.settings-one-page.settings-flat-live-v1 .app-icon-panel,
+.settings-one-page.settings-flat-live-v1 .app-font-panel,
+.settings-one-page.settings-flat-live-v1 .settings-live-row{
+  position:relative;
+  margin:0!important;
+  padding:19px 2px!important;
+  border:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2,#e8c96a) 24%,var(--line2,rgba(255,255,255,.1)) 76%)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+.settings-one-page.settings-flat-live-v1 .notification-hero{padding-top:12px!important}
+.settings-one-page.settings-flat-live-v1 .notification-section:before,
+.settings-one-page.settings-flat-live-v1 .notification-hero:after{display:none!important}
+.settings-one-page.settings-flat-live-v1 .notification-section__head{margin:0 2px 14px!important}
 @media (min-width:720px){
   .dar-setup-hub__list{display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
   .dar-setup-hub__row:nth-child(2){border-top:0}
