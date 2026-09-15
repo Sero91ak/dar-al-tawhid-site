@@ -176,6 +176,31 @@
 /* Die native iOS-App besitzt ihren eigenen Einrichtungsbereich. Im WebView darf
    deshalb kein zweiter, vom Web gerenderter Hub darunter erscheinen. */
 html.dar-ios-native-app #dar-setup-hub[data-dar-setup="true"]{display:none!important}
+html.dar-ios-native-app #dar-ios-setup-assistant{
+  margin:14px 18px 8px!important;
+  padding:0 0 16px!important;
+  border:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2,#e8c96a) 30%,var(--line2,rgba(255,255,255,.1)) 70%)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html.dar-ios-native-app #dar-ios-setup-assistant .dar-setup-head{align-items:flex-start!important;margin-bottom:12px!important}
+html.dar-ios-native-app #dar-ios-setup-assistant .dar-setup-title{font-family:var(--serif,Georgia,serif)!important;font-size:26px!important;font-weight:650!important;line-height:1.05!important}
+html.dar-ios-native-app #dar-ios-setup-assistant .dar-setup-badge,
+html.dar-ios-native-app #dar-ios-setup-assistant .dar-setup-status{display:none!important}
+html.dar-ios-native-app #dar-ios-setup-assistant .dar-setup-grid{display:grid!important;grid-template-columns:1fr!important;gap:0!important}
+html.dar-ios-native-app #dar-ios-setup-assistant .dar-setup-row{
+  padding:14px 0!important;
+  border:0!important;
+  border-top:1px solid color-mix(in srgb,var(--gold2,#e8c96a) 18%,var(--line2,rgba(255,255,255,.1)) 82%)!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+html.dar-ios-native-app #dar-ios-setup-assistant .dar-setup-row button{border:1px solid color-mix(in srgb,var(--gold2,#e8c96a) 42%,transparent)!important;background:transparent!important;color:var(--gold2,#e8c96a)!important}
+html.dar-ios-native-app .settings-one-page :is(.notification-hero,.notification-section,.theme-switch-panel,.app-icon-panel,.app-font-panel,.font-slider-panel,.settings-live-row){margin:0!important;padding:18px 2px!important;border:0!important;border-bottom:1px solid color-mix(in srgb,var(--gold2,#e8c96a) 24%,var(--line2,rgba(255,255,255,.1)) 76%)!important;border-radius:0!important;background:transparent!important;background-image:none!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+html.dar-ios-native-app .settings-one-page .notification-hero:after,
+html.dar-ios-native-app .settings-one-page .notification-section:before{display:none!important}
 
 /* Besucher- und Test-App: ein ruhiger, durchgehender Einstellungsfluss.
    Steuerungselemente bleiben bedienbar, die Bereiche selbst sind nie Karten. */
