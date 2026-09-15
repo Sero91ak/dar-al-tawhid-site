@@ -73,7 +73,15 @@
     "content/admin/push-lanes-lock.json",
     "scripts/push-lanes-guard.js",
     "cloudflare/WORKER_SECRETS_LOCK.md",
-    "cloudflare/library-push-admin.js"
+    "cloudflare/library-push-admin.js",
+    "admin/dar-admin-top-chrome-fix.css",
+    "assets/dar-setup-hub.css",
+    "assets/dar-setup-hub.js",
+    "assets/dar-top-chrome-fix.css",
+    "test/assets/dar-setup-hub.css",
+    "test/assets/dar-setup-hub.js",
+    "test/assets/dar-top-chrome-fix.css",
+    ".github/workflows/deploy-live-admin-app.yml"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -93,6 +101,27 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "admin-top-chrome-hub-live-2026-09-15",
+      "approvedBy": "user-explicit-push-live-admin-same-chrome",
+      "reason": "Nutzer: push live; Admin App dasselbe (Top-Schrift/Chrome + Setup-Hub Optik).",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "admin/dar-admin-top-chrome-fix.css",
+        "admin/index.html",
+        "service-worker.js",
+        ".github/workflows/deploy-live-admin-app.yml",
+        "assets/dar-setup-hub.css",
+        "assets/dar-setup-hub.js",
+        "assets/dar-top-chrome-fix.css",
+        "test/assets/dar-setup-hub.css",
+        "test/assets/dar-setup-hub.js",
+        "test/assets/dar-top-chrome-fix.css",
+        "index.html",
+        "test/index.html"
+      ],
+      "expiresAt": "2026-09-17T23:59:00.000Z"
+    },
     {
       "id": "links-appstore-icon-only-2026-09-13",
       "approvedBy": "user-explicit-links-appstore-icon-only",
