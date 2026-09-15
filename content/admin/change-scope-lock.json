@@ -81,7 +81,11 @@
     "test/assets/dar-setup-hub.css",
     "test/assets/dar-setup-hub.js",
     "test/assets/dar-top-chrome-fix.css",
-    ".github/workflows/deploy-live-admin-app.yml"
+    ".github/workflows/deploy-live-admin-app.yml",
+    "assets/app-soft-boot.js",
+    "assets/app-soft-boot.css",
+    "test/assets/app-soft-boot.js",
+    "test/assets/app-soft-boot.css"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -101,6 +105,22 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "android-boot-logo-hang-2026-09-15",
+      "approvedBy": "user-explicit-android-besucher-hangt-logo-sofort-fixen-push-live",
+      "reason": "Nutzer: Android Besucher-App hängt am Logo, sofort fixen und live pushen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "assets/app-soft-boot.js",
+        "test/assets/app-soft-boot.js",
+        "service-worker.js",
+        "version.json",
+        "test/version.json"
+      ],
+      "expiresAt": "2026-09-17T23:59:00.000Z"
+    },
     {
       "id": "admin-top-chrome-hub-live-2026-09-15",
       "approvedBy": "user-explicit-push-live-admin-same-chrome",
