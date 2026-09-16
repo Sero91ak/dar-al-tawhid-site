@@ -232,4 +232,5 @@ body.is-home-route .footer strong{font-size:14px}
 @media(prefers-reduced-motion:reduce){
   .home-v380-post-slider,.home-v380-lib-grid{scroll-behavior:auto}
 }
+.home-v380-app-status,.home-push-strip{display:none!important}
 </style>
