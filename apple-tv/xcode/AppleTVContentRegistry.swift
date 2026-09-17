@@ -5,7 +5,13 @@ struct AppleTVContentCatalog: Codable {
     let schemaVersion: String
     let language: String
     let defaultModule: String
+    let screensaver: AppleTVScreensaverDescriptor?
     let modules: [AppleTVContentModule]
+}
+
+struct AppleTVScreensaverDescriptor: Codable {
+    let enabled: Bool
+    let rotationConfigPath: String
 }
 
 struct AppleTVContentModule: Codable, Identifiable {
