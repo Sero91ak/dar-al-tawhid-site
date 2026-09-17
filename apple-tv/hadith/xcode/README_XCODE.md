@@ -19,7 +19,7 @@ Diese Dateien in das tvOS-Target übernehmen:
 - `apple-tv/hadith/xcode/HadithRemoteService.swift`
 - `apple-tv/hadith/xcode/HadithScreensaverProvider.swift`
 
-Alle aktuell im GitHub-Katalog registrierten Ḥadīṯ-Serien laden:
+Alle aktuell im GitHub-Katalog registrierten Inhalte laden:
 
 ```swift
 let hadiths = try await HadithRemoteService.shared.loadAllHadith()
@@ -33,7 +33,39 @@ let nextHadith = try await HadithScreensaverProvider.shared.nextHadith()
 
 Nicht selbst per `randomElement()` auswählen.
 
-`loadAllHadith()` ist der Standard. Neue Serien wie `051-100` oder `101-150` werden über `hadith/catalog.json` registriert und müssen nicht im Swift-Code fest eingetragen werden.
+`loadAllHadith()` ist der Standard. Neue Serien werden über `hadith/catalog.json` registriert und müssen nicht im Swift-Code fest eingetragen werden.
+
+## Inhaltstyp oben rechts – verbindlich
+
+Die Typbezeichnung im Kopfbereich darf NIEMALS als fester String `ḤADĪṮ` programmiert werden.
+
+Verwende für jeden angezeigten Datensatz:
+
+```swift
+Text(record.displayTypeLabel)
+```
+
+oder die vorbereitete View:
+
+```swift
+AppleTVContentTypeLabel(record: record)
+```
+
+Automatische Zuordnung:
+
+- `recordType = hadith` oder fehlendes `recordType` bei Altbeständen → `ḤADĪṮ`
+- `recordType = athar` → `ĀṮAR`
+- `recordType = dua` → `DUʿĀʾ`
+
+Damit muss bei einer authentischen Aussage eines Ṣaḥābī, Tābiʿī oder Salaf oben rechts `ĀṮAR` erscheinen und NICHT `ḤADĪṮ`.
+
+Der Name der Person bleibt über `narratorLine` unmittelbar im Inhaltsbereich sichtbar, z. B.:
+
+`Von ʿAbdullāh ibn Masʿūd ist authentisch überliefert:`
+
+Dadurch erkennt der Nutzer sowohl den Inhaltstyp als auch die Person, von der die Aussage überliefert ist.
+
+Neue Inhaltstypen müssen künftig über `recordType` und die zentrale Modelllogik ergänzt werden; nicht durch fest programmierte Texte in einzelnen Views.
 
 ## Bildschirmschoner-Rotation – verbindlich
 
@@ -56,7 +88,7 @@ Der Bildschirmschoner verwendet ein persistentes Shuffle-Bag-System:
 
 Die Zahl `20` und weitere Rotationswerte werden aus GitHub gelesen. Nach der einmaligen Swift-Integration können diese Werte später über `rotation.json` angepasst werden, ohne die Auswahl-Logik neu zu programmieren.
 
-Wichtig: Eine bereits kompilierte tvOS-App kann neue Swift-Dateien aus GitHub nicht dynamisch ausführen. Deshalb müssen `ScreensaverRotationService.swift` und `HadithScreensaverProvider.swift` einmal in das tvOS-Target integriert und mit der App gebaut werden. Danach werden neue Inhaltsdaten, neue Serien und Rotationskonfigurationen automatisch aus GitHub geladen.
+Wichtig: Eine bereits kompilierte tvOS-App kann neue Swift-Dateien aus GitHub nicht dynamisch ausführen. Deshalb müssen neue Swift-Strukturen einmal in das tvOS-Target integriert und mit der App gebaut werden. Danach werden neue Inhaltsdaten, Serien und Rotationskonfigurationen automatisch aus GitHub geladen.
 
 ## Verhalten
 
@@ -72,14 +104,14 @@ Wichtig: Eine bereits kompilierte tvOS-App kann neue Swift-Dateien aus GitHub ni
 
 ## Darstellung – verbindlich
 
-Die Ḥadīṯ-Karte darf niemals als einheitlicher schwerer Fließtext gerendert werden.
+Die Aussage darf niemals als einheitlicher schwerer Fließtext gerendert werden.
 
 Visuelle Hierarchie:
 
-1. Überliefererzeile – eigenständige, mittelstarke Typografie
+1. Überlieferer-/Personenzeile – eigenständige, mittelstarke Typografie
 2. kleiner Abstand
-3. `Der Prophet ﷺ sagte:` – sichtbar semibold, direkt im selben Textblock wie die Aussage
-4. Ḥadīṯ-Text – normale Grundschrift mit gezielten Hervorhebungen
+3. Sprecherformel – z. B. `Der Prophet ﷺ sagte:` oder bei Āṯār `Er sagte:` – sichtbar semibold und direkt im selben Textblock wie die Aussage
+4. Aussage – normale Grundschrift mit gezielten Hervorhebungen
 5. kleiner Abstand
 6. Quelle – kleiner und optisch zurückgenommen
 
@@ -90,12 +122,10 @@ Der Aussagebereich soll eine begrenzte komfortable Lesebreite haben und nicht un
 `textMarkdown` ist nur das Datenformat. Es darf niemals direkt so ausgegeben werden:
 
 ```swift
-Text(hadith.textMarkdown)
+Text(record.textMarkdown)
 ```
 
-Das würde Steuerzeichen wie `**` oder `*` sichtbar machen und ist verboten.
-
-Die Darstellung muss ausschließlich über `hadith.attributedHadith` bzw. `HadithInlineFormatter` erfolgen.
+Die Darstellung muss ausschließlich über `record.attributedHadith` bzw. `HadithInlineFormatter` erfolgen.
 
 Bedeutung:
 
@@ -105,15 +135,13 @@ Bedeutung:
 
 Die Zeichen `**` und `*` selbst dürfen niemals auf Apple TV sichtbar sein.
 
-`HadithInlineFormatter` entfernt die Steuerzeichen ausdrücklich und weist den Textsegmenten native tvOS-Schriftstile zu.
-
 ## Typografie
 
 Nicht alle Ebenen verwenden dieselbe Schriftstärke:
 
-- Überlieferer: semibold / rounded
+- Überlieferer / Person: semibold / rounded
 - Sprecherformel: semibold / rounded
-- normaler Ḥadīṯ-Text: regular
+- normaler Aussage-Text: regular
 - starke Hervorhebung: bold
 - kurvige Hervorhebung: serif + italic
 - Quelle: kleiner, regular und secondary
