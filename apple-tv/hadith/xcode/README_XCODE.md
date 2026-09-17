@@ -4,7 +4,7 @@
 
 Staging-Raw-Basis:
 
-`https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/apple-tv-hadith-staging/apple-tv/hadith/`
+`https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/apple-tv-hadith-staging/apple-tv/`
 
 Produktiv wird später nach ausdrücklicher Freigabe dieselbe Struktur auf `main` verwendet.
 
@@ -12,9 +12,12 @@ Produktiv wird später nach ausdrücklicher Freigabe dieselbe Struktur auf `main
 
 Diese Dateien in das tvOS-Target übernehmen:
 
-- `HadithModels.swift`
-- `HadithCardView.swift`
-- `HadithRemoteService.swift`
+- `apple-tv/xcode/AppleTVContentRegistry.swift`
+- `apple-tv/xcode/ScreensaverRotationService.swift`
+- `apple-tv/hadith/xcode/HadithModels.swift`
+- `apple-tv/hadith/xcode/HadithCardView.swift`
+- `apple-tv/hadith/xcode/HadithRemoteService.swift`
+- `apple-tv/hadith/xcode/HadithScreensaverProvider.swift`
 
 Alle aktuell im GitHub-Katalog registrierten Ḥadīṯ-Serien laden:
 
@@ -22,16 +25,50 @@ Alle aktuell im GitHub-Katalog registrierten Ḥadīṯ-Serien laden:
 let hadiths = try await HadithRemoteService.shared.loadAllHadith()
 ```
 
-`loadAllHadith()` ist der Standard. Neue Serien wie `051-100` oder `101-150` werden später über `hadith/catalog.json` registriert und müssen nicht im Swift-Code fest eingetragen werden.
+Für den Bildschirmschoner ausschließlich:
+
+```swift
+let nextHadith = try await HadithScreensaverProvider.shared.nextHadith()
+```
+
+Nicht selbst per `randomElement()` auswählen.
+
+`loadAllHadith()` ist der Standard. Neue Serien wie `051-100` oder `101-150` werden über `hadith/catalog.json` registriert und müssen nicht im Swift-Code fest eingetragen werden.
+
+## Bildschirmschoner-Rotation – verbindlich
+
+Die Rotationsregel liegt zentral in:
+
+`apple-tv/screensaver/rotation.json`
+
+Der Bildschirmschoner verwendet ein persistentes Shuffle-Bag-System:
+
+- jede verfügbare Aussage einmal zeigen, bevor Wiederholungen erlaubt sind
+- Reihenfolge pro Zyklus mischen
+- Fortschritt dauerhaft in Application Support speichern
+- App-/Apple-TV-Neustart setzt den Zyklus nicht zurück
+- neue GitHub-IDs werden in die noch offene Queue integriert
+- bereits gezeigte IDs bleiben bis zum Zyklusende gesperrt
+- entfernte IDs werden aus dem Zustand entfernt
+- nach vollständigem Zyklus neuer Shuffle
+- letzte 20 IDs des vorherigen Zyklus dürfen nach Möglichkeit nicht in den ersten 20 Positionen des neuen Zyklus erscheinen
+- unmittelbare Wiederholung ist verboten
+
+Die Zahl `20` und weitere Rotationswerte werden aus GitHub gelesen. Nach der einmaligen Swift-Integration können diese Werte später über `rotation.json` angepasst werden, ohne die Auswahl-Logik neu zu programmieren.
+
+Wichtig: Eine bereits kompilierte tvOS-App kann neue Swift-Dateien aus GitHub nicht dynamisch ausführen. Deshalb müssen `ScreensaverRotationService.swift` und `HadithScreensaverProvider.swift` einmal in das tvOS-Target integriert und mit der App gebaut werden. Danach werden neue Inhaltsdaten, neue Serien und Rotationskonfigurationen automatisch aus GitHub geladen.
 
 ## Verhalten
 
-1. `hadith/catalog.json` wird von GitHub geladen.
-2. Alle dort registrierten Serien werden automatisch erkannt.
-3. Das jeweilige `index.json` bestimmt die Dateien und Reihenfolge.
-4. Nach erfolgreichem Download wird der vollständige gültige Datenstand lokal gecacht.
-5. Ist GitHub oder das Internet nicht erreichbar, wird die zuletzt erfolgreich gespeicherte Fassung geladen.
-6. Bereits vergebene IDs werden nie verschoben.
+1. `apple-tv/catalog.json` wird von GitHub geladen.
+2. Die App erkennt die zentrale Bildschirmschoner-Konfiguration.
+3. `hadith/catalog.json` wird geladen.
+4. Alle dort registrierten Serien werden automatisch erkannt.
+5. Das jeweilige `index.json` bestimmt die Dateien.
+6. Nach erfolgreichem Download wird der vollständige gültige Datenstand lokal gecacht.
+7. Ist GitHub oder das Internet nicht erreichbar, wird die zuletzt erfolgreich gespeicherte Fassung geladen.
+8. Bereits vergebene IDs werden nie verschoben.
+9. Die Bildschirmschoner-Queue wird separat und dauerhaft gespeichert.
 
 ## Darstellung – verbindlich
 
@@ -68,7 +105,7 @@ Bedeutung:
 
 Die Zeichen `**` und `*` selbst dürfen niemals auf Apple TV sichtbar sein.
 
-`HadithInlineFormatter` entfernt die Steuerzeichen ausdrücklich und weist den Textsegmenten native tvOS-Schriftstile zu. Dadurch bleibt die Darstellung auch dann korrekt, wenn Apples eingebauter Markdown-Parser einen Datensatz nicht verarbeiten kann.
+`HadithInlineFormatter` entfernt die Steuerzeichen ausdrücklich und weist den Textsegmenten native tvOS-Schriftstile zu.
 
 ## Typografie
 
