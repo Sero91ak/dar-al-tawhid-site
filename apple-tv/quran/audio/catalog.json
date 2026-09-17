@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0",
+  "status": "active",
+  "target": "tvOS-only",
+  "provider": {
+    "name": "Al Quran Cloud / Islamic Network",
+    "editionsURL": "https://api.alquran.cloud/v1/edition/format/audio",
+    "surahURLTemplate": "https://api.alquran.cloud/v1/surah/{surah}/{edition}",
+    "cdnBaseURL": "https://cdn.islamic.network"
+  },
+  "selection": {
+    "includeAllAvailableArabicAudioEditions": true,
+    "language": "ar",
+    "format": "audio",
+    "defaultEdition": "ar.alafasy",
+    "persistSelection": true,
+    "sort": "displayName"
+  },
+  "offline": {
+    "cacheLastSuccessfulEditionList": true,
+    "fallbackRequired": true
+  },
+  "fallbackEditions": [
+    "ar.alafasy",
+    "ar.sudais",
+    "ar.shuraim",
+    "ar.husary",
+    "ar.minshawi",
+    "ar.minshawimujawwad",
+    "ar.abdulbasit",
+    "ar.abdulbasitmujawwad",
+    "ar.ajamy",
+    "ar.muhammadayoub",
+    "ar.hudhaify",
+    "ar.muhammadjibreel"
+  ]
+}
