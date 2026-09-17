@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HadithRecord: Codable, Identifiable {
     let id: String
+    let recordType: String?
     let language: String
     let narratorLine: String
     let speakerLabel: String
@@ -12,10 +13,43 @@ struct HadithRecord: Codable, Identifiable {
 }
 
 extension HadithRecord {
+    /// Alte Datensätze ohne `recordType` sind prophetische Ḥadīṯe.
+    var normalizedRecordType: String {
+        (recordType ?? "hadith").lowercased()
+    }
+
+    /// Verbindliche Bezeichnung für den Apple-TV-Kopfbereich.
+    /// Niemals "ḤADĪṮ" fest im View hardcoden.
+    var displayTypeLabel: String {
+        switch normalizedRecordType {
+        case "athar":
+            return "ĀṮAR"
+        case "dua":
+            return "DUʿĀʾ"
+        case "hadith":
+            return "ḤADĪṮ"
+        default:
+            return normalizedRecordType.uppercased()
+        }
+    }
+
     /// Robuste tvOS-Darstellung: Markdown-Steuerzeichen werden niemals sichtbar ausgegeben.
     /// **Text** = fett, *Text* = kursiv/geschwungen.
     var attributedHadith: AttributedString {
         HadithInlineFormatter.attributedString(from: textMarkdown)
+    }
+}
+
+/// Wiederverwendbare Typ-Kennzeichnung für den rechten oberen Bereich des Bildschirmschoners.
+/// Beispiel: ḤADĪṮ / ĀṮAR / DUʿĀʾ.
+struct AppleTVContentTypeLabel: View {
+    let record: HadithRecord
+
+    var body: some View {
+        Text(record.displayTypeLabel)
+            .font(.system(size: 30, weight: .semibold, design: .serif))
+            .tracking(1.2)
+            .accessibilityLabel(record.displayTypeLabel)
     }
 }
 
