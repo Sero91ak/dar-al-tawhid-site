@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "status": "active",
   "target": "tvOS-only",
   "provider": {
@@ -7,6 +7,16 @@
     "editionsURL": "https://api.alquran.cloud/v1/edition/format/audio",
     "surahURLTemplate": "https://api.alquran.cloud/v1/surah/{surah}/{edition}",
     "cdnBaseURL": "https://cdn.islamic.network"
+  },
+  "readerSync": {
+    "mode": "ayah-by-ayah",
+    "arabicEdition": "quran-uthmani",
+    "germanEdition": "de.bubenheim",
+    "germanTranslationName": "Bubenheim & Elyas",
+    "advanceTrigger": "audio-item-finished",
+    "showArabic": true,
+    "showGerman": true,
+    "persistLastPosition": true
   },
   "selection": {
     "includeAllAvailableArabicAudioEditions": true,
@@ -18,6 +28,8 @@
   },
   "offline": {
     "cacheLastSuccessfulEditionList": true,
+    "cacheLoadedSurahText": true,
+    "cacheLoadedGermanTranslation": true,
     "fallbackRequired": true
   },
   "fallbackEditions": [
