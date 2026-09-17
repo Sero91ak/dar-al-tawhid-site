@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "mode": "shuffleBag",
+  "persistProgress": true,
+  "storage": "applicationSupport",
+  "cyclePolicy": {
+    "showEveryItemBeforeRepeat": true,
+    "shuffleEachCycle": true,
+    "crossCycleCooldownCount": 20,
+    "preventImmediateRepeat": true,
+    "newItemsPolicy": "appendToRemainingAndReshuffle",
+    "removedItemsPolicy": "dropFromState"
+  },
+  "futureModuleMixing": {
+    "enabled": false,
+    "strategy": "weightedRoundRobin",
+    "weights": {
+      "hadith": 6,
+      "dua": 1,
+      "athar": 2
+    }
+  }
+}
