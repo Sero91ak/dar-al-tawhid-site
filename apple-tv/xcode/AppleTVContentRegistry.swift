@@ -6,12 +6,28 @@ struct AppleTVContentCatalog: Codable {
     let language: String
     let defaultModule: String
     let screensaver: AppleTVScreensaverDescriptor?
+    let quran: AppleTVQuranDescriptor?
     let modules: [AppleTVContentModule]
 }
 
 struct AppleTVScreensaverDescriptor: Codable {
     let enabled: Bool
     let rotationConfigPath: String
+}
+
+struct AppleTVQuranDescriptor: Codable {
+    let audio: AppleTVQuranAudioDescriptor?
+}
+
+struct AppleTVQuranAudioDescriptor: Codable {
+    let status: String
+    let target: String
+    let catalogPath: String
+    let remoteLoad: Bool
+    let offlineCache: Bool
+    let fallbackRequired: Bool
+
+    var isActive: Bool { status == "active" && target == "tvOS-only" }
 }
 
 struct AppleTVContentModule: Codable, Identifiable {
@@ -61,6 +77,14 @@ actor AppleTVContentRegistry {
         return catalog.modules
             .filter(\.isActive)
             .sorted { $0.sortOrder < $1.sortOrder }
+    }
+
+    func quranAudioDescriptor() async throws -> AppleTVQuranAudioDescriptor? {
+        let catalog = try await loadCatalog()
+        guard let descriptor = catalog.quran?.audio, descriptor.isActive else {
+            return nil
+        }
+        return descriptor
     }
 
     private func fetchJSON<T: Decodable>(_ url: URL) async throws -> T {
