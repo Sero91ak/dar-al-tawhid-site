@@ -1,10 +1,15 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "DĀR AL TAWḤĪD Apple TV Hadith Record",
+  "title": "DĀR AL TAWḤĪD Apple TV Content Record",
   "type": "object",
   "required": ["id", "language", "narratorLine", "speakerLabel", "textMarkdown", "source", "grade"],
   "properties": {
     "id": { "type": "string", "pattern": "^HAD-[0-9]{4}$" },
+    "recordType": {
+      "type": "string",
+      "enum": ["hadith", "athar", "dua"],
+      "description": "Fehlt das Feld bei Altbeständen, wird der Datensatz als hadith behandelt."
+    },
     "language": { "const": "de" },
     "narratorLine": { "type": "string" },
     "speakerLabel": { "type": "string" },
