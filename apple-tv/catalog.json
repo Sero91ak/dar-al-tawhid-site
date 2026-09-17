@@ -1,0 +1,45 @@
+{
+  "project": "DĀR AL TAWḤĪD – Apple TV Content",
+  "schemaVersion": "1.0",
+  "language": "de",
+  "defaultModule": "hadith",
+  "modules": [
+    {
+      "id": "hadith",
+      "title": "Ḥadīṯe",
+      "status": "active",
+      "recordType": "hadith",
+      "rootPath": "hadith",
+      "catalogPath": "hadith/catalog.json",
+      "schemaPath": "hadith/schema.json",
+      "remoteLoad": true,
+      "offlineCache": true,
+      "sortOrder": 10
+    },
+    {
+      "id": "dua",
+      "title": "Duʿāʾ",
+      "status": "planned",
+      "recordType": "dua",
+      "rootPath": "dua",
+      "catalogPath": "dua/catalog.json",
+      "schemaPath": "dua/schema.json",
+      "remoteLoad": true,
+      "offlineCache": true,
+      "sortOrder": 20
+    },
+    {
+      "id": "athar",
+      "title": "Āṯār & Aussagen der Salaf",
+      "status": "planned",
+      "recordType": "athar",
+      "rootPath": "athar",
+      "catalogPath": "athar/catalog.json",
+      "schemaPath": "athar/schema.json",
+      "remoteLoad": true,
+      "offlineCache": true,
+      "sortOrder": 30,
+      "scope": "Ṣaḥābah, Tābiʿīn und Salaf"
+    }
+  ]
+}
