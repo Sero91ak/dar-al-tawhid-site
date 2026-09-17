@@ -17,11 +17,19 @@ struct QuranReciterEdition: Codable, Identifiable, Hashable {
     }
 
     var styleName: String {
-        switch type.lowercased() {
+        let normalizedIdentifier = identifier.lowercased()
+        let normalizedType = type.lowercased()
+
+        if normalizedIdentifier.contains("mujawwad") {
+            return "Muǧawwad"
+        }
+
+        switch normalizedType {
         case "mujawwad": return "Muǧawwad"
         case "murattal": return "Murattal"
         case "muallim": return "Muʿallim"
-        default: return type.capitalized
+        case "versebyverse": return "Āyah für Āyah"
+        default: return "Rezitation"
         }
     }
 }
