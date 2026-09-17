@@ -1,0 +1,24 @@
+{
+  "project": "DĀR AL TAWḤĪD – Apple TV Ḥadīṯ",
+  "schemaVersion": "1.1",
+  "language": "de",
+  "authenticOnly": true,
+  "totalCount": 50,
+  "currentSeries": "001-050",
+  "latestId": "HAD-0050",
+  "nextId": "HAD-0051",
+  "series": [
+    {
+      "id": "001-050",
+      "count": 50,
+      "firstId": "HAD-0001",
+      "lastId": "HAD-0050",
+      "indexPath": "series/001-050/index.json"
+    }
+  ],
+  "xcode": {
+    "models": "xcode/HadithModels.swift",
+    "view": "xcode/HadithCardView.swift",
+    "remoteService": "xcode/HadithRemoteService.swift"
+  }
+}
