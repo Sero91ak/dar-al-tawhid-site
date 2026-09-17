@@ -1,11 +1,11 @@
 {
   "project": "DĀR AL TAWḤĪD – Apple TV Qurʾān Tadabbur",
-  "schemaVersion": "1.7",
+  "schemaVersion": "1.8",
   "language": "de",
   "target": "tvOS-only",
   "remoteLoad": true,
   "offlineCache": true,
-  "entriesCount": 119,
+  "entriesCount": 125,
   "fallback": {
     "enabled": true,
     "text": "Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor."
@@ -23,7 +23,8 @@
     "entries-batch-03c.json",
     "entries-batch-03d.json",
     "entries-batch-03e.json",
-    "entries-batch-03f.json"
+    "entries-batch-03f.json",
+    "entries-batch-03g.json"
   ],
   "coveragePath": "coverage.json",
   "schemaPath": "schema.json",
