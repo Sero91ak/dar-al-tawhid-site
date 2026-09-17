@@ -1,5 +1,25 @@
 import Foundation
 
+struct HadithCatalog: Codable {
+    let project: String
+    let schemaVersion: String
+    let language: String
+    let authenticOnly: Bool
+    let totalCount: Int
+    let currentSeries: String
+    let latestId: String
+    let nextId: String
+    let series: [HadithCatalogSeries]
+}
+
+struct HadithCatalogSeries: Codable {
+    let id: String
+    let count: Int
+    let firstId: String
+    let lastId: String
+    let indexPath: String
+}
+
 struct HadithSeriesIndex: Codable {
     let series: String
     let count: Int
@@ -11,18 +31,45 @@ struct HadithSeriesIndex: Codable {
 actor HadithRemoteService {
     static let shared = HadithRemoteService()
 
-    // Staging-Branch ohne Slash, damit raw.githubusercontent.com stabil genutzt werden kann.
-    private let baseURL = URL(string: "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/apple-tv-hadith-staging/apple-tv/hadith")!
+    private let baseURL = AppleTVContentEnvironment.rootURL.appendingPathComponent("hadith")
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
 
-    func loadSeries(_ series: String = "001-050") async throws -> [HadithRecord] {
+    /// Lädt automatisch alle im GitHub-Ḥadīṯ-Katalog registrierten Serien.
+    /// Neue 50er-Blöcke benötigen keinen neuen App-Code, solange catalog.json aktualisiert wird.
+    func loadAllHadith() async throws -> [HadithRecord] {
+        do {
+            let catalog: HadithCatalog = try await fetchJSON(
+                baseURL.appendingPathComponent("catalog.json")
+            )
+
+            var all: [HadithRecord] = []
+            all.reserveCapacity(catalog.totalCount)
+
+            for series in catalog.series {
+                let records = try await fetchSeries(series.id)
+                all.append(contentsOf: records)
+            }
+
+            let ordered = all.sorted { $0.id < $1.id }
+            try saveAllCache(ordered)
+            return ordered
+        } catch {
+            if let cached = try? loadAllCache(), !cached.isEmpty {
+                return cached
+            }
+            throw error
+        }
+    }
+
+    /// Optional: lädt nur eine bestimmte Serie, z. B. 001-050.
+    func loadSeries(_ series: String) async throws -> [HadithRecord] {
         do {
             let remote = try await fetchSeries(series)
-            try saveCache(remote, series: series)
+            try saveSeriesCache(remote, series: series)
             return remote
         } catch {
-            if let cached = try? loadCache(series: series), !cached.isEmpty {
+            if let cached = try? loadSeriesCache(series: series), !cached.isEmpty {
                 return cached
             }
             throw error
@@ -48,7 +95,7 @@ actor HadithRemoteService {
             records.append(record)
         }
 
-        return records
+        return records.sorted { $0.id < $1.id }
     }
 
     private func fetchJSON<T: Decodable>(_ url: URL) async throws -> T {
@@ -64,20 +111,36 @@ actor HadithRemoteService {
         return try decoder.decode(T.self, from: data)
     }
 
-    private func cacheURL(series: String) throws -> URL {
+    private func cacheRoot() throws -> URL {
         let root = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("DarAlTawhidHadith", isDirectory: true)
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
-        return root.appendingPathComponent("series-\(series).json")
+        return root
     }
 
-    private func saveCache(_ records: [HadithRecord], series: String) throws {
-        let data = try encoder.encode(records)
-        try data.write(to: cacheURL(series: series), options: .atomic)
+    private func allCacheURL() throws -> URL {
+        try cacheRoot().appendingPathComponent("all-hadith.json")
     }
 
-    private func loadCache(series: String) throws -> [HadithRecord] {
-        let data = try Data(contentsOf: cacheURL(series: series))
+    private func seriesCacheURL(_ series: String) throws -> URL {
+        try cacheRoot().appendingPathComponent("series-\(series).json")
+    }
+
+    private func saveAllCache(_ records: [HadithRecord]) throws {
+        try encoder.encode(records).write(to: allCacheURL(), options: .atomic)
+    }
+
+    private func loadAllCache() throws -> [HadithRecord] {
+        let data = try Data(contentsOf: allCacheURL())
+        return try decoder.decode([HadithRecord].self, from: data)
+    }
+
+    private func saveSeriesCache(_ records: [HadithRecord], series: String) throws {
+        try encoder.encode(records).write(to: seriesCacheURL(series), options: .atomic)
+    }
+
+    private func loadSeriesCache(series: String) throws -> [HadithRecord] {
+        let data = try Data(contentsOf: seriesCacheURL(series))
         return try decoder.decode([HadithRecord].self, from: data)
     }
 }
