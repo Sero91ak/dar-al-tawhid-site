@@ -16,7 +16,24 @@ struct AppleTVScreensaverDescriptor: Codable {
 }
 
 struct AppleTVQuranDescriptor: Codable {
+    let reader: AppleTVQuranReaderDescriptor?
     let audio: AppleTVQuranAudioDescriptor?
+}
+
+struct AppleTVQuranReaderDescriptor: Codable {
+    let status: String
+    let target: String
+    let view: String
+    let arabicEdition: String
+    let germanEdition: String
+    let germanTranslationName: String
+    let syncMode: String
+    let autoAdvance: Bool
+    let persistLastPosition: Bool
+    let remoteLoad: Bool
+    let offlineCache: Bool
+
+    var isActive: Bool { status == "active" && target == "tvOS-only" }
 }
 
 struct AppleTVQuranAudioDescriptor: Codable {
@@ -77,6 +94,14 @@ actor AppleTVContentRegistry {
         return catalog.modules
             .filter(\.isActive)
             .sorted { $0.sortOrder < $1.sortOrder }
+    }
+
+    func quranReaderDescriptor() async throws -> AppleTVQuranReaderDescriptor? {
+        let catalog = try await loadCatalog()
+        guard let descriptor = catalog.quran?.reader, descriptor.isActive else {
+            return nil
+        }
+        return descriptor
     }
 
     func quranAudioDescriptor() async throws -> AppleTVQuranAudioDescriptor? {
