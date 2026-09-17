@@ -1,6 +1,6 @@
 {
   "project": "DĀR AL TAWḤĪD – Apple TV Content",
-  "schemaVersion": "1.4",
+  "schemaVersion": "1.5",
   "language": "de",
   "defaultModule": "hadith",
   "screensaver": {
@@ -8,6 +8,19 @@
     "rotationConfigPath": "screensaver/rotation.json"
   },
   "quran": {
+    "reader": {
+      "status": "active",
+      "target": "tvOS-only",
+      "view": "QuranTabView",
+      "arabicEdition": "quran-uthmani",
+      "germanEdition": "de.bubenheim",
+      "germanTranslationName": "Bubenheim & Elyas",
+      "syncMode": "ayah-by-ayah",
+      "autoAdvance": true,
+      "persistLastPosition": true,
+      "remoteLoad": true,
+      "offlineCache": true
+    },
     "audio": {
       "status": "active",
       "target": "tvOS-only",
