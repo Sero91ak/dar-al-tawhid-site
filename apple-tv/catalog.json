@@ -1,6 +1,6 @@
 {
   "project": "DĀR AL TAWḤĪD – Apple TV Content",
-  "schemaVersion": "1.3",
+  "schemaVersion": "1.4",
   "language": "de",
   "defaultModule": "hadith",
   "screensaver": {
@@ -8,6 +8,14 @@
     "rotationConfigPath": "screensaver/rotation.json"
   },
   "quran": {
+    "audio": {
+      "status": "active",
+      "target": "tvOS-only",
+      "catalogPath": "quran/audio/catalog.json",
+      "remoteLoad": true,
+      "offlineCache": true,
+      "fallbackRequired": true
+    },
     "tadabbur": {
       "status": "active",
       "target": "tvOS-only",
