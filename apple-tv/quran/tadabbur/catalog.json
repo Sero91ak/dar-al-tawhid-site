@@ -5,7 +5,7 @@
   "target": "tvOS-only",
   "remoteLoad": true,
   "offlineCache": true,
-  "entriesCount": 276,
+  "entriesCount": 281,
   "fallback": {
     "enabled": true,
     "text": "Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor."
@@ -52,7 +52,8 @@
     "entries-batch-04f.json",
     "entries-batch-04g.json",
     "entries-batch-04h.json",
-    "entries-batch-04i.json"
+    "entries-batch-04i.json",
+    "entries-batch-04j.json"
   ],
   "coveragePath": "coverage.json",
   "schemaPath": "schema.json",
@@ -64,7 +65,19 @@
     "requiresGeneration": true,
     "requiresSource": true,
     "requiresGrading": true,
-    "allowedGenerations": ["Ṣaḥābī", "Tābiʿī", "Atbāʿ at-Tābiʿīn"],
-    "allowedGradings": ["ṣaḥīḥ", "ḥasan", "isnād ṣaḥīḥ", "isnād ḥasan", "isnād ṣaḥīḥ mawqūf", "isnād ḥasan mawqūf", "isnād ṣaḥīḥ bis Überlieferer; Bericht mursal"]
+    "allowedGenerations": [
+      "Ṣaḥābī",
+      "Tābiʿī",
+      "Atbāʿ at-Tābiʿīn"
+    ],
+    "allowedGradings": [
+      "ṣaḥīḥ",
+      "ḥasan",
+      "isnād ṣaḥīḥ",
+      "isnād ḥasan",
+      "isnād ṣaḥīḥ mawqūf",
+      "isnād ḥasan mawqūf",
+      "isnād ṣaḥīḥ bis Überlieferer; Bericht mursal"
+    ]
   }
 }
