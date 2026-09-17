@@ -1,10 +1,11 @@
 {
   "project": "DĀR AL TAWḤĪD – Apple TV Qurʾān Tadabbur",
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "language": "de",
   "target": "tvOS-only",
   "remoteLoad": true,
   "offlineCache": true,
+  "entriesCount": 31,
   "fallback": {
     "enabled": true,
     "text": "Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor."
@@ -19,6 +20,7 @@
     "requiresGeneration": true,
     "requiresSource": true,
     "requiresGrading": true,
-    "allowedGenerations": ["Ṣaḥābī", "Tābiʿī", "Atbāʿ at-Tābiʿīn"]
+    "allowedGenerations": ["Ṣaḥābī", "Tābiʿī", "Atbāʿ at-Tābiʿīn"],
+    "allowedGradings": ["ṣaḥīḥ", "ḥasan", "isnād ṣaḥīḥ", "isnād ṣaḥīḥ bis Überlieferer; Bericht mursal"]
   }
 }
