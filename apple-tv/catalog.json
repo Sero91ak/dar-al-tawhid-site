@@ -1,8 +1,12 @@
 {
   "project": "DĀR AL TAWḤĪD – Apple TV Content",
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "language": "de",
   "defaultModule": "hadith",
+  "screensaver": {
+    "enabled": true,
+    "rotationConfigPath": "screensaver/rotation.json"
+  },
   "modules": [
     {
       "id": "hadith",
