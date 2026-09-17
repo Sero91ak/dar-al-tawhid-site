@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DĀR AL TAWḤĪD Apple TV Hadith Record",
+  "type": "object",
+  "required": ["id", "language", "narratorLine", "speakerLabel", "textMarkdown", "source", "grade"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^HAD-[0-9]{4}$" },
+    "language": { "const": "de" },
+    "narratorLine": { "type": "string" },
+    "speakerLabel": { "type": "string" },
+    "textMarkdown": { "type": "string" },
+    "source": { "type": "string" },
+    "grade": { "type": "string" },
+    "verificationNote": { "type": ["string", "null"] }
+  },
+  "additionalProperties": false
+}
