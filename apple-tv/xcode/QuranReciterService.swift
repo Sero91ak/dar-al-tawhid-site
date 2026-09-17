@@ -13,7 +13,7 @@ struct QuranReciterEdition: Codable, Identifiable, Hashable {
     var id: String { identifier }
 
     var displayName: String {
-        QuranReciterNames.preferred[identifier] ?? englishName.nonEmpty ?? name
+        QuranReciterNames.displayName(for: identifier) ?? englishName.nonEmpty ?? name
     }
 
     var styleName: String {
@@ -39,23 +39,67 @@ private extension String {
         let value = trimmingCharacters(in: .whitespacesAndNewlines)
         return value.isEmpty ? nil : value
     }
+
+    var reciterSearchKey: String {
+        folding(options: [.diacriticInsensitive, .caseInsensitive], locale: Locale(identifier: "en_US_POSIX"))
+            .lowercased()
+            .replacingOccurrences(of: "-", with: "")
+            .replacingOccurrences(of: "_", with: "")
+            .replacingOccurrences(of: " ", with: "")
+            .replacingOccurrences(of: ".", with: "")
+            .replacingOccurrences(of: "'", with: "")
+            .replacingOccurrences(of: "’", with: "")
+    }
+}
+
+private struct CuratedReciterProfile {
+    let displayName: String
+    let preferredIdentifiers: [String]
+    let matchTokens: [String]
+
+    func matches(_ edition: QuranReciterEdition) -> Bool {
+        let identifier = edition.identifier.reciterSearchKey
+        let englishName = edition.englishName.reciterSearchKey
+        return preferredIdentifiers.contains { identifier == $0.reciterSearchKey }
+            || matchTokens.contains { token in
+                let key = token.reciterSearchKey
+                return identifier.contains(key) || englishName.contains(key)
+            }
+    }
 }
 
 enum QuranReciterNames {
-    static let preferred: [String: String] = [
-        "ar.alafasy": "Mišārī Rāšid al-ʿAfāsī",
-        "ar.sudais": "ʿAbd ar-Raḥmān as-Sudays",
-        "ar.shuraim": "Saʿūd aš-Šuraym",
-        "ar.husary": "Maḥmūd Ḫalīl al-Ḥuṣarī",
-        "ar.minshawi": "Muḥammad Ṣiddīq al-Minšāwī",
-        "ar.minshawimujawwad": "Muḥammad Ṣiddīq al-Minšāwī",
-        "ar.abdulbasit": "ʿAbd al-Bāsiṭ ʿAbd aṣ-Ṣamad",
-        "ar.abdulbasitmujawwad": "ʿAbd al-Bāsiṭ ʿAbd aṣ-Ṣamad",
-        "ar.ajamy": "Aḥmad ibn ʿAlī al-ʿAǧamī",
-        "ar.muhammadayoub": "Muḥammad Ayyūb",
-        "ar.hudhaify": "ʿAlī al-Ḥuḏayfī",
-        "ar.muhammadjibreel": "Muḥammad Ǧibrīl"
+    /// Curated Apple-TV selection. One audio edition per reciter, in this exact UI order.
+    static let curated: [CuratedReciterProfile] = [
+        .init(displayName: "Mišārī Rāšid al-ʿAfāsī", preferredIdentifiers: ["ar.alafasy"], matchTokens: ["alafasy", "mishary"]),
+        .init(displayName: "ʿAbd ar-Raḥmān as-Sudays", preferredIdentifiers: ["ar.sudais", "ar.abdurrahmaansudais", "ar.abdulrahmansudais"], matchTokens: ["sudais", "sudays"]),
+        .init(displayName: "Saʿūd aš-Šuraym", preferredIdentifiers: ["ar.shuraim", "ar.shuraym", "ar.saoodshuraym"], matchTokens: ["shuraim", "shuraym"]),
+        .init(displayName: "Māhir al-Muʿayqlī", preferredIdentifiers: ["ar.mahermuaiqly", "ar.maheralmueaqly"], matchTokens: ["mahermuaiqly", "muaiqly", "muayqli"]),
+        .init(displayName: "Muḥammad Ṣiddīq al-Minšāwī", preferredIdentifiers: ["ar.minshawi"], matchTokens: ["minshawi", "minshaw"]),
+        .init(displayName: "ʿAbd al-Bāsiṭ ʿAbd aṣ-Ṣamad", preferredIdentifiers: ["ar.abdulbasit", "ar.abdulbasitmurattal", "ar.abdulsamad"], matchTokens: ["abdulbasit", "abdulsamad"]),
+        .init(displayName: "Maḥmūd Ḫalīl al-Ḥuṣarī", preferredIdentifiers: ["ar.husary"], matchTokens: ["husary", "hussary"]),
+        .init(displayName: "ʿAlī al-Ḥuḏayfī", preferredIdentifiers: ["ar.hudhaify"], matchTokens: ["hudhaify", "huthaify"]),
+        .init(displayName: "Muḥammad Ayyūb", preferredIdentifiers: ["ar.muhammadayoub", "ar.muhammadayyoub"], matchTokens: ["muhammadayoub", "muhammadayyoub"]),
+        .init(displayName: "Aḥmad ibn ʿAlī al-ʿAǧamī", preferredIdentifiers: ["ar.ajamy", "ar.ahmedajamy"], matchTokens: ["ajamy", "ajmi"]),
+        .init(displayName: "Muḥammad Ǧibrīl", preferredIdentifiers: ["ar.muhammadjibreel", "ar.jibreel"], matchTokens: ["jibreel", "jebril"]),
+        .init(displayName: "Saʿd al-Ġāmidī", preferredIdentifiers: ["ar.saadalghamdi", "ar.saadghamdi"], matchTokens: ["ghamdi"]),
+        .init(displayName: "Abū Bakr aš-Šāṭirī", preferredIdentifiers: ["ar.shaatree", "ar.shatri"], matchTokens: ["shatri", "shaatree"]),
+        .init(displayName: "Hānī ar-Rifāʿī", preferredIdentifiers: ["ar.hanirifai", "ar.rifai"], matchTokens: ["hanirifai", "rifai"]),
+        .init(displayName: "ʿAbdullāh Baṣfar", preferredIdentifiers: ["ar.abdullahbasfar", "ar.basfar"], matchTokens: ["basfar"]),
+        .init(displayName: "Fāris ʿAbbād", preferredIdentifiers: ["ar.faresabbad", "ar.fares"], matchTokens: ["faresabbad", "fares", "farisabbad"]),
+        .init(displayName: "Yāsir ad-Dawsarī", preferredIdentifiers: ["ar.yasserdossari", "ar.yasirdosari"], matchTokens: ["yasseraddossari", "yasserdossari", "dosari", "dossari"]),
+        .init(displayName: "Nāṣir al-Qaṭāmī", preferredIdentifiers: ["ar.nasseralqatami", "ar.qatami"], matchTokens: ["qatami"]),
+        .init(displayName: "Ṣalāḥ al-Budayr", preferredIdentifiers: ["ar.salahalbudair", "ar.salahbudair"], matchTokens: ["budair", "budayr"]),
+        .init(displayName: "Ibrāhīm al-Aḫḍar", preferredIdentifiers: ["ar.ibrahimakhbar", "ar.ibrahimalakhdar"], matchTokens: ["ibrahimakh", "alakhdar", "alakhdar"])
     ]
+
+    static func displayName(for identifier: String) -> String? {
+        curated.first { profile in
+            profile.preferredIdentifiers.contains {
+                $0.reciterSearchKey == identifier.reciterSearchKey
+            }
+        }?.displayName
+    }
 }
 
 private struct QuranEditionsResponse: Decodable {
@@ -105,10 +149,8 @@ actor QuranReciterService {
         self.session = session
     }
 
-    /// Loads the authoritative live list of Arabic audio editions.
-    /// Network is preferred so newly added reciters appear automatically.
-    /// If the provider is temporarily unavailable, the last successful list
-    /// is loaded from the local tvOS cache, then the bundled fallback list.
+    /// Loads the provider catalogue, but exposes only the curated 20 Apple-TV reciters.
+    /// One edition is selected per person so users never see 200+ technical variants.
     func loadReciters() async -> [QuranReciterEdition] {
         do {
             let response: QuranEditionsResponse = try await fetch(Self.editionsURL)
@@ -125,8 +167,6 @@ actor QuranReciterService {
     }
 
     /// Returns the verse-by-verse audio URLs for a Sūrah and selected edition.
-    /// The provider supplies the real audio URL for each Āyah, so the app does
-    /// not need to guess a bitrate or construct MP3 URLs itself.
     func loadSurahAudio(surah: Int, reciterIdentifier: String) async throws -> [QuranAyahAudio] {
         guard (1...114).contains(surah) else { throw URLError(.badURL) }
         let encodedEdition = reciterIdentifier.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? reciterIdentifier
@@ -136,19 +176,44 @@ actor QuranReciterService {
     }
 
     private func normalized(_ editions: [QuranReciterEdition]) -> [QuranReciterEdition] {
-        var unique: [String: QuranReciterEdition] = [:]
-
-        for edition in editions where edition.format.lowercased() == "audio" && edition.language.lowercased() == "ar" {
-            unique[edition.identifier] = edition
+        let arabicAudio = editions.filter {
+            $0.format.lowercased() == "audio" && $0.language.lowercased() == "ar"
         }
 
-        return unique.values.sorted {
-            let lhs = $0.displayName.localizedCaseInsensitiveCompare($1.displayName)
-            if lhs == .orderedSame {
-                return $0.styleName.localizedCaseInsensitiveCompare($1.styleName) == .orderedAscending
+        var result: [QuranReciterEdition] = []
+        var usedIdentifiers = Set<String>()
+
+        for profile in QuranReciterNames.curated {
+            let candidates = arabicAudio.filter(profile.matches)
+            guard !candidates.isEmpty else { continue }
+
+            let selected = candidates.sorted { lhs, rhs in
+                editionRank(lhs, profile: profile) < editionRank(rhs, profile: profile)
+            }.first!
+
+            if usedIdentifiers.insert(selected.identifier).inserted {
+                result.append(selected)
             }
-            return lhs == .orderedAscending
         }
+
+        return Array(result.prefix(20))
+    }
+
+    private func editionRank(_ edition: QuranReciterEdition, profile: CuratedReciterProfile) -> Int {
+        let identifier = edition.identifier.reciterSearchKey
+
+        if let exactIndex = profile.preferredIdentifiers.firstIndex(where: {
+            $0.reciterSearchKey == identifier
+        }) {
+            return exactIndex
+        }
+
+        var score = 100
+        if identifier.contains("mujawwad") { score += 30 }
+        if identifier.contains("muallim") { score += 20 }
+        if identifier.contains("translation") { score += 50 }
+        score += edition.identifier.count
+        return score
     }
 
     private func fetch<T: Decodable>(_ url: URL) async throws -> T {
@@ -184,15 +249,23 @@ actor QuranReciterService {
         .init(identifier: "ar.alafasy", language: "ar", name: "مشاري راشد العفاسي", englishName: "Mishary Rashid Alafasy", format: "audio", type: "murattal", direction: nil),
         .init(identifier: "ar.sudais", language: "ar", name: "عبدالرحمن السديس", englishName: "Abdul Rahman Al-Sudais", format: "audio", type: "murattal", direction: nil),
         .init(identifier: "ar.shuraim", language: "ar", name: "سعود الشريم", englishName: "Saud Al-Shuraim", format: "audio", type: "murattal", direction: nil),
-        .init(identifier: "ar.husary", language: "ar", name: "محمود خليل الحصري", englishName: "Mahmoud Khalil Al-Husary", format: "audio", type: "murattal", direction: nil),
+        .init(identifier: "ar.mahermuaiqly", language: "ar", name: "ماهر المعيقلي", englishName: "Maher Al Muaiqly", format: "audio", type: "murattal", direction: nil),
         .init(identifier: "ar.minshawi", language: "ar", name: "محمد صديق المنشاوي", englishName: "Mohamed Siddiq al-Minshawi", format: "audio", type: "murattal", direction: nil),
-        .init(identifier: "ar.minshawimujawwad", language: "ar", name: "محمد صديق المنشاوي", englishName: "Mohamed Siddiq al-Minshawi", format: "audio", type: "mujawwad", direction: nil),
         .init(identifier: "ar.abdulbasit", language: "ar", name: "عبد الباسط عبد الصمد", englishName: "Abdul Basit Abdul Samad", format: "audio", type: "murattal", direction: nil),
-        .init(identifier: "ar.abdulbasitmujawwad", language: "ar", name: "عبد الباسط عبد الصمد", englishName: "Abdul Basit Abdul Samad", format: "audio", type: "mujawwad", direction: nil),
-        .init(identifier: "ar.ajamy", language: "ar", name: "أحمد بن علي العجمي", englishName: "Ahmed ibn Ali al-Ajamy", format: "audio", type: "murattal", direction: nil),
+        .init(identifier: "ar.husary", language: "ar", name: "محمود خليل الحصري", englishName: "Mahmoud Khalil Al-Husary", format: "audio", type: "murattal", direction: nil),
+        .init(identifier: "ar.hudhaify", language: "ar", name: "علي الحذيفي", englishName: "Ali Al-Hudhaify", format: "audio", type: "murattal", direction: nil),
         .init(identifier: "ar.muhammadayoub", language: "ar", name: "محمد أيوب", englishName: "Muhammad Ayyoub", format: "audio", type: "murattal", direction: nil),
-        .init(identifier: "ar.hudhaify", language: "ar", name: "علي بن عبدالرحمن الحذيفي", englishName: "Ali Al-Hudhaify", format: "audio", type: "murattal", direction: nil),
-        .init(identifier: "ar.muhammadjibreel", language: "ar", name: "محمد جبريل", englishName: "Muhammad Jibreel", format: "audio", type: "murattal", direction: nil)
+        .init(identifier: "ar.ajamy", language: "ar", name: "أحمد العجمي", englishName: "Ahmed Al-Ajmy", format: "audio", type: "murattal", direction: nil),
+        .init(identifier: "ar.muhammadjibreel", language: "ar", name: "محمد جبريل", englishName: "Muhammad Jibreel", format: "audio", type: "murattal", direction: nil),
+        .init(identifier: "ar.saadalghamdi", language: "ar", name: "سعد الغامدي", englishName: "Saad Al-Ghamdi", format: "audio", type: "murattal", direction: nil),
+        .init(identifier: "ar.shaatree", language: "ar", name: "أبو بكر الشاطري", englishName: "Abu Bakr Al-Shatri", format: "audio", type: "murattal", direction: nil),
+        .init(identifier: "ar.hanirifai", language: "ar", name: "هاني الرفاعي", englishName: "Hani Ar-Rifai", format: "audio", type: "murattal", direction: nil),
+        .init(identifier: "ar.abdullahbasfar", language: "ar", name: "عبد الله بصفر", englishName: "Abdullah Basfar", format: "audio", type: "murattal", direction: nil),
+        .init(identifier: "ar.faresabbad", language: "ar", name: "فارس عباد", englishName: "Fares Abbad", format: "audio", type: "murattal", direction: nil),
+        .init(identifier: "ar.yasserdossari", language: "ar", name: "ياسر الدوسري", englishName: "Yasser Al-Dosari", format: "audio", type: "murattal", direction: nil),
+        .init(identifier: "ar.nasseralqatami", language: "ar", name: "ناصر القطامي", englishName: "Nasser Al-Qatami", format: "audio", type: "murattal", direction: nil),
+        .init(identifier: "ar.salahalbudair", language: "ar", name: "صلاح البدير", englishName: "Salah Al-Budair", format: "audio", type: "murattal", direction: nil),
+        .init(identifier: "ar.ibrahimakhbar", language: "ar", name: "إبراهيم الأخضر", englishName: "Ibrahim Al-Akhdar", format: "audio", type: "murattal", direction: nil)
     ]
 }
 
