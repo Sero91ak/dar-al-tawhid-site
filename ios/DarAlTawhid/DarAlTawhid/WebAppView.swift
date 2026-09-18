@@ -12,6 +12,15 @@ final class InsetAwareWebView: WKWebView {
     }
 }
 
+private func hideWebScrollEdgeEffects(_ scrollView: UIScrollView) {
+    if #available(iOS 26.0, *) {
+        scrollView.topEdgeEffect.isHidden = true
+        scrollView.bottomEdgeEffect.isHidden = true
+        scrollView.leftEdgeEffect.isHidden = true
+        scrollView.rightEdgeEffect.isHidden = true
+    }
+}
+
 final class GradientBackdropView: UIView {
     override class var layerClass: AnyClass { CAGradientLayer.self }
 
@@ -138,8 +147,8 @@ struct WebAppView: UIViewRepresentable {
         (function(){
           if(window.__darIosViewportPolishInstalled)return;
           window.__darIosViewportPolishInstalled=true;
-          window.__DAR_IOS_BUILD__="0.25-glass-status";
-          /* Restore glassy status area. Live v665 paints a solid --dar-edge-fill strip. */
+          window.__DAR_IOS_BUILD__="0.26-sharp-status";
+          /* Match sharp iOS reference: no glass/blur at the top scroll edge. */
           function cssText(){
             return [
               "html.dar-ios-native-app{",
@@ -168,25 +177,19 @@ struct WebAppView: UIViewRepresentable {
               "  background-color:transparent!important;",
               "  background-image:none!important;",
               "}",
-              "html.dar-ios-native-app::before{",
-              "  content:'';",
-              "  position:fixed;",
-              "  top:0;left:0;right:0;",
-              "  height:max(12px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px));",
-              "  z-index:2147483000;",
-              "  pointer-events:none;",
-              "  background:color-mix(in srgb,var(--page-cover,var(--outer-bg-flat,#07162c)) 28%,transparent);",
-              "  -webkit-backdrop-filter:blur(22px) saturate(1.18);",
-              "  backdrop-filter:blur(22px) saturate(1.18);",
+              "html.dar-ios-native-app::before,",
+              "html.dar-ios-native-app::after{",
+              "  content:none!important;",
+              "  display:none!important;",
+              "  -webkit-backdrop-filter:none!important;",
+              "  backdrop-filter:none!important;",
               "}",
               "html.dar-ios-native-app .top-edge-fade,",
               "html.dar-ios-native-app .top-swim-aura{",
-              "  display:block!important;",
-              "  opacity:.55!important;",
-              "  background:linear-gradient(180deg,color-mix(in srgb,var(--page-cover) 22%,transparent),transparent)!important;",
-              "  -webkit-backdrop-filter:blur(16px) saturate(1.1)!important;",
-              "  backdrop-filter:blur(16px) saturate(1.1)!important;",
-              "  z-index:4!important;",
+              "  display:none!important;",
+              "  opacity:0!important;",
+              "  -webkit-backdrop-filter:none!important;",
+              "  backdrop-filter:none!important;",
               "}",
               "html.dar-ios-native-app #dar-soft-boot{display:none!important;visibility:hidden!important;}",
               "html.dar-ios-native-app.dar-soft-booting,",
@@ -236,7 +239,7 @@ struct WebAppView: UIViewRepresentable {
               }
             }
             if(document.body)document.body.classList.add("dar-ios-native-app");
-            var forceIds=["dar-ios-parity-edge-force-v665","dar-ios-parity-edge-force-v659","dar-ios-parity-edge-force-v658","dar-ios-parity-edge-force-v657","dar-ios-parity-edge-force-v656","dar-ios-parity-edge-force-v655","dar-ios-parity-edge-force-v654","dar-ios-parity-edge-force-v653","dar-ios-parity-edge-force-v652","dar-ios-parity-edge-force-v651","dar-ios-parity-edge-force-v650","dar-ios-parity-edge-force-v649","dar-ios-parity-edge-force-v648","full-edge-feed-force-v645","full-edge-feed-force-v644"];
+            var forceIds=["dar-ios-parity-edge-force-v659","dar-ios-parity-edge-force-v658","dar-ios-parity-edge-force-v657","dar-ios-parity-edge-force-v656","dar-ios-parity-edge-force-v655","dar-ios-parity-edge-force-v654","dar-ios-parity-edge-force-v653","dar-ios-parity-edge-force-v652","dar-ios-parity-edge-force-v651","dar-ios-parity-edge-force-v650","dar-ios-parity-edge-force-v649","dar-ios-parity-edge-force-v648","full-edge-feed-force-v645","full-edge-feed-force-v644"];
             for(var fi=0;fi<forceIds.length;fi++){
               var forceEl=document.getElementById(forceIds[fi]);
               if(forceEl)forceEl.disabled=true;
@@ -579,11 +582,12 @@ struct WebAppView: UIViewRepresentable {
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate = context.coordinator
         webView.scrollView.contentInsetAdjustmentBehavior = .never
+        hideWebScrollEdgeEffects(webView.scrollView)
         webView.scrollView.backgroundColor = .clear
         webView.allowsBackForwardNavigationGestures = true
         webView.isOpaque = false
         webView.backgroundColor = .clear
-        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.25-glass-status"
+        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.26-sharp-status"
         if #available(iOS 15.0, *) {
             webView.underPageBackgroundColor = .clear
         }

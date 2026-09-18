@@ -1,6 +1,16 @@
 import SwiftUI
 import UIKit
 
+private struct DarHideScrollEdgeEffect: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) {
+            content.scrollEdgeEffectHidden(true, for: .all)
+        } else {
+            content
+        }
+    }
+}
+
 @main
 struct DarAlTawhidApp: App {
     @StateObject private var router = DarAppRouter()
@@ -22,6 +32,7 @@ struct DarAlTawhidApp: App {
             WebAppView(destination: router.destination)
                 .ignoresSafeArea()
                 .background(Color.clear)
+                .modifier(DarHideScrollEdgeEffect())
                 .onOpenURL { url in
                     router.open(url)
                 }
