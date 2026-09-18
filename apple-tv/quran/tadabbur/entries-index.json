@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "totalVerifiedEntries": 376,
+  "totalVerifiedEntries": 381,
   "files": [
     {"path": "entries.json", "count": 31},
     {"path": "entries-batch-02a.json", "count": 10},
@@ -61,7 +61,8 @@
     {"path": "entries-batch-04z.json", "count": 5},
     {"path": "entries-batch-05a.json", "count": 5},
     {"path": "entries-batch-05b.json", "count": 5},
-    {"path": "entries-batch-05c.json", "count": 5}
+    {"path": "entries-batch-05c.json", "count": 5},
+    {"path": "entries-batch-05d.json", "count": 5}
   ],
   "mergeRule": "Index all entries by exact reference Sūrah:Āyah. Duplicate references are invalid unless a future schema explicitly supports multiple reviewed entries per verse.",
   "fallback": "Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor."
