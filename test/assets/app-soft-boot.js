@@ -388,3 +388,29 @@
 
   install();
 })();
+
+
+/* DAR_QURAN_PLAYER_TEST_LOADER_V1: test-only loader for the dedicated Qurʾān Player. */
+;(function () {
+  if (window.__DAR_QURAN_PLAYER_TEST_LOADER_V1__) return;
+  window.__DAR_QURAN_PLAYER_TEST_LOADER_V1__ = true;
+  function addCss() {
+    if (document.querySelector('link[data-dar-quran-player-test]')) return;
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/test/assets/quran-player-test.css?v=qpt-v1';
+    link.setAttribute('data-dar-quran-player-test', '1');
+    (document.head || document.documentElement).appendChild(link);
+  }
+  function addScript() {
+    if (window.__DAR_QURAN_PLAYER_TEST_V1__ || document.querySelector('script[data-dar-quran-player-test]')) return;
+    var script = document.createElement('script');
+    script.src = '/test/assets/quran-player-test.js?v=qpt-v1';
+    script.defer = true;
+    script.setAttribute('data-dar-quran-player-test', '1');
+    (document.head || document.documentElement).appendChild(script);
+  }
+  function bootQuranPlayerTest() { addCss(); addScript(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootQuranPlayerTest, { once: true });
+  else bootQuranPlayerTest();
+})();
