@@ -18,9 +18,8 @@
       "kind": "video",
       "fit": "cover",
       "source": {
-        "type": "base64Chunks",
-        "chunkDirectory": "backgrounds/assets/bg_makkah_dusk_01/chunks",
-        "chunkCount": 8,
+        "type": "bundle",
+        "bundleResource": "bg_makkah_dusk_01_3840x2160_hevc",
         "fileExtension": "mp4"
       },
       "video": {
