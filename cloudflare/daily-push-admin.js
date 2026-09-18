@@ -227,50 +227,74 @@ async function sendWelcomePushOnce(env, subscriptionId, cached) {
 
 export async function sendDailyTestPush(env, input = {}) {
   const subscriptionId = String(input.subscriptionId || input.subscription_id || "").trim();
-  const kind = String(input.kind || "dua").toLowerCase() === "recommendation" ? "recommendation" : "dua";
+  const rawKind = String(input.kind || "dua").toLowerCase();
+  const kind = rawKind === "recommendation" ? "recommendation" : rawKind === "device" ? "device" : "dua";
   if (!subscriptionId) return { ok: true, sent: false, reason: "Subscription-ID fehlt" };
 
   const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
   const appId = String(env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e").trim();
-  const isDua = kind === "dua";
-  const title = isDua ? "Duʿāʾ des Tages" : "Heute empfohlen";
 
-  let daily = null;
-  try {
-    const res = await fetch(`${site}/content/updates/daily.json?v=${Date.now()}`, { headers: { Accept: "application/json" } });
-    if (res.ok) daily = await res.json();
-  } catch (e) {}
-  const item = isDua ? daily?.dua : daily?.recommendation;
-  if (!item || !item.id) {
-    return { ok: true, sent: false, kind, subscriptionId, reason: "Kein aktiver Tagesinhalt gefunden – Push nicht gesendet" };
+  let title = "DĀR AL TAWḤĪD Test";
+  let body = "Wenn du diese Nachricht siehst, funktionieren Push-Benachrichtigungen auf diesem Gerät.";
+  let url = `${site}/#notifications`;
+  let data = {
+    type: "device_test",
+    reminder_type: "device_test",
+    source: "admin-test",
+    nav: "notifications",
+    url,
+    test: true
+  };
+
+  if (kind !== "device") {
+    const isDua = kind === "dua";
+    title = isDua ? "Duʿāʾ des Tages" : "Heute empfohlen";
+    let daily = null;
+    try {
+      const res = await fetch(`${site}/content/updates/daily.json?v=${Date.now()}`, { headers: { Accept: "application/json" } });
+      if (res.ok) daily = await res.json();
+    } catch (e) {}
+    const item = isDua ? daily?.dua : daily?.recommendation;
+    if (!item || !item.id) {
+      return { ok: true, sent: false, kind, subscriptionId, reason: "Kein aktiver Tagesinhalt gefunden – Push nicht gesendet" };
+    }
+    const itemTitle = String(item.title || "").trim();
+    const snippet = String(item.snippet || "").trim();
+    body = [itemTitle, snippet].filter(Boolean).join(snippet ? " – " : "") ||
+      (isDua ? "Heutige Duʿāʾ aus Qurʾān & Sunnah." : "Heute empfohlener Beitrag.");
+    url = isDua
+      ? `${site}/#dua/${encodeURIComponent(item.id)}`
+      : `${site}/#post/${encodeURIComponent(item.id)}`;
+    data = {
+      type: isDua ? "daily_dua" : "daily_recommendation",
+      reminder_type: isDua ? "dua_daily" : "today_recommended",
+      source: "admin-test",
+      target: isDua ? "dua" : "post",
+      content_id: item.id,
+      nav: isDua ? "dua" : "post",
+      url,
+      date: daily?.date || "",
+      test: true
+    };
+    title = `[Test] ${title}`;
   }
 
-  const itemTitle = String(item.title || "").trim();
-  const snippet = String(item.snippet || "").trim();
-  const body = [itemTitle, snippet].filter(Boolean).join(snippet ? " – " : "") ||
-    (isDua ? "Heutige Duʿāʾ aus Qurʾān & Sunnah." : "Heute empfohlener Beitrag.");
-  const url = isDua
-    ? `${site}/#dua/${encodeURIComponent(item.id)}`
-    : `${site}/#post/${encodeURIComponent(item.id)}`;
   const idempotencyKey = await deterministicUuid(
-    `daily-test:${kind}:${subscriptionId}:${item.id}:${daily?.date || "undated"}`
+    `daily-test:${kind}:${subscriptionId}:${url}:${Date.now()}`
   );
 
   const payload = {
     app_id: appId,
     target_channel: "push",
     include_subscription_ids: [subscriptionId],
-    headings: { de: `[Test] ${title}`, en: `[Test] ${title}` },
+    headings: { de: title, en: title },
     contents: { de: body, en: body },
+    ios_sound: "default",
+    ttl: 3600,
     url,
+    web_url: url,
     idempotency_key: idempotencyKey,
-    data: {
-      type: isDua ? "daily_dua" : "daily_recommendation",
-      content_id: item.id,
-      date: daily?.date || "",
-      test: true,
-      source: "admin-test"
-    },
+    data,
     chrome_web_icon: `${site}/notification-icon-192.png?v=3`,
     chrome_web_badge: `${site}/notification-badge-96.png?v=3`
   };

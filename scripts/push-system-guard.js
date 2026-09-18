@@ -9,6 +9,7 @@ const fs = require("fs");
 const path = require("path");
 
 const ROOT = path.join(__dirname, "..");
+const EXPECTED_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 
 function read(file) {
   return fs.readFileSync(path.join(ROOT, file), "utf8");
@@ -121,7 +122,8 @@ function runPushSystemGuard() {
     'status === "pending"',
     'status === "failed"',
     "sendNewPostPush",
-    "STRICT: Push nur wenn Index + Datei öffentlich online"
+    "STRICT: Push nur wenn Index + Datei öffentlich online",
+    "POST_PUSH_HANG_GUARD"
   ]);
 
   const wrangler = read("cloudflare/wrangler.toml");
@@ -141,7 +143,8 @@ function runPushSystemGuard() {
   mustInclude("iOS-Push bleibt in der App", read("cloudflare/push-launch-urls.js"), [
     "separatePushLaunchUrls",
     "daraltawhid://in-app",
-    "web_url"
+    "web_url",
+    "delete next.url"
   ]);
 
   ["cloudflare/prayer-push-scheduler.js", "cloudflare/daily-push-scheduler.js", "cloudflare/post-push-admin.js"].forEach((file) => {
@@ -231,6 +234,75 @@ function runPushSystemGuard() {
     "cloudflare/daily-push-*.js",
     "cloudflare/jummah-push-*.js"
   ]);
+
+  [
+    "content/admin/post-push-hang-lock.json",
+    "scripts/post-push-hang-guard.js",
+    ".github/workflows/post-push-hang-watchdog.yml"
+  ].forEach((file) => {
+    if (!fs.existsSync(path.join(ROOT, file))) fail(`Datei fehlt: ${file}`);
+    else ok(`Datei vorhanden: ${file}`);
+  });
+
+  const oneSignalAppIdFiles = [
+    "index.html",
+    "test/index.html",
+    "cloudflare/worker.js",
+    "cloudflare/prayer-push-scheduler.js",
+    "cloudflare/daily-push-scheduler.js",
+    "cloudflare/jummah-push-scheduler.js",
+    "cloudflare/post-push-admin.js",
+    "cloudflare/library-push-admin.js",
+    "scripts/send-post-push.js",
+    "scripts/send-news-push.js",
+    "scripts/send-daily-content-push.js"
+  ];
+  oneSignalAppIdFiles.forEach((file) => {
+    if (!mustExist(file)) return;
+    mustInclude(`${file} OneSignal App-ID`, read(file), [EXPECTED_ONESIGNAL_APP_ID]);
+  });
+
+  [
+    "OneSignalSDKWorker.js",
+    "OneSignalSDKUpdaterWorker.js",
+    "push/onesignal/OneSignalSDKWorker.js",
+    "scripts/lib/onesignal-push.js",
+    "cloudflare/onesignal-delivery.js",
+    "cloudflare/push-launch-urls.js"
+  ].forEach((file) => mustExist(file));
+
+  const globalLock = JSON.parse(read("content/admin/push-lanes-lock.json"));
+  const requiredLanes = [
+    "lock-meta",
+    "prayer-server",
+    "prayer-local",
+    "daily",
+    "jummah",
+    "welcome",
+    "onesignal-core",
+    "post",
+    "news",
+    "library",
+    "focus",
+    "ios-native",
+    "worker-cron"
+  ];
+  if (globalLock.locked !== true || globalLock.globalApprovalRequired !== true || globalLock.passwordRequired !== true) {
+    fail("Globale Push-Sperre, Kennwortpflicht oder Doppel-Freigabe ist deaktiviert");
+  } else {
+    ok("Globale Push-Sperre, Kennwortpflicht und Doppel-Freigabe aktiv");
+  }
+  if (String(globalLock.unlockPasswordSha256 || "").length !== 64) {
+    fail("Push-Kennwort-Hash fehlt oder ist ungültig");
+  } else {
+    ok("Push-Kennwort-Hash hinterlegt");
+  }
+  requiredLanes.forEach((lane) => {
+    if (!globalLock?.lanes?.[lane]) fail(`Globale Push-Sperre: Spur fehlt: ${lane}`);
+  });
+  if (requiredLanes.every((lane) => globalLock?.lanes?.[lane])) {
+    ok(`Globale Push-Sperre: alle ${requiredLanes.length} Spuren vorhanden`);
+  }
 
   return failed;
 }

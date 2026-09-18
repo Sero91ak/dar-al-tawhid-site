@@ -39,7 +39,39 @@ Das Push-System ist geschützt durch `scripts/push-system-guard.js` und CI (Cano
 - Entfernen von `syncPrayerPushTags`, `syncDailyPushTags`, `savePushRegistration`, Tages-Push-Panel in `index.html`/`test/index.html`
 - Admin-Rollbacks die den Worker auf reine Publish-Logik reduzieren
 
-**Vor jedem Merge auf `main`:** `node scripts/push-system-guard.js` und `node scripts/repo-integrity-guard.js` müssen grün sein. Bei Worker-Änderungen deployt die GitHub Action nur, wenn der Guard besteht.
+**Vor jedem Merge auf `main`:** `node scripts/push-system-guard.js`, `node scripts/push-lanes-guard.js` und `node scripts/repo-integrity-guard.js` müssen grün sein. Bei Worker-Änderungen deployt die GitHub Action nur, wenn der Guard besteht.
+
+## Push-Spuren (hart – getrennt, nie ohne Befehl)
+
+Geschützt durch `content/admin/push-lanes-lock.json` und `scripts/push-lanes-guard.js` (CI: Canonical State Guard, App Health Check, Worker-Deploy).
+
+Die Systeme sind **einzelne Spuren** und dürfen einander nicht überschreiben:
+- **Gebets-Push (Server):** OneSignal/Cron, `cloudflare/prayer-push-*.js`
+- **Gebets-Erinnerungen (App-Uhr):** lokale Timer nach den Zeiten auf dem Bildschirm
+- **Tages-Push:** Duʿāʾ 09:00 / Empfehlung 12:00
+- **Jumuʿah-Push**
+- **Willkommens-Push**
+- **Beitrags-Push**
+- **News-Push**
+- **Bibliotheks-/PDF-Push**
+- **Fokus-Push:** Quiz, Propheten und Zakāt
+- **OneSignal-Kern:** App-ID, API-Key, SDK-Worker und Öffnungsziele
+- **Native iOS-Push-Registrierung und Weiterleitung**
+- **Worker-Cron** `*/5 * * * *`
+
+**Verboten ohne ausdrücklichen Nutzer-Befehl, Kennwort und Doppel-Freigabe:** Jeder Push-Eingriff braucht zuerst eine klare Anfrage des Nutzers. Zusätzlich muss der Commit `push-password:<Kennwort>`, `push-global-freigabe` und den Marker der konkreten Spur enthalten (z. B. `prayer-push-scheduler-freigabe`, `daily-push-freigabe`, `post-push-freigabe`). Ohne Anfrage, ohne Kennwort oder ohne Spur-Freigabe bleibt OneSignal/Gebet/Duʿāʾ des Tages/Empfehlung/Beiträge/News/Bibliothek/Fokus unverändert.
+- Diese Dateien oder Funktionen in `index.html` / `worker.js` mitändern, auch nicht „nebenbei“ bei Layout/Feed/Quiz.
+- Mehrere Spuren in einem Commit (außer `push-lanes-multi-freigabe`).
+- Eine allgemeine App-, Layout-, Build-, PDF- oder Content-Freigabe gilt niemals als Push-Freigabe.
+- Bei jeder unklaren Push-Auswirkung zuerst den Nutzer fragen; ohne Antwort bleibt der Push-Code unverändert.
+
+**Wenn der Nutzer Push bewusst ändert:** nur diese Spur korrigieren, **sofort live** auf `main` (Worker + App), Sperre bleibt aktiv. Ohne solchen Befehl gilt: nicht anfassen.
+
+## Beitrags-Push (Hang-Sperre – autonom reparieren)
+
+Geschützt durch `content/admin/post-push-hang-lock.json` und `scripts/post-push-hang-guard.js`. Menschliche Zeiten: **Europe/Berlin**.
+
+Der Besucher-Beitrags-Push darf **nicht hängen**. Der Workflow **Post Push Hang Watchdog** läuft **nicht** im Minuten-Takt und stößt **keine** extra Cloudflare-Deploys an. Status-Commits (`pending-pushes` usw.) tragen `[skip ci]`, damit Cloudflare Pages/Workers Builds nicht bei jedem Queue-Tick bauen. Nachsenden nur nach erfolgreichem Besucher-Deploy oder manuell. Gebets-/Tages-/Jumuʿah-Push und der bestehende Worker-**Runtime**-Cron (`*/5`, kein Deploy) bleiben getrennte Spuren.
 
 ## Repo-Integritäts-Schutz (streng – nicht verletzen)
 

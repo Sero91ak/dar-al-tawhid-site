@@ -161,20 +161,11 @@ async function loadLibraryPushSubscriptionIds(env) {
   return [];
 }
 
-function buildLibraryPushAttempts(basePayload, subscriptionIds) {
-  const attempts = [];
-  // Zuerst bekannte aktive Gebets-Push-Abos (funktionieren live), dann Segmente.
-  for (const ids of chunkValues(subscriptionIds, ONESIGNAL_BATCH_SIZE)) {
-    attempts.push({ ...basePayload, include_subscription_ids: ids });
-  }
-  attempts.push(
+function buildLibraryPushAttempts(basePayload) {
+  return [
     { ...basePayload, included_segments: ["Subscribed Users"] },
-    { ...basePayload, included_segments: ["DAR_PUSH"] },
-    { ...basePayload, included_segments: ["Total Subscriptions"] },
-    { ...basePayload, filters: [{ field: "tag", key: "dar_push", relation: "=", value: "true" }] },
-    { ...basePayload, filters: [{ field: "tag", key: "post_notifications", relation: "=", value: "true" }] }
-  );
-  return attempts;
+    { ...basePayload, included_segments: ["DAR_PUSH"] }
+  ];
 }
 
 function siteOrigin(env) {
@@ -350,8 +341,7 @@ export async function sendLibraryPublicationPush(env, record) {
     idempotency_key: idempotencyKey
   };
 
-  const subscriptionIds = await loadLibraryPushSubscriptionIds(env);
-  const attempts = buildLibraryPushAttempts(basePayload, subscriptionIds);
+  const attempts = buildLibraryPushAttempts(basePayload);
 
   let lastError = "Kein Empfänger gefunden – alle Zielgruppen lieferten 0 Empfänger oder Fehler";
   const attemptLog = [];

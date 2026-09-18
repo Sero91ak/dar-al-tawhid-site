@@ -297,7 +297,6 @@ async function sendJummahPush(env, group, slot, stats, sentInRun) {
     headings: { de: copy.title, en: copy.title },
     contents: { de: copy.body, en: copy.body },
     url: String(env.SITE_URL || DEFAULT_SITE_URL),
-    isAnyWeb: true,
     data: { type: "jummah-push", mode: slot.mode, test: false },
     idempotency_key: await uuidFrom(idKey)
   }, env);

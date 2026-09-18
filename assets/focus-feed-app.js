@@ -469,7 +469,7 @@
               date: n.date || '',
               image: sanitizeImageUrl(n.image || ''),
               backgroundMode: 'auto',
-              target: n.link || n.href || ('news-detail:' + (n.id || i)),
+              target: n.nav === 'appstore' ? ('appstore:' + (n.value || n.link || '')) : (n.link || n.href || ('news-detail:' + (n.id || i))),
               badges: ['neu'],
               sort: 30 + i
             });
@@ -848,6 +848,12 @@
       }
       if (t.indexOf('topic:') === 0 || t.indexOf('category:') === 0) {
         navigate('topic', t.split(':').slice(1).join(':'));
+        return;
+      }
+      if (t.indexOf('appstore') === 0) {
+        var store = t.indexOf('appstore:') === 0 ? t.slice(9) : '';
+        if (typeof window.openAppStore === 'function') window.openAppStore(store);
+        else location.href = store || 'https://apps.apple.com/de/app/id6805988753';
         return;
       }
       if (t.indexOf('news-detail:') === 0) {

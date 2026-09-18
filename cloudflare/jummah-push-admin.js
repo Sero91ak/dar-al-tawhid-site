@@ -94,7 +94,6 @@ export async function sendJummahTestPush(env, input = {}) {
     headings: { de: copy.title, en: copy.title },
     contents: { de: copy.body, en: copy.body },
     url: String(env.SITE_URL || DEFAULT_SITE_URL),
-    isAnyWeb: true,
     data: { type: "jummah-test", mode, test: true }
   }, env);
 

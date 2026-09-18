@@ -76,6 +76,7 @@ enum DarDailyContent {
         snap.recommendationBody = card.recBody
         snap.duaId = keptDuaId
         snap.postId = keptPostId
+        applyCalendar(to: &snap, date: date)
         if fetchLiveDaily, let live = fetchDailyFile() {
             if let dua = live.dua {
                 snap.duaId = dua.id ?? snap.duaId
@@ -97,6 +98,75 @@ enum DarDailyContent {
             snap.cityLabel = "Berlin (Standard)"
         }
         return snap
+    }
+
+    private static func applyCalendar(to snap: inout DarWidgetSnapshot, date: Date) {
+        var hijri = Calendar(identifier: .islamicUmmAlQura)
+        hijri.timeZone = .current
+        let parts = hijri.dateComponents([.day, .month, .year], from: date)
+        let month = max(1, min(12, parts.month ?? 1))
+        let months = [
+            "Muḥarram", "Ṣafar", "Rabīʿ al-Awwal", "Rabīʿ ath-Thānī",
+            "Jumādā al-Ūlā", "Jumādā ath-Thāniyah", "Rajab", "Shaʿbān",
+            "Ramaḍān", "Shawwāl", "Dhū al-Qaʿdah", "Dhū al-Ḥijjah"
+        ]
+        snap.hijriDay = String(parts.day ?? 1)
+        snap.hijriMonthYear = "\(months[month - 1]) \(parts.year ?? 0) AH"
+        snap.hijriLabel = "\(snap.hijriDay). \(snap.hijriMonthYear)"
+
+        let gregorian = DateFormatter()
+        gregorian.locale = Locale(identifier: "de_DE")
+        gregorian.dateFormat = "EEEE, d. MMMM yyyy"
+        snap.gregorianLabel = gregorian.string(from: date)
+        snap.islamicEvents = upcomingIslamicEvents(from: date, calendar: hijri, months: months)
+    }
+
+    private static func upcomingIslamicEvents(
+        from date: Date,
+        calendar: Calendar,
+        months: [String]
+    ) -> [DarIslamicEvent] {
+        let definitions: [(String, String, Int, Int)] = [
+            ("ramadan", "Beginn Ramaḍān", 9, 1),
+            ("eid-fitr", "ʿĪd al-Fiṭr", 10, 1),
+            ("arafah", "Tag von ʿArafah", 12, 9),
+            ("eid-adha", "ʿĪd al-Aḍḥā", 12, 10),
+            ("new-year", "Islamisches Neujahr", 1, 1),
+            ("ashura", "ʿĀshūrāʾ", 1, 10)
+        ]
+        let today = Calendar.current.startOfDay(for: date)
+        let currentYear = calendar.component(.year, from: date)
+        let gregorian = DateFormatter()
+        gregorian.locale = Locale(identifier: "de_DE")
+        gregorian.dateFormat = "d. MMMM yyyy"
+
+        return [currentYear, currentYear + 1]
+            .flatMap { year in
+                definitions.compactMap { id, title, month, day -> (Date, DarIslamicEvent)? in
+                    var components = DateComponents()
+                    components.calendar = calendar
+                    components.timeZone = calendar.timeZone
+                    components.year = year
+                    components.month = month
+                    components.day = day
+                    components.hour = 12
+                    guard let eventDate = calendar.date(from: components) else { return nil }
+                    let eventDay = Calendar.current.startOfDay(for: eventDate)
+                    let days = Calendar.current.dateComponents([.day], from: today, to: eventDay).day ?? 0
+                    guard days >= 0 else { return nil }
+                    let event = DarIslamicEvent(
+                        id: "\(id)-\(year)",
+                        title: title,
+                        hijriDate: "\(day). \(months[month - 1]) \(year) AH",
+                        gregorianDate: gregorian.string(from: eventDate),
+                        daysUntil: days
+                    )
+                    return (eventDate, event)
+                }
+            }
+            .sorted { $0.0 < $1.0 }
+            .prefix(8)
+            .map(\.1)
     }
 
     private static func fetchDailyFile() -> DailyFile? {

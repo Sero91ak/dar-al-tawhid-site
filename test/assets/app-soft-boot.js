@@ -1,6 +1,6 @@
 /**
  * Soft boot overlay for visitor + test web apps (iOS parity).
- * v670 · Titel DĀR AL TAWḤĪD; Leiste rund (CSS in index). Overlay nie auf <html>.
+ * v672 · Android-Native: Soft-Boot überspringen (kein Logo-Hang). v670 · Titel DĀR AL TAWḤĪD; Leiste rund (CSS in index). Overlay nie auf <html>.
  */
 (function () {
   if (window.__darSoftBootInstalled) return;
@@ -15,12 +15,12 @@
   /* Original-Hauptfarben je Erscheinungsbild (THEME_META / theme-page-bg) */
   var THEME_FILLS = {
     dark: "#050706",
-    light: "#F2EEE3",
+    light: "#f7f0df",
     soft: "#f2e6e2",
     royal: "#07162c",
     bordeaux: "#140B0C",
     "dar-al-layl": "#050605",
-    eisgold: "#edf7ff",
+    eisgold: "#e8f3fb",
     aurora: "#080806"
   };
   var progress = 0;
@@ -283,10 +283,22 @@
 
   function install() {
     try {
-      if (
-        (document.documentElement && document.documentElement.classList.contains("dar-ios-native-app")) ||
-        /DarAlTawhid-iOS/i.test(String(navigator.userAgent || ""))
-      ) {
+      var ua = String(navigator.userAgent || "");
+      var root = document.documentElement;
+      var isIosNative =
+        (root && root.classList.contains("dar-ios-native-app")) ||
+        /DarAlTawhid-iOS/i.test(ua);
+      var isAndroidNative =
+        (root && root.classList.contains("dar-android-native-app")) ||
+        !!window.DAR_ANDROID_NATIVE_APP ||
+        /DarAlTawhidAndroid/i.test(ua);
+      if (isIosNative || isAndroidNative) {
+        try {
+          if (isAndroidNative) {
+            window.DAR_ANDROID_NATIVE_APP = true;
+            if (root) root.classList.add("is-android", "dar-android-native-app");
+          }
+        } catch (e2) {}
         finished = true;
         releaseChrome();
         return;
@@ -309,6 +321,15 @@
     hardTimer = setTimeout(function () {
       finish();
     }, HARD_TIMEOUT_MS);
+    try {
+      if (/Android/i.test(String(navigator.userAgent || ""))) {
+        setTimeout(function () { if (!finished) finish(); }, 2200);
+        setTimeout(function () {
+          if (finished) return;
+          try { releaseChrome(); finished = true; window.__darSoftBootLocked = true; } catch (e3) {}
+        }, 3800);
+      }
+    } catch (e4) {}
 
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", function () {

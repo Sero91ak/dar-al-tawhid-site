@@ -10,6 +10,7 @@ on:
       - version.json
       - content/updates/daily.json
       - content/posts/**
+      - content/admin/change-scope-lock.json
       - service-worker.js
       - manifest.json
       - assets/**
@@ -264,10 +265,12 @@ jobs:
         env:
           INTEGRITY_BASE_REF: ${{ github.event.before || '' }}
           CHANGE_SCOPE_LOCK_COMMIT_ONLY: "1"
+          GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
           node scripts/app-health-check.js
           node scripts/change-scope-lock-guard.js
           node scripts/push-system-guard.js
+          node scripts/push-lanes-guard.js
           node scripts/version-update-guard.js
           node scripts/app-stability-guard.js
 

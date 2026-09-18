@@ -101,15 +101,18 @@ async function scheduleDailyNotification(kind, item, config, dateKey) {
     headings: { de: title, en: title },
     contents: { de: body, en: body },
     url,
-    isAnyWeb: true,
     delayed_option: "timezone",
     delivery_time_of_day: deliveryTime,
     idempotency_key: `dar-${kind}-${dateKey}`,
     data: {
       type: isDua ? "daily_dua" : "daily_recommendation",
-      date: dateKey,
+      reminder_type: isDua ? "dua_daily" : "today_recommended",
+      source: "dar-reminder-scheduler",
+      target: isDua ? "dua" : "post",
       content_id: item.id,
-      source: "dar-daily-onesignal-timezone"
+      nav: isDua ? "dua" : "post",
+      url,
+      date: dateKey
     }
   }, SITE_ORIGIN);
 

@@ -10,7 +10,40 @@ enum DarDeepLink {
         case quran
         case duas
         case more
+        case search
+        case jummah
         case hash(String)
+
+        var rawValue: String {
+            switch self {
+            case .home: return "home"
+            case .prayer: return "prayer"
+            case .qibla: return "qibla"
+            case .quran: return "quran"
+            case .duas: return "duas"
+            case .more: return "more"
+            case .search: return "search"
+            case .jummah: return "jummah"
+            case .hash(let raw):
+                let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+                if trimmed.hasPrefix("#") { return String(trimmed.dropFirst()) }
+                return trimmed
+            }
+        }
+
+        init?(rawValue: String) {
+            switch rawValue.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() {
+            case "home": self = .home
+            case "prayer": self = .prayer
+            case "qibla": self = .qibla
+            case "quran": self = .quran
+            case "duas", "dua": self = .duas
+            case "more": self = .more
+            case "search": self = .search
+            case "jummah": self = .jummah
+            default: return nil
+            }
+        }
 
         var webHash: String {
             switch self {
@@ -19,6 +52,8 @@ enum DarDeepLink {
             case .quran: return "#quran"
             case .duas: return "#duas"
             case .more: return "#more"
+            case .search: return "#home"
+            case .jummah: return "#jummah"
             case .hash(let raw):
                 let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
                 if trimmed.isEmpty { return "#home" }
@@ -26,11 +61,19 @@ enum DarDeepLink {
             }
         }
 
+        var openHint: String {
+            switch self {
+            case .qibla: return "qibla"
+            case .search: return "search"
+            default: return ""
+            }
+        }
+
         var url: URL {
             var components = URLComponents()
             components.scheme = DarDeepLink.scheme
             components.host = "open"
-            let path = String(webHash.dropFirst())
+            let path = rawValue
             components.queryItems = [URLQueryItem(name: "h", value: path)]
             return components.url ?? URL(string: "\(DarDeepLink.scheme)://home")!
         }
@@ -43,6 +86,9 @@ enum DarDeepLink {
             }
             if url.host == "open" || url.path == "/open" {
                 if let hash = queryValue("h", in: url), !hash.isEmpty {
+                    if let semantic = Destination(rawValue: hash) {
+                        return semantic
+                    }
                     return .hash(hash)
                 }
             }
@@ -54,6 +100,8 @@ enum DarDeepLink {
             case "quran": return .quran
             case "duas", "dua": return .duas
             case "more": return .more
+            case "search": return .search
+            case "jummah": return .jummah
             default: break
             }
         }
@@ -103,5 +151,32 @@ enum DarDeepLink {
     private static func isSiteHost(_ host: String?) -> Bool {
         let h = (host ?? "").lowercased()
         return h == "dar-al-tawhid.de" || h == "www.dar-al-tawhid.de"
+    }
+}
+
+enum DarQuickActions {
+    private static let lock = NSLock()
+    private static var stored: DarDeepLink.Destination?
+
+    static func set(_ destination: DarDeepLink.Destination) {
+        lock.lock()
+        stored = destination
+        lock.unlock()
+        DarWidgetStore.setPendingDestination(destination)
+    }
+
+    static func peek() -> DarDeepLink.Destination? {
+        lock.lock()
+        let value = stored
+        lock.unlock()
+        return value
+    }
+
+    static func consume() -> DarDeepLink.Destination? {
+        lock.lock()
+        let value = stored
+        stored = nil
+        lock.unlock()
+        return value ?? DarWidgetStore.consumePendingDestination()
     }
 }

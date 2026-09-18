@@ -1,0 +1,305 @@
+{
+  "version": 2,
+  "id": "push-lanes-lock",
+  "locked": true,
+  "lockedAt": "2026-09-13T09:05:00.000Z",
+  "lockedReason": "Nutzer 2026-09-13: Sämtliche OneSignal- und Push-Funktionen global sperren. Keine sonstige Änderung darf Beiträge, News, Bibliothek, Fokus, Gebet, Tages-Duʿāʾ, Empfehlung, Jumuʿah, Willkommen oder native iOS-Pushs mitändern.",
+  "unlockPolicy": "Strenge Dreifach-Sperre: 1) ausdrücklicher Nutzerauftrag in dieser Unterhaltung, 2) Kennwort push-password:… im Commit, 3) globale Freigabe plus Spur-Freigabe. Ohne Anfrage bleibt jeder Push-Code unverändert, auch bei Layout-, PDF-, Build- oder Inhaltsänderungen.",
+  "globalApprovalRequired": true,
+  "passwordRequired": true,
+  "unlockPasswordSha256": "88c5d00e83bd7611814a2ecaac762beeed85a518c2690eada74260e5cea9ccf7",
+  "globalUnlockPhrases": ["push-global-freigabe"],
+  "liveOnExplicitPushCommand": true,
+  "requiredGuardMarker": "PUSH_LANES_GUARD",
+  "lanes": {
+    "lock-meta": {
+      "label": "Push-Spuren-Sperre",
+      "unlockPhrases": ["push-lanes-freigabe"],
+      "paths": [
+        "content/admin/push-lanes-lock.json",
+        "scripts/push-lanes-guard.js",
+        "scripts/push-system-guard.js",
+        ".github/workflows/app-health-check.yml",
+        ".github/workflows/canonical-state-guard.yml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        ".github/workflows/deploy-test-app.yml",
+        ".github/workflows/deploy-test-library-canonical.yml"
+      ]
+    },
+    "prayer-server": {
+      "label": "Gebets-Push (Server/Cron/OneSignal)",
+      "unlockPhrases": ["prayer-push-scheduler-freigabe", "gebets-push freigeben"],
+      "paths": [
+        "cloudflare/prayer-push-scheduler.js",
+        "cloudflare/prayer-push-admin.js",
+        "cloudflare/prayer-push-copy.js",
+        "cloudflare/prayer-status-store.js",
+        "assets/prayer-push-tags.js",
+        "scripts/prayer-push-loop-guard.js",
+        "scripts/prayer-push-integrity-guard.js",
+        "scripts/send-prayer-push.js",
+        "content/admin/prayer-push-scheduler-lock.json",
+        ".github/workflows/prayer-push.yml"
+      ],
+      "diffMarkers": {
+        "cloudflare/worker.js": [
+          "ensurePrayerSchedulerFresh",
+          "/api/prayer/",
+          "runPrayerPushScheduler",
+          "readPrayerPushStatus"
+        ],
+        "cloudflare/wrangler.toml": [
+          "PRAYER_STATUS_PATH",
+          "PRAYER_STATUS_STORE"
+        ]
+      }
+    },
+    "prayer-local": {
+      "label": "Gebets-Erinnerungen (App-Uhr / lokal)",
+      "unlockPhrases": ["prayer-local-reminders-freigabe", "gebets-erinnerungen freigeben"],
+      "paths": [],
+      "diffMarkers": {
+        "index.html": [
+          "shouldUseLocalPrayerReminders",
+          "scheduleLocalPrayerReminders",
+          "restorePrayerRemindersOnLoad",
+          "syncPrayerPushTags",
+          "enablePrayerServerPush",
+          "disablePrayerServerPush",
+          "PRAYER_LOCAL_FALLBACK_GUARD",
+          "PUSH_LANES_GUARD_PRAYER_LOCAL"
+        ],
+        "test/index.html": [
+          "shouldUseLocalPrayerReminders",
+          "scheduleLocalPrayerReminders",
+          "restorePrayerRemindersOnLoad",
+          "syncPrayerPushTags",
+          "enablePrayerServerPush",
+          "disablePrayerServerPush",
+          "PRAYER_LOCAL_FALLBACK_GUARD",
+          "PUSH_LANES_GUARD_PRAYER_LOCAL"
+        ]
+      }
+    },
+    "daily": {
+      "label": "Tages-Push (Duʿāʾ / Empfehlung)",
+      "unlockPhrases": ["daily-push-freigabe", "tages-push freigeben"],
+      "paths": [
+        "cloudflare/daily-push-scheduler.js",
+        "cloudflare/daily-push-admin.js",
+        "scripts/send-daily-content-push.js",
+        "scripts/send-daily-live-repair.js",
+        ".github/workflows/daily-push-schedule.yml",
+        ".github/workflows/daily-push-backup.yml",
+        ".github/workflows/daily-push-live-repair.yml",
+        "content/admin/daily-push-live-repair-trigger.json",
+        "content/admin/daily-push.json",
+        "content/admin/daily-push-schema.sql"
+      ],
+      "diffMarkers": {
+        "index.html": [
+          "syncDailyPushTags",
+          "daily-push-panel",
+          "setDailyPushPreference"
+        ],
+        "test/index.html": [
+          "syncDailyPushTags",
+          "daily-push-panel",
+          "setDailyPushPreference"
+        ],
+        "cloudflare/worker.js": [
+          "ensureDailyPushSchedulerFresh",
+          "/api/daily/"
+        ]
+      }
+    },
+    "jummah": {
+      "label": "Jumuʿah-Push",
+      "unlockPhrases": ["jummah-push-freigabe", "jumuah-push freigeben"],
+      "paths": [
+        "cloudflare/jummah-push-scheduler.js",
+        "cloudflare/jummah-push-admin.js"
+      ],
+      "diffMarkers": {
+        "index.html": [
+          "syncJummahPushTags",
+          "setJummahPushPreference"
+        ],
+        "test/index.html": [
+          "syncJummahPushTags",
+          "setJummahPushPreference"
+        ],
+        "cloudflare/worker.js": [
+          "ensureJummahPushSchedulerFresh",
+          "/api/jummah/"
+        ]
+      }
+    },
+    "welcome": {
+      "label": "Willkommens-Push",
+      "unlockPhrases": ["welcome-push-freigabe", "willkommens-push freigeben"],
+      "paths": [
+        "cloudflare/onesignal-delivery.js"
+      ],
+      "diffMarkers": {
+        "index.html": [
+          "sendWelcomePushIfNeeded",
+          "scheduleWelcomePushRetries",
+          "dar_welcome_push"
+        ],
+        "test/index.html": [
+          "sendWelcomePushIfNeeded",
+          "scheduleWelcomePushRetries",
+          "dar_welcome_push"
+        ],
+        "cloudflare/worker.js": [
+          "/api/push/welcome",
+          "sendWelcomePush"
+        ],
+        "cloudflare/daily-push-admin.js": [
+          "sendWelcomePush"
+        ]
+      }
+    },
+    "onesignal-core": {
+      "label": "OneSignal-Kern, Schlüssel und Öffnungsziele",
+      "unlockPhrases": ["onesignal-core-freigabe", "onesignal freigeben"],
+      "paths": [
+        "scripts/lib/onesignal-push.js",
+        "cloudflare/onesignal-delivery.js",
+        "cloudflare/push-launch-urls.js",
+        "OneSignalSDKWorker.js",
+        "OneSignalSDKUpdaterWorker.js",
+        "push/onesignal/",
+        "content/admin/worker-secrets-safety-lock.json",
+        "content/admin/push-autonomous-heal-lock.json",
+        "scripts/push-autonomous-heal-guard.js",
+        ".github/workflows/deploy-admin-publisher.yml",
+        ".github/workflows/push-worker-secret-watchdog.yml",
+        ".github/workflows/sync-admin-publisher-secrets.yml",
+        ".github/workflows/install-prayer-push-tags.yml"
+      ],
+      "diffMarkers": {
+        "index.html": [
+          "OneSignal.init",
+          "ONESIGNAL",
+          "repairPushConnection",
+          "savePushRegistration"
+        ],
+        "test/index.html": [
+          "OneSignal.init",
+          "ONESIGNAL",
+          "repairPushConnection",
+          "savePushRegistration"
+        ],
+        "cloudflare/worker.js": [
+          "oneSignalApiKey",
+          "ONESIGNAL_API_KEY_NEW",
+          "DEFAULT_ONESIGNAL_APP_ID"
+        ]
+      }
+    },
+    "post": {
+      "label": "Beitrags-Push",
+      "unlockPhrases": ["post-push-freigabe", "beitrags-push freigeben"],
+      "paths": [
+        "cloudflare/post-push-admin.js",
+        "scripts/send-post-push.js",
+        "scripts/post-push-hang-guard.js",
+        "content/admin/post-push-hang-lock.json",
+        ".github/workflows/onesignal-post-push.yml",
+        ".github/workflows/post-push-hang-watchdog.yml"
+      ],
+      "diffMarkers": {
+        "cloudflare/worker.js": [
+          "sendNewPostPush",
+          "processAllPendingPushes",
+          "processPendingPushUntilLive",
+          "isPostPushApproved"
+        ]
+      }
+    },
+    "news": {
+      "label": "News-Push",
+      "unlockPhrases": ["news-push-freigabe"],
+      "paths": [
+        "scripts/send-news-push.js",
+        ".github/workflows/news-push.yml"
+      ],
+      "diffMarkers": {
+        "cloudflare/worker.js": [
+          "sendNewsPush"
+        ]
+      }
+    },
+    "library": {
+      "label": "Bibliotheks- und PDF-Push",
+      "unlockPhrases": ["library-push-freigabe", "bibliotheks-push freigeben"],
+      "paths": [
+        "cloudflare/library-push-admin.js",
+        "scripts/send-library-publication-push.js",
+        "scripts/send-library-focus-push.js",
+        ".github/workflows/library-publication-push.yml",
+        ".github/workflows/library-focus-push.yml"
+      ],
+      "diffMarkers": {
+        "cloudflare/worker.js": [
+          "sendLibraryPublicationPush"
+        ]
+      }
+    },
+    "focus": {
+      "label": "Fokus-Push (Quiz, Propheten, Zakāt)",
+      "unlockPhrases": ["focus-push-freigabe"],
+      "paths": [
+        "scripts/send-quiz-focus-push.js",
+        "scripts/send-prophets-focus-push.js",
+        "scripts/send-zakat-focus-push.js",
+        ".github/workflows/quiz-focus-push.yml",
+        ".github/workflows/prophets-focus-push.yml",
+        ".github/workflows/zakat-focus-push.yml"
+      ]
+    },
+    "ios-native": {
+      "label": "Native iOS-Push-Registrierung und Weiterleitung",
+      "unlockPhrases": ["ios-push-freigabe", "native-push freigeben"],
+      "paths": [
+        "ios/DarAlTawhid/DarAlTawhid/DarAlTawhidApp.swift",
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift",
+        "ios/DarAlTawhid/DarAlTawhid/FreshWebAppView.swift",
+        "ios/DarAlTawhid/DarAlTawhid/DarAppRouter.swift",
+        "ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift",
+        "ios/DarAlTawhid/DarAlTawhid/DarNativePermissions.swift",
+        "ios/DarAlTawhid/DarAlTawhid/DarInAppOpenGuard.swift",
+        "android/app/src/main/java/de/daraltawhid/app/DarPush.kt"
+      ]
+    },
+    "worker-cron": {
+      "label": "Worker-Cron (alle 5 Min)",
+      "unlockPhrases": ["push-cron-freigabe", "worker-cron freigeben"],
+      "paths": [
+        "cloudflare/wrangler.toml"
+      ],
+      "diffMarkers": {
+        "cloudflare/wrangler.toml": [
+          "crons",
+          "*/5 * * * *"
+        ],
+        "cloudflare/worker.js": [
+          "async scheduled(event, env, ctx)",
+          "PUSH_SYSTEM_GUARD: Cron"
+        ]
+      }
+    }
+  },
+  "requiredAppMarkers": {
+    "index.html": [
+      "PUSH_LANES_GUARD",
+      "PUSH_LANES_GUARD_PRAYER_LOCAL"
+    ],
+    "test/index.html": [
+      "PUSH_LANES_GUARD",
+      "PUSH_LANES_GUARD_PRAYER_LOCAL"
+    ]
+  }
+}

@@ -144,6 +144,20 @@ if (edgeToEdgeFails) failed += edgeToEdgeFails;
 const repoIntegrityFails = require("./repo-integrity-guard.js").runRepoIntegrityGuard();
 if (repoIntegrityFails) failed += repoIntegrityFails;
 
+try {
+  const pushLanesFails = require("./push-lanes-guard.js").runPushLanesGuard();
+  if (pushLanesFails) failed += pushLanesFails;
+} catch (e) {
+  fail(`push-lanes-guard: ${e.message}`);
+}
+
+try {
+  const postPushHangFails = require("./post-push-hang-guard.js").runPostPushHangGuard();
+  if (postPushHangFails) failed += postPushHangFails;
+} catch (e) {
+  fail(`post-push-hang-guard: ${e.message}`);
+}
+
 if (failed) {
   console.error(`\n${failed} check(s) failed – Deploy stoppen.`);
   process.exit(1);

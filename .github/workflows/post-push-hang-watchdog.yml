@@ -1,0 +1,62 @@
+name: Post Push Hang Watchdog
+
+# POST_PUSH_HANG_GUARD
+# POST_PUSH_NO_CF_POLL
+# Kein 5-Minuten-Takt, kein extra Cloudflare-Deploy.
+# Nur nach erfolgreichem Besucher-Deploy oder manuell: hängende OneSignal-Pushes nachsenden.
+# Zeiten: Europe/Berlin. Gebets-/Tages-/Jumuʿah-Push nicht anfassen.
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - Deploy Besucher-App (Cloudflare Workers)
+    types: [completed]
+
+concurrency:
+  group: post-push-hang-watchdog
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  repair-stuck-post-push:
+    name: POST_PUSH_HANG_GUARD repair
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          ref: main
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Send stuck approved post pushes
+        id: repair
+        env:
+          STUCK_REPAIR: "1"
+          SITE_URL: "https://dar-al-tawhid.de"
+          ONESIGNAL_APP_ID: "786d7cd6-0455-4434-ab14-0c10a7bc6b1e"
+          ONESIGNAL_API_KEY_NEW: ${{ secrets.ONESIGNAL_API_KEY_NEW }}
+          ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+        run: |
+          echo "POST_PUSH_NO_CF_POLL Berlin $(TZ=Europe/Berlin date '+%Y-%m-%d %H:%M:%S')"
+          node scripts/send-post-push.js
+
+      - name: Commit repaired pending-pushes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/admin/pending-pushes.json
+          if git diff --cached --quiet; then
+            echo "Keine pending-pushes Änderung."
+            exit 0
+          fi
+          git commit -m "POST_PUSH_HANG_GUARD: hängenden Beitrags-Push nach Live-Deploy nachgesendet ($(TZ=Europe/Berlin date '+%Y-%m-%d %H:%M %Z'))"
+          git pull --rebase origin main || true
+          git push origin HEAD:main

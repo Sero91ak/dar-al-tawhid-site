@@ -18,6 +18,11 @@
     "test/assets/library/pdfs/",
     "test/assets/library/covers/",
     "content/admin/pending-pushes.json",
+    "content/posts/",
+    "scripts/send-post-push.js",
+    "content/admin/post-push-hang-lock.json",
+    "scripts/post-push-hang-guard.js",
+    ".github/workflows/post-push-hang-watchdog.yml",
     "content/admin/push-triggers/",
     "admin/index.html",
     "admin/quiz-stats-manager.js",
@@ -65,8 +70,24 @@
     "assets/fold-split.js",
     "assets/fold-split.css",
     "content/admin/worker-secrets-safety-lock.json",
+    "content/admin/push-lanes-lock.json",
+    "scripts/push-lanes-guard.js",
     "cloudflare/WORKER_SECRETS_LOCK.md",
-    "cloudflare/library-push-admin.js"
+    "cloudflare/library-push-admin.js",
+    "admin/dar-admin-top-chrome-fix.css",
+    "assets/dar-setup-hub.css",
+    "assets/dar-setup-hub.js",
+    "assets/dar-top-chrome-fix.css",
+    "test/assets/dar-setup-hub.css",
+    "test/assets/dar-setup-hub.js",
+    "test/assets/dar-top-chrome-fix.css",
+    ".github/workflows/deploy-live-admin-app.yml",
+    "assets/app-soft-boot.js",
+    "assets/app-soft-boot.css",
+    "test/assets/app-soft-boot.js",
+    "test/assets/app-soft-boot.css",
+    "assets/dar-ios-oversize-copy.css",
+    "test/assets/dar-ios-oversize-copy.css"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -87,9 +108,219 @@
   ],
   "unlockedScopes": [
     {
-      "id": "scroll-edge-sharp-ios-web-2026-09-18",
-      "approvedBy": "user-explicit-test-visitor-like-ios-no-scroll-edge-blur",
-      "reason": "Nutzer: Test-App und Besucher-App ohne glasigen Scroll-Edge, wie die normale iOS-App (Bild 3/4).",
+      "id": "revert-visitor-header-smash-2026-09-16",
+      "approvedBy": "user-explicit-besucher-oben-falsch-zurueck",
+      "reason": "Nutzer: Besucher-App oben kaputt (Logo im Statusbalken). Safe-Area wiederherstellen, Glas weg, iOS unangetastet.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "assets/dar-ios-oversize-copy.css",
+        "test/assets/dar-ios-oversize-copy.css",
+        "admin/index.html",
+        "admin/dar-admin-top-chrome-fix.css"
+      ],
+      "expiresAt": "2026-09-17T23:59:00.000Z"
+    },
+    {
+      "id": "ios-oversize-copy-win-2026-09-16",
+      "approvedBy": "user-explicit-glass-oben-wie-ios-bild-1",
+      "reason": "Nutzer: Bild 1 iOS Oversize, Bild 2/3 glasig. Visitor/Test wie iOS, iOS nicht ändern.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "assets/dar-ios-oversize-copy.css",
+        "test/assets/dar-ios-oversize-copy.css"
+      ],
+      "expiresAt": "2026-09-17T23:59:00.000Z"
+    },
+    {
+      "id": "settings-flat-ios-oversize-copy-2026-09-15",
+      "approvedBy": "user-explicit-settings-edel-ohne-kasten-oversize-copy-visitor-test-admin",
+      "reason": "Nutzer: Einstellungen global edel ohne Kasten wie Bild 2; iOS-Oversize unverändert kopieren auf Besucher, Test, Admin.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "assets/dar-setup-hub.css",
+        "assets/dar-setup-hub.js",
+        "assets/dar-top-chrome-fix.css",
+        "assets/dar-ios-oversize-copy.css",
+        "test/assets/dar-setup-hub.css",
+        "test/assets/dar-setup-hub.js",
+        "test/assets/dar-top-chrome-fix.css",
+        "test/assets/dar-ios-oversize-copy.css",
+        "admin/index.html",
+        "admin/dar-admin-top-chrome-fix.css"
+      ],
+      "expiresAt": "2026-09-17T23:59:00.000Z"
+    },
+    {
+      "id": "android-boot-logo-hang-2026-09-15",
+      "approvedBy": "user-explicit-android-besucher-hangt-logo-sofort-fixen-push-live",
+      "reason": "Nutzer: Android Besucher-App hängt am Logo, sofort fixen und live pushen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "assets/app-soft-boot.js",
+        "test/assets/app-soft-boot.js",
+        "service-worker.js",
+        "version.json",
+        "test/version.json"
+      ],
+      "expiresAt": "2026-09-17T23:59:00.000Z"
+    },
+    {
+      "id": "admin-top-chrome-hub-live-2026-09-15",
+      "approvedBy": "user-explicit-push-live-admin-same-chrome",
+      "reason": "Nutzer: push live; Admin App dasselbe (Top-Schrift/Chrome + Setup-Hub Optik).",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "admin/dar-admin-top-chrome-fix.css",
+        "admin/index.html",
+        "service-worker.js",
+        ".github/workflows/deploy-live-admin-app.yml",
+        "assets/dar-setup-hub.css",
+        "assets/dar-setup-hub.js",
+        "assets/dar-top-chrome-fix.css",
+        "test/assets/dar-setup-hub.css",
+        "test/assets/dar-setup-hub.js",
+        "test/assets/dar-top-chrome-fix.css",
+        "index.html",
+        "test/index.html"
+      ],
+      "expiresAt": "2026-09-17T23:59:00.000Z"
+    },
+    {
+      "id": "links-appstore-icon-only-2026-09-13",
+      "approvedBy": "user-explicit-links-appstore-icon-only",
+      "reason": "Nutzer: Nur das Apple App Store Icon im separaten App-Store-Link rund korrekt einbauen; alte Icons unverändert lassen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "links/index.html",
+        "assets/app-store-icon-fixed.svg",
+        "assets/app-store-icon.png"
+      ],
+      "expiresAt": "2026-09-14T23:59:00.000Z"
+    },
+    {
+      "id": "ios-onesignal-uuid-testflight-54-2026-09-13",
+      "approvedBy": "user-explicit-ios-onesignal-testflight-subscription-uuid",
+      "reason": "Nutzer: echte OneSignal-UUID statt APNs-Token, Server-Registrierung, TestFlight 54.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift",
+        "ios/DarAlTawhid/DarAlTawhid/FreshWebAppView.swift",
+        "ios/DarAlTawhid/DarAlTawhid.xcodeproj/project.pbxproj",
+        "ios/DarAlTawhid/ExportOptions.plist"
+      ],
+      "expiresAt": "2026-09-14T23:59:00.000Z"
+    },
+    {
+      "id": "ios-onesignal-native-subscription-2026-09-13",
+      "approvedBy": "user-explicit-ios-onesignal-subscription-fehlt",
+      "reason": "Nutzer: iOS Native Diagnose fehlt OneSignal, keine Push-Subscription. Native SDK init + Opt-in, kein konkurrierendes APNs.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift",
+        "ios/DarAlTawhid/DarAlTawhid/DarAlTawhidApp.swift",
+        "ios/DarAlTawhid/DarAlTawhid/FreshWebAppView.swift",
+        "ios/DarAlTawhid/DarAlTawhid.xcodeproj/project.pbxproj",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-09-14T23:59:00.000Z"
+    },
+    {
+      "id": "app-update-once-per-viewer-2026-09-13",
+      "approvedBy": "user-explicit-app-update-nur-einmal-sehen",
+      "reason": "Nutzer: App-Update nur einmal pro ID (Popup und Fokus); 14 Tage nur für noch nicht gesehene Nutzer.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-09-14T23:59:00.000Z"
+    },
+    {
+      "id": "app-update-news-visible-berlin-time-2026-09-13",
+      "approvedBy": "user-explicit-app-update-zeiten-news-abgelaufen",
+      "reason": "Nutzer: App-Update-Uhrzeiten falsch, News in der App abgelaufen obwohl Admin LIVE.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/updates/current.json",
+        "content/staging/updates/current.json",
+        "index.html",
+        "test/index.html",
+        "admin/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-09-14T23:59:00.000Z"
+    },
+    {
+      "id": "reminder-ios-push-visible-sound-2026-09-13",
+      "approvedBy": "user-explicit-heute-empfohlen-ios-push-sound-data-banner",
+      "reason": "Nutzer: Heute empfohlen/Duʿāʾ/Gebetszeiten als echte iOS-Push mit Ton, Datenpayload, Foreground-Banner und lokaler Zeit.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "cloudflare/push-launch-urls.js",
+        "cloudflare/daily-push-scheduler.js",
+        "cloudflare/daily-push-admin.js",
+        "cloudflare/prayer-push-scheduler.js",
+        "cloudflare/prayer-push-admin.js",
+        "scripts/lib/onesignal-push.js",
+        "scripts/send-daily-content-push.js",
+        "scripts/send-daily-live-repair.js",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift"
+      ],
+      "expiresAt": "2026-09-14T23:59:00.000Z"
+    },
+    {
+      "id": "app-update-news-popup-push-2026-09-13",
+      "approvedBy": "user-explicit-app-update-news-popup-push-appstore",
+      "reason": "Nutzer: App-Update autonom als News, Popup und Push; Klick öffnet App Store; einmal pro ID.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/updates/current.json",
+        "content/staging/updates/current.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "admin/index.html",
+        "cloudflare/worker.js",
+        "scripts/send-news-push.js",
+        "assets/premium-feed-app.js",
+        "assets/focus-feed-app.js",
+        "test/assets/premium-feed-app.js"
+      ],
+      "expiresAt": "2026-09-14T23:59:00.000Z"
+    },
+    {
+      "id": "library-pdf-fullpage-hires-2026-09-13",
+      "approvedBy": "user-explicit-pdf-jetzt-lesen-volle-scharfe-seite-jede-app",
+      "reason": "Nutzer: PDF und Jetzt lesen öffnen abgeschnitten und unscharf. PDF-Button eigene volle, ungeschnittene, hochaufgelöste Seite, global jede App.",
       "paths": [
         "content/admin/change-scope-lock.json",
         "index.html",
@@ -98,40 +329,17 @@
         "test/version.json",
         "service-worker.js",
         "test/service-worker.js",
-        "ios/DarAlTawhid/",
-        "ios/DAR-SCROLL-EDGE-EFFECT-XCODE-AUFTRAG.md"
+        "assets/library/library-app.js",
+        "assets/library/library-app.css",
+        "test/assets/library/library-app.js",
+        "test/assets/library/library-app.css"
       ],
-      "expiresAt": "2026-12-31T23:59:00.000Z"
+      "expiresAt": "2026-09-14T23:59:00.000Z"
     },
     {
-      "id": "ios-screensaver-xcode-auftrag-2026-09-17",
-      "approvedBy": "user-explicit-bildschirmschoner-xcode-auftrag",
-      "reason": "Nutzer: Bildschirmschonerbereich einbauen; Hintergrund Bild oder Siegel-Deckblatt wählbar; Hadith, Dua und Quranverse nach Textlänge wechseln. Auftrag für Xcode-Programmierer.",
-      "paths": [
-        "content/admin/change-scope-lock.json",
-        "ios/DAR-SCREENSAVER-XCODE-AUFTRAG.md"
-      ],
-      "expiresAt": "2026-12-31T23:59:00.000Z"
-    },
-    {
-      "id": "test-wissen-feed-examples-2026-09-08",
-      "approvedBy": "user-explicit-feed-bereich-beispiele-pruef-app",
-      "reason": "Nutzer: Im Feed-Bereich der Test-App Beispiele, Beiträge und Verse einfügen; der Bereich ist leer.",
-      "paths": [
-        "content/admin/change-scope-lock.json",
-        "test/index.html",
-        "test/version.json",
-        "test/service-worker.js",
-        "test/assets/wissen-feed-app.js",
-        "test/data/feed-posts.json",
-        "test/data/daily-push-plan.json"
-      ],
-      "expiresAt": "2026-12-31T23:59:00.000Z"
-    },
-    {
-      "id": "global-air-gap-collapse-live-2026-09-08",
-      "approvedBy": "user-explicit-global-luft-luecken-jede-app-pushen",
-      "reason": "Nutzer: Überall so viel Luft dazwischen; Lücken in jedem Bereich schließen; jede App pushen.",
+      "id": "quick-access-direct-notifications-settings-2026-09-13",
+      "approvedBy": "user-explicit-glocke-einstellungen-direkt-jede-app",
+      "reason": "Nutzer: Glocke muss Benachrichtigungen direkt öffnen, Zahnrad Einstellungen direkt, global jede App, nicht nur Mehr.",
       "paths": [
         "content/admin/change-scope-lock.json",
         "index.html",
@@ -140,7 +348,137 @@
         "test/version.json",
         "service-worker.js",
         "test/service-worker.js",
-        "assets/fold-split.css"
+        "ios/DarAlTawhid/DarAlTawhid/FreshWebAppView.swift"
+      ],
+      "expiresAt": "2026-09-14T23:59:00.000Z"
+    },
+    {
+      "id": "individual-daily-push-times-2026-09-13",
+      "approvedBy": "user-explicit-daily-dua-recommendation-times-all-apps",
+      "reason": "Nutzer: Gewählte Uhrzeiten und Ein/Aus für Duʿāʾ des Tages und Heute empfohlen müssen in Besucher-, iOS- und Test-App exakt beim Push wirken; ausgefallenen 09:00-Versand beheben.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "cloudflare/daily-push-scheduler.js",
+        "content/admin/daily-push-schema.sql",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-09-14T23:59:00.000Z"
+    },
+    {
+      "id": "ios-appstore-hang-scroll-2026-09-12",
+      "approvedBy": "user-explicit-ios-appstore-sofort-fix-bugs-only",
+      "reason": "Nutzer: iOS-App hängt weiter (Scroll/Tabs/Reload/schwarz). Sofort wie Besucher-App, live pushen. Kein Design/Schrift/Logo.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift",
+        "ios/DarAlTawhid/DarAlTawhid.xcodeproj/project.pbxproj",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js"
+      ],
+      "expiresAt": "2026-09-14T23:59:00.000Z"
+    },
+    {
+      "id": "cloudflare-status-push-cost-trap-2026-09-10",
+      "approvedBy": "user-explicit-branche-cloudfare-aufloesen-kostenfalle",
+      "reason": "Nutzer: Cloudflare-Git-Branche/Minuten-Pushes sind Kostenfalle und durften nie passieren. Status-Commits dürfen keine CF-Builds auslösen; Secret-Watchdog nicht alle paar Minuten wrangler-deployen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "cloudflare/worker.js",
+        "wrangler.toml",
+        ".github/workflows/push-worker-secret-watchdog.yml",
+        "content/admin/post-push-hang-lock.json",
+        "scripts/post-push-hang-guard.js",
+        "AGENTS.md"
+      ],
+      "expiresAt": "2026-09-12T23:59:00.000Z"
+    },
+    {
+      "id": "post-push-hang-lock-2026-09-10",
+      "approvedBy": "user-explicit-nie-haengen-autonom-sofort-reparieren",
+      "reason": "Nutzer: Beitrags-Push darf nie hängen oder beschädigt bleiben; bei Beschädigung autonom sofort reparieren. Zeiten in Europe/Berlin.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/admin/post-push-hang-lock.json",
+        "scripts/post-push-hang-guard.js",
+        "scripts/send-post-push.js",
+        ".github/workflows/post-push-hang-watchdog.yml",
+        "cloudflare/worker.js",
+        "scripts/push-system-guard.js",
+        "scripts/app-health-check.js",
+        ".github/workflows/canonical-state-guard.yml",
+        ".github/workflows/app-health-check.yml",
+        ".github/workflows/deploy-admin-publisher.yml",
+        "AGENTS.md"
+      ],
+      "expiresAt": "2026-09-12T23:59:00.000Z"
+    },
+    {
+      "id": "visitor-post-push-uuid-fix-2026-09-10",
+      "approvedBy": "user-explicit-es-funktioniert-nichts-ausser-in-der-app",
+      "reason": "Nutzer: Nur der Beitrag ist in der App, Push kommt nicht. GitHub-Post-Push sendet ungültige OneSignal-idempotency_key (kein UUID).",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "scripts/send-post-push.js",
+        "content/posts/",
+        "cloudflare/post-push-admin.js"
+      ],
+      "expiresAt": "2026-09-11T23:59:00.000Z"
+    },
+    {
+      "id": "visitor-posts-deploy-unlock-2026-09-10",
+      "approvedBy": "user-explicit-beitrag-gepostet-push-haengt",
+      "reason": "Nutzer: Beitrag in der Besucher-App gepostet, Push kam nicht. Besucher-Deploy war an posts-index.json durch die globale Sperre blockiert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        ".github/workflows/cloudflare-pages-deploy.yml"
+      ],
+      "expiresAt": "2026-09-11T23:59:00.000Z"
+    },
+    {
+      "id": "push-lanes-hard-lock-live-2026-09-09",
+      "approvedBy": "user-explicit-push-getrennt-sperre-sofort-live",
+      "reason": "Nutzer: Push-Systeme getrennt halten, harte Sperre, Gebets-Push nie ohne Befehl, bei Befehl korrigieren und sofort live.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/admin/push-lanes-lock.json",
+        "scripts/push-lanes-guard.js",
+        "scripts/app-health-check.js",
+        "AGENTS.md",
+        ".github/workflows/canonical-state-guard.yml",
+        ".github/workflows/app-health-check.yml",
+        ".github/workflows/deploy-admin-publisher.yml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "cloudflare/prayer-push-scheduler.js"
+      ],
+      "expiresAt": "2026-09-10T23:59:00.000Z"
+    },
+    {
+      "id": "prayer-push-clock-match-2026-09-09",
+      "approvedBy": "user-explicit-gebetszeiten-push-uhrzeit",
+      "reason": "Nutzer: Gebetszeiten-Pushes kommen nicht und laufen nicht nach der Uhrzeit. Nur diesen Pfad reparieren, sonst nichts umbauen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "cloudflare/prayer-push-scheduler.js"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     },
@@ -4618,6 +4956,49 @@
         "version.json",
         "test/version.json",
         "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "knowledge-first-html-preview-2026-09-12",
+      "approvedBy": "user-explicit-preview-before-test-app",
+      "reason": "Eigenständige scrollbar-interaktive HTML-Vorschau für den wissensorientierten App-Umbau vor jeder Änderung an Test- oder Live-App",
+      "paths": [
+        "assets/previews/wissen-startseite.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "pdf-reader-immediate-repair-2026-09-13",
+      "approvedBy": "user-explicit-pdf-reader-immediate-fix",
+      "reason": "PDF- und Jetzt-lesen-Klicks in Besucher-, iOS- und Test-App wieder lesbar machen, Reader vor Hintergrund-Refresh schützen und Zurücknavigation erhalten",
+      "paths": [
+        "assets/library/library-app.js",
+        "test/assets/library/library-app.js",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "global-push-double-lock-2026-09-13",
+      "approvedBy": "user-explicit-global-push-lock",
+      "reason": "Nutzer-Auftrag: OneSignal und sämtliche Push-Arten global prüfen und gegen jede unbeauftragte Codeänderung mit strenger Doppel-Freigabe sperren",
+      "paths": [
+        "AGENTS.md",
+        "content/admin/push-lanes-lock.json",
+        "scripts/push-lanes-guard.js",
+        "scripts/push-system-guard.js",
+        ".github/workflows/deploy-test-app.yml",
+        ".github/workflows/deploy-test-library-canonical.yml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"

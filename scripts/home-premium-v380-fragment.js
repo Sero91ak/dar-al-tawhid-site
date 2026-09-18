@@ -56,9 +56,7 @@ function renderHomePushSheetOnly(){
   return `<div id="homePushRemindersBackdrop" class="home-push-sheet-backdrop" hidden tabindex="-1"><div class="home-push-sheet" role="dialog" aria-modal="true" aria-labelledby="homePushSheetTitle"><div class="home-push-sheet__head"><h3 id="homePushSheetTitle">Gebets- & Duʿāʾ-Erinnerungen</h3><button type="button" id="homePushRemindersClose" class="home-push-sheet__close" aria-label="Schließen">×</button></div><div class="home-push-sheet__body" id="prayerPushSettingsBody">${renderPrayerReminderSettingsInner()}</div></div></div>`;
 }
 function renderHomeAppStatus(){
-  const sync=homeSyncStatusSummary();
-  const push=homePushStatusCompact();
-  return `<section class="home-v380-app-status" aria-label="App-Status"><button type="button" id="homeAppStatusSync" class="home-v380-app-status__half${sync.state==="update"?" is-update":""}${sync.state==="error"?" is-error":""}" aria-label="${esc(sync.aria)}"><span class="home-v380-app-status__label">App-Status</span><span class="home-v380-app-status__line" id="homeAppStatusSyncLine">${esc(sync.line)}</span></button><button type="button" id="homeAppStatusPush" class="home-v380-app-status__half" aria-label="${esc(push.ariaLabel)}"><span class="home-v380-app-status__label">Erinnerungen</span><span class="home-v380-app-status__line" id="homeAppStatusPushLine">${esc(push.line)}</span></button></section>${renderHomePushSheetOnly()}`;
+  return"";
 }
 function homePostPreviewCard(post,{label="NEUSTER BEITRAG",action="Öffnen"}={}){
   if(!post)return"";

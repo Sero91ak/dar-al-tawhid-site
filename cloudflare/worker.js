@@ -20,6 +20,7 @@ import {
   ensurePrayerSchedulerFresh,
   triggerPrayerWorkflowForSubscription
 } from "./prayer-push-admin.js";
+import { registerNativeIosPush } from "./ios-native-push-register.js";
 import {
   readDailyPushStatus,
   readDailyPushConfig,
@@ -198,6 +199,12 @@ export default {
       if (url.pathname === "/api/jummah/status" && request.method === "GET") {
         const result = await readJummahPushStatus(env, githubGet, base64ToUtf8);
         return json(result, cors, 200);
+      }
+
+      if (url.pathname === "/api/prayer/register-native" && request.method === "POST") {
+        const input = await request.json().catch(() => ({}));
+        const result = await registerNativeIosPush(env, input);
+        return json(result, cors, result.ok ? 200 : 503);
       }
 
       if (url.pathname === "/api/prayer/schedule-now" && request.method === "POST") {
@@ -1784,6 +1791,19 @@ async function publishNewsUpdate(env, input) {
     ttlHours: Number.isFinite(ttlHours) && ttlHours > 0 ? ttlHours : 24,
     visible: input.visible === false ? false : true
   };
+  if (item.nav === "appstore") {
+    item.type = item.type || "app";
+    item.badge = item.badge || "Update";
+    if (!/^https?:\/\//i.test(String(item.value || ""))) {
+      item.value = "https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753";
+    }
+    item.popup = input.popup !== false;
+    item.popupTitle = String(input.popupTitle || "App-Update bereit").trim();
+    item.popupButton = String(input.popupButton || "Jetzt aktualisieren").trim();
+    item.push = input.push !== false;
+    item.pushTitle = String(input.pushTitle || "DĀR AL TAWḤĪD Update bereit").trim();
+    item.pushText = String(input.pushText || "Die App wurde aktualisiert. Bitte jetzt im App Store updaten, damit alles wieder korrekt funktioniert.").trim();
+  }
   const freshItems = items
     .filter((entry) => entry && entry.id !== id)
     .filter((entry) => {
@@ -1814,7 +1834,9 @@ async function publishNewsUpdate(env, input) {
       title,
       text,
       nav: item.nav,
-      value: item.value || ""
+      value: item.value || "",
+      pushTitle: item.pushTitle || input.pushTitle || "",
+      pushText: item.pushText || input.pushText || ""
     });
   }
 
@@ -2037,8 +2059,26 @@ async function githubGet(env, owner, repo, path, branch) {
   return data;
 }
 
+const GITHUB_SKIP_CI_PATHS = [
+  "content/admin/pending-pushes.json",
+  "content/admin/prayer-push-status.json",
+  "content/admin/daily-push-status.json",
+  "content/admin/jummah-push-status.json",
+  "content/admin/post-push-log.json",
+  "content/admin/telegram-posts.json"
+];
+
+function githubCommitMessageForPath(filePath, message) {
+  const rel = trimSlashes(filePath);
+  const skip = GITHUB_SKIP_CI_PATHS.includes(rel) || rel.startsWith("content/admin/push-triggers/");
+  const text = String(message || "update").trim();
+  if (!skip || /\[skip ci\]/i.test(text)) return text;
+  return `${text} [skip ci]`;
+}
+
 async function githubPut(env, owner, repo, path, content, message, branch, sha) {
-  const body = { message, content: utf8ToBase64(content), branch };
+  const commitMessage = githubCommitMessageForPath(path, message);
+  const body = { message: commitMessage, content: utf8ToBase64(content), branch };
   if (sha) body.sha = sha;
   const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponentPath(path)}`, {
     method: "PUT",
@@ -3132,14 +3172,15 @@ async function processPendingPushUntilLive(env, record, options = {}) {
     }
   }
 
-  await writePendingPushStatus(env, postId, {
-    lastCheckAt: new Date().toISOString(),
-    liveCheck,
-    attempts: liveCheck.attempts,
-    lastError: liveCheck.ok ? "" : liveCheck.diagnosis,
-    lastRepair: repair || existing?.lastRepair || null,
-    status: "pending"
-  });
+    await writePendingPushStatus(env, postId, {
+      lastCheckAt: new Date().toISOString(),
+      liveCheck,
+      attempts: liveCheck.attempts,
+      lastError: liveCheck.ok ? "" : liveCheck.diagnosis,
+      lastRepair: repair || existing?.lastRepair || null,
+      status: "pending"
+    });
+    // POST_PUSH_HANG_GUARD: pending bleibt pending; Hang-Watchdog + Cron reparieren autonom.
 
   if (!liveCheck.ok) {
     return { sent: false, pending: true, waitingForLive: true, liveCheck, repair, reason: liveCheck.diagnosis };
@@ -3412,13 +3453,18 @@ function buildNewsPushUrl(env, { newsId, nav, value }) {
   const id = String(newsId || "").trim();
   const targetNav = String(nav || "").trim();
   const targetValue = String(value || "").trim();
+  if (/^https?:\/\//i.test(targetValue) && /apps\.apple\.com/i.test(targetValue)) return targetValue;
+  if (targetNav === "appstore") {
+    if (/^https?:\/\//i.test(targetValue)) return targetValue;
+    return "https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753";
+  }
   if (targetNav && targetValue && targetNav !== "news-detail") {
     return `${site}/#${targetNav}/${encodeURIComponent(targetValue)}`;
   }
   return `${site}/#news-detail/${encodeURIComponent(id || "news")}`;
 }
 
-async function sendNewsPush(env, { newsId, title, text, nav, value }) {
+async function sendNewsPush(env, { newsId, title, text, nav, value, pushTitle, pushText }) {
   const apiKey = oneSignalApiKey(env);
   const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
   if (!apiKey) {
@@ -3428,8 +3474,8 @@ async function sendNewsPush(env, { newsId, title, text, nav, value }) {
     return { sent: false, reason: "OneSignal App-ID fehlt" };
   }
 
-  const pushTitle = String(title || "Neu im Fokus").trim();
-  const pushMessage = newsPushBody(text);
+  const resolvedTitle = String(pushTitle || title || "Neu im Fokus").trim();
+  const pushMessage = newsPushBody(pushText || text);
   const url = buildNewsPushUrl(env, { newsId, nav, value });
   const site = siteOrigin(env);
   const icon = `${site}/notification-icon-192.png?v=3`;
@@ -3446,7 +3492,7 @@ async function sendNewsPush(env, { newsId, title, text, nav, value }) {
   const basePayload = {
     app_id: appId,
     target_channel: "push",
-    headings: { en: pushTitle, de: pushTitle },
+    headings: { en: resolvedTitle, de: resolvedTitle },
     contents: { en: pushMessage, de: pushMessage },
     url,
     data: pushData,
@@ -3457,16 +3503,8 @@ async function sendNewsPush(env, { newsId, title, text, nav, value }) {
   };
 
   const attempts = [
-    { ...basePayload, included_segments: ["DAR_PUSH"] },
     { ...basePayload, included_segments: ["Subscribed Users"] },
-    {
-      ...basePayload,
-      filters: [{ field: "tag", key: "dar_push", relation: "=", value: "true" }]
-    },
-    {
-      ...basePayload,
-      filters: [{ field: "tag", key: "post_notifications", relation: "=", value: "true" }]
-    }
+    { ...basePayload, included_segments: ["DAR_PUSH"] }
   ];
 
   let lastError = "Kein Empfänger gefunden";

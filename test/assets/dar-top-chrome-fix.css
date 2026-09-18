@@ -1,0 +1,63 @@
+/* DAR top chrome fix — keep titles readable above page fill (app + test only) */
+html[data-theme] .top-edge-fade,
+html[data-theme] .top-swim-aura,
+html .top-edge-fade,
+html .top-swim-aura,
+#topEdgeFade,
+#topSwimAura{
+  display:none!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  height:0!important;
+  min-height:0!important;
+  max-height:0!important;
+  background:none!important;
+  z-index:-2!important;
+}
+
+.top-shell,
+.header,
+.brand,
+.view-head,
+.settings-page-head{
+  position:relative;
+}
+
+.brand small,
+.eyebrow,
+.view-head .eyebrow,
+.isnad-label{
+  color:#e2d2a8!important;
+  opacity:1!important;
+  -webkit-text-fill-color:#e2d2a8!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.65)!important;
+}
+
+.view-head h2,
+.view h2,
+.settings-page-head h2,
+.home-start-title{
+  color:var(--gold2,#e8c96a)!important;
+  opacity:1!important;
+  -webkit-text-fill-color:var(--gold2,#e8c96a)!important;
+  visibility:visible!important;
+}
+
+.view-desc,
+.settings-page-head .view-desc{
+  color:var(--muted,#cfc4aa)!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+
+.home-v380-app-status,
+.home-push-strip{
+  display:none!important;
+  height:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  overflow:hidden!important;
+  visibility:hidden!important;
+}

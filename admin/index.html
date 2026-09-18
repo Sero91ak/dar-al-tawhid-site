@@ -26,8 +26,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <script>
 (function(){
-  var ADMIN_SW_CACHE="dar-admin-stats-v72";
-  var MIG_KEY="darAdminSwFixV31";
+  var ADMIN_SW_CACHE="dar-admin-stats-v75";
+  var MIG_KEY="darAdminSwFixV32";
   var RELOAD_KEY="darAdminSwReloadBudget";
   if(!location.pathname.startsWith("/admin"))return;
   function cleanCaches(){
@@ -433,6 +433,27 @@ button{cursor:pointer}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:0 0 10px}
 .section-head h3{margin:0;font-family:var(--serif);font-size:22px;color:var(--gold)}
 .section-head span{color:var(--muted);font-size:11px;font-weight:850;white-space:nowrap}
+.kennwort-page{display:grid;gap:10px}
+.kennwort-page .section-head{margin:0}
+.kennwort-intro{margin:0;color:var(--muted);font-size:11.5px;line-height:1.45}
+.kennwort-search{width:100%;min-height:40px;border-radius:12px;border:1px solid rgba(239,215,142,.18);background:rgba(0,0,0,.22);color:#fff7df;padding:0 12px;font-size:13px}
+.kennwort-list{border:1px solid rgba(239,215,142,.16);border-radius:16px;overflow:hidden;background:rgba(4,8,14,.55)}
+.kennwort-sec{padding:11px 14px 6px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:900}
+.kennwort-item{border-top:1px solid rgba(239,215,142,.08)}
+.kennwort-item:first-child{border-top:0}
+.kennwort-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;padding:11px 14px;margin:0;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer}
+.kennwort-head b{display:block;font-family:var(--serif);font-size:16px;line-height:1.2;color:#fff7df;font-weight:700}
+.kennwort-head small{display:block;margin-top:3px;color:var(--soft);font-size:10.5px;line-height:1.35;font-weight:700}
+.kennwort-meta{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.kennwort-dot{width:7px;height:7px;border-radius:99px;background:rgba(255,255,255,.18)}
+.kennwort-dot.on{background:var(--gold);box-shadow:0 0 10px rgba(239,215,142,.45)}
+.kennwort-chevron{color:var(--gold);font-size:12px;font-weight:900}
+.kennwort-item.is-open .kennwort-chevron{transform:rotate(90deg)}
+.kennwort-body{display:none;padding:0 14px 12px}
+.kennwort-item.is-open .kennwort-body{display:grid;gap:8px}
+.kennwort-value{width:100%;min-height:38px;border-radius:10px;border:1px solid rgba(239,215,142,.18);background:rgba(0,0,0,.28);color:#fff7df;padding:8px 10px;font-size:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.kennwort-tools{display:flex;gap:7px}
+.kennwort-tools .btn{flex:1;min-height:36px;font-size:11px}
 .rank-list{display:grid;gap:9px}
 .rank-card{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:12px;align-items:center;border:1px solid var(--line2);border-radius:15px;padding:11px;background:linear-gradient(145deg,rgba(12,24,39,.90),rgba(6,8,10,.94));text-align:left;color:inherit;width:100%}
 .rank-num{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:rgba(239,215,142,.10);border:1px solid rgba(239,215,142,.20);color:var(--gold);font-weight:950}
@@ -630,6 +651,15 @@ main#panel.panel{
 .quiz-admin-export-grid{display:flex;flex-wrap:wrap;gap:8px}
 @media(max-width:900px){.quiz-admin-split{grid-template-columns:1fr}}
 </style>
+
+<style id="dar-admin-top-chrome-fix">
+/* same readability fix as web/test: top titles never drown in page fill */
+.topbar,.brand,.admin-cover,.hero-title,.login{position:relative!important;z-index:5!important}
+.brand h1,.login h2,.admin-cover h2,.hero-title h2{color:var(--gold,#efd78e)!important;opacity:1!important;visibility:visible!important;-webkit-text-fill-color:var(--gold,#efd78e)!important;text-shadow:0 1px 2px rgba(0,0,0,.55)!important}
+.brand p,.login p,.admin-cover p,.hero-title p,.hint{color:#d7c9a8!important;opacity:1!important;visibility:visible!important}
+.tab,.chip{opacity:1!important}
+</style>
+
 </head>
 <body>
 <div class="app">
@@ -638,7 +668,7 @@ main#panel.panel{
       <img src="/admin/admin-icon-192.png" alt="" width="48" height="48">
       <div>
         <h1>DAR Admin</h1>
-        <p><span class="status-dot"></span>Command Center · Admin v58</p>
+        <p><span class="status-dot"></span>Command Center · Admin v61</p>
       </div>
     </div>
     <div class="toolbar">
@@ -662,6 +692,7 @@ main#panel.panel{
 <script src="/admin/live-edit.js?v=1"></script>
 <link rel="stylesheet" href="/admin/library-admin.css?v=14">
 <link rel="stylesheet" href="/admin/live-edit.css?v=1">
+<link rel="stylesheet" href="/admin/dar-admin-top-chrome-fix.css?v=4"><!-- DAR_ADMIN_TOP_CHROME_FIX -->
 <script>
 window.DAR_ANALYTICS_CONFIG={
   supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
@@ -678,12 +709,13 @@ const DEFAULT_WORKER_PUBLISH_URL="https://dar-admin-publisher.sero91ak.workers.d
 const WORKER_PUBLISH_URL_KEY="darAdminWorkerPublishUrlV1";
 const WORKER_SECRET_KEY="darAdminWorkerSecretV1";
 const ADMIN_DRAFT_KEY="darAdminDraftV1";
-const ADMIN_BUILD="2026-08-22-admin-hang-fix";
+const ADMIN_BUILD="2026-09-10-kennwort-list";
 const ADMIN_PLAN_KEY="darAdminPlannedPostsV1";
 const ADMIN_NEWS_KEY="darAdminNewsDraftsV1";
 const ADMIN_REPORTS_KEY="darAdminReportsV1";
 const ADMIN_USERS_KEY="darAdminUsersV1";
-const ADMIN_TAB_ORDER_KEY="darAdminTabOrderV3";
+const ADMIN_TAB_ORDER_KEY="darAdminTabOrderV4";
+const ADMIN_KENNWORT_VAULT_KEY="darAdminKennwortVaultV1";
 const ADMIN_PREVIEW_SIZE_KEY="darAdminPreviewSizeV1";
 const ADMIN_LAST_PUSH_CTX_KEY="darAdminLastPublishPushV1";
 const ADMIN_PUBLISH_TRACK_KEY="darAdminPublishTrackV1";
@@ -696,6 +728,7 @@ const DEFAULT_ADMIN_TABS=[
   ["feed","Feed / Im Fokus"],
   ["bibliothek","Bibliothek"],
   ["kurzlinks","Kurzlinks"],
+  ["kennwoerter","Kennwörter"],
   ["settings","Einstellungen"],
   ["tech","Technik"],
   ["besucher","Besucher"],
@@ -726,7 +759,7 @@ let newsSearchQuery="",newsFilter="live",editingNewsId=null;
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function adminEditableTarget(target){return!!(target&&target.closest&&target.closest("input,textarea,select,button,a,label,[contenteditable='true'],.admin-form-grid,.upload-grid,.push-test-controls,.login"))}
 function adminIsEditing(){
-  if(currentTab==="bibliothek"||currentTab==="live-edit")return true;
+  if(currentTab==="bibliothek"||currentTab==="live-edit"||currentTab==="kennwoerter")return true;
   const active=document.activeElement;
   const tag=active&&active.tagName?active.tagName.toLowerCase():"";
   if(window.DARLibraryAdmin&&typeof window.DARLibraryAdmin.isLibraryBusy==="function"&&window.DARLibraryAdmin.isLibraryBusy())return true;
@@ -738,7 +771,138 @@ function cfg(){return window.DAR_ANALYTICS_CONFIG||{}}
 function hasSupabase(){const c=cfg();return !!(String(c.supabaseUrl||"").trim()&&String(c.supabaseKey||"").trim())}
 function headers(){const key=String(cfg().supabaseKey||"").trim();return{apikey:key,Authorization:"Bearer "+key}}
 function readAuth(){try{const raw=localStorage.getItem(AUTH_KEY);if(!raw)return false;const data=JSON.parse(raw);if(!data||!data.ok)return false;if(Date.now()-Number(data.ts||0)>AUTH_TTL_MS){localStorage.removeItem(AUTH_KEY);return false}return true}catch(e){return false}}
-function setAuth(on){authed=!!on;try{if(on)localStorage.setItem(AUTH_KEY,JSON.stringify({ok:true,ts:Date.now()}));else localStorage.removeItem(AUTH_KEY)}catch(e){}}
+let kennwortVaultUnlocked=false;
+let kennwortOpenId="";
+let kennwortQuery="";
+let kennwortComposerOpen=false;
+const KENNWORT_VAULT_ALIASES={
+  "github-worker-token":"github-token",
+  "github-onesignal-key":"onesignal-api-key",
+  "github-telegram-token":"telegram-bot-token",
+  "github-cf-token":"cloudflare-api-token",
+  "github-cf-account":"cloudflare-account-id"
+};
+const KENNWORT_LIVE_IDS=new Set(["admin-pin","site-url","worker-url","worker-health-url","supabase-url","supabase-anon","onesignal-app-id","github-repo"]);
+function setAuth(on){authed=!!on;if(!on){kennwortVaultUnlocked=false;kennwortOpenId="";kennwortComposerOpen=false}try{if(on)localStorage.setItem(AUTH_KEY,JSON.stringify({ok:true,ts:Date.now()}));else localStorage.removeItem(AUTH_KEY)}catch(e){}}
+function loadKennwortVault(){
+  try{
+    const data=JSON.parse(localStorage.getItem(ADMIN_KENNWORT_VAULT_KEY)||"{}");
+    const vault=data&&typeof data==="object"?data:{entries:{}};
+    if(!vault.entries||typeof vault.entries!=="object")vault.entries={};
+    let changed=false;
+    Object.keys(KENNWORT_VAULT_ALIASES).forEach(oldId=>{
+      const nextId=KENNWORT_VAULT_ALIASES[oldId];
+      if(!vault.entries[oldId])return;
+      if(!vault.entries[nextId]||!String(vault.entries[nextId].value||"").trim())vault.entries[nextId]=vault.entries[oldId];
+      delete vault.entries[oldId];
+      changed=true;
+    });
+    KENNWORT_LIVE_IDS.forEach(id=>{
+      if(vault.entries[id]){delete vault.entries[id];changed=true}
+    });
+    if(vault.entries["worker-secret"]){
+      const secret=String(vault.entries["worker-secret"].value||"").trim();
+      if(secret&&!savedWorkerSecret())setSavedWorkerSecret(secret);
+      delete vault.entries["worker-secret"];
+      changed=true;
+    }
+    if(changed)saveKennwortVault(vault);
+    return vault;
+  }catch(e){return{entries:{}}}
+}
+function saveKennwortVault(vault){
+  try{localStorage.setItem(ADMIN_KENNWORT_VAULT_KEY,JSON.stringify(vault||{entries:{}}))}catch(e){}
+}
+function kennwortHealthFlag(key){
+  const h=workerPublishHealth||{};
+  return h[key]===true;
+}
+function kennwortBuiltinCatalog(){
+  /* Agent: neue Passwörter, Tokens, IPs, Keywords nur hier — ein Slot, aktueller Wert, alten ersetzen. */
+  const c=cfg();
+  return [
+    {id:"admin-pin",group:"Admin-App",label:"Admin-Login",hint:"Aktuelles Command-Center-Passwort.",live:true,get:()=>String(c.adminPin||"")},
+    {id:"site-url",group:"Admin-App",label:"App-Adresse",hint:"Öffentliche Domain.",live:true,get:()=>SITE_ORIGIN},
+    {id:"worker-url",group:"Cloudflare Worker",label:"Publish-URL",hint:"Nur diese URL gilt zum Veröffentlichen.",live:true,get:()=>workerPublishUrl()},
+    {id:"worker-health-url",group:"Cloudflare Worker",label:"Health-URL",hint:"Zeigt, ob Secrets am Worker gesetzt sind.",live:true,get:()=>workerHealthUrl()},
+    {id:"worker-secret",group:"Cloudflare Worker",label:"ADMIN_PUBLISH_SECRET",hint:"Ein Worker-Passwort. GitHub-Secret gleichen Namens.",githubName:"ADMIN_PUBLISH_SECRET",workerFlag:"hasAdminSecret",get:()=>savedWorkerSecret()},
+    {id:"supabase-url",group:"Supabase",label:"Projekt-URL",hint:"Statistik und Quiz.",live:true,get:()=>String(c.supabaseUrl||"")},
+    {id:"supabase-anon",group:"Supabase",label:"Anon-Key",hint:"Öffentlicher App-Key, kein Service-Role.",live:true,get:()=>String(c.supabaseKey||"")},
+    {id:"onesignal-app-id",group:"OneSignal",label:"App-ID",hint:"Aktuelle Besucher-Push-App.",live:true,get:()=>"786d7cd6-0455-4434-ab14-0c10a7bc6b1e"},
+    {id:"onesignal-api-key",group:"OneSignal",label:"ONESIGNAL_API_KEY_NEW",hint:"Nur dieser Key gilt. Alter ONESIGNAL_API_KEY ist Fallback, nicht extra merken.",githubName:"ONESIGNAL_API_KEY_NEW",workerFlag:"hasOneSignalKey"},
+    {id:"github-repo",group:"GitHub",label:"Repository",hint:"Aktuelles Repo.",live:true,get:()=>"Sero91ak/dar-al-tawhid-site"},
+    {id:"github-token",group:"GitHub",label:"GITHUB_TOKEN",hint:"Ein Token: Actions-Name WORKER_GITHUB_TOKEN, am Worker GITHUB_TOKEN.",githubName:"WORKER_GITHUB_TOKEN",workerFlag:"hasGithubToken"},
+    {id:"telegram-bot-token",group:"Telegram",label:"TELEGRAM_BOT_TOKEN",hint:"Bot für Kanalversand.",githubName:"TELEGRAM_BOT_TOKEN",workerFlag:"hasTelegramToken"},
+    {id:"telegram-channel-id",group:"Telegram",label:"TELEGRAM_CHANNEL_ID",hint:"Aktueller Zielkanal.",githubName:"TELEGRAM_CHANNEL_ID",get:()=>String((workerPublishHealth&&workerPublishHealth.telegramChannel)||"")},
+    {id:"telegram-channel-username",group:"Telegram",label:"TELEGRAM_CHANNEL_USERNAME",hint:"Kanal-Benutzername.",githubName:"TELEGRAM_CHANNEL_USERNAME"},
+    {id:"telegram-topics-chat-id",group:"Telegram",label:"TELEGRAM_TOPICS_CHAT_ID",hint:"Forum/Topics. TELEGRAM_FORUM_CHAT_ID ist nur Fallback.",githubName:"TELEGRAM_TOPICS_CHAT_ID",get:()=>String((workerPublishHealth&&workerPublishHealth.telegramTopicsChatId)||"")},
+    {id:"cloudflare-api-token",group:"Cloudflare",label:"CLOUDFLARE_API_TOKEN",hint:"Wrangler-Deploy. Ein Token.",githubName:"CLOUDFLARE_API_TOKEN"},
+    {id:"cloudflare-account-id",group:"Cloudflare",label:"CLOUDFLARE_ACCOUNT_ID",hint:"Cloudflare-Konto.",githubName:"CLOUDFLARE_ACCOUNT_ID"},
+    {id:"video-fal-key",group:"KI-Video-Studio",label:"FAL_KEY",hint:"Bild/Video-Modell. FAL_API_KEY ist nur Fallback.",githubName:"FAL_KEY",workerFlag:"videoStudioFal"},
+    {id:"video-elevenlabs-key",group:"KI-Video-Studio",label:"ELEVENLABS_API_KEY",hint:"Stimme im Video-Studio.",githubName:"ELEVENLABS_API_KEY",workerFlag:"videoStudioVoice"},
+    {id:"video-elevenlabs-voice",group:"KI-Video-Studio",label:"ELEVENLABS_VOICE_ID",hint:"Aktuelle Stimme. DAR_MALE_VOICE_ID ist Fallback.",githubName:"ELEVENLABS_VOICE_ID"},
+    {id:"video-shotstack-key",group:"KI-Video-Studio",label:"SHOTSTACK_API_KEY",hint:"Schnitt am Worker.",githubName:"SHOTSTACK_API_KEY",workerFlag:"videoStudioShotstack"},
+    {id:"video-studio-signing",group:"KI-Video-Studio",label:"VIDEO_STUDIO_SIGNING_SECRET",hint:"Signatur der Studio-Jobs.",githubName:"VIDEO_STUDIO_SIGNING_SECRET",workerFlag:"videoStudioSigning"}
+  ];
+}
+function kennwortMatchBuiltin(label,githubName){
+  const needle=String(label||"").trim().toLowerCase();
+  const gh=String(githubName||"").trim().toUpperCase();
+  return kennwortBuiltinCatalog().find(item=>{
+    if(gh&&String(item.githubName||"").toUpperCase()===gh)return true;
+    const names=[item.id,item.label,item.githubName].filter(Boolean).map(x=>String(x).toLowerCase());
+    return names.includes(needle);
+  })||null;
+}
+function kennwortMergedRows(){
+  const vault=loadKennwortVault();
+  const entries=vault.entries&&typeof vault.entries==="object"?vault.entries:{};
+  const builtinIds=new Set();
+  const builtin=kennwortBuiltinCatalog().map(item=>{
+    builtinIds.add(item.id);
+    const live=typeof item.get==="function"?String(item.get()||"").trim():"";
+    const overlay=(!item.live&&entries[item.id]&&String(entries[item.id].value||"").trim())?String(entries[item.id].value).trim():"";
+    const value=live||overlay;
+    const workerSet=item.workerFlag?kennwortHealthFlag(item.workerFlag):false;
+    return {...item,value,custom:false,hasValue:!!value,workerSet};
+  });
+  const custom=Object.keys(entries).filter(id=>!builtinIds.has(id)&&!KENNWORT_VAULT_ALIASES[id]).map(id=>{
+    const row=entries[id]||{};
+    const matched=kennwortMatchBuiltin(row.label,row.githubName);
+    if(matched)return null;
+    return{
+      id,
+      group:row.group||"Eigene Einträge",
+      label:row.label||id,
+      hint:row.hint||"Nur auf diesem Gerät.",
+      value:String(row.value||""),
+      custom:true,
+      hasValue:!!String(row.value||"").trim(),
+      workerSet:false
+    };
+  }).filter(Boolean);
+  return builtin.concat(custom);
+}
+function kennwortGroupedRows(){
+  const q=String(kennwortQuery||"").trim().toLowerCase();
+  const groups=[];
+  const map=new Map();
+  kennwortMergedRows().forEach(row=>{
+    if(q){
+      const hay=[row.group,row.label,row.hint,row.githubName,row.id].filter(Boolean).join(" ").toLowerCase();
+      if(!hay.includes(q))return;
+    }
+    const key=row.group||"Weitere";
+    if(!map.has(key)){map.set(key,[]);groups.push(key)}
+    map.get(key).push(row);
+  });
+  return groups.map(name=>({name,rows:map.get(name)}));
+}
+function applyKennwortLive(id,value){
+  const v=String(value||"").trim();
+  if(id==="worker-secret")setSavedWorkerSecret(v);
+  if(id==="worker-url")saveWorkerPublishUrl(v);
+}
 function checkPin(pin){const want=String(cfg().adminPin||"").trim();const got=String(pin||"").trim();return want&&got.toLowerCase()===want.toLowerCase()}
 function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),1800)}
 function loadLocalDraft(){try{const d=JSON.parse(localStorage.getItem(ADMIN_DRAFT_KEY)||"{}");draftMarkdown=d.markdown||draftMarkdown;draftFilename=d.filename||draftFilename;draftStatus=d.status||draftStatus;draftPostMode=d.postMode==="slide"?"slide":"single"}catch(e){}}
@@ -887,6 +1051,13 @@ function newsSummaryLabel(){
   if(drafts)return `${drafts} Entwurf`;
   return "Keine Meldung";
 }
+function formatAdminBerlin(value, withYear=false){
+  const d=value instanceof Date?value:new Date(value);
+  if(!Number.isFinite(d.getTime()))return "—";
+  const opts={timeZone:"Europe/Berlin",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"};
+  if(withYear)opts.year="numeric";
+  return d.toLocaleString("de-DE",opts);
+}
 function newsItemExpiresAt(item){
   const expires=Date.parse(item?.expiresAt||"");
   if(Number.isFinite(expires))return expires;
@@ -898,11 +1069,13 @@ function newsItemExpiresAt(item){
 function newsDurationHours(value){
   const v=String(value||"72 Stunden");
   if(v.includes("manuell"))return 720;
+  if(v.includes("336")||v.includes("14 Tage"))return 336;
   if(v.includes("72"))return 72;
   return 24;
 }
 function newsDurationFromItem(item){
   if(!item)return "72 Stunden";
+  if(Number(item.ttlHours||0)===336)return "14 Tage / 336 Stunden";
   if(Number(item.ttlHours||0)>=168||String(item.until||"").includes("manuell"))return "bis manuell deaktiviert";
   if(Number(item.ttlHours||24)===72)return "72 Stunden";
   return "24 Stunden";
@@ -936,7 +1109,7 @@ function formatNewsUntil(item){
   const diff=exp-Date.now();
   if(diff<=0)return "abgelaufen";
   const hours=Math.ceil(diff/3600000);
-  if(hours>=48)return `bis ${new Date(exp).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}`;
+  if(hours>=48)return `bis ${formatAdminBerlin(exp)}`;
   return `noch ~${hours} Std.`;
 }
 async function fetchLiveNewsItems({force=false}={}){
@@ -1098,6 +1271,271 @@ function workerEndpoint(path){
 }
 function savedWorkerSecret(){try{return localStorage.getItem(WORKER_SECRET_KEY)||""}catch(e){return""}}
 function setSavedWorkerSecret(secret){try{if(secret)localStorage.setItem(WORKER_SECRET_KEY,secret);else localStorage.removeItem(WORKER_SECRET_KEY)}catch(e){}}
+const ADMIN_SECRET_UNLOCK_CRED_KEY="darAdminSecretUnlockCredV1";
+const ADMIN_SECRET_UNLOCK_USER_KEY="darAdminSecretUnlockUserV1";
+function adminSecretBytesToB64(bytes){const u=new Uint8Array(bytes);let s="";for(let i=0;i<u.length;i++)s+=String.fromCharCode(u[i]);return btoa(s)}
+function adminSecretB64ToBytes(s){const bin=atob(s);const out=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)out[i]=bin.charCodeAt(i);return out}
+function currentWorkerSecretValue(){return String(document.getElementById("workerSecretInput")?.value||savedWorkerSecret()||"").trim()}
+async function copyAdminText(text){
+  const value=String(text||"");
+  if(!value)return false;
+  try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(value);return true}}catch(e){}
+  try{
+    const ta=document.createElement("textarea");
+    ta.value=value;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.left="-9999px";
+    document.body.appendChild(ta);ta.select();
+    const ok=document.execCommand("copy");
+    ta.remove();
+    return ok;
+  }catch(e){return false}
+}
+async function unlockAdminWorkerSecretView(){
+  const hasWebAuthn=typeof window.PublicKeyCredential==="function"&&window.isSecureContext&&location.protocol==="https:";
+  let platform=false;
+  if(hasWebAuthn){
+    try{platform=await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable()}catch(e){platform=false}
+  }
+  if(!platform){
+    return confirm("Kennwort auf diesem Gerät anzeigen oder kopieren?");
+  }
+  const challenge=crypto.getRandomValues(new Uint8Array(32));
+  const rpId=location.hostname;
+  try{
+    let credId="";
+    try{credId=localStorage.getItem(ADMIN_SECRET_UNLOCK_CRED_KEY)||""}catch(e){}
+    if(!credId){
+      let userId;
+      try{userId=localStorage.getItem(ADMIN_SECRET_UNLOCK_USER_KEY)||""}catch(e){}
+      if(!userId){
+        userId=adminSecretBytesToB64(crypto.getRandomValues(new Uint8Array(16)));
+        try{localStorage.setItem(ADMIN_SECRET_UNLOCK_USER_KEY,userId)}catch(e){}
+      }
+      const cred=await navigator.credentials.create({
+        publicKey:{
+          challenge,
+          rp:{name:"DAR Admin",id:rpId},
+          user:{id:adminSecretB64ToBytes(userId),name:"admin-kennwort-vault",displayName:"Kennwörter"},
+          pubKeyCredParams:[{type:"public-key",alg:-7},{type:"public-key",alg:-257}],
+          authenticatorSelection:{authenticatorAttachment:"platform",userVerification:"required",residentKey:"preferred"},
+          timeout:60000
+        }
+      });
+      if(!cred||!cred.rawId)return false;
+      try{localStorage.setItem(ADMIN_SECRET_UNLOCK_CRED_KEY,adminSecretBytesToB64(cred.rawId))}catch(e){}
+      return true;
+    }
+    const assertion=await navigator.credentials.get({
+      publicKey:{
+        challenge,
+        rpId,
+        allowCredentials:[{type:"public-key",id:adminSecretB64ToBytes(credId),transports:["internal"]}],
+        userVerification:"required",
+        timeout:60000
+      }
+    });
+    return !!assertion;
+  }catch(e){
+    if(e&&(e.name==="NotAllowedError"||e.name==="AbortError"))return false;
+    return confirm("Face ID / Geräte-Code nicht verfügbar. Kennwort trotzdem anzeigen?");
+  }
+}
+async function ensureKennwortVaultUnlocked(){
+  if(kennwortVaultUnlocked)return true;
+  const ok=await unlockAdminWorkerSecretView();
+  if(ok)kennwortVaultUnlocked=true;
+  return ok;
+}
+function bindWorkerSecretReveal(){
+  const input=document.getElementById("workerSecretInput");
+  const revealBtn=document.getElementById("revealWorkerSecretBtn");
+  const copyBtn=document.getElementById("copyWorkerSecretBtn");
+  if(revealBtn){
+    revealBtn.onclick=async()=>{
+      if(!input)return;
+      const showing=input.type==="text";
+      if(showing){
+        input.type="password";
+        revealBtn.textContent="Anzeigen";
+        return;
+      }
+      const ok=await unlockAdminWorkerSecretView();
+      if(!ok){toast("Nicht entsperrt");return}
+      const secret=currentWorkerSecretValue();
+      if(!secret){toast("Kein Worker-Passwort gespeichert");return}
+      input.value=secret;
+      input.type="text";
+      input.focus();
+      input.select();
+      revealBtn.textContent="Verbergen";
+    };
+  }
+  if(copyBtn){
+    copyBtn.onclick=async()=>{
+      const ok=await unlockAdminWorkerSecretView();
+      if(!ok){toast("Nicht entsperrt");return}
+      const secret=currentWorkerSecretValue();
+      if(!secret){toast("Kein Worker-Passwort gespeichert");return}
+      const copied=await copyAdminText(secret);
+      toast(copied?"Worker-Passwort kopiert":"Kopieren nicht möglich — bitte Anzeigen und markieren");
+    };
+  }
+}
+function renderKennwoerter(){
+  const groups=kennwortGroupedRows();
+  const rows=kennwortMergedRows();
+  const known=rows.filter(r=>r.hasValue||r.workerSet).length;
+  return `<section class="kennwort-page">
+    <div class="section-head"><h3>Kennwörter</h3><span>Face ID · ${known} aktuell</span></div>
+    <p class="kennwort-intro">Eine Liste, ein gültiger Wert je Eintrag. Antippen öffnet. Anzeigen und Kopieren nach Face ID. Tokens aus GitHub/Cloudflare stehen nicht im Code — nur lokal, überschreibt den alten Wert.</p>
+    <input class="kennwort-search" id="kennwortSearch" type="search" placeholder="Suchen…" value="${esc(kennwortQuery)}" autocomplete="off">
+    <div class="kennwort-list">
+      ${groups.map(group=>`<div class="kennwort-sec">${esc(group.name)}</div>${group.rows.map(row=>{
+        const open=kennwortOpenId===row.id;
+        const shown=open&&kennwortVaultUnlocked;
+        const status=row.hasValue?"auf diesem Gerät":(row.workerSet?"am Worker gesetzt":"noch leer");
+        const display=shown?(row.value||""):(row.hasValue?"••••••••••••":"");
+        return `<div class="kennwort-item${open?" is-open":""}" data-kennwort-id="${esc(row.id)}">
+          <button class="kennwort-head" type="button" data-kennwort-open="${esc(row.id)}">
+            <span><b>${esc(row.label)}</b><small>${esc(status)}${row.githubName?" · "+row.githubName:""}</small></span>
+            <span class="kennwort-meta"><span class="kennwort-dot${row.hasValue||row.workerSet?" on":""}"></span><span class="kennwort-chevron">›</span></span>
+          </button>
+          <div class="kennwort-body">
+            <input class="kennwort-value" data-kennwort-input="${esc(row.id)}" type="${shown?"text":"password"}" value="${esc(display)}" ${row.live&&row.hasValue?"readonly":""} placeholder="${row.live?"Gilt in der laufenden App":"Aktuellen Wert eintragen"}" autocomplete="off">
+            <div class="kennwort-tools">
+              <button class="btn" type="button" data-kennwort-reveal="${esc(row.id)}">${shown?"Verbergen":"Anzeigen"}</button>
+              <button class="btn primary" type="button" data-kennwort-copy="${esc(row.id)}">Kopieren</button>
+            </div>
+            <div class="kennwort-tools">
+              ${row.live?`<span class="kennwort-intro">Nur der App-Wert gilt.</span>`:`<button class="btn" type="button" data-kennwort-save="${esc(row.id)}">Als aktuell speichern</button>`}
+              ${row.custom?`<button class="btn" type="button" data-kennwort-delete="${esc(row.id)}">Löschen</button>`:""}
+            </div>
+          </div>
+        </div>`;
+      }).join("")}`).join("")}
+      <div class="kennwort-item${kennwortComposerOpen?" is-open":""}">
+        <button class="kennwort-head" type="button" id="kennwortComposerToggle">
+          <span><b>Neuer Eintrag</b><small>Gleicher Name überschreibt den alten Wert</small></span>
+          <span class="kennwort-meta"><span class="kennwort-chevron">›</span></span>
+        </button>
+        <div class="kennwort-body">
+          <input class="field" id="kennwortNewGroup" placeholder="Gruppe" style="margin-bottom:8px">
+          <input class="field" id="kennwortNewLabel" placeholder="Name oder Secret-Name" style="margin-bottom:8px">
+          <input class="field" id="kennwortNewValue" type="password" placeholder="Aktueller Wert" autocomplete="off" style="margin-bottom:8px">
+          <button class="btn primary" id="kennwortAddBtn" type="button">Speichern</button>
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+function bindKennwoerter(){
+  if(currentTab!=="kennwoerter")return;
+  const persist=async(id,value)=>{
+    const row=kennwortMergedRows().find(item=>item.id===id)||{};
+    if(row.live)return;
+    applyKennwortLive(id,value);
+    if(id==="worker-secret"||id==="worker-url")return;
+    const vault=loadKennwortVault();
+    if(!vault.entries)vault.entries={};
+    vault.entries[id]={group:row.group||"Eigene Einträge",label:row.label||id,hint:row.hint||"",githubName:row.githubName||"",value:String(value||"")};
+    saveKennwortVault(vault);
+  };
+  const search=document.getElementById("kennwortSearch");
+  if(search){
+    search.oninput=()=>{
+      kennwortQuery=search.value;
+      const pos=search.selectionStart;
+      renderShell();
+      const next=document.getElementById("kennwortSearch");
+      if(next){next.focus();try{next.setSelectionRange(pos,pos)}catch(e){}}
+    };
+  }
+  document.querySelectorAll("[data-kennwort-open]").forEach(btn=>{
+    btn.onclick=async()=>{
+      const id=btn.getAttribute("data-kennwort-open");
+      if(kennwortOpenId===id){kennwortOpenId="";renderShell();return}
+      const row=kennwortMergedRows().find(item=>item.id===id);
+      if(row&&row.hasValue){
+        const ok=await ensureKennwortVaultUnlocked();
+        if(!ok){toast("Nicht entsperrt");return}
+      }
+      kennwortOpenId=id;
+      kennwortComposerOpen=false;
+      renderShell();
+    };
+  });
+  const composer=document.getElementById("kennwortComposerToggle");
+  if(composer)composer.onclick=()=>{kennwortComposerOpen=!kennwortComposerOpen;if(kennwortComposerOpen)kennwortOpenId="";renderShell()};
+  document.querySelectorAll("[data-kennwort-reveal]").forEach(btn=>{
+    btn.onclick=async()=>{
+      const id=btn.getAttribute("data-kennwort-reveal");
+      if(kennwortOpenId===id&&kennwortVaultUnlocked){kennwortOpenId="";renderShell();return}
+      const ok=await ensureKennwortVaultUnlocked();
+      if(!ok){toast("Nicht entsperrt");return}
+      kennwortOpenId=id;
+      renderShell();
+    };
+  });
+  document.querySelectorAll("[data-kennwort-copy]").forEach(btn=>{
+    btn.onclick=async()=>{
+      const id=btn.getAttribute("data-kennwort-copy");
+      const ok=await ensureKennwortVaultUnlocked();
+      if(!ok){toast("Nicht entsperrt");return}
+      const row=kennwortMergedRows().find(item=>item.id===id);
+      const value=String(row&&row.value||"").trim();
+      if(!value){toast("Kein Wert gespeichert");return}
+      const copied=await copyAdminText(value);
+      toast(copied?"Kopiert":"Kopieren nicht möglich");
+    };
+  });
+  document.querySelectorAll("[data-kennwort-save]").forEach(btn=>{
+    btn.onclick=async()=>{
+      const id=btn.getAttribute("data-kennwort-save");
+      const ok=await ensureKennwortVaultUnlocked();
+      if(!ok){toast("Nicht entsperrt");return}
+      const input=document.querySelector('[data-kennwort-input="'+String(id).replace(/"/g,"")+'"]');
+      const value=String(input&&input.value||"").trim();
+      if(!value||/^•+$/.test(value)){toast("Zuerst Anzeigen oder neuen Wert eintragen");return}
+      await persist(id,value);
+      kennwortOpenId=id;
+      toast("Aktueller Wert gespeichert");
+      renderShell();
+    };
+  });
+  document.querySelectorAll("[data-kennwort-delete]").forEach(btn=>{
+    btn.onclick=()=>{
+      const id=btn.getAttribute("data-kennwort-delete");
+      const vault=loadKennwortVault();
+      if(vault.entries)delete vault.entries[id];
+      saveKennwortVault(vault);
+      if(kennwortOpenId===id)kennwortOpenId="";
+      toast("Eintrag gelöscht");
+      renderShell();
+    };
+  });
+  const addBtn=document.getElementById("kennwortAddBtn");
+  if(addBtn)addBtn.onclick=async()=>{
+    const ok=await ensureKennwortVaultUnlocked();
+    if(!ok){toast("Nicht entsperrt");return}
+    const group=String(document.getElementById("kennwortNewGroup")?.value||"").trim()||"Eigene Einträge";
+    const label=String(document.getElementById("kennwortNewLabel")?.value||"").trim();
+    const value=String(document.getElementById("kennwortNewValue")?.value||"").trim();
+    if(!label||!value){toast("Name und Wert fehlen");return}
+    const matched=kennwortMatchBuiltin(label,label);
+    const id=matched?matched.id:"custom-"+label.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+    if(matched&&matched.live){toast("Dieser Wert gilt in der App — nicht doppelt anlegen");return}
+    const vault=loadKennwortVault();
+    if(!vault.entries)vault.entries={};
+    const row=matched||{group,label,hint:"Nur aktueller Wert.",githubName:""};
+    vault.entries[id]={group:row.group||group,label:row.label||label,hint:row.hint||"",githubName:row.githubName||"",value};
+    applyKennwortLive(id,value);
+    if(id==="worker-secret")delete vault.entries[id];
+    saveKennwortVault(vault);
+    kennwortOpenId=id;
+    kennwortComposerOpen=false;
+    toast(matched?"Überschrieben — nur dieser Wert gilt":"Gespeichert");
+    renderShell();
+  };
+}
 async function fetchDashboard(){
   if(!hasSupabase())throw new Error("Supabase nicht konfiguriert");
   const url=String(cfg().supabaseUrl||"").replace(/\/$/,"");
@@ -1180,7 +1618,7 @@ function rankCard(row,idx,mode="score"){
 }
 function bindRankCards(){document.querySelectorAll(".rank-card[data-href]").forEach(card=>{card.onclick=()=>window.open(card.getAttribute("data-href"),"_blank","noopener")})}
 function enhanceAdminCollapsibles(){
-  if(currentTab==="quellen"||currentTab==="ordner")return;
+  if(currentTab==="quellen"||currentTab==="ordner"||currentTab==="kennwoerter")return;
   document.querySelectorAll("#panel .panel,#panel .hero-card,#panel .preview-box").forEach((card,index)=>{
     if(card.dataset.collapseReady==="1")return;
     if(card.hasAttribute("data-no-collapse"))return;
@@ -2488,7 +2926,7 @@ window.renderLibraryAdminPartial=function(){
   return true;
 };
 function renderShell(){
-  if(currentTab==="bibliothek"||currentTab==="live-edit")stopRefresh();
+  if(currentTab==="bibliothek"||currentTab==="live-edit"||currentTab==="kennwoerter")stopRefresh();
   if(currentTab==="bibliothek"&&window.DARLibraryAdmin&&typeof window.DARLibraryAdmin.isLibraryBusy==="function"&&window.DARLibraryAdmin.isLibraryBusy())return;
   const data=lastData||{live:{},totals:[],updated:new Date()};
   const live=data.live||{},rows=totals();
@@ -2501,7 +2939,7 @@ function renderShell(){
   currentTab=normalizeAdminTab(currentTab);
   if(currentTab==="schedule")currentTab="actions";
   const refreshSec=currentTab==="besucher"?15:30;
-  const body=currentTab==="live-edit"&&window.DARLiveEdit?window.DARLiveEdit.renderLiveEditTab():currentTab==="besucher"?renderVisitors(ctx):currentTab==="quiz-stats"&&window.DARQuizStatsAdmin?window.DARQuizStatsAdmin.renderQuizStatsTab():currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="bibliothek"?(window.DARLibraryAdmin?window.DARLibraryAdmin.renderLibraryTab():'<section class="lib-admin"><p class="lib-admin-category">Bibliothek-Modul wird geladen…</p></section>'):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  const body=currentTab==="kennwoerter"?renderKennwoerter():currentTab==="live-edit"&&window.DARLiveEdit?window.DARLiveEdit.renderLiveEditTab():currentTab==="besucher"?renderVisitors(ctx):currentTab==="quiz-stats"&&window.DARQuizStatsAdmin?window.DARQuizStatsAdmin.renderQuizStatsTab():currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="bibliothek"?(window.DARLibraryAdmin?window.DARLibraryAdmin.renderLibraryTab():'<section class="lib-admin"><p class="lib-admin-category">Bibliothek-Modul wird geladen…</p></section>'):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tab-picker" aria-label="Admin-Bereich wählen">
       <label class="tab-picker-label" for="adminTabSelect">Bereich</label>
@@ -2510,14 +2948,14 @@ function renderShell(){
       </select>
     </nav>
     ${body}
-    <div class="meta-line">Aktualisiert: ${esc(data.updated.toLocaleString("de-DE"))} · Auto-Refresh alle ${refreshSec} Sekunden${currentTab==="besucher"?" · Besucher-Live":""}</div>`;
+    <div class="meta-line">Aktualisiert (Europe/Berlin): ${esc(formatAdminBerlin(data.updated,true))} · Auto-Refresh alle ${refreshSec} Sekunden${currentTab==="besucher"?" · Besucher-Live":""}</div>`;
   bindUi();
   enhanceAdminCollapsibles();
   updateAdminBackButton();
   if(currentTab==="live-edit"&&window.DARLiveEdit)window.DARLiveEdit.bindLiveEditTab();
   if(currentTab==="ordner"&&!ordnerCatalogLoaded&&!ordnerBusy)ensureOrdnerData(false).then(()=>{if(currentTab==="ordner")renderShell()});
   if(currentTab==="quellen"&&!quellenCatalogLoaded&&!quellenCatalogBusy)ensureQuellenCatalog(false).then(()=>{if(currentTab==="quellen")renderShell()});
-  if(currentTab==="quellen"&&!workerPublishHealth)refreshWorkerPublishHealth(true).then(()=>{if(currentTab==="quellen")renderShell()});
+  if((currentTab==="quellen"||currentTab==="kennwoerter")&&!workerPublishHealth)refreshWorkerPublishHealth(true).then(()=>{if(currentTab==="quellen"||currentTab==="kennwoerter")renderShell()});
   if(currentTab==="kurzlinks"&&!shortlinksRegistryLoaded&&!shortlinksRegistryBusy)ensureShortlinksRegistry(false).then(()=>{if(currentTab==="kurzlinks"){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
   if(currentTab==="zakat"&&!zakatAdminLoaded)ensureZakatAdminReady().then(()=>{if(currentTab==="zakat")renderShell()}).catch(()=>{});
   if(currentTab==="feed"&&window.DARFeedAdmin&&!feedLoadedFlag())ensureFeedAdminData(false).then(()=>{if(currentTab==="feed")renderShell()}).catch(()=>{});
@@ -2544,12 +2982,13 @@ function navigateAdmin(tab,{skipStack=false,scrollToBulk=false}={}){
   if(!skipStack)adminNavStack.push(currentTab);
   currentTab=tab;
   restartRefreshInterval();
-  if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"||tab==="ordner"||tab==="quellen"||tab==="kurzlinks"||tab==="zakat"||tab==="feed"||tab==="quiz-stats"){
+  if(tab==="news"||tab==="actions"||tab==="tech"||tab==="start"||tab==="ordner"||tab==="quellen"||tab==="kurzlinks"||tab==="zakat"||tab==="feed"||tab==="quiz-stats"||tab==="kennwoerter"){
     if(tab==="ordner")ensureOrdnerData(false).then(()=>{if(currentTab===tab)renderShell()});
     if(tab==="quellen"){
       refreshWorkerPublishHealth(true).then(()=>{if(currentTab===tab)renderShell()});
       ensureQuellenCatalog(false).then(()=>{if(currentTab===tab)renderShell()});
     }
+    if(tab==="kennwoerter")refreshWorkerPublishHealth(true).then(()=>{if(currentTab===tab)renderShell()});
     if(tab==="kurzlinks")ensureShortlinksRegistry(false).then(()=>{if(currentTab===tab){refreshKurzlinkDraft();renderShell()}}).catch(()=>{});
     if(tab==="zakat")ensureZakatAdminReady().then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
     if(tab==="feed")ensureFeedAdminData(true).then(()=>{if(currentTab===tab)renderShell()}).catch(()=>{});
@@ -2603,9 +3042,10 @@ function renderStart(ctx){
     ${folderCard("④","Ordner","Kategorien sortieren und Texte korrigieren.","ordner","Studio")}
     ${folderCard("⑤","Feed / Im Fokus","Fokus-Inhalte steuern.","feed","Feed")}
     ${folderCard("⑥","Bibliothek","PDFs und Titel verwalten.","bibliothek","Bibliothek")}
-    ${folderCard("⑦","Einstellungen","Worker und Technik.","settings","Admin")}
-    ${folderCard("⑧","Besucher","Live-Zahlen und Aufrufe.","besucher",`${Number(ctx.live.live_now||0)} live`)}
-    ${folderCard("⑨","Quiz-Statistik","Nutzer und Fragen.","quiz-stats","Hinten")}
+    ${folderCard("⑦","Kennwörter","Liste · aktuell gültig.","kennwoerter","Face ID")}
+    ${folderCard("⑧","Einstellungen","Worker und Technik.","settings","Admin")}
+    ${folderCard("⑨","Besucher","Live-Zahlen und Aufrufe.","besucher",`${Number(ctx.live.live_now||0)} live`)}
+    ${folderCard("⑩","Quiz-Statistik","Nutzer und Fragen.","quiz-stats","Hinten")}
   </section>
   <section class="command-grid">
     <div class="command-card"><b>Letzte Veröffentlichung</b><span>${esc(lastPublishLabel())}</span><small>Lokales Admin-Protokoll</small></div>
@@ -2845,7 +3285,7 @@ function filteredNewsItems(){
 function newsManageRow(item){
   const status=newsItemStatus(item);
   const full=String(item.text||"").trim();
-  const created=item.createdAt?new Date(item.createdAt).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"—";
+  const created=item.createdAt?formatAdminBerlin(item.createdAt):"—";
   const canDelete=status!=="gelöscht";
   return `<details class="news-row">
     <summary>
@@ -2870,7 +3310,7 @@ function newsLiveCard(item){
     <div class="news-card-head">
       <span class="news-pill live">Live</span>
       <b>${esc(item.title||"News")}</b>
-      <span class="news-meta">${esc(formatNewsUntil(item))} · ${esc(new Date(item.createdAt||Date.now()).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}))}</span>
+      <span class="news-meta">${esc(formatAdminBerlin(item.createdAt||Date.now()))} · ${esc(formatNewsUntil(item))} · Europe/Berlin</span>
     </div>
     <p class="news-card-text" id="newsLiveText-${esc(item.id)}">${esc(short)}</p>
     ${needsMore?`<button class="btn news-expand-btn" type="button" data-news-live-expand="${esc(item.id)}">Mehr anzeigen</button>`:""}
@@ -2900,7 +3340,15 @@ function renderNewsFormFields(compact){
   const editing=editingNewsId?` · Bearbeitung ${esc(editingNewsId)}`:"";
   return `<div class="admin-form-grid news-form-grid${compact?" news-compose-compact":""}">
       <input class="field" id="newsTitle" placeholder="Kurzer Titel" value="${esc(editItem?.title||"")}">
-      <select class="field" id="newsDuration"><option value="24 Stunden"${newsDurationFromItem(editItem)==="24 Stunden"?" selected":""}>24 Stunden</option><option value="72 Stunden"${newsDurationFromItem(editItem)==="72 Stunden"||!editItem?" selected":""}>72 Stunden</option><option value="bis manuell deaktiviert"${newsDurationFromItem(editItem)==="bis manuell deaktiviert"?" selected":""}>Dauerhaft / manuell</option></select>
+      <select class="field" id="newsDuration"><option value="24 Stunden"${newsDurationFromItem(editItem)==="24 Stunden"?" selected":""}>24 Stunden</option><option value="72 Stunden"${newsDurationFromItem(editItem)==="72 Stunden"||!editItem?" selected":""}>72 Stunden</option><option value="14 Tage / 336 Stunden"${newsDurationFromItem(editItem)==="14 Tage / 336 Stunden"?" selected":""}>14 Tage / 336 Stunden</option><option value="bis manuell deaktiviert"${newsDurationFromItem(editItem)==="bis manuell deaktiviert"?" selected":""}>Dauerhaft / manuell</option></select>
+      <select class="field" id="newsNav">
+        <option value="recent"${(editItem?.nav||"")==="recent"?" selected":""}>Neueste Beiträge</option>
+        <option value="appstore"${!editItem||editItem.nav==="appstore"?" selected":""}>App Store / App-Update</option>
+        <option value="news-detail"${editItem?.nav==="news-detail"?" selected":""}>Nur Meldung</option>
+        <option value="bibliothek"${editItem?.nav==="bibliothek"?" selected":""}>Bibliothek</option>
+        <option value="propheten"${editItem?.nav==="propheten"?" selected":""}>Propheten</option>
+      </select>
+      <input class="field wide" id="newsPopupButton" placeholder="Buttontext (App-Update), z. B. Jetzt aktualisieren" value="${esc(editItem?.popupButton||"Jetzt aktualisieren")}">
       <textarea class="admin-textarea wide" id="newsText" placeholder="Kurzer Hinweis für Besucher">${esc(editItem?.text||"")}</textarea>
       <button class="btn primary wide" id="publishNewsLiveBtn" type="button">${editingNewsId?"Änderung live speichern (ohne Push)":"Live posten"}</button>
       ${editingNewsId?`<button class="btn" id="cancelNewsEditBtn" type="button">Bearbeitung abbrechen</button>`:""}
@@ -2934,7 +3382,7 @@ function renderNewsManageSection(){
       <button class="btn" id="newsRefreshLiveBtn" type="button"${liveNewsLoading?" disabled":""}>${liveNewsLoading?"Lädt…":"Aktualisieren"}</button>
     </div>
     <div class="news-manage-list">${rows.length?rows.map(newsManageRow).join(""):`<div class="empty">${liveNewsLoading?"News werden geladen…":"Keine News in diesem Filter."}</div>`}</div>
-    <div class="news-sync-note" style="margin-top:8px">${liveNewsFetchedAt?`Zuletzt: ${liveNewsFetchedAt.toLocaleTimeString("de-DE")} · content/updates/current.json`:"Synchron mit dem Server"}</div>
+    <div class="news-sync-note" style="margin-top:8px">${liveNewsFetchedAt?`Stand (Europe/Berlin): ${formatAdminBerlin(liveNewsFetchedAt)} · content/updates/current.json`:"Synchron mit dem Server"}</div>
   </div>`;
 }
 function renderNews(){
@@ -3135,13 +3583,17 @@ function renderActions(rows){
         <div class="admin-fold-body">
           <input class="field" id="workerPublishUrlInput" value="${esc(workerPublishUrl())}" placeholder="${esc(DEFAULT_WORKER_PUBLISH_URL)}">
           <input class="field" id="workerSecretInput" type="password" autocomplete="off" value="${esc(savedWorkerSecret())}" placeholder="Admin Worker Secret" style="margin-top:8px">
+          <div class="quick-grid" style="margin-top:8px;grid-template-columns:1fr 1fr">
+            <button class="btn" id="revealWorkerSecretBtn" type="button">Anzeigen</button>
+            <button class="btn primary" id="copyWorkerSecretBtn" type="button">Kopieren</button>
+          </div>
           <label class="upload-status" style="display:flex;align-items:center;gap:8px;margin:8px 0 0;min-height:38px">
             <input id="rememberWorkerSecret" type="checkbox" checked>
             <span>Worker Secret auf diesem Gerät merken</span>
           </label>
           <button class="btn primary" id="saveWorkerConnectionBtn" type="button" style="margin-top:8px;width:100%;justify-content:center">Worker-Verbindung speichern</button>
           <button class="btn" id="forgetWorkerSecretBtn" type="button" style="margin-top:8px">Worker Secret löschen</button>
-          <div class="upload-status" style="margin-top:10px">URL: <code>https://dar-admin-publisher.sero91ak.workers.dev</code> (mit/ohne <code>/publish</code>). Secret: <code>DarAdminLive2026Publish</code> — nicht GitHub-Token. Erst <b>speichern</b>, dann Bibliothek live pushen.</div>
+          <div class="upload-status" style="margin-top:10px">URL: <code>https://dar-admin-publisher.sero91ak.workers.dev</code> (mit/ohne <code>/publish</code>). Passwort mit <b>Anzeigen</b> oder <b>Kopieren</b> holen — Face ID / Geräte-Code, sonst Bestätigung. Nicht das GitHub-Token. Erst <b>speichern</b>, dann Bibliothek live pushen.</div>
         </div>
       </details>
       <details class="admin-fold">
@@ -3679,7 +4131,9 @@ function bindUi(){
     workerSecretInput.addEventListener("change",persist);
     workerSecretInput.addEventListener("blur",persist);
   }
-  const forgetWorkerSecretBtn=document.getElementById("forgetWorkerSecretBtn");if(forgetWorkerSecretBtn)forgetWorkerSecretBtn.onclick=()=>{setSavedWorkerSecret("");const input=document.getElementById("workerSecretInput");if(input)input.value="";const remember=document.getElementById("rememberWorkerSecret");if(remember)remember.checked=false;setUploadStatus("Worker Secret wurde von diesem Gerät gelöscht.")};
+  bindWorkerSecretReveal();
+  bindKennwoerter();
+  const forgetWorkerSecretBtn=document.getElementById("forgetWorkerSecretBtn");if(forgetWorkerSecretBtn)forgetWorkerSecretBtn.onclick=()=>{setSavedWorkerSecret("");const input=document.getElementById("workerSecretInput");if(input){input.value="";input.type="password"}const reveal=document.getElementById("revealWorkerSecretBtn");if(reveal)reveal.textContent="Anzeigen";const remember=document.getElementById("rememberWorkerSecret");if(remember)remember.checked=false;setUploadStatus("Worker Secret wurde von diesem Gerät gelöscht.")};
   document.querySelectorAll("[data-scroll-upload]").forEach(btn=>btn.onclick=()=>document.getElementById("postMarkdownInput")?.scrollIntoView({behavior:"smooth",block:"center"}));
   bindCommandCenterForms();
   bindRankCards();
@@ -3750,7 +4204,19 @@ function bindCommandCenterForms(){
     const oldLabel=publishNewsLive.textContent;
     publishNewsLive.textContent=isEdit?"Speichere…":"Sende…";
     try{
-      const payload={title,text,ttlHours:hours,badge:"News",nav:"recent"};
+      const nav=(document.getElementById("newsNav")?.value||"appstore").trim()||"recent";
+      const isApp=nav==="appstore";
+      const popupButton=(document.getElementById("newsPopupButton")?.value||"").trim()||"Jetzt aktualisieren";
+      const payload={title,text,ttlHours:hours,badge:isApp?"Update":"News",nav,type:isApp?"app":"news"};
+      if(isApp){
+        payload.value="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753";
+        payload.popup=true;
+        payload.popupTitle="App-Update bereit";
+        payload.popupButton=popupButton;
+        payload.push=true;
+        payload.pushTitle="DĀR AL TAWḤĪD Update bereit";
+        payload.pushText="Die App wurde aktualisiert. Bitte jetzt im App Store updaten, damit alles wieder korrekt funktioniert.";
+      }
       if(isEdit){payload.id=editingNewsId;payload.skipPush=true}
       const result=await workerPostRequest("news",payload);
       await fetchLiveNewsItems({force:true});
@@ -3799,7 +4265,7 @@ function bindCommandCenterForms(){
     }
   });
   document.querySelectorAll("[data-news-remove]").forEach(btn=>btn.onclick=()=>{if(confirm("Diese News entfernen?")){removeStoreItem(ADMIN_NEWS_KEY,btn.dataset.newsRemove);addAdminLog("News","News entfernt","");renderShell()}});
-  document.querySelectorAll("[data-news-publish]").forEach(btn=>btn.onclick=async()=>{const item=newsItems().find(x=>String(x.id)===String(btn.dataset.newsPublish));if(!item){toast("News fehlt");return}if(!confirm("Diese News live veröffentlichen?\n\nSie erscheint unter „Neu im Fokus“ und wird als Push an Besucher mit aktivierten Benachrichtigungen gesendet (Titel und Kurztext wie eingegeben)."))return;btn.disabled=true;btn.textContent="Sende...";try{const hours=newsDurationHours(item.until||"24 Stunden");const result=await workerPostRequest("news",{id:item.id,title:item.title,text:item.text,ttlHours:hours,badge:"News",nav:"recent"});updateStoreItem(ADMIN_NEWS_KEY,item.id,{status:"Live",workerId:result.id,commitSha:result.commitSha});await fetchLiveNewsItems({force:true});const pushNote=result.push?.sent?" · Push gesendet":result.push?.reason?` · Push: ${result.push.reason}`:"";addAdminLog("News",`News live${result.push?.sent?" + Push":""}`,item.title+pushNote);toast(result.push?.sent?"News live · Push gesendet":"News live · Push nicht zugestellt");renderShell()}catch(e){btn.disabled=false;btn.textContent="Live veröffentlichen";addAdminLog("Fehler","News konnte nicht veröffentlicht werden",e.message||String(e));toast(e.message||"News-Veröffentlichung fehlgeschlagen")}});
+  document.querySelectorAll("[data-news-publish]").forEach(btn=>btn.onclick=async()=>{const item=newsItems().find(x=>String(x.id)===String(btn.dataset.newsPublish));if(!item){toast("News fehlt");return}if(!confirm("Diese News live veröffentlichen?\n\nSie erscheint unter „Neu im Fokus“ und wird als Push an Besucher mit aktivierten Benachrichtigungen gesendet (Titel und Kurztext wie eingegeben)."))return;btn.disabled=true;btn.textContent="Sende...";try{const hours=newsDurationHours(item.until||"24 Stunden");const result=await workerPostRequest("news",{id:item.id,title:item.title,text:item.text,ttlHours:hours,badge:item.nav==="appstore"?"Update":"News",nav:item.nav||"recent",type:item.nav==="appstore"?"app":"news",value:item.nav==="appstore"?"https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753":"",popup:item.nav==="appstore",popupTitle:item.nav==="appstore"?"App-Update bereit":"",popupButton:item.popupButton||"Jetzt aktualisieren",push:item.nav==="appstore",pushTitle:item.nav==="appstore"?"DĀR AL TAWḤĪD Update bereit":"",pushText:item.nav==="appstore"?"Die App wurde aktualisiert. Bitte jetzt im App Store updaten, damit alles wieder korrekt funktioniert.":""});updateStoreItem(ADMIN_NEWS_KEY,item.id,{status:"Live",workerId:result.id,commitSha:result.commitSha});await fetchLiveNewsItems({force:true});const pushNote=result.push?.sent?" · Push gesendet":result.push?.reason?` · Push: ${result.push.reason}`:"";addAdminLog("News",`News live${result.push?.sent?" + Push":""}`,item.title+pushNote);toast(result.push?.sent?"News live · Push gesendet":"News live · Push nicht zugestellt");renderShell()}catch(e){btn.disabled=false;btn.textContent="Live veröffentlichen";addAdminLog("Fehler","News konnte nicht veröffentlicht werden",e.message||String(e));toast(e.message||"News-Veröffentlichung fehlgeschlagen")}});
   const newsRefreshLive=document.getElementById("newsRefreshLiveBtn");if(newsRefreshLive)newsRefreshLive.onclick=async()=>{newsRefreshLive.disabled=true;newsRefreshLive.textContent="Lädt…";await fetchLiveNewsItems({force:true});toast(liveNewsError?"Live-News konnten nicht geladen werden":"Live-News aktualisiert");renderShell()};
   const addReport=document.getElementById("addReportBtn");if(addReport)addReport.onclick=()=>{const user=(document.getElementById("reportUser")?.value||"").trim()||"Admin";const area=document.getElementById("reportArea")?.value||"Technik";const text=(document.getElementById("reportText")?.value||"").trim();if(!text){toast("Meldung fehlt");return}addStoreItem(ADMIN_REPORTS_KEY,{user,area,text,status:"Neu"});addAdminLog("Fehler","Fehlermeldung erfasst",area);renderShell()};
   document.querySelectorAll("[data-report-progress]").forEach(btn=>btn.onclick=()=>{updateStoreItem(ADMIN_REPORTS_KEY,btn.dataset.reportProgress,{status:"In Bearbeitung"});renderShell()});
@@ -4198,7 +4664,7 @@ async function renderDashboard({force=false}={}){
 }
 function stopRefresh(){if(refreshTimer){clearInterval(refreshTimer);refreshTimer=null}}
 function refreshIntervalMs(){return currentTab==="besucher"?VISITOR_REFRESH_MS:ADMIN_REFRESH_MS}
-function restartRefreshInterval(){if(!authed)return;if(currentTab==="bibliothek"||currentTab==="live-edit")return;stopRefresh();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
+function restartRefreshInterval(){if(!authed)return;if(currentTab==="bibliothek"||currentTab==="live-edit"||currentTab==="kennwoerter")return;stopRefresh();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
 function startRefresh(){stopRefresh();renderDashboard();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
 function renderApp(){authed=readAuth()||authed;if(!authed){stopRefresh();renderLogin();return}document.getElementById("topbar").hidden=false;startRefresh()}
 document.getElementById("refreshBtn").onclick=()=>renderDashboard({force:true});

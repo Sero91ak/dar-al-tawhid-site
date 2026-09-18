@@ -1,0 +1,15 @@
+/* Admin: readable under status bar, no glass smash */
+.topbar{
+  position:sticky!important;
+  top:0!important;
+  z-index:5!important;
+  padding-top:8px!important;
+  background:transparent!important;
+  background-image:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  box-shadow:none!important;
+}
+.topbar,.brand,.admin-cover,.hero-title,.login{position:relative!important}
+.brand h1,.login h2,.admin-cover h2,.hero-title h2{color:var(--gold,#efd78e)!important;opacity:1!important;visibility:visible!important;-webkit-text-fill-color:var(--gold,#efd78e)!important}
+.brand p,.login p,.admin-cover p,.hero-title p,.hint{color:#d7c9a8!important;opacity:1!important}

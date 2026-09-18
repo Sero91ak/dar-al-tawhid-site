@@ -10,7 +10,7 @@
   const OFFLINE_DB = "darLibraryOfflineV1";
   const OFFLINE_STORE = "pdfs";
   const PDFJS_URL = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
-  const PDFJS_WORKER = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  const PDFJS_WORKER = "https://cdn.jsdelivr.net/npm/pdfjs-dist@5.6.205/build/pdf.worker.min.mjs";
   const PDFJS_FALLBACK_URLS = [
     PDFJS_URL,
     "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js",
@@ -80,6 +80,8 @@
   let libraryPreserveFocus = false;
   let libraryListScrollY = 0;
   let librarySearchSelection = 0;
+  let libraryReaderReturnScrollY = null;
+  let libraryReaderReturnSlug = "";
   let readerState = null;
   const LIBRARY_STATS_CACHE = new Map();
   let libraryStatsPollTimer = null;
@@ -90,8 +92,9 @@
   function trackLibraryEvent(eventType, pub) {
     if (!pub) return;
     try {
-      const track = global.trackAnalytics
-        || (global.DarAnalytics && typeof global.DarAnalytics.track === "function" && global.DarAnalytics.track.bind(global.DarAnalytics));
+      const track = (global.DarAnalytics && typeof global.DarAnalytics.track === "function"
+        && global.DarAnalytics.track.bind(global.DarAnalytics))
+        || global.trackAnalytics;
       if (typeof track === "function") {
         track(eventType, {
           contentType: "library",
@@ -307,8 +310,22 @@
     navigate("bibliothek", slug);
   }
 
-  function navigateReader(slug) {
-    global.location.hash = `#bibliothek/${encodeURIComponent(slug)}/lesen`;
+  function navigateReader(slug, mode) {
+    libraryReaderReturnScrollY = Math.max(0, Number(global.scrollY || 0));
+    libraryReaderReturnSlug = String(slug || "");
+    const suffix = mode === "pdf" ? "pdf" : "lesen";
+    global.location.hash = `#bibliothek/${encodeURIComponent(slug)}/${suffix}`;
+  }
+
+  function isPdfViewerHashActive() {
+    return /\/pdf$/i.test(String(global.location.hash || ""));
+  }
+
+  function isReaderHashActive() {
+    const hash = String(global.location.hash || "");
+    return /^#bibliothek-reader\//i.test(hash)
+      || /^#bibliothek\/.+\/lesen$/i.test(hash)
+      || /^#bibliothek\/.+\/pdf$/i.test(hash);
   }
 
   function normalizeSearchText(text) {
@@ -521,6 +538,14 @@
     if (track) {
       trackLibraryEvent("library_read", pub);
       scheduleLibraryStatsRefresh(pub.id);
+    }
+    if (shouldUseNativePdfViewer()) {
+      try {
+        global.location.assign(url);
+        return true;
+      } catch (e) {
+        /* Fallback unten */
+      }
     }
     try {
       const popup = global.open(url, "_blank", "noopener,noreferrer");
@@ -756,7 +781,7 @@
       return `<section class="lib-page"><div class="lib-empty">Diese Veröffentlichung wird momentan vorbereitet.</div></section>`;
     }
     const progress = getProgress(pub.id);
-    return `<div class="lib-reader" data-library-reader="${esc(pub.slug)}" role="dialog" aria-label="PDF-Leser: ${esc(pub.title)}">
+    return `<div class="lib-reader" data-library-reader="${esc(pub.slug)}" data-library-reader-mode="${isPdfViewerHashActive() ? "pdf" : "lesen"}" role="dialog" aria-label="PDF-Leser: ${esc(pub.title)}">
       <div class="lib-reader-toolbar lib-reader-toolbar-compact">
         <button class="lib-btn lib-btn-ghost lib-reader-icon" type="button" data-library-reader-close aria-label="Zurück zur Buchdetailseite">←</button>
         <button class="lib-btn lib-reader-icon" type="button" data-library-reader-prev aria-label="Vorherige Seite">▲</button>
@@ -969,15 +994,15 @@
       };
 
       try {
-        const embedded = await tryEmbeddedModule();
-        if (embedded) return embedded;
+        const embeddedClassic = await tryEmbeddedClassicScript();
+        if (embeddedClassic) return embeddedClassic;
       } catch (e) {
-        /* Modul-Import fehlgeschlagen — wir versuchen klassisches Inline-Skript */
+        /* Klassische Einbettung fehlgeschlagen — wir versuchen das lokale Modul */
       }
 
       try {
-        const embeddedClassic = await tryEmbeddedClassicScript();
-        if (embeddedClassic) return embeddedClassic;
+        const embedded = await tryEmbeddedModule();
+        if (embedded) return embedded;
       } catch (e) {
         /* Lokale Einbettung fehlgeschlagen — wir versuchen externe Fallbacks */
       }
@@ -1021,6 +1046,8 @@
   let readerPageObserver = null;
   let readerRenderToken = 0;
   let readerSessionId = 0;
+  let readerInitPromise = null;
+  let readerInitSlug = "";
 
   function getReaderRoot() {
     return document.querySelector("[data-library-reader-portal]")
@@ -1029,7 +1056,24 @@
 
   function getReaderStage() {
     const root = getReaderRoot();
-    return root ? root.querySelector("[data-library-reader-stage]") : null;
+    if (!root) return null;
+    let stage = document.getElementById("darLibraryPdfSurface");
+    if (!stage) {
+      stage = document.createElement("div");
+      stage.id = "darLibraryPdfSurface";
+      stage.className = "lib-pdf-surface";
+      stage.innerHTML = '<div class="lib-reader-msg">PDF wird geladen…</div>';
+      document.body.appendChild(stage);
+    }
+    const toolbar = root.querySelector(".lib-reader-toolbar");
+    const top = Math.max(48, Math.ceil(toolbar?.getBoundingClientRect().bottom || 56));
+    stage.style.top = `${top}px`;
+    stage.style.left = "0px";
+    stage.style.right = "0px";
+    stage.style.bottom = "0px";
+    document.documentElement.classList.add("is-library-reader-route");
+    document.body.classList.add("is-library-reader-route");
+    return stage;
   }
 
   function readerPublicationSlug(root) {
@@ -1049,7 +1093,7 @@
     const root = getReaderRoot();
     if (!root || !root.hasAttribute("data-library-reader-portal")) return false;
     if (pubSlug !== key || readerPublicationSlug(root) !== key) return false;
-    const stage = root.querySelector("[data-library-reader-stage]");
+    const stage = getReaderStage();
     if (!stage) return false;
     return !!stage.querySelector(".lib-reader-page-canvas, .lib-reader-fallback, .lib-reader-native");
   }
@@ -1126,20 +1170,16 @@
   }
 
   function removeReaderOverlay() {
+    if (isReaderHashActive()) return;
     document.querySelectorAll("[data-library-reader-portal]").forEach((el) => el.remove());
+    document.getElementById("darLibraryPdfSurface")?.remove();
+    document.documentElement.classList.remove("is-library-reader-route");
   }
 
   function mountReaderOverlay() {
-    const portal = document.querySelector("[data-library-reader-portal]");
-    if (portal) {
-      scrubDuplicateReaders(portal);
-      return portal;
-    }
     const reader = document.querySelector("[data-library-reader]");
     if (!reader) return null;
-    removeReaderOverlay();
     reader.setAttribute("data-library-reader-portal", "1");
-    document.body.appendChild(reader);
     scrubDuplicateReaders(reader);
     try {
       window.scrollTo(0, 0);
@@ -1152,19 +1192,29 @@
   function waitForReaderLayout(stage) {
     return new Promise((resolve) => {
       const measure = () => {
-        const stageWidth = Math.max(stage?.clientWidth || 0, stage?.offsetWidth || 0);
+        const rect = stage?.getBoundingClientRect?.() || { width: 0, height: 0 };
+        const stageWidth = Math.max(stage?.clientWidth || 0, stage?.offsetWidth || 0, rect.width || 0);
+        const stageHeight = Math.max(stage?.clientHeight || 0, stage?.offsetHeight || 0, rect.height || 0);
         const viewportWidth = Math.max(document.documentElement?.clientWidth || 0, window.innerWidth || 0);
-        return Math.max(stageWidth, viewportWidth - 24);
+        const viewportHeight = Math.max(document.documentElement?.clientHeight || 0, window.innerHeight || 0);
+        return {
+          width: Math.max(stageWidth, viewportWidth - 16),
+          height: Math.max(stageHeight, Math.floor(viewportHeight * 0.72))
+        };
       };
-      if (measure() > 40) {
-        resolve(measure());
+      const first = measure();
+      if (first.width > 40 && first.height > 80) {
+        resolve(first);
         return;
       }
       let tries = 0;
       const tick = () => {
-        const width = measure();
-        if (width > 40 || tries >= 20) {
-          resolve(Math.max(width, 280));
+        const size = measure();
+        if ((size.width > 40 && size.height > 80) || tries >= 24) {
+          resolve({
+            width: Math.max(size.width, 280),
+            height: Math.max(size.height, 360)
+          });
           return;
         }
         tries += 1;
@@ -1188,7 +1238,7 @@
     }
     const stage = getReaderStage();
     const target = stage?.querySelector(`[data-page="${page}"]`);
-    if (target) {
+    if (target && readerState.mode !== "pdf") {
       readerState.page = page;
       const input = getReaderRoot()?.querySelector("[data-library-reader-input]");
       if (input) input.value = String(page);
@@ -1226,47 +1276,72 @@
     stack.querySelectorAll("[data-page]").forEach((pageEl) => readerPageObserver.observe(pageEl));
   }
 
+  function readerOutputScale() {
+    const dpr = Number(window.devicePixelRatio || 1) || 1;
+    return Math.min(4, Math.max(2, Math.round(dpr * 2) / 1 || 2));
+  }
+
+  async function paintPdfPageToCanvas(pdfPage, canvas, fitScale) {
+    const outputScale = readerOutputScale();
+    const viewport = pdfPage.getViewport({ scale: Math.max(fitScale * outputScale, 0.2) });
+    const cssWidth = Math.max(1, Math.floor(viewport.width / outputScale));
+    const cssHeight = Math.max(1, Math.floor(viewport.height / outputScale));
+    const ctx = canvas.getContext("2d", { alpha: false });
+    if (!ctx) throw new Error("canvas unavailable");
+    canvas.width = Math.max(1, Math.floor(viewport.width));
+    canvas.height = Math.max(1, Math.floor(viewport.height));
+    canvas.style.width = `${cssWidth}px`;
+    canvas.style.height = `${cssHeight}px`;
+    canvas.className = "lib-reader-page-canvas";
+    await pdfPage.render({
+      canvasContext: ctx,
+      viewport,
+      background: "#ffffff"
+    }).promise;
+    return { cssWidth, cssHeight };
+  }
+
   async function renderReaderScroll(options) {
     if (!readerState || !readerState.doc) return;
     const stage = getReaderStage();
     if (!stage) return;
 
     const token = ++readerRenderToken;
+    global.__darPdfReaderDebug = { step: "render-start", token, session: readerSessionId };
     const startPage = Math.max(1, Math.min(readerState.total || 1, Number(options?.page) || readerState.page || 1));
     readerState.page = startPage;
+    readerState.mode = isPdfViewerHashActive() ? "pdf" : "lesen";
     stage.innerHTML = '<div class="lib-reader-msg">PDF wird aufgebaut…</div>';
 
     try {
-      const layoutWidth = await waitForReaderLayout(stage);
-      if (token !== readerRenderToken) return;
+      const layout = await waitForReaderLayout(stage);
+      if (token !== readerRenderToken) {
+        global.__darPdfReaderDebug = { step: "render-cancelled", token, currentToken: readerRenderToken, session: readerSessionId };
+        return;
+      }
+      const layoutWidth = Number(layout?.width || layout || 0);
+      global.__darPdfReaderDebug = { step: "render-layout", token, layoutWidth, session: readerSessionId };
 
-      const width = Math.max(280, layoutWidth - 12);
+      const width = Math.max(280, layoutWidth - 16);
       const stack = document.createElement("div");
-      stack.className = "lib-reader-stack";
-      stack.style.alignItems = "center";
-      stack.style.paddingBottom = "12px";
+      stack.className = readerState.mode === "pdf" ? "lib-reader-stack lib-reader-stack-single" : "lib-reader-stack";
       stage.innerHTML = "";
       stage.appendChild(stack);
 
-      for (let page = 1; page <= readerState.total; page += 1) {
+      const pages = readerState.mode === "pdf"
+        ? [startPage]
+        : Array.from({ length: readerState.total }, (_, i) => i + 1);
+
+      for (const page of pages) {
         const pdfPage = await readerState.doc.getPage(page);
         if (token !== readerRenderToken) return;
 
         const baseViewport = pdfPage.getViewport({ scale: 1 });
-        const scale = baseViewport.width > 0 ? width / baseViewport.width : 1;
-        const viewport = pdfPage.getViewport({ scale: Math.max(scale, 0.1) });
-
+        const fitScale = baseViewport.width > 0 ? width / baseViewport.width : 1;
         const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-        if (!ctx) throw new Error("canvas unavailable");
-
-        const cssWidth = Math.max(1, Math.floor(viewport.width));
-        const cssHeight = Math.max(1, Math.floor(viewport.height));
-        canvas.width = cssWidth;
-        canvas.height = cssHeight;
-        canvas.style.width = `${cssWidth}px`;
-        canvas.style.height = `${cssHeight}px`;
-        canvas.className = "lib-reader-page-canvas";
+        await paintPdfPageToCanvas(pdfPage, canvas, Math.max(fitScale, 0.1));
+        if (token !== readerRenderToken) return;
+        if (isCanvasLikelyBlank(canvas)) throw new Error("blank canvas");
 
         const wrap = document.createElement("div");
         wrap.className = "lib-reader-sheet";
@@ -1274,14 +1349,6 @@
         if (page === startPage) wrap.setAttribute("data-reader-start-page", "1");
         wrap.appendChild(canvas);
         stack.appendChild(wrap);
-
-        await pdfPage.render({
-          canvasContext: ctx,
-          viewport,
-          background: "#ffffff"
-        }).promise;
-        if (token !== readerRenderToken) return;
-        if (isCanvasLikelyBlank(canvas)) throw new Error("blank canvas");
       }
 
       if (token !== readerRenderToken) return;
@@ -1300,6 +1367,7 @@
       }
     } catch (e) {
       if (token !== readerRenderToken) return;
+      console.error("PDF-Seitenrendering fehlgeschlagen", e);
       if (renderReaderIframeFallback(stage, startPage)) return;
       stage.innerHTML = `<div class="lib-reader-msg">PDF konnte nicht geladen werden. Bitte versuche es erneut oder lade die Datei herunter.</div>`;
     }
@@ -1341,9 +1409,11 @@
 
   async function initReader(pub) {
     const session = ++readerSessionId;
+    global.__darPdfReaderDebug = { step: "init-start", session, slug: String(pub?.slug || "") };
     const root = mountReaderOverlay() || getReaderRoot();
     const stage = root?.querySelector("[data-library-reader-stage]");
     if (!root || !stage) return;
+    setTimeout(() => getReaderStage(), 0);
     scrubDuplicateReaders(root);
 
     if (readerState?.blobUrl) {
@@ -1365,9 +1435,11 @@
 
     try {
       const pdfjs = await loadPdfJs();
+      global.__darPdfReaderDebug = { step: "pdfjs-ready", session, currentSession: readerSessionId };
       if (session !== readerSessionId) return;
       const offline = await getOfflineBlob(pub.id);
       const blob = offline || await fetchPdfBlob(pub);
+      global.__darPdfReaderDebug = { step: "blob-ready", session, currentSession: readerSessionId, size: Number(blob?.size || 0) };
       if (session !== readerSessionId) return;
       readerState.useOfflineBlob = !!offline;
       readerState.blobUrl = URL.createObjectURL(blob);
@@ -1379,19 +1451,37 @@
         isEvalSupported: false,
         useSystemFonts: true
       }).promise;
+      global.__darPdfReaderDebug = { step: "document-ready", session, currentSession: readerSessionId, pages: Number(doc?.numPages || 0) };
       if (session !== readerSessionId) return;
       readerState.doc = doc;
       readerState.total = doc.numPages;
-      const totalEl = root.querySelector("[data-library-reader-total]");
+      const liveRoot = getReaderRoot();
+      const totalEl = liveRoot?.querySelector("[data-library-reader-total]");
       if (totalEl) totalEl.textContent = String(readerState.total);
       await renderReaderScroll({ page: readerState.page });
       if (session !== readerSessionId) return;
       trackLibraryEvent("library_read", pub);
     } catch (e) {
       if (session !== readerSessionId) return;
+      console.error("PDF-Reader-Initialisierung fehlgeschlagen", e);
       if (renderReaderIframeFallback(stage)) return;
       stage.innerHTML = `<div class="lib-reader-msg">PDF konnte nicht geladen werden. Bitte versuche es erneut oder lade die Datei herunter.</div>`;
     }
+  }
+
+  async function ensureReaderInitialized(pub) {
+    const slug = String(pub?.slug || pub?.id || "");
+    if (isReaderActive(slug)) return;
+    if (!readerInitPromise || readerInitSlug !== slug) {
+      readerInitSlug = slug;
+      readerInitPromise = initReader(pub).finally(() => {
+        if (readerInitSlug === slug) {
+          readerInitPromise = null;
+          readerInitSlug = "";
+        }
+      });
+    }
+    await readerInitPromise;
   }
 
   async function initReaderNative(pub) {
@@ -1447,6 +1537,20 @@
       }
       libraryPreserveFocus = false;
     }
+  }
+
+  function restoreLibraryReaderReturnPosition(slug) {
+    if (libraryReaderReturnScrollY === null || libraryReaderReturnSlug !== String(slug || "")) return;
+    const y = libraryReaderReturnScrollY;
+    libraryReaderReturnScrollY = null;
+    libraryReaderReturnSlug = "";
+    requestAnimationFrame(() => {
+      if (global.DARScrollManager?.stableScrollTo) {
+        global.DARScrollManager.stableScrollTo(y, { force: true });
+      } else {
+        global.scrollTo({ top: y, behavior: "auto" });
+      }
+    });
   }
 
   async function bindLibrary(route) {
@@ -1541,21 +1645,9 @@
       });
 
       detail.querySelectorAll("[data-library-download]").forEach((btn) => {
-        btn.onclick = async () => {
+        btn.onclick = () => {
           if (!canDownload(pub)) return;
-          try {
-            const blob = await fetchPdfBlob(pub);
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = `${pub.slug || pub.id}.pdf`;
-            a.click();
-            setTimeout(() => URL.revokeObjectURL(url), 4000);
-            trackLibraryEvent("library_download", pub);
-            scheduleLibraryStatsRefresh(pub.id);
-          } catch (e) {
-            alert("Der Download konnte nicht abgeschlossen werden. Bitte versuche es erneut.");
-          }
+          navigateReader(pub.slug, "pdf");
         };
       });
 
@@ -1597,6 +1689,7 @@
       hydrateLibraryStats(pub.id);
       startLibraryStatsPolling(pub.id);
       trackLibraryDetailView(pub);
+      restoreLibraryReaderReturnPosition(pub.slug);
     } else {
       stopLibraryStatsPolling();
     }
@@ -1604,6 +1697,13 @@
     if (route && route.view === "bibliothek-reader") {
       document.body.classList.add("is-library-reader-route");
       const pub = findPublication(route.value);
+      if (!pub && !catalog) {
+        ensureCatalog().then(() => {
+          const activeRoute = typeof global.readRoute === "function" ? global.readRoute() : route;
+          if (activeRoute?.view === "bibliothek-reader" && typeof global.render === "function") global.render();
+        }).catch(() => {});
+        return;
+      }
       if (pub && canRead(pub)) {
         if (isReaderActive(pub.slug)) {
           const reader = getReaderRoot();
@@ -1614,14 +1714,17 @@
           const pageInput = reader?.querySelector("[data-library-reader-input]");
           if (pageInput && readerState?.page) pageInput.value = String(readerState.page);
         } else {
-          await initReader(pub);
+          await ensureReaderInitialized(pub);
           bindReaderControls(pub, getReaderRoot());
         }
       } else {
         navigateDetail(route?.value || "");
       }
     } else {
+      if (isReaderHashActive()) return;
       readerSessionId += 1;
+      readerInitPromise = null;
+      readerInitSlug = "";
       removeReaderOverlay();
       if (readerState?.blobUrl) {
         try {
@@ -1667,4 +1770,17 @@
       uiState = { query: "", category: "Alle", catOpen: false };
     }
   };
+
+  if (!global.__darLibraryProgressRefreshInstalled) {
+    global.__darLibraryProgressRefreshInstalled = true;
+    const refreshLibraryIfVisible = () => {
+      if (typeof global.render !== "function") return;
+      if (isReaderHashActive()) return;
+      const hash = String(global.location.hash || "");
+      if (!/^#bibliothek\//i.test(hash)) return;
+      global.render();
+    };
+    global.addEventListener("pageshow", refreshLibraryIfVisible);
+    global.addEventListener("focus", refreshLibraryIfVisible);
+  }
 })(window);
