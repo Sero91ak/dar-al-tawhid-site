@@ -1,8 +1,18 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "mode": "shuffleBag",
   "persistProgress": true,
   "storage": "applicationSupport",
+  "contentSource": {
+    "provider": "HadithScreensaverProvider",
+    "catalogPath": "hadith/catalog.json",
+    "includedRecordTypes": [
+      "hadith",
+      "athar"
+    ],
+    "salafStatementsUseRecordType": "athar",
+    "rule": "Alle registrierten Ḥadīṯe, Āṯār und Salaf-Aussagen erscheinen im Bildschirmschoner."
+  },
   "cyclePolicy": {
     "showEveryItemBeforeRepeat": true,
     "shuffleEachCycle": true,
@@ -12,7 +22,7 @@
     "removedItemsPolicy": "dropFromState"
   },
   "futureModuleMixing": {
-    "enabled": false,
+    "enabled": true,
     "strategy": "weightedRoundRobin",
     "weights": {
       "hadith": 6,
