@@ -1,6 +1,6 @@
 {
   "project": "DĀR AL TAWḤĪD – Apple TV Content",
-  "schemaVersion": "1.5",
+  "schemaVersion": "1.6",
   "language": "de",
   "defaultModule": "hadith",
   "screensaver": {
@@ -81,5 +81,12 @@
       "sortOrder": 30,
       "scope": "Ṣaḥābah, Tābiʿīn und Salaf"
     }
-  ]
+  ],
+  "backgrounds": {
+    "status": "active",
+    "target": "tvOS-only",
+    "catalogPath": "backgrounds/catalog.json",
+    "selectionMode": "ownerFixed",
+    "allowUserSelection": false
+  }
 }
