@@ -16,5 +16,23 @@
     "title": "Duʿāʾ um Allahs Vergebung",
     "snippet": "O Allah, Du bist vergebend und liebst die Vergebung, so vergib mir.",
     "category": "Vergebung"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 466,
+      "remaining": 442
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 74,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
