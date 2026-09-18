@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1789319677748 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v849";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v850";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -18840,6 +18840,38 @@ html.is-standalone-pwa body{
   }
 }
 </style>
+<style id="header-prayer-hub-type-read-v765">
+/* v765 · Feine Lesbarkeit: Zeiten/Namen unverändert. Nur Labels/Countdown/Status +3–8 %. Keine Geometrie. */
+.header-prayer-zone__count-label{
+  font-size:clamp(5.9px,1.33vw,7.5px)!important;
+}
+.header-prayer-zone__caption{
+  font-size:clamp(5.8px,1.31vw,7.4px)!important;
+}
+.header-prayer-zone__countdown{
+  font-size:clamp(8.4px,1.94vw,10px)!important;
+  font-weight:780!important;
+}
+.top-shell.theme-hero-shell .header-prayer-hub__status,
+.header-prayer-hub__status{
+  font-size:clamp(8.9px,2.13vw,10.9px)!important;
+}
+@media(max-width:700px){
+  .top-shell.theme-hero-shell .header-prayer-hub__status,
+  .header-prayer-hub__status{font-size:clamp(8.5px,2.03vw,10.2px)!important}
+}
+@media(max-width:430px){
+  .header-prayer-zone__count-label{font-size:clamp(5.8px,1.32vw,7.3px)!important}
+  .header-prayer-zone__caption{font-size:clamp(5.7px,1.3vw,7.2px)!important}
+  .header-prayer-zone__countdown{font-size:clamp(8.3px,1.92vw,9.9px)!important}
+  .top-shell.theme-hero-shell .header-prayer-hub__status,
+  .header-prayer-hub__status{font-size:clamp(8.1px,1.92vw,9.6px)!important}
+}
+@media(max-width:390px){
+  .top-shell.theme-hero-shell .header-prayer-hub__status,
+  .header-prayer-hub__status{font-size:clamp(7.7px,1.82vw,8.9px)!important}
+}
+</style>
 <style id="quran-tafsir-nav-smooth-v568">
 /* QURAN_TAFSIR_NAV_GUARD · smooth open/close, kein Schwarzfeld */
 #quranExplanationMount{
@@ -27108,7 +27140,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v849";
+const APP_BUILD_ID="app-shell-v850";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}

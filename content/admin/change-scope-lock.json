@@ -5002,6 +5002,21 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "visitor-ios-prayer-capsule-type-live-2026-09-18",
+      "approvedBy": "user-explicit-ios-visitor-groesse-live-pushen",
+      "reason": "Nutzer: In der iOS App und Besucher den geänderten Größenbereich der Gebets-Kapsel live pushen. Nur Schrift von Labels/Countdown/Status, keine Geometrie, keine Push-Kampagne.",
+      "paths": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-09-25T23:59:00.000Z"
     }
   ],
   "enabled": true
