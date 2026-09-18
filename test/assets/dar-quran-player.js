@@ -213,64 +213,57 @@
   }
   function icon(name) {
     var p = {
-      back: '<path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>',
-      more: '<circle cx="6" cy="12" r="1.35" fill="currentColor"/><circle cx="12" cy="12" r="1.35" fill="currentColor"/><circle cx="18" cy="12" r="1.35" fill="currentColor"/>',
-      prev: '<path d="M18 6l-8 6 8 6M7.2 6v12" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round"/>',
-      next: '<path d="M6 6l8 6-8 6M16.8 6v12" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round"/>',
-      back15: '<path d="M8 8a7 7 0 1 0 8 0" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 8V4.2M8 8h3.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
-      fwd15: '<path d="M16 8a7 7 0 1 1-8 0" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M16 8V4.2M16 8h-3.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
-      play: '<path d="M9 7.2l10 4.8-10 4.8z" fill="currentColor"/>',
-      pause: '<path d="M8.2 7h2.6v10H8.2zM13.2 7h2.6v10h-2.6z" fill="currentColor"/>',
+      grab: "",
+      more: '<circle cx="12" cy="6" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="18" r="1.6" fill="currentColor"/>',
+      prev: '<path d="M6 6h2v12H6zM20 6l-10 6 10 6z" fill="currentColor"/>',
+      next: '<path d="M16 6l10 0" fill="none"/><path d="M4 6l10 6-10 6zM18 6h2v12h-2z" fill="currentColor"/>',
+      play: '<path d="M8 6.2l12 5.8L8 17.8z" fill="currentColor"/>',
+      pause: '<path d="M7 6h3.4v12H7zM13.6 6H17v12h-3.4z" fill="currentColor"/>',
+      lyrics: '<path d="M6 5.5h12v10.5H9.2L6 19z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+      airplay: '<path d="M6 15.2A7 7 0 0 1 12 5.5a7 7 0 0 1 6 9.7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 19l4-5H8z" fill="currentColor"/>',
+      queue: '<path d="M6 7h12M6 12h12M6 17h8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>',
+      volmin: '<path d="M4 10h2.4L10 7.2v9.6L6.4 14H4z" fill="currentColor"/>',
+      volmax: '<path d="M4 10h2.4L10 7.2v9.6L6.4 14H4z" fill="currentColor"/><path d="M13 9.2a3.4 3.4 0 0 1 0 5.6M15.4 7.2a6 6 0 0 1 0 9.6" fill="none" stroke="currentColor" stroke-width="1.5"/>',
       shuffle: '<path d="M4 7h4l3 5 3-5h6M4 17h4l3-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
-      repeat: '<path d="M7 8h9l-2-2M17 16H8l2 2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
-      book: '<path d="M6.5 5.5h11v13h-9.2a1.8 1.8 0 0 1-1.8-1.8V5.5z" fill="none" stroke="currentColor" stroke-width="1.5"/>',
-      mic: '<rect x="9" y="4.5" width="6" height="9.5" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7.2 12.2a4.8 4.8 0 0 0 9.6 0M12 17v2.4" fill="none" stroke="currentColor" stroke-width="1.5"/>',
-      text: '<path d="M6 7.2h12M8 12h8M10 16.8h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>'
+      repeat: '<path d="M7 8h9l-2-2M17 16H8l2 2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>'
     };
     return '<svg viewBox="0 0 24 24" aria-hidden="true">' + (p[name] || "") + "</svg>";
   }
   function renderShell() {
     return (
       '<div id="darQuranPlayer" data-text="' + esc(state.text) + '">' +
-        '<header class="dqp-header">' +
-          '<button class="dqp-hit" type="button" data-dqp="min" aria-label="Minimieren">' + icon("back") + "</button>" +
-          '<div><span class="dqp-kicker">DĀR AL TAWḤĪD</span><h1 class="dqp-page-title">QURʾĀN PLAYER</h1></div>' +
-          '<button class="dqp-hit" type="button" data-dqp="menu" aria-label="Optionen">' + icon("more") + "</button>" +
-        "</header>" +
-        '<hr class="dqp-rule">' +
-        '<section class="dqp-info">' +
-          '<span class="dqp-ornament">۞</span>' +
-          '<p class="dqp-ar-surah" lang="ar" dir="rtl" data-dqp-arname>سورة …</p>' +
-          '<button type="button" class="dqp-surah-lat" data-dqp="pick-surah">Sūrah wird geladen …</button>' +
-          '<button type="button" class="dqp-qari" data-dqp="pick-reciter">Rezitator wird geladen …</button>' +
-          '<p class="dqp-counts" data-dqp-counts></p>' +
-        "</section>" +
-        '<hr class="dqp-rule">' +
-        '<section class="dqp-stage">' +
+        '<button class="dqp-grab" type="button" data-dqp="min" aria-label="Minimieren"></button>' +
+        '<div class="dqp-art">' +
           '<div class="dqp-ayah" data-dqp-ayah>' +
-            '<div class="dqp-ayah-ref" data-ref>…</div>' +
+            '<div class="dqp-ayah-ref" data-ref></div>' +
             '<div class="dqp-ayah-ar" lang="ar" dir="rtl"></div>' +
             '<div class="dqp-ayah-de"></div>' +
-            '<div class="dqp-status">Sūrah wird geladen …</div>' +
+            '<div class="dqp-status">Wird geladen …</div>' +
           "</div>" +
-        "</section>" +
+        "</div>" +
+        '<div class="dqp-meta">' +
+          '<button type="button" class="dqp-title" data-dqp="pick-surah">—</button>' +
+          '<button type="button" class="dqp-more" data-dqp="menu" aria-label="Optionen">' + icon("more") + "</button>" +
+          '<button type="button" class="dqp-artist" data-dqp="pick-reciter">—</button>' +
+        "</div>" +
         '<section class="dqp-progress">' +
-          '<div class="dqp-times"><span data-dqp-cur>00:00</span><span class="dqp-ayah-n" data-dqp-n></span><span data-dqp-dur>00:00</span></div>' +
           '<input class="dqp-slider" data-dqp="seek" type="range" min="0" max="1000" value="0" aria-label="Fortschritt">' +
+          '<div class="dqp-times"><span data-dqp-cur>0:00</span><span data-dqp-dur>-0:00</span></div>' +
         "</section>" +
         '<div class="dqp-controls">' +
-          '<button class="dqp-hit dqp-ctrl" type="button" data-dqp="prev" aria-label="Vorige Āyah">' + icon("prev") + "</button>" +
-          '<button class="dqp-hit dqp-ctrl" type="button" data-dqp="back15" aria-label="15 Sekunden zurück">' + icon("back15") + "</button>" +
-          '<button class="dqp-play dqp-hit" type="button" data-dqp="play" aria-label="Wiedergabe">' + icon("play") + "</button>" +
-          '<button class="dqp-hit dqp-ctrl" type="button" data-dqp="fwd15" aria-label="15 Sekunden vor">' + icon("fwd15") + "</button>" +
-          '<button class="dqp-hit dqp-ctrl" type="button" data-dqp="next" aria-label="Nächste Āyah">' + icon("next") + "</button>" +
+          '<button class="dqp-skip" type="button" data-dqp="prev" aria-label="Vorige Āyah">' + icon("prev") + "</button>" +
+          '<button class="dqp-play" type="button" data-dqp="play" aria-label="Wiedergabe">' + icon("play") + "</button>" +
+          '<button class="dqp-skip" type="button" data-dqp="next" aria-label="Nächste Āyah">' + icon("next") + "</button>" +
         "</div>" +
-        '<div class="dqp-tools">' +
-          '<button class="dqp-tool" type="button" data-dqp="shuffle">' + icon("shuffle") + "<span>Zufall</span></button>" +
-          '<button class="dqp-tool" type="button" data-dqp="repeat">' + icon("repeat") + "<span>Wiederholen</span></button>" +
-          '<button class="dqp-tool" type="button" data-dqp="pick-surah">' + icon("book") + "<span>Sūrah</span></button>" +
-          '<button class="dqp-tool" type="button" data-dqp="pick-reciter">' + icon("mic") + "<span>Qāriʾ</span></button>" +
-          '<button class="dqp-tool" type="button" data-dqp="text">' + icon("text") + "<span>Text</span></button>" +
+        '<div class="dqp-volume">' +
+          icon("volmin") +
+          '<input class="dqp-vol" data-dqp="vol" type="range" min="0" max="100" value="100" aria-label="Lautstärke">' +
+          icon("volmax") +
+        "</div>" +
+        '<div class="dqp-dock">' +
+          '<button type="button" data-dqp="text" aria-label="Textmodus">' + icon("lyrics") + "</button>" +
+          '<button type="button" data-dqp="repeat" aria-label="Wiederholen">' + icon("airplay") + "</button>" +
+          '<button type="button" data-dqp="pick-surah" aria-label="Sūrah / Queue">' + icon("queue") + "</button>" +
         "</div>" +
         '<div class="dqp-sheet" data-dqp-sheet hidden></div>' +
       "</div>"
@@ -344,14 +337,11 @@
     var root = document.getElementById("darQuranPlayer");
     if (!root) return;
     var m = meta || {};
-    var ar = root.querySelector("[data-dqp-arname]");
-    var lat = root.querySelector(".dqp-surah-lat");
-    var q = root.querySelector(".dqp-qari");
-    var c = root.querySelector("[data-dqp-counts]");
-    if (ar) ar.textContent = m.name ? "سورة " + String(m.name).replace(/^سورة\s*/, "") : "سورة …";
-    if (lat) lat.textContent = m.transliteration ? "Sūrah " + m.transliteration : "Sūrah wird geladen …";
+    var lat = root.querySelector(".dqp-title");
+    var q = root.querySelector(".dqp-artist");
+    if (lat) lat.textContent = m.transliteration ? ("Sūrah " + m.transliteration) : "—";
     if (q) q.textContent = reciterById(state.reciter).name;
-    if (c) c.textContent = state.surah + " · " + totalAyat() + " Āyāt";
+    syncMediaSession();
   }
   function paintProgress() {
     var root = document.getElementById("darQuranPlayer");
@@ -361,7 +351,7 @@
     var n = root.querySelector("[data-dqp-n]");
     var sl = root.querySelector("[data-dqp=seek]");
     if (cur) cur.textContent = fmt(state.current);
-    if (dur) dur.textContent = fmt(state.duration);
+    if (dur) dur.textContent = "-" + fmt(Math.max(0, (state.duration || 0) - (state.current || 0)));
     if (n) n.textContent = "Āyah " + state.ayah + " / " + totalAyat();
     if (sl) {
       var pct = state.duration ? (state.current / state.duration) * 1000 : 0;
@@ -380,10 +370,31 @@
       }
       var sh = root.querySelector("[data-dqp=shuffle]");
       var rp = root.querySelector("[data-dqp=repeat]");
+      var tx = root.querySelector("[data-dqp=text]");
       if (sh) sh.classList.toggle("is-on", state.shuffle !== "off");
       if (rp) rp.classList.toggle("is-on", state.repeat !== "off");
+      if (tx) tx.classList.toggle("is-on", state.text !== "both");
+      syncMediaSession();
     }
     paintMini();
+  }
+  function syncMediaSession() {
+    if (!navigator.mediaSession) return;
+    var m = meta || {};
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: (m.transliteration || "Qurʾān") + " · Āyah " + state.ayah,
+        artist: reciterById(state.reciter).name,
+        album: "DĀR AL TAWḤĪD"
+      });
+      navigator.mediaSession.playbackState = state.playing ? "playing" : "paused";
+      navigator.mediaSession.setActionHandler("play", function () { audioEl().play().catch(function () {}); });
+      navigator.mediaSession.setActionHandler("pause", function () { audioEl().pause(); });
+      navigator.mediaSession.setActionHandler("previoustrack", function () { prevAyah(); });
+      navigator.mediaSession.setActionHandler("nexttrack", function () { nextAyah(false); });
+      navigator.mediaSession.setActionHandler("seekbackward", function () { skip(-15); });
+      navigator.mediaSession.setActionHandler("seekforward", function () { skip(15); });
+    } catch (e) {}
   }
   function miniEl() {
     var el = document.getElementById("darQuranMiniPlayer");
@@ -501,6 +512,8 @@
       '<button type="button" class="dqp-opt" data-dqp-opt="m-shuffle">Zufall · ' + esc(SHUFFLE_L[state.shuffle]) + "</button>",
       '<button type="button" class="dqp-opt" data-dqp-opt="m-repeat">Wiederholen · ' + esc(REPEAT_L[state.repeat]) + "</button>",
       '<button type="button" class="dqp-opt" data-dqp-opt="m-text">Text · ' + esc(TEXT_L[state.text]) + "</button>",
+      '<button type="button" class="dqp-opt" data-dqp-opt="m-back15">−15 Sekunden</button>',
+      '<button type="button" class="dqp-opt" data-dqp-opt="m-fwd15">+15 Sekunden</button>',
       '<button type="button" class="dqp-opt" data-dqp="pick-surah">Sūrah wechseln</button>',
       '<button type="button" class="dqp-opt" data-dqp="pick-reciter">Qāriʾ wechseln</button>',
       '<button type="button" class="dqp-opt" data-dqp-opt="m-read">Sūrah lesen</button>'
@@ -520,6 +533,8 @@
     if (id === "m-shuffle") { closeSheet(); state.shuffle = cycle(SHUFFLE, state.shuffle); saveState(); paintChrome(); return; }
     if (id === "m-repeat") { closeSheet(); state.repeat = cycle(REPEAT, state.repeat); saveState(); paintChrome(); return; }
     if (id === "m-text") { closeSheet(); state.text = cycle(TEXT, state.text); saveState(); paintChrome(); return; }
+    if (id === "m-back15") { closeSheet(); skip(-15); return; }
+    if (id === "m-fwd15") { closeSheet(); skip(15); return; }
     if (id === "m-read") {
       closeSheet();
       if (typeof window.navigate === "function") window.navigate("quran-surah", String(state.surah) + "/" + state.ayah);
@@ -535,6 +550,7 @@
       return;
     }
     root.dataset.bound = "1";
+    var holdSkip = false;
     root.addEventListener("click", function (ev) {
       var t = ev.target.closest("[data-dqp],[data-dqp-opt]");
       if (!t) return;
@@ -551,8 +567,8 @@
         else a.pause();
         return;
       }
-      if (act === "prev") { prevAyah(); return; }
-      if (act === "next") { nextAyah(false); return; }
+      if (act === "prev") { if (holdSkip) { holdSkip = false; return; } prevAyah(); return; }
+      if (act === "next") { if (holdSkip) { holdSkip = false; return; } nextAyah(false); return; }
       if (act === "back15") { skip(-15); return; }
       if (act === "fwd15") { skip(15); return; }
       if (act === "retry") { state.error = ""; loadAudio(true, false); return; }
@@ -587,6 +603,28 @@
       });
       sl.addEventListener("change", function () { seekLock = false; saveState(); });
     }
+    var vol = root.querySelector("[data-dqp=vol]");
+    if (vol) {
+      vol.value = String(Math.round((audioEl().volume || 1) * 100));
+      vol.style.setProperty("--dqp-fill", vol.value + "%");
+      vol.addEventListener("input", function () {
+        audioEl().volume = Number(vol.value) / 100;
+        vol.style.setProperty("--dqp-fill", vol.value + "%");
+      });
+    }
+    root.querySelectorAll("[data-dqp=prev],[data-dqp=next]").forEach(function (btn) {
+      var timer = 0;
+      btn.addEventListener("pointerdown", function () {
+        holdSkip = false;
+        timer = setTimeout(function () {
+          holdSkip = true;
+          skip(btn.getAttribute("data-dqp") === "prev" ? -15 : 15);
+        }, 450);
+      });
+      ["pointerup", "pointercancel", "pointerleave"].forEach(function (ev) {
+        btn.addEventListener(ev, function () { clearTimeout(timer); });
+      });
+    });
     var sheet = root.querySelector("[data-dqp-sheet]");
     if (sheet) sheet.addEventListener("click", function (e) { if (e.target === sheet) closeSheet(); });
     paintChrome();
