@@ -6,6 +6,7 @@ struct AppleTVContentCatalog: Codable {
     let language: String
     let defaultModule: String
     let screensaver: AppleTVScreensaverDescriptor?
+    let backgrounds: AppleTVBackgroundDescriptor?
     let quran: AppleTVQuranDescriptor?
     let modules: [AppleTVContentModule]
 }
@@ -13,6 +14,16 @@ struct AppleTVContentCatalog: Codable {
 struct AppleTVScreensaverDescriptor: Codable {
     let enabled: Bool
     let rotationConfigPath: String
+}
+
+struct AppleTVBackgroundDescriptor: Codable {
+    let status: String
+    let target: String
+    let catalogPath: String
+    let selectionMode: String
+    let allowUserSelection: Bool
+
+    var isActive: Bool { status == "active" && target == "tvOS-only" }
 }
 
 struct AppleTVQuranDescriptor: Codable {
@@ -94,6 +105,14 @@ actor AppleTVContentRegistry {
         return catalog.modules
             .filter(\.isActive)
             .sorted { $0.sortOrder < $1.sortOrder }
+    }
+
+    func backgroundDescriptor() async throws -> AppleTVBackgroundDescriptor? {
+        let catalog = try await loadCatalog()
+        guard let descriptor = catalog.backgrounds, descriptor.isActive else {
+            return nil
+        }
+        return descriptor
     }
 
     func quranReaderDescriptor() async throws -> AppleTVQuranReaderDescriptor? {
