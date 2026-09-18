@@ -5017,6 +5017,20 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-09-25T23:59:00.000Z"
+    },
+    {
+      "id": "test-quran-player-rebuild-2026-09-18",
+      "approvedBy": "user-explicit-quran-player-test-app",
+      "reason": "Nutzer: Qurʾān Player in der Test-App (#quran-player) optisch und funktional neu bauen. Nur Test-App, Besucher-App unangetastet.",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/dar-quran-player.css",
+        "test/assets/dar-quran-player.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-09-30T23:59:00.000Z"
     }
   ],
   "enabled": true
