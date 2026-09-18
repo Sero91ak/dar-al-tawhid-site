@@ -5017,6 +5017,21 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-09-25T23:59:00.000Z"
+    },
+    {
+      "id": "restore-test-quran-player-after-wrong-live-2026-09-18",
+      "approvedBy": "user-explicit-nur-kapsel-live-rest-test-zurueck",
+      "reason": "Nutzer: nur Gebets-Kapsel aus Test in Besucher/iOS; den Rest des falschen Pushes zurück. Test-Player wiederherstellen.",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/dar-quran-player.css",
+        "test/assets/dar-quran-player.js",
+        "test/assets/app-soft-boot.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-09-25T23:59:00.000Z"
     }
   ],
   "enabled": true
