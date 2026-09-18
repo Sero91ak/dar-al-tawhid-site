@@ -21,13 +21,18 @@
     "newItemsPolicy": "appendToRemainingAndReshuffle",
     "removedItemsPolicy": "dropFromState"
   },
+  "batchBuildPolicy": {
+    "stepSize": 100,
+    "twentyBlockPattern": true,
+    "rule": "Neue Apple-TV-Bildschirmschoner-Inhalte werden in 100er-Schritten gebaut; innerhalb jedes 100er-Schritts werden 20er-Blöcke für Ḥadīṯ, Āṯār, Ṣaḥābah- und Salaf-Aussagen verwendet."
+  },
   "futureModuleMixing": {
     "enabled": true,
     "strategy": "weightedRoundRobin",
     "weights": {
-      "hadith": 6,
-      "dua": 1,
-      "athar": 2
+      "hadith": 5,
+      "athar": 5,
+      "dua": 1
     }
   }
 }
