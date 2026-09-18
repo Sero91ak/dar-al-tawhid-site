@@ -1,5 +1,6 @@
 import SwiftUI
 import AVFoundation
+import UIKit
 
 @MainActor
 struct AppleTVAnimatedBackgroundView: View {
