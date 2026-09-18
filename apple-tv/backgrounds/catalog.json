@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0",
+  "target": "tvOS-only",
+  "selection": {
+    "mode": "ownerFixed",
+    "selectedId": "bg_makkah_dusk_01",
+    "allowUserSelection": false,
+    "rotation": {
+      "enabled": false,
+      "intervalMinutes": 15
+    }
+  },
+  "backgrounds": [
+    {
+      "id": "bg_makkah_dusk_01",
+      "title": "Makkah – Abenddämmerung",
+      "status": "active",
+      "kind": "video",
+      "fit": "cover",
+      "source": {
+        "type": "base64Chunks",
+        "chunkDirectory": "backgrounds/assets/bg_makkah_dusk_01/chunks",
+        "chunkCount": 8,
+        "fileExtension": "mp4"
+      },
+      "video": {
+        "codec": "hevc",
+        "container": "mp4",
+        "width": 3840,
+        "height": 2160,
+        "frameRate": 12,
+        "durationSeconds": 12,
+        "loop": true,
+        "muted": true
+      }
+    }
+  ]
+}
