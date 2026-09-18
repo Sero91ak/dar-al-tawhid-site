@@ -37,6 +37,7 @@ struct AppleTVBackgroundSource: Codable {
     let chunkCount: Int?
     let fileExtension: String?
     let directPath: String?
+    let bundleResource: String?
 }
 
 struct AppleTVBackgroundVideo: Codable {
@@ -93,6 +94,13 @@ actor AppleTVBackgroundService {
         }
 
         switch item.source.type {
+        case "bundle":
+            guard let resource = item.source.bundleResource,
+                  let url = Bundle.main.url(forResource: resource, withExtension: ext) else {
+                throw URLError(.fileDoesNotExist)
+            }
+            return url
+
         case "direct":
             guard let directPath = item.source.directPath else {
                 throw URLError(.badURL)
