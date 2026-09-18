@@ -5,53 +5,47 @@
   var KEY = "darQuranPlayerStateV1";
   var RECITERS = [
     { id: "alafasy", name: "Mišārī Rāšid al-ʿAfāsī", folder: "Alafasy_128kbps", edition: "ar.alafasy" },
+    { id: "minshawi", name: "Muḥammad Ṣiddīq al-Minšāwī", folder: "Minshawy_Murattal_128kbps", edition: "ar.minshawi" },
     { id: "husary", name: "Maḥmūd Ḫalīl al-Ḥuṣarī", folder: "Husary_128kbps", edition: "ar.husary" },
+    { id: "basit", name: "ʿAbd al-Bāsiṭ ʿAbd aṣ-Ṣamad", folder: "Abdul_Basit_Murattal_192kbps", edition: "ar.abdulbasitmurattal" },
     { id: "sudais", name: "ʿAbd ar-Raḥmān as-Sudais", folder: "Abdurrahmaan_As-Sudais_192kbps", edition: "ar.abdurrahmaansudais" },
-    { id: "maher", name: "Māhir al-Muʿayqlī", folder: "MaherAlMuaiqly128kbps", edition: "ar.mahermuaiqly" },
-    { id: "minshawi", name: "Muḥammad Ṣiddīq al-Minšāwī", folder: "Minshawy_Murattal_128kbps", edition: "ar.minshawi" }
+    { id: "maher", name: "Māhir al-Muʿayqlī", folder: "MaherAlMuaiqly128kbps", edition: "ar.mahermuaiqly" }
   ];
   var SHUFFLE = ["off", "surah", "reciter", "both"];
   var REPEAT = ["off", "ayah", "surah"];
   var TEXT = ["both", "ar", "de"];
-  var TEXT_LABEL = { both: "AR+DE", ar: "AR", de: "DE" };
-  var SHUFFLE_LABEL = { off: "Aus", surah: "Sūrah zufällig", reciter: "Rezitator zufällig", both: "Sūrah + Rezitator" };
-  var REPEAT_LABEL = { off: "Aus", ayah: "Aktuelle Āyah", surah: "Aktuelle Sūrah" };
-  var SLEEP = [0, 5, 10, 15, 30, 45];
+  var TEXT_L = { both: "Beides", ar: "عربي", de: "Deutsch" };
+  var SHUFFLE_L = { off: "Aus", surah: "Sūrah zufällig", reciter: "Rezitator zufällig", both: "Sūrah + Rezitator" };
+  var REPEAT_L = { off: "Aus", ayah: "Āyah", surah: "Sūrah" };
 
   var state = {
     surah: 1, ayah: 1, reciter: "alafasy",
     shuffle: "off", repeat: "off", text: "both",
-    playing: false, duration: 0, current: 0,
-    loading: true, error: "", sleepMin: 0, sleepAt: 0
+    playing: false, duration: 0, current: 0, resumeAt: 0,
+    loading: true, error: "", layer: 0
   };
   var verses = [];
   var meta = null;
   var seekLock = false;
   var urlIndex = 0;
-  var ayahPainted = 0;
-  var sleepTimer = 0;
+  var lastSurahs = [];
+  var saveTimer = 0;
 
   function reciterById(id) {
     return RECITERS.find(function (r) { return r.id === id; }) || RECITERS[0];
   }
-  function reciterIndex() {
-    return Math.max(0, RECITERS.findIndex(function (r) { return r.id === state.reciter; }));
-  }
   function esc(s) {
-    return String(s == null ? "" : s)
-      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
   function pad(n, w) { return String(n).padStart(w || 3, "0"); }
   function fmt(sec) {
     sec = Math.max(0, Math.floor(Number(sec) || 0));
-    return Math.floor(sec / 60) + ":" + String(sec % 60).padStart(2, "0");
+    return String(Math.floor(sec / 60)).padStart(2, "0") + ":" + String(sec % 60).padStart(2, "0");
   }
   function verseAt(n) {
     return verses.find(function (v) { return Number(v.id) === Number(n); }) || null;
   }
-  function totalAyat() {
-    return (meta && meta.total_verses) || verses.length || 1;
-  }
+  function totalAyat() { return (meta && meta.total_verses) || verses.length || 1; }
   function loadState() {
     try {
       var raw = JSON.parse(localStorage.getItem(KEY) || "null");
@@ -62,15 +56,23 @@
       if (SHUFFLE.indexOf(raw.shuffle) >= 0) state.shuffle = raw.shuffle;
       if (REPEAT.indexOf(raw.repeat) >= 0) state.repeat = raw.repeat;
       if (TEXT.indexOf(raw.text) >= 0) state.text = raw.text;
+      if (Number(raw.resumeAt) > 0) state.resumeAt = Number(raw.resumeAt);
+      if (Array.isArray(raw.lastSurahs)) lastSurahs = raw.lastSurahs.map(Number).filter(Boolean);
     } catch (e) {}
   }
   function saveState() {
     try {
       localStorage.setItem(KEY, JSON.stringify({
         surah: state.surah, ayah: state.ayah, reciter: state.reciter,
-        shuffle: state.shuffle, repeat: state.repeat, text: state.text
+        shuffle: state.shuffle, repeat: state.repeat, text: state.text,
+        resumeAt: state.current || state.resumeAt || 0,
+        lastSurahs: lastSurahs.slice(-12)
       }));
     } catch (e) {}
+  }
+  function rememberSurah(id) {
+    lastSurahs.push(Number(id));
+    if (lastSurahs.length > 16) lastSurahs = lastSurahs.slice(-16);
   }
   function audioEl() {
     var a = document.getElementById("darQuranPlayerAudio");
@@ -86,6 +88,17 @@
     a.addEventListener("play", function () { state.playing = true; paintChrome(); });
     a.addEventListener("pause", function () { state.playing = false; paintChrome(); });
     a.addEventListener("error", tryFallback);
+    a.addEventListener("canplay", function () { state.error = ""; paintError(); });
+    return a;
+  }
+  function preloadEl() {
+    var a = document.getElementById("darQuranPlayerAudioNext");
+    if (a) return a;
+    a = document.createElement("audio");
+    a.id = "darQuranPlayerAudioNext";
+    a.preload = "auto";
+    a.style.display = "none";
+    document.body.appendChild(a);
     return a;
   }
   function globalAyah(surah, ayah) {
@@ -96,29 +109,46 @@
     }
     return n + ayah;
   }
-  function audioUrls() {
+  function urlsFor(surah, ayah) {
     var rec = reciterById(state.reciter);
-    var s = pad(state.surah, 3);
-    var a = pad(state.ayah, 3);
+    var s = pad(surah, 3);
+    var a = pad(ayah, 3);
     return [
       "https://everyayah.com/data/" + rec.folder + "/" + s + a + ".mp3",
-      "https://cdn.islamic.network/quran/audio/128/" + rec.edition + "/" + globalAyah(state.surah, state.ayah) + ".mp3"
+      "https://cdn.islamic.network/quran/audio/128/" + rec.edition + "/" + globalAyah(surah, ayah) + ".mp3"
     ];
   }
-  function loadAudio(autoplay) {
+  function loadAudio(autoplay, keepTime) {
     urlIndex = 0;
+    state.error = "";
     var a = audioEl();
-    a.src = audioUrls()[0];
+    a.src = urlsFor(state.surah, state.ayah)[0];
     a.load();
+    if (keepTime && state.resumeAt > 0) {
+      a.addEventListener("loadedmetadata", function once() {
+        a.removeEventListener("loadedmetadata", once);
+        if (state.resumeAt < (a.duration || 1e9)) a.currentTime = state.resumeAt;
+        state.resumeAt = 0;
+      });
+    }
     if (autoplay) a.play().catch(function () {});
     paintAyah(true);
     paintChrome();
+    preloadNext();
+  }
+  function preloadNext() {
+    var nextA = state.ayah < totalAyat() ? state.ayah + 1 : (state.repeat === "surah" ? 1 : 0);
+    if (!nextA) return;
+    var p = preloadEl();
+    p.src = urlsFor(state.surah, nextA)[0];
+    try { p.load(); } catch (e) {}
   }
   function tryFallback() {
-    var urls = audioUrls();
+    var urls = urlsFor(state.surah, state.ayah);
     urlIndex += 1;
     if (urlIndex >= urls.length) {
-      state.error = "Audio nicht verfügbar.";
+      state.error = "Rezitation konnte nicht geladen werden.";
+      paintError();
       return;
     }
     var a = audioEl();
@@ -132,6 +162,7 @@
     state.current = a.currentTime || 0;
     state.duration = a.duration || 0;
     paintProgress();
+    if (!saveTimer) saveTimer = setTimeout(function () { saveTimer = 0; saveState(); }, 1800);
   }
   function onMeta() {
     state.duration = audioEl().duration || 0;
@@ -152,6 +183,7 @@
   }
   async function ensureData() {
     state.loading = true;
+    paintStatus();
     if (typeof window.loadQuranIndex === "function") await window.loadQuranIndex();
     if (typeof window.loadQuranSurah === "function") {
       var doc = await window.loadQuranSurah(state.surah);
@@ -164,8 +196,7 @@
     saveState();
   }
   function parseRoute(value) {
-    var parts = String(value || (location.hash || "").replace(/^#quran-player\/?/, "")).split("/").filter(Boolean);
-    if (parts[0] === "quran-player") parts = parts.slice(1);
+    var parts = String(value || "").split("/").filter(Boolean);
     var s = Number(parts[0]);
     var a = Number(parts[1]);
     if (s >= 1 && s <= 114) state.surah = s;
@@ -179,111 +210,174 @@
   }
   function icon(name) {
     var p = {
-      chevron: '<path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
-      ellipsis: '<circle cx="6" cy="12" r="1.4" fill="currentColor"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/><circle cx="18" cy="12" r="1.4" fill="currentColor"/>',
-      prev: '<path d="M18 6l-8 6 8 6M7 6v12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>',
-      next: '<path d="M6 6l8 6-8 6M17 6v12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>',
-      back15: '<path d="M8 8a7 7 0 1 0 8 0" fill="none" stroke="currentColor" stroke-width="1.55"/><path d="M8 8V4M8 8h4" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"/><text x="12" y="15.2" text-anchor="middle" font-size="6.2" fill="currentColor" font-weight="700">15</text>',
-      fwd15: '<path d="M16 8a7 7 0 1 1-8 0" fill="none" stroke="currentColor" stroke-width="1.55"/><path d="M16 8V4M16 8h-4" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"/><text x="12" y="15.2" text-anchor="middle" font-size="6.2" fill="currentColor" font-weight="700">15</text>',
-      play: '<path d="M9 7l10 5-10 5z" fill="currentColor"/>',
-      pause: '<path d="M8 7h3v10H8zM13 7h3v10h-3z" fill="currentColor"/>',
-      shuffle: '<path d="M4 7h4l3 5 3-5h6M17 7l3 0M4 17h4l3-5" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"/>',
-      repeat: '<path d="M7 8h9l-2-2M17 16H8l2 2" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"/>'
+      back: '<path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>',
+      more: '<circle cx="6" cy="12" r="1.35" fill="currentColor"/><circle cx="12" cy="12" r="1.35" fill="currentColor"/><circle cx="18" cy="12" r="1.35" fill="currentColor"/>',
+      prev: '<path d="M18 6l-8 6 8 6M7.2 6v12" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round"/>',
+      next: '<path d="M6 6l8 6-8 6M16.8 6v12" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round"/>',
+      back15: '<path d="M8 8a7 7 0 1 0 8 0" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 8V4.2M8 8h3.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+      fwd15: '<path d="M16 8a7 7 0 1 1-8 0" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M16 8V4.2M16 8h-3.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+      play: '<path d="M9 7.2l10 4.8-10 4.8z" fill="currentColor"/>',
+      pause: '<path d="M8.2 7h2.6v10H8.2zM13.2 7h2.6v10h-2.6z" fill="currentColor"/>',
+      shuffle: '<path d="M4 7h4l3 5 3-5h6M4 17h4l3-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+      repeat: '<path d="M7 8h9l-2-2M17 16H8l2 2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+      book: '<path d="M6.5 5.5h11v13h-9.2a1.8 1.8 0 0 1-1.8-1.8V5.5z" fill="none" stroke="currentColor" stroke-width="1.5"/>',
+      mic: '<rect x="9" y="4.5" width="6" height="9.5" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7.2 12.2a4.8 4.8 0 0 0 9.6 0M12 17v2.4" fill="none" stroke="currentColor" stroke-width="1.5"/>',
+      text: '<path d="M6 7.2h12M8 12h8M10 16.8h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>'
     };
     return '<svg viewBox="0 0 24 24" aria-hidden="true">' + (p[name] || "") + "</svg>";
   }
-  function hue() {
-    return 168 + ((state.surah * 11 + reciterIndex() * 7) % 28);
-  }
   function renderShell() {
-    var m = meta || {};
-    var rec = reciterById(state.reciter);
     return (
-      '<div id="darQuranPlayer" data-text="' + esc(state.text) + '" style="--dqp-hue:' + hue() + '">' +
-        '<header class="dqp-top">' +
-          '<button type="button" data-dqp="min" aria-label="Minimieren">' + icon("chevron") + "</button>" +
-          '<div><span class="dqp-kicker">DĀR AL TAWḤĪD</span><h1 class="dqp-head-title">QURʾĀN PLAYER</h1></div>' +
-          '<button type="button" data-dqp="menu" aria-label="Optionen">' + icon("ellipsis") + "</button>" +
+      '<div id="darQuranPlayer" data-text="' + esc(state.text) + '">' +
+        '<header class="dqp-header">' +
+          '<button class="dqp-hit" type="button" data-dqp="min" aria-label="Minimieren">' + icon("back") + "</button>" +
+          '<div><span class="dqp-kicker">DĀR AL TAWḤĪD</span><h1 class="dqp-page-title">QURʾĀN PLAYER</h1></div>' +
+          '<button class="dqp-hit" type="button" data-dqp="menu" aria-label="Optionen">' + icon("more") + "</button>" +
         "</header>" +
-        '<div class="dqp-art-wrap"><div class="dqp-art"><div class="dqp-art-inner">' +
-          '<div class="dqp-art-brand">DĀR AL TAWḤĪD</div>' +
-          '<div class="dqp-art-label">سورة</div>' +
-          '<div class="dqp-art-ar" lang="ar" dir="rtl">' + esc(m.name || "…") + "</div>" +
-        "</div></div></div>" +
-        '<div class="dqp-meta">' +
-          '<button type="button" class="dqp-surah-btn" data-dqp="pick-surah">' + esc(m.transliteration || "…") + "</button>" +
-          '<button type="button" class="dqp-reciter-btn" data-dqp="pick-reciter">' + esc(rec.name) + "</button>" +
-        "</div>" +
+        '<hr class="dqp-rule">' +
+        '<section class="dqp-info">' +
+          '<span class="dqp-ornament">۞</span>' +
+          '<p class="dqp-ar-surah" lang="ar" dir="rtl" data-dqp-arname>سورة …</p>' +
+          '<button type="button" class="dqp-surah-lat" data-dqp="pick-surah">Sūrah wird geladen …</button>' +
+          '<button type="button" class="dqp-qari" data-dqp="pick-reciter">Rezitator wird geladen …</button>' +
+          '<p class="dqp-counts" data-dqp-counts></p>' +
+        "</section>" +
+        '<hr class="dqp-rule">' +
         '<section class="dqp-stage">' +
-          '<div class="dqp-ghost" data-dqp-prev></div>' +
-          '<div class="dqp-now" data-dqp-now>' +
-            '<div class="dqp-now-ar" lang="ar" dir="rtl"></div>' +
-            '<div class="dqp-now-de"></div>' +
+          '<div class="dqp-ayah is-on" data-dqp-layer="0">' +
+            '<div class="dqp-ayah-ref" data-ref></div>' +
+            '<div class="dqp-ayah-ar" lang="ar" dir="rtl"></div>' +
+            '<div class="dqp-ayah-de"></div>' +
+            '<div class="dqp-status">Sūrah wird geladen …</div>' +
           "</div>" +
-          '<div class="dqp-ghost" data-dqp-next></div>' +
+          '<div class="dqp-ayah" data-dqp-layer="1" hidden>' +
+            '<div class="dqp-ayah-ref" data-ref></div>' +
+            '<div class="dqp-ayah-ar" lang="ar" dir="rtl"></div>' +
+            '<div class="dqp-ayah-de"></div>' +
+          "</div>" +
         "</section>" +
         '<section class="dqp-progress">' +
-          '<div class="dqp-times"><span data-dqp-cur>0:00</span><span data-dqp-dur>0:00</span></div>' +
+          '<div class="dqp-times"><span data-dqp-cur>00:00</span><span class="dqp-ayah-n" data-dqp-n></span><span data-dqp-dur>00:00</span></div>' +
           '<input class="dqp-slider" data-dqp="seek" type="range" min="0" max="1000" value="0" aria-label="Fortschritt">' +
-          '<div class="dqp-count" data-dqp-ayah></div>' +
         "</section>" +
         '<div class="dqp-controls">' +
-          '<button class="dqp-ctrl" type="button" data-dqp="prev" aria-label="Vorige Āyah">' + icon("prev") + "</button>" +
-          '<button class="dqp-ctrl" type="button" data-dqp="back15" aria-label="15 Sekunden zurück">' + icon("back15") + "</button>" +
-          '<button class="dqp-play" type="button" data-dqp="play" aria-label="Wiedergabe">' + icon("play") + "</button>" +
-          '<button class="dqp-ctrl" type="button" data-dqp="fwd15" aria-label="15 Sekunden vor">' + icon("fwd15") + "</button>" +
-          '<button class="dqp-ctrl" type="button" data-dqp="next" aria-label="Nächste Āyah">' + icon("next") + "</button>" +
+          '<button class="dqp-hit dqp-ctrl" type="button" data-dqp="prev" aria-label="Vorige Āyah">' + icon("prev") + "</button>" +
+          '<button class="dqp-hit dqp-ctrl" type="button" data-dqp="back15" aria-label="15 Sekunden zurück">' + icon("back15") + "</button>" +
+          '<button class="dqp-play dqp-hit" type="button" data-dqp="play" aria-label="Wiedergabe">' + icon("play") + "</button>" +
+          '<button class="dqp-hit dqp-ctrl" type="button" data-dqp="fwd15" aria-label="15 Sekunden vor">' + icon("fwd15") + "</button>" +
+          '<button class="dqp-hit dqp-ctrl" type="button" data-dqp="next" aria-label="Nächste Āyah">' + icon("next") + "</button>" +
         "</div>" +
-        '<div class="dqp-secondary">' +
-          '<button class="dqp-ico" type="button" data-dqp="shuffle" aria-label="Zufall">' + icon("shuffle") + "</button>" +
-          '<div class="dqp-seg" role="tablist" aria-label="Textmodus">' +
-            '<button type="button" data-dqp="text-ar">AR</button>' +
-            '<button type="button" data-dqp="text-de">DE</button>' +
-            '<button type="button" data-dqp="text-both">AR+DE</button>' +
-          "</div>" +
-          '<button class="dqp-ico" type="button" data-dqp="repeat" aria-label="Wiederholen">' + icon("repeat") + "</button>" +
+        '<div class="dqp-tools">' +
+          '<button class="dqp-tool" type="button" data-dqp="shuffle">' + icon("shuffle") + "<span>Zufall</span></button>" +
+          '<button class="dqp-tool" type="button" data-dqp="repeat">' + icon("repeat") + "<span>Wiederholen</span></button>" +
+          '<button class="dqp-tool" type="button" data-dqp="pick-surah">' + icon("book") + "<span>Sūrah</span></button>" +
+          '<button class="dqp-tool" type="button" data-dqp="pick-reciter">' + icon("mic") + "<span>Qāriʾ</span></button>" +
+          '<button class="dqp-tool" type="button" data-dqp="text">' + icon("text") + "<span>Text</span></button>" +
         "</div>" +
         '<div class="dqp-sheet" data-dqp-sheet hidden></div>' +
       "</div>"
     );
   }
-  function lineFor(v) {
-    if (!v) return "";
-    if (state.text === "de") return v.de || "";
-    return v.ar || "";
+  function fillLayer(el, v) {
+    if (!el) return;
+    var ref = el.querySelector("[data-ref]");
+    var ar = el.querySelector(".dqp-ayah-ar");
+    var de = el.querySelector(".dqp-ayah-de");
+    var st = el.querySelector(".dqp-status");
+    if (st) st.remove();
+    if (ref) ref.textContent = state.surah + " · Āyah " + state.ayah;
+    if (ar) ar.textContent = (v && v.ar) || "";
+    if (de) de.textContent = (v && v.de) || "";
+    fitAyah(el);
+  }
+  function fitAyah(el) {
+    var ar = el.querySelector(".dqp-ayah-ar");
+    var de = el.querySelector(".dqp-ayah-de");
+    if (!ar) return;
+    var n = (ar.textContent || "").length;
+    var px = n > 220 ? 24 : n > 140 ? 27 : n > 80 ? 31 : 36;
+    ar.style.fontSize = px + "px";
+    if (de) de.style.fontSize = Math.max(13, Math.round(px * 0.46)) + "px";
+    var box = el.parentElement;
+    if (!box) return;
+    var guard = 0;
+    while (el.scrollHeight > box.clientHeight - 4 && px > 18 && guard < 16) {
+      px -= 1;
+      ar.style.fontSize = px + "px";
+      if (de) de.style.fontSize = Math.max(12, Math.round(px * 0.46)) + "px";
+      guard += 1;
+    }
   }
   function paintAyah(animate) {
     var root = document.getElementById("darQuranPlayer");
     if (!root) return;
-    var now = root.querySelector("[data-dqp-now]");
-    var prev = root.querySelector("[data-dqp-prev]");
-    var next = root.querySelector("[data-dqp-next]");
-    var ar = root.querySelector(".dqp-now-ar");
-    var de = root.querySelector(".dqp-now-de");
-    var cur = verseAt(state.ayah);
-    var apply = function () {
-      if (ar) ar.textContent = (cur && cur.ar) || (state.loading ? "…" : "");
-      if (de) de.textContent = (cur && cur.de) || "";
-      if (prev) prev.textContent = lineFor(verseAt(state.ayah - 1));
-      if (next) next.textContent = lineFor(verseAt(state.ayah + 1));
-      ayahPainted = state.ayah;
-      if (now) { now.classList.remove("is-out"); now.classList.add("is-in"); setTimeout(function () { now.classList.remove("is-in"); }, 400); }
-    };
-    if (animate && now && ayahPainted && ayahPainted !== state.ayah) {
-      now.classList.add("is-out");
-      setTimeout(apply, 220);
-    } else apply();
+    var v = verseAt(state.ayah);
+    var a = root.querySelector('[data-dqp-layer="0"]');
+    var b = root.querySelector('[data-dqp-layer="1"]');
+    if (!a || !b) return;
+    if (!animate) {
+      a.hidden = false;
+      b.hidden = true;
+      a.className = "dqp-ayah is-on";
+      fillLayer(a, v);
+      paintError();
+      return;
+    }
+    var cur = a.classList.contains("is-on") ? a : b;
+    var nxt = cur === a ? b : a;
+    nxt.hidden = false;
+    fillLayer(nxt, v);
+    nxt.className = "dqp-ayah";
+    requestAnimationFrame(function () {
+      cur.classList.add("is-leave");
+      nxt.classList.add("is-on");
+      setTimeout(function () {
+        cur.className = "dqp-ayah";
+        cur.hidden = true;
+      }, 300);
+    });
+    paintError();
+  }
+  function paintStatus() {
+    var el = document.querySelector("#darQuranPlayer .dqp-status");
+    if (el) el.textContent = state.loading ? "Sūrah wird geladen …" : "";
+  }
+  function paintError() {
+    var root = document.getElementById("darQuranPlayer");
+    if (!root) return;
+    var on = root.querySelector(".dqp-ayah.is-on") || root.querySelector('[data-dqp-layer="0"]');
+    if (!on) return;
+    var old = on.querySelector(".dqp-err");
+    if (old) old.remove();
+    if (!state.error) return;
+    var box = document.createElement("div");
+    box.className = "dqp-err";
+    box.innerHTML = "<div>" + esc(state.error) + '</div><button type="button" data-dqp="retry">Erneut versuchen</button>';
+    on.appendChild(box);
+  }
+  function paintInfo() {
+    var root = document.getElementById("darQuranPlayer");
+    if (!root) return;
+    var m = meta || {};
+    var ar = root.querySelector("[data-dqp-arname]");
+    var lat = root.querySelector(".dqp-surah-lat");
+    var q = root.querySelector(".dqp-qari");
+    var c = root.querySelector("[data-dqp-counts]");
+    if (ar) ar.textContent = m.name ? "سورة " + String(m.name).replace(/^سورة\s*/, "") : "سورة …";
+    if (lat) lat.textContent = m.transliteration ? "Sūrah " + m.transliteration : "Sūrah wird geladen …";
+    if (q) q.textContent = reciterById(state.reciter).name;
+    if (c) c.textContent = state.surah + " · " + totalAyat() + " Āyāt";
   }
   function paintProgress() {
     var root = document.getElementById("darQuranPlayer");
     if (!root) return;
     var cur = root.querySelector("[data-dqp-cur]");
     var dur = root.querySelector("[data-dqp-dur]");
-    var ay = root.querySelector("[data-dqp-ayah]");
+    var n = root.querySelector("[data-dqp-n]");
     var sl = root.querySelector("[data-dqp=seek]");
     if (cur) cur.textContent = fmt(state.current);
     if (dur) dur.textContent = fmt(state.duration);
-    if (ay) ay.textContent = state.ayah + " / " + totalAyat();
+    if (n) n.textContent = "Āyah " + state.ayah + " / " + totalAyat();
     if (sl) {
       var pct = state.duration ? (state.current / state.duration) * 1000 : 0;
       sl.value = String(Math.round(pct));
@@ -293,7 +387,6 @@
   function paintChrome() {
     var root = document.getElementById("darQuranPlayer");
     if (root) {
-      root.style.setProperty("--dqp-hue", String(hue()));
       root.setAttribute("data-text", state.text);
       var play = root.querySelector("[data-dqp=play]");
       if (play) {
@@ -304,9 +397,6 @@
       var rp = root.querySelector("[data-dqp=repeat]");
       if (sh) sh.classList.toggle("is-on", state.shuffle !== "off");
       if (rp) rp.classList.toggle("is-on", state.repeat !== "off");
-      root.querySelectorAll("[data-dqp^=text-]").forEach(function (b) {
-        b.classList.toggle("is-on", b.getAttribute("data-dqp") === "text-" + state.text);
-      });
     }
     paintMini();
   }
@@ -333,10 +423,9 @@
   }
   function paintMini() {
     var el = miniEl();
-    var onPlayer = document.documentElement.classList.contains("is-quran-player-route");
     var a = audioEl();
     var live = !!(a.src && (!a.paused || state.playing || a.currentTime > 0));
-    el.classList.toggle("is-on", !onPlayer && live);
+    el.classList.toggle("is-on", !document.documentElement.classList.contains("is-quran-player-route") && live);
     var m = meta || surahMeta(state.surah) || {};
     var b = el.querySelector("b");
     var s = el.querySelector("span");
@@ -347,45 +436,55 @@
   }
   function closeSheet() {
     var sh = document.querySelector("[data-dqp-sheet]");
-    if (sh) { sh.hidden = true; sh.innerHTML = ""; }
+    if (!sh) return;
+    sh.classList.remove("is-open");
+    setTimeout(function () { sh.hidden = true; sh.innerHTML = ""; }, 280);
   }
-  function openSheet(title, rows) {
+  function openSheet(title, html) {
     var sh = document.querySelector("[data-dqp-sheet]");
     if (!sh) return;
     sh.hidden = false;
-    sh.innerHTML = '<div class="dqp-sheet-card"><div class="dqp-sheet-head"><span>' + esc(title) + '</span><button type="button" data-dqp="sheet-close">Fertig</button></div>' +
-      rows.map(function (r) {
-        return '<button type="button" class="dqp-opt' + (r.on ? " is-on" : "") + '" data-dqp-opt="' + esc(r.id) + '">' + esc(r.label) + (r.sub ? "<small>" + esc(r.sub) + "</small>" : "") + "</button>";
-      }).join("") + "</div>";
+    sh.innerHTML = '<div class="dqp-sheet-card"><div class="dqp-sheet-head"><span>' + esc(title) + '</span><button type="button" class="dqp-hit" data-dqp="sheet-close">Fertig</button></div>' + html + "</div>";
+    requestAnimationFrame(function () { sh.classList.add("is-open"); });
   }
-  function pickRandomSurah() { return 1 + Math.floor(Math.random() * 114); }
+  function cycle(list, cur) { return list[(list.indexOf(cur) + 1) % list.length]; }
+  function pickRandomSurah() {
+    var id, n = 0;
+    do {
+      id = 1 + Math.floor(Math.random() * 114);
+      n += 1;
+    } while (lastSurahs.indexOf(id) >= 0 && n < 20);
+    return id;
+  }
   function pickRandomReciter() { return RECITERS[Math.floor(Math.random() * RECITERS.length)].id; }
   async function gotoAyah(ayah, autoplay) {
     state.ayah = Math.max(1, Math.min(totalAyat(), Number(ayah) || 1));
+    state.resumeAt = 0;
     writeHash();
     saveState();
     paintProgress();
-    loadAudio(autoplay !== false && (state.playing || autoplay === true));
+    loadAudio(autoplay !== false && (state.playing || autoplay === true), false);
   }
   async function gotoSurah(id, ayah, autoplay, keepReciter) {
-    state.surah = Math.max(1, Math.min(114, Number(id) || 1));
+    var next = Math.max(1, Math.min(114, Number(id) || 1));
+    rememberSurah(next);
+    state.surah = next;
     state.ayah = Number(ayah) || 1;
+    state.resumeAt = 0;
     if (!keepReciter && (state.shuffle === "reciter" || state.shuffle === "both")) state.reciter = pickRandomReciter();
     await ensureData();
-    var host = document.getElementById("darQuranPlayer");
-    if (host && host.parentNode) {
-      host.parentNode.innerHTML = renderShell();
-      bind(true);
-      var readyGo = document.getElementById("darQuranPlayer");
-      if (readyGo) readyGo.dataset.ready = "1";
-    }
-    loadAudio(!!autoplay || state.playing);
+    paintInfo();
+    writeHash();
+    loadAudio(!!autoplay || state.playing, false);
   }
   async function nextAyah(fromEnd) {
-    if (state.shuffle === "reciter" || state.shuffle === "both") state.reciter = pickRandomReciter();
+    if (state.shuffle === "reciter" || state.shuffle === "both") {
+      state.reciter = pickRandomReciter();
+      paintInfo();
+    }
     if (state.ayah < totalAyat()) return gotoAyah(state.ayah + 1, true);
     if (state.repeat === "surah") return gotoAyah(1, true);
-    if (state.shuffle === "surah" || state.shuffle === "both") return gotoSurah(pickRandomSurah(), 1, true);
+    if (state.shuffle === "surah" || state.shuffle === "both") return gotoSurah(pickRandomSurah(), 1, true, state.shuffle === "surah");
     if (state.surah < 114) return gotoSurah(state.surah + 1, 1, fromEnd || state.playing, true);
     return gotoSurah(1, 1, fromEnd || state.playing, true);
   }
@@ -396,102 +495,58 @@
       return gotoAyah(totalAyat(), state.playing);
     }
   }
-  function skip(delta) {
+  function skip(d) {
     var a = audioEl();
-    a.currentTime = Math.max(0, (a.currentTime || 0) + delta);
-  }
-  function cycle(list, cur) { return list[(list.indexOf(cur) + 1) % list.length]; }
-  function setSleep(min) {
-    state.sleepMin = min;
-    clearTimeout(sleepTimer);
-    if (!min) { state.sleepAt = 0; return; }
-    state.sleepAt = Date.now() + min * 60000;
-    sleepTimer = setTimeout(function () { audioEl().pause(); }, min * 60000);
-  }
-  function openMenu() {
-    var sleepNote = state.sleepMin ? state.sleepMin + " Min." : "Aus";
-    openSheet("Optionen", [
-      { id: "m-shuffle", label: "Zufall: " + SHUFFLE_LABEL[state.shuffle], on: state.shuffle !== "off" },
-      { id: "m-repeat", label: "Wiederholen: " + REPEAT_LABEL[state.repeat], on: state.repeat !== "off" },
-      { id: "m-text", label: "Textmodus: " + TEXT_LABEL[state.text] },
-      { id: "m-surah", label: "Sūrah wechseln" },
-      { id: "m-reciter", label: "Rezitator wechseln" },
-      { id: "m-sleep", label: "Sleep Timer: " + sleepNote },
-      { id: "m-queue", label: "Queue" },
-      { id: "m-read", label: "Sūrah lesen" }
-    ]);
-  }
-  function openShuffleSheet() {
-    openSheet("Zufall", SHUFFLE.map(function (id) {
-      return { id: "sh-" + id, label: SHUFFLE_LABEL[id], on: state.shuffle === id };
-    }));
-  }
-  function openRepeatSheet() {
-    openSheet("Wiederholen", REPEAT.map(function (id) {
-      return { id: "rp-" + id, label: REPEAT_LABEL[id], on: state.repeat === id };
-    }));
-  }
-  function openSleepSheet() {
-    openSheet("Sleep Timer", SLEEP.map(function (n) {
-      return { id: "sl-" + n, label: n ? n + " Minuten" : "Aus", on: state.sleepMin === n };
-    }));
-  }
-  function openQueue() {
-    var rows = [];
-    for (var i = state.ayah; i <= totalAyat(); i++) {
-      var v = verseAt(i);
-      rows.push({ id: "q-" + i, label: "Āyah " + i, sub: (v && v.ar) || "", on: i === state.ayah });
-    }
-    openSheet("Queue", rows);
+    a.currentTime = Math.max(0, (a.currentTime || 0) + d);
   }
   function openSurahSheet() {
     var list = (window.quranMeta && window.quranMeta.surahs) || [];
-    openSheet("Sūrah", list.map(function (s) {
-      return { id: "s-" + s.id, label: s.id + ". " + s.transliteration, sub: s.name, on: Number(s.id) === state.surah };
-    }));
+    var rows = list.map(function (s) {
+      return '<button type="button" class="dqp-opt' + (Number(s.id) === state.surah ? " is-on" : "") + '" data-dqp-opt="s-' + s.id + '" data-q="' + esc((s.transliteration + " " + s.name + " " + s.id).toLowerCase()) + '"><span>' + s.id + "  " + esc(s.transliteration) + "</span><small>" + esc(s.name) + "</small></button>";
+    }).join("");
+    openSheet("Sūrah auswählen", '<input class="dqp-search" data-dqp-search type="search" placeholder="Suche" autocomplete="off">' + rows);
   }
   function openReciterSheet() {
-    openSheet("Rezitator", RECITERS.map(function (r) {
-      return { id: "r-" + r.id, label: r.name, on: r.id === state.reciter };
-    }));
+    openSheet("Qāriʾ", RECITERS.map(function (r) {
+      return '<button type="button" class="dqp-opt' + (r.id === state.reciter ? " is-on" : "") + '" data-dqp-opt="r-' + r.id + '">' + (r.id === state.reciter ? "✓ " : "") + esc(r.name) + "</button>";
+    }).join(""));
+  }
+  function openMenu() {
+    openSheet("Optionen", [
+      '<button type="button" class="dqp-opt" data-dqp-opt="m-shuffle">Zufall · ' + esc(SHUFFLE_L[state.shuffle]) + "</button>",
+      '<button type="button" class="dqp-opt" data-dqp-opt="m-repeat">Wiederholen · ' + esc(REPEAT_L[state.repeat]) + "</button>",
+      '<button type="button" class="dqp-opt" data-dqp-opt="m-text">Text · ' + esc(TEXT_L[state.text]) + "</button>",
+      '<button type="button" class="dqp-opt" data-dqp="pick-surah">Sūrah wechseln</button>',
+      '<button type="button" class="dqp-opt" data-dqp="pick-reciter">Qāriʾ wechseln</button>',
+      '<button type="button" class="dqp-opt" data-dqp-opt="m-read">Sūrah lesen</button>'
+    ].join(""));
   }
   async function onOpt(id) {
-    closeSheet();
-    if (id.indexOf("s-") === 0) return gotoSurah(Number(id.slice(2)), 1, state.playing, true);
+    if (id.indexOf("s-") === 0) { closeSheet(); return gotoSurah(Number(id.slice(2)), 1, state.playing, true); }
     if (id.indexOf("r-") === 0) {
+      closeSheet();
       state.reciter = id.slice(2);
+      state.resumeAt = audioEl().currentTime || 0;
       saveState();
-      loadAudio(state.playing);
-      var recBtn = document.querySelector(".dqp-reciter-btn");
-      if (recBtn) recBtn.textContent = reciterById(state.reciter).name;
-      paintChrome();
+      paintInfo();
+      loadAudio(state.playing, true);
       return;
     }
-    if (id.indexOf("sh-") === 0) { state.shuffle = id.slice(3); saveState(); paintChrome(); return; }
-    if (id.indexOf("rp-") === 0) { state.repeat = id.slice(3); saveState(); paintChrome(); return; }
-    if (id.indexOf("sl-") === 0) { setSleep(Number(id.slice(3))); return; }
-    if (id.indexOf("q-") === 0) return gotoAyah(Number(id.slice(2)), true);
-    if (id === "m-shuffle") return openShuffleSheet();
-    if (id === "m-repeat") return openRepeatSheet();
-    if (id === "m-text") { state.text = cycle(TEXT, state.text); saveState(); paintAyah(false); paintChrome(); return; }
-    if (id === "m-surah") return openSurahSheet();
-    if (id === "m-reciter") return openReciterSheet();
-    if (id === "m-sleep") return openSleepSheet();
-    if (id === "m-queue") return openQueue();
-    if (id === "m-read" && typeof window.navigate === "function") window.navigate("quran-surah", String(state.surah) + "/" + state.ayah);
-  }
-  function minimize() {
-    if (typeof window.navigate === "function") window.navigate("quran");
-    else location.hash = "#quran";
-    setTimeout(paintMini, 40);
+    if (id === "m-shuffle") { closeSheet(); state.shuffle = cycle(SHUFFLE, state.shuffle); saveState(); paintChrome(); return; }
+    if (id === "m-repeat") { closeSheet(); state.repeat = cycle(REPEAT, state.repeat); saveState(); paintChrome(); return; }
+    if (id === "m-text") { closeSheet(); state.text = cycle(TEXT, state.text); saveState(); paintChrome(); return; }
+    if (id === "m-read") {
+      closeSheet();
+      if (typeof window.navigate === "function") window.navigate("quran-surah", String(state.surah) + "/" + state.ayah);
+    }
   }
   function bind(force) {
     var root = document.getElementById("darQuranPlayer");
     if (!root) return;
     if (root.dataset.bound && !force) {
+      paintInfo();
       paintChrome();
       paintProgress();
-      paintAyah(false);
       return;
     }
     root.dataset.bound = "1";
@@ -499,7 +554,12 @@
       var t = ev.target.closest("[data-dqp],[data-dqp-opt]");
       if (!t) return;
       var act = t.getAttribute("data-dqp");
-      if (act === "min") { minimize(); return; }
+      if (act === "min") {
+        if (typeof window.navigate === "function") window.navigate("quran");
+        else location.hash = "#quran";
+        setTimeout(paintMini, 40);
+        return;
+      }
       if (act === "play") {
         var a = audioEl();
         if (a.paused) a.play().catch(function () {});
@@ -510,21 +570,26 @@
       if (act === "next") { nextAyah(false); return; }
       if (act === "back15") { skip(-15); return; }
       if (act === "fwd15") { skip(15); return; }
+      if (act === "retry") { state.error = ""; loadAudio(true, false); return; }
       if (act === "sheet-close") { closeSheet(); return; }
       if (act === "menu") { openMenu(); return; }
-      if (act === "shuffle") { openShuffleSheet(); return; }
-      if (act === "repeat") { openRepeatSheet(); return; }
+      if (act === "shuffle") { state.shuffle = cycle(SHUFFLE, state.shuffle); saveState(); paintChrome(); return; }
+      if (act === "repeat") { state.repeat = cycle(REPEAT, state.repeat); saveState(); paintChrome(); return; }
+      if (act === "text") { state.text = cycle(TEXT, state.text); saveState(); paintChrome(); return; }
       if (act === "pick-surah") { openSurahSheet(); return; }
       if (act === "pick-reciter") { openReciterSheet(); return; }
-      if (act === "text-ar" || act === "text-de" || act === "text-both") {
-        state.text = act.replace("text-", "");
-        saveState();
-        paintAyah(false);
-        paintChrome();
-        return;
-      }
       var opt = t.getAttribute("data-dqp-opt");
       if (opt) onOpt(opt);
+    });
+    root.addEventListener("input", function (ev) {
+      var q = ev.target.getAttribute && ev.target.getAttribute("data-dqp-search");
+      if (q == null && !(ev.target && ev.target.hasAttribute && ev.target.hasAttribute("data-dqp-search"))) return;
+      if (ev.target.hasAttribute("data-dqp-search")) {
+        var needle = String(ev.target.value || "").toLowerCase();
+        root.querySelectorAll(".dqp-opt[data-q]").forEach(function (opt) {
+          opt.style.display = !needle || String(opt.getAttribute("data-q")).indexOf(needle) >= 0 ? "" : "none";
+        });
+      }
     });
     var sl = root.querySelector("[data-dqp=seek]");
     if (sl) {
@@ -532,14 +597,15 @@
         seekLock = true;
         var a = audioEl();
         if (a.duration) a.currentTime = (Number(sl.value) / 1000) * a.duration;
+        state.current = a.currentTime || 0;
+        paintProgress();
       });
-      sl.addEventListener("change", function () { seekLock = false; });
+      sl.addEventListener("change", function () { seekLock = false; saveState(); });
     }
     var sheet = root.querySelector("[data-dqp-sheet]");
     if (sheet) sheet.addEventListener("click", function (e) { if (e.target === sheet) closeSheet(); });
     paintChrome();
     paintProgress();
-    paintAyah(false);
   }
 
   window.DARQuranPlayer = {
@@ -551,22 +617,17 @@
     bind: function () {
       var host = document.getElementById("darQuranPlayer");
       if (!host) { paintMini(); return; }
-      if (host.dataset.ready === "1") {
-        bind(false);
-        return;
-      }
+      if (host.dataset.ready === "1") { bind(false); return; }
       bind(false);
       ensureData().then(function () {
         var node = document.getElementById("darQuranPlayer");
-        if (!node || !node.parentNode) return;
-        node.parentNode.innerHTML = renderShell();
-        bind(true);
-        var ready = document.getElementById("darQuranPlayer");
-        if (ready) ready.dataset.ready = "1";
+        if (!node) return;
+        node.dataset.ready = "1";
+        paintInfo();
         writeHash();
         var a = audioEl();
         var want = pad(state.surah, 3) + pad(state.ayah, 3);
-        if (!a.getAttribute("src") || String(a.src).indexOf(want) < 0) loadAudio(false);
+        if (!a.getAttribute("src") || String(a.src).indexOf(want) < 0) loadAudio(false, true);
         else {
           state.current = a.currentTime || 0;
           state.duration = a.duration || 0;
@@ -578,5 +639,4 @@
       });
     }
   };
-  document.addEventListener("visibilitychange", paintMini);
 })();
