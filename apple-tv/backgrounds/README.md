@@ -4,8 +4,8 @@ Dieser Ordner ist die zentrale Registry für animierte tvOS-Hintergründe.
 
 ## Aktueller Modus
 
-- selection.mode: `ownerFixed`
-- nur der vom Betreiber gewählte Hintergrund wird verwendet
+- `selection.mode = ownerFixed`
+- nur der Betreiber bestimmt den aktiven Hintergrund
 - Benutzerauswahl ist vorbereitet, aber deaktiviert
 - automatische Rotation ist vorbereitet, aber deaktiviert
 - vorgesehener Rotationsabstand: 15 Minuten
@@ -16,14 +16,27 @@ Dieser Ordner ist die zentrale Registry für animierte tvOS-Hintergründe.
 - Titel: Makkah – Abenddämmerung
 - 3840×2160 (4K UHD)
 - HEVC/H.265 in MP4
+- 24 fps
+- 12 Sekunden
 - Endlosschleife, stumm
 - Seitenverhältnis 16:9
-- Darstellungsmodus: cover
+- Darstellungsmodus: `cover`
 
-## Xcode
+## Xcode-Ressource
 
-`AppleTVBackgroundService.swift` liest diesen Katalog, bestimmt den aktuell freigegebenen Hintergrund und stellt eine lokale Video-URL bereit.
+Aktuell erwartet die Registry die Bundle-Ressource:
 
-`AppleTVAnimatedBackgroundView.swift` kann diese URL als vollflächigen, stummen Loop hinter der tvOS-Oberfläche anzeigen.
+`bg_makkah_dusk_01_3840x2160_hevc.mp4`
 
-Später kann `allowUserSelection` aktiviert oder `selection.mode` auf Rotation umgestellt werden, ohne die Asset-Struktur zu ändern.
+Die Datei wird über `AppleTVBackgroundService.swift` aufgelöst.
+`AppleTVAnimatedBackgroundView.swift` rendert sie vollflächig mit `AVPlayerLooper`.
+
+## Spätere Erweiterung
+
+Die Datenstruktur ist bereits auf mehrere Hintergründe ausgelegt. Später können:
+
+- `allowUserSelection` aktiviert werden,
+- ein Auswahl-Pop-up auf Basis derselben Registry gebaut werden,
+- oder `selection.mode` auf Rotation gestellt werden.
+
+Für die Rotation ist ein Intervall von 15 Minuten bereits im Katalog vorgesehen.
