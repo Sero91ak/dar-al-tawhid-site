@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v812";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v813";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -18914,12 +18914,11 @@ html.is-standalone-pwa body{
 }
 </style>
 <style id="header-prayer-hub-status-sit-v812">
-/* v812 · Statuszeile (Fr./Hijri/Uhr/Ort) tiefer unter der Goldlinie, mittiger, etwas größer */
-.top-shell.theme-hero-shell .header-prayer-hub{
+/* v812 · Statuszeile nur auf der Startseite, nicht auf Quiz/Qurʾān/Mehr */
+body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub{
   padding-bottom:clamp(9px,2.1vw,12px)!important;
 }
-.top-shell.theme-hero-shell .header-prayer-hub__status,
-.header-prayer-hub__status{
+body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub__status{
   margin-top:clamp(6px,1.4vw,8px)!important;
   padding-top:clamp(12px,2.8vw,16px)!important;
   padding-bottom:clamp(4px,1.1vw,7px)!important;
@@ -18930,20 +18929,18 @@ html.is-standalone-pwa body{
   line-height:1.25!important;
   align-items:center!important;
 }
-.header-prayer-hub__status::before{
+body.is-home-route .header-prayer-hub__status::before{
   top:0!important;
 }
-.header-prayer-hub__ico{font-size:1.08em!important}
+body.is-home-route .header-prayer-hub__ico{font-size:1.08em!important}
 @media(max-width:700px){
-  .top-shell.theme-hero-shell .header-prayer-hub__status,
-  .header-prayer-hub__status{
+  body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub__status{
     font-size:clamp(10.6px,2.55vw,12.8px)!important;
     padding-top:clamp(11px,2.6vw,15px)!important;
   }
 }
 @media(max-width:430px){
-  .top-shell.theme-hero-shell .header-prayer-hub__status,
-  .header-prayer-hub__status{
+  body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub__status{
     font-size:clamp(10.2px,2.45vw,12.2px)!important;
     padding-top:clamp(10px,2.4vw,14px)!important;
   }
@@ -27109,7 +27106,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v812";
+const APP_BUILD_ID="app-shell-v813";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -33521,6 +33518,29 @@ html[data-theme]:not(.dar-ios-native-app) .top-shell,html[data-theme]:not(.dar-i
 html:not(.dar-ios-native-app) body.is-home-route .header,html:not(.dar-ios-native-app) body.is-home-route .header.theme-hero-surface{padding-top:max(14px,calc(env(safe-area-inset-top,0px) + 12px))!important}
 html.is-standalone-pwa:not(.dar-ios-native-app) body.is-home-route .header,html.is-standalone-pwa:not(.dar-ios-native-app) .top-shell .header{padding-top:max(54px,calc(env(safe-area-inset-top,0px) + 14px))!important}
 @media (display-mode:standalone),(display-mode:fullscreen){html:not(.dar-ios-native-app) body.is-home-route .header,html:not(.dar-ios-native-app) .top-shell .header{padding-top:max(54px,calc(env(safe-area-inset-top,0px) + 14px))!important}html:not(.dar-ios-native-app) body:not(.is-home-route):not(.is-feed-fullscreen):not(.is-quran-reader-route) #appView.view{padding-top:max(50px,env(safe-area-inset-top,0px))!important}}
+</style>
+<style id="inner-pages-top-align-v813">
+/* v813 · Innen-Seiten (Quiz, Qurʾān, Mehr, Account) wieder oben wie die Startseite */
+html[data-theme] body.is-more-route #appView,
+html[data-theme] body.is-more-route #appView.view,
+html[data-theme] body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-reader-route) #appView.view,
+html[data-theme] body.is-quiz-route #appView.view,
+html[data-theme] body.is-account-route #appView.view,
+html[data-theme] body.is-quran-overview #appView.view,
+html.dar-ios-native-app body.is-more-route #appView.view,
+html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-reader-route) #appView.view,
+html.dar-ios-native-app body.is-quiz-route #appView.view,
+html.dar-ios-native-app body.is-account-route #appView.view,
+html.dar-ios-native-app body.is-quran-overview #appView.view,
+html.is-standalone-pwa body:not(.is-home-route):not(.is-feed-fullscreen):not(.is-quran-reader-route) #appView.view{
+  padding-top:max(8px,env(safe-area-inset-top,0px))!important;
+}
+html[data-theme] body.is-quiz-route #appView.view{--quiz-page-padding-top:8px}
+@media (display-mode:standalone),(display-mode:fullscreen){
+  html body:not(.is-home-route):not(.is-feed-fullscreen):not(.is-quran-reader-route) #appView.view{
+    padding-top:max(8px,env(safe-area-inset-top,0px))!important;
+  }
+}
 </style>
 
 </html>
