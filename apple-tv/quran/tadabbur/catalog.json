@@ -5,7 +5,7 @@
   "target": "tvOS-only",
   "remoteLoad": true,
   "offlineCache": true,
-  "entriesCount": 366,
+  "entriesCount": 371,
   "fallback": {
     "enabled": true,
     "text": "Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor."
@@ -70,7 +70,8 @@
     "entries-batch-04x.json",
     "entries-batch-04y.json",
     "entries-batch-04z.json",
-    "entries-batch-05a.json"
+    "entries-batch-05a.json",
+    "entries-batch-05b.json"
   ],
   "coveragePath": "coverage.json",
   "schemaPath": "schema.json",
