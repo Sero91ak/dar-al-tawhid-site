@@ -36,6 +36,8 @@ const APP_SHELL = [
   '/test/assets/prophets/prophets.css',
   '/test/data/prophets/index.json',
   '/test/data/prophets/search-index.json',
+  '/test/assets/dar-quran-player.js',
+  '/test/assets/dar-quran-player.css',
   '/test/assets/frauen/frauen-fiqh.js',
   '/test/assets/frauen/frauen-fiqh.css',
   '/test/data/frauen-fiqh.json',
