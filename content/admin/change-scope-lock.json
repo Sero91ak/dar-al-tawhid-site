@@ -108,6 +108,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-quran-player-layout-2026-09-19",
+      "approvedBy": "user-explicit-quran-player-test-optik",
+      "reason": "Nutzerauftrag: Qurʾān-Player in der Test-App optisch und strukturell nach Referenz umbauen; Audio-Logik behalten; iOS später.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "revert-visitor-header-smash-2026-09-16",
       "approvedBy": "user-explicit-besucher-oben-falsch-zurueck",
       "reason": "Nutzer: Besucher-App oben kaputt (Logo im Statusbalken). Safe-Area wiederherstellen, Glas weg, iOS unangetastet.",
