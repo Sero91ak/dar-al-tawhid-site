@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v820";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v821";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -27104,7 +27104,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v820";
+const APP_BUILD_ID="app-shell-v821";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -33509,101 +33509,62 @@ html[data-theme] .top-edge-fade,html[data-theme] .top-swim-aura,.top-edge-fade,.
 .home-v380-app-status,.home-push-strip{display:none!important;height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important;visibility:hidden!important}
 </style>
 
-<style id="home-today-ios-match-v819">
-/* iOS WKWebView: Heute-für-dich-Masse wie Besucher-App. */
-html.dar-ios-native-app .home-v380-today .home-v380-section-title,
-html.dar-ios-native-app .home-v380-discover .home-v380-section-title{
-  font-size:22px!important;
-  line-height:1.08!important;
-  letter-spacing:0!important;
-  margin-bottom:10px!important;
-  -webkit-text-size-adjust:100%!important;
-  text-size-adjust:100%!important;
-}
-html.dar-ios-native-app .home-v380-today .highlight-sections .recommended-box,
-html.dar-ios-native-app .home-v380-today .highlight-sections .daily-box{
-  min-height:0!important;
-  padding:9px 11px!important;
-  margin:0!important;
-  border-radius:14px!important;
-  -webkit-text-size-adjust:100%!important;
-  text-size-adjust:100%!important;
-}
-html.dar-ios-native-app .home-v380-today .highlight-sections .gold-divider{
-  margin:7px 0!important;
-}
-html.dar-ios-native-app .home-v380-today .daily-label,
-html.dar-ios-native-app .home-v380-today .recommended-label{
-  font-size:8.5px!important;
-  letter-spacing:.14em!important;
-  margin-bottom:3px!important;
-}
-html.dar-ios-native-app .home-v380-today .daily-title,
-html.dar-ios-native-app .home-v380-today .recommended-title{
-  font-size:16.5px!important;
-  line-height:1.12!important;
-  margin:0 0 4px!important;
-}
-html.dar-ios-native-app .home-v380-today .daily-text,
-html.dar-ios-native-app .home-v380-today .recommended-text{
-  font-size:11px!important;
-  line-height:1.32!important;
-  margin:0!important;
-}
-html.dar-ios-native-app .home-v380-discover .home-v380-section-head{
-  margin-bottom:10px!important;
-}
-html.dar-ios-native-app .home-v380-discover .home-v380-text-link{
-  font-size:11px!important;
-}
-</style>
-<style id="home-ios-edge-v820">
-/* iOS Start: gleiche Seitenbreite wie Mehr/Qurʾān — fast kantenbündig, kurzer Rand. */
+<style id="home-ios-width-v821">
+/* iOS Start: eine Content-Breite wie Mehr — kein doppelter Außenrand, keine Karten-Overrides. */
 html.dar-ios-native-app body.is-home-route{
+  --page-gutter-x:0px;
+  --page-gutter-y:0px;
+  --app-frame-inset-x:0px;
+  --content-inset:max(14px,env(safe-area-inset-left,0px));
+  --dar-edge-gutter:max(14px,env(safe-area-inset-left,0px));
+  --dar-edge-gutter-right:max(14px,env(safe-area-inset-right,0px));
   padding-left:0!important;
   padding-right:0!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin-left:0!important;
+  margin-right:0!important;
 }
 html.dar-ios-native-app body.is-home-route .app,
 html.dar-ios-native-app body.is-home-route #appRoot,
 html.dar-ios-native-app body.is-home-route #appShell{
   width:100%!important;
-  max-width:100%!important;
+  max-width:none!important;
   margin-left:0!important;
   margin-right:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  box-sizing:border-box!important;
 }
 html.dar-ios-native-app body.is-home-route .header,
 html.dar-ios-native-app body.is-home-route .header.theme-hero-surface{
-  padding-left:max(12px,env(safe-area-inset-left,0px))!important;
-  padding-right:max(12px,env(safe-area-inset-right,0px))!important;
-}
-html.dar-ios-native-app body.is-home-route #appView,
-html.dar-ios-native-app body.is-home-route #appView.view,
-html.dar-ios-native-app body.is-home-route .view{
-  padding-left:max(12px,env(safe-area-inset-left,0px))!important;
-  padding-right:max(12px,env(safe-area-inset-right,0px))!important;
+  padding-left:max(14px,env(safe-area-inset-left,0px))!important;
+  padding-right:max(14px,env(safe-area-inset-right,0px))!important;
   width:100%!important;
-  max-width:100%!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+}
+html.dar-ios-native-app body.is-home-route .app-bar{
+  margin-left:0!important;
+  margin-right:0!important;
+}
+html.dar-ios-native-app body.is-home-route #appView.view{
+  padding-left:max(14px,env(safe-area-inset-left,0px))!important;
+  padding-right:max(14px,env(safe-area-inset-right,0px))!important;
+  width:100%!important;
+  max-width:none!important;
   margin-left:0!important;
   margin-right:0!important;
   box-sizing:border-box!important;
 }
-html.dar-ios-native-app body.is-home-route .home-v380-shell,
-html.dar-ios-native-app body.is-home-route .home-v380-section,
-html.dar-ios-native-app body.is-home-route .home-v380-today,
-html.dar-ios-native-app body.is-home-route .home-v380-discover,
-html.dar-ios-native-app body.is-home-route .home-v380-today__highlights,
-html.dar-ios-native-app body.is-home-route .highlight-sections,
-html.dar-ios-native-app body.is-home-route .recommended-box,
-html.dar-ios-native-app body.is-home-route .daily-box{
+html.dar-ios-native-app body.is-home-route .home-v380-shell{
   width:100%!important;
-  max-width:100%!important;
+  max-width:none!important;
   margin-left:0!important;
   margin-right:0!important;
-  box-sizing:border-box!important;
-}
-html.dar-ios-native-app body.is-home-route .home-v380-libraries--noble{
   padding-left:0!important;
   padding-right:0!important;
+  box-sizing:border-box!important;
 }
 </style>
 <style id="dar-ios-oversize-copy-final">
