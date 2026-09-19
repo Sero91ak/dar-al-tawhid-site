@@ -22,7 +22,7 @@
     surah: 1, ayah: 1, reciter: "alafasy",
     shuffle: "off", repeat: "off", text: "both",
     playing: false, sessionActive: false, duration: 0, current: 0, resumeAt: 0,
-    loading: true, error: "", layer: 0
+    loading: true, error: "", layer: 0, textScale: 5, volume: 1
   };
   var verses = [];
   var meta = null;
@@ -31,6 +31,68 @@
   var lastSurahs = [];
   var saveTimer = 0;
   var capsuleCollapsed = false;
+  var volGain = null;
+  var volCtx = null;
+  var volSrc = null;
+  var volNativeOk = null;
+
+  function probeVolume() {
+    if (volNativeOk != null) return volNativeOk;
+    var a = audioEl();
+    try {
+      var prev = a.volume;
+      a.volume = 0.41;
+      volNativeOk = Math.abs(a.volume - 0.41) < 0.08;
+      a.volume = prev;
+    } catch (e) { volNativeOk = false; }
+    return volNativeOk;
+  }
+  function applyVolume() {
+    var v = Math.max(0, Math.min(1, Number(state.volume)));
+    if (!isFinite(v)) v = 1;
+    state.volume = v;
+    var a = audioEl();
+    a.muted = v <= 0.001;
+    try { a.volume = v; } catch (e) {}
+    if (!probeVolume()) {
+      try {
+        var AC = window.AudioContext || window.webkitAudioContext;
+        if (AC && !volSrc) {
+          volCtx = volCtx || new AC();
+          volGain = volCtx.createGain();
+          volSrc = volCtx.createMediaElementSource(a);
+          volSrc.connect(volGain);
+          volGain.connect(volCtx.destination);
+        }
+        if (volGain) volGain.gain.value = v;
+        if (volCtx && volCtx.state === "suspended") volCtx.resume().catch(function () {});
+      } catch (e2) {}
+    }
+    var vol = document.querySelector("#darQuranPlayer [data-dqp=vol]");
+    if (vol) {
+      vol.value = String(Math.round(v * 100));
+      vol.style.setProperty("--dqp-fill", vol.value + "%");
+    }
+    var hint = document.querySelector("[data-dqp-vol-hint]");
+    if (hint) {
+      var ok = probeVolume() || !!volGain;
+      hint.hidden = ok;
+      if (!ok) hint.textContent = "Geräte-Lautstärke über die Hardwaretasten. Der Browser gibt die Systemlautstärke nicht frei.";
+    }
+  }
+  function setTextScale(n) {
+    state.textScale = Math.max(1, Math.min(10, Math.round(Number(n) || 5)));
+    saveState();
+    var el = document.querySelector("#darQuranPlayer [data-dqp-ayah]");
+    if (el) fitAyah(el);
+    var lab = document.querySelector("[data-dqp-scale-n]");
+    if (lab) lab.textContent = String(state.textScale);
+    var sl = document.querySelector("[data-dqp=text-scale]");
+    if (sl) {
+      sl.value = String(state.textScale);
+      sl.style.setProperty("--dqp-fill", ((state.textScale - 1) / 9 * 100) + "%");
+    }
+  }
 
   function reciterById(id) {
     return RECITERS.find(function (r) { return r.id === id; }) || RECITERS[0];
@@ -65,6 +127,8 @@
       if (SHUFFLE.indexOf(raw.shuffle) >= 0) state.shuffle = raw.shuffle;
       if (REPEAT.indexOf(raw.repeat) >= 0) state.repeat = raw.repeat;
       if (TEXT.indexOf(raw.text) >= 0) state.text = raw.text;
+      if (Number(raw.textScale) >= 1 && Number(raw.textScale) <= 10) state.textScale = Math.round(Number(raw.textScale));
+      if (Number(raw.volume) >= 0 && Number(raw.volume) <= 1) state.volume = Number(raw.volume);
       if (Number(raw.resumeAt) > 0) state.resumeAt = Number(raw.resumeAt);
       if (raw.sessionActive === true) state.sessionActive = true;
       if (Array.isArray(raw.lastSurahs)) lastSurahs = raw.lastSurahs.map(Number).filter(Boolean);
@@ -75,6 +139,7 @@
       localStorage.setItem(KEY, JSON.stringify({
         surah: state.surah, ayah: state.ayah, reciter: state.reciter,
         shuffle: state.shuffle, repeat: state.repeat, text: state.text,
+        textScale: state.textScale, volume: state.volume,
         resumeAt: state.current || state.resumeAt || 0,
         sessionActive: !!state.sessionActive,
         lastSurahs: lastSurahs.slice(-12)
@@ -96,7 +161,7 @@
     a.addEventListener("timeupdate", onTime);
     a.addEventListener("loadedmetadata", onMeta);
     a.addEventListener("ended", onEnded);
-    a.addEventListener("play", function () { state.playing = true; state.sessionActive = true; saveState(); paintChrome(); });
+    a.addEventListener("play", function () { state.playing = true; state.sessionActive = true; applyVolume(); saveState(); paintChrome(); });
     a.addEventListener("pause", function () {
       state.playing = false;
       saveState();
@@ -272,6 +337,7 @@
           icon("volmin") +
           '<input class="dqp-vol" data-dqp="vol" type="range" min="0" max="100" value="100" aria-label="Lautstärke">' +
           icon("volmax") +
+          '<p class="dqp-vol-note" data-dqp-vol-hint hidden></p>' +
         "</div>" +
         '<div class="dqp-dock">' +
           '<button type="button" data-dqp="text" aria-label="Textmodus">' + icon("lyrics") + "</button>" +
@@ -315,17 +381,28 @@
     var ar = el.querySelector(".dqp-ayah-ar");
     var de = el.querySelector(".dqp-ayah-de");
     if (!ar) return;
-    var n = (ar.textContent || "").length;
-    var px = n > 220 ? 24 : n > 140 ? 27 : n > 80 ? 31 : 34;
+    var n = (ar.textContent || "").length + ((de && de.textContent) || "").length * 0.45;
+    var scale = (Number(state.textScale) || 5) / 5;
+    if (state.text === "ar") scale *= 1.08;
+    if (state.text === "de") scale *= 1.05;
+    var px = n > 260 ? 22 : n > 170 ? 26 : n > 90 ? 30 : 34;
+    px = Math.round(px * scale);
+    var minPx = state.text === "de" ? 12 : 14;
+    ar.style.lineHeight = px > 28 ? "1.7" : "1.55";
     ar.style.fontSize = px + "px";
-    if (de) de.style.fontSize = Math.max(13, Math.round(px * 0.46)) + "px";
+    if (de) {
+      var dpx = Math.max(12, Math.round(px * (state.text === "de" ? 0.72 : 0.48)));
+      de.style.fontSize = dpx + "px";
+      de.style.lineHeight = "1.4";
+    }
     var box = el.parentElement;
     if (!box || box.clientHeight < 40) return;
     var guard = 0;
-    while (el.scrollHeight > box.clientHeight - 8 && px > 18 && guard < 14) {
+    while (el.scrollHeight > box.clientHeight - 6 && px > minPx && guard < 28) {
       px -= 1;
       ar.style.fontSize = px + "px";
-      if (de) de.style.fontSize = Math.max(12, Math.round(px * 0.46)) + "px";
+      ar.style.lineHeight = px > 24 ? "1.62" : "1.45";
+      if (de) de.style.fontSize = Math.max(11, Math.round(px * (state.text === "de" ? 0.7 : 0.48))) + "px";
       guard += 1;
     }
   }
@@ -352,7 +429,9 @@
     var m = meta || {};
     var lat = root.querySelector(".dqp-title");
     var q = root.querySelector(".dqp-artist");
-    if (lat) lat.textContent = m.transliteration ? ("Sūrah " + m.transliteration) : "—";
+    if (lat) lat.textContent = m.transliteration
+      ? ("Sūrah " + m.transliteration + " · Āyah " + state.ayah)
+      : ("Āyah " + state.ayah);
     if (q) q.textContent = reciterById(state.reciter).name;
     syncMediaSession();
   }
@@ -380,8 +459,9 @@
       var dur = root.querySelector("[data-dqp-dur]");
       var n = root.querySelector("[data-dqp-n]");
       var sl = root.querySelector("[data-dqp=seek]");
-      if (cur) cur.textContent = fmt(state.current);
-      if (dur) dur.textContent = "-" + fmt(Math.max(0, (state.duration || 0) - (state.current || 0)));
+      var ready = state.duration && isFinite(state.duration) && state.duration > 0;
+      if (cur) cur.textContent = ready ? fmt(state.current) : "––:––";
+      if (dur) dur.textContent = ready ? ("-" + fmt(Math.max(0, state.duration - (state.current || 0)))) : "––:––";
       if (n) n.textContent = "Āyah " + state.ayah + " / " + totalAyat();
       if (sl) {
         var pct = state.duration ? (state.current / state.duration) * 1000 : 0;
@@ -406,6 +486,9 @@
       if (sh) sh.classList.toggle("is-on", state.shuffle !== "off");
       if (rp) rp.classList.toggle("is-on", state.repeat !== "off");
       if (tx) tx.classList.toggle("is-on", state.text !== "both");
+      applyVolume();
+      var ayah = root.querySelector("[data-dqp-ayah]");
+      if (ayah) fitAyah(ayah);
       syncMediaSession();
     }
     paintMini();
@@ -768,9 +851,21 @@
   }
   function openMenu() {
     openSheet("Optionen", [
+      '<div class="dqp-text-panel">',
+      '<div class="dqp-text-label">Textanzeige</div>',
+      '<div class="dqp-text-modes">',
+      '<button type="button" class="dqp-opt-chip' + (state.text === "ar" ? " is-on" : "") + '" data-dqp-opt="m-text-ar">Arabisch</button>',
+      '<button type="button" class="dqp-opt-chip' + (state.text === "de" ? " is-on" : "") + '" data-dqp-opt="m-text-de">Deutsch</button>',
+      '<button type="button" class="dqp-opt-chip' + (state.text === "both" ? " is-on" : "") + '" data-dqp-opt="m-text-both">Beides</button>',
+      "</div>",
+      '<div class="dqp-text-label">Textgröße · <span data-dqp-scale-n>' + state.textScale + "</span></div>",
+      '<div class="dqp-scale-row">',
+      '<button type="button" data-dqp-opt="m-scale-minus" aria-label="Kleiner">−</button>',
+      '<input class="dqp-vol" data-dqp="text-scale" type="range" min="1" max="10" step="1" value="' + state.textScale + '" aria-label="Textgröße">',
+      '<button type="button" data-dqp-opt="m-scale-plus" aria-label="Größer">+</button>',
+      "</div></div>",
       '<button type="button" class="dqp-opt" data-dqp-opt="m-shuffle">Zufall · ' + esc(SHUFFLE_L[state.shuffle]) + "</button>",
       '<button type="button" class="dqp-opt" data-dqp-opt="m-repeat">Wiederholen · ' + esc(REPEAT_L[state.repeat]) + "</button>",
-      '<button type="button" class="dqp-opt" data-dqp-opt="m-text">Text · ' + esc(TEXT_L[state.text]) + "</button>",
       '<button type="button" class="dqp-opt" data-dqp-opt="m-back15">−15 Sekunden</button>',
       '<button type="button" class="dqp-opt" data-dqp-opt="m-fwd15">+15 Sekunden</button>',
       '<button type="button" class="dqp-opt" data-dqp="pick-surah">Sūrah wechseln</button>',
@@ -778,6 +873,8 @@
       '<button type="button" class="dqp-opt" data-dqp-opt="m-read">Sūrah lesen</button>',
       '<button type="button" class="dqp-opt" data-dqp-opt="m-stop">Wiedergabe beenden</button>'
     ].join(""));
+    var sl = document.querySelector("[data-dqp=text-scale]");
+    if (sl) sl.style.setProperty("--dqp-fill", ((state.textScale - 1) / 9 * 100) + "%");
   }
   async function onOpt(id) {
     if (id.indexOf("s-") === 0) { closeSheet(); return gotoSurah(Number(id.slice(2)), 1, state.playing, true); }
@@ -792,7 +889,18 @@
     }
     if (id === "m-shuffle") { closeSheet(); state.shuffle = cycle(SHUFFLE, state.shuffle); saveState(); paintChrome(); return; }
     if (id === "m-repeat") { closeSheet(); state.repeat = cycle(REPEAT, state.repeat); saveState(); paintChrome(); return; }
-    if (id === "m-text") { closeSheet(); state.text = cycle(TEXT, state.text); saveState(); paintChrome(); return; }
+    if (id === "m-text") { state.text = cycle(TEXT, state.text); saveState(); paintChrome(); return; }
+    if (id === "m-text-ar" || id === "m-text-de" || id === "m-text-both") {
+      state.text = id === "m-text-ar" ? "ar" : id === "m-text-de" ? "de" : "both";
+      saveState();
+      paintChrome();
+      document.querySelectorAll(".dqp-text-modes button").forEach(function (b) {
+        b.classList.toggle("is-on", b.getAttribute("data-dqp-opt") === id);
+      });
+      return;
+    }
+    if (id === "m-scale-minus") { setTextScale(state.textScale - 1); return; }
+    if (id === "m-scale-plus") { setTextScale(state.textScale + 1); return; }
     if (id === "m-back15") { closeSheet(); skip(-15); return; }
     if (id === "m-fwd15") { closeSheet(); skip(15); return; }
     if (id === "m-read") {
@@ -836,16 +944,18 @@
       if (act === "menu") { openMenu(); return; }
       if (act === "shuffle") { state.shuffle = cycle(SHUFFLE, state.shuffle); saveState(); paintChrome(); return; }
       if (act === "repeat") { state.repeat = cycle(REPEAT, state.repeat); saveState(); paintChrome(); return; }
-      if (act === "text") { state.text = cycle(TEXT, state.text); saveState(); paintChrome(); return; }
+      if (act === "text") { state.text = cycle(TEXT, state.text); saveState(); paintChrome(); paintAyah(false); return; }
       if (act === "pick-surah") { openSurahSheet(); return; }
       if (act === "pick-reciter") { openReciterSheet(); return; }
       var opt = t.getAttribute("data-dqp-opt");
       if (opt) onOpt(opt);
     });
     root.addEventListener("input", function (ev) {
-      var q = ev.target.getAttribute && ev.target.getAttribute("data-dqp-search");
-      if (q == null && !(ev.target && ev.target.hasAttribute && ev.target.hasAttribute("data-dqp-search"))) return;
-      if (ev.target.hasAttribute("data-dqp-search")) {
+      if (ev.target && ev.target.getAttribute("data-dqp") === "text-scale") {
+        setTextScale(ev.target.value);
+        return;
+      }
+      if (ev.target && ev.target.hasAttribute("data-dqp-search")) {
         var needle = String(ev.target.value || "").toLowerCase();
         root.querySelectorAll(".dqp-opt[data-q]").forEach(function (opt) {
           opt.style.display = !needle || String(opt.getAttribute("data-q")).indexOf(needle) >= 0 ? "" : "none";
@@ -865,11 +975,11 @@
     }
     var vol = root.querySelector("[data-dqp=vol]");
     if (vol) {
-      vol.value = String(Math.round((audioEl().volume || 1) * 100));
-      vol.style.setProperty("--dqp-fill", vol.value + "%");
+      applyVolume();
       vol.addEventListener("input", function () {
-        audioEl().volume = Number(vol.value) / 100;
-        vol.style.setProperty("--dqp-fill", vol.value + "%");
+        state.volume = Number(vol.value) / 100;
+        applyVolume();
+        saveState();
       });
     }
     root.querySelectorAll("[data-dqp=prev],[data-dqp=next]").forEach(function (btn) {
@@ -939,6 +1049,8 @@
         currentPosition: state.current,
         duration: state.duration,
         textMode: state.text,
+        textScale: state.textScale,
+        volume: state.volume,
         shuffleMode: state.shuffle,
         shuffle: state.shuffle,
         repeatMode: state.repeat,
@@ -961,6 +1073,10 @@
   window.addEventListener("pageshow", function () { resumeVisibleSession(); });
   document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "visible") resumeVisibleSession();
+  });
+  window.addEventListener("resize", function () {
+    var el = document.querySelector("#darQuranPlayer [data-dqp-ayah]");
+    if (el) fitAyah(el);
   });
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () { paintMini(); }, { once: true });
