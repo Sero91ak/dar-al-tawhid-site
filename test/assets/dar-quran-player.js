@@ -30,6 +30,7 @@
   var urlIndex = 0;
   var lastSurahs = [];
   var saveTimer = 0;
+  var capsuleCollapsed = false;
 
   function reciterById(id) {
     return RECITERS.find(function (r) { return r.id === id; }) || RECITERS[0];
@@ -461,38 +462,87 @@
     }
     return s;
   }
+  function applyCapsuleMode() {
+    var html = document.documentElement;
+    var body = document.body;
+    var el = document.getElementById("darQuranMiniPlayer");
+    var show = !!state.sessionActive && !isFullPlayerRoute();
+    var collapsed = show && capsuleCollapsed;
+    var expanded = show && !capsuleCollapsed;
+    html.classList.toggle("player-active", !!state.sessionActive);
+    html.classList.toggle("player-expanded", expanded);
+    html.classList.toggle("player-collapsed", collapsed);
+    html.classList.toggle("player-stopped", !state.sessionActive);
+    html.classList.toggle("dar-quran-top-capsule-on", show);
+    if (body) {
+      body.classList.toggle("player-active", !!state.sessionActive);
+      body.classList.toggle("player-expanded", expanded);
+      body.classList.toggle("player-collapsed", collapsed);
+      body.classList.toggle("player-stopped", !state.sessionActive);
+      body.classList.toggle("dar-quran-top-capsule-on", show);
+    }
+    if (el) {
+      el.classList.toggle("player-expanded", expanded);
+      el.classList.toggle("player-collapsed", collapsed);
+      el.classList.remove("is-away");
+    }
+  }
+  function setCapsuleCollapsed(next) {
+    next = !!next;
+    if (!state.sessionActive || isFullPlayerRoute()) next = false;
+    if (capsuleCollapsed === next) {
+      applyCapsuleMode();
+      return;
+    }
+    capsuleCollapsed = next;
+    applyCapsuleMode();
+  }
   function bindScrollAway() {
     if (window.__dqpScrollAwayBound) return;
     window.__dqpScrollAwayBound = true;
-    var awayTimer = 0;
+    var idleTimer = 0;
     var lastY = 0;
-    function onScroll(ev) {
-      if (!state.sessionActive || isFullPlayerRoute()) return;
-      var el = document.getElementById("darQuranMiniPlayer");
-      if (!el || !el.classList.contains("is-on")) return;
-      if (ev && ev.target && el.contains(ev.target)) return;
-      var y = window.scrollY || document.documentElement.scrollTop || 0;
-      if (Math.abs(y - lastY) < 2 && ev && ev.target === document) return;
-      lastY = y;
-      el.classList.add("is-away");
-      clearTimeout(awayTimer);
-      awayTimer = setTimeout(function () {
-        if (el) el.classList.remove("is-away");
-      }, 240);
+    var ticking = false;
+    var pendingY = 0;
+    function readY(target) {
+      if (target && target !== document && target !== window && typeof target.scrollTop === "number") {
+        return target.scrollTop || 0;
+      }
+      return window.scrollY || document.documentElement.scrollTop || 0;
     }
+    function onFrame() {
+      ticking = false;
+      if (!state.sessionActive || isFullPlayerRoute()) {
+        setCapsuleCollapsed(false);
+        return;
+      }
+      var y = pendingY;
+      var dy = y - lastY;
+      if (dy > 8 && y > 14) setCapsuleCollapsed(true);
+      else if (dy < -10 || y < 8) setCapsuleCollapsed(false);
+      lastY = y;
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(function () {
+        if (state.sessionActive && !isFullPlayerRoute()) setCapsuleCollapsed(false);
+      }, 280);
+    }
+    function onScroll(ev) {
+      if (ev && ev.target && ev.target.closest && ev.target.closest("#darQuranMiniPlayer")) return;
+      pendingY = readY(ev && ev.target);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(onFrame);
+    }
+    lastY = readY(window);
     window.addEventListener("scroll", onScroll, { passive: true, capture: true });
     document.addEventListener("touchmove", onScroll, { passive: true, capture: true });
+    var view = document.getElementById("appView");
+    if (view) view.addEventListener("scroll", onScroll, { passive: true });
   }
   function setPlayerLayout(showOval) {
-    var html = document.documentElement;
-    var body = document.body;
     slotEl();
-    html.classList.toggle("player-active", !!state.sessionActive);
-    html.classList.toggle("dar-quran-top-capsule-on", !!showOval);
-    if (body) {
-      body.classList.toggle("player-active", !!state.sessionActive);
-      body.classList.toggle("dar-quran-top-capsule-on", !!showOval);
-    }
+    if (!showOval) capsuleCollapsed = false;
+    applyCapsuleMode();
     bindScrollAway();
   }
   function openFullPlayer() {
@@ -522,8 +572,9 @@
       try { a.removeAttribute("src"); a.removeAttribute("srcObject"); a.load(); } catch (e2) {}
     }
     saveState();
+    capsuleCollapsed = false;
     var mini = document.getElementById("darQuranMiniPlayer");
-    if (mini) mini.classList.remove("is-away");
+    if (mini) mini.classList.remove("is-away", "player-collapsed", "player-expanded");
     syncMediaSession();
     paintChrome();
     paintMini();
