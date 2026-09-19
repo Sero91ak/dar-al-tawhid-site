@@ -54,30 +54,37 @@
     var a = audioEl();
     a.muted = v <= 0.001;
     try { a.volume = v; } catch (e) {}
-    if (!probeVolume()) {
-      try {
+    try {
+      if (!volSrc) {
         var AC = window.AudioContext || window.webkitAudioContext;
-        if (AC && !volSrc) {
+        if (AC) {
           volCtx = volCtx || new AC();
           volGain = volCtx.createGain();
           volSrc = volCtx.createMediaElementSource(a);
           volSrc.connect(volGain);
           volGain.connect(volCtx.destination);
         }
-        if (volGain) volGain.gain.value = v;
-        if (volCtx && volCtx.state === "suspended") volCtx.resume().catch(function () {});
-      } catch (e2) {}
+      }
+      if (volGain) volGain.gain.value = v;
+      if (volCtx && volCtx.state === "suspended") volCtx.resume().catch(function () {});
+    } catch (e2) {
+      volSrc = volSrc || null;
     }
+    var nativeOk = false;
+    try { nativeOk = Math.abs((a.volume || 0) - v) < 0.08 || v >= 0.97; } catch (e3) {}
+    var track = document.querySelector("#darQuranPlayer [data-dqp-vol-track]");
+    var fillPct = (v * 100) + "%";
+    if (track) track.style.setProperty("--dqp-fill", fillPct);
     var vol = document.querySelector("#darQuranPlayer [data-dqp=vol]");
     if (vol) {
       vol.value = String(Math.round(v * 100));
-      vol.style.setProperty("--dqp-fill", vol.value + "%");
+      vol.style.setProperty("--dqp-fill", fillPct);
     }
     var hint = document.querySelector("[data-dqp-vol-hint]");
     if (hint) {
-      var ok = probeVolume() || !!volGain;
+      var ok = nativeOk || !!volGain;
       hint.hidden = ok;
-      if (!ok) hint.textContent = "Geräte-Lautstärke über die Hardwaretasten. Der Browser gibt die Systemlautstärke nicht frei.";
+      if (!ok) hint.textContent = "Lautstärke über die Gerätetasten. Dieser Browser gibt die Wiedergabelautstärke nicht frei.";
     }
   }
   function setTextScale(n) {
@@ -157,6 +164,7 @@
     a.id = "darQuranPlayerAudio";
     a.preload = "auto";
     a.style.display = "none";
+    try { a.crossOrigin = "anonymous"; } catch (e0) {}
     document.body.appendChild(a);
     a.addEventListener("timeupdate", onTime);
     a.addEventListener("loadedmetadata", onMeta);
@@ -325,8 +333,12 @@
           '<button type="button" class="dqp-artist" data-dqp="pick-reciter">—</button>' +
         "</div>" +
         '<section class="dqp-progress">' +
-          '<input class="dqp-slider" data-dqp="seek" type="range" min="0" max="1000" value="0" aria-label="Fortschritt">' +
-          '<div class="dqp-times"><span data-dqp-cur>0:00</span><span data-dqp-dur>-0:00</span></div>' +
+          '<div class="dqp-track" data-dqp-seek-track>' +
+            '<span class="dqp-groove" aria-hidden="true"></span>' +
+            '<span class="dqp-fill" aria-hidden="true"></span>' +
+            '<input class="dqp-range" data-dqp="seek" type="range" min="0" max="1000" value="0" aria-label="Fortschritt">' +
+          "</div>" +
+          '<div class="dqp-times"><span data-dqp-cur>––:––</span><span data-dqp-dur>––:––</span></div>' +
         "</section>" +
         '<div class="dqp-controls">' +
           '<button class="dqp-skip" type="button" data-dqp="prev" aria-label="Vorige Āyah">' + icon("prev") + "</button>" +
@@ -335,7 +347,11 @@
         "</div>" +
         '<div class="dqp-volume">' +
           icon("volmin") +
-          '<input class="dqp-vol" data-dqp="vol" type="range" min="0" max="100" value="100" aria-label="Lautstärke">' +
+          '<div class="dqp-track" data-dqp-vol-track>' +
+            '<span class="dqp-groove" aria-hidden="true"></span>' +
+            '<span class="dqp-fill" aria-hidden="true"></span>' +
+            '<input class="dqp-range" data-dqp="vol" type="range" min="0" max="100" value="100" aria-label="Lautstärke">' +
+          "</div>" +
           icon("volmax") +
           '<p class="dqp-vol-note" data-dqp-vol-hint hidden></p>' +
         "</div>" +
@@ -381,21 +397,21 @@
     var ar = el.querySelector(".dqp-ayah-ar");
     var de = el.querySelector(".dqp-ayah-de");
     if (!ar) return;
-    var n = (ar.textContent || "").length + ((de && de.textContent) || "").length * 0.45;
-    var scale = (Number(state.textScale) || 5) / 5;
-    if (state.text === "ar") scale *= 1.08;
-    if (state.text === "de") scale *= 1.05;
-    var px = n > 260 ? 22 : n > 170 ? 26 : n > 90 ? 30 : 34;
-    px = Math.round(px * scale);
-    var minPx = state.text === "de" ? 12 : 14;
+    var box = el.parentElement;
+    var prefer = 13 + (Number(state.textScale) || 5) * 2.3;
+    if (state.text === "ar") prefer += 2;
+    if (state.text === "de") prefer += 1;
+    var n = (ar.textContent || "").length + ((de && state.text !== "ar" ? de.textContent : "") || "").length * 0.4;
+    if (n > 280) prefer *= 0.78;
+    else if (n > 160) prefer *= 0.88;
+    var px = Math.round(prefer);
+    var minPx = 12;
     ar.style.lineHeight = px > 28 ? "1.7" : "1.55";
     ar.style.fontSize = px + "px";
     if (de) {
-      var dpx = Math.max(12, Math.round(px * (state.text === "de" ? 0.72 : 0.48)));
-      de.style.fontSize = dpx + "px";
+      de.style.fontSize = Math.max(12, Math.round(px * (state.text === "de" ? 0.72 : 0.48))) + "px";
       de.style.lineHeight = "1.4";
     }
-    var box = el.parentElement;
     if (!box || box.clientHeight < 40) return;
     var guard = 0;
     while (el.scrollHeight > box.clientHeight - 6 && px > minPx && guard < 28) {
@@ -464,9 +480,12 @@
       if (dur) dur.textContent = ready ? ("-" + fmt(Math.max(0, state.duration - (state.current || 0)))) : "––:––";
       if (n) n.textContent = "Āyah " + state.ayah + " / " + totalAyat();
       if (sl) {
-        var pct = state.duration ? (state.current / state.duration) * 1000 : 0;
-        sl.value = String(Math.round(pct));
-        sl.style.setProperty("--dqp-fill", (pct / 10) + "%");
+        var pct = ready ? (state.current / state.duration) * 1000 : 0;
+        if (!seekLock) sl.value = String(Math.round(pct));
+        var fillPct = ready ? ((state.current / state.duration) * 100) + "%" : "0%";
+        sl.style.setProperty("--dqp-fill", fillPct);
+        var track = root.querySelector("[data-dqp-seek-track]");
+        if (track) track.style.setProperty("--dqp-fill", fillPct);
       }
     }
     paintMiniProgress();
@@ -637,6 +656,7 @@
   function togglePlay(forcePlay) {
     state.sessionActive = true;
     saveState();
+    applyVolume();
     var a = audioEl();
     if (!audioHasSrc(a)) {
       loadAudio(true, true);
@@ -753,6 +773,9 @@
   function paintMini() {
     var el = miniEl();
     var onFull = isFullPlayerRoute();
+    var page = document.getElementById("darQuranPlayer");
+    if (onFull) mountPlayerPage(page);
+    else if (page && page.parentNode === document.body) page.hidden = true;
     var show = !!state.sessionActive && !onFull;
     el.classList.toggle("is-on", show);
     el.setAttribute("aria-hidden", show ? "false" : "true");
@@ -858,7 +881,7 @@
       '<button type="button" class="dqp-opt-chip' + (state.text === "de" ? " is-on" : "") + '" data-dqp-opt="m-text-de">Deutsch</button>',
       '<button type="button" class="dqp-opt-chip' + (state.text === "both" ? " is-on" : "") + '" data-dqp-opt="m-text-both">Beides</button>',
       "</div>",
-      '<div class="dqp-text-label">Textgröße · <span data-dqp-scale-n>' + state.textScale + "</span></div>",
+      '<div class="dqp-text-label">Textgröße · Stufe <span data-dqp-scale-n>' + state.textScale + "</span> / 10</div>",
       '<div class="dqp-scale-row">',
       '<button type="button" data-dqp-opt="m-scale-minus" aria-label="Kleiner">−</button>',
       '<input class="dqp-vol" data-dqp="text-scale" type="range" min="1" max="10" step="1" value="' + state.textScale + '" aria-label="Textgröße">',
@@ -910,9 +933,16 @@
     }
     if (id === "m-stop") { closeSheet(); stopSession(); return; }
   }
+  function mountPlayerPage(root) {
+    root = root || document.getElementById("darQuranPlayer");
+    if (!root || !document.body) return;
+    if (root.parentNode !== document.body) document.body.appendChild(root);
+    root.hidden = false;
+  }
   function bind(force) {
     var root = document.getElementById("darQuranPlayer");
     if (!root) return;
+    mountPlayerPage(root);
     if (root.dataset.bound && !force) {
       paintInfo();
       paintChrome();
@@ -1038,6 +1068,7 @@
       });
     },
     stop: stopSession,
+    open: openFullPlayer,
     store: function () {
       return {
         isSessionActive: !!state.sessionActive,
