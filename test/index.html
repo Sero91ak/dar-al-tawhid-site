@@ -13755,34 +13755,30 @@ body.home-push-sheet-open{overflow:hidden}
   .home-v380-app-status__half + .home-v380-app-status__half{border-left:0;border-top:1px solid color-mix(in srgb,var(--theme-accent) 18%,var(--theme-border) 82%)}
 }
 body.is-home-route .view-head.view-head-home--v380::after{display:none!important}
-.home-v380-today .home-v380-section-title{margin-bottom:14px}
-.home-v380-today__list{display:flex;flex-direction:column;gap:10px}
-.home-v380-today .home-v380-open-row{
-  padding:14px 14px 13px;
-  border:1px solid color-mix(in srgb,var(--theme-accent) 24%,var(--theme-border) 76%);
-  border-radius:14px;
+.home-today-cards .home-v380-section-title{margin-bottom:16px}
+.home-today-cards .home-v380-section-title:after{display:none!important;content:none!important}
+.home-today-cards .home-v380-open-row{
+  padding:12px 16px;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 28%,var(--theme-border) 72%);
+  border-radius:22px;
   background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 88%,var(--theme-text) 3%));
 }
-.home-v380-today .home-v380-open-row:last-child{border-bottom:1px solid color-mix(in srgb,var(--theme-accent) 24%,var(--theme-border) 76%)}
-.home-v380-today .home-v380-open-row__action{padding-top:2px;padding-right:2px}
-.home-v380-today__highlights{margin-top:2px}
-.home-v380-today__season{margin-bottom:10px}
-.home-v380-today .highlight-sections{margin:0;gap:0}
-.home-v380-today .highlight-sections .recommended-box,
-.home-v380-today .highlight-sections .daily-box{
+.home-today-cards .home-v380-open-row:last-child{border-bottom:1px solid color-mix(in srgb,var(--theme-accent) 28%,var(--theme-border) 72%)}
+.home-today-cards .home-v380-today__highlights{margin-top:12px}
+.home-today-cards .home-v380-today__season{margin-bottom:12px}
+.home-today-cards .highlight-sections{margin:0;display:flex;flex-direction:column;gap:12px}
+.home-today-cards .highlight-sections .recommended-box,
+.home-today-cards .highlight-sections .daily-box{
   position:relative;overflow:hidden;margin:0;
-  border-radius:14px!important;
-  border:1px solid color-mix(in srgb,var(--theme-accent) 24%,var(--theme-border) 76%)!important;
+  border-radius:22px!important;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 28%,var(--theme-border) 72%)!important;
   background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 88%,var(--theme-text) 3%))!important;
   box-shadow:none!important;
+  padding:16px 18px!important;
 }
-.home-v380-today .highlight-sections .recommended-box::before,
-.home-v380-today .highlight-sections .daily-box::before{
-  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-  border-left:1px solid color-mix(in srgb,var(--glow-accent,var(--theme-accent)) 44%,transparent);
-  box-shadow:inset 1px 0 14px -12px color-mix(in srgb,var(--glow-accent,var(--theme-accent)) 12%,transparent);
-}
-.home-v380-today .highlight-sections .gold-divider{margin:10px 0!important;opacity:.78}
+.home-today-cards .highlight-sections .recommended-box::before,
+.home-today-cards .highlight-sections .daily-box::before{content:none!important;display:none!important}
+.home-today-cards .highlight-sections .gold-divider{display:none!important}
 .home-v380-popular-wrap{margin-top:clamp(18px,4vw,24px)}
 .home-v380-popular-wrap .home-v380-popular-list{gap:8px}
 .home-v380-popular-wrap .home-v380-popular-row{
@@ -26761,7 +26757,7 @@ function renderHomeTodaySection(){
   if(!highlights&&!ramadan)return"";
   const ramadanWrap=ramadan?`<div class="home-v380-today__season">${ramadan}</div>`:"";
   const highlightsWrap=highlights?`<div class="home-v380-today__highlights">${highlights}</div>`:"";
-  return `<section class="home-v380-section home-v380-today" aria-labelledby="homeTodayTitle"><h2 class="home-v380-section-title" id="homeTodayTitle">Heute für dich</h2>${ramadanWrap}${highlightsWrap}</section>`;
+  return `<section class="home-v380-section home-today-cards" aria-labelledby="homeTodayTitle"><h2 class="home-v380-section-title" id="homeTodayTitle">Heute für dich</h2>${ramadanWrap}${highlightsWrap}</section>`;
 }
 function homeDiscoverPosts(excludeIds=new Set()){
   const rec=recommendedPost();
