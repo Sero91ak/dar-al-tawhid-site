@@ -567,3 +567,51 @@ html.player-learn .quran-ayah{
   background:color-mix(in srgb,var(--gold2,#EED3AE) 22%,transparent)!important;
   border-color:color-mix(in srgb,var(--gold2,#EED3AE) 55%,transparent)!important;
 }
+
+/* DQP_CREAM_GOLD_V909 · öffentliche Test-App: Gold cremig, Dunkel bleibt */
+html.is-quran-player-route,
+html.is-quran-player-route body,
+html.is-quran-player-route .app,
+html.is-quran-player-route #appView.view,
+#darQuranPlayer,
+#darQuranPlayer .dqp-grab{
+  background:#22201E!important;
+  color:#EBE4D9!important;
+}
+#darQuranPlayer .dqp-art{
+  background:linear-gradient(180deg,#373634,#32302E)!important;
+}
+#darQuranPlayer .dqp-ayah-ar,
+#darQuranPlayer .dqp-ayah-de{
+  color:#EBE4D9!important;
+}
+#darQuranPlayer .dqp-ayah-ref{color:#EED3AE!important}
+#darQuranPlayer .dqp-title{color:#EBE4D9!important}
+#darQuranPlayer .dqp-artist{color:#BEB7AE!important}
+#darQuranPlayer button,
+#darQuranPlayer .dqp-play,
+#darQuranPlayer .dqp-more,
+#darQuranPlayer .dqp-dock button,
+#darQuranPlayer .dqp-volume{
+  color:#EED3AE!important;
+}
+#darQuranPlayer .dqp-skip svg{fill:#EED3AE!important}
+#darQuranPlayer .dqp-fill,
+#darQuranMiniPlayer .dqp-top-fill{
+  background:linear-gradient(90deg,#CFAE86,#EED3AE)!important;
+}
+#darQuranPlayer .dqp-range::-webkit-slider-thumb,
+#darQuranPlayer .dqp-range::-moz-range-thumb,
+#darQuranMiniPlayer .dqp-top-range::-webkit-slider-thumb,
+#darQuranMiniPlayer .dqp-top-range::-moz-range-thumb{
+  background:#F4DEC2!important;
+}
+#darQuranMiniPlayer{
+  color:#EBE4D9!important;
+  background:linear-gradient(180deg,#32302E,#22201E)!important;
+  border-bottom-color:rgba(238,211,174,.22)!important;
+}
+#darQuranMiniPlayer .dqp-top-ctrl,
+#darQuranMiniPlayer .dqp-learn-btn{
+  color:#EED3AE!important;
+}
