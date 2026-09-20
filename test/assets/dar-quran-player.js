@@ -176,7 +176,10 @@
       paintMini();
       markPlayingAyah();
     });
-    a.addEventListener("error", tryFallback);
+    a.addEventListener("error", function () {
+      if (!audioHasSrc(a)) return;
+      tryFallback();
+    });
     a.addEventListener("canplay", function () { state.error = ""; paintError(); });
     return a;
   }
@@ -202,21 +205,43 @@
     var rec = reciterById(state.reciter);
     var s = pad(surah, 3);
     var a = pad(ayah, 3);
+    var g = globalAyah(surah, ayah);
     return [
+      "https://cdn.islamic.network/quran/audio/128/" + rec.edition + "/" + g + ".mp3",
       "https://everyayah.com/data/" + rec.folder + "/" + s + a + ".mp3",
-      "https://cdn.islamic.network/quran/audio/128/" + rec.edition + "/" + globalAyah(surah, ayah) + ".mp3"
+      "https://cdn.alquran.cloud/media/audio/ayah/" + rec.edition + "/" + g
     ];
+  }
+  function audioMatchesTrack(a) {
+    if (!audioHasSrc(a)) return false;
+    var src = String(a.currentSrc || a.getAttribute("src") || "");
+    var key = pad(state.surah, 3) + pad(state.ayah, 3);
+    if (src.indexOf(key) >= 0) return true;
+    var g = String(globalAyah(state.surah, state.ayah));
+    return src.indexOf("/" + g + ".mp3") >= 0 || src.indexOf("/" + g) >= 0;
+  }
+  function playNow() {
+    var a = audioEl();
+    state.playing = true;
+    state.sessionActive = true;
+    audioAdvancing = false;
+    applyLearnRate();
+    var p = a.play();
+    if (p && typeof p.catch === "function") {
+      p.catch(function () { tryFallback(); });
+    }
+    paintChrome();
+    paintMini();
   }
   function loadAudio(autoplay, keepTime) {
     urlIndex = 0;
     state.error = "";
     audioToken += 1;
     var myToken = audioToken;
-    audioAdvancing = true;
+    audioAdvancing = false;
     var a = audioEl();
-    try { a.pause(); } catch (e0) {}
-    a.src = urlsFor(state.surah, state.ayah)[0];
-    try { a.load(); } catch (e1) {}
+    var url = urlsFor(state.surah, state.ayah)[0];
+    if (String(a.getAttribute("src") || "") !== url) a.src = url;
     if (keepTime && state.resumeAt > 0) {
       a.addEventListener("loadedmetadata", function once() {
         a.removeEventListener("loadedmetadata", once);
@@ -225,58 +250,30 @@
         state.resumeAt = 0;
       });
     }
-    var start = function () {
-      if (myToken !== audioToken) return;
-      audioAdvancing = false;
-      applyLearnRate();
-      if (autoplay) {
-        state.playing = true;
-        state.sessionActive = true;
-        a.play().catch(function () {});
-      }
-    };
-    if (a.readyState >= 2) start();
-    else {
-      var onReady = function () {
-        a.removeEventListener("canplay", onReady);
-        a.removeEventListener("loadeddata", onReady);
-        start();
-      };
-      a.addEventListener("canplay", onReady);
-      a.addEventListener("loadeddata", onReady);
-      setTimeout(function () {
-        if (myToken === audioToken && audioAdvancing) start();
-      }, 1200);
-    }
-    applyLearnRate();
     paintAyah();
+    paintInfo();
     paintChrome();
     paintMini();
     preloadNext();
+    if (autoplay) playNow();
   }
   function preloadNext() {
     var nextA = state.ayah < totalAyat() ? state.ayah + 1 : (state.repeat === "surah" ? 1 : 0);
     if (!nextA) return;
     var p = preloadEl();
     p.src = urlsFor(state.surah, nextA)[0];
-    try { p.load(); } catch (e) {}
   }
   function tryFallback() {
-    if (audioAdvancing && urlIndex === 0) {
-      /* load() can emit error while swapping src; wait for the real source */
-    }
     var urls = urlsFor(state.surah, state.ayah);
     urlIndex += 1;
     if (urlIndex >= urls.length) {
-      audioAdvancing = false;
       state.error = "Rezitation konnte nicht geladen werden.";
       paintError();
       return;
     }
     var a = audioEl();
     a.src = urls[urlIndex];
-    try { a.load(); } catch (e) {}
-    if (state.playing || state.sessionActive) a.play().catch(function () {});
+    if (state.playing || state.sessionActive) playNow();
   }
   function onTime() {
     if (seekLock) return;
@@ -541,6 +538,7 @@
     paintTad(el);
     fitAyah(el);
     paintError();
+    paintInfo();
     var sid = state.surah;
     var aid = state.ayah;
     loadTadForSurah(sid).then(function () {
@@ -1044,20 +1042,17 @@
     state.sessionActive = true;
     saveState();
     var a = audioEl();
-    if (!audioHasSrc(a) || a.readyState < 1) {
+    if (!audioMatchesTrack(a)) {
       loadAudio(true, true);
       return;
     }
-    if (forcePlay === true || a.paused) {
-      state.playing = true;
-      applyLearnRate();
-      a.play().catch(function () { loadAudio(true, true); });
-    } else {
+    if (forcePlay === true || a.paused) playNow();
+    else {
       a.pause();
       state.playing = false;
+      paintChrome();
+      paintMini();
     }
-    paintChrome();
-    paintMini();
   }
   function stopSession() {
     audioToken += 1;
@@ -1444,11 +1439,12 @@
       var a = audioEl();
       if (audioHasSrc(a)) {
         state.current = a.currentTime || 0;
-        state.duration = a.duration || 0;
-        state.playing = !a.paused;
-        if (!a.paused) state.sessionActive = true;
+        if (a.duration && isFinite(a.duration)) state.duration = a.duration;
+        if (!a.paused) {
+          state.playing = true;
+          state.sessionActive = true;
+        }
       }
-      applyLearnRate();
       paintInfo();
       paintChrome();
       paintProgress();
@@ -1610,21 +1606,23 @@
         node.dataset.ready = "1";
         paintInfo();
         paintAyah();
+        paintInfo();
         writeHash();
         var a = audioEl();
-        var want = pad(state.surah, 3) + pad(state.ayah, 3);
-        var src = String(a.currentSrc || a.getAttribute("src") || "");
-        if (audioHasSrc(a) && src.indexOf(want) >= 0) {
+        if (audioMatchesTrack(a)) {
           seekLock = false;
           state.current = a.currentTime || 0;
           state.duration = a.duration || 0;
           state.playing = !a.paused;
           if (!a.paused || state.sessionActive) state.sessionActive = true;
           paintAyah();
+          paintInfo();
           paintChrome();
           paintProgress();
-        } else {
-          loadAudio(!!state.sessionActive && state.playing, true);
+        } else if (!audioHasSrc(a) && state.sessionActive && state.playing) {
+          loadAudio(true, true);
+        } else if (!audioHasSrc(a)) {
+          loadAudio(false, true);
         }
         paintMini();
       });
