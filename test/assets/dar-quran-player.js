@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 905;
+  var PLAYER_BUILD = 906;
   if (window.__DAR_QURAN_PLAYER_BUILD === PLAYER_BUILD && window.DARQuranPlayer) return;
   try {
     var staleAudio = document.getElementById("darQuranPlayerAudio");
@@ -527,7 +527,6 @@
     state.loading = false;
     saveState();
     ensureTadCatalog();
-    loadTadForSurah(state.surah);
   }
   function parseRoute(value) {
     var parts = String(value || "").split("/").filter(Boolean);
@@ -668,7 +667,7 @@
       el.classList.remove("is-leave", "is-enter");
       fitAyah(el);
       paintError();
-      Promise.all([ensureTadCatalog(), loadTadForSurah(state.surah)]).then(function () {
+      ensureTadCatalog().then(function () {
         paintTad(el);
         fitAyah(el);
       });
@@ -797,71 +796,24 @@
       fitAyah(el);
     }
   });
-  function tadPlain(pack) {
+  function tadPlain() {
     var catalog = tadEntryFor(state.surah, state.ayah);
-    if (catalog && catalog.reflection) {
-      var meta = [catalog.narrator, catalog.generation].filter(Boolean).join(" · ");
-      var tail = [meta, catalog.source].filter(Boolean).join("\n");
-      return tail ? (catalog.reflection + "\n\n" + tail) : catalog.reflection;
-    }
-    pack = pack || {};
-    var de = "";
-    var v = verseAt(state.ayah);
-    if (v) de = String(v.de || v.translation || "").trim();
-    var tafsirEntry = pack.tafsirEntry || null;
-    var meaning = String((tafsirEntry && tafsirEntry.meaning) || "").trim();
-    var lines = [];
-    var tafsirLine = pickTafsirLine(tafsirEntry);
-    if (tafsirLine) lines.push(tafsirLine);
-    pickAtharLines(pack.atharEntry).forEach(function (row) { lines.push(row); });
-    var deN = normTad(de);
-    var meaningN = normTad(meaning);
-    if (meaning && meaningN !== deN && meaningN.indexOf(deN) !== 0 && deN.indexOf(meaningN) !== 0) {
-      lines.unshift({ source: "", text: meaning });
-    }
-    var parts = [];
-    var i;
-    for (i = 0; i < lines.length; i++) {
-      var row = lines[i];
-      var body = String(row.text || "").trim();
-      if (!body) continue;
-      if (deN && normTad(body) === deN) continue;
-      if (row.source) parts.push(row.source + "\n" + body);
-      else parts.push(body);
-    }
-    var tad = parts.join("\n\n").trim();
-    if (tad.length > 780) tad = tad.slice(0, 760).replace(/\s+\S*$/, "") + " …";
-    return tad;
+    if (!catalog || !catalog.reflection) return "";
+    var meta = [catalog.narrator, catalog.generation].filter(Boolean).join(" · ");
+    var tail = [meta, catalog.source].filter(Boolean).join("\n");
+    return tail ? (catalog.reflection + "\n\n" + tail) : catalog.reflection;
   }
-  function loadTadForSurah(surah) {
-    surah = Number(surah);
-    if (!(surah >= 1 && surah <= 114)) return Promise.resolve(null);
-    if (tadCache[surah] && tadCache[surah].ready) return Promise.resolve(tadCache[surah]);
-    var jobs = [];
-    if (typeof window.loadTafsirSurah === "function") jobs.push(window.loadTafsirSurah(surah).catch(function () { return null; }));
-    else jobs.push(Promise.resolve(null));
-    if (typeof window.loadQuranAtharSurah === "function") jobs.push(window.loadQuranAtharSurah(surah).catch(function () { return null; }));
-    else jobs.push(Promise.resolve(null));
-    return Promise.all(jobs).then(function (docs) {
-      tadCache[surah] = { ready: true, tafsir: docs[0] || null, athar: docs[1] || null };
-      return tadCache[surah];
-    });
+  function loadTadForSurah() {
+    return ensureTadCatalog();
   }
-  function packForAyah(surah, ayah) {
-    var pack = tadCache[surah] || {};
-    var tafsirEntry = null;
-    var atharEntry = null;
-    if (typeof window.ayahTafsirEntry === "function") tafsirEntry = window.ayahTafsirEntry(pack.tafsir, ayah);
-    else if (pack.tafsir && pack.tafsir.verses && typeof pack.tafsir.verses.get === "function") tafsirEntry = pack.tafsir.verses.get(Number(ayah));
-    if (typeof window.ayahAtharEntry === "function") atharEntry = window.ayahAtharEntry(pack.athar, ayah);
-    else if (pack.athar && pack.athar.verses && typeof pack.athar.verses.get === "function") atharEntry = pack.athar.verses.get(Number(ayah));
-    return { tafsirEntry: tafsirEntry, atharEntry: atharEntry };
+  function packForAyah() {
+    return {};
   }
   function paintTad(el) {
     if (!el) return;
     var tadEl = el.querySelector("[data-tad]");
     if (!tadEl) return;
-    var text = tadPlain(packForAyah(state.surah, state.ayah));
+    var text = tadPlain();
     tadEl.hidden = !text;
     tadEl.textContent = text ? ("Tadabbur\n" + text) : "";
   }
