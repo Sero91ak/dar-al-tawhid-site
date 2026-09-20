@@ -1,7 +1,11 @@
+import AVFoundation
+import os
 import SwiftUI
 import UIKit
 import WebKit
 import PDFKit
+
+private let quranPlayerLog = Logger(subsystem: "de.daraltawhid.app", category: "QuranPlayer")
 
 final class InsetAwareWebView: WKWebView {
     var onInsetsChange: (() -> Void)?
@@ -87,7 +91,16 @@ struct WebAppView: UIViewRepresentable {
     func makeUIView(context: Context) -> UIView {
         let configuration = WKWebViewConfiguration()
         configuration.allowsInlineMediaPlayback = true
+        configuration.mediaTypesRequiringUserActionForPlayback = []
         configuration.defaultWebpagePreferences.allowsContentJavaScript = true
+        do {
+            let session = AVAudioSession.sharedInstance()
+            try session.setCategory(.playback, mode: .default, options: [.mixWithOthers])
+            try session.setActive(true)
+            quranPlayerLog.debug("AVAudioSession playback active")
+        } catch {
+            quranPlayerLog.error("AVAudioSession failed: \(error.localizedDescription, privacy: .public)")
+        }
         // Do not wipe WKWebsiteDataStore on launch — that cancels/breaks the first page load.
         let userContentController = WKUserContentController()
         userContentController.add(context.coordinator, name: "darLibraryReader")
@@ -659,7 +672,8 @@ struct WebAppView: UIViewRepresentable {
         webView.scrollView.delaysContentTouches = false
         webView.scrollView.canCancelContentTouches = true
         webView.scrollView.backgroundColor = bootInk
-        webView.allowsBackForwardNavigationGestures = true
+        // Hash-Router: Kanten-Wischen würde #quran-player wiederherstellen und die Player-Seite zurückziehen.
+        webView.allowsBackForwardNavigationGestures = false
         webView.isOpaque = true
         webView.backgroundColor = bootInk
         webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.25-watch-push"

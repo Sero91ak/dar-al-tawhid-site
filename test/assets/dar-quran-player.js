@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 903;
+  var PLAYER_BUILD = 904;
   if (window.__DAR_QURAN_PLAYER_BUILD === PLAYER_BUILD && window.DARQuranPlayer) return;
   try {
     var staleAudio = document.getElementById("darQuranPlayerAudio");
@@ -999,8 +999,16 @@
     return nodes[0] || null;
   }
   function navigateApp(view, value) {
-    if (typeof window.navigate === "function") window.navigate(view, value || "", { noAnim: true });
-    else location.hash = "#" + view + (value ? "/" + value : "");
+    if (typeof window.navigateToTabRootReplace === "function") {
+      window.navigateToTabRootReplace(view, value || "");
+      return;
+    }
+    if (typeof window.navigate === "function") window.navigate(view, value || "", { noAnim: true, skipPush: true });
+    else {
+      var hash = "#" + view + (value ? "/" + value : "");
+      try { history.replaceState(null, "", location.pathname + (location.search || "") + hash); } catch (e) { location.hash = hash; }
+      try { window.dispatchEvent(new HashChangeEvent("hashchange")); } catch (e2) {}
+    }
   }
   function leavePlayerRoute(kind) {
     dismissFullPlayer();
