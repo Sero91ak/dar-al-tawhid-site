@@ -31,6 +31,7 @@
   var lastSurahs = [];
   var saveTimer = 0;
   var capsuleCollapsed = false;
+  var capsuleDimmed = false;
   var volGain = null;
   var volCtx = null;
   var volSrc = null;
@@ -586,8 +587,21 @@
     if (el) {
       el.classList.toggle("player-expanded", expanded);
       el.classList.toggle("player-collapsed", collapsed);
+      el.classList.toggle("player-dim", show && capsuleDimmed);
       el.classList.remove("is-away");
     }
+    html.classList.toggle("player-dim", show && capsuleDimmed);
+    if (body) body.classList.toggle("player-dim", show && capsuleDimmed);
+  }
+  function setPlayerDim(next) {
+    next = !!next;
+    if (!state.sessionActive || isFullPlayerRoute()) next = false;
+    if (capsuleDimmed === next) {
+      applyCapsuleMode();
+      return;
+    }
+    capsuleDimmed = next;
+    applyCapsuleMode();
   }
   function setCapsuleCollapsed(next) {
     next = !!next;
@@ -616,10 +630,20 @@
       ticking = false;
       if (!state.sessionActive || isFullPlayerRoute()) {
         setCapsuleCollapsed(false);
+        setPlayerDim(false);
         return;
       }
       var y = pendingY;
       var dy = y - lastY;
+      var home = document.body && document.body.classList.contains("is-home-route");
+      if (home) {
+        setCapsuleCollapsed(false);
+        if (dy > 6 && y > 10) setPlayerDim(true);
+        else if (dy < -8 || y < 8) setPlayerDim(false);
+        lastY = y;
+        return;
+      }
+      setPlayerDim(false);
       if (dy > 8 && y > 14) setCapsuleCollapsed(true);
       else if (dy < -10 || y < 8) setCapsuleCollapsed(false);
       lastY = y;
@@ -676,8 +700,9 @@
     }
     saveState();
     capsuleCollapsed = false;
+    capsuleDimmed = false;
     var mini = document.getElementById("darQuranMiniPlayer");
-    if (mini) mini.classList.remove("is-away", "player-collapsed", "player-expanded");
+    if (mini) mini.classList.remove("is-away", "player-collapsed", "player-expanded", "player-dim");
     syncMediaSession();
     paintChrome();
     paintMini();
@@ -685,6 +710,7 @@
   function bindMiniChrome(el) {
     if (el.dataset.dqpMiniBound === "1") return;
     el.dataset.dqpMiniBound = "1";
+    el.addEventListener("pointerdown", function () { setPlayerDim(false); });
     el.addEventListener("click", function (e) {
       e.stopPropagation();
       var t = e.target.closest("[data-dqp-mini]");
