@@ -5032,6 +5032,20 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-09-25T23:59:00.000Z"
+    },
+    {
+      "id": "test-quran-learn-player-2026-09-20",
+      "approvedBy": "user-explicit-test-quran-vers-lern-player",
+      "reason": "Nutzer: Test-App Qurʾān-Leser Abspielbutton je Āyah, Mini-Player wird Lern-Player (Tempo/Schleife/bleiben), beim Verlassen sofort Standard-Player.",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.css",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

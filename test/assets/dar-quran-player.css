@@ -457,3 +457,64 @@ html.player-active body.is-home-route #appView.view{
 .qov-player-launch-txt b{font-size:15px;font-weight:800;line-height:1.15}
 .qov-player-launch-txt small{font-size:11px;opacity:.72;font-weight:650}
 .qov-icon-btn.qov-player-icon{color:var(--gold2,#efd78e)!important;font-size:16px}
+
+/* Lern-Player unter dem Lesekopf */
+html.player-reader-dock #darQuranPlayerSlot,
+html.player-learn #darQuranPlayerSlot{
+  height:0!important;
+}
+#darQuranMiniPlayer.is-reader-dock,
+#darQuranMiniPlayer.is-learn{
+  top:var(--qrc-chrome-h,calc(env(safe-area-inset-top,0px) + 92px));
+  z-index:555;
+  border-radius:0 0 18px 18px;
+}
+html.player-learn #darQuranMiniPlayer.is-learn,
+#darQuranMiniPlayer.is-learn{
+  height:108px;min-height:108px;
+  padding:8px 14px 10px;
+}
+.dqp-learn{
+  display:none;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:6px;
+  width:100%;
+  padding:4px 2px 0;
+}
+#darQuranMiniPlayer.is-learn .dqp-learn{display:grid}
+#darQuranMiniPlayer .dqp-learn-btn{
+  min-height:30px!important;height:30px;border-radius:999px!important;
+  background:rgba(255,248,230,.1)!important;
+  border:1px solid rgba(236,220,176,.18)!important;
+  color:#ead9a8!important;font-size:12px!important;font-weight:700;
+  display:grid!important;place-items:center;padding:0!important;
+}
+#darQuranMiniPlayer .dqp-learn-btn.is-on{
+  background:rgba(236,220,176,.2)!important;
+  border-color:rgba(236,220,176,.42)!important;
+  color:#fff8e4!important;
+}
+html.player-reader-dock #qrcChromeSpacer,
+html.player-learn #qrcChromeSpacer{
+  height:calc(var(--qrc-chrome-h,78px) + var(--dqp-cap-h,74px))!important;
+  min-height:calc(var(--qrc-chrome-h,78px) + var(--dqp-cap-h,74px))!important;
+}
+html.player-learn #qrcChromeSpacer{
+  height:calc(var(--qrc-chrome-h,78px) + 108px)!important;
+  min-height:calc(var(--qrc-chrome-h,78px) + 108px)!important;
+}
+html.player-reader-dock .quran-ayah,
+html.player-learn .quran-ayah{
+  scroll-margin-top:calc(var(--qrc-chrome-h,78px) + var(--dqp-cap-h,74px) + 8px)!important;
+}
+html.player-learn .quran-ayah{
+  scroll-margin-top:calc(var(--qrc-chrome-h,78px) + 116px)!important;
+}
+.quran-ayah.is-dqp-playing{
+  outline:1px solid color-mix(in srgb,var(--gold2,#efd78e) 38%,transparent);
+  border-radius:12px;
+}
+.quran-ayah-action-btn--play.is-on{
+  background:color-mix(in srgb,var(--gold2,#efd78e) 22%,transparent)!important;
+  border-color:color-mix(in srgb,var(--gold2,#efd78e) 55%,transparent)!important;
+}
