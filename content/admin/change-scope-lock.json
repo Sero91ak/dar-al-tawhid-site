@@ -5074,6 +5074,32 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "test-scroll-glass-veil-2026-09-20",
+      "approvedBy": "user-explicit-test-hochscroll-glas-schicht",
+      "reason": "Nutzer: Test-App global beim Hochscrollen glasige Schicht über der Seite entfernen.",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "test-quran-player-close-fit-taddabur-2026-09-20",
+      "approvedBy": "user-explicit-test-player-close-fit-taddabur",
+      "reason": "Nutzer Test-App: Grab/Wisch schließen zur App, Āyah AR+DE+Taddabur im Display-Feld, Standardgröße lesbar.",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.css",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

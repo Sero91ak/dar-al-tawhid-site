@@ -50,9 +50,9 @@ html.is-quran-player-route body.has-bottom-nav{padding-bottom:0!important}
   touch-action:manipulation;
   pointer-events:auto!important;
   display:grid;
-  grid-template-rows:auto minmax(0,1fr) auto auto auto auto auto;
+  grid-template-rows:auto minmax(42vh,1fr) auto auto auto auto auto;
   align-items:stretch;justify-items:stretch;
-  padding:0 16px 0 16px;
+  padding:0 14px calc(10px + env(safe-area-inset-bottom,0px)) 14px;
   background:#3e4450;
   color:#fff;
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Inter,sans-serif;
@@ -81,12 +81,13 @@ html.is-quran-player-route #darQuranPlayer button,
 .dqp-grab{
   flex:0 0 auto;grid-row:1;
   width:100%!important;
-  min-height:28px!important;
+  min-height:36px!important;
   padding-top:env(safe-area-inset-top,0px)!important;
   display:flex!important;align-items:flex-end;justify-content:center;
   margin:0;
   background:#3e4450!important;
-  touch-action:pan-y;
+  touch-action:none;
+  z-index:6;
 }
 .dqp-grab::after{
   content:"";width:36px;height:5px;margin-bottom:10px;border-radius:99px;background:rgba(255,255,255,.55);
@@ -96,24 +97,34 @@ html.is-quran-player-route #darQuranPlayer button,
   aspect-ratio:auto;max-height:none;
   border-radius:22px;
   background:linear-gradient(180deg,#6a7180,#555c6a);
-  display:flex;align-items:center;justify-content:center;
+  display:flex;align-items:stretch;justify-content:center;
   overflow:hidden;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.16);
 }
 .dqp-ayah{
-  width:100%;height:100%;padding:18px 20px;
+  width:100%;height:100%;padding:16px 16px 14px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;overflow:hidden;
+  text-align:center;overflow-x:hidden;overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
   transition:opacity .26s ease,transform .26s ease;
 }
 .dqp-ayah-ar{
   font-family:"Noto Naskh Arabic","Amiri",serif;
-  font-size:28px;line-height:1.7;color:#fff;
+  font-size:32px;line-height:1.62;color:#fff;
   overflow-wrap:anywhere;word-break:break-word;max-width:100%;
   text-shadow:0 1px 0 rgba(0,0,0,.12);
-  font-weight:600;
+  font-weight:600;flex:0 0 auto;
 }
-.dqp-ayah-de{margin-top:10px;font-size:17px;line-height:1.5;color:#fff;overflow-wrap:anywhere;max-width:100%;font-weight:500}
+.dqp-ayah-de{margin-top:10px;font-size:18px;line-height:1.48;color:#fff;overflow-wrap:anywhere;max-width:100%;font-weight:500;flex:0 0 auto}
+.dqp-ayah-tad{
+  margin-top:12px;padding-top:10px;width:100%;max-width:100%;
+  border-top:1px solid rgba(243,234,214,.18);
+  color:#efe6d0;font-size:13px;line-height:1.4;font-weight:500;
+  white-space:pre-wrap;overflow-wrap:anywhere;text-align:center;
+  flex:0 1 auto;min-height:0;
+}
+.dqp-ayah-tad[hidden]{display:none!important}
 .dqp-ayah.is-leave{opacity:0;transform:translateY(-8px)}
 .dqp-ayah.is-enter{opacity:0;transform:translateY(10px)}
 .dqp-ayah-ref{font-size:12px;letter-spacing:.12em;color:#f3ead6;margin-bottom:8px;flex:0 0 auto;font-weight:600}

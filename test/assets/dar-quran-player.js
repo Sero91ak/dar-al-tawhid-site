@@ -23,7 +23,7 @@
     surah: 1, ayah: 1, reciter: "alafasy",
     shuffle: "off", repeat: "off", text: "both",
     playing: false, sessionActive: false, duration: 0, current: 0, resumeAt: 0,
-    loading: true, error: "", layer: 0, textScale: 5, volume: 1,
+    loading: true, error: "", layer: 0, textScale: 7, volume: 1,
     learnMode: false, learnLoop: true, learnStay: true, learnRate: 1
   };
   var sleepUntil = 0;
@@ -41,6 +41,7 @@
   var volCtx = null;
   var volSrc = null;
   var volNativeOk = null;
+  var tadCache = Object.create(null);
 
   function probeVolume() {
     if (volNativeOk != null) return volNativeOk;
@@ -94,7 +95,7 @@
     }
   }
   function setTextScale(n) {
-    state.textScale = Math.max(1, Math.min(10, Math.round(Number(n) || 5)));
+    state.textScale = Math.max(1, Math.min(10, Math.round(Number(n) || 7)));
     saveState();
     var el = document.querySelector("#darQuranPlayer [data-dqp-ayah]");
     if (el) fitAyah(el);
@@ -140,7 +141,11 @@
       if (SHUFFLE.indexOf(raw.shuffle) >= 0) state.shuffle = raw.shuffle;
       if (REPEAT.indexOf(raw.repeat) >= 0) state.repeat = raw.repeat;
       if (TEXT.indexOf(raw.text) >= 0) state.text = raw.text;
-      if (Number(raw.textScale) >= 1 && Number(raw.textScale) <= 10) state.textScale = Math.round(Number(raw.textScale));
+      if (raw.textScaleFit === 1 && Number(raw.textScale) >= 1 && Number(raw.textScale) <= 10) {
+        state.textScale = Math.round(Number(raw.textScale));
+      } else {
+        state.textScale = 7;
+      }
       if (Number(raw.volume) >= 0 && Number(raw.volume) <= 1) state.volume = Number(raw.volume);
       if (Number(raw.resumeAt) > 0) state.resumeAt = Number(raw.resumeAt);
       if (raw.sessionActive === true) state.sessionActive = true;
@@ -152,7 +157,7 @@
       localStorage.setItem(KEY, JSON.stringify({
         surah: state.surah, ayah: state.ayah, reciter: state.reciter,
         shuffle: state.shuffle, repeat: state.repeat, text: state.text,
-        textScale: state.textScale, volume: state.volume,
+        textScale: state.textScale, textScaleFit: 1, volume: state.volume,
         resumeAt: state.current || state.resumeAt || 0,
         sessionActive: !!state.sessionActive,
         lastSurahs: lastSurahs.slice(-12)
@@ -363,6 +368,7 @@
     if (state.ayah < 1) state.ayah = 1;
     state.loading = false;
     saveState();
+    loadTadForSurah(state.surah);
   }
   function parseRoute(value) {
     var parts = String(value || "").split("/").filter(Boolean);
@@ -438,6 +444,7 @@
             '<div class="dqp-ayah-ref" data-ref></div>' +
             '<div class="dqp-ayah-ar" lang="ar" dir="rtl"></div>' +
             '<div class="dqp-ayah-de"></div>' +
+            '<div class="dqp-ayah-tad" data-tad hidden></div>' +
             '<div class="dqp-status">Wird geladen …</div>' +
           "</div>" +
         "</div>" +
@@ -493,9 +500,14 @@
       if (ref) ref.textContent = state.surah + " · Āyah " + state.ayah;
       if (ar) ar.textContent = (v && (v.ar || v.arabic)) || (state.loading ? "" : "Āyah wird geladen …");
       if (de) de.textContent = (v && (v.de || v.translation)) || "";
+      paintTad(el);
       el.classList.remove("is-leave", "is-enter");
       fitAyah(el);
       paintError();
+      loadTadForSurah(state.surah).then(function () {
+        paintTad(el);
+        fitAyah(el);
+      });
     };
     if (!animate) { apply(); return; }
     el.classList.add("is-leave");
@@ -507,34 +519,100 @@
       });
     }, 160);
   }
+  function tadPlain(entry) {
+    if (!entry) return "";
+    var meaning = String(entry.meaning || "").trim();
+    var kath = "";
+    var saadi = "";
+    if (typeof window.tafsirBySource === "function") {
+      kath = String(window.tafsirBySource(entry, "ibn kath", "kathīr", "kathir") || "").trim();
+      saadi = String(window.tafsirBySource(entry, "saʿd", "saadi", "sadi") || "").trim();
+    } else if (Array.isArray(entry.tafsir)) {
+      entry.tafsir.forEach(function (row) {
+        var src = String((row && row.source) || "").toLowerCase();
+        var tx = String((row && row.text) || "").trim();
+        if (!kath && /kath/.test(src)) kath = tx;
+        if (!saadi && /saʿd|saad|sadi/.test(src)) saadi = tx;
+      });
+    }
+    var extra = kath || saadi;
+    var tad = extra || meaning;
+    if (meaning && extra && extra.indexOf(meaning) !== 0) tad = meaning + "\n" + extra;
+    tad = String(tad || "").replace(/\s+\n/g, "\n").trim();
+    if (tad.length > 720) tad = tad.slice(0, 700).replace(/\s+\S*$/, "") + " …";
+    return tad;
+  }
+  function loadTadForSurah(surah) {
+    surah = Number(surah);
+    if (!(surah >= 1 && surah <= 114)) return Promise.resolve(null);
+    if (tadCache[surah]) return Promise.resolve(tadCache[surah]);
+    if (typeof window.loadTafsirSurah !== "function") return Promise.resolve(null);
+    return window.loadTafsirSurah(surah).then(function (doc) {
+      tadCache[surah] = doc || { verses: null };
+      return tadCache[surah];
+    }).catch(function () {
+      tadCache[surah] = { verses: null };
+      return tadCache[surah];
+    });
+  }
+  function paintTad(el) {
+    if (!el) return;
+    var tadEl = el.querySelector("[data-tad]");
+    if (!tadEl) return;
+    var doc = tadCache[state.surah];
+    var entry = null;
+    if (typeof window.ayahTafsirEntry === "function") entry = window.ayahTafsirEntry(doc, state.ayah);
+    else if (doc && doc.verses && typeof doc.verses.get === "function") entry = doc.verses.get(Number(state.ayah));
+    var text = tadPlain(entry);
+    tadEl.hidden = !text;
+    tadEl.textContent = text ? ("Taddabur\n" + text) : "";
+  }
   function fitAyah(el) {
     var ar = el.querySelector(".dqp-ayah-ar");
     var de = el.querySelector(".dqp-ayah-de");
+    var tad = el.querySelector("[data-tad]");
     if (!ar) return;
     var box = el.parentElement;
-    var prefer = 13 + (Number(state.textScale) || 5) * 2.3;
-    if (state.text === "ar") prefer += 2;
+    var scale = Number(state.textScale) || 7;
+    var prefer = 15 + scale * 2.55;
+    if (state.text === "ar") prefer += 3;
     if (state.text === "de") prefer += 1;
-    var n = (ar.textContent || "").length + ((de && state.text !== "ar" ? de.textContent : "") || "").length * 0.4;
-    if (n > 280) prefer *= 0.78;
-    else if (n > 160) prefer *= 0.88;
-    var px = Math.round(prefer);
-    var minPx = 12;
-    ar.style.lineHeight = px > 28 ? "1.7" : "1.55";
-    ar.style.fontSize = px + "px";
-    if (de) {
-      de.style.fontSize = Math.max(12, Math.round(px * (state.text === "de" ? 0.72 : 0.48))) + "px";
-      de.style.lineHeight = "1.4";
-    }
-    if (!box || box.clientHeight < 40) return;
-    var guard = 0;
-    while (el.scrollHeight > box.clientHeight - 6 && px > minPx && guard < 28) {
-      px -= 1;
+    var n = (ar.textContent || "").length + ((de && state.text !== "ar" ? de.textContent : "") || "").length * 0.72;
+    if (n > 420) prefer *= 0.82;
+    else if (n > 240) prefer *= 0.9;
+    var deRatio = state.text === "de" ? 0.92 : 0.76;
+    var tadPx = function (px) { return Math.max(12, Math.round(px * 0.42)); };
+    var applyPx = function (px) {
+      ar.style.lineHeight = px > 28 ? "1.62" : "1.48";
       ar.style.fontSize = px + "px";
-      ar.style.lineHeight = px > 24 ? "1.62" : "1.45";
-      if (de) de.style.fontSize = Math.max(11, Math.round(px * (state.text === "de" ? 0.7 : 0.48))) + "px";
+      if (de) {
+        de.style.fontSize = Math.max(13, Math.round(px * deRatio)) + "px";
+        de.style.lineHeight = "1.45";
+      }
+      if (tad) {
+        tad.style.fontSize = tadPx(px) + "px";
+        tad.style.lineHeight = "1.4";
+      }
+    };
+    var px = Math.round(prefer);
+    var minPx = 14;
+    var maxPx = Math.round(15 + scale * 3.1);
+    applyPx(px);
+    if (!box || box.clientHeight < 40) return;
+    var room = box.clientHeight - 8;
+    var guard = 0;
+    while (el.scrollHeight < room * 0.7 && px < maxPx && guard < 22) {
+      px += 1;
+      applyPx(px);
       guard += 1;
     }
+    guard = 0;
+    while (el.scrollHeight > room && px > minPx && guard < 40) {
+      px -= 1;
+      applyPx(px);
+      guard += 1;
+    }
+    el.style.justifyContent = el.scrollHeight > room ? "flex-start" : "center";
   }
   function paintStatus() {
     var el = document.querySelector("#darQuranPlayer .dqp-status");
@@ -687,26 +765,32 @@
   function leavePlayerRoute(kind) {
     function go() {
       if (kind === "read") navigateApp("quran-surah", String(state.surah) + "/" + state.ayah);
-      else if (kind === "home") navigateApp("home");
-      else if (typeof window.goBack === "function") {
-        window.goBack();
-        setTimeout(function () { if (isFullPlayerRoute()) navigateApp("home"); }, 50);
-      } else navigateApp("home");
-      setTimeout(paintMini, 40);
+      else navigateApp("home");
+      setTimeout(function () {
+        if (kind !== "read" && isFullPlayerRoute()) navigateApp("home");
+        paintMini();
+      }, 40);
     }
     var root = playerRoot();
     if (!root || !isFullPlayerRoute()) {
+      leaveLock = false;
       go();
       return;
     }
-    if (leaveLock) return;
+    if (leaveLock) {
+      go();
+      return;
+    }
     leaveLock = true;
     root.classList.add("is-leaving");
+    go();
     setTimeout(function () {
-      root.classList.remove("is-leaving");
-      root.hidden = true;
+      if (root) {
+        root.classList.remove("is-leaving");
+        if (!isFullPlayerRoute()) root.hidden = true;
+      }
       leaveLock = false;
-      go();
+      paintMini();
     }, 280);
   }
   function sleepLabel() {
@@ -1282,7 +1366,7 @@
       var act = t.getAttribute("data-dqp");
       if (act === "seek" || act === "vol" || act === "text-scale") return;
       ev.stopPropagation();
-      if (act === "min") { leavePlayerRoute("back"); return; }
+      if (act === "min") { leavePlayerRoute("home"); return; }
       if (act === "play") { togglePlay(); return; }
       if (act === "prev") { if (holdSkip) { holdSkip = false; return; } prevAyah(); return; }
       if (act === "next") { if (holdSkip) { holdSkip = false; return; } nextAyah(false); return; }
@@ -1366,10 +1450,21 @@
         return;
       }
       grabClose = !!(t.closest && t.closest(".dqp-grab"));
-      dismissY = grabClose ? e.touches[0].clientY : null;
+      dismissY = e.touches[0].clientY;
       swipeX = e.touches[0].clientX;
       swipeY = e.touches[0].clientY;
     }, { passive: true });
+    root.addEventListener("touchmove", function (e) {
+      if (!e.touches || !e.touches[0]) return;
+      if (grabClose) {
+        e.preventDefault();
+        return;
+      }
+      if (swipeX == null) return;
+      var dx = e.touches[0].clientX - swipeX;
+      var dy = e.touches[0].clientY - swipeY;
+      if (Math.abs(dx) > 12 && Math.abs(dx) > Math.abs(dy) * 1.05) e.preventDefault();
+    }, { passive: false });
     root.addEventListener("touchend", function (e) {
       if (!e.changedTouches || !e.changedTouches[0]) return;
       var x = e.changedTouches[0].clientX;
@@ -1383,11 +1478,11 @@
       swipeX = null;
       swipeY = null;
       grabClose = false;
-      if (adx > 72 && adx > ady * 1.35) {
-        if (dx > 0) leavePlayerRoute("home");
+      if (adx > 40 && adx > ady * 0.95 && dx > 0) {
+        leavePlayerRoute("home");
         return;
       }
-      if (grab && dy > 52 && ady > adx) leavePlayerRoute("back");
+      if (grab && (ady > 22 || (adx < 14 && ady < 14))) leavePlayerRoute("home");
     }, { passive: true });
     paintChrome();
     paintProgress();
