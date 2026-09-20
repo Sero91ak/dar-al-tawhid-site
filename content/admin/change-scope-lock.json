@@ -5155,6 +5155,21 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "test-quran-player-layout-cache-912-2026-09-20",
+      "approvedBy": "user-explicit-test-player-textbereich-vergroessern",
+      "reason": "Nutzer Test-App: Player-Aufteilung muss tatsächlich in der iOS-Test-Webview ankommen (Cache umgehen).",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.css",
+        "cloudflare/test-app-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
