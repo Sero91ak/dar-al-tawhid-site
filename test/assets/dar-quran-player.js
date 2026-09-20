@@ -616,7 +616,6 @@
   function bindScrollAway() {
     if (window.__dqpScrollAwayBound) return;
     window.__dqpScrollAwayBound = true;
-    var idleTimer = 0;
     var lastY = 0;
     var ticking = false;
     var pendingY = 0;
@@ -635,22 +634,10 @@
       }
       var y = pendingY;
       var dy = y - lastY;
-      var home = document.body && document.body.classList.contains("is-home-route");
-      if (home) {
-        setCapsuleCollapsed(false);
-        if (dy > 6 && y > 10) setPlayerDim(true);
-        else if (dy < -8 || y < 8) setPlayerDim(false);
-        lastY = y;
-        return;
-      }
-      setPlayerDim(false);
-      if (dy > 8 && y > 14) setCapsuleCollapsed(true);
-      else if (dy < -10 || y < 8) setCapsuleCollapsed(false);
+      setCapsuleCollapsed(false);
+      if (y < 12 || dy < -8) setPlayerDim(false);
+      else if (dy > 6 && y > 14) setPlayerDim(true);
       lastY = y;
-      clearTimeout(idleTimer);
-      idleTimer = setTimeout(function () {
-        if (state.sessionActive && !isFullPlayerRoute()) setCapsuleCollapsed(false);
-      }, 280);
     }
     function onScroll(ev) {
       if (ev && ev.target && ev.target.closest && ev.target.closest("#darQuranMiniPlayer")) return;
