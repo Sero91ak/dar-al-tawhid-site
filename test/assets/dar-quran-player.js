@@ -983,18 +983,14 @@
       else location.hash = "#quran";
       setTimeout(paintMini, 40);
     }
-    root.addEventListener("click", function (ev) {
-      var t = ev.target.closest("[data-dqp],[data-dqp-opt]");
+    function onPlayerAction(ev) {
+      var t = ev.target && ev.target.closest ? ev.target.closest("[data-dqp],[data-dqp-opt]") : null;
       if (!t) return;
       var act = t.getAttribute("data-dqp");
-      if (act === "min") {
-        closePlayerToApp();
-        return;
-      }
-      if (act === "play") {
-        togglePlay();
-        return;
-      }
+      if (act === "seek" || act === "vol" || act === "text-scale") return;
+      ev.stopPropagation();
+      if (act === "min") { closePlayerToApp(); return; }
+      if (act === "play") { togglePlay(); return; }
       if (act === "prev") { if (holdSkip) { holdSkip = false; return; } prevAyah(); return; }
       if (act === "next") { if (holdSkip) { holdSkip = false; return; } nextAyah(false); return; }
       if (act === "back15") { skip(-15); return; }
@@ -1009,7 +1005,8 @@
       if (act === "pick-reciter") { openReciterSheet(); return; }
       var opt = t.getAttribute("data-dqp-opt");
       if (opt) onOpt(opt);
-    });
+    }
+    root.addEventListener("click", onPlayerAction);
     root.addEventListener("input", function (ev) {
       if (ev.target && ev.target.getAttribute("data-dqp") === "text-scale") {
         setTextScale(ev.target.value);
@@ -1059,8 +1056,7 @@
     if (sheet) sheet.addEventListener("click", function (e) { if (e.target === sheet) closeSheet(); });
     root.addEventListener("touchstart", function (e) {
       if (!e.touches || !e.touches[0]) return;
-      var y = e.touches[0].clientY;
-      if (e.target.closest(".dqp-grab") || y < 96) dismissY = y;
+      if (e.target.closest && e.target.closest(".dqp-grab")) dismissY = e.touches[0].clientY;
       else dismissY = null;
     }, { passive: true });
     root.addEventListener("touchend", function (e) {
@@ -1069,16 +1065,6 @@
       dismissY = null;
       if (dy > 52) closePlayerToApp();
     }, { passive: true });
-    if (!window.__dqpScrollLock) {
-      window.__dqpScrollLock = true;
-      var blockScroll = function (e) {
-        if (!isFullPlayerRoute()) return;
-        if (e.target && e.target.closest && e.target.closest(".dqp-sheet, .dqp-sheet-card, input[type=range]")) return;
-        e.preventDefault();
-      };
-      document.addEventListener("touchmove", blockScroll, { passive: false });
-      document.addEventListener("wheel", blockScroll, { passive: false });
-    }
     paintChrome();
     paintProgress();
   }
