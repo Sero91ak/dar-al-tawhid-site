@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 904;
+  var PLAYER_BUILD = 905;
   if (window.__DAR_QURAN_PLAYER_BUILD === PLAYER_BUILD && window.DARQuranPlayer) return;
   try {
     var staleAudio = document.getElementById("darQuranPlayerAudio");
@@ -57,6 +57,7 @@
   var volSrc = null;
   var volNativeOk = null;
   var tadCache = Object.create(null);
+  var tadCatalogReady = null;
   var ignoreEndedUntil = 0;
   var trackHeard = false;
   var playGen = 0;
@@ -525,6 +526,7 @@
     if (state.ayah < 1) state.ayah = 1;
     state.loading = false;
     saveState();
+    ensureTadCatalog();
     loadTadForSurah(state.surah);
   }
   function parseRoute(value) {
@@ -666,7 +668,7 @@
       el.classList.remove("is-leave", "is-enter");
       fitAyah(el);
       paintError();
-      loadTadForSurah(state.surah).then(function () {
+      Promise.all([ensureTadCatalog(), loadTadForSurah(state.surah)]).then(function () {
         paintTad(el);
         fitAyah(el);
       });
@@ -717,7 +719,91 @@
     }
     return out;
   }
+  function ingestTadItems(items) {
+    var by = window.__DAR_TADABBUR_BY_REF && typeof window.__DAR_TADABBUR_BY_REF === "object"
+      ? window.__DAR_TADABBUR_BY_REF
+      : {};
+    var list = Array.isArray(window.__DAR_TADABBUR_ITEMS) ? window.__DAR_TADABBUR_ITEMS.slice() : [];
+    var seen = {};
+    list.forEach(function (it) { if (it && it.id) seen[it.id] = 1; });
+    (items || []).forEach(function (it) {
+      if (!it || !it.reference || !it.reflection) return;
+      if (it.id && seen[it.id]) return;
+      if (it.id) seen[it.id] = 1;
+      list.push(it);
+      if (!by[it.reference]) by[it.reference] = it;
+    });
+    window.__DAR_TADABBUR_ITEMS = list;
+    window.__DAR_TADABBUR_BY_REF = by;
+    return by;
+  }
+  function parseTadCatalog(raw) {
+    var rows = [];
+    if (Array.isArray(raw)) rows = raw;
+    else if (raw && Array.isArray(raw.items)) rows = raw.items;
+    var out = [];
+    var seen = {};
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i] || {};
+      var id = String(row.id || "").trim();
+      var ref = String(row.reference || "").trim();
+      var reflection = String(row.reflection || "").trim();
+      if (!ref || reflection.length < 20) continue;
+      if (seen[id || ref]) continue;
+      seen[id || ref] = 1;
+      out.push({
+        id: id || ref,
+        reference: ref,
+        verse: String(row.verse || "").trim(),
+        reflection: reflection,
+        narrator: String(row.narrator || "").trim(),
+        generation: String(row.generation || "").trim(),
+        source: String(row.source || "").trim()
+      });
+    }
+    ingestTadItems(out);
+    return out;
+  }
+  function ensureTadCatalog() {
+    var existing = window.__DAR_TADABBUR_BY_REF;
+    if (existing && Object.keys(existing).length) return Promise.resolve(existing);
+    if (tadCatalogReady) return tadCatalogReady;
+    var urls = [
+      "/apple-tv/tadabbur/catalog.json",
+      "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/apple-tv-hadith-staging/apple-tv/tadabbur/catalog.json"
+    ];
+    tadCatalogReady = (function next(i) {
+      if (i >= urls.length) return Promise.resolve(window.__DAR_TADABBUR_BY_REF || {});
+      return fetch(urls[i], { cache: "no-store" }).then(function (r) {
+        if (!r.ok) return next(i + 1);
+        return r.json().then(parseTadCatalog).then(function () { return window.__DAR_TADABBUR_BY_REF || {}; });
+      }).catch(function () { return next(i + 1); });
+    })(0);
+    return tadCatalogReady;
+  }
+  function tadEntryFor(surah, ayah) {
+    var by = window.__DAR_TADABBUR_BY_REF || {};
+    return by[Number(surah) + ":" + Number(ayah)] || null;
+  }
+  window.DARTadabburCatalog = {
+    ensure: ensureTadCatalog,
+    get: tadEntryFor
+  };
+  window.addEventListener("dar-tadabbur-ready", function () {
+    var root = playerRoot();
+    var el = root && root.querySelector("[data-dqp-ayah]");
+    if (el) {
+      paintTad(el);
+      fitAyah(el);
+    }
+  });
   function tadPlain(pack) {
+    var catalog = tadEntryFor(state.surah, state.ayah);
+    if (catalog && catalog.reflection) {
+      var meta = [catalog.narrator, catalog.generation].filter(Boolean).join(" · ");
+      var tail = [meta, catalog.source].filter(Boolean).join("\n");
+      return tail ? (catalog.reflection + "\n\n" + tail) : catalog.reflection;
+    }
     pack = pack || {};
     var de = "";
     var v = verseAt(state.ayah);
@@ -777,7 +863,7 @@
     if (!tadEl) return;
     var text = tadPlain(packForAyah(state.surah, state.ayah));
     tadEl.hidden = !text;
-    tadEl.textContent = text ? ("Taddabur\n" + text) : "";
+    tadEl.textContent = text ? ("Tadabbur\n" + text) : "";
   }
   function fitAyah(el) {
     var ar = el.querySelector(".dqp-ayah-ar");
@@ -1897,6 +1983,7 @@
   };
 
   loadState();
+  ensureTadCatalog();
   function resumeVisibleSession() {
     loadState({ keepLiveSession: true });
     if (state.sessionActive) {
