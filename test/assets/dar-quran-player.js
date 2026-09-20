@@ -234,8 +234,9 @@
     }
     if (autoplay) a.play().catch(function () {});
     applyLearnRate();
-    paintAyah(true);
+    paintAyah();
     paintChrome();
+    paintMini();
     preloadNext();
   }
   function preloadNext() {
@@ -378,7 +379,8 @@
     if (a >= 1) state.ayah = a;
   }
   function writeHash() {
-    if (isReaderRoute() || (state.learnMode && !isFullPlayerRoute())) return;
+    if (!isFullPlayerRoute()) return;
+    if (isReaderRoute()) return;
     var next = "#quran-player/" + state.surah + "/" + state.ayah;
     if (location.hash !== next) {
       try { history.replaceState(null, "", location.pathname + (location.search || "") + next); } catch (e) {}
@@ -485,39 +487,40 @@
       "</div>"
     );
   }
-  function paintAyah(animate) {
+  function verseAr(v) {
+    return String((v && (v.ar || v.arabic || "")) || "").trim();
+  }
+  function verseDe(v) {
+    return String((v && (v.de || v.translation || "")) || "").trim();
+  }
+  function paintAyah() {
     var root = playerRoot();
     if (!root) return;
     var el = root.querySelector("[data-dqp-ayah]");
     if (!el) return;
     var v = verseAt(state.ayah);
-    var apply = function () {
-      var st = el.querySelector(".dqp-status");
-      if (st) st.remove();
-      var ref = el.querySelector("[data-ref]");
-      var ar = el.querySelector(".dqp-ayah-ar");
-      var de = el.querySelector(".dqp-ayah-de");
-      if (ref) ref.textContent = state.surah + " · Āyah " + state.ayah;
-      if (ar) ar.textContent = (v && (v.ar || v.arabic)) || (state.loading ? "" : "Āyah wird geladen …");
-      if (de) de.textContent = (v && (v.de || v.translation)) || "";
+    var st = el.querySelector(".dqp-status");
+    if (st) st.remove();
+    var ref = el.querySelector("[data-ref]");
+    var ar = el.querySelector(".dqp-ayah-ar");
+    var de = el.querySelector(".dqp-ayah-de");
+    var arTxt = verseAr(v);
+    var deTxt = verseDe(v);
+    el.classList.remove("is-leave", "is-enter");
+    if (ref) ref.textContent = state.surah + " · Āyah " + state.ayah;
+    if (ar && arTxt) ar.textContent = arTxt;
+    else if (ar && !state.loading && !ar.textContent) ar.textContent = "Āyah wird geladen …";
+    if (de && deTxt) de.textContent = deTxt;
+    paintTad(el);
+    fitAyah(el);
+    paintError();
+    var sid = state.surah;
+    var aid = state.ayah;
+    loadTadForSurah(sid).then(function () {
+      if (state.surah !== sid || state.ayah !== aid) return;
       paintTad(el);
-      el.classList.remove("is-leave", "is-enter");
       fitAyah(el);
-      paintError();
-      loadTadForSurah(state.surah).then(function () {
-        paintTad(el);
-        fitAyah(el);
-      });
-    };
-    if (!animate) { apply(); return; }
-    el.classList.add("is-leave");
-    setTimeout(function () {
-      apply();
-      el.classList.add("is-enter");
-      requestAnimationFrame(function () {
-        el.classList.remove("is-enter");
-      });
-    }, 160);
+    });
   }
   function isPlaceholderTad(text) {
     var t = String(text || "");
@@ -666,7 +669,14 @@
   }
   function paintStatus() {
     var el = document.querySelector("#darQuranPlayer .dqp-status");
-    if (el) el.textContent = state.loading ? "Sūrah wird geladen …" : "";
+    if (!el) return;
+    if (!state.loading) {
+      try { el.remove(); } catch (e) {}
+      return;
+    }
+    var ar = document.querySelector("#darQuranPlayer .dqp-ayah-ar");
+    if (ar && (ar.textContent || "").trim()) return;
+    el.textContent = "Sūrah wird geladen …";
   }
   function paintError() {
     var root = playerRoot();
@@ -787,8 +797,6 @@
     return src && src.indexOf("http") === 0;
   }
   function isFullPlayerRoute() {
-    var hash = String(location.hash || "").replace(/^#\/?/, "");
-    if (hash.split("/")[0] === "quran-player") return true;
     return document.documentElement.classList.contains("is-quran-player-route")
       || (document.body && document.body.classList.contains("is-quran-player-route"));
   }
@@ -1384,7 +1392,8 @@
   function bind(force) {
     var root = playerRoot();
     if (!root) return;
-    mountPlayerPage(root);
+    if (isFullPlayerRoute()) mountPlayerPage(root);
+    else if (root.parentNode === document.body) root.hidden = true;
     function syncLiveAudio() {
       seekLock = false;
       var a = audioEl();
@@ -1398,7 +1407,7 @@
       paintInfo();
       paintChrome();
       paintProgress();
-      paintAyah(false);
+      paintAyah();
     }
     if (root.dataset.bound && !force) {
       syncLiveAudio();
@@ -1436,7 +1445,7 @@
       }
       if (act === "shuffle") { state.shuffle = cycle(SHUFFLE, state.shuffle); saveState(); paintChrome(); return; }
       if (act === "repeat") { state.repeat = cycle(REPEAT, state.repeat); saveState(); paintChrome(); return; }
-      if (act === "text") { state.text = cycle(TEXT, state.text); saveState(); paintChrome(); paintAyah(false); return; }
+      if (act === "text") { state.text = cycle(TEXT, state.text); saveState(); paintChrome(); paintAyah(); return; }
       if (act === "pick-surah") { openSurahSheet(); return; }
       if (act === "pick-reciter") { openReciterSheet(); return; }
       var opt = t.getAttribute("data-dqp-opt");
@@ -1555,7 +1564,7 @@
         if (!node) return;
         node.dataset.ready = "1";
         paintInfo();
-        paintAyah(false);
+        paintAyah();
         writeHash();
         var a = audioEl();
         var want = pad(state.surah, 3) + pad(state.ayah, 3);
@@ -1566,7 +1575,7 @@
           state.duration = a.duration || 0;
           state.playing = !a.paused;
           if (!a.paused || state.sessionActive) state.sessionActive = true;
-          paintAyah(false);
+          paintAyah();
           paintChrome();
           paintProgress();
         } else {
