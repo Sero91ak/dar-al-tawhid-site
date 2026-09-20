@@ -810,6 +810,13 @@ struct WebAppView: UIViewRepresentable {
                 name: .darNativePushReady,
                 object: nil
             )
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(injectTadabburCatalog),
+                name: .darTadabburCatalogUpdated,
+                object: nil
+            )
+            injectTadabburCatalog()
         }
 
         deinit {
@@ -1134,6 +1141,12 @@ struct WebAppView: UIViewRepresentable {
             handlePossibleLibraryReaderRoute(currentURL)
             applyPendingQuickActionIfNeeded()
             injectNativePushBridge()
+            injectTadabburCatalog()
+        }
+
+        @objc func injectTadabburCatalog() {
+            let js = DarTadabburRemoteService.injectionJavaScript()
+            webView?.evaluateJavaScript(js, completionHandler: nil)
         }
 
         @objc func injectNativePushBridge() {
@@ -1773,6 +1786,12 @@ struct WebAppView: UIViewRepresentable {
             updateViewportInsets()
             applyPendingQuickActionIfNeeded()
             DarPushNotifications.syncWithServerThenScheduleLocalFallback()
+            Task {
+                _ = await DarTadabburRemoteService.refresh()
+                await MainActor.run { [weak self] in
+                    self?.injectTadabburCatalog()
+                }
+            }
             webView.evaluateJavaScript(
                 """
                 (function(){

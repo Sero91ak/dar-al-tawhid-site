@@ -560,6 +560,12 @@
   }
   function tadPlain(pack) {
     pack = pack || {};
+    var catalogRow = (window.__DAR_TADABBUR_BY_REF || {})[state.surah + ":" + state.ayah];
+    var catalogText = "";
+    if (catalogRow && String(catalogRow.reflection || "").trim().length >= 40) {
+      var head = [catalogRow.narrator, catalogRow.generation].filter(Boolean).join(" · ");
+      catalogText = (head ? head + "\n" : "") + String(catalogRow.reflection).trim();
+    }
     var de = "";
     var v = verseAt(state.ayah);
     if (v) de = String(v.de || v.translation || "").trim();
@@ -585,6 +591,7 @@
       else parts.push(body);
     }
     var tad = parts.join("\n\n").trim();
+    if (catalogText) tad = catalogText + (tad ? "\n\n" + tad : "");
     if (tad.length > 780) tad = tad.slice(0, 760).replace(/\s+\S*$/, "") + " …";
     return tad;
   }
@@ -1637,4 +1644,7 @@
   } else {
     paintMini();
   }
+  window.addEventListener("dar-tadabbur-ready", function () {
+    try { paintAyah(); } catch (e) {}
+  });
 })();

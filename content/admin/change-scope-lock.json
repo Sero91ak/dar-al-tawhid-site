@@ -108,6 +108,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "ios-tadabbur-catalog-2026-09-20",
+      "approvedBy": "user-explicit-tadabbur-github-ios",
+      "reason": "Nutzer: zentrale Tadabbur-JSON (GitHub apple-tv-hadith-staging) in der iOS-App laden, cachen und anzeigen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "apple-tv/tadabbur/",
+        "ios/DarAlTawhid/",
+        "test/assets/dar-quran-player.js",
+        "test/index.html",
+        "test/version.json"
+      ]
+    },
+    {
       "id": "revert-visitor-header-smash-2026-09-16",
       "approvedBy": "user-explicit-besucher-oben-falsch-zurueck",
       "reason": "Nutzer: Besucher-App oben kaputt (Logo im Statusbalken). Safe-Area wiederherstellen, Glas weg, iOS unangetastet.",
