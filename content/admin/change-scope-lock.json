@@ -5116,6 +5116,19 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "live-quran-corpus-translit-2026-09-20",
+      "approvedBy": "user-explicit-push-live-visitor-ios-lautschrift",
+      "reason": "Nutzer: Corpus-Coranicum-Lautschrift jetzt auch Besucher-App und iOS (WKWebView live).",
+      "paths": [
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "content/quran-translit/",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
