@@ -42,6 +42,9 @@
   var volSrc = null;
   var volNativeOk = null;
   var tadCache = Object.create(null);
+  var audioToken = 0;
+  var audioAdvancing = false;
+  var lastEndedAt = 0;
 
   function probeVolume() {
     if (volNativeOk != null) return volNativeOk;
@@ -61,22 +64,6 @@
     var a = audioEl();
     a.muted = v <= 0.001;
     try { a.volume = v; } catch (e) {}
-    try {
-      if (!volSrc) {
-        var AC = window.AudioContext || window.webkitAudioContext;
-        if (AC) {
-          volCtx = volCtx || new AC();
-          volGain = volCtx.createGain();
-          volSrc = volCtx.createMediaElementSource(a);
-          volSrc.connect(volGain);
-          volGain.connect(volCtx.destination);
-        }
-      }
-      if (volGain) volGain.gain.value = v;
-      if (volCtx && volCtx.state === "suspended") volCtx.resume().catch(function () {});
-    } catch (e2) {
-      volSrc = volSrc || null;
-    }
     var nativeOk = false;
     try { nativeOk = Math.abs((a.volume || 0) - v) < 0.08 || v >= 0.97; } catch (e3) {}
     var track = document.querySelector("#darQuranPlayer [data-dqp-vol-track]");
@@ -89,9 +76,8 @@
     }
     var hint = document.querySelector("[data-dqp-vol-hint]");
     if (hint) {
-      var ok = nativeOk || !!volGain;
-      hint.hidden = ok;
-      if (!ok) hint.textContent = "Lautstärke über die Gerätetasten. Dieser Browser gibt die Wiedergabelautstärke nicht frei.";
+      hint.hidden = nativeOk || v >= 0.97;
+      if (!hint.hidden) hint.textContent = "Lautstärke über die Gerätetasten. Dieser Browser gibt die Wiedergabelautstärke nicht frei.";
     }
   }
   function setTextScale(n) {
@@ -175,13 +161,15 @@
     a.id = "darQuranPlayerAudio";
     a.preload = "auto";
     a.style.display = "none";
-    try { a.crossOrigin = "anonymous"; } catch (e0) {}
+    a.setAttribute("playsinline", "true");
+    a.setAttribute("webkit-playsinline", "true");
     document.body.appendChild(a);
     a.addEventListener("timeupdate", onTime);
     a.addEventListener("loadedmetadata", onMeta);
     a.addEventListener("ended", onEnded);
     a.addEventListener("play", function () { state.playing = true; state.sessionActive = true; applyVolume(); applyLearnRate(); saveState(); paintChrome(); paintMini(); markPlayingAyah(); });
     a.addEventListener("pause", function () {
+      if (audioAdvancing) return;
       state.playing = false;
       saveState();
       paintChrome();
@@ -222,17 +210,44 @@
   function loadAudio(autoplay, keepTime) {
     urlIndex = 0;
     state.error = "";
+    audioToken += 1;
+    var myToken = audioToken;
+    audioAdvancing = true;
     var a = audioEl();
+    try { a.pause(); } catch (e0) {}
     a.src = urlsFor(state.surah, state.ayah)[0];
-    a.load();
+    try { a.load(); } catch (e1) {}
     if (keepTime && state.resumeAt > 0) {
       a.addEventListener("loadedmetadata", function once() {
         a.removeEventListener("loadedmetadata", once);
+        if (myToken !== audioToken) return;
         if (state.resumeAt < (a.duration || 1e9)) a.currentTime = state.resumeAt;
         state.resumeAt = 0;
       });
     }
-    if (autoplay) a.play().catch(function () {});
+    var start = function () {
+      if (myToken !== audioToken) return;
+      audioAdvancing = false;
+      applyLearnRate();
+      if (autoplay) {
+        state.playing = true;
+        state.sessionActive = true;
+        a.play().catch(function () {});
+      }
+    };
+    if (a.readyState >= 2) start();
+    else {
+      var onReady = function () {
+        a.removeEventListener("canplay", onReady);
+        a.removeEventListener("loadeddata", onReady);
+        start();
+      };
+      a.addEventListener("canplay", onReady);
+      a.addEventListener("loadeddata", onReady);
+      setTimeout(function () {
+        if (myToken === audioToken && audioAdvancing) start();
+      }, 1200);
+    }
     applyLearnRate();
     paintAyah();
     paintChrome();
@@ -247,17 +262,21 @@
     try { p.load(); } catch (e) {}
   }
   function tryFallback() {
+    if (audioAdvancing && urlIndex === 0) {
+      /* load() can emit error while swapping src; wait for the real source */
+    }
     var urls = urlsFor(state.surah, state.ayah);
     urlIndex += 1;
     if (urlIndex >= urls.length) {
+      audioAdvancing = false;
       state.error = "Rezitation konnte nicht geladen werden.";
       paintError();
       return;
     }
     var a = audioEl();
     a.src = urls[urlIndex];
-    a.load();
-    if (state.playing) a.play().catch(function () {});
+    try { a.load(); } catch (e) {}
+    if (state.playing || state.sessionActive) a.play().catch(function () {});
   }
   function onTime() {
     if (seekLock) return;
@@ -273,8 +292,16 @@
     paintProgress();
   }
   async function onEnded() {
+    if (audioAdvancing) return;
+    var now = Date.now();
+    if (now - lastEndedAt < 400) return;
+    lastEndedAt = now;
+    var a = audioEl();
+    var t = Number(a.currentTime || 0);
+    var d = Number(a.duration || 0);
+    if (d > 1.2 && t < Math.max(0.45, d * 0.15)) return;
+    if (!state.sessionActive) return;
     if (state.learnMode && state.learnLoop) {
-      var a = audioEl();
       a.currentTime = 0;
       applyLearnRate();
       a.play().catch(function () {});
@@ -287,8 +314,8 @@
       return;
     }
     if (state.repeat === "ayah") {
-      audioEl().currentTime = 0;
-      audioEl().play().catch(function () {});
+      a.currentTime = 0;
+      a.play().catch(function () {});
       return;
     }
     await nextAyah(true);
@@ -804,6 +831,8 @@
     return src && src.indexOf("http") === 0;
   }
   function isFullPlayerRoute() {
+    var hash = String(location.hash || "").replace(/^#\/?/, "");
+    if (hash.split("/")[0] === "quran-player") return true;
     return document.documentElement.classList.contains("is-quran-player-route")
       || (document.body && document.body.classList.contains("is-quran-player-route"));
   }
@@ -1014,23 +1043,32 @@
   function togglePlay(forcePlay) {
     state.sessionActive = true;
     saveState();
-    applyVolume();
     var a = audioEl();
-    if (!audioHasSrc(a)) {
+    if (!audioHasSrc(a) || a.readyState < 1) {
       loadAudio(true, true);
       return;
     }
-    if (forcePlay === true || a.paused) a.play().catch(function () {});
-    else a.pause();
+    if (forcePlay === true || a.paused) {
+      state.playing = true;
+      applyLearnRate();
+      a.play().catch(function () { loadAudio(true, true); });
+    } else {
+      a.pause();
+      state.playing = false;
+    }
+    paintChrome();
+    paintMini();
   }
   function stopSession() {
+    audioToken += 1;
+    audioAdvancing = true;
     state.sessionActive = false;
     state.playing = false;
     state.resumeAt = 0;
     var a = document.getElementById("darQuranPlayerAudio");
     if (a) {
       try { a.pause(); } catch (e) {}
-      try { a.removeAttribute("src"); a.removeAttribute("srcObject"); a.load(); } catch (e2) {}
+      try { a.removeAttribute("src"); } catch (e2) {}
     }
     saveState();
     capsuleCollapsed = false;
