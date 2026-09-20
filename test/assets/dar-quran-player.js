@@ -905,7 +905,8 @@
       e.stopPropagation();
       var t = e.target.closest("[data-dqp-mini]");
       var act = t ? t.getAttribute("data-dqp-mini") : "";
-      if (act === "play") { e.preventDefault(); togglePlay(); return; }
+      if (act === "play") { e.preventDefault(); togglePlay(true); return; }
+      if (act === "pause") { e.preventDefault(); audioEl().pause(); return; }
       if (act === "stop") { e.preventDefault(); stopSession(); return; }
       if (act === "learn-loop") {
         e.preventDefault();
@@ -932,12 +933,20 @@
       openFullPlayer();
     });
     var playBtn = el.querySelector("[data-dqp-mini=play]");
+    var pauseBtn = el.querySelector("[data-dqp-mini=pause]");
     var stopBtn = el.querySelector("[data-dqp-mini=stop]");
     if (playBtn) {
       playBtn.addEventListener("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
-        togglePlay();
+        togglePlay(true);
+      });
+    }
+    if (pauseBtn) {
+      pauseBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        audioEl().pause();
       });
     }
     if (stopBtn) {
@@ -975,6 +984,7 @@
         "</button>" +
         '<div class="dqp-top-actions">' +
           '<button type="button" class="dqp-top-ctrl" data-dqp-mini="play" aria-label="Wiedergabe"></button>' +
+          '<button type="button" class="dqp-top-ctrl dqp-top-pause" data-dqp-mini="pause" aria-label="Pause"></button>' +
           '<button type="button" class="dqp-top-ctrl dqp-top-stop" data-dqp-mini="stop" aria-label="Stopp"></button>' +
         "</div>" +
       "</div>" +
@@ -1003,7 +1013,7 @@
       el.setAttribute("role", "region");
       el.setAttribute("aria-label", "Qurʾān Wiedergabe");
     }
-    if (!el.querySelector(".dqp-top-track") || !el.querySelector("[data-dqp-mini=seek]") || !el.querySelector("[data-dqp-learn]")) {
+    if (!el.querySelector(".dqp-top-track") || !el.querySelector("[data-dqp-mini=seek]") || !el.querySelector("[data-dqp-learn]") || !el.querySelector("[data-dqp-mini=pause]")) {
       el.innerHTML = miniMarkup();
       el.dataset.dqpMiniBound = "";
     }
@@ -1027,12 +1037,19 @@
     var b = el.querySelector(".dqp-top-text b");
     var s = el.querySelector(".dqp-top-text span");
     var p = el.querySelector("[data-dqp-mini=play]");
+    var pa = el.querySelector("[data-dqp-mini=pause]");
     var st = el.querySelector("[data-dqp-mini=stop]");
     if (b) b.textContent = latin + " · Āyah " + state.ayah;
     if (s) s.textContent = reciterById(state.reciter).name;
     if (p) {
-      p.innerHTML = icon(state.playing ? "pause" : "play");
-      p.setAttribute("aria-label", state.playing ? "Pause" : "Wiedergabe");
+      p.innerHTML = icon("play");
+      p.setAttribute("aria-label", "Wiedergabe");
+      p.classList.toggle("is-on", !state.playing && !!state.sessionActive);
+    }
+    if (pa) {
+      pa.innerHTML = icon("pause");
+      pa.setAttribute("aria-label", "Pause");
+      pa.classList.toggle("is-on", !!state.playing);
     }
     if (st) st.innerHTML = icon("stop");
     applyLearnChrome();
