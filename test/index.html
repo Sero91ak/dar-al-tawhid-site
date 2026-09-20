@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1789319677748 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v873";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v875";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -22471,6 +22471,7 @@ function parentRoute(route){if(route&&route.view==="frauen"){const parts=String(
   if(route.view==="books")return{view:"more"};
   if(route.view==="image-editor")return{view:"more"};
   if(route.view==="image-editor-test")return{view:"more"};
+  if(route.view==="more"&&route.value)return{view:"more"};
   if(route.view==="more")return{view:"home"};
   if(route.view==="prayer")return{view:"home"};
   if(route.view==="ramadan")return{view:"home"};
@@ -26468,23 +26469,77 @@ function renderFeatureHint(){return""}
 function renderPinnedFeaturesSection(){const pins=featurePins().map(featureById).filter(Boolean).slice(0,6);if(!pins.length)return"";return `<section class="feature-section"><div class="feature-head"><div><h3>Meine Schnellzugriffe</h3><span>Angepinnte Bereiche für schnellen Zugriff.</span></div></div><div class="feature-grid">${pins.map(renderFeatureCard).join("")}</div></section>`}
 function renderFeatureDiscoverySection(){return""}
 function renderTodayRecommendedFeatures(){return""}
-function renderMoreFeatureRow(item,idx){
+function renderMoreFeatureRow(item,idx,opts){
+  const numbered=!(opts&&opts.numbered===false);
   const search=[item.title,item.desc,item.group,item.badge,item.id==="propheten"?"die propheten anbiya quran sunnah ueberlieferungen lernen wissen musa":""].filter(Boolean).join(" ").toLowerCase();
   const hub=item.id==="jummah"||item.id==="qibla"?" more-feature-row--hub":"";
-  const n=String((idx||0)+1).padStart(2,"0");
+  const n=numbered?String((idx||0)+1).padStart(2,"0"):"";
   const icon=item.icon||"✦";
   const badge=item.badge?` <span class="feature-badge">${esc(item.badge)}</span>`:"";
-  return `<button class="more-feature-row dua-theme-card${hub}" type="button" data-nav="${esc(item.nav)}" ${item.value?`data-value="${esc(item.value)}"`:""} data-feature-search="${esc(search)}"><span class="dua-theme-card__idx" aria-hidden="true">${n}</span><div class="dua-theme-card__icon" aria-hidden="true"><span class="emoji-emblem">${esc(icon)}</span></div><div class="dua-theme-card__body"><h3>${esc(item.title)}${badge}</h3><p class="more-feature-row__desc dua-row__sub">${esc(item.desc||"")}</p></div><span class="dua-theme-card__chev" aria-hidden="true">›</span></button>`;
+  const idxHtml=numbered?`<span class="dua-theme-card__idx" aria-hidden="true">${n}</span>`:`<span class="dua-theme-card__idx more-feature-row__idx-gap" aria-hidden="true"></span>`;
+  return `<button class="more-feature-row dua-theme-card${hub}${numbered?"":" more-feature-row--plain"}" type="button" data-nav="${esc(item.nav)}" ${item.value?`data-value="${esc(item.value)}"`:""} data-feature-search="${esc(search)}">${idxHtml}<div class="dua-theme-card__icon" aria-hidden="true"><span class="emoji-emblem">${esc(icon)}</span></div><div class="dua-theme-card__body"><h3>${esc(item.title)}${badge}</h3><p class="more-feature-row__desc dua-row__sub">${esc(item.desc||"")}</p></div><span class="dua-theme-card__chev" aria-hidden="true">›</span></button>`;
 }
 function renderMoreGroup(title,items){if(!items.length)return"";return `<section class="more-group" data-more-group><div class="dua-hub__label more-group__label"><b>${esc(title)}</b><span>${items.length} Bereiche</span></div><div class="more-group-grid dua-theme-grid">${items.map((item,i)=>renderMoreFeatureRow(item,i)).join("")}</div></section>`}
-function filterMoreFeatures(){const input=$("moreFeatureSearch");if(!input)return;const q=input.value.trim().toLowerCase();document.querySelectorAll(".more-feature-row").forEach(row=>{row.classList.toggle("is-hidden",!!q&&!String(row.getAttribute("data-feature-search")||"").includes(q))});document.querySelectorAll("[data-more-group]").forEach(group=>{group.classList.toggle("is-hidden",!group.querySelector(".more-feature-row:not(.is-hidden)"))})}
+function moreWorlds(){
+  return [
+    {id:"lernen-wissen",title:"Lernen & Wissen",desc:"Qurʾān, Sunnah, Beiträge, Quiz und Wissensbereiche.",group:"Lernen & Wissen"},
+    {id:"alltag-gebet",title:"Alltag & Gebet",desc:"Gebetszeiten, Qibla, Jumuʿah und der islamische Kalender.",group:"Alltag & Gebet"},
+    {id:"bibliothek-quellen",title:"Bibliothek & Quellen",desc:"PDFs, geprüfte Werke, Ḥadīṯ und Gelehrte.",ids:["bibliothek","books","hadith","scholars"]},
+    {id:"werkzeuge-assistenten",title:"Werkzeuge & Assistenten",desc:"Rechner, Widgets und Hilfen für den Alltag.",group:"Werkzeuge & Assistenten"},
+    {id:"persoenlich",title:"Persönlich",desc:"Favoriten und dein persönlicher Bereich.",group:"Persönlich"},
+    {id:"app",title:"App",desc:"Einstellungen, Hinweise und über DĀR AL TAWḤĪD.",group:"App"}
+  ];
+}
+function moreWorldById(id){return moreWorlds().find(w=>w.id===String(id||""))}
+function moreWorldItems(world){
+  const items=featureCatalog();
+  if(!world)return[];
+  if(world.ids)return world.ids.map(id=>items.find(x=>x.id===id)).filter(Boolean);
+  return items.filter(item=>item.group===world.group);
+}
+function renderMoreWorld(world){
+  const list=moreWorldItems(world);
+  if(!list.length)return"";
+  const preview=list.slice(0,4).map(i=>i.title).join(" · ");
+  return `<button type="button" class="more-world" data-nav="more" data-value="${esc(world.id)}"><div class="dua-hub__label more-world__label"><b>${esc(world.title)}</b><span>${list.length}</span></div><p class="more-world__desc">${esc(world.desc)}</p><p class="more-world__preview">${esc(preview)}</p><span class="more-world__open">Alle anzeigen ›</span></button>`;
+}
+function filterMoreFeatures(){
+  const input=$("moreFeatureSearch");
+  if(!input)return;
+  const q=input.value.trim().toLowerCase();
+  const results=$("moreSearchResults");
+  const worlds=document.querySelector(".more-worlds");
+  if(results){
+    if(!q){
+      results.hidden=true;
+      results.innerHTML="";
+      if(worlds)worlds.hidden=false;
+      return;
+    }
+    const hits=featureCatalog().filter(item=>[item.title,item.desc,item.group,item.badge,item.id].join(" ").toLowerCase().includes(q));
+    results.hidden=false;
+    if(worlds)worlds.hidden=true;
+    results.innerHTML=hits.length?`<div class="dua-hub__label"><b>Treffer</b><span>${hits.length}</span></div><div class="more-group-grid dua-theme-grid">${hits.map(item=>renderMoreFeatureRow(item,0,{numbered:false})).join("")}</div>`:`<div class="empty">Kein passender Bereich gefunden.</div>`;
+    results.querySelectorAll("[data-nav]").forEach(bindNavActivation);
+    return;
+  }
+  document.querySelectorAll(".more-feature-row").forEach(row=>{row.classList.toggle("is-hidden",!!q&&!String(row.getAttribute("data-feature-search")||"").includes(q))});
+  document.querySelectorAll("[data-more-group]").forEach(group=>{group.classList.toggle("is-hidden",!group.querySelector(".more-feature-row:not(.is-hidden)"))});
+}
 
 
 function renderMoreQuickAccessSection(){
   return `<section class="more-quick-access" aria-label="Schnellzugriff"><div class="more-quick-access__list"><button type="button" class="more-quick-access__chip" data-more-quick="orient" aria-label="Orientierung" title="Orientierung"><span aria-hidden="true">🧭</span></button><button type="button" class="more-quick-access__chip" data-more-quick="saved" aria-label="Merkliste" title="Merkliste"><span aria-hidden="true">❤️</span></button><button type="button" class="more-quick-access__chip" data-more-quick="notifications" aria-label="Erinnerungen" title="Erinnerungen"><span aria-hidden="true">🔔</span></button><button type="button" class="more-quick-access__chip" data-more-quick="settings" aria-label="Einstellungen" title="Einstellungen"><span aria-hidden="true">⚙️</span></button></div></section>`;
 }
 
-function renderMore(){const groups=["Lernen & Wissen","Alltag & Gebet","Werkzeuge & Assistenten","Persönlich","App"];const items=featureCatalog();return `<div class="more-hub">${setPageHeader("Mehr","Alle Bereiche von DĀR AL TAWḤĪD an einem Ort.","Mehr")}${renderMoreQuickAccessSection()}${renderZakatMoreFocus()}<section class="more-search-block"><input id="moreFeatureSearch" class="more-search" type="search" placeholder="Funktion suchen…" autocomplete="off"></section>${groups.map(group=>renderMoreGroup(group,items.filter(item=>item.group===group))).join("")}</div>`}
+function renderMore(){
+  const world=moreWorldById(currentRoute.value);
+  if(world){
+    const list=moreWorldItems(world);
+    return `<div class="more-hub more-hub--world">${setPageHeader(world.title,world.desc,"Mehr")}${renderMoreGroup(world.title,list)}</div>`;
+  }
+  return `<div class="more-hub more-hub--discover">${setPageHeader("Entdecken","Finde Wissen, Funktionen und Bereiche.","Mehr")}${renderMoreQuickAccessSection()}${renderZakatMoreFocus()}<section class="more-search-block more-search-block--hero"><input id="moreFeatureSearch" class="more-search" type="search" placeholder="Funktion, Thema oder Inhalt suchen …" autocomplete="off"></section><section id="moreSearchResults" class="more-search-results" hidden></section><div class="more-worlds">${moreWorlds().map(renderMoreWorld).join("")}</div></div>`;
+}
 function notificationToggleButton(id,on,label){return `<button type="button" id="${id}" class="notification-toggle ${on?"is-on":""}" role="switch" aria-checked="${on?"true":"false"}" aria-label="${esc(label)}"></button>`}
 function renderNotificationCenter({embedded=false}={}){
   const s=getPrayerSettings();
@@ -27216,7 +27271,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v873";
+const APP_BUILD_ID="app-shell-v875";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -27523,11 +27578,12 @@ function updateChrome(route){
   document.body.classList.toggle("is-scholars-route",route.view==="scholars");
   document.body.classList.toggle("is-scholar-route",route.view==="scholar");
   document.body.classList.toggle("is-more-route",isMore);
+  document.body.classList.toggle("is-more-world-route",isMore&&!!moreWorldById(route.value));
   document.body.classList.toggle("is-catalog-route",["duas","dua-cat","dua","topics","topic","scholars","scholar","book","series","frauen","more"].includes(route.view));
   document.body.classList.toggle("is-library-reader-route",route.view==="bibliothek-reader");
   document.documentElement.classList.toggle("is-library-reader-route",route.view==="bibliothek-reader");
   document.body.classList.toggle("is-post-route",isPost);
-  if(appBar)appBar.classList.toggle("is-more-route",isMore);
+  if(appBar)appBar.classList.toggle("is-more-route",isMore&&!moreWorldById(route.value));
   if(postReaderActions)postReaderActions.hidden=!isPost;
   updateBottomNav(route);
   updatePostNavVisibility();
@@ -27564,7 +27620,7 @@ function updateChrome(route){
   if(homeBtn)homeBtn.classList.add("show");
   const labels={"news-detail":"Neu im Fokus",news:"Neu im Fokus",feed:"Feed",ilm:"ʿIlm",quiz:"Quiz-App",hadith:"Hadith",bibliothek:"Bibliothek","bibliothek-detail":"Bibliothek","bibliothek-reader":"Lesen",topics:"Beiträge",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",jummah:"Jumuʿah",qibla:"Qibla",settings:"Einstellungen",ramadan:"Ramaḍān & ʿĪd",zakat:"Zakāt-Rechner",series:"Serie",statistik:"Statistik",more:"","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:""};
   let crumbLabel=labels[route.view]||"";
-  if(isMore)crumbLabel="";
+  if(isMore)crumbLabel=moreWorldById(route.value)?.title||"";
   if(isPost)crumbLabel="";
   if(route.view==="quran-surah")crumbLabel="";
   if(route.view==="bibliothek-reader")crumbLabel="";
@@ -34415,8 +34471,10 @@ html[data-theme="eisgold"] body.is-more-route .prophets-spotlight.more-feature-r
   opacity:.55!important;pointer-events:none!important;z-index:1;
   -webkit-mask:none!important;mask:none!important;
 }
-html[data-theme] body.is-more-route .more-group-grid .more-feature-row:last-child::after,
-html[data-theme="eisgold"] body.is-more-route .prophets-spotlight__edge{content:none!important;background:none!important;opacity:0!important}
+html[data-theme] body.is-more-route .more-group-grid .more-feature-row:last-child::after{
+  content:none!important;background:none!important;opacity:0!important;height:0!important;
+}
+html[data-theme="eisgold"] body.is-more-route .prophets-spotlight__edge{display:none!important}
 body.is-more-route .more-feature-row:hover,
 body.is-more-route .more-feature-row:focus-visible,
 body.is-more-route .more-feature-row:active,
@@ -34489,6 +34547,41 @@ body.is-more-route .zakat-home-teaser.premium-surface{
   box-shadow:none!important;
   padding:10px 12px!important;
 }
+body.is-more-route .more-search-block--hero .more-search,
+html[data-theme] body.is-more-route .more-search-block--hero .more-search{
+  height:50px!important;min-height:50px!important;font-size:15px!important;margin:4px 0 14px!important;
+}
+body.is-more-route .more-worlds{display:flex;flex-direction:column;margin-top:8px}
+html[data-theme] body.is-more-route .more-world,
+html[data-theme="eisgold"] body.is-more-route .more-world{
+  display:block!important;width:100%!important;margin:0!important;padding:16px 6px 18px!important;
+  border:0!important;border-radius:0!important;background:transparent!important;background-image:none!important;
+  box-shadow:none!important;text-align:left!important;color:inherit!important;font:inherit!important;
+  -webkit-appearance:none;appearance:none;cursor:pointer;position:relative;
+}
+html[data-theme] body.is-more-route .more-world + .more-world{
+  border-top:1px solid color-mix(in srgb,var(--gold2) 16%,transparent)!important;
+}
+html[data-theme] body.is-more-route .more-world:hover,
+html[data-theme] body.is-more-route .more-world:focus-visible{
+  background:color-mix(in srgb,var(--gold2) 6%,transparent)!important;
+  border-radius:22px!important;outline:none;box-shadow:none!important;
+}
+body.is-more-route .more-world__label{margin:0 0 8px;padding-bottom:8px}
+body.is-more-route .more-world__desc{
+  margin:0 0 8px;font-family:var(--sans,var(--ui,system-ui));font-size:13px;line-height:1.4;color:var(--cat-muted,var(--muted));
+}
+body.is-more-route .more-world__preview{
+  margin:0 0 10px;font-family:var(--sans,var(--ui,system-ui));font-size:12px;line-height:1.35;
+  color:color-mix(in srgb,var(--gold2) 72%,var(--muted));
+}
+body.is-more-route .more-world__open{
+  font-family:var(--serif);font-size:13.5px;color:var(--cat-accent,var(--gold2));letter-spacing:.02em;
+}
+body.is-more-route .more-feature-row--plain{grid-template-columns:34px minmax(0,1fr) 14px!important}
+body.is-more-route .more-feature-row--plain .dua-theme-card__idx,
+body.is-more-route .more-feature-row--plain .more-feature-row__idx-gap{display:none!important}
+body.is-more-route .more-search-results{margin:8px 0 18px}
 </style>
 
 </html>
