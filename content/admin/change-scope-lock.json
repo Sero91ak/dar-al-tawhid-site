@@ -108,19 +108,6 @@
   ],
   "unlockedScopes": [
     {
-      "id": "ios-tadabbur-catalog-2026-09-20",
-      "approvedBy": "user-explicit-tadabbur-github-ios",
-      "reason": "Nutzer: zentrale Tadabbur-JSON (GitHub apple-tv-hadith-staging) in der iOS-App laden, cachen und anzeigen.",
-      "paths": [
-        "content/admin/change-scope-lock.json",
-        "apple-tv/tadabbur/",
-        "ios/DarAlTawhid/",
-        "test/assets/dar-quran-player.js",
-        "test/index.html",
-        "test/version.json"
-      ]
-    },
-    {
       "id": "revert-visitor-header-smash-2026-09-16",
       "approvedBy": "user-explicit-besucher-oben-falsch-zurueck",
       "reason": "Nutzer: Besucher-App oben kaputt (Logo im Statusbalken). Safe-Area wiederherstellen, Glas weg, iOS unangetastet.",
@@ -5139,34 +5126,6 @@
         "version.json",
         "service-worker.js",
         "content/quran-translit/",
-        "content/admin/change-scope-lock.json"
-      ],
-      "expiresAt": "2026-12-31T23:59:00.000Z"
-    },
-    {
-      "id": "test-quran-player-layout-text-910-2026-09-20",
-      "approvedBy": "user-explicit-test-player-textbereich-vergroessern",
-      "reason": "Nutzer Test-App: Player-Textbereich vergrößern, Controls nach unten, Schichten wählbar, Griff zurück, Swipe nur im Text.",
-      "paths": [
-        "test/index.html",
-        "test/version.json",
-        "test/assets/dar-quran-player.js",
-        "test/assets/dar-quran-player.css",
-        "content/admin/change-scope-lock.json"
-      ],
-      "expiresAt": "2026-12-31T23:59:00.000Z"
-    },
-    {
-      "id": "test-quran-player-layout-cache-912-2026-09-20",
-      "approvedBy": "user-explicit-test-player-textbereich-vergroessern",
-      "reason": "Nutzer Test-App: Player-Aufteilung muss tatsächlich in der iOS-Test-Webview ankommen (Cache umgehen).",
-      "paths": [
-        "test/index.html",
-        "test/version.json",
-        "test/service-worker.js",
-        "test/assets/dar-quran-player.js",
-        "test/assets/dar-quran-player.css",
-        "cloudflare/test-app-worker.js",
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
