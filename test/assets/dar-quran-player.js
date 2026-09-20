@@ -1646,7 +1646,7 @@
       if (act === "seek" || act === "vol" || act === "text-scale") return;
       ev.stopPropagation();
       if (act === "min") { leavePlayerRoute("home"); return; }
-      if (act === "play") { togglePlay(true); return; }
+      if (act === "play") { togglePlay(); return; }
       if (act === "prev") { if (holdSkip) { holdSkip = false; return; } prevAyah(); return; }
       if (act === "next") { if (holdSkip) { holdSkip = false; return; } nextAyah(false); return; }
       if (act === "back15") { skip(-15); return; }
