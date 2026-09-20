@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 906;
+  var PLAYER_BUILD = 907;
   if (window.__DAR_QURAN_PLAYER_BUILD === PLAYER_BUILD && window.DARQuranPlayer) return;
   try {
     var staleAudio = document.getElementById("darQuranPlayerAudio");
@@ -112,6 +112,8 @@
     }
   }
 
+  var FALLBACK_QARI = "alafasy";
+  var availCache = Object.create(null);
   function reciterById(id) {
     return RECITERS.find(function (r) { return r.id === id; }) || RECITERS[0];
   }
@@ -244,6 +246,63 @@
       "https://cdn.islamic.network/quran/audio/128/" + rec.edition + "/" + g + ".mp3"
     ];
   }
+  function probeAudioUrl(url) {
+    return fetch(url, { method: "HEAD", mode: "cors", cache: "no-store" }).then(function (r) {
+      if (!r) return true;
+      if (r.status === 404 || r.status === 403) return false;
+      return true;
+    }).catch(function () {
+      return true;
+    });
+  }
+  function resolvePlayable(qari, surah, ayah) {
+    var chain = [qari];
+    if (qari !== FALLBACK_QARI) chain.push(FALLBACK_QARI);
+    var i = 0;
+    function nextQari() {
+      if (i >= chain.length) return Promise.resolve(null);
+      var id = chain[i++];
+      var key = id + ":" + surah + ":" + ayah;
+      if (availCache[key] === false) return nextQari();
+      if (availCache[key] && availCache[key].url) return Promise.resolve(availCache[key]);
+      var rec = reciterById(id);
+      var list = urlsForWithRec(rec, surah, ayah);
+      return (function walk(j) {
+        if (j >= list.length) {
+          availCache[key] = false;
+          console.log("[QURAN_AUDIO] missing audio", { qari: id, surah: surah, ayah: ayah, url: list[0] || "" });
+          return nextQari();
+        }
+        return probeAudioUrl(list[j]).then(function (ok) {
+          if (!ok) return walk(j + 1);
+          var hit = { qari: id, url: list[j] };
+          availCache[key] = hit;
+          return hit;
+        });
+      })(0);
+    }
+    return nextQari();
+  }
+  function urlsForWithRec(rec, surah, ayah) {
+    rec = rec || reciterById(state.reciter);
+    var s = pad(surah, 3);
+    var a = pad(ayah, 3);
+    var g = globalAyah(surah, ayah);
+    return [
+      "https://everyayah.com/data/" + rec.folder + "/" + s + a + ".mp3",
+      "https://cdn.islamic.network/quran/audio/128/" + rec.edition + "/" + g + ".mp3"
+    ];
+  }
+  function missingAudioHalt(qari, surah, ayah, url) {
+    state.playing = false;
+    allowAdvance = false;
+    engine.started = false;
+    state.error = "Diese Rezitation ist für diesen Qāriʾ nicht verfügbar.";
+    console.log("[QURAN_AUDIO] missing audio", { qari: qari, surah: surah, ayah: ayah, url: url || "" });
+    paintError();
+    paintChrome();
+    paintMini();
+  }
   function runPlay(a, gen) {
     a.muted = false;
     a.defaultMuted = false;
@@ -291,44 +350,67 @@
     allowAdvance = false;
     engine.started = false;
     ignoreEndedUntil = Date.now() + 1200;
-    var a = audioEl();
-    var url = urlsFor(state.surah, state.ayah)[0];
-    engine.lastUrl = url;
-    logAudio("loadAudio", { autoplay: !!autoplay, keepTime: !!keepTime, url: url, before: snapAudio(a) });
-    a.muted = false;
-    a.defaultMuted = false;
-    a.src = url;
-    logAudio("src after", snapAudio(a));
-    if (keepTime && state.resumeAt > 0) {
-      a.addEventListener("loadedmetadata", function once() {
-        a.removeEventListener("loadedmetadata", once);
-        if (gen !== playGen) return;
-        if (state.resumeAt < (a.duration || 1e9)) a.currentTime = state.resumeAt;
-        state.resumeAt = 0;
-      });
-    }
-    if (autoplay) {
-      state.playing = true;
-      state.sessionActive = true;
-      runPlay(a, gen);
-    }
-    applyLearnRate();
-    paintAyah(false);
-    paintChrome();
-    paintMini();
+    var wantQari = state.reciter;
+    var surah = state.surah;
+    var ayah = state.ayah;
+    resolvePlayable(wantQari, surah, ayah).then(function (hit) {
+      if (gen !== playGen) return;
+      if (!hit) {
+        missingAudioHalt(wantQari, surah, ayah, "");
+        return;
+      }
+      if (hit.qari !== wantQari) {
+        state.reciter = hit.qari;
+        state.error = "Diese Āyah ist bei diesem Qāriʾ nicht verfügbar. Es wird vorübergehend " + reciterById(hit.qari).name + " abgespielt.";
+      }
+      var a = audioEl();
+      engine.lastUrl = hit.url;
+      logAudio("loadAudio", { autoplay: !!autoplay, keepTime: !!keepTime, url: hit.url, qari: hit.qari, before: snapAudio(a) });
+      a.muted = false;
+      a.defaultMuted = false;
+      a.src = hit.url;
+      logAudio("src after", snapAudio(a));
+      if (keepTime && state.resumeAt > 0) {
+        a.addEventListener("loadedmetadata", function once() {
+          a.removeEventListener("loadedmetadata", once);
+          if (gen !== playGen) return;
+          if (state.resumeAt < (a.duration || 1e9)) a.currentTime = state.resumeAt;
+          state.resumeAt = 0;
+        });
+      }
+      if (autoplay) {
+        state.playing = true;
+        state.sessionActive = true;
+        runPlay(a, gen);
+      }
+      applyLearnRate();
+      paintAyah(false);
+      paintChrome();
+      paintMini();
+    });
   }
   function preloadNext() {}
   function tryFallback() {
     var urls = urlsFor(state.surah, state.ayah);
     urlIndex += 1;
     if (urlIndex >= urls.length) {
-      state.playing = false;
-      allowAdvance = false;
-      engine.started = false;
-      state.error = "Rezitation konnte nicht geladen werden.";
-      logAudio("all urls failed", { surah: state.surah, ayah: state.ayah, qari: state.reciter, urls: urls });
-      paintError();
-      paintChrome();
+      resolvePlayable(FALLBACK_QARI, state.surah, state.ayah).then(function (hit) {
+        if (!hit || hit.url === engine.lastUrl) {
+          missingAudioHalt(state.reciter, state.surah, state.ayah, engine.lastUrl);
+          return;
+        }
+        if (hit.qari !== state.reciter) {
+          state.reciter = hit.qari;
+          state.error = "Diese Āyah ist bei diesem Qāriʾ nicht verfügbar. Es wird vorübergehend " + reciterById(hit.qari).name + " abgespielt.";
+        }
+        ignoreEndedUntil = Date.now() + 1200;
+        engine.started = false;
+        allowAdvance = false;
+        engine.lastUrl = hit.url;
+        audioEl().src = hit.url;
+        if (state.playing || state.sessionActive) runPlay(audioEl(), playGen);
+        paintChrome();
+      });
       return;
     }
     ignoreEndedUntil = Date.now() + 1200;
@@ -963,13 +1045,18 @@
         ["play", "pause", "stop", "previoustrack", "nexttrack", "seekbackward", "seekforward"].forEach(function (act) {
           try { navigator.mediaSession.setActionHandler(act, null); } catch (e2) {}
         });
+        try {
+          if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.darQuranNowPlaying) {
+            window.webkit.messageHandlers.darQuranNowPlaying.postMessage({ clear: true });
+          }
+        } catch (e0) {}
         return;
       }
       var m = meta || surahMeta(state.surah) || {};
       navigator.mediaSession.metadata = new MediaMetadata({
         title: (m.transliteration || "Qurʾān") + " · Āyah " + state.ayah,
         artist: reciterById(state.reciter).name,
-        album: "DĀR AL TAWḤĪD"
+        album: "Dar Test"
       });
       navigator.mediaSession.playbackState = state.playing ? "playing" : "paused";
       navigator.mediaSession.setActionHandler("play", function () { togglePlay(true); });
@@ -979,6 +1066,22 @@
       navigator.mediaSession.setActionHandler("seekbackward", function () { skip(-15); });
       navigator.mediaSession.setActionHandler("seekforward", function () { skip(15); });
       try { navigator.mediaSession.setActionHandler("stop", function () { stopSession(); }); } catch (e3) {}
+      try {
+        if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.darQuranNowPlaying) {
+          window.webkit.messageHandlers.darQuranNowPlaying.postMessage({
+            title: (m.transliteration || "Qurʾān") + " · Āyah " + state.ayah,
+            artist: reciterById(state.reciter).name,
+            playing: !!state.playing,
+            elapsed: Number(state.current) || 0,
+            duration: Number(state.duration) || 0,
+            surah: state.surah,
+            ayah: state.ayah,
+            qari: state.reciter,
+            sourceApp: "dar-test",
+            targetRoute: "quran-player"
+          });
+        }
+      } catch (e4) {}
     } catch (e) {}
   }
   function audioHasSrc(a) {
@@ -1499,7 +1602,17 @@
     } while (lastSurahs.indexOf(id) >= 0 && n < 20);
     return id;
   }
-  function pickRandomReciter() { return RECITERS[Math.floor(Math.random() * RECITERS.length)].id; }
+  function pickRandomReciter() {
+    var tries = 0;
+    var id = RECITERS[Math.floor(Math.random() * RECITERS.length)].id;
+    while (tries < 8) {
+      var key = id + ":" + state.surah + ":" + state.ayah;
+      if (availCache[key] !== false) return id;
+      id = RECITERS[Math.floor(Math.random() * RECITERS.length)].id;
+      tries += 1;
+    }
+    return FALLBACK_QARI;
+  }
   async function gotoAyah(ayah, autoplay) {
     state.ayah = Math.max(1, Math.min(totalAyat(), Number(ayah) || 1));
     state.resumeAt = 0;
@@ -1522,17 +1635,44 @@
       paintAyah(false);
     });
   }
+  function ayahCount(surah) {
+    var list = (window.quranMeta && window.quranMeta.surahs) || [];
+    var i;
+    for (i = 0; i < list.length; i++) {
+      if (Number(list[i].id) === Number(surah)) return Number(list[i].total_verses) || 1;
+    }
+    return totalAyat();
+  }
   async function nextAyah(fromEnd) {
     logAudio(fromEnd ? "advance after ended" : "next clicked", { surah: state.surah, ayah: state.ayah, qari: state.reciter });
-    if (state.shuffle === "reciter" || state.shuffle === "both") {
-      state.reciter = pickRandomReciter();
-      paintInfo();
+    var guard = 0;
+    var surah = state.surah;
+    var ayah = state.ayah;
+    var qari = state.reciter;
+    if (state.shuffle === "reciter" || state.shuffle === "both") qari = pickRandomReciter();
+    while (guard < 24) {
+      guard += 1;
+      if (ayah < ayahCount(surah)) ayah += 1;
+      else if (state.repeat === "surah") ayah = 1;
+      else if (state.shuffle === "surah" || state.shuffle === "both") {
+        surah = pickRandomSurah();
+        ayah = 1;
+      } else if (surah < 114) {
+        surah += 1;
+        ayah = 1;
+      } else {
+        surah = 1;
+        ayah = 1;
+      }
+      if (state.shuffle === "reciter" || state.shuffle === "both") qari = pickRandomReciter();
+      var hit = await resolvePlayable(qari, surah, ayah);
+      if (hit) {
+        state.reciter = hit.qari;
+        if (surah !== state.surah) return gotoSurah(surah, ayah, true, true);
+        return gotoAyah(ayah, true);
+      }
     }
-    if (state.ayah < totalAyat()) return gotoAyah(state.ayah + 1, true);
-    if (state.repeat === "surah") return gotoAyah(1, true);
-    if (state.shuffle === "surah" || state.shuffle === "both") return gotoSurah(pickRandomSurah(), 1, true, state.shuffle === "surah");
-    if (state.surah < 114) return gotoSurah(state.surah + 1, 1, fromEnd || state.playing, true);
-    return gotoSurah(1, 1, fromEnd || state.playing, true);
+    missingAudioHalt(state.reciter, state.surah, state.ayah, engine.lastUrl);
   }
   async function prevAyah() {
     logAudio("previous clicked", { surah: state.surah, ayah: state.ayah, qari: state.reciter });
@@ -1555,7 +1695,9 @@
   }
   function openReciterSheet() {
     openSheet("Qāriʾ", RECITERS.map(function (r) {
-      return '<button type="button" class="dqp-opt' + (r.id === state.reciter ? " is-on" : "") + '" data-dqp-opt="r-' + r.id + '">' + (r.id === state.reciter ? "✓ " : "") + esc(r.name) + "</button>";
+      var key = r.id + ":" + state.surah + ":" + state.ayah;
+      var mark = availCache[key] === false ? " · diese Āyah nicht verfügbar" : (r.id === FALLBACK_QARI ? " · vollständig" : "");
+      return '<button type="button" class="dqp-opt' + (r.id === state.reciter ? " is-on" : "") + '" data-dqp-opt="r-' + r.id + '">' + (r.id === state.reciter ? "✓ " : "") + esc(r.name) + esc(mark) + "</button>";
     }).join(""));
   }
   function openMenu() {

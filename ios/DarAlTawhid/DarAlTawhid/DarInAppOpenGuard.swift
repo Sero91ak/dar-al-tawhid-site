@@ -26,8 +26,20 @@ extension UIApplication {
         completionHandler: ((Bool) -> Void)?
     ) {
         if DarAppShell.isOwnHost(url) {
+            if DarDeepLink.isAdminURL(url) {
+                DarDeepLink.logIncoming(url, source: "UIApplication.open-admin-blocked")
+                DarQuickActions.set(.quranPlayer)
+                DarPushNotifications.openFromNotification(userInfo: [
+                    "type": "quran-player",
+                    "postId": "",
+                    "url": DarDeepLink.Destination.quranPlayer.url.absoluteString
+                ])
+                completionHandler?(true)
+                return
+            }
+            DarDeepLink.logIncoming(url, source: "UIApplication.open")
             DarPushNotifications.openFromNotification(userInfo: [
-                "type": "",
+                "type": DarDeepLink.destination(from: url).rawValue,
                 "postId": DarAppShell.postId(from: DarAppShell.sourceURL(from: url) ?? url),
                 "url": url.absoluteString
             ])

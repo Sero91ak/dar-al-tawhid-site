@@ -112,6 +112,7 @@ struct WebAppView: UIViewRepresentable {
         userContentController.add(context.coordinator, name: "darPushReactivate")
         userContentController.add(context.coordinator, name: "darPushExternalId")
         userContentController.add(context.coordinator, name: "darAppIcon")
+        userContentController.add(context.coordinator, name: "darQuranNowPlaying")
         let deviceId = DarPushNotifications.deviceId()
         let escapedDevice = deviceId
             .replacingOccurrences(of: "\\", with: "\\\\")
@@ -705,10 +706,13 @@ struct WebAppView: UIViewRepresentable {
         if context.coordinator.lastOpenNonce != openNonce {
             context.coordinator.lastOpenNonce = openNonce
             if let openURL {
+                DarDeepLink.logIncoming(openURL, source: "WebAppView.update")
                 context.coordinator.loadPushURL(openURL)
-            }
-            if let route = destination {
+            } else if let route = destination {
                 context.coordinator.navigate(to: route, force: true)
+            }
+            if destination == .quranPlayer {
+                context.coordinator.navigate(to: .quranPlayer, force: true)
             }
         }
         context.coordinator.applyPendingQuickActionIfNeeded()
@@ -831,6 +835,9 @@ struct WebAppView: UIViewRepresentable {
                 object: nil
             )
             injectTadabburCatalog()
+            DarQuranNowPlaying.install { [weak self] js in
+                self?.webView?.evaluateJavaScript(js, completionHandler: nil)
+            }
         }
 
         deinit {
@@ -844,6 +851,7 @@ struct WebAppView: UIViewRepresentable {
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushReactivate")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushExternalId")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darAppIcon")
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darQuranNowPlaying")
             NotificationCenter.default.removeObserver(self)
         }
 
@@ -863,7 +871,20 @@ struct WebAppView: UIViewRepresentable {
               var hash=\(Self.jsString(hash));
               var hint=\(Self.jsString(hint));
               var view=String(hash||"").replace(/^#/,"");
-              var views=view==="duas"?["duas","dua"]:view==="quran"?["quran"]:view==="prayer"?["prayer"]: [view];
+              console.log('[QURAN_DEEPLINK] opened full player:', hint==='quran-player'?1:0, hash);
+              if(hint==="quran-player" || view.indexOf("quran-player")===0){
+                try{
+                  var parts=view.split("/");
+                  var s=parts[1]||"";
+                  var a=parts[2]||"";
+                  if(window.DARQuranPlayer&&typeof window.DARQuranPlayer.open==="function"){
+                    window.DARQuranPlayer.open();
+                    return;
+                  }
+                  if(typeof navigate==="function"){navigate("quran-player", s&&a?(s+"/"+a):"");return;}
+                }catch(e){}
+              }
+              var views=view==="duas"?["duas","dua"]:view==="quran"?["quran"]:view==="prayer"?["prayer"]: [view.split("/")[0]];
               var opened=false;
               try{
                 if(typeof navigateToTabRootReplace==="function"){
@@ -906,10 +927,19 @@ struct WebAppView: UIViewRepresentable {
         }
 
         func loadPushURL(_ url: URL) {
+            DarDeepLink.logIncoming(url, source: "loadPushURL")
+            if DarDeepLink.isAdminURL(url) {
+                navigate(to: .quranPlayer, force: true)
+                return
+            }
             let target = DarAppShell.inAppURL(from: url)
             guard DarAppShell.isOwnHost(target) else { return }
+            if DarDeepLink.isAdminURL(target) {
+                navigate(to: .quranPlayer, force: true)
+                return
+            }
             let dest = DarDeepLink.destination(from: target)
-            if dest == .qibla || dest == .prayer || dest == .quran || dest == .duas || dest == .jummah {
+            if dest == .quranPlayer || dest == .qibla || dest == .prayer || dest == .quran || dest == .duas || dest == .jummah {
                 navigate(to: dest, force: true)
                 return
             }
@@ -1015,6 +1045,15 @@ struct WebAppView: UIViewRepresentable {
                 DarAppIcons.set(name.isEmpty ? id : name)
                 return
             }
+            if message.name == "darQuranNowPlaying" {
+                let body = message.body as? [String: Any] ?? [:]
+                if (body["clear"] as? Bool) == true {
+                    DarQuranNowPlaying.clear()
+                } else {
+                    DarQuranNowPlaying.update(body)
+                }
+                return
+            }
             if message.name == "darHaptic" {
                 let style = (message.body as? [String: Any])?["style"] as? String ?? "light"
                 DarHaptics.play(raw: style)
@@ -1091,8 +1130,15 @@ struct WebAppView: UIViewRepresentable {
                 return
             }
 
-            if url.scheme?.lowercased() == DarDeepLink.scheme {
+            let scheme = url.scheme?.lowercased()
+            if scheme == DarDeepLink.scheme || scheme == DarDeepLink.testScheme {
                 loadPushURL(url)
+                decisionHandler(.cancel)
+                return
+            }
+            if DarDeepLink.isAdminURL(url) {
+                DarDeepLink.logIncoming(url, source: "decidePolicy-admin-blocked")
+                navigate(to: .quranPlayer, force: true)
                 decisionHandler(.cancel)
                 return
             }
@@ -1517,7 +1563,9 @@ struct WebAppView: UIViewRepresentable {
                 return false
             }
 
-            return (scheme == "https" || scheme == "http") && DarAppShell.hosts.contains(host)
+            return (scheme == "https" || scheme == "http")
+                && DarAppShell.hosts.contains(host)
+                && !DarDeepLink.isAdminURL(url)
         }
 
         private func shouldOpenExternally(_ url: URL) -> Bool {
@@ -1813,6 +1861,24 @@ struct WebAppView: UIViewRepresentable {
                     if(typeof getPrayerSettings!=='function')return;
                     if(!window.webkit||!window.webkit.messageHandlers||!window.webkit.messageHandlers.darPushSettings)return;
                     window.webkit.messageHandlers.darPushSettings.postMessage(getPrayerSettings());
+                  }catch(e){}
+                })();
+                """,
+                completionHandler: nil
+            )
+            webView.evaluateJavaScript(
+                """
+                (function(){
+                  try{
+                    var hash=String(location.hash||'');
+                    var onPlayer=hash.indexOf('quran-player')>=0;
+                    var st=window.DARQuranPlayer&&DARQuranPlayer.store?DARQuranPlayer.store():null;
+                    console.log('[QURAN_DEEPLINK] source: didBecomeActive');
+                    console.log('[QURAN_DEEPLINK] resolved route:', hash);
+                    if(st&&st.isSessionActive&&!onPlayer&&DARQuranPlayer.open){
+                      DARQuranPlayer.open();
+                      console.log('[QURAN_DEEPLINK] opened full player: 1');
+                    }
                   }catch(e){}
                 })();
                 """,
