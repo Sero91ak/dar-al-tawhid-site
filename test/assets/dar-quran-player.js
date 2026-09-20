@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 914;
+  var PLAYER_BUILD = 915;
   if (window.__DAR_QURAN_PLAYER_BUILD === PLAYER_BUILD && window.DARQuranPlayer) return;
   try {
     var staleAudio = document.getElementById("darQuranPlayerAudio");
@@ -49,6 +49,7 @@
   };
   var sleepUntil = 0;
   var sleepWatch = 0;
+  var sleepPicked = 15;
   var leaveLock = false;
   var fullUiWanted = false;
   var dismissUntil = 0;
@@ -1357,12 +1358,47 @@
       paintMini();
     }, 280);
   }
+  function sleepLeftMs() {
+    if (!sleepUntil) return 0;
+    return Math.max(0, sleepUntil - Date.now());
+  }
   function sleepLabel() {
-    if (!sleepUntil) return "Sleep-Timer";
-    var s = Math.max(0, Math.round((sleepUntil - Date.now()) / 1000));
+    var left = sleepLeftMs();
+    if (!left) return "Sleep-Timer";
+    var s = Math.ceil(left / 1000);
     var mm = Math.floor(s / 60);
     var ss = s % 60;
     return "Sleep-Timer · " + mm + ":" + String(ss).padStart(2, "0");
+  }
+  function sleepClock() {
+    var left = sleepLeftMs();
+    if (!left) return "00:00";
+    var s = Math.ceil(left / 1000);
+    return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
+  }
+  function paintSleepLive() {
+    var box = document.querySelector("[data-dqp-sleep-box]");
+    if (!box) return;
+    var on = sleepLeftMs() > 0;
+    box.classList.toggle("is-on", on);
+    var clock = box.querySelector("[data-dqp-sleep-clock]");
+    var stateEl = box.querySelector("[data-dqp-sleep-state]");
+    var sl = box.querySelector("[data-dqp=sleep-mins]");
+    var nEl = box.querySelector("[data-dqp-sleep-n]");
+    var shown = on ? Math.max(1, Math.ceil(sleepLeftMs() / 60000)) : sleepPicked;
+    if (clock) clock.textContent = on ? sleepClock() : "— —";
+    if (stateEl) stateEl.textContent = on ? "Aktiv · zählt herunter" : "Bereit";
+    if (nEl) nEl.textContent = String(shown);
+    if (sl && document.activeElement !== sl) {
+      sl.value = String(shown);
+      sl.style.setProperty("--dqp-fill", (shown / 60 * 100) + "%");
+    }
+    box.querySelectorAll("[data-dqp-opt^='sleep-']").forEach(function (b) {
+      var id = String(b.getAttribute("data-dqp-opt") || "");
+      if (id === "sleep-off") return;
+      var mins = Number(id.slice(6));
+      b.classList.toggle("is-on", !on && mins === sleepPicked);
+    });
   }
   function clearSleepTimer() {
     sleepUntil = 0;
@@ -1370,6 +1406,7 @@
       clearInterval(sleepWatch);
       sleepWatch = 0;
     }
+    paintSleepLive();
   }
   function fireSleepTimer() {
     if (!sleepUntil) return;
@@ -1378,6 +1415,7 @@
       clearInterval(sleepWatch);
       sleepWatch = 0;
     }
+    paintSleepLive();
     stopSession();
     if (isFullPlayerRoute()) leavePlayerRoute("home");
   }
@@ -1389,6 +1427,7 @@
     }
     if (ms < 1000) {
       sleepUntil = 0;
+      paintSleepLive();
       return;
     }
     sleepUntil = Date.now() + ms;
@@ -1396,13 +1435,18 @@
       if (!sleepUntil) {
         clearInterval(sleepWatch);
         sleepWatch = 0;
+        paintSleepLive();
         return;
       }
+      paintSleepLive();
       if (Date.now() >= sleepUntil) fireSleepTimer();
-    }, 1000);
+    }, 250);
+    paintSleepLive();
   }
   function setSleepMinutes(mins) {
-    armSleepTimer(Math.max(0, Number(mins) || 0) * 60000);
+    mins = Math.max(1, Math.min(60, Math.round(Number(mins) || 0)));
+    sleepPicked = mins;
+    armSleepTimer(mins * 60000);
   }
   function slotEl() {
     var s = document.getElementById("darQuranPlayerSlot");
@@ -1891,26 +1935,24 @@
     if (sl) sl.style.setProperty("--dqp-fill", ((state.textScale - 1) / 9 * 100) + "%");
   }
   function openSleepSheet() {
-    var presets = [5, 10, 15, 20, 30, 40];
-    var left = sleepUntil ? Math.max(0, sleepUntil - Date.now()) : 0;
+    var shown = sleepLeftMs() > 0 ? Math.max(1, Math.ceil(sleepLeftMs() / 60000)) : sleepPicked;
     openSheet("Sleep-Timer", [
-      '<div class="dqp-text-panel">',
-      '<div class="dqp-text-label">Wiedergabe beenden nach</div>',
+      '<div class="dqp-sleep" data-dqp-sleep-box>',
+      '<div class="dqp-sleep-clock" data-dqp-sleep-clock>' + (sleepLeftMs() > 0 ? sleepClock() : "— —") + "</div>",
+      '<div class="dqp-sleep-state" data-dqp-sleep-state>' + (sleepLeftMs() > 0 ? "Aktiv · zählt herunter" : "Bereit") + "</div>",
       '<div class="dqp-sleep-presets">',
-      presets.map(function (m) {
-        return '<button type="button" class="dqp-opt-chip" data-dqp-opt="sleep-' + m + '">' + m + " Min</button>";
+      [5, 15, 30, 50].map(function (m) {
+        return '<button type="button" class="dqp-opt-chip' + (!sleepLeftMs() && m === sleepPicked ? " is-on" : "") + '" data-dqp-opt="sleep-' + m + '">' + m + " Min</button>";
       }).join(""),
       "</div>",
-      '<div class="dqp-text-label">Eigene Zeit</div>',
-      '<div class="dqp-sleep-custom">',
-      '<label>Stunden<input class="dqp-sleep-num" data-dqp-sleep-h type="number" min="0" max="12" step="1" value="0" inputmode="numeric"></label>',
-      '<label>Minuten<input class="dqp-sleep-num" data-dqp-sleep-m type="number" min="0" max="59" step="1" value="0" inputmode="numeric"></label>',
-      '<button type="button" class="dqp-opt-chip is-on" data-dqp="sleep-apply">Setzen</button>',
+      '<div class="dqp-sleep-slide">',
+      '<div class="dqp-sleep-slide-lab"><span>1 Min</span><span><b data-dqp-sleep-n>' + shown + "</b> Min</span><span>60 Min</span></div>",
+      '<input class="dqp-sleep-range" data-dqp="sleep-mins" type="range" min="1" max="60" step="1" value="' + shown + '" aria-label="Minuten">',
       "</div>",
-      left ? ('<p class="dqp-vol-note">Läuft noch ' + sleepLabel().replace("Sleep-Timer · ", "") + "</p>") : "",
-      '<button type="button" class="dqp-opt" data-dqp-opt="sleep-off">Timer aus</button>',
+      '<button type="button" class="dqp-opt dqp-sleep-off" data-dqp-opt="sleep-off">Timer aus</button>',
       "</div>"
     ].join(""));
+    paintSleepLive();
   }
   async function onOpt(id) {
     if (id.indexOf("s-") === 0) { closeSheet(); return gotoSurah(Number(id.slice(2)), 1, state.playing, true); }
@@ -1972,10 +2014,9 @@
     if (id === "m-scale-minus") { setTextScale(state.textScale - 1); return; }
     if (id === "m-scale-plus") { setTextScale(state.textScale + 1); return; }
     if (id === "m-sleep") { openSleepSheet(); return; }
-    if (id === "sleep-off") { clearSleepTimer(); closeSheet(); return; }
+    if (id === "sleep-off") { clearSleepTimer(); return; }
     if (id.indexOf("sleep-") === 0) {
       setSleepMinutes(Number(id.slice(6)));
-      closeSheet();
       return;
     }
     if (id === "m-read") {
@@ -2032,7 +2073,7 @@
       var t = ev.target && ev.target.closest ? ev.target.closest("[data-dqp],[data-dqp-opt]") : null;
       if (!t) return;
       var act = t.getAttribute("data-dqp");
-      if (act === "seek" || act === "vol" || act === "text-scale") return;
+      if (act === "seek" || act === "vol" || act === "text-scale" || act === "sleep-mins") return;
       ev.stopPropagation();
       if (act === "min" || act === "home") { leavePlayerRoute("home"); return; }
       if (act === "play") { togglePlay(); return; }
@@ -2044,12 +2085,8 @@
       if (act === "sheet-close") { closeSheet(); return; }
       if (act === "menu") { openMenu(); return; }
       if (act === "sleep-apply") {
-        var hEl = root.querySelector("[data-dqp-sleep-h]");
-        var mEl = root.querySelector("[data-dqp-sleep-m]");
-        var h = Math.max(0, Math.min(12, Number(hEl && hEl.value) || 0));
-        var m = Math.max(0, Math.min(59, Number(mEl && mEl.value) || 0));
-        armSleepTimer(((h * 60) + m) * 60000);
-        closeSheet();
+        var slp = root.querySelector("[data-dqp=sleep-mins]");
+        setSleepMinutes(slp ? slp.value : sleepPicked);
         return;
       }
       if (act === "shuffle") { state.shuffle = cycle(SHUFFLE, state.shuffle); saveState(); paintChrome(); return; }
@@ -2068,6 +2105,10 @@
     root.addEventListener("input", function (ev) {
       if (ev.target && ev.target.getAttribute("data-dqp") === "text-scale") {
         setTextScale(ev.target.value);
+        return;
+      }
+      if (ev.target && ev.target.getAttribute("data-dqp") === "sleep-mins") {
+        setSleepMinutes(ev.target.value);
         return;
       }
       if (ev.target && ev.target.hasAttribute("data-dqp-search")) {
