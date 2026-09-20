@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 910;
+  var PLAYER_BUILD = 911;
   if (window.__DAR_QURAN_PLAYER_BUILD === PLAYER_BUILD && window.DARQuranPlayer) return;
   try {
     var staleAudio = document.getElementById("darQuranPlayerAudio");
@@ -712,6 +712,7 @@
             '<div class="dqp-status">Wird geladen …</div>' +
           "</div>" +
         "</div>" +
+        '<div class="dqp-foot">' +
         '<div class="dqp-meta">' +
           '<button type="button" class="dqp-title" data-dqp="pick-surah">—</button>' +
           '<button type="button" class="dqp-more" data-dqp="menu" aria-label="Optionen">' + icon("more") + "</button>" +
@@ -744,6 +745,7 @@
           '<button type="button" data-dqp="text" aria-label="Textmodus">' + icon("lyrics") + "</button>" +
           '<button type="button" data-dqp="pick-reciter" aria-label="Qāriʾ wählen">' + icon("reciter") + "</button>" +
           '<button type="button" data-dqp="pick-surah" aria-label="Sūrah wählen">' + icon("queue") + "</button>" +
+        "</div>" +
         "</div>" +
         '<div class="dqp-sheet" data-dqp-sheet hidden></div>' +
       "</div>"
@@ -1235,6 +1237,16 @@
       return bodyOne;
     }
     return nodes[0] || null;
+  }
+  function ensureFreshShell(root) {
+    if (root && root.querySelector && root.querySelector(".dqp-foot") && root.querySelector("[data-sec=lat]")) return root;
+    var wrap = document.createElement("div");
+    wrap.innerHTML = renderShell();
+    var neu = wrap.firstElementChild;
+    if (!neu) return root;
+    if (root && root.parentNode) root.parentNode.replaceChild(neu, root);
+    else if (document.body) document.body.appendChild(neu);
+    return neu;
   }
   function navigateApp(view, value) {
     if (typeof window.navigateToTabRootReplace === "function") {
@@ -1765,8 +1777,9 @@
       var hit = await resolvePlayable(qari, surah, ayah);
       if (hit) {
         state.reciter = hit.qari;
-        if (surah !== state.surah) return gotoSurah(surah, ayah, true, true);
-        return gotoAyah(ayah, true);
+        var keepPlay = fromEnd ? true : !!state.playing;
+        if (surah !== state.surah) return gotoSurah(surah, ayah, keepPlay, true);
+        return gotoAyah(ayah, keepPlay);
       }
     }
     missingAudioHalt(state.reciter, state.surah, state.ayah, engine.lastUrl);
@@ -1915,6 +1928,8 @@
   }
   function bind(force) {
     var root = playerRoot();
+    if (!root) return;
+    root = ensureFreshShell(root);
     if (!root) return;
     if (!fullUiWanted) {
       hideFullPlayerUi();
