@@ -5100,6 +5100,22 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "test-quran-corpus-translit-2026-09-20",
+      "approvedBy": "user-explicit-quran-lautschrift-komplett-ersetzen",
+      "reason": "Nutzer: Qurʾān-Lautschrift komplett durch Corpus Coranicum ersetzen (LESBAR/STANDARD/WISSENSCHAFTLICH). Test-App zuerst.",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "scripts/quran-translit-map.js",
+        "scripts/import-corpus-coranicum-translit.js",
+        "scripts/quran-translit-qa.js",
+        "content/quran-translit/",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
