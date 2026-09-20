@@ -1180,6 +1180,7 @@
     ignoreEndedUntil = Date.now() + 4000;
     trackHeard = false;
     allowAdvance = false;
+    engine.started = false;
     if (engine.fallbackTimer) { clearTimeout(engine.fallbackTimer); engine.fallbackTimer = 0; }
     state.sessionActive = false;
     state.playing = false;
