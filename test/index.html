@@ -33391,6 +33391,221 @@ html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-apply-btn{
   }
 }
 </style>
+<style id="test-quran-picker-flat-lines-v916">
+/* TEST ONLY · v916
+   Schwarzer Juz/Sure/Aya-Wähler: kompakt, flach, ohne Kapseln/Kästen.
+   Funktion/Picker-Logik bleibt unverändert. */
+html .qrc-sheet.qrc-sheet--picker,
+html[data-theme] .qrc-sheet.qrc-sheet--picker,
+html[data-theme="eisgold"] .qrc-sheet.qrc-sheet--picker,
+body.qrc-sheet-open .qrc-sheet.qrc-sheet--picker{
+  max-height:min(42dvh,390px)!important;
+  background:#050505!important;
+  background-color:#050505!important;
+  background-image:none!important;
+  border:0!important;
+  border-radius:20px 20px 0 0!important;
+  box-shadow:0 -12px 32px rgba(0,0,0,.48)!important;
+  overflow:hidden!important;
+}
+html .qrc-sheet--picker .qrc-sheet-body,
+html[data-theme] .qrc-sheet--picker .qrc-sheet-body{
+  background:#050505!important;
+  padding:0!important;
+  border:0!important;
+}
+html .qrc-sheet--picker .qrc-picker-layout,
+html[data-theme] .qrc-sheet--picker .qrc-picker-layout{
+  display:flex!important;
+  flex-direction:column!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  background:#050505!important;
+}
+html .qrc-sheet--picker .qrc-picker-grid,
+html[data-theme] .qrc-sheet--picker .qrc-picker-grid,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-grid{
+  flex:0 0 auto!important;
+  min-height:clamp(190px,27dvh,228px)!important;
+  height:clamp(190px,27dvh,228px)!important;
+  max-height:228px!important;
+  gap:0!important;
+  padding:0 12px!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+html .qrc-sheet--picker .qrc-picker-grid::before,
+html[data-theme] .qrc-sheet--picker .qrc-picker-grid::before,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-grid::before{
+  content:none!important;
+  display:none!important;
+  background:none!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+html .qrc-sheet--picker .qrc-picker-col,
+html[data-theme] .qrc-sheet--picker .qrc-picker-col,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-col{
+  max-height:228px!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  outline:0!important;
+  scroll-behavior:smooth!important;
+}
+html .qrc-sheet--picker .qrc-picker-col:not(:last-child),
+html[data-theme] .qrc-sheet--picker .qrc-picker-col:not(:last-child){
+  border-right:1px solid rgba(232,214,170,.15)!important;
+}
+html .qrc-sheet--picker .qrc-picker-col-head,
+html[data-theme] .qrc-sheet--picker .qrc-picker-col-head,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-col-head{
+  min-height:34px!important;
+  padding:9px 6px 7px!important;
+  background:#050505!important;
+  background-color:#050505!important;
+  color:rgba(248,244,235,.92)!important;
+  -webkit-text-fill-color:rgba(248,244,235,.92)!important;
+  border:0!important;
+  border-bottom:1px solid rgba(232,214,170,.18)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  font-size:11px!important;
+  font-weight:780!important;
+  letter-spacing:.16em!important;
+  line-height:1!important;
+  text-transform:uppercase!important;
+}
+html .qrc-sheet--picker .qrc-picker-pad,
+html[data-theme] .qrc-sheet--picker .qrc-picker-pad{
+  height:calc(50% - 34px)!important;
+}
+html .qrc-sheet--picker button.qrc-picker-item,
+html .qrc-sheet--picker .qrc-picker-item,
+html[data-theme] .qrc-sheet--picker button.qrc-picker-item,
+html[data-theme] .qrc-sheet--picker .qrc-picker-item,
+html[data-theme="eisgold"] .qrc-sheet--picker button.qrc-picker-item,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-item{
+  min-height:39px!important;
+  padding:0 8px!important;
+  margin:0!important;
+  justify-content:center!important;
+  text-align:center!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  color:rgba(255,255,255,.62)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.62)!important;
+  border:0!important;
+  border-bottom:1px solid rgba(255,255,255,.045)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  outline:0!important;
+  font-size:14px!important;
+  font-weight:500!important;
+  line-height:1.15!important;
+  opacity:1!important;
+}
+html .qrc-sheet--picker .qrc-picker-col--surah .qrc-picker-item,
+html .qrc-sheet--picker .qrc-picker-col--surah .qrc-picker-item.is-active,
+html[data-theme] .qrc-sheet--picker .qrc-picker-col--surah .qrc-picker-item,
+html[data-theme] .qrc-sheet--picker .qrc-picker-col--surah .qrc-picker-item.is-active{
+  min-height:39px!important;
+  padding:0 8px!important;
+  justify-content:center!important;
+  text-align:center!important;
+  font-size:14px!important;
+}
+html .qrc-sheet--picker .qrc-picker-item-name,
+html[data-theme] .qrc-sheet--picker .qrc-picker-item-name,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-item-name{
+  display:block!important;
+  width:100%!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+  color:inherit!important;
+  -webkit-text-fill-color:inherit!important;
+  border-radius:0!important;
+}
+html .qrc-sheet--picker button.qrc-picker-item.is-active,
+html .qrc-sheet--picker .qrc-picker-item.is-active,
+html[data-theme] .qrc-sheet--picker button.qrc-picker-item.is-active,
+html[data-theme] .qrc-sheet--picker .qrc-picker-item.is-active,
+html[data-theme="eisgold"] .qrc-sheet--picker button.qrc-picker-item.is-active,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-item.is-active{
+  position:relative!important;
+  background:linear-gradient(90deg,transparent,rgba(232,214,170,.055) 18%,rgba(232,214,170,.055) 82%,transparent)!important;
+  color:#fffdf7!important;
+  -webkit-text-fill-color:#fffdf7!important;
+  border-top:1px solid rgba(232,214,170,.28)!important;
+  border-bottom:1px solid rgba(232,214,170,.28)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  font-size:14px!important;
+  font-weight:760!important;
+  opacity:1!important;
+}
+html .qrc-sheet--picker .qrc-picker-footer,
+html[data-theme] .qrc-sheet--picker .qrc-picker-footer,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-footer{
+  flex:0 0 auto!important;
+  padding:8px 16px max(9px,env(safe-area-inset-bottom))!important;
+  background:#050505!important;
+  background-color:#050505!important;
+  border:0!important;
+  border-top:1px solid rgba(232,214,170,.16)!important;
+  box-shadow:none!important;
+}
+html .qrc-sheet--picker .qrc-picker-apply-btn,
+html .qrc-sheet--picker button.qrc-picker-apply-btn,
+html[data-theme] .qrc-sheet--picker .qrc-picker-apply-btn,
+html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-apply-btn{
+  min-height:43px!important;
+  padding:0 10px!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  color:#fffdf7!important;
+  -webkit-text-fill-color:#fffdf7!important;
+  border:0!important;
+  border-top:1px solid rgba(232,214,170,.28)!important;
+  border-bottom:1px solid rgba(232,214,170,.28)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  font-size:13px!important;
+  font-weight:800!important;
+  letter-spacing:.15em!important;
+  text-transform:uppercase!important;
+}
+html .qrc-sheet--picker .qrc-picker-apply-btn:active,
+html[data-theme] .qrc-sheet--picker .qrc-picker-apply-btn:active{
+  background:rgba(232,214,170,.055)!important;
+  transform:none!important;
+}
+@media(min-width:720px){
+  html .qrc-sheet.qrc-sheet--picker,
+  html[data-theme] .qrc-sheet.qrc-sheet--picker{
+    max-height:min(38dvh,360px)!important;
+    border-radius:20px 20px 0 0!important;
+  }
+  html .qrc-sheet--picker .qrc-picker-grid,
+  html[data-theme] .qrc-sheet--picker .qrc-picker-grid{
+    min-height:210px!important;
+    height:210px!important;
+    max-height:210px!important;
+  }
+  html .qrc-sheet--picker .qrc-picker-col,
+  html[data-theme] .qrc-sheet--picker .qrc-picker-col{
+    max-height:210px!important;
+  }
+}
+</style>
 
 <script>
 (function(){
