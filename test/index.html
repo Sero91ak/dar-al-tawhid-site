@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1789319677748 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v870";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v871";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -26468,8 +26468,15 @@ function renderFeatureHint(){return""}
 function renderPinnedFeaturesSection(){const pins=featurePins().map(featureById).filter(Boolean).slice(0,6);if(!pins.length)return"";return `<section class="feature-section"><div class="feature-head"><div><h3>Meine Schnellzugriffe</h3><span>Angepinnte Bereiche für schnellen Zugriff.</span></div></div><div class="feature-grid">${pins.map(renderFeatureCard).join("")}</div></section>`}
 function renderFeatureDiscoverySection(){return""}
 function renderTodayRecommendedFeatures(){return""}
-function renderMoreFeatureRow(item){if(item&&item.id==="propheten"&&window.DARProphets&&typeof window.DARProphets.renderSpotlight==="function"){let spot=window.DARProphets.renderSpotlight();if(spot.indexOf("more-feature-row")<0)spot=spot.replace('class="prophets-spotlight"','class="prophets-spotlight more-feature-row" data-feature-search="die propheten anbiya quran sunnah ueberlieferungen lernen wissen musa"');return spot}const search=[item.title,item.desc,item.group,item.badge].filter(Boolean).join(" ").toLowerCase();const hub=item.id==="jummah"||item.id==="qibla"?" more-feature-row--hub":"";return `<button class="more-feature-row${hub}" type="button" data-nav="${esc(item.nav)}" ${item.value?`data-value="${esc(item.value)}"`:""} data-feature-search="${esc(search)}"><span class="feature-icon">${esc(item.icon||"✨")}</span><span><h4>${esc(item.title)} ${item.badge?`<span class="feature-badge">${esc(item.badge)}</span>`:""}</h4><p>${esc(item.desc||"")}</p></span></button>`}
-function renderMoreGroup(title,items){if(!items.length)return"";return `<section class="more-group" data-more-group><h3>${esc(title)}</h3><div class="more-group-grid">${items.map(renderMoreFeatureRow).join("")}</div></section>`}
+function renderMoreFeatureRow(item,idx){
+  const search=[item.title,item.desc,item.group,item.badge,item.id==="propheten"?"die propheten anbiya quran sunnah ueberlieferungen lernen wissen musa":""].filter(Boolean).join(" ").toLowerCase();
+  const hub=item.id==="jummah"||item.id==="qibla"?" more-feature-row--hub":"";
+  const n=String((idx||0)+1).padStart(2,"0");
+  const icon=item.icon||"✦";
+  const badge=item.badge?` <span class="feature-badge">${esc(item.badge)}</span>`:"";
+  return `<button class="more-feature-row dua-theme-card${hub}" type="button" data-nav="${esc(item.nav)}" ${item.value?`data-value="${esc(item.value)}"`:""} data-feature-search="${esc(search)}"><span class="dua-theme-card__idx" aria-hidden="true">${n}</span><div class="dua-theme-card__icon" aria-hidden="true"><span class="emoji-emblem">${esc(icon)}</span></div><div class="dua-theme-card__body"><h3>${esc(item.title)}${badge}</h3><p class="more-feature-row__desc dua-row__sub">${esc(item.desc||"")}</p></div><span class="dua-theme-card__chev" aria-hidden="true">›</span></button>`;
+}
+function renderMoreGroup(title,items){if(!items.length)return"";return `<section class="more-group" data-more-group><div class="dua-hub__label more-group__label"><b>${esc(title)}</b><span>${items.length} Bereiche</span></div><div class="more-group-grid dua-theme-grid">${items.map((item,i)=>renderMoreFeatureRow(item,i)).join("")}</div></section>`}
 function filterMoreFeatures(){const input=$("moreFeatureSearch");if(!input)return;const q=input.value.trim().toLowerCase();document.querySelectorAll(".more-feature-row").forEach(row=>{row.classList.toggle("is-hidden",!!q&&!String(row.getAttribute("data-feature-search")||"").includes(q))});document.querySelectorAll("[data-more-group]").forEach(group=>{group.classList.toggle("is-hidden",!group.querySelector(".more-feature-row:not(.is-hidden)"))})}
 
 
@@ -26477,7 +26484,7 @@ function renderMoreQuickAccessSection(){
   return `<section class="more-quick-access" aria-label="Schnellzugriff"><div class="more-quick-access__list"><button type="button" class="more-quick-access__chip" data-more-quick="orient" aria-label="Orientierung" title="Orientierung"><span aria-hidden="true">🧭</span></button><button type="button" class="more-quick-access__chip" data-more-quick="saved" aria-label="Merkliste" title="Merkliste"><span aria-hidden="true">❤️</span></button><button type="button" class="more-quick-access__chip" data-more-quick="notifications" aria-label="Erinnerungen" title="Erinnerungen"><span aria-hidden="true">🔔</span></button><button type="button" class="more-quick-access__chip" data-more-quick="settings" aria-label="Einstellungen" title="Einstellungen"><span aria-hidden="true">⚙️</span></button></div></section>`;
 }
 
-function renderMore(){const groups=["Lernen & Wissen","Alltag & Gebet","Werkzeuge & Assistenten","Persönlich","App"];const items=featureCatalog();return `${setPageHeader("Mehr","Funktionen geordnet nach Lernen, Alltag, Werkzeugen und Einstellungen","Mehr")}${renderMoreQuickAccessSection()}${renderZakatMoreFocus()}<section class="feature-section"><div class="feature-head"><div><h3>Funktion suchen</h3><span>Tippe z. B. Qibla, Rechner oder Qurʾān.</span></div></div><input id="moreFeatureSearch" class="more-search" type="search" placeholder="Funktion suchen…" autocomplete="off"></section>${groups.map(group=>renderMoreGroup(group,items.filter(item=>item.group===group))).join("")}`}
+function renderMore(){const groups=["Lernen & Wissen","Alltag & Gebet","Werkzeuge & Assistenten","Persönlich","App"];const items=featureCatalog();return `<div class="more-hub">${setPageHeader("Mehr","Alle Bereiche von DĀR AL TAWḤĪD an einem Ort.","Mehr")}${renderMoreQuickAccessSection()}${renderZakatMoreFocus()}<section class="more-search-block"><input id="moreFeatureSearch" class="more-search" type="search" placeholder="Funktion suchen…" autocomplete="off"></section>${groups.map(group=>renderMoreGroup(group,items.filter(item=>item.group===group))).join("")}</div>`}
 function notificationToggleButton(id,on,label){return `<button type="button" id="${id}" class="notification-toggle ${on?"is-on":""}" role="switch" aria-checked="${on?"true":"false"}" aria-label="${esc(label)}"></button>`}
 function renderNotificationCenter({embedded=false}={}){
   const s=getPrayerSettings();
@@ -27209,7 +27216,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v870";
+const APP_BUILD_ID="app-shell-v871";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -27515,6 +27522,7 @@ function updateChrome(route){
   document.body.classList.toggle("is-topic-route",route.view==="topic"||route.view==="book"||route.view==="series");
   document.body.classList.toggle("is-scholars-route",route.view==="scholars");
   document.body.classList.toggle("is-scholar-route",route.view==="scholar");
+  document.body.classList.toggle("is-more-route",isMore);
   document.body.classList.toggle("is-catalog-route",["duas","dua-cat","dua","topics","topic","scholars","scholar","book","series","frauen"].includes(route.view));
   document.body.classList.toggle("is-library-reader-route",route.view==="bibliothek-reader");
   document.documentElement.classList.toggle("is-library-reader-route",route.view==="bibliothek-reader");
@@ -34203,6 +34211,229 @@ html[data-theme] body.is-quiz-route .quiz-home-quick-card b{
 }
 html[data-theme] body.is-quiz-route .quiz-home-quick-card>span:last-child{
   font-size:11px!important;font-weight:650!important;color:color-mix(in srgb,var(--cream,#f4ead2) 58%,transparent)!important;
+}
+</style>
+<style id="more-hub-catalog-v871">
+/* Test-App Mehr: dieselbe Katalog-DNA wie Beiträge / Duʿāʾ */
+body.is-more-route{
+  --cat-ink:var(--cream,var(--text));
+  --cat-title:var(--cream,var(--text));
+  --cat-accent:var(--gold2,var(--cream));
+  --cat-muted:var(--muted);
+  --cat-muted2:var(--muted2,var(--muted));
+  --cat-line:color-mix(in srgb,var(--gold2,var(--line)) 26%,transparent);
+  --cat-line-soft:color-mix(in srgb,var(--gold2,var(--line2,var(--line))) 12%,transparent);
+  --cat-line-strong:color-mix(in srgb,var(--gold2) 44%,transparent);
+  --cat-wash:color-mix(in srgb,var(--gold2) 10%,transparent);
+  --cat-wash-strong:color-mix(in srgb,var(--gold2) 16%,transparent);
+  --cat-rule:radial-gradient(ellipse 62% 900% at 50% 50%,var(--cat-line-strong),color-mix(in srgb,var(--gold2) 22%,transparent) 46%,transparent 72%);
+  --cat-ornament:color-mix(in srgb,var(--gold2) 72%,transparent);
+  --cat-rail:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--gold2) 35%,transparent) 12%,var(--gold2) 42%,var(--gold2) 58%,color-mix(in srgb,var(--gold2) 35%,transparent) 88%,transparent 100%);
+}
+body.is-more-route .view-head{
+  margin:4px 0 24px!important;
+  padding:4px 0 18px!important;
+  border-bottom:0!important;
+  position:relative;
+}
+body.is-more-route .view-head::after{
+  content:"";
+  display:block;
+  height:1px;
+  margin:16px auto 0;
+  max-width:min(100%,400px);
+  background:var(--cat-rule);
+  opacity:.92;
+}
+body.is-more-route .view-head::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-1px;
+  width:5px;
+  height:5px;
+  margin-left:-2.5px;
+  border:1px solid var(--cat-ornament);
+  border-radius:50%;
+  background:transparent;
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--panel,var(--bg)) 88%,transparent);
+  z-index:1;
+  pointer-events:none;
+}
+body.is-more-route .view-head .eyebrow{
+  letter-spacing:.22em;
+  font-size:9px;
+  font-weight:750;
+  color:var(--cat-accent);
+  opacity:.8;
+  margin-bottom:10px;
+  text-transform:uppercase;
+}
+body.is-more-route .view-head h2{
+  font-family:var(--serif);
+  font-weight:650;
+  letter-spacing:.01em;
+  line-height:1.14;
+  color:var(--cat-ink);
+  font-size:clamp(28px,5.8vw,38px);
+  text-wrap:balance;
+}
+body.is-more-route .view-head .view-desc{
+  margin-top:10px;
+  max-width:34rem;
+  font-family:var(--sans,var(--ui,system-ui));
+  font-size:13.5px;
+  line-height:1.55;
+  color:var(--cat-muted);
+  letter-spacing:.005em;
+  font-weight:450;
+}
+.more-hub{display:block;padding-bottom:calc(28px + env(safe-area-inset-bottom,0px))}
+body.is-more-route .more-quick-access{margin:0 0 18px;padding:0;border:0;background:transparent}
+body.is-more-route .more-quick-access__list{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+body.is-more-route .more-quick-access__chip{
+  width:44px;height:44px;border-radius:50%;
+  border:1px solid var(--cat-line-soft);
+  background:color-mix(in srgb,var(--gold2) 3.5%,transparent);
+  color:var(--cat-ink);
+  display:grid;place-items:center;padding:0;box-shadow:none;
+}
+body.is-more-route .more-search-block{margin:0 0 8px;padding:0;border:0;background:transparent}
+html[data-theme] body.is-more-route .more-search,
+html[data-theme="eisgold"] body.is-more-route .more-search,
+body.is-more-route .more-search{
+  height:46px!important;min-height:46px!important;width:100%!important;
+  border-radius:999px!important;
+  border:1px solid var(--cat-line)!important;
+  background:color-mix(in srgb,var(--gold2) 3%,transparent)!important;
+  box-shadow:none!important;
+  color:var(--cat-ink)!important;
+  font-family:var(--sans,var(--ui,system-ui))!important;
+  font-size:14px!important;
+  padding:0 16px!important;
+  margin:0 0 10px!important;
+}
+@media(max-width:700px){
+  body.is-more-route .more-group,
+  body.is-more-route .feature-section{margin-right:0!important}
+}
+html[data-theme] body.is-more-route .more-hub .more-group,
+html[data-theme="eisgold"] body.is-more-route .more-hub .more-group{
+  width:100%!important;max-width:100%!important;
+  margin:28px 0 0!important;padding:0!important;
+  border:0!important;border-radius:0!important;
+  background:transparent!important;background-image:none!important;
+  box-shadow:none!important;overflow:visible!important;
+}
+html[data-theme] body.is-more-route .more-hub .more-group + .more-group,
+html[data-theme="eisgold"] body.is-more-route .more-hub .more-group + .more-group{
+  margin-top:46px!important;
+}
+html[data-theme] body.is-more-route .more-hub .more-group::before,
+html[data-theme="eisgold"] body.is-more-route .more-hub .more-group::before,
+html[data-theme] body.is-more-route .more-hub .more-group::after,
+html[data-theme="eisgold"] body.is-more-route .more-hub .more-group::after{content:none!important;display:none!important}
+body.is-more-route .more-group__label{margin:0 0 6px}
+@media(min-width:520px){
+  html[data-theme] body.is-more-route .more-group-grid,
+  html[data-theme="eisgold"] body.is-more-route .more-group-grid{grid-template-columns:none!important}
+}
+body.is-more-route .more-hub .more-group-grid{
+  display:flex!important;flex-direction:column!important;
+  gap:4px!important;margin:4px 0 0!important;padding:0!important;
+  grid-template-columns:none!important;background:transparent!important;border:0!important;
+}
+html[data-theme] body.is-more-route .more-feature-row,
+html[data-theme="eisgold"] body.is-more-route .more-feature-row,
+html[data-theme] body.is-more-route .more-feature-row--hub,
+html[data-theme="eisgold"] body.is-more-route .more-feature-row--hub,
+html[data-theme="eisgold"] body.is-more-route .prophets-spotlight.more-feature-row{
+  display:grid!important;
+  grid-template-columns:26px 44px minmax(0,1fr) auto!important;
+  column-gap:12px!important;align-items:center!important;
+  min-height:88px!important;width:100%!important;
+  margin:0!important;padding:14px 12px 14px 8px!important;
+  border:0!important;border-radius:999px!important;
+  background:transparent!important;background-image:none!important;
+  box-shadow:none!important;overflow:hidden!important;
+  text-align:left!important;color:inherit!important;
+  font:inherit!important;-webkit-appearance:none;appearance:none;
+  position:relative!important;cursor:pointer;
+}
+html[data-theme] body.is-more-route .more-feature-row::before,
+html[data-theme="eisgold"] body.is-more-route .more-feature-row::before,
+html[data-theme="eisgold"] body.is-more-route .prophets-spotlight.more-feature-row::before{
+  content:""!important;display:block!important;position:absolute;left:10px;top:28%;bottom:28%;
+  width:2px;border-radius:999px;background:transparent;opacity:0;pointer-events:none;
+}
+html[data-theme="eisgold"] body.is-more-route .more-feature-row::after,
+html[data-theme="eisgold"] body.is-more-route .prophets-spotlight.more-feature-row::after,
+html[data-theme="eisgold"] body.is-more-route .prophets-spotlight__edge{content:none!important;display:none!important}
+body.is-more-route .more-feature-row:hover,
+body.is-more-route .more-feature-row:focus-visible,
+html[data-theme] body.is-more-route .more-feature-row:hover,
+html[data-theme="eisgold"] body.is-more-route .more-feature-row:hover{
+  background:radial-gradient(ellipse 96% 86% at 38% 50%,var(--cat-wash-strong),color-mix(in srgb,var(--gold2) 5%,transparent) 58%,transparent 76%)!important;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2) 14%,transparent)!important;
+  outline:none;
+}
+body.is-more-route .more-feature-row:hover::before,
+body.is-more-route .more-feature-row:focus-visible::before{
+  background:var(--cat-rail);opacity:1;top:22%;bottom:22%;
+}
+body.is-more-route .more-feature-row .dua-theme-card__body{
+  min-width:0;
+  padding-bottom:8px;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2) 20%,transparent);
+}
+body.is-more-route .more-hub .more-group-grid .more-feature-row:last-child .dua-theme-card__body{
+  border-bottom-color:transparent;
+}
+body.is-more-route .more-feature-row .dua-theme-card__idx{
+  font-family:var(--serif);font-size:12px;font-weight:650;letter-spacing:.08em;
+  color:var(--cat-accent);opacity:.72;text-align:right;font-variant-numeric:tabular-nums;
+}
+body.is-more-route .more-feature-row .dua-theme-card__icon,
+html[data-theme] body.is-more-route .more-feature-row .feature-icon{
+  width:44px!important;height:44px!important;max-width:44px!important;
+  border-radius:50%!important;flex:0 0 44px!important;
+  border:1px solid var(--cat-line-soft)!important;
+  background:color-mix(in srgb,var(--gold2) 3.5%,transparent)!important;
+  box-shadow:none!important;display:grid!important;place-items:center!important;margin:0!important;
+}
+body.is-more-route .more-feature-row .emoji-emblem{
+  width:18px!important;height:18px!important;font-size:16px!important;line-height:1;filter:none!important;
+}
+body.is-more-route .more-feature-row h3,
+html[data-theme] body.is-more-route .more-feature-row h4{
+  margin:0!important;
+  font-family:var(--serif)!important;
+  font-size:clamp(18px,5vw,22px)!important;
+  line-height:1.22!important;font-weight:650!important;
+  color:var(--cat-title)!important;letter-spacing:.002em;
+  overflow:visible!important;white-space:normal!important;-webkit-line-clamp:unset!important;
+}
+body.is-more-route .more-feature-row__desc,
+html[data-theme] body.is-more-route .more-feature-row p{
+  margin:4px 0 0!important;
+  font-family:var(--sans,var(--ui,system-ui))!important;
+  font-size:clamp(13px,3.6vw,15px)!important;
+  line-height:1.45!important;font-weight:450!important;
+  color:var(--cat-muted)!important;text-transform:none!important;letter-spacing:.01em;
+  display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;
+}
+body.is-more-route .more-feature-row .feature-badge{
+  position:static!important;display:inline!important;margin-left:6px!important;
+  padding:0!important;border:0!important;background:transparent!important;
+  color:var(--cat-muted2)!important;font-family:var(--sans,var(--ui,system-ui))!important;
+  font-size:10px!important;letter-spacing:.08em;text-transform:uppercase;font-weight:650;max-width:none!important;
+}
+body.is-more-route .more-feature-row.is-hidden{display:none!important}
+body.is-more-route .zakat-home-teaser.premium-surface{
+  margin:0 0 18px!important;border-radius:22px!important;
+  border:1px solid var(--cat-line)!important;
+  background:color-mix(in srgb,var(--gold2) 6%,transparent)!important;
+  box-shadow:none!important;
 }
 </style>
 
