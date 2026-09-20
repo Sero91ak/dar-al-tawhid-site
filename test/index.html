@@ -27523,7 +27523,7 @@ function updateChrome(route){
   document.body.classList.toggle("is-scholars-route",route.view==="scholars");
   document.body.classList.toggle("is-scholar-route",route.view==="scholar");
   document.body.classList.toggle("is-more-route",isMore);
-  document.body.classList.toggle("is-catalog-route",["duas","dua-cat","dua","topics","topic","scholars","scholar","book","series","frauen"].includes(route.view));
+  document.body.classList.toggle("is-catalog-route",["duas","dua-cat","dua","topics","topic","scholars","scholar","book","series","frauen","more"].includes(route.view));
   document.body.classList.toggle("is-library-reader-route",route.view==="bibliothek-reader");
   document.documentElement.classList.toggle("is-library-reader-route",route.view==="bibliothek-reader");
   document.body.classList.toggle("is-post-route",isPost);
@@ -34213,8 +34213,33 @@ html[data-theme] body.is-quiz-route .quiz-home-quick-card>span:last-child{
   font-size:11px!important;font-weight:650!important;color:color-mix(in srgb,var(--cream,#f4ead2) 58%,transparent)!important;
 }
 </style>
-<style id="more-hub-catalog-v873">
-/* Test-App Mehr: kompakte Oval-Zeilen wie Beiträge / Duʿāʾ */
+<style id="more-hub-catalog-v874">
+/* Test-App Mehr: offene Liste wie Beiträge / Duʿāʾ, fast schwarz */
+html[data-theme] body.is-more-route,
+html[data-theme] body.is-more-route #appView,
+html[data-theme] body.is-more-route #appView.view,
+html[data-theme] body.is-more-route .app,
+html[data-theme="royal"] body.is-more-route,
+html[data-theme="aurora"] body.is-more-route,
+html[data-theme="dark"] body.is-more-route,
+html[data-theme="dar-al-layl"] body.is-more-route,
+html[data-theme="bordeaux"] body.is-more-route,
+html.dar-ios-native-app body.is-more-route,
+html.dar-ios-native-app body.is-more-route #appView.view{
+  --dar-edge-fill:#070706!important;
+  --theme-page-bg:#070706!important;
+  background:#070706!important;
+  background-color:#070706!important;
+  background-image:none!important;
+}
+html[data-theme="light"] body.is-more-route,
+html[data-theme="soft"] body.is-more-route,
+html[data-theme="eisgold"] body.is-more-route{
+  --dar-edge-fill:var(--bg)!important;
+  background:var(--bg)!important;
+  background-color:var(--bg)!important;
+  background-image:none!important;
+}
 body.is-more-route{
   --cat-ink:var(--cream,var(--text));
   --cat-title:var(--cream,var(--text));
@@ -34224,11 +34249,11 @@ body.is-more-route{
   --cat-line:color-mix(in srgb,var(--gold2,var(--line)) 26%,transparent);
   --cat-line-soft:color-mix(in srgb,var(--gold2,var(--line2,var(--line))) 12%,transparent);
   --cat-line-strong:color-mix(in srgb,var(--gold2) 44%,transparent);
-  --cat-wash:color-mix(in srgb,var(--gold2) 10%,transparent);
-  --cat-wash-strong:color-mix(in srgb,var(--gold2) 16%,transparent);
+  --cat-wash:color-mix(in srgb,var(--gold2) 8%,transparent);
+  --cat-wash-strong:color-mix(in srgb,var(--gold2) 11%,transparent);
   --cat-rule:radial-gradient(ellipse 62% 900% at 50% 50%,var(--cat-line-strong),color-mix(in srgb,var(--gold2) 22%,transparent) 46%,transparent 72%);
   --cat-ornament:color-mix(in srgb,var(--gold2) 72%,transparent);
-  --cat-rail:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--gold2) 35%,transparent) 12%,var(--gold2) 42%,var(--gold2) 58%,color-mix(in srgb,var(--gold2) 35%,transparent) 88%,transparent 100%);
+  --cat-rail:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--gold2) 28%,transparent) 12%,var(--gold2) 42%,var(--gold2) 58%,color-mix(in srgb,var(--gold2) 28%,transparent) 88%,transparent 100%);
 }
 body.is-more-route .view-head{
   margin:2px 0 12px!important;
@@ -34318,12 +34343,16 @@ body.is-more-route .more-search{
   body.is-more-route .feature-section{margin-right:0!important}
 }
 html[data-theme] body.is-more-route .more-hub .more-group,
-html[data-theme="eisgold"] body.is-more-route .more-hub .more-group{
+html[data-theme="eisgold"] body.is-more-route .more-hub .more-group,
+html[data-theme="eisgold"] body.is-more-route .more-group,
+html[data-theme="eisgold"] body.is-more-route .feature-section,
+html[data-theme] body.is-more-route .feature-section{
   width:100%!important;max-width:100%!important;
   margin:18px 0 0!important;padding:0!important;
   border:0!important;border-radius:0!important;
-  background:transparent!important;background-image:none!important;
+  background:transparent!important;background-color:transparent!important;background-image:none!important;
   box-shadow:none!important;overflow:visible!important;
+  -webkit-mask:none!important;mask:none!important;
 }
 html[data-theme] body.is-more-route .more-hub .more-group + .more-group,
 html[data-theme="eisgold"] body.is-more-route .more-hub .more-group + .more-group{
@@ -34331,8 +34360,10 @@ html[data-theme="eisgold"] body.is-more-route .more-hub .more-group + .more-grou
 }
 html[data-theme] body.is-more-route .more-hub .more-group::before,
 html[data-theme="eisgold"] body.is-more-route .more-hub .more-group::before,
+html[data-theme="eisgold"] body.is-more-route .more-group::before,
+html[data-theme="eisgold"] body.is-more-route .feature-section::before,
 html[data-theme] body.is-more-route .more-hub .more-group::after,
-html[data-theme="eisgold"] body.is-more-route .more-hub .more-group::after{content:none!important;display:none!important}
+html[data-theme="eisgold"] body.is-more-route .more-hub .more-group::after{content:none!important;display:none!important;background:none!important;padding:0!important}
 body.is-more-route .more-group__label{margin:0 0 2px;padding-bottom:8px}
 body.is-more-route .more-group__label b{font-size:11px!important;letter-spacing:.16em}
 @media(min-width:520px){
@@ -34350,42 +34381,56 @@ html[data-theme] body.is-more-route .more-feature-row.dua-theme-card,
 html[data-theme="eisgold"] body.is-more-route .more-feature-row.dua-theme-card,
 html[data-theme] body.is-more-route .more-feature-row--hub,
 html[data-theme="eisgold"] body.is-more-route .more-feature-row--hub,
-html[data-theme="eisgold"] body.is-more-route .prophets-spotlight.more-feature-row{
+html[data-theme="eisgold"] body.is-more-route .prophets-spotlight.more-feature-row,
+html.dar-ios-native-app body.is-more-route .more-feature-row{
   display:grid!important;
   grid-template-columns:22px 34px minmax(0,1fr) 14px!important;
   column-gap:8px!important;align-items:center!important;
-  min-height:58px!important;height:auto!important;width:100%!important;
-  margin:0!important;padding:8px 12px 8px 10px!important;
-  border:0!important;
-  border-radius:999px!important;
-  background:transparent!important;background-image:none!important;
-  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2) 10%,transparent)!important;
-  overflow:hidden!important;
+  min-height:54px!important;height:auto!important;width:100%!important;
+  margin:0!important;padding:7px 8px 8px 4px!important;
+  border:0!important;border-bottom:0!important;
+  border-radius:0!important;
+  background:transparent!important;background-color:transparent!important;background-image:none!important;
+  box-shadow:none!important;
+  overflow:visible!important;
   text-align:left!important;color:inherit!important;
   font:inherit!important;-webkit-appearance:none;appearance:none;
   position:relative!important;cursor:pointer;
+  transform:none!important;filter:none!important;
 }
 html[data-theme] body.is-more-route .more-feature-row::before,
 html[data-theme="eisgold"] body.is-more-route .more-feature-row::before,
 html[data-theme="eisgold"] body.is-more-route .prophets-spotlight.more-feature-row::before{
-  content:""!important;display:block!important;position:absolute;left:8px;top:30%;bottom:30%;
-  width:2px;border-radius:999px;background:transparent;opacity:0;pointer-events:none;
+  content:""!important;display:block!important;position:absolute;left:6px;top:32%;bottom:32%;
+  width:2px;border-radius:999px;background:transparent;opacity:0;pointer-events:none;z-index:2;
 }
+html[data-theme] body.is-more-route .more-feature-row::after,
 html[data-theme="eisgold"] body.is-more-route .more-feature-row::after,
-html[data-theme="eisgold"] body.is-more-route .prophets-spotlight.more-feature-row::after,
-html[data-theme="eisgold"] body.is-more-route .prophets-spotlight__edge{content:none!important;display:none!important}
+html[data-theme="eisgold"] body.is-more-route .prophets-spotlight.more-feature-row::after{
+  content:""!important;display:block!important;position:absolute!important;
+  left:56px!important;right:8px!important;bottom:0!important;top:auto!important;
+  height:1px!important;width:auto!important;inset:auto 8px 0 56px!important;
+  border:0!important;border-radius:0!important;padding:0!important;
+  background:color-mix(in srgb,var(--gold2) 18%,transparent)!important;
+  opacity:.55!important;pointer-events:none!important;z-index:1;
+  -webkit-mask:none!important;mask:none!important;
+}
+html[data-theme] body.is-more-route .more-group-grid .more-feature-row:last-child::after,
+html[data-theme="eisgold"] body.is-more-route .prophets-spotlight__edge{content:none!important;background:none!important;opacity:0!important}
 body.is-more-route .more-feature-row:hover,
 body.is-more-route .more-feature-row:focus-visible,
+body.is-more-route .more-feature-row:active,
 html[data-theme] body.is-more-route .more-feature-row:hover,
 html[data-theme="eisgold"] body.is-more-route .more-feature-row:hover,
 html[data-theme] body.is-more-route .more-feature-row:focus-visible,
 html[data-theme="eisgold"] body.is-more-route .more-feature-row:focus-visible,
 html[data-theme] body.is-more-route .more-feature-row:active,
 html[data-theme="eisgold"] body.is-more-route .more-feature-row:active{
-  background:radial-gradient(ellipse 96% 86% at 38% 50%,var(--cat-wash-strong),color-mix(in srgb,var(--gold2) 5%,transparent) 58%,transparent 76%)!important;
-  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2) 22%,transparent)!important;
+  background:color-mix(in srgb,var(--gold2) 6%,transparent)!important;
+  box-shadow:none!important;
   outline:none;
   border-radius:999px!important;
+  border:0!important;
 }
 body.is-more-route .more-feature-row:hover::before,
 body.is-more-route .more-feature-row:focus-visible::before{
