@@ -5170,6 +5170,18 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "test-quran-picker-flat-lines-v916-2026-09-21",
+      "approvedBy": "user-explicit-test-picker-no-capsules",
+      "reason": "Nutzer: Nur Test-App, schwarzer Qurʾān Juz/Sure/Aya-Auswahlbereich kompakter und edel; keine Kasten-/Kapseloptik, Sure wie Aya, feine Trennlinien.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
