@@ -635,7 +635,7 @@
       var y = pendingY;
       var dy = y - lastY;
       setCapsuleCollapsed(false);
-      if (y < 12 || dy < -8) setPlayerDim(false);
+      if (y < 24 || dy < -8) setPlayerDim(false);
       else if (dy > 6 && y > 14) setPlayerDim(true);
       lastY = y;
     }
