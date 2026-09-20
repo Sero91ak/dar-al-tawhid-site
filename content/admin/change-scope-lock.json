@@ -108,6 +108,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "archive-preview-v290-2026-09-20",
+      "approvedBy": "user-explicit-alte-website-vorschau-link-wiederherstellen",
+      "reason": "Nutzer: historischen weit ausgebauten hellen Website-/Global-Premium-Stand wieder als funktionierende Vorschau auf der eigenen DĀR-Domain bereitstellen; keine Live-/Test-/iOS-Inhalte umbauen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "vorschau-juli-2026/",
+        "assets/preview-v290-deploy-marker.txt"
+      ],
+      "expiresAt": "2026-09-21T23:59:00.000Z"
+    },
+    {
       "id": "revert-visitor-header-smash-2026-09-16",
       "approvedBy": "user-explicit-besucher-oben-falsch-zurueck",
       "reason": "Nutzer: Besucher-App oben kaputt (Logo im Statusbalken). Safe-Area wiederherstellen, Glas weg, iOS unangetastet.",
