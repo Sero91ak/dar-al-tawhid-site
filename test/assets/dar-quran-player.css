@@ -57,6 +57,13 @@ html.is-quran-player-route body.has-bottom-nav{padding-bottom:0!important}
   color:#fff;
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Inter,sans-serif;
   box-sizing:border-box;
+  transform:translate3d(0,0,0);
+  transition:transform .32s cubic-bezier(.22,.7,.28,1),opacity .28s ease;
+}
+#darQuranPlayer.is-leaving{
+  transform:translate3d(0,110%,0);
+  opacity:0;
+  pointer-events:none!important;
 }
 #darQuranPlayer *{box-sizing:border-box}
 html.is-quran-player-route #darQuranPlayer button,
@@ -301,12 +308,12 @@ html.player-active:not(.is-quran-player-route) body{
   opacity:1;pointer-events:auto;visibility:visible;
 }
 #darQuranMiniPlayer.is-on.player-dim{
-  background:linear-gradient(180deg,rgba(74,81,96,.72),rgba(58,65,80,.68));
-  border-bottom-color:rgba(236,220,176,.12);
-  box-shadow:none;
-  -webkit-backdrop-filter:blur(8px);
-  backdrop-filter:blur(8px);
-  opacity:.88;
+  background:linear-gradient(180deg,#4a5160,#3a4150);
+  border-bottom-color:rgba(236,220,176,.22);
+  box-shadow:0 14px 28px rgba(0,0,0,.32);
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+  opacity:1;
   pointer-events:auto!important;
 }
 #darQuranMiniPlayer.is-on.player-dim .dqp-top-ctrl,
@@ -457,6 +464,18 @@ html.player-active body.is-home-route #appView.view{
 .qov-player-launch-txt b{font-size:15px;font-weight:800;line-height:1.15}
 .qov-player-launch-txt small{font-size:11px;opacity:.72;font-weight:650}
 .qov-icon-btn.qov-player-icon{color:var(--gold2,#efd78e)!important;font-size:16px}
+.dqp-sleep-presets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:6px 0 12px}
+#darQuranPlayer .dqp-sleep-presets .dqp-opt-chip{
+  min-height:42px!important;border-radius:12px!important;
+  border:1px solid rgba(236,220,176,.22)!important;
+  background:rgba(255,255,255,.04)!important;color:#efe6d0!important;font-size:13px!important;
+}
+.dqp-sleep-custom{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end;margin:0 0 10px}
+.dqp-sleep-custom label{display:flex;flex-direction:column;gap:4px;font-size:11px;color:rgba(255,255,255,.45)}
+.dqp-sleep-num{
+  width:100%;min-height:44px;border:0;border-bottom:1px solid rgba(255,255,255,.16);
+  background:transparent;color:#fff;font:inherit;padding:8px 4px;
+}
 
 /* Lern-Player unter dem Lesekopf */
 html.player-reader-dock #darQuranPlayerSlot,

@@ -26,6 +26,9 @@
     loading: true, error: "", layer: 0, textScale: 5, volume: 1,
     learnMode: false, learnLoop: true, learnStay: true, learnRate: 1
   };
+  var sleepUntil = 0;
+  var sleepWatch = 0;
+  var leaveLock = false;
   var verses = [];
   var meta = null;
   var seekLock = false;
@@ -257,6 +260,7 @@
     state.duration = a.duration || 0;
     paintProgress();
     if (!saveTimer) saveTimer = setTimeout(function () { saveTimer = 0; saveState(); }, 1800);
+    if (sleepUntil && Date.now() >= sleepUntil) fireSleepTimer();
   }
   function onMeta() {
     state.duration = audioEl().duration || 0;
@@ -475,7 +479,7 @@
     );
   }
   function paintAyah(animate) {
-    var root = document.getElementById("darQuranPlayer");
+    var root = playerRoot();
     if (!root) return;
     var el = root.querySelector("[data-dqp-ayah]");
     if (!el) return;
@@ -537,7 +541,7 @@
     if (el) el.textContent = state.loading ? "Sūrah wird geladen …" : "";
   }
   function paintError() {
-    var root = document.getElementById("darQuranPlayer");
+    var root = playerRoot();
     if (!root) return;
     var on = root.querySelector("[data-dqp-ayah]");
     if (!on) return;
@@ -550,7 +554,7 @@
     on.appendChild(box);
   }
   function paintInfo() {
-    var root = document.getElementById("darQuranPlayer");
+    var root = playerRoot();
     if (!root) return;
     var m = meta || {};
     var lat = root.querySelector(".dqp-title");
@@ -579,7 +583,7 @@
     }
   }
   function paintProgress() {
-    var root = document.getElementById("darQuranPlayer");
+    var root = playerRoot();
     if (root) {
       var cur = root.querySelector("[data-dqp-cur]");
       var dur = root.querySelector("[data-dqp-dur]");
@@ -601,7 +605,7 @@
     paintMiniProgress();
   }
   function paintChrome() {
-    var root = document.getElementById("darQuranPlayer");
+    var root = playerRoot();
     if (root) {
       root.setAttribute("data-text", state.text);
       var play = root.querySelector("[data-dqp=play]");
@@ -660,6 +664,98 @@
     return document.documentElement.classList.contains("is-quran-player-route")
       || (document.body && document.body.classList.contains("is-quran-player-route"));
   }
+  function playerRoot() {
+    var nodes = document.querySelectorAll("#darQuranPlayer");
+    var bodyOne = null;
+    for (var i = 0; i < nodes.length; i++) {
+      if (nodes[i].parentNode === document.body) bodyOne = nodes[i];
+    }
+    if (bodyOne) {
+      for (var j = 0; j < nodes.length; j++) {
+        if (nodes[j] !== bodyOne) {
+          try { nodes[j].remove(); } catch (e) {}
+        }
+      }
+      return bodyOne;
+    }
+    return nodes[0] || null;
+  }
+  function navigateApp(view, value) {
+    if (typeof window.navigate === "function") window.navigate(view, value || "", { noAnim: true });
+    else location.hash = "#" + view + (value ? "/" + value : "");
+  }
+  function leavePlayerRoute(kind) {
+    function go() {
+      if (kind === "read") navigateApp("quran-surah", String(state.surah) + "/" + state.ayah);
+      else if (kind === "home") navigateApp("home");
+      else if (typeof window.goBack === "function") {
+        window.goBack();
+        setTimeout(function () { if (isFullPlayerRoute()) navigateApp("home"); }, 50);
+      } else navigateApp("home");
+      setTimeout(paintMini, 40);
+    }
+    var root = playerRoot();
+    if (!root || !isFullPlayerRoute()) {
+      go();
+      return;
+    }
+    if (leaveLock) return;
+    leaveLock = true;
+    root.classList.add("is-leaving");
+    setTimeout(function () {
+      root.classList.remove("is-leaving");
+      root.hidden = true;
+      leaveLock = false;
+      go();
+    }, 280);
+  }
+  function sleepLabel() {
+    if (!sleepUntil) return "Sleep-Timer";
+    var s = Math.max(0, Math.round((sleepUntil - Date.now()) / 1000));
+    var mm = Math.floor(s / 60);
+    var ss = s % 60;
+    return "Sleep-Timer · " + mm + ":" + String(ss).padStart(2, "0");
+  }
+  function clearSleepTimer() {
+    sleepUntil = 0;
+    if (sleepWatch) {
+      clearInterval(sleepWatch);
+      sleepWatch = 0;
+    }
+  }
+  function fireSleepTimer() {
+    if (!sleepUntil) return;
+    sleepUntil = 0;
+    if (sleepWatch) {
+      clearInterval(sleepWatch);
+      sleepWatch = 0;
+    }
+    stopSession();
+    if (isFullPlayerRoute()) leavePlayerRoute("home");
+  }
+  function armSleepTimer(ms) {
+    ms = Math.max(0, Number(ms) || 0);
+    if (sleepWatch) {
+      clearInterval(sleepWatch);
+      sleepWatch = 0;
+    }
+    if (ms < 1000) {
+      sleepUntil = 0;
+      return;
+    }
+    sleepUntil = Date.now() + ms;
+    sleepWatch = setInterval(function () {
+      if (!sleepUntil) {
+        clearInterval(sleepWatch);
+        sleepWatch = 0;
+        return;
+      }
+      if (Date.now() >= sleepUntil) fireSleepTimer();
+    }, 1000);
+  }
+  function setSleepMinutes(mins) {
+    armSleepTimer(Math.max(0, Number(mins) || 0) * 60000);
+  }
   function slotEl() {
     var s = document.getElementById("darQuranPlayerSlot");
     if (!s) {
@@ -707,24 +803,12 @@
     if (body) body.classList.toggle("player-dim", show && capsuleDimmed);
     applyLearnChrome();
   }
-  function setPlayerDim(next) {
-    next = !!next;
-    if (!state.sessionActive || isFullPlayerRoute()) next = false;
-    if (capsuleDimmed === next) {
-      applyCapsuleMode();
-      return;
-    }
-    capsuleDimmed = next;
+  function setPlayerDim() {
+    capsuleDimmed = false;
     applyCapsuleMode();
   }
-  function setCapsuleCollapsed(next) {
-    next = !!next;
-    if (!state.sessionActive || isFullPlayerRoute()) next = false;
-    if (capsuleCollapsed === next) {
-      applyCapsuleMode();
-      return;
-    }
-    capsuleCollapsed = next;
+  function setCapsuleCollapsed() {
+    capsuleCollapsed = false;
     applyCapsuleMode();
   }
   function bindScrollAway() {
@@ -802,6 +886,7 @@
     saveState();
     capsuleCollapsed = false;
     capsuleDimmed = false;
+    clearSleepTimer();
     state.learnMode = false;
     state.learnLoop = false;
     state.learnStay = false;
@@ -930,7 +1015,7 @@
   function paintMini() {
     var el = miniEl();
     var onFull = isFullPlayerRoute();
-    var page = document.getElementById("darQuranPlayer");
+    var page = playerRoot();
     if (onFull) mountPlayerPage(page);
     else if (page && page.parentNode === document.body) page.hidden = true;
     var show = !!state.sessionActive && !onFull;
@@ -1069,8 +1154,7 @@
       "</div></div>",
       '<button type="button" class="dqp-opt" data-dqp-opt="m-shuffle">Zufall · ' + esc(SHUFFLE_L[state.shuffle]) + "</button>",
       '<button type="button" class="dqp-opt" data-dqp-opt="m-repeat">Wiederholen · ' + esc(REPEAT_L[state.repeat]) + "</button>",
-      '<button type="button" class="dqp-opt" data-dqp-opt="m-back15">−15 Sekunden</button>',
-      '<button type="button" class="dqp-opt" data-dqp-opt="m-fwd15">+15 Sekunden</button>',
+      '<button type="button" class="dqp-opt" data-dqp-opt="m-sleep">' + esc(sleepLabel()) + "</button>",
       '<button type="button" class="dqp-opt" data-dqp="pick-surah">Sūrah wechseln</button>',
       '<button type="button" class="dqp-opt" data-dqp="pick-reciter">Qāriʾ wechseln</button>',
       '<button type="button" class="dqp-opt" data-dqp-opt="m-read">Sūrah lesen</button>',
@@ -1078,6 +1162,28 @@
     ].join(""));
     var sl = document.querySelector("[data-dqp=text-scale]");
     if (sl) sl.style.setProperty("--dqp-fill", ((state.textScale - 1) / 9 * 100) + "%");
+  }
+  function openSleepSheet() {
+    var presets = [5, 10, 15, 20, 30, 40];
+    var left = sleepUntil ? Math.max(0, sleepUntil - Date.now()) : 0;
+    openSheet("Sleep-Timer", [
+      '<div class="dqp-text-panel">',
+      '<div class="dqp-text-label">Wiedergabe beenden nach</div>',
+      '<div class="dqp-sleep-presets">',
+      presets.map(function (m) {
+        return '<button type="button" class="dqp-opt-chip" data-dqp-opt="sleep-' + m + '">' + m + " Min</button>";
+      }).join(""),
+      "</div>",
+      '<div class="dqp-text-label">Eigene Zeit</div>',
+      '<div class="dqp-sleep-custom">',
+      '<label>Stunden<input class="dqp-sleep-num" data-dqp-sleep-h type="number" min="0" max="12" step="1" value="0" inputmode="numeric"></label>',
+      '<label>Minuten<input class="dqp-sleep-num" data-dqp-sleep-m type="number" min="0" max="59" step="1" value="0" inputmode="numeric"></label>',
+      '<button type="button" class="dqp-opt-chip is-on" data-dqp="sleep-apply">Setzen</button>',
+      "</div>",
+      left ? ('<p class="dqp-vol-note">Läuft noch ' + sleepLabel().replace("Sleep-Timer · ", "") + "</p>") : "",
+      '<button type="button" class="dqp-opt" data-dqp-opt="sleep-off">Timer aus</button>',
+      "</div>"
+    ].join(""));
   }
   async function onOpt(id) {
     if (id.indexOf("s-") === 0) { closeSheet(); return gotoSurah(Number(id.slice(2)), 1, state.playing, true); }
@@ -1104,46 +1210,62 @@
     }
     if (id === "m-scale-minus") { setTextScale(state.textScale - 1); return; }
     if (id === "m-scale-plus") { setTextScale(state.textScale + 1); return; }
-    if (id === "m-back15") { closeSheet(); skip(-15); return; }
-    if (id === "m-fwd15") { closeSheet(); skip(15); return; }
+    if (id === "m-sleep") { openSleepSheet(); return; }
+    if (id === "sleep-off") { clearSleepTimer(); closeSheet(); return; }
+    if (id.indexOf("sleep-") === 0) {
+      setSleepMinutes(Number(id.slice(6)));
+      closeSheet();
+      return;
+    }
     if (id === "m-read") {
       closeSheet();
-      if (typeof window.navigate === "function") window.navigate("quran-surah", String(state.surah) + "/" + state.ayah);
+      leavePlayerRoute("read");
       return;
     }
     if (id === "m-stop") { closeSheet(); stopSession(); return; }
   }
   function mountPlayerPage(root) {
-    root = root || document.getElementById("darQuranPlayer");
+    root = root || playerRoot();
     if (!root || !document.body) return;
     if (root.parentNode !== document.body) document.body.appendChild(root);
     root.hidden = false;
   }
   function bind(force) {
-    var root = document.getElementById("darQuranPlayer");
+    var root = playerRoot();
     if (!root) return;
     mountPlayerPage(root);
-    if (root.dataset.bound && !force) {
+    function syncLiveAudio() {
+      seekLock = false;
+      var a = audioEl();
+      if (audioHasSrc(a)) {
+        state.current = a.currentTime || 0;
+        state.duration = a.duration || 0;
+        state.playing = !a.paused;
+        if (!a.paused) state.sessionActive = true;
+      }
+      applyLearnRate();
       paintInfo();
       paintChrome();
       paintProgress();
+      paintAyah(false);
+    }
+    if (root.dataset.bound && !force) {
+      syncLiveAudio();
       return;
     }
     root.dataset.bound = "1";
     var holdSkip = false;
     var dismissY = null;
-    function closePlayerToApp() {
-      if (typeof window.navigate === "function") window.navigate("quran");
-      else location.hash = "#quran";
-      setTimeout(paintMini, 40);
-    }
+    var swipeX = null;
+    var swipeY = null;
+    var grabClose = false;
     function onPlayerAction(ev) {
       var t = ev.target && ev.target.closest ? ev.target.closest("[data-dqp],[data-dqp-opt]") : null;
       if (!t) return;
       var act = t.getAttribute("data-dqp");
       if (act === "seek" || act === "vol" || act === "text-scale") return;
       ev.stopPropagation();
-      if (act === "min") { closePlayerToApp(); return; }
+      if (act === "min") { leavePlayerRoute("back"); return; }
       if (act === "play") { togglePlay(); return; }
       if (act === "prev") { if (holdSkip) { holdSkip = false; return; } prevAyah(); return; }
       if (act === "next") { if (holdSkip) { holdSkip = false; return; } nextAyah(false); return; }
@@ -1152,6 +1274,15 @@
       if (act === "retry") { state.error = ""; loadAudio(true, false); return; }
       if (act === "sheet-close") { closeSheet(); return; }
       if (act === "menu") { openMenu(); return; }
+      if (act === "sleep-apply") {
+        var hEl = root.querySelector("[data-dqp-sleep-h]");
+        var mEl = root.querySelector("[data-dqp-sleep-m]");
+        var h = Math.max(0, Math.min(12, Number(hEl && hEl.value) || 0));
+        var m = Math.max(0, Math.min(59, Number(mEl && mEl.value) || 0));
+        armSleepTimer(((h * 60) + m) * 60000);
+        closeSheet();
+        return;
+      }
       if (act === "shuffle") { state.shuffle = cycle(SHUFFLE, state.shuffle); saveState(); paintChrome(); return; }
       if (act === "repeat") { state.repeat = cycle(REPEAT, state.repeat); saveState(); paintChrome(); return; }
       if (act === "text") { state.text = cycle(TEXT, state.text); saveState(); paintChrome(); paintAyah(false); return; }
@@ -1210,14 +1341,36 @@
     if (sheet) sheet.addEventListener("click", function (e) { if (e.target === sheet) closeSheet(); });
     root.addEventListener("touchstart", function (e) {
       if (!e.touches || !e.touches[0]) return;
-      if (e.target.closest && e.target.closest(".dqp-grab")) dismissY = e.touches[0].clientY;
-      else dismissY = null;
+      var t = e.target;
+      if (t.closest && (t.closest("[data-dqp-sheet]") || t.closest("input") || t.closest(".dqp-range") || t.closest(".dqp-top-range"))) {
+        dismissY = null;
+        swipeX = null;
+        grabClose = false;
+        return;
+      }
+      grabClose = !!(t.closest && t.closest(".dqp-grab"));
+      dismissY = grabClose ? e.touches[0].clientY : null;
+      swipeX = e.touches[0].clientX;
+      swipeY = e.touches[0].clientY;
     }, { passive: true });
     root.addEventListener("touchend", function (e) {
-      if (dismissY == null || !e.changedTouches || !e.changedTouches[0]) return;
-      var dy = e.changedTouches[0].clientY - dismissY;
+      if (!e.changedTouches || !e.changedTouches[0]) return;
+      var x = e.changedTouches[0].clientX;
+      var y = e.changedTouches[0].clientY;
+      var dy = dismissY == null ? 0 : y - dismissY;
+      var dx = swipeX == null ? 0 : x - swipeX;
+      var adx = Math.abs(dx);
+      var ady = Math.abs(swipeY == null ? dy : y - swipeY);
+      var grab = grabClose;
       dismissY = null;
-      if (dy > 52) closePlayerToApp();
+      swipeX = null;
+      swipeY = null;
+      grabClose = false;
+      if (adx > 72 && adx > ady * 1.35) {
+        if (dx > 0) leavePlayerRoute("home");
+        return;
+      }
+      if (grab && dy > 52 && ady > adx) leavePlayerRoute("back");
     }, { passive: true });
     paintChrome();
     paintProgress();
@@ -1231,12 +1384,12 @@
       return renderShell();
     },
     bind: function () {
-      var host = document.getElementById("darQuranPlayer");
+      var host = playerRoot();
       if (!host) { paintMini(); return; }
       if (host.dataset.ready === "1") { bind(false); paintMini(); return; }
       bind(false);
       ensureData().then(function () {
-        var node = document.getElementById("darQuranPlayer");
+        var node = playerRoot();
         if (!node) return;
         node.dataset.ready = "1";
         paintInfo();
@@ -1246,6 +1399,7 @@
         var want = pad(state.surah, 3) + pad(state.ayah, 3);
         var src = String(a.currentSrc || a.getAttribute("src") || "");
         if (audioHasSrc(a) && src.indexOf(want) >= 0) {
+          seekLock = false;
           state.current = a.currentTime || 0;
           state.duration = a.duration || 0;
           state.playing = !a.paused;

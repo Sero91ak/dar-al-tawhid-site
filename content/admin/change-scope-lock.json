@@ -5046,6 +5046,20 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "test-quran-player-close-sleep-2026-09-20",
+      "approvedBy": "user-explicit-test-quran-player-close-sleep-quickaccess",
+      "reason": "Nutzer Test-App: Scroll-Kapsel, Schnellzugriff-Player, Grab/Wisch schließen ohne Stopp, Sleep-Timer, −15/+15 raus, Sure lesen zum Vers.",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.css",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
