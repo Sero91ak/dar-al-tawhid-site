@@ -108,15 +108,17 @@
   ],
   "unlockedScopes": [
     {
-      "id": "archive-preview-v290-2026-09-20",
-      "approvedBy": "user-explicit-alte-website-vorschau-link-wiederherstellen",
-      "reason": "Nutzer: historischen weit ausgebauten hellen Website-/Global-Premium-Stand wieder als funktionierende Vorschau auf der eigenen DĀR-Domain bereitstellen; keine Live-/Test-/iOS-Inhalte umbauen.",
+      "id": "ios-tadabbur-catalog-2026-09-20",
+      "approvedBy": "user-explicit-tadabbur-github-ios",
+      "reason": "Nutzer: zentrale Tadabbur-JSON (GitHub apple-tv-hadith-staging) in der iOS-App laden, cachen und anzeigen.",
       "paths": [
         "content/admin/change-scope-lock.json",
-        "vorschau-juli-2026/",
-        "assets/preview-v290-deploy-marker.txt"
-      ],
-      "expiresAt": "2026-09-21T23:59:00.000Z"
+        "apple-tv/tadabbur/",
+        "ios/DarAlTawhid/",
+        "test/assets/dar-quran-player.js",
+        "test/index.html",
+        "test/version.json"
+      ]
     },
     {
       "id": "revert-visitor-header-smash-2026-09-16",
@@ -5137,6 +5139,19 @@
         "version.json",
         "service-worker.js",
         "content/quran-translit/",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "test-quran-player-layout-text-910-2026-09-20",
+      "approvedBy": "user-explicit-test-player-textbereich-vergroessern",
+      "reason": "Nutzer Test-App: Player-Textbereich vergrößern, Controls nach unten, Schichten wählbar, Griff zurück, Swipe nur im Text.",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "test/assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.css",
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
