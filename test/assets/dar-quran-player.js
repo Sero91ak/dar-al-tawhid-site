@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 913;
+  var PLAYER_BUILD = 914;
   if (window.__DAR_QURAN_PLAYER_BUILD === PLAYER_BUILD && window.DARQuranPlayer) return;
   try {
     var staleAudio = document.getElementById("darQuranPlayerAudio");
@@ -661,7 +661,7 @@
     if (a >= 1) state.ayah = a;
   }
   function writeHash() {
-    if (!fullUiWanted) return;
+    if (!fullUiWanted || Date.now() < dismissUntil) return;
     if (!isFullPlayerRoute()) return;
     if (isReaderRoute() || state.learnMode) return;
     var next = "#quran-player/" + state.surah + "/" + state.ayah;
@@ -727,7 +727,7 @@
     return (
       '<div id="darQuranPlayer" data-text="' + esc(state.text) + '">' +
         '<div class="dqp-topbar">' +
-          '<button class="dqp-back" type="button" data-dqp="min" aria-label="Zurück zur Startseite">Zurück</button>' +
+          '<button class="dqp-back" type="button" data-dqp="home" aria-label="Zurück zur Startseite">Zurück</button>' +
           '<button class="dqp-grab" type="button" data-dqp="min" aria-label="Minimieren"></button>' +
         "</div>" +
         '<div class="dqp-art">' +
@@ -1236,6 +1236,7 @@
     var root = playerRoot();
     if (root) {
       root.hidden = true;
+      root.style.display = "none";
       root.classList.remove("is-leaving");
       try { root.setAttribute("inert", ""); } catch (e) {}
       try { if (document.activeElement && root.contains(document.activeElement)) document.activeElement.blur(); } catch (e2) {}
@@ -1243,7 +1244,7 @@
   }
   function dismissFullPlayer() {
     fullUiWanted = false;
-    dismissUntil = Date.now() + 2000;
+    dismissUntil = Date.now() + 8000;
     hideFullPlayerUi();
   }
   function wantFullPlayer() {
@@ -1298,10 +1299,27 @@
   function leavePlayerRoute(kind) {
     dismissFullPlayer();
     function go() {
+      document.documentElement.classList.remove("is-quran-player-route");
+      if (document.body) {
+        document.body.classList.remove("is-quran-player-route", "dar-quran-player-open");
+      }
+      var root = playerRoot();
+      if (root) {
+        root.hidden = true;
+        root.style.display = "none";
+        try { root.setAttribute("inert", ""); } catch (e0) {}
+      }
       if (kind === "read") navigateApp("quran-surah", String(state.surah) + "/" + state.ayah);
       else navigateApp("home");
+      try {
+        if (kind !== "read") {
+          history.replaceState(null, "", location.pathname + (location.search || "") + "#home");
+        }
+      } catch (e1) {}
+      paintMini();
       setTimeout(function () {
         dismissFullPlayer();
+        hideFullPlayerUi();
         if (kind !== "read") {
           var hash = String(location.hash || "").replace(/^#\/?/, "");
           if (hash.split("/")[0] === "quran-player") navigateApp("home");
@@ -1315,7 +1333,7 @@
           hideFullPlayerUi();
           paintMini();
         }
-      }, 220);
+      }, 280);
     }
     var root = playerRoot();
     if (!root || !isFullPlayerRoute()) {
@@ -1972,6 +1990,7 @@
     if (!root || !document.body) return;
     if (root.parentNode !== document.body) document.body.appendChild(root);
     root.hidden = false;
+    root.style.display = "";
     try { root.removeAttribute("inert"); } catch (e) {}
   }
   function bind(force) {
@@ -2015,7 +2034,7 @@
       var act = t.getAttribute("data-dqp");
       if (act === "seek" || act === "vol" || act === "text-scale") return;
       ev.stopPropagation();
-      if (act === "min") { leavePlayerRoute("home"); return; }
+      if (act === "min" || act === "home") { leavePlayerRoute("home"); return; }
       if (act === "play") { togglePlay(); return; }
       if (act === "prev") { if (holdSkip) { holdSkip = false; return; } prevAyah(); return; }
       if (act === "next") { if (holdSkip) { holdSkip = false; return; } nextAyah(false); return; }
@@ -2147,6 +2166,17 @@
     }, { passive: true });
     paintChrome();
     paintProgress();
+  }
+
+  if (!window.__dqpHomeGuard) {
+    window.__dqpHomeGuard = true;
+    document.addEventListener("click", function (ev) {
+      var t = ev.target && ev.target.closest ? ev.target.closest("#darQuranPlayer .dqp-back, #darQuranPlayer [data-dqp=home], #darQuranPlayer [data-dqp=min]") : null;
+      if (!t) return;
+      ev.preventDefault();
+      ev.stopPropagation();
+      leavePlayerRoute("home");
+    }, true);
   }
 
   window.DARQuranPlayer = {
