@@ -305,7 +305,7 @@
       play: '<path d="M8 6.2l12 5.8L8 17.8z" fill="currentColor"/>',
       pause: '<path d="M7 6h3.4v12H7zM13.6 6H17v12h-3.4z" fill="currentColor"/>',
       lyrics: '<path d="M6 5.5h12v10.5H9.2L6 19z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
-      airplay: '<path d="M6 15.2A7 7 0 0 1 12 5.5a7 7 0 0 1 6 9.7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 19l4-5H8z" fill="currentColor"/>',
+      reciter: '<circle cx="12" cy="8.2" r="3.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6.4 19c.9-3 2.9-4.6 5.6-4.6s4.7 1.6 5.6 4.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
       queue: '<path d="M6 7h12M6 12h12M6 17h8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>',
       volmin: '<path d="M4 10h2.4L10 7.2v9.6L6.4 14H4z" fill="currentColor"/>',
       volmax: '<path d="M4 10h2.4L10 7.2v9.6L6.4 14H4z" fill="currentColor"/><path d="M13 9.2a3.4 3.4 0 0 1 0 5.6M15.4 7.2a6 6 0 0 1 0 9.6" fill="none" stroke="currentColor" stroke-width="1.5"/>',
@@ -357,8 +357,8 @@
         "</div>" +
         '<div class="dqp-dock">' +
           '<button type="button" data-dqp="text" aria-label="Textmodus">' + icon("lyrics") + "</button>" +
-          '<button type="button" data-dqp="repeat" aria-label="Wiederholen">' + icon("airplay") + "</button>" +
-          '<button type="button" data-dqp="pick-surah" aria-label="Sūrah / Queue">' + icon("queue") + "</button>" +
+          '<button type="button" data-dqp="pick-reciter" aria-label="Qāriʾ wählen">' + icon("reciter") + "</button>" +
+          '<button type="button" data-dqp="pick-surah" aria-label="Sūrah wählen">' + icon("queue") + "</button>" +
         "</div>" +
         '<div class="dqp-sheet" data-dqp-sheet hidden></div>' +
       "</div>"
@@ -951,14 +951,18 @@
     }
     root.dataset.bound = "1";
     var holdSkip = false;
+    var dismissY = null;
+    function closePlayerToApp() {
+      if (typeof window.navigate === "function") window.navigate("quran");
+      else location.hash = "#quran";
+      setTimeout(paintMini, 40);
+    }
     root.addEventListener("click", function (ev) {
       var t = ev.target.closest("[data-dqp],[data-dqp-opt]");
       if (!t) return;
       var act = t.getAttribute("data-dqp");
       if (act === "min") {
-        if (typeof window.navigate === "function") window.navigate("quran");
-        else location.hash = "#quran";
-        setTimeout(paintMini, 40);
+        closePlayerToApp();
         return;
       }
       if (act === "play") {
@@ -1027,6 +1031,28 @@
     });
     var sheet = root.querySelector("[data-dqp-sheet]");
     if (sheet) sheet.addEventListener("click", function (e) { if (e.target === sheet) closeSheet(); });
+    root.addEventListener("touchstart", function (e) {
+      if (!e.touches || !e.touches[0]) return;
+      var y = e.touches[0].clientY;
+      if (e.target.closest(".dqp-grab") || y < 96) dismissY = y;
+      else dismissY = null;
+    }, { passive: true });
+    root.addEventListener("touchend", function (e) {
+      if (dismissY == null || !e.changedTouches || !e.changedTouches[0]) return;
+      var dy = e.changedTouches[0].clientY - dismissY;
+      dismissY = null;
+      if (dy > 52) closePlayerToApp();
+    }, { passive: true });
+    if (!window.__dqpScrollLock) {
+      window.__dqpScrollLock = true;
+      var blockScroll = function (e) {
+        if (!isFullPlayerRoute()) return;
+        if (e.target && e.target.closest && e.target.closest(".dqp-sheet, .dqp-sheet-card, input[type=range]")) return;
+        e.preventDefault();
+      };
+      document.addEventListener("touchmove", blockScroll, { passive: false });
+      document.addEventListener("wheel", blockScroll, { passive: false });
+    }
     paintChrome();
     paintProgress();
   }
