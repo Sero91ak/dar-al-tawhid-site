@@ -7,6 +7,7 @@ final class DarAppRouter: ObservableObject {
     @Published var openNonce = UUID()
 
     func open(_ url: URL) {
+        DarDeepLink.logIncoming(url, source: "onOpenURL")
         openPush(
             type: DarDeepLink.destination(from: url).rawValue,
             postId: DarAppShell.postId(from: url),
@@ -31,13 +32,31 @@ final class DarAppRouter: ObservableObject {
     func openPush(type: String, postId: String, url: String) {
         let cleanType = type.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         let cleanPost = postId.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let parsed = URL(string: url), DarDeepLink.isAdminURL(parsed) {
+            DarDeepLink.logIncoming(parsed, source: "openPush-admin-blocked")
+            apply(.quranPlayer, webURL: DarAppShell.hashed(DarDeepLink.Destination.quranPlayer.webHash))
+            return
+        }
+        if DarDeepLink.isQuranPlayerHash(cleanType) || cleanType.contains("quran-player") {
+            if let parsed = URL(string: url) { DarDeepLink.rememberPlayerQuery(parsed) }
+            apply(.quranPlayer, webURL: DarAppShell.hashed(DarDeepLink.Destination.quranPlayer.webHash))
+            return
+        }
+        if let parsed = URL(string: url), let fragment = parsed.fragment, DarDeepLink.isQuranPlayerHash(fragment) {
+            apply(.quranPlayer, webURL: DarAppShell.inAppURL(from: parsed))
+            return
+        }
         if let exact = DarDeepLink.Destination(rawValue: cleanType),
-           ["prayer", "qibla", "quran", "duas", "more", "search", "jummah", "home"].contains(cleanType) {
-            apply(exact, webURL: nil)
+           ["prayer", "qibla", "quran", "quran-player", "duas", "more", "search", "jummah", "home"].contains(cleanType) {
+            apply(exact, webURL: exact == .quranPlayer ? DarAppShell.hashed(exact.webHash) : nil)
             return
         }
         let mapped = mapPushType(cleanType)
-        if mapped != .home {
+        if mapped == .quranPlayer {
+            apply(.quranPlayer, webURL: DarAppShell.hashed(DarDeepLink.Destination.quranPlayer.webHash))
+            return
+        }
+        if mapped != .home && mapped != .quran {
             apply(mapped, webURL: nil)
             return
         }
@@ -74,6 +93,7 @@ final class DarAppRouter: ObservableObject {
         return DarDeepLink.Destination(rawValue: head) ?? {
             if head.contains("prayer") || head.contains("gebet") { return .prayer }
             if head.contains("qibla") { return .qibla }
+            if DarDeepLink.isQuranPlayerHash(fragment) { return .quranPlayer }
             if head.contains("quran") { return .quran }
             if head.contains("dua") { return .duas }
             if head.contains("jum") { return .jummah }
@@ -85,6 +105,7 @@ final class DarAppRouter: ObservableObject {
 
     private func mapPushType(_ type: String) -> DarDeepLink.Destination {
         if type.contains("qibla") { return .qibla }
+        if type.contains("quran-player") || type.contains("quranplayer") { return .quranPlayer }
         if type.contains("quran") || type.contains("ayah") || type.contains("surah") { return .quran }
         if type.contains("dua") { return .duas }
         if type.contains("jum") { return .jummah }

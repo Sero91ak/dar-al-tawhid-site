@@ -69,6 +69,7 @@ struct DarAlTawhidApp: App {
         Task.detached {
             let live = DarDailyContent.refresh(DarWidgetStore.load(), fetchLiveDaily: true)
             DarWidgetStore.save(live)
+            _ = await DarTadabburRemoteService.refresh()
             await MainActor.run {
                 WidgetCenter.shared.reloadAllTimelines()
             }

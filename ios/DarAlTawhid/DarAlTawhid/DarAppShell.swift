@@ -1,8 +1,9 @@
 import Foundation
+import MediaPlayer
 
 enum DarAppShell {
-    /// Native iOS is the live shell. Test lives only at /test/ until explicitly released.
-    static let usesStagingWeb = false
+    /// iOS-Test-Webbesucher-App: Web-Shell unter /test/, nicht Admin, nicht Live-Besucher.
+    static let usesStagingWeb = true
 
     static let hosts: Set<String> = [
         "dar-al-tawhid.de",
@@ -18,7 +19,7 @@ enum DarAppShell {
 
     static func isOwnHost(_ url: URL) -> Bool {
         let scheme = url.scheme?.lowercased() ?? ""
-        if scheme == DarDeepLink.scheme { return true }
+        if scheme == DarDeepLink.scheme || scheme == DarDeepLink.testScheme { return true }
         guard let host = url.host?.lowercased() else { return false }
         return (scheme == "https" || scheme == "http") && hosts.contains(host)
     }
@@ -46,10 +47,14 @@ enum DarAppShell {
         return incoming
     }
 
-    /// Map any DAR URL onto this app's own web shell (never /test/ in the live native app).
+    /// Map any DAR URL onto this app's Test web shell. Never /admin.
     static func inAppURL(from incoming: URL) -> URL {
         let source = sourceURL(from: incoming) ?? incoming
-        if source.scheme == DarDeepLink.scheme {
+        if DarDeepLink.isAdminURL(source) {
+            return hashed(DarDeepLink.Destination.quranPlayer.webHash)
+        }
+        let scheme = (source.scheme ?? "").lowercased()
+        if scheme == DarDeepLink.scheme || scheme == DarDeepLink.testScheme {
             let dest = DarDeepLink.destination(from: source)
             return hashed(dest.webHash)
         }
@@ -60,7 +65,13 @@ enum DarAppShell {
         components.host = "dar-al-tawhid.de"
         components.port = nil
         var path = components.path
+        if path == "/admin" || path.hasPrefix("/admin/") {
+            return hashed(DarDeepLink.Destination.quranPlayer.webHash)
+        }
         if usesStagingWeb {
+            if path.hasPrefix("/admin") {
+                return hashed(DarDeepLink.Destination.quranPlayer.webHash)
+            }
             if !path.hasPrefix("/test") {
                 path = "/test" + (path == "/" || path.isEmpty ? "/" : path)
             }
@@ -71,6 +82,9 @@ enum DarAppShell {
             path = "/"
         }
         components.path = path.isEmpty ? "/" : path
+        if let fragment = components.fragment, DarDeepLink.isQuranPlayerHash(fragment) {
+            UserDefaults.standard.set("#\(fragment.trimmingCharacters(in: CharacterSet(charactersIn: "#")))", forKey: "darQuranPlayerResumeHashV1")
+        }
         if let url = components.url { return url }
         return launchURL
     }
@@ -80,5 +94,83 @@ enum DarAppShell {
         let clean = hash.hasPrefix("#") ? String(hash.dropFirst()) : hash
         components.fragment = clean
         return components.url ?? launchURL
+    }
+}
+
+enum DarQuranNowPlaying {
+    private static var installed = false
+    private static var evalJS: ((String) -> Void)?
+
+    static func install(eval: @escaping (String) -> Void) {
+        evalJS = eval
+        guard !installed else { return }
+        installed = true
+        let center = MPRemoteCommandCenter.shared()
+        center.playCommand.isEnabled = true
+        center.pauseCommand.isEnabled = true
+        center.nextTrackCommand.isEnabled = true
+        center.previousTrackCommand.isEnabled = true
+        center.playCommand.addTarget { _ in
+            evalJS?(
+                """
+                (function(){
+                  try{
+                    if(window.DARQuranPlayer&&DARQuranPlayer.open)DARQuranPlayer.open();
+                    if(window.DARQuranAudio&&DARQuranAudio.resume)DARQuranAudio.resume();
+                    console.log('[QURAN_DEEPLINK] opened full player: remote-play');
+                  }catch(e){}
+                })();
+                """
+            )
+            return .success
+        }
+        center.pauseCommand.addTarget { _ in
+            evalJS?("try{if(window.DARQuranAudio)DARQuranAudio.pause()}catch(e){}")
+            return .success
+        }
+        center.nextTrackCommand.addTarget { _ in
+            evalJS?("try{if(window.DARQuranAudio)DARQuranAudio.nextAyah()}catch(e){}")
+            return .success
+        }
+        center.previousTrackCommand.addTarget { _ in
+            evalJS?("try{if(window.DARQuranAudio)DARQuranAudio.previousAyah()}catch(e){}")
+            return .success
+        }
+        center.togglePlayPauseCommand.isEnabled = true
+        center.togglePlayPauseCommand.addTarget { _ in
+            evalJS?(
+                """
+                (function(){
+                  try{
+                    if(window.DARQuranPlayer&&DARQuranPlayer.open)DARQuranPlayer.open();
+                    var a=document.getElementById('darQuranPlayerAudio');
+                    if(!a)return;
+                    if(a.paused){if(window.DARQuranAudio)DARQuranAudio.resume()}else{if(window.DARQuranAudio)DARQuranAudio.pause()}
+                  }catch(e){}
+                })();
+                """
+            )
+            return .success
+        }
+    }
+
+    static func update(_ body: [String: Any]) {
+        var info: [String: Any] = [:]
+        info[MPMediaItemPropertyTitle] = body["title"] as? String ?? "Qurʾān"
+        info[MPMediaItemPropertyArtist] = body["artist"] as? String ?? "Dar Test"
+        info[MPMediaItemPropertyAlbumTitle] = "Dar Test"
+        if let elapsed = body["elapsed"] as? Double {
+            info[MPNowPlayingInfoPropertyElapsedPlaybackTime] = elapsed
+        }
+        if let duration = body["duration"] as? Double {
+            info[MPMediaItemPropertyPlaybackDuration] = duration
+        }
+        let playing = (body["playing"] as? Bool) == true
+        info[MPNowPlayingInfoPropertyPlaybackRate] = playing ? 1.0 : 0.0
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = info
+    }
+
+    static func clear() {
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
     }
 }
