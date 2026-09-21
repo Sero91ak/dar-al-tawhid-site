@@ -4,7 +4,7 @@
  * Kein Gerätetyp (kein iPhone/iPad/Fold-UA).
  * Visitor: Compact/Medium/Expanded, Bottom-Nav (unverändert).
  * Test: COMPACT / REGULAR / WIDE / EXTRA_WIDE + optionale Seiten-Nav.
- * TEST_COPY v918 — /test/assets (nicht Live-/assets/)
+ * TEST_COPY v919 — /test/assets (nicht Live-/assets/)
  */
 (function (global) {
   "use strict";
@@ -206,45 +206,28 @@
     nav.classList.add("is-adaptive-rail");
     nav.classList.remove("is-adaptive-centered", "dar-test-thumb-nav");
     nav.removeAttribute("hidden");
-    nav.style.setProperty("display", "flex", "important");
-    nav.style.setProperty("visibility", "visible", "important");
-    nav.style.setProperty("opacity", "1", "important");
     nav.setAttribute("data-rail-collapsed", collapsed ? "1" : "0");
     ensureRailToggle(nav, collapsed);
 
-    nav.style.setProperty("position", "fixed", "important");
-    nav.style.setProperty("top", "0", "important");
-    nav.style.setProperty("bottom", "0", "important");
-    nav.style.setProperty("height", "100dvh", "important");
-    nav.style.setProperty("min-height", "100dvh", "important");
-    nav.style.setProperty("max-height", "100dvh", "important");
-    nav.style.setProperty("width", width + "px", "important");
-    nav.style.setProperty("min-width", width + "px", "important");
-    nav.style.setProperty("max-width", width + "px", "important");
-    nav.style.setProperty("transform", "translate3d(0,0,0)", "important");
-    nav.style.setProperty("-webkit-transform", "translate3d(0,0,0)", "important");
-    nav.style.setProperty("flex-direction", "column", "important");
-    nav.style.setProperty("margin", "0", "important");
-    nav.style.setProperty("padding", collapsed ? "4px 2px" : "8px 4px", "important");
-    nav.style.setProperty("padding-top", "max(8px, " + insetT + ")", "important");
-    nav.style.setProperty("padding-bottom", "max(8px, " + insetB + ")", "important");
-    nav.style.setProperty("border-radius", "0", "important");
-    nav.style.setProperty("z-index", "80", "important");
-    nav.style.setProperty("gap", "2px", "important");
-    nav.style.setProperty("justify-content", "flex-start", "important");
-    nav.style.setProperty("align-items", "stretch", "important");
-    nav.style.setProperty("box-sizing", "border-box", "important");
-    nav.style.setProperty("transition", "left .28s ease, right .28s ease, top .28s ease, bottom .28s ease, width .28s ease", "important");
+    var sideCss = leading
+      ? "left:0px !important;right:auto !important;"
+      : "right:0px !important;left:auto !important;";
+    nav.style.cssText =
+      "display:flex !important;visibility:visible !important;opacity:1 !important;pointer-events:auto !important;" +
+      "position:fixed !important;top:0 !important;bottom:0 !important;" +
+      sideCss +
+      "width:" + width + "px !important;min-width:" + width + "px !important;max-width:" + width + "px !important;" +
+      "height:100dvh !important;min-height:0 !important;max-height:none !important;" +
+      "margin:0 !important;padding:8px 3px !important;" +
+      "padding-top:max(8px," + insetT + ") !important;padding-bottom:max(8px," + insetB + ") !important;" +
+      "flex-direction:column !important;justify-content:flex-start !important;align-items:stretch !important;gap:2px !important;" +
+      "transform:none !important;-webkit-transform:none !important;border-radius:0 !important;" +
+      "z-index:120 !important;overflow:hidden !important;box-sizing:border-box !important;contain:layout !important;" +
+      "background:rgba(10,9,8,.97) !important;border:0 !important;box-shadow:none !important;";
 
-    if (leading) {
-      nav.style.setProperty("left", "0px", "important");
-      nav.style.setProperty("right", "auto", "important");
-      nav.style.setProperty("padding-left", "max(2px, " + insetL + ")", "important");
-    } else {
-      nav.style.setProperty("right", "0px", "important");
-      nav.style.setProperty("left", "auto", "important");
-      nav.style.setProperty("padding-right", "max(2px, " + insetR + ")", "important");
-    }
+    Array.prototype.forEach.call(document.querySelectorAll(".bottom-nav"), function (el) {
+      if (el !== nav) el.style.setProperty("display", "none", "important");
+    });
 
     var root = document.documentElement;
     root.style.setProperty("--layout-rail-width", width + "px");
@@ -258,19 +241,59 @@
   }
 
   function applyChromeInsets(leading, width) {
-    var left = leading ? width + "px" : "0px";
-    var right = leading ? "0px" : width + "px";
     var root = document.documentElement;
-    root.style.setProperty("--layout-chrome-left", left);
-    root.style.setProperty("--layout-chrome-right", right);
-    ["darQuranMiniPlayer", "darQuranPlayer"].forEach(function (id) {
-      var el = document.getElementById(id);
-      if (!el) return;
-      el.style.setProperty("left", left, "important");
-      el.style.setProperty("right", right, "important");
-      el.style.setProperty("width", "auto", "important");
-      el.style.setProperty("max-width", "none", "important");
-    });
+    var strip =
+      root.classList.contains("player-active") &&
+      !root.classList.contains("player-stopped") &&
+      !root.classList.contains("is-quran-player-route")
+        ? 56
+        : 0;
+    var navLeft = leading ? width : 0;
+    var navRight = leading ? 0 : width;
+    var playLeft = leading ? 0 : strip;
+    var playRight = leading ? strip : 0;
+    var left = navLeft + playLeft;
+    var right = navRight + playRight;
+    root.style.setProperty("--layout-chrome-left", left + "px");
+    root.style.setProperty("--layout-chrome-right", right + "px");
+    root.style.setProperty("--layout-player-strip", strip + "px");
+    root.classList.toggle("dar-player-strip", strip > 0);
+
+    var mini = document.getElementById("darQuranMiniPlayer");
+    if (mini) {
+      if (strip) {
+        mini.style.setProperty("top", "0", "important");
+        mini.style.setProperty("bottom", "0", "important");
+        mini.style.setProperty("width", strip + "px", "important");
+        mini.style.setProperty("height", "auto", "important");
+        mini.style.setProperty("max-width", strip + "px", "important");
+        mini.style.setProperty("transform", "none", "important");
+        if (leading) {
+          mini.style.setProperty("right", navRight + "px", "important");
+          mini.style.setProperty("left", "auto", "important");
+        } else {
+          mini.style.setProperty("left", "0px", "important");
+          mini.style.setProperty("right", "auto", "important");
+        }
+      } else {
+        mini.style.removeProperty("top");
+        mini.style.removeProperty("bottom");
+        mini.style.removeProperty("width");
+        mini.style.removeProperty("height");
+        mini.style.removeProperty("left");
+        mini.style.removeProperty("right");
+        mini.style.removeProperty("max-width");
+        mini.style.removeProperty("transform");
+      }
+    }
+    var full = document.getElementById("darQuranPlayer");
+    if (full) {
+      full.style.setProperty("left", navLeft + "px", "important");
+      full.style.setProperty("right", navRight + "px", "important");
+      full.style.setProperty("width", "auto", "important");
+      full.style.setProperty("top", "0", "important");
+      full.style.setProperty("bottom", "0", "important");
+    }
   }
 
   function applyBottomNav(nav, mode) {
@@ -547,6 +570,11 @@
     document.addEventListener("visibilitychange", function () {
       if (!document.hidden) scheduleOrientBurst();
     });
+    try {
+      new MutationObserver(function () {
+        if (currentRail) scheduleApply(true);
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    } catch (eObs) {}
 
     document.addEventListener(
       "click",
