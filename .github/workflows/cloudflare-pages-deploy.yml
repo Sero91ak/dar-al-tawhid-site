@@ -236,6 +236,13 @@ jobs:
         with:
           fetch-depth: 1
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Vollständigen Desktop-Beitragsindex erzeugen
+        run: node scripts/build-desktop-posts-index.js
+
       - name: Desktop-Vorschau einmalig statisch deployen
         uses: cloudflare/wrangler-action@v3
         with:
@@ -279,6 +286,9 @@ jobs:
 
       - name: Build + Build-IDs synchronisieren
         run: npm run build
+
+      - name: Vollständigen Desktop-Beitragsindex erzeugen
+        run: node scripts/build-desktop-posts-index.js
 
       - name: Visitor Service-Worker Cache-Version absichern
         run: |
