@@ -1425,6 +1425,65 @@ button,input,select{font:inherit}
  .foundation-topic+.foundation-topic:before{left:0;right:0;top:-14px;bottom:auto;width:auto;height:1px;background:linear-gradient(90deg,transparent,rgba(152,116,57,.18),transparent)}
 }
 
+
+/* Desktop player v13 — compact fixed reading control */
+.player-wrap{
+  width:min(900px,calc(100% - 64px))!important;
+  margin:12px auto 4px!important;
+}
+.quran-player{
+  height:58px!important;
+  min-height:58px!important;
+  grid-template-columns:48px minmax(185px,1fr) 145px 92px 176px 36px!important;
+  border-radius:30px!important;
+}
+.player-play{
+  width:42px!important;
+  height:42px!important;
+  margin-left:5px!important;
+  font-size:15px!important;
+}
+.player-now{padding:0 12px!important}
+.player-kicker{font-size:6.5px!important}
+.player-title{font-size:13px!important;margin-top:3px!important}
+.player-progress{margin-top:5px!important}
+.player-field{
+  height:58px!important;
+  padding:0 9px!important;
+  gap:6px!important;
+}
+.player-field label{font-size:6.4px!important}
+.player-field select{
+  max-width:128px!important;
+  font-size:8.8px!important;
+}
+.player-field.reciter select{max-width:150px!important}
+.player-step{
+  width:36px!important;
+  height:58px!important;
+  font-size:14px!important;
+}
+@media(min-width:1500px){
+  .player-wrap{width:900px!important}
+}
+@media(max-width:1120px){
+  .player-wrap{width:min(820px,calc(100% - 42px))!important}
+  .quran-player{
+    grid-template-columns:46px minmax(170px,1fr) 138px 86px 36px!important
+  }
+  .player-field.reciter{display:none!important}
+}
+@media(max-width:860px){
+  .player-wrap{width:min(700px,calc(100% - 28px))!important}
+  .quran-player{
+    height:56px!important;
+    min-height:56px!important;
+    grid-template-columns:46px minmax(0,1fr) 34px!important
+  }
+  .player-field{display:none!important}
+  .player-step{height:56px!important;width:34px!important}
+}
+
 </style>
 </head>
 <body>
@@ -2090,7 +2149,7 @@ button,input,select{font:inherit}
  }
  function loadDesktopContent(){
   return Promise.all([
-   fetchJsonSafe("/data/desktop-posts-index.json"),
+   fetchJsonSafe("/data/desktop-posts-index.json").catch(function(){return fetchJsonSafe("/desktop-preview/posts.json").then(function(rows){return{posts:Array.isArray(rows)?rows:[]}})}),
    fetchJsonSafe("/data/books-library.json"),
    fetchJsonSafe("/data/library-publications.json"),
    fetchJsonSafe("/data/prophets/index.json"),
