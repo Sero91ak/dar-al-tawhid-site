@@ -156,6 +156,113 @@ button,input,select{font:inherit}
  .knowledge-grid{grid-template-columns:1fr}.knowledge-item:nth-child(n){border-right:0;padding:17px 0}.library-grid{grid-template-columns:1fr 1fr;gap:14px}.prayer-grid{grid-template-columns:repeat(2,1fr)}.prayer:nth-child(odd){border-right:1px solid var(--line2)}.prayer:nth-child(even){border-right:0}.prayer:nth-child(-n+4){border-bottom:1px solid var(--line2)}
  .quran-player{min-height:58px}.player-play{width:44px;height:44px}.player-title{font-size:13px}.player-step{height:58px}
 }
+
+/* Desktop refinement v4: stable proportions + real reading-book hierarchy */
+.player-wrap{width:min(1210px,calc(100% - 42px));margin:15px auto 0}
+.quran-player{height:68px;min-height:68px;grid-template-columns:58px minmax(250px,1fr) 178px 104px 224px 44px}
+.player-play{width:48px;height:48px;margin-left:6px}
+.player-now{padding:0 15px}
+.player-title{font-size:14px}
+.player-field{height:68px;padding:0 11px}
+.player-field select{width:100%;max-width:none;font-size:9.5px}
+.player-step{width:44px;height:68px}
+.page{width:min(1380px,calc(100% - 46px));padding-top:26px}
+.page-intro{padding:12px 0 19px}
+.page-intro p{font-size:13px;color:#514a41;line-height:1.66}
+.section{padding:23px 0}
+.section.parchment{padding-top:25px;padding-bottom:25px}
+.rule-card{padding:14px 0}.rule-card h3{font-size:20px}.rule-card p{font-size:11.5px;color:#615a51}
+.list-row{padding-top:12px;padding-bottom:12px}
+.statement-block{padding:18px 0 15px}
+.statement-source{font-size:10px;color:#5f584d}
+.ornament-line{height:16px;margin-bottom:5px}
+.ornament-line:before{top:7px;background:linear-gradient(90deg,transparent 0,rgba(88,66,34,.10) 7%,rgba(152,116,57,.52) 46%,rgba(152,116,57,.52) 54%,rgba(88,66,34,.10) 93%,transparent 100%);box-shadow:0 3px 0 rgba(88,66,34,.035)}
+.prayer-river{width:min(1160px,100%);min-height:104px;margin:22px auto 8px;background:
+ radial-gradient(520px 150px at 74% 18%,rgba(218,191,126,.17),transparent 70%),
+ linear-gradient(115deg,#23372f 0%,#334c40 36%,#40594b 63%,#2a4036 100%);
+ box-shadow:0 13px 34px rgba(37,55,46,.12);border-color:rgba(72,91,78,.28)}
+.prayer-river:after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 26%,rgba(255,255,255,.045) 48%,transparent 70%);transform:translateX(-120%);animation:prayerSheen 12s ease-in-out infinite;pointer-events:none}
+@keyframes prayerSheen{0%,76%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+.prayer-inner{min-height:104px;grid-template-columns:1fr 1fr 230px 152px;gap:0;padding:0 22px}
+.prayer-current,.prayer-next,.prayer-count{padding:0 24px}
+.prayer-current,.prayer-next{border-right:1px solid rgba(255,255,255,.12)}
+.prayer-count{font-size:32px}
+.prayer-locate{padding-left:20px}
+.quran-reading-zone{margin-left:-14px!important;margin-right:-14px!important;padding-left:14px!important;padding-right:14px!important}
+.quran-layout{display:grid;grid-template-columns:180px minmax(0,1fr);gap:24px;align-items:start}
+.quran-sidebar{padding-right:17px}
+.quran-surah-nav{max-height:706px;overflow:auto;padding-right:6px;scrollbar-width:thin;scrollbar-color:rgba(152,116,57,.32) transparent}
+.quran-surah-nav a{font-size:10.5px}
+.book-stage{max-width:1280px;width:100%;padding:12px 14px 31px;perspective:2600px}
+.book-stage:before{left:4%;right:4%;bottom:5px;height:34px;background:rgba(64,46,21,.16);filter:blur(21px)}
+.book-rim{position:relative;padding:8px 10px 11px;border-radius:16px 16px 20px 20px;background:linear-gradient(180deg,#c9b083,#a88d60 3px,#6d5435 4px,#3c2d20 8px,#b89d70 9px,#d6bf91 100%);box-shadow:0 26px 54px rgba(72,50,18,.17)}
+.book-shell{min-height:710px;border-radius:11px 11px 15px 15px;overflow:hidden;border:1px solid rgba(72,49,24,.26);box-shadow:0 18px 44px rgba(62,43,19,.16),inset 0 0 75px rgba(104,74,31,.045)}
+.book-shell:before{content:"";position:absolute;inset:7px;border:1px solid rgba(120,91,48,.12);border-radius:8px;z-index:7;pointer-events:none}
+.book-shell:after{width:32px;background:linear-gradient(90deg,rgba(62,42,19,.13),rgba(255,255,255,.14) 42%,rgba(255,255,255,.26) 50%,rgba(60,40,18,.15));box-shadow:0 0 22px rgba(58,39,17,.12)}
+.book-page{min-height:710px;padding:31px 38px 43px;background:
+ radial-gradient(ellipse at 50% 0%,rgba(255,255,255,.46),transparent 42%),
+ repeating-linear-gradient(0deg,rgba(85,61,28,.014) 0 1px,transparent 1px 4px),
+ linear-gradient(180deg,#f7efe1 0%,#efe3cd 100%)}
+.book-page.left{border-radius:10px 0 0 13px;box-shadow:inset -40px 0 48px -42px rgba(59,39,15,.39),inset 5px 0 8px rgba(255,255,255,.15)}
+.book-page.right{border-radius:0 10px 13px 0;box-shadow:inset 40px 0 48px -42px rgba(59,39,15,.36),inset -5px 0 8px rgba(255,255,255,.15)}
+.book-surah{font-size:18px;padding-bottom:11px;margin-bottom:10px}
+.book-verses{position:relative;z-index:1}
+.book-verse{position:relative;padding:10px 0 11px;border-bottom:1px solid rgba(90,66,31,.085);cursor:pointer;transition:background .2s ease,padding .2s ease}
+.book-verse:last-child{border-bottom:0}
+.book-verse:hover{background:linear-gradient(90deg,transparent,rgba(157,123,55,.035),transparent)}
+.book-verse.is-audio{background:linear-gradient(90deg,transparent,rgba(157,123,55,.065),transparent)}
+.book-verse-ar{font-family:"Geeza Pro","Noto Naskh Arabic",serif;font-size:25px;line-height:1.82;text-align:right;color:#2b261f}
+.book-verse-de{margin-top:4px;font:500 12.3px/1.52 var(--serif);color:#51483e}
+.ayah-marker{display:inline-block;margin-inline-start:7px;color:#8a6a2d;font-size:.67em;white-space:nowrap}
+.book-ref{position:absolute;left:38px;right:38px;bottom:25px;padding-top:8px;font-size:8px}
+.book-loading{grid-column:1/-1;display:grid;place-items:center;min-height:710px;font:500 18px var(--serif);color:#776d60}
+.book-controls{margin-top:12px}
+.book-btn{height:36px;min-width:110px}
+.book-position{min-width:170px;font-size:10px}
+.flip-leaf{top:0;bottom:0;width:50%;background:transparent;box-shadow:none;perspective:2400px}
+.flip-leaf.next{left:0;right:auto;transform-origin:right center;animation:turnNextArabic 1.08s cubic-bezier(.22,.03,.14,1) forwards}
+.flip-leaf.prev{right:0;left:auto;transform-origin:left center;animation:turnPrevArabic 1.08s cubic-bezier(.22,.03,.14,1) forwards}
+.flip-face{position:absolute;inset:0;backface-visibility:hidden;overflow:hidden;background:linear-gradient(180deg,#f7efe1,#eadcc4);box-shadow:0 0 34px rgba(51,34,13,.18)}
+.flip-back{transform:rotateY(180deg);background:linear-gradient(180deg,#eee2cc,#f6eddd)}
+.flip-leaf.next .flip-front{box-shadow:inset -28px 0 38px -31px rgba(52,34,13,.36)}
+.flip-leaf.next .flip-back{box-shadow:inset 28px 0 38px -31px rgba(52,34,13,.30)}
+.flip-leaf.prev .flip-front{box-shadow:inset 28px 0 38px -31px rgba(52,34,13,.34)}
+.flip-leaf.prev .flip-back{box-shadow:inset -28px 0 38px -31px rgba(52,34,13,.30)}
+.flip-leaf:after{background:linear-gradient(90deg,transparent,rgba(68,47,20,.16),transparent);animation:leafShade 1.08s ease both}
+@keyframes turnNextArabic{0%{transform:rotateY(0deg) translateZ(0)}42%{transform:rotateY(76deg) translateZ(10px)}58%{transform:rotateY(105deg) translateZ(8px)}100%{transform:rotateY(180deg) translateZ(0)}}
+@keyframes turnPrevArabic{0%{transform:rotateY(0deg) translateZ(0)}42%{transform:rotateY(-76deg) translateZ(10px)}58%{transform:rotateY(-105deg) translateZ(8px)}100%{transform:rotateY(-180deg) translateZ(0)}}
+@keyframes leafShade{0%,100%{opacity:.12}50%{opacity:.72}}
+@media(min-width:1500px){
+ .page{width:min(1380px,calc(100% - 70px))}
+ .player-wrap{width:1210px}
+ .prayer-river{width:1160px}
+}
+@media(max-width:1120px){
+ .quran-player{grid-template-columns:56px minmax(220px,1fr) 165px 94px 42px}
+ .player-field.reciter{display:none}
+ .quran-layout{grid-template-columns:155px minmax(0,1fr);gap:18px}
+ .book-shell,.book-page,.book-loading{min-height:650px}
+ .prayer-inner{grid-template-columns:1fr 1fr 210px auto}
+}
+@media(max-width:860px){
+ .player-wrap{width:min(760px,calc(100% - 28px))}
+ .quran-player{height:62px;min-height:62px;grid-template-columns:52px minmax(0,1fr) 42px}
+ .player-field{display:none}.player-step{height:62px}
+ .quran-layout{grid-template-columns:1fr}
+ .quran-sidebar{border-right:0;padding-right:0}
+ .quran-surah-nav{max-height:138px;grid-template-columns:repeat(3,1fr);gap:0 14px}
+ .book-rim{padding:6px}
+ .book-shell{grid-template-columns:1fr;min-height:620px}
+ .book-page{min-height:620px}
+ .book-page.left{display:none}
+ .book-shell:after{display:none}
+ .book-loading{min-height:620px}
+ .flip-leaf{display:none}
+ .prayer-river{width:min(720px,100%)}
+ .prayer-inner{grid-template-columns:1fr 1fr;min-height:126px;padding:14px 18px}
+ .prayer-current,.prayer-next,.prayer-count{padding:8px 16px}
+}
+
 </style>
 </head>
 <body>
@@ -253,20 +360,40 @@ button,input,select{font:inherit}
   '<a class="list-row desktop-link" href="'+p("quran")+'" data-page="quran"><span class="meta">Qurʾān</span><strong>al-Fātiḥah in der Buchansicht</strong><small>Öffnen</small></a>'+
   '<a class="list-row desktop-link" href="'+p("quellen")+'" data-page="quellen"><span class="meta">Quellen</span><strong>Werke und Direktnachweise</strong><small>Nachschlagen</small></a></div></section>'+footer()
  }
- var spreads=[
-  {left:{title:"al-Fātiḥah · Āyāt 4–5",ar:"مَٰلِكِ يَوۡمِ ٱلدِّينِ<br>إِيَّاكَ نَعۡبُدُ وَإِيَّاكَ نَسۡتَعِينُ",de:["dem Herrscher am Tag des Gerichts.","Dir allein dienen wir, und zu Dir allein flehen wir um Hilfe."],ref:"Sūrah al-Fātiḥah · 1:4–5"},
-   right:{title:"al-Fātiḥah · Āyāt 1–3",ar:"بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ<br>ٱلۡحَمۡدُ لِلَّهِ رَبِّ ٱلۡعَٰلَمِينَ<br>ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",de:["Im Namen Allahs, des Allerbarmers, des Barmherzigen.","(Alles) Lob gehört Allah, dem Herrn der Welten,","dem Allerbarmer, dem Barmherzigen,"],ref:"Sūrah al-Fātiḥah · 1:1–3"}},
-  {left:{title:"al-Fātiḥah · Āyah 7",ar:"صِرَٰطَ ٱلَّذِينَ أَنۡعَمۡتَ عَلَيۡهِمۡ غَيۡرِ ٱلۡمَغۡضُوبِ عَلَيۡهِمۡ وَلَا ٱلضَّآلِّينَ",de:["den Weg derjenigen, denen Du Gunst erwiesen hast, nicht derjenigen, die (Deinen) Zorn erregt haben, und nicht der Irregehenden!"],ref:"Sūrah al-Fātiḥah · 1:7"},
-   right:{title:"al-Fātiḥah · Āyah 6",ar:"ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ",de:["Leite uns den geraden Weg,"],ref:"Sūrah al-Fātiḥah · 1:6"}},
-  {left:{title:"al-Baqarah · Āyah 2",ar:"ذَٰلِكَ ٱلۡكِتَٰبُ لَا رَيۡبَۛ فِيهِۛ هُدٗى لِّلۡمُتَّقِينَ",de:["Dieses Buch, an dem es keinen Zweifel gibt, ist eine Rechtleitung für die Gottesfürchtigen."],ref:"Sūrah al-Baqarah · 2:2"},
-   right:{title:"al-Baqarah · Āyah 1",ar:"الٓمٓ",de:["Alif-Lām-Mīm."],ref:"Sūrah al-Baqarah · 2:1"}}
- ];
- function bookPage(side,data,no){return '<article class="book-page '+side+'"><div class="book-surah">'+data.title+'</div><div class="book-ar" dir="rtl">'+data.ar+'</div><div class="book-de">'+data.de.map(function(x){return "<p>"+x+"</p>"}).join("")+'</div><div class="book-ref">'+data.ref+' · Übersetzung: Frank Bubenheim & Nadeem Elyas</div><div class="page-no">'+no+'</div></article>'}
+ var quranBookState={surah:1,spread:0,pages:[],meta:null,busy:false};
+ function escBook(v){return String(v==null?"":v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+ function arabicDigits(n){return String(n).replace(/\d/g,function(d){return "٠١٢٣٤٥٦٧٨٩"[Number(d)]})}
+ function pageWeight(v){
+  var ar=String(v.ar||"").length,de=String(v.de||"").length;
+  return 54+(ar*1.28)+(de*.56);
+ }
+ function paginateQuranVerses(data){
+  var out=[],cur=[],score=0,target=560;
+  (data.verses||[]).forEach(function(v){
+   var w=pageWeight(v);
+   if(cur.length&&(score+w>target||cur.length>=5)){out.push(cur);cur=[];score=0}
+   cur.push(v);score+=w
+  });
+  if(cur.length)out.push(cur);
+  return out
+ }
+ function verseHtml(v){
+  return '<section class="book-verse" data-book-ayah="'+Number(v.id)+'"><div class="book-verse-ar" dir="rtl">'+escBook(v.ar)+' <span class="ayah-marker">﴿'+arabicDigits(v.id)+'﴾</span></div><div class="book-verse-de">'+escBook(v.de)+'</div></section>'
+ }
+ function bookPage(side,verses,pageNo,data){
+  if(!verses||!verses.length)return '<article class="book-page '+side+'"><div class="book-surah">'+escBook(data.transliteration)+'</div><div class="book-verses" style="display:grid;place-items:center;min-height:520px;color:#9a8d7a;font:500 14px var(--serif)">Ende der Sūrah</div><div class="page-no">'+pageNo+'</div></article>';
+  var from=verses[0].id,to=verses[verses.length-1].id;
+  return '<article class="book-page '+side+'" data-book-page="'+pageNo+'"><div class="book-surah">'+escBook(data.transliteration)+' · '+escBook(data.name)+'</div><div class="book-verses">'+verses.map(verseHtml).join("")+'</div><div class="book-ref">Qurʾān · '+Number(data.id)+':'+from+(to!==from?"–"+to:"")+' · Übersetzung: Frank Bubenheim & Nadeem Elyas</div><div class="page-no">'+pageNo+'</div></article>'
+ }
+ function spreadHtml(spread,data){
+  var rightIndex=spread*2,leftIndex=rightIndex+1;
+  return bookPage("left",quranBookState.pages[leftIndex],leftIndex+1,data)+bookPage("right",quranBookState.pages[rightIndex],rightIndex+1,data)
+ }
  function quran(){
   return intro("quran")+
-  '<section class="section parchment reveal"><div class="toolbar"><button class="tool active" type="button">Buchansicht</button><button class="tool" type="button">Arabisch</button><button class="tool" type="button">Deutsch</button><button class="tool" type="button">Lautschrift</button><button class="tool" type="button">Tafsīr</button><button class="tool" type="button">Tadabbur</button></div>'+
-  '<div class="split"><aside class="sidebar"><div class="side-title">Sūrah auswählen</div><nav class="side-nav"><a class="active desktop-link" href="'+p("quran","surah=1")+'" data-page="quran">1 · al-Fātiḥah</a><a class="desktop-link" href="'+p("quran","surah=2")+'" data-page="quran">2 · al-Baqarah</a><a class="desktop-link" href="'+p("quran","surah=3")+'" data-page="quran">3 · Āl ʿImrān</a><a class="desktop-link" href="'+p("quran","surah=4")+'" data-page="quran">4 · an-Nisāʾ</a><a class="desktop-link" href="'+p("quran","surah=5")+'" data-page="quran">5 · al-Māʾidah</a><a class="desktop-link" href="'+p("quran","surah=6")+'" data-page="quran">6 · al-Anʿām</a></nav></aside>'+
-  '<div class="book-stage"><div id="bookShell" class="book-shell"></div><div class="book-controls"><button id="prevPage" class="book-btn" type="button">← Zurück</button><div id="bookPos" class="book-position"></div><button id="nextPage" class="book-btn" type="button">Weiter →</button></div></div></div></section>'+footer()
+  '<section class="quran-reading-zone section parchment reveal"><div class="toolbar"><button class="tool active" type="button">Buchansicht</button><button class="tool" type="button">Arabisch + Deutsch</button><button class="tool" type="button">Lautschrift</button><button class="tool" type="button">Tafsīr</button><button class="tool" type="button">Tadabbur</button></div>'+
+  '<div class="quran-layout"><aside class="sidebar quran-sidebar"><div class="side-title">Sūrah auswählen</div><nav class="side-nav quran-surah-nav" id="bookSurahNav"><span style="font-size:10px;color:#8b8275">Sūrah-Verzeichnis wird geladen …</span></nav></aside>'+
+  '<div class="book-stage"><div class="book-rim"><div id="bookShell" class="book-shell"><div class="book-loading">Qurʾān wird geöffnet …</div></div></div><div class="book-controls"><button id="prevPage" class="book-btn" type="button">← Zurück</button><div id="bookPos" class="book-position">—</div><button id="nextPage" class="book-btn" type="button">Weiter →</button></div></div></div></section>'+footer()
  }
  function beitraege(){
   return intro("beitraege")+
@@ -376,10 +503,78 @@ button,input,select{font:inherit}
  }
 
  function initBook(){
-  var idx=0,busy=false,shell=document.getElementById("bookShell"),pos=document.getElementById("bookPos");
-  function paint(){var s=spreads[idx];shell.innerHTML=bookPage("left",s.left,idx*2+1)+bookPage("right",s.right,idx*2+2);pos.textContent="Doppelseite "+(idx+1)+" / "+spreads.length}
-  function flip(dir){if(busy)return;var ni=Math.max(0,Math.min(spreads.length-1,idx+dir));if(ni===idx)return;busy=true;var leaf=document.createElement("div");leaf.className="flip-leaf "+(dir>0?"next":"prev");shell.appendChild(leaf);setTimeout(function(){idx=ni;paint()},600);setTimeout(function(){busy=false},1260)}
-  document.getElementById("nextPage").onclick=function(){flip(1)};document.getElementById("prevPage").onclick=function(){flip(-1)};paint()
+  var shell=document.getElementById("bookShell"),pos=document.getElementById("bookPos"),nav=document.getElementById("bookSurahNav");
+  if(!shell||!pos)return;
+  var params=new URLSearchParams(location.search);
+  var requested=Math.max(1,Math.min(114,Number(params.get("surah")||0)||0));
+  try{
+   var saved=JSON.parse(localStorage.getItem("darDesktopQuranBookV2")||"null");
+   if(!requested&&saved&&Number(saved.surah))requested=Number(saved.surah);
+   if(saved&&Number(saved.surah)===requested&&Number.isFinite(Number(saved.spread)))quranBookState.spread=Math.max(0,Number(saved.spread));
+  }catch(e){}
+  if(!requested)requested=1;
+  quranBookState.surah=requested;
+  function saveBook(){try{localStorage.setItem("darDesktopQuranBookV2",JSON.stringify({surah:quranBookState.surah,spread:quranBookState.spread}))}catch(e){}}
+  function bindVerses(){
+   shell.querySelectorAll("[data-book-ayah]").forEach(function(el){
+    var ay=Number(el.getAttribute("data-book-ayah"));
+    if(qa&&Number(qa.state.surah)===Number(quranBookState.surah)&&Number(qa.state.ayah)===ay)el.classList.add("is-audio");
+    el.onclick=function(){
+     if(!qa)return;
+     qa.state.surah=Number(quranBookState.surah);qa.state.ayah=ay;
+     if(qa.surah)qa.surah.value=String(qa.state.surah);
+     fillAyat();if(qa.ayah)qa.ayah.value=String(ay);
+     setQaSource(!qa.audio.paused);
+     bindVerses()
+    }
+   })
+  }
+  function paint(){
+   var max=Math.max(0,Math.ceil(quranBookState.pages.length/2)-1);
+   quranBookState.spread=Math.max(0,Math.min(max,quranBookState.spread));
+   shell.innerHTML=spreadHtml(quranBookState.spread,quranBookState.meta);
+   var r=quranBookState.spread*2+1,l=Math.min(quranBookState.pages.length,quranBookState.spread*2+2);
+   pos.textContent="Seiten "+r+(l!==r?"–"+l:"")+" · "+quranBookState.meta.transliteration;
+   saveBook();bindVerses()
+  }
+  function leafFaceHtml(page,side,pageNo){
+   return '<div class="flip-face flip-front">'+bookPage(side,page,pageNo,quranBookState.meta)+'</div><div class="flip-face flip-back">'+bookPage(side,page,pageNo,quranBookState.meta)+'</div>'
+  }
+  function flip(dir){
+   if(quranBookState.busy)return;
+   var max=Math.max(0,Math.ceil(quranBookState.pages.length/2)-1),next=Math.max(0,Math.min(max,quranBookState.spread+dir));
+   if(next===quranBookState.spread)return;
+   quranBookState.busy=true;
+   var currentSpread=quranBookState.spread;
+   var leaf=document.createElement("div");
+   leaf.className="flip-leaf "+(dir>0?"next":"prev");
+   var currentPageIndex=dir>0?(currentSpread*2+1):(currentSpread*2);
+   var side=dir>0?"left":"right";
+   leaf.innerHTML=leafFaceHtml(quranBookState.pages[currentPageIndex],side,currentPageIndex+1);
+   shell.appendChild(leaf);
+   setTimeout(function(){
+    quranBookState.spread=next;
+    var keep=leaf;
+    shell.innerHTML=spreadHtml(quranBookState.spread,quranBookState.meta);
+    shell.appendChild(keep);
+    bindVerses()
+   },520);
+   setTimeout(function(){if(leaf.parentNode)leaf.remove();quranBookState.busy=false;paint()},1110)
+  }
+  document.getElementById("nextPage").onclick=function(){flip(1)};
+  document.getElementById("prevPage").onclick=function(){flip(-1)};
+  Promise.all([
+   fetch("/content/quran/surahs.json",{cache:"force-cache"}).then(function(r){return r.json()}),
+   fetch("/content/quran/"+pad3(requested)+".json",{cache:"force-cache"}).then(function(r){if(!r.ok)throw new Error("Quran "+r.status);return r.json()})
+  ]).then(function(all){
+   var catalog=all[0].surahs||[],data=all[1];
+   quranBookState.meta=data;quranBookState.pages=paginateQuranVerses(data);
+   var max=Math.max(0,Math.ceil(quranBookState.pages.length/2)-1);quranBookState.spread=Math.min(quranBookState.spread,max);
+   if(nav)nav.innerHTML=catalog.map(function(x){return '<a class="desktop-link'+(Number(x.id)===requested?' active':'')+'" data-page="quran" href="'+p("quran","surah="+x.id)+'">'+x.id+' · '+escBook(x.transliteration)+'</a>'}).join("");
+   paint()
+  }).catch(function(){
+   shell.innerHTML='<div class="book-loading">Der Qurʾān konnte gerade nicht geladen werden.</div>'
+  })
  }
 
  var prayerTimer=0;
@@ -472,6 +667,7 @@ button,input,select{font:inherit}
  function updateQaTitle(){var s=currentSurah();qa.title.textContent=(s?s.transliteration:"Qurʾān")+" · Āyah "+qa.state.ayah+" · "+reciter().name}
  function setQaSource(autoplay){
   qa.audio.src=audioUrl();qa.audio.load();updateQaTitle();saveQa();
+  try{if(currentPage()==="quran")document.querySelectorAll("[data-book-ayah]").forEach(function(el){el.classList.toggle("is-audio",Number(el.getAttribute("data-book-ayah"))===Number(qa.state.ayah)&&Number(quranBookState.surah)===Number(qa.state.surah))})}catch(e){}
   if("mediaSession" in navigator){try{navigator.mediaSession.metadata=new MediaMetadata({title:(currentSurah()?currentSurah().transliteration:"Qurʾān")+" · Āyah "+qa.state.ayah,artist:reciter().name,album:"DĀR AL TAWḤĪD · Qurʾān"})}catch(e){}}
   if(autoplay)qa.audio.play().catch(function(){})
  }
