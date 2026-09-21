@@ -5186,14 +5186,14 @@
     {
       "id": "desktop-website-preview-2026-09-21",
       "approvedBy": "user-explicit-desktop-website-preview-link",
-      "reason": "Nutzer: Desktop-Entwurf weiter ausbauen; direkte Quellen unter Aussagen, weiße/cremige Seite mit Pergamentbereichen und Übergängen, Animationen, Live-Gebetszeiten-Ticker, persistenter ovaler Qurʾān-Audio-Player, alle internen Wege bleiben Desktop.",
+      "reason": "Nutzer: Desktop-Vorschau direkt weiter verfeinern; feste Player-/Ticker-Proportionen, kompaktere Bereiche, echter Qurʾān-Mehrvers-Leser aus vorhandenen Qurʾān-Daten, realistischere Buchoptik und verbesserte Seitenanimation.",
       "paths": [
         "content/admin/change-scope-lock.json",
         "desktop-preview/index.html"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z",
-      "deployTriggerAt": "2026-09-21T11:20:00.000Z",
-      "note": "Nur /desktop-preview/ als nicht indexierter Entwurf veröffentlichen; Root-/App-Oberflächen nicht umstellen."
+      "deployTriggerAt": "2026-09-21T11:58:00.000Z",
+      "note": "Nur /desktop-preview/ veröffentlichen; Root, Besucher-App, Test-App und native Apps unverändert lassen."
     }
   ],
   "enabled": true
