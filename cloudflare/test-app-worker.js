@@ -7,8 +7,8 @@ export default {
     }
 
     if (url.pathname === "/test" || url.pathname === "/test/") {
-      if (url.searchParams.get("dqp") !== "916") {
-        url.searchParams.set("dqp", "916");
+      if (url.searchParams.get("dqp") !== "917") {
+        url.searchParams.set("dqp", "917");
         return Response.redirect(url.toString(), 302);
       }
     }

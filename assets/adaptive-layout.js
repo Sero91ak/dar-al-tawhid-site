@@ -146,10 +146,6 @@
     if (!body) return true;
     if (body.classList.contains("is-ilm-chat-route")) return true;
     if (body.classList.contains("reader-mode") || root.classList.contains("reader-mode")) return true;
-    if (body.classList.contains("is-quran-player-route") || root.classList.contains("is-quran-player-route")) {
-      return true;
-    }
-    if (body.classList.contains("dar-quran-player-open")) return true;
     return false;
   }
 
@@ -207,36 +203,46 @@
     var insetB = "env(safe-area-inset-bottom, 0px)";
 
     nav.classList.add("is-adaptive-rail");
-    nav.classList.remove("is-adaptive-centered");
+    nav.classList.remove("is-adaptive-centered", "dar-test-thumb-nav");
+    nav.removeAttribute("hidden");
+    nav.style.setProperty("display", "flex", "important");
+    nav.style.setProperty("visibility", "visible", "important");
+    nav.style.setProperty("opacity", "1", "important");
     nav.setAttribute("data-rail-collapsed", collapsed ? "1" : "0");
     ensureRailToggle(nav, collapsed);
 
     nav.style.setProperty("position", "fixed", "important");
-    nav.style.setProperty("top", "max(6px, " + insetT + ")", "important");
-    nav.style.setProperty("bottom", "max(6px, " + insetB + ")", "important");
-    nav.style.setProperty("height", "auto", "important");
-    nav.style.setProperty("min-height", "0", "important");
-    nav.style.setProperty("max-height", "none", "important");
+    nav.style.setProperty("top", "0", "important");
+    nav.style.setProperty("bottom", "0", "important");
+    nav.style.setProperty("height", "100dvh", "important");
+    nav.style.setProperty("min-height", "100dvh", "important");
+    nav.style.setProperty("max-height", "100dvh", "important");
     nav.style.setProperty("width", width + "px", "important");
     nav.style.setProperty("min-width", width + "px", "important");
     nav.style.setProperty("max-width", width + "px", "important");
-    nav.style.setProperty("transform", "none", "important");
-    nav.style.setProperty("-webkit-transform", "none", "important");
+    nav.style.setProperty("transform", "translate3d(0,0,0)", "important");
+    nav.style.setProperty("-webkit-transform", "translate3d(0,0,0)", "important");
     nav.style.setProperty("flex-direction", "column", "important");
     nav.style.setProperty("margin", "0", "important");
     nav.style.setProperty("padding", collapsed ? "4px 2px" : "8px 4px", "important");
+    nav.style.setProperty("padding-top", "max(8px, " + insetT + ")", "important");
+    nav.style.setProperty("padding-bottom", "max(8px, " + insetB + ")", "important");
     nav.style.setProperty("border-radius", "0", "important");
     nav.style.setProperty("z-index", "80", "important");
     nav.style.setProperty("gap", "2px", "important");
     nav.style.setProperty("justify-content", "flex-start", "important");
     nav.style.setProperty("align-items", "stretch", "important");
+    nav.style.setProperty("box-sizing", "border-box", "important");
+    nav.style.setProperty("transition", "left .28s ease, right .28s ease, top .28s ease, bottom .28s ease, width .28s ease", "important");
 
     if (leading) {
-      nav.style.setProperty("left", "max(0px, " + insetL + ")", "important");
+      nav.style.setProperty("left", "0px", "important");
       nav.style.setProperty("right", "auto", "important");
+      nav.style.setProperty("padding-left", "max(2px, " + insetL + ")", "important");
     } else {
-      nav.style.setProperty("right", "max(0px, " + insetR + ")", "important");
+      nav.style.setProperty("right", "0px", "important");
       nav.style.setProperty("left", "auto", "important");
+      nav.style.setProperty("padding-right", "max(2px, " + insetR + ")", "important");
     }
 
     var root = document.documentElement;
@@ -245,18 +251,25 @@
     root.setAttribute("data-nav-placement", placement);
     root.setAttribute("data-nav-collapsed", collapsed ? "1" : "0");
     if (document.body) {
-      document.body.style.setProperty(
-        "padding-left",
-        leading ? "calc(" + width + "px + " + insetL + ")" : "0px",
-        "important"
-      );
-      document.body.style.setProperty(
-        "padding-right",
-        leading ? "0px" : "calc(" + width + "px + " + insetR + ")",
-        "important"
-      );
       document.body.style.setProperty("padding-bottom", "0px", "important");
     }
+    applyChromeInsets(leading, width);
+  }
+
+  function applyChromeInsets(leading, width) {
+    var left = leading ? width + "px" : "0px";
+    var right = leading ? "0px" : width + "px";
+    var root = document.documentElement;
+    root.style.setProperty("--layout-chrome-left", left);
+    root.style.setProperty("--layout-chrome-right", right);
+    ["darQuranMiniPlayer", "darQuranPlayer"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.style.setProperty("left", left, "important");
+      el.style.setProperty("right", right, "important");
+      el.style.setProperty("width", "auto", "important");
+      el.style.setProperty("max-width", "none", "important");
+    });
   }
 
   function applyBottomNav(nav, mode) {
@@ -266,6 +279,16 @@
     var root = document.documentElement;
     root.setAttribute("data-nav-rail", "0");
     root.style.setProperty("--layout-rail-width", "0px");
+    root.style.setProperty("--layout-chrome-left", "0px");
+    root.style.setProperty("--layout-chrome-right", "0px");
+    ["darQuranMiniPlayer", "darQuranPlayer"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.style.removeProperty("left");
+      el.style.removeProperty("right");
+      el.style.removeProperty("width");
+      el.style.removeProperty("max-width");
+    });
     if (document.body && isTestApp()) {
       document.body.style.removeProperty("padding-left");
       document.body.style.removeProperty("padding-right");
@@ -381,8 +404,12 @@
     var changed = mode !== currentMode || density !== currentDensity;
     var prevDual = root.getAttribute("data-fold-dual") === "1";
 
-    if (isTestApp()) root.classList.add("dar-test-adaptive");
-    else root.classList.remove("dar-test-adaptive");
+    if (isTestApp()) {
+      root.classList.add("dar-test-adaptive");
+      root.setAttribute("data-nav-placement", readPlacement());
+    } else {
+      root.classList.remove("dar-test-adaptive");
+    }
 
     if (changed || force) {
       currentMode = mode;
@@ -455,21 +482,19 @@
       }
     } catch (e) {}
     clearOrientTimers();
-    scheduleApply(true);
-    [50, 150, 350, 700].forEach(function (ms) {
-      orientTimers.push(
-        setTimeout(function () {
-          applyLayout(true);
-          try {
-            if (global.DARScrollManager && typeof global.DARScrollManager.stableScrollTo === "function") {
-              global.DARScrollManager.stableScrollTo(savedScrollY);
-            } else if (savedScrollY) {
-              global.scrollTo(0, savedScrollY);
-            }
-          } catch (e2) {}
-        }, ms)
-      );
-    });
+    applyLayout(true);
+    orientTimers.push(
+      setTimeout(function () {
+        applyLayout(true);
+        try {
+          if (global.DARScrollManager && typeof global.DARScrollManager.stableScrollTo === "function") {
+            global.DARScrollManager.stableScrollTo(savedScrollY);
+          } else if (savedScrollY) {
+            global.scrollTo(0, savedScrollY);
+          }
+        } catch (e2) {}
+      }, 180)
+    );
   }
 
   function syncNav() {
@@ -521,6 +546,31 @@
     document.addEventListener("visibilitychange", function () {
       if (!document.hidden) scheduleOrientBurst();
     });
+
+    document.addEventListener(
+      "click",
+      function (ev) {
+        var placeBtn = ev.target && ev.target.closest && ev.target.closest("[data-nav-placement]");
+        if (placeBtn) {
+          ev.preventDefault();
+          setPlacement(placeBtn.getAttribute("data-nav-placement"));
+          document.querySelectorAll("[data-nav-placement]").forEach(function (x) {
+            x.classList.toggle("is-active", x.getAttribute("data-nav-placement") === readPlacement());
+          });
+        }
+      },
+      true
+    );
+    document.addEventListener(
+      "change",
+      function (ev) {
+        var t = ev.target;
+        if (t && t.getAttribute && t.getAttribute("data-nav-collapsed") != null) {
+          setCollapsed(!!t.checked);
+        }
+      },
+      true
+    );
   }
 
   var api = {

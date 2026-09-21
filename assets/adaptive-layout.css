@@ -348,41 +348,90 @@ html.dar-test-adaptive[data-nav-rail="1"] body.has-bottom-nav {
   padding-bottom: 0 !important;
 }
 
+html.dar-test-adaptive[data-nav-rail="1"] .app,
+html.dar-test-adaptive[data-nav-rail="1"] #appView,
+html.dar-test-adaptive[data-nav-rail="1"] #appView.view,
+html.dar-test-adaptive[data-nav-rail="1"] .top-shell,
+html.dar-test-adaptive[data-nav-rail="1"] .home-v380,
+html.dar-test-adaptive[data-nav-rail="1"] .home-v380-shell {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  box-sizing: border-box !important;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="trailing"] .app,
+html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="trailing"] #appView {
+  padding-right: var(--layout-rail-width, 56px) !important;
+  padding-left: 0 !important;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] .app,
+html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] #appView {
+  padding-left: var(--layout-rail-width, 56px) !important;
+  padding-right: 0 !important;
+}
+
 html.dar-test-adaptive[data-nav-rail="1"] #appChromeDock #bottomNav.bottom-nav,
 html.dar-test-adaptive[data-nav-rail="1"] #bottomNav.bottom-nav,
-html.dar-test-adaptive[data-nav-rail="1"][data-theme] #bottomNav.bottom-nav {
+html.dar-test-adaptive[data-theme][data-nav-rail="1"] #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-adaptive[data-theme][data-nav-rail="1"] #bottomNav.bottom-nav,
+html.dar-test-adaptive.is-quran-player-route[data-nav-rail="1"] #bottomNav.bottom-nav {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
   position: fixed !important;
   width: var(--layout-rail-width, 56px) !important;
   min-width: var(--layout-rail-width, 56px) !important;
   max-width: var(--layout-rail-width, 56px) !important;
-  top: max(6px, env(safe-area-inset-top, 0px)) !important;
-  bottom: max(6px, env(safe-area-inset-bottom, 0px)) !important;
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  transform: none !important;
-  -webkit-transform: none !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  max-height: 100dvh !important;
+  transform: translate3d(0,0,0) !important;
+  -webkit-transform: translate3d(0,0,0) !important;
   flex-direction: column !important;
   border-radius: 0 !important;
   padding: 8px 4px !important;
   gap: 2px !important;
   z-index: 80 !important;
-  background: color-mix(in srgb, var(--bg, #12110f) 92%, #000) !important;
+  background: color-mix(in srgb, var(--bg, #12110f) 94%, #000) !important;
   border: 0 !important;
-  border-left: 1px solid color-mix(in srgb, var(--gold2, #efd78e) 22%, transparent) !important;
   box-shadow: none !important;
+  transition: left .28s ease, right .28s ease, width .28s ease !important;
 }
 
-html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] #bottomNav.bottom-nav {
-  left: max(0px, env(safe-area-inset-left, 0px)) !important;
+html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] #bottomNav.bottom-nav,
+html.dar-test-adaptive[data-theme][data-nav-rail="1"][data-nav-placement="leading"] #bottomNav.bottom-nav {
+  left: 0 !important;
   right: auto !important;
-  border-left: 0 !important;
   border-right: 1px solid color-mix(in srgb, var(--gold2, #efd78e) 22%, transparent) !important;
+  border-left: 0 !important;
 }
 
-html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="trailing"] #bottomNav.bottom-nav {
-  right: max(0px, env(safe-area-inset-right, 0px)) !important;
+html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="trailing"] #bottomNav.bottom-nav,
+html.dar-test-adaptive[data-theme][data-nav-rail="1"][data-nav-placement="trailing"] #bottomNav.bottom-nav,
+html.dar-test-adaptive[data-nav-rail="1"]:not([data-nav-placement]) #bottomNav.bottom-nav {
+  right: 0 !important;
   left: auto !important;
+  border-left: 1px solid color-mix(in srgb, var(--gold2, #efd78e) 22%, transparent) !important;
+  border-right: 0 !important;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"] #darQuranMiniPlayer,
+html.dar-test-adaptive[data-nav-rail="1"] #darQuranPlayer {
+  left: var(--layout-chrome-left, 0px) !important;
+  right: var(--layout-chrome-right, 56px) !important;
+  width: auto !important;
+  max-width: none !important;
+}
+
+html.dar-test-adaptive.is-quran-player-route[data-nav-rail="1"] #darQuranPlayer {
+  display: grid !important;
+  inset: 0 var(--layout-chrome-right, 56px) 0 var(--layout-chrome-left, 0px) !important;
 }
 
 html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn {
