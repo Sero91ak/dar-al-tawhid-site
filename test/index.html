@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1789319677748 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v935";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v936";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -10444,11 +10444,11 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/test/assets/premium-feed-app.js?v=101" defer></script>
 <script src="/test/assets/dar-setup-hub.js?v=5" defer></script><!-- DAR_SETUP_HUB_V1 -->
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
-<script src="/test/assets/adaptive-layout.js?v=935" defer></script>
-<script src="/test/assets/fold-split.js?v=935" defer></script>
+<script src="/test/assets/adaptive-layout.js?v=936" defer></script>
+<script src="/test/assets/fold-split.js?v=936" defer></script>
 <script src="/assets/scholars-index.js?v=587" defer></script>
 <script src="/test/assets/prophets/prophets.js?v=33" defer></script>
-<script src="/test/assets/dar-quran-player.js?v=935" defer></script>
+<script src="/test/assets/dar-quran-player.js?v=936" defer></script>
 <script>
 (function(){
   var WANT=920;
@@ -12083,15 +12083,15 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/scholars-index.css?v=588">
 <link rel="preload" href="/test/data/prophets/index.json" as="fetch" crossorigin>
 <link rel="stylesheet" href="/test/assets/prophets/prophets.css?v=17">
-<link rel="stylesheet" href="/test/assets/dar-quran-player.css?v=935">
+<link rel="stylesheet" href="/test/assets/dar-quran-player.css?v=936">
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=791">
-<link rel="stylesheet" href="/test/assets/adaptive-layout.css?v=935">
+<link rel="stylesheet" href="/test/assets/adaptive-layout.css?v=936">
 <link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=668">
 <link rel="stylesheet" href="/test/assets/dar-setup-hub.css?v=7"><!-- DAR_SETUP_HUB_V1 -->
 <link rel="stylesheet" href="/test/assets/dar-top-chrome-fix.css?v=2"><!-- DAR_TOP_CHROME_FIX -->
 <link rel="stylesheet" href="/test/assets/dar-ios-oversize-copy.css?v=5"><!-- DAR_IOS_OVERSIZE_COPY -->
 <link rel="stylesheet" href="/test/assets/full-edge-appearance-polish.css?v=665">
-<link rel="stylesheet" href="/test/assets/fold-split.css?v=935">
+<link rel="stylesheet" href="/test/assets/fold-split.css?v=936">
 <style id="typography-compact-fix-v310">
 /* Finale Typografie-Korrektur — gewinnt gegen Home-Compact-Overrides */
 .section-head h3,
@@ -27234,7 +27234,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v935";
+const APP_BUILD_ID="app-shell-v936";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -33650,137 +33650,16 @@ html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-apply-btn{
 
 <script>
 (function(){
-  function syncDuoLayout(){
-    var viewport=window.visualViewport;
-    var width=Math.round((viewport&&viewport.width)||window.innerWidth||0);
-    var offsetLeft=Math.max(0,Math.round((viewport&&viewport.offsetLeft)||0));
-    var pageScrollLeft=Math.max(0,Math.round(window.scrollX||document.documentElement.scrollLeft||0));
-    var root=document.documentElement;
-    var wide=false;
-    root.setAttribute("data-duo-layout",wide?"wide":"compact");
-    root.style.setProperty("--duo-viewport-width",width+"px");
-    root.style.setProperty("--duo-viewport-left",offsetLeft+"px");
-    root.style.setProperty("--duo-page-scroll-left",pageScrollLeft+"px");
-    var body=document.body;
-    if(body){
-      if(wide){
-        body.style.setProperty("padding-left","calc(max(14px,env(safe-area-inset-left,0px)) + 110px)","important");
-        body.style.setProperty("padding-right","max(18px,env(safe-area-inset-right,0px))","important");
-        body.style.setProperty("padding-bottom","max(18px,env(safe-area-inset-bottom,0px))","important");
-      }else{
-        body.style.removeProperty("padding-left");
-        body.style.removeProperty("padding-right");
-        body.style.removeProperty("padding-bottom");
-      }
+  /* v936: Duo-Layout und Style-Observer komplett aus — sonst hängt die Test-App. */
+  try{
+    document.documentElement.setAttribute("data-duo-layout","compact");
+    document.documentElement.classList.remove("dar-test-adaptive");
+    document.documentElement.setAttribute("data-nav-rail","0");
+    if(window.__duoNavStyleObserver){
+      try{window.__duoNavStyleObserver.disconnect()}catch(e){}
+      window.__duoNavStyleObserver=null;
     }
-    var nav=document.getElementById("bottomNav");
-    if(nav){
-      if(wide){
-        nav.style.setProperty("top","max(18px,env(safe-area-inset-top,0px))","important");
-        nav.style.setProperty("left","calc(var(--duo-page-scroll-left,0px) + var(--duo-viewport-left,0px) + max(14px,env(safe-area-inset-left,0px)))","important");
-        nav.style.setProperty("right","auto","important");
-        nav.style.setProperty("bottom","max(18px,env(safe-area-inset-bottom,0px))","important");
-        nav.style.setProperty("width","var(--duo-nav-rail-width)","important");
-        nav.style.setProperty("height","auto","important");
-        nav.style.setProperty("flex-direction","column","important");
-        nav.style.setProperty("align-items","center","important");
-        nav.style.setProperty("justify-content","center","important");
-        nav.style.setProperty("gap","8px","important");
-        nav.style.setProperty("padding","10px","important");
-        nav.style.setProperty("border-radius","30px","important");
-        nav.style.setProperty("overflow","visible","important");
-        var railRect=nav.getBoundingClientRect();
-        if(railRect.left<14){
-          var computedLeft=parseFloat(getComputedStyle(nav).left)||0;
-          nav.style.setProperty("left",Math.round(computedLeft+(14-railRect.left))+"px","important");
-        }
-      }else{
-        nav.style.setProperty("top","auto","important");
-        nav.style.setProperty("left","max(14px,env(safe-area-inset-left))","important");
-        nav.style.setProperty("right","max(14px,env(safe-area-inset-right))","important");
-        nav.style.setProperty("bottom","calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm)","important");
-        nav.style.removeProperty("width");
-        nav.style.removeProperty("height");
-        nav.style.removeProperty("flex-direction");
-        nav.style.removeProperty("align-items");
-        nav.style.removeProperty("justify-content");
-        nav.style.removeProperty("gap");
-        nav.style.removeProperty("padding");
-        nav.style.removeProperty("border-radius");
-        nav.style.removeProperty("overflow");
-      }
-      nav.querySelectorAll(".bottom-nav-btn").forEach(function(btn){
-        if(wide){
-          btn.style.setProperty("flex","0 0 auto","important");
-          btn.style.setProperty("width","72px","important");
-          btn.style.setProperty("max-width","72px","important");
-          btn.style.setProperty("min-height","68px","important");
-          btn.style.setProperty("padding","8px 5px","important");
-          btn.style.setProperty("border-radius","20px","important");
-          btn.style.setProperty("gap","5px","important");
-          btn.style.setProperty("font-size","10px","important");
-        }else{
-          ["flex","width","max-width","min-height","padding","border-radius","gap","font-size"].forEach(function(prop){
-            btn.style.removeProperty(prop);
-          });
-        }
-      });
-    }
-    var appView=document.getElementById("appView");
-    if(appView){
-      if(wide&&body&&body.classList.contains("is-ilm-chat-route")){
-        appView.style.setProperty("left","124px","important");
-        appView.style.setProperty("right","max(18px,env(safe-area-inset-right,0px))","important");
-        appView.style.setProperty("width","auto","important");
-      }else{
-        appView.style.removeProperty("left");
-        appView.style.removeProperty("right");
-        appView.style.removeProperty("width");
-      }
-    }
-  }
-  syncDuoLayout();
-  window.addEventListener("resize",syncDuoLayout,{passive:true});
-  window.addEventListener("orientationchange",syncDuoLayout,{passive:true});
-  window.addEventListener("hashchange",function(){
-    setTimeout(syncDuoLayout,50);
-    setTimeout(syncDuoLayout,250);
-  },{passive:true});
-  if(window.visualViewport)window.visualViewport.addEventListener("resize",syncDuoLayout,{passive:true});
-  window.DarAdaptiveLayout=Object.assign(window.DarAdaptiveLayout||{},{syncNav:syncDuoLayout});
-  if(typeof window.ensureBottomNavDock==="function"&&!window.ensureBottomNavDock.__duoWrapped){
-    var originalDockSync=window.ensureBottomNavDock;
-    var wrappedDockSync=function(){
-      var result=originalDockSync.apply(this,arguments);
-      syncDuoLayout();
-      return result;
-    };
-    wrappedDockSync.__duoWrapped=true;
-    window.ensureBottomNavDock=wrappedDockSync;
-  }
-  var observedNav=document.getElementById("bottomNav");
-  if(observedNav&&!window.__duoNavStyleObserver){
-    var duoSyncQueued=false;
-    window.__duoNavStyleObserver=new MutationObserver(function(){
-      if(duoSyncQueued)return;
-      var currentWidth=Math.round((window.visualViewport&&window.visualViewport.width)||window.innerWidth||0);
-      var shouldBeWide=currentWidth>=700;
-      var right=observedNav.style.getPropertyValue("right");
-      var top=observedNav.style.getPropertyValue("top");
-      var outOfSync=shouldBeWide?(right!=="auto"||top==="auto"):right==="auto";
-      if(!outOfSync)return;
-      duoSyncQueued=true;
-      requestAnimationFrame(function(){
-        duoSyncQueued=false;
-        syncDuoLayout();
-      });
-    });
-    window.__duoNavStyleObserver.observe(observedNav,{attributes:true,attributeFilter:["style"]});
-  }
-  requestAnimationFrame(syncDuoLayout);
-  setTimeout(syncDuoLayout,250);
-  setTimeout(syncDuoLayout,900);
-  setTimeout(syncDuoLayout,1800);
+  }catch(e){}
 })();
 </script>
 
