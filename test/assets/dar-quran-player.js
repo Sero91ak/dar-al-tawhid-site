@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 925;
+  var PLAYER_BUILD = 926;
   if (window.__DAR_QURAN_PLAYER_BUILD === PLAYER_BUILD && window.DARQuranPlayer) return;
   try {
     var staleAudio = document.getElementById("darQuranPlayerAudio");
@@ -485,7 +485,7 @@
       trackHeard = true;
       allowAdvance = true;
     }
-    paintProgress();
+    requestProgressPaint();
     if (!saveTimer) saveTimer = setTimeout(function () { saveTimer = 0; saveState(); }, 1800);
     if (sleepUntil && Date.now() >= sleepUntil) fireSleepTimer();
     var now = Date.now();
@@ -598,7 +598,12 @@
   }
   function applyLearnRate() {
     var rate = state.learnMode ? (Number(state.learnRate) || 1) : 1;
-    try { audioEl().playbackRate = rate; } catch (e) {}
+    try {
+      var a = audioEl();
+      try { a.preservesPitch = true; } catch (eP) {}
+      try { a.webkitPreservesPitch = true; } catch (eW) {}
+      if (Math.abs((Number(a.playbackRate) || 1) - rate) > 0.001) a.playbackRate = rate;
+    } catch (e) {}
   }
   function exitLearnMode(keepPlaying) {
     if (!state.learnMode) {
@@ -1172,19 +1177,37 @@
   function paintMiniProgress() {
     var el = document.getElementById("darQuranMiniPlayer");
     if (!el) return;
-    var pct = state.duration ? Math.max(0, Math.min(1, state.current / state.duration)) : 0;
-    var cur = el.querySelector("[data-dqp-mini-cur]");
-    var dur = el.querySelector("[data-dqp-mini-dur]");
+    var dur = Number(state.duration) || 0;
+    var cur = Number(state.current) || 0;
+    var pct = dur > 0 ? Math.max(0, Math.min(1, cur / dur)) : 0;
+    var curEl = el.querySelector("[data-dqp-mini-cur]");
+    var durEl = el.querySelector("[data-dqp-mini-dur]");
     var sl = el.querySelector("[data-dqp-mini=seek]");
-    if (cur) cur.textContent = fmt(state.current);
-    if (dur) dur.textContent = fmt(state.duration || 0);
-    var fillPct = (pct * 100) + "%";
+    var curTxt = fmt(cur);
+    var durTxt = fmt(dur);
+    if (curEl && curEl.textContent !== curTxt) curEl.textContent = curTxt;
+    if (durEl && durEl.textContent !== durTxt) durEl.textContent = durTxt;
+    var fillN = pct.toFixed(4);
     var track = el.querySelector(".dqp-top-track");
-    if (track) track.style.setProperty("--dqp-fill", fillPct);
+    if (track) track.style.setProperty("--dqp-fill-n", fillN);
+    var fill = el.querySelector(".dqp-top-fill");
+    if (fill) fill.style.setProperty("--dqp-fill-n", fillN);
     if (sl && !seekLock) {
-      sl.value = String(Math.round(pct * 1000));
-      sl.style.setProperty("--dqp-fill", fillPct);
+      var now = Date.now();
+      if (!paintMiniProgress._lastRange || now - paintMiniProgress._lastRange > 180) {
+        paintMiniProgress._lastRange = now;
+        var nextVal = String(Math.round(pct * 1000));
+        if (sl.value !== nextVal) sl.value = nextVal;
+      }
     }
+  }
+  var progressRaf = 0;
+  function requestProgressPaint() {
+    if (progressRaf) return;
+    progressRaf = requestAnimationFrame(function () {
+      progressRaf = 0;
+      paintProgress();
+    });
   }
   function paintProgress() {
     var root = playerRoot();
@@ -2109,11 +2132,11 @@
     openSheet("Sūrah auswählen", '<input class="dqp-search" data-dqp-search type="search" placeholder="Suche" autocomplete="off">' + rows);
   }
   function openReciterSheet() {
-    openSheet("Qāriʾ", RECITERS.map(function (r) {
+    openSheet("Qāriʾ", '<div class="dqp-opt-list">' + RECITERS.map(function (r) {
       var key = r.id + ":" + state.surah + ":" + state.ayah;
-      var mark = availCache[key] === false ? " · diese Āyah nicht verfügbar" : (r.id === FALLBACK_QARI ? " · vollständig" : "");
-      return '<button type="button" class="dqp-opt' + (r.id === state.reciter ? " is-on" : "") + '" data-dqp-opt="r-' + r.id + '">' + (r.id === state.reciter ? "✓ " : "") + esc(r.name) + esc(mark) + "</button>";
-    }).join(""));
+      var mark = availCache[key] === false ? "nicht verfügbar" : (r.id === FALLBACK_QARI ? "vollständig" : "");
+      return '<button type="button" class="dqp-opt' + (r.id === state.reciter ? " is-on" : "") + '" data-dqp-opt="r-' + r.id + '"><span class="dqp-opt-name">' + esc(r.name) + "</span>" + (mark ? '<span class="dqp-opt-meta">' + esc(mark) + "</span>" : "") + "</button>";
+    }).join("") + "</div>");
   }
   function openMenu() {
     openSheet("Optionen", [
