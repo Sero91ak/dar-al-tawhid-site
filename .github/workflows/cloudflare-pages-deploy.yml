@@ -10,7 +10,7 @@ on:
       - version.json
       - content/updates/daily.json
       - content/posts/**
-      - content/admin/change-scope-lock.json
+      - desktop-preview/**
       - service-worker.js
       - manifest.json
       - assets/**
@@ -27,7 +27,6 @@ on:
       - scripts/sync-app-build-ids.js
       - scripts/verify-live-deploy.js
       - scripts/purge-cloudflare-cache.js
-      - .github/workflows/cloudflare-pages-deploy.yml
 
 permissions:
   contents: read
@@ -38,6 +37,7 @@ jobs:
     outputs:
       shortlinks_only: ${{ steps.scope.outputs.shortlinks_only }}
       qsource_only: ${{ steps.scope.outputs.qsource_only }}
+      preview_only: ${{ steps.scope.outputs.preview_only }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -50,12 +50,14 @@ jobs:
           if [ "${{ github.event_name }}" != "push" ]; then
             echo "shortlinks_only=false" >> "$GITHUB_OUTPUT"
             echo "qsource_only=false" >> "$GITHUB_OUTPUT"
+            echo "preview_only=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           BASE="${{ github.event.before }}"
           if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
             echo "shortlinks_only=false" >> "$GITHUB_OUTPUT"
             echo "qsource_only=false" >> "$GITHUB_OUTPUT"
+            echo "preview_only=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           CHANGED="$(git diff --name-only "$BASE" "$GITHUB_SHA")"
@@ -73,6 +75,15 @@ jobs:
             echo "qsource_only=true" >> "$GITHUB_OUTPUT"
           else
             echo "qsource_only=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          # COST GUARD: reine Desktop-Vorschau niemals durch den kompletten
+          # Besucher-App-Build schicken. change-scope-lock darf dabei nur
+          # begleitend vorkommen und löst allein keinen Deploy mehr aus.
+          if [ -n "$CHANGED" ] && [ -z "$(printf '%s\n' "$CHANGED" | grep -Ev '^(desktop-preview/|content/admin/change-scope-lock\.json$)' || true)" ] && printf '%s\n' "$CHANGED" | grep -q '^desktop-preview/'; then
+            echo "preview_only=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "preview_only=false" >> "$GITHUB_OUTPUT"
           fi
 
   deploy-shortlinks:
@@ -213,9 +224,36 @@ jobs:
           done <<< "$FILES"
           exit "$failed"
 
+  # COST GUARD: Desktop-Entwurf = genau ein schlanker Asset-Deploy.
+  # Kein npm install/build, keine Build-ID-/SW-Arbeiten, kein globaler Purge,
+  # keine Reclaim-Schleife und keine wiederholten wrangler deploys.
+  deploy-preview:
+    needs: classify
+    if: needs.classify.outputs.preview_only == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Desktop-Vorschau einmalig statisch deployen
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+
+      - name: Vorschau erreichbar
+        shell: bash
+        run: |
+          sleep 3
+          status="$(curl -sS -L --retry 2 --retry-delay 2 --max-time 20 -o /tmp/desktop-preview.html -w '%{http_code}' "https://dar-al-tawhid.de/desktop-preview/?cb=${GITHUB_SHA}" || true)"
+          test "$status" = "200" || { echo "::error::Desktop-Vorschau HTTP $status"; exit 1; }
+          grep -q 'DĀR AL TAWḤĪD' /tmp/desktop-preview.html || { echo "::error::Desktop-Vorschau Branding fehlt"; exit 1; }
+
   deploy:
     needs: classify
-    if: needs.classify.outputs.shortlinks_only != 'true' && needs.classify.outputs.qsource_only != 'true'
+    if: needs.classify.outputs.shortlinks_only != 'true' && needs.classify.outputs.qsource_only != 'true' && needs.classify.outputs.preview_only != 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
