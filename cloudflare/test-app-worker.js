@@ -6,13 +6,6 @@ export default {
       return Response.redirect(`${url.origin}/test/${url.search || ""}`, 302);
     }
 
-    if (url.pathname === "/test" || url.pathname === "/test/") {
-      if (url.searchParams.get("dqp") !== "933") {
-        url.searchParams.set("dqp", "933");
-        return Response.redirect(url.toString(), 302);
-      }
-    }
-
     if (url.pathname === "/version.json") {
       const testVersionUrl = new URL("/test/version.json", url.origin);
       return env.ASSETS.fetch(new Request(testVersionUrl.toString(), request));
