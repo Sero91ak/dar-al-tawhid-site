@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 928;
+  var PLAYER_BUILD = 929;
   /* LEARN_PLAYER_ONLY: Āyah-Buttons + Mini-Lernleiste, kein Voll-Player. */
   var LEARN_PLAYER_ONLY = true;
   if (window.__DAR_QURAN_PLAYER_BUILD === PLAYER_BUILD && window.DARQuranPlayer) return;
@@ -439,7 +439,7 @@
         runPlay(a, gen);
       }
       applyLearnRate();
-      syncProgressSample();
+      syncProgressSample(true);
       if (state.playing) startProgressClock();
       paintAyah(false);
       paintChrome();
@@ -484,7 +484,7 @@
     if (seekLock) return;
     var a = audioEl();
     state.duration = a.duration || 0;
-    syncProgressSample();
+    syncProgressSample(false);
     if (engine.started && (Number(state.current) || 0) > 0.25 && isFinite(state.duration) && state.duration > 1) {
       trackHeard = true;
       allowAdvance = true;
@@ -518,7 +518,7 @@
     paintChrome();
     paintMini();
     markPlayingAyah();
-    syncProgressSample();
+    syncProgressSample(true);
     startProgressClock();
   }
   function onPauseEv() {
@@ -527,7 +527,7 @@
     paintChrome();
     paintMini();
     markPlayingAyah();
-    syncProgressSample();
+    syncProgressSample(true);
     stopProgressClock();
     paintProgress();
   }
@@ -611,7 +611,10 @@
       try { a.preservesPitch = true; } catch (eP) {}
       try { a.webkitPreservesPitch = true; } catch (eW) {}
       if (Math.abs((Number(a.playbackRate) || 1) - rate) > 0.001) a.playbackRate = rate;
-      syncProgressSample();
+      var hold = currentProgressTime();
+      progSampleT = hold;
+      progSampleAt = performance.now();
+      state.current = hold;
     } catch (e) {}
   }
   function exitLearnMode(keepPlaying) {
@@ -1188,10 +1191,16 @@
     applyProgressVisual(currentProgressTime(), Number(state.duration) || 0);
   }
   var progressClock = 0;
+  var progressTimer = 0;
   var progSampleT = 0;
   var progSampleAt = 0;
+  var progRate = 1;
   var progCache = null;
-  function invalidateProgressCache() { progCache = null; }
+  var lastProgPct = -1;
+  var lastProgPaintAt = 0;
+  var PROG_HZ = 120;
+  var PROG_FRAME_MS = 1000 / PROG_HZ;
+  function invalidateProgressCache() { progCache = null; lastProgPct = -1; }
   function progressEls() {
     if (progCache && progCache.el && progCache.el.isConnected) return progCache;
     var el = document.getElementById("darQuranMiniPlayer");
@@ -1201,26 +1210,34 @@
       cur: el.querySelector("[data-dqp-mini-cur]"),
       dur: el.querySelector("[data-dqp-mini-dur]"),
       fill: el.querySelector(".dqp-top-fill"),
-      knob: el.querySelector(".dqp-top-knob"),
-      track: el.querySelector(".dqp-top-track")
+      shift: el.querySelector(".dqp-top-knob-shift")
     };
     return progCache;
   }
-  function syncProgressSample() {
+  function audioRate() {
+    try { return Number(audioEl().playbackRate) || 1; } catch (eR) { return 1; }
+  }
+  function syncProgressSample(force) {
     try {
       var a = audioEl();
-      progSampleT = Number(a.currentTime) || 0;
-      progSampleAt = performance.now();
-      state.current = progSampleT;
+      var audioT = Number(a.currentTime) || 0;
       var d = Number(a.duration);
       if (d && isFinite(d)) state.duration = d;
+      var now = performance.now();
+      var rate = audioRate();
+      progRate = rate;
+      if (!force && state.playing && !seekLock && progSampleAt) {
+        var vis = progSampleT + (now - progSampleAt) / 1000 * (progRate || rate || 1);
+        if (audioT + 0.03 < vis && vis - audioT < 0.45) return;
+      }
+      progSampleT = audioT;
+      progSampleAt = now;
+      state.current = audioT;
     } catch (eS) {}
   }
   function currentProgressTime() {
     if (seekLock || !state.playing) return Number(state.current) || progSampleT || 0;
-    var rate = 1;
-    try { rate = Number(audioEl().playbackRate) || 1; } catch (eR) {}
-    var t = progSampleT + (performance.now() - (progSampleAt || performance.now())) / 1000 * rate;
+    var t = progSampleT + (performance.now() - (progSampleAt || performance.now())) / 1000 * (progRate || 1);
     var d = Number(state.duration) || 0;
     if (t < 0) t = 0;
     if (d > 0 && t > d) t = d;
@@ -1230,36 +1247,52 @@
     var ui = progressEls();
     if (!ui) return;
     var pct = d > 0 && isFinite(d) ? Math.max(0, Math.min(1, t / d)) : 0;
-    if (ui.fill) ui.fill.style.transform = "scaleX(" + pct.toFixed(5) + ")";
-    if (ui.knob && ui.track) {
-      var w = ui.track.clientWidth || 0;
-      var x = Math.max(0, pct * Math.max(0, w - 11));
-      ui.knob.style.transform = "translate3d(" + x + "px,-50%,0)";
-    }
+    var xform = "translate3d(" + (pct * 100).toFixed(4) + "%,0,0)";
+    var scale = "scaleX(" + pct.toFixed(5) + ")";
+    if (ui.fill && lastProgPct !== pct) ui.fill.style.transform = scale;
+    if (ui.shift && lastProgPct !== pct) ui.shift.style.transform = xform;
+    lastProgPct = pct;
     var curTxt = fmt(t);
     var durTxt = fmt(d || 0);
     if (ui.cur && ui.cur.textContent !== curTxt) ui.cur.textContent = curTxt;
     if (ui.dur && ui.dur.textContent !== durTxt) ui.dur.textContent = durTxt;
   }
-  function startProgressClock() {
-    if (progressClock) return;
-    syncProgressSample();
-    function tick() {
-      progressClock = requestAnimationFrame(tick);
-      if (!state.sessionActive) {
-        stopProgressClock();
-        return;
-      }
-      if (seekLock) return;
-      var t = currentProgressTime();
-      state.current = t;
-      applyProgressVisual(t, Number(state.duration) || 0);
+  function progressClockTick() {
+    if (!state.sessionActive) {
+      stopProgressClock();
+      return;
     }
-    progressClock = requestAnimationFrame(tick);
+    if (seekLock) return;
+    var now = performance.now();
+    if (now - lastProgPaintAt < PROG_FRAME_MS * 0.35) return;
+    lastProgPaintAt = now;
+    var t = currentProgressTime();
+    state.current = t;
+    applyProgressVisual(t, Number(state.duration) || 0);
+  }
+  function startProgressClock() {
+    if (progressClock || progressTimer) {
+      progressClockTick();
+      return;
+    }
+    syncProgressSample(true);
+    lastProgPaintAt = 0;
+    function rafLoop() {
+      progressClock = requestAnimationFrame(rafLoop);
+      progressClockTick();
+    }
+    function hzLoop() {
+      progressTimer = setTimeout(hzLoop, PROG_FRAME_MS);
+      progressClockTick();
+    }
+    progressClock = requestAnimationFrame(rafLoop);
+    progressTimer = setTimeout(hzLoop, PROG_FRAME_MS);
   }
   function stopProgressClock() {
     if (progressClock) cancelAnimationFrame(progressClock);
+    if (progressTimer) clearTimeout(progressTimer);
     progressClock = 0;
+    progressTimer = 0;
   }
   function requestProgressPaint() {
     applyProgressVisual(currentProgressTime(), Number(state.duration) || 0);
@@ -1284,7 +1317,7 @@
         if (track) track.style.setProperty("--dqp-fill", fillPct);
       }
     }
-    applyProgressVisual(Number(state.current) || 0, Number(state.duration) || 0);
+    if (!state.playing) applyProgressVisual(Number(state.current) || 0, Number(state.duration) || 0);
   }
   function paintChrome() {
     var root = playerRoot();
@@ -1888,12 +1921,13 @@
         var d = Number(a.duration) || Number(state.duration) || 0;
         if (d) a.currentTime = (Number(range.value) / 1000) * d;
         state.current = a.currentTime || 0;
-        syncProgressSample();
+        syncProgressSample(true);
+        lastProgPct = -1;
         applyProgressVisual(state.current, d);
       });
       range.addEventListener("change", function () {
         seekLock = false;
-        syncProgressSample();
+        syncProgressSample(true);
         if (state.playing) startProgressClock();
         saveState();
       });
@@ -1942,7 +1976,7 @@
         '<div class="dqp-top-track">' +
           '<span class="dqp-top-groove" aria-hidden="true"></span>' +
           '<span class="dqp-top-fill" aria-hidden="true"></span>' +
-          '<span class="dqp-top-knob" aria-hidden="true"></span>' +
+          '<span class="dqp-top-knob-rail" aria-hidden="true"><span class="dqp-top-knob-shift"><span class="dqp-top-knob"></span></span></span>' +
           '<input class="dqp-top-range" data-dqp-mini="seek" type="range" min="0" max="1000" value="0" aria-label="Fortschritt">' +
         "</div>" +
         '<span class="dqp-top-time" data-dqp-mini-dur>00:00</span>' +
@@ -1966,7 +2000,7 @@
     }
     if (
       !el.querySelector(".dqp-top-track") ||
-      !el.querySelector(".dqp-top-knob") ||
+      !el.querySelector(".dqp-top-knob-shift") ||
       !el.querySelector("[data-dqp-mini=seek]") ||
       !el.querySelector("[data-dqp-learn]") ||
       !el.querySelector(".dqp-learn-lab") ||
