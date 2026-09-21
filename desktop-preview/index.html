@@ -1123,6 +1123,162 @@ button,input,select{font:inherit}
   .pdf-reader-frame-wrap{height:72vh;min-height:560px;border-radius:24px}
 }
 
+
+/* Inline PDF reader v11 — vertical continuous reading */
+.pdf-reader-shell{
+  width:min(1180px,100%)!important;
+  margin:0 auto!important
+}
+.pdf-reader-toolbar{
+  position:sticky;
+  top:88px;
+  z-index:36;
+  min-height:62px;
+  margin:0 0 10px;
+  padding:10px 16px!important;
+  border:0!important;
+  border-radius:24px;
+  background:
+    radial-gradient(420px 76px at 14% 20%,rgba(255,255,255,.84),transparent 70%),
+    linear-gradient(100deg,rgba(245,237,223,.94),rgba(255,254,250,.98) 56%,rgba(239,228,207,.80));
+  box-shadow:0 10px 28px rgba(70,50,23,.075);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px)
+}
+.pdf-reader-toolbar-left{min-width:0}
+.pdf-reader-toolbar-left .eyebrow{margin-bottom:3px}
+.pdf-reader-toolbar-left h3{
+  max-width:620px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  margin:0!important;
+  font:500 16px/1.25 var(--serif)!important
+}
+.pdf-reader-actions{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  margin-left:auto
+}
+.pdf-action{
+  height:36px;
+  padding:0 13px;
+  border:0;
+  border-radius:18px;
+  background:rgba(255,254,250,.64);
+  color:#604b27;
+  font-size:8px;
+  font-weight:850;
+  letter-spacing:.075em;
+  text-transform:uppercase;
+  cursor:pointer;
+  box-shadow:inset 0 0 0 1px rgba(152,116,57,.10);
+  transition:background .2s ease,transform .2s ease,box-shadow .2s ease
+}
+.pdf-action:hover{
+  transform:translateY(-1px);
+  background:#fffdf7;
+  box-shadow:inset 0 0 0 1px rgba(152,116,57,.22),0 5px 14px rgba(72,51,22,.07)
+}
+.pdf-page-status{
+  min-width:82px;
+  text-align:right;
+  color:#837869;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.055em
+}
+.pdf-scroll-reader{
+  position:relative;
+  height:min(78vh,980px);
+  min-height:660px;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  scroll-behavior:smooth;
+  padding:18px 18px 34px;
+  border-radius:30px;
+  background:
+    radial-gradient(800px 320px at 50% 0%,rgba(255,255,255,.68),transparent 70%),
+    linear-gradient(180deg,#f6f0e4,#eee2ce);
+  box-shadow:inset 0 0 0 1px rgba(91,66,31,.06),0 18px 48px rgba(60,43,20,.07)
+}
+.pdf-scroll-reader::-webkit-scrollbar{width:9px}
+.pdf-scroll-reader::-webkit-scrollbar-track{background:transparent}
+.pdf-scroll-reader::-webkit-scrollbar-thumb{
+  background:rgba(133,103,54,.25);
+  border-radius:999px;
+  border:3px solid transparent;
+  background-clip:padding-box
+}
+.pdf-pages{
+  width:min(900px,100%);
+  margin:0 auto;
+  display:grid;
+  gap:18px
+}
+.pdf-page{
+  position:relative;
+  background:#fff;
+  box-shadow:0 8px 26px rgba(51,37,19,.10);
+  border-radius:3px;
+  overflow:hidden
+}
+.pdf-page canvas{
+  display:block;
+  width:100%;
+  height:auto;
+  background:#fff
+}
+.pdf-page-number{
+  position:absolute;
+  right:10px;
+  bottom:7px;
+  min-width:25px;
+  padding:3px 7px;
+  border-radius:999px;
+  background:rgba(37,31,24,.62);
+  color:#fff;
+  font-size:7px;
+  text-align:center;
+  opacity:.46
+}
+.pdf-loading{
+  min-height:560px;
+  display:grid;
+  place-items:center;
+  padding:30px;
+  text-align:center;
+  color:#756b5e;
+  font:500 15px/1.5 var(--serif)
+}
+.pdf-loading-progress{
+  display:block;
+  margin-top:8px;
+  color:#9a7b42;
+  font:800 8px/1.3 var(--sans);
+  letter-spacing:.08em;
+  text-transform:uppercase
+}
+.pdf-reader-meta{
+  margin-top:10px!important;
+  justify-content:center
+}
+@media(max-width:900px){
+ .pdf-reader-toolbar{top:124px;border-radius:20px;padding:9px 11px!important}
+ .pdf-reader-toolbar-left h3{max-width:360px}
+ .pdf-scroll-reader{height:72vh;min-height:520px;border-radius:24px;padding:12px 10px 26px}
+ .pdf-pages{gap:12px}
+}
+@media(max-width:600px){
+ .pdf-reader-toolbar{grid-template-columns:1fr;display:grid;gap:8px}
+ .pdf-reader-actions{margin-left:0;width:100%}
+ .pdf-action{flex:1}
+ .pdf-page-status{min-width:68px}
+ .pdf-scroll-reader{height:70vh}
+}
+
 </style>
 </head>
 <body>
@@ -1329,6 +1485,7 @@ button,input,select{font:inherit}
   if(key==="einstellungen")initSettings();
   initRealPage(key);
   initSmartBrowse(key);
+  if(key==="werk")initPdfReaderPage();
  }
  function navigate(url,push){
   if(push!==false)history.pushState({desktop:true},"",url);
@@ -2398,6 +2555,137 @@ button,input,select{font:inherit}
   }
   input.oninput=paint;paint()
  };
+
+ // --- Inline PDF reader v11 ---
+ var PDFJS_CDN="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+ var PDFJS_WORKER_CDN="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+ var pdfJsPromise=null;
+ function loadPdfJs(){
+  if(window.pdfjsLib)return Promise.resolve(window.pdfjsLib);
+  if(pdfJsPromise)return pdfJsPromise;
+  pdfJsPromise=new Promise(function(resolve,reject){
+   var sc=document.createElement("script");
+   sc.src=PDFJS_CDN;sc.async=true;
+   sc.onload=function(){
+    if(!window.pdfjsLib){reject(new Error("PDF.js nicht geladen"));return}
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc=PDFJS_WORKER_CDN;
+    resolve(window.pdfjsLib)
+   };
+   sc.onerror=function(){reject(new Error("PDF.js konnte nicht geladen werden"))};
+   document.head.appendChild(sc)
+  });
+  return pdfJsPromise
+ }
+ function pdfFilename(pub){
+  var raw=(pub&&pub.pdfUrl||"").split("/").pop()||"dar-al-tawhid.pdf";
+  try{raw=decodeURIComponent(raw)}catch(e){}
+  return raw.toLowerCase().endsWith(".pdf")?raw:raw+".pdf"
+ }
+ function absolutePdfUrl(url){return new URL(url,location.origin).href}
+ function downloadPdf(pub){
+  if(!pub||!pub.pdfUrl)return;
+  var a=document.createElement("a");
+  a.href=pub.pdfUrl;
+  a.download=pdfFilename(pub);
+  a.rel="noopener";
+  document.body.appendChild(a);a.click();a.remove()
+ }
+ async function sharePdf(pub){
+  if(!pub||!pub.pdfUrl)return;
+  var url=absolutePdfUrl(pub.pdfUrl),title=pub.title||"DĀR AL TAWḤĪD PDF";
+  var btn=document.getElementById("pdfShareBtn");
+  if(btn)btn.textContent="Wird vorbereitet …";
+  try{
+   if(navigator.share){
+    try{
+     var res=await fetch(pub.pdfUrl,{cache:"force-cache"});
+     if(res.ok){
+      var blob=await res.blob();
+      var file=new File([blob],pdfFilename(pub),{type:"application/pdf"});
+      if(!navigator.canShare||navigator.canShare({files:[file]})){
+       await navigator.share({title:title,files:[file]});
+       return
+      }
+     }
+    }catch(e){}
+    await navigator.share({title:title,url:url});
+    return
+   }
+   if(navigator.clipboard){await navigator.clipboard.writeText(url);if(btn)btn.textContent="Link kopiert";setTimeout(function(){if(btn)btn.textContent="Teilen"},1400);return}
+  }catch(e){}
+  if(btn)btn.textContent="Teilen"
+ }
+ function pdfReaderHtml(pub){
+  var pdf=pub.pdfUrl||"";
+  return '<section class="section parchment reveal"><div class="pdf-reader-shell">'+
+   '<div class="pdf-reader-toolbar"><div class="pdf-reader-toolbar-left"><div class="eyebrow">PDF-LESER</div><h3>'+escBook(pub.title)+'</h3></div>'+
+   '<div class="pdf-reader-actions"><span id="pdfPageStatus" class="pdf-page-status">—</span><button id="pdfShareBtn" class="pdf-action" type="button">Teilen</button><button id="pdfDownloadBtn" class="pdf-action" type="button">Download</button></div></div>'+
+   (pdf?'<div id="pdfScrollReader" class="pdf-scroll-reader"><div id="pdfPages" class="pdf-pages"><div class="pdf-loading">PDF wird für die Leseseite vorbereitet.<span id="pdfLoadProgress" class="pdf-loading-progress">Laden …</span></div></div></div>':'<div class="loading-line">Für dieses Werk ist derzeit keine PDF-Datei hinterlegt.</div>')+
+   '<div class="pdf-reader-meta"><span>Version '+escBook(pub.version||"—")+'</span><span>'+escBook(pub.publisher||"DĀR AL TAWḤĪD")+'</span><span>'+escBook(pub.publishedAt||"")+'</span>'+(pub.pageCount?'<span>'+Number(pub.pageCount)+' Seiten</span>':"")+(pub.fileSize?'<span>'+escBook(pub.fileSize)+'</span>':"")+'</div>'+
+   '</div></section>'+footer()
+ }
+ renders.werk=function(){
+  var q=new URLSearchParams(location.search),id=q.get("id"),type=q.get("type")||"";
+  var pub=realData.publications.find(function(x){return x.id===id}),book=realData.books.find(function(x){return x.id===id});
+  if(pub||type==="pub"){
+   var x=pub||realData.publications[0];if(!x)return realIntro("WERK","Keine Publikation gefunden.","");
+   return realIntro(x.category||"PUBLIKATION",x.title,x.description||x.subtitle||"DĀR AL TAWḤĪD · "+(x.publishedAt||""))+pdfReaderHtml(x)
+  }
+  var b=book||realData.books[0];if(!b)return realIntro("WERK","Kein Werk gefunden.","");
+  var related=realData.posts.filter(function(pst){return (b.postIds||[]).indexOf(pst.id)>=0}).slice(0,6);
+  return realIntro(b.category||"QUELLENWERK",b.title,b.author||"")+
+   '<section class="section parchment reveal"><div class="detail-page"><div class="detail-main"><div class="fact-grid"><div class="fact-row"><span>Autor</span><b>'+escBook(b.author||"")+'</b></div><div class="fact-row"><span>Kategorie</span><b>'+escBook(b.category||"")+'</b></div><div class="fact-row"><span>Verknüpfte Beiträge</span><b>'+Number(b.postCount||0)+'</b></div><div class="fact-row"><span>Verifikation</span><b>'+escBook(b.verification||"verified")+'</b></div></div><div class="list-lines" style="margin-top:22px">'+related.map(compactPostLink).join("")+'</div></div><aside class="related-editorial"><div class="related-editorial-head">Zitierte Gelehrte</div><div style="font:500 16px/1.5 var(--serif);color:#514a41">'+escBook((b.quotedScholars||[]).slice(0,6).join(" · ")||b.author||"")+'</div></aside></div></section>'+footer()
+ };
+ async function renderPdfPages(pub){
+  var host=document.getElementById("pdfPages"),scroll=document.getElementById("pdfScrollReader"),status=document.getElementById("pdfPageStatus"),progress=document.getElementById("pdfLoadProgress");
+  if(!host||!scroll||!pub||!pub.pdfUrl)return;
+  try{
+   var lib=await loadPdfJs(),task=lib.getDocument({url:pub.pdfUrl}),pdf=await task.promise;
+   host.innerHTML="";
+   if(status)status.textContent="Seite 1 / "+pdf.numPages;
+   var pageEls=[];
+   for(var n=1;n<=pdf.numPages;n++){
+    if(progress)progress.textContent="Seite "+n+" / "+pdf.numPages;
+    var page=await pdf.getPage(n);
+    var base=page.getViewport({scale:1});
+    var cssWidth=Math.min(900,Math.max(320,scroll.clientWidth-36));
+    var cssScale=cssWidth/base.width;
+    var density=Math.min(2,window.devicePixelRatio||1.5);
+    var renderViewport=page.getViewport({scale:cssScale*density});
+    var wrap=document.createElement("article");wrap.className="pdf-page";wrap.setAttribute("data-pdf-page",String(n));
+    var canvas=document.createElement("canvas"),ctx=canvas.getContext("2d",{alpha:false});
+    canvas.width=Math.floor(renderViewport.width);canvas.height=Math.floor(renderViewport.height);
+    canvas.style.aspectRatio=renderViewport.width+" / "+renderViewport.height;
+    var badge=document.createElement("span");badge.className="pdf-page-number";badge.textContent=String(n);
+    wrap.appendChild(canvas);wrap.appendChild(badge);host.appendChild(wrap);pageEls.push(wrap);
+    await page.render({canvasContext:ctx,viewport:renderViewport}).promise
+   }
+   var visiblePage=1,ticking=false;
+   function updatePage(){
+    ticking=false;
+    var top=scroll.scrollTop+24,best=1,bestDist=Infinity;
+    pageEls.forEach(function(el,i){var d=Math.abs(el.offsetTop-top);if(d<bestDist){bestDist=d;best=i+1}});
+    if(best!==visiblePage){visiblePage=best;if(status)status.textContent="Seite "+visiblePage+" / "+pdf.numPages}
+   }
+   scroll.addEventListener("scroll",function(){if(!ticking){ticking=true;requestAnimationFrame(updatePage)}},{passive:true});
+   updatePage()
+  }catch(err){
+   host.innerHTML='<div class="pdf-loading">Der integrierte PDF-Leser konnte die Datei nicht darstellen.<span class="pdf-loading-progress">Du kannst die PDF oben über Download speichern.</span></div>'
+  }
+ }
+ function initPdfReaderPage(){
+  if(currentPage()!=="werk")return;
+  var q=new URLSearchParams(location.search),id=q.get("id"),type=q.get("type")||"";
+  var pub=realData.publications.find(function(x){return x.id===id});
+  if(!pub&&type==="pub")pub=realData.publications[0];
+  if(!pub||!pub.pdfUrl)return;
+  var share=document.getElementById("pdfShareBtn"),download=document.getElementById("pdfDownloadBtn");
+  if(share)share.onclick=function(){sharePdf(pub)};
+  if(download)download.onclick=function(){downloadPdf(pub)};
+  renderPdfPages(pub)
+ }
+ // --- end Inline PDF reader v11 ---
+
  // --- end Fuzzy search + inline reader v10 ---
 
  // --- end Smart browse v9 ---
