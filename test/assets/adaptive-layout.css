@@ -371,9 +371,13 @@ html.dar-test-adaptive[data-nav-rail="1"] {
 }
 
 html.dar-test-adaptive[data-nav-rail="1"] .app,
-html.dar-test-adaptive[data-nav-rail="1"] #appView {
-  padding-left: var(--layout-chrome-left, 16px) !important;
-  padding-right: var(--layout-chrome-right, 72px) !important;
+html.dar-test-adaptive[data-nav-rail="1"] #appView,
+html.dar-test-adaptive[data-nav-rail="1"] .view,
+html.dar-test-adaptive[data-nav-rail="1"] .qov-page,
+html.dar-test-adaptive[data-nav-rail="1"] .home-v380,
+html.dar-test-adaptive[data-nav-rail="1"] .home-v380-shell {
+  padding-left: var(--layout-chrome-left, max(8px, env(safe-area-inset-left, 0px))) !important;
+  padding-right: var(--layout-chrome-right, 64px) !important;
 }
 
 html.dar-test-adaptive[data-nav-rail="1"] #appChromeDock #bottomNav.bottom-nav,
@@ -404,6 +408,7 @@ html.dar-test-adaptive.is-quran-player-route[data-nav-rail="1"] #bottomNav.botto
   gap: 2px !important;
   z-index: 120 !important;
   overflow: hidden !important;
+  isolation: isolate !important;
   box-sizing: border-box !important;
   background: rgba(255,255,255,.04) !important;
   border: 1px solid rgba(255,255,255,.08) !important;
@@ -430,34 +435,68 @@ html.dar-test-adaptive.is-quran-player-route[data-nav-rail="1"] #darQuranPlayer 
   inset: 0 var(--layout-chrome-right, 72px) 0 var(--layout-chrome-left, 16px) !important;
 }
 
+html.dar-test-adaptive[data-nav-rail="1"] {
+  --bottom-tab-capsule-w: 40px;
+  --bottom-tab-capsule-h: 36px;
+}
 html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn {
+  position: relative !important;
   flex: 0 0 auto !important;
   width: 100% !important;
   min-width: 0 !important;
-  max-width: none !important;
+  max-width: 100% !important;
   min-height: 48px !important;
   max-height: none !important;
   height: auto !important;
   margin: 0 !important;
-  padding: 8px 2px !important;
-  gap: 3px !important;
-  border-radius: 0 !important;
+  padding: 6px 2px !important;
+  gap: 2px !important;
+  border-radius: 16px !important;
   background: transparent !important;
   box-shadow: none !important;
   flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
   color: #fff9e5 !important;
-  overflow: visible !important;
+  overflow: hidden !important;
+}
+html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn::before {
+  left: 50% !important;
+  top: 50% !important;
+  width: 40px !important;
+  min-width: 0 !important;
+  max-width: calc(100% - 4px) !important;
+  height: 36px !important;
+  max-height: calc(100% - 4px) !important;
+  transform: translate(-50%, -50%) !important;
+  opacity: 0 !important;
+}
+html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn.active::before,
+html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn.is-pressed::before {
+  opacity: 1 !important;
+}
+html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-pill {
+  display: none !important;
 }
 html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn .nav-icon,
 html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn .nav-icon--emoji {
-  display: block !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   visibility: visible !important;
   opacity: 1 !important;
-  font-size: 20px !important;
+  font-size: 17px !important;
   line-height: 1 !important;
+  width: 22px !important;
+  height: 22px !important;
+  max-width: 22px !important;
+  max-height: 22px !important;
+  overflow: hidden !important;
   color: inherit !important;
   filter: none !important;
   transform: none !important;
+  position: relative !important;
+  z-index: 1 !important;
 }
 
 html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn > span:last-child {

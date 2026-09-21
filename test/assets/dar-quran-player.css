@@ -735,22 +735,32 @@ html.dar-test-adaptive[data-nav-rail="1"] #darQuranMiniPlayer.is-on.player-dim{
   position:fixed !important;
   top:max(0px, env(safe-area-inset-top, 0px), var(--dar-native-safe-top, 0px)) !important;
   bottom:auto !important;
-  left:0 !important;
-  right:var(--layout-chrome-right, 64px) !important;
-  width:auto !important;
+  left:50% !important;
+  right:auto !important;
+  width:min(720px, calc(100% - var(--layout-chrome-left, 8px) - var(--layout-chrome-right, 64px) - 16px)) !important;
   min-width:0 !important;
-  max-width:none !important;
+  max-width:min(720px, calc(100% - var(--layout-chrome-left, 8px) - var(--layout-chrome-right, 64px) - 16px)) !important;
   height:var(--dqp-cap-h, 78px) !important;
   min-height:var(--dqp-cap-h, 78px) !important;
+  max-height:var(--dqp-cap-h, 78px) !important;
   border-radius:0 0 22px 22px !important;
   padding:8px 16px 10px !important;
-  transform:none !important;
+  flex-direction:column !important;
+  transform:translate3d(calc(-50% + (var(--layout-chrome-left, 0px) - var(--layout-chrome-right, 0px)) / 2), 0, 0) !important;
+  -webkit-transform:translate3d(calc(-50% + (var(--layout-chrome-left, 0px) - var(--layout-chrome-right, 0px)) / 2), 0, 0) !important;
   box-sizing:border-box !important;
+  overflow:hidden !important;
 }
-html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] #darQuranMiniPlayer,
-html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] #darQuranMiniPlayer.is-on{
-  left:var(--layout-chrome-left, 64px) !important;
-  right:0 !important;
+html.dar-test-adaptive[data-nav-rail="1"] #darQuranMiniPlayer:not(.is-on){
+  transform:translate3d(calc(-50% + (var(--layout-chrome-left, 0px) - var(--layout-chrome-right, 0px)) / 2), calc(-100% - 24px), 0) !important;
+  -webkit-transform:translate3d(calc(-50% + (var(--layout-chrome-left, 0px) - var(--layout-chrome-right, 0px)) / 2), calc(-100% - 24px), 0) !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+html.dar-test-adaptive[data-nav-rail="1"] #darQuranMiniPlayer .dqp-top-main{
+  flex-direction:row !important;
+  width:100% !important;
 }
 html.dar-test-adaptive[data-nav-rail="1"].is-quran-player-route #darQuranPlayer{
   left:var(--layout-chrome-left,8px) !important;

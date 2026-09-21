@@ -4,7 +4,7 @@
  * Kein Gerätetyp (kein iPhone/iPad/Fold-UA).
  * Visitor: Compact/Medium/Expanded, Bottom-Nav (unverändert).
  * Test: COMPACT / REGULAR / WIDE / EXTRA_WIDE + optionale Seiten-Nav.
- * TEST_COPY v923 — Tabs rechts, Inhalt breit, Player oben
+ * TEST_COPY v925 — Player mittig, Inhalt bis Notch, Tabs in der Kapsel
  */
 (function (global) {
   "use strict";
@@ -237,7 +237,7 @@
       "margin:0 !important;padding:8px 4px !important;" +
       "flex-direction:column !important;justify-content:space-around !important;align-items:stretch !important;gap:2px !important;" +
       "transform:translate3d(0,-50%,0) !important;-webkit-transform:translate3d(0,-50%,0) !important;" +
-      "z-index:120 !important;overflow:visible !important;box-sizing:border-box !important;" +
+      "z-index:120 !important;overflow:hidden !important;isolation:isolate !important;box-sizing:border-box !important;" +
       glass;
 
     Array.prototype.forEach.call(document.querySelectorAll(".bottom-nav"), function (el) {
@@ -258,32 +258,29 @@
   function applyChromeInsets(leading, width, metrics) {
     var root = document.documentElement;
     var pad = 8;
-    var left = leading ? width + pad : 8;
-    var right = leading ? 12 : width + pad;
-    root.style.setProperty("--layout-chrome-left", left + "px");
-    root.style.setProperty("--layout-chrome-right", right + "px");
+    var railReserve = width + pad;
+    var left = leading
+      ? "calc(" + railReserve + "px + env(safe-area-inset-left, 0px))"
+      : "max(8px, env(safe-area-inset-left, 0px), var(--dar-native-safe-left, 0px))";
+    var right = leading
+      ? "max(8px, env(safe-area-inset-right, 0px), var(--dar-native-safe-right, 0px))"
+      : "calc(" + railReserve + "px + env(safe-area-inset-right, 0px))";
+    root.style.setProperty("--layout-chrome-left", left);
+    root.style.setProperty("--layout-chrome-right", right);
     root.style.setProperty("--layout-player-strip", "0px");
     root.classList.remove("dar-player-strip");
+    root.style.setProperty("--bottom-tab-capsule-w", "40px");
+    root.style.setProperty("--bottom-tab-capsule-h", "36px");
 
     var mini = document.getElementById("darQuranMiniPlayer");
-    if (mini) {
-      mini.style.removeProperty("top");
-      mini.style.removeProperty("bottom");
-      mini.style.removeProperty("width");
-      mini.style.removeProperty("height");
-      mini.style.removeProperty("left");
-      mini.style.removeProperty("right");
-      mini.style.removeProperty("max-width");
-      mini.style.removeProperty("min-width");
-      mini.style.removeProperty("transform");
-    }
+    if (mini) mini.style.cssText = "";
     var full = document.getElementById("darQuranPlayer");
     if (full) {
-      full.style.setProperty("left", left + "px", "important");
-      full.style.setProperty("right", right + "px", "important");
-      full.style.setProperty("width", "auto", "important");
-      full.style.setProperty("top", "0", "important");
-      full.style.setProperty("bottom", "0", "important");
+      full.style.removeProperty("left");
+      full.style.removeProperty("right");
+      full.style.removeProperty("width");
+      full.style.removeProperty("top");
+      full.style.removeProperty("bottom");
     }
   }
 
@@ -296,13 +293,12 @@
     root.style.setProperty("--layout-rail-width", "0px");
     root.style.setProperty("--layout-chrome-left", "0px");
     root.style.setProperty("--layout-chrome-right", "0px");
+    root.style.removeProperty("--bottom-tab-capsule-w");
+    root.style.removeProperty("--bottom-tab-capsule-h");
     ["darQuranMiniPlayer", "darQuranPlayer"].forEach(function (id) {
       var el = document.getElementById(id);
       if (!el) return;
-      el.style.removeProperty("left");
-      el.style.removeProperty("right");
-      el.style.removeProperty("width");
-      el.style.removeProperty("max-width");
+      el.style.cssText = "";
     });
     if (document.body && isTestApp()) {
       document.body.style.removeProperty("padding-left");
