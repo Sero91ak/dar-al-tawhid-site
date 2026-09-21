@@ -72,13 +72,6 @@ html[data-fold-dual="1"] .dar-fold[data-fold-mode="dual"] {
   gap: 0;
 }
 
-html.dar-test-adaptive[data-panes="3"] .dar-fold[data-fold-mode="dual"]:has(> .dar-fold__support) {
-  grid-template-columns:
-    clamp(220px, 22%, 300px)
-    minmax(0, 1fr)
-    clamp(220px, 24%, 340px);
-}
-
 html[data-layout="expanded"] .dar-fold[data-fold-mode="dual"] > .dar-fold__rail,
 html.is-fold-dual .dar-fold[data-fold-mode="dual"] > .dar-fold__rail,
 html[data-fold-dual="1"] .dar-fold[data-fold-mode="dual"] > .dar-fold__rail {
