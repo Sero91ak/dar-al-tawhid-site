@@ -51,6 +51,8 @@ Dieser Ordner ist die zentrale Ablage für alle nummerierten Quellenlinks.
 | `q/33` | Iḥsān, Furcht vor Allah, Ikhlāṣ und Tazkiyah | `al-Ḥasan al-Baṣrī` | Der Muʾmin vereint Iḥsān und Furcht; der Munāfiq vereint schlechte Tat und Sicherheit. |
 | `q/34` | ʿAqīdah, Ṣifāt, Tašbīh und Taʿṭīl | `Nuʿaym ibn Ḥammād al-Khuzāʿī` | Wer Allah Seiner Schöpfung ähnlich macht, hat Kufr begangen; wer leugnet, womit Allah Sich selbst beschrieben hat, hat Kufr begangen; Allahs und Seines Gesandten Beschreibung ist kein Tašbīh. |
 
+| `q/35` | ʿĪsā ibn Maryam, Tawaffī, Rafʿ und Nuzūl | `Qurʾān; Prophet ﷺ; Ibn ʿAbbās; al-Ḥasan al-Baṣrī; aṭ-Ṭabarī; aṭ-Ṭaḥāwī; Ibn Baṭṭah; Abū ʿAmr ad-Dānī` | Ein Quellenlink bündelt alle Einzelbelege und trennt den echten Tafsīr-Ikhtilāf über tawaffī von der metaphorischen Ersatzdeutung. |
+
 ## Sonderbereiche
 
 - `q/_registry/` ist nur Verwaltung: Nummerierung, Vorlage und Registry.
