@@ -7,8 +7,8 @@ export default {
     }
 
     if (url.pathname === "/test" || url.pathname === "/test/") {
-      if (url.searchParams.get("dqp") !== "917") {
-        url.searchParams.set("dqp", "917");
+      if (url.searchParams.get("dqp") !== "918") {
+        url.searchParams.set("dqp", "918");
         return Response.redirect(url.toString(), 302);
       }
     }
@@ -22,6 +22,9 @@ export default {
     const path = url.pathname;
     const bust = /\/test\/(index\.html)?$/.test(path)
       || /dar-quran-player\.(js|css)$/.test(path)
+      || /adaptive-layout\.(js|css)$/.test(path)
+      || /fold-split\.(js|css)$/.test(path)
+      || /fold-thumb-nav\.(js|css)$/.test(path)
       || path.endsWith("/test/version.json")
       || path.endsWith("/test/service-worker.js");
     if (!bust || !asset) return asset;

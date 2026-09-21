@@ -1,0 +1,488 @@
+/**
+ * DĀR AL TAWḤĪD — Adaptive Layout System (emergency-safe)
+ * Compact / Medium for foldables. Expanded left-rail disabled.
+ * Layout-only: no theme colors, no font family changes.
+ */
+
+:root,
+html[data-theme] {
+  --layout-content-max: 100%;
+  --layout-reader-max: 100%;
+  --layout-navigation-max: 100%;
+  --layout-card-min: 250px;
+  --layout-page-gutter: clamp(12px, 2.4vw, 28px);
+  --layout-rail-width: 0px;
+  --layout-shell-max: 100%;
+  --layout-form-max: 640px;
+  --layout-dialog-max: 560px;
+  --layout-feed-max: 100%;
+  --library-card-min: 250px;
+  --layout-vv-height: 100dvh;
+  --layout-vv-offset-top: 0px;
+  --layout-segment-gap: 0px;
+}
+
+@media (max-width: 599.98px) {
+  :root,
+  html[data-theme] {
+    --layout-shell-max: 100%;
+    --layout-page-gutter: clamp(10px, 3vw, 16px);
+  }
+}
+
+@media (min-width: 600px) {
+  :root,
+  html[data-theme] {
+    --layout-shell-max: 100%;
+    --layout-content-max: 100%;
+    --layout-reader-max: 100%;
+    --layout-navigation-max: 100%;
+    --layout-page-gutter: clamp(14px, 2.2vw, 28px);
+  }
+}
+
+html[data-layout="compact"],
+html[data-layout="medium"],
+html[data-layout="expanded"] {
+  --layout-shell-max: 100%;
+  /* Content dual-pane uses DarFold — nav rail width stays 0 (bottom nav) */
+  --layout-rail-width: 0px;
+}
+
+@media (min-width: 700px) {
+  :root,
+  html[data-theme],
+  html[data-layout="expanded"] {
+    --layout-content-max: 100%;
+    --layout-reader-max: 100%;
+    --layout-navigation-max: 100%;
+  }
+}
+
+/* Full-bleed shell — no extra gutters (Aug-4 Seitenverhältnis) */
+html[data-layout] .app {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  box-sizing: border-box;
+}
+
+html[data-layout] body.is-feed-fullscreen .app,
+html[data-layout] body.is-ilm-chat-route .app {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Content caps — keep readable columns without empty side fields */
+html[data-layout="medium"] .view,
+html[data-layout="expanded"] .view,
+html[data-layout="medium"] .dua-hub,
+html[data-layout="expanded"] .dua-hub,
+html[data-layout="medium"] .dua-collection-page,
+html[data-layout="expanded"] .dua-collection-page,
+html[data-layout="medium"] .topics-hub,
+html[data-layout="expanded"] .topics-hub,
+html[data-layout="medium"] .topic-collection-page,
+html[data-layout="expanded"] .topic-collection-page,
+html[data-layout="medium"] .qov-page,
+html[data-layout="expanded"] .qov-page,
+html[data-layout="medium"] .quran-topic-page,
+html[data-layout="expanded"] .quran-topic-page,
+html[data-layout="medium"] .books-library-shell,
+html[data-layout="expanded"] .books-library-shell,
+html[data-layout="medium"] .scholars-index,
+html[data-layout="expanded"] .scholars-index,
+html[data-layout="medium"] .prayer-overview,
+html[data-layout="expanded"] .prayer-overview,
+html[data-layout="medium"] .zakat-view,
+html[data-layout="expanded"] .zakat-view,
+html[data-layout="medium"] .account-page,
+html[data-layout="expanded"] .account-page,
+html[data-layout="medium"] .more-page,
+html[data-layout="expanded"] .more-page,
+html[data-layout="medium"] .quiz-home,
+html[data-layout="expanded"] .quiz-home,
+html[data-layout="medium"] .quiz-session,
+html[data-layout="expanded"] .quiz-session,
+html[data-layout="medium"] .profile-box,
+html[data-layout="expanded"] .profile-box,
+html[data-layout="medium"] .book-profile-box,
+html[data-layout="expanded"] .book-profile-box {
+  width: 100%;
+  max-width: var(--layout-content-max);
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+html[data-layout="medium"] .article,
+html[data-layout="expanded"] .article,
+html[data-layout="medium"] .dua-detail-box,
+html[data-layout="expanded"] .dua-detail-box,
+html[data-layout="medium"] .post-reader,
+html[data-layout="expanded"] .post-reader,
+html[data-layout="medium"] .post-body,
+html[data-layout="expanded"] .post-body,
+html[data-layout="medium"] .quran-ayah-list,
+html[data-layout="expanded"] .quran-ayah-list,
+html[data-layout="medium"] .quran-surah-head,
+html[data-layout="expanded"] .quran-surah-head,
+html[data-layout="medium"] .quran-reader-shell,
+html[data-layout="expanded"] .quran-reader-shell,
+html[data-layout="medium"] .quiz-shell,
+html[data-layout="expanded"] .quiz-shell {
+  max-width: var(--layout-reader-max);
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+html[data-layout="medium"] .dua-theme-grid,
+html[data-layout="medium"] .topics-theme-grid,
+html[data-layout="expanded"] .dua-theme-grid,
+html[data-layout="expanded"] .topics-theme-grid {
+  display: grid !important;
+  flex-direction: unset !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  max-width: var(--layout-content-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 900px) {
+  html[data-layout="medium"] .dua-theme-grid,
+  html[data-layout="medium"] .topics-theme-grid,
+  html[data-layout="expanded"] .dua-theme-grid,
+  html[data-layout="expanded"] .topics-theme-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+html[data-layout="medium"] .lib-grid,
+html[data-layout="expanded"] .lib-grid,
+html[data-layout="medium"] .books-library-list,
+html[data-layout="expanded"] .books-library-list {
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--library-card-min, 220px)), 1fr)
+  ) !important;
+}
+
+html[data-layout="medium"] #folderGrid.folder-grid,
+html[data-layout="medium"] .folder-grid,
+html[data-layout="medium"] #latestGrid.latest-grid,
+html[data-layout="medium"] .latest-grid,
+html[data-layout="expanded"] #folderGrid.folder-grid,
+html[data-layout="expanded"] .folder-grid,
+html[data-layout="expanded"] #latestGrid.latest-grid,
+html[data-layout="expanded"] .latest-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+@media (min-width: 960px) {
+  html[data-layout="medium"] #folderGrid.folder-grid,
+  html[data-layout="medium"] #latestGrid.latest-grid,
+  html[data-layout="expanded"] #folderGrid.folder-grid,
+  html[data-layout="expanded"] #latestGrid.latest-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+html[data-layout="medium"] .post-intro-dialog,
+html[data-layout="expanded"] .post-intro-dialog,
+html[data-layout="medium"] .modal-dialog,
+html[data-layout="expanded"] .modal-dialog,
+html[data-layout="medium"] .app-update-dialog,
+html[data-layout="expanded"] .app-update-dialog,
+html[data-layout="medium"] .sheet-panel,
+html[data-layout="expanded"] .sheet-panel,
+html[data-layout="medium"] .qov-sheet,
+html[data-layout="expanded"] .qov-sheet {
+  width: min(var(--layout-dialog-max), calc(100% - 2 * var(--layout-page-gutter)));
+  max-width: var(--layout-dialog-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Bottom nav: centered on Fold/tablet — NEVER left rail */
+html[data-theme][data-layout="medium"] #appChromeDock #bottomNav.bottom-nav,
+html[data-theme][data-layout="medium"] #bottomNav.bottom-nav,
+html[data-layout="medium"] #appChromeDock #bottomNav.bottom-nav,
+html[data-layout="medium"] #bottomNav.bottom-nav,
+html[data-theme][data-layout="expanded"] #appChromeDock #bottomNav.bottom-nav,
+html[data-theme][data-layout="expanded"] #bottomNav.bottom-nav,
+html[data-layout="expanded"] #appChromeDock #bottomNav.bottom-nav,
+html[data-layout="expanded"] #bottomNav.bottom-nav {
+  left: 50% !important;
+  right: auto !important;
+  top: auto !important;
+  width: min(var(--layout-navigation-max), calc(100vw - 28px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px))) !important;
+  max-width: var(--layout-navigation-max) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  transform: translateX(-50%) !important;
+  -webkit-transform: translateX(-50%) !important;
+  flex-direction: row !important;
+  bottom: calc(max(7px, calc(env(safe-area-inset-bottom) - 18px)) + 3mm) !important;
+  padding: 6px 8px !important;
+  border-radius: 999px !important;
+}
+
+html[data-layout="medium"] body.has-bottom-nav,
+html[data-layout="expanded"] body.has-bottom-nav {
+  padding-left: 0 !important;
+  padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+html[data-layout="medium"] body.has-bottom-nav .float-actions,
+html[data-layout="expanded"] body.has-bottom-nav .float-actions {
+  bottom: calc(76px + 0.5cm + max(0px, calc(env(safe-area-inset-bottom) - 22px)) + 3mm);
+}
+
+html.adaptive-keyboard-open #bottomNav.bottom-nav {
+  bottom: max(8px, calc(var(--layout-vv-offset-top, 0px) + 8px)) !important;
+}
+
+html[data-layout] body {
+  overflow-x: hidden;
+}
+
+html[data-layout] .app,
+html[data-layout] .view {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* v624 · Fold open / tablet landscape — wide grids, full-bleed shell */
+html[data-orientation="landscape"][data-layout="medium"] .app,
+html.is-layout-landscape[data-layout="medium"] .app {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+@media (orientation: landscape) and (min-width: 600px) {
+  html[data-layout="medium"] #folderGrid.folder-grid,
+  html[data-layout="medium"] .folder-grid,
+  html[data-layout="medium"] #latestGrid.latest-grid,
+  html[data-layout="medium"] .latest-grid,
+  html[data-layout="medium"] .dua-theme-grid,
+  html[data-layout="medium"] .topics-theme-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  html[data-layout="medium"] .view,
+  html[data-layout="medium"] .dua-hub,
+  html[data-layout="medium"] .topics-hub,
+  html[data-layout="medium"] .qov-page,
+  html[data-layout="medium"] .books-library-shell,
+  html[data-layout="medium"] .more-page,
+  html[data-layout="medium"] .account-page {
+    max-width: 100%;
+  }
+}
+
+@media (orientation: landscape) and (min-width: 900px) {
+  html[data-layout="medium"] #folderGrid.folder-grid,
+  html[data-layout="medium"] .folder-grid,
+  html[data-layout="medium"] #latestGrid.latest-grid,
+  html[data-layout="medium"] .latest-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-layout] .app,
+  html[data-layout] #bottomNav.bottom-nav,
+  html[data-layout] .view {
+    transition: none !important;
+  }
+}
+
+/* —— Test adaptive tokens + side rail (visitor CSS oben unverändert) —— */
+html.dar-test-adaptive {
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 18px;
+  --space-xl: 28px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --divider-thickness: 1px;
+  --touch-min: 44px;
+  --icon-sm: 18px;
+  --layout-rail-width: 0px;
+  --layout-type-scale: 1;
+  --font-min: 12px;
+  --font-pref: 15px;
+  --font-max: 18px;
+}
+
+html.dar-test-adaptive[data-density="wide"] {
+  --font-pref: 16px;
+}
+html.dar-test-adaptive[data-density="extra_wide"] {
+  --font-pref: 17px;
+}
+
+html.dar-test-adaptive .app,
+html.dar-test-adaptive .view,
+html.dar-test-adaptive [data-layout] .app {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+html.dar-test-adaptive img,
+html.dar-test-adaptive video {
+  max-width: 100%;
+  height: auto;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"] body.has-bottom-nav {
+  padding-bottom: 0 !important;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"] .app,
+html.dar-test-adaptive[data-nav-rail="1"] #appView,
+html.dar-test-adaptive[data-nav-rail="1"] #appView.view,
+html.dar-test-adaptive[data-nav-rail="1"] .top-shell,
+html.dar-test-adaptive[data-nav-rail="1"] .home-v380,
+html.dar-test-adaptive[data-nav-rail="1"] .home-v380-shell {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  box-sizing: border-box !important;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="trailing"] .app,
+html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="trailing"] #appView {
+  padding-right: var(--layout-rail-width, 56px) !important;
+  padding-left: 0 !important;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] .app,
+html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] #appView {
+  padding-left: var(--layout-rail-width, 56px) !important;
+  padding-right: 0 !important;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"] #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-adaptive[data-nav-rail="1"] #bottomNav.bottom-nav,
+html.dar-test-adaptive[data-theme][data-nav-rail="1"] #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-adaptive[data-theme][data-nav-rail="1"] #bottomNav.bottom-nav,
+html.dar-test-adaptive.is-quran-player-route[data-nav-rail="1"] #bottomNav.bottom-nav {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  position: fixed !important;
+  width: var(--layout-rail-width, 56px) !important;
+  min-width: var(--layout-rail-width, 56px) !important;
+  max-width: var(--layout-rail-width, 56px) !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  max-height: 100dvh !important;
+  transform: translate3d(0,0,0) !important;
+  -webkit-transform: translate3d(0,0,0) !important;
+  flex-direction: column !important;
+  border-radius: 0 !important;
+  padding: 8px 4px !important;
+  gap: 2px !important;
+  z-index: 80 !important;
+  background: color-mix(in srgb, var(--bg, #12110f) 94%, #000) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  transition: left .28s ease, right .28s ease, width .28s ease !important;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] #bottomNav.bottom-nav,
+html.dar-test-adaptive[data-theme][data-nav-rail="1"][data-nav-placement="leading"] #bottomNav.bottom-nav {
+  left: 0 !important;
+  right: auto !important;
+  border-right: 1px solid color-mix(in srgb, var(--gold2, #efd78e) 22%, transparent) !important;
+  border-left: 0 !important;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="trailing"] #bottomNav.bottom-nav,
+html.dar-test-adaptive[data-theme][data-nav-rail="1"][data-nav-placement="trailing"] #bottomNav.bottom-nav,
+html.dar-test-adaptive[data-nav-rail="1"]:not([data-nav-placement]) #bottomNav.bottom-nav {
+  right: 0 !important;
+  left: auto !important;
+  border-left: 1px solid color-mix(in srgb, var(--gold2, #efd78e) 22%, transparent) !important;
+  border-right: 0 !important;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"] #darQuranMiniPlayer,
+html.dar-test-adaptive[data-nav-rail="1"] #darQuranPlayer {
+  left: var(--layout-chrome-left, 0px) !important;
+  right: var(--layout-chrome-right, 56px) !important;
+  width: auto !important;
+  max-width: none !important;
+}
+
+html.dar-test-adaptive.is-quran-player-route[data-nav-rail="1"] #darQuranPlayer {
+  display: grid !important;
+  inset: 0 var(--layout-chrome-right, 56px) 0 var(--layout-chrome-left, 0px) !important;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn {
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: var(--touch-min) !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 6px 2px !important;
+  gap: 2px !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn > span:last-child {
+  font-size: clamp(8px, 1.6vw, 10px) !important;
+  line-height: 1.15 !important;
+  white-space: normal !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100%;
+}
+
+html.dar-test-adaptive[data-nav-collapsed="1"] #bottomNav .bottom-nav-btn > span:last-child {
+  display: none !important;
+}
+
+html.dar-test-adaptive .dar-adaptive-rail-toggle {
+  flex: 0 0 auto;
+  min-height: 36px;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--gold2, #efd78e);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"] .float-actions {
+  right: calc(var(--layout-rail-width, 56px) + 10px + env(safe-area-inset-right, 0px));
+}
+
+html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] .float-actions {
+  right: calc(10px + env(safe-area-inset-right, 0px));
+}
+
+@media (horizontal-viewport-segments: 2) {
+  html.dar-test-adaptive.is-fold-dual .dar-fold[data-fold-mode="dual"] {
+    grid-template-columns: env(viewport-segment-width 0 0, 34%) minmax(0, 1fr);
+  }
+}
