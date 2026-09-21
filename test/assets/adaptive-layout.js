@@ -1,36 +1,47 @@
 /**
- * DĀR AL TAWḤĪD — Adaptive Layout Engine
- * Größenbasiert: Breite + Höhe + Aspekt + Safe Area + Fenster.
- * Kein Gerätetyp (kein iPhone/iPad/Fold-UA).
- * Visitor: Compact/Medium/Expanded, Bottom-Nav (unverändert).
- * Test: COMPACT / REGULAR / WIDE / EXTRA_WIDE + optionale Seiten-Nav.
- * TEST_COPY v925 — Player mittig, Inhalt bis Notch, Tabs in der Kapsel
+ * DĀR AL TAWḤĪD — Adaptive Layout Engine (Test)
+ * Fensterbasiert: Breite, Höhe, Aspekt, Safe Area, Fold/Hinge, Split-Screen.
+ * Kein Gerätetyp, keine Modellnamen, keine festen Displayauflösungen.
+ * Visitor bleibt unberührt (isTestApp-Gating).
+ * TEST_COPY v930 — AdaptiveAppShell + Tokens + Nav-Morph + Multi-Pane
  */
 (function (global) {
   "use strict";
 
-  var COMPACT_MAX = 599;
-  var EXPANDED_MIN = 700;
-  var EXPANDED_PORTRAIT_MIN = 840;
-  var EXPANDED_MIN_HEIGHT = 480;
-  var WIDE_MIN = 1000;
-  var EXTRA_WIDE_MIN = 1100;
-  var PANE_MIN = 280;
-  var RAIL_PREF = 56;
-  var RAIL_COLLAPSED = 44;
-  var FLOAT_EDGE = 4;
-  var PLAYER_STRIP = 64;
+  var T = {
+    COMPACT_MAX: 599,
+    REGULAR_MIN: 600,
+    EXPANDED_MIN: 700,
+    EXPANDED_PORTRAIT_MIN: 840,
+    WIDE_MIN: 1000,
+    EXTRA_WIDE_MIN: 1100,
+    PANE_MIN: 280,
+    DUAL_MIN_HEIGHT: 520,
+    RAIL_MIN_WIDTH: 620,
+    RAIL_MIN_HEIGHT: 300,
+    RAIL_PREF: 56,
+    RAIL_COLLAPSED: 44,
+    FLOAT_EDGE: 10,
+    NAV_PAD: 8,
+    TOUCH_MIN: 44,
+    ANIM_MS: 280,
+    READER_MAX: "42rem",
+    FORM_MAX: "40rem",
+  };
+
   var PLACE_KEY = "dar_sidebar_placement";
   var COLLAPSE_KEY = "dar_sidebar_collapsed";
 
   var currentMode = "";
   var currentDensity = "";
   var currentRail = false;
+  var lastState = null;
   var rafId = 0;
   var started = false;
   var resizeObserver = null;
   var orientTimers = [];
   var savedScrollY = 0;
+  var navReady = false;
 
   function isTestApp() {
     try {
@@ -61,56 +72,93 @@
     return { width: w, height: h, offsetTop: offsetTop, aspect: aspect };
   }
 
-  function isDualViewport(width, height) {
-    var w = Number(width);
-    var h = Number(height);
-    if (!Number.isFinite(w)) w = 0;
-    if (!Number.isFinite(h)) h = 0;
-    if (isTestApp()) {
-      if (w < EXPANDED_MIN) return false;
-      if (w < PANE_MIN * 2) return false;
-      return true;
-    }
-    if (w < EXPANDED_MIN) return false;
-    if (w >= h) return true;
-    if (w >= EXPANDED_PORTRAIT_MIN) return true;
-    return false;
+  function readViewportSegments() {
+    try {
+      if (global.matchMedia && global.matchMedia("(horizontal-viewport-segments: 3)").matches) {
+        return 3;
+      }
+    } catch (e) {}
+    try {
+      if (global.matchMedia && global.matchMedia("(horizontal-viewport-segments: 2)").matches) {
+        return 2;
+      }
+    } catch (e2) {}
+    try {
+      var segs = global.visualViewport && global.visualViewport.segments;
+      if (segs && segs.length >= 2) return segs.length;
+    } catch (e3) {}
+    return 1;
   }
 
-  function resolveLayoutMode(width, height) {
-    var w = Number(width) || 0;
-    var h = Number(height) || 0;
-    if (isTestApp()) {
-      var d = resolveDensity(w, h);
-      if (d === "extra_wide") return "expanded";
-      if (d === "wide") return "expanded";
-      if (d === "regular") return "medium";
-      return "compact";
-    }
-    if (w < 600) return "compact";
-    if (isDualViewport(w, h) && (h >= EXPANDED_MIN_HEIGHT || w >= h || w >= EXPANDED_PORTRAIT_MIN)) {
-      return "expanded";
-    }
-    return "medium";
+  function readHinge() {
+    var segs = readViewportSegments();
+    var regions = [];
+    var start = 0;
+    var gap = 0;
+    try {
+      var vs = global.visualViewport && global.visualViewport.segments;
+      if (vs && vs.length >= 2) {
+        segs = vs.length;
+        var i;
+        for (i = 0; i < vs.length - 1; i++) {
+          var a = vs[i];
+          var b = vs[i + 1];
+          var s = Math.round(a.x + a.width);
+          var g = Math.max(0, Math.round(b.x - s));
+          regions.push({ start: s, gap: g, index: i });
+        }
+        start = regions[0].start;
+        gap = regions[0].gap;
+      }
+    } catch (e) {}
+    return { segments: segs, start: start, gap: gap, regions: regions };
   }
 
   function resolveDensity(width, height) {
     var w = Number(width) || 0;
     var h = Number(height) || 0;
-    if (w < 600) return "compact";
-    if (w >= EXTRA_WIDE_MIN && w >= PANE_MIN * 3) return "extra_wide";
-    if (w >= WIDE_MIN && (w >= h || w >= 1000)) return "wide";
-    if (w >= 600) return "regular";
+    if (w < T.REGULAR_MIN) return "compact";
+    if (w >= T.EXTRA_WIDE_MIN && w >= T.PANE_MIN * 3) return "extra_wide";
+    if (w >= T.WIDE_MIN && (w >= h || w >= T.WIDE_MIN)) return "wide";
+    if (w >= T.REGULAR_MIN) return "regular";
     return "compact";
+  }
+
+  function resolveLayoutMode(width, height) {
+    var w = Number(width) || 0;
+    var h = Number(height) || 0;
+    var d = resolveDensity(w, h);
+    if (isTestApp()) {
+      if (d === "extra_wide" || d === "wide") return "expanded";
+      if (d === "regular") return "medium";
+      return "compact";
+    }
+    if (w < T.REGULAR_MIN) return "compact";
+    if (isDualViewport(w, h) && (h >= T.DUAL_MIN_HEIGHT || w >= h || w >= T.EXPANDED_PORTRAIT_MIN)) {
+      return "expanded";
+    }
+    return "medium";
+  }
+
+  function isDualViewport(width, height) {
+    var w = Number(width) || 0;
+    var h = Number(height) || 0;
+    if (w < T.PANE_MIN * 2) return false;
+    var hinge = readHinge();
+    if (hinge.segments >= 2 && w >= T.PANE_MIN * 2) return true;
+    if (h < T.DUAL_MIN_HEIGHT && hinge.segments < 2) return false;
+    if (w >= T.EXPANDED_PORTRAIT_MIN && h >= T.DUAL_MIN_HEIGHT) return true;
+    if (w >= T.EXPANDED_MIN && h >= T.DUAL_MIN_HEIGHT) return true;
+    return false;
   }
 
   function resolvePaneCount(width, height) {
     var w = Number(width) || 0;
-    var segs = readViewportSegments();
-    if (segs >= 2 && w >= PANE_MIN * 2) return 2;
-    if (w >= PANE_MIN * 3 + RAIL_PREF && w >= EXTRA_WIDE_MIN) return 2;
-    if (w >= PANE_MIN * 2 && w >= EXTRA_WIDE_MIN) return 2;
-    if (w >= PANE_MIN * 2 && w >= EXPANDED_MIN) return 2;
+    var h = Number(height) || 0;
+    var hinge = readHinge();
+    if (hinge.segments >= 3 && w >= T.PANE_MIN * 3) return 3;
+    if (hinge.segments >= 2 && w >= T.PANE_MIN * 2) return 2;
+    if (isDualViewport(w, h)) return 2;
     return 1;
   }
 
@@ -160,37 +208,15 @@
     if (routeBlocksRail()) return false;
     var w = Number(width) || 0;
     var h = Number(height) || 0;
-    if (w < 620 || h < 300) return false;
+    if (w < T.RAIL_MIN_WIDTH || h < T.RAIL_MIN_HEIGHT) return false;
     var landscape = w >= h;
-    if (landscape && w >= 620) return true;
-    if (density === "extra_wide" && w >= EXTRA_WIDE_MIN && h >= 500) return true;
+    if (landscape && w >= T.RAIL_MIN_WIDTH) return true;
+    if ((density === "extra_wide" || density === "wide") && w >= T.WIDE_MIN && h >= 500) return true;
     return false;
   }
 
   function navBottomCompact() {
     return "calc(max(7px, calc(env(safe-area-inset-bottom) - 18px)) + 3mm)";
-  }
-
-  function ensureRailToggle(nav, collapsed) {
-    var btn = document.getElementById("darAdaptiveRailToggle");
-    if (!btn) {
-      btn = document.createElement("button");
-      btn.id = "darAdaptiveRailToggle";
-      btn.type = "button";
-      btn.className = "dar-adaptive-rail-toggle";
-      btn.setAttribute("aria-label", "Navigation ein- oder ausklappen");
-      nav.insertBefore(btn, nav.firstChild);
-      btn.addEventListener("click", function (ev) {
-        ev.preventDefault();
-        ev.stopPropagation();
-        setCollapsed(!readCollapsed());
-      });
-    }
-    btn.hidden = false;
-    btn.textContent = collapsed ? "‹" : "›";
-    if (readPlacement() === "leading") {
-      btn.textContent = collapsed ? "›" : "‹";
-    }
   }
 
   function hideRailToggle() {
@@ -199,14 +225,38 @@
   }
 
   function railWidthFor(metrics, collapsed) {
-    if (collapsed) return RAIL_COLLAPSED;
+    if (collapsed) return T.RAIL_COLLAPSED;
     var h = Number(metrics && metrics.height) || 0;
-    return h > 0 && h < 800 ? 52 : RAIL_PREF;
+    return h > 0 && h < 800 ? 52 : T.RAIL_PREF;
   }
 
-  function playerStripFor(metrics) {
-    var h = Number(metrics && metrics.height) || 0;
-    return h > 0 && h < 800 ? 58 : PLAYER_STRIP;
+  function glassNav(nav) {
+    nav.style.setProperty("background", "rgba(255,255,255,.04)", "important");
+    nav.style.setProperty("border", "1px solid rgba(255,255,255,.08)", "important");
+    nav.style.setProperty("border-radius", "27px", "important");
+    nav.style.setProperty("box-shadow", "0 6px 18px rgba(0,0,0,.14)", "important");
+    nav.style.setProperty("-webkit-backdrop-filter", "blur(10px) saturate(1.08)", "important");
+    nav.style.setProperty("backdrop-filter", "blur(10px) saturate(1.08)", "important");
+  }
+
+  function applyChromeInsets(leading, width) {
+    var root = document.documentElement;
+    var railReserve = width + T.FLOAT_EDGE + T.NAV_PAD;
+    var left = leading
+      ? "calc(" + railReserve + "px + env(safe-area-inset-left, 0px))"
+      : "max(" + T.NAV_PAD + "px, env(safe-area-inset-left, 0px), var(--dar-native-safe-left, 0px))";
+    var right = leading
+      ? "max(" + T.NAV_PAD + "px, env(safe-area-inset-right, 0px), var(--dar-native-safe-right, 0px))"
+      : "calc(" + railReserve + "px + env(safe-area-inset-right, 0px))";
+    root.style.setProperty("--layout-chrome-left", left);
+    root.style.setProperty("--layout-chrome-right", right);
+    root.style.setProperty("--layout-player-strip", "0px");
+    root.classList.remove("dar-player-strip");
+    root.style.setProperty("--bottom-tab-capsule-w", "40px");
+    root.style.setProperty("--bottom-tab-capsule-h", "36px");
+    root.style.setProperty("--layout-nav-margin", T.FLOAT_EDGE + "px");
+    var mini = document.getElementById("darQuranMiniPlayer");
+    if (mini) mini.style.cssText = "";
   }
 
   function applySideRail(nav, metrics) {
@@ -214,31 +264,48 @@
     var collapsed = readCollapsed();
     var leading = placement === "leading";
     var width = railWidthFor(metrics, collapsed);
-    var edge = FLOAT_EDGE;
-    var glass =
-      "background:rgba(255,255,255,.04) !important;border:1px solid rgba(255,255,255,.08) !important;" +
-      "border-radius:27px !important;box-shadow:0 6px 18px rgba(0,0,0,.14) !important;" +
-      "-webkit-backdrop-filter:blur(10px) saturate(1.08) !important;backdrop-filter:blur(10px) saturate(1.08) !important;";
-    var sideCss = leading
-      ? "left:max(" + edge + "px, calc(env(safe-area-inset-left, 0px) + " + edge + "px)) !important;right:auto !important;"
-      : "right:max(" + edge + "px, calc(env(safe-area-inset-right, 0px) + " + edge + "px)) !important;left:auto !important;";
+    var edge = T.FLOAT_EDGE;
+    var sideInset = "max(" + edge + "px, calc(env(safe-area-inset-" + (leading ? "left" : "right") + ", 0px) + " + edge + "px))";
 
     nav.classList.add("is-adaptive-rail");
     nav.classList.remove("is-adaptive-centered", "dar-test-thumb-nav");
     nav.removeAttribute("hidden");
     nav.setAttribute("data-rail-collapsed", collapsed ? "1" : "0");
     hideRailToggle();
-    nav.style.cssText =
-      "display:flex !important;visibility:visible !important;opacity:1 !important;pointer-events:auto !important;" +
-      "position:fixed !important;top:50% !important;bottom:auto !important;" +
-      sideCss +
-      "width:" + width + "px !important;min-width:" + width + "px !important;max-width:" + width + "px !important;" +
-      "height:auto !important;min-height:0 !important;max-height:min(78dvh, 520px) !important;" +
-      "margin:0 !important;padding:8px 4px !important;" +
-      "flex-direction:column !important;justify-content:space-around !important;align-items:stretch !important;gap:2px !important;" +
-      "transform:translate3d(0,-50%,0) !important;-webkit-transform:translate3d(0,-50%,0) !important;" +
-      "z-index:120 !important;overflow:hidden !important;isolation:isolate !important;box-sizing:border-box !important;" +
-      glass;
+
+    nav.style.setProperty("display", "flex", "important");
+    nav.style.setProperty("visibility", "visible", "important");
+    nav.style.setProperty("opacity", "1", "important");
+    nav.style.setProperty("pointer-events", "auto", "important");
+    nav.style.setProperty("position", "fixed", "important");
+    nav.style.setProperty("top", "50%", "important");
+    nav.style.setProperty("bottom", "auto", "important");
+    if (leading) {
+      nav.style.setProperty("left", sideInset, "important");
+      nav.style.setProperty("right", "auto", "important");
+    } else {
+      nav.style.setProperty("right", sideInset, "important");
+      nav.style.setProperty("left", "auto", "important");
+    }
+    nav.style.setProperty("width", width + "px", "important");
+    nav.style.setProperty("min-width", width + "px", "important");
+    nav.style.setProperty("max-width", width + "px", "important");
+    nav.style.setProperty("height", "auto", "important");
+    nav.style.setProperty("min-height", "0", "important");
+    nav.style.setProperty("max-height", "min(78dvh, 520px)", "important");
+    nav.style.setProperty("margin", "0", "important");
+    nav.style.setProperty("padding", "8px 4px", "important");
+    nav.style.setProperty("flex-direction", "column", "important");
+    nav.style.setProperty("justify-content", "space-around", "important");
+    nav.style.setProperty("align-items", "stretch", "important");
+    nav.style.setProperty("gap", "2px", "important");
+    nav.style.setProperty("transform", "translate3d(0,-50%,0)", "important");
+    nav.style.setProperty("-webkit-transform", "translate3d(0,-50%,0)", "important");
+    nav.style.setProperty("z-index", "120", "important");
+    nav.style.setProperty("overflow", "hidden", "important");
+    nav.style.setProperty("isolation", "isolate", "important");
+    nav.style.setProperty("box-sizing", "border-box", "important");
+    glassNav(nav);
 
     Array.prototype.forEach.call(document.querySelectorAll(".bottom-nav"), function (el) {
       if (el !== nav) el.style.setProperty("display", "none", "important");
@@ -247,41 +314,13 @@
     var root = document.documentElement;
     root.style.setProperty("--layout-rail-width", width + "px");
     root.setAttribute("data-nav-rail", "1");
+    root.setAttribute("data-nav-mode", "side");
     root.setAttribute("data-nav-placement", placement);
     root.setAttribute("data-nav-collapsed", collapsed ? "1" : "0");
     if (document.body) {
       document.body.style.setProperty("padding-bottom", "0px", "important");
     }
-    applyChromeInsets(leading, width, metrics);
-  }
-
-  function applyChromeInsets(leading, width, metrics) {
-    var root = document.documentElement;
-    var pad = 8;
-    var railReserve = width + pad;
-    var left = leading
-      ? "calc(" + railReserve + "px + env(safe-area-inset-left, 0px))"
-      : "max(8px, env(safe-area-inset-left, 0px), var(--dar-native-safe-left, 0px))";
-    var right = leading
-      ? "max(8px, env(safe-area-inset-right, 0px), var(--dar-native-safe-right, 0px))"
-      : "calc(" + railReserve + "px + env(safe-area-inset-right, 0px))";
-    root.style.setProperty("--layout-chrome-left", left);
-    root.style.setProperty("--layout-chrome-right", right);
-    root.style.setProperty("--layout-player-strip", "0px");
-    root.classList.remove("dar-player-strip");
-    root.style.setProperty("--bottom-tab-capsule-w", "40px");
-    root.style.setProperty("--bottom-tab-capsule-h", "36px");
-
-    var mini = document.getElementById("darQuranMiniPlayer");
-    if (mini) mini.style.cssText = "";
-    var full = document.getElementById("darQuranPlayer");
-    if (full) {
-      full.style.removeProperty("left");
-      full.style.removeProperty("right");
-      full.style.removeProperty("width");
-      full.style.removeProperty("top");
-      full.style.removeProperty("bottom");
-    }
+    applyChromeInsets(leading, width);
   }
 
   function applyBottomNav(nav, mode) {
@@ -290,9 +329,10 @@
     nav.removeAttribute("data-rail-collapsed");
     var root = document.documentElement;
     root.setAttribute("data-nav-rail", "0");
+    root.setAttribute("data-nav-mode", "bottom");
     root.style.setProperty("--layout-rail-width", "0px");
-    root.style.setProperty("--layout-chrome-left", "0px");
-    root.style.setProperty("--layout-chrome-right", "0px");
+    root.style.setProperty("--layout-chrome-left", "max(0px, env(safe-area-inset-left, 0px))");
+    root.style.setProperty("--layout-chrome-right", "max(0px, env(safe-area-inset-right, 0px))");
     root.style.removeProperty("--bottom-tab-capsule-w");
     root.style.removeProperty("--bottom-tab-capsule-h");
     ["darQuranMiniPlayer", "darQuranPlayer"].forEach(function (id) {
@@ -351,13 +391,10 @@
     nav.style.setProperty("-webkit-transform", "none", "important");
     nav.style.setProperty("flex-direction", "row", "important");
     nav.style.setProperty("margin", "0", "important");
-    nav.style.setProperty("padding", "", "important");
-    nav.style.setProperty("border-radius", "", "important");
+    nav.style.setProperty("padding", "5px", "important");
     nav.style.setProperty("z-index", "40", "important");
-    nav.style.setProperty("gap", "", "important");
-    var mask = document.getElementById("darHingeMask");
-    if (mask) mask.hidden = true;
-    document.documentElement.classList.remove("dar-has-hinge");
+    nav.style.setProperty("overflow", "hidden", "important");
+    glassNav(nav);
   }
 
   function applyNavLayout(mode, metrics) {
@@ -369,9 +406,17 @@
     metrics = metrics || measureViewport();
     var density = resolveDensity(metrics.width, metrics.height);
     var rail = wantsSideRail(metrics.width, metrics.height, density);
+    var switching = navReady && currentRail !== rail;
+    if (switching) nav.classList.add("is-nav-morphing");
     currentRail = rail;
     if (rail) applySideRail(nav, metrics);
     else applyBottomNav(nav, mode);
+    navReady = true;
+    if (switching) {
+      setTimeout(function () {
+        nav.classList.remove("is-nav-morphing");
+      }, T.ANIM_MS + 40);
+    }
   }
 
   function applyKeyboardState(metrics) {
@@ -385,115 +430,107 @@
     root.style.setProperty("--layout-vv-offset-top", (metrics.offsetTop || 0) + "px");
   }
 
-  function applyOrientationAttrs(metrics) {
-    var root = document.documentElement;
-    var landscape = metrics.width >= metrics.height;
-    var dual = isDualViewport(metrics.width, metrics.height);
-    root.setAttribute("data-orientation", landscape ? "landscape" : "portrait");
-    root.classList.toggle("is-layout-landscape", landscape);
-    root.classList.toggle("is-layout-wide", metrics.width >= 600);
-    root.classList.toggle("is-fold-dual", dual);
-    root.setAttribute("data-fold-dual", dual ? "1" : "0");
-  }
-
-  function readViewportSegments() {
-    try {
-      if (global.matchMedia && global.matchMedia("(horizontal-viewport-segments: 2)").matches) {
-        return 2;
-      }
-    } catch (e) {}
-    try {
-      var segs = global.visualViewport && global.visualViewport.segments;
-      if (segs && segs.length >= 2) return segs.length;
-    } catch (e2) {}
-    return 1;
-  }
-
-  function ensureHingeMask() {
-    var el = document.getElementById("darHingeMask");
-    if (el) return el;
-    el = document.createElement("div");
-    el.id = "darHingeMask";
-    el.className = "dar-hinge-mask";
-    el.setAttribute("aria-hidden", "true");
-    if (document.body) document.body.appendChild(el);
-    return el;
-  }
-
   function applyHingeMetrics(metrics) {
     var root = document.documentElement;
-    var segs = readViewportSegments();
-    var gap = 0;
-    var start = 0;
-    try {
-      var vs = global.visualViewport && global.visualViewport.segments;
-      if (vs && vs.length >= 2) {
-        segs = vs.length;
-        start = Math.round(vs[0].x + vs[0].width);
-        gap = Math.max(0, Math.round(vs[1].x - start));
-      }
-    } catch (e) {}
-    root.setAttribute("data-viewport-segments", String(segs));
+    var hinge = readHinge();
+    root.setAttribute("data-viewport-segments", String(hinge.segments));
     root.style.setProperty("--layout-aspect", String((metrics.aspect || 1).toFixed(3)));
-    root.style.setProperty("--layout-hinge-gap", gap + "px");
-    root.style.setProperty("--layout-hinge-start", start ? start + "px" : "50%");
-    root.classList.remove("dar-has-hinge");
+    root.style.setProperty("--layout-hinge-gap", hinge.gap + "px");
+    root.style.setProperty("--layout-hinge-start", hinge.start ? hinge.start + "px" : "50%");
+    root.style.setProperty("--layout-fold-regions", String(hinge.regions.length));
+    if (hinge.segments >= 2 && hinge.gap > 0) {
+      root.classList.add("dar-has-hinge");
+    } else {
+      root.classList.remove("dar-has-hinge");
+    }
     var mask = document.getElementById("darHingeMask");
     if (mask) mask.hidden = true;
   }
 
-  function applyLayout(force) {
-    var metrics = measureViewport();
-    var mode = resolveLayoutMode(metrics.width, metrics.height);
+  function computeState(metrics) {
+    metrics = metrics || measureViewport();
     var density = resolveDensity(metrics.width, metrics.height);
+    var mode = resolveLayoutMode(metrics.width, metrics.height);
     var panes = resolvePaneCount(metrics.width, metrics.height);
     var dual = isDualViewport(metrics.width, metrics.height);
+    var landscape = metrics.width >= metrics.height;
+    var rail = wantsSideRail(metrics.width, metrics.height, density);
+    var hinge = readHinge();
+    return {
+      width: metrics.width,
+      height: metrics.height,
+      aspect: metrics.aspect,
+      offsetTop: metrics.offsetTop,
+      widthClass: mode,
+      heightClass: metrics.height < 500 ? "short" : metrics.height < 800 ? "regular" : "tall",
+      density: density,
+      orientationMode: landscape ? "landscape" : "portrait",
+      isWide: metrics.width >= T.REGULAR_MIN,
+      isShort: metrics.height < 500,
+      isMultiPane: panes >= 2,
+      panes: panes,
+      dual: dual,
+      navigationMode: rail ? "side" : "bottom",
+      rail: rail,
+      placement: readPlacement(),
+      collapsed: readCollapsed(),
+      foldingRegions: hinge.regions,
+      viewportSegments: hinge.segments,
+      hingeStart: hinge.start,
+      hingeGap: hinge.gap,
+    };
+  }
+
+  function applyLayout(force) {
+    var metrics = measureViewport();
+    var state = computeState(metrics);
     var root = document.documentElement;
-    var changed = mode !== currentMode || density !== currentDensity;
-    var prevDual = root.getAttribute("data-fold-dual") === "1";
+    var changed =
+      state.widthClass !== currentMode ||
+      state.density !== currentDensity ||
+      (lastState && lastState.navigationMode !== state.navigationMode) ||
+      (lastState && lastState.panes !== state.panes);
 
     if (isTestApp()) {
       root.classList.add("dar-test-adaptive");
-      root.setAttribute("data-nav-placement", readPlacement());
+      root.setAttribute("data-nav-placement", state.placement);
     } else {
       root.classList.remove("dar-test-adaptive");
     }
 
-    if (changed || force) {
-      currentMode = mode;
-      currentDensity = density;
-      root.setAttribute("data-layout", mode);
-      root.setAttribute("data-density", density);
-      root.setAttribute("data-panes", String(panes));
-      root.classList.remove("data-layout-expanded-legacy");
-      root.style.setProperty("--layout-vw", metrics.width + "px");
-      root.style.setProperty("--layout-vh", metrics.height + "px");
-      root.style.setProperty("--layout-pane-count", String(panes));
-      var fs = density === "extra_wide" ? 1.06 : density === "wide" ? 1.03 : density === "regular" ? 1 : 0.98;
-      root.style.setProperty("--layout-type-scale", String(fs));
-    }
+    currentMode = state.widthClass;
+    currentDensity = state.density;
+    lastState = state;
 
-    applyOrientationAttrs(metrics);
+    root.setAttribute("data-layout", state.widthClass);
+    root.setAttribute("data-density", state.density);
+    root.setAttribute("data-panes", String(state.panes));
+    root.setAttribute("data-orientation", state.orientationMode);
+    root.setAttribute("data-height-class", state.heightClass);
+    root.classList.toggle("is-layout-landscape", state.orientationMode === "landscape");
+    root.classList.toggle("is-layout-wide", state.isWide);
+    root.classList.toggle("is-fold-dual", state.dual);
+    root.setAttribute("data-fold-dual", state.dual ? "1" : "0");
+    root.style.setProperty("--layout-vw", state.width + "px");
+    root.style.setProperty("--layout-vh", state.height + "px");
+    root.style.setProperty("--layout-pane-count", String(state.panes));
+    root.style.setProperty("--layout-reader-max", T.READER_MAX);
+    root.style.setProperty("--layout-form-max", T.FORM_MAX);
+    root.style.setProperty("--layout-anim", T.ANIM_MS + "ms");
+    root.style.setProperty("--touch-min", T.TOUCH_MIN + "px");
+    var fs =
+      state.density === "extra_wide" ? 1.04 : state.density === "wide" ? 1.02 : 1;
+    root.style.setProperty("--layout-type-scale", String(fs));
+
     applyKeyboardState(metrics);
     applyHingeMetrics(metrics);
-    applyNavLayout(mode, metrics);
+    applyNavLayout(state.widthClass, metrics);
 
-    var dualChanged = prevDual !== dual;
-    if (changed || force || dualChanged) {
+    if (changed || force) {
       try {
         global.dispatchEvent(
           new CustomEvent("dar:layoutchange", {
-            detail: {
-              mode: mode,
-              density: density,
-              panes: panes,
-              width: metrics.width,
-              height: metrics.height,
-              dual: dual,
-              rail: currentRail,
-              placement: readPlacement(),
-              orientation: metrics.width >= metrics.height ? "landscape" : "portrait",
-            },
+            detail: state,
           })
         );
       } catch (e) {}
@@ -522,9 +559,10 @@
 
   function scheduleOrientBurst() {
     try {
-      savedScrollY = global.DARScrollManager && typeof global.DARScrollManager.getY === "function"
-        ? global.DARScrollManager.getY()
-        : global.scrollY || document.documentElement.scrollTop || 0;
+      savedScrollY =
+        global.DARScrollManager && typeof global.DARScrollManager.getY === "function"
+          ? global.DARScrollManager.getY()
+          : global.scrollY || document.documentElement.scrollTop || 0;
       if (global.DARScrollManager && typeof global.DARScrollManager.setPendingRestore === "function") {
         global.DARScrollManager.setPendingRestore(savedScrollY);
       }
@@ -646,6 +684,9 @@
       var m = measureViewport();
       return isDualViewport(m.width, m.height);
     },
+    getState: function () {
+      return lastState || computeState();
+    },
     getPlacement: readPlacement,
     setPlacement: setPlacement,
     getCollapsed: readCollapsed,
@@ -656,10 +697,11 @@
     },
     syncNav: syncNav,
     start: start,
-    COMPACT_MAX: COMPACT_MAX,
-    EXPANDED_MIN: EXPANDED_MIN,
-    EXPANDED_PORTRAIT_MIN: EXPANDED_PORTRAIT_MIN,
-    EXPANDED_MIN_HEIGHT: EXPANDED_MIN_HEIGHT,
+    TOKENS: T,
+    COMPACT_MAX: T.COMPACT_MAX,
+    EXPANDED_MIN: T.EXPANDED_MIN,
+    EXPANDED_PORTRAIT_MIN: T.EXPANDED_PORTRAIT_MIN,
+    EXPANDED_MIN_HEIGHT: T.DUAL_MIN_HEIGHT,
   };
 
   global.DarAdaptiveLayout = api;

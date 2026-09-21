@@ -417,16 +417,27 @@ html.dar-test-adaptive.is-quran-player-route[data-nav-rail="1"] #bottomNav.botto
   backdrop-filter: blur(10px) saturate(1.08) !important;
 }
 
+html.dar-test-adaptive #bottomNav.bottom-nav {
+  transition:
+    top var(--layout-anim, 280ms) cubic-bezier(.22,.7,.28,1),
+    bottom var(--layout-anim, 280ms) cubic-bezier(.22,.7,.28,1),
+    left var(--layout-anim, 280ms) cubic-bezier(.22,.7,.28,1),
+    right var(--layout-anim, 280ms) cubic-bezier(.22,.7,.28,1),
+    width var(--layout-anim, 280ms) cubic-bezier(.22,.7,.28,1),
+    max-height var(--layout-anim, 280ms) cubic-bezier(.22,.7,.28,1),
+    transform var(--layout-anim, 280ms) cubic-bezier(.22,.7,.28,1),
+    border-radius var(--layout-anim, 280ms) cubic-bezier(.22,.7,.28,1);
+}
 html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="trailing"] #bottomNav.bottom-nav,
 html.dar-test-adaptive[data-theme][data-nav-rail="1"][data-nav-placement="trailing"] #bottomNav.bottom-nav,
 html.dar-test-adaptive[data-nav-rail="1"]:not([data-nav-placement]) #bottomNav.bottom-nav {
-  right: max(4px, env(safe-area-inset-right, 0px)) !important;
+  right: max(10px, calc(env(safe-area-inset-right, 0px) + 10px)) !important;
   left: auto !important;
 }
 
 html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] #bottomNav.bottom-nav,
 html.dar-test-adaptive[data-theme][data-nav-rail="1"][data-nav-placement="leading"] #bottomNav.bottom-nav {
-  left: max(4px, env(safe-area-inset-left, 0px)) !important;
+  left: max(10px, calc(env(safe-area-inset-left, 0px) + 10px)) !important;
   right: auto !important;
 }
 
@@ -522,10 +533,17 @@ html.dar-test-adaptive .dar-hinge-mask {
   display: none !important;
 }
 
+html.dar-test-adaptive[data-panes="1"] .dar-fold[data-fold-mode="dual"] {
+  grid-template-columns: 1fr !important;
+}
+html.dar-test-adaptive.dar-has-hinge .dar-fold[data-fold-mode="dual"] {
+  grid-template-columns: minmax(0, var(--layout-hinge-start, 34%)) minmax(0, 1fr);
+  column-gap: max(12px, var(--layout-hinge-gap, 24px));
+}
 @media (horizontal-viewport-segments: 2) {
   html.dar-test-adaptive.is-fold-dual .dar-fold[data-fold-mode="dual"] {
     grid-template-columns: env(viewport-segment-width 0 0, 1fr) minmax(0, 1fr);
-    column-gap: var(--layout-hinge-gap, 28px);
+    column-gap: max(12px, var(--layout-hinge-gap, 28px));
   }
 }
 
@@ -559,8 +577,24 @@ html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] .float-a
   right: calc(10px + env(safe-area-inset-right, 0px));
 }
 
-@media (horizontal-viewport-segments: 2) {
-  html.dar-test-adaptive.is-fold-dual .dar-fold[data-fold-mode="dual"] {
-    grid-template-columns: env(viewport-segment-width 0 0, 34%) minmax(0, 1fr);
+html.dar-test-adaptive .article,
+html.dar-test-adaptive .post-reader,
+html.dar-test-adaptive .post-body,
+html.dar-test-adaptive .dua-detail-box,
+html.dar-test-adaptive .settings-one-page,
+html.dar-test-adaptive .quiz-shell {
+  max-width: var(--layout-reader-max, 42rem);
+  margin-left: auto;
+  margin-right: auto;
+}
+html.dar-test-adaptive [data-bottom-nav],
+html.dar-test-adaptive .bottom-nav-btn,
+html.dar-test-adaptive button.dqp-top-ctrl {
+  min-width: var(--touch-min, 44px);
+  min-height: var(--touch-min, 44px);
+}
+@media (prefers-reduced-motion: reduce) {
+  html.dar-test-adaptive #bottomNav.bottom-nav {
+    transition: none !important;
   }
 }
