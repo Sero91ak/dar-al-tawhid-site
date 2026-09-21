@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 922;
+  var PLAYER_BUILD = 923;
   if (window.__DAR_QURAN_PLAYER_BUILD === PLAYER_BUILD && window.DARQuranPlayer) return;
   try {
     var staleAudio = document.getElementById("darQuranPlayerAudio");
@@ -625,6 +625,9 @@
       el.classList.toggle("is-learn", onLearn);
       el.classList.toggle("is-reader-dock", onDock);
     }
+    try {
+      if (typeof window.syncQuranLearnChromeLock === "function") window.syncQuranLearnChromeLock();
+    } catch (eLearnChrome) {}
   }
   function markPlayingAyah() {
     document.querySelectorAll(".quran-ayah.is-dqp-playing").forEach(function (n) {
