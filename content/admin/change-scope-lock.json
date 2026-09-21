@@ -5191,7 +5191,9 @@
         "content/admin/change-scope-lock.json",
         "desktop-preview/index.html"
       ],
-      "expiresAt": "2026-12-31T23:59:00.000Z"
+      "expiresAt": "2026-12-31T23:59:00.000Z",
+      "deployTriggerAt": "2026-09-21T09:06:00.000Z",
+      "note": "Trigger visitor static-assets deploy so /desktop-preview/ is published on dar-al-tawhid.de."
     }
   ],
   "enabled": true
