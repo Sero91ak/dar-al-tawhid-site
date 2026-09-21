@@ -1990,7 +1990,7 @@ button,input,select{font:inherit}
  function compactPostLink(p){
   return '<a class="list-row desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(p.id))+'"><span class="meta">'+escBook(p.category||"Beitrag")+'</span><strong>'+escBook(cleanTitle(p.title))+'</strong><small>'+escBook(p.speaker||"Lesen")+'</small></a>'
  }
- function pUrl(name,extra){return "/desktop-preview/?page="+encodeURIComponent(name)+(extra?"&"+extra:"")}
+ function pUrl(name,extra){return "/?page="+encodeURIComponent(name)+(extra?"&"+extra:"")}
  function realIntro(label,title,desc){return '<section class="page-intro reveal"><div><div class="eyebrow">'+escBook(label)+'</div><h1>'+escBook(title)+'</h1><p>'+escBook(desc)+'</p></div><div class="intro-aside">DĀR AL TAWḤĪD<br>Qurʾān · Sunnah · Āṯār</div></section><div class="ornament-line reveal"></div>'}
 
  intros.propheten=["PROPHETEN","Die Propheten","Qurʾān, authentische Sunnah und geprüfte frühe Überlieferungen."];
