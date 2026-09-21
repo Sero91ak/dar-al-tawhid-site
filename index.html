@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v830";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v831";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -10457,7 +10457,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/premium-feed-app.js?v=101" defer></script>
 <script src="/assets/dar-setup-hub.js?v=5" defer></script><!-- DAR_SETUP_HUB_V1 -->
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
-<script src="/assets/dar-quran-player.js?v=924" defer></script>
+<script src="/assets/dar-quran-player.js?v=925" defer></script>
 <script src="/assets/adaptive-layout.js?v=7" defer></script>
 <script src="/assets/fold-split.js?v=3" defer></script>
 <script src="/assets/scholars-index.js?v=587" defer></script>
@@ -12072,7 +12072,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 }
 </style>
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=587">
-<link rel="stylesheet" href="/assets/dar-quran-player.css?v=924">
+<link rel="stylesheet" href="/assets/dar-quran-player.css?v=925">
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=5">
 <link rel="stylesheet" href="/assets/books-library.css?v=2">
 <link rel="stylesheet" href="/assets/prophets/prophets.css?v=16">
@@ -21615,7 +21615,7 @@ window.addEventListener('popstate',function(){if(quranExplanationBusy)quranExpla
 
 function scrollToQuranAyah(ayah,opts){const el=document.getElementById(`ayah-${ayah}`);if(!el)return;const ratio=Math.max(0,Math.min(1,Number(opts?.scrollOffset)||0));const offsetPx=Math.round(el.offsetHeight*ratio);const top=Math.max(0,el.getBoundingClientRect().top+window.scrollY-scrollChromeOffset()+offsetPx);if(window.DARScrollManager?.stableScrollTo)window.DARScrollManager.stableScrollTo(top,{force:true});else window.scrollTo({top,behavior:"auto"});el.classList.add("quran-ayah-highlight");setTimeout(()=>el.classList.remove("quran-ayah-highlight"),1800)}
 function scrollToPostStatement(){return scrollToViewAnchor("postReadStart",10)}
-function scrollChromeOffset(){const html=document.documentElement;const learn=html.classList.contains("player-learn")||(document.body&&document.body.classList.contains("player-learn"));const dock=!learn&&(html.classList.contains("player-reader-dock")||(document.body&&document.body.classList.contains("player-reader-dock")));const extra=learn?116:dock?82:0;const qrc=$("qrcChrome");if(qrc&&document.body.classList.contains("is-quran-reader-route")&&!qrc.classList.contains("is-hidden"))return qrc.offsetHeight+8+extra;const bar=document.querySelector(".app-bar");const h=bar&&!bar.classList.contains("is-home")?bar.offsetHeight:0;return h+14+extra}
+function scrollChromeOffset(){const html=document.documentElement;const learn=html.classList.contains("player-learn")||(document.body&&document.body.classList.contains("player-learn"));const dock=!learn&&(html.classList.contains("player-reader-dock")||(document.body&&document.body.classList.contains("player-reader-dock")));const extra=learn?132:dock?82:0;const qrc=$("qrcChrome");if(qrc&&document.body.classList.contains("is-quran-reader-route")&&!qrc.classList.contains("is-hidden"))return qrc.offsetHeight+8+extra;const bar=document.querySelector(".app-bar");const h=bar&&!bar.classList.contains("is-home")?bar.offsetHeight:0;return h+14+extra}
 function scrollToViewAnchor(id,extra=0){const el=document.getElementById(id);if(!el)return false;const top=Math.max(0,el.getBoundingClientRect().top+window.scrollY-scrollChromeOffset()-extra);if(window.DARScrollManager?.stableScrollTo)window.DARScrollManager.stableScrollTo(top,{force:true});else window.scrollTo({top,behavior:"auto"});return true}
 function openQuranSurah(surahId,ayah,opts){const id=Number(surahId);touchQuranSurahOpened(id);if(!Number.isFinite(id)||id<1||id>114)return;const meta=quranSurahMeta(id);const ay=Number(ayah);const safeAyah=ay>0&&meta?Math.min(ay,meta.total_verses):0;if(opts&&typeof opts==="object"&&Number.isFinite(Number(opts.scrollOffset))){quranPendingResumeTarget={surahNumber:id,ayahNumber:safeAyah||1,scrollOffset:Math.max(0,Math.min(1,Number(opts.scrollOffset)))}}const value=safeAyah>0?`${id}/${safeAyah}`:String(id);const cur=currentRoute||{};const curSid=cur.view==="quran-surah"?Number(String(cur.value||"").split("/")[0]):NaN;const targetAyah=safeAyah||1;if(cur.view==="quran-surah"&&curSid===id&&document.getElementById("ayah-"+targetAyah)){try{history.replaceState(null,"",location.pathname+(location.search||"")+routeToHash("quran-surah",value));currentRoute={view:"quran-surah",value}}catch(e){}if(safeAyah>0)requestAnimationFrame(function(){scrollToQuranAyah(safeAyah,opts);updateQuranContextBarLabel(id,safeAyah)});else updateQuranContextBarLabel(id,1);return}const navOpts=opts&&typeof opts==="object"?{noAnim:!!opts.noAnim,skipPush:!!opts.skipPush}:{};navigate("quran-surah",value,navOpts)}
 function visibleQuranAyahEntry(){const items=[...document.querySelectorAll(".quran-ayah[id^='ayah-']")];if(!items.length)return null;const vh=window.innerHeight||document.documentElement.clientHeight||1;let best=null;items.forEach(el=>{const rect=el.getBoundingClientRect();const visible=Math.max(0,Math.min(rect.bottom,vh)-Math.max(rect.top,0));const ratio=Math.max(0,Math.min(1,visible/Math.max(rect.height,1)));if(!best||ratio>best.ratio){const ayah=Number(String(el.id||"").replace("ayah-",""));best={ayah,ratio,rect,height:Math.max(rect.height,1)}}});if(!best||!Number.isFinite(best.ayah)||best.ratio<=0)return null;const center=vh*0.5;const scrollOffset=Math.max(0,Math.min(1,(center-best.rect.top)/best.height));return{ayahNumber:best.ayah,ratio:best.ratio,scrollOffset}}
@@ -27112,7 +27112,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v830";
+const APP_BUILD_ID="app-shell-v831";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
