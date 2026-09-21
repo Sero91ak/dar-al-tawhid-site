@@ -5195,6 +5195,19 @@
       "expiresAt": "2026-12-31T23:59:00.000Z",
       "deployTriggerAt": "2026-09-21T13:13:00.000Z",
       "note": "Nur /desktop-preview/ ändern; Root, Besucher-App, Test-App und native Apps unverändert. Inhalte werden aus bestehenden verifizierten Datenquellen geladen."
+    },
+    {
+      "id": "desktop-live-rollout-v825-2026-09-21",
+      "approvedBy": "user-explicit-desktop-total-rollout",
+      "reason": "Nutzer: Desktop-Seite jetzt vollständig als echte Desktop-/Tablet-Browser-Webseite umsetzen. Neue Desktop-Oberfläche live am Domain-Einstieg; native Apps, installierte PWA und Handy-Browser bleiben getrennt.",
+      "paths": [
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "desktop-preview/index.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

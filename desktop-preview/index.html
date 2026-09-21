@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="robots" content="noindex,nofollow">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://dar-al-tawhid.de/">
 <meta name="theme-color" content="#fbfaf6">
 <title>DĀR AL TAWḤĪD</title>
 <style>
@@ -1284,21 +1285,21 @@ button,input,select{font:inherit}
 <body>
 <header class="site-header">
  <div class="header-inner">
-  <a class="brand desktop-link" href="/desktop-preview/?page=start" data-page="start">
+  <a class="brand desktop-link" href="/?page=start" data-page="start">
    <img class="brand-logo" src="/watermark-my-logo-full.png" alt="DĀR AL TAWḤĪD Logo">
    <div class="brand-copy"><strong>DĀR AL TAWḤĪD</strong><span>Qurʾān · Sunnah · Āṯār</span></div>
   </a>
   <nav class="main-nav" id="mainNav">
-   <a class="desktop-link" data-page="start" href="/desktop-preview/?page=start">Startseite</a>
-   <a class="desktop-link" data-page="quran" href="/desktop-preview/?page=quran">Qurʾān</a>
-   <a class="desktop-link" data-page="beitraege" href="/desktop-preview/?page=beitraege">Beiträge</a>
-   <a class="desktop-link" data-page="dua" href="/desktop-preview/?page=dua">Duʿāʾ</a>
-   <a class="desktop-link" data-page="wissen" href="/desktop-preview/?page=wissen">Wissen</a>
-   <a class="desktop-link" data-page="bibliothek" href="/desktop-preview/?page=bibliothek">Bibliothek</a>
-   <a class="desktop-link" data-page="gebetszeiten" href="/desktop-preview/?page=gebetszeiten">Gebetszeiten</a>
-   <a class="desktop-link" data-page="mehr" href="/desktop-preview/?page=mehr">Mehr</a>
+   <a class="desktop-link" data-page="start" href="/?page=start">Startseite</a>
+   <a class="desktop-link" data-page="quran" href="/?page=quran">Qurʾān</a>
+   <a class="desktop-link" data-page="beitraege" href="/?page=beitraege">Beiträge</a>
+   <a class="desktop-link" data-page="dua" href="/?page=dua">Duʿāʾ</a>
+   <a class="desktop-link" data-page="wissen" href="/?page=wissen">Wissen</a>
+   <a class="desktop-link" data-page="bibliothek" href="/?page=bibliothek">Bibliothek</a>
+   <a class="desktop-link" data-page="gebetszeiten" href="/?page=gebetszeiten">Gebetszeiten</a>
+   <a class="desktop-link" data-page="mehr" href="/?page=mehr">Mehr</a>
   </nav>
-  <div class="header-actions"><a class="header-action desktop-link hide-tablet" data-page="suche" href="/desktop-preview/?page=suche">Suche</a></div>
+  <div class="header-actions"><a class="header-action desktop-link hide-tablet" data-page="suche" href="/?page=suche">Suche</a></div>
  </div>
 </header>
 
@@ -1334,6 +1335,9 @@ button,input,select{font:inherit}
 <script>
 (function(){
  "use strict";
+ if(location.pathname.indexOf("/desktop-preview")===0){
+   try{history.replaceState(history.state||{desktop:true},"","/"+(location.search||"?page=start")+(location.hash||""))}catch(e){}
+ }
  var root=document.getElementById("pageRoot");
  var SOURCE_URL="https://www.islamweb.net/ar/fatwa/38541/%D8%A7%D9%86%D8%B8%D8%B1%D9%88%D8%A7-%D8%B9%D9%85%D9%86%20%D8%AA%D8%A3%D8%AE%D8%B0%D9%88%D9%86-%D8%AF%D9%8A%D9%86%D9%83%D9%85#:~:text=%D9%88%D9%81%D9%8A%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D9%85%D8%B3%D9%84%D9%85%20%D8%B9%D9%86%20%D9%85%D8%AD%D9%85%D8%AF%20%D8%A8%D9%86%20%D8%B3%D9%8A%D8%B1%D9%8A%D9%86%20%D9%82%D8%A7%D9%84,%D9%81%D8%A7%D9%86%D8%B8%D8%B1%D9%88%D8%A7%20%D8%B9%D9%85%D9%86%20%D8%AA%D8%A3%D8%AE%D8%B0%D9%88%D9%86%20%D8%AF%D9%8A%D9%86%D9%83%D9%85";
  var intros={
@@ -1357,7 +1361,7 @@ button,input,select{font:inherit}
   quellen:["QUELLEN","Werke und Direktnachweise.","Quellen nach Werk, Gelehrtem und Thema geordnet."],
   einstellungen:["DARSTELLUNG","Lesen nach deinen Vorlieben.","Passe Schriftgröße und Lesedarstellung an."]
  };
- function p(name,extra){return "/desktop-preview/?page="+encodeURIComponent(name)+(extra?"&"+extra:"")}
+ function p(name,extra){return "/?page="+encodeURIComponent(name)+(extra?"&"+extra:"")}
  function intro(k){var d=intros[k]||intros.thema;return '<section class="page-intro reveal"><div><div class="eyebrow">'+d[0]+'</div><h1>'+d[1]+'</h1><p>'+d[2]+'</p></div><div class="intro-aside">Qurʾān · Sunnah · Āṯār<br>DĀR AL TAWḤĪD</div></section><div class="ornament-line reveal"></div>'}
  function footer(){return '<footer class="site-footer reveal"><span>DĀR AL TAWḤĪD</span><span>Qurʾān · Sunnah · Āṯār</span></footer>'}
  function sourceLine(label,url){return '<div class="statement-source"><b>Quelle:</b> '+label+' <a target="_blank" rel="noopener" href="'+url+'">Direktnachweis ↗</a></div>'}
@@ -1496,7 +1500,7 @@ button,input,select{font:inherit}
   var a=e.target.closest("a.desktop-link");
   if(!a)return;
   var u=new URL(a.href,location.href);
-  if(u.origin!==location.origin||u.pathname!=="/desktop-preview/")return;
+  if(u.origin!==location.origin||(u.pathname!=="/"&&u.pathname!=="/desktop-preview/"))return;
   e.preventDefault();navigate(u.pathname+u.search,true)
  });
  window.addEventListener("popstate",function(){navigate(location.pathname+location.search,false)});
