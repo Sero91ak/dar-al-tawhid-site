@@ -5186,13 +5186,13 @@
     {
       "id": "desktop-website-preview-2026-09-21",
       "approvedBy": "user-explicit-desktop-website-preview-link",
-      "reason": "Nutzer: Gebetszeiten-Livebereich der Desktop-Vorschau ohne sichtbare Kanten, Ecken oder Linien; Grün weich und animiert in die weiße/cremige Hauptseite ausblenden.",
+      "reason": "Nutzer: Gebetszeiten-Farbfluss kompakter machen; Effekt nur um Fajr, nächstes Gebet, Countdown und Standort, ohne Überschneiden mit Nachbarbereichen; weiterhin randlos und weich.",
       "paths": [
         "content/admin/change-scope-lock.json",
         "desktop-preview/index.html"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z",
-      "deployTriggerAt": "2026-09-21T12:01:00.000Z",
+      "deployTriggerAt": "2026-09-21T12:34:00.000Z",
       "note": "Nur /desktop-preview/ ändern; Root und Apps unverändert."
     }
   ],
