@@ -1714,32 +1714,24 @@
   function miniMarkup() {
     return (
       '<div class="dqp-top-main">' +
+        '<span class="dqp-top-mark" aria-hidden="true">📖</span>' +
         '<button type="button" data-dqp-mini="open" class="dqp-top-open">' +
-          '<span class="dqp-top-mark" aria-hidden="true">📖</span>' +
           '<span class="dqp-top-text"><b></b><span></span></span>' +
         "</button>" +
-        '<div class="dqp-top-seek">' +
-          '<span class="dqp-top-time" data-dqp-mini-cur>00:00</span>' +
-          '<div class="dqp-top-track">' +
-            '<span class="dqp-top-groove" aria-hidden="true"></span>' +
-            '<span class="dqp-top-fill" aria-hidden="true"></span>' +
-            '<input class="dqp-top-range" data-dqp-mini="seek" type="range" min="0" max="1000" value="0" aria-label="Fortschritt">' +
-          "</div>" +
-          '<span class="dqp-top-time" data-dqp-mini-dur>00:00</span>' +
-        "</div>" +
         '<div class="dqp-top-actions">' +
-          '<button type="button" class="dqp-top-ctrl dqp-top-play" data-dqp-mini="play" aria-label="Wiedergabe"></button>' +
+          '<button type="button" class="dqp-top-ctrl" data-dqp-mini="play" aria-label="Wiedergabe"></button>' +
           '<button type="button" class="dqp-top-ctrl dqp-top-pause" data-dqp-mini="pause" aria-label="Pause"></button>' +
+          '<button type="button" class="dqp-top-ctrl dqp-top-stop" data-dqp-mini="stop" aria-label="Stopp"></button>' +
         "</div>" +
-        '<div class="dqp-top-skip">' +
-          '<button type="button" class="dqp-top-ctrl dqp-top-skip-btn" data-dqp-mini="prev" aria-label="Zurück"></button>' +
-          '<button type="button" class="dqp-top-ctrl dqp-top-skip-btn" data-dqp-mini="next" aria-label="Weiter"></button>' +
+      "</div>" +
+      '<div class="dqp-top-seek">' +
+        '<span class="dqp-top-time" data-dqp-mini-cur>00:00</span>' +
+        '<div class="dqp-top-track">' +
+          '<span class="dqp-top-groove" aria-hidden="true"></span>' +
+          '<span class="dqp-top-fill" aria-hidden="true"></span>' +
+          '<input class="dqp-top-range" data-dqp-mini="seek" type="range" min="0" max="1000" value="0" aria-label="Fortschritt">' +
         "</div>" +
-        '<div class="dqp-top-vol">' +
-          '<span class="dqp-top-vol-ico" aria-hidden="true"></span>' +
-          '<input class="dqp-top-vol-range" data-dqp-mini="vol" type="range" min="0" max="100" value="100" aria-label="Lautstärke">' +
-        "</div>" +
-        '<button type="button" class="dqp-top-ctrl dqp-top-stop" data-dqp-mini="stop" aria-label="Stopp"></button>' +
+        '<span class="dqp-top-time" data-dqp-mini-dur>00:00</span>' +
       "</div>" +
       '<div class="dqp-learn" data-dqp-learn hidden>' +
         '<button type="button" class="dqp-learn-btn" data-dqp-mini="learn-loop" aria-pressed="true" aria-label="Āyah wiederholen">⟳</button>' +
@@ -1757,7 +1749,15 @@
       el.setAttribute("role", "region");
       el.setAttribute("aria-label", "Qurʾān Wiedergabe");
     }
-    if (!el.querySelector(".dqp-top-track") || !el.querySelector("[data-dqp-mini=seek]") || !el.querySelector("[data-dqp-learn]") || !el.querySelector("[data-dqp-mini=pause]") || !el.querySelector("[data-dqp-mini=prev]") || !el.querySelector("[data-dqp-mini=vol]")) {
+    if (
+      !el.querySelector(".dqp-top-track") ||
+      !el.querySelector("[data-dqp-mini=seek]") ||
+      !el.querySelector("[data-dqp-learn]") ||
+      !el.querySelector("[data-dqp-mini=pause]") ||
+      !el.querySelector("[data-dqp-mini=stop]") ||
+      el.querySelector("[data-dqp-mini=prev]") ||
+      el.querySelector("[data-dqp-mini=vol]")
+    ) {
       el.innerHTML = miniMarkup();
       el.dataset.dqpMiniBound = "";
     }

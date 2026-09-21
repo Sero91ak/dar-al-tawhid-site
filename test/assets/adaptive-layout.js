@@ -258,7 +258,7 @@
   function applyChromeInsets(leading, width, metrics) {
     var root = document.documentElement;
     var pad = 8;
-    var left = leading ? width + pad : 12;
+    var left = leading ? width + pad : 8;
     var right = leading ? 12 : width + pad;
     root.style.setProperty("--layout-chrome-left", left + "px");
     root.style.setProperty("--layout-chrome-right", right + "px");
@@ -437,14 +437,13 @@
         gap = Math.max(0, Math.round(vs[1].x - start));
       }
     } catch (e) {}
-    if (segs >= 2 && gap < 12) gap = 28;
     root.setAttribute("data-viewport-segments", String(segs));
     root.style.setProperty("--layout-aspect", String((metrics.aspect || 1).toFixed(3)));
     root.style.setProperty("--layout-hinge-gap", gap + "px");
     root.style.setProperty("--layout-hinge-start", start ? start + "px" : "50%");
-    root.classList.toggle("dar-has-hinge", segs >= 2);
-    var mask = ensureHingeMask();
-    if (mask) mask.hidden = segs < 2 || !currentRail;
+    root.classList.remove("dar-has-hinge");
+    var mask = document.getElementById("darHingeMask");
+    if (mask) mask.hidden = true;
   }
 
   function applyLayout(force) {
