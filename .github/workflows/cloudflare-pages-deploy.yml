@@ -102,6 +102,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Desktop-Beitragsindex für Kurzlink-Deploy erzeugen
+        run: node scripts/build-desktop-posts-index.js
+
       - name: Kurzlink-Regeln prüfen
         shell: bash
         run: |
@@ -156,6 +159,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+
+      - name: Desktop-Beitragsindex für Quellenlink-Deploy erzeugen
+        run: node scripts/build-desktop-posts-index.js
 
       - name: Quellenlink-Seiten prüfen
         shell: bash
