@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 924;
+  var PLAYER_BUILD = 925;
   /* LEARN_PLAYER_ONLY: Āyah-Buttons + Mini-Lernleiste, kein Voll-Player. */
   var LEARN_PLAYER_ONLY = true;
   if (window.__DAR_QURAN_PLAYER_BUILD === PLAYER_BUILD && window.DARQuranPlayer) return;
@@ -490,6 +490,11 @@
     paintProgress();
     if (!saveTimer) saveTimer = setTimeout(function () { saveTimer = 0; saveState(); }, 1800);
     if (sleepUntil && Date.now() >= sleepUntil) fireSleepTimer();
+    var now = Date.now();
+    if (now - posTick > 450) {
+      posTick = now;
+      syncMediaPosition();
+    }
   }
   function onMeta() {
     var a = audioEl();
@@ -1234,52 +1239,102 @@
     }
     paintMini();
   }
+  var posTick = 0;
+  function isTestShell() {
+    try {
+      var p = String(location.pathname || "");
+      return p.indexOf("/test") === 0;
+    } catch (eTs) {
+      return false;
+    }
+  }
+  function nowPlayingArtwork() {
+    var origin = "";
+    try { origin = String(location.origin || ""); } catch (eArt) {}
+    var src = origin + (isTestShell() ? "/test-app-icon-512.png" : "/app-icon-512.png");
+    return [{ src: src, sizes: "512x512", type: "image/png" }];
+  }
+  function nowPlayingRoute() {
+    return "quran-surah/" + state.surah + "/" + state.ayah;
+  }
+  function postNowPlaying(clear) {
+    try {
+      var h = window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.darQuranNowPlaying;
+      if (!h) return;
+      if (clear) {
+        h.postMessage({ clear: true });
+        return;
+      }
+      var m = meta || surahMeta(state.surah) || {};
+      h.postMessage({
+        title: (m.transliteration || "Qurʾān") + " · Āyah " + state.ayah,
+        artist: reciterById(state.reciter).name,
+        album: "DĀR AL TAWḤĪD",
+        playing: !!state.playing,
+        elapsed: Number(state.current) || 0,
+        duration: Number(state.duration) || 0,
+        surah: state.surah,
+        ayah: state.ayah,
+        qari: state.reciter,
+        sourceApp: isTestShell() ? "dar-test" : "dar-live",
+        targetRoute: nowPlayingRoute(),
+        inPlayer: true
+      });
+    } catch (eNp) {}
+  }
+  function syncMediaPosition() {
+    try {
+      if (!navigator.mediaSession || !state.sessionActive) return;
+      var d = Number(state.duration) || 0;
+      var t = Number(state.current) || 0;
+      if (d > 0 && typeof navigator.mediaSession.setPositionState === "function") {
+        navigator.mediaSession.setPositionState({
+          duration: d,
+          playbackRate: Number(state.learnMode ? state.learnRate : 1) || 1,
+          position: Math.max(0, Math.min(d, t))
+        });
+      }
+      postNowPlaying(false);
+    } catch (ePos) {}
+  }
   function syncMediaSession() {
-    if (!navigator.mediaSession) return;
+    if (!navigator.mediaSession) {
+      postNowPlaying(!state.sessionActive);
+      return;
+    }
     try {
       if (!state.sessionActive) {
         navigator.mediaSession.playbackState = "none";
         try { navigator.mediaSession.metadata = null; } catch (e1) {}
-        ["play", "pause", "stop", "previoustrack", "nexttrack", "seekbackward", "seekforward"].forEach(function (act) {
+        ["play", "pause", "stop", "previoustrack", "nexttrack", "seekbackward", "seekforward", "seekto"].forEach(function (act) {
           try { navigator.mediaSession.setActionHandler(act, null); } catch (e2) {}
         });
-        try {
-          if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.darQuranNowPlaying) {
-            window.webkit.messageHandlers.darQuranNowPlaying.postMessage({ clear: true });
-          }
-        } catch (e0) {}
+        postNowPlaying(true);
         return;
       }
       var m = meta || surahMeta(state.surah) || {};
       navigator.mediaSession.metadata = new MediaMetadata({
         title: (m.transliteration || "Qurʾān") + " · Āyah " + state.ayah,
         artist: reciterById(state.reciter).name,
-        album: "Dar Test"
+        album: "DĀR AL TAWḤĪD",
+        artwork: nowPlayingArtwork()
       });
       navigator.mediaSession.playbackState = state.playing ? "playing" : "paused";
       navigator.mediaSession.setActionHandler("play", function () { togglePlay(true); });
       navigator.mediaSession.setActionHandler("pause", function () { audioEl().pause(); });
       navigator.mediaSession.setActionHandler("previoustrack", function () { prevAyah(); });
       navigator.mediaSession.setActionHandler("nexttrack", function () { nextAyah(false); });
-      navigator.mediaSession.setActionHandler("seekbackward", function () { skip(-15); });
-      navigator.mediaSession.setActionHandler("seekforward", function () { skip(15); });
+      navigator.mediaSession.setActionHandler("seekbackward", function () { skip(-10); });
+      navigator.mediaSession.setActionHandler("seekforward", function () { skip(10); });
       try { navigator.mediaSession.setActionHandler("stop", function () { stopSession(); }); } catch (e3) {}
       try {
-        if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.darQuranNowPlaying) {
-          window.webkit.messageHandlers.darQuranNowPlaying.postMessage({
-            title: (m.transliteration || "Qurʾān") + " · Āyah " + state.ayah,
-            artist: reciterById(state.reciter).name,
-            playing: !!state.playing,
-            elapsed: Number(state.current) || 0,
-            duration: Number(state.duration) || 0,
-            surah: state.surah,
-            ayah: state.ayah,
-            qari: state.reciter,
-            sourceApp: "dar-test",
-            targetRoute: "quran-player"
-          });
-        }
-      } catch (e4) {}
+        navigator.mediaSession.setActionHandler("seekto", function (det) {
+          var a = audioEl();
+          if (!a || !det) return;
+          if (typeof det.seekTime === "number") a.currentTime = det.seekTime;
+        });
+      } catch (eSeek) {}
+      syncMediaPosition();
     } catch (e) {}
   }
   function audioHasSrc(a) {
@@ -1814,10 +1869,10 @@
         '<span class="dqp-top-time" data-dqp-mini-dur>00:00</span>' +
       "</div>" +
       '<div class="dqp-learn" data-dqp-learn hidden>' +
-        '<button type="button" class="dqp-learn-btn dqp-learn-reciter" data-dqp-mini="learn-reciter" aria-label="Qāriʾ wählen">ق</button>' +
-        '<button type="button" class="dqp-learn-btn" data-dqp-mini="learn-loop" aria-pressed="true" aria-label="Āyah wiederholen">⟳</button>' +
-        '<button type="button" class="dqp-learn-btn" data-dqp-mini="learn-stay" aria-pressed="true" aria-label="Bei der Āyah bleiben">◉</button>' +
-        '<button type="button" class="dqp-learn-btn dqp-learn-rate" data-dqp-mini="learn-rate" aria-label="Tempo">1×</button>' +
+        '<button type="button" class="dqp-learn-btn dqp-learn-reciter" data-dqp-mini="learn-reciter" aria-label="Qāriʾ wählen"><span class="dqp-learn-lab">Qāriʾ</span></button>' +
+        '<button type="button" class="dqp-learn-btn" data-dqp-mini="learn-loop" aria-pressed="true" aria-label="Āyah wiederholen"><span class="dqp-learn-lab">Wiederholen</span></button>' +
+        '<button type="button" class="dqp-learn-btn" data-dqp-mini="learn-stay" aria-pressed="true" aria-label="Bei der Āyah bleiben"><span class="dqp-learn-lab">Bleiben</span></button>' +
+        '<button type="button" class="dqp-learn-btn dqp-learn-rate" data-dqp-mini="learn-rate" aria-label="Tempo"><span class="dqp-learn-lab" data-dqp-learn-rate-lab>1×</span></button>' +
       "</div>"
     );
   }
@@ -1834,6 +1889,7 @@
       !el.querySelector(".dqp-top-track") ||
       !el.querySelector("[data-dqp-mini=seek]") ||
       !el.querySelector("[data-dqp-learn]") ||
+      !el.querySelector(".dqp-learn-lab") ||
       !el.querySelector("[data-dqp-mini=learn-reciter]") ||
       !el.querySelector("[data-dqp-mini=pause]") ||
       !el.querySelector("[data-dqp-mini=stop]") ||
@@ -1904,7 +1960,8 @@
     }
     if (rateBtn) {
       var rate = Number(state.learnRate) || 1;
-      rateBtn.textContent = String(rate).replace(/\.00$/, "") + "×";
+      var rateLab = rateBtn.querySelector("[data-dqp-learn-rate-lab]") || rateBtn;
+      rateLab.textContent = String(rate).replace(/\.00$/, "") + "×";
       rateBtn.classList.toggle("is-on", rate !== 1);
     }
     if (b && state.learnMode && isReaderRoute()) {
@@ -1912,6 +1969,7 @@
     }
     markPlayingAyah();
     paintMiniProgress();
+    syncMediaSession();
     if (state.learnMode && !state.learnLoop) followPlayingAyah(false);
   }
   function bindLearnSheet(sh) {
