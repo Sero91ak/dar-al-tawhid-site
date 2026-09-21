@@ -530,6 +530,59 @@ button,input,select{font:inherit}
   .prayer-river::after{border-radius:32px!important}
 }
 
+
+/* Realistic content population v8 */
+.real-list{border-top:1px solid var(--line)}
+.real-post{padding:18px 0;border-bottom:1px solid var(--line2)}
+.real-post-top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
+.real-post h3{margin:5px 0 6px;font:500 21px/1.18 var(--serif)}
+.real-post .speaker-line{font-size:9px;color:var(--gold);font-weight:850;letter-spacing:.09em;text-transform:uppercase}
+.real-post .statement{margin-top:10px;font:500 14px/1.62 var(--serif);color:#453e35;max-width:970px}
+.real-post .fazit{margin-top:9px;font-size:10.5px;line-height:1.62;color:#756c61;max-width:930px}
+.real-source{margin-top:11px;padding-top:9px;border-top:1px solid var(--line2);font-size:9.5px;line-height:1.55;color:#665d51}
+.real-source b{color:#4d412f}
+.real-source a{margin-left:8px;color:#76591f;font-weight:850;white-space:nowrap}
+.real-source a:hover{text-decoration:underline;text-underline-offset:3px}
+.two-reading-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 34px}
+.two-reading-cols>*:nth-child(odd){padding-right:34px;border-right:1px solid var(--line2)}
+.dua-real{padding:20px 0;border-bottom:1px solid var(--line2)}
+.dua-real:first-child{border-top:1px solid var(--line)}
+.dua-real h3{font:500 20px/1.25 var(--serif);margin:6px 0 12px}
+.dua-real .dua-ar{font-size:27px}
+.dua-real .dua-tr{margin-bottom:6px}
+.content-count{font-size:8px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.real-cover-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.real-cover{display:block;min-width:0}
+.real-cover-visual{aspect-ratio:.70;position:relative;overflow:hidden;background:linear-gradient(145deg,#ece2cc,#bca373);border:1px solid rgba(87,62,29,.18);box-shadow:0 12px 24px rgba(72,50,18,.08);transition:transform .24s ease,box-shadow .24s ease}
+.real-cover:hover .real-cover-visual{transform:translateY(-4px);box-shadow:0 18px 30px rgba(72,50,18,.13)}
+.real-cover-visual img{width:100%;height:100%;object-fit:cover;display:block}
+.real-cover h3{font:500 15px/1.28 var(--serif);margin:11px 0 3px}
+.real-cover small{display:block;color:var(--muted);font-size:9px;line-height:1.45}
+.prophet-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.prophet-item{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:16px 16px 16px 0;border-bottom:1px solid var(--line2);border-right:1px solid var(--line2)}
+.prophet-item:nth-child(4n){border-right:0;padding-left:16px}
+.prophet-item:nth-child(4n+2),.prophet-item:nth-child(4n+3){padding-left:16px}
+.prophet-item h3{margin:0;font:500 18px/1.2 var(--serif)}
+.prophet-item p{margin:4px 0 0;font-size:9.5px;color:#786f63}
+.prophet-item .ar{font-family:"Geeza Pro","Noto Naskh Arabic",serif;font-size:24px;color:#76591f}
+.fact-grid{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--line)}
+.fact-row{padding:14px 18px 14px 0;border-bottom:1px solid var(--line2);border-right:1px solid var(--line2)}
+.fact-row:nth-child(even){border-right:0;padding-left:18px}
+.fact-row span{display:block;font-size:8px;color:var(--gold);font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+.fact-row b{display:block;margin-top:5px;font:500 14px/1.45 var(--serif)}
+.women-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.women-item{padding:18px 18px 19px 0;border-bottom:1px solid var(--line2);border-right:1px solid var(--line2)}
+.women-item:nth-child(3n){border-right:0;padding-left:18px}.women-item:nth-child(3n+2){padding-left:18px}
+.women-item h3{margin:5px 0 6px;font:500 19px/1.2 var(--serif)}.women-item p{margin:0;font-size:10.5px;line-height:1.55;color:#736b60}
+.women-detail-entry{padding:18px 0;border-bottom:1px solid var(--line2)}
+.women-detail-entry h3{font:500 20px/1.2 var(--serif);margin:0 0 7px}.women-detail-entry p{font-size:11.5px;line-height:1.72;color:#615a51}
+.quiz-meta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px}.quiz-meta span{font-size:8px;color:var(--gold);font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+.quiz-next{margin-top:18px;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:transparent;padding:10px 0;color:#715523;font-size:9px;font-weight:850;letter-spacing:.09em;text-transform:uppercase;cursor:pointer}
+.search-kind{font-size:8px;color:var(--gold);font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+@media(max-width:1050px){.real-cover-grid{grid-template-columns:repeat(3,1fr)}.prophet-grid{grid-template-columns:repeat(3,1fr)}.prophet-item:nth-child(n){padding-left:14px;padding-right:14px}.prophet-item:nth-child(3n){border-right:0}.prophet-item:nth-child(4n){border-right:1px solid var(--line2)}}
+@media(max-width:820px){.two-reading-cols{grid-template-columns:1fr}.two-reading-cols>*:nth-child(odd){padding-right:0;border-right:0}.real-cover-grid{grid-template-columns:repeat(2,1fr)}.prophet-grid,.women-grid,.fact-grid{grid-template-columns:repeat(2,1fr)}.women-item:nth-child(n){padding-left:14px;padding-right:14px}.women-item:nth-child(2n){border-right:0}.women-item:nth-child(3n){border-right:1px solid var(--line2)}}
+@media(max-width:560px){.real-cover-grid{grid-template-columns:1fr 1fr;gap:14px}.prophet-grid,.women-grid,.fact-grid{grid-template-columns:1fr}.prophet-item:nth-child(n),.women-item:nth-child(n),.fact-row:nth-child(n){border-right:0;padding-left:0;padding-right:0}}
+
 </style>
 </head>
 <body>
@@ -1002,7 +1055,247 @@ button,input,select{font:inherit}
   qa.audio.onended=function(){stepQa(1,true)};
   if("mediaSession" in navigator){try{navigator.mediaSession.setActionHandler("play",function(){qa.audio.play()});navigator.mediaSession.setActionHandler("pause",function(){qa.audio.pause()});navigator.mediaSession.setActionHandler("nexttrack",function(){stepQa(1,true)});navigator.mediaSession.setActionHandler("previoustrack",function(){stepQa(-1,true)})}catch(e){}}
  }
- initQa();render()
+
+ // --- Real visitor content v8 ---
+ var realData={posts:[],duas:[],books:[],publications:[],prophets:[],womenAreas:[],quiz:[],scholars:[]};
+ var duaPreviewPaths=[
+  "/content/duas/dua-001-rabbana-atina.md",
+  "/content/duas/dua-025-qunut-witr.md",
+  "/content/duas/dua-026-ya-muqallib.md",
+  "/content/duas/dua-027-allahumma-inni-asaluka-huda.md",
+  "/content/duas/dua-032-rabbi-zidni-ilma.md",
+  "/content/duas/dua-049-rabbi-shrah-li-sadri.md",
+  "/content/duas/dua-051-la-ilaha-illa-anta-subhanaka.md",
+  "/content/duas/dua-059-sayyid-al-istighfar.md",
+  "/content/duas/dua-065-allahumma-inni-asaluka-al-afwa-wal-afiyah.md",
+  "/content/duas/dua-067-allahumma-inni-audhu-bika-min-al-hammi.md",
+  "/content/duas/dua-068-allahumma-innaka-afuwwun.md",
+  "/content/duas/dua-071-rabbana-taqabbal-minna.md"
+ ];
+ function fetchJsonSafe(url){return fetch(url,{cache:"force-cache"}).then(function(r){if(!r.ok)throw new Error(url+" "+r.status);return r.json()})}
+ function parseMdSimple(md){
+  var fm={},body=String(md||"");
+  if(body.indexOf("---")===0){
+   var end=body.indexOf("\n---",3);
+   if(end>=0){
+    body.slice(3,end).trim().split(/\r?\n/).forEach(function(line){
+     var m=line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);if(m)fm[m[1]]=m[2].replace(/^["']|["']$/g,"")
+    });
+    body=body.slice(end+4).trim()
+   }
+  }
+  var sections={},parts=body.split(/^##\s+/m);
+  for(var i=1;i<parts.length;i++){var nl=parts[i].indexOf("\n"),k=(nl>=0?parts[i].slice(0,nl):parts[i]).trim(),v=(nl>=0?parts[i].slice(nl+1):"").trim();sections[k]=v}
+  return{id:fm.id||"",title:fm.title||"",category:fm.cat||fm.type||"Duʿāʾ",occasion:fm.occasion||"",arabic:sections.Arabisch||"",translit:sections.Lautschrift||"",german:sections.Deutsch||"",source:String(sections.Quelle||fm.src||"").replace(/^📝\s*/,"")}
+ }
+ function loadDesktopContent(){
+  return Promise.all([
+   fetchJsonSafe("/desktop-preview/posts.json"),
+   fetchJsonSafe("/data/books-library.json"),
+   fetchJsonSafe("/data/library-publications.json"),
+   fetchJsonSafe("/data/prophets/index.json"),
+   fetchJsonSafe("/data/quiz-questions.json"),
+   fetchJsonSafe("/data/scholars-library.json"),
+   fetchJsonSafe("/test/data/frauen-bereiche-index.json"),
+   Promise.all(duaPreviewPaths.map(function(url){return fetch(url,{cache:"force-cache"}).then(function(r){return r.text()}).then(parseMdSimple).catch(function(){return null})}))
+  ]).then(function(all){
+   realData.posts=all[0]||[];
+   realData.books=(all[1]&&all[1].books||[]).filter(function(x){return x.verification==="verified"});
+   realData.publications=(all[2]&&all[2].publications||[]).filter(function(x){return x.status==="published"||x.status==="updated"}).sort(function(a,b){return String(b.publishedAt||"").localeCompare(String(a.publishedAt||""))});
+   realData.prophets=(all[3]&&all[3].prophets||[]).filter(function(x){return x.profileStatus==="approved"});
+   realData.quiz=(all[4]||[]).filter(function(x){return x.status==="published"&&x.reviewStatus==="approved"&&x.type==="multiple_choice"});
+   realData.scholars=(all[5]&&all[5].scholars||[]).slice(0,60);
+   realData.womenAreas=(all[6]&&all[6].bereiche||[]).filter(function(x){return x.status==="aktiv"&&Number(x.sichtbareEintraege||0)>0});
+   realData.duas=(all[7]||[]).filter(Boolean)
+  })
+ }
+ function cleanTitle(v){return String(v||"").replace(/^📖\s*/,"")}
+ function cleanMd(v){return String(v||"").replace(/\*\*/g,"").replace(/__+/g,"").replace(/^\s*🖋️\s*/,"").trim()}
+ function clip(v,n){var t=cleanMd(v);return t.length>n?t.slice(0,n).replace(/\s+\S*$/,"")+"…":t}
+ function splitPost(p){
+  var t=cleanMd(p&&p.body||""),fazit="",i=t.indexOf("🌙 Fazit:");
+  if(i>=0){fazit=t.slice(i+9).trim();t=t.slice(0,i).trim()}
+  t=t.replace(/👉🏼\s*Erklärung/g,"\n\nErklärung:");
+  return{statement:t,fazit:fazit}
+ }
+ function sourceHtml(p){
+  var links=(p.links||[]).map(function(l){return '<a target="_blank" rel="noopener" href="'+escBook(l.url)+'">'+escBook(l.label||"Direktnachweis")+' ↗</a>'}).join("");
+  return '<div class="real-source"><b>Quelle:</b> '+escBook(p.reference||p.work||"")+(links?" "+links:"")+'</div>'
+ }
+ function postHtml(p,full){
+  var x=splitPost(p);
+  return '<article class="real-post"><div class="real-post-top"><div><div class="eyebrow">'+escBook(p.category||"Wissen")+'</div><h3>'+escBook(cleanTitle(p.title))+'</h3></div><span class="content-count">'+escBook(p.work||"")+'</span></div>'+
+   (p.speaker?'<div class="speaker-line">'+escBook(p.speaker)+'</div>':"")+
+   '<div class="statement">'+escBook(full?x.statement:clip(x.statement,430)).replace(/\n/g,"<br>")+'</div>'+sourceHtml(p)+
+   (x.fazit?'<div class="fazit"><b>Fazit:</b> '+escBook(full?x.fazit:clip(x.fazit,260))+'</div>':"")+'</article>'
+ }
+ function compactPostLink(p){
+  return '<a class="list-row desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(p.id))+'"><span class="meta">'+escBook(p.category||"Beitrag")+'</span><strong>'+escBook(cleanTitle(p.title))+'</strong><small>'+escBook(p.speaker||"Lesen")+'</small></a>'
+ }
+ function pUrl(name,extra){return "/desktop-preview/?page="+encodeURIComponent(name)+(extra?"&"+extra:"")}
+ function realIntro(label,title,desc){return '<section class="page-intro reveal"><div><div class="eyebrow">'+escBook(label)+'</div><h1>'+escBook(title)+'</h1><p>'+escBook(desc)+'</p></div><div class="intro-aside">DĀR AL TAWḤĪD<br>Qurʾān · Sunnah · Āṯār</div></section><div class="ornament-line reveal"></div>'}
+
+ intros.propheten=["PROPHETEN","Die Propheten","Qurʾān, authentische Sunnah und geprüfte frühe Überlieferungen."];
+ intros.prophet=["PROPHET","Biografie und Belege","Geprüfte Angaben und Qurʾān-Stellen."];
+ intros.frauenbereich=["FRAUEN","Geprüfte Inhalte","Aussagen mit Quelle und Direktnachweis."];
+
+ renders.start=function(){
+  var posts=realData.posts.slice(0,4),duas=realData.duas.slice(0,2),pubs=realData.publications.slice(0,4),props=realData.prophets.slice(0,5);
+  return realIntro("DĀR AL TAWḤĪD","Qurʾān, Sunnah und überliefertes Wissen.","Lies den Qurʾān, höre Rezitation, öffne geprüfte Beiträge, Duʿāʾ, Werke und Quellen.")+
+   '<section class="hero reveal"><div><div class="hero-ar" dir="rtl">ٱهْدِنَا ٱلصِّرَاطَ ٱلْمُسْتَقِيمَ</div><div class="hero-trans">„Leite uns den geraden Weg.“</div><span class="hero-ref">Qurʾān · al-Fātiḥah 1:6</span></div><div class="hero-note">Qurʾān lesen oder hören, Wissen nachschlagen und Quellen direkt öffnen.</div></section>'+
+   '<section id="prayerRiver" class="prayer-river reveal"><div class="prayer-inner"><div class="prayer-current"><div class="prayer-label">Aktuelle Gebetszeit</div><b id="prCurrent">—</b><small id="prLocation">Standort wählen</small></div><div class="prayer-next"><div class="prayer-label">Nächstes Gebet</div><b id="prNext">—</b><small id="prNextTime">—</small></div><div id="prCountdown" class="prayer-count">--:--:--<span>bis zum nächsten Gebet</span></div><button id="prLocate" class="prayer-locate" type="button">Standort verwenden</button></div></section>'+
+   '<section class="section parchment reveal"><div class="section-head"><h2>Ausgewählte Beiträge</h2><a class="text-link desktop-link" data-page="beitraege" href="'+pUrl("beitraege")+'">Alle Beiträge</a></div><div class="two-reading-cols">'+posts.map(function(x){return '<a class="rule-card desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'"><div class="kicker">'+escBook(x.category||"Wissen")+'</div><h3>'+escBook(cleanTitle(x.title))+'</h3><p>'+escBook(x.speaker||x.work||"")+'</p></a>'}).join("")+'</div></section>'+
+   '<section class="section reveal"><div class="section-head"><h2>Duʿāʾ</h2><a class="text-link desktop-link" data-page="dua" href="'+pUrl("dua")+'">Alle Duʿāʾ</a></div><div class="two-reading-cols">'+duas.map(function(d){return '<a class="dua-real desktop-link" data-page="dua" href="'+pUrl("dua","id="+encodeURIComponent(d.id))+'"><div class="eyebrow">'+escBook(d.category)+'</div><h3>'+escBook(d.title)+'</h3><div class="dua-ar" dir="rtl">'+escBook(d.arabic)+'</div><div class="real-source"><b>Quelle:</b> '+escBook(d.source)+'</div></a>'}).join("")+'</div></section>'+
+   '<section class="section parchment reveal"><div class="section-head"><h2>Bibliothek</h2><a class="text-link desktop-link" data-page="bibliothek" href="'+pUrl("bibliothek")+'">Alle Werke</a></div><div class="real-cover-grid">'+pubs.map(function(b){return '<a class="real-cover desktop-link" data-page="werk" href="'+pUrl("werk","type=pub&id="+encodeURIComponent(b.id))+'"><div class="real-cover-visual">'+(b.coverUrl?'<img src="'+escBook(b.coverUrl)+'" alt="">':"")+'</div><h3>'+escBook(b.title)+'</h3><small>'+escBook(b.category||"Publikation")+(b.publishedAt?' · '+escBook(b.publishedAt):"")+'</small></a>'}).join("")+'</div></section>'+
+   '<section class="section reveal"><div class="section-head"><h2>Die Propheten</h2><a class="text-link desktop-link" data-page="propheten" href="'+pUrl("propheten")+'">Alle öffnen</a></div><div class="list-lines">'+props.map(function(x){return '<a class="list-row desktop-link" data-page="prophet" href="'+pUrl("prophet","id="+encodeURIComponent(x.id))+'"><span class="meta">'+(x.uluAlAzm?"Ulū al-ʿAzm":"Prophet")+'</span><strong>'+escBook(x.name)+' '+escBook(x.honorific||"")+'</strong><small>'+escBook(x.people||x.roles.join(" · "))+'</small></a>'}).join("")+'</div></section>'+footer()
+ };
+
+ renders.beitraege=function(){
+  var q=new URLSearchParams(location.search),cat=q.get("cat")||"",cats=[];
+  realData.posts.forEach(function(x){if(x.category&&cats.indexOf(x.category)<0)cats.push(x.category)});
+  var list=cat?realData.posts.filter(function(x){return x.category===cat}):realData.posts;
+  return realIntro("BEITRÄGE","Aussagen, Erklärungen und Quellen.","Jede Aussage steht mit ihrer Quelle und dem verfügbaren Direktnachweis unmittelbar zusammen.")+
+   '<section class="section reveal"><div class="toolbar"><a class="tool '+(!cat?"active":"")+' desktop-link" data-page="beitraege" href="'+pUrl("beitraege")+'">Alle</a>'+cats.slice(0,8).map(function(c){return '<a class="tool '+(cat===c?"active":"")+' desktop-link" data-page="beitraege" href="'+pUrl("beitraege","cat="+encodeURIComponent(c))+'">'+escBook(c)+'</a>'}).join("")+'</div><div class="real-list">'+list.slice(0,14).map(function(x){return '<div>'+postHtml(x,false)+'<a class="text-link desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'">Vollständig lesen</a></div>'}).join("")+'</div></section>'+footer()
+ };
+
+ renders.beitrag=function(){
+  var id=new URLSearchParams(location.search).get("id"),item=realData.posts.find(function(x){return x.id===id})||realData.posts[0];
+  if(!item)return realIntro("BEITRAG","Keine Inhalte gefunden.","");
+  var related=realData.posts.filter(function(x){return x.id!==item.id&&x.category===item.category}).slice(0,4);
+  return realIntro(item.category||"BEITRAG",cleanTitle(item.title),item.topic||item.work||"")+
+   '<section class="section parchment reveal"><div class="detail-page"><div class="detail-main">'+postHtml(item,true)+'</div><aside class="source-index"><div class="eyebrow">ZUGEHÖRIGE INHALTE</div><div class="list-lines">'+related.map(compactPostLink).join("")+'</div></aside></div></section>'+footer()
+ };
+
+ renders.dua=function(){
+  var id=new URLSearchParams(location.search).get("id"),item=realData.duas.find(function(x){return x.id===id});
+  if(item){
+   return realIntro(item.category||"DUʿĀʾ",item.title,item.occasion||"")+
+    '<section class="section parchment reveal"><article class="dua-real"><div class="dua-ar" dir="rtl">'+escBook(item.arabic)+'</div><p class="dua-tr">'+escBook(item.translit)+'</p><p class="dua-de">'+escBook(item.german)+'</p><div class="real-source"><b>Quelle:</b> '+escBook(item.source)+'</div></article><a class="text-link desktop-link" data-page="dua" href="'+pUrl("dua")+'">Zur Duʿāʾ-Übersicht</a></section>'+footer()
+  }
+  var cats=[];realData.duas.forEach(function(d){if(d.category&&cats.indexOf(d.category)<0)cats.push(d.category)});
+  return realIntro("DUʿĀʾ","Bittgebete aus Qurʾān und Sunnah.","Arabisch, Lautschrift, deutsche Bedeutung und Quelle direkt zusammen.")+
+   '<section class="section reveal"><div class="dua-reader"><aside class="sidebar"><div class="side-title">Kategorien</div><nav class="side-nav">'+cats.map(function(c){return '<span>'+escBook(c)+'</span>'}).join("")+'</nav></aside><div class="dua-main">'+realData.duas.map(function(d){return '<a class="dua-real desktop-link" data-page="dua" href="'+pUrl("dua","id="+encodeURIComponent(d.id))+'"><div class="eyebrow">'+escBook(d.category)+'</div><h3>'+escBook(d.title)+'</h3><div class="dua-ar" dir="rtl">'+escBook(d.arabic)+'</div><p class="dua-de">'+escBook(d.german)+'</p><div class="real-source"><b>Quelle:</b> '+escBook(d.source)+'</div></a>'}).join("")+'</div></div></section>'+footer()
+ };
+
+ renders.wissen=function(){
+  var counts={};realData.posts.forEach(function(x){counts[x.category]=(counts[x.category]||0)+1});
+  var cats=Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]}).slice(0,12);
+  var scholars=realData.scholars.slice(0,10);
+  return realIntro("WISSEN","Themen und Gelehrte erschließen.","Beiträge nach Themen öffnen und zu den verwendeten Quellen weitergehen.")+
+   '<section class="section reveal"><div class="section-head"><h2>Themen</h2><p>Aus den vorhandenen Beiträgen</p></div><div class="knowledge-grid">'+cats.map(function(c){return '<a class="knowledge-item desktop-link" data-page="thema" href="'+pUrl("thema","name="+encodeURIComponent(c))+'"><span>'+counts[c]+' Beiträge</span><h3>'+escBook(c)+'</h3><p>Beiträge, Aussagen und Quellen zu diesem Bereich.</p></a>'}).join("")+'</div></section>'+
+   '<section class="section parchment reveal"><div class="section-head"><h2>Gelehrte & Überlieferer</h2><p>Bibliotheksindex</p></div><div class="list-lines">'+scholars.map(function(x){var n=x.displayName||x.name||"Gelehrter";return '<div class="list-row"><span class="meta">Person</span><strong>'+escBook(n)+'</strong><small>'+escBook(x.era||x.death||"")+'</small></div>'}).join("")+'</div></section>'+footer()
+ };
+
+ renders.thema=function(){
+  var name=new URLSearchParams(location.search).get("name")||"",list=realData.posts.filter(function(x){return !name||x.category===name});
+  if(!list.length)list=realData.posts.slice(0,8);
+  return realIntro("WISSENSTHEMA",name||"Ausgewählte Inhalte","Aussagen mit direkt zugeordneten Quellen und Nachweisen.")+
+   '<section class="section reveal"><div class="real-list">'+list.slice(0,14).map(function(x){return postHtml(x,false)+'<a class="text-link desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'">Öffnen</a>'}).join("")+'</div></section>'+footer()
+ };
+
+ renders.bibliothek=function(){
+  var pubs=realData.publications.slice(0,12),books=realData.books.slice(0,12);
+  return realIntro("BIBLIOTHEK","Publikationen und klassische Quellenwerke.","Eigene Dossiers und verifizierte Quellenwerke getrennt, aber in einer gemeinsamen Bibliothek.")+
+   '<section class="section parchment reveal"><div class="section-head"><h2>DĀR AL TAWḤĪD Publikationen</h2><p>'+pubs.length+' ausgewählte Werke</p></div><div class="real-cover-grid">'+pubs.map(function(b){return '<a class="real-cover desktop-link" data-page="werk" href="'+pUrl("werk","type=pub&id="+encodeURIComponent(b.id))+'"><div class="real-cover-visual">'+(b.coverUrl?'<img src="'+escBook(b.coverUrl)+'" alt="">':"")+'</div><h3>'+escBook(b.title)+'</h3><small>'+escBook(b.category||"")+(b.fileSize?' · '+escBook(b.fileSize):"")+'</small></a>'}).join("")+'</div></section>'+
+   '<section class="section reveal"><div class="section-head"><h2>Quellenwerke</h2><p>Verifizierter Bibliotheksindex</p></div><div class="list-lines">'+books.map(function(b){return '<a class="list-row desktop-link" data-page="werk" href="'+pUrl("werk","type=book&id="+encodeURIComponent(b.id))+'"><span class="meta">'+escBook(b.category||"Werk")+'</span><strong>'+escBook(b.title)+'</strong><small>'+escBook(b.author||"")+'</small></a>'}).join("")+'</div></section>'+footer()
+ };
+
+ renders.werk=function(){
+  var q=new URLSearchParams(location.search),id=q.get("id"),type=q.get("type")||"";
+  var pub=realData.publications.find(function(x){return x.id===id}),book=realData.books.find(function(x){return x.id===id});
+  if(pub||type==="pub"){
+   var x=pub||realData.publications[0];if(!x)return realIntro("WERK","Keine Publikation gefunden.","");
+   return realIntro(x.category||"PUBLIKATION",x.title,x.description||x.subtitle||"DĀR AL TAWḤĪD · "+(x.publishedAt||""))+
+    '<section class="section parchment reveal"><div class="detail-page"><div class="detail-main"><div class="real-cover-grid" style="grid-template-columns:minmax(180px,260px)"><div class="real-cover"><div class="real-cover-visual">'+(x.coverUrl?'<img src="'+escBook(x.coverUrl)+'" alt="">':"")+'</div></div></div><div class="fact-grid" style="margin-top:24px"><div class="fact-row"><span>Sprache</span><b>'+escBook(x.language||"Deutsch")+'</b></div><div class="fact-row"><span>Version</span><b>'+escBook(x.version||"")+'</b></div><div class="fact-row"><span>Veröffentlicht</span><b>'+escBook(x.publishedAt||"")+'</b></div><div class="fact-row"><span>Datei</span><b>'+escBook(x.fileSize||"PDF")+'</b></div></div></div><aside class="source-index"><div class="eyebrow">LESEN</div><h3>'+escBook(x.title)+'</h3>'+(x.pdfUrl?'<a class="source-open" target="_blank" rel="noopener" href="'+escBook(x.pdfUrl)+'">PDF öffnen ↗</a>':"")+'</aside></div></section>'+footer()
+  }
+  var b=book||realData.books[0];if(!b)return realIntro("WERK","Kein Werk gefunden.","");
+  var related=realData.posts.filter(function(pst){return (b.postIds||[]).indexOf(pst.id)>=0}).slice(0,6);
+  return realIntro(b.category||"QUELLENWERK",b.title,b.author||"")+
+   '<section class="section reveal"><div class="detail-page"><div class="detail-main"><div class="fact-grid"><div class="fact-row"><span>Autor</span><b>'+escBook(b.author||"")+'</b></div><div class="fact-row"><span>Kategorie</span><b>'+escBook(b.category||"")+'</b></div><div class="fact-row"><span>Verknüpfte Beiträge</span><b>'+Number(b.postCount||0)+'</b></div><div class="fact-row"><span>Verifikation</span><b>'+escBook(b.verification||"verified")+'</b></div></div><div class="list-lines" style="margin-top:22px">'+related.map(compactPostLink).join("")+'</div></div><aside class="source-index"><div class="eyebrow">ZITIERTE GELEHRTE</div><h3>'+escBook((b.quotedScholars||[]).slice(0,4).join(" · ")||b.author||"")+'</h3></aside></div></section>'+footer()
+ };
+
+ renders.propheten=function(){
+  return realIntro("PROPHETEN","Die Propheten","Was Qurʾān, authentische Sunnah und geprüfte frühe Überlieferungen berichten.")+
+   '<section class="section parchment reveal"><div class="prophet-grid">'+realData.prophets.map(function(x){return '<a class="prophet-item desktop-link" data-page="prophet" href="'+pUrl("prophet","id="+encodeURIComponent(x.id))+'"><div><h3>'+escBook(x.name)+' '+escBook(x.honorific||"")+'</h3><p>'+(x.uluAlAzm?"Ulū al-ʿAzm · ":"")+escBook(x.people||x.roles.join(" · "))+'</p></div><div class="ar" dir="rtl">'+escBook(x.nameAr||"")+'</div></a>'}).join("")+'</div></section>'+footer()
+ };
+
+ function hydrateProphet(id){
+  var box=document.getElementById("prophetDetail");if(!box)return;
+  fetchJsonSafe("/data/prophets/"+encodeURIComponent(id)+".json").then(function(d){
+   var facts=(d.overviewFields||d.overview||[]).filter(function(x){return x&&x.value}).slice(0,12);
+   var refs=(d.quranRefs||[]).slice(0,8);
+   box.innerHTML='<div class="eyebrow">'+escBook((d.roles||[]).join(" · "))+'</div><h2 style="font:500 38px/1.1 var(--serif);margin:8px 0 9px">'+escBook(d.name)+' <span dir="rtl">'+escBook(d.nameAr||"")+'</span> '+escBook(d.honorific||"")+'</h2><p style="font-size:12px;color:#655d52;line-height:1.72">'+escBook(d.mission||d.people||"")+'</p><div class="fact-grid" style="margin-top:22px">'+facts.map(function(f){return '<div class="fact-row"><span>'+escBook(f.label||f.key)+'</span><b>'+escBook(f.value)+'</b></div>'}).join("")+'</div><div class="section-head" style="margin-top:28px"><h2>Qurʾān-Stellen</h2></div><div class="list-lines">'+refs.map(function(r){return '<a class="list-row desktop-link" data-page="quran" href="'+pUrl("quran","surah="+r.surah)+'"><span class="meta">'+r.surah+':'+r.ayah+(r.ayahEnd&&r.ayahEnd!==r.ayah?"–"+r.ayahEnd:"")+'</span><strong>'+escBook(r.event||"Qurʾān")+'</strong><small>Qurʾān öffnen</small></a>'}).join("")+'</div>'
+  }).catch(function(){box.innerHTML='<p>Die geprüften Angaben konnten gerade nicht geladen werden.</p>'})
+ }
+ renders.prophet=function(){
+  var id=new URLSearchParams(location.search).get("id")||realData.prophets[0]?.id||"adam",meta=realData.prophets.find(function(x){return x.id===id});
+  setTimeout(function(){hydrateProphet(id)},0);
+  return realIntro("PROPHET",meta?meta.name:"Prophet",meta?((meta.uluAlAzm?"Ulū al-ʿAzm · ":"")+(meta.people||"")):"")+'<section class="section parchment reveal"><div id="prophetDetail"><p>Inhalt wird geladen …</p></div></section>'+footer()
+ };
+
+ renders.frauen=function(){
+  return realIntro("FRAUEN","Geprüfte Wissensbereiche","Nur Bereiche mit bereits sichtbaren, geprüften Inhalten werden hier angezeigt.")+
+   '<section class="section reveal"><div class="women-grid">'+realData.womenAreas.map(function(x){return '<a class="women-item desktop-link" data-page="frauenbereich" href="'+pUrl("frauenbereich","id="+encodeURIComponent(x.kennung))+'"><div class="eyebrow">'+Number(x.sichtbareEintraege||0)+' Inhalte</div><h3>'+escBook(x.titel)+'</h3><p>'+escBook(x.untertitel||"")+'</p></a>'}).join("")+'</div></section>'+footer()
+ };
+ function hydrateWomen(id){
+  var area=realData.womenAreas.find(function(x){return x.kennung===id}),box=document.getElementById("womenDetail");if(!box||!area||!area.datenDatei)return;
+  fetchJsonSafe("/"+area.datenDatei.replace(/^\/+/,"")).then(function(d){
+   var items=(d.eintraege||[]).filter(function(x){return x.quellenstatus==="geprueft"&&x.direktnachweisUrl}).slice(0,12);
+   box.innerHTML=items.map(function(x){return '<article class="women-detail-entry"><div class="eyebrow">'+escBook(x.bereich||x.thema||"Wissen")+'</div><h3>'+escBook(x.titel)+'</h3><p>'+escBook(x.inhalt||x.kurzbeschreibung||"")+'</p><div class="real-source"><b>'+escBook(x.quellenanzeige||"Quelle")+'</b> <a target="_blank" rel="noopener" href="'+escBook(x.direktnachweisUrl)+'">'+escBook(x.direktnachweisText||"Quelle öffnen")+' ↗</a></div></article>'}).join("")
+  }).catch(function(){box.innerHTML='<p>Die geprüften Inhalte konnten gerade nicht geladen werden.</p>'})
+ }
+ renders.frauenbereich=function(){
+  var id=new URLSearchParams(location.search).get("id"),area=realData.womenAreas.find(function(x){return x.kennung===id})||realData.womenAreas[0];
+  if(!area)return realIntro("FRAUEN","Keine Inhalte gefunden.","");
+  setTimeout(function(){hydrateWomen(area.kennung)},0);
+  return realIntro("FRAUEN",area.titel,area.untertitel||"")+'<section class="section parchment reveal"><div id="womenDetail"><p>Inhalte werden geladen …</p></div></section>'+footer()
+ };
+
+ var quizCursor=0;
+ renders.quiz=function(){
+  var q=realData.quiz[quizCursor%Math.max(1,realData.quiz.length)]||null;
+  if(!q)return realIntro("QUIZ","Wissensquiz","Keine Frage verfügbar.");
+  return realIntro("QUIZ","Wissen prüfen",q.category+" · "+q.topic)+
+   '<section class="section reveal"><div style="max-width:880px"><div class="quiz-meta"><span>'+escBook(q.category)+'</span><span>'+escBook(q.level||"")+'</span><span>Frage '+escBook(q.number||"")+'</span></div><h2 style="font:500 29px/1.28 var(--serif);margin:8px 0 18px">'+escBook(q.question)+'</h2>'+q.answers.map(function(a,i){return '<button class="quiz-option" data-correct="'+(i===Number(q.correctIndex)?"1":"0")+'">'+escBook(a)+'</button>'}).join("")+'<div id="quizFeedback" class="quiz-feedback"></div><div id="quizSource" class="real-source" style="display:none"><b>Quelle:</b> '+escBook(q.source||"")+'</div><button id="quizNext" class="quiz-next" type="button">Nächste Frage →</button></div></section>'+footer()
+ };
+ initQuiz=function(){
+  var q=realData.quiz[quizCursor%Math.max(1,realData.quiz.length)]||null,out=document.getElementById("quizFeedback"),src=document.getElementById("quizSource"),next=document.getElementById("quizNext");
+  document.querySelectorAll(".quiz-option").forEach(function(b){b.onclick=function(){var ok=b.getAttribute("data-correct")==="1";out.textContent=ok?"Richtig.":("Nicht richtig. "+(q&&q.explanation||""));if(src)src.style.display="block"}});
+  if(next)next.onclick=function(){quizCursor=(quizCursor+1)%Math.max(1,realData.quiz.length);render()}
+ };
+
+ renders.quellen=function(){
+  return realIntro("QUELLEN","Direktnachweise und verwendete Werke","Aussage, Quellenangabe und Direktnachweis bleiben unmittelbar zusammen.")+
+   '<section class="section reveal"><div class="real-list">'+realData.posts.slice(0,18).map(function(x){return '<article class="real-post"><div class="eyebrow">'+escBook(x.category||"Wissen")+'</div><h3>'+escBook(cleanTitle(x.title))+'</h3><div class="speaker-line">'+escBook(x.speaker||"")+'</div>'+sourceHtml(x)+'</article>'}).join("")+'</div></section>'+footer()
+ };
+
+ renders.suche=function(){
+  return realIntro("SUCHE","Die gesamte Wissensseite durchsuchen.","Suche gleichzeitig in Beiträgen, Duʿāʾ, Bibliothek und Propheten.")+
+   '<section class="section parchment reveal"><input id="siteSearch" class="search-input" type="search" placeholder="Begriff, Person, Werk, Duʿāʾ oder Prophet …" autocomplete="off"><div id="searchResults" class="list-lines" style="margin-top:20px"></div></section>'+footer()
+ };
+ initSearch=function(){
+  var input=document.getElementById("siteSearch"),out=document.getElementById("searchResults");if(!input||!out)return;
+  function rows(){
+   var a=[];
+   realData.posts.forEach(function(x){a.push({kind:"Beitrag",title:cleanTitle(x.title),sub:(x.speaker||"")+" "+(x.work||""),page:"beitrag",extra:"id="+encodeURIComponent(x.id)})});
+   realData.duas.forEach(function(x){a.push({kind:"Duʿāʾ",title:x.title,sub:x.category+" "+x.source,page:"dua",extra:"id="+encodeURIComponent(x.id)})});
+   realData.publications.forEach(function(x){a.push({kind:"Publikation",title:x.title,sub:x.category||"",page:"werk",extra:"type=pub&id="+encodeURIComponent(x.id)})});
+   realData.books.slice(0,30).forEach(function(x){a.push({kind:"Werk",title:x.title,sub:(x.author||"")+" "+(x.category||""),page:"werk",extra:"type=book&id="+encodeURIComponent(x.id)})});
+   realData.prophets.forEach(function(x){a.push({kind:"Prophet",title:x.name,sub:x.people||"",page:"prophet",extra:"id="+encodeURIComponent(x.id)})});
+   return a
+  }
+  var all=rows();
+  function paint(){var q=input.value.trim().toLowerCase(),list=all.filter(function(x){return !q||(x.title+" "+x.sub+" "+x.kind).toLowerCase().indexOf(q)>=0}).slice(0,30);out.innerHTML=list.map(function(x){return '<a class="list-row desktop-link" data-page="'+x.page+'" href="'+pUrl(x.page,x.extra)+'"><span class="search-kind">'+escBook(x.kind)+'</span><strong>'+escBook(x.title)+'</strong><small>'+escBook(x.sub)+'</small></a>'}).join("")}
+  input.oninput=paint;paint()
+ };
+
+ renders.mehr=function(){
+  return realIntro("MEHR","Weitere Bereiche entdecken.","Wissenssammlungen und Werkzeuge der Seite.")+
+   '<section class="section reveal"><div class="more-grid"><a class="more-row desktop-link" href="'+pUrl("propheten")+'" data-page="propheten"><div><h3>Propheten</h3><p>25 geprüfte Profile aus Qurʾān, Sunnah und frühen Quellen.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("frauen")+'" data-page="frauen"><div><h3>Frauen</h3><p>Geprüfte Bereiche zu Fiqh, Familie, Wissen und Adab.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("quiz")+'" data-page="quiz"><div><h3>Quiz</h3><p>Geprüfte Fragen mit Erklärung und Quelle.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("zakat")+'" data-page="zakat"><div><h3>Zakāt-Rechner</h3><p>Vermögen und fällige Schulden eingeben.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("quellen")+'" data-page="quellen"><div><h3>Quellen</h3><p>Direktnachweise und verwendete Werke.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("einstellungen")+'" data-page="einstellungen"><div><h3>Darstellung</h3><p>Lesemodus und Schriftgröße.</p></div><b>→</b></a></div></section>'+footer()
+ };
+ // --- end real visitor content v8 ---
+
+ initQa();loadDesktopContent().then(function(){render()}).catch(function(){render()})
 })();
 </script>
 </body>
