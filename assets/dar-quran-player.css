@@ -679,6 +679,14 @@ html.player-learn .quran-ayah{
 html.player-learn .quran-ayah{
   scroll-margin-top:calc(var(--qrc-chrome-h,78px) + 116px)!important;
 }
+html.player-learn #qrcChrome.is-hidden,
+html.player-learn .qrc-chrome.is-hidden,
+body.player-learn #qrcChrome.is-hidden{
+  transform:none!important;
+  pointer-events:auto!important;
+  opacity:1!important;
+  box-shadow:0 4px 18px color-mix(in srgb,var(--bg) 88%,transparent);
+}
 .quran-ayah.is-dqp-playing{
   outline:1px solid color-mix(in srgb,var(--gold2,#EED3AE) 38%,transparent);
   border-radius:12px;
