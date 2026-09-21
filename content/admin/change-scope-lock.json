@@ -108,6 +108,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adaptive-mobile-fold-tablet-test-2026-09-21",
+      "approvedBy": "user-explicit-master-adaptive-ui",
+      "reason": "MASTER-AUFTRAG: Adaptive Mobile/Foldable/Tablet-Architektur zuerst in Dar Test. Kein Visitor-Live, kein Desktop.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "assets/adaptive-layout.js",
+        "assets/adaptive-layout.css",
+        "assets/fold-split.js",
+        "assets/fold-split.css",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/fold-thumb-nav.js",
+        "test/assets/fold-thumb-nav.css",
+        "cloudflare/test-app-worker.js"
+      ]
+    },
+    {
       "id": "ios-tadabbur-catalog-2026-09-20",
       "approvedBy": "user-explicit-tadabbur-github-ios",
       "reason": "Nutzer: zentrale Tadabbur-JSON (GitHub apple-tv-hadith-staging) in der iOS-App laden, cachen und anzeigen.",

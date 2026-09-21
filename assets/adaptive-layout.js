@@ -1,24 +1,42 @@
 /**
- * DĀR AL TAWḤĪD — Adaptive Layout Controller
- * Compact: Smartphone, Fold geschlossen, Tablet Hochformat → Einspalte
- * Expanded: Fold geöffnet, Tablet Querformat, große Breite → Zwei-Bereichs-Modus
- * Bottom-Nav bleibt unten — KEIN Left-Rail-Nav.
- * v8: verbindliche Tablet-Querformat / Fold Dual-Regel + State-sichere Orientation
+ * DĀR AL TAWḤĪD — Adaptive Layout Engine
+ * Größenbasiert: Breite + Höhe + Aspekt + Safe Area + Fenster.
+ * Kein Gerätetyp (kein iPhone/iPad/Fold-UA).
+ * Visitor: Compact/Medium/Expanded, Bottom-Nav (unverändert).
+ * Test: COMPACT / REGULAR / WIDE / EXTRA_WIDE + optionale Seiten-Nav.
  */
 (function (global) {
   "use strict";
 
   var COMPACT_MAX = 599;
-  /* Ab dieser Breite + Querformat: Dual (Tablet landscape, Fold landscape) */
   var EXPANDED_MIN = 700;
-  /* Portrait mit sehr großer Breite: Fold offen / Desktop (nicht Tablet-Hochformat ~768–834) */
   var EXPANDED_PORTRAIT_MIN = 840;
   var EXPANDED_MIN_HEIGHT = 480;
+  var WIDE_MIN = 720;
+  var EXTRA_WIDE_MIN = 1100;
+  var PANE_MIN = 280;
+  var RAIL_PREF = 56;
+  var RAIL_COLLAPSED = 28;
+  var PLACE_KEY = "dar_sidebar_placement";
+  var COLLAPSE_KEY = "dar_sidebar_collapsed";
+
   var currentMode = "";
+  var currentDensity = "";
+  var currentRail = false;
   var rafId = 0;
   var started = false;
   var resizeObserver = null;
   var orientTimers = [];
+  var savedScrollY = 0;
+
+  function isTestApp() {
+    try {
+      var p = String((global.location && global.location.pathname) || "");
+      return p === "/test" || p.indexOf("/test/") === 0;
+    } catch (e) {
+      return false;
+    }
+  }
 
   function measureViewport() {
     var vv = global.visualViewport;
@@ -36,28 +54,36 @@
     var h = vvH || clientH || innerH || 0;
     if (!h) h = Math.max(clientH, innerH) || 0;
     var offsetTop = vv && typeof vv.offsetTop === "number" ? vv.offsetTop : 0;
-    return { width: w, height: h, offsetTop: offsetTop };
+    var aspect = h > 0 ? w / h : 1;
+    return { width: w, height: h, offsetTop: offsetTop, aspect: aspect };
   }
 
-  /**
-   * Verbindliche Dual-Regel (Breite + Orientierung, kein reiner Gerätetyp):
-   * - Compact/Einspalte: Phone, Fold zu, Tablet Hochformat
-   * - Dual: Tablet Querformat (≥700), Fold offen / große Breite (≥840 Portrait)
-   */
   function isDualViewport(width, height) {
     var w = Number(width);
     var h = Number(height);
     if (!Number.isFinite(w)) w = 0;
     if (!Number.isFinite(h)) h = 0;
+    if (isTestApp()) {
+      if (w < EXPANDED_MIN) return false;
+      if (w < PANE_MIN * 2) return false;
+      return true;
+    }
     if (w < EXPANDED_MIN) return false;
-    if (w >= h) return true; /* landscape / square-ish */
-    if (w >= EXPANDED_PORTRAIT_MIN) return true; /* Fold open / desktop portrait */
-    return false; /* Tablet portrait 700–899 */
+    if (w >= h) return true;
+    if (w >= EXPANDED_PORTRAIT_MIN) return true;
+    return false;
   }
 
   function resolveLayoutMode(width, height) {
     var w = Number(width) || 0;
     var h = Number(height) || 0;
+    if (isTestApp()) {
+      var d = resolveDensity(w, h);
+      if (d === "extra_wide") return "expanded";
+      if (d === "wide") return "expanded";
+      if (d === "regular") return "medium";
+      return "compact";
+    }
     if (w < 600) return "compact";
     if (isDualViewport(w, h) && (h >= EXPANDED_MIN_HEIGHT || w >= h || w >= EXPANDED_PORTRAIT_MIN)) {
       return "expanded";
@@ -65,46 +91,209 @@
     return "medium";
   }
 
+  function resolveDensity(width, height) {
+    var w = Number(width) || 0;
+    var h = Number(height) || 0;
+    if (w < 600) return "compact";
+    if (w >= EXTRA_WIDE_MIN && w >= PANE_MIN * 3) return "extra_wide";
+    if (w >= WIDE_MIN && (w >= h || w >= 900)) return "wide";
+    if (w >= 600) return "regular";
+    return "compact";
+  }
+
+  function resolvePaneCount(width, height) {
+    var w = Number(width) || 0;
+    if (w >= PANE_MIN * 3 + RAIL_PREF && w >= EXTRA_WIDE_MIN) return 3;
+    if (w >= PANE_MIN * 2 && w >= EXPANDED_MIN) return 2;
+    return 1;
+  }
+
+  function readPlacement() {
+    try {
+      var v = String(global.localStorage.getItem(PLACE_KEY) || "trailing").toLowerCase();
+      return v === "leading" ? "leading" : "trailing";
+    } catch (e) {
+      return "trailing";
+    }
+  }
+
+  function readCollapsed() {
+    try {
+      return global.localStorage.getItem(COLLAPSE_KEY) === "1";
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function setPlacement(next) {
+    var v = String(next || "") === "leading" ? "leading" : "trailing";
+    try {
+      global.localStorage.setItem(PLACE_KEY, v);
+    } catch (e) {}
+    applyLayout(true);
+  }
+
+  function setCollapsed(next) {
+    try {
+      global.localStorage.setItem(COLLAPSE_KEY, next ? "1" : "0");
+    } catch (e) {}
+    applyLayout(true);
+  }
+
+  function routeBlocksRail() {
+    var body = document.body;
+    var root = document.documentElement;
+    if (!body) return true;
+    if (body.classList.contains("is-ilm-chat-route")) return true;
+    if (body.classList.contains("reader-mode") || root.classList.contains("reader-mode")) return true;
+    if (body.classList.contains("is-quran-player-route") || root.classList.contains("is-quran-player-route")) {
+      return true;
+    }
+    if (body.classList.contains("dar-quran-player-open")) return true;
+    return false;
+  }
+
+  function wantsSideRail(width, height, density) {
+    if (!isTestApp()) return false;
+    if (routeBlocksRail()) return false;
+    var w = Number(width) || 0;
+    var h = Number(height) || 0;
+    if (w < 620 || h < 300) return false;
+    var landscape = w >= h;
+    if (landscape && w >= 620) return true;
+    if (density === "extra_wide" && w >= EXTRA_WIDE_MIN && h >= 500) return true;
+    return false;
+  }
+
   function navBottomCompact() {
     return "calc(max(7px, calc(env(safe-area-inset-bottom) - 18px)) + 3mm)";
   }
 
-  function applyNavLayout(mode) {
-    var nav = document.getElementById("bottomNav");
-    if (!nav) return;
-    if (document.body && document.body.classList.contains("is-ilm-chat-route")) {
-      return;
+  function ensureRailToggle(nav, collapsed) {
+    var btn = document.getElementById("darAdaptiveRailToggle");
+    if (!btn) {
+      btn = document.createElement("button");
+      btn.id = "darAdaptiveRailToggle";
+      btn.type = "button";
+      btn.className = "dar-adaptive-rail-toggle";
+      btn.setAttribute("aria-label", "Navigation ein- oder ausklappen");
+      nav.insertBefore(btn, nav.firstChild);
+      btn.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        setCollapsed(!readCollapsed());
+      });
     }
-    if (document.body && document.body.classList.contains("reader-mode")) {
-      return;
+    btn.hidden = false;
+    btn.textContent = collapsed ? "‹" : "›";
+    if (readPlacement() === "leading") {
+      btn.textContent = collapsed ? "›" : "‹";
     }
+  }
 
-    /* NEVER left-rail nav — Fold dual is content split only */
-    nav.classList.remove("is-adaptive-rail");
-    var wide = mode === "medium" || mode === "expanded";
-    nav.classList.toggle("is-adaptive-centered", wide);
+  function hideRailToggle() {
+    var btn = document.getElementById("darAdaptiveRailToggle");
+    if (btn) btn.hidden = true;
+  }
 
-    if (wide) {
-      nav.style.setProperty("position", "fixed", "important");
-      nav.style.setProperty("left", "50%", "important");
+  function applySideRail(nav, metrics) {
+    var placement = readPlacement();
+    var collapsed = readCollapsed();
+    var leading = placement === "leading";
+    var width = collapsed ? RAIL_COLLAPSED : RAIL_PREF;
+    var insetL = "env(safe-area-inset-left, 0px)";
+    var insetR = "env(safe-area-inset-right, 0px)";
+    var insetT = "env(safe-area-inset-top, 0px)";
+    var insetB = "env(safe-area-inset-bottom, 0px)";
+
+    nav.classList.add("is-adaptive-rail");
+    nav.classList.remove("is-adaptive-centered");
+    nav.setAttribute("data-rail-collapsed", collapsed ? "1" : "0");
+    ensureRailToggle(nav, collapsed);
+
+    nav.style.setProperty("position", "fixed", "important");
+    nav.style.setProperty("top", "max(6px, " + insetT + ")", "important");
+    nav.style.setProperty("bottom", "max(6px, " + insetB + ")", "important");
+    nav.style.setProperty("height", "auto", "important");
+    nav.style.setProperty("min-height", "0", "important");
+    nav.style.setProperty("max-height", "none", "important");
+    nav.style.setProperty("width", width + "px", "important");
+    nav.style.setProperty("min-width", width + "px", "important");
+    nav.style.setProperty("max-width", width + "px", "important");
+    nav.style.setProperty("transform", "none", "important");
+    nav.style.setProperty("-webkit-transform", "none", "important");
+    nav.style.setProperty("flex-direction", "column", "important");
+    nav.style.setProperty("margin", "0", "important");
+    nav.style.setProperty("padding", collapsed ? "4px 2px" : "8px 4px", "important");
+    nav.style.setProperty("border-radius", "0", "important");
+    nav.style.setProperty("z-index", "80", "important");
+    nav.style.setProperty("gap", "2px", "important");
+    nav.style.setProperty("justify-content", "flex-start", "important");
+    nav.style.setProperty("align-items", "stretch", "important");
+
+    if (leading) {
+      nav.style.setProperty("left", "max(0px, " + insetL + ")", "important");
       nav.style.setProperty("right", "auto", "important");
-      nav.style.setProperty(
-        "width",
-        "min(var(--layout-navigation-max, 800px), calc(100vw - 28px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)))",
+    } else {
+      nav.style.setProperty("right", "max(0px, " + insetR + ")", "important");
+      nav.style.setProperty("left", "auto", "important");
+    }
+
+    var root = document.documentElement;
+    root.style.setProperty("--layout-rail-width", width + "px");
+    root.setAttribute("data-nav-rail", "1");
+    root.setAttribute("data-nav-placement", placement);
+    root.setAttribute("data-nav-collapsed", collapsed ? "1" : "0");
+    if (document.body) {
+      document.body.style.setProperty(
+        "padding-left",
+        leading ? "calc(" + width + "px + " + insetL + ")" : "0px",
         "important"
       );
-      nav.style.setProperty("max-width", "var(--layout-navigation-max, 800px)", "important");
-      nav.style.setProperty("top", "auto", "important");
-      nav.style.setProperty("bottom", navBottomCompact(), "important");
-      nav.style.setProperty("height", "auto", "important");
-      nav.style.setProperty("min-height", "0", "important");
-      nav.style.setProperty("max-height", "none", "important");
-      nav.style.setProperty("transform", "translateX(-50%)", "important");
-      nav.style.setProperty("-webkit-transform", "translateX(-50%)", "important");
-      nav.style.setProperty("flex-direction", "row", "important");
-      nav.style.setProperty("margin", "0", "important");
-      nav.style.setProperty("z-index", "40", "important");
-      return;
+      document.body.style.setProperty(
+        "padding-right",
+        leading ? "0px" : "calc(" + width + "px + " + insetR + ")",
+        "important"
+      );
+      document.body.style.setProperty("padding-bottom", "0px", "important");
+    }
+  }
+
+  function applyBottomNav(nav, mode) {
+    hideRailToggle();
+    nav.classList.remove("is-adaptive-rail");
+    nav.removeAttribute("data-rail-collapsed");
+    var root = document.documentElement;
+    root.setAttribute("data-nav-rail", "0");
+    root.style.setProperty("--layout-rail-width", "0px");
+    if (document.body && isTestApp()) {
+      document.body.style.removeProperty("padding-left");
+      document.body.style.removeProperty("padding-right");
+    }
+
+    if (!isTestApp()) {
+      var wide = mode === "medium" || mode === "expanded";
+      nav.classList.toggle("is-adaptive-centered", wide);
+      if (wide) {
+        nav.style.setProperty("position", "fixed", "important");
+        nav.style.setProperty("left", "50%", "important");
+        nav.style.setProperty("right", "auto", "important");
+        nav.style.setProperty(
+          "width",
+          "min(var(--layout-navigation-max, 800px), calc(100vw - 28px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)))",
+          "important"
+        );
+        nav.style.setProperty("max-width", "var(--layout-navigation-max, 800px)", "important");
+        nav.style.setProperty("top", "auto", "important");
+        nav.style.setProperty("bottom", navBottomCompact(), "important");
+        nav.style.setProperty("height", "auto", "important");
+        nav.style.setProperty("transform", "translateX(-50%)", "important");
+        nav.style.setProperty("-webkit-transform", "translateX(-50%)", "important");
+        nav.style.setProperty("flex-direction", "row", "important");
+        nav.style.setProperty("margin", "0", "important");
+        nav.style.setProperty("z-index", "40", "important");
+        return;
+      }
     }
 
     var inset = "14px";
@@ -112,19 +301,40 @@
       var w = measureViewport().width;
       if (w <= 700) inset = "10px";
     } catch (e) {}
+    nav.classList.remove("is-adaptive-centered");
     nav.style.setProperty("position", "fixed", "important");
     nav.style.setProperty("left", "max(" + inset + ", env(safe-area-inset-left))", "important");
     nav.style.setProperty("right", "max(" + inset + ", env(safe-area-inset-right))", "important");
     nav.style.setProperty("top", "auto", "important");
     nav.style.setProperty("bottom", navBottomCompact(), "important");
     nav.style.setProperty("width", "auto", "important");
+    nav.style.setProperty("min-width", "0", "important");
     nav.style.setProperty("max-width", "none", "important");
     nav.style.setProperty("height", "auto", "important");
+    nav.style.setProperty("min-height", "0", "important");
+    nav.style.setProperty("max-height", "none", "important");
     nav.style.setProperty("transform", "none", "important");
     nav.style.setProperty("-webkit-transform", "none", "important");
     nav.style.setProperty("flex-direction", "row", "important");
     nav.style.setProperty("margin", "0", "important");
+    nav.style.setProperty("padding", "", "important");
+    nav.style.setProperty("border-radius", "", "important");
     nav.style.setProperty("z-index", "40", "important");
+    nav.style.setProperty("gap", "", "important");
+  }
+
+  function applyNavLayout(mode, metrics) {
+    var nav = document.getElementById("bottomNav");
+    if (!nav) return;
+    if (document.body && document.body.classList.contains("is-ilm-chat-route")) return;
+    if (document.body && document.body.classList.contains("reader-mode")) return;
+
+    metrics = metrics || measureViewport();
+    var density = resolveDensity(metrics.width, metrics.height);
+    var rail = wantsSideRail(metrics.width, metrics.height, density);
+    currentRail = rail;
+    if (rail) applySideRail(nav, metrics);
+    else applyBottomNav(nav, mode);
   }
 
   function applyKeyboardState(metrics) {
@@ -149,25 +359,49 @@
     root.setAttribute("data-fold-dual", dual ? "1" : "0");
   }
 
+  function applyHingeMetrics(metrics) {
+    var root = document.documentElement;
+    var segs = 1;
+    try {
+      if (global.matchMedia && global.matchMedia("(horizontal-viewport-segments: 2)").matches) {
+        segs = 2;
+      }
+    } catch (e) {}
+    root.setAttribute("data-viewport-segments", String(segs));
+    root.style.setProperty("--layout-aspect", String((metrics.aspect || 1).toFixed(3)));
+  }
+
   function applyLayout(force) {
     var metrics = measureViewport();
     var mode = resolveLayoutMode(metrics.width, metrics.height);
+    var density = resolveDensity(metrics.width, metrics.height);
+    var panes = resolvePaneCount(metrics.width, metrics.height);
     var dual = isDualViewport(metrics.width, metrics.height);
     var root = document.documentElement;
-    var changed = mode !== currentMode;
+    var changed = mode !== currentMode || density !== currentDensity;
     var prevDual = root.getAttribute("data-fold-dual") === "1";
+
+    if (isTestApp()) root.classList.add("dar-test-adaptive");
+    else root.classList.remove("dar-test-adaptive");
 
     if (changed || force) {
       currentMode = mode;
+      currentDensity = density;
       root.setAttribute("data-layout", mode);
+      root.setAttribute("data-density", density);
+      root.setAttribute("data-panes", String(panes));
       root.classList.remove("data-layout-expanded-legacy");
       root.style.setProperty("--layout-vw", metrics.width + "px");
       root.style.setProperty("--layout-vh", metrics.height + "px");
+      root.style.setProperty("--layout-pane-count", String(panes));
+      var fs = density === "extra_wide" ? 1.06 : density === "wide" ? 1.03 : density === "regular" ? 1 : 0.98;
+      root.style.setProperty("--layout-type-scale", String(fs));
     }
 
     applyOrientationAttrs(metrics);
     applyKeyboardState(metrics);
-    applyNavLayout(mode);
+    applyHingeMetrics(metrics);
+    applyNavLayout(mode, metrics);
 
     var dualChanged = prevDual !== dual;
     if (changed || force || dualChanged) {
@@ -176,9 +410,13 @@
           new CustomEvent("dar:layoutchange", {
             detail: {
               mode: mode,
+              density: density,
+              panes: panes,
               width: metrics.width,
               height: metrics.height,
               dual: dual,
+              rail: currentRail,
+              placement: readPlacement(),
               orientation: metrics.width >= metrics.height ? "landscape" : "portrait",
             },
           })
@@ -208,12 +446,27 @@
   }
 
   function scheduleOrientBurst() {
+    try {
+      savedScrollY = global.DARScrollManager && typeof global.DARScrollManager.getY === "function"
+        ? global.DARScrollManager.getY()
+        : global.scrollY || document.documentElement.scrollTop || 0;
+      if (global.DARScrollManager && typeof global.DARScrollManager.setPendingRestore === "function") {
+        global.DARScrollManager.setPendingRestore(savedScrollY);
+      }
+    } catch (e) {}
     clearOrientTimers();
     scheduleApply(true);
     [50, 150, 350, 700].forEach(function (ms) {
       orientTimers.push(
         setTimeout(function () {
           applyLayout(true);
+          try {
+            if (global.DARScrollManager && typeof global.DARScrollManager.stableScrollTo === "function") {
+              global.DARScrollManager.stableScrollTo(savedScrollY);
+            } else if (savedScrollY) {
+              global.scrollTo(0, savedScrollY);
+            }
+          } catch (e2) {}
         }, ms)
       );
     });
@@ -224,7 +477,7 @@
       applyLayout(true);
       return;
     }
-    applyNavLayout(currentMode);
+    applyNavLayout(currentMode, measureViewport());
   }
 
   function onResize() {
@@ -272,14 +525,28 @@
 
   var api = {
     resolveLayoutMode: resolveLayoutMode,
+    resolveDensity: resolveDensity,
+    resolvePaneCount: resolvePaneCount,
     isDualViewport: isDualViewport,
+    wantsRail: function () {
+      var m = measureViewport();
+      return wantsSideRail(m.width, m.height, resolveDensity(m.width, m.height));
+    },
     getMode: function () {
       return currentMode || resolveLayoutMode(measureViewport().width, measureViewport().height);
+    },
+    getDensity: function () {
+      var m = measureViewport();
+      return currentDensity || resolveDensity(m.width, m.height);
     },
     isDual: function () {
       var m = measureViewport();
       return isDualViewport(m.width, m.height);
     },
+    getPlacement: readPlacement,
+    setPlacement: setPlacement,
+    getCollapsed: readCollapsed,
+    setCollapsed: setCollapsed,
     measure: measureViewport,
     apply: function () {
       applyLayout(true);

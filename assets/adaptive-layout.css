@@ -302,3 +302,138 @@ html.is-layout-landscape[data-layout="medium"] .app {
     transition: none !important;
   }
 }
+
+/* —— Test adaptive tokens + side rail (visitor CSS oben unverändert) —— */
+html.dar-test-adaptive {
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 18px;
+  --space-xl: 28px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --divider-thickness: 1px;
+  --touch-min: 44px;
+  --icon-sm: 18px;
+  --layout-rail-width: 0px;
+  --layout-type-scale: 1;
+  --font-min: 12px;
+  --font-pref: 15px;
+  --font-max: 18px;
+}
+
+html.dar-test-adaptive[data-density="wide"] {
+  --font-pref: 16px;
+}
+html.dar-test-adaptive[data-density="extra_wide"] {
+  --font-pref: 17px;
+}
+
+html.dar-test-adaptive .app,
+html.dar-test-adaptive .view,
+html.dar-test-adaptive [data-layout] .app {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+html.dar-test-adaptive img,
+html.dar-test-adaptive video {
+  max-width: 100%;
+  height: auto;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"] body.has-bottom-nav {
+  padding-bottom: 0 !important;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"] #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-adaptive[data-nav-rail="1"] #bottomNav.bottom-nav,
+html.dar-test-adaptive[data-nav-rail="1"][data-theme] #bottomNav.bottom-nav {
+  position: fixed !important;
+  width: var(--layout-rail-width, 56px) !important;
+  min-width: var(--layout-rail-width, 56px) !important;
+  max-width: var(--layout-rail-width, 56px) !important;
+  top: max(6px, env(safe-area-inset-top, 0px)) !important;
+  bottom: max(6px, env(safe-area-inset-bottom, 0px)) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  flex-direction: column !important;
+  border-radius: 0 !important;
+  padding: 8px 4px !important;
+  gap: 2px !important;
+  z-index: 80 !important;
+  background: color-mix(in srgb, var(--bg, #12110f) 92%, #000) !important;
+  border: 0 !important;
+  border-left: 1px solid color-mix(in srgb, var(--gold2, #efd78e) 22%, transparent) !important;
+  box-shadow: none !important;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] #bottomNav.bottom-nav {
+  left: max(0px, env(safe-area-inset-left, 0px)) !important;
+  right: auto !important;
+  border-left: 0 !important;
+  border-right: 1px solid color-mix(in srgb, var(--gold2, #efd78e) 22%, transparent) !important;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="trailing"] #bottomNav.bottom-nav {
+  right: max(0px, env(safe-area-inset-right, 0px)) !important;
+  left: auto !important;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn {
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: var(--touch-min) !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 6px 2px !important;
+  gap: 2px !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn > span:last-child {
+  font-size: clamp(8px, 1.6vw, 10px) !important;
+  line-height: 1.15 !important;
+  white-space: normal !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100%;
+}
+
+html.dar-test-adaptive[data-nav-collapsed="1"] #bottomNav .bottom-nav-btn > span:last-child {
+  display: none !important;
+}
+
+html.dar-test-adaptive .dar-adaptive-rail-toggle {
+  flex: 0 0 auto;
+  min-height: 36px;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--gold2, #efd78e);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"] .float-actions {
+  right: calc(var(--layout-rail-width, 56px) + 10px + env(safe-area-inset-right, 0px));
+}
+
+html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] .float-actions {
+  right: calc(10px + env(safe-area-inset-right, 0px));
+}
+
+@media (horizontal-viewport-segments: 2) {
+  html.dar-test-adaptive.is-fold-dual .dar-fold[data-fold-mode="dual"] {
+    grid-template-columns: env(viewport-segment-width 0 0, 34%) minmax(0, 1fr);
+  }
+}
