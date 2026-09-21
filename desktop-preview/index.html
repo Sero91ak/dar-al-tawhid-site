@@ -442,6 +442,65 @@ button,input,select{font:inherit}
   .prayer-count,.prayer-locate{grid-column:auto}
 }
 
+
+/* Prayer flow v6 — compact seamless field, no spill into neighbouring sections */
+.prayer-river{
+  width:min(990px,calc(100% - 44px))!important;
+  min-height:84px!important;
+  margin:14px auto 15px!important;
+  overflow:visible!important;
+}
+.prayer-river::before{
+  inset:-9px -24px!important;
+  background:
+    radial-gradient(ellipse at 17% 52%,rgba(37,61,51,.95) 0%,rgba(43,70,58,.88) 38%,rgba(43,70,58,.48) 67%,rgba(43,70,58,.10) 87%,transparent 100%),
+    radial-gradient(ellipse at 52% 48%,rgba(59,84,69,.89) 0%,rgba(60,86,71,.72) 43%,rgba(60,86,71,.22) 74%,transparent 100%),
+    radial-gradient(ellipse at 84% 50%,rgba(49,73,61,.90) 0%,rgba(46,70,59,.64) 47%,rgba(46,70,59,.14) 80%,transparent 100%),
+    radial-gradient(ellipse at 68% 34%,rgba(204,177,113,.11) 0%,rgba(204,177,113,.035) 36%,transparent 66%)!important;
+  filter:blur(3.5px)!important;
+  transform:scale(1.006)!important;
+  -webkit-mask-image:radial-gradient(ellipse 100% 92% at 50% 50%,#000 54%,rgba(0,0,0,.82) 70%,rgba(0,0,0,.25) 90%,transparent 100%);
+  mask-image:radial-gradient(ellipse 100% 92% at 50% 50%,#000 54%,rgba(0,0,0,.82) 70%,rgba(0,0,0,.25) 90%,transparent 100%);
+}
+.prayer-river::after{
+  inset:-5px -14px!important;
+  filter:blur(10px)!important;
+  opacity:.64!important;
+  -webkit-mask-image:radial-gradient(ellipse 100% 94% at 50% 50%,#000 52%,rgba(0,0,0,.65) 76%,transparent 100%);
+  mask-image:radial-gradient(ellipse 100% 94% at 50% 50%,#000 52%,rgba(0,0,0,.65) 76%,transparent 100%);
+}
+.prayer-inner{
+  width:min(900px,calc(100% - 54px))!important;
+  min-height:84px!important;
+  grid-template-columns:1fr 1fr 205px 136px!important;
+  gap:20px!important;
+}
+.prayer-current b,
+.prayer-next b{font-size:23px!important;margin-top:5px!important}
+.prayer-current small,
+.prayer-next small{margin-top:5px!important;font-size:9px!important}
+.prayer-count{font-size:29px!important}
+.prayer-count span{margin-top:6px!important;font-size:7.5px!important}
+.prayer-label{font-size:7.5px!important}
+.prayer-locate{font-size:7.5px!important;letter-spacing:.11em!important}
+@media(max-width:1120px){
+  .prayer-river{width:min(900px,calc(100% - 34px))!important}
+  .prayer-river::before{inset:-8px -18px!important}
+  .prayer-inner{width:min(830px,calc(100% - 42px))!important;grid-template-columns:1fr 1fr 190px 126px!important;gap:17px!important}
+}
+@media(max-width:860px){
+  .prayer-river{width:min(690px,calc(100% - 26px))!important;min-height:108px!important;margin:12px auto 14px!important}
+  .prayer-river::before{inset:-8px -14px!important}
+  .prayer-river::after{inset:-4px -10px!important}
+  .prayer-inner{width:calc(100% - 34px)!important;min-height:108px!important;grid-template-columns:1fr 1fr!important;gap:12px 20px!important;padding:8px 0!important}
+  .prayer-count{font-size:27px!important}
+}
+@media(max-width:560px){
+  .prayer-river{width:calc(100% - 18px)!important}
+  .prayer-river::before{inset:-6px -8px!important}
+  .prayer-inner{width:calc(100% - 24px)!important}
+}
+
 </style>
 </head>
 <body>
