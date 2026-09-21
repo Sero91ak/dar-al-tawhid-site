@@ -108,6 +108,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "visitor-quran-learn-live-2026-09-21",
+      "approvedBy": "user-explicit-lern-player-nicht-live-kein-button",
+      "reason": "Nutzer: Lernplayer ist nicht live, kein Button sichtbar. Play-Button + Mini-Lernleiste in die Besucher-App.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "assets/dar-quran-player.js",
+        "assets/dar-quran-player.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "ios-tadabbur-catalog-2026-09-20",
       "approvedBy": "user-explicit-tadabbur-github-ios",
       "reason": "Nutzer: zentrale Tadabbur-JSON (GitHub apple-tv-hadith-staging) in der iOS-App laden, cachen und anzeigen.",
