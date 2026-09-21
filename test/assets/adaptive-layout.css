@@ -352,8 +352,10 @@ html.dar-test-adaptive[data-nav-rail="1"] .app,
 html.dar-test-adaptive[data-nav-rail="1"] #appView,
 html.dar-test-adaptive[data-nav-rail="1"] #appView.view,
 html.dar-test-adaptive[data-nav-rail="1"] .top-shell,
+html.dar-test-adaptive[data-nav-rail="1"] .header,
 html.dar-test-adaptive[data-nav-rail="1"] .home-v380,
-html.dar-test-adaptive[data-nav-rail="1"] .home-v380-shell {
+html.dar-test-adaptive[data-nav-rail="1"] .home-v380-shell,
+html.dar-test-adaptive[data-nav-rail="1"] .header-prayer-hub {
   width: 100% !important;
   max-width: none !important;
   margin-left: 0 !important;
@@ -361,23 +363,17 @@ html.dar-test-adaptive[data-nav-rail="1"] .home-v380-shell {
   box-sizing: border-box !important;
 }
 
-html.dar-test-adaptive[data-nav-rail="1"] html,
-html.dar-test-adaptive[data-nav-rail="1"] body {
-  width: 100% !important;
-  max-width: none !important;
-  background-attachment: fixed;
+html.dar-test-adaptive[data-nav-rail="1"] {
+  --content-max-width: 100%;
+  --layout-content-max: 100%;
+  --layout-reader-max: 100%;
+  --layout-shell-max: 100%;
 }
 
 html.dar-test-adaptive[data-nav-rail="1"] .app,
 html.dar-test-adaptive[data-nav-rail="1"] #appView {
-  padding-left: var(--layout-chrome-left, 0px) !important;
-  padding-right: var(--layout-chrome-right, 60px) !important;
-}
-
-html.dar-test-adaptive[data-nav-rail="1"][data-panes="2"] .home-v380,
-html.dar-test-adaptive[data-nav-rail="1"][data-density="extra_wide"] .home-v380,
-html.dar-test-adaptive[data-nav-rail="1"][data-density="wide"] .home-v380 {
-  max-width: none !important;
+  padding-left: var(--layout-chrome-left, 16px) !important;
+  padding-right: var(--layout-chrome-right, 72px) !important;
 }
 
 html.dar-test-adaptive[data-nav-rail="1"] #appChromeDock #bottomNav.bottom-nav,
@@ -390,72 +386,61 @@ html.dar-test-adaptive.is-quran-player-route[data-nav-rail="1"] #bottomNav.botto
   opacity: 1 !important;
   pointer-events: auto !important;
   position: fixed !important;
-  width: var(--layout-rail-width, 60px) !important;
-  min-width: var(--layout-rail-width, 60px) !important;
-  max-width: var(--layout-rail-width, 60px) !important;
-  top: 0 !important;
-  bottom: 0 !important;
-  height: 100dvh !important;
-  min-height: 100dvh !important;
-  max-height: 100dvh !important;
-  transform: none !important;
-  -webkit-transform: none !important;
+  width: var(--layout-rail-width, 56px) !important;
+  min-width: var(--layout-rail-width, 56px) !important;
+  max-width: var(--layout-rail-width, 56px) !important;
+  top: 50% !important;
+  bottom: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: min(78dvh, 520px) !important;
+  transform: translate3d(0, -50%, 0) !important;
+  -webkit-transform: translate3d(0, -50%, 0) !important;
   flex-direction: column !important;
-  justify-content: space-evenly !important;
+  justify-content: space-around !important;
   align-items: stretch !important;
-  border-radius: 0 !important;
-  padding: max(10px, env(safe-area-inset-top, 0px)) 4px max(10px, env(safe-area-inset-bottom, 0px)) !important;
+  border-radius: 27px !important;
+  padding: 8px 4px !important;
   gap: 2px !important;
   z-index: 120 !important;
   overflow: hidden !important;
   box-sizing: border-box !important;
-  background: color-mix(in srgb, var(--bg, #12110f) 92%, #000) !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  -webkit-backdrop-filter: blur(12px) saturate(1.08) !important;
-  backdrop-filter: blur(12px) saturate(1.08) !important;
+  background: rgba(255,255,255,.04) !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,.14) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(1.08) !important;
+  backdrop-filter: blur(10px) saturate(1.08) !important;
 }
 
 html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] #bottomNav.bottom-nav,
 html.dar-test-adaptive[data-theme][data-nav-rail="1"][data-nav-placement="leading"] #bottomNav.bottom-nav {
-  left: 0 !important;
+  left: max(12px, calc(env(safe-area-inset-left, 0px) + 12px)) !important;
   right: auto !important;
-  border-right: 1px solid rgba(255,255,255,.18) !important;
-  border-left: 0 !important;
 }
 
 html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="trailing"] #bottomNav.bottom-nav,
 html.dar-test-adaptive[data-theme][data-nav-rail="1"][data-nav-placement="trailing"] #bottomNav.bottom-nav,
 html.dar-test-adaptive[data-nav-rail="1"]:not([data-nav-placement]) #bottomNav.bottom-nav {
-  right: 0 !important;
+  right: max(12px, calc(env(safe-area-inset-right, 0px) + 12px)) !important;
   left: auto !important;
-  border-left: 1px solid rgba(255,255,255,.18) !important;
-  border-right: 0 !important;
-}
-
-html.dar-test-adaptive[data-nav-rail="1"] #darQuranMiniPlayer {
-  left: auto !important;
-  right: auto !important;
-  width: var(--layout-player-strip, 84px) !important;
-  max-width: var(--layout-player-strip, 84px) !important;
 }
 
 html.dar-test-adaptive.is-quran-player-route[data-nav-rail="1"] #darQuranPlayer {
   display: grid !important;
-  inset: 0 var(--layout-chrome-right, 60px) 0 var(--layout-chrome-left, 0px) !important;
+  inset: 0 var(--layout-chrome-right, 72px) 0 var(--layout-chrome-left, 16px) !important;
 }
 
 html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn {
-  flex: 1 1 0 !important;
+  flex: 0 0 auto !important;
   width: 100% !important;
   min-width: 0 !important;
-  min-height: 48px !important;
+  min-height: 44px !important;
   max-height: none !important;
   height: auto !important;
   margin: 0 !important;
   padding: 6px 2px !important;
   gap: 2px !important;
-  border-radius: 12px !important;
+  border-radius: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
   flex-direction: column !important;
@@ -481,19 +466,7 @@ html.dar-test-adaptive[data-nav-collapsed="1"] #bottomNav .bottom-nav-btn > span
 }
 
 html.dar-test-adaptive .dar-hinge-mask {
-  display: none;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: var(--layout-hinge-start, 50%);
-  width: var(--layout-hinge-gap, 28px);
-  pointer-events: none;
-  z-index: 35;
-  background: color-mix(in srgb, var(--bg, #0b0c10) 82%, transparent);
-  box-shadow: inset 1px 0 0 rgba(255,255,255,.2), inset -1px 0 0 rgba(255,255,255,.2);
-}
-html.dar-test-adaptive.dar-has-hinge .dar-hinge-mask:not([hidden]) {
-  display: block;
+  display: none !important;
 }
 
 @media (horizontal-viewport-segments: 2) {

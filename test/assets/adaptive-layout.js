@@ -4,7 +4,7 @@
  * Kein Gerätetyp (kein iPhone/iPad/Fold-UA).
  * Visitor: Compact/Medium/Expanded, Bottom-Nav (unverändert).
  * Test: COMPACT / REGULAR / WIDE / EXTRA_WIDE + optionale Seiten-Nav.
- * TEST_COPY v921 — Drei-Zonen-Querformat, Edge-to-Edge
+ * TEST_COPY v922 — schwebendes Glas, volle Inhaltsbreite
  */
 (function (global) {
   "use strict";
@@ -16,9 +16,10 @@
   var WIDE_MIN = 1000;
   var EXTRA_WIDE_MIN = 1100;
   var PANE_MIN = 280;
-  var RAIL_PREF = 60;
+  var RAIL_PREF = 56;
   var RAIL_COLLAPSED = 44;
-  var PLAYER_STRIP = 84;
+  var FLOAT_EDGE = 12;
+  var PLAYER_STRIP = 64;
   var PLACE_KEY = "dar_sidebar_placement";
   var COLLAPSE_KEY = "dar_sidebar_collapsed";
 
@@ -199,17 +200,13 @@
 
   function railWidthFor(metrics, collapsed) {
     if (collapsed) return RAIL_COLLAPSED;
-    var w = Number(metrics && metrics.width) || 0;
     var h = Number(metrics && metrics.height) || 0;
-    var compactH = h > 0 && h < 800;
-    if (w >= 1400) return compactH ? 64 : 76;
-    if (w >= WIDE_MIN) return compactH ? 58 : 68;
-    return compactH ? 52 : RAIL_PREF;
+    return h > 0 && h < 800 ? 52 : RAIL_PREF;
   }
 
   function playerStripFor(metrics) {
     var h = Number(metrics && metrics.height) || 0;
-    return h > 0 && h < 800 ? 72 : PLAYER_STRIP;
+    return h > 0 && h < 800 ? 58 : PLAYER_STRIP;
   }
 
   function applySideRail(nav, metrics) {
@@ -217,13 +214,31 @@
     var collapsed = readCollapsed();
     var leading = placement === "leading";
     var width = railWidthFor(metrics, collapsed);
+    var edge = FLOAT_EDGE;
+    var glass =
+      "background:rgba(255,255,255,.04) !important;border:1px solid rgba(255,255,255,.08) !important;" +
+      "border-radius:27px !important;box-shadow:0 6px 18px rgba(0,0,0,.14) !important;" +
+      "-webkit-backdrop-filter:blur(10px) saturate(1.08) !important;backdrop-filter:blur(10px) saturate(1.08) !important;";
+    var sideCss = leading
+      ? "left:max(" + edge + "px, calc(env(safe-area-inset-left, 0px) + " + edge + "px)) !important;right:auto !important;"
+      : "right:max(" + edge + "px, calc(env(safe-area-inset-right, 0px) + " + edge + "px)) !important;left:auto !important;";
 
     nav.classList.add("is-adaptive-rail");
     nav.classList.remove("is-adaptive-centered", "dar-test-thumb-nav");
     nav.removeAttribute("hidden");
     nav.setAttribute("data-rail-collapsed", collapsed ? "1" : "0");
     hideRailToggle();
-    nav.style.cssText = "";
+    nav.style.cssText =
+      "display:flex !important;visibility:visible !important;opacity:1 !important;pointer-events:auto !important;" +
+      "position:fixed !important;top:50% !important;bottom:auto !important;" +
+      sideCss +
+      "width:" + width + "px !important;min-width:" + width + "px !important;max-width:" + width + "px !important;" +
+      "height:auto !important;min-height:0 !important;max-height:min(78dvh, 520px) !important;" +
+      "margin:0 !important;padding:8px 4px !important;" +
+      "flex-direction:column !important;justify-content:space-around !important;align-items:stretch !important;gap:2px !important;" +
+      "transform:translate3d(0,-50%,0) !important;-webkit-transform:translate3d(0,-50%,0) !important;" +
+      "z-index:120 !important;overflow:hidden !important;box-sizing:border-box !important;" +
+      glass;
 
     Array.prototype.forEach.call(document.querySelectorAll(".bottom-nav"), function (el) {
       if (el !== nav) el.style.setProperty("display", "none", "important");
@@ -248,8 +263,9 @@
       !root.classList.contains("is-quran-player-route")
         ? playerStripFor(metrics)
         : 0;
-    var left = leading ? width : strip;
-    var right = leading ? strip : width;
+    var pad = FLOAT_EDGE + 10;
+    var left = leading ? width + pad : strip ? strip + pad + 8 : 16;
+    var right = leading ? (strip ? strip + pad + 8 : 16) : width + pad;
     root.style.setProperty("--layout-chrome-left", left + "px");
     root.style.setProperty("--layout-chrome-right", right + "px");
     root.style.setProperty("--layout-player-strip", strip + "px");
@@ -258,18 +274,18 @@
     var mini = document.getElementById("darQuranMiniPlayer");
     if (mini) {
       if (strip) {
-        mini.style.setProperty("top", "0", "important");
-        mini.style.setProperty("bottom", "0", "important");
-        mini.style.setProperty("height", "100dvh", "important");
+        mini.style.setProperty("top", "50%", "important");
+        mini.style.setProperty("bottom", "auto", "important");
+        mini.style.setProperty("height", "min(72dvh, 460px)", "important");
         mini.style.setProperty("width", strip + "px", "important");
         mini.style.setProperty("max-width", strip + "px", "important");
         mini.style.setProperty("min-width", strip + "px", "important");
-        mini.style.setProperty("transform", "none", "important");
+        mini.style.setProperty("transform", "translate3d(0,-50%,0)", "important");
         if (leading) {
-          mini.style.setProperty("right", "0", "important");
+          mini.style.setProperty("right", "max(12px, calc(env(safe-area-inset-right, 0px) + 12px))", "important");
           mini.style.setProperty("left", "auto", "important");
         } else {
-          mini.style.setProperty("left", "0", "important");
+          mini.style.setProperty("left", "max(14px, calc(env(safe-area-inset-left, 0px) + 16px))", "important");
           mini.style.setProperty("right", "auto", "important");
         }
       } else {
