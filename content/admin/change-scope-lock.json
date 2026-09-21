@@ -5186,14 +5186,14 @@
     {
       "id": "desktop-website-preview-2026-09-21",
       "approvedBy": "user-explicit-desktop-website-preview-link",
-      "reason": "Nutzer: Desktop-Webseiten-Vorschau komplett neu im cremig-pergamentartigen Stil; echtes Logo, globales Ibn-Sīrīn-Zitat, ausschließlich Desktop-interne Navigation, Qurʾān als aufgeschlagenes Buch mit langsamem Blättern, klare Beitrags-/Quellenhierarchie.",
+      "reason": "Nutzer: Desktop-Entwurf weiter ausbauen; direkte Quellen unter Aussagen, weiße/cremige Seite mit Pergamentbereichen und Übergängen, Animationen, Live-Gebetszeiten-Ticker, persistenter ovaler Qurʾān-Audio-Player, alle internen Wege bleiben Desktop.",
       "paths": [
         "content/admin/change-scope-lock.json",
         "desktop-preview/index.html"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z",
-      "deployTriggerAt": "2026-09-21T09:18:00.000Z",
-      "note": "Trigger visitor static-assets deploy so /desktop-preview/ is published on dar-al-tawhid.de."
+      "deployTriggerAt": "2026-09-21T11:20:00.000Z",
+      "note": "Nur /desktop-preview/ als nicht indexierter Entwurf veröffentlichen; Root-/App-Oberflächen nicht umstellen."
     }
   ],
   "enabled": true
