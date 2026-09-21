@@ -57,11 +57,6 @@
 
   function isDual() {
     try {
-      if (global.DarAdaptiveLayout && typeof global.DarAdaptiveLayout.getState === "function") {
-        var st = global.DarAdaptiveLayout.getState();
-        if (st && st.isMultiPane) return true;
-        if (st && st.panes >= 2) return true;
-      }
       if (global.DarAdaptiveLayout && typeof global.DarAdaptiveLayout.isDual === "function") {
         return !!global.DarAdaptiveLayout.isDual();
       }
