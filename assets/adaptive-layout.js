@@ -150,14 +150,6 @@
   }
 
   function wantsSideRail(width, height, density) {
-    if (!isTestApp()) return false;
-    if (routeBlocksRail()) return false;
-    var w = Number(width) || 0;
-    var h = Number(height) || 0;
-    if (w < 620 || h < 300) return false;
-    var landscape = w >= h;
-    if (landscape && w >= 620) return true;
-    if (density === "extra_wide" && w >= EXTRA_WIDE_MIN && h >= 500) return true;
     return false;
   }
 
