@@ -355,22 +355,29 @@ html.dar-test-adaptive[data-nav-rail="1"] .top-shell,
 html.dar-test-adaptive[data-nav-rail="1"] .home-v380,
 html.dar-test-adaptive[data-nav-rail="1"] .home-v380-shell {
   width: 100% !important;
-  max-width: 100% !important;
+  max-width: none !important;
   margin-left: 0 !important;
   margin-right: 0 !important;
   box-sizing: border-box !important;
 }
 
-html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="trailing"] .app,
-html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="trailing"] #appView {
-  padding-right: var(--layout-rail-width, 56px) !important;
-  padding-left: 0 !important;
+html.dar-test-adaptive[data-nav-rail="1"] html,
+html.dar-test-adaptive[data-nav-rail="1"] body {
+  width: 100% !important;
+  max-width: none !important;
+  background-attachment: fixed;
 }
 
-html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] .app,
-html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] #appView {
-  padding-left: var(--layout-rail-width, 56px) !important;
-  padding-right: 0 !important;
+html.dar-test-adaptive[data-nav-rail="1"] .app,
+html.dar-test-adaptive[data-nav-rail="1"] #appView {
+  padding-left: var(--layout-chrome-left, 0px) !important;
+  padding-right: var(--layout-chrome-right, 60px) !important;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"][data-panes="2"] .home-v380,
+html.dar-test-adaptive[data-nav-rail="1"][data-density="extra_wide"] .home-v380,
+html.dar-test-adaptive[data-nav-rail="1"][data-density="wide"] .home-v380 {
+  max-width: none !important;
 }
 
 html.dar-test-adaptive[data-nav-rail="1"] #appChromeDock #bottomNav.bottom-nav,
@@ -383,32 +390,37 @@ html.dar-test-adaptive.is-quran-player-route[data-nav-rail="1"] #bottomNav.botto
   opacity: 1 !important;
   pointer-events: auto !important;
   position: fixed !important;
-  width: var(--layout-rail-width, 56px) !important;
-  min-width: var(--layout-rail-width, 56px) !important;
-  max-width: var(--layout-rail-width, 56px) !important;
+  width: var(--layout-rail-width, 60px) !important;
+  min-width: var(--layout-rail-width, 60px) !important;
+  max-width: var(--layout-rail-width, 60px) !important;
   top: 0 !important;
   bottom: 0 !important;
   height: 100dvh !important;
   min-height: 100dvh !important;
   max-height: 100dvh !important;
-  transform: translate3d(0,0,0) !important;
-  -webkit-transform: translate3d(0,0,0) !important;
+  transform: none !important;
+  -webkit-transform: none !important;
   flex-direction: column !important;
+  justify-content: space-evenly !important;
+  align-items: stretch !important;
   border-radius: 0 !important;
-  padding: 8px 4px !important;
+  padding: max(10px, env(safe-area-inset-top, 0px)) 4px max(10px, env(safe-area-inset-bottom, 0px)) !important;
   gap: 2px !important;
-  z-index: 80 !important;
-  background: color-mix(in srgb, var(--bg, #12110f) 94%, #000) !important;
+  z-index: 120 !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  background: color-mix(in srgb, var(--bg, #12110f) 92%, #000) !important;
   border: 0 !important;
   box-shadow: none !important;
-  transition: left .28s ease, right .28s ease, width .28s ease !important;
+  -webkit-backdrop-filter: blur(12px) saturate(1.08) !important;
+  backdrop-filter: blur(12px) saturate(1.08) !important;
 }
 
 html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] #bottomNav.bottom-nav,
 html.dar-test-adaptive[data-theme][data-nav-rail="1"][data-nav-placement="leading"] #bottomNav.bottom-nav {
   left: 0 !important;
   right: auto !important;
-  border-right: 1px solid color-mix(in srgb, var(--gold2, #efd78e) 22%, transparent) !important;
+  border-right: 1px solid rgba(255,255,255,.18) !important;
   border-left: 0 !important;
 }
 
@@ -417,48 +429,88 @@ html.dar-test-adaptive[data-theme][data-nav-rail="1"][data-nav-placement="traili
 html.dar-test-adaptive[data-nav-rail="1"]:not([data-nav-placement]) #bottomNav.bottom-nav {
   right: 0 !important;
   left: auto !important;
-  border-left: 1px solid color-mix(in srgb, var(--gold2, #efd78e) 22%, transparent) !important;
+  border-left: 1px solid rgba(255,255,255,.18) !important;
   border-right: 0 !important;
 }
 
-html.dar-test-adaptive[data-nav-rail="1"] #darQuranMiniPlayer,
-html.dar-test-adaptive[data-nav-rail="1"] #darQuranPlayer {
-  left: var(--layout-chrome-left, 0px) !important;
-  right: var(--layout-chrome-right, 56px) !important;
-  width: auto !important;
-  max-width: none !important;
+html.dar-test-adaptive[data-nav-rail="1"] #darQuranMiniPlayer {
+  left: auto !important;
+  right: auto !important;
+  width: var(--layout-player-strip, 84px) !important;
+  max-width: var(--layout-player-strip, 84px) !important;
 }
 
 html.dar-test-adaptive.is-quran-player-route[data-nav-rail="1"] #darQuranPlayer {
   display: grid !important;
-  inset: 0 var(--layout-chrome-right, 56px) 0 var(--layout-chrome-left, 0px) !important;
+  inset: 0 var(--layout-chrome-right, 60px) 0 var(--layout-chrome-left, 0px) !important;
 }
 
 html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn {
-  flex: 0 0 auto !important;
+  flex: 1 1 0 !important;
   width: 100% !important;
   min-width: 0 !important;
-  min-height: var(--touch-min) !important;
+  min-height: 48px !important;
   max-height: none !important;
+  height: auto !important;
   margin: 0 !important;
   padding: 6px 2px !important;
   gap: 2px !important;
-  border-radius: 0 !important;
+  border-radius: 12px !important;
   background: transparent !important;
   box-shadow: none !important;
+  flex-direction: column !important;
 }
 
 html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn > span:last-child {
-  font-size: clamp(8px, 1.6vw, 10px) !important;
+  font-size: 9px !important;
   line-height: 1.15 !important;
-  white-space: normal !important;
+  white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   max-width: 100%;
+  display: block !important;
+}
+
+html.dar-test-adaptive[data-density="extra_wide"][data-nav-rail="1"] #bottomNav .bottom-nav-btn > span:last-child,
+html.dar-test-adaptive[data-nav-rail="1"][data-viewport-segments="2"] #bottomNav .bottom-nav-btn > span:last-child {
+  font-size: 10px !important;
 }
 
 html.dar-test-adaptive[data-nav-collapsed="1"] #bottomNav .bottom-nav-btn > span:last-child {
   display: none !important;
+}
+
+html.dar-test-adaptive .dar-hinge-mask {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: var(--layout-hinge-start, 50%);
+  width: var(--layout-hinge-gap, 28px);
+  pointer-events: none;
+  z-index: 35;
+  background: color-mix(in srgb, var(--bg, #0b0c10) 82%, transparent);
+  box-shadow: inset 1px 0 0 rgba(255,255,255,.2), inset -1px 0 0 rgba(255,255,255,.2);
+}
+html.dar-test-adaptive.dar-has-hinge .dar-hinge-mask:not([hidden]) {
+  display: block;
+}
+
+@media (horizontal-viewport-segments: 2) {
+  html.dar-test-adaptive.is-fold-dual .dar-fold[data-fold-mode="dual"] {
+    grid-template-columns: env(viewport-segment-width 0 0, 1fr) minmax(0, 1fr);
+    column-gap: var(--layout-hinge-gap, 28px);
+  }
+}
+
+@media (max-height: 799.98px) {
+  html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn {
+    min-height: 40px !important;
+    padding: 4px 1px !important;
+  }
+  html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn > span:last-child {
+    font-size: 8px !important;
+  }
 }
 
 html.dar-test-adaptive .dar-adaptive-rail-toggle {

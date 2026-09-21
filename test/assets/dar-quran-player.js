@@ -1637,7 +1637,9 @@
         paintMini();
         return;
       }
-      if (act === "seek" || act === "learn-loop" || act === "learn-stay" || act === "learn-rate") return;
+      if (act === "prev") { e.preventDefault(); prevAyah(); return; }
+      if (act === "next") { e.preventDefault(); nextAyah(false); return; }
+      if (act === "vol") return;
       if (state.learnMode || isReaderRoute()) return;
       openFullPlayer();
     });
@@ -1683,28 +1685,61 @@
       });
       range.addEventListener("change", function () { seekLock = false; saveState(); });
     }
+    var prevBtn = el.querySelector("[data-dqp-mini=prev]");
+    var nextBtn = el.querySelector("[data-dqp-mini=next]");
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        prevAyah();
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        nextAyah(false);
+      });
+    }
+    var vol = el.querySelector("[data-dqp-mini=vol]");
+    if (vol) {
+      vol.addEventListener("pointerdown", function (e) { e.stopPropagation(); });
+      vol.addEventListener("click", function (e) { e.stopPropagation(); });
+      vol.addEventListener("input", function () {
+        state.volume = Number(vol.value) / 100;
+        applyVolume();
+      });
+    }
   }
   function miniMarkup() {
     return (
       '<div class="dqp-top-main">' +
-        '<span class="dqp-top-mark" aria-hidden="true">📖</span>' +
         '<button type="button" data-dqp-mini="open" class="dqp-top-open">' +
+          '<span class="dqp-top-mark" aria-hidden="true">📖</span>' +
           '<span class="dqp-top-text"><b></b><span></span></span>' +
         "</button>" +
+        '<div class="dqp-top-seek">' +
+          '<span class="dqp-top-time" data-dqp-mini-cur>00:00</span>' +
+          '<div class="dqp-top-track">' +
+            '<span class="dqp-top-groove" aria-hidden="true"></span>' +
+            '<span class="dqp-top-fill" aria-hidden="true"></span>' +
+            '<input class="dqp-top-range" data-dqp-mini="seek" type="range" min="0" max="1000" value="0" aria-label="Fortschritt">' +
+          "</div>" +
+          '<span class="dqp-top-time" data-dqp-mini-dur>00:00</span>' +
+        "</div>" +
         '<div class="dqp-top-actions">' +
-          '<button type="button" class="dqp-top-ctrl" data-dqp-mini="play" aria-label="Wiedergabe"></button>' +
+          '<button type="button" class="dqp-top-ctrl dqp-top-play" data-dqp-mini="play" aria-label="Wiedergabe"></button>' +
           '<button type="button" class="dqp-top-ctrl dqp-top-pause" data-dqp-mini="pause" aria-label="Pause"></button>' +
-          '<button type="button" class="dqp-top-ctrl dqp-top-stop" data-dqp-mini="stop" aria-label="Stopp"></button>' +
         "</div>" +
-      "</div>" +
-      '<div class="dqp-top-seek">' +
-        '<span class="dqp-top-time" data-dqp-mini-cur>00:00</span>' +
-        '<div class="dqp-top-track">' +
-          '<span class="dqp-top-groove" aria-hidden="true"></span>' +
-          '<span class="dqp-top-fill" aria-hidden="true"></span>' +
-          '<input class="dqp-top-range" data-dqp-mini="seek" type="range" min="0" max="1000" value="0" aria-label="Fortschritt">' +
+        '<div class="dqp-top-skip">' +
+          '<button type="button" class="dqp-top-ctrl dqp-top-skip-btn" data-dqp-mini="prev" aria-label="Zurück"></button>' +
+          '<button type="button" class="dqp-top-ctrl dqp-top-skip-btn" data-dqp-mini="next" aria-label="Weiter"></button>' +
         "</div>" +
-        '<span class="dqp-top-time" data-dqp-mini-dur>00:00</span>' +
+        '<div class="dqp-top-vol">' +
+          '<span class="dqp-top-vol-ico" aria-hidden="true"></span>' +
+          '<input class="dqp-top-vol-range" data-dqp-mini="vol" type="range" min="0" max="100" value="100" aria-label="Lautstärke">' +
+        "</div>" +
+        '<button type="button" class="dqp-top-ctrl dqp-top-stop" data-dqp-mini="stop" aria-label="Stopp"></button>' +
       "</div>" +
       '<div class="dqp-learn" data-dqp-learn hidden>' +
         '<button type="button" class="dqp-learn-btn" data-dqp-mini="learn-loop" aria-pressed="true" aria-label="Āyah wiederholen">⟳</button>' +
@@ -1722,7 +1757,7 @@
       el.setAttribute("role", "region");
       el.setAttribute("aria-label", "Qurʾān Wiedergabe");
     }
-    if (!el.querySelector(".dqp-top-track") || !el.querySelector("[data-dqp-mini=seek]") || !el.querySelector("[data-dqp-learn]") || !el.querySelector("[data-dqp-mini=pause]")) {
+    if (!el.querySelector(".dqp-top-track") || !el.querySelector("[data-dqp-mini=seek]") || !el.querySelector("[data-dqp-learn]") || !el.querySelector("[data-dqp-mini=pause]") || !el.querySelector("[data-dqp-mini=prev]") || !el.querySelector("[data-dqp-mini=vol]")) {
       el.innerHTML = miniMarkup();
       el.dataset.dqpMiniBound = "";
     }
@@ -1761,6 +1796,14 @@
       pa.classList.toggle("is-on", !!state.playing);
     }
     if (st) st.innerHTML = icon("stop");
+    var pv = el.querySelector("[data-dqp-mini=prev]");
+    var nx = el.querySelector("[data-dqp-mini=next]");
+    if (pv) pv.innerHTML = icon("prev");
+    if (nx) nx.innerHTML = icon("next");
+    var volIco = el.querySelector(".dqp-top-vol-ico");
+    if (volIco) volIco.innerHTML = icon("volmin");
+    var vol = el.querySelector("[data-dqp-mini=vol]");
+    if (vol) vol.value = String(Math.round((Number(state.volume) || 1) * 100));
     applyLearnChrome();
     var learn = el.querySelector("[data-dqp-learn]");
     var loopBtn = el.querySelector("[data-dqp-mini=learn-loop]");

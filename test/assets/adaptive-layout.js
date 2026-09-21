@@ -4,7 +4,7 @@
  * Kein Gerätetyp (kein iPhone/iPad/Fold-UA).
  * Visitor: Compact/Medium/Expanded, Bottom-Nav (unverändert).
  * Test: COMPACT / REGULAR / WIDE / EXTRA_WIDE + optionale Seiten-Nav.
- * TEST_COPY v920 — /test/assets (nicht Live-/assets/)
+ * TEST_COPY v921 — Drei-Zonen-Querformat, Edge-to-Edge
  */
 (function (global) {
   "use strict";
@@ -13,13 +13,12 @@
   var EXPANDED_MIN = 700;
   var EXPANDED_PORTRAIT_MIN = 840;
   var EXPANDED_MIN_HEIGHT = 480;
-  var WIDE_MIN = 720;
+  var WIDE_MIN = 1000;
   var EXTRA_WIDE_MIN = 1100;
   var PANE_MIN = 280;
-  var RAIL_PREF = 58;
-  var RAIL_COLLAPSED = 36;
-  var FLOAT_EDGE = 10;
-  var PLAYER_STRIP = 62;
+  var RAIL_PREF = 60;
+  var RAIL_COLLAPSED = 44;
+  var PLAYER_STRIP = 84;
   var PLACE_KEY = "dar_sidebar_placement";
   var COLLAPSE_KEY = "dar_sidebar_collapsed";
 
@@ -99,14 +98,17 @@
     var h = Number(height) || 0;
     if (w < 600) return "compact";
     if (w >= EXTRA_WIDE_MIN && w >= PANE_MIN * 3) return "extra_wide";
-    if (w >= WIDE_MIN && (w >= h || w >= 900)) return "wide";
+    if (w >= WIDE_MIN && (w >= h || w >= 1000)) return "wide";
     if (w >= 600) return "regular";
     return "compact";
   }
 
   function resolvePaneCount(width, height) {
     var w = Number(width) || 0;
-    if (w >= PANE_MIN * 3 + RAIL_PREF && w >= EXTRA_WIDE_MIN) return 3;
+    var segs = readViewportSegments();
+    if (segs >= 2 && w >= PANE_MIN * 2) return 2;
+    if (w >= PANE_MIN * 3 + RAIL_PREF && w >= EXTRA_WIDE_MIN) return 2;
+    if (w >= PANE_MIN * 2 && w >= EXTRA_WIDE_MIN) return 2;
     if (w >= PANE_MIN * 2 && w >= EXPANDED_MIN) return 2;
     return 1;
   }
@@ -195,39 +197,33 @@
     if (btn) btn.hidden = true;
   }
 
+  function railWidthFor(metrics, collapsed) {
+    if (collapsed) return RAIL_COLLAPSED;
+    var w = Number(metrics && metrics.width) || 0;
+    var h = Number(metrics && metrics.height) || 0;
+    var compactH = h > 0 && h < 800;
+    if (w >= 1400) return compactH ? 64 : 76;
+    if (w >= WIDE_MIN) return compactH ? 58 : 68;
+    return compactH ? 52 : RAIL_PREF;
+  }
+
+  function playerStripFor(metrics) {
+    var h = Number(metrics && metrics.height) || 0;
+    return h > 0 && h < 800 ? 72 : PLAYER_STRIP;
+  }
+
   function applySideRail(nav, metrics) {
     var placement = readPlacement();
     var collapsed = readCollapsed();
     var leading = placement === "leading";
-    var width = collapsed ? RAIL_COLLAPSED : RAIL_PREF;
-    var insetL = "env(safe-area-inset-left, 0px)";
-    var insetR = "env(safe-area-inset-right, 0px)";
-    var insetT = "env(safe-area-inset-top, 0px)";
-    var insetB = "env(safe-area-inset-bottom, 0px)";
+    var width = railWidthFor(metrics, collapsed);
 
     nav.classList.add("is-adaptive-rail");
     nav.classList.remove("is-adaptive-centered", "dar-test-thumb-nav");
     nav.removeAttribute("hidden");
     nav.setAttribute("data-rail-collapsed", collapsed ? "1" : "0");
     hideRailToggle();
-
-    var edge = FLOAT_EDGE + "px";
-    var sideCss = leading
-      ? "left:max(" + edge + ", calc(" + insetL + " + " + edge + ")) !important;right:auto !important;"
-      : "right:max(" + edge + ", calc(" + insetR + " + " + edge + ")) !important;left:auto !important;";
-    nav.style.cssText =
-      "display:flex !important;visibility:visible !important;opacity:1 !important;pointer-events:auto !important;" +
-      "position:fixed !important;top:50% !important;bottom:auto !important;" +
-      sideCss +
-      "width:" + width + "px !important;min-width:" + width + "px !important;max-width:" + width + "px !important;" +
-      "height:auto !important;min-height:0 !important;max-height:calc(100dvh - 28px) !important;" +
-      "margin:0 !important;padding:6px 4px !important;" +
-      "flex-direction:column !important;justify-content:space-around !important;align-items:stretch !important;gap:1px !important;" +
-      "transform:translate3d(0,-50%,0) !important;-webkit-transform:translate3d(0,-50%,0) !important;" +
-      "border-radius:27px !important;z-index:120 !important;overflow:hidden !important;box-sizing:border-box !important;" +
-      "background:rgba(255,255,255,.04) !important;border:1px solid rgba(255,255,255,.08) !important;" +
-      "box-shadow:0 6px 18px rgba(0,0,0,.14) !important;" +
-      "-webkit-backdrop-filter:blur(10px) saturate(1.08) !important;backdrop-filter:blur(10px) saturate(1.08) !important;";
+    nav.style.cssText = "";
 
     Array.prototype.forEach.call(document.querySelectorAll(".bottom-nav"), function (el) {
       if (el !== nav) el.style.setProperty("display", "none", "important");
@@ -241,24 +237,19 @@
     if (document.body) {
       document.body.style.setProperty("padding-bottom", "0px", "important");
     }
-    applyChromeInsets(leading, width);
+    applyChromeInsets(leading, width, metrics);
   }
 
-  function applyChromeInsets(leading, width) {
+  function applyChromeInsets(leading, width, metrics) {
     var root = document.documentElement;
     var strip =
       root.classList.contains("player-active") &&
       !root.classList.contains("player-stopped") &&
       !root.classList.contains("is-quran-player-route")
-        ? PLAYER_STRIP
+        ? playerStripFor(metrics)
         : 0;
-    var floatPad = FLOAT_EDGE + 8;
-    var navReserve = width + floatPad;
-    var playReserve = strip ? strip + floatPad + 18 : 12;
-    var left = leading ? navReserve : playReserve;
-    var right = leading ? playReserve : navReserve;
-    if (!strip && !leading) left = 12;
-    if (!strip && leading) right = 12;
+    var left = leading ? width : strip;
+    var right = leading ? strip : width;
     root.style.setProperty("--layout-chrome-left", left + "px");
     root.style.setProperty("--layout-chrome-right", right + "px");
     root.style.setProperty("--layout-player-strip", strip + "px");
@@ -267,17 +258,18 @@
     var mini = document.getElementById("darQuranMiniPlayer");
     if (mini) {
       if (strip) {
-        mini.style.setProperty("top", "50%", "important");
-        mini.style.setProperty("bottom", "auto", "important");
+        mini.style.setProperty("top", "0", "important");
+        mini.style.setProperty("bottom", "0", "important");
+        mini.style.setProperty("height", "100dvh", "important");
         mini.style.setProperty("width", strip + "px", "important");
-        mini.style.setProperty("height", "min(78dvh, 470px)", "important");
         mini.style.setProperty("max-width", strip + "px", "important");
-        mini.style.setProperty("transform", "translate3d(0,-50%,0)", "important");
+        mini.style.setProperty("min-width", strip + "px", "important");
+        mini.style.setProperty("transform", "none", "important");
         if (leading) {
-          mini.style.setProperty("right", "max(14px, calc(env(safe-area-inset-right, 0px) + 14px))", "important");
+          mini.style.setProperty("right", "0", "important");
           mini.style.setProperty("left", "auto", "important");
         } else {
-          mini.style.setProperty("left", "max(16px, calc(env(safe-area-inset-left, 0px) + 18px))", "important");
+          mini.style.setProperty("left", "0", "important");
           mini.style.setProperty("right", "auto", "important");
         }
       } else {
@@ -288,6 +280,7 @@
         mini.style.removeProperty("left");
         mini.style.removeProperty("right");
         mini.style.removeProperty("max-width");
+        mini.style.removeProperty("min-width");
         mini.style.removeProperty("transform");
       }
     }
@@ -373,6 +366,9 @@
     nav.style.setProperty("border-radius", "", "important");
     nav.style.setProperty("z-index", "40", "important");
     nav.style.setProperty("gap", "", "important");
+    var mask = document.getElementById("darHingeMask");
+    if (mask) mask.hidden = true;
+    document.documentElement.classList.remove("dar-has-hinge");
   }
 
   function applyNavLayout(mode, metrics) {
@@ -411,16 +407,51 @@
     root.setAttribute("data-fold-dual", dual ? "1" : "0");
   }
 
-  function applyHingeMetrics(metrics) {
-    var root = document.documentElement;
-    var segs = 1;
+  function readViewportSegments() {
     try {
       if (global.matchMedia && global.matchMedia("(horizontal-viewport-segments: 2)").matches) {
-        segs = 2;
+        return 2;
       }
     } catch (e) {}
+    try {
+      var segs = global.visualViewport && global.visualViewport.segments;
+      if (segs && segs.length >= 2) return segs.length;
+    } catch (e2) {}
+    return 1;
+  }
+
+  function ensureHingeMask() {
+    var el = document.getElementById("darHingeMask");
+    if (el) return el;
+    el = document.createElement("div");
+    el.id = "darHingeMask";
+    el.className = "dar-hinge-mask";
+    el.setAttribute("aria-hidden", "true");
+    if (document.body) document.body.appendChild(el);
+    return el;
+  }
+
+  function applyHingeMetrics(metrics) {
+    var root = document.documentElement;
+    var segs = readViewportSegments();
+    var gap = 0;
+    var start = 0;
+    try {
+      var vs = global.visualViewport && global.visualViewport.segments;
+      if (vs && vs.length >= 2) {
+        segs = vs.length;
+        start = Math.round(vs[0].x + vs[0].width);
+        gap = Math.max(0, Math.round(vs[1].x - start));
+      }
+    } catch (e) {}
+    if (segs >= 2 && gap < 12) gap = 28;
     root.setAttribute("data-viewport-segments", String(segs));
     root.style.setProperty("--layout-aspect", String((metrics.aspect || 1).toFixed(3)));
+    root.style.setProperty("--layout-hinge-gap", gap + "px");
+    root.style.setProperty("--layout-hinge-start", start ? start + "px" : "50%");
+    root.classList.toggle("dar-has-hinge", segs >= 2);
+    var mask = ensureHingeMask();
+    if (mask) mask.hidden = segs < 2 || !currentRail;
   }
 
   function applyLayout(force) {
