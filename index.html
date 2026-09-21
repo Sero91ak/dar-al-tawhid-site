@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v826";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v827";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -12072,7 +12072,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 }
 </style>
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=587">
-<link rel="stylesheet" href="/assets/dar-quran-player.css?v=922">
+<link rel="stylesheet" href="/assets/dar-quran-player.css?v=923">
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=5">
 <link rel="stylesheet" href="/assets/books-library.css?v=2">
 <link rel="stylesheet" href="/assets/prophets/prophets.css?v=16">
@@ -27111,7 +27111,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v826";
+const APP_BUILD_ID="app-shell-v827";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -34007,6 +34007,69 @@ html[data-theme] body.is-quiz-route .quiz-home-quick-card>span:last-child{
   grid-column:2!important;
   font-size:12px!important;font-weight:600!important;color:color-mix(in srgb,var(--cream,#f4ead2) 70%,transparent)!important;
 }
+</style>
+<style id="theme-player-contrast-v826">
+.theme-switch-btn[data-theme-select="eisgold"]{--theme-card-bg:linear-gradient(145deg,#f4fbff,#d4e8f6);--theme-card-border:rgba(184,150,58,.55);--theme-card-text:#0a1628;--theme-card-shine:rgba(255,255,255,.78);--theme-preview-ring:rgba(184,150,58,.5);--theme-preview-logo:radial-gradient(circle,#fff 0 32%,#cfe6f6 35% 100%);--theme-preview-shadow:rgba(20,40,70,.14);--theme-preview-line:linear-gradient(90deg,#c8a95a,#8eb7d6)}
+html[data-theme] .theme-switch-btn[data-theme-select],
+html[data-theme="eisgold"] .theme-switch-btn[data-theme-select],
+html[data-theme="dar-al-layl"] .theme-switch-btn[data-theme-select],
+html[data-theme="light"] .theme-switch-btn[data-theme-select],
+html[data-theme="soft"] .theme-switch-btn[data-theme-select],
+html[data-theme="dark"] .theme-switch-btn[data-theme-select],
+html[data-theme="royal"] .theme-switch-btn[data-theme-select],
+html[data-theme="bordeaux"] .theme-switch-btn[data-theme-select]{
+  background:var(--theme-card-bg)!important;
+  background-image:var(--theme-card-bg)!important;
+  border:1px solid var(--theme-card-border)!important;
+  color:var(--theme-card-text)!important;
+  -webkit-text-fill-color:var(--theme-card-text)!important;
+  box-shadow:inset 0 1px 0 var(--theme-card-shine,rgba(255,255,255,.08))!important;
+}
+html[data-theme] .theme-switch-btn[data-theme-select] *{
+  color:var(--theme-card-text)!important;
+  -webkit-text-fill-color:var(--theme-card-text)!important;
+}
+html[data-theme="eisgold"] .theme-switch-btn:not([data-theme-select]),
+html[data-theme="light"] .theme-switch-btn:not([data-theme-select]),
+html[data-theme="soft"] .theme-switch-btn:not([data-theme-select]){
+  color:#1a140e!important;-webkit-text-fill-color:#1a140e!important;
+  background:#fff!important;border-color:rgba(160,130,70,.4)!important;
+}
+html[data-theme="dar-al-layl"] .theme-switch-btn:not([data-theme-select]),
+html[data-theme="dark"] .theme-switch-btn:not([data-theme-select]),
+html[data-theme="royal"] .theme-switch-btn:not([data-theme-select]),
+html[data-theme="bordeaux"] .theme-switch-btn:not([data-theme-select]){
+  color:#F1E6C8!important;-webkit-text-fill-color:#F1E6C8!important;
+  background:#141916!important;border-color:rgba(216,193,139,.28)!important;
+}
+#darQuranMiniPlayer input.dqp-top-range,#darQuranPlayer input.dqp-range{background:transparent!important;border:0!important;box-shadow:none!important;color:transparent!important;-webkit-text-fill-color:transparent!important}
+html[data-theme="eisgold"] #darQuranPlayer,
+html[data-theme="eisgold"] #darQuranMiniPlayer{color:#F4FBFF!important;--text:#F4FBFF;--cream:#F4FBFF;--gold2:#E8D5A3}
+html[data-theme="eisgold"] #darQuranPlayer .dqp-ayah-ar,
+html[data-theme="eisgold"] #darQuranPlayer .dqp-ayah-de,
+html[data-theme="eisgold"] #darQuranPlayer .dqp-ayah-lat,
+html[data-theme="eisgold"] #darQuranPlayer .dqp-ayah-ref,
+html[data-theme="eisgold"] #darQuranPlayer .dqp-title,
+html[data-theme="eisgold"] #darQuranMiniPlayer .dqp-top-text b,
+html[data-theme="eisgold"] #darQuranMiniPlayer .dqp-top-time{color:#F4FBFF!important;-webkit-text-fill-color:#F4FBFF!important}
+html[data-theme="eisgold"] #darQuranPlayer .dqp-artist,
+html[data-theme="eisgold"] #darQuranMiniPlayer .dqp-top-text span{color:#D7E9F6!important;-webkit-text-fill-color:#D7E9F6!important}
+html[data-theme="dar-al-layl"] #darQuranMiniPlayer .dqp-top-groove,
+html[data-theme="dark"] #darQuranMiniPlayer .dqp-top-groove,
+html[data-theme="royal"] #darQuranMiniPlayer .dqp-top-groove,
+html[data-theme="bordeaux"] #darQuranMiniPlayer .dqp-top-groove{background:rgba(232,215,179,.4)!important}
+html[data-theme="light"] #darQuranMiniPlayer .dqp-top-groove,
+html[data-theme="soft"] #darQuranMiniPlayer .dqp-top-groove,
+html[data-theme="eisgold"] #darQuranMiniPlayer .dqp-top-groove{background:rgba(255,255,255,.34)!important}
+html[data-theme] #darQuranMiniPlayer .dqp-top-fill{background:linear-gradient(90deg,#C9A86A,#F0E0B8)!important}
+html[data-theme="dar-al-layl"] #darQuranMiniPlayer .dqp-top-time,
+html[data-theme="dark"] #darQuranMiniPlayer .dqp-top-time,
+html[data-theme="royal"] #darQuranMiniPlayer .dqp-top-time,
+html[data-theme="bordeaux"] #darQuranMiniPlayer .dqp-top-time,
+html[data-theme="light"] #darQuranMiniPlayer .dqp-top-time,
+html[data-theme="soft"] #darQuranMiniPlayer .dqp-top-time,
+html[data-theme="eisgold"] #darQuranMiniPlayer .dqp-top-time{color:#F4EED8!important;-webkit-text-fill-color:#F4EED8!important;opacity:1!important}
+html[data-theme="eisgold"] #darQuranMiniPlayer .dqp-top-time{color:#F4FBFF!important;-webkit-text-fill-color:#F4FBFF!important}
 </style>
 
 </html>

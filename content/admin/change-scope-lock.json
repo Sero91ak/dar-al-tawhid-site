@@ -108,6 +108,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "theme-player-contrast-2026-09-21",
+      "approvedBy": "user-explicit-eisgold-layl-erscheinungsbilder-lesbar",
+      "reason": "Nutzer: Player-Schrift Eisgold hell/lesbar, Dar-al-Layl Seek/Zeiten sichtbar, jede Erscheinungsbild-Karte und Player farblich lesbar.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "assets/dar-quran-player.css",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/dar-quran-player.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "visitor-ios-quran-learn-player-2026-09-21",
       "approvedBy": "user-explicit-quran-lern-player-besucher-ios",
       "reason": "Nutzer: Qurʾān-Lernplayer in Besucher-App und iOS, plus alle 17 Apple-TV-Rezitatoren. Nicht den Voll-Player.",
