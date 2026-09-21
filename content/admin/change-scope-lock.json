@@ -5186,13 +5186,13 @@
     {
       "id": "desktop-website-preview-2026-09-21",
       "approvedBy": "user-explicit-desktop-website-preview-link",
-      "reason": "Nutzer: separate Desktop-Webseiten-Vorschau auf eigener Domain-Route erstellen; jede Seite einzeln über obere Navigation prüfbar; Apps unverändert.",
+      "reason": "Nutzer: Desktop-Webseiten-Vorschau komplett neu im cremig-pergamentartigen Stil; echtes Logo, globales Ibn-Sīrīn-Zitat, ausschließlich Desktop-interne Navigation, Qurʾān als aufgeschlagenes Buch mit langsamem Blättern, klare Beitrags-/Quellenhierarchie.",
       "paths": [
         "content/admin/change-scope-lock.json",
         "desktop-preview/index.html"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z",
-      "deployTriggerAt": "2026-09-21T09:06:00.000Z",
+      "deployTriggerAt": "2026-09-21T09:18:00.000Z",
       "note": "Trigger visitor static-assets deploy so /desktop-preview/ is published on dar-al-tawhid.de."
     }
   ],
