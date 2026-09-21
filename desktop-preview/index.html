@@ -501,6 +501,35 @@ button,input,select{font:inherit}
   .prayer-inner{width:calc(100% - 24px)!important}
 }
 
+
+/* Prayer flow v7 — softly rounded field + place name */
+.prayer-river{
+  border-radius:38px!important;
+}
+.prayer-river::before{
+  inset:-7px -18px!important;
+  border-radius:42px!important;
+  -webkit-mask-image:radial-gradient(ellipse 99% 94% at 50% 50%,#000 56%,rgba(0,0,0,.90) 70%,rgba(0,0,0,.44) 86%,transparent 100%)!important;
+  mask-image:radial-gradient(ellipse 99% 94% at 50% 50%,#000 56%,rgba(0,0,0,.90) 70%,rgba(0,0,0,.44) 86%,transparent 100%)!important;
+}
+.prayer-river::after{
+  inset:-4px -11px!important;
+  border-radius:40px!important;
+  -webkit-mask-image:radial-gradient(ellipse 99% 94% at 50% 50%,#000 54%,rgba(0,0,0,.74) 78%,transparent 100%)!important;
+  mask-image:radial-gradient(ellipse 99% 94% at 50% 50%,#000 54%,rgba(0,0,0,.74) 78%,transparent 100%)!important;
+}
+.prayer-locate.has-place{
+  color:#f0dfb1!important;
+  font:500 13px/1.25 var(--serif)!important;
+  letter-spacing:.025em!important;
+  text-transform:none!important;
+}
+@media(max-width:860px){
+  .prayer-river{border-radius:30px!important}
+  .prayer-river::before{border-radius:34px!important}
+  .prayer-river::after{border-radius:32px!important}
+}
+
 </style>
 </head>
 <body>
@@ -824,22 +853,55 @@ button,input,select{font:inherit}
   var b=parse("darDesktopPrayerLocationV1");if(b&&isFinite(Number(b.lat))&&isFinite(Number(b.lon)))return{lat:Number(b.lat),lon:Number(b.lon),city:b.city||"Dein Standort",angle:Number(b.angle||12),asrFactor:Number(b.asrFactor||1)};
   return null
  }
+ function reversePrayerPlace(lat,lon){
+  return fetch("https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat="+encodeURIComponent(lat)+"&lon="+encodeURIComponent(lon)+"&zoom=10&addressdetails=1&accept-language=de",{headers:{"Accept":"application/json"}})
+   .then(function(r){if(!r.ok)throw new Error("reverse "+r.status);return r.json()})
+   .then(function(d){
+    var a=d&&d.address||{};
+    return a.city||a.town||a.village||a.municipality||a.city_district||a.county||"";
+   }).catch(function(){return ""})
+ }
+ function saveDesktopPrayerLoc(v){try{localStorage.setItem("darDesktopPrayerLocationV1",JSON.stringify(v))}catch(e){}}
  function initPrayerTicker(){
   clearInterval(prayerTimer);
   var locate=document.getElementById("prLocate");if(!locate)return;
+  function paintLocate(loc){
+   if(loc&&loc.city&&loc.city!=="Dein Standort"){
+    locate.textContent=loc.city;
+    locate.classList.add("has-place");
+    locate.setAttribute("aria-label","Standort: "+loc.city+" · Standort aktualisieren");
+   }else{
+    locate.textContent=loc?"Standort wird ermittelt …":"Standort verwenden";
+    locate.classList.remove("has-place");
+   }
+  }
+  function resolvePlace(loc){
+   if(!loc||!isFinite(Number(loc.lat))||!isFinite(Number(loc.lon)))return;
+   if(loc.city&&loc.city!=="Dein Standort"){paintLocate(loc);return}
+   reversePrayerPlace(loc.lat,loc.lon).then(function(name){
+    if(!name)return;
+    var saved={lat:Number(loc.lat),lon:Number(loc.lon),city:name,angle:Number(loc.angle||12),asrFactor:Number(loc.asrFactor||1)};
+    saveDesktopPrayerLoc(saved);paintLocate(saved);drawPrayer()
+   })
+  }
   locate.onclick=function(){
    if(!navigator.geolocation){locate.textContent="Standort nicht verfügbar";return}
+   locate.classList.remove("has-place");
    locate.textContent="Standort wird ermittelt …";
    navigator.geolocation.getCurrentPosition(function(pos){
     var v={lat:pos.coords.latitude,lon:pos.coords.longitude,city:"Dein Standort",angle:12,asrFactor:1};
-    try{localStorage.setItem("darDesktopPrayerLocationV1",JSON.stringify(v))}catch(e){}
-    drawPrayer();locate.textContent="Standort aktualisieren"
-   },function(){locate.textContent="Standort erneut versuchen"},{enableHighAccuracy:false,timeout:10000,maximumAge:3600000})
+    saveDesktopPrayerLoc(v);drawPrayer();
+    reversePrayerPlace(v.lat,v.lon).then(function(name){
+     if(name){v.city=name;saveDesktopPrayerLoc(v)}
+     paintLocate(v);drawPrayer()
+    })
+   },function(){paintLocate(readPrayerLoc())},{enableHighAccuracy:false,timeout:10000,maximumAge:3600000})
   };
   function drawPrayer(){
    var math=window.DarPrayerMath,loc=readPrayerLoc();
    var cur=document.getElementById("prCurrent"),nextEl=document.getElementById("prNext"),timeEl=document.getElementById("prNextTime"),count=document.getElementById("prCountdown"),city=document.getElementById("prLocation");
-   if(!math||!loc){if(city)city.textContent="Standort wählen, um Zeiten zu berechnen";return}
+   if(!math||!loc){if(city)city.textContent="Standort wählen, um Zeiten zu berechnen";paintLocate(null);return}
+   paintLocate(loc);
    var now=new Date(),opts={angle:loc.angle,asrFactor:loc.asrFactor},times=math.calculateDayTimes(now,loc.lat,loc.lon,opts),next=math.nextPrayer(now,loc.lat,loc.lon,opts);
    var prayerOnly=times.filter(function(x){return x.key!=="sunrise"});
    var current=null;
@@ -849,7 +911,7 @@ button,input,select{font:inherit}
    if(count){var ms=Math.max(0,next.date-now),sec=Math.floor(ms/1000),h=Math.floor(sec/3600),m=Math.floor((sec%3600)/60),s=sec%60;count.innerHTML=String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")+'<span>bis zum nächsten Gebet</span>'}
    var grid=document.getElementById("fullPrayerGrid");if(grid){var bs=grid.querySelectorAll("b");times.forEach(function(x,i){if(bs[i])bs[i].textContent=math.formatHour(x.time)})}
   }
-  drawPrayer();prayerTimer=setInterval(drawPrayer,1000)
+  drawPrayer();resolvePlace(readPrayerLoc());prayerTimer=setInterval(drawPrayer,1000)
  }
 
  var searchIndex=[
