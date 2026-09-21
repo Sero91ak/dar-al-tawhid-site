@@ -1072,7 +1072,12 @@ button,input,select{font:inherit}
  }
  function initPostDetail(){
   var out=document.getElementById("postDetail");if(!out)return;
-  var file=new URLSearchParams(location.search).get("file")||REAL_POST_FILES[0];
+  var params=new URLSearchParams(location.search),special=params.get("id");
+  if(special==="ibn-sirin"){
+   out.innerHTML='<div class="detail-page"><article class="detail-main"><div class="eyebrow">ĀṮĀR · QUELLENMETHODIK</div><h2>Dieses Wissen ist Dīn</h2><div class="speaker">Ibn Sīrīn sagte:</div><div class="statement-block">„Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</div><div class="statement-source"><b>Quelle:</b> Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn. <a target="_blank" rel="noopener" href="'+SOURCE_URL+'">Direktnachweis ↗</a></div></article><aside class="source-index"><div class="eyebrow">NACHWEIS</div><h3>Ṣaḥīḥ Muslim</h3><div class="source-meta"><span>Teil</span><p>Muqaddimah</p></div><div class="source-meta"><span>Sprecher</span><p>Muḥammad ibn Sīrīn</p></div></aside></div>';
+   return
+  }
+  var file=params.get("file")||REAL_POST_FILES[0];
   tget("/content/posts/"+file).then(function(t){var r=parsePostMarkdown(t,file);out.innerHTML='<div class="detail-page"><article class="detail-main"><div class="eyebrow">'+escBook(r.category)+'</div><h2>'+escBook(r.title)+'</h2>'+(r.speaker?'<div class="speaker">'+escBook(r.speaker)+'</div>':'')+(r.statement?'<div class="statement-block">„'+escBook(r.statement.replace(/^„|”$/g,""))+'“</div>':'')+'<div class="statement-source"><b>Quelle:</b> '+escBook(r.source||"Quellenangabe im Beitrag")+(r.sourceUrl?' <a target="_blank" rel="noopener" href="'+escBook(r.sourceUrl)+'">Direktnachweis ↗</a>':'')+'</div>'+(r.conclusion?'<p style="margin-top:20px;color:#5f584e;font-size:12px;line-height:1.75">'+escBook(r.conclusion)+'</p>':'')+'</article><aside class="source-index"><div class="eyebrow">ZUORDNUNG</div><h3>'+escBook(r.scholar||r.speaker||"Überlieferung")+'</h3><div class="source-meta"><span>Kategorie</span><p>'+escBook(r.category)+'</p></div><div class="source-meta"><span>Quelle</span><p>'+escBook(r.source||"siehe Beitrag")+'</p></div></aside></div>'}).catch(function(){out.innerHTML='<div class="loading-line">Beitrag konnte gerade nicht geladen werden.</div>'})
  }
  function initRealDuas(){
