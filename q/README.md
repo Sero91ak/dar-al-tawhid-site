@@ -51,16 +51,8 @@ Dieser Ordner ist die zentrale Ablage für alle nummerierten Quellenlinks.
 | `q/33` | Iḥsān, Furcht vor Allah, Ikhlāṣ und Tazkiyah | `al-Ḥasan al-Baṣrī` | Der Muʾmin vereint Iḥsān und Furcht; der Munāfiq vereint schlechte Tat und Sicherheit. |
 | `q/34` | ʿAqīdah, Ṣifāt, Tašbīh und Taʿṭīl | `Nuʿaym ibn Ḥammād al-Khuzāʿī` | Wer Allah Seiner Schöpfung ähnlich macht, hat Kufr begangen; wer leugnet, womit Allah Sich selbst beschrieben hat, hat Kufr begangen; Allahs und Seines Gesandten Beschreibung ist kein Tašbīh. |
 
-| `q/35` | ʿĪsā, Tawaffī, Rafʿ und Qurʾān-Sprache | `Qurʾān` | Tawaffā wird im Qurʾān auch für Menschen verwendet, die nicht gestorben sind; 3:55 kann daher nicht allein lexikalisch als zwingender endgültiger Tod gelesen werden. |
-| `q/36` | ʿĪsā, Tawaffī, Tafsīr-Ikhtilāf und Nuzūl | `Ibn ʿAbbās; Maṭar al-Warrāq; al-Ḥasan al-Baṣrī; Ibn Zayd; aṭ-Ṭabarī` | Frühe Ausleger überlieferten mehrere Deutungen von mutawaffīka; dieser Ikhtilāf ist nicht gleichbedeutend mit einer metaphorischen Ersatzperson für ʿĪsā ibn Maryam. |
-| `q/37` | ʿĪsā, Leben und Nuzūl | `al-Ḥasan al-Baṣrī` | Al-Ḥasan erklärt zu 4:159, ʿĪsā sei jetzt lebendig bei Allah und werde herabsteigen. |
-| `q/38` | ʿĪsā, Zeichen der Stunde und Nuzūl | `Ibn ʿAbbās; Muǧāhid; Qatādah; aḍ-Ḍaḥḥāk` | Zu 43:61 wird von Ibn ʿAbbās und weiteren Salaf die Herabkunft des namentlich genannten ʿĪsā ibn Maryam überliefert. |
-| `q/39` | Nuzūl, Identität ʿĪsās und Ummah | `Der Prophet ﷺ` | Die Ṣaḥīḥ-Texte unterscheiden die Ummah und ihren Amīr von ʿĪsā ibn Maryam, der zu ihnen herabsteigt. |
-| `q/40` | Nuzūl, Daǧǧāl und konkrete Zeichen | `Der Prophet ﷺ` | Ṣaḥīḥ Muslim nennt al-Masīḥ ibn Maryam, den Ort seines Nuzūl, Engel und die Tötung des Daǧǧāl bei Ludd. |
-| `q/41` | ʿAqīdah und Zeichen der Stunde | `Abū Ǧaʿfar aṭ-Ṭaḥāwī` | Aṭ-Ṭaḥāwī nennt den Nuzūl von ʿĪsā ibn Maryam vom Himmel ausdrücklich als Glauben an die Zeichen der Stunde. |
-| `q/42` | ʿAqīdah, Ijmāʿ-Zeugnis und Nuzūl | `Ibn Baṭṭah al-ʿUkbarī` | Ibn Baṭṭah nennt im Rahmen seiner Konsensdarstellung den Glauben, dass ʿĪsā ibn Maryam vom Himmel zur Erde herabsteigt. |
-| `q/43` | Ahl as-Sunnah, Nuzūl und Zeichen der Stunde | `Abū ʿAmr ad-Dānī` | Ad-Dānī zählt den Nuzūl ʿĪsās zum verpflichtenden Glauben aufgrund authentischer Überlieferung und deutet 4:159 auf seinen späteren Tod. |
-| `q/44` | Tafsīr, Tawaffī und Nuzūl bis Ende des 5. Jh. H. | `Abū al-Muẓaffar as-Samʿānī` | As-Samʿānī dokumentiert den Ikhtilāf über tawaffī, behandelt ʿĪsā aber als zu den Lebenden gehörig und nennt den Tod nach dem Nuzūl als frühe Deutung. |
+
+| `q/35` | ʿĪsā ibn Maryam, Tawaffī, Rafʿ und Nuzūl | `Qurʾān; Prophet ﷺ; Ibn ʿAbbās; al-Ḥasan al-Baṣrī; aṭ-Ṭabarī; aṭ-Ṭaḥāwī; Ibn Baṭṭah; Abū ʿAmr ad-Dānī` | Ein Quellenlink bündelt alle Einzelbelege und trennt den echten Tafsīr-Ikhtilāf über tawaffī von der metaphorischen Ersatzdeutung. |
 
 ## Sonderbereiche
 
