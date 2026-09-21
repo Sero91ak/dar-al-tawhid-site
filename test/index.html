@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1789319677748 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v922";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v923";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -10447,12 +10447,12 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/test/assets/premium-feed-app.js?v=101" defer></script>
 <script src="/test/assets/dar-setup-hub.js?v=5" defer></script><!-- DAR_SETUP_HUB_V1 -->
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
-<script src="/test/assets/adaptive-layout.js?v=922" defer></script>
-<script src="/test/assets/fold-split.js?v=922" defer></script>
+<script src="/test/assets/adaptive-layout.js?v=923" defer></script>
+<script src="/test/assets/fold-split.js?v=923" defer></script>
 <script src="/test/assets/fold-thumb-nav.js?v=4" defer></script>
 <script src="/assets/scholars-index.js?v=587" defer></script>
 <script src="/test/assets/prophets/prophets.js?v=33" defer></script>
-<script src="/test/assets/dar-quran-player.js?v=922" defer></script>
+<script src="/test/assets/dar-quran-player.js?v=923" defer></script>
 <script>
 (function(){
   var WANT=920;
@@ -12087,15 +12087,15 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/scholars-index.css?v=588">
 <link rel="preload" href="/test/data/prophets/index.json" as="fetch" crossorigin>
 <link rel="stylesheet" href="/test/assets/prophets/prophets.css?v=17">
-<link rel="stylesheet" href="/test/assets/dar-quran-player.css?v=922">
+<link rel="stylesheet" href="/test/assets/dar-quran-player.css?v=923">
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=791">
-<link rel="stylesheet" href="/test/assets/adaptive-layout.css?v=922">
+<link rel="stylesheet" href="/test/assets/adaptive-layout.css?v=923">
 <link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=668">
 <link rel="stylesheet" href="/test/assets/dar-setup-hub.css?v=7"><!-- DAR_SETUP_HUB_V1 -->
 <link rel="stylesheet" href="/test/assets/dar-top-chrome-fix.css?v=2"><!-- DAR_TOP_CHROME_FIX -->
 <link rel="stylesheet" href="/test/assets/dar-ios-oversize-copy.css?v=5"><!-- DAR_IOS_OVERSIZE_COPY -->
 <link rel="stylesheet" href="/test/assets/full-edge-appearance-polish.css?v=665">
-<link rel="stylesheet" href="/test/assets/fold-split.css?v=922">
+<link rel="stylesheet" href="/test/assets/fold-split.css?v=923">
 <link rel="stylesheet" href="/test/assets/fold-thumb-nav.css?v=3">
 <style id="typography-compact-fix-v310">
 /* Finale Typografie-Korrektur — gewinnt gegen Home-Compact-Overrides */
@@ -27238,7 +27238,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v922";
+const APP_BUILD_ID="app-shell-v923";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -34417,30 +34417,39 @@ html.is-quran-player-route,#darQuranPlayer,#darQuranPlayer .dqp-grab{background:
 #darQuranPlayer .dqp-fill,#darQuranMiniPlayer .dqp-top-fill{background:linear-gradient(90deg,#CFAE86,#EED3AE)!important}
 #darQuranMiniPlayer{background:linear-gradient(180deg,#32302E,#22201E)!important;color:#EBE4D9!important}
 </style>
-<style id="dar-wide-rail-last-v922">
-html.dar-test-adaptive .app,
-html.dar-test-adaptive #appView,
-html.dar-test-adaptive .top-shell,
-html.dar-test-adaptive .header,
-html.dar-test-adaptive .hero-text,
-html.dar-test-adaptive .header-prayer-hub,
-html.dar-test-adaptive .header-prayer-status,
-html.dar-test-adaptive .view,
-html.dar-test-adaptive .qov-page,
-html.dar-test-adaptive .home-v380,
-html.dar-test-adaptive .home-v380-shell{
+<style id="dar-wide-rail-last-v923">
+html.dar-test-adaptive[data-nav-rail="1"] .app,
+html.dar-test-adaptive[data-nav-rail="1"] #appView,
+html.dar-test-adaptive[data-nav-rail="1"] .top-shell,
+html.dar-test-adaptive[data-nav-rail="1"] .header,
+html.dar-test-adaptive[data-nav-rail="1"] .brand,
+html.dar-test-adaptive[data-nav-rail="1"] .hero-text,
+html.dar-test-adaptive[data-nav-rail="1"] .header-prayer-hub,
+html.dar-test-adaptive[data-nav-rail="1"] .header-prayer-status,
+html.dar-test-adaptive[data-nav-rail="1"] .view,
+html.dar-test-adaptive[data-nav-rail="1"] .qov-page,
+html.dar-test-adaptive[data-nav-rail="1"] .home-v380,
+html.dar-test-adaptive[data-nav-rail="1"] .home-v380-shell,
+html.dar-test-adaptive[data-nav-rail="1"] .isnad{
   width:100% !important;
   max-width:none !important;
   margin-left:0 !important;
   margin-right:0 !important;
+  box-sizing:border-box !important;
 }
-html.dar-test-adaptive{
+html.dar-test-adaptive[data-nav-rail="1"]{
   --content-max-width:100%;
   --layout-content-max:100%;
   --layout-shell-max:100%;
 }
-html.dar-test-adaptive .hero-text{max-width:none !important}
-html.dar-test-adaptive .salam{white-space:normal !important;overflow:visible !important;text-overflow:unset !important}
+html.dar-test-adaptive[data-nav-rail="1"] .header,
+html.dar-test-adaptive[data-nav-rail="1"] .brand,
+html.dar-test-adaptive[data-nav-rail="1"] .brand-kicker-row,
+html.dar-test-adaptive[data-nav-rail="1"] .hero-text{
+  text-align:left !important;
+}
+html.dar-test-adaptive[data-nav-rail="1"] .hero-text{max-width:none !important}
+html.dar-test-adaptive[data-nav-rail="1"] .salam{white-space:normal !important;overflow:visible !important;text-overflow:unset !important}
 @media (orientation:landscape){
   html.dar-test-adaptive,html.dar-test-adaptive body{
     width:100% !important;
@@ -34452,8 +34461,8 @@ html.dar-test-adaptive .salam{white-space:normal !important;overflow:visible !im
 }
 html.dar-test-adaptive[data-nav-rail="1"] .app,
 html.dar-test-adaptive[data-nav-rail="1"] #appView{
-  padding-left:var(--layout-chrome-left,16px) !important;
-  padding-right:var(--layout-chrome-right,72px) !important;
+  padding-left:var(--layout-chrome-left,12px) !important;
+  padding-right:var(--layout-chrome-right,64px) !important;
   box-sizing:border-box !important;
 }
 html.dar-test-adaptive[data-theme][data-nav-rail="1"] #bottomNav.bottom-nav,
@@ -34462,7 +34471,7 @@ html.dar-test-adaptive[data-nav-rail="1"] #bottomNav.bottom-nav{
   position:fixed !important;
   top:50% !important;
   bottom:auto !important;
-  right:max(12px, calc(env(safe-area-inset-right, 0px) + 12px)) !important;
+  right:max(4px, env(safe-area-inset-right, 0px)) !important;
   left:auto !important;
   width:var(--layout-rail-width,56px) !important;
   min-width:var(--layout-rail-width,56px) !important;
@@ -34475,7 +34484,7 @@ html.dar-test-adaptive[data-nav-rail="1"] #bottomNav.bottom-nav{
   transform:translate3d(0,-50%,0) !important;
   -webkit-transform:translate3d(0,-50%,0) !important;
   border-radius:27px !important;
-  overflow:hidden !important;
+  overflow:visible !important;
   background:rgba(255,255,255,.04) !important;
   border:1px solid rgba(255,255,255,.08) !important;
   box-shadow:0 6px 18px rgba(0,0,0,.14) !important;
@@ -34483,16 +34492,21 @@ html.dar-test-adaptive[data-nav-rail="1"] #bottomNav.bottom-nav{
   backdrop-filter:blur(10px) saturate(1.08) !important;
 }
 html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] #bottomNav.bottom-nav{
-  left:max(12px, calc(env(safe-area-inset-left, 0px) + 12px)) !important;
+  left:max(4px, env(safe-area-inset-left, 0px)) !important;
   right:auto !important;
+}
+html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn{
+  color:#fff9e5 !important;
+  max-width:none !important;
+}
+html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .nav-icon{
+  display:block !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  font-size:20px !important;
 }
 html.dar-test-adaptive[data-nav-rail="1"] body.has-bottom-nav{
   padding-bottom:0 !important;
-}
-html.dar-test-adaptive[data-nav-rail="1"].dar-player-strip #darQuranMiniPlayer{
-  background:rgba(255,255,255,.04) !important;
-  border:1px solid rgba(255,255,255,.08) !important;
-  border-radius:27px !important;
 }
 html.dar-test-adaptive .dar-hinge-mask{display:none !important}
 </style>

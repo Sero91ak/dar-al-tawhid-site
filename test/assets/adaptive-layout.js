@@ -4,7 +4,7 @@
  * Kein Gerätetyp (kein iPhone/iPad/Fold-UA).
  * Visitor: Compact/Medium/Expanded, Bottom-Nav (unverändert).
  * Test: COMPACT / REGULAR / WIDE / EXTRA_WIDE + optionale Seiten-Nav.
- * TEST_COPY v922 — schwebendes Glas, volle Inhaltsbreite
+ * TEST_COPY v923 — Tabs rechts, Inhalt breit, Player oben
  */
 (function (global) {
   "use strict";
@@ -18,7 +18,7 @@
   var PANE_MIN = 280;
   var RAIL_PREF = 56;
   var RAIL_COLLAPSED = 44;
-  var FLOAT_EDGE = 12;
+  var FLOAT_EDGE = 4;
   var PLAYER_STRIP = 64;
   var PLACE_KEY = "dar_sidebar_placement";
   var COLLAPSE_KEY = "dar_sidebar_collapsed";
@@ -237,7 +237,7 @@
       "margin:0 !important;padding:8px 4px !important;" +
       "flex-direction:column !important;justify-content:space-around !important;align-items:stretch !important;gap:2px !important;" +
       "transform:translate3d(0,-50%,0) !important;-webkit-transform:translate3d(0,-50%,0) !important;" +
-      "z-index:120 !important;overflow:hidden !important;box-sizing:border-box !important;" +
+      "z-index:120 !important;overflow:visible !important;box-sizing:border-box !important;" +
       glass;
 
     Array.prototype.forEach.call(document.querySelectorAll(".bottom-nav"), function (el) {
@@ -257,48 +257,25 @@
 
   function applyChromeInsets(leading, width, metrics) {
     var root = document.documentElement;
-    var strip =
-      root.classList.contains("player-active") &&
-      !root.classList.contains("player-stopped") &&
-      !root.classList.contains("is-quran-player-route")
-        ? playerStripFor(metrics)
-        : 0;
-    var pad = FLOAT_EDGE + 10;
-    var left = leading ? width + pad : strip ? strip + pad + 8 : 16;
-    var right = leading ? (strip ? strip + pad + 8 : 16) : width + pad;
+    var pad = 8;
+    var left = leading ? width + pad : 12;
+    var right = leading ? 12 : width + pad;
     root.style.setProperty("--layout-chrome-left", left + "px");
     root.style.setProperty("--layout-chrome-right", right + "px");
-    root.style.setProperty("--layout-player-strip", strip + "px");
-    root.classList.toggle("dar-player-strip", strip > 0);
+    root.style.setProperty("--layout-player-strip", "0px");
+    root.classList.remove("dar-player-strip");
 
     var mini = document.getElementById("darQuranMiniPlayer");
     if (mini) {
-      if (strip) {
-        mini.style.setProperty("top", "50%", "important");
-        mini.style.setProperty("bottom", "auto", "important");
-        mini.style.setProperty("height", "min(72dvh, 460px)", "important");
-        mini.style.setProperty("width", strip + "px", "important");
-        mini.style.setProperty("max-width", strip + "px", "important");
-        mini.style.setProperty("min-width", strip + "px", "important");
-        mini.style.setProperty("transform", "translate3d(0,-50%,0)", "important");
-        if (leading) {
-          mini.style.setProperty("right", "max(12px, calc(env(safe-area-inset-right, 0px) + 12px))", "important");
-          mini.style.setProperty("left", "auto", "important");
-        } else {
-          mini.style.setProperty("left", "max(14px, calc(env(safe-area-inset-left, 0px) + 16px))", "important");
-          mini.style.setProperty("right", "auto", "important");
-        }
-      } else {
-        mini.style.removeProperty("top");
-        mini.style.removeProperty("bottom");
-        mini.style.removeProperty("width");
-        mini.style.removeProperty("height");
-        mini.style.removeProperty("left");
-        mini.style.removeProperty("right");
-        mini.style.removeProperty("max-width");
-        mini.style.removeProperty("min-width");
-        mini.style.removeProperty("transform");
-      }
+      mini.style.removeProperty("top");
+      mini.style.removeProperty("bottom");
+      mini.style.removeProperty("width");
+      mini.style.removeProperty("height");
+      mini.style.removeProperty("left");
+      mini.style.removeProperty("right");
+      mini.style.removeProperty("max-width");
+      mini.style.removeProperty("min-width");
+      mini.style.removeProperty("transform");
     }
     var full = document.getElementById("darQuranPlayer");
     if (full) {

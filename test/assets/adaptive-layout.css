@@ -412,17 +412,17 @@ html.dar-test-adaptive.is-quran-player-route[data-nav-rail="1"] #bottomNav.botto
   backdrop-filter: blur(10px) saturate(1.08) !important;
 }
 
-html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] #bottomNav.bottom-nav,
-html.dar-test-adaptive[data-theme][data-nav-rail="1"][data-nav-placement="leading"] #bottomNav.bottom-nav {
-  left: max(12px, calc(env(safe-area-inset-left, 0px) + 12px)) !important;
-  right: auto !important;
-}
-
 html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="trailing"] #bottomNav.bottom-nav,
 html.dar-test-adaptive[data-theme][data-nav-rail="1"][data-nav-placement="trailing"] #bottomNav.bottom-nav,
 html.dar-test-adaptive[data-nav-rail="1"]:not([data-nav-placement]) #bottomNav.bottom-nav {
-  right: max(12px, calc(env(safe-area-inset-right, 0px) + 12px)) !important;
+  right: max(4px, env(safe-area-inset-right, 0px)) !important;
   left: auto !important;
+}
+
+html.dar-test-adaptive[data-nav-rail="1"][data-nav-placement="leading"] #bottomNav.bottom-nav,
+html.dar-test-adaptive[data-theme][data-nav-rail="1"][data-nav-placement="leading"] #bottomNav.bottom-nav {
+  left: max(4px, env(safe-area-inset-left, 0px)) !important;
+  right: auto !important;
 }
 
 html.dar-test-adaptive.is-quran-player-route[data-nav-rail="1"] #darQuranPlayer {
@@ -434,16 +434,30 @@ html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn {
   flex: 0 0 auto !important;
   width: 100% !important;
   min-width: 0 !important;
-  min-height: 44px !important;
+  max-width: none !important;
+  min-height: 48px !important;
   max-height: none !important;
   height: auto !important;
   margin: 0 !important;
-  padding: 6px 2px !important;
-  gap: 2px !important;
+  padding: 8px 2px !important;
+  gap: 3px !important;
   border-radius: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
   flex-direction: column !important;
+  color: #fff9e5 !important;
+  overflow: visible !important;
+}
+html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn .nav-icon,
+html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn .nav-icon--emoji {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  font-size: 20px !important;
+  line-height: 1 !important;
+  color: inherit !important;
+  filter: none !important;
+  transform: none !important;
 }
 
 html.dar-test-adaptive[data-nav-rail="1"] #bottomNav .bottom-nav-btn > span:last-child {
