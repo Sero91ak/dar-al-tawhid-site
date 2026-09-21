@@ -4,7 +4,7 @@
  * Kein Gerätetyp (kein iPhone/iPad/Fold-UA).
  * Visitor: Compact/Medium/Expanded, Bottom-Nav (unverändert).
  * Test: COMPACT / REGULAR / WIDE / EXTRA_WIDE + optionale Seiten-Nav.
- * TEST_COPY v919 — /test/assets (nicht Live-/assets/)
+ * TEST_COPY v920 — /test/assets (nicht Live-/assets/)
  */
 (function (global) {
   "use strict";
@@ -16,8 +16,10 @@
   var WIDE_MIN = 720;
   var EXTRA_WIDE_MIN = 1100;
   var PANE_MIN = 280;
-  var RAIL_PREF = 56;
-  var RAIL_COLLAPSED = 28;
+  var RAIL_PREF = 58;
+  var RAIL_COLLAPSED = 36;
+  var FLOAT_EDGE = 10;
+  var PLAYER_STRIP = 62;
   var PLACE_KEY = "dar_sidebar_placement";
   var COLLAPSE_KEY = "dar_sidebar_collapsed";
 
@@ -207,23 +209,25 @@
     nav.classList.remove("is-adaptive-centered", "dar-test-thumb-nav");
     nav.removeAttribute("hidden");
     nav.setAttribute("data-rail-collapsed", collapsed ? "1" : "0");
-    ensureRailToggle(nav, collapsed);
+    hideRailToggle();
 
+    var edge = FLOAT_EDGE + "px";
     var sideCss = leading
-      ? "left:0px !important;right:auto !important;"
-      : "right:0px !important;left:auto !important;";
+      ? "left:max(" + edge + ", calc(" + insetL + " + " + edge + ")) !important;right:auto !important;"
+      : "right:max(" + edge + ", calc(" + insetR + " + " + edge + ")) !important;left:auto !important;";
     nav.style.cssText =
       "display:flex !important;visibility:visible !important;opacity:1 !important;pointer-events:auto !important;" +
-      "position:fixed !important;top:0 !important;bottom:0 !important;" +
+      "position:fixed !important;top:50% !important;bottom:auto !important;" +
       sideCss +
       "width:" + width + "px !important;min-width:" + width + "px !important;max-width:" + width + "px !important;" +
-      "height:100dvh !important;min-height:0 !important;max-height:none !important;" +
-      "margin:0 !important;padding:8px 3px !important;" +
-      "padding-top:max(8px," + insetT + ") !important;padding-bottom:max(8px," + insetB + ") !important;" +
-      "flex-direction:column !important;justify-content:flex-start !important;align-items:stretch !important;gap:2px !important;" +
-      "transform:none !important;-webkit-transform:none !important;border-radius:0 !important;" +
-      "z-index:120 !important;overflow:hidden !important;box-sizing:border-box !important;contain:layout !important;" +
-      "background:rgba(10,9,8,.97) !important;border:0 !important;box-shadow:none !important;";
+      "height:auto !important;min-height:0 !important;max-height:calc(100dvh - 28px) !important;" +
+      "margin:0 !important;padding:6px 4px !important;" +
+      "flex-direction:column !important;justify-content:space-around !important;align-items:stretch !important;gap:1px !important;" +
+      "transform:translate3d(0,-50%,0) !important;-webkit-transform:translate3d(0,-50%,0) !important;" +
+      "border-radius:27px !important;z-index:120 !important;overflow:hidden !important;box-sizing:border-box !important;" +
+      "background:rgba(255,255,255,.04) !important;border:1px solid rgba(255,255,255,.08) !important;" +
+      "box-shadow:0 6px 18px rgba(0,0,0,.14) !important;" +
+      "-webkit-backdrop-filter:blur(10px) saturate(1.08) !important;backdrop-filter:blur(10px) saturate(1.08) !important;";
 
     Array.prototype.forEach.call(document.querySelectorAll(".bottom-nav"), function (el) {
       if (el !== nav) el.style.setProperty("display", "none", "important");
@@ -246,14 +250,15 @@
       root.classList.contains("player-active") &&
       !root.classList.contains("player-stopped") &&
       !root.classList.contains("is-quran-player-route")
-        ? 56
+        ? PLAYER_STRIP
         : 0;
-    var navLeft = leading ? width : 0;
-    var navRight = leading ? 0 : width;
-    var playLeft = leading ? 0 : strip;
-    var playRight = leading ? strip : 0;
-    var left = navLeft + playLeft;
-    var right = navRight + playRight;
+    var floatPad = FLOAT_EDGE + 8;
+    var navReserve = width + floatPad;
+    var playReserve = strip ? strip + floatPad + 18 : 12;
+    var left = leading ? navReserve : playReserve;
+    var right = leading ? playReserve : navReserve;
+    if (!strip && !leading) left = 12;
+    if (!strip && leading) right = 12;
     root.style.setProperty("--layout-chrome-left", left + "px");
     root.style.setProperty("--layout-chrome-right", right + "px");
     root.style.setProperty("--layout-player-strip", strip + "px");
@@ -262,17 +267,17 @@
     var mini = document.getElementById("darQuranMiniPlayer");
     if (mini) {
       if (strip) {
-        mini.style.setProperty("top", "0", "important");
-        mini.style.setProperty("bottom", "0", "important");
+        mini.style.setProperty("top", "50%", "important");
+        mini.style.setProperty("bottom", "auto", "important");
         mini.style.setProperty("width", strip + "px", "important");
-        mini.style.setProperty("height", "auto", "important");
+        mini.style.setProperty("height", "min(78dvh, 470px)", "important");
         mini.style.setProperty("max-width", strip + "px", "important");
-        mini.style.setProperty("transform", "none", "important");
+        mini.style.setProperty("transform", "translate3d(0,-50%,0)", "important");
         if (leading) {
-          mini.style.setProperty("right", navRight + "px", "important");
+          mini.style.setProperty("right", "max(14px, calc(env(safe-area-inset-right, 0px) + 14px))", "important");
           mini.style.setProperty("left", "auto", "important");
         } else {
-          mini.style.setProperty("left", "0px", "important");
+          mini.style.setProperty("left", "max(16px, calc(env(safe-area-inset-left, 0px) + 18px))", "important");
           mini.style.setProperty("right", "auto", "important");
         }
       } else {
@@ -288,8 +293,8 @@
     }
     var full = document.getElementById("darQuranPlayer");
     if (full) {
-      full.style.setProperty("left", navLeft + "px", "important");
-      full.style.setProperty("right", navRight + "px", "important");
+      full.style.setProperty("left", left + "px", "important");
+      full.style.setProperty("right", right + "px", "important");
       full.style.setProperty("width", "auto", "important");
       full.style.setProperty("top", "0", "important");
       full.style.setProperty("bottom", "0", "important");
