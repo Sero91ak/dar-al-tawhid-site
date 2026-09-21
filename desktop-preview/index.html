@@ -922,6 +922,207 @@ button,input,select{font:inherit}
  .search-result-row small{display:none}
 }
 
+
+/* Editorial flow + fuzzy search + inline PDF v10 */
+.section.parchment{
+  position:relative;
+  isolation:isolate;
+  margin-left:-10px!important;
+  margin-right:-10px!important;
+  padding:30px 30px!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:38px!important;
+  overflow:visible!important;
+}
+.section.parchment::before{
+  content:"";
+  position:absolute;
+  z-index:-2;
+  inset:-7px -10px;
+  border-radius:46px;
+  background:
+    radial-gradient(ellipse at 18% 18%,rgba(255,255,255,.72),transparent 48%),
+    radial-gradient(ellipse at 82% 62%,rgba(219,195,151,.12),transparent 54%),
+    linear-gradient(115deg,rgba(245,238,224,.80),rgba(253,251,246,.72) 52%,rgba(239,228,208,.58));
+  box-shadow:0 18px 50px rgba(76,54,24,.045);
+}
+.section.parchment::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:-3px 4%;
+  border-radius:42px;
+  pointer-events:none;
+  background:linear-gradient(108deg,transparent 20%,rgba(255,255,255,.16) 48%,rgba(192,153,82,.035) 61%,transparent 82%);
+  filter:blur(13px);
+  opacity:.72;
+  animation:parchmentFlow 15s ease-in-out infinite alternate;
+}
+@keyframes parchmentFlow{
+  0%{transform:translate3d(-1.2%,0,0);opacity:.55}
+  100%{transform:translate3d(1.6%,.5%,0);opacity:.82}
+}
+.detail-page{
+  grid-template-columns:minmax(0,1fr) 270px!important;
+  gap:52px!important;
+  align-items:start;
+}
+.source-index{
+  padding-left:0!important;
+  border-left:0!important;
+  background:transparent!important;
+}
+.source-index>.eyebrow{margin-bottom:12px}
+.source-index h3{
+  margin:0 0 14px!important;
+  font:500 18px/1.28 var(--serif)!important;
+}
+.source-index .list-lines{border-top:0!important}
+.source-index .list-row{
+  display:block!important;
+  padding:10px 0 12px!important;
+  border-bottom:0!important;
+  background:transparent!important;
+}
+.source-index .list-row+.list-row{margin-top:5px}
+.source-index .list-row .meta{
+  display:block;
+  margin-bottom:5px;
+  font-size:7px
+}
+.source-index .list-row strong{
+  display:block;
+  font:500 15px/1.28 var(--serif)!important;
+}
+.source-index .list-row small{
+  display:block;
+  margin-top:4px;
+  font-size:8.5px
+}
+.source-meta{
+  padding:8px 0!important;
+  border-top:0!important
+}
+.related-editorial{
+  padding:3px 0 0;
+  align-self:start
+}
+.related-editorial-head{
+  margin-bottom:14px;
+  color:#987439;
+  font-size:7.5px;
+  font-weight:850;
+  letter-spacing:.13em;
+  text-transform:uppercase
+}
+.related-note{
+  display:block;
+  position:relative;
+  padding:10px 0 13px;
+  transition:transform .2s ease,color .2s ease
+}
+.related-note:before{
+  content:"";
+  display:block;
+  width:24px;
+  height:1px;
+  margin-bottom:8px;
+  background:linear-gradient(90deg,rgba(152,116,57,.66),transparent)
+}
+.related-note:hover{transform:translateX(3px)}
+.related-note .meta{
+  display:block;
+  color:#96743a;
+  font-size:7px;
+  font-weight:850;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  margin-bottom:4px
+}
+.related-note strong{
+  display:block;
+  font:500 15.5px/1.28 var(--serif);
+  color:#3a342c
+}
+.related-note small{
+  display:block;
+  margin-top:4px;
+  color:#8b8174;
+  font-size:8.5px;
+  line-height:1.4
+}
+.real-post,.statement-source,.real-source{
+  border-color:rgba(88,66,34,.065)!important
+}
+.fuzzy-note{
+  color:#8a8175;
+  font-size:8px;
+  line-height:1.4;
+  margin-top:3px
+}
+.pdf-reader-shell{
+  position:relative;
+  width:100%;
+  margin-top:8px;
+}
+.pdf-reader-toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding:0 4px 12px;
+}
+.pdf-reader-toolbar h3{
+  margin:0;
+  font:500 18px/1.2 var(--serif)
+}
+.pdf-reader-toolbar span{
+  color:#897f70;
+  font-size:8.5px
+}
+.pdf-reader-frame-wrap{
+  position:relative;
+  min-height:720px;
+  height:min(78vh,980px);
+  border-radius:30px;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg,rgba(245,238,225,.92),rgba(255,254,250,.98));
+  box-shadow:0 18px 48px rgba(60,43,20,.08)
+}
+.pdf-reader-frame{
+  display:block;
+  width:100%;
+  height:100%;
+  border:0;
+  background:#f8f5ed
+}
+.pdf-inline-fallback{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  padding:30px;
+  text-align:center;
+  color:#766d61;
+  pointer-events:none;
+  z-index:-1
+}
+.pdf-reader-meta{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  margin-top:12px;
+  color:#84796b;
+  font-size:8.5px
+}
+@media(max-width:900px){
+  .detail-page{grid-template-columns:1fr!important;gap:28px!important}
+  .related-editorial{padding-top:6px}
+  .pdf-reader-frame-wrap{height:72vh;min-height:560px;border-radius:24px}
+}
+
 </style>
 </head>
 <body>
@@ -1991,6 +2192,214 @@ button,input,select{font:inherit}
   if(key==="wissen")initKnowledgeBrowser();
   if(key==="bibliothek")initLibraryBrowser()
  }
+
+ // --- Fuzzy search + inline reader v10 ---
+ function searchFold(v){
+  return normText(v)
+   .replace(/qur'?an|koran/g,"quran")
+   .replace(/aqida?h?|akida?h?/g,"aqidah")
+   .replace(/hadith|hadis|hadeeth/g,"hadith")
+   .replace(/dua|duaa|bittgebet/g,"dua")
+   .replace(/tawhid|tauhid|tevhid/g,"tawhid")
+   .replace(/sunna+h?/g,"sunnah")
+   .replace(/athar|asar/g,"athar")
+   .replace(/sahaba+h?/g,"sahaba")
+   .replace(/tafsir|tefsir/g,"tafsir")
+   .replace(/zakat|zekat/g,"zakat")
+   .replace(/sch/g,"sh")
+   .replace(/kh|ch/g,"h")
+   .replace(/dh/g,"d")
+   .replace(/th/g,"t")
+   .replace(/ph/g,"f")
+   .replace(/(.)\1+/g,"$1")
+   .replace(/[^a-z0-9\u0600-\u06ff]+/g," ")
+   .replace(/\s+/g," ")
+   .trim()
+ }
+ function searchTokens(v){return searchFold(v).split(" ").filter(Boolean)}
+ function editDistanceLimited(a,b,limit){
+  if(a===b)return 0;
+  if(Math.abs(a.length-b.length)>limit)return limit+1;
+  var prev=new Array(b.length+1),cur=new Array(b.length+1);
+  for(var j=0;j<=b.length;j++)prev[j]=j;
+  for(var i=1;i<=a.length;i++){
+   cur[0]=i;var rowMin=cur[0];
+   for(var k=1;k<=b.length;k++){
+    var cost=a.charCodeAt(i-1)===b.charCodeAt(k-1)?0:1;
+    cur[k]=Math.min(cur[k-1]+1,prev[k]+1,prev[k-1]+cost);
+    if(i>1&&k>1&&a.charCodeAt(i-1)===b.charCodeAt(k-2)&&a.charCodeAt(i-2)===b.charCodeAt(k-1))cur[k]=Math.min(cur[k],prev[k-2]+1);
+    if(cur[k]<rowMin)rowMin=cur[k]
+   }
+   if(rowMin>limit)return limit+1;
+   var tmp=prev;prev=cur;cur=tmp
+  }
+  return prev[b.length]
+ }
+ function fuzzyTokenMatch(q,t){
+  if(!q||!t)return false;
+  if(t.indexOf(q)>=0||q.indexOf(t)>=0)return true;
+  if(q.length<=2)return q===t;
+  var lim=q.length<=5?1:q.length<=9?2:3;
+  if(Math.abs(q.length-t.length)>lim)return false;
+  return editDistanceLimited(q,t,lim)<=lim
+ }
+ function smartMatch(fields,query){
+  var q=searchFold(query);if(!q)return true;
+  var hay=searchFold((fields||[]).join(" "));
+  if(hay.indexOf(q)>=0)return true;
+  var qTokens=searchTokens(q),hTokens=searchTokens(hay);
+  return qTokens.every(function(qt){return hTokens.some(function(ht){return fuzzyTokenMatch(qt,ht)})})
+ }
+ function relatedEditorialHtml(rows){
+  return '<aside class="related-editorial"><div class="related-editorial-head">Zugehörige Inhalte</div>'+rows.map(function(x){
+   return '<a class="related-note desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'"><span class="meta">'+escBook(postCatLabel(postCatKey(x.category)))+'</span><strong>'+escBook(cleanTitle(x.title))+'</strong><small>'+escBook(x.speaker||x.work||"")+'</small></a>'
+  }).join("")+'</aside>'
+ }
+ renders.beitrag=function(){
+  var id=new URLSearchParams(location.search).get("id"),item=realData.posts.find(function(x){return x.id===id})||realData.posts[0];
+  if(!item)return realIntro("BEITRAG","Keine Inhalte gefunden.","");
+  var related=realData.posts.filter(function(x){return x.id!==item.id&&(postCatKey(x.category)===postCatKey(item.category)||smartMatch([x.topic,x.work],[item.topic]))}).slice(0,5);
+  return realIntro(item.category||"BEITRAG",cleanTitle(item.title),item.topic||item.work||"")+
+   '<section class="section parchment reveal"><div class="detail-page"><div class="detail-main">'+postHtml(item,true)+'</div>'+relatedEditorialHtml(related)+'</div></section>'+footer()
+ };
+ renders.werk=function(){
+  var q=new URLSearchParams(location.search),id=q.get("id"),type=q.get("type")||"";
+  var pub=realData.publications.find(function(x){return x.id===id}),book=realData.books.find(function(x){return x.id===id});
+  if(pub||type==="pub"){
+   var x=pub||realData.publications[0];if(!x)return realIntro("WERK","Keine Publikation gefunden.","");
+   var pdf=x.pdfUrl||"";
+   return realIntro(x.category||"PUBLIKATION",x.title,x.description||x.subtitle||"DĀR AL TAWḤĪD · "+(x.publishedAt||""))+
+    '<section class="section parchment reveal"><div class="pdf-reader-shell"><div class="pdf-reader-toolbar"><div><div class="eyebrow">PDF-LESER</div><h3>'+escBook(x.title)+'</h3></div><span>'+escBook(x.language||"Deutsch")+(x.pageCount?' · '+x.pageCount+' Seiten':"")+(x.fileSize?' · '+escBook(x.fileSize):"")+'</span></div>'+
+    (pdf?'<div class="pdf-reader-frame-wrap"><div class="pdf-inline-fallback">PDF wird innerhalb dieser Seite geladen.</div><iframe class="pdf-reader-frame" title="'+escBook(x.title)+'" src="'+escBook(pdf)+'#view=FitH&toolbar=1&navpanes=0" loading="eager"></iframe></div>':'<div class="loading-line">Für dieses Werk ist derzeit keine PDF-Datei hinterlegt.</div>')+
+    '<div class="pdf-reader-meta"><span>Version '+escBook(x.version||"—")+'</span><span>'+escBook(x.publisher||"DĀR AL TAWḤĪD")+'</span><span>'+escBook(x.publishedAt||"")+'</span></div></div></section>'+footer()
+  }
+  var b=book||realData.books[0];if(!b)return realIntro("WERK","Kein Werk gefunden.","");
+  var related=realData.posts.filter(function(pst){return (b.postIds||[]).indexOf(pst.id)>=0}).slice(0,6);
+  return realIntro(b.category||"QUELLENWERK",b.title,b.author||"")+
+   '<section class="section parchment reveal"><div class="detail-page"><div class="detail-main"><div class="fact-grid"><div class="fact-row"><span>Autor</span><b>'+escBook(b.author||"")+'</b></div><div class="fact-row"><span>Kategorie</span><b>'+escBook(b.category||"")+'</b></div><div class="fact-row"><span>Verknüpfte Beiträge</span><b>'+Number(b.postCount||0)+'</b></div><div class="fact-row"><span>Verifikation</span><b>'+escBook(b.verification||"verified")+'</b></div></div><div class="list-lines" style="margin-top:22px">'+related.map(compactPostLink).join("")+'</div></div><aside class="related-editorial"><div class="related-editorial-head">Zitierte Gelehrte</div><div style="font:500 16px/1.5 var(--serif);color:#514a41">'+escBook((b.quotedScholars||[]).slice(0,6).join(" · ")||b.author||"")+'</div></aside></div></section>'+footer()
+ };
+ function initPostBrowser(){
+  var input=document.getElementById("postSmartSearch"),listEl=document.getElementById("postBrowseList"),pager=document.getElementById("postPagination"),count=document.getElementById("postBrowseCount"),status=document.getElementById("postSmartStatus");
+  if(!input||!listEl)return;
+  var params=new URLSearchParams(location.search),cat=params.get("cat")||"",page=Math.max(1,Number(params.get("pg")||1)),pageSize=10;
+  function filtered(){
+   var term=input.value.trim();
+   return realData.posts.filter(function(x){
+    if(cat&&postCatKey(x.category)!==cat)return false;
+    return smartMatch([x.title,x.speaker,x.category,x.topic,x.work,x.reference,x.body,(x.links||[]).map(function(l){return l.label}).join(" ")],term)
+   })
+  }
+  function paint(){
+   var rows=filtered(),pages=Math.max(1,Math.ceil(rows.length/pageSize));page=Math.min(page,pages);
+   var slice=rows.slice((page-1)*pageSize,page*pageSize);
+   listEl.innerHTML=slice.length?slice.map(renderPostBrowserRow).join(""):'<div class="loading-line">Keine passenden Beiträge gefunden.</div>';
+   count.textContent=rows.length+" Beiträge · Seite "+page+" / "+pages;
+   status.textContent=rows.length+" Treffer";
+   var html='<button class="page-button nav" data-pg="'+Math.max(1,page-1)+'" '+(page<=1?'disabled':'')+'>← Zurück</button>';
+   var from=Math.max(1,page-2),to=Math.min(pages,from+4);from=Math.max(1,to-4);
+   for(var i=from;i<=to;i++)html+='<button class="page-button '+(i===page?'active':'')+'" data-pg="'+i+'">'+i+'</button>';
+   html+='<button class="page-button nav" data-pg="'+Math.min(pages,page+1)+'" '+(page>=pages?'disabled':'')+'>Weiter →</button>';
+   pager.innerHTML=html;
+   pager.querySelectorAll("[data-pg]").forEach(function(b){b.onclick=function(){if(b.disabled)return;page=Number(b.getAttribute("data-pg"))||1;paint();document.getElementById("postBrowseHeading").scrollIntoView({behavior:"smooth",block:"start"})}})
+  }
+  input.oninput=function(){page=1;paint()};paint()
+ }
+ function initDuaBrowser(){
+  var input=document.getElementById("duaSmartSearch"),list=document.getElementById("duaBrowseList"),status=document.getElementById("duaSmartStatus");if(!input)return;
+  var cat=new URLSearchParams(location.search).get("cat")||"";
+  function rows(){
+   var term=input.value.trim();
+   return realData.duas.filter(function(d){if(cat&&d.category!==cat)return false;return smartMatch([d.title,d.category,d.occasion,d.german,d.translit,d.arabic,d.source],term)})
+  }
+  function paint(){
+   var r=rows();if(status)status.textContent=r.length+" Treffer";
+   var count=document.getElementById("duaBrowseCount");if(count)count.textContent=r.length+" Duʿāʾ";
+   if(list)list.innerHTML=r.slice(0,20).map(function(d){return '<a class="dua-browser-item desktop-link" data-page="dua" href="'+pUrl("dua","id="+encodeURIComponent(d.id))+'"><div class="eyebrow">'+escBook(d.category)+'</div><h3>'+escBook(d.title)+'</h3><div class="dua-ar" dir="rtl">'+escBook(d.arabic)+'</div><p>'+escBook(clip(d.german,150))+'</p></a>'}).join("")||'<div class="loading-line">Keine passenden Duʿāʾ gefunden.</div>'
+  }
+  input.oninput=paint;paint()
+ }
+ function initKnowledgeBrowser(){
+  var input=document.getElementById("knowledgeSmartSearch"),out=document.getElementById("knowledgeSearchResults"),def=document.getElementById("knowledgeDefault"),status=document.getElementById("knowledgeSmartStatus");if(!input||!out)return;
+  function paint(){
+   var term=input.value.trim();if(!term){def.style.display="block";out.classList.remove("is-active");out.innerHTML="";status.textContent="Themen · Gelehrte · Werke";return}
+   var rows=[];
+   realData.posts.forEach(function(x){if(smartMatch([x.title,x.speaker,x.category,x.topic,x.work,x.reference,x.body],term))rows.push({kind:"Beitrag",title:cleanTitle(x.title),sub:x.speaker||x.work,page:"beitrag",extra:"id="+encodeURIComponent(x.id)})});
+   realData.scholars.forEach(function(x){if(smartMatch([x.name,x.id,(x.citedWorkIds||[]).join(" ")],term))rows.push({kind:"Gelehrter",title:x.name,sub:(x.postCount||0)+" Beiträge",page:"thema",extra:"name=gelehrte&scholar="+encodeURIComponent(x.id)})});
+   realData.books.forEach(function(x){if(smartMatch([x.title,x.author,x.category,(x.aliases||[]).join(" "),(x.quotedScholars||[]).join(" ")],term))rows.push({kind:"Werk",title:x.title,sub:x.author||x.category,page:"werk",extra:"type=book&id="+encodeURIComponent(x.id)})});
+   rows=rows.slice(0,30);def.style.display="none";out.classList.add("is-active");status.textContent=rows.length+" Treffer";
+   out.innerHTML=rows.map(function(x){return '<a class="search-result-row desktop-link" data-page="'+x.page+'" href="'+pUrl(x.page,x.extra)+'"><span class="kind">'+escBook(x.kind)+'</span><strong>'+escBook(x.title)+'</strong><small>'+escBook(x.sub||"")+'</small></a>'}).join("")||'<div class="loading-line">Keine Treffer.</div>'
+  }
+  input.oninput=paint;paint()
+ }
+ function initLibraryBrowser(){
+  var input=document.getElementById("librarySmartSearch"),out=document.getElementById("librarySearchResults"),def=document.getElementById("libraryDefault"),status=document.getElementById("librarySmartStatus");if(!input||!out)return;
+  function paint(){
+   var term=input.value.trim();if(!term){def.style.display="block";out.classList.remove("is-active");out.innerHTML="";status.textContent=(realData.publications.length+realData.books.length)+" Werke";return}
+   var rows=[];
+   realData.publications.forEach(function(x){if(smartMatch([x.title,x.category,x.topic,(x.tags||[]).join(" "),(x.searchAliases||[]).join(" "),x.editor,x.publisher],term))rows.push({kind:"Publikation",title:x.title,sub:x.category||"",url:pUrl("werk","type=pub&id="+encodeURIComponent(x.id))})});
+   realData.books.forEach(function(x){if(smartMatch([x.title,x.author,x.category,(x.aliases||[]).join(" "),(x.quotedScholars||[]).join(" ")],term))rows.push({kind:"Quellenwerk",title:x.title,sub:x.author||x.category,url:pUrl("werk","type=book&id="+encodeURIComponent(x.id))})});
+   rows=rows.slice(0,36);def.style.display="none";out.classList.add("is-active");status.textContent=rows.length+" Treffer";
+   out.innerHTML=rows.map(function(x){return '<a class="search-result-row desktop-link" data-page="werk" href="'+x.url+'"><span class="kind">'+escBook(x.kind)+'</span><strong>'+escBook(x.title)+'</strong><small>'+escBook(x.sub||"")+'</small></a>'}).join("")||'<div class="loading-line">Keine Treffer.</div>'
+  }
+  input.oninput=paint;paint()
+ }
+ window.__initQuranSmartSearch=function(catalog,data,nav,paint,requestedAyah){
+  var input=document.getElementById("bookQuranSearch"),status=document.getElementById("bookQuranSearchStatus");if(!input)return;
+  function markAyah(ayah){
+   setTimeout(function(){
+    document.querySelectorAll("[data-book-ayah]").forEach(function(el){el.classList.toggle("is-search-match",Number(el.getAttribute("data-book-ayah"))===Number(ayah))});
+    var hit=document.querySelector('[data-book-ayah="'+Number(ayah)+'"]');if(hit)hit.scrollIntoView({behavior:"smooth",block:"center"})
+   },40)
+  }
+  if(requestedAyah)markAyah(requestedAyah);
+  function search(){
+   var raw=input.value.trim();
+   if(nav)nav.querySelectorAll("a").forEach(function(a){a.style.display=smartMatch([a.textContent],raw)?"":"none"});
+   if(!raw){status.textContent="114 Sūrah";document.querySelectorAll("[data-book-ayah]").forEach(function(el){el.classList.remove("is-search-match")});return}
+   var ref=raw.match(/^(\\d{1,3})\\s*[:.]\\s*(\\d{1,3})$/);
+   if(ref){
+    var su=Number(ref[1]),ay=Number(ref[2]);status.textContent="Āyah "+su+":"+ay+" öffnen";
+    if(su===Number(quranBookState.surah)){
+     var pi=quranBookState.pages.findIndex(function(pg){return pg.some(function(v){return Number(v.id)===ay})});
+     if(pi>=0){quranBookState.spread=Math.floor(pi/2);paint();markAyah(ay)}
+    }
+    return
+   }
+   var verses=(data.verses||[]),hit=verses.find(function(v){return smartMatch([v.de,v.ar,v.tr,v.transliteration],raw)});
+   if(hit){
+    var pageIndex=quranBookState.pages.findIndex(function(pg){return pg.some(function(v){return Number(v.id)===Number(hit.id)})});
+    if(pageIndex>=0){quranBookState.spread=Math.floor(pageIndex/2);paint();markAyah(hit.id);status.textContent="Āyah "+data.id+":"+hit.id}
+    return
+   }
+   var sHit=catalog.find(function(x){return smartMatch([x.id,x.transliteration,x.name],raw)});
+   status.textContent=sHit?"Sūrah "+sHit.id+" · "+sHit.transliteration:"Kein Treffer"
+  }
+  input.oninput=search;
+  input.onkeydown=function(e){
+   if(e.key!=="Enter")return;
+   var raw=input.value.trim(),ref=raw.match(/^(\\d{1,3})\\s*[:.]\\s*(\\d{1,3})$/);
+   if(ref){e.preventDefault();navigate(pUrl("quran","surah="+Number(ref[1])+"&ayah="+Number(ref[2])),true);return}
+   var sHit=catalog.find(function(x){return smartMatch([x.id,x.transliteration,x.name],raw)});
+   if(sHit&&Number(sHit.id)!==Number(quranBookState.surah)){e.preventDefault();navigate(pUrl("quran","surah="+sHit.id),true)}
+  };
+  status.textContent="114 Sūrah"
+ };
+ initSearch=function(){
+  var input=document.getElementById("siteSearch"),out=document.getElementById("searchResults");if(!input||!out)return;
+  var all=[];
+  realData.posts.forEach(function(x){all.push({kind:"Beitrag",title:cleanTitle(x.title),sub:(x.speaker||"")+" "+(x.work||""),hay:[x.title,x.speaker,x.category,x.topic,x.work,x.reference,x.body],page:"beitrag",extra:"id="+encodeURIComponent(x.id)})});
+  realData.duas.forEach(function(x){all.push({kind:"Duʿāʾ",title:x.title,sub:x.category+" "+x.source,hay:[x.title,x.category,x.occasion,x.german,x.translit,x.arabic,x.source],page:"dua",extra:"id="+encodeURIComponent(x.id)})});
+  realData.publications.forEach(function(x){all.push({kind:"Publikation",title:x.title,sub:x.category||"",hay:[x.title,x.category,x.topic,(x.searchAliases||[]).join(" ")],page:"werk",extra:"type=pub&id="+encodeURIComponent(x.id)})});
+  realData.books.forEach(function(x){all.push({kind:"Werk",title:x.title,sub:(x.author||"")+" "+(x.category||""),hay:[x.title,x.author,x.category,(x.aliases||[]).join(" ")],page:"werk",extra:"type=book&id="+encodeURIComponent(x.id)})});
+  realData.prophets.forEach(function(x){all.push({kind:"Prophet",title:x.name,sub:x.people||"",hay:[x.name,x.nameAr,x.people,(x.roles||[]).join(" ")],page:"prophet",extra:"id="+encodeURIComponent(x.id)})});
+  function paint(){
+   var q=input.value.trim(),rows=all.filter(function(x){return smartMatch(x.hay,q)}).slice(0,40);
+   out.innerHTML=rows.map(function(x){return '<a class="list-row desktop-link" data-page="'+x.page+'" href="'+pUrl(x.page,x.extra)+'"><span class="search-kind">'+escBook(x.kind)+'</span><strong>'+escBook(x.title)+'</strong><small>'+escBook(x.sub)+'</small></a>'}).join("")||'<div class="loading-line">Keine Treffer.</div>'
+  }
+  input.oninput=paint;paint()
+ };
+ // --- end Fuzzy search + inline reader v10 ---
+
  // --- end Smart browse v9 ---
 
  // --- end real visitor content v8 ---
