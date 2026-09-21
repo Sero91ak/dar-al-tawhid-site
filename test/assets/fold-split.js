@@ -56,13 +56,7 @@
   }
 
   function isDual() {
-    try {
-      if (global.DarAdaptiveLayout && typeof global.DarAdaptiveLayout.isDual === "function") {
-        return !!global.DarAdaptiveLayout.isDual();
-      }
-    } catch (e) {}
-    var m = measureViewport();
-    return isDualViewport(m.width, m.height);
+    return false;
   }
 
   function emptyPane(message) {
@@ -128,29 +122,11 @@
   }
 
   function start() {
-    syncRootClass();
-    global.addEventListener(
-      "dar:layoutchange",
-      function () {
-        syncRootClass();
-      },
-      { passive: true }
-    );
-    global.addEventListener(
-      "resize",
-      function () {
-        syncRootClass();
-      },
-      { passive: true }
-    );
-    global.addEventListener(
-      "orientationchange",
-      function () {
-        setTimeout(syncRootClass, 80);
-        setTimeout(syncRootClass, 320);
-      },
-      { passive: true }
-    );
+    try {
+      var root = document.documentElement;
+      root.classList.remove("is-fold-dual");
+      root.setAttribute("data-fold-dual", "0");
+    } catch (e) {}
   }
 
   var api = {

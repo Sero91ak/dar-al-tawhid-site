@@ -10,8 +10,8 @@
   var MAX_FAKE = 0.94;
   var FADE_HOLD_MS = 280;
   var HUNDRED_HOLD_MS = 380;
-  var MIN_SHOW_MS = 900;
-  var HARD_TIMEOUT_MS = 6500;
+  var MIN_SHOW_MS = 400;
+  var HARD_TIMEOUT_MS = 1800;
   /* Original-Hauptfarben je Erscheinungsbild (THEME_META / theme-page-bg) */
   var THEME_FILLS = {
     dark: "#050706",
@@ -374,9 +374,6 @@
       var startObserve = function () {
         var view = document.getElementById("appView");
         if (view) mo.observe(view, { childList: true, subtree: true, characterData: true });
-        if (document.body) mo.observe(document.body, { attributes: true, attributeFilter: ["class"] });
-        /* Never observe style — syncEdgeFill writes style and would loop forever (black screen). */
-        mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "class"] });
       };
       if (document.body) startObserve();
       else document.addEventListener("DOMContentLoaded", startObserve, { once: true });

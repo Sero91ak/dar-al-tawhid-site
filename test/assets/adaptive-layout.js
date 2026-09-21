@@ -233,42 +233,18 @@
   }
 
   function start() {
-    if (started) {
-      scheduleApply(true);
-      return;
-    }
+    /* v937: keine Resize-/Event-Schleifen — Standard-App, Tabs unten. */
+    if (started) return;
     started = true;
-    applyLayout(true);
-
-    if (typeof ResizeObserver === "function") {
-      try {
-        resizeObserver = new ResizeObserver(function () {
-          scheduleApply(false);
-        });
-        resizeObserver.observe(document.documentElement);
-        if (document.body) resizeObserver.observe(document.body);
-      } catch (e) {
-        resizeObserver = null;
-      }
-    }
-
-    global.addEventListener("resize", onResize, { passive: true });
-    global.addEventListener("orientationchange", scheduleOrientBurst, { passive: true });
-
-    if (global.screen && global.screen.orientation && typeof global.screen.orientation.addEventListener === "function") {
-      try {
-        global.screen.orientation.addEventListener("change", scheduleOrientBurst);
-      } catch (e) {}
-    }
-
-    if (global.visualViewport) {
-      global.visualViewport.addEventListener("resize", onResize, { passive: true });
-      global.visualViewport.addEventListener("scroll", onResize, { passive: true });
-    }
-
-    document.addEventListener("visibilitychange", function () {
-      if (!document.hidden) scheduleOrientBurst();
-    });
+    try {
+      var root = document.documentElement;
+      currentMode = "compact";
+      root.setAttribute("data-layout", "compact");
+      root.setAttribute("data-nav-rail", "0");
+      root.setAttribute("data-fold-dual", "0");
+      root.classList.remove("is-fold-dual", "is-layout-wide", "is-layout-landscape", "dar-test-adaptive");
+      applyNavLayout("compact");
+    } catch (e) {}
   }
 
   var api = {
@@ -278,14 +254,16 @@
       return currentMode || resolveLayoutMode(measureViewport().width, measureViewport().height);
     },
     isDual: function () {
-      var m = measureViewport();
-      return isDualViewport(m.width, m.height);
+      return false;
     },
     measure: measureViewport,
-    apply: function () {
-      applyLayout(true);
+    apply: function () {},
+    syncNav: function () {
+      applyNavLayout("compact");
     },
-    syncNav: syncNav,
+    wantsRail: function () {
+      return false;
+    },
     start: start,
     COMPACT_MAX: COMPACT_MAX,
     EXPANDED_MIN: EXPANDED_MIN,
