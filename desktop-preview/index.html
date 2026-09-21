@@ -849,8 +849,15 @@ button,input,select{font:inherit}
  var prayerTimer=0;
  function readPrayerLoc(){
   function parse(key){try{return JSON.parse(localStorage.getItem(key)||"null")}catch(e){return null}}
-  var a=parse("darPrayerSettingsV1");if(a&&isFinite(Number(a.lat))&&isFinite(Number(a.lon))&&a.locationGranted===true)return{lat:Number(a.lat),lon:Number(a.lon),city:a.city||"Dein Standort",angle:Number(a.angle||12),asrFactor:Number(a.asrFactor||1)};
-  var b=parse("darDesktopPrayerLocationV1");if(b&&isFinite(Number(b.lat))&&isFinite(Number(b.lon)))return{lat:Number(b.lat),lon:Number(b.lon),city:b.city||"Dein Standort",angle:Number(b.angle||12),asrFactor:Number(b.asrFactor||1)};
+  function valid(x){return x&&isFinite(Number(x.lat))&&isFinite(Number(x.lon))}
+  function norm(x){return{lat:Number(x.lat),lon:Number(x.lon),city:x.city||"Dein Standort",angle:Number(x.angle||12),asrFactor:Number(x.asrFactor||1)}}
+  var a=parse("darPrayerSettingsV1"),b=parse("darDesktopPrayerLocationV1");
+  if(valid(a)&&a.locationGranted===true){
+   if(a.city&&a.city!=="Dein Standort")return norm(a);
+   if(valid(b)&&b.city&&b.city!=="Dein Standort"&&Math.abs(Number(a.lat)-Number(b.lat))<.03&&Math.abs(Number(a.lon)-Number(b.lon))<.03)return norm(b);
+   return norm(a)
+  }
+  if(valid(b))return norm(b);
   return null
  }
  function reversePrayerPlace(lat,lon){
