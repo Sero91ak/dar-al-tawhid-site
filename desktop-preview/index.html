@@ -506,10 +506,12 @@ button,input,select{font:inherit}
   var shell=document.getElementById("bookShell"),pos=document.getElementById("bookPos"),nav=document.getElementById("bookSurahNav");
   if(!shell||!pos)return;
   var params=new URLSearchParams(location.search);
-  var requested=Math.max(1,Math.min(114,Number(params.get("surah")||0)||0));
+  var rawRequested=Number(params.get("surah")||0);
+  var requested=(rawRequested>=1&&rawRequested<=114)?rawRequested:0;
+  quranBookState.spread=0;
   try{
    var saved=JSON.parse(localStorage.getItem("darDesktopQuranBookV2")||"null");
-   if(!requested&&saved&&Number(saved.surah))requested=Number(saved.surah);
+   if(!requested&&saved&&Number(saved.surah))requested=Math.max(1,Math.min(114,Number(saved.surah)));
    if(saved&&Number(saved.surah)===requested&&Number.isFinite(Number(saved.spread)))quranBookState.spread=Math.max(0,Number(saved.spread));
   }catch(e){}
   if(!requested)requested=1;
