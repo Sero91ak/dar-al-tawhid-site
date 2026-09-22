@@ -11,6 +11,7 @@ on:
       - content/updates/daily.json
       - content/posts/**
       - desktop-preview/**
+      - cloudflare/site-router.js
       - service-worker.js
       - manifest.json
       - assets/**
