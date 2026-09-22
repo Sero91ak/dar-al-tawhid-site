@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 948;
+    var PLAYER_BUILD = 949;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -94,10 +94,6 @@
   var saveTimer = 0;
   var capsuleCollapsed = false;
   var capsuleDimmed = false;
-  var volGain = null;
-  var volCtx = null;
-  var volSrc = null;
-  var volNativeOk = null;
   var tadCache = Object.create(null);
   var tadCatalogReady = null;
   var translitCache = Object.create(null);
@@ -108,58 +104,14 @@
   var allowAdvance = false;
   var engine = { started: false, lastUrl: "" };
 
-  function probeVolume() {
-    if (volNativeOk != null) return volNativeOk;
-    var a = audioEl();
-    try {
-      var prev = a.volume;
-      a.volume = 0.41;
-      volNativeOk = Math.abs(a.volume - 0.41) < 0.08;
-      a.volume = prev;
-    } catch (e) { volNativeOk = false; }
-    return volNativeOk;
-  }
-  function resumeVolCtx() {
-    if (volCtx && volCtx.state === "suspended") {
-      try { volCtx.resume(); } catch (eR) {}
-    }
-  }
-  function ensureVolGraph() {
-    var a = audioEl();
-    if (!a) return null;
-    if (volGain && volSrc) return volGain;
-    var Ctx = window.AudioContext || window.webkitAudioContext;
-    if (!Ctx) return null;
-    try {
-      if (!volCtx) volCtx = new Ctx();
-      if (!volSrc) {
-        volSrc = volCtx.createMediaElementSource(a);
-        volGain = volCtx.createGain();
-        volSrc.connect(volGain);
-        volGain.connect(volCtx.destination);
-      }
-    } catch (eG) {
-      return volGain;
-    }
-    return volGain;
-  }
   function applyVolume() {
     var v = Math.max(0, Math.min(1, Number(state.volume)));
     if (!isFinite(v)) v = 1;
     state.volume = v;
     var a = audioEl();
-    a.muted = v <= 0.001;
-    var nativeOk = probeVolume();
-    if (nativeOk) {
-      try { a.volume = v; } catch (e) {}
-    } else {
-      try { a.volume = 1; } catch (e2) {}
-      var g = ensureVolGraph();
-      if (g && g.gain) {
-        try { g.gain.value = v; } catch (e3) {}
-      }
-      resumeVolCtx();
-    }
+    a.muted = false;
+    a.defaultMuted = false;
+    try { a.volume = v; } catch (e) {}
     var track = document.querySelector("#darQuranPlayer [data-dqp-vol-track]");
     var fillPct = (v * 100) + "%";
     if (track) track.style.setProperty("--dqp-fill", fillPct);
@@ -179,39 +131,17 @@
     var track = root.querySelector("[data-dqp-vol-track]");
     if (!vol || vol.getAttribute("data-dqp-vol-bound") === "1") return;
     vol.setAttribute("data-dqp-vol-bound", "1");
-    function fromClientX(clientX) {
-      var el = track || vol;
-      var r = el.getBoundingClientRect();
-      if (!r.width) return;
-      state.volume = Math.max(0, Math.min(1, (clientX - r.left) / r.width));
-      applyVolume();
-      saveState();
-    }
     function onInput() {
-      state.volume = Number(vol.value) / 100;
+      var n = Number(vol.value) / 100;
+      state.volume = isFinite(n) ? Math.max(0, Math.min(1, n)) : 1;
       applyVolume();
       saveState();
     }
     vol.addEventListener("input", onInput);
     vol.addEventListener("change", onInput);
-    var dragging = false;
-    var host = track || vol;
-    host.addEventListener("pointerdown", function (e) {
-      dragging = true;
-      try { if (host.setPointerCapture) host.setPointerCapture(e.pointerId); } catch (err) {}
-      fromClientX(e.clientX);
-      e.preventDefault();
-      e.stopPropagation();
-    });
-    host.addEventListener("pointermove", function (e) {
-      if (!dragging) return;
-      fromClientX(e.clientX);
-      e.preventDefault();
-      e.stopPropagation();
-    });
-    function endDrag() { dragging = false; }
-    host.addEventListener("pointerup", endDrag);
-    host.addEventListener("pointercancel", endDrag);
+    if (track) {
+      track.addEventListener("pointerdown", function (e) { e.stopPropagation(); });
+    }
     applyVolume();
   }
   function setTextScale(n) {
@@ -452,7 +382,7 @@
     if (raw.textScaleFit === 1 && Number(raw.textScale) >= 1 && Number(raw.textScale) <= 10) {
       state.textScale = Math.round(Number(raw.textScale));
     }
-    if (Number(raw.volume) >= 0 && Number(raw.volume) <= 1) state.volume = Number(raw.volume);
+    if (Number(raw.volume) > 0 && Number(raw.volume) <= 1) state.volume = Number(raw.volume);
     var t = Number(raw.currentTime != null ? raw.currentTime : raw.resumeAt) || 0;
     if (t > 0) { state.resumeAt = t; state.current = t; }
     if (!LEARN_PLAYER_ONLY && raw.sessionActive === true) state.sessionActive = true;
@@ -557,7 +487,6 @@
     a.style.display = "none";
     document.body.appendChild(a);
     bindAudioListeners(a);
-    try { ensureVolGraph(); } catch (eVol) {}
     return a;
   }
   function globalAyah(surah, ayah) {
@@ -645,8 +574,6 @@
       url: engine.lastUrl,
       snap: snapAudio(a)
     });
-    resumeVolCtx();
-    applyVolume();
     var p = a.play();
     if (!p || !p.then) {
       engine.started = true;

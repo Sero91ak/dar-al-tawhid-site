@@ -108,6 +108,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-player-restore-sound-after-webaudio-2026-09-22",
+      "approvedBy": "user-explicit-koranplayer-kein-sound-seit-laut-leise-global",
+      "reason": "Nutzer: seit Web-Audio am Laut/Leise-Balken kein Ton im Lern- und Normal-Player, Logo fehlt, alles flackert. Global reparieren.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "ios-tabbar-glass-top-solid-2026-09-22",
       "approvedBy": "user-explicit-unten-glass-zurueck-oben-glass-weg-kein-ios-store-release",
       "reason": "Nutzer: untere Tab-Leiste wieder Glas; oben beim Scrollen kein Glas. Kein Redesign. Offizieller iOS-Store-Build erst nach Prüfung.",
