@@ -132,7 +132,7 @@ struct WebAppView: UIViewRepresentable {
             if(!document.getElementById("dar-ios-top-solid-boot")){
               var s=document.createElement("style");
               s.id="dar-ios-top-solid-boot";
-              s.textContent="html.dar-ios-native-app .header,html.dar-ios-native-app .sf-top,html.dar-ios-native-app .qov-header,html.dar-ios-native-app .app-bar{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:var(--page-cover,var(--bg,#050706))!important}html.dar-ios-native-app .top-edge-fade{display:none!important}html.dar-ios-native-app #bottomNav.bottom-nav{isolation:auto!important}";
+              s.textContent="html.dar-ios-native-app .header,html.dar-ios-native-app .sf-top,html.dar-ios-native-app .qov-header,html.dar-ios-native-app .app-bar{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:var(--page-cover,var(--bg,#050706))!important}html.dar-ios-native-app .top-edge-fade,html.dar-ios-native-app .app:after{display:none!important;content:none!important}html.dar-ios-native-app #darQuranMiniPlayer{box-shadow:none!important;filter:none!important}html.dar-ios-native-app #bottomNav.bottom-nav{isolation:auto!important}";
               (document.head||document.documentElement).appendChild(s);
             }
           }catch(e){}
