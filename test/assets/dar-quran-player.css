@@ -311,14 +311,20 @@ html.is-quran-player-route #darQuranPlayer .dqp-play,
   margin:4px 0 0;color:#EED3AE;
   touch-action:pan-x;
   pointer-events:auto;
-  position:relative;z-index:6;
+  position:relative;z-index:30;
 }
-.dqp-volume .dqp-track,
-.dqp-volume .dqp-range{
-  touch-action:pan-x!important;
+.dqp-volume .dqp-track{
+  position:relative;height:36px;display:flex;align-items:center;
+  touch-action:none!important;
   pointer-events:auto!important;
+  z-index:31;
 }
-.dqp-volume .dqp-range{height:32px}
+.dqp-volume .dqp-range{
+  touch-action:none!important;
+  pointer-events:auto!important;
+  height:36px!important;
+  z-index:32;
+}
 .dqp-volume svg{width:16px;height:16px}
 .dqp-vol-note{grid-column:1 / -1;margin:4px 0 0;font-size:11px;line-height:1.35;color:rgba(255,255,255,.42)}
 

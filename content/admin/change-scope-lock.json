@@ -108,6 +108,25 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-player-volume-ayah-picker-2026-09-22",
+      "approvedBy": "user-explicit-laut-leise-balken-ayah-auswahl-wie-surah-live-global",
+      "reason": "Nutzer: Laut/Leise-Balken funktioniert nicht; Āyah-Auswahl fehlt analog zur Sūrah-Auswahl. Sofort einbauen, edel, live global.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/dar-quran-player.js",
+        "assets/dar-quran-player.css",
+        "test/assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-player-pack-options-sleep-2026-09-22",
       "approvedBy": "user-explicit-ayah-luecke-optionen-links-kein-capsule-sleep-timer-oben-rechts-mittelstrich-weg",
       "reason": "Nutzer: Arabisch/Deutsch/Lautschrift ohne Lücke, Optionen edel ohne Kapseln mit linker Trennung, Stufe flüssig, Sleep-Timer + Countdown oben rechts, Mittelstrich weg, Zurück bleibt. Global alle Erscheinungsbilder.",

@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 951;
+    var PLAYER_BUILD = 952;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -104,14 +104,62 @@
   var allowAdvance = false;
   var engine = { started: false, lastUrl: "" };
 
-  function applyVolume() {
+  var volCtx = null;
+  var volGain = null;
+  var volSrc = null;
+  var volGraphReady = false;
+  var volArming = false;
+  function armVolGraph() {
+    if (volGraphReady || volArming) {
+      if (volCtx && volCtx.state === "suspended") {
+        try { volCtx.resume(); } catch (eR0) {}
+      }
+      return;
+    }
+    try {
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return;
+      if (!volCtx) volCtx = new Ctx();
+      volArming = true;
+      var connect = function () {
+        try {
+          if (!volSrc) {
+            volSrc = volCtx.createMediaElementSource(audioEl());
+            volGain = volCtx.createGain();
+            volGain.gain.value = Math.max(0, Math.min(1, Number(state.volume) || 1));
+            volSrc.connect(volGain);
+            volGain.connect(volCtx.destination);
+          }
+          volGraphReady = true;
+        } catch (eC) {}
+        volArming = false;
+        applyVolume(true);
+      };
+      if (volCtx.state === "suspended") {
+        volCtx.resume().then(connect).catch(function () { volArming = false; });
+      } else connect();
+    } catch (eA) {
+      volArming = false;
+    }
+  }
+  function applyVolume(fromUi) {
     var v = Math.max(0, Math.min(1, Number(state.volume)));
     if (!isFinite(v)) v = 1;
     state.volume = v;
     var a = audioEl();
-    a.muted = false;
+    a.muted = v <= 0.001;
     a.defaultMuted = false;
     try { a.volume = v; } catch (e) {}
+    if (volGraphReady && volGain) {
+      try {
+        if (volCtx && volCtx.state === "suspended") volCtx.resume();
+        if (volCtx && typeof volGain.gain.setTargetAtTime === "function") {
+          volGain.gain.setTargetAtTime(v, volCtx.currentTime || 0, 0.03);
+        } else volGain.gain.value = v;
+      } catch (eG) {
+        try { volGain.gain.value = v; } catch (eG2) {}
+      }
+    }
     var track = document.querySelector("#darQuranPlayer [data-dqp-vol-track]");
     var fillPct = (v * 100) + "%";
     if (track) track.style.setProperty("--dqp-fill", fillPct);
@@ -119,11 +167,19 @@
     if (vfill) vfill.style.transform = "scaleX(" + Math.max(0, Math.min(1, v)).toFixed(4) + ")";
     var vol = document.querySelector("#darQuranPlayer [data-dqp=vol]");
     if (vol) {
-      vol.value = String(Math.round(v * 100));
+      if (!fromUi) vol.value = String(Math.round(v * 100));
       vol.style.setProperty("--dqp-fill", fillPct);
     }
     var hint = document.querySelector("[data-dqp-vol-hint]");
     if (hint) hint.hidden = true;
+  }
+  function volumeFromClientX(track, clientX) {
+    if (!track) return;
+    var r = track.getBoundingClientRect();
+    var w = r.width || 1;
+    var n = (clientX - r.left) / w;
+    state.volume = Math.max(0, Math.min(1, n));
+    applyVolume(true);
   }
   function bindVolumeSlider(root) {
     if (!root) return;
@@ -132,15 +188,41 @@
     if (!vol || vol.getAttribute("data-dqp-vol-bound") === "1") return;
     vol.setAttribute("data-dqp-vol-bound", "1");
     function onInput() {
+      armVolGraph();
       var n = Number(vol.value) / 100;
       state.volume = isFinite(n) ? Math.max(0, Math.min(1, n)) : 1;
-      applyVolume();
+      applyVolume(true);
       saveState();
     }
+    vol.addEventListener("pointerdown", function (e) {
+      e.stopPropagation();
+      armVolGraph();
+    });
     vol.addEventListener("input", onInput);
     vol.addEventListener("change", onInput);
     if (track) {
-      track.addEventListener("pointerdown", function (e) { e.stopPropagation(); });
+      var drag = false;
+      track.addEventListener("pointerdown", function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+        drag = true;
+        try { track.setPointerCapture(e.pointerId); } catch (eCap) {}
+        armVolGraph();
+        volumeFromClientX(track, e.clientX);
+      });
+      track.addEventListener("pointermove", function (e) {
+        if (!drag) return;
+        e.preventDefault();
+        volumeFromClientX(track, e.clientX);
+      });
+      function endDrag(e) {
+        if (!drag) return;
+        drag = false;
+        volumeFromClientX(track, e.clientX);
+        saveState();
+      }
+      track.addEventListener("pointerup", endDrag);
+      track.addEventListener("pointercancel", endDrag);
     }
     applyVolume();
   }
@@ -574,8 +656,10 @@
     paintMini();
   }
   function runPlay(a, gen) {
-    a.muted = false;
-    a.defaultMuted = false;
+    applyVolume(true);
+    if (volCtx && volCtx.state === "suspended") {
+      try { volCtx.resume(); } catch (eVolR) {}
+    }
     logAudio("play request", {
       surah: state.surah,
       ayah: state.ayah,
@@ -1108,7 +1192,7 @@
         "</div>" +
         '<div class="dqp-foot">' +
         '<div class="dqp-meta">' +
-          '<button type="button" class="dqp-title" data-dqp="pick-surah">—</button>' +
+          '<button type="button" class="dqp-title" data-dqp="pick-ayah">—</button>' +
           '<button type="button" class="dqp-more" data-dqp="menu" aria-label="Optionen">' + icon("more") + "</button>" +
           '<button type="button" class="dqp-artist" data-dqp="pick-reciter">—</button>' +
         "</div>" +
@@ -1841,7 +1925,7 @@
     return bodyOne || visible || nodes[0];
   }
   function ensureFreshShell(root) {
-    if (root && root.querySelector && root.querySelector(".dqp-back") && root.querySelector(".dqp-foot") && root.querySelector("[data-dqp-sleep-live]")) return root;
+    if (root && root.querySelector && root.querySelector(".dqp-back") && root.querySelector(".dqp-foot") && root.querySelector("[data-dqp-sleep-live]") && root.querySelector("[data-dqp=pick-ayah]")) return root;
     var wrap = document.createElement("div");
     wrap.innerHTML = renderShell();
     var neu = wrap.firstElementChild;
@@ -2275,6 +2359,7 @@
       return;
     }
     if (forcePlay === true || a.paused) {
+      armVolGraph();
       var hold = Number(state.resumeAt || state.current) || 0;
       if (hold > 0.2) {
         try {
@@ -2706,6 +2791,34 @@
     var a = audioEl();
     a.currentTime = Math.max(0, (a.currentTime || 0) + d);
   }
+  function clipTxt(s, n) {
+    s = String(s || "").replace(/\s+/g, " ").trim();
+    if (s.length <= n) return s;
+    return s.slice(0, n).replace(/\s+\S*$/, "") + "…";
+  }
+  function openAyahSheet() {
+    function draw() {
+      var n = totalAyat();
+      var i;
+      var rows = "";
+      for (i = 1; i <= n; i++) {
+        var v = verseAt(i);
+        var de = (v && (v.de || v.translation)) || "";
+        var ar = (v && (v.ar || v.arabic)) || "";
+        var q = (i + " " + de + " " + ar).toLowerCase();
+        rows += '<button type="button" class="dqp-opt' + (i === state.ayah ? " is-on" : "") + '" data-dqp-opt="a-' + i + '" data-q="' + esc(q) + '"><span>Āyah ' + i + "</span><small>" + esc(clipTxt(de || ar, 72)) + "</small></button>";
+      }
+      var m = meta || surahMeta(state.surah) || {};
+      var head = m.transliteration ? ("Āyah · " + m.transliteration) : "Āyah auswählen";
+      openSheet(head, '<input class="dqp-search" data-dqp-search type="search" placeholder="Āyah suchen" autocomplete="off">' + rows);
+      requestAnimationFrame(function () {
+        var on = document.querySelector("#darQuranPlayer .dqp-opt.is-on[data-dqp-opt^='a-']");
+        if (on && on.scrollIntoView) on.scrollIntoView({ block: "center" });
+      });
+    }
+    if (!verses.length) ensureData().then(draw);
+    else draw();
+  }
   function openSurahSheet() {
     var list = (window.quranMeta && window.quranMeta.surahs) || [];
     var rows = list.map(function (s) {
@@ -2740,6 +2853,7 @@
       '<button type="button" class="dqp-opt" data-dqp-opt="m-repeat">Wiederholen · ' + esc(REPEAT_L[state.repeat]) + "</button>",
       '<button type="button" class="dqp-opt" data-dqp-opt="m-sleep">' + esc(sleepLabel()) + "</button>",
       '<button type="button" class="dqp-opt" data-dqp="pick-surah">Sūrah wechseln</button>',
+      '<button type="button" class="dqp-opt" data-dqp="pick-ayah">Āyah wechseln</button>',
       '<button type="button" class="dqp-opt" data-dqp="pick-reciter">Qāriʾ wechseln</button>',
       '<button type="button" class="dqp-opt" data-dqp-opt="m-read">Sūrah lesen</button>',
       '<button type="button" class="dqp-opt" data-dqp-opt="m-stop">Wiedergabe beenden</button>'
@@ -2769,7 +2883,16 @@
     paintSleepLive();
   }
   async function onOpt(id) {
-    if (id.indexOf("s-") === 0) { closeSheet(); return gotoSurah(Number(id.slice(2)), 1, state.playing, true); }
+    if (id.indexOf("s-") === 0) {
+      closeSheet();
+      return gotoSurah(Number(id.slice(2)), 1, state.playing, true).then(function () {
+        openAyahSheet();
+      });
+    }
+    if (id.indexOf("a-") === 0) {
+      closeSheet();
+      return gotoAyah(Number(id.slice(2)), state.playing);
+    }
     if (id.indexOf("r-") === 0) {
       closeSheet();
       state.reciter = id.slice(2);
@@ -2916,6 +3039,7 @@
       if (act === "repeat") { state.repeat = cycle(REPEAT, state.repeat); saveState(); paintChrome(); return; }
       if (act === "text") { cycleTextQuick(); return; }
       if (act === "pick-surah") { openSurahSheet(); return; }
+      if (act === "pick-ayah") { openAyahSheet(); return; }
       if (act === "pick-reciter") { openReciterSheet(); return; }
       var opt = t.getAttribute("data-dqp-opt");
       if (opt) onOpt(opt);
@@ -2928,6 +3052,13 @@
     root.addEventListener("input", function (ev) {
       if (ev.target && ev.target.getAttribute("data-dqp") === "text-scale") {
         setTextScale(ev.target.value, true);
+        return;
+      }
+      if (ev.target && ev.target.getAttribute("data-dqp") === "vol") {
+        armVolGraph();
+        var nv = Number(ev.target.value) / 100;
+        state.volume = isFinite(nv) ? Math.max(0, Math.min(1, nv)) : 1;
+        applyVolume(true);
         return;
       }
       if (ev.target && ev.target.getAttribute("data-dqp") === "sleep-mins") {
