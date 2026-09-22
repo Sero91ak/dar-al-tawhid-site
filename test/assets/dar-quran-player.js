@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 929;
+  var PLAYER_BUILD = 930;
   /* LEARN_PLAYER_ONLY: Āyah-Buttons + Mini-Lernleiste, kein Voll-Player. */
   var LEARN_PLAYER_ONLY = true;
   if (window.__DAR_QURAN_PLAYER_BUILD === PLAYER_BUILD && window.DARQuranPlayer) return;
@@ -58,7 +58,8 @@
     playing: false, sessionActive: false, duration: 0, current: 0, resumeAt: 0,
     loading: true, error: "", layer: 0, textScale: 7, volume: 1,
     layers: { ar: true, de: true, lat: false, tad: false, taf: false },
-    learnMode: false, learnLoop: true, learnStay: true, learnRate: 1
+    learnMode: false, learnLoop: true, learnStay: true, learnRate: 1,
+    playerMode: "none"
   };
   var sleepUntil = 0;
   var sleepWatch = 0;
@@ -208,7 +209,7 @@
       }
       if (Number(raw.volume) >= 0 && Number(raw.volume) <= 1) state.volume = Number(raw.volume);
       if (Number(raw.resumeAt) > 0) state.resumeAt = Number(raw.resumeAt);
-      if (raw.sessionActive === true) state.sessionActive = true;
+      if (!LEARN_PLAYER_ONLY && raw.sessionActive === true) state.sessionActive = true;
       if (Array.isArray(raw.lastSurahs)) lastSurahs = raw.lastSurahs.map(Number).filter(Boolean);
     } catch (e) {}
   }
@@ -220,7 +221,7 @@
         layers: state.layers,
         textScale: state.textScale, textScaleFit: 1, volume: state.volume,
         resumeAt: state.current || state.resumeAt || 0,
-        sessionActive: !!state.sessionActive,
+        sessionActive: LEARN_PLAYER_ONLY ? false : !!state.sessionActive,
         lastSurahs: lastSurahs.slice(-12)
       }));
     } catch (e) {}
@@ -511,6 +512,11 @@
     }
   }
   function onPlayEv() {
+    if (LEARN_PLAYER_ONLY && !isQuranArea()) {
+      try { audioEl().pause(); } catch (ePlayLeave) {}
+      stopSession();
+      return;
+    }
     state.playing = true;
     state.sessionActive = true;
     applyLearnRate();
@@ -599,10 +605,50 @@
     }
     await nextAyah(true);
   }
+  function quranRouteName() {
+    return String(location.hash || "").replace(/^#\/?/, "").split("/")[0].toLowerCase();
+  }
   function isReaderRoute() {
-    var hash = String(location.hash || "").replace(/^#\/?/, "");
-    return hash.split("/")[0] === "quran-surah"
-      || (document.body && document.body.classList.contains("is-quran-reader-route"));
+    var name = quranRouteName();
+    return name === "quran-surah"
+      || (document.body && document.body.classList.contains("is-quran-reader-route"))
+      || document.documentElement.classList.contains("is-quran-reader-route");
+  }
+  function isQuranArea() {
+    var name = quranRouteName();
+    if (name === "quran" || name === "quran-surah") return true;
+    var body = document.body;
+    var html = document.documentElement;
+    if (body && (body.classList.contains("is-quran-reader-route") || body.classList.contains("is-quran-overview"))) return true;
+    if (html && (html.classList.contains("is-quran-reader-route") || html.classList.contains("is-quran-overview"))) return true;
+    return false;
+  }
+  function playerModeNow() {
+    if (LEARN_PLAYER_ONLY) {
+      if (state.learnMode && state.sessionActive && isQuranArea()) return "learning";
+      return "none";
+    }
+    if (state.learnMode && state.sessionActive && isQuranArea()) return "learning";
+    if (state.sessionActive && !state.learnMode) return "global";
+    return "none";
+  }
+  function showLearningPlayer() {
+    return isQuranArea()
+      && playerModeNow() === "learning"
+      && !!state.learnMode
+      && !!state.sessionActive
+      && Number(state.ayah) >= 1;
+  }
+  function cleanupLearningPlayerOnRouteLeave() {
+    state.playerMode = playerModeNow();
+    if (isQuranArea()) {
+      applyLearnChrome();
+      return;
+    }
+    if (LEARN_PLAYER_ONLY || state.learnMode || (state.sessionActive && !fullUiWanted)) {
+      if (state.sessionActive || state.learnMode || state.playing) stopSession();
+      else applyLearnChrome();
+    }
   }
   function applyLearnRate() {
     var rate = state.learnMode ? (Number(state.learnRate) || 1) : 1;
@@ -710,8 +756,7 @@
     if (btn && state.playing) btn.classList.add("is-on");
   }
   function syncLearnFromRoute() {
-    if (state.learnMode && !isReaderRoute()) exitLearnMode(true);
-    else applyLearnChrome();
+    cleanupLearningPlayerOnRouteLeave();
   }
   function surahMeta(id) {
     return typeof window.quranSurahMeta === "function"
@@ -764,7 +809,9 @@
     surah = Number(surah);
     ayah = Number(ayah);
     if (!(surah >= 1 && surah <= 114) || !(ayah >= 1)) return;
+    if (!isQuranArea()) return;
     enterLearnMode();
+    state.playerMode = "learning";
     state.sessionActive = true;
     var a = audioEl();
     var same = state.surah === surah && state.ayah === ayah && audioHasSrc(a);
@@ -1369,7 +1416,7 @@
     try {
       var h = window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.darQuranNowPlaying;
       if (!h) return;
-      if (clear) {
+      if (clear || LEARN_PLAYER_ONLY || !showLearningPlayer()) {
         h.postMessage({ clear: true });
         return;
       }
@@ -1406,6 +1453,19 @@
     } catch (ePos) {}
   }
   function syncMediaSession() {
+    if (LEARN_PLAYER_ONLY || !showLearningPlayer()) {
+      if (navigator.mediaSession) {
+        try {
+          navigator.mediaSession.playbackState = "none";
+          try { navigator.mediaSession.metadata = null; } catch (e1) {}
+          ["play", "pause", "stop", "previoustrack", "nexttrack", "seekbackward", "seekforward", "seekto"].forEach(function (act) {
+            try { navigator.mediaSession.setActionHandler(act, null); } catch (e2) {}
+          });
+        } catch (eMs) {}
+      }
+      postNowPlaying(true);
+      return;
+    }
     if (!navigator.mediaSession) {
       postNowPlaying(!state.sessionActive);
       return;
@@ -1692,23 +1752,23 @@
     var html = document.documentElement;
     var body = document.body;
     var el = document.getElementById("darQuranMiniPlayer");
-    var show = !!state.sessionActive && !isFullPlayerRoute();
+    var show = showLearningPlayer() && !isFullPlayerRoute();
     if (isReaderRoute()) {
       capsuleCollapsed = false;
       capsuleDimmed = false;
     }
     var collapsed = show && capsuleCollapsed;
     var expanded = show && !capsuleCollapsed;
-    html.classList.toggle("player-active", !!state.sessionActive);
+    html.classList.toggle("player-active", show);
     html.classList.toggle("player-expanded", expanded);
     html.classList.toggle("player-collapsed", collapsed);
-    html.classList.toggle("player-stopped", !state.sessionActive);
+    html.classList.toggle("player-stopped", !show);
     html.classList.toggle("dar-quran-top-capsule-on", show);
     if (body) {
-      body.classList.toggle("player-active", !!state.sessionActive);
+      body.classList.toggle("player-active", show);
       body.classList.toggle("player-expanded", expanded);
       body.classList.toggle("player-collapsed", collapsed);
-      body.classList.toggle("player-stopped", !state.sessionActive);
+      body.classList.toggle("player-stopped", !show);
       body.classList.toggle("dar-quran-top-capsule-on", show);
     }
     if (el) {
@@ -1787,6 +1847,10 @@
     setTimeout(paintMini, 30);
   }
   function togglePlay(forcePlay) {
+    if (LEARN_PLAYER_ONLY && !isQuranArea()) {
+      cleanupLearningPlayerOnRouteLeave();
+      return;
+    }
     logAudio(forcePlay === true ? "play clicked" : "play/pause clicked", {
       surah: state.surah,
       ayah: state.ayah,
@@ -1832,6 +1896,7 @@
     state.learnStay = false;
     state.learnRate = 1;
     lastFollowKey = "";
+    state.playerMode = "none";
     var mini = document.getElementById("darQuranMiniPlayer");
     if (mini) mini.classList.remove("is-away", "player-collapsed", "player-expanded", "player-dim", "is-learn", "is-reader-dock");
     syncMediaSession();
@@ -2025,7 +2090,7 @@
     var page = playerRoot();
     if (onFull) mountPlayerPage(page);
     else if (page && page.parentNode === document.body) page.hidden = true;
-    var show = !!state.sessionActive && !onFull;
+    var show = showLearningPlayer() && !onFull;
     el.classList.toggle("is-on", show);
     el.setAttribute("aria-hidden", show ? "false" : "true");
     setPlayerLayout(show);
@@ -2565,6 +2630,7 @@
     bind: function () {
       if (LEARN_PLAYER_ONLY) {
         hideFullPlayerUi();
+        cleanupLearningPlayerOnRouteLeave();
         paintMini();
         return;
       }
@@ -2632,7 +2698,11 @@
         repeatMode: state.repeat,
         repeat: state.repeat
       };
-    }
+    },
+    isQuranArea: isQuranArea,
+    showLearningPlayer: showLearningPlayer,
+    playerMode: function () { return playerModeNow(); },
+    cleanupLearningPlayerOnRouteLeave: cleanupLearningPlayerOnRouteLeave
   };
 
   window.DARQuranAudio = {
@@ -2641,6 +2711,10 @@
       if (opts.qariId) state.reciter = reciterById(opts.qariId).id;
       if (Number(opts.surahNumber) >= 1) state.surah = Number(opts.surahNumber);
       if (Number(opts.ayahNumber) >= 1) state.ayah = Number(opts.ayahNumber);
+      if (LEARN_PLAYER_ONLY) {
+        playFromReader(state.surah, state.ayah);
+        return;
+      }
       state.resumeAt = 0;
       saveState();
       loadAudio(true, false);
@@ -2678,20 +2752,40 @@
   loadState();
   ensureTadCatalog();
   function resumeVisibleSession() {
+    if (LEARN_PLAYER_ONLY && !isQuranArea()) {
+      cleanupLearningPlayerOnRouteLeave();
+      return;
+    }
     loadState({ keepLiveSession: true });
-    if (state.sessionActive) {
+    if (state.sessionActive && !LEARN_PLAYER_ONLY) {
       var a = audioEl();
       if (!audioHasSrc(a) && state.playing) loadAudio(true, true);
     }
     paintMini();
   }
+  var routePaintT = 0;
   function onRoutePaint() {
-    setTimeout(function () {
-      syncLearnFromRoute();
+    if (routePaintT) clearTimeout(routePaintT);
+    routePaintT = setTimeout(function () {
+      routePaintT = 0;
+      cleanupLearningPlayerOnRouteLeave();
       paintMini();
-    }, 16);
+    }, 0);
   }
   window.addEventListener("hashchange", onRoutePaint);
+  window.addEventListener("popstate", onRoutePaint);
+  document.addEventListener("click", function (ev) {
+    var t = ev.target && ev.target.closest ? ev.target.closest("[data-nav],.bottom-nav-btn,a[href^='#']") : null;
+    if (!t) return;
+    onRoutePaint();
+    setTimeout(onRoutePaint, 48);
+  }, true);
+  function watchQuranBodyClass() {
+    if (!document.body || window.__dqpQuranBodyWatch) return;
+    window.__dqpQuranBodyWatch = true;
+    new MutationObserver(onRoutePaint).observe(document.body, { attributes: true, attributeFilter: ["class"] });
+    new MutationObserver(onRoutePaint).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+  }
   window.addEventListener("pageshow", function () { resumeVisibleSession(); });
   document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "visible") resumeVisibleSession();
@@ -2701,8 +2795,14 @@
     if (el) fitAyah(el);
   });
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () { paintMini(); }, { once: true });
+    document.addEventListener("DOMContentLoaded", function () {
+      watchQuranBodyClass();
+      cleanupLearningPlayerOnRouteLeave();
+      paintMini();
+    }, { once: true });
   } else {
+    watchQuranBodyClass();
+    cleanupLearningPlayerOnRouteLeave();
     paintMini();
   }
 })();
