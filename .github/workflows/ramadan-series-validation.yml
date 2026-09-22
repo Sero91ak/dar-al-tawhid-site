@@ -1,0 +1,26 @@
+name: Ramadan Series Validation
+
+on:
+  push:
+    branches:
+      - feat/ramadan-series-engine
+    paths:
+      - "content/ramadan/**"
+      - "scripts/validate-ramadan-series.js"
+      - "package.json"
+      - ".github/workflows/ramadan-series-validation.yml"
+  pull_request:
+    paths:
+      - "content/ramadan/**"
+      - "scripts/validate-ramadan-series.js"
+      - "package.json"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm run test:ramadan
