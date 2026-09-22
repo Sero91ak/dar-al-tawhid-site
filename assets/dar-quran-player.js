@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 935;
+  var PLAYER_BUILD = 936;
   /* LEARN_PLAYER_ONLY: Āyah-Buttons + Mini-Lernleiste, kein Voll-Player.
      Offizielle iOS-App bekommt den kompletten Player inkl. Vollansicht. */
   function isOfficialIosApp() {
@@ -2742,7 +2742,7 @@
       if (opts.qariId) state.reciter = reciterById(opts.qariId).id;
       if (Number(opts.surahNumber) >= 1) state.surah = Number(opts.surahNumber);
       if (Number(opts.ayahNumber) >= 1) state.ayah = Number(opts.ayahNumber);
-      if (LEARN_PLAYER_ONLY) {
+      if (LEARN_PLAYER_ONLY || isQuranArea()) {
         playFromReader(state.surah, state.ayah);
         return;
       }

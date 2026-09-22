@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v846";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v847";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script id="dar-browser-desktop-router-v833">
 (function(){
   try{
@@ -10494,7 +10494,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/premium-feed-app.js?v=101" defer></script>
 <script src="/assets/dar-setup-hub.js?v=5" defer></script><!-- DAR_SETUP_HUB_V1 -->
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
-<script src="/assets/dar-quran-player.js?v=845" defer></script>
+<script src="/assets/dar-quran-player.js?v=847" defer></script>
 <script src="/assets/adaptive-layout.js?v=7" defer></script>
 <script src="/assets/fold-split.js?v=3" defer></script>
 <script src="/assets/scholars-index.js?v=587" defer></script>
@@ -12109,7 +12109,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 }
 </style>
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=587">
-<link rel="stylesheet" href="/assets/dar-quran-player.css?v=845">
+<link rel="stylesheet" href="/assets/dar-quran-player.css?v=847">
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=5">
 <link rel="stylesheet" href="/assets/books-library.css?v=2">
 <link rel="stylesheet" href="/assets/prophets/prophets.css?v=16">
@@ -27154,7 +27154,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v846";
+const APP_BUILD_ID="app-shell-v847";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -34278,11 +34278,23 @@ html.dar-ios-native-app.is-standalone-pwa .app:after{
   visibility:hidden!important;
   pointer-events:none!important;
 }
-html.dar-ios-native-app #darQuranMiniPlayer{
+html.dar-ios-native-app #darQuranMiniPlayer.is-on:not(.is-learn):not(.is-reader-dock){
   top:0!important;
   padding-top:max(8px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))!important;
-  height:auto!important;
   min-height:calc(var(--dqp-cap-h,78px) + max(8px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px)))!important;
+}
+html.dar-ios-native-app #darQuranMiniPlayer.is-on.is-learn,
+html.dar-ios-native-app #darQuranMiniPlayer.is-on.is-reader-dock{
+  top:var(--qrc-chrome-h,calc(env(safe-area-inset-top,0px) + 92px))!important;
+  padding-top:8px!important;
+  height:124px!important;
+  min-height:124px!important;
+  transform:translate3d(0,0,0)!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+  z-index:555!important;
+  display:flex!important;
 }
 html.dar-ios-native-app{
   --dqp-reserve:calc(var(--dqp-cap-h,78px) + max(8px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px)));
