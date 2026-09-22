@@ -5222,6 +5222,19 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "desktop-live-router-stability-v833-2026-09-22",
+      "approvedBy": "user-explicit-total-desktop-browser-rollout",
+      "reason": "Nutzer: Desktop-Webseite darf nicht mehr als App in Desktop-/Tablet-Browsern erscheinen; leeren Desktop-Inhaltsbereich beheben und Qurʾān-Player deutlich kompakter platzieren.",
+      "paths": [
+        "index.html",
+        "desktop-preview/index.html",
+        "version.json",
+        "service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

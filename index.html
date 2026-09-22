@@ -5,7 +5,41 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v832";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v833";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script id="dar-browser-desktop-router-v833">
+(function(){
+  try{
+    var ua=String(navigator.userAgent||"");
+    var q=new URLSearchParams(location.search||"");
+    var nativeApp=/DarAlTawhid-iOS|DarAlTawhidAndroid/i.test(ua)||!!window.DAR_IOS_NATIVE_APP||!!window.DAR_ANDROID_NATIVE_APP;
+    var homescreen=q.get("homescreen")==="1"||q.get("app")==="1"||q.get("mobile")==="1";
+    var standalone=(window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches)||navigator.standalone===true;
+    var phone=/iPhone|iPod|Windows Phone|IEMobile|Opera Mini|Android[^;]*Mobile/i.test(ua);
+    var tablet=/iPad|Tablet|Silk/i.test(ua)||(/Android/i.test(ua)&&!/Mobile/i.test(ua))||(/Macintosh/i.test(ua)&&Number(navigator.maxTouchPoints||0)>1);
+    var rootPath=location.pathname==="/"||location.pathname==="/index.html";
+    if(!rootPath||nativeApp||homescreen||standalone||(phone&&!tablet))return;
+
+    var hash=String(location.hash||"").replace(/^#/,"");
+    var page=q.get("page")||"";
+    if(!page){
+      if(/^post\//i.test(hash)){page="beitrag";q.set("id",hash.split("/").slice(1).join("/"))}
+      else if(/^(quran|koran)/i.test(hash))page="quran";
+      else if(/^(dua|duas)/i.test(hash))page="dua";
+      else if(/^(ilm|wissen)/i.test(hash))page="wissen";
+      else if(/^(bibliothek|library)/i.test(hash))page="bibliothek";
+      else if(/^(prayer|gebet|gebetszeiten)/i.test(hash))page="gebetszeiten";
+      else if(/^(feed|beitraege|posts)/i.test(hash))page="beitraege";
+      else if(/^(more|mehr)/i.test(hash))page="mehr";
+      else page="start";
+    }
+    var post=q.get("post");
+    if(post){page="beitrag";q.set("id",post);q.delete("post")}
+    q.set("page",page);
+    q.delete("homescreen");q.delete("app");q.delete("mobile");
+    location.replace("/desktop-preview/?"+q.toString());
+  }catch(e){}
+})();
+</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -27116,7 +27150,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v832";
+const APP_BUILD_ID="app-shell-v833";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
