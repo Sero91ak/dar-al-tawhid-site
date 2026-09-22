@@ -105,7 +105,7 @@ Bitte testen:
 
 The app is a WebKit-based iOS wrapper for the DAR AL TAWḤĪD web application. It provides Islamic educational/reference content, including articles, sources, prayer times, search, and related reading tools.
 
-This first build opens the staging/test version for TestFlight evaluation before public release. No payment, user-generated marketplace, gambling, or financial functionality is included.
+This build opens the same live DAR AL TAWḤĪD web application as the public App Store. No payment, user-generated marketplace, gambling, or financial functionality is included.
 
 The content is intended for reading, study, and reference. Religious terminology may appear within educational source material and explanatory content, not as functionality for assigning religious judgments to specific persons or groups.
 

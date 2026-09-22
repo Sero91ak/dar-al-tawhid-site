@@ -1,7 +1,8 @@
 import Foundation
 
 enum DarAppShell {
-    /// Native iOS is the live shell. Test lives only at /test/ until explicitly released.
+    /// Sicherster Weg: TestFlight und App Store laden dieselbe Live-Seite.
+    /// Dar Test bleibt nur im Browser unter /test/ — nie in der nativen App.
     static let usesStagingWeb = false
 
     static let hosts: Set<String> = [

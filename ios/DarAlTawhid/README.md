@@ -12,16 +12,13 @@ Native iOS wrapper for TestFlight distribution.
 6. Distribute App > App Store Connect > Upload.
 7. In App Store Connect, create a TestFlight external group and public invite link.
 
-The first build loads:
+TestFlight und App Store laden dieselbe Live-Seite (wie Store-Build 89, ohne Glas-Split):
 
-`https://dar-al-tawhid.de/test/?env=staging&source=ios-testflight#home`
+`https://dar-al-tawhid.de/#home`
 
-Before the first real live release, change `environment` in `DarAlTawhid/WebAppView.swift` from `.staging` to `.live`.
+`DarAppShell.usesStagingWeb` bleibt `false`. Dar Test (`/test/`) ist nur die Website zum Prüfen, nicht die native App.
 
-Current modes:
-
-- `.staging` -> `https://dar-al-tawhid.de/test/?env=staging&source=ios-testflight#home`
-- `.live` -> `https://dar-al-tawhid.de/#home`
+Vor jedem neuen TestFlight-Upload in Xcode die **Build-Nummer über der letzten Store-/TestFlight-Nummer** erhöhen (nach 89 also 90), dann Product → Archive → App Store Connect.
 
 ## Home-Screen-Widgets (iPhone / iPad / Mac Catalyst)
 

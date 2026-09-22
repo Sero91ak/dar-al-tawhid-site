@@ -6,7 +6,7 @@
 - `de.daraltawhid.app` bleibt korrekt
 - Version nur erhoehen, wenn inhaltlich noetig
 - Build-Nummer vor jedem neuen Upload erhoehen
-- App startet weiterhin in die Test/Staging-Version
+- App startet die Live-Seite `https://dar-al-tawhid.de/#home` (wie der App Store, nicht `/test/`)
 - Apple-Account ist in Xcode unter `Accounts` eingeloggt
 - Team ist nicht mehr `Personal Team`, sondern echtes Developer Program Team
 
