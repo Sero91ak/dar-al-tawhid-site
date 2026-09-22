@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v837";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v838";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -19,8 +19,9 @@
     var root=document.documentElement;
     root.setAttribute("data-theme",t);
     root.setAttribute("data-theme-name",names[t]||names.dark);
-    if(/DarAlTawhid-iOS/i.test(String(navigator.userAgent||""))){
+    if(/DarAlTawhid-iOS/i.test(String(navigator.userAgent||""))||/DarAlTawhidOfficialIOS/i.test(String(navigator.userAgent||""))){
       window.DAR_IOS_NATIVE_APP=true;
+      window.DAR_OFFICIAL_IOS_APP=true;
       root.classList.add("dar-ios-native-app");
     }else{
       root.classList.add("dar-soft-booting");
@@ -33,7 +34,7 @@
   }catch(e){}
 })();
 </script>
-<script src="/assets/visitor-ios-deprecation.js?v=837"></script>
+<script src="/assets/visitor-ios-deprecation.js?v=838"></script>
 <style id="dar-soft-boot-inline-v670">
 html.dar-soft-booting,html.dar-soft-booting body{background-color:var(--dar-boot-fill,var(--theme-page-bg,#080806))!important;overflow:hidden!important}
 html.dar-soft-booting #bottomNav,html.dar-soft-booting .bottom-nav,html.dar-soft-booting .footer,html.dar-soft-booting .home-discover,html.dar-soft-booting .home-v380{visibility:hidden!important;opacity:0!important;pointer-events:none!important}
@@ -27119,7 +27120,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v837";
+const APP_BUILD_ID="app-shell-v838";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
