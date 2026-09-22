@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 942;
+  var PLAYER_BUILD = 943;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -2074,7 +2074,20 @@
     opts = opts || {};
     qlog("[QURAN_STATE] restore learning state", opts);
     var snap = readLearn();
-    applyLearnBlob(snap || { surahNumber: state.surah, ayahNumber: state.ayah, qari: state.reciter, currentTime: state.resumeAt });
+    if (!applyLearnBlob(snap || {})) {
+      var fallback = { surahNumber: state.surah, ayahNumber: state.ayah, qari: state.reciter, currentTime: state.resumeAt };
+      try {
+        if (typeof window.getPreferredQuranProgress === "function") {
+          var p = window.getPreferredQuranProgress();
+          if (p && Number(p.surahNumber) >= 1) {
+            fallback.surahNumber = Number(p.surahNumber);
+            fallback.ayahNumber = Number(p.ayahNumber) || 1;
+            fallback.surahName = p.surahName || "";
+          }
+        }
+      } catch (eFb) {}
+      applyLearnBlob(fallback);
+    }
     enterLearnMode();
     writeMode("learning-quran");
     state.sessionActive = true;
@@ -2129,26 +2142,18 @@
       paintMini();
     }, 40);
   }
+  function launchGlobalPlayer() {
+    persistCurrent("launch-global-icon");
+    qlog("[QURAN_ROUTE] mode = global-quran", { from: "header-icon" });
+    restoreGlobalPlayer({ play: false, from: "header-icon" });
+  }
+  function launchLearnPlayer() {
+    persistCurrent("launch-learn-bar");
+    qlog("[QURAN_ROUTE] mode = learning-quran", { from: "learn-launch-bar" });
+    restoreLearning({ play: false, from: "learn-launch-bar" });
+  }
   function launchPlayback() {
-    persistCurrent("launch-playback");
-    var mode = readMode();
-    var g = readGlobal();
-    var l = readLearn();
-    qlog("[QURAN_ROUTE] pinned player clicked", { mode: mode, from: "launchPlayback" });
-    if (!LEARN_PLAYER_ONLY && (mode === "global-quran" || (g && g.sessionActive))) {
-      restoreGlobalPlayer({ play: !!(g && (g.playing || g.sessionActive)), from: "launch-global" });
-      return;
-    }
-    if (l && Number(l.surahNumber) >= 1) {
-      restoreLearning({ play: !!l.isPlaying, from: "launch-learn" });
-      return;
-    }
-    if (!LEARN_PLAYER_ONLY) {
-      restoreGlobalPlayer({ play: false, from: "launch-default-global" });
-      return;
-    }
-    if (typeof window.navigate === "function") window.navigate("quran");
-    else location.hash = "#quran";
+    launchGlobalPlayer();
   }
   function onPinnedPlayerClick() {
     persistCurrent("pinned-click");
@@ -3032,6 +3037,8 @@
     playerMode: function () { return playerModeNow(); },
     cleanupLearningPlayerOnRouteLeave: cleanupLearningPlayerOnRouteLeave,
     launchPlayback: launchPlayback,
+    launchGlobalPlayer: launchGlobalPlayer,
+    launchLearnPlayer: launchLearnPlayer,
     restoreLearning: function (play) { restoreLearning({ play: !!play, from: "api" }); },
     learnResume: readLearn,
     persistNow: persistCurrent
@@ -3117,11 +3124,18 @@
   window.addEventListener("hashchange", onRoutePaint);
   window.addEventListener("popstate", onRoutePaint);
   document.addEventListener("click", function (ev) {
-    var launch = ev.target && ev.target.closest ? ev.target.closest(".qov-player-launch, .qov-player-icon, [data-nav='quran-player'], [data-qa-action='quran-player']") : null;
-    if (launch) {
+    var learnBar = ev.target && ev.target.closest ? ev.target.closest(".qov-player-launch, [data-dqp-learn-resume]") : null;
+    if (learnBar) {
       ev.preventDefault();
       ev.stopPropagation();
-      launchPlayback();
+      launchLearnPlayer();
+      return;
+    }
+    var globalIcon = ev.target && ev.target.closest ? ev.target.closest(".qov-player-icon, [data-qa-action='quran-player'], [data-nav='quran-player']") : null;
+    if (globalIcon) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      launchGlobalPlayer();
       return;
     }
     var t = ev.target && ev.target.closest ? ev.target.closest("[data-nav],.bottom-nav-btn,a[href^='#']") : null;
