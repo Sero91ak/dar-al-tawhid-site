@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1789319677748 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v949";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v950";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -27239,7 +27239,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v949";
+const APP_BUILD_ID="app-shell-v950";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -34404,12 +34404,34 @@ html[data-theme] #darQuranPlayer .dqp-fill{
   window.addEventListener("dar:layoutchange", forceStandardNav);
 })();
 </script>
-<style id="dar-ios-native-oversize-restore-v845">
-/* Test-App oben wie App-Store-iOS: kein Hero-Glas, keine Blur-Schicht. */
+<style id="dar-test-no-glass-top-v950">
+/* Dar Test: oben undurchsichtig wie Store-iOS — Kicker nicht in der Statusleiste. */
+html,body,.app,#appRoot,#appShell{
+  background:var(--page-cover,var(--bg,#050706))!important;
+  background-color:var(--page-cover,var(--bg,#050706))!important;
+  background-image:none!important;
+  overscroll-behavior:none!important;
+}
+html::before{
+  content:""!important;
+  position:fixed!important;
+  top:0!important;left:0!important;right:0!important;
+  height:max(12px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))!important;
+  background:var(--page-cover,var(--bg,#050706))!important;
+  background-image:none!important;
+  z-index:400!important;
+  pointer-events:none!important;
+  opacity:1!important;
+  filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
 html[data-theme] .theme-hero-shell,
 html[data-theme] .top-shell.theme-hero-shell,
 html[data-theme] .theme-hero-surface,
-html[data-theme] .top-shell{
+html[data-theme] .top-shell,
+html[data-theme] .top-shell:before,
+.top-shell{
   border:0!important;
   border-radius:0!important;
   box-shadow:none!important;
@@ -34417,15 +34439,18 @@ html[data-theme] .top-shell{
   -webkit-clip-path:none!important;
   overflow:visible!important;
   isolation:auto!important;
+  margin-top:0!important;
   -webkit-backdrop-filter:none!important;
   backdrop-filter:none!important;
-  background:var(--dar-edge-fill,var(--page-cover,var(--bg)))!important;
+  background:var(--page-cover,var(--bg,#050706))!important;
   background-image:none!important;
 }
 html[data-theme] .theme-hero-shell::before,
 html[data-theme] .theme-hero-shell::after,
 html[data-theme] .top-shell::before,
 html[data-theme] .top-shell::after,
+html[data-theme] .top-shell:before,
+html[data-theme] .top-shell:after,
 html[data-theme] .header::before,
 html[data-theme] .header::after,
 html[data-theme] .theme-hero-surface::before,
@@ -34445,9 +34470,13 @@ html[data-theme] .header.theme-hero-surface,
 html[data-theme] .sf-top{
   -webkit-backdrop-filter:none!important;
   backdrop-filter:none!important;
-  background:transparent!important;
+  background:var(--page-cover,var(--bg,#050706))!important;
   background-image:none!important;
   box-shadow:none!important;
+}
+html[data-theme] body.is-home-route .header,
+html[data-theme] .top-shell .header{
+  padding-top:max(18px,calc(env(safe-area-inset-top,0px) + 10px))!important;
 }
 html[data-theme] .top-swim-aura,
 html[data-theme] #topSwimAura,
@@ -34579,7 +34608,7 @@ html.dar-ios-native-app.is-quran-player-route #darQuranPlayer{
 <script>
 (function(){
   function pin(){
-    var src=document.getElementById("dar-ios-native-oversize-restore-v845");
+    var src=document.getElementById("dar-test-no-glass-top-v950");
     if(!src)return;
     var live=document.getElementById("dar-test-no-glass-top-live");
     if(!live){
