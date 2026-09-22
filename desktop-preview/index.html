@@ -1799,6 +1799,183 @@ button,input,select{font:inherit}
   .player-field select{font-size:11px!important}
 }
 
+
+/* Qurʾān player v17 — compact real player, fixed premium footprint */
+.player-wrap{
+  width:min(840px,calc(100% - 48px))!important;
+  margin:16px auto 12px!important;
+}
+.quran-player{
+  width:100%!important;
+  height:62px!important;
+  min-height:62px!important;
+  display:grid!important;
+  grid-template-columns:34px 48px minmax(205px,1fr) 146px 72px 176px 34px!important;
+  align-items:center!important;
+  gap:0!important;
+  border:0!important;
+  border-radius:31px!important;
+  background:
+    radial-gradient(360px 86px at 20% 5%,rgba(255,255,255,.055),transparent 70%),
+    radial-gradient(260px 72px at 78% 32%,rgba(194,157,86,.045),transparent 72%),
+    linear-gradient(105deg,#111d25 0%,#182831 34%,#1c302e 70%,#14251f 100%)!important;
+  box-shadow:
+    0 12px 28px rgba(12,21,25,.14),
+    inset 0 0 0 1px rgba(224,198,139,.085)!important;
+  overflow:hidden!important;
+}
+.quran-player:before{
+  background:
+    linear-gradient(112deg,transparent 30%,rgba(255,255,255,.025) 47%,rgba(222,190,119,.045) 59%,transparent 75%)!important;
+  animation-duration:14s!important;
+}
+.player-prev,
+.player-step{
+  width:34px!important;
+  height:62px!important;
+  border:0!important;
+  background:transparent!important;
+  color:#dbc793!important;
+  font-size:18px!important;
+  display:grid!important;
+  place-items:center!important;
+  cursor:pointer!important;
+  transition:background .18s ease,color .18s ease,transform .18s ease!important;
+}
+.player-prev:hover,
+.player-step:hover{
+  background:rgba(255,255,255,.035)!important;
+  color:#fff5d9!important;
+}
+.player-prev:active,
+.player-step:active{transform:scale(.94)}
+.player-play{
+  width:40px!important;
+  height:40px!important;
+  margin:0 auto!important;
+  border:1px solid rgba(227,202,147,.24)!important;
+  background:linear-gradient(180deg,#fffdf7,#f0e3c6)!important;
+  color:#1b2a26!important;
+  font-size:13px!important;
+  box-shadow:0 5px 12px rgba(7,14,17,.14)!important;
+}
+.player-now{
+  padding:0 13px 0 10px!important;
+}
+.player-kicker{
+  font-size:7px!important;
+  letter-spacing:.13em!important;
+  color:#d9bf84!important;
+}
+.player-title{
+  margin-top:3px!important;
+  font-size:13px!important;
+  line-height:1.15!important;
+  color:#fffdf8!important;
+}
+.player-progress{
+  height:1px!important;
+  margin-top:6px!important;
+  background:rgba(255,255,255,.12)!important;
+}
+.player-progress i{
+  background:linear-gradient(90deg,#b99350,#ead394)!important;
+}
+.player-field{
+  height:62px!important;
+  min-width:0!important;
+  padding:0 9px!important;
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  align-content:center!important;
+  gap:4px!important;
+  border:0!important;
+  background:transparent!important;
+}
+.player-field:before{
+  top:15px!important;
+  bottom:15px!important;
+  background:linear-gradient(180deg,transparent,rgba(226,201,145,.13),transparent)!important;
+}
+.player-field label{
+  font-size:6.5px!important;
+  letter-spacing:.11em!important;
+  color:#cdbb91!important;
+}
+.player-field select{
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  padding-right:10px!important;
+  color:#fffdf8!important;
+  font-size:10.5px!important;
+  font-weight:650!important;
+}
+.player-field.reciter select{font-size:10px!important}
+.quran-player.is-playing .player-play{
+  box-shadow:
+    0 0 0 4px rgba(206,177,112,.085),
+    0 5px 14px rgba(6,14,17,.18)!important;
+}
+
+/* Medium tablet/desktop: keep compact, only reciter drops to a quiet second row */
+@media(max-width:900px){
+  .player-wrap{
+    width:min(700px,calc(100% - 34px))!important;
+    margin:13px auto 10px!important;
+  }
+  .quran-player{
+    height:auto!important;
+    min-height:98px!important;
+    grid-template-columns:32px 46px minmax(190px,1fr) 130px 66px 32px!important;
+    grid-template-rows:58px 40px!important;
+    border-radius:27px!important;
+  }
+  .player-prev{grid-column:1;grid-row:1;height:58px!important}
+  .player-play{grid-column:2;grid-row:1}
+  .player-now{grid-column:3;grid-row:1}
+  .player-field:not(.reciter):nth-of-type(1){grid-column:4;grid-row:1;height:58px!important}
+  .player-field:not(.reciter):nth-of-type(2){grid-column:5;grid-row:1;height:58px!important}
+  .player-step{grid-column:6;grid-row:1;height:58px!important}
+  .player-field.reciter{
+    grid-column:3/6!important;
+    grid-row:2!important;
+    height:40px!important;
+    grid-template-columns:66px minmax(0,1fr)!important;
+    align-items:center!important;
+    gap:8px!important;
+  }
+  .player-field.reciter:before{top:6px!important;bottom:6px!important}
+}
+
+/* Small screens: compact stacked controller, never a giant banner */
+@media(max-width:620px){
+  .player-wrap{width:calc(100% - 22px)!important;margin:10px 11px 8px!important}
+  .quran-player{
+    min-height:132px!important;
+    grid-template-columns:30px 44px minmax(0,1fr) 32px!important;
+    grid-template-rows:56px 38px 38px!important;
+    border-radius:24px!important;
+  }
+  .player-prev{grid-column:1;grid-row:1;height:56px!important}
+  .player-play{grid-column:2;grid-row:1;width:38px!important;height:38px!important}
+  .player-now{grid-column:3;grid-row:1;padding:0 9px!important}
+  .player-step{grid-column:4;grid-row:1;height:56px!important}
+  .player-field:not(.reciter):nth-of-type(1){
+    grid-column:1/3!important;grid-row:2!important;height:38px!important;
+    grid-template-columns:52px minmax(0,1fr)!important;align-items:center!important
+  }
+  .player-field:not(.reciter):nth-of-type(2){
+    grid-column:3/5!important;grid-row:2!important;height:38px!important;
+    grid-template-columns:40px minmax(0,1fr)!important;align-items:center!important
+  }
+  .player-field.reciter{
+    grid-column:1/5!important;grid-row:3!important;height:38px!important;
+    grid-template-columns:64px minmax(0,1fr)!important;align-items:center!important
+  }
+  .player-title{font-size:12px!important}
+}
+
 </style>
 </head>
 <body>
@@ -1834,6 +2011,7 @@ button,input,select{font:inherit}
 
 <div class="player-wrap">
  <section id="quranAudioPlayer" class="quran-player" aria-label="Qurʾān-Player">
+  <button id="qaPrev" class="player-prev" type="button" aria-label="Vorherige Āyah">‹</button>
   <button id="qaPlay" class="player-play" type="button" aria-label="Wiedergabe">▶</button>
   <div class="player-now">
    <div class="player-kicker">Qurʾān hören</div>
@@ -2384,7 +2562,7 @@ button,input,select{font:inherit}
  }
 
  var qa={
-  audio:document.getElementById("qaAudio"),wrap:document.getElementById("quranAudioPlayer"),play:document.getElementById("qaPlay"),title:document.getElementById("qaTitle"),progress:document.getElementById("qaProgress"),
+  audio:document.getElementById("qaAudio"),wrap:document.getElementById("quranAudioPlayer"),prev:document.getElementById("qaPrev"),play:document.getElementById("qaPlay"),title:document.getElementById("qaTitle"),progress:document.getElementById("qaProgress"),
   surah:document.getElementById("qaSurah"),ayah:document.getElementById("qaAyah"),reciter:document.getElementById("qaReciter"),next:document.getElementById("qaNext"),surahs:[],state:{surah:1,ayah:1,reciter:"alafasy"}
  };
  var reciters=[
@@ -2423,6 +2601,7 @@ button,input,select{font:inherit}
   fetch("/content/quran/surahs.json",{cache:"force-cache"}).then(function(r){return r.json()}).then(function(data){
    qa.surahs=data.surahs||[];qa.surah.innerHTML="";qa.surahs.forEach(function(s){var o=document.createElement("option");o.value=String(s.id);o.textContent=s.id+" · "+s.transliteration;if(Number(s.id)===Number(qa.state.surah))o.selected=true;qa.surah.appendChild(o)});fillAyat();updateQaTitle()
   }).catch(function(){qa.title.textContent="Qurʾān-Player"});
+  qa.prev.onclick=function(){stepQa(-1,!qa.audio.paused)};
   qa.play.onclick=function(){if(qa.audio.paused){if(!qa.audio.src)setQaSource(false);qa.audio.play().catch(function(){})}else qa.audio.pause()};
   qa.next.onclick=function(){stepQa(1,!qa.audio.paused)};
   qa.surah.onchange=function(){qa.state.surah=Number(qa.surah.value);qa.state.ayah=1;fillAyat();setQaSource(!qa.audio.paused)};
