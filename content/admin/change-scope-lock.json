@@ -110,7 +110,7 @@
     {
       "id": "ramadan-test-app-integration-2026-09-22",
       "approvedBy": "user-explicit-leg-los-ramadan-test-app",
-      "reason": "Nutzer: Ramaḍān-30-Tage-Serie jetzt sichtbar ausschließlich in der Test-App aufbauen und testen. Besucher-App und bestehende Push-Spuren bleiben unverändert.",
+      "reason": "Nutzer: Ramaḍān-30-Tage-Serie jetzt sichtbar ausschließlich in der Test-App aufbauen und testen. Besucher-App und bestehende Push-Spuren bleiben unverändert. Testdateien eingebaut; Deploy dieses Stands freigegeben.",
       "paths": [
         "content/admin/change-scope-lock.json",
         "test/index.html",
@@ -118,7 +118,8 @@
         "test/assets/ramadan-series-test.js",
         "test/content/ramadan/"
       ],
-      "expiresAt": "2026-10-31T22:59:00.000Z"
+      "expiresAt": "2026-10-31T22:59:00.000Z",
+      "stage": "test-visible"
     },
     {
       "id": "ilm-research-chat-test-only-2026-09-22",
