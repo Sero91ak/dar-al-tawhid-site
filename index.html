@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v844";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v845";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script id="dar-browser-desktop-router-v833">
 (function(){
   try{
@@ -93,6 +93,7 @@ html[data-theme="light"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="lig
 <script>/* ANDROID_FULL_RELOAD_V665: PWA/Standalone wie iOS — kein Hängen auf Chrome-Splash */(function(){try{var ua=String(navigator.userAgent||"");if(!/Android/i.test(ua))return;document.documentElement.classList.add("is-android");window.addEventListener("pageshow",function(ev){if(ev&&ev.persisted)location.reload()});}catch(e){}})();</script>
 
 <script>/* VISUAL_PAST_PURGE_V588: alte Optik-Caches löschen – aktuelle Darstellung bleibt Autorität */(function(){var BUILD=String(window.__DAR_EXPECTED_BUILD||"");var KEY="dar_visual_authority_build_v1";var ONCE="dar_visual_past_purge_once_v588";function num(id){var m=String(id||"").match(/v(\d+)/);return m?parseInt(m[1],10):0}function wipe(){if(!("caches"in window))return Promise.resolve();return caches.keys().then(function(keys){return Promise.all(keys.filter(function(k){return /^dar-al-tawhid-offline-light-/i.test(k)}).map(function(k){return caches.delete(k)}))})}function bustReload(tag){try{if(sessionStorage.getItem(ONCE)===BUILD+"|"+tag)return;sessionStorage.setItem(ONCE,BUILD+"|"+tag)}catch(e){}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?"+tag+"="+Date.now()+h)}try{var prev=localStorage.getItem(KEY)||"";var localN=num(BUILD);var prevN=num(prev);if(prevN>localN&&localN>0){wipe().then(function(){if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){try{g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}catch(e){}}).catch(function(){})}bustReload("visual-stale")}).catch(function(){bustReload("visual-stale")});return}if(localN>prevN){wipe().then(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}bustReload("visual-new")}).catch(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}});return}if(!prev&&BUILD){try{localStorage.setItem(KEY,BUILD)}catch(e){}}if(localN>0&&"caches"in window){caches.keys().then(function(keys){keys.forEach(function(k){if(!/^dar-al-tawhid-offline-light-/i.test(k))return;var kn=num(k);if(kn&&kn<localN)caches.delete(k)})}).catch(function(){})}}catch(e){}try{var path=String(location.pathname||"");var ver=path.indexOf("/test")===0?"/test/version.json":"/version.json";fetch(ver,{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(remote){if(!remote||!remote.buildId)return;var remoteN=num(remote.buildId);if(remoteN>localN&&localN>0){wipe().then(function(){bustReload("visual-remote")}).catch(function(){bustReload("visual-remote")})}}).catch(function(){})}catch(e){}})();</script>
+<script>/* IOS_NATIVE_FORCE_SHELL_V845: iOS-App lädt neue Hülle ohne Banner */(function(){try{var ua=String(navigator.userAgent||"");if(!/DarAlTawhid-iOS/i.test(ua)&&!window.DAR_IOS_NATIVE_APP)return;var BUILD=String(window.__DAR_EXPECTED_BUILD||"");function num(id){var m=String(id||"").match(/v(\d+)/);return m?parseInt(m[1],10):0}function go(tag){var h=location.hash||"#home";if(String(location.search||"").indexOf(tag+"=")>=0)return;location.replace((location.pathname||"/")+"?"+tag+"="+Date.now()+h)}function pull(){fetch("/version.json?ios="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(remote){if(!remote||!remote.buildId)return;if(num(remote.buildId)>num(BUILD)&&num(BUILD)>0){if("caches"in window){caches.keys().then(function(keys){return Promise.all(keys.filter(function(k){return /^dar-al-tawhid-offline-light-/i.test(k)}).map(function(k){return caches.delete(k)}))}).then(function(){go("ios-shell")}).catch(function(){go("ios-shell")});return}go("ios-shell")}}).catch(function(){})}pull();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")pull()});window.addEventListener("pageshow",pull)}catch(e){}})();</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -10493,7 +10494,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/premium-feed-app.js?v=101" defer></script>
 <script src="/assets/dar-setup-hub.js?v=5" defer></script><!-- DAR_SETUP_HUB_V1 -->
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
-<script src="/assets/dar-quran-player.js?v=935" defer></script>
+<script src="/assets/dar-quran-player.js?v=845" defer></script>
 <script src="/assets/adaptive-layout.js?v=7" defer></script>
 <script src="/assets/fold-split.js?v=3" defer></script>
 <script src="/assets/scholars-index.js?v=587" defer></script>
@@ -12108,7 +12109,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 }
 </style>
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=587">
-<link rel="stylesheet" href="/assets/dar-quran-player.css?v=935">
+<link rel="stylesheet" href="/assets/dar-quran-player.css?v=845">
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=5">
 <link rel="stylesheet" href="/assets/books-library.css?v=2">
 <link rel="stylesheet" href="/assets/prophets/prophets.css?v=16">
@@ -27153,7 +27154,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v844";
+const APP_BUILD_ID="app-shell-v845";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -28927,7 +28928,9 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       } catch (e) {}
     }
     async function maybeAutoApplyShellUpdate(targetId) {
-      if (window.__darAppBootOk || window.__darSoftBootLocked) return false;
+      var iosNative=false;
+      try{iosNative=(typeof isOfficialIosApp==="function"&&isOfficialIosApp())||document.documentElement.classList.contains("dar-ios-native-app")||/DarAlTawhid-iOS/i.test(String(navigator.userAgent||""))}catch(e){}
+      if (!iosNative && (window.__darAppBootOk || window.__darSoftBootLocked)) return false;
       var id = String(targetId || remoteBuildId || window.__darRemoteBuildId || '').trim();
       if (!id || !shouldOfferShellUpdate(id)) return false;
       if (!canAutoShellReload(id)) return false;
@@ -34203,8 +34206,8 @@ html[data-theme] #darQuranPlayer .dqp-fill{
 }
 </style>
 
-<style id="dar-ios-native-oversize-restore-v844">
-/* Alter iOS-Oversize-Zustand: Farbe bis in die Systemkante, kein PWA-Glaskasten, kein Test-Glas. */
+<style id="dar-ios-native-oversize-restore-v845">
+/* Alter iOS-Oversize: Farbe kantenbündig; Qurʾān ohne Lücke oben. */
 html.dar-ios-native-app,
 html.dar-ios-native-app body,
 html.dar-ios-native-app #appRoot,
@@ -34219,7 +34222,9 @@ html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen),
 html.dar-ios-native-app body.is-more-route,
 html.dar-ios-native-app body.is-quiz-route,
 html.dar-ios-native-app body.is-account-route,
-html.dar-ios-native-app body.is-quran-overview{
+html.dar-ios-native-app body.is-quran-overview,
+html.dar-ios-native-app body.is-quran-player-route,
+html.dar-ios-native-app.is-quran-player-route body{
   padding-top:0!important;
 }
 html.dar-ios-native-app .top-shell,
@@ -34255,6 +34260,10 @@ html.dar-ios-native-app #topEdgeFade{
   filter:none!important;
   background:linear-gradient(180deg,var(--page-cover,var(--dar-edge-fill,var(--bg))) 0%,var(--page-cover-mid,var(--page-cover,var(--bg))) 100%)!important;
 }
+html.dar-ios-native-app.is-quran-player-route .top-edge-fade,
+html.dar-ios-native-app.is-quran-player-route #topEdgeFade,
+html.dar-ios-native-app.player-active .top-edge-fade,
+html.dar-ios-native-app.player-active #topEdgeFade,
 html.dar-ios-native-app .top-swim-aura,
 html.dar-ios-native-app #topSwimAura,
 html.dar-ios-native-app .app:after,
@@ -34269,6 +34278,19 @@ html.dar-ios-native-app.is-standalone-pwa .app:after{
   visibility:hidden!important;
   pointer-events:none!important;
 }
+html.dar-ios-native-app #darQuranMiniPlayer{
+  top:0!important;
+  padding-top:max(8px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))!important;
+  height:auto!important;
+  min-height:calc(var(--dqp-cap-h,78px) + max(8px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px)))!important;
+}
+html.dar-ios-native-app{
+  --dqp-reserve:calc(var(--dqp-cap-h,78px) + max(8px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px)));
+}
+html.dar-ios-native-app.is-quran-player-route #darQuranPlayer{
+  top:0!important;
+  padding-top:0!important;
+}
 </style>
 <script>
 (function(){
@@ -34279,12 +34301,12 @@ html.dar-ios-native-app.is-standalone-pwa .app:after{
   }
   function pin(){
     if(!native())return;
-    var src=document.getElementById("dar-ios-native-oversize-restore-v844");
+    var src=document.getElementById("dar-ios-native-oversize-restore-v845");
     if(!src)return;
-    var live=document.getElementById("dar-ios-native-oversize-live-v844");
+    var live=document.getElementById("dar-ios-native-oversize-live-v845");
     if(!live){
       live=document.createElement("style");
-      live.id="dar-ios-native-oversize-live-v844";
+      live.id="dar-ios-native-oversize-live-v845";
     }
     live.textContent=src.textContent;
     document.documentElement.appendChild(live);
