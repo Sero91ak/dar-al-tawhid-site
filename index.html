@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v835";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v836";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -15146,14 +15146,14 @@ body.is-quran-reader-route #qrcInfoMount{position:relative;z-index:640}
 html.is-quran-reader-route,
 html.is-quran-reader-route body,
 body.is-quran-reader-route{
-  --qrc-noble-bg:#1e1e1e;
-  --qrc-noble-surface:#2a2a2a;
-  --qrc-noble-text:#ffffff;
-  --qrc-noble-muted:#9a9a9a;
-  --qrc-noble-divider:#333333;
-  --qrc-noble-pill-border:#3a3a3a;
-  background:var(--qrc-noble-bg)!important;
-  background-color:var(--qrc-noble-bg)!important;
+  --qrc-noble-bg:var(--bg);
+  --qrc-noble-surface:var(--card);
+  --qrc-noble-text:var(--text);
+  --qrc-noble-muted:var(--muted);
+  --qrc-noble-divider:var(--line2);
+  --qrc-noble-pill-border:var(--line2);
+  background:var(--qrc-noble-bg,var(--bg))!important;
+  background-color:var(--qrc-noble-bg,var(--bg))!important;
   background-image:none!important;
 }
 html.is-quran-reader-route::after{background:var(--qrc-noble-bg)!important}
@@ -15255,16 +15255,18 @@ html[data-theme="light"] body.is-quran-reader-route #appView.view,
 html[data-theme="light"] body.is-quran-reader-route .qrc-shell,
 html[data-theme="light"] body.is-quran-reader-route .qrc-body,
 html[data-theme="light"] body.is-quran-reader-route .qrc-body .quran-ayah.quran-ayah--noble{
-  --qrc-noble-bg:#1e1e1e;
-  --qrc-noble-surface:#2a2a2a;
-  --qrc-noble-text:#ffffff;
-  --qrc-noble-muted:#9a9a9a;
-  background:var(--qrc-noble-bg)!important;
+  --qrc-noble-bg:var(--bg);
+  --qrc-noble-surface:var(--card);
+  --qrc-noble-text:var(--text);
+  --qrc-noble-muted:var(--muted);
+  --qrc-noble-divider:var(--line2);
+  --qrc-noble-pill-border:var(--line2);
+  background:var(--bg)!important;
 }
 html[data-theme="light"] body.is-quran-reader-route .quran-ayah-ref-pill{
-  background:var(--qrc-noble-surface)!important;
-  color:var(--qrc-noble-text)!important;
-  border-color:var(--qrc-noble-pill-border)!important;
+  background:var(--card)!important;
+  color:var(--text)!important;
+  border-color:var(--line2)!important;
 }
 /* v531 · Funktionen zurück (Kopfleiste, Scroll, Picker) + edles Grau + Richtungen + Aya-Pille */
 body.is-quran-reader-route .qrc-chrome{
@@ -27116,7 +27118,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v835";
+const APP_BUILD_ID="app-shell-v836";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -34152,6 +34154,72 @@ html[data-theme="light"] #darQuranMiniPlayer .dqp-learn-btn{color:#8a6530!import
 html[data-theme="light"] #darQuranMiniPlayer .dqp-top-groove{background:rgba(138,101,48,.22)!important}
 html[data-theme="light"] #darQuranMiniPlayer .dqp-top-fill{background:linear-gradient(90deg,#6d4e24,#d8bf78)!important}
 html[data-theme="light"] #darQuranMiniPlayer .dqp-top-knob{background:#6d4e24!important}
+</style>
+<style id="quran-theme-tokens-v836">
+html{
+  --quran-page-bg:var(--bg);
+  --quran-arabic-text:var(--text);
+  --quran-transliteration-text:var(--muted);
+  --quran-translation-text:var(--text);
+  --quran-source-text:var(--muted2);
+  --player-bg:var(--card);
+  --player-text:var(--text);
+  --player-muted-text:var(--muted);
+}
+html.is-quran-reader-route,
+html.is-quran-reader-route body,
+body.is-quran-reader-route,
+html[data-theme] body.is-quran-reader-route,
+html[data-theme="light"] body.is-quran-reader-route,
+html[data-theme="light"] body.is-quran-reader-route #appView.view,
+html[data-theme="light"] body.is-quran-reader-route .qrc-shell,
+html[data-theme="light"] body.is-quran-reader-route .qrc-body,
+html[data-theme="light"] body.is-quran-reader-route .qrc-ayah-list,
+html[data-theme="light"] body.is-quran-reader-route .qrc-page,
+html[data-theme="light"] body.is-quran-reader-route .qrc-body .quran-ayah.quran-ayah--noble{
+  --qrc-noble-bg:var(--bg)!important;
+  --qrc-noble-surface:var(--card)!important;
+  --qrc-noble-text:var(--text)!important;
+  --qrc-noble-muted:var(--muted)!important;
+  --qrc-noble-divider:var(--line2)!important;
+  --qrc-noble-pill-border:var(--line2)!important;
+  background:var(--bg)!important;
+  background-color:var(--bg)!important;
+  background-image:none!important;
+}
+html[data-theme="light"] body.is-quran-reader-route .quran-ayah-ar,
+html[data-theme="light"] body.is-quran-reader-route .qrc-body .quran-ayah--noble .quran-ayah-ar{
+  color:var(--text)!important;
+}
+html[data-theme="light"] body.is-quran-reader-route .quran-ayah-tr,
+html[data-theme="light"] body.is-quran-reader-route .qrc-body .quran-ayah--noble .quran-ayah-tr{
+  color:var(--muted)!important;
+}
+html[data-theme="light"] body.is-quran-reader-route .quran-ayah-de,
+html[data-theme="light"] body.is-quran-reader-route .qrc-body .quran-ayah--noble .quran-ayah-de{
+  color:var(--text)!important;
+}
+html[data-theme="light"] body.is-quran-reader-route .quran-ayah-action-btn,
+html[data-theme="soft"] body.is-quran-reader-route .quran-ayah-action-btn{
+  color:var(--text)!important;
+  background:var(--card)!important;
+  border-color:var(--line2)!important;
+}
+html[data-theme="light"] #darQuranMiniPlayer,
+html[data-theme="soft"] #darQuranMiniPlayer,
+html[data-theme="eisgold"] #darQuranMiniPlayer{
+  color:var(--text)!important;
+  background:var(--card)!important;
+  border-bottom-color:var(--line2)!important;
+}
+html[data-theme="dark"] #darQuranMiniPlayer,
+html[data-theme="royal"] #darQuranMiniPlayer,
+html[data-theme="bordeaux"] #darQuranMiniPlayer,
+html[data-theme="dar-al-layl"] #darQuranMiniPlayer{
+  color:var(--text)!important;
+  background:var(--card)!important;
+  border-bottom-color:var(--line2)!important;
+}
 </style>
 
 </html>
