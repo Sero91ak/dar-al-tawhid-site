@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 938;
+  var PLAYER_BUILD = 939;
   /* LEARN_PLAYER_ONLY: Āyah-Buttons + Mini-Lernleiste, kein Voll-Player.
      Offizielle iOS-App bekommt den kompletten Player inkl. Vollansicht. */
   function isOfficialIosApp() {
@@ -2352,9 +2352,9 @@
       "</div>",
       '<div class="dqp-text-label">Stufe <span data-dqp-scale-n>' + state.textScale + "</span> / 10</div>",
       '<div class="dqp-scale-row">',
-      '<button type="button" data-dqp-opt="m-scale-minus" aria-label="Kleiner">−</button>',
-      '<input class="dqp-vol" data-dqp="text-scale" type="range" min="1" max="10" step="1" value="' + state.textScale + '" aria-label="Textgröße">',
-      '<button type="button" data-dqp-opt="m-scale-plus" aria-label="Größer">+</button>',
+      '<button type="button" class="dqp-scale-btn" data-dqp-opt="m-scale-minus" aria-label="Kleiner">−</button>',
+      '<input class="dqp-scale-range" data-dqp="text-scale" type="range" min="1" max="10" step="1" value="' + state.textScale + '" aria-label="Textgröße">',
+      '<button type="button" class="dqp-scale-btn" data-dqp-opt="m-scale-plus" aria-label="Größer">+</button>',
       "</div></div>",
       '<button type="button" class="dqp-opt" data-dqp-opt="m-shuffle">Zufall · ' + esc(SHUFFLE_L[state.shuffle]) + "</button>",
       '<button type="button" class="dqp-opt" data-dqp-opt="m-repeat">Wiederholen · ' + esc(REPEAT_L[state.repeat]) + "</button>",
