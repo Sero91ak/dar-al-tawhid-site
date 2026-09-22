@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "build": "node scripts/cf-pages-build.js",
-    "sync-build-ids": "node scripts/sync-app-build-ids.js"
+    "sync-build-ids": "node scripts/sync-app-build-ids.js",
+    "test:ramadan": "node scripts/validate-ramadan-series.js"
   },
   "devDependencies": {
     "wrangler": "^4.86.0"
