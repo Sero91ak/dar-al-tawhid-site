@@ -108,6 +108,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "visitor-ios-pwa-deprecation-live-2026-09-22",
+      "approvedBy": "user-explicit-auftrag-pushen-live",
+      "reason": "Nutzer: Auftrag iOS-Besucher-PWA-Sperre live auf main / Besucher-App.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "assets/visitor-ios-deprecation.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "ios-quran-light-reader-live-2026-09-22",
       "approvedBy": "user-explicit-auch-in-ios-app-pushen",
       "reason": "Nutzer: helles Qurʾān-Lesebild ohne Dunkelgrau auch in der offiziellen iOS-App (Live-WebView).",
