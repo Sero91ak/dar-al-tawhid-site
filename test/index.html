@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1789319677748 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v952";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v953";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -27239,7 +27239,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v952";
+const APP_BUILD_ID="app-shell-v953";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -34614,6 +34614,78 @@ html.dar-ios-native-app.is-quran-player-route #darQuranPlayer{
     if(!live){
       live=document.createElement("style");
       live.id="dar-test-no-glass-top-live";
+    }
+    live.textContent=src.textContent;
+    document.documentElement.appendChild(live);
+  }
+  pin();
+  document.addEventListener("DOMContentLoaded",pin);
+  window.addEventListener("pageshow",pin);
+  window.addEventListener("hashchange",function(){setTimeout(pin,40);});
+  setTimeout(pin,80);
+  setTimeout(pin,500);
+})();
+</script>
+<style id="ui-compact-optics-v849">
+/* v849 · Optik wieder kompakt: Sektionstitel, Start, Quiz, Duʿāʾ-Karten. Kein Funktionsabbau. */
+.home-v380-section-title,
+.home-v380-discover .home-v380-section-title,
+.home-v380-popular-wrap .home-v380-section-title,
+.home-today-cards .home-v380-section-title,
+.home-v380-libraries--noble .home-v380-section-title,
+.home-v380-search-wrap .home-v380-section-title,
+.home-v380-search-results .home-v380-section-title{
+  font-size:clamp(16px,3.8vw,19px)!important;
+  font-weight:700!important;
+  line-height:1.12!important;
+}
+.home-v380-section-head{margin-bottom:8px!important}
+.home-v380-section-rule{margin-bottom:10px!important}
+.home-today-cards .home-v380-section-title{margin-bottom:8px!important}
+body.is-home-route .view-head h2.home-start-title,
+.view-head-home-row h2.home-start-title,
+.view-head-home-row h2{
+  font-size:clamp(17px,4.2vw,21px)!important;
+  line-height:1.08!important;
+  font-weight:650!important;
+}
+@media(max-width:520px){
+  body.is-home-route .view-head h2.home-start-title,
+  .view-head-home-row h2.home-start-title,
+  .view-head-home-row h2{font-size:clamp(16px,4.4vw,20px)!important}
+}
+.quiz-home-title,
+body.is-quiz-route .quiz-shell .quiz-home-title,
+html[data-theme] .quiz-shell.quiz-shell-pro .quiz-home-title{
+  font-size:clamp(17px,4.2vw,21px)!important;
+  line-height:1.08!important;
+}
+.daily-title,.recommended-title{
+  font-size:clamp(15.5px,3.7vw,18px)!important;
+  line-height:1.12!important;
+  font-weight:750!important;
+}
+.top-shell.theme-hero-shell .salam,.salam{
+  font-size:clamp(14px,3.5vw,17px)!important;
+  line-height:1.28!important;
+}
+.top-shell.theme-hero-shell .intro,.intro{
+  font-size:12.5px!important;
+  line-height:1.5!important;
+}
+.feature-discovery-section .feature-head h3{
+  font-size:clamp(16px,4vw,20px)!important;
+}
+</style>
+<script>
+(function(){
+  function pin(){
+    var src=document.getElementById("ui-compact-optics-v849");
+    if(!src)return;
+    var live=document.getElementById("ui-compact-optics-live-v849");
+    if(!live){
+      live=document.createElement("style");
+      live.id="ui-compact-optics-live-v849";
     }
     live.textContent=src.textContent;
     document.documentElement.appendChild(live);
