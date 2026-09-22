@@ -1,0 +1,234 @@
+/* TEST-ONLY · ʿIlm-Recherche-Chat · Wissensseite im Gespräch */
+html.is-ilm-chat-route body.is-ilm-chat-route,
+body.is-ilm-chat-route{
+  --ilm-page-bg:#07131c;
+  --ilm-header-bg:#0a1a22;
+  --ilm-composer-bg:#0e1f28;
+  --ilm-primary-text:#f4eee4;
+  --ilm-secondary-text:#c3b9a8;
+  --ilm-accent:#d6b46a;
+  --ilm-gold:#c8a85b;
+  --ilm-line:color-mix(in srgb,var(--ilm-accent) 22%,transparent);
+  --ilm-serif:"Cormorant Garamond","Times New Roman",serif;
+}
+html[data-theme="light"] body.is-ilm-chat-route,
+html[data-theme="soft"] body.is-ilm-chat-route,
+html[data-theme="eisgold"] body.is-ilm-chat-route{
+  --ilm-page-bg:#f4efe4;
+  --ilm-header-bg:#fbf7ef;
+  --ilm-composer-bg:#fffdf8;
+  --ilm-primary-text:#2b241d;
+  --ilm-secondary-text:#5a5146;
+  --ilm-accent:#9a7a3e;
+}
+html[data-theme="royal"] body.is-ilm-chat-route{
+  --ilm-page-bg:#061526;
+  --ilm-header-bg:#0a1b30;
+  --ilm-composer-bg:#102a46;
+}
+html[data-theme="bordeaux"] body.is-ilm-chat-route{
+  --ilm-page-bg:#140b0c;
+  --ilm-header-bg:#211013;
+  --ilm-composer-bg:#2a1418;
+}
+html[data-theme="dar-al-layl"] body.is-ilm-chat-route{
+  --ilm-page-bg:#07140f;
+  --ilm-header-bg:#0c1c16;
+  --ilm-composer-bg:#10221a;
+}
+
+body.is-ilm-chat-route .ilm-chat-shell{
+  background:
+    radial-gradient(circle at 50% -8%,color-mix(in srgb,var(--ilm-accent) 10%,transparent),transparent 36%),
+    linear-gradient(180deg,color-mix(in srgb,#052018 35%,var(--ilm-page-bg)),var(--ilm-page-bg))!important;
+}
+body.is-ilm-chat-route .ilm-chat-header{
+  border-radius:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  border-bottom:1px solid var(--ilm-line)!important;
+  background:var(--ilm-header-bg)!important;
+}
+body.is-ilm-chat-route .ilm-header-title b{
+  font-family:var(--ilm-serif);
+  font-weight:650;
+  letter-spacing:.02em;
+}
+body.is-ilm-chat-route .ilm-icon-btn{
+  border-radius:10px!important;
+  box-shadow:none!important;
+  background:transparent!important;
+}
+body.is-ilm-chat-route .ilm-user-bubble{
+  border-radius:12px 12px 4px 12px!important;
+  box-shadow:none!important;
+  font-size:14.5px!important;
+  padding:8px 12px!important;
+  max-width:min(72%,520px)!important;
+  background:color-mix(in srgb,var(--ilm-accent) 10%,transparent)!important;
+}
+body.is-ilm-chat-route .ilm-assistant-message{
+  max-width:min(720px,100%);
+  gap:0;
+  padding:4px 0 18px;
+}
+body.is-ilm-chat-route .ilm-assistant-name{
+  display:none;
+}
+body.is-ilm-chat-route .ilm-answer-text{
+  display:block;
+  font-size:16.5px;
+  line-height:1.72;
+  color:var(--ilm-primary-text);
+}
+body.is-ilm-chat-route .ilm-answer-text p{margin:0 0 12px}
+body.is-ilm-chat-route .ilm-intro{
+  font-size:15.5px;
+  color:var(--ilm-primary-text);
+  margin:0 0 16px;
+}
+body.is-ilm-chat-route .ilm-em{
+  font-family:var(--ilm-serif);
+  font-style:italic;
+  font-weight:600;
+  color:var(--ilm-accent);
+}
+body.is-ilm-chat-route .ilm-evidence{
+  margin:18px 0 0;
+  padding:16px 0 4px;
+  border-top:1px solid var(--ilm-line);
+}
+body.is-ilm-chat-route .ilm-evidence-kicker{
+  margin:0 0 8px;
+  font-size:12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--ilm-accent);
+  font-weight:700;
+}
+body.is-ilm-chat-route .ilm-quote{
+  margin:0 0 10px;
+  font-family:var(--ilm-serif);
+  font-size:20px;
+  line-height:1.45;
+  font-style:italic;
+  color:var(--ilm-primary-text);
+}
+body.is-ilm-chat-route .ilm-cite{
+  margin:0 0 4px;
+  font-size:13.5px;
+  font-weight:700;
+  color:var(--ilm-primary-text);
+}
+body.is-ilm-chat-route .ilm-cite-meta{
+  margin:0 0 10px;
+  font-size:12.5px;
+  color:var(--ilm-secondary-text);
+  line-height:1.45;
+}
+body.is-ilm-chat-route .ilm-open-src{
+  display:inline;
+  border:0;
+  background:none;
+  padding:0;
+  color:var(--ilm-accent);
+  font-size:13.5px;
+  font-weight:650;
+  text-decoration:none;
+  cursor:pointer;
+}
+body.is-ilm-chat-route .ilm-open-src:hover{text-decoration:underline}
+body.is-ilm-chat-route .ilm-summary{
+  margin:22px 0 0;
+  padding-top:16px;
+  border-top:1px solid var(--ilm-line);
+}
+body.is-ilm-chat-route .ilm-summary b{
+  display:block;
+  font-family:var(--ilm-serif);
+  font-size:18px;
+  font-weight:650;
+  margin-bottom:8px;
+}
+body.is-ilm-chat-route .ilm-follow{
+  margin:18px 0 0;
+  display:grid;
+  gap:8px;
+}
+body.is-ilm-chat-route .ilm-follow button{
+  border:0;
+  background:transparent;
+  color:var(--ilm-accent);
+  text-align:left;
+  padding:0;
+  font-size:13.5px;
+  font-weight:650;
+  cursor:pointer;
+}
+body.is-ilm-chat-route .ilm-status-line{
+  margin:0 0 12px;
+  font-size:11.5px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--ilm-secondary-text);
+}
+body.is-ilm-chat-route .ilm-answer-toolbar,
+body.is-ilm-chat-route .ilm-source-cards,
+body.is-ilm-chat-route .ilm-source-card-v2,
+body.is-ilm-chat-route .ilm-clarify-chips,
+body.is-ilm-chat-route .ilm-section-title,
+body.is-ilm-chat-route .ilm-confidence{
+  display:none!important;
+}
+body.is-ilm-chat-route .ilm-follow-inline{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 16px;
+  margin-top:8px;
+}
+body.is-ilm-chat-route .ilm-welcome-card{
+  text-align:left;
+}
+body.is-ilm-chat-route .ilm-welcome h2{
+  font-family:var(--ilm-serif);
+}
+body.is-ilm-chat-route .ilm-starter-chip{
+  border-radius:0!important;
+  border:0!important;
+  border-bottom:1px solid var(--ilm-line)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  min-height:42px;
+  padding:10px 0!important;
+  font-weight:650!important;
+}
+body.is-ilm-chat-route .ilm-composer-inner{
+  border-radius:14px!important;
+  box-shadow:none!important;
+}
+body.is-ilm-chat-route .ilm-send-icon{
+  border-radius:10px!important;
+  box-shadow:none!important;
+}
+body.is-ilm-chat-route .ilm-loading-row{
+  display:grid;
+  gap:4px;
+  font-size:13px;
+  letter-spacing:.04em;
+}
+body.is-ilm-chat-route .ilm-loading-sub{
+  font-size:12px;
+  color:var(--ilm-accent);
+}
+body.is-ilm-chat-route .ilm-menu-popover{
+  border-radius:12px!important;
+  box-shadow:none!important;
+}
+body.is-ilm-chat-route .ilm-history-drawer{
+  box-shadow:none!important;
+}
+body.is-ilm-chat-route .ilm-thread-row-new,
+body.is-ilm-chat-route .ilm-sheet,
+body.is-ilm-chat-route .ilm-source-row{
+  border-radius:0!important;
+}

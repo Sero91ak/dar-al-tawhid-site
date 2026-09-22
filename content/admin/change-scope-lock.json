@@ -108,6 +108,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "ilm-research-chat-test-only-2026-09-22",
+      "approvedBy": "user-explicit-ilm-bereich-komplett-neu-nur-test-app",
+      "reason": "Nutzer: ʿIlm-Bereich der Test-App grundlegend als islamischer Recherche-Chat neu aufbauen. Live-App nicht ersetzen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/ilm-research-chat.js",
+        "test/assets/ilm-research-chat.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-player-volume-ayah-picker-2026-09-22",
       "approvedBy": "user-explicit-laut-leise-balken-ayah-auswahl-wie-surah-live-global",
       "reason": "Nutzer: Laut/Leise-Balken funktioniert nicht; Āyah-Auswahl fehlt analog zur Sūrah-Auswahl. Sofort einbauen, edel, live global.",
