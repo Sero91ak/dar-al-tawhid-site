@@ -99,6 +99,7 @@ import {
   LIBRARY_PUSH_DELAY_AFTER_LIVE_MS
 } from "./library-push-admin.js";
 import { sendNewPostPush } from "./post-push-admin.js";
+import { handleIlmResearch } from "./ilm-research.js";
 
 const DEFAULT_OWNER = "Sero91ak";
 const DEFAULT_REPO = "dar-al-tawhid-site";
@@ -125,6 +126,11 @@ const LIVE_CHECK_SCHEDULE_CRON_MS = [0, 5000, 15000, 30000, 60000, 120000];
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+
+    if (url.pathname === "/api/ilm/research") {
+      return handleIlmResearch(request);
+    }
+
     const cors = corsHeaders(request, env);
 
     if (request.method === "OPTIONS") {

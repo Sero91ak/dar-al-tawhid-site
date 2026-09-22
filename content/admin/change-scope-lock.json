@@ -117,7 +117,10 @@
         "test/version.json",
         "test/service-worker.js",
         "test/assets/ilm-research-chat.js",
-        "test/assets/ilm-research-chat.css"
+        "test/assets/ilm-research-chat.css",
+        "cloudflare/worker.js",
+        "cloudflare/ilm-research.js",
+        ".github/workflows/deploy-admin-publisher.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     },

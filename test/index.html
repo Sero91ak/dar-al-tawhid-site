@@ -12084,7 +12084,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="preload" href="/test/data/prophets/index.json" as="fetch" crossorigin>
 <link rel="stylesheet" href="/test/assets/prophets/prophets.css?v=17">
 <link rel="stylesheet" href="/test/assets/dar-quran-player.css?v=978">
-<link rel="stylesheet" href="/test/assets/ilm-research-chat.css?v=979">
+<link rel="stylesheet" href="/test/assets/ilm-research-chat.css?v=980">
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=791">
 <link rel="stylesheet" href="/test/assets/adaptive-layout.css?v=937">
 <link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=668">
@@ -23261,24 +23261,33 @@ function buildIlmExternalResearchSource(question,serverResults=[]){
 }
 async function fetchIlmExternalResearch(question){
   const q=String(question||"").trim();
-  if(q.length<3)return null;
-  try{
-    const res=await fetch(`${ILM_RESEARCH_WORKER_URL}/api/ilm/research`,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({query:q,limit:6})
-    });
-    if(!res.ok)return null;
-    const data=await res.json();
-    if(!data?.ok||!Array.isArray(data.results))return null;
-    return data.results;
-  }catch(e){
-    console.warn("ʿIlm externe Recherche:",e);
-    return null;
+  if(q.length<3)return [];
+  const urls=[
+    `${ILM_RESEARCH_WORKER_URL}/api/ilm/research`,
+    `${location.origin}/api/ilm/research`
+  ];
+  for(const endpoint of urls){
+    try{
+      const res=await fetch(endpoint,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({query:q,limit:8,allowlist:true})
+      });
+      if(!res.ok){
+        const getRes=await fetch(`${endpoint}?q=${encodeURIComponent(q)}&limit=8`,{method:"GET"});
+        if(!getRes.ok)continue;
+        const getData=await getRes.json();
+        if(getData&&Array.isArray(getData.results))return getData.results;
+        continue;
+      }
+      const data=await res.json();
+      if(data&&Array.isArray(data.results))return data.results;
+    }catch(e){}
   }
+  return [];
 }
 function ilmNeedsExternalResearch(matches){
-  return !Array.isArray(matches)||!matches.length||Number(matches[0]?.score||0)<ILM_MIN_SCORE+1.2;
+  return navigator.onLine !== false;
 }
 function buildIlmFallbackReply(question,matches,externalResults=null){
   if(window.IlmMajlisV2){
@@ -34865,5 +34874,5 @@ html.dar-ios-native-app::after,html.is-standalone-pwa::after{
   window.addEventListener("pageshow",pin);
 })();
 </script>
-<script src="/test/assets/ilm-research-chat.js?v=979"></script>
+<script src="/test/assets/ilm-research-chat.js?v=980"></script>
 </html>

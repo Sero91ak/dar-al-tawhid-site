@@ -112,7 +112,7 @@
   function renderEvidence(ev, idx) {
     if (ev.verification_status === "unverified" && !ev.statement) return "";
     var kicker = ev.speaker
-      ? (ev.speaker + ( /prophet|rasul|ﷺ/i.test(ev.speaker) || ev.speaker_type === "sunnah" ? " ﷺ sagte:" : " sagte:"))
+      ? (ev.speaker + (/prophet|rasul|ﷺ/i.test(ev.speaker) || ev.speaker_type === "sunnah" ? " ﷺ sagte:" : ":"))
       : (idx ? "Ein weiterer Beleg" : "Beleg");
     var open = "";
     if (ev.verification_status === "verified" && (ev.deep_link || ev.route)) {
@@ -145,7 +145,15 @@
       });
     });
     (reply.sources || []).forEach(function (s) {
-      items.push(toEvidence(s, s.origin === "external" ? "external" : "internal"));
+      items.push(toEvidence({
+        speaker: s.author || s.speaker || s.label || "",
+        work: s.work || s.host || "",
+        excerpt: s.excerpt || s.snippet || "",
+        sourceTag: s.note || "",
+        url: s.url || s.markedUrl || s.finalUrl || "",
+        markedUrl: s.markedUrl,
+        finalUrl: s.finalUrl
+      }, s.origin === "external" ? "external" : "internal"));
     });
     var seen = {};
     var unique = [];
@@ -288,7 +296,10 @@
     }
 
     if (typeof window.ilmNeedsExternalResearch === "function") {
-      window.ilmNeedsExternalResearch = function () { return !!navigator.onLine; };
+      window.ilmNeedsExternalResearch = function () { return navigator.onLine !== false; };
+    }
+    if (typeof window.fetchIlmExternalResearch === "function") {
+      window.fetchIlmExternalResearch = window.fetchIlmExternalResearch;
     }
 
     if (typeof window.buildIlmAssistantReply === "function") {

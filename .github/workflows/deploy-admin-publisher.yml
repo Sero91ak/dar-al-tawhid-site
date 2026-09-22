@@ -8,6 +8,7 @@ on:
     paths:
       - cloudflare/quiz-stats-admin.js
       - cloudflare/worker.js
+      - cloudflare/ilm-research.js
       - cloudflare/wrangler.toml
       - cloudflare/prayer-push-*.js
       - cloudflare/prayer-status-store.js
