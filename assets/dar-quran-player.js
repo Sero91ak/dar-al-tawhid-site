@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 949;
+    var PLAYER_BUILD = 950;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -1630,6 +1630,10 @@
     paintMini();
   }
   var posTick = 0;
+  var lastMediaMetaKey = "";
+  var lastNowPlayingKey = "";
+  var lastNowPlayingAt = 0;
+  var mediaHandlersBound = false;
   function isTestShell() {
     try {
       var p = String(location.pathname || "");
@@ -1679,57 +1683,20 @@
       });
     } catch (eNp) {}
   }
-  function syncMediaPosition() {
-    try {
-      if (!navigator.mediaSession || !state.sessionActive) return;
-      var d = Number(state.duration) || 0;
-      var t = Number(state.current) || 0;
-      if (d > 0 && typeof navigator.mediaSession.setPositionState === "function") {
-        navigator.mediaSession.setPositionState({
-          duration: d,
-          playbackRate: Number(state.learnMode ? state.learnRate : 1) || 1,
-          position: Math.max(0, Math.min(d, t))
-        });
-      }
-      postNowPlaying(false);
-    } catch (ePos) {}
+  function mediaIdentityKey() {
+    return [
+      state.sessionActive ? "1" : "0",
+      state.playing ? "1" : "0",
+      state.surah,
+      state.ayah,
+      state.reciter,
+      nowPlayingArtworkUrl()
+    ].join("|");
   }
-  function syncMediaSession() {
-    if (!state.playing && !state.sessionActive) {
-      if (navigator.mediaSession) {
-        try {
-          navigator.mediaSession.playbackState = "none";
-          try { navigator.mediaSession.metadata = null; } catch (e1) {}
-          ["play", "pause", "stop", "previoustrack", "nexttrack", "seekbackward", "seekforward", "seekto"].forEach(function (act) {
-            try { navigator.mediaSession.setActionHandler(act, null); } catch (e2) {}
-          });
-        } catch (eMs) {}
-      }
-      postNowPlaying(true);
-      return;
-    }
-    if (!navigator.mediaSession) {
-      postNowPlaying(!state.sessionActive);
-      return;
-    }
+  function bindMediaHandlersOnce() {
+    if (mediaHandlersBound || !navigator.mediaSession) return;
+    mediaHandlersBound = true;
     try {
-      if (!state.sessionActive) {
-        navigator.mediaSession.playbackState = "none";
-        try { navigator.mediaSession.metadata = null; } catch (e1) {}
-        ["play", "pause", "stop", "previoustrack", "nexttrack", "seekbackward", "seekforward", "seekto"].forEach(function (act) {
-          try { navigator.mediaSession.setActionHandler(act, null); } catch (e2) {}
-        });
-        postNowPlaying(true);
-        return;
-      }
-      var m = meta || surahMeta(state.surah) || {};
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: (m.transliteration || "Qurʾān") + " · Āyah " + state.ayah,
-        artist: reciterById(state.reciter).name,
-        album: "DĀR AL TAWḤĪD",
-        artwork: nowPlayingArtwork()
-      });
-      navigator.mediaSession.playbackState = state.playing ? "playing" : "paused";
       navigator.mediaSession.setActionHandler("play", function () { togglePlay(true); });
       navigator.mediaSession.setActionHandler("pause", function () { audioEl().pause(); });
       navigator.mediaSession.setActionHandler("previoustrack", function () { prevAyah(); });
@@ -1744,6 +1711,66 @@
           if (typeof det.seekTime === "number") a.currentTime = det.seekTime;
         });
       } catch (eSeek) {}
+    } catch (eBind) {}
+  }
+  function syncMediaPosition() {
+    try {
+      if (!navigator.mediaSession || !state.sessionActive) return;
+      var d = Number(state.duration) || 0;
+      var t = Number(state.current) || 0;
+      if (d > 0 && typeof navigator.mediaSession.setPositionState === "function") {
+        navigator.mediaSession.setPositionState({
+          duration: d,
+          playbackRate: Number(state.learnMode ? state.learnRate : 1) || 1,
+          position: Math.max(0, Math.min(d, t))
+        });
+      }
+      var key = mediaIdentityKey();
+      var now = Date.now();
+      if (key !== lastNowPlayingKey || now - lastNowPlayingAt > 4000) {
+        lastNowPlayingKey = key;
+        lastNowPlayingAt = now;
+        postNowPlaying(false);
+      }
+    } catch (ePos) {}
+  }
+  function syncMediaSession() {
+    if (!state.playing && !state.sessionActive) {
+      lastMediaMetaKey = "";
+      lastNowPlayingKey = "";
+      if (navigator.mediaSession) {
+        try {
+          navigator.mediaSession.playbackState = "none";
+        } catch (eMs) {}
+      }
+      postNowPlaying(true);
+      return;
+    }
+    if (!navigator.mediaSession) {
+      postNowPlaying(!state.sessionActive);
+      return;
+    }
+    try {
+      if (!state.sessionActive) {
+        lastMediaMetaKey = "";
+        lastNowPlayingKey = "";
+        navigator.mediaSession.playbackState = "none";
+        postNowPlaying(true);
+        return;
+      }
+      var m = meta || surahMeta(state.surah) || {};
+      var key = mediaIdentityKey();
+      if (key !== lastMediaMetaKey) {
+        lastMediaMetaKey = key;
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: (m.transliteration || "Qurʾān") + " · Āyah " + state.ayah,
+          artist: reciterById(state.reciter).name,
+          album: "DĀR AL TAWḤĪD",
+          artwork: nowPlayingArtwork()
+        });
+      }
+      navigator.mediaSession.playbackState = state.playing ? "playing" : "paused";
+      bindMediaHandlersOnce();
       syncMediaPosition();
     } catch (e) {}
   }

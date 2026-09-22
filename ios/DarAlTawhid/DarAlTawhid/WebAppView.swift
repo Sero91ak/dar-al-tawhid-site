@@ -973,15 +973,14 @@ struct WebAppView: UIViewRepresentable {
             }
             installRemoteCommandsIfNeeded()
             UIApplication.shared.beginReceivingRemoteControlEvents()
-            var info: [String: Any] = [
-                MPMediaItemPropertyTitle: body["title"] as? String ?? "Qurʾān",
-                MPMediaItemPropertyArtist: body["artist"] as? String ?? "",
-                MPMediaItemPropertyAlbumTitle: body["album"] as? String ?? "DĀR AL TAWḤĪD",
-                MPNowPlayingInfoPropertyElapsedPlaybackTime: (body["elapsed"] as? NSNumber)?.doubleValue ?? 0,
-                MPMediaItemPropertyPlaybackDuration: (body["duration"] as? NSNumber)?.doubleValue ?? 0,
-                MPNowPlayingInfoPropertyPlaybackRate: (body["playing"] as? Bool == true) ? 1.0 : 0.0
-            ]
-            if let img = nowPlayingArt {
+            var info = MPNowPlayingInfoCenter.default().nowPlayingInfo ?? [:]
+            info[MPMediaItemPropertyTitle] = body["title"] as? String ?? "Qurʾān"
+            info[MPMediaItemPropertyArtist] = body["artist"] as? String ?? ""
+            info[MPMediaItemPropertyAlbumTitle] = body["album"] as? String ?? "DĀR AL TAWḤĪD"
+            info[MPNowPlayingInfoPropertyElapsedPlaybackTime] = (body["elapsed"] as? NSNumber)?.doubleValue ?? 0
+            info[MPMediaItemPropertyPlaybackDuration] = (body["duration"] as? NSNumber)?.doubleValue ?? 0
+            info[MPNowPlayingInfoPropertyPlaybackRate] = (body["playing"] as? Bool == true) ? 1.0 : 0.0
+            if info[MPMediaItemPropertyArtwork] == nil, let img = nowPlayingArt {
                 info[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: img.size) { _ in img }
             }
             MPNowPlayingInfoCenter.default().nowPlayingInfo = info
