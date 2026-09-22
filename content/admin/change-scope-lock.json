@@ -108,6 +108,25 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-player-sound-and-compact-options-2026-09-22",
+      "approvedBy": "user-explicit-quran-player-kein-ton-menu-ordnung-plus-minus-kapsel-sofort-global",
+      "reason": "Nutzer: Voll-Player ohne Ton (nur Lern-Qurʾān hat Ton); Optionsmenü zu viel Leerraum/Unordnung; Plus/Minus dunkle eckige Kapseln; Arabisch–Tafsīr ein Bereich. Sofort global.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/dar-quran-player.js",
+        "assets/dar-quran-player.css",
+        "test/assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "ramadan-test-app-integration-2026-09-22",
       "approvedBy": "user-explicit-leg-los-ramadan-test-app",
       "reason": "Nutzer: Ramaḍān-30-Tage-Serie jetzt sichtbar ausschließlich in der Test-App aufbauen und testen. Besucher-App und bestehende Push-Spuren bleiben unverändert. Testdateien eingebaut; Deploy dieses Stands freigegeben.",

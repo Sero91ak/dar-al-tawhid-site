@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 952;
+    var PLAYER_BUILD = 953;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -104,62 +104,14 @@
   var allowAdvance = false;
   var engine = { started: false, lastUrl: "" };
 
-  var volCtx = null;
-  var volGain = null;
-  var volSrc = null;
-  var volGraphReady = false;
-  var volArming = false;
-  function armVolGraph() {
-    if (volGraphReady || volArming) {
-      if (volCtx && volCtx.state === "suspended") {
-        try { volCtx.resume(); } catch (eR0) {}
-      }
-      return;
-    }
-    try {
-      var Ctx = window.AudioContext || window.webkitAudioContext;
-      if (!Ctx) return;
-      if (!volCtx) volCtx = new Ctx();
-      volArming = true;
-      var connect = function () {
-        try {
-          if (!volSrc) {
-            volSrc = volCtx.createMediaElementSource(audioEl());
-            volGain = volCtx.createGain();
-            volGain.gain.value = Math.max(0, Math.min(1, Number(state.volume) || 1));
-            volSrc.connect(volGain);
-            volGain.connect(volCtx.destination);
-          }
-          volGraphReady = true;
-        } catch (eC) {}
-        volArming = false;
-        applyVolume(true);
-      };
-      if (volCtx.state === "suspended") {
-        volCtx.resume().then(connect).catch(function () { volArming = false; });
-      } else connect();
-    } catch (eA) {
-      volArming = false;
-    }
-  }
   function applyVolume(fromUi) {
     var v = Math.max(0, Math.min(1, Number(state.volume)));
     if (!isFinite(v)) v = 1;
     state.volume = v;
     var a = audioEl();
-    a.muted = v <= 0.001;
+    a.muted = v === 0;
     a.defaultMuted = false;
     try { a.volume = v; } catch (e) {}
-    if (volGraphReady && volGain) {
-      try {
-        if (volCtx && volCtx.state === "suspended") volCtx.resume();
-        if (volCtx && typeof volGain.gain.setTargetAtTime === "function") {
-          volGain.gain.setTargetAtTime(v, volCtx.currentTime || 0, 0.03);
-        } else volGain.gain.value = v;
-      } catch (eG) {
-        try { volGain.gain.value = v; } catch (eG2) {}
-      }
-    }
     var track = document.querySelector("#darQuranPlayer [data-dqp-vol-track]");
     var fillPct = (v * 100) + "%";
     if (track) track.style.setProperty("--dqp-fill", fillPct);
@@ -188,7 +140,6 @@
     if (!vol || vol.getAttribute("data-dqp-vol-bound") === "1") return;
     vol.setAttribute("data-dqp-vol-bound", "1");
     function onInput() {
-      armVolGraph();
       var n = Number(vol.value) / 100;
       state.volume = isFinite(n) ? Math.max(0, Math.min(1, n)) : 1;
       applyVolume(true);
@@ -196,7 +147,6 @@
     }
     vol.addEventListener("pointerdown", function (e) {
       e.stopPropagation();
-      armVolGraph();
     });
     vol.addEventListener("input", onInput);
     vol.addEventListener("change", onInput);
@@ -207,7 +157,6 @@
         e.preventDefault();
         drag = true;
         try { track.setPointerCapture(e.pointerId); } catch (eCap) {}
-        armVolGraph();
         volumeFromClientX(track, e.clientX);
       });
       track.addEventListener("pointermove", function (e) {
@@ -2359,7 +2308,7 @@
       return;
     }
     if (forcePlay === true || a.paused) {
-      armVolGraph();
+      try { a.muted = false; } catch (eUnmute) {}
       var hold = Number(state.resumeAt || state.current) || 0;
       if (hold > 0.2) {
         try {
@@ -2836,12 +2785,12 @@
   function openMenu() {
     openSheet("Optionen", [
       '<div class="dqp-text-panel">',
-      '<div class="dqp-text-modes">',
-      '<button type="button" class="dqp-opt' + (state.layers.ar ? " is-on" : "") + '" data-dqp-opt="m-layer-ar">Arabisch</button>',
-      '<button type="button" class="dqp-opt' + (state.layers.de ? " is-on" : "") + '" data-dqp-opt="m-layer-de">Deutsch</button>',
-      '<button type="button" class="dqp-opt' + (state.layers.lat ? " is-on" : "") + '" data-dqp-opt="m-layer-lat">Lautschrift</button>',
-      '<button type="button" class="dqp-opt' + (state.layers.tad ? " is-on" : "") + '" data-dqp-opt="m-layer-tad">Tadabbur</button>',
-      '<button type="button" class="dqp-opt' + (state.layers.taf ? " is-on" : "") + '" data-dqp-opt="m-layer-taf">Tafsīr</button>',
+      '<div class="dqp-layer-row" role="group" aria-label="Textlagen">',
+      '<button type="button" class="dqp-layer-chip' + (state.layers.ar ? " is-on" : "") + '" data-dqp-opt="m-layer-ar">Arabisch</button>',
+      '<button type="button" class="dqp-layer-chip' + (state.layers.de ? " is-on" : "") + '" data-dqp-opt="m-layer-de">Deutsch</button>',
+      '<button type="button" class="dqp-layer-chip' + (state.layers.lat ? " is-on" : "") + '" data-dqp-opt="m-layer-lat">Lautschrift</button>',
+      '<button type="button" class="dqp-layer-chip' + (state.layers.tad ? " is-on" : "") + '" data-dqp-opt="m-layer-tad">Tadabbur</button>',
+      '<button type="button" class="dqp-layer-chip' + (state.layers.taf ? " is-on" : "") + '" data-dqp-opt="m-layer-taf">Tafsīr</button>',
       "</div>",
       '<div class="dqp-text-label">Stufe <span data-dqp-scale-n>' + state.textScale + "</span> / 10</div>",
       '<div class="dqp-scale-row">',
@@ -2930,7 +2879,7 @@
         saveState();
         paintChrome();
         paintAyah(false);
-        document.querySelectorAll(".dqp-text-modes button").forEach(function (b) {
+        document.querySelectorAll(".dqp-layer-row button, .dqp-text-modes button").forEach(function (b) {
           var k = String(b.getAttribute("data-dqp-opt") || "").replace("m-layer-", "");
           b.classList.toggle("is-on", !!state.layers[k]);
         });
@@ -3055,7 +3004,6 @@
         return;
       }
       if (ev.target && ev.target.getAttribute("data-dqp") === "vol") {
-        armVolGraph();
         var nv = Number(ev.target.value) / 100;
         state.volume = isFinite(nv) ? Math.max(0, Math.min(1, nv)) : 1;
         applyVolume(true);
