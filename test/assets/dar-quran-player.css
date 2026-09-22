@@ -645,9 +645,20 @@ html.player-learn #darQuranPlayerSlot{
   border-radius:0 0 18px 18px;
 }
 html.player-learn #darQuranMiniPlayer.is-learn,
-#darQuranMiniPlayer.is-learn{
+#darQuranMiniPlayer.is-learn,
+html.dar-ios-native-app #darQuranMiniPlayer.is-on.is-learn,
+html.dar-ios-native-app #darQuranMiniPlayer.is-on.is-reader-dock{
   height:124px;min-height:124px;
   padding:8px 14px 10px;
+}
+html.dar-ios-native-app #darQuranMiniPlayer.is-on.is-learn,
+html.dar-ios-native-app #darQuranMiniPlayer.is-on.is-reader-dock{
+  top:var(--qrc-chrome-h,calc(env(safe-area-inset-top,0px) + 92px));
+  z-index:555;
+  transform:translate3d(0,0,0);
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
 }
 .dqp-learn{
   display:none;
