@@ -10448,10 +10448,10 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/test/assets/fold-split.js?v=937" defer></script>
 <script src="/assets/scholars-index.js?v=587" defer></script>
 <script src="/test/assets/prophets/prophets.js?v=33" defer></script>
-<script src="/test/assets/dar-quran-player.js?v=950" defer></script>
+<script src="/test/assets/dar-quran-player.js?v=951" defer></script>
 <script>
 (function(){
-  var WANT=950;
+  var WANT=951;
   function boot(){
     if(window.__DAR_QURAN_PLAYER_BUILD===WANT&&window.DARQuranPlayer)return;
     var s=document.createElement("script");
@@ -12083,7 +12083,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/scholars-index.css?v=588">
 <link rel="preload" href="/test/data/prophets/index.json" as="fetch" crossorigin>
 <link rel="stylesheet" href="/test/assets/prophets/prophets.css?v=17">
-<link rel="stylesheet" href="/test/assets/dar-quran-player.css?v=976">
+<link rel="stylesheet" href="/test/assets/dar-quran-player.css?v=977">
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=791">
 <link rel="stylesheet" href="/test/assets/adaptive-layout.css?v=937">
 <link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=668">
@@ -34373,6 +34373,17 @@ html[data-theme] #darQuranPlayer .dqp-artist{
 html[data-theme] #darQuranMiniPlayer .dqp-top-ctrl,
 html[data-theme] #darQuranPlayer button{
   color:var(--gold2)!important;
+}
+html[data-theme] #darQuranPlayer .dqp-opt,
+html[data-theme] #darQuranPlayer .dqp-text-modes .dqp-opt{
+  color:var(--text)!important;
+  -webkit-text-fill-color:var(--text)!important;
+}
+html[data-theme] #darQuranPlayer .dqp-opt.is-on,
+html[data-theme] #darQuranPlayer .dqp-text-modes .dqp-opt.is-on,
+html[data-theme] #darQuranPlayer .dqp-sleep-live{
+  color:var(--gold2)!important;
+  -webkit-text-fill-color:var(--gold2)!important;
 }
 html[data-theme] #darQuranMiniPlayer .dqp-learn-btn{
   color:color-mix(in srgb,var(--text) 58%,var(--muted) 42%)!important;

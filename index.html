@@ -10494,7 +10494,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/premium-feed-app.js?v=101" defer></script>
 <script src="/assets/dar-setup-hub.js?v=5" defer></script><!-- DAR_SETUP_HUB_V1 -->
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
-<script src="/assets/dar-quran-player.js?v=950" defer></script>
+<script src="/assets/dar-quran-player.js?v=951" defer></script>
 <script src="/assets/adaptive-layout.js?v=7" defer></script>
 <script src="/assets/fold-split.js?v=3" defer></script>
 <script src="/assets/scholars-index.js?v=587" defer></script>
@@ -12109,7 +12109,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 }
 </style>
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=587">
-<link rel="stylesheet" href="/assets/dar-quran-player.css?v=873">
+<link rel="stylesheet" href="/assets/dar-quran-player.css?v=874">
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=8">
 <link rel="stylesheet" href="/assets/books-library.css?v=2">
 <link rel="stylesheet" href="/assets/prophets/prophets.css?v=16">
@@ -34199,6 +34199,17 @@ html[data-theme] #darQuranPlayer .dqp-artist{
 html[data-theme] #darQuranMiniPlayer .dqp-top-ctrl,
 html[data-theme] #darQuranPlayer button{
   color:var(--gold2)!important;
+}
+html[data-theme] #darQuranPlayer .dqp-opt,
+html[data-theme] #darQuranPlayer .dqp-text-modes .dqp-opt{
+  color:var(--text)!important;
+  -webkit-text-fill-color:var(--text)!important;
+}
+html[data-theme] #darQuranPlayer .dqp-opt.is-on,
+html[data-theme] #darQuranPlayer .dqp-text-modes .dqp-opt.is-on,
+html[data-theme] #darQuranPlayer .dqp-sleep-live{
+  color:var(--gold2)!important;
+  -webkit-text-fill-color:var(--gold2)!important;
 }
 html[data-theme] #darQuranMiniPlayer .dqp-learn-btn{
   color:color-mix(in srgb,var(--text) 58%,var(--muted) 42%)!important;
