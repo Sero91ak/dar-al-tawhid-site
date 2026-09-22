@@ -83,19 +83,20 @@
 
   function cssText() {
     return [
-      "html.ios-visitor-blocked,html.ios-visitor-blocked body{overflow:hidden!important;height:100%!important;background:#f7f0df!important}",
+      "html.ios-visitor-blocked,html.ios-visitor-blocked body{position:fixed!important;inset:0!important;overflow:hidden!important;overscroll-behavior:none!important;touch-action:none!important;height:100%!important;height:100dvh!important;width:100%!important;max-width:100%!important;background:#f7f0df!important}",
       "html.ios-visitor-blocked #appView,html.ios-visitor-blocked #bottomNav,html.ios-visitor-blocked .app,html.ios-visitor-blocked .footer,html.ios-visitor-blocked #darQuranMiniPlayer,html.ios-visitor-blocked #dar-soft-boot,html.ios-visitor-blocked .top-shell,html.ios-visitor-blocked .float-actions,html.ios-visitor-blocked .home-discover,html.ios-visitor-blocked .home-v380{display:none!important;visibility:hidden!important;pointer-events:none!important}",
-      "#iosVisitorBlock{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:max(22px,env(safe-area-inset-top,0px)) 18px max(22px,env(safe-area-inset-bottom,0px));box-sizing:border-box;background:radial-gradient(120% 80% at 50% 8%,rgba(239,215,142,.28),transparent 46%),linear-gradient(180deg,#fffaf0 0%,#f7f0df 42%,#ead9b4 100%);font-family:Manrope,Inter,system-ui,-apple-system,sans-serif;color:#2a2218}",
-      "#iosVisitorBlock .ios-visitor-block-card{width:min(440px,100%);max-height:100%;overflow:auto;-webkit-overflow-scrolling:touch;padding:28px 22px 22px;border-radius:28px;background:linear-gradient(165deg,#fffdf7,#f4e8cc);border:1px solid rgba(155,122,60,.32);box-shadow:0 24px 48px rgba(90,62,20,.14),inset 0 1px 0 rgba(255,255,255,.86);text-align:center}",
-      "#iosVisitorBlock .ios-visitor-goldline{height:1px;margin:0 auto 16px;width:72px;background:linear-gradient(90deg,transparent,#c9a86a,transparent)}",
-      "#iosVisitorBlock .ios-visitor-brand{font-family:'Cormorant Garamond',Georgia,serif;letter-spacing:.16em;font-size:12px;font-weight:800;color:#8a6530;text-transform:uppercase;margin:0 0 10px}",
-      "#iosVisitorBlock h1{margin:0 0 16px;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(24px,6.4vw,32px);line-height:1.2;font-weight:700;color:#3d2a12}",
-      "#iosVisitorBlock .bismillah{margin:0 0 14px;font-size:22px;color:#6d4e24;direction:rtl}",
-      "#iosVisitorBlock p{margin:0 0 12px;font-size:15.5px;line-height:1.55;color:#3e2b17}",
-      "#iosVisitorBlock .dua{color:#5c4e3c;font-style:italic}",
-      "#iosVisitorBlock .app-store-button{display:flex;align-items:center;justify-content:center;gap:10px;margin:18px 0 12px;min-height:52px;padding:12px 16px;border-radius:16px;background:linear-gradient(180deg,#c9a86a,#9b7334);color:#fffaf0!important;text-decoration:none;font-weight:800;font-size:16px;box-shadow:0 10px 22px rgba(120,90,40,.22);-webkit-tap-highlight-color:transparent}",
+      "#iosVisitorBlock{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) 18px max(16px,env(safe-area-inset-bottom,0px));box-sizing:border-box;width:100%;height:100%;height:100dvh;overflow:hidden;overscroll-behavior:none;touch-action:none;-webkit-overflow-scrolling:auto;background:radial-gradient(120% 80% at 50% 8%,rgba(239,215,142,.28),transparent 46%),linear-gradient(180deg,#fffaf0 0%,#f7f0df 42%,#ead9b4 100%);font-family:Manrope,Inter,system-ui,-apple-system,sans-serif;color:#2a2218}",
+      "#iosVisitorBlock .ios-visitor-block-card{width:min(400px,100%);max-height:100%;overflow:hidden;overscroll-behavior:none;touch-action:none;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px 20px 18px;border-radius:28px;background:linear-gradient(165deg,#fffdf7,#f4e8cc);border:1px solid rgba(155,122,60,.32);box-shadow:0 24px 48px rgba(90,62,20,.14),inset 0 1px 0 rgba(255,255,255,.86);text-align:center;box-sizing:border-box}",
+      "#iosVisitorBlock .ios-visitor-goldline{height:1px;margin:0 auto 12px;width:64px;background:linear-gradient(90deg,transparent,#c9a86a,transparent);flex:0 0 auto}",
+      "#iosVisitorBlock .ios-visitor-brand{font-family:'Cormorant Garamond',Georgia,serif;letter-spacing:.18em;font-size:11px;font-weight:800;color:#8a6530;text-transform:uppercase;margin:0 0 8px;flex:0 0 auto}",
+      "#iosVisitorBlock h1{margin:0 0 12px;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(22px,6vw,28px);line-height:1.18;font-weight:700;color:#8a6530;max-width:100%;overflow:hidden}",
+      "#iosVisitorBlock h1 span{display:block}",
+      "#iosVisitorBlock .bismillah{margin:0 0 10px;font-size:20px;color:#6d4e24;direction:rtl}",
+      "#iosVisitorBlock p{margin:0 0 8px;font-size:14.5px;line-height:1.45;color:#3e2b17}",
+      "#iosVisitorBlock .dua{color:#5c4e3c;font-style:italic;font-size:13.5px;margin-bottom:4px}",
+      "#iosVisitorBlock .app-store-button{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0 8px;width:100%;min-height:50px;padding:12px 16px;border-radius:16px;background:linear-gradient(180deg,#c9a86a,#9b7334);color:#fffaf0!important;text-decoration:none;font-weight:800;font-size:15.5px;box-shadow:0 10px 22px rgba(120,90,40,.22);-webkit-tap-highlight-color:transparent;touch-action:manipulation;flex:0 0 auto}",
       "#iosVisitorBlock .app-store-button svg{width:18px;height:18px;flex:0 0 auto}",
-      "#iosVisitorBlock .android-note{margin:8px 0 0;font-size:12.5px;color:#7a6a54}"
+      "#iosVisitorBlock .android-note{margin:4px 0 0;font-size:12px;color:#7a6a54}"
     ].join("");
   }
 
@@ -104,7 +105,7 @@
       '<div class="ios-visitor-block-card" role="dialog" aria-modal="true" aria-labelledby="iosVisitorBlockTitle">' +
         '<div class="ios-visitor-brand">DĀR AL TAWḤĪD</div>' +
         '<div class="ios-visitor-goldline" aria-hidden="true"></div>' +
-        '<h1 id="iosVisitorBlockTitle">DĀR AL TAWḤĪD ist jetzt offiziell im App Store</h1>' +
+        '<h1 id="iosVisitorBlockTitle"><span>DĀR AL TAWḤĪD ist jetzt</span><span>offiziell im App Store</span></h1>' +
         '<p class="bismillah">بِسْمِ اللهِ</p>' +
         '<p>Diese installierte Besucher-App auf iOS wird nicht mehr unterstützt.</p>' +
         '<p>Damit du DĀR AL TAWḤĪD weiterhin stabil, sicher und vollständig nutzen kannst, lade bitte die offizielle iOS-App aus dem App Store herunter.</p>' +
@@ -135,14 +136,17 @@
     if (!document.getElementById("iosVisitorBlockStyle")) {
       var st = document.createElement("style");
       st.id = "iosVisitorBlockStyle";
-      st.textContent = cssText();
       (document.head || document.documentElement).appendChild(st);
     }
+    document.getElementById("iosVisitorBlockStyle").textContent = cssText();
     var el = document.getElementById("iosVisitorBlock");
     if (!el) {
       el = document.createElement("div");
       el.id = "iosVisitorBlock";
       el.setAttribute("data-ios-visitor-block", "1");
+    }
+    if (el.getAttribute("data-lock-version") !== "836") {
+      el.setAttribute("data-lock-version", "836");
       el.innerHTML = htmlText();
       var btn = el.querySelector("a.app-store-button");
       if (btn) {
@@ -160,6 +164,15 @@
       document.documentElement.appendChild(el);
     }
     stopPlayers();
+    lockScroll();
+  }
+
+  function lockScroll() {
+    try {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    } catch (eSc) {}
   }
 
   function haltNavigation(ev) {
@@ -185,6 +198,18 @@
     });
     document.addEventListener("click", haltNavigation, true);
     document.addEventListener("submit", haltNavigation, true);
+    ["touchmove", "wheel", "scroll"].forEach(function (ev) {
+      window.addEventListener(ev, function (e) {
+        var t = e && e.target;
+        if (t && t.closest && t.closest("a.app-store-button")) return;
+        if (e.cancelable && typeof e.preventDefault === "function") e.preventDefault();
+        if (typeof e.stopPropagation === "function") e.stopPropagation();
+        lockScroll();
+      }, { capture: true, passive: false });
+    });
+    document.addEventListener("gesturestart", function (e) {
+      if (e.cancelable) e.preventDefault();
+    }, { capture: true, passive: false });
     try {
       if (window.MutationObserver) {
         var obs = new MutationObserver(function () {
