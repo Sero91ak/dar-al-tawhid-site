@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 936;
+  var PLAYER_BUILD = 937;
   /* LEARN_PLAYER_ONLY: Āyah-Buttons + Mini-Lernleiste, kein Voll-Player.
      Offizielle iOS-App bekommt den kompletten Player inkl. Vollansicht. */
   function isOfficialIosApp() {
@@ -1428,11 +1428,17 @@
       return false;
     }
   }
-  function nowPlayingArtwork() {
+  function nowPlayingArtworkUrl() {
     var origin = "";
     try { origin = String(location.origin || ""); } catch (eArt) {}
-    var src = origin + (isTestShell() ? "/test-app-icon-512.png" : "/app-icon-512.png");
-    return [{ src: src, sizes: "512x512", type: "image/png" }];
+    return origin + "/quran-player-artwork-512.png";
+  }
+  function nowPlayingArtwork() {
+    var src = nowPlayingArtworkUrl();
+    return [
+      { src: src, sizes: "512x512", type: "image/png" },
+      { src: src + "?v=937", sizes: "512x512", type: "image/png" }
+    ];
   }
   function nowPlayingRoute() {
     return "quran-surah/" + state.surah + "/" + state.ayah;
@@ -1441,7 +1447,7 @@
     try {
       var h = window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.darQuranNowPlaying;
       if (!h) return;
-      if (clear || LEARN_PLAYER_ONLY || !showLearningPlayer()) {
+      if (clear || (!state.playing && !state.sessionActive)) {
         h.postMessage({ clear: true });
         return;
       }
@@ -1458,6 +1464,7 @@
         qari: state.reciter,
         sourceApp: isTestShell() ? "dar-test" : "dar-live",
         targetRoute: nowPlayingRoute(),
+        artwork: nowPlayingArtworkUrl(),
         inPlayer: true
       });
     } catch (eNp) {}
@@ -1478,7 +1485,7 @@
     } catch (ePos) {}
   }
   function syncMediaSession() {
-    if (LEARN_PLAYER_ONLY || !showLearningPlayer()) {
+    if (!state.playing && !state.sessionActive) {
       if (navigator.mediaSession) {
         try {
           navigator.mediaSession.playbackState = "none";

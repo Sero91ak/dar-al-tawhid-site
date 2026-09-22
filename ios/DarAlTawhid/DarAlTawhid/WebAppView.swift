@@ -2,6 +2,7 @@ import SwiftUI
 import UIKit
 import WebKit
 import PDFKit
+import MediaPlayer
 
 final class InsetAwareWebView: WKWebView {
     var onInsetsChange: (() -> Void)?
@@ -71,6 +72,7 @@ struct WebAppView: UIViewRepresentable {
         userContentController.add(context.coordinator, name: "darPushReactivate")
         userContentController.add(context.coordinator, name: "darPushExternalId")
         userContentController.add(context.coordinator, name: "darAppIcon")
+        userContentController.add(context.coordinator, name: "darQuranNowPlaying")
         let deviceId = DarPushNotifications.deviceId()
         let escapedDevice = deviceId
             .replacingOccurrences(of: "\\", with: "\\\\")
@@ -722,6 +724,9 @@ struct WebAppView: UIViewRepresentable {
         private var lastLoadedPushURL: URL?
         var lastOpenNonce: UUID?
         private var pendingRoute: DarDeepLink.Destination?
+        private var nowPlayingArt: UIImage?
+        private var nowPlayingArtURL: String = ""
+        private var remoteCommandsReady = false
         private let errorHTML = """
         <!doctype html>
         <html lang="de">
@@ -791,6 +796,7 @@ struct WebAppView: UIViewRepresentable {
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushReactivate")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushExternalId")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darAppIcon")
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darQuranNowPlaying")
             NotificationCenter.default.removeObserver(self)
         }
 
@@ -932,6 +938,70 @@ struct WebAppView: UIViewRepresentable {
             DarWidgetStore.save(DarDailyContent.refresh(snap))
         }
 
+        private func applyQuranNowPlaying(_ body: [String: Any]) {
+            if (body["clear"] as? Bool) == true {
+                MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
+                return
+            }
+            installRemoteCommandsIfNeeded()
+            UIApplication.shared.beginReceivingRemoteControlEvents()
+            var info: [String: Any] = [
+                MPMediaItemPropertyTitle: body["title"] as? String ?? "Qurʾān",
+                MPMediaItemPropertyArtist: body["artist"] as? String ?? "",
+                MPMediaItemPropertyAlbumTitle: body["album"] as? String ?? "DĀR AL TAWḤĪD",
+                MPNowPlayingInfoPropertyElapsedPlaybackTime: (body["elapsed"] as? NSNumber)?.doubleValue ?? 0,
+                MPMediaItemPropertyPlaybackDuration: (body["duration"] as? NSNumber)?.doubleValue ?? 0,
+                MPNowPlayingInfoPropertyPlaybackRate: (body["playing"] as? Bool == true) ? 1.0 : 0.0
+            ]
+            if let img = nowPlayingArt {
+                info[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: img.size) { _ in img }
+            }
+            MPNowPlayingInfoCenter.default().nowPlayingInfo = info
+            let art = body["artwork"] as? String ?? "https://dar-al-tawhid.de/quran-player-artwork-512.png"
+            if nowPlayingArtURL != art, let url = URL(string: art) {
+                nowPlayingArtURL = art
+                URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
+                    guard let self, let data, let img = UIImage(data: data) else { return }
+                    DispatchQueue.main.async {
+                        self.nowPlayingArt = img
+                        var next = MPNowPlayingInfoCenter.default().nowPlayingInfo ?? info
+                        next[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: img.size) { _ in img }
+                        MPNowPlayingInfoCenter.default().nowPlayingInfo = next
+                    }
+                }.resume()
+            }
+        }
+
+        private func installRemoteCommandsIfNeeded() {
+            guard !remoteCommandsReady else { return }
+            remoteCommandsReady = true
+            let center = MPRemoteCommandCenter.shared()
+            center.playCommand.isEnabled = true
+            center.pauseCommand.isEnabled = true
+            center.nextTrackCommand.isEnabled = true
+            center.previousTrackCommand.isEnabled = true
+            center.playCommand.addTarget { [weak self] _ in
+                self?.evalPlayerJS("try{var a=document.getElementById('darQuranPlayerAudio');if(a)a.play()}catch(e){}")
+                return .success
+            }
+            center.pauseCommand.addTarget { [weak self] _ in
+                self?.evalPlayerJS("try{var a=document.getElementById('darQuranPlayerAudio');if(a)a.pause()}catch(e){}")
+                return .success
+            }
+            center.nextTrackCommand.addTarget { [weak self] _ in
+                self?.evalPlayerJS("try{if(window.DARQuranPlayer&&DARQuranPlayer.next)DARQuranPlayer.next()}catch(e){}")
+                return .success
+            }
+            center.previousTrackCommand.addTarget { [weak self] _ in
+                self?.evalPlayerJS("try{if(window.DARQuranPlayer&&DARQuranPlayer.prev)DARQuranPlayer.prev()}catch(e){}")
+                return .success
+            }
+        }
+
+        private func evalPlayerJS(_ js: String) {
+            webView?.evaluateJavaScript(js, completionHandler: nil)
+        }
+
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
             if message.name == "darPushTest" {
                 let body = message.body as? [String: Any] ?? [:]
@@ -960,6 +1030,10 @@ struct WebAppView: UIViewRepresentable {
                 let name = body["name"] as? String ?? ""
                 let id = body["id"] as? String ?? ""
                 DarAppIcons.set(name.isEmpty ? id : name)
+                return
+            }
+            if message.name == "darQuranNowPlaying" {
+                applyQuranNowPlaying(message.body as? [String: Any] ?? [:])
                 return
             }
             if message.name == "darHaptic" {

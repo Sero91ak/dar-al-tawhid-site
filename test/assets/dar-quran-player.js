@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 928;
+  var PLAYER_BUILD = 929;
   if (window.__DAR_QURAN_PLAYER_BUILD === PLAYER_BUILD && window.DARQuranPlayer) return;
   try {
     var staleAudio = document.getElementById("darQuranPlayerAudio");
@@ -1362,11 +1362,17 @@
       return false;
     }
   }
-  function nowPlayingArtwork() {
+  function nowPlayingArtworkUrl() {
     var origin = "";
     try { origin = String(location.origin || ""); } catch (eArt) {}
-    var src = origin + (isTestShell() ? "/test-app-icon-512.png" : "/app-icon-512.png");
-    return [{ src: src, sizes: "512x512", type: "image/png" }];
+    return origin + "/quran-player-artwork-512.png";
+  }
+  function nowPlayingArtwork() {
+    var src = nowPlayingArtworkUrl();
+    return [
+      { src: src, sizes: "512x512", type: "image/png" },
+      { src: src + "?v=929", sizes: "512x512", type: "image/png" }
+    ];
   }
   function nowPlayingRoute() {
     return "quran-surah/" + state.surah + "/" + state.ayah;
@@ -1392,6 +1398,7 @@
         qari: state.reciter,
         sourceApp: isTestShell() ? "dar-test" : "dar-live",
         targetRoute: nowPlayingRoute(),
+        artwork: nowPlayingArtworkUrl(),
         inPlayer: true
       });
     } catch (eNp) {}
