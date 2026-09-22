@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 946;
+    var PLAYER_BUILD = 947;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -131,6 +131,8 @@
     var track = document.querySelector("#darQuranPlayer [data-dqp-vol-track]");
     var fillPct = (v * 100) + "%";
     if (track) track.style.setProperty("--dqp-fill", fillPct);
+    var vfill = document.querySelector("#darQuranPlayer .dqp-volume .dqp-fill");
+    if (vfill) vfill.style.transform = "scaleX(" + Math.max(0, Math.min(1, v)).toFixed(4) + ")";
     var vol = document.querySelector("#darQuranPlayer [data-dqp=vol]");
     if (vol) {
       vol.value = String(Math.round(v * 100));
@@ -185,11 +187,14 @@
   }
   function pad(n, w) { return String(n).padStart(w || 3, "0"); }
   function fmt(sec) {
-    sec = Math.max(0, Number(sec) || 0);
-    var whole = Math.floor(sec);
-    var tenth = Math.floor((sec - whole) * 10 + 1e-6);
-    if (tenth > 9) { whole += 1; tenth = 0; }
-    return String(Math.floor(whole / 60)).padStart(2, "0") + ":" + String(whole % 60).padStart(2, "0") + "." + String(tenth);
+    sec = Math.max(0, Math.floor(Number(sec) || 0));
+    var h = Math.floor(sec / 3600);
+    var m = Math.floor((sec % 3600) / 60);
+    var s = sec % 60;
+    var mm = String(m).padStart(2, "0");
+    var ss = String(s).padStart(2, "0");
+    if (h > 0) return String(h).padStart(2, "0") + ":" + mm + ":" + ss;
+    return mm + ":" + ss;
   }
   function audioDuration(a) {
     try {
@@ -1486,7 +1491,7 @@
       dur: mini ? mini.querySelector("[data-dqp-mini-dur]") : null,
       fill: mini ? mini.querySelector(".dqp-top-fill") : null,
       shift: mini ? mini.querySelector(".dqp-top-knob-shift") : null,
-      pfill: root ? root.querySelector(".dqp-fill") : null,
+      pfill: root ? root.querySelector(".dqp-progress .dqp-fill") : null,
       pcur: root ? root.querySelector("[data-dqp-cur]") : null,
       pdur: root ? root.querySelector("[data-dqp-dur]") : null,
       sl: root ? root.querySelector("[data-dqp=seek]") : null,
@@ -1533,12 +1538,12 @@
     if (ui && ui.fill) ui.fill.style.transform = scale;
     if (ui && ui.shift) ui.shift.style.transform = xform;
     if (ui && ui.pfill) ui.pfill.style.transform = scale;
-    var fills = document.querySelectorAll("#darQuranPlayer .dqp-fill, #darQuranMiniPlayer .dqp-top-fill");
+    var fills = document.querySelectorAll("#darQuranPlayer .dqp-progress .dqp-fill, #darQuranMiniPlayer .dqp-top-fill");
     for (var fi = 0; fi < fills.length; fi++) fills[fi].style.transform = scale;
     lastProgPct = pct;
     var curTxt = fmt(t);
-    var durTxt = ready ? fmt(d) : "00:00.0";
-    var remainTxt = ready ? ("-" + fmt(Math.max(0, d - t))) : "00:00.0";
+    var durTxt = ready ? fmt(d) : "00:00";
+    var remainTxt = ready ? ("-" + fmt(Math.max(0, d - t))) : "00:00";
     setAllText("#darQuranMiniPlayer [data-dqp-mini-cur]", curTxt);
     setAllText("#darQuranMiniPlayer [data-dqp-mini-dur]", durTxt);
     setAllText("#darQuranPlayer [data-dqp-cur]", curTxt);
@@ -1586,7 +1591,7 @@
   }
   function stopProgressClock() {
     if (progressClock) cancelAnimationFrame(progressClock);
-    if (progressTimer) clearTimeout(progressTimer);
+    if (progressTimer) clearInterval(progressTimer);
     progressClock = 0;
     progressTimer = 0;
   }
