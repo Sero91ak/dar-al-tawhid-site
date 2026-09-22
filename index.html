@@ -28696,7 +28696,7 @@ window.addEventListener("load",()=>{
       window.__darSwMessageBound=true;
       navigator.serviceWorker.addEventListener("message",(ev)=>{
         const d=ev.data||{};
-        if(d.type==="NAVIGATE_POST"&&d.postId)openPostFromPush(d.postId,d.url);if(d.type==="VISUAL_CACHE_INVALIDATED"){try{if(window.__darAppBootOk||window.__darSoftBootLocked)return;var vk="dar_visual_sw_reload_v588";if(sessionStorage.getItem(vk)!==String(d.version||"")){sessionStorage.setItem(vk,String(d.version||""));location.reload()}}catch(e){}}
+        if(d.type==="NAVIGATE_POST"&&d.postId)openPostFromPush(d.postId,d.url);if(d.type==="VISUAL_CACHE_INVALIDATED"){try{var iosN=/DarAlTawhid-iOS/i.test(String(navigator.userAgent||""))||!!window.DAR_IOS_NATIVE_APP;if(!iosN&&(window.__darAppBootOk||window.__darSoftBootLocked))return;var vk="dar_visual_sw_reload_v848";if(sessionStorage.getItem(vk)!==String(d.version||"")){sessionStorage.setItem(vk,String(d.version||""));location.reload()}}catch(e){}}
       });
     }
     setTimeout(()=>{loadQuranIndex().then(()=>{syncQuranOfflinePrecache();if(["quran","quran-surah"].includes(readRoute().view))render()}).catch(e=>console.warn("Qurʾān-Index:",e))},1500);
