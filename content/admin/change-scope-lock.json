@@ -110,7 +110,7 @@
     {
       "id": "ramadan-series-foundation-2026-09-22",
       "approvedBy": "user-explicit-ramadan-serie-aufbauen-und-testen",
-      "reason": "Nutzer: Ramaḍān-Serie für iOS und Apple TV jetzt technisch aufbauen und in Staging testen; keine Live-Freigabe und keine bestehende Push-Spur verändern.",
+      "reason": "Nutzer: Ramaḍān-Serie in der Test-App sichtbar integrieren und testen; Test-Startseite + bestehender Ramaḍān-Bereich dürfen dafür additiv erweitert werden. Keine Live-App, keine Push-Spur.",
       "paths": [
         "content/admin/change-scope-lock.json",
         "content/ramadan/",
@@ -121,7 +121,8 @@
         "apple-tv/xcode/RamadanSeriesModel.swift",
         "test/ramadan/",
         "test/assets/ramadan-series-test.css",
-        "test/assets/ramadan-series-test.js"
+        "test/assets/ramadan-series-test.js",
+        "test/index.html"
       ],
       "expiresAt": "2026-10-31T22:59:00.000Z"
     },
