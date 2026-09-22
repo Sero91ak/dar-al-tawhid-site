@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1789319677748 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v947";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v948";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -27239,7 +27239,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v947";
+const APP_BUILD_ID="app-shell-v948";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -34405,7 +34405,64 @@ html[data-theme] #darQuranPlayer .dqp-fill{
 })();
 </script>
 <style id="dar-ios-native-oversize-restore-v845">
-/* Gleicher Stand wie App-Store-iOS: kein Test-Glas, Farbe kantenbündig, Lernleiste unter dem Lesekopf. */
+/* Test-App oben wie App-Store-iOS: kein Hero-Glas, keine Blur-Schicht. */
+html[data-theme] .theme-hero-shell,
+html[data-theme] .top-shell.theme-hero-shell,
+html[data-theme] .theme-hero-surface,
+html[data-theme] .top-shell{
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  clip-path:none!important;
+  -webkit-clip-path:none!important;
+  overflow:visible!important;
+  isolation:auto!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  background:var(--dar-edge-fill,var(--page-cover,var(--bg)))!important;
+  background-image:none!important;
+}
+html[data-theme] .theme-hero-shell::before,
+html[data-theme] .theme-hero-shell::after,
+html[data-theme] .top-shell::before,
+html[data-theme] .top-shell::after,
+html[data-theme] .header::before,
+html[data-theme] .header::after,
+html[data-theme] .theme-hero-surface::before,
+html[data-theme] .theme-hero-surface::after{
+  content:none!important;
+  display:none!important;
+  background:none!important;
+  box-shadow:none!important;
+  mix-blend-mode:normal!important;
+  filter:none!important;
+  opacity:0!important;
+}
+html[data-theme] .theme-hero-shell .isnad,
+html[data-theme] .theme-hero-shell .app-bar,
+html[data-theme] .header,
+html[data-theme] .header.theme-hero-surface,
+html[data-theme] .sf-top{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+html[data-theme] .top-swim-aura,
+html[data-theme] #topSwimAura,
+html[data-theme] .top-swim-aura:before,
+html[data-theme] .top-edge-fade,
+html[data-theme] #topEdgeFade{
+  display:none!important;
+  content:none!important;
+  opacity:0!important;
+  height:0!important;
+  filter:none!important;
+  background:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
 html.dar-ios-native-app,
 html.dar-ios-native-app body,
 html.dar-ios-native-app #appRoot,
@@ -34453,6 +34510,16 @@ html.dar-ios-native-app::after{
   height:0!important;
   background:none!important;
 }
+html.dar-ios-native-app .theme-hero-shell::before,
+html.dar-ios-native-app .theme-hero-shell::after,
+html.dar-ios-native-app .top-shell::before,
+html.dar-ios-native-app .top-shell::after{
+  content:none!important;
+  display:none!important;
+  opacity:0!important;
+  background:none!important;
+  mix-blend-mode:normal!important;
+}
 html.dar-ios-native-app .top-edge-fade,
 html.dar-ios-native-app #topEdgeFade{
   display:block!important;
@@ -34462,7 +34529,8 @@ html.dar-ios-native-app #topEdgeFade{
   z-index:0!important;
   pointer-events:none!important;
   filter:none!important;
-  background:linear-gradient(180deg,var(--page-cover,var(--dar-edge-fill,var(--bg))) 0%,var(--page-cover-mid,var(--page-cover,var(--bg))) 100%)!important;
+  background:var(--page-cover,var(--dar-edge-fill,var(--bg)))!important;
+  background-image:none!important;
 }
 html.dar-ios-native-app.is-quran-player-route .top-edge-fade,
 html.dar-ios-native-app.is-quran-player-route #topEdgeFade,
