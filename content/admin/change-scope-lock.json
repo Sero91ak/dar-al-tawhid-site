@@ -108,6 +108,25 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-player-test-ios-parity-2026-09-22",
+      "approvedBy": "user-explicit-test-und-ios-player-text-menu-laut-suren-verse-sofort",
+      "reason": "Nutzer: Test- und iOS-App stark fehlerhaft; Text/Größe nicht gleich; Laut/Leise tot; Verse/Rezitatoren hängen; Sūrah/Āyah-Auswahl leer; Menü-Buttons tot. Gleichstellen und reparieren.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/dar-quran-player.js",
+        "assets/dar-quran-player.css",
+        "test/assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-player-sound-and-compact-options-2026-09-22",
       "approvedBy": "user-explicit-quran-player-kein-ton-menu-ordnung-plus-minus-kapsel-sofort-global",
       "reason": "Nutzer: Voll-Player ohne Ton (nur Lern-Qurʾān hat Ton); Optionsmenü zu viel Leerraum/Unordnung; Plus/Minus dunkle eckige Kapseln; Arabisch–Tafsīr ein Bereich. Sofort global.",
