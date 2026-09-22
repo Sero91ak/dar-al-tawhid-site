@@ -132,8 +132,8 @@ html.is-quran-player-route #darQuranPlayer .dqp-back,
   grid-row:2;min-height:0;width:100%;max-width:none;height:auto;
   aspect-ratio:auto;max-height:none;
   border-radius:22px;
-  background:linear-gradient(180deg,#373634,#32302E);
-  display:flex;align-items:stretch;justify-content:center;
+  background:linear-gradient(180deg,var(--card,#373634),var(--bg2,#32302E));
+  display:flex;align-items:stretch;justify-content:flex-start;
   overflow:hidden;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.16);
 }
@@ -144,7 +144,7 @@ html.is-quran-player-route .dqp-ayah::-webkit-scrollbar-thumb{
   background:rgba(238,211,174,.35);border-radius:99px;
 }
 .dqp-ayah{
-  width:100%;height:100%;padding:18px 16px 16px;
+  width:100%;height:100%;padding:10px 12px 8px;
   display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;
   text-align:center;overflow-x:hidden;overflow-y:auto;
   -webkit-overflow-scrolling:touch;
@@ -153,15 +153,15 @@ html.is-quran-player-route .dqp-ayah::-webkit-scrollbar-thumb{
   transition:opacity .26s ease,transform .26s ease;
   scrollbar-width:thin;
 }
-.dqp-sec{width:100%;flex:0 0 auto;padding:4px 0 2px}
+.dqp-sec{width:100%;flex:0 0 auto;padding:2px 0 1px}
 .dqp-sec + .dqp-sec{
-  margin-top:10px;padding-top:12px;
-  border-top:1px solid rgba(238,211,174,.22);
+  margin-top:6px;padding-top:8px;
+  border-top:1px solid color-mix(in srgb,var(--gold2,#EED3AE) 22%,transparent);
 }
 .dqp-sec[hidden]{display:none!important}
 .dqp-sec-h{
-  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-  color:#EED3AE;margin:0 0 8px;font-weight:700;
+  font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold2,#EED3AE);margin:0 0 4px;font-weight:700;
 }
 .dqp-ayah-ar{
   font-family:"Noto Naskh Arabic","Amiri",serif;
@@ -179,7 +179,7 @@ html.is-quran-player-route .dqp-ayah::-webkit-scrollbar-thumb{
 .dqp-ayah-tad,.dqp-ayah-taf{font-size:14px;line-height:1.45;color:#EFE7DB;text-align:left}
 .dqp-ayah.is-leave{opacity:0;transform:translateY(-8px)}
 .dqp-ayah.is-enter{opacity:0;transform:translateY(10px)}
-.dqp-ayah-ref{font-size:12px;letter-spacing:.12em;color:#EED3AE;margin-bottom:10px;flex:0 0 auto;font-weight:600}
+.dqp-ayah-ref{font-size:12px;letter-spacing:.12em;color:var(--gold2,#EED3AE);margin-bottom:6px;flex:0 0 auto;font-weight:600}
 #darQuranPlayer[data-ar="0"] .dqp-sec-ar,
 #darQuranPlayer[data-de="0"] .dqp-sec-de,
 #darQuranPlayer[data-lat="0"] .dqp-sec-lat,

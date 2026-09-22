@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 927;
+  var PLAYER_BUILD = 928;
   if (window.__DAR_QURAN_PLAYER_BUILD === PLAYER_BUILD && window.DARQuranPlayer) return;
   try {
     var staleAudio = document.getElementById("darQuranPlayerAudio");
@@ -527,6 +527,10 @@
     markPlayingAyah();
     syncProgressSample(true);
     stopProgressClock();
+    try {
+      state.current = Number(audioEl().currentTime) || state.current || 0;
+      state.resumeAt = state.current;
+    } catch (ePause) {}
     paintProgress();
   }
   function onAudioError() {
@@ -1131,25 +1135,23 @@
     };
     var px = Math.round(prefer);
     var minPx = Math.max(12, Math.round(10 + scale * 1.15));
-    var maxPx = Math.round(14 + scale * (layersOn >= 3 ? 2.4 : 3.2));
+    var maxPx = Math.round(15 + scale * (layersOn >= 4 ? 2.6 : 3.6));
     applyPx(px);
     if (!box || box.clientHeight < 40) return;
     var room = box.clientHeight - 8;
     var guard = 0;
-    if (layersOn <= 2) {
-      while (el.scrollHeight < room * 0.78 && px < maxPx && guard < 22) {
-        px += 1;
-        applyPx(px);
-        guard += 1;
-      }
+    while (el.scrollHeight < room * 0.94 && px < maxPx && guard < 36) {
+      px += 1;
+      applyPx(px);
+      guard += 1;
     }
     guard = 0;
-    while (el.scrollHeight > room && px > minPx && guard < 40) {
+    while (el.scrollHeight > room && px > minPx && guard < 48) {
       px -= 1;
       applyPx(px);
       guard += 1;
     }
-    el.style.justifyContent = el.scrollHeight > room ? "flex-start" : (layersOn <= 2 ? "center" : "flex-start");
+    el.style.justifyContent = "flex-start";
   }
   function paintStatus() {
     var el = document.querySelector("#darQuranPlayer .dqp-status");
@@ -1647,7 +1649,6 @@
     }
     paintSleepLive();
     stopSession();
-    if (isFullPlayerRoute()) leavePlayerRoute("home");
   }
   function armSleepTimer(ms) {
     ms = Math.max(0, Number(ms) || 0);
@@ -1799,6 +1800,12 @@
       return;
     }
     if (forcePlay === true || a.paused) {
+      var hold = Number(state.resumeAt || state.current) || 0;
+      if (hold > 0.2) {
+        try {
+          if (Math.abs((Number(a.currentTime) || 0) - hold) > 0.35) a.currentTime = hold;
+        } catch (eHold) {}
+      }
       state.playing = true;
       runPlay(a, playGen);
     } else {
@@ -1814,13 +1821,15 @@
     engine.started = false;
     stopProgressClock();
     if (engine.fallbackTimer) { clearTimeout(engine.fallbackTimer); engine.fallbackTimer = 0; }
+    var hold = 0;
+    try { hold = Number(audioEl().currentTime) || Number(state.current) || 0; } catch (eHold) { hold = Number(state.current) || 0; }
     state.sessionActive = false;
     state.playing = false;
-    state.resumeAt = 0;
+    state.current = hold;
+    state.resumeAt = hold;
     var a = document.getElementById("darQuranPlayerAudio");
     if (a) {
       try { a.pause(); } catch (e) {}
-      try { a.removeAttribute("src"); } catch (e2) {}
     }
     saveState();
     capsuleCollapsed = false;
@@ -1836,7 +1845,6 @@
     syncMediaSession();
     paintChrome();
     paintMini();
-    if (fullUiWanted) leavePlayerRoute("home");
   }
   function bindMiniChrome(el) {
     if (el.dataset.dqpMiniBound === "1") return;
