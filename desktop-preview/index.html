@@ -1976,6 +1976,215 @@ button,input,select{font:inherit}
   .player-title{font-size:12px!important}
 }
 
+
+/* Live desktop recovery + compact player + foundations v13 */
+.player-wrap{
+  width:min(860px,calc(100% - 40px))!important;
+  margin:12px auto 16px!important;
+}
+.quran-player{
+  width:100%!important;
+  height:62px!important;
+  min-height:62px!important;
+  grid-template-columns:52px minmax(210px,1fr) 138px 78px 170px 40px!important;
+  border-radius:999px!important;
+}
+.player-play{
+  width:44px!important;
+  height:44px!important;
+  margin-left:6px!important;
+  font-size:15px!important;
+}
+.player-now{padding:0 12px!important}
+.player-kicker{font-size:6.5px!important}
+.player-title{font-size:13px!important}
+.player-field{
+  height:62px!important;
+  padding:0 9px!important;
+  gap:5px!important;
+}
+.player-field label{font-size:6px!important}
+.player-field select{
+  width:100%!important;
+  max-width:none!important;
+  font-size:9px!important;
+}
+.player-step{
+  width:40px!important;
+  height:62px!important;
+}
+@media(max-width:980px){
+  .player-wrap{width:min(760px,calc(100% - 28px))!important}
+  .quran-player{grid-template-columns:50px minmax(180px,1fr) 130px 70px 38px!important}
+  .player-field.reciter{display:none!important}
+}
+@media(max-width:760px){
+  .player-wrap{width:calc(100% - 24px)!important}
+  .quran-player{height:58px!important;min-height:58px!important;grid-template-columns:48px minmax(0,1fr) 38px!important}
+  .player-field{display:none!important}
+  .player-step{height:58px!important}
+}
+
+.home-foundations{
+  padding:26px 0 8px;
+}
+.foundation-lead{
+  position:relative;
+  margin:0 0 22px;
+  padding:31px 34px 30px;
+  border-radius:40px;
+  overflow:hidden;
+  background:
+    radial-gradient(760px 260px at 12% 8%,rgba(255,255,255,.72),transparent 67%),
+    radial-gradient(680px 260px at 90% 75%,rgba(196,159,89,.09),transparent 66%),
+    linear-gradient(112deg,rgba(244,236,221,.82),rgba(255,254,250,.94) 52%,rgba(238,226,205,.62));
+  box-shadow:0 18px 46px rgba(70,50,22,.055);
+}
+.foundation-lead:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(110deg,transparent 28%,rgba(255,255,255,.18) 48%,rgba(177,137,66,.035) 63%,transparent 82%);
+  animation:foundationFlow 15s ease-in-out infinite alternate;
+}
+@keyframes foundationFlow{
+  to{transform:translateX(3%);opacity:.68}
+}
+.foundation-lead-inner{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);
+  gap:42px;
+  align-items:center;
+}
+.foundation-label{
+  color:var(--gold);
+  font-size:8px;
+  font-weight:850;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.foundation-lead h2{
+  margin:8px 0 10px;
+  font:500 clamp(30px,3.2vw,46px)/1.04 var(--serif);
+  letter-spacing:-.018em;
+}
+.foundation-lead p{
+  max-width:790px;
+  margin:0;
+  color:#554e45;
+  font-size:12.5px;
+  line-height:1.72;
+}
+.foundation-proof{
+  padding-left:24px;
+  border-left:1px solid rgba(152,116,57,.18);
+}
+.foundation-proof-ar{
+  font-family:"Geeza Pro","Noto Naskh Arabic",serif;
+  font-size:28px;
+  line-height:1.8;
+  text-align:right;
+  color:#2f2922;
+}
+.foundation-proof-de{
+  margin-top:7px;
+  font:500 15px/1.55 var(--serif);
+  color:#5d554b;
+}
+.foundation-proof-ref{
+  display:block;
+  margin-top:8px;
+  color:#8d6c31;
+  font-size:8.5px;
+  font-weight:800;
+}
+.foundation-links{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0 30px;
+  margin-top:16px;
+}
+.foundation-link{
+  display:block;
+  padding:14px 0 15px;
+  border-bottom:1px solid rgba(88,66,34,.07);
+}
+.foundation-link .meta{
+  display:block;
+  color:#9a7634;
+  font-size:7px;
+  font-weight:850;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  margin-bottom:5px;
+}
+.foundation-link strong{
+  display:block;
+  font:500 17px/1.24 var(--serif);
+  color:#352f28;
+}
+.foundation-link small{
+  display:block;
+  margin-top:4px;
+  color:#847a6d;
+  font-size:8.5px;
+}
+.foundation-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:20px 30px;
+  margin-top:20px;
+}
+.foundation-topic{
+  position:relative;
+  padding:22px 2px 22px;
+}
+.foundation-topic:before{
+  content:"";
+  display:block;
+  width:34px;
+  height:1px;
+  margin-bottom:12px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+}
+.foundation-topic h3{
+  margin:0 0 8px;
+  font:500 24px/1.08 var(--serif);
+}
+.foundation-topic p{
+  margin:0;
+  color:#655d52;
+  font-size:11px;
+  line-height:1.62;
+}
+.foundation-topic .topic-links{
+  margin-top:10px;
+}
+.foundation-topic .topic-links a{
+  display:block;
+  padding:7px 0;
+  color:#4b4339;
+  font:500 13px/1.35 var(--serif);
+}
+.foundation-topic .topic-links a:hover{color:#76571f}
+.desktop-loading-note{
+  margin:22px 0;
+  padding:18px 0;
+  color:#7d7468;
+  font:500 13px/1.5 var(--serif);
+}
+@media(max-width:900px){
+  .foundation-lead-inner{grid-template-columns:1fr;gap:24px}
+  .foundation-proof{padding-left:0;border-left:0}
+}
+@media(max-width:700px){
+  .foundation-lead{padding:24px 20px;border-radius:30px}
+  .foundation-links,.foundation-grid{grid-template-columns:1fr}
+}
+
 </style>
 </head>
 <body>
@@ -2648,7 +2857,16 @@ button,input,select{font:inherit}
  }
  function loadDesktopContent(){
   return Promise.all([
-   fetchJsonSafe("/data/desktop-posts-index.json").catch(function(){return fetchJsonSafe("/desktop-preview/posts.json").then(function(rows){return{posts:Array.isArray(rows)?rows:[]}})}),
+   fetchJsonSafe("/data/desktop-posts-index.json").catch(function(){
+    return fetchJsonSafe("/desktop-preview/posts.json").then(function(rows){return{posts:Array.isArray(rows)?rows:[]}}).catch(function(){
+     return fetchJsonSafe("/content/posts/posts-index.json").then(function(idx){
+      return{posts:(idx.files||[]).slice().reverse().map(function(x){
+       var id=String(x.name||"").replace(/\.md$/,""),slug=id.replace(/^\d{4}-\d{2}-\d{2}-/,"");
+       return{id:id,file:x.name,title:slug.replace(/-/g," "),category:(slug.split("-")[0]||"Beitrag"),topic:"",speaker:"",work:"",reference:"",body:"",links:[]}
+      })}
+     })
+    })
+   }),
    fetchJsonSafe("/data/books-library.json").catch(function(){return{books:[]}}),
    fetchJsonSafe("/data/library-publications.json").catch(function(){return{publications:[]}}),
    fetchJsonSafe("/data/prophets/index.json").catch(function(){return{prophets:[]}}),
@@ -3439,6 +3657,45 @@ button,input,select{font:inherit}
    '<section class="section parchment reveal"><div class="section-head"><h2>Bibliothek</h2><a class="text-link desktop-link" data-page="bibliothek" href="'+pUrl("bibliothek")+'">Alle Werke</a></div><div class="real-cover-grid">'+pubs.map(function(b){return '<a class="real-cover desktop-link" data-page="werk" href="'+pUrl("werk","type=pub&id="+encodeURIComponent(b.id))+'"><div class="real-cover-visual">'+(b.coverUrl?'<img src="'+escBook(b.coverUrl)+'" alt="">':"")+'</div><h3>'+escBook(b.title)+'</h3><small>'+escBook(b.category||"Publikation")+(b.publishedAt?' · '+escBook(b.publishedAt):"")+'</small></a>'}).join("")+'</div></section>'+
    '<section class="section reveal"><div class="section-head"><h2>Die Propheten</h2><a class="text-link desktop-link" data-page="propheten" href="'+pUrl("propheten")+'">Alle öffnen</a></div><div class="list-lines">'+props.map(function(x){return '<a class="list-row desktop-link" data-page="prophet" href="'+pUrl("prophet","id="+encodeURIComponent(x.id))+'"><span class="meta">'+(x.uluAlAzm?"Ulū al-ʿAzm":"Prophet")+'</span><strong>'+escBook(x.name)+' '+escBook(x.honorific||"")+'</strong><small>'+escBook(x.people||(x.roles||[]).join(" · "))+'</small></a>'}).join("")+'</div></section>'+footer()
  };
+
+ // --- Homepage foundations v13 ---
+ function foundationPostMatch(needles,limit){
+  needles=(needles||[]).map(searchFold);
+  return realData.posts.filter(function(x){
+   var hay=searchFold([x.id,x.title,x.category,x.topic,x.speaker,x.work,x.reference,x.body].join(" "));
+   return needles.some(function(n){return n&&hay.indexOf(n)>=0})
+  }).slice(0,limit||4)
+ }
+ function foundationLinks(rows,label){
+  if(!rows||!rows.length)return '<div class="desktop-loading-note">Weitere Inhalte werden aus dem vollständigen Beitragsbestand geladen.</div>';
+  return '<div class="foundation-links">'+rows.map(function(x){
+   return '<a class="foundation-link desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'"><span class="meta">'+escBook(label||x.category||"Beitrag")+'</span><strong>'+escBook(cleanTitle(x.title))+'</strong><small>'+escBook(x.speaker||x.work||"Lesen")+'</small></a>'
+  }).join("")+'</div>'
+ }
+ renders.start=function(){
+  var tawhid=foundationPostMatch(["tawhid","la ilaha","dua ist ibadah","dua an andere"],4);
+  var iman=foundationPostMatch(["iman ist wort und tat","iman nimmt zu","wahrer iman","vollkommener iman"],4);
+  var quranSunnah=foundationPostMatch(["quran ist allahs wort","festhalten an der sunnah","sunnah vor meinem wort","quran lernen"],4);
+  var adab=foundationPostMatch(["adab","akhlaq","charakter","zunge"],4);
+  var fiqh=foundationPostMatch(["fiqh","fatwa","halal haram"],4);
+  var duas=realData.duas.slice(0,2),pubs=realData.publications.slice(0,4);
+
+  return realIntro("DĀR AL TAWḤĪD","Tawḥīd, Īmān und Wissen aus Qurʾān & Sunnah.","Die Grundlagen des Dīn stehen zuerst. Von hier aus gelangst du direkt zu Qurʾān, Aussagen, Quellen, Duʿāʾ und Werken.")+
+   '<section class="home-foundations reveal">'+
+    '<article class="foundation-lead"><div class="foundation-lead-inner"><div><div class="foundation-label">GRUNDLAGE DES DĪN</div><h2>Was ist Tawḥīd?</h2><p>Tawḥīd bedeutet, Allah allein die Anbetung zu widmen und Ihm keinen Teil der ʿIbādah beizugesellen. Die Botschaft der Gesandten ruft dazu auf, Allah zu dienen und den Ṭāġūt zu meiden.</p>'+foundationLinks(tawhid,"Tawḥīd")+'</div><div class="foundation-proof"><div class="foundation-proof-ar" dir="rtl">وَلَقَدْ بَعَثْنَا فِي كُلِّ أُمَّةٍ رَسُولًا أَنِ اعْبُدُوا اللَّهَ وَاجْتَنِبُوا الطَّاغُوتَ</div><div class="foundation-proof-de">„Und Wir haben ja bereits in jeder Gemeinschaft einen Gesandten erweckt: Dient Allah und meidet den Ṭāġūt.“</div><a class="foundation-proof-ref desktop-link" data-page="quran" href="'+pUrl("quran","surah=16&ayah=36")+'">Qurʾān 16:36 · im Qurʾān öffnen →</a></div></div></article>'+
+    '<div class="foundation-grid">'+
+      '<article class="foundation-topic"><div class="foundation-label">ĪMĀN</div><h3>Glaube zeigt sich in Wort und Tat</h3><p>In der auf dieser Seite dargestellten Lehre von Ahl as-Sunnah wird Īmān mit Überzeugung, Wort und Tat verbunden; er nimmt durch Gehorsam zu und durch Sünde ab.</p><div class="topic-links">'+iman.slice(0,3).map(function(x){return '<a class="desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'">'+escBook(cleanTitle(x.title))+' →</a>'}).join("")+'</div></article>'+
+      '<article class="foundation-topic"><div class="foundation-label">QURʾĀN & SUNNAH</div><h3>Die Offenbarung als Maßstab</h3><p>Qurʾān und authentische Sunnah bilden die Grundlage, auf die Aussagen und Themen dieser Website zurückgeführt werden.</p><div class="topic-links">'+quranSunnah.slice(0,3).map(function(x){return '<a class="desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'">'+escBook(cleanTitle(x.title))+' →</a>'}).join("")+'</div></article>'+
+      '<article class="foundation-topic"><div class="foundation-label">ADAB & AKHLĀQ</div><h3>Wissen muss im Verhalten sichtbar werden</h3><p>Charakter, Zunge, Umgang mit Menschen und Aufrichtigkeit gehören zum praktischen Leben des Wissens.</p><div class="topic-links">'+adab.slice(0,3).map(function(x){return '<a class="desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'">'+escBook(cleanTitle(x.title))+' →</a>'}).join("")+'</div></article>'+
+      '<article class="foundation-topic"><div class="foundation-label">FIQH</div><h3>Handeln mit Wissen</h3><p>Rechtsfragen werden geordnet nach Themen und mit zugehörigen Quellen dargestellt.</p><div class="topic-links">'+fiqh.slice(0,3).map(function(x){return '<a class="desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'">'+escBook(cleanTitle(x.title))+' →</a>'}).join("")+'</div></article>'+
+    '</div>'+
+   '</section>'+
+   '<section id="prayerRiver" class="prayer-river reveal"><div class="prayer-inner"><div class="prayer-current"><div class="prayer-label">Aktuelle Gebetszeit</div><b id="prCurrent">—</b><small id="prLocation">Standort wählen</small></div><div class="prayer-next"><div class="prayer-label">Nächstes Gebet</div><b id="prNext">—</b><small id="prNextTime">—</small></div><div id="prCountdown" class="prayer-count">--:--:--<span>bis zum nächsten Gebet</span></div><button id="prLocate" class="prayer-locate" type="button">Standort verwenden</button></div></section>'+
+   '<section class="section reveal"><div class="section-head"><h2>Duʿāʾ</h2><a class="text-link desktop-link" data-page="dua" href="'+pUrl("dua")+'">Alle Duʿāʾ</a></div><div class="two-reading-cols">'+duas.map(function(d){return '<a class="dua-real desktop-link" data-page="dua" href="'+pUrl("dua","id="+encodeURIComponent(d.id))+'"><div class="eyebrow">'+escBook(d.category)+'</div><h3>'+escBook(d.title)+'</h3><div class="dua-ar" dir="rtl">'+escBook(d.arabic)+'</div><div class="real-source"><b>Quelle:</b> '+escBook(d.source)+'</div></a>'}).join("")+'</div></section>'+
+   '<section class="section parchment reveal"><div class="section-head"><h2>Bibliothek</h2><a class="text-link desktop-link" data-page="bibliothek" href="'+pUrl("bibliothek")+'">Alle Werke</a></div><div class="real-cover-grid">'+pubs.map(function(b){return '<a class="real-cover desktop-link" data-page="werk" href="'+pUrl("werk","type=pub&id="+encodeURIComponent(b.id))+'"><div class="real-cover-visual">'+(b.coverUrl?'<img src="'+escBook(b.coverUrl)+'" alt="">':"")+'</div><h3>'+escBook(b.title)+'</h3><small>'+escBook(b.category||"Publikation")+(b.publishedAt?' · '+escBook(b.publishedAt):"")+'</small></a>'}).join("")+'</div></section>'+footer()
+ };
+ // --- end Homepage foundations v13 ---
+
  // --- end Homepage foundations v12 ---
 
  // --- end Inline PDF reader v11 ---
