@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
-  "id": "ramadan-series-staging",
+  "schemaVersion": 2,
+  "id": "ramadan-series-release-candidate",
   "environment": "staging",
-  "publicationState": "draft",
+  "publicationState": "release-candidate",
   "title": "Ramaḍān",
   "subtitle": "30 Tage mit Qurʾān & Sunnah",
   "timezone": "Europe/Berlin",
@@ -10,7 +10,7 @@
   "startDate": null,
   "plannedDays": 30,
   "actualDays": null,
-  "seriesState": "upcoming",
+  "seriesState": "ready-for-testing",
   "testMode": {
     "enabled": true,
     "overrideDay": 1,
@@ -21,614 +21,2008 @@
     "requiredEvidenceTypes": [
       "quran",
       "sunnah",
-      "salaf"
+      "salaf",
+      "dua"
     ],
     "publicForeignUrlsAllowed": false,
-    "internalShortlinkPattern": "dar-al-tawhid.de/q/<nummer>"
+    "externalVerificationUrlsVisibility": "internal-only",
+    "sourceStandard": "Qurʾān, authentische Sunnah, Ṣaḥābah und verlässlich überlieferte Salaf-Aussagen"
+  },
+  "releaseGate": {
+    "contentComplete": true,
+    "allThirtyDaysFilled": true,
+    "allRequiredEvidenceVerified": true,
+    "excludedTopicFocus": [
+      "Bidʿah",
+      "Kufr",
+      "Shirk"
+    ],
+    "livePushRequiresExplicitCommand": true,
+    "startDateRequiresManualConfirmation": true,
+    "actualDaysResolvedAtMonthEnd": true,
+    "designIntegrated": false
   },
   "completion": {
-    "title": "Ramaḍān-Serie abgeschlossen",
-    "body": "Abschlusstext wird vor Veröffentlichung separat geprüft."
+    "title": "Ramaḍān endet – die ʿIbādah bleibt",
+    "body": "Möge Allah dein Fasten, deine Ṣalāh, deinen Qurʾān, deine Duʿāʾ und deine guten Taten annehmen. Bewahre nach Ramaḍān, was dein Herz näher zu Allah gebracht hat.",
+    "dua": {
+      "text": "Rabbana taqabbal minnā innaka anta s-Samīʿu l-ʿAlīm.",
+      "meaning": "Unser Herr, nimm von uns an. Du bist der Allhörende, der Allwissende.",
+      "source": "Qurʾān 2:127"
+    },
+    "continuation": "Plane deine sechs Tage aus Shawwāl und halte an kleinen, beständigen Taten fest.",
+    "evidence": [
+      {
+        "type": "quran",
+        "sourceTitle": "Qurʾān",
+        "reference": "Qurʾān 2:127",
+        "verificationStatus": "verified"
+      },
+      {
+        "type": "sunnah",
+        "sourceTitle": "Ṣaḥīḥ Muslim",
+        "reference": "Nr. 1164",
+        "verificationStatus": "verified",
+        "verificationUrl": "https://dorar.net/hadith/sharh/33004"
+      },
+      {
+        "type": "sunnah",
+        "sourceTitle": "Ṣaḥīḥ al-Buḫārī / Ṣaḥīḥ Muslim",
+        "reference": "al-Buḫārī 6464; Muslim 2818",
+        "verificationStatus": "verified",
+        "verificationUrl": "https://dorar.net/hadith/sharh/25705"
+      }
+    ]
   },
   "days": [
     {
       "day": 1,
       "slug": "day-01",
-      "title": "Testtag 01",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Tawḥīd – das Herz auf Allah ausrichten",
+      "contentStatus": "verified",
+      "theme": "Tawḥīd – das Herz auf Allah ausrichten",
+      "summary": "Ramaḍān beginnt nicht beim Hunger, sondern beim Herzen. Tawḥīd ordnet die Absicht, die Hoffnung und die ʿIbādah auf Allah allein.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Ramaḍān beginnt nicht beim Hunger, sondern beim Herzen. Tawḥīd ordnet die Absicht, die Hoffnung und die ʿIbādah auf Allah allein.",
+        "quran": {
+          "reference": "Qurʾān 1:5",
+          "text": "Sinngemäße Bedeutung: Dir allein dienen wir, und Dich allein bitten wir um Hilfe.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte sinngemäß: Am glücklichsten mit seiner Fürsprache ist, wer Lā ilāha illā Allāh aufrichtig aus seinem Herzen sagt.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 99",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "ʿAbdullāh ibn Masʿūd رضي الله عنه",
+          "text": "Überliefert ist von ihm: „Geduld ist die Hälfte des Īmān, und Gewissheit ist der ganze Īmān.“",
+          "source": "Ibn Abī Shaybah; al-Buḫārī überliefert den zweiten Teil taʿlīqan",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Sprich Lā ilāha illā Allāh heute bewusst und mit Verständnis. Wähle anschließend eine verborgene gute Tat, die du nur für Allah tust.",
+        "dua": {
+          "text": "Rabbana lā tuziġ qulūbanā baʿda iḏ hadaytanā wa hab lanā min ladunka raḥmah.",
+          "meaning": "Unser Herr, lass unsere Herzen nicht abweichen, nachdem Du uns rechtgeleitet hast, und schenke uns Barmherzigkeit von Dir.",
+          "source": "Qurʾān 3:8"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 1:5",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 99",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 99",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/d0cA8jJq?osoul=1"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "ʿAbdullāh ibn Masʿūd رضي الله عنه",
+          "reference": "Ibn Abī Shaybah; al-Buḫārī überliefert den zweiten Teil taʿlīqan",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/6SNnoLT0?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 3:8",
+          "reference": "Qurʾān 3:8",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 01",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Tawḥīd – das Herz auf Allah ausrichten",
+        "ambientLine": "Ramaḍān beginnt nicht beim Hunger, sondern beim Herzen. Tawḥīd ordnet die Absicht, die Hoffnung und die ʿIbādah auf Allah allein."
       }
     },
     {
       "day": 2,
       "slug": "day-02",
-      "title": "Testtag 02",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Niyyah und Ikhlāṣ",
+      "contentStatus": "verified",
+      "theme": "Niyyah und Ikhlāṣ",
+      "summary": "Eine kleine Tat mit aufrichtiger Niyyah kann schwer wiegen. Prüfe nicht nur, was du tust, sondern für wen du es tust.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Eine kleine Tat mit aufrichtiger Niyyah kann schwer wiegen. Prüfe nicht nur, was du tust, sondern für wen du es tust.",
+        "quran": {
+          "reference": "Qurʾān 98:5",
+          "text": "Sinngemäße Bedeutung: Ihnen wurde befohlen, Allah aufrichtig und allein Ihm die Religion widmend zu dienen.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte: Die Taten sind nur entsprechend den Absichten, und jedem Menschen steht zu, was er beabsichtigt hat.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 1; Ṣaḥīḥ Muslim, Nr. 1907",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "Ibrāhīm at-Taymī رحمه الله",
+          "text": "Er sagte sinngemäß: Wenn ich meine Worte an meinen Taten messe, fürchte ich, in meinen Worten unwahr zu sein.",
+          "source": "Von al-Buḫārī taʿlīqan mit Bestimmtheit überliefert; verbunden bei Ibn Abī Shaybah",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Erneuere vor Fasten, Ṣalāh, Qurʾān und Ṣadaqah deine Niyyah. Bewahre heute mindestens eine Tat vollständig vor den Blicken der Menschen.",
+        "dua": {
+          "text": "Rabbana taqabbal minnā innaka anta s-Samīʿu l-ʿAlīm.",
+          "meaning": "Unser Herr, nimm von uns an. Du bist der Allhörende, der Allwissende.",
+          "source": "Qurʾān 2:127"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 98:5",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 1; Ṣaḥīḥ Muslim, Nr. 1907",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 1; Ṣaḥīḥ Muslim, Nr. 1907",
+          "verificationStatus": "verified",
+          "verificationUrl": null
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "Ibrāhīm at-Taymī رحمه الله",
+          "reference": "Von al-Buḫārī taʿlīqan mit Bestimmtheit überliefert; verbunden bei Ibn Abī Shaybah",
+          "verificationStatus": "verified",
+          "verificationUrl": null
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 2:127",
+          "reference": "Qurʾān 2:127",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 02",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Niyyah und Ikhlāṣ",
+        "ambientLine": "Eine kleine Tat mit aufrichtiger Niyyah kann schwer wiegen. Prüfe nicht nur, was du tust, sondern für wen du es tust."
       }
     },
     {
       "day": 3,
       "slug": "day-03",
-      "title": "Testtag 03",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Fiṭrah – zur natürlichen Reinheit zurückkehren",
+      "contentStatus": "verified",
+      "theme": "Fiṭrah – zur natürlichen Reinheit zurückkehren",
+      "summary": "Ramaḍān ist eine Gelegenheit, Gewohnheiten abzulegen, die das Herz überdecken, und die natürliche Ausrichtung auf Allah zu stärken.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Ramaḍān ist eine Gelegenheit, Gewohnheiten abzulegen, die das Herz überdecken, und die natürliche Ausrichtung auf Allah zu stärken.",
+        "quran": {
+          "reference": "Qurʾān 30:30",
+          "text": "Sinngemäße Bedeutung: Richte dein Gesicht aufrichtig zur Religion – gemäß der Fiṭrah Allahs, auf der Er die Menschen erschaffen hat.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte sinngemäß: Jedes Kind wird auf der Fiṭrah geboren.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6599; Ṣaḥīḥ Muslim, Nr. 2658",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "ʿAlī ibn Abī Ṭālib رضي الله عنه",
+          "text": "Zu {Schützt euch und eure Familien vor dem Feuer} sagte er sinngemäß: „Lehrt euch selbst und eure Familien das Gute.“",
+          "source": "Tafsīr zu Qurʾān 66:6; authentisch überliefert",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Entferne heute bewusst eine Gewohnheit, die dein Herz unnötig beschäftigt. Lehre deiner Familie oder einem Kind eine einfache islamische Wahrheit oder Duʿāʾ.",
+        "dua": {
+          "text": "Rabbi šraḥ lī ṣadrī, wa yassir lī amrī, waḥlul ʿuqdatan min lisānī, yafqahū qawlī.",
+          "meaning": "Mein Herr, weite mir meine Brust, erleichtere mir meine Angelegenheit und löse den Knoten meiner Zunge, damit man meine Worte versteht.",
+          "source": "Qurʾān 20:25–28"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 30:30",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 6599; Ṣaḥīḥ Muslim, Nr. 2658",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 6599; Ṣaḥīḥ Muslim, Nr. 2658",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/hadith/sharh/43385"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "ʿAlī ibn Abī Ṭālib رضي الله عنه",
+          "reference": "Tafsīr zu Qurʾān 66:6; authentisch überliefert",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/3xCJsIcc?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 20:25–28",
+          "reference": "Qurʾān 20:25–28",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 03",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Fiṭrah – zur natürlichen Reinheit zurückkehren",
+        "ambientLine": "Ramaḍān ist eine Gelegenheit, Gewohnheiten abzulegen, die das Herz überdecken, und die natürliche Ausrichtung auf Allah zu stärken."
       }
     },
     {
       "day": 4,
       "slug": "day-04",
-      "title": "Testtag 04",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Īmān – was im Herzen wächst",
+      "contentStatus": "verified",
+      "theme": "Īmān – was im Herzen wächst",
+      "summary": "Īmān ist nicht nur ein Wort. Er zeigt sich in Herz, Aussage und Handlung und wird durch Gehorsam gestärkt.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Īmān ist nicht nur ein Wort. Er zeigt sich in Herz, Aussage und Handlung und wird durch Gehorsam gestärkt.",
+        "quran": {
+          "reference": "Qurʾān 8:2",
+          "text": "Sinngemäße Bedeutung: Wenn Allah erwähnt wird, erbeben die Herzen der Gläubigen; und wenn Seine Zeichen verlesen werden, mehrt es ihren Īmān.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte sinngemäß: Der Īmān hat viele Zweige; sein höchster ist Lā ilāha illā Allāh, und auch das Entfernen von Schaden vom Weg gehört zum Īmān.",
+          "source": "Ṣaḥīḥ Muslim, Nr. 35",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "ʿUmar ibn ʿAbd al-ʿAzīz رحمه الله",
+          "text": "Er schrieb sinngemäß: Der Īmān besitzt Pflichten, Regeln, Grenzen und Sunan; wer sie vervollständigt, vervollständigt seinen Īmān.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Kitāb al-Īmān, taʿlīqan; verbunden überliefert",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Wähle heute einen Zweig des Īmān: Dhikr, eine gute Tat, das Entfernen von Schaden oder eine aufrichtige Hilfe – und setze ihn bewusst um.",
+        "dua": {
+          "text": "Rabbanā āmannā fa-ġfir lanā wa-rḥamnā wa anta ḫayru r-rāḥimīn.",
+          "meaning": "Unser Herr, wir glauben; so vergib uns und erbarme Dich unser. Du bist der Beste der Barmherzigen.",
+          "source": "Qurʾān 23:109"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 8:2",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ Muslim, Nr. 35",
+          "reference": "Ṣaḥīḥ Muslim, Nr. 35",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/hadith/sharh/63779"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "ʿUmar ibn ʿAbd al-ʿAzīz رحمه الله",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Kitāb al-Īmān, taʿlīqan; verbunden überliefert",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/OW4hCPG4?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 23:109",
+          "reference": "Qurʾān 23:109",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 04",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Īmān – was im Herzen wächst",
+        "ambientLine": "Īmān ist nicht nur ein Wort. Er zeigt sich in Herz, Aussage und Handlung und wird durch Gehorsam gestärkt."
       }
     },
     {
       "day": 5,
       "slug": "day-05",
-      "title": "Testtag 05",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Ein gesundes Herz",
+      "contentStatus": "verified",
+      "theme": "Ein gesundes Herz",
+      "summary": "Das Herz ist der Mittelpunkt des Weges zu Allah. Neid, Groll, Stolz und Gleichgültigkeit brauchen ebenso Reinigung wie sichtbare Fehler.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Das Herz ist der Mittelpunkt des Weges zu Allah. Neid, Groll, Stolz und Gleichgültigkeit brauchen ebenso Reinigung wie sichtbare Fehler.",
+        "quran": {
+          "reference": "Qurʾān 26:88–89",
+          "text": "Sinngemäße Bedeutung: Am Tag, an dem weder Besitz noch Kinder nützen, außer wer mit einem gesunden Herzen zu Allah kommt.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte sinngemäß: Im Körper befindet sich ein Stück Fleisch; ist es gut, ist der ganze Körper gut, und ist es verdorben, ist der ganze Körper verdorben – es ist das Herz.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 52; Ṣaḥīḥ Muslim, Nr. 1599",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "ʿAbdullāh ibn Masʿūd رضي الله عنه",
+          "text": "Er sagte sinngemäß: Der Gläubige sieht seine Sünden, als säße er unter einem Berg und fürchtete, dass er auf ihn fällt.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6308",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Nimm dir zehn ruhige Minuten für Muḥāsabah. Benenne vor Allah eine Krankheit deines Herzens und beginne heute mit einem konkreten Gegenmittel.",
+        "dua": {
+          "text": "Rabbana lā tuziġ qulūbanā baʿda iḏ hadaytanā wa hab lanā min ladunka raḥmah.",
+          "meaning": "Unser Herr, lass unsere Herzen nicht abweichen, nachdem Du uns rechtgeleitet hast, und schenke uns Barmherzigkeit von Dir.",
+          "source": "Qurʾān 3:8"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 26:88–89",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 52; Ṣaḥīḥ Muslim, Nr. 1599",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 52; Ṣaḥīḥ Muslim, Nr. 1599",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/ZcPHWUwu"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "ʿAbdullāh ibn Masʿūd رضي الله عنه",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 6308",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/5oUfmElN"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 3:8",
+          "reference": "Qurʾān 3:8",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 05",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Ein gesundes Herz",
+        "ambientLine": "Das Herz ist der Mittelpunkt des Weges zu Allah. Neid, Groll, Stolz und Gleichgültigkeit brauchen ebenso Reinigung wie sichtbare Fehler."
       }
     },
     {
       "day": 6,
       "slug": "day-06",
-      "title": "Testtag 06",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Tawbah – immer wieder zurückkehren",
+      "contentStatus": "verified",
+      "theme": "Tawbah – immer wieder zurückkehren",
+      "summary": "Tawbah ist kein Zeichen von Hoffnungslosigkeit, sondern von Leben im Herzen. Der Gläubige erkennt seinen Fehler und kehrt zu Allah zurück.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Tawbah ist kein Zeichen von Hoffnungslosigkeit, sondern von Leben im Herzen. Der Gläubige erkennt seinen Fehler und kehrt zu Allah zurück.",
+        "quran": {
+          "reference": "Qurʾān 39:53",
+          "text": "Sinngemäße Bedeutung: Verzweifelt nicht an Allahs Barmherzigkeit; Allah vergibt die Sünden.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ berichtete, dass Allah die Möglichkeit zur Tawbah bei Nacht und bei Tag offenhält.",
+          "source": "Ṣaḥīḥ Muslim, Nr. 2759",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "ʿAbdullāh ibn Masʿūd رضي الله عنه",
+          "text": "Er sagte sinngemäß: Der Gläubige sieht seine Sünden, als säße er unter einem Berg und fürchtete, dass er auf ihn fällt.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6308",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Vollziehe heute eine konkrete Tawbah: Sünde lassen, bereuen, um Vergebung bitten und fest vornehmen, nicht zurückzukehren. Bei Rechten anderer: gib das Recht zurück.",
+        "dua": {
+          "text": "Rabbanā ẓalamnā anfusanā wa in lam taġfir lanā wa tarḥamnā la-nakūnanna mina l-ḫāsirīn.",
+          "meaning": "Unser Herr, wir haben uns selbst Unrecht getan. Wenn Du uns nicht vergibst und Dich unser erbarmst, gehören wir zu den Verlierern.",
+          "source": "Qurʾān 7:23"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 39:53",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ Muslim, Nr. 2759",
+          "reference": "Ṣaḥīḥ Muslim, Nr. 2759",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/wMnHnCDm?osoul=1"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "ʿAbdullāh ibn Masʿūd رضي الله عنه",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 6308",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/5oUfmElN"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 7:23",
+          "reference": "Qurʾān 7:23",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 06",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Tawbah – immer wieder zurückkehren",
+        "ambientLine": "Tawbah ist kein Zeichen von Hoffnungslosigkeit, sondern von Leben im Herzen. Der Gläubige erkennt seinen Fehler und kehrt zu Allah zurück."
       }
     },
     {
       "day": 7,
       "slug": "day-07",
-      "title": "Testtag 07",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Qurʾān – Führung für den Īmān",
+      "contentStatus": "verified",
+      "theme": "Qurʾān – Führung für den Īmān",
+      "summary": "Der Qurʾān soll nicht nur durch die Zunge gehen. Er soll Wissen, Īmān, Furcht, Hoffnung und Handeln im Herzen vermehren.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Der Qurʾān soll nicht nur durch die Zunge gehen. Er soll Wissen, Īmān, Furcht, Hoffnung und Handeln im Herzen vermehren.",
+        "quran": {
+          "reference": "Qurʾān 2:185",
+          "text": "Sinngemäße Bedeutung: Ramaḍān ist der Monat, in dem der Qurʾān als Rechtleitung für die Menschen herabgesandt wurde.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte: Die Besten unter euch sind diejenigen, die den Qurʾān lernen und ihn lehren.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 5027",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "Jundub ibn ʿAbdillāh رضي الله عنه",
+          "text": "Er berichtete: „Wir lernten den Īmān, bevor wir den Qurʾān lernten; dann lernten wir den Qurʾān und unser Īmān nahm dadurch zu.“",
+          "source": "Sunan Ibn Mājah, Nr. 61; authentisch überliefert",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Lies heute einen festgelegten Abschnitt des Qurʾān und wähle eine Āyah aus, deren Bedeutung du nachliest und praktisch umsetzt.",
+        "dua": {
+          "text": "Rabbi zidnī ʿilmā.",
+          "meaning": "Mein Herr, mehre mich an Wissen.",
+          "source": "Qurʾān 20:114"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 2:185",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 5027",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 5027",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/5vS5H0V8?osoul=1"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "Jundub ibn ʿAbdillāh رضي الله عنه",
+          "reference": "Sunan Ibn Mājah, Nr. 61; authentisch überliefert",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/El8Txvx6?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 20:114",
+          "reference": "Qurʾān 20:114",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 07",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Qurʾān – Führung für den Īmān",
+        "ambientLine": "Der Qurʾān soll nicht nur durch die Zunge gehen. Er soll Wissen, Īmān, Furcht, Hoffnung und Handeln im Herzen vermehren."
       }
     },
     {
       "day": 8,
       "slug": "day-08",
-      "title": "Testtag 08",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Ṣalāh – Ruhe vor Allah",
+      "contentStatus": "verified",
+      "theme": "Ṣalāh – Ruhe vor Allah",
+      "summary": "Die Pflichtgebete sind das feste Gerüst des Tages. Ramaḍān soll die Ṣalāh nicht nur vermehren, sondern bewusster machen.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Die Pflichtgebete sind das feste Gerüst des Tages. Ramaḍān soll die Ṣalāh nicht nur vermehren, sondern bewusster machen.",
+        "quran": {
+          "reference": "Qurʾān 23:1–2",
+          "text": "Sinngemäße Bedeutung: Erfolgreich sind die Gläubigen, die in ihrem Gebet demütig und gesammelt sind.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Als der Prophet ﷺ nach der Allah liebsten Tat gefragt wurde, nannte er zuerst das Gebet zu seiner Zeit und danach die Güte zu den Eltern.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 527; Ṣaḥīḥ Muslim, Nr. 85",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "Salmān al-Fārisī رضي الله عنه",
+          "text": "Er sagte zu Abū ad-Dardāʾ: „Dein Herr hat ein Recht über dich, dein Körper hat ein Recht über dich und deine Familie hat ein Recht über dich; gib jedem sein Recht.“ Der Prophet ﷺ bestätigte dies.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6139",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Bereite heute mindestens ein Pflichtgebet frühzeitig vor: Wuḍūʾ ohne Eile, Handy weg, rechtzeitig stehen und die Worte bewusst sprechen.",
+        "dua": {
+          "text": "Rabbi ǧʿalnī muqīma ṣ-ṣalāti wa min ḏurriyyatī rabbanā wa taqabbal duʿāʾ.",
+          "meaning": "Mein Herr, lass mich das Gebet verrichten und auch aus meiner Nachkommenschaft. Unser Herr, nimm mein Bittgebet an.",
+          "source": "Qurʾān 14:40"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 23:1–2",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 527; Ṣaḥīḥ Muslim, Nr. 85",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 527; Ṣaḥīḥ Muslim, Nr. 85",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/hadith/sharh/2070"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "Salmān al-Fārisī رضي الله عنه",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 6139",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/FzkTB07d?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 14:40",
+          "reference": "Qurʾān 14:40",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 08",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Ṣalāh – Ruhe vor Allah",
+        "ambientLine": "Die Pflichtgebete sind das feste Gerüst des Tages. Ramaḍān soll die Ṣalāh nicht nur vermehren, sondern bewusster machen."
       }
     },
     {
       "day": 9,
       "slug": "day-09",
-      "title": "Testtag 09",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Dhikr – Leben für das Herz",
+      "contentStatus": "verified",
+      "theme": "Dhikr – Leben für das Herz",
+      "summary": "Ein Herz ohne Dhikr trocknet aus. Regelmäßiges Gedenken hält die Verbindung zu Allah auch zwischen Ṣalāh, Arbeit und Familie lebendig.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Ein Herz ohne Dhikr trocknet aus. Regelmäßiges Gedenken hält die Verbindung zu Allah auch zwischen Ṣalāh, Arbeit und Familie lebendig.",
+        "quran": {
+          "reference": "Qurʾān 13:28",
+          "text": "Sinngemäße Bedeutung: Im Gedenken Allahs finden die Herzen Ruhe.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ verglich denjenigen, der Allah gedenkt, und denjenigen, der Ihn nicht gedenkt, mit dem Lebenden und dem Toten.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6407",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "Muʿādh ibn Jabal رضي الله عنه",
+          "text": "Er sagte: „Setz dich zu uns, damit wir eine Stunde Īmān haben“ – gemeint war: Allah gedenken.",
+          "source": "Überliefert von den frühen Ḥadīṯ-Gelehrten; Überlieferung mit authentischer Kette",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Halte heute deine authentischen Morgen- und Abendadhkār ein und nutze kurze Wege oder Wartezeiten bewusst für Tasbīḥ, Taḥmīd und Istighfār.",
+        "dua": {
+          "text": "Allāhumma aʿinnī ʿalā ḏikrika wa šukrika wa ḥusni ʿibādatik.",
+          "meaning": "O Allah, hilf mir, Deiner zu gedenken, Dir zu danken und Dir auf schöne Weise zu dienen.",
+          "source": "Sunan Abī Dāwūd, Nr. 1522; Sunan an-Nasāʾī, Nr. 1303; authentisch"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 13:28",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 6407",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 6407",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/ZMG5qhAf?osoul=1"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "Muʿādh ibn Jabal رضي الله عنه",
+          "reference": "Überliefert von den frühen Ḥadīṯ-Gelehrten; Überlieferung mit authentischer Kette",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/WAOhZwKr?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Sunan Abī Dāwūd, Nr. 1522; Sunan an-Nasāʾī, Nr. 1303; authentisch",
+          "reference": "Sunan Abī Dāwūd, Nr. 1522; Sunan an-Nasāʾī, Nr. 1303; authentisch",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 09",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Dhikr – Leben für das Herz",
+        "ambientLine": "Ein Herz ohne Dhikr trocknet aus. Regelmäßiges Gedenken hält die Verbindung zu Allah auch zwischen Ṣalāh, Arbeit und Familie lebendig."
       }
     },
     {
       "day": 10,
       "slug": "day-10",
-      "title": "Testtag 10",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Das Herz vor Nifāq schützen",
+      "contentStatus": "verified",
+      "theme": "Das Herz vor Nifāq schützen",
+      "summary": "Die Texte über Nifāq sind zuerst ein Spiegel für das eigene Herz. Ziel ist Selbstkorrektur, nicht das Etikettieren anderer Menschen.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Die Texte über Nifāq sind zuerst ein Spiegel für das eigene Herz. Ziel ist Selbstkorrektur, nicht das Etikettieren anderer Menschen.",
+        "quran": {
+          "reference": "Qurʾān 61:2–3",
+          "text": "Sinngemäße Bedeutung: Warum sagt ihr, was ihr nicht tut? Schwer wiegt es bei Allah, dass ihr sagt, was ihr nicht tut.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ nannte als Zeichen des Nifāq: Lüge beim Sprechen, Bruch des Versprechens und Verrat an anvertrautem Gut.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 33; Ṣaḥīḥ Muslim, Nr. 59",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "Ibrāhīm at-Taymī رحمه الله",
+          "text": "Er sagte sinngemäß: Wenn ich meine Worte an meinen Taten messe, fürchte ich, in meinen Worten unwahr zu sein.",
+          "source": "Von al-Buḫārī taʿlīqan mit Bestimmtheit überliefert; verbunden bei Ibn Abī Shaybah",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Prüfe dich heute bei drei Dingen: Wahrheit, Versprechen und anvertraute Rechte. Repariere noch heute einen Punkt, bei dem du nachlässig warst.",
+        "dua": {
+          "text": "Rabbana lā tuziġ qulūbanā baʿda iḏ hadaytanā wa hab lanā min ladunka raḥmah.",
+          "meaning": "Unser Herr, lass unsere Herzen nicht abweichen, nachdem Du uns rechtgeleitet hast, und schenke uns Barmherzigkeit von Dir.",
+          "source": "Qurʾān 3:8"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 61:2–3",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 33; Ṣaḥīḥ Muslim, Nr. 59",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 33; Ṣaḥīḥ Muslim, Nr. 59",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/LbzHfnV3?osoul=1"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "Ibrāhīm at-Taymī رحمه الله",
+          "reference": "Von al-Buḫārī taʿlīqan mit Bestimmtheit überliefert; verbunden bei Ibn Abī Shaybah",
+          "verificationStatus": "verified",
+          "verificationUrl": null
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 3:8",
+          "reference": "Qurʾān 3:8",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 10",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Das Herz vor Nifāq schützen",
+        "ambientLine": "Die Texte über Nifāq sind zuerst ein Spiegel für das eigene Herz. Ziel ist Selbstkorrektur, nicht das Etikettieren anderer Menschen."
       }
     },
     {
       "day": 11,
       "slug": "day-11",
-      "title": "Testtag 11",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Die Zunge bewahren",
+      "contentStatus": "verified",
+      "theme": "Die Zunge bewahren",
+      "summary": "Ein Wort ist schnell gesprochen, seine Wirkung kann aber lange bleiben. Die Zunge ist ein tägliches Feld von Īmān und Taqwā.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Ein Wort ist schnell gesprochen, seine Wirkung kann aber lange bleiben. Die Zunge ist ein tägliches Feld von Īmān und Taqwā.",
+        "quran": {
+          "reference": "Qurʾān 50:18",
+          "text": "Sinngemäße Bedeutung: Kein Wort spricht der Mensch aus, ohne dass ein Beobachter bereitsteht.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte: Wer an Allah und den Jüngsten Tag glaubt, soll Gutes sprechen oder schweigen.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6018; Ṣaḥīḥ Muslim, Nr. 47",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "ʿAlī ibn Abī Ṭālib رضي الله عنه",
+          "text": "Er sagte sinngemäß: Sprecht zu den Menschen mit dem, was sie verstehen können.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 127, taʿlīqan",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Halte dich heute bewusst von übler Nachrede, Spott, verletzenden Bemerkungen und unnötigem Streit fern. Wenn kein gutes Wort da ist: schweige.",
+        "dua": {
+          "text": "Rabbi šraḥ lī ṣadrī, wa yassir lī amrī, waḥlul ʿuqdatan min lisānī, yafqahū qawlī.",
+          "meaning": "Mein Herr, weite mir meine Brust, erleichtere mir meine Angelegenheit und löse den Knoten meiner Zunge, damit man meine Worte versteht.",
+          "source": "Qurʾān 20:25–28"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 50:18",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 6018; Ṣaḥīḥ Muslim, Nr. 47",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 6018; Ṣaḥīḥ Muslim, Nr. 47",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/mDZKhLdR"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "ʿAlī ibn Abī Ṭālib رضي الله عنه",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 127, taʿlīqan",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/jBjp2ZjW"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 20:25–28",
+          "reference": "Qurʾān 20:25–28",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 11",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Die Zunge bewahren",
+        "ambientLine": "Ein Wort ist schnell gesprochen, seine Wirkung kann aber lange bleiben. Die Zunge ist ein tägliches Feld von Īmān und Taqwā."
       }
     },
     {
       "day": 12,
       "slug": "day-12",
-      "title": "Testtag 12",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Wahrhaftigkeit",
+      "contentStatus": "verified",
+      "theme": "Wahrhaftigkeit",
+      "summary": "Wahrheit reinigt Beziehungen und das Herz. Der Gläubige gewöhnt seine Zunge nicht an Ausreden, Übertreibung oder doppelte Sprache.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Wahrheit reinigt Beziehungen und das Herz. Der Gläubige gewöhnt seine Zunge nicht an Ausreden, Übertreibung oder doppelte Sprache.",
+        "quran": {
+          "reference": "Qurʾān 33:70",
+          "text": "Sinngemäße Bedeutung: Fürchtet Allah und sprecht ein treffendes, richtiges Wort.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte sinngemäß: Haltet euch an die Wahrhaftigkeit; Wahrhaftigkeit führt zur Rechtschaffenheit und die Rechtschaffenheit zum Paradies.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6094; Ṣaḥīḥ Muslim, Nr. 2607",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "Ibrāhīm at-Taymī رحمه الله",
+          "text": "Er sagte sinngemäß: Wenn ich meine Worte an meinen Taten messe, fürchte ich, in meinen Worten unwahr zu sein.",
+          "source": "Von al-Buḫārī taʿlīqan mit Bestimmtheit überliefert; verbunden bei Ibn Abī Shaybah",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Sei heute auch dort wahrhaftig, wo eine Ausrede bequemer wäre. Korrigiere eine falsche oder übertriebene Aussage, falls du eine gemacht hast.",
+        "dua": {
+          "text": "Wa-ǧʿal lī lisāna ṣidqin fī l-āḫirīn.",
+          "meaning": "Und verleihe mir einen guten, wahrhaftigen Ruf bei den Späteren.",
+          "source": "Qurʾān 26:84"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 33:70",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 6094; Ṣaḥīḥ Muslim, Nr. 2607",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 6094; Ṣaḥīḥ Muslim, Nr. 2607",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/7f0vtWdY?osoul=1"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "Ibrāhīm at-Taymī رحمه الله",
+          "reference": "Von al-Buḫārī taʿlīqan mit Bestimmtheit überliefert; verbunden bei Ibn Abī Shaybah",
+          "verificationStatus": "verified",
+          "verificationUrl": null
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 26:84",
+          "reference": "Qurʾān 26:84",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 12",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Wahrhaftigkeit",
+        "ambientLine": "Wahrheit reinigt Beziehungen und das Herz. Der Gläubige gewöhnt seine Zunge nicht an Ausreden, Übertreibung oder doppelte Sprache."
       }
     },
     {
       "day": 13,
       "slug": "day-13",
-      "title": "Testtag 13",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Schöner Charakter",
+      "contentStatus": "verified",
+      "theme": "Schöner Charakter",
+      "summary": "ʿIbādah zeigt sich auch darin, wie du mit Menschen umgehst. Geduld, Respekt, Vergebung und Güte gehören zum sichtbaren Ergebnis des Īmān.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "ʿIbādah zeigt sich auch darin, wie du mit Menschen umgehst. Geduld, Respekt, Vergebung und Güte gehören zum sichtbaren Ergebnis des Īmān.",
+        "quran": {
+          "reference": "Qurʾān 68:4",
+          "text": "Sinngemäße Bedeutung: Der Prophet ﷺ steht auf gewaltigem Charakter.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte sinngemäß: Die vollkommensten Gläubigen im Īmān sind diejenigen mit dem besten Charakter.",
+          "source": "Jāmiʿ at-Tirmiḏī, Nr. 1162; ḥasan ṣaḥīḥ",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "ʿĀʾišah رضي الله عنها",
+          "text": "Als sie nach dem Charakter des Propheten ﷺ gefragt wurde, sagte sie: „Sein Charakter war der Qurʾān.“",
+          "source": "Musnad Aḥmad, Nr. 25302; authentische Kette",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Wähle heute bewusst eine Charaktereigenschaft: Geduld, Vergebung, Freundlichkeit oder Bescheidenheit – und setze sie in einer realen Situation um.",
+        "dua": {
+          "text": "Rabbanā hab lanā min azwāǧinā wa ḏurriyyātinā qurrata aʿyunin wa-ǧʿalnā li-l-muttaqīna imāmā.",
+          "meaning": "Unser Herr, schenke uns an unseren Ehepartnern und Kindern Freude für die Augen und mache uns zu Vorbildern für die Gottesfürchtigen.",
+          "source": "Qurʾān 25:74"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 68:4",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Jāmiʿ at-Tirmiḏī, Nr. 1162; ḥasan ṣaḥīḥ",
+          "reference": "Jāmiʿ at-Tirmiḏī, Nr. 1162; ḥasan ṣaḥīḥ",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/XKssBaPT"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "ʿĀʾišah رضي الله عنها",
+          "reference": "Musnad Aḥmad, Nr. 25302; authentische Kette",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/1OXbtUrZ"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 25:74",
+          "reference": "Qurʾān 25:74",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 13",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Schöner Charakter",
+        "ambientLine": "ʿIbādah zeigt sich auch darin, wie du mit Menschen umgehst. Geduld, Respekt, Vergebung und Güte gehören zum sichtbaren Ergebnis des Īmān."
       }
     },
     {
       "day": 14,
       "slug": "day-14",
-      "title": "Testtag 14",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Sanftmut",
+      "contentStatus": "verified",
+      "theme": "Sanftmut",
+      "summary": "Sanftmut ist keine Schwäche. Sie bewahrt Wahrheit und Würde, ohne unnötig Herzen zu brechen.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Sanftmut ist keine Schwäche. Sie bewahrt Wahrheit und Würde, ohne unnötig Herzen zu brechen.",
+        "quran": {
+          "reference": "Qurʾān 3:159",
+          "text": "Sinngemäße Bedeutung: Durch Barmherzigkeit von Allah warst du sanft zu ihnen; wärst du hart gewesen, hätten sie sich von dir entfernt.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte sinngemäß: Allah ist sanft und liebt die Sanftmut.",
+          "source": "Ṣaḥīḥ Muslim, Nr. 2593; Ṣaḥīḥ al-Buḫārī, Nr. 6927",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "ʿAlī ibn Abī Ṭālib رضي الله عنه",
+          "text": "Er sagte sinngemäß: Sprecht zu den Menschen mit dem, was sie verstehen können.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 127, taʿlīqan",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Antworte heute in einer angespannten Situation bewusst ruhiger als dein erster Impuls. Senke Stimme und Härte, ohne eine Pflicht oder Wahrheit aufzugeben.",
+        "dua": {
+          "text": "Rabbi šraḥ lī ṣadrī, wa yassir lī amrī, waḥlul ʿuqdatan min lisānī, yafqahū qawlī.",
+          "meaning": "Mein Herr, weite mir meine Brust, erleichtere mir meine Angelegenheit und löse den Knoten meiner Zunge, damit man meine Worte versteht.",
+          "source": "Qurʾān 20:25–28"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 3:159",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ Muslim, Nr. 2593; Ṣaḥīḥ al-Buḫārī, Nr. 6927",
+          "reference": "Ṣaḥīḥ Muslim, Nr. 2593; Ṣaḥīḥ al-Buḫārī, Nr. 6927",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/N3oe6VCE"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "ʿAlī ibn Abī Ṭālib رضي الله عنه",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 127, taʿlīqan",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/jBjp2ZjW"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 20:25–28",
+          "reference": "Qurʾān 20:25–28",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 14",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Sanftmut",
+        "ambientLine": "Sanftmut ist keine Schwäche. Sie bewahrt Wahrheit und Würde, ohne unnötig Herzen zu brechen."
       }
     },
     {
       "day": 15,
       "slug": "day-15",
-      "title": "Testtag 15",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Eltern – Birr im Alltag",
+      "contentStatus": "verified",
+      "theme": "Eltern – Birr im Alltag",
+      "summary": "Birr al-Wālidayn besteht nicht nur aus großen Gesten. Ein Anruf, Hilfe, Geduld und ein gutes Wort können heute schwer wiegen.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Birr al-Wālidayn besteht nicht nur aus großen Gesten. Ein Anruf, Hilfe, Geduld und ein gutes Wort können heute schwer wiegen.",
+        "quran": {
+          "reference": "Qurʾān 17:23–24",
+          "text": "Sinngemäße Bedeutung: Behandle deine Eltern mit Güte, sprich zu ihnen ehrerbietig und bitte Allah um Barmherzigkeit für sie.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Als der Prophet ﷺ nach der Allah liebsten Tat gefragt wurde, nannte er zuerst das Gebet zu seiner Zeit und danach die Güte zu den Eltern.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 527; Ṣaḥīḥ Muslim, Nr. 85",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "ʿAlī ibn Abī Ṭālib رضي الله عنه",
+          "text": "Zu {Schützt euch und eure Familien vor dem Feuer} sagte er sinngemäß: „Lehrt euch selbst und eure Familien das Gute.“",
+          "source": "Tafsīr zu Qurʾān 66:6; authentisch überliefert",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Tu heute eine konkrete gute Tat für deine Eltern: anrufen, helfen, etwas abnehmen, freundlich zuhören oder – wenn sie verstorben sind – für sie Duʿāʾ machen.",
+        "dua": {
+          "text": "Rabbi rḥamhumā kamā rabbayānī ṣaġīrā.",
+          "meaning": "Mein Herr, erbarme Dich ihrer, wie sie mich aufgezogen haben, als ich klein war.",
+          "source": "Qurʾān 17:24"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 17:23–24",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 527; Ṣaḥīḥ Muslim, Nr. 85",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 527; Ṣaḥīḥ Muslim, Nr. 85",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/hadith/sharh/2070"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "ʿAlī ibn Abī Ṭālib رضي الله عنه",
+          "reference": "Tafsīr zu Qurʾān 66:6; authentisch überliefert",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/3xCJsIcc?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 17:24",
+          "reference": "Qurʾān 17:24",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 15",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Eltern – Birr im Alltag",
+        "ambientLine": "Birr al-Wālidayn besteht nicht nur aus großen Gesten. Ein Anruf, Hilfe, Geduld und ein gutes Wort können heute schwer wiegen."
       }
     },
     {
       "day": 16,
       "slug": "day-16",
-      "title": "Testtag 16",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Ehe – Liebe, Ruhe und Barmherzigkeit",
+      "contentStatus": "verified",
+      "theme": "Ehe – Liebe, Ruhe und Barmherzigkeit",
+      "summary": "Ein gutes Zuhause wird nicht nur durch Rechte erhalten, sondern durch Raḥmah, Geduld, Dankbarkeit und gute Sprache.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Ein gutes Zuhause wird nicht nur durch Rechte erhalten, sondern durch Raḥmah, Geduld, Dankbarkeit und gute Sprache.",
+        "quran": {
+          "reference": "Qurʾān 30:21",
+          "text": "Sinngemäße Bedeutung: Allah setzte zwischen Ehepartnern Zuneigung und Barmherzigkeit und machte die Ehe zu einem Ort der Ruhe.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ wies dazu an, Frauen gut zu behandeln.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 5185; Ṣaḥīḥ Muslim, Nr. 1468",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "Salmān al-Fārisī رضي الله عنه",
+          "text": "Er sagte zu Abū ad-Dardāʾ: „Dein Herr hat ein Recht über dich, dein Körper hat ein Recht über dich und deine Familie hat ein Recht über dich; gib jedem sein Recht.“ Der Prophet ﷺ bestätigte dies.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6139",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Tu deinem Ehepartner heute bewusst etwas Gutes, ohne Gegenleistung zu erwarten. Sprich Dank für eine konkrete Sache aus und vermeide alte Fehler als Waffe im Streit.",
+        "dua": {
+          "text": "Rabbanā hab lanā min azwāǧinā wa ḏurriyyātinā qurrata aʿyunin wa-ǧʿalnā li-l-muttaqīna imāmā.",
+          "meaning": "Unser Herr, schenke uns an unseren Ehepartnern und Kindern Freude für die Augen und mache uns zu Vorbildern für die Gottesfürchtigen.",
+          "source": "Qurʾān 25:74"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 30:21",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 5185; Ṣaḥīḥ Muslim, Nr. 1468",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 5185; Ṣaḥīḥ Muslim, Nr. 1468",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/hadith/sharh/151208"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "Salmān al-Fārisī رضي الله عنه",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 6139",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/FzkTB07d?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 25:74",
+          "reference": "Qurʾān 25:74",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 16",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Ehe – Liebe, Ruhe und Barmherzigkeit",
+        "ambientLine": "Ein gutes Zuhause wird nicht nur durch Rechte erhalten, sondern durch Raḥmah, Geduld, Dankbarkeit und gute Sprache."
       }
     },
     {
       "day": 17,
       "slug": "day-17",
-      "title": "Testtag 17",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Kinder – Barmherzigkeit und Vorbild",
+      "contentStatus": "verified",
+      "theme": "Kinder – Barmherzigkeit und Vorbild",
+      "summary": "Kinder lernen Religion nicht nur aus Worten, sondern aus dem, was sie bei Erwachsenen täglich sehen: Ṣalāh, Geduld, Wahrhaftigkeit und Barmherzigkeit.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Kinder lernen Religion nicht nur aus Worten, sondern aus dem, was sie bei Erwachsenen täglich sehen: Ṣalāh, Geduld, Wahrhaftigkeit und Barmherzigkeit.",
+        "quran": {
+          "reference": "Qurʾān 66:6",
+          "text": "Sinngemäße Bedeutung: Schützt euch selbst und eure Familien – Verantwortung beginnt bei der eigenen Person und im eigenen Haus.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte: Wer keine Barmherzigkeit zeigt, dem wird keine Barmherzigkeit gezeigt.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6013; Ṣaḥīḥ Muslim, Nr. 2319",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "ʿAlī ibn Abī Ṭālib رضي الله عنه",
+          "text": "Zu {Schützt euch und eure Familien vor dem Feuer} sagte er sinngemäß: „Lehrt euch selbst und eure Familien das Gute.“",
+          "source": "Tafsīr zu Qurʾān 66:6; authentisch überliefert",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Schenke einem Kind heute ungeteilte Aufmerksamkeit. Lehre eine kurze Duʿāʾ, eine Āyah-Bedeutung oder einen islamischen Adab – ruhig und liebevoll.",
+        "dua": {
+          "text": "Rabbanā hab lanā min azwāǧinā wa ḏurriyyātinā qurrata aʿyunin wa-ǧʿalnā li-l-muttaqīna imāmā.",
+          "meaning": "Unser Herr, schenke uns an unseren Ehepartnern und Kindern Freude für die Augen und mache uns zu Vorbildern für die Gottesfürchtigen.",
+          "source": "Qurʾān 25:74"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 66:6",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 6013; Ṣaḥīḥ Muslim, Nr. 2319",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 6013; Ṣaḥīḥ Muslim, Nr. 2319",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/a0twW4od"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "ʿAlī ibn Abī Ṭālib رضي الله عنه",
+          "reference": "Tafsīr zu Qurʾān 66:6; authentisch überliefert",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/3xCJsIcc?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 25:74",
+          "reference": "Qurʾān 25:74",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 17",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Kinder – Barmherzigkeit und Vorbild",
+        "ambientLine": "Kinder lernen Religion nicht nur aus Worten, sondern aus dem, was sie bei Erwachsenen täglich sehen: Ṣalāh, Geduld, Wahrhaftigkeit und Barmherzigkeit."
       }
     },
     {
       "day": 18,
       "slug": "day-18",
-      "title": "Testtag 18",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Das Haus mit Ṣalāh beleben",
+      "contentStatus": "verified",
+      "theme": "Das Haus mit Ṣalāh beleben",
+      "summary": "Familienführung beginnt nicht mit Kontrolle, sondern mit eigenem Vorbild, Verantwortung und beständiger Einladung zum Guten.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Familienführung beginnt nicht mit Kontrolle, sondern mit eigenem Vorbild, Verantwortung und beständiger Einladung zum Guten.",
+        "quran": {
+          "reference": "Qurʾān 20:132",
+          "text": "Sinngemäße Bedeutung: Befiehl deiner Familie das Gebet und bleibe selbst standhaft darin.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte sinngemäß: Jeder von euch ist ein Hüter und jeder ist für das ihm Anvertraute verantwortlich.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 2558; Ṣaḥīḥ Muslim, Nr. 1829",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "Salmān al-Fārisī رضي الله عنه",
+          "text": "Er sagte zu Abū ad-Dardāʾ: „Dein Herr hat ein Recht über dich, dein Körper hat ein Recht über dich und deine Familie hat ein Recht über dich; gib jedem sein Recht.“ Der Prophet ﷺ bestätigte dies.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6139",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Plane heute einen gemeinsamen ruhigen Moment im Haus: Ṣalāh, Qurʾān-Lesen oder zehn Minuten islamisches Lernen ohne Ablenkung.",
+        "dua": {
+          "text": "Rabbanā ġfir lī wa li-wālidayya wa li-l-muʾminīna yawma yaqūmu l-ḥisāb.",
+          "meaning": "Unser Herr, vergib mir, meinen Eltern und den Gläubigen am Tag, an dem die Abrechnung stattfindet.",
+          "source": "Qurʾān 14:41"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 20:132",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 2558; Ṣaḥīḥ Muslim, Nr. 1829",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 2558; Ṣaḥīḥ Muslim, Nr. 1829",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/DmDGL6jr"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "Salmān al-Fārisī رضي الله عنه",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 6139",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/FzkTB07d?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 14:41",
+          "reference": "Qurʾān 14:41",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 18",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Das Haus mit Ṣalāh beleben",
+        "ambientLine": "Familienführung beginnt nicht mit Kontrolle, sondern mit eigenem Vorbild, Verantwortung und beständiger Einladung zum Guten."
       }
     },
     {
       "day": 19,
       "slug": "day-19",
-      "title": "Testtag 19",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Verwandtschaftsbande pflegen",
+      "contentStatus": "verified",
+      "theme": "Verwandtschaftsbande pflegen",
+      "summary": "Ṣilat ar-Raḥim braucht manchmal Überwindung. Gerade kleine, regelmäßige Kontakte bewahren Nähe, Respekt und Barmherzigkeit.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Ṣilat ar-Raḥim braucht manchmal Überwindung. Gerade kleine, regelmäßige Kontakte bewahren Nähe, Respekt und Barmherzigkeit.",
+        "quran": {
+          "reference": "Qurʾān 13:21",
+          "text": "Sinngemäße Bedeutung: Die Rechtschaffenen verbinden, was Allah zu verbinden geboten hat.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte sinngemäß: Wer wünscht, dass ihm sein Lebensunterhalt erweitert und seine Lebensspur verlängert wird, soll die Verwandtschaftsbande pflegen.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 5986; Ṣaḥīḥ Muslim, Nr. 2557",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "ʿAbdullāh ibn ʿUmar رضي الله عنهما",
+          "text": "Er sagte: „Wenn du den Abend erreichst, erwarte nicht den Morgen; und wenn du den Morgen erreichst, erwarte nicht den Abend. Nimm von deiner Gesundheit für deine Krankheit und von deinem Leben für deinen Tod.“",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6416",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Kontaktiere heute einen Verwandten, den du länger nicht gesprochen hast. Beginne mit Salām, ehrlicher Nachfrage und ohne alte Spannungen neu aufzurollen.",
+        "dua": {
+          "text": "Rabbanā ġfir lanā wa li-iḫwāninā llaḏīna sabaqūnā bi-l-Īmān wa-lā taǧʿal fī qulūbinā ġillan li-llaḏīna āmanū.",
+          "meaning": "Unser Herr, vergib uns und unseren Geschwistern im Īmān und lege keinen Groll gegen die Gläubigen in unsere Herzen.",
+          "source": "Qurʾān 59:10"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 13:21",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 5986; Ṣaḥīḥ Muslim, Nr. 2557",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 5986; Ṣaḥīḥ Muslim, Nr. 2557",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/daQ00vMn?osoul=1"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "ʿAbdullāh ibn ʿUmar رضي الله عنهما",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 6416",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/gI1CDzYH?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 59:10",
+          "reference": "Qurʾān 59:10",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 19",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Verwandtschaftsbande pflegen",
+        "ambientLine": "Ṣilat ar-Raḥim braucht manchmal Überwindung. Gerade kleine, regelmäßige Kontakte bewahren Nähe, Respekt und Barmherzigkeit."
       }
     },
     {
       "day": 20,
       "slug": "day-20",
-      "title": "Testtag 20",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Für andere lieben, was man selbst liebt",
+      "contentStatus": "verified",
+      "theme": "Für andere lieben, was man selbst liebt",
+      "summary": "Īmān verändert den Blick auf andere. Neid wird durch Duʿāʾ, Wohlwollen und echte Freude über Gutes für andere bekämpft.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Īmān verändert den Blick auf andere. Neid wird durch Duʿāʾ, Wohlwollen und echte Freude über Gutes für andere bekämpft.",
+        "quran": {
+          "reference": "Qurʾān 49:10",
+          "text": "Sinngemäße Bedeutung: Die Gläubigen sind Geschwister; so stiftet Frieden zwischen euren Geschwistern.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte: Keiner von euch hat vollkommenen Īmān, bis er für seinen Bruder liebt, was er für sich selbst liebt.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 13; Ṣaḥīḥ Muslim, Nr. 45",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "Muʿādh ibn Jabal رضي الله عنه",
+          "text": "Er sagte: „Setz dich zu uns, damit wir eine Stunde Īmān haben“ – gemeint war: Allah gedenken.",
+          "source": "Überliefert von den frühen Ḥadīṯ-Gelehrten; Überlieferung mit authentischer Kette",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Mache heute für einen Muslim im Verborgenen Duʿāʾ und tue einer Person etwas Gutes, von dem du selbst dich freuen würdest.",
+        "dua": {
+          "text": "Rabbanā ġfir lanā wa li-iḫwāninā llaḏīna sabaqūnā bi-l-Īmān wa-lā taǧʿal fī qulūbinā ġillan li-llaḏīna āmanū.",
+          "meaning": "Unser Herr, vergib uns und unseren Geschwistern im Īmān und lege keinen Groll gegen die Gläubigen in unsere Herzen.",
+          "source": "Qurʾān 59:10"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 49:10",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 13; Ṣaḥīḥ Muslim, Nr. 45",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 13; Ṣaḥīḥ Muslim, Nr. 45",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/TNgEqffN?osoul=1"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "Muʿādh ibn Jabal رضي الله عنه",
+          "reference": "Überliefert von den frühen Ḥadīṯ-Gelehrten; Überlieferung mit authentischer Kette",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/WAOhZwKr?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 59:10",
+          "reference": "Qurʾān 59:10",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 20",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Für andere lieben, was man selbst liebt",
+        "ambientLine": "Īmān verändert den Blick auf andere. Neid wird durch Duʿāʾ, Wohlwollen und echte Freude über Gutes für andere bekämpft."
       }
     },
     {
       "day": 21,
       "slug": "day-21",
-      "title": "Testtag 21",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Barmherzigkeit",
+      "contentStatus": "verified",
+      "theme": "Barmherzigkeit",
+      "summary": "Raḥmah zeigt sich im Ton, im Verzeihen, im Umgang mit Schwachen, Kindern, Älteren und auch mit Menschen, die einen Fehler machen.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Raḥmah zeigt sich im Ton, im Verzeihen, im Umgang mit Schwachen, Kindern, Älteren und auch mit Menschen, die einen Fehler machen.",
+        "quran": {
+          "reference": "Qurʾān 7:156",
+          "text": "Sinngemäße Bedeutung: Allahs Barmherzigkeit umfasst alles.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte sinngemäß: Den Barmherzigen erweist der Allerbarmer Barmherzigkeit. Seid barmherzig zu den Bewohnern der Erde.",
+          "source": "Jāmiʿ at-Tirmiḏī, Nr. 1924; Sunan Abī Dāwūd, Nr. 4941",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "ʿĀʾišah رضي الله عنها",
+          "text": "Als sie nach dem Charakter des Propheten ﷺ gefragt wurde, sagte sie: „Sein Charakter war der Qurʾān.“",
+          "source": "Musnad Aḥmad, Nr. 25302; authentische Kette",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Suche heute bewusst eine Gelegenheit für Barmherzigkeit: verzeihen, erleichtern, trösten, geduldig zuhören oder jemand Schwächeren schützen.",
+        "dua": {
+          "text": "Rabbanā ātinā fī d-dunyā ḥasanatan wa fī l-āḫirati ḥasanatan wa qinā ʿaḏāba n-nār.",
+          "meaning": "Unser Herr, gib uns Gutes im Diesseits und Gutes im Jenseits und bewahre uns vor der Strafe des Feuers.",
+          "source": "Qurʾān 2:201"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 7:156",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Jāmiʿ at-Tirmiḏī, Nr. 1924; Sunan Abī Dāwūd, Nr. 4941",
+          "reference": "Jāmiʿ at-Tirmiḏī, Nr. 1924; Sunan Abī Dāwūd, Nr. 4941",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/hadith/sharh/60776"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "ʿĀʾišah رضي الله عنها",
+          "reference": "Musnad Aḥmad, Nr. 25302; authentische Kette",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/1OXbtUrZ"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 2:201",
+          "reference": "Qurʾān 2:201",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 21",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Barmherzigkeit",
+        "ambientLine": "Raḥmah zeigt sich im Ton, im Verzeihen, im Umgang mit Schwachen, Kindern, Älteren und auch mit Menschen, die einen Fehler machen."
       }
     },
     {
       "day": 22,
       "slug": "day-22",
-      "title": "Testtag 22",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Die Last eines anderen erleichtern",
+      "contentStatus": "verified",
+      "theme": "Die Last eines anderen erleichtern",
+      "summary": "Dienst am Menschen kann ʿIbādah sein, wenn er für Allah getan wird. Manche guten Taten bestehen darin, dass ein anderer durch dich weniger Last trägt.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Dienst am Menschen kann ʿIbādah sein, wenn er für Allah getan wird. Manche guten Taten bestehen darin, dass ein anderer durch dich weniger Last trägt.",
+        "quran": {
+          "reference": "Qurʾān 5:2",
+          "text": "Sinngemäße Bedeutung: Helft einander in Güte und Taqwā.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte sinngemäß: Wer sich um das Bedürfnis seines Bruders kümmert, um dessen Bedürfnis kümmert sich Allah.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 2442; Ṣaḥīḥ Muslim, Nr. 2580",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "Salmān al-Fārisī رضي الله عنه",
+          "text": "Er sagte zu Abū ad-Dardāʾ: „Dein Herr hat ein Recht über dich, dein Körper hat ein Recht über dich und deine Familie hat ein Recht über dich; gib jedem sein Recht.“ Der Prophet ﷺ bestätigte dies.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6139",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Erledige heute konkret ein Bedürfnis eines Menschen: eine Fahrt, einen Einkauf, eine Aufgabe, einen Anruf, eine Erklärung oder stille finanzielle Hilfe.",
+        "dua": {
+          "text": "Rabbi innī limā anzalta ilayya min ḫayrin faqīr.",
+          "meaning": "Mein Herr, ich bin dessen bedürftig, was Du an Gutem zu mir herabsendest.",
+          "source": "Qurʾān 28:24"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 5:2",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 2442; Ṣaḥīḥ Muslim, Nr. 2580",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 2442; Ṣaḥīḥ Muslim, Nr. 2580",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/jlxZZOdn"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "Salmān al-Fārisī رضي الله عنه",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 6139",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/FzkTB07d?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 28:24",
+          "reference": "Qurʾān 28:24",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 22",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Die Last eines anderen erleichtern",
+        "ambientLine": "Dienst am Menschen kann ʿIbādah sein, wenn er für Allah getan wird. Manche guten Taten bestehen darin, dass ein anderer durch dich weniger Last trägt."
       }
     },
     {
       "day": 23,
       "slug": "day-23",
-      "title": "Testtag 23",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Ṣadaqah – geben, ohne Angst zu verlieren",
+      "contentStatus": "verified",
+      "theme": "Ṣadaqah – geben, ohne Angst zu verlieren",
+      "summary": "Ṣadaqah reinigt die Bindung an Besitz. Besonders wertvoll ist eine Gabe, die ohne Selbstdarstellung und ohne Erniedrigung des Empfängers geschieht.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Ṣadaqah reinigt die Bindung an Besitz. Besonders wertvoll ist eine Gabe, die ohne Selbstdarstellung und ohne Erniedrigung des Empfängers geschieht.",
+        "quran": {
+          "reference": "Qurʾān 2:261",
+          "text": "Sinngemäße Bedeutung: Allah vervielfacht den Lohn derjenigen, die auf Seinem Weg ausgeben.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte: Ṣadaqah vermindert keinen Besitz; Vergebung mehrt Ehre, und wer sich für Allah demütigt, den erhöht Allah.",
+          "source": "Ṣaḥīḥ Muslim, Nr. 2588",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "ʿAbdullāh ibn ʿUmar رضي الله عنهما",
+          "text": "Er sagte: „Wenn du den Abend erreichst, erwarte nicht den Morgen; und wenn du den Morgen erreichst, erwarte nicht den Abend. Nimm von deiner Gesundheit für deine Krankheit und von deinem Leben für deinen Tod.“",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6416",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Gib heute eine Ṣadaqah im Verborgenen – Geld, Essen oder eine konkrete Hilfe. Sprich danach nicht darüber, wenn kein guter Grund dafür besteht.",
+        "dua": {
+          "text": "Rabbanā ātinā fī d-dunyā ḥasanatan wa fī l-āḫirati ḥasanatan wa qinā ʿaḏāba n-nār.",
+          "meaning": "Unser Herr, gib uns Gutes im Diesseits und Gutes im Jenseits und bewahre uns vor der Strafe des Feuers.",
+          "source": "Qurʾān 2:201"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 2:261",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ Muslim, Nr. 2588",
+          "reference": "Ṣaḥīḥ Muslim, Nr. 2588",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/5ny4Eh57"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "ʿAbdullāh ibn ʿUmar رضي الله عنهما",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 6416",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/gI1CDzYH?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 2:201",
+          "reference": "Qurʾān 2:201",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 23",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Ṣadaqah – geben, ohne Angst zu verlieren",
+        "ambientLine": "Ṣadaqah reinigt die Bindung an Besitz. Besonders wertvoll ist eine Gabe, die ohne Selbstdarstellung und ohne Erniedrigung des Empfängers geschieht."
       }
     },
     {
       "day": 24,
       "slug": "day-24",
-      "title": "Testtag 24",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Ṣabr – ruhig bleiben und weitergehen",
+      "contentStatus": "verified",
+      "theme": "Ṣabr – ruhig bleiben und weitergehen",
+      "summary": "Ṣabr ist nicht Passivität. Er bedeutet, bei Gehorsam standhaft zu bleiben, sich von Fehlern zurückzuhalten und Belastungen mit Vertrauen zu tragen.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Ṣabr ist nicht Passivität. Er bedeutet, bei Gehorsam standhaft zu bleiben, sich von Fehlern zurückzuhalten und Belastungen mit Vertrauen zu tragen.",
+        "quran": {
+          "reference": "Qurʾān 2:153",
+          "text": "Sinngemäße Bedeutung: Sucht Hilfe in Geduld und Gebet; Allah ist mit den Geduldigen.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte sinngemäß: Die Angelegenheit des Gläubigen ist immer gut: Bei Erfreulichem dankt er, bei Schwerem ist er geduldig.",
+          "source": "Ṣaḥīḥ Muslim, Nr. 2999",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "ʿAbdullāh ibn Masʿūd رضي الله عنه",
+          "text": "Überliefert ist von ihm: „Geduld ist die Hälfte des Īmān, und Gewissheit ist der ganze Īmān.“",
+          "source": "Ibn Abī Shaybah; al-Buḫārī überliefert den zweiten Teil taʿlīqan",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Wenn heute etwas schwer wird, unterbrich die erste impulsive Reaktion. Mache Duʿāʾ, bewahre die Zunge und wähle dann die Handlung, die Allah gefällt.",
+        "dua": {
+          "text": "Rabbanā afriġ ʿalaynā ṣabran wa ṯabbit aqdāmanā.",
+          "meaning": "Unser Herr, gieße Geduld über uns aus und festige unsere Schritte.",
+          "source": "Qurʾān 2:250"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 2:153",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ Muslim, Nr. 2999",
+          "reference": "Ṣaḥīḥ Muslim, Nr. 2999",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/hadith/sharh/17865"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "ʿAbdullāh ibn Masʿūd رضي الله عنه",
+          "reference": "Ibn Abī Shaybah; al-Buḫārī überliefert den zweiten Teil taʿlīqan",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/6SNnoLT0?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 2:250",
+          "reference": "Qurʾān 2:250",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 24",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Ṣabr – ruhig bleiben und weitergehen",
+        "ambientLine": "Ṣabr ist nicht Passivität. Er bedeutet, bei Gehorsam standhaft zu bleiben, sich von Fehlern zurückzuhalten und Belastungen mit Vertrauen zu tragen."
       }
     },
     {
       "day": 25,
       "slug": "day-25",
-      "title": "Testtag 25",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Shukr – Gunst erkennen",
+      "contentStatus": "verified",
+      "theme": "Shukr – Gunst erkennen",
+      "summary": "Dankbarkeit ist Herz, Zunge und Handlung. Wer eine Gunst erkennt, lobt Allah dafür und nutzt sie nicht gegen das, was Ihm gefällt.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Dankbarkeit ist Herz, Zunge und Handlung. Wer eine Gunst erkennt, lobt Allah dafür und nutzt sie nicht gegen das, was Ihm gefällt.",
+        "quran": {
+          "reference": "Qurʾān 14:7",
+          "text": "Sinngemäße Bedeutung: Wenn ihr dankbar seid, werde Ich euch gewiss noch mehr geben.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte sinngemäß: Wer den Menschen nicht dankt, dankt Allah nicht.",
+          "source": "Sunan Abī Dāwūd, Nr. 4811; Jāmiʿ at-Tirmiḏī, Nr. 1954",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "Muʿādh ibn Jabal رضي الله عنه",
+          "text": "Er sagte: „Setz dich zu uns, damit wir eine Stunde Īmān haben“ – gemeint war: Allah gedenken.",
+          "source": "Überliefert von den frühen Ḥadīṯ-Gelehrten; Überlieferung mit authentischer Kette",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Nenne nach einer Ṣalāh drei konkrete Gaben Allahs. Danke außerdem heute zwei Menschen ausdrücklich für etwas Gutes, das sie dir getan haben.",
+        "dua": {
+          "text": "Rabbi awziʿnī an aškura niʿmataka llatī anʿamta ʿalayya wa ʿalā wālidayya wa an aʿmala ṣāliḥan tarḍāh.",
+          "meaning": "Mein Herr, gib mir ein, für Deine Gunst zu danken und rechtschaffen zu handeln, womit Du zufrieden bist.",
+          "source": "Qurʾān 27:19"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 14:7",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Sunan Abī Dāwūd, Nr. 4811; Jāmiʿ at-Tirmiḏī, Nr. 1954",
+          "reference": "Sunan Abī Dāwūd, Nr. 4811; Jāmiʿ at-Tirmiḏī, Nr. 1954",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/c6wJXXOB?osoul=1"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "Muʿādh ibn Jabal رضي الله عنه",
+          "reference": "Überliefert von den frühen Ḥadīṯ-Gelehrten; Überlieferung mit authentischer Kette",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/WAOhZwKr?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 27:19",
+          "reference": "Qurʾān 27:19",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 25",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Shukr – Gunst erkennen",
+        "ambientLine": "Dankbarkeit ist Herz, Zunge und Handlung. Wer eine Gunst erkennt, lobt Allah dafür und nutzt sie nicht gegen das, was Ihm gefällt."
       }
     },
     {
       "day": 26,
       "slug": "day-26",
-      "title": "Testtag 26",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Tawakkul mit Stärke",
+      "contentStatus": "verified",
+      "theme": "Tawakkul mit Stärke",
+      "summary": "Tawakkul verbindet das Herz mit Allah und lässt die Hände handeln. Der Gläubige nimmt erlaubte Mittel, bittet Allah um Hilfe und gibt nicht mutlos auf.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Tawakkul verbindet das Herz mit Allah und lässt die Hände handeln. Der Gläubige nimmt erlaubte Mittel, bittet Allah um Hilfe und gibt nicht mutlos auf.",
+        "quran": {
+          "reference": "Qurʾān 3:159",
+          "text": "Sinngemäße Bedeutung: Wenn du dich entschlossen hast, dann vertraue auf Allah.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte sinngemäß: Der starke Gläubige ist Allah lieber als der schwache Gläubige, und in beiden liegt Gutes. Strebe nach dem, was dir nützt, bitte Allah um Hilfe und werde nicht schwach.",
+          "source": "Ṣaḥīḥ Muslim, Nr. 2664",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "ʿAbdullāh ibn Masʿūd رضي الله عنه",
+          "text": "Überliefert ist von ihm: „Geduld ist die Hälfte des Īmān, und Gewissheit ist der ganze Īmān.“",
+          "source": "Ibn Abī Shaybah; al-Buḫārī überliefert den zweiten Teil taʿlīqan",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Wähle heute eine nützliche Sache, die du aufgeschoben hast. Bitte Allah um Hilfe, setze einen erlaubten konkreten Schritt um und überlasse das Ergebnis Allah.",
+        "dua": {
+          "text": "Rabbanā ʿalayka tawakkalnā wa ilayka anabnā wa ilayka l-maṣīr.",
+          "meaning": "Unser Herr, auf Dich vertrauen wir, zu Dir wenden wir uns reuevoll, und zu Dir ist die Rückkehr.",
+          "source": "Qurʾān 60:4"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 3:159",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ Muslim, Nr. 2664",
+          "reference": "Ṣaḥīḥ Muslim, Nr. 2664",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/Ov16uqG0"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "ʿAbdullāh ibn Masʿūd رضي الله عنه",
+          "reference": "Ibn Abī Shaybah; al-Buḫārī überliefert den zweiten Teil taʿlīqan",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/6SNnoLT0?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 60:4",
+          "reference": "Qurʾān 60:4",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 26",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Tawakkul mit Stärke",
+        "ambientLine": "Tawakkul verbindet das Herz mit Allah und lässt die Hände handeln. Der Gläubige nimmt erlaubte Mittel, bittet Allah um Hilfe und gibt nicht mutlos auf."
       }
     },
     {
       "day": 27,
       "slug": "day-27",
-      "title": "Testtag 27",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Die letzten Nächte – mehr Nähe zu Allah",
+      "contentStatus": "verified",
+      "theme": "Die letzten Nächte – mehr Nähe zu Allah",
+      "summary": "Die letzten Nächte sind keine Zeit zum Nachlassen. Der Prophet ﷺ steigerte seine Anstrengung und bezog seine Familie in das Gute ein.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Die letzten Nächte sind keine Zeit zum Nachlassen. Der Prophet ﷺ steigerte seine Anstrengung und bezog seine Familie in das Gute ein.",
+        "quran": {
+          "reference": "Qurʾān 73:6",
+          "text": "Sinngemäße Bedeutung: Das Aufstehen in der Nacht prägt Herz und Wort besonders stark.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "ʿĀʾišah رضي الله عنها berichtete: Wenn die letzten zehn Nächte begannen, belebte der Prophet ﷺ die Nacht, weckte seine Familie und strengte sich besonders an.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 2024; Ṣaḥīḥ Muslim, Nr. 1174",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "ʿAbdullāh ibn ʿUmar رضي الله عنهما",
+          "text": "Er sagte: „Wenn du den Abend erreichst, erwarte nicht den Morgen; und wenn du den Morgen erreichst, erwarte nicht den Abend. Nimm von deiner Gesundheit für deine Krankheit und von deinem Leben für deinen Tod.“",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6416",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Reduziere heute Abend unnötige Bildschirmzeit. Plane Qiyām, Qurʾān und Duʿāʾ fest ein und wecke deine Familie freundlich zu einem Teil der Nacht.",
+        "dua": {
+          "text": "Rabbanā fa-ġfir lanā ḏunūbanā wa kaffir ʿannā sayyiʾātinā wa tawaffanā maʿa l-abrār.",
+          "meaning": "Unser Herr, vergib uns unsere Sünden, tilge unsere schlechten Taten und lass uns mit den Rechtschaffenen sterben.",
+          "source": "Qurʾān 3:193"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 73:6",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 2024; Ṣaḥīḥ Muslim, Nr. 1174",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 2024; Ṣaḥīḥ Muslim, Nr. 1174",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/CKWPDiww?osoul=1"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "ʿAbdullāh ibn ʿUmar رضي الله عنهما",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 6416",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/gI1CDzYH?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 3:193",
+          "reference": "Qurʾān 3:193",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 27",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Die letzten Nächte – mehr Nähe zu Allah",
+        "ambientLine": "Die letzten Nächte sind keine Zeit zum Nachlassen. Der Prophet ﷺ steigerte seine Anstrengung und bezog seine Familie in das Gute ein."
       }
     },
     {
       "day": 28,
       "slug": "day-28",
-      "title": "Testtag 28",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Laylat al-Qadr – Nacht der Vergebung",
+      "contentStatus": "verified",
+      "theme": "Laylat al-Qadr – Nacht der Vergebung",
+      "summary": "Die genaue Nacht wird gesucht, nicht als selbstverständlich behandelt. Īmān, Hoffnung auf Lohn, Qiyām und Duʿāʾ stehen im Mittelpunkt.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Die genaue Nacht wird gesucht, nicht als selbstverständlich behandelt. Īmān, Hoffnung auf Lohn, Qiyām und Duʿāʾ stehen im Mittelpunkt.",
+        "quran": {
+          "reference": "Qurʾān 97:1–5",
+          "text": "Sinngemäße Bedeutung: Laylat al-Qadr ist besser als tausend Monate; sie ist eine Nacht des Friedens bis zum Anbruch der Morgendämmerung.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte sinngemäß: Wer Laylat al-Qadr aus Īmān und in Hoffnung auf Allahs Lohn im Gebet verbringt, dem werden seine vergangenen Sünden vergeben.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 35; Ṣaḥīḥ Muslim, Nr. 760",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "ʿAbdullāh ibn ʿUmar رضي الله عنهما",
+          "text": "Er sagte: „Wenn du den Abend erreichst, erwarte nicht den Morgen; und wenn du den Morgen erreichst, erwarte nicht den Abend. Nimm von deiner Gesundheit für deine Krankheit und von deinem Leben für deinen Tod.“",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6416",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Behandle diese Nacht so, als könnte sie Laylat al-Qadr sein: Qiyām, Qurʾān, Istighfār und viel Duʿāʾ – ohne Ablenkung und ohne Selbstdarstellung.",
+        "dua": {
+          "text": "Allāhumma innaka ʿafuwwun tuḥibbu l-ʿafwa faʿfu ʿannī.",
+          "meaning": "O Allah, Du bist vergebend und liebst die Vergebung, so vergib mir.",
+          "source": "Jāmiʿ at-Tirmiḏī, Nr. 3513; ḥasan ṣaḥīḥ"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 97:1–5",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 35; Ṣaḥīḥ Muslim, Nr. 760",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 35; Ṣaḥīḥ Muslim, Nr. 760",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/hadith/sharh/1431"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "ʿAbdullāh ibn ʿUmar رضي الله عنهما",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 6416",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/gI1CDzYH?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Jāmiʿ at-Tirmiḏī, Nr. 3513; ḥasan ṣaḥīḥ",
+          "reference": "Jāmiʿ at-Tirmiḏī, Nr. 3513; ḥasan ṣaḥīḥ",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 28",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Laylat al-Qadr – Nacht der Vergebung",
+        "ambientLine": "Die genaue Nacht wird gesucht, nicht als selbstverständlich behandelt. Īmān, Hoffnung auf Lohn, Qiyām und Duʿāʾ stehen im Mittelpunkt."
       }
     },
     {
       "day": 29,
       "slug": "day-29",
-      "title": "Testtag 29",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Beständigkeit nach dem Höhepunkt",
+      "contentStatus": "verified",
+      "theme": "Beständigkeit nach dem Höhepunkt",
+      "summary": "Die Stärke einer guten Tat zeigt sich auch darin, ob etwas davon bleibt. Kleine dauerhafte ʿIbādah ist besser als ein kurzer Ausbruch ohne Fortsetzung.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Die Stärke einer guten Tat zeigt sich auch darin, ob etwas davon bleibt. Kleine dauerhafte ʿIbādah ist besser als ein kurzer Ausbruch ohne Fortsetzung.",
+        "quran": {
+          "reference": "Qurʾān 41:30",
+          "text": "Sinngemäße Bedeutung: Diejenigen, die sagen: Unser Herr ist Allah, und dann standhaft bleiben, erhalten Sicherheit und gute Botschaft.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte sinngemäß: Die Allah liebsten Taten sind die beständigen, auch wenn sie gering sind.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6464; Ṣaḥīḥ Muslim, Nr. 2818",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "ʿUmar ibn ʿAbd al-ʿAzīz رحمه الله",
+          "text": "Er schrieb sinngemäß: Der Īmān besitzt Pflichten, Regeln, Grenzen und Sunan; wer sie vervollständigt, vervollständigt seinen Īmān.",
+          "source": "Ṣaḥīḥ al-Buḫārī, Kitāb al-Īmān, taʿlīqan; verbunden überliefert",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Lege heute drei kleine Taten fest, die nach Ramaḍān bleiben: z. B. täglicher Qurʾān, feste Adhkār und eine regelmäßige verborgene Ṣadaqah.",
+        "dua": {
+          "text": "Rabbi awziʿnī an aškura niʿmataka llatī anʿamta ʿalayya wa ʿalā wālidayya wa an aʿmala ṣāliḥan tarḍāh wa aṣliḥ lī fī ḏurriyyatī.",
+          "meaning": "Mein Herr, gib mir ein, Dir zu danken, rechtschaffen zu handeln und mache meine Nachkommenschaft gut für mich.",
+          "source": "Qurʾān 46:15"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 41:30",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ al-Buḫārī, Nr. 6464; Ṣaḥīḥ Muslim, Nr. 2818",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 6464; Ṣaḥīḥ Muslim, Nr. 2818",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/hadith/sharh/25705"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "ʿUmar ibn ʿAbd al-ʿAzīz رحمه الله",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Kitāb al-Īmān, taʿlīqan; verbunden überliefert",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/OW4hCPG4?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 46:15",
+          "reference": "Qurʾān 46:15",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 29",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Beständigkeit nach dem Höhepunkt",
+        "ambientLine": "Die Stärke einer guten Tat zeigt sich auch darin, ob etwas davon bleibt. Kleine dauerhafte ʿIbādah ist besser als ein kurzer Ausbruch ohne Fortsetzung."
       }
     },
     {
       "day": 30,
       "slug": "day-30",
-      "title": "Testtag 30",
-      "contentStatus": "structure-test",
-      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "title": "Ramaḍān endet – ʿIbādah bleibt",
+      "contentStatus": "verified",
+      "theme": "Ramaḍān endet – ʿIbādah bleibt",
+      "summary": "Der Monat endet, aber die Dienerschaft gegenüber Allah endet nicht. Das Ziel ist nicht, Ramaḍān zu überstehen, sondern mit mehr Īmān und besseren Gewohnheiten weiterzugehen.",
       "sections": {
-        "thought": "",
-        "quran": null,
-        "sunnah": null,
-        "salaf": null,
-        "action": "",
-        "dua": null
+        "thought": "Der Monat endet, aber die Dienerschaft gegenüber Allah endet nicht. Das Ziel ist nicht, Ramaḍān zu überstehen, sondern mit mehr Īmān und besseren Gewohnheiten weiterzugehen.",
+        "quran": {
+          "reference": "Qurʾān 15:99",
+          "text": "Sinngemäße Bedeutung: Diene deinem Herrn, bis die Gewissheit – der Tod – zu dir kommt.",
+          "source": "Qurʾān"
+        },
+        "sunnah": {
+          "text": "Der Prophet ﷺ sagte sinngemäß: Wer Ramaḍān fastet und ihm sechs Tage aus Shawwāl folgen lässt, erhält den Lohn wie für das Fasten eines ganzen Jahres.",
+          "source": "Ṣaḥīḥ Muslim, Nr. 1164",
+          "grading": "authentisch"
+        },
+        "salaf": {
+          "speaker": "ʿAbdullāh ibn ʿUmar رضي الله عنهما",
+          "text": "Er sagte: „Wenn du den Abend erreichst, erwarte nicht den Morgen; und wenn du den Morgen erreichst, erwarte nicht den Abend. Nimm von deiner Gesundheit für deine Krankheit und von deinem Leben für deinen Tod.“",
+          "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6416",
+          "grading": "geprüfte Überlieferung"
+        },
+        "action": "Schreibe deinen Plan für die Zeit nach Ramaḍān fest: sechs Tage Shawwāl, Qurʾān-Rhythmus, Adhkār, Ṣalāh und eine regelmäßige gute Tat für Familie oder andere.",
+        "dua": {
+          "text": "Rabbana taqabbal minnā innaka anta s-Samīʿu l-ʿAlīm.",
+          "meaning": "Unser Herr, nimm von uns an. Du bist der Allhörende, der Allwissende.",
+          "source": "Qurʾān 2:127"
+        }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "type": "quran",
+          "sourceTitle": "Qurʾān",
+          "reference": "Qurʾān 15:99",
+          "verificationStatus": "verified"
+        },
+        {
+          "type": "sunnah",
+          "sourceTitle": "Ṣaḥīḥ Muslim, Nr. 1164",
+          "reference": "Ṣaḥīḥ Muslim, Nr. 1164",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/hadith/sharh/33004"
+        },
+        {
+          "type": "salaf",
+          "sourceTitle": "ʿAbdullāh ibn ʿUmar رضي الله عنهما",
+          "reference": "Ṣaḥīḥ al-Buḫārī, Nr. 6416",
+          "verificationStatus": "verified",
+          "verificationUrl": "https://dorar.net/h/gI1CDzYH?osoul=1"
+        },
+        {
+          "type": "dua",
+          "sourceTitle": "Qurʾān 2:127",
+          "reference": "Qurʾān 2:127",
+          "verificationStatus": "verified"
+        }
+      ],
       "presentation": {
-        "shortTitle": "Tag 30",
-        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+        "shortTitle": "Ramaḍān endet – ʿIbādah bleibt",
+        "ambientLine": "Der Monat endet, aber die Dienerschaft gegenüber Allah endet nicht. Das Ziel ist nicht, Ramaḍān zu überstehen, sondern mit mehr Īmān und besseren Gewohn…"
       }
     }
   ]
