@@ -3,89 +3,130 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#07121b">
-<title>Ramaḍān · DĀR AL TAWḤĪD Test</title>
+<meta name="theme-color" content="#c8b38e">
+<title>Ramaḍān · 30 Tage · DĀR AL TAWḤĪD</title>
 <style>
 :root{
-  color-scheme:dark;
-  --bg:#061019;--bg2:#0a1823;--text:#f3eddf;--muted:#a9b0b3;
-  --gold:#d3b36f;--gold2:#ead7a2;--line:rgba(211,179,111,.24);
-  --line-soft:rgba(211,179,111,.12);--ok:#aec7ad;
+  --paper:#cbb792;
+  --paper2:#bfa77f;
+  --paper3:#d4c29f;
+  --ink:#17130f;
+  --ink2:#2c241b;
+  --muted:#665849;
+  --gold:#8b642d;
+  --gold2:#a97c39;
+  --line:rgba(88,60,24,.28);
+  --line-soft:rgba(88,60,24,.15);
+  --ok:#51694d;
 }
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:
- radial-gradient(circle at 50% -12%,rgba(211,179,111,.09),transparent 30%),
- linear-gradient(155deg,var(--bg2),var(--bg) 55%,#03080c);
- color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif}
-body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
-button{font:inherit}
-a{color:inherit}
-.wrap{width:min(1080px,100%);margin:0 auto;padding:22px clamp(17px,4vw,42px) 54px}
-.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:8px 0 20px;border-bottom:1px solid var(--line)}
-.brand{font-family:Georgia,serif;font-size:clamp(17px,2.4vw,23px);letter-spacing:.08em}
-.testmark{font-size:11px;color:var(--gold2);letter-spacing:.08em}
-.hero{padding:34px 0 26px;border-bottom:1px solid var(--line)}
-.hero small{display:block;color:var(--gold);font-size:12px;font-weight:720;letter-spacing:.05em;margin-bottom:9px}
-.hero h1{font-family:Georgia,serif;font-weight:500;font-size:clamp(38px,8vw,70px);line-height:1;margin:0 0 10px}
-.hero p{max-width:740px;color:var(--muted);font-size:clamp(15px,1.8vw,18px);line-height:1.65;margin:0}
-.progress{padding:20px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:18px;align-items:end}
-.progress-title{font-size:14px;font-weight:700}.progress-meta{font-size:12px;color:var(--muted);margin-top:7px}
-.progress-track{height:2px;background:rgba(255,255,255,.08);margin-top:13px;position:relative}
-.progress-fill{height:2px;background:var(--gold);width:0;transition:width .25s ease}
-.progress-count{font-size:25px;font-weight:700;color:var(--gold2);font-variant-numeric:tabular-nums}
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:42px}
-.reader{min-width:0}
-.dayhead{padding:31px 0 24px;border-bottom:1px solid var(--line)}
-.daymeta{font-size:12px;color:var(--gold);font-weight:740;letter-spacing:.04em}
-.dayhead h2{font-family:Georgia,serif;font-size:clamp(29px,5vw,47px);font-weight:500;line-height:1.1;margin:7px 0 9px}
-.summary{font-size:15px;line-height:1.7;color:#d8d8d1;max-width:760px}
-.verified{margin-top:12px;font-size:11px;color:var(--ok)}
-.content-section{padding:24px 0;border-bottom:1px solid var(--line-soft)}
-.content-section h3{font-family:Georgia,serif;font-size:21px;font-weight:500;margin:0 0 11px;color:var(--gold2)}
-.content-section p{margin:0;font-size:15px;line-height:1.72;color:#e3e1da}
-.content-section .meaning{margin-top:9px;color:#c9cbc8}
-.source{margin-top:10px!important;font-size:11.5px!important;color:var(--muted)!important;line-height:1.5!important}
-.source strong{color:var(--gold);font-weight:650}
-.salaf-speaker{font-weight:700;color:#f0eadb;margin-bottom:7px!important}
-.action-text{font-size:16px!important;color:#f0ecdf!important}
-.dua-translit{font-family:Georgia,serif;font-size:17px!important;line-height:1.65!important;color:#f1e8d1!important}
-.done-button{appearance:none;width:100%;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:transparent;color:var(--gold2);padding:16px 0;margin-top:28px;font-weight:760;cursor:pointer;text-align:left}
-.done-button.is-done{color:var(--ok)}
-.side{padding-top:31px;border-left:1px solid var(--line);padding-left:24px}
-.side h3{font-family:Georgia,serif;font-size:20px;font-weight:500;margin:0 0 9px}
-.side p{font-size:12px;color:var(--muted);line-height:1.6;margin:0 0 18px}
-.side-controls{display:flex;flex-direction:column}
-.side-controls button{appearance:none;border:0;border-top:1px solid var(--line-soft);background:transparent;color:var(--text);padding:12px 0;text-align:left;cursor:pointer}
-.side-controls button:last-child{border-bottom:1px solid var(--line-soft)}
-.side-controls button:disabled{opacity:.35}
-.state{font-size:11px;color:var(--gold);margin-top:14px}
-.days{padding:31px 0 4px;border-top:1px solid var(--line);margin-top:34px}
-.days-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:16px}
-.days h3{font-family:Georgia,serif;font-size:23px;font-weight:500;margin:0}.days small{color:var(--muted)}
-.daygrid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));column-gap:14px;row-gap:5px}
-.daybtn{appearance:none;border:0;border-bottom:1px solid var(--line-soft);background:transparent;color:var(--muted);padding:10px 1px 8px;cursor:pointer;font-size:12px;font-weight:700;text-align:center}
-.daybtn.active{color:var(--gold2);border-bottom-color:var(--gold)}
+html,body{margin:0;min-height:100%}
+html{background:#8f795d}
+body{
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at 18% 4%,rgba(255,255,255,.22),transparent 22%),
+    radial-gradient(circle at 84% 12%,rgba(95,62,23,.06),transparent 24%),
+    linear-gradient(180deg,var(--paper3),var(--paper) 34%,var(--paper2) 100%);
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.18;
+  background:
+    repeating-linear-gradient(0deg,rgba(67,47,26,.035) 0,rgba(67,47,26,.035) 1px,transparent 1px,transparent 4px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.02) 0,rgba(255,255,255,.02) 1px,transparent 1px,transparent 5px);
+}
+button,a{font:inherit}
+.wrap{position:relative;width:min(920px,100%);margin:0 auto;padding:18px clamp(18px,4.5vw,42px) 56px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 0 14px;border-bottom:1px solid var(--line)}
+.back{color:var(--ink2);text-decoration:none;font-size:12px;font-weight:750}
+.brand{font-family:Georgia,serif;font-size:15px;letter-spacing:.09em;color:var(--ink2)}
+.test{font-size:10px;color:var(--gold);font-weight:850;letter-spacing:.08em}
+.hero{padding:28px 0 24px;border-bottom:1px solid var(--line)}
+.kicker{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:850}
+.hero h1{font-family:Georgia,serif;font-weight:500;font-size:clamp(42px,10vw,72px);line-height:.98;margin:7px 0 12px;color:var(--ink)}
+.hero p{margin:0;max-width:760px;font-family:Georgia,serif;font-size:clamp(15px,2.2vw,18px);line-height:1.62;color:var(--ink2)}
+.progress{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end;padding:19px 0 21px;border-bottom:1px solid var(--line)}
+.progress-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:850;color:var(--gold)}
+.progress-track{height:3px;background:rgba(57,39,18,.14);margin:10px 0 6px;position:relative}
+.progress-fill{height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .25s ease}
+.progress-meta{font-size:11.5px;color:var(--muted)}
+.progress-count{font-family:Georgia,serif;font-size:27px;color:var(--ink);font-weight:600}
+.day{padding:27px 0 0}
+.dayhead{padding-bottom:23px;border-bottom:1px solid var(--line)}
+.dayno{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:850}
+.dayhead h2{font-family:Georgia,serif;font-weight:500;font-size:clamp(30px,7vw,48px);line-height:1.08;margin:7px 0 9px;color:var(--ink)}
+.summary{font-family:Georgia,serif;font-size:16px;line-height:1.62;color:var(--ink2);max-width:760px}
+.verified{margin-top:11px;font-size:11px;color:var(--ok);font-weight:700}
+.section{display:grid;grid-template-columns:150px 1fr;gap:28px;padding:23px 0;border-bottom:1px solid var(--line-soft)}
+.section-label{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);font-weight:850;padding-top:3px}
+.section-body{min-width:0}
+.section-body p{margin:0;font-family:Georgia,serif;font-size:16px;line-height:1.68;color:var(--ink)}
+.section-body .source{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;font-size:11px;line-height:1.5;color:var(--muted);margin-top:8px}
+.section-body .speaker{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;font-size:12px;font-weight:800;color:var(--ink2);margin-bottom:6px}
+.section-body .meaning{margin-top:8px;color:var(--ink2)}
+.section.action .section-body p{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;font-size:15px;line-height:1.62;font-weight:600}
+.section.dua .section-body .dua-text{font-family:Georgia,serif;font-size:18px;line-height:1.7;color:var(--ink)}
+.complete{appearance:none;width:100%;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:transparent;color:var(--ink);padding:16px 0;margin-top:26px;text-align:left;font-weight:820;cursor:pointer}
+.complete.is-done{color:var(--ok)}
+.controls{padding:24px 0 6px;border-top:1px solid var(--line);margin-top:30px}
+.controls h3{font-family:Georgia,serif;font-size:20px;font-weight:500;margin:0 0 12px}
+.control-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.control-row button{appearance:none;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink2);padding:11px 0;text-align:left;cursor:pointer}
+.control-row button:nth-child(even){text-align:right}
+.control-row button:disabled{opacity:.35}
+.simstate{font-size:10.5px;color:var(--gold);margin-top:12px}
+.days{padding:26px 0 2px;border-top:1px solid var(--line);margin-top:28px}
+.days-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:12px}
+.days h3{font-family:Georgia,serif;font-size:23px;font-weight:500;margin:0}
+.days small{font-size:10.5px;color:var(--muted)}
+.daygrid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));column-gap:12px;row-gap:2px}
+.daybtn{appearance:none;border:0;border-bottom:1px solid var(--line-soft);background:transparent;color:var(--muted);padding:8px 0;cursor:pointer;font-size:11px;font-weight:800}
+.daybtn.active{color:var(--ink);border-bottom-color:var(--gold)}
 .daybtn.done{color:var(--ok)}
-.finish{display:none;padding:34px 0 8px;margin-top:32px;border-top:1px solid var(--line)}
-.finish.show{display:block}.finish h3{font-family:Georgia,serif;font-weight:500;font-size:32px;margin:7px 0 10px}.finish p{max-width:760px;color:#d3d3cc;line-height:1.7}.finish-dua{padding:19px 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);margin-top:20px}
-.error{margin:22px 0;padding:12px 0;border-top:1px solid #7d4e4e;border-bottom:1px solid #7d4e4e;color:#efcaca}
-@media(max-width:850px){.layout{grid-template-columns:1fr;gap:0}.side{border-left:0;border-top:1px solid var(--line);padding:24px 0 0;margin-top:28px}.side-controls{display:grid;grid-template-columns:1fr 1fr;column-gap:18px}.daygrid{grid-template-columns:repeat(6,minmax(0,1fr))}}
-@media(max-width:480px){.wrap{padding-left:16px;padding-right:16px}.progress{grid-template-columns:1fr}.progress-count{font-size:21px}.daygrid{grid-template-columns:repeat(5,minmax(0,1fr))}.hero{padding-top:27px}.content-section{padding:21px 0}}
+.finish{display:none;padding:30px 0 6px;border-top:1px solid var(--line);margin-top:30px}
+.finish.show{display:block}
+.finish h3{font-family:Georgia,serif;font-size:30px;font-weight:500;margin:6px 0 10px}
+.finish p{font-family:Georgia,serif;font-size:15px;line-height:1.65;color:var(--ink2);max-width:760px}
+.finish-dua{padding:18px 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);margin:18px 0}
+.error{margin:20px 0;padding:12px 0;border-top:1px solid #815d4f;border-bottom:1px solid #815d4f;color:#5d231f}
+@media(max-width:700px){
+  .section{grid-template-columns:1fr;gap:9px}
+  .section-label{padding-top:0}
+  .daygrid{grid-template-columns:repeat(6,minmax(0,1fr))}
+}
+@media(max-width:450px){
+  .wrap{padding-left:16px;padding-right:16px}
+  .progress{grid-template-columns:1fr}
+  .progress-count{font-size:23px}
+  .daygrid{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .control-row{grid-template-columns:1fr}
+  .control-row button:nth-child(even){text-align:left}
+}
 </style>
 </head>
 <body>
 <main class="wrap">
-<header class="top"><div class="brand">DĀR AL TAWḤĪD</div><div class="testmark">Ramaḍān · Test-App</div></header>
+<header class="topbar">
+  <a class="back" href="/test/?page=ramadan">← Ramaḍān</a>
+  <div class="brand">DĀR AL TAWḤĪD</div>
+  <div class="test">TEST</div>
+</header>
 
 <section class="hero">
-  <small>30 Tage mit Qurʾān & Sunnah</small>
+  <div class="kicker">30 Tage mit Qurʾān & Sunnah</div>
   <h1>Ramaḍān</h1>
-  <p>Ein geordneter Weg durch Tawḥīd, Īmān, Herz, Charakter, Familie und Standhaftigkeit. Jeder Tag ist mit Qurʾān, authentischer Sunnah, einer geprüften Überlieferung der Salaf und einer passenden Duʿāʾ belegt.</p>
+  <p>Ein geordneter Weg durch Tawḥīd, Īmān, Herz, Charakter, Familie und Standhaftigkeit. Jeder Tag ist vollständig mit Qurʾān, authentischer Sunnah, Athar und Duʿāʾ belegt.</p>
 </section>
 
 <section class="progress">
   <div>
-    <div class="progress-title">Mein Weg</div>
+    <div class="progress-label">Mein Weg</div>
     <div class="progress-track"><div id="progressFill" class="progress-fill"></div></div>
     <div id="progressMeta" class="progress-meta">0 von 30 Tagen abgeschlossen</div>
   </div>
@@ -94,80 +135,71 @@ a{color:inherit}
 
 <div id="appError" class="error" hidden></div>
 
-<div class="layout">
-<article class="reader">
+<article class="day">
   <header class="dayhead">
-    <div id="dayNumber" class="daymeta">Tag 01 von 30</div>
+    <div id="dayNumber" class="dayno">Tag 01 von 30</div>
     <h2 id="dayTitle">Lädt …</h2>
     <div id="summary" class="summary"></div>
     <div id="contentStatus" class="verified"></div>
   </header>
 
-  <section class="content-section">
-    <h3>Tagesgedanke</h3>
-    <p id="thought"></p>
+  <section class="section">
+    <div class="section-label">Tagesgedanke</div>
+    <div class="section-body"><p id="thought"></p></div>
   </section>
 
-  <section class="content-section">
-    <h3>Qurʾān</h3>
-    <p id="quran"></p>
-    <p id="quranSource" class="source"></p>
+  <section class="section">
+    <div class="section-label">Qurʾān</div>
+    <div class="section-body"><p id="quran"></p><p id="quranSource" class="source"></p></div>
   </section>
 
-  <section class="content-section">
-    <h3>Sunnah</h3>
-    <p id="sunnah"></p>
-    <p id="sunnahSource" class="source"></p>
+  <section class="section">
+    <div class="section-label">Sunnah</div>
+    <div class="section-body"><p id="sunnah"></p><p id="sunnahSource" class="source"></p></div>
   </section>
 
-  <section class="content-section">
-    <h3>Athar der Salaf</h3>
-    <p id="salafSpeaker" class="salaf-speaker"></p>
-    <p id="salaf"></p>
-    <p id="salafSource" class="source"></p>
+  <section class="section">
+    <div class="section-label">Athar der Salaf</div>
+    <div class="section-body"><p id="salafSpeaker" class="speaker"></p><p id="salaf"></p><p id="salafSource" class="source"></p></div>
   </section>
 
-  <section class="content-section">
-    <h3>Heute umsetzen</h3>
-    <p id="action" class="action-text"></p>
+  <section class="section action">
+    <div class="section-label">Heute umsetzen</div>
+    <div class="section-body"><p id="action"></p></div>
   </section>
 
-  <section class="content-section">
-    <h3>Duʿāʾ</h3>
-    <p id="dua" class="dua-translit"></p>
-    <p id="duaMeaning" class="meaning"></p>
-    <p id="duaSource" class="source"></p>
+  <section class="section dua">
+    <div class="section-label">Duʿāʾ</div>
+    <div class="section-body"><p id="dua" class="dua-text"></p><p id="duaMeaning" class="meaning"></p><p id="duaSource" class="source"></p></div>
   </section>
 
-  <button id="completeBtn" class="done-button" type="button">Tag als abgeschlossen markieren →</button>
+  <button id="completeBtn" class="complete" type="button">Tag als abgeschlossen markieren →</button>
 </article>
 
-<aside class="side">
+<section class="controls">
   <h3>Teststeuerung</h3>
-  <p>Nur in der Test-App sichtbar. Damit prüfen wir alle 30 Tage und das Finale vor der späteren Live-Schaltung.</p>
-  <div class="side-controls">
+  <div class="control-row">
     <button id="prevBtn" type="button">← Vorheriger Tag</button>
     <button id="nextBtn" type="button">Nächster Tag →</button>
     <button id="day1Btn" type="button">Tag 1 öffnen</button>
     <button id="day30Btn" type="button">Tag 30 öffnen</button>
     <button id="resetBtn" type="button">Fortschritt zurücksetzen</button>
   </div>
-  <div id="simState" class="state"></div>
-</aside>
-</div>
+  <div id="simState" class="simstate"></div>
+</section>
 
 <section class="days">
-  <div class="days-head"><h3>Alle 30 Tage</h3><small>Vergangene Tage bleiben lesbar</small></div>
+  <div class="days-head"><h3>Alle 30 Tage</h3><small>Testmodus</small></div>
   <div id="dayGrid" class="daygrid"></div>
 </section>
 
 <section id="finish" class="finish">
-  <small class="daymeta">Abschluss</small>
+  <div class="kicker">Abschluss</div>
   <h3 id="finishTitle">Ramaḍān endet – die ʿIbādah bleibt</h3>
   <p id="finishBody"></p>
   <div class="finish-dua">
-    <p id="finishDua" class="dua-translit"></p>
-    <p id="finishDuaMeaning" class="meaning"></p>
+    <p id="finishDua"></p>
+    <p id="finishDuaMeaning"></p>
     <p id="finishDuaSource" class="source"></p>
   </div>
   <p id="finishContinuation"></p>
@@ -178,77 +210,63 @@ a{color:inherit}
 (function(){
 "use strict";
 var SOURCE="../content/ramadan/staging.json";
-var STORAGE="dar.ramadan.test.progress.v2";
+var STORAGE="dar.ramadan.test.progress.v3";
 var series=null,day=1,completed=new Set();
 function el(id){return document.getElementById(id)}
-function pad(n){return String(n).padStart(2,"0")}
 function set(id,v){var n=el(id);if(n)n.textContent=v||""}
-function sourceLine(value){return value?"Quelle: "+value:""}
+function pad(n){return String(n).padStart(2,"0")}
+function source(v){return v?"Quelle: "+v:""}
 function loadProgress(){try{var raw=JSON.parse(localStorage.getItem(STORAGE)||"[]");completed=new Set(Array.isArray(raw)?raw.filter(function(n){return Number.isInteger(n)&&n>=1&&n<=30}):[])}catch(e){completed=new Set()}}
 function saveProgress(){localStorage.setItem(STORAGE,JSON.stringify(Array.from(completed).sort(function(a,b){return a-b})))}
 function dayFromURL(){var n=Number(new URLSearchParams(location.search).get("day"));return Number.isInteger(n)&&n>=1&&n<=30?n:Number(series&&series.testMode&&series.testMode.overrideDay||1)}
 function updateURL(){var u=new URL(location.href);u.searchParams.set("day",String(day));history.replaceState(null,"",u)}
-function verifiedDay(item){
+function verified(item){
   var types=new Set((item.evidence||[]).filter(function(x){return x.verificationStatus==="verified"}).map(function(x){return x.type}));
   return ["quran","sunnah","salaf","dua"].every(function(t){return types.has(t)});
 }
 function render(){
  if(!series)return;
- var item=series.days.find(function(x){return x.day===day})||series.days[0];
- var s=item.sections||{};
+ var item=series.days.find(function(x){return x.day===day})||series.days[0],s=item.sections||{};
  set("dayNumber","Tag "+pad(item.day)+" von "+series.plannedDays);
  set("dayTitle",item.title||("Tag "+pad(item.day)));
  set("summary",item.summary||"");
- set("contentStatus",verifiedDay(item)?"✓ Qurʾān · Sunnah · Athar · Duʿāʾ geprüft":"Quellenprüfung unvollständig");
+ set("contentStatus",verified(item)?"✓ Qurʾān · Sunnah · Athar · Duʿāʾ geprüft":"Quellenprüfung unvollständig");
  set("thought",s.thought||"");
  set("quran",s.quran&&s.quran.text||"");
- set("quranSource",sourceLine(s.quran&&s.quran.reference||""));
+ set("quranSource",source(s.quran&&s.quran.reference||""));
  set("sunnah",s.sunnah&&s.sunnah.text||"");
- set("sunnahSource",sourceLine(s.sunnah&&s.sunnah.source||""));
+ set("sunnahSource",source(s.sunnah&&s.sunnah.source||""));
  set("salafSpeaker",s.salaf&&s.salaf.speaker||"");
  set("salaf",s.salaf&&s.salaf.text||"");
- set("salafSource",sourceLine(s.salaf&&s.salaf.source||""));
+ set("salafSource",source(s.salaf&&s.salaf.source||""));
  set("action",s.action||"");
  set("dua",s.dua&&s.dua.text||"");
  set("duaMeaning",s.dua&&s.dua.meaning||"");
- set("duaSource",sourceLine(s.dua&&s.dua.source||""));
-
+ set("duaSource",source(s.dua&&s.dua.source||""));
  var done=completed.has(day);
  el("completeBtn").textContent=done?"✓ Tag abgeschlossen":"Tag als abgeschlossen markieren →";
  el("completeBtn").classList.toggle("is-done",done);
-
  var count=completed.size;
  el("progressFill").style.width=((count/series.plannedDays)*100)+"%";
  set("progressMeta",count+" von "+series.plannedDays+" Tagen abgeschlossen");
  set("progressBig",count+" / "+series.plannedDays);
  set("simState","Simulator · Tag "+day+" von "+series.plannedDays);
-
- Array.from(el("dayGrid").children).forEach(function(b,i){
-  var n=i+1;b.classList.toggle("active",n===day);b.classList.toggle("done",completed.has(n));
- });
-
+ Array.from(el("dayGrid").children).forEach(function(b,i){var n=i+1;b.classList.toggle("active",n===day);b.classList.toggle("done",completed.has(n))});
  var finish=count===series.plannedDays;
  el("finish").classList.toggle("show",finish);
  if(finish&&series.completion){
-   set("finishTitle",series.completion.title);
-   set("finishBody",series.completion.body);
-   set("finishDua",series.completion.dua&&series.completion.dua.text||"");
-   set("finishDuaMeaning",series.completion.dua&&series.completion.dua.meaning||"");
-   set("finishDuaSource",sourceLine(series.completion.dua&&series.completion.dua.source||""));
-   set("finishContinuation",series.completion.continuation||"");
+  set("finishTitle",series.completion.title);set("finishBody",series.completion.body);
+  set("finishDua",series.completion.dua&&series.completion.dua.text||"");
+  set("finishDuaMeaning",series.completion.dua&&series.completion.dua.meaning||"");
+  set("finishDuaSource",source(series.completion.dua&&series.completion.dua.source||""));
+  set("finishContinuation",series.completion.continuation||"");
  }
- el("prevBtn").disabled=day<=1;el("nextBtn").disabled=day>=series.plannedDays;
- updateURL();
+ el("prevBtn").disabled=day<=1;el("nextBtn").disabled=day>=series.plannedDays;updateURL();
 }
 function renderGrid(){
  el("dayGrid").innerHTML="";
  for(var n=1;n<=series.plannedDays;n++){
-  (function(num){
-   var b=document.createElement("button");b.type="button";b.className="daybtn";b.textContent=pad(num);
-   b.setAttribute("aria-label","Tag "+num+" öffnen");
-   b.addEventListener("click",function(){day=num;render();scrollTo({top:0,behavior:"smooth"})});
-   el("dayGrid").appendChild(b);
-  })(n);
+  (function(num){var b=document.createElement("button");b.type="button";b.className="daybtn";b.textContent=pad(num);b.addEventListener("click",function(){day=num;render();scrollTo({top:0,behavior:"smooth"})});el("dayGrid").appendChild(b)})(n);
  }
 }
 el("prevBtn").addEventListener("click",function(){if(day>1){day--;render();scrollTo({top:0,behavior:"smooth"})}});
@@ -256,22 +274,16 @@ el("nextBtn").addEventListener("click",function(){if(day<30){day++;render();scro
 el("day1Btn").addEventListener("click",function(){day=1;render();scrollTo({top:0,behavior:"smooth"})});
 el("day30Btn").addEventListener("click",function(){day=30;render();scrollTo({top:0,behavior:"smooth"})});
 el("resetBtn").addEventListener("click",function(){completed.clear();saveProgress();render()});
-el("completeBtn").addEventListener("click",function(){if(completed.has(day))completed.delete(day);else completed.add(day);saveProgress();render()});
-
+el("completeBtn").addEventListener("click",function(){completed.has(day)?completed.delete(day):completed.add(day);saveProgress();render()});
 async function boot(){
  loadProgress();
  try{
-  var res=await fetch(SOURCE,{cache:"no-store"});
-  if(!res.ok)throw new Error("HTTP "+res.status);
-  series=await res.json();
+  var r=await fetch(SOURCE,{cache:"no-store"});if(!r.ok)throw new Error("HTTP "+r.status);
+  series=await r.json();
   if(!Array.isArray(series.days)||series.days.length!==30)throw new Error("Ungültige 30-Tage-Serie");
-  var allVerified=series.days.every(verifiedDay);
-  if(!allVerified)throw new Error("Mindestens ein Tag ist noch nicht vollständig verifiziert");
+  if(!series.days.every(verified))throw new Error("Mindestens ein Tag ist noch nicht vollständig verifiziert");
   day=dayFromURL();renderGrid();render();
- }catch(err){
-  el("appError").hidden=false;
-  el("appError").textContent="Ramaḍān-Serie konnte nicht geladen werden: "+err.message;
- }
+ }catch(err){el("appError").hidden=false;el("appError").textContent="Ramaḍān-Serie konnte nicht geladen werden: "+err.message}
 }
 boot();
 })();
