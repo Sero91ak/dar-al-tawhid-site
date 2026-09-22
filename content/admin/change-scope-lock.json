@@ -108,6 +108,26 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-player-art-lockscreen-only-live-2026-09-22",
+      "approvedBy": "user-explicit-player-hintergrund-kein-icon-sperrbildschirm-ios-global-pushen",
+      "reason": "Nutzer: Mushaf-Cover nicht als Player-Hintergrund in der App; nur Sperrbildschirm/Live Activity. Global inkl. iOS live pushen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "assets/dar-quran-player.js",
+        "assets/dar-quran-player.css",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.css",
+        "ios/DarAlTawhid/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-learn-launch-vs-global-icon-live-2026-09-22",
       "approvedBy": "user-explicit-icon-global-player-leiste-lernplayer-live-global-pushen",
       "reason": "Nutzer: oberes Icon = globaler Qurʾān-Player; lange Leiste = Lernplayer letzter Stand; live global pushen.",
