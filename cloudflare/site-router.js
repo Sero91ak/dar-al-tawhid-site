@@ -23,10 +23,38 @@ function desktopHeaders(assetResponse) {
   return headers;
 }
 
+function iosNativeHeaders(assetResponse) {
+  const headers = new Headers(assetResponse.headers);
+  headers.set("Vary", "User-Agent");
+  headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+  headers.set("CDN-Cache-Control", "no-store");
+  headers.set("Cloudflare-CDN-Cache-Control", "no-store");
+  headers.set("X-Dar-Surface", "ios-native");
+  headers.delete("Content-Length");
+  headers.delete("Content-Encoding");
+  headers.delete("ETag");
+  return headers;
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     const isRoot = url.pathname === "/" || url.pathname === "/index.html";
+    const ua = String(request.headers.get("User-Agent") || "");
+    const nativeIos = /DarAlTawhid-iOS/i.test(ua);
+
+    if ((request.method === "GET" || request.method === "HEAD") && isRoot && nativeIos) {
+      const assetResponse = await env.ASSETS.fetch(request);
+      const headers = iosNativeHeaders(assetResponse);
+      if (request.method === "HEAD") {
+        return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
+      }
+      return new Response(assetResponse.body, {
+        status: assetResponse.status,
+        statusText: assetResponse.statusText,
+        headers
+      });
+    }
 
     if ((request.method === "GET" || request.method === "HEAD") && isRoot && wantsDesktopWebsite(request, url)) {
       const target = new URL("/desktop-preview/index.html", url.origin);

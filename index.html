@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v845";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v846";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script id="dar-browser-desktop-router-v833">
 (function(){
   try{
@@ -27154,7 +27154,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v845";
+const APP_BUILD_ID="app-shell-v846";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -28715,7 +28715,7 @@ window.addEventListener("load",()=>{
 (function(){const pushBtn=document.getElementById("pushFloat");if(!pushBtn)return;async function waitForOneSignal(timeoutMs){const start=Date.now();while(Date.now()-start<(timeoutMs||10000)){try{if(window.OneSignal&&window.DAR_ONE_SIGNAL_READY)return window.OneSignal}catch(e){}await new Promise(resolve=>setTimeout(resolve,180))}return window.OneSignal||null}async function activatePushFromFloat(){const permission=typeof getNotificationPermission==="function"?getNotificationPermission():"default";if(permission==="denied"){alert("Benachrichtigungen sind im Browser blockiert. Bitte zuerst in den Browser-Einstellungen erlauben.");return}const OneSignal=await waitForOneSignal();try{if(OneSignal&&OneSignal.Notifications&&typeof OneSignal.Notifications.isPushSupported==="function"&&!OneSignal.Notifications.isPushSupported()){alert("Dieser Browser unterstützt Web-Push-Benachrichtigungen nicht.");return}if(OneSignal&&OneSignal.User&&OneSignal.User.PushSubscription&&typeof OneSignal.User.PushSubscription.optIn==="function"){await OneSignal.User.PushSubscription.optIn()}else if(OneSignal&&OneSignal.Notifications&&typeof OneSignal.Notifications.requestPermission==="function"){await OneSignal.Notifications.requestPermission()}else if(typeof requestNotificationPermission==="function"){await requestNotificationPermission()}await new Promise(r=>setTimeout(r,500));const state=typeof readOneSignalPushSubscriptionState==="function"?readOneSignalPushSubscriptionState(OneSignal):null;if(state&&state.optedIn&&state.subscriptionId){const welcomed=typeof syncPushRegistrationAndWelcome==="function"?await syncPushRegistrationAndWelcome(OneSignal):false;if(typeof getPrayerSettings==="function"&&getPrayerSettings().reminder&&typeof syncPrayerPushTags==="function"){await syncPrayerPushTags(undefined,{retries:5})}if(typeof maintainPushHealth==="function")await maintainPushHealth({silent:true});if(typeof updatePushFloatButton==="function")updatePushFloatButton();alert(welcomed?"✓ Push aktiv – Willkommens-Nachricht (As-Salāmu ʿalaykum) wurde gesendet.":"✓ Push aktiv – Willkommens-Nachricht wird automatisch zugestellt.")}else{alert("Push konnte noch nicht verbunden werden. Bitte erneut tippen oder die App vom Home-Bildschirm öffnen.")}}catch(e){console.error(e);alert("Push konnte nicht aktiviert werden. Bitte prüfe Browser-Berechtigung und OneSignal-Service-Worker.")}}pushBtn.addEventListener("click",function(ev){ev.preventDefault();activatePushFromFloat()});pushBtn.setAttribute("tabindex","0");pushBtn.setAttribute("aria-hidden","false");pushBtn.style.pointerEvents="auto"})();
 </script>
 <script>
-if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/service-worker.js",{updateViaCache:"none"}).catch(function(e){console.warn("Service Worker konnte nicht registriert werden:",e)})})}
+if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/service-worker.js",{updateViaCache:"none"}).then(function(reg){try{reg.update()}catch(e){}}).catch(function(e){console.warn("Service Worker konnte nicht registriert werden:",e)});navigator.serviceWorker.addEventListener("message",function(ev){try{if(ev&&ev.data&&ev.data.type==="VISUAL_CACHE_INVALIDATED"){var h=location.hash||"#home";if(String(location.search||"").indexOf("darsw=")>=0)return;location.replace((location.pathname||"/")+"?darsw="+Date.now()+h)}}catch(e){}})})}
 </script>
 
 <script>

@@ -1,10 +1,10 @@
-// workers-deploy-stamp:1789400000845
+// workers-deploy-stamp:1789400000846
 /* DĀR AL TAWḤĪD – Offline Light Service Worker
    Ziel: Startseite/App-Hülle offline nutzbar machen, ohne viel Speicher zu belegen.
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v845';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v846';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -486,12 +486,28 @@ async function purgePastVisualCaches() {
 }
 
 self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    purgePastVisualCaches()
-      .then(() => self.clients.claim())
-      .then(() => postToClients({ type: 'VISUAL_CACHE_INVALIDATED', version: CACHE_VERSION }))
-      .catch(() => self.clients.claim())
-  );
+  event.waitUntil((async () => {
+    try {
+      await purgePastVisualCaches();
+      await self.clients.claim();
+      await postToClients({ type: 'VISUAL_CACHE_INVALIDATED', version: CACHE_VERSION });
+      const stamp = String(CACHE_VERSION).replace(/^.*v/, '');
+      const list = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+      await Promise.all(list.map((client) => {
+        try {
+          const u = new URL(client.url, self.location.origin);
+          if (u.pathname.indexOf('/admin') === 0) return null;
+          if (u.pathname.indexOf('/desktop-preview') === 0) return null;
+          if (u.searchParams.get('darsw') === stamp) return null;
+          u.searchParams.set('darsw', stamp);
+          if (typeof client.navigate === 'function') return client.navigate(u.href);
+        } catch (e) {}
+        return null;
+      }));
+    } catch (e) {
+      try { await self.clients.claim(); } catch (e2) {}
+    }
+  })());
 });
 
 // Wenn Nutzer auf Push-Benachrichtigung klickt → Beitrag öffnen
