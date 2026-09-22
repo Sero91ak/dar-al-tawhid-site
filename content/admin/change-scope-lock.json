@@ -108,6 +108,25 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-two-resume-rows-2026-09-22",
+      "approvedBy": "user-explicit-nur-zwei-weiter-karten-lernen-wiedergabe-und-lesen",
+      "reason": "Nutzer: drei Weiter-Elemente zu viel; nur Lernen mit Wiedergabe und Qurʾān weiterlesen untereinander.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "assets/dar-quran-player.js",
+        "assets/dar-quran-player.css",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-learn-bar-rename-ios-2026-09-22",
       "approvedBy": "user-explicit-ios-lernbutton-letzter-stand-anders-heissen",
       "reason": "Nutzer: iOS-Leiste führt nicht zum Lernbereich letzter Stand; Button anders benennen (Lernen).",
