@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v841";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v842";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script id="dar-browser-desktop-router-v833">
 (function(){
   try{
@@ -27153,7 +27153,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v841";
+const APP_BUILD_ID="app-shell-v842";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -34200,6 +34200,46 @@ html[data-theme] #darQuranPlayer .dqp-groove{
 html[data-theme] #darQuranMiniPlayer .dqp-top-fill,
 html[data-theme] #darQuranPlayer .dqp-fill{
   background:linear-gradient(90deg,var(--gold),var(--gold2))!important;
+}
+</style>
+
+<style id="dar-ios-native-oversize-restore-v842">
+/* Offizielle iOS-App: Oversize/Edge-to-Edge je Erscheinungsbild, kein Test-Glas. */
+html.dar-ios-native-app,
+html.dar-ios-native-app body,
+html.dar-ios-native-app #appRoot,
+html.dar-ios-native-app #appShell{
+  background:var(--dar-edge-fill,var(--page-cover,var(--outer-bg-flat,var(--bg))))!important;
+  background-color:var(--dar-edge-fill,var(--page-cover,var(--outer-bg-flat,var(--bg))))!important;
+  background-image:none!important;
+  overscroll-behavior-y:none!important;
+  overscroll-behavior-x:none!important;
+}
+html.dar-ios-native-app .app{
+  background:transparent!important;
+}
+html.dar-ios-native-app .top-shell,
+html.dar-ios-native-app .header,
+html.dar-ios-native-app .header.theme-hero-surface,
+html.dar-ios-native-app .theme-hero-surface,
+html.dar-ios-native-app .sf-top{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html.dar-ios-native-app .top-edge-fade,
+html.dar-ios-native-app .top-swim-aura,
+html.dar-ios-native-app #topEdgeFade,
+html.dar-ios-native-app #topSwimAura,
+html.dar-ios-native-app .app:after,
+html.dar-ios-native-app .app::after{
+  display:none!important;
+  content:none!important;
+  opacity:0!important;
+  height:0!important;
+  background:none!important;
+  filter:none!important;
+  pointer-events:none!important;
+  visibility:hidden!important;
 }
 </style>
 

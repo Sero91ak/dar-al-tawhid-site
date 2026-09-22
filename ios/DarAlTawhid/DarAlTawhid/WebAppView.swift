@@ -510,6 +510,7 @@ struct WebAppView: UIViewRepresentable {
             // Theme-only: never inject hardcoded navy/blue route palettes.
             var roots=[document.body, document.documentElement, document.querySelector('.app'), document.querySelector('#appShell'), document.querySelector('#appView')];
             var topColor=firstVariableColor(roots, [
+              "--dar-edge-fill",
               "--theme-page-bg",
               "--theme-feed-bg",
               "--ilm-page-bg",
@@ -523,6 +524,7 @@ struct WebAppView: UIViewRepresentable {
               topColor=firstSolidColor([".sf-top", ".lib-page", "#appView > .view-head", "#appView > .view", "body", "html"]);
             }
             var midColor=firstVariableColor(roots, [
+              "--dar-edge-fill",
               "--theme-feed-bg",
               "--page-cover-mid",
               "--theme-page-bg",
@@ -535,6 +537,7 @@ struct WebAppView: UIViewRepresentable {
               midColor=firstSolidColor(["#appView > .view-head", ".sf-top", ".lib-page", "#appView > .view", "body"]) || topColor;
             }
             var bottomColor=firstVariableColor(roots, [
+              "--dar-edge-fill",
               "--outer-bg-flat",
               "--theme-page-bg",
               "--ilm-page-bg",

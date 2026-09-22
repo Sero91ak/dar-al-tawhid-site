@@ -108,6 +108,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "ios-native-oversize-restore-2026-09-22",
+      "approvedBy": "user-explicit-ios-app-glass-oversize-nicht-testfehler",
+      "reason": "Nutzer: iOS-App Edge-to-Edge/Oversize für alle Erscheinungsbilder wiederherstellen; kein Test-Glas; keine Fremdfarbe beim Ziehen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "ios/DarAlTawhid/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-player-back-mini-compact-2026-09-22",
       "approvedBy": "user-explicit-zurueck-mini-weiter-kein-stopp-im-vollplayer",
       "reason": "Nutzer: Zurück beendet den Qurʾān-Player nicht, Mini heftet oben an und läuft weiter; Stopp nur im angehefteten Mini; Position merken; Textfläche kompakter.",
