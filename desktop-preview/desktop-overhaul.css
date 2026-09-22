@@ -1,1 +1,137 @@
 :root{--dt-page:#fbf8f1;--dt-ink:#24211d;--dt-gold:#a78242;--dt-night:#111d27;--dt-night2:#1a2c35;--dt-green:#223a32;--dt-line:rgba(91,68,35,.13);--dt-line2:rgba(118,88,43,.22);--dt-max:1360px}html{background:var(--dt-page)}body.desktop-overhaul-v18{color:var(--dt-ink);background:radial-gradient(980px 420px at 12% -7%,rgba(204,175,116,.13),transparent 64%),radial-gradient(780px 360px at 92% 7%,rgba(193,164,106,.08),transparent 64%),linear-gradient(180deg,#fffdf8 0%,var(--dt-page) 42%,#f8f3ea 100%)}body.desktop-overhaul-v18:before{opacity:.15}.desktop-overhaul-v18 .site-header{background:rgba(255,253,248,.93);border-bottom:1px solid rgba(105,78,39,.09);box-shadow:0 7px 24px rgba(62,45,22,.035)}.desktop-overhaul-v18 .header-inner{width:min(var(--dt-max),calc(100% - 56px));min-height:74px;grid-template-columns:minmax(235px,auto) minmax(0,1fr) auto;gap:22px}.desktop-overhaul-v18 .brand{min-width:235px;gap:11px}.desktop-overhaul-v18 .brand-logo{width:48px;height:48px}.desktop-overhaul-v18 .brand-copy strong{font-size:18px}.desktop-overhaul-v18 .main-nav{gap:4px;overflow:auto;scrollbar-width:none}.desktop-overhaul-v18 .main-nav::-webkit-scrollbar{display:none}.desktop-overhaul-v18 .main-nav a{padding:26px 8px 23px;font-size:10px}.desktop-overhaul-v18 .main-nav a:after{bottom:15px}.desktop-overhaul-v18 .isnad-ribbon{background:linear-gradient(180deg,rgba(246,239,226,.88),rgba(243,234,218,.76))}.desktop-overhaul-v18 .isnad-inner{width:min(var(--dt-max),calc(100% - 56px));padding:10px 0 9px;grid-template-columns:120px minmax(0,1fr);gap:20px}.desktop-overhaul-v18 .isnad-label{font-size:7px}.desktop-overhaul-v18 .isnad-quote{padding-left:18px;font-size:14px}.desktop-overhaul-v18 .inline-source{margin-top:4px;padding-top:5px;font-size:8px}.desktop-overhaul-v18 .player-wrap{width:min(720px,calc(100% - 56px))!important;margin:12px auto 11px!important}.desktop-overhaul-v18 .quran-player{width:100%!important;height:58px!important;min-height:58px!important;display:grid!important;grid-template-columns:30px 44px minmax(178px,1fr) 116px 62px 145px 30px!important;grid-template-rows:58px!important;gap:0!important;align-items:center!important;border:0!important;border-radius:29px!important;overflow:hidden!important;color:#fffaf0!important;background:radial-gradient(310px 74px at 18% 0%,rgba(255,255,255,.055),transparent 72%),radial-gradient(270px 80px at 82% 50%,rgba(197,159,88,.055),transparent 74%),linear-gradient(105deg,var(--dt-night) 0%,var(--dt-night2) 42%,var(--dt-green) 100%)!important;box-shadow:0 11px 27px rgba(12,21,25,.13),inset 0 0 0 1px rgba(224,198,139,.09)!important}.desktop-overhaul-v18 .player-prev,.desktop-overhaul-v18 .player-step{display:grid!important;place-items:center!important;width:30px!important;height:58px!important;margin:0!important;border:0!important;background:transparent!important;color:#d7c18d!important;font-size:17px!important}.desktop-overhaul-v18 .player-prev{grid-column:1!important;grid-row:1!important}.desktop-overhaul-v18 .player-play{grid-column:2!important;grid-row:1!important;width:38px!important;height:38px!important;margin:0 auto!important;border:1px solid rgba(227,202,147,.25)!important;background:linear-gradient(180deg,#fffdf7,#eee0c1)!important;color:#1c2c27!important;font-size:13px!important}.desktop-overhaul-v18 .player-now{grid-column:3!important;grid-row:1!important;min-width:0!important;padding:0 11px!important}.desktop-overhaul-v18 .player-kicker{font-size:6.5px!important;color:#d7bc7f!important}.desktop-overhaul-v18 .player-title{margin-top:3px!important;font-size:12.5px!important;color:#fffdf8!important}.desktop-overhaul-v18 .player-progress{height:1px!important;margin-top:5px!important}.desktop-overhaul-v18 .player-field{min-width:0!important;height:58px!important;padding:0 8px!important;display:grid!important;grid-template-columns:1fr!important;align-content:center!important;gap:3px!important;border:0!important;background:transparent!important}.desktop-overhaul-v18 .player-field label{font-size:6px!important;color:#cbb88e!important}.desktop-overhaul-v18 .player-field select{width:100%!important;max-width:none!important;min-width:0!important;padding:0 9px 0 0!important;font-size:9.4px!important;font-weight:650!important;color:#fffdf8!important;background:transparent!important}.desktop-overhaul-v18 .player-surah{grid-column:4!important;grid-row:1!important}.desktop-overhaul-v18 .player-ayah{grid-column:5!important;grid-row:1!important}.desktop-overhaul-v18 .player-reciter{grid-column:6!important;grid-row:1!important}.desktop-overhaul-v18 .player-step{grid-column:7!important;grid-row:1!important}.desktop-overhaul-v18 .page{width:min(var(--dt-max),calc(100% - 56px));padding:24px 0 76px}.desktop-overhaul-v18 .page-intro{grid-template-columns:minmax(0,1fr) 250px;gap:44px;padding:13px 0 21px;border-bottom:1px solid var(--dt-line2)}.desktop-overhaul-v18 .page-intro h1{margin:7px 0;font-size:clamp(36px,3.8vw,54px)}.desktop-overhaul-v18 .page-intro p{max-width:760px;font-size:12px}.desktop-overhaul-v18 .desktop-home-jump{display:flex;align-items:center;margin:0 0 6px;padding:7px 0 8px;border-bottom:1px solid rgba(91,68,35,.08);overflow:auto;scrollbar-width:none}.desktop-overhaul-v18 .desktop-home-jump::-webkit-scrollbar{display:none}.desktop-overhaul-v18 .desktop-home-jump a{flex:0 0 auto;padding:8px 16px 8px 0;margin-right:16px;color:#6f665a;font-size:8px;font-weight:850;letter-spacing:.09em;text-transform:uppercase}.desktop-overhaul-v18 .home-foundations{padding:18px 0 5px}.desktop-overhaul-v18 .foundation-lead{margin:0 0 20px;padding:38px 40px 36px;border-radius:34px;color:#f7f1e4;background:radial-gradient(820px 360px at 8% -18%,rgba(213,187,128,.14),transparent 62%),radial-gradient(580px 300px at 90% 86%,rgba(47,82,69,.42),transparent 70%),linear-gradient(112deg,#101b24 0%,#172a32 44%,#1d342e 100%)!important;box-shadow:0 22px 54px rgba(13,23,25,.16),inset 0 0 0 1px rgba(229,204,151,.10)}.desktop-overhaul-v18 .foundation-lead-inner{grid-template-columns:minmax(0,1.12fr) minmax(310px,.88fr);gap:52px}.desktop-overhaul-v18 .foundation-label{color:#d8bd81}.desktop-overhaul-v18 .foundation-lead h2{margin:9px 0 12px;font-size:clamp(34px,3.15vw,47px);color:#fffaf0}.desktop-overhaul-v18 .foundation-lead p{max-width:720px;color:#ddd5c7;font-size:12.5px;line-height:1.74}.desktop-overhaul-v18 .foundation-proof{padding-left:30px;border-left:1px solid rgba(226,199,139,.18)}.desktop-overhaul-v18 .foundation-proof-ar{font-size:27px;color:#fff8e9}.desktop-overhaul-v18 .foundation-proof-de{font-size:14px;color:#e6ddcd}.desktop-overhaul-v18 .foundation-proof-ref{color:#dfc384}.desktop-overhaul-v18 .foundation-lead .foundation-link{border-bottom-color:rgba(255,255,255,.085)}.desktop-overhaul-v18 .foundation-lead .foundation-link .meta{color:#d3b674}.desktop-overhaul-v18 .foundation-lead .foundation-link strong{color:#fff9ec}.desktop-overhaul-v18 .foundation-lead .foundation-link small{color:#bfb6a6}.desktop-overhaul-v18 .foundation-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 42px;margin-top:6px;border-top:1px solid var(--dt-line2)}.desktop-overhaul-v18 .foundation-topic{padding:27px 4px 28px;border-bottom:1px solid var(--dt-line)}.desktop-overhaul-v18 .foundation-topic:nth-child(even){padding-left:22px;border-left:1px solid var(--dt-line)}.desktop-overhaul-v18 .foundation-topic h3{font-size:23px}.desktop-overhaul-v18 .foundation-topic p{font-size:11px;line-height:1.67}.desktop-overhaul-v18 .foundation-section{margin:19px 0 8px;padding:29px 30px 26px;border-radius:30px}.desktop-overhaul-v18 .hero{padding:28px 0 24px}.desktop-overhaul-v18 .hero-ar{font-size:30px}.desktop-overhaul-v18 .prayer-river{margin:18px 0 9px;border:0;border-radius:24px;background:linear-gradient(105deg,#20362f,#2d493e 58%,#233d34);box-shadow:0 14px 32px rgba(30,54,44,.11)}.desktop-overhaul-v18 .prayer-inner{grid-template-columns:1fr .75fr 1fr auto;gap:22px;padding:17px 23px}.desktop-overhaul-v18 .prayer-current b,.desktop-overhaul-v18 .prayer-next b{font-size:21px}.desktop-overhaul-v18 .prayer-count{font-size:28px}.desktop-overhaul-v18 .section{padding:26px 0;border-bottom:1px solid rgba(91,68,35,.09)}.desktop-overhaul-v18 .section.parchment{margin-left:0!important;margin-right:0!important;padding:27px 28px!important;border-radius:30px!important}.desktop-overhaul-v18 .section.parchment::before{inset:0!important;border-radius:30px!important}.desktop-overhaul-v18 .smart-search-dock{top:78px;width:min(940px,100%);min-height:50px}.desktop-overhaul-v18 .book-stage{max-width:1050px}.desktop-overhaul-v18 .book-shell{min-height:590px}.desktop-overhaul-v18 .book-page{padding:31px 35px 42px}.desktop-overhaul-v18 .detail-page{grid-template-columns:minmax(0,1fr) 255px!important;gap:46px!important}.desktop-overhaul-v18 .pdf-reader-shell{width:min(1120px,100%)!important}.desktop-overhaul-v18 .pdf-reader-toolbar{top:78px;min-height:56px}.desktop-overhaul-v18 .pdf-scroll-reader{height:min(80vh,1000px);min-height:640px;border-radius:24px}.desktop-overhaul-v18 a:focus-visible,.desktop-overhaul-v18 button:focus-visible,.desktop-overhaul-v18 select:focus-visible,.desktop-overhaul-v18 input:focus-visible{outline:2px solid rgba(167,130,66,.78)!important;outline-offset:3px!important}@media(prefers-reduced-motion:reduce){.desktop-overhaul-v18 *,.desktop-overhaul-v18 *:before,.desktop-overhaul-v18 *:after{animation-duration:.01ms!important;animation-iteration-count:1!important}}@media(max-width:1100px){.desktop-overhaul-v18 .header-inner{width:calc(100% - 34px);grid-template-columns:auto minmax(0,1fr)}.desktop-overhaul-v18 .header-actions{display:none}.desktop-overhaul-v18 .isnad-inner,.desktop-overhaul-v18 .page{width:calc(100% - 34px)}.desktop-overhaul-v18 .page-intro{grid-template-columns:1fr;gap:8px}.desktop-overhaul-v18 .foundation-lead-inner{grid-template-columns:1fr;gap:27px}.desktop-overhaul-v18 .foundation-proof{padding-left:0;border-left:0;padding-top:22px;border-top:1px solid rgba(226,199,139,.14)}}@media(max-width:860px){.desktop-overhaul-v18 .brand-copy span{display:none}.desktop-overhaul-v18 .isnad-inner{grid-template-columns:1fr;gap:3px}.desktop-overhaul-v18 .isnad-label,.desktop-overhaul-v18 .inline-source{display:none}.desktop-overhaul-v18 .player-wrap{width:min(650px,calc(100% - 30px))!important}.desktop-overhaul-v18 .quran-player{height:auto!important;min-height:92px!important;grid-template-columns:28px 42px minmax(160px,1fr) 108px 58px 28px!important;grid-template-rows:54px 38px!important}.desktop-overhaul-v18 .player-prev,.desktop-overhaul-v18 .player-step{height:54px!important}.desktop-overhaul-v18 .player-field{height:54px!important}.desktop-overhaul-v18 .player-surah{grid-column:4!important}.desktop-overhaul-v18 .player-ayah{grid-column:5!important}.desktop-overhaul-v18 .player-reciter{grid-column:3/6!important;grid-row:2!important;height:38px!important;grid-template-columns:62px minmax(0,1fr)!important;align-items:center!important}.desktop-overhaul-v18 .player-step{grid-column:6!important}.desktop-overhaul-v18 .foundation-grid{grid-template-columns:1fr}.desktop-overhaul-v18 .foundation-topic:nth-child(even){padding-left:4px;border-left:0}.desktop-overhaul-v18 .detail-page{grid-template-columns:1fr!important}}@media(max-width:650px){.desktop-overhaul-v18 .header-inner{width:calc(100% - 22px);display:flex;overflow:hidden}.desktop-overhaul-v18 .brand{min-width:auto}.desktop-overhaul-v18 .isnad-inner,.desktop-overhaul-v18 .page{width:calc(100% - 22px)}.desktop-overhaul-v18 .player-wrap{width:calc(100% - 22px)!important;margin:9px 11px 10px!important}.desktop-overhaul-v18 .quran-player{min-height:126px!important;grid-template-columns:27px 40px minmax(0,1fr) 28px!important;grid-template-rows:52px 37px 37px!important}.desktop-overhaul-v18 .player-prev{grid-column:1!important;grid-row:1!important}.desktop-overhaul-v18 .player-play{grid-column:2!important;grid-row:1!important}.desktop-overhaul-v18 .player-now{grid-column:3!important;grid-row:1!important}.desktop-overhaul-v18 .player-step{grid-column:4!important;grid-row:1!important}.desktop-overhaul-v18 .player-surah{grid-column:1/3!important;grid-row:2!important;height:37px!important;grid-template-columns:45px minmax(0,1fr)!important;align-items:center!important}.desktop-overhaul-v18 .player-ayah{grid-column:3/5!important;grid-row:2!important;height:37px!important;grid-template-columns:38px minmax(0,1fr)!important;align-items:center!important}.desktop-overhaul-v18 .player-reciter{grid-column:1/5!important;grid-row:3!important;height:37px!important;grid-template-columns:58px minmax(0,1fr)!important}.desktop-overhaul-v18 .foundation-lead{padding:27px 22px}.desktop-overhaul-v18 .foundation-links{grid-template-columns:1fr}.desktop-overhaul-v18 .prayer-inner{grid-template-columns:1fr 1fr}.desktop-overhaul-v18 .section.parchment{padding:22px 18px!important}}
+
+/* v18.1 — FINAL PLAYER WIDTH FIX: no clipped reciter / next control */
+.desktop-overhaul-v18 .player-wrap{
+  width:min(860px,calc(100% - 56px))!important;
+  max-width:860px!important;
+  margin:12px auto 12px!important;
+}
+.desktop-overhaul-v18 .quran-player{
+  width:100%!important;
+  max-width:100%!important;
+  height:58px!important;
+  min-height:58px!important;
+  grid-template-columns:28px 44px minmax(160px,1fr) 92px 60px 132px 28px!important;
+  grid-template-rows:58px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+}
+.desktop-overhaul-v18 .player-prev{grid-column:1!important;grid-row:1!important;width:28px!important}
+.desktop-overhaul-v18 .player-play{grid-column:2!important;grid-row:1!important}
+.desktop-overhaul-v18 .player-now{
+  grid-column:3!important;
+  grid-row:1!important;
+  min-width:0!important;
+  overflow:hidden!important;
+}
+.desktop-overhaul-v18 .player-surah{
+  grid-column:4!important;
+  grid-row:1!important;
+  min-width:0!important;
+}
+.desktop-overhaul-v18 .player-ayah{
+  grid-column:5!important;
+  grid-row:1!important;
+  min-width:0!important;
+}
+.desktop-overhaul-v18 .player-reciter{
+  grid-column:6!important;
+  grid-row:1!important;
+  min-width:0!important;
+}
+.desktop-overhaul-v18 .player-step{
+  grid-column:7!important;
+  grid-row:1!important;
+  width:28px!important;
+}
+.desktop-overhaul-v18 .player-field{
+  min-width:0!important;
+  overflow:hidden!important;
+  box-sizing:border-box!important;
+  padding-left:7px!important;
+  padding-right:7px!important;
+}
+.desktop-overhaul-v18 .player-field select{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+  box-sizing:border-box!important;
+  padding-right:6px!important;
+}
+.desktop-overhaul-v18 .player-title{
+  display:block!important;
+  min-width:0!important;
+  max-width:100%!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
+@media(max-width:980px){
+  .desktop-overhaul-v18 .player-wrap{
+    width:min(760px,calc(100% - 32px))!important;
+    max-width:760px!important;
+  }
+  .desktop-overhaul-v18 .quran-player{
+    height:auto!important;
+    min-height:96px!important;
+    grid-template-columns:28px 44px minmax(150px,1fr) 88px 56px 28px!important;
+    grid-template-rows:56px 40px!important;
+  }
+  .desktop-overhaul-v18 .player-prev{grid-column:1!important;grid-row:1!important;height:56px!important}
+  .desktop-overhaul-v18 .player-play{grid-column:2!important;grid-row:1!important}
+  .desktop-overhaul-v18 .player-now{grid-column:3!important;grid-row:1!important}
+  .desktop-overhaul-v18 .player-surah{grid-column:4!important;grid-row:1!important;height:56px!important}
+  .desktop-overhaul-v18 .player-ayah{grid-column:5!important;grid-row:1!important;height:56px!important}
+  .desktop-overhaul-v18 .player-step{grid-column:6!important;grid-row:1!important;height:56px!important;width:28px!important}
+  .desktop-overhaul-v18 .player-reciter{
+    grid-column:3/6!important;
+    grid-row:2!important;
+    height:40px!important;
+    display:grid!important;
+    grid-template-columns:58px minmax(0,1fr)!important;
+    align-items:center!important;
+    gap:8px!important;
+    padding-right:10px!important;
+  }
+}
+@media(max-width:650px){
+  .desktop-overhaul-v18 .player-wrap{
+    width:calc(100% - 22px)!important;
+    max-width:none!important;
+    margin:9px 11px 10px!important;
+  }
+  .desktop-overhaul-v18 .quran-player{
+    min-height:126px!important;
+    grid-template-columns:27px 40px minmax(0,1fr) 28px!important;
+    grid-template-rows:52px 37px 37px!important;
+  }
+  .desktop-overhaul-v18 .player-prev{grid-column:1!important;grid-row:1!important;height:52px!important}
+  .desktop-overhaul-v18 .player-play{grid-column:2!important;grid-row:1!important}
+  .desktop-overhaul-v18 .player-now{grid-column:3!important;grid-row:1!important}
+  .desktop-overhaul-v18 .player-step{grid-column:4!important;grid-row:1!important;height:52px!important}
+  .desktop-overhaul-v18 .player-surah{
+    grid-column:1/3!important;
+    grid-row:2!important;
+    height:37px!important;
+    grid-template-columns:45px minmax(0,1fr)!important;
+    align-items:center!important;
+  }
+  .desktop-overhaul-v18 .player-ayah{
+    grid-column:3/5!important;
+    grid-row:2!important;
+    height:37px!important;
+    grid-template-columns:38px minmax(0,1fr)!important;
+    align-items:center!important;
+  }
+  .desktop-overhaul-v18 .player-reciter{
+    grid-column:1/5!important;
+    grid-row:3!important;
+    height:37px!important;
+    grid-template-columns:58px minmax(0,1fr)!important;
+    align-items:center!important;
+  }
+}
