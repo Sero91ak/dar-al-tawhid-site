@@ -12083,7 +12083,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/scholars-index.css?v=588">
 <link rel="preload" href="/test/data/prophets/index.json" as="fetch" crossorigin>
 <link rel="stylesheet" href="/test/assets/prophets/prophets.css?v=17">
-<link rel="stylesheet" href="/test/assets/dar-quran-player.css?v=972">
+<link rel="stylesheet" href="/test/assets/dar-quran-player.css?v=973">
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=791">
 <link rel="stylesheet" href="/test/assets/adaptive-layout.css?v=937">
 <link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=668">
@@ -34230,16 +34230,14 @@ html.dar-ios-native-app .theme-hero-surface{
   -webkit-backdrop-filter:none!important;
   backdrop-filter:none!important;
 }
-html.dar-ios-native-app::after{
-  content:"";
-  position:fixed;
-  top:0;left:0;right:0;
-  height:max(0px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px));
-  background:var(--dar-edge-fill,var(--page-cover,var(--bg,#060604)));
-  z-index:90;
-  pointer-events:none;
+html.dar-ios-native-app::after,
+html.is-standalone-pwa::after{
+  content:none!important;
+  display:none!important;
+  height:0!important;
+  background:none!important;
+  opacity:0!important;
 }
-html.player-active.dar-ios-native-app::after{z-index:50}
 </style>
 
 <style id="dqp-theme-contrast-v934">
@@ -34671,17 +34669,12 @@ html.player-active:not(.player-stopped):not(.is-quran-player-route) body.is-qura
 }
 html.dar-ios-native-app::after,
 html.is-standalone-pwa::after{
-  content:"";
-  position:fixed;
-  top:0;left:0;right:0;
-  height:max(0px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px));
-  background:var(--dar-edge-fill,var(--page-cover,var(--bg,#060604)));
-  z-index:120;
-  pointer-events:none;
-  filter:none!important;
-  box-shadow:none!important;
+  content:none!important;
+  display:none!important;
+  height:0!important;
+  background:none!important;
+  opacity:0!important;
 }
-html.player-active.dar-ios-native-app::after{z-index:120}
 </style>
 <script>
 (function(){
