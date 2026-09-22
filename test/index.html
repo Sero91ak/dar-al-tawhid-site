@@ -12083,7 +12083,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/scholars-index.css?v=588">
 <link rel="preload" href="/test/data/prophets/index.json" as="fetch" crossorigin>
 <link rel="stylesheet" href="/test/assets/prophets/prophets.css?v=17">
-<link rel="stylesheet" href="/test/assets/dar-quran-player.css?v=968">
+<link rel="stylesheet" href="/test/assets/dar-quran-player.css?v=971">
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=791">
 <link rel="stylesheet" href="/test/assets/adaptive-layout.css?v=937">
 <link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=668">
@@ -34644,6 +34644,26 @@ html[data-theme] body.is-more-route .view-head::before,
 html[data-theme] body.is-more-route .view-head::after{
   content:none!important;
   display:none!important;
+}
+</style>
+<style id="dqp-mini-shade-not-glass-v868">
+html.player-active .app:after,
+html.player-active .app::after,
+html.player-active.is-standalone-pwa .app:after{
+  display:none!important;content:none!important;opacity:0!important;filter:none!important;height:0!important;background:none!important;
+}
+#darQuranMiniPlayer,
+#darQuranMiniPlayer.is-on,
+#darQuranMiniPlayer.is-on.player-dim,
+html[data-theme] #darQuranMiniPlayer{
+  box-shadow:none!important;
+  filter:none!important;
+  -webkit-filter:none!important;
+}
+html.player-active:not(.is-quran-player-route):not(.player-stopped) body.is-quran-overview #appView.view,
+html.player-active:not(.is-quran-player-route):not(.player-stopped) body.is-quran-overview #appView,
+html.player-active:not(.player-stopped):not(.is-quran-player-route) body.is-quran-overview #appView.view{
+  padding-top:8px!important;
 }
 </style>
 <script>

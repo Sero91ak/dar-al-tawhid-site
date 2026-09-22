@@ -108,6 +108,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "mini-player-drop-shadow-not-glass-2026-09-22",
+      "approvedBy": "user-explicit-schattierung-wandert-mit-mini-player-kein-glas",
+      "reason": "Nutzer: Schattierung/Leuchten unter dem angehefteten Mini-Player wandert mit; das ist nicht das Glas oben.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/dar-quran-player.css",
+        "test/assets/dar-quran-player.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-player-restore-sound-after-webaudio-2026-09-22",
       "approvedBy": "user-explicit-koranplayer-kein-sound-seit-laut-leise-global",
       "reason": "Nutzer: seit Web-Audio am Laut/Leise-Balken kein Ton im Lern- und Normal-Player, Logo fehlt, alles flackert. Global reparieren.",

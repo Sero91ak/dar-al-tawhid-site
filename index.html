@@ -12109,7 +12109,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 }
 </style>
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=587">
-<link rel="stylesheet" href="/assets/dar-quran-player.css?v=865">
+<link rel="stylesheet" href="/assets/dar-quran-player.css?v=868">
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=8">
 <link rel="stylesheet" href="/assets/books-library.css?v=2">
 <link rel="stylesheet" href="/assets/prophets/prophets.css?v=16">
@@ -34307,6 +34307,26 @@ html.dar-ios-native-app{
 html.dar-ios-native-app.is-quran-player-route #darQuranPlayer{
   top:0!important;
   padding-top:0!important;
+}
+</style>
+<style id="dqp-mini-shade-not-glass-v868">
+/* Mini-Player-Schein ist nicht Glas: color-mix/--text-Leuchten + .app:after wandern mit dem Slot. */
+html.player-active .app:after,
+html.player-active .app::after,
+html.player-active.is-standalone-pwa .app:after{
+  display:none!important;content:none!important;opacity:0!important;filter:none!important;height:0!important;background:none!important;
+}
+#darQuranMiniPlayer,
+#darQuranMiniPlayer.is-on,
+#darQuranMiniPlayer.is-on.player-dim,
+html[data-theme] #darQuranMiniPlayer{
+  box-shadow:none!important;
+  filter:none!important;
+  -webkit-filter:none!important;
+}
+html.player-active:not(.is-quran-player-route):not(.player-stopped) body.is-quran-overview #appView.view,
+html.player-active:not(.is-quran-player-route):not(.player-stopped) body.is-quran-overview #appView{
+  padding-top:8px!important;
 }
 </style>
 <script>
