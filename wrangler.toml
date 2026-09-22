@@ -12,7 +12,7 @@ main = "cloudflare/site-router.js"
 [assets]
 directory = "."
 binding = "ASSETS"
-run_worker_first = ["/", "/index.html"]
+run_worker_first = true
 
 [build]
 watch_paths = [
