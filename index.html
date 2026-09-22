@@ -12109,7 +12109,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 }
 </style>
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=587">
-<link rel="stylesheet" href="/assets/dar-quran-player.css?v=871">
+<link rel="stylesheet" href="/assets/dar-quran-player.css?v=873">
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=8">
 <link rel="stylesheet" href="/assets/books-library.css?v=2">
 <link rel="stylesheet" href="/assets/prophets/prophets.css?v=16">
@@ -34197,9 +34197,21 @@ html[data-theme] #darQuranPlayer .dqp-artist{
   opacity:1!important;
 }
 html[data-theme] #darQuranMiniPlayer .dqp-top-ctrl,
-html[data-theme] #darQuranMiniPlayer .dqp-learn-btn,
 html[data-theme] #darQuranPlayer button{
   color:var(--gold2)!important;
+}
+html[data-theme] #darQuranMiniPlayer .dqp-learn-btn{
+  color:color-mix(in srgb,var(--text) 58%,var(--muted) 42%)!important;
+  -webkit-text-fill-color:color-mix(in srgb,var(--text) 58%,var(--muted) 42%)!important;
+  background:transparent!important;
+  border:1px solid color-mix(in srgb,var(--text) 20%,transparent)!important;
+}
+html[data-theme] #darQuranMiniPlayer .dqp-learn-btn.is-on,
+html[data-theme] #darQuranMiniPlayer .dqp-learn-btn[aria-pressed="true"]{
+  color:var(--cream,#f8efd4)!important;
+  -webkit-text-fill-color:var(--cream,#f8efd4)!important;
+  background:var(--gold,#c8a85b)!important;
+  border-color:var(--gold,#c8a85b)!important;
 }
 html[data-theme] #darQuranMiniPlayer .dqp-top-groove,
 html[data-theme] #darQuranPlayer .dqp-groove{

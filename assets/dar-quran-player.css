@@ -765,16 +765,18 @@ html.dar-ios-native-app #darQuranMiniPlayer.is-on.is-reader-dock{
 }
 #darQuranMiniPlayer .dqp-learn-btn{
   min-height:34px!important;height:34px;border-radius:999px!important;
-  background:rgba(244,222,194,.1)!important;
-  border:1px solid rgba(238,211,174,.18)!important;
-  color:#EED3AE!important;font-size:10px!important;font-weight:800;
+  background:transparent!important;
+  border:1px solid color-mix(in srgb,var(--text,#EBE4D9) 22%,transparent)!important;
+  color:color-mix(in srgb,var(--text,#EBE4D9) 62%,var(--muted,#BEB7AE) 38%)!important;
+  font-size:10px!important;font-weight:800;
   display:grid!important;place-items:center;padding:0 4px!important;
   letter-spacing:.01em;line-height:1.1;white-space:nowrap;
 }
 #darQuranMiniPlayer .dqp-learn-btn.is-on{
-  background:rgba(238,211,174,.2)!important;
-  border-color:rgba(238,211,174,.42)!important;
-  color:#F4DEC2!important;
+  background:var(--gold,#c8a85b)!important;
+  border-color:var(--gold,#c8a85b)!important;
+  color:var(--cream,#f8efd4)!important;
+  font-weight:900;
 }
 html.player-reader-dock #qrcChromeSpacer,
 html.player-learn #qrcChromeSpacer{
@@ -896,10 +898,24 @@ html.is-quran-player-route #appView.view,
   box-shadow:none!important;
   filter:none!important;
 }
-#darQuranMiniPlayer .dqp-top-ctrl,
-#darQuranMiniPlayer .dqp-learn-btn{
+#darQuranMiniPlayer .dqp-top-ctrl{
   color:var(--gold2,#EED3AE)!important;
   background:color-mix(in srgb,var(--gold2,#EED3AE) 16%,transparent)!important;
+}
+#darQuranMiniPlayer .dqp-learn-btn,
+html[data-theme] #darQuranMiniPlayer .dqp-learn-btn{
+  color:color-mix(in srgb,var(--text,#EBE4D9) 58%,var(--muted,#BEB7AE) 42%)!important;
+  -webkit-text-fill-color:color-mix(in srgb,var(--text,#EBE4D9) 58%,var(--muted,#BEB7AE) 42%)!important;
+  background:transparent!important;
+  border:1px solid color-mix(in srgb,var(--text,#EBE4D9) 20%,transparent)!important;
+}
+#darQuranMiniPlayer .dqp-learn-btn.is-on,
+html[data-theme] #darQuranMiniPlayer .dqp-learn-btn.is-on,
+html[data-theme] #darQuranMiniPlayer .dqp-learn-btn[aria-pressed="true"]{
+  color:var(--cream,#f8efd4)!important;
+  -webkit-text-fill-color:var(--cream,#f8efd4)!important;
+  background:var(--gold,#c8a85b)!important;
+  border-color:var(--gold,#c8a85b)!important;
 }
 #darQuranMiniPlayer .dqp-top-text b,
 #darQuranMiniPlayer .dqp-top-time,
