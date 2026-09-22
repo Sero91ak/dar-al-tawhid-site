@@ -108,6 +108,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "ios-hide-footer-app-save-center-social-2026-09-22",
+      "approvedBy": "user-explicit-ios-app-speichern-entfernen-rest-mittig",
+      "reason": "Nutzer: iOS-App darf App speichern nicht zeigen; Telegram/WhatsApp/Instagram mittig. Sofort.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift",
+        "ios/DarAlTawhid/DarAlTawhid/FreshWebAppView.swift"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-mini-player-page-start-offset-2026-09-22",
       "approvedBy": "user-explicit-player-laeuft-seite-direkt-darunter-jede-seite-global",
       "reason": "Nutzer: Wenn der Player läuft, muss jede Seite direkt darunter beginnen (Bild 1). Bild 2 falsche Anfangshöhe. Global alle Apps.",

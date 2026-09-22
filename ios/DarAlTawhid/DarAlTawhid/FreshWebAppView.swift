@@ -148,8 +148,9 @@ struct WebAppView: UIViewRepresentable {
       var style=document.createElement("style");
       style.id="dar-ios-clean-shell-style";
       style.textContent=[
-        "html body #footerAppSave,html body .footer-app-save,html body .footer-action-save{display:none!important;visibility:hidden!important;}",
-        "html body .footer .footer-actions,html body.is-home-route .footer .footer-actions{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;width:min(430px,calc(100% - 16px))!important;max-width:430px!important;margin-left:auto!important;margin-right:auto!important;justify-content:center!important;}"
+        "html body #footerAppSave,html body .footer-app-save,html body .footer-action-save{display:none!important;visibility:hidden!important;width:0!important;height:0!important;overflow:hidden!important;}",
+        "html body .footer .footer-actions,html body.is-home-route .footer .footer-actions{display:flex!important;flex-wrap:nowrap!important;justify-content:center!important;align-items:stretch!important;grid-template-columns:none!important;width:min(430px,calc(100% - 16px))!important;max-width:430px!important;margin:12px auto 0!important;gap:8px!important;}",
+        "html body .footer .footer-actions .footer-action-btn,html body .footer .footer-actions .footer-social-link{flex:1 1 0!important;max-width:140px!important;margin:0!important;}"
       ].join("\\n");
       (document.head||document.documentElement).appendChild(style);
     })();

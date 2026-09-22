@@ -27053,10 +27053,24 @@ function bindHomeV380Events(){
     };
   }
 }
-function shouldShowFooterAppSave(){return true}
+function shouldShowFooterAppSave(){
+  try{
+    if(window.DAR_IOS_NATIVE_APP===true||window.DAR_OFFICIAL_IOS_APP===true)return false;
+    var root=document.documentElement;
+    if(root&&(root.classList.contains("dar-ios-native-app")||root.classList.contains("dar-ios-native-tabs")))return false;
+    if(/DarAlTawhid-iOS/i.test(String(navigator.userAgent||"")))return false;
+  }catch(e){}
+  return true;
+}
 function updateFooterAppSaveVisibility(){
   const btn=document.getElementById("footerAppSave");
   if(!btn)return;
+  if(!shouldShowFooterAppSave()){
+    btn.hidden=true;
+    btn.setAttribute("hidden","");
+    btn.style.setProperty("display","none","important");
+    return;
+  }
   const standalone=isStandalonePwa();
   btn.removeAttribute("hidden");
   btn.style.display="";
@@ -34876,4 +34890,40 @@ html.dar-ios-native-app::after,html.is-standalone-pwa::after{
 })();
 </script>
 <script src="/test/assets/ilm-research-chat.js?v=980"></script>
+<style id="dar-ios-hide-app-save-v879">
+html.dar-ios-native-app #footerAppSave,
+html.dar-ios-native-tabs #footerAppSave,
+html.dar-ios-native-app .footer-app-save,
+html.dar-ios-native-app .footer-action-save,
+html.dar-ios-native-tabs .footer-action-save{
+  display:none!important;
+  visibility:hidden!important;
+  width:0!important;min-width:0!important;max-width:0!important;
+  height:0!important;margin:0!important;padding:0!important;
+  overflow:hidden!important;border:0!important;
+  pointer-events:none!important;
+}
+html.dar-ios-native-app .footer-actions,
+html.dar-ios-native-tabs .footer-actions,
+html.dar-ios-native-app body .footer .footer-actions,
+html.dar-ios-native-app body.is-home-route .footer .footer-actions,
+html.dar-ios-native-app body.is-home-route .footer-actions{
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  justify-content:center!important;
+  align-items:stretch!important;
+  grid-template-columns:none!important;
+  gap:8px!important;
+  width:min(430px,calc(100% - 16px))!important;
+  max-width:430px!important;
+  margin:12px auto 0!important;
+}
+html.dar-ios-native-app .footer-actions .footer-action-btn,
+html.dar-ios-native-app .footer-actions .footer-social-link,
+html.dar-ios-native-tabs .footer-actions .footer-action-btn{
+  flex:1 1 0!important;
+  max-width:140px!important;
+  margin:0!important;
+}
+</style>
 </html>
