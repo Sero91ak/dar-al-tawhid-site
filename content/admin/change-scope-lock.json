@@ -108,6 +108,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "ios-quran-light-reader-live-2026-09-22",
+      "approvedBy": "user-explicit-auch-in-ios-app-pushen",
+      "reason": "Nutzer: helles Qurʾān-Lesebild ohne Dunkelgrau auch in der offiziellen iOS-App (Live-WebView).",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "assets/dar-quran-player.css",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/dar-quran-player.css",
+        "ios/DarAlTawhid/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "visitor-quran-learn-live-2026-09-21",
       "approvedBy": "user-explicit-lern-player-nicht-live-kein-button",
       "reason": "Nutzer: Lernplayer ist nicht live, kein Button sichtbar. Play-Button + Mini-Lernleiste in die Besucher-App.",

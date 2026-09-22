@@ -755,9 +755,9 @@ html.is-quran-player-route #appView.view,
   background:#F4DEC2!important;
 }
 #darQuranMiniPlayer{
-  color:#EBE4D9!important;
-  background:linear-gradient(180deg,#32302E,#22201E)!important;
-  border-bottom-color:rgba(238,211,174,.22)!important;
+  color:var(--player-text,var(--text,#EBE4D9))!important;
+  background:var(--player-bg,var(--card,#22201E))!important;
+  border-bottom-color:var(--line2,rgba(238,211,174,.22))!important;
 }
 #darQuranMiniPlayer .dqp-top-ctrl,
 #darQuranMiniPlayer .dqp-learn-btn{

@@ -108,6 +108,7 @@ struct WebAppView: UIViewRepresentable {
           try{
             window.DAR_IOS_NATIVE_PUSH=true;
             window.DAR_IOS_NATIVE_APP=true;
+            window.DAR_OFFICIAL_IOS_APP=true;
             window.DAR_IOS_DEVICE_ID="\(escapedDevice)";
             var existingId="";
             try{existingId=localStorage.getItem("darPushExternalIdV1")||""}catch(e){}
@@ -662,7 +663,7 @@ struct WebAppView: UIViewRepresentable {
         webView.allowsBackForwardNavigationGestures = true
         webView.isOpaque = true
         webView.backgroundColor = bootInk
-        webView.customUserAgent = "DarAlTawhid-iOS-TestFlight/0.25-watch-push"
+        webView.customUserAgent = "DarAlTawhid-iOS/1.0 WKWebView"
         webView.onInsetsChange = { [weak coordinator = context.coordinator] in
             coordinator?.updateViewportInsets()
         }
@@ -683,7 +684,7 @@ struct WebAppView: UIViewRepresentable {
             backdropView: backdropView,
             containerView: containerView
         )
-        webView.load(URLRequest(url: Self.launchURL))
+        webView.load(URLRequest(url: Self.launchURL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60))
         return containerView
     }
 
@@ -1142,6 +1143,8 @@ struct WebAppView: UIViewRepresentable {
             let device = DarPushNotifications.externalId()
             let js = """
             (function(){
+              window.DAR_IOS_NATIVE_APP=true;
+              window.DAR_OFFICIAL_IOS_APP=true;
               window.DAR_IOS_NATIVE_PUSH=true;
               window.DAR_IOS_ONESIGNAL_ID=\(Self.jsString(sub));
               window.DAR_IOS_PUSH_TOKEN=\(Self.jsString(token));
