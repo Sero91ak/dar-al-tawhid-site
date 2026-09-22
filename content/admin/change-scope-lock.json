@@ -108,6 +108,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "visitor-ios-full-quran-player-2026-09-22",
+      "approvedBy": "user-explicit-kompletten-quran-player-ios-app",
+      "reason": "Nutzer: kompletten Qurʾān-Player inkl. Voll-Player nur in die offizielle iOS-App. Nicht nur Lernbereich.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "assets/dar-quran-player.js",
+        "assets/dar-quran-player.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "visitor-ios-player-live-2026-09-22",
       "approvedBy": "user-explicit-player-sachen-in-ios-app-pushen",
       "reason": "Nutzer: Player-Stand (930, 120 Hz, Lernleiste nur Qurʾān) live in die iOS-App / Besucher-App.",

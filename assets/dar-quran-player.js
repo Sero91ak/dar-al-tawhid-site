@@ -1,8 +1,20 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 930;
-  /* LEARN_PLAYER_ONLY: Āyah-Buttons + Mini-Lernleiste, kein Voll-Player. */
-  var LEARN_PLAYER_ONLY = true;
+  var PLAYER_BUILD = 932;
+  /* LEARN_PLAYER_ONLY: Āyah-Buttons + Mini-Lernleiste, kein Voll-Player.
+     Offizielle iOS-App bekommt den kompletten Player inkl. Vollansicht. */
+  function isOfficialIosApp() {
+    try {
+      if (window.DAR_OFFICIAL_IOS_APP === true) return true;
+      if (window.DAR_IOS_NATIVE_APP === true) return true;
+      var ua = String(navigator.userAgent || "");
+      if (/DarAlTawhid-iOS/i.test(ua) || /DarAlTawhidOfficialIOS/i.test(ua)) return true;
+      var root = document.documentElement;
+      if (root && (root.classList.contains("dar-ios-native-app") || root.classList.contains("dar-ios-native-tabs"))) return true;
+    } catch (eOff) {}
+    return false;
+  }
+  var LEARN_PLAYER_ONLY = !isOfficialIosApp();
   if (window.__DAR_QURAN_PLAYER_BUILD === PLAYER_BUILD && window.DARQuranPlayer) return;
   try {
     var staleAudio = document.getElementById("darQuranPlayerAudio");
