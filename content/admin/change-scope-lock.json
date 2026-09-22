@@ -108,6 +108,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "ios-testflight-no-glass-like-build86-2026-09-22",
+      "approvedBy": "user-explicit-testflight-89-glass-weg-wie-build-86-ios-app",
+      "reason": "Nutzer: TestFlight Build 89 glassig, Build 86 nicht; iOS-App und TestFlight ohne Glas.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "assets/dar-bottom-nav-glass.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-player-volume-not-time-hms-2026-09-22",
       "approvedBy": "user-explicit-laut-leise-kein-sekundenzaehler-keine-millisekunden-global",
       "reason": "Nutzer: Laut/Leise ist Lautstärke, nicht Zeit; Uhr nur Stunde:Minute:Sekunde, keine Zehntel. Global pushen.",

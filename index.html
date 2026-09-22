@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v862";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v863";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script id="dar-browser-desktop-router-v833">
 (function(){
   try{
@@ -12110,7 +12110,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 </style>
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=587">
 <link rel="stylesheet" href="/assets/dar-quran-player.css?v=862">
-<link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=5">
+<link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=6">
 <link rel="stylesheet" href="/assets/books-library.css?v=2">
 <link rel="stylesheet" href="/assets/prophets/prophets.css?v=16">
 <link rel="stylesheet" href="/assets/dar-account-visibility.css?v=11">
@@ -27159,7 +27159,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v862";
+const APP_BUILD_ID="app-shell-v863";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -34408,6 +34408,61 @@ html[data-theme] .quiz-shell.quiz-shell-pro .quiz-home-title{
     if(!live){
       live=document.createElement("style");
       live.id="ui-compact-optics-live-v849";
+    }
+    live.textContent=src.textContent;
+    document.documentElement.appendChild(live);
+  }
+  pin();
+  document.addEventListener("DOMContentLoaded",pin);
+  window.addEventListener("pageshow",pin);
+  window.addEventListener("hashchange",function(){setTimeout(pin,40);});
+  setTimeout(pin,80);
+  setTimeout(pin,500);
+})();
+</script>
+<style id="dar-ios-no-glass-v863">
+/* iOS-App + TestFlight: kein Glass/Blur. Wie Build 86 — undurchsichtig, WKWebView-sicher. */
+html.dar-ios-native-app,
+html.dar-ios-native-app *{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html.dar-ios-native-app .top-shell,
+html.dar-ios-native-app .top-shell.theme-hero-shell,
+html.dar-ios-native-app .theme-hero-surface,
+html.dar-ios-native-app .header,
+html.dar-ios-native-app .header.theme-hero-surface,
+html.dar-ios-native-app .sf-top,
+html.dar-ios-native-app #bottomNav.bottom-nav,
+html.dar-ios-native-app .bottom-nav,
+html.dar-ios-native-app #darQuranMiniPlayer,
+html.dar-ios-native-app #darQuranPlayer,
+html.dar-ios-native-app .qov-header,
+html.dar-ios-native-app .qrc-chrome{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  background-color:var(--page-cover,var(--bg,#050706))!important;
+}
+html.dar-ios-native-app .header,
+html.dar-ios-native-app .sf-top{
+  background:var(--page-cover,var(--bg,#050706))!important;
+}
+</style>
+<script>
+(function(){
+  function native(){
+    try{
+      return !!(window.DAR_IOS_NATIVE_APP||window.DAR_OFFICIAL_IOS_APP||document.documentElement.classList.contains("dar-ios-native-app")||/DarAlTawhid-iOS/i.test(String(navigator.userAgent||"")));
+    }catch(e){return false}
+  }
+  function pin(){
+    if(!native())return;
+    var src=document.getElementById("dar-ios-no-glass-v863");
+    if(!src)return;
+    var live=document.getElementById("dar-ios-no-glass-live-v863");
+    if(!live){
+      live=document.createElement("style");
+      live.id="dar-ios-no-glass-live-v863";
     }
     live.textContent=src.textContent;
     document.documentElement.appendChild(live);

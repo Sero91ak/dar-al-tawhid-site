@@ -381,3 +381,17 @@ html[data-theme] #bottomNav.bottom-nav .bottom-nav-pill,
     backdrop-filter: none !important;
   }
 }
+
+/* iOS/TestFlight: kein Glas — wie Store-Build 86, undurchsichtig. */
+html.dar-ios-native-app #bottomNav.bottom-nav,
+html.dar-ios-native-app .bottom-nav{
+  background:var(--bg,var(--page-cover,#050706))!important;
+  background-color:var(--bg,#050706)!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn::before,
+html.dar-ios-native-app .bottom-nav .bottom-nav-btn::before{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
