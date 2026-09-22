@@ -256,10 +256,11 @@ html.is-quran-player-route .dqp-ayah::-webkit-scrollbar-thumb{
   white-space:nowrap;overflow:hidden;color:var(--muted,#BEB7AE);
 }
 .dqp-times span{
-  flex:0 0 auto;min-width:4.6ch;
+  flex:0 0 auto;min-width:7.2ch;
   overflow:hidden;text-overflow:clip;white-space:nowrap;
   font-size:inherit;line-height:inherit;padding:0;margin:0;
   font-variant-numeric:tabular-nums;font-feature-settings:"tnum";
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
 }
 
 .dqp-controls{

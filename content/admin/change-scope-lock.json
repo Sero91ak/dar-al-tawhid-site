@@ -108,6 +108,27 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-player-seconds-smooth-all-apps-2026-09-22",
+      "approvedBy": "user-explicit-ios-sekunden-nicht-smooth-global-jede-app-ios-android-test",
+      "reason": "Nutzer: Sekunden im Player iOS nicht smooth; global in jede App (iOS, Android, Test, Besucher) pushen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "assets/dar-quran-player.js",
+        "assets/dar-quran-player.css",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.css",
+        "ios/DarAlTawhid/",
+        "android/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-player-art-lockscreen-only-live-2026-09-22",
       "approvedBy": "user-explicit-player-hintergrund-kein-icon-sperrbildschirm-ios-global-pushen",
       "reason": "Nutzer: Mushaf-Cover nicht als Player-Hintergrund in der App; nur Sperrbildschirm/Live Activity. Global inkl. iOS live pushen.",

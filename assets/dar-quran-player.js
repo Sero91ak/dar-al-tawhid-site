@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 944;
+  var PLAYER_BUILD = 945;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -185,8 +185,26 @@
   }
   function pad(n, w) { return String(n).padStart(w || 3, "0"); }
   function fmt(sec) {
-    sec = Math.max(0, Math.floor(Number(sec) || 0));
-    return String(Math.floor(sec / 60)).padStart(2, "0") + ":" + String(sec % 60).padStart(2, "0");
+    sec = Math.max(0, Number(sec) || 0);
+    var whole = Math.floor(sec);
+    var tenth = Math.floor((sec - whole) * 10 + 1e-6);
+    if (tenth > 9) { whole += 1; tenth = 0; }
+    return String(Math.floor(whole / 60)).padStart(2, "0") + ":" + String(whole % 60).padStart(2, "0") + "." + String(tenth);
+  }
+  function audioDuration(a) {
+    try {
+      var d = Number(a && a.duration);
+      if (isFinite(d) && d > 0) return d;
+    } catch (eD) {}
+    var s = Number(state.duration);
+    return isFinite(s) && s > 0 ? s : 0;
+  }
+  function setAllText(sel, txt) {
+    var list;
+    try { list = document.querySelectorAll(sel); } catch (eQ) { return; }
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].textContent !== txt) list[i].textContent = txt;
+    }
   }
   function verseAt(n) {
     var id = Number(n);
@@ -439,6 +457,7 @@
     a.dataset.dqpEngineBound = "1";
     a.addEventListener("timeupdate", onTime);
     a.addEventListener("loadedmetadata", onMeta);
+    a.addEventListener("durationchange", onMeta);
     a.addEventListener("canplay", onCanPlay);
     a.addEventListener("ended", onEnded);
     a.addEventListener("play", onPlayEv);
@@ -665,7 +684,7 @@
   function onTime() {
     if (seekLock) return;
     var a = audioEl();
-    state.duration = a.duration || 0;
+    state.duration = audioDuration(a);
     syncProgressSample(false);
     if (engine.started && (Number(state.current) || 0) > 0.25 && isFinite(state.duration) && state.duration > 1) {
       trackHeard = true;
@@ -681,9 +700,11 @@
   }
   function onMeta() {
     var a = audioEl();
-    state.duration = a.duration || 0;
+    state.duration = audioDuration(a);
     logAudio("loadedmetadata", snapAudio(a));
+    syncProgressSample(true);
     paintProgress();
+    if (state.playing) startProgressClock();
   }
   function onCanPlay() {
     logAudio("canplay", snapAudio());
@@ -1480,8 +1501,8 @@
     try {
       var a = audioEl();
       var audioT = Number(a.currentTime) || 0;
-      var d = Number(a.duration);
-      if (d && isFinite(d)) state.duration = d;
+      var d = audioDuration(a);
+      if (d) state.duration = d;
       var now = performance.now();
       var rate = audioRate();
       progRate = rate;
@@ -1504,51 +1525,64 @@
   }
   function applyProgressVisual(t, d) {
     var ui = progressEls();
-    if (!ui) return;
+    d = Number(d) || audioDuration(audioEl()) || 0;
     var ready = d > 0 && isFinite(d);
     var pct = ready ? Math.max(0, Math.min(1, t / d)) : 0;
     var xform = "translate3d(" + (pct * 100).toFixed(4) + "%,0,0)";
     var scale = "scaleX(" + pct.toFixed(5) + ")";
-    if (ui.fill) ui.fill.style.transform = scale;
-    if (ui.shift) ui.shift.style.transform = xform;
-    if (ui.pfill) ui.pfill.style.transform = scale;
+    if (ui && ui.fill) ui.fill.style.transform = scale;
+    if (ui && ui.shift) ui.shift.style.transform = xform;
+    if (ui && ui.pfill) ui.pfill.style.transform = scale;
+    var fills = document.querySelectorAll("#darQuranPlayer .dqp-fill, #darQuranMiniPlayer .dqp-top-fill");
+    for (var fi = 0; fi < fills.length; fi++) fills[fi].style.transform = scale;
     lastProgPct = pct;
     var curTxt = fmt(t);
-    var durTxt = ready ? fmt(d || 0) : "––:––";
-    var remainTxt = ready ? ("-" + fmt(Math.max(0, d - t))) : "––:––";
-    if (ui.cur && ui.cur.textContent !== curTxt) ui.cur.textContent = curTxt;
-    if (ui.dur && ui.dur.textContent !== durTxt) ui.dur.textContent = durTxt;
-    if (ui.pcur && ui.pcur.textContent !== curTxt) ui.pcur.textContent = curTxt;
-    if (ui.pdur && ui.pdur.textContent !== remainTxt) ui.pdur.textContent = remainTxt;
+    var durTxt = ready ? fmt(d) : "00:00.0";
+    var remainTxt = ready ? ("-" + fmt(Math.max(0, d - t))) : "00:00.0";
+    setAllText("#darQuranMiniPlayer [data-dqp-mini-cur]", curTxt);
+    setAllText("#darQuranMiniPlayer [data-dqp-mini-dur]", durTxt);
+    setAllText("#darQuranPlayer [data-dqp-cur]", curTxt);
+    setAllText("#darQuranPlayer [data-dqp-dur]", remainTxt);
     if (!seekLock) {
       var now = performance.now();
       if (now - lastSeekUiAt > 80) {
         lastSeekUiAt = now;
         var nextVal = String(Math.round(pct * 1000));
-        if (ui.sl && ui.sl.value !== nextVal) ui.sl.value = nextVal;
-        if (ui.msl && ui.msl.value !== nextVal) ui.msl.value = nextVal;
+        var sliders = document.querySelectorAll("#darQuranPlayer [data-dqp=seek], #darQuranMiniPlayer [data-dqp-mini=seek]");
+        for (var si = 0; si < sliders.length; si++) {
+          if (sliders[si].value !== nextVal) sliders[si].value = nextVal;
+        }
       }
     }
   }
   function progressClockTick() {
-    if (!state.sessionActive && !isFullPlayerRoute()) {
+    if (!state.sessionActive && !state.playing && !isFullPlayerRoute()) {
       stopProgressClock();
       return;
     }
     if (seekLock) return;
     var t = currentProgressTime();
     state.current = t;
-    applyProgressVisual(t, Number(state.duration) || Number(audioEl().duration) || 0);
+    applyProgressVisual(t, audioDuration(audioEl()));
   }
   function startProgressClock() {
-    if (progressClock) return;
     syncProgressSample(true);
     lastProgPaintAt = 0;
-    function rafLoop() {
+    if (!progressClock) {
+      function rafLoop() {
+        progressClock = requestAnimationFrame(rafLoop);
+        var now = performance.now();
+        if (now - lastProgPaintAt < PROG_FRAME_MS * 0.55) return;
+        lastProgPaintAt = now;
+        progressClockTick();
+      }
       progressClock = requestAnimationFrame(rafLoop);
-      progressClockTick();
     }
-    progressClock = requestAnimationFrame(rafLoop);
+    if (!progressTimer) {
+      progressTimer = setInterval(function () {
+        progressClockTick();
+      }, 8);
+    }
   }
   function stopProgressClock() {
     if (progressClock) cancelAnimationFrame(progressClock);
@@ -1756,19 +1790,16 @@
   }
   function playerRoot() {
     var nodes = document.querySelectorAll("#darQuranPlayer");
+    if (!nodes.length) return null;
+    var visible = null;
     var bodyOne = null;
     for (var i = 0; i < nodes.length; i++) {
-      if (nodes[i].parentNode === document.body) bodyOne = nodes[i];
+      var n = nodes[i];
+      if (n.parentNode === document.body) bodyOne = n;
+      if (!n.hidden && String(n.style.display || "") !== "none") visible = visible || n;
     }
-    if (bodyOne) {
-      for (var j = 0; j < nodes.length; j++) {
-        if (nodes[j] !== bodyOne) {
-          try { nodes[j].remove(); } catch (e) {}
-        }
-      }
-      return bodyOne;
-    }
-    return nodes[0] || null;
+    if (isFullPlayerRoute()) return visible || bodyOne || nodes[0];
+    return bodyOne || visible || nodes[0];
   }
   function ensureFreshShell(root) {
     if (root && root.querySelector && root.querySelector(".dqp-back") && root.querySelector(".dqp-foot")) return root;
@@ -2759,6 +2790,12 @@
     root.hidden = false;
     root.style.display = "";
     try { root.removeAttribute("inert"); } catch (e) {}
+    try {
+      var extras = document.querySelectorAll("#darQuranPlayer");
+      for (var xi = 0; xi < extras.length; xi++) {
+        if (extras[xi] !== root) extras[xi].remove();
+      }
+    } catch (eX) {}
     invalidateProgressCache();
     if (state.playing || state.sessionActive) startProgressClock();
     paintProgress();
@@ -2778,7 +2815,7 @@
       var a = audioEl();
       if (audioHasSrc(a)) {
         state.current = a.currentTime || 0;
-        state.duration = a.duration || 0;
+        state.duration = audioDuration(a);
         state.playing = !a.paused;
         if (!a.paused) state.sessionActive = true;
       }
@@ -2997,7 +3034,7 @@
         if (audioHasSrc(a) && srcMatchesAyah(src, state.surah, state.ayah)) {
           seekLock = false;
           state.current = a.currentTime || 0;
-          state.duration = a.duration || 0;
+          state.duration = audioDuration(a);
           state.playing = !a.paused;
           if (!a.paused || state.sessionActive) state.sessionActive = true;
           paintAyah(false);

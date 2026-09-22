@@ -24,6 +24,7 @@ struct WebAppView: UIViewRepresentable {
     func makeUIView(context: Context) -> UIView {
         let configuration = WKWebViewConfiguration()
         configuration.allowsInlineMediaPlayback = true
+        configuration.mediaTypesRequiringUserActionForPlayback = []
         configuration.websiteDataStore = .default()
         configuration.defaultWebpagePreferences.allowsContentJavaScript = true
 
