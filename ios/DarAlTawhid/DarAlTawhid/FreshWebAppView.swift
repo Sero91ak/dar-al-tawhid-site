@@ -61,7 +61,7 @@ struct WebAppView: UIViewRepresentable {
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.backgroundColor = host.backgroundColor
-        webView.isOpaque = false
+        webView.isOpaque = true
         webView.scrollView.backgroundColor = host.backgroundColor
         webView.scrollView.contentInsetAdjustmentBehavior = .never
         webView.allowsBackForwardNavigationGestures = true
@@ -123,6 +123,17 @@ struct WebAppView: UIViewRepresentable {
               try{webkit.messageHandlers.darNative.postMessage({type:"notifications"})}catch(e){}
               return Promise.resolve(window.__darPushPermission||"default");
             };
+            var root=document.documentElement;
+            if(root){
+              root.classList.add("dar-ios-native-app");
+              root.setAttribute("data-dar-ios-no-glass","1");
+            }
+            if(!document.getElementById("dar-ios-no-glass-boot")){
+              var s=document.createElement("style");
+              s.id="dar-ios-no-glass-boot";
+              s.textContent="html[data-theme] #appChromeDock #bottomNav.bottom-nav,html[data-theme] #bottomNav.bottom-nav,#bottomNav.bottom-nav,.bottom-nav{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:var(--page-cover,var(--bg,#050706))!important;background-image:none!important;isolation:isolate!important;opacity:1!important;}";
+              (document.head||document.documentElement).appendChild(s);
+            }
           }catch(e){}
         })();
         """

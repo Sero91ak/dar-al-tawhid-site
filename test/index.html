@@ -12077,7 +12077,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 }
 </style>
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=587">
-<link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=5">
+<link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=7">
 <link rel="stylesheet" href="/assets/books-library.css?v=2">
 <link rel="stylesheet" href="/assets/dar-account-visibility.css?v=11">
 <link rel="stylesheet" href="/assets/scholars-index.css?v=588">
@@ -34726,6 +34726,36 @@ html[data-theme] .quiz-shell.quiz-shell-pro .quiz-home-title{
       live.id="ui-compact-optics-live-v849";
     }
     live.textContent=src.textContent;
+    document.documentElement.appendChild(live);
+  }
+  pin();
+  document.addEventListener("DOMContentLoaded",pin);
+  window.addEventListener("pageshow",pin);
+  window.addEventListener("hashchange",function(){setTimeout(pin,40);});
+  setTimeout(pin,80);
+  setTimeout(pin,500);
+})();
+</script>
+<script>
+(function(){
+  var CSS="html[data-theme] #appChromeDock #bottomNav.bottom-nav,html[data-theme] #bottomNav.bottom-nav,#appChromeDock #bottomNav.bottom-nav,#bottomNav.bottom-nav,.bottom-nav,.top-shell,.header,.sf-top{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:var(--page-cover,var(--bg,#050706))!important;background-color:var(--page-cover,var(--bg,#050706))!important;background-image:none!important;isolation:isolate!important;opacity:1!important;}html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn::before,#bottomNav.bottom-nav .bottom-nav-btn::before,.bottom-nav .bottom-nav-btn::before{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;}";
+  function native(){
+    try{
+      return !!(window.DAR_IOS_NATIVE_APP||window.DAR_OFFICIAL_IOS_APP||document.documentElement.classList.contains("dar-ios-native-app")||/DarAlTawhid-iOS/i.test(String(navigator.userAgent||"")));
+    }catch(e){return false}
+  }
+  function pin(){
+    if(!native())return;
+    try{
+      document.documentElement.classList.add("dar-ios-native-app");
+      document.documentElement.setAttribute("data-dar-ios-no-glass","1");
+    }catch(e){}
+    var live=document.getElementById("dar-ios-no-glass-live-v864");
+    if(!live){
+      live=document.createElement("style");
+      live.id="dar-ios-no-glass-live-v864";
+    }
+    live.textContent=CSS;
     document.documentElement.appendChild(live);
   }
   pin();

@@ -12110,7 +12110,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 </style>
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=587">
 <link rel="stylesheet" href="/assets/dar-quran-player.css?v=862">
-<link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=6">
+<link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=7">
 <link rel="stylesheet" href="/assets/books-library.css?v=2">
 <link rel="stylesheet" href="/assets/prophets/prophets.css?v=16">
 <link rel="stylesheet" href="/assets/dar-account-visibility.css?v=11">
@@ -34420,36 +34420,16 @@ html[data-theme] .quiz-shell.quiz-shell-pro .quiz-home-title{
   setTimeout(pin,500);
 })();
 </script>
-<style id="dar-ios-no-glass-v863">
-/* iOS-App + TestFlight: kein Glass/Blur. Wie Build 86 — undurchsichtig, WKWebView-sicher. */
+<style id="dar-ios-no-glass-v864">
 html.dar-ios-native-app,
-html.dar-ios-native-app *{
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
-}
-html.dar-ios-native-app .top-shell,
-html.dar-ios-native-app .top-shell.theme-hero-shell,
-html.dar-ios-native-app .theme-hero-surface,
-html.dar-ios-native-app .header,
-html.dar-ios-native-app .header.theme-hero-surface,
-html.dar-ios-native-app .sf-top,
-html.dar-ios-native-app #bottomNav.bottom-nav,
-html.dar-ios-native-app .bottom-nav,
-html.dar-ios-native-app #darQuranMiniPlayer,
-html.dar-ios-native-app #darQuranPlayer,
-html.dar-ios-native-app .qov-header,
-html.dar-ios-native-app .qrc-chrome{
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
-  background-color:var(--page-cover,var(--bg,#050706))!important;
-}
-html.dar-ios-native-app .header,
-html.dar-ios-native-app .sf-top{
-  background:var(--page-cover,var(--bg,#050706))!important;
+html[data-dar-ios-no-glass="1"]{
+  --bottom-nav-bg-glass:var(--page-cover,var(--bg,#050706))!important;
+  --bottom-nav-blur:0px!important;
 }
 </style>
 <script>
 (function(){
+  var CSS="html[data-theme] #appChromeDock #bottomNav.bottom-nav,html[data-theme] #bottomNav.bottom-nav,#appChromeDock #bottomNav.bottom-nav,#bottomNav.bottom-nav,.bottom-nav,.top-shell,.header,.sf-top{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:var(--page-cover,var(--bg,#050706))!important;background-color:var(--page-cover,var(--bg,#050706))!important;background-image:none!important;isolation:isolate!important;opacity:1!important;}html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn::before,#bottomNav.bottom-nav .bottom-nav-btn::before,.bottom-nav .bottom-nav-btn::before{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;}";
   function native(){
     try{
       return !!(window.DAR_IOS_NATIVE_APP||window.DAR_OFFICIAL_IOS_APP||document.documentElement.classList.contains("dar-ios-native-app")||/DarAlTawhid-iOS/i.test(String(navigator.userAgent||"")));
@@ -34457,14 +34437,16 @@ html.dar-ios-native-app .sf-top{
   }
   function pin(){
     if(!native())return;
-    var src=document.getElementById("dar-ios-no-glass-v863");
-    if(!src)return;
-    var live=document.getElementById("dar-ios-no-glass-live-v863");
+    try{
+      document.documentElement.classList.add("dar-ios-native-app");
+      document.documentElement.setAttribute("data-dar-ios-no-glass","1");
+    }catch(e){}
+    var live=document.getElementById("dar-ios-no-glass-live-v864");
     if(!live){
       live=document.createElement("style");
-      live.id="dar-ios-no-glass-live-v863";
+      live.id="dar-ios-no-glass-live-v864";
     }
-    live.textContent=src.textContent;
+    live.textContent=CSS;
     document.documentElement.appendChild(live);
   }
   pin();

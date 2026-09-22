@@ -383,15 +383,43 @@ html[data-theme] #bottomNav.bottom-nav .bottom-nav-pill,
 }
 
 /* iOS/TestFlight: kein Glas — wie Store-Build 86, undurchsichtig. */
+html.dar-ios-native-app,
+html[data-theme].dar-ios-native-app,
+html[data-dar-ios-no-glass="1"],
+html[data-theme][data-dar-ios-no-glass="1"]{
+  --bottom-nav-bg-glass: var(--page-cover, var(--bg, #050706)) !important;
+  --bottom-nav-bg: var(--page-cover, var(--bg, #050706)) !important;
+  --bottom-nav-blur: 0px !important;
+}
+html[data-theme].dar-ios-native-app #appChromeDock #bottomNav.bottom-nav,
+html[data-theme].dar-ios-native-app #bottomNav.bottom-nav,
+html[data-theme].dar-ios-native-app .bottom-nav,
+html.dar-ios-native-app #appChromeDock #bottomNav.bottom-nav,
 html.dar-ios-native-app #bottomNav.bottom-nav,
-html.dar-ios-native-app .bottom-nav{
-  background:var(--bg,var(--page-cover,#050706))!important;
-  background-color:var(--bg,#050706)!important;
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
+html.dar-ios-native-app .bottom-nav,
+html[data-theme][data-dar-ios-no-glass="1"] #appChromeDock #bottomNav.bottom-nav,
+html[data-theme][data-dar-ios-no-glass="1"] #bottomNav.bottom-nav,
+html[data-dar-ios-no-glass="1"] #bottomNav.bottom-nav,
+html[data-dar-ios-no-glass="1"] .bottom-nav{
+  background: var(--page-cover, var(--bg, #050706)) !important;
+  background-color: var(--page-cover, var(--bg, #050706)) !important;
+  background-image: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  isolation: isolate !important;
+  opacity: 1 !important;
+}
+html[data-theme="eisgold"].dar-ios-native-app #appChromeDock #bottomNav.bottom-nav,
+html[data-theme="eisgold"].dar-ios-native-app #bottomNav.bottom-nav,
+html[data-theme="eisgold"][data-dar-ios-no-glass="1"] #bottomNav.bottom-nav{
+  background: var(--page-cover, var(--bg, #fcfeff)) !important;
+  background-image: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
 }
 html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn::before,
-html.dar-ios-native-app .bottom-nav .bottom-nav-btn::before{
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
+html.dar-ios-native-app .bottom-nav .bottom-nav-btn::before,
+html[data-dar-ios-no-glass="1"] #bottomNav.bottom-nav .bottom-nav-btn::before{
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
 }

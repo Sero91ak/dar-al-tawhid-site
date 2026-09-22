@@ -110,13 +110,17 @@
     {
       "id": "ios-testflight-no-glass-like-build86-2026-09-22",
       "approvedBy": "user-explicit-testflight-89-glass-weg-wie-build-86-ios-app",
-      "reason": "Nutzer: TestFlight Build 89 glassig, Build 86 nicht; iOS-App und TestFlight ohne Glas.",
+      "reason": "Nutzer: aktuelle TestFlight immer noch glassig; iOS-App und TestFlight undurchsichtig wie Build 86.",
       "paths": [
         "content/admin/change-scope-lock.json",
         "index.html",
+        "test/index.html",
         "version.json",
+        "test/version.json",
         "service-worker.js",
-        "assets/dar-bottom-nav-glass.css"
+        "assets/dar-bottom-nav-glass.css",
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift",
+        "ios/DarAlTawhid/DarAlTawhid/FreshWebAppView.swift"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     },

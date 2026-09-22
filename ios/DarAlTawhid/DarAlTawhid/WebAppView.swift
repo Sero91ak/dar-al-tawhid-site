@@ -109,6 +109,31 @@ struct WebAppView: UIViewRepresentable {
                 forMainFrameOnly: true
             )
         )
+        let iosNoGlassBoot = """
+        (function(){
+          try{
+            window.DAR_IOS_NATIVE_APP=true;
+            window.DAR_OFFICIAL_IOS_APP=true;
+            var root=document.documentElement;
+            if(root){
+              root.classList.add("dar-ios-native-app");
+              root.setAttribute("data-dar-ios-no-glass","1");
+            }
+            if(document.getElementById("dar-ios-no-glass-boot"))return;
+            var s=document.createElement("style");
+            s.id="dar-ios-no-glass-boot";
+            s.textContent="html,html[data-theme]{--bottom-nav-bg-glass:var(--page-cover,var(--bg,#050706))!important;--bottom-nav-blur:0px!important;}html[data-theme] #appChromeDock #bottomNav.bottom-nav,html[data-theme] #bottomNav.bottom-nav,#appChromeDock #bottomNav,#bottomNav.bottom-nav,.bottom-nav,.top-shell,.header,.sf-top{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:var(--page-cover,var(--bg,#050706))!important;background-color:var(--page-cover,var(--bg,#050706))!important;background-image:none!important;isolation:isolate!important;opacity:1!important;}";
+            (document.head||document.documentElement).appendChild(s);
+          }catch(e){}
+        })();
+        """
+        userContentController.addUserScript(
+            WKUserScript(
+                source: iosNoGlassBoot,
+                injectionTime: .atDocumentStart,
+                forMainFrameOnly: true
+            )
+        )
         let iosHapticBridge = """
         (function(){
           if(window.__darIosHapticInstalled)return;
@@ -1346,6 +1371,19 @@ struct WebAppView: UIViewRepresentable {
               }
               patch();
               patchDarPushLinkStatusUI();
+              try{
+                var root=document.documentElement;
+                if(root){
+                  root.classList.add("dar-ios-native-app");
+                  root.setAttribute("data-dar-ios-no-glass","1");
+                }
+                if(!document.getElementById("dar-ios-no-glass-boot")){
+                  var s=document.createElement("style");
+                  s.id="dar-ios-no-glass-boot";
+                  s.textContent="html[data-theme] #appChromeDock #bottomNav.bottom-nav,html[data-theme] #bottomNav.bottom-nav,#bottomNav.bottom-nav,.bottom-nav{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:var(--page-cover,var(--bg,#050706))!important;background-image:none!important;isolation:isolate!important;opacity:1!important;}";
+                  (document.head||document.documentElement).appendChild(s);
+                }
+              }catch(e){}
               setTimeout(function(){patch();patchDarPushLinkStatusUI();},400);
               setTimeout(function(){patch();patchDarPushLinkStatusUI();},1200);
             })();
