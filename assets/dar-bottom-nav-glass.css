@@ -382,44 +382,33 @@ html[data-theme] #bottomNav.bottom-nav .bottom-nav-pill,
   }
 }
 
-/* iOS/TestFlight: kein Glas — wie Store-Build 86, undurchsichtig. */
-html.dar-ios-native-app,
-html[data-theme].dar-ios-native-app,
-html[data-dar-ios-no-glass="1"],
-html[data-theme][data-dar-ios-no-glass="1"]{
-  --bottom-nav-bg-glass: var(--page-cover, var(--bg, #050706)) !important;
-  --bottom-nav-bg: var(--page-cover, var(--bg, #050706)) !important;
-  --bottom-nav-blur: 0px !important;
+/* iOS/TestFlight: Tab-Bar bleibt Glas. Oben beim Scrollen kein Blur/Translucent. */
+html.dar-ios-native-app .top-shell,
+html.dar-ios-native-app .header,
+html.dar-ios-native-app .header.theme-hero-surface,
+html.dar-ios-native-app .sf-top,
+html.dar-ios-native-app .qov-header,
+html.dar-ios-native-app .app-bar,
+html.dar-ios-native-app body.is-post-route .app-bar{
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
 }
-html[data-theme].dar-ios-native-app #appChromeDock #bottomNav.bottom-nav,
-html[data-theme].dar-ios-native-app #bottomNav.bottom-nav,
-html[data-theme].dar-ios-native-app .bottom-nav,
-html.dar-ios-native-app #appChromeDock #bottomNav.bottom-nav,
-html.dar-ios-native-app #bottomNav.bottom-nav,
-html.dar-ios-native-app .bottom-nav,
-html[data-theme][data-dar-ios-no-glass="1"] #appChromeDock #bottomNav.bottom-nav,
-html[data-theme][data-dar-ios-no-glass="1"] #bottomNav.bottom-nav,
-html[data-dar-ios-no-glass="1"] #bottomNav.bottom-nav,
-html[data-dar-ios-no-glass="1"] .bottom-nav{
+html.dar-ios-native-app .header,
+html.dar-ios-native-app .header.theme-hero-surface,
+html.dar-ios-native-app .sf-top,
+html.dar-ios-native-app .qov-header{
   background: var(--page-cover, var(--bg, #050706)) !important;
   background-color: var(--page-cover, var(--bg, #050706)) !important;
   background-image: none !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-  isolation: isolate !important;
-  opacity: 1 !important;
 }
-html[data-theme="eisgold"].dar-ios-native-app #appChromeDock #bottomNav.bottom-nav,
-html[data-theme="eisgold"].dar-ios-native-app #bottomNav.bottom-nav,
-html[data-theme="eisgold"][data-dar-ios-no-glass="1"] #bottomNav.bottom-nav{
-  background: var(--page-cover, var(--bg, #fcfeff)) !important;
-  background-image: none !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-}
-html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn::before,
-html.dar-ios-native-app .bottom-nav .bottom-nav-btn::before,
-html[data-dar-ios-no-glass="1"] #bottomNav.bottom-nav .bottom-nav-btn::before{
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
+html.dar-ios-native-app .top-edge-fade,
+html.dar-ios-native-app #topEdgeFade,
+html.dar-ios-native-app .top-swim-aura,
+html.dar-ios-native-app #topSwimAura{
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  background: none !important;
 }

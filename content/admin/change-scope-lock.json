@@ -108,6 +108,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "ios-tabbar-glass-top-solid-2026-09-22",
+      "approvedBy": "user-explicit-unten-glass-zurueck-oben-glass-weg-kein-ios-store-release",
+      "reason": "Nutzer: untere Tab-Leiste wieder Glas; oben beim Scrollen kein Glas. Kein Redesign. Offizieller iOS-Store-Build erst nach Prüfung.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/dar-bottom-nav-glass.css",
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift",
+        "ios/DarAlTawhid/DarAlTawhid/FreshWebAppView.swift"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-player-gap-and-volume-ios-2026-09-22",
       "approvedBy": "user-explicit-ios-luecke-arabisch-linie-laut-leise-balken-global",
       "reason": "Nutzer: iOS zu viel Lücke zwischen Arabisch und Linie; Laut/Leise-Balken funktioniert nicht. Global pushen.",

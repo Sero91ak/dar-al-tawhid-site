@@ -117,12 +117,13 @@ struct WebAppView: UIViewRepresentable {
             var root=document.documentElement;
             if(root){
               root.classList.add("dar-ios-native-app");
-              root.setAttribute("data-dar-ios-no-glass","1");
+              root.removeAttribute("data-dar-ios-no-glass");
+              root.setAttribute("data-dar-ios-top-solid","1");
             }
-            if(document.getElementById("dar-ios-no-glass-boot"))return;
+            if(document.getElementById("dar-ios-top-solid-boot"))return;
             var s=document.createElement("style");
-            s.id="dar-ios-no-glass-boot";
-            s.textContent="html,html[data-theme]{--bottom-nav-bg-glass:var(--page-cover,var(--bg,#050706))!important;--bottom-nav-blur:0px!important;}html[data-theme] #appChromeDock #bottomNav.bottom-nav,html[data-theme] #bottomNav.bottom-nav,#appChromeDock #bottomNav,#bottomNav.bottom-nav,.bottom-nav,.top-shell,.header,.sf-top{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:var(--page-cover,var(--bg,#050706))!important;background-color:var(--page-cover,var(--bg,#050706))!important;background-image:none!important;isolation:isolate!important;opacity:1!important;}";
+            s.id="dar-ios-top-solid-boot";
+            s.textContent="html.dar-ios-native-app .top-shell,html.dar-ios-native-app .header,html.dar-ios-native-app .sf-top,html.dar-ios-native-app .qov-header,html.dar-ios-native-app .app-bar{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}html.dar-ios-native-app .header,html.dar-ios-native-app .sf-top,html.dar-ios-native-app .qov-header{background:var(--page-cover,var(--bg,#050706))!important;background-image:none!important}html.dar-ios-native-app .top-edge-fade,html.dar-ios-native-app #topEdgeFade,html.dar-ios-native-app .top-swim-aura{display:none!important}html.dar-ios-native-app #bottomNav.bottom-nav{isolation:auto!important;contain:none!important}";
             (document.head||document.documentElement).appendChild(s);
           }catch(e){}
         })();
@@ -1375,12 +1376,13 @@ struct WebAppView: UIViewRepresentable {
                 var root=document.documentElement;
                 if(root){
                   root.classList.add("dar-ios-native-app");
-                  root.setAttribute("data-dar-ios-no-glass","1");
+                  root.removeAttribute("data-dar-ios-no-glass");
+                  root.setAttribute("data-dar-ios-top-solid","1");
                 }
-                if(!document.getElementById("dar-ios-no-glass-boot")){
+                if(!document.getElementById("dar-ios-top-solid-boot")){
                   var s=document.createElement("style");
-                  s.id="dar-ios-no-glass-boot";
-                  s.textContent="html[data-theme] #appChromeDock #bottomNav.bottom-nav,html[data-theme] #bottomNav.bottom-nav,#bottomNav.bottom-nav,.bottom-nav{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:var(--page-cover,var(--bg,#050706))!important;background-image:none!important;isolation:isolate!important;opacity:1!important;}";
+                  s.id="dar-ios-top-solid-boot";
+                  s.textContent="html.dar-ios-native-app .header,html.dar-ios-native-app .sf-top,html.dar-ios-native-app .qov-header,html.dar-ios-native-app .app-bar{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:var(--page-cover,var(--bg,#050706))!important}html.dar-ios-native-app .top-edge-fade,html.dar-ios-native-app #topEdgeFade{display:none!important}html.dar-ios-native-app #bottomNav.bottom-nav{isolation:auto!important}";
                   (document.head||document.documentElement).appendChild(s);
                 }
               }catch(e){}
