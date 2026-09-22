@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 945;
+    var PLAYER_BUILD = 946;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -2106,17 +2106,23 @@
     qlog("[QURAN_STATE] restore learning state", opts);
     var snap = readLearn();
     if (!applyLearnBlob(snap || {})) {
-      var fallback = { surahNumber: state.surah, ayahNumber: state.ayah, qari: state.reciter, currentTime: state.resumeAt };
+      var fallback = null;
       try {
         if (typeof window.getPreferredQuranProgress === "function") {
           var p = window.getPreferredQuranProgress();
           if (p && Number(p.surahNumber) >= 1) {
-            fallback.surahNumber = Number(p.surahNumber);
-            fallback.ayahNumber = Number(p.ayahNumber) || 1;
-            fallback.surahName = p.surahName || "";
+            fallback = {
+              surahNumber: Number(p.surahNumber),
+              ayahNumber: Number(p.ayahNumber) || 1,
+              surahName: p.surahName || "",
+              qari: state.reciter
+            };
           }
         }
       } catch (eFb) {}
+      if (!fallback) {
+        fallback = { surahNumber: state.surah, ayahNumber: state.ayah, qari: state.reciter, currentTime: state.resumeAt };
+      }
       applyLearnBlob(fallback);
     }
     enterLearnMode();
@@ -2179,7 +2185,6 @@
     restoreGlobalPlayer({ play: false, from: "header-icon" });
   }
   function launchLearnPlayer() {
-    persistCurrent("launch-learn-bar");
     qlog("[QURAN_ROUTE] mode = learning-quran", { from: "learn-launch-bar" });
     restoreLearning({ play: false, from: "learn-launch-bar" });
   }
@@ -3160,16 +3165,22 @@
   var routePaintT = 0;
   window.addEventListener("hashchange", onRoutePaint);
   window.addEventListener("popstate", onRoutePaint);
+  var learnTapAt = 0;
+  function onLearnLaunchTap(ev) {
+    var learnBar = ev.target && ev.target.closest ? ev.target.closest(".qov-learn-launch, [data-dqp-learn-resume], [data-qov-learn-launch], #qovLearnLaunchBtn") : null;
+    if (!learnBar) return false;
+    ev.preventDefault();
+    ev.stopPropagation();
+    var now = Date.now();
+    if (now - learnTapAt < 450) return true;
+    learnTapAt = now;
+    launchLearnPlayer();
+    return true;
+  }
   document.addEventListener("click", function (ev) {
-    var learnBar = ev.target && ev.target.closest ? ev.target.closest(".qov-player-launch, [data-dqp-learn-resume]") : null;
-    if (learnBar) {
-      ev.preventDefault();
-      ev.stopPropagation();
-      launchLearnPlayer();
-      return;
-    }
-    var globalIcon = ev.target && ev.target.closest ? ev.target.closest(".qov-player-icon, [data-qa-action='quran-player'], [data-nav='quran-player']") : null;
-    if (globalIcon) {
+    if (onLearnLaunchTap(ev)) return;
+    var globalIcon = ev.target && ev.target.closest ? ev.target.closest(".qov-player-icon, [data-qa-action='quran-player']") : null;
+    if (globalIcon && !globalIcon.closest(".qov-learn-launch, [data-dqp-learn-resume], [data-qov-learn-launch]")) {
       ev.preventDefault();
       ev.stopPropagation();
       launchGlobalPlayer();
@@ -3177,8 +3188,12 @@
     }
     var t = ev.target && ev.target.closest ? ev.target.closest("[data-nav],.bottom-nav-btn,a[href^='#']") : null;
     if (!t) return;
+    if (t.closest && t.closest(".qov-learn-launch, [data-dqp-learn-resume], [data-qov-learn-launch]")) return;
     onRoutePaint();
     setTimeout(onRoutePaint, 48);
+  }, true);
+  document.addEventListener("pointerup", function (ev) {
+    onLearnLaunchTap(ev);
   }, true);
   document.addEventListener("click", function (ev) {
     var btn = ev.target && ev.target.closest ? ev.target.closest("[data-dqp-learn-resume]") : null;

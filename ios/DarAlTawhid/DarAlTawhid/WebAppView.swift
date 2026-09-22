@@ -61,6 +61,7 @@ struct WebAppView: UIViewRepresentable {
         let configuration = WKWebViewConfiguration()
         configuration.allowsInlineMediaPlayback = true
         configuration.mediaTypesRequiringUserActionForPlayback = []
+        configuration.websiteDataStore = .default()
         configuration.defaultWebpagePreferences.allowsContentJavaScript = true
         // Do not wipe WKWebsiteDataStore on launch — that cancels/breaks the first page load.
         let userContentController = WKUserContentController()
@@ -879,7 +880,7 @@ struct WebAppView: UIViewRepresentable {
             }
             if lastLoadedPushURL == target { return }
             lastLoadedPushURL = target
-            webView?.load(URLRequest(url: target))
+            webView?.load(URLRequest(url: target, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60))
         }
 
         private static func jsString(_ value: String) -> String {
@@ -1514,7 +1515,7 @@ struct WebAppView: UIViewRepresentable {
             }
 
             if isAllowedInternalURL(url) {
-                webView.load(URLRequest(url: url))
+                webView.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60))
                 return nil
             }
 
@@ -1843,7 +1844,7 @@ struct WebAppView: UIViewRepresentable {
             )
             if didShowErrorState {
                 showLoadingOverlay(subtitle: "Erneut laden")
-                webView.load(URLRequest(url: WebAppView.launchURL))
+                webView.load(URLRequest(url: WebAppView.launchURL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60))
             }
         }
 

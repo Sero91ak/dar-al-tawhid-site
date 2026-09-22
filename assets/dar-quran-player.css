@@ -634,7 +634,7 @@ html.player-active body.is-home-route #appView.view{
   html.is-quran-player-route #darQuranPlayer .dqp-play,
   #darQuranPlayer .dqp-play{width:60px;height:40px;min-width:60px!important;min-height:40px!important}
 }
-.qov-player-launch{
+.qov-player-launch,.qov-learn-launch{
   display:flex;align-items:center;gap:12px;width:100%;
   margin:8px 0 4px;padding:10px 12px;min-height:52px;
   border:1px solid color-mix(in srgb,var(--gold2,#EED3AE) 32%,transparent);
