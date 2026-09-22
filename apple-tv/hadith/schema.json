@@ -10,13 +10,36 @@
       "enum": ["hadith", "athar", "dua"],
       "description": "Fehlt das Feld bei Altbeständen, wird der Datensatz als hadith behandelt."
     },
+    "categoryLabel": { "type": ["string", "null"] },
     "language": { "const": "de" },
     "narratorLine": { "type": "string" },
     "speakerLabel": { "type": "string" },
     "textMarkdown": { "type": "string" },
     "source": { "type": "string" },
+    "sourceBook": { "type": ["string", "null"] },
+    "sourceVolume": { "type": ["string", "null"] },
+    "sourcePage": { "type": ["string", "null"] },
+    "sourceChapter": { "type": ["string", "null"] },
+    "sourceSection": { "type": ["string", "null"] },
+    "sourceHadithNumber": { "type": ["string", "null"] },
+    "sourceEdition": { "type": ["string", "null"] },
     "grade": { "type": "string" },
-    "verificationNote": { "type": ["string", "null"] }
+    "verificationNote": { "type": ["string", "null"] },
+    "sharhStatus": {
+      "type": ["string", "null"],
+      "enum": ["verified", "needs-review", "missing", null],
+      "description": "Sharḥ wird nur angezeigt, wenn verified und sharhText gefüllt ist."
+    },
+    "sharhText": { "type": ["string", "null"] },
+    "sharhLanguage": { "type": ["string", "null"] },
+    "sharhScholar": { "type": ["string", "null"] },
+    "sharhBook": { "type": ["string", "null"] },
+    "sharhVolume": { "type": ["string", "null"] },
+    "sharhPage": { "type": ["string", "null"] },
+    "sharhChapter": { "type": ["string", "null"] },
+    "sharhSection": { "type": ["string", "null"] },
+    "sharhEdition": { "type": ["string", "null"] },
+    "sharhReference": { "type": ["string", "null"] }
   },
   "additionalProperties": false
 }
