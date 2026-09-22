@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v842";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v843";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script id="dar-browser-desktop-router-v833">
 (function(){
   try{
@@ -27153,7 +27153,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v842";
+const APP_BUILD_ID="app-shell-v843";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -34203,20 +34203,19 @@ html[data-theme] #darQuranPlayer .dqp-fill{
 }
 </style>
 
-<style id="dar-ios-native-oversize-restore-v842">
-/* Offizielle iOS-App: Oversize/Edge-to-Edge je Erscheinungsbild, kein Test-Glas. */
+<style id="dar-ios-native-oversize-restore-v843">
+/* Offizielle iOS-App: Oversize = Seitenfarbe bis in die Systemkante, kein Glas, keine Eis-/Fremdfarbe. */
 html.dar-ios-native-app,
 html.dar-ios-native-app body,
 html.dar-ios-native-app #appRoot,
-html.dar-ios-native-app #appShell{
+html.dar-ios-native-app #appShell,
+html.dar-ios-native-app .app{
   background:var(--dar-edge-fill,var(--page-cover,var(--outer-bg-flat,var(--bg))))!important;
   background-color:var(--dar-edge-fill,var(--page-cover,var(--outer-bg-flat,var(--bg))))!important;
   background-image:none!important;
+  overscroll-behavior:none!important;
   overscroll-behavior-y:none!important;
   overscroll-behavior-x:none!important;
-}
-html.dar-ios-native-app .app{
-  background:transparent!important;
 }
 html.dar-ios-native-app .top-shell,
 html.dar-ios-native-app .header,
@@ -34225,6 +34224,8 @@ html.dar-ios-native-app .theme-hero-surface,
 html.dar-ios-native-app .sf-top{
   -webkit-backdrop-filter:none!important;
   backdrop-filter:none!important;
+  background:var(--dar-edge-fill,var(--page-cover,var(--bg)))!important;
+  background-color:var(--dar-edge-fill,var(--page-cover,var(--bg)))!important;
 }
 html.dar-ios-native-app .top-edge-fade,
 html.dar-ios-native-app .top-swim-aura,
@@ -34242,5 +34243,46 @@ html.dar-ios-native-app .app::after{
   visibility:hidden!important;
 }
 </style>
+<script>
+/* iOS Oversize zuletzt setzen — gewinnt gegen Viewport-Polish der App. */
+(function(){
+  function native(){
+    try{
+      return !!(window.DAR_IOS_NATIVE_APP||window.DAR_OFFICIAL_IOS_APP||document.documentElement.classList.contains("dar-ios-native-app")||/DarAlTawhid-iOS/i.test(String(navigator.userAgent||"")));
+    }catch(e){return false}
+  }
+  function pin(){
+    if(!native())return;
+    var src=document.getElementById("dar-ios-native-oversize-restore-v843");
+    if(!src)return;
+    var live=document.getElementById("dar-ios-native-oversize-live-v843");
+    if(!live){
+      live=document.createElement("style");
+      live.id="dar-ios-native-oversize-live-v843";
+    }
+    live.textContent=src.textContent;
+    document.documentElement.appendChild(live);
+    if(window.__darPublishAppearance)window.__darPublishAppearance();
+  }
+  function wrap(){
+    var prev=window.__darIosEnsureViewportPolish;
+    if(prev&&prev.__darOversizeWrapped)return;
+    var next=function(){
+      try{if(typeof prev==="function")prev();}catch(e){}
+      pin();
+    };
+    next.__darOversizeWrapped=true;
+    window.__darIosEnsureViewportPolish=next;
+  }
+  wrap();
+  pin();
+  document.addEventListener("DOMContentLoaded",function(){wrap();pin();});
+  window.addEventListener("pageshow",pin);
+  window.addEventListener("hashchange",function(){setTimeout(pin,40);});
+  setTimeout(function(){wrap();pin();},80);
+  setTimeout(function(){wrap();pin();},400);
+  setTimeout(function(){wrap();pin();},1200);
+})();
+</script>
 
 </html>

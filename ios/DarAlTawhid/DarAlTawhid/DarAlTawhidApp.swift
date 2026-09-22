@@ -62,7 +62,18 @@ struct DarAlTawhidApp: App {
     @StateObject private var router = DarAppRouter()
 
     init() {
-        let bootInk = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
+        let ink = DarWidgetStore.load().inkHex.trimmingCharacters(in: .whitespacesAndNewlines)
+        let bootInk: UIColor
+        if ink.hasPrefix("#"), ink.count == 7, let value = Int(ink.dropFirst(), radix: 16) {
+            bootInk = UIColor(
+                red: CGFloat((value >> 16) & 0xFF) / 255.0,
+                green: CGFloat((value >> 8) & 0xFF) / 255.0,
+                blue: CGFloat(value & 0xFF) / 255.0,
+                alpha: 1.0
+            )
+        } else {
+            bootInk = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
+        }
         UIWindow.appearance().backgroundColor = bootInk
         let snap = DarDailyContent.refresh(DarWidgetStore.load())
         DarWidgetStore.save(snap)
@@ -79,7 +90,7 @@ struct DarAlTawhidApp: App {
         WindowGroup {
             WebAppView(destination: router.destination, openURL: router.webURL, openNonce: router.openNonce)
                 .ignoresSafeArea()
-                .background(Color(red: 0.02, green: 0.02, blue: 0.01))
+                .background(Color(uiColor: WebAppView.Coordinator.storedSurfaceColor()))
                 .onOpenURL { url in
                     router.open(url)
                 }

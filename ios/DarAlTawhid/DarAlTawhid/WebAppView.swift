@@ -33,43 +33,15 @@ final class GradientBackdropView: UIView {
     }
 
     func updateColors(top: UIColor, mid: UIColor? = nil, bottom: UIColor) {
-        gradientLayer.startPoint = CGPoint(x: 0.12, y: 0.0)
-        gradientLayer.endPoint = CGPoint(x: 0.88, y: 1.0)
-        gradientLayer.locations = [0.0, 0.18, 0.55, 1.0] as [NSNumber]
-        let ice = UIColor(red: 0.86, green: 0.91, blue: 0.97, alpha: 1.0)
-        let gold = UIColor(red: 0.84, green: 0.75, blue: 0.52, alpha: 1.0)
-        let topMist = blendedColor(from: top, to: ice, ratio: 0.11)
-        let resolvedMid = mid ?? blendedColor(from: top, to: bottom, ratio: 0.42)
-        let midPearl = blendedColor(from: resolvedMid, to: ice, ratio: 0.05)
-        let bottomGold = blendedColor(from: bottom, to: gold, ratio: 0.07)
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        gradientLayer.locations = [0.0, 0.5, 1.0] as [NSNumber]
+        let resolvedMid = mid ?? top
         gradientLayer.colors = [
-            topMist.cgColor,
             top.cgColor,
-            midPearl.cgColor,
-            bottomGold.cgColor
+            resolvedMid.cgColor,
+            bottom.cgColor
         ]
-    }
-
-    private func blendedColor(from: UIColor, to: UIColor, ratio: CGFloat) -> UIColor {
-        var fromRed: CGFloat = 0
-        var fromGreen: CGFloat = 0
-        var fromBlue: CGFloat = 0
-        var fromAlpha: CGFloat = 0
-        var toRed: CGFloat = 0
-        var toGreen: CGFloat = 0
-        var toBlue: CGFloat = 0
-        var toAlpha: CGFloat = 0
-        guard from.getRed(&fromRed, green: &fromGreen, blue: &fromBlue, alpha: &fromAlpha),
-              to.getRed(&toRed, green: &toGreen, blue: &toBlue, alpha: &toAlpha) else {
-            return from
-        }
-        let clampedRatio = min(1, max(0, ratio))
-        return UIColor(
-            red: fromRed + (toRed - fromRed) * clampedRatio,
-            green: fromGreen + (toGreen - fromGreen) * clampedRatio,
-            blue: fromBlue + (toBlue - fromBlue) * clampedRatio,
-            alpha: fromAlpha + (toAlpha - fromAlpha) * clampedRatio
-        )
     }
 }
 
@@ -267,6 +239,18 @@ struct WebAppView: UIViewRepresentable {
               "html.dar-ios-native-app body.is-quran-overview #appView,",
               "html.dar-ios-native-app body.is-quran-overview #appView.view{",
               "  padding-top:max(6px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px)) !important;",
+              "}",
+              "html.dar-ios-native-app,html.dar-ios-native-app body,html.dar-ios-native-app #appRoot,html.dar-ios-native-app #appShell,html.dar-ios-native-app .app{",
+              "  background:var(--dar-edge-fill,var(--page-cover,var(--outer-bg-flat,var(--bg))))!important;",
+              "  background-color:var(--dar-edge-fill,var(--page-cover,var(--outer-bg-flat,var(--bg))))!important;",
+              "  background-image:none!important;",
+              "  overscroll-behavior:none!important;",
+              "}",
+              "html.dar-ios-native-app .top-shell,html.dar-ios-native-app .header,html.dar-ios-native-app .header.theme-hero-surface,html.dar-ios-native-app .theme-hero-surface,html.dar-ios-native-app .sf-top{",
+              "  -webkit-backdrop-filter:none!important;",
+              "  backdrop-filter:none!important;",
+              "  background:var(--dar-edge-fill,var(--page-cover,var(--bg)))!important;",
+              "  background-color:var(--dar-edge-fill,var(--page-cover,var(--bg)))!important;",
               "}"
             ].join("\\n");
           }
@@ -281,7 +265,6 @@ struct WebAppView: UIViewRepresentable {
             if(root){
               root.classList.add("dar-ios-native-app");
               root.classList.remove("dar-soft-booting");
-              root.style.removeProperty("background-color");
               if(root.getAttribute("data-layout")==="medium"||root.getAttribute("data-layout")==="expanded"){
                 root.setAttribute("data-layout","compact");
               }
@@ -508,48 +491,25 @@ struct WebAppView: UIViewRepresentable {
           }
           function publishAppearance(){
             // Theme-only: never inject hardcoded navy/blue route palettes.
-            var roots=[document.body, document.documentElement, document.querySelector('.app'), document.querySelector('#appShell'), document.querySelector('#appView')];
-            var topColor=firstVariableColor(roots, [
+            var roots=[document.documentElement, document.body, document.querySelector('.app'), document.querySelector('#appShell'), document.querySelector('#appView')];
+            var painted=firstSolidColor(["html", "body", "#appShell", ".app", "#appRoot"]);
+            var topColor=painted || firstVariableColor(roots, [
               "--dar-edge-fill",
+              "--page-cover",
+              "--outer-bg-flat",
               "--theme-page-bg",
               "--theme-feed-bg",
               "--ilm-page-bg",
               "--page-cover-mid",
-              "--page-cover",
-              "--outer-bg-flat",
               "--bg2",
               "--bg"
             ]);
             if(!topColor){
               topColor=firstSolidColor([".sf-top", ".lib-page", "#appView > .view-head", "#appView > .view", "body", "html"]);
             }
-            var midColor=firstVariableColor(roots, [
-              "--dar-edge-fill",
-              "--theme-feed-bg",
-              "--page-cover-mid",
-              "--theme-page-bg",
-              "--ilm-page-bg",
-              "--page-cover",
-              "--bg2",
-              "--bg"
-            ]);
-            if(!midColor){
-              midColor=firstSolidColor(["#appView > .view-head", ".sf-top", ".lib-page", "#appView > .view", "body"]) || topColor;
-            }
-            var bottomColor=firstVariableColor(roots, [
-              "--dar-edge-fill",
-              "--outer-bg-flat",
-              "--theme-page-bg",
-              "--ilm-page-bg",
-              "--theme-feed-bg",
-              "--page-cover",
-              "--bg2",
-              "--bg"
-            ]);
-            if(!bottomColor){
-              bottomColor=firstSolidColor(["#appView > .view", ".lib-page", "body", "html"]) || topColor;
-            }
-            var boot="#050504";
+            var midColor=topColor;
+            var bottomColor=topColor;
+            var boot=topColor || "#050504";
             try{
               window.webkit.messageHandlers.darAppearance.postMessage({
                 top: topColor || boot,
@@ -646,7 +606,7 @@ struct WebAppView: UIViewRepresentable {
         )
         configuration.userContentController = userContentController
 
-        let bootInk = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
+        let bootInk = Coordinator.storedSurfaceColor()
         let containerView = UIView(frame: .zero)
         containerView.backgroundColor = bootInk
 
@@ -663,9 +623,13 @@ struct WebAppView: UIViewRepresentable {
         webView.scrollView.delaysContentTouches = false
         webView.scrollView.canCancelContentTouches = true
         webView.scrollView.backgroundColor = bootInk
+        webView.scrollView.alwaysBounceVertical = false
         webView.allowsBackForwardNavigationGestures = true
         webView.isOpaque = true
         webView.backgroundColor = bootInk
+        if #available(iOS 15.0, *) {
+            webView.underPageBackgroundColor = bootInk
+        }
         webView.customUserAgent = "DarAlTawhid-iOS/1.0 WKWebView"
         webView.onInsetsChange = { [weak coordinator = context.coordinator] in
             coordinator?.updateViewportInsets()
@@ -734,7 +698,7 @@ struct WebAppView: UIViewRepresentable {
         private weak var backdropView: GradientBackdropView?
         private weak var containerView: UIView?
         private weak var loadingOverlay: UIView?
-        private var pageSurfaceColor = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
+        private var pageSurfaceColor = Coordinator.storedSurfaceColor()
         private weak var loadingLabel: UILabel?
         private weak var loadingProgressFill: UIView?
         private weak var loadingProgressTrack: UIView?
@@ -1386,11 +1350,32 @@ struct WebAppView: UIViewRepresentable {
             )
         }
 
+        static func storedSurfaceColor() -> UIColor {
+            let ink = DarWidgetStore.load().inkHex
+            if let parsed = parseHex(ink) { return parsed }
+            return UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
+        }
+
+        private static func parseHex(_ hex: String?) -> UIColor? {
+            guard var hex else { return nil }
+            hex = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard hex.hasPrefix("#") else { return nil }
+            let normalized = String(hex.dropFirst())
+            guard normalized.count == 6, let value = Int(normalized, radix: 16) else { return nil }
+            return UIColor(
+                red: CGFloat((value >> 16) & 0xFF) / 255.0,
+                green: CGFloat((value >> 8) & 0xFF) / 255.0,
+                blue: CGFloat(value & 0xFF) / 255.0,
+                alpha: 1.0
+            )
+        }
+
         private func applySurfaceColor(_ color: UIColor) {
             pageSurfaceColor = color
             backdropView?.updateColors(top: color, mid: color, bottom: color)
             containerView?.backgroundColor = color
             webView?.scrollView.backgroundColor = color
+            webView?.scrollView.alwaysBounceVertical = false
             webView?.backgroundColor = color
             webView?.isOpaque = true
             if #available(iOS 15.0, *) {
@@ -1415,17 +1400,7 @@ struct WebAppView: UIViewRepresentable {
         }
 
         private func color(from hex: String?) -> UIColor? {
-            guard var hex else { return nil }
-            hex = hex.trimmingCharacters(in: .whitespacesAndNewlines)
-            guard hex.hasPrefix("#") else { return nil }
-            let normalized = String(hex.dropFirst())
-            guard normalized.count == 6, let value = Int(normalized, radix: 16) else { return nil }
-            return UIColor(
-                red: CGFloat((value >> 16) & 0xFF) / 255.0,
-                green: CGFloat((value >> 8) & 0xFF) / 255.0,
-                blue: CGFloat(value & 0xFF) / 255.0,
-                alpha: 1.0
-            )
+            Coordinator.parseHex(hex)
         }
 
         private func resolvedSafeAreaInsets(for webView: WKWebView) -> UIEdgeInsets {
@@ -1824,7 +1799,7 @@ struct WebAppView: UIViewRepresentable {
         private func installLoadingOverlay(on host: UIView) {
             let overlay = UIView(frame: host.bounds)
             overlay.translatesAutoresizingMaskIntoConstraints = false
-            overlay.backgroundColor = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
+            overlay.backgroundColor = pageSurfaceColor
             overlay.isUserInteractionEnabled = true
             overlay.isHidden = true
             overlay.alpha = 0
@@ -1956,11 +1931,10 @@ struct WebAppView: UIViewRepresentable {
 
         private func showLoadingOverlay(subtitle: String) {
             hideLoadingWorkItem?.cancel()
-            let bootInk = UIColor(red: 0.02, green: 0.02, blue: 0.01, alpha: 1.0)
             isBootLoadingVisible = true
             loadingLabel?.text = subtitle
             guard let overlay = loadingOverlay else { return }
-            overlay.backgroundColor = bootInk
+            overlay.backgroundColor = pageSurfaceColor
             overlay.isHidden = false
             overlay.isUserInteractionEnabled = true
             overlay.alpha = 1
