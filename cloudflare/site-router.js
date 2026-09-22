@@ -40,8 +40,8 @@ export default {
 
       let html = await assetResponse.text();
       if (assetResponse.ok) {
-        const styleTag = '<link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=18">';
-        const scriptTag = '<script defer src="/desktop-preview/desktop-overhaul.js?v=18"><\/script>';
+        const styleTag = '<link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=181">';
+        const scriptTag = '<script defer src="/desktop-preview/desktop-overhaul.js?v=181"><\/script>';
         if (!html.includes("desktop-overhaul.css")) html = html.replace("</head>", styleTag + "</head>");
         if (!html.includes("desktop-overhaul.js")) html = html.replace("</body>", scriptTag + "</body>");
       }
