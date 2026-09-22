@@ -782,6 +782,11 @@ body.player-learn #qrcChrome.is-hidden{
   outline:1px solid color-mix(in srgb,var(--gold2,#EED3AE) 38%,transparent);
   border-radius:12px;
 }
+.quran-ayah.is-dqp-resume-flash{
+  outline:2px solid color-mix(in srgb,var(--gold2,#EED3AE) 70%,transparent);
+  border-radius:12px;
+  background:color-mix(in srgb,var(--gold2,#EED3AE) 12%,transparent);
+}
 .quran-ayah-action-btn--play.is-on{
   background:color-mix(in srgb,var(--gold2,#EED3AE) 22%,transparent)!important;
   border-color:color-mix(in srgb,var(--gold2,#EED3AE) 55%,transparent)!important;

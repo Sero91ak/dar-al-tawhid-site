@@ -550,14 +550,32 @@ html.player-active:not(.is-quran-player-route) body{
   will-change:transform;
   backface-visibility:hidden;
   border-radius:99px;
-  background:linear-gradient(90deg,var(--gold,#CFAE86),var(--gold2,#EED3AE));
-  box-shadow:0 0 5px color-mix(in srgb,var(--gold,#EED3AE) 25%,transparent);
+  background:linear-gradient(90deg,#CFAE86,#EED3AE);
+  box-shadow:0 0 5px rgba(238,211,174,.25);
+  pointer-events:none;
+}
+.dqp-top-knob-rail{
+  position:absolute;left:0;top:0;width:calc(100% - 11px);height:100%;
+  pointer-events:none;z-index:2;overflow:visible;
+}
+.dqp-top-knob-shift{
+  position:absolute;left:0;top:0;width:100%;height:100%;
+  transform:translate3d(0,0,0);
+  will-change:transform;
+  backface-visibility:hidden;
+}
+.dqp-top-knob{
+  position:absolute;left:0;top:50%;width:11px;height:11px;margin:0;
+  border-radius:50%;background:#F4DEC2;
+  box-shadow:0 0 0 2px rgba(34,32,30,.7),0 1px 2px rgba(0,0,0,.35);
+  transform:translate3d(0,-50%,0);
   pointer-events:none;
 }
 .dqp-top-range{
-  -webkit-appearance:none;appearance:none;position:relative;z-index:1;
+  -webkit-appearance:none;appearance:none;position:relative;z-index:3;
   width:100%;height:16px;margin:0;padding:0;
   background:transparent;cursor:pointer;
+  opacity:0;
 }
 .dqp-top-range::-webkit-slider-runnable-track{
   height:5px;border-radius:99px;background:transparent;
@@ -764,6 +782,11 @@ body.player-learn #qrcChrome.is-hidden{
   outline:1px solid color-mix(in srgb,var(--gold2,#EED3AE) 38%,transparent);
   border-radius:12px;
 }
+.quran-ayah.is-dqp-resume-flash{
+  outline:2px solid color-mix(in srgb,var(--gold2,#EED3AE) 70%,transparent);
+  border-radius:12px;
+  background:color-mix(in srgb,var(--gold2,#EED3AE) 12%,transparent);
+}
 .quran-ayah-action-btn--play.is-on{
   background:color-mix(in srgb,var(--gold2,#EED3AE) 22%,transparent)!important;
   border-color:color-mix(in srgb,var(--gold2,#EED3AE) 55%,transparent)!important;
@@ -867,6 +890,8 @@ html.is-quran-player-route #appView.view,
 #darQuranMiniPlayer .dqp-top-groove{
   background:color-mix(in srgb,var(--text,#EBE4D9) 28%,transparent)!important;
 }
+
+/* Erscheinungsbilder: Player-Text, Zeiten und Seek immer kontrastreich */
 #darQuranMiniPlayer input.dqp-top-range,
 #darQuranPlayer input.dqp-range{
   background:transparent!important;
