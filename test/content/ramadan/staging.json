@@ -1,0 +1,635 @@
+{
+  "schemaVersion": 1,
+  "id": "ramadan-series-staging",
+  "environment": "staging",
+  "publicationState": "draft",
+  "title": "Ramaḍān",
+  "subtitle": "30 Tage mit Qurʾān & Sunnah",
+  "timezone": "Europe/Berlin",
+  "activationMode": "manual-confirmed",
+  "startDate": null,
+  "plannedDays": 30,
+  "actualDays": null,
+  "seriesState": "upcoming",
+  "testMode": {
+    "enabled": true,
+    "overrideDay": 1,
+    "allowManualStepping": true
+  },
+  "sourcePolicy": {
+    "requireVerifiedContentForProduction": true,
+    "requiredEvidenceTypes": [
+      "quran",
+      "sunnah",
+      "salaf"
+    ],
+    "publicForeignUrlsAllowed": false,
+    "internalShortlinkPattern": "dar-al-tawhid.de/q/<nummer>"
+  },
+  "completion": {
+    "title": "Ramaḍān-Serie abgeschlossen",
+    "body": "Abschlusstext wird vor Veröffentlichung separat geprüft."
+  },
+  "days": [
+    {
+      "day": 1,
+      "slug": "day-01",
+      "title": "Testtag 01",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 01",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 2,
+      "slug": "day-02",
+      "title": "Testtag 02",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 02",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 3,
+      "slug": "day-03",
+      "title": "Testtag 03",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 03",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 4,
+      "slug": "day-04",
+      "title": "Testtag 04",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 04",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 5,
+      "slug": "day-05",
+      "title": "Testtag 05",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 05",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 6,
+      "slug": "day-06",
+      "title": "Testtag 06",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 06",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 7,
+      "slug": "day-07",
+      "title": "Testtag 07",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 07",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 8,
+      "slug": "day-08",
+      "title": "Testtag 08",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 08",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 9,
+      "slug": "day-09",
+      "title": "Testtag 09",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 09",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 10,
+      "slug": "day-10",
+      "title": "Testtag 10",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 10",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 11,
+      "slug": "day-11",
+      "title": "Testtag 11",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 11",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 12,
+      "slug": "day-12",
+      "title": "Testtag 12",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 12",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 13,
+      "slug": "day-13",
+      "title": "Testtag 13",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 13",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 14,
+      "slug": "day-14",
+      "title": "Testtag 14",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 14",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 15,
+      "slug": "day-15",
+      "title": "Testtag 15",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 15",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 16,
+      "slug": "day-16",
+      "title": "Testtag 16",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 16",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 17,
+      "slug": "day-17",
+      "title": "Testtag 17",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 17",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 18,
+      "slug": "day-18",
+      "title": "Testtag 18",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 18",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 19,
+      "slug": "day-19",
+      "title": "Testtag 19",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 19",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 20,
+      "slug": "day-20",
+      "title": "Testtag 20",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 20",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 21,
+      "slug": "day-21",
+      "title": "Testtag 21",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 21",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 22,
+      "slug": "day-22",
+      "title": "Testtag 22",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 22",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 23,
+      "slug": "day-23",
+      "title": "Testtag 23",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 23",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 24,
+      "slug": "day-24",
+      "title": "Testtag 24",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 24",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 25,
+      "slug": "day-25",
+      "title": "Testtag 25",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 25",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 26,
+      "slug": "day-26",
+      "title": "Testtag 26",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 26",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 27,
+      "slug": "day-27",
+      "title": "Testtag 27",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 27",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 28,
+      "slug": "day-28",
+      "title": "Testtag 28",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 28",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 29,
+      "slug": "day-29",
+      "title": "Testtag 29",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 29",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    },
+    {
+      "day": 30,
+      "slug": "day-30",
+      "title": "Testtag 30",
+      "contentStatus": "structure-test",
+      "summary": "Nur Strukturtest – noch kein veröffentlichungsfähiger religiöser Inhalt.",
+      "sections": {
+        "thought": "",
+        "quran": null,
+        "sunnah": null,
+        "salaf": null,
+        "action": "",
+        "dua": null
+      },
+      "evidence": [],
+      "presentation": {
+        "shortTitle": "Tag 30",
+        "ambientLine": "Testmodus · Inhalt noch nicht freigegeben"
+      }
+    }
+  ]
+}
