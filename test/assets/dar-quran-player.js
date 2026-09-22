@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 940;
+  var PLAYER_BUILD = 942;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -1446,13 +1446,21 @@
   function invalidateProgressCache() { progCache = null; lastProgPct = -1; }
   var lastSeekUiAt = 0;
   function progressEls() {
-    if (progCache && progCache.el && progCache.el.isConnected) return progCache;
     var mini = document.getElementById("darQuranMiniPlayer");
     var root = playerRoot();
-    var el = mini || root;
-    if (!el) return null;
+    if (
+      progCache &&
+      progCache.mini === mini &&
+      progCache.root === root &&
+      (!mini || (progCache.cur && progCache.cur.isConnected)) &&
+      (!root || root.hidden || (progCache.pcur && progCache.pcur.isConnected && progCache.pfill && progCache.pfill.isConnected))
+    ) {
+      return progCache;
+    }
     progCache = {
-      el: el,
+      mini: mini,
+      root: root,
+      el: root && !root.hidden ? root : mini,
       cur: mini ? mini.querySelector("[data-dqp-mini-cur]") : null,
       dur: mini ? mini.querySelector("[data-dqp-mini-dur]") : null,
       fill: mini ? mini.querySelector(".dqp-top-fill") : null,
@@ -1501,13 +1509,11 @@
     var pct = ready ? Math.max(0, Math.min(1, t / d)) : 0;
     var xform = "translate3d(" + (pct * 100).toFixed(4) + "%,0,0)";
     var scale = "scaleX(" + pct.toFixed(5) + ")";
-    if (lastProgPct !== pct) {
-      if (ui.fill) ui.fill.style.transform = scale;
-      if (ui.shift) ui.shift.style.transform = xform;
-      if (ui.pfill) ui.pfill.style.transform = scale;
-    }
+    if (ui.fill) ui.fill.style.transform = scale;
+    if (ui.shift) ui.shift.style.transform = xform;
+    if (ui.pfill) ui.pfill.style.transform = scale;
     lastProgPct = pct;
-    var curTxt = ready ? fmt(t) : "––:––";
+    var curTxt = fmt(t);
     var durTxt = ready ? fmt(d || 0) : "––:––";
     var remainTxt = ready ? ("-" + fmt(Math.max(0, d - t))) : "––:––";
     if (ui.cur && ui.cur.textContent !== curTxt) ui.cur.textContent = curTxt;
@@ -1525,35 +1531,24 @@
     }
   }
   function progressClockTick() {
-    if (!state.sessionActive) {
+    if (!state.sessionActive && !isFullPlayerRoute()) {
       stopProgressClock();
       return;
     }
     if (seekLock) return;
-    var now = performance.now();
-    if (now - lastProgPaintAt < PROG_FRAME_MS * 0.35) return;
-    lastProgPaintAt = now;
     var t = currentProgressTime();
     state.current = t;
-    applyProgressVisual(t, Number(state.duration) || 0);
+    applyProgressVisual(t, Number(state.duration) || Number(audioEl().duration) || 0);
   }
   function startProgressClock() {
-    if (progressClock || progressTimer) {
-      progressClockTick();
-      return;
-    }
+    if (progressClock) return;
     syncProgressSample(true);
     lastProgPaintAt = 0;
     function rafLoop() {
       progressClock = requestAnimationFrame(rafLoop);
       progressClockTick();
     }
-    function hzLoop() {
-      progressTimer = setTimeout(hzLoop, PROG_FRAME_MS);
-      progressClockTick();
-    }
     progressClock = requestAnimationFrame(rafLoop);
-    progressTimer = setTimeout(hzLoop, PROG_FRAME_MS);
   }
   function stopProgressClock() {
     if (progressClock) cancelAnimationFrame(progressClock);
@@ -1613,7 +1608,8 @@
   function nowPlayingArtworkUrl() {
     var origin = "";
     try { origin = String(location.origin || ""); } catch (eArt) {}
-    return origin + "/quran-player-artwork-512.png?v=938";
+    if (isTestShell()) return origin + "/test/assets/quran-player-artwork-512.png?v=" + PLAYER_BUILD;
+    return origin + "/assets/quran-player-artwork-512.png?v=" + PLAYER_BUILD;
   }
   function nowPlayingArtwork() {
     var src = nowPlayingArtworkUrl();
@@ -2106,6 +2102,10 @@
   }
   function restoreGlobalPlayer(opts) {
     opts = opts || {};
+    if (LEARN_PLAYER_ONLY) {
+      restoreLearning({ play: !!opts.play, from: "global-blocked-learn-only" });
+      return;
+    }
     qlog("[QURAN_STATE] restore global player state", opts);
     var snap = readGlobal();
     applyGlobalBlob(snap);
@@ -2754,6 +2754,9 @@
     root.hidden = false;
     root.style.display = "";
     try { root.removeAttribute("inert"); } catch (e) {}
+    invalidateProgressCache();
+    if (state.playing || state.sessionActive) startProgressClock();
+    paintProgress();
   }
   function bind(force) {
     var root = playerRoot();
