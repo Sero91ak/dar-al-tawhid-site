@@ -108,6 +108,25 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-player-gap-and-volume-ios-2026-09-22",
+      "approvedBy": "user-explicit-ios-luecke-arabisch-linie-laut-leise-balken-global",
+      "reason": "Nutzer: iOS zu viel Lücke zwischen Arabisch und Linie; Laut/Leise-Balken funktioniert nicht. Global pushen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/dar-quran-player.js",
+        "assets/dar-quran-player.css",
+        "test/assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "ios-testflight-no-glass-like-build86-2026-09-22",
       "approvedBy": "user-explicit-testflight-89-glass-weg-wie-build-86-ios-app",
       "reason": "Nutzer: aktuelle TestFlight immer noch glassig; iOS-App und TestFlight undurchsichtig wie Build 86.",
