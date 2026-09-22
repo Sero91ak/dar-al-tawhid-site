@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v839";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v840";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script id="dar-browser-desktop-router-v833">
 (function(){
   try{
@@ -10493,7 +10493,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/premium-feed-app.js?v=101" defer></script>
 <script src="/assets/dar-setup-hub.js?v=5" defer></script><!-- DAR_SETUP_HUB_V1 -->
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
-<script src="/assets/dar-quran-player.js?v=933" defer></script>
+<script src="/assets/dar-quran-player.js?v=934" defer></script>
 <script src="/assets/adaptive-layout.js?v=7" defer></script>
 <script src="/assets/fold-split.js?v=3" defer></script>
 <script src="/assets/scholars-index.js?v=587" defer></script>
@@ -12108,7 +12108,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 }
 </style>
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=587">
-<link rel="stylesheet" href="/assets/dar-quran-player.css?v=933">
+<link rel="stylesheet" href="/assets/dar-quran-player.css?v=934">
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=5">
 <link rel="stylesheet" href="/assets/books-library.css?v=2">
 <link rel="stylesheet" href="/assets/prophets/prophets.css?v=16">
@@ -27153,7 +27153,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v839";
+const APP_BUILD_ID="app-shell-v840";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -34167,33 +34167,40 @@ html[data-theme="bordeaux"] .theme-switch-btn:not([data-theme-select]){
   background:#141916!important;border-color:rgba(216,193,139,.28)!important;
 }
 #darQuranMiniPlayer input.dqp-top-range,#darQuranPlayer input.dqp-range{background:transparent!important;border:0!important;box-shadow:none!important;color:transparent!important;-webkit-text-fill-color:transparent!important}
-html[data-theme="eisgold"] #darQuranPlayer,
-html[data-theme="eisgold"] #darQuranMiniPlayer{color:#F4FBFF!important;--text:#F4FBFF;--cream:#F4FBFF;--gold2:#E8D5A3}
-html[data-theme="eisgold"] #darQuranPlayer .dqp-ayah-ar,
-html[data-theme="eisgold"] #darQuranPlayer .dqp-ayah-de,
-html[data-theme="eisgold"] #darQuranPlayer .dqp-ayah-lat,
-html[data-theme="eisgold"] #darQuranPlayer .dqp-ayah-ref,
-html[data-theme="eisgold"] #darQuranPlayer .dqp-title,
-html[data-theme="eisgold"] #darQuranMiniPlayer .dqp-top-text b,
-html[data-theme="eisgold"] #darQuranMiniPlayer .dqp-top-time{color:#F4FBFF!important;-webkit-text-fill-color:#F4FBFF!important}
-html[data-theme="eisgold"] #darQuranPlayer .dqp-artist,
-html[data-theme="eisgold"] #darQuranMiniPlayer .dqp-top-text span{color:#D7E9F6!important;-webkit-text-fill-color:#D7E9F6!important}
-html[data-theme="dar-al-layl"] #darQuranMiniPlayer .dqp-top-groove,
-html[data-theme="dark"] #darQuranMiniPlayer .dqp-top-groove,
-html[data-theme="royal"] #darQuranMiniPlayer .dqp-top-groove,
-html[data-theme="bordeaux"] #darQuranMiniPlayer .dqp-top-groove{background:rgba(232,215,179,.4)!important}
-html[data-theme="light"] #darQuranMiniPlayer .dqp-top-groove,
-html[data-theme="soft"] #darQuranMiniPlayer .dqp-top-groove,
-html[data-theme="eisgold"] #darQuranMiniPlayer .dqp-top-groove{background:rgba(255,255,255,.34)!important}
-html[data-theme] #darQuranMiniPlayer .dqp-top-fill{background:linear-gradient(90deg,#C9A86A,#F0E0B8)!important}
-html[data-theme="dar-al-layl"] #darQuranMiniPlayer .dqp-top-time,
-html[data-theme="dark"] #darQuranMiniPlayer .dqp-top-time,
-html[data-theme="royal"] #darQuranMiniPlayer .dqp-top-time,
-html[data-theme="bordeaux"] #darQuranMiniPlayer .dqp-top-time,
-html[data-theme="light"] #darQuranMiniPlayer .dqp-top-time,
-html[data-theme="soft"] #darQuranMiniPlayer .dqp-top-time,
-html[data-theme="eisgold"] #darQuranMiniPlayer .dqp-top-time{color:#F4EED8!important;-webkit-text-fill-color:#F4EED8!important;opacity:1!important}
-html[data-theme="eisgold"] #darQuranMiniPlayer .dqp-top-time{color:#F4FBFF!important;-webkit-text-fill-color:#F4FBFF!important}
+html[data-theme] #darQuranMiniPlayer,
+html[data-theme] #darQuranPlayer{
+  color:var(--text)!important;
+  background:var(--bg)!important;
+}
+html[data-theme] #darQuranMiniPlayer .dqp-top-text b,
+html[data-theme] #darQuranMiniPlayer .dqp-top-time,
+html[data-theme] #darQuranMiniPlayer .dqp-top-mark,
+html[data-theme] #darQuranPlayer .dqp-title,
+html[data-theme] #darQuranPlayer .dqp-times,
+html[data-theme] #darQuranPlayer .dqp-times span{
+  color:var(--text)!important;
+  -webkit-text-fill-color:var(--text)!important;
+  opacity:1!important;
+}
+html[data-theme] #darQuranMiniPlayer .dqp-top-text span,
+html[data-theme] #darQuranPlayer .dqp-artist{
+  color:var(--muted)!important;
+  -webkit-text-fill-color:var(--muted)!important;
+  opacity:1!important;
+}
+html[data-theme] #darQuranMiniPlayer .dqp-top-ctrl,
+html[data-theme] #darQuranMiniPlayer .dqp-learn-btn,
+html[data-theme] #darQuranPlayer button{
+  color:var(--gold2)!important;
+}
+html[data-theme] #darQuranMiniPlayer .dqp-top-groove,
+html[data-theme] #darQuranPlayer .dqp-groove{
+  background:color-mix(in srgb,var(--text) 28%,transparent)!important;
+}
+html[data-theme] #darQuranMiniPlayer .dqp-top-fill,
+html[data-theme] #darQuranPlayer .dqp-fill{
+  background:linear-gradient(90deg,var(--gold),var(--gold2))!important;
+}
 </style>
 
 </html>

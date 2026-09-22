@@ -108,6 +108,25 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-player-smooth-theme-test-ios-2026-09-22",
+      "approvedBy": "user-explicit-player-ruckel-farben-test-und-ios-pushen",
+      "reason": "Nutzer: Voll-Player 120-Hz-Leiste wie Lernplayer, Mini-Player farblich an alle Erscheinungsbilder, lesbare Schrift/Linien/Zahlen, Test-App und iOS live.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "assets/dar-quran-player.js",
+        "assets/dar-quran-player.css",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "visitor-ios-full-quran-player-2026-09-22",
       "approvedBy": "user-explicit-kompletten-quran-player-ios-app",
       "reason": "Nutzer: kompletten Qurʾān-Player inkl. Voll-Player und Tab-Schnellzugriff in die offizielle iOS-App wie in Test.",

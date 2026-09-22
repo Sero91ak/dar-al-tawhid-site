@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 933;
+  var PLAYER_BUILD = 934;
   /* LEARN_PLAYER_ONLY: Āyah-Buttons + Mini-Lernleiste, kein Voll-Player.
      Offizielle iOS-App bekommt den kompletten Player inkl. Vollansicht. */
   function isOfficialIosApp() {
@@ -1260,16 +1260,24 @@
   var PROG_HZ = 120;
   var PROG_FRAME_MS = 1000 / PROG_HZ;
   function invalidateProgressCache() { progCache = null; lastProgPct = -1; }
+  var lastSeekUiAt = 0;
   function progressEls() {
     if (progCache && progCache.el && progCache.el.isConnected) return progCache;
-    var el = document.getElementById("darQuranMiniPlayer");
+    var mini = document.getElementById("darQuranMiniPlayer");
+    var root = playerRoot();
+    var el = mini || root;
     if (!el) return null;
     progCache = {
       el: el,
-      cur: el.querySelector("[data-dqp-mini-cur]"),
-      dur: el.querySelector("[data-dqp-mini-dur]"),
-      fill: el.querySelector(".dqp-top-fill"),
-      shift: el.querySelector(".dqp-top-knob-shift")
+      cur: mini ? mini.querySelector("[data-dqp-mini-cur]") : null,
+      dur: mini ? mini.querySelector("[data-dqp-mini-dur]") : null,
+      fill: mini ? mini.querySelector(".dqp-top-fill") : null,
+      shift: mini ? mini.querySelector(".dqp-top-knob-shift") : null,
+      pfill: root ? root.querySelector(".dqp-fill") : null,
+      pcur: root ? root.querySelector("[data-dqp-cur]") : null,
+      pdur: root ? root.querySelector("[data-dqp-dur]") : null,
+      sl: root ? root.querySelector("[data-dqp=seek]") : null,
+      msl: mini ? mini.querySelector("[data-dqp-mini=seek]") : null
     };
     return progCache;
   }
@@ -1305,16 +1313,32 @@
   function applyProgressVisual(t, d) {
     var ui = progressEls();
     if (!ui) return;
-    var pct = d > 0 && isFinite(d) ? Math.max(0, Math.min(1, t / d)) : 0;
+    var ready = d > 0 && isFinite(d);
+    var pct = ready ? Math.max(0, Math.min(1, t / d)) : 0;
     var xform = "translate3d(" + (pct * 100).toFixed(4) + "%,0,0)";
     var scale = "scaleX(" + pct.toFixed(5) + ")";
-    if (ui.fill && lastProgPct !== pct) ui.fill.style.transform = scale;
-    if (ui.shift && lastProgPct !== pct) ui.shift.style.transform = xform;
+    if (lastProgPct !== pct) {
+      if (ui.fill) ui.fill.style.transform = scale;
+      if (ui.shift) ui.shift.style.transform = xform;
+      if (ui.pfill) ui.pfill.style.transform = scale;
+    }
     lastProgPct = pct;
-    var curTxt = fmt(t);
-    var durTxt = fmt(d || 0);
+    var curTxt = ready ? fmt(t) : "––:––";
+    var durTxt = ready ? fmt(d || 0) : "––:––";
+    var remainTxt = ready ? ("-" + fmt(Math.max(0, d - t))) : "––:––";
     if (ui.cur && ui.cur.textContent !== curTxt) ui.cur.textContent = curTxt;
     if (ui.dur && ui.dur.textContent !== durTxt) ui.dur.textContent = durTxt;
+    if (ui.pcur && ui.pcur.textContent !== curTxt) ui.pcur.textContent = curTxt;
+    if (ui.pdur && ui.pdur.textContent !== remainTxt) ui.pdur.textContent = remainTxt;
+    if (!seekLock) {
+      var now = performance.now();
+      if (now - lastSeekUiAt > 80) {
+        lastSeekUiAt = now;
+        var nextVal = String(Math.round(pct * 1000));
+        if (ui.sl && ui.sl.value !== nextVal) ui.sl.value = nextVal;
+        if (ui.msl && ui.msl.value !== nextVal) ui.msl.value = nextVal;
+      }
+    }
   }
   function progressClockTick() {
     if (!state.sessionActive) {
@@ -1359,24 +1383,11 @@
   function paintProgress() {
     var root = playerRoot();
     if (root) {
-      var cur = root.querySelector("[data-dqp-cur]");
-      var dur = root.querySelector("[data-dqp-dur]");
       var n = root.querySelector("[data-dqp-n]");
-      var sl = root.querySelector("[data-dqp=seek]");
-      var ready = state.duration && isFinite(state.duration) && state.duration > 0;
-      if (cur) cur.textContent = ready ? fmt(state.current) : "––:––";
-      if (dur) dur.textContent = ready ? ("-" + fmt(Math.max(0, state.duration - (state.current || 0)))) : "––:––";
       if (n) n.textContent = "Āyah " + state.ayah + " / " + totalAyat();
-      if (sl) {
-        var pct = ready ? (state.current / state.duration) * 1000 : 0;
-        if (!seekLock) sl.value = String(Math.round(pct));
-        var fillPct = ready ? ((state.current / state.duration) * 100) + "%" : "0%";
-        sl.style.setProperty("--dqp-fill", fillPct);
-        var track = root.querySelector("[data-dqp-seek-track]");
-        if (track) track.style.setProperty("--dqp-fill", fillPct);
-      }
     }
-    if (!state.playing) applyProgressVisual(Number(state.current) || 0, Number(state.duration) || 0);
+    lastProgPct = -1;
+    applyProgressVisual(currentProgressTime(), Number(state.duration) || 0);
   }
   function paintChrome() {
     var root = playerRoot();
