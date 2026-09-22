@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08131e">
+<title>Ramaḍān-Serie · DĀR AL TAWḤĪD Test</title>
+<style>
+:root{color-scheme:dark;--bg:#061019;--bg2:#0a1824;--panel:rgba(12,28,40,.84);--panel2:rgba(19,39,54,.82);--gold:#d8b66c;--gold2:#f0dba4;--cream:#f5efdd;--muted:#a9b0b5;--line:rgba(216,182,108,.25);--ok:#a8c8a7}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:radial-gradient(circle at 18% 0%,rgba(216,182,108,.12),transparent 26%),linear-gradient(150deg,var(--bg2),var(--bg) 55%,#03080d);color:var(--cream);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
+body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}button{font:inherit}.shell{width:min(1180px,100%);margin:0 auto;padding:24px clamp(16px,4vw,40px) 48px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0 22px;border-bottom:1px solid var(--line)}.brand strong{font-family:Georgia,serif;letter-spacing:.08em;font-size:clamp(17px,2.5vw,24px)}.badge{border:1px solid var(--line);border-radius:999px;padding:7px 10px;color:var(--gold2);font-size:12px;font-weight:700;letter-spacing:.08em}
+.hero{padding:32px 0 24px}.eyebrow{color:var(--gold);font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}.hero h1{margin:8px 0 8px;font-family:Georgia,serif;font-size:clamp(38px,8vw,74px);font-weight:500;line-height:.98}.hero p{max-width:720px;margin:0;color:var(--muted);font-size:clamp(15px,2vw,19px);line-height:1.6}
+.progress-card{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;padding:18px 20px;border:1px solid var(--line);background:linear-gradient(135deg,var(--panel),rgba(7,17,25,.72));border-radius:22px;box-shadow:0 18px 55px rgba(0,0,0,.28)}.progress-track{height:8px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden;margin-top:12px}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .25s ease}.progress-meta{color:var(--muted);font-size:13px;margin-top:6px}.progress-big{font-size:30px;font-weight:800;color:var(--gold2);font-variant-numeric:tabular-nums}
+.layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(280px,.8fr);gap:22px;margin-top:22px}.panel{border:1px solid var(--line);background:linear-gradient(145deg,var(--panel),rgba(6,15,23,.82));border-radius:24px;padding:clamp(18px,3vw,28px);box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.day-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}.day-number{color:var(--gold);font-weight:800;letter-spacing:.12em;font-size:12px;text-transform:uppercase}.day-title{font-family:Georgia,serif;font-size:clamp(28px,5vw,48px);margin:5px 0 10px;font-weight:500}.status{font-size:12px;border:1px solid var(--line);color:var(--gold2);padding:7px 9px;border-radius:999px;white-space:nowrap}
+.notice{margin:18px 0 8px;padding:14px 16px;border:1px solid rgba(216,182,108,.18);background:rgba(216,182,108,.07);border-radius:16px;color:#d5d8d8;line-height:1.5;font-size:14px}
+.section{padding:18px 0;border-top:1px solid rgba(216,182,108,.14)}.section:first-of-type{margin-top:18px}.section-label{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}.section h3{margin:7px 0 6px;font-family:Georgia,serif;font-size:22px;font-weight:500}.empty{color:var(--muted);font-size:14px;line-height:1.55}
+.primary{width:100%;border:1px solid rgba(240,219,164,.42);background:linear-gradient(180deg,#d9bc7b,#b78f45);color:#10100e;border-radius:15px;padding:13px 16px;font-weight:800;cursor:pointer}.primary.is-done{background:rgba(168,200,167,.12);border-color:rgba(168,200,167,.34);color:#cfe2cf}
+.sim h2,.days h2{margin:0 0 6px;font-family:Georgia,serif;font-size:26px;font-weight:500}.sim p{margin:0 0 16px;color:var(--muted);font-size:14px;line-height:1.5}.sim-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.sim button{border:1px solid var(--line);background:var(--panel2);color:var(--cream);border-radius:14px;padding:12px;cursor:pointer}.sim .wide{grid-column:1/-1}.sim .final{margin-top:10px;color:var(--gold2)}
+.days{margin-top:22px}.grid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:8px}.day-btn{aspect-ratio:1;border:1px solid rgba(216,182,108,.18);background:rgba(255,255,255,.035);color:var(--muted);border-radius:12px;font-weight:700;cursor:pointer}.day-btn.active{border-color:var(--gold);background:rgba(216,182,108,.15);color:var(--cream);box-shadow:inset 0 0 0 1px rgba(216,182,108,.18)}.day-btn.done:after{content:"✓";display:block;font-size:9px;color:var(--ok);margin-top:-2px}
+.finish{display:none;margin-top:22px;text-align:center;padding:30px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,rgba(216,182,108,.08),rgba(10,20,28,.88))}.finish.show{display:block}.finish h2{font-family:Georgia,serif;font-size:38px;font-weight:500;margin:0 0 8px}.finish p{color:var(--muted);line-height:1.6;max-width:640px;margin:0 auto}.error{padding:18px;border:1px solid rgba(216,162,162,.3);background:rgba(216,162,162,.08);border-radius:16px;color:#f0caca}
+@media(max-width:840px){.layout{grid-template-columns:1fr}.grid{grid-template-columns:repeat(6,minmax(0,1fr))}}@media(max-width:480px){.shell{padding-left:14px;padding-right:14px}.grid{grid-template-columns:repeat(5,minmax(0,1fr))}.progress-card{grid-template-columns:1fr}.progress-big{font-size:24px}.day-head{flex-direction:column}.status{align-self:flex-start}}
+</style>
+</head>
+<body>
+<main class="shell">
+<header class="brand"><strong>DĀR AL TAWḤĪD</strong><span class="badge">TEST · RAMAḌĀN</span></header>
+<section class="hero"><div class="eyebrow">30-Tage-Serie · Testumgebung</div><h1>Ramaḍān</h1><p>Technischer Probelauf für die spätere gemeinsame Serie in iOS, Widget und Apple TV. Die Inhalte sind noch nicht religiös freigegeben.</p></section>
+<section class="progress-card"><div><strong>Fortschritt</strong><div class="progress-track"><div id="progressFill" class="progress-fill"></div></div><div id="progressMeta" class="progress-meta">0 von 30 Testtagen abgeschlossen</div></div><div id="progressBig" class="progress-big">0 / 30</div></section>
+<div id="appError" class="error" hidden></div>
+<section class="layout">
+<article class="panel">
+<div class="day-head"><div><div id="dayNumber" class="day-number">Tag 01 von 30</div><h2 id="dayTitle" class="day-title">Lädt …</h2></div><span id="contentStatus" class="status">structure-test</span></div>
+<div id="summary" class="notice">Strukturtest wird geladen.</div>
+<div class="section"><div class="section-label">Tagesgedanke</div><h3>Gedanke</h3><div id="thought" class="empty">Noch nicht freigegeben.</div></div>
+<div class="section"><div class="section-label">Qurʾān</div><h3>Āyah & Nachweis</h3><div id="quran" class="empty">Noch nicht freigegeben.</div></div>
+<div class="section"><div class="section-label">Sunnah</div><h3>Authentischer Ḥadīṯ</h3><div id="sunnah" class="empty">Noch nicht freigegeben.</div></div>
+<div class="section"><div class="section-label">Von den Salaf</div><h3>Überlieferte Aussage</h3><div id="salaf" class="empty">Noch nicht freigegeben.</div></div>
+<div class="section"><div class="section-label">Heute umsetzen</div><h3>Tagesaufgabe</h3><div id="action" class="empty">Noch nicht freigegeben.</div></div>
+<div class="section"><div class="section-label">Duʿāʾ</div><h3>Duʿāʾ des Tages</h3><div id="dua" class="empty">Noch nicht freigegeben.</div></div>
+<button id="completeBtn" class="primary" type="button">✓ Testtag abschließen</button>
+</article>
+<aside class="panel sim"><h2>Tag-Simulator</h2><p>Damit testen wir alle 30 Tage sofort, ohne auf den echten Ramaḍān zu warten.</p><div class="sim-row"><button id="prevBtn" type="button">← Vorheriger Tag</button><button id="nextBtn" type="button">Nächster Tag →</button><button id="day1Btn" class="wide" type="button">Zu Tag 1</button><button id="day30Btn" class="wide" type="button">Zu Tag 30</button><button id="resetBtn" class="wide" type="button">Testfortschritt zurücksetzen</button></div><div id="simState" class="final">Testmodus aktiv</div></aside>
+</section>
+<section class="panel days"><h2>30 Tage</h2><div id="dayGrid" class="grid" aria-label="Ramaḍān-Testtage"></div></section>
+<section id="finish" class="finish"><div class="eyebrow">Testabschluss</div><h2>Ramaḍān-Serie vollständig durchlaufen</h2><p>Dieser Abschluss ist nur der technische Testzustand. Der endgültige Gratulationstext wird später zusammen mit den authentischen Inhalten geprüft und freigegeben.</p></section>
+</main>
+<script>
+(function(){
+"use strict";
+var SOURCE="../../content/ramadan/staging.json";
+var STORAGE="dar.ramadan.test.progress.v1";
+var series=null,day=1,completed=new Set();
+function el(id){return document.getElementById(id)}
+function pad(n){return String(n).padStart(2,"0")}
+function loadProgress(){try{var raw=JSON.parse(localStorage.getItem(STORAGE)||"[]");completed=new Set(Array.isArray(raw)?raw.filter(function(n){return Number.isInteger(n)&&n>=1&&n<=30}):[])}catch(e){completed=new Set()}}
+function saveProgress(){localStorage.setItem(STORAGE,JSON.stringify(Array.from(completed).sort(function(a,b){return a-b})))}
+function setText(id,value,fallback){var node=el(id);if(!node)return;node.textContent=value&&typeof value==="string"&&value.trim()?value.trim():(fallback||"Noch nicht freigegeben.")}
+function dayFromURL(){var n=Number(new URLSearchParams(location.search).get("day"));return Number.isInteger(n)&&n>=1&&n<=30?n:Number(series&&series.testMode&&series.testMode.overrideDay||1)}
+function updateURL(){var u=new URL(location.href);u.searchParams.set("day",String(day));history.replaceState(null,"",u)}
+function render(){
+ if(!series)return;
+ var item=series.days.find(function(x){return x.day===day})||series.days[0];
+ el("dayNumber").textContent="Tag "+pad(item.day)+" von "+series.plannedDays;
+ el("dayTitle").textContent=item.title||("Tag "+pad(item.day));
+ el("contentStatus").textContent=item.contentStatus||"draft";
+ el("summary").textContent=item.summary||"Noch nicht freigegeben.";
+ var s=item.sections||{};
+ setText("thought",s.thought);setText("action",s.action);setText("quran",s.quran&&s.quran.text||"");setText("sunnah",s.sunnah&&s.sunnah.text||"");setText("salaf",s.salaf&&s.salaf.text||"");setText("dua",s.dua&&s.dua.text||"");
+ var done=completed.has(day);
+ el("completeBtn").textContent=done?"✓ Testtag abgeschlossen":"✓ Testtag abschließen";
+ el("completeBtn").classList.toggle("is-done",done);
+ var count=completed.size;
+ el("progressFill").style.width=((count/series.plannedDays)*100)+"%";
+ el("progressMeta").textContent=count+" von "+series.plannedDays+" Testtagen abgeschlossen";
+ el("progressBig").textContent=count+" / "+series.plannedDays;
+ el("simState").textContent="Testmodus aktiv · Tag "+day+" von "+series.plannedDays;
+ Array.from(el("dayGrid").children).forEach(function(b,i){var n=i+1;b.classList.toggle("active",n===day);b.classList.toggle("done",completed.has(n))});
+ el("finish").classList.toggle("show",count===series.plannedDays);
+ el("prevBtn").disabled=day<=1;el("nextBtn").disabled=day>=series.plannedDays;updateURL();
+}
+function renderGrid(){
+ el("dayGrid").innerHTML="";
+ for(var n=1;n<=series.plannedDays;n++){
+  (function(num){var b=document.createElement("button");b.type="button";b.className="day-btn";b.textContent=pad(num);b.setAttribute("aria-label","Tag "+num+" öffnen");b.addEventListener("click",function(){day=num;render();scrollTo({top:0,behavior:"smooth"})});el("dayGrid").appendChild(b)})(n);
+ }
+}
+el("prevBtn").addEventListener("click",function(){if(day>1){day--;render()}});
+el("nextBtn").addEventListener("click",function(){if(day<30){day++;render()}});
+el("day1Btn").addEventListener("click",function(){day=1;render()});
+el("day30Btn").addEventListener("click",function(){day=30;render()});
+el("resetBtn").addEventListener("click",function(){completed.clear();saveProgress();render()});
+el("completeBtn").addEventListener("click",function(){if(completed.has(day))completed.delete(day);else completed.add(day);saveProgress();render()});
+async function boot(){loadProgress();try{var res=await fetch(SOURCE,{cache:"no-store"});if(!res.ok)throw new Error("HTTP "+res.status);series=await res.json();if(!Array.isArray(series.days)||series.days.length!==30)throw new Error("Ungültige 30-Tage-Serie");day=dayFromURL();renderGrid();render()}catch(err){el("appError").hidden=false;el("appError").textContent="Ramaḍān-Testdaten konnten nicht geladen werden: "+err.message}}
+boot();
+})();
+</script>
+</body>
+</html>
