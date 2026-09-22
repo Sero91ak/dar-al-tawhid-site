@@ -1524,6 +1524,41 @@ button,input,select{font:inherit}
  .player-step{height:52px!important;width:30px!important}
 }
 
+
+/* Desktop player v15 — compact website control, never a full-width bar */
+.player-wrap{
+  width:min(640px,calc(100% - 48px))!important;
+  margin:9px auto 5px!important;
+}
+.quran-player{
+  height:50px!important;
+  min-height:50px!important;
+  grid-template-columns:40px minmax(145px,1fr) 102px 62px 116px 28px!important;
+  border-radius:25px!important;
+}
+.player-play{width:35px!important;height:35px!important;margin-left:3px!important;font-size:13px!important}
+.player-now{padding:0 8px!important}
+.player-kicker{font-size:5.8px!important}
+.player-title{font-size:11.3px!important;margin-top:2px!important}
+.player-progress{margin-top:4px!important}
+.player-field{height:50px!important;padding:0 6px!important;gap:3px!important}
+.player-field label{font-size:5.8px!important}
+.player-field select{max-width:96px!important;font-size:7.8px!important}
+.player-field.reciter select{max-width:110px!important}
+.player-step{width:28px!important;height:50px!important;font-size:12px!important}
+@media(min-width:1500px){.player-wrap{width:640px!important}}
+@media(max-width:900px){
+ .player-wrap{width:min(590px,calc(100% - 30px))!important}
+ .quran-player{grid-template-columns:40px minmax(140px,1fr) 96px 58px 28px!important}
+ .player-field.reciter{display:none!important}
+}
+@media(max-width:680px){
+ .player-wrap{width:min(540px,calc(100% - 22px))!important}
+ .quran-player{height:49px!important;min-height:49px!important;grid-template-columns:39px minmax(0,1fr) 28px!important}
+ .player-field{display:none!important}
+ .player-step{height:49px!important}
+}
+
 </style>
 </head>
 <body>
@@ -2195,13 +2230,13 @@ button,input,select{font:inherit}
  function loadDesktopContent(){
   return Promise.all([
    fetchJsonSafe("/data/desktop-posts-index.json").catch(function(){return fetchJsonSafe("/desktop-preview/posts.json").then(function(rows){return{posts:Array.isArray(rows)?rows:[]}})}),
-   fetchJsonSafe("/data/books-library.json"),
-   fetchJsonSafe("/data/library-publications.json"),
-   fetchJsonSafe("/data/prophets/index.json"),
-   fetchJsonSafe("/data/quiz-questions.json"),
-   fetchJsonSafe("/data/scholars-library.json"),
-   fetchJsonSafe("/test/data/frauen-bereiche-index.json"),
-   fetchJsonSafe("/content/duas/duas.json")
+   fetchJsonSafe("/data/books-library.json").catch(function(){return{books:[]}}),
+   fetchJsonSafe("/data/library-publications.json").catch(function(){return{publications:[]}}),
+   fetchJsonSafe("/data/prophets/index.json").catch(function(){return{prophets:[]}}),
+   fetchJsonSafe("/data/quiz-questions.json").catch(function(){return[]}),
+   fetchJsonSafe("/data/scholars-library.json").catch(function(){return{scholars:[]}}),
+   fetchJsonSafe("/test/data/frauen-bereiche-index.json").catch(function(){return{bereiche:[]}}),
+   fetchJsonSafe("/content/duas/duas.json").catch(function(){return[]})
   ]).then(function(all){
    realData.posts=(all[0]&&all[0].posts)||[];
    realData.books=(all[1]&&all[1].books||[]).filter(function(x){return x.verification==="verified"});
@@ -2996,6 +3031,8 @@ button,input,select{font:inherit}
  // --- end real visitor content v8 ---
 
  try{initQa()}catch(e){try{console.error("Desktop Quran player:",e)}catch(_){}}
+ // Never leave the website empty while shared app data is loading.
+ try{render()}catch(e){try{console.error("Desktop initial render:",e)}catch(_){}}
  loadDesktopContent().then(function(){render()}).catch(function(err){try{console.error("Desktop content:",err)}catch(_){};render()})
 })();
 </script>

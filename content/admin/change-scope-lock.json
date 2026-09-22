@@ -5266,6 +5266,18 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "desktop-server-router-v836-2026-09-22",
+      "approvedBy": "user-explicit-total-desktop-browser-conversion",
+      "reason": "Nutzer: Desktop-/Tablet-Browser müssen echte Webseite statt App erhalten; Desktop darf nicht leer sein; Qurʾān-Player kompakt in normaler Webseitenbreite.",
+      "paths": [
+        "desktop-preview/index.html",
+        "wrangler.toml",
+        "cloudflare/site-router.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

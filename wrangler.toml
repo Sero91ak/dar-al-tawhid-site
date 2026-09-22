@@ -7,9 +7,12 @@
 name = "dar-al-tawhid-site"
 compatibility_date = "2026-06-14"
 compatibility_flags = ["nodejs_compat"]
+main = "cloudflare/site-router.js"
 
 [assets]
 directory = "."
+binding = "ASSETS"
+run_worker_first = ["/", "/index.html"]
 
 [build]
 watch_paths = [
