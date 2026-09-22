@@ -12109,7 +12109,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 }
 </style>
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=587">
-<link rel="stylesheet" href="/assets/dar-quran-player.css?v=870">
+<link rel="stylesheet" href="/assets/dar-quran-player.css?v=871">
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=8">
 <link rel="stylesheet" href="/assets/books-library.css?v=2">
 <link rel="stylesheet" href="/assets/prophets/prophets.css?v=16">
@@ -34484,6 +34484,48 @@ html[data-theme] .quiz-shell.quiz-shell-pro .quiz-home-title{
   window.addEventListener("hashchange",function(){setTimeout(pin,40);});
   setTimeout(pin,80);
   setTimeout(pin,500);
+})();
+</script>
+<style id="dar-no-top-blur-v974">
+html,body,.app,#appRoot,#appShell,#appView,#appView.view,.view,.view-head,
+.top-shell,.header,.theme-hero-shell,.theme-hero-surface,.account-page,.settings-one-page,
+.notification-hero,.notification-health,.qov-header,.sf-top{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  filter:none!important;
+}
+html .app:after,html .app::after,.top-edge-fade,.top-swim-aura,.top-swim-aura:before,
+#topEdgeFade,#topSwimAura,.theme-hero-shell::before,.theme-hero-shell::after,
+.top-shell::before,.top-shell::after,.header::before,.header::after{
+  display:none!important;
+  content:none!important;
+  filter:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  opacity:0!important;
+  background:none!important;
+  height:0!important;
+}
+html.dar-ios-native-app::after,html.is-standalone-pwa::after{
+  content:none!important;display:none!important;height:0!important;background:none!important;opacity:0!important;
+}
+</style>
+<script>
+(function(){
+  var src=document.getElementById("dar-no-top-blur-v974");
+  if(!src)return;
+  function pin(){
+    var live=document.getElementById("dar-no-top-blur-live");
+    if(!live){
+      live=document.createElement("style");
+      live.id="dar-no-top-blur-live";
+    }
+    live.textContent=src.textContent;
+    document.documentElement.appendChild(live);
+  }
+  pin();
+  document.addEventListener("DOMContentLoaded",pin);
+  window.addEventListener("pageshow",pin);
 })();
 </script>
 </html>
