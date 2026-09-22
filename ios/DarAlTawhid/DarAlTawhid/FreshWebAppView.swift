@@ -106,6 +106,7 @@ struct WebAppView: UIViewRepresentable {
         (function(){
           try{
             window.DAR_IOS_NATIVE_APP=true;
+            window.DAR_OFFICIAL_IOS_APP=true;
             window.DAR_IOS_NATIVE_PUSH=true;
             window.DAR_IOS_DEVICE_ID="\(device)";
             try{localStorage.setItem("darPushExternalIdV1",window.DAR_IOS_DEVICE_ID)}catch(e){}
@@ -388,6 +389,7 @@ struct WebAppView: UIViewRepresentable {
             let script = """
             (function(){
               window.DAR_IOS_NATIVE_APP=true;
+              window.DAR_OFFICIAL_IOS_APP=true;
               window.DAR_IOS_NATIVE_PUSH=true;
               window.DAR_IOS_ONESIGNAL_ID=\(Self.jsString(subscription));
               window.DAR_IOS_PUSH_TOKEN=\(Self.jsString(token));
