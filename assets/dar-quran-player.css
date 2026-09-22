@@ -513,8 +513,8 @@ html.dar-ios-native-app #darQuranPlayer .dqp-scale-row button,
   --dqp-cap-side:0px;
   --dqp-btn:40px;
   --dqp-anim:.28s cubic-bezier(.22,.7,.28,1);
-  --dqp-reserve:calc(env(safe-area-inset-top,0px) + 78px);
-  --dqp-reserve-home:calc(env(safe-area-inset-top,0px) + 78px);
+  --dqp-reserve:calc(var(--dqp-cap-h,78px) + max(8px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px)));
+  --dqp-reserve-home:var(--dqp-reserve);
 }
 #darQuranMiniPlayer[data-size="compact"]{ --dqp-cap-h:70px; --dqp-btn:36px; }
 #darQuranMiniPlayer[data-size="mini"]{ --dqp-cap-h:62px; --dqp-btn:34px; }
@@ -523,17 +523,19 @@ html.dar-ios-native-app #darQuranPlayer .dqp-scale-row button,
   overflow:hidden;pointer-events:none;flex-shrink:0;
   transition:height var(--dqp-anim);
 }
-html.player-active:not(.is-quran-player-route):not(.player-stopped) #darQuranPlayerSlot{
-  height:var(--dqp-reserve)!important;
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) #darQuranPlayerSlot{
+  height:0!important;
 }
 html.player-stopped #darQuranPlayerSlot,
-html.is-quran-player-route #darQuranPlayerSlot{height:0!important}
+html.is-quran-player-route #darQuranPlayerSlot,
+html.player-learn #darQuranPlayerSlot,
+html.player-reader-dock #darQuranPlayerSlot{height:0!important}
 html.player-active:not(.is-quran-player-route) body{
   margin-top:0;
 }
 #darQuranMiniPlayer{
   position:fixed;
-  top:max(0px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px));
+  top:0;
   left:0;
   right:0;
   width:100%;
@@ -541,8 +543,8 @@ html.player-active:not(.is-quran-player-route) body{
   margin:0;
   z-index:140;
   display:flex;flex-direction:column;justify-content:center;gap:1px;
-  height:var(--dqp-cap-h);min-height:var(--dqp-cap-h);
-  padding:8px 16px 10px;
+  height:auto;min-height:var(--dqp-cap-h);
+  padding:max(8px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px)) 16px 10px;
   box-sizing:border-box;overflow:hidden;
   border-radius:0 0 22px 22px;
   color:#EBE4D9;
@@ -561,13 +563,15 @@ html.player-active:not(.is-quran-player-route) body{
 }
 #darQuranMiniPlayer.is-on.player-expanded,
 #darQuranMiniPlayer.is-on:not(.player-collapsed){
+  top:0;
+  min-height:var(--dqp-reserve);
   transform:translate3d(0,0,0);opacity:1;pointer-events:auto;visibility:visible;
 }
 #darQuranMiniPlayer.is-on.player-collapsed{
-  top:max(0px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px));
+  top:0;
   transform:translate3d(0,0,0);
-  height:var(--dqp-cap-h);min-height:var(--dqp-cap-h);
-  padding:8px 16px 10px;
+  height:auto;min-height:var(--dqp-reserve);
+  padding:max(8px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px)) 16px 10px;
   max-width:none;
   opacity:1;pointer-events:auto;visibility:visible;
 }
@@ -705,24 +709,33 @@ html.player-active:not(.is-quran-player-route) body{
   box-shadow:0 0 0 2px rgba(34,32,30,.7);
 }
 
-html.player-active:not(.is-quran-player-route) body.is-home-route .top-shell,
-html.player-active:not(.is-quran-player-route) body.is-home-route .header,
-html.player-active:not(.is-quran-player-route) body.is-home-route .top-shell.theme-hero-shell .header{
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) .app,
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) #appRoot,
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) #appShell{
+  padding-top:var(--dqp-reserve)!important;
+  margin-top:0!important;
+  box-sizing:border-box!important;
+}
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) body.is-home-route .top-shell,
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) body.is-home-route .header,
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) body.is-home-route .top-shell.theme-hero-shell .header{
+  margin-top:0!important;
+  padding-top:8px!important;
+}
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) body.is-home-route .top-shell.theme-hero-shell .brand-kicker-row,
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) body.is-home-route .brand-kicker-row{
   margin-top:0!important;
 }
-html.player-active:not(.is-quran-player-route) body.is-home-route .top-shell.theme-hero-shell .brand-kicker-row,
-html.player-active:not(.is-quran-player-route) body.is-home-route .brand-kicker-row{
-  margin-top:0!important;
-}
-html.player-active:not(.is-quran-player-route) #appView.view,
-html.player-active body.is-more-route #appView.view,
-html.player-active body.is-quiz-route #appView.view,
-html.player-active body.is-account-route #appView.view,
-html.player-active body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-reader-route) #appView.view,
-html.player-active body.is-quran-overview #appView.view,
-html.player-active body.is-feed-fullscreen,
-html.player-active body.is-home-route #appView.view{
-  padding-top:0!important;
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) #appView.view,
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) body.is-more-route #appView.view,
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) body.is-quiz-route #appView.view,
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) body.is-account-route #appView.view,
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-reader-route) #appView.view,
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) body.is-quran-overview #appView.view,
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) body.is-feed-fullscreen #appView.view,
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) body.is-home-route #appView.view,
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) body.is-library-route #appView.view{
+  padding-top:8px!important;
   margin-top:0!important;
 }
 

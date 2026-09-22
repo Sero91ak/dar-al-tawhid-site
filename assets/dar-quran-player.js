@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 954;
+    var PLAYER_BUILD = 955;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -2059,6 +2059,28 @@
     html.classList.toggle("player-dim", show && capsuleDimmed);
     if (body) body.classList.toggle("player-dim", show && capsuleDimmed);
     applyLearnChrome();
+    requestAnimationFrame(function () {
+      syncPageOffsetForMiniPlayer();
+      requestAnimationFrame(syncPageOffsetForMiniPlayer);
+    });
+  }
+  function syncPageOffsetForMiniPlayer() {
+    var html = document.documentElement;
+    var el = document.getElementById("darQuranMiniPlayer");
+    var learn = html.classList.contains("player-learn") || html.classList.contains("player-reader-dock");
+    var show = html.classList.contains("player-active")
+      && !html.classList.contains("player-stopped")
+      && !html.classList.contains("is-quran-player-route")
+      && !learn;
+    var px = 0;
+    if (show && el) {
+      try {
+        var r = el.getBoundingClientRect();
+        px = Math.max(0, Math.round(r.bottom));
+      } catch (eOff) { px = 0; }
+    }
+    if (px > 0) html.style.setProperty("--dqp-reserve", px + "px");
+    else html.style.removeProperty("--dqp-reserve");
   }
   function setPlayerDim() {
     capsuleDimmed = false;

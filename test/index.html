@@ -10448,10 +10448,10 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/test/assets/fold-split.js?v=937" defer></script>
 <script src="/assets/scholars-index.js?v=587" defer></script>
 <script src="/test/assets/prophets/prophets.js?v=33" defer></script>
-<script src="/test/assets/dar-quran-player.js?v=954" defer></script>
+<script src="/test/assets/dar-quran-player.js?v=955" defer></script>
 <script>
 (function(){
-  var WANT=954;
+  var WANT=955;
   function boot(){
     if(window.__DAR_QURAN_PLAYER_BUILD===WANT&&window.DARQuranPlayer)return;
     var s=document.createElement("script");
@@ -12083,7 +12083,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/scholars-index.css?v=588">
 <link rel="preload" href="/test/data/prophets/index.json" as="fetch" crossorigin>
 <link rel="stylesheet" href="/test/assets/prophets/prophets.css?v=17">
-<link rel="stylesheet" href="/test/assets/dar-quran-player.css?v=982">
+<link rel="stylesheet" href="/test/assets/dar-quran-player.css?v=983">
 <link rel="stylesheet" href="/test/assets/ilm-research-chat.css?v=980">
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=791">
 <link rel="stylesheet" href="/test/assets/adaptive-layout.css?v=937">
@@ -34183,7 +34183,7 @@ html[data-theme] body.is-quiz-route .quiz-home-quick-card>span:last-child{
 </style>
 
 <style id="dqp-home-gap-v889">
-/* Glas-Schleier aus, Seiten beginnen unter der Statuszeile. Player-Platz nur per Slot. */
+/* Player-Platz: Mini-Player-Höhe (--dqp-reserve). Kein zweites Safe-Area. */
 html.dar-ios-native-app .top-edge-fade,
 html.dar-ios-native-app .top-swim-aura,
 html.dar-ios-native-app #topEdgeFade,
@@ -34192,20 +34192,20 @@ html.player-dim .top-edge-fade,
 html.player-dim .top-swim-aura{
   display:none!important;opacity:0!important;height:0!important;pointer-events:none!important;visibility:hidden!important;
 }
-html.player-active:not(.is-quran-player-route):not(.player-stopped) #darQuranPlayerSlot{
-  height:calc(env(safe-area-inset-top,0px) + 78px)!important;
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) #darQuranPlayerSlot{
+  height:0!important;
 }
-html.player-active:not(.player-stopped):not(.is-quran-player-route) body.is-home-route .top-shell.theme-hero-shell .header,
-html.player-active:not(.player-stopped):not(.is-quran-player-route) body.is-home-route .header{
-  padding-top:max(8px,calc(env(safe-area-inset-top,0px) + 8px))!important;
+html.player-active:not(.player-stopped):not(.is-quran-player-route):not(.player-learn):not(.player-reader-dock) body.is-home-route .top-shell.theme-hero-shell .header,
+html.player-active:not(.player-stopped):not(.is-quran-player-route):not(.player-learn):not(.player-reader-dock) body.is-home-route .header{
+  padding-top:8px!important;
   margin-top:0!important;
 }
-html.player-active:not(.player-stopped):not(.is-quran-player-route) body.is-more-route #appView.view,
-html.player-active:not(.player-stopped):not(.is-quran-player-route) body.is-quiz-route #appView.view,
-html.player-active:not(.player-stopped):not(.is-quran-player-route) body.is-account-route #appView.view,
-html.player-active:not(.player-stopped):not(.is-quran-player-route) body.is-quran-overview #appView.view,
-html.player-active:not(.player-stopped):not(.is-quran-player-route) body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-reader-route) #appView.view{
-  padding-top:max(8px,env(safe-area-inset-top,0px))!important;
+html.player-active:not(.player-stopped):not(.is-quran-player-route):not(.player-learn):not(.player-reader-dock) body.is-more-route #appView.view,
+html.player-active:not(.player-stopped):not(.is-quran-player-route):not(.player-learn):not(.player-reader-dock) body.is-quiz-route #appView.view,
+html.player-active:not(.player-stopped):not(.is-quran-player-route):not(.player-learn):not(.player-reader-dock) body.is-account-route #appView.view,
+html.player-active:not(.player-stopped):not(.is-quran-player-route):not(.player-learn):not(.player-reader-dock) body.is-quran-overview #appView.view,
+html.player-active:not(.player-stopped):not(.is-quran-player-route):not(.player-learn):not(.player-reader-dock) body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-reader-route) #appView.view{
+  padding-top:8px!important;
 }
 </style>
 <style id="dar-test-scroll-glass-fix-v889">
@@ -34696,8 +34696,8 @@ html.dar-ios-native-app #darQuranMiniPlayer{
   filter:none!important;
   -webkit-filter:none!important;
 }
-html.player-active:not(.is-quran-player-route):not(.player-stopped) body.is-quran-overview #appView.view,
-html.player-active:not(.is-quran-player-route):not(.player-stopped) body.is-quran-overview #appView,
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) body.is-quran-overview #appView.view,
+html.player-active:not(.is-quran-player-route):not(.player-stopped):not(.player-learn):not(.player-reader-dock) body.is-quran-overview #appView,
 html.player-active:not(.player-stopped):not(.is-quran-player-route) body.is-quran-overview #appView.view{
   padding-top:8px!important;
 }
