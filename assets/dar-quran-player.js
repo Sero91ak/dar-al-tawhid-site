@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 937;
+  var PLAYER_BUILD = 938;
   /* LEARN_PLAYER_ONLY: Āyah-Buttons + Mini-Lernleiste, kein Voll-Player.
      Offizielle iOS-App bekommt den kompletten Player inkl. Vollansicht. */
   function isOfficialIosApp() {
@@ -1431,13 +1431,12 @@
   function nowPlayingArtworkUrl() {
     var origin = "";
     try { origin = String(location.origin || ""); } catch (eArt) {}
-    return origin + "/quran-player-artwork-512.png";
+    return origin + "/quran-player-artwork-512.png?v=938";
   }
   function nowPlayingArtwork() {
     var src = nowPlayingArtworkUrl();
     return [
-      { src: src, sizes: "512x512", type: "image/png" },
-      { src: src + "?v=937", sizes: "512x512", type: "image/png" }
+      { src: src, sizes: "512x512", type: "image/png" }
     ];
   }
   function nowPlayingRoute() {

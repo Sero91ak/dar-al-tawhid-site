@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var PLAYER_BUILD = 929;
+  var PLAYER_BUILD = 930;
   if (window.__DAR_QURAN_PLAYER_BUILD === PLAYER_BUILD && window.DARQuranPlayer) return;
   try {
     var staleAudio = document.getElementById("darQuranPlayerAudio");
@@ -1365,13 +1365,12 @@
   function nowPlayingArtworkUrl() {
     var origin = "";
     try { origin = String(location.origin || ""); } catch (eArt) {}
-    return origin + "/quran-player-artwork-512.png";
+    return origin + "/quran-player-artwork-512.png?v=930";
   }
   function nowPlayingArtwork() {
     var src = nowPlayingArtworkUrl();
     return [
-      { src: src, sizes: "512x512", type: "image/png" },
-      { src: src + "?v=929", sizes: "512x512", type: "image/png" }
+      { src: src, sizes: "512x512", type: "image/png" }
     ];
   }
   function nowPlayingRoute() {
