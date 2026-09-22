@@ -2185,6 +2185,74 @@ button,input,select{font:inherit}
   .foundation-links,.foundation-grid{grid-template-columns:1fr}
 }
 
+
+/* Women complete content v12 */
+.women-detail-shell{width:min(1080px,100%);margin:0 auto}
+.women-detail-top{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;
+  margin-bottom:18px;padding-bottom:12px
+}
+.women-detail-top h2{margin:0;font:500 28px/1.12 var(--serif)}
+.women-detail-top p{margin:6px 0 0;color:#756c60;font-size:10.5px;line-height:1.55}
+.women-detail-count{color:#92713a;font-size:8px;font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+.women-search{
+  position:sticky;top:88px;z-index:34;
+  display:grid;grid-template-columns:28px minmax(0,1fr) auto;align-items:center;gap:8px;
+  min-height:50px;margin:0 0 16px;padding:0 13px;
+  border-radius:22px;
+  background:linear-gradient(100deg,rgba(245,237,223,.95),rgba(255,254,250,.98) 54%,rgba(239,228,207,.82));
+  box-shadow:0 8px 24px rgba(70,50,23,.065);
+  backdrop-filter:blur(13px);-webkit-backdrop-filter:blur(13px)
+}
+.women-search input{
+  width:100%;border:0!important;outline:0!important;background:transparent!important;
+  padding:11px 4px;color:#2d2821;font:500 13px/1.2 var(--serif)
+}
+.women-search span{color:#8b7e6d;font-size:8px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+.women-search-icon{font:500 18px/1 var(--serif)!important;color:#8a6c34!important;text-transform:none!important;letter-spacing:0!important}
+.women-content-list{display:block}
+.women-statement{
+  position:relative;
+  padding:20px 0 22px;
+  border:0!important
+}
+.women-statement+.women-statement{margin-top:4px}
+.women-statement:after{
+  content:"";display:block;width:min(180px,22%);height:1px;margin-top:19px;
+  background:linear-gradient(90deg,rgba(152,116,57,.44),transparent)
+}
+.women-statement-head{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:start
+}
+.women-statement h3{margin:5px 0 9px;font:500 22px/1.18 var(--serif);color:#312b24}
+.women-statement .person{
+  color:#886a35;font-size:8px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;
+  padding-top:8px;text-align:right;max-width:220px
+}
+.women-statement-text{
+  max-width:900px;margin:0;color:#514a42;font:500 13px/1.72 var(--serif)
+}
+.women-lehre{
+  max-width:900px;margin:10px 0 0;color:#71685d;font-size:10.5px;line-height:1.62
+}
+.women-lehre b{color:#5e4a2b}
+.women-source{
+  max-width:940px;margin-top:12px;padding-top:9px;
+  color:#6e6559;font-size:9px;line-height:1.55
+}
+.women-source b{color:#493d2d}
+.women-source a{margin-left:8px;color:#76581f;font-weight:850;white-space:nowrap}
+.women-empty{padding:28px 0;color:#756c60;font:500 15px/1.5 var(--serif)}
+.women-back{
+  display:inline-block;margin-bottom:16px;color:#775b24;font-size:8px;font-weight:850;
+  letter-spacing:.09em;text-transform:uppercase
+}
+@media(max-width:900px){
+ .women-search{top:124px}
+ .women-statement-head{grid-template-columns:1fr}
+ .women-statement .person{text-align:left;padding-top:0}
+}
+
 </style>
 </head>
 <body>
@@ -3016,18 +3084,47 @@ button,input,select{font:inherit}
   return realIntro("FRAUEN","Geprüfte Wissensbereiche","Nur Bereiche mit bereits sichtbaren, geprüften Inhalten werden hier angezeigt.")+
    '<section class="section reveal"><div class="women-grid">'+realData.womenAreas.map(function(x){return '<a class="women-item desktop-link" data-page="frauenbereich" href="'+pUrl("frauenbereich","id="+encodeURIComponent(x.kennung))+'"><div class="eyebrow">'+Number(x.sichtbareEintraege||0)+' Inhalte</div><h3>'+escBook(x.titel)+'</h3><p>'+escBook(x.untertitel||"")+'</p></a>'}).join("")+'</div></section>'+footer()
  };
+ function womenItemTitle(x){
+  return x.titel||x.frage||x.person||x.name||"Geprüfter Inhalt"
+ }
+ function womenItemText(x){
+  return x.vollstaendigeAussage||x.vollstaendigeAntwort||x.vollstaendigerBericht||x.inhalt||x.kurzbeschreibung||x.kurzantwort||x.kurzvorschau||""
+ }
+ function womenItemPerson(x){
+  return x.person||x.name||x.sprecher||x.ueberlieferer||""
+ }
+ function womenSearchText(x){
+  return [
+   womenItemTitle(x),womenItemText(x),x.kurzvorschau,x.kurzantwort,x.lehre,x.bereich,x.thema,
+   womenItemPerson(x),x.quellenanzeige,(x.schlagwoerter||[]).join(" ")
+  ].join(" ")
+ }
  function hydrateWomen(id){
   var area=realData.womenAreas.find(function(x){return x.kennung===id}),box=document.getElementById("womenDetail");if(!box||!area||!area.datenDatei)return;
   fetchJsonSafe("/"+area.datenDatei.replace(/^\/+/,"")).then(function(d){
-   var items=(d.eintraege||[]).filter(function(x){return x.quellenstatus==="geprueft"&&x.direktnachweisUrl}).slice(0,12);
-   box.innerHTML=items.map(function(x){return '<article class="women-detail-entry"><div class="eyebrow">'+escBook(x.bereich||x.thema||"Wissen")+'</div><h3>'+escBook(x.titel)+'</h3><p>'+escBook(x.inhalt||x.kurzbeschreibung||"")+'</p><div class="real-source"><b>'+escBook(x.quellenanzeige||"Quelle")+'</b> <a target="_blank" rel="noopener" href="'+escBook(x.direktnachweisUrl)+'">'+escBook(x.direktnachweisText||"Quelle öffnen")+' ↗</a></div></article>'}).join("")
-  }).catch(function(){box.innerHTML='<p>Die geprüften Inhalte konnten gerade nicht geladen werden.</p>'})
+   var items=(d.eintraege||[]).filter(function(x){return x.quellenstatus==="geprueft"&&x.direktnachweisUrl});
+   var expected=Number(area.sichtbareEintraege||0);
+   box.innerHTML='<div class="women-detail-shell"><a class="women-back desktop-link" data-page="frauen" href="'+pUrl("frauen")+'">← Alle Frauenbereiche</a><div class="women-detail-top"><div><h2>'+escBook(area.titel)+'</h2><p>'+escBook(area.untertitel||"")+'</p></div><div id="womenVisibleCount" class="women-detail-count">'+items.length+' geprüfte Inhalte</div></div><div class="women-search"><span class="women-search-icon">⌕</span><input id="womenAreaSearch" type="search" autocomplete="off" placeholder="Aussage, Thema, Person oder Begriff suchen …"><span id="womenAreaSearchStatus">'+items.length+' Treffer</span></div><div id="womenContentList" class="women-content-list"></div></div>';
+   var input=document.getElementById("womenAreaSearch"),list=document.getElementById("womenContentList"),status=document.getElementById("womenAreaSearchStatus"),count=document.getElementById("womenVisibleCount");
+   function card(x){
+    var title=womenItemTitle(x),body=womenItemText(x),person=womenItemPerson(x),source=x.quellenanzeige||"Quelle",link=x.direktnachweisUrl||"";
+    return '<article class="women-statement"><div class="women-statement-head"><div><div class="eyebrow">'+escBook(x.bereich||x.thema||"Wissen")+'</div><h3>'+escBook(title)+'</h3></div>'+(person?'<div class="person">'+escBook(person)+'</div>':'')+'</div><p class="women-statement-text">'+escBook(body)+'</p>'+(x.lehre?'<p class="women-lehre"><b>Lehre:</b> '+escBook(x.lehre)+'</p>':'')+'<div class="women-source"><b>'+escBook(source)+'</b>'+(link?' <a target="_blank" rel="noopener" href="'+escBook(link)+'">'+escBook(x.direktnachweisText||"Direktnachweis")+' ↗</a>':'')+'</div></article>'
+   }
+   function paint(){
+    var term=(input&&input.value||"").trim(),rows=items.filter(function(x){return !term||(typeof smartMatch==="function"?smartMatch([womenSearchText(x)],term):normText(womenSearchText(x)).indexOf(normText(term))>=0)});
+    list.innerHTML=rows.length?rows.map(card).join(""):'<div class="women-empty">Keine passenden geprüften Inhalte gefunden.</div>';
+    if(status)status.textContent=rows.length+" Treffer";
+    if(count)count.textContent=items.length+" geprüfte Inhalte"+(expected&&expected!==items.length?" · Index: "+expected:"")
+   }
+   if(input)input.oninput=paint;
+   paint()
+  }).catch(function(){box.innerHTML='<div class="women-empty">Die geprüften Inhalte konnten gerade nicht geladen werden.</div>'})
  }
  renders.frauenbereich=function(){
   var id=new URLSearchParams(location.search).get("id"),area=realData.womenAreas.find(function(x){return x.kennung===id})||realData.womenAreas[0];
   if(!area)return realIntro("FRAUEN","Keine Inhalte gefunden.","");
   setTimeout(function(){hydrateWomen(area.kennung)},0);
-  return realIntro("FRAUEN",area.titel,area.untertitel||"")+'<section class="section parchment reveal"><div id="womenDetail"><p>Inhalte werden geladen …</p></div></section>'+footer()
+  return realIntro("FRAUEN",area.titel,(area.sichtbareEintraege||0)+" geprüfte Inhalte · "+(area.untertitel||""))+'<section class="section parchment reveal"><div id="womenDetail"><div class="women-empty">Geprüfte Inhalte werden geladen …</div></div></section>'+footer()
  };
 
  var quizCursor=0;
@@ -3479,6 +3576,7 @@ button,input,select{font:inherit}
   realData.publications.forEach(function(x){all.push({kind:"Publikation",title:x.title,sub:x.category||"",hay:[x.title,x.category,x.topic,(x.searchAliases||[]).join(" ")],page:"werk",extra:"type=pub&id="+encodeURIComponent(x.id)})});
   realData.books.forEach(function(x){all.push({kind:"Werk",title:x.title,sub:(x.author||"")+" "+(x.category||""),hay:[x.title,x.author,x.category,(x.aliases||[]).join(" ")],page:"werk",extra:"type=book&id="+encodeURIComponent(x.id)})});
   realData.prophets.forEach(function(x){all.push({kind:"Prophet",title:x.name,sub:x.people||"",hay:[x.name,x.nameAr,x.people,(x.roles||[]).join(" ")],page:"prophet",extra:"id="+encodeURIComponent(x.id)})});
+  realData.womenAreas.forEach(function(x){all.push({kind:"Frauen",title:x.titel,sub:x.untertitel||"",hay:[x.titel,x.untertitel,x.kennung],page:"frauenbereich",extra:"id="+encodeURIComponent(x.kennung)})});
   function paint(){
    var q=input.value.trim(),rows=all.filter(function(x){return smartMatch(x.hay,q)}).slice(0,40);
    out.innerHTML=rows.map(function(x){return '<a class="list-row desktop-link" data-page="'+x.page+'" href="'+pUrl(x.page,x.extra)+'"><span class="search-kind">'+escBook(x.kind)+'</span><strong>'+escBook(x.title)+'</strong><small>'+escBook(x.sub)+'</small></a>'}).join("")||'<div class="loading-line">Keine Treffer.</div>'
