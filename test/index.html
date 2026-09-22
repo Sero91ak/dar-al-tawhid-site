@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1789319677748 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v954";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v955";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -22397,7 +22397,7 @@ function parseRouteFromHash(hashRaw){
   const slug=normalizeRouteSlug(parts[0]);
   let view=ROUTE_ALIASES[slug]||parts[0]||"home";
   let rest=parts.slice(1);
-  if(view==="feed"){view="recent";rest=[]}
+  if(view==="feed"){view="topics";rest=[]}
   if(view==="quran"&&rest.length&&isQuranSurahPath(rest.join("/")))return{view:"quran-surah",value:rest.join("/")};
   if(view==="quran-topic")return{view:"quran-topic",value:safeDecodeURIComponent(rest.join("/"))};
   if(view==="topics"&&rest.length){
@@ -22535,7 +22535,7 @@ function setBottomNavPill(left,width,dragging){const nav=$("bottomNav");if(!nav)
 function highlightBottomNavIndex(idx){document.querySelectorAll("[data-bottom-nav]").forEach((btn,i)=>btn.classList.toggle("active",i===idx))}
 function nearestBottomNavIndex(pillCenter,metrics){let best=0,d=Infinity;metrics.forEach((m,i)=>{const dist=Math.abs(m.center-pillCenter);if(dist<d){d=dist;best=i}});return best}
 function hardGoHome(){clearQuranReturnState();clearNavStack();try{sessionStorage.removeItem(NAV_SCROLL_KEY);sessionStorage.removeItem(QURAN_SCROLL_KEY);sessionStorage.removeItem(QURAN_RETURN_KEY)}catch(e){}window.__restoreScrollY=0;window.__smoothNav=false;window.DARScrollManager?.markScrollToTop?.();clearStickyPushLaunchParams();if((location.hash||"#home")!=="#home"){location.hash="#home"}else{currentRoute={view:"home",value:""};render()}requestAnimationFrame(()=>requestAnimationFrame(()=>window.DARScrollManager?.stableScrollTo?.(0)||window.scrollTo({top:0,behavior:"auto"})))}
-const BOTTOM_TAB_ROOTS={home:{view:"home",value:""},ilm:{view:"ilm",value:""},quiz:{view:"quiz",value:""},feed:{view:"recent",value:""},topics:{view:"recent",value:""},recent:{view:"recent",value:""},quran:{view:"quran",value:""},more:{view:"more",value:""}};
+const BOTTOM_TAB_ROOTS={home:{view:"home",value:""},ilm:{view:"ilm",value:""},quiz:{view:"quiz",value:""},feed:{view:"topics",value:""},topics:{view:"topics",value:""},recent:{view:"topics",value:""},quran:{view:"quran",value:""},more:{view:"more",value:""}};
 function bottomTabRootRoute(tab){return BOTTOM_TAB_ROOTS[tab]?{view:BOTTOM_TAB_ROOTS[tab].view,value:BOTTOM_TAB_ROOTS[tab].value||""}:null}
 function isExactBottomTabRoot(tab,route=currentRoute){const r=route||readRoute();if(bottomNavTabForRoute(r)!==tab)return false;if(tab==="home")return r.view==="home"&&!r.value;if(tab==="quiz"){if(r.view!=="quiz")return false;const mode=String(r.value||"").trim().toLowerCase();return !mode||mode==="home"}const root=bottomTabRootRoute(tab);return !!(root&&routeEqual(r,root))}
 function closeTransientNavOverlays(){try{if(typeof closeQuickAccessMenu==='function')closeQuickAccessMenu()}catch(e){}try{if(typeof closeQuranExplanationPanel==="function"&&quranExplanationState)closeQuranExplanationPanel({fromPop:true})}catch(e){}try{if(typeof closeIlmSheet==="function")closeIlmSheet()}catch(e){}const hist=$("ilmHistoryDrawer");if(hist)hist.setAttribute("hidden","");const menu=$("ilmMenuPopover");if(menu)menu.setAttribute("hidden","");if(typeof syncIlmOverlayState==="function")syncIlmOverlayState();document.querySelectorAll(".cal-tl-info-sheet").forEach(el=>{el.hidden=true;el.classList.remove("is-open")})}
@@ -27239,7 +27239,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v954";
+const APP_BUILD_ID="app-shell-v955";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
