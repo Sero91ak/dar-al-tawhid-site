@@ -108,6 +108,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "visitor-ios-pwa-deprecation-2026-09-22",
+      "approvedBy": "user-explicit-alte-ios-besucher-pwa-sperren-app-store",
+      "reason": "Nutzer: Alte installierte iOS-Besucher-PWA sperren und zum App Store führen. Nicht Test, nicht Admin, nicht Android, nicht Desktop, nicht offizielle iOS-App.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "assets/visitor-ios-deprecation.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "theme-player-contrast-2026-09-21",
       "approvedBy": "user-explicit-eisgold-layl-erscheinungsbilder-lesbar",
       "reason": "Nutzer: Player-Schrift Eisgold hell/lesbar, Dar-al-Layl Seek/Zeiten sichtbar, jede Erscheinungsbild-Karte und Player farblich lesbar.",

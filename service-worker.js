@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v836';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v837';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -21,6 +21,7 @@ const APP_SHELL = [
   '/manifest-staging.json',
   '/test/manifest.json',
   '/version.json',
+  '/assets/visitor-ios-deprecation.js',
   '/data/quran-search-keywords.json',
   '/data/quran-search-index.json',
   '/data/offline-content-manifest.json',
