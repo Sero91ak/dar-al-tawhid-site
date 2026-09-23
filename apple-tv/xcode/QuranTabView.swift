@@ -1,5 +1,18 @@
 import SwiftUI
 
+private enum DarAlLaylQuranCardStyle {
+    static let cornerRadius: CGFloat = 32
+    static let primaryText = Color(red: 0.94, green: 0.89, blue: 0.78)
+    static let secondaryText = Color(red: 0.72, green: 0.66, blue: 0.54)
+    static let mutedText = Color(red: 0.58, green: 0.55, blue: 0.48)
+    static let goldLine = Color(red: 0.76, green: 0.60, blue: 0.32)
+    static let cardTop = Color(red: 0.055, green: 0.075, blue: 0.13)
+    static let cardBottom = Color(red: 0.025, green: 0.035, blue: 0.07)
+    static let cardStroke = Color(red: 0.70, green: 0.56, blue: 0.30)
+    static let pageTop = Color(red: 0.018, green: 0.026, blue: 0.052)
+    static let pageBottom = Color(red: 0.006, green: 0.010, blue: 0.024)
+}
+
 @MainActor
 struct QuranTabView: View {
     @StateObject private var reciterStore = QuranReciterSelectionStore()
@@ -18,8 +31,9 @@ struct QuranTabView: View {
             VStack(spacing: 28) {
                 header
 
-                Divider()
-                    .opacity(0.35)
+                Rectangle()
+                    .fill(DarAlLaylQuranCardStyle.goldLine.opacity(0.30))
+                    .frame(height: 1)
 
                 Group {
                     if playbackStore.isLoading {
@@ -69,9 +83,9 @@ struct QuranTabView: View {
     private var background: some View {
         LinearGradient(
             colors: [
-                Color.black,
-                Color.black.opacity(0.94),
-                Color.black
+                DarAlLaylQuranCardStyle.pageTop,
+                Color.black.opacity(0.96),
+                DarAlLaylQuranCardStyle.pageBottom
             ],
             startPoint: .topLeading,
             endPoint: .bottomTrailing
@@ -83,17 +97,18 @@ struct QuranTabView: View {
         HStack(spacing: 22) {
             VStack(alignment: .leading, spacing: 5) {
                 Text("QURʾĀN")
-                    .font(.system(size: 23, weight: .bold, design: .rounded))
-                    .tracking(2.8)
+                    .font(.system(size: 24, weight: .bold, design: .serif))
+                    .tracking(3.0)
+                    .foregroundStyle(DarAlLaylQuranCardStyle.primaryText)
 
                 if let surah = playbackStore.surah {
                     Text("\(surah.englishName) · Āyah \(playbackStore.currentAyahNumber) von \(playbackStore.verseCount)")
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
+                        .font(.system(size: 17, weight: .regular, design: .serif))
+                        .foregroundStyle(DarAlLaylQuranCardStyle.secondaryText)
                 } else {
                     Text("Arabisch · Deutsch · Rezitation")
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
+                        .font(.system(size: 17, weight: .regular, design: .serif))
+                        .foregroundStyle(DarAlLaylQuranCardStyle.secondaryText)
                 }
             }
 
@@ -109,7 +124,9 @@ struct QuranTabView: View {
                     Image(systemName: "chevron.down")
                         .font(.caption.weight(.bold))
                 }
+                .font(.system(size: 18, weight: .semibold, design: .serif))
                 .frame(minWidth: 230)
+                .foregroundStyle(DarAlLaylQuranCardStyle.primaryText)
             }
             .disabled(surahs.isEmpty)
 
@@ -120,49 +137,83 @@ struct QuranTabView: View {
     private func verseView(_ verse: QuranSynchronizedVerse) -> some View {
         ScrollView {
             VStack(spacing: 34) {
-                Spacer(minLength: 24)
-
                 Text(verse.arabicText)
-                    .font(.system(size: 58, weight: .medium, design: .serif))
+                    .font(.system(size: 60, weight: .medium, design: .serif))
+                    .foregroundStyle(DarAlLaylQuranCardStyle.primaryText)
                     .multilineTextAlignment(.center)
-                    .lineSpacing(18)
+                    .lineSpacing(20)
                     .frame(maxWidth: 1450)
                     .environment(\.layoutDirection, .rightToLeft)
                     .id("arabic-\(verse.id)")
 
                 HStack(spacing: 16) {
                     Rectangle()
+                        .fill(DarAlLaylQuranCardStyle.goldLine.opacity(0.42))
                         .frame(height: 1)
-                        .opacity(0.3)
 
                     Text("ĀYAH \(verse.numberInSurah)")
-                        .font(.caption.weight(.bold))
-                        .tracking(2.2)
-                        .foregroundStyle(.secondary)
+                        .font(.system(size: 14, weight: .bold, design: .serif))
+                        .tracking(2.4)
+                        .foregroundStyle(DarAlLaylQuranCardStyle.goldLine.opacity(0.90))
                         .fixedSize()
 
                     Rectangle()
+                        .fill(DarAlLaylQuranCardStyle.goldLine.opacity(0.42))
                         .frame(height: 1)
-                        .opacity(0.3)
                 }
                 .frame(maxWidth: 1180)
 
                 Text(verse.germanText)
-                    .font(.system(size: 29, weight: .regular, design: .serif))
+                    .font(.system(size: 30, weight: .regular, design: .serif))
+                    .foregroundStyle(DarAlLaylQuranCardStyle.primaryText.opacity(0.92))
                     .multilineTextAlignment(.center)
-                    .lineSpacing(9)
+                    .lineSpacing(10)
                     .frame(maxWidth: 1250)
                     .id("german-\(verse.id)")
 
                 Text("Deutsche Übersetzung: \(QuranContentService.germanTranslationName)")
-                    .font(.caption)
-                    .foregroundStyle(.tertiary)
-
-                Spacer(minLength: 28)
+                    .font(.system(size: 14, weight: .regular, design: .serif))
+                    .foregroundStyle(DarAlLaylQuranCardStyle.mutedText)
             }
             .frame(maxWidth: .infinity)
+            .padding(.horizontal, 54)
+            .padding(.vertical, 52)
+            .background(quranCardBackground)
+            .overlay(quranCardBorder)
+            .shadow(color: .black.opacity(0.38), radius: 28, x: 0, y: 18)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 20)
         }
         .animation(.easeInOut(duration: 0.28), value: verse.id)
+    }
+
+    private var quranCardBackground: some View {
+        RoundedRectangle(cornerRadius: DarAlLaylQuranCardStyle.cornerRadius, style: .continuous)
+            .fill(
+                LinearGradient(
+                    colors: [
+                        DarAlLaylQuranCardStyle.cardTop,
+                        DarAlLaylQuranCardStyle.cardBottom
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+    }
+
+    private var quranCardBorder: some View {
+        RoundedRectangle(cornerRadius: DarAlLaylQuranCardStyle.cornerRadius, style: .continuous)
+            .stroke(
+                LinearGradient(
+                    colors: [
+                        DarAlLaylQuranCardStyle.cardStroke.opacity(0.52),
+                        DarAlLaylQuranCardStyle.cardStroke.opacity(0.16)
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                ),
+                lineWidth: 1.2
+            )
     }
 
     private var playerControls: some View {
@@ -181,7 +232,7 @@ struct QuranTabView: View {
                     playbackStore.isPlaying ? "Pause" : "Rezitation starten",
                     systemImage: playbackStore.isPlaying ? "pause.fill" : "play.fill"
                 )
-                .font(.headline)
+                .font(.system(size: 19, weight: .semibold, design: .serif))
                 .frame(minWidth: 220)
             }
             .disabled(playbackStore.currentVerse == nil || playbackStore.isLoading)
@@ -197,12 +248,13 @@ struct QuranTabView: View {
 
             VStack(alignment: .trailing, spacing: 4) {
                 Text(reciterStore.selectedReciter?.displayName ?? "Qurʾān-Rezitator")
-                    .font(.callout.weight(.semibold))
+                    .font(.system(size: 17, weight: .semibold, design: .serif))
+                    .foregroundStyle(DarAlLaylQuranCardStyle.primaryText)
                     .lineLimit(1)
 
                 Text("Die nächste Āyah erscheint automatisch nach Ende der Rezitation.")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(.system(size: 13, weight: .regular, design: .serif))
+                    .foregroundStyle(DarAlLaylQuranCardStyle.secondaryText)
             }
         }
     }
@@ -212,7 +264,8 @@ struct QuranTabView: View {
             ProgressView()
                 .controlSize(.large)
             Text("Qurʾān wird vorbereitet …")
-                .foregroundStyle(.secondary)
+                .font(.system(size: 20, weight: .regular, design: .serif))
+                .foregroundStyle(DarAlLaylQuranCardStyle.secondaryText)
         }
     }
 
@@ -220,8 +273,10 @@ struct QuranTabView: View {
         VStack(spacing: 20) {
             Image(systemName: "exclamationmark.triangle")
                 .font(.system(size: 42))
+                .foregroundStyle(DarAlLaylQuranCardStyle.goldLine)
             Text(message)
-                .font(.headline)
+                .font(.system(size: 22, weight: .semibold, design: .serif))
+                .foregroundStyle(DarAlLaylQuranCardStyle.primaryText)
             Button("Erneut versuchen") {
                 Task {
                     await playbackStore.load(
@@ -272,47 +327,31 @@ private struct QuranSurahPickerSheet: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 22) {
-                    ForEach(surahs) { surah in
-                        Button {
-                            onSelect(surah)
-                        } label: {
-                            HStack(spacing: 16) {
-                                Text("\(surah.number)")
-                                    .font(.title3.monospacedDigit().weight(.bold))
-                                    .frame(width: 48)
+            ZStack {
+                LinearGradient(
+                    colors: [
+                        DarAlLaylQuranCardStyle.pageTop,
+                        DarAlLaylQuranCardStyle.pageBottom
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .ignoresSafeArea()
 
-                                VStack(alignment: .leading, spacing: 6) {
-                                    Text(surah.englishName)
-                                        .font(.headline)
-                                        .lineLimit(1)
-
-                                    Text(surah.name)
-                                        .font(.title3)
-                                        .lineLimit(1)
-                                        .environment(\.layoutDirection, .rightToLeft)
-
-                                    Text("\(surah.numberOfAyahs) Āyāt")
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                }
-
-                                Spacer(minLength: 4)
-
-                                if surah.number == selectedSurah {
-                                    Image(systemName: "checkmark.circle.fill")
-                                }
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 22) {
+                        ForEach(surahs) { surah in
+                            Button {
+                                onSelect(surah)
+                            } label: {
+                                surahCard(surah)
                             }
-                            .frame(maxWidth: .infinity, minHeight: 112, alignment: .leading)
-                            .padding(.horizontal, 18)
-                            .contentShape(Rectangle())
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.bordered)
                     }
+                    .padding(.horizontal, 54)
+                    .padding(.vertical, 36)
                 }
-                .padding(.horizontal, 54)
-                .padding(.vertical, 36)
             }
             .navigationTitle("Sūrah auswählen")
             .toolbar {
@@ -323,6 +362,63 @@ private struct QuranSurahPickerSheet: View {
                 }
             }
         }
+    }
+
+    private func surahCard(_ surah: QuranSurahSummary) -> some View {
+        HStack(spacing: 16) {
+            Text("\(surah.number)")
+                .font(.system(size: 24, weight: .bold, design: .serif).monospacedDigit())
+                .foregroundStyle(DarAlLaylQuranCardStyle.goldLine.opacity(0.94))
+                .frame(width: 48)
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text(surah.englishName)
+                    .font(.system(size: 19, weight: .semibold, design: .serif))
+                    .foregroundStyle(DarAlLaylQuranCardStyle.primaryText)
+                    .lineLimit(1)
+
+                Text(surah.name)
+                    .font(.system(size: 24, weight: .medium, design: .serif))
+                    .foregroundStyle(DarAlLaylQuranCardStyle.primaryText.opacity(0.94))
+                    .lineLimit(1)
+                    .environment(\.layoutDirection, .rightToLeft)
+
+                Text("\(surah.numberOfAyahs) Āyāt")
+                    .font(.system(size: 13, weight: .regular, design: .serif))
+                    .foregroundStyle(DarAlLaylQuranCardStyle.secondaryText)
+            }
+
+            Spacer(minLength: 4)
+
+            if surah.number == selectedSurah {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundStyle(DarAlLaylQuranCardStyle.goldLine)
+            }
+        }
+        .frame(maxWidth: .infinity, minHeight: 112, alignment: .leading)
+        .padding(.horizontal, 18)
+        .background(quranPickerCardBackground)
+        .overlay(quranPickerCardBorder)
+        .contentShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+    }
+
+    private var quranPickerCardBackground: some View {
+        RoundedRectangle(cornerRadius: 24, style: .continuous)
+            .fill(
+                LinearGradient(
+                    colors: [
+                        DarAlLaylQuranCardStyle.cardTop,
+                        DarAlLaylQuranCardStyle.cardBottom
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+    }
+
+    private var quranPickerCardBorder: some View {
+        RoundedRectangle(cornerRadius: 24, style: .continuous)
+            .stroke(DarAlLaylQuranCardStyle.cardStroke.opacity(0.30), lineWidth: 1)
     }
 }
 
