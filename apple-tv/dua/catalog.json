@@ -1,0 +1,25 @@
+{
+  "project": "DĀR AL TAWḤĪD – Duʿāʾ",
+  "schemaVersion": "1.0",
+  "contentType": "dua",
+  "status": "planned",
+  "target": ["tvOS", "iOS", "iPadOS"],
+  "remoteLoad": true,
+  "offlineCache": true,
+  "contentVersion": 0,
+  "entriesCount": 0,
+  "lastUpdated": "2026-09-23T00:00:00Z",
+  "entriesIndexPath": "entries-index.json",
+  "entriesPaths": [],
+  "syncPolicy": {
+    "checkOnAppStart": true,
+    "checkOnForeground": true,
+    "minimumRefreshIntervalHours": 6,
+    "atomicCacheActivation": true,
+    "keepLastGoodCacheOnError": true
+  },
+  "fallback": {
+    "enabled": true,
+    "text": "Dieses Duʿāʾ ist derzeit nicht verfügbar."
+  }
+}
