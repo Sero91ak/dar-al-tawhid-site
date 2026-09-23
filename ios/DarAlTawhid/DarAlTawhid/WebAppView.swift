@@ -750,7 +750,6 @@ struct WebAppView: UIViewRepresentable {
         private var lastAppearanceKey: String = ""
         private var lastOpenedDestination: DarDeepLink.Destination?
         private var lastLoadedPushURL: URL?
-        private var lastShellCheckAt: TimeInterval = 0
         var lastOpenNonce: UUID?
         private var pendingRoute: DarDeepLink.Destination?
         private var nowPlayingArt: UIImage?
@@ -890,17 +889,6 @@ struct WebAppView: UIViewRepresentable {
         func loadPushURL(_ url: URL) {
             let target = DarAppShell.inAppURL(from: url)
             guard DarAppShell.isOwnHost(target) else { return }
-            let queryNames = Set(
-                (URLComponents(url: target, resolvingAgainstBaseURL: false)?.queryItems ?? []).map(\.name)
-            )
-            let forceShell = queryNames.contains("ios-shell")
-                || queryNames.contains("darsw")
-                || queryNames.contains("r")
-            if forceShell {
-                lastLoadedPushURL = nil
-                webView?.load(URLRequest(url: target, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60))
-                return
-            }
             let dest = DarDeepLink.destination(from: target)
             if dest == .qibla || dest == .prayer || dest == .quran || dest == .duas || dest == .jummah {
                 navigate(to: dest, force: true)
@@ -1896,40 +1884,7 @@ struct WebAppView: UIViewRepresentable {
             if didShowErrorState {
                 showLoadingOverlay(subtitle: "Erneut laden")
                 webView.load(URLRequest(url: WebAppView.launchURL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60))
-                return
             }
-            refreshLiveShellIfNeeded()
-        }
-
-        private func refreshLiveShellIfNeeded() {
-            let now = Date().timeIntervalSince1970
-            if now - lastShellCheckAt < 25 { return }
-            lastShellCheckAt = now
-            guard let webView else { return }
-            guard let versionURL = URL(string: "https://dar-al-tawhid.de/version.json?ios=\(Int(now * 1000))") else { return }
-            var request = URLRequest(url: versionURL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 20)
-            request.setValue("DarAlTawhid-iOS/1.0 WKWebView", forHTTPHeaderField: "User-Agent")
-            URLSession.shared.dataTask(with: request) { [weak self, weak webView] data, _, _ in
-                guard let self, let webView, let data,
-                      let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-                      let remote = json["buildId"] as? String,
-                      !remote.isEmpty else { return }
-                DispatchQueue.main.async {
-                    webView.evaluateJavaScript("String(window.__DAR_EXPECTED_BUILD||'')") { result, _ in
-                        let local = String(describing: result ?? "")
-                        if !local.isEmpty && local.contains(remote) { return }
-                        var components = URLComponents(url: WebAppView.launchURL, resolvingAgainstBaseURL: false)
-                        var items = components?.queryItems ?? []
-                        items.append(URLQueryItem(name: "ios-shell", value: String(Int(now * 1000))))
-                        components?.queryItems = items
-                        if let fragment = webView.url?.fragment, !fragment.isEmpty {
-                            components?.fragment = fragment
-                        }
-                        guard let url = components?.url else { return }
-                        webView.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60))
-                    }
-                }
-            }.resume()
         }
 
         private func showLoadError(in webView: WKWebView) {
