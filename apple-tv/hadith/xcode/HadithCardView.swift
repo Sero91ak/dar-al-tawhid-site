@@ -2,6 +2,12 @@ import SwiftUI
 
 struct HadithCardView: View {
     let hadith: HadithRecord
+    let showsSharh: Bool
+
+    init(hadith: HadithRecord, showsSharh: Bool = false) {
+        self.hadith = hadith
+        self.showsSharh = showsSharh
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -20,7 +26,7 @@ struct HadithCardView: View {
 
             sourceView
 
-            if hadith.hasVerifiedSharh, let sharh = hadith.attributedSharh {
+            if showsSharh, hadith.hasVerifiedSharh, let sharh = hadith.attributedSharh {
                 Spacer().frame(height: 22)
                 sharhDivider
                 Spacer().frame(height: 18)
@@ -85,5 +91,23 @@ struct HadithCardView: View {
                 .padding(.top, 2)
             }
         }
+    }
+}
+
+/// Apple-TV-Bildschirmschoner: nur Ḥadīṯ/Āṯar und Quelle, kein Sharḥ.
+struct HadithScreensaverCardView: View {
+    let hadith: HadithRecord
+
+    var body: some View {
+        HadithCardView(hadith: hadith, showsSharh: false)
+    }
+}
+
+/// Hadith-Bibliothek in Test-App/iOS: gleicher Datensatz, aber mit geprüftem Sharḥ.
+struct HadithLibraryCardView: View {
+    let hadith: HadithRecord
+
+    var body: some View {
+        HadithCardView(hadith: hadith, showsSharh: true)
     }
 }
