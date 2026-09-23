@@ -2,7 +2,7 @@
   "project": "DĀR AL TAWḤĪD – Apple TV Ḥadīṯ & Āṯār",
   "language": "de",
   "encoding": "UTF-8",
-  "formatVersion": "1.2",
+  "formatVersion": "1.3",
   "authenticOnly": true,
   "currentSeries": "2051-2150",
   "nextId": "HAD-2151",
@@ -19,7 +19,9 @@
     "includeAthar": true,
     "salafAsAthar": true,
     "rotationMode": "shuffleBag",
-    "showSharh": false
+    "showSharh": true,
+    "showSharhMode": "compact",
+    "requireVerifiedSharh": true
   },
   "hadithLibrary": {
     "enabledForTestApp": true,
@@ -33,7 +35,8 @@
   "syncPolicy": {
     "path": "sync-policy.json",
     "sourceOfTruth": "apple-tv/hadith/",
-    "appleTvScreensaverShowsSharh": false,
+    "appleTvScreensaverShowsSharh": true,
+    "appleTvScreensaverSharhMode": "compact",
     "testAppHadithLibraryShowsSharh": true,
     "iosHadithLibraryShowsSharh": true
   },
