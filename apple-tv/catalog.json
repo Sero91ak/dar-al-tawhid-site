@@ -1,11 +1,27 @@
 {
   "project": "DĀR AL TAWḤĪD – Apple TV Content",
-  "schemaVersion": "1.6",
+  "schemaVersion": "1.7",
   "language": "de",
   "defaultModule": "hadith",
+  "remoteContentSync": {
+    "enabled": true,
+    "rule": "GitHub bzw. die Live-Auslieferungsquelle liefert catalog.json und Indexdateien; Xcode kennt keine festen Inhaltsgrenzen.",
+    "checkOnAppStart": true,
+    "checkOnForeground": true,
+    "checkOnAppleTVWake": true,
+    "minimumRefreshIntervalHours": 6,
+    "offlineCache": true,
+    "atomicCacheActivation": true,
+    "keepLastGoodCacheOnError": true
+  },
   "screensaver": {
     "enabled": true,
-    "rotationConfigPath": "screensaver/rotation.json"
+    "status": "active",
+    "catalogPath": "screensaver/catalog.json",
+    "rotationConfigPath": "screensaver/rotation.json",
+    "remoteLoad": true,
+    "offlineCache": true,
+    "fallbackRequired": true
   },
   "quran": {
     "reader": {
@@ -57,6 +73,18 @@
       "sortOrder": 10
     },
     {
+      "id": "hadithSharh",
+      "title": "Ḥadīṯ-Šarḥ",
+      "status": "planned",
+      "recordType": "hadith-sharh",
+      "rootPath": "hadith/sharh",
+      "catalogPath": "hadith/sharh/catalog.json",
+      "remoteLoad": true,
+      "offlineCache": true,
+      "requiresModule": "hadith",
+      "sortOrder": 15
+    },
+    {
       "id": "dua",
       "title": "Duʿāʾ",
       "status": "planned",
@@ -67,6 +95,17 @@
       "remoteLoad": true,
       "offlineCache": true,
       "sortOrder": 20
+    },
+    {
+      "id": "series",
+      "title": "Serien / 30-Tage-Bereiche",
+      "status": "planned",
+      "recordType": "series",
+      "rootPath": "series",
+      "catalogPath": "series/catalog.json",
+      "remoteLoad": true,
+      "offlineCache": true,
+      "sortOrder": 25
     },
     {
       "id": "athar",
