@@ -1,5 +1,5 @@
 /**
- * DAR AL TAWḤID — Boot: Cache-Update + Feed-Doppelheader + Chip-Pruning.
+ * DAR AL TAWḤID — Boot: Cache-Update + Feed-Doppelheader + Chip-Pruning + Hadith-Gate-Guard.
  * Lokal aus /assets/live-boot.js (kein CDN-Wartezeit).
  */
 (function () {
@@ -37,6 +37,7 @@
 
   var isTest = /\/test(?:\/|$)/.test(location.pathname || "");
   var VERSION_STATE_KEY = "dar_app_version_state_v1";
+  var HADITH_GATE_ID = "dar-hadith-library-gate";
   var TAG_CLASS_RE = /(chip|chips|badge|pill|tag|tags|keyword|keywords)/i;
   var PRUNE_SELECTOR = [
     '[class*="chip"]',
@@ -48,6 +49,7 @@
   var SKIP_ANCESTORS = "nav,footer,form,select,input,textarea,option,[role='tablist'],[contenteditable='true'],[data-keep-tags='true']";
   var pruneScheduled = false;
   var homeMoreScheduled = false;
+  var hadithGateScheduled = false;
 
   function isFeedRoute() {
     try {
@@ -81,6 +83,19 @@
       .replace(/\s+/g, " ")
       .trim()
       .toLowerCase();
+  }
+
+  function currentRouteKey() {
+    try {
+      return String(location.hash || "").replace(/^#\/?/, "").split(/[/?&]/)[0].toLowerCase();
+    } catch (e) {
+      return "";
+    }
+  }
+
+  function isMoreRoute() {
+    var key = currentRouteKey();
+    return key === "more" || key === "mehr" || key === "settings" || key === "setup" || key === "einstellungen";
   }
 
   function shouldPruneNode(el) {
@@ -194,6 +209,91 @@
     else setTimeout(done, 16);
   }
 
+  function findLearningTarget() {
+    var app = document.getElementById("appView") || document.body;
+    if (!app || !app.querySelectorAll) return null;
+    var headings = app.querySelectorAll("h1,h2,h3,h4,.section-title,.more-section-title,.group-title,.card-title,.panel-title,.settings-title,.view-title,strong,b");
+    for (var i = 0; i < headings.length; i += 1) {
+      var text = foldText(headings[i].textContent || "");
+      if (text === "lernen wissen" || text.indexOf("lernen wissen") === 0 || text.indexOf("lernen und wissen") === 0) {
+        var section = headings[i].closest("section,article,.more-section,.settings-group,.premium-card,.card,.panel,.dar-section,.learn-section") || headings[i].parentElement;
+        return section && (section.querySelector(".list,.more-list,.settings-list,.feature-list,.learning-list,.dar-list,.menu-list,.stack,.items") || section);
+      }
+    }
+    var blocks = app.querySelectorAll("section,article,.more-section,.settings-group,.premium-card,.card,.panel,.dar-section,.learn-section");
+    for (var j = 0; j < blocks.length; j += 1) {
+      var blockText = foldText(blocks[j].textContent || "");
+      var hasLearningItems = blockText.indexOf("die propheten") !== -1 || blockText.indexOf("din quiz") !== -1 || blockText.indexOf("beitrage") !== -1 || blockText.indexOf("quran") !== -1;
+      if (hasLearningItems) return blocks[j].querySelector(".list,.more-list,.settings-list,.feature-list,.learning-list,.dar-list,.menu-list,.stack,.items") || blocks[j];
+    }
+    return null;
+  }
+
+  function compactHadithGateHtml() {
+    return [
+      '<section id="' + HADITH_GATE_ID + '" class="dar-hadith-library-gate" aria-label="Ḥadīṯ-Bibliothek" data-dar-hadith-library-open="1">',
+      '  <div class="dar-hadith-library-gate__icon" aria-hidden="true">📚</div>',
+      '  <div class="dar-hadith-library-gate__body">',
+      '    <div class="dar-hadith-library-gate__topline">',
+      '      <h3 class="dar-hadith-library-gate__title">Ḥadīṯ-Bibliothek</h3>',
+      '      <span class="dar-hadith-library-gate__status">Noch nicht freigegeben</span>',
+      '    </div>',
+      '    <p class="dar-hadith-library-gate__text">Šarḥ wird vorbereitet.</p>',
+      '  </div>',
+      '</section>'
+    ].join("");
+  }
+
+  function enforceHadithGatePlacement() {
+    try {
+      var existing = document.getElementById(HADITH_GATE_ID);
+      if (!isMoreRoute()) {
+        if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+        return;
+      }
+      var target = findLearningTarget();
+      if (!target) {
+        if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+        return;
+      }
+      var needsReplace = !existing || !existing.querySelector(".dar-hadith-library-gate__body") || existing.parentNode !== target;
+      if (needsReplace) {
+        if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+        var wrap = document.createElement("div");
+        wrap.innerHTML = compactHadithGateHtml();
+        var card = wrap.firstElementChild;
+        if (card) target.appendChild(card);
+      }
+    } catch (e) {}
+  }
+
+  function scheduleHadithGateGuard() {
+    if (hadithGateScheduled) return;
+    hadithGateScheduled = true;
+    var done = function () {
+      hadithGateScheduled = false;
+      enforceHadithGatePlacement();
+    };
+    if (typeof requestAnimationFrame === "function") requestAnimationFrame(done);
+    else setTimeout(done, 16);
+  }
+
+  function bindHadithGateGuard() {
+    scheduleHadithGateGuard();
+    window.addEventListener("hashchange", scheduleHadithGateGuard);
+    window.addEventListener("load", scheduleHadithGateGuard);
+    window.addEventListener("pageshow", scheduleHadithGateGuard);
+    document.addEventListener("dar:render", scheduleHadithGateGuard);
+    if (document.documentElement) {
+      new MutationObserver(function () {
+        scheduleHadithGateGuard();
+      }).observe(document.documentElement, {
+        childList: true,
+        subtree: true
+      });
+    }
+  }
+
   function readVersionState() {
     try {
       var raw = localStorage.getItem(VERSION_STATE_KEY);
@@ -231,7 +331,6 @@
             var stuck = JSON.parse(sessionStorage.getItem(stuckKey) || "{}");
             if (String(stuck.buildId) === remoteBuildId && (Number(stuck.tries) || 0) >= 1) return;
           } catch (e) {}
-          // Alte Optik-Caches sofort löschen, sobald neuere Hülle erkannt wird.
           try {
             if ("caches" in window) {
               caches.keys().then(function (keys) {
@@ -251,7 +350,6 @@
           } catch (e) {}
         }
         var state = readVersionState();
-        // Nie als „fertig“ werten, wenn die geladene Hülle noch alt ist.
         if (state && (String(state.appliedBuildId || "") === remoteBuildId || String(state.acknowledgedBuildId || "") === remoteBuildId) && remoteBuildId !== local) {
           try {
             var cleared = Object.assign({}, state, { appliedBuildId: "", acknowledgedBuildId: "", pendingBuildId: remoteBuildId });
@@ -284,6 +382,7 @@
   function boot() {
     bindFeedHeaderGuard();
     bindChipPruneGuard();
+    bindHadithGateGuard();
     scheduleHomeMoreFix();
     window.addEventListener("hashchange", scheduleHomeMoreFix);
     window.addEventListener("load", scheduleHomeMoreFix);
