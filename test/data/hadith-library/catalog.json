@@ -1,0 +1,41 @@
+{
+  "project": "DĀR AL TAWḤĪD – Test-App Ḥadīṯ-Bibliothek",
+  "schemaVersion": "1.0",
+  "language": "de",
+  "authenticOnly": true,
+  "sourceOfTruth": "/apple-tv/hadith/catalog.json",
+  "dataRoot": "/apple-tv/hadith/",
+  "currentSeries": "2051-2150",
+  "latestId": "HAD-2150",
+  "nextId": "HAD-2151",
+  "mode": "library",
+  "display": {
+    "showHadith": true,
+    "showSource": true,
+    "showSharh": true,
+    "showSharhSource": true,
+    "requireVerifiedSharh": true
+  },
+  "surfaces": {
+    "testApp": true,
+    "iosApp": true,
+    "visitorApp": false,
+    "appleTvScreensaver": false
+  },
+  "syncRule": "Neue HAD-Datensätze werden einmal unter /apple-tv/hadith/ gepflegt. Die Test-App/iOS-Ḥadīṯ-Bibliothek liest dieselben verifizierten Datensätze inklusive Sharḥ. Der Apple-TV-Bildschirmschoner zeigt daraus nur Aussage und Quelle.",
+  "completionRule": {
+    "completeBlockBeforeNext": true,
+    "sharhRequiredForCompletion": true,
+    "completedRecordSharhStatus": "verified"
+  },
+  "series": [
+    {
+      "id": "2051-2150",
+      "count": 100,
+      "firstId": "HAD-2051",
+      "lastId": "HAD-2150",
+      "sourceIndexPath": "/apple-tv/hadith/series/2051-2150/index.json",
+      "allRecordsSharhStatus": "verified"
+    }
+  ]
+}
