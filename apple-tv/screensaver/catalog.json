@@ -1,0 +1,35 @@
+{
+  "project": "DĀR AL TAWḤĪD – Apple TV Screensaver",
+  "schemaVersion": "1.0",
+  "contentType": "screensaver",
+  "status": "active",
+  "target": ["tvOS", "iOS", "iPadOS"],
+  "remoteLoad": true,
+  "offlineCache": true,
+  "contentVersion": 1,
+  "entriesCount": 1,
+  "lastUpdated": "2026-09-23T00:00:00Z",
+  "entriesIndexPath": "entries-index.json",
+  "entriesPaths": [
+    "rotation.json"
+  ],
+  "rotationConfigPath": "rotation.json",
+  "contentSource": {
+    "provider": "HadithScreensaverProvider",
+    "catalogPath": "../hadith/catalog.json",
+    "includedRecordTypes": ["hadith", "athar"],
+    "futureModules": ["dua", "quran-tadabbur", "daily"]
+  },
+  "syncPolicy": {
+    "checkOnAppStart": true,
+    "checkOnForeground": true,
+    "checkOnAppleTVWake": true,
+    "minimumRefreshIntervalHours": 6,
+    "atomicCacheActivation": true,
+    "keepLastGoodCacheOnError": true
+  },
+  "fallback": {
+    "enabled": true,
+    "text": "Der Bildschirmschoner-Inhalt ist derzeit nicht verfügbar."
+  }
+}
