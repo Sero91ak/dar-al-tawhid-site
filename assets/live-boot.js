@@ -245,10 +245,7 @@
   }
 
   function enforceHadithGatePlacement() {
-    try {
-      var existing = document.getElementById(HADITH_GATE_ID);
-      if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
-    } catch (e) {}
+    /* Eine Karte kommt nur aus hadith-library-gate.js. */
   }
 
   function scheduleHadithGateGuard() {

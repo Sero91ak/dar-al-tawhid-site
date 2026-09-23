@@ -77,12 +77,12 @@
   function ensureCss() {
     var existing = document.querySelector('link[href*="hadith-library-gate.css"]');
     if (existing) {
-      existing.href = assetPath("hadith-library-gate.css?v=3");
+      existing.href = assetPath("hadith-library-gate.css?v=4");
       return;
     }
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = assetPath("hadith-library-gate.css?v=3");
+    link.href = assetPath("hadith-library-gate.css?v=4");
     document.head.appendChild(link);
   }
 
@@ -144,18 +144,9 @@
   function cardHtml() {
     var open = !!(gateState.enabled && gateState.releasedByUser === true);
     var statusText = open ? "Öffnen" : (gateState.label || DEFAULT_STATE.label);
-    return [
-      '<section id="' + GATE_ID + '" class="dar-hadith-library-gate" aria-label="Ḥadīṯ-Bibliothek" data-dar-hadith-library-open="1">',
-      '  <div class="dar-hadith-library-gate__icon" aria-hidden="true">📚</div>',
-      '  <div class="dar-hadith-library-gate__body">',
-      '    <div class="dar-hadith-library-gate__topline">',
-      '      <h3 class="dar-hadith-library-gate__title">' + esc(gateState.cardTitle || DEFAULT_STATE.cardTitle) + '</h3>',
-      '      <span class="dar-hadith-library-gate__status' + (open ? ' is-open' : '') + '">' + esc(statusText) + '</span>',
-      '    </div>',
-      '    <p class="dar-hadith-library-gate__text">' + esc(gateState.cardSubtitle || DEFAULT_STATE.cardSubtitle) + '</p>',
-      '  </div>',
-      '</section>'
-    ].join("");
+    var title = esc(gateState.cardTitle || DEFAULT_STATE.cardTitle);
+    var subtitle = esc(gateState.cardSubtitle || DEFAULT_STATE.cardSubtitle);
+    return '<button type="button" id="' + GATE_ID + '" class="more-feature-row dar-hadith-library-gate" data-dar-hadith-library-open="1" data-feature-search="hadith hadit bibliothek sharh sarh erklaerung"><span class="feature-icon" aria-hidden="true">📚</span><span><h4>' + title + ' <span class="feature-badge">' + esc(statusText) + '</span></h4><p>' + subtitle + '</p></span></button>';
   }
 
   function removeCard() {
@@ -169,7 +160,7 @@
 
   function findListInside(section) {
     if (!section) return null;
-    return section.querySelector(".list,.more-list,.settings-list,.feature-list,.learning-list,.dar-list,.menu-list,.stack,.items") || section;
+    return section.querySelector(".more-group-grid,.list,.more-list,.settings-list,.feature-list,.learning-list,.dar-list,.menu-list,.stack,.items") || section;
   }
 
   function findLearningPlacement() {
@@ -196,8 +187,6 @@
   }
 
   function mountCard() {
-    removeCard();
-    return;
     ensureCss();
     ensureDataLoader();
 
@@ -234,7 +223,6 @@
   }
 
   function blockLockedRoute() {
-    return;
     if (!isHadithRoute()) return;
     ensureDataLoader();
     if (gateState.enabled && gateState.releasedByUser === true) return;
