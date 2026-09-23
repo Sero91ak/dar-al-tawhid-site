@@ -241,6 +241,7 @@ html.dar-ios-native-app .settings-one-page .notification-section:before{display:
   .dar-setup-hub__row:nth-child(2){border-top:0}
 }
 
+body.is-more-route #dar-ios-setup-assistant{display:none!important}
 /* Hadith-Bibliothek nur Mehr → Lernen & Wissen, nicht im Setup-Hub */
 #dar-setup-hub [data-nav="hadith"],
 .dar-setup-hub [data-nav="hadith"],
