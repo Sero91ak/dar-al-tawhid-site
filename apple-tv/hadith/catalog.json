@@ -4,11 +4,11 @@
   "encoding": "UTF-8",
   "schemaVersion": "1.3",
   "sourceOfTruth": "/apple-tv/hadith/",
-  "totalCount": 22,
-  "publishedCount": 22,
+  "totalCount": 29,
+  "publishedCount": 29,
   "currentSeries": "001-050",
-  "latestPublishedId": "HAD-0022",
-  "nextId": "HAD-0023",
+  "latestPublishedId": "HAD-0030",
+  "nextId": "HAD-0031",
   "policy": {
     "authenticOnly": true,
     "requireVerifiedSharh": true,
@@ -23,8 +23,9 @@
       "label": "HAD-0001 bis HAD-0050",
       "indexPath": "series/001-050/index.json",
       "publishedFrom": "HAD-0001",
-      "publishedTo": "HAD-0022",
-      "publishedCount": 22
+      "publishedTo": "HAD-0030",
+      "publishedCount": 29,
+      "skipped": ["HAD-0023"]
     }
   ]
 }
