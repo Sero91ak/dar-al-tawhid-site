@@ -311,7 +311,7 @@
     }
     var script = document.createElement("script");
     script.setAttribute("defer","");
-    script.src = base() + "hadith-library-gate.js?v=8";
+    script.src = base() + "hadith-library-gate.js?v=9";
     (document.head || document.documentElement).appendChild(script);
   }
   function boot() { loadCss(); loadJs(); }

@@ -124,7 +124,10 @@
         "assets/live-boot.js",
         "assets/hadith-library-gate.js",
         "assets/hadith-library-gate.css",
-        "assets/app-soft-boot.js"
+        "assets/app-soft-boot.js",
+        "test/data/hadith-library-gate.json",
+        "test/data/hadith/",
+        "scripts/build-test-hadith-library.js"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     },

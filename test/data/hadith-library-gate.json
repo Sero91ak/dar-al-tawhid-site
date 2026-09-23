@@ -1,0 +1,29 @@
+{
+  "enabled": true,
+  "status": "test-open",
+  "label": "Test-App · Aufbau sichtbar",
+  "releaseRequired": false,
+  "releasedByUser": true,
+  "targetHash": "#hadith",
+  "cardTitle": "Ḥadīṯ-Bibliothek",
+  "cardSubtitle": "In der Test-App frei zugänglich, während die Sammlung aufgebaut wird.",
+  "lockedMessage": "",
+  "chips": ["Test", "Šarḥ", "Quelle"],
+  "surfaces": {
+    "iosApp": false,
+    "androidWebApp": false,
+    "website": false,
+    "testApp": true,
+    "appleTvScreensaver": false
+  },
+  "visibility": {
+    "showInMoreAreaWhileLocked": true,
+    "allowOpenWhileLocked": true,
+    "showLockedStatus": false,
+    "placement": "learning-and-knowledge-list",
+    "compactListItem": true,
+    "hideOutsideMoreRoute": true,
+    "disableTopFallback": true
+  },
+  "releaseRule": "Nur die Test-App ist geöffnet. Die Besucher-App bleibt gesperrt, bis ausdrücklich live freigegeben wird."
+}
