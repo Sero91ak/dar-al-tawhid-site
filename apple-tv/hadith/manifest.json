@@ -2,7 +2,7 @@
   "project": "DĀR AL TAWḤĪD – Apple TV Ḥadīṯ & Āṯār",
   "language": "de",
   "encoding": "UTF-8",
-  "formatVersion": "1.3",
+  "formatVersion": "1.4",
   "authenticOnly": true,
   "currentSeries": "2051-2150",
   "nextId": "HAD-2151",
@@ -21,7 +21,9 @@
     "rotationMode": "shuffleBag",
     "showSharh": true,
     "showSharhMode": "compact",
-    "requireVerifiedSharh": true
+    "showSharhSource": true,
+    "requireVerifiedSharh": true,
+    "layoutRule": "Ḥadīṯ/Āṯar zuerst; darunter Quelle; danach kurzer geprüfter Sharḥ mit Sharḥ-Quelle, kompakt und bildschirmschonerfreundlich."
   },
   "hadithLibrary": {
     "enabledForTestApp": true,
@@ -37,6 +39,7 @@
     "sourceOfTruth": "apple-tv/hadith/",
     "appleTvScreensaverShowsSharh": true,
     "appleTvScreensaverSharhMode": "compact",
+    "appleTvScreensaverRequiresVerifiedSharh": true,
     "testAppHadithLibraryShowsSharh": true,
     "iosHadithLibraryShowsSharh": true
   },
@@ -44,12 +47,13 @@
     "stepSize": 100,
     "completeBlockBeforeNext": true,
     "sharhRequiredForCompletion": true,
+    "earliestSharhAuditRequired": true,
     "twentyBlocks": [
-      "hadith-with-sharh",
-      "hadith-with-sharh",
-      "hadith-with-sharh",
-      "hadith-with-sharh",
-      "hadith-with-sharh"
+      "hadith-with-earliest-verified-sharh",
+      "hadith-with-earliest-verified-sharh",
+      "hadith-with-earliest-verified-sharh",
+      "hadith-with-earliest-verified-sharh",
+      "hadith-with-earliest-verified-sharh"
     ]
   }
 }
