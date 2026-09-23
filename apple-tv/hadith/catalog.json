@@ -4,11 +4,11 @@
   "encoding": "UTF-8",
   "schemaVersion": "1.3",
   "sourceOfTruth": "/apple-tv/hadith/",
-  "totalCount": 190,
-  "publishedCount": 190,
-  "currentSeries": "201-250",
-  "latestPublishedId": "HAD-0243",
-  "nextId": "HAD-0244",
+  "totalCount": 197,
+  "publishedCount": 197,
+  "currentSeries": "251-300",
+  "latestPublishedId": "HAD-0259",
+  "nextId": "HAD-0264",
   "policy": {
     "authenticOnly": true,
     "requireVerifiedSharh": true,
@@ -59,9 +59,18 @@
       "label": "HAD-0201 bis HAD-0250",
       "indexPath": "series/201-250/index.json",
       "publishedFrom": "HAD-0201",
-      "publishedTo": "HAD-0243",
-      "publishedCount": 24,
-      "skipped": ["HAD-0202", "HAD-0203", "HAD-0206", "HAD-0207", "HAD-0209", "HAD-0210", "HAD-0212", "HAD-0213", "HAD-0214", "HAD-0215", "HAD-0216", "HAD-0217", "HAD-0219", "HAD-0223", "HAD-0225", "HAD-0226", "HAD-0227", "HAD-0238", "HAD-0242"]
+      "publishedTo": "HAD-0248",
+      "publishedCount": 25,
+      "skipped": ["HAD-0202", "HAD-0203", "HAD-0206", "HAD-0207", "HAD-0209", "HAD-0210", "HAD-0212", "HAD-0213", "HAD-0214", "HAD-0215", "HAD-0216", "HAD-0217", "HAD-0219", "HAD-0223", "HAD-0225", "HAD-0226", "HAD-0227", "HAD-0238", "HAD-0242", "HAD-0244", "HAD-0245", "HAD-0246", "HAD-0247", "HAD-0249", "HAD-0250"]
+    },
+    {
+      "id": "251-300",
+      "label": "HAD-0251 bis HAD-0300",
+      "indexPath": "series/251-300/index.json",
+      "publishedFrom": "HAD-0251",
+      "publishedTo": "HAD-0259",
+      "publishedCount": 6,
+      "skipped": ["HAD-0252", "HAD-0255", "HAD-0256", "HAD-0260", "HAD-0261", "HAD-0262", "HAD-0263"]
     }
   ]
 }
