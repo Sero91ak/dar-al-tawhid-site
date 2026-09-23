@@ -154,12 +154,20 @@
     else setTimeout(done, 16);
   }
 
+  function isOfficialIosApp() {
+    try {
+      return window.DAR_IOS_NATIVE_APP === true || /DarAlTawhid-iOS/i.test(String(navigator.userAgent || ""));
+    } catch (e) {
+      return false;
+    }
+  }
+
   function bindFeedHeaderGuard() {
     scheduleDomWork(stripFeedDuplicateHeader);
     window.addEventListener("hashchange", function () {
       scheduleDomWork(stripFeedDuplicateHeader);
     });
-    if (document.documentElement) {
+    if (document.documentElement && !isOfficialIosApp()) {
       new MutationObserver(function () {
         scheduleDomWork(stripFeedDuplicateHeader);
       }).observe(document.documentElement, {
@@ -174,7 +182,7 @@
     window.addEventListener("hashchange", scheduleChipPrune);
     window.addEventListener("load", scheduleChipPrune);
     document.addEventListener("DOMContentLoaded", scheduleChipPrune);
-    if (document.documentElement) {
+    if (document.documentElement && !isOfficialIosApp()) {
       new MutationObserver(function () {
         scheduleChipPrune();
       }).observe(document.documentElement, {
@@ -267,7 +275,7 @@
     window.addEventListener("load", scheduleHadithGateGuard);
     window.addEventListener("pageshow", scheduleHadithGateGuard);
     document.addEventListener("dar:render", scheduleHadithGateGuard);
-    if (document.documentElement) {
+    if (document.documentElement && !isOfficialIosApp()) {
       new MutationObserver(function () {
         scheduleHadithGateGuard();
       }).observe(document.documentElement, {

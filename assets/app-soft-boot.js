@@ -297,23 +297,23 @@
   function loadCss() {
     var existing = document.querySelector('link[href*="hadith-library-gate.css"]');
     if (existing) {
-      existing.href = base() + "hadith-library-gate.css?v=5";
+      existing.href = base() + "hadith-library-gate.css?v=6";
       return;
     }
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = base() + "hadith-library-gate.css?v=5";
+    link.href = base() + "hadith-library-gate.css?v=6";
     document.head.appendChild(link);
   }
   function loadJs() {
     var existing = document.querySelector('script[src*="hadith-library-gate.js"]');
     if (existing) {
-      existing.src = base() + "hadith-library-gate.js?v=5";
+      existing.src = base() + "hadith-library-gate.js?v=6";
       return;
     }
     var script = document.createElement("script");
-    script.defer = true;
-    script.src = base() + "hadith-library-gate.js?v=5";
+    script.setAttribute("defer","");
+    script.src = base() + "hadith-library-gate.js?v=6";
     (document.head || document.documentElement).appendChild(script);
   }
   function boot() { loadCss(); loadJs(); }
