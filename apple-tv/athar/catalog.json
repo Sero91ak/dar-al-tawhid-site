@@ -1,0 +1,26 @@
+{
+  "project": "DĀR AL TAWḤĪD – Āṯār & Aussagen der Salaf",
+  "schemaVersion": "1.0",
+  "contentType": "athar",
+  "status": "planned",
+  "target": ["tvOS", "iOS", "iPadOS"],
+  "remoteLoad": true,
+  "offlineCache": true,
+  "contentVersion": 0,
+  "entriesCount": 0,
+  "lastUpdated": "2026-09-23T00:00:00Z",
+  "entriesIndexPath": "entries-index.json",
+  "entriesPaths": [],
+  "scope": "Ṣaḥābah, Tābiʿīn und Salaf",
+  "syncPolicy": {
+    "checkOnAppStart": true,
+    "checkOnForeground": true,
+    "minimumRefreshIntervalHours": 6,
+    "atomicCacheActivation": true,
+    "keepLastGoodCacheOnError": true
+  },
+  "fallback": {
+    "enabled": true,
+    "text": "Für diesen Bereich liegen derzeit keine geprüften Āṯār vor."
+  }
+}
