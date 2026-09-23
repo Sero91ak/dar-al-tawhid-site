@@ -301,7 +301,7 @@
     }
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = base() + "hadith-library-gate.css?v=7";
+    link.href = base() + "hadith-library-gate.css?v=8";
     document.head.appendChild(link);
   }
   function loadJs() {
@@ -311,7 +311,7 @@
     }
     var script = document.createElement("script");
     script.setAttribute("defer","");
-    script.src = base() + "hadith-library-gate.js?v=7";
+    script.src = base() + "hadith-library-gate.js?v=8";
     (document.head || document.documentElement).appendChild(script);
   }
   function boot() { loadCss(); loadJs(); }

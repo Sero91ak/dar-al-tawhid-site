@@ -247,7 +247,7 @@
   }
 
   function enforceHadithGatePlacement() {
-    /* Eine Karte kommt nur aus hadith-library-gate.js. */
+    /* Katalogzeile in Mehr bleibt. Extra-Gate-Karte nicht einsetzen. */
   }
 
   function scheduleHadithGateGuard() {

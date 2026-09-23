@@ -1,10 +1,9 @@
-/* DĀR AL TAWḤĪD – Global Hadith-Bibliothek Gate */
+/* DĀR AL TAWḤĪD – Hadith-Bibliothek: eine Katalogzeile, gesperrt bis Freigabe */
 (function () {
   "use strict";
-  if (window.__DAR_HADITH_LIBRARY_GATE_V3) return;
-  window.__DAR_HADITH_LIBRARY_GATE_V3 = true;
+  if (window.__DAR_HADITH_LIBRARY_GATE_V4) return;
+  window.__DAR_HADITH_LIBRARY_GATE_V4 = true;
 
-  var GATE_ID = "dar-hadith-library-gate";
   var TOAST_ID = "dar-hadith-library-gate-toast";
   var DATA_LOADER_ID = "dar-hadith-library-data-loader";
   var DEFAULT_STATE = {
@@ -14,10 +13,7 @@
     releaseRequired: true,
     releasedByUser: false,
     targetHash: "#hadith-bibliothek",
-    cardTitle: "Ḥadīṯ-Bibliothek",
-    cardSubtitle: "Šarḥ wird vorbereitet.",
-    lockedMessage: "Ḥadīṯ-Bibliothek ist noch nicht freigegeben.",
-    chips: ["Šarḥ", "Quelle"]
+    lockedMessage: "Ḥadīṯ-Bibliothek ist noch nicht freigegeben."
   };
   var gateState = DEFAULT_STATE;
 
@@ -43,20 +39,8 @@
     var script = document.createElement("script");
     script.id = DATA_LOADER_ID;
     script.src = assetPath("hadith-library-data.js?v=3");
-    script.setAttribute("defer","");
+    script.setAttribute("defer", "");
     document.head.appendChild(script);
-  }
-
-  function esc(value) {
-    return String(value == null ? "" : value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/\"/g, "&quot;");
-  }
-
-  function normalizeText(value) {
-    return String(value == null ? "" : value).replace(/\s+/g, " ").trim().toLowerCase();
   }
 
   function currentHashKey() {
@@ -64,24 +48,20 @@
     return hash.split(/[/?&]/)[0].toLowerCase();
   }
 
-  function isMoreRoute() {
-    var key = currentHashKey();
-    return key === "more" || key === "mehr";
-  }
-
   function isHadithRoute() {
     var key = currentHashKey();
     return key === "hadith" || key === "hadith-library" || key === "hadith-bibliothek" || key === "hadithbibliothek";
   }
 
+  function isOpen() {
+    return !!(gateState.enabled && gateState.releasedByUser === true);
+  }
+
   function ensureCss() {
-    var existing = document.querySelector('link[href*="hadith-library-gate.css"]');
-    if (existing) {
-      return;
-    }
+    if (document.querySelector('link[href*="hadith-library-gate.css"]')) return;
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = assetPath("hadith-library-gate.css?v=7");
+    link.href = assetPath("hadith-library-gate.css?v=8");
     document.head.appendChild(link);
   }
 
@@ -90,7 +70,6 @@
     var next = {};
     Object.keys(DEFAULT_STATE).forEach(function (key) { next[key] = DEFAULT_STATE[key]; });
     Object.keys(data).forEach(function (key) { next[key] = data[key]; });
-    if (!Array.isArray(next.chips)) next.chips = DEFAULT_STATE.chips;
     return next;
   }
 
@@ -109,14 +88,8 @@
 
   function toast(message) {
     try {
-      if (window.__darToast) {
-        window.__darToast(message);
-        return;
-      }
-      if (typeof showToast === "function") {
-        showToast(message);
-        return;
-      }
+      if (window.__darToast) { window.__darToast(message); return; }
+      if (typeof showToast === "function") { showToast(message); return; }
     } catch (e) {}
     var node = document.getElementById(TOAST_ID);
     if (!node) {
@@ -131,111 +104,51 @@
     node.__darTimer = setTimeout(function () { node.classList.remove("is-visible"); }, 2600);
   }
 
+  function stripInjectedCard() {
+    var extra = document.getElementById("dar-hadith-library-gate");
+    if (extra && extra.parentNode && extra.getAttribute("data-nav") !== "hadith") {
+      extra.parentNode.removeChild(extra);
+    }
+  }
+
   function navigateToLibrary() {
     ensureDataLoader();
-    if (!gateState.enabled || gateState.releasedByUser !== true) {
+    if (!isOpen()) {
       toast(gateState.lockedMessage || DEFAULT_STATE.lockedMessage);
       return;
     }
     location.hash = gateState.targetHash || "#hadith-bibliothek";
   }
 
-  function cardHtml() {
-    var open = !!(gateState.enabled && gateState.releasedByUser === true);
-    var statusText = open ? "Öffnen" : (gateState.label || DEFAULT_STATE.label);
-    var title = esc(gateState.cardTitle || DEFAULT_STATE.cardTitle);
-    var subtitle = esc(gateState.cardSubtitle || DEFAULT_STATE.cardSubtitle);
-    return '<button type="button" id="' + GATE_ID + '" class="more-feature-row dar-hadith-library-gate" data-dar-hadith-library-open="1" data-feature-search="hadith hadit bibliothek sharh sarh erklaerung"><span class="feature-icon" aria-hidden="true">📚</span><span><h4>' + title + ' <span class="feature-badge">' + esc(statusText) + '</span></h4><p>' + subtitle + '</p></span></button>';
-  }
-
-  function removeCard() {
-    var existing = document.getElementById(GATE_ID);
-    if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
-  }
-
-  function appRoot() {
-    return document.getElementById("appView") || document.body;
-  }
-
-  function findListInside(section) {
-    if (!section) return null;
-    return section.querySelector(".more-group-grid,.list,.more-list,.settings-list,.feature-list,.learning-list,.dar-list,.menu-list,.stack,.items") || section;
-  }
-
-  function findLearningPlacement() {
-    var app = appRoot();
-    if (!app) return null;
-    var groups = app.querySelectorAll(".more-group");
-    for (var i = 0; i < groups.length; i += 1) {
-      var heading = groups[i].querySelector("h3");
-      var text = normalizeText(heading && heading.textContent);
-      if (text !== "lernen & wissen") continue;
-      var grid = groups[i].querySelector(".more-group-grid");
-      if (grid && !groups[i].closest("#dar-setup-hub,.dar-setup-hub,.settings-one-page")) return grid;
-    }
-    return null;
-  }
-
-  function mountCard() {
-    try {
-    ensureCss();
-    ensureDataLoader();
-
-    if (!isMoreRoute()) {
-      removeCard();
-      return;
-    }
-
-    var target = findLearningPlacement();
-    if (!target) {
-      removeCard();
-      return;
-    }
-
-    removeCard();
-    var wrap = document.createElement("div");
-    wrap.innerHTML = cardHtml();
-    var card = wrap.firstElementChild;
-    if (!card) return;
-    target.appendChild(card);
-    bind();
-    } catch (e) {}
-  }
-
-  function bind() {
-    var card = document.getElementById(GATE_ID);
-    if (!card || card.getAttribute("data-bound") === "1") return;
-    card.setAttribute("data-bound", "1");
-    card.addEventListener("click", function (ev) {
-      var opener = ev.target && ev.target.closest && ev.target.closest("[data-dar-hadith-library-open]");
-      if (!opener) return;
-      ev.preventDefault();
-      navigateToLibrary();
+  function bindCatalogRow() {
+    document.querySelectorAll(".more-feature-row[data-nav='hadith']").forEach(function (row) {
+      if (row.getAttribute("data-dar-hadith-bound") === "1") return;
+      row.setAttribute("data-dar-hadith-bound", "1");
+      row.addEventListener("click", function (ev) {
+        if (isOpen()) return;
+        ev.preventDefault();
+        ev.stopPropagation();
+        navigateToLibrary();
+      }, true);
     });
   }
 
   function blockLockedRoute() {
     if (!isHadithRoute()) return;
-    ensureDataLoader();
-    if (gateState.enabled && gateState.releasedByUser === true) return;
+    if (isOpen()) return;
     toast(gateState.lockedMessage || DEFAULT_STATE.lockedMessage);
     try { location.hash = "#more"; } catch (e) {}
-    setTimeout(mountCard, 80);
   }
 
   function refresh() {
-    if (!isMoreRoute() && !isHadithRoute()) {
-      removeCard();
-      return;
-    }
+    ensureCss();
     ensureDataLoader();
+    stripInjectedCard();
     loadGateState().then(function () {
       blockLockedRoute();
-      mountCard();
+      bindCatalogRow();
     });
   }
-
-  function observe() {}
 
   window.DARHadithLibraryGate = {
     refresh: refresh,
@@ -246,10 +159,9 @@
   };
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () { refresh(); observe(); });
+    document.addEventListener("DOMContentLoaded", refresh);
   } else {
     refresh();
-    observe();
   }
   window.addEventListener("hashchange", function () { setTimeout(refresh, 40); });
   document.addEventListener("dar:render", function () { setTimeout(refresh, 40); });

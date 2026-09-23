@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1789319677748 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v994";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v995";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -26467,7 +26467,9 @@ function renderQuizRepeatPage(){const ids=[...getQuizMarkedIds()].filter(id=>qui
 function bindQuizEvents(){if(currentRoute.view!=="quiz")return;__quizQuestionShownAt=Date.now();quizTelemetryFlushAsync();const start=(quick=false)=>{const cfg=quick?{topic:"all",level:"all",count:5,mode:"standard"}:quizConfig();if(!quizQuestions().length)return;const s=quizBuildSession(cfg);saveQuizSession(s);quizTelemetryTrackSession(s,"started");navigate("quiz","session")};const startBtn=$("quizStartBtn");if(startBtn)startBtn.onclick=()=>start(false);const quickBtn=$("quizQuickBtn");if(quickBtn)quickBtn.onclick=()=>start(true);const resumeBtn=$("quizResumeBtn");if(resumeBtn)resumeBtn.onclick=()=>navigate("quiz","session");const repeatBtn=$("quizRepeatStartBtn");if(repeatBtn)repeatBtn.onclick=()=>{const ids=[...getQuizMarkedIds()].filter(id=>quizQuestionById(id));if(!ids.length){alert("Noch keine gemerkten Fragen vorhanden.");return}saveQuizSession(quizBuildSession({topic:"all",level:"all",count:ids.length,mode:"lernen"},ids));navigate("quiz","session")};const newBtn=$("quizNewBtn");if(newBtn)newBtn.onclick=()=>{clearQuizSession();navigate("quiz","home")};const endBtn=$("quizEndBtn");if(endBtn)endBtn.onclick=()=>{if(confirm("Quiz wirklich beenden? Dein Fortschritt bleibt gespeichert.")){const s=quizSession();if(s){s.finished=true;s.updatedAt=Date.now();saveQuizHistoryEntry(s);quizTelemetryTrackSession(s,"abandoned");saveQuizSession(s)}navigate("quiz","session");render()}};document.querySelectorAll("[data-quiz-answer]").forEach(btn=>{btn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);if(!q)return;const existing=s.answers?.[q.id];if(existing?.evaluated)return;const idx=Number(btn.getAttribute("data-quiz-answer"));const isCorrect=idx===Number(q.correctIndex);s.answers=s.answers||{};s.answers[q.id]={selectedIndex:idx,evaluated:true,correct:isCorrect};if(!isCorrect){s.retries=s.retries||{};s.retries[q.id]=(Number(s.retries[q.id]||0)+1)}const attemptNo=Number(s.retries?.[q.id]||0)+1;quizTelemetryTrackAttempt(s,q,idx,isCorrect,attemptNo,attemptNo===1);s.updatedAt=Date.now();saveQuizSession(s);render()}});const prevBtn=$("quizPrevBtn");if(prevBtn)prevBtn.onclick=()=>{const s=quizSession();if(!s)return;s.index=Math.max(0,(s.index||0)-1);s.updatedAt=Date.now();saveQuizSession(s);render()};const retryBtn=$("quizRetryBtn");if(retryBtn)retryBtn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);if(!q)return;if(s.answers)s.answers[q.id]={selectedIndex:null,evaluated:false,correct:false};s.updatedAt=Date.now();saveQuizSession(s);render()};const rememberBtn=$("quizRememberBtn");if(rememberBtn)rememberBtn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);if(!q)return;s.bookmarked=s.bookmarked||{};const key=String(q.id);const active=toggleQuizMarkedId(key);if(active)s.bookmarked[key]=true;else delete s.bookmarked[key];s.updatedAt=Date.now();saveQuizSession(s);render()};const nextBtn=$("quizNextBtn");if(nextBtn)nextBtn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);const answer=s.answers?.[q?.id];if(!answer?.evaluated)return;if(s.index>=s.questionIds.length-1){s.finished=true;s.updatedAt=Date.now();saveQuizHistoryEntry(s);quizTelemetryTrackSession(s,"completed");saveQuizSession(s);navigate("quiz","session");render();return}s.index+=1;s.updatedAt=Date.now();saveQuizSession(s);render()}}document.querySelectorAll("[data-quiz-result-tab]").forEach(btn=>{btn.onclick=()=>{const tab=btn.getAttribute("data-quiz-result-tab");document.querySelectorAll("[data-quiz-result-tab]").forEach(b=>b.classList.toggle("active",b===btn));document.querySelectorAll("[data-quiz-result-panel]").forEach(p=>{const on=p.getAttribute("data-quiz-result-panel")===tab;p.classList.toggle("active",on);p.hidden=!on})}});document.querySelectorAll("[data-quiz-audit-filter]").forEach(btn=>{btn.onclick=()=>{const filter=btn.getAttribute("data-quiz-audit-filter");document.querySelectorAll("[data-quiz-audit-filter]").forEach(b=>b.classList.toggle("active",b===btn));document.querySelectorAll(".quiz-audit-fold").forEach(det=>{const state=det.getAttribute("data-quiz-audit-state");det.hidden=filter!=="all"&&state!==filter})}});
 const FEATURE_PIN_KEY="darFeaturePinsV1";
 function confineHadithLibraryEntry(){
-  document.querySelectorAll(".more-feature-row[data-nav='hadith'],.home-v380-lib-card[data-nav='hadith']").forEach(function(el){el.remove()});
+  document.querySelectorAll(".home-v380-lib-card[data-nav='hadith']").forEach(function(el){el.remove()});
+  var extra=document.getElementById("dar-hadith-library-gate");
+  if(extra&&!extra.getAttribute("data-nav"))extra.remove();
 }
 function featureCatalog(){
   const testOnly=typeof IS_TEST_PATH!=="undefined"&&IS_TEST_PATH;
@@ -26484,6 +26486,7 @@ function featureCatalog(){
     {id:"duas",title:"Duʿāʾ",icon:"🤲",desc:(DUAS?.length||0)+" bekannte Duʿāʾ nach Themen.",button:"Öffnen",nav:"duas",group:"Lernen & Wissen"},
     {id:"scholars",title:"Gelehrte",icon:"👤",desc:scholarCount+" Namen und Zuordnungen.",button:"Ansehen",nav:"scholars",group:"Lernen & Wissen"},
     {id:"books",title:"Quellenbibliothek",icon:"📘",desc:(()=>{const api=window.DARCanonicalSourceLibrary;const n=api&&typeof api.getReadyBookCount==="function"?api.getReadyBookCount():(api&&api.isReady&&api.isReady()?api.getBookCount():null);return n==null?"Geprüfte historische Werke und zitierte Gelehrte.":`${n} geprüfte Werke und zitierte Gelehrte.`})(),button:"Ansehen",nav:"books",group:"Lernen & Wissen",badge:"Geprüft"},
+    {id:"hadith",title:"Hadith-Bibliothek",icon:"📜",desc:"Hadith-Werke mit Büchern, Kapiteln und Filterung.",button:"Öffnen",nav:"hadith",group:"Lernen & Wissen",badge:"Hadith"},
     {id:"prayer",title:"Gebetszeiten",icon:"🕌",desc:"Zeiten, Standort, Qibla und Erinnerungen.",button:"Öffnen",nav:"prayer",group:"Alltag & Gebet",badge:"Praktisch"},
     {id:"notifications",title:"Benachrichtigungen",icon:"🔔",desc:"Gebete, Duʿāʾ und Empfehlungen einzeln einstellen.",button:"Einstellen",nav:"notifications",group:"Alltag & Gebet",badge:"Test"},
     {id:"jummah",title:"Jumuʿah",icon:"🕌",desc:"Freitagsgebet und Erinnerung.",button:"Öffnen",nav:"jummah",group:"Alltag & Gebet"},
@@ -27274,7 +27277,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v994";
+const APP_BUILD_ID="app-shell-v995";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
