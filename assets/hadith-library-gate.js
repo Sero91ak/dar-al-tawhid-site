@@ -77,12 +77,11 @@
   function ensureCss() {
     var existing = document.querySelector('link[href*="hadith-library-gate.css"]');
     if (existing) {
-      existing.href = assetPath("hadith-library-gate.css?v=6");
       return;
     }
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = assetPath("hadith-library-gate.css?v=6");
+    link.href = assetPath("hadith-library-gate.css?v=7");
     document.head.appendChild(link);
   }
 
