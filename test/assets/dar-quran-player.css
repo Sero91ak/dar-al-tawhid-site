@@ -58,6 +58,15 @@ html.is-quran-player-route body.dar-quran-player-open .view{
 }
 html.is-quran-player-route body.has-bottom-nav{padding-bottom:0!important}
 
+#darQuranPlayer,#darQuranPlayer *{
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-touch-callout:none;
+}
+#darQuranPlayer input,#darQuranPlayer textarea{
+  -webkit-user-select:auto;
+  user-select:auto;
+}
 #darQuranPlayer{
   position:fixed;inset:0;z-index:240;
   width:100vw;height:100dvh;max-height:100dvh;overflow:hidden!important;

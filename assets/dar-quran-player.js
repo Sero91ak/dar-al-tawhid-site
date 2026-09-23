@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 956;
+    var PLAYER_BUILD = 957;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -104,34 +104,15 @@
   var allowAdvance = false;
   var engine = { started: false, lastUrl: "" };
 
-  var lastSysVolAt = 0;
-  function usesSystemVolume() {
-    return isOfficialIosApp();
-  }
-  function postSystemVolume(v) {
-    var now = Date.now();
-    if (now - lastSysVolAt < 40) return;
-    lastSysVolAt = now;
-    try {
-      var h = window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.darQuranNowPlaying;
-      if (h) h.postMessage({ volume: v });
-    } catch (eVol) {}
-  }
   function armVolumeFromGesture() {}
-  function applyVolume(fromUi) {
+  function applyVolume() {
     var v = Math.max(0, Math.min(1, Number(state.volume)));
     if (!isFinite(v)) v = 1;
     state.volume = v;
     var a = audioEl();
     a.defaultMuted = false;
-    if (usesSystemVolume()) {
-      try { a.muted = false; } catch (eM) {}
-      try { a.volume = 1; } catch (e) {}
-      if (fromUi) postSystemVolume(v);
-    } else {
-      a.muted = v === 0;
-      try { a.volume = v; } catch (e2) {}
-    }
+    a.muted = v === 0;
+    try { a.volume = v; } catch (eVol) {}
     var track = document.querySelector("#darQuranPlayer [data-dqp-vol-track]");
     var fillPct = (v * 100) + "%";
     if (track) track.style.setProperty("--dqp-fill", fillPct);
@@ -139,7 +120,7 @@
     if (vfill) vfill.style.transform = "scaleX(" + Math.max(0, Math.min(1, v)).toFixed(4) + ")";
     var vol = document.querySelector("#darQuranPlayer [data-dqp=vol]");
     if (vol) {
-      if (!fromUi) vol.value = String(Math.round(v * 100));
+      vol.value = String(Math.round(v * 100));
       vol.style.setProperty("--dqp-fill", fillPct);
     }
     var hint = document.querySelector("[data-dqp-vol-hint]");
@@ -154,7 +135,7 @@
     var ny = 1 - ((clientY - r.top) / h);
     var n = (h > w * 1.2) ? ny : nx;
     state.volume = Math.max(0, Math.min(1, n));
-    applyVolume(true);
+    applyVolume();
   }
   function bindVolumeSlider(root) {
     if (!root) return;
@@ -166,7 +147,7 @@
       armVolumeFromGesture();
       var n = Number(vol.value) / 100;
       state.volume = isFinite(n) ? Math.max(0, Math.min(1, n)) : 1;
-      applyVolume(true);
+      applyVolume();
       saveState();
     }
     vol.addEventListener("pointerdown", function (e) {
@@ -602,10 +583,7 @@
     paintMini();
   }
   function runPlay(a, gen) {
-    applyVolume(true);
-    if (volCtx && volCtx.state === "suspended") {
-      try { volCtx.resume(); } catch (eVolR) {}
-    }
+    applyVolume();
     logAudio("play request", {
       surah: state.surah,
       ayah: state.ayah,
@@ -2440,7 +2418,7 @@
       vol.addEventListener("click", function (e) { e.stopPropagation(); });
       vol.addEventListener("input", function () {
         state.volume = Number(vol.value) / 100;
-        applyVolume(true);
+        applyVolume();
       });
     }
   }
@@ -3015,7 +2993,7 @@
         armVolumeFromGesture();
         var nv = Number(ev.target.value) / 100;
         state.volume = isFinite(nv) ? Math.max(0, Math.min(1, nv)) : 1;
-        applyVolume(true);
+        applyVolume();
         return;
       }
       if (ev.target && ev.target.getAttribute("data-dqp") === "sleep-mins") {
