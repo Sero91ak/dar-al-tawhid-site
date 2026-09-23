@@ -82,6 +82,8 @@ actor QuranContentService {
     }
 
     func loadSurahList() async throws -> [QuranSurahSummary] {
+        _ = await RemoteContentSyncService.shared.syncAll(trigger: .contentOpen)
+
         do {
             let url = URL(string: "https://api.alquran.cloud/v1/surah")!
             let response: QuranSurahListResponse = try await fetch(url)
@@ -103,6 +105,8 @@ actor QuranContentService {
         reciterIdentifier: String,
         reciterService: QuranReciterService = .shared
     ) async throws -> QuranSynchronizedSurah {
+        _ = await RemoteContentSyncService.shared.syncAll(trigger: .contentOpen)
+
         guard (1...114).contains(surah) else { throw URLError(.badURL) }
 
         let cacheName = "quran-surah-\(surah)-\(safeFilename(reciterIdentifier)).json"
