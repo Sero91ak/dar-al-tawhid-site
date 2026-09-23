@@ -6,6 +6,7 @@
 
   var GATE_ID = "dar-hadith-library-gate";
   var TOAST_ID = "dar-hadith-library-gate-toast";
+  var DATA_LOADER_ID = "dar-hadith-library-data-loader";
   var DEFAULT_STATE = {
     enabled: false,
     status: "in-progress",
@@ -16,7 +17,7 @@
     cardTitle: "Ḥadīṯ-Bibliothek",
     cardSubtitle: "Nach Buchkategorie, Kapitel, Seite und Nummer vorbereitet",
     lockedMessage: "Die Ḥadīṯ-Bibliothek ist vorbereitet, aber noch nicht freigegeben.",
-    chips: ["Buchkategorie", "Kapitel", "Seite", "Sharḥ"]
+    chips: ["Buchkategorie", "Kapitel", "Seite", "Šarḥ"]
   };
   var gateState = DEFAULT_STATE;
 
@@ -34,6 +35,16 @@
 
   function dataPath(file) {
     return basePath() + "data/" + file;
+  }
+
+  function ensureDataLoader() {
+    if (window.DARHadithLibraryData) return;
+    if (document.getElementById(DATA_LOADER_ID)) return;
+    var script = document.createElement("script");
+    script.id = DATA_LOADER_ID;
+    script.src = assetPath("hadith-library-data.js?v=1");
+    script.defer = true;
+    document.head.appendChild(script);
   }
 
   function esc(value) {
@@ -114,6 +125,7 @@
   }
 
   function navigateToLibrary() {
+    ensureDataLoader();
     if (!gateState.enabled || gateState.releasedByUser !== true) {
       toast(gateState.lockedMessage || DEFAULT_STATE.lockedMessage);
       return;
@@ -150,6 +162,7 @@
 
   function mountCard() {
     ensureCss();
+    ensureDataLoader();
     if (!isMoreRoute()) return;
     var target = findMountTarget();
     if (!target) return;
@@ -186,6 +199,7 @@
 
   function blockLockedRoute() {
     if (!isHadithRoute()) return;
+    ensureDataLoader();
     if (gateState.enabled && gateState.releasedByUser === true) return;
     toast(gateState.lockedMessage || DEFAULT_STATE.lockedMessage);
     try { location.hash = "#more"; } catch (e) {}
@@ -193,6 +207,7 @@
   }
 
   function refresh() {
+    ensureDataLoader();
     loadGateState().then(function () {
       blockLockedRoute();
       mountCard();
@@ -213,7 +228,9 @@
   window.DARHadithLibraryGate = {
     refresh: refresh,
     open: navigateToLibrary,
-    state: function () { return gateState; }
+    state: function () { return gateState; },
+    data: function () { return window.DARHadithLibraryData || null; },
+    ensureDataLoader: ensureDataLoader
   };
 
   if (document.readyState === "loading") {
