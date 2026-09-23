@@ -1,0 +1,152 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-2546-2570",
+  "series": "2451-2650",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "Der 25er-Unterblock wurde unter Regel v6 neu erstellt und vollständig geprüft. Alle Datensätze besitzen eine eindeutige Ṣaḥīḥ-Muslim-Quelle, sharhStatus=verified, einen konkreten Šarḥ-Nachweis und die dokumentierte Prüfung der al-Māzirī-Priorität vor Qāḍī ʿIyāḍ. Der Block überschreitet die Seriengrenze: HAD-2546–2550 liegen in 2451-2550, HAD-2551–2570 in 2551-2650. Muslim 2842 wurde wegen der bekannten Überlieferungsdiskussion bewusst nicht in diesen Hauptblock aufgenommen. Unsichere Druckseiten wurden nicht geschätzt.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "appleTvScreensaverShowsSharh": true,
+    "perRecordImmediateActivation": true,
+    "blockActivationAllowed": true
+  },
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
+  "records": [
+    {
+      "id": "HAD-2546",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2547",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2548",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2549",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2550",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2551",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2552",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2553",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2554",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2555",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2556",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2557",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2558",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2559",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2560",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2561",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2562",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2563",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2564",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2565",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2566",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2567",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2568",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2569",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2570",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    }
+  ]
+}
