@@ -66,7 +66,7 @@
 
   function isMoreRoute() {
     var key = currentHashKey();
-    return key === "more" || key === "mehr" || key === "settings" || key === "setup";
+    return key === "more" || key === "mehr";
   }
 
   function isHadithRoute() {
@@ -77,12 +77,12 @@
   function ensureCss() {
     var existing = document.querySelector('link[href*="hadith-library-gate.css"]');
     if (existing) {
-      existing.href = assetPath("hadith-library-gate.css?v=4");
+      existing.href = assetPath("hadith-library-gate.css?v=5");
       return;
     }
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = assetPath("hadith-library-gate.css?v=4");
+    link.href = assetPath("hadith-library-gate.css?v=5");
     document.head.appendChild(link);
   }
 
@@ -166,27 +166,19 @@
   function findLearningPlacement() {
     var app = appRoot();
     if (!app) return null;
-
-    var headings = app.querySelectorAll("h1,h2,h3,h4,.section-title,.more-section-title,.group-title,.card-title,.panel-title,.settings-title,.view-title,strong,b");
-    for (var i = 0; i < headings.length; i += 1) {
-      var text = normalizeText(headings[i].textContent);
-      if (text === "lernen & wissen" || text.indexOf("lernen & wissen") === 0) {
-        var section = headings[i].closest("section,article,.more-section,.settings-group,.premium-card,.card,.panel,.dar-section,.learn-section") || headings[i].parentElement;
-        return findListInside(section);
-      }
+    var groups = app.querySelectorAll(".more-group");
+    for (var i = 0; i < groups.length; i += 1) {
+      var heading = groups[i].querySelector("h3");
+      var text = normalizeText(heading && heading.textContent);
+      if (text !== "lernen & wissen") continue;
+      var grid = groups[i].querySelector(".more-group-grid");
+      if (grid && !groups[i].closest("#dar-setup-hub,.dar-setup-hub,.settings-one-page")) return grid;
     }
-
-    var blocks = app.querySelectorAll("section,article,.more-section,.settings-group,.premium-card,.card,.panel,.dar-section,.learn-section");
-    for (var j = 0; j < blocks.length; j += 1) {
-      var blockText = normalizeText(blocks[j].textContent);
-      var hasLearningItems = blockText.indexOf("die propheten") !== -1 || blockText.indexOf("din-quiz") !== -1 || blockText.indexOf("beiträge") !== -1 || blockText.indexOf("qurʾān") !== -1 || blockText.indexOf("qur'an") !== -1;
-      if (hasLearningItems) return findListInside(blocks[j]);
-    }
-
     return null;
   }
 
   function mountCard() {
+    try {
     ensureCss();
     ensureDataLoader();
 
@@ -208,6 +200,7 @@
     if (!card) return;
     target.appendChild(card);
     bind();
+    } catch (e) {}
   }
 
   function bind() {
@@ -243,17 +236,7 @@
     });
   }
 
-  function observe() {
-    try {
-      var root = appRoot();
-      if (!root) return;
-      var mo = new MutationObserver(function () {
-        if (isMoreRoute()) setTimeout(mountCard, 60);
-        else removeCard();
-      });
-      mo.observe(root, { childList: true, subtree: true });
-    } catch (e) {}
-  }
+  function observe() {}
 
   window.DARHadithLibraryGate = {
     refresh: refresh,

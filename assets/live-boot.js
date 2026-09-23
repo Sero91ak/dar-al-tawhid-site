@@ -101,6 +101,7 @@
   function shouldPruneNode(el) {
     if (!el || el.nodeType !== 1) return false;
     if (el.matches(SKIP_ANCESTORS) || el.closest(SKIP_ANCESTORS)) return false;
+    if (el.closest("#dar-hadith-library-gate,.more-feature-row,#dar-setup-hub,.dar-setup-hub")) return false;
     var tagName = el.tagName;
     var cls = String(el.className || "");
     var text = foldText(el.textContent || "");
@@ -123,6 +124,7 @@
     root.querySelectorAll(selectors).forEach(function (el) {
       if (!el || el.nodeType !== 1) return;
       if (el.matches(SKIP_ANCESTORS) || el.closest(SKIP_ANCESTORS)) return;
+      if (el.closest("#dar-hadith-library-gate,.more-feature-row,#dar-setup-hub,.dar-setup-hub")) return;
       var hasUsefulChild = el.querySelector("button,a,input,select,textarea,img,svg");
       var hasText = foldText(el.textContent || "").length > 0;
       if (!hasUsefulChild && !hasText) {
