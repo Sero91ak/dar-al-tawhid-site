@@ -94,16 +94,16 @@ struct HadithCardView: View {
     }
 }
 
-/// Apple-TV-Bildschirmschoner: nur Ḥadīṯ/Āṯar und Quelle, kein Sharḥ.
+/// Apple-TV-Bildschirmschoner: Ḥadīṯ/Āṯar, Quelle und geprüfter Sharḥ.
 struct HadithScreensaverCardView: View {
     let hadith: HadithRecord
 
     var body: some View {
-        HadithCardView(hadith: hadith, showsSharh: false)
+        HadithCardView(hadith: hadith, showsSharh: true)
     }
 }
 
-/// Hadith-Bibliothek in Test-App/iOS: gleicher Datensatz, aber mit geprüftem Sharḥ.
+/// Hadith-Bibliothek in Test-App/iOS: gleicher Datensatz, ebenfalls mit geprüftem Sharḥ.
 struct HadithLibraryCardView: View {
     let hadith: HadithRecord
 
