@@ -1,0 +1,49 @@
+{
+  "project": "DĀR AL TAWḤĪD – Apple TV Ḥadīṯ & Āṯār",
+  "language": "de",
+  "encoding": "UTF-8",
+  "formatVersion": "1.3",
+  "authenticOnly": true,
+  "currentSeries": "001-050",
+  "nextId": "HAD-0023",
+  "display": {
+    "narratorGap": 14,
+    "sourceGap": 14,
+    "speakerAndHadithSameBlock": true,
+    "markdownEmphasis": true,
+    "dynamicTypeLabel": true
+  },
+  "screensaver": {
+    "enabled": true,
+    "includeHadith": true,
+    "includeAthar": true,
+    "salafAsAthar": true,
+    "rotationMode": "shuffleBag",
+    "showSharh": true,
+    "showSharhMode": "compact",
+    "requireVerifiedSharh": true
+  },
+  "hadithLibrary": {
+    "enabledForTestApp": true,
+    "enabledForIosApp": true,
+    "catalogPath": "/test/data/hadith-library/catalog.json",
+    "sourceOfTruth": "/apple-tv/hadith/catalog.json",
+    "showSharh": true,
+    "showSharhSource": true,
+    "requireVerifiedSharh": true
+  },
+  "syncPolicy": {
+    "sourceOfTruth": "apple-tv/hadith/",
+    "appleTvScreensaverShowsSharh": true,
+    "appleTvScreensaverSharhMode": "compact",
+    "testAppHadithLibraryShowsSharh": true,
+    "iosHadithLibraryShowsSharh": true,
+    "onlyVerifiedSharhOnline": true
+  },
+  "releasePolicy": {
+    "onlineBranch": "main",
+    "stagingBranch": "apple-tv-hadith-staging",
+    "publishedRange": "HAD-0001-HAD-0022",
+    "excludeStatuses": ["missing", "needs-review"]
+  }
+}
