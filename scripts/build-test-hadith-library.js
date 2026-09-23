@@ -24,14 +24,20 @@ function readJson(file) {
 }
 
 function loadRecords() {
-  const catalog = readJson(path.join(srcRoot, "catalog.json"));
   const records = [];
-  for (const series of catalog.series || []) {
-    const indexPath = path.join(srcRoot, series.indexPath);
-    if (!fs.existsSync(indexPath)) continue;
-    const index = readJson(indexPath);
-    for (const name of index.files || []) {
-      const file = path.join(path.dirname(indexPath), name);
+  const seriesRoot = path.join(srcRoot, "series");
+  const seriesDirs = fs.existsSync(seriesRoot)
+    ? fs.readdirSync(seriesRoot).filter(function (name) {
+        return fs.statSync(path.join(seriesRoot, name)).isDirectory();
+      })
+    : [];
+  for (const series of seriesDirs) {
+    const dir = path.join(seriesRoot, series);
+    const files = fs.readdirSync(dir).filter(function (name) {
+      return /^HAD-\d+\.json$/i.test(name);
+    });
+    for (const name of files) {
+      const file = path.join(dir, name);
       if (!fs.existsSync(file)) continue;
       records.push(readJson(file));
     }
