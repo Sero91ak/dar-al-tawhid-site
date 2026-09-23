@@ -1,0 +1,153 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-2346-2370",
+  "series": "2251-2450",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "Der 25er-Unterblock wurde unter Regel v6 einzeln aufgebaut und vollständig geprüft. Alle Datensätze besitzen eine eindeutige Quelle, sharhStatus=verified, einen konkreten Šarḥ-Nachweis und entweder den frühesten greifbaren direkten Šarḥ oder eine dokumentierte Begründung für einen späteren direkten Šarḥ. Der Block überschreitet bewusst die Seriengrenze: HAD-2346–2350 liegen in 2251-2350, HAD-2351–2370 in 2351-2450. Vor dem Schreiben wurden die vorgesehenen Quellen gegen den vorhandenen Apple-TV-Ḥadīṯ-Katalog auf Dubletten geprüft. Unsichere Druckseiten wurden nicht geschätzt.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "appleTvScreensaverShowsSharh": true,
+    "perRecordImmediateActivation": true,
+    "blockActivationAllowed": true
+  },
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
+  "records": [
+    {
+      "id": "HAD-2346",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2347",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2348",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2349",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2350",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2351",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2352",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2353",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2354",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2355",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2356",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2357",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2358",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2359",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2360",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2361",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2362",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2363",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check",
+      "note": "Kufr-Begriff im Datensatz ausdrücklich nicht pauschal als Kufr akbar für jeden Täter wiedergegeben."
+    },
+    {
+      "id": "HAD-2364",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2365",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2366",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2367",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2368",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2369",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2370",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    }
+  ]
+}
