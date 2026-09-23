@@ -1,0 +1,151 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-2271-2295",
+  "series": "2251-2350",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "Der 25er-Unterblock wurde unter Regel v6 einzeln aufgebaut und vollständig geprüft. Alle Datensätze besitzen eine eindeutige Quelle, sharhStatus=verified, einen konkreten Šarḥ-Nachweis und entweder den frühesten greifbaren direkten Šarḥ oder eine dokumentierte Begründung für einen späteren direkten Šarḥ. HAD-2292 und HAD-2293 sind bewusst als authentische mawqūf-Aṯār aus dem Kontext von al-Buḫārī 6416 gekennzeichnet. Bei Ibn Māǧah 2045 ist die Isnād-Diskussion ausdrücklich dokumentiert; die Einstufung wurde deshalb vorsichtig als Ḥasan bi-maǧmūʿ ṭuruqih geführt.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "appleTvScreensaverShowsSharh": true,
+    "perRecordImmediateActivation": true,
+    "blockActivationAllowed": true
+  },
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
+  "records": [
+    {
+      "id": "HAD-2271",
+      "currentSharh": "Ibn al-ʿArabī al-Mālikī",
+      "auditStatus": "earliest-direct-tirmidhi-sharh"
+    },
+    {
+      "id": "HAD-2272",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification"
+    },
+    {
+      "id": "HAD-2273",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification"
+    },
+    {
+      "id": "HAD-2274",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification"
+    },
+    {
+      "id": "HAD-2275",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification"
+    },
+    {
+      "id": "HAD-2276",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification"
+    },
+    {
+      "id": "HAD-2277",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification"
+    },
+    {
+      "id": "HAD-2278",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2279",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2280",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2281",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2282",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2283",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2284",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2285",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2286",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2287",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2288",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "isnad-discussion-documented-and-direct-sharh-used"
+    },
+    {
+      "id": "HAD-2289",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "isnad-discussion-documented-and-direct-sharh-used"
+    },
+    {
+      "id": "HAD-2290",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "isnad-discussion-documented-and-direct-sharh-used"
+    },
+    {
+      "id": "HAD-2291",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2292",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "authentic-mawquf-athar-in-bukhari-context"
+    },
+    {
+      "id": "HAD-2293",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "authentic-mawquf-athar-in-bukhari-context"
+    },
+    {
+      "id": "HAD-2294",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification"
+    },
+    {
+      "id": "HAD-2295",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification"
+    }
+  ]
+}
