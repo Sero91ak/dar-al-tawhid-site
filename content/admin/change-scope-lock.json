@@ -5794,6 +5794,18 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "hadith-live-sync-2026-09-23",
+      "approvedBy": "user-explicit-live-hadith-sync",
+      "reason": "Nutzer: aktuelle verifizierte Ḥadīṯ-Daten automatisch für Apple-TV-Bildschirmschoner, Test-App und vorbereitete iOS-Ḥadīṯ-Bibliothek synchron halten.",
+      "paths": [
+        "assets/hadith-library-data.js",
+        "test/assets/hadith-library-data.js",
+        "test/data/hadith-library/",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
