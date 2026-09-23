@@ -12,7 +12,6 @@
   var HUNDRED_HOLD_MS = 380;
   var MIN_SHOW_MS = 900;
   var HARD_TIMEOUT_MS = 6500;
-  /* Original-Hauptfarben je Erscheinungsbild (THEME_META / theme-page-bg) */
   var THEME_FILLS = {
     dark: "#050706",
     light: "#f7f0df",
@@ -35,13 +34,9 @@
   var overlayEl = null;
 
   function prefersReducedMotion() {
-    try {
-      return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-    } catch (e) {
-      return false;
-    }
+    try { return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches); }
+    catch (e) { return false; }
   }
-
   function resolveThemeId() {
     try {
       var t = (document.documentElement && document.documentElement.getAttribute("data-theme")) || "";
@@ -50,36 +45,26 @@
       if (t === "emerald" || t === "smaragd" || t === "aurora") t = "dark";
       if (!THEME_FILLS[t]) t = "dark";
       return t;
-    } catch (e) {
-      return "dark";
-    }
+    } catch (e) { return "dark"; }
   }
-
   function hexFromCssValue(raw) {
     if (!raw) return "";
     var m = String(raw).trim().match(/#[0-9a-fA-F]{3,8}/);
     return m ? m[0] : "";
   }
-
   function resolveFill() {
-    /* Immer zuerst aktuelles Erscheinungsbild — kein festgeklebtes Boot-Blau. */
     var mapped = THEME_FILLS[resolveThemeId()];
     if (mapped) return mapped;
     try {
       var root = document.documentElement;
       if (root) {
         var cs = getComputedStyle(root);
-        var live =
-          hexFromCssValue(cs.getPropertyValue("--outer-bg-flat")) ||
-          hexFromCssValue(cs.getPropertyValue("--theme-page-bg")) ||
-          hexFromCssValue(cs.getPropertyValue("--dar-boot-fill")) ||
-          hexFromCssValue(cs.getPropertyValue("--bg"));
+        var live = hexFromCssValue(cs.getPropertyValue("--outer-bg-flat")) || hexFromCssValue(cs.getPropertyValue("--theme-page-bg")) || hexFromCssValue(cs.getPropertyValue("--dar-boot-fill")) || hexFromCssValue(cs.getPropertyValue("--bg"));
         if (live) return live;
       }
     } catch (e) {}
     return THEME_FILLS.dark;
   }
-
   function syncEdgeFill() {
     if (syncing || finished) return resolveFill();
     syncing = true;
@@ -87,7 +72,6 @@
       var fill = resolveFill();
       var root = document.documentElement;
       if (!root) return fill;
-      /* Nur Boot-Fill setzen — --theme-page-bg NIEMALS inline (blockiert Theme-CSS). */
       root.style.setProperty("--dar-boot-fill", fill);
       root.style.removeProperty("--theme-page-bg");
       if (!finished) {
@@ -103,18 +87,12 @@
       meta.setAttribute("content", fill);
       var tile = document.querySelector('meta[name="msapplication-TileColor"]');
       if (tile) tile.setAttribute("content", fill);
-      if (overlayEl) {
-        overlayEl.style.backgroundColor = fill;
-      }
+      if (overlayEl) overlayEl.style.backgroundColor = fill;
       window.__DAR_BOOT_FILL = fill;
       return fill;
-    } catch (e) {
-      return THEME_FILLS.dark;
-    } finally {
-      syncing = false;
-    }
+    } catch (e) { return THEME_FILLS.dark; }
+    finally { syncing = false; }
   }
-
   function removeAllOverlays(keep) {
     try {
       var nodes = document.querySelectorAll("#" + OVERLAY_ID);
@@ -124,7 +102,6 @@
       }
     } catch (e) {}
   }
-
   function ensureOverlay() {
     if (finished) return overlayEl;
     var existing = document.querySelectorAll("#" + OVERLAY_ID);
@@ -143,12 +120,7 @@
     overlayEl.id = OVERLAY_ID;
     overlayEl.setAttribute("role", "status");
     overlayEl.setAttribute("aria-live", "polite");
-    overlayEl.innerHTML =
-      '<img class="dar-soft-boot__mark" src="/watermark-my-logo-full.png" alt="" width="148" height="148" decoding="async">' +
-      '<p class="dar-soft-boot__title brand-title">' + (window.DAR_BRAND_NAME || "DĀR AL TAWḤĪD") + '</p>' +
-      '<p class="dar-soft-boot__sub">QUR’ĀN • SUNNAH • ĀTHĀR</p>' +
-      '<div class="dar-soft-boot__track" aria-hidden="true"><div class="dar-soft-boot__bar"></div></div>' +
-      '<p class="dar-soft-boot__pct">0%</p>';
+    overlayEl.innerHTML = '<img class="dar-soft-boot__mark" src="/watermark-my-logo-full.png" alt="" width="148" height="148" decoding="async">' + '<p class="dar-soft-boot__title brand-title">' + (window.DAR_BRAND_NAME || "DĀR AL TAWḤĪD") + '</p>' + '<p class="dar-soft-boot__sub">QUR’ĀN • SUNNAH • ĀTHĀR</p>' + '<div class="dar-soft-boot__track" aria-hidden="true"><div class="dar-soft-boot__bar"></div></div>' + '<p class="dar-soft-boot__pct">0%</p>';
     var host = document.body || document.documentElement;
     host.appendChild(overlayEl);
     barEl = overlayEl.querySelector(".dar-soft-boot__bar");
@@ -156,51 +128,30 @@
     syncEdgeFill();
     return overlayEl;
   }
-
   function paint() {
     var pct = Math.max(0, Math.min(100, Math.round(progress * 100)));
     if (barEl) barEl.style.width = pct + "%";
     if (pctEl) pctEl.textContent = pct + "%";
   }
-
   function tick() {
     if (finished) return;
     var remain = MAX_FAKE - progress;
-    if (remain <= 0.002) {
-      progress = MAX_FAKE;
-      paint();
-      return;
-    }
+    if (remain <= 0.002) { progress = MAX_FAKE; paint(); return; }
     progress += remain * 0.045;
     if (progress > MAX_FAKE) progress = MAX_FAKE;
     paint();
   }
-
   function startRamp() {
     if (timer || finished) return;
-    if (prefersReducedMotion()) {
-      progress = MAX_FAKE;
-      paint();
-      return;
-    }
+    if (prefersReducedMotion()) { progress = MAX_FAKE; paint(); return; }
     timer = setInterval(tick, 60);
   }
-
-  function clearRamp() {
-    if (timer) {
-      clearInterval(timer);
-      timer = null;
-    }
-  }
-
+  function clearRamp() { if (timer) { clearInterval(timer); timer = null; } }
   function finish() {
     if (finished) return;
     var elapsed = Date.now() - startedAt;
     if (elapsed < MIN_SHOW_MS) {
-      if (!finishScheduled) {
-        finishScheduled = true;
-        setTimeout(finish, MIN_SHOW_MS - elapsed);
-      }
+      if (!finishScheduled) { finishScheduled = true; setTimeout(finish, MIN_SHOW_MS - elapsed); }
       return;
     }
     finished = true;
@@ -208,10 +159,7 @@
     window.__darAppBootPainted = true;
     finishScheduled = false;
     clearRamp();
-    if (hardTimer) {
-      clearTimeout(hardTimer);
-      hardTimer = null;
-    }
+    if (hardTimer) { clearTimeout(hardTimer); hardTimer = null; }
     progress = 1;
     paint();
     setTimeout(function () {
@@ -234,17 +182,11 @@
       try { all = document.querySelectorAll("#" + OVERLAY_ID); } catch (e) {}
       if (!all.length) return;
       setTimeout(function () {
-        for (var i = 0; i < all.length; i++) {
-          try { all[i].classList.add("is-done"); } catch (e) {}
-        }
-        setTimeout(function () {
-          removeAllOverlays(null);
-          overlayEl = null;
-        }, 300);
+        for (var i = 0; i < all.length; i++) { try { all[i].classList.add("is-done"); } catch (e) {} }
+        setTimeout(function () { removeAllOverlays(null); overlayEl = null; }, 300);
       }, FADE_HOLD_MS);
     }, HUNDRED_HOLD_MS);
   }
-
   function viewLooksReady() {
     try {
       if (window.__darAppBootOk) return true;
@@ -254,18 +196,14 @@
       if (!text || text === "App wird geladen…") return false;
       if (view.querySelector(".loading") && text.length < 40) return false;
       return text.length > 24 || !!view.querySelector("section, article, .premium-surface, .sf-app, .qov-page, .more-page, .quiz-home");
-    } catch (e) {
-      return false;
-    }
+    } catch (e) { return false; }
   }
-
   function maybeFinish() {
     if (finished || window.__darSoftBootLocked) return;
     if (!window.__darAppBootOk && !viewLooksReady()) return;
     if (!window.__darAppBootOk) return;
     finish();
   }
-
   function releaseChrome() {
     try {
       var root = document.documentElement;
@@ -280,18 +218,12 @@
       overlayEl = null;
     } catch (e) {}
   }
-
   function install() {
     try {
       var ua = String(navigator.userAgent || "");
       var root = document.documentElement;
-      var isIosNative =
-        (root && root.classList.contains("dar-ios-native-app")) ||
-        /DarAlTawhid-iOS/i.test(ua);
-      var isAndroidNative =
-        (root && root.classList.contains("dar-android-native-app")) ||
-        !!window.DAR_ANDROID_NATIVE_APP ||
-        /DarAlTawhidAndroid/i.test(ua);
+      var isIosNative = (root && root.classList.contains("dar-ios-native-app")) || /DarAlTawhid-iOS/i.test(ua);
+      var isAndroidNative = (root && root.classList.contains("dar-android-native-app")) || !!window.DAR_ANDROID_NATIVE_APP || /DarAlTawhidAndroid/i.test(ua);
       if (isIosNative || isAndroidNative) {
         try {
           if (isAndroidNative) {
@@ -304,7 +236,6 @@
         return;
       }
     } catch (e) {}
-
     try {
       var early = THEME_FILLS[resolveThemeId()] || THEME_FILLS.dark;
       window.__DAR_BOOT_FILL = early;
@@ -314,60 +245,27 @@
         document.documentElement.classList.add("dar-soft-booting");
       }
     } catch (e) {}
-
     ensureOverlay();
     paint();
     startRamp();
-    hardTimer = setTimeout(function () {
-      finish();
-    }, HARD_TIMEOUT_MS);
+    hardTimer = setTimeout(function () { finish(); }, HARD_TIMEOUT_MS);
     try {
       if (/Android/i.test(String(navigator.userAgent || ""))) {
         setTimeout(function () { if (!finished) finish(); }, 2200);
-        setTimeout(function () {
-          if (finished) return;
-          try { releaseChrome(); finished = true; window.__darSoftBootLocked = true; } catch (e3) {}
-        }, 3800);
+        setTimeout(function () { if (finished) return; try { releaseChrome(); finished = true; window.__darSoftBootLocked = true; } catch (e3) {} }, 3800);
       }
     } catch (e4) {}
-
     if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", function () {
-        ensureOverlay();
-        syncEdgeFill();
-        paint();
-        setTimeout(maybeFinish, 60);
-      }, { once: true });
-    } else {
-      syncEdgeFill();
-      setTimeout(maybeFinish, 60);
-    }
-
-    window.addEventListener("load", function () {
-      setTimeout(maybeFinish, 40);
-      setTimeout(function () { if (!finished) finish(); }, 4000);
-    });
-    window.addEventListener("pageshow", function (ev) {
-      try {
-        if (ev && ev.persisted && /Android/i.test(String(navigator.userAgent || ""))) {
-          location.reload();
-          return;
-        }
-      } catch (e) {}
-      setTimeout(maybeFinish, 40);
-    });
-    window.addEventListener("hashchange", function () {
-      if (finished || window.__darSoftBootLocked) return;
-      setTimeout(maybeFinish, 60);
-    });
-
+      document.addEventListener("DOMContentLoaded", function () { ensureOverlay(); syncEdgeFill(); paint(); setTimeout(maybeFinish, 60); }, { once: true });
+    } else { syncEdgeFill(); setTimeout(maybeFinish, 60); }
+    window.addEventListener("load", function () { setTimeout(maybeFinish, 40); setTimeout(function () { if (!finished) finish(); }, 4000); });
+    window.addEventListener("pageshow", function (ev) { try { if (ev && ev.persisted && /Android/i.test(String(navigator.userAgent || ""))) { location.reload(); return; } } catch (e) {} setTimeout(maybeFinish, 40); });
+    window.addEventListener("hashchange", function () { if (finished || window.__darSoftBootLocked) return; setTimeout(maybeFinish, 60); });
     try {
       var mo = new MutationObserver(function (records) {
         if (finished || syncing) return;
         var themeChanged = false;
-        for (var i = 0; i < records.length; i++) {
-          if (records[i].attributeName === "data-theme") themeChanged = true;
-        }
+        for (var i = 0; i < records.length; i++) { if (records[i].attributeName === "data-theme") themeChanged = true; }
         if (themeChanged) syncEdgeFill();
         maybeFinish();
       });
@@ -375,16 +273,40 @@
         var view = document.getElementById("appView");
         if (view) mo.observe(view, { childList: true, subtree: true, characterData: true });
         if (document.body) mo.observe(document.body, { attributes: true, attributeFilter: ["class"] });
-        /* Never observe style — syncEdgeFill writes style and would loop forever (black screen). */
         mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "class"] });
       };
-      if (document.body) startObserve();
-      else document.addEventListener("DOMContentLoaded", startObserve, { once: true });
+      if (document.body) startObserve(); else document.addEventListener("DOMContentLoaded", startObserve, { once: true });
     } catch (e) {}
-
     window.__darSoftBootFinish = finish;
     window.__darSoftBootSyncFill = syncEdgeFill;
   }
-
   install();
+})();
+
+/* HADITH_LIBRARY_GATE_LOADER_V1 */
+(function () {
+  function base() {
+    try {
+      var p = String(location.pathname || "");
+      if (p === "/test" || p.indexOf("/test/") === 0) return "/test/assets/";
+    } catch (e) {}
+    return "/assets/";
+  }
+  function loadCss() {
+    if (document.querySelector('link[href*="hadith-library-gate.css"]')) return;
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = base() + "hadith-library-gate.css?v=1";
+    document.head.appendChild(link);
+  }
+  function loadJs() {
+    if (document.querySelector('script[src*="hadith-library-gate.js"]')) return;
+    var script = document.createElement("script");
+    script.defer = true;
+    script.src = base() + "hadith-library-gate.js?v=1";
+    (document.head || document.documentElement).appendChild(script);
+  }
+  function boot() { loadCss(); loadJs(); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, { once: true });
+  else boot();
 })();
