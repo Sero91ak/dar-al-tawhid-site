@@ -1,0 +1,39 @@
+{
+  "series": "2451-2550",
+  "count": 20,
+  "firstId": "HAD-2451",
+  "lastId": "HAD-2470",
+  "status": "incremental-active",
+  "plannedLastId": "HAD-2550",
+  "screensaver": {
+    "included": true,
+    "rotation": "shuffleBag",
+    "showEveryItemBeforeRepeat": true
+  },
+  "completionRule": {
+    "sharhRequiredForCompletion": true,
+    "allRecordsSharhStatus": "verified"
+  },
+  "files": [
+    "HAD-2451.json",
+    "HAD-2452.json",
+    "HAD-2453.json",
+    "HAD-2454.json",
+    "HAD-2455.json",
+    "HAD-2456.json",
+    "HAD-2457.json",
+    "HAD-2458.json",
+    "HAD-2459.json",
+    "HAD-2460.json",
+    "HAD-2461.json",
+    "HAD-2462.json",
+    "HAD-2463.json",
+    "HAD-2464.json",
+    "HAD-2465.json",
+    "HAD-2466.json",
+    "HAD-2467.json",
+    "HAD-2468.json",
+    "HAD-2469.json",
+    "HAD-2470.json"
+  ]
+}
