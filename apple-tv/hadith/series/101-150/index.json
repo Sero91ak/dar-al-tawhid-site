@@ -2,8 +2,8 @@
   "series": "101-150",
   "label": "HAD-0101 bis HAD-0150",
   "publishedFrom": "HAD-0102",
-  "publishedTo": "HAD-0143",
-  "publishedCount": 31,
+  "publishedTo": "HAD-0148",
+  "publishedCount": 36,
   "requireVerifiedSharh": true,
   "files": [
     "HAD-0102.json",
@@ -36,7 +36,12 @@
     "HAD-0140.json",
     "HAD-0141.json",
     "HAD-0142.json",
-    "HAD-0143.json"
+    "HAD-0143.json",
+    "HAD-0144.json",
+    "HAD-0145.json",
+    "HAD-0146.json",
+    "HAD-0147.json",
+    "HAD-0148.json"
   ],
   "pendingReview": [
     "HAD-0101.json",
@@ -50,7 +55,9 @@
     "HAD-0123.json",
     "HAD-0124.json",
     "HAD-0136.json",
-    "HAD-0139.json"
+    "HAD-0139.json",
+    "HAD-0149.json",
+    "HAD-0150.json"
   ],
   "excluded": [
     {"id":"HAD-0101","reason":"needs-review: Duplikat von HAD-0078; nicht live aktiviert"},
@@ -64,6 +71,8 @@
     {"id":"HAD-0123","reason":"needs-review: Duplikat von HAD-0062; nicht live aktiviert"},
     {"id":"HAD-0124","reason":"needs-review: Duplikat von HAD-0063; nicht live aktiviert"},
     {"id":"HAD-0136","reason":"needs-review: Duplikat von HAD-0080; nicht live aktiviert"},
-    {"id":"HAD-0139","reason":"needs-review: gleiche Grundüberlieferung wie HAD-0065; nicht live aktiviert, ggf. später zusammenführen"}
+    {"id":"HAD-0139","reason":"needs-review: gleiche Grundüberlieferung wie HAD-0065; nicht live aktiviert, ggf. später zusammenführen"},
+    {"id":"HAD-0149","reason":"needs-review: Duplikat von HAD-0079; nicht live aktiviert"},
+    {"id":"HAD-0150","reason":"needs-review: Duplikat von HAD-0061; nicht live aktiviert"}
   ]
 }
