@@ -4,27 +4,33 @@ struct HadithCatalog: Codable {
     let project: String
     let schemaVersion: String
     let language: String
-    let authenticOnly: Bool
+    let authenticOnly: Bool?
     let totalCount: Int
-    let currentSeries: String
-    let latestId: String
-    let nextId: String
+    let currentSeries: String?
+    let latestId: String?
+    let nextId: String?
     let series: [HadithCatalogSeries]
 }
 
 struct HadithCatalogSeries: Codable {
     let id: String
-    let count: Int
-    let firstId: String
-    let lastId: String
+    let status: String?
+    let count: Int?
+    let firstId: String?
+    let lastId: String?
+    let plannedLastId: String?
     let indexPath: String
+    let screensaverIncluded: Bool?
+    let readyThrough: String?
 }
 
 struct HadithSeriesIndex: Codable {
     let series: String
+    let status: String?
     let count: Int
     let firstId: String
     let lastId: String
+    let plannedLastId: String?
     let files: [String]
 }
 
@@ -35,19 +41,20 @@ actor HadithRemoteService {
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
 
-    /// Lädt automatisch alle im GitHub-Ḥadīṯ-Katalog registrierten Serien.
-    /// Neue 50er-Blöcke benötigen keinen neuen App-Code, solange catalog.json aktualisiert wird.
+    /// Lädt automatisch alle im Ḥadīṯ-Katalog registrierten Serien.
+    /// Vorher wird der zentrale RemoteContentSyncService ausgeführt, damit neue Serien,
+    /// einzelne HAD-Dateien und Korrekturen ohne App-Update im Cache landen.
     func loadAllHadith() async throws -> [HadithRecord] {
+        _ = await RemoteContentSyncService.shared.syncAll(trigger: .hadithOpen)
+
         do {
-            let catalog: HadithCatalog = try await fetchJSON(
-                baseURL.appendingPathComponent("catalog.json")
-            )
+            let catalog = try await loadCatalog()
 
             var all: [HadithRecord] = []
             all.reserveCapacity(catalog.totalCount)
 
             for series in catalog.series {
-                let records = try await fetchSeries(series.id)
+                let records = try await loadSeries(series.id)
                 all.append(contentsOf: records)
             }
 
@@ -62,18 +69,62 @@ actor HadithRemoteService {
         }
     }
 
-    /// Optional: lädt nur eine bestimmte Serie, z. B. 001-050.
+    /// Optional: lädt nur eine bestimmte Serie, z. B. 2451-2550.
     func loadSeries(_ series: String) async throws -> [HadithRecord] {
+        _ = await RemoteContentSyncService.shared.syncCatalog(relativeCatalogPath: "hadith/catalog.json")
+
         do {
-            let remote = try await fetchSeries(series)
-            try saveSeriesCache(remote, series: series)
-            return remote
+            let records = try await loadSeriesFromSyncedCache(series)
+            try saveSeriesCache(records, series: series)
+            return records
         } catch {
-            if let cached = try? loadSeriesCache(series: series), !cached.isEmpty {
-                return cached
+            do {
+                let remote = try await fetchSeries(series)
+                try saveSeriesCache(remote, series: series)
+                return remote
+            } catch {
+                if let cached = try? loadSeriesCache(series: series), !cached.isEmpty {
+                    return cached
+                }
+                throw error
             }
-            throw error
         }
+    }
+
+    private func loadCatalog() async throws -> HadithCatalog {
+        if let cachedURL = try? await RemoteContentSyncService.shared.cachedFileURL(
+            relativeCatalogPath: "hadith/catalog.json",
+            filePath: "catalog.json"
+        ), FileManager.default.fileExists(atPath: cachedURL.path) {
+            let data = try Data(contentsOf: cachedURL)
+            return try decoder.decode(HadithCatalog.self, from: data)
+        }
+
+        return try await fetchJSON(baseURL.appendingPathComponent("catalog.json"))
+    }
+
+    private func loadSeriesFromSyncedCache(_ series: String) async throws -> [HadithRecord] {
+        let indexURL = try await RemoteContentSyncService.shared.cachedFileURL(
+            relativeCatalogPath: "hadith/catalog.json",
+            filePath: "series/\(series)/index.json"
+        )
+        let indexData = try Data(contentsOf: indexURL)
+        let index = try decoder.decode(HadithSeriesIndex.self, from: indexData)
+
+        var records: [HadithRecord] = []
+        records.reserveCapacity(index.files.count)
+
+        for file in index.files {
+            let fileURL = try await RemoteContentSyncService.shared.cachedFileURL(
+                relativeCatalogPath: "hadith/catalog.json",
+                filePath: "series/\(series)/\(file)"
+            )
+            let data = try Data(contentsOf: fileURL)
+            let record = try decoder.decode(HadithRecord.self, from: data)
+            records.append(record)
+        }
+
+        return records.sorted { $0.id < $1.id }
     }
 
     private func fetchSeries(_ series: String) async throws -> [HadithRecord] {
