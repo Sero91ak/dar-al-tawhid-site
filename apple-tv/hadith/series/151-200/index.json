@@ -1,0 +1,28 @@
+{
+  "series": "151-200",
+  "label": "HAD-0151 bis HAD-0200",
+  "publishedFrom": "HAD-0151",
+  "publishedTo": "HAD-0163",
+  "publishedCount": 12,
+  "requireVerifiedSharh": true,
+  "files": [
+    "HAD-0151.json",
+    "HAD-0152.json",
+    "HAD-0153.json",
+    "HAD-0155.json",
+    "HAD-0156.json",
+    "HAD-0157.json",
+    "HAD-0158.json",
+    "HAD-0159.json",
+    "HAD-0160.json",
+    "HAD-0161.json",
+    "HAD-0162.json",
+    "HAD-0163.json"
+  ],
+  "pendingReview": [
+    "HAD-0154.json"
+  ],
+  "excluded": [
+    {"id":"HAD-0154","reason":"needs-review: Duplikat von HAD-0085; nicht live aktiviert"}
+  ]
+}
