@@ -71,13 +71,22 @@ struct RemoteAreaCatalog: Codable {
         if let series {
             paths.append(contentsOf: series.compactMap(\.indexPath))
         }
-        return Array(NSOrderedSet(array: paths)) as? [String] ?? paths
+        return orderedUnique(paths)
     }
 
     var contentPaths: [String] {
         var paths = entriesPaths ?? []
         paths.append(contentsOf: indexPaths)
-        return Array(NSOrderedSet(array: paths)) as? [String] ?? paths
+        return orderedUnique(paths)
+    }
+
+    private func orderedUnique(_ values: [String]) -> [String] {
+        var seen = Set<String>()
+        var output: [String] = []
+        for value in values where seen.insert(value).inserted {
+            output.append(value)
+        }
+        return output
     }
 }
 
@@ -138,15 +147,11 @@ actor RemoteContentSyncService {
             }
 
             if let audio = rootCatalog.quran?.audio, audio.remoteLoad, audio.offlineCache {
-                let path = audio.catalogPath
-                let ok = await syncCatalog(relativeCatalogPath: path)
-                ok ? synced.append(path) : failed.append(path)
+                await appendSyncResult(audio.catalogPath, synced: &synced, failed: &failed)
             }
 
             if let tadabbur = rootCatalog.quran?.tadabbur, tadabbur.remoteLoad, tadabbur.offlineCache {
-                let path = tadabbur.catalogPath
-                let ok = await syncCatalog(relativeCatalogPath: path)
-                ok ? synced.append(path) : failed.append(path)
+                await appendSyncResult(tadabbur.catalogPath, synced: &synced, failed: &failed)
             }
 
             if let screensaver = rootCatalog.screensaver,
@@ -154,20 +159,15 @@ actor RemoteContentSyncService {
                screensaver.remoteLoad != false,
                screensaver.offlineCache != false,
                let path = screensaver.catalogPath {
-                let ok = await syncCatalog(relativeCatalogPath: path)
-                ok ? synced.append(path) : failed.append(path)
+                await appendSyncResult(path, synced: &synced, failed: &failed)
             }
 
             for module in rootCatalog.modules where module.remoteLoad && module.offlineCache {
-                let path = module.catalogPath
-                let ok = await syncCatalog(relativeCatalogPath: path)
-                ok ? synced.append(path) : failed.append(path)
+                await appendSyncResult(module.catalogPath, synced: &synced, failed: &failed)
             }
 
             if let backgrounds = rootCatalog.backgrounds, backgrounds.isActive {
-                let path = backgrounds.catalogPath
-                let ok = await syncCatalog(relativeCatalogPath: path)
-                ok ? synced.append(path) : failed.append(path)
+                await appendSyncResult(backgrounds.catalogPath, synced: &synced, failed: &failed)
             }
         } catch {
             failed.append("apple-tv/catalog.json")
@@ -179,6 +179,14 @@ actor RemoteContentSyncService {
             syncedCatalogs: synced,
             failedCatalogs: failed
         )
+    }
+
+    private func appendSyncResult(_ path: String, synced: inout [String], failed: inout [String]) async {
+        if await syncCatalog(relativeCatalogPath: path) {
+            synced.append(path)
+        } else {
+            failed.append(path)
+        }
     }
 
     func syncCatalog(relativeCatalogPath: String) async -> Bool {
