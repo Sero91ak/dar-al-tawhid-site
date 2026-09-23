@@ -1,0 +1,44 @@
+name: Sync Ḥadīṯ Catalogs
+
+on:
+  push:
+    branches:
+      - apple-tv-hadith-staging
+    paths:
+      - "apple-tv/hadith/series/**/HAD-*.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hadith-catalog-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Rebuild verified Ḥadīṯ indexes and catalog
+        run: node scripts/sync-hadith-catalogs.mjs
+
+      - name: Commit generated catalog state
+        shell: bash
+        run: |
+          if git diff --quiet -- apple-tv/hadith/catalog.json apple-tv/hadith/manifest.json apple-tv/hadith/series; then
+            echo "Ḥadīṯ catalog already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apple-tv/hadith/catalog.json apple-tv/hadith/manifest.json apple-tv/hadith/series/*/index.json
+          git commit -m "[skip ci] Sync Ḥadīṯ catalogs"
+          git push origin HEAD:apple-tv-hadith-staging
