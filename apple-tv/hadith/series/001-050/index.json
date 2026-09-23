@@ -2,8 +2,8 @@
   "series": "001-050",
   "label": "HAD-0001 bis HAD-0050",
   "publishedFrom": "HAD-0001",
-  "publishedTo": "HAD-0016",
-  "publishedCount": 16,
+  "publishedTo": "HAD-0022",
+  "publishedCount": 22,
   "requireVerifiedSharh": true,
   "files": [
     "HAD-0001.json",
@@ -21,15 +21,16 @@
     "HAD-0013.json",
     "HAD-0014.json",
     "HAD-0015.json",
-    "HAD-0016.json"
-  ],
-  "pendingOnlineTransfer": [
+    "HAD-0016.json",
     "HAD-0017.json",
     "HAD-0018.json",
     "HAD-0019.json",
     "HAD-0020.json",
     "HAD-0021.json",
     "HAD-0022.json"
+  ],
+  "pendingReview": [
+    "HAD-0023.json"
   ],
   "excluded": [
     {
