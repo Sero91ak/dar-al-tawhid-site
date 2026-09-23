@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="de">
 <head>
-<!-- pages-deploy-stamp:1786151800000 -->
+<!-- pages-deploy-stamp:1786152800000 -->
 <!-- workers-deploy-stamp:1786150368000 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -4385,9 +4385,9 @@ body:has(.qibla-hub-page) .signature{font-size:18px!important;margin-top:4px!imp
 /* Dezenter Neutral-Glass für App-Controls – Tab-Buttons ausgenommen */
 :where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-wa):not(.footer-action-save):not(.share-btn):not(.qov-btn-primary):not(.qov-btn-secondary):not(.qov-direct-go){
   border-color:rgba(255,255,255,.14)!important;
-  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03))!important;
-  -webkit-backdrop-filter:blur(10px) saturate(1.12)!important;
-  backdrop-filter:blur(10px) saturate(1.12)!important;
+  background:var(--theme-surface,var(--card,var(--bg,#0c0b09)))!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 4px 12px rgba(0,0,0,.10)!important;
 }
 :where(button,.btn,.pill,.icon-btn,.social-link,.action-btn,.hint-btn,.collapse-toggle,.advanced-toggle,.home-btn,.back-btn,.direct-pick,.filter-select,.search:not(.search-input-field),.prayer-action-btn,.quran-surah-nav button,.quran-tafsir-tab,.quran-popular-btn,.quran-jump-btn,.nav-posts button,.link-row a,.footer-action-btn,.footer-social-link,.float-btn,.float-touch-handle,.hijri-header-pill):not(.bottom-nav-btn):not(.footer-action-tg):not(.footer-action-ig):not(.footer-action-wa):not(.footer-action-save):not(.share-btn):hover{
@@ -34572,13 +34572,12 @@ html[data-theme] .quiz-shell.quiz-shell-pro .quiz-home-title{
   setTimeout(pin,500);
 })();
 </script>
-<style id="dar-no-top-blur-v974">
+<style id="dar-no-top-blur-v898">
 html,body,.app,#appRoot,#appShell,#appView,#appView.view,.view,.view-head,
 .top-shell,.header,.theme-hero-shell,.theme-hero-surface,.account-page,.settings-one-page,
-.notification-hero,.notification-health,.qov-header,.sf-top{
+.notification-hero,.notification-health,.qov-header,.sf-top,.header-prayer-hub,.hijri-header-pill{
   -webkit-backdrop-filter:none!important;
   backdrop-filter:none!important;
-  filter:none!important;
 }
 html .app:after,html .app::after,.top-edge-fade,.top-swim-aura,.top-swim-aura:before,
 #topEdgeFade,#topSwimAura,.theme-hero-shell::before,.theme-hero-shell::after,
@@ -34595,10 +34594,29 @@ html .app:after,html .app::after,.top-edge-fade,.top-swim-aura,.top-swim-aura:be
 html.dar-ios-native-app::after,html.is-standalone-pwa::after{
   content:none!important;display:none!important;height:0!important;background:none!important;opacity:0!important;
 }
+html[data-theme] .top-shell,
+html[data-theme] .top-shell.theme-hero-shell,
+.top-shell{
+  overflow:visible!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+.logo,.brand-main .logo{
+  background:var(--page-cover,var(--bg,#0c0b09))!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+.top-shell.theme-hero-shell .header-prayer-hub,
+.header-prayer-hub{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  background:var(--theme-surface,var(--page-cover,#0c0b09))!important;
+  background-image:none!important;
+}
 </style>
 <script>
 (function(){
-  var src=document.getElementById("dar-no-top-blur-v974");
+  var src=document.getElementById("dar-no-top-blur-v898");
   if(!src)return;
   function pin(){
     var live=document.getElementById("dar-no-top-blur-live");
