@@ -1,6 +1,6 @@
 {
   "project": "DĀR AL TAWḤĪD – HAD Sync Policy",
-  "version": 2,
+  "version": 3,
   "active": true,
   "sourceOfTruth": "apple-tv/hadith/",
   "globalGate": {
@@ -57,6 +57,31 @@
       "purpose": "Webseite und Android-Web-App zeigen den vorbereiteten Bereich im Mehr-Bereich, blockieren Zugriff bis Freigabe."
     }
   },
+  "hadithAndSharhSourceRules": {
+    "earliestSharhPreferred": true,
+    "rule": "Für jeden neuen HAD-Datensatz wird der früheste belastbare klassische Sharḥ bevorzugt. Spätere Erklärungen dürfen nur genutzt werden, wenn kein früherer passender Sharḥ auffindbar ist oder wenn sie zur Präzisierung zusätzlich nötig sind.",
+    "sourcePriority": [
+      "direkter klassischer Sharḥ zum konkreten Ḥadīṯ",
+      "frühere anerkannte Sammel-/Nawawī-/Ibn-Raǧab-Erklärung zum selben Wortlaut oder Abschnitt",
+      "spätere klassische Kommentierung nur mit Prüfnotiz, warum kein früherer Sharḥ genutzt wurde",
+      "moderne Datenbanken wie Dorar/Islamweb nur als Nachweis-/Auffindehilfe, nicht als alleiniger Sharḥ, außer sie zitieren den klassischen Sharḥ klar"
+    ],
+    "exactReferenceRequired": true,
+    "requiredReferenceFields": [
+      "sourceBook",
+      "sourceChapter",
+      "sourceHadithNumber oder sourceSection",
+      "grade",
+      "sharhScholar",
+      "sharhBook",
+      "sharhChapter oder sharhSection",
+      "sharhReference"
+    ],
+    "pagePolicy": "Band/Seite/Edition werden eingetragen, wenn sie für die verwendete Ausgabe sicher vorliegen. Wenn eine editionsabhängige Seite nicht sicher ist, bleibt die Seite null und die Referenz muss stattdessen über Werk, Kapitel, Ḥadīṯ-Nummer/Abschnitt eindeutig auffindbar sein; keine geschätzten Seitenzahlen.",
+    "noGenericSharh": true,
+    "noInventedReferences": true,
+    "auditRule": "Bereits begonnene Blöcke werden vor Fortsetzung geprüft. Ein Datensatz gilt nur als fertig, wenn Sharḥ, Sharḥ-Quelle und Zuordnung zum konkreten Ḥadīṯ belastbar sind."
+  },
   "libraryOrganization": {
     "groupBy": [
       "bookCategory",
@@ -89,7 +114,10 @@
     "sharhRequiredForCompletion": true,
     "completedRecordSharhStatus": "verified",
     "noMissingSharhInCompletedBlocks": true,
-    "libraryOrderRequired": true
+    "libraryOrderRequired": true,
+    "earliestSharhPreferred": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true
   },
-  "workflowRule": "Jeder neue HAD-Block wird zuerst vollständig unter apple-tv/hadith erstellt. Danach wird er über die Ḥadīṯ-Bibliothek-Kataloge für Test-App, iOS-App, Android/Web-App und Webseite vorbereitet. Apple-TV-Screensaver blendet Sharḥ nicht ein. Alle App-Bereiche bleiben bis zur Nutzerfreigabe gesperrt."
+  "workflowRule": "Jeder neue HAD-Block wird zuerst vollständig unter apple-tv/hadith erstellt. Danach wird er über die Ḥadīṯ-Bibliothek-Kataloge für Test-App, iOS-App, Android/Web-App und Webseite vorbereitet. Apple-TV-Screensaver blendet Sharḥ nicht ein. Alle App-Bereiche bleiben bis zur Nutzerfreigabe gesperrt. Vor Fortsetzung wird geprüft: frühester belastbarer Sharḥ, konkrete Quellenzuordnung, keine geschätzten Seiten."
 }
