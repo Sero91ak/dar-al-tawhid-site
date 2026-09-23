@@ -1,6 +1,6 @@
 {
   "project": "DĀR AL TAWḤĪD – HAD Sync Policy",
-  "version": 5,
+  "version": 6,
   "active": true,
   "sourceOfTruth": "apple-tv/hadith/",
   "globalGate": {
@@ -11,7 +11,7 @@
     "releaseRequired": true,
     "liveGatePath": "data/hadith-library-gate.json",
     "testGatePath": "test/data/hadith-library-gate.json",
-    "releaseRule": "Die Ḥadīṯ-Bibliothek wird global sichtbar vorbereitet, bleibt aber gesperrt, bis der Nutzer ausdrücklich freigibt."
+    "releaseRule": "Die Ḥadīṯ-Bibliothek wird global sichtbar vorbereitet, bleibt aber gesperrt, bis der Nutzer ausdrücklich freigibt. Die Datensätze selbst werden trotzdem sofort vorbereitet und synchronisiert."
   },
   "surfaces": {
     "appleTvScreensaver": {
@@ -22,7 +22,8 @@
       "showSharh": true,
       "showSharhSource": true,
       "requireSharhStatus": "verified",
-      "purpose": "Bildschirmschoner zeigt Ḥadīṯ-/Āṯār-Aussage, Quelle und den geprüften Sharḥ edel/kompakt an."
+      "activation": "per-record-immediate",
+      "purpose": "Bildschirmschoner zeigt jeden einzeln geprüften Ḥadīṯ-/Āṯār-Datensatz sofort mit Quelle und geprüftem Sharḥ edel/kompakt an."
     },
     "testAppHadithLibrary": {
       "path": "test/data/hadith-library/catalog.json",
@@ -35,7 +36,8 @@
       "showSharh": true,
       "showSharhSource": true,
       "requireSharhStatus": "verified",
-      "purpose": "Test-App Ḥadīṯ-Bibliothek erhält denselben Datensatz inklusive geprüfter Erklärung, bleibt aber bis Freigabe gesperrt."
+      "activation": "per-record-immediate-behind-gate",
+      "purpose": "Test-App Ḥadīṯ-Bibliothek erhält jeden einzeln geprüften Datensatz sofort inklusive geprüfter Erklärung, bleibt aber bis Freigabe gesperrt."
     },
     "iosAppHadithLibrary": {
       "path": "ios/DarAlTawhid/",
@@ -47,7 +49,8 @@
       "showSharh": true,
       "showSharhSource": true,
       "requireSharhStatus": "verified",
-      "purpose": "iOS-App nutzt die Test-App-Bibliothekslogik, sobald der Bereich veröffentlicht wird, bleibt vorher gesperrt."
+      "activation": "per-record-immediate-behind-gate",
+      "purpose": "iOS-App bekommt jeden einzeln geprüften Datensatz sofort in die vorbereitete Bibliotheksstruktur; Zugriff bleibt bis Nutzerfreigabe gesperrt."
     },
     "androidWebAppAndWebsite": {
       "path": "assets/hadith-library-gate.js",
@@ -56,7 +59,8 @@
       "allowOpenWhileLocked": false,
       "usesSameRecords": true,
       "showSharhAfterRelease": true,
-      "purpose": "Webseite und Android-Web-App zeigen den vorbereiteten Bereich im Mehr-Bereich, blockieren Zugriff bis Freigabe."
+      "activation": "per-record-immediate-behind-gate",
+      "purpose": "Webseite und Android-Web-App erhalten jeden einzeln geprüften Datensatz sofort in die vorbereitete Struktur, blockieren Zugriff aber bis Freigabe."
     }
   },
   "hadithAndSharhSourceRules": {
@@ -99,25 +103,49 @@
     "pagePolicy": "Band/Seite/Edition werden eingetragen, wenn sie für die verwendete Ausgabe sicher vorliegen. Wenn eine editionsabhängige Seite nicht sicher ist, bleibt die Seite null und die Referenz muss stattdessen über Werk, Kapitel, Ḥadīṯ-Nummer/Abschnitt eindeutig auffindbar sein; keine geschätzten Seitenzahlen.",
     "noGenericSharh": true,
     "noInventedReferences": true,
-    "auditRule": "Bereits begonnene Blöcke werden vor Fortsetzung geprüft. Ein Datensatz gilt nur als fertig, wenn Sharḥ, Sharḥ-Quelle, früheste-greifbare-Prüfung und Zuordnung zum konkreten Ḥadīṯ belastbar sind."
+    "auditRule": "Ein Datensatz gilt einzeln als bereit, sobald Sharḥ, Sharḥ-Quelle, früheste-greifbare-Prüfung und Zuordnung zum konkreten Ḥadīṯ belastbar sind. Es wird nicht auf den 100er-Block gewartet."
   },
   "libraryOrganization": {
     "groupBy": ["bookCategory", "sourceBook", "sourceChapter"],
     "sortBy": ["bookCategory", "sourceBook", "sourceChapter", "sourcePage", "sourceHadithNumber", "id"],
     "requiredDetailFields": ["id", "recordType", "textMarkdown", "sourceBook", "sourceChapter", "sourcePage", "grade", "sharhStatus", "sharhText", "sharhReference"]
   },
+  "activationRules": {
+    "mode": "per-record-immediate",
+    "doNotWaitForHundredBlock": true,
+    "hundredBlocksAreOnlyOrganization": true,
+    "recordReadyWhen": [
+      "sharhStatus == verified",
+      "sharhText vorhanden",
+      "sharhReference vorhanden",
+      "earliestSharhPriority geprüft oder begründet",
+      "sourceBook/sourceChapter/sourceHadithNumber oder sourceSection vorhanden"
+    ],
+    "publishTargetsWhenReady": [
+      "appleTvScreensaver",
+      "testAppHadithLibraryBehindGate",
+      "iosHadithLibraryBehindGate",
+      "androidWebAppAndWebsiteBehindGate"
+    ],
+    "blockedWhen": [
+      "sharhStatus missing oder needs-review",
+      "früheste Šarḥ-Priorität ungeprüft",
+      "Quelle nicht eindeutig",
+      "geschätzte Seitenzahl statt sicherer Referenz"
+    ]
+  },
   "completionRules": {
-    "completeBlockBeforeNext": true,
-    "sharhRequiredForCompletion": true,
+    "completeBlockBeforeNext": false,
+    "perRecordActivation": true,
+    "sharhRequiredForActivation": true,
     "completedRecordSharhStatus": "verified",
-    "noMissingSharhInCompletedBlocks": true,
+    "noMissingSharhForActivatedRecords": true,
     "libraryOrderRequired": true,
     "earliestSharhPreferred": true,
     "exactReferenceRequired": true,
     "noEstimatedPages": true,
     "specificBukhariMuslimPriorityRequired": true,
-    "noBlockActivationBeforeEarliestSharhAudit": true,
     "appleTvScreensaverSharhRequired": true
   },
-  "workflowRule": "Jeder neue HAD-Block wird zuerst vollständig unter apple-tv/hadith erstellt. Apple-TV-Bildschirmschoner, Test-App, iOS-App, Android/Web-App und Webseite nutzen denselben verifizierten Datensatz inklusive Sharḥ; Apple TV zeigt den Sharḥ im Bildschirmschoner kompakt und edel an. Alle App-Bereiche bleiben bis zur Nutzerfreigabe gesperrt. Vor Fortsetzung und Aktivierung wird geprüft: frühester greifbarer Sharḥ nach Werkpriorität, konkrete Quellenzuordnung, keine geschätzten Seiten."
+  "workflowRule": "Jeder neue HAD-Datensatz wird zuerst unter apple-tv/hadith erstellt und sofort freigegeben, sobald er einzeln verified, quellenklar und nach frühester greifbarer Šarḥ-Priorität geprüft ist. Es wird nicht auf 25er-, 50er- oder 100er-Blöcke gewartet. 100er-Blöcke dienen nur der Ordnung. Apple-TV-Bildschirmschoner, Test-App, iOS-App, Android/Web-App und Webseite nutzen denselben geprüften Datensatz inklusive Sharḥ; gesperrte App-Bereiche bleiben bis zur Nutzerfreigabe sichtbar, aber nicht öffnend."
 }
