@@ -206,7 +206,7 @@ actor AppleTVContentRegistry {
         return descriptor
     }
 
-    func url(forRelativePath path: String) -> URL {
+    nonisolated func url(forRelativePath path: String) -> URL {
         AppleTVContentEnvironment.rootURL.appendingPathComponent(path)
     }
 
