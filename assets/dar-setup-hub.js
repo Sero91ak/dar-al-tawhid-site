@@ -225,7 +225,7 @@
     link.id = "dar-setup-hub-style-link";
     link.rel = "stylesheet";
     var base = location.pathname.indexOf("/test/") === 0 ? "/test/assets/" : "/assets/";
-    link.href = base + "dar-setup-hub.css?v=5";
+    link.href = base + "dar-setup-hub.css?v=8";
     document.head.appendChild(link);
   }
 

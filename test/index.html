@@ -1173,80 +1173,93 @@ body.is-post-route .bottom-nav.post-nav-hidden{transform:translateY(120%);opacit
 .quran-athar-source b{color:var(--cream)}
 .quran-athar-note{display:block;margin-top:4px;color:var(--muted2);font-size:10px}
 @media(max-width:700px){.quran-surah-grid{grid-template-columns:1fr}.quran-quick-grid{grid-template-columns:minmax(0,1.15fr) minmax(58px,.62fr) auto!important}.quran-jump-bar{grid-template-columns:minmax(0,1.1fr) minmax(68px,.65fr) auto!important}.quran-jump-btn{width:auto}}
-.hadith-shell{--hadith-bg:#08110d;--hadith-panel:#111818;--hadith-panel-2:#17201f;--hadith-emerald:#062f24;--hadith-accent:#d6b46a;--hadith-text:#fff5dd;--hadith-muted:#c8bda2;--hadith-line:rgba(214,180,106,.34);display:grid;gap:11px}
-html[data-theme="light"] .hadith-shell{--hadith-bg:#F2EEE3;--hadith-panel:#FBF7EF;--hadith-panel-2:#F6F1E7;--hadith-emerald:#EEE7D8;--hadith-accent:#A98745;--hadith-text:#2B241D;--hadith-muted:#776D5F;--hadith-line:rgba(130,105,65,.30)}
-html[data-theme="soft"] .hadith-shell{--hadith-bg:#f2e6e2;--hadith-panel:#fff8f1;--hadith-panel-2:#ead5dd;--hadith-emerald:#eadce0;--hadith-accent:#7d5368;--hadith-text:#34232c;--hadith-muted:#715f65;--hadith-line:rgba(125,83,104,.28)}
-html[data-theme="royal"] .hadith-shell{--hadith-bg:#07162c;--hadith-panel:#0d1f3d;--hadith-panel-2:#102b55;--hadith-emerald:#0a2444;--hadith-accent:#efd78e;--hadith-text:#fff2c6;--hadith-muted:#cbbf9f;--hadith-line:rgba(239,215,142,.36)}
-html[data-theme="bordeaux"] .hadith-shell{--hadith-bg:#140b0c;--hadith-panel:#211315;--hadith-panel-2:#321317;--hadith-emerald:#32141b;--hadith-accent:#d6be84;--hadith-text:#f7eed8;--hadith-muted:#d1c1a8;--hadith-line:rgba(214,190,132,.34)}
-.hadith-hero{position:relative;overflow:hidden;border:1px solid var(--hadith-line);border-radius:18px;background:linear-gradient(135deg,var(--hadith-emerald),var(--hadith-bg));box-shadow:0 12px 30px rgba(0,0,0,.24);padding:12px}
-.hadith-hero:before{content:"";position:absolute;inset:10px;border:1px solid rgba(239,215,142,.18);border-radius:24px;pointer-events:none}
-.hadith-hero:after{display:none}
-.hadith-hero h3{position:relative;z-index:1;margin:0;color:var(--hadith-text);font-family:var(--serif);font-size:clamp(24px,5vw,38px);line-height:1.08;letter-spacing:0}
-.hadith-hero p{position:relative;z-index:1;margin:8px 0 0;color:var(--hadith-muted);font-size:14px;line-height:1.62;max-width:760px}
-.hadith-note{position:relative;z-index:1;margin-top:13px;border:1px solid var(--hadith-line);border-radius:14px;background:color-mix(in srgb,var(--hadith-accent) 10%,transparent);color:var(--hadith-text);padding:10px 12px;font-size:12px;line-height:1.55}
-.hadith-toolbar{display:grid;grid-template-columns:minmax(0,1fr) minmax(130px,.22fr) minmax(130px,.22fr) minmax(130px,.22fr);gap:9px;align-items:center}
-.hadith-search,.hadith-select{width:100%;min-height:45px;border:1px solid var(--hadith-line);border-radius:12px;background:color-mix(in srgb,var(--hadith-panel) 92%,transparent);color:var(--hadith-text);padding:0 13px;font-size:13px;font-weight:800;outline:none}
+.hadith-shell{
+  --hadith-accent:var(--gold2,#d6b46a);
+  --hadith-text:var(--text,#fff5dd);
+  --hadith-muted:var(--muted,#c8bda2);
+  --hadith-line:color-mix(in srgb,var(--gold2,#d6b46a) 32%, transparent);
+  display:grid;gap:0;background:transparent;border:0;border-radius:0;box-shadow:none;max-width:100%;min-width:0
+}
+html[data-theme="light"] .hadith-shell{--hadith-accent:#A98745;--hadith-text:#2B241D;--hadith-muted:#776D5F;--hadith-line:rgba(130,105,65,.30)}
+html[data-theme="soft"] .hadith-shell{--hadith-accent:#7d5368;--hadith-text:#34232c;--hadith-muted:#715f65;--hadith-line:rgba(125,83,104,.28)}
+html[data-theme="royal"] .hadith-shell{--hadith-accent:#efd78e;--hadith-text:#fff2c6;--hadith-muted:#cbbf9f;--hadith-line:rgba(239,215,142,.36)}
+html[data-theme="bordeaux"] .hadith-shell{--hadith-accent:#d6be84;--hadith-text:#f7eed8;--hadith-muted:#d1c1a8;--hadith-line:rgba(214,190,132,.34)}
+html[data-theme="eisgold"] .hadith-shell{--hadith-accent:#a9852f;--hadith-text:#111111;--hadith-muted:#1a1a1a;--hadith-line:rgba(200,169,90,.55)}
+.hadith-hero{position:relative;overflow:visible;border:0;border-bottom:1px solid var(--hadith-line);border-radius:0;background:transparent;box-shadow:none;padding:6px 2px 16px}
+.hadith-hero:before,.hadith-hero:after{display:none}
+.hadith-hero h3{margin:0;color:var(--hadith-text);font-family:var(--serif);font-size:clamp(24px,5vw,36px);line-height:1.08;letter-spacing:0;font-weight:650}
+.hadith-hero p{margin:8px 0 0;color:var(--hadith-muted);font-size:14px;line-height:1.62;max-width:760px}
+.hadith-note{margin-top:12px;border:0;border-top:1px solid var(--hadith-line);border-radius:0;background:transparent;color:var(--hadith-text);padding:10px 0 0;font-size:12px;line-height:1.55}
+.hadith-toolbar{display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,.22fr) minmax(120px,.22fr) minmax(120px,.22fr);gap:10px;align-items:end;padding:10px 0 12px;border:0;border-bottom:1px solid var(--hadith-line)}
+.hadith-search,.hadith-select{width:100%;min-height:42px;border:0;border-bottom:1px solid var(--hadith-line);border-radius:0;background:transparent;color:var(--hadith-text);padding:0 2px 6px;font-size:13px;font-weight:700;outline:none}
 .hadith-select option{color:#111;background:#fff8e8}
-.hadith-search:focus{border-color:rgba(239,215,142,.52);box-shadow:0 0 0 3px rgba(239,215,142,.13)}
-.hadith-filter-note{border:1px solid var(--line2);border-radius:999px;background:rgba(239,215,142,.07);color:var(--muted);font-size:10px;font-weight:950;padding:9px 11px;white-space:nowrap}
-.hadith-layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:14px;align-items:start}
-.hadith-books-panel,.hadith-panel{border:1px solid var(--hadith-line);border-radius:18px;background:linear-gradient(135deg,var(--hadith-panel),var(--hadith-bg));box-shadow:0 10px 28px rgba(0,0,0,.18);padding:10px;max-width:100%;overflow:hidden}
-.hadith-books-panel-title{margin:0 0 10px;color:var(--hadith-accent);font-size:11px;font-weight:950;letter-spacing:.16em;text-transform:uppercase}
-.hadith-books-grid{display:grid;gap:9px;max-height:76svh;overflow:auto;padding-right:2px}
-.hadith-book-card{border:1px solid var(--hadith-line);border-radius:14px;background:var(--hadith-panel);padding:10px;text-align:left;cursor:pointer;min-height:92px;display:flex;flex-direction:column;gap:5px;transition:transform .18s ease,border-color .18s ease,background .18s ease;max-width:100%;overflow:hidden}
-.hadith-book-card:hover{transform:translateY(-1px);border-color:rgba(239,215,142,.48);background:rgba(255,248,232,.085)}
-.hadith-book-card.active{border-color:color-mix(in srgb,var(--hadith-accent) 72%,transparent);background:linear-gradient(135deg,var(--hadith-emerald),var(--hadith-panel-2))}
-.hadith-book-card.imported{border-color:rgba(132,220,160,.36)}
+.hadith-search:focus,.hadith-select:focus{border-bottom-color:var(--hadith-accent);box-shadow:none}
+.hadith-filter-note{border:0;border-radius:0;background:transparent;color:var(--hadith-muted);font-size:10px;font-weight:850;padding:8px 0;white-space:nowrap}
+.hadith-layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:18px;align-items:start}
+.hadith-books-panel,.hadith-panel{border:0;border-radius:0;background:transparent;box-shadow:none;padding:8px 0;max-width:100%;overflow:hidden}
+.hadith-books-panel-title{margin:0 0 8px;color:var(--hadith-accent);font-size:11px;font-weight:850;letter-spacing:.16em;text-transform:uppercase}
+.hadith-books-grid{display:grid;gap:0;max-height:76svh;overflow:auto;padding-right:2px}
+.hadith-book-card{border:0;border-top:1px solid var(--hadith-line);border-radius:0;background:transparent;padding:12px 2px;text-align:left;cursor:pointer;min-height:0;display:flex;flex-direction:column;gap:4px;max-width:100%;overflow:hidden}
+.hadith-book-card:hover{transform:none;border-color:var(--hadith-line);background:transparent}
+.hadith-book-card.active{border-top-color:var(--hadith-accent);background:transparent;box-shadow:none}
+.hadith-book-card.imported{border-top-color:color-mix(in srgb,var(--hadith-accent) 70%, transparent)}
 .hadith-book-card.pending{opacity:.88}
-.hadith-book-card h3{margin:0;color:var(--hadith-text);font-family:var(--serif);font-size:15px;line-height:1.18;overflow-wrap:anywhere}
-.hadith-book-card .ar{direction:rtl;text-align:right;color:var(--hadith-accent);font-size:14px;line-height:1.35;overflow-wrap:anywhere}
-.hadith-book-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto}
-.hadith-chip{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--hadith-line);border-radius:8px;background:color-mix(in srgb,var(--hadith-accent) 8%,transparent);color:var(--hadith-text);font-size:9px;font-weight:950;padding:4px 6px;line-height:1.15;max-width:100%;white-space:normal;overflow-wrap:anywhere}
-.hadith-chip.ok{color:#caffd2;border-color:rgba(132,220,160,.32);background:rgba(132,220,160,.08)}
-.hadith-chip.warn{color:#f5d386;border-color:rgba(239,215,142,.28)}
-.hadith-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.hadith-book-card h3{margin:0;color:var(--hadith-text);font-family:var(--serif);font-size:16px;line-height:1.22;overflow-wrap:anywhere;font-weight:650}
+.hadith-book-card .ar{direction:rtl;text-align:right;color:var(--hadith-accent);font-size:14px;line-height:1.4;overflow-wrap:anywhere}
+.hadith-book-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.hadith-chip{display:inline;border:0;border-radius:0;background:transparent;color:var(--hadith-muted);font-size:10px;font-weight:750;padding:0;line-height:1.3;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+.hadith-chip.ok{color:var(--hadith-accent);border:0;background:transparent}
+.hadith-chip.warn{color:var(--hadith-accent);border:0}
+.hadith-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin:0 0 8px;padding:0 0 10px;border-bottom:1px solid var(--hadith-line)}
 .hadith-panel-head h3{margin:0;color:var(--hadith-text);font-family:var(--serif);font-size:clamp(21px,4vw,31px);line-height:1.1;letter-spacing:0;overflow-wrap:anywhere}
 .hadith-panel-head p{margin:4px 0 0;color:var(--hadith-muted);font-size:11px;line-height:1.45}
-.hadith-chapter-tabs{display:flex;gap:7px;overflow-x:auto;padding-bottom:5px;margin-bottom:10px;scrollbar-width:none}
+.hadith-chapter-tabs{display:flex;gap:12px;overflow-x:auto;padding:0 0 6px;margin:0 0 6px;scrollbar-width:none;border-bottom:1px solid var(--hadith-line)}
 .hadith-chapter-tabs::-webkit-scrollbar{display:none}
-.hadith-chapter-btn{border:1px solid var(--line2);border-radius:999px;background:rgba(8,8,6,.55);color:var(--cream);font-size:10px;font-weight:950;padding:8px 11px;white-space:nowrap;cursor:pointer}
-.hadith-chapter-btn.active{border-color:rgba(239,215,142,.56);background:rgba(239,215,142,.14);color:#fff8df}
-.hadith-list{display:grid;gap:9px}
-.hadith-card{border:1px solid var(--hadith-line);border-radius:16px;background:linear-gradient(145deg,color-mix(in srgb,var(--hadith-accent) 7%,transparent),transparent),var(--hadith-panel);padding:12px;cursor:pointer;overflow:hidden;max-width:100%}
-.hadith-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px}
-.hadith-card-title{color:var(--hadith-text);font-family:var(--serif);font-size:17px;line-height:1.16;font-weight:700}
-.hadith-card-ar{direction:rtl;text-align:right;color:#fff5dc;font-family:"Amiri","Scheherazade New","Traditional Arabic",serif;font-size:clamp(23px,4.8vw,35px);line-height:2;margin:10px 0 12px}
-.hadith-card-de{color:var(--hadith-text);font-size:15px;line-height:1.72;margin:8px 0 0}
-.hadith-warning{border:1px dashed rgba(239,215,142,.36);border-radius:15px;background:rgba(239,215,142,.075);color:#f4e4bd;padding:9px 10px;font-size:12px;line-height:1.48;margin:8px 0}
-.hadith-source-line{border-top:1px dashed var(--hadith-line);margin-top:9px;padding-top:8px;color:var(--hadith-muted);font-size:10.5px;line-height:1.42}
-.hadith-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
-.hadith-action{border:1px solid var(--hadith-line);border-radius:10px;background:color-mix(in srgb,var(--hadith-accent) 8%,transparent);color:var(--hadith-text);font-size:10px;font-weight:950;padding:8px 9px;cursor:pointer;text-decoration:none;min-width:0;overflow-wrap:anywhere}
-.hadith-action.primary{border-color:transparent;background:linear-gradient(135deg,var(--gold),#f0d18a);color:#1d1304}
-.hadith-empty{border:1px dashed rgba(239,215,142,.25);border-radius:18px;padding:14px;color:var(--muted);font-size:13px;line-height:1.55;background:rgba(239,215,142,.035)}
-.hadith-breadcrumb{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-.hadith-breadcrumb button{border:1px solid rgba(214,180,106,.22);border-radius:999px;background:rgba(214,180,106,.07);color:var(--cream);font-size:10px;font-weight:950;padding:7px 9px}
-.hadith-chapter-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-.hadith-chapter-card{border:1px solid var(--hadith-line);border-radius:14px;background:var(--hadith-panel);padding:11px;text-align:left;color:var(--hadith-text);cursor:pointer;max-width:100%;overflow:hidden}
+.hadith-chapter-btn{border:0;border-bottom:1px solid transparent;border-radius:0;background:transparent;color:var(--hadith-muted);font-size:11px;font-weight:750;padding:8px 2px;white-space:nowrap;cursor:pointer}
+.hadith-chapter-btn.active{border-bottom-color:var(--hadith-accent);background:transparent;color:var(--hadith-text)}
+.hadith-list{display:grid;gap:0}
+.hadith-card{border:0;border-top:1px solid var(--hadith-line);border-radius:0;background:transparent;box-shadow:none;padding:16px 2px 18px;cursor:pointer;overflow:hidden;max-width:100%}
+.hadith-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.hadith-card-title{color:var(--hadith-text);font-family:var(--serif);font-size:18px;line-height:1.2;font-weight:650}
+.hadith-card-ar{direction:rtl;text-align:right;color:var(--hadith-text);font-family:"Amiri","Scheherazade New","Traditional Arabic",serif;font-size:clamp(23px,4.8vw,34px);line-height:2;margin:10px 0 12px}
+.hadith-card-de{color:var(--hadith-text);font-size:15px;line-height:1.78;margin:8px 0 0}
+.hadith-warning{border:0;border-top:1px dashed var(--hadith-line);border-radius:0;background:transparent;color:var(--hadith-muted);padding:8px 0;font-size:12px;line-height:1.48;margin:8px 0}
+.hadith-source-line{border-top:1px solid var(--hadith-line);margin-top:12px;padding-top:8px;color:var(--hadith-muted);font-size:11px;line-height:1.45}
+.hadith-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px}
+.hadith-action{border:0;border-bottom:1px solid var(--hadith-line);border-radius:0;background:transparent;color:var(--hadith-text);font-size:11px;font-weight:750;padding:4px 0;cursor:pointer;text-decoration:none;min-width:0;overflow-wrap:anywhere}
+.hadith-action.primary{border-color:var(--hadith-accent);background:transparent;color:var(--hadith-accent)}
+.hadith-empty{border:0;border-top:1px dashed var(--hadith-line);border-radius:0;padding:14px 0;color:var(--hadith-muted);font-size:13px;line-height:1.55;background:transparent}
+.hadith-breadcrumb{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 10px;padding:0 0 8px;border-bottom:1px solid var(--hadith-line)}
+.hadith-breadcrumb button{border:0;border-radius:0;background:transparent;color:var(--hadith-accent);font-size:11px;font-weight:750;padding:4px 0}
+.hadith-chapter-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0}
+.hadith-chapter-card{border:0;border-top:1px solid var(--hadith-line);border-radius:0;background:transparent;padding:12px 8px 12px 2px;text-align:left;color:var(--hadith-text);cursor:pointer;max-width:100%;overflow:hidden}
 .hadith-chapter-card b{display:block;color:var(--hadith-text);font-family:var(--serif);font-size:17px;line-height:1.18}
 .hadith-chapter-card span{display:block;color:var(--hadith-muted);font-size:11px;margin-top:4px}
-.hadith-section-list{display:grid;gap:8px}
-.hadith-section-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--hadith-line);border-radius:14px;background:var(--hadith-panel);padding:10px;color:var(--hadith-text);text-align:left;cursor:pointer;min-height:50px;max-width:100%;overflow:hidden}
+.hadith-section-list{display:grid;gap:0}
+.hadith-section-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;border:0;border-top:1px solid var(--hadith-line);border-radius:0;background:transparent;padding:12px 2px;color:var(--hadith-text);text-align:left;cursor:pointer;min-height:48px;max-width:100%;overflow:hidden}
 .hadith-section-row b{font-size:15px;color:var(--hadith-text)}
-.hadith-section-row span{color:var(--hadith-accent);font-size:12px;font-weight:950}
-.hadith-daily-panel{border:1px solid rgba(214,180,106,.24);border-radius:20px;background:linear-gradient(135deg,rgba(6,47,36,.84),rgba(17,24,24,.90));padding:12px}
+.hadith-section-row span{color:var(--hadith-accent);font-size:12px;font-weight:750}
+.hadith-daily-panel{border:0;border-top:1px solid var(--hadith-line);border-radius:0;background:transparent;padding:12px 0}
 .hadith-daily-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
-.hadith-daily-grid label{display:grid;gap:5px;color:var(--muted);font-size:11px;font-weight:900}
-.hadith-daily-grid input,.hadith-daily-grid select{width:100%;border:1px solid rgba(214,180,106,.24);border-radius:14px;background:rgba(255,245,221,.08);color:var(--cream);padding:9px}
+.hadith-daily-grid label{display:grid;gap:5px;color:var(--hadith-muted);font-size:11px;font-weight:800}
+.hadith-daily-grid input,.hadith-daily-grid select{width:100%;border:0;border-bottom:1px solid var(--hadith-line);border-radius:0;background:transparent;color:var(--hadith-text);padding:8px 0}
 .hadith-daily-grid option{color:#111}
-@media(max-width:940px){.hadith-toolbar{grid-template-columns:1fr}.hadith-layout{grid-template-columns:1fr}.hadith-books-grid{display:flex;overflow-x:auto;max-height:none;padding-bottom:6px;scrollbar-width:none}.hadith-books-grid::-webkit-scrollbar{display:none}.hadith-book-card{min-width:245px}.hadith-panel-head{flex-direction:column}.hadith-actions .hadith-action{flex:1 1 auto;text-align:center}}
-@media(max-width:700px){.hadith-hero{padding:12px;border-radius:20px}.hadith-books-panel,.hadith-panel{padding:10px;border-radius:18px}.hadith-book-card{min-height:96px}.hadith-card-ar{font-size:21px}.hadith-card-de{font-size:14px}.hadith-toolbar{gap:8px}.hadith-chapter-grid,.hadith-daily-grid{grid-template-columns:1fr}}
-.hadith-card.is-favorite{border-color:rgba(239,215,142,.62);box-shadow:0 0 0 1px rgba(239,215,142,.20),0 18px 44px rgba(0,0,0,.25)}
+@media(max-width:940px){.hadith-toolbar{grid-template-columns:1fr}.hadith-layout{grid-template-columns:1fr}.hadith-books-grid{display:flex;overflow-x:auto;max-height:none;padding-bottom:6px;scrollbar-width:none}.hadith-books-grid::-webkit-scrollbar{display:none}.hadith-book-card{min-width:220px;border-top:0;border-right:1px solid var(--hadith-line);padding:10px 14px}.hadith-panel-head{flex-direction:column}.hadith-actions .hadith-action{flex:1 1 auto;text-align:center}}
+@media(max-width:700px){.hadith-hero{padding:8px 2px 14px;border-radius:0}.hadith-books-panel,.hadith-panel{padding:8px 0;border-radius:0}.hadith-card-ar{font-size:21px}.hadith-card-de{font-size:14px}.hadith-toolbar{gap:8px}.hadith-chapter-grid,.hadith-daily-grid{grid-template-columns:1fr}}
+.hadith-card.is-favorite{border-top-color:var(--hadith-accent);box-shadow:none}
 .hadith-card-ar.is-hidden,.hadith-machine-box.is-hidden{display:none}
 .hadith-card-de.is-primary{font-size:16px;line-height:1.78;margin-top:10px}
-.hadith-machine-box{margin-top:10px;border:1px solid rgba(239,215,142,.30);border-radius:16px;background:rgba(239,215,142,.075);padding:10px;color:var(--cream);font-size:13px;line-height:1.6}
-.hadith-machine-box b{display:block;color:var(--gold2);margin-bottom:5px}
-.hadith-action.is-active{border-color:rgba(239,215,142,.60);background:rgba(239,215,142,.16);color:#fff8df}
-@media(max-width:767px){.hadith-shell,.hadith-layout,.hadith-toolbar,.hadith-books-panel,.hadith-panel,.hadith-card,.hadith-chapter-card,.hadith-section-row{max-width:100%;min-width:0}.hadith-toolbar{display:grid;grid-template-columns:1fr}.hadith-books-grid{display:flex;gap:8px;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}.hadith-book-card{flex:0 0 min(74vw,255px);min-width:0}.hadith-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.hadith-action{width:100%;text-align:center;white-space:normal}.hadith-card-ar{font-size:clamp(22px,7vw,32px);line-height:1.9;overflow-wrap:anywhere}.hadith-card-de{font-size:clamp(14px,4vw,17px);line-height:1.7}.hadith-card-top{align-items:flex-start}.hadith-chip{white-space:normal}.hadith-source-line,.hadith-card-title,.hadith-card-de,.hadith-section-row b,.hadith-chapter-card b{overflow-wrap:anywhere;word-break:normal}.hadith-daily-panel{display:none}}
+.hadith-machine-box{margin-top:10px;border:0;border-top:1px solid var(--hadith-line);border-radius:0;background:transparent;padding:10px 0;color:var(--hadith-text);font-size:13px;line-height:1.6}
+.hadith-machine-box b{display:block;color:var(--hadith-accent);margin-bottom:5px}
+.hadith-action.is-active{border-bottom-color:var(--hadith-accent);background:transparent;color:var(--hadith-accent)}
+@media(max-width:767px){.hadith-shell,.hadith-layout,.hadith-toolbar,.hadith-books-panel,.hadith-panel,.hadith-card,.hadith-chapter-card,.hadith-section-row{max-width:100%;min-width:0}.hadith-toolbar{display:grid;grid-template-columns:1fr}.hadith-books-grid{display:flex;gap:0;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}.hadith-book-card{flex:0 0 min(74vw,255px);min-width:0}.hadith-actions{display:flex;flex-wrap:wrap}.hadith-action{width:auto;text-align:left;white-space:normal}.hadith-card-ar{font-size:clamp(22px,7vw,32px);line-height:1.9;overflow-wrap:anywhere}.hadith-card-de{font-size:clamp(14px,4vw,17px);line-height:1.7}.hadith-card-top{align-items:flex-start}.hadith-chip{white-space:normal}.hadith-source-line,.hadith-card-title,.hadith-card-de,.hadith-section-row b,.hadith-chapter-card b{overflow-wrap:anywhere;word-break:normal}.hadith-daily-panel{display:none}}
+body.is-hadith-route .view{background:transparent}
+.more-feature-row.more-feature-row--hadith{border-radius:0!important;background:transparent!important;box-shadow:none!important;border:0!important;border-top:1px solid color-mix(in srgb,var(--gold2,#e8c96a) 28%, transparent)!important;padding:12px 2px!important}
+#dar-setup-hub [data-nav="hadith"],
+.dar-setup-hub [data-nav="hadith"],
+#dar-ios-setup-assistant [data-nav="hadith"],
+.settings-one-page [data-nav="hadith"],
+.home-v380-lib-card[data-nav="hadith"]{display:none!important}
 .ilm-shell{display:grid;gap:16px}
 .ilm-hero{display:grid;gap:12px;padding:18px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,rgba(239,215,142,.06),rgba(255,255,255,.02))}
 .ilm-hero-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -9921,12 +9934,7 @@ body.is-quiz-route .view{
     radial-gradient(circle at 86% 10%,color-mix(in srgb,var(--accent) 18%,transparent),transparent 36%),
     linear-gradient(180deg,color-mix(in srgb,var(--bg) 90%,#050607 10%),color-mix(in srgb,var(--bg2) 88%,#050607 12%) 56%,color-mix(in srgb,var(--bg) 92%,#000 8%));
 }
-body.is-hadith-route .view{
-  background:
-    radial-gradient(circle at 10% 0%,rgba(239,208,138,.14),transparent 42%),
-    radial-gradient(circle at 90% 12%,rgba(123,186,255,.16),transparent 38%),
-    linear-gradient(180deg,#051422,#0d2136 54%,#09182a);
-}
+body.is-hadith-route .view{background:transparent}
 body.is-quiz-route .view-head h2,
 body.is-hadith-route .view-head h2{color:var(--gold2)}
 body.is-quiz-route .view-desc,
@@ -10276,57 +10284,52 @@ html[data-theme="bordeaux"] .quiz-shell.quiz-shell-pro{
   --quiz-accent-2:#d2b06b;
 }
 .hadith-shell.hadith-shell-pro{
-  --hadith-bg:#061529;
-  --hadith-panel:#0d2038;
-  --hadith-panel-2:#173455;
-  --hadith-emerald:#12304e;
-  --hadith-accent:#f0d08a;
-  --hadith-text:#f8eed8;
-  --hadith-muted:#d4c5a9;
-  --hadith-line:rgba(240,208,138,.36);
-  gap:14px;
+  --hadith-accent:var(--gold2,#f0d08a);
+  --hadith-text:var(--text,#f8eed8);
+  --hadith-muted:var(--muted,#d4c5a9);
+  --hadith-line:color-mix(in srgb,var(--gold2,#f0d08a) 34%, transparent);
+  gap:0;
+  background:transparent;
+  border-radius:0;
+  box-shadow:none;
 }
 .hadith-shell.hadith-shell-pro :is(.hadith-hero,.hadith-books-panel,.hadith-panel,.hadith-book-card,.hadith-card,.hadith-chapter-card,.hadith-section-row){
-  border-radius:20px;
-  box-shadow:0 16px 40px rgba(0,0,0,.28);
+  border-radius:0;
+  box-shadow:none;
+  background:transparent;
 }
 .hadith-shell.hadith-shell-pro :is(.hadith-panel-head h3,.hadith-card-title,.hadith-section-row b,.hadith-chapter-card b,.hadith-card-de,.hadith-source-line,.hadith-chip,.hadith-warning){
   overflow-wrap:anywhere;
   word-break:normal;
 }
-.hadith-shell.hadith-shell-pro .hadith-card-de{line-height:1.72}
-.hadith-shell.hadith-shell-pro .hadith-card-ar{
-  line-height:1.95;
-  text-wrap:pretty;
-}
+.hadith-shell.hadith-shell-pro .hadith-card-de{line-height:1.78}
+.hadith-shell.hadith-shell-pro .hadith-card-ar{line-height:1.95;text-wrap:pretty}
 .hadith-shell.hadith-shell-pro .hadith-book-card,
 .hadith-shell.hadith-shell-pro .hadith-section-row,
 .hadith-shell.hadith-shell-pro .hadith-chapter-card,
 .hadith-shell.hadith-shell-pro .hadith-card{
-  transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,filter .16s ease;
+  transition:border-color .16s ease,color .16s ease;
 }
 .hadith-shell.hadith-shell-pro :is(.hadith-book-card:hover,.hadith-section-row:hover,.hadith-chapter-card:hover,.hadith-card:hover){
-  transform:translateY(-1px);
-  filter:brightness(1.04);
+  transform:none;
+  filter:none;
 }
 .hadith-shell.hadith-shell-pro .hadith-book-card.active{
-  border-color:rgba(240,208,138,.74);
-  box-shadow:0 0 0 2px rgba(240,208,138,.25),0 18px 46px rgba(0,0,0,.32);
+  border-color:transparent;
+  border-top-color:var(--hadith-accent);
+  box-shadow:none;
 }
-.hadith-shell.hadith-shell-pro .hadith-actions{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-}
+.hadith-shell.hadith-shell-pro .hadith-actions{display:flex;flex-wrap:wrap;gap:14px}
 .hadith-shell.hadith-shell-pro .hadith-action{
-  min-height:40px;
-  text-align:center;
+  min-height:0;
+  text-align:left;
   white-space:normal;
-  transition:transform .16s ease,box-shadow .16s ease,background .16s ease,border-color .16s ease;
+  transition:border-color .16s ease,color .16s ease;
 }
-.hadith-shell.hadith-shell-pro .hadith-action:hover{transform:translateY(-1px)}
+.hadith-shell.hadith-shell-pro .hadith-action:hover{transform:none}
 .hadith-shell.hadith-shell-pro .hadith-action.is-active,
 .hadith-shell.hadith-shell-pro .hadith-action.active{
-  box-shadow:0 0 0 2px rgba(240,208,138,.24),0 0 22px rgba(240,208,138,.14);
+  box-shadow:none;
 }
 @media(max-width:900px){
   .quiz-shell.quiz-shell-pro .quiz-config-grid{grid-template-columns:1fr}
@@ -10442,7 +10445,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/focus-feed-app.js?v=7" defer></script>
 <script src="/assets/html2canvas.min.js" defer></script>
 <script src="/test/assets/premium-feed-app.js?v=101" defer></script>
-<script src="/test/assets/dar-setup-hub.js?v=5" defer></script><!-- DAR_SETUP_HUB_V1 -->
+<script src="/test/assets/dar-setup-hub.js?v=6" defer></script><!-- DAR_SETUP_HUB_V1 -->
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <script src="/test/assets/adaptive-layout.js?v=937" defer></script>
 <script src="/test/assets/fold-split.js?v=937" defer></script>
@@ -12088,7 +12091,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=791">
 <link rel="stylesheet" href="/test/assets/adaptive-layout.css?v=937">
 <link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=668">
-<link rel="stylesheet" href="/test/assets/dar-setup-hub.css?v=7"><!-- DAR_SETUP_HUB_V1 -->
+<link rel="stylesheet" href="/test/assets/dar-setup-hub.css?v=8"><!-- DAR_SETUP_HUB_V1 -->
 <link rel="stylesheet" href="/test/assets/dar-top-chrome-fix.css?v=2"><!-- DAR_TOP_CHROME_FIX -->
 <link rel="stylesheet" href="/test/assets/dar-ios-oversize-copy.css?v=5"><!-- DAR_IOS_OVERSIZE_COPY -->
 <link rel="stylesheet" href="/test/assets/full-edge-appearance-polish.css?v=665">
@@ -20926,7 +20929,7 @@ html body .post-reader-main .post-source-oval.post-source-module .post-after-lin
 <script>
 
 /* PUBLISH ISOLATION GUARD FINAL: stale index, incremental sync, render caps */
-const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const IS_TEST_PATH=location.pathname.indexOf("/test/")===0||location.pathname==="/test";function isTestAppPath(){return IS_TEST_PATH}function isVisitorTestOnlyView(view){const v=String(view||"");return!isTestAppPath()&&(v==="hadith"||v==="ilm"||v==="quran-player")}const IS_STAGING_HOST=location.hostname.startsWith("staging.");const IS_STAGING_ENV=new URLSearchParams(location.search).get("env")==="staging";const CONTENT_ENV=IS_TEST_PATH||IS_STAGING_ENV||IS_STAGING_HOST?"staging":"production";const IS_STAGING_APP=IS_TEST_PATH||IS_STAGING_HOST;const POSTS_DIR=IS_STAGING_APP?"content/staging/posts":"content/posts";const BRANCH="main";const CACHE_KEY=IS_STAGING_APP?"darCachedPostsStagingV3":"darCachedPostsV12";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY=IS_STAGING_APP?"darPostFileMapStagingV3":"darPostFileMapV10";const POST_PARSE_VERSION=14;const FEED_MIN_POST_NUM=431;const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_TOPICS_PATH="/data/quran-topics.json";const QURAN_TOPICS_CACHE_KEY="darQuranTopicsV2";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV2";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="quranTransliterationMode";const QURAN_VIEW_SETTINGS_KEY="darQuranViewSettingsV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";const POST_BROWSE_KEY="darPostBrowseV1";const ILM_CHAT_STORE_KEY=IS_STAGING_APP?"darIlmChatStoreStagingV1":"darIlmChatStoreV1";const ILM_ADMIN_STORE_KEY=IS_STAGING_APP?"darIlmAdminStoreStagingV1":"darIlmAdminStoreV1";const ILM_QUIZ_PATH="/data/quiz-questions.json";const ILM_KNOWLEDGE_INDEX_PATH="/data/ilm-knowledge-index.json";const ILM_QUIZ_CACHE_KEY=IS_STAGING_APP?"darIlmQuizStagingV1":"darIlmQuizV1";const ILM_KNOWLEDGE_CACHE_KEY=IS_STAGING_APP?"darIlmKnowledgeIndexStagingV1":"darIlmKnowledgeIndexV1";const ILM_MAX_CHAT_MESSAGES=120;const ILM_MAX_MATCHES=10;const ILM_MIN_SCORE=4;const ILM_STRONG_SCORE=12;const CONTENT_REFRESH_MS=60000;const POSTS_FETCH_BATCH=8;const FILTER_RENDER_LIMIT=80;const POSTS_CACHE_QUOTA_MAX=300;const POSTS_INDEX_STALE_KEY=IS_STAGING_APP?"darPostsIndexStaleStagingV2":"darPostsIndexStaleV2";const POSTS_FETCH_TIMEOUT_MS=12000;let postsSyncBusy=false;let postsSyncSilent=false;let postsSyncLabel="";let refreshContentPromise=null;let refreshContentQueued=false;let refreshContentDebTimer=null;let postsRenderTimer=null;
+const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const IS_TEST_PATH=location.pathname.indexOf("/test/")===0||location.pathname==="/test";function isTestAppPath(){return IS_TEST_PATH}function isVisitorTestOnlyView(view){const v=String(view||"");return!isTestAppPath()&&(v==="ilm"||v==="quran-player")}const IS_STAGING_HOST=location.hostname.startsWith("staging.");const IS_STAGING_ENV=new URLSearchParams(location.search).get("env")==="staging";const CONTENT_ENV=IS_TEST_PATH||IS_STAGING_ENV||IS_STAGING_HOST?"staging":"production";const IS_STAGING_APP=IS_TEST_PATH||IS_STAGING_HOST;const POSTS_DIR=IS_STAGING_APP?"content/staging/posts":"content/posts";const BRANCH="main";const CACHE_KEY=IS_STAGING_APP?"darCachedPostsStagingV3":"darCachedPostsV12";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY=IS_STAGING_APP?"darPostFileMapStagingV3":"darPostFileMapV10";const POST_PARSE_VERSION=14;const FEED_MIN_POST_NUM=431;const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_TOPICS_PATH="/data/quran-topics.json";const QURAN_TOPICS_CACHE_KEY="darQuranTopicsV2";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV2";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="quranTransliterationMode";const QURAN_VIEW_SETTINGS_KEY="darQuranViewSettingsV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";const POST_BROWSE_KEY="darPostBrowseV1";const ILM_CHAT_STORE_KEY=IS_STAGING_APP?"darIlmChatStoreStagingV1":"darIlmChatStoreV1";const ILM_ADMIN_STORE_KEY=IS_STAGING_APP?"darIlmAdminStoreStagingV1":"darIlmAdminStoreV1";const ILM_QUIZ_PATH="/data/quiz-questions.json";const ILM_KNOWLEDGE_INDEX_PATH="/data/ilm-knowledge-index.json";const ILM_QUIZ_CACHE_KEY=IS_STAGING_APP?"darIlmQuizStagingV1":"darIlmQuizV1";const ILM_KNOWLEDGE_CACHE_KEY=IS_STAGING_APP?"darIlmKnowledgeIndexStagingV1":"darIlmKnowledgeIndexV1";const ILM_MAX_CHAT_MESSAGES=120;const ILM_MAX_MATCHES=10;const ILM_MIN_SCORE=4;const ILM_STRONG_SCORE=12;const CONTENT_REFRESH_MS=60000;const POSTS_FETCH_BATCH=8;const FILTER_RENDER_LIMIT=80;const POSTS_CACHE_QUOTA_MAX=300;const POSTS_INDEX_STALE_KEY=IS_STAGING_APP?"darPostsIndexStaleStagingV2":"darPostsIndexStaleV2";const POSTS_FETCH_TIMEOUT_MS=12000;let postsSyncBusy=false;let postsSyncSilent=false;let postsSyncLabel="";let refreshContentPromise=null;let refreshContentQueued=false;let refreshContentDebTimer=null;let postsRenderTimer=null;
 const CURRENT_UPDATES_PATH=IS_STAGING_APP?"/content/staging/updates/current.json":"/content/updates/current.json";const CURRENT_UPDATES_CACHE_KEY=IS_STAGING_APP?"darCurrentUpdatesStagingV2":"darCurrentUpdatesV2";let currentUpdates=[];
 const DAILY_CONTENT_PATH="/content/updates/daily.json";let darDailyContent=null;
 const HADITH_BOOKS_PATH="/data/hadith/books.json";const HADITH_SEARCH_PATH="/data/hadith/search-index.json";const HADITH_CACHE_KEY="darHadithLibraryV2";const HADITH_FILTER_KEY="darHadithFiltersV2";const HADITH_FAV_KEY="darHadithFavoritesV1";const HADITH_MACHINE_CACHE_KEY="darHadithMachineTranslationsV1";const HADITH_DAILY_KEY="darHadithDailySettingsV1";let hadithBooks=[];let hadithSearchIndex=[];let hadithCollections=new Map();let hadithLoading=null;let hadithActiveBook="";let hadithActiveChapter="";let hadithActiveSection="";let hadithFilters={status:"",grade:"",language:"german"};
@@ -26462,6 +26465,7 @@ function renderQuizStatsPage(session){const snap=quizSnapshotStats();const topic
 function renderQuizRepeatPage(){const ids=[...getQuizMarkedIds()].filter(id=>quizQuestionById(id));const weakFromHistory=quizHistory().slice(-10).flatMap(x=>x.topics||[]).sort((a,b)=>b.wrong-a.wrong).slice(0,6);return `${setPageHeader("Wiederholen","Gemerkte und schwierige Fragen trainieren","Quiz")}<section class="quiz-shell quiz-shell-pro"><article class="quiz-result"><span class="quiz-kicker">Wiederholen</span><h2 class="quiz-main-title">${ids.length}</h2><div class="quiz-result-grid"><div class="quiz-result-box"><b>${ids.length}</b><span>Gemerkte Fragen</span></div><div class="quiz-result-box"><b>${weakFromHistory.length}</b><span>Schwierige Themen</span></div></div><div class="quiz-result-section"><h3 class="quiz-section-title">Bereiche</h3><div class="quiz-topic-stats"><article class="quiz-topic-row"><b>Falsch beantwortete Fragen</b><span>${ids.length?`${ids.length} für Wiederholung bereit`:"Noch leer"}</span></article><article class="quiz-topic-row"><b>Gemerkte Fragen</b><span>${ids.length?`Aktiv markiert: ${ids.length}`:"Noch keine Markierung vorhanden."}</span></article><article class="quiz-topic-row"><b>Schwierige Themen</b><span>${weakFromHistory.map(x=>x.topic).slice(0,3).join(" · ")||"Noch keine Daten"}</span></article><article class="quiz-topic-row"><b>Zuletzt beantwortet</b><span>${quizHistory().length?new Date(quizHistory().slice(-1)[0].at||Date.now()).toLocaleString("de-DE"):"Noch keine Runde abgeschlossen"}</span></article></div></div><div class="quiz-actions"><button class="quiz-btn primary" type="button" id="quizRepeatStartBtn" ${ids.length?"":"disabled"}>Alle Fehler wiederholen</button><button class="quiz-btn secondary" type="button" data-nav="quiz" data-value="home">Zur Quiz-Startseite</button></div><div class="quiz-result-empty">${ids.length?"Du kannst sofort mit einer Wiederholungsrunde starten.":"Noch keine Fragen zum Wiederholen vorhanden."}</div></article></section>`}
 function bindQuizEvents(){if(currentRoute.view!=="quiz")return;__quizQuestionShownAt=Date.now();quizTelemetryFlushAsync();const start=(quick=false)=>{const cfg=quick?{topic:"all",level:"all",count:5,mode:"standard"}:quizConfig();if(!quizQuestions().length)return;const s=quizBuildSession(cfg);saveQuizSession(s);quizTelemetryTrackSession(s,"started");navigate("quiz","session")};const startBtn=$("quizStartBtn");if(startBtn)startBtn.onclick=()=>start(false);const quickBtn=$("quizQuickBtn");if(quickBtn)quickBtn.onclick=()=>start(true);const resumeBtn=$("quizResumeBtn");if(resumeBtn)resumeBtn.onclick=()=>navigate("quiz","session");const repeatBtn=$("quizRepeatStartBtn");if(repeatBtn)repeatBtn.onclick=()=>{const ids=[...getQuizMarkedIds()].filter(id=>quizQuestionById(id));if(!ids.length){alert("Noch keine gemerkten Fragen vorhanden.");return}saveQuizSession(quizBuildSession({topic:"all",level:"all",count:ids.length,mode:"lernen"},ids));navigate("quiz","session")};const newBtn=$("quizNewBtn");if(newBtn)newBtn.onclick=()=>{clearQuizSession();navigate("quiz","home")};const endBtn=$("quizEndBtn");if(endBtn)endBtn.onclick=()=>{if(confirm("Quiz wirklich beenden? Dein Fortschritt bleibt gespeichert.")){const s=quizSession();if(s){s.finished=true;s.updatedAt=Date.now();saveQuizHistoryEntry(s);quizTelemetryTrackSession(s,"abandoned");saveQuizSession(s)}navigate("quiz","session");render()}};document.querySelectorAll("[data-quiz-answer]").forEach(btn=>{btn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);if(!q)return;const existing=s.answers?.[q.id];if(existing?.evaluated)return;const idx=Number(btn.getAttribute("data-quiz-answer"));const isCorrect=idx===Number(q.correctIndex);s.answers=s.answers||{};s.answers[q.id]={selectedIndex:idx,evaluated:true,correct:isCorrect};if(!isCorrect){s.retries=s.retries||{};s.retries[q.id]=(Number(s.retries[q.id]||0)+1)}const attemptNo=Number(s.retries?.[q.id]||0)+1;quizTelemetryTrackAttempt(s,q,idx,isCorrect,attemptNo,attemptNo===1);s.updatedAt=Date.now();saveQuizSession(s);render()}});const prevBtn=$("quizPrevBtn");if(prevBtn)prevBtn.onclick=()=>{const s=quizSession();if(!s)return;s.index=Math.max(0,(s.index||0)-1);s.updatedAt=Date.now();saveQuizSession(s);render()};const retryBtn=$("quizRetryBtn");if(retryBtn)retryBtn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);if(!q)return;if(s.answers)s.answers[q.id]={selectedIndex:null,evaluated:false,correct:false};s.updatedAt=Date.now();saveQuizSession(s);render()};const rememberBtn=$("quizRememberBtn");if(rememberBtn)rememberBtn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);if(!q)return;s.bookmarked=s.bookmarked||{};const key=String(q.id);const active=toggleQuizMarkedId(key);if(active)s.bookmarked[key]=true;else delete s.bookmarked[key];s.updatedAt=Date.now();saveQuizSession(s);render()};const nextBtn=$("quizNextBtn");if(nextBtn)nextBtn.onclick=()=>{const s=quizSession();if(!s)return;const q=quizQuestionById(s.questionIds[s.index]);const answer=s.answers?.[q?.id];if(!answer?.evaluated)return;if(s.index>=s.questionIds.length-1){s.finished=true;s.updatedAt=Date.now();saveQuizHistoryEntry(s);quizTelemetryTrackSession(s,"completed");saveQuizSession(s);navigate("quiz","session");render();return}s.index+=1;s.updatedAt=Date.now();saveQuizSession(s);render()}}document.querySelectorAll("[data-quiz-result-tab]").forEach(btn=>{btn.onclick=()=>{const tab=btn.getAttribute("data-quiz-result-tab");document.querySelectorAll("[data-quiz-result-tab]").forEach(b=>b.classList.toggle("active",b===btn));document.querySelectorAll("[data-quiz-result-panel]").forEach(p=>{const on=p.getAttribute("data-quiz-result-panel")===tab;p.classList.toggle("active",on);p.hidden=!on})}});document.querySelectorAll("[data-quiz-audit-filter]").forEach(btn=>{btn.onclick=()=>{const filter=btn.getAttribute("data-quiz-audit-filter");document.querySelectorAll("[data-quiz-audit-filter]").forEach(b=>b.classList.toggle("active",b===btn));document.querySelectorAll(".quiz-audit-fold").forEach(det=>{const state=det.getAttribute("data-quiz-audit-state");det.hidden=filter!=="all"&&state!==filter})}});
 const FEATURE_PIN_KEY="darFeaturePinsV1";
+function confineHadithLibraryEntry(){document.querySelectorAll('[data-nav="hadith"]').forEach(function(el){if(el.closest(".more-group,.hadith-shell,.hadith-panel,.hadith-layout,.hadith-books-panel"))return;el.remove()});}
 function featureCatalog(){
   const testOnly=typeof IS_TEST_PATH!=="undefined"&&IS_TEST_PATH;
   const scholarCount=typeof buildScholarCatalog==="function"?buildScholarCatalog().length:0;
@@ -26500,7 +26504,7 @@ function featureCatalog(){
     const pIdx=items.findIndex(x=>x.id==="propheten");
     items.splice(pIdx>=0?pIdx+1:0,0,{id:"frauen",title:"Frauen im Islam",icon:"✦",desc:"Fiqh, Ṣaḥābiyyāt, Tābiʿiyyāt, Ehe, Familie und Wissen.",button:"Öffnen",nav:"frauen",group:"Lernen & Wissen",badge:"Prüfen"});
   }
-  if(!testOnly)return items.filter(item=>item.id!=="ilm"&&item.id!=="hadith"&&item.id!=="quran-player");
+  if(!testOnly)return items.filter(item=>item.id!=="ilm"&&item.id!=="quran-player");
   return items;
 }
 function featureById(id){return featureCatalog().find(item=>item.id===id)}
@@ -26513,7 +26517,7 @@ function renderFeatureHint(){return""}
 function renderPinnedFeaturesSection(){const pins=featurePins().map(featureById).filter(Boolean).slice(0,6);if(!pins.length)return"";return `<section class="feature-section"><div class="feature-head"><div><h3>Meine Schnellzugriffe</h3><span>Angepinnte Bereiche für schnellen Zugriff.</span></div></div><div class="feature-grid">${pins.map(renderFeatureCard).join("")}</div></section>`}
 function renderFeatureDiscoverySection(){return""}
 function renderTodayRecommendedFeatures(){return""}
-function renderMoreFeatureRow(item){if(item&&item.id==="propheten"&&window.DARProphets&&typeof window.DARProphets.renderSpotlight==="function"){let spot=window.DARProphets.renderSpotlight();if(spot.indexOf("more-feature-row")<0)spot=spot.replace('class="prophets-spotlight"','class="prophets-spotlight more-feature-row" data-feature-search="die propheten anbiya quran sunnah ueberlieferungen lernen wissen musa"');return spot}const search=[item.title,item.desc,item.group,item.badge].filter(Boolean).join(" ").toLowerCase();const hub=item.id==="jummah"||item.id==="qibla"?" more-feature-row--hub":"";return `<button class="more-feature-row${hub}" type="button" data-nav="${esc(item.nav)}" ${item.value?`data-value="${esc(item.value)}"`:""} data-feature-search="${esc(search)}"><span class="feature-icon">${esc(item.icon||"✨")}</span><span><h4>${esc(item.title)} ${item.badge?`<span class="feature-badge">${esc(item.badge)}</span>`:""}</h4><p>${esc(item.desc||"")}</p></span></button>`}
+function renderMoreFeatureRow(item){if(item&&item.id==="propheten"&&window.DARProphets&&typeof window.DARProphets.renderSpotlight==="function"){let spot=window.DARProphets.renderSpotlight();if(spot.indexOf("more-feature-row")<0)spot=spot.replace('class="prophets-spotlight"','class="prophets-spotlight more-feature-row" data-feature-search="die propheten anbiya quran sunnah ueberlieferungen lernen wissen musa"');return spot}const search=[item.title,item.desc,item.group,item.badge].filter(Boolean).join(" ").toLowerCase();const hub=item.id==="jummah"||item.id==="qibla"?" more-feature-row--hub":"";const hadithRow=item.id==="hadith"?" more-feature-row--hadith":"";return `<button class="more-feature-row${hub}${hadithRow}" type="button" data-nav="${esc(item.nav)}" ${item.value?`data-value="${esc(item.value)}"`:""} data-feature-search="${esc(search)}"><span class="feature-icon">${esc(item.icon||"✨")}</span><span><h4>${esc(item.title)} ${item.badge?`<span class="feature-badge">${esc(item.badge)}</span>`:""}</h4><p>${esc(item.desc||"")}</p></span></button>`}
 function renderMoreGroup(title,items){if(!items.length)return"";return `<section class="more-group" data-more-group><h3>${esc(title)}</h3><div class="more-group-grid">${items.map(renderMoreFeatureRow).join("")}</div></section>`}
 function filterMoreFeatures(){const input=$("moreFeatureSearch");if(!input)return;const q=input.value.trim().toLowerCase();document.querySelectorAll(".more-feature-row").forEach(row=>{row.classList.toggle("is-hidden",!!q&&!String(row.getAttribute("data-feature-search")||"").includes(q))});document.querySelectorAll("[data-more-group]").forEach(group=>{group.classList.toggle("is-hidden",!group.querySelector(".more-feature-row:not(.is-hidden)"))})}
 
@@ -26932,8 +26936,7 @@ function renderHomeLibrariesSection(){
     {nav:"bibliothek",icon:"📚",title:"DĀR AL TAWḤĪD Bibliothek",desc:"PDFs & Lernmaterialien",aria:"DĀR AL TAWḤĪD Bibliothek öffnen"},
     {nav:"books",icon:"📚",title:"Quellenbibliothek",desc:"Geprüfte Werke & Quellen",aria:"Quellenbibliothek öffnen"},
     {nav:"scholars",icon:"👤",title:"Gelehrte",desc:"Imāme, Ṣaḥābah & Tābiʿīn",aria:"Gelehrten-Bibliothek öffnen"},
-    {nav:"duas",icon:"🤲",title:"Duʿāʾ",desc:"Qurʾān & Sunnah",aria:"Duʿāʾ-Sammlung öffnen"},
-    ...(isTestAppPath()?[{nav:"hadith",icon:"📜",title:"Hadith-Bibliothek",desc:"Bücher & Übersetzungen",aria:"Hadith-Bibliothek öffnen"}]:[])
+    {nav:"duas",icon:"🤲",title:"Duʿāʾ",desc:"Qurʾān & Sunnah",aria:"Duʿāʾ-Sammlung öffnen"}
   ];
   if(!defs.length)return"";
   const cards=defs.map(c=>`<button type="button" class="home-v380-lib-card home-v380-lib-card--compact home-v380-lib-card--noble" data-nav="${c.nav}" aria-label="${esc(c.aria)}"><span class="home-v380-lib-card__ico" aria-hidden="true">${c.icon}</span><div class="home-v380-lib-card__body"><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p></div></button>`).join("");
@@ -27557,7 +27560,7 @@ function updateChrome(route){
   document.body.classList.toggle("is-feed-fullscreen",isFeedFull);
   document.body.classList.toggle("is-quiz-route",route.view==="quiz");
   document.body.classList.toggle("is-calendar-route",route.view==="calendar");
-  document.body.classList.toggle("is-hadith-route",route.view==="hadith");
+  document.body.classList.toggle("is-hadith-route",route.view==="hadith");try{confineHadithLibraryEntry()}catch(e){}
   document.body.classList.toggle("is-quran-overview",route.view==="quran");
   document.body.classList.toggle("is-quran-reader-route",route.view==="quran-surah");
   document.body.classList.toggle("is-quran-player-route",route.view==="quran-player");

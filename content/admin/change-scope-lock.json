@@ -108,6 +108,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "hadith-mehr-wissen-noble-lines-2026-09-23",
+      "approvedBy": "user-explicit-hadith-nur-mehr-wissen-lernen-edel-linien-kein-kapsel",
+      "reason": "Nutzer: Hadith-Bibliothek nur im Mehrbereich Lernen & Wissen; von anderen Seiten entfernen; Seite edel mit Linien, kein Kasten/Kapsel; zu jedem Erscheinungsbild anpassen. iOS/Web/Android.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/dar-setup-hub.css",
+        "test/assets/dar-setup-hub.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "ios-hide-footer-app-save-center-social-2026-09-22",
       "approvedBy": "user-explicit-ios-app-speichern-entfernen-rest-mittig",
       "reason": "Nutzer: iOS-App darf App speichern nicht zeigen; Telegram/WhatsApp/Instagram mittig. Sofort.",
