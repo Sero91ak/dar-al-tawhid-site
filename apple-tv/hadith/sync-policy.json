@@ -1,0 +1,43 @@
+{
+  "project": "DĀR AL TAWḤĪD – HAD Sync Policy",
+  "version": 1,
+  "active": true,
+  "sourceOfTruth": "apple-tv/hadith/",
+  "surfaces": {
+    "appleTvScreensaver": {
+      "path": "apple-tv/hadith/",
+      "usesSameRecords": true,
+      "showHadith": true,
+      "showSource": true,
+      "showSharh": false,
+      "purpose": "Bildschirmschoner zeigt nur die Ḥadīṯ-/Āṯār-Aussage mit Quelle."
+    },
+    "testAppHadithLibrary": {
+      "path": "test/data/hadith-library/catalog.json",
+      "usesSameRecords": true,
+      "showHadith": true,
+      "showSource": true,
+      "showSharh": true,
+      "showSharhSource": true,
+      "requireSharhStatus": "verified",
+      "purpose": "Test-App Ḥadīṯ-Bibliothek erhält denselben Datensatz inklusive geprüfter Erklärung."
+    },
+    "iosAppHadithLibrary": {
+      "path": "ios/DarAlTawhid/",
+      "usesTestAppData": true,
+      "showHadith": true,
+      "showSource": true,
+      "showSharh": true,
+      "showSharhSource": true,
+      "requireSharhStatus": "verified",
+      "purpose": "iOS-App nutzt die Test-App-Bibliothekslogik, sobald der Bereich veröffentlicht wird."
+    }
+  },
+  "completionRules": {
+    "completeBlockBeforeNext": true,
+    "sharhRequiredForCompletion": true,
+    "completedRecordSharhStatus": "verified",
+    "noMissingSharhInCompletedBlocks": true
+  },
+  "workflowRule": "Jeder neue HAD-Block wird zuerst vollständig unter apple-tv/hadith erstellt. Danach wird er über test/data/hadith-library/catalog.json für Test-App/iOS-Bibliothek verfügbar gemacht. Apple-TV-Screensaver blendet Sharḥ nicht ein."
+}
