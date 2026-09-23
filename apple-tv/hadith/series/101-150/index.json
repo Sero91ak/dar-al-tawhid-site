@@ -1,0 +1,21 @@
+{
+  "series": "101-150",
+  "label": "HAD-0101 bis HAD-0150",
+  "publishedFrom": "HAD-0102",
+  "publishedTo": "HAD-0103",
+  "publishedCount": 2,
+  "requireVerifiedSharh": true,
+  "files": [
+    "HAD-0102.json",
+    "HAD-0103.json"
+  ],
+  "pendingReview": [
+    "HAD-0101.json"
+  ],
+  "excluded": [
+    {
+      "id": "HAD-0101",
+      "reason": "needs-review: Duplikat von HAD-0078; nicht live aktiviert"
+    }
+  ]
+}
