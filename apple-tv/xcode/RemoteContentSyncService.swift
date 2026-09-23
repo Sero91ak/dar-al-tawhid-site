@@ -16,19 +16,69 @@ struct RemoteAreaCatalog: Codable {
         let keepLastGoodCacheOnError: Bool?
     }
 
+    struct Series: Codable {
+        let id: String?
+        let status: String?
+        let count: Int?
+        let firstId: String?
+        let lastId: String?
+        let plannedLastId: String?
+        let indexPath: String?
+        let screensaverIncluded: Bool?
+        let readyThrough: String?
+    }
+
     let project: String?
     let schemaVersion: String
-    let contentType: String
+    let language: String?
+    let contentType: String?
     let status: String?
-    let remoteLoad: Bool
-    let offlineCache: Bool
+    let target: String?
+    let remoteLoad: Bool?
+    let offlineCache: Bool?
     let contentVersion: Int?
-    let entriesCount: Int
+    let entriesCount: Int?
+    let totalCount: Int?
+    let latestId: String?
+    let nextId: String?
+    let currentSeries: String?
     let lastUpdated: String?
     let entriesIndexPath: String?
-    let entriesPaths: [String]
+    let entriesPaths: [String]?
+    let series: [Series]?
     let fallback: Fallback?
     let syncPolicy: SyncPolicy?
+
+    var shouldRemoteLoad: Bool { remoteLoad ?? true }
+    var shouldOfflineCache: Bool { offlineCache ?? true }
+
+    var effectiveContentType: String {
+        if let contentType { return contentType }
+        if totalCount != nil || series != nil { return "hadith" }
+        return "generic"
+    }
+
+    var effectiveEntriesCount: Int {
+        if let entriesCount { return entriesCount }
+        if let totalCount { return totalCount }
+        if let series { return series.compactMap(\.count).reduce(0, +) }
+        return entriesPaths?.count ?? 0
+    }
+
+    var indexPaths: [String] {
+        var paths: [String] = []
+        if let entriesIndexPath { paths.append(entriesIndexPath) }
+        if let series {
+            paths.append(contentsOf: series.compactMap(\.indexPath))
+        }
+        return Array(NSOrderedSet(array: paths)) as? [String] ?? paths
+    }
+
+    var contentPaths: [String] {
+        var paths = entriesPaths ?? []
+        paths.append(contentsOf: indexPaths)
+        return Array(NSOrderedSet(array: paths)) as? [String] ?? paths
+    }
 }
 
 struct RemoteEntriesIndex: Codable {
@@ -36,12 +86,12 @@ struct RemoteEntriesIndex: Codable {
     let totalVerifiedEntries: Int?
     let totalEntries: Int?
     let entriesCount: Int?
-    let files: [RemoteIndexedFile]
+    let files: [RemoteIndexedFile]?
 }
 
 struct RemoteIndexedFile: Codable {
     let path: String
-    let count: Int
+    let count: Int?
 }
 
 enum RemoteContentSyncTrigger: String {
@@ -87,9 +137,12 @@ actor RemoteContentSyncService {
                 return RemoteContentSyncReport(startedAt: startedAt, finishedAt: Date(), syncedCatalogs: [], failedCatalogs: [])
             }
 
+            if let audio = rootCatalog.quran?.audio, audio.remoteLoad, audio.offlineCache {
+                await collectSyncResult(audio.catalogPath, synced: &synced, failed: &failed)
+            }
+
             if let tadabbur = rootCatalog.quran?.tadabbur, tadabbur.remoteLoad, tadabbur.offlineCache {
-                let ok = await syncCatalog(relativeCatalogPath: tadabbur.catalogPath)
-                ok ? synced.append(tadabbur.catalogPath) : failed.append(tadabbur.catalogPath)
+                await collectSyncResult(tadabbur.catalogPath, synced: &synced, failed: &failed)
             }
 
             if let screensaver = rootCatalog.screensaver,
@@ -97,13 +150,15 @@ actor RemoteContentSyncService {
                screensaver.remoteLoad != false,
                screensaver.offlineCache != false,
                let catalogPath = screensaver.catalogPath {
-                let ok = await syncCatalog(relativeCatalogPath: catalogPath)
-                ok ? synced.append(catalogPath) : failed.append(catalogPath)
+                await collectSyncResult(catalogPath, synced: &synced, failed: &failed)
             }
 
             for module in rootCatalog.modules where module.remoteLoad && module.offlineCache {
-                let ok = await syncCatalog(relativeCatalogPath: module.catalogPath)
-                ok ? synced.append(module.catalogPath) : failed.append(module.catalogPath)
+                await collectSyncResult(module.catalogPath, synced: &synced, failed: &failed)
+            }
+
+            if let backgrounds = rootCatalog.backgrounds, backgrounds.isActive {
+                await collectSyncResult(backgrounds.catalogPath, synced: &synced, failed: &failed)
             }
         } catch {
             failed.append("apple-tv/catalog.json")
@@ -117,12 +172,17 @@ actor RemoteContentSyncService {
         )
     }
 
+    private func collectSyncResult(_ relativeCatalogPath: String, synced: inout [String], failed: inout [String]) async {
+        let ok = await syncCatalog(relativeCatalogPath: relativeCatalogPath)
+        ok ? synced.append(relativeCatalogPath) : failed.append(relativeCatalogPath)
+    }
+
     func syncCatalog(relativeCatalogPath: String) async -> Bool {
         do {
             let catalogURL = registry.url(forRelativePath: relativeCatalogPath)
             let catalog: RemoteAreaCatalog = try await fetchJSON(catalogURL)
 
-            guard catalog.remoteLoad, catalog.offlineCache else {
+            guard catalog.shouldRemoteLoad, catalog.shouldOfflineCache else {
                 return true
             }
 
@@ -141,20 +201,13 @@ actor RemoteContentSyncService {
                 options: .atomic
             )
 
-            if let indexPath = catalog.entriesIndexPath {
-                let indexRelativePath = join(catalogDirectory, indexPath)
-                let indexURL = registry.url(forRelativePath: indexRelativePath)
-                let indexData = try await fetchData(indexURL)
-                try indexData.write(to: stagingDirectory.appendingPathComponent(indexPath), options: .atomic)
-            }
-
-            for entryPath in catalog.entriesPaths {
-                let entryRelativePath = join(catalogDirectory, entryPath)
-                let entryURL = registry.url(forRelativePath: entryRelativePath)
-                let entryData = try await fetchData(entryURL)
-                let localURL = stagingDirectory.appendingPathComponent(entryPath)
+            for relativeFilePath in catalog.contentPaths {
+                let remoteRelativePath = join(catalogDirectory, relativeFilePath)
+                let remoteURL = registry.url(forRelativePath: remoteRelativePath)
+                let data = try await fetchData(remoteURL)
+                let localURL = stagingDirectory.appendingPathComponent(relativeFilePath)
                 try fileManager.createDirectory(at: localURL.deletingLastPathComponent(), withIntermediateDirectories: true)
-                try entryData.write(to: localURL, options: .atomic)
+                try data.write(to: localURL, options: .atomic)
             }
 
             try validate(catalog: catalog, directory: stagingDirectory)
@@ -193,18 +246,12 @@ actor RemoteContentSyncService {
 
     private func validate(catalog: RemoteAreaCatalog, directory: URL) throws {
         guard !catalog.schemaVersion.isEmpty else { throw URLError(.cannotParseResponse) }
-        guard !catalog.contentType.isEmpty else { throw URLError(.cannotParseResponse) }
+        guard !catalog.effectiveContentType.isEmpty else { throw URLError(.cannotParseResponse) }
+        guard catalog.effectiveEntriesCount >= 0 else { throw URLError(.cannotParseResponse) }
 
-        if let indexPath = catalog.entriesIndexPath {
-            let indexURL = directory.appendingPathComponent(indexPath)
-            guard fileManager.fileExists(atPath: indexURL.path) else {
-                throw URLError(.fileDoesNotExist)
-            }
-        }
-
-        for entryPath in catalog.entriesPaths {
-            let entryURL = directory.appendingPathComponent(entryPath)
-            guard fileManager.fileExists(atPath: entryURL.path) else {
+        for filePath in catalog.contentPaths {
+            let fileURL = directory.appendingPathComponent(filePath)
+            guard fileManager.fileExists(atPath: fileURL.path) else {
                 throw URLError(.fileDoesNotExist)
             }
         }
