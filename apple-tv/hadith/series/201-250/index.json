@@ -2,8 +2,8 @@
   "series": "201-250",
   "label": "HAD-0201 bis HAD-0250",
   "publishedFrom": "HAD-0201",
-  "publishedTo": "HAD-0222",
-  "publishedCount": 9,
+  "publishedTo": "HAD-0243",
+  "publishedCount": 24,
   "requireVerifiedSharh": true,
   "files": [
     "HAD-0201.json",
@@ -14,7 +14,22 @@
     "HAD-0218.json",
     "HAD-0220.json",
     "HAD-0221.json",
-    "HAD-0222.json"
+    "HAD-0222.json",
+    "HAD-0224.json",
+    "HAD-0228.json",
+    "HAD-0229.json",
+    "HAD-0230.json",
+    "HAD-0231.json",
+    "HAD-0232.json",
+    "HAD-0233.json",
+    "HAD-0234.json",
+    "HAD-0235.json",
+    "HAD-0236.json",
+    "HAD-0237.json",
+    "HAD-0239.json",
+    "HAD-0240.json",
+    "HAD-0241.json",
+    "HAD-0243.json"
   ],
   "pendingReview": [
     "HAD-0202.json",
@@ -30,7 +45,12 @@
     "HAD-0216.json",
     "HAD-0217.json",
     "HAD-0219.json",
-    "HAD-0223.json"
+    "HAD-0223.json",
+    "HAD-0225.json",
+    "HAD-0226.json",
+    "HAD-0227.json",
+    "HAD-0238.json",
+    "HAD-0242.json"
   ],
   "excluded": [
     {"id":"HAD-0202","reason":"needs-review: Duplikat von HAD-0152; nicht live aktiviert"},
@@ -46,6 +66,11 @@
     {"id":"HAD-0216","reason":"needs-review: Duplikat von HAD-0067; nicht live aktiviert"},
     {"id":"HAD-0217","reason":"needs-review: Duplikat von HAD-0175; nicht live aktiviert"},
     {"id":"HAD-0219","reason":"needs-review: thematische Überschneidung/Duplikat von HAD-0094; nicht live aktiviert"},
-    {"id":"HAD-0223","reason":"needs-review: Duplikat von HAD-0069; nicht live aktiviert"}
+    {"id":"HAD-0223","reason":"needs-review: Duplikat von HAD-0069; nicht live aktiviert"},
+    {"id":"HAD-0225","reason":"needs-review: Duplikat von HAD-0163; nicht live aktiviert"},
+    {"id":"HAD-0226","reason":"needs-review: Duplikat von HAD-0169; nicht live aktiviert"},
+    {"id":"HAD-0227","reason":"needs-review: Duplikat von HAD-0170; nicht live aktiviert"},
+    {"id":"HAD-0238","reason":"needs-review: Duplikat von HAD-0177; nicht live aktiviert"},
+    {"id":"HAD-0242","reason":"needs-review: thematische Überschneidung/Duplikat von HAD-0068 und HAD-0069; nicht live aktiviert"}
   ]
 }
