@@ -1,0 +1,166 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-2196-2220",
+  "series": "2151-2250",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "Der 25er-Unterblock wurde unter Regel v6 einzeln erstellt und abschließend vollständig geprüft. Alle 25 Datensätze besitzen einen verifizierten Šarḥ, eine eindeutige Ḥadīṯ-Quelle und entweder den frühesten greifbaren direkten Šarḥ zur konkreten Stelle oder eine dokumentierte Begründung, warum ein späterer direkter Šarḥ verwendet wurde. Es wurden keine Seitenzahlen geschätzt.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "appleTvScreensaverShowsSharh": true,
+    "perRecordImmediateActivation": true,
+    "blockActivationAllowed": true
+  },
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
+  "records": [
+    {
+      "id": "HAD-2196",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2197",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2198",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2199",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2200",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2201",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2202",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority",
+      "note": "Direkter Šarḥ zur Anfangsformulierung von Muslim 2577 in al-Muʿlim 3/291."
+    },
+    {
+      "id": "HAD-2203",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority",
+      "note": "Direkter Šarḥ zur Rechtleitungs-Klausel von Muslim 2577 in al-Muʿlim 3/291."
+    },
+    {
+      "id": "HAD-2204",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification",
+      "note": "al-Māzirī und Qāḍī ʿIyāḍ geprüft; kein früherer clause-spezifischer erklärender Šarḥ sicher greifbar gesichert."
+    },
+    {
+      "id": "HAD-2205",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification",
+      "note": "al-Māzirī und Qāḍī ʿIyāḍ geprüft; kein früherer clause-spezifischer erklärender Šarḥ sicher greifbar gesichert."
+    },
+    {
+      "id": "HAD-2206",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification",
+      "note": "al-Māzirī und Qāḍī ʿIyāḍ geprüft; Ibn Raǧab erklärt die Vergebungs-Klausel direkt."
+    },
+    {
+      "id": "HAD-2207",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification",
+      "note": "al-Māzirī und Qāḍī ʿIyāḍ geprüft; Ibn Raǧab erklärt die Nutzen-/Schaden-Klausel direkt."
+    },
+    {
+      "id": "HAD-2208",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification",
+      "note": "Frühere Muslim-Kommentare geprüft; kein früherer clause-spezifischer erklärender Šarḥ sicher greifbar gesichert."
+    },
+    {
+      "id": "HAD-2209",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification",
+      "note": "Frühere Muslim-Kommentare geprüft; kein früherer clause-spezifischer erklärender Šarḥ sicher greifbar gesichert."
+    },
+    {
+      "id": "HAD-2210",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check",
+      "note": "Direkte Erklärung des Nadel-im-Meer-Vergleichs in Ikmāl al-Muʿlim 8/47–48."
+    },
+    {
+      "id": "HAD-2211",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification",
+      "note": "Frühere Muslim-Kommentare geprüft; kein früherer clause-spezifischer erklärender Šarḥ sicher greifbar gesichert."
+    },
+    {
+      "id": "HAD-2212",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification",
+      "note": "Frühere Muslim-Kommentare geprüft; Ibn Raǧab erklärt die Schlussklausel direkt."
+    },
+    {
+      "id": "HAD-2213",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification",
+      "note": "Frühere Muslim-Kommentare geprüft; Ibn Raǧab erklärt die Schlussklausel direkt."
+    },
+    {
+      "id": "HAD-2214",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2215",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2216",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2217",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2218",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority",
+      "note": "Direkter Šarḥ der buḍʿ-Klausel in al-Muʿlim 2/22, Nr. 387."
+    },
+    {
+      "id": "HAD-2219",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority",
+      "note": "Direkter Šarḥ des Umkehrschlusses in al-Muʿlim 2/22, Nr. 387."
+    },
+    {
+      "id": "HAD-2220",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority",
+      "note": "Direkter Šarḥ des abschließenden Analogieschlusses in al-Muʿlim 2/22, Nr. 387."
+    }
+  ]
+}
