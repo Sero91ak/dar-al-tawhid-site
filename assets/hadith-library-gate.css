@@ -1,0 +1,10 @@
+.dar-hadith-library-gate{margin:14px 0;padding:16px;border:1px solid rgba(201,168,106,.28);border-radius:22px;background:linear-gradient(145deg,rgba(201,168,106,.10),rgba(20,16,10,.18));box-shadow:0 16px 34px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.04);color:var(--text,#f7ecd0)}
+.dar-hadith-library-gate__top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.dar-hadith-library-gate__title{margin:0;font-size:18px;font-weight:850;letter-spacing:.02em;color:var(--gold2,#efd78e)}
+.dar-hadith-library-gate__status{display:inline-flex;align-items:center;border:1px solid rgba(239,215,142,.32);border-radius:999px;padding:5px 9px;background:rgba(239,215,142,.09);font-size:10px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:var(--gold2,#efd78e);white-space:nowrap}
+.dar-hadith-library-gate__sub{margin:0 0 12px;font-size:13px;line-height:1.45;color:var(--muted,#b9ad8f)}
+.dar-hadith-library-gate__chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.dar-hadith-library-gate__chip{border:1px solid rgba(201,168,106,.22);border-radius:999px;padding:5px 8px;background:rgba(201,168,106,.07);font-size:11px;font-weight:750;color:var(--cream,#f6ead1)}
+.dar-hadith-library-gate__button{width:100%;min-height:40px;border:1px solid rgba(201,168,106,.30);border-radius:14px;background:rgba(201,168,106,.08);color:var(--gold2,#efd78e);font:inherit;font-size:13px;font-weight:850;letter-spacing:.02em;cursor:not-allowed}
+.dar-hadith-library-gate__button.is-open{cursor:pointer;background:linear-gradient(135deg,rgba(239,215,142,.18),rgba(201,168,106,.10))}
+.dar-hadith-library-gate__note{margin:10px 0 0;font-size:12px;line-height:1.45;color:var(--muted,#b9ad8f)}
