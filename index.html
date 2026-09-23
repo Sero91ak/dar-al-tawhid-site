@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1786134093716 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v889";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v890";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script id="dar-browser-desktop-router-v833">
 (function(){
   try{
@@ -26385,10 +26385,10 @@ function featureCatalog(){
   const newsCount=typeof activeCurrentUpdates==="function"?activeCurrentUpdates().length:0;
   const items=[
     {id:"feed",title:"Feed",icon:"✦",desc:"Neue Bildbeiträge und ruhige Empfehlungen.",button:"Öffnen",nav:"feed",group:"Lernen & Wissen",badge:"Aktuell"},
-    {id:"ilm",title:"ʿIlm",icon:"📘",desc:"Wissensassistent mit belegten Antworten aus DĀR AL TAWḤĪD.",button:"Öffnen",nav:"ilm",group:"Lernen & Wissen",badge:"Neu"},
     {id:"quiz",title:"Din-Quiz",icon:"🧠",desc:"Strukturierte Wissensprüfung nach Themen und Stufen.",button:"Öffnen",nav:"quiz",group:"Lernen & Wissen",badge:"Lernen"},
     {id:"topics",title:"Beiträge",icon:"📚",desc:(posts?.length||0)+" Aussagen mit Quellen.",button:"Lesen",nav:"topics",group:"Lernen & Wissen"},
     {id:"quran",title:"Qurʾān",icon:"📖",desc:"114 Suren mit Arabisch und Lautschrift.",button:"Öffnen",nav:"quran",group:"Lernen & Wissen",badge:"Empfohlen"},
+    ...(typeof showQuranPlayerUi==="function"&&showQuranPlayerUi()?[{id:"quran-player",title:"Qurʾān Player",icon:"🎧",desc:"Hören, mitlesen, Āyah für Āyah.",button:"Öffnen",nav:"quran-player",group:"Lernen & Wissen"}]:[]),
     {id:"duas",title:"Duʿāʾ",icon:"🤲",desc:(DUAS?.length||0)+" bekannte Duʿāʾ nach Themen.",button:"Öffnen",nav:"duas",group:"Lernen & Wissen"},
     {id:"scholars",title:"Gelehrte",icon:"👤",desc:scholarCount+" Namen und Zuordnungen.",button:"Ansehen",nav:"scholars",group:"Lernen & Wissen"},
     {id:"books",title:"Quellenbibliothek",icon:"📘",desc:(()=>{const api=window.DARCanonicalSourceLibrary;const n=api&&typeof api.getReadyBookCount==="function"?api.getReadyBookCount():(api&&api.isReady&&api.isReady()?api.getBookCount():null);return n==null?"Geprüfte historische Werke und zitierte Gelehrte.":`${n} geprüfte Werke und zitierte Gelehrte.`})(),button:"Ansehen",nav:"books",group:"Lernen & Wissen",badge:"Geprüft"},
@@ -26407,9 +26407,9 @@ function featureCatalog(){
     {id:"about",title:"Über die App",icon:"ℹ️",desc:"Maßstab, Quellenordnung und Aufbau.",button:"Lesen",nav:"about",group:"App"}
   ];
   if(typeof seasonalIslamicContext==="function"&&seasonalIslamicContext())items.push({id:"ramadan",title:"Ramaḍān & ʿĪd",icon:"🌙",desc:"Saisonale Beiträge und Zeiten.",button:"Öffnen",nav:"ramadan",group:"Alltag & Gebet",badge:"Saison"});
-  items.unshift({id:"propheten",title:"Die Propheten",icon:"",desc:"Qurʾān · Sunnah · authentische Überlieferungen",button:"Entdecken",nav:"propheten",group:"Lernen & Wissen",badge:"Wissen",premium:true});
   {const qIdx=items.findIndex(x=>x.id==="quran");items.splice(qIdx>=0?qIdx+1:3,0,{id:"bibliothek",title:"DĀR AL TAWḤĪD Bibliothek",icon:"📚",desc:"PDFs, Bücher und Themenhefte von DĀR AL TAWḤĪD.",button:"Öffnen",nav:"bibliothek",group:"Lernen & Wissen",badge:"Neu"})}
-  if(!testOnly)items=items.filter(item=>item.id!=="ilm");
+  items.unshift({id:"propheten",title:"Die Propheten",icon:"",desc:"Qurʾān · Sunnah · authentische Überlieferungen",button:"Entdecken",nav:"propheten",group:"Lernen & Wissen",badge:"Wissen",premium:true});
+  items=items.filter(item=>item.id!=="ilm"&&item.id!=="widgets"&&item.id!=="frauen");
   const seen=new Set();
   return items.filter(item=>{const id=String(item.id||item.nav||"");if(!id||seen.has(id))return false;seen.add(id);return true});
 }
@@ -26423,7 +26423,7 @@ function renderFeatureHint(){return""}
 function renderPinnedFeaturesSection(){const pins=featurePins().map(featureById).filter(Boolean).slice(0,6);if(!pins.length)return"";return `<section class="feature-section"><div class="feature-head"><div><h3>Meine Schnellzugriffe</h3><span>Angepinnte Bereiche für schnellen Zugriff.</span></div></div><div class="feature-grid">${pins.map(renderFeatureCard).join("")}</div></section>`}
 function renderFeatureDiscoverySection(){return""}
 function renderTodayRecommendedFeatures(){return""}
-function renderMoreFeatureRow(item){if(item&&item.id==="propheten"&&window.DARProphets&&typeof window.DARProphets.renderSpotlight==="function"){let spot=window.DARProphets.renderSpotlight();if(spot.indexOf("more-feature-row")<0)spot=spot.replace('class="prophets-spotlight"','class="prophets-spotlight more-feature-row" data-feature-search="die propheten anbiya quran sunnah ueberlieferungen lernen wissen musa"');return spot}const search=[item.title,item.desc,item.group,item.badge].filter(Boolean).join(" ").toLowerCase();const hub=item.id==="jummah"||item.id==="qibla"?" more-feature-row--hub":"";return `<button class="more-feature-row${hub}" type="button" data-nav="${esc(item.nav)}" ${item.value?`data-value="${esc(item.value)}"`:""} data-feature-search="${esc(search)}"><span class="feature-icon">${esc(item.icon||"✨")}</span><span><h4>${esc(item.title)} ${item.badge?`<span class="feature-badge">${esc(item.badge)}</span>`:""}</h4><p>${esc(item.desc||"")}</p></span></button>`}
+function renderMoreFeatureRow(item){if(item&&item.id==="propheten"&&window.DARProphets&&typeof window.DARProphets.renderSpotlight==="function"){try{let spot=window.DARProphets.renderSpotlight();if(spot.indexOf("more-feature-row")<0)spot=spot.replace('class="prophets-spotlight"','class="prophets-spotlight more-feature-row" data-feature-search="die propheten anbiya quran sunnah ueberlieferungen lernen wissen musa"');if(spot)return spot}catch(e){}}const search=[item.title,item.desc,item.group,item.badge].filter(Boolean).join(" ").toLowerCase();const hub=item.id==="jummah"||item.id==="qibla"?" more-feature-row--hub":"";return `<button class="more-feature-row${hub}" type="button" data-nav="${esc(item.nav)}" ${item.value?`data-value="${esc(item.value)}"`:""} data-feature-search="${esc(search)}"><span class="feature-icon">${esc(item.icon||"✨")}</span><span><h4>${esc(item.title)} ${item.badge?`<span class="feature-badge">${esc(item.badge)}</span>`:""}</h4><p>${esc(item.desc||"")}</p></span></button>`}
 function renderMoreGroup(title,items){if(!items.length)return"";return `<section class="more-group" data-more-group><h3>${esc(title)}</h3><div class="more-group-grid">${items.map(renderMoreFeatureRow).join("")}</div></section>`}
 function filterMoreFeatures(){const input=$("moreFeatureSearch");if(!input)return;const q=input.value.trim().toLowerCase();document.querySelectorAll(".more-feature-row").forEach(row=>{row.classList.toggle("is-hidden",!!q&&!String(row.getAttribute("data-feature-search")||"").includes(q))});document.querySelectorAll("[data-more-group]").forEach(group=>{group.classList.toggle("is-hidden",!group.querySelector(".more-feature-row:not(.is-hidden)"))})}
 
@@ -27178,7 +27178,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v889";
+const APP_BUILD_ID="app-shell-v890";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -28018,7 +28018,7 @@ function bindEvents(){
   document.querySelectorAll("[data-collapse-target]").forEach(btn=>{btn.onclick=(ev)=>{ev.stopPropagation();const id=btn.getAttribute("data-collapse-target");const grid=document.getElementById(id);if(!grid)return;const run=()=>{const collapsed=grid.classList.toggle("collapsed");const closedLabel=btn.getAttribute("data-collapse-closed")||"Alle anzeigen";const openLabel=btn.getAttribute("data-collapse-open")||"Zuklappen";btn.textContent=collapsed?closedLabel:openLabel};if(window.DARScrollManager?.withScrollPreserved)window.DARScrollManager.withScrollPreserved(run);else run()}});
   bindCalendarPremiumFilters();
   document.querySelectorAll("[data-nav]").forEach(bindNavActivation);
-  if(window.DARQuranPlayer&&typeof window.DARQuranPlayer.bind==="function"){window.DARQuranPlayer.bind();}
+  if(window.DARQuranPlayer&&typeof window.DARQuranPlayer.bind==="function"){try{window.DARQuranPlayer.bind()}catch(e){}}
   document.querySelectorAll("[data-feature-pin]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();ev.stopPropagation();toggleFeaturePin(btn.getAttribute("data-feature-pin")||"");render()}});
   document.querySelectorAll("[data-feature-hint-dismiss]").forEach(btn=>{btn.onclick=ev=>{ev.preventDefault();ev.stopPropagation();const key="seenFeatureHint_"+(btn.getAttribute("data-feature-hint-dismiss")||"");try{localStorage.setItem(key,"true")}catch(e){}btn.closest(".feature-hint")?.remove()}});
   const moreFeatureSearch=$("moreFeatureSearch");if(moreFeatureSearch)moreFeatureSearch.oninput=filterMoreFeatures;
