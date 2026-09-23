@@ -76,7 +76,8 @@ currentSeries: 2451-2550
 Besonderheit:
 
 - Dieser Bereich nutzt bereits eine ältere, funktionierende Struktur mit `series[].indexPath`.
-- Der neue `RemoteContentSyncService` muss deshalb nicht nur `entriesPaths`, sondern auch `series[].indexPath` synchronisieren.
+- Der neue `RemoteContentSyncService` synchronisiert deshalb nicht nur `entriesPaths`, sondern auch `series[].indexPath`.
+- Zusätzlich liest der Service die Serien-Indexdateien und lädt daraus die einzelnen `HAD-xxxx.json`-Datensätze in den zentralen Sync-Cache.
 
 ### Ḥadīṯ-Šarḥ
 
@@ -214,6 +215,11 @@ Pflicht:
 ```text
 apple-tv/xcode/AppleTVContentRegistry.swift
 apple-tv/xcode/RemoteContentSyncService.swift
+apple-tv/xcode/RemoteContentSyncCoordinator.swift
+apple-tv/xcode/QuranContentService.swift
+apple-tv/xcode/ScreensaverRotationService.swift
+apple-tv/hadith/xcode/HadithRemoteService.swift
+apple-tv/hadith/xcode/HadithScreensaverProvider.swift
 apple-tv/xcode/AUFTRAG_REMOTE_CONTENT_SYNC_IMPLEMENTATION.md
 ```
 
@@ -231,7 +237,9 @@ Pflicht:
 
 ### RemoteContentSyncService.swift
 
-Pflicht:
+Ist umgesetzt als zentrale Sync-Schicht.
+
+Pflicht/Stand:
 
 - Root-Katalog laden.
 - Qurʾān-Audio synchronisieren.
@@ -241,10 +249,71 @@ Pflicht:
 - Hintergründe synchronisieren.
 - Standard-Kataloge mit `entriesPaths` unterstützen.
 - Legacy-Kataloge mit `series[].indexPath` unterstützen.
+- Serien-Indexdateien auslesen.
+- einzelne HAD-Dateien aus Serien-Indizes laden.
 - zuerst Staging-Cache schreiben.
 - validieren.
 - erst danach aktiven Cache ersetzen.
 - alten Cache bei Fehler behalten.
+
+### RemoteContentSyncCoordinator.swift
+
+Ist umgesetzt als App-Lifecycle-Brücke.
+
+Pflicht/Stand:
+
+- `appDidStart()` für App-Start.
+- `appDidEnterForeground()` für Rückkehr aus Hintergrund.
+- `appleTVDidWake()` für Apple-TV-Wake.
+- `contentAreaDidOpen()` für Qurʾān, Ḥadīṯ, Šarḥ, Screensaver, Duʿāʾ, Serien.
+- `hadithDidOpen()` für Ḥadīṯ + Šarḥ-Prüfung.
+- `manualRefresh()` für Debug/Admin.
+- respektiert `minimumRefreshIntervalHours` aus Root-Katalog.
+
+### QuranContentService.swift
+
+Ist angebunden.
+
+Pflicht/Stand:
+
+- triggert `RemoteContentSyncService.shared.syncAll(trigger: .contentOpen)` beim Laden der Sūrenliste.
+- triggert denselben Sync beim Laden einer synchronisierten Sūrah.
+- dadurch werden Qurʾān-Tadabbur und Qurʾān-Audio-Kataloge beim Öffnen aktuell gehalten.
+- lokaler Qurʾān-Cache bleibt erhalten.
+
+### HadithRemoteService.swift
+
+Ist angebunden.
+
+Pflicht/Stand:
+
+- triggert `RemoteContentSyncService` beim Laden aller Ḥadīṯe.
+- lädt zuerst aus zentral synchronisiertem Cache.
+- fällt bei Bedarf auf Remote zurück.
+- fällt danach auf alten lokalen Ḥadīṯ-Cache zurück.
+- unterstützt bestehende Legacy-Struktur mit `series/*/index.json` und einzelnen `HAD-xxxx.json` Dateien.
+
+### ScreensaverRotationService.swift
+
+Ist angebunden.
+
+Pflicht/Stand:
+
+- triggert `RemoteContentSyncService` beim Screensaver-Start.
+- lädt `rotation.json` bevorzugt aus zentralem Sync-Cache.
+- fällt bei Bedarf auf Remote zurück.
+- fällt danach auf eigenen Config-Cache zurück.
+- Rotation bleibt shuffle-bag-basiert ohne Wiederholung vor vollständigem Zyklus.
+
+### HadithScreensaverProvider.swift
+
+Ist indirekt angebunden.
+
+Pflicht/Stand:
+
+- nutzt `HadithRemoteService.shared.loadAllHadith()`.
+- profitiert dadurch automatisch vom zentral synchronisierten Ḥadīṯ-/Āṯār-Cache.
+- liefert Inhalte an `ScreensaverRotationService`.
 
 ## Strenge Regeln für Xcode
 
@@ -296,20 +365,21 @@ Live-App darf nicht dauerhaft auf Staging zeigen.
 10. Ḥadīṯ-Katalog laden.
 11. `totalCount = 2545` erkennen.
 12. `series/2451-2550/index.json` laden.
-13. Screensaver-Katalog laden.
-14. `rotation.json` laden.
-15. Apple TV 60 Sekunden nicht bedienen.
-16. Bildschirmschoner startet.
-17. Šarḥ-Katalog lädt ohne Crash, auch wenn leer.
-18. Duʿāʾ-Katalog lädt ohne Crash, auch wenn leer.
-19. Serien-Katalog lädt ohne Crash, auch wenn leer.
-20. Āṯār-Katalog lädt ohne Crash, auch wenn leer.
-21. Internet ausschalten.
-22. App neu starten.
-23. Letzter vollständiger Cache bleibt aktiv.
-24. Remote-Datei korrigieren.
-25. App online starten.
-26. Korrektur wird ohne App-Update übernommen.
+13. einzelne `HAD-xxxx.json` Dateien aus dem Serien-Index laden.
+14. Screensaver-Katalog laden.
+15. `rotation.json` laden.
+16. Apple TV 60 Sekunden nicht bedienen.
+17. Bildschirmschoner startet.
+18. Šarḥ-Katalog lädt ohne Crash, auch wenn leer.
+19. Duʿāʾ-Katalog lädt ohne Crash, auch wenn leer.
+20. Serien-Katalog lädt ohne Crash, auch wenn leer.
+21. Āṯār-Katalog lädt ohne Crash, auch wenn leer.
+22. Internet ausschalten.
+23. App neu starten.
+24. Letzter vollständiger Cache bleibt aktiv.
+25. Remote-Datei korrigieren.
+26. App online starten.
+27. Korrektur wird ohne App-Update übernommen.
 
 ## Schlussregel
 
