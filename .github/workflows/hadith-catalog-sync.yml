@@ -13,7 +13,7 @@ permissions:
 
 concurrency:
   group: hadith-catalog-sync
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   sync:
