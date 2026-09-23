@@ -88,7 +88,8 @@ actor RemoteContentSyncService {
             }
 
             if let tadabbur = rootCatalog.quran?.tadabbur, tadabbur.remoteLoad, tadabbur.offlineCache {
-                await syncCatalog(relativeCatalogPath: tadabbur.catalogPath, synced: &synced, failed: &failed)
+                let ok = await syncCatalog(relativeCatalogPath: tadabbur.catalogPath)
+                ok ? synced.append(tadabbur.catalogPath) : failed.append(tadabbur.catalogPath)
             }
 
             if let screensaver = rootCatalog.screensaver,
@@ -96,11 +97,13 @@ actor RemoteContentSyncService {
                screensaver.remoteLoad != false,
                screensaver.offlineCache != false,
                let catalogPath = screensaver.catalogPath {
-                await syncCatalog(relativeCatalogPath: catalogPath, synced: &synced, failed: &failed)
+                let ok = await syncCatalog(relativeCatalogPath: catalogPath)
+                ok ? synced.append(catalogPath) : failed.append(catalogPath)
             }
 
             for module in rootCatalog.modules where module.remoteLoad && module.offlineCache {
-                await syncCatalog(relativeCatalogPath: module.catalogPath, synced: &synced, failed: &failed)
+                let ok = await syncCatalog(relativeCatalogPath: module.catalogPath)
+                ok ? synced.append(module.catalogPath) : failed.append(module.catalogPath)
             }
         } catch {
             failed.append("apple-tv/catalog.json")
@@ -115,20 +118,12 @@ actor RemoteContentSyncService {
     }
 
     func syncCatalog(relativeCatalogPath: String) async -> Bool {
-        var synced: [String] = []
-        var failed: [String] = []
-        await syncCatalog(relativeCatalogPath: relativeCatalogPath, synced: &synced, failed: &failed)
-        return failed.isEmpty
-    }
-
-    private func syncCatalog(relativeCatalogPath: String, synced: inout [String], failed: inout [String]) async {
         do {
             let catalogURL = registry.url(forRelativePath: relativeCatalogPath)
             let catalog: RemoteAreaCatalog = try await fetchJSON(catalogURL)
 
             guard catalog.remoteLoad, catalog.offlineCache else {
-                synced.append(relativeCatalogPath)
-                return
+                return true
             }
 
             let catalogDirectory = (relativeCatalogPath as NSString).deletingLastPathComponent
@@ -164,9 +159,9 @@ actor RemoteContentSyncService {
 
             try validate(catalog: catalog, directory: stagingDirectory)
             try activate(stagingDirectory: stagingDirectory, activeDirectory: activeDirectory)
-            synced.append(relativeCatalogPath)
+            return true
         } catch {
-            failed.append(relativeCatalogPath)
+            return false
         }
     }
 
