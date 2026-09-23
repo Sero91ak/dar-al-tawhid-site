@@ -42,7 +42,7 @@ actor HadithRemoteService {
     private let encoder = JSONEncoder()
 
     /// Lädt automatisch alle im Ḥadīṯ-Katalog registrierten Serien.
-    /// Vorher wird der zentrale RemoteContentSyncService ausgeführt, damit neue Serien,
+    /// Vorher wird genau einmal der zentrale RemoteContentSyncService ausgeführt, damit neue Serien,
     /// einzelne HAD-Dateien und Korrekturen ohne App-Update im Cache landen.
     func loadAllHadith() async throws -> [HadithRecord] {
         _ = await RemoteContentSyncService.shared.syncAll(trigger: .hadithOpen)
@@ -54,8 +54,15 @@ actor HadithRemoteService {
             all.reserveCapacity(catalog.totalCount)
 
             for series in catalog.series {
-                let records = try await loadSeries(series.id)
-                all.append(contentsOf: records)
+                do {
+                    let records = try await loadSeriesFromSyncedCache(series.id)
+                    try? saveSeriesCache(records, series: series.id)
+                    all.append(contentsOf: records)
+                } catch {
+                    let remote = try await fetchSeries(series.id)
+                    try? saveSeriesCache(remote, series: series.id)
+                    all.append(contentsOf: remote)
+                }
             }
 
             let ordered = all.sorted { $0.id < $1.id }
