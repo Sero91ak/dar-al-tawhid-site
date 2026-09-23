@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 955;
+    var PLAYER_BUILD = 956;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -104,41 +104,33 @@
   var allowAdvance = false;
   var engine = { started: false, lastUrl: "" };
 
-  var volCtx = null;
-  var volGain = null;
-  var volSrc = null;
-  function armVolumeFromGesture() {
-    try {
-      var Ctx = window.AudioContext || window.webkitAudioContext;
-      if (!Ctx) return;
-      if (!volCtx) volCtx = new Ctx();
-      var connect = function () {
-        if (!volCtx || volCtx.state !== "running") return;
-        if (!volSrc) {
-          volSrc = volCtx.createMediaElementSource(audioEl());
-          volGain = volCtx.createGain();
-          volSrc.connect(volGain);
-          volGain.connect(volCtx.destination);
-        }
-        applyVolume(true);
-      };
-      if (volCtx.state === "suspended") {
-        var p = volCtx.resume();
-        if (p && p.then) p.then(connect).catch(function () {});
-        else connect();
-      } else connect();
-    } catch (eArm) {}
+  var lastSysVolAt = 0;
+  function usesSystemVolume() {
+    return isOfficialIosApp();
   }
+  function postSystemVolume(v) {
+    var now = Date.now();
+    if (now - lastSysVolAt < 40) return;
+    lastSysVolAt = now;
+    try {
+      var h = window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.darQuranNowPlaying;
+      if (h) h.postMessage({ volume: v });
+    } catch (eVol) {}
+  }
+  function armVolumeFromGesture() {}
   function applyVolume(fromUi) {
     var v = Math.max(0, Math.min(1, Number(state.volume)));
     if (!isFinite(v)) v = 1;
     state.volume = v;
     var a = audioEl();
-    a.muted = v === 0;
     a.defaultMuted = false;
-    try { a.volume = v; } catch (e) {}
-    if (volGain && volCtx && volCtx.state === "running") {
-      try { volGain.gain.value = v; } catch (eG) {}
+    if (usesSystemVolume()) {
+      try { a.muted = false; } catch (eM) {}
+      try { a.volume = 1; } catch (e) {}
+      if (fromUi) postSystemVolume(v);
+    } else {
+      a.muted = v === 0;
+      try { a.volume = v; } catch (e2) {}
     }
     var track = document.querySelector("#darQuranPlayer [data-dqp-vol-track]");
     var fillPct = (v * 100) + "%";
@@ -153,11 +145,14 @@
     var hint = document.querySelector("[data-dqp-vol-hint]");
     if (hint) hint.hidden = true;
   }
-  function volumeFromClientX(track, clientX) {
+  function volumeFromPointer(track, clientX, clientY) {
     if (!track) return;
     var r = track.getBoundingClientRect();
     var w = r.width || 1;
-    var n = (clientX - r.left) / w;
+    var h = r.height || 1;
+    var nx = (clientX - r.left) / w;
+    var ny = 1 - ((clientY - r.top) / h);
+    var n = (h > w * 1.2) ? ny : nx;
     state.volume = Math.max(0, Math.min(1, n));
     applyVolume(true);
   }
@@ -184,21 +179,20 @@
       var drag = false;
       track.addEventListener("pointerdown", function (e) {
         e.stopPropagation();
-        e.preventDefault();
         drag = true;
         try { track.setPointerCapture(e.pointerId); } catch (eCap) {}
         armVolumeFromGesture();
-        volumeFromClientX(track, e.clientX);
+        volumeFromPointer(track, e.clientX, e.clientY);
       });
       track.addEventListener("pointermove", function (e) {
         if (!drag) return;
         e.preventDefault();
-        volumeFromClientX(track, e.clientX);
+        volumeFromPointer(track, e.clientX, e.clientY);
       });
       function endDrag(e) {
         if (!drag) return;
         drag = false;
-        volumeFromClientX(track, e.clientX);
+        volumeFromPointer(track, e.clientX, e.clientY);
         saveState();
       }
       track.addEventListener("pointerup", endDrag);
@@ -2446,7 +2440,7 @@
       vol.addEventListener("click", function (e) { e.stopPropagation(); });
       vol.addEventListener("input", function () {
         state.volume = Number(vol.value) / 100;
-        applyVolume();
+        applyVolume(true);
       });
     }
   }
@@ -2582,7 +2576,7 @@
   function bindLearnSheet(sh) {
     if (!sh || sh.dataset.dqpSheetBound === "1") return;
     sh.dataset.dqpSheetBound = "1";
-    sh.addEventListener("click", function (ev) {
+    function handle(ev) {
       if (ev.target === sh) { closeSheet(); return; }
       var t = ev.target.closest ? ev.target.closest("[data-dqp],[data-dqp-opt]") : null;
       if (!t || !sh.contains(t)) return;
@@ -2592,7 +2586,11 @@
       if (act === "sheet-close") { closeSheet(); return; }
       var opt = t.getAttribute("data-dqp-opt");
       if (opt) onOpt(opt);
-    });
+    }
+    sh.addEventListener("click", handle, true);
+    sh.addEventListener("pointerup", function (ev) {
+      if (ev.pointerType === "touch") handle(ev);
+    }, true);
   }
   function learnSheet() {
     var sh = document.getElementById("dqpLearnSheet");
@@ -2612,11 +2610,13 @@
     return (root && root.querySelector("[data-dqp-sheet]")) || null;
   }
   function activeSheetEl() {
-    if (fullUiWanted) {
+    var root = playerRoot();
+    var fullVisible = !!(isFullPlayerRoute() && fullUiWanted && root && !root.hidden && String(root.style.display || "") !== "none");
+    if (fullVisible) {
       var inner = playerSheetEl();
       if (inner) return inner;
     }
-    return document.getElementById("dqpLearnSheet") || playerSheetEl();
+    return learnSheet();
   }
   function closeSheet() {
     var sh = activeSheetEl();
@@ -2783,6 +2783,7 @@
     draw();
   }
   function openReciterSheet() {
+    if (!isFullPlayerRoute()) fullUiWanted = false;
     openSheet("Qāriʾ", '<div class="dqp-opt-list">' + RECITERS.map(function (r) {
       var key = r.id + ":" + state.surah + ":" + state.ayah;
       var mark = availCache[key] === false ? "nicht verfügbar" : (r.id === FALLBACK_QARI ? "vollständig" : "");

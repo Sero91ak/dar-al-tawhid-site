@@ -755,6 +755,8 @@ struct WebAppView: UIViewRepresentable {
         private var nowPlayingArt: UIImage?
         private var nowPlayingArtURL: String = ""
         private var remoteCommandsReady = false
+        private var systemVolumeView: MPVolumeView?
+        private weak var systemVolumeSlider: UISlider?
         private let errorHTML = """
         <!doctype html>
         <html lang="de">
@@ -967,6 +969,16 @@ struct WebAppView: UIViewRepresentable {
         }
 
         private func applyQuranNowPlaying(_ body: [String: Any]) {
+            if body["volume"] != nil {
+                let raw = (body["volume"] as? NSNumber)?.doubleValue
+                    ?? (body["volume"] as? Double)
+                    ?? Double(body["volume"] as? String ?? "")
+                    ?? -1
+                if raw >= 0 {
+                    setSystemVolume(Float(min(1, max(0, raw))))
+                }
+                return
+            }
             if (body["clear"] as? Bool) == true {
                 MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
                 return
@@ -1027,6 +1039,27 @@ struct WebAppView: UIViewRepresentable {
 
         private func evalPlayerJS(_ js: String) {
             webView?.evaluateJavaScript(js, completionHandler: nil)
+        }
+
+        private func ensureSystemVolumeSlider() {
+            if systemVolumeSlider != nil { return }
+            let host = webView?.superview ?? webView
+            let view = MPVolumeView(frame: CGRect(x: -1200, y: -1200, width: 12, height: 12))
+            view.alpha = 0.01
+            view.isUserInteractionEnabled = false
+            host?.addSubview(view)
+            view.layoutIfNeeded()
+            systemVolumeView = view
+            systemVolumeSlider = view.subviews.compactMap { $0 as? UISlider }.first
+        }
+
+        private func setSystemVolume(_ value: Float) {
+            ensureSystemVolumeSlider()
+            let clamped = min(1, max(0, value))
+            if systemVolumeSlider == nil {
+                ensureSystemVolumeSlider()
+            }
+            systemVolumeSlider?.value = clamped
         }
 
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
