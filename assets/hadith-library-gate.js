@@ -196,6 +196,8 @@
   }
 
   function mountCard() {
+    removeCard();
+    return;
     ensureCss();
     ensureDataLoader();
 
@@ -232,6 +234,7 @@
   }
 
   function blockLockedRoute() {
+    return;
     if (!isHadithRoute()) return;
     ensureDataLoader();
     if (gateState.enabled && gateState.releasedByUser === true) return;

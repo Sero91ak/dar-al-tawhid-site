@@ -247,23 +247,7 @@
   function enforceHadithGatePlacement() {
     try {
       var existing = document.getElementById(HADITH_GATE_ID);
-      if (!isMoreRoute()) {
-        if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
-        return;
-      }
-      var target = findLearningTarget();
-      if (!target) {
-        if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
-        return;
-      }
-      var needsReplace = !existing || !existing.querySelector(".dar-hadith-library-gate__body") || existing.parentNode !== target;
-      if (needsReplace) {
-        if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
-        var wrap = document.createElement("div");
-        wrap.innerHTML = compactHadithGateHtml();
-        var card = wrap.firstElementChild;
-        if (card) target.appendChild(card);
-      }
+      if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
     } catch (e) {}
   }
 
