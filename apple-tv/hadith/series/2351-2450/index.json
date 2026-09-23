@@ -1,17 +1,22 @@
 {
   "series": "2351-2450",
+  "status": "complete",
   "count": 100,
   "firstId": "HAD-2351",
   "lastId": "HAD-2450",
-  "status": "complete",
+  "contentTypes": {
+    "hadith": 98,
+    "athar": 2
+  },
   "screensaver": {
     "included": true,
     "rotation": "shuffleBag",
-    "showEveryItemBeforeRepeat": true
+    "showEveryItemBeforeRepeat": true,
+    "requireVerifiedSharh": true
   },
   "completionRule": {
     "sharhRequiredForCompletion": true,
-    "allRecordsSharhStatus": "verified"
+    "allIndexedRecordsSharhStatus": "verified"
   },
   "files": [
     "HAD-2351.json",
