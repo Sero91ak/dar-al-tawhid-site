@@ -1,8 +1,18 @@
 {
   "project": "DĀR AL TAWḤĪD – HAD Sync Policy",
-  "version": 1,
+  "version": 2,
   "active": true,
   "sourceOfTruth": "apple-tv/hadith/",
+  "globalGate": {
+    "enabled": false,
+    "status": "in-progress",
+    "visibleInMoreArea": true,
+    "allowOpenWhileLocked": false,
+    "releaseRequired": true,
+    "liveGatePath": "data/hadith-library-gate.json",
+    "testGatePath": "test/data/hadith-library-gate.json",
+    "releaseRule": "Die Ḥadīṯ-Bibliothek wird global sichtbar vorbereitet, bleibt aber gesperrt, bis der Nutzer ausdrücklich freigibt."
+  },
   "surfaces": {
     "appleTvScreensaver": {
       "path": "apple-tv/hadith/",
@@ -14,30 +24,72 @@
     },
     "testAppHadithLibrary": {
       "path": "test/data/hadith-library/catalog.json",
+      "gatePath": "test/data/hadith-library-gate.json",
       "usesSameRecords": true,
+      "visibleInMoreArea": true,
+      "allowOpenWhileLocked": false,
       "showHadith": true,
       "showSource": true,
       "showSharh": true,
       "showSharhSource": true,
       "requireSharhStatus": "verified",
-      "purpose": "Test-App Ḥadīṯ-Bibliothek erhält denselben Datensatz inklusive geprüfter Erklärung."
+      "purpose": "Test-App Ḥadīṯ-Bibliothek erhält denselben Datensatz inklusive geprüfter Erklärung, bleibt aber bis Freigabe gesperrt."
     },
     "iosAppHadithLibrary": {
       "path": "ios/DarAlTawhid/",
       "usesTestAppData": true,
+      "visibleInMoreArea": true,
+      "allowOpenWhileLocked": false,
       "showHadith": true,
       "showSource": true,
       "showSharh": true,
       "showSharhSource": true,
       "requireSharhStatus": "verified",
-      "purpose": "iOS-App nutzt die Test-App-Bibliothekslogik, sobald der Bereich veröffentlicht wird."
+      "purpose": "iOS-App nutzt die Test-App-Bibliothekslogik, sobald der Bereich veröffentlicht wird, bleibt vorher gesperrt."
+    },
+    "androidWebAppAndWebsite": {
+      "path": "assets/hadith-library-gate.js",
+      "gatePath": "data/hadith-library-gate.json",
+      "visibleInMoreArea": true,
+      "allowOpenWhileLocked": false,
+      "usesSameRecords": true,
+      "showSharhAfterRelease": true,
+      "purpose": "Webseite und Android-Web-App zeigen den vorbereiteten Bereich im Mehr-Bereich, blockieren Zugriff bis Freigabe."
     }
+  },
+  "libraryOrganization": {
+    "groupBy": [
+      "bookCategory",
+      "sourceBook",
+      "sourceChapter"
+    ],
+    "sortBy": [
+      "bookCategory",
+      "sourceBook",
+      "sourceChapter",
+      "sourcePage",
+      "sourceHadithNumber",
+      "id"
+    ],
+    "requiredDetailFields": [
+      "id",
+      "recordType",
+      "textMarkdown",
+      "sourceBook",
+      "sourceChapter",
+      "sourcePage",
+      "grade",
+      "sharhStatus",
+      "sharhText",
+      "sharhReference"
+    ]
   },
   "completionRules": {
     "completeBlockBeforeNext": true,
     "sharhRequiredForCompletion": true,
     "completedRecordSharhStatus": "verified",
-    "noMissingSharhInCompletedBlocks": true
+    "noMissingSharhInCompletedBlocks": true,
+    "libraryOrderRequired": true
   },
-  "workflowRule": "Jeder neue HAD-Block wird zuerst vollständig unter apple-tv/hadith erstellt. Danach wird er über test/data/hadith-library/catalog.json für Test-App/iOS-Bibliothek verfügbar gemacht. Apple-TV-Screensaver blendet Sharḥ nicht ein."
+  "workflowRule": "Jeder neue HAD-Block wird zuerst vollständig unter apple-tv/hadith erstellt. Danach wird er über die Ḥadīṯ-Bibliothek-Kataloge für Test-App, iOS-App, Android/Web-App und Webseite vorbereitet. Apple-TV-Screensaver blendet Sharḥ nicht ein. Alle App-Bereiche bleiben bis zur Nutzerfreigabe gesperrt."
 }
