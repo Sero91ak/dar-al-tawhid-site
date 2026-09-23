@@ -138,27 +138,36 @@ actor RemoteContentSyncService {
             }
 
             if let audio = rootCatalog.quran?.audio, audio.remoteLoad, audio.offlineCache {
-                await collectSyncResult(audio.catalogPath, synced: &synced, failed: &failed)
+                let path = audio.catalogPath
+                let ok = await syncCatalog(relativeCatalogPath: path)
+                ok ? synced.append(path) : failed.append(path)
             }
 
             if let tadabbur = rootCatalog.quran?.tadabbur, tadabbur.remoteLoad, tadabbur.offlineCache {
-                await collectSyncResult(tadabbur.catalogPath, synced: &synced, failed: &failed)
+                let path = tadabbur.catalogPath
+                let ok = await syncCatalog(relativeCatalogPath: path)
+                ok ? synced.append(path) : failed.append(path)
             }
 
             if let screensaver = rootCatalog.screensaver,
                screensaver.isActive,
                screensaver.remoteLoad != false,
                screensaver.offlineCache != false,
-               let catalogPath = screensaver.catalogPath {
-                await collectSyncResult(catalogPath, synced: &synced, failed: &failed)
+               let path = screensaver.catalogPath {
+                let ok = await syncCatalog(relativeCatalogPath: path)
+                ok ? synced.append(path) : failed.append(path)
             }
 
             for module in rootCatalog.modules where module.remoteLoad && module.offlineCache {
-                await collectSyncResult(module.catalogPath, synced: &synced, failed: &failed)
+                let path = module.catalogPath
+                let ok = await syncCatalog(relativeCatalogPath: path)
+                ok ? synced.append(path) : failed.append(path)
             }
 
             if let backgrounds = rootCatalog.backgrounds, backgrounds.isActive {
-                await collectSyncResult(backgrounds.catalogPath, synced: &synced, failed: &failed)
+                let path = backgrounds.catalogPath
+                let ok = await syncCatalog(relativeCatalogPath: path)
+                ok ? synced.append(path) : failed.append(path)
             }
         } catch {
             failed.append("apple-tv/catalog.json")
@@ -170,11 +179,6 @@ actor RemoteContentSyncService {
             syncedCatalogs: synced,
             failedCatalogs: failed
         )
-    }
-
-    private func collectSyncResult(_ relativeCatalogPath: String, synced: inout [String], failed: inout [String]) async {
-        let ok = await syncCatalog(relativeCatalogPath: relativeCatalogPath)
-        ok ? synced.append(relativeCatalogPath) : failed.append(relativeCatalogPath)
     }
 
     func syncCatalog(relativeCatalogPath: String) async -> Bool {
