@@ -1,0 +1,34 @@
+{
+  "series": "251-300",
+  "label": "HAD-0251 bis HAD-0300",
+  "publishedFrom": "HAD-0251",
+  "publishedTo": "HAD-0259",
+  "publishedCount": 6,
+  "requireVerifiedSharh": true,
+  "files": [
+    "HAD-0251.json",
+    "HAD-0253.json",
+    "HAD-0254.json",
+    "HAD-0257.json",
+    "HAD-0258.json",
+    "HAD-0259.json"
+  ],
+  "pendingReview": [
+    "HAD-0252.json",
+    "HAD-0255.json",
+    "HAD-0256.json",
+    "HAD-0260.json",
+    "HAD-0261.json",
+    "HAD-0262.json",
+    "HAD-0263.json"
+  ],
+  "excluded": [
+    {"id":"HAD-0252","reason":"needs-review: thematische Überschneidung/merge mit HAD-0251; nicht live aktiviert"},
+    {"id":"HAD-0255","reason":"needs-review: thematische Überschneidung/merge mit HAD-0254; nicht live aktiviert"},
+    {"id":"HAD-0256","reason":"needs-review: thematische Überschneidung/merge mit HAD-0254; nicht live aktiviert"},
+    {"id":"HAD-0260","reason":"needs-review: thematische Überschneidung/merge mit HAD-0257; nicht live aktiviert"},
+    {"id":"HAD-0261","reason":"needs-review: thematische Überschneidung/merge mit HAD-0253; nicht live aktiviert"},
+    {"id":"HAD-0262","reason":"needs-review: thematische Überschneidung/merge mit HAD-0257; nicht live aktiviert"},
+    {"id":"HAD-0263","reason":"needs-review: thematische Überschneidung/merge mit HAD-0253; nicht live aktiviert"}
+  ]
+}
