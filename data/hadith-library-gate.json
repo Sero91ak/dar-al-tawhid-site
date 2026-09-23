@@ -1,20 +1,16 @@
 {
   "enabled": false,
   "status": "in-progress",
-  "label": "In Bearbeitung",
+  "label": "Noch nicht freigegeben",
   "releaseRequired": true,
   "releasedByUser": false,
   "targetHash": "#hadith-bibliothek",
   "cardTitle": "Ḥadīṯ-Bibliothek",
-  "cardSubtitle": "Wird vorbereitet: nach Buchkategorie, Werk, Kapitel, Seite, Nummer und Sharḥ geordnet.",
-  "lockedMessage": "Die Ḥadīṯ-Bibliothek ist vorbereitet, aber noch nicht freigegeben.",
+  "cardSubtitle": "Šarḥ wird vorbereitet.",
+  "lockedMessage": "Ḥadīṯ-Bibliothek ist noch nicht freigegeben.",
   "chips": [
-    "Buchkategorie",
-    "Werk",
-    "Kapitel",
-    "Seite",
-    "Nummer",
-    "Sharḥ"
+    "Šarḥ",
+    "Quelle"
   ],
   "surfaces": {
     "iosApp": true,
@@ -26,7 +22,11 @@
   "visibility": {
     "showInMoreAreaWhileLocked": true,
     "allowOpenWhileLocked": false,
-    "showLockedStatus": true
+    "showLockedStatus": true,
+    "placement": "learning-and-knowledge-list",
+    "compactListItem": true,
+    "hideOutsideMoreRoute": true,
+    "disableTopFallback": true
   },
-  "releaseRule": "Erst wenn releasedByUser true und enabled true gesetzt sind, darf die Ḥadīṯ-Bibliothek geöffnet werden. Bis dahin bleibt sie nur als vorbereiteter Bereich im Mehr-Bereich sichtbar."
+  "releaseRule": "Erst wenn releasedByUser true und enabled true gesetzt sind, darf die Ḥadīṯ-Bibliothek geöffnet werden. Bis dahin bleibt sie kompakt im Bereich Lernen & Wissen sichtbar."
 }
