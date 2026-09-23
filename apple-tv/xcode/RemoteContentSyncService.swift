@@ -91,7 +91,7 @@ struct RemoteAreaCatalog: Codable {
 }
 
 struct RemoteEntriesIndex: Codable {
-    let schemaVersion: String
+    let schemaVersion: String?
     let totalVerifiedEntries: Int?
     let totalEntries: Int?
     let entriesCount: Int?
@@ -101,6 +101,15 @@ struct RemoteEntriesIndex: Codable {
 struct RemoteIndexedFile: Codable {
     let path: String
     let count: Int?
+}
+
+struct RemoteSeriesIndex: Codable {
+    let series: String?
+    let count: Int?
+    let firstId: String?
+    let lastId: String?
+    let plannedLastId: String?
+    let files: [String]?
 }
 
 enum RemoteContentSyncTrigger: String {
@@ -209,13 +218,22 @@ actor RemoteContentSyncService {
                 options: .atomic
             )
 
-            for relativeFilePath in catalog.contentPaths {
-                let remoteRelativePath = join(catalogDirectory, relativeFilePath)
-                let remoteURL = registry.url(forRelativePath: remoteRelativePath)
-                let data = try await fetchData(remoteURL)
-                let localURL = stagingDirectory.appendingPathComponent(relativeFilePath)
-                try fileManager.createDirectory(at: localURL.deletingLastPathComponent(), withIntermediateDirectories: true)
-                try data.write(to: localURL, options: .atomic)
+            var downloaded = Set<String>()
+            var queue = catalog.contentPaths
+
+            while let relativeFilePath = queue.first {
+                queue.removeFirst()
+                guard downloaded.insert(relativeFilePath).inserted else { continue }
+
+                let data = try await downloadFile(
+                    relativeFilePath: relativeFilePath,
+                    catalogDirectory: catalogDirectory,
+                    stagingDirectory: stagingDirectory
+                )
+
+                for nestedPath in nestedContentPaths(from: data, indexPath: relativeFilePath) where !downloaded.contains(nestedPath) {
+                    queue.append(nestedPath)
+                }
             }
 
             try validate(catalog: catalog, directory: stagingDirectory)
@@ -232,6 +250,31 @@ actor RemoteContentSyncService {
             .appendingPathComponent("active", isDirectory: true)
             .appendingPathComponent(catalogDirectory, isDirectory: true)
             .appendingPathComponent(filePath)
+    }
+
+    private func downloadFile(relativeFilePath: String, catalogDirectory: String, stagingDirectory: URL) async throws -> Data {
+        let remoteRelativePath = join(catalogDirectory, relativeFilePath)
+        let remoteURL = registry.url(forRelativePath: remoteRelativePath)
+        let data = try await fetchData(remoteURL)
+        let localURL = stagingDirectory.appendingPathComponent(relativeFilePath)
+        try fileManager.createDirectory(at: localURL.deletingLastPathComponent(), withIntermediateDirectories: true)
+        try data.write(to: localURL, options: .atomic)
+        return data
+    }
+
+    private func nestedContentPaths(from data: Data, indexPath: String) -> [String] {
+        var nested: [String] = []
+        let indexDirectory = (indexPath as NSString).deletingLastPathComponent
+
+        if let seriesIndex = try? decoder.decode(RemoteSeriesIndex.self, from: data), let files = seriesIndex.files {
+            nested.append(contentsOf: files.map { join(indexDirectory, $0) })
+        }
+
+        if let entriesIndex = try? decoder.decode(RemoteEntriesIndex.self, from: data), let files = entriesIndex.files {
+            nested.append(contentsOf: files.map(\.path))
+        }
+
+        return orderedUnique(nested)
     }
 
     private func fetchJSON<T: Decodable>(_ url: URL) async throws -> T {
@@ -306,6 +349,16 @@ actor RemoteContentSyncService {
 
     private func join(_ base: String, _ child: String) -> String {
         guard !base.isEmpty else { return child }
+        guard !child.isEmpty else { return base }
         return base + "/" + child
+    }
+
+    private func orderedUnique(_ values: [String]) -> [String] {
+        var seen = Set<String>()
+        var output: [String] = []
+        for value in values where seen.insert(value).inserted {
+            output.append(value)
+        }
+        return output
     }
 }
