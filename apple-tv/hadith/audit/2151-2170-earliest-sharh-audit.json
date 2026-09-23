@@ -5,19 +5,6 @@
   "status": "completed-earliest-sharh-audit",
   "createdAfterRuleChange": true,
   "ruleVersion": 6,
-  "reason": "Der Unterblock wurde nach der verbindlichen Regel zur frühesten greifbaren Erklärung nachgeprüft. Jeder Datensatz hat nun entweder den früheren greifbaren Direktscharḥ oder eine dokumentierte Begründung, warum der vorhandene direkte Šarḥ beibehalten wurde.",
-  "bukhariPriority": [
-    "al-Ḫaṭṭābī",
-    "Ibn Baṭṭāl",
-    "frühere direkte Erklärungen",
-    "Ibn Ḥaǧar / al-ʿAynī / al-Qasṭallānī nur danach"
-  ],
-  "muslimPriority": [
-    "al-Māzirī",
-    "al-Qāḍī ʿIyāḍ",
-    "al-Qurṭubī",
-    "an-Nawawī nur danach"
-  ],
   "completionRequirement": {
     "allRecordsHaveSharh": true,
     "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
@@ -33,26 +20,49 @@
     "iosHadithLibraryBehindGate",
     "androidWebAppAndWebsiteBehindGate"
   ],
+  "bukhariPriority": [
+    "al-Ḫaṭṭābī",
+    "Ibn Baṭṭāl",
+    "frühere direkte Erklärungen",
+    "Ibn Ḥaǧar / al-ʿAynī / al-Qasṭallānī nur danach"
+  ],
+  "muslimPriority": [
+    "al-Māzirī",
+    "al-Qāḍī ʿIyāḍ",
+    "al-Qurṭubī",
+    "an-Nawawī nur danach"
+  ],
+  "nonBukhariMuslimPriority": [
+    "frühester greifbarer direkter Sunan-/Jāmiʿ-Kommentar",
+    "frühere erklärende Athar/Salaf-Aussagen, wenn direkt passend",
+    "spätere Sammelkommentare nur mit Begründung"
+  ],
+  "summary": {
+    "correctedEarliestBukhariPriority": ["HAD-2151", "HAD-2152", "HAD-2153", "HAD-2154", "HAD-2155", "HAD-2156", "HAD-2157", "HAD-2158", "HAD-2159", "HAD-2160", "HAD-2163", "HAD-2164", "HAD-2165"],
+    "correctedEarliestMuslimPriority": ["HAD-2161", "HAD-2162", "HAD-2166", "HAD-2167", "HAD-2168"],
+    "correctedEarliestTirmidhiPriority": ["HAD-2169", "HAD-2170"],
+    "openRecords": []
+  },
   "records": [
-    { "id": "HAD-2151", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority", "note": "Von Ibn Raǧab auf Ibn Baṭṭāl vorgezogen; al-Ḫaṭṭābī in dieser Prüfung nicht als direkt greifbarer Šarḥ zur konkreten Stelle gesichert." },
-    { "id": "HAD-2152", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority", "note": "Gleicher Grundḥadīṯ wie HAD-2151; Ibn Baṭṭāl vor Ibn Raǧab verwendet." },
-    { "id": "HAD-2153", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority", "note": "Gleicher Grundḥadīṯ wie HAD-2151; Ibn Baṭṭāl vor Ibn Raǧab verwendet." },
-    { "id": "HAD-2154", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority", "note": "Von Ibn Raǧab auf Ibn Baṭṭāl vorgezogen; Buḫārī-Priorität erfüllt, soweit al-Ḫaṭṭābī zur konkreten Stelle nicht greifbar gesichert wurde." },
-    { "id": "HAD-2155", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority", "note": "Gleicher Grundḥadīṯ wie HAD-2154; Ibn Baṭṭāl vor Ibn Raǧab verwendet." },
-    { "id": "HAD-2156", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority", "note": "Gleicher Grundḥadīṯ wie HAD-2154; Ibn Baṭṭāl vor Ibn Raǧab verwendet." },
-    { "id": "HAD-2157", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority", "note": "Von Ibn Raǧab auf Ibn Baṭṭāl vorgezogen; Buḫārī-Stelle al-ḥalāl bayyin im Bāb Faḍl man istabraʾa li-dīnih geprüft." },
-    { "id": "HAD-2158", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority", "note": "Gleicher Grundḥadīṯ wie HAD-2157; Ibn Baṭṭāl vor Ibn Raǧab verwendet." },
-    { "id": "HAD-2159", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority", "note": "Gleicher Grundḥadīṯ wie HAD-2157; Ibn Baṭṭāl vor Ibn Raǧab verwendet." },
-    { "id": "HAD-2160", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority", "note": "Gleicher Grundḥadīṯ wie HAD-2157; Ibn Baṭṭāl vor Ibn Raǧab verwendet." },
-    { "id": "HAD-2161", "currentSharh": "al-Māzirī", "auditStatus": "corrected-earliest-muslim-priority", "note": "Von an-Nawawī auf al-Māzirī vorgezogen; Muslim-Priorität erfüllt, soweit al-Muʿlim zur konkreten Naṣīḥah-Stelle greifbar ist." },
-    { "id": "HAD-2162", "currentSharh": "al-Māzirī", "auditStatus": "corrected-earliest-muslim-priority", "note": "Von an-Nawawī auf al-Māzirī vorgezogen; gleicher Grundḥadīṯ wie HAD-2161." },
-    { "id": "HAD-2163", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority", "note": "Von Ibn Raǧab auf Ibn Baṭṭāl vorgezogen; Buḫārī-Stelle al-iqtidāʾ bi-sunan Rasūl Allāh ﷺ geprüft." },
-    { "id": "HAD-2164", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority", "note": "Gleicher Grundḥadīṯ wie HAD-2163; Ibn Baṭṭāl vor Ibn Raǧab verwendet." },
-    { "id": "HAD-2165", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority", "note": "Gleicher Grundḥadīṯ wie HAD-2163; Ibn Baṭṭāl vor Ibn Raǧab verwendet." },
-    { "id": "HAD-2166", "currentSharh": "Qāḍī ʿIyāḍ", "auditStatus": "corrected-earliest-muslim-priority", "note": "Al-Māzirī nicht als direkt greifbarer Šarḥ zur konkreten Stelle gesichert; Qāḍī ʿIyāḍ, Ikmāl al-Muʿlim 3/535, vor Ibn Raǧab verwendet." },
-    { "id": "HAD-2167", "currentSharh": "Qāḍī ʿIyāḍ", "auditStatus": "corrected-earliest-muslim-priority", "note": "Gleicher Grundḥadīṯ wie HAD-2166; Qāḍī ʿIyāḍ vor Ibn Raǧab verwendet." },
-    { "id": "HAD-2168", "currentSharh": "Qāḍī ʿIyāḍ", "auditStatus": "corrected-earliest-muslim-priority", "note": "Gleicher Grundḥadīṯ wie HAD-2166; Qāḍī ʿIyāḍ vor Ibn Raǧab verwendet." },
-    { "id": "HAD-2169", "currentSharh": "Ibn Raǧab", "auditStatus": "kept-direct-sharh-with-priority-justification", "note": "Tirmiḏī/Nasāʾī-Stelle; kein früherer direkter Sunan-Šarḥ sicher greifbar gesichert. Ibn Raǧab 1/278 erklärt die konkrete Stelle direkt und bleibt mit Begründung." },
-    { "id": "HAD-2170", "currentSharh": "Ibn Raǧab", "auditStatus": "kept-direct-sharh-with-priority-justification", "note": "Tirmiḏī/Ibn Māǧah-Stelle; Ibn ʿAbd al-Barr als frühere Überlieferungs-/Takhrīj-Stelle berücksichtigt, aber kein früherer direkter erklärender Sunan-Šarḥ gesichert. Ibn Raǧab 1/287 erklärt die konkrete Stelle direkt und bleibt mit Begründung." }
+    { "id": "HAD-2151", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority" },
+    { "id": "HAD-2152", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority" },
+    { "id": "HAD-2153", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority" },
+    { "id": "HAD-2154", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority" },
+    { "id": "HAD-2155", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority" },
+    { "id": "HAD-2156", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority" },
+    { "id": "HAD-2157", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority" },
+    { "id": "HAD-2158", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority" },
+    { "id": "HAD-2159", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority" },
+    { "id": "HAD-2160", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority" },
+    { "id": "HAD-2161", "currentSharh": "al-Māzirī", "auditStatus": "corrected-earliest-muslim-priority" },
+    { "id": "HAD-2162", "currentSharh": "al-Māzirī", "auditStatus": "corrected-earliest-muslim-priority" },
+    { "id": "HAD-2163", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority" },
+    { "id": "HAD-2164", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority" },
+    { "id": "HAD-2165", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority" },
+    { "id": "HAD-2166", "currentSharh": "Qāḍī ʿIyāḍ", "auditStatus": "corrected-earliest-muslim-priority" },
+    { "id": "HAD-2167", "currentSharh": "Qāḍī ʿIyāḍ", "auditStatus": "corrected-earliest-muslim-priority" },
+    { "id": "HAD-2168", "currentSharh": "Qāḍī ʿIyāḍ", "auditStatus": "corrected-earliest-muslim-priority" },
+    { "id": "HAD-2169", "currentSharh": "Ibn al-ʿArabī al-Mālikī", "auditStatus": "corrected-earliest-tirmidhi-priority", "note": "ʿĀriḍat al-Aḥwaḏī vor Ibn Raǧab verwendet; keine unsichere Seitenzahl." },
+    { "id": "HAD-2170", "currentSharh": "Ibn al-ʿArabī al-Mālikī", "auditStatus": "corrected-earliest-tirmidhi-priority", "note": "ʿĀriḍat al-Aḥwaḏī vor Ibn Raǧab verwendet; 8/166 nur soweit greifbar übernommen." }
   ]
 }
