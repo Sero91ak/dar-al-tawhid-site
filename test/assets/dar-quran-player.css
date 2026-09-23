@@ -873,6 +873,8 @@ html.dar-ios-native-app #darQuranMiniPlayer.is-on.is-reader-dock{
 }
 #darQuranMiniPlayer.is-learn .dqp-learn{display:grid}
 #dqpLearnSheet.dqp-learn-sheet{z-index:9000;position:fixed;inset:0;pointer-events:auto}
+#dqpLearnSheet[hidden]{display:none!important;pointer-events:none!important;visibility:hidden!important}
+#darQuranPlayer > .dqp-sheet{display:none!important;pointer-events:none!important}
 #dqpLearnSheet .dqp-opt-list{
   display:flex;flex-direction:column;margin-top:4px;
 }

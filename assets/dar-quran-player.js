@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 957;
+    var PLAYER_BUILD = 958;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -30,6 +30,8 @@
     }
     var staleNext = document.getElementById("darQuranPlayerAudioNext");
     if (staleNext) staleNext.remove();
+    var staleSheet = document.getElementById("dqpLearnSheet");
+    if (staleSheet) staleSheet.remove();
   } catch (e2) {}
   window.DARQuranPlayer = null;
   window.__DAR_QURAN_PLAYER_BUILD = PLAYER_BUILD;
@@ -185,7 +187,7 @@
     var next = Math.max(1, Math.min(10, Math.round(Number(n) || 7)));
     var lab = document.querySelector("[data-dqp-scale-n]");
     if (lab) lab.textContent = String(next);
-    var sl = document.querySelector("[data-dqp=text-scale]");
+    var sl = document.querySelector("#dqpLearnSheet [data-dqp=text-scale], #darQuranPlayer [data-dqp=text-scale]");
     if (sl) sl.style.setProperty("--dqp-fill", ((next - 1) / 9 * 100) + "%");
     if (next === state.textScale) {
       if (sl && !fromSlider) sl.value = String(next);
@@ -609,7 +611,24 @@
       if (gen !== playGen) return;
       var name = err && err.name;
       logAudio("play rejected", { name: name, message: err && err.message, snap: snapAudio(a) });
-      if (name === "AbortError") return;
+      if (name === "AbortError") {
+        setTimeout(function () {
+          if (gen !== playGen) return;
+          if (!(state.playing || state.sessionActive)) return;
+          var again = a.play();
+          if (again && again.then) {
+            again.then(function () {
+              if (gen !== playGen) return;
+              engine.started = true;
+              state.playing = true;
+              state.sessionActive = true;
+              paintChrome();
+              paintMini();
+            }).catch(function () {});
+          }
+        }, 60);
+        return;
+      }
       if (name === "NotAllowedError") {
         state.playing = false;
         state.error = "Tippe erneut auf Wiedergabe, um den Ton zu starten.";
@@ -2250,8 +2269,10 @@
     });
     state.sessionActive = true;
     saveState();
+    ignoreEndedUntil = 0;
     var a = audioEl();
-    if (!audioHasSrc(a)) {
+    if (!audioHasSrc(a) || !engine.started) {
+      state.playing = true;
       loadAudio(true, true);
       return;
     }
@@ -2272,7 +2293,8 @@
   }
   function stopSession() {
     playGen += 1;
-    ignoreEndedUntil = Date.now() + 4000;
+    engine.started = false;
+    ignoreEndedUntil = Date.now() + 400;
     trackHeard = false;
     allowAdvance = false;
     engine.started = false;
@@ -2552,23 +2574,43 @@
     if (state.learnMode && !state.learnLoop) followPlayingAyah(false);
   }
   function bindLearnSheet(sh) {
-    if (!sh || sh.dataset.dqpSheetBound === "1") return;
+    if (!sh) return;
+    if (sh.dataset.dqpSheetBound === "1") return;
     sh.dataset.dqpSheetBound = "1";
     function handle(ev) {
       if (ev.target === sh) { closeSheet(); return; }
-      var t = ev.target.closest ? ev.target.closest("[data-dqp],[data-dqp-opt]") : null;
+      var t = ev.target && ev.target.closest ? ev.target.closest("[data-dqp],[data-dqp-opt]") : null;
       if (!t || !sh.contains(t)) return;
+      var act = t.getAttribute("data-dqp");
+      if (act === "seek" || act === "vol" || act === "text-scale" || act === "sleep-mins") return;
       ev.preventDefault();
       ev.stopPropagation();
-      var act = t.getAttribute("data-dqp");
       if (act === "sheet-close") { closeSheet(); return; }
+      if (act === "pick-surah") { openSurahSheet(); return; }
+      if (act === "pick-ayah") { openAyahSheet(); return; }
+      if (act === "pick-reciter") { openReciterSheet(); return; }
       var opt = t.getAttribute("data-dqp-opt");
       if (opt) onOpt(opt);
     }
     sh.addEventListener("click", handle, true);
-    sh.addEventListener("pointerup", function (ev) {
-      if (ev.pointerType === "touch") handle(ev);
-    }, true);
+    sh.addEventListener("input", function (ev) {
+      var el = ev.target;
+      if (!el) return;
+      if (el.getAttribute("data-dqp") === "text-scale") {
+        setTextScale(el.value, true);
+        return;
+      }
+      if (el.getAttribute("data-dqp") === "sleep-mins") {
+        setSleepMinutes(el.value);
+        return;
+      }
+      if (el.hasAttribute("data-dqp-search")) {
+        var needle = String(el.value || "").toLowerCase();
+        sh.querySelectorAll(".dqp-opt[data-q]").forEach(function (opt) {
+          opt.style.display = !needle || String(opt.getAttribute("data-q")).indexOf(needle) >= 0 ? "" : "none";
+        });
+      }
+    });
   }
   function learnSheet() {
     var sh = document.getElementById("dqpLearnSheet");
@@ -2587,26 +2629,34 @@
     var root = playerRoot();
     return (root && root.querySelector("[data-dqp-sheet]")) || null;
   }
+  function hideNodeSheet(sh) {
+    if (!sh) return;
+    sh.classList.remove("is-open");
+    sh.hidden = true;
+    try { sh.innerHTML = ""; } catch (eH) {}
+  }
+  function closeSheet() {
+    hideNodeSheet(document.getElementById("dqpLearnSheet"));
+    hideNodeSheet(playerSheetEl());
+  }
   function activeSheetEl() {
-    var root = playerRoot();
-    var fullVisible = !!(isFullPlayerRoute() && fullUiWanted && root && !root.hidden && String(root.style.display || "") !== "none");
-    if (fullVisible) {
-      var inner = playerSheetEl();
-      if (inner) return inner;
+    closeSheet();
+    var inner = playerSheetEl();
+    if (inner) {
+      inner.hidden = true;
+      inner.classList.remove("is-open");
     }
     return learnSheet();
   }
-  function closeSheet() {
-    var sh = activeSheetEl();
-    if (!sh) return;
-    sh.classList.remove("is-open");
-    setTimeout(function () { if (sh && !sh.classList.contains("is-open")) { sh.hidden = true; sh.innerHTML = ""; } }, 280);
-  }
   function openSheet(title, html) {
-    var sh = activeSheetEl();
-    if (!sh && !fullUiWanted) sh = learnSheet();
+    var sh = learnSheet();
     if (!sh) return;
-    if (sh.id === "dqpLearnSheet") bindLearnSheet(sh);
+    var inner = playerSheetEl();
+    if (inner) {
+      inner.hidden = true;
+      inner.classList.remove("is-open");
+      try { inner.innerHTML = ""; } catch (eIn) {}
+    }
     sh.hidden = false;
     sh.innerHTML = '<div class="dqp-sheet-card"><div class="dqp-sheet-head"><span>' + esc(title) + '</span><button type="button" class="dqp-hit" data-dqp="sheet-close">Fertig</button></div>' + html + "</div>";
     requestAnimationFrame(function () { sh.classList.add("is-open"); });
@@ -2732,7 +2782,7 @@
       var head = m.transliteration ? ("Āyah · " + m.transliteration) : "Āyah auswählen";
       openSheet(head, '<input class="dqp-search" data-dqp-search type="search" placeholder="Āyah suchen" autocomplete="off"><div class="dqp-opt-list">' + rows + "</div>");
       requestAnimationFrame(function () {
-        var on = document.querySelector("#darQuranPlayer .dqp-opt.is-on[data-dqp-opt^='a-']");
+        var on = document.querySelector("#dqpLearnSheet .dqp-opt.is-on[data-dqp-opt^='a-'], #darQuranPlayer .dqp-opt.is-on[data-dqp-opt^='a-']");
         if (on && on.scrollIntoView) on.scrollIntoView({ block: "center" });
       });
     }
@@ -2793,7 +2843,7 @@
       '<button type="button" class="dqp-opt" data-dqp-opt="m-read">Sūrah lesen</button>',
       '<button type="button" class="dqp-opt" data-dqp-opt="m-stop">Wiedergabe beenden</button>'
     ].join(""));
-    var sl = document.querySelector("[data-dqp=text-scale]");
+    var sl = document.querySelector("#dqpLearnSheet [data-dqp=text-scale]");
     if (sl) sl.style.setProperty("--dqp-fill", ((state.textScale - 1) / 9 * 100) + "%");
   }
   function openSleepSheet() {
