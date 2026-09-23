@@ -283,8 +283,10 @@
   install();
 })();
 
-/* HADITH_LIBRARY_GATE_LOADER_V1 */
+/* HADITH_LIBRARY_GATE_LOADER_V3 */
 (function () {
+  if (window.__DAR_HADITH_LIBRARY_GATE_LOADER_V3) return;
+  window.__DAR_HADITH_LIBRARY_GATE_LOADER_V3 = true;
   function base() {
     try {
       var p = String(location.pathname || "");
@@ -293,17 +295,25 @@
     return "/assets/";
   }
   function loadCss() {
-    if (document.querySelector('link[href*="hadith-library-gate.css"]')) return;
+    var existing = document.querySelector('link[href*="hadith-library-gate.css"]');
+    if (existing) {
+      existing.href = base() + "hadith-library-gate.css?v=3";
+      return;
+    }
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = base() + "hadith-library-gate.css?v=1";
+    link.href = base() + "hadith-library-gate.css?v=3";
     document.head.appendChild(link);
   }
   function loadJs() {
-    if (document.querySelector('script[src*="hadith-library-gate.js"]')) return;
+    var existing = document.querySelector('script[src*="hadith-library-gate.js"]');
+    if (existing) {
+      existing.src = base() + "hadith-library-gate.js?v=3";
+      return;
+    }
     var script = document.createElement("script");
     script.defer = true;
-    script.src = base() + "hadith-library-gate.js?v=1";
+    script.src = base() + "hadith-library-gate.js?v=3";
     (document.head || document.documentElement).appendChild(script);
   }
   function boot() { loadCss(); loadJs(); }
