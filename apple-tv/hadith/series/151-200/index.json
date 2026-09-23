@@ -2,8 +2,8 @@
   "series": "151-200",
   "label": "HAD-0151 bis HAD-0200",
   "publishedFrom": "HAD-0151",
-  "publishedTo": "HAD-0163",
-  "publishedCount": 12,
+  "publishedTo": "HAD-0183",
+  "publishedCount": 30,
   "requireVerifiedSharh": true,
   "files": [
     "HAD-0151.json",
@@ -17,12 +17,34 @@
     "HAD-0160.json",
     "HAD-0161.json",
     "HAD-0162.json",
-    "HAD-0163.json"
+    "HAD-0163.json",
+    "HAD-0164.json",
+    "HAD-0165.json",
+    "HAD-0166.json",
+    "HAD-0167.json",
+    "HAD-0168.json",
+    "HAD-0169.json",
+    "HAD-0170.json",
+    "HAD-0172.json",
+    "HAD-0173.json",
+    "HAD-0174.json",
+    "HAD-0175.json",
+    "HAD-0176.json",
+    "HAD-0177.json",
+    "HAD-0178.json",
+    "HAD-0179.json",
+    "HAD-0180.json",
+    "HAD-0182.json",
+    "HAD-0183.json"
   ],
   "pendingReview": [
-    "HAD-0154.json"
+    "HAD-0154.json",
+    "HAD-0171.json",
+    "HAD-0181.json"
   ],
   "excluded": [
-    {"id":"HAD-0154","reason":"needs-review: Duplikat von HAD-0085; nicht live aktiviert"}
+    {"id":"HAD-0154","reason":"needs-review: Duplikat von HAD-0085; nicht live aktiviert"},
+    {"id":"HAD-0171","reason":"needs-review: Duplikat von HAD-0083; nicht live aktiviert"},
+    {"id":"HAD-0181","reason":"needs-review: Ṣaḥābah-Aṯar braucht separate Athar-Verifikation/Erklärung; nicht live aktiviert"}
   ]
 }
