@@ -1,0 +1,50 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-2151-2170",
+  "series": "2151-2250",
+  "status": "needs-earliest-sharh-priority-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 4,
+  "reason": "Der Unterblock wurde mit klassischem Šarḥ erstellt, aber vor der neuen verbindlichen Regel zur frühesten greifbaren Erklärung. Vor Abschluss/Aktivierung muss je Datensatz geprüft werden, ob al-Ḫaṭṭābī/Ibn Baṭṭāl bei Buḫārī-Stellen bzw. al-Māzirī/al-Qāḍī ʿIyāḍ/al-Qurṭubī bei Muslim-Stellen Vorrang haben.",
+  "bukhariPriority": [
+    "al-Ḫaṭṭābī",
+    "Ibn Baṭṭāl",
+    "frühere direkte Erklärungen",
+    "Ibn Ḥaǧar / al-ʿAynī / al-Qasṭallānī nur danach"
+  ],
+  "muslimPriority": [
+    "al-Māzirī",
+    "al-Qāḍī ʿIyāḍ",
+    "al-Qurṭubī",
+    "an-Nawawī nur danach"
+  ],
+  "completionRequirement": {
+    "allRecordsMustHaveSharh": true,
+    "allRecordsMustUseEarliestAvailableSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "blockActivationAllowed": false
+  },
+  "records": [
+    { "id": "HAD-2151", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Buḫārī/Muslim-Stelle; frühere Buḫārī-/Muslim-Kommentare prüfen." },
+    { "id": "HAD-2152", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Gleicher Grundḥadīṯ wie HAD-2151." },
+    { "id": "HAD-2153", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Gleicher Grundḥadīṯ wie HAD-2151." },
+    { "id": "HAD-2154", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Buḫārī/Muslim-Stelle; frühere direkte Erklärung prüfen." },
+    { "id": "HAD-2155", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Gleicher Grundḥadīṯ wie HAD-2154." },
+    { "id": "HAD-2156", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Gleicher Grundḥadīṯ wie HAD-2154." },
+    { "id": "HAD-2157", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Buḫārī/Muslim-Stelle al-ḥalāl bayyin; frühe Kommentare prüfen." },
+    { "id": "HAD-2158", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Gleicher Grundḥadīṯ wie HAD-2157." },
+    { "id": "HAD-2159", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Gleicher Grundḥadīṯ wie HAD-2157." },
+    { "id": "HAD-2160", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Gleicher Grundḥadīṯ wie HAD-2157." },
+    { "id": "HAD-2161", "currentSharh": "an-Nawawī", "auditStatus": "needs-priority-check", "note": "Muslim-Stelle; al-Māzirī, Qāḍī ʿIyāḍ, al-Qurṭubī vor an-Nawawī prüfen." },
+    { "id": "HAD-2162", "currentSharh": "an-Nawawī", "auditStatus": "needs-priority-check", "note": "Gleicher Grundḥadīṯ wie HAD-2161." },
+    { "id": "HAD-2163", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Buḫārī/Muslim-Stelle; frühere direkte Erklärung prüfen." },
+    { "id": "HAD-2164", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Gleicher Grundḥadīṯ wie HAD-2163." },
+    { "id": "HAD-2165", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Gleicher Grundḥadīṯ wie HAD-2163." },
+    { "id": "HAD-2166", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Muslim-Stelle; al-Māzirī/Qāḍī ʿIyāḍ/al-Qurṭubī vor Ibn Raǧab prüfen, wenn direkt passend." },
+    { "id": "HAD-2167", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Gleicher Grundḥadīṯ wie HAD-2166." },
+    { "id": "HAD-2168", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Gleicher Grundḥadīṯ wie HAD-2166." },
+    { "id": "HAD-2169", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Tirmiḏī/Nasāʾī-Stelle; frühester greifbarer direkter Sunan-Kommentar prüfen." },
+    { "id": "HAD-2170", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Tirmiḏī/Ibn Māǧah-Stelle; frühester greifbarer direkter Sunan-Kommentar prüfen." }
+  ]
+}
