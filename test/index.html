@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="de">
 <head>
-<!-- pages-deploy-stamp:1786152800000 -->
+<!-- pages-deploy-stamp:1786154200000 -->
 <!-- workers-deploy-stamp:1789319677748 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v996";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v997";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -27277,7 +27277,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v996";
+const APP_BUILD_ID="app-shell-v997";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -34861,15 +34861,15 @@ html[data-theme] .quiz-shell.quiz-shell-pro .quiz-home-title{
   setTimeout(pin,500);
 })();
 </script>
-<style id="dar-no-top-blur-v898">
+<style id="dar-no-top-blur-v899">
 html,body,.app,#appRoot,#appShell,#appView,#appView.view,.view,.view-head,
 .top-shell,.header,.theme-hero-shell,.theme-hero-surface,.account-page,.settings-one-page,
 .notification-hero,.notification-health,.qov-header,.sf-top,.header-prayer-hub,.hijri-header-pill{
   -webkit-backdrop-filter:none!important;
   backdrop-filter:none!important;
 }
-html .app:after,html .app::after,.top-edge-fade,.top-swim-aura,.top-swim-aura:before,
-#topEdgeFade,#topSwimAura,.theme-hero-shell::before,.theme-hero-shell::after,
+html .app:after,html .app::after,.top-swim-aura,.top-swim-aura:before,
+#topSwimAura,.theme-hero-shell::before,.theme-hero-shell::after,
 .top-shell::before,.top-shell::after,.header::before,.header::after{
   display:none!important;
   content:none!important;
@@ -34890,8 +34890,8 @@ html[data-theme] .top-shell.theme-hero-shell,
   -webkit-backdrop-filter:none!important;
   backdrop-filter:none!important;
 }
-.logo,.brand-main .logo{
-  background:var(--page-cover,var(--bg,#0c0b09))!important;
+.logo,.brand-main .logo,.brand-main h1,.header h1,h1{
+  filter:none!important;
   -webkit-backdrop-filter:none!important;
   backdrop-filter:none!important;
 }
@@ -34902,10 +34902,36 @@ html[data-theme] .top-shell.theme-hero-shell,
   background:var(--theme-surface,var(--page-cover,#0c0b09))!important;
   background-image:none!important;
 }
+html[data-theme] body.is-home-route .header,
+html[data-theme] body.is-home-route .header.theme-hero-surface,
+html.dar-ios-native-app body.is-home-route .header,
+html.dar-ios-native-app body.is-home-route .header.theme-hero-surface{
+  padding-top:max(58px,calc(env(safe-area-inset-top,0px) + 14px),calc(var(--dar-native-safe-top,0px) + 12px))!important;
+}
+html.dar-ios-native-app body.is-more-route #appView.view,
+html.dar-ios-native-app body.is-quiz-route #appView.view,
+html.dar-ios-native-app body.is-account-route #appView.view,
+html.dar-ios-native-app body.is-quran-overview #appView.view,
+html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-reader-route) #appView.view,
+html.is-standalone-pwa body:not(.is-home-route):not(.is-feed-fullscreen):not(.is-quran-reader-route) #appView.view{
+  padding-top:max(54px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))!important;
+}
+.top-edge-fade,#topEdgeFade{
+  display:block!important;
+  opacity:1!important;
+  pointer-events:none!important;
+  z-index:80!important;
+  height:max(47px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))!important;
+  background:var(--page-cover,var(--bg,#0c0b09))!important;
+  background-image:none!important;
+  filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
 </style>
 <script>
 (function(){
-  var src=document.getElementById("dar-no-top-blur-v898");
+  var src=document.getElementById("dar-no-top-blur-v899");
   if(!src)return;
   function pin(){
     var live=document.getElementById("dar-no-top-blur-live");
