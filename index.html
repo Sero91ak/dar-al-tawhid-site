@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="de">
 <head>
-<!-- pages-deploy-stamp:1786151000000 -->
+<!-- pages-deploy-stamp:1786151800000 -->
 <!-- workers-deploy-stamp:1786150368000 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v896";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v897";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script id="dar-browser-desktop-router-v833">
 (function(){
   try{
@@ -26388,7 +26388,7 @@ function featureCatalog(){
   const scholarCount=typeof buildScholarCatalog==="function"?buildScholarCatalog().length:0;
   const bookCount=typeof countBy==="function"?[...countBy("book").keys()].filter(x=>x&&x!=="Unbekannt").length:0;
   const newsCount=typeof activeCurrentUpdates==="function"?activeCurrentUpdates().length:0;
-  const items=[
+  let items=[
     {id:"feed",title:"Feed",icon:"✦",desc:"Neue Bildbeiträge und ruhige Empfehlungen.",button:"Öffnen",nav:"feed",group:"Lernen & Wissen",badge:"Aktuell"},
     {id:"ilm",title:"ʿIlm",icon:"📘",desc:"Wissensassistent mit belegten Antworten aus DĀR AL TAWḤĪD.",button:"Öffnen",nav:"ilm",group:"Lernen & Wissen",badge:"Neu"},
     {id:"quiz",title:"Din-Quiz",icon:"🧠",desc:"Strukturierte Wissensprüfung nach Themen und Stufen.",button:"Öffnen",nav:"quiz",group:"Lernen & Wissen",badge:"Lernen"},
@@ -27187,7 +27187,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v896";
+const APP_BUILD_ID="app-shell-v897";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -27946,6 +27946,18 @@ function render(){
     console.error(error);
     var painted=document.getElementById("appView");
     var paintedText=painted?(painted.textContent||"").trim():"";
+    var wantMore=false;
+    try{wantMore=readRoute().view==="more"}catch(eWant){}
+    if(wantMore){
+      try{
+        if(painted)painted.innerHTML=renderMore();
+        markAppBootComplete();
+        bindEvents();
+        bindIosShellUpdateBar();
+        ensureBottomNavDock();
+      }catch(eMore){console.error(eMore)}
+      return;
+    }
     if(paintedText&&paintedText!=="App wird geladen…"&&paintedText.indexOf("App wird repariert")<0)return;
     renderAppRecovery(error,"Darstellung");
   }
