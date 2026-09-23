@@ -123,13 +123,14 @@ extension HadithRecord {
 
     /// Robuste tvOS-Darstellung: Markdown-Steuerzeichen werden niemals sichtbar ausgegeben.
     /// **Text** = fett, *Text* = kursiv/geschwungen.
+    /// Keine Logos oder Branding-Zeilen werden hier erzeugt; diese Formatierung betrifft nur Schrift.
     var attributedHadith: AttributedString {
         HadithInlineFormatter.attributedString(from: textMarkdown)
     }
 
     var attributedSharh: AttributedString? {
         guard hasVerifiedSharh, let sharhText else { return nil }
-        return HadithInlineFormatter.attributedString(from: sharhText)
+        return HadithInlineFormatter.attributedString(from: sharhText, baseSize: 29)
     }
 }
 
@@ -140,14 +141,14 @@ struct AppleTVContentTypeLabel: View {
 
     var body: some View {
         Text(record.displayTypeLabel)
-            .font(.system(size: 30, weight: .semibold, design: .serif))
-            .tracking(1.2)
+            .font(.system(size: 29, weight: .semibold, design: .serif))
+            .tracking(1.4)
             .accessibilityLabel(record.displayTypeLabel)
     }
 }
 
 enum HadithInlineFormatter {
-    static func attributedString(from markdown: String) -> AttributedString {
+    static func attributedString(from markdown: String, baseSize: CGFloat = 39) -> AttributedString {
         var result = AttributedString()
         var buffer = ""
         var isBold = false
@@ -159,13 +160,13 @@ enum HadithInlineFormatter {
             var part = AttributedString(buffer)
 
             if isBold && isItalic {
-                part.font = .system(size: 38, weight: .bold, design: .serif).italic()
+                part.font = .system(size: baseSize, weight: .bold, design: .serif).italic()
             } else if isBold {
-                part.font = .system(size: 38, weight: .bold, design: .default)
+                part.font = .system(size: baseSize, weight: .bold, design: .serif)
             } else if isItalic {
-                part.font = .system(size: 38, weight: .medium, design: .serif).italic()
+                part.font = .system(size: baseSize, weight: .medium, design: .serif).italic()
             } else {
-                part.font = .system(size: 38, weight: .regular, design: .default)
+                part.font = .system(size: baseSize, weight: .regular, design: .serif)
             }
 
             result.append(part)
