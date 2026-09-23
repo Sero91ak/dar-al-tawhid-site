@@ -198,6 +198,8 @@ html.dar-ios-native-app #dar-ios-setup-assistant .dar-setup-row{
   background:transparent!important;
 }
 html.dar-ios-native-app #dar-ios-setup-assistant .dar-setup-row button{border:1px solid color-mix(in srgb,var(--gold2,#e8c96a) 42%,transparent)!important;background:transparent!important;color:var(--gold2,#e8c96a)!important}
+/* The native setup bridge must never cover the More tab. */
+html.dar-ios-native-app body.is-more-route #dar-ios-setup-assistant{display:none!important;pointer-events:none!important}
 html.dar-ios-native-app .settings-one-page :is(.notification-hero,.notification-section,.theme-switch-panel,.app-icon-panel,.app-font-panel,.font-slider-panel,.settings-live-row){margin:0!important;padding:18px 2px!important;border:0!important;border-bottom:1px solid color-mix(in srgb,var(--gold2,#e8c96a) 24%,var(--line2,rgba(255,255,255,.1)) 76%)!important;border-radius:0!important;background:transparent!important;background-image:none!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
 html.dar-ios-native-app .settings-one-page .notification-hero:after,
 html.dar-ios-native-app .settings-one-page .notification-section:before{display:none!important}
