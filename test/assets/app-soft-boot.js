@@ -12,7 +12,6 @@
   var HUNDRED_HOLD_MS = 380;
   var MIN_SHOW_MS = 900;
   var HARD_TIMEOUT_MS = 6500;
-  /* Original-Hauptfarben je Erscheinungsbild (THEME_META / theme-page-bg) */
   var THEME_FILLS = {
     dark: "#050706",
     light: "#f7f0df",
@@ -35,11 +34,8 @@
   var overlayEl = null;
 
   function prefersReducedMotion() {
-    try {
-      return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-    } catch (e) {
-      return false;
-    }
+    try { return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches); }
+    catch (e) { return false; }
   }
 
   function resolveThemeId() {
@@ -50,9 +46,7 @@
       if (t === "emerald" || t === "smaragd" || t === "aurora") t = "dark";
       if (!THEME_FILLS[t]) t = "dark";
       return t;
-    } catch (e) {
-      return "dark";
-    }
+    } catch (e) { return "dark"; }
   }
 
   function hexFromCssValue(raw) {
@@ -62,7 +56,6 @@
   }
 
   function resolveFill() {
-    /* Immer zuerst aktuelles Erscheinungsbild — kein festgeklebtes Boot-Blau. */
     var mapped = THEME_FILLS[resolveThemeId()];
     if (mapped) return mapped;
     try {
@@ -87,7 +80,6 @@
       var fill = resolveFill();
       var root = document.documentElement;
       if (!root) return fill;
-      /* Nur Boot-Fill setzen — --theme-page-bg NIEMALS inline (blockiert Theme-CSS). */
       root.style.setProperty("--dar-boot-fill", fill);
       root.style.removeProperty("--theme-page-bg");
       if (!finished) {
@@ -103,16 +95,11 @@
       meta.setAttribute("content", fill);
       var tile = document.querySelector('meta[name="msapplication-TileColor"]');
       if (tile) tile.setAttribute("content", fill);
-      if (overlayEl) {
-        overlayEl.style.backgroundColor = fill;
-      }
+      if (overlayEl) overlayEl.style.backgroundColor = fill;
       window.__DAR_BOOT_FILL = fill;
       return fill;
-    } catch (e) {
-      return THEME_FILLS.dark;
-    } finally {
-      syncing = false;
-    }
+    } catch (e) { return THEME_FILLS.dark; }
+    finally { syncing = false; }
   }
 
   function removeAllOverlays(keep) {
@@ -166,11 +153,7 @@
   function tick() {
     if (finished) return;
     var remain = MAX_FAKE - progress;
-    if (remain <= 0.002) {
-      progress = MAX_FAKE;
-      paint();
-      return;
-    }
+    if (remain <= 0.002) { progress = MAX_FAKE; paint(); return; }
     progress += remain * 0.045;
     if (progress > MAX_FAKE) progress = MAX_FAKE;
     paint();
@@ -178,19 +161,12 @@
 
   function startRamp() {
     if (timer || finished) return;
-    if (prefersReducedMotion()) {
-      progress = MAX_FAKE;
-      paint();
-      return;
-    }
+    if (prefersReducedMotion()) { progress = MAX_FAKE; paint(); return; }
     timer = setInterval(tick, 60);
   }
 
   function clearRamp() {
-    if (timer) {
-      clearInterval(timer);
-      timer = null;
-    }
+    if (timer) { clearInterval(timer); timer = null; }
   }
 
   function finish() {
@@ -208,10 +184,7 @@
     window.__darAppBootPainted = true;
     finishScheduled = false;
     clearRamp();
-    if (hardTimer) {
-      clearTimeout(hardTimer);
-      hardTimer = null;
-    }
+    if (hardTimer) { clearTimeout(hardTimer); hardTimer = null; }
     progress = 1;
     paint();
     setTimeout(function () {
@@ -237,10 +210,7 @@
         for (var i = 0; i < all.length; i++) {
           try { all[i].classList.add("is-done"); } catch (e) {}
         }
-        setTimeout(function () {
-          removeAllOverlays(null);
-          overlayEl = null;
-        }, 300);
+        setTimeout(function () { removeAllOverlays(null); overlayEl = null; }, 300);
       }, FADE_HOLD_MS);
     }, HUNDRED_HOLD_MS);
   }
@@ -254,9 +224,7 @@
       if (!text || text === "App wird geladen…") return false;
       if (view.querySelector(".loading") && text.length < 40) return false;
       return text.length > 24 || !!view.querySelector("section, article, .premium-surface, .sf-app, .qov-page, .more-page, .quiz-home");
-    } catch (e) {
-      return false;
-    }
+    } catch (e) { return false; }
   }
 
   function maybeFinish() {
@@ -285,13 +253,8 @@
     try {
       var ua = String(navigator.userAgent || "");
       var root = document.documentElement;
-      var isIosNative =
-        (root && root.classList.contains("dar-ios-native-app")) ||
-        /DarAlTawhid-iOS/i.test(ua);
-      var isAndroidNative =
-        (root && root.classList.contains("dar-android-native-app")) ||
-        !!window.DAR_ANDROID_NATIVE_APP ||
-        /DarAlTawhidAndroid/i.test(ua);
+      var isIosNative = (root && root.classList.contains("dar-ios-native-app")) || /DarAlTawhid-iOS/i.test(ua);
+      var isAndroidNative = (root && root.classList.contains("dar-android-native-app")) || !!window.DAR_ANDROID_NATIVE_APP || /DarAlTawhidAndroid/i.test(ua);
       if (isIosNative || isAndroidNative) {
         try {
           if (isAndroidNative) {
@@ -318,9 +281,7 @@
     ensureOverlay();
     paint();
     startRamp();
-    hardTimer = setTimeout(function () {
-      finish();
-    }, HARD_TIMEOUT_MS);
+    hardTimer = setTimeout(function () { finish(); }, HARD_TIMEOUT_MS);
     try {
       if (/Android/i.test(String(navigator.userAgent || ""))) {
         setTimeout(function () { if (!finished) finish(); }, 2200);
@@ -375,7 +336,6 @@
         var view = document.getElementById("appView");
         if (view) mo.observe(view, { childList: true, subtree: true, characterData: true });
         if (document.body) mo.observe(document.body, { attributes: true, attributeFilter: ["class"] });
-        /* Never observe style — syncEdgeFill writes style and would loop forever (black screen). */
         mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "class"] });
       };
       if (document.body) startObserve();
@@ -387,4 +347,35 @@
   }
 
   install();
+})();
+
+/* v673 · Hadith-Bibliothek global im Mehr-Bereich vorbereiten, aber bis Freigabe sperren. */
+(function () {
+  "use strict";
+  if (window.__DAR_HADITH_LIBRARY_GATE_LOADER_V1) return;
+  window.__DAR_HADITH_LIBRARY_GATE_LOADER_V1 = true;
+  function base() {
+    try {
+      var p = String(location.pathname || "");
+      if (p === "/test" || p.indexOf("/test/") === 0) return "/test/assets/";
+    } catch (e) {}
+    return "/assets/";
+  }
+  function loadCss() {
+    if (document.querySelector('link[href*="hadith-library-gate.css"]')) return;
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = base() + "hadith-library-gate.css?v=1";
+    document.head.appendChild(link);
+  }
+  function loadJs() {
+    if (document.querySelector('script[src*="hadith-library-gate.js"]')) return;
+    var script = document.createElement("script");
+    script.defer = true;
+    script.src = base() + "hadith-library-gate.js?v=1";
+    (document.head || document.documentElement).appendChild(script);
+  }
+  function boot() { loadCss(); loadJs(); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, { once: true });
+  else boot();
 })();
