@@ -4,7 +4,7 @@
   "series": "2151-2250",
   "status": "partial-earliest-sharh-corrections-done",
   "createdAfterRuleChange": true,
-  "ruleVersion": 5,
+  "ruleVersion": 6,
   "reason": "Der Unterblock wurde mit klassischem Šarḥ erstellt, aber vor der verbindlichen Regel zur frühesten greifbaren Erklärung. Vor Abschluss/Aktivierung muss je Datensatz geprüft werden, ob al-Ḫaṭṭābī/Ibn Baṭṭāl bei Buḫārī-Stellen bzw. al-Māzirī/al-Qāḍī ʿIyāḍ/al-Qurṭubī bei Muslim-Stellen Vorrang haben.",
   "bukhariPriority": [
     "al-Ḫaṭṭābī",
@@ -24,6 +24,7 @@
     "exactReferenceRequired": true,
     "noEstimatedPages": true,
     "appleTvScreensaverShowsSharh": true,
+    "perRecordImmediateActivation": true,
     "blockActivationAllowed": false
   },
   "records": [
@@ -42,9 +43,9 @@
     { "id": "HAD-2163", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority", "note": "Von Ibn Raǧab auf Ibn Baṭṭāl vorgezogen; Buḫārī-Stelle al-iqtidāʾ bi-sunan Rasūl Allāh ﷺ geprüft." },
     { "id": "HAD-2164", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority", "note": "Gleicher Grundḥadīṯ wie HAD-2163; Ibn Baṭṭāl vor Ibn Raǧab verwendet." },
     { "id": "HAD-2165", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority", "note": "Gleicher Grundḥadīṯ wie HAD-2163; Ibn Baṭṭāl vor Ibn Raǧab verwendet." },
-    { "id": "HAD-2166", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Muslim-Stelle; al-Māzirī/Qāḍī ʿIyāḍ/al-Qurṭubī vor Ibn Raǧab prüfen, wenn direkt passend." },
-    { "id": "HAD-2167", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Gleicher Grundḥadīṯ wie HAD-2166." },
-    { "id": "HAD-2168", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Gleicher Grundḥadīṯ wie HAD-2166." },
+    { "id": "HAD-2166", "currentSharh": "Qāḍī ʿIyāḍ", "auditStatus": "corrected-earliest-muslim-priority", "note": "Al-Māzirī nicht als direkt greifbarer Šarḥ zur konkreten Stelle gesichert; Qāḍī ʿIyāḍ, Ikmāl al-Muʿlim 3/535, vor Ibn Raǧab verwendet." },
+    { "id": "HAD-2167", "currentSharh": "Qāḍī ʿIyāḍ", "auditStatus": "corrected-earliest-muslim-priority", "note": "Gleicher Grundḥadīṯ wie HAD-2166; Qāḍī ʿIyāḍ vor Ibn Raǧab verwendet." },
+    { "id": "HAD-2168", "currentSharh": "Qāḍī ʿIyāḍ", "auditStatus": "corrected-earliest-muslim-priority", "note": "Gleicher Grundḥadīṯ wie HAD-2166; Qāḍī ʿIyāḍ vor Ibn Raǧab verwendet." },
     { "id": "HAD-2169", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Tirmiḏī/Nasāʾī-Stelle; frühester greifbarer direkter Sunan-Kommentar prüfen." },
     { "id": "HAD-2170", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Tirmiḏī/Ibn Māǧah-Stelle; frühester greifbarer direkter Sunan-Kommentar prüfen." }
   ]
