@@ -2,8 +2,8 @@
   "series": "151-200",
   "label": "HAD-0151 bis HAD-0200",
   "publishedFrom": "HAD-0151",
-  "publishedTo": "HAD-0183",
-  "publishedCount": 30,
+  "publishedTo": "HAD-0187",
+  "publishedCount": 32,
   "requireVerifiedSharh": true,
   "files": [
     "HAD-0151.json",
@@ -35,16 +35,48 @@
     "HAD-0179.json",
     "HAD-0180.json",
     "HAD-0182.json",
-    "HAD-0183.json"
+    "HAD-0183.json",
+    "HAD-0185.json",
+    "HAD-0187.json"
   ],
   "pendingReview": [
     "HAD-0154.json",
     "HAD-0171.json",
-    "HAD-0181.json"
+    "HAD-0181.json",
+    "HAD-0184.json",
+    "HAD-0186.json",
+    "HAD-0188.json",
+    "HAD-0189.json",
+    "HAD-0190.json",
+    "HAD-0191.json",
+    "HAD-0192.json",
+    "HAD-0193.json",
+    "HAD-0194.json",
+    "HAD-0195.json",
+    "HAD-0196.json",
+    "HAD-0197.json",
+    "HAD-0198.json",
+    "HAD-0199.json",
+    "HAD-0200.json"
   ],
   "excluded": [
     {"id":"HAD-0154","reason":"needs-review: Duplikat von HAD-0085; nicht live aktiviert"},
     {"id":"HAD-0171","reason":"needs-review: Duplikat von HAD-0083; nicht live aktiviert"},
-    {"id":"HAD-0181","reason":"needs-review: Ṣaḥābah-Aṯar braucht separate Athar-Verifikation/Erklärung; nicht live aktiviert"}
+    {"id":"HAD-0181","reason":"needs-review: Ṣaḥābah-Aṯar braucht separate Athar-Verifikation/Erklärung; nicht live aktiviert"},
+    {"id":"HAD-0184","reason":"needs-review: Ṣaḥābah-Aṯar braucht separate Athar-Verifikation/Erklärung; nicht live aktiviert"},
+    {"id":"HAD-0186","reason":"needs-review: Salaf-Aṯar braucht separate Athar-Verifikation/Erklärung; nicht live aktiviert"},
+    {"id":"HAD-0188","reason":"needs-review: Ṣaḥābah-Aṯar braucht separate Athar-Verifikation/Erklärung; nicht live aktiviert"},
+    {"id":"HAD-0189","reason":"needs-review: Ṣaḥābah-Aṯar braucht separate Athar-Verifikation/Erklärung; nicht live aktiviert"},
+    {"id":"HAD-0190","reason":"needs-review: Ṣaḥābah-Aṯar braucht separate Athar-Verifikation/Erklärung; nicht live aktiviert"},
+    {"id":"HAD-0191","reason":"needs-review: Ṣaḥābah-Aṯar braucht separate Athar-Verifikation/Erklärung; nicht live aktiviert"},
+    {"id":"HAD-0192","reason":"needs-review: Ṣaḥābah-Aṯar braucht separate Athar-Verifikation/Erklärung; nicht live aktiviert"},
+    {"id":"HAD-0193","reason":"needs-review: Athar braucht separate Athar-Verifikation/Erklärung; nicht live aktiviert"},
+    {"id":"HAD-0194","reason":"needs-review: Ṣaḥābah-Aṯar braucht separate Athar-Verifikation/Erklärung; nicht live aktiviert"},
+    {"id":"HAD-0195","reason":"needs-review: Ṣaḥābah-Aṯar braucht separate Athar-Verifikation/Erklärung; nicht live aktiviert"},
+    {"id":"HAD-0196","reason":"needs-review: Ṣaḥābah-Aṯar braucht separate Athar-Verifikation/Erklärung; nicht live aktiviert"},
+    {"id":"HAD-0197","reason":"needs-review: Ṣaḥābah-Aṯar braucht separate Athar-Verifikation/Erklärung; nicht live aktiviert"},
+    {"id":"HAD-0198","reason":"needs-review: Salaf-Aṯar braucht separate Athar-Verifikation/Erklärung; nicht live aktiviert"},
+    {"id":"HAD-0199","reason":"needs-review: Salaf-Aṯar braucht separate Athar-Verifikation/Erklärung; nicht live aktiviert"},
+    {"id":"HAD-0200","reason":"needs-review: Ṣaḥābah-Aṯar braucht separate Athar-Verifikation/Erklärung; nicht live aktiviert"}
   ]
 }
