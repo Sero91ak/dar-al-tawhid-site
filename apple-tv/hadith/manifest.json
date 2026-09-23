@@ -2,10 +2,10 @@
   "project": "DĀR AL TAWḤĪD – Apple TV Ḥadīṯ & Āṯār",
   "language": "de",
   "encoding": "UTF-8",
-  "formatVersion": "1.4",
+  "formatVersion": "1.5",
   "authenticOnly": true,
-  "currentSeries": "2051-2150",
-  "nextId": "HAD-2151",
+  "currentSeries": "2151-2250",
+  "nextId": "HAD-2166",
   "display": {
     "narratorGap": 14,
     "sourceGap": 14,
@@ -23,7 +23,8 @@
     "showSharhMode": "compact",
     "showSharhSource": true,
     "requireVerifiedSharh": true,
-    "layoutRule": "Ḥadīṯ/Āṯar zuerst; darunter Quelle; danach kurzer geprüfter Sharḥ mit Sharḥ-Quelle, kompakt und bildschirmschonerfreundlich."
+    "activation": "per-record-immediate",
+    "layoutRule": "Ḥadīṯ/Āṯar zuerst; darunter Quelle; danach kurzer geprüfter Sharḥ mit Sharḥ-Quelle, kompakt und bildschirmschonerfreundlich. Fertige Einzeldatensätze werden sofort aufgenommen."
   },
   "hadithLibrary": {
     "enabledForTestApp": true,
@@ -32,7 +33,8 @@
     "sourceOfTruth": "/apple-tv/hadith/catalog.json",
     "showSharh": true,
     "showSharhSource": true,
-    "requireVerifiedSharh": true
+    "requireVerifiedSharh": true,
+    "activation": "per-record-immediate-behind-gate"
   },
   "syncPolicy": {
     "path": "sync-policy.json",
@@ -40,20 +42,21 @@
     "appleTvScreensaverShowsSharh": true,
     "appleTvScreensaverSharhMode": "compact",
     "appleTvScreensaverRequiresVerifiedSharh": true,
+    "activationMode": "per-record-immediate",
+    "doNotWaitForHundredBlock": true,
     "testAppHadithLibraryShowsSharh": true,
     "iosHadithLibraryShowsSharh": true
   },
   "batchBuildPolicy": {
-    "stepSize": 100,
-    "completeBlockBeforeNext": true,
-    "sharhRequiredForCompletion": true,
-    "earliestSharhAuditRequired": true,
-    "twentyBlocks": [
-      "hadith-with-earliest-verified-sharh",
-      "hadith-with-earliest-verified-sharh",
-      "hadith-with-earliest-verified-sharh",
-      "hadith-with-earliest-verified-sharh",
-      "hadith-with-earliest-verified-sharh"
+    "stepSize": 25,
+    "hundredBlocksAreOnlyOrganization": true,
+    "completeBlockBeforeNext": false,
+    "perRecordActivation": true,
+    "sharhRequiredForActivation": true,
+    "earliestSharhAuditRequiredForActivation": true,
+    "readyRecordRule": "Jeder einzelne HAD-Datensatz geht sofort in Apple TV/Screensaver und Bibliotheksstruktur, sobald verified Sharḥ, klare Quelle und früheste-greifbare-Šarḥ-Prüfung erfüllt sind.",
+    "twentyFiveBlocks": [
+      "hadith-with-earliest-verified-sharh-immediate-activation"
     ]
   }
 }
