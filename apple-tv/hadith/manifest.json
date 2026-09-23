@@ -2,10 +2,10 @@
   "project": "DĀR AL TAWḤĪD – Apple TV Ḥadīṯ & Āṯār",
   "language": "de",
   "encoding": "UTF-8",
-  "formatVersion": "1.5",
+  "formatVersion": "1.6",
   "authenticOnly": true,
   "currentSeries": "2151-2250",
-  "nextId": "HAD-2166",
+  "nextId": "HAD-2171",
   "display": {
     "narratorGap": 14,
     "sourceGap": 14,
@@ -24,6 +24,7 @@
     "showSharhSource": true,
     "requireVerifiedSharh": true,
     "activation": "per-record-immediate",
+    "readyThrough": "HAD-2170",
     "layoutRule": "Ḥadīṯ/Āṯar zuerst; darunter Quelle; danach kurzer geprüfter Sharḥ mit Sharḥ-Quelle, kompakt und bildschirmschonerfreundlich. Fertige Einzeldatensätze werden sofort aufgenommen."
   },
   "hadithLibrary": {
@@ -34,7 +35,8 @@
     "showSharh": true,
     "showSharhSource": true,
     "requireVerifiedSharh": true,
-    "activation": "per-record-immediate-behind-gate"
+    "activation": "per-record-immediate-behind-gate",
+    "readyThrough": "HAD-2170"
   },
   "syncPolicy": {
     "path": "sync-policy.json",
