@@ -1,0 +1,32 @@
+{
+  "enabled": false,
+  "status": "in-progress",
+  "label": "In Bearbeitung",
+  "releaseRequired": true,
+  "releasedByUser": false,
+  "targetHash": "#hadith-bibliothek",
+  "cardTitle": "Ḥadīṯ-Bibliothek",
+  "cardSubtitle": "Wird vorbereitet: nach Buchkategorie, Werk, Kapitel, Seite, Nummer und Sharḥ geordnet.",
+  "lockedMessage": "Die Ḥadīṯ-Bibliothek ist vorbereitet, aber noch nicht freigegeben.",
+  "chips": [
+    "Buchkategorie",
+    "Werk",
+    "Kapitel",
+    "Seite",
+    "Nummer",
+    "Sharḥ"
+  ],
+  "surfaces": {
+    "iosApp": true,
+    "androidWebApp": true,
+    "website": true,
+    "testApp": true,
+    "appleTvScreensaver": false
+  },
+  "visibility": {
+    "showInMoreAreaWhileLocked": true,
+    "allowOpenWhileLocked": false,
+    "showLockedStatus": true
+  },
+  "releaseRule": "Erst wenn releasedByUser true und enabled true gesetzt sind, darf die Ḥadīṯ-Bibliothek geöffnet werden. Bis dahin bleibt sie nur als vorbereiteter Bereich im Mehr-Bereich sichtbar."
+}
