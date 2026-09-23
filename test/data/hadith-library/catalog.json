@@ -1,15 +1,15 @@
 {
   "project": "DĀR AL TAWḤĪD – Test-App Ḥadīṯ-Bibliothek",
-  "schemaVersion": "1.1",
+  "schemaVersion": "1.2",
   "language": "de",
   "authenticOnly": true,
+  "mode": "library",
   "sourceOfTruth": "/apple-tv/hadith/catalog.json",
   "dataRoot": "/apple-tv/hadith/",
+  "loaderPath": "/test/assets/hadith-library-data.js",
   "gateStatePath": "/test/data/hadith-library-gate.json",
-  "currentSeries": "2051-2150",
-  "latestId": "HAD-2150",
-  "nextId": "HAD-2151",
-  "mode": "library",
+  "seriesMode": "auto-from-source-catalog",
+  "seriesSourcePath": "/apple-tv/hadith/catalog.json",
   "access": {
     "enabled": false,
     "status": "in-progress",
@@ -23,10 +23,50 @@
   "display": {
     "showHadith": true,
     "showSource": true,
+    "showGrade": true,
     "showSharh": true,
     "showSharhSource": true,
     "requireVerifiedSharh": true,
     "lockedPlaceholderText": "Die Ḥadīṯ-Bibliothek ist vorbereitet, aber noch nicht freigegeben."
+  },
+  "appleTvPolicy": {
+    "usesSameRecords": true,
+    "renderSharh": false,
+    "allowedFields": [
+      "id",
+      "recordType",
+      "language",
+      "categoryLabel",
+      "narratorLine",
+      "speakerLabel",
+      "textMarkdown",
+      "source",
+      "sourceBook",
+      "sourceChapter",
+      "sourceSection",
+      "sourceHadithNumber",
+      "grade"
+    ],
+    "ignoredFields": [
+      "sharhStatus",
+      "sharhText",
+      "sharhLanguage",
+      "sharhScholar",
+      "sharhBook",
+      "sharhVolume",
+      "sharhPage",
+      "sharhChapter",
+      "sharhSection",
+      "sharhEdition",
+      "sharhReference"
+    ]
+  },
+  "hadithLibraryPolicy": {
+    "usesSameRecords": true,
+    "renderSharh": true,
+    "renderSharhWhen": "sharhStatus === verified && sharhText is filled",
+    "detailSectionTitle": "Šarḥ & Erklärung",
+    "completionRule": "Ein Datensatz gilt für die Ḥadīṯ-Bibliothek erst als vollständig, wenn ein geprüfter klassischer Šarḥ eingetragen ist."
   },
   "organization": {
     "groupBy": [
@@ -68,21 +108,21 @@
       "recordType",
       "textMarkdown",
       "sourceBook",
-      "sourceChapter",
-      "sourcePage",
       "grade",
       "sharhStatus",
       "sharhText",
+      "sharhScholar",
+      "sharhBook",
       "sharhReference"
     ]
   },
   "surfaces": {
     "testApp": true,
     "iosApp": true,
-    "androidWebApp": true,
-    "website": true,
-    "visitorApp": true,
-    "appleTvScreensaver": false
+    "appleTvScreensaver": false,
+    "visitorApp": false,
+    "website": false,
+    "androidWebApp": false
   },
   "navigation": {
     "entryArea": "more",
@@ -91,22 +131,12 @@
     "route": "#hadith-bibliothek",
     "blockedUntilRelease": true
   },
-  "syncRule": "Neue HAD-Datensätze werden einmal unter /apple-tv/hadith/ gepflegt. Apple TV nutzt daraus Aussage und Quelle. Test-App, iOS-App, Android/Web-App und Webseite erhalten denselben Datensatz für die Ḥadīṯ-Bibliothek inklusive geprüftem Sharḥ, bleiben aber bis zur Nutzerfreigabe gesperrt.",
+  "syncRule": "Neue HAD-Datensätze werden einmal unter /apple-tv/hadith/ gepflegt. Apple TV nutzt daraus nur Aussage und Quellenanzeige. Die Test-App- und spätere iOS-Ḥadīṯ-Bibliothek nutzt denselben Datensatz inklusive geprüftem Šarḥ.",
   "completionRule": {
     "completeBlockBeforeNext": true,
     "sharhRequiredForCompletion": true,
     "completedRecordSharhStatus": "verified",
     "libraryOrderRequired": true
   },
-  "series": [
-    {
-      "id": "2051-2150",
-      "count": 100,
-      "firstId": "HAD-2051",
-      "lastId": "HAD-2150",
-      "sourceIndexPath": "/apple-tv/hadith/series/2051-2150/index.json",
-      "allRecordsSharhStatus": "verified",
-      "libraryStatus": "prepared-locked"
-    }
-  ]
+  "series": []
 }
