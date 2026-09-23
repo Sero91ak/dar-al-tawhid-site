@@ -1,0 +1,155 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-2171-2195",
+  "series": "2151-2250",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "Der 25er-Unterblock wurde unter Regel v6 einzeln aufgebaut und abschließend erneut geprüft. Jeder Datensatz besitzt einen verifizierten Šarḥ, eine eindeutige Ḥadīṯ-Quelle und entweder den frühesten greifbaren direkten Šarḥ oder eine dokumentierte Begründung, warum ein späterer direkter Šarḥ verwendet wird. Beim Abschluss-Audit wurden HAD-2183 bis HAD-2185 von Ibn Raǧab auf den früheren direkten Tirmiḏī-Šarḥ von Ibn al-ʿArabī korrigiert.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "appleTvScreensaverShowsSharh": true,
+    "perRecordImmediateActivation": true,
+    "blockActivationAllowed": true
+  },
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
+  "records": [
+    {
+      "id": "HAD-2171",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "created-under-earliest-sharh-rule"
+    },
+    {
+      "id": "HAD-2172",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "created-under-earliest-sharh-rule"
+    },
+    {
+      "id": "HAD-2173",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "created-under-earliest-sharh-rule"
+    },
+    {
+      "id": "HAD-2174",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "created-under-earliest-sharh-rule"
+    },
+    {
+      "id": "HAD-2175",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "created-under-earliest-sharh-rule"
+    },
+    {
+      "id": "HAD-2176",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "created-under-earliest-sharh-rule"
+    },
+    {
+      "id": "HAD-2177",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "created-under-earliest-sharh-rule"
+    },
+    {
+      "id": "HAD-2178",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "created-under-earliest-sharh-rule"
+    },
+    {
+      "id": "HAD-2179",
+      "currentSharh": "al-Ḫaṭṭābī",
+      "auditStatus": "created-under-earliest-sharh-rule"
+    },
+    {
+      "id": "HAD-2180",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2181",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2182",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2183",
+      "currentSharh": "Ibn al-ʿArabī al-Mālikī",
+      "auditStatus": "corrected-earliest-sunan-priority",
+      "note": "Von Ibn Raǧab auf Ibn al-ʿArabī, ʿĀriḍat al-Aḥwaḏī 4/349, vorgezogen."
+    },
+    {
+      "id": "HAD-2184",
+      "currentSharh": "Ibn al-ʿArabī al-Mālikī",
+      "auditStatus": "corrected-earliest-sunan-priority",
+      "note": "Von Ibn Raǧab auf Ibn al-ʿArabī, ʿĀriḍat al-Aḥwaḏī 4/349, vorgezogen."
+    },
+    {
+      "id": "HAD-2185",
+      "currentSharh": "Ibn al-ʿArabī al-Mālikī",
+      "auditStatus": "corrected-earliest-sunan-priority",
+      "note": "Von Ibn Raǧab auf Ibn al-ʿArabī, ʿĀriḍat al-Aḥwaḏī 4/349, vorgezogen."
+    },
+    {
+      "id": "HAD-2186",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification",
+      "note": "Für at-Tirmiḏī 2516 kein früherer direkter Sunan-Šarḥ sicher greifbar gesichert; Ibn Raǧab erklärt Ḥadīṯ 19 direkt ab 1/459."
+    },
+    {
+      "id": "HAD-2187",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification"
+    },
+    {
+      "id": "HAD-2188",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification"
+    },
+    {
+      "id": "HAD-2189",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification"
+    },
+    {
+      "id": "HAD-2190",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification"
+    },
+    {
+      "id": "HAD-2191",
+      "currentSharh": "al-Ḫaṭṭābī",
+      "auditStatus": "created-under-earliest-sharh-rule"
+    },
+    {
+      "id": "HAD-2192",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2193",
+      "currentSharh": "Abū al-ʿAbbās al-Qurṭubī",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-and-Qadi-Iyad-check"
+    },
+    {
+      "id": "HAD-2194",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2195",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    }
+  ]
+}
