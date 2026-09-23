@@ -1,0 +1,41 @@
+{
+  "id": "2151-2250",
+  "status": "incremental-active",
+  "activation": "per-record-immediate",
+  "firstId": "HAD-2151",
+  "readyThrough": "HAD-2170",
+  "nextId": "HAD-2171",
+  "plannedLastId": "HAD-2250",
+  "count": 20,
+  "contentTypes": {
+    "hadith": 20,
+    "athar": 0
+  },
+  "screensaverIncluded": true,
+  "showSharh": true,
+  "showSharhSource": true,
+  "requireVerifiedSharh": true,
+  "earliestSharhAudit": "../../audit/2151-2170-earliest-sharh-audit.json",
+  "records": [
+    "HAD-2151.json",
+    "HAD-2152.json",
+    "HAD-2153.json",
+    "HAD-2154.json",
+    "HAD-2155.json",
+    "HAD-2156.json",
+    "HAD-2157.json",
+    "HAD-2158.json",
+    "HAD-2159.json",
+    "HAD-2160.json",
+    "HAD-2161.json",
+    "HAD-2162.json",
+    "HAD-2163.json",
+    "HAD-2164.json",
+    "HAD-2165.json",
+    "HAD-2166.json",
+    "HAD-2167.json",
+    "HAD-2168.json",
+    "HAD-2169.json",
+    "HAD-2170.json"
+  ]
+}
