@@ -1,0 +1,152 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-2246-2270",
+  "series": "2151-2350",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "Der 25er-Unterblock wurde unter Regel v6 einzeln erstellt und abschließend vollständig geprüft. Alle Datensätze besitzen einen verifizierten Šarḥ, eine eindeutige Ḥadīṯ-Quelle und den frühesten greifbaren direkten Šarḥ oder eine dokumentierte Begründung. Der Block überschreitet bewusst die Seriengrenze: HAD-2246–2250 liegen in 2151-2250, HAD-2251–2270 in 2251-2350. Unsichere Druckseiten wurden nicht geschätzt.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "appleTvScreensaverShowsSharh": true,
+    "perRecordImmediateActivation": true,
+    "blockActivationAllowed": true
+  },
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
+  "records": [
+    {
+      "id": "HAD-2246",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification"
+    },
+    {
+      "id": "HAD-2247",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification"
+    },
+    {
+      "id": "HAD-2248",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification"
+    },
+    {
+      "id": "HAD-2249",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification"
+    },
+    {
+      "id": "HAD-2250",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification"
+    },
+    {
+      "id": "HAD-2251",
+      "currentSharh": "Ibn Raǧab al-Ḥanbalī",
+      "auditStatus": "kept-direct-sharh-with-priority-justification"
+    },
+    {
+      "id": "HAD-2252",
+      "currentSharh": "Ibn ʿAbd al-Barr",
+      "auditStatus": "earliest-muwatta-priority",
+      "note": "Frühere direkte Erklärung bei Ibn ʿAbd al-Barr vor Ibn Raǧab verwendet."
+    },
+    {
+      "id": "HAD-2253",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2254",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2255",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2256",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2257",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2258",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2259",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2260",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2261",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2262",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2263",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2264",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2265",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2266",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2267",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2268",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2269",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2270",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    }
+  ]
+}
