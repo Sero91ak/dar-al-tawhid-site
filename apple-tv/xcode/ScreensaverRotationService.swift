@@ -191,7 +191,7 @@ actor ScreensaverRotationService {
         do {
             let catalog = try await AppleTVContentRegistry.shared.loadCatalog()
             let path = catalog.screensaver?.rotationConfigPath ?? "screensaver/rotation.json"
-            if let cachedURL = try? RemoteContentSyncService.shared.cachedFileURL(
+            if let cachedURL = try? await RemoteContentSyncService.shared.cachedFileURL(
                 relativeCatalogPath: catalog.screensaver?.catalogPath ?? "screensaver/catalog.json",
                 filePath: (path as NSString).lastPathComponent
             ), FileManager.default.fileExists(atPath: cachedURL.path) {
