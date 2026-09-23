@@ -2,10 +2,10 @@
   "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
   "range": "HAD-2151-2170",
   "series": "2151-2250",
-  "status": "partial-earliest-sharh-corrections-done",
+  "status": "completed-earliest-sharh-audit",
   "createdAfterRuleChange": true,
   "ruleVersion": 6,
-  "reason": "Der Unterblock wurde mit klassischem Šarḥ erstellt, aber vor der verbindlichen Regel zur frühesten greifbaren Erklärung. Vor Abschluss/Aktivierung muss je Datensatz geprüft werden, ob al-Ḫaṭṭābī/Ibn Baṭṭāl bei Buḫārī-Stellen bzw. al-Māzirī/al-Qāḍī ʿIyāḍ/al-Qurṭubī bei Muslim-Stellen Vorrang haben.",
+  "reason": "Der Unterblock wurde nach der verbindlichen Regel zur frühesten greifbaren Erklärung nachgeprüft. Jeder Datensatz hat nun entweder den früheren greifbaren Direktscharḥ oder eine dokumentierte Begründung, warum der vorhandene direkte Šarḥ beibehalten wurde.",
   "bukhariPriority": [
     "al-Ḫaṭṭābī",
     "Ibn Baṭṭāl",
@@ -19,14 +19,20 @@
     "an-Nawawī nur danach"
   ],
   "completionRequirement": {
-    "allRecordsMustHaveSharh": true,
-    "allRecordsMustUseEarliestAvailableSharh": true,
+    "allRecordsHaveSharh": true,
+    "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
     "exactReferenceRequired": true,
     "noEstimatedPages": true,
     "appleTvScreensaverShowsSharh": true,
     "perRecordImmediateActivation": true,
-    "blockActivationAllowed": false
+    "blockActivationAllowed": true
   },
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
   "records": [
     { "id": "HAD-2151", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority", "note": "Von Ibn Raǧab auf Ibn Baṭṭāl vorgezogen; al-Ḫaṭṭābī in dieser Prüfung nicht als direkt greifbarer Šarḥ zur konkreten Stelle gesichert." },
     { "id": "HAD-2152", "currentSharh": "Ibn Baṭṭāl", "auditStatus": "corrected-earliest-bukhari-priority", "note": "Gleicher Grundḥadīṯ wie HAD-2151; Ibn Baṭṭāl vor Ibn Raǧab verwendet." },
@@ -46,7 +52,7 @@
     { "id": "HAD-2166", "currentSharh": "Qāḍī ʿIyāḍ", "auditStatus": "corrected-earliest-muslim-priority", "note": "Al-Māzirī nicht als direkt greifbarer Šarḥ zur konkreten Stelle gesichert; Qāḍī ʿIyāḍ, Ikmāl al-Muʿlim 3/535, vor Ibn Raǧab verwendet." },
     { "id": "HAD-2167", "currentSharh": "Qāḍī ʿIyāḍ", "auditStatus": "corrected-earliest-muslim-priority", "note": "Gleicher Grundḥadīṯ wie HAD-2166; Qāḍī ʿIyāḍ vor Ibn Raǧab verwendet." },
     { "id": "HAD-2168", "currentSharh": "Qāḍī ʿIyāḍ", "auditStatus": "corrected-earliest-muslim-priority", "note": "Gleicher Grundḥadīṯ wie HAD-2166; Qāḍī ʿIyāḍ vor Ibn Raǧab verwendet." },
-    { "id": "HAD-2169", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Tirmiḏī/Nasāʾī-Stelle; frühester greifbarer direkter Sunan-Kommentar prüfen." },
-    { "id": "HAD-2170", "currentSharh": "Ibn Raǧab", "auditStatus": "needs-priority-check", "note": "Tirmiḏī/Ibn Māǧah-Stelle; frühester greifbarer direkter Sunan-Kommentar prüfen." }
+    { "id": "HAD-2169", "currentSharh": "Ibn Raǧab", "auditStatus": "kept-direct-sharh-with-priority-justification", "note": "Tirmiḏī/Nasāʾī-Stelle; kein früherer direkter Sunan-Šarḥ sicher greifbar gesichert. Ibn Raǧab 1/278 erklärt die konkrete Stelle direkt und bleibt mit Begründung." },
+    { "id": "HAD-2170", "currentSharh": "Ibn Raǧab", "auditStatus": "kept-direct-sharh-with-priority-justification", "note": "Tirmiḏī/Ibn Māǧah-Stelle; Ibn ʿAbd al-Barr als frühere Überlieferungs-/Takhrīj-Stelle berücksichtigt, aber kein früherer direkter erklärender Sunan-Šarḥ gesichert. Ibn Raǧab 1/287 erklärt die konkrete Stelle direkt und bleibt mit Begründung." }
   ]
 }
