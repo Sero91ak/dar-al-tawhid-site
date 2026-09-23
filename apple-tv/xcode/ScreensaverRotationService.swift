@@ -39,9 +39,12 @@ actor ScreensaverRotationService {
     private let encoder = JSONEncoder()
 
     /// Liefert die nächste Content-ID für den Bildschirmschoner.
-    /// Jede verfügbare ID wird einmal gezeigt, bevor eine Wiederholung möglich ist.
-    /// Neue GitHub-IDs werden in den laufenden Zyklus integriert, ohne ihn zurückzusetzen.
+    /// Vor jeder Rotation wird der zentrale RemoteContentSyncService getriggert.
+    /// Dadurch bekommt der Screensaver neue Ḥadīṯe, Āṯār, Duʿāʾ oder Qurʾān-Hinweise automatisch,
+    /// sobald sie im jeweiligen GitHub-/Production-Katalog registriert sind.
     func nextID(availableIDs: [String], catalogFingerprint: String) async throws -> String? {
+        _ = await RemoteContentSyncService.shared.syncAll(trigger: .screensaverStart)
+
         let config = try await loadConfig()
         let available = Array(Set(availableIDs)).sorted()
         guard !available.isEmpty else { return nil }
@@ -188,6 +191,16 @@ actor ScreensaverRotationService {
         do {
             let catalog = try await AppleTVContentRegistry.shared.loadCatalog()
             let path = catalog.screensaver?.rotationConfigPath ?? "screensaver/rotation.json"
+            if let cachedURL = try? RemoteContentSyncService.shared.cachedFileURL(
+                relativeCatalogPath: catalog.screensaver?.catalogPath ?? "screensaver/catalog.json",
+                filePath: (path as NSString).lastPathComponent
+            ), FileManager.default.fileExists(atPath: cachedURL.path) {
+                let data = try Data(contentsOf: cachedURL)
+                let config = try decoder.decode(ScreensaverRotationConfig.self, from: data)
+                try saveConfigCache(config)
+                return config
+            }
+
             let url = AppleTVContentEnvironment.rootURL.appendingPathComponent(path)
             let config: ScreensaverRotationConfig = try await fetchJSON(url)
             try saveConfigCache(config)
