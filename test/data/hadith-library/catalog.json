@@ -1,0 +1,37 @@
+{
+  "project": "DĀR AL TAWḤĪD – Test-App Ḥadīṯ-Bibliothek",
+  "schemaVersion": "2.0",
+  "language": "de",
+  "authenticOnly": true,
+  "mode": "library",
+  "sourceOfTruth": "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/apple-tv-hadith-staging/apple-tv/hadith/catalog.json",
+  "dataRoot": "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/apple-tv-hadith-staging/apple-tv/hadith/",
+  "loaderPath": "/test/assets/hadith-library-data.js",
+  "gateStatePath": "/test/data/hadith-library-gate.json",
+  "seriesMode": "auto-from-source-catalog",
+  "access": {
+    "enabled": true,
+    "status": "test-open",
+    "visibleInMoreArea": true,
+    "allowOpenWhileLocked": true,
+    "releaseRequired": false,
+    "releasedByUser": true
+  },
+  "display": {
+    "showHadith": true,
+    "showSource": true,
+    "showGrade": true,
+    "showSharh": true,
+    "showSharhSource": true,
+    "requireVerifiedSharh": true
+  },
+  "syncRule": "Verifizierte HAD-Datensätze werden zentral aus apple-tv-hadith-staging geladen; Test-App benötigt pro neuem Datensatz keinen eigenen Daten-Commit.",
+  "surfaces": {
+    "testApp": true,
+    "iosApp": false,
+    "appleTvScreensaver": false,
+    "visitorApp": false,
+    "website": false,
+    "androidWebApp": false
+  }
+}
