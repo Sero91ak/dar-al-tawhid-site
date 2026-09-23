@@ -8,6 +8,7 @@ actor RemoteContentSyncCoordinator {
 
     private var lastSyncByTrigger: [RemoteContentSyncTrigger: Date] = [:]
     private var lastGlobalSync: Date?
+    private var minimumRefreshInterval: TimeInterval = 6 * 60 * 60
 
     /// Beim App-Start aufrufen.
     func appDidStart() async -> RemoteContentSyncReport {
@@ -43,6 +44,10 @@ actor RemoteContentSyncCoordinator {
         do {
             let policy = try await AppleTVContentRegistry.shared.remoteContentSyncPolicy()
             guard policy?.enabled ?? true else { return nil }
+
+            if let hours = policy?.minimumRefreshIntervalHours, hours > 0 {
+                minimumRefreshInterval = TimeInterval(hours * 60 * 60)
+            }
 
             switch trigger {
             case .foreground:
@@ -81,22 +86,16 @@ actor RemoteContentSyncCoordinator {
 
     private func shouldSyncNow(trigger: RemoteContentSyncTrigger) -> Bool {
         let now = Date()
-        let minimumInterval = minimumRefreshIntervalSeconds()
+        let interval = max(60, minimumRefreshInterval)
 
-        if let lastForTrigger = lastSyncByTrigger[trigger], now.timeIntervalSince(lastForTrigger) < minimumInterval {
+        if let lastForTrigger = lastSyncByTrigger[trigger], now.timeIntervalSince(lastForTrigger) < interval {
             return false
         }
 
-        if let lastGlobalSync, now.timeIntervalSince(lastGlobalSync) < minimumInterval / 2 {
+        if let lastGlobalSync, now.timeIntervalSince(lastGlobalSync) < interval / 2 {
             return false
         }
 
         return true
-    }
-
-    private func minimumRefreshIntervalSeconds() -> TimeInterval {
-        // Root-Katalog setzt aktuell 6 Stunden. Diese App-seitige Default-Regel verhindert Spam.
-        // Wenn die Policy geladen werden kann, wird sie künftig in einem erweiterten Coordinator direkt ausgewertet.
-        6 * 60 * 60
     }
 }
