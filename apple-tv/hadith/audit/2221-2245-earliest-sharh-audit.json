@@ -1,0 +1,151 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-2221-2245",
+  "series": "2151-2250",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "Der 25er-Unterblock wurde unter Regel v6 einzeln erstellt und vollständig geprüft. Alle Datensätze besitzen einen verifizierten Šarḥ, eine eindeutige Ḥadīṯ-Quelle und den frühesten greifbaren direkten Šarḥ oder eine dokumentierte Begründung. Unsichere Druckseiten wurden nicht geschätzt.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "appleTvScreensaverShowsSharh": true,
+    "perRecordImmediateActivation": true,
+    "blockActivationAllowed": true
+  },
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
+  "records": [
+    {
+      "id": "HAD-2221",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2222",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2223",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2224",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2225",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2226",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2227",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2228",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2229",
+      "currentSharh": "al-Ḫaṭṭābī",
+      "auditStatus": "earliest-sunan-priority"
+    },
+    {
+      "id": "HAD-2230",
+      "currentSharh": "al-Ḫaṭṭābī",
+      "auditStatus": "earliest-sunan-priority"
+    },
+    {
+      "id": "HAD-2231",
+      "currentSharh": "al-Ḫaṭṭābī",
+      "auditStatus": "earliest-sunan-priority"
+    },
+    {
+      "id": "HAD-2232",
+      "currentSharh": "al-Ḫaṭṭābī",
+      "auditStatus": "earliest-sunan-priority"
+    },
+    {
+      "id": "HAD-2233",
+      "currentSharh": "Ibn al-ʿArabī al-Mālikī",
+      "auditStatus": "earliest-direct-tirmidhi-sharh"
+    },
+    {
+      "id": "HAD-2234",
+      "currentSharh": "Ibn al-ʿArabī al-Mālikī",
+      "auditStatus": "earliest-direct-tirmidhi-sharh"
+    },
+    {
+      "id": "HAD-2235",
+      "currentSharh": "Ibn al-ʿArabī al-Mālikī",
+      "auditStatus": "earliest-direct-tirmidhi-sharh"
+    },
+    {
+      "id": "HAD-2236",
+      "currentSharh": "Ibn al-ʿArabī al-Mālikī",
+      "auditStatus": "earliest-direct-tirmidhi-sharh"
+    },
+    {
+      "id": "HAD-2237",
+      "currentSharh": "Ibn al-ʿArabī al-Mālikī",
+      "auditStatus": "earliest-direct-tirmidhi-sharh"
+    },
+    {
+      "id": "HAD-2238",
+      "currentSharh": "Ibn al-ʿArabī al-Mālikī",
+      "auditStatus": "earliest-direct-tirmidhi-sharh"
+    },
+    {
+      "id": "HAD-2239",
+      "currentSharh": "Ibn al-ʿArabī al-Mālikī",
+      "auditStatus": "earliest-direct-tirmidhi-sharh"
+    },
+    {
+      "id": "HAD-2240",
+      "currentSharh": "Ibn al-ʿArabī al-Mālikī",
+      "auditStatus": "earliest-direct-tirmidhi-sharh"
+    },
+    {
+      "id": "HAD-2241",
+      "currentSharh": "Ibn al-ʿArabī al-Mālikī",
+      "auditStatus": "earliest-direct-tirmidhi-sharh"
+    },
+    {
+      "id": "HAD-2242",
+      "currentSharh": "Ibn al-ʿArabī al-Mālikī",
+      "auditStatus": "earliest-direct-tirmidhi-sharh"
+    },
+    {
+      "id": "HAD-2243",
+      "currentSharh": "Ibn al-ʿArabī al-Mālikī",
+      "auditStatus": "earliest-direct-tirmidhi-sharh"
+    },
+    {
+      "id": "HAD-2244",
+      "currentSharh": "Ibn al-ʿArabī al-Mālikī",
+      "auditStatus": "earliest-direct-tirmidhi-sharh"
+    },
+    {
+      "id": "HAD-2245",
+      "currentSharh": "Ibn al-ʿArabī al-Mālikī",
+      "auditStatus": "earliest-direct-tirmidhi-sharh"
+    }
+  ]
+}
