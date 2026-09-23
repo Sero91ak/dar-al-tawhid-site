@@ -1,6 +1,6 @@
 {
   "project": "DĀR AL TAWḤĪD – HAD Sync Policy",
-  "version": 3,
+  "version": 4,
   "active": true,
   "sourceOfTruth": "apple-tv/hadith/",
   "globalGate": {
@@ -59,11 +59,28 @@
   },
   "hadithAndSharhSourceRules": {
     "earliestSharhPreferred": true,
-    "rule": "Für jeden neuen HAD-Datensatz wird der früheste belastbare klassische Sharḥ bevorzugt. Spätere Erklärungen dürfen nur genutzt werden, wenn kein früherer passender Sharḥ auffindbar ist oder wenn sie zur Präzisierung zusätzlich nötig sind.",
+    "rule": "Für jeden neuen HAD-Datensatz hat der früheste greifbare Sharḥ bzw. die früheste greifbare Erklärung zur konkreten Ḥadīṯ-Stelle Vorrang. Ein späterer Sharḥ darf nur genutzt werden, wenn frühere direkte Erklärungen nicht greifbar sind, nicht zur konkreten Stelle passen oder nur ergänzend benötigt werden; dann muss die Prüfnotiz dies erkennen lassen.",
+    "sahihBukhariPriority": [
+      "al-Ḫaṭṭābī – Aʿlām al-Ḥadīṯ / Aʿlām as-Sunan, wenn die konkrete Buḫārī-Stelle dort erklärt wird",
+      "Ibn Baṭṭāl – Sharḥ Ṣaḥīḥ al-Buḫārī, wenn die konkrete Buḫārī-Stelle dort erklärt wird",
+      "frühere überlieferte Erklärungen von Salaf/Mutaqaddimīn, wenn sie direkt zur Stelle passen",
+      "danach erst spätere Buḫārī-Kommentare wie Ibn Ḥaǧar, al-ʿAynī, al-Qasṭallānī usw."
+    ],
+    "sahihMuslimPriority": [
+      "al-Māzirī – al-Muʿlim bi-Fawāʾid Muslim, wenn die konkrete Muslim-Stelle dort erklärt wird",
+      "al-Qāḍī ʿIyāḍ – Ikmāl al-Muʿlim, wenn die konkrete Muslim-Stelle dort erklärt wird",
+      "al-Qurṭubī – al-Mufhim, wenn die konkrete Muslim-Stelle dort erklärt wird",
+      "danach erst an-Nawawī – Šarḥ Ṣaḥīḥ Muslim"
+    ],
+    "nonBukhariMuslimPriority": [
+      "frühester greifbarer direkter Sunan-/Musnad-/Jāmiʿ-Kommentar zur konkreten Stelle",
+      "frühere erklärende Athar/Salaf-Aussagen, wenn direkt passend",
+      "anerkannte spätere Sammelkommentare wie Ibn Raǧab nur wenn die Stelle dort explizit erklärt wird oder wenn früherer Direktscharḥ nicht greifbar ist"
+    ],
     "sourcePriority": [
-      "direkter klassischer Sharḥ zum konkreten Ḥadīṯ",
-      "frühere anerkannte Sammel-/Nawawī-/Ibn-Raǧab-Erklärung zum selben Wortlaut oder Abschnitt",
-      "spätere klassische Kommentierung nur mit Prüfnotiz, warum kein früherer Sharḥ genutzt wurde",
+      "frühester greifbarer direkter klassischer Sharḥ zum konkreten Ḥadīṯ",
+      "frühere überlieferte Erklärung zur konkreten Formulierung oder zum konkreten Kapitel",
+      "spätere klassische Kommentierung nur mit Prüfnotiz, warum kein früherer passender Sharḥ genutzt wurde",
       "moderne Datenbanken wie Dorar/Islamweb nur als Nachweis-/Auffindehilfe, nicht als alleiniger Sharḥ, außer sie zitieren den klassischen Sharḥ klar"
     ],
     "exactReferenceRequired": true,
@@ -80,7 +97,7 @@
     "pagePolicy": "Band/Seite/Edition werden eingetragen, wenn sie für die verwendete Ausgabe sicher vorliegen. Wenn eine editionsabhängige Seite nicht sicher ist, bleibt die Seite null und die Referenz muss stattdessen über Werk, Kapitel, Ḥadīṯ-Nummer/Abschnitt eindeutig auffindbar sein; keine geschätzten Seitenzahlen.",
     "noGenericSharh": true,
     "noInventedReferences": true,
-    "auditRule": "Bereits begonnene Blöcke werden vor Fortsetzung geprüft. Ein Datensatz gilt nur als fertig, wenn Sharḥ, Sharḥ-Quelle und Zuordnung zum konkreten Ḥadīṯ belastbar sind."
+    "auditRule": "Bereits begonnene Blöcke werden vor Fortsetzung geprüft. Ein Datensatz gilt nur als fertig, wenn Sharḥ, Sharḥ-Quelle, früheste-greifbare-Prüfung und Zuordnung zum konkreten Ḥadīṯ belastbar sind."
   },
   "libraryOrganization": {
     "groupBy": [
@@ -117,7 +134,9 @@
     "libraryOrderRequired": true,
     "earliestSharhPreferred": true,
     "exactReferenceRequired": true,
-    "noEstimatedPages": true
+    "noEstimatedPages": true,
+    "specificBukhariMuslimPriorityRequired": true,
+    "noBlockActivationBeforeEarliestSharhAudit": true
   },
-  "workflowRule": "Jeder neue HAD-Block wird zuerst vollständig unter apple-tv/hadith erstellt. Danach wird er über die Ḥadīṯ-Bibliothek-Kataloge für Test-App, iOS-App, Android/Web-App und Webseite vorbereitet. Apple-TV-Screensaver blendet Sharḥ nicht ein. Alle App-Bereiche bleiben bis zur Nutzerfreigabe gesperrt. Vor Fortsetzung wird geprüft: frühester belastbarer Sharḥ, konkrete Quellenzuordnung, keine geschätzten Seiten."
+  "workflowRule": "Jeder neue HAD-Block wird zuerst vollständig unter apple-tv/hadith erstellt. Danach wird er über die Ḥadīṯ-Bibliothek-Kataloge für Test-App, iOS-App, Android/Web-App und Webseite vorbereitet. Apple-TV-Screensaver blendet Sharḥ nicht ein. Alle App-Bereiche bleiben bis zur Nutzerfreigabe gesperrt. Vor Fortsetzung und Aktivierung wird geprüft: frühester greifbarer Sharḥ nach Werkpriorität, konkrete Quellenzuordnung, keine geschätzten Seiten."
 }
