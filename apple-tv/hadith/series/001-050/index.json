@@ -2,8 +2,8 @@
   "series": "001-050",
   "label": "HAD-0001 bis HAD-0050",
   "publishedFrom": "HAD-0001",
-  "publishedTo": "HAD-0036",
-  "publishedCount": 35,
+  "publishedTo": "HAD-0043",
+  "publishedCount": 41,
   "requireVerifiedSharh": true,
   "files": [
     "HAD-0001.json",
@@ -40,15 +40,26 @@
     "HAD-0033.json",
     "HAD-0034.json",
     "HAD-0035.json",
-    "HAD-0036.json"
+    "HAD-0036.json",
+    "HAD-0037.json",
+    "HAD-0038.json",
+    "HAD-0040.json",
+    "HAD-0041.json",
+    "HAD-0042.json",
+    "HAD-0043.json"
   ],
   "pendingReview": [
-    "HAD-0023.json"
+    "HAD-0023.json",
+    "HAD-0039.json"
   ],
   "excluded": [
     {
       "id": "HAD-0023",
       "reason": "needs-review: früh greifbarer punktgenauer Šarḥ noch nicht sicher gesetzt"
+    },
+    {
+      "id": "HAD-0039",
+      "reason": "needs-review: früher punktgenauer Šarḥ noch nicht sicher gesetzt"
     }
   ]
 }
