@@ -5,15 +5,35 @@ struct AppleTVContentCatalog: Codable {
     let schemaVersion: String
     let language: String
     let defaultModule: String
+    let remoteContentSync: AppleTVRemoteContentSyncPolicy?
     let screensaver: AppleTVScreensaverDescriptor?
     let backgrounds: AppleTVBackgroundDescriptor?
     let quran: AppleTVQuranDescriptor?
     let modules: [AppleTVContentModule]
 }
 
+struct AppleTVRemoteContentSyncPolicy: Codable {
+    let enabled: Bool
+    let rule: String?
+    let checkOnAppStart: Bool
+    let checkOnForeground: Bool
+    let checkOnAppleTVWake: Bool
+    let minimumRefreshIntervalHours: Int
+    let offlineCache: Bool
+    let atomicCacheActivation: Bool
+    let keepLastGoodCacheOnError: Bool
+}
+
 struct AppleTVScreensaverDescriptor: Codable {
     let enabled: Bool
+    let status: String?
+    let catalogPath: String?
     let rotationConfigPath: String
+    let remoteLoad: Bool?
+    let offlineCache: Bool?
+    let fallbackRequired: Bool?
+
+    var isActive: Bool { enabled && (status == nil || status == "active") }
 }
 
 struct AppleTVBackgroundDescriptor: Codable {
@@ -29,6 +49,7 @@ struct AppleTVBackgroundDescriptor: Codable {
 struct AppleTVQuranDescriptor: Codable {
     let reader: AppleTVQuranReaderDescriptor?
     let audio: AppleTVQuranAudioDescriptor?
+    let tadabbur: AppleTVQuranTadabburDescriptor?
 }
 
 struct AppleTVQuranReaderDescriptor: Codable {
@@ -58,6 +79,22 @@ struct AppleTVQuranAudioDescriptor: Codable {
     var isActive: Bool { status == "active" && target == "tvOS-only" }
 }
 
+struct AppleTVQuranTadabburDescriptor: Codable {
+    let status: String
+    let target: String
+    let rootPath: String
+    let catalogPath: String
+    let schemaPath: String?
+    let entriesPath: String?
+    let entriesIndexPath: String?
+    let coveragePath: String?
+    let remoteLoad: Bool
+    let offlineCache: Bool
+    let fallbackRequired: Bool
+
+    var isActive: Bool { status == "active" && target == "tvOS-only" }
+}
+
 struct AppleTVContentModule: Codable, Identifiable {
     let id: String
     let title: String
@@ -65,13 +102,16 @@ struct AppleTVContentModule: Codable, Identifiable {
     let recordType: String
     let rootPath: String
     let catalogPath: String
-    let schemaPath: String
+    let schemaPath: String?
     let remoteLoad: Bool
     let offlineCache: Bool
     let sortOrder: Int
     let scope: String?
+    let requiresModule: String?
 
     var isActive: Bool { status == "active" }
+    var isPlanned: Bool { status == "planned" }
+    var canRemoteSync: Bool { remoteLoad && offlineCache }
 }
 
 enum AppleTVContentEnvironment {
@@ -100,11 +140,38 @@ actor AppleTVContentRegistry {
         }
     }
 
+    func remoteContentSyncPolicy() async throws -> AppleTVRemoteContentSyncPolicy? {
+        let catalog = try await loadCatalog()
+        return catalog.remoteContentSync
+    }
+
     func activeModules() async throws -> [AppleTVContentModule] {
         let catalog = try await loadCatalog()
         return catalog.modules
             .filter(\.isActive)
             .sorted { $0.sortOrder < $1.sortOrder }
+    }
+
+    func syncableModules(includePlanned: Bool = true) async throws -> [AppleTVContentModule] {
+        let catalog = try await loadCatalog()
+        return catalog.modules
+            .filter { module in
+                module.canRemoteSync && (module.isActive || (includePlanned && module.isPlanned))
+            }
+            .sorted { $0.sortOrder < $1.sortOrder }
+    }
+
+    func module(id: String) async throws -> AppleTVContentModule? {
+        let catalog = try await loadCatalog()
+        return catalog.modules.first { $0.id == id }
+    }
+
+    func screensaverDescriptor() async throws -> AppleTVScreensaverDescriptor? {
+        let catalog = try await loadCatalog()
+        guard let descriptor = catalog.screensaver, descriptor.isActive else {
+            return nil
+        }
+        return descriptor
     }
 
     func backgroundDescriptor() async throws -> AppleTVBackgroundDescriptor? {
@@ -129,6 +196,18 @@ actor AppleTVContentRegistry {
             return nil
         }
         return descriptor
+    }
+
+    func quranTadabburDescriptor() async throws -> AppleTVQuranTadabburDescriptor? {
+        let catalog = try await loadCatalog()
+        guard let descriptor = catalog.quran?.tadabbur, descriptor.isActive else {
+            return nil
+        }
+        return descriptor
+    }
+
+    func url(forRelativePath path: String) -> URL {
+        AppleTVContentEnvironment.rootURL.appendingPathComponent(path)
     }
 
     private func fetchJSON<T: Decodable>(_ url: URL) async throws -> T {
