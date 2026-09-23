@@ -1,22 +1,23 @@
 /* DĀR AL TAWḤĪD – Global Hadith-Bibliothek Gate */
 (function () {
   "use strict";
-  if (window.__DAR_HADITH_LIBRARY_GATE_V1) return;
-  window.__DAR_HADITH_LIBRARY_GATE_V1 = true;
+  if (window.__DAR_HADITH_LIBRARY_GATE_V3) return;
+  window.__DAR_HADITH_LIBRARY_GATE_V3 = true;
 
   var GATE_ID = "dar-hadith-library-gate";
   var TOAST_ID = "dar-hadith-library-gate-toast";
+  var DATA_LOADER_ID = "dar-hadith-library-data-loader";
   var DEFAULT_STATE = {
     enabled: false,
     status: "in-progress",
-    label: "In Bearbeitung",
+    label: "Noch nicht freigegeben",
     releaseRequired: true,
     releasedByUser: false,
     targetHash: "#hadith-bibliothek",
     cardTitle: "Ḥadīṯ-Bibliothek",
-    cardSubtitle: "Nach Buchkategorie, Kapitel, Seite und Nummer vorbereitet",
-    lockedMessage: "Die Ḥadīṯ-Bibliothek ist vorbereitet, aber noch nicht freigegeben.",
-    chips: ["Buchkategorie", "Kapitel", "Seite", "Sharḥ"]
+    cardSubtitle: "Šarḥ wird vorbereitet.",
+    lockedMessage: "Ḥadīṯ-Bibliothek ist noch nicht freigegeben.",
+    chips: ["Šarḥ", "Quelle"]
   };
   var gateState = DEFAULT_STATE;
 
@@ -36,12 +37,26 @@
     return basePath() + "data/" + file;
   }
 
+  function ensureDataLoader() {
+    if (window.DARHadithLibraryData) return;
+    if (document.getElementById(DATA_LOADER_ID)) return;
+    var script = document.createElement("script");
+    script.id = DATA_LOADER_ID;
+    script.src = assetPath("hadith-library-data.js?v=3");
+    script.defer = true;
+    document.head.appendChild(script);
+  }
+
   function esc(value) {
     return String(value == null ? "" : value)
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/\"/g, "&quot;");
+  }
+
+  function normalizeText(value) {
+    return String(value == null ? "" : value).replace(/\s+/g, " ").trim().toLowerCase();
   }
 
   function currentHashKey() {
@@ -60,10 +75,14 @@
   }
 
   function ensureCss() {
-    if (document.querySelector('link[href*="hadith-library-gate.css"]')) return;
+    var existing = document.querySelector('link[href*="hadith-library-gate.css"]');
+    if (existing) {
+      existing.href = assetPath("hadith-library-gate.css?v=3");
+      return;
+    }
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = assetPath("hadith-library-gate.css?v=1");
+    link.href = assetPath("hadith-library-gate.css?v=3");
     document.head.appendChild(link);
   }
 
@@ -77,7 +96,7 @@
   }
 
   function loadGateState() {
-    return fetch(dataPath("hadith-library-gate.json"), { cache: "no-store" })
+    return fetch(dataPath("hadith-library-gate.json?v=3"), { cache: "no-store" })
       .then(function (res) { return res.ok ? res.json() : null; })
       .then(function (data) {
         gateState = mergeState(data);
@@ -114,6 +133,7 @@
   }
 
   function navigateToLibrary() {
+    ensureDataLoader();
     if (!gateState.enabled || gateState.releasedByUser !== true) {
       toast(gateState.lockedMessage || DEFAULT_STATE.lockedMessage);
       return;
@@ -123,52 +143,79 @@
 
   function cardHtml() {
     var open = !!(gateState.enabled && gateState.releasedByUser === true);
-    var chips = (gateState.chips || DEFAULT_STATE.chips).map(function (chip) {
-      return '<span class="dar-hadith-library-gate__chip">' + esc(chip) + '</span>';
-    }).join("");
+    var statusText = open ? "Öffnen" : (gateState.label || DEFAULT_STATE.label);
     return [
-      '<section id="' + GATE_ID + '" class="dar-hadith-library-gate" aria-label="Ḥadīṯ-Bibliothek">',
-      '  <div class="dar-hadith-library-gate__inner">',
-      '    <div class="dar-hadith-library-gate__eyebrow">Neu vorbereitet</div>',
-      '    <h2 class="dar-hadith-library-gate__title">' + esc(gateState.cardTitle || DEFAULT_STATE.cardTitle) + '</h2>',
-      '    <p class="dar-hadith-library-gate__text">' + esc(gateState.cardSubtitle || DEFAULT_STATE.cardSubtitle) + '</p>',
-      '    <div class="dar-hadith-library-gate__meta">' + chips + '</div>',
-      '    <div class="dar-hadith-library-gate__actions">',
-      '      <span class="dar-hadith-library-gate__status">' + esc(gateState.label || DEFAULT_STATE.label) + '</span>',
-      '      <button type="button" class="dar-hadith-library-gate__btn' + (open ? ' is-open' : '') + '" data-dar-hadith-library-open="1">' + (open ? 'Öffnen' : 'Noch gesperrt') + '</button>',
+      '<section id="' + GATE_ID + '" class="dar-hadith-library-gate" aria-label="Ḥadīṯ-Bibliothek" data-dar-hadith-library-open="1">',
+      '  <div class="dar-hadith-library-gate__icon" aria-hidden="true">📚</div>',
+      '  <div class="dar-hadith-library-gate__body">',
+      '    <div class="dar-hadith-library-gate__topline">',
+      '      <h3 class="dar-hadith-library-gate__title">' + esc(gateState.cardTitle || DEFAULT_STATE.cardTitle) + '</h3>',
+      '      <span class="dar-hadith-library-gate__status' + (open ? ' is-open' : '') + '">' + esc(statusText) + '</span>',
       '    </div>',
+      '    <p class="dar-hadith-library-gate__text">' + esc(gateState.cardSubtitle || DEFAULT_STATE.cardSubtitle) + '</p>',
       '  </div>',
       '</section>'
     ].join("");
   }
 
-  function findMountTarget() {
-    var app = document.getElementById("appView") || document.body;
+  function removeCard() {
+    var existing = document.getElementById(GATE_ID);
+    if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+  }
+
+  function appRoot() {
+    return document.getElementById("appView") || document.body;
+  }
+
+  function findListInside(section) {
+    if (!section) return null;
+    return section.querySelector(".list,.more-list,.settings-list,.feature-list,.learning-list,.dar-list,.menu-list,.stack,.items") || section;
+  }
+
+  function findLearningPlacement() {
+    var app = appRoot();
     if (!app) return null;
-    return app.querySelector(".more-page") || app.querySelector(".settings-one-page") || app.querySelector(".premium-surface") || app.querySelector("main") || app;
+
+    var headings = app.querySelectorAll("h1,h2,h3,h4,.section-title,.more-section-title,.group-title,.card-title,.panel-title,.settings-title,.view-title,strong,b");
+    for (var i = 0; i < headings.length; i += 1) {
+      var text = normalizeText(headings[i].textContent);
+      if (text === "lernen & wissen" || text.indexOf("lernen & wissen") === 0) {
+        var section = headings[i].closest("section,article,.more-section,.settings-group,.premium-card,.card,.panel,.dar-section,.learn-section") || headings[i].parentElement;
+        return findListInside(section);
+      }
+    }
+
+    var blocks = app.querySelectorAll("section,article,.more-section,.settings-group,.premium-card,.card,.panel,.dar-section,.learn-section");
+    for (var j = 0; j < blocks.length; j += 1) {
+      var blockText = normalizeText(blocks[j].textContent);
+      var hasLearningItems = blockText.indexOf("die propheten") !== -1 || blockText.indexOf("din-quiz") !== -1 || blockText.indexOf("beiträge") !== -1 || blockText.indexOf("qurʾān") !== -1 || blockText.indexOf("qur'an") !== -1;
+      if (hasLearningItems) return findListInside(blocks[j]);
+    }
+
+    return null;
   }
 
   function mountCard() {
     ensureCss();
-    if (!isMoreRoute()) return;
-    var target = findMountTarget();
-    if (!target) return;
-    var existing = document.getElementById(GATE_ID);
-    if (existing) {
-      existing.outerHTML = cardHtml();
-      bind();
+    ensureDataLoader();
+
+    if (!isMoreRoute()) {
+      removeCard();
       return;
     }
+
+    var target = findLearningPlacement();
+    if (!target) {
+      removeCard();
+      return;
+    }
+
+    removeCard();
     var wrap = document.createElement("div");
     wrap.innerHTML = cardHtml();
     var card = wrap.firstElementChild;
     if (!card) return;
-    var afterHead = target.querySelector(".view-head, .more-head, header");
-    if (afterHead && afterHead.parentNode === target) {
-      afterHead.insertAdjacentElement("afterend", card);
-    } else {
-      target.insertBefore(card, target.firstChild);
-    }
+    target.appendChild(card);
     bind();
   }
 
@@ -177,8 +224,8 @@
     if (!card || card.getAttribute("data-bound") === "1") return;
     card.setAttribute("data-bound", "1");
     card.addEventListener("click", function (ev) {
-      var btn = ev.target && ev.target.closest && ev.target.closest("[data-dar-hadith-library-open]");
-      if (!btn) return;
+      var opener = ev.target && ev.target.closest && ev.target.closest("[data-dar-hadith-library-open]");
+      if (!opener) return;
       ev.preventDefault();
       navigateToLibrary();
     });
@@ -186,6 +233,7 @@
 
   function blockLockedRoute() {
     if (!isHadithRoute()) return;
+    ensureDataLoader();
     if (gateState.enabled && gateState.releasedByUser === true) return;
     toast(gateState.lockedMessage || DEFAULT_STATE.lockedMessage);
     try { location.hash = "#more"; } catch (e) {}
@@ -193,6 +241,11 @@
   }
 
   function refresh() {
+    if (!isMoreRoute() && !isHadithRoute()) {
+      removeCard();
+      return;
+    }
+    ensureDataLoader();
     loadGateState().then(function () {
       blockLockedRoute();
       mountCard();
@@ -201,10 +254,11 @@
 
   function observe() {
     try {
-      var root = document.getElementById("appView") || document.body;
+      var root = appRoot();
       if (!root) return;
       var mo = new MutationObserver(function () {
-        if (isMoreRoute()) setTimeout(mountCard, 40);
+        if (isMoreRoute()) setTimeout(mountCard, 60);
+        else removeCard();
       });
       mo.observe(root, { childList: true, subtree: true });
     } catch (e) {}
@@ -213,7 +267,9 @@
   window.DARHadithLibraryGate = {
     refresh: refresh,
     open: navigateToLibrary,
-    state: function () { return gateState; }
+    state: function () { return gateState; },
+    data: function () { return window.DARHadithLibraryData || null; },
+    ensureDataLoader: ensureDataLoader
   };
 
   if (document.readyState === "loading") {
