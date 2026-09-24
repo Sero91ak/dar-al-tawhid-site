@@ -108,6 +108,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-pronunciation-library-2026-09-24",
+      "approvedBy": "user-explicit-push-aussprachebibliothek-kids-farid-2026-09-24",
+      "reason": "Nutzer: zentrale islamische Aussprachebibliothek auch in der separaten DĀR AL TAWḤĪD Kids-App für Geschichten, Feedback und Voice-Fallback verwenden.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "kids-app/DarAlTawhidKids/Services/PronunciationLibrary.swift",
+        "kids-app/DarAlTawhidKids/Services/NarrationService.swift",
+        "kids-app/DarAlTawhidKids.xcodeproj/project.pbxproj",
+        "kids-app/docs/PRONUNCIATION_LIBRARY.md"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "dar-al-tawhid-kids-dedicated-worker-v6-2026-09-24",
       "approvedBy": "user-explicit-kids-live-fix-2026-09-24",
       "reason": "Nutzer meldet weiterhin milchigen oberen Bereich und fehlendes Update-Popup. Kids erhält einen eigenen Cloudflare Worker/Deploypfad, damit normale Test-App-Deploys die Kids-Route nicht mehr überschreiben.",
