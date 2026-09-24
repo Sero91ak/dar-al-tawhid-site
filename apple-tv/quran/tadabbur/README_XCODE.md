@@ -47,23 +47,18 @@ letzter Vers im aktuellen Durchgang: 114:6
 
 ## Aktive Xcode-Dateien
 
-Die aktive Datei für das Apple-TV-/Qurʾān-Xcode-Paket ist jetzt:
+Die aktive Datei für das Apple-TV-/Qurʾān-Xcode-Paket ist:
 
 ```text
 apple-tv/xcode/TVQuranTadabburSupport.swift
 ```
 
-Die Referenzkopie im Tadabbur-Datenordner bleibt bestehen:
-
-```text
-apple-tv/quran/tadabbur/xcode/TVQuranTadabburSupport.swift
-```
-
 Wichtig:
 
 - `QuranTabView.swift` liegt unter `apple-tv/xcode/`.
-- Deshalb muss auch `TVQuranTadabburSupport.swift` im Xcode-App-Ordner vorhanden sein.
+- `TVQuranTadabburSupport.swift` liegt deshalb ebenfalls unter `apple-tv/xcode/`.
 - So findet Xcode `TVQuranTadabbur`, `TVQuranTadabburStore` und `TVQuranTadabburCard` direkt.
+- Es gibt bewusst keine zweite aktive `.swift`-Kopie im Tadabbur-Datenordner, damit keine doppelten Swift-Typen entstehen.
 
 ## Datenmodell
 
