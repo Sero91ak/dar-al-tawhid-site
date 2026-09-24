@@ -108,6 +108,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "all-apps-top-no-glass-2026-09-24",
+      "approvedBy": "user-explicit-all-apps-top-blur-weg-2026-09-24",
+      "reason": "Nutzer: milchigen/Blur-/Glass-Effekt oben in DĀR AL TAWḤĪD Kids, aktueller iOS-App, Test-App und allen App-Shells vollständig entfernen; obere Safe-Area/Statusbar muss solid und app-native wirken. Untere Tab-Bar bleibt unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "assets/full-edge-appearance-polish.css",
+        "test/assets/full-edge-appearance-polish.css",
+        "assets/dar-ios-oversize-copy.css",
+        "test/assets/dar-ios-oversize-copy.css",
+        "assets/dar-bottom-nav-glass.css",
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift",
+        "ios/DarAlTawhid/DarAlTawhid/FreshWebAppView.swift",
+        "android/app/src/main/java/de/daraltawhid/app/MainActivity.kt"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-learn-qari-ios-volume-2026-09-23",
       "approvedBy": "user-explicit-qari-auswahl-lautstaerke-ios-android-test",
       "reason": "Nutzer: Qāriʾ im Lernbereich nicht wählbar; Lautstärke-Slider bricht Audio; iOS-Systemlautstärke/HUD; iOS-App, Android-Webapp, Test-App.",
