@@ -3,278 +3,465 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0d2236">
-<title>DĀR AL TAWḤĪD KIDS – Vorschau</title>
+<meta name="theme-color" content="#0f2943">
+<title>DĀR AL TAWḤĪD KIDS – Kinderwelt</title>
 <style>
 :root{
-  --night:#0d2236;
+  --ink:#f9f3e8;
+  --muted:rgba(255,255,255,.72);
+  --soft:rgba(255,255,255,.48);
+  --night:#0c2236;
   --deep:#06131f;
-  --blue:#163a58;
-  --cream:#f7efe2;
-  --sand:#ead9ba;
-  --gold:#cbae70;
-  --sage:#9bb7a5;
-  --sky:#9ac2dd;
-  --peach:#dfa98f;
-  --panel:rgba(255,255,255,.075);
-  --line:rgba(255,255,255,.11);
-  --muted:rgba(255,255,255,.62);
-  --soft:rgba(255,255,255,.42);
-  --shadow:0 20px 60px rgba(0,0,0,.28);
-  --safe-bottom:max(16px,env(safe-area-inset-bottom));
+  --blue:#163f62;
+  --sky:#8ec5e8;
+  --aqua:#73c9c1;
+  --sage:#9ec49e;
+  --gold:#e2bd72;
+  --sand:#efd6a4;
+  --peach:#efb08f;
+  --berry:#c78aa0;
+  --violet:#9f91d6;
+  --card:rgba(255,255,255,.10);
+  --line:rgba(255,255,255,.13);
+  --safe-top:max(16px,env(safe-area-inset-top));
+  --safe-bottom:max(14px,env(safe-area-inset-bottom));
 }
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:var(--deep);color:var(--cream);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Rounded","Avenir Next",system-ui,sans-serif}
+html,body{margin:0;min-height:100%;background:var(--deep);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Rounded","Avenir Next",system-ui,sans-serif}
 body{overflow-x:hidden}
-button,input{font:inherit}
+button,input,select{font:inherit}
 button{color:inherit}
 .app{
   min-height:100dvh;
   background:
-    radial-gradient(circle at 85% 7%,rgba(145,183,210,.22),transparent 27%),
-    radial-gradient(circle at 10% 70%,rgba(201,169,103,.13),transparent 30%),
-    linear-gradient(160deg,#06131f 0%,#102942 48%,#183b57 100%);
+    radial-gradient(circle at 82% 5%,rgba(132,202,235,.24),transparent 27%),
+    radial-gradient(circle at 9% 55%,rgba(237,190,105,.14),transparent 30%),
+    linear-gradient(165deg,#071522 0%,#0d2942 48%,#174e68 100%);
   position:relative;
-  overflow:hidden;
 }
-.sky-orb{
-  position:fixed;right:-90px;top:-100px;width:340px;height:340px;border-radius:50%;
-  background:radial-gradient(circle,rgba(154,194,221,.17),rgba(154,194,221,.02) 60%,transparent 72%);
-  animation:float 10s ease-in-out infinite alternate;pointer-events:none
+.ambient{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.ambient:before{
+  content:"";position:absolute;inset:0;opacity:.42;
+  background-image:
+    radial-gradient(circle at 14% 12%,#fff 0 1px,transparent 1.6px),
+    radial-gradient(circle at 43% 9%,#fff 0 1px,transparent 1.5px),
+    radial-gradient(circle at 76% 18%,#fff 0 1px,transparent 1.6px),
+    radial-gradient(circle at 91% 30%,#fff 0 1px,transparent 1.5px),
+    radial-gradient(circle at 23% 35%,#fff 0 1px,transparent 1.5px),
+    radial-gradient(circle at 61% 42%,#fff 0 1px,transparent 1.5px);
+  animation:twinkle 4.5s ease-in-out infinite alternate;
 }
-.glow-orb{
-  position:fixed;left:-120px;bottom:90px;width:330px;height:330px;border-radius:50%;
-  background:radial-gradient(circle,rgba(203,174,112,.12),rgba(203,174,112,.015) 62%,transparent 74%);
-  animation:float2 12s ease-in-out infinite alternate;pointer-events:none
+.ambient:after{
+  content:"";position:absolute;width:440px;height:440px;border-radius:50%;right:-190px;top:-190px;
+  background:radial-gradient(circle,rgba(149,206,237,.18),rgba(149,206,237,.03) 62%,transparent 72%);
+  animation:drift 10s ease-in-out infinite alternate;
 }
-@keyframes float{to{transform:translate(-24px,38px) scale(1.06)}}
-@keyframes float2{to{transform:translate(34px,-34px) scale(1.05)}}
-.stars{position:fixed;inset:0;pointer-events:none;opacity:.33;background-image:
-radial-gradient(circle at 13% 15%,#fff 0 1px,transparent 1.5px),
-radial-gradient(circle at 70% 11%,#fff 0 1px,transparent 1.5px),
-radial-gradient(circle at 39% 29%,#fff 0 1px,transparent 1.5px),
-radial-gradient(circle at 88% 34%,#fff 0 1px,transparent 1.5px),
-radial-gradient(circle at 21% 43%,#fff 0 1px,transparent 1.5px)}
-.shell{width:min(100%,760px);margin:0 auto;padding:18px 18px calc(112px + var(--safe-bottom));position:relative;z-index:2}
-.brand{padding-top:max(10px,env(safe-area-inset-top));margin-bottom:18px}
-.brand-kicker{font:600 12px Georgia,serif;letter-spacing:.2em;color:var(--gold)}
-.brand h1{margin:6px 0 0;font-size:clamp(30px,7.8vw,48px);line-height:1.02;letter-spacing:-.035em}
-.brand p{margin:8px 0 0;color:var(--muted);font-size:15px}
+@keyframes twinkle{to{opacity:.7}}
+@keyframes drift{to{transform:translate(-35px,52px) scale(1.05)}}
+@keyframes bob{50%{transform:translateY(-8px)}}
+@keyframes lantern{50%{filter:drop-shadow(0 0 18px rgba(255,210,112,.85));opacity:1}}
+@keyframes cloudmove{from{transform:translateX(-10%)}to{transform:translateX(110%)}}
+@keyframes fadeup{from{opacity:.15;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.shell{width:min(100%,780px);margin:0 auto;padding:var(--safe-top) 16px calc(106px + var(--safe-bottom));position:relative;z-index:2}
 .view{display:none}
-.view.active{display:block;animation:fade .28s ease}
-@keyframes fade{from{opacity:.2;transform:translateY(5px)}to{opacity:1;transform:none}}
-.card{
-  background:linear-gradient(180deg,rgba(255,255,255,.085),rgba(255,255,255,.055));
-  border:1px solid var(--line);border-radius:28px;padding:18px;box-shadow:var(--shadow);
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)
+.view.active{display:block;animation:fadeup .28s ease}
+.brand-line{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
+.brand{font:700 12px Georgia,serif;letter-spacing:.18em;color:var(--gold)}
+.profile-dot{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.09);border:1px solid var(--line);font-size:18px}
+
+.hero{
+  min-height:310px;border-radius:34px;position:relative;overflow:hidden;
+  border:1px solid rgba(255,255,255,.14);
+  background:
+    linear-gradient(180deg,rgba(1,13,24,.03),rgba(3,15,25,.18) 52%,rgba(7,22,32,.62) 100%),
+    radial-gradient(circle at 77% 23%,rgba(255,228,165,.9) 0 8%,rgba(255,228,165,.16) 9%,transparent 18%),
+    linear-gradient(180deg,#4d87a8 0%,#6ba4b4 27%,#efb272 64%,#987558 100%);
+  box-shadow:0 26px 70px rgba(0,0,0,.32);
 }
-.soft-card{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);border-radius:25px;padding:17px}
-.welcome{display:flex;align-items:center;gap:14px;margin-bottom:16px}
-.round-icon{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;flex:none;background:rgba(154,194,221,.15);color:var(--sky)}
-.round-icon svg{width:28px;height:28px}
-.welcome strong{font-size:19px;display:block}
-.welcome span{font-size:13px;color:var(--muted);display:block;margin-top:3px}
-.section-title{font-size:22px;font-weight:800;margin:22px 0 11px;letter-spacing:-.02em}
-.story-hero{position:relative;overflow:hidden;padding:0;min-height:285px}
-.story-art{height:132px;position:relative;background:
-linear-gradient(180deg,rgba(14,48,73,.08),rgba(4,20,32,.2)),
-radial-gradient(circle at 78% 20%,rgba(240,211,137,.75) 0 7%,rgba(240,211,137,.18) 8%,transparent 18%),
-linear-gradient(180deg,#244f6d 0%,#17405d 54%,#102a40 100%)}
-.story-art:before{
-content:"";position:absolute;left:-5%;right:-5%;bottom:-2px;height:58px;
-background:
-radial-gradient(ellipse at 20% 100%,#c59f67 0 22%,transparent 23%),
-radial-gradient(ellipse at 48% 100%,#b9905b 0 25%,transparent 26%),
-radial-gradient(ellipse at 82% 100%,#cfad74 0 23%,transparent 24%);
-opacity:.7
+.hero .cloud{position:absolute;width:90px;height:22px;border-radius:999px;background:rgba(255,255,255,.32);filter:blur(1px);top:42px;left:-110px;animation:cloudmove 26s linear infinite}
+.hero .cloud:before,.hero .cloud:after{content:"";position:absolute;border-radius:50%;background:inherit}
+.hero .cloud:before{width:36px;height:36px;left:14px;bottom:0}
+.hero .cloud:after{width:46px;height:46px;right:15px;bottom:0}
+.hero .dune{
+  position:absolute;left:-10%;right:-10%;bottom:-22px;height:118px;
+  background:
+    radial-gradient(ellipse at 12% 100%,#d5a867 0 28%,transparent 29%),
+    radial-gradient(ellipse at 43% 100%,#e0b875 0 32%,transparent 33%),
+    radial-gradient(ellipse at 78% 100%,#c69a60 0 29%,transparent 30%);
+  opacity:.95;
 }
-.story-art:after{
-content:"";position:absolute;left:50%;bottom:8px;width:96px;height:84px;transform:translateX(-50%);
-background:linear-gradient(180deg,#102536,#0b1d2b);
-clip-path:polygon(0 100%,0 40%,12% 40%,12% 28%,30% 28%,30% 40%,43% 40%,43% 15%,57% 15%,57% 40%,70% 40%,70% 28%,88% 28%,88% 40%,100% 40%,100% 100%);
-opacity:.85
+.hero .city{
+  position:absolute;left:50%;bottom:52px;width:210px;height:100px;transform:translateX(-50%);
+  background:linear-gradient(180deg,#153346,#0d2636);
+  clip-path:polygon(0 100%,0 50%,8% 50%,8% 34%,19% 34%,19% 50%,28% 50%,28% 22%,35% 22%,35% 50%,42% 50%,42% 36%,49% 36%,49% 16%,57% 16%,57% 50%,65% 50%,65% 29%,75% 29%,75% 50%,84% 50%,84% 39%,93% 39%,93% 50%,100% 50%,100% 100%);
+  opacity:.92;filter:drop-shadow(0 -5px 14px rgba(0,0,0,.18));
 }
-.story-body{padding:18px}
-.eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--gold)}
-.story-body h2{font-size:27px;line-height:1.05;margin:9px 0 7px}
-.story-body p{font-size:15px;line-height:1.45;color:var(--muted);margin:0}
-.play-row{margin-top:17px;display:flex;align-items:center;justify-content:space-between;color:var(--gold);font-weight:800}
-.play-pill{display:inline-flex;align-items:center;gap:8px}
-.play-circle{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(203,174,112,.14)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.mini{min-height:150px;display:flex;flex-direction:column;justify-content:space-between}
-.mini .symbol{font-size:29px}
-.mini strong{display:block;font-size:17px}
-.mini span{font-size:12px;color:var(--soft)}
-.pause-note{text-align:center;color:var(--soft);font-size:13px;line-height:1.5;padding:18px 22px 0}
-.list{display:grid;gap:12px}
-.story-item{display:flex;align-items:center;gap:13px;cursor:pointer}
-.story-thumb{width:70px;height:78px;border-radius:20px;display:grid;place-items:center;background:rgba(203,174,112,.12);font-size:26px;color:var(--gold);flex:none}
-.story-item h3{margin:0;font-size:18px}
-.story-meta{font-size:12px;color:var(--sage);margin-top:4px}
-.story-time{font-size:12px;color:var(--soft);margin-top:4px}
-.chev{margin-left:auto;color:var(--soft);font-size:22px}
-.learn-list{display:grid;gap:12px}
-.learn-card{display:flex;align-items:center;gap:14px}
-.learn-icon{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:25px;flex:none}
-.learn-card h3{margin:0;font-size:19px}
-.learn-card p{margin:3px 0 0;color:var(--muted);font-size:13px}
-.badge{margin-left:auto;color:var(--soft);font-size:11px;font-weight:800}
-.parents .card+.card{margin-top:14px}
-.label-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}
+.hero .arch{
+  position:absolute;right:20px;bottom:51px;width:68px;height:104px;border:7px solid rgba(242,217,173,.62);
+  border-bottom:0;border-radius:42px 42px 0 0;opacity:.5
+}
+.hero .lantern{position:absolute;font-size:30px;right:35px;top:72px;animation:lantern 2.8s ease-in-out infinite}
+.hero-copy{position:absolute;left:20px;right:20px;bottom:20px;z-index:3}
+.hero-kicker{font-size:11px;font-weight:900;letter-spacing:.14em;color:#ffe2a2;text-shadow:0 2px 10px rgba(0,0,0,.3)}
+.hero h1{font-size:clamp(32px,8.2vw,48px);letter-spacing:-.04em;line-height:.98;margin:7px 0 8px;max-width:440px;text-shadow:0 3px 22px rgba(0,0,0,.28)}
+.hero p{margin:0;color:rgba(255,255,255,.86);font-size:15px;font-weight:650;max-width:420px}
+
+.section-title{font-size:22px;font-weight:900;letter-spacing:-.025em;margin:24px 2px 11px}
+.big-choice-grid{display:grid;gap:12px}
+.choice{
+  min-height:142px;border:0;border-radius:29px;padding:17px;text-align:left;position:relative;overflow:hidden;cursor:pointer;
+  box-shadow:0 18px 42px rgba(0,0,0,.18);transition:transform .16s ease,filter .16s ease;
+}
+.choice:active{transform:scale(.985)}
+.choice:before{content:"";position:absolute;inset:0;background:linear-gradient(130deg,rgba(255,255,255,.13),transparent 55%)}
+.choice .icon{font-size:34px;display:block;margin-bottom:17px;position:relative}
+.choice strong{font-size:22px;display:block;line-height:1;position:relative}
+.choice small{font-size:13px;display:block;margin-top:6px;color:rgba(255,255,255,.78);font-weight:700;position:relative}
+.choice .arrow{position:absolute;right:17px;bottom:16px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.12);font-size:24px}
+.choice.story{background:linear-gradient(135deg,#c68771,#a85f69)}
+.choice.quran{background:linear-gradient(135deg,#42968d,#286d79)}
+.choice.dua{background:linear-gradient(135deg,#7d89c5,#6a68a7)}
+.resume{
+  margin-top:13px;border:1px solid var(--line);background:rgba(255,255,255,.075);border-radius:24px;padding:14px 16px;
+  display:flex;align-items:center;gap:12px;cursor:pointer
+}
+.resume .resume-icon{width:48px;height:48px;border-radius:17px;background:rgba(226,189,114,.15);display:grid;place-items:center;color:var(--gold);font-size:22px}
+.resume strong{font-size:15px;display:block}
+.resume span{font-size:12px;color:var(--muted);display:block;margin-top:3px}
+.resume .go{margin-left:auto;font-size:22px;color:var(--soft)}
+.gentle-note{text-align:center;color:var(--soft);font-size:13px;line-height:1.5;padding:19px 20px 0}
+
+.page-head{margin:7px 1px 18px}
+.page-head .kicker{font-size:11px;font-weight:900;letter-spacing:.15em;color:var(--gold)}
+.page-head h2{font-size:34px;line-height:1;margin:6px 0 8px;letter-spacing:-.04em}
+.page-head p{margin:0;color:var(--muted);font-size:14px}
+
+.story-feature{
+  border-radius:31px;overflow:hidden;border:1px solid var(--line);background:rgba(255,255,255,.075);
+  margin-bottom:13px;cursor:pointer
+}
+.story-scene{height:142px;position:relative;overflow:hidden;background:
+radial-gradient(circle at 78% 23%,rgba(255,224,160,.85) 0 8%,transparent 9%),
+linear-gradient(180deg,#356987 0%,#638f91 50%,#c28d61 100%)}
+.story-scene:before{
+  content:"";position:absolute;left:-4%;right:-4%;bottom:-18px;height:83px;
+  background:
+    radial-gradient(ellipse at 15% 100%,#d6ad70 0 28%,transparent 29%),
+    radial-gradient(ellipse at 54% 100%,#c59861 0 32%,transparent 33%),
+    radial-gradient(ellipse at 86% 100%,#dbb87c 0 28%,transparent 29%);
+}
+.story-scene:after{
+  content:"";position:absolute;left:16%;bottom:35px;width:114px;height:70px;background:#173543;
+  clip-path:polygon(0 100%,0 42%,16% 42%,16% 30%,31% 30%,31% 42%,48% 42%,48% 18%,62% 18%,62% 42%,80% 42%,80% 34%,100% 34%,100% 100%);opacity:.86
+}
+.story-copy{padding:16px}
+.story-copy .meta{font-size:11px;font-weight:850;color:var(--sage);letter-spacing:.05em}
+.story-copy h3{font-size:22px;margin:6px 0}
+.story-copy p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
+.story-list{display:grid;gap:11px}
+.story-row{border-radius:24px;padding:13px;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.08);cursor:pointer}
+.story-thumb{width:64px;height:64px;border-radius:19px;display:grid;place-items:center;font-size:27px;flex:none;background:rgba(226,189,114,.13)}
+.story-row h3{font-size:16px;margin:0}
+.story-row .meta{font-size:11px;color:var(--sage);margin-top:4px}
+.story-row .time{font-size:11px;color:var(--soft);margin-top:4px}
+.story-row .chev{margin-left:auto;font-size:23px;color:var(--soft)}
+
+.quran-hero{
+  border-radius:31px;padding:18px;overflow:hidden;position:relative;min-height:168px;
+  background:
+    radial-gradient(circle at 84% 12%,rgba(238,218,151,.26),transparent 24%),
+    linear-gradient(140deg,#174f57,#1c6d6c 55%,#3a8a80);
+  border:1px solid rgba(255,255,255,.13);box-shadow:0 18px 46px rgba(0,0,0,.18)
+}
+.quran-hero:after{
+  content:"۞";position:absolute;right:17px;bottom:-12px;font:80px Georgia,serif;color:rgba(255,255,255,.075);transform:rotate(-8deg)
+}
+.quran-hero .book{font-size:38px}
+.quran-hero h3{font-size:26px;margin:12px 0 5px;letter-spacing:-.025em}
+.quran-hero p{margin:0;color:rgba(255,255,255,.78);font-size:13px;max-width:430px}
+.quran-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.quran-action{
+  min-height:105px;border:0;border-radius:24px;text-align:left;padding:15px;cursor:pointer;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.09)
+}
+.quran-action .qa-icon{font-size:27px;margin-bottom:14px}
+.quran-action strong{font-size:16px;display:block}
+.quran-action small{display:block;color:var(--muted);font-size:11px;margin-top:4px;font-weight:650}
+
+.surah-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.surah-card{
+  min-height:128px;border:0;border-radius:25px;padding:14px;text-align:left;cursor:pointer;position:relative;overflow:hidden;
+  border:1px solid rgba(255,255,255,.10);box-shadow:0 14px 30px rgba(0,0,0,.14)
+}
+.surah-card:nth-child(4n+1){background:linear-gradient(145deg,#357f79,#28646d)}
+.surah-card:nth-child(4n+2){background:linear-gradient(145deg,#7f82bb,#6869a4)}
+.surah-card:nth-child(4n+3){background:linear-gradient(145deg,#b97973,#a45e6b)}
+.surah-card:nth-child(4n+4){background:linear-gradient(145deg,#5b8a65,#477355)}
+.surah-card .num{font-size:10px;font-weight:900;color:rgba(255,255,255,.58);letter-spacing:.1em}
+.surah-card .ar{font-family:"Geeza Pro","Noto Naskh Arabic",serif;font-size:25px;text-align:right;margin-top:2px}
+.surah-card strong{display:block;font-size:15px;margin-top:12px}
+.surah-card small{display:block;color:rgba(255,255,255,.67);font-size:10px;margin-top:4px}
+
+.verse-strip{display:grid;gap:10px}
+.verse-card{
+  min-height:100px;border:0;border-radius:24px;padding:15px;text-align:left;cursor:pointer;display:flex;gap:13px;align-items:center;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.09)
+}
+.verse-badge{width:50px;height:50px;border-radius:18px;display:grid;place-items:center;background:rgba(226,189,114,.15);font-size:21px;flex:none}
+.verse-card strong{font-size:15px;display:block}
+.verse-card small{font-size:11px;color:var(--muted);display:block;margin-top:4px}
+
+.full-quran{
+  margin-top:12px;border:0;border-radius:28px;padding:18px;width:100%;text-align:left;cursor:pointer;
+  background:linear-gradient(135deg,#254860,#1b394e);border:1px solid rgba(255,255,255,.11);
+  display:flex;align-items:center;gap:14px
+}
+.full-quran .ficon{width:58px;height:58px;border-radius:20px;display:grid;place-items:center;background:rgba(255,255,255,.08);font-size:27px}
+.full-quran strong{font-size:18px;display:block}
+.full-quran small{font-size:12px;color:var(--muted);display:block;margin-top:4px}
+.full-quran .fgo{margin-left:auto;font-size:24px;color:var(--soft)}
+
+.parent-card{border-radius:27px;padding:17px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10);margin-bottom:12px}
+.label-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .label-row strong{font-size:16px}
-.age-tabs{display:grid;grid-template-columns:repeat(3,1fr);background:rgba(255,255,255,.06);border-radius:14px;padding:3px}
-.age-tabs button{border:0;background:transparent;padding:10px 6px;border-radius:11px;color:var(--muted);font-weight:800;cursor:pointer}
-.age-tabs button.active{background:rgba(255,255,255,.13);color:var(--cream)}
-.age-help{font-size:13px;color:var(--muted);margin:12px 0 0}
-input[type="range"]{width:100%;accent-color:var(--gold)}
-.parent-note{font-size:13px;line-height:1.5;color:var(--muted);margin:10px 0 0}
+.age-tabs{display:grid;grid-template-columns:repeat(3,1fr);background:rgba(255,255,255,.055);border-radius:15px;padding:3px}
+.age-tabs button{border:0;background:transparent;padding:10px 6px;border-radius:12px;color:var(--muted);font-weight:850}
+.age-tabs button.active{background:rgba(255,255,255,.14);color:var(--ink)}
+.age-help,.parent-note{font-size:12px;color:var(--muted);line-height:1.5;margin:11px 0 0}
+input[type=range]{width:100%;accent-color:var(--gold)}
+
 .bottom-nav{
-position:fixed;z-index:20;left:50%;transform:translateX(-50%);
-bottom:max(10px,env(safe-area-inset-bottom));
-width:min(calc(100% - 22px),720px);
-display:grid;grid-template-columns:repeat(4,1fr);gap:4px;
-padding:8px;border:1px solid rgba(255,255,255,.10);border-radius:25px;
-background:rgba(5,17,27,.83);box-shadow:0 20px 70px rgba(0,0,0,.45);
-backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)
+  position:fixed;z-index:30;left:50%;transform:translateX(-50%);bottom:max(8px,env(safe-area-inset-bottom));
+  width:min(calc(100% - 20px),740px);display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:7px;
+  background:rgba(5,17,27,.88);border:1px solid rgba(255,255,255,.11);border-radius:26px;
+  box-shadow:0 22px 70px rgba(0,0,0,.44);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)
 }
-.nav-btn{border:0;background:transparent;padding:8px 4px;border-radius:18px;display:grid;gap:5px;place-items:center;color:rgba(255,255,255,.48);cursor:pointer}
-.nav-btn .ni{font-size:20px;line-height:1}
-.nav-btn .nl{font-size:10px;font-weight:800}
-.nav-btn.active{color:var(--gold);background:rgba(203,174,112,.08)}
-.modal{position:fixed;inset:0;z-index:50;display:none;background:rgba(2,9,15,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-.modal.open{display:grid;place-items:center}
-.player{width:min(100%,620px);height:100dvh;padding:max(18px,env(safe-area-inset-top)) 18px calc(22px + env(safe-area-inset-bottom));display:flex;flex-direction:column}
-.player-top{display:flex;justify-content:space-between;align-items:center}
-.icon-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.07);color:var(--cream);font-size:22px;cursor:pointer}
-.player-main{flex:1;display:grid;place-items:center;text-align:center}
-.audio-orb{width:190px;height:190px;border-radius:50%;display:grid;place-items:center;margin:0 auto 24px;background:radial-gradient(circle,rgba(203,174,112,.14),rgba(203,174,112,.04));border:1px solid rgba(203,174,112,.25);position:relative}
-.audio-orb:after{content:"";position:absolute;inset:21px;border-radius:50%;border:1px solid rgba(203,174,112,.20)}
-.wave{font-size:46px;color:var(--gold);position:relative;z-index:2}
-.player h2{font-size:31px;margin:0 0 7px}
-.player .category{color:var(--sage);font-size:13px;font-weight:800}
-.player .fallback{font-size:11px;color:var(--soft);margin-top:12px}
-.main-action{width:100%;border:0;background:var(--gold);color:var(--deep);font-weight:900;padding:18px;border-radius:20px;font-size:16px;cursor:pointer}
-.secondary-action{width:100%;border:0;background:transparent;color:rgba(255,255,255,.68);font-weight:800;padding:14px;cursor:pointer}
-.dev-ribbon{position:fixed;z-index:30;top:max(8px,env(safe-area-inset-top));right:10px;font-size:9px;letter-spacing:.08em;font-weight:900;color:rgba(255,255,255,.55);background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.1);padding:6px 9px;border-radius:999px}
-@media(min-width:720px){
- .shell{padding-top:30px}
- .brand{padding-top:18px}
- .story-hero{min-height:325px}
- .story-art{height:158px}
+.nav-btn{border:0;background:transparent;padding:8px 3px;border-radius:19px;display:grid;place-items:center;gap:4px;color:rgba(255,255,255,.48);cursor:pointer}
+.nav-btn .ico{font-size:20px;line-height:1}
+.nav-btn .lab{font-size:10px;font-weight:850}
+.nav-btn.active{color:var(--gold);background:rgba(226,189,114,.085)}
+
+.modal{
+  position:fixed;z-index:80;inset:0;background:rgba(3,11,18,.94);display:none;
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)
+}
+.modal.open{display:block;animation:fadeup .2s ease}
+.modal-shell{width:min(100%,680px);height:100dvh;margin:0 auto;padding:var(--safe-top) 16px calc(16px + var(--safe-bottom));display:flex;flex-direction:column}
+.modal-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.close-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.075);font-size:23px;cursor:pointer}
+.modal-title{text-align:center;flex:1;min-width:0}
+.modal-title strong{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.modal-title small{display:block;font-size:10px;color:var(--soft);margin-top:2px}
+.top-spacer{width:44px}
+
+.story-player-main{flex:1;display:grid;place-items:center;text-align:center;padding:22px 10px}
+.story-orb{width:190px;height:190px;border-radius:50%;display:grid;place-items:center;margin:0 auto 22px;position:relative;background:radial-gradient(circle,rgba(226,189,114,.15),rgba(226,189,114,.035));border:1px solid rgba(226,189,114,.25)}
+.story-orb:after{content:"";position:absolute;inset:24px;border-radius:50%;border:1px solid rgba(226,189,114,.18)}
+.story-orb span{font-size:46px;color:var(--gold);position:relative;z-index:2}
+.story-player-main h2{font-size:31px;margin:0 0 7px}
+.story-player-main .category{font-size:12px;font-weight:850;color:var(--sage)}
+.dev-note{font-size:10px;color:var(--soft);margin-top:12px;line-height:1.4}
+.primary{width:100%;border:0;border-radius:21px;padding:18px;background:var(--gold);color:#102030;font-weight:900;font-size:16px;cursor:pointer}
+.secondary{width:100%;border:0;background:transparent;color:rgba(255,255,255,.66);font-weight:800;padding:13px;cursor:pointer}
+
+.quran-player{flex:1;display:flex;flex-direction:column;min-height:0}
+.progress-dots{display:flex;justify-content:center;gap:6px;margin:17px 0 5px;flex-wrap:wrap}
+.progress-dots span{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.15)}
+.progress-dots span.active{background:var(--gold);box-shadow:0 0 10px rgba(226,189,114,.5)}
+.ayah-stage{flex:1;min-height:0;display:grid;place-items:center;text-align:center;padding:10px 6px}
+.ayah-box{width:100%}
+.learn-status{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.06);padding:8px 11px;border-radius:999px;color:var(--muted);font-size:11px;font-weight:850;margin-bottom:17px}
+.learn-status.you{background:rgba(115,201,193,.13);color:#bff5e8;border-color:rgba(115,201,193,.22);animation:bob 1.4s ease-in-out infinite}
+.ayah-ar{font-family:"Geeza Pro","Noto Naskh Arabic","Traditional Arabic",serif;font-size:clamp(33px,9vw,52px);line-height:1.72;direction:rtl;margin:0 auto;color:#fff;max-width:620px;text-shadow:0 3px 18px rgba(0,0,0,.18)}
+.ayah-tr{font-size:14px;line-height:1.5;color:#d8e8ed;margin:17px auto 0;max-width:560px;font-weight:700}
+.ayah-de{font-size:12px;line-height:1.5;color:var(--muted);margin:10px auto 0;max-width:540px}
+.ayah-no{font-size:10px;color:var(--soft);margin-top:15px}
+.quran-controls{padding-top:8px}
+.big-play{width:100%;border:0;border-radius:21px;padding:17px;background:linear-gradient(135deg,#e5c47e,#d6ad62);color:#102030;font-weight:900;font-size:16px;cursor:pointer}
+.learn-row{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:9px;margin-top:9px}
+.learn-row button{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.065);border-radius:18px;padding:13px 7px;font-weight:850;font-size:12px;cursor:pointer}
+.learn-row button.active{background:rgba(115,201,193,.14);color:#c9fff3;border-color:rgba(115,201,193,.24)}
+.quran-mini-note{text-align:center;color:var(--soft);font-size:10px;margin-top:10px}
+.picker-panel{flex:1;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.picker-panel .picker-icon{font-size:48px;text-align:center}
+.picker-panel h3{text-align:center;font-size:28px;margin:0}
+.picker-panel p{text-align:center;color:var(--muted);font-size:13px;margin:0 0 9px}
+.big-select{width:100%;appearance:none;border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--ink);border-radius:20px;padding:17px;font-weight:800}
+.big-select option{color:#111}
+.loader{font-size:13px;color:var(--muted)}
+.dev-ribbon{position:fixed;z-index:40;right:10px;top:var(--safe-top);font-size:8px;font-weight:900;letter-spacing:.09em;color:rgba(255,255,255,.5);background:rgba(0,0,0,.20);border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:5px 8px}
+
+@media(min-width:700px){
+  .shell{padding-left:22px;padding-right:22px}
+  .hero{min-height:360px}
+  .big-choice-grid{grid-template-columns:repeat(3,1fr)}
+  .choice{min-height:174px}
+  .surah-grid{grid-template-columns:repeat(3,1fr)}
+  .story-list{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="sky-orb"></div><div class="glow-orb"></div><div class="stars"></div>
-  <div class="dev-ribbon">KIDS PREVIEW · V0.1</div>
+  <div class="ambient"></div>
+  <div class="dev-ribbon">KIDS · V0.2</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
-      <div class="brand">
-        <div class="brand-kicker">DĀR AL TAWḤĪD</div>
-        <h1>Meine Kinderwelt</h1>
-        <p>Hören · verstehen · mitmachen</p>
+      <div class="brand-line">
+        <div class="brand">DĀR AL TAWḤĪD KIDS</div>
+        <div class="profile-dot">☾</div>
       </div>
 
-      <div class="card welcome">
-        <div class="round-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.7 2.1a8.9 8.9 0 1 0 9.2 11.1 7.2 7.2 0 0 1-9.2-11.1Zm5.9 2.4.5 1.4 1.4.5-1.4.5-.5 1.4-.5-1.4-1.4-.5 1.4-.5.5-1.4Z"/></svg>
+      <div class="hero" aria-label="Islamische Kinder-Abenteuerwelt">
+        <div class="cloud"></div>
+        <div class="city"></div>
+        <div class="arch"></div>
+        <div class="dune"></div>
+        <div class="lantern">🏮</div>
+        <div class="hero-copy">
+          <div class="hero-kicker">DEINE HEUTIGE REISE</div>
+          <h1>Entdecke etwas Schönes.</h1>
+          <p>Eine Geschichte, eine Sūrah oder ein Duʿāʾ. Du entscheidest.</p>
         </div>
+      </div>
+
+      <div class="section-title">Was möchtest du machen?</div>
+      <div class="big-choice-grid">
+        <button class="choice story" data-story="coin">
+          <span class="icon">🎧</span>
+          <strong>Geschichte</strong>
+          <small>hören & entdecken</small>
+          <span class="arrow">›</span>
+        </button>
+
+        <button class="choice quran" data-go="quran">
+          <span class="icon">📖</span>
+          <strong>Mein Qurʾān</strong>
+          <small>hören & mitsprechen</small>
+          <span class="arrow">›</span>
+        </button>
+
+        <button class="choice dua" data-go="quran" data-open-verse="20:114">
+          <span class="icon">🤲</span>
+          <strong>Heute lernen</strong>
+          <small>ein kurzer Vers</small>
+          <span class="arrow">›</span>
+        </button>
+      </div>
+
+      <button class="resume" id="resumeButton">
+        <div class="resume-icon">▶</div>
         <div>
-          <strong>Heute ganz in Ruhe</strong>
-          <span id="todayMeta">Alter 6–8 · ungefähr 12 Minuten</span>
+          <strong>Da weitermachen, wo du warst</strong>
+          <span id="resumeText">Noch nichts begonnen</span>
         </div>
-      </div>
+        <div class="go">›</div>
+      </button>
 
-      <article class="card story-hero" data-story="coin">
-        <div class="story-art"></div>
-        <div class="story-body">
-          <div class="eyebrow">GESCHICHTE DES TAGES · CA. 3 MIN.</div>
-          <h2>Die gefundene Münze</h2>
-          <p>Eine kurze Geschichte über Ehrlichkeit – auch wenn niemand zusieht.</p>
-          <div class="play-row">
-            <span class="play-pill"><span class="play-circle">▶</span><span>Jetzt hören</span></span>
-            <span>Adab</span>
-          </div>
-        </div>
-      </article>
-
-      <div class="section-title">Heute noch</div>
-      <div class="grid2">
-        <button class="soft-card mini go-learn" style="text-align:left;border:1px solid rgba(255,255,255,.08);color:inherit;cursor:pointer">
-          <span class="symbol" style="color:var(--sky)">🤲</span>
-          <span><strong>Duʿāʾ</strong><span>kurz lernen</span></span>
-        </button>
-        <button class="soft-card mini go-learn" style="text-align:left;border:1px solid rgba(255,255,255,.08);color:inherit;cursor:pointer">
-          <span class="symbol" style="color:var(--peach)">?</span>
-          <span><strong>Eine Frage</strong><span>kurz überlegen</span></span>
-        </button>
-      </div>
-
-      <div class="pause-note">Du musst nicht alles heute machen.<br>Ein bisschen Wissen mit Ruhe ist genug.</div>
+      <div class="gentle-note">Nur ein paar Minuten reichen. Danach darf die Kinderwelt auch wieder zugehen.</div>
     </section>
 
     <section id="view-stories" class="view">
-      <div class="brand">
-        <div class="brand-kicker">HÖRWELT</div>
-        <h1>Geschichten</h1>
-        <p>Kurze Geschichten mit einem klaren Ende.</p>
+      <div class="page-head">
+        <div class="kicker">ABENTEUER ZUM HÖREN</div>
+        <h2>Geschichten</h2>
+        <p>Große Bilder, kurze Erzählungen, klare Botschaften.</p>
       </div>
-      <div class="list">
-        <div class="soft-card story-item" data-story="coin">
-          <div class="story-thumb">🎧</div><div><h3>Die gefundene Münze</h3><div class="story-meta">Adab · frei verfasst</div><div class="story-time">ca. 3 Min.</div></div><div class="chev">›</div>
+
+      <article class="story-feature" data-story="coin">
+        <div class="story-scene"></div>
+        <div class="story-copy">
+          <div class="meta">ADAB · FREI VERFASST · CA. 3 MIN.</div>
+          <h3>Die gefundene Münze</h3>
+          <p>Adam entdeckt etwas, das ihm nicht gehört. Was wird er tun?</p>
         </div>
-        <div class="soft-card story-item" data-story="water">
-          <div class="story-thumb" style="background:rgba(154,194,221,.11);color:var(--sky)">💧</div><div><h3>Das Glas Wasser</h3><div class="story-meta">Adab · frei verfasst</div><div class="story-time">ca. 2 Min.</div></div><div class="chev">›</div>
-        </div>
-        <div class="soft-card story-item" data-story="helper">
-          <div class="story-thumb" style="background:rgba(155,183,165,.11);color:var(--sage)">✦</div><div><h3>Der leise Helfer</h3><div class="story-meta">Adab · frei verfasst</div><div class="story-time">ca. 3 Min.</div></div><div class="chev">›</div>
-        </div>
+      </article>
+
+      <div class="story-list">
+        <article class="story-row" data-story="water">
+          <div class="story-thumb">💧</div>
+          <div><h3>Das Glas Wasser</h3><div class="meta">Adab · frei verfasst</div><div class="time">ca. 2 Min.</div></div>
+          <div class="chev">›</div>
+        </article>
+        <article class="story-row" data-story="helper">
+          <div class="story-thumb" style="background:rgba(115,201,193,.12)">✦</div>
+          <div><h3>Der leise Helfer</h3><div class="meta">Adab · frei verfasst</div><div class="time">ca. 3 Min.</div></div>
+          <div class="chev">›</div>
+        </article>
+        <article class="story-row" data-story="kindword">
+          <div class="story-thumb" style="background:rgba(159,145,214,.12)">☁</div>
+          <div><h3>Das gute Wort</h3><div class="meta">Adab · frei verfasst</div><div class="time">ca. 3 Min.</div></div>
+          <div class="chev">›</div>
+        </article>
       </div>
-      <div class="pause-note">Später kommen hier geprüfte Propheten-, Ṣaḥābah- und Wissensgeschichten hinzu. Freie Geschichten bleiben klar gekennzeichnet.</div>
+
+      <div class="gentle-note">Authentische Propheten- und Ṣaḥābah-Erzählungen kommen nur nach Quellenprüfung hinein. Freie pädagogische Geschichten bleiben sichtbar gekennzeichnet.</div>
     </section>
 
-    <section id="view-learn" class="view">
-      <div class="brand">
-        <div class="brand-kicker">MEIN WISSEN</div>
-        <h1>Lernen</h1>
-        <p>Hören · verstehen · wiederholen</p>
+    <section id="view-quran" class="view">
+      <div class="page-head">
+        <div class="kicker">HÖREN · MITSPRECHEN · LERNEN</div>
+        <h2>Mein Qurʾān</h2>
+        <p>Kein kompliziertes Menü. Eine Sūrah antippen und loslegen.</p>
       </div>
-      <div class="learn-list">
-        <div class="soft-card learn-card">
-          <div class="learn-icon" style="background:rgba(203,174,112,.14);color:var(--gold)">▤</div>
-          <div><h3>Mein Qurʾān</h3><p>hören · wiederholen · lernen</p></div><div class="badge">BALD</div>
-        </div>
-        <div class="soft-card learn-card">
-          <div class="learn-icon" style="background:rgba(154,194,221,.14);color:var(--sky)">🤲</div>
-          <div><h3>Meine Duʿāʾ</h3><p>für meinen Alltag</p></div><div class="badge">BALD</div>
-        </div>
-        <div class="soft-card learn-card">
-          <div class="learn-icon" style="background:rgba(155,183,165,.14);color:var(--sage)">☾</div>
-          <div><h3>Mein Dīn</h3><p>kurz und verständlich</p></div><div class="badge">BALD</div>
-        </div>
-        <div class="soft-card learn-card">
-          <div class="learn-icon" style="background:rgba(223,169,143,.14);color:var(--peach)">?</div>
-          <div><h3>Quiz</h3><p>hören · überlegen · antworten</p></div><div class="badge">BALD</div>
+
+      <div class="quran-hero">
+        <div class="book">📖</div>
+        <h3>Deine Qurʾān-Reise</h3>
+        <p>Höre eine Āyah, sprich danach selbst mit und gehe weiter, wenn du bereit bist.</p>
+        <div class="quran-actions">
+          <button class="quran-action" id="quickLearn112">
+            <div class="qa-icon">🎙️</div>
+            <strong>Mitrezitieren</strong>
+            <small>Starte mit al-Iḫlāṣ</small>
+          </button>
+          <button class="quran-action" id="resumeQuran">
+            <div class="qa-icon">▶</div>
+            <strong>Weiterlernen</strong>
+            <small id="resumeQuranText">dein letzter Vers</small>
+          </button>
         </div>
       </div>
-      <div class="card" style="margin-top:15px">
-        <div class="eyebrow">QURʾĀN-REGEL</div>
-        <p style="margin:8px 0 0;color:var(--muted);font-size:14px;line-height:1.5">Rezitation wird ausschließlich mit echten, sauber lizenzierten Aufnahmen eingebunden. KI-Stimmen dienen nur für Erklärungen, Geschichten und Bedienhinweise.</p>
+
+      <div class="section-title">Meine kurzen Sūrah</div>
+      <div class="surah-grid" id="kidsSurahGrid"></div>
+
+      <div class="section-title">Verse zum Lernen</div>
+      <div class="verse-strip">
+        <button class="verse-card" data-quran-ref="2:255">
+          <div class="verse-badge">✦</div>
+          <div><strong>Āyat al-Kursī</strong><small>al-Baqarah · 2:255</small></div>
+        </button>
+        <button class="verse-card" data-quran-ref="20:114">
+          <div class="verse-badge">📚</div>
+          <div><strong>„Mein Herr, mehre mich an Wissen.“</strong><small>Ṭā-Hā · 20:114</small></div>
+        </button>
+        <button class="verse-card" data-quran-ref="17:24">
+          <div class="verse-badge">♡</div>
+          <div><strong>Duʿāʾ für die Eltern</strong><small>al-Isrāʾ · 17:24</small></div>
+        </button>
       </div>
+
+      <button class="full-quran" id="fullQuranButton">
+        <div class="ficon">☰</div>
+        <div><strong>Ganzer Qurʾān zum Hören</strong><small>Eine Sūrah auswählen und direkt starten</small></div>
+        <div class="fgo">›</div>
+      </button>
+
+      <div class="gentle-note">Für die Kinder-Lernansicht nutzen wir dieselben Qurʾān-Texte und dieselbe Audio-Struktur wie in deiner bestehenden App – nur viel einfacher.</div>
     </section>
 
-    <section id="view-parents" class="view parents">
-      <div class="brand">
-        <div class="brand-kicker">GESCHÜTZTER BEREICH</div>
-        <h1>Eltern</h1>
-        <p>V0.1 Vorschau · PIN-Sperre folgt als Nächstes.</p>
+    <section id="view-parents" class="view">
+      <div class="page-head">
+        <div class="kicker">FÜR ERWACHSENE</div>
+        <h2>Eltern</h2>
+        <p>Hier wird eingestellt. Das Kind braucht diesen Bereich nicht.</p>
       </div>
 
-      <div class="card">
-        <div class="label-row"><strong>Altersstufe</strong><span style="color:var(--gold)">Kindgerecht</span></div>
+      <div class="parent-card">
+        <div class="label-row"><strong>Altersstufe</strong><span style="color:var(--gold);font-size:12px;font-weight:850">EINFACH</span></div>
         <div class="age-tabs">
           <button data-age="4–5">4–5</button>
           <button class="active" data-age="6–8">6–8</button>
@@ -283,50 +470,107 @@ backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)
         <p id="ageHelp" class="age-help">hören · verstehen · mitmachen</p>
       </div>
 
-      <div class="card">
+      <div class="parent-card">
         <div class="label-row"><strong>Tägliche Lernzeit</strong><strong id="minuteValue" style="color:var(--gold)">12 Min.</strong></div>
         <input id="minuteSlider" type="range" min="5" max="20" value="12" step="1">
-        <p class="parent-note">Die App soll ein klares Ende haben und nicht möglichst lange Aufmerksamkeit binden.</p>
+        <p class="parent-note">Die App soll ein klares Ende haben. Keine endlosen Feeds, keine Streak-Angst und kein Kaufdruck.</p>
       </div>
 
-      <div class="card">
-        <div class="eyebrow">GEPLANT</div>
-        <p style="margin:8px 0 0;color:var(--muted);font-size:14px;line-height:1.55">Eltern-PIN · Kinderprofile · Offline-Pakete · Lernfortschritt · Inhaltsfreigaben · Schlafenszeit-Modus.</p>
+      <div class="parent-card">
+        <div class="label-row"><strong>Geplant</strong><span style="color:var(--soft);font-size:11px">NÄCHSTE SCHRITTE</span></div>
+        <p class="parent-note" style="margin-top:0">Eltern-PIN · Kinderprofile · Offline-Audio · Inhaltsfreigaben · Schlafenszeit-Modus · Fortschritt ohne Leistungsdruck.</p>
       </div>
     </section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
-    <button class="nav-btn active" data-target="today"><span class="ni">☀</span><span class="nl">Heute</span></button>
-    <button class="nav-btn" data-target="stories"><span class="ni">◉</span><span class="nl">Geschichten</span></button>
-    <button class="nav-btn" data-target="learn"><span class="ni">✦</span><span class="nl">Lernen</span></button>
-    <button class="nav-btn" data-target="parents"><span class="ni">⌾</span><span class="nl">Eltern</span></button>
+    <button class="nav-btn active" data-target="today"><span class="ico">☀</span><span class="lab">Heute</span></button>
+    <button class="nav-btn" data-target="stories"><span class="ico">🎧</span><span class="lab">Geschichten</span></button>
+    <button class="nav-btn" data-target="quran"><span class="ico">📖</span><span class="lab">Qurʾān</span></button>
+    <button class="nav-btn" data-target="parents"><span class="ico">⚙</span><span class="lab">Eltern</span></button>
   </nav>
 
-  <div id="storyModal" class="modal" role="dialog" aria-modal="true" aria-label="Geschichtenplayer">
-    <div class="player">
-      <div class="player-top">
-        <button id="closePlayer" class="icon-btn" aria-label="Schließen">×</button>
-        <span id="playerTime" style="font-size:12px;color:var(--soft)">ca. 3 Min.</span>
+  <div id="storyModal" class="modal">
+    <div class="modal-shell">
+      <div class="modal-top">
+        <button class="close-btn" data-close="story">×</button>
+        <div class="modal-title"><strong id="storyPlayerTitle">Geschichte</strong><small id="storyPlayerTime">ca. 3 Min.</small></div>
+        <div class="top-spacer"></div>
       </div>
-      <div class="player-main">
+      <div class="story-player-main">
         <div>
-          <div class="audio-orb"><div id="wave" class="wave">≋</div></div>
-          <h2 id="playerTitle">Die gefundene Münze</h2>
-          <div id="playerCategory" class="category">Adab · frei verfasst</div>
-          <div class="fallback">Vorschau: nutzt die Browser-Stimme deines Geräts. Die feste KI-Erzählstimme folgt später als Audio-Datei.</div>
+          <div class="story-orb"><span id="storyWave">≋</span></div>
+          <h2 id="storyBigTitle">Geschichte</h2>
+          <div id="storyCategory" class="category">Adab</div>
+          <div class="dev-note">Vorschau-Stimme des Geräts. Die feste KI-Erzählstimme wird später als fertige Audio-Datei eingesetzt.</div>
         </div>
       </div>
       <div>
-        <button id="playStory" class="main-action">▶ Geschichte hören</button>
-        <button id="markDone" class="secondary-action">○ Als gehört markieren</button>
+        <button id="storyPlay" class="primary">▶ Geschichte hören</button>
+        <button id="storyDone" class="secondary">○ Als gehört markieren</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="quranModal" class="modal">
+    <div class="modal-shell">
+      <div class="modal-top">
+        <button class="close-btn" data-close="quran">×</button>
+        <div class="modal-title"><strong id="quranTitle">Sūrah</strong><small id="quranSubtitle">Mitrezitieren</small></div>
+        <div class="top-spacer"></div>
+      </div>
+
+      <div class="quran-player">
+        <div id="progressDots" class="progress-dots"></div>
+        <div class="ayah-stage">
+          <div id="ayahBox" class="ayah-box">
+            <div id="learnStatus" class="learn-status">🎧 Erst hören</div>
+            <div id="ayahAr" class="ayah-ar"><span class="loader">Qurʾān wird geladen …</span></div>
+            <div id="ayahTr" class="ayah-tr"></div>
+            <div id="ayahDe" class="ayah-de"></div>
+            <div id="ayahNo" class="ayah-no"></div>
+          </div>
+        </div>
+        <div class="quran-controls">
+          <button id="ayahPlay" class="big-play">▶ Āyah anhören</button>
+          <div class="learn-row">
+            <button id="prevAyah">‹ Zurück</button>
+            <button id="speakAlong">🎙 Jetzt mitsprechen</button>
+            <button id="nextAyah">Weiter ›</button>
+          </div>
+          <div class="quran-mini-note">Beim „Mitsprechen“-Modus hörst du die Āyah, bekommst Zeit zum Nachsprechen und hörst sie danach noch einmal.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="fullQuranModal" class="modal">
+    <div class="modal-shell">
+      <div class="modal-top">
+        <button class="close-btn" data-close="fullquran">×</button>
+        <div class="modal-title"><strong>Ganzer Qurʾān</strong><small>Einfach auswählen und hören</small></div>
+        <div class="top-spacer"></div>
+      </div>
+      <div class="picker-panel">
+        <div class="picker-icon">📖</div>
+        <h3>Welche Sūrah?</h3>
+        <p>Nur eine Auswahl. Danach öffnet sich direkt der große Hör- und Lernbildschirm.</p>
+        <select id="surahPicker" class="big-select" aria-label="Sūrah auswählen">
+          <option>Lade Sūrah …</option>
+        </select>
+        <button id="openPickedSurah" class="primary">Sūrah öffnen</button>
       </div>
     </div>
   </div>
 </div>
 
+<audio id="quranAudio" preload="none" playsinline></audio>
+
 <script>
-const stories={
+(function(){
+"use strict";
+
+var stories={
   coin:{
     title:"Die gefundene Münze",time:"ca. 3 Min.",category:"Adab · frei verfasst",
     text:"Auf dem Heimweg entdeckte Adam neben einer Bank eine glänzende Münze. Er hob sie auf und sah sich um. Niemand schien sie zu suchen. Für einen Moment dachte Adam: Ich könnte sie einfach behalten. Dann erinnerte er sich daran, dass ein Muslim ehrlich sein soll, nicht nur dann, wenn andere Menschen zuschauen. Adam ging zurück zu dem kleinen Laden neben dem Platz. Er fragte den Besitzer, ob jemand nach einer verlorenen Münze gesucht habe. Der Mann lächelte und sagte: Gerade eben war ein älterer Mann hier. Er hatte bemerkt, dass ihm etwas aus der Tasche gefallen war. Adam wartete einen Augenblick. Kurz darauf kam der Mann zurück. Als Adam ihm die Münze gab, war der Mann sehr erleichtert. Auf dem Heimweg hatte Adam keine neue Münze in der Tasche. Aber er hatte etwas Wertvolleres gelernt: Ehrlichkeit bedeutet, das Richtige zu tun, auch wenn man etwas anderes tun könnte. Denk einmal nach: Was würdest du tun, wenn du etwas findest, das dir nicht gehört?"
@@ -338,80 +582,325 @@ const stories={
   helper:{
     title:"Der leise Helfer",time:"ca. 3 Min.",category:"Adab · frei verfasst",
     text:"Nach dem Unterricht lagen einige Bücher und Stifte auf dem Boden. Die meisten Kinder gingen schon zur Tür. Yusuf blieb stehen. Ohne etwas zu sagen, sammelte er die Stifte ein und legte die Bücher zurück an ihren Platz. Sein Freund fragte: Warum machst du das? Die Lehrerin sieht dich doch gar nicht. Yusuf antwortete: Eine gute Sache wird nicht erst gut, wenn jemand mich dafür lobt. Gemeinsam räumten beide den Rest auf. Am nächsten Morgen war der Raum ordentlich und niemand wusste, wer geholfen hatte. Manchmal sind die schönsten guten Taten diejenigen, für die wir keinen Applaus erwarten."
+  },
+  kindword:{
+    title:"Das gute Wort",time:"ca. 3 Min.",category:"Adab · frei verfasst",
+    text:"In der Pause saß ein neues Kind allein am Rand des Hofes. Einige liefen vorbei, ohne etwas zu sagen. Hamza blieb stehen. Er wusste nicht, was er Besonderes sagen sollte. Also lächelte er einfach und fragte: Möchtest du mit uns spielen? Es waren nur wenige Worte. Doch plötzlich war der Hof für das neue Kind nicht mehr so fremd. Hamza lernte an diesem Tag, dass ein gutes Wort klein sein kann und trotzdem viel verändert."
   }
 };
 
-let currentStory=stories.coin;
-let speaking=false;
-const modal=document.getElementById("storyModal");
-const synth=window.speechSynthesis;
+var kidsSurahs=[
+  {id:1,label:"al-Fātiḥah",hint:"7 Āyāt"},
+  {id:112,label:"al-Iḫlāṣ",hint:"4 Āyāt"},
+  {id:113,label:"al-Falaq",hint:"5 Āyāt"},
+  {id:114,label:"an-Nās",hint:"6 Āyāt"},
+  {id:108,label:"al-Kawṯar",hint:"3 Āyāt"},
+  {id:103,label:"al-ʿAṣr",hint:"3 Āyāt"},
+  {id:105,label:"al-Fīl",hint:"5 Āyāt"},
+  {id:106,label:"Qurayš",hint:"4 Āyāt"},
+  {id:109,label:"al-Kāfirūn",hint:"6 Āyāt"},
+  {id:110,label:"an-Naṣr",hint:"3 Āyāt"}
+];
 
+var catalog=[];
+var currentSurah=null;
+var currentAyahIndex=0;
+var quranMode="listen";
+var speakAlongTimer=0;
+var quranAudio=document.getElementById("quranAudio");
+var speech=window.speechSynthesis;
+var speaking=false;
+var currentStoryKey="coin";
+
+function pad3(n){return String(n).padStart(3,"0")}
+function padAyah(n){return String(n).padStart(3,"0")}
+function audioUrl(surah,ayah){
+  return "https://everyayah.com/data/Husary_128kbps/"+pad3(surah)+padAyah(ayah)+".mp3";
+}
 function showTab(name){
-  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
-  document.getElementById("view-"+name).classList.add("active");
-  document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.target===name));
+  document.querySelectorAll(".view").forEach(function(v){v.classList.remove("active")});
+  var view=document.getElementById("view-"+name);
+  if(view)view.classList.add("active");
+  document.querySelectorAll(".nav-btn").forEach(function(b){b.classList.toggle("active",b.dataset.target===name)});
   window.scrollTo({top:0,behavior:"smooth"});
 }
-document.querySelectorAll(".nav-btn").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.target)));
-document.querySelectorAll(".go-learn").forEach(b=>b.addEventListener("click",()=>showTab("learn")));
+document.querySelectorAll(".nav-btn").forEach(function(b){b.addEventListener("click",function(){showTab(b.dataset.target)})});
+document.querySelectorAll("[data-go]").forEach(function(b){
+  b.addEventListener("click",function(){
+    showTab(b.dataset.go);
+    if(b.dataset.openVerse){
+      setTimeout(function(){openQuranRef(b.dataset.openVerse)},250);
+    }
+  });
+});
+
+function renderKidsSurahs(){
+  var grid=document.getElementById("kidsSurahGrid");
+  grid.innerHTML="";
+  kidsSurahs.forEach(function(s){
+    var card=document.createElement("button");
+    card.className="surah-card";
+    card.innerHTML='<div class="num">SŪRAH '+s.id+'</div><div class="ar" data-surah-ar="'+s.id+'">…</div><strong>'+s.label+'</strong><small>'+s.hint+' · antippen & loslegen</small>';
+    card.addEventListener("click",function(){openSurah(s.id,0,"learn")});
+    grid.appendChild(card);
+  });
+}
+renderKidsSurahs();
+
+function fetchCatalog(){
+  return fetch("/content/quran/surahs.json",{cache:"force-cache"})
+    .then(function(r){if(!r.ok)throw new Error("catalog");return r.json()})
+    .then(function(data){
+      catalog=Array.isArray(data.surahs)?data.surahs:[];
+      fillPicker();
+      kidsSurahs.forEach(function(s){
+        var meta=catalog.find(function(x){return Number(x.id)===Number(s.id)});
+        var el=document.querySelector('[data-surah-ar="'+s.id+'"]');
+        if(el&&meta)el.textContent=meta.name;
+      });
+      return catalog;
+    }).catch(function(){catalog=[];fillPicker();return []});
+}
+function fillPicker(){
+  var picker=document.getElementById("surahPicker");
+  picker.innerHTML="";
+  var list=catalog.length?catalog:kidsSurahs.map(function(s){return{id:s.id,name:"",transliteration:s.label,total_verses:""}});
+  list.forEach(function(s){
+    var o=document.createElement("option");
+    o.value=String(s.id);
+    o.textContent=String(s.id)+". "+(s.transliteration||"Sūrah")+(s.total_verses?" · "+s.total_verses+" Āyāt":"");
+    picker.appendChild(o);
+  });
+}
+
+function fetchSurah(id){
+  return fetch("/content/quran/"+pad3(id)+".json",{cache:"force-cache"})
+    .then(function(r){if(!r.ok)throw new Error("surah");return r.json()});
+}
+function normalizeSurah(data){
+  var verses=Array.isArray(data.verses)?data.verses:[];
+  return{
+    id:Number(data.id||0),
+    name:data.name||"",
+    transliteration:data.transliteration||("Sūrah "+data.id),
+    verses:verses
+  };
+}
+function stopQuran(){
+  clearTimeout(speakAlongTimer);
+  try{quranAudio.pause()}catch(e){}
+  quranAudio.removeAttribute("src");
+  quranAudio.load();
+  quranMode="listen";
+  updateLearnStatus("🎧 Erst hören",false);
+  document.getElementById("ayahPlay").textContent="▶ Āyah anhören";
+  document.getElementById("speakAlong").classList.remove("active");
+}
+function openSurah(id,ayahIndex,mode){
+  stopQuran();
+  document.getElementById("quranModal").classList.add("open");
+  document.getElementById("ayahAr").innerHTML='<span class="loader">Qurʾān wird geladen …</span>';
+  document.getElementById("ayahTr").textContent="";
+  document.getElementById("ayahDe").textContent="";
+  document.getElementById("ayahNo").textContent="";
+  fetchSurah(id).then(function(data){
+    currentSurah=normalizeSurah(data);
+    currentAyahIndex=Math.max(0,Math.min(Number(ayahIndex)||0,currentSurah.verses.length-1));
+    quranMode=mode||"listen";
+    renderAyah();
+    if(quranMode==="learn")document.getElementById("speakAlong").classList.add("active");
+    saveQuranResume();
+  }).catch(function(){
+    document.getElementById("ayahAr").textContent="Diese Sūrah konnte gerade nicht geladen werden.";
+  });
+}
+function openQuranRef(ref){
+  var parts=String(ref).split(":");
+  var s=Number(parts[0]||1),a=Number(parts[1]||1);
+  openSurah(s,Math.max(0,a-1),"learn");
+}
+function renderAyah(){
+  if(!currentSurah||!currentSurah.verses.length)return;
+  var v=currentSurah.verses[currentAyahIndex];
+  document.getElementById("quranTitle").textContent=currentSurah.transliteration;
+  document.getElementById("quranSubtitle").textContent="Āyah "+v.id+" von "+currentSurah.verses.length;
+  document.getElementById("ayahAr").textContent=v.ar||"";
+  document.getElementById("ayahTr").textContent=v.tr_readable||v.tr||"";
+  document.getElementById("ayahDe").textContent=v.de||"";
+  document.getElementById("ayahNo").textContent="Āyah "+v.id+" · Sūrah "+currentSurah.id;
+  renderDots();
+  updateLearnStatus(quranMode==="learn"?"🎙 Bereit zum Mitsprechen":"🎧 Erst hören",quranMode==="learn");
+  document.getElementById("ayahPlay").textContent="▶ Āyah anhören";
+  saveQuranResume();
+}
+function renderDots(){
+  var box=document.getElementById("progressDots");
+  box.innerHTML="";
+  if(!currentSurah)return;
+  var total=currentSurah.verses.length;
+  var max=Math.min(total,20);
+  for(var i=0;i<max;i++){
+    var d=document.createElement("span");
+    var mapped=Math.floor(i*total/max);
+    if(currentAyahIndex>=mapped&&currentAyahIndex<Math.floor((i+1)*total/max)||currentAyahIndex===total-1&&i===max-1)d.className="active";
+    box.appendChild(d);
+  }
+}
+function updateLearnStatus(text,you){
+  var el=document.getElementById("learnStatus");
+  el.textContent=text;
+  el.classList.toggle("you",!!you);
+}
+function playCurrent(after){
+  if(!currentSurah)return;
+  clearTimeout(speakAlongTimer);
+  var v=currentSurah.verses[currentAyahIndex];
+  quranAudio.src=audioUrl(currentSurah.id,v.id);
+  quranAudio.play().then(function(){
+    updateLearnStatus("🎧 Hör genau zu",false);
+    document.getElementById("ayahPlay").textContent="■ Stopp";
+  }).catch(function(){
+    updateLearnStatus("Audio konnte nicht gestartet werden",false);
+  });
+  quranAudio.onended=function(){
+    document.getElementById("ayahPlay").textContent="▶ Āyah anhören";
+    if(typeof after==="function")after();
+    else updateLearnStatus(quranMode==="learn"?"🎙 Jetzt du":"✓ Geh weiter, wenn du bereit bist",quranMode==="learn");
+  };
+}
+document.getElementById("ayahPlay").addEventListener("click",function(){
+  if(!quranAudio.paused){quranAudio.pause();document.getElementById("ayahPlay").textContent="▶ Āyah anhören";return}
+  quranMode="listen";
+  document.getElementById("speakAlong").classList.remove("active");
+  playCurrent();
+});
+document.getElementById("speakAlong").addEventListener("click",function(){
+  if(!currentSurah)return;
+  quranMode="learn";
+  this.classList.add("active");
+  playCurrent(function(){
+    updateLearnStatus("🎙 Jetzt du — sprich die Āyah nach",true);
+    speakAlongTimer=setTimeout(function(){
+      updateLearnStatus("🎧 Noch einmal hören",false);
+      playCurrent(function(){updateLearnStatus("✓ Sehr gut — wenn du bereit bist: Weiter",false)});
+    },5000);
+  });
+});
+document.getElementById("prevAyah").addEventListener("click",function(){
+  if(!currentSurah)return;
+  stopQuran();
+  currentAyahIndex=Math.max(0,currentAyahIndex-1);
+  renderAyah();
+});
+document.getElementById("nextAyah").addEventListener("click",function(){
+  if(!currentSurah)return;
+  stopQuran();
+  if(currentAyahIndex<currentSurah.verses.length-1){currentAyahIndex++;renderAyah()}
+  else updateLearnStatus("★ Sūrah geschafft",false);
+});
+function saveQuranResume(){
+  if(!currentSurah)return;
+  localStorage.setItem("kids.quran.resume",JSON.stringify({surah:currentSurah.id,ayah:currentAyahIndex,label:currentSurah.transliteration}));
+  updateResume();
+}
+function readQuranResume(){
+  try{return JSON.parse(localStorage.getItem("kids.quran.resume")||"null")}catch(e){return null}
+}
+function updateResume(){
+  var r=readQuranResume();
+  var text=r?(r.label+" · Āyah "+(Number(r.ayah)+1)):"Noch nichts begonnen";
+  document.getElementById("resumeText").textContent=text;
+  document.getElementById("resumeQuranText").textContent=r?text:"Starte mit einer kurzen Sūrah";
+}
+document.getElementById("resumeButton").addEventListener("click",function(){
+  var r=readQuranResume();
+  showTab("quran");
+  if(r)setTimeout(function(){openSurah(r.surah,r.ayah,"learn")},220);
+});
+document.getElementById("resumeQuran").addEventListener("click",function(){
+  var r=readQuranResume();
+  if(r)openSurah(r.surah,r.ayah,"learn");else openSurah(112,0,"learn");
+});
+document.getElementById("quickLearn112").addEventListener("click",function(){openSurah(112,0,"learn")});
+document.querySelectorAll("[data-quran-ref]").forEach(function(b){b.addEventListener("click",function(){openQuranRef(b.dataset.quranRef)})});
+document.getElementById("fullQuranButton").addEventListener("click",function(){document.getElementById("fullQuranModal").classList.add("open")});
+document.getElementById("openPickedSurah").addEventListener("click",function(){
+  var id=Number(document.getElementById("surahPicker").value||1);
+  document.getElementById("fullQuranModal").classList.remove("open");
+  openSurah(id,0,"listen");
+});
 
 function openStory(key){
-  currentStory=stories[key]||stories.coin;
-  document.getElementById("playerTitle").textContent=currentStory.title;
-  document.getElementById("playerTime").textContent=currentStory.time;
-  document.getElementById("playerCategory").textContent=currentStory.category;
-  document.getElementById("markDone").textContent=localStorage.getItem("kids.done."+key)==="1"?"✓ Schon geschafft":"○ Als gehört markieren";
-  modal.classList.add("open");
+  currentStoryKey=key;
+  var s=stories[key]||stories.coin;
+  document.getElementById("storyPlayerTitle").textContent=s.title;
+  document.getElementById("storyBigTitle").textContent=s.title;
+  document.getElementById("storyPlayerTime").textContent=s.time;
+  document.getElementById("storyCategory").textContent=s.category;
+  document.getElementById("storyDone").textContent=localStorage.getItem("kids.story."+key)==="1"?"✓ Schon geschafft":"○ Als gehört markieren";
+  document.getElementById("storyModal").classList.add("open");
 }
-document.querySelectorAll("[data-story]").forEach(el=>el.addEventListener("click",()=>openStory(el.dataset.story)));
-
+document.querySelectorAll("[data-story]").forEach(function(el){el.addEventListener("click",function(){openStory(el.dataset.story)})});
 function stopSpeech(){
-  if(synth) synth.cancel();
+  if(speech)speech.cancel();
   speaking=false;
-  document.getElementById("playStory").textContent="▶ Geschichte hören";
-  document.getElementById("wave").textContent="≋";
+  document.getElementById("storyPlay").textContent="▶ Geschichte hören";
+  document.getElementById("storyWave").textContent="≋";
 }
-document.getElementById("closePlayer").addEventListener("click",()=>{stopSpeech();modal.classList.remove("open")});
-document.getElementById("playStory").addEventListener("click",()=>{
-  if(!("speechSynthesis" in window)){alert("Auf diesem Browser ist die Vorschau-Stimme nicht verfügbar.");return}
+document.getElementById("storyPlay").addEventListener("click",function(){
+  if(!("speechSynthesis" in window)){alert("Auf diesem Gerät ist die Vorschau-Stimme nicht verfügbar.");return}
   if(speaking){stopSpeech();return}
-  const u=new SpeechSynthesisUtterance(currentStory.text);
-  u.lang="de-DE";u.rate=.88;u.pitch=.92;
+  var s=stories[currentStoryKey]||stories.coin;
+  var u=new SpeechSynthesisUtterance(s.text);
+  u.lang="de-DE";u.rate=.87;u.pitch=.94;
   u.onend=stopSpeech;u.onerror=stopSpeech;
   speaking=true;
-  document.getElementById("playStory").textContent="■ Stopp";
-  document.getElementById("wave").textContent="≋≋";
-  synth.speak(u);
+  this.textContent="■ Stopp";
+  document.getElementById("storyWave").textContent="≋≋";
+  speech.speak(u);
 });
-document.getElementById("markDone").addEventListener("click",()=>{
-  const key=Object.keys(stories).find(k=>stories[k]===currentStory)||"coin";
-  localStorage.setItem("kids.done."+key,"1");
-  document.getElementById("markDone").textContent="✓ Schon geschafft";
+document.getElementById("storyDone").addEventListener("click",function(){
+  localStorage.setItem("kids.story."+currentStoryKey,"1");
+  this.textContent="✓ Schon geschafft";
 });
 
-const ageHelp={"4–5":"viel hören · kurze Einheiten","6–8":"hören · verstehen · mitmachen","9–10":"verstehen · anwenden · vertiefen"};
-const ageButtons=[...document.querySelectorAll("[data-age]")];
-let age=localStorage.getItem("kids.age")||"6–8";
+document.querySelectorAll("[data-close]").forEach(function(b){
+  b.addEventListener("click",function(){
+    var type=b.dataset.close;
+    if(type==="story"){stopSpeech();document.getElementById("storyModal").classList.remove("open")}
+    if(type==="quran"){stopQuran();document.getElementById("quranModal").classList.remove("open")}
+    if(type==="fullquran"){document.getElementById("fullQuranModal").classList.remove("open")}
+  });
+});
+
+var ageHelp={"4–5":"viel hören · sehr kurze Wege","6–8":"hören · verstehen · mitmachen","9–10":"verstehen · anwenden · vertiefen"};
+var ageButtons=[].slice.call(document.querySelectorAll("[data-age]"));
+var age=localStorage.getItem("kids.age")||"6–8";
 function setAge(a){
   age=a;localStorage.setItem("kids.age",a);
-  ageButtons.forEach(b=>b.classList.toggle("active",b.dataset.age===a));
-  document.getElementById("ageHelp").textContent=ageHelp[a];
-  updateMeta();
+  ageButtons.forEach(function(b){b.classList.toggle("active",b.dataset.age===a)});
+  document.getElementById("ageHelp").textContent=ageHelp[a]||"";
 }
-ageButtons.forEach(b=>b.addEventListener("click",()=>setAge(b.dataset.age)));
+ageButtons.forEach(function(b){b.addEventListener("click",function(){setAge(b.dataset.age)})});
 
-const slider=document.getElementById("minuteSlider");
+var slider=document.getElementById("minuteSlider");
 slider.value=localStorage.getItem("kids.minutes")||"12";
 function updateMinutes(){
   localStorage.setItem("kids.minutes",slider.value);
   document.getElementById("minuteValue").textContent=slider.value+" Min.";
-  updateMeta();
 }
 slider.addEventListener("input",updateMinutes);
-function updateMeta(){
-  document.getElementById("todayMeta").textContent="Alter "+age+" · ungefähr "+slider.value+" Minuten";
-}
-setAge(age);updateMinutes();
+
+quranAudio.addEventListener("error",function(){
+  updateLearnStatus("Audio lädt gerade nicht — bitte erneut tippen",false);
+  document.getElementById("ayahPlay").textContent="▶ Āyah anhören";
+});
+
+setAge(age);
+updateMinutes();
+updateResume();
+fetchCatalog();
+})();
 </script>
 </body>
 </html>
