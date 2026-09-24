@@ -39,3 +39,11 @@ Status: **verbindlich für jede künftige Änderung an DĀR AL TAWḤĪD Kids**.
 - Neue Assets und Code werden gemeinsam committed.
 
 Der CI-Guard `scripts/kids-design-system-guard.js` verhindert Emoji-Rückfälle und alte Sprite-Referenzen.
+
+
+## Kinderfreundliche Bedienelemente
+- Die feste untere Hauptnavigation bleibt **großzügig und leicht erreichbar**; sie darf nicht zu stark komprimiert werden.
+- Primäre Aktionsbuttons in Lern-/Rezitationsansichten werden bevorzugt **weich oval/pillenförmig** gestaltet statt als lange, flache iOS-Leisten.
+- Touch-Ziele bleiben mindestens ungefähr 44–48 px hoch; für jüngere Kinder eher 52–56 px.
+- Buttons sollen kompakt wirken, aber nicht klein: klare Abstände, große reale Icons und kurze Beschriftungen.
+- DĀR AL TAWḤĪD Kids folgt einem eigenen kinderfreundlichen Designsystem und kopiert nicht automatisch die nüchterne Gestaltung der Erwachsenen-iOS-App.
