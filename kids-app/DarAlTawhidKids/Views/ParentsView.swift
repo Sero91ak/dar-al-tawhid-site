@@ -152,6 +152,4 @@ struct ParentsView: View {
         .padding(12)
         .background(.white.opacity(0.045), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
-
-    }
 }
