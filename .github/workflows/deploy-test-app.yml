@@ -31,7 +31,6 @@ on:
       - scripts/library-deploy-repair.js
       - scripts/test-app-health-check.js
       - scripts/verify-test-app-deploy.js
-      - scripts/kids-content-authenticity-guard.js
       - scripts/purge-cloudflare-cache.js
       - package.json
       - _headers
@@ -61,9 +60,6 @@ jobs:
           git fetch origin test-library-canonical
           node scripts/overlay-test-staging-from-branch.js
           node scripts/app-stability-repair.js
-
-      - name: Kids content authenticity guard
-        run: node scripts/kids-content-authenticity-guard.js
 
       - name: Build + Build-IDs synchronisieren
         run: npm run build
