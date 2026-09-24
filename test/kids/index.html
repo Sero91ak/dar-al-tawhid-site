@@ -450,6 +450,26 @@ html,body{background:#06131f!important}
   }
 }
 
+/* KIDS_SAFE_AREA_SOLID_V6
+   iOS Home-Screen/PWA: top safe-area is an opaque app surface, never glass/gradient. */
+.app::before{
+  content:"";
+  position:fixed;
+  z-index:1;
+  top:0;left:0;right:0;
+  height:calc(env(safe-area-inset-top) + 10px);
+  background:#06131f;
+  background-image:none;
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+  filter:none;
+  pointer-events:none;
+}
+.shell{position:relative;z-index:2}
+@media (display-mode:standalone),(display-mode:fullscreen){
+  html,body,.app{background-color:#06131f!important}
+}
+
 /* KIDS_UPDATE_UI_V3 */
 .kids-update-layer{
   position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;
@@ -480,7 +500,7 @@ html,body{background:#06131f!important}
 </div>
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon">KIDS · V0.5</div>
+  <div class="dev-ribbon">KIDS · V0.6</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -819,7 +839,7 @@ html,body{background:#06131f!important}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v5";
+const KIDS_BUILD_ID="kids-shell-v6";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -842,7 +862,7 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
   function kidsHardReload(targetBuild){
     try{localStorage.setItem(KIDS_BUILD_SEEN_KEY,targetBuild||KIDS_BUILD_ID)}catch(e){}
     var u=new URL(location.href);
-    u.searchParams.set("kv","20260924-5");
+    u.searchParams.set("kv","20260924-6");
     u.searchParams.set("cb",String(Date.now()));
     location.replace(u.toString());
   }
@@ -865,7 +885,7 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
     });
     var seen="";
     try{seen=String(localStorage.getItem(KIDS_BUILD_SEEN_KEY)||"")}catch(e){}
-    if(kidsStandalone() && seen!==KIDS_BUILD_ID){
+    if(seen!==KIDS_BUILD_ID){
       kidsShowUpdate("App-Aktualisierung bereit","Die Kinder-App wurde aktualisiert. Tippe einmal auf Aktualisieren, damit die neue Oberfläche vollständig geladen wird.",KIDS_BUILD_ID);
     }
     kidsCheckRemoteVersion();
