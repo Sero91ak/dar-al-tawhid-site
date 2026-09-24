@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-031` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-032` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4315
-totalVerifiedEntries: 4315
-loadedEntries: 4315
-uniqueVerifiedReferences: 4315
-missingCount: 1921
+entriesCount: 4316
+totalVerifiedEntries: 4316
+loadedEntries: 4316
+uniqueVerifiedReferences: 4316
+missingCount: 1920
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,8 +42,8 @@ firstMissingReference: 2:4
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-031.json
-nächster Gap-Fill-Batch: entries-gap-06-032.json
+letzter Gap-Fill-Batch: entries-gap-06-032.json
+nächster Gap-Fill-Batch: entries-gap-06-033.json
 ```
 
 ## Warum kein `entries-batch-05z-117.json`?
@@ -86,9 +86,10 @@ entries-gap-06-028.json   3 Einträge
 entries-gap-06-029.json   2 Einträge
 entries-gap-06-030.json   3 Einträge
 entries-gap-06-031.json   3 Einträge
+entries-gap-06-032.json   1 Eintrag
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `125` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `126` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Audit-Korrektur bei 06-025
 
@@ -126,6 +127,7 @@ Diese Korrektur ist verbindlich; Qurʾān `2:229` darf nicht erneut als Gap-Fill
 06-029: 3:6, 3:13
 06-030: 3:17, 3:23, 3:30
 06-031: 3:35, 3:36, 3:39
+06-032: 3:50
 ```
 
 ## Aktuell bewusst offen
