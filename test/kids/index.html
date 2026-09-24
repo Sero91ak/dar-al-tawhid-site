@@ -2335,17 +2335,24 @@ function quizSpeak(text){
   u.lang="de-DE";u.rate=age==="4–5"?.82:.88;u.pitch=.96;
   speech.speak(u);
 }
+function isYesNoAnswers(answers){
+  var labels=(answers||[]).map(function(a){return String(a.label||"").trim().toLowerCase()});
+  return labels.length===2&&labels.indexOf("ja")>=0&&labels.indexOf("nein")>=0;
+}
+function spokenChoices(q){
+  return (q.answers||[]).map(function(a,i){
+    return "Antwort "+(i+1)+": "+a.label+".";
+  }).join(" ");
+}
 function quizPrompt(q){
   if(!q)return"";
-  if(age==="4–5")return q.question+" Ja oder Nein?";
-  var labels=q.answers.map(function(a,i){return "Antwort "+(i+1)+": "+a.label+"."}).join(" ");
-  return q.question+" "+labels;
+  if(age==="4–5"&&isYesNoAnswers(q.answers))return q.question+" Ja oder Nein?";
+  return q.question+" "+spokenChoices(q);
 }
 function storyQuestionPrompt(q){
   if(!q)return"";
-  if(age==="4–5")return q.question+" Ja oder Nein?";
-  var labels=q.answers.map(function(a,i){return "Antwort "+(i+1)+": "+a.label+"."}).join(" ");
-  return q.question+" "+labels;
+  if(age==="4–5"&&isYesNoAnswers(q.answers))return q.question+" Ja oder Nein?";
+  return q.question+" "+spokenChoices(q);
 }
 function quizAgeRange(){
   if(age==="4–5")return{min:4,max:5,limit:3};
