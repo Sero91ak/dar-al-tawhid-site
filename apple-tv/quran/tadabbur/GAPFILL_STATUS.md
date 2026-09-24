@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-019` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-031` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4268
-totalVerifiedEntries: 4268
-loadedEntries: 4268
-uniqueVerifiedReferences: 4268
-missingCount: 1968
+entriesCount: 4315
+totalVerifiedEntries: 4315
+loadedEntries: 4315
+uniqueVerifiedReferences: 4315
+missingCount: 1921
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,7 +42,8 @@ firstMissingReference: 2:4
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-019.json
+letzter Gap-Fill-Batch: entries-gap-06-031.json
+nächster Gap-Fill-Batch: entries-gap-06-032.json
 ```
 
 ## Warum kein `entries-batch-05z-117.json`?
@@ -73,19 +74,58 @@ entries-gap-06-016.json   2 Einträge
 entries-gap-06-017.json   2 Einträge
 entries-gap-06-018.json   2 Einträge
 entries-gap-06-019.json   3 Einträge
+entries-gap-06-020.json   6 Einträge
+entries-gap-06-021.json   4 Einträge
+entries-gap-06-022.json   3 Einträge
+entries-gap-06-023.json   6 Einträge
+entries-gap-06-024.json   5 Einträge
+entries-gap-06-025.json   4 Einträge
+entries-gap-06-026.json   3 Einträge
+entries-gap-06-027.json   5 Einträge
+entries-gap-06-028.json   3 Einträge
+entries-gap-06-029.json   2 Einträge
+entries-gap-06-030.json   3 Einträge
+entries-gap-06-031.json   3 Einträge
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `78` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `125` neue eindeutige, geprüfte Referenzen registriert.
+
+## Audit-Korrektur bei 06-025
+
+Der erste Audit von `entries-gap-06-025.json` stoppte korrekt, weil Qurʾān `2:229` bereits in
+
+```text
+entries-batch-04n.json
+```
+
+registriert war.
+
+Der doppelte Eintrag wurde ausschließlich aus `06-025` entfernt. Danach:
+
+```text
+entries-gap-06-025.json: 4 Einträge
+duplicateCount: 0
+invalidCount: 0
+countMismatchCount: 0
+```
+
+Diese Korrektur ist verbindlich; Qurʾān `2:229` darf nicht erneut als Gap-Fill registriert werden.
 
 ## Zuletzt ergänzte Bereiche
 
 ```text
-06-014: 2:79, 2:80, 2:81
-06-015: 2:84, 2:85, 2:86
-06-016: 2:88, 2:89
-06-017: 2:97, 2:100
-06-018: 2:106, 2:109
-06-019: 2:111, 2:113, 2:118
+06-020: 2:124, 2:127, 2:129, 2:130, 2:132, 2:138
+06-021: 2:154, 2:166, 2:167, 2:171
+06-022: 2:173, 2:174, 2:182
+06-023: 2:185, 2:188, 2:193, 2:194, 2:195, 2:200
+06-024: 2:204, 2:207, 2:208, 2:217, 2:218
+06-025: 2:220, 2:224, 2:231, 2:233
+06-026: 2:235, 2:236, 2:237
+06-027: 2:254, 2:265, 2:269, 2:270, 2:271
+06-028: 2:278, 2:279, 2:282
+06-029: 3:6, 3:13
+06-030: 3:17, 3:23, 3:30
+06-031: 3:35, 3:36, 3:39
 ```
 
 ## Aktuell bewusst offen
@@ -115,6 +155,7 @@ Ab jetzt verbindlich:
 8. Audit muss duplicateCount=0, invalidCount=0 und countMismatchCount=0 behalten
 9. kein Eintrag wird nur erzeugt, um eine Zahl zu erhöhen
 10. mursal/unsichere oder nicht vollständig geprüfte Überlieferungen werden nicht als ṣaḥīḥ ausgegeben
+11. bereits registrierte Referenzen werden vor jedem neuen Batch gegen den Audit geprüft
 ```
 
 Benennung:
