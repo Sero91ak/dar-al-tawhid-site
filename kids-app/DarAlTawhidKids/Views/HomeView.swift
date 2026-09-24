@@ -74,30 +74,55 @@ struct HomeView: View {
     }
 
     private var storyCard: some View {
-        Button {
+        let version = storyOfTheDay.version(for: appState.ageBand)
+
+        return Button {
             selectedStory = storyOfTheDay
         } label: {
             KidsCard {
-                VStack(alignment: .leading, spacing: 14) {
-                    HStack {
-                        Text("GESCHICHTE DES TAGES")
-                            .font(.caption.weight(.bold))
-                            .tracking(1.3)
-                            .foregroundStyle(KidsTheme.gold)
-                        Spacer()
-                        Text(storyOfTheDay.durationLabel)
-                            .font(.caption.weight(.semibold))
-                            .foregroundStyle(.white.opacity(0.6))
+                VStack(alignment: .leading, spacing: 13) {
+                    ZStack(alignment: .bottomLeading) {
+                        Image(storyOfTheDay.coverAsset)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(maxWidth: .infinity)
+                            .frame(height: appState.ageBand == .age4to5 ? 205 : 170)
+                            .clipped()
+
+                        LinearGradient(
+                            colors: [.clear, KidsTheme.deepNight.opacity(0.94)],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("GESCHICHTE DES TAGES")
+                                .font(.caption2.weight(.heavy))
+                                .tracking(1.2)
+                                .foregroundStyle(KidsTheme.gold)
+
+                            Text(storyOfTheDay.title)
+                                .font(.system(size: 25, weight: .bold, design: .rounded))
+                                .foregroundStyle(KidsTheme.cream)
+
+                            Text(version.durationLabel)
+                                .font(.caption.weight(.semibold))
+                                .foregroundStyle(.white.opacity(0.66))
+                        }
+                        .padding(14)
                     }
+                    .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
 
-                    Text(storyOfTheDay.title)
-                        .font(.system(size: 25, weight: .bold, design: .rounded))
-                        .foregroundStyle(KidsTheme.cream)
-
-                    Text(storyOfTheDay.summary)
-                        .font(.system(size: 16, weight: .medium, design: .rounded))
-                        .foregroundStyle(.white.opacity(0.76))
-                        .multilineTextAlignment(.leading)
+                    if appState.ageBand.showsStoryReading {
+                        Text(storyOfTheDay.summary)
+                            .font(.system(size: 15, weight: .medium, design: .rounded))
+                            .foregroundStyle(.white.opacity(0.74))
+                            .multilineTextAlignment(.leading)
+                    } else {
+                        Text("Antippen und zuhören")
+                            .font(.system(size: 17, weight: .bold, design: .rounded))
+                            .foregroundStyle(KidsTheme.gold)
+                    }
 
                     HStack {
                         Image(systemName: progress.isCompleted(storyOfTheDay) ? "checkmark.circle.fill" : "play.circle.fill")
