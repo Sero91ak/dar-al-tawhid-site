@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-013` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-019` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4253
-totalVerifiedEntries: 4253
-loadedEntries: 4253
-uniqueVerifiedReferences: 4253
-missingCount: 1983
+entriesCount: 4268
+totalVerifiedEntries: 4268
+loadedEntries: 4268
+uniqueVerifiedReferences: 4268
+missingCount: 1968
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,7 +42,7 @@ firstMissingReference: 2:4
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-013.json
+letzter Gap-Fill-Batch: entries-gap-06-019.json
 ```
 
 ## Warum kein `entries-batch-05z-117.json`?
@@ -67,9 +67,26 @@ entries-gap-06-010.json   7 Einträge
 entries-gap-06-011.json   8 Einträge
 entries-gap-06-012.json   6 Einträge
 entries-gap-06-013.json   2 Einträge
+entries-gap-06-014.json   3 Einträge
+entries-gap-06-015.json   3 Einträge
+entries-gap-06-016.json   2 Einträge
+entries-gap-06-017.json   2 Einträge
+entries-gap-06-018.json   2 Einträge
+entries-gap-06-019.json   3 Einträge
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `63` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `78` neue eindeutige, geprüfte Referenzen registriert.
+
+## Zuletzt ergänzte Bereiche
+
+```text
+06-014: 2:79, 2:80, 2:81
+06-015: 2:84, 2:85, 2:86
+06-016: 2:88, 2:89
+06-017: 2:97, 2:100
+06-018: 2:106, 2:109
+06-019: 2:111, 2:113, 2:118
+```
 
 ## Aktuell bewusst offen
 
@@ -80,6 +97,8 @@ Der erste weiterhin fehlende Vers ist:
 ```
 
 Frühe offene Referenzen wie `2:4–2:7`, `2:21`, `2:36`, `2:38`, `2:42–2:53`, `2:64`, `2:67`, `2:70` und `2:72` werden nicht künstlich gefüllt. Sie bleiben offen, bis ein konkreter früher Bericht mit belastbarer Zuordnung und ausreichend geprüfter Überlieferungskette vorliegt.
+
+Ebenso gilt für spätere Lücken: Ein vorhandener später Kommentar allein genügt nicht, wenn der zugehörige frühe Bericht oder seine Überlieferungskette für den Eintrag nicht ausreichend abgesichert ist.
 
 ## Gap-Fill-Regel
 
