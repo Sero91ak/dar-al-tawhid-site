@@ -754,3 +754,56 @@ html.is-standalone-pwa :is(.top-shell,.header,.sf-top,.qov-header,.app-bar)::aft
   }
 }
 
+/* APP_TOP_SOLID_LOCK_V1007
+   Installed/native app shells: no blur/milky layer in top chrome or fullscreen backdrops.
+   Bottom navigation glass is intentionally excluded. */
+html.dar-ios-native-app :is(.qov-header,.qov-filter-bar,.qpt-topbar,.top-shell,.header,.header.theme-hero-surface,.sf-top,.app-bar,.view-head,.settings-page-head),
+html.dar-android-native-app :is(.qov-header,.qov-filter-bar,.qpt-topbar,.top-shell,.header,.header.theme-hero-surface,.sf-top,.app-bar,.view-head,.settings-page-head),
+html.is-standalone-pwa :is(.qov-header,.qov-filter-bar,.qpt-topbar,.top-shell,.header,.header.theme-hero-surface,.sf-top,.app-bar,.view-head,.settings-page-head){
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  filter:none!important;
+  background-image:none!important;
+}
+html.dar-ios-native-app .qov-header,
+html.dar-ios-native-app .qov-filter-bar,
+html.dar-android-native-app .qov-header,
+html.dar-android-native-app .qov-filter-bar,
+html.is-standalone-pwa .qov-header,
+html.is-standalone-pwa .qov-filter-bar{
+  background:var(--quran-page-bg,var(--dar-edge-fill,var(--page-cover,var(--bg,#050706))))!important;
+  background-color:var(--quran-page-bg,var(--dar-edge-fill,var(--page-cover,var(--bg,#050706))))!important;
+}
+html.dar-ios-native-app .qpt-topbar,
+html.dar-android-native-app .qpt-topbar,
+html.is-standalone-pwa .qpt-topbar{
+  background:var(--qpt-bg,var(--dar-edge-fill,var(--bg,#03070c)))!important;
+  background-color:var(--qpt-bg,var(--dar-edge-fill,var(--bg,#03070c)))!important;
+}
+html.dar-ios-native-app :is(.qpt-sheet-backdrop,.story-viewer-backdrop,.modal-backdrop),
+html.dar-android-native-app :is(.qpt-sheet-backdrop,.story-viewer-backdrop,.modal-backdrop),
+html.is-standalone-pwa :is(.qpt-sheet-backdrop,.story-viewer-backdrop,.modal-backdrop){
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  filter:none!important;
+}
+@media (display-mode:standalone), (display-mode:fullscreen){
+  .qov-header,.qov-filter-bar,.qpt-topbar,.top-shell,.header,.header.theme-hero-surface,.sf-top,.app-bar,.view-head,.settings-page-head{
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+    filter:none!important;
+    background-image:none!important;
+  }
+  .qov-header,.qov-filter-bar{
+    background:var(--quran-page-bg,var(--dar-edge-fill,var(--page-cover,var(--bg,#050706))))!important;
+  }
+  .qpt-topbar{
+    background:var(--qpt-bg,var(--dar-edge-fill,var(--bg,#03070c)))!important;
+  }
+  .qpt-sheet-backdrop,.story-viewer-backdrop,.modal-backdrop{
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+    filter:none!important;
+  }
+}
+
