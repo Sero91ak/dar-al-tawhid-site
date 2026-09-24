@@ -89,7 +89,90 @@ async function fetchVersionBuild(base) {
   return { url, status, buildId };
 }
 
+function readJsonLocal(relativePath) {
+  return JSON.parse(fs.readFileSync(path.join(ROOT_DIR, relativePath), "utf8"));
+}
+
+function validateKidsQuizCanonicalLocal() {
+  const kids = readJsonLocal("test/kids/data/quiz-kids.json");
+  const canonical = readJsonLocal("data/quiz-questions.json");
+  const map = new Map(canonical.map((q) => [q.id, q]));
+  const items = Array.isArray(kids.items) ? kids.items : [];
+  if (items.length < 34) throw new Error("Kids Quiz: zu wenige geprüfte Fragen.");
+
+  for (const item of items) {
+    const source = map.get(item.canonicalQuizId);
+    if (!source) throw new Error(`Kids Quiz: kanonische Frage fehlt: ${item.canonicalQuizId}`);
+    if (source.status !== "published" || source.reviewStatus !== "approved") {
+      throw new Error(`Kids Quiz: Quelle nicht mehr freigegeben: ${item.canonicalQuizId}`);
+    }
+    if (Array.isArray(source.validationErrors) && source.validationErrors.length) {
+      throw new Error(`Kids Quiz: Validierungsfehler in ${item.canonicalQuizId}`);
+    }
+    if (String(source.source || "") !== String(item.source || "")) {
+      throw new Error(`Kids Quiz: Quellenabweichung bei ${item.canonicalQuizId}`);
+    }
+    if (item.verification !== "approved") {
+      throw new Error(`Kids Quiz: Kinderfassung nicht approved: ${item.id}`);
+    }
+  }
+  console.log(`Kids canonical quiz guard OK — ${items.length} geprüfte Fragen.`);
+}
+
+function validateKidsAuthenticStoriesCanonicalLocal() {
+  const stories = readJsonLocal("test/kids/data/stories-authentic.json");
+  const items = Array.isArray(stories.items) ? stories.items : [];
+  if (items.length < 4) throw new Error("Kids Stories: zu wenige geprüfte Qurʾān-Geschichten.");
+
+  for (const story of items) {
+    if (story.verification !== "approved") {
+      throw new Error(`Kids Stories: Story nicht approved: ${story.id}`);
+    }
+    if (!story.prophetId || !Array.isArray(story.claimIds) || !story.claimIds.length) {
+      throw new Error(`Kids Stories: Claim-Verknüpfung fehlt: ${story.id}`);
+    }
+    const profilePath = `data/prophets/${story.prophetId}.json`;
+    const profile = readJsonLocal(profilePath);
+    const profileStatus = profile.status || profile.profileStatus || "";
+    if (profileStatus !== "approved") {
+      throw new Error(`Kids Stories: Prophetenprofil nicht approved: ${story.prophetId}`);
+    }
+    const claims = new Map((profile.claims || []).map((claim) => [claim.id, claim]));
+    for (const claimId of story.claimIds) {
+      const claim = claims.get(claimId);
+      if (!claim) throw new Error(`Kids Stories: Claim fehlt: ${story.prophetId}/${claimId}`);
+      if (claim.verificationStatus !== "approved") {
+        throw new Error(`Kids Stories: Claim nicht approved: ${story.prophetId}/${claimId}`);
+      }
+      if (claim.evidenceType !== "quran" || claim.grading !== "quran") {
+        throw new Error(`Kids Stories: Claim ist nicht reine Qurʾān-Evidenz: ${story.prophetId}/${claimId}`);
+      }
+    }
+  }
+  console.log(`Kids canonical story guard OK — ${items.length} Qurʾān-Geschichten.`);
+}
+
+function validateKidsDuaCanonicalLocal() {
+  const kids = readJsonLocal("test/kids/data/dua-kids.json");
+  const canonical = readJsonLocal("content/duas/duas.json");
+  const ids = new Set(canonical.map((d) => d.id));
+  const items = Array.isArray(kids.items) ? kids.items : [];
+  for (const item of items) {
+    if (item.verification !== "verified") {
+      throw new Error(`Kids Duʿāʾ: Eintrag nicht verified: ${item.id}`);
+    }
+    if (item.canonicalId && !ids.has(item.canonicalId)) {
+      throw new Error(`Kids Duʿāʾ: kanonischer Eintrag fehlt: ${item.canonicalId}`);
+    }
+    if (!item.source) throw new Error(`Kids Duʿāʾ: Quelle fehlt: ${item.id}`);
+  }
+  console.log(`Kids canonical Duʿāʾ guard OK — ${items.length} geprüfte Einträge.`);
+}
+
 (async function main() {
+  validateKidsQuizCanonicalLocal();
+  validateKidsAuthenticStoriesCanonicalLocal();
+  validateKidsDuaCanonicalLocal();
   console.log(`Dar Test Verify: expect=${TEST_EXPECT_BUILD}`);
   console.log(`public=${publicBase}`);
   console.log(`workers.dev=${workersBase}`);
@@ -158,7 +241,8 @@ async function fetchVersionBuild(base) {
       text.includes("id=\"storyQuestion\"") &&
       text.includes("id=\"parentStoriesDone\"") &&
       text.includes("id=\"openDuaButton\"") &&
-      text.includes("id=\"duaModal\"");
+      text.includes("id=\"duaModal\"") &&
+      text.includes("id=\"authenticStoryList\"");
     console.log(
       `${label} kids: ${url} -> ${status} cf=${cf} marker=${ok}`
     );
@@ -249,6 +333,38 @@ async function fetchVersionBuild(base) {
 
   await verifyKidsQuizData("public", publicBase);
   await verifyKidsQuizData("workers.dev", workersBase);
+
+  async function verifyKidsAuthenticStories(label, base) {
+    const url = `${base}/kids/data/stories-authentic.json?v=${Date.now()}`;
+    const { status, text, cf } = await fetchText(url);
+    let payload = {};
+    try { payload = JSON.parse(text); } catch {}
+    const items = Array.isArray(payload.items) ? payload.items : [];
+    const ok =
+      status === 200 &&
+      payload?.policy?.status === "approved-only" &&
+      items.length >= 4 &&
+      items.every((x) =>
+        x &&
+        x.verification === "approved" &&
+        x.prophetId &&
+        Array.isArray(x.claimIds) &&
+        x.claimIds.length > 0 &&
+        Array.isArray(x.sourceRefs) &&
+        x.sourceRefs.length > 0
+      );
+    console.log(
+      `${label} kids authentic stories: ${url} -> ${status} cf=${cf} items=${items.length} ok=${ok}`
+    );
+    if (!ok) {
+      throw new Error(
+        `${label} geprüfte Kinder-Qurʾān-Geschichten fehlen/ungültig: ${url}`
+      );
+    }
+  }
+
+  await verifyKidsAuthenticStories("public", publicBase);
+  await verifyKidsAuthenticStories("workers.dev", workersBase);
 
   console.log(
     `Dar Test live OK — public und workers.dev liefern identisch ${TEST_EXPECT_BUILD}.`
