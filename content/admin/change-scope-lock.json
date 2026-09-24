@@ -108,6 +108,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quiz-end-back-hang-2026-09-24",
+      "approvedBy": "user-explicit-quiz-beenden-zurueck-haengt-ios-web-alle-apps",
+      "reason": "Nutzer: Quiz-App Beenden und Zurück reagieren nicht und hängen in iOS-App, Web-App und allen aktiven Apps.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift",
+        "ios/DarAlTawhid/DarAlTawhid/FreshWebAppView.swift"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "ios-widgets-restore-build95-ref-2026-09-24",
       "approvedBy": "user-explicit-ios-ipad-widget-white-black-screen-build95",
       "reason": "Nutzer: iOS/iPadOS-Widgets White/Black Screen nach Schattierung; Build-95-Referenz; alte Widget-Versionen entfernen; nur Widget-System, Rest der App unangetastet.",

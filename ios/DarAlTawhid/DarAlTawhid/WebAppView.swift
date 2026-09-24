@@ -1607,6 +1607,69 @@ struct WebAppView: UIViewRepresentable {
             return nil
         }
 
+        func webView(
+            _ webView: WKWebView,
+            runJavaScriptAlertPanelWithMessage message: String,
+            initiatedByFrame frame: WKFrameInfo,
+            completionHandler: @escaping () -> Void
+        ) {
+            presentJSDialog(message: message, confirm: false) { _ in
+                completionHandler()
+            }
+        }
+
+        func webView(
+            _ webView: WKWebView,
+            runJavaScriptConfirmPanelWithMessage message: String,
+            initiatedByFrame frame: WKFrameInfo,
+            completionHandler: @escaping (Bool) -> Void
+        ) {
+            presentJSDialog(message: message, confirm: true, completionHandler)
+        }
+
+        func webView(
+            _ webView: WKWebView,
+            runJavaScriptTextInputPanelWithPrompt prompt: String,
+            defaultText: String?,
+            initiatedByFrame frame: WKFrameInfo,
+            completionHandler: @escaping (String?) -> Void
+        ) {
+            DispatchQueue.main.async {
+                guard let presenter = self.topViewController() else {
+                    completionHandler(nil)
+                    return
+                }
+                let alert = UIAlertController(title: nil, message: prompt, preferredStyle: .alert)
+                alert.addTextField { $0.text = defaultText }
+                alert.addAction(UIAlertAction(title: "Abbrechen", style: .cancel) { _ in
+                    completionHandler(nil)
+                })
+                alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                    completionHandler(alert.textFields?.first?.text)
+                })
+                presenter.present(alert, animated: true)
+            }
+        }
+
+        private func presentJSDialog(message: String, confirm: Bool, _ completion: @escaping (Bool) -> Void) {
+            DispatchQueue.main.async {
+                guard let presenter = self.topViewController() else {
+                    completion(!confirm)
+                    return
+                }
+                let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+                if confirm {
+                    alert.addAction(UIAlertAction(title: "Abbrechen", style: .cancel) { _ in
+                        completion(false)
+                    })
+                }
+                alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                    completion(true)
+                })
+                presenter.present(alert, animated: true)
+            }
+        }
+
         private func isAllowedInternalURL(_ url: URL) -> Bool {
             if url.scheme == "about" {
                 return true
