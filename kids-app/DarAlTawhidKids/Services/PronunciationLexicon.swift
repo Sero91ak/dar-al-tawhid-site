@@ -78,7 +78,7 @@ final class PronunciationLexicon {
     }
 
     private static let fallbackRules: [PronunciationRule] = [
-        .init(stringToReplace: "DĀR AL TAWḤĪD", alias: "Daar at-Tauhiid", ipa: "daːr at.tawˈħiːd"),
+        .init(stringToReplace: "DĀR AL TAWḤĪD", alias: "Daar al Tauhiid", ipa: "daːr al tawˈħiːd"),
         .init(stringToReplace: "Tawḥīd", alias: "Tauhiid", ipa: "tawˈħiːd"),
         .init(stringToReplace: "ʿAqīdah", alias: "A-qiidah", ipa: "ʕaˈqiːda"),
         .init(stringToReplace: "Qurʾān", alias: "Qur-aan", ipa: "qurˈʔaːn"),
