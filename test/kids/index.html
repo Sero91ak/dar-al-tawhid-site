@@ -1267,7 +1267,8 @@ function updateDailyJourney(){
 }
 function updateParentProgress(){
   var storyCount=0;
-  Object.keys(stories).forEach(function(k){
+  var storyIds=Object.keys(stories).concat(authenticStories.map(function(s){return s.id}));
+  Array.from(new Set(storyIds)).forEach(function(k){
     try{if(localStorage.getItem("kids.story."+k)==="1")storyCount++}catch(e){}
   });
   var duaCount=0;
