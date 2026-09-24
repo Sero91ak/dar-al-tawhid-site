@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "policy": {
+    "childExplanation": "Die Erklärung darf vereinfacht werden. Arabischer Wortlaut und Quellenangabe werden nicht frei umformuliert.",
+    "quranAudio": "Qurʾān-Arabisch niemals synthetisch rezitieren.",
+    "status": "verified-only"
+  },
+  "items": [
+    {
+      "id": "dua-knowledge",
+      "ageMin": 4,
+      "ageMax": 10,
+      "type": "quran",
+      "scene": "learn",
+      "symbol": "📚",
+      "title": "Wenn ich lerne",
+      "childPrompt": "Bitte Allah um mehr Wissen.",
+      "arabic": "رَّبِّ زِدْنِي عِلْمًا",
+      "transliteration": "Rabbi zidnī ʿilmā.",
+      "meaning": "Mein Herr, mehre mein Wissen.",
+      "source": "Qurʾān, Ṭā-Hā 20:114",
+      "canonicalId": "dua-032-rabbi-zidni-ilma",
+      "verification": "verified",
+      "quiz": {
+        "question": "Wann passt dieses Duʿāʾ besonders gut?",
+        "answers": [
+          {
+            "label": "Beim Lernen",
+            "correct": true
+          },
+          {
+            "label": "Wenn ich etwas verstecken will",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "dua-parents",
+      "ageMin": 6,
+      "ageMax": 10,
+      "type": "quran",
+      "scene": "family",
+      "symbol": "♡",
+      "title": "Für meine Eltern",
+      "childPrompt": "Bitte Allah um Vergebung für dich, deine Eltern und die Gläubigen.",
+      "arabic": "رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ",
+      "transliteration": "Rabbanā-ghfir lī wa li-wālidayya wa li-l-muʾminīna yawma yaqūmu-l-ḥisāb.",
+      "meaning": "Unser Herr, vergib mir und meinen Eltern und den Gläubigen am Tag, an dem die Abrechnung stattfindet.",
+      "source": "Qurʾān, Ibrāhīm 14:41",
+      "canonicalId": "dua-044-rabbana-ghfir-li-wa-li-walidayya",
+      "verification": "verified",
+      "quiz": {
+        "question": "Für wen bitten wir in diesem Duʿāʾ auch um Vergebung?",
+        "answers": [
+          {
+            "label": "Für unsere Eltern",
+            "correct": true
+          },
+          {
+            "label": "Nur für uns selbst",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "dua-protection",
+      "ageMin": 7,
+      "ageMax": 10,
+      "type": "quran",
+      "scene": "night",
+      "symbol": "☾",
+      "title": "Allah um Schutz bitten",
+      "childPrompt": "Wenn du Schutz vor Einflüsterungen suchst.",
+      "arabic": "رَبِّ أَعُوذُ بِكَ مِنْ هَمَزَاتِ الشَّيَاطِينِ وَأَعُوذُ بِكَ رَبِّ أَن يَحْضُرُونِ",
+      "transliteration": "Rabbi aʿūdhu bika min hamazāti-sh-shayāṭīn, wa aʿūdhu bika rabbi an yaḥḍurūn.",
+      "meaning": "Mein Herr, ich suche Zuflucht bei Dir vor den Einflüsterungen der Shayāṭīn, und ich suche Zuflucht bei Dir, mein Herr, davor, dass sie bei mir anwesend sind.",
+      "source": "Qurʾān, al-Muʾminūn 23:97–98",
+      "canonicalId": "dua-079-rabbi-audhu-bika-min-hamazati-sh-shayatin",
+      "verification": "verified",
+      "quiz": {
+        "question": "Bei wem suchen wir Schutz?",
+        "answers": [
+          {
+            "label": "Bei Allah",
+            "correct": true
+          },
+          {
+            "label": "Bei Glücksbringern",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "dua-sleep",
+      "ageMin": 4,
+      "ageMax": 10,
+      "type": "sunnah",
+      "scene": "sleep",
+      "symbol": "🌙",
+      "title": "Vor dem Schlafen",
+      "childPrompt": "Dieses Duʿāʾ sagte der Prophet ﷺ, wenn er sich zum Schlafen legte.",
+      "arabic": "اللَّهُمَّ بِاسْمِكَ أَحْيَا وَأَمُوتُ",
+      "transliteration": "Allāhumma bismika aḥyā wa amūt.",
+      "meaning": "O Allah, in Deinem Namen lebe ich und sterbe ich.",
+      "source": "Ṣaḥīḥ al-Buḫārī, Nr. 7394",
+      "sourceUrl": "https://dorar.net/h/q5F8hPon",
+      "verification": "verified",
+      "quiz": {
+        "question": "Wann sagen wir dieses Duʿāʾ?",
+        "answers": [
+          {
+            "label": "Vor dem Schlafen",
+            "correct": true
+          },
+          {
+            "label": "Vor dem Spielen",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "dua-wake",
+      "ageMin": 4,
+      "ageMax": 10,
+      "type": "sunnah",
+      "scene": "morning",
+      "symbol": "☀",
+      "title": "Nach dem Aufwachen",
+      "childPrompt": "Nach dem Aufwachen loben wir Allah.",
+      "arabic": "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
+      "transliteration": "Al-ḥamdu lillāhi-lladhī aḥyānā baʿda mā amātanā wa ilayhi-n-nushūr.",
+      "meaning": "Alles Lob gehört Allah, Der uns lebendig gemacht hat, nachdem Er uns sterben ließ; und zu Ihm ist die Auferstehung.",
+      "source": "Ṣaḥīḥ al-Buḫārī, Nr. 7394",
+      "sourceUrl": "https://dorar.net/h/q5F8hPon",
+      "verification": "verified",
+      "quiz": {
+        "question": "Was machen wir mit diesem Duʿāʾ?",
+        "answers": [
+          {
+            "label": "Wir loben Allah nach dem Aufwachen",
+            "correct": true
+          },
+          {
+            "label": "Wir bitten um ein Spielzeug",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "dua-eating",
+      "ageMin": 4,
+      "ageMax": 10,
+      "type": "sunnah",
+      "scene": "food",
+      "symbol": "🍽️",
+      "title": "Vor dem Essen",
+      "childPrompt": "Bevor du isst, nenne Allahs Namen.",
+      "arabic": "بِسْمِ اللَّهِ",
+      "transliteration": "Bismillāh.",
+      "meaning": "Im Namen Allahs.",
+      "source": "Jāmiʿ at-Tirmiḏī, Nr. 1858; Ḥadīṯ ḥasan ṣaḥīḥ",
+      "sourceUrl": "https://dorar.net/h/b1RqSELr",
+      "verification": "verified",
+      "olderNote": {
+        "ageMin": 7,
+        "title": "Wenn du es am Anfang vergessen hast",
+        "arabic": "بِسْمِ اللَّهِ أَوَّلَهُ وَآخِرَهُ",
+        "transliteration": "Bismillāhi awwalahu wa ākhirahu.",
+        "meaning": "Im Namen Allahs, am Anfang und am Ende."
+      },
+      "quiz": {
+        "question": "Was sagen wir vor dem Essen?",
+        "answers": [
+          {
+            "label": "Bismillāh",
+            "correct": true
+          },
+          {
+            "label": "Nichts",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "dua-afiyah",
+      "ageMin": 8,
+      "ageMax": 10,
+      "type": "sunnah",
+      "scene": "morning",
+      "symbol": "✦",
+      "title": "Um Vergebung und Wohlergehen",
+      "childPrompt": "Eine kurze tägliche Bitte um Vergebung und Wohlergehen.",
+      "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ",
+      "transliteration": "Allāhumma innī asʾaluka-l-ʿafwa wa-l-ʿāfiyata fi-d-dunyā wa-l-ākhirah.",
+      "meaning": "O Allah, ich bitte Dich um Vergebung und Wohlergehen im Diesseits und im Jenseits.",
+      "source": "Sunan Abī Dāwūd, Nr. 5074; Sunan Ibn Māǧah, Nr. 3871",
+      "canonicalId": "dua-065-allahumma-inni-asaluka-al-afwa-wal-afiyah",
+      "verification": "verified",
+      "quiz": {
+        "question": "Worum bitten wir Allah in diesem Duʿāʾ?",
+        "answers": [
+          {
+            "label": "Um Vergebung und Wohlergehen",
+            "correct": true
+          },
+          {
+            "label": "Darum, besser als andere zu sein",
+            "correct": false
+          }
+        ]
+      }
+    }
+  ]
+}
