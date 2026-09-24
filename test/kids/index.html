@@ -169,6 +169,30 @@ radial-gradient(ellipse at 88% 100%,#dfba7f 0 27%,transparent 28%)}
 .resume span{font-size:12px;color:var(--muted);display:block;margin-top:3px}
 .resume .go{margin-left:auto;font-size:22px;color:var(--soft)}
 .gentle-note{text-align:center;color:var(--soft);font-size:13px;line-height:1.5;padding:19px 20px 0}
+.daily-journey{margin:16px 0 4px;border:1px solid rgba(226,189,114,.18);background:linear-gradient(145deg,rgba(226,189,114,.08),rgba(255,255,255,.035));border-radius:26px;padding:15px}
+.daily-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.daily-head strong{font-size:16px}.daily-head span{font-size:10px;color:var(--soft);font-weight:850}
+.daily-steps{display:grid;gap:8px}
+.daily-step{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.045);border-radius:18px;padding:11px 12px;display:flex;align-items:center;gap:12px;text-align:left;cursor:pointer}
+.daily-step .dnum{width:32px;height:32px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.07);font-size:12px;font-weight:950}
+.daily-step .dtxt{flex:1}.daily-step .dtxt strong{display:block;font-size:13px}.daily-step .dtxt small{display:block;margin-top:2px;color:var(--soft);font-size:10px}
+.daily-step .dstate{font-size:17px;color:var(--soft)}
+.daily-step.done{border-color:rgba(82,196,132,.22);background:rgba(82,196,132,.07)}
+.daily-step.done .dnum{background:rgba(82,196,132,.18);color:#caffe0}
+.daily-step.current{border-color:rgba(226,189,114,.24);background:rgba(226,189,114,.08)}
+.daily-start{width:100%;margin-top:11px;border:0;border-radius:17px;min-height:48px;background:var(--gold);color:#102030;font-weight:950;cursor:pointer}
+.story-question{display:none;margin-top:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.045);border-radius:24px;padding:14px}
+.story-question.show{display:block}
+.story-question .sq-kicker{font-size:10px;font-weight:900;letter-spacing:.1em;color:var(--gold);text-align:center}
+.story-question h3{text-align:center;font-size:20px;line-height:1.25;margin:8px 0 12px}
+.story-answer-grid{display:grid;gap:9px}
+.story-answer{min-height:58px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.055);border-radius:18px;padding:11px 13px;font-weight:850;text-align:left;cursor:pointer}
+.story-answer.correct{background:rgba(82,196,132,.14);border-color:rgba(82,196,132,.32)}
+.story-answer.wrong{background:rgba(235,83,83,.14);border-color:rgba(235,83,83,.32)}
+.story-question-feedback{text-align:center;min-height:28px;margin-top:9px;font-size:12px;font-weight:850}
+.story-question-feedback.good{color:#caffe0}.story-question-feedback.bad{color:#ffc3c3}
+.app[data-age="4–5"] .daily-step{min-height:64px}.app[data-age="4–5"] .daily-step .dtxt strong{font-size:16px}
+.app[data-age="4–5"] .story-question h3{font-size:25px}.app[data-age="4–5"] .story-answer{min-height:72px;font-size:18px}
 
 .page-head{margin:7px 1px 18px}
 .page-head .kicker{font-size:11px;font-weight:900;letter-spacing:.15em;color:var(--gold)}
@@ -474,6 +498,15 @@ html,body{background:#06131f!important}
         </div>
       </div>
 
+      <div id="dailyJourney" class="daily-journey">
+        <div class="daily-head">
+          <strong>Deine heutige Reise</strong>
+          <span id="dailyJourneyCount">0 von 3 geschafft</span>
+        </div>
+        <div id="dailySteps" class="daily-steps"></div>
+        <button id="dailyStart" class="daily-start">Reise starten</button>
+      </div>
+
       <div class="section-title">Was möchtest du machen?</div>
       <div class="big-choice-grid">
         <button class="choice story" data-story="coin">
@@ -683,7 +716,13 @@ html,body{background:#06131f!important}
       </div>
       <div>
         <button id="storyPlay" class="primary">▶ Geschichte hören</button>
-        <button id="storyDone" class="secondary">○ Als gehört markieren</button>
+        <button id="storyDone" class="secondary">○ Frage beantworten</button>
+        <div id="storyQuestion" class="story-question">
+          <div class="sq-kicker">HAST DU GUT ZUGEHÖRT?</div>
+          <h3 id="storyQuestionText"></h3>
+          <div id="storyQuestionAnswers" class="story-answer-grid"></div>
+          <div id="storyQuestionFeedback" class="story-question-feedback"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -844,6 +883,29 @@ var stories={
   }
 };
 
+var storyQuestions={
+  coin:{
+    "4–5":{question:"Soll Adam die gefundene Münze einfach behalten?",answers:[{label:"Ja",correct:false},{label:"Nein",correct:true}],success:"Richtig. Die Münze gehört jemand anderem.",retry:"Denk noch einmal an die Geschichte."},
+    "6–8":{question:"Was war die ehrliche Handlung?",answers:[{label:"Nach dem Besitzer suchen",correct:true},{label:"Die Münze behalten",correct:false}],success:"Richtig. Adam suchte nach dem Besitzer.",retry:"Hör noch einmal: Wem gehörte die Münze?"},
+    "9–10":{question:"Was zeigt Adams Verhalten am besten?",answers:[{label:"Ehrlichkeit auch ohne Zuschauer",correct:true},{label:"Nur helfen, wenn jemand zusieht",correct:false},{label:"Gefundene Dinge gehören automatisch mir",correct:false}],success:"Richtig. Ehrlichkeit gilt auch, wenn niemand zusieht.",retry:"Denk an die Botschaft der Geschichte."}
+  },
+  water:{
+    "4–5":{question:"War es gut, dass Maryam ihrer Schwester Wasser gab?",answers:[{label:"Ja",correct:true},{label:"Nein",correct:false}],success:"Ja. Helfen ist gutes Benehmen.",retry:"Denk an das Lächeln ihrer Schwester."},
+    "6–8":{question:"Was lernte Maryam?",answers:[{label:"Aufmerksam sein und helfen",correct:true},{label:"Nur an sich selbst denken",correct:false}],success:"Richtig. Kleine Hilfe kann viel bedeuten.",retry:"Was hat Maryam für ihre Schwester getan?"},
+    "9–10":{question:"Welche Aussage passt zur Geschichte?",answers:[{label:"Gutes Benehmen zeigt sich oft in kleinen Handlungen",correct:true},{label:"Gute Taten zählen nur mit Lob",correct:false},{label:"Man hilft nur nach Aufforderung",correct:false}],success:"Richtig. Kleine gute Handlungen gehören zu gutem Adab.",retry:"Denk an die kleine Handlung am Tisch."}
+  },
+  helper:{
+    "4–5":{question:"War es gut, dass Yusuf aufgeräumt hat?",answers:[{label:"Ja",correct:true},{label:"Nein",correct:false}],success:"Richtig. Yusuf half, obwohl niemand ihn lobte.",retry:"Denk noch einmal an die Bücher und Stifte."},
+    "6–8":{question:"Warum half Yusuf?",answers:[{label:"Weil die gute Tat selbst wichtig ist",correct:true},{label:"Nur damit er gelobt wird",correct:false}],success:"Richtig. Er erwartete keinen Applaus.",retry:"Was sagte Yusuf über gute Taten?"},
+    "9–10":{question:"Welche Haltung zeigt Yusuf?",answers:[{label:"Gutes tun ohne Lob zu erwarten",correct:true},{label:"Nur helfen, wenn die Lehrerin zusieht",correct:false},{label:"Arbeit immer anderen überlassen",correct:false}],success:"Richtig. Eine gute Tat braucht keinen Applaus.",retry:"Denk an die Botschaft am Ende."}
+  },
+  kindword:{
+    "4–5":{question:"War Hamzas freundliche Frage eine gute Sache?",answers:[{label:"Ja",correct:true},{label:"Nein",correct:false}],success:"Ja. Ein gutes Wort kann helfen.",retry:"Denk an das neue Kind auf dem Hof."},
+    "6–8":{question:"Was half dem neuen Kind?",answers:[{label:"Ein freundliches Wort",correct:true},{label:"Ignoriert zu werden",correct:false}],success:"Richtig. Wenige freundliche Worte können viel verändern.",retry:"Was fragte Hamza das neue Kind?"},
+    "9–10":{question:"Was ist die wichtigste Botschaft?",answers:[{label:"Ein gutes Wort kann viel bewirken",correct:true},{label:"Nur lange Reden helfen",correct:false},{label:"Neue Kinder sollte man allein lassen",correct:false}],success:"Richtig. Ein gutes Wort kann klein sein und trotzdem viel verändern.",retry:"Denk an Hamzas kurze Frage."}
+  }
+};
+
 var quizQuestions={
   "4–5":[
     {id:"q45-creation",scene:"🌙",question:"Allah hat den Mond und die Sterne erschaffen. Stimmt das?",type:"yesno",answers:[{label:"Ja",icon:"✓",correct:true},{label:"Nein",icon:"✕",correct:false}],success:"Ja. Allah ist der Schöpfer.",retry:"Hör noch einmal gut zu."},
@@ -922,6 +984,7 @@ var lastWordScore=0;
 var speech=window.speechSynthesis;
 var speaking=false;
 var currentStoryKey="coin";
+var storyQuestionPassed=false;
 var currentQuiz=[];
 var currentQuizIndex=0;
 var quizLocked=false;
@@ -931,6 +994,58 @@ function pad3(n){return String(n).padStart(3,"0")}
 function padAyah(n){return String(n).padStart(3,"0")}
 function audioUrl(surah,ayah){
   return "https://everyayah.com/data/Husary_128kbps/"+pad3(surah)+padAyah(ayah)+".mp3";
+}
+function todayKey(){
+  var d=new Date();
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+function dailyStorageKey(step){return "kids.daily."+todayKey()+"."+step}
+function dailyDone(step){
+  try{return localStorage.getItem(dailyStorageKey(step))==="1"}catch(e){return false}
+}
+function markDailyDone(step){
+  try{localStorage.setItem(dailyStorageKey(step),"1")}catch(e){}
+  updateDailyJourney();
+}
+function dailyPlan(){
+  if(age==="4–5")return[
+    {id:"story",title:"Eine Geschichte",hint:"zuhören & eine Frage lösen",icon:"🎧"},
+    {id:"quiz",title:"Ein kleines Quiz",hint:"hören & tippen",icon:"⭐"}
+  ];
+  return[
+    {id:"story",title:"Eine Geschichte",hint:"zuhören & verstehen",icon:"🎧"},
+    {id:"quiz",title:"Quiz",hint:"Wissen prüfen",icon:"⭐"},
+    {id:"quran",title:"Qurʾān",hint:"eine Āyah lernen",icon:"📖"}
+  ];
+}
+function updateDailyJourney(){
+  var plan=dailyPlan();
+  var done=plan.filter(function(s){return dailyDone(s.id)}).length;
+  var box=document.getElementById("dailySteps");
+  var count=document.getElementById("dailyJourneyCount");
+  var start=document.getElementById("dailyStart");
+  if(!box||!count||!start)return;
+  count.textContent=done+" von "+plan.length+" geschafft";
+  var firstOpen=plan.findIndex(function(s){return !dailyDone(s.id)});
+  box.innerHTML="";
+  plan.forEach(function(s,i){
+    var b=document.createElement("button");
+    b.className="daily-step"+(dailyDone(s.id)?" done":(i===firstOpen?" current":""));
+    b.innerHTML='<span class="dnum">'+(dailyDone(s.id)?"✓":(i+1))+'</span><span class="dtxt"><strong>'+s.icon+" "+s.title+'</strong><small>'+s.hint+'</small></span><span class="dstate">'+(dailyDone(s.id)?"✓":"›")+'</span>';
+    b.addEventListener("click",function(){launchDailyStep(s.id)});
+    box.appendChild(b);
+  });
+  start.textContent=done===plan.length?"✓ Für heute geschafft":"Reise fortsetzen";
+}
+function launchDailyStep(step){
+  if(step==="story"){openStory("coin");return}
+  if(step==="quiz"){openQuiz();return}
+  if(step==="quran"){showTab("quran");setTimeout(function(){openSurah(112,0,"learn")},220)}
+}
+function launchNextDailyStep(){
+  var plan=dailyPlan();
+  var next=plan.find(function(s){return !dailyDone(s.id)});
+  if(next)launchDailyStep(next.id);
 }
 function showTab(name){
   document.querySelectorAll(".view").forEach(function(v){v.classList.remove("active")});
@@ -947,6 +1062,13 @@ document.querySelectorAll("[data-go]").forEach(function(b){
       setTimeout(function(){openQuranRef(b.dataset.openVerse)},250);
     }
   });
+});
+document.getElementById("dailyStart").addEventListener("click",function(){
+  if(dailyPlan().every(function(s){return dailyDone(s.id)})){
+    quizSpeak("Sehr gut. Deine Reise für heute ist geschafft.");
+    return;
+  }
+  launchNextDailyStep();
 });
 
 function renderKidsSurahs(){
@@ -1435,6 +1557,7 @@ function completeAyahPractice(){
   renderWordCoach();
   updateLearnStatus("✓ Sehr gut! Die Āyah ist geschafft.",false,"success");
   setLessonStep("done");
+  markDailyDone("quran");
   var btn=document.getElementById("speakAlong");
   btn.textContent="✓ GESCHAFFT";
   btn.classList.add("active");
@@ -1912,6 +2035,7 @@ function renderQuizFinish(){
     '<p>Du hast '+quizCorrectCount+' von '+currentQuiz.length+' Fragen richtig gelöst.</p>'+
     '<button id="quizAgain" class="primary">Noch einmal spielen</button></div>';
   document.getElementById("quizAgain").addEventListener("click",openQuiz);
+  markDailyDone("quiz");
   quizSpeak("Sehr gut. Du hast das Quiz geschafft.");
 }
 document.getElementById("openQuizButton").addEventListener("click",openQuiz);
@@ -1923,7 +2047,10 @@ function openStory(key){
   document.getElementById("storyBigTitle").textContent=s.title;
   document.getElementById("storyPlayerTime").textContent=s.time;
   document.getElementById("storyCategory").textContent=s.category;
-  document.getElementById("storyDone").textContent=localStorage.getItem("kids.story."+key)==="1"?"✓ Schon geschafft":"○ Als gehört markieren";
+  storyQuestionPassed=false;
+  document.getElementById("storyDone").textContent=localStorage.getItem("kids.story."+key)==="1"?"✓ Frage noch einmal":"○ Frage beantworten";
+  document.getElementById("storyQuestion").classList.remove("show");
+  document.getElementById("storyQuestionFeedback").textContent="";
   document.getElementById("storyModal").classList.add("open");
 }
 document.querySelectorAll("[data-story]").forEach(function(el){el.addEventListener("click",function(){openStory(el.dataset.story)})});
@@ -1945,9 +2072,48 @@ document.getElementById("storyPlay").addEventListener("click",function(){
   document.getElementById("storyWave").textContent="≋≋";
   speech.speak(u);
 });
+function renderStoryQuestion(){
+  var s=storyQuestions[currentStoryKey]||storyQuestions.coin;
+  var q=s[age]||s["6–8"];
+  var panel=document.getElementById("storyQuestion");
+  var text=document.getElementById("storyQuestionText");
+  var answers=document.getElementById("storyQuestionAnswers");
+  var feedback=document.getElementById("storyQuestionFeedback");
+  panel.classList.add("show");
+  text.textContent=q.question;
+  feedback.textContent="";
+  feedback.className="story-question-feedback";
+  answers.innerHTML="";
+  q.answers.forEach(function(a){
+    var b=document.createElement("button");
+    b.className="story-answer";
+    b.textContent=a.label;
+    b.addEventListener("click",function(){
+      if(storyQuestionPassed)return;
+      if(a.correct){
+        storyQuestionPassed=true;
+        b.classList.add("correct");
+        feedback.className="story-question-feedback good";
+        feedback.textContent="✓ "+q.success;
+        localStorage.setItem("kids.story."+currentStoryKey,"1");
+        document.getElementById("storyDone").textContent="✓ Verstanden";
+        markDailyDone("story");
+        quizSpeak(q.success);
+      }else{
+        b.classList.add("wrong");
+        feedback.className="story-question-feedback bad";
+        feedback.textContent=q.retry;
+        quizSpeak(q.retry);
+        setTimeout(function(){b.classList.remove("wrong")},1100);
+      }
+    });
+    answers.appendChild(b);
+  });
+  setTimeout(function(){quizSpeak(q.question)},150);
+}
 document.getElementById("storyDone").addEventListener("click",function(){
-  localStorage.setItem("kids.story."+currentStoryKey,"1");
-  this.textContent="✓ Schon geschafft";
+  stopSpeech();
+  renderStoryQuestion();
 });
 
 document.querySelectorAll("[data-close]").forEach(function(b){
@@ -1969,6 +2135,7 @@ function setAge(a){
   document.getElementById("ageHelp").textContent=ageHelp[a]||"";
   var app=document.querySelector(".app");
   if(app)app.setAttribute("data-age",a);
+  updateDailyJourney();
   if(a==="4–5"){
     document.querySelectorAll(".quran-mini-note").forEach(function(el){el.textContent="1. Hören. 2. Das große Wort sprechen. 3. Grün? Dann kommt das nächste Wort."});
   }else if(a==="6–8"){
@@ -1993,6 +2160,7 @@ quranAudio.addEventListener("error",function(){
 });
 
 setAge(age);
+updateDailyJourney();
 updateMinutes();
 updateResume();
 fetchCatalog();
