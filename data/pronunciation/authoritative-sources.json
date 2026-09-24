@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "id": "dar-al-tawhid-pronunciation-authorities",
+  "updatedAt": "2026-09-24",
+  "policy": {
+    "claim": "No external catalogue can guarantee a single 100% pronunciation for every Arabic name/term because connected speech, case endings, dialect/allophony and brand readings can differ.",
+    "hierarchy": [
+      "brand-owner-approved override for exact DĀR AL TAWḤĪD product/brand strings",
+      "Classical/Standard Arabic phonology",
+      "Qurʾānic phonetic/transcription reference where relevant to lexical forms",
+      "scientific romanization standard for spelling/transliteration only",
+      "pedagogical sources only as secondary confirmation"
+    ],
+    "quranRecitation": "real-recording-only"
+  },
+  "sources": [
+    {
+      "id": "ipa-official",
+      "authorityTier": 1,
+      "title": "International Phonetic Alphabet / official IPA chart",
+      "publisher": "International Phonetic Association",
+      "url": "https://www.internationalphoneticassociation.org/content/ipa-chart",
+      "use": [
+        "IPA symbol definitions",
+        "phonetic notation inventory"
+      ],
+      "notFor": [
+        "word-level Arabic lexical pronunciation by itself"
+      ],
+      "licenseNote": "Official IPA chart is published by the International Phonetic Association; do not copy chart layout/audio into product assets without following its stated licence."
+    },
+    {
+      "id": "jipa-arabic-1990",
+      "authorityTier": 1,
+      "title": "Arabic — Illustration of the IPA",
+      "authors": [
+        "Robin Thelwall",
+        "M. Akram Sa'Adeddin"
+      ],
+      "publisher": "Journal of the International Phonetic Association / Cambridge University Press",
+      "year": 1990,
+      "doi": "10.1017/S0025100300004266",
+      "url": "https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/arabic/D54098F7BBE7821861A80617B872FA24",
+      "use": [
+        "Standard Arabic consonant/vowel phonology",
+        "broad IPA reference"
+      ]
+    },
+    {
+      "id": "quranic-arabic-corpus-phonetic",
+      "authorityTier": 2,
+      "title": "Quranic Arabic Corpus — Phonetic Transcription",
+      "publisher": "Quranic Arabic Corpus",
+      "url": "https://corpus.quran.com/documentation/phonetic.jsp",
+      "basis": "Arabic Through the Quran, Alan Jones, Islamic Texts Society, 2008",
+      "use": [
+        "classical/Qurʾānic letter transcription",
+        "long vowels",
+        "shadda",
+        "hamza",
+        "hamzat al-waṣl context"
+      ],
+      "caveat": "Used for linguistic/transcription verification only. Qurʾān recitation remains real-recording-only."
+    },
+    {
+      "id": "ala-lc-arabic-2012",
+      "authorityTier": 2,
+      "title": "ALA-LC Romanization Table — Arabic",
+      "publisher": "Library of Congress / American Library Association",
+      "year": 2012,
+      "url": "https://www.loc.gov/catdir/cpso/romanization/arabic.pdf",
+      "indexUrl": "https://www.loc.gov/catdir/cpso/roman",
+      "use": [
+        "canonical Latin transliteration cross-check"
+      ],
+      "notFor": [
+        "audio pronunciation",
+        "connected-speech phonetics"
+      ]
+    },
+    {
+      "id": "madinah-sun-moon",
+      "authorityTier": 3,
+      "title": "Arabic definite article — sun and moon letters",
+      "publisher": "Madinah Arabic",
+      "url": "https://madinaharabic.com/free-content/grammar/lesson-3/part-7",
+      "use": [
+        "secondary pedagogical confirmation of al- assimilation before sun letters"
+      ],
+      "caveat": "Secondary pedagogical source; primary phonetic authority remains JIPA/IPA."
+    }
+  ]
+}
