@@ -301,6 +301,29 @@ input[type=range]{width:100%;accent-color:var(--gold)}
 .mic-level{height:100%;width:3%;border-radius:999px;background:linear-gradient(90deg,#5bc78b,#9de3b9,#e6c678);transition:width .06s linear}
 .recording-playback{display:none;width:100%;margin-top:9px;border:1px solid rgba(115,201,193,.22);background:rgba(115,201,193,.09);color:#c9fff3;border-radius:14px;padding:10px;font-size:11px;font-weight:850;cursor:pointer}
 .recording-playback.show{display:block}
+.word-coach{margin:6px auto 20px;max-width:610px;border:1px solid rgba(255,255,255,.10);background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035));border-radius:24px;padding:14px 16px;text-align:center}
+.word-coach .coach-kicker{font-size:10px;font-weight:900;letter-spacing:.12em;color:var(--soft)}
+.word-coach .coach-word{font-family:"Geeza Pro","Noto Naskh Arabic","Traditional Arabic",serif;direction:rtl;font-size:clamp(38px,10vw,62px);line-height:1.45;margin:3px 0 2px}
+.word-coach .coach-help{font-size:11px;color:var(--muted);font-weight:750}
+.word-coach.good{border-color:rgba(82,196,132,.28);background:rgba(82,196,132,.08)}
+.word-coach.near{border-color:rgba(239,172,76,.34);background:rgba(239,172,76,.09)}
+.word-coach.bad{border-color:rgba(235,83,83,.36);background:rgba(235,83,83,.10)}
+.word-progress{display:flex;justify-content:center;gap:5px;margin-top:10px;flex-wrap:wrap}
+.word-progress span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.14)}
+.word-progress span.done{background:#58ca8c}
+.word-progress span.now{background:#e3bb70;box-shadow:0 0 0 4px rgba(227,187,112,.09)}
+.word-progress span.near{background:#e9a74c}
+.word-progress span.bad{background:#eb5d5d}
+.learn-row button:disabled{opacity:.34;filter:saturate(.35);cursor:not-allowed}
+.learn-row button.next-ready{background:rgba(82,196,132,.16);color:#d7ffe6;border-color:rgba(82,196,132,.30)}
+.app[data-age="4–5"] .ayah-ar{font-size:clamp(48px,13vw,76px);line-height:1.95}
+.app[data-age="4–5"] .ayah-tr,.app[data-age="4–5"] .ayah-de,.app[data-age="4–5"] .ayah-no{display:none}
+.app[data-age="4–5"] .word-coach .coach-word{font-size:clamp(52px,14vw,82px)}
+.app[data-age="4–5"] .learn-row{grid-template-columns:.72fr 1.7fr .72fr}
+.app[data-age="4–5"] .learn-row button{min-height:58px;font-size:13px}
+.app[data-age="4–5"] .big-play{min-height:62px;font-size:18px}
+.app[data-age="6–8"] .ayah-ar{font-size:clamp(44px,11.5vw,70px)}
+.app[data-age="9–10"] .ayah-ar{font-size:clamp(38px,9.5vw,60px)}
 @keyframes micRing{70%{box-shadow:0 0 0 9px rgba(115,201,193,0)}100%{box-shadow:0 0 0 0 rgba(115,201,193,0)}}
 .ayah-tr{font-size:14px;line-height:1.5;color:#d8e8ed;margin:17px auto 0;max-width:560px;font-weight:700}
 .ayah-de{font-size:12px;line-height:1.5;color:var(--muted);margin:10px auto 0;max-width:540px}
@@ -553,6 +576,12 @@ input[type=range]{width:100%;accent-color:var(--gold)}
         <div class="ayah-stage">
           <div id="ayahBox" class="ayah-box">
             <div id="learnStatus" class="learn-status">🎧 Erst hören</div>
+            <div id="wordCoach" class="word-coach">
+              <div class="coach-kicker">DEIN WORT</div>
+              <div id="coachWord" class="coach-word">—</div>
+              <div id="coachHelp" class="coach-help">Tippe auf „Mitsprechen“ und sprich dieses Wort.</div>
+              <div id="wordProgress" class="word-progress"></div>
+            </div>
             <div id="ayahAr" class="ayah-ar"><span class="loader">Qurʾān wird geladen …</span></div>
             <div id="micMonitor" class="mic-monitor">
               <div class="mic-top">
@@ -574,7 +603,7 @@ input[type=range]{width:100%;accent-color:var(--gold)}
             <button id="speakAlong">🎙 Jetzt mitsprechen</button>
             <button id="nextAyah">Weiter ›</button>
           </div>
-          <div class="quran-mini-note">Die App nimmt deinen Versuch auf und verfolgt die Āyah Wort für Wort. Grün = erkannt, Gold = gerade gesprochen, Rot = hier noch einmal. Danach kannst du deine eigene Aufnahme anhören.</div>
+          <div class="quran-mini-note">Wort für Wort: Grün = richtig und weiter. Orange = fast richtig, bitte wiederholen. Rot = falsch, die Übung bleibt an diesem Wort stehen. Erst wenn jedes Wort grün ist, wird „Weiter“ freigeschaltet.</div>
         </div>
       </div>
     </div>
@@ -662,6 +691,14 @@ var recordingClockTimer=0;
 var audioContext=null;
 var analyser=null;
 var meterRaf=0;
+var practiceActive=false;
+var practiceRequired=false;
+var ayahPassed=false;
+var currentPracticeWord=0;
+var wordStates=[];
+var recognitionRestartTimer=0;
+var lastWordHeard="";
+var lastWordScore=0;
 var speech=window.speechSynthesis;
 var speaking=false;
 var currentStoryKey="coin";
@@ -740,9 +777,27 @@ function normalizeSurah(data){
     verses:verses
   };
 }
+function stopWordRecognition(){
+  clearTimeout(recognitionRestartTimer);
+  recognitionRestartTimer=0;
+  recitationListening=false;
+  if(recitationRecognition){
+    try{recitationRecognition.onend=null;recitationRecognition.stop()}catch(e){}
+    try{recitationRecognition.abort()}catch(e2){}
+  }
+  recitationRecognition=null;
+}
+function stopPractice(keepRecording){
+  practiceActive=false;
+  stopWordRecognition();
+  if(!keepRecording)stopRecordingCapture();
+  var btn=document.getElementById("speakAlong");
+  btn.classList.remove("active","mic-live");
+  if(!ayahPassed)btn.textContent="🎙 Jetzt mitsprechen";
+}
 function stopQuran(){
   clearTimeout(speakAlongTimer);
-  stopRecitationRecognition();
+  stopPractice(false);
   try{quranAudio.pause()}catch(e){}
   quranAudio.removeAttribute("src");
   quranAudio.load();
@@ -750,14 +805,16 @@ function stopQuran(){
   recitationState="idle";
   recitationMatched=0;
   recitationWrong=-1;
+  currentPracticeWord=0;
+  wordStates=[];
+  ayahPassed=false;
   updateLearnStatus("🎧 Erst hören",false);
   document.getElementById("ayahPlay").textContent="▶ Āyah anhören";
-  var speakBtn=document.getElementById("speakAlong");
-  speakBtn.classList.remove("active","mic-live");
-  speakBtn.textContent="🎙 Jetzt mitsprechen";
+  document.getElementById("speakAlong").textContent="🎙 Jetzt mitsprechen";
 }
 function openSurah(id,ayahIndex,mode){
   stopQuran();
+  practiceRequired=(mode==="learn");
   document.getElementById("quranModal").classList.add("open");
   document.getElementById("ayahAr").innerHTML='<span class="loader">Qurʾān wird geladen …</span>';
   document.getElementById("ayahTr").textContent="";
@@ -768,7 +825,6 @@ function openSurah(id,ayahIndex,mode){
     currentAyahIndex=Math.max(0,Math.min(Number(ayahIndex)||0,currentSurah.verses.length-1));
     quranMode=mode||"listen";
     renderAyah();
-    if(quranMode==="learn")document.getElementById("speakAlong").classList.add("active");
     saveQuranResume();
   }).catch(function(){
     document.getElementById("ayahAr").textContent="Diese Sūrah konnte gerade nicht geladen werden.";
@@ -779,6 +835,45 @@ function openQuranRef(ref){
   var s=Number(parts[0]||1),a=Number(parts[1]||1);
   openSurah(s,Math.max(0,a-1),"learn");
 }
+function setNextLock(){
+  var next=document.getElementById("nextAyah");
+  var locked=practiceRequired&&!ayahPassed;
+  next.disabled=locked;
+  next.classList.toggle("next-ready",!locked&&practiceRequired);
+  next.textContent=locked?"🔒 Weiter":"Weiter ›";
+}
+function renderWordCoach(){
+  var words=rawAyahWords();
+  var coach=document.getElementById("wordCoach");
+  var help=document.getElementById("coachHelp");
+  var box=document.getElementById("wordCoach");
+  var dots=document.getElementById("wordProgress");
+  box.classList.remove("good","near","bad");
+  if(!words.length){
+    coach.textContent="—";help.textContent="";dots.innerHTML="";return;
+  }
+  var idx=Math.min(currentPracticeWord,words.length-1);
+  coach.innerHTML=renderWordLetters(words[idx],lastWordHeard,lastWordScore<.62&&lastWordHeard?"wrong":"current");
+  if(ayahPassed){
+    coach.textContent="✓";help.textContent="Āyah geschafft";box.classList.add("good");
+  }else if(wordStates[idx]==="red"){
+    help.textContent="Dieses Wort ist noch falsch. Wiederhole es.";box.classList.add("bad");
+  }else if(wordStates[idx]==="orange"){
+    help.textContent="Fast richtig. Sprich dasselbe Wort noch einmal.";box.classList.add("near");
+  }else if(practiceActive){
+    help.textContent="Sprich nur dieses Wort."; 
+  }else{
+    help.textContent="Tippe auf „Mitsprechen“ und sprich dieses Wort.";
+  }
+  dots.innerHTML=words.map(function(_,i){
+    var cls="";
+    if(wordStates[i]==="green")cls="done";
+    else if(wordStates[i]==="orange")cls="near";
+    else if(wordStates[i]==="red")cls="bad";
+    else if(i===currentPracticeWord&&!ayahPassed)cls="now";
+    return '<span class="'+cls+'"></span>';
+  }).join("");
+}
 function renderAyah(){
   if(!currentSurah||!currentSurah.verses.length)return;
   var v=currentSurah.verses[currentAyahIndex];
@@ -787,13 +882,21 @@ function renderAyah(){
   recitationMatched=0;
   recitationWrong=-1;
   recitationState="idle";
+  currentPracticeWord=0;
+  wordStates=rawAyahWords().map(function(){return "pending"});
+  ayahPassed=!practiceRequired;
+  lastWordHeard="";
+  lastWordScore=0;
   renderAyahWords(0,-1,0);
+  renderWordCoach();
   document.getElementById("ayahTr").textContent=v.tr_readable||v.tr||"";
   document.getElementById("ayahDe").textContent=v.de||"";
   document.getElementById("ayahNo").textContent="Āyah "+v.id+" · Sūrah "+currentSurah.id;
   renderDots();
-  updateLearnStatus(quranMode==="learn"?"🎙 Bereit zum Mitsprechen":"🎧 Erst hören",quranMode==="learn");
+  updateLearnStatus(practiceRequired?"🎙 Erst anhören, dann Wort für Wort":"🎧 Anhören",false);
   document.getElementById("ayahPlay").textContent="▶ Āyah anhören";
+  document.getElementById("speakAlong").textContent="🎙 Mitsprechen starten";
+  setNextLock();
   saveQuranResume();
 }
 function renderDots(){
@@ -846,12 +949,15 @@ function levenshtein(a,b){
   }
   return prev[n];
 }
-function tokenMatches(a,b){
-  if(a===b)return true;
-  if(!a||!b)return false;
+function similarity(a,b){
+  a=String(a||"");b=String(b||"");
+  if(a===b&&a)return 1;
+  if(!a||!b)return 0;
   var max=Math.max(a.length,b.length);
-  if(max<3)return false;
-  return (1-(levenshtein(a,b)/max))>=0.72;
+  return Math.max(0,1-(levenshtein(a,b)/max));
+}
+function tokenMatches(a,b){
+  return similarity(a,b)>=0.82;
 }
 function trimOptionalPrelude(words,expected){
   var out=words.slice();
@@ -939,16 +1045,16 @@ function stopRecordingCapture(){
   clearInterval(recordingClockTimer);
   recordingClockTimer=0;
   stopMeter();
-  if(mediaRecorder&&mediaRecorder.state!=="inactive"){
-    try{mediaRecorder.stop()}catch(e){}
+  var recorder=mediaRecorder;
+  if(recorder&&recorder.state!=="inactive"){
+    try{recorder.stop()}catch(e){}
   }
-  mediaRecorder=null;
   var monitor=document.getElementById("micMonitor");
   monitor.classList.remove("live");
-  document.getElementById("micStateText").textContent="Aufnahme beendet";
+  if(practiceActive)document.getElementById("micStateText").textContent="Mikrofon hört weiter";
 }
 function releaseMicStream(){
-  stopRecordingCapture();
+  stopPractice(false);
   if(recitationStream){
     recitationStream.getTracks().forEach(function(t){try{t.stop()}catch(e){}});
   }
@@ -960,6 +1066,7 @@ function startMeter(stream){
   try{
     var Ctx=window.AudioContext||window.webkitAudioContext;
     if(!Ctx)return;
+    if(audioContext){try{audioContext.close()}catch(e0){}}
     audioContext=new Ctx();
     var src=audioContext.createMediaStreamSource(stream);
     analyser=audioContext.createAnalyser();
@@ -972,34 +1079,52 @@ function startMeter(stream){
       var sum=0;
       for(var i=0;i<data.length;i++)sum+=data[i];
       var avg=sum/Math.max(1,data.length);
-      var pct=Math.max(3,Math.min(100,(avg/90)*100));
+      var pct=Math.max(3,Math.min(100,(avg/75)*100));
       document.getElementById("micLevel").style.width=pct.toFixed(1)+"%";
       meterRaf=requestAnimationFrame(draw);
     }
     draw();
   }catch(e){}
 }
+function supportedRecorderMime(){
+  if(!window.MediaRecorder||!MediaRecorder.isTypeSupported)return "";
+  var types=["audio/mp4","audio/webm;codecs=opus","audio/webm","audio/ogg;codecs=opus"];
+  for(var i=0;i<types.length;i++){
+    try{if(MediaRecorder.isTypeSupported(types[i]))return types[i]}catch(e){}
+  }
+  return "";
+}
 function startRecordingCapture(){
   recordingChunks=[];
   var play=document.getElementById("recordingPlayback");
   play.classList.remove("show");
   if(recordingUrl){try{URL.revokeObjectURL(recordingUrl)}catch(e){} recordingUrl=""}
-  if(!recitationStream||!window.MediaRecorder)return;
+  if(!recitationStream||!window.MediaRecorder){
+    document.getElementById("micStateText").textContent="Live-Mikrofon aktiv";
+    startMeter(recitationStream);
+    return;
+  }
   try{
-    var opts={};
-    if(MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported("audio/webm;codecs=opus"))opts.mimeType="audio/webm;codecs=opus";
-    mediaRecorder=new MediaRecorder(recitationStream,opts);
-    mediaRecorder.ondataavailable=function(e){if(e.data&&e.data.size)recordingChunks.push(e.data)};
-    mediaRecorder.onstop=function(){
-      if(!recordingChunks.length)return;
-      var blob=new Blob(recordingChunks,{type:mediaRecorder&&mediaRecorder.mimeType?mediaRecorder.mimeType:"audio/webm"});
+    var mime=supportedRecorderMime();
+    var recorder=mime?new MediaRecorder(recitationStream,{mimeType:mime}):new MediaRecorder(recitationStream);
+    mediaRecorder=recorder;
+    var recorderMime=recorder.mimeType||mime||"audio/mp4";
+    recorder.ondataavailable=function(e){if(e.data&&e.data.size)recordingChunks.push(e.data)};
+    recorder.onstop=function(){
+      if(mediaRecorder===recorder)mediaRecorder=null;
+      if(!recordingChunks.length){
+        document.getElementById("micStateText").textContent="Keine Aufnahme erzeugt";
+        return;
+      }
+      var blob=new Blob(recordingChunks,{type:recorderMime});
       recordingUrl=URL.createObjectURL(blob);
       var audio=document.getElementById("recitationPlaybackAudio");
       audio.src=recordingUrl;
       play.classList.add("show");
       play.textContent="▶ Meine Aufnahme anhören";
+      document.getElementById("micStateText").textContent=ayahPassed?"Aufnahme gespeichert":"Versuch gespeichert";
     };
-    mediaRecorder.start(200);
+    recorder.start(250);
     recordingStartedAt=Date.now();
     document.getElementById("micClock").textContent="00:00";
     recordingClockTimer=setInterval(function(){
@@ -1013,19 +1138,10 @@ function startRecordingCapture(){
     monitor.classList.remove("error");
     document.getElementById("micStateText").textContent="Aufnahme läuft";
     startMeter(recitationStream);
-  }catch(e){}
-}
-function stopRecitationRecognition(){
-  recitationListening=false;
-  clearTimeout(speakAlongTimer);
-  if(recitationRecognition){
-    try{recitationRecognition.onend=null;recitationRecognition.stop()}catch(e){}
-    try{recitationRecognition.abort()}catch(e2){}
+  }catch(e){
+    document.getElementById("micStateText").textContent="Live-Mikrofon aktiv";
+    startMeter(recitationStream);
   }
-  recitationRecognition=null;
-  stopRecordingCapture();
-  var btn=document.getElementById("speakAlong");
-  if(btn)btn.classList.remove("mic-live");
 }
 function ensureMicrophonePermission(){
   if(recitationStream&&recitationStream.active)return Promise.resolve(true);
@@ -1049,128 +1165,166 @@ function ensureMicrophonePermission(){
     return false;
   });
 }
-function recognizedSessionText(event){
-  var out=[];
-  for(var i=0;i<event.results.length;i++){
-    if(event.results[i]&&event.results[i][0])out.push(event.results[i][0].transcript||"");
-  }
-  return out.join(" ").trim();
-}
-function gradeRecitation(transcript,isFinal){
-  if(!currentSurah)return;
-  var expected=normalizedWords((currentSurah.verses[currentAyahIndex]||{}).ar||"");
-  var heard=trimOptionalPrelude(normalizedWords(transcript),expected);
-  var matched=0;
-  var wrong=-1;
-  var heardCurrent="";
-  for(var i=0;i<heard.length&&matched<expected.length;i++){
-    if(tokenMatches(heard[i],expected[matched])){
-      matched++;
-    }else{
-      wrong=matched;
-      heardCurrent=heard[i]||"";
-      break;
+function bestRecognizedWord(event,target){
+  var best={word:"",score:0,final:false};
+  for(var r=0;r<event.results.length;r++){
+    var result=event.results[r];
+    if(!result)continue;
+    for(var a=0;a<Math.min(result.length,5);a++){
+      var transcript=(result[a].transcript||"").trim();
+      var words=normalizedWords(transcript);
+      for(var w=0;w<words.length;w++){
+        var score=similarity(words[w],target);
+        if(score>best.score)best={word:words[w],score:score,final:!!result.isFinal};
+      }
     }
   }
-  if(wrong<0&&heard.length>matched)heardCurrent=heard[matched]||"";
-  if(wrong<0&&heard.length===matched&&matched<expected.length)heardCurrent=heard.length?heard[heard.length-1]:"";
-  recitationMatched=matched;
-  recitationWrong=wrong;
-  renderAyahWords(matched,wrong,wrong<0?matched:-1,heardCurrent);
-
-  if(expected.length&&matched>=expected.length){
-    recitationState="success";
-    stopRecitationRecognition();
-    renderAyahWords(expected.length,-1,-1);
-    updateLearnStatus("✓ Sehr gut — richtig mitgesprochen",false,"success");
-    var btn=document.getElementById("speakAlong");
-    btn.textContent="✓ Geschafft";
-    btn.classList.add("active");
-    return;
-  }
-
-  if(wrong>=0&&isFinal){
-    recitationState="error";
-    stopRecitationRecognition();
-    updateLearnStatus("Stopp — dieses Wort noch einmal",false,"error");
-    var b=document.getElementById("speakAlong");
-    b.textContent="↻ Noch einmal";
-    b.classList.remove("active");
-    try{
-      if("speechSynthesis" in window){
-        window.speechSynthesis.cancel();
-        var u=new SpeechSynthesisUtterance("Stopp. Noch einmal.");
-        u.lang="de-DE";u.rate=.88;
-        window.speechSynthesis.speak(u);
-      }
-    }catch(e){}
-    return;
-  }
-
-  updateLearnStatus("🎙 Ich höre zu — sprich weiter",true);
+  return best;
 }
-function startRecitationRecognition(){
-  if(!SpeechRecognitionCtor){
-    recitationState="error";
-    updateLearnStatus("Mikrofon-Erkennung ist auf diesem Browser nicht verfügbar",false,"error");
-    document.getElementById("speakAlong").textContent="↻ Noch einmal";
+function paintPracticeState(heard,score,status){
+  lastWordHeard=heard||"";
+  lastWordScore=score||0;
+  var matched=currentPracticeWord;
+  var wrong=status==="red"?currentPracticeWord:-1;
+  renderAyahWords(matched,wrong,status==="red"?-1:currentPracticeWord,lastWordHeard);
+  renderWordCoach();
+}
+function scheduleWordListen(delay){
+  clearTimeout(recognitionRestartTimer);
+  if(!practiceActive||ayahPassed)return;
+  recognitionRestartTimer=setTimeout(startWordRecognition,Math.max(120,delay||350));
+}
+function completeAyahPractice(){
+  ayahPassed=true;
+  practiceActive=false;
+  recitationState="success";
+  stopWordRecognition();
+  stopRecordingCapture();
+  wordStates=wordStates.map(function(){return "green"});
+  renderAyahWords(wordStates.length,-1,-1);
+  renderWordCoach();
+  updateLearnStatus("✓ Āyah geschafft — alle Wörter richtig",false,"success");
+  var btn=document.getElementById("speakAlong");
+  btn.textContent="✓ Āyah geschafft";
+  btn.classList.add("active");
+  btn.classList.remove("mic-live");
+  setNextLock();
+}
+function evaluateCurrentWord(heard,score,isFinal){
+  if(!practiceActive||ayahPassed)return;
+  var idx=currentPracticeWord;
+  var words=normalizedWords((currentSurah.verses[currentAyahIndex]||{}).ar||"");
+  if(idx>=words.length){completeAyahPractice();return}
+
+  if(!isFinal){
+    lastWordHeard=heard||"";
+    lastWordScore=score||0;
+    renderAyahWords(idx,-1,idx,lastWordHeard);
+    renderWordCoach();
     return;
   }
-  stopRecitationRecognition();
-  recitationState="listening";
-  recitationMatched=0;
-  recitationWrong=-1;
-  recitationTranscript="";
-  renderAyahWords(0,-1,0);
+
+  if(score>=0.86){
+    wordStates[idx]="green";
+    currentPracticeWord++;
+    lastWordHeard="";
+    lastWordScore=1;
+    renderAyahWords(currentPracticeWord,-1,currentPracticeWord,"");
+    renderWordCoach();
+    if(currentPracticeWord>=words.length){
+      completeAyahPractice();
+      return;
+    }
+    updateLearnStatus("✓ Richtig — nächstes Wort",true,"success");
+    scheduleWordListen(380);
+    return;
+  }
+
+  if(score>=0.58){
+    wordStates[idx]="orange";
+    paintPracticeState(heard,score,"orange");
+    updateLearnStatus("Fast richtig — dasselbe Wort noch einmal",true);
+    scheduleWordListen(520);
+    return;
+  }
+
+  wordStates[idx]="red";
+  paintPracticeState(heard,score,"red");
+  updateLearnStatus("Stopp — hier ist ein Fehler. Wiederhole dieses Wort.",false,"error");
+  document.getElementById("micMonitor").classList.add("error");
+  scheduleWordListen(700);
+}
+function startWordRecognition(){
+  if(!practiceActive||ayahPassed)return;
+  if(!SpeechRecognitionCtor){
+    updateLearnStatus("Die Live-Worterkennung ist in diesem Browser nicht verfügbar.",false,"error");
+    document.getElementById("micStateText").textContent="Aufnahme läuft – Wortprüfung nicht verfügbar";
+    return;
+  }
+  stopWordRecognition();
+  var expected=normalizedWords((currentSurah.verses[currentAyahIndex]||{}).ar||"");
+  if(currentPracticeWord>=expected.length){completeAyahPractice();return}
+  var target=expected[currentPracticeWord];
 
   var recognition=new SpeechRecognitionCtor();
   recitationRecognition=recognition;
   recognition.lang="ar-SA";
   recognition.interimResults=true;
-  recognition.continuous=true;
-  recognition.maxAlternatives=3;
+  recognition.continuous=false;
+  recognition.maxAlternatives=5;
 
   recognition.onstart=function(){
     recitationListening=true;
-    startRecordingCapture();
-    updateLearnStatus("🎙 Ich höre zu — sprich Wort für Wort",true);
-    var btn=document.getElementById("speakAlong");
-    btn.textContent="■ Mikrofon stoppen";
-    btn.classList.add("active","mic-live");
+    document.getElementById("micMonitor").classList.remove("error");
+    document.getElementById("micStateText").textContent="Ich höre Wort "+(currentPracticeWord+1);
+    updateLearnStatus("🎙 Sprich das goldene Wort",true);
+    renderWordCoach();
   };
   recognition.onresult=function(event){
-    recitationTranscript=recognizedSessionText(event);
-    var last=event.results[event.results.length-1];
-    gradeRecitation(recitationTranscript,!!(last&&last.isFinal));
+    var best=bestRecognizedWord(event,target);
+    if(best.word)evaluateCurrentWord(best.word,best.score,best.final);
   };
   recognition.onerror=function(event){
+    recitationListening=false;
+    if(!practiceActive||ayahPassed)return;
+    if(event&&event.error==="not-allowed"){
+      practiceActive=false;
+      updateLearnStatus("Mikrofon nicht freigegeben",false,"error");
+      document.getElementById("micStateText").textContent="Mikrofon gesperrt";
+      stopRecordingCapture();
+      return;
+    }
     if(event&&event.error==="aborted")return;
-    recitationState="error";
-    stopRecitationRecognition();
-    document.getElementById("micMonitor").classList.add("error");
-    document.getElementById("micStateText").textContent="Versuch nicht erkannt";
-    updateLearnStatus(event&&event.error==="not-allowed"?"🎙 Mikrofon nicht freigegeben":"Sprache nicht sicher erkannt — noch einmal",false,"error");
-    document.getElementById("speakAlong").textContent="↻ Noch einmal";
+    updateLearnStatus("Ich habe das Wort nicht verstanden — noch einmal",true);
+    scheduleWordListen(500);
   };
   recognition.onend=function(){
-    if(recitationState==="listening"&&recitationMatched>0){
-      recitationState="error";
-      updateLearnStatus("Noch nicht vollständig — versuch es noch einmal",false,"error");
-      document.getElementById("speakAlong").textContent="↻ Noch einmal";
-    }else if(recitationState==="listening"){
-      recitationState="idle";
-      updateLearnStatus("🎙 Tippe und sprich noch einmal",true);
-      document.getElementById("speakAlong").textContent="🎙 Jetzt mitsprechen";
-    }
     recitationListening=false;
-    document.getElementById("speakAlong").classList.remove("mic-live");
+    recitationRecognition=null;
+    if(practiceActive&&!ayahPassed)scheduleWordListen(260);
   };
   try{recognition.start()}catch(e){
-    recitationState="error";
-    stopRecordingCapture();
-    updateLearnStatus("Mikrofon konnte nicht gestartet werden",false,"error");
-    document.getElementById("speakAlong").textContent="↻ Noch einmal";
+    updateLearnStatus("Worterkennung startet neu …",true);
+    scheduleWordListen(500);
   }
+}
+function startPracticeSession(){
+  if(!currentSurah)return;
+  practiceRequired=true;
+  ayahPassed=false;
+  practiceActive=true;
+  currentPracticeWord=0;
+  wordStates=rawAyahWords().map(function(){return "pending"});
+  lastWordHeard="";
+  lastWordScore=0;
+  renderAyahWords(0,-1,0,"");
+  renderWordCoach();
+  setNextLock();
+  var btn=document.getElementById("speakAlong");
+  btn.textContent="■ Übung läuft";
+  btn.classList.add("active","mic-live");
+  startRecordingCapture();
+  startWordRecognition();
 }
 function playCurrent(after){
   if(!currentSurah)return;
@@ -1212,23 +1366,27 @@ document.getElementById("ayahPlay").addEventListener("click",function(){
 });
 document.getElementById("speakAlong").addEventListener("click",function(){
   if(!currentSurah)return;
-  if(recitationListening){
-    stopRecitationRecognition();
-    recitationState="idle";
-    updateLearnStatus("🎙 Mikrofon gestoppt",false);
-    this.textContent="🎙 Jetzt mitsprechen";
+  if(practiceActive){
+    stopPractice(false);
+    updateLearnStatus("Übung pausiert — du kannst neu starten",false);
+    renderWordCoach();
     return;
   }
   quranMode="learn";
+  practiceRequired=true;
   var btn=this;
   ensureMicrophonePermission().then(function(ok){
     if(!ok)return;
     btn.classList.add("active");
     btn.textContent="🎧 Erst hören …";
-    renderAyahWords(0,-1,0);
+    renderAyahWords(0,-1,0,"");
+    currentPracticeWord=0;
+    wordStates=rawAyahWords().map(function(){return "pending"});
+    ayahPassed=false;
+    setNextLock();
     playCurrent(function(){
-      updateLearnStatus("🎙 Jetzt du — das Mikrofon hört zu",true);
-      startRecitationRecognition();
+      updateLearnStatus("🎙 Jetzt Wort für Wort",true);
+      startPracticeSession();
     });
   });
 });
@@ -1240,9 +1398,20 @@ document.getElementById("prevAyah").addEventListener("click",function(){
 });
 document.getElementById("nextAyah").addEventListener("click",function(){
   if(!currentSurah)return;
+  if(practiceRequired&&!ayahPassed){
+    updateLearnStatus("🔒 Erst alle Wörter richtig sprechen",false,"error");
+    renderWordCoach();
+    return;
+  }
   stopQuran();
-  if(currentAyahIndex<currentSurah.verses.length-1){currentAyahIndex++;renderAyah()}
-  else updateLearnStatus("★ Sūrah geschafft",false);
+  practiceRequired=true;
+  if(currentAyahIndex<currentSurah.verses.length-1){
+    currentAyahIndex++;
+    quranMode="learn";
+    renderAyah();
+  }else{
+    updateLearnStatus("★ Sūrah geschafft",false,"success");
+  }
 });
 function saveQuranResume(){
   if(!currentSurah)return;
@@ -1326,6 +1495,15 @@ function setAge(a){
   age=a;localStorage.setItem("kids.age",a);
   ageButtons.forEach(function(b){b.classList.toggle("active",b.dataset.age===a)});
   document.getElementById("ageHelp").textContent=ageHelp[a]||"";
+  var app=document.querySelector(".app");
+  if(app)app.setAttribute("data-age",a);
+  if(a==="4–5"){
+    document.querySelectorAll(".quran-mini-note").forEach(function(el){el.textContent="Hören. Ein Wort sprechen. Grün? Dann geht es weiter."});
+  }else if(a==="6–8"){
+    document.querySelectorAll(".quran-mini-note").forEach(function(el){el.textContent="Grün = richtig. Orange = fast richtig. Rot = noch einmal. Erst wenn alles grün ist, geht es weiter."});
+  }else{
+    document.querySelectorAll(".quran-mini-note").forEach(function(el){el.textContent="Wort-für-Wort-Training mit Aufnahme: Grün = bestanden, Orange = ähnlich, Rot = Fehler. Die nächste Āyah bleibt bis zum vollständigen Bestehen gesperrt."});
+  }
 }
 ageButtons.forEach(function(b){b.addEventListener("click",function(){setAge(b.dataset.age)})});
 
