@@ -5,35 +5,35 @@
  alphabet="ipa" xml:lang="de-DE">
   <lexeme>
     <grapheme>DĀR AL TAWḤĪD</grapheme>
-    <phoneme>/daːr at.tawˈħiːd/</phoneme>
+    <phoneme>/daːr al tawˈħiːd/</phoneme>
   </lexeme>
   <lexeme>
     <grapheme>DAR AL TAWHID</grapheme>
-    <phoneme>/daːr at.tawˈħiːd/</phoneme>
+    <phoneme>/daːr al tawˈħiːd/</phoneme>
   </lexeme>
   <lexeme>
     <grapheme>dār al tawḥīd</grapheme>
-    <phoneme>/daːr at.tawˈħiːd/</phoneme>
+    <phoneme>/daːr al tawˈħiːd/</phoneme>
   </lexeme>
   <lexeme>
     <grapheme>dar al tawhid</grapheme>
-    <phoneme>/daːr at.tawˈħiːd/</phoneme>
+    <phoneme>/daːr al tawˈħiːd/</phoneme>
   </lexeme>
   <lexeme>
     <grapheme>Dār al-Tawḥīd</grapheme>
-    <phoneme>/daːr at.tawˈħiːd/</phoneme>
+    <phoneme>/daːr al tawˈħiːd/</phoneme>
   </lexeme>
   <lexeme>
     <grapheme>Dar al-Tawhid</grapheme>
-    <phoneme>/daːr at.tawˈħiːd/</phoneme>
+    <phoneme>/daːr al tawˈħiːd/</phoneme>
   </lexeme>
   <lexeme>
     <grapheme>dār al-tawḥīd</grapheme>
-    <phoneme>/daːr at.tawˈħiːd/</phoneme>
+    <phoneme>/daːr al tawˈħiːd/</phoneme>
   </lexeme>
   <lexeme>
     <grapheme>dar al-tawhid</grapheme>
-    <phoneme>/daːr at.tawˈħiːd/</phoneme>
+    <phoneme>/daːr al tawˈħiːd/</phoneme>
   </lexeme>
   <lexeme>
     <grapheme>Tawḥīd</grapheme>
