@@ -34,7 +34,7 @@ final class NarrationService: NSObject, ObservableObject, AVSpeechSynthesizerDel
             }
         }
 
-        let utterance = AVSpeechUtterance(string: story.narrationText)
+        let utterance = AVSpeechUtterance(string: KidsPronunciationLibrary.prepare(story.narrationText))
         utterance.voice = AVSpeechSynthesisVoice(language: "de-DE")
         utterance.rate = 0.43
         utterance.pitchMultiplier = 0.94
@@ -47,7 +47,7 @@ final class NarrationService: NSObject, ObservableObject, AVSpeechSynthesizerDel
 
     func speakFeedback(_ text: String, ageBand: AgeBand) {
         stop()
-        let utterance = AVSpeechUtterance(string: text)
+        let utterance = AVSpeechUtterance(string: KidsPronunciationLibrary.prepare(text))
         utterance.voice = AVSpeechSynthesisVoice(language: "de-DE")
         utterance.rate = ageBand == .age4to5 ? 0.40 : 0.44
         utterance.pitchMultiplier = 0.96
