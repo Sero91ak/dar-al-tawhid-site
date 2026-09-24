@@ -13,11 +13,25 @@
     "aliasPls": "alias-master.pls",
     "ipaPls": "ipa-master.pls",
     "qa": "qa-sentences.txt",
-    "voiceProfile": "voice-production-profile.json"
+    "voiceProfile": "voice-production-profile.json",
+    "authoritativeSources": "authoritative-sources.json",
+    "phonemeReference": "arabic-phoneme-reference.json",
+    "brandOverrides": "brand-pronunciation-overrides.json"
   },
   "consumers": [
     "DĀR AL TAWḤĪD Kids",
     "eigene Stimmproduktion",
     "weitere Audio-Apps"
-  ]
+  ],
+  "verification": {
+    "authorityHierarchy": [
+      "IPA/JIPA phonetics",
+      "Quranic Arabic Corpus for classical phonetic transcription",
+      "ALA-LC for transliteration only",
+      "secondary pedagogical confirmation"
+    ],
+    "brandOverridesTakePrecedence": true,
+    "connectedSpeechAudit": true,
+    "universal100PercentClaim": false
+  }
 }
