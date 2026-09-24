@@ -156,7 +156,9 @@ async function fetchVersionBuild(base) {
       text.includes("id=\"quizModal\"") &&
       text.includes("id=\"dailyJourney\"") &&
       text.includes("id=\"storyQuestion\"") &&
-      text.includes("id=\"parentStoriesDone\"");
+      text.includes("id=\"parentStoriesDone\"") &&
+      text.includes("id=\"openDuaButton\"") &&
+      text.includes("id=\"duaModal\"");
     console.log(
       `${label} kids: ${url} -> ${status} cf=${cf} marker=${ok}`
     );
@@ -192,6 +194,30 @@ async function fetchVersionBuild(base) {
 
   await verifyKidsRecitationApi("public", publicBase);
   await verifyKidsRecitationApi("workers.dev", workersBase);
+
+  async function verifyKidsDuaData(label, base) {
+    const url = `${base}/kids/data/dua-kids.json?v=${Date.now()}`;
+    const { status, text, cf } = await fetchText(url);
+    let payload = {};
+    try { payload = JSON.parse(text); } catch {}
+    const items = Array.isArray(payload.items) ? payload.items : [];
+    const ok =
+      status === 200 &&
+      payload?.policy?.status === "verified-only" &&
+      items.length >= 7 &&
+      items.every((x) => x && x.verification === "verified");
+    console.log(
+      `${label} kids duas: ${url} -> ${status} cf=${cf} items=${items.length} ok=${ok}`
+    );
+    if (!ok) {
+      throw new Error(
+        `${label} Kinder-Duʿāʾ-Daten nicht vollständig/geprüft: ${url}`
+      );
+    }
+  }
+
+  await verifyKidsDuaData("public", publicBase);
+  await verifyKidsDuaData("workers.dev", workersBase);
 
   console.log(
     `Dar Test live OK — public und workers.dev liefern identisch ${TEST_EXPECT_BUILD}.`
