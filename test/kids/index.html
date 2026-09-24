@@ -339,6 +339,11 @@ input[type=range]{width:100%;accent-color:var(--gold)}
 .learn-row{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:9px;margin-top:9px}
 .learn-row button{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.065);border-radius:18px;padding:13px 7px;font-weight:850;font-size:12px;cursor:pointer}
 .learn-row button.active{background:rgba(115,201,193,.14);color:#c9fff3;border-color:rgba(115,201,193,.24)}
+#prevAyah{background:rgba(255,255,255,.045)}
+#speakAlong{background:linear-gradient(135deg,rgba(51,130,122,.36),rgba(38,102,112,.32));border-color:rgba(115,201,193,.24);min-height:52px}
+#nextAyah:not(:disabled){background:linear-gradient(135deg,rgba(68,155,104,.28),rgba(51,119,84,.25));border-color:rgba(82,196,132,.28)}
+.app[data-age="4–5"] .page-head p,.app[data-age="4–5"] .quran-mini-note{font-size:12px}
+.app[data-age="4–5"] .modal-title small{font-size:12px}
 .quran-mini-note{text-align:center;color:var(--soft);font-size:10px;margin-top:10px}
 .picker-panel{flex:1;display:flex;flex-direction:column;justify-content:center;gap:12px}
 .picker-panel .picker-icon{font-size:48px;text-align:center}
@@ -1216,8 +1221,14 @@ function completeAyahPractice(){
   btn.classList.remove("mic-live");
   setNextLock();
 }
+function practiceThresholds(){
+  if(age==="4–5")return{green:.76,orange:.46};
+  if(age==="9–10")return{green:.88,orange:.62};
+  return{green:.83,orange:.55};
+}
 function evaluateCurrentWord(heard,score,isFinal){
   if(!practiceActive||ayahPassed)return;
+  var thresholds=practiceThresholds();
   var idx=currentPracticeWord;
   var words=normalizedWords((currentSurah.verses[currentAyahIndex]||{}).ar||"");
   if(idx>=words.length){completeAyahPractice();return}
@@ -1230,7 +1241,7 @@ function evaluateCurrentWord(heard,score,isFinal){
     return;
   }
 
-  if(score>=0.86){
+  if(score>=thresholds.green){
     wordStates[idx]="green";
     currentPracticeWord++;
     lastWordHeard="";
@@ -1246,7 +1257,7 @@ function evaluateCurrentWord(heard,score,isFinal){
     return;
   }
 
-  if(score>=0.58){
+  if(score>=thresholds.orange){
     wordStates[idx]="orange";
     paintPracticeState(heard,score,"orange");
     updateLearnStatus("Fast richtig — dasselbe Wort noch einmal",true);
@@ -1307,7 +1318,7 @@ function startWordRecognition(){
   recognition.onend=function(){
     recitationListening=false;
     recitationRecognition=null;
-    if(practiceActive&&!ayahPassed)scheduleWordListen(260);
+    if(practiceActive&&!ayahPassed&&!recognitionRestartTimer)scheduleWordListen(420);
   };
   try{recognition.start()}catch(e){
     updateLearnStatus("Worterkennung startet neu …",true);
