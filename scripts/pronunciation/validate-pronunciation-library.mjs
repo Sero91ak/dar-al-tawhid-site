@@ -16,7 +16,7 @@ for (const r of rules) {
   else seen.set(key, sig);
 }
 
-if (rules.length !== 3719) throw new Error(`expected 3719 rules, got ${rules.length}`);
+if (rules.length !== 3727) throw new Error(`expected 3727 rules, got ${rules.length}`);
 if (missing.length) throw new Error(`missing core rules: ${missing.join(", ")}`);
 if (blank.length) throw new Error(`blank pronunciation fields: ${blank.length}`);
 if (conflicts.length) throw new Error(`conflicting duplicate rules: ${[...new Set(conflicts)].slice(0,20).join(", ")}`);
