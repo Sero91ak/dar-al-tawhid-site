@@ -1,0 +1,71 @@
+name: Deploy DĀR AL TAWḤĪD Kids
+
+on:
+  push:
+    branches:
+      - feature/dar-al-tawhid-kids-v1
+    paths:
+      - test/kids/**
+      - cloudflare/test-app-worker.js
+      - wrangler.kids.toml
+      - .github/workflows/deploy-kids-app.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dar-al-tawhid-kids-live
+  cancel-in-progress: true
+
+jobs:
+  deploy-kids:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Kids build consistency
+        shell: bash
+        run: |
+          EXPECT="$(node -e "console.log(require('./test/kids/version.json').buildId)")"
+          echo "Expect: $EXPECT"
+          grep -Fq "const KIDS_BUILD_ID=\"$EXPECT\"" test/kids/index.html
+          grep -Fq 'KIDS_SAFE_AREA_SOLID_V6' test/kids/index.html
+          grep -Fq 'apple-mobile-web-app-status-bar-style" content="black"' test/kids/index.html
+
+      - name: Deploy dedicated Kids Worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler deploy -c wrangler.kids.toml
+
+      - name: Verify Kids live route
+        shell: bash
+        run: |
+          EXPECT="$(node -e "console.log(require('./test/kids/version.json').buildId)")"
+          for BASE in "https://dar-al-tawhid.de/test/kids/" "https://dar-al-tawhid-kids.sero91ak.workers.dev/test/kids/"; do
+            ok=0
+            for attempt in 1 2 3 4 5 6 7 8; do
+              stamp="$(date +%s)-$attempt"
+              rm -f /tmp/kids-head /tmp/kids-body
+              status="$(curl -sS -L --retry 2 --retry-delay 1 --max-time 25 -D /tmp/kids-head -o /tmp/kids-body -w '%{http_code}' "$BASE?verify=$stamp" || true)"
+              if [ "$status" = "200" ] \
+                && grep -Fq "const KIDS_BUILD_ID=\"$EXPECT\"" /tmp/kids-body \
+                && grep -Fq 'KIDS_SAFE_AREA_SOLID_V6' /tmp/kids-body \
+                && grep -Fq 'apple-mobile-web-app-status-bar-style" content="black"' /tmp/kids-body; then
+                echo "$BASE -> $EXPECT live"
+                ok=1
+                break
+              fi
+              echo "$BASE attempt $attempt: HTTP $status / expected $EXPECT"
+              sleep 5
+            done
+            test "$ok" = "1"
+          done
