@@ -181,7 +181,7 @@ struct StoryPlayerView: View {
                             .minimumScaleFactor(0.8)
 
                         Button {
-                            narration.speakFeedback(question.question, ageBand: appState.ageBand)
+                            narration.speakFeedback(spokenStoryQuestion(question), ageBand: appState.ageBand)
                         } label: {
                             Label("Frage anhören", systemImage: "speaker.wave.2.fill")
                                 .font(.system(size: 14, weight: .bold, design: .rounded))
@@ -259,7 +259,7 @@ struct StoryPlayerView: View {
             .onAppear {
                 Task { @MainActor in
                     try? await Task.sleep(for: .milliseconds(200))
-                    narration.speakFeedback(question.question, ageBand: appState.ageBand)
+                    narration.speakFeedback(spokenStoryQuestion(question), ageBand: appState.ageBand)
                 }
             }
         } else {
@@ -271,6 +271,16 @@ struct StoryPlayerView: View {
                     .padding(24)
             }
         }
+    }
+
+    private func spokenStoryQuestion(_ question: KidsStoryQuestion) -> String {
+        if appState.ageBand == .age4to5 {
+            return question.question + " Ja oder Nein?"
+        }
+        let choices = question.answers.enumerated()
+            .map { "Antwort \($0.offset + 1): \($0.element.title)." }
+            .joined(separator: " ")
+        return question.question + " " + choices
     }
 
     private func chooseStoryAnswer(_ answer: KidsStoryQuestionAnswer, in question: KidsStoryQuestion) {
