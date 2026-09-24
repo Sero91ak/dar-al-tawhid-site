@@ -328,8 +328,8 @@ input[type=range]{width:100%;accent-color:var(--gold)}
 .app[data-age="4–5"] .learn-row{grid-template-columns:.72fr 1.7fr .72fr}
 .app[data-age="4–5"] .learn-row button{min-height:58px;font-size:13px}
 .app[data-age="4–5"] .big-play{min-height:62px;font-size:18px}
-.app[data-age="6–8"] .ayah-ar{font-size:clamp(44px,11.5vw,70px)}
-.app[data-age="9–10"] .ayah-ar{font-size:clamp(38px,9.5vw,60px)}
+.app[data-age="6–7"] .ayah-ar{font-size:clamp(44px,11.5vw,70px)}
+.app[data-age="8–10"] .ayah-ar{font-size:clamp(38px,9.5vw,60px)}
 @keyframes micRing{70%{box-shadow:0 0 0 9px rgba(115,201,193,0)}100%{box-shadow:0 0 0 0 rgba(115,201,193,0)}}
 .ayah-tr{font-size:14px;line-height:1.5;color:#d8e8ed;margin:17px auto 0;max-width:560px;font-weight:700}
 .ayah-de{font-size:12px;line-height:1.5;color:var(--muted);margin:10px auto 0;max-width:540px}
@@ -363,6 +363,35 @@ input[type=range]{width:100%;accent-color:var(--gold)}
 .big-select option{color:#111}
 .loader{font-size:13px;color:var(--muted)}
 .dev-ribbon{position:fixed;z-index:40;right:10px;top:var(--safe-top);font-size:8px;font-weight:900;letter-spacing:.09em;color:rgba(255,255,255,.5);background:rgba(0,0,0,.20);border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:5px 8px}
+
+
+.story-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.story-settings-btn{width:46px;height:46px;flex:none;border-radius:50%;border:1px solid rgba(226,189,114,.22);background:rgba(255,255,255,.055);color:var(--gold);font-size:19px;cursor:pointer}
+.story-scene.image{height:190px;background-size:cover;background-position:center}
+.story-scene.image:before,.story-scene.image:after{display:none}
+.story-row.illustrated{min-height:94px}
+.story-thumb.image{width:82px;height:72px;border-radius:18px;background-size:cover!important;background-position:center!important}
+.story-modal-shell{overflow:auto}
+.story-modal-cover{position:relative;min-height:300px;margin:12px 0 13px;border-radius:30px;background-size:cover;background-position:center;overflow:hidden;border:1px solid rgba(255,255,255,.10);flex:none}
+.story-cover-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,10,16,.04),rgba(3,10,16,.10) 42%,rgba(3,10,16,.94))}
+.story-cover-copy{position:absolute;left:18px;right:18px;bottom:18px}
+.story-cover-copy h2{font-size:30px;line-height:1.02;margin:7px 0 7px}
+.story-age-mode{font-size:11px;font-weight:850;color:rgba(255,255,255,.68)}
+.story-play{flex:none}
+.story-reading-wrap,.story-sources-wrap{margin:17px 0 2px}
+.story-section-label{font-size:10px;font-weight:950;letter-spacing:.13em;color:var(--gold);margin:0 2px 9px}
+.story-reading{display:grid;gap:9px}
+.story-reading p{margin:0;padding:13px 14px;border-radius:18px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.07);font-size:15px;line-height:1.6;color:rgba(255,255,255,.82)}
+.story-sources{display:grid;gap:8px}
+.story-source-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border-top:1px solid rgba(255,255,255,.09)}
+.story-source-row:last-child{border-bottom:1px solid rgba(255,255,255,.09)}
+.story-source-row span{font-size:10px;font-weight:900;color:var(--sage)}
+.story-source-row strong{font-size:13px;text-align:right}
+.app[data-age="4–5"] .story-copy p,.app[data-age="4–5"] .story-row .meta{display:none}
+.app[data-age="4–5"] .story-row{min-height:108px}
+.app[data-age="4–5"] .story-row h3{font-size:19px}
+.app[data-age="4–5"] .story-modal-cover{min-height:360px}
+.app[data-age="4–5"] .story-play{min-height:70px;font-size:18px}
 
 @media(min-width:700px){
   .shell{padding-left:22px;padding-right:22px}
@@ -401,7 +430,7 @@ input[type=range]{width:100%;accent-color:var(--gold)}
 
       <div class="section-title">Was möchtest du machen?</div>
       <div class="big-choice-grid">
-        <button class="choice story" data-story="coin">
+        <button class="choice story" data-story="nuh">
           <span class="icon">🎧</span>
           <strong>Geschichte</strong>
           <small>hören & entdecken</small>
@@ -436,40 +465,43 @@ input[type=range]{width:100%;accent-color:var(--gold)}
     </section>
 
     <section id="view-stories" class="view">
-      <div class="page-head">
-        <div class="kicker">ABENTEUER ZUM HÖREN</div>
-        <h2>Geschichten</h2>
-        <p>Große Bilder, kurze Erzählungen, klare Botschaften.</p>
+      <div class="page-head story-head">
+        <div>
+          <div class="kicker">QURʾĀN · KINDGERECHT · KURZ</div>
+          <h2>Geschichten</h2>
+          <p id="storyModeHint">Audio + kurzer Lesetext.</p>
+        </div>
+        <button class="story-settings-btn" data-go="parents" aria-label="Altersstufe einstellen">⚙</button>
       </div>
 
-      <article class="story-feature" data-story="coin">
-        <div class="story-scene"></div>
+      <article class="story-feature illustrated" data-story="nuh">
+        <div class="story-scene image" style="background-image:url('story-covers/nuh-arche.jpg')"></div>
         <div class="story-copy">
-          <div class="meta">ADAB · FREI VERFASST · CA. 3 MIN.</div>
-          <h3>Die gefundene Münze</h3>
-          <p>Adam entdeckt etwas, das ihm nicht gehört. Was wird er tun?</p>
+          <div class="meta">PROPHETENGESCHICHTE · QURʾĀN</div>
+          <h3>Nūḥ und die Arche</h3>
+          <p>Geduld, Tawḥīd und Vertrauen auf Allah.</p>
         </div>
       </article>
 
       <div class="story-list">
-        <article class="story-row" data-story="water">
-          <div class="story-thumb">💧</div>
-          <div><h3>Das Glas Wasser</h3><div class="meta">Adab · frei verfasst</div><div class="time">ca. 2 Min.</div></div>
+        <article class="story-row illustrated" data-story="ibrahim">
+          <div class="story-thumb image" style="background-image:url('story-covers/ibrahim-feuer.jpg')"></div>
+          <div><h3>Ibrāhīm und das Feuer</h3><div class="meta">Prophetengeschichte · Qurʾān</div><div class="time">3–5 Min.</div></div>
           <div class="chev">›</div>
         </article>
-        <article class="story-row" data-story="helper">
-          <div class="story-thumb" style="background:rgba(115,201,193,.12)">✦</div>
-          <div><h3>Der leise Helfer</h3><div class="meta">Adab · frei verfasst</div><div class="time">ca. 3 Min.</div></div>
+        <article class="story-row illustrated" data-story="musa">
+          <div class="story-thumb image" style="background-image:url('story-covers/musa-meer.jpg')"></div>
+          <div><h3>Mūsā und das Meer</h3><div class="meta">Prophetengeschichte · Qurʾān</div><div class="time">3–5 Min.</div></div>
           <div class="chev">›</div>
         </article>
-        <article class="story-row" data-story="kindword">
-          <div class="story-thumb" style="background:rgba(159,145,214,.12)">☁</div>
-          <div><h3>Das gute Wort</h3><div class="meta">Adab · frei verfasst</div><div class="time">ca. 3 Min.</div></div>
+        <article class="story-row illustrated" data-story="yusuf">
+          <div class="story-thumb image" style="background-image:url('story-covers/yusuf-geduld.jpg')"></div>
+          <div><h3>Yūsuf und die Geduld</h3><div class="meta">Prophetengeschichte · Qurʾān</div><div class="time">4–6 Min.</div></div>
           <div class="chev">›</div>
         </article>
       </div>
 
-      <div class="gentle-note">Authentische Propheten- und Ṣaḥābah-Erzählungen kommen nur nach Quellenprüfung hinein. Freie pädagogische Geschichten bleiben sichtbar gekennzeichnet.</div>
+      <div class="gentle-note">Keine erfundenen Ereignisse als Überlieferung: Die ersten Geschichten folgen direkt den angegebenen Qurʾān-Stellen.</div>
     </section>
 
     <section id="view-quran" class="view">
@@ -536,10 +568,10 @@ input[type=range]{width:100%;accent-color:var(--gold)}
         <div class="label-row"><strong>Altersstufe</strong><span style="color:var(--gold);font-size:12px;font-weight:850">EINFACH</span></div>
         <div class="age-tabs">
           <button data-age="4–5">4–5</button>
-          <button class="active" data-age="6–8">6–8</button>
-          <button data-age="9–10">9–10</button>
+          <button class="active" data-age="6–7">6–7</button>
+          <button data-age="8–10">8–10</button>
         </div>
-        <p id="ageHelp" class="age-help">hören · verstehen · mitmachen</p>
+        <p id="ageHelp" class="age-help">Audio + kurzer Lesetext · einfache Sätze</p>
       </div>
 
       <div class="parent-card">
@@ -563,24 +595,35 @@ input[type=range]{width:100%;accent-color:var(--gold)}
   </nav>
 
   <div id="storyModal" class="modal">
-    <div class="modal-shell">
+    <div class="modal-shell story-modal-shell">
       <div class="modal-top">
         <button class="close-btn" data-close="story">×</button>
         <div class="modal-title"><strong id="storyPlayerTitle">Geschichte</strong><small id="storyPlayerTime">ca. 3 Min.</small></div>
         <div class="top-spacer"></div>
       </div>
-      <div class="story-player-main">
-        <div>
-          <div class="story-orb"><span id="storyWave">≋</span></div>
+
+      <div id="storyCover" class="story-modal-cover">
+        <div class="story-cover-shade"></div>
+        <div class="story-cover-copy">
+          <div id="storyCategory" class="category">Prophetengeschichte · Qurʾān</div>
           <h2 id="storyBigTitle">Geschichte</h2>
-          <div id="storyCategory" class="category">Adab</div>
-          <div class="dev-note">Vorschau-Stimme des Geräts. Die feste KI-Erzählstimme wird später als fertige Audio-Datei eingesetzt.</div>
+          <div id="storyAgeMode" class="story-age-mode">Audio + kurzer Lesetext</div>
         </div>
       </div>
-      <div>
-        <button id="storyPlay" class="primary">▶ Geschichte hören</button>
-        <button id="storyDone" class="secondary">○ Als gehört markieren</button>
+
+      <button id="storyPlay" class="primary story-play">▶ Geschichte hören</button>
+
+      <div id="storyReadingWrap" class="story-reading-wrap">
+        <div class="story-section-label">MITLESEN</div>
+        <div id="storyReading" class="story-reading"></div>
       </div>
+
+      <div id="storySourcesWrap" class="story-sources-wrap">
+        <div class="story-section-label">WO STEHT DAS?</div>
+        <div id="storySources" class="story-sources"></div>
+      </div>
+
+      <button id="storyDone" class="secondary">○ Als gehört markieren</button>
     </div>
   </div>
 
@@ -665,25 +708,73 @@ input[type=range]{width:100%;accent-color:var(--gold)}
 "use strict";
 
 var stories={
-  coin:{
-    title:"Die gefundene Münze",time:"ca. 3 Min.",category:"Adab · frei verfasst",
-    text:"Auf dem Heimweg entdeckte Adam neben einer Bank eine glänzende Münze. Er hob sie auf und sah sich um. Niemand schien sie zu suchen. Für einen Moment dachte Adam: Ich könnte sie einfach behalten. Dann erinnerte er sich daran, dass ein Muslim ehrlich sein soll, nicht nur dann, wenn andere Menschen zuschauen. Adam ging zurück zu dem kleinen Laden neben dem Platz. Er fragte den Besitzer, ob jemand nach einer verlorenen Münze gesucht habe. Der Mann lächelte und sagte: Gerade eben war ein älterer Mann hier. Er hatte bemerkt, dass ihm etwas aus der Tasche gefallen war. Adam wartete einen Augenblick. Kurz darauf kam der Mann zurück. Als Adam ihm die Münze gab, war der Mann sehr erleichtert. Auf dem Heimweg hatte Adam keine neue Münze in der Tasche. Aber er hatte etwas Wertvolleres gelernt: Ehrlichkeit bedeutet, das Richtige zu tun, auch wenn man etwas anderes tun könnte. Denk einmal nach: Was würdest du tun, wenn du etwas findest, das dir nicht gehört?"
+  nuh:{
+    title:"Nūḥ und die Arche",
+    category:"Prophetengeschichte · Qurʾān",
+    cover:"story-covers/nuh-arche.jpg",
+    time:{"4–5":"ca. 3 Min.","6–7":"ca. 4 Min.","8–10":"ca. 5 Min."},
+    text:{
+      "4–5":"Nūḥ war ein Prophet Allahs. Allah sandte ihn zu seinem Volk. Nūḥ sagte den Menschen immer wieder: Betet nur Allah an. Viele wollten nicht hören. Trotzdem blieb Nūḥ geduldig. Dann befahl Allah ihm, eine große Arche zu bauen. Nūḥ gehorchte, auch als Menschen über ihn lachten. Als die Flut kam, stiegen Nūḥ und die Gläubigen in das Schiff. Allah rettete sie. Wir lernen: Nūḥ blieb geduldig, gehorchte Allah und vertraute auf Ihn.",
+      "6–7":"Allah sandte den Propheten Nūḥ zu seinem Volk. Seine Botschaft war klar: Die Menschen sollten Allah allein anbeten. Nūḥ rief sie am Tag und in der Nacht. Viele lehnten seine Botschaft ab. Trotzdem blieb er geduldig. Allah befahl ihm, eine Arche zu bauen. Während des Baus verspotteten ihn Menschen. Nūḥ ließ sich nicht davon abhalten. Als die Flut kam, stiegen Nūḥ und die Gläubigen in die Arche. Allah rettete sie. Die Geschichte lehrt Tawḥīd, Geduld und Gehorsam.",
+      "8–10":"Allah sandte Nūḥ zu seinem Volk mit der Botschaft des Tawḥīd. Der Qurʾān berichtet, dass Nūḥ sein Volk am Tag und in der Nacht rief. Viele Menschen lehnten ihn ab. Allah offenbarte ihm schließlich, dass niemand mehr glauben würde außer denjenigen, die bereits glaubten, und befahl ihm, die Arche unter Seiner Aufsicht zu bauen. Während Nūḥ baute, verspotteten ihn führende Leute seines Volkes. Als Allahs Befehl kam, fuhr die Arche durch gewaltige Wellen. Allah rettete Nūḥ und die Gläubigen. Die Geschichte zeigt Tawḥīd, Geduld, Gehorsam und Vertrauen auf Allah."
+    },
+    reading:{
+      "6–7":["Allah sandte Nūḥ zu seinem Volk. Er rief die Menschen dazu auf, nur Allah anzubeten.","Viele lehnten seine Botschaft ab. Nūḥ blieb geduldig.","Allah befahl ihm, eine Arche zu bauen. Als die Flut kam, rettete Allah die Gläubigen.","Lehre: Wir vertrauen auf Allah und bleiben beim Richtigen."],
+      "8–10":["Nūḥ rief sein Volk zum Tawḥīd und blieb über lange Zeit geduldig.","Allah befahl ihm, die Arche unter Seiner Aufsicht zu bauen.","Während des Baus wurde Nūḥ verspottet, aber er blieb gehorsam.","Als die Flut kam, rettete Allah Nūḥ und die Gläubigen.","Lehre: Tawḥīd, Geduld und Gehorsam stehen über der Meinung der Menschen."]
+    },
+    sources:["Hūd 11:25–49","Nūḥ 71:1–28"]
   },
-  water:{
-    title:"Das Glas Wasser",time:"ca. 2 Min.",category:"Adab · frei verfasst",
-    text:"Maryam saß mit ihrer Familie am Tisch. Alle unterhielten sich. Da bemerkte sie, dass ihre kleine Schwester nach dem Wasser greifen wollte, aber nicht herankam. Maryam hätte einfach weiteressen können. Stattdessen nahm sie die Kanne, schenkte ihrer Schwester ein Glas ein und stellte es vorsichtig vor sie. Es war nur eine kleine Handlung. Niemand klatschte. Niemand gab ihr einen Preis. Aber ihre Schwester lächelte. Maryam verstand: Gutes Benehmen besteht oft aus kleinen Dingen. Aufmerksam sein. Helfen. Freundlich sprechen. Und nicht immer darauf warten, dass jemand einen darum bittet. Welche kleine gute Sache kannst du heute für jemanden tun?"
+  ibrahim:{
+    title:"Ibrāhīm und das Feuer",
+    category:"Prophetengeschichte · Qurʾān",
+    cover:"story-covers/ibrahim-feuer.jpg",
+    time:{"4–5":"ca. 3 Min.","6–7":"ca. 4 Min.","8–10":"ca. 5 Min."},
+    text:{
+      "4–5":"Ibrāhīm war ein Prophet Allahs. Er wusste, dass nur Allah angebetet werden darf. Sein Volk betete Götzen an. Ibrāhīm zeigte ihnen, dass diese Götzen nicht sprechen und niemandem helfen können. Die Menschen wurden wütend und wollten Ibrāhīm in ein großes Feuer werfen. Doch Allah befahl dem Feuer, für Ibrāhīm kühl und sicher zu sein. Wir lernen: Nur Allah verdient Anbetung. Ibrāhīm blieb bei der Wahrheit und vertraute auf Allah.",
+      "6–7":"Ibrāhīm rief sein Volk zum Tawḥīd. Der Qurʾān berichtet, dass er die Götzen zerbrach und den größten stehen ließ. Als die Menschen zurückkamen, machte Ibrāhīm ihnen klar, dass ihre Götzen nicht einmal sprechen konnten. Statt die Wahrheit anzunehmen, beschlossen sie, ihn zu verbrennen. Allah befahl dem Feuer, kühl und sicher für Ibrāhīm zu sein. So rettete Allah Seinen Propheten.",
+      "8–10":"Ibrāhīm stellte den Götzendienst seines Volkes in Frage. Die Menschen beriefen sich auf die Gewohnheit ihrer Vorfahren. Ibrāhīm zeigte ihnen, dass die Götzen weder sprechen noch sich selbst schützen konnten. Obwohl die Menschen ihren Widerspruch erkannten, wollten sie Ibrāhīm verbrennen. Allah befahl dem Feuer, kühl und sicher zu sein. Die Geschichte zeigt: Tradition allein ist kein Beweis, Tawḥīd steht über Gewohnheit und Allah besitzt Macht über Seine gesamte Schöpfung."
+    },
+    reading:{
+      "6–7":["Ibrāhīm rief sein Volk dazu auf, Allah allein anzubeten.","Er zeigte ihnen, dass ihre Götzen weder sprechen noch helfen können.","Die Menschen wollten Ibrāhīm verbrennen. Allah machte das Feuer für ihn kühl und sicher.","Lehre: Tawḥīd und Wahrheit stehen über blinder Gewohnheit."],
+      "8–10":["Ibrāhīm stellte den Götzendienst seines Volkes in Frage.","Er zeigte, dass die Götzen weder sprechen noch sich selbst schützen konnten.","Die Menschen beschlossen trotzdem, ihn zu verbrennen.","Allah befahl dem Feuer, kühl und sicher zu sein.","Lehre: Wahrheit wird durch Beweise erkannt, nicht durch die Zahl ihrer Anhänger."]
+    },
+    sources:["al-Anbiyāʾ 21:51–70"]
   },
-  helper:{
-    title:"Der leise Helfer",time:"ca. 3 Min.",category:"Adab · frei verfasst",
-    text:"Nach dem Unterricht lagen einige Bücher und Stifte auf dem Boden. Die meisten Kinder gingen schon zur Tür. Yusuf blieb stehen. Ohne etwas zu sagen, sammelte er die Stifte ein und legte die Bücher zurück an ihren Platz. Sein Freund fragte: Warum machst du das? Die Lehrerin sieht dich doch gar nicht. Yusuf antwortete: Eine gute Sache wird nicht erst gut, wenn jemand mich dafür lobt. Gemeinsam räumten beide den Rest auf. Am nächsten Morgen war der Raum ordentlich und niemand wusste, wer geholfen hatte. Manchmal sind die schönsten guten Taten diejenigen, für die wir keinen Applaus erwarten."
+  musa:{
+    title:"Mūsā und das Meer",
+    category:"Prophetengeschichte · Qurʾān",
+    cover:"story-covers/musa-meer.jpg",
+    time:{"4–5":"ca. 3 Min.","6–7":"ca. 4 Min.","8–10":"ca. 5 Min."},
+    text:{
+      "4–5":"Mūsā war ein Prophet Allahs. Allah befahl ihm, mit den Gläubigen aufzubrechen. Firʿawn und seine Soldaten verfolgten sie. Vor den Gläubigen lag das Meer. Mūsā vertraute auf Allah. Allah befahl ihm, mit seinem Stock auf das Meer zu schlagen. Das Meer teilte sich und ein Weg entstand. Mūsā und die Gläubigen gingen sicher hindurch. Allah rettete sie. Wir lernen: Auch wenn etwas sehr schwierig aussieht, vertrauen wir auf Allah und gehorchen Ihm.",
+      "6–7":"Allah befahl Mūsā, mit Banū Isrāʾīl in der Nacht aufzubrechen. Firʿawn verfolgte sie. Vor ihnen lag das Meer und hinter ihnen kam die Armee näher. Mūsā blieb voller Vertrauen auf Allah. Allah offenbarte ihm, mit seinem Stock auf das Meer zu schlagen. Das Meer teilte sich und ein trockener Weg entstand. Mūsā und die Gläubigen gingen hindurch. Die Geschichte zeigt: Tawakkul bedeutet, Allah zu vertrauen und nach Seinem Befehl zu handeln.",
+      "8–10":"Mūsā führte Banū Isrāʾīl auf Allahs Befehl in der Nacht fort. Firʿawn verfolgte sie mit seinen Truppen. Als die Lage aus menschlicher Sicht ausweglos wirkte, blieb Mūsā überzeugt, dass Allah ihn rechtleiten würde. Allah befahl ihm, mit seinem Stock auf das Meer zu schlagen. Das Meer teilte sich, und der Qurʾān beschreibt die Wassermassen wie gewaltige Berge. Allah rettete Mūsā und die Gläubigen. Die Geschichte verbindet Īmān, Gehorsam und Tawakkul."
+    },
+    reading:{
+      "6–7":["Mūsā führte die Gläubigen auf Allahs Befehl fort. Firʿawn verfolgte sie.","Vor ihnen lag das Meer. Mūsā vertraute darauf, dass Allah ihn führen würde.","Allah ließ das Meer auseinandergehen und die Gläubigen gingen sicher hindurch.","Lehre: Wir handeln richtig und vertrauen dabei auf Allah."],
+      "8–10":["Mūsā führte Banū Isrāʾīl auf Allahs Befehl fort.","Vor ihnen lag das Meer und hinter ihnen kamen die Verfolger.","Allah befahl Mūsā, mit seinem Stock auf das Meer zu schlagen. Das Meer teilte sich.","Allah rettete Mūsā und die Gläubigen.","Lehre: Tawakkul verbindet Vertrauen auf Allah mit Gehorsam und richtigem Handeln."]
+    },
+    sources:["Ṭā-Hā 20:77–79","aš-Šuʿarāʾ 26:52–68"]
   },
-  kindword:{
-    title:"Das gute Wort",time:"ca. 3 Min.",category:"Adab · frei verfasst",
-    text:"In der Pause saß ein neues Kind allein am Rand des Hofes. Einige liefen vorbei, ohne etwas zu sagen. Hamza blieb stehen. Er wusste nicht, was er Besonderes sagen sollte. Also lächelte er einfach und fragte: Möchtest du mit uns spielen? Es waren nur wenige Worte. Doch plötzlich war der Hof für das neue Kind nicht mehr so fremd. Hamza lernte an diesem Tag, dass ein gutes Wort klein sein kann und trotzdem viel verändert."
+  yusuf:{
+    title:"Yūsuf und die Geduld",
+    category:"Prophetengeschichte · Qurʾān",
+    cover:"story-covers/yusuf-geduld.jpg",
+    time:{"4–5":"ca. 4 Min.","6–7":"ca. 5 Min.","8–10":"ca. 6 Min."},
+    text:{
+      "4–5":"Yūsuf war ein Prophet Allahs. Einige seiner Brüder wurden eifersüchtig und warfen ihn in einen Brunnen. Allah ließ Yūsuf nicht verloren gehen. Reisende fanden ihn und er kam später nach Ägypten. Dort wurde Yūsuf erneut geprüft. Er hielt sich von einer Sünde fern und suchte Schutz bei Allah. Später kam er ins Gefängnis. Auch dort vergaß er Allah nicht. Viele Jahre später bekam Yūsuf eine wichtige Aufgabe. Als er seine Brüder wiedertraf, vergab er ihnen. Wir lernen Geduld, Reinheit und Vergebung.",
+      "6–7":"Yūsufs Brüder wurden eifersüchtig und warfen ihn in einen Brunnen. Reisende fanden ihn und so kam er nach Ägypten. Als Yūsuf älter wurde, wurde er zu einer Sünde verleitet. Er suchte Schutz bei Allah. Später kam Yūsuf ins Gefängnis. Auch dort rief er zum Tawḥīd. Allah gab ihm Wissen, und später erhielt er eine wichtige Verantwortung im Land. Als seine Brüder wiederkamen, vergab Yūsuf ihnen. Die Geschichte zeigt Geduld, Tawḥīd und Vergebung.",
+      "8–10":"Sūrat Yūsuf erzählt eine zusammenhängende Geschichte voller Prüfungen. Yūsuf wurde von seinen Brüdern in einen Brunnen geworfen, kam nach Ägypten und wurde später zu einer schweren Sünde verleitet. Er suchte Schutz bei Allah und hielt sich vom Verbotenen fern. Im Gefängnis rief er zum Tawḥīd und deutete Träume. Später wurde seine Unschuld deutlich und er erhielt Verantwortung im Land. Als er seine Brüder wiedertraf, vergab er ihnen. Die Geschichte zeigt verschiedene Formen von Ṣabr, Tawḥīd, Reinheit und Vergebung."
+    },
+    reading:{
+      "6–7":["Yūsufs Brüder wurden eifersüchtig und warfen ihn in einen Brunnen.","Yūsuf kam nach Ägypten und wurde später schwer geprüft. Er blieb Allah treu.","Im Gefängnis rief Yūsuf zum Tawḥīd. Später erhielt er eine wichtige Aufgabe.","Als seine Brüder wiederkamen, vergab Yūsuf ihnen."],
+      "8–10":["Yūsufs Brüder waren eifersüchtig und warfen ihn in einen Brunnen.","Yūsuf hielt sich von einer schweren Sünde fern und kam später ins Gefängnis.","Im Gefängnis rief er zum Tawḥīd und deutete Träume.","Später wurde seine Unschuld deutlich und er erhielt Verantwortung im Land.","Als er seine Brüder wiedertraf, vergab er ihnen."]
+    },
+    sources:["Yūsuf 12:4–101"]
   }
 };
 
-var kidsSurahs=[
+var kidsSurahs=[var kidsSurahs=[
   {id:1,label:"al-Fātiḥah",hint:"7 Āyāt"},
   {id:112,label:"al-Iḫlāṣ",hint:"4 Āyāt"},
   {id:113,label:"al-Falaq",hint:"5 Āyāt"},
@@ -1272,7 +1363,7 @@ function completeAyahPractice(){
 }
 function practiceThresholds(){
   if(age==="4–5")return{green:.76,orange:.46};
-  if(age==="9–10")return{green:.88,orange:.62};
+  if(age==="8–10")return{green:.88,orange:.62};
   return{green:.83,orange:.55};
 }
 function evaluateCurrentWord(heard,score,isFinal){
@@ -1639,14 +1730,59 @@ document.getElementById("openPickedSurah").addEventListener("click",function(){
   openSurah(id,0,"listen");
 });
 
+function storyVersion(s){
+  return{
+    time:(s.time&&s.time[age])||"ca. 4 Min.",
+    text:(s.text&&s.text[age])||(s.text&&s.text["8–10"])||"",
+    reading:(s.reading&&s.reading[age])||[]
+  };
+}
+function renderStoryForAge(){
+  if(!currentStoryKey)return;
+  var s=stories[currentStoryKey]||stories.nuh;
+  var v=storyVersion(s);
+  document.getElementById("storyPlayerTime").textContent=v.time;
+  document.getElementById("storyAgeMode").textContent=age==="4–5"?"Nur Audio":(age==="6–7"?"Audio + kurz lesen":"Audio + lesen + Quellen");
+
+  var readingWrap=document.getElementById("storyReadingWrap");
+  var reading=document.getElementById("storyReading");
+  reading.innerHTML="";
+  if(age==="4–5"){
+    readingWrap.hidden=true;
+  }else{
+    readingWrap.hidden=false;
+    v.reading.forEach(function(p){
+      var el=document.createElement("p");
+      el.textContent=p;
+      reading.appendChild(el);
+    });
+  }
+
+  var sourceWrap=document.getElementById("storySourcesWrap");
+  var sourceBox=document.getElementById("storySources");
+  sourceBox.innerHTML="";
+  if(age!=="8–10"){
+    sourceWrap.hidden=true;
+  }else{
+    sourceWrap.hidden=false;
+    (s.sources||[]).forEach(function(ref){
+      var row=document.createElement("div");
+      row.className="story-source-row";
+      row.innerHTML="<span>Qurʾān</span><strong></strong>";
+      row.querySelector("strong").textContent=ref;
+      sourceBox.appendChild(row);
+    });
+  }
+}
 function openStory(key){
   currentStoryKey=key;
-  var s=stories[key]||stories.coin;
+  var s=stories[key]||stories.nuh;
   document.getElementById("storyPlayerTitle").textContent=s.title;
   document.getElementById("storyBigTitle").textContent=s.title;
-  document.getElementById("storyPlayerTime").textContent=s.time;
   document.getElementById("storyCategory").textContent=s.category;
+  document.getElementById("storyCover").style.backgroundImage="url('"+s.cover+"')";
   document.getElementById("storyDone").textContent=localStorage.getItem("kids.story."+key)==="1"?"✓ Schon geschafft":"○ Als gehört markieren";
+  renderStoryForAge();
   document.getElementById("storyModal").classList.add("open");
 }
 document.querySelectorAll("[data-story]").forEach(function(el){el.addEventListener("click",function(){openStory(el.dataset.story)})});
@@ -1654,18 +1790,19 @@ function stopSpeech(){
   if(speech)speech.cancel();
   speaking=false;
   document.getElementById("storyPlay").textContent="▶ Geschichte hören";
-  document.getElementById("storyWave").textContent="≋";
 }
 document.getElementById("storyPlay").addEventListener("click",function(){
-  if(!("speechSynthesis" in window)){alert("Auf diesem Gerät ist die Vorschau-Stimme nicht verfügbar.");return}
+  if(!("speechSynthesis" in window)){alert("Auf diesem Gerät ist die Vorlesestimme nicht verfügbar.");return}
   if(speaking){stopSpeech();return}
-  var s=stories[currentStoryKey]||stories.coin;
-  var u=new SpeechSynthesisUtterance(s.text);
-  u.lang="de-DE";u.rate=.87;u.pitch=.94;
+  var s=stories[currentStoryKey]||stories.nuh;
+  var v=storyVersion(s);
+  var u=new SpeechSynthesisUtterance(v.text);
+  u.lang="de-DE";
+  u.rate=age==="4–5"?.82:(age==="6–7"?.87:.92);
+  u.pitch=.97;
   u.onend=stopSpeech;u.onerror=stopSpeech;
   speaking=true;
   this.textContent="■ Stopp";
-  document.getElementById("storyWave").textContent="≋≋";
   speech.speak(u);
 });
 document.getElementById("storyDone").addEventListener("click",function(){
@@ -1673,7 +1810,7 @@ document.getElementById("storyDone").addEventListener("click",function(){
   this.textContent="✓ Schon geschafft";
 });
 
-document.querySelectorAll("[data-close]").forEach(function(b){
+document.querySelectorAll("[data-close]").forEach(function(b){document.querySelectorAll("[data-close]").forEach(function(b){
   b.addEventListener("click",function(){
     var type=b.dataset.close;
     if(type==="story"){stopSpeech();document.getElementById("storyModal").classList.remove("open")}
@@ -1682,18 +1819,28 @@ document.querySelectorAll("[data-close]").forEach(function(b){
   });
 });
 
-var ageHelp={"4–5":"viel hören · sehr kurze Wege","6–8":"hören · verstehen · mitmachen","9–10":"verstehen · anwenden · vertiefen"};
+var ageHelp={
+  "4–5":"Nur Audio · große Bilder · kein Lesetext",
+  "6–7":"Audio + kurzer Lesetext · einfache Sätze",
+  "8–10":"Audio + Lesetext + Qurʾān-Quellen"
+};
 var ageButtons=[].slice.call(document.querySelectorAll("[data-age]"));
-var age=localStorage.getItem("kids.age")||"6–8";
+var savedAge=localStorage.getItem("kids.age")||"";
+if(savedAge==="6–8")savedAge="6–7";
+if(savedAge==="9–10")savedAge="8–10";
+var age=(savedAge==="4–5"||savedAge==="6–7"||savedAge==="8–10")?savedAge:"6–7";
 function setAge(a){
   age=a;localStorage.setItem("kids.age",a);
   ageButtons.forEach(function(b){b.classList.toggle("active",b.dataset.age===a)});
   document.getElementById("ageHelp").textContent=ageHelp[a]||"";
   var app=document.querySelector(".app");
   if(app)app.setAttribute("data-age",a);
+  var hint=document.getElementById("storyModeHint");
+  if(hint)hint.textContent=a==="4–5"?"Nur Audio. Große Bilder und einfache Bedienung.":(a==="6–7"?"Audio + kurzer Lesetext.":"Audio + Lesetext + Qurʾān-Quellen.");
+  if(currentStoryKey&&document.getElementById("storyModal").classList.contains("open"))renderStoryForAge();
   if(a==="4–5"){
     document.querySelectorAll(".quran-mini-note").forEach(function(el){el.textContent="1. Hören. 2. Das große Wort sprechen. 3. Grün? Dann kommt das nächste Wort."});
-  }else if(a==="6–8"){
+  }else if(a==="6–7"){
     document.querySelectorAll(".quran-mini-note").forEach(function(el){el.textContent="Grün = richtig. Orange = fast richtig. Rot = noch einmal. Erst wenn alles grün ist, geht es weiter."});
   }else{
     document.querySelectorAll(".quran-mini-note").forEach(function(el){el.textContent="Wort-für-Wort-Training mit Aufnahme: Grün = bestanden, Orange = ähnlich, Rot = Fehler. Die nächste Āyah bleibt bis zum vollständigen Bestehen gesperrt."});
