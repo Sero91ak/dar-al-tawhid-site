@@ -108,6 +108,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "dar-al-tawhid-kids-dedicated-worker-v6-2026-09-24",
+      "approvedBy": "user-explicit-kids-live-fix-2026-09-24",
+      "reason": "Nutzer meldet weiterhin milchigen oberen Bereich und fehlendes Update-Popup. Kids erhält einen eigenen Cloudflare Worker/Deploypfad, damit normale Test-App-Deploys die Kids-Route nicht mehr überschreiben.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/kids/",
+        "cloudflare/test-app-worker.js",
+        "wrangler.kids.toml",
+        ".github/workflows/deploy-kids-app.yml"
+      ],
+      "expiresAt": "2027-03-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-learn-qari-ios-volume-2026-09-23",
       "approvedBy": "user-explicit-qari-auswahl-lautstaerke-ios-android-test",
       "reason": "Nutzer: Qāriʾ im Lernbereich nicht wählbar; Lautstärke-Slider bricht Audio; iOS-Systemlautstärke/HUD; iOS-App, Android-Webapp, Test-App.",
