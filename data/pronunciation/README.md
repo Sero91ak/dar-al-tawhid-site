@@ -4,8 +4,8 @@ Zentrale, provider-unabhängige Aussprachequelle für eigene Audio-/Stimmprodukt
 
 ## Bestand
 
-- 901 kanonische Begriffe und Phrasen
-- 3.719 konkrete Match-Regeln inklusive Schreibvarianten
+- 902 kanonische Begriffe und Phrasen
+- 3.727 konkrete Match-Regeln inklusive Schreibvarianten
 - Alias-Lautschriften als robuste Synthese-Fallbacks
 - IPA als phonetische Referenz
 - W3C-PLS-Dateien für generische Sprachsysteme
