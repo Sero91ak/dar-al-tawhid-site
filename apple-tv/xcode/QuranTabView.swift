@@ -17,6 +17,7 @@ private enum DarAlLaylQuranCardStyle {
 struct QuranTabView: View {
     @StateObject private var reciterStore = QuranReciterSelectionStore()
     @StateObject private var playbackStore = QuranPlaybackStore()
+    @StateObject private var tadabburStore = TVQuranTadabburStore.shared
 
     @State private var surahs: [QuranSurahSummary] = []
     @State private var isLoadingSurahs = false
@@ -135,8 +136,11 @@ struct QuranTabView: View {
     }
 
     private func verseView(_ verse: QuranSynchronizedVerse) -> some View {
-        ScrollView {
-            VStack(spacing: 34) {
+        let reference = "\(playbackStore.surah?.number ?? playbackStore.savedSurahNumber):\(verse.numberInSurah)"
+        let tadabbur = tadabburStore.entry(for: reference)
+
+        return ScrollView {
+            VStack(spacing: 30) {
                 Text(verse.arabicText)
                     .font(.system(size: 60, weight: .medium, design: .serif))
                     .foregroundStyle(DarAlLaylQuranCardStyle.primaryText)
@@ -174,6 +178,10 @@ struct QuranTabView: View {
                 Text("Deutsche Übersetzung: \(QuranContentService.germanTranslationName)")
                     .font(.system(size: 14, weight: .regular, design: .serif))
                     .foregroundStyle(DarAlLaylQuranCardStyle.mutedText)
+
+                TVQuranTadabburCard(reference: reference, tadabbur: tadabbur)
+                    .frame(maxWidth: 1180)
+                    .padding(.top, 2)
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 54)
@@ -290,9 +298,9 @@ struct QuranTabView: View {
     }
 
     private func prepare() async {
-        if !reciterStore.loadFinished {
-            await reciterStore.load()
-        }
+        async let reciterLoad: Void = reciterStore.loadFinished ? () : reciterStore.load()
+        async let tadabburLoad: Void = tadabburStore.load()
+        _ = await (reciterLoad, tadabburLoad)
 
         if surahs.isEmpty && !isLoadingSurahs {
             isLoadingSurahs = true
