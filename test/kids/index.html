@@ -624,7 +624,7 @@ html,body{background:#06131f!important}
 </div>
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon">KIDS · V0.7</div>
+  <div class="dev-ribbon">KIDS · V0.8</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -983,7 +983,7 @@ html,body{background:#06131f!important}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v7";
+const KIDS_BUILD_ID="kids-shell-v8";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -1006,7 +1006,7 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
   function kidsHardReload(targetBuild){
     try{localStorage.setItem(KIDS_BUILD_SEEN_KEY,targetBuild||KIDS_BUILD_ID)}catch(e){}
     var u=new URL(location.href);
-    u.searchParams.set("kv","20260924-7");
+    u.searchParams.set("kv","20260924-8");
     u.searchParams.set("cb",String(Date.now()));
     location.replace(u.toString());
   }
