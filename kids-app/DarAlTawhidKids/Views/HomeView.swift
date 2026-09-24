@@ -119,7 +119,7 @@ struct HomeView: View {
                 .foregroundStyle(KidsTheme.cream)
 
             HStack(spacing: 12) {
-                smallTile("Duʿāʾ", "hands.sparkles.fill", KidsTheme.sky)
+                smallTile("Duʿāʾ", "hand.raised.fill", KidsTheme.sky)
                 quizTile
             }
         }
