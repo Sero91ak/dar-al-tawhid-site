@@ -64,7 +64,7 @@ struct HomeView: View {
                     Text("Heute ganz in Ruhe")
                         .font(.system(size: 19, weight: .bold, design: .rounded))
                         .foregroundStyle(KidsTheme.cream)
-                    Text("Alter (appState.ageBand.rawValue) · ungefähr (appState.dailyMinutes) Minuten")
+                    Text("Alter \(appState.ageBand.rawValue) · ungefähr \(appState.dailyMinutes) Minuten")
                         .font(.system(size: 14, weight: .medium, design: .rounded))
                         .foregroundStyle(.white.opacity(0.66))
                 }
@@ -120,9 +120,33 @@ struct HomeView: View {
 
             HStack(spacing: 12) {
                 smallTile("Duʿāʾ", "hands.sparkles.fill", KidsTheme.sky)
-                smallTile("Eine Frage", "questionmark.bubble.fill", KidsTheme.peach)
+                quizTile
             }
         }
+    }
+
+    private var quizTile: some View {
+        NavigationLink {
+            QuizView()
+        } label: {
+            KidsCard {
+                VStack(alignment: .leading, spacing: 18) {
+                    Image(systemName: "star.fill")
+                        .font(.system(size: 25))
+                        .foregroundStyle(KidsTheme.peach)
+
+                    Text("Quiz spielen")
+                        .font(.system(size: 17, weight: .bold, design: .rounded))
+                        .foregroundStyle(KidsTheme.cream)
+
+                    Text(appState.ageBand == .age4to5 ? "hören & tippen" : "hören & auswählen")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.white.opacity(0.55))
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+        .buttonStyle(.plain)
     }
 
     private func smallTile(_ title: String, _ symbol: String, _ tint: Color) -> some View {
