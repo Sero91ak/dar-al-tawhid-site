@@ -219,6 +219,37 @@ async function fetchVersionBuild(base) {
   await verifyKidsDuaData("public", publicBase);
   await verifyKidsDuaData("workers.dev", workersBase);
 
+  async function verifyKidsQuizData(label, base) {
+    const url = `${base}/kids/data/quiz-kids.json?v=${Date.now()}`;
+    const { status, text, cf } = await fetchText(url);
+    let payload = {};
+    try { payload = JSON.parse(text); } catch {}
+    const items = Array.isArray(payload.items) ? payload.items : [];
+    const ok =
+      status === 200 &&
+      payload?.policy?.status === "approved-only" &&
+      items.length >= 34 &&
+      items.every((x) =>
+        x &&
+        x.verification === "approved" &&
+        x.canonicalStatus === "published" &&
+        x.canonicalReviewStatus === "approved" &&
+        x.canonicalQuizId &&
+        x.source
+      );
+    console.log(
+      `${label} kids quiz: ${url} -> ${status} cf=${cf} items=${items.length} ok=${ok}`
+    );
+    if (!ok) {
+      throw new Error(
+        `${label} Kinder-Quiz-Daten nicht vollständig/geprüft: ${url}`
+      );
+    }
+  }
+
+  await verifyKidsQuizData("public", publicBase);
+  await verifyKidsQuizData("workers.dev", workersBase);
+
   console.log(
     `Dar Test live OK — public und workers.dev liefern identisch ${TEST_EXPECT_BUILD}.`
   );
