@@ -126,7 +126,7 @@ enum SampleContent {
             id: "q68-adab",
             ageBand: .age6to8,
             question: "Was ist besser, wenn jemand Hilfe braucht?",
-            sceneSymbol: "hands.sparkles.fill",
+            sceneSymbol: "hand.raised.fill",
             style: .choice,
             answers: [
                 KidsQuizAnswer(id: "help", title: "Helfen", symbol: "sparkles", isCorrect: true),
@@ -279,7 +279,7 @@ enum SampleContent {
 
     static let learnCards: [LearnCard] = [
         LearnCard(id: "quran", title: "Mein Qurʾān", subtitle: "hören · wiederholen · lernen", symbol: "book.closed.fill", tintName: "gold"),
-        LearnCard(id: "dua", title: "Meine Duʿāʾ", subtitle: "für meinen Alltag", symbol: "hands.sparkles.fill", tintName: "sky"),
+        LearnCard(id: "dua", title: "Meine Duʿāʾ", subtitle: "für meinen Alltag", symbol: "hand.raised.fill", tintName: "sky"),
         LearnCard(id: "din", title: "Mein Dīn", subtitle: "kurz und verständlich", symbol: "moon.stars.fill", tintName: "sage"),
         LearnCard(id: "quiz", title: "Quiz", subtitle: "hören · überlegen · antworten", symbol: "questionmark.bubble.fill", tintName: "peach")
     ]
