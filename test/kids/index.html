@@ -178,7 +178,9 @@ radial-gradient(ellipse at 88% 100%,#dfba7f 0 27%,transparent 28%)}
 .dua-ar{font-family:"Geeza Pro","Noto Naskh Arabic","Traditional Arabic",serif;direction:rtl;text-align:center;font-size:clamp(34px,10vw,58px);line-height:1.75;color:#fff;margin:8px auto;max-width:620px}
 .dua-tr{text-align:center;color:#f2dca9;font-size:14px;line-height:1.5;font-style:italic;margin:3px auto 11px;max-width:620px}
 .dua-meaning{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.045);border-radius:20px;padding:13px 14px;text-align:center;font-size:14px;line-height:1.55;color:rgba(255,255,255,.82)}
-.dua-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:13px 0}
+.dua-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:13px 0}
+.dua-actions.has-quran{grid-template-columns:repeat(3,minmax(0,1fr))}
+.dua-quran-audio{background:rgba(115,201,193,.16);color:#c9fff3;border:1px solid rgba(115,201,193,.22)!important}
 .dua-actions button{border:0;border-radius:18px;min-height:52px;font-weight:900;cursor:pointer}
 .dua-listen{background:var(--gold);color:#102030}.dua-next-item{background:rgba(255,255,255,.075);color:var(--ink);border:1px solid rgba(255,255,255,.09)!important}
 .dua-source{font-size:10px;line-height:1.45;color:var(--soft);text-align:center;margin:10px 8px 0}
@@ -1164,6 +1166,8 @@ var currentAyahIndex=0;
 var quranMode="listen";
 var speakAlongTimer=0;
 var quranAudio=document.getElementById("quranAudio");
+var duaAudio=new Audio();
+var duaAudioPlaying=false;
 var recitationRecognition=null;
 var wordAudioContext=null;
 var wordAudioSource=null;
@@ -2370,6 +2374,35 @@ function openDailyDua(){
   currentDuaIndex=duaDailyIndex(list);
   openDuaAt(currentDuaIndex);
 }
+function stopDuaAudio(){
+  duaAudioPlaying=false;
+  try{duaAudio.pause()}catch(e){}
+  try{duaAudio.removeAttribute("src");duaAudio.load()}catch(e2){}
+}
+function playDuaQuran(refs,pos){
+  refs=Array.isArray(refs)?refs:[];
+  pos=Number(pos)||0;
+  if(!refs.length||pos>=refs.length){
+    duaAudioPlaying=false;
+    var btn=document.getElementById("duaQuranAudio");
+    if(btn)btn.textContent="▶ Qurʾān hören";
+    return;
+  }
+  var ref=refs[pos];
+  duaAudio.src=audioUrl(Number(ref.surah),Number(ref.ayah));
+  duaAudioPlaying=true;
+  var btn=document.getElementById("duaQuranAudio");
+  if(btn)btn.textContent="■ Stopp";
+  duaAudio.onended=function(){playDuaQuran(refs,pos+1)};
+  duaAudio.onerror=function(){
+    duaAudioPlaying=false;
+    if(btn)btn.textContent="▶ Qurʾān hören";
+  };
+  duaAudio.play().catch(function(){
+    duaAudioPlaying=false;
+    if(btn)btn.textContent="▶ Qurʾān hören";
+  });
+}
 function openDuaAt(index){
   var list=filteredDuas();
   if(!list.length){
@@ -2384,6 +2417,7 @@ function openDuaAt(index){
   renderDua();
 }
 function renderDua(){
+  stopDuaAudio();
   var list=filteredDuas();
   var d=list[currentDuaIndex];
   if(!d)return;
@@ -2405,7 +2439,9 @@ function renderDua(){
     '<div class="dua-tr">'+d.transliteration+'</div>'+
     '<div class="dua-meaning">'+d.meaning+'</div>'+
     older+
-    '<div class="dua-actions"><button id="duaListen" class="dua-listen">🔊 Erklärung hören</button><button id="duaNextItem" class="dua-next-item">Nächstes Duʿāʾ ›</button></div>'+
+    '<div class="dua-actions '+(d.type==="quran"&&Array.isArray(d.quranRefs)&&d.quranRefs.length?"has-quran":"")+'">'+
+      (d.type==="quran"&&Array.isArray(d.quranRefs)&&d.quranRefs.length?'<button id="duaQuranAudio" class="dua-quran-audio">▶ Qurʾān hören</button>':'')+
+      '<button id="duaListen" class="dua-listen">🔊 Erklärung hören</button><button id="duaNextItem" class="dua-next-item">Nächstes Duʿāʾ ›</button></div>'+
     '<div class="dua-question"><h3>'+d.quiz.question+'</h3><div id="duaAnswers" class="dua-answer-grid"></div><div id="duaFeedback" class="dua-feedback">'+(done?"✓ Schon gelernt":"")+'</div></div>'+
     '<div class="dua-source">'+d.source+(sourceLink?' · '+sourceLink:'')+'</div>';
   var answers=document.getElementById("duaAnswers");
@@ -2436,7 +2472,16 @@ function renderDua(){
     });
     answers.appendChild(b);
   });
+  var quranBtn=document.getElementById("duaQuranAudio");
+  if(quranBtn){
+    quranBtn.addEventListener("click",function(){
+      if(duaAudioPlaying){stopDuaAudio();quranBtn.textContent="▶ Qurʾān hören";return}
+      try{speech.cancel()}catch(e){}
+      playDuaQuran(d.quranRefs,0);
+    });
+  }
   document.getElementById("duaListen").addEventListener("click",function(){
+    stopDuaAudio();
     quizSpeak(d.childPrompt+" "+d.meaning);
   });
   document.getElementById("duaNextItem").addEventListener("click",function(){
@@ -2760,7 +2805,7 @@ document.querySelectorAll("[data-close]").forEach(function(b){
     var type=b.dataset.close;
     if(type==="story"){stopSpeech();document.getElementById("storyModal").classList.remove("open")}
     if(type==="knowledge"){try{speech.cancel()}catch(e){} document.getElementById("knowledgeModal").classList.remove("open")}
-    if(type==="dua"){try{speech.cancel()}catch(e){} document.getElementById("duaModal").classList.remove("open")}
+    if(type==="dua"){try{speech.cancel()}catch(e){} stopDuaAudio();document.getElementById("duaModal").classList.remove("open")}
     if(type==="quiz"){try{speech.cancel()}catch(e){} document.getElementById("quizModal").classList.remove("open")}
     if(type==="quran"){stopQuran();releaseMicStream();document.getElementById("quranModal").classList.remove("open")}
     if(type==="fullquran"){document.getElementById("fullQuranModal").classList.remove("open")}
