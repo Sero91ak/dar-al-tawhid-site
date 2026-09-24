@@ -5816,7 +5816,8 @@
         "kids-app/",
         "test/kids/",
         "cloudflare/test-app-worker.js",
-        "scripts/verify-test-app-deploy.js"
+        "scripts/verify-test-app-deploy.js",
+        "wrangler.test.toml"
       ],
       "expiresAt": "2027-03-31T23:59:00.000Z",
       "stage": "feature-only"
