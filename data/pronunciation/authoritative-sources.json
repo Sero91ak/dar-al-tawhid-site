@@ -11,7 +11,8 @@
       "scientific romanization standard for spelling/transliteration only",
       "pedagogical sources only as secondary confirmation"
     ],
-    "quranRecitation": "real-recording-only"
+    "quranRecitation": "real-recording-only",
+    "lexicalVerification": "Prefer two independent confirmations for high-priority terms when possible; owner-recorded pronunciations are required for brand-specific readings."
   },
   "sources": [
     {
@@ -88,6 +89,63 @@
         "secondary pedagogical confirmation of al- assimilation before sun letters"
       ],
       "caveat": "Secondary pedagogical source; primary phonetic authority remains JIPA/IPA."
+    },
+    {
+      "id": "ldc-qcri-msa-pronunciation-dictionary",
+      "authorityTier": 1,
+      "title": "Arabic Speech Recognition Pronunciation Dictionary",
+      "publisher": "Linguistic Data Consortium / Qatar Computing Research Institute",
+      "year": 2017,
+      "doi": "10.35111/9abp-k222",
+      "url": "https://catalog.ldc.upenn.edu/LDC2017L01",
+      "scale": "~2,000,000 pronunciation entries for ~526,000 Standard Arabic words",
+      "use": [
+        "licensed lexical pronunciation gold reference",
+        "pronunciation-variant comparison"
+      ],
+      "distribution": "reference-only",
+      "caveat": "LDC licence required; data must not be copied into this repository without the appropriate licence."
+    },
+    {
+      "id": "ipa-dict-ar",
+      "authorityTier": 2,
+      "title": "ipa-dict — Arabic (Modern Standard) pronunciation dictionary",
+      "publisher": "open-dict-data",
+      "url": "https://github.com/open-dict-data/ipa-dict",
+      "scale": "~857,000 Arabic IPA dictionary entries",
+      "provenance": "Arabic IPA generated from Tim Buckwalter's Arabic Morphological Analyzer with UTF-8/IPA adaptations.",
+      "license": "MIT repository; verify any third-party provenance notices before vendoring derived subsets.",
+      "use": [
+        "open lexical IPA cross-check",
+        "secondary machine-readable verification"
+      ],
+      "caveat": "Algorithmically generated; never overrides owner-recorded brand readings or higher-tier linguistic evidence by itself."
+    },
+    {
+      "id": "orthography2ipa-ar",
+      "authorityTier": 2,
+      "title": "orthography2ipa — Modern Standard Arabic research specification",
+      "publisher": "orthography2ipa project",
+      "url": "https://github.com/TigreGotico/orthography2ipa/blob/dev/docs/languages/ar.md",
+      "license": "Apache-2.0",
+      "use": [
+        "rule-level cross-check for sun-letter assimilation",
+        "hamzat al-waṣl",
+        "pausal tanwīn",
+        "G2P sanity checks"
+      ],
+      "caveat": "Project labels Arabic as research quality, not production/native-speaker gold; use only as corroboration."
+    },
+    {
+      "id": "msa-stress-weight-sensitive",
+      "authorityTier": 1,
+      "title": "Modern Standard Arabic lexical stress — weight-sensitive description",
+      "publisher": "Cambridge University Press / Studies in Second Language Acquisition",
+      "url": "https://www.cambridge.org/core/journals/studies-in-second-language-acquisition/article/influence-of-the-native-language-on-sensitivity-to-lexical-stress/2A33EBFA90CF7BE19E355C2A3E1BC674",
+      "use": [
+        "stress-rule verification"
+      ],
+      "summary": "MSA stress is predictable and weight-sensitive; final superheavy syllables attract stress, otherwise the rightmost heavy syllable is preferred subject to the language's stress domain."
     }
   ]
 }
