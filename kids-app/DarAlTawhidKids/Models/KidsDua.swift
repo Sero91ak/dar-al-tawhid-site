@@ -171,8 +171,9 @@ enum KidsDuaContent {
     ]
 
     static func available(for ageBand: AgeBand) -> [KidsDua] {
-        verified.filter { dua in
-            ageBand.numericRange.overlaps(dua.ageMin...dua.ageMax)
+        let band = ageBand.numericRange
+        return verified.filter { dua in
+            dua.ageMin <= band.lowerBound && dua.ageMax >= band.upperBound
         }
     }
 }
