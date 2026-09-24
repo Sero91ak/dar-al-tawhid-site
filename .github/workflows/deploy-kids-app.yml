@@ -9,6 +9,7 @@ on:
       - cloudflare/test-app-worker.js
       - wrangler.kids.toml
       - .github/workflows/deploy-kids-app.yml
+      - scripts/kids-content-authenticity-guard.js
   workflow_dispatch:
 
 permissions:
@@ -30,6 +31,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Kids content authenticity guard
+        run: node scripts/kids-content-authenticity-guard.js
 
       - name: Kids build consistency
         shell: bash
