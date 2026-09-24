@@ -14,3 +14,15 @@ node scripts/pronunciation/prepare-narration.mjs story.txt story.spoken.txt
 ```
 
 Der sichtbare Originaltext bleibt unverändert. Nur der Audiopfad erhält die Alias-/IPA-Fassung.
+
+## Autoritative Verifikation
+
+`validate-authoritative-pronunciation.mjs` prüft zusätzlich:
+
+- Vorhandensein der hinterlegten IPA/JIPA/Qurʾānic-Corpus/ALA-LC-Quellen,
+- Kernphoneme des Arabischen,
+- exakte Brand-Overrides,
+- Sonnenbuchstaben-Assimilation in normalen `al-`-Formen,
+- formale IPA-Felder der Runtime-Regeln.
+
+Die eigentliche TTS-Ausgabe bleibt provider-unabhängig; Alias ist Synthese-Fallback, IPA ist phonetische Referenz.
