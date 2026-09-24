@@ -1183,7 +1183,7 @@ function storyData(key){
 }
 function authenticStoryAvailableForAge(story){
   var r=ageRange();
-  return Number(story.ageMin)<=r.max&&Number(story.ageMax)>=r.min&&story.verification==="approved";
+  return Number(story.ageMin)<=r.min&&Number(story.ageMax)>=r.max&&story.verification==="approved";
 }
 function renderAuthenticStories(){
   var box=document.getElementById("authenticStoryList");
@@ -2208,7 +2208,7 @@ function ageRange(){
 }
 function filteredDuas(){
   var r=ageRange();
-  return kidsDuas.filter(function(d){return Number(d.ageMin)<=r.max&&Number(d.ageMax)>=r.min&&d.verification==="verified"});
+  return kidsDuas.filter(function(d){return Number(d.ageMin)<=r.min&&Number(d.ageMax)>=r.max&&d.verification==="verified"});
 }
 function duaDailyIndex(list){
   if(!list.length)return 0;
@@ -2383,8 +2383,8 @@ function quizBankForAge(){
     return q.verification==="approved" &&
       q.canonicalStatus==="published" &&
       q.canonicalReviewStatus==="approved" &&
-      Number(q.ageMin)<=r.max &&
-      Number(q.ageMax)>=r.min;
+      Number(q.ageMin)<=r.min &&
+      Number(q.ageMax)>=r.max;
   });
   pool.sort(function(a,b){
     var ma=quizMastery(a.id),mb=quizMastery(b.id);
