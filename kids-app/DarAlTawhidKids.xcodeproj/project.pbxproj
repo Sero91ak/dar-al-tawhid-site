@@ -20,6 +20,8 @@
 		B1000000000000000000000B /* ParentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000000B /* ParentsView.swift */; };
 		B1000000000000000000000C /* StoryPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000000C /* StoryPlayerView.swift */; };
 		B1000000000000000000000F /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000000F /* QuizView.swift */; };
+		B10000000000000000000010 /* KidsDua.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000010 /* KidsDua.swift */; };
+		B10000000000000000000011 /* DuaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000011 /* DuaView.swift */; };
 		B1000000000000000000000D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000000E /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +39,8 @@
 		F1000000000000000000000B /* ParentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentsView.swift; sourceTree = "<group>"; };
 		F1000000000000000000000C /* StoryPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPlayerView.swift; sourceTree = "<group>"; };
 		F1000000000000000000000F /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
+		F10000000000000000000010 /* KidsDua.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsDua.swift; sourceTree = "<group>"; };
+		F10000000000000000000011 /* DuaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuaView.swift; sourceTree = "<group>"; };
 		F1000000000000000000000D /* DarAlTawhidKids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarAlTawhidKids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1000000000000000000000E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				F10000000000000000000004 /* KidsContent.swift */,
+				F10000000000000000000010 /* KidsDua.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -117,6 +122,7 @@
 				F1000000000000000000000B /* ParentsView.swift */,
 				F1000000000000000000000C /* StoryPlayerView.swift */,
 				F1000000000000000000000F /* QuizView.swift */,
+				F10000000000000000000011 /* DuaView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -211,6 +217,8 @@
 				B1000000000000000000000B /* ParentsView.swift in Sources */,
 				B1000000000000000000000C /* StoryPlayerView.swift in Sources */,
 				B1000000000000000000000F /* QuizView.swift in Sources */,
+				B10000000000000000000010 /* KidsDua.swift in Sources */,
+				B10000000000000000000011 /* DuaView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
