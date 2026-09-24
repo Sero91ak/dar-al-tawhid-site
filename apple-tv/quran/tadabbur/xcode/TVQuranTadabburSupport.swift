@@ -68,7 +68,7 @@ final class TVQuranTadabburStore: ObservableObject {
         _ = await RemoteContentSyncService.shared.syncCatalog(relativeCatalogPath: relativeCatalogPath)
 
         do {
-            let merged = try loadFromRemoteContentCache()
+            let merged = try await loadFromRemoteContentCache()
             try activate(entries: merged)
             return
         } catch {
@@ -89,15 +89,15 @@ final class TVQuranTadabburStore: ObservableObject {
         entriesByReference[reference]
     }
 
-    private func loadFromRemoteContentCache() throws -> [TVQuranTadabbur] {
-        let catalogURL = try RemoteContentSyncService.shared.cachedFileURL(
+    private func loadFromRemoteContentCache() async throws -> [TVQuranTadabbur] {
+        let catalogURL = try await RemoteContentSyncService.shared.cachedFileURL(
             relativeCatalogPath: relativeCatalogPath,
             filePath: "catalog.json"
         )
         let catalogData = try Data(contentsOf: catalogURL)
         let catalog = try JSONDecoder().decode(TadabburCatalog.self, from: catalogData)
 
-        let indexURL = try RemoteContentSyncService.shared.cachedFileURL(
+        let indexURL = try await RemoteContentSyncService.shared.cachedFileURL(
             relativeCatalogPath: relativeCatalogPath,
             filePath: catalog.entriesIndexPath
         )
@@ -108,7 +108,7 @@ final class TVQuranTadabburStore: ObservableObject {
         merged.reserveCapacity(index.totalVerifiedEntries)
 
         for file in index.files {
-            let fileURL = try RemoteContentSyncService.shared.cachedFileURL(
+            let fileURL = try await RemoteContentSyncService.shared.cachedFileURL(
                 relativeCatalogPath: relativeCatalogPath,
                 filePath: file.path
             )
