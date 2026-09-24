@@ -199,9 +199,19 @@ struct QuizView: View {
         }
     }
 
+    private func spokenPrompt(for question: KidsQuizQuestion) -> String {
+        if appState.ageBand == .age4to5 {
+            return question.question + " Ja oder Nein?"
+        }
+        let choices = question.answers.enumerated()
+            .map { "Antwort \($0.offset + 1): \($0.element.title)." }
+            .joined(separator: " ")
+        return question.question + " " + choices
+    }
+
     private func listenButton(_ question: KidsQuizQuestion) -> some View {
         Button {
-            narrator.speak(question.question, ageBand: appState.ageBand)
+            narrator.speak(spokenPrompt(for: question), ageBand: appState.ageBand)
         } label: {
             Label("Frage anhören", systemImage: "speaker.wave.2.fill")
                 .font(.system(size: 14, weight: .bold, design: .rounded))
@@ -385,7 +395,7 @@ struct QuizView: View {
         guard let question else { return }
         Task { @MainActor in
             try? await Task.sleep(for: .milliseconds(250))
-            narrator.speak(question.question, ageBand: appState.ageBand)
+            narrator.speak(spokenPrompt(for: question), ageBand: appState.ageBand)
         }
     }
 
