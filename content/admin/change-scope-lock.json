@@ -108,6 +108,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "voice-pronunciation-master-kids-2026-09-24",
+      "approvedBy": "user-explicit-push-aussprachebibliothek-kids-farid-2026-09-24",
+      "reason": "Nutzer: komplette islamische Aussprachebibliothek in GitHub zentralisieren und für Voice/TTS, DĀR AL TAWḤĪD Kids sowie weitere Kinder-/Audio-Systeme als gemeinsame Source of Truth aufbauen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "data/voice/pronunciation/",
+        "cloudflare/voice/",
+        "cloudflare/video-studio/voice.js",
+        "scripts/test-pronunciation-library.mjs",
+        "docs/voice-pronunciation-library.md"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "all-apps-top-no-glass-cache-bust-v1006-2026-09-24",
       "approvedBy": "user-explicit-still-no-change-no-update-popup-2026-09-24",
       "reason": "Nutzer: Effekt ist weiterhin sichtbar und kein Aktualisierungs-Popup erscheint. Build-ID erhöhen und geänderte No-Blur-CSS-Dateien mit neuen Asset-Versionen erzwingen, damit iOS/PWA/Test die Änderung wirklich laden.",

@@ -1,3 +1,5 @@
+import { prepareDarSpeech } from "../voice/pronunciation.js";
+
 export function elevenKey(env) {
   let key = String(env.ELEVENLABS_API_KEY || env.ELEVEN_API_KEY || "").trim();
   // Paste-Fehler: Anführungszeichen, Bearer/xi-api-key-Prefix, Whitespace/Zeilenumbrüche
@@ -87,6 +89,7 @@ export async function synthesizeDarVoice(env, text) {
   }
   const script = String(text || "").trim();
   if (!script) return { ok: false, reason: "Kein Sprachtext" };
+  const preparedSpeech = prepareDarSpeech(env, script);
 
   const res = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voiceId)}`, {
     method: "POST",
@@ -96,8 +99,11 @@ export async function synthesizeDarVoice(env, text) {
       Accept: "audio/mpeg"
     },
     body: JSON.stringify({
-      text: script,
+      text: preparedSpeech.text,
       model_id: String(env.ELEVENLABS_MODEL_ID || "eleven_multilingual_v2"),
+      ...(preparedSpeech.pronunciationDictionaryLocators.length
+        ? { pronunciation_dictionary_locators: preparedSpeech.pronunciationDictionaryLocators }
+        : {}),
       // Ruhig, würdevoll, nicht hektisch – exakt den vorgegebenen Text lesen
       voice_settings: {
         stability: 0.72,
@@ -118,6 +124,8 @@ export async function synthesizeDarVoice(env, text) {
     contentType: "audio/mpeg",
     voiceId,
     chars: script.length,
+    pronunciationMode: preparedSpeech.mode,
+    pronunciationVersion: preparedSpeech.version,
     estimatedCostEur: Number(((script.length / 1000) * 0.18).toFixed(4))
   };
 }

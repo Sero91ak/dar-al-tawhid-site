@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "version": "2026-09-24",
+  "name": "DĀR AL TAWḤĪD Islamic Pronunciation Library",
+  "locale": "de-DE",
+  "canonicalTermCount": 902,
+  "concreteAliasRuleCount": 3719,
+  "sourceOfTruth": true,
+  "files": {
+    "canonical": "dar_al_tawhid_canonical_terms.csv",
+    "master": "dar_al_tawhid_islamic_pronunciation_master.csv",
+    "elevenLabsAliasPls": "dar_al_tawhid_alias_master.pls",
+    "elevenLabsV3IpaPls": "dar_al_tawhid_v3_ipa_master.pls",
+    "elevenLabsRulesJson": "elevenlabs_create_from_rules_alias.json",
+    "qa": "QA_TESTSAETZE.txt"
+  },
+  "consumers": [
+    "DĀR AL TAWḤĪD Voice/TTS",
+    "DĀR AL TAWḤĪD Kids",
+    "Hörgeschichten",
+    "Video-Studio",
+    "future kids/audio clients"
+  ],
+  "policy": {
+    "visibleText": "scientific Unicode transliteration",
+    "speech": "ElevenLabs pronunciation dictionary when configured; local alias fallback otherwise",
+    "noCompetingLists": true
+  }
+}
