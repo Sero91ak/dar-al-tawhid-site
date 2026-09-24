@@ -8,7 +8,7 @@
 <link rel="apple-touch-icon" href="/test/kids/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/test/kids/icons/icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="DĀR AL TAWḤĪD KIDS">
 <title>DĀR AL TAWḤĪD KIDS – Kinderwelt</title>
 <style>
@@ -384,12 +384,38 @@ html,body{background:#06131f!important}
     filter:none!important;
   }
 }
+
+/* KIDS_UPDATE_UI_V3 */
+.kids-update-layer{
+  position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;
+  padding:24px;background:#06131f;color:#f9f3e8
+}
+.kids-update-layer.show{display:flex}
+.kids-update-card{
+  width:min(100%,430px);border:1px solid rgba(226,189,114,.28);border-radius:30px;
+  padding:26px 22px;text-align:center;background:#0b2133;box-shadow:0 24px 70px rgba(0,0,0,.46)
+}
+.kids-update-mark{font-size:32px;margin-bottom:10px}
+.kids-update-card h2{margin:0 0 8px;font-size:24px}
+.kids-update-card p{margin:0;color:rgba(255,255,255,.72);font-size:13px;line-height:1.5}
+.kids-update-card button{
+  width:100%;margin-top:20px;min-height:54px;border:0;border-radius:18px;
+  background:#e2bd72;color:#102030;font-weight:950;font-size:15px
+}
 </style>
 </head>
 <body>
+<div id="kidsUpdateLayer" class="kids-update-layer" role="dialog" aria-modal="true" aria-live="polite">
+  <div class="kids-update-card">
+    <div class="kids-update-mark">↻</div>
+    <h2 id="kidsUpdateTitle">App-Aktualisierung bereit</h2>
+    <p id="kidsUpdateText">Die Kinder-App wurde aktualisiert. Tippe einmal auf Aktualisieren, damit die neue Oberfläche vollständig geladen wird.</p>
+    <button id="kidsUpdateButton" type="button">Jetzt aktualisieren</button>
+  </div>
+</div>
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon">KIDS · V0.2</div>
+  <div class="dev-ribbon">KIDS · V0.3</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -673,6 +699,63 @@ html,body{background:#06131f!important}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
+const KIDS_BUILD_ID="kids-shell-v3";
+const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
+
+(function(){
+  function kidsStandalone(){
+    try{
+      return navigator.standalone===true || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+    }catch(e){return false}
+  }
+  function kidsShowUpdate(title,text,targetBuild){
+    var layer=document.getElementById("kidsUpdateLayer");
+    var t=document.getElementById("kidsUpdateTitle");
+    var p=document.getElementById("kidsUpdateText");
+    var b=document.getElementById("kidsUpdateButton");
+    if(!layer||!b)return;
+    if(t&&title)t.textContent=title;
+    if(p&&text)p.textContent=text;
+    layer.dataset.targetBuild=targetBuild||KIDS_BUILD_ID;
+    layer.classList.add("show");
+  }
+  function kidsHardReload(targetBuild){
+    try{localStorage.setItem(KIDS_BUILD_SEEN_KEY,targetBuild||KIDS_BUILD_ID)}catch(e){}
+    var u=new URL(location.href);
+    u.searchParams.set("kv","20260924-3");
+    u.searchParams.set("cb",String(Date.now()));
+    location.replace(u.toString());
+  }
+  async function kidsCheckRemoteVersion(){
+    try{
+      var r=await fetch("/test/kids/version.json?cb="+Date.now(),{cache:"no-store"});
+      if(!r.ok)return;
+      var j=await r.json();
+      var remote=String(j.buildId||"").trim();
+      if(remote && remote!==KIDS_BUILD_ID){
+        kidsShowUpdate("Neue Version verfügbar","Eine neue Version von DĀR AL TAWḤĪD KIDS ist bereit.",remote);
+      }
+    }catch(e){}
+  }
+  window.addEventListener("DOMContentLoaded",function(){
+    var b=document.getElementById("kidsUpdateButton");
+    if(b)b.addEventListener("click",function(){
+      var layer=document.getElementById("kidsUpdateLayer");
+      kidsHardReload(layer&&layer.dataset.targetBuild||KIDS_BUILD_ID);
+    });
+    var seen="";
+    try{seen=String(localStorage.getItem(KIDS_BUILD_SEEN_KEY)||"")}catch(e){}
+    if(kidsStandalone() && seen!==KIDS_BUILD_ID){
+      kidsShowUpdate("App-Aktualisierung bereit","Die Kinder-App wurde aktualisiert. Tippe einmal auf Aktualisieren, damit die neue Oberfläche vollständig geladen wird.",KIDS_BUILD_ID);
+    }
+    kidsCheckRemoteVersion();
+  });
+  window.addEventListener("focus",kidsCheckRemoteVersion);
+  document.addEventListener("visibilitychange",function(){if(!document.hidden)kidsCheckRemoteVersion()});
+  setInterval(kidsCheckRemoteVersion,60000);
+  window.addEventListener("pageshow",function(e){if(e.persisted)kidsCheckRemoteVersion()});
+})();
+
 (function(){
 "use strict";
 
