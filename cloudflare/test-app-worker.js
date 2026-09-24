@@ -9,12 +9,7 @@ export default {
     if (url.pathname === "/test/kids" || url.pathname === "/test/kids/") {
       const kidsUrl = new URL(request.url);
       kidsUrl.pathname = "/test/kids/index.html";
-      const kidsRequest = new Request(kidsUrl.toString(), {
-        method: request.method,
-        headers: request.headers,
-        redirect: "follow"
-      });
-      return env.ASSETS.fetch(kidsRequest);
+      return Response.redirect(kidsUrl.toString(), 302);
     }
 
     if (url.pathname === "/test" || url.pathname === "/test/") {
