@@ -3,52 +3,79 @@
 Status: verbindliche Fortsetzung nach Abschluss des fortlaufenden Verslaufs  
 Branch: `apple-tv-hadith-staging`
 
-## Aktueller echter Stand
+## Aktueller auditfester Stand
 
-Der ältere Arbeitsstand mit `entriesCount: 5008` und Fortsetzungspunkt `entries-batch-05z-113.json` ist überholt.
+Der frühere Stand `5102` war die Zahl registrierter Zeilen, nicht die Zahl eindeutiger Qurʾān-Referenzen.
 
-Aktuell registriert:
+Der vollständige Audit am 24.09.2026 ergab vor der Bereinigung:
 
 ```text
-entriesCount: 5102
-totalVerifiedEntries: 5102
-letzter Batch: entries-batch-05z-116.json
+geladene Einträge: 5102
+eindeutige Referenzen: 4190
+Duplikate: 912
+ungültige Referenzen: 0
+Count-Mismatches: 2
+```
+
+Die 912 späteren Dubletten wurden verlustfrei aus dem registrierten Datensatz entfernt und nach
+
+```text
+duplicate-review-archive.json
+```
+
+verschoben. Die jeweils erste registrierte Referenz bleibt kanonisch. Dadurch geht kein alternativer Datensatz verloren; er bleibt für spätere Einzelprüfung erhalten.
+
+Nach der Reparatur:
+
+```text
+entriesCount: 4190
+totalVerifiedEntries: 4190
+loadedEntries: 4190
+uniqueVerifiedReferences: 4190
+duplicateCount: 0
+invalidCount: 0
+countMismatchCount: 0
+fehlende eindeutige Referenzen: 2046
+erster fehlender Vers: 1:1
+letzter fehlender Vers: 19:98
+letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
 ```
 
 ## Warum kein `entries-batch-05z-117.json`?
 
-`entries-batch-05z-116.json` endet bei Qurʾān `114:6`.
+`entries-batch-05z-116.json` erreicht Qurʾān `114:6`.
 
-Danach gibt es keinen weiteren Qurʾān-Vers. Deshalb darf kein weiterer fortlaufender Batch nach `114:6` erfunden werden.
+Danach gibt es keinen weiteren Qurʾān-Vers. Deshalb darf kein weiterer fortlaufender `05z`-Batch nach `114:6` erzeugt werden.
 
 ## Was jetzt wirklich fehlt
 
-Die verbleibenden fehlenden Einträge bis zur Vollzahl `6236` sind keine Verse nach `114:6`, sondern Lücken innerhalb des bereits durchlaufenen Qurʾān-Bereichs.
+Die verbleibenden `2046` Referenzen sind interne Lücken innerhalb des Qurʾān, keine Verse nach `114:6`.
 
 Rechnung:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-registrierte geprüfte Einträge: 5102
-fehlende geprüfte Einträge: 1134
+eindeutige geprüfte Einträge: 4190
+fehlende eindeutige Einträge: 2046
 ```
 
-Diese `1134` müssen als Gap-Fill-Batches ergänzt werden, nicht als fortlaufende `05z`-Weiterführung.
+## Gap-Fill-Regel
 
-## Neue Arbeitsregel
-
-Ab jetzt:
+Ab jetzt verbindlich:
 
 ```text
-1. fehlende Referenzen auditieren
-2. nur echte fehlende Referenzen aufnehmen
-3. keine Duplikate erzeugen
-4. keine Referenz nach 114:6 erzeugen
-5. neue Batches als Gap-Fill kennzeichnen
+1. fehlende Referenzen nur aus dem Audit übernehmen
+2. ausschließlich geprüfte Einträge ergänzen
+3. keine doppelten reference-Werte registrieren
+4. keine ungültigen Qurʾān-Referenzen erzeugen
+5. maximal 25 Einträge pro Gap-Fill-Datei
+6. nach jedem Batch catalog.json und entries-index.json aktualisieren
+7. nach jedem Batch Audit erneut ausführen
+8. Audit muss duplicateCount=0, invalidCount=0 und countMismatchCount=0 behalten
 ```
 
-Empfohlene Benennung:
+Benennung:
 
 ```text
 entries-gap-06-001.json
@@ -57,30 +84,54 @@ entries-gap-06-003.json
 ...
 ```
 
-Jeder Gap-Fill-Batch enthält maximal 25 geprüfte Einträge.
+## Nächster Audit-Batch
+
+Der nächste echte 25er-Bereich ist:
+
+```text
+1:1
+1:2
+1:3
+1:4
+1:5
+1:6
+1:7
+2:1
+2:2
+2:3
+2:4
+2:5
+2:6
+2:7
+2:8
+2:9
+2:10
+2:11
+2:12
+2:13
+2:14
+2:15
+2:16
+2:17
+2:18
+```
+
+Diese Referenzen sind nur Arbeitsziele. Sie dürfen erst registriert werden, wenn für die jeweilige Referenz ein geprüfter Datensatz vorliegt.
 
 ## Audit-Tool
-
-Neu angelegt:
 
 ```text
 apple-tv/quran/tadabbur/tools/find-missing-references.mjs
 ```
 
-Ausführen aus dem Tadabbur-Ordner:
+Ausführen:
 
 ```bash
 cd apple-tv/quran/tadabbur
 node tools/find-missing-references.mjs
 ```
 
-Das Tool erzeugt:
-
-```text
-apple-tv/quran/tadabbur/missing-references.report.json
-```
-
-Der Report enthält:
+Der Report enthält insbesondere:
 
 - `totalVerses`
 - `catalogEntriesCount`
@@ -97,26 +148,27 @@ Der Report enthält:
 - `suggestedNextPlus200`
 - vollständige `missing`-Liste
 
-## Nächster sauberer Schritt
+## Dedupe-Reparatur
 
-1. Audit-Tool ausführen.
-2. `suggestedNextBatch` oder `suggestedNextPlus200` prüfen.
-3. Für diese Referenzen nur geprüfte Salaf-/Tafsīr-Einträge ergänzen.
-4. Neue Datei erstellen, z. B. `entries-gap-06-001.json`.
-5. `catalog.json` aktualisieren.
-6. `entries-index.json` aktualisieren.
-7. erneut Audit laufen lassen.
-8. keine Duplikate, keine ungültigen Referenzen, keine Count-Mismatches zulassen.
+Werkzeug:
 
-## Auditlauf 24.09.2026
+```text
+apple-tv/quran/tadabbur/tools/dedupe-registered-entries.mjs
+```
 
-Der Gap-Fill-Lauf wurde zur vollständigen Prüfung des aktuellen Branchstands erneut angestoßen. Maßgeblich ist ausschließlich der erzeugte `missing-references.report.json`; vor dessen Auswertung werden keine Gap-Fill-Referenzen geraten oder manuell fortgeschrieben.
+Review-Archiv:
 
-## Strenge Regel
+```text
+apple-tv/quran/tadabbur/duplicate-review-archive.json
+```
+
+Die entfernten Mehrfacheinträge bleiben dort mit `canonicalPath` und `removedFromPath` nachvollziehbar.
+
+## Strenge Inhaltsregel
 
 Fehlende Verse dürfen nicht durch frei erzeugten religiösen Text gefüllt werden.
 
-Wenn für eine Referenz kein geprüfter Eintrag vorliegt, bleibt in der App der feste Fallback aktiv:
+Wenn für eine Referenz kein geprüfter Eintrag vorliegt, bleibt der feste Fallback aktiv:
 
 ```text
 Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor.
@@ -124,9 +176,7 @@ Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor.
 
 ## App-Verhalten
 
-Die App zeigt:
-
 - geprüfter Eintrag vorhanden → Tadabbur-Karte anzeigen
 - kein geprüfter Eintrag vorhanden → festen Fallback anzeigen
 
-Das ist vollständige technische Abdeckung, aber keine erfundene inhaltliche Abdeckung.
+Das ist vollständige technische Abdeckung ohne erfundene inhaltliche Abdeckung.
