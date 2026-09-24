@@ -218,6 +218,19 @@ radial-gradient(ellipse at 88% 100%,#dfba7f 0 27%,transparent 28%)}
 .daily-step.done .dnum{background:rgba(82,196,132,.18);color:#caffe0}
 .daily-step.current{border-color:rgba(226,189,114,.24);background:rgba(226,189,114,.08)}
 .daily-start{width:100%;margin-top:11px;border:0;border-radius:17px;min-height:48px;background:var(--gold);color:#102030;font-weight:950;cursor:pointer}
+.knowledge-card{width:100%;margin-top:13px;border:1px solid rgba(158,196,158,.20);background:linear-gradient(145deg,rgba(115,201,193,.08),rgba(255,255,255,.04));border-radius:24px;padding:14px 15px;display:flex;align-items:center;gap:13px;text-align:left;cursor:pointer}
+.knowledge-card .kicon{width:50px;height:50px;border-radius:17px;background:rgba(115,201,193,.13);display:grid;place-items:center;font-size:24px;flex:none}
+.knowledge-card .kcopy{flex:1;min-width:0}.knowledge-card .kcopy small{display:block;color:var(--sage);font-size:9px;font-weight:900;letter-spacing:.09em}.knowledge-card .kcopy strong{display:block;margin-top:3px;font-size:15px}.knowledge-card .kcopy span{display:block;margin-top:3px;color:var(--muted);font-size:11px;line-height:1.35}.knowledge-card .kgo{font-size:22px;color:var(--soft)}
+.knowledge-stage{flex:1;overflow-y:auto;padding:12px 2px 24px}
+.knowledge-symbol{width:120px;height:120px;border-radius:32px;margin:12px auto 18px;display:grid;place-items:center;font-size:54px;background:linear-gradient(145deg,rgba(115,201,193,.14),rgba(226,189,114,.08));border:1px solid rgba(255,255,255,.10)}
+.knowledge-badge{text-align:center;color:var(--sage);font-size:10px;font-weight:950;letter-spacing:.1em}
+.knowledge-title{text-align:center;font-size:27px;font-weight:950;margin:8px 0}
+.knowledge-child{text-align:center;font-size:18px;line-height:1.45;font-weight:800;margin:0 auto;max-width:560px}
+.knowledge-exact{margin:17px auto 0;max-width:600px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.045);border-radius:20px;padding:14px;font-size:13px;line-height:1.55;color:var(--muted)}
+.knowledge-person{text-align:center;margin-top:10px;color:var(--gold);font-size:12px;font-weight:850}
+.knowledge-source{text-align:center;margin-top:12px;color:var(--soft);font-size:10px;line-height:1.45}
+.knowledge-listen{display:block;margin:16px auto 0;border:0;border-radius:999px;padding:11px 16px;background:rgba(226,189,114,.14);color:#ffe6ac;font-weight:900;cursor:pointer}
+.app[data-age="4–5"] .knowledge-title{font-size:30px}.app[data-age="4–5"] .knowledge-child{font-size:22px}.app[data-age="4–5"] .knowledge-exact,.app[data-age="4–5"] .knowledge-person{display:none}
 .story-question{display:none;margin-top:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.045);border-radius:24px;padding:14px}
 .story-question.show{display:block}
 .story-question .sq-kicker{font-size:10px;font-weight:900;letter-spacing:.1em;color:var(--gold);text-align:center}
@@ -669,6 +682,16 @@ html,body{background:#06131f!important}
         <button id="dailyStart" class="daily-start">Reise starten</button>
       </div>
 
+      <button id="knowledgeCard" class="knowledge-card" type="button">
+        <span class="kicon">✦</span>
+        <span class="kcopy">
+          <small>HEUTE WISSEN · GEPRÜFT</small>
+          <strong id="knowledgeCardTitle">Eine gute Lehre</strong>
+          <span id="knowledgeCardPreview">Wird geladen …</span>
+        </span>
+        <span class="kgo">›</span>
+      </button>
+
       <div class="section-title">Was möchtest du machen?</div>
       <div class="big-choice-grid">
         <button class="choice story" data-story="coin">
@@ -855,6 +878,26 @@ html,body{background:#06131f!important}
     <button class="nav-btn" data-target="quran"><span class="ico">📖</span><span class="lab">Qurʾān</span></button>
     <button class="nav-btn" data-target="parents"><span class="ico">⚙</span><span class="lab">Eltern</span></button>
   </nav>
+
+  <div id="knowledgeModal" class="modal">
+    <div class="modal-shell">
+      <div class="modal-top">
+        <button class="close-btn" data-close="knowledge">×</button>
+        <div class="modal-title"><strong>Heute wissen</strong><small>nur geprüfte Quellen</small></div>
+        <div class="top-spacer"></div>
+      </div>
+      <div id="knowledgeStage" class="knowledge-stage">
+        <div class="knowledge-symbol" id="knowledgeSymbol">✦</div>
+        <div id="knowledgeBadge" class="knowledge-badge">GEPRÜFT</div>
+        <div id="knowledgeTitle" class="knowledge-title">Eine gute Lehre</div>
+        <div id="knowledgeChild" class="knowledge-child"></div>
+        <div id="knowledgePerson" class="knowledge-person"></div>
+        <div id="knowledgeExact" class="knowledge-exact"></div>
+        <button id="knowledgeListen" class="knowledge-listen">🔊 Erklärung hören</button>
+        <div id="knowledgeSource" class="knowledge-source"></div>
+      </div>
+    </div>
+  </div>
 
   <div id="duaModal" class="modal">
     <div class="modal-shell">
@@ -1163,6 +1206,8 @@ var currentStoryKey="coin";
 var storyQuestionPassed=false;
 var authenticStories=[];
 var kidsDuas=[];
+var verifiedKnowledge=[];
+var currentKnowledge=null;
 var currentDuaIndex=0;
 var duaQuestionPassed=false;
 var currentQuiz=[];
@@ -2216,6 +2261,75 @@ document.getElementById("openPickedSurah").addEventListener("click",function(){
   openSurah(id,0,"listen");
 });
 
+function knowledgeAgeAllowed(item){
+  return Array.isArray(item.ages)&&item.ages.indexOf(age)>=0&&item.verificationStatus==="verified";
+}
+function dailyKnowledgeRank(id){
+  var str=todayKey()+"|"+age+"|"+String(id||"");
+  var h=2166136261;
+  for(var i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}
+  return h>>>0;
+}
+function knowledgePoolForAge(){
+  return verifiedKnowledge.filter(knowledgeAgeAllowed).sort(function(a,b){
+    return dailyKnowledgeRank(a.id)-dailyKnowledgeRank(b.id);
+  });
+}
+function currentDailyKnowledge(){
+  var pool=knowledgePoolForAge();
+  return pool.length?pool[0]:null;
+}
+function renderKnowledgeCard(){
+  var item=currentDailyKnowledge();
+  currentKnowledge=item;
+  var title=document.getElementById("knowledgeCardTitle");
+  var preview=document.getElementById("knowledgeCardPreview");
+  var card=document.getElementById("knowledgeCard");
+  if(!item){
+    if(card)card.style.display="none";
+    return;
+  }
+  card.style.display="flex";
+  title.textContent=item.title||"Eine gute Lehre";
+  preview.textContent=item.childExplanation||"Geprüftes Wissen";
+}
+function renderKnowledgeModal(){
+  var item=currentKnowledge||currentDailyKnowledge();
+  if(!item)return;
+  document.getElementById("knowledgeSymbol").textContent=item.scene||"✦";
+  document.getElementById("knowledgeBadge").textContent=(item.generation?String(item.generation).toUpperCase()+" · ":"")+"GEPRÜFT";
+  document.getElementById("knowledgeTitle").textContent=item.title||"Eine gute Lehre";
+  document.getElementById("knowledgeChild").textContent=item.childExplanation||"";
+  document.getElementById("knowledgeExact").textContent=item.exactText||"";
+  document.getElementById("knowledgePerson").textContent=item.person?item.person:"Der Prophet ﷺ";
+  document.getElementById("knowledgeSource").textContent=item.source||"";
+}
+function fetchVerifiedKnowledge(){
+  return fetch("/test/kids/data/verified-content.json?v="+Date.now(),{cache:"no-store"})
+    .then(function(r){if(!r.ok)throw new Error("verified-content");return r.json()})
+    .then(function(data){
+      var hadith=Array.isArray(data.hadithLessons)?data.hadithLessons:[];
+      var early=Array.isArray(data.earlyLessons)?data.earlyLessons:[];
+      verifiedKnowledge=hadith.concat(early).filter(function(x){return x.verificationStatus==="verified"});
+      renderKnowledgeCard();
+      return verifiedKnowledge;
+    }).catch(function(){
+      verifiedKnowledge=[];
+      renderKnowledgeCard();
+      return [];
+    });
+}
+document.getElementById("knowledgeCard").addEventListener("click",function(){
+  currentKnowledge=currentDailyKnowledge();
+  if(!currentKnowledge)return;
+  renderKnowledgeModal();
+  document.getElementById("knowledgeModal").classList.add("open");
+});
+document.getElementById("knowledgeListen").addEventListener("click",function(){
+  if(!currentKnowledge)return;
+  quizSpeak((currentKnowledge.childExplanation||"")+(age==="9–10"&&currentKnowledge.person?". "+currentKnowledge.person+".":""));
+});
+
 function ageRange(){
   if(age==="4–5")return{min:4,max:5};
   if(age==="6–8")return{min:6,max:8};
@@ -2645,6 +2759,7 @@ document.querySelectorAll("[data-close]").forEach(function(b){
   b.addEventListener("click",function(){
     var type=b.dataset.close;
     if(type==="story"){stopSpeech();document.getElementById("storyModal").classList.remove("open")}
+    if(type==="knowledge"){try{speech.cancel()}catch(e){} document.getElementById("knowledgeModal").classList.remove("open")}
     if(type==="dua"){try{speech.cancel()}catch(e){} document.getElementById("duaModal").classList.remove("open")}
     if(type==="quiz"){try{speech.cancel()}catch(e){} document.getElementById("quizModal").classList.remove("open")}
     if(type==="quran"){stopQuran();releaseMicStream();document.getElementById("quranModal").classList.remove("open")}
@@ -2663,6 +2778,8 @@ function setAge(a){
   if(app)app.setAttribute("data-age",a);
   updateDailyJourney();
   updateParentProgress();
+  renderKnowledgeCard();
+  if(document.getElementById("knowledgeModal").classList.contains("open")){currentKnowledge=currentDailyKnowledge();renderKnowledgeModal()}
   if(document.getElementById("duaModal").classList.contains("open"))renderDua();
   if(a==="4–5"){
     document.querySelectorAll(".quran-mini-note").forEach(function(el){el.textContent="1. Hören. 2. Das große Wort sprechen. 3. Grün? Dann kommt das nächste Wort."});
@@ -2695,6 +2812,7 @@ updateParentProgress();
 fetchKidsDuas();
 fetchKidsQuiz();
 fetchAuthenticStories();
+fetchVerifiedKnowledge();
 fetchCatalog();
 })();
 </script>
