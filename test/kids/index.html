@@ -1033,6 +1033,250 @@ html,body{background:#06131f!important}
 }
 /* KIDS_SCREENSHOT_FIX_V11_END */
 
+
+/* KIDS_CREATIVE_POLISH_V11
+   Full app pass: clearer hierarchy, calmer spacing, richer child-friendly visuals,
+   responsive scenic panels and stronger separation between content groups. */
+
+:root{
+  --kids-card-gap:14px;
+  --kids-section-gap:24px;
+}
+.view{padding-bottom:8px}
+.page-head{margin:10px 3px 22px}
+.page-head .kicker{
+  display:inline-flex;align-items:center;min-height:25px;padding:0 9px;border-radius:999px;
+  background:rgba(226,189,114,.08);border:1px solid rgba(226,189,114,.12);
+  letter-spacing:.13em
+}
+.page-head h2{margin-top:10px}
+.section-title{
+  margin:var(--kids-section-gap) 2px 12px;
+  font-size:20px;letter-spacing:-.025em;
+  display:flex;align-items:center;gap:10px
+}
+.section-title::after{
+  content:"";height:1px;flex:1;
+  background:linear-gradient(90deg,rgba(226,189,114,.32),rgba(255,255,255,.02))
+}
+
+/* HOME — clearer action hierarchy */
+#view-today .hero{
+  --art:url("/test/kids/assets/kids-art/home-journey-v11.jpg?v=11-creative1");
+  min-height:clamp(292px,51vw,390px)!important;
+  background:#102936!important;
+}
+#view-today .hero::before{
+  content:""!important;position:absolute!important;inset:0!important;
+  background-image:var(--art)!important;background-size:cover!important;background-position:center!important;
+  transform:none!important;filter:saturate(1.04) brightness(.83)!important;opacity:1!important
+}
+#view-today .hero::after{
+  content:""!important;position:absolute!important;inset:0!important;
+  background:
+    radial-gradient(ellipse 86% 115% at -4% 54%,rgba(5,19,29,.94) 0%,rgba(5,19,29,.72) 40%,rgba(5,19,29,.28) 66%,transparent 89%),
+    linear-gradient(180deg,rgba(4,14,22,.04),rgba(4,14,22,.05) 58%,rgba(4,14,22,.42) 100%)!important
+}
+#view-today .hero-copy{left:22px;right:22px;bottom:24px;max-width:560px}
+#view-today .resume{
+  margin-top:14px;
+  background:linear-gradient(145deg,rgba(226,189,114,.11),rgba(115,201,193,.055));
+  border-color:rgba(226,189,114,.18);
+  box-shadow:0 12px 30px rgba(0,0,0,.12)
+}
+#view-today .daily-journey{margin-top:14px}
+#view-today .knowledge-card{
+  margin-top:16px;
+  background:
+    linear-gradient(90deg,rgba(7,34,44,.88),rgba(7,34,44,.56) 56%,rgba(7,34,44,.18)),
+    url("/test/kids/assets/kids-art/knowledge-courtyard-v11.jpg?v=11-creative1") center/cover no-repeat;
+  min-height:92px;border-color:rgba(115,201,193,.22);overflow:hidden
+}
+#view-today .knowledge-card .kicon{
+  color:transparent!important;font-size:0!important;
+  background:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=2") center/contain no-repeat;
+  width:58px;height:58px;flex:none
+}
+#view-today .knowledge-card .kcopy strong,#view-today .knowledge-card .kcopy span{
+  text-shadow:0 2px 8px rgba(0,0,0,.58)
+}
+.big-choice-grid{gap:var(--kids-card-gap)}
+.choice{
+  border-radius:25px!important;
+  box-shadow:0 15px 30px rgba(0,0,0,.13)!important
+}
+
+/* STORIES — featured story + grouped rows */
+.story-feature{box-shadow:0 18px 42px rgba(0,0,0,.14)}
+.story-more-title{margin-top:18px}
+.story-list{gap:12px}
+.story-row{
+  min-height:88px;padding:12px 13px;
+  background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.045));
+  box-shadow:inset 0 1px rgba(255,255,255,.035)
+}
+.story-thumb{
+  width:68px!important;height:68px!important;border-radius:21px!important;
+  background-color:rgba(255,255,255,.055)!important;
+  border:1px solid rgba(255,255,255,.07)
+}
+.story-row h3{font-size:17px}
+.story-player-note{
+  margin:14px auto 0;max-width:420px;color:var(--soft);font-size:11px;line-height:1.45
+}
+.story-orb{
+  width:min(100%,430px)!important;height:190px!important;border-radius:28px!important;
+  background:
+    linear-gradient(180deg,rgba(8,21,28,.04),rgba(8,21,28,.34)),
+    url("/test/kids/assets/kids-art/story-coin-v11-clean.png?v=11-creative1") center/cover no-repeat!important;
+  border:1px solid rgba(255,255,255,.11)!important;
+  box-shadow:0 20px 46px rgba(0,0,0,.22)!important;
+  overflow:hidden
+}
+.story-orb::after{display:none!important}
+.story-orb span{display:none!important}
+#storyModal[data-story="water"] .story-orb{
+  background:
+    radial-gradient(circle at center,rgba(75,175,214,.18),rgba(7,26,39,.94) 72%),
+    url("/test/kids/assets/kids-icons/water-real-v11.png?v=2") center/128px auto no-repeat!important
+}
+#storyModal[data-story="helper"] .story-orb{
+  background:
+    radial-gradient(circle at center,rgba(226,189,114,.16),rgba(7,26,39,.94) 72%),
+    url("/test/kids/assets/kids-icons/spark-real-v11.png?v=2") center/132px auto no-repeat!important
+}
+#storyModal[data-story="kindword"] .story-orb{
+  background:
+    radial-gradient(circle at center,rgba(159,145,214,.14),rgba(7,26,39,.94) 72%),
+    url("/test/kids/assets/kids-icons/cloud-real-v11.png?v=2") center/150px auto no-repeat!important
+}
+
+/* QUR'AN — banner becomes its own component, grid is independent */
+#view-quran .quran-hero{box-shadow:0 22px 52px rgba(0,0,0,.18)!important}
+#view-quran .section-title{margin-top:30px!important}
+.surah-banner{
+  height:clamp(122px,28vw,194px);
+  margin:0 0 18px;
+  border-radius:28px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  background:
+    linear-gradient(180deg,rgba(5,29,39,.02),rgba(5,29,39,.08) 62%,rgba(5,29,39,.24)),
+    url("/test/kids/assets/kids-art/quran-surah-banner-v11-clean.png?v=11-creative1") center/cover no-repeat;
+  box-shadow:0 16px 36px rgba(0,0,0,.16)
+}
+.surah-grid{
+  padding-top:0!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:12px!important
+}
+.surah-grid::before{display:none!important}
+.surah-card{
+  min-height:154px!important;border-radius:24px!important;
+  box-shadow:0 14px 28px rgba(0,0,0,.13)!important
+}
+.verse-strip{gap:11px}
+.verse-card{
+  min-height:92px;border-radius:22px;
+  background:linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,255,255,.045));
+}
+.full-quran{
+  margin-top:14px;
+  background:linear-gradient(135deg,#274f60,#1c3d50 58%,#183548);
+  box-shadow:0 14px 32px rgba(0,0,0,.13)
+}
+
+/* KNOWLEDGE — turn the icon tile into a visual learning scene */
+.knowledge-stage{padding-top:10px}
+.knowledge-symbol{
+  width:100%!important;height:178px!important;max-width:620px!important;border-radius:30px!important;
+  background:
+    linear-gradient(180deg,rgba(8,31,41,.10),rgba(8,31,41,.48)),
+    url("/test/kids/assets/kids-art/knowledge-courtyard-v11.jpg?v=11-creative1") center/cover no-repeat!important;
+  box-shadow:0 18px 42px rgba(0,0,0,.18)
+}
+.knowledge-symbol .kid-icon{
+  width:92px!important;height:92px!important;
+  background-image:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=2")!important;
+  background-size:contain!important;background-position:center!important
+}
+.knowledge-exact{
+  background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07);
+  border-radius:20px;padding:14px 15px
+}
+
+/* QUIZ — richer scene, simpler hierarchy below */
+.quiz-scene{
+  min-height:176px!important;border-radius:30px!important;
+  background:
+    linear-gradient(180deg,rgba(7,24,34,.06),rgba(7,24,34,.42)),
+    url("/test/kids/assets/kids-art/quiz-courtyard-v11.jpg?v=11-creative1") center/cover no-repeat!important;
+  border:1px solid rgba(255,255,255,.11)!important;
+  box-shadow:0 18px 42px rgba(0,0,0,.18)
+}
+.quiz-scene-symbol{width:94px!important;height:94px!important}
+.quiz-question{margin-top:18px}
+.quiz-answer{
+  border-radius:20px!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.045))!important
+}
+
+/* DU'A — actual environments instead of flat gradient panels */
+.dua-scene{
+  min-height:206px!important;border-radius:30px!important;isolation:isolate;
+  background:#203f4a!important;box-shadow:0 18px 42px rgba(0,0,0,.18)
+}
+.dua-scene::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background-image:var(--dua-art);background-size:cover;background-position:center;background-repeat:no-repeat;
+  filter:saturate(1.02) brightness(.84)
+}
+.dua-scene::after{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(5,19,28,.04),rgba(5,19,28,.18) 58%,rgba(5,19,28,.42))
+}
+.dua-scene.morning,.dua-scene.learn{--dua-art:url("/test/kids/assets/kids-art/dua-day-v11.jpg?v=11-creative1")}
+.dua-scene.sleep,.dua-scene.night{--dua-art:url("/test/kids/assets/kids-art/dua-night-v11.jpg?v=11-creative1")}
+.dua-scene.food,.dua-scene.family{--dua-art:url("/test/kids/assets/kids-art/dua-home-v11.jpg?v=11-creative1")}
+.dua-scene-symbol{position:relative;z-index:2}
+.dua-scene-symbol .kid-icon{
+  background-image:url("/test/kids/assets/kids-icons/dua-real-v11.png?v=2")!important;
+  background-size:contain!important;background-position:center!important
+}
+.dua-meaning{
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.035));
+  border-color:rgba(255,255,255,.09)
+}
+
+/* PARENTS — calm, clear, grown-up but still visually part of the app */
+#view-parents .parent-card{
+  padding:18px;border-radius:25px;
+  background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.035));
+  box-shadow:inset 0 1px rgba(255,255,255,.03)
+}
+.parent-progress-grid{gap:10px}
+.parent-progress-stat{
+  min-height:92px;border-radius:20px;
+  background:linear-gradient(145deg,rgba(115,201,193,.065),rgba(226,189,114,.035))
+}
+.parent-progress-stat strong{font-size:25px}
+.age-tabs{padding:4px;border-radius:18px}
+.age-tabs button{min-height:44px;border-radius:14px}
+
+/* Modal rhythm */
+.modal-shell{padding-left:18px;padding-right:18px}
+.modal-top{padding-bottom:6px}
+.close-btn{background:rgba(255,255,255,.065);box-shadow:inset 0 1px rgba(255,255,255,.04)}
+
+/* Tablet polish */
+@media(min-width:700px){
+  .surah-banner{height:194px}
+  .surah-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .story-list{grid-template-columns:1fr 1fr}
+  #authenticStoryList{grid-template-columns:1fr}
+  .knowledge-symbol,.quiz-scene{height:210px!important}
+}
+/* KIDS_CREATIVE_POLISH_V11_END */
+
 </style>
 </head>
 <body>
@@ -1068,6 +1312,15 @@ html,body{background:#06131f!important}
         </div>
       </div>
 
+      <button class="resume" id="resumeButton">
+        <div class="resume-icon"></div>
+        <div>
+          <strong>Da weitermachen, wo du warst</strong>
+          <span id="resumeText">Noch nichts begonnen</span>
+        </div>
+        <div class="go">›</div>
+      </button>
+
       <div id="dailyJourney" class="daily-journey">
         <div class="daily-head">
           <strong>Deine heutige Reise</strong>
@@ -1076,16 +1329,6 @@ html,body{background:#06131f!important}
         <div id="dailySteps" class="daily-steps"></div>
         <button id="dailyStart" class="daily-start">Reise starten</button>
       </div>
-
-      <button id="knowledgeCard" class="knowledge-card" type="button">
-        <span class="kicon">✦</span>
-        <span class="kcopy">
-          <small>HEUTE WISSEN · GEPRÜFT</small>
-          <strong id="knowledgeCardTitle">Eine gute Lehre</strong>
-          <span id="knowledgeCardPreview">Wird geladen …</span>
-        </span>
-        <span class="kgo">›</span>
-      </button>
 
       <div class="section-title">Was möchtest du machen?</div>
       <div class="big-choice-grid">
@@ -1118,13 +1361,14 @@ html,body{background:#06131f!important}
         </button>
       </div>
 
-      <button class="resume" id="resumeButton">
-        <div class="resume-icon"></div>
-        <div>
-          <strong>Da weitermachen, wo du warst</strong>
-          <span id="resumeText">Noch nichts begonnen</span>
-        </div>
-        <div class="go">›</div>
+      <button id="knowledgeCard" class="knowledge-card" type="button">
+        <span class="kicon">✦</span>
+        <span class="kcopy">
+          <small>HEUTE WISSEN · GEPRÜFT</small>
+          <strong id="knowledgeCardTitle">Eine gute Lehre</strong>
+          <span id="knowledgeCardPreview">Wird geladen …</span>
+        </span>
+        <span class="kgo">›</span>
       </button>
 
       <div class="gentle-note">Nur ein paar Minuten reichen. Danach darf die Kinderwelt auch wieder zugehen.</div>
@@ -1146,6 +1390,7 @@ html,body{background:#06131f!important}
         </div>
       </article>
 
+      <div class="section-title story-more-title">Weitere Geschichten</div>
       <div class="story-list">
         <article class="story-row" data-story="water">
           <div class="story-thumb"></div>
@@ -1198,6 +1443,7 @@ html,body{background:#06131f!important}
       </div>
 
       <div class="section-title">Meine kurzen Sūrah</div>
+      <div class="surah-banner" aria-hidden="true"></div>
       <div class="surah-grid" id="kidsSurahGrid"></div>
 
       <div class="section-title">Verse zum Lernen</div>
@@ -1222,7 +1468,7 @@ html,body{background:#06131f!important}
         <div class="fgo">›</div>
       </button>
 
-      <div class="gentle-note">Für die Kinder-Lernansicht nutzen wir dieselben Qurʾān-Texte und dieselbe Audio-Struktur wie in deiner bestehenden App – nur viel einfacher.</div>
+      <div class="gentle-note">Höre in Ruhe, sprich mit und wiederhole so oft du möchtest. Lernen darf leicht und ruhig sein.</div>
     </section>
 
     <section id="view-parents" class="view">
@@ -1342,7 +1588,7 @@ html,body{background:#06131f!important}
           <h2 id="storyBigTitle">Geschichte</h2>
           <div id="storyCategory" class="category">Adab</div>
           <div id="storySource" class="story-source"></div>
-          <div class="dev-note">Deutsche Lern-Erzählstimme. Qurʾān-Arabisch wird hier nicht synthetisch rezitiert.</div>
+          <div class="story-player-note">Hör aufmerksam zu. Danach wartet eine kleine Frage auf dich.</div>
         </div>
       </div>
       <div>
@@ -1435,7 +1681,7 @@ html,body{background:#06131f!important}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v11-shotfix1";
+const KIDS_BUILD_ID="kids-shell-v11-creative1";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -1657,7 +1903,7 @@ function renderAuthenticStories(){
     row.innerHTML=
       '<div class="story-thumb" style="background:rgba(82,196,132,.10)">'+String(s.symbol||"✦")+'</div>'+
       '<div><h3>'+s.title+'</h3><div class="meta">'+s.category+'</div>'+
-      '<div class="story-verify">✓ APPROVED · '+String((s.sourceRefs||[])[0]||"Qurʾān")+'</div>'+
+      '<div class="story-verify">✓ GEPRÜFT · '+String((s.sourceRefs||[])[0]||"Qurʾān")+'</div>'+
       '<div class="time">'+s.duration+'</div></div><div class="chev">›</div>';
     row.addEventListener("click",function(){openStory(s.id)});
     box.appendChild(row);
@@ -3127,6 +3373,8 @@ document.getElementById("openQuizButton").addEventListener("click",openQuiz);
 function openStory(key){
   currentStoryKey=key;
   var s=storyData(key);
+  var storyModal=document.getElementById("storyModal");
+  if(storyModal)storyModal.dataset.story=key;
   document.getElementById("storyPlayerTitle").textContent=s.title;
   document.getElementById("storyBigTitle").textContent=s.title;
   document.getElementById("storyPlayerTime").textContent=s.time||s.duration||"";
