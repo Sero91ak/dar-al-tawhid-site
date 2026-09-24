@@ -5,35 +5,35 @@
  alphabet="ipa" xml:lang="de-DE">
   <lexeme>
     <grapheme>DĀR AL TAWḤĪD</grapheme>
-    <alias>Daar at-Tauhiid</alias>
+    <alias>Daar al Tauhiid</alias>
   </lexeme>
   <lexeme>
     <grapheme>DAR AL TAWHID</grapheme>
-    <alias>Daar at-Tauhiid</alias>
+    <alias>Daar al Tauhiid</alias>
   </lexeme>
   <lexeme>
     <grapheme>dār al tawḥīd</grapheme>
-    <alias>Daar at-Tauhiid</alias>
+    <alias>Daar al Tauhiid</alias>
   </lexeme>
   <lexeme>
     <grapheme>dar al tawhid</grapheme>
-    <alias>Daar at-Tauhiid</alias>
+    <alias>Daar al Tauhiid</alias>
   </lexeme>
   <lexeme>
     <grapheme>Dār al-Tawḥīd</grapheme>
-    <alias>Daar at-Tauhiid</alias>
+    <alias>Daar al Tauhiid</alias>
   </lexeme>
   <lexeme>
     <grapheme>Dar al-Tawhid</grapheme>
-    <alias>Daar at-Tauhiid</alias>
+    <alias>Daar al Tauhiid</alias>
   </lexeme>
   <lexeme>
     <grapheme>dār al-tawḥīd</grapheme>
-    <alias>Daar at-Tauhiid</alias>
+    <alias>Daar al Tauhiid</alias>
   </lexeme>
   <lexeme>
     <grapheme>dar al-tawhid</grapheme>
-    <alias>Daar at-Tauhiid</alias>
+    <alias>Daar al Tauhiid</alias>
   </lexeme>
   <lexeme>
     <grapheme>Tawḥīd</grapheme>
