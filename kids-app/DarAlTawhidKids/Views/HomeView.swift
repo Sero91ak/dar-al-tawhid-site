@@ -5,6 +5,7 @@ struct HomeView: View {
     @EnvironmentObject private var progress: ProgressStore
     @State private var selectedStory: KidsStory?
     @State private var showQuiz = false
+    @State private var showDua = false
 
     private var storyOfTheDay: KidsStory {
         SampleContent.stories[Calendar.current.component(.day, from: .now) % SampleContent.stories.count]
@@ -36,6 +37,9 @@ struct HomeView: View {
             }
             .navigationDestination(isPresented: $showQuiz) {
                 QuizView()
+            }
+            .navigationDestination(isPresented: $showDua) {
+                DuaView()
             }
         }
     }
@@ -80,8 +84,27 @@ struct HomeView: View {
 
     private var dailyJourneyCard: some View {
         let storyDone = progress.isDailyStepComplete("story")
+        let duaDone = progress.isDailyStepComplete("dua")
         let quizDone = progress.isDailyStepComplete("quiz")
-        let finished = storyDone && quizDone
+
+        let doneCount: Int
+        let totalCount: Int
+        let finished: Bool
+
+        switch appState.ageBand {
+        case .age4to5:
+            doneCount = [duaDone, storyDone].filter { $0 }.count
+            totalCount = 2
+            finished = duaDone && storyDone
+        case .age6to8:
+            doneCount = [storyDone, duaDone, quizDone].filter { $0 }.count
+            totalCount = 3
+            finished = storyDone && duaDone && quizDone
+        case .age9to10:
+            doneCount = [storyDone, duaDone, quizDone].filter { $0 }.count
+            totalCount = 3
+            finished = storyDone && duaDone && quizDone
+        }
 
         return KidsCard {
             VStack(alignment: .leading, spacing: 12) {
@@ -93,29 +116,61 @@ struct HomeView: View {
 
                     Spacer()
 
-                    Text("\([storyDone, quizDone].filter { $0 }.count)/2")
+                    Text("\(doneCount)/\(totalCount)")
                         .font(.caption.weight(.bold))
                         .foregroundStyle(finished ? KidsTheme.sage : .white.opacity(0.48))
                 }
 
-                journeyStep(
-                    number: 1,
-                    title: "Eine Geschichte",
-                    subtitle: "zuhören & verstehen",
-                    symbol: "headphones",
-                    done: storyDone
-                ) {
-                    selectedStory = storyOfTheDay
-                }
+                if appState.ageBand == .age4to5 {
+                    journeyStep(
+                        number: 1,
+                        title: "Ein Duʿāʾ",
+                        subtitle: "hören & verstehen",
+                        symbol: "hand.raised.fill",
+                        done: duaDone
+                    ) {
+                        showDua = true
+                    }
 
-                journeyStep(
-                    number: 2,
-                    title: "Ein kleines Quiz",
-                    subtitle: appState.ageBand == .age4to5 ? "hören & tippen" : "hören & auswählen",
-                    symbol: "star.fill",
-                    done: quizDone
-                ) {
-                    showQuiz = true
+                    journeyStep(
+                        number: 2,
+                        title: "Eine Geschichte",
+                        subtitle: "zuhören & verstehen",
+                        symbol: "headphones",
+                        done: storyDone
+                    ) {
+                        selectedStory = storyOfTheDay
+                    }
+                } else {
+                    journeyStep(
+                        number: 1,
+                        title: "Eine Geschichte",
+                        subtitle: "zuhören & verstehen",
+                        symbol: "headphones",
+                        done: storyDone
+                    ) {
+                        selectedStory = storyOfTheDay
+                    }
+
+                    journeyStep(
+                        number: 2,
+                        title: "Ein Duʿāʾ",
+                        subtitle: "lernen & verstehen",
+                        symbol: "hand.raised.fill",
+                        done: duaDone
+                    ) {
+                        showDua = true
+                    }
+
+                    journeyStep(
+                        number: 3,
+                        title: "Ein kleines Quiz",
+                        subtitle: "hören & auswählen",
+                        symbol: "star.fill",
+                        done: quizDone
+                    ) {
+                        showQuiz = true
+                    }
                 }
 
                 Text(finished ? "Für heute geschafft. Sehr schön." : "Ein kleiner Schritt nach dem anderen reicht.")
@@ -224,10 +279,34 @@ struct HomeView: View {
                 .foregroundStyle(KidsTheme.cream)
 
             HStack(spacing: 12) {
-                smallTile("Duʿāʾ", "hand.raised.fill", KidsTheme.sky)
+                duaTile
                 quizTile
             }
         }
+    }
+
+    private var duaTile: some View {
+        NavigationLink {
+            DuaView()
+        } label: {
+            KidsCard {
+                VStack(alignment: .leading, spacing: 18) {
+                    Image(systemName: "hand.raised.fill")
+                        .font(.system(size: 25))
+                        .foregroundStyle(KidsTheme.sky)
+
+                    Text("Meine Duʿāʾ")
+                        .font(.system(size: 17, weight: .bold, design: .rounded))
+                        .foregroundStyle(KidsTheme.cream)
+
+                    Text("geprüft · hören · lernen")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.white.opacity(0.55))
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+        .buttonStyle(.plain)
     }
 
     private var quizTile: some View {
