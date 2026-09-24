@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "dar-al-tawhid-brand-pronunciation-overrides",
+  "updatedAt": "2026-09-24",
+  "rule": "Exact brand-owner-approved readings override ordinary connected-speech Arabic phonology only for the listed brand strings.",
+  "overrides": [
+    {
+      "canonical": "DĀR AL TAWḤĪD",
+      "forms": [
+        "DĀR AL TAWḤĪD",
+        "DAR AL TAWHID",
+        "Dār al-Tawḥīd",
+        "Dar al-Tawhid",
+        "dār al tawḥīd",
+        "dar al tawhid",
+        "dār al-tawḥīd",
+        "dar al-tawhid"
+      ],
+      "alias": "Daar al Tauhiid",
+      "ipa": "/daːr al tawˈħiːd/",
+      "status": "brand-owner-approved",
+      "note": "Deliberately keeps audible 'al' for the product/brand reading. Ordinary Classical/Standard Arabic connected speech before /t/ would assimilate the article."
+    }
+  ]
+}
