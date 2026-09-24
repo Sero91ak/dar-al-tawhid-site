@@ -1,0 +1,261 @@
+{
+  "version": 1,
+  "policy": {
+    "source": "data/prophets/*.json",
+    "rule": "Nur profileStatus/status=approved und Claims mit verificationStatus=approved sowie evidenceType=quran.",
+    "narration": "Kindgerechte deutsche Zusammenfassung; keine erfundenen Dialoge, Namen, Orte, Zahlen oder Israʾīliyyāt.",
+    "status": "approved-only"
+  },
+  "items": [
+    {
+      "id": "auth-ibrahim-kabah",
+      "prophetId": "ibrahim",
+      "ageMin": 4,
+      "ageMax": 10,
+      "title": "Ibrāhīm und Ismāʿīl bauen am Haus",
+      "duration": "ca. 2 Min.",
+      "category": "Qurʾān · geprüft",
+      "scene": "kaabah",
+      "symbol": "◆",
+      "text": "Der Qurʾān berichtet von Ibrāhīm und Ismāʿīl. Gemeinsam erhöhten sie die Grundlagen des Hauses. Während dieser Arbeit baten sie Allah, ihre Tat anzunehmen. Sie baten Ihn auch darum, sie Ihm ergeben zu machen und aus ihren Nachkommen eine Gemeinschaft entstehen zu lassen, die Ihm ergeben ist. Diese Begebenheit erinnert uns daran: Eine gute Tat tun wir für Allah, und wir bitten Ihn darum, sie anzunehmen.",
+      "question": {
+        "4–5": {
+          "question": "Wen baten Ibrāhīm und Ismāʿīl, ihre Tat anzunehmen?",
+          "answers": [
+            {
+              "label": "Allah",
+              "correct": true
+            },
+            {
+              "label": "Die Menschen",
+              "correct": false
+            }
+          ],
+          "success": "Richtig. Sie baten Allah.",
+          "retry": "Hör noch einmal gut zu."
+        },
+        "6–8": {
+          "question": "Was taten Ibrāhīm und Ismāʿīl gemeinsam?",
+          "answers": [
+            {
+              "label": "Sie erhöhten die Grundlagen des Hauses",
+              "correct": true
+            },
+            {
+              "label": "Sie bauten ein Schiff",
+              "correct": false
+            }
+          ],
+          "success": "Richtig. Sie erhöhten die Grundlagen des Hauses.",
+          "retry": "Denk an die Arbeit am Haus."
+        },
+        "9–10": {
+          "question": "Was lehrt uns ihre Bitte während der guten Tat?",
+          "answers": [
+            {
+              "label": "Allah um Annahme der Tat zu bitten",
+              "correct": true
+            },
+            {
+              "label": "Lob von Menschen zu suchen",
+              "correct": false
+            },
+            {
+              "label": "Eine gute Tat geheim zu halten ist verboten",
+              "correct": false
+            }
+          ],
+          "success": "Richtig. Gute Taten tun wir für Allah und bitten Ihn um Annahme.",
+          "retry": "Denk an ihre Bitte während des Bauens."
+        }
+      },
+      "claimIds": [
+        "ibrahim-kabah",
+        "ibrahim-ismail-quran"
+      ],
+      "sourceRefs": [
+        "Qurʾān 2:125–129"
+      ],
+      "verification": "approved"
+    },
+    {
+      "id": "auth-nuh-ark",
+      "prophetId": "nuh",
+      "ageMin": 6,
+      "ageMax": 10,
+      "title": "Nūḥ und das Schiff",
+      "duration": "ca. 3 Min.",
+      "category": "Qurʾān · geprüft",
+      "scene": "ark",
+      "symbol": "≋",
+      "text": "Nūḥ war ein Gesandter Allahs. Er rief sein Volk dazu auf, Allah allein zu dienen. Der Qurʾān berichtet, dass er seine Botschaft am Tag und in der Nacht weitergab und die Menschen auch zur Vergebung aufrief. Dann befahl Allah ihm, das Schiff unter Seiner Beobachtung und nach Seiner Offenbarung zu bauen. Als die Flut kam, geschah, was Allah bestimmt hatte. Der Qurʾān berichtet anschließend, dass das Schiff auf al-Jūdī aufsetzte. Wir fügen keine unbekannten Namen, Maße oder Orte hinzu, die der Qurʾān nicht nennt.",
+      "question": {
+        "6–8": {
+          "question": "Wozu rief Nūḥ sein Volk auf?",
+          "answers": [
+            {
+              "label": "Allah allein zu dienen",
+              "correct": true
+            },
+            {
+              "label": "Viele Götter anzubeten",
+              "correct": false
+            }
+          ],
+          "success": "Richtig. Nūḥ rief zum Tawḥīd auf.",
+          "retry": "Was war die Botschaft von Nūḥ?"
+        },
+        "9–10": {
+          "question": "Wie wurde das Schiff gebaut?",
+          "answers": [
+            {
+              "label": "Unter Allahs Beobachtung und Offenbarung",
+              "correct": true
+            },
+            {
+              "label": "Nach einer erfundenen Karte",
+              "correct": false
+            },
+            {
+              "label": "Ohne Anweisung",
+              "correct": false
+            }
+          ],
+          "success": "Richtig. Der Qurʾān nennt Allahs Beobachtung und Offenbarung.",
+          "retry": "Denk an Qurʾān 23:27."
+        }
+      },
+      "claimIds": [
+        "nuh-tawhid-7",
+        "nuh-dawah-day-night",
+        "nuh-dawah-forgiveness",
+        "nuh-ark-11",
+        "nuh-ark-23",
+        "nuh-judi-11-44"
+      ],
+      "sourceRefs": [
+        "Qurʾān 7:59",
+        "Qurʾān 11:36–44",
+        "Qurʾān 23:27",
+        "Qurʾān 71:5–12"
+      ],
+      "verification": "approved"
+    },
+    {
+      "id": "auth-yusuf-forgiveness",
+      "prophetId": "yusuf",
+      "ageMin": 7,
+      "ageMax": 10,
+      "title": "Yūsuf vergibt",
+      "duration": "ca. 3 Min.",
+      "category": "Qurʾān · geprüft",
+      "scene": "grain",
+      "symbol": "✦",
+      "text": "Der Qurʾān erzählt ausführlich von Yūsuf. Seine Brüder kamen später zu ihm, und schließlich wurde seine Identität bekannt. Obwohl in seiner Geschichte schwere Prüfungen vorkamen, berichtet Allah von Yūsufs Vergebung. In Sūrah Yūsuf sagt er, dass es an diesem Tag keinen Tadel gegen seine Brüder geben solle, und er bittet Allah um Vergebung für sie. Diese Begebenheit zeigt uns, wie groß Vergebung sein kann, wenn man die Möglichkeit hätte, Vorwürfe zu machen.",
+      "question": {
+        "6–8": {
+          "question": "Was tat Yūsuf gegenüber seinen Brüdern?",
+          "answers": [
+            {
+              "label": "Er vergab ihnen",
+              "correct": true
+            },
+            {
+              "label": "Er verspottete sie",
+              "correct": false
+            }
+          ],
+          "success": "Richtig. Der Qurʾān berichtet von Yūsufs Vergebung.",
+          "retry": "Denk an das Ende der Begebenheit."
+        },
+        "9–10": {
+          "question": "Welche Eigenschaft zeigt Yūsuf in Qurʾān 12:92?",
+          "answers": [
+            {
+              "label": "Vergebung",
+              "correct": true
+            },
+            {
+              "label": "Hochmut",
+              "correct": false
+            },
+            {
+              "label": "Spott",
+              "correct": false
+            }
+          ],
+          "success": "Richtig. Yūsuf zeigte Vergebung.",
+          "retry": "Lies die Botschaft der Geschichte noch einmal."
+        }
+      },
+      "claimIds": [
+        "yusuf-brothers-arc",
+        "yusuf-forgiveness"
+      ],
+      "sourceRefs": [
+        "Qurʾān 12:58–92"
+      ],
+      "verification": "approved"
+    },
+    {
+      "id": "auth-musa-tuwa",
+      "prophetId": "musa",
+      "ageMin": 6,
+      "ageMax": 10,
+      "title": "Mūsā im geheiligten Tal",
+      "duration": "ca. 3 Min.",
+      "category": "Qurʾān · geprüft",
+      "scene": "valley",
+      "symbol": "✧",
+      "text": "Der Qurʾān berichtet von Mūsā. Im geheiligten Tal Ṭuwā wurde er angesprochen. Allah zeigte ihm Zeichen: seinen Stock und seine Hand. Mūsā bat darum, dass sein Bruder Hārūn ihm zur Seite gestellt werde. Danach wurden Mūsā und Hārūn zu Firʿawn gesandt. Die Geschichte zeigt: Allah gab Mūsā eine große Aufgabe und gab ihm Zeichen und Unterstützung.",
+      "question": {
+        "6–8": {
+          "question": "Wer war der Bruder, um dessen Unterstützung Mūsā bat?",
+          "answers": [
+            {
+              "label": "Hārūn",
+              "correct": true
+            },
+            {
+              "label": "Yūsuf",
+              "correct": false
+            }
+          ],
+          "success": "Richtig. Hārūn war der Bruder Mūsās.",
+          "retry": "Hör noch einmal auf den Namen."
+        },
+        "9–10": {
+          "question": "Wo wurde Mūsā im Qurʾān angesprochen?",
+          "answers": [
+            {
+              "label": "Im geheiligten Tal Ṭuwā",
+              "correct": true
+            },
+            {
+              "label": "Auf al-Jūdī",
+              "correct": false
+            },
+            {
+              "label": "In Madyan beim Brunnen als Offenbarungsort",
+              "correct": false
+            }
+          ],
+          "success": "Richtig. Der Qurʾān nennt das geheiligte Tal Ṭuwā.",
+          "retry": "Denk an Sūrah Ṭā-Hā."
+        }
+      },
+      "claimIds": [
+        "musa-tuwa",
+        "musa-tl-tuwa-call",
+        "musa-tl-staff-hand",
+        "musa-tl-ask-harun",
+        "musa-harun-brother",
+        "musa-tl-sent-firaun"
+      ],
+      "sourceRefs": [
+        "Qurʾān 20:9–36"
+      ],
+      "verification": "approved"
+    }
+  ]
+}
