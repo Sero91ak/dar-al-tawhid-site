@@ -165,6 +165,29 @@ async function fetchVersionBuild(base) {
   await verifyKidsPage("public", publicBase);
   await verifyKidsPage("workers.dev", workersBase);
 
+  async function verifyKidsRecitationApi(label, base) {
+    const url = `${base}/kids/api/recitation/health?v=${Date.now()}`;
+    const { status, text, cf } = await fetchText(url);
+    let payload = {};
+    try { payload = JSON.parse(text); } catch {}
+    const ok =
+      status === 200 &&
+      payload.ok === true &&
+      payload.ai === true &&
+      payload.service === "dar-al-tawhid-kids-recitation";
+    console.log(
+      `${label} kids speech: ${url} -> ${status} cf=${cf} ai=${payload.ai} ok=${ok}`
+    );
+    if (!ok) {
+      throw new Error(
+        `${label} Kinder-Sprach-API/AI-Binding nicht bereit: ${url}`
+      );
+    }
+  }
+
+  await verifyKidsRecitationApi("public", publicBase);
+  await verifyKidsRecitationApi("workers.dev", workersBase);
+
   console.log(
     `Dar Test live OK — public und workers.dev liefern identisch ${TEST_EXPECT_BUILD}.`
   );
