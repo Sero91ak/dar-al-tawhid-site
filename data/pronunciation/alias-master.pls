@@ -14879,4 +14879,36 @@
     <grapheme>لا إله إلا الله</grapheme>
     <alias>Laa ilaaha illallaah</alias>
   </lexeme>
+  <lexeme>
+    <grapheme>Ṣaḥābah</grapheme>
+    <alias>Sahaaba</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>Sahabah</grapheme>
+    <alias>Sahaaba</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>ṣaḥābah</grapheme>
+    <alias>Sahaaba</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>sahabah</grapheme>
+    <alias>Sahaaba</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>Ṣaḥāba</grapheme>
+    <alias>Sahaaba</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>Sahaba</grapheme>
+    <alias>Sahaaba</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>ṣaḥāba</grapheme>
+    <alias>Sahaaba</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>sahaba</grapheme>
+    <alias>Sahaaba</alias>
+  </lexeme>
 </lexicon>
