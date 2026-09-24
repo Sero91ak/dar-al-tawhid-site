@@ -42,7 +42,9 @@ for (const item of brand.overrides || []) {
 // Audit ordinary al- forms before sun letters. l is excluded here because al+l
 // is naturally represented with a geminated /l/ and requires a separate lexical check.
 const sun = new Set(["t","ṯ","d","ḏ","r","z","s","š","ṣ","ḍ","ṭ","ẓ","n"]);
+const brandForms = new Set((brand.overrides || []).flatMap((x) => x.forms || []));
 for (const r of runtime.rules || []) {
+  if (brandForms.has(r.string_to_replace)) continue;
   const canonical = String(r.canonical || "");
   const m = canonical.match(/\bal[-\s]+([A-Za-zĀĪŪāīūḤḥṢṣḌḍṬṭẒẓṮṯḎḏŠš])/);
   if (!m) continue;
