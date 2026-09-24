@@ -123,6 +123,43 @@ button{color:inherit}
 .choice.story{background:linear-gradient(135deg,#c68771,#a85f69)}
 .choice.quran{background:linear-gradient(135deg,#42968d,#286d79)}
 .choice.dua{background:linear-gradient(135deg,#7d89c5,#6a68a7)}
+.choice.quiz{background:linear-gradient(135deg,#d09958,#a96f45)}
+.quiz-stage{flex:1;display:flex;flex-direction:column;min-height:0;padding-top:10px}
+.quiz-progress{display:flex;gap:6px;justify-content:center;margin:8px 0 14px}
+.quiz-progress span{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.14)}
+.quiz-progress span.done{background:#58ca8c}
+.quiz-progress span.now{background:var(--gold);box-shadow:0 0 0 4px rgba(226,189,114,.10)}
+.quiz-scene{min-height:190px;border-radius:31px;display:grid;place-items:center;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.11);background:
+radial-gradient(circle at 78% 20%,rgba(255,224,160,.65) 0 7%,transparent 8%),
+linear-gradient(180deg,#315c78 0%,#5a8f8a 48%,#ba8b5f 100%)}
+.quiz-scene:after{content:"";position:absolute;left:-4%;right:-4%;bottom:-20px;height:92px;background:
+radial-gradient(ellipse at 16% 100%,#d5ae73 0 28%,transparent 29%),
+radial-gradient(ellipse at 54% 100%,#c79a66 0 33%,transparent 34%),
+radial-gradient(ellipse at 88% 100%,#dfba7f 0 27%,transparent 28%)}
+.quiz-scene-symbol{font-size:72px;position:relative;z-index:2;filter:drop-shadow(0 10px 16px rgba(0,0,0,.18))}
+.quiz-listen{margin:14px auto 0;border:0;border-radius:999px;padding:10px 14px;background:rgba(226,189,114,.14);color:#ffe6ac;font-weight:900;font-size:12px;cursor:pointer}
+.quiz-question{text-align:center;font-size:clamp(24px,7vw,36px);line-height:1.18;font-weight:950;letter-spacing:-.03em;margin:18px auto 10px;max-width:580px}
+.quiz-help{text-align:center;color:var(--muted);font-size:12px;margin-bottom:14px}
+.quiz-answers{display:grid;gap:10px}
+.quiz-answer{min-height:76px;border-radius:22px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.065);display:flex;align-items:center;gap:14px;text-align:left;padding:13px 15px;cursor:pointer;transition:transform .14s ease,background .14s ease,border .14s ease}
+.quiz-answer:active{transform:scale(.985)}
+.quiz-answer .ans-icon{width:50px;height:50px;border-radius:17px;display:grid;place-items:center;font-size:25px;background:rgba(255,255,255,.07);flex:none}
+.quiz-answer strong{font-size:17px}
+.quiz-answer.correct{background:rgba(82,196,132,.15);border-color:rgba(82,196,132,.36)}
+.quiz-answer.wrong{background:rgba(235,83,83,.15);border-color:rgba(235,83,83,.36)}
+.quiz-answer.reveal{background:rgba(226,189,114,.13);border-color:rgba(226,189,114,.28)}
+.quiz-feedback{text-align:center;min-height:48px;margin:13px 0 2px;font-size:15px;font-weight:900}
+.quiz-feedback.good{color:#caffe0}.quiz-feedback.bad{color:#ffc3c3}
+.quiz-next{display:none;width:100%;border:0;border-radius:20px;padding:17px;background:var(--gold);color:#102030;font-size:16px;font-weight:950;cursor:pointer}
+.quiz-next.show{display:block}
+.quiz-finish{text-align:center;padding:26px 10px}
+.quiz-finish .star{font-size:68px;margin-bottom:10px}
+.quiz-finish h3{font-size:30px;margin:0 0 8px}
+.quiz-finish p{color:var(--muted);font-size:13px;line-height:1.5;margin:0 0 20px}
+.app[data-age="4–5"] .quiz-question{font-size:clamp(30px,9vw,42px)}
+.app[data-age="4–5"] .quiz-answer{min-height:92px}
+.app[data-age="4–5"] .quiz-answer strong{font-size:21px}
+.app[data-age="4–5"] .quiz-help{display:none}
 .resume{
   margin-top:13px;border:1px solid var(--line);background:rgba(255,255,255,.075);border-radius:24px;padding:14px 16px;
   display:flex;align-items:center;gap:12px;cursor:pointer
@@ -459,6 +496,13 @@ html,body{background:#06131f!important}
           <small>ein kurzer Vers</small>
           <span class="arrow">›</span>
         </button>
+
+        <button class="choice quiz" id="openQuizButton">
+          <span class="icon">⭐</span>
+          <strong>Quiz spielen</strong>
+          <small>hören · tippen · lernen</small>
+          <span class="arrow">›</span>
+        </button>
       </div>
 
       <button class="resume" id="resumeButton">
@@ -599,6 +643,28 @@ html,body{background:#06131f!important}
     <button class="nav-btn" data-target="quran"><span class="ico">📖</span><span class="lab">Qurʾān</span></button>
     <button class="nav-btn" data-target="parents"><span class="ico">⚙</span><span class="lab">Eltern</span></button>
   </nav>
+
+  <div id="quizModal" class="modal">
+    <div class="modal-shell">
+      <div class="modal-top">
+        <button class="close-btn" data-close="quiz">×</button>
+        <div class="modal-title"><strong>Mein Quiz</strong><small id="quizAgeLabel">für deine Altersstufe</small></div>
+        <div class="top-spacer"></div>
+      </div>
+      <div id="quizStage" class="quiz-stage">
+        <div id="quizProgress" class="quiz-progress"></div>
+        <div id="quizBody">
+          <div id="quizScene" class="quiz-scene"><div id="quizSceneSymbol" class="quiz-scene-symbol">⭐</div></div>
+          <button id="quizListen" class="quiz-listen">🔊 Frage noch einmal hören</button>
+          <div id="quizQuestion" class="quiz-question"></div>
+          <div id="quizHelp" class="quiz-help">Hör zu und tippe auf deine Antwort.</div>
+          <div id="quizAnswers" class="quiz-answers"></div>
+          <div id="quizFeedback" class="quiz-feedback"></div>
+          <button id="quizNext" class="quiz-next">Weiter ›</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div id="storyModal" class="modal">
     <div class="modal-shell">
@@ -778,6 +844,27 @@ var stories={
   }
 };
 
+var quizQuestions={
+  "4–5":[
+    {id:"q45-creation",scene:"🌙",question:"Allah hat den Mond und die Sterne erschaffen. Stimmt das?",type:"yesno",answers:[{label:"Ja",icon:"✓",correct:true},{label:"Nein",icon:"✕",correct:false}],success:"Ja. Allah ist der Schöpfer.",retry:"Hör noch einmal gut zu."},
+    {id:"q45-eating",scene:"🍽️",question:"Sagen wir vor dem Essen Bismillāh?",type:"yesno",answers:[{label:"Ja",icon:"✓",correct:true},{label:"Nein",icon:"✕",correct:false}],success:"Richtig. Vor dem Essen sagen wir Bismillāh.",retry:"Versuch es noch einmal."},
+    {id:"q45-honesty",scene:"🪙",question:"Darf ich etwas behalten, das einem anderen Kind gehört?",type:"yesno",answers:[{label:"Ja",icon:"✓",correct:false},{label:"Nein",icon:"✕",correct:true}],success:"Richtig. Was anderen gehört, geben wir zurück.",retry:"Denk an Ehrlichkeit und versuch es noch einmal."},
+    {id:"q45-water",scene:"💧",question:"Benutzen wir Wasser für Wuḍūʾ?",type:"yesno",answers:[{label:"Ja",icon:"✓",correct:true},{label:"Nein",icon:"✕",correct:false}],success:"Sehr gut. Für Wuḍūʾ benutzen wir Wasser.",retry:"Hör die Frage noch einmal."}
+  ],
+  "6–8":[
+    {id:"q68-salah",scene:"🕌",question:"Wie viele Pflichtgebete beten Muslime jeden Tag?",type:"choice",answers:[{label:"Fünf",icon:"⑤",correct:true},{label:"Zwei",icon:"②",correct:false}],success:"Richtig. Es sind fünf Pflichtgebete.",retry:"Noch nicht. Hör die Frage noch einmal."},
+    {id:"q68-fatiha",scene:"📖",question:"Welche Sūrah lesen wir in jeder Rakʿah des Gebets?",type:"choice",answers:[{label:"al-Fātiḥah",icon:"📖",correct:true},{label:"al-Falaq",icon:"☀️",correct:false}],success:"Richtig. al-Fātiḥah gehört in jede Rakʿah.",retry:"Versuch es noch einmal."},
+    {id:"q68-adab",scene:"🤲",question:"Was ist besser, wenn jemand Hilfe braucht?",type:"choice",answers:[{label:"Helfen",icon:"✦",correct:true},{label:"Wegschauen",icon:"↗",correct:false}],success:"Sehr gut. Wir versuchen zu helfen.",retry:"Denk an gutes Benehmen."},
+    {id:"q68-quran",scene:"📚",question:"Ist der Qurʾān die Rede Allahs?",type:"yesno",answers:[{label:"Ja",icon:"✓",correct:true},{label:"Nein",icon:"✕",correct:false}],success:"Richtig. Der Qurʾān ist die Rede Allahs.",retry:"Hör noch einmal genau zu."}
+  ],
+  "9–10":[
+    {id:"q910-fatiha7",scene:"📖",question:"Wie viele Āyāt hat Sūrah al-Fātiḥah?",type:"choice",answers:[{label:"Sieben",icon:"⑦",correct:true},{label:"Fünf",icon:"⑤",correct:false},{label:"Neun",icon:"⑨",correct:false}],success:"Richtig. al-Fātiḥah hat sieben Āyāt.",retry:"Noch nicht. Versuch es erneut."},
+    {id:"q910-ikhlas",scene:"✦",question:"Welche Sūrah beginnt mit Qul huwa Allāhu aḥad?",type:"choice",answers:[{label:"al-Iḫlāṣ",icon:"📖",correct:true},{label:"an-Nās",icon:"☾",correct:false},{label:"al-Fīl",icon:"◆",correct:false}],success:"Richtig. Das ist Sūrah al-Iḫlāṣ.",retry:"Hör die Frage noch einmal."},
+    {id:"q910-prayers",scene:"🕌",question:"Welches Gebet hat drei Farḍ-Rakʿāt?",type:"choice",answers:[{label:"Maġrib",icon:"☀️",correct:true},{label:"Faǧr",icon:"🌅",correct:false},{label:"ʿAṣr",icon:"◐",correct:false}],success:"Richtig. Maġrib hat drei Farḍ-Rakʿāt.",retry:"Versuch es noch einmal."},
+    {id:"q910-trust",scene:"🪙",question:"Du findest etwas, das dir nicht gehört. Was ist die richtige Handlung?",type:"choice",answers:[{label:"Nach dem Besitzer suchen",icon:"🔎",correct:true},{label:"Einfach behalten",icon:"⬇",correct:false},{label:"Verstecken",icon:"◼",correct:false}],success:"Richtig. Ehrlichkeit bedeutet, das Eigentum anderer zu achten.",retry:"Denk an Ehrlichkeit und versuch es noch einmal."}
+  ]
+};
+
 var kidsSurahs=[
   {id:1,label:"al-Fātiḥah",hint:"7 Āyāt"},
   {id:112,label:"al-Iḫlāṣ",hint:"4 Āyāt"},
@@ -835,6 +922,10 @@ var lastWordScore=0;
 var speech=window.speechSynthesis;
 var speaking=false;
 var currentStoryKey="coin";
+var currentQuiz=[];
+var currentQuizIndex=0;
+var quizLocked=false;
+var quizCorrectCount=0;
 
 function pad3(n){return String(n).padStart(3,"0")}
 function padAyah(n){return String(n).padStart(3,"0")}
@@ -1732,6 +1823,99 @@ document.getElementById("openPickedSurah").addEventListener("click",function(){
   openSurah(id,0,"listen");
 });
 
+function quizSpeak(text){
+  if(!("speechSynthesis" in window))return;
+  try{speech.cancel()}catch(e){}
+  var u=new SpeechSynthesisUtterance(String(text||""));
+  u.lang="de-DE";u.rate=age==="4–5"?.82:.88;u.pitch=.96;
+  speech.speak(u);
+}
+function quizBankForAge(){
+  return (quizQuestions[age]||quizQuestions["6–8"]).slice();
+}
+function quizSavedCorrect(){
+  try{return Number(localStorage.getItem("kids.quiz.correct")||"0")}catch(e){return 0}
+}
+function renderQuizProgress(){
+  var box=document.getElementById("quizProgress");
+  box.innerHTML=currentQuiz.map(function(_,i){
+    var cls=i<currentQuizIndex?"done":(i===currentQuizIndex?"now":"");
+    return '<span class="'+cls+'"></span>';
+  }).join("");
+}
+function openQuiz(){
+  currentQuiz=quizBankForAge();
+  currentQuizIndex=0;
+  quizCorrectCount=0;
+  quizLocked=false;
+  document.getElementById("quizModal").classList.add("open");
+  document.getElementById("quizAgeLabel").textContent=age==="4–5"?"4–5 Jahre · nur hören & tippen":(age==="6–8"?"6–8 Jahre · hören & auswählen":"9–10 Jahre · hören & nachdenken");
+  renderQuizQuestion();
+}
+function renderQuizQuestion(){
+  if(currentQuizIndex>=currentQuiz.length){renderQuizFinish();return}
+  var q=currentQuiz[currentQuizIndex];
+  quizLocked=false;
+  renderQuizProgress();
+  document.getElementById("quizBody").innerHTML=
+    '<div id="quizScene" class="quiz-scene"><div id="quizSceneSymbol" class="quiz-scene-symbol">'+q.scene+'</div></div>'+
+    '<button id="quizListen" class="quiz-listen">🔊 Frage noch einmal hören</button>'+
+    '<div id="quizQuestion" class="quiz-question">'+q.question+'</div>'+
+    '<div id="quizHelp" class="quiz-help">'+(age==="4–5"?"":"Hör zu und tippe auf deine Antwort.")+'</div>'+
+    '<div id="quizAnswers" class="quiz-answers"></div>'+
+    '<div id="quizFeedback" class="quiz-feedback"></div>'+
+    '<button id="quizNext" class="quiz-next">Weiter ›</button>';
+  var answers=document.getElementById("quizAnswers");
+  q.answers.forEach(function(a,idx){
+    var btn=document.createElement("button");
+    btn.className="quiz-answer";
+    btn.innerHTML='<span class="ans-icon">'+a.icon+'</span><strong>'+a.label+'</strong>';
+    btn.addEventListener("click",function(){chooseQuizAnswer(idx,btn)});
+    answers.appendChild(btn);
+  });
+  document.getElementById("quizListen").addEventListener("click",function(){quizSpeak(q.question)});
+  document.getElementById("quizNext").addEventListener("click",function(){currentQuizIndex++;renderQuizQuestion()});
+  setTimeout(function(){quizSpeak(q.question)},250);
+}
+function chooseQuizAnswer(index,button){
+  if(quizLocked)return;
+  var q=currentQuiz[currentQuizIndex];
+  var a=q.answers[index];
+  var buttons=[].slice.call(document.querySelectorAll("#quizAnswers .quiz-answer"));
+  if(a.correct){
+    quizLocked=true;
+    quizCorrectCount++;
+    button.classList.add("correct");
+    document.getElementById("quizFeedback").className="quiz-feedback good";
+    document.getElementById("quizFeedback").textContent="✓ "+q.success;
+    document.getElementById("quizNext").classList.add("show");
+    quizSpeak(q.success);
+  }else{
+    button.classList.add("wrong");
+    document.getElementById("quizFeedback").className="quiz-feedback bad";
+    document.getElementById("quizFeedback").textContent=q.retry;
+    quizSpeak(q.retry);
+    setTimeout(function(){
+      button.classList.remove("wrong");
+      document.getElementById("quizFeedback").textContent="";
+    },1300);
+  }
+}
+function renderQuizFinish(){
+  try{
+    var total=quizSavedCorrect()+quizCorrectCount;
+    localStorage.setItem("kids.quiz.correct",String(total));
+  }catch(e){}
+  document.getElementById("quizProgress").innerHTML="";
+  document.getElementById("quizBody").innerHTML=
+    '<div class="quiz-finish"><div class="star">⭐</div><h3>Quiz geschafft!</h3>'+
+    '<p>Du hast '+quizCorrectCount+' von '+currentQuiz.length+' Fragen richtig gelöst.</p>'+
+    '<button id="quizAgain" class="primary">Noch einmal spielen</button></div>';
+  document.getElementById("quizAgain").addEventListener("click",openQuiz);
+  quizSpeak("Sehr gut. Du hast das Quiz geschafft.");
+}
+document.getElementById("openQuizButton").addEventListener("click",openQuiz);
+
 function openStory(key){
   currentStoryKey=key;
   var s=stories[key]||stories.coin;
@@ -1770,6 +1954,7 @@ document.querySelectorAll("[data-close]").forEach(function(b){
   b.addEventListener("click",function(){
     var type=b.dataset.close;
     if(type==="story"){stopSpeech();document.getElementById("storyModal").classList.remove("open")}
+    if(type==="quiz"){try{speech.cancel()}catch(e){} document.getElementById("quizModal").classList.remove("open")}
     if(type==="quran"){stopQuran();releaseMicStream();document.getElementById("quranModal").classList.remove("open")}
     if(type==="fullquran"){document.getElementById("fullQuranModal").classList.remove("open")}
   });
