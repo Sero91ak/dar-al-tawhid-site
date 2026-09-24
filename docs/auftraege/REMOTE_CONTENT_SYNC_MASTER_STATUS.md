@@ -35,6 +35,7 @@ Aufgabe:
 ```text
 apple-tv/quran/tadabbur/catalog.json
 apple-tv/quran/tadabbur/entries-index.json
+apple-tv/quran/tadabbur/xcode/TVQuranTadabburSupport.swift
 apple-tv/quran/tadabbur/entries-batch-05z-113.json
 apple-tv/quran/tadabbur/entries-batch-05z-114.json
 apple-tv/quran/tadabbur/entries-batch-05z-115.json
@@ -45,15 +46,20 @@ Aktueller registrierter Stand:
 
 ```text
 entriesCount: 5102
+totalVerifiedEntries: 5102
 letzter Batch: entries-batch-05z-116.json
 letzter Vers: 114:6
 ```
 
-Pflicht:
+Pflicht/Stand:
 
 - Apple TV, iOS und iPadOS müssen diesen Stand automatisch erkennen.
 - Keine feste Grenze im Code.
 - Neue Batch-Dateien müssen künftig automatisch über den Katalog erkannt werden.
+- `TVQuranTadabburSupport.swift` ist am zentralen `RemoteContentSyncService` angebunden.
+- Tadabbur wird in `QuranTabView.swift` sichtbar direkt unter der Qurʾān-Übersetzung gerendert.
+- Lookup erfolgt über exakte Referenz `Sūrah:Āyah`.
+- Wenn kein geprüfter Eintrag existiert, erscheint nur der feste Fallback.
 
 ### Ḥadīṯ / Āṯār Legacy-Katalog
 
@@ -217,7 +223,9 @@ apple-tv/xcode/AppleTVContentRegistry.swift
 apple-tv/xcode/RemoteContentSyncService.swift
 apple-tv/xcode/RemoteContentSyncCoordinator.swift
 apple-tv/xcode/QuranContentService.swift
+apple-tv/xcode/QuranTabView.swift
 apple-tv/xcode/ScreensaverRotationService.swift
+apple-tv/quran/tadabbur/xcode/TVQuranTadabburSupport.swift
 apple-tv/hadith/xcode/HadithRemoteService.swift
 apple-tv/hadith/xcode/HadithScreensaverProvider.swift
 apple-tv/xcode/AUFTRAG_REMOTE_CONTENT_SYNC_IMPLEMENTATION.md
@@ -280,6 +288,32 @@ Pflicht/Stand:
 - triggert denselben Sync beim Laden einer synchronisierten Sūrah.
 - dadurch werden Qurʾān-Tadabbur und Qurʾān-Audio-Kataloge beim Öffnen aktuell gehalten.
 - lokaler Qurʾān-Cache bleibt erhalten.
+
+### TVQuranTadabburSupport.swift
+
+Ist angebunden.
+
+Pflicht/Stand:
+
+- triggert `RemoteContentSyncService.shared.syncCatalog(relativeCatalogPath: "quran/tadabbur/catalog.json")`.
+- lädt Tadabbur-Daten bevorzugt aus dem zentralen Sync-Cache.
+- fällt bei Bedarf auf Remote zurück.
+- fällt danach auf den letzten gültigen lokalen Tadabbur-Cache zurück.
+- validiert Referenzen, Pflichtfelder, doppelte IDs und Gesamtanzahl.
+- rendert `TVQuranTadabburCard` ohne Logo, mit Dar-al-Layl-Karte, cremefarbener Schrift und Goldakzent.
+
+### QuranTabView.swift
+
+Ist sichtbar angebunden.
+
+Pflicht/Stand:
+
+- hält `TVQuranTadabburStore.shared` als `@StateObject`.
+- lädt Tadabbur im `prepare()`.
+- bildet pro Vers die Referenz `Sūrah:Āyah`.
+- rendert `TVQuranTadabburCard` direkt unter der deutschen Übersetzung.
+- zeigt bei fehlendem Eintrag nur den festen Fallback.
+- keine Logos in der Tadabbur-Karte.
 
 ### HadithRemoteService.swift
 
@@ -362,24 +396,25 @@ Live-App darf nicht dauerhaft auf Staging zeigen.
 7. `entriesCount = 5102` erkennen.
 8. `entries-batch-05z-116.json` laden.
 9. Vers `114:6` öffnen.
-10. Ḥadīṯ-Katalog laden.
-11. `totalCount = 2545` erkennen.
-12. `series/2451-2550/index.json` laden.
-13. einzelne `HAD-xxxx.json` Dateien aus dem Serien-Index laden.
-14. Screensaver-Katalog laden.
-15. `rotation.json` laden.
-16. Apple TV 60 Sekunden nicht bedienen.
-17. Bildschirmschoner startet.
-18. Šarḥ-Katalog lädt ohne Crash, auch wenn leer.
-19. Duʿāʾ-Katalog lädt ohne Crash, auch wenn leer.
-20. Serien-Katalog lädt ohne Crash, auch wenn leer.
-21. Āṯār-Katalog lädt ohne Crash, auch wenn leer.
-22. Internet ausschalten.
-23. App neu starten.
-24. Letzter vollständiger Cache bleibt aktiv.
-25. Remote-Datei korrigieren.
-26. App online starten.
-27. Korrektur wird ohne App-Update übernommen.
+10. Tadabbur-Karte unter der deutschen Übersetzung prüfen.
+11. Ḥadīṯ-Katalog laden.
+12. `totalCount = 2545` erkennen.
+13. `series/2451-2550/index.json` laden.
+14. einzelne `HAD-xxxx.json` Dateien aus dem Serien-Index laden.
+15. Screensaver-Katalog laden.
+16. `rotation.json` laden.
+17. Apple TV 60 Sekunden nicht bedienen.
+18. Bildschirmschoner startet.
+19. Šarḥ-Katalog lädt ohne Crash, auch wenn leer.
+20. Duʿāʾ-Katalog lädt ohne Crash, auch wenn leer.
+21. Serien-Katalog lädt ohne Crash, auch wenn leer.
+22. Āṯār-Katalog lädt ohne Crash, auch wenn leer.
+23. Internet ausschalten.
+24. App neu starten.
+25. Letzter vollständiger Cache bleibt aktiv.
+26. Remote-Datei korrigieren.
+27. App online starten.
+28. Korrektur wird ohne App-Update übernommen.
 
 ## Schlussregel
 
