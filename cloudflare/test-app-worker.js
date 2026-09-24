@@ -147,7 +147,7 @@ async function gradeRecitation(request, env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    const KIDS_SHELL_REV = "20260924-11-creative1";
+    const KIDS_SHELL_REV = "20260925-11-quran-mic-focus1";
     const isKidsPath = /^\/test\/kids(?:\/|$)/.test(url.pathname);
 
     if ((url.pathname === "/test/kids" || url.pathname === "/test/kids/") && url.searchParams.get("kv") !== KIDS_SHELL_REV) {
