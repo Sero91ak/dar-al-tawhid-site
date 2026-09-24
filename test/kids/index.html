@@ -774,7 +774,7 @@ var stories={
   }
 };
 
-var kidsSurahs=[var kidsSurahs=[
+var kidsSurahs=[
   {id:1,label:"al-Fātiḥah",hint:"7 Āyāt"},
   {id:112,label:"al-Iḫlāṣ",hint:"4 Āyāt"},
   {id:113,label:"al-Falaq",hint:"5 Āyāt"},
@@ -1810,7 +1810,7 @@ document.getElementById("storyDone").addEventListener("click",function(){
   this.textContent="✓ Schon geschafft";
 });
 
-document.querySelectorAll("[data-close]").forEach(function(b){document.querySelectorAll("[data-close]").forEach(function(b){
+document.querySelectorAll("[data-close]").forEach(function(b){
   b.addEventListener("click",function(){
     var type=b.dataset.close;
     if(type==="story"){stopSpeech();document.getElementById("storyModal").classList.remove("open")}
