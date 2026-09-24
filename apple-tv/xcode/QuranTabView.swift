@@ -298,9 +298,11 @@ struct QuranTabView: View {
     }
 
     private func prepare() async {
-        async let reciterLoad: Void = reciterStore.loadFinished ? () : reciterStore.load()
-        async let tadabburLoad: Void = tadabburStore.load()
-        _ = await (reciterLoad, tadabburLoad)
+        if !reciterStore.loadFinished {
+            await reciterStore.load()
+        }
+
+        await tadabburStore.load()
 
         if surahs.isEmpty && !isLoadingSurahs {
             isLoadingSurahs = true
