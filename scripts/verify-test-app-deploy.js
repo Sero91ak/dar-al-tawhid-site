@@ -155,7 +155,8 @@ async function fetchVersionBuild(base) {
       text.includes("id=\"openQuizButton\"") &&
       text.includes("id=\"quizModal\"") &&
       text.includes("id=\"dailyJourney\"") &&
-      text.includes("id=\"storyQuestion\"");
+      text.includes("id=\"storyQuestion\"") &&
+      text.includes("id=\"parentStoriesDone\"");
     console.log(
       `${label} kids: ${url} -> ${status} cf=${cf} marker=${ok}`
     );
