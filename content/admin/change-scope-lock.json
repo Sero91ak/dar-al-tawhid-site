@@ -5830,7 +5830,10 @@
         "test/kids/",
         "cloudflare/test-app-worker.js",
         "scripts/verify-test-app-deploy.js",
-        "wrangler.test.toml"
+        "wrangler.test.toml",
+        "scripts/kids-content-authenticity-guard.js",
+        ".github/workflows/deploy-kids-app.yml",
+        ".github/workflows/deploy-test-app.yml"
       ],
       "expiresAt": "2027-03-31T23:59:00.000Z",
       "stage": "feature-only"
