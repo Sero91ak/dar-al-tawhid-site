@@ -22,65 +22,73 @@
       "category": "Branding & Grundbegriffe",
       "canonical": "DĀR AL TAWḤĪD",
       "string_to_replace": "DĀR AL TAWḤĪD",
-      "alias": "Daar at-Tauhiid",
-      "ipa": "/daːr at.tawˈħiːd/",
-      "priority": "core"
+      "alias": "Daar al Tauhiid",
+      "ipa": "/daːr al tawˈħiːd/",
+      "priority": "core",
+      "verification": "brand-owner-approved"
     },
     {
       "category": "Weitere Begriffe",
       "canonical": "DAR AL TAWHID",
       "string_to_replace": "DAR AL TAWHID",
-      "alias": "Daar at-Tauhiid",
-      "ipa": "/daːr at.tawˈħiːd/",
-      "priority": "extended"
+      "alias": "Daar al Tauhiid",
+      "ipa": "/daːr al tawˈħiːd/",
+      "priority": "extended",
+      "verification": "brand-owner-approved"
     },
     {
       "category": "Weitere Begriffe",
       "canonical": "dār al tawḥīd",
       "string_to_replace": "dār al tawḥīd",
-      "alias": "Daar at-Tauhiid",
-      "ipa": "/daːr at.tawˈħiːd/",
-      "priority": "extended"
+      "alias": "Daar al Tauhiid",
+      "ipa": "/daːr al tawˈħiːd/",
+      "priority": "extended",
+      "verification": "brand-owner-approved"
     },
     {
       "category": "Weitere Begriffe",
       "canonical": "dar al tawhid",
       "string_to_replace": "dar al tawhid",
-      "alias": "Daar at-Tauhiid",
-      "ipa": "/daːr at.tawˈħiːd/",
-      "priority": "extended"
+      "alias": "Daar al Tauhiid",
+      "ipa": "/daːr al tawˈħiːd/",
+      "priority": "extended",
+      "verification": "brand-owner-approved"
     },
     {
       "category": "Branding & Grundbegriffe",
       "canonical": "Dār al-Tawḥīd",
       "string_to_replace": "Dār al-Tawḥīd",
-      "alias": "Daar at-Tauhiid",
-      "ipa": "/daːr at.tawˈħiːd/",
-      "priority": "core"
+      "alias": "Daar al Tauhiid",
+      "ipa": "/daːr al tawˈħiːd/",
+      "priority": "core",
+      "verification": "brand-owner-approved"
     },
     {
       "category": "Weitere Begriffe",
       "canonical": "Dar al-Tawhid",
       "string_to_replace": "Dar al-Tawhid",
-      "alias": "Daar at-Tauhiid",
-      "ipa": "/daːr at.tawˈħiːd/",
-      "priority": "extended"
+      "alias": "Daar al Tauhiid",
+      "ipa": "/daːr al tawˈħiːd/",
+      "priority": "extended",
+      "verification": "brand-owner-approved"
     },
     {
       "category": "Weitere Begriffe",
       "canonical": "dār al-tawḥīd",
       "string_to_replace": "dār al-tawḥīd",
-      "alias": "Daar at-Tauhiid",
-      "ipa": "/daːr at.tawˈħiːd/",
-      "priority": "extended"
+      "alias": "Daar al Tauhiid",
+      "ipa": "/daːr al tawˈħiːd/",
+      "priority": "extended",
+      "verification": "brand-owner-approved"
     },
     {
       "category": "Weitere Begriffe",
       "canonical": "dar al-tawhid",
       "string_to_replace": "dar al-tawhid",
-      "alias": "Daar at-Tauhiid",
-      "ipa": "/daːr at.tawˈħiːd/",
-      "priority": "extended"
+      "alias": "Daar al Tauhiid",
+      "ipa": "/daːr al tawˈħiːd/",
+      "priority": "extended",
+      "verification": "brand-owner-approved"
     },
     {
       "category": "Branding & Grundbegriffe",
@@ -29770,5 +29778,11 @@
       "ipa": "/laː ʔilaːha ʔilˈlaː lˈlaːh/",
       "priority": "core"
     }
-  ]
+  ],
+  "verification": {
+    "sourceCatalog": "authoritative-sources.json",
+    "phonemeReference": "arabic-phoneme-reference.json",
+    "brandOverrides": "brand-pronunciation-overrides.json",
+    "note": "Brand-owner-approved readings override ordinary Classical/Standard Arabic connected-speech assimilation only for the exact brand forms."
+  }
 }
