@@ -660,7 +660,7 @@ html,body{background:#06131f!important}
 
 /* ---------- STORY IMAGE ---------- */
 .story-scene{
-  --art:url("/test/kids/assets/kids-art/story-muenze.png?v=11-seamless2");
+  --art:url("/test/kids/assets/kids-art/story-coin-v11-clean.png?v=11-shotfix1");
   --art-pos:50% 54%;
   height:clamp(148px,28vw,224px);
   background:linear-gradient(135deg,#294955,#75624a);
@@ -679,7 +679,7 @@ html,body{background:#06131f!important}
 
 /* ---------- QURAN HERO ---------- */
 .quran-hero{
-  --art:url("/test/kids/assets/kids-art/quran-reise-v11-wide.jpg?v=11-quranpolish2");
+  --art:url("/test/kids/assets/kids-art/quran-reise-v11-clean.png?v=11-shotfix1");
   --art-pos:70% center;
   --wash-a:rgba(7,43,49,.92);
   --wash-b:rgba(16,80,78,.68);
@@ -711,7 +711,7 @@ html,body{background:#06131f!important}
   background-image:
     linear-gradient(90deg,rgba(6,28,40,.68) 0%,rgba(6,28,40,.38) 28%,rgba(6,28,40,.15) 56%,rgba(6,28,40,.05) 78%,transparent 100%),
     linear-gradient(180deg,rgba(6,28,40,.02),rgba(6,28,40,.18)),
-    url("/test/kids/assets/kids-art/quran-surah-zone-v11-wide.jpg?v=11-quranpolish2");
+    url("/test/kids/assets/kids-art/quran-surah-banner-v11-clean.png?v=11-shotfix1");
   background-size:100% 100%,100% 100%,cover;
   background-position:center,center,center;
   background-repeat:no-repeat;
@@ -847,6 +847,191 @@ html,body{background:#06131f!important}
 #storyPlay::before,#recordingPlayback::before,.dua-quran-audio::before{background-position:0% 33.333%}
 #speakAlong::before,.learn-status.you::before{background-position:25% 33.333%}
 .learn-status.error::before{background-position:75% 33.333%}.learn-status.success::before{background-position:75% 0%}
+
+
+/* KIDS_SCREENSHOT_FIX_V11
+   Screenshot QA: fix cropped/blank artwork, separate the short-sūrah banner from cards,
+   and use realistic transparent PNG icons in the prominent child-facing surfaces. */
+
+/* Story feature: the old decorative pseudo-element left a fixed 83px height behind.
+   Reset every inherited dimension so the artwork truly fills the whole scene. */
+.story-scene{
+  --art:url("/test/kids/assets/kids-art/story-coin-v11-clean.png?v=11-shotfix1");
+  height:clamp(190px,34vw,252px)!important;
+  background:#273f49!important;
+}
+.story-scene::before{
+  content:""!important;
+  position:absolute!important;
+  inset:-3px!important;
+  left:-3px!important;right:-3px!important;top:-3px!important;bottom:-3px!important;
+  width:auto!important;height:auto!important;
+  clip-path:none!important;
+  transform:scale(1.025)!important;
+  background-image:var(--art)!important;
+  background-size:cover!important;
+  background-position:center 58%!important;
+  background-repeat:no-repeat!important;
+  filter:saturate(1.05) contrast(.99) brightness(.96)!important;
+  opacity:1!important;
+}
+.story-scene::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  left:0!important;right:0!important;top:0!important;bottom:0!important;
+  width:auto!important;height:auto!important;
+  clip-path:none!important;
+  background:linear-gradient(180deg,rgba(7,20,28,.02) 45%,rgba(7,20,28,.16) 78%,rgba(7,20,28,.30) 100%)!important;
+  opacity:1!important;
+}
+.story-copy{position:relative;z-index:2;background:linear-gradient(180deg,rgba(255,255,255,.018),rgba(255,255,255,.045))}
+
+/* Qurʾān journey: clean 16:9 asset, stable focal point, no inherited pseudo geometry. */
+.quran-hero{
+  --art:url("/test/kids/assets/kids-art/quran-reise-v11-clean.png?v=11-shotfix1");
+  --art-pos:center 52%;
+  min-height:0!important;
+  padding:22px 22px 24px!important;
+  background:#164b50!important;
+}
+.quran-hero::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  width:auto!important;height:auto!important;
+  transform:none!important;
+  background-image:var(--art)!important;
+  background-size:cover!important;
+  background-position:center 52%!important;
+  background-repeat:no-repeat!important;
+  filter:saturate(1.03) brightness(.78) contrast(1.01)!important;
+  opacity:1!important;
+}
+.quran-hero::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  width:auto!important;height:auto!important;
+  background:
+    radial-gradient(ellipse 88% 115% at 0% 42%,rgba(4,35,42,.89) 0%,rgba(4,35,42,.72) 41%,rgba(4,35,42,.28) 68%,transparent 92%),
+    linear-gradient(180deg,rgba(5,31,38,.08) 0%,rgba(5,31,38,.08) 50%,rgba(5,31,38,.48) 100%)!important;
+}
+.quran-hero h3{margin:10px 0 6px!important}
+.quran-hero p{max-width:560px!important;color:rgba(255,255,255,.86)!important}
+.quran-actions{margin-top:20px!important;gap:12px!important}
+.quran-action{
+  min-height:112px!important;
+  padding:16px!important;
+  background:linear-gradient(145deg,rgba(10,43,48,.66),rgba(255,255,255,.10))!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  -webkit-backdrop-filter:blur(13px)!important;
+  backdrop-filter:blur(13px)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.06),0 12px 28px rgba(0,0,0,.16)!important;
+}
+
+/* The banner now has its own panoramic height and an explicit breathing gap.
+   Sūrah cards can never touch it. */
+#view-quran .section-title{margin:30px 0 14px!important}
+.surah-grid{
+  --kids-surah-banner-h:clamp(118px,28vw,194px);
+  padding-top:calc(var(--kids-surah-banner-h) + 20px)!important;
+  column-gap:10px!important;
+  row-gap:12px!important;
+}
+.surah-grid::before{
+  height:var(--kids-surah-banner-h)!important;
+  border-radius:26px!important;
+  background-image:
+    linear-gradient(180deg,rgba(6,28,40,.02) 0%,rgba(6,28,40,.05) 54%,rgba(6,28,40,.18) 100%),
+    url("/test/kids/assets/kids-art/quran-surah-banner-v11-clean.png?v=11-shotfix1")!important;
+  background-size:100% 100%,cover!important;
+  background-position:center,center!important;
+  background-repeat:no-repeat!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.18)!important;
+}
+
+/* Realistic PNG icon system for the places visible in the screenshots. */
+.choice .icon,.resume-icon,.story-thumb,.quran-hero .book,.qa-icon,.nav-btn .ico,.dua-scene-symbol .kid-icon,
+.knowledge-symbol .kid-icon,.quiz-scene-symbol .kid-icon,.quiz-finish .star .kid-icon{
+  background-repeat:no-repeat!important;
+  background-position:center!important;
+  background-size:contain!important;
+}
+.choice.quran .icon,.quran-hero .book,.nav-btn[data-target="quran"] .ico,.picker-icon{
+  background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=1")!important;
+}
+.choice.story .icon,.nav-btn[data-target="stories"] .ico,#quickLearn112 .qa-icon{
+  background-image:url("/test/kids/assets/kids-icons/mic-real-v11.png?v=1")!important;
+}
+.choice.dua .icon,.dua-scene-symbol .kid-icon{
+  background-image:url("/test/kids/assets/kids-icons/dua-real-v11.png?v=1")!important;
+}
+.choice.quiz .icon,.nav-btn[data-target="today"] .ico,.knowledge-symbol .kid-icon,.quiz-scene-symbol .kid-icon,.quiz-finish .star .kid-icon{
+  background-image:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=1")!important;
+}
+.resume-icon,#resumeQuran .qa-icon{
+  background-image:url("/test/kids/assets/kids-icons/play-real-v11.png?v=1")!important;
+}
+.story-row[data-story="water"] .story-thumb{
+  background-image:url("/test/kids/assets/kids-icons/water-real-v11.png?v=1")!important;
+}
+.story-row[data-story="helper"] .story-thumb{
+  background-image:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=1")!important;
+}
+.story-row[data-story="kindword"] .story-thumb{
+  background-image:url("/test/kids/assets/kids-icons/cloud-real-v11.png?v=1")!important;
+}
+.story-row.verified .story-thumb{
+  background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=1")!important;
+}
+.story-thumb{
+  color:transparent!important;
+  font-size:0!important;
+  background-size:72% auto!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+}
+.quran-hero .book{width:58px!important;height:58px!important}
+.quran-action .qa-icon{width:44px!important;height:44px!important;margin-bottom:12px!important}
+.choice .icon{width:42px!important;height:42px!important;display:block!important;margin-bottom:12px!important}
+.resume-icon{background-size:70%!important}
+.nav-btn .ico{background-size:88%!important}
+.dua-scene-symbol{
+  width:142px!important;height:142px!important;
+  filter:drop-shadow(0 16px 22px rgba(0,0,0,.22))!important;
+}
+.dua-scene-symbol .kid-icon{width:100%!important;height:100%!important}
+.knowledge-symbol .kid-icon,.quiz-scene-symbol .kid-icon,.quiz-finish .star .kid-icon{width:100%!important;height:100%!important}
+
+/* Realistic controls instead of tiny sprite-style system-look icons. */
+#storyPlay::before,#recordingPlayback::before,.dua-quran-audio::before,
+#knowledgeListen::before,.quiz-listen::before,#ayahPlay::before,.dua-listen::before{
+  background-image:url("/test/kids/assets/kids-icons/play-real-v11.png?v=1")!important;
+  background-size:contain!important;background-position:center!important;
+}
+#speakAlong::before,.learn-status.you::before{
+  background-image:url("/test/kids/assets/kids-icons/mic-real-v11.png?v=1")!important;
+  background-size:contain!important;background-position:center!important;
+}
+
+/* Responsive polishing based on the supplied iPad screenshots. */
+@media(max-width:699px){
+  .quran-hero{padding:18px!important}
+  .quran-actions{grid-template-columns:1fr 1fr!important}
+  .quran-action{min-height:102px!important}
+}
+@media(max-width:390px){
+  .quran-actions{grid-template-columns:1fr!important}
+  .surah-grid{--kids-surah-banner-h:118px}
+  .story-scene{height:190px!important}
+}
+@media(min-width:700px){
+  .quran-hero{padding:24px 26px 26px!important}
+  .story-scene{height:252px!important}
+  .surah-grid{--kids-surah-banner-h:194px}
+}
+/* KIDS_SCREENSHOT_FIX_V11_END */
 
 </style>
 </head>
@@ -1250,7 +1435,7 @@ html,body{background:#06131f!important}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v11-quran-polish2";
+const KIDS_BUILD_ID="kids-shell-v11-shotfix1";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){

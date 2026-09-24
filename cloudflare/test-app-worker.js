@@ -147,7 +147,7 @@ async function gradeRecitation(request, env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    const KIDS_SHELL_REV = "20260924-11-quran-polish2";
+    const KIDS_SHELL_REV = "20260924-11-shotfix1";
     const isKidsPath = /^\/test\/kids(?:\/|$)/.test(url.pathname);
 
     if ((url.pathname === "/test/kids" || url.pathname === "/test/kids/") && url.searchParams.get("kv") !== KIDS_SHELL_REV) {
@@ -213,7 +213,7 @@ export default {
     out.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
     out.headers.set("Pragma", "no-cache");
     if (isKidsPath) {
-      out.headers.set("X-DAR-Kids-Build", "kids-shell-v11-quran-polish2");
+      out.headers.set("X-DAR-Kids-Build", "kids-shell-v11-shotfix1");
     }
     return out;
   }
