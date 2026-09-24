@@ -147,6 +147,21 @@ async function gradeRecitation(request, env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const KIDS_SHELL_REV = "20260924-3";
+    const isKidsPath = /^\/test\/kids(?:\/|$)/.test(url.pathname);
+
+    if ((url.pathname === "/test/kids" || url.pathname === "/test/kids/") && url.searchParams.get("kv") !== KIDS_SHELL_REV) {
+      url.pathname = "/test/kids/";
+      url.searchParams.set("kv", KIDS_SHELL_REV);
+      return new Response(null, {
+        status: 302,
+        headers: {
+          "Location": url.toString(),
+          "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+          "Pragma": "no-cache"
+        }
+      });
+    }
 
     if (url.pathname === "/test/kids/api/recitation/health") {
       return json({
@@ -188,7 +203,8 @@ export default {
 
     const asset = await env.ASSETS.fetch(request);
     const path = url.pathname;
-    const bust = /\/test\/(index\.html)?$/.test(path)
+    const bust = isKidsPath
+      || /\/test\/(index\.html)?$/.test(path)
       || /dar-quran-player\.(js|css)$/.test(path)
       || path.endsWith("/test/version.json")
       || path.endsWith("/test/service-worker.js");
@@ -196,6 +212,9 @@ export default {
     const out = new Response(asset.body, asset);
     out.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
     out.headers.set("Pragma", "no-cache");
+    if (isKidsPath) {
+      out.headers.set("X-DAR-Kids-Build", "kids-shell-v3");
+    }
     return out;
   }
 };
