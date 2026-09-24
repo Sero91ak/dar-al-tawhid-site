@@ -13580,35 +13580,64 @@ body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:no
 .top-shell.theme-hero-shell .header-top-chips{display:none!important}
 </style>
 
+
 <style id="qibla-quick-sheet-v1">
-body.qibla-quick-sheet-open{overflow:hidden}
+html.qibla-quick-sheet-open,html.qibla-quick-sheet-open body{overflow:hidden!important;overscroll-behavior:none}
+html.qibla-quick-sheet-open #bottomNav,
+html.qibla-quick-sheet-open .bottom-nav,
+html.qibla-quick-sheet-open .top-shell,
+html.qibla-quick-sheet-open .header,
+html.qibla-quick-sheet-open #appView{pointer-events:none!important}
+html.qibla-quick-sheet-open #bottomNav{opacity:0!important;visibility:hidden!important}
 .qibla-quick-sheet-backdrop{
-  position:fixed;inset:0;z-index:240;
-  display:grid;align-items:end;
-  padding:max(8px,env(safe-area-inset-top)) 10px max(8px,env(safe-area-inset-bottom));
-  background:rgba(5,7,6,.46);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  opacity:0;transition:opacity .28s ease;
+  position:fixed;inset:0;z-index:4200;
+  display:grid;place-items:center;
+  padding:max(10px,env(safe-area-inset-top)) 14px max(14px,env(safe-area-inset-bottom));
+  background:color-mix(in srgb,var(--theme-page-bg,var(--bg,#050706)) 28%,#000 72%);
+  backdrop-filter:blur(18px) saturate(1.1);-webkit-backdrop-filter:blur(18px) saturate(1.1);
+  opacity:0;transition:opacity .34s ease;
 }
 .qibla-quick-sheet-backdrop.is-open{opacity:1}
 .qibla-quick-sheet{
-  width:min(100%,520px);margin:0 auto;
-  max-height:min(88dvh,740px);overflow:auto;
-  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 28%,transparent);
-  border-radius:28px 28px 18px 18px;
-  background:linear-gradient(180deg,color-mix(in srgb,var(--card,#12110d) 92%,#000 8%),#0b0c0a);
-  box-shadow:0 24px 70px rgba(0,0,0,.48);
-  transform:translateY(28px);transition:transform .32s cubic-bezier(.2,.8,.2,1);
-  padding:8px 14px 16px;
+  width:min(100%,430px);
+  max-height:min(86dvh,720px);
+  overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;
+  border:1px solid color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 34%,transparent);
+  border-radius:32px;
+  background:
+    radial-gradient(120% 80% at 50% 0%,color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 16%,transparent),transparent 58%),
+    linear-gradient(180deg,color-mix(in srgb,var(--theme-surface,var(--card,#14120e)) 94%,#fff 6%),var(--theme-page-bg,var(--bg,#0a0907)));
+  color:var(--theme-text,var(--text,#f5efe1));
+  box-shadow:0 28px 80px rgba(0,0,0,.5),inset 0 1px 0 color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 22%,transparent);
+  transform:translateY(22px) rotate(var(--qibla-lock-rot,0deg));
+  transform-origin:center center;
+  transition:transform .34s cubic-bezier(.2,.82,.2,1),opacity .34s ease;
+  padding:12px 16px 18px;
+  text-align:center;
 }
-.qibla-quick-sheet-backdrop.is-open .qibla-quick-sheet{transform:none}
-.qibla-quick-sheet__handle{width:44px;height:4px;border-radius:999px;margin:6px auto 10px;background:rgba(239,215,142,.32)}
-.qibla-quick-sheet__head{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:start;margin:0 2px 8px}
-.qibla-quick-sheet__kicker{grid-column:1;margin:0;font:700 10px/1.2 Georgia,serif;letter-spacing:.18em;color:var(--gold2,#efd78e)}
-.qibla-quick-sheet__head h3{grid-column:1;margin:0;font-family:Georgia,serif;font-size:24px;color:var(--gold2,#efd78e);line-height:1.1}
-.qibla-quick-sheet__close{grid-column:2;grid-row:1/span 2;width:36px;height:36px;border:0;border-radius:999px;background:rgba(255,255,255,.06);color:var(--text,#f5efe1);font-size:22px}
-.qibla-quick-sheet .qibla-pro-head{display:none}
-.qibla-quick-sheet .qibla-status{min-height:18px}
+.qibla-quick-sheet-backdrop.is-open .qibla-quick-sheet{transform:rotate(var(--qibla-lock-rot,0deg))}
+.qibla-quick-sheet__handle{width:42px;height:4px;border-radius:999px;margin:2px auto 10px;background:color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 42%,transparent)}
+.qibla-quick-sheet__head{width:100%;display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:start;margin:0 0 4px}
+.qibla-quick-sheet__kicker{margin:0;justify-self:start;font:800 10px/1.2 Georgia,serif;letter-spacing:.2em;color:var(--theme-accent,var(--gold2,#efd78e))}
+.qibla-quick-sheet__head h3{margin:0;justify-self:start;font-family:Georgia,"Times New Roman",serif;font-size:26px;font-weight:500;color:var(--theme-accent,var(--gold2,#efd78e));line-height:1.08}
+.qibla-quick-sheet__close{grid-column:2;grid-row:1/span 2;width:38px;height:38px;border:1px solid color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 24%,transparent);border-radius:999px;background:color-mix(in srgb,var(--theme-surface,var(--card,#14120e)) 80%,transparent);color:var(--theme-text,var(--text,#f5efe1));font-size:22px}
+.qibla-quick-stage{width:100%;display:flex;flex-direction:column;align-items:center;gap:8px}
+.qibla-quick-sheet .qibla-pro-head,
+.qibla-quick-sheet .qibla-info-pro,
+.qibla-quick-sheet .qibla-action-row,
+.qibla-quick-sheet .qibla-fiqh-line,
+.qibla-quick-sheet .qibla-orient-hint,
+.qibla-quick-sheet #startQiblaBtn,
+.qibla-quick-sheet #stopQiblaBtn{display:none!important}
+.qibla-quick-sheet .qibla-layout-pro{display:block!important;width:100%}
+.qibla-quick-sheet .qibla-compass-pro{width:min(72vw,250px)!important;max-width:250px;margin:4px auto 0}
+.qibla-quick-city{margin:0;font-size:13px;font-weight:700;color:var(--theme-text,var(--text,#f5efe1))}
+.qibla-quick-live{margin:0;min-height:22px;font-size:13px;font-weight:800;letter-spacing:.04em;color:var(--theme-accent,var(--gold2,#efd78e))}
+.qibla-quick-hint{margin:2px 0 0;max-width:32ch;font-size:11px;line-height:1.4;color:var(--theme-muted,var(--muted,#b8ae97))}
+.qibla-quick-sheet .qibla-compass-pro.qibla-aligned .qibla-compass-face{box-shadow:0 0 0 3px color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 55%,transparent),0 0 28px color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 35%,transparent)}
+html[data-theme="eisgold"] .qibla-quick-sheet{background:linear-gradient(180deg,#16140f,#0c0b08)}
+html[data-theme="light"] .qibla-quick-sheet,html[data-theme="ivory"] .qibla-quick-sheet{background:linear-gradient(180deg,#f7f1e4,#efe6d2)}
 </style>
 <style id="home-push-reminders-v379">
 /* Startseite: kompakte Erinnerungszeile, themeabhängig */
@@ -25060,7 +25089,7 @@ function attachQiblaOrientationListener(getBearing,status,wrap,rose,settings,sta
     const aligned=off<=8;
     const safe=off<=15;
     const orient=off<=45;
-    if(wrap){wrap.classList.remove("qibla-static-mode");wrap.classList.toggle("qibla-aligned",aligned);wrap.classList.toggle("qibla-safe",safe);wrap.classList.toggle("qibla-orient",orient);wrap.classList.toggle("qibla-in-range",orient)}
+    if(wrap){const wasAligned=wrap.classList.contains("qibla-aligned");wrap.classList.remove("qibla-static-mode");wrap.classList.toggle("qibla-aligned",aligned);wrap.classList.toggle("qibla-safe",safe);wrap.classList.toggle("qibla-orient",orient);wrap.classList.toggle("qibla-in-range",orient);if(aligned&&!wasAligned&&document.getElementById("qiblaQuickSheet")){try{if(typeof triggerLightHapticFeedback==="function")triggerLightHapticFeedback()}catch(e){}}}
     const hl=$("qiblaHeadingLive");if(hl)hl.textContent=Math.round(heading)+"°";
     const dl=$("qiblaDeltaLive");if(dl)dl.textContent=off+"°";
     const rangeEl=$("qiblaRangeLive");if(rangeEl)rangeEl.textContent=aligned?"Sehr gut":(safe?"Sicher":(orient?"Nur Orientierung":"Abweichung"));
@@ -25448,11 +25477,43 @@ async function startQiblaCompass(){
   }
   enableQiblaStaticFallback(getBearing(),settings,status,startBtn,stopBtn);
 }
+function qiblaScreenAngle(){
+  const a=(screen.orientation&&typeof screen.orientation.angle==="number")?screen.orientation.angle:(typeof window.orientation==="number"?window.orientation:0);
+  return ((Number(a)||0)%360+360)%360;
+}
+function syncQiblaSheetOrientation(){
+  const sheet=document.querySelector("#qiblaQuickSheet .qibla-quick-sheet");
+  if(!sheet)return;
+  const angle=qiblaScreenAngle();
+  sheet.style.setProperty("--qibla-lock-rot",(-angle)+"deg");
+}
+function setQiblaNativeOrientationLock(on){
+  try{
+    if(window.webkit&&webkit.messageHandlers&&webkit.messageHandlers.darOrientation){
+      webkit.messageHandlers.darOrientation.postMessage({lock:on?"portrait":"unlock"});
+    }
+  }catch(e){}
+  try{
+    if(on&&screen.orientation&&typeof screen.orientation.lock==="function")screen.orientation.lock("portrait").catch(function(){});
+    if(!on&&screen.orientation&&typeof screen.orientation.unlock==="function")screen.orientation.unlock();
+  }catch(e){}
+}
+function renderQiblaQuickStage(){
+  const settings=getPrayerSettings();
+  const hasLoc=hasPrayerLocation(settings);
+  const bearing=hasLoc?qiblaBearing(settings.lat,settings.lon):0;
+  const city=hasLoc?esc(settings.city||"Standort"):"Standort wird gesucht…";
+  return `<div class="qibla-quick-stage">${qiblaCompassMarkup(bearing)}<p class="qibla-quick-city" id="qiblaQuickCity">${city}</p><p id="qiblaStatus" class="qibla-quick-live" aria-live="polite">Suche startet…</p><p class="qibla-quick-hint">Handy flach halten. Drehen ändert nur die Nadel — das Fenster bleibt waagerecht.</p><button id="startQiblaBtn" type="button" hidden>Start</button><button id="stopQiblaBtn" type="button" hidden>Stopp</button></div>`;
+}
 function closeQiblaQuickSheet(){
   try{stopQiblaCompass()}catch(e){}
+  setQiblaNativeOrientationLock(false);
+  try{window.removeEventListener("orientationchange",syncQiblaSheetOrientation)}catch(e){}
+  try{screen.orientation&&screen.orientation.removeEventListener&&screen.orientation.removeEventListener("change",syncQiblaSheetOrientation)}catch(e){}
   const el=document.getElementById("qiblaQuickSheet");
   if(el)el.remove();
   document.body.classList.remove("qibla-quick-sheet-open");
+  document.documentElement.classList.remove("qibla-quick-sheet-open");
 }
 function openQiblaQuickSheet(){
   try{if(typeof triggerLightHapticFeedback==="function")triggerLightHapticFeedback()}catch(e){}
@@ -25463,19 +25524,24 @@ function openQiblaQuickSheet(){
     return;
   }
   closeQiblaQuickSheet();
+  setQiblaNativeOrientationLock(true);
   const wrap=document.createElement("div");
   wrap.id="qiblaQuickSheet";
   wrap.className="qibla-quick-sheet-backdrop";
-  wrap.innerHTML=`<div class="qibla-quick-sheet" role="dialog" aria-modal="true" aria-labelledby="qiblaQuickTitle"><div class="qibla-quick-sheet__handle" aria-hidden="true"></div><div class="qibla-quick-sheet__head"><p class="qibla-quick-sheet__kicker">DĀR AL TAWḤĪD</p><h3 id="qiblaQuickTitle">Qibla-Suche</h3><button type="button" class="qibla-quick-sheet__close" aria-label="Schließen">×</button></div><div class="qibla-quick-sheet__body">${renderQiblaProPanel(getPrayerSettings())}</div></div>`;
+  wrap.innerHTML=`<div class="qibla-quick-sheet" role="dialog" aria-modal="true" aria-labelledby="qiblaQuickTitle"><div class="qibla-quick-sheet__handle" aria-hidden="true"></div><div class="qibla-quick-sheet__head"><p class="qibla-quick-sheet__kicker">DĀR AL TAWḤĪD</p><h3 id="qiblaQuickTitle">Qibla</h3><button type="button" class="qibla-quick-sheet__close" aria-label="Schließen">×</button></div>${renderQiblaQuickStage()}</div>`;
   document.body.appendChild(wrap);
   document.body.classList.add("qibla-quick-sheet-open");
-  requestAnimationFrame(()=>wrap.classList.add("is-open"));
+  document.documentElement.classList.add("qibla-quick-sheet-open");
+  syncQiblaSheetOrientation();
+  requestAnimationFrame(()=>{wrap.classList.add("is-open");syncQiblaSheetOrientation()});
+  window.addEventListener("orientationchange",syncQiblaSheetOrientation);
+  try{screen.orientation&&screen.orientation.addEventListener&&screen.orientation.addEventListener("change",syncQiblaSheetOrientation)}catch(e){}
   wrap.addEventListener("click",ev=>{if(ev.target===wrap)closeQiblaQuickSheet()});
   wrap.querySelector(".qibla-quick-sheet__close")?.addEventListener("click",closeQiblaQuickSheet);
   const startBtn=$("startQiblaBtn"); if(startBtn) startBtn.onclick=startQiblaCompass;
   const stopBtn=$("stopQiblaBtn"); if(stopBtn) stopBtn.onclick=stopQiblaCompass;
   const status=$("qiblaStatus"); if(status) status.textContent="Suche startet…";
-  setTimeout(()=>runQiblaSheetAutoStart(),60);
+  setTimeout(()=>runQiblaSheetAutoStart(),50);
 }
 async function runQiblaSheetAutoStart(){
   if(!document.getElementById("qiblaQuickSheet"))return;
@@ -25488,8 +25554,14 @@ async function runQiblaSheetAutoStart(){
       const lat=pos.coords.latitude,lon=pos.coords.longitude;
       const city=await reversePrayerCity(lat,lon);
       setPrayerSettings({lat,lon,city,locationGranted:true});
-      const body=document.querySelector("#qiblaQuickSheet .qibla-quick-sheet__body");
-      if(body) body.innerHTML=renderQiblaProPanel(getPrayerSettings());
+      const sheet=document.querySelector("#qiblaQuickSheet .qibla-quick-sheet");
+      if(sheet){
+        const oldHead=sheet.querySelector(".qibla-quick-sheet__head");
+        const handle=sheet.querySelector(".qibla-quick-sheet__handle");
+        const stage=renderQiblaQuickStage();
+        sheet.innerHTML=`${handle?handle.outerHTML:""}${oldHead?oldHead.outerHTML:""}${stage}`;
+        sheet.querySelector(".qibla-quick-sheet__close")?.addEventListener("click",closeQiblaQuickSheet);
+      }
       const startBtn=$("startQiblaBtn"); if(startBtn) startBtn.onclick=startQiblaCompass;
       const stopBtn=$("stopQiblaBtn"); if(stopBtn) stopBtn.onclick=stopQiblaCompass;
     }catch(e){
@@ -25497,6 +25569,8 @@ async function runQiblaSheetAutoStart(){
       return;
     }
   }
+  const cityEl=$("qiblaQuickCity");
+  if(cityEl)cityEl.textContent=getPrayerSettings().city||"Standort";
   if(status)status.textContent="Kompass wird ausgerichtet…";
   startQiblaCompass();
 }
