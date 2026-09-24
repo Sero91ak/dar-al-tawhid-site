@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "dar-al-tawhid-pronunciation-audit",
+  "updatedAt": "2026-09-24",
+  "counts": {
+    "canonicalTerms": 901,
+    "rules": 3719
+  },
+  "checks": {
+    "transliterationToIpaStructuralMismatches": 0,
+    "unassimilatedOrdinarySunLetterAliasesExcludingLam": 6,
+    "canonicalEntriesWithoutExplicitPrimaryStress": 847
+  },
+  "status": {
+    "segmentalPhonemeMapping": "pass",
+    "ordinarySunLetterAssimilation": "review",
+    "lexicalStress": "needs-verification",
+    "brandReading": "owner-approved"
+  },
+  "notes": [
+    "The current IPA layer is broad/phonemic for most entries rather than a complete narrow phonetic transcription.",
+    "847 canonical entries currently lack an explicit primary-stress marker; these must not be advertised as fully stress-verified.",
+    "Open machine dictionaries are secondary cross-checks. Licensed LDC/QCRI data is registered as a gold reference but not bundled.",
+    "Qurʾān recitation is excluded from synthetic narration and remains real-recording-only."
+  ]
+}
