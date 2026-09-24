@@ -7,13 +7,14 @@ export default {
     }
 
     if (url.pathname === "/test/kids" || url.pathname === "/test/kids/") {
-      const kidsUrl = new URL("/test/kids/index.html", url.origin);
-      kidsUrl.search = url.search;
-      const kidsAsset = await env.ASSETS.fetch(new Request(kidsUrl.toString(), request));
-      const out = new Response(kidsAsset.body, kidsAsset);
-      out.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
-      out.headers.set("Pragma", "no-cache");
-      return out;
+      const kidsUrl = new URL(request.url);
+      kidsUrl.pathname = "/test/kids/index.html";
+      const kidsRequest = new Request(kidsUrl.toString(), {
+        method: request.method,
+        headers: request.headers,
+        redirect: "follow"
+      });
+      return env.ASSETS.fetch(kidsRequest);
     }
 
     if (url.pathname === "/test" || url.pathname === "/test/") {
