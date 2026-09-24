@@ -108,9 +108,9 @@
   ],
   "unlockedScopes": [
     {
-      "id": "kids-stories-age-audio-live-2026-09-24",
-      "approvedBy": "user-explicit-kinder-geschichten-altersprofil-audio-text-cover-live",
-      "reason": "Nutzer: Kindergeschichten direkt in den bestehenden Geschichten-/Prophetenbereich einbauen; kindgerechte Cover ohne Gesichter; Altersprofil steuert Audio und Lesetext; Einstellungs-Button; jetzt live in die App pushen.",
+      "id": "rollback-wrong-kids-app-2026-09-24",
+      "approvedBy": "user-explicit-stop-wrong-app-rollback",
+      "reason": "Nutzer: Stopp — Kinder-Geschichten wurden in die falsche DĀR AL TAWḤĪD Haupt-App eingebaut. Nur diese irrtümlichen Änderungen vollständig zurücknehmen.",
       "paths": [
         "content/admin/change-scope-lock.json",
         "assets/live-boot.js",
@@ -119,8 +119,8 @@
         "test/assets/kids-stories/",
         "test/data/kids-stories.json"
       ],
-      "expiresAt": "2026-12-31T23:59:00.000Z",
-      "stage": "live"
+      "expiresAt": "2026-09-25T23:59:00.000Z",
+      "stage": "rollback"
     },
     {
       "id": "quran-learn-qari-ios-volume-2026-09-23",
