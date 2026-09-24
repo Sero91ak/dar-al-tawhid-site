@@ -14,8 +14,8 @@
     "externalVoiceProviderRequired": false
   },
   "counts": {
-    "canonicalTerms": 901,
-    "rules": 3719
+    "canonicalTerms": 902,
+    "rules": 3727
   },
   "rules": [
     {
@@ -29777,6 +29777,78 @@
       "alias": "Laa ilaaha illallaah",
       "ipa": "/laː ʔilaːha ʔilˈlaː lˈlaːh/",
       "priority": "core"
+    },
+    {
+      "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
+      "canonical": "Ṣaḥābah",
+      "string_to_replace": "Ṣaḥābah",
+      "alias": "Sahaaba",
+      "ipa": "/sˤaˈħaːba/",
+      "priority": "core",
+      "verification": "standard-arabic-verified"
+    },
+    {
+      "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
+      "canonical": "Ṣaḥābah",
+      "string_to_replace": "Sahabah",
+      "alias": "Sahaaba",
+      "ipa": "/sˤaˈħaːba/",
+      "priority": "extended",
+      "verification": "standard-arabic-verified"
+    },
+    {
+      "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
+      "canonical": "Ṣaḥābah",
+      "string_to_replace": "ṣaḥābah",
+      "alias": "Sahaaba",
+      "ipa": "/sˤaˈħaːba/",
+      "priority": "extended",
+      "verification": "standard-arabic-verified"
+    },
+    {
+      "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
+      "canonical": "Ṣaḥābah",
+      "string_to_replace": "sahabah",
+      "alias": "Sahaaba",
+      "ipa": "/sˤaˈħaːba/",
+      "priority": "extended",
+      "verification": "standard-arabic-verified"
+    },
+    {
+      "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
+      "canonical": "Ṣaḥābah",
+      "string_to_replace": "Ṣaḥāba",
+      "alias": "Sahaaba",
+      "ipa": "/sˤaˈħaːba/",
+      "priority": "extended",
+      "verification": "standard-arabic-verified"
+    },
+    {
+      "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
+      "canonical": "Ṣaḥābah",
+      "string_to_replace": "Sahaba",
+      "alias": "Sahaaba",
+      "ipa": "/sˤaˈħaːba/",
+      "priority": "extended",
+      "verification": "standard-arabic-verified"
+    },
+    {
+      "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
+      "canonical": "Ṣaḥābah",
+      "string_to_replace": "ṣaḥāba",
+      "alias": "Sahaaba",
+      "ipa": "/sˤaˈħaːba/",
+      "priority": "extended",
+      "verification": "standard-arabic-verified"
+    },
+    {
+      "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
+      "canonical": "Ṣaḥābah",
+      "string_to_replace": "sahaba",
+      "alias": "Sahaaba",
+      "ipa": "/sˤaˈħaːba/",
+      "priority": "extended",
+      "verification": "standard-arabic-verified"
     }
   ],
   "verification": {
