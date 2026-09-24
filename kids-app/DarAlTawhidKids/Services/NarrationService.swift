@@ -45,6 +45,19 @@ final class NarrationService: NSObject, ObservableObject, AVSpeechSynthesizerDel
         synthesizer.speak(utterance)
     }
 
+    func speakFeedback(_ text: String, ageBand: AgeBand) {
+        stop()
+        let utterance = AVSpeechUtterance(string: text)
+        utterance.voice = AVSpeechSynthesisVoice(language: "de-DE")
+        utterance.rate = ageBand == .age4to5 ? 0.40 : 0.44
+        utterance.pitchMultiplier = 0.96
+        utterance.preUtteranceDelay = 0.08
+        utterance.postUtteranceDelay = 0.08
+        isUsingFallbackVoice = true
+        isPlaying = true
+        synthesizer.speak(utterance)
+    }
+
     func stop() {
         if synthesizer.isSpeaking {
             synthesizer.stopSpeaking(at: .immediate)
