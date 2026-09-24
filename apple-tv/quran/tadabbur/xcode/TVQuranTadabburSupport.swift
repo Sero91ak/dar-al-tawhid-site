@@ -15,7 +15,14 @@ struct TVQuranTadabbur: Codable, Hashable {
 private struct TadabburCatalog: Codable {
     let entriesCount: Int
     let entriesIndexPath: String
-    let coveragePath: String
+    let entriesPaths: [String]?
+    let coveragePath: String?
+    let fallback: TadabburFallback?
+}
+
+private struct TadabburFallback: Codable {
+    let enabled: Bool
+    let text: String
 }
 
 private struct TadabburEntriesIndex: Codable {
@@ -41,7 +48,9 @@ final class TVQuranTadabburStore: ObservableObject {
 
     @Published private(set) var entriesByReference: [String: TVQuranTadabbur] = [:]
     @Published private(set) var isLoaded = false
+    @Published private(set) var loadedCount = 0
 
+    private let relativeCatalogPath = "quran/tadabbur/catalog.json"
     private let baseURL = URL(
         string: "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/apple-tv-hadith-staging/apple-tv/quran/tadabbur/"
     )!
@@ -56,38 +65,92 @@ final class TVQuranTadabburStore: ObservableObject {
     func load() async {
         loadCache()
 
+        _ = await RemoteContentSyncService.shared.syncCatalog(relativeCatalogPath: relativeCatalogPath)
+
         do {
-            let catalog: TadabburCatalog = try await loadJSON("catalog.json")
-            let index: TadabburEntriesIndex = try await loadJSON(catalog.entriesIndexPath)
+            let merged = try loadFromRemoteContentCache()
+            try activate(entries: merged)
+            return
+        } catch {
+            // Fall through to direct remote load, then legacy cache.
+        }
 
-            var merged: [TVQuranTadabbur] = []
-            merged.reserveCapacity(index.totalVerifiedEntries)
-
-            for file in index.files {
-                let envelope: TadabburEnvelope = try await loadJSON(file.path)
-                guard envelope.entries.count == file.count else {
-                    throw TadabburError.countMismatch(file.path)
-                }
-                merged.append(contentsOf: envelope.entries)
-            }
-
-            try validate(merged, expectedCount: catalog.entriesCount)
-
-            entriesByReference = Dictionary(
-                uniqueKeysWithValues: merged.map { ($0.reference, $0) }
-            )
-            isLoaded = true
-
-            let data = try JSONEncoder().encode(merged)
-            try data.write(to: cacheURL, options: .atomic)
+        do {
+            let merged = try await loadFromRemote()
+            try activate(entries: merged)
         } catch {
             // Keep last valid cache. Never replace it with partial/invalid remote data.
             isLoaded = !entriesByReference.isEmpty
+            loadedCount = entriesByReference.count
         }
     }
 
     func entry(for reference: String) -> TVQuranTadabbur? {
         entriesByReference[reference]
+    }
+
+    private func loadFromRemoteContentCache() throws -> [TVQuranTadabbur] {
+        let catalogURL = try RemoteContentSyncService.shared.cachedFileURL(
+            relativeCatalogPath: relativeCatalogPath,
+            filePath: "catalog.json"
+        )
+        let catalogData = try Data(contentsOf: catalogURL)
+        let catalog = try JSONDecoder().decode(TadabburCatalog.self, from: catalogData)
+
+        let indexURL = try RemoteContentSyncService.shared.cachedFileURL(
+            relativeCatalogPath: relativeCatalogPath,
+            filePath: catalog.entriesIndexPath
+        )
+        let indexData = try Data(contentsOf: indexURL)
+        let index = try JSONDecoder().decode(TadabburEntriesIndex.self, from: indexData)
+
+        var merged: [TVQuranTadabbur] = []
+        merged.reserveCapacity(index.totalVerifiedEntries)
+
+        for file in index.files {
+            let fileURL = try RemoteContentSyncService.shared.cachedFileURL(
+                relativeCatalogPath: relativeCatalogPath,
+                filePath: file.path
+            )
+            let data = try Data(contentsOf: fileURL)
+            let envelope = try JSONDecoder().decode(TadabburEnvelope.self, from: data)
+            guard envelope.entries.count == file.count else {
+                throw TadabburError.countMismatch(file.path)
+            }
+            merged.append(contentsOf: envelope.entries)
+        }
+
+        try validate(merged, expectedCount: catalog.entriesCount)
+        return merged
+    }
+
+    private func loadFromRemote() async throws -> [TVQuranTadabbur] {
+        let catalog: TadabburCatalog = try await loadJSON("catalog.json")
+        let index: TadabburEntriesIndex = try await loadJSON(catalog.entriesIndexPath)
+
+        var merged: [TVQuranTadabbur] = []
+        merged.reserveCapacity(index.totalVerifiedEntries)
+
+        for file in index.files {
+            let envelope: TadabburEnvelope = try await loadJSON(file.path)
+            guard envelope.entries.count == file.count else {
+                throw TadabburError.countMismatch(file.path)
+            }
+            merged.append(contentsOf: envelope.entries)
+        }
+
+        try validate(merged, expectedCount: catalog.entriesCount)
+        return merged
+    }
+
+    private func activate(entries: [TVQuranTadabbur]) throws {
+        let byReference = Dictionary(uniqueKeysWithValues: entries.map { ($0.reference, $0) })
+        entriesByReference = byReference
+        loadedCount = byReference.count
+        isLoaded = true
+
+        let data = try JSONEncoder().encode(entries)
+        try data.write(to: cacheURL, options: .atomic)
     }
 
     private func loadCache() {
@@ -99,6 +162,7 @@ final class TVQuranTadabburStore: ObservableObject {
         entriesByReference = Dictionary(
             uniqueKeysWithValues: cached.map { ($0.reference, $0) }
         )
+        loadedCount = entriesByReference.count
         isLoaded = true
     }
 
@@ -128,11 +192,11 @@ final class TVQuranTadabburStore: ObservableObject {
             guard seen.insert(entry.reference).inserted else {
                 throw TadabburError.duplicateReference(entry.reference)
             }
-            guard !entry.text.isEmpty,
-                  !entry.narrator.isEmpty,
-                  !entry.generation.isEmpty,
-                  !entry.source.isEmpty,
-                  !entry.grading.isEmpty else {
+            guard !entry.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+                  !entry.narrator.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+                  !entry.generation.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+                  !entry.source.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+                  !entry.grading.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
                 throw TadabburError.incompleteEntry(entry.reference)
             }
         }
@@ -147,43 +211,54 @@ final class TVQuranTadabburStore: ObservableObject {
     }
 }
 
+private enum TVQuranTadabburCardStyle {
+    static let cornerRadius: CGFloat = 24
+    static let primaryText = Color(red: 0.94, green: 0.89, blue: 0.78)
+    static let secondaryText = Color(red: 0.72, green: 0.66, blue: 0.54)
+    static let mutedText = Color(red: 0.58, green: 0.55, blue: 0.48)
+    static let gold = Color(red: 0.76, green: 0.60, blue: 0.32)
+    static let cardTop = Color(red: 0.050, green: 0.070, blue: 0.125)
+    static let cardBottom = Color(red: 0.022, green: 0.032, blue: 0.064)
+}
+
 struct TVQuranTadabburCard: View {
     let reference: String
     let tadabbur: TVQuranTadabbur?
 
-    private let gold = Color(red: 0.82, green: 0.70, blue: 0.40)
-
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            HStack {
+        VStack(alignment: .leading, spacing: 11) {
+            HStack(alignment: .firstTextBaseline) {
                 Text("TADABBUR")
-                    .font(.caption.weight(.semibold))
-                    .tracking(1.5)
-                    .foregroundStyle(gold)
+                    .font(.system(size: 15, weight: .semibold, design: .serif))
+                    .tracking(1.6)
+                    .foregroundStyle(TVQuranTadabburCardStyle.gold)
 
                 Spacer()
 
                 if let tadabbur {
                     Text(tadabbur.generation)
-                        .font(.caption.weight(.medium))
-                        .foregroundStyle(gold.opacity(0.88))
+                        .font(.system(size: 14, weight: .medium, design: .serif))
+                        .foregroundStyle(TVQuranTadabburCardStyle.gold.opacity(0.88))
                 }
             }
 
             if let tadabbur {
                 Text("„\(tadabbur.text)“")
-                    .font(.title3)
+                    .font(.system(size: 22, weight: .regular, design: .serif))
+                    .foregroundStyle(TVQuranTadabburCardStyle.primaryText)
+                    .lineSpacing(6)
                     .lineLimit(3)
                     .minimumScaleFactor(0.84)
                     .fixedSize(horizontal: false, vertical: true)
 
                 HStack(spacing: 7) {
-                    Text(tadabbur.narrator).fontWeight(.semibold)
+                    Text(tadabbur.narrator)
+                        .fontWeight(.semibold)
                     Text("·")
                     Text(tadabbur.source)
                 }
-                .font(.footnote)
-                .foregroundStyle(.secondary)
+                .font(.system(size: 14, weight: .regular, design: .serif))
+                .foregroundStyle(TVQuranTadabburCardStyle.secondaryText)
                 .lineLimit(1)
                 .minimumScaleFactor(0.82)
 
@@ -192,25 +267,39 @@ struct TVQuranTadabburCard: View {
                     Text("·")
                     Text("Einstufung: \(tadabbur.grading)")
                 }
-                .font(.caption)
-                .foregroundStyle(.secondary.opacity(0.85))
+                .font(.system(size: 13, weight: .regular, design: .serif))
+                .foregroundStyle(TVQuranTadabburCardStyle.mutedText)
             } else {
                 Text(TVQuranTadabburStore.fallbackText)
-                    .font(.body)
-                    .foregroundStyle(.secondary)
+                    .font(.system(size: 19, weight: .regular, design: .serif))
+                    .foregroundStyle(TVQuranTadabburCardStyle.secondaryText)
+                    .lineSpacing(5)
                     .lineLimit(3)
             }
         }
-        .padding(.vertical, 14)
-        .padding(.horizontal, 18)
-        .background(
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .fill(.ultraThinMaterial.opacity(0.42))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .stroke(gold.opacity(0.22), lineWidth: 1)
-        )
+        .padding(.vertical, 17)
+        .padding(.horizontal, 20)
+        .background(cardBackground)
+        .overlay(cardBorder)
         .accessibilityElement(children: .combine)
+    }
+
+    private var cardBackground: some View {
+        RoundedRectangle(cornerRadius: TVQuranTadabburCardStyle.cornerRadius, style: .continuous)
+            .fill(
+                LinearGradient(
+                    colors: [
+                        TVQuranTadabburCardStyle.cardTop,
+                        TVQuranTadabburCardStyle.cardBottom
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+    }
+
+    private var cardBorder: some View {
+        RoundedRectangle(cornerRadius: TVQuranTadabburCardStyle.cornerRadius, style: .continuous)
+            .stroke(TVQuranTadabburCardStyle.gold.opacity(0.24), lineWidth: 1)
     }
 }
