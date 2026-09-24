@@ -6,6 +6,16 @@ export default {
       return Response.redirect(`${url.origin}/test/${url.search || ""}`, 302);
     }
 
+    if (url.pathname === "/test/kids" || url.pathname === "/test/kids/") {
+      const kidsUrl = new URL("/test/kids/index.html", url.origin);
+      kidsUrl.search = url.search;
+      const kidsAsset = await env.ASSETS.fetch(new Request(kidsUrl.toString(), request));
+      const out = new Response(kidsAsset.body, kidsAsset);
+      out.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+      out.headers.set("Pragma", "no-cache");
+      return out;
+    }
+
     if (url.pathname === "/test" || url.pathname === "/test/") {
       if (url.searchParams.get("dqp") !== "915") {
         url.searchParams.set("dqp", "915");
