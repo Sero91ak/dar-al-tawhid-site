@@ -3,7 +3,7 @@
   "id": "dar-own-voice-pronunciation-recording-queue",
   "updatedAt": "2026-09-24",
   "voiceProfile": "../voice-production-profile.json",
-  "total": 901,
+  "total": 902,
   "purpose": "Eigene Referenzaufnahmen / Eigenproduktion für kanonische islamische Begriffe und Phrasen",
   "rule": "Nicht als Wort-Schnipsel zu Geschichten zusammensetzen; Aufnahmen dienen als Aussprache-Referenz und QA für die eigene Erzählstimme.",
   "items": [
@@ -9919,6 +9919,18 @@
       "status": "pending",
       "referenceAudio": null,
       "notes": ""
+    },
+    {
+      "id": "PRON-0902-sahabah",
+      "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
+      "canonical": "Ṣaḥābah",
+      "alias": "Sahaaba",
+      "ipa": "sˤaˈħaːba",
+      "priority": "core",
+      "status": "pending",
+      "referenceAudio": null,
+      "notes": "Standard Arabic pausal form; tāʾ marbūṭa is realized as final -a in isolation.",
+      "verification": "standard-arabic-verified"
     }
   ],
   "verificationSources": "../authoritative-sources.json"
