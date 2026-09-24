@@ -145,6 +145,26 @@ async function fetchVersionBuild(base) {
     );
   }
 
+  async function verifyKidsPage(label, base) {
+    const url = `${base}/kids/?v=${Date.now()}`;
+    const { status, text, cf } = await fetchText(url);
+    const ok =
+      status === 200 &&
+      text.includes("DĀR AL TAWḤĪD KIDS") &&
+      text.includes("id=\"view-today\"");
+    console.log(
+      `${label} kids: ${url} -> ${status} cf=${cf} marker=${ok}`
+    );
+    if (!ok) {
+      throw new Error(
+        `${label} Kinder-App nicht erreichbar oder falscher Inhalt: ${url}`
+      );
+    }
+  }
+
+  await verifyKidsPage("public", publicBase);
+  await verifyKidsPage("workers.dev", workersBase);
+
   console.log(
     `Dar Test live OK — public und workers.dev liefern identisch ${TEST_EXPECT_BUILD}.`
   );
