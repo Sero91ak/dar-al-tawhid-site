@@ -5814,7 +5814,9 @@
       "paths": [
         "content/admin/change-scope-lock.json",
         "kids-app/",
-        "test/kids/"
+        "test/kids/",
+        "cloudflare/test-app-worker.js",
+        "scripts/verify-test-app-deploy.js"
       ],
       "expiresAt": "2027-03-31T23:59:00.000Z",
       "stage": "feature-only"
