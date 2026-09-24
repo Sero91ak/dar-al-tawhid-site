@@ -128,6 +128,8 @@ struct ParentsView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
         }
+    }
+
     private var dailyStepCount: Int {
         switch appState.ageBand {
         case .age4to5: return 2
