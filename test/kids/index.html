@@ -265,6 +265,10 @@ linear-gradient(180deg,#356987 0%,#638f91 50%,#c28d61 100%)}
 .story-row .meta{font-size:11px;color:var(--sage);margin-top:4px}
 .story-row .time{font-size:11px;color:var(--soft);margin-top:4px}
 .story-row .chev{margin-left:auto;font-size:23px;color:var(--soft)}
+.story-row.verified{border-color:rgba(82,196,132,.20);background:linear-gradient(135deg,rgba(82,196,132,.07),rgba(255,255,255,.045))}
+.story-verify{display:inline-flex;align-items:center;gap:5px;margin-top:5px;font-size:9px;font-weight:900;letter-spacing:.05em;color:#caffe0}
+.story-source{font-size:10px;color:var(--soft);line-height:1.45;margin-top:7px;text-align:center}
+.story-source.show{display:block}.story-source:empty{display:none}
 
 .quran-hero{
   border-radius:31px;padding:18px;overflow:hidden;position:relative;min-height:168px;
@@ -728,6 +732,11 @@ html,body{background:#06131f!important}
         </article>
       </div>
 
+      <div class="section-title">Aus dem Qurʾān · geprüft</div>
+      <div id="authenticStoryList" class="story-list">
+        <div class="gentle-note" style="padding-top:4px">Geprüfte Geschichten werden geladen …</div>
+      </div>
+
       <div class="gentle-note">Authentische Propheten- und Ṣaḥābah-Erzählungen kommen nur nach Quellenprüfung hinein. Freie pädagogische Geschichten bleiben sichtbar gekennzeichnet.</div>
     </section>
 
@@ -880,7 +889,8 @@ html,body{background:#06131f!important}
           <div class="story-orb"><span id="storyWave">≋</span></div>
           <h2 id="storyBigTitle">Geschichte</h2>
           <div id="storyCategory" class="category">Adab</div>
-          <div class="dev-note">Vorschau-Stimme des Geräts. Die feste KI-Erzählstimme wird später als fertige Audio-Datei eingesetzt.</div>
+          <div id="storySource" class="story-source"></div>
+          <div class="dev-note">Deutsche Lern-Erzählstimme. Qurʾān-Arabisch wird hier nicht synthetisch rezitiert.</div>
         </div>
       </div>
       <div>
@@ -1137,6 +1147,7 @@ var speaking=false;
 var storyManualStop=false;
 var currentStoryKey="coin";
 var storyQuestionPassed=false;
+var authenticStories=[];
 var kidsDuas=[];
 var currentDuaIndex=0;
 var duaQuestionPassed=false;
@@ -1163,9 +1174,57 @@ function markDailyDone(step){
   try{localStorage.setItem(dailyStorageKey(step),"1")}catch(e){}
   updateDailyJourney();
   updateParentProgress();
+  renderAuthenticStories();
+}
+function storyData(key){
+  if(stories[key])return stories[key];
+  var found=authenticStories.find(function(s){return s.id===key});
+  return found||stories.coin;
+}
+function authenticStoryAvailableForAge(story){
+  var r=ageRange();
+  return Number(story.ageMin)<=r.max&&Number(story.ageMax)>=r.min&&story.verification==="approved";
+}
+function renderAuthenticStories(){
+  var box=document.getElementById("authenticStoryList");
+  if(!box)return;
+  var list=authenticStories.filter(authenticStoryAvailableForAge);
+  if(!list.length){
+    box.innerHTML='<div class="gentle-note" style="padding-top:4px">Für diese Altersstufe ist gerade keine geprüfte Qurʾān-Geschichte freigegeben.</div>';
+    return;
+  }
+  box.innerHTML="";
+  list.forEach(function(s){
+    var row=document.createElement("article");
+    row.className="story-row verified";
+    row.dataset.story=s.id;
+    row.innerHTML=
+      '<div class="story-thumb" style="background:rgba(82,196,132,.10)">'+String(s.symbol||"✦")+'</div>'+
+      '<div><h3>'+s.title+'</h3><div class="meta">'+s.category+'</div>'+
+      '<div class="story-verify">✓ APPROVED · '+String((s.sourceRefs||[])[0]||"Qurʾān")+'</div>'+
+      '<div class="time">'+s.duration+'</div></div><div class="chev">›</div>';
+    row.addEventListener("click",function(){openStory(s.id)});
+    box.appendChild(row);
+  });
+}
+function fetchAuthenticStories(){
+  return fetch("/test/kids/data/stories-authentic.json?v="+Date.now(),{cache:"no-store"})
+    .then(function(r){if(!r.ok)throw new Error("story-data");return r.json()})
+    .then(function(data){
+      authenticStories=Array.isArray(data.items)?data.items.filter(function(s){return s.verification==="approved"}):[];
+      renderAuthenticStories();
+      return authenticStories;
+    }).catch(function(){
+      authenticStories=[];
+      renderAuthenticStories();
+      return [];
+    });
 }
 function dailyStoryKey(){
   var keys=Object.keys(stories);
+  if(age!=="4–5"){
+    authenticStories.filter(authenticStoryAvailableForAge).forEach(function(s){keys.push(s.id)});
+  }
   if(!keys.length)return"coin";
   var seed=Number(todayKey().replace(/-/g,""))||0;
   return keys[seed%keys.length];
@@ -2468,11 +2527,13 @@ document.getElementById("openQuizButton").addEventListener("click",openQuiz);
 
 function openStory(key){
   currentStoryKey=key;
-  var s=stories[key]||stories.coin;
+  var s=storyData(key);
   document.getElementById("storyPlayerTitle").textContent=s.title;
   document.getElementById("storyBigTitle").textContent=s.title;
-  document.getElementById("storyPlayerTime").textContent=s.time;
+  document.getElementById("storyPlayerTime").textContent=s.time||s.duration||"";
   document.getElementById("storyCategory").textContent=s.category;
+  var storySource=document.getElementById("storySource");
+  storySource.textContent=s.verification==="approved"?(s.sourceRefs||[]).join(" · "):"";
   storyQuestionPassed=false;
   document.getElementById("storyDone").textContent=localStorage.getItem("kids.story."+key)==="1"?"✓ Frage noch einmal":"○ Frage beantworten";
   document.getElementById("storyQuestion").classList.remove("show");
@@ -2494,7 +2555,7 @@ function stopSpeech(){
 document.getElementById("storyPlay").addEventListener("click",function(){
   if(!("speechSynthesis" in window)){alert("Auf diesem Gerät ist die Vorschau-Stimme nicht verfügbar.");return}
   if(speaking){stopSpeech();return}
-  var s=stories[currentStoryKey]||stories.coin;
+  var s=storyData(currentStoryKey);
   var u=new SpeechSynthesisUtterance(s.text);
   storyManualStop=false;
   u.lang="de-DE";u.rate=.87;u.pitch=.94;
@@ -2512,8 +2573,10 @@ document.getElementById("storyPlay").addEventListener("click",function(){
   speech.speak(u);
 });
 function renderStoryQuestion(){
-  var s=storyQuestions[currentStoryKey]||storyQuestions.coin;
-  var q=s[age]||s["6–8"];
+  var story=storyData(currentStoryKey);
+  var bank=story&&story.question?story.question:(storyQuestions[currentStoryKey]||storyQuestions.coin);
+  var q=bank[age]||bank["6–8"]||bank["9–10"]||bank["4–5"];
+  if(!q)return;
   var panel=document.getElementById("storyQuestion");
   var text=document.getElementById("storyQuestionText");
   var answers=document.getElementById("storyQuestionAnswers");
@@ -2609,6 +2672,7 @@ updateResume();
 updateParentProgress();
 fetchKidsDuas();
 fetchKidsQuiz();
+fetchAuthenticStories();
 fetchCatalog();
 })();
 </script>
