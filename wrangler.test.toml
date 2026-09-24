@@ -20,3 +20,8 @@ zone_name = "dar-al-tawhid.de"
 [[routes]]
 pattern = "dar-al-tawhid.de/test/*"
 zone_name = "dar-al-tawhid.de"
+
+
+# Nur für die isolierte Kinder-Qurʾān-Sprachprüfung im Test-Worker.
+[ai]
+binding = "AI"
