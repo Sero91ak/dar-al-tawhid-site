@@ -12,6 +12,7 @@
 		B10000000000000000000003 /* KidsTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000003 /* KidsTheme.swift */; };
 		B10000000000000000000004 /* KidsContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000004 /* KidsContent.swift */; };
 		B10000000000000000000005 /* NarrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000005 /* NarrationService.swift */; };
+		B10000000000000000000012 /* PronunciationLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000012 /* PronunciationLibrary.swift */; };
 		B10000000000000000000006 /* ProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000006 /* ProgressStore.swift */; };
 		B10000000000000000000007 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000007 /* RootView.swift */; };
 		B10000000000000000000008 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000008 /* HomeView.swift */; };
@@ -31,6 +32,7 @@
 		F10000000000000000000003 /* KidsTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsTheme.swift; sourceTree = "<group>"; };
 		F10000000000000000000004 /* KidsContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsContent.swift; sourceTree = "<group>"; };
 		F10000000000000000000005 /* NarrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NarrationService.swift; sourceTree = "<group>"; };
+		F10000000000000000000012 /* PronunciationLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PronunciationLibrary.swift; sourceTree = "<group>"; };
 		F10000000000000000000006 /* ProgressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStore.swift; sourceTree = "<group>"; };
 		F10000000000000000000007 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		F10000000000000000000008 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				F10000000000000000000005 /* NarrationService.swift */,
+				F10000000000000000000012 /* PronunciationLibrary.swift */,
 				F10000000000000000000006 /* ProgressStore.swift */,
 			);
 			path = Services;
@@ -209,6 +212,7 @@
 				B10000000000000000000003 /* KidsTheme.swift in Sources */,
 				B10000000000000000000004 /* KidsContent.swift in Sources */,
 				B10000000000000000000005 /* NarrationService.swift in Sources */,
+				B10000000000000000000012 /* PronunciationLibrary.swift in Sources */,
 				B10000000000000000000006 /* ProgressStore.swift in Sources */,
 				B10000000000000000000007 /* RootView.swift in Sources */,
 				B10000000000000000000008 /* HomeView.swift in Sources */,
