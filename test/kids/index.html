@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d2236">
+<title>DĀR AL TAWḤĪD KIDS – Vorschau</title>
+<style>
+:root{
+  --night:#0d2236;
+  --deep:#06131f;
+  --blue:#163a58;
+  --cream:#f7efe2;
+  --sand:#ead9ba;
+  --gold:#cbae70;
+  --sage:#9bb7a5;
+  --sky:#9ac2dd;
+  --peach:#dfa98f;
+  --panel:rgba(255,255,255,.075);
+  --line:rgba(255,255,255,.11);
+  --muted:rgba(255,255,255,.62);
+  --soft:rgba(255,255,255,.42);
+  --shadow:0 20px 60px rgba(0,0,0,.28);
+  --safe-bottom:max(16px,env(safe-area-inset-bottom));
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--deep);color:var(--cream);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Rounded","Avenir Next",system-ui,sans-serif}
+body{overflow-x:hidden}
+button,input{font:inherit}
+button{color:inherit}
+.app{
+  min-height:100dvh;
+  background:
+    radial-gradient(circle at 85% 7%,rgba(145,183,210,.22),transparent 27%),
+    radial-gradient(circle at 10% 70%,rgba(201,169,103,.13),transparent 30%),
+    linear-gradient(160deg,#06131f 0%,#102942 48%,#183b57 100%);
+  position:relative;
+  overflow:hidden;
+}
+.sky-orb{
+  position:fixed;right:-90px;top:-100px;width:340px;height:340px;border-radius:50%;
+  background:radial-gradient(circle,rgba(154,194,221,.17),rgba(154,194,221,.02) 60%,transparent 72%);
+  animation:float 10s ease-in-out infinite alternate;pointer-events:none
+}
+.glow-orb{
+  position:fixed;left:-120px;bottom:90px;width:330px;height:330px;border-radius:50%;
+  background:radial-gradient(circle,rgba(203,174,112,.12),rgba(203,174,112,.015) 62%,transparent 74%);
+  animation:float2 12s ease-in-out infinite alternate;pointer-events:none
+}
+@keyframes float{to{transform:translate(-24px,38px) scale(1.06)}}
+@keyframes float2{to{transform:translate(34px,-34px) scale(1.05)}}
+.stars{position:fixed;inset:0;pointer-events:none;opacity:.33;background-image:
+radial-gradient(circle at 13% 15%,#fff 0 1px,transparent 1.5px),
+radial-gradient(circle at 70% 11%,#fff 0 1px,transparent 1.5px),
+radial-gradient(circle at 39% 29%,#fff 0 1px,transparent 1.5px),
+radial-gradient(circle at 88% 34%,#fff 0 1px,transparent 1.5px),
+radial-gradient(circle at 21% 43%,#fff 0 1px,transparent 1.5px)}
+.shell{width:min(100%,760px);margin:0 auto;padding:18px 18px calc(112px + var(--safe-bottom));position:relative;z-index:2}
+.brand{padding-top:max(10px,env(safe-area-inset-top));margin-bottom:18px}
+.brand-kicker{font:600 12px Georgia,serif;letter-spacing:.2em;color:var(--gold)}
+.brand h1{margin:6px 0 0;font-size:clamp(30px,7.8vw,48px);line-height:1.02;letter-spacing:-.035em}
+.brand p{margin:8px 0 0;color:var(--muted);font-size:15px}
+.view{display:none}
+.view.active{display:block;animation:fade .28s ease}
+@keyframes fade{from{opacity:.2;transform:translateY(5px)}to{opacity:1;transform:none}}
+.card{
+  background:linear-gradient(180deg,rgba(255,255,255,.085),rgba(255,255,255,.055));
+  border:1px solid var(--line);border-radius:28px;padding:18px;box-shadow:var(--shadow);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)
+}
+.soft-card{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);border-radius:25px;padding:17px}
+.welcome{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.round-icon{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;flex:none;background:rgba(154,194,221,.15);color:var(--sky)}
+.round-icon svg{width:28px;height:28px}
+.welcome strong{font-size:19px;display:block}
+.welcome span{font-size:13px;color:var(--muted);display:block;margin-top:3px}
+.section-title{font-size:22px;font-weight:800;margin:22px 0 11px;letter-spacing:-.02em}
+.story-hero{position:relative;overflow:hidden;padding:0;min-height:285px}
+.story-art{height:132px;position:relative;background:
+linear-gradient(180deg,rgba(14,48,73,.08),rgba(4,20,32,.2)),
+radial-gradient(circle at 78% 20%,rgba(240,211,137,.75) 0 7%,rgba(240,211,137,.18) 8%,transparent 18%),
+linear-gradient(180deg,#244f6d 0%,#17405d 54%,#102a40 100%)}
+.story-art:before{
+content:"";position:absolute;left:-5%;right:-5%;bottom:-2px;height:58px;
+background:
+radial-gradient(ellipse at 20% 100%,#c59f67 0 22%,transparent 23%),
+radial-gradient(ellipse at 48% 100%,#b9905b 0 25%,transparent 26%),
+radial-gradient(ellipse at 82% 100%,#cfad74 0 23%,transparent 24%);
+opacity:.7
+}
+.story-art:after{
+content:"";position:absolute;left:50%;bottom:8px;width:96px;height:84px;transform:translateX(-50%);
+background:linear-gradient(180deg,#102536,#0b1d2b);
+clip-path:polygon(0 100%,0 40%,12% 40%,12% 28%,30% 28%,30% 40%,43% 40%,43% 15%,57% 15%,57% 40%,70% 40%,70% 28%,88% 28%,88% 40%,100% 40%,100% 100%);
+opacity:.85
+}
+.story-body{padding:18px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--gold)}
+.story-body h2{font-size:27px;line-height:1.05;margin:9px 0 7px}
+.story-body p{font-size:15px;line-height:1.45;color:var(--muted);margin:0}
+.play-row{margin-top:17px;display:flex;align-items:center;justify-content:space-between;color:var(--gold);font-weight:800}
+.play-pill{display:inline-flex;align-items:center;gap:8px}
+.play-circle{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(203,174,112,.14)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mini{min-height:150px;display:flex;flex-direction:column;justify-content:space-between}
+.mini .symbol{font-size:29px}
+.mini strong{display:block;font-size:17px}
+.mini span{font-size:12px;color:var(--soft)}
+.pause-note{text-align:center;color:var(--soft);font-size:13px;line-height:1.5;padding:18px 22px 0}
+.list{display:grid;gap:12px}
+.story-item{display:flex;align-items:center;gap:13px;cursor:pointer}
+.story-thumb{width:70px;height:78px;border-radius:20px;display:grid;place-items:center;background:rgba(203,174,112,.12);font-size:26px;color:var(--gold);flex:none}
+.story-item h3{margin:0;font-size:18px}
+.story-meta{font-size:12px;color:var(--sage);margin-top:4px}
+.story-time{font-size:12px;color:var(--soft);margin-top:4px}
+.chev{margin-left:auto;color:var(--soft);font-size:22px}
+.learn-list{display:grid;gap:12px}
+.learn-card{display:flex;align-items:center;gap:14px}
+.learn-icon{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:25px;flex:none}
+.learn-card h3{margin:0;font-size:19px}
+.learn-card p{margin:3px 0 0;color:var(--muted);font-size:13px}
+.badge{margin-left:auto;color:var(--soft);font-size:11px;font-weight:800}
+.parents .card+.card{margin-top:14px}
+.label-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}
+.label-row strong{font-size:16px}
+.age-tabs{display:grid;grid-template-columns:repeat(3,1fr);background:rgba(255,255,255,.06);border-radius:14px;padding:3px}
+.age-tabs button{border:0;background:transparent;padding:10px 6px;border-radius:11px;color:var(--muted);font-weight:800;cursor:pointer}
+.age-tabs button.active{background:rgba(255,255,255,.13);color:var(--cream)}
+.age-help{font-size:13px;color:var(--muted);margin:12px 0 0}
+input[type="range"]{width:100%;accent-color:var(--gold)}
+.parent-note{font-size:13px;line-height:1.5;color:var(--muted);margin:10px 0 0}
+.bottom-nav{
+position:fixed;z-index:20;left:50%;transform:translateX(-50%);
+bottom:max(10px,env(safe-area-inset-bottom));
+width:min(calc(100% - 22px),720px);
+display:grid;grid-template-columns:repeat(4,1fr);gap:4px;
+padding:8px;border:1px solid rgba(255,255,255,.10);border-radius:25px;
+background:rgba(5,17,27,.83);box-shadow:0 20px 70px rgba(0,0,0,.45);
+backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)
+}
+.nav-btn{border:0;background:transparent;padding:8px 4px;border-radius:18px;display:grid;gap:5px;place-items:center;color:rgba(255,255,255,.48);cursor:pointer}
+.nav-btn .ni{font-size:20px;line-height:1}
+.nav-btn .nl{font-size:10px;font-weight:800}
+.nav-btn.active{color:var(--gold);background:rgba(203,174,112,.08)}
+.modal{position:fixed;inset:0;z-index:50;display:none;background:rgba(2,9,15,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.modal.open{display:grid;place-items:center}
+.player{width:min(100%,620px);height:100dvh;padding:max(18px,env(safe-area-inset-top)) 18px calc(22px + env(safe-area-inset-bottom));display:flex;flex-direction:column}
+.player-top{display:flex;justify-content:space-between;align-items:center}
+.icon-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.07);color:var(--cream);font-size:22px;cursor:pointer}
+.player-main{flex:1;display:grid;place-items:center;text-align:center}
+.audio-orb{width:190px;height:190px;border-radius:50%;display:grid;place-items:center;margin:0 auto 24px;background:radial-gradient(circle,rgba(203,174,112,.14),rgba(203,174,112,.04));border:1px solid rgba(203,174,112,.25);position:relative}
+.audio-orb:after{content:"";position:absolute;inset:21px;border-radius:50%;border:1px solid rgba(203,174,112,.20)}
+.wave{font-size:46px;color:var(--gold);position:relative;z-index:2}
+.player h2{font-size:31px;margin:0 0 7px}
+.player .category{color:var(--sage);font-size:13px;font-weight:800}
+.player .fallback{font-size:11px;color:var(--soft);margin-top:12px}
+.main-action{width:100%;border:0;background:var(--gold);color:var(--deep);font-weight:900;padding:18px;border-radius:20px;font-size:16px;cursor:pointer}
+.secondary-action{width:100%;border:0;background:transparent;color:rgba(255,255,255,.68);font-weight:800;padding:14px;cursor:pointer}
+.dev-ribbon{position:fixed;z-index:30;top:max(8px,env(safe-area-inset-top));right:10px;font-size:9px;letter-spacing:.08em;font-weight:900;color:rgba(255,255,255,.55);background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.1);padding:6px 9px;border-radius:999px}
+@media(min-width:720px){
+ .shell{padding-top:30px}
+ .brand{padding-top:18px}
+ .story-hero{min-height:325px}
+ .story-art{height:158px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="sky-orb"></div><div class="glow-orb"></div><div class="stars"></div>
+  <div class="dev-ribbon">KIDS PREVIEW · V0.1</div>
+
+  <main class="shell">
+    <section id="view-today" class="view active">
+      <div class="brand">
+        <div class="brand-kicker">DĀR AL TAWḤĪD</div>
+        <h1>Meine Kinderwelt</h1>
+        <p>Hören · verstehen · mitmachen</p>
+      </div>
+
+      <div class="card welcome">
+        <div class="round-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.7 2.1a8.9 8.9 0 1 0 9.2 11.1 7.2 7.2 0 0 1-9.2-11.1Zm5.9 2.4.5 1.4 1.4.5-1.4.5-.5 1.4-.5-1.4-1.4-.5 1.4-.5.5-1.4Z"/></svg>
+        </div>
+        <div>
+          <strong>Heute ganz in Ruhe</strong>
+          <span id="todayMeta">Alter 6–8 · ungefähr 12 Minuten</span>
+        </div>
+      </div>
+
+      <article class="card story-hero" data-story="coin">
+        <div class="story-art"></div>
+        <div class="story-body">
+          <div class="eyebrow">GESCHICHTE DES TAGES · CA. 3 MIN.</div>
+          <h2>Die gefundene Münze</h2>
+          <p>Eine kurze Geschichte über Ehrlichkeit – auch wenn niemand zusieht.</p>
+          <div class="play-row">
+            <span class="play-pill"><span class="play-circle">▶</span><span>Jetzt hören</span></span>
+            <span>Adab</span>
+          </div>
+        </div>
+      </article>
+
+      <div class="section-title">Heute noch</div>
+      <div class="grid2">
+        <button class="soft-card mini go-learn" style="text-align:left;border:1px solid rgba(255,255,255,.08);color:inherit;cursor:pointer">
+          <span class="symbol" style="color:var(--sky)">🤲</span>
+          <span><strong>Duʿāʾ</strong><span>kurz lernen</span></span>
+        </button>
+        <button class="soft-card mini go-learn" style="text-align:left;border:1px solid rgba(255,255,255,.08);color:inherit;cursor:pointer">
+          <span class="symbol" style="color:var(--peach)">?</span>
+          <span><strong>Eine Frage</strong><span>kurz überlegen</span></span>
+        </button>
+      </div>
+
+      <div class="pause-note">Du musst nicht alles heute machen.<br>Ein bisschen Wissen mit Ruhe ist genug.</div>
+    </section>
+
+    <section id="view-stories" class="view">
+      <div class="brand">
+        <div class="brand-kicker">HÖRWELT</div>
+        <h1>Geschichten</h1>
+        <p>Kurze Geschichten mit einem klaren Ende.</p>
+      </div>
+      <div class="list">
+        <div class="soft-card story-item" data-story="coin">
+          <div class="story-thumb">🎧</div><div><h3>Die gefundene Münze</h3><div class="story-meta">Adab · frei verfasst</div><div class="story-time">ca. 3 Min.</div></div><div class="chev">›</div>
+        </div>
+        <div class="soft-card story-item" data-story="water">
+          <div class="story-thumb" style="background:rgba(154,194,221,.11);color:var(--sky)">💧</div><div><h3>Das Glas Wasser</h3><div class="story-meta">Adab · frei verfasst</div><div class="story-time">ca. 2 Min.</div></div><div class="chev">›</div>
+        </div>
+        <div class="soft-card story-item" data-story="helper">
+          <div class="story-thumb" style="background:rgba(155,183,165,.11);color:var(--sage)">✦</div><div><h3>Der leise Helfer</h3><div class="story-meta">Adab · frei verfasst</div><div class="story-time">ca. 3 Min.</div></div><div class="chev">›</div>
+        </div>
+      </div>
+      <div class="pause-note">Später kommen hier geprüfte Propheten-, Ṣaḥābah- und Wissensgeschichten hinzu. Freie Geschichten bleiben klar gekennzeichnet.</div>
+    </section>
+
+    <section id="view-learn" class="view">
+      <div class="brand">
+        <div class="brand-kicker">MEIN WISSEN</div>
+        <h1>Lernen</h1>
+        <p>Hören · verstehen · wiederholen</p>
+      </div>
+      <div class="learn-list">
+        <div class="soft-card learn-card">
+          <div class="learn-icon" style="background:rgba(203,174,112,.14);color:var(--gold)">▤</div>
+          <div><h3>Mein Qurʾān</h3><p>hören · wiederholen · lernen</p></div><div class="badge">BALD</div>
+        </div>
+        <div class="soft-card learn-card">
+          <div class="learn-icon" style="background:rgba(154,194,221,.14);color:var(--sky)">🤲</div>
+          <div><h3>Meine Duʿāʾ</h3><p>für meinen Alltag</p></div><div class="badge">BALD</div>
+        </div>
+        <div class="soft-card learn-card">
+          <div class="learn-icon" style="background:rgba(155,183,165,.14);color:var(--sage)">☾</div>
+          <div><h3>Mein Dīn</h3><p>kurz und verständlich</p></div><div class="badge">BALD</div>
+        </div>
+        <div class="soft-card learn-card">
+          <div class="learn-icon" style="background:rgba(223,169,143,.14);color:var(--peach)">?</div>
+          <div><h3>Quiz</h3><p>hören · überlegen · antworten</p></div><div class="badge">BALD</div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:15px">
+        <div class="eyebrow">QURʾĀN-REGEL</div>
+        <p style="margin:8px 0 0;color:var(--muted);font-size:14px;line-height:1.5">Rezitation wird ausschließlich mit echten, sauber lizenzierten Aufnahmen eingebunden. KI-Stimmen dienen nur für Erklärungen, Geschichten und Bedienhinweise.</p>
+      </div>
+    </section>
+
+    <section id="view-parents" class="view parents">
+      <div class="brand">
+        <div class="brand-kicker">GESCHÜTZTER BEREICH</div>
+        <h1>Eltern</h1>
+        <p>V0.1 Vorschau · PIN-Sperre folgt als Nächstes.</p>
+      </div>
+
+      <div class="card">
+        <div class="label-row"><strong>Altersstufe</strong><span style="color:var(--gold)">Kindgerecht</span></div>
+        <div class="age-tabs">
+          <button data-age="4–5">4–5</button>
+          <button class="active" data-age="6–8">6–8</button>
+          <button data-age="9–10">9–10</button>
+        </div>
+        <p id="ageHelp" class="age-help">hören · verstehen · mitmachen</p>
+      </div>
+
+      <div class="card">
+        <div class="label-row"><strong>Tägliche Lernzeit</strong><strong id="minuteValue" style="color:var(--gold)">12 Min.</strong></div>
+        <input id="minuteSlider" type="range" min="5" max="20" value="12" step="1">
+        <p class="parent-note">Die App soll ein klares Ende haben und nicht möglichst lange Aufmerksamkeit binden.</p>
+      </div>
+
+      <div class="card">
+        <div class="eyebrow">GEPLANT</div>
+        <p style="margin:8px 0 0;color:var(--muted);font-size:14px;line-height:1.55">Eltern-PIN · Kinderprofile · Offline-Pakete · Lernfortschritt · Inhaltsfreigaben · Schlafenszeit-Modus.</p>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Hauptnavigation">
+    <button class="nav-btn active" data-target="today"><span class="ni">☀</span><span class="nl">Heute</span></button>
+    <button class="nav-btn" data-target="stories"><span class="ni">◉</span><span class="nl">Geschichten</span></button>
+    <button class="nav-btn" data-target="learn"><span class="ni">✦</span><span class="nl">Lernen</span></button>
+    <button class="nav-btn" data-target="parents"><span class="ni">⌾</span><span class="nl">Eltern</span></button>
+  </nav>
+
+  <div id="storyModal" class="modal" role="dialog" aria-modal="true" aria-label="Geschichtenplayer">
+    <div class="player">
+      <div class="player-top">
+        <button id="closePlayer" class="icon-btn" aria-label="Schließen">×</button>
+        <span id="playerTime" style="font-size:12px;color:var(--soft)">ca. 3 Min.</span>
+      </div>
+      <div class="player-main">
+        <div>
+          <div class="audio-orb"><div id="wave" class="wave">≋</div></div>
+          <h2 id="playerTitle">Die gefundene Münze</h2>
+          <div id="playerCategory" class="category">Adab · frei verfasst</div>
+          <div class="fallback">Vorschau: nutzt die Browser-Stimme deines Geräts. Die feste KI-Erzählstimme folgt später als Audio-Datei.</div>
+        </div>
+      </div>
+      <div>
+        <button id="playStory" class="main-action">▶ Geschichte hören</button>
+        <button id="markDone" class="secondary-action">○ Als gehört markieren</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const stories={
+  coin:{
+    title:"Die gefundene Münze",time:"ca. 3 Min.",category:"Adab · frei verfasst",
+    text:"Auf dem Heimweg entdeckte Adam neben einer Bank eine glänzende Münze. Er hob sie auf und sah sich um. Niemand schien sie zu suchen. Für einen Moment dachte Adam: Ich könnte sie einfach behalten. Dann erinnerte er sich daran, dass ein Muslim ehrlich sein soll, nicht nur dann, wenn andere Menschen zuschauen. Adam ging zurück zu dem kleinen Laden neben dem Platz. Er fragte den Besitzer, ob jemand nach einer verlorenen Münze gesucht habe. Der Mann lächelte und sagte: Gerade eben war ein älterer Mann hier. Er hatte bemerkt, dass ihm etwas aus der Tasche gefallen war. Adam wartete einen Augenblick. Kurz darauf kam der Mann zurück. Als Adam ihm die Münze gab, war der Mann sehr erleichtert. Auf dem Heimweg hatte Adam keine neue Münze in der Tasche. Aber er hatte etwas Wertvolleres gelernt: Ehrlichkeit bedeutet, das Richtige zu tun, auch wenn man etwas anderes tun könnte. Denk einmal nach: Was würdest du tun, wenn du etwas findest, das dir nicht gehört?"
+  },
+  water:{
+    title:"Das Glas Wasser",time:"ca. 2 Min.",category:"Adab · frei verfasst",
+    text:"Maryam saß mit ihrer Familie am Tisch. Alle unterhielten sich. Da bemerkte sie, dass ihre kleine Schwester nach dem Wasser greifen wollte, aber nicht herankam. Maryam hätte einfach weiteressen können. Stattdessen nahm sie die Kanne, schenkte ihrer Schwester ein Glas ein und stellte es vorsichtig vor sie. Es war nur eine kleine Handlung. Niemand klatschte. Niemand gab ihr einen Preis. Aber ihre Schwester lächelte. Maryam verstand: Gutes Benehmen besteht oft aus kleinen Dingen. Aufmerksam sein. Helfen. Freundlich sprechen. Und nicht immer darauf warten, dass jemand einen darum bittet. Welche kleine gute Sache kannst du heute für jemanden tun?"
+  },
+  helper:{
+    title:"Der leise Helfer",time:"ca. 3 Min.",category:"Adab · frei verfasst",
+    text:"Nach dem Unterricht lagen einige Bücher und Stifte auf dem Boden. Die meisten Kinder gingen schon zur Tür. Yusuf blieb stehen. Ohne etwas zu sagen, sammelte er die Stifte ein und legte die Bücher zurück an ihren Platz. Sein Freund fragte: Warum machst du das? Die Lehrerin sieht dich doch gar nicht. Yusuf antwortete: Eine gute Sache wird nicht erst gut, wenn jemand mich dafür lobt. Gemeinsam räumten beide den Rest auf. Am nächsten Morgen war der Raum ordentlich und niemand wusste, wer geholfen hatte. Manchmal sind die schönsten guten Taten diejenigen, für die wir keinen Applaus erwarten."
+  }
+};
+
+let currentStory=stories.coin;
+let speaking=false;
+const modal=document.getElementById("storyModal");
+const synth=window.speechSynthesis;
+
+function showTab(name){
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  document.getElementById("view-"+name).classList.add("active");
+  document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.target===name));
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll(".nav-btn").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.target)));
+document.querySelectorAll(".go-learn").forEach(b=>b.addEventListener("click",()=>showTab("learn")));
+
+function openStory(key){
+  currentStory=stories[key]||stories.coin;
+  document.getElementById("playerTitle").textContent=currentStory.title;
+  document.getElementById("playerTime").textContent=currentStory.time;
+  document.getElementById("playerCategory").textContent=currentStory.category;
+  document.getElementById("markDone").textContent=localStorage.getItem("kids.done."+key)==="1"?"✓ Schon geschafft":"○ Als gehört markieren";
+  modal.classList.add("open");
+}
+document.querySelectorAll("[data-story]").forEach(el=>el.addEventListener("click",()=>openStory(el.dataset.story)));
+
+function stopSpeech(){
+  if(synth) synth.cancel();
+  speaking=false;
+  document.getElementById("playStory").textContent="▶ Geschichte hören";
+  document.getElementById("wave").textContent="≋";
+}
+document.getElementById("closePlayer").addEventListener("click",()=>{stopSpeech();modal.classList.remove("open")});
+document.getElementById("playStory").addEventListener("click",()=>{
+  if(!("speechSynthesis" in window)){alert("Auf diesem Browser ist die Vorschau-Stimme nicht verfügbar.");return}
+  if(speaking){stopSpeech();return}
+  const u=new SpeechSynthesisUtterance(currentStory.text);
+  u.lang="de-DE";u.rate=.88;u.pitch=.92;
+  u.onend=stopSpeech;u.onerror=stopSpeech;
+  speaking=true;
+  document.getElementById("playStory").textContent="■ Stopp";
+  document.getElementById("wave").textContent="≋≋";
+  synth.speak(u);
+});
+document.getElementById("markDone").addEventListener("click",()=>{
+  const key=Object.keys(stories).find(k=>stories[k]===currentStory)||"coin";
+  localStorage.setItem("kids.done."+key,"1");
+  document.getElementById("markDone").textContent="✓ Schon geschafft";
+});
+
+const ageHelp={"4–5":"viel hören · kurze Einheiten","6–8":"hören · verstehen · mitmachen","9–10":"verstehen · anwenden · vertiefen"};
+const ageButtons=[...document.querySelectorAll("[data-age]")];
+let age=localStorage.getItem("kids.age")||"6–8";
+function setAge(a){
+  age=a;localStorage.setItem("kids.age",a);
+  ageButtons.forEach(b=>b.classList.toggle("active",b.dataset.age===a));
+  document.getElementById("ageHelp").textContent=ageHelp[a];
+  updateMeta();
+}
+ageButtons.forEach(b=>b.addEventListener("click",()=>setAge(b.dataset.age)));
+
+const slider=document.getElementById("minuteSlider");
+slider.value=localStorage.getItem("kids.minutes")||"12";
+function updateMinutes(){
+  localStorage.setItem("kids.minutes",slider.value);
+  document.getElementById("minuteValue").textContent=slider.value+" Min.";
+  updateMeta();
+}
+slider.addEventListener("input",updateMinutes);
+function updateMeta(){
+  document.getElementById("todayMeta").textContent="Alter "+age+" · ungefähr "+slider.value+" Minuten";
+}
+setAge(age);updateMinutes();
+</script>
+</body>
+</html>
