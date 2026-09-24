@@ -1,10 +1,11 @@
 {
-  "version": 1,
+  "version": 2,
   "policy": {
     "source": "data/quiz-questions.json",
     "rule": "Nur kanonische Fragen mit status=published, reviewStatus=approved und ohne validationErrors.",
     "childAdaptation": "Nur Sprache und Antwortlänge werden kindgerecht vereinfacht; Aussage und Quelle bleiben dieselben.",
-    "status": "approved-only"
+    "status": "approved-only",
+    "note": "Enthält zusätzlich kindgerechte, kanonisch geprüfte Fragen zu Ṣaḥābah und Tābiʿīn."
   },
   "items": [
     {
@@ -1049,6 +1050,103 @@
       "explanation": "Qurʾān 2:185 erwähnt den Monat Ramaḍān als den Monat, in dem der Qurʾān herabgesandt wurde.",
       "sourceType": "Qurʾān",
       "source": "Qurʾān 2:185",
+      "canonicalStatus": "published",
+      "canonicalReviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "k68-q543",
+      "canonicalQuizId": "quiz-543",
+      "ageMin": 6,
+      "ageMax": 8,
+      "scene": "📚",
+      "category": "Ṣaḥābah",
+      "question": "Worum bat der Prophet ﷺ für Ibn ʿAbbās?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Dass Allah ihn das Buch lehrt",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nur um viel Geld",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Der Prophet ﷺ bat Allah, Ibn ʿAbbās das Buch zu lehren.",
+      "retry": "Noch nicht. Hör die Frage noch einmal und versuch es erneut.",
+      "explanation": "Der Prophet ﷺ bat الله darum, Ibn ʿAbbās das Buch zu lehren.",
+      "sourceType": "Ṣaḥīḥ Ḥadīth",
+      "source": "Ṣaḥīḥ al-Bukhārī 75",
+      "canonicalStatus": "published",
+      "canonicalReviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "k910-q509",
+      "canonicalQuizId": "quiz-509",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "📚",
+      "category": "Ṣaḥābah",
+      "question": "Was tat Ibn ʿUmar, wenn er etwas nicht wusste?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Er sagte ehrlich, dass er es nicht wusste",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Er erfand eine Antwort",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Er antwortete immer aus Vermutung",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Bei fehlendem Wissen sagte Ibn ʿUmar offen, dass er es nicht wusste.",
+      "retry": "Noch nicht. Hör die Frage noch einmal und versuch es erneut.",
+      "explanation": "Ibn ʿUmar betrachtete es als richtig und lobenswert, bei fehlendem Wissen ehrlich zu sagen, dass man es nicht weiß.",
+      "sourceType": "Athar",
+      "source": "Sunan ad-Dārimī 181",
+      "canonicalStatus": "published",
+      "canonicalReviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "k910-q508",
+      "canonicalQuizId": "quiz-508",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "✦",
+      "category": "Tābiʿīn",
+      "question": "Was sagte ʿĀmir aš-Šaʿbī oft, wenn er etwas nicht sicher wusste?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ich habe darüber kein Wissen",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Meine Meinung reicht immer",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Ich weiß immer die Antwort",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Aš-Šaʿbī sagte offen, wenn er über etwas kein Wissen hatte.",
+      "retry": "Noch nicht. Hör die Frage noch einmal und versuch es erneut.",
+      "explanation": "Asch-Schaʿbī war dafür bekannt, häufig offen zu sagen, dass er über eine Sache kein Wissen besaß.",
+      "sourceType": "Athar",
+      "source": "Sunan ad-Dārimī 132",
       "canonicalStatus": "published",
       "canonicalReviewStatus": "approved",
       "verification": "approved"
