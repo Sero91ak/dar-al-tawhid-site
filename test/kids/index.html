@@ -545,157 +545,299 @@ html,body{background:#06131f!important}
 }
 
 /* KIDS_AI_ART_V7_START — generated artwork backgrounds */
-/* KIDS_IMAGE_PROPORTIONAL_V11
-   Images keep their original aspect ratio. The artwork is anchored in the visual zone,
-   while gradients fill the remaining space and protect all reading areas. */
+/* KIDS_EDGE_BLEND_V11
+   No stretched art and no hard image seams.
+   Each artwork uses a blurred edge-to-edge continuation underneath plus a sharp,
+   proportional foreground layer that fades softly into the card. */
+
+.hero,
+.choice,
+.story-scene,
+.quran-hero,
+.surah-card{
+  isolation:isolate;
+  position:relative;
+  overflow:hidden;
+}
+
+/* ---------- HERO ---------- */
 .hero{
+  --art:url("/test/kids/assets/kids-art/hero-entdecke.png?v=11-blend1");
+  --wash:linear-gradient(120deg,#0b2232 0%,#173f4e 48%,#8e6040 100%);
   min-height:clamp(286px,46vw,372px);
-  background-color:#102a38;
+  background:var(--wash);
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:-12%;
+  z-index:0;
+  background-image:var(--art);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  filter:blur(24px) saturate(1.06);
+  transform:scale(1.08);
+  opacity:.72;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
   background-image:
-    linear-gradient(90deg,rgba(5,18,29,.94) 0%,rgba(5,18,29,.72) 43%,rgba(5,18,29,.25) 72%,rgba(5,18,29,.05) 100%),
-    url("/test/kids/assets/kids-art/hero-entdecke.png?v=11-prop1");
-  background-size:100% 100%,auto 100%;
+    linear-gradient(90deg,rgba(5,18,29,.84) 0%,rgba(5,18,29,.62) 30%,rgba(5,18,29,.22) 55%,rgba(5,18,29,.04) 76%,transparent 100%),
+    var(--art);
+  background-size:100% 100%,auto 108%;
   background-position:center,right center;
   background-repeat:no-repeat,no-repeat;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.14) 10%,rgba(0,0,0,.55) 24%,#000 43%,#000 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.14) 10%,rgba(0,0,0,.55) 24%,#000 43%,#000 100%);
 }
 .hero .cloud,.hero .city,.hero .arch,.hero .dune,.hero .lantern{display:none}
-.hero-copy{z-index:3;text-shadow:0 3px 18px rgba(0,0,0,.48)}
+.hero-copy{z-index:3;text-shadow:0 3px 18px rgba(0,0,0,.58)}
 .hero-kicker{color:#ffe4a3}
 
+/* ---------- HOME CHOICE CARDS ---------- */
 .choice{
   min-height:clamp(142px,23vw,178px);
-  background-color:#153044;
-  background-size:100% 100%,auto 100%!important;
-  background-position:center,right center!important;
-  background-repeat:no-repeat,no-repeat!important;
+  background:var(--wash,#153044)!important;
 }
 .choice.story{
-  background-image:
-    linear-gradient(90deg,rgba(71,31,37,.98) 0%,rgba(71,31,37,.90) 40%,rgba(71,31,37,.48) 68%,rgba(71,31,37,.08) 100%),
-    url("/test/kids/assets/kids-art/card-geschichte.jpg?v=11-prop1");
+  --art:url("/test/kids/assets/kids-art/card-geschichte.jpg?v=11-blend1");
+  --wash:linear-gradient(135deg,#7f4550 0%,#a56267 55%,#58343e 100%);
 }
 .choice.quran{
-  background-image:
-    linear-gradient(90deg,rgba(8,51,55,.98) 0%,rgba(8,51,55,.89) 40%,rgba(8,51,55,.46) 68%,rgba(8,51,55,.08) 100%),
-    url("/test/kids/assets/kids-art/card-mein-quran.png?v=11-prop1");
+  --art:url("/test/kids/assets/kids-art/card-mein-quran.png?v=11-blend1");
+  --wash:linear-gradient(135deg,#174f52 0%,#347d78 55%,#1c4c59 100%);
 }
 .choice.dua{
-  background-image:
-    linear-gradient(90deg,rgba(55,42,96,.98) 0%,rgba(55,42,96,.89) 40%,rgba(55,42,96,.45) 68%,rgba(55,42,96,.08) 100%),
-    url("/test/kids/assets/kids-art/card-heute-lernen.png?v=11-prop1");
+  --art:url("/test/kids/assets/kids-art/card-heute-lernen.png?v=11-blend1");
+  --wash:linear-gradient(135deg,#514a88 0%,#7776ac 55%,#433d70 100%);
 }
 .choice.quiz{
+  --art:url("/test/kids/assets/kids-art/card-quiz.jpg?v=11-blend1");
+  --wash:linear-gradient(135deg,#795021 0%,#b07943 55%,#6d431f 100%);
+}
+.choice::before{
+  content:"";
+  position:absolute;
+  inset:-16%;
+  z-index:0;
+  background-image:var(--art);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  filter:blur(20px) saturate(1.08);
+  transform:scale(1.08);
+  opacity:.66;
+  pointer-events:none;
+}
+.choice::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
   background-image:
-    linear-gradient(90deg,rgba(91,53,18,.98) 0%,rgba(91,53,18,.88) 40%,rgba(91,53,18,.44) 68%,rgba(91,53,18,.08) 100%),
-    url("/test/kids/assets/kids-art/card-quiz.jpg?v=11-prop1");
-}
-.choice .icon,.choice strong,.choice small,.choice .arrow{
-  z-index:2;text-shadow:0 2px 12px rgba(0,0,0,.48)
-}
-.choice strong,.choice small{max-width:61%}
-.choice:before{
-  background:linear-gradient(130deg,rgba(255,255,255,.07),transparent 54%);
-  z-index:1;pointer-events:none
-}
-
-.story-scene{
-  height:clamp(148px,28vw,224px);
-  background-color:#173444;
-  background-image:
-    linear-gradient(90deg,rgba(9,28,39,.35),rgba(9,28,39,.05)),
-    url("/test/kids/assets/kids-art/story-muenze.png?v=11-prop1");
-  background-size:100% 100%,auto 100%;
-  background-position:center,center;
-  background-repeat:no-repeat,no-repeat;
-}
-.story-scene:before,.story-scene:after{display:none}
-
-.quran-hero{
-  min-height:clamp(236px,38vw,324px);
-  background-color:#164b50;
-  background-image:
-    linear-gradient(90deg,rgba(7,43,49,.98) 0%,rgba(7,43,49,.90) 42%,rgba(7,43,49,.48) 70%,rgba(7,43,49,.08) 100%),
-    url("/test/kids/assets/kids-art/quran-reise.png?v=11-prop1");
-  background-size:100% 100%,auto 100%;
+    linear-gradient(90deg,rgba(9,20,30,.72) 0%,rgba(9,20,30,.50) 32%,rgba(9,20,30,.14) 58%,transparent 82%),
+    var(--art);
+  background-size:100% 100%,auto 114%;
   background-position:center,right center;
   background-repeat:no-repeat,no-repeat;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.12) 12%,rgba(0,0,0,.50) 27%,#000 48%,#000 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.12) 12%,rgba(0,0,0,.50) 27%,#000 48%,#000 100%);
+  pointer-events:none;
 }
-.quran-hero:after{display:none}
-.quran-hero>*{position:relative;z-index:2}
-.quran-hero h3,.quran-hero p{max-width:min(94%,520px);text-shadow:0 2px 14px rgba(0,0,0,.42)}
-.quran-actions{margin-top:18px}
-.quran-action{
-  background:linear-gradient(145deg,rgba(255,255,255,.17),rgba(255,255,255,.075));
-  border-color:rgba(255,255,255,.14);
-  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)
+.choice .icon,.choice strong,.choice small,.choice .arrow{
+  position:relative;
+  z-index:3;
+  text-shadow:0 2px 12px rgba(0,0,0,.58)
+}
+.choice strong,.choice small{max-width:61%}
+
+/* ---------- STORY FEATURE ---------- */
+.story-scene{
+  --art:url("/test/kids/assets/kids-art/story-muenze.png?v=11-blend1");
+  height:clamp(148px,28vw,224px);
+  background:linear-gradient(135deg,#244c58,#6f654f);
+}
+.story-scene::before{
+  content:"";
+  position:absolute;
+  inset:-14%;
+  z-index:0;
+  display:block;
+  background-image:var(--art);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  filter:blur(22px) saturate(1.04);
+  transform:scale(1.08);
+  opacity:.68;
+}
+.story-scene::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  display:block;
+  background-image:var(--art);
+  background-size:auto 112%;
+  background-position:center;
+  background-repeat:no-repeat;
+  -webkit-mask-image:radial-gradient(ellipse 82% 92% at 54% 52%,#000 48%,rgba(0,0,0,.90) 65%,rgba(0,0,0,.32) 82%,transparent 100%);
+  mask-image:radial-gradient(ellipse 82% 92% at 54% 52%,#000 48%,rgba(0,0,0,.90) 65%,rgba(0,0,0,.32) 82%,transparent 100%);
 }
 
+/* ---------- QURAN HERO ---------- */
+.quran-hero{
+  --art:url("/test/kids/assets/kids-art/quran-reise.png?v=11-blend1");
+  --wash:linear-gradient(135deg,#123e48,#2d716a 58%,#315d5d);
+  min-height:clamp(236px,38vw,324px);
+  background:var(--wash);
+}
+.quran-hero::before{
+  content:"";
+  position:absolute;
+  inset:-14%;
+  z-index:0;
+  background-image:var(--art);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  filter:blur(24px) saturate(1.06);
+  transform:scale(1.09);
+  opacity:.70;
+}
+.quran-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background-image:
+    linear-gradient(90deg,rgba(5,35,42,.83) 0%,rgba(5,35,42,.64) 34%,rgba(5,35,42,.18) 62%,transparent 84%),
+    var(--art);
+  background-size:100% 100%,auto 112%;
+  background-position:center,right center;
+  background-repeat:no-repeat,no-repeat;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.14) 12%,rgba(0,0,0,.56) 28%,#000 48%,#000 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.14) 12%,rgba(0,0,0,.56) 28%,#000 48%,#000 100%);
+}
+.quran-hero>*{position:relative;z-index:3}
+.quran-hero h3,.quran-hero p{max-width:min(94%,520px);text-shadow:0 2px 14px rgba(0,0,0,.50)}
+.quran-actions{margin-top:18px}
+.quran-action{
+  background:linear-gradient(145deg,rgba(255,255,255,.18),rgba(255,255,255,.08));
+  border-color:rgba(255,255,255,.15);
+  -webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px)
+}
+
+/* ---------- QURAN SECTION BANNER ---------- */
 #view-quran .section-title{margin-top:25px}
 .surah-grid{position:relative;padding-top:clamp(116px,17vw,154px)}
-.surah-grid:before{
+.surah-grid::before{
   content:"";
-  position:absolute;left:0;right:0;top:0;
+  position:absolute;
+  left:0;right:0;top:0;
   height:clamp(100px,15vw,138px);
   border-radius:24px;
   border:1px solid rgba(255,255,255,.13);
   box-shadow:0 13px 30px rgba(0,0,0,.18);
-  background-color:#173b4a;
   background-image:
-    linear-gradient(90deg,rgba(7,34,48,.84) 0%,rgba(7,34,48,.56) 54%,rgba(7,34,48,.08) 100%),
-    url("/test/kids/assets/kids-art/quran-surah-zone.png?v=11-prop1");
-  background-size:100% 100%,auto 100%;
-  background-position:center,right center;
+    linear-gradient(90deg,rgba(7,34,48,.70),rgba(7,34,48,.18) 56%,rgba(7,34,48,.06)),
+    url("/test/kids/assets/kids-art/quran-surah-zone.png?v=11-blend1");
+  background-size:100% 100%,cover;
+  background-position:center,center;
   background-repeat:no-repeat,no-repeat;
 }
 
+/* ---------- INDIVIDUAL SURAH CARDS ---------- */
 .surah-card{
   min-height:clamp(132px,21vw,168px);
-  background-color:#203848!important;
-  background-size:100% 100%,auto 100%!important;
-  background-position:center,right center!important;
-  background-repeat:no-repeat,no-repeat!important;
-  isolation:isolate;
+  --wash:linear-gradient(145deg,#284e5a,#25404e);
+  background:var(--wash)!important;
 }
-.surah-card>*{position:relative;z-index:2}
+.surah-card::before{
+  content:"";
+  position:absolute;
+  inset:-18%;
+  z-index:0;
+  background-image:var(--art);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  filter:blur(18px) saturate(1.08);
+  transform:scale(1.10);
+  opacity:.72;
+  pointer-events:none;
+}
+.surah-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background-image:
+    linear-gradient(90deg,rgba(8,20,29,.62) 0%,rgba(8,20,29,.43) 36%,rgba(8,20,29,.10) 62%,transparent 84%),
+    var(--art);
+  background-size:100% 100%,auto 116%;
+  background-position:center,right center;
+  background-repeat:no-repeat,no-repeat;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.12) 12%,rgba(0,0,0,.52) 28%,#000 48%,#000 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.12) 12%,rgba(0,0,0,.52) 28%,#000 48%,#000 100%);
+  pointer-events:none;
+}
+.surah-card>*{position:relative;z-index:3}
 .surah-card .num,.surah-card .ar,.surah-card strong,.surah-card small{
-  text-shadow:0 2px 10px rgba(0,0,0,.72)
+  text-shadow:0 2px 10px rgba(0,0,0,.78)
 }
 .surah-card .ar{max-width:70%;margin-left:auto}
+
 .surah-card[data-surah="1"]{
-  background-image:linear-gradient(90deg,rgba(17,67,69,.96) 0%,rgba(17,67,69,.86) 45%,rgba(17,67,69,.34) 75%,rgba(17,67,69,.04) 100%),url("/test/kids/assets/kids-art/surah-001-al-fatihah.jpg?v=11-q1")!important
+  --art:url("/test/kids/assets/kids-art/surah-001-al-fatihah.jpg?v=11-blend1");
+  --wash:linear-gradient(145deg,#205c5c,#173f49)
 }
 .surah-card[data-surah="112"]{
-  background-image:linear-gradient(90deg,rgba(34,39,82,.96) 0%,rgba(34,39,82,.86) 45%,rgba(34,39,82,.34) 75%,rgba(34,39,82,.04) 100%),url("/test/kids/assets/kids-art/surah-112-al-ikhlas.jpg?v=11-q1")!important
+  --art:url("/test/kids/assets/kids-art/surah-112-al-ikhlas.jpg?v=11-blend1");
+  --wash:linear-gradient(145deg,#343b78,#242c58)
 }
 .surah-card[data-surah="113"]{
-  background-image:linear-gradient(90deg,rgba(92,49,58,.96) 0%,rgba(92,49,58,.86) 45%,rgba(92,49,58,.34) 75%,rgba(92,49,58,.04) 100%),url("/test/kids/assets/kids-art/surah-113-al-falaq.jpg?v=11-q1")!important
+  --art:url("/test/kids/assets/kids-art/surah-113-al-falaq.jpg?v=11-blend1");
+  --wash:linear-gradient(145deg,#8a5960,#553746)
 }
 .surah-card[data-surah="114"]{
-  background-image:linear-gradient(90deg,rgba(26,62,59,.96) 0%,rgba(26,62,59,.86) 45%,rgba(26,62,59,.34) 75%,rgba(26,62,59,.04) 100%),url("/test/kids/assets/kids-art/surah-114-an-nas.jpg?v=11-q1")!important
+  --art:url("/test/kids/assets/kids-art/surah-114-an-nas.jpg?v=11-blend1");
+  --wash:linear-gradient(145deg,#386f63,#274d4f)
 }
 .surah-card[data-surah="108"]{
-  background-image:linear-gradient(90deg,rgba(32,75,79,.96) 0%,rgba(32,75,79,.86) 45%,rgba(32,75,79,.34) 75%,rgba(32,75,79,.04) 100%),url("/test/kids/assets/kids-art/surah-108-al-kawthar.jpg?v=11-q1")!important
+  --art:url("/test/kids/assets/kids-art/surah-108-al-kawthar.jpg?v=11-blend1");
+  --wash:linear-gradient(145deg,#397a7c,#28545e)
 }
 .surah-card[data-surah="103"]{
-  background-image:linear-gradient(90deg,rgba(88,58,30,.96) 0%,rgba(88,58,30,.86) 45%,rgba(88,58,30,.34) 75%,rgba(88,58,30,.04) 100%),url("/test/kids/assets/kids-art/surah-103-al-asr.jpg?v=11-q1")!important
+  --art:url("/test/kids/assets/kids-art/surah-103-al-asr.jpg?v=11-blend1");
+  --wash:linear-gradient(145deg,#9a7043,#5e4935)
 }
 .surah-card[data-surah="105"]{
-  background-image:linear-gradient(90deg,rgba(75,63,48,.96) 0%,rgba(75,63,48,.86) 45%,rgba(75,63,48,.34) 75%,rgba(75,63,48,.04) 100%),url("/test/kids/assets/kids-art/surah-105-al-fil.jpg?v=11-q1")!important
+  --art:url("/test/kids/assets/kids-art/surah-105-al-fil.jpg?v=11-blend1");
+  --wash:linear-gradient(145deg,#806f55,#4e5249)
 }
 .surah-card[data-surah="106"]{
-  background-image:linear-gradient(90deg,rgba(76,58,32,.96) 0%,rgba(76,58,32,.86) 45%,rgba(76,58,32,.34) 75%,rgba(76,58,32,.04) 100%),url("/test/kids/assets/kids-art/surah-106-quraysh.jpg?v=11-q1")!important
+  --art:url("/test/kids/assets/kids-art/surah-106-quraysh.jpg?v=11-blend1");
+  --wash:linear-gradient(145deg,#9c7240,#5f4930)
 }
 .surah-card[data-surah="109"]{
-  background-image:linear-gradient(90deg,rgba(51,42,82,.96) 0%,rgba(51,42,82,.86) 45%,rgba(51,42,82,.34) 75%,rgba(51,42,82,.04) 100%),url("/test/kids/assets/kids-art/surah-109-al-kafirun.jpg?v=11-q1")!important
+  --art:url("/test/kids/assets/kids-art/surah-109-al-kafirun.jpg?v=11-blend1");
+  --wash:linear-gradient(145deg,#5d5488,#39385e)
 }
 .surah-card[data-surah="110"]{
-  background-image:linear-gradient(90deg,rgba(28,70,54,.96) 0%,rgba(28,70,54,.86) 45%,rgba(28,70,54,.34) 75%,rgba(28,70,54,.04) 100%),url("/test/kids/assets/kids-art/surah-110-an-nasr.jpg?v=11-q1")!important
+  --art:url("/test/kids/assets/kids-art/surah-110-an-nasr.jpg?v=11-blend1");
+  --wash:linear-gradient(145deg,#44765e,#294d45)
 }
 
-/* Small phones: preserve image ratio; let the gradient own the reading side */
+/* Small phones */
 @media(max-width:390px){
   .hero{min-height:282px}
   .choice{min-height:136px;padding:15px}
+  .choice::after{background-size:100% 100%,auto 110%}
   .choice .icon{font-size:31px;margin-bottom:14px}
   .choice strong{font-size:20px}
   .choice small{font-size:12px;max-width:58%}
@@ -703,23 +845,26 @@ html,body{background:#06131f!important}
   .quran-hero{min-height:228px}
   .quran-actions{grid-template-columns:1fr}
   .surah-card{min-height:132px;padding:13px}
+  .surah-card::after{background-size:100% 100%,auto 112%}
 }
 
-/* Normal and large phones */
+/* Normal / large phones */
 @media(min-width:391px) and (max-width:699px){
   .choice{min-height:146px}
   .story-scene{height:clamp(154px,39vw,190px)}
 }
 
-/* iPad / tablet: art grows through height, never by horizontal stretching */
+/* iPad / tablet */
 @media(min-width:700px){
   .hero{min-height:360px}
   .big-choice-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
   .choice{min-height:184px}
   .choice strong,.choice small{max-width:57%}
+  .choice::after{background-size:100% 100%,auto 118%}
   .story-scene{height:220px}
   .quran-hero{min-height:314px}
   .surah-card{min-height:162px}
+  .surah-card::after{background-size:100% 100%,auto 120%}
 }
 /* KIDS_AI_ART_V7_END */
 
@@ -1125,7 +1270,7 @@ html,body{background:#06131f!important}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v11-quran-art1";
+const KIDS_BUILD_ID="kids-shell-v11-edgeblend1";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
