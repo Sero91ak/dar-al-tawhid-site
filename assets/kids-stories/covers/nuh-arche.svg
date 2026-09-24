@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Arche auf stürmischem Meer">
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#071a36"/><stop offset=".58" stop-color="#19486b"/><stop offset="1" stop-color="#d89a4c"/></linearGradient>
+<linearGradient id="sea" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b4369"/><stop offset=".5" stop-color="#176f91"/><stop offset="1" stop-color="#04233e"/></linearGradient>
+<linearGradient id="wood" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5d341f"/><stop offset=".5" stop-color="#9a6337"/><stop offset="1" stop-color="#3e2419"/></linearGradient>
+<radialGradient id="sun"><stop stop-color="#fff1ba"/><stop offset=".35" stop-color="#f2c66e" stop-opacity=".9"/><stop offset="1" stop-color="#f2c66e" stop-opacity="0"/></radialGradient>
+<filter id="glow"><feGaussianBlur stdDeviation="18"/></filter>
+</defs>
+<rect width="1200" height="900" fill="url(#sky)"/>
+<circle cx="970" cy="180" r="135" fill="url(#sun)" filter="url(#glow)"/>
+<g fill="#fff" opacity=".72"><circle cx="120" cy="120" r="2"/><circle cx="180" cy="95" r="1.8"/><circle cx="315" cy="148" r="2"/><circle cx="430" cy="96" r="1.5"/><circle cx="760" cy="118" r="1.4"/></g>
+<path d="M0 610 C130 540 235 670 360 605 S600 540 760 625 1000 565 1200 600 V900 H0Z" fill="url(#sea)"/>
+<path d="M0 710 C130 630 250 760 370 690 S640 620 770 710 1020 630 1200 690" fill="none" stroke="#b7e2e7" stroke-width="18" opacity=".68"/>
+<path d="M40 770 C170 690 280 800 390 750 S630 700 790 760 1040 705 1180 750" fill="none" stroke="#edf7ef" stroke-width="10" opacity=".72"/>
+<g transform="translate(240 250)">
+<path d="M85 320 C160 390 640 390 765 305 L710 485 C575 565 215 560 120 478Z" fill="url(#wood)" stroke="#2e1c16" stroke-width="10"/>
+<path d="M155 180 H640 L705 318 H98Z" fill="#714429" stroke="#2e1c16" stroke-width="9"/>
+<path d="M205 100 H600 L638 180 H168Z" fill="#845235" stroke="#2e1c16" stroke-width="8"/>
+<path d="M278 40 H530 L590 100 H220Z" fill="#6c412b"/>
+<g fill="#eac878" opacity=".86">
+<rect x="208" y="220" width="48" height="42" rx="6"/><rect x="292" y="220" width="48" height="42" rx="6"/><rect x="376" y="220" width="48" height="42" rx="6"/><rect x="460" y="220" width="48" height="42" rx="6"/><rect x="544" y="220" width="48" height="42" rx="6"/>
+</g>
+<path d="M145 384 H718" stroke="#d9aa66" stroke-width="7" opacity=".5"/>
+<path d="M160 433 H687" stroke="#d9aa66" stroke-width="6" opacity=".4"/>
+</g>
+<g opacity=".45" fill="#d9e7ef"><path d="M40 420 C170 350 240 350 340 420 C255 392 180 398 40 450Z"/><path d="M770 360 C900 305 1040 325 1190 430 C1010 350 920 350 770 395Z"/></g>
+</svg>
