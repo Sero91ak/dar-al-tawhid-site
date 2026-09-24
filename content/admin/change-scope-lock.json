@@ -5821,18 +5821,6 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
-    },
-    {
-      "id": "visitor-site-recovery-2026-09-24",
-      "approvedBy": "user-explicit-website-does-not-open",
-      "reason": "Nutzer meldet: Webseite öffnet sich nicht. Temporäre Freigabe ausschließlich zum Entsperren und erneuten Ausrollen der Besucher-App; keine Inhaltsänderung.",
-      "paths": [
-        "content/admin/change-scope-lock.json",
-        "content/admin/daily-content-rotation.json",
-        "service-worker.js"
-      ],
-      "expiresAt": "2026-09-25T23:59:00.000Z",
-      "stage": "live-recovery"
     }
   ],
   "enabled": true
