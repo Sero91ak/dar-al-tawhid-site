@@ -27,6 +27,16 @@ jobs:
         working-directory: apple-tv/quran/tadabbur
         run: node tools/find-missing-references.mjs
 
+      - name: Print Tadabbur missing-reference report
+        if: always()
+        working-directory: apple-tv/quran/tadabbur
+        run: |
+          if [ -f missing-references.report.json ]; then
+            cat missing-references.report.json
+          else
+            echo "missing-references.report.json was not created"
+          fi
+
       - name: Upload Tadabbur missing-reference report
         if: always()
         uses: actions/upload-artifact@v4
