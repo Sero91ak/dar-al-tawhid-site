@@ -45,7 +45,7 @@ struct ParentsView: View {
                                         .font(.headline)
                                         .foregroundStyle(KidsTheme.cream)
                                     Spacer()
-                                    Text("(appState.dailyMinutes) Min.")
+                                    Text("\(appState.dailyMinutes) Min.")
                                         .font(.headline)
                                         .foregroundStyle(KidsTheme.gold)
                                 }
