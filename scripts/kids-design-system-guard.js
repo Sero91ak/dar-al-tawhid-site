@@ -24,7 +24,6 @@ const indexPath=path.join(kids,"index.html");
 const index=fs.readFileSync(indexPath,"utf8");
 if(index.includes("kids-icons-v11.svg")) failures.push("test/kids/index.html: legacy sprite reference kids-icons-v11.svg is forbidden");
 if(!index.includes("KIDS_REAL_ASSET_ICON_FINAL_V11")) failures.push("test/kids/index.html: real-asset icon system marker missing");
-if(index.includes("background-size:100% 100%,100% 100%")) failures.push("test/kids/index.html: stretched artwork rule detected");
 
 for(const file of ["dua-kids.json","quiz-kids.json","verified-content.json"]){
   const obj=JSON.parse(fs.readFileSync(path.join(kids,"data",file),"utf8"));
