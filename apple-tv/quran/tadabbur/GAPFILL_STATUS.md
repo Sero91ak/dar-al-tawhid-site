@@ -28,15 +28,15 @@ verschoben. Die jeweils erste registrierte Referenz bleibt kanonisch. Dadurch ge
 Nach der Reparatur:
 
 ```text
-entriesCount: 4190
-totalVerifiedEntries: 4190
-loadedEntries: 4190
-uniqueVerifiedReferences: 4190
+entriesCount: 4197
+totalVerifiedEntries: 4197
+loadedEntries: 4197
+uniqueVerifiedReferences: 4197
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
-fehlende eindeutige Referenzen: 2046
-erster fehlender Vers: 1:1
+fehlende eindeutige Referenzen: 2039
+erster fehlender Vers: 2:1
 letzter fehlender Vers: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
@@ -56,8 +56,8 @@ Rechnung:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-eindeutige geprüfte Einträge: 4190
-fehlende eindeutige Einträge: 2046
+eindeutige geprüfte Einträge: 4197
+fehlende eindeutige Einträge: 2039
 ```
 
 ## Gap-Fill-Regel
@@ -180,3 +180,46 @@ Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor.
 - kein geprüfter Eintrag vorhanden → festen Fallback anzeigen
 
 Das ist vollständige technische Abdeckung ohne erfundene inhaltliche Abdeckung.
+
+
+## Gap-Fill 06-001 abgeschlossen
+
+Datei:
+
+```text
+entries-gap-06-001.json
+```
+
+Enthaltene geprüfte Referenzen:
+
+```text
+1:1
+1:2
+1:3
+1:4
+1:5
+1:6
+1:7
+```
+
+Quellenbasis:
+
+- Qurʾān 1:1: authentischer Bericht von ʿAbdullāh ibn ʿAbbās, Sunan Abī Dāwūd Nr. 788, zur Herabsendung der Basmala als Kennzeichen des Sūrah-Übergangs.
+- Qurʾān 1:2–1:7: authentischer Ḥadīṯ qudsī von Abū Hurayrah, Ṣaḥīḥ Muslim Nr. 395, mit direkter Zuordnung der Fātiḥah-Abschnitte.
+
+Audit nach Registrierung:
+
+```text
+catalogEntriesCount=4197
+indexTotalVerifiedEntries=4197
+loadedEntries=4197
+uniqueVerifiedReferences=4197
+missingCount=2039
+duplicateCount=0
+invalidCount=0
+countMismatchCount=0
+firstMissingReference=2:1
+lastMissingReference=19:98
+```
+
+Nächster Arbeitsbereich beginnt bei `2:1`. Auch dort gilt: keine Referenz wird registriert, bevor der konkrete Bericht und seine Einstufung geprüft sind.
