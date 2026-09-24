@@ -19,6 +19,7 @@
 		B1000000000000000000000A /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000000A /* LearnView.swift */; };
 		B1000000000000000000000B /* ParentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000000B /* ParentsView.swift */; };
 		B1000000000000000000000C /* StoryPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000000C /* StoryPlayerView.swift */; };
+		B1000000000000000000000F /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000000F /* QuizView.swift */; };
 		B1000000000000000000000D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000000E /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		F1000000000000000000000A /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
 		F1000000000000000000000B /* ParentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentsView.swift; sourceTree = "<group>"; };
 		F1000000000000000000000C /* StoryPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPlayerView.swift; sourceTree = "<group>"; };
+		F1000000000000000000000F /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		F1000000000000000000000D /* DarAlTawhidKids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarAlTawhidKids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1000000000000000000000E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,6 +116,7 @@
 				F1000000000000000000000A /* LearnView.swift */,
 				F1000000000000000000000B /* ParentsView.swift */,
 				F1000000000000000000000C /* StoryPlayerView.swift */,
+				F1000000000000000000000F /* QuizView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				B1000000000000000000000A /* LearnView.swift in Sources */,
 				B1000000000000000000000B /* ParentsView.swift in Sources */,
 				B1000000000000000000000C /* StoryPlayerView.swift in Sources */,
+				B1000000000000000000000F /* QuizView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
