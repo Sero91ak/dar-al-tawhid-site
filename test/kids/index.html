@@ -1357,6 +1357,9 @@ function startScribeAudioPipe(){
   var Ctx=window.AudioContext||window.webkitAudioContext;
   if(!Ctx)throw new Error("audio_context_unavailable");
   scribeContext=new Ctx();
+  if(scribeContext.state==="suspended"){
+    try{scribeContext.resume()}catch(e){}
+  }
   scribeSource=scribeContext.createMediaStreamSource(recitationStream);
   scribeProcessor=scribeContext.createScriptProcessor(4096,1,1);
   scribeMuteGain=scribeContext.createGain();
@@ -1384,11 +1387,26 @@ function bestWordFromText(text,target){
 function handleScribeText(text,isCommitted){
   if(!practiceActive||ayahPassed||!currentSurah)return;
   var expected=normalizedWords((currentSurah.verses[currentAyahIndex]||{}).ar||"");
-  var target=expected[currentPracticeWord]||"";
-  if(!target)return;
-  var best=bestWordFromText(text,target);
-  if(!best.word)return;
-  evaluateCurrentWord(best.word,best.score,!!isCommitted);
+  var heardWords=normalizedWords(text);
+  if(!heardWords.length)return;
+
+  if(!isCommitted){
+    var target=expected[currentPracticeWord]||"";
+    if(!target)return;
+    var best=bestWordFromText(text,target);
+    if(best.word)evaluateCurrentWord(best.word,best.score,false);
+    return;
+  }
+
+  for(var i=0;i<heardWords.length&&!ayahPassed;i++){
+    var targetNow=expected[currentPracticeWord]||"";
+    if(!targetNow)break;
+    var before=currentPracticeWord;
+    var heard=heardWords[i];
+    var score=similarity(heard,targetNow);
+    evaluateCurrentWord(heard,score,true);
+    if(currentPracticeWord===before)break;
+  }
 }
 async function fetchScribeToken(){
   var res=await fetch("https://dar-admin-publisher.sero91ak.workers.dev/api/kids/recitation/token",{
@@ -1420,7 +1438,7 @@ async function startWordRecognition(){
       vad_silence_threshold_secs:"0.45",
       min_speech_duration_ms:"120",
       min_silence_duration_ms:"220",
-      include_timestamps:"true"
+      filter_background_audio:"true"
     });
     var ws=new WebSocket("wss://api.elevenlabs.io/v1/speech-to-text/realtime?"+qs.toString());
     scribeSocket=ws;
@@ -1453,7 +1471,7 @@ async function startWordRecognition(){
         handleScribeText(String(msg.text||""),false);
         return;
       }
-      if(type==="committed_transcript"||type==="committed_transcript_with_timestamps"||type==="final_transcript_with_timestamps"){
+      if(type==="committed_transcript"){
         scribeCommittedText=String(msg.text||"");
         handleScribeText(scribeCommittedText,true);
         return;
