@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Wüstenbrunnen unter Sternenhimmel, ohne Menschen">
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#061225"/><stop offset=".62" stop-color="#173b5a"/><stop offset="1" stop-color="#b97745"/></linearGradient>
+<linearGradient id="sand" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c9965e"/><stop offset="1" stop-color="#6f4933"/></linearGradient>
+<radialGradient id="moon"><stop stop-color="#fff6c8"/><stop offset=".55" stop-color="#f1d98e"/><stop offset="1" stop-color="#f1d98e" stop-opacity="0"/></radialGradient>
+<linearGradient id="stone"><stop stop-color="#aa7952"/><stop offset="1" stop-color="#5f412f"/></linearGradient>
+</defs>
+<rect width="1200" height="900" fill="url(#sky)"/>
+<circle cx="895" cy="150" r="92" fill="url(#moon)"/>
+<g fill="#fff" opacity=".84"><circle cx="120" cy="130" r="2"/><circle cx="205" cy="93" r="1.5"/><circle cx="290" cy="145" r="2.2"/><circle cx="410" cy="110" r="1.5"/><circle cx="545" cy="73" r="2"/><circle cx="700" cy="120" r="1.6"/><circle cx="1030" cy="98" r="1.8"/><circle cx="1100" cy="170" r="1.4"/></g>
+<g stroke="#f5e4aa" stroke-width="3" opacity=".8"><path d="M515 115 h26 M528 102 v26"/><path d="M328 210 h20 M338 200 v20"/><path d="M1050 250 h22 M1061 239 v22"/></g>
+<path d="M0 560 C180 500 320 590 460 565 C650 530 790 520 930 560 C1040 590 1120 570 1200 550 V900 H0Z" fill="url(#sand)"/>
+<path d="M0 650 C170 610 290 680 430 655 C620 620 760 640 900 680 C1030 715 1110 690 1200 670" fill="none" stroke="#e5bd82" stroke-width="9" opacity=".26"/>
+<g transform="translate(405 420)">
+<ellipse cx="190" cy="285" rx="235" ry="52" fill="#2b201c" opacity=".42"/>
+<path d="M55 190 C95 120 285 120 325 190 L300 345 C250 385 125 385 80 345Z" fill="url(#stone)" stroke="#493226" stroke-width="10"/>
+<ellipse cx="190" cy="190" rx="137" ry="60" fill="#c09669" stroke="#493226" stroke-width="10"/>
+<ellipse cx="190" cy="193" rx="98" ry="38" fill="#07131e"/>
+<path d="M82 250 H298" stroke="#d3a06b" stroke-width="8" opacity=".45"/>
+<path d="M92 305 H290" stroke="#d3a06b" stroke-width="7" opacity=".35"/>
+</g>
+<g fill="#1b2a2c"><path d="M90 510 l80-135 78 135z"/><path d="M960 520 l65-110 64 110z"/></g>
+<path d="M86 516 C115 485 136 455 170 410 C205 462 225 486 250 516Z" fill="#1f3436"/>
+</svg>
