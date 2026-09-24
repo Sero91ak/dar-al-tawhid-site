@@ -153,7 +153,9 @@ async function fetchVersionBuild(base) {
       text.includes("DĀR AL TAWḤĪD KIDS") &&
       text.includes("id=\"view-today\"") &&
       text.includes("id=\"openQuizButton\"") &&
-      text.includes("id=\"quizModal\"");
+      text.includes("id=\"quizModal\"") &&
+      text.includes("id=\"dailyJourney\"") &&
+      text.includes("id=\"storyQuestion\"");
     console.log(
       `${label} kids: ${url} -> ${status} cf=${cf} marker=${ok}`
     );
