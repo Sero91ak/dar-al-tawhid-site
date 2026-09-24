@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 256">
+<defs>
+<linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff3bf"/><stop offset=".45" stop-color="#e8bd68"/><stop offset="1" stop-color="#a56b2b"/></linearGradient>
+<linearGradient id="t" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a9eee3"/><stop offset=".5" stop-color="#4ba99e"/><stop offset="1" stop-color="#255f68"/></linearGradient>
+<filter id="s" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#07131e" flood-opacity=".38"/></filter>
+<mask id="cres"><rect width="64" height="64" fill="#fff"/><circle cx="41" cy="23" r="20" fill="#000"/></mask>
+</defs>
+<!-- row 1: book, headphones, dua, star, spark -->
+<g transform="translate(0 0)" filter="url(#s)"><path d="M9 15c9-4 16-3 23 2v34c-7-5-14-6-23-2z" fill="#f8eed9" stroke="#d8b46b" stroke-width="2"/><path d="M55 15c-9-4-16-3-23 2v34c7-5 14-6 23-2z" fill="#fff8e9" stroke="#d8b46b" stroke-width="2"/><path d="M32 18v33" stroke="#b98a43" stroke-width="2"/><path d="M14 24h12M14 31h12M38 24h12M38 31h12" stroke="#907552" stroke-width="1.8" stroke-linecap="round"/></g>
+<g transform="translate(64 0)" filter="url(#s)"><path d="M14 34v-6c0-12 8-20 18-20s18 8 18 20v6" fill="none" stroke="url(#g)" stroke-width="7" stroke-linecap="round"/><rect x="8" y="29" width="13" height="22" rx="6.5" fill="url(#t)" stroke="#c5f2ea" stroke-width="2"/><rect x="43" y="29" width="13" height="22" rx="6.5" fill="url(#t)" stroke="#c5f2ea" stroke-width="2"/></g>
+<g transform="translate(128 0)" filter="url(#s)"><path d="M11 39c4-10 8-17 12-16 4 1 1 10 1 13 2-6 4-15 8-14 4 1 1 10 1 14 2-5 5-13 9-11 3 2-1 10-1 13 3-4 7-10 10-7 4 4-6 18-17 22-8 3-18-2-23-14z" fill="url(#g)" stroke="#fff0b7" stroke-width="1.6"/></g>
+<g transform="translate(192 0)" filter="url(#s)"><path d="m32 6 7.2 15.5L56 24l-12 11.8L47 53 32 44.8 17 53l3-17.2L8 24l16.8-2.5z" fill="url(#g)" stroke="#fff0b7" stroke-width="2"/></g>
+<g transform="translate(256 0)" filter="url(#s)"><path d="M32 6c2 13 7 18 20 20-13 2-18 7-20 20-2-13-7-18-20-20 13-2 18-7 20-20z" fill="url(#g)"/><circle cx="49" cy="13" r="4" fill="#a9eee3"/><circle cx="14" cy="49" r="3" fill="#a9eee3"/></g>
+<!-- row 2: play, mic, volume, lock, menu -->
+<g transform="translate(0 64)" filter="url(#s)"><circle cx="32" cy="32" r="25" fill="url(#t)" stroke="#c7f4ec" stroke-width="2"/><path d="m27 21 17 11-17 11z" fill="#fff2c5"/></g>
+<g transform="translate(64 64)" filter="url(#s)"><rect x="23" y="8" width="18" height="31" rx="9" fill="url(#g)" stroke="#fff0b7" stroke-width="2"/><path d="M17 30v3c0 9 6 15 15 15s15-6 15-15v-3M32 48v8M24 56h16" fill="none" stroke="#a9eee3" stroke-width="3.2" stroke-linecap="round"/></g>
+<g transform="translate(128 64)" filter="url(#s)"><path d="M10 26h11l12-10v32L21 38H10z" fill="url(#g)" stroke="#fff0b7" stroke-width="1.5"/><path d="M39 24c5 5 5 11 0 16M45 18c9 8 9 20 0 28" fill="none" stroke="#9de5da" stroke-width="3.2" stroke-linecap="round"/></g>
+<g transform="translate(192 64)" filter="url(#s)"><rect x="14" y="28" width="36" height="28" rx="8" fill="url(#t)" stroke="#c2f1ea" stroke-width="2"/><path d="M22 29v-8c0-7 4-12 10-12s10 5 10 12v8" fill="none" stroke="url(#g)" stroke-width="5" stroke-linecap="round"/><circle cx="32" cy="41" r="4" fill="#fff1bf"/></g>
+<g transform="translate(256 64)" filter="url(#s)"><rect x="10" y="10" width="44" height="44" rx="14" fill="url(#t)"/><path d="M20 23h24M20 32h24M20 41h24" stroke="#fff0bd" stroke-width="4" stroke-linecap="round"/></g>
+<!-- row 3: moon, lantern, heart, library, droplet -->
+<g transform="translate(0 128)" filter="url(#s)"><circle cx="28" cy="32" r="23" fill="url(#g)" mask="url(#cres)"/><circle cx="49" cy="14" r="2.5" fill="#c6f4ec"/></g>
+<g transform="translate(64 128)" filter="url(#s)"><path d="M25 8h14M28 13h8M22 19h20l-3 28H25z" fill="url(#g)" stroke="#fff0b7" stroke-width="2"/><rect x="27" y="24" width="10" height="17" rx="5" fill="#fff0a8"/><path d="M24 48h16M28 53h8" stroke="#8c5e2a" stroke-width="3" stroke-linecap="round"/></g>
+<g transform="translate(128 128)" filter="url(#s)"><path d="M32 53S9 41 9 24c0-8 6-14 14-14 5 0 8 3 9 7 2-4 5-7 10-7 8 0 13 6 13 14 0 17-23 29-23 29z" fill="#d96d76" stroke="#ffd0c8" stroke-width="2"/></g>
+<g transform="translate(192 128)" filter="url(#s)"><rect x="10" y="36" width="44" height="10" rx="4" fill="url(#t)" stroke="#b8eee5" stroke-width="1.5"/><rect x="14" y="25" width="39" height="10" rx="4" fill="url(#g)" stroke="#fff0b7" stroke-width="1.5"/><rect x="19" y="14" width="34" height="10" rx="4" fill="#8f78b7" stroke="#d7c7f1" stroke-width="1.5"/></g>
+<g transform="translate(256 128)" filter="url(#s)"><path d="M32 7S14 27 14 39c0 10 8 18 18 18s18-8 18-18C50 27 32 7 32 7z" fill="#64bde0" stroke="#b9eaff" stroke-width="2"/><path d="M23 38c1 6 5 9 10 10" fill="none" stroke="#eefcff" stroke-width="3" stroke-linecap="round"/></g>
+<!-- row 4: cloud, sun, settings, hourglass, shield -->
+<g transform="translate(0 192)" filter="url(#s)"><path d="M18 47c-7 0-12-5-12-11s5-11 11-11c2-9 9-15 18-15 10 0 18 7 19 17 5 1 9 5 9 10 0 6-5 10-11 10z" fill="#d7e9f4" stroke="#f3fbff" stroke-width="2"/></g>
+<g transform="translate(64 192)" filter="url(#s)"><circle cx="32" cy="32" r="13" fill="url(#g)" stroke="#fff2ba" stroke-width="2"/><path d="M32 5v8M32 51v8M5 32h8M51 32h8M13 13l6 6M45 45l6 6M51 13l-6 6M19 45l-6 6" stroke="#efc269" stroke-width="3" stroke-linecap="round"/></g>
+<g transform="translate(128 192)" filter="url(#s)"><path d="M32 8l5 3 6-1 4 5-1 6 5 4v7l-5 4 1 6-4 5-6-1-5 3-5-3-6 1-4-5 1-6-5-4v-7l5-4-1-6 4-5 6 1z" fill="url(#t)" stroke="#bcefe7" stroke-width="2"/><circle cx="32" cy="28" r="8" fill="#fff0b6" stroke="#b68842" stroke-width="2"/></g>
+<g transform="translate(192 192)" filter="url(#s)"><path d="M20 9h24M20 55h24M23 11c0 10 3 15 9 21-6 6-9 11-9 21M41 11c0 10-3 15-9 21 6 6 9 11 9 21" fill="none" stroke="url(#g)" stroke-width="4" stroke-linecap="round"/><path d="M27 22h10l-5 7zM27 43h10l-5-7z" fill="#77cfc2"/></g>
+<g transform="translate(256 192)" filter="url(#s)"><path d="M32 6 51 13v15c0 13-8 23-19 30C21 51 13 41 13 28V13z" fill="url(#t)" stroke="#c0f1e8" stroke-width="2"/><path d="m22 32 7 7 14-16" fill="none" stroke="#fff0b6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+</svg>
