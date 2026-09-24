@@ -108,6 +108,10 @@ Der Report enthält:
 7. erneut Audit laufen lassen.
 8. keine Duplikate, keine ungültigen Referenzen, keine Count-Mismatches zulassen.
 
+## Auditlauf 24.09.2026
+
+Der Gap-Fill-Lauf wurde zur vollständigen Prüfung des aktuellen Branchstands erneut angestoßen. Maßgeblich ist ausschließlich der erzeugte `missing-references.report.json`; vor dessen Auswertung werden keine Gap-Fill-Referenzen geraten oder manuell fortgeschrieben.
+
 ## Strenge Regel
 
 Fehlende Verse dürfen nicht durch frei erzeugten religiösen Text gefüllt werden.
