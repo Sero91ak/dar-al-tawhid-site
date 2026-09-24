@@ -256,6 +256,28 @@ function validateKidsDuaCanonicalLocal() {
   await verifyKidsPage("public", publicBase);
   await verifyKidsPage("workers.dev", workersBase);
 
+  async function verifyKidsVerifiedPools(label, base) {
+    const checks = [
+      { path: "/kids/data/dua-kids.json", key: "items", min: 4 },
+      { path: "/kids/data/verified-content.json", key: "hadithLessons", min: 1 },
+      { path: "/kids/data/stories-authentic.json", key: "items", min: 1 },
+      { path: "/kids/data/quiz-kids.json", key: "items", min: 1 }
+    ];
+    for (const check of checks) {
+      const url = `${base}${check.path}?v=${Date.now()}`;
+      const { status, text, cf } = await fetchText(url);
+      let payload = {};
+      try { payload = JSON.parse(text); } catch {}
+      const list = Array.isArray(payload[check.key]) ? payload[check.key] : [];
+      const ok = status === 200 && list.length >= check.min;
+      console.log(`${label} verified pool: ${url} -> ${status} cf=${cf} items=${list.length} ok=${ok}`);
+      if (!ok) throw new Error(`${label} geprüfter Kinder-Pool fehlt/leer: ${url}`);
+    }
+  }
+
+  await verifyKidsVerifiedPools("public", publicBase);
+  await verifyKidsVerifiedPools("workers.dev", workersBase);
+
   async function verifyKidsRecitationApi(label, base) {
     const url = `${base}/kids/api/recitation/health?v=${Date.now()}`;
     const { status, text, cf } = await fetchText(url);
