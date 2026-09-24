@@ -181,6 +181,54 @@ export default {
         }, cors);
       }
 
+      // DĀR AL TAWḤĪD KIDS — kurzlebiger Realtime-Scribe-Token.
+      // Kein API-Key im Browser; Token ist single-use und läuft nach ca. 15 Minuten ab.
+      if (url.pathname === "/api/kids/recitation/token" && request.method === "POST") {
+        const allowedOrigin = String(env.ALLOWED_ORIGIN || DEFAULT_ALLOWED_ORIGIN).replace(/\/$/, "");
+        const origin = String(request.headers.get("Origin") || "").replace(/\/$/, "");
+        if (origin !== allowedOrigin) {
+          return json({ ok: false, error: "origin_not_allowed" }, cors, 403);
+        }
+
+        const key = String(env.ELEVENLABS_API_KEY || "").trim();
+        if (!key) {
+          return json({ ok: false, error: "speech_service_not_configured" }, cors, 503);
+        }
+
+        const upstream = await fetch("https://api.elevenlabs.io/v1/single-use-token/realtime_scribe", {
+          method: "POST",
+          headers: {
+            "xi-api-key": key,
+            "Accept": "application/json"
+          }
+        });
+
+        const raw = await upstream.text();
+        let payload = {};
+        try { payload = JSON.parse(raw || "{}"); } catch {}
+        const token = String(payload?.token || "").trim();
+
+        if (!upstream.ok || !token) {
+          return json({
+            ok: false,
+            error: "speech_token_failed",
+            upstreamStatus: upstream.status
+          }, cors, 502);
+        }
+
+        const headers = new Headers(cors);
+        headers.set("Cache-Control", "no-store, max-age=0");
+        return new Response(JSON.stringify({
+          ok: true,
+          token,
+          expiresInSeconds: 900,
+          provider: "scribe_v2_realtime"
+        }), {
+          status: 200,
+          headers: { ...Object.fromEntries(headers), "Content-Type": "application/json; charset=utf-8" }
+        });
+      }
+
       // DAR KI-Video-Studio (Admin only; approve = no visitor push)
       if (url.pathname.startsWith("/api/admin/video-studio")) {
         assertConfigured(env);
