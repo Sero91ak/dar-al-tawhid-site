@@ -1,0 +1,35 @@
+name: Qur'an Tadabbur Audit
+
+on:
+  push:
+    paths:
+      - 'apple-tv/quran/tadabbur/**'
+      - '.github/workflows/quran-tadabbur-audit.yml'
+  pull_request:
+    paths:
+      - 'apple-tv/quran/tadabbur/**'
+      - '.github/workflows/quran-tadabbur-audit.yml'
+  workflow_dispatch:
+
+jobs:
+  tadabbur-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run Tadabbur missing-reference audit
+        working-directory: apple-tv/quran/tadabbur
+        run: node tools/find-missing-references.mjs
+
+      - name: Upload Tadabbur missing-reference report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quran-tadabbur-missing-references-report
+          path: apple-tv/quran/tadabbur/missing-references.report.json
