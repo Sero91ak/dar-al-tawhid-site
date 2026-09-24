@@ -33,7 +33,13 @@
             "correct": false
           }
         ]
-      }
+      },
+      "quranRefs": [
+        {
+          "surah": 20,
+          "ayah": 114
+        }
+      ]
     },
     {
       "id": "dua-parents",
@@ -62,7 +68,13 @@
             "correct": false
           }
         ]
-      }
+      },
+      "quranRefs": [
+        {
+          "surah": 14,
+          "ayah": 41
+        }
+      ]
     },
     {
       "id": "dua-protection",
@@ -88,6 +100,51 @@
           },
           {
             "label": "Bei Glücksbringern",
+            "correct": false
+          }
+        ]
+      },
+      "quranRefs": [
+        {
+          "surah": 23,
+          "ayah": 97
+        },
+        {
+          "surah": 23,
+          "ayah": 98
+        }
+      ]
+    },
+    {
+      "id": "dua-arrival",
+      "ageMin": 4,
+      "ageMax": 10,
+      "type": "quran",
+      "scene": "home",
+      "symbol": "🏠",
+      "title": "Gesegnet ankommen",
+      "childPrompt": "Bitte Allah um eine gute und gesegnete Ankunft.",
+      "arabic": "رَّبِّ أَنزِلْنِي مُنزَلًا مُّبَارَكًا وَأَنتَ خَيْرُ الْمُنزِلِينَ",
+      "transliteration": "Rabbi anzilnī munzalan mubārakan wa anta khayru-l-munzilīn.",
+      "meaning": "Mein Herr, lass mich an einem gesegneten Ort ankommen, und Du bist der beste derer, die ankommen lassen.",
+      "source": "Qurʾān, al-Muʾminūn 23:29",
+      "canonicalId": "dua-052-rabbi-anzilni-munzalan-mubarakan",
+      "verification": "verified",
+      "quranRefs": [
+        {
+          "surah": 23,
+          "ayah": 29
+        }
+      ],
+      "quiz": {
+        "question": "Worum bitten wir Allah in diesem Duʿāʾ?",
+        "answers": [
+          {
+            "label": "Um eine gesegnete Ankunft",
+            "correct": true
+          },
+          {
+            "label": "Darum, immer zuerst zu sein",
             "correct": false
           }
         ]
