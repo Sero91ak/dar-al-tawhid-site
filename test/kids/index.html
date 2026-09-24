@@ -2311,15 +2311,6 @@ function renderQuizProgress(){
     return '<span class="'+cls+'"></span>';
   }).join("");
 }
-function openQuiz(){
-  currentQuiz=quizBankForAge();
-  currentQuizIndex=0;
-  quizCorrectCount=0;
-  quizLocked=false;
-  document.getElementById("quizModal").classList.add("open");
-  document.getElementById("quizAgeLabel").textContent=age==="4–5"?"4–5 Jahre · nur hören & tippen":(age==="6–8"?"6–8 Jahre · hören & auswählen":"9–10 Jahre · hören & nachdenken");
-  renderQuizQuestion();
-}
 function renderQuizQuestion(){
   if(currentQuizIndex>=currentQuiz.length){renderQuizFinish();return}
   var q=currentQuiz[currentQuizIndex];
