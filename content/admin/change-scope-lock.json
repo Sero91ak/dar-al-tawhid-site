@@ -108,6 +108,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "all-apps-top-no-glass-cache-bust-v1006-2026-09-24",
+      "approvedBy": "user-explicit-still-no-change-no-update-popup-2026-09-24",
+      "reason": "Nutzer: Effekt ist weiterhin sichtbar und kein Aktualisierungs-Popup erscheint. Build-ID erhöhen und geänderte No-Blur-CSS-Dateien mit neuen Asset-Versionen erzwingen, damit iOS/PWA/Test die Änderung wirklich laden.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "all-apps-top-no-glass-2026-09-24",
       "approvedBy": "user-explicit-all-apps-top-blur-weg-2026-09-24",
       "reason": "Nutzer: milchigen/Blur-/Glass-Effekt oben in DĀR AL TAWḤĪD Kids, aktueller iOS-App, Test-App und allen App-Shells vollständig entfernen; obere Safe-Area/Statusbar muss solid und app-native wirken. Untere Tab-Bar bleibt unverändert.",
