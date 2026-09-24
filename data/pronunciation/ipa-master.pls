@@ -14879,4 +14879,36 @@
     <grapheme>لا إله إلا الله</grapheme>
     <phoneme>/laː ʔilaːha ʔilˈlaː lˈlaːh/</phoneme>
   </lexeme>
+  <lexeme>
+    <grapheme>Ṣaḥābah</grapheme>
+    <phoneme>/sˤaˈħaːba/</phoneme>
+  </lexeme>
+  <lexeme>
+    <grapheme>Sahabah</grapheme>
+    <phoneme>/sˤaˈħaːba/</phoneme>
+  </lexeme>
+  <lexeme>
+    <grapheme>ṣaḥābah</grapheme>
+    <phoneme>/sˤaˈħaːba/</phoneme>
+  </lexeme>
+  <lexeme>
+    <grapheme>sahabah</grapheme>
+    <phoneme>/sˤaˈħaːba/</phoneme>
+  </lexeme>
+  <lexeme>
+    <grapheme>Ṣaḥāba</grapheme>
+    <phoneme>/sˤaˈħaːba/</phoneme>
+  </lexeme>
+  <lexeme>
+    <grapheme>Sahaba</grapheme>
+    <phoneme>/sˤaˈħaːba/</phoneme>
+  </lexeme>
+  <lexeme>
+    <grapheme>ṣaḥāba</grapheme>
+    <phoneme>/sˤaˈħaːba/</phoneme>
+  </lexeme>
+  <lexeme>
+    <grapheme>sahaba</grapheme>
+    <phoneme>/sˤaˈħaːba/</phoneme>
+  </lexeme>
 </lexicon>
