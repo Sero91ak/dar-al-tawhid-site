@@ -276,13 +276,31 @@ input[type=range]{width:100%;accent-color:var(--gold)}
 .learn-status.error{background:rgba(225,75,75,.15);color:#ffc5c5;border-color:rgba(238,91,91,.34);animation:errorPulse .6s ease-in-out 2}
 .learn-status.success{background:rgba(82,196,132,.15);color:#cbffe1;border-color:rgba(82,196,132,.30)}
 @keyframes errorPulse{50%{transform:scale(1.025);box-shadow:0 0 0 7px rgba(229,70,70,.08)}}
-.ayah-ar{font-family:"Geeza Pro","Noto Naskh Arabic","Traditional Arabic",serif;font-size:clamp(33px,9vw,52px);line-height:1.72;direction:rtl;margin:0 auto;color:#fff;max-width:620px;text-shadow:0 3px 18px rgba(0,0,0,.18)}
-.qword{display:inline-block;padding:.02em .04em;border-radius:.18em;transition:color .16s ease,background .16s ease,transform .16s ease}
+.ayah-stage{overflow-y:auto;-webkit-overflow-scrolling:touch}
+.ayah-ar{font-family:"Geeza Pro","Noto Naskh Arabic","Traditional Arabic",serif;font-size:clamp(42px,11vw,68px);line-height:1.88;direction:rtl;margin:0 auto;color:#fff;max-width:650px;text-shadow:0 3px 18px rgba(0,0,0,.18);word-spacing:.16em}
+.ayah-ar.long{font-size:clamp(30px,7.6vw,46px);line-height:1.78;word-spacing:.10em}
+.qword{display:inline-block;padding:.03em .06em;border-radius:.18em;transition:color .16s ease,background .16s ease,transform .16s ease}
 .qword.correct{color:#bff4d1;background:rgba(67,190,116,.09)}
 .qword.current{color:#ffe09a;background:rgba(226,189,114,.10);transform:scale(1.03)}
 .qword.wrong{color:#ffb0b0;background:rgba(225,70,70,.16);text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.13em}
 .qword.pending{color:#fff}
+.qletter{display:inline-block;transition:color .12s ease,background .12s ease,transform .12s ease}
+.qletter.ok{color:#bff4d1}
+.qletter.live{color:#ffe09a;background:rgba(226,189,114,.13);border-radius:.12em;transform:scale(1.08)}
+.qletter.bad{color:#ff9b9b;background:rgba(225,70,70,.18);border-radius:.12em;text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.12em}
+.qletter.wait{color:#fff}
 .mic-live{box-shadow:0 0 0 0 rgba(115,201,193,.34);animation:micRing 1.4s ease-out infinite}
+.mic-monitor{margin:13px auto 0;max-width:520px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.045);border-radius:19px;padding:11px 12px}
+.mic-top{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:10px;font-weight:850;color:var(--soft)}
+.mic-state{display:flex;align-items:center;gap:7px}
+.mic-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.28)}
+.mic-monitor.live .mic-dot{background:#54cf8a;box-shadow:0 0 0 0 rgba(84,207,138,.36);animation:micDot 1.1s ease-out infinite}
+.mic-monitor.error .mic-dot{background:#ef6464}
+@keyframes micDot{70%{box-shadow:0 0 0 8px rgba(84,207,138,0)}100%{box-shadow:0 0 0 0 rgba(84,207,138,0)}}
+.mic-meter{height:7px;margin-top:9px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.08)}
+.mic-level{height:100%;width:3%;border-radius:999px;background:linear-gradient(90deg,#5bc78b,#9de3b9,#e6c678);transition:width .06s linear}
+.recording-playback{display:none;width:100%;margin-top:9px;border:1px solid rgba(115,201,193,.22);background:rgba(115,201,193,.09);color:#c9fff3;border-radius:14px;padding:10px;font-size:11px;font-weight:850;cursor:pointer}
+.recording-playback.show{display:block}
 @keyframes micRing{70%{box-shadow:0 0 0 9px rgba(115,201,193,0)}100%{box-shadow:0 0 0 0 rgba(115,201,193,0)}}
 .ayah-tr{font-size:14px;line-height:1.5;color:#d8e8ed;margin:17px auto 0;max-width:560px;font-weight:700}
 .ayah-de{font-size:12px;line-height:1.5;color:var(--muted);margin:10px auto 0;max-width:540px}
@@ -536,6 +554,14 @@ input[type=range]{width:100%;accent-color:var(--gold)}
           <div id="ayahBox" class="ayah-box">
             <div id="learnStatus" class="learn-status">🎧 Erst hören</div>
             <div id="ayahAr" class="ayah-ar"><span class="loader">Qurʾān wird geladen …</span></div>
+            <div id="micMonitor" class="mic-monitor">
+              <div class="mic-top">
+                <div class="mic-state"><span class="mic-dot"></span><span id="micStateText">Mikrofon bereit</span></div>
+                <span id="micClock">00:00</span>
+              </div>
+              <div class="mic-meter"><div id="micLevel" class="mic-level"></div></div>
+              <button id="recordingPlayback" class="recording-playback">▶ Meine Aufnahme anhören</button>
+            </div>
             <div id="ayahTr" class="ayah-tr"></div>
             <div id="ayahDe" class="ayah-de"></div>
             <div id="ayahNo" class="ayah-no"></div>
@@ -548,7 +574,7 @@ input[type=range]{width:100%;accent-color:var(--gold)}
             <button id="speakAlong">🎙 Jetzt mitsprechen</button>
             <button id="nextAyah">Weiter ›</button>
           </div>
-          <div class="quran-mini-note">„Mitsprechen“ öffnet das Mikrofon. Richtige Wörter werden grün. Bei einer deutlichen Abweichung stoppt die Übung und du kannst die Āyah sofort noch einmal versuchen.</div>
+          <div class="quran-mini-note">Die App nimmt deinen Versuch auf und verfolgt die Āyah Wort für Wort. Grün = erkannt, Gold = gerade gesprochen, Rot = hier noch einmal. Danach kannst du deine eigene Aufnahme anhören.</div>
         </div>
       </div>
     </div>
@@ -575,6 +601,7 @@ input[type=range]{width:100%;accent-color:var(--gold)}
 </div>
 
 <audio id="quranAudio" preload="none" playsinline></audio>
+<audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
 (function(){
@@ -626,6 +653,15 @@ var recitationMatched=0;
 var recitationWrong=-1;
 var recitationTranscript="";
 var recitationPermissionReady=false;
+var recitationStream=null;
+var mediaRecorder=null;
+var recordingChunks=[];
+var recordingUrl="";
+var recordingStartedAt=0;
+var recordingClockTimer=0;
+var audioContext=null;
+var analyser=null;
+var meterRaf=0;
 var speech=window.speechSynthesis;
 var speaking=false;
 var currentStoryKey="coin";
@@ -832,16 +868,60 @@ function trimOptionalPrelude(words,expected){
   });
   return out;
 }
-function renderAyahWords(matched,wrong,current){
+function arabicGraphemes(raw){
+  var chars=Array.from(String(raw||""));
+  var groups=[];
+  chars.forEach(function(ch){
+    if(/[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED]/.test(ch)&&groups.length){
+      groups[groups.length-1]+=ch;
+    }else{
+      groups.push(ch);
+    }
+  });
+  return groups;
+}
+function normalizedGrapheme(g){
+  return stripArabicMarks(g).replace(/\s/g,"");
+}
+function renderWordLetters(rawWord,heardWord,mode){
+  var groups=arabicGraphemes(rawWord);
+  var heard=Array.from(String(heardWord||""));
+  var expectedNormalized=groups.map(normalizedGrapheme).filter(Boolean);
+  var heardNormalized=Array.from(stripArabicMarks(heard.join("")));
+  var matchCount=0;
+  while(matchCount<expectedNormalized.length&&matchCount<heardNormalized.length&&expectedNormalized[matchCount]===heardNormalized[matchCount])matchCount++;
+  var badIndex=(mode==="wrong"&&heardNormalized.length>matchCount)?matchCount:-1;
+  var seenLetters=0;
+  return groups.map(function(g){
+    var n=normalizedGrapheme(g);
+    if(!n)return escapeHtml(g);
+    var cls="wait";
+    if(seenLetters<matchCount)cls="ok";
+    else if(seenLetters===badIndex)cls="bad";
+    else if(mode==="current"&&seenLetters===matchCount)cls="live";
+    else if(mode==="wrong"&&seenLetters===matchCount)cls="bad";
+    seenLetters++;
+    return '<span class="qletter '+cls+'">'+escapeHtml(g)+'</span>';
+  }).join("");
+}
+function renderAyahWords(matched,wrong,current,heardCurrent){
   var words=rawAyahWords();
   var html=words.map(function(w,i){
     var cls="pending";
+    var inside=escapeHtml(w);
     if(i<matched)cls="correct";
-    else if(i===wrong)cls="wrong";
-    else if(i===current)cls="current";
-    return '<span class="qword '+cls+'">'+escapeHtml(w)+'</span>';
+    else if(i===wrong){
+      cls="wrong";
+      inside=renderWordLetters(w,heardCurrent||"","wrong");
+    }else if(i===current){
+      cls="current";
+      inside=renderWordLetters(w,heardCurrent||"","current");
+    }
+    return '<span class="qword '+cls+'">'+inside+'</span>';
   }).join(" ");
-  document.getElementById("ayahAr").innerHTML=html||"";
+  var ar=document.getElementById("ayahAr");
+  ar.classList.toggle("long",words.length>14);
+  ar.innerHTML=html||"";
 }
 function updateLearnStatus(text,you,type){
   var el=document.getElementById("learnStatus");
@@ -849,6 +929,91 @@ function updateLearnStatus(text,you,type){
   el.classList.toggle("you",!!you);
   el.classList.toggle("error",type==="error");
   el.classList.toggle("success",type==="success");
+}
+function stopMeter(){
+  if(meterRaf)cancelAnimationFrame(meterRaf);
+  meterRaf=0;
+  document.getElementById("micLevel").style.width="3%";
+}
+function stopRecordingCapture(){
+  clearInterval(recordingClockTimer);
+  recordingClockTimer=0;
+  stopMeter();
+  if(mediaRecorder&&mediaRecorder.state!=="inactive"){
+    try{mediaRecorder.stop()}catch(e){}
+  }
+  mediaRecorder=null;
+  var monitor=document.getElementById("micMonitor");
+  monitor.classList.remove("live");
+  document.getElementById("micStateText").textContent="Aufnahme beendet";
+}
+function releaseMicStream(){
+  stopRecordingCapture();
+  if(recitationStream){
+    recitationStream.getTracks().forEach(function(t){try{t.stop()}catch(e){}});
+  }
+  recitationStream=null;
+  if(audioContext){try{audioContext.close()}catch(e2){}}
+  audioContext=null;analyser=null;
+}
+function startMeter(stream){
+  try{
+    var Ctx=window.AudioContext||window.webkitAudioContext;
+    if(!Ctx)return;
+    audioContext=new Ctx();
+    var src=audioContext.createMediaStreamSource(stream);
+    analyser=audioContext.createAnalyser();
+    analyser.fftSize=256;
+    src.connect(analyser);
+    var data=new Uint8Array(analyser.frequencyBinCount);
+    function draw(){
+      if(!analyser)return;
+      analyser.getByteFrequencyData(data);
+      var sum=0;
+      for(var i=0;i<data.length;i++)sum+=data[i];
+      var avg=sum/Math.max(1,data.length);
+      var pct=Math.max(3,Math.min(100,(avg/90)*100));
+      document.getElementById("micLevel").style.width=pct.toFixed(1)+"%";
+      meterRaf=requestAnimationFrame(draw);
+    }
+    draw();
+  }catch(e){}
+}
+function startRecordingCapture(){
+  recordingChunks=[];
+  var play=document.getElementById("recordingPlayback");
+  play.classList.remove("show");
+  if(recordingUrl){try{URL.revokeObjectURL(recordingUrl)}catch(e){} recordingUrl=""}
+  if(!recitationStream||!window.MediaRecorder)return;
+  try{
+    var opts={};
+    if(MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported("audio/webm;codecs=opus"))opts.mimeType="audio/webm;codecs=opus";
+    mediaRecorder=new MediaRecorder(recitationStream,opts);
+    mediaRecorder.ondataavailable=function(e){if(e.data&&e.data.size)recordingChunks.push(e.data)};
+    mediaRecorder.onstop=function(){
+      if(!recordingChunks.length)return;
+      var blob=new Blob(recordingChunks,{type:mediaRecorder&&mediaRecorder.mimeType?mediaRecorder.mimeType:"audio/webm"});
+      recordingUrl=URL.createObjectURL(blob);
+      var audio=document.getElementById("recitationPlaybackAudio");
+      audio.src=recordingUrl;
+      play.classList.add("show");
+      play.textContent="▶ Meine Aufnahme anhören";
+    };
+    mediaRecorder.start(200);
+    recordingStartedAt=Date.now();
+    document.getElementById("micClock").textContent="00:00";
+    recordingClockTimer=setInterval(function(){
+      var sec=Math.floor((Date.now()-recordingStartedAt)/1000);
+      var mm=String(Math.floor(sec/60)).padStart(2,"0");
+      var ss=String(sec%60).padStart(2,"0");
+      document.getElementById("micClock").textContent=mm+":"+ss;
+    },250);
+    var monitor=document.getElementById("micMonitor");
+    monitor.classList.add("live");
+    monitor.classList.remove("error");
+    document.getElementById("micStateText").textContent="Aufnahme läuft";
+    startMeter(recitationStream);
+  }catch(e){}
 }
 function stopRecitationRecognition(){
   recitationListening=false;
@@ -858,18 +1023,29 @@ function stopRecitationRecognition(){
     try{recitationRecognition.abort()}catch(e2){}
   }
   recitationRecognition=null;
+  stopRecordingCapture();
   var btn=document.getElementById("speakAlong");
   if(btn)btn.classList.remove("mic-live");
 }
 function ensureMicrophonePermission(){
-  if(recitationPermissionReady)return Promise.resolve(true);
+  if(recitationStream&&recitationStream.active)return Promise.resolve(true);
   if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return Promise.resolve(true);
-  return navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
-    stream.getTracks().forEach(function(t){t.stop()});
+  return navigator.mediaDevices.getUserMedia({
+    audio:{
+      echoCancellation:true,
+      noiseSuppression:true,
+      autoGainControl:true,
+      channelCount:1
+    }
+  }).then(function(stream){
+    recitationStream=stream;
     recitationPermissionReady=true;
+    document.getElementById("micStateText").textContent="Mikrofon bereit";
     return true;
   }).catch(function(){
     updateLearnStatus("🎙 Mikrofon nicht freigegeben",false,"error");
+    document.getElementById("micMonitor").classList.add("error");
+    document.getElementById("micStateText").textContent="Mikrofon gesperrt";
     return false;
   });
 }
@@ -886,17 +1062,21 @@ function gradeRecitation(transcript,isFinal){
   var heard=trimOptionalPrelude(normalizedWords(transcript),expected);
   var matched=0;
   var wrong=-1;
+  var heardCurrent="";
   for(var i=0;i<heard.length&&matched<expected.length;i++){
     if(tokenMatches(heard[i],expected[matched])){
       matched++;
     }else{
       wrong=matched;
+      heardCurrent=heard[i]||"";
       break;
     }
   }
+  if(wrong<0&&heard.length>matched)heardCurrent=heard[matched]||"";
+  if(wrong<0&&heard.length===matched&&matched<expected.length)heardCurrent=heard.length?heard[heard.length-1]:"";
   recitationMatched=matched;
   recitationWrong=wrong;
-  renderAyahWords(matched,wrong,wrong<0?matched:-1);
+  renderAyahWords(matched,wrong,wrong<0?matched:-1,heardCurrent);
 
   if(expected.length&&matched>=expected.length){
     recitationState="success";
@@ -952,7 +1132,8 @@ function startRecitationRecognition(){
 
   recognition.onstart=function(){
     recitationListening=true;
-    updateLearnStatus("🎙 Ich höre zu — sprich die Āyah",true);
+    startRecordingCapture();
+    updateLearnStatus("🎙 Ich höre zu — sprich Wort für Wort",true);
     var btn=document.getElementById("speakAlong");
     btn.textContent="■ Mikrofon stoppen";
     btn.classList.add("active","mic-live");
@@ -966,6 +1147,8 @@ function startRecitationRecognition(){
     if(event&&event.error==="aborted")return;
     recitationState="error";
     stopRecitationRecognition();
+    document.getElementById("micMonitor").classList.add("error");
+    document.getElementById("micStateText").textContent="Versuch nicht erkannt";
     updateLearnStatus(event&&event.error==="not-allowed"?"🎙 Mikrofon nicht freigegeben":"Sprache nicht sicher erkannt — noch einmal",false,"error");
     document.getElementById("speakAlong").textContent="↻ Noch einmal";
   };
@@ -984,6 +1167,7 @@ function startRecitationRecognition(){
   };
   try{recognition.start()}catch(e){
     recitationState="error";
+    stopRecordingCapture();
     updateLearnStatus("Mikrofon konnte nicht gestartet werden",false,"error");
     document.getElementById("speakAlong").textContent="↻ Noch einmal";
   }
@@ -1005,6 +1189,21 @@ function playCurrent(after){
     else updateLearnStatus(quranMode==="learn"?"🎙 Jetzt du":"✓ Geh weiter, wenn du bereit bist",quranMode==="learn");
   };
 }
+document.getElementById("recordingPlayback").addEventListener("click",function(){
+  var audio=document.getElementById("recitationPlaybackAudio");
+  if(!recordingUrl)return;
+  if(audio.paused){
+    audio.play();
+    this.textContent="■ Aufnahme stoppen";
+  }else{
+    audio.pause();
+    audio.currentTime=0;
+    this.textContent="▶ Meine Aufnahme anhören";
+  }
+});
+document.getElementById("recitationPlaybackAudio").addEventListener("ended",function(){
+  document.getElementById("recordingPlayback").textContent="▶ Meine Aufnahme anhören";
+});
 document.getElementById("ayahPlay").addEventListener("click",function(){
   if(!quranAudio.paused){quranAudio.pause();document.getElementById("ayahPlay").textContent="▶ Āyah anhören";return}
   quranMode="listen";
@@ -1115,7 +1314,7 @@ document.querySelectorAll("[data-close]").forEach(function(b){
   b.addEventListener("click",function(){
     var type=b.dataset.close;
     if(type==="story"){stopSpeech();document.getElementById("storyModal").classList.remove("open")}
-    if(type==="quran"){stopQuran();document.getElementById("quranModal").classList.remove("open")}
+    if(type==="quran"){stopQuran();releaseMicStream();document.getElementById("quranModal").classList.remove("open")}
     if(type==="fullquran"){document.getElementById("fullQuranModal").classList.remove("open")}
   });
 });
