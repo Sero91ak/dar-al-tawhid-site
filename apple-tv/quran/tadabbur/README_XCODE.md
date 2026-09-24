@@ -45,6 +45,26 @@ letzter Batch: entries-batch-05z-116.json
 letzter Vers im aktuellen Durchgang: 114:6
 ```
 
+## Aktive Xcode-Dateien
+
+Die aktive Datei für das Apple-TV-/Qurʾān-Xcode-Paket ist jetzt:
+
+```text
+apple-tv/xcode/TVQuranTadabburSupport.swift
+```
+
+Die Referenzkopie im Tadabbur-Datenordner bleibt bestehen:
+
+```text
+apple-tv/quran/tadabbur/xcode/TVQuranTadabburSupport.swift
+```
+
+Wichtig:
+
+- `QuranTabView.swift` liegt unter `apple-tv/xcode/`.
+- Deshalb muss auch `TVQuranTadabburSupport.swift` im Xcode-App-Ordner vorhanden sein.
+- So findet Xcode `TVQuranTadabbur`, `TVQuranTadabburStore` und `TVQuranTadabburCard` direkt.
+
 ## Datenmodell
 
 ```swift
@@ -71,13 +91,7 @@ TVQuranTadabburCard(
 
 ## Fertiger Support-Code
 
-Verwende als Grundlage:
-
-```text
-apple-tv/quran/tadabbur/xcode/TVQuranTadabburSupport.swift
-```
-
-Dieser Service muss:
+`TVQuranTadabburSupport.swift` muss:
 
 1. den zentralen `RemoteContentSyncService` triggern,
 2. `quran/tadabbur/catalog.json` laden,
