@@ -15,7 +15,7 @@ const brand = readJson("data/pronunciation/brand-pronunciation-overrides.json");
 const errors = [];
 const warnings = [];
 
-if ((runtime.rules || []).length !== 3719) errors.push(`expected 3719 runtime rules, got ${(runtime.rules || []).length}`);
+if ((runtime.rules || []).length !== 3727) errors.push(`expected 3727 runtime rules, got ${(runtime.rules || []).length}`);
 
 const sourceIds = new Set((sources.sources || []).map((s) => s.id));
 for (const id of ["ipa-official","jipa-arabic-1990","quranic-arabic-corpus-phonetic","ala-lc-arabic-2012"]) {
