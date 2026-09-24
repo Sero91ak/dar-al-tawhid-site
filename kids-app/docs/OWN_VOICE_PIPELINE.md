@@ -6,7 +6,7 @@ DĀR AL TAWḤĪD Kids verwendet langfristig fertige Eigenproduktionen mit der a
 
 `data/pronunciation/pronunciation-rules.json`
 
-Sie enthält 901 kanonische Begriffe und 3.719 Schreib-/Aussprachevarianten.
+Sie enthält 902 kanonische Begriffe und 3.727 Schreib-/Aussprachevarianten.
 
 ## Produktionsweg
 
