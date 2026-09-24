@@ -42,7 +42,141 @@ struct KidsQuizQuestion: Identifiable, Hashable {
     let retryText: String
 }
 
+struct KidsStoryQuestionAnswer: Identifiable, Hashable {
+    let id: String
+    let title: String
+    let isCorrect: Bool
+}
+
+struct KidsStoryQuestion: Identifiable, Hashable {
+    let id: String
+    let storyID: String
+    let ageBand: AgeBand
+    let question: String
+    let answers: [KidsStoryQuestionAnswer]
+    let successText: String
+    let retryText: String
+}
+
 enum SampleContent {
+    static let storyQuestions: [KidsStoryQuestion] = [
+        KidsStoryQuestion(
+            id: "coin-45",
+            storyID: "adab-found-coin",
+            ageBand: .age4to5,
+            question: "Soll Adam die gefundene Münze einfach behalten?",
+            answers: [
+                KidsStoryQuestionAnswer(id: "yes", title: "Ja", isCorrect: false),
+                KidsStoryQuestionAnswer(id: "no", title: "Nein", isCorrect: true)
+            ],
+            successText: "Richtig. Die Münze gehört jemand anderem.",
+            retryText: "Denk noch einmal an die Geschichte."
+        ),
+        KidsStoryQuestion(
+            id: "coin-68",
+            storyID: "adab-found-coin",
+            ageBand: .age6to8,
+            question: "Was war die ehrliche Handlung?",
+            answers: [
+                KidsStoryQuestionAnswer(id: "owner", title: "Nach dem Besitzer suchen", isCorrect: true),
+                KidsStoryQuestionAnswer(id: "keep", title: "Die Münze behalten", isCorrect: false)
+            ],
+            successText: "Richtig. Adam suchte nach dem Besitzer.",
+            retryText: "Hör noch einmal: Wem gehörte die Münze?"
+        ),
+        KidsStoryQuestion(
+            id: "coin-910",
+            storyID: "adab-found-coin",
+            ageBand: .age9to10,
+            question: "Was zeigt Adams Verhalten am besten?",
+            answers: [
+                KidsStoryQuestionAnswer(id: "honesty", title: "Ehrlichkeit auch ohne Zuschauer", isCorrect: true),
+                KidsStoryQuestionAnswer(id: "praise", title: "Nur helfen, wenn jemand zusieht", isCorrect: false),
+                KidsStoryQuestionAnswer(id: "mine", title: "Gefundene Dinge gehören automatisch mir", isCorrect: false)
+            ],
+            successText: "Richtig. Ehrlichkeit gilt auch, wenn niemand zusieht.",
+            retryText: "Denk an die Botschaft der Geschichte."
+        ),
+        KidsStoryQuestion(
+            id: "water-45",
+            storyID: "adab-water",
+            ageBand: .age4to5,
+            question: "War es gut, dass Maryam ihrer Schwester Wasser gab?",
+            answers: [
+                KidsStoryQuestionAnswer(id: "yes", title: "Ja", isCorrect: true),
+                KidsStoryQuestionAnswer(id: "no", title: "Nein", isCorrect: false)
+            ],
+            successText: "Ja. Helfen ist gutes Benehmen.",
+            retryText: "Denk an das Lächeln ihrer Schwester."
+        ),
+        KidsStoryQuestion(
+            id: "water-68",
+            storyID: "adab-water",
+            ageBand: .age6to8,
+            question: "Was lernte Maryam?",
+            answers: [
+                KidsStoryQuestionAnswer(id: "help", title: "Aufmerksam sein und helfen", isCorrect: true),
+                KidsStoryQuestionAnswer(id: "self", title: "Nur an sich selbst denken", isCorrect: false)
+            ],
+            successText: "Richtig. Kleine Hilfe kann viel bedeuten.",
+            retryText: "Was hat Maryam für ihre Schwester getan?"
+        ),
+        KidsStoryQuestion(
+            id: "water-910",
+            storyID: "adab-water",
+            ageBand: .age9to10,
+            question: "Welche Aussage passt zur Geschichte?",
+            answers: [
+                KidsStoryQuestionAnswer(id: "small", title: "Gutes Benehmen zeigt sich oft in kleinen Handlungen", isCorrect: true),
+                KidsStoryQuestionAnswer(id: "praise", title: "Gute Taten zählen nur mit Lob", isCorrect: false),
+                KidsStoryQuestionAnswer(id: "ask", title: "Man hilft nur nach Aufforderung", isCorrect: false)
+            ],
+            successText: "Richtig. Kleine gute Handlungen gehören zu gutem Adab.",
+            retryText: "Denk an die kleine Handlung am Tisch."
+        ),
+        KidsStoryQuestion(
+            id: "helper-45",
+            storyID: "adab-quiet-helper",
+            ageBand: .age4to5,
+            question: "War es gut, dass Yusuf aufgeräumt hat?",
+            answers: [
+                KidsStoryQuestionAnswer(id: "yes", title: "Ja", isCorrect: true),
+                KidsStoryQuestionAnswer(id: "no", title: "Nein", isCorrect: false)
+            ],
+            successText: "Richtig. Yusuf half, obwohl niemand ihn lobte.",
+            retryText: "Denk noch einmal an die Bücher und Stifte."
+        ),
+        KidsStoryQuestion(
+            id: "helper-68",
+            storyID: "adab-quiet-helper",
+            ageBand: .age6to8,
+            question: "Warum half Yusuf?",
+            answers: [
+                KidsStoryQuestionAnswer(id: "good", title: "Weil die gute Tat selbst wichtig ist", isCorrect: true),
+                KidsStoryQuestionAnswer(id: "praise", title: "Nur damit er gelobt wird", isCorrect: false)
+            ],
+            successText: "Richtig. Er erwartete keinen Applaus.",
+            retryText: "Was sagte Yusuf über gute Taten?"
+        ),
+        KidsStoryQuestion(
+            id: "helper-910",
+            storyID: "adab-quiet-helper",
+            ageBand: .age9to10,
+            question: "Welche Haltung zeigt Yusuf?",
+            answers: [
+                KidsStoryQuestionAnswer(id: "quiet", title: "Gutes tun ohne Lob zu erwarten", isCorrect: true),
+                KidsStoryQuestionAnswer(id: "teacher", title: "Nur helfen, wenn die Lehrerin zusieht", isCorrect: false),
+                KidsStoryQuestionAnswer(id: "others", title: "Arbeit immer anderen überlassen", isCorrect: false)
+            ],
+            successText: "Richtig. Eine gute Tat braucht keinen Applaus.",
+            retryText: "Denk an die Botschaft am Ende."
+        )
+    ]
+
+    static func storyQuestion(for story: KidsStory, ageBand: AgeBand) -> KidsStoryQuestion? {
+        storyQuestions.first { $0.storyID == story.id && $0.ageBand == ageBand }
+    }
+
     static let quizQuestions: [KidsQuizQuestion] = [
         KidsQuizQuestion(
             id: "q45-creation",
