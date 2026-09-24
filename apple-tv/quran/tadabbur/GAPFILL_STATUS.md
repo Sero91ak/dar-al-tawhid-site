@@ -1,13 +1,14 @@
 # Qurʾān Tadabbur – Gap-Fill Status
 
 Status: verbindliche Fortsetzung nach Abschluss des fortlaufenden Verslaufs  
-Branch: `apple-tv-hadith-staging`
+Branch: `apple-tv-hadith-staging`  
+Letzter Voll-Audit: 24.09.2026
 
 ## Aktueller auditfester Stand
 
-Der frühere Stand `5102` war die Zahl registrierter Zeilen, nicht die Zahl eindeutiger Qurʾān-Referenzen.
+Der historische Stand `5102` war die Zahl registrierter Zeilen, nicht die Zahl eindeutiger Qurʾān-Referenzen.
 
-Der vollständige Audit am 24.09.2026 ergab vor der Bereinigung:
+Der erste vollständige Audit ergab:
 
 ```text
 geladene Einträge: 5102
@@ -17,48 +18,68 @@ ungültige Referenzen: 0
 Count-Mismatches: 2
 ```
 
-Die 912 späteren Dubletten wurden verlustfrei aus dem registrierten Datensatz entfernt und nach
+Die 912 späteren Dubletten wurden verlustfrei aus dem registrierten Datensatz entfernt und in
 
 ```text
 duplicate-review-archive.json
 ```
 
-verschoben. Die jeweils erste registrierte Referenz bleibt kanonisch. Dadurch geht kein alternativer Datensatz verloren; er bleibt für spätere Einzelprüfung erhalten.
+archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach der Reparatur:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-013` gilt jetzt:
 
 ```text
-entriesCount: 4197
-totalVerifiedEntries: 4197
-loadedEntries: 4197
-uniqueVerifiedReferences: 4197
+Qurʾān-Gesamtverse: 6236
+entriesCount: 4253
+totalVerifiedEntries: 4253
+loadedEntries: 4253
+uniqueVerifiedReferences: 4253
+missingCount: 1983
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
-fehlende eindeutige Referenzen: 2039
-erster fehlender Vers: 2:1
-letzter fehlender Vers: 19:98
+firstMissingReference: 2:4
+lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
+letzter Gap-Fill-Batch: entries-gap-06-013.json
 ```
 
 ## Warum kein `entries-batch-05z-117.json`?
 
 `entries-batch-05z-116.json` erreicht Qurʾān `114:6`.
 
-Danach gibt es keinen weiteren Qurʾān-Vers. Deshalb darf kein weiterer fortlaufender `05z`-Batch nach `114:6` erzeugt werden.
+Danach gibt es keinen weiteren Qurʾān-Vers. Alle weiteren Arbeiten sind ausschließlich interne Gap-Fills.
 
-## Was jetzt wirklich fehlt
-
-Die verbleibenden `2046` Referenzen sind interne Lücken innerhalb des Qurʾān, keine Verse nach `114:6`.
-
-Rechnung:
+## Abgeschlossene Gap-Fill-Batches
 
 ```text
-Qurʾān-Gesamtverse: 6236
-eindeutige geprüfte Einträge: 4197
-fehlende eindeutige Einträge: 2039
+entries-gap-06-001.json   7 Einträge
+entries-gap-06-002.json   8 Einträge
+entries-gap-06-003.json   3 Einträge
+entries-gap-06-004.json   5 Einträge
+entries-gap-06-005.json   1 Eintrag
+entries-gap-06-006.json   4 Einträge
+entries-gap-06-007.json   8 Einträge
+entries-gap-06-008.json   1 Eintrag
+entries-gap-06-009.json   3 Einträge
+entries-gap-06-010.json   7 Einträge
+entries-gap-06-011.json   8 Einträge
+entries-gap-06-012.json   6 Einträge
+entries-gap-06-013.json   2 Einträge
 ```
+
+Seit der Dedupe-Basis `4190` wurden damit `63` neue eindeutige, geprüfte Referenzen registriert.
+
+## Aktuell bewusst offen
+
+Der erste weiterhin fehlende Vers ist:
+
+```text
+2:4
+```
+
+Frühe offene Referenzen wie `2:4–2:7`, `2:21`, `2:36`, `2:38`, `2:42–2:53`, `2:64`, `2:67`, `2:70` und `2:72` werden nicht künstlich gefüllt. Sie bleiben offen, bis ein konkreter früher Bericht mit belastbarer Zuordnung und ausreichend geprüfter Überlieferungskette vorliegt.
 
 ## Gap-Fill-Regel
 
@@ -73,6 +94,8 @@ Ab jetzt verbindlich:
 6. nach jedem Batch catalog.json und entries-index.json aktualisieren
 7. nach jedem Batch Audit erneut ausführen
 8. Audit muss duplicateCount=0, invalidCount=0 und countMismatchCount=0 behalten
+9. kein Eintrag wird nur erzeugt, um eine Zahl zu erhöhen
+10. mursal/unsichere oder nicht vollständig geprüfte Überlieferungen werden nicht als ṣaḥīḥ ausgegeben
 ```
 
 Benennung:
@@ -83,40 +106,6 @@ entries-gap-06-002.json
 entries-gap-06-003.json
 ...
 ```
-
-## Nächster Audit-Batch
-
-Der nächste echte 25er-Bereich ist:
-
-```text
-1:1
-1:2
-1:3
-1:4
-1:5
-1:6
-1:7
-2:1
-2:2
-2:3
-2:4
-2:5
-2:6
-2:7
-2:8
-2:9
-2:10
-2:11
-2:12
-2:13
-2:14
-2:15
-2:16
-2:17
-2:18
-```
-
-Diese Referenzen sind nur Arbeitsziele. Sie dürfen erst registriert werden, wenn für die jeweilige Referenz ein geprüfter Datensatz vorliegt.
 
 ## Audit-Tool
 
@@ -180,46 +169,3 @@ Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor.
 - kein geprüfter Eintrag vorhanden → festen Fallback anzeigen
 
 Das ist vollständige technische Abdeckung ohne erfundene inhaltliche Abdeckung.
-
-
-## Gap-Fill 06-001 abgeschlossen
-
-Datei:
-
-```text
-entries-gap-06-001.json
-```
-
-Enthaltene geprüfte Referenzen:
-
-```text
-1:1
-1:2
-1:3
-1:4
-1:5
-1:6
-1:7
-```
-
-Quellenbasis:
-
-- Qurʾān 1:1: authentischer Bericht von ʿAbdullāh ibn ʿAbbās, Sunan Abī Dāwūd Nr. 788, zur Herabsendung der Basmala als Kennzeichen des Sūrah-Übergangs.
-- Qurʾān 1:2–1:7: authentischer Ḥadīṯ qudsī von Abū Hurayrah, Ṣaḥīḥ Muslim Nr. 395, mit direkter Zuordnung der Fātiḥah-Abschnitte.
-
-Audit nach Registrierung:
-
-```text
-catalogEntriesCount=4197
-indexTotalVerifiedEntries=4197
-loadedEntries=4197
-uniqueVerifiedReferences=4197
-missingCount=2039
-duplicateCount=0
-invalidCount=0
-countMismatchCount=0
-firstMissingReference=2:1
-lastMissingReference=19:98
-```
-
-Nächster Arbeitsbereich beginnt bei `2:1`. Auch dort gilt: keine Referenz wird registriert, bevor der konkrete Bericht und seine Einstufung geprüft sind.
