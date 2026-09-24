@@ -25,6 +25,12 @@ Ruhig, warm, freundlich, hochwertig und klar. Keine grelle Gaming-Optik.
 - Animationen langsam und ruhig
 - keine blinkenden Belohnungen
 - keine endlosen Feeds
+- pro Zustand genau eine aktive Oberfläche: geöffnete Lern-/Detailseiten übernehmen den gesamten Fokus
+- Hintergrund unter einer geöffneten Oberfläche ist inert: kein Scrollen, Antippen, Markieren oder Fokuswechsel
+- kein Scroll-Chaining in den Hintergrund; interne Scrollbereiche bleiben per Touch und Tastatur bedienbar
+- Browser-/WebView-Scrollbalken werden in der App-Oberfläche nicht sichtbar dargestellt
+- im Qurʾān-Lernmodus steht der aktuelle arabische Text im Vordergrund; Status, Aufnahme und Navigation bleiben kompakt
+- Mikrofonstatus gilt nur dann als aktiv, wenn ein echter Live-Audiotrack und die Audioanalyse laufen; Fehler werden sichtbar gemeldet
 
 ## 4K-Bildwelten
 
