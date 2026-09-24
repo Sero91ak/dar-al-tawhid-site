@@ -3,10 +3,12 @@ import Foundation
 @MainActor
 final class ProgressStore: ObservableObject {
     @Published private(set) var completedStoryIDs: Set<String> = []
+    @Published private(set) var completedDuaIDs: Set<String> = []
     @Published private(set) var quizCorrectTotal: Int = 0
     @Published private(set) var dailyCompletedSteps: Set<String> = []
 
     private let key = "kids.completedStories"
+    private let duaKey = "kids.completedDuas"
     private let quizKey = "kids.quiz.correctTotal"
 
     private var dailyKey: String {
@@ -20,6 +22,8 @@ final class ProgressStore: ObservableObject {
     init() {
         let saved = UserDefaults.standard.stringArray(forKey: key) ?? []
         completedStoryIDs = Set(saved)
+        let savedDuas = UserDefaults.standard.stringArray(forKey: duaKey) ?? []
+        completedDuaIDs = Set(savedDuas)
         quizCorrectTotal = UserDefaults.standard.integer(forKey: quizKey)
         dailyCompletedSteps = Set(UserDefaults.standard.stringArray(forKey: dailyKey) ?? [])
     }
@@ -32,6 +36,16 @@ final class ProgressStore: ObservableObject {
 
     func isCompleted(_ story: KidsStory) -> Bool {
         completedStoryIDs.contains(story.id)
+    }
+
+    func markDuaComplete(_ id: String) {
+        completedDuaIDs.insert(id)
+        UserDefaults.standard.set(Array(completedDuaIDs), forKey: duaKey)
+        markDailyStepComplete("dua")
+    }
+
+    func isDuaComplete(_ id: String) -> Bool {
+        completedDuaIDs.contains(id)
     }
 
     func addQuizCorrect(_ count: Int) {
