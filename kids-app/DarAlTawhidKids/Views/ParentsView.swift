@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ParentsView: View {
     @EnvironmentObject private var appState: AppState
+    @EnvironmentObject private var progress: ProgressStore
 
     var body: some View {
         NavigationStack {
@@ -67,6 +68,49 @@ struct ParentsView: View {
                         }
 
                         KidsCard {
+                            VStack(alignment: .leading, spacing: 14) {
+                                HStack {
+                                    Text("Lernfortschritt")
+                                        .font(.headline)
+                                        .foregroundStyle(KidsTheme.cream)
+                                    Spacer()
+                                    Text("LOKAL")
+                                        .font(.caption.weight(.bold))
+                                        .foregroundStyle(KidsTheme.sage)
+                                }
+
+                                LazyVGrid(
+                                    columns: [
+                                        GridItem(.flexible()),
+                                        GridItem(.flexible())
+                                    ],
+                                    spacing: 10
+                                ) {
+                                    progressStat(
+                                        value: "\(progress.completedStoryIDs.count)",
+                                        label: "Geschichten verstanden"
+                                    )
+                                    progressStat(
+                                        value: "\(progress.completedDuaIDs.count)",
+                                        label: "Duʿāʾ gelernt"
+                                    )
+                                    progressStat(
+                                        value: "\(progress.quizCorrectTotal)",
+                                        label: "Quizfragen richtig"
+                                    )
+                                    progressStat(
+                                        value: "\(progress.dailyCompletedSteps.count)/\(dailyStepCount)",
+                                        label: "Heute geschafft"
+                                    )
+                                }
+
+                                Text("Der Fortschritt bleibt auf diesem Gerät. Keine Rangliste und kein Vergleich mit anderen Kindern.")
+                                    .font(.system(size: 13, weight: .medium, design: .rounded))
+                                    .foregroundStyle(.white.opacity(0.54))
+                            }
+                        }
+
+                        KidsCard {
                             VStack(alignment: .leading, spacing: 8) {
                                 Text("Geplant")
                                     .font(.headline)
@@ -84,5 +128,28 @@ struct ParentsView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
         }
+    private var dailyStepCount: Int {
+        switch appState.ageBand {
+        case .age4to5: return 2
+        case .age6to8, .age9to10: return 3
+        }
+    }
+
+    private func progressStat(value: String, label: String) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(value)
+                .font(.system(size: 23, weight: .bold, design: .rounded))
+                .foregroundStyle(KidsTheme.gold)
+
+            Text(label)
+                .font(.caption.weight(.medium))
+                .foregroundStyle(.white.opacity(0.5))
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity, minHeight: 72, alignment: .leading)
+        .padding(12)
+        .background(.white.opacity(0.045), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+    }
+
     }
 }
