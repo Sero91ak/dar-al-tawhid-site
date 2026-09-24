@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0f2943">
+<meta name="theme-color" content="#06131f">
 <link rel="manifest" href="/test/kids/manifest.webmanifest">
 <link rel="apple-touch-icon" href="/test/kids/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/test/kids/icons/icon-192.png">
@@ -40,8 +40,7 @@ button{color:inherit}
 .app{
   min-height:100dvh;
   background:
-    radial-gradient(circle at 82% 5%,rgba(132,202,235,.24),transparent 27%),
-    radial-gradient(circle at 9% 55%,rgba(237,190,105,.14),transparent 30%),
+    radial-gradient(circle at 9% 55%,rgba(237,190,105,.12),transparent 30%),
     linear-gradient(165deg,#071522 0%,#0d2942 48%,#174e68 100%);
   position:relative;
 }
@@ -57,11 +56,7 @@ button{color:inherit}
     radial-gradient(circle at 61% 42%,#fff 0 1px,transparent 1.5px);
   animation:twinkle 4.5s ease-in-out infinite alternate;
 }
-.ambient:after{
-  content:"";position:absolute;width:440px;height:440px;border-radius:50%;right:-190px;top:-190px;
-  background:radial-gradient(circle,rgba(149,206,237,.18),rgba(149,206,237,.03) 62%,transparent 72%);
-  animation:drift 10s ease-in-out infinite alternate;
-}
+.ambient:after{content:none;display:none}
 @keyframes twinkle{to{opacity:.7}}
 @keyframes drift{to{transform:translate(-35px,52px) scale(1.05)}}
 @keyframes bob{50%{transform:translateY(-8px)}}
@@ -249,11 +244,11 @@ input[type=range]{width:100%;accent-color:var(--gold)}
 .nav-btn.active{color:var(--gold);background:rgba(226,189,114,.085)}
 
 .modal{
-  position:fixed;z-index:80;inset:0;background:rgba(3,11,18,.94);display:none;
-  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)
+  position:fixed;z-index:80;inset:0;background:#06131f;display:none;
+  backdrop-filter:none;-webkit-backdrop-filter:none;filter:none
 }
 .modal.open{display:block;animation:fadeup .2s ease}
-.modal-shell{width:min(100%,680px);height:100dvh;margin:0 auto;padding:var(--safe-top) 16px calc(16px + var(--safe-bottom));display:flex;flex-direction:column}
+.modal-shell{width:min(100%,680px);height:100dvh;margin:0 auto;padding:var(--safe-top) 16px calc(16px + var(--safe-bottom));display:flex;flex-direction:column;background:#06131f}
 .modal-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .close-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.075);font-size:23px;cursor:pointer}
 .modal-title{text-align:center;flex:1;min-width:0}
@@ -371,6 +366,23 @@ input[type=range]{width:100%;accent-color:var(--gold)}
   .choice{min-height:174px}
   .surah-grid{grid-template-columns:repeat(3,1fr)}
   .story-list{grid-template-columns:1fr 1fr}
+}
+
+/* KIDS_TOP_SOLID_LOCK_V2 — safe-area/header/modal top is solid, never glass/blur */
+html,body{background:#06131f!important}
+.modal,.modal-shell,.modal-top{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  filter:none!important;
+}
+.modal,.modal-shell{background:#06131f!important}
+@media (display-mode:standalone), (display-mode:fullscreen){
+  html,body{background:#06131f!important}
+  .modal,.modal-shell,.modal-top{
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+    filter:none!important;
+  }
 }
 </style>
 </head>
