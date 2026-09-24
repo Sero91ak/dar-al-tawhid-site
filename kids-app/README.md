@@ -11,7 +11,7 @@ Version 0.1 – isolierter Feature-/Staging-Aufbau. Keine Änderung an Besucher-
 - Hören → sehen → verstehen → wiederholen → anwenden.
 - Kurze Einheiten statt endlosem Scrollen.
 - Geschichten typischerweise 3–6 Minuten.
-- KI-/TTS-Stimmen nur für Erzählung, Erklärung und Bedienhinweise.
+- Fertige Eigenproduktionen mit der autorisierten eigenen Stimme haben Vorrang; System-TTS dient nur als Entwicklungs-/Fallbackpfad.
 - Qurʾān-Rezitation ausschließlich als echte, sauber lizenzierte Audioaufnahme.
 - Keine Werbung, keine manipulativen Streaks, keine Coins und kein Kaufdruck.
 - Keine Darstellung von Propheten oder Ṣaḥābah als Figuren.
@@ -34,7 +34,8 @@ Unter Lernen: Mein Qurʾān, Meine Duʿāʾ, Mein Dīn, Quiz.
 - Bundle ID: de.daraltawhid.kids
 - Mindestziel: iOS 17
 - Offline-fähige lokale Inhalte sind vorgesehen.
-- AudioService spielt lokale MP3-Dateien; solange eine Datei fehlt, dient Apple-Sprachsynthese nur als Entwicklungs-Fallback.
+- NarrationService spielt lokale Audio-Eigenproduktionen bevorzugt ab; solange eine Datei fehlt, dient Apple-Sprachsynthese nur als Entwicklungs-Fallback.
+- Islamische Namen und Fachbegriffe laufen über die zentrale Aussprachebibliothek `data/pronunciation/pronunciation-rules.json` (901 kanonische Begriffe / 3.719 Regeln).
 
 ## Nächste Schritte
 
