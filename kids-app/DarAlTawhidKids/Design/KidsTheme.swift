@@ -37,13 +37,8 @@ struct KidsAmbientBackground: View {
 
     var body: some View {
         ZStack {
+            // Top edge intentionally has no blurred ambient halo.
             KidsTheme.pageGradient
-
-            Circle()
-                .fill(KidsTheme.sky.opacity(0.16))
-                .frame(width: 340, height: 340)
-                .blur(radius: 50)
-                .offset(x: drift ? 120 : 70, y: drift ? -240 : -190)
 
             Circle()
                 .fill(KidsTheme.gold.opacity(0.10))
