@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "dar-own-voice-narration",
+  "updatedAt": "2026-09-24",
+  "provider": "self-produced",
+  "sourceVoice": "authorized-owner-voice",
+  "language": "de-DE",
+  "delivery": {
+    "genderPresentation": "male",
+    "character": [
+      "warm",
+      "sanft",
+      "klar",
+      "ehrlich",
+      "ruhig"
+    ],
+    "avoid": [
+      "metallisch",
+      "hart",
+      "werblich",
+      "hektisch"
+    ]
+  },
+  "preprocessing": {
+    "reduceRoomReverb": true,
+    "reduceBackgroundNoise": true,
+    "preserveNaturalTimbre": true
+  },
+  "pronunciation": {
+    "library": "/data/pronunciation/pronunciation-rules.json",
+    "displayUsesCanonical": true,
+    "synthesisUsesAliasFallback": true,
+    "ipaIsReference": true,
+    "longestMatchFirst": true
+  },
+  "religiousAudio": {
+    "quranRecitation": "real-recording-only",
+    "narration": "own-voice-production",
+    "music": false
+  }
+}
