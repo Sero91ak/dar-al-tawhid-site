@@ -285,6 +285,10 @@ linear-gradient(180deg,#356987 0%,#638f91 50%,#c28d61 100%)}
 .full-quran .fgo{margin-left:auto;font-size:24px;color:var(--soft)}
 
 .parent-card{border-radius:27px;padding:17px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10);margin-bottom:12px}
+.parent-progress-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.parent-progress-stat{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.045);border-radius:18px;padding:12px}
+.parent-progress-stat strong{display:block;font-size:22px;color:var(--gold)}
+.parent-progress-stat span{display:block;margin-top:4px;font-size:10px;line-height:1.35;color:var(--soft);font-weight:750}
 .label-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .label-row strong{font-size:16px}
 .age-tabs{display:grid;grid-template-columns:repeat(3,1fr);background:rgba(255,255,255,.055);border-radius:15px;padding:3px}
@@ -664,6 +668,17 @@ html,body{background:#06131f!important}
       </div>
 
       <div class="parent-card">
+        <div class="label-row"><strong>Lernfortschritt</strong><span style="color:var(--sage);font-size:11px">LOKAL</span></div>
+        <div class="parent-progress-grid">
+          <div class="parent-progress-stat"><strong id="parentStoriesDone">0</strong><span>Geschichten verstanden</span></div>
+          <div class="parent-progress-stat"><strong id="parentQuizCorrect">0</strong><span>Quizfragen richtig</span></div>
+          <div class="parent-progress-stat"><strong id="parentTodayDone">0/3</strong><span>Heute geschafft</span></div>
+          <div class="parent-progress-stat"><strong id="parentQuranResume">–</strong><span>Letzter Qurʾān-Stand</span></div>
+        </div>
+        <p class="parent-note">Der Fortschritt bleibt auf diesem Gerät. Keine Rangliste und kein Vergleich mit anderen Kindern.</p>
+      </div>
+
+      <div class="parent-card">
         <div class="label-row"><strong>Geplant</strong><span style="color:var(--soft);font-size:11px">NÄCHSTE SCHRITTE</span></div>
         <p class="parent-note" style="margin-top:0">Eltern-PIN · Kinderprofile · Offline-Audio · Inhaltsfreigaben · Schlafenszeit-Modus · Fortschritt ohne Leistungsdruck.</p>
       </div>
@@ -983,6 +998,7 @@ var lastWordHeard="";
 var lastWordScore=0;
 var speech=window.speechSynthesis;
 var speaking=false;
+var storyManualStop=false;
 var currentStoryKey="coin";
 var storyQuestionPassed=false;
 var currentQuiz=[];
@@ -1006,6 +1022,13 @@ function dailyDone(step){
 function markDailyDone(step){
   try{localStorage.setItem(dailyStorageKey(step),"1")}catch(e){}
   updateDailyJourney();
+  updateParentProgress();
+}
+function dailyStoryKey(){
+  var keys=Object.keys(stories);
+  if(!keys.length)return"coin";
+  var seed=Number(todayKey().replace(/-/g,""))||0;
+  return keys[seed%keys.length];
 }
 function dailyPlan(){
   if(age==="4–5")return[
@@ -1037,8 +1060,27 @@ function updateDailyJourney(){
   });
   start.textContent=done===plan.length?"✓ Für heute geschafft":"Reise fortsetzen";
 }
+function updateParentProgress(){
+  var storyCount=0;
+  Object.keys(stories).forEach(function(k){
+    try{if(localStorage.getItem("kids.story."+k)==="1")storyCount++}catch(e){}
+  });
+  var quizCount=0;
+  try{quizCount=Number(localStorage.getItem("kids.quiz.correct")||"0")}catch(e){}
+  var plan=dailyPlan();
+  var todayCount=plan.filter(function(s){return dailyDone(s.id)}).length;
+  var resume=readQuranResume();
+  var s=document.getElementById("parentStoriesDone");
+  var q=document.getElementById("parentQuizCorrect");
+  var t=document.getElementById("parentTodayDone");
+  var r=document.getElementById("parentQuranResume");
+  if(s)s.textContent=String(storyCount);
+  if(q)q.textContent=String(quizCount);
+  if(t)t.textContent=todayCount+"/"+plan.length;
+  if(r)r.textContent=resume?(resume.label+" "+(Number(resume.ayah)+1)):"–";
+}
 function launchDailyStep(step){
-  if(step==="story"){openStory("coin");return}
+  if(step==="story"){openStory(dailyStoryKey());return}
   if(step==="quiz"){openQuiz();return}
   if(step==="quran"){showTab("quran");setTimeout(function(){openSurah(112,0,"learn")},220)}
 }
@@ -1927,6 +1969,7 @@ function updateResume(){
   var text=r?(r.label+" · Āyah "+(Number(r.ayah)+1)):"Noch nichts begonnen";
   document.getElementById("resumeText").textContent=text;
   document.getElementById("resumeQuranText").textContent=r?text:"Starte mit einer kurzen Sūrah";
+  updateParentProgress();
 }
 document.getElementById("resumeButton").addEventListener("click",function(){
   var r=readQuranResume();
@@ -2041,6 +2084,7 @@ function renderQuizFinish(){
     var total=quizSavedCorrect()+quizCorrectCount;
     localStorage.setItem("kids.quiz.correct",String(total));
   }catch(e){}
+  updateParentProgress();
   document.getElementById("quizProgress").innerHTML="";
   document.getElementById("quizBody").innerHTML=
     '<div class="quiz-finish"><div class="star">⭐</div><h3>Quiz geschafft!</h3>'+
@@ -2066,19 +2110,32 @@ function openStory(key){
   document.getElementById("storyModal").classList.add("open");
 }
 document.querySelectorAll("[data-story]").forEach(function(el){el.addEventListener("click",function(){openStory(el.dataset.story)})});
-function stopSpeech(){
-  if(speech)speech.cancel();
+function resetStorySpeechUi(){
   speaking=false;
   document.getElementById("storyPlay").textContent="▶ Geschichte hören";
   document.getElementById("storyWave").textContent="≋";
+}
+function stopSpeech(){
+  storyManualStop=true;
+  if(speech)speech.cancel();
+  resetStorySpeechUi();
+  setTimeout(function(){storyManualStop=false},180);
 }
 document.getElementById("storyPlay").addEventListener("click",function(){
   if(!("speechSynthesis" in window)){alert("Auf diesem Gerät ist die Vorschau-Stimme nicht verfügbar.");return}
   if(speaking){stopSpeech();return}
   var s=stories[currentStoryKey]||stories.coin;
   var u=new SpeechSynthesisUtterance(s.text);
+  storyManualStop=false;
   u.lang="de-DE";u.rate=.87;u.pitch=.94;
-  u.onend=stopSpeech;u.onerror=stopSpeech;
+  u.onend=function(){
+    resetStorySpeechUi();
+    if(storyManualStop)return;
+    setTimeout(function(){
+      if(document.getElementById("storyModal").classList.contains("open"))renderStoryQuestion();
+    },420);
+  };
+  u.onerror=function(){resetStorySpeechUi()};
   speaking=true;
   this.textContent="■ Stopp";
   document.getElementById("storyWave").textContent="≋≋";
@@ -2110,6 +2167,7 @@ function renderStoryQuestion(){
         localStorage.setItem("kids.story."+currentStoryKey,"1");
         document.getElementById("storyDone").textContent="✓ Verstanden";
         markDailyDone("story");
+        updateParentProgress();
         quizSpeak(q.success);
       }else{
         b.classList.add("wrong");
@@ -2148,6 +2206,7 @@ function setAge(a){
   var app=document.querySelector(".app");
   if(app)app.setAttribute("data-age",a);
   updateDailyJourney();
+  updateParentProgress();
   if(a==="4–5"){
     document.querySelectorAll(".quran-mini-note").forEach(function(el){el.textContent="1. Hören. 2. Das große Wort sprechen. 3. Grün? Dann kommt das nächste Wort."});
   }else if(a==="6–8"){
@@ -2175,6 +2234,7 @@ setAge(age);
 updateDailyJourney();
 updateMinutes();
 updateResume();
+updateParentProgress();
 fetchCatalog();
 })();
 </script>
