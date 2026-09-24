@@ -75,3 +75,85 @@ html.is-standalone-pwa:not(.dar-ios-native-app) body.is-account-route #appView.v
 html:not(.dar-ios-native-app) body.is-quran-overview #appView.view{
   padding-top:max(6px, env(safe-area-inset-top, 0px))!important;
 }
+
+/* APP_TOP_SOLID_LOCK_V1006
+   Appweit: obere Safe-Area / Header niemals milchig, geblurt oder translucent.
+   Die untere #bottomNav-Glasoptik bleibt ausdrücklich unangetastet. */
+html.dar-ios-native-app,
+html.dar-android-native-app,
+html.is-standalone-pwa{
+  --dar-app-top-solid:
+    var(--quran-page-bg,
+      var(--theme-feed-bg,
+        var(--dar-edge-fill,
+          var(--page-cover,
+            var(--outer-bg-flat,
+              var(--bg,#050706))))));
+}
+
+html.dar-ios-native-app :is(.top-shell,.header,.header.theme-hero-surface,.sf-top,.qov-header,.app-bar,.view-head,.settings-page-head),
+html.dar-android-native-app :is(.top-shell,.header,.header.theme-hero-surface,.sf-top,.qov-header,.app-bar,.view-head,.settings-page-head),
+html.is-standalone-pwa :is(.top-shell,.header,.header.theme-hero-surface,.sf-top,.qov-header,.app-bar,.view-head,.settings-page-head){
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  filter:none!important;
+  background:var(--dar-app-top-solid)!important;
+  background-color:var(--dar-app-top-solid)!important;
+  background-image:none!important;
+}
+
+html.dar-ios-native-app :is(.top-edge-fade,.top-swim-aura,#topEdgeFade,#topSwimAura),
+html.dar-android-native-app :is(.top-edge-fade,.top-swim-aura,#topEdgeFade,#topSwimAura),
+html.is-standalone-pwa :is(.top-edge-fade,.top-swim-aura,#topEdgeFade,#topSwimAura){
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  height:0!important;
+  min-height:0!important;
+  max-height:0!important;
+  background:none!important;
+  filter:none!important;
+  pointer-events:none!important;
+}
+
+html.dar-ios-native-app :is(.top-shell,.header,.sf-top,.qov-header,.app-bar)::before,
+html.dar-ios-native-app :is(.top-shell,.header,.sf-top,.qov-header,.app-bar)::after,
+html.dar-android-native-app :is(.top-shell,.header,.sf-top,.qov-header,.app-bar)::before,
+html.dar-android-native-app :is(.top-shell,.header,.sf-top,.qov-header,.app-bar)::after,
+html.is-standalone-pwa :is(.top-shell,.header,.sf-top,.qov-header,.app-bar)::before,
+html.is-standalone-pwa :is(.top-shell,.header,.sf-top,.qov-header,.app-bar)::after{
+  content:none!important;
+  display:none!important;
+  opacity:0!important;
+  background:none!important;
+  background-image:none!important;
+  filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+
+/* Mobile Browser/Test shell: gleiches Verhalten wie installierte App. */
+@media (max-width:900px){
+  html[data-theme] :is(.top-shell,.header,.header.theme-hero-surface,.sf-top,.qov-header,.app-bar,.view-head,.settings-page-head){
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+    filter:none!important;
+    background:
+      var(--quran-page-bg,
+        var(--theme-feed-bg,
+          var(--dar-edge-fill,
+            var(--page-cover,
+              var(--outer-bg-flat,
+                var(--bg,#050706))))))!important;
+    background-image:none!important;
+  }
+  html[data-theme] :is(.top-edge-fade,.top-swim-aura,#topEdgeFade,#topSwimAura){
+    display:none!important;
+    visibility:hidden!important;
+    opacity:0!important;
+    background:none!important;
+    filter:none!important;
+    pointer-events:none!important;
+  }
+}
+
