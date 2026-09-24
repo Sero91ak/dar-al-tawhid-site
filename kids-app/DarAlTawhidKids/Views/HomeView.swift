@@ -4,6 +4,7 @@ struct HomeView: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var progress: ProgressStore
     @State private var selectedStory: KidsStory?
+    @State private var showQuiz = false
 
     private var storyOfTheDay: KidsStory {
         SampleContent.stories[Calendar.current.component(.day, from: .now) % SampleContent.stories.count]
@@ -18,6 +19,7 @@ struct HomeView: View {
                     VStack(alignment: .leading, spacing: 18) {
                         header
                         welcomeCard
+                        dailyJourneyCard
                         storyCard
                         quickLearning
                         pauseNote
@@ -31,6 +33,9 @@ struct HomeView: View {
             .toolbar(.hidden, for: .navigationBar)
             .sheet(item: $selectedStory) { story in
                 StoryPlayerView(story: story)
+            }
+            .navigationDestination(isPresented: $showQuiz) {
+                QuizView()
             }
         }
     }
@@ -71,6 +76,106 @@ struct HomeView: View {
                 Spacer()
             }
         }
+    }
+
+    private var dailyJourneyCard: some View {
+        let storyDone = progress.isDailyStepComplete("story")
+        let quizDone = progress.isDailyStepComplete("quiz")
+        let finished = storyDone && quizDone
+
+        return KidsCard {
+            VStack(alignment: .leading, spacing: 12) {
+                HStack {
+                    Text("DEINE HEUTIGE REISE")
+                        .font(.caption.weight(.bold))
+                        .tracking(1.2)
+                        .foregroundStyle(KidsTheme.gold)
+
+                    Spacer()
+
+                    Text("\([storyDone, quizDone].filter { $0 }.count)/2")
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(finished ? KidsTheme.sage : .white.opacity(0.48))
+                }
+
+                journeyStep(
+                    number: 1,
+                    title: "Eine Geschichte",
+                    subtitle: "zuhören & verstehen",
+                    symbol: "headphones",
+                    done: storyDone
+                ) {
+                    selectedStory = storyOfTheDay
+                }
+
+                journeyStep(
+                    number: 2,
+                    title: "Ein kleines Quiz",
+                    subtitle: appState.ageBand == .age4to5 ? "hören & tippen" : "hören & auswählen",
+                    symbol: "star.fill",
+                    done: quizDone
+                ) {
+                    showQuiz = true
+                }
+
+                Text(finished ? "Für heute geschafft. Sehr schön." : "Ein kleiner Schritt nach dem anderen reicht.")
+                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .foregroundStyle(finished ? KidsTheme.sage : .white.opacity(0.52))
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.top, 2)
+            }
+        }
+    }
+
+    private func journeyStep(
+        number: Int,
+        title: String,
+        subtitle: String,
+        symbol: String,
+        done: Bool,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            HStack(spacing: 12) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 13, style: .continuous)
+                        .fill(done ? KidsTheme.sage.opacity(0.18) : .white.opacity(0.07))
+                        .frame(width: 40, height: 40)
+
+                    if done {
+                        Image(systemName: "checkmark")
+                            .font(.system(size: 15, weight: .bold))
+                            .foregroundStyle(KidsTheme.sage)
+                    } else {
+                        Text("\(number)")
+                            .font(.system(size: 14, weight: .bold, design: .rounded))
+                            .foregroundStyle(KidsTheme.gold)
+                    }
+                }
+
+                Image(systemName: symbol)
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundStyle(done ? KidsTheme.sage : KidsTheme.gold)
+                    .frame(width: 24)
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(title)
+                        .font(.system(size: 16, weight: .bold, design: .rounded))
+                        .foregroundStyle(KidsTheme.cream)
+                    Text(subtitle)
+                        .font(.caption.weight(.medium))
+                        .foregroundStyle(.white.opacity(0.5))
+                }
+
+                Spacer()
+
+                Image(systemName: done ? "checkmark.circle.fill" : "chevron.right")
+                    .foregroundStyle(done ? KidsTheme.sage : .white.opacity(0.34))
+            }
+            .padding(11)
+            .background(.white.opacity(0.04), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        }
+        .buttonStyle(.plain)
     }
 
     private var storyCard: some View {
