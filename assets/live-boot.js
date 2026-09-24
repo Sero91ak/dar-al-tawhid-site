@@ -363,31 +363,7 @@
   }
 
 
-  /* DAR_KIDS_STORIES_LOADER_V1 — bestehende Prophetenbibliothek erhält Kinder-Unterbereich */
-  function loadKidsStories() {
-    try {
-      if (window.__DAR_KIDS_STORIES_LOADER_V1) return;
-      window.__DAR_KIDS_STORIES_LOADER_V1 = true;
-      var base = isTest ? "/test/assets/kids-stories/" : "/assets/kids-stories/";
-      if (!document.querySelector('link[href*="kids-stories/kids-stories.css"]')) {
-        var link = document.createElement("link");
-        link.rel = "stylesheet";
-        link.href = base + "kids-stories.css?v=2";
-        (document.head || document.documentElement).appendChild(link);
-      }
-      if (!document.querySelector('script[src*="kids-stories/kids-stories.js"]')) {
-        var script = document.createElement("script");
-        script.defer = true;
-        script.src = base + "kids-stories.js?v=2";
-        (document.head || document.documentElement).appendChild(script);
-      }
-    } catch (e) {
-      darDiag("kids stories loader failed", e);
-    }
-  }
-
   function boot() {
-    loadKidsStories();
     bindFeedHeaderGuard();
     bindChipPruneGuard();
     bindHadithGateGuard();
