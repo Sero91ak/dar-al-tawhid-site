@@ -10,6 +10,7 @@ on:
       - wrangler.kids.toml
       - .github/workflows/deploy-kids-app.yml
       - scripts/kids-content-authenticity-guard.js
+      - scripts/kids-design-system-guard.js
   workflow_dispatch:
 
 permissions:
@@ -34,6 +35,9 @@ jobs:
 
       - name: Kids content authenticity guard
         run: node scripts/kids-content-authenticity-guard.js
+
+      - name: Kids design system guard
+        run: node scripts/kids-design-system-guard.js
 
       - name: Kids build consistency
         shell: bash
