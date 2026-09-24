@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "dar-al-tawhid-pronunciation",
+  "updatedAt": "2026-09-24",
+  "providerIndependent": true,
+  "canonicalTerms": 901,
+  "rules": 3719,
+  "sourceOfTruth": "pronunciation-rules.json",
+  "files": {
+    "runtime": "pronunciation-rules.json",
+    "master": "pronunciation-master.csv",
+    "canonical": "canonical-terms.csv",
+    "aliasPls": "alias-master.pls",
+    "ipaPls": "ipa-master.pls",
+    "qa": "qa-sentences.txt",
+    "voiceProfile": "voice-production-profile.json"
+  },
+  "consumers": [
+    "DĀR AL TAWḤĪD Kids",
+    "eigene Stimmproduktion",
+    "weitere Audio-Apps"
+  ]
+}
