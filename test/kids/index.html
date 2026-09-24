@@ -631,7 +631,7 @@ input[type=range]{width:100%;accent-color:var(--gold)}
             <button id="prevAyah">← Vorherige Āyah</button>
             <button id="nextAyah">🔒 Weiter</button>
           </div>
-          <div class="quran-mini-note">Sprich immer nur das große Wort. Grün = richtig. Orange = fast richtig. Rot = wiederholen. Erst wenn alle Wörter grün sind, geht es weiter.</div>
+          <div class="quran-mini-note">Das Mikrofon erkennt jedes Wort automatisch. Grün = richtig und weiter. Orange = fast richtig, gleiches Wort wiederholen. Rot = Fehler, das Wort bleibt gesperrt.</div>
         </div>
       </div>
     </div>
@@ -703,14 +703,17 @@ var quranMode="listen";
 var speakAlongTimer=0;
 var quranAudio=document.getElementById("quranAudio");
 var recitationRecognition=null;
-var scribeSocket=null;
-var scribeContext=null;
-var scribeSource=null;
-var scribeProcessor=null;
-var scribeMuteGain=null;
-var scribeConnected=false;
-var scribePartialText="";
-var scribeCommittedText="";
+var wordAudioContext=null;
+var wordAudioSource=null;
+var wordAudioProcessor=null;
+var wordAudioMuteGain=null;
+var wordCaptureChunks=[];
+var wordPreRoll=[];
+var wordCapturing=false;
+var wordCaptureBusy=false;
+var wordSilenceMs=0;
+var wordCaptureStartedAt=0;
+var wordLastVoiceAt=0;
 var recitationListening=false;
 var recitationState="idle";
 var recitationMatched=0;
@@ -812,26 +815,30 @@ function normalizeSurah(data){
     verses:verses
   };
 }
-function stopScribeAudioPipe(){
-  if(scribeProcessor){try{scribeProcessor.disconnect()}catch(e){}}
-  if(scribeSource){try{scribeSource.disconnect()}catch(e){}}
-  if(scribeMuteGain){try{scribeMuteGain.disconnect()}catch(e){}}
-  scribeProcessor=null;scribeSource=null;scribeMuteGain=null;
-  if(scribeContext){try{scribeContext.close()}catch(e){}}
-  scribeContext=null;
+function stopWordAudioPipe(){
+  if(wordAudioProcessor){
+    try{wordAudioProcessor.onaudioprocess=null}catch(e){}
+    try{wordAudioProcessor.disconnect()}catch(e2){}
+  }
+  if(wordAudioSource){try{wordAudioSource.disconnect()}catch(e3){}}
+  if(wordAudioMuteGain){try{wordAudioMuteGain.disconnect()}catch(e4){}}
+  wordAudioProcessor=null;
+  wordAudioSource=null;
+  wordAudioMuteGain=null;
+  if(wordAudioContext){try{wordAudioContext.close()}catch(e5){}}
+  wordAudioContext=null;
+  wordCaptureChunks=[];
+  wordPreRoll=[];
+  wordCapturing=false;
+  wordCaptureBusy=false;
+  wordSilenceMs=0;
 }
 function stopWordRecognition(){
   clearTimeout(recognitionRestartTimer);
   recognitionRestartTimer=0;
   recitationListening=false;
-  stopScribeAudioPipe();
-  if(scribeSocket){
-    try{scribeSocket.onopen=null;scribeSocket.onmessage=null;scribeSocket.onerror=null;scribeSocket.onclose=null;scribeSocket.close(1000,"done")}catch(e){}
-  }
-  scribeSocket=null;
-  scribeConnected=false;
-  scribePartialText="";
-  scribeCommittedText="";
+  stopWordAudioPipe();
+  document.getElementById("micStateText").textContent="Mikrofon pausiert";
 }
 function stopPractice(keepRecording){
   practiceActive=false;
@@ -909,8 +916,7 @@ function renderWordCoach(){
   }
   var idx=Math.min(currentPracticeWord,words.length-1);
   document.getElementById("coachKicker").textContent=ayahPassed?"GESCHAFFT":"WORT "+(idx+1)+" VON "+words.length;
-  var thresholds=practiceThresholds();
-  var liveMode=lastWordHeard&&lastWordScore<thresholds.orange?"current":(lastWordHeard&&lastWordScore<thresholds.green?"current":"current");
+  var liveMode=wordStates[idx]==="red"?"wrong":"current";
   coach.innerHTML=renderWordLetters(words[idx],lastWordHeard,liveMode);
   if(ayahPassed){
     coach.textContent="✓";help.textContent="Āyah geschafft";box.classList.add("good");
@@ -1224,22 +1230,6 @@ function ensureMicrophonePermission(){
     return false;
   });
 }
-function bestRecognizedWord(event,target){
-  var best={word:"",score:0,final:false};
-  for(var r=0;r<event.results.length;r++){
-    var result=event.results[r];
-    if(!result)continue;
-    for(var a=0;a<Math.min(result.length,5);a++){
-      var transcript=(result[a].transcript||"").trim();
-      var words=normalizedWords(transcript);
-      for(var w=0;w<words.length;w++){
-        var score=similarity(words[w],target);
-        if(score>best.score)best={word:words[w],score:score,final:!!result.isFinal};
-      }
-    }
-  }
-  return best;
-}
 function paintPracticeState(heard,score,status){
   lastWordHeard=heard||"";
   lastWordScore=score||0;
@@ -1247,11 +1237,6 @@ function paintPracticeState(heard,score,status){
   var wrong=status==="red"?currentPracticeWord:-1;
   renderAyahWords(matched,wrong,status==="red"?-1:currentPracticeWord,lastWordHeard);
   renderWordCoach();
-}
-function scheduleWordListen(delay){
-  clearTimeout(recognitionRestartTimer);
-  if(!practiceActive||ayahPassed)return;
-  recognitionRestartTimer=setTimeout(startWordRecognition,Math.max(120,delay||350));
 }
 function completeAyahPractice(){
   ayahPassed=true;
@@ -1271,34 +1256,88 @@ function completeAyahPractice(){
   setNextLock();
 }
 function practiceThresholds(){
-  if(age==="4–5")return{green:.76,orange:.46};
-  if(age==="9–10")return{green:.88,orange:.62};
-  return{green:.83,orange:.55};
+  if(age==="4–5")return{green:.72,orange:.42};
+  if(age==="9–10")return{green:.88,orange:.60};
+  return{green:.81,orange:.52};
 }
-function evaluateCurrentWord(heard,score,isFinal){
-  if(!practiceActive||ayahPassed)return;
-  var thresholds=practiceThresholds();
-  var idx=currentPracticeWord;
-  var words=normalizedWords((currentSurah.verses[currentAyahIndex]||{}).ar||"");
-  if(idx>=words.length){completeAyahPractice();return}
-
-  lastWordHeard=heard||"";
-  lastWordScore=score||0;
-
-  if(!isFinal){
-    renderAyahWords(idx,-1,idx,lastWordHeard);
-    renderWordCoach();
-    if(score>=thresholds.green){
-      updateLearnStatus("✓ Das klingt richtig — kurz warten …",true,"success");
-    }else if(score>=thresholds.orange){
-      updateLearnStatus("Fast richtig — sprich das Wort zu Ende.",true);
-    }else if(lastWordHeard){
-      updateLearnStatus("Ich höre zu …",true);
-    }
-    return;
+function flattenFloatChunks(chunks){
+  var total=0;
+  chunks.forEach(function(ch){total+=ch.length});
+  var out=new Float32Array(total);
+  var offset=0;
+  chunks.forEach(function(ch){out.set(ch,offset);offset+=ch.length});
+  return out;
+}
+function writeAscii(view,offset,text){
+  for(var i=0;i<text.length;i++)view.setUint8(offset+i,text.charCodeAt(i));
+}
+function wavBlobFromSamples(samples,sampleRate){
+  var buffer=new ArrayBuffer(44+samples.length*2);
+  var view=new DataView(buffer);
+  writeAscii(view,0,"RIFF");
+  view.setUint32(4,36+samples.length*2,true);
+  writeAscii(view,8,"WAVE");
+  writeAscii(view,12,"fmt ");
+  view.setUint32(16,16,true);
+  view.setUint16(20,1,true);
+  view.setUint16(22,1,true);
+  view.setUint32(24,sampleRate,true);
+  view.setUint32(28,sampleRate*2,true);
+  view.setUint16(32,2,true);
+  view.setUint16(34,16,true);
+  writeAscii(view,36,"data");
+  view.setUint32(40,samples.length*2,true);
+  var offset=44;
+  for(var i=0;i<samples.length;i++){
+    var s=Math.max(-1,Math.min(1,samples[i]));
+    view.setInt16(offset,s<0?s*0x8000:s*0x7fff,true);
+    offset+=2;
   }
+  return new Blob([buffer],{type:"audio/wav"});
+}
+function rmsOf(samples){
+  var sum=0;
+  for(var i=0;i<samples.length;i++)sum+=samples[i]*samples[i];
+  return Math.sqrt(sum/Math.max(1,samples.length));
+}
+function setWordChecking(checking){
+  var monitor=document.getElementById("micMonitor");
+  var coach=document.getElementById("coachHelp");
+  if(checking){
+    monitor.classList.remove("error");
+    document.getElementById("micStateText").textContent="Ich prüfe dein Wort …";
+    if(coach)coach.textContent="Einen Moment — das Wort wird geprüft.";
+    updateLearnStatus("⏳ Wort wird geprüft …",true);
+  }else if(practiceActive&&!ayahPassed){
+    document.getElementById("micStateText").textContent="Ich höre dir zu";
+  }
+}
+async function gradeCapturedWord(blob,expected){
+  var form=new FormData();
+  form.append("audio",blob,"word.wav");
+  form.append("expected",expected);
+  form.append("age",age);
+  var response=await fetch("/test/kids/api/recitation/grade",{
+    method:"POST",
+    body:form,
+    cache:"no-store"
+  });
+  var data=await response.json().catch(function(){return{}});
+  if(!response.ok||!data.ok)throw new Error(data.error||"grade_failed");
+  return data;
+}
+function applyServerGrade(data){
+  if(!practiceActive||ayahPassed)return;
+  var idx=currentPracticeWord;
+  var rawWords=rawAyahWords();
+  if(idx>=rawWords.length){completeAyahPractice();return}
+  var grade=String(data.grade||"red");
+  var heard=String(data.heard||data.transcript||"");
+  var score=Number(data.score||0);
+  lastWordHeard=heard;
+  lastWordScore=score;
 
-  if(score>=thresholds.green){
+  if(grade==="green"){
     wordStates[idx]="green";
     currentPracticeWord++;
     lastWordHeard="";
@@ -1306,196 +1345,151 @@ function evaluateCurrentWord(heard,score,isFinal){
     document.getElementById("micMonitor").classList.remove("error");
     renderAyahWords(currentPracticeWord,-1,currentPracticeWord,"");
     renderWordCoach();
-    if(currentPracticeWord>=words.length){completeAyahPractice();return}
-    updateLearnStatus("✓ Richtig! Jetzt das nächste große Wort.",true,"success");
+    if(currentPracticeWord>=rawWords.length){
+      completeAyahPractice();
+      return;
+    }
+    updateLearnStatus("✓ Richtig! Sprich jetzt das nächste große Wort.",true,"success");
+    document.getElementById("micStateText").textContent="Richtig — nächstes Wort";
     return;
   }
 
-  if(score>=thresholds.orange){
+  if(grade==="orange"){
     wordStates[idx]="orange";
     paintPracticeState(heard,score,"orange");
-    updateLearnStatus("Fast richtig. Bleib hier und wiederhole das Wort.",true);
+    updateLearnStatus("Fast richtig. Bleib bei diesem Wort und versuch es noch einmal.",true);
+    document.getElementById("micStateText").textContent="Fast richtig — noch einmal";
     return;
   }
 
   wordStates[idx]="red";
   paintPracticeState(heard,score,"red");
   document.getElementById("micMonitor").classList.add("error");
-  updateLearnStatus("Stopp. Dieses Wort war falsch — bitte noch einmal.",false,"error");
+  updateLearnStatus("Stopp. Dieses Wort war falsch — wiederhole genau dieses Wort.",false,"error");
+  document.getElementById("micStateText").textContent="Fehler erkannt — Wort wiederholen";
 }
-function downsampleTo16k(input,inputRate){
-  if(inputRate===16000)return input;
-  var ratio=inputRate/16000;
-  var len=Math.max(1,Math.floor(input.length/ratio));
-  var out=new Float32Array(len);
-  var offset=0;
-  for(var i=0;i<len;i++){
-    var next=Math.floor((i+1)*ratio);
-    var sum=0,count=0;
-    for(var j=offset;j<next&&j<input.length;j++){sum+=input[j];count++}
-    out[i]=count?sum/count:0;
-    offset=next;
-  }
-  return out;
-}
-function pcm16Base64(samples){
-  var buffer=new ArrayBuffer(samples.length*2);
-  var view=new DataView(buffer);
-  for(var i=0;i<samples.length;i++){
-    var s=Math.max(-1,Math.min(1,samples[i]));
-    view.setInt16(i*2,s<0?s*0x8000:s*0x7fff,true);
-  }
-  var bytes=new Uint8Array(buffer);
-  var bin="",chunk=0x8000;
-  for(var p=0;p<bytes.length;p+=chunk){
-    bin+=String.fromCharCode.apply(null,bytes.subarray(p,Math.min(p+chunk,bytes.length)));
-  }
-  return btoa(bin);
-}
-function startScribeAudioPipe(){
-  if(!recitationStream||!scribeSocket||scribeSocket.readyState!==WebSocket.OPEN)return;
-  var Ctx=window.AudioContext||window.webkitAudioContext;
-  if(!Ctx)throw new Error("audio_context_unavailable");
-  scribeContext=new Ctx();
-  if(scribeContext.state==="suspended"){
-    try{scribeContext.resume()}catch(e){}
-  }
-  scribeSource=scribeContext.createMediaStreamSource(recitationStream);
-  scribeProcessor=scribeContext.createScriptProcessor(4096,1,1);
-  scribeMuteGain=scribeContext.createGain();
-  scribeMuteGain.gain.value=0;
-  scribeProcessor.onaudioprocess=function(ev){
-    if(!practiceActive||!scribeSocket||scribeSocket.readyState!==WebSocket.OPEN)return;
-    var input=ev.inputBuffer.getChannelData(0);
-    var pcm=downsampleTo16k(input,scribeContext.sampleRate);
-    var base64=pcm16Base64(pcm);
-    try{scribeSocket.send(JSON.stringify({message_type:"input_audio_chunk",audio_base_64:base64}))}catch(e){}
-  };
-  scribeSource.connect(scribeProcessor);
-  scribeProcessor.connect(scribeMuteGain);
-  scribeMuteGain.connect(scribeContext.destination);
-}
-function bestWordFromText(text,target){
-  var words=normalizedWords(text);
-  var best={word:"",score:0};
-  words.forEach(function(w){
-    var sc=similarity(w,target);
-    if(sc>best.score)best={word:w,score:sc};
-  });
-  return best;
-}
-function handleScribeText(text,isCommitted){
-  if(!practiceActive||ayahPassed||!currentSurah)return;
-  var expected=normalizedWords((currentSurah.verses[currentAyahIndex]||{}).ar||"");
-  var heardWords=normalizedWords(text);
-  if(!heardWords.length)return;
+async function finishWordCapture(){
+  if(wordCaptureBusy||!wordCapturing)return;
+  wordCapturing=false;
+  wordCaptureBusy=true;
+  var chunks=wordCaptureChunks.slice();
+  wordCaptureChunks=[];
+  wordPreRoll=[];
+  wordSilenceMs=0;
 
-  if(!isCommitted){
-    var target=expected[currentPracticeWord]||"";
-    if(!target)return;
-    var best=bestWordFromText(text,target);
-    if(best.word)evaluateCurrentWord(best.word,best.score,false);
+  var samples=flattenFloatChunks(chunks);
+  var rate=wordAudioContext?wordAudioContext.sampleRate:48000;
+  var minSamples=Math.floor(rate*.16);
+  if(samples.length<minSamples){
+    wordCaptureBusy=false;
+    updateLearnStatus("Ich habe dich kaum gehört — sprich das Wort noch einmal.",true);
     return;
   }
 
-  for(var i=0;i<heardWords.length&&!ayahPassed;i++){
-    var targetNow=expected[currentPracticeWord]||"";
-    if(!targetNow)break;
-    var before=currentPracticeWord;
-    var heard=heardWords[i];
-    var score=similarity(heard,targetNow);
-    evaluateCurrentWord(heard,score,true);
-    if(currentPracticeWord===before)break;
+  var expectedWords=rawAyahWords();
+  var expected=expectedWords[currentPracticeWord]||"";
+  if(!expected){
+    wordCaptureBusy=false;
+    completeAyahPractice();
+    return;
+  }
+
+  setWordChecking(true);
+  try{
+    var blob=wavBlobFromSamples(samples,rate);
+    var result=await gradeCapturedWord(blob,expected);
+    applyServerGrade(result);
+  }catch(error){
+    document.getElementById("micMonitor").classList.add("error");
+    document.getElementById("micStateText").textContent="Prüfung fehlgeschlagen — noch einmal";
+    updateLearnStatus("Das Wort konnte nicht geprüft werden. Sprich es bitte noch einmal.",false,"error");
+  }finally{
+    wordCaptureBusy=false;
+    if(practiceActive&&!ayahPassed){
+      setTimeout(function(){
+        if(practiceActive&&!ayahPassed){
+          setWordChecking(false);
+          renderWordCoach();
+        }
+      },350);
+    }
   }
 }
-async function fetchScribeToken(){
-  var res=await fetch("https://dar-admin-publisher.sero91ak.workers.dev/api/kids/recitation/token",{
-    method:"POST",
-    mode:"cors",
-    cache:"no-store",
-    headers:{"Accept":"application/json"}
-  });
-  var data=await res.json().catch(function(){return{}});
-  if(!res.ok||!data.token)throw new Error(data.error||"token_failed");
-  return data.token;
-}
-async function startWordRecognition(){
-  if(!practiceActive||ayahPassed)return;
-  stopWordRecognition();
-  document.getElementById("micStateText").textContent="Sprachdienst wird verbunden …";
-  updateLearnStatus("Einen Moment — ich schalte das Zuhören ein.",true);
+function startWordRecognition(){
+  if(!practiceActive||ayahPassed||!recitationStream)return;
+  stopWordAudioPipe();
+
+  var Ctx=window.AudioContext||window.webkitAudioContext;
+  if(!Ctx){
+    updateLearnStatus("Audioaufnahme wird auf diesem Browser nicht unterstützt.",false,"error");
+    return;
+  }
 
   try{
-    var token=await fetchScribeToken();
-    if(!practiceActive)return;
-    var qs=new URLSearchParams({
-      model_id:"scribe_v2_realtime",
-      token:token,
-      audio_format:"pcm_16000",
-      language_code:"ara",
-      commit_strategy:"vad",
-      vad_threshold:"0.35",
-      vad_silence_threshold_secs:"0.45",
-      min_speech_duration_ms:"120",
-      min_silence_duration_ms:"220",
-      filter_background_audio:"true"
-    });
-    var ws=new WebSocket("wss://api.elevenlabs.io/v1/speech-to-text/realtime?"+qs.toString());
-    scribeSocket=ws;
+    wordAudioContext=new Ctx();
+    if(wordAudioContext.state==="suspended"){
+      try{wordAudioContext.resume()}catch(e){}
+    }
+    wordAudioSource=wordAudioContext.createMediaStreamSource(recitationStream);
+    wordAudioProcessor=wordAudioContext.createScriptProcessor(2048,1,1);
+    wordAudioMuteGain=wordAudioContext.createGain();
+    wordAudioMuteGain.gain.value=0;
 
-    ws.onopen=function(){
-      document.getElementById("micStateText").textContent="Verbunden — Mikrofon startet";
-    };
-    ws.onmessage=function(ev){
-      var msg={};
-      try{msg=JSON.parse(ev.data||"{}")}catch(e){return}
-      var type=String(msg.message_type||"");
-      if(type==="session_started"){
-        scribeConnected=true;
-        recitationListening=true;
-        document.getElementById("micMonitor").classList.add("live");
-        document.getElementById("micStateText").textContent="Ich höre dir zu";
-        updateLearnStatus("Sprich nur das große Wort.",true);
-        setLessonStep("speak");
-        try{startScribeAudioPipe()}catch(e){
-          updateLearnStatus("Mikrofon-Audio konnte nicht gestartet werden.",false,"error");
+    wordAudioProcessor.onaudioprocess=function(ev){
+      if(!practiceActive||ayahPassed||wordCaptureBusy)return;
+      var input=ev.inputBuffer.getChannelData(0);
+      var copy=new Float32Array(input);
+      var rms=rmsOf(copy);
+      var frameMs=(copy.length/wordAudioContext.sampleRate)*1000;
+      var startThreshold=age==="4–5"?0.012:0.015;
+      var silenceThreshold=startThreshold*.62;
+      var now=Date.now();
+
+      if(!wordCapturing){
+        wordPreRoll.push(copy);
+        if(wordPreRoll.length>5)wordPreRoll.shift();
+        if(rms>=startThreshold){
+          wordCapturing=true;
+          wordCaptureStartedAt=now;
+          wordLastVoiceAt=now;
+          wordSilenceMs=0;
+          wordCaptureChunks=wordPreRoll.slice();
+          wordCaptureChunks.push(copy);
+          wordPreRoll=[];
+          document.getElementById("micStateText").textContent="Ich höre dein Wort …";
+          updateLearnStatus("🎙 Sprich das große Wort.",true);
         }
         return;
       }
-      if(type==="partial_transcript"){
-        scribePartialText=String(msg.text||"");
-        handleScribeText(scribePartialText,false);
-        return;
+
+      wordCaptureChunks.push(copy);
+      if(rms>=silenceThreshold){
+        wordLastVoiceAt=now;
+        wordSilenceMs=0;
+      }else{
+        wordSilenceMs+=frameMs;
       }
-      if(type==="final_transcript"){
-        handleScribeText(String(msg.text||""),false);
-        return;
-      }
-      if(type==="committed_transcript"){
-        scribeCommittedText=String(msg.text||"");
-        handleScribeText(scribeCommittedText,true);
-        return;
-      }
-      if(type.indexOf("error")>=0||msg.error){
-        updateLearnStatus("Zuhören wurde unterbrochen. Tippe erneut auf Sprechen.",false,"error");
-        document.getElementById("micStateText").textContent="Verbindung unterbrochen";
+
+      var duration=now-wordCaptureStartedAt;
+      var enoughSpeech=(wordLastVoiceAt-wordCaptureStartedAt)>=100;
+      if((enoughSpeech&&wordSilenceMs>=520&&duration>=260)||duration>=4500){
+        finishWordCapture();
       }
     };
-    ws.onerror=function(){
-      updateLearnStatus("Sprachdienst konnte nicht verbunden werden.",false,"error");
-      document.getElementById("micStateText").textContent="Verbindungsfehler";
-    };
-    ws.onclose=function(){
-      scribeConnected=false;
-      stopScribeAudioPipe();
-      if(practiceActive&&!ayahPassed){
-        document.getElementById("micStateText").textContent="Zuhören beendet";
-      }
-    };
-  }catch(e){
-    updateLearnStatus("Der Sprachdienst ist gerade nicht erreichbar.",false,"error");
-    document.getElementById("micStateText").textContent="Sprachdienst nicht erreichbar";
-    document.getElementById("micMonitor").classList.add("error");
+
+    wordAudioSource.connect(wordAudioProcessor);
+    wordAudioProcessor.connect(wordAudioMuteGain);
+    wordAudioMuteGain.connect(wordAudioContext.destination);
+
+    recitationListening=true;
+    document.getElementById("micMonitor").classList.add("live");
+    document.getElementById("micMonitor").classList.remove("error");
+    document.getElementById("micStateText").textContent="Ich höre dir zu";
+    updateLearnStatus("🎙 Sprich nur das große Wort.",true);
+    setLessonStep("speak");
+  }catch(error){
+    updateLearnStatus("Mikrofon konnte nicht gestartet werden.",false,"error");
+    document.getElementById("micStateText").textContent="Mikrofonfehler";
   }
 }
 function startPracticeSession(){
@@ -1503,11 +1497,15 @@ function startPracticeSession(){
   practiceRequired=true;
   ayahPassed=false;
   practiceActive=true;
-  currentPracticeWord=0;
-  wordStates=rawAyahWords().map(function(){return "pending"});
+
+  if(!wordStates.length){
+    currentPracticeWord=0;
+    wordStates=rawAyahWords().map(function(){return "pending"});
+  }
+
   lastWordHeard="";
   lastWordScore=0;
-  renderAyahWords(0,-1,0,"");
+  renderAyahWords(currentPracticeWord,-1,currentPracticeWord,"");
   renderWordCoach();
   setNextLock();
   var btn=document.getElementById("speakAlong");
