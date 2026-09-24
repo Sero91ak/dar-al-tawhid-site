@@ -1,0 +1,317 @@
+{
+  "schemaVersion": 1,
+  "id": "dar-al-tawhid-arabic-phoneme-reference",
+  "updatedAt": "2026-09-24",
+  "scope": "Broad Classical/Modern Standard Arabic reference used to validate IPA fields and alias design; not a dialect dictionary.",
+  "sourceIds": [
+    "jipa-arabic-1990",
+    "ipa-official",
+    "quranic-arabic-corpus-phonetic"
+  ],
+  "consonants": [
+    {
+      "arabic": "ء",
+      "transliteration": [
+        "ʾ",
+        "'"
+      ],
+      "ipa": "ʔ",
+      "name": "hamza"
+    },
+    {
+      "arabic": "ب",
+      "transliteration": [
+        "b"
+      ],
+      "ipa": "b"
+    },
+    {
+      "arabic": "ت",
+      "transliteration": [
+        "t"
+      ],
+      "ipa": "t",
+      "sunLetter": true
+    },
+    {
+      "arabic": "ث",
+      "transliteration": [
+        "ṯ",
+        "th"
+      ],
+      "ipa": "θ",
+      "sunLetter": true
+    },
+    {
+      "arabic": "ج",
+      "transliteration": [
+        "ǧ",
+        "j"
+      ],
+      "ipa": "d͡ʒ",
+      "note": "Broad Standard Arabic target; regional realizations vary."
+    },
+    {
+      "arabic": "ح",
+      "transliteration": [
+        "ḥ"
+      ],
+      "ipa": "ħ"
+    },
+    {
+      "arabic": "خ",
+      "transliteration": [
+        "ḫ",
+        "kh"
+      ],
+      "ipa": "x"
+    },
+    {
+      "arabic": "د",
+      "transliteration": [
+        "d"
+      ],
+      "ipa": "d",
+      "sunLetter": true
+    },
+    {
+      "arabic": "ذ",
+      "transliteration": [
+        "ḏ",
+        "dh"
+      ],
+      "ipa": "ð",
+      "sunLetter": true
+    },
+    {
+      "arabic": "ر",
+      "transliteration": [
+        "r"
+      ],
+      "ipa": "r",
+      "sunLetter": true,
+      "note": "Tap/trill realization can vary by context/speaker."
+    },
+    {
+      "arabic": "ز",
+      "transliteration": [
+        "z"
+      ],
+      "ipa": "z",
+      "sunLetter": true
+    },
+    {
+      "arabic": "س",
+      "transliteration": [
+        "s"
+      ],
+      "ipa": "s",
+      "sunLetter": true
+    },
+    {
+      "arabic": "ش",
+      "transliteration": [
+        "š",
+        "sh"
+      ],
+      "ipa": "ʃ",
+      "sunLetter": true
+    },
+    {
+      "arabic": "ص",
+      "transliteration": [
+        "ṣ"
+      ],
+      "ipa": "sˤ",
+      "sunLetter": true
+    },
+    {
+      "arabic": "ض",
+      "transliteration": [
+        "ḍ"
+      ],
+      "ipa": "dˤ",
+      "sunLetter": true,
+      "note": "Broad MSA phonemic target."
+    },
+    {
+      "arabic": "ط",
+      "transliteration": [
+        "ṭ"
+      ],
+      "ipa": "tˤ",
+      "sunLetter": true
+    },
+    {
+      "arabic": "ظ",
+      "transliteration": [
+        "ẓ"
+      ],
+      "ipa": "ðˤ",
+      "sunLetter": true,
+      "note": "Some modern regional realizations approach zˤ."
+    },
+    {
+      "arabic": "ع",
+      "transliteration": [
+        "ʿ"
+      ],
+      "ipa": "ʕ"
+    },
+    {
+      "arabic": "غ",
+      "transliteration": [
+        "ġ",
+        "gh"
+      ],
+      "ipa": "ɣ"
+    },
+    {
+      "arabic": "ف",
+      "transliteration": [
+        "f"
+      ],
+      "ipa": "f"
+    },
+    {
+      "arabic": "ق",
+      "transliteration": [
+        "q"
+      ],
+      "ipa": "q"
+    },
+    {
+      "arabic": "ك",
+      "transliteration": [
+        "k"
+      ],
+      "ipa": "k"
+    },
+    {
+      "arabic": "ل",
+      "transliteration": [
+        "l"
+      ],
+      "ipa": "l",
+      "sunLetter": true,
+      "note": "May be velarized/pharyngealized in specific lexical contexts such as Allāh."
+    },
+    {
+      "arabic": "م",
+      "transliteration": [
+        "m"
+      ],
+      "ipa": "m"
+    },
+    {
+      "arabic": "ن",
+      "transliteration": [
+        "n"
+      ],
+      "ipa": "n",
+      "sunLetter": true
+    },
+    {
+      "arabic": "ه",
+      "transliteration": [
+        "h"
+      ],
+      "ipa": "h"
+    },
+    {
+      "arabic": "و",
+      "transliteration": [
+        "w"
+      ],
+      "ipa": "w"
+    },
+    {
+      "arabic": "ي",
+      "transliteration": [
+        "y"
+      ],
+      "ipa": "j"
+    }
+  ],
+  "vowels": [
+    {
+      "transliteration": "a",
+      "ipa": "a",
+      "length": "short"
+    },
+    {
+      "transliteration": "i",
+      "ipa": "i",
+      "length": "short"
+    },
+    {
+      "transliteration": "u",
+      "ipa": "u",
+      "length": "short"
+    },
+    {
+      "transliteration": "ā",
+      "ipa": "aː",
+      "length": "long"
+    },
+    {
+      "transliteration": "ī",
+      "ipa": "iː",
+      "length": "long"
+    },
+    {
+      "transliteration": "ū",
+      "ipa": "uː",
+      "length": "long"
+    },
+    {
+      "transliteration": "aw",
+      "ipa": "aw",
+      "type": "diphthong"
+    },
+    {
+      "transliteration": "ay",
+      "ipa": "aj",
+      "type": "diphthong"
+    }
+  ],
+  "connectedSpeech": {
+    "definiteArticle": {
+      "written": "al-",
+      "rule": "Before a sun letter, /l/ assimilates to the following consonant and that consonant is geminated in ordinary Classical/Standard Arabic connected pronunciation.",
+      "sunLettersArabic": [
+        "ت",
+        "ث",
+        "د",
+        "ذ",
+        "ر",
+        "ز",
+        "س",
+        "ش",
+        "ص",
+        "ض",
+        "ط",
+        "ظ",
+        "ل",
+        "ن"
+      ],
+      "sourceIds": [
+        "jipa-arabic-1990",
+        "madinah-sun-moon"
+      ]
+    },
+    "hamzatAlWasl": {
+      "rule": "Initial hamzat al-waṣl is context-sensitive and may be elided after a preceding word.",
+      "sourceIds": [
+        "quranic-arabic-corpus-phonetic"
+      ]
+    },
+    "shadda": {
+      "rule": "Gemination is phonemic and must be preserved in pronunciation.",
+      "sourceIds": [
+        "quranic-arabic-corpus-phonetic",
+        "jipa-arabic-1990"
+      ]
+    }
+  }
+}
