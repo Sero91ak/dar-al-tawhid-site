@@ -372,13 +372,13 @@
       if (!document.querySelector('link[href*="kids-stories/kids-stories.css"]')) {
         var link = document.createElement("link");
         link.rel = "stylesheet";
-        link.href = base + "kids-stories.css?v=1";
+        link.href = base + "kids-stories.css?v=2";
         (document.head || document.documentElement).appendChild(link);
       }
       if (!document.querySelector('script[src*="kids-stories/kids-stories.js"]')) {
         var script = document.createElement("script");
         script.defer = true;
-        script.src = base + "kids-stories.js?v=1";
+        script.src = base + "kids-stories.js?v=2";
         (document.head || document.documentElement).appendChild(script);
       }
     } catch (e) {
