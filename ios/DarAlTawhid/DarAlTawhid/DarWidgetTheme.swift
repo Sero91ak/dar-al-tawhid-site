@@ -1,6 +1,15 @@
 import SwiftUI
 import UIKit
 
+enum DarWidgetLook: String, Hashable, CaseIterable {
+    case app
+    case eisgold
+    case tinte
+    case pergament
+    case royal
+    case bordeaux
+}
+
 struct DarWidgetPalette {
     var id: String
     var ink: Color
@@ -39,6 +48,8 @@ enum DarWidgetTheme {
     /// Live calibration from the web app (`darAppearance` bridge).
     private static func customFromSnapshot(_ snap: DarWidgetSnapshot) -> DarWidgetPalette? {
         guard
+            snap.inkHex.count >= 6,
+            snap.textHex.count >= 6,
             let ink = Color(hex: snap.inkHex),
             let gold = Color(hex: snap.goldHex),
             let cream = Color(hex: snap.textHex)

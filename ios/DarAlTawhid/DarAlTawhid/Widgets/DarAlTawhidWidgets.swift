@@ -1,67 +1,41 @@
 import SwiftUI
 import WidgetKit
-import AppIntents
 
+/// Single WidgetKit entry point. Timeline completes synchronously.
+/// No AppIntent color editor, no remote fetch, no duplicate kinds.
 struct DarTimelineProvider: TimelineProvider {
     func placeholder(in context: Context) -> DarEntry {
-        DarEntry(date: Date(), snapshot: DarDailyContent.refresh(DarWidgetStore.load()))
+        makeEntry(Date())
     }
 
     func getSnapshot(in context: Context, completion: @escaping (DarEntry) -> Void) {
-        completion(placeholder(in: context))
+        completion(makeEntry(Date()))
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<DarEntry>) -> Void) {
-        Task {
-            completion(await Self.makeTimeline(look: .app))
-        }
-    }
-
-    static func makeTimeline(look: DarWidgetLook) async -> Timeline<DarEntry> {
-        var snap = DarWidgetStore.load()
-        if let live = await DarWidgetRemote.fetchDaily() {
-            snap = DarWidgetRemote.applyLive(live, to: snap)
-        }
-        snap = DarDailyContent.refresh(snap)
-        DarWidgetStore.save(snap, reload: false)
         let now = Date()
-        var entries: [DarEntry] = []
-        for second in stride(from: 0, through: 120, by: 30) {
-            let date = now.addingTimeInterval(Double(second))
-            entries.append(DarEntry(date: date, snapshot: DarDailyContent.refresh(snap, date: date), look: look))
-        }
-        for minute in stride(from: 3, through: 30, by: 3) {
-            let date = now.addingTimeInterval(Double(minute * 60))
-            entries.append(DarEntry(date: date, snapshot: DarDailyContent.refresh(snap, date: date), look: look))
-        }
+        var snap = DarDailyContent.refresh(DarWidgetStore.load(), date: now)
+        DarWidgetStore.save(snap, reload: false)
+        let entry = DarEntry(date: now, snapshot: snap, look: .app)
         let nextPrayer = DarPrayerEngine.nextTarget(from: snap.prayers, now: now).target
-        let fallback = Calendar.current.date(byAdding: .minute, value: 30, to: now) ?? now.addingTimeInterval(1800)
-        let next = nextPrayer ?? fallback
-        return Timeline(entries: entries, policy: .after(min(next, fallback)))
-    }
-}
-
-struct DarIntentProvider: AppIntentTimelineProvider {
-    func placeholder(in context: Context) -> DarEntry {
-        DarEntry(date: Date(), snapshot: DarDailyContent.refresh(DarWidgetStore.load()), look: .app)
+        let fallback = Calendar.current.date(byAdding: .minute, value: 15, to: now) ?? now.addingTimeInterval(900)
+        let next = min(nextPrayer ?? fallback, fallback)
+        completion(Timeline(entries: [entry], policy: .after(next)))
     }
 
-    func snapshot(for configuration: DarWidgetColorIntent, in context: Context) async -> DarEntry {
-        DarEntry(date: Date(), snapshot: DarDailyContent.refresh(DarWidgetStore.load()), look: configuration.look)
-    }
-
-    func timeline(for configuration: DarWidgetColorIntent, in context: Context) async -> Timeline<DarEntry> {
-        await DarTimelineProvider.makeTimeline(look: configuration.look)
+    private func makeEntry(_ date: Date) -> DarEntry {
+        let snap = DarDailyContent.refresh(DarWidgetStore.load(), date: date)
+        return DarEntry(date: date, snapshot: snap, look: .app)
     }
 }
 
 struct PrayerTimerWidget: Widget {
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: "de.daraltawhid.widget.prayer.timer", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
+        StaticConfiguration(kind: "de.daraltawhid.widget.prayer.timer", provider: DarTimelineProvider()) { entry in
             PrayerTimerView(entry: entry)
         }
         .configurationDisplayName("Nächstes Gebet")
-        .description("Countdown mit Sekunden, DĀR AL TAWḤĪD Look. Farbe unter Bearbeiten wählen.")
+        .description("Countdown und nächste Gebetszeit.")
         .supportedFamilies(Self.timerFamilies)
     }
 
@@ -74,13 +48,25 @@ struct PrayerTimerWidget: Widget {
     }
 }
 
-struct PrayerListWidget: Widget {
+/// Preserves homescreen widgets that still use the pre-timer kind.
+struct LegacyPrayerWidget: Widget {
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: "de.daraltawhid.widget.prayer.list", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
-            PrayerListView(entry: entry)
+        StaticConfiguration(kind: "de.daraltawhid.widget.prayer", provider: DarTimelineProvider()) { entry in
+            PrayerTimerView(entry: entry)
         }
         .configurationDisplayName("Gebetszeiten")
-        .description("Fajr bis ʿIshāʾ — gleiche Zeiten wie in der App.")
+        .description("Nächstes Gebet auf dem Home-Bildschirm.")
+        .supportedFamilies(PrayerTimerWidget.timerFamilies)
+    }
+}
+
+struct PrayerListWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "de.daraltawhid.widget.prayer.list", provider: DarTimelineProvider()) { entry in
+            PrayerListView(entry: entry)
+        }
+        .configurationDisplayName("Gebetszeiten-Liste")
+        .description("Fajr bis Isha, gleiche Zeiten wie in der App.")
         .supportedFamilies(Self.listFamilies)
     }
 
@@ -95,7 +81,7 @@ struct PrayerListWidget: Widget {
 
 struct PrayerDayWidget: Widget {
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: "de.daraltawhid.widget.prayer.day", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
+        StaticConfiguration(kind: "de.daraltawhid.widget.prayer.day", provider: DarTimelineProvider()) { entry in
             PrayerDayView(entry: entry)
         }
         .configurationDisplayName("Tagesgebetszeiten")
@@ -114,7 +100,7 @@ struct PrayerDayWidget: Widget {
 
 struct QiblaWidget: Widget {
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: "de.daraltawhid.widget.qibla", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
+        StaticConfiguration(kind: "de.daraltawhid.widget.qibla", provider: DarTimelineProvider()) { entry in
             QiblaCompassView(entry: entry)
         }
         .configurationDisplayName("Qibla")
@@ -125,7 +111,7 @@ struct QiblaWidget: Widget {
 
 struct TodayWidget: Widget {
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: "de.daraltawhid.widget.today", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
+        StaticConfiguration(kind: "de.daraltawhid.widget.today", provider: DarTimelineProvider()) { entry in
             TodayContentView(entry: entry)
         }
         .configurationDisplayName("Heute empfohlen")
@@ -136,10 +122,10 @@ struct TodayWidget: Widget {
 
 struct AyahWidget: Widget {
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: "de.daraltawhid.widget.ayah", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
+        StaticConfiguration(kind: "de.daraltawhid.widget.ayah", provider: DarTimelineProvider()) { entry in
             AyahContentView(entry: entry)
         }
-        .configurationDisplayName("Āyah des Tages")
+        .configurationDisplayName("Ayah des Tages")
         .description("Deutscher Wortlaut.")
         .supportedFamilies([.systemSmall, .systemMedium])
     }
@@ -147,10 +133,10 @@ struct AyahWidget: Widget {
 
 struct DuaWidget: Widget {
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: "de.daraltawhid.widget.dua", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
+        StaticConfiguration(kind: "de.daraltawhid.widget.dua", provider: DarTimelineProvider()) { entry in
             DuaContentView(entry: entry)
         }
-        .configurationDisplayName("Duʿāʾ des Tages")
+        .configurationDisplayName("Dua des Tages")
         .description("Aktuelles Bittgebet.")
         .supportedFamilies([.systemSmall, .systemMedium])
     }
@@ -173,20 +159,8 @@ struct LockHijriPrayerWidget: Widget {
             LockHijriPrayerView(entry: entry)
         }
         .configurationDisplayName("Hidschra und Gebet")
-        .description("Hidschra nach Umm al-Qura und nächstes Gebet.")
+        .description("Hidschra und nächstes Gebet.")
         .supportedFamilies([.accessoryRectangular, .accessoryInline])
-    }
-}
-
-/// Legacy kind from older builds — keeps existing home-screen widgets working after upgrades.
-struct LegacyPrayerWidget: Widget {
-    var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: "de.daraltawhid.widget.prayer", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
-            PrayerTimerView(entry: entry)
-        }
-        .configurationDisplayName("Nächstes Gebet")
-        .description("Homescreen und Sperrbildschirm.")
-        .supportedFamilies(PrayerTimerWidget.timerFamilies)
     }
 }
 
@@ -203,10 +177,5 @@ struct DarAlTawhidWidgets: WidgetBundle {
         TodayWidget()
         AyahWidget()
         DuaWidget()
-        DarPrayerLiveActivityWidget()
-        if #available(iOSApplicationExtension 18.0, *) {
-            DarPrayerControlWidget()
-            DarQiblaControlWidget()
-        }
     }
 }

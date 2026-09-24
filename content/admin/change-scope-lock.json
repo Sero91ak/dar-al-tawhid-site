@@ -108,6 +108,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "ios-widgets-restore-build95-ref-2026-09-24",
+      "approvedBy": "user-explicit-ios-ipad-widget-white-black-screen-build95",
+      "reason": "Nutzer: iOS/iPadOS-Widgets White/Black Screen nach Schattierung; Build-95-Referenz; alte Widget-Versionen entfernen; nur Widget-System, Rest der App unangetastet.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "ios/DarAlTawhid/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-learn-qari-ios-volume-2026-09-23",
       "approvedBy": "user-explicit-qari-auswahl-lautstaerke-ios-android-test",
       "reason": "Nutzer: Qāriʾ im Lernbereich nicht wählbar; Lautstärke-Slider bricht Audio; iOS-Systemlautstärke/HUD; iOS-App, Android-Webapp, Test-App.",

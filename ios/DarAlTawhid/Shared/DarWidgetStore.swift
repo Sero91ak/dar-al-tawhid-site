@@ -1,4 +1,5 @@
 import Foundation
+import WidgetKit
 
 enum DarWidgetStore {
     static var defaults: UserDefaults {
@@ -13,9 +14,12 @@ enum DarWidgetStore {
         return snap
     }
 
-    static func save(_ snapshot: DarWidgetSnapshot) {
+    static func save(_ snapshot: DarWidgetSnapshot, reload: Bool = true) {
         if let data = try? JSONEncoder().encode(snapshot) {
             defaults.set(data, forKey: DarWidgetKeys.snapshot)
+        }
+        if reload {
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 
