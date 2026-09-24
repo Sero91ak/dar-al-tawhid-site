@@ -11,23 +11,25 @@
       "id": "PRON-0001-dar-al-tawhid",
       "category": "Branding & Grundbegriffe",
       "canonical": "DĀR AL TAWḤĪD",
-      "alias": "Daar at-Tauhiid",
-      "ipa": "daːr at.tawˈħiːd",
+      "alias": "Daar al Tauhiid",
+      "ipa": "daːr al tawˈħiːd",
       "priority": "core",
       "status": "pending",
       "referenceAudio": null,
-      "notes": ""
+      "notes": "Brand-owner-approved reading; audible al is intentional. Classical/Standard Arabic connected speech would normally assimilate before t.",
+      "verification": "brand-owner-approved"
     },
     {
       "id": "PRON-0002-dar-al-tawhid-2",
       "category": "Branding & Grundbegriffe",
       "canonical": "Dār al-Tawḥīd",
-      "alias": "Daar at-Tauhiid",
-      "ipa": "daːr at.tawˈħiːd",
+      "alias": "Daar al Tauhiid",
+      "ipa": "daːr al tawˈħiːd",
       "priority": "core",
       "status": "pending",
       "referenceAudio": null,
-      "notes": ""
+      "notes": "Brand-owner-approved reading; audible al is intentional. Classical/Standard Arabic connected speech would normally assimilate before t.",
+      "verification": "brand-owner-approved"
     },
     {
       "id": "PRON-0003-tawhid",
@@ -9918,5 +9920,6 @@
       "referenceAudio": null,
       "notes": ""
     }
-  ]
+  ],
+  "verificationSources": "../authoritative-sources.json"
 }
