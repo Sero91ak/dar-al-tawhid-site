@@ -2101,6 +2101,14 @@ function fetchKidsDuas(){
     });
 }
 function openDailyDua(){
+  if(!kidsDuas.length){
+    fetchKidsDuas().then(function(){
+      var loaded=filteredDuas();
+      currentDuaIndex=duaDailyIndex(loaded);
+      openDuaAt(currentDuaIndex);
+    });
+    return;
+  }
   var list=filteredDuas();
   currentDuaIndex=duaDailyIndex(list);
   openDuaAt(currentDuaIndex);
@@ -2181,6 +2189,13 @@ function renderDua(){
   if(!done)setTimeout(function(){quizSpeak(d.childPrompt+" "+d.meaning)},260);
 }
 document.getElementById("openDuaButton").addEventListener("click",function(){
+  if(!kidsDuas.length){
+    fetchKidsDuas().then(function(){
+      var loaded=filteredDuas();
+      openDuaAt(duaDailyIndex(loaded));
+    });
+    return;
+  }
   var list=filteredDuas();
   openDuaAt(duaDailyIndex(list));
 });
