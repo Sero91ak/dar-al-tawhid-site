@@ -98,7 +98,7 @@ function validateKidsQuizCanonicalLocal() {
   const canonical = readJsonLocal("data/quiz-questions.json");
   const map = new Map(canonical.map((q) => [q.id, q]));
   const items = Array.isArray(kids.items) ? kids.items : [];
-  if (items.length < 34) throw new Error("Kids Quiz: zu wenige geprüfte Fragen.");
+  if (items.length < 37) throw new Error("Kids Quiz: zu wenige geprüfte Fragen.");
 
   for (const item of items) {
     const source = map.get(item.canonicalQuizId);
@@ -312,7 +312,7 @@ function validateKidsDuaCanonicalLocal() {
     const ok =
       status === 200 &&
       payload?.policy?.status === "approved-only" &&
-      items.length >= 34 &&
+      items.length >= 37 &&
       items.every((x) =>
         x &&
         x.verification === "approved" &&
