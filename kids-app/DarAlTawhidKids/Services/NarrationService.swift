@@ -14,10 +14,10 @@ final class NarrationService: NSObject, ObservableObject, AVSpeechSynthesizerDel
         synthesizer.delegate = self
     }
 
-    func play(story: KidsStory) {
+    func play(story: KidsStory, ageBand: AgeBand) {
         stop()
 
-        if let resource = story.audioResource,
+        if let resource = story.audioResource(for: ageBand),
            let url = Bundle.main.url(forResource: resource, withExtension: "mp3", subdirectory: "Audio") {
             do {
                 try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio, options: [.duckOthers])
@@ -30,28 +30,46 @@ final class NarrationService: NSObject, ObservableObject, AVSpeechSynthesizerDel
                 isPlaying = true
                 return
             } catch {
-                // Entwicklungs-Fallback unten.
+                // Fällt kontrolliert auf die lokale iOS-Stimme zurück.
             }
         }
 
-        let utterance = AVSpeechUtterance(string: story.narrationText)
-        utterance.voice = AVSpeechSynthesisVoice(language: "de-DE")
-        utterance.rate = 0.43
-        utterance.pitchMultiplier = 0.94
-        utterance.preUtteranceDelay = 0.2
-        utterance.postUtteranceDelay = 0.15
+        let version = story.version(for: ageBand)
+        let utterance = AVSpeechUtterance(string: version.narrationText)
+        utterance.voice = preferredGermanVoice()
+        utterance.rate = ageBand.narrationRate
+        utterance.pitchMultiplier = 0.97
+        utterance.preUtteranceDelay = 0.15
+        utterance.postUtteranceDelay = 0.12
+
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio, options: [.duckOthers])
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            // Die Sprachausgabe kann auch ohne explizite Aktivierung funktionieren.
+        }
+
         isUsingFallbackVoice = true
         isPlaying = true
         synthesizer.speak(utterance)
     }
 
     func stop() {
-        if synthesizer.isSpeaking {
+        if synthesizer.isSpeaking || synthesizer.isPaused {
             synthesizer.stopSpeaking(at: .immediate)
         }
         audioPlayer?.stop()
         audioPlayer = nil
         isPlaying = false
+    }
+
+    private func preferredGermanVoice() -> AVSpeechSynthesisVoice? {
+        let germanVoices = AVSpeechSynthesisVoice.speechVoices()
+            .filter { $0.language.lowercased().hasPrefix("de") }
+
+        return germanVoices.max { left, right in
+            left.quality.rawValue < right.quality.rawValue
+        } ?? AVSpeechSynthesisVoice(language: "de-DE")
     }
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
