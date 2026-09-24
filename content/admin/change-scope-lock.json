@@ -5810,10 +5810,11 @@
     {
       "id": "dar-al-tawhid-kids-v1-2026-09-24",
       "approvedBy": "user-explicit-kids-app-start",
-      "reason": "Nutzer: eigenständige DĀR AL TAWḤĪD Kinder-App für 4–10 Jahre jetzt als separaten GitHub-Bereich beginnen; bestehende Besucher-, Test-, iOS- und Apple-TV-App unverändert lassen.",
+      "reason": "Nutzer: eigenständige DĀR AL TAWḤĪD Kinder-App für 4–10 Jahre jetzt als separaten GitHub-Bereich beginnen und eine öffentliche Test-Vorschau unter /test/kids/ bereitstellen; bestehende Besucher-, normale Test-, iOS- und Apple-TV-App unverändert lassen.",
       "paths": [
         "content/admin/change-scope-lock.json",
-        "kids-app/"
+        "kids-app/",
+        "test/kids/"
       ],
       "expiresAt": "2027-03-31T23:59:00.000Z",
       "stage": "feature-only"
