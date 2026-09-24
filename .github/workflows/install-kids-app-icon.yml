@@ -1,0 +1,71 @@
+name: Install official Kids app icon
+
+on:
+  push:
+    branches:
+      - feature/dar-al-tawhid-kids-v1
+    paths:
+      - .github/workflows/install-kids-app-icon.yml
+
+permissions:
+  contents: write
+
+jobs:
+  install-icon:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Kids branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/dar-al-tawhid-kids-v1
+          fetch-depth: 0
+
+      - name: Download approved full-bleed icon
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 "https://at.adobe.com/7qOFP4BMGJesYBrf" -o /tmp/kids-app-icon-1024.png
+          file /tmp/kids-app-icon-1024.png
+          test "$(head -c 8 /tmp/kids-app-icon-1024.png | xxd -p)" = "89504e470d0a1a0a"
+
+      - name: Install native and web icon assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          NATIVE="kids-app/DarAlTawhidKids/Assets.xcassets/AppIcon.appiconset"
+          WEB="test/kids/icons"
+          mkdir -p "$NATIVE" "$WEB"
+          cp /tmp/kids-app-icon-1024.png "$NATIVE/AppIcon-1024.png"
+          cp /tmp/kids-app-icon-1024.png "$WEB/app-icon-1024.png"
+
+          if command -v magick >/dev/null 2>&1; then
+            magick /tmp/kids-app-icon-1024.png -resize 512x512 "$WEB/icon-512.png"
+            magick /tmp/kids-app-icon-1024.png -resize 192x192 "$WEB/icon-192.png"
+            magick /tmp/kids-app-icon-1024.png -resize 180x180 "$WEB/apple-touch-icon.png"
+          elif command -v convert >/dev/null 2>&1; then
+            convert /tmp/kids-app-icon-1024.png -resize 512x512 "$WEB/icon-512.png"
+            convert /tmp/kids-app-icon-1024.png -resize 192x192 "$WEB/icon-192.png"
+            convert /tmp/kids-app-icon-1024.png -resize 180x180 "$WEB/apple-touch-icon.png"
+          else
+            python3 -m pip install --quiet pillow
+            python3 - <<'PY'
+from PIL import Image
+from pathlib import Path
+src = Image.open("/tmp/kids-app-icon-1024.png").convert("RGB")
+out = Path("test/kids/icons")
+for size, name in [(512,"icon-512.png"),(192,"icon-192.png"),(180,"apple-touch-icon.png")]:
+    src.resize((size,size), Image.Resampling.LANCZOS).save(out/name, "PNG", optimize=True)
+PY
+          fi
+
+      - name: Commit icon assets and remove installer
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/install-kids-app-icon.yml
+          git add kids-app/DarAlTawhidKids/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png
+          git add test/kids/icons
+          git commit -m "chore(kids): install official app icon assets"
+          git push origin HEAD:feature/dar-al-tawhid-kids-v1
