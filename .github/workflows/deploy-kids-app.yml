@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: dar-al-tawhid-kids-live
@@ -27,32 +27,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
-
-      - name: Bootstrap Kids artwork assets
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p test/kids/assets/kids-art
-          if [ ! -s test/kids/assets/kids-art/hero-entdecke.png ]; then
-            curl -fsSL --retry 3 --retry-all-errors -o test/kids/assets/kids-art/hero-entdecke.png "https://at.adobe.com/Av6QirIr4TwVcL9A"
-            curl -fsSL --retry 3 --retry-all-errors -o test/kids/assets/kids-art/card-mein-quran.png "https://at.adobe.com/I5jmx6stqnTEQCAC"
-            curl -fsSL --retry 3 --retry-all-errors -o test/kids/assets/kids-art/card-heute-lernen.png "https://at.adobe.com/IffAMNUTETBXRG2G"
-            curl -fsSL --retry 3 --retry-all-errors -o test/kids/assets/kids-art/story-muenze.png "https://at.adobe.com/1q6T8V7vcGAZKudK"
-            curl -fsSL --retry 3 --retry-all-errors -o test/kids/assets/kids-art/quran-reise.png "https://at.adobe.com/D9Fzg02KQ6LOUc5Q"
-            curl -fsSL --retry 3 --retry-all-errors -o test/kids/assets/kids-art/quran-surah-zone.png "https://at.adobe.com/yrwm6PRoEtrxxamq"
-            curl -fsSL --retry 3 --retry-all-errors -o test/kids/assets/kids-art/card-geschichte.jpg "https://at.adobe.com/SaqOfn3a8Sb9MEiR"
-            curl -fsSL --retry 3 --retry-all-errors -o test/kids/assets/kids-art/card-quiz.jpg "https://at.adobe.com/CCnvlcd3KjxaoMKC"
-          fi
-          test -s test/kids/assets/kids-art/hero-entdecke.png
-          test -s test/kids/assets/kids-art/quran-reise.png
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add test/kids/assets/kids-art
-          if ! git diff --cached --quiet; then
-            git commit -m "Kids v0.7: add generated artwork assets [skip ci]"
-            git push origin HEAD:feature/dar-al-tawhid-kids-v1
-          fi
-
 
       - name: Install dependencies
         run: npm install
