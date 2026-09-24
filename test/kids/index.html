@@ -273,7 +273,17 @@ input[type=range]{width:100%;accent-color:var(--gold)}
 .ayah-box{width:100%}
 .learn-status{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.06);padding:8px 11px;border-radius:999px;color:var(--muted);font-size:11px;font-weight:850;margin-bottom:17px}
 .learn-status.you{background:rgba(115,201,193,.13);color:#bff5e8;border-color:rgba(115,201,193,.22);animation:bob 1.4s ease-in-out infinite}
+.learn-status.error{background:rgba(225,75,75,.15);color:#ffc5c5;border-color:rgba(238,91,91,.34);animation:errorPulse .6s ease-in-out 2}
+.learn-status.success{background:rgba(82,196,132,.15);color:#cbffe1;border-color:rgba(82,196,132,.30)}
+@keyframes errorPulse{50%{transform:scale(1.025);box-shadow:0 0 0 7px rgba(229,70,70,.08)}}
 .ayah-ar{font-family:"Geeza Pro","Noto Naskh Arabic","Traditional Arabic",serif;font-size:clamp(33px,9vw,52px);line-height:1.72;direction:rtl;margin:0 auto;color:#fff;max-width:620px;text-shadow:0 3px 18px rgba(0,0,0,.18)}
+.qword{display:inline-block;padding:.02em .04em;border-radius:.18em;transition:color .16s ease,background .16s ease,transform .16s ease}
+.qword.correct{color:#bff4d1;background:rgba(67,190,116,.09)}
+.qword.current{color:#ffe09a;background:rgba(226,189,114,.10);transform:scale(1.03)}
+.qword.wrong{color:#ffb0b0;background:rgba(225,70,70,.16);text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.13em}
+.qword.pending{color:#fff}
+.mic-live{box-shadow:0 0 0 0 rgba(115,201,193,.34);animation:micRing 1.4s ease-out infinite}
+@keyframes micRing{70%{box-shadow:0 0 0 9px rgba(115,201,193,0)}100%{box-shadow:0 0 0 0 rgba(115,201,193,0)}}
 .ayah-tr{font-size:14px;line-height:1.5;color:#d8e8ed;margin:17px auto 0;max-width:560px;font-weight:700}
 .ayah-de{font-size:12px;line-height:1.5;color:var(--muted);margin:10px auto 0;max-width:540px}
 .ayah-no{font-size:10px;color:var(--soft);margin-top:15px}
@@ -538,7 +548,7 @@ input[type=range]{width:100%;accent-color:var(--gold)}
             <button id="speakAlong">🎙 Jetzt mitsprechen</button>
             <button id="nextAyah">Weiter ›</button>
           </div>
-          <div class="quran-mini-note">Beim „Mitsprechen“-Modus hörst du die Āyah, bekommst Zeit zum Nachsprechen und hörst sie danach noch einmal.</div>
+          <div class="quran-mini-note">„Mitsprechen“ öffnet das Mikrofon. Richtige Wörter werden grün. Bei einer deutlichen Abweichung stoppt die Übung und du kannst die Āyah sofort noch einmal versuchen.</div>
         </div>
       </div>
     </div>
@@ -608,6 +618,14 @@ var currentAyahIndex=0;
 var quranMode="listen";
 var speakAlongTimer=0;
 var quranAudio=document.getElementById("quranAudio");
+var SpeechRecognitionCtor=window.SpeechRecognition||window.webkitSpeechRecognition||null;
+var recitationRecognition=null;
+var recitationListening=false;
+var recitationState="idle";
+var recitationMatched=0;
+var recitationWrong=-1;
+var recitationTranscript="";
+var recitationPermissionReady=false;
 var speech=window.speechSynthesis;
 var speaking=false;
 var currentStoryKey="coin";
@@ -688,13 +706,19 @@ function normalizeSurah(data){
 }
 function stopQuran(){
   clearTimeout(speakAlongTimer);
+  stopRecitationRecognition();
   try{quranAudio.pause()}catch(e){}
   quranAudio.removeAttribute("src");
   quranAudio.load();
   quranMode="listen";
+  recitationState="idle";
+  recitationMatched=0;
+  recitationWrong=-1;
   updateLearnStatus("🎧 Erst hören",false);
   document.getElementById("ayahPlay").textContent="▶ Āyah anhören";
-  document.getElementById("speakAlong").classList.remove("active");
+  var speakBtn=document.getElementById("speakAlong");
+  speakBtn.classList.remove("active","mic-live");
+  speakBtn.textContent="🎙 Jetzt mitsprechen";
 }
 function openSurah(id,ayahIndex,mode){
   stopQuran();
@@ -724,7 +748,10 @@ function renderAyah(){
   var v=currentSurah.verses[currentAyahIndex];
   document.getElementById("quranTitle").textContent=currentSurah.transliteration;
   document.getElementById("quranSubtitle").textContent="Āyah "+v.id+" von "+currentSurah.verses.length;
-  document.getElementById("ayahAr").textContent=v.ar||"";
+  recitationMatched=0;
+  recitationWrong=-1;
+  recitationState="idle";
+  renderAyahWords(0,-1,0);
   document.getElementById("ayahTr").textContent=v.tr_readable||v.tr||"";
   document.getElementById("ayahDe").textContent=v.de||"";
   document.getElementById("ayahNo").textContent="Āyah "+v.id+" · Sūrah "+currentSurah.id;
@@ -746,10 +773,220 @@ function renderDots(){
     box.appendChild(d);
   }
 }
-function updateLearnStatus(text,you){
+function escapeHtml(s){
+  return String(s==null?"":s).replace(/[&<>"']/g,function(ch){return{"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]});
+}
+function rawAyahWords(){
+  if(!currentSurah||!currentSurah.verses.length)return[];
+  var v=currentSurah.verses[currentAyahIndex]||{};
+  return String(v.ar||"").trim().split(/\s+/).filter(Boolean);
+}
+function stripArabicMarks(s){
+  return String(s||"")
+    .replace(/[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED]/g,"")
+    .replace(/ـ/g,"")
+    .replace(/ٱ/g,"ا")
+    .replace(/[أإآ]/g,"ا")
+    .replace(/ؤ/g,"و")
+    .replace(/ئ/g,"ي")
+    .replace(/ى/g,"ي")
+    .replace(/ة/g,"ه")
+    .replace(/[^ء-ي\s]/g,"")
+    .replace(/\s+/g," ")
+    .trim();
+}
+function normalizedWords(s){
+  var n=stripArabicMarks(s);
+  return n?n.split(" ").filter(Boolean):[];
+}
+function levenshtein(a,b){
+  if(a===b)return 0;
+  var m=a.length,n=b.length,prev=new Array(n+1),cur=new Array(n+1);
+  for(var j=0;j<=n;j++)prev[j]=j;
+  for(var i=1;i<=m;i++){
+    cur[0]=i;
+    for(var k=1;k<=n;k++)cur[k]=Math.min(cur[k-1]+1,prev[k]+1,prev[k-1]+(a.charAt(i-1)===b.charAt(k-1)?0:1));
+    var t=prev;prev=cur;cur=t;
+  }
+  return prev[n];
+}
+function tokenMatches(a,b){
+  if(a===b)return true;
+  if(!a||!b)return false;
+  var max=Math.max(a.length,b.length);
+  if(max<3)return false;
+  return (1-(levenshtein(a,b)/max))>=0.72;
+}
+function trimOptionalPrelude(words,expected){
+  var out=words.slice();
+  var preludes=[
+    normalizedWords("اعوذ بالله من الشيطان الرجيم"),
+    normalizedWords("بسم الله الرحمن الرحيم")
+  ];
+  preludes.forEach(function(p){
+    if(out.length>=p.length){
+      var ok=true;
+      for(var i=0;i<p.length;i++){if(!tokenMatches(out[i],p[i])){ok=false;break}}
+      if(ok && (!expected.length || !tokenMatches(out[0],expected[0])))out=out.slice(p.length);
+    }
+  });
+  return out;
+}
+function renderAyahWords(matched,wrong,current){
+  var words=rawAyahWords();
+  var html=words.map(function(w,i){
+    var cls="pending";
+    if(i<matched)cls="correct";
+    else if(i===wrong)cls="wrong";
+    else if(i===current)cls="current";
+    return '<span class="qword '+cls+'">'+escapeHtml(w)+'</span>';
+  }).join(" ");
+  document.getElementById("ayahAr").innerHTML=html||"";
+}
+function updateLearnStatus(text,you,type){
   var el=document.getElementById("learnStatus");
   el.textContent=text;
   el.classList.toggle("you",!!you);
+  el.classList.toggle("error",type==="error");
+  el.classList.toggle("success",type==="success");
+}
+function stopRecitationRecognition(){
+  recitationListening=false;
+  clearTimeout(speakAlongTimer);
+  if(recitationRecognition){
+    try{recitationRecognition.onend=null;recitationRecognition.stop()}catch(e){}
+    try{recitationRecognition.abort()}catch(e2){}
+  }
+  recitationRecognition=null;
+  var btn=document.getElementById("speakAlong");
+  if(btn)btn.classList.remove("mic-live");
+}
+function ensureMicrophonePermission(){
+  if(recitationPermissionReady)return Promise.resolve(true);
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return Promise.resolve(true);
+  return navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
+    stream.getTracks().forEach(function(t){t.stop()});
+    recitationPermissionReady=true;
+    return true;
+  }).catch(function(){
+    updateLearnStatus("🎙 Mikrofon nicht freigegeben",false,"error");
+    return false;
+  });
+}
+function recognizedSessionText(event){
+  var out=[];
+  for(var i=0;i<event.results.length;i++){
+    if(event.results[i]&&event.results[i][0])out.push(event.results[i][0].transcript||"");
+  }
+  return out.join(" ").trim();
+}
+function gradeRecitation(transcript,isFinal){
+  if(!currentSurah)return;
+  var expected=normalizedWords((currentSurah.verses[currentAyahIndex]||{}).ar||"");
+  var heard=trimOptionalPrelude(normalizedWords(transcript),expected);
+  var matched=0;
+  var wrong=-1;
+  for(var i=0;i<heard.length&&matched<expected.length;i++){
+    if(tokenMatches(heard[i],expected[matched])){
+      matched++;
+    }else{
+      wrong=matched;
+      break;
+    }
+  }
+  recitationMatched=matched;
+  recitationWrong=wrong;
+  renderAyahWords(matched,wrong,wrong<0?matched:-1);
+
+  if(expected.length&&matched>=expected.length){
+    recitationState="success";
+    stopRecitationRecognition();
+    renderAyahWords(expected.length,-1,-1);
+    updateLearnStatus("✓ Sehr gut — richtig mitgesprochen",false,"success");
+    var btn=document.getElementById("speakAlong");
+    btn.textContent="✓ Geschafft";
+    btn.classList.add("active");
+    return;
+  }
+
+  if(wrong>=0&&isFinal){
+    recitationState="error";
+    stopRecitationRecognition();
+    updateLearnStatus("Stopp — dieses Wort noch einmal",false,"error");
+    var b=document.getElementById("speakAlong");
+    b.textContent="↻ Noch einmal";
+    b.classList.remove("active");
+    try{
+      if("speechSynthesis" in window){
+        window.speechSynthesis.cancel();
+        var u=new SpeechSynthesisUtterance("Stopp. Noch einmal.");
+        u.lang="de-DE";u.rate=.88;
+        window.speechSynthesis.speak(u);
+      }
+    }catch(e){}
+    return;
+  }
+
+  updateLearnStatus("🎙 Ich höre zu — sprich weiter",true);
+}
+function startRecitationRecognition(){
+  if(!SpeechRecognitionCtor){
+    recitationState="error";
+    updateLearnStatus("Mikrofon-Erkennung ist auf diesem Browser nicht verfügbar",false,"error");
+    document.getElementById("speakAlong").textContent="↻ Noch einmal";
+    return;
+  }
+  stopRecitationRecognition();
+  recitationState="listening";
+  recitationMatched=0;
+  recitationWrong=-1;
+  recitationTranscript="";
+  renderAyahWords(0,-1,0);
+
+  var recognition=new SpeechRecognitionCtor();
+  recitationRecognition=recognition;
+  recognition.lang="ar-SA";
+  recognition.interimResults=true;
+  recognition.continuous=true;
+  recognition.maxAlternatives=3;
+
+  recognition.onstart=function(){
+    recitationListening=true;
+    updateLearnStatus("🎙 Ich höre zu — sprich die Āyah",true);
+    var btn=document.getElementById("speakAlong");
+    btn.textContent="■ Mikrofon stoppen";
+    btn.classList.add("active","mic-live");
+  };
+  recognition.onresult=function(event){
+    recitationTranscript=recognizedSessionText(event);
+    var last=event.results[event.results.length-1];
+    gradeRecitation(recitationTranscript,!!(last&&last.isFinal));
+  };
+  recognition.onerror=function(event){
+    if(event&&event.error==="aborted")return;
+    recitationState="error";
+    stopRecitationRecognition();
+    updateLearnStatus(event&&event.error==="not-allowed"?"🎙 Mikrofon nicht freigegeben":"Sprache nicht sicher erkannt — noch einmal",false,"error");
+    document.getElementById("speakAlong").textContent="↻ Noch einmal";
+  };
+  recognition.onend=function(){
+    if(recitationState==="listening"&&recitationMatched>0){
+      recitationState="error";
+      updateLearnStatus("Noch nicht vollständig — versuch es noch einmal",false,"error");
+      document.getElementById("speakAlong").textContent="↻ Noch einmal";
+    }else if(recitationState==="listening"){
+      recitationState="idle";
+      updateLearnStatus("🎙 Tippe und sprich noch einmal",true);
+      document.getElementById("speakAlong").textContent="🎙 Jetzt mitsprechen";
+    }
+    recitationListening=false;
+    document.getElementById("speakAlong").classList.remove("mic-live");
+  };
+  try{recognition.start()}catch(e){
+    recitationState="error";
+    updateLearnStatus("Mikrofon konnte nicht gestartet werden",false,"error");
+    document.getElementById("speakAlong").textContent="↻ Noch einmal";
+  }
 }
 function playCurrent(after){
   if(!currentSurah)return;
@@ -776,14 +1013,24 @@ document.getElementById("ayahPlay").addEventListener("click",function(){
 });
 document.getElementById("speakAlong").addEventListener("click",function(){
   if(!currentSurah)return;
+  if(recitationListening){
+    stopRecitationRecognition();
+    recitationState="idle";
+    updateLearnStatus("🎙 Mikrofon gestoppt",false);
+    this.textContent="🎙 Jetzt mitsprechen";
+    return;
+  }
   quranMode="learn";
-  this.classList.add("active");
-  playCurrent(function(){
-    updateLearnStatus("🎙 Jetzt du — sprich die Āyah nach",true);
-    speakAlongTimer=setTimeout(function(){
-      updateLearnStatus("🎧 Noch einmal hören",false);
-      playCurrent(function(){updateLearnStatus("✓ Sehr gut — wenn du bereit bist: Weiter",false)});
-    },5000);
+  var btn=this;
+  ensureMicrophonePermission().then(function(ok){
+    if(!ok)return;
+    btn.classList.add("active");
+    btn.textContent="🎧 Erst hören …";
+    renderAyahWords(0,-1,0);
+    playCurrent(function(){
+      updateLearnStatus("🎙 Jetzt du — das Mikrofon hört zu",true);
+      startRecitationRecognition();
+    });
   });
 });
 document.getElementById("prevAyah").addEventListener("click",function(){
