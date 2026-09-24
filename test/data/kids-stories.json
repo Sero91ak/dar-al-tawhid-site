@@ -1,0 +1,77 @@
+{
+  "version":1,
+  "title":"Kindergeschichten",
+  "defaultAgeProfile":"8-10",
+  "ageProfiles":[
+    {"id":"4-5","label":"4–5 Jahre","showReading":false,"showSources":false,"description":"Nur Audio · kein Lesetext"},
+    {"id":"6-7","label":"6–7 Jahre","showReading":true,"showSources":false,"description":"Audio + kurzer Lesetext"},
+    {"id":"8-10","label":"8–10 Jahre","showReading":true,"showSources":true,"description":"Audio + vollständiger Lesetext"},
+    {"id":"11-12","label":"11–12 Jahre","showReading":true,"showSources":true,"description":"Audio + Text + Quellen"}
+  ],
+  "stories":[
+    {
+      "id":"nuh-arche","title":"Nūḥ und die Arche","durationMinutes":4,"cover":"/assets/kids-stories/covers/nuh-arche.jpg",
+      "teaser":"Nūḥ ruft sein Volk zu Allah und baut auf Allahs Befehl die Arche.",
+      "audioText":{
+        "4-5":"Nūḥ war ein Prophet Allahs. Er sagte zu seinem Volk: Betet nur Allah an. Viele Menschen hörten nicht auf ihn. Allah befahl Nūḥ, ein großes Schiff zu bauen. Nūḥ gehorchte Allah. Dann kam viel Wasser. Allah rettete Nūḥ und die Gläubigen im Schiff. Nūḥ vertraute Allah und blieb geduldig.",
+        "6-7":"Allah sandte den Propheten Nūḥ zu seinem Volk. Nūḥ rief die Menschen dazu auf, nur Allah anzubeten. Er sprach mit ihnen am Tag und in der Nacht. Viele wollten nicht hören. Allah befahl ihm, unter Seiner Aufsicht eine Arche zu bauen. Als die Flut kam, rettete Allah Nūḥ und die Gläubigen im Schiff.",
+        "8-10":"Allah sandte Nūḥ zu seinem Volk. Seine Botschaft war der Tawḥīd: Sie sollten Allah allein anbeten. Nūḥ rief sie am Tag und in der Nacht. Viele lehnten seine Botschaft ab. Allah befahl ihm, die Arche unter Seiner Aufsicht zu bauen. Während Nūḥ baute, verspotteten ihn Menschen. Als Allahs Befehl kam, stiegen Nūḥ und die Gläubigen in das Schiff. Allah rettete sie vor der Flut. Die Geschichte zeigt Geduld, Gehorsam und Vertrauen auf Allah.",
+        "11-12":"Allah sandte Nūḥ zu seinem Volk mit der Botschaft des Tawḥīd. Nūḥ setzte seine Daʿwah am Tag und in der Nacht fort. Viele Menschen wiesen ihn zurück. Allah befahl ihm, die Arche unter Seiner Aufsicht und Eingebung zu bauen. Als die Flut kam, fuhr die Arche durch Wellen wie Berge. Ein Sohn Nūḥs lehnte es ab, mitzukommen. Nach der Flut ließ Allah das Wasser zurückgehen. Die Erzählung verbindet Tawḥīd, Geduld und Gehorsam."
+      },
+      "readingText":{
+        "6-7":["Allah sandte Nūḥ zu seinem Volk und rief sie dazu auf, nur Allah anzubeten.","Viele wollten nicht zuhören. Trotzdem blieb Nūḥ geduldig.","Allah befahl ihm, eine Arche zu bauen. Als die Flut kam, rettete Allah Nūḥ und die Gläubigen."],
+        "8-10":["Allah sandte Nūḥ zu seinem Volk. Seine Botschaft war klar: Sie sollten Allah allein anbeten.","Nūḥ rief die Menschen am Tag und in der Nacht zu Allah. Viele lehnten seine Botschaft ab.","Allah befahl ihm, eine Arche zu bauen. Als die Flut kam, rettete Allah Nūḥ und die Gläubigen.","Lehre: Tawḥīd, Geduld und Gehorsam gegenüber Allah sind wichtiger als die Meinung der Menschen."],
+        "11-12":["Nūḥ rief sein Volk zum Tawḥīd und setzte seine Daʿwah beharrlich fort.","Allah befahl ihm, die Arche unter Seiner Aufsicht und Eingebung zu bauen.","Als die Flut kam, wurden Nūḥ und die Gläubigen gerettet. Einer seiner Söhne lehnte es ab, mitzukommen.","Die Geschichte zeigt, dass Rettung mit Īmān und Gehorsam verbunden ist."]
+      },
+      "sources":[{"type":"Qurʾān","label":"Qurʾān 7:59–64","surah":7,"ayah":59},{"type":"Qurʾān","label":"Qurʾān 11:36–44","surah":11,"ayah":36},{"type":"Qurʾān","label":"Qurʾān 71:5–9","surah":71,"ayah":5}]
+    },
+    {
+      "id":"ibrahim-feuer","title":"Ibrāhīm und das Feuer","durationMinutes":4,"cover":"/assets/kids-stories/covers/ibrahim-feuer.jpg",
+      "teaser":"Ibrāhīm hält am Tawḥīd fest, und Allah macht das Feuer kühl und sicher.",
+      "audioText":{
+        "4-5":"Ibrāhīm war ein Prophet Allahs. Er wusste, dass nur Allah angebetet werden darf. Die Menschen wollten ihn in ein großes Feuer werfen. Doch Allah beschützte Ibrāhīm. Allah machte das Feuer für ihn kühl und sicher.",
+        "6-7":"Ibrāhīm rief sein Volk zum Tawḥīd. Er erklärte ihnen, dass ihre Götzen nicht helfen können. Die Menschen wollten ihn verbrennen. Aber Allah machte das Feuer kühl und sicher für Ibrāhīm.",
+        "8-10":"Ibrāhīm rief sein Volk dazu auf, Allah allein anzubeten. Er zeigte ihnen, dass ihre Götzen weder sprechen noch helfen können. Die Menschen beschlossen, ihn zu verbrennen. Doch Allah befahl dem Feuer, für Ibrāhīm kühl und sicher zu sein. So rettete Allah Seinen Propheten.",
+        "11-12":"Ibrāhīm stellte den Götzendienst seines Volkes offen in Frage und rief sie zum Tawḥīd. Statt seine Argumente zu beantworten, beschlossen seine Gegner, ihn zu verbrennen. Allah befahl dem Feuer, kühl und sicher für Ibrāhīm zu sein. Die Erzählung zeigt Klarheit im Tawḥīd und Vertrauen auf Allah."
+      },
+      "readingText":{
+        "6-7":["Ibrāhīm rief sein Volk dazu auf, nur Allah anzubeten.","Sein Volk wollte ihn in ein Feuer werfen. Doch Allah beschützte ihn.","Allah machte das Feuer für Ibrāhīm kühl und sicher."],
+        "8-10":["Ibrāhīm sah, dass sein Volk Götzen anbetete. Er erklärte ihnen, dass nur Allah Anbetung verdient.","Die Menschen beschlossen, Ibrāhīm zu verbrennen.","Allah befahl dem Feuer, für ihn kühl und sicher zu sein. So rettete Allah Ibrāhīm."],
+        "11-12":["Ibrāhīm widersprach dem Götzendienst seines Volkes und rief sie zum Tawḥīd.","Seine Gegner wollten ihn verbrennen.","Allah machte das Feuer kühl und sicher für Ibrāhīm. Wahrheit wird nicht nach der Zahl ihrer Anhänger bewertet."]
+      },
+      "sources":[{"type":"Qurʾān","label":"Qurʾān 21:51–70","surah":21,"ayah":51}]
+    },
+    {
+      "id":"musa-meer","title":"Mūsā und das Meer","durationMinutes":5,"cover":"/assets/kids-stories/covers/musa-meer.jpg",
+      "teaser":"Mūsā führt Banū Isrāʾīl fort, und Allah spaltet das Meer für sie.",
+      "audioText":{
+        "4-5":"Mūsā war ein Prophet Allahs. Ein böser Herrscher verfolgte ihn und die Gläubigen. Vor ihnen war das Meer. Mūsā vertraute Allah. Allah ließ das Meer auseinandergehen. Mūsā und die Gläubigen gingen sicher hindurch.",
+        "6-7":"Mūsā führte die Gläubigen fort. Firʿawn und seine Leute verfolgten sie. Vor ihnen lag das Meer. Allah befahl Mūsā, mit seinem Stock auf das Meer zu schlagen. Das Meer teilte sich und die Gläubigen gingen sicher hindurch.",
+        "8-10":"Mūsā führte Banū Isrāʾīl in der Nacht fort. Firʿawn und seine Truppen verfolgten sie. Vor ihnen lag das Meer. Mūsā blieb überzeugt, dass Allah ihn führen würde. Allah offenbarte ihm, mit seinem Stock auf das Meer zu schlagen. Das Meer teilte sich und die Gläubigen gingen hindurch. Allah rettete sie.",
+        "11-12":"Allah befahl Mūsā, mit Banū Isrāʾīl nachts aufzubrechen. Firʿawn verfolgte sie. Als das Meer vor ihnen lag und die Armee näher kam, hielt Mūsā an seinem Vertrauen auf Allah fest. Allah offenbarte ihm, mit seinem Stock auf das Meer zu schlagen. Es teilte sich und die Gläubigen wurden gerettet."
+      },
+      "readingText":{
+        "6-7":["Mūsā führte die Gläubigen fort. Firʿawn verfolgte sie.","Vor ihnen war das Meer. Mūsā vertraute Allah.","Allah ließ das Meer auseinandergehen. Die Gläubigen gingen sicher hindurch."],
+        "8-10":["Mūsā führte Banū Isrāʾīl in der Nacht fort. Firʿawn und seine Truppen verfolgten sie.","Allah befahl Mūsā, mit seinem Stock auf das Meer zu schlagen.","Das Meer teilte sich. Mūsā und die Gläubigen gingen sicher hindurch."],
+        "11-12":["Allah befahl Mūsā, nachts aufzubrechen. Firʿawn verfolgte die Gläubigen.","Mūsā hielt am Vertrauen auf Allah fest.","Allah teilte das Meer. Tawakkul zeigt sich hier zusammen mit Gehorsam gegenüber Allahs Befehl."]
+      },
+      "sources":[{"type":"Qurʾān","label":"Qurʾān 20:77–79","surah":20,"ayah":77},{"type":"Qurʾān","label":"Qurʾān 26:52–68","surah":26,"ayah":52}]
+    },
+    {
+      "id":"yusuf-geduld","title":"Yūsuf und die Geduld","durationMinutes":6,"cover":"/assets/kids-stories/covers/yusuf-geduld.jpg",
+      "teaser":"Yūsuf erlebt schwere Prüfungen, bleibt Allah treu und vergibt seinen Brüdern.",
+      "audioText":{
+        "4-5":"Yūsuf war ein Prophet Allahs. Seine Brüder behandelten ihn schlecht und ließen ihn allein zurück. Aber Allah half Yūsuf. Später bekam Yūsuf eine wichtige Aufgabe. Als er seine Brüder wiedertraf, vergab er ihnen.",
+        "6-7":"Yūsufs Brüder wurden eifersüchtig und warfen ihn in einen Brunnen. Reisende fanden ihn. Yūsuf kam nach Ägypten und erlebte weitere Prüfungen. Er blieb Allah treu. Später bekam er eine wichtige Aufgabe. Als seine Brüder wiederkamen, vergab er ihnen.",
+        "8-10":"Yūsuf erzählte seinem Vater von einem besonderen Traum. Seine Brüder wurden eifersüchtig und warfen ihn in einen Brunnen. Yūsuf kam nach Ägypten und wurde weiter geprüft. Obwohl er unschuldig war, kam er ins Gefängnis. Dort rief er zum Tawḥīd und deutete Träume. Später erhielt er Verantwortung im Land. Als seine Brüder wiederkamen, vergab er ihnen.",
+        "11-12":"Sūrat Yūsuf erzählt eine zusammenhängende Geschichte voller Prüfungen. Yūsuf wurde von seinen Brüdern in einen Brunnen geworfen, kam nach Ägypten, widerstand einer Versuchung und kam unschuldig ins Gefängnis. Dort rief er zum Tawḥīd. Später wurde seine Unschuld deutlich und er erhielt Verantwortung im Land. Als er seine Brüder wiedertraf, vergab er ihnen."
+      },
+      "readingText":{
+        "6-7":["Yūsufs Brüder wurden eifersüchtig und warfen ihn in einen Brunnen.","Yūsuf erlebte weitere Prüfungen und blieb Allah treu.","Später erhielt er eine wichtige Aufgabe. Als seine Brüder wiederkamen, vergab er ihnen."],
+        "8-10":["Yūsuf erzählte seinem Vater von einem besonderen Traum. Seine Brüder wurden eifersüchtig und warfen ihn in einen Brunnen.","Yūsuf kam nach Ägypten und wurde weiter geprüft. Im Gefängnis rief er zum Tawḥīd.","Später erhielt er Verantwortung im Land. Als seine Brüder wiederkamen, vergab er ihnen."],
+        "11-12":["Yūsufs Geschichte führt durch Eifersucht, Verrat, Fremde und Gefängnis.","In jeder Phase hält Yūsuf an Allah fest und ruft zum Tawḥīd.","Später übernimmt er Verantwortung und vergibt seinen Brüdern. Die Geschichte zeigt Geduld, Gottesfurcht und Vergebung."]
+      },
+      "sources":[{"type":"Qurʾān","label":"Qurʾān 12:4–21","surah":12,"ayah":4},{"type":"Qurʾān","label":"Qurʾān 12:23–57","surah":12,"ayah":23},{"type":"Qurʾān","label":"Qurʾān 12:58–100","surah":12,"ayah":58}]
+    }
+  ]
+}
