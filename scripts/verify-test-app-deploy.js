@@ -151,7 +151,9 @@ async function fetchVersionBuild(base) {
     const ok =
       status === 200 &&
       text.includes("DĀR AL TAWḤĪD KIDS") &&
-      text.includes("id=\"view-today\"");
+      text.includes("id=\"view-today\"") &&
+      text.includes("id=\"openQuizButton\"") &&
+      text.includes("id=\"quizModal\"");
     console.log(
       `${label} kids: ${url} -> ${status} cf=${cf} marker=${ok}`
     );
