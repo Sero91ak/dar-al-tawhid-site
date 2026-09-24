@@ -1,6 +1,5 @@
 import SwiftUI
 import WidgetKit
-import AppIntents
 import UIKit
 
 struct DarEntry: TimelineEntry {
@@ -126,34 +125,12 @@ private struct DarAura: View {
     var body: some View {
         ZStack {
             palette.ink
-            if palette.id == "eisgold" {
-                LinearGradient(
-                    colors: [
-                        palette.panel.opacity(0.96),
-                        palette.ink.opacity(0.92),
-                        palette.ink
-                    ],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-                RadialGradient(
-                    colors: [palette.gold.opacity(0.20), Color.clear],
-                    center: .topLeading,
-                    startRadius: 4,
-                    endRadius: 90
-                )
-                Color.black.opacity(0.10)
-            } else {
-                LinearGradient(
-                    colors: [
-                        palette.panel.opacity(0.9),
-                        palette.ink.opacity(0.2),
-                        Color.clear
-                    ],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            }
+            RadialGradient(
+                colors: [palette.gold.opacity(0.08), Color.clear],
+                center: .topLeading,
+                startRadius: 0,
+                endRadius: 120
+            )
         }
     }
 }

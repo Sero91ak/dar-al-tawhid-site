@@ -20,7 +20,6 @@
 		A1000000000000000000000A /* DarDailyContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000015 /* DarDailyContent.swift */; };
 		A1000000000000000000000C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000000000000000000014 /* WidgetKit.framework */; };
 		A1000000000000000000000D /* DarWidgetTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000016 /* DarWidgetTheme.swift */; };
-		A1000000000000000000000E /* DarWidgetRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000017 /* DarWidgetRemote.swift */; };
 		A1000000000000000000000F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000019 /* PrivacyInfo.xcprivacy */; };
 		A20000000000000000000001 /* DarAlTawhidWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000011 /* DarAlTawhidWidgets.swift */; };
 		A20000000000000000000002 /* DarDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000011 /* DarDeepLink.swift */; };
@@ -32,22 +31,13 @@
 		A20000000000000000000008 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000000000000000000015 /* SwiftUI.framework */; };
 		A20000000000000000000009 /* DarAlTawhidWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A20000000000000000000010 /* DarAlTawhidWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A2000000000000000000000A /* DarWidgetTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000016 /* DarWidgetTheme.swift */; };
-		A2000000000000000000000B /* DarWidgetRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000017 /* DarWidgetRemote.swift */; };
 		A2000000000000000000000C /* DarWidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000016 /* DarWidgetViews.swift */; };
 		A2000000000000000000000D /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000017 /* PrivacyInfo.xcprivacy */; };
 		A2000000000000000000000E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000018 /* Assets.xcassets */; };
 		A40000000000000000000001 /* DarPushNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40000000000000000000011 /* DarPushNotifications.swift */; };
-		A60000000000000000000001 /* DarPrayerLive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60000000000000000000011 /* DarPrayerLive.swift */; };
-		A60000000000000000000002 /* DarPrayerLive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60000000000000000000011 /* DarPrayerLive.swift */; };
-		A60000000000000000000003 /* DarPrayerLiveActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60000000000000000000012 /* DarPrayerLiveActivityWidget.swift */; };
 		A60000000000000000000004 /* ActivityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60000000000000000000013 /* ActivityKit.framework */; };
 		A60000000000000000000005 /* ActivityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60000000000000000000013 /* ActivityKit.framework */; };
 		A70000000000000000000001 /* DarHaptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70000000000000000000011 /* DarHaptics.swift */; };
-		A70000000000000000000002 /* DarAppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70000000000000000000012 /* DarAppIntents.swift */; };
-		A70000000000000000000003 /* DarAppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70000000000000000000012 /* DarAppIntents.swift */; };
-		A70000000000000000000004 /* DarControlWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70000000000000000000013 /* DarControlWidgets.swift */; };
-		A70000000000000000000005 /* DarAppShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70000000000000000000014 /* DarAppShortcuts.swift */; };
-		A80000000000000000000001 /* DarWidgetConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80000000000000000000011 /* DarWidgetConfig.swift */; };
 		A90000000000000000000001 /* DarAppIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90000000000000000000011 /* DarAppIcons.swift */; };
 		A91000000000000000000001 /* DarAppShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91000000000000000000011 /* DarAppShell.swift */; };
 		A91100000000000000000001 /* DarInAppOpenGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91100000000000000000011 /* DarInAppOpenGuard.swift */; };
@@ -200,16 +190,9 @@
 		B50000000000000000000002 /* DarPrayerPushCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarPrayerPushCopy.swift; sourceTree = "<group>"; };
 		A30000000000000000000015 /* DarDailyContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarDailyContent.swift; sourceTree = "<group>"; };
 		A30000000000000000000016 /* DarWidgetTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWidgetTheme.swift; sourceTree = "<group>"; };
-		A30000000000000000000017 /* DarWidgetRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWidgetRemote.swift; sourceTree = "<group>"; };
 		A40000000000000000000011 /* DarPushNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarPushNotifications.swift; sourceTree = "<group>"; };
-		A60000000000000000000011 /* DarPrayerLive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarPrayerLive.swift; sourceTree = "<group>"; };
-		A60000000000000000000012 /* DarPrayerLiveActivityWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarPrayerLiveActivityWidget.swift; sourceTree = "<group>"; };
 		A60000000000000000000013 /* ActivityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActivityKit.framework; path = System/Library/Frameworks/ActivityKit.framework; sourceTree = SDKROOT; };
 		A70000000000000000000011 /* DarHaptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarHaptics.swift; sourceTree = "<group>"; };
-		A70000000000000000000012 /* DarAppIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAppIntents.swift; sourceTree = "<group>"; };
-		A70000000000000000000013 /* DarControlWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarControlWidgets.swift; sourceTree = "<group>"; };
-		A70000000000000000000014 /* DarAppShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAppShortcuts.swift; sourceTree = "<group>"; };
-		A80000000000000000000011 /* DarWidgetConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWidgetConfig.swift; sourceTree = "<group>"; };
 		A90000000000000000000011 /* DarAppIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAppIcons.swift; sourceTree = "<group>"; };
 		A91000000000000000000011 /* DarAppShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAppShell.swift; sourceTree = "<group>"; };
 		A91100000000000000000011 /* DarInAppOpenGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarInAppOpenGuard.swift; sourceTree = "<group>"; };
@@ -348,14 +331,10 @@
 				A10000000000000000000011 /* DarAlTawhidApp.swift */,
 				A40000000000000000000011 /* DarPushNotifications.swift */,
 				A70000000000000000000011 /* DarHaptics.swift */,
-				A70000000000000000000014 /* DarAppShortcuts.swift */,
 				A30000000000000000000016 /* DarWidgetTheme.swift */,
-				A30000000000000000000017 /* DarWidgetRemote.swift */,
 				A20000000000000000000031 /* Widgets */,
 				A90000000000000000000011 /* DarAppIcons.swift */,
-				A70000000000000000000012 /* DarAppIntents.swift */,
 				A91000000000000000000011 /* DarAppShell.swift */,
-				A60000000000000000000011 /* DarPrayerLive.swift */,
 				A91100000000000000000011 /* DarInAppOpenGuard.swift */,
 				A10000000000000000000016 /* DarAppRouter.swift */,
 				A10000000000000000000012 /* WebAppView.swift */,
@@ -404,9 +383,6 @@
 			children = (
 				A20000000000000000000011 /* DarAlTawhidWidgets.swift */,
 				A20000000000000000000016 /* DarWidgetViews.swift */,
-				A80000000000000000000011 /* DarWidgetConfig.swift */,
-				A60000000000000000000012 /* DarPrayerLiveActivityWidget.swift */,
-				A70000000000000000000013 /* DarControlWidgets.swift */,
 				A20000000000000000000012 /* Info.plist */,
 				A20000000000000000000013 /* Widgets.entitlements */,
 				A20000000000000000000018 /* Assets.xcassets */,
@@ -709,8 +685,6 @@
 				A90000000000000000000001 /* DarAppIcons.swift in Sources */,
 				A91000000000000000000001 /* DarAppShell.swift in Sources */,
 				A91100000000000000000001 /* DarInAppOpenGuard.swift in Sources */,
-				A70000000000000000000005 /* DarAppShortcuts.swift in Sources */,
-				A70000000000000000000002 /* DarAppIntents.swift in Sources */,
 				A10000000000000000000005 /* DarAppRouter.swift in Sources */,
 				A10000000000000000000002 /* WebAppView.swift in Sources */,
 				A10000000000000000000006 /* DarDeepLink.swift in Sources */,
@@ -720,8 +694,6 @@
 				B50000000000000000000001 /* DarPrayerPushCopy.swift in Sources */,
 				A1000000000000000000000A /* DarDailyContent.swift in Sources */,
 				A1000000000000000000000D /* DarWidgetTheme.swift in Sources */,
-				A1000000000000000000000E /* DarWidgetRemote.swift in Sources */,
-				A60000000000000000000001 /* DarPrayerLive.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,18 +703,12 @@
 			files = (
 				A20000000000000000000001 /* DarAlTawhidWidgets.swift in Sources */,
 				A2000000000000000000000C /* DarWidgetViews.swift in Sources */,
-				A80000000000000000000001 /* DarWidgetConfig.swift in Sources */,
-				A60000000000000000000003 /* DarPrayerLiveActivityWidget.swift in Sources */,
-				A70000000000000000000004 /* DarControlWidgets.swift in Sources */,
-				A70000000000000000000003 /* DarAppIntents.swift in Sources */,
-				A60000000000000000000002 /* DarPrayerLive.swift in Sources */,
 				A20000000000000000000002 /* DarDeepLink.swift in Sources */,
 				A20000000000000000000003 /* DarWidgetSnapshot.swift in Sources */,
 				A20000000000000000000004 /* DarWidgetStore.swift in Sources */,
 				A20000000000000000000005 /* DarPrayerEngine.swift in Sources */,
 				A20000000000000000000006 /* DarDailyContent.swift in Sources */,
 				A2000000000000000000000A /* DarWidgetTheme.swift in Sources */,
-				A2000000000000000000000B /* DarWidgetRemote.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
