@@ -7,7 +7,7 @@ enum KidsTab: Hashable {
     case parents
 }
 
-enum AgeBand: String, CaseIterable, Identifiable {
+enum AgeBand: String, CaseIterable, Identifiable, Hashable {
     case age4to5 = "4–5"
     case age6to8 = "6–8"
     case age9to10 = "9–10"
