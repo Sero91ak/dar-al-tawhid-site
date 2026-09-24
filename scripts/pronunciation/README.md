@@ -4,7 +4,7 @@ Diese Skripte sind provider-unabhängig und bereiten Erzähltexte für die eigen
 
 - `pronunciation-library.mjs`: Loader und längste-Match-zuerst-Engine
 - `prepare-narration.mjs`: CLI für Textdateien
-- `validate-pronunciation-library.mjs`: Integritätsprüfung der 3.719 Regeln
+- `validate-pronunciation-library.mjs`: Integritätsprüfung der 3.727 Regeln
 
 Beispiel:
 
