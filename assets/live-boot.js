@@ -363,7 +363,77 @@
   }
 
 
+
+  // DAR_FORCED_UI_UPDATE_V1007
+  var FORCED_UI_UPDATE_ID = "app-shell-v1007-topfix";
+  var FORCED_UI_UPDATE_KEY = "dar_forced_ui_update_v1007";
+
+  function isDarAppLike() {
+    try {
+      var ua = String(navigator.userAgent || "");
+      var q = new URLSearchParams(location.search || "");
+      return /DarAlTawhid-iOS|DarAlTawhidAndroid/i.test(ua)
+        || navigator.standalone === true
+        || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches)
+        || q.get("homescreen") === "1"
+        || q.get("app") === "1";
+    } catch (e) { return false; }
+  }
+
+  function installRuntimeSolidTop() {
+    try {
+      if (document.getElementById("dar-runtime-solid-top-v1007")) return;
+      var style = document.createElement("style");
+      style.id = "dar-runtime-solid-top-v1007";
+      style.textContent = [
+        "html.dar-ios-native-app,html.dar-android-native-app,html.is-standalone-pwa{--dar-runtime-top:var(--quran-page-bg,var(--theme-feed-bg,var(--dar-edge-fill,var(--page-cover,var(--outer-bg-flat,var(--bg,#050706))))))}",
+        "html.dar-ios-native-app :is(.top-shell,.header,.header.theme-hero-surface,.sf-top,.qov-header,.qov-filter-bar,.qpt-topbar,.app-bar,.view-head,.settings-page-head),html.dar-android-native-app :is(.top-shell,.header,.header.theme-hero-surface,.sf-top,.qov-header,.qov-filter-bar,.qpt-topbar,.app-bar,.view-head,.settings-page-head),html.is-standalone-pwa :is(.top-shell,.header,.header.theme-hero-surface,.sf-top,.qov-header,.qov-filter-bar,.qpt-topbar,.app-bar,.view-head,.settings-page-head){-webkit-backdrop-filter:none!important;backdrop-filter:none!important;filter:none!important;background-image:none!important;background:var(--dar-runtime-top)!important;background-color:var(--dar-runtime-top)!important}",
+        "html.dar-ios-native-app :is(.top-edge-fade,.top-swim-aura,#topEdgeFade,#topSwimAura),html.dar-android-native-app :is(.top-edge-fade,.top-swim-aura,#topEdgeFade,#topSwimAura),html.is-standalone-pwa :is(.top-edge-fade,.top-swim-aura,#topEdgeFade,#topSwimAura){display:none!important;visibility:hidden!important;opacity:0!important;height:0!important;background:none!important;filter:none!important;pointer-events:none!important}"
+      ].join("");
+      (document.head || document.documentElement).appendChild(style);
+    } catch (e) {}
+  }
+
+  function forceUiRefreshNow() {
+    try { localStorage.setItem(FORCED_UI_UPDATE_KEY, FORCED_UI_UPDATE_ID); } catch (e) {}
+    try {
+      if ("caches" in window) caches.keys().then(function(keys){keys.forEach(function(k){if(/^dar-al-tawhid-offline-light-/i.test(k))caches.delete(k);});});
+    } catch (e) {}
+    try {
+      if ("serviceWorker" in navigator) navigator.serviceWorker.getRegistration("/").then(function(reg){
+        try { if(reg && reg.active) reg.active.postMessage({type:"HARD_REFRESH"}); } catch (e) {}
+        try { if(reg && typeof reg.update==="function") reg.update(); } catch (e) {}
+      });
+    } catch (e) {}
+    try {
+      var u = new URL(location.href);
+      u.searchParams.set("darui","1007");
+      u.searchParams.set("cb",String(Date.now()));
+      location.replace(u.toString());
+    } catch (e) { location.reload(); }
+  }
+
+  function showForcedUiUpdate() {
+    if (!isDarAppLike()) return;
+    try { if (String(localStorage.getItem(FORCED_UI_UPDATE_KEY) || "") === FORCED_UI_UPDATE_ID) return; } catch (e) {}
+    if (!document.body || document.getElementById("dar-forced-ui-update-v1007")) return;
+    var overlay = document.createElement("div");
+    overlay.id = "dar-forced-ui-update-v1007";
+    overlay.setAttribute("role","dialog");
+    overlay.setAttribute("aria-modal","true");
+    overlay.innerHTML = '<div class="dar-fu-card"><div class="dar-fu-kicker">DĀR AL TAWḤĪD</div><h2>Aktualisierung bereit</h2><p>Die App-Oberfläche wurde aktualisiert. Einmal neu laden, damit der obere Bereich ohne Blur/Glass übernommen wird.</p><button type="button" id="darForcedUiUpdateBtn">Jetzt aktualisieren</button></div>';
+    var style = document.createElement("style");
+    style.id = "dar-forced-ui-update-style-v1007";
+    style.textContent = "#dar-forced-ui-update-v1007{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:24px;background:#050706;color:#f5efe1;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',system-ui,sans-serif}#dar-forced-ui-update-v1007 .dar-fu-card{width:min(100%,430px);padding:28px 22px 22px;border:1px solid rgba(216,190,122,.28);border-radius:28px;background:#0b0d0c;text-align:center;box-shadow:0 24px 70px rgba(0,0,0,.55)}#dar-forced-ui-update-v1007 .dar-fu-kicker{font:700 11px/1.2 Georgia,serif;letter-spacing:.2em;color:#d8be7a}#dar-forced-ui-update-v1007 h2{margin:12px 0 8px;font-size:25px;line-height:1.1}#dar-forced-ui-update-v1007 p{margin:0;color:rgba(245,239,225,.72);font-size:14px;line-height:1.5}#dar-forced-ui-update-v1007 button{width:100%;min-height:54px;margin-top:20px;border:0;border-radius:17px;background:#d8be7a;color:#111;font-size:15px;font-weight:900}";
+    (document.head || document.documentElement).appendChild(style);
+    document.body.appendChild(overlay);
+    var btn = document.getElementById("darForcedUiUpdateBtn");
+    if (btn) btn.addEventListener("click", forceUiRefreshNow);
+  }
+
   function boot() {
+    installRuntimeSolidTop();
+    showForcedUiUpdate();
     bindFeedHeaderGuard();
     bindChipPruneGuard();
     bindHadithGateGuard();
