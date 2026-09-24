@@ -227,7 +227,40 @@ function validateStories() {
     for (const key of ["prophetId", "title", "text", "category"]) {
       if (!nonEmpty(item[key])) fail(`${rel}:${item.id}: ${key} fehlt`);
     }
-    if (!Array.isArray(item.claimIds) || item.claimIds.length === 0) fail(`${rel}:${item.id}: claimIds fehlen`);
+    if (!Array.isArray(item.claimIds) || item.claimIds.length === 0) {
+      fail(`${rel}:${item.id}: claimIds fehlen`);
+    } else {
+      const prophetRel = `data/prophets/${item.prophetId}.json`;
+      const prophet = readJson(prophetRel);
+      if (!prophet) {
+        fail(`${rel}:${item.id}: Propheten-Kanon fehlt (${prophetRel})`);
+      } else {
+        if (prophet.profileStatus !== "approved") {
+          fail(`${rel}:${item.id}: Prophetenprofil ${item.prophetId} ist nicht approved`);
+        }
+        const claims = Array.isArray(prophet.claims) ? prophet.claims : [];
+        const claimMap = new Map(claims.map((claim) => [String(claim.id), claim]));
+        for (const claimId of item.claimIds) {
+          const claim = claimMap.get(String(claimId));
+          if (!claim) {
+            fail(`${rel}:${item.id}: claimId ${claimId} fehlt in ${prophetRel}`);
+            continue;
+          }
+          if (claim.verificationStatus !== "approved") {
+            fail(`${rel}:${item.id}: claim ${claimId} ist nicht approved`);
+          }
+          if (claim.evidenceType !== "quran" || claim.grading !== "quran") {
+            fail(`${rel}:${item.id}: claim ${claimId} ist kein reiner Qurʾān-Beleg`);
+          }
+          if (claim.reviewPass1 !== "passed" || claim.reviewPass2 !== "passed") {
+            fail(`${rel}:${item.id}: claim ${claimId} hat nicht beide Review-Pässe bestanden`);
+          }
+          if (!nonEmpty(claim.number) || !nonEmpty(claim.arabicOriginal) || !nonEmpty(claim.translationDe)) {
+            fail(`${rel}:${item.id}: claim ${claimId} ist inhaltlich unvollständig`);
+          }
+        }
+      }
+    }
     if (!Array.isArray(item.sourceRefs) || item.sourceRefs.length === 0) {
       fail(`${rel}:${item.id}: sourceRefs fehlen`);
     } else if (item.sourceRefs.some((s) => !/^Qurʾān\s/.test(String(s)))) {
