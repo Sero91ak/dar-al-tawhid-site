@@ -669,3 +669,5 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
+
+/* VISITOR_SITE_RECOVERY_2026_09_24 */
