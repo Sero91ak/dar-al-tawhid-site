@@ -8,12 +8,12 @@
   },
   "checks": {
     "transliterationToIpaStructuralMismatches": 0,
-    "unassimilatedOrdinarySunLetterAliasesExcludingLam": 6,
+    "unassimilatedOrdinarySunLetterAliasesExcludingLam": 0,
     "canonicalEntriesWithoutExplicitPrimaryStress": 847
   },
   "status": {
     "segmentalPhonemeMapping": "pass",
-    "ordinarySunLetterAssimilation": "review",
+    "ordinarySunLetterAssimilation": "pass",
     "lexicalStress": "needs-verification",
     "brandReading": "owner-approved"
   },
