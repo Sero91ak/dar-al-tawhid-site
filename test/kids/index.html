@@ -545,13 +545,16 @@ html,body{background:#06131f!important}
 }
 
 /* KIDS_AI_ART_V7_START — generated artwork backgrounds */
-/* KIDS_IMAGE_FIT_V9 — show complete artwork instead of cropping it */
+/* KIDS_IMAGE_RESPONSIVE_V10
+   Artwork always preserves its full aspect ratio on phones, split view and iPad.
+   The first background layer paints the full card; the second is the artwork and uses contain. */
 .hero{
+  min-height:clamp(286px,46vw,372px);
   background-color:#102a38;
   background-image:
-    linear-gradient(90deg,rgba(5,18,29,.88) 0%,rgba(5,18,29,.48) 47%,rgba(5,18,29,.12) 100%),
-    url("/test/kids/assets/kids-art/hero-entdecke.png?v=9");
-  background-size:cover,auto 100%;
+    linear-gradient(90deg,rgba(5,18,29,.92) 0%,rgba(5,18,29,.62) 43%,rgba(5,18,29,.17) 76%,rgba(5,18,29,.05) 100%),
+    url("/test/kids/assets/kids-art/hero-entdecke.png?v=10");
+  background-size:100% 100%,contain;
   background-position:center,right center;
   background-repeat:no-repeat,no-repeat;
 }
@@ -560,60 +563,66 @@ html,body{background:#06131f!important}
 .hero-kicker{color:#ffe4a3}
 
 .choice{
+  min-height:clamp(142px,23vw,178px);
   background-color:#153044;
-  background-size:cover,auto 100%!important;
+  background-size:100% 100%,contain!important;
   background-position:center,right center!important;
   background-repeat:no-repeat,no-repeat!important;
 }
 .choice.story{
   background-image:
-    linear-gradient(90deg,rgba(71,31,37,.96) 0%,rgba(71,31,37,.83) 46%,rgba(71,31,37,.26) 72%,rgba(71,31,37,.08) 100%),
-    url("/test/kids/assets/kids-art/card-geschichte.jpg?v=9");
+    linear-gradient(90deg,rgba(71,31,37,.97) 0%,rgba(71,31,37,.87) 38%,rgba(71,31,37,.40) 66%,rgba(71,31,37,.08) 100%),
+    url("/test/kids/assets/kids-art/card-geschichte.jpg?v=10");
 }
 .choice.quran{
   background-image:
-    linear-gradient(90deg,rgba(8,51,55,.96) 0%,rgba(8,51,55,.82) 46%,rgba(8,51,55,.24) 72%,rgba(8,51,55,.07) 100%),
-    url("/test/kids/assets/kids-art/card-mein-quran.png?v=9");
+    linear-gradient(90deg,rgba(8,51,55,.97) 0%,rgba(8,51,55,.86) 38%,rgba(8,51,55,.39) 66%,rgba(8,51,55,.08) 100%),
+    url("/test/kids/assets/kids-art/card-mein-quran.png?v=10");
 }
 .choice.dua{
   background-image:
-    linear-gradient(90deg,rgba(55,42,96,.96) 0%,rgba(55,42,96,.82) 46%,rgba(55,42,96,.23) 72%,rgba(55,42,96,.07) 100%),
-    url("/test/kids/assets/kids-art/card-heute-lernen.png?v=9");
+    linear-gradient(90deg,rgba(55,42,96,.97) 0%,rgba(55,42,96,.86) 38%,rgba(55,42,96,.38) 66%,rgba(55,42,96,.08) 100%),
+    url("/test/kids/assets/kids-art/card-heute-lernen.png?v=10");
 }
 .choice.quiz{
   background-image:
-    linear-gradient(90deg,rgba(91,53,18,.96) 0%,rgba(91,53,18,.81) 46%,rgba(91,53,18,.22) 72%,rgba(91,53,18,.06) 100%),
-    url("/test/kids/assets/kids-art/card-quiz.jpg?v=9");
+    linear-gradient(90deg,rgba(91,53,18,.97) 0%,rgba(91,53,18,.85) 38%,rgba(91,53,18,.37) 66%,rgba(91,53,18,.07) 100%),
+    url("/test/kids/assets/kids-art/card-quiz.jpg?v=10");
 }
 .choice .icon,.choice strong,.choice small,.choice .arrow{
   z-index:2;text-shadow:0 2px 12px rgba(0,0,0,.42);
 }
-.choice:before{background:linear-gradient(130deg,rgba(255,255,255,.08),transparent 54%);z-index:1;pointer-events:none}
+.choice strong,.choice small{max-width:62%}
+.choice:before{
+  background:linear-gradient(130deg,rgba(255,255,255,.08),transparent 54%);
+  z-index:1;pointer-events:none
+}
 
 .story-scene{
+  height:clamp(148px,28vw,224px);
   background-color:#173444;
   background-image:
-    linear-gradient(90deg,rgba(9,28,39,.30),rgba(9,28,39,.04)),
-    url("/test/kids/assets/kids-art/story-muenze.png?v=9");
-  background-size:cover,auto 100%;
+    linear-gradient(90deg,rgba(9,28,39,.34),rgba(9,28,39,.05)),
+    url("/test/kids/assets/kids-art/story-muenze.png?v=10");
+  background-size:100% 100%,contain;
   background-position:center,center;
   background-repeat:no-repeat,no-repeat;
 }
 .story-scene:before,.story-scene:after{display:none}
 
 .quran-hero{
-  min-height:292px;
+  min-height:clamp(236px,38vw,324px);
   background-color:#164b50;
   background-image:
-    linear-gradient(90deg,rgba(7,43,49,.96) 0%,rgba(7,43,49,.82) 45%,rgba(7,43,49,.24) 72%,rgba(7,43,49,.07) 100%),
-    url("/test/kids/assets/kids-art/quran-reise.png?v=9");
-  background-size:cover,auto 100%;
+    linear-gradient(90deg,rgba(7,43,49,.97) 0%,rgba(7,43,49,.87) 40%,rgba(7,43,49,.41) 67%,rgba(7,43,49,.08) 100%),
+    url("/test/kids/assets/kids-art/quran-reise.png?v=10");
+  background-size:100% 100%,contain;
   background-position:center,right center;
   background-repeat:no-repeat,no-repeat;
 }
 .quran-hero:after{display:none}
 .quran-hero>*{position:relative;z-index:2}
-.quran-hero h3,.quran-hero p{max-width:94%;text-shadow:0 2px 14px rgba(0,0,0,.38)}
+.quran-hero h3,.quran-hero p{max-width:min(94%,520px);text-shadow:0 2px 14px rgba(0,0,0,.38)}
 .quran-actions{margin-top:18px}
 .quran-action{
   background:linear-gradient(145deg,rgba(255,255,255,.17),rgba(255,255,255,.075));
@@ -622,22 +631,51 @@ html,body{background:#06131f!important}
 }
 
 #view-quran .section-title{margin-top:25px}
-.surah-grid{position:relative;padding-top:118px}
+.surah-grid{position:relative;padding-top:clamp(116px,17vw,154px)}
 .surah-grid:before{
   content:"";
-  position:absolute;left:0;right:0;top:0;height:100px;
+  position:absolute;left:0;right:0;top:0;
+  height:clamp(100px,15vw,138px);
   border-radius:24px;
   border:1px solid rgba(255,255,255,.13);
   box-shadow:0 13px 30px rgba(0,0,0,.18);
   background-color:#173b4a;
   background-image:
-    linear-gradient(90deg,rgba(7,34,48,.78) 0%,rgba(7,34,48,.44) 55%,rgba(7,34,48,.08) 100%),
-    url("/test/kids/assets/kids-art/quran-surah-zone.png?v=9");
-  background-size:cover,auto 100%;
+    linear-gradient(90deg,rgba(7,34,48,.80) 0%,rgba(7,34,48,.48) 54%,rgba(7,34,48,.08) 100%),
+    url("/test/kids/assets/kids-art/quran-surah-zone.png?v=10");
+  background-size:100% 100%,contain;
   background-position:center,right center;
   background-repeat:no-repeat,no-repeat;
 }
 .surah-card{box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 12px 28px rgba(0,0,0,.12)}
+
+/* Very small iPhones / split view */
+@media(max-width:390px){
+  .hero{min-height:282px}
+  .choice{min-height:136px;padding:15px}
+  .choice .icon{font-size:31px;margin-bottom:14px}
+  .choice strong{font-size:20px}
+  .choice small{font-size:12px;max-width:60%}
+  .story-scene{height:144px}
+  .quran-hero{min-height:228px}
+  .quran-actions{grid-template-columns:1fr}
+}
+
+/* Normal / large phones */
+@media(min-width:391px) and (max-width:699px){
+  .choice{min-height:146px}
+  .story-scene{height:clamp(154px,39vw,190px)}
+}
+
+/* iPad / tablet: keep cards wide enough for text + complete artwork */
+@media(min-width:700px){
+  .hero{min-height:360px}
+  .big-choice-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .choice{min-height:184px}
+  .choice strong,.choice small{max-width:58%}
+  .story-scene{height:220px}
+  .quran-hero{min-height:314px}
+}
 /* KIDS_AI_ART_V7_END */
 
 </style>
@@ -653,7 +691,7 @@ html,body{background:#06131f!important}
 </div>
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon">KIDS · V0.11</div>
+  <div class="dev-ribbon">KIDS · V0.10</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -1042,7 +1080,7 @@ html,body{background:#06131f!important}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v11";
+const KIDS_BUILD_ID="kids-shell-v10";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
