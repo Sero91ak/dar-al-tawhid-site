@@ -95,10 +95,15 @@ if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
   brew install ffmpeg >/dev/null 2>&1 || true
 fi
 
-# Alte lokale Engine beenden, damit LaunchAgent sauber übernehmen kann.
+# Vorherige Engine/LaunchAgent-Reste sauber lösen.
 pkill -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
+launchctl bootout "gui/$UID/$LABEL" >/dev/null 2>&1 || true
+launchctl bootout "gui/$UID" "$LAUNCH" >/dev/null 2>&1 || true
+launchctl remove "$LABEL" >/dev/null 2>&1 || true
+sleep 1
 
-# LaunchAgent: lokale Serhat-Engine beim Login starten und am Leben halten.
+# LaunchAgent: lokale Serhat-Engine beim Login starten. Ein launchctl-Fehler
+# darf die App-Installation niemals mehr abbrechen.
 cat > "$LAUNCH" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -119,17 +124,61 @@ cat > "$LAUNCH" <<PLIST
   </dict>
   <key>RunAtLoad</key><true/>
   <key>KeepAlive</key><true/>
-  <key>ProcessType</key><string>Interactive</string>
   <key>StandardOutPath</key><string>$TARGET/engine.log</string>
   <key>StandardErrorPath</key><string>$TARGET/engine-error.log</string>
 </dict>
 </plist>
 PLIST
-/usr/bin/plutil -lint "$LAUNCH" >/dev/null
 
-launchctl bootout "gui/$UID/$LABEL" >/dev/null 2>&1 || true
-launchctl bootstrap "gui/$UID" "$LAUNCH"
-launchctl kickstart -k "gui/$UID/$LABEL" >/dev/null 2>&1 || true
+/usr/bin/plutil -lint "$LAUNCH" >/dev/null
+chmod 600 "$LAUNCH"
+
+LAUNCH_OK=0
+: > "$TARGET/launchctl-bootstrap.log"
+if launchctl bootstrap "gui/$UID" "$LAUNCH" 2>"$TARGET/launchctl-bootstrap.log"; then
+  launchctl enable "gui/$UID/$LABEL" >/dev/null 2>&1 || true
+  launchctl kickstart -k "gui/$UID/$LABEL" >/dev/null 2>&1 || true
+  LAUNCH_OK=1
+else
+  echo "Hinweis: macOS launchctl bootstrap wurde abgelehnt. Die Engine wird direkt gestartet."
+  cat "$TARGET/launchctl-bootstrap.log" || true
+fi
+
+# Warten, ob LaunchAgent die Engine erfolgreich hochgebracht hat.
+ENGINE_OK=0
+for i in $(seq 1 20); do
+  if curl -fsS --max-time 1 "http://127.0.0.1:8787/health" >/dev/null 2>&1; then
+    ENGINE_OK=1
+    break
+  fi
+  sleep 0.5
+done
+
+# Robuster Fallback ohne sudo/root und unabhängig von launchctl.
+if [ "$ENGINE_OK" -ne 1 ]; then
+  echo "Starte Serhat Engine direkt …"
+  nohup env     DAR_VOICE_APP_HOME="$TARGET"     SERHAT_VOICE_REF="$REF"     PYTORCH_ENABLE_MPS_FALLBACK=1     "$VENV/bin/python" "$TARGET/local-engine.py"     >>"$TARGET/engine.log" 2>>"$TARGET/engine-error.log" </dev/null &
+  echo $! > "$TARGET/engine.pid"
+
+  for i in $(seq 1 40); do
+    if curl -fsS --max-time 1 "http://127.0.0.1:8787/health" >/dev/null 2>&1; then
+      ENGINE_OK=1
+      break
+    fi
+    sleep 0.5
+  done
+fi
+
+if [ "$ENGINE_OK" -ne 1 ]; then
+  echo "FEHLER: Serhat Engine konnte nicht gestartet werden."
+  echo "---- engine-error.log ----"
+  tail -n 80 "$TARGET/engine-error.log" 2>/dev/null || true
+  echo "---- engine.log ----"
+  tail -n 80 "$TARGET/engine.log" 2>/dev/null || true
+  exit 1
+fi
+
+echo "Serhat Engine erreichbar: http://127.0.0.1:8787/health"
 
 # Native macOS-App: eigenes Fenster mit WKWebView, kein Safari/Chrome.
 cat > "$TARGET/VoiceStudioApp.swift" <<'SWIFT'
@@ -180,6 +229,63 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
         task.executableURL = URL(fileURLWithPath: "/bin/launchctl")
         task.arguments = ["kickstart", "-k", "gui/\(getuid())/com.daraltawhid.voice-engine"]
         try? task.run()
+
+        // launchctl ist auf einzelnen macOS-Versionen unzuverlässig. Wenn der
+        // Dienst nach kurzer Zeit nicht antwortet, startet die App die lokale
+        // Engine selbst – ohne sudo und ohne Browser.
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            self?.startEngineDirectlyIfNeeded()
+        }
+    }
+
+    private func startEngineDirectlyIfNeeded() {
+        var request = URLRequest(url: healthURL)
+        request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        request.timeoutInterval = 1.0
+
+        URLSession.shared.dataTask(with: request) { [weak self] _, response, error in
+            guard let self else { return }
+            let ok = (response as? HTTPURLResponse)?.statusCode == 200 && error == nil
+            if ok { return }
+
+            let home = FileManager.default.homeDirectoryForCurrentUser
+            let target = home.appendingPathComponent("Applications/DAR-Voice-Studio")
+            let python = home.appendingPathComponent("SerhatVoice/.venv/bin/python")
+            let engine = target.appendingPathComponent("local-engine.py")
+            let adobe = home.appendingPathComponent("SerhatVoice/Serhat_Adobe_MASTER.wav")
+            let fallback = home.appendingPathComponent("SerhatVoice/Serhat_FINAL_REF.wav")
+
+            guard FileManager.default.isExecutableFile(atPath: python.path),
+                  FileManager.default.fileExists(atPath: engine.path) else { return }
+
+            let process = Process()
+            process.executableURL = python
+            process.arguments = [engine.path]
+            process.currentDirectoryURL = target
+
+            var env = ProcessInfo.processInfo.environment
+            env["DAR_VOICE_APP_HOME"] = target.path
+            env["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
+            if FileManager.default.fileExists(atPath: adobe.path) {
+                env["SERHAT_VOICE_REF"] = adobe.path
+            } else if FileManager.default.fileExists(atPath: fallback.path) {
+                env["SERHAT_VOICE_REF"] = fallback.path
+            }
+            process.environment = env
+
+            let log = target.appendingPathComponent("engine.log").path
+            let err = target.appendingPathComponent("engine-error.log").path
+            FileManager.default.createFile(atPath: log, contents: nil)
+            FileManager.default.createFile(atPath: err, contents: nil)
+            process.standardOutput = FileHandle(forWritingAtPath: log)
+            process.standardError = FileHandle(forWritingAtPath: err)
+
+            do {
+                try process.run()
+            } catch {
+                NSLog("DĀR Voice direct engine start failed: \(error)")
+            }
+        }.resume()
     }
 
     private func showLoading() {
@@ -352,8 +458,8 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>1.4.3</string>
-  <key>CFBundleShortVersionString</key><string>1.4.3</string>
+  <key>CFBundleVersion</key><string>1.5.1</string>
+  <key>CFBundleShortVersionString</key><string>1.5.1</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>
