@@ -529,11 +529,7 @@ html,body{background:#06131f!important}
 }
 
 /* KIDS_UPDATE_UI_V3 */
-.kids-update-layer{
-  position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;
-  padding:24px;background:#06131f;color:#f9f3e8
-}
-.kids-update-layer.show{display:flex}
+.kids-update-layer,.kids-update-layer.show{display:none!important}
 .kids-update-card{
   width:min(100%,430px);border:1px solid rgba(226,189,114,.28);border-radius:30px;
   padding:26px 22px;text-align:center;background:#0b2133;box-shadow:0 24px 70px rgba(0,0,0,.46)
@@ -1768,11 +1764,9 @@ html,body{
 }
 
 </style>
+<link rel="stylesheet" href="/assets/global-update-banner.css?v=1">
 </head>
 <body>
-<div id="kidsUpdateLayer" class="kids-update-layer" role="dialog" aria-modal="true" aria-live="polite">
-  <div class="kids-update-card">
-    <div class="kids-update-mark">↻</div>
     <h2 id="kidsUpdateTitle">App-Aktualisierung bereit</h2>
     <p id="kidsUpdateText">Die Kinder-App wurde aktualisiert. Tippe einmal auf Aktualisieren, damit die neue Oberfläche vollständig geladen wird.</p>
     <button id="kidsUpdateButton" type="button">Jetzt aktualisieren</button>
@@ -2172,6 +2166,7 @@ html,body{
 <audio id="quranAudio" preload="none" playsinline></audio>
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
+<script src="/assets/global-update-banner.js?v=1"></script>
 <script>
 const KIDS_BUILD_ID="kids-shell-v12-tab2";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
@@ -2183,6 +2178,16 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
     }catch(e){return false}
   }
   function kidsShowUpdate(title,text,targetBuild){
+    if(window.DARGlobalUpdate){
+      window.DARGlobalUpdate.show({
+        buildId: targetBuild,
+        localBuild: KIDS_BUILD_ID,
+        title: title||"Neue Version verfügbar",
+        text: "Eine neue Version von DĀR AL TAWḤĪD ist bereit.",
+        apply: function(){ kidsHardReload(targetBuild); }
+      });
+      return;
+    }
     kidsHardReload(targetBuild);
   }
   function kidsHardReload(targetBuild){
@@ -2211,11 +2216,6 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
     }catch(e){}
   }
   window.addEventListener("DOMContentLoaded",function(){
-    var b=document.getElementById("kidsUpdateButton");
-    if(b)b.addEventListener("click",function(){
-      var layer=document.getElementById("kidsUpdateLayer");
-      kidsHardReload(layer&&layer.dataset.targetBuild||KIDS_BUILD_ID);
-    });
     kidsCheckRemoteVersion();
   });
   window.addEventListener("focus",kidsCheckRemoteVersion);

@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/assets/dar-app-chrome.css?v=1">
 <script src="/assets/dar-app-chrome.js?v=1"></script>
 
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1023";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1024";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -9107,10 +9107,10 @@ html[data-theme="bordeaux"] .post-after-panel,html[data-theme="bordeaux"] .relat
 html[data-theme] #appChromeDock #bottomNav.bottom-nav,html[data-theme] #bottomNav.bottom-nav{position:fixed!important;top:auto!important;left:50%!important;right:auto!important;bottom:calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm)!important;transform:translateX(-50%)!important;-webkit-transform:translateX(-50%)!important;margin-left:0!important;margin-right:0!important;contain:none!important;width:var(--dar-nav-width,min(clamp(21rem,66vw,54.5rem),calc(100vw - 2 * max(10px,env(safe-area-inset-left,0px),2.2vw))))!important;max-width:min(900px,calc(100vw - 2 * max(10px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px))))!important}
 .new-posts-banner{position:fixed;top:0;left:0;right:0;z-index:1200;display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top));background:linear-gradient(135deg,rgba(239,215,142,.18),rgba(155,122,60,.12));border:1px solid rgba(239,215,142,.45);border-bottom:2px solid rgba(239,215,142,.65);border-radius:0 0 22px 22px;backdrop-filter:blur(12px);cursor:pointer;transition:transform .3s ease,opacity .3s ease;transform:translateY(0);opacity:1}.new-posts-banner.is-app-version{background:linear-gradient(135deg,rgba(120,165,235,.16),rgba(239,215,142,.14));border-color:rgba(160,195,255,.42);border-bottom-color:rgba(160,195,255,.55)}.new-posts-banner.is-app-version .new-posts-text{color:#eef4ff}.new-posts-banner.is-app-version .new-posts-refresh{color:#eef4ff;background:rgba(140,190,255,.18);border-color:rgba(140,190,255,.38)}.new-posts-banner.hidden{transform:translateY(-120%);opacity:0;pointer-events:none}.new-posts-icon{font-size:18px}.new-posts-text{color:var(--gold2);font-size:14px;font-weight:900;letter-spacing:.02em}.new-posts-refresh{color:var(--cream);font-size:11px;font-weight:900;background:rgba(239,215,142,.15);border:1px solid rgba(239,215,142,.35);border-radius:999px;padding:4px 10px}
 /* UPDATE_SOFT_BANNER_V628: kein blockierendes Modal — nur blauer Top-Banner */
-html.dar-ios-native-app .app-update-modal[hidden]{display:none!important}
+.app-update-modal,.app-update-modal[hidden],html.dar-ios-native-app .app-update-modal,html.dar-ios-native-app .app-update-modal:not([hidden]){display:none!important;visibility:hidden!important;pointer-events:none!important}
 html.dar-ios-native-app .app-update-modal:not([hidden]){
-  display:flex!important;visibility:visible!important;pointer-events:auto!important;
-  position:fixed;inset:0;z-index:2147483646;align-items:center;justify-content:center;
+  display:none!important;visibility:hidden!important;pointer-events:none!important;
+  position:fixed;inset:0;z-index:0;align-items:center;justify-content:center;
   padding:max(18px,env(safe-area-inset-top)) 18px max(18px,env(safe-area-inset-bottom));
 }
 html.dar-ios-native-app .app-update-modal:not([hidden]) .app-update-modal__backdrop{
@@ -10487,6 +10487,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <script src="/assets/adaptive-layout.js?v=10" defer></script>
 <script src="/assets/qibla-quick-view.js?v=2" defer></script>
+<script src="/assets/global-update-banner.js?v=1"></script>
 <script src="/test/assets/fold-split.js?v=937" defer></script>
 <script src="/assets/scholars-index.js?v=587" defer></script>
 <script src="/test/assets/prophets/prophets.js?v=33" defer></script>
@@ -12130,6 +12131,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=791">
 <link rel="stylesheet" href="/assets/adaptive-layout.css?v=645">
 <link rel="stylesheet" href="/assets/qibla-quick-view.css?v=2">
+<link rel="stylesheet" href="/assets/global-update-banner.css?v=1">
 <link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=668">
 <link rel="stylesheet" href="/test/assets/dar-setup-hub.css?v=8"><!-- DAR_SETUP_HUB_V1 -->
 <link rel="stylesheet" href="/test/assets/dar-top-chrome-fix.css?v=2"><!-- DAR_TOP_CHROME_FIX -->
@@ -20896,15 +20898,6 @@ html body .post-reader-main .post-source-oval.post-source-module .post-after-lin
   <span class="new-posts-text">Neue Inhalte verfügbar</span>
   <span class="new-posts-refresh">Aktualisieren</span>
 </div>
-<div id="appUpdateModal" class="app-update-modal" hidden aria-modal="true" role="dialog" aria-labelledby="appUpdateModalTitle" aria-describedby="appUpdateModalText">
-  <div class="app-update-modal__backdrop" aria-hidden="true"></div>
-  <div class="app-update-modal__panel premium-surface">
-    <span class="app-update-modal__badge">Update verfügbar</span>
-    <h2 id="appUpdateModalTitle">Neue Version verfügbar</h2>
-    <p id="appUpdateModalText">Inhalte, Darstellung und Funktionen wurden verbessert. Bitte jetzt aktualisieren, damit du die neueste Version siehst.</p>
-    <button id="appUpdateModalBtn" class="app-update-modal__btn premium-pill" type="button">Jetzt aktualisieren</button>
-  </div>
-</div>
 <div class="top-edge-fade" id="topEdgeFade" aria-hidden="true"></div>
 <div class="top-swim-aura" id="topSwimAura" aria-hidden="true"></div>
 <div class="app">
@@ -27356,7 +27349,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1023";
+const APP_BUILD_ID="app-shell-v1024";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -28905,22 +28898,8 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     }
     function showUpdateModal(mode, label) {
       hideUpdateModal();
-      if (iosNativeShell()) {
-        var modal = getUpdateModal();
-        if (modal) {
-          var title = modal.querySelector('#appUpdateModalTitle');
-          var text = modal.querySelector('#appUpdateModalText');
-          if (title) title.textContent = mode === 'recovery' ? 'App-Update erforderlich' : 'Neue Version verfügbar';
-          if (text) text.textContent = label || 'Darstellung und Funktionen wurden aktualisiert. Tippe auf Jetzt aktualisieren.';
-          modal.hidden = false;
-          document.body.classList.add('app-update-modal-open');
-          updateModalLocked = true;
-          window.__darAppVersionAvailable = true;
-          return;
-        }
-      }
       updateModalLocked = false;
-      showBanner(mode === 'recovery' ? 'recovery' : 'version', label);
+      offerGlobalShellUpdate(mode, label);
     }
     function showBanner(mode, label) {
       /* Nie blockierendes Modal — Besucher sollen die App weiter nutzen können */
@@ -28963,6 +28942,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       if (typeof updateHomeAppStatusUi === 'function') updateHomeAppStatusUi();
     }
     function hideBanner() {
+      try{ if(window.DARGlobalUpdate) window.DARGlobalUpdate.hide(); }catch(e){}
       var banner = getBanner();
       if (banner) {
         banner.classList.add('hidden');
@@ -29162,9 +29142,29 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       window.__darAppVersionAvailable = !!on;
       if (typeof updateHomeAppStatusUi === 'function') updateHomeAppStatusUi();
     }
+    function offerGlobalShellUpdate(mode, label) {
+      var title = mode === 'recovery' ? 'App-Update erforderlich' : 'Neue Version verfügbar';
+      var text = label || 'Eine neue Version von DĀR AL TAWḤĪD ist bereit.';
+      if (window.DARGlobalUpdate && window.DARGlobalUpdate.isAppExperience()) {
+        hideBanner();
+        window.DARGlobalUpdate.show({
+          buildId: remoteBuildId || window.__darRemoteBuildId || '',
+          title: title,
+          text: text,
+          apply: function(){
+            var targetBuild = remoteBuildId || window.__darRemoteBuildId || '';
+            markVersionUpdatePending(targetBuild);
+            if (typeof hardRefreshApp === 'function') return hardRefreshApp();
+            location.reload();
+          }
+        });
+        window.__darAppVersionAvailable = true;
+        return;
+      }
+      showBanner(mode === 'recovery' ? 'recovery' : 'version', label || title);
+    }
     function showVersionBanner() {
-      if (iosNativeShell()) showUpdateModal('version', 'Neue Version verfügbar. Tippe auf Jetzt aktualisieren.');
-      else showBanner('version', 'Neue Version verfügbar');
+      offerGlobalShellUpdate('version', 'Eine neue Version von DĀR AL TAWḤĪD ist bereit.');
     }
     function showPostsBanner(label) {
       showBanner('posts', label);
@@ -29172,7 +29172,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     function showRecoveryBanner(label) {
       if (!canShowRecoveryBanner()) return false;
       rememberRecoveryBannerShown();
-      showBanner('recovery', label || 'App-Update erforderlich');
+      offerGlobalShellUpdate('recovery', label || 'App-Update erforderlich');
       setTimeout(function() {
         if (typeof isAppViewStuck === 'function' && isAppViewStuck() && typeof window.__darScheduleBootRepair === 'function') {
           window.__darScheduleBootRepair('recovery-banner', 5000);
