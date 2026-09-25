@@ -1469,6 +1469,7 @@ class H(BaseHTTPRequestHandler):
         self.send_header("Vary","Origin")
         self.send_header("Access-Control-Allow-Headers","Content-Type")
         self.send_header("Access-Control-Allow-Methods","GET,POST,OPTIONS")
+        self.send_header("Access-Control-Expose-Headers","X-Learning-Preview-Id, X-Learning-Lock-Key")
         self.send_header("Access-Control-Allow-Private-Network","true")
         self.send_header("Cache-Control","no-store")
 
