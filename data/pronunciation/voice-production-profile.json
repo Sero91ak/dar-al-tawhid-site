@@ -1,11 +1,11 @@
 {
-  "schemaVersion": 6,
-  "id": "dar-own-voice-narration-v2.2",
+  "schemaVersion": 7,
+  "id": "dar-own-voice-narration-v2.3",
   "updatedAt": "2026-09-26",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
-  "productionGoal": "Production-grade Serhat narration with deterministic pronunciation, persistent core/name audio locks, and mandatory spoken honorifics for the Prophet Muḥammad and known Ṣaḥābah/Ṣaḥābiyyāt.",
+  "productionGoal": "Production-grade Serhat narration with deterministic pronunciation, mandatory honorifics, persistent confirmed audio locks, and a user-driven pronunciation learning loop that can search current online rules without silently promoting unreviewed audio.",
   "delivery": {
     "genderPresentation": "male",
     "character": [
@@ -351,7 +351,10 @@
     "coreAudioCandidateSinglePerRender": true,
     "coreAudioConfirmedNeverResynthesized": true,
     "requiredHonorificRegression": true,
-    "duplicateHonorificGuard": true
+    "duplicateHonorificGuard": true,
+    "pronunciationLearningRegression": true,
+    "onlineRuleValidation": true,
+    "learnedRuleRequiresConfirmedAudio": true
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
@@ -456,5 +459,27 @@
       }
     },
     "behavior": "If the required honorific is absent, append it to the internal speak text. If any supported honorific is already explicitly written immediately after the name, do not add another one."
+  },
+  "pronunciationLearning": {
+    "enabled": true,
+    "localOverridePath": "~/SerhatVoice/PronunciationLearning/user-overrides.json",
+    "onlineCachePath": "~/SerhatVoice/PronunciationLearning/online-library.json",
+    "learningLogPath": "~/SerhatVoice/PronunciationLearning/learning-log.jsonl",
+    "onlineSource": "GitHub main pronunciation-rules.json",
+    "searchOrder": [
+      "user-confirmed",
+      "online-cache",
+      "installed-library"
+    ],
+    "clickableDetectedTerms": true,
+    "textSelectionCapture": true,
+    "manualUnknownTermEntry": true,
+    "manualArabicTtsRequiredWhenNoRuleFound": true,
+    "isolatedPreviewBeforeSave": true,
+    "explicitHumanConfirmationRequired": true,
+    "confirmedPreviewBecomesPersistentAudioLock": true,
+    "userRuleOverridesBaseRule": true,
+    "onlineRulesNeverAutoPromoteToMaster": true,
+    "vocabularyExpandsPersistently": true
   }
 }
