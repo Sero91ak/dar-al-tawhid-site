@@ -39,6 +39,9 @@ function iosNativeHeaders(assetResponse) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (url.searchParams.get("dar_asset") === "1") {
+      return env.ASSETS.fetch(request);
+    }
     const isRoot = url.pathname === "/" || url.pathname === "/index.html";
     const ua = String(request.headers.get("User-Agent") || "");
     const nativeIos = /DarAlTawhid-iOS/i.test(ua);
@@ -51,6 +54,7 @@ export default {
 
     if (kidsEntry) {
       const target = new URL("/test/kids/start.html", url.origin);
+      target.searchParams.set("dar_asset", "1");
       const assetResponse = await env.ASSETS.fetch(new Request(target.toString(), { method: "GET" }));
       const headers = new Headers(assetResponse.headers);
       headers.set("Content-Type", "text/html; charset=utf-8");
