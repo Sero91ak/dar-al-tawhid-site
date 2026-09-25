@@ -149,6 +149,7 @@ export default {
     const url = new URL(request.url);
     const KIDS_SHELL_REV = "20260924-11-seamless2";
     const isKidsPath = /^\/test\/kids(?:\/|$)/.test(url.pathname);
+    const isVoiceStudioPath = /^\/test\/voice-studio(?:\/|$)/.test(url.pathname);
 
     if ((url.pathname === "/test/kids" || url.pathname === "/test/kids/") && url.searchParams.get("kv") !== KIDS_SHELL_REV) {
       url.pathname = "/test/kids/";
@@ -189,6 +190,12 @@ export default {
       return Response.redirect(kidsUrl.toString(), 302);
     }
 
+    if (url.pathname === "/test/voice-studio" || url.pathname === "/test/voice-studio/") {
+      const voiceUrl = new URL(request.url);
+      voiceUrl.pathname = "/test/voice-studio/index.html";
+      return env.ASSETS.fetch(new Request(voiceUrl.toString(), request));
+    }
+
     if (url.pathname === "/test" || url.pathname === "/test/") {
       if (url.searchParams.get("dqp") !== "915") {
         url.searchParams.set("dqp", "915");
@@ -204,6 +211,7 @@ export default {
     const asset = await env.ASSETS.fetch(request);
     const path = url.pathname;
     const bust = isKidsPath
+      || isVoiceStudioPath
       || /\/test\/(index\.html)?$/.test(path)
       || /dar-quran-player\.(js|css)$/.test(path)
       || path.endsWith("/test/version.json")
@@ -214,6 +222,9 @@ export default {
     out.headers.set("Pragma", "no-cache");
     if (isKidsPath) {
       out.headers.set("X-DAR-Kids-Build", "kids-shell-v11-seamless2");
+    }
+    if (isVoiceStudioPath) {
+      out.headers.set("X-DAR-Voice-Studio", "voice-studio-v1");
     }
     return out;
   }
