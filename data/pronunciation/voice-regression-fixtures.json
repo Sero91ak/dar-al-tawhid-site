@@ -1,0 +1,178 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Regression fixtures for DĀR Voice Studio 2.0. These are structural pronunciation/prosody checks, not replacements for final human audio QA.",
+  "cases": [
+    {
+      "id": "brand",
+      "text": "Willkommen bei DĀR AL TAWḤĪD.",
+      "expectedTts": [
+        "دَار التَّوْحِيد"
+      ],
+      "expectedMode": "kids_lesson"
+    },
+    {
+      "id": "core",
+      "text": "Heute lernen wir etwas über Tawḥīd, Īmān und Islām.",
+      "expectedTts": [
+        "تَوْحِيد",
+        "إِيمَان",
+        "إِسْلَام"
+      ],
+      "expectedMode": "kids_lesson"
+    },
+    {
+      "id": "prophet-musa",
+      "text": "Mūsā war ein Prophet.",
+      "expectedTts": [
+        "مُوسَى"
+      ],
+      "expectedMode": "narration"
+    },
+    {
+      "id": "allah",
+      "text": "Wir beten Allah allein an.",
+      "expectedTts": [
+        "اللَّه"
+      ],
+      "expectedMode": "teaching"
+    },
+    {
+      "id": "quran",
+      "text": "Ein Muslim liest den Qurʾān.",
+      "expectedTts": [
+        "مُسْلِم",
+        "قُرْآن"
+      ],
+      "expectedMode": "teaching"
+    },
+    {
+      "id": "aqidah",
+      "text": "In der ʿAqīdah lernen wir wichtige Grundlagen.",
+      "expectedTts": [
+        "عَقِيدَة"
+      ],
+      "expectedMode": "teaching"
+    },
+    {
+      "id": "hadith",
+      "text": "Ein authentischer Ḥadīṯ erklärt uns diese Sache.",
+      "expectedTts": [
+        "حَدِيث"
+      ],
+      "expectedMode": "teaching"
+    },
+    {
+      "id": "sahabah",
+      "text": "Die Ṣaḥābah lernten direkt vom Propheten.",
+      "expectedTts": [
+        "صَحَابَة"
+      ],
+      "expectedMode": "narration"
+    },
+    {
+      "id": "fiqh",
+      "text": "Beim Wuḍūʾ bereiten wir uns auf die Ṣalāh vor.",
+      "expectedTts": [
+        "وُضُوء",
+        "صَلَاة"
+      ],
+      "expectedMode": "teaching"
+    },
+    {
+      "id": "pillars",
+      "text": "Zakāh, Ṣawm und Ḥajj gehören zu wichtigen Pflichten.",
+      "expectedTts": [
+        "زَكَاة",
+        "صَوم",
+        "حَجّ"
+      ],
+      "expectedMode": "list"
+    },
+    {
+      "id": "question",
+      "text": "Was bedeutet Tawḥīd?",
+      "expectedTts": [
+        "تَوْحِيد"
+      ],
+      "expectedMode": "question"
+    },
+    {
+      "id": "story",
+      "text": "Eines Tages machte sich Mūsā auf den Weg.",
+      "expectedTts": [
+        "مُوسَى"
+      ],
+      "expectedMode": "kids_story"
+    },
+    {
+      "id": "gentle",
+      "text": "Ganz ruhig, wir lernen das Schritt für Schritt.",
+      "expectedTts": [],
+      "expectedMode": "gentle"
+    },
+    {
+      "id": "serious",
+      "text": "Achtung: Diese Sache ist verboten und sehr ernst.",
+      "expectedTts": [],
+      "expectedMode": "serious"
+    },
+    {
+      "id": "dua",
+      "text": "Wir machen Duʿāʾ und bitten Allah um Gutes.",
+      "expectedTts": [
+        "دُعَاء",
+        "اللَّه"
+      ],
+      "expectedMode": "dua"
+    },
+    {
+      "id": "companions",
+      "text": "Abū Bakr und ʿUmar ibn al-Khaṭṭāb gehörten zu den Ṣaḥābah.",
+      "expectedTts": [
+        "أَبُو",
+        "عُمَر",
+        "صَحَابَة"
+      ],
+      "expectedMode": "narration"
+    },
+    {
+      "id": "sunnah",
+      "text": "Ahl as-Sunnah folgen Qurʾān und Sunnah.",
+      "expectedTts": [
+        "أَهْل",
+        "قُرْآن",
+        "سُنَّة"
+      ],
+      "expectedMode": "teaching"
+    },
+    {
+      "id": "book",
+      "text": "Wir finden den Bericht in Ṣaḥīḥ al-Bukhārī.",
+      "expectedTts": [
+        "صَحِيح",
+        "بُخَارِي"
+      ],
+      "expectedMode": "teaching"
+    },
+    {
+      "id": "mixed-fast",
+      "text": "Tawḥīd, ʿAqīdah, Islām, Īmān und Iḥsān gehören zu unserem Lernwortschatz.",
+      "expectedTts": [
+        "تَوْحِيد",
+        "عَقِيدَة",
+        "إِسْلَام",
+        "إِيمَان",
+        "إِحْسَان"
+      ],
+      "expectedMode": "list"
+    },
+    {
+      "id": "kids-warm",
+      "text": "Komm, wir entdecken gemeinsam eine schöne Geschichte über Mūsā.",
+      "expectedTts": [
+        "مُوسَى"
+      ],
+      "expectedMode": "kids_story"
+    }
+  ]
+}
