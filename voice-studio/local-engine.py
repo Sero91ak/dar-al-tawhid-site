@@ -297,19 +297,129 @@ def build_render_plan(text:str):
 
 def render_with_model(model,text:str,language_id:str):
     import torch
-    # Chatterbox weist selbst darauf hin, dass eine Referenzstimme aus einer
-    # anderen Sprache den Akzent beeinflussen kann. Für arabische Segmente
-    # wird CFG deshalb auf 0 gesetzt; Deutsch behält die bisherige Führung.
-    cfg=0.0 if language_id=="ar" else 0.30
+    # Arabische Einzelbegriffe sollen neutral und flüssig gesprochen werden,
+    # nicht wie isolierte dramatische Clips. Deutsch behält das bisherige Profil.
+    is_ar=language_id=="ar"
+    short_ar=is_ar and len(str(text).strip())<=48
     kwargs=dict(
         language_id=language_id,
         audio_prompt_path=str(REF),
-        exaggeration=0.22,
-        cfg_weight=cfg,
-        temperature=0.55
+        exaggeration=0.12 if short_ar else (0.18 if is_ar else 0.22),
+        cfg_weight=0.0 if is_ar else 0.30,
+        temperature=0.44 if short_ar else (0.50 if is_ar else 0.55)
     )
     with torch.inference_mode():
         return model.generate(text,**kwargs)
+
+def normalize_segment_shape(wav):
+    w=wav.detach().float().cpu()
+    if w.ndim==1:
+        w=w.unsqueeze(0)
+    if w.ndim>2:
+        w=w.reshape(w.shape[0],-1)
+    return w
+
+def trim_segment_edges(wav,sr:int):
+    """Nur echte Randstille entfernen; Konsonanten/Anlaute bleiben geschützt."""
+    import torch
+    w=normalize_segment_shape(wav)
+    if w.numel()==0 or w.shape[-1]<8:
+        return w
+
+    envelope=w.abs().amax(dim=0)
+    peak=float(envelope.max().item()) if envelope.numel() else 0.0
+    if peak<=1e-7:
+        return w
+
+    # Etwa -49 dB relativ zum Segmentpeak; 20 ms Sicherheit an beiden Rändern.
+    threshold=max(peak*0.0035,1e-5)
+    active=torch.nonzero(envelope>threshold).flatten()
+    if active.numel()==0:
+        return w
+
+    pad=max(1,int(sr*0.020))
+    start=max(0,int(active[0].item())-pad)
+    end=min(w.shape[-1],int(active[-1].item())+pad+1)
+    return w[...,start:end]
+
+def segment_rms(wav):
+    import torch
+    w=normalize_segment_shape(wav)
+    if not w.numel():
+        return 0.0
+    return float(torch.sqrt(torch.mean(w*w)+1e-12).item())
+
+def gently_level_segments(items):
+    """Kleine Pegelsprünge glätten, ohne die natürliche Dynamik plattzumachen."""
+    import statistics
+    levels=[segment_rms(w) for w,_,_ in items]
+    valid=[x for x in levels if x>1e-5]
+    if not valid:
+        return items
+    target=float(statistics.median(valid))
+    out=[]
+    for (w,lang,chunk),level in zip(items,levels):
+        if level>1e-5:
+            gain=max(0.88,min(1.14,target/level))
+            w=(w*gain).clamp(-0.995,0.995)
+        out.append((w,lang,chunk))
+    return out
+
+def crossfade_audio(left,right,sr:int,seconds:float):
+    import torch
+    a=normalize_segment_shape(left)
+    b=normalize_segment_shape(right)
+    n=min(int(sr*seconds),a.shape[-1]//3,b.shape[-1]//3)
+    if n<8:
+        return torch.cat([a,b],dim=-1)
+
+    fade_in=torch.linspace(0.0,1.0,n,dtype=a.dtype).view(1,-1)
+    fade_out=1.0-fade_in
+    mixed=a[...,-n:]*fade_out+b[...,:n]*fade_in
+    return torch.cat([a[...,:-n],mixed,b[...,n:]],dim=-1)
+
+def join_rendered_segments(items,sr:int):
+    """Deutsch/Arabisch ohne hörbare harte Schnittkante zusammensetzen."""
+    import torch
+    if not items:
+        raise RuntimeError("Keine Audiosegmente erzeugt.")
+
+    cleaned=[]
+    for wav,lang,chunk in items:
+        cleaned.append((trim_segment_edges(wav,sr),lang,chunk))
+    cleaned=gently_level_segments(cleaned)
+
+    full=cleaned[0][0]
+    prev_lang=cleaned[0][1]
+    prev_chunk=cleaned[0][2]
+
+    for wav,lang,chunk in cleaned[1:]:
+        sentence_end=bool(re.search(r"[.!?؟…]$",prev_chunk.strip()))
+        soft_pause=bool(re.search(r"[,،;؛:]$",prev_chunk.strip()))
+
+        if sentence_end:
+            # Satzende darf atmen, aber ohne die alte 160-ms-Zwangspause.
+            silence=torch.zeros((1,max(1,int(sr*0.085))),dtype=full.dtype)
+            full=torch.cat([full,silence,wav],dim=-1)
+        elif soft_pause:
+            silence=torch.zeros((1,max(1,int(sr*0.035))),dtype=full.dtype)
+            full=torch.cat([full,silence,wav],dim=-1)
+        else:
+            # Sprachwechsel in einem laufenden Satz: keine Pause, sondern
+            # 26–32 ms Überblendung. Dadurch kein Stoppen/Neuansetzen.
+            xfade=0.032 if prev_lang!=lang else 0.022
+            full=crossfade_audio(full,wav,sr,xfade)
+
+        prev_lang=lang
+        prev_chunk=chunk
+
+    # Mini-Fades verhindern Klicks am Dateianfang/-ende.
+    edge=max(1,min(int(sr*0.012),full.shape[-1]//4))
+    if edge>1:
+        fade=torch.linspace(0.0,1.0,edge,dtype=full.dtype).view(1,-1)
+        full[...,:edge]*=fade
+        full[...,-edge:]*=torch.flip(fade,dims=[1])
+    return full
 
 def save_wav(path:Path,wav,sr:int):
     tensor=wav.detach().float().cpu()
@@ -404,7 +514,9 @@ def generate(text:str,prepared:str=""):
             lang_label="Arabisch" if lang=="ar" else "Deutsch"
             set_status(progress=pct,message=f"{lang_label} · Abschnitt {idx}/{total} …")
             print(f"[DĀR Voice] segment {idx}/{total} lang={lang}: {chunk}",flush=True)
-            torch.manual_seed(2026+idx-1)
+            # Gleicher Seed pro Segment stabilisiert Timbre und Sprechhaltung
+            # über Deutsch/Arabisch-Grenzen hinweg.
+            torch.manual_seed(2026)
             try:
                 wav=render_with_model(model,chunk,lang)
             except Exception as first_error:
@@ -418,20 +530,8 @@ def generate(text:str,prepared:str=""):
                     raise
             outputs.append((wav.detach().float().cpu(),lang,chunk))
 
-        if len(outputs)==1:
-            full=outputs[0][0]
-        else:
-            sr=int(model.sr)
-            joined=[]
-            for i,(w,lang,chunk) in enumerate(outputs):
-                if w.ndim==1:w=w.unsqueeze(0)
-                joined.append(w)
-                if i<len(outputs)-1:
-                    next_lang=outputs[i+1][1]
-                    # Kurzer Übergang beim Sprachwechsel; längere Pause am Satzende.
-                    pause_s=0.16 if re.search(r"[.!?؟…]$",chunk) else (0.055 if lang!=next_lang else 0.09)
-                    joined.append(torch.zeros((1,int(sr*pause_s)),dtype=w.dtype))
-            full=torch.cat(joined,dim=-1)
+        sr=int(model.sr)
+        full=join_rendered_segments(outputs,sr)
 
         set_status(progress=90,message="WAV wird gespeichert …")
         raw=OUTPUT/f"dar_voice_{uuid.uuid4().hex[:10]}.wav"
@@ -544,6 +644,9 @@ class H(BaseHTTPRequestHandler):
                 "mixed_language_segmentation":True,
                 "arabic_language_id":"ar",
                 "german_language_id":"de",
+                "boundary_silence_trim":True,
+                "language_crossfade_ms":32,
+                "gentle_level_matching":True,
                 **get_status()
             })
         elif p in ("/studio","/studio/","/studio/index.html"):
