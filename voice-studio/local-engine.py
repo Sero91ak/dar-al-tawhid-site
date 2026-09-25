@@ -78,10 +78,13 @@ RENDER_LOCK=threading.Lock()
 STATUS_LOCK=threading.Lock()
 TORCH_LOAD_ORIGINAL=None
 
+AUDIO_LOCK_EDGE_CHARS=" \t\r\n.,،;؛:!?؟…·-–—()[]{}«»\\\"“”„‘’"
+
 def audio_lock_key_for_chunk(text:str):
     value=str(text or "").strip()
-    value=re.sub(r'^[\s.,،;؛:!?؟…·\-–—()\[\]{}«»"“”„‘’]+',"",value)
-    value=re.sub(r'[\s.,،;؛:!?؟…·\-–—()\[\]{}«»"“”„‘’]+
+    value=value.strip(AUDIO_LOCK_EDGE_CHARS)
+    return AUDIO_LOCK_BY_TTS.get(value,"")
+
 def audio_lock_path(key:str):
     safe=re.sub(r"[^a-z0-9_-]+","_",str(key or "").lower()).strip("_")
     return MASTER_AUDIO_DIR/f"{safe}.wav"
