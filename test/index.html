@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/assets/dar-app-chrome.css?v=1">
 <script src="/assets/dar-app-chrome.js?v=1"></script>
 
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1020";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1021";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -10464,6 +10464,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/test/assets/dar-setup-hub.js?v=1019" defer></script><!-- DAR_SETUP_HUB_V1 -->
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <script src="/assets/adaptive-layout.js?v=10" defer></script>
+<script src="/assets/qibla-quick-view.js?v=1" defer></script>
 <script src="/test/assets/fold-split.js?v=937" defer></script>
 <script src="/assets/scholars-index.js?v=587" defer></script>
 <script src="/test/assets/prophets/prophets.js?v=33" defer></script>
@@ -12106,6 +12107,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/test/assets/ilm-research-chat.css?v=980">
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=791">
 <link rel="stylesheet" href="/assets/adaptive-layout.css?v=645">
+<link rel="stylesheet" href="/assets/qibla-quick-view.css?v=1">
 <link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=668">
 <link rel="stylesheet" href="/test/assets/dar-setup-hub.css?v=8"><!-- DAR_SETUP_HUB_V1 -->
 <link rel="stylesheet" href="/test/assets/dar-top-chrome-fix.css?v=2"><!-- DAR_TOP_CHROME_FIX -->
@@ -13564,64 +13566,7 @@ body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:no
 </style>
 
 
-<style id="qibla-quick-sheet-v1">
-html.qibla-quick-sheet-open,html.qibla-quick-sheet-open body{overflow:hidden!important;overscroll-behavior:none}
-html.qibla-quick-sheet-open #bottomNav,
-html.qibla-quick-sheet-open .bottom-nav,
-html.qibla-quick-sheet-open .top-shell,
-html.qibla-quick-sheet-open .header,
-html.qibla-quick-sheet-open #appView{pointer-events:none!important}
-html.qibla-quick-sheet-open #bottomNav{opacity:0!important;visibility:hidden!important}
-.qibla-quick-sheet-backdrop{
-  position:fixed;inset:0;z-index:4200;
-  display:grid;place-items:center;
-  padding:max(10px,env(safe-area-inset-top)) 14px max(14px,env(safe-area-inset-bottom));
-  background:color-mix(in srgb,var(--theme-page-bg,var(--bg,#050706)) 28%,#000 72%);
-  backdrop-filter:blur(18px) saturate(1.1);-webkit-backdrop-filter:blur(18px) saturate(1.1);
-  opacity:0;transition:opacity .34s ease;
-}
-.qibla-quick-sheet-backdrop.is-open{opacity:1}
-.qibla-quick-sheet{
-  width:min(100%,430px);
-  max-height:min(86dvh,720px);
-  overflow:hidden;
-  display:flex;flex-direction:column;align-items:center;
-  border:1px solid color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 34%,transparent);
-  border-radius:32px;
-  background:
-    radial-gradient(120% 80% at 50% 0%,color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 16%,transparent),transparent 58%),
-    linear-gradient(180deg,color-mix(in srgb,var(--theme-surface,var(--card,#14120e)) 94%,#fff 6%),var(--theme-page-bg,var(--bg,#0a0907)));
-  color:var(--theme-text,var(--text,#f5efe1));
-  box-shadow:0 28px 80px rgba(0,0,0,.5),inset 0 1px 0 color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 22%,transparent);
-  transform:translateY(22px) rotate(var(--qibla-lock-rot,0deg));
-  transform-origin:center center;
-  transition:transform .34s cubic-bezier(.2,.82,.2,1),opacity .34s ease;
-  padding:12px 16px 18px;
-  text-align:center;
-}
-.qibla-quick-sheet-backdrop.is-open .qibla-quick-sheet{transform:rotate(var(--qibla-lock-rot,0deg))}
-.qibla-quick-sheet__handle{width:42px;height:4px;border-radius:999px;margin:2px auto 10px;background:color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 42%,transparent)}
-.qibla-quick-sheet__head{width:100%;display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:start;margin:0 0 4px}
-.qibla-quick-sheet__kicker{margin:0;justify-self:start;font:800 10px/1.2 Georgia,serif;letter-spacing:.2em;color:var(--theme-accent,var(--gold2,#efd78e))}
-.qibla-quick-sheet__head h3{margin:0;justify-self:start;font-family:Georgia,"Times New Roman",serif;font-size:26px;font-weight:500;color:var(--theme-accent,var(--gold2,#efd78e));line-height:1.08}
-.qibla-quick-sheet__close{grid-column:2;grid-row:1/span 2;width:38px;height:38px;border:1px solid color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 24%,transparent);border-radius:999px;background:color-mix(in srgb,var(--theme-surface,var(--card,#14120e)) 80%,transparent);color:var(--theme-text,var(--text,#f5efe1));font-size:22px}
-.qibla-quick-stage{width:100%;display:flex;flex-direction:column;align-items:center;gap:8px}
-.qibla-quick-sheet .qibla-pro-head,
-.qibla-quick-sheet .qibla-info-pro,
-.qibla-quick-sheet .qibla-action-row,
-.qibla-quick-sheet .qibla-fiqh-line,
-.qibla-quick-sheet .qibla-orient-hint,
-.qibla-quick-sheet #startQiblaBtn,
-.qibla-quick-sheet #stopQiblaBtn{display:none!important}
-.qibla-quick-sheet .qibla-layout-pro{display:block!important;width:100%}
-.qibla-quick-sheet .qibla-compass-pro{width:min(72vw,250px)!important;max-width:250px;margin:4px auto 0}
-.qibla-quick-city{margin:0;font-size:13px;font-weight:700;color:var(--theme-text,var(--text,#f5efe1))}
-.qibla-quick-live{margin:0;min-height:22px;font-size:13px;font-weight:800;letter-spacing:.04em;color:var(--theme-accent,var(--gold2,#efd78e))}
-.qibla-quick-hint{margin:2px 0 0;max-width:32ch;font-size:11px;line-height:1.4;color:var(--theme-muted,var(--muted,#b8ae97))}
-.qibla-quick-sheet .qibla-compass-pro.qibla-aligned .qibla-compass-face{box-shadow:0 0 0 3px color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 55%,transparent),0 0 28px color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 35%,transparent)}
-html[data-theme="eisgold"] .qibla-quick-sheet{background:linear-gradient(180deg,#16140f,#0c0b08)}
-html[data-theme="light"] .qibla-quick-sheet,html[data-theme="ivory"] .qibla-quick-sheet{background:linear-gradient(180deg,#f7f1e4,#efe6d2)}
-</style>
+<style id="qibla-quick-sheet-v1">/* retired: Qibla Quick View uses assets/qibla-quick-view.css */</style>
 <style id="home-push-reminders-v379">
 /* Startseite: kompakte Erinnerungszeile, themeabhängig */
 .home-push-strip{
@@ -20983,7 +20928,7 @@ html body .post-reader-main .post-source-oval.post-source-module .post-after-lin
   <button type="button" id="quickAccessScrim" class="quick-access-scrim" aria-label="Schnellzugriff schließen"></button>
   <div id="quickAccessHint" class="quick-access-hint" hidden>Mehr gedrückt halten für Schnellzugriff</div>
   <div id="quickAccessMenu" class="quick-access-menu" role="menu" aria-label="Schnellzugriff" data-profile="more" hidden>
-    <button type="button" id="quickAccessOrientBtn" class="quick-action" role="menuitem" data-qa-action="orient" aria-label="Orientierung" title="Orientierung">
+    <button type="button" id="quickAccessOrientBtn" class="quick-action" role="menuitem" data-qa-action="orient" aria-label="Qibla" title="Qibla">
       <span class="quick-action-emoji" aria-hidden="true">🧭</span>
     </button>
     <button type="button" id="quickAccessSavedBtn" class="quick-action" role="menuitem" data-qa-action="saved" aria-label="Merkliste" title="Merkliste">
@@ -25552,6 +25497,7 @@ function bindPrayerPushSettingsControls(){
 }
 function bindPrayerEvents(){stopQiblaCompass();restorePrayerRemindersOnLoad();updatePrayerReminderButtons();updateHighlightPushButtons();updatePushFloatButton();bindPrayerPushAccordion();bindHomePushRemindersSheet();bindPrayerPushSettingsControls();if(prayerCountdownTimer)clearInterval(prayerCountdownTimer);prayerCountdownTimer=setInterval(updatePrayerCountdowns,1000);updatePrayerCountdowns();if(!window.__darHeaderPrayerVisibilityBound){window.__darHeaderPrayerVisibilityBound=true;document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){headerPrayerStatusMinuteKey="";updateHeaderPrayerStatusLine();updateHeaderPrayerStatus();updatePrayerCountdowns()}})}document.querySelectorAll("[data-toggle-prayer-details]").forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const body=$("prayerQuickDetails");if(!body)return;const open=body.hasAttribute("hidden");if(open){body.removeAttribute("hidden");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails schließen":btn.textContent.includes("Alle Gebetszeiten")?"Alle Gebetszeiten schließen":"Details schließen"}else{body.setAttribute("hidden","");btn.textContent=btn.textContent.includes("Berechnung")?"Berechnungsdetails anzeigen":btn.textContent.includes("Alle Zeiten")?"Alle Gebetszeiten öffnen":"Details öffnen"}}});const quickLoc=$("quickUseLocationBtn");if(quickLoc)quickLoc.onclick=ev=>{ev.stopPropagation();requestPrayerLocation(quickLoc)};const asr=$("asrMethodSelect");if(asr)asr.onchange=()=>{setPrayerSettings({asrFactor:Number(asr.value)});render()};const saveCity=$("savePrayerCityBtn");if(saveCity)saveCity.onclick=async()=>{const input=$("prayerCityInput");const city=(input?.value||"").trim();if(!city){alert("Bitte Ort eingeben oder Standort freigeben.");return}const old=saveCity.textContent;saveCity.textContent="Ort wird gesucht…";try{const found=await geocodePrayerCity(city);setPrayerSettings(found);render()}catch(e){saveCity.textContent=old;alert("Ort konnte nicht gefunden werden. Bitte genauer eingeben oder Standort freigeben.")}};const qiblaBtn=$("startQiblaBtn");if(qiblaBtn)qiblaBtn.onclick=startQiblaCompass;const stopQiblaBtn=$("stopQiblaBtn");if(stopQiblaBtn)stopQiblaBtn.onclick=stopQiblaCompass}
 async function startQiblaCompass(){
+  if(window.DARQiblaQuickView&&typeof window.DARQiblaQuickView.isOpen==="function"&&window.DARQiblaQuickView.isOpen())return;
   const status=$("qiblaStatus");
   const startBtn=$("startQiblaBtn");
   const stopBtn=$("stopQiblaBtn");
@@ -25611,9 +25557,8 @@ function renderQiblaQuickStage(){
 }
 function closeQiblaQuickSheet(){
   try{stopQiblaCompass()}catch(e){}
-  setQiblaNativeOrientationLock(false);
-  try{window.removeEventListener("orientationchange",syncQiblaSheetOrientation)}catch(e){}
-  try{screen.orientation&&screen.orientation.removeEventListener&&screen.orientation.removeEventListener("change",syncQiblaSheetOrientation)}catch(e){}
+  try{setQiblaNativeOrientationLock(false)}catch(e){}
+  if(window.DARQiblaQuickView&&typeof window.DARQiblaQuickView.close==="function"){window.DARQiblaQuickView.close()}
   const el=document.getElementById("qiblaQuickSheet");
   if(el)el.remove();
   document.body.classList.remove("qibla-quick-sheet-open");
@@ -25621,31 +25566,9 @@ function closeQiblaQuickSheet(){
 }
 function openQiblaQuickSheet(){
   try{if(typeof triggerLightHapticFeedback==="function")triggerLightHapticFeedback()}catch(e){}
-  const view=typeof readRoute==="function"?readRoute().view:"";
-  if(view==="qibla"||view==="prayer"){
-    qiblaAutoStart=true;
-    render();
-    return;
-  }
-  closeQiblaQuickSheet();
-  setQiblaNativeOrientationLock(true);
-  const wrap=document.createElement("div");
-  wrap.id="qiblaQuickSheet";
-  wrap.className="qibla-quick-sheet-backdrop";
-  wrap.innerHTML=`<div class="qibla-quick-sheet" role="dialog" aria-modal="true" aria-labelledby="qiblaQuickTitle"><div class="qibla-quick-sheet__handle" aria-hidden="true"></div><div class="qibla-quick-sheet__head"><p class="qibla-quick-sheet__kicker">DĀR AL TAWḤĪD</p><h3 id="qiblaQuickTitle">Qibla</h3><button type="button" class="qibla-quick-sheet__close" aria-label="Schließen">×</button></div>${renderQiblaQuickStage()}</div>`;
-  document.body.appendChild(wrap);
-  document.body.classList.add("qibla-quick-sheet-open");
-  document.documentElement.classList.add("qibla-quick-sheet-open");
-  syncQiblaSheetOrientation();
-  requestAnimationFrame(()=>{wrap.classList.add("is-open");syncQiblaSheetOrientation()});
-  window.addEventListener("orientationchange",syncQiblaSheetOrientation);
-  try{screen.orientation&&screen.orientation.addEventListener&&screen.orientation.addEventListener("change",syncQiblaSheetOrientation)}catch(e){}
-  wrap.addEventListener("click",ev=>{if(ev.target===wrap)closeQiblaQuickSheet()});
-  wrap.querySelector(".qibla-quick-sheet__close")?.addEventListener("click",closeQiblaQuickSheet);
-  const startBtn=$("startQiblaBtn"); if(startBtn) startBtn.onclick=startQiblaCompass;
-  const stopBtn=$("stopQiblaBtn"); if(stopBtn) stopBtn.onclick=stopQiblaCompass;
-  const status=$("qiblaStatus"); if(status) status.textContent="Suche startet…";
-  setTimeout(()=>runQiblaSheetAutoStart(),50);
+  try{stopQiblaCompass()}catch(e){}
+  try{setQiblaNativeOrientationLock(true)}catch(e){}
+  if(window.DARQiblaQuickView&&typeof window.DARQiblaQuickView.open==="function"){window.DARQiblaQuickView.open();return}
 }
 async function runQiblaSheetAutoStart(){
   if(!document.getElementById("qiblaQuickSheet"))return;
@@ -26674,7 +26597,7 @@ function featureCatalog(){
     {id:"prayer",title:"Gebetszeiten",icon:"🕌",desc:"Zeiten, Standort, Qibla und Erinnerungen.",button:"Öffnen",nav:"prayer",group:"Alltag & Gebet",badge:"Praktisch"},
     {id:"notifications",title:"Benachrichtigungen",icon:"🔔",desc:"Gebete, Duʿāʾ und Empfehlungen einzeln einstellen.",button:"Einstellen",nav:"notifications",group:"Alltag & Gebet",badge:"Test"},
     {id:"jummah",title:"Jumuʿah",icon:"🕌",desc:"Freitagsgebet und Erinnerung.",button:"Öffnen",nav:"jummah",group:"Alltag & Gebet"},
-    {id:"qibla",title:"Qibla",icon:"🕋",desc:"Tippen: Suche startet sofort.",button:"Starten",nav:"qibla",group:"Alltag & Gebet"},
+    {id:"qibla",title:"Qibla",icon:"🕋",desc:"Live-Richtung zur Kaʿbah.",button:"Öffnen",nav:"qibla",group:"Alltag & Gebet"},
     {id:"calendar",title:"Islamischer Kalender",icon:"🗓️",desc:"Hijrī-Termine und wichtige Tage.",button:"Öffnen",nav:"calendar",group:"Alltag & Gebet"},
     {id:"zakat",title:"Zakāt-Rechner",icon:"🧾",desc:typeof isZakatFocusActive==="function"&&isZakatFocusActive()?"Im Fokus · Berechnung und Bericht.":"Berechnung, Niṣāb und Bericht.",button:"Ansehen",nav:"zakat",group:"Werkzeuge & Assistenten",badge:"Praktisch"},
     {id:"wasiyyah",title:"Testament",icon:"📜",desc:"Private islamische Wasiyyah-Erklärung mit Pflichtprüfung und PDF-Ausgabe.",button:"Öffnen",nav:"wasiyyah",group:"Werkzeuge & Assistenten",badge:"Wasiyyah"},
@@ -26713,7 +26636,7 @@ function filterMoreFeatures(){const input=$("moreFeatureSearch");if(!input)retur
 
 
 function renderMoreQuickAccessSection(){
-  return `<section class="more-quick-access" aria-label="Schnellzugriff"><div class="more-quick-access__list"><button type="button" class="more-quick-access__chip" data-more-quick="orient" aria-label="Orientierung" title="Orientierung"><span aria-hidden="true">🧭</span></button><button type="button" class="more-quick-access__chip" data-more-quick="saved" aria-label="Merkliste" title="Merkliste"><span aria-hidden="true">❤️</span></button><button type="button" class="more-quick-access__chip" data-more-quick="notifications" aria-label="Erinnerungen" title="Erinnerungen"><span aria-hidden="true">🔔</span></button><button type="button" class="more-quick-access__chip" data-more-quick="settings" aria-label="Einstellungen" title="Einstellungen"><span aria-hidden="true">⚙️</span></button></div></section>`;
+  return `<section class="more-quick-access" aria-label="Schnellzugriff"><div class="more-quick-access__list"><button type="button" class="more-quick-access__chip" data-more-quick="orient" aria-label="Qibla" title="Qibla"><span aria-hidden="true">🧭</span></button><button type="button" class="more-quick-access__chip" data-more-quick="saved" aria-label="Merkliste" title="Merkliste"><span aria-hidden="true">❤️</span></button><button type="button" class="more-quick-access__chip" data-more-quick="notifications" aria-label="Erinnerungen" title="Erinnerungen"><span aria-hidden="true">🔔</span></button><button type="button" class="more-quick-access__chip" data-more-quick="settings" aria-label="Einstellungen" title="Einstellungen"><span aria-hidden="true">⚙️</span></button></div></section>`;
 }
 
 function renderMore(){const groups=["Lernen & Wissen","Alltag & Gebet","Werkzeuge & Assistenten","Persönlich","App"];const items=featureCatalog();return `${setPageHeader("Mehr","Funktionen geordnet nach Lernen, Alltag, Werkzeugen und Einstellungen","Mehr")}${renderMoreQuickAccessSection()}${typeof renderAdaptiveNavPanel==="function"?renderAdaptiveNavPanel():""}${renderZakatMoreFocus()}<section class="feature-section"><div class="feature-head"><div><h3>Funktion suchen</h3><span>Tippe z. B. Qibla, Rechner oder Qurʾān.</span></div></div><input id="moreFeatureSearch" class="more-search" type="search" placeholder="Funktion suchen…" autocomplete="off"></section>${groups.map(group=>renderMoreGroup(group,items.filter(item=>item.group===group))).join("")}`}
@@ -27461,7 +27384,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1020";
+const APP_BUILD_ID="app-shell-v1021";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -28056,7 +27979,7 @@ function render(){
     else if(currentRoute.view==="news")html=renderNews();
     else if(currentRoute.view==="settings")html=renderSettings();
     else if(currentRoute.view==="jummah")html=renderJummah();
-    else if(currentRoute.view==="qibla")html=renderQiblaPage();
+    else if(currentRoute.view==="qibla"){html=typeof renderMore==="function"?renderMore():renderQiblaPage();if(!(window.DARQiblaQuickView&&window.DARQiblaQuickView.isOpen&&window.DARQiblaQuickView.isOpen()))queueMicrotask(()=>{try{openQiblaQuickSheet()}catch(e){}});}
     else if(currentRoute.view==="image-editor")html=renderImageEditor();
     else if(currentRoute.view==="image-editor-test")html=renderImageEditorTest();
     else if(currentRoute.view==="quran")html=renderQuranFoldRoute("quran");
