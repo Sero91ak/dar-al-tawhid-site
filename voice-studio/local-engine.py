@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import gc, json, os, re, subprocess, threading, time, traceback, uuid
+import gc, json, os, re, shutil, subprocess, threading, time, traceback, uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
@@ -267,12 +267,33 @@ def save_wav(path:Path,wav,sr:int):
         wf.setframerate(int(sr))
         wf.writeframes(pcm.tobytes())
 
+def find_ffmpeg():
+    candidates=[
+        os.environ.get("DAR_FFMPEG_BIN","").strip(),
+        shutil.which("ffmpeg") or "",
+        "/opt/homebrew/bin/ffmpeg",
+        "/usr/local/bin/ffmpeg",
+        "/opt/local/bin/ffmpeg",
+    ]
+    for candidate in candidates:
+        if candidate and Path(candidate).is_file() and os.access(candidate,os.X_OK):
+            return candidate
+    return None
+
 def postprocess(src:Path):
-    if subprocess.run(["/usr/bin/env","bash","-lc","command -v ffmpeg"],capture_output=True).returncode!=0:
+    ffmpeg=find_ffmpeg()
+    if not ffmpeg:
+        print("[DĀR Voice] ffmpeg nicht gefunden – liefere ungemasterte WAV aus.",flush=True)
         return src
+
     dst=src.with_name(src.stem+"_master.wav")
     filt="highpass=f=65,acompressor=threshold=-18dB:ratio=2.2:attack=15:release=180,alimiter=limit=0.95,loudnorm=I=-16:TP=-1.5:LRA=7"
-    p=subprocess.run(["ffmpeg","-y","-i",str(src),"-af",filt,str(dst)],capture_output=True,text=True)
+    try:
+        p=subprocess.run([ffmpeg,"-y","-i",str(src),"-af",filt,str(dst)],capture_output=True,text=True)
+    except (FileNotFoundError,OSError) as e:
+        print("[DĀR Voice] ffmpeg nicht startbar – Roh-WAV bleibt erhalten:",e,flush=True)
+        return src
+
     if p.returncode==0 and dst.exists() and dst.stat().st_size>44:
         return dst
     if p.stderr:
