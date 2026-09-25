@@ -5,6 +5,7 @@ const SHELL=[
   "/voice-studio/manifest.webmanifest",
   "/voice-studio/version.json",
   "/voice-studio/install-mac.command",
+  "/voice-studio/DAR-Voice-Studio-Setup.app.zip",
   "/voice-studio/local-engine.py",
   "/data/pronunciation/pronunciation-rules.json",
   "/watermark-my-logo-full.png",

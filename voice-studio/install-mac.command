@@ -91,7 +91,7 @@ cat > "$MACOS/dar-voice-engine" <<'RUNNER'
 set -e
 TARGET="$HOME/Applications/DAR-Voice-Studio"
 VENV="$HOME/SerhatVoice/.venv"
-URL="\${1:-}"
+URL="${1:-}"
 OPEN_STUDIO=1
 [ "$URL" = "--background" ] && OPEN_STUDIO=0
 
