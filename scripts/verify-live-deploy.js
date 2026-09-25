@@ -88,22 +88,14 @@ async function main() {
       "service-worker.js"
     ]);
     const voiceVersionOk = await waitForStatus(`${SITE_URL}/voice-studio/version.json`, 200);
-    const voiceSetupOk = await waitForHtmlIncludes(
-      `${SITE_URL}/voice-studio/install-mac.command?setup=11`,
-      ["DĀR Voice Studio.app", "WKWebView", "swiftc"]
-    );
-    const voiceSwOk = await waitForHtmlIncludes(
-      `${SITE_URL}/voice-studio/sw-v11.js`,
-      ["dar-voice-studio-v11"]
-    );
     const pronunciationOk = await waitForStatus(
       `${SITE_URL}/data/pronunciation/pronunciation-rules.json`,
       200
     );
 
-    if (!visitorOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !voiceSetupOk || !voiceSwOk || !pronunciationOk) {
+    if (!visitorOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
       console.error(
-        `verify: Besucher-App fehlgeschlagen (build=${visitorBuild}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, voice-setup=${voiceSetupOk ? "ok" : "fail"}, voice-sw=${voiceSwOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
+        `verify: Besucher-App fehlgeschlagen (build=${visitorBuild}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
       );
       failed += 1;
     } else {

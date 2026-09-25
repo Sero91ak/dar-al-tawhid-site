@@ -1,6 +1,6 @@
 {
-  "version": "1.4.1",
-  "updatedAt": "2026-09-25T12:15:00+02:00",
+  "version": "1.4.2",
+  "updatedAt": "2026-09-25T12:20:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "local-chatterbox-v3",
   "provider": "self-produced",
@@ -14,9 +14,10 @@
     "fallbackReference": "~/SerhatVoice/Serhat_FINAL_REF.wav"
   },
   "setupMethod": "native-macos-wkwebview-existing-serhatvoice",
-  "setupCommand": "curl -fsSL 'https://dar-al-tawhid.de/voice-studio/install-mac.command?setup=11' | /bin/bash",
+  "setupCommand": "curl -fsSL 'https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/voice-studio/install-mac.command?native=142' | /bin/bash",
   "macApp": "~/Applications/DĀR Voice Studio.app",
   "macAppRuntime": "native WKWebView + local Chatterbox engine",
   "browserRequiredAfterInstall": false,
-  "serviceWorker": "/voice-studio/sw-v11.js"
+  "serviceWorker": "/voice-studio/sw-v11.js",
+  "setupSource": "github-raw"
 }

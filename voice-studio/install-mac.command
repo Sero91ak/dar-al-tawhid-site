@@ -2,6 +2,7 @@
 set -euo pipefail
 
 SITE="https://dar-al-tawhid.de"
+RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main"
 TARGET="$HOME/Applications/DAR-Voice-Studio"
 VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
@@ -21,12 +22,12 @@ say_status() {
 say_status "DĀR Voice Studio wird eingerichtet …"
 
 # Aktuelle Studio-Dateien lokal spiegeln.
-curl -fsSL "$SITE/voice-studio/local-engine.py?setup=11" -o "$TARGET/local-engine.py"
-curl -fsSL "$SITE/voice-studio/index.html?setup=11" -o "$TARGET/studio.html"
-curl -fsSL "$SITE/data/pronunciation/pronunciation-rules.json?setup=11" -o "$TARGET/pronunciation-rules.json"
-curl -fsSL "$SITE/data/pronunciation/voice-production-profile.json?setup=11" -o "$TARGET/voice-production-profile.json"
-curl -fsSL "$SITE/watermark-my-logo-full.png?setup=11" -o "$TARGET/watermark-my-logo-full.png" || true
-curl -fsSL "$SITE/app-icon-512.png?setup=11" -o "$TARGET/app-icon-512.png" || true
+curl -fsSL "$RAW/voice-studio/local-engine.py?native=142" -o "$TARGET/local-engine.py"
+curl -fsSL "$RAW/voice-studio/index.html?native=142" -o "$TARGET/studio.html"
+curl -fsSL "$RAW/data/pronunciation/pronunciation-rules.json?native=142" -o "$TARGET/pronunciation-rules.json"
+curl -fsSL "$RAW/data/pronunciation/voice-production-profile.json?native=142" -o "$TARGET/voice-production-profile.json"
+curl -fsSL "$RAW/watermark-my-logo-full.png?native=142" -o "$TARGET/watermark-my-logo-full.png" || true
+curl -fsSL "$RAW/app-icon-512.png?native=142" -o "$TARGET/app-icon-512.png" || true
 
 # Vorhandene Stimmreferenz bevorzugen.
 REF="$VOICE_HOME/Serhat_Adobe_MASTER.wav"
@@ -151,7 +152,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
 
         webView = WKWebView(frame: .zero, configuration: config)
         webView.navigationDelegate = self
-        webView.setValue(false, forKey: "drawsBackground")
 
         window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 1500, height: 940),
