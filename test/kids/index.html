@@ -2101,6 +2101,9 @@ var speaking=false;
 var storyManualStop=false;
 var currentStoryKey="coin";
 var storyQuestionPassed=false;
+var pronunciationRules=[];
+var pronunciationBuckets=Object.create(null);
+var pronunciationReady=loadPronunciationLibrary();
 var authenticStories=[];
 var kidsDuas=[];
 var verifiedKnowledge=[];
@@ -2112,6 +2115,50 @@ var currentQuizIndex=0;
 var quizLocked=false;
 var quizCorrectCount=0;
 var quizQuestionHadError=false;
+
+function buildPronunciationBuckets(rules){
+  var buckets=Object.create(null);
+  (rules||[]).forEach(function(rule){
+    var input=String(rule&&rule.string_to_replace||"");
+    if(!input)return;
+    var first=Array.from(input)[0];
+    if(!buckets[first])buckets[first]=[];
+    buckets[first].push(rule);
+  });
+  Object.keys(buckets).forEach(function(key){
+    buckets[key].sort(function(a,b){
+      return Array.from(String(b.string_to_replace||"")).length-Array.from(String(a.string_to_replace||"")).length;
+    });
+  });
+  return buckets;
+}
+function loadPronunciationLibrary(){
+  return fetch("/test/kids/data/pronunciation-rules.json?v=20260924")
+    .then(function(r){if(!r.ok)throw new Error("pronunciation "+r.status);return r.json()})
+    .then(function(data){
+      pronunciationRules=Array.isArray(data&&data.rules)?data.rules:[];
+      pronunciationBuckets=buildPronunciationBuckets(pronunciationRules);
+      return pronunciationRules;
+    })
+    .catch(function(){pronunciationRules=[];pronunciationBuckets=Object.create(null);return []});
+}
+function prepareNarrationText(text){
+  var chars=Array.from(String(text||"")),out="";
+  for(var i=0;i<chars.length;){
+    var list=pronunciationBuckets[chars[i]]||[],matched=null,matchedLen=0;
+    for(var r=0;r<list.length;r++){
+      var needle=Array.from(String(list[r].string_to_replace||""));
+      if(!needle.length||i+needle.length>chars.length)continue;
+      var ok=true;
+      for(var j=0;j<needle.length;j++){if(chars[i+j]!==needle[j]){ok=false;break}}
+      if(ok){matched=list[r];matchedLen=needle.length;break}
+    }
+    if(!matched){out+=chars[i++];continue}
+    out+=String(matched.alias||matched.string_to_replace||"");
+    i+=matchedLen;
+  }
+  return out;
+}
 
 function pad3(n){return String(n).padStart(3,"0")}
 function padAyah(n){return String(n).padStart(3,"0")}
@@ -3546,7 +3593,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
 function quizSpeak(text){
   if(!("speechSynthesis" in window))return;
   try{speech.cancel()}catch(e){}
-  var u=new SpeechSynthesisUtterance(String(text||""));
+  var u=new SpeechSynthesisUtterance(prepareNarrationText(String(text||"")));
   u.lang="de-DE";u.rate=age==="4–5"?.82:.88;u.pitch=.96;
   speech.speak(u);
 }
@@ -3780,7 +3827,7 @@ document.getElementById("storyPlay").addEventListener("click",function(){
   if(!("speechSynthesis" in window)){alert("Auf diesem Gerät ist die Vorschau-Stimme nicht verfügbar.");return}
   if(speaking){stopSpeech();return}
   var s=storyData(currentStoryKey);
-  var u=new SpeechSynthesisUtterance(s.text);
+  var u=new SpeechSynthesisUtterance(prepareNarrationText(s.text));
   storyManualStop=false;
   u.lang="de-DE";u.rate=.87;u.pitch=.94;
   u.onend=function(){

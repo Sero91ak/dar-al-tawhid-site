@@ -22,6 +22,8 @@
 		B1000000000000000000000F /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000000F /* QuizView.swift */; };
 		B10000000000000000000010 /* KidsDua.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000010 /* KidsDua.swift */; };
 		B10000000000000000000011 /* DuaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000011 /* DuaView.swift */; };
+		B10000000000000000000012 /* PronunciationLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000012 /* PronunciationLexicon.swift */; };
+		B10000000000000000000013 /* pronunciation-rules.json in Resources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000013 /* pronunciation-rules.json */; };
 		B1000000000000000000000D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000000E /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,8 @@
 		F1000000000000000000000F /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		F10000000000000000000010 /* KidsDua.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsDua.swift; sourceTree = "<group>"; };
 		F10000000000000000000011 /* DuaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuaView.swift; sourceTree = "<group>"; };
+		F10000000000000000000012 /* PronunciationLexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PronunciationLexicon.swift; sourceTree = "<group>"; };
+		F10000000000000000000013 /* pronunciation-rules.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "pronunciation-rules.json"; sourceTree = "<group>"; };
 		F1000000000000000000000D /* DarAlTawhidKids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarAlTawhidKids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1000000000000000000000E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,6 +76,7 @@
 				G10000000000000000000004 /* Design */,
 				G10000000000000000000005 /* Models */,
 				G10000000000000000000006 /* Services */,
+				G10000000000000000000009 /* Resources */,
 				G10000000000000000000007 /* Views */,
 			);
 			path = DarAlTawhidKids;
@@ -108,8 +113,17 @@
 			children = (
 				F10000000000000000000005 /* NarrationService.swift */,
 				F10000000000000000000006 /* ProgressStore.swift */,
+				F10000000000000000000012 /* PronunciationLexicon.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000009 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000013 /* pronunciation-rules.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		G10000000000000000000007 /* Views */ = {
@@ -194,6 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1000000000000000000000D /* Assets.xcassets in Resources */,
+				B10000000000000000000013 /* pronunciation-rules.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +234,7 @@
 				B1000000000000000000000F /* QuizView.swift in Sources */,
 				B10000000000000000000010 /* KidsDua.swift in Sources */,
 				B10000000000000000000011 /* DuaView.swift in Sources */,
+				B10000000000000000000012 /* PronunciationLexicon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071522">
+<meta name="color-scheme" content="dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DĀR Voice">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="DĀR Voice Studio">
+<meta name="description" content="Private Sprachproduktion für DĀR AL TAWḤĪD Kids">
+<link rel="manifest" href="manifest.webmanifest?v=3">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="/app-icon-192.png">
+<title>DĀR AL TAWḤĪD – Voice Studio</title>
+<style>
+:root{
+  --bg:#06131f;--bg2:#0a1d2d;--panel:#0c2234;--panel2:#0a1a28;
+  --ink:#f7f2e8;--muted:#9eafbc;--soft:#738797;--line:rgba(255,255,255,.095);
+  --gold:#d9b66f;--gold2:#f0d59a;--green:#79bea0;--red:#df8686;--amber:#e7bd70;
+  --safe-top:max(10px,env(safe-area-inset-top));
+  --safe-right:max(12px,env(safe-area-inset-right));
+  --safe-bottom:max(12px,env(safe-area-inset-bottom));
+  --safe-left:max(12px,env(safe-area-inset-left));
+  --radius:22px;--shadow:0 24px 70px rgba(0,0,0,.24);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-width:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Avenir Next",system-ui,sans-serif}
+html{background:#06131f}
+body{min-height:100dvh;overflow-x:hidden;background:
+radial-gradient(circle at 0 0,rgba(217,182,111,.11),transparent 26rem),
+radial-gradient(circle at 100% 14%,rgba(72,128,151,.16),transparent 28rem),
+linear-gradient(145deg,#06131f 0%,#091b2a 50%,#0b2534 100%)}
+button,input,textarea,summary{font:inherit}
+button,a,input,textarea{touch-action:manipulation}
+button{color:inherit}
+button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid rgba(217,182,111,.72);outline-offset:2px}
+.app{width:100%;min-height:100dvh;padding:var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left)}
+.shell{width:100%;max-width:1920px;margin:0 auto;min-height:calc(100dvh - var(--safe-top) - var(--safe-bottom));display:flex;flex-direction:column}
+.topbar{
+  min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:10px 6px 14px;position:sticky;top:0;z-index:30;
+  background:linear-gradient(180deg,rgba(6,19,31,.96),rgba(6,19,31,.76) 72%,transparent);
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)
+}
+.brand-wrap{min-width:0;display:flex;align-items:center;gap:13px}
+.brand-mark{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;border:1px solid rgba(217,182,111,.25);background:linear-gradient(145deg,rgba(217,182,111,.14),rgba(255,255,255,.035));box-shadow:inset 0 1px rgba(255,255,255,.08)}
+.brand-mark svg{width:23px;height:23px}
+.brand{font-family:Georgia,serif;font-size:13px;letter-spacing:.13em;color:var(--gold2);font-weight:700;white-space:nowrap}
+.brand-sub{font-size:11px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top-actions{display:flex;align-items:center;gap:9px}
+.status{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:rgba(255,255,255,.045);padding:9px 12px;border-radius:999px;font-size:12px;white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:#687b89}.dot.ok{background:#69c89d;box-shadow:0 0 0 4px rgba(105,200,157,.11)}.dot.bad{background:#df8686}
+.install-btn{display:none}
+.workspace{flex:1;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(330px,.62fr);gap:14px;min-height:0}
+.panel{background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.026));border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--radius);min-width:0}
+.editor-panel{padding:clamp(16px,1.6vw,28px);display:flex;flex-direction:column;min-height:0}
+.side-panel{padding:18px;align-self:start;position:sticky;top:82px;max-height:calc(100dvh - 100px);overflow:auto}
+.heading-row{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:15px}
+h1{font-size:clamp(26px,2.1vw,40px);line-height:1.02;letter-spacing:-.035em;margin:0 0 7px}
+.lead{font-size:13px;line-height:1.5;color:var(--muted);max-width:760px}
+.badges{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.badge{font-size:10px;font-weight:800;letter-spacing:.04em;padding:6px 9px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#cbd7df;white-space:nowrap}
+.textbox-wrap{position:relative;flex:1;min-height:290px}
+textarea{
+  width:100%;height:clamp(330px,48vh,760px);min-height:290px;resize:vertical;
+  background:linear-gradient(180deg,#071a29,#071725);color:var(--ink);border:1px solid rgba(255,255,255,.10);
+  border-radius:18px;padding:18px 18px 48px;line-height:1.62;font-size:clamp(15px,1.05vw,18px);
+  outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.025)
+}
+textarea:focus{border-color:rgba(217,182,111,.45);box-shadow:0 0 0 4px rgba(217,182,111,.055)}
+.counter{position:absolute;right:12px;bottom:11px;color:var(--soft);font-size:10px;border:1px solid var(--line);background:rgba(6,19,31,.78);padding:5px 8px;border-radius:999px;pointer-events:none}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 14px}
+.stat{background:#071927;border:1px solid var(--line);border-radius:15px;padding:11px 12px}.stat b{font-size:21px;display:block;letter-spacing:-.02em}.stat span{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+.section-title{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:#d7e0e6;font-weight:850;margin:0 0 9px}
+.term-list{display:flex;flex-wrap:wrap;gap:6px;max-height:132px;overflow:auto;padding-right:2px}
+.term{font-size:10px;padding:6px 8px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.045);white-space:nowrap}.term.locked{border-color:rgba(217,182,111,.38);color:#f2d79c;background:rgba(217,182,111,.07)}.term.verified{border-color:rgba(121,190,160,.30);color:#b8e2cf;background:rgba(121,190,160,.05)}
+.preview-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.36fr);gap:10px;margin-top:15px}
+.preview{white-space:pre-wrap;background:#071927;border:1px solid var(--line);border-radius:15px;padding:13px;min-height:108px;max-height:190px;overflow:auto;color:#dfe7ec;font-size:12px;line-height:1.55}
+.actions-card{border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.025);padding:12px;display:flex;flex-direction:column;justify-content:space-between;gap:10px}
+.btn{min-height:44px;border:0;border-radius:13px;padding:11px 14px;font-weight:800;font-size:13px;cursor:pointer;transition:transform .14s ease,filter .14s ease,opacity .14s ease}.btn:active{transform:scale(.985)}.primary{background:linear-gradient(180deg,#e2c47d,#d4ad5e);color:#11212b;box-shadow:0 8px 24px rgba(217,182,111,.14)}.secondary{background:rgba(255,255,255,.075);color:var(--ink);border:1px solid var(--line)}.quiet{background:transparent;color:#cbd6dc;border:1px solid var(--line)}.btn:disabled{opacity:.38;cursor:not-allowed;transform:none}
+.player-wrap{margin-top:12px;padding:12px;border-radius:16px;border:1px solid var(--line);background:rgba(0,0,0,.12)}audio{width:100%;height:38px}.download-row{display:flex;gap:8px;margin-top:8px}
+.download-row a{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.side-section{padding:0 0 16px;margin-bottom:16px;border-bottom:1px solid var(--line)}.side-section:last-child{border:0;margin:0;padding:0}
+.side-title{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#91a4b2;font-weight:850;margin-bottom:10px}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.profile-box{background:#071927;border:1px solid var(--line);border-radius:14px;padding:11px}.profile-box small{display:block;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}.profile-box strong{font-size:13px}
+.qa{display:grid;gap:0}.qa-item{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.065);font-size:12px}.qa-item:last-child{border-bottom:0}.good{color:#9bd8ba}.warn{color:#f1c77c}.bad{color:#ef9d9d}
+details{border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025);overflow:hidden}summary{list-style:none;cursor:pointer;padding:12px 13px;font-size:12px;font-weight:800;color:#cbd6de;display:flex;align-items:center;justify-content:space-between}summary::-webkit-details-marker{display:none}summary:after{content:"＋";color:var(--muted)}details[open] summary:after{content:"−"}.advanced{padding:0 12px 12px}
+label{display:block;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-weight:800;margin:0 0 6px}
+input{width:100%;background:#071927;color:var(--ink);border:1px solid var(--line);border-radius:11px;padding:10px 11px;font-size:12px}
+.notice{font-size:11px;line-height:1.5;color:var(--muted)}
+.footer{padding:13px 4px 4px;color:#6f8290;font-size:10px;text-align:center}
+.mobile-actions{display:none}
+@media(min-width:1420px){
+  .workspace{grid-template-columns:minmax(0,1.82fr) minmax(390px,.55fr);gap:18px}
+  .editor-panel{padding:28px 30px}
+  textarea{height:clamp(420px,58vh,780px)}
+  .side-panel{padding:22px}
+}
+@media(min-width:800px) and (max-width:1100px){
+  .workspace{grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr)}
+  .preview-grid{grid-template-columns:1fr}
+  .side-panel{top:76px}
+  .badges{display:none}
+}
+@media(max-width:799px){
+  .app{padding:var(--safe-top) 0 var(--safe-bottom)}
+  .shell{max-width:none}
+  .topbar{padding:8px max(14px,var(--safe-right)) 11px max(14px,var(--safe-left));min-height:64px}
+  .brand-mark{width:38px;height:38px;border-radius:12px}
+  .brand{font-size:11px}.brand-sub{font-size:9px;max-width:46vw}
+  .status{padding:8px 10px;font-size:10px}.status span:last-child{max-width:30vw;overflow:hidden;text-overflow:ellipsis}
+  .workspace{display:block}
+  .panel{border-radius:0;border-left:0;border-right:0;box-shadow:none}
+  .editor-panel{padding:16px max(14px,var(--safe-right)) 104px max(14px,var(--safe-left));border-top:1px solid var(--line)}
+  .side-panel{position:relative;top:auto;max-height:none;overflow:visible;margin-top:10px;padding:17px max(14px,var(--safe-right)) 22px max(14px,var(--safe-left))}
+  .heading-row{display:block}.badges{justify-content:flex-start;margin-top:10px}.badges .badge:nth-child(n+3){display:none}
+  h1{font-size:29px}
+  textarea{height:42dvh;min-height:290px;max-height:520px;font-size:16px;padding:15px 14px 44px}
+  .preview-grid{grid-template-columns:1fr}
+  .actions-card{display:none}
+  .stats{gap:6px}.stat{padding:10px}.stat b{font-size:19px}.stat span{font-size:8px}
+  .term-list{max-height:112px}
+  .mobile-actions{display:grid;grid-template-columns:.42fr 1fr;gap:8px;position:fixed;z-index:40;left:max(10px,var(--safe-left));right:max(10px,var(--safe-right));bottom:max(9px,var(--safe-bottom));padding:8px;background:rgba(7,21,33,.88);border:1px solid rgba(255,255,255,.12);border-radius:18px;-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);box-shadow:0 16px 40px rgba(0,0,0,.4)}
+  .mobile-actions .btn{min-height:49px}
+  .footer{padding-bottom:86px}
+}
+@media(max-width:430px){
+  .top-actions .install-btn{display:none!important}
+  .status{max-width:42vw}
+  .profile-grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .editor-panel{padding-left:max(11px,var(--safe-left));padding-right:max(11px,var(--safe-right))}
+  textarea{min-height:260px;height:40dvh}
+}
+@media(max-height:560px) and (orientation:landscape){
+  .app{padding-top:0}
+  .topbar{position:relative;min-height:54px;padding-top:6px;padding-bottom:7px}
+  .workspace{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.55fr)}
+  .editor-panel{padding:12px 14px 78px;border-radius:0}
+  .side-panel{position:relative;top:auto;max-height:none;margin:0;border-radius:0;padding:12px}
+  .heading-row{margin-bottom:8px}.lead,.badges{display:none}h1{font-size:23px}
+  textarea{height:48dvh;min-height:190px;max-height:300px;padding:11px 12px 40px}
+  .stats{margin:7px 0}.term-list{max-height:70px}.preview-grid{display:none}
+  .mobile-actions{display:grid;grid-template-columns:.42fr 1fr}
+  .footer{display:none}
+}
+@media(min-width:1921px){
+  .shell{max-width:none}
+  .workspace{grid-template-columns:minmax(0,2fr) 430px}
+  .editor-panel{padding-left:clamp(30px,2.5vw,54px);padding-right:clamp(30px,2.5vw,54px)}
+}
+@media(display-mode:standalone){
+  .topbar{padding-top:4px}
+  .install-btn{display:none!important}
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DĀR AL TAWḤĪD VOICE STUDIO — PROFESSIONAL CONTINUOUS SURFACE
+   Keine Dashboard-Karten: durchgehende Studiofläche, feine Linien.
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --bg:#061318;
+  --bg2:#071b22;
+  --panel:#081b24;
+  --panel2:#0a202a;
+  --ink:#f5f1e8;
+  --muted:#9cafb4;
+  --soft:#71868b;
+  --line:rgba(210,229,226,.105);
+  --line-strong:rgba(210,229,226,.17);
+  --gold:#cdb071;
+  --gold2:#e8d29a;
+  --green:#71a899;
+  --cyan:#6f9eaa;
+  --radius:0px;
+  --shadow:none;
+}
+html{background:#061318}
+body{
+  background:
+    radial-gradient(1200px 760px at -8% -8%,rgba(75,122,118,.13),transparent 58%),
+    radial-gradient(1000px 640px at 108% 16%,rgba(53,91,113,.13),transparent 60%),
+    linear-gradient(135deg,#061318 0%,#071a21 48%,#081b25 100%);
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background:
+    linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.009) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 78%);
+}
+.app{padding-top:var(--safe-top)}
+.shell{max-width:1920px}
+.topbar{
+  min-height:78px;
+  padding:10px 4px 14px;
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg,rgba(6,19,24,.97),rgba(6,19,24,.87) 74%,rgba(6,19,24,.68));
+  box-shadow:none;
+}
+.brand-wrap{gap:11px}
+.brand-mark{
+  width:48px;height:48px;border:0;border-radius:0;background:transparent;box-shadow:none;overflow:visible;
+  display:grid;place-items:center;flex:none
+}
+.brand-mark img{
+  display:block;width:48px;height:48px;object-fit:contain;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.24))
+}
+.brand{font-size:13px;color:var(--gold2);letter-spacing:.145em}
+.brand-sub{color:#7f9499;letter-spacing:.055em}
+.status{
+  border-color:var(--line);background:rgba(7,26,33,.58);
+  border-radius:9px;padding:8px 11px
+}
+.workspace{
+  gap:0;
+  background:linear-gradient(180deg,rgba(8,28,36,.76),rgba(6,20,27,.74));
+  border-bottom:1px solid var(--line);
+  min-height:calc(100dvh - 104px);
+}
+.panel{
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+.editor-panel{
+  padding:clamp(18px,1.85vw,34px) clamp(18px,2.15vw,42px) 28px;
+  border-right:1px solid var(--line)!important;
+}
+.side-panel{
+  padding:24px 22px;
+  border-left:0!important;
+  background:linear-gradient(180deg,rgba(6,20,27,.34),rgba(8,28,36,.21))!important;
+  top:79px;
+  max-height:calc(100dvh - 80px)
+}
+.heading-row{margin-bottom:18px}
+h1{font-weight:730;letter-spacing:-.038em}
+.lead{color:#91a6ab;max-width:820px}
+.badge{
+  background:transparent;border:0;border-left:1px solid var(--line);
+  border-radius:0;padding:4px 9px;color:#82979d;font-weight:750
+}
+.badges .badge:first-child{border-left:0}
+.textbox-wrap{
+  border-top:1px solid var(--line-strong);
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg,rgba(2,14,19,.30),rgba(2,14,19,.10));
+}
+textarea{
+  border:0!important;border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:22px 6px 48px;
+  line-height:1.7;
+}
+textarea:focus{box-shadow:none!important}
+.counter{
+  right:4px;bottom:9px;border:0;border-radius:0;background:transparent;
+  color:#62777c;padding:3px 0
+}
+.stats{
+  margin:0 0 18px;
+  border-bottom:1px solid var(--line);
+  gap:0
+}
+.stat{
+  border:0;border-right:1px solid var(--line);border-radius:0;background:transparent;
+  padding:12px 14px
+}
+.stat:first-child{padding-left:2px}
+.stat:last-child{border-right:0}
+.stat b{font-size:20px;font-weight:680}
+.stat span{color:#71868b}
+.section-title{color:#8da0a5;font-size:10px;letter-spacing:.13em}
+.term-list{
+  max-height:128px;padding:0 0 2px;
+  scrollbar-width:thin
+}
+.term{
+  background:rgba(111,158,170,.05);
+  border:1px solid rgba(138,175,181,.13);
+  border-radius:8px;padding:6px 8px
+}
+.term.locked{background:rgba(205,176,113,.05);border-color:rgba(205,176,113,.25)}
+.term.verified{background:rgba(113,168,153,.045);border-color:rgba(113,168,153,.2)}
+.preview-grid{
+  grid-template-columns:minmax(0,1fr) minmax(210px,.32fr);
+  margin-top:20px;padding-top:18px;border-top:1px solid var(--line);
+}
+.preview{
+  border:0;border-radius:0;
+  border-left:2px solid rgba(113,168,153,.26);
+  background:rgba(3,16,21,.22);
+  padding:12px 14px;min-height:100px
+}
+.actions-card{
+  border:0;border-radius:0;background:transparent;
+  border-left:1px solid var(--line);
+  padding:0 0 0 16px
+}
+.btn{border-radius:9px;min-height:43px;font-weight:750}
+.primary{
+  background:linear-gradient(180deg,#d2b878,#bea05d);
+  box-shadow:0 8px 22px rgba(0,0,0,.13);
+  color:#0b1d22
+}
+.secondary,.quiet{
+  background:rgba(255,255,255,.026);
+  border:1px solid var(--line);
+  color:#d6dfdf
+}
+.player-wrap{
+  margin-top:18px;padding:16px 0 0;
+  border:0;border-top:1px solid var(--line);border-radius:0;background:transparent
+}
+audio{filter:saturate(.65)}
+.side-section{
+  padding:0 0 18px;margin-bottom:18px;border-bottom:1px solid var(--line)
+}
+.side-title{color:#768b90;letter-spacing:.13em}
+.profile-grid{
+  display:grid;grid-template-columns:1fr;gap:0;
+  border-top:1px solid var(--line)
+}
+.profile-box{
+  border:0;border-bottom:1px solid var(--line);border-radius:0;
+  background:transparent;padding:10px 0;display:flex;justify-content:space-between;align-items:center;gap:16px
+}
+.profile-box small{margin:0;color:#72858a}
+.profile-box strong{font-size:12px;font-weight:650;color:#d7dfdf;text-align:right}
+.qa-item{padding:10px 0}
+details{
+  border:0;border-radius:0;background:transparent;border-top:1px solid var(--line)
+}
+summary{padding:11px 0}
+.advanced{padding:0 0 12px}
+input{
+  border-radius:8px;background:rgba(1,14,19,.34);
+  border-color:var(--line)
+}
+.footer{color:#5d7478;padding-top:14px}
+.mobile-actions{
+  border-radius:12px;
+  background:rgba(6,20,26,.92);
+  border-color:var(--line);
+  box-shadow:0 18px 50px rgba(0,0,0,.34)
+}
+@media(min-width:1420px){
+  .editor-panel{padding-left:48px;padding-right:48px}
+  .side-panel{padding-left:28px;padding-right:28px}
+}
+@media(max-width:799px){
+  body{
+    background:
+      radial-gradient(700px 460px at -15% -5%,rgba(75,122,118,.12),transparent 58%),
+      linear-gradient(160deg,#061318,#071b22 58%,#081b25);
+  }
+  .topbar{border-bottom:1px solid var(--line);background:rgba(6,19,24,.91)}
+  .brand-mark,.brand-mark img{width:42px;height:42px}
+  .workspace{background:transparent}
+  .editor-panel{
+    padding-top:18px;
+    border-right:0!important;
+    border-bottom:1px solid var(--line)!important
+  }
+  .side-panel{
+    background:rgba(7,24,31,.35)!important;
+    margin-top:0;border-top:0!important
+  }
+  .textbox-wrap{margin-left:-1px;margin-right:-1px}
+  textarea{padding-left:2px;padding-right:2px}
+  .stats{margin-left:0;margin-right:0}
+  .preview-grid{margin-top:17px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="shell">
+<header class="topbar">
+  <div class="brand-wrap">
+    <div class="brand-mark" aria-hidden="true"><img src="/watermark-my-logo-full.png" alt=""></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO · SERHAT VOICE</div></div>
+  </div>
+  <div class="top-actions">
+    <button id="installBtn" class="btn quiet install-btn">App installieren</button>
+    <div class="status"><span id="engineDot" class="dot"></span><span id="engineLabel">Engine wird geprüft …</span></div>
+  </div>
+</header>
+
+<div class="workspace">
+<main class="panel editor-panel">
+  <div class="heading-row">
+    <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
+    <div class="badges"><span class="badge">SERHAT VOICE</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
+  </div>
+
+  <div class="textbox-wrap">
+    <textarea id="text" spellcheck="true" placeholder="Geschichte oder Erzähltext hier einfügen …">Willkommen bei DĀR AL TAWḤĪD Kids. Heute lernen wir etwas über Tawḥīd, Īmān und Islām.</textarea>
+    <div id="charCounter" class="counter">0 Zeichen</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b id="words">0</b><span>Wörter</span></div>
+    <div class="stat"><b id="terms">0</b><span>Begriffe erkannt</span></div>
+    <div class="stat"><b id="locked">0</b><span>Locked</span></div>
+  </div>
+
+  <div class="section-title">Erkannte islamische Begriffe</div>
+  <div id="termList" class="term-list"><span class="term">Bibliothek wird geladen …</span></div>
+
+  <div class="preview-grid">
+    <div>
+      <div class="section-title">Interner Sprechtext</div>
+      <div id="prepared" class="preview">–</div>
+    </div>
+    <div class="actions-card">
+      <div class="notice">Vor dem Rendern werden LOCKED- und VERIFIED-Begriffe geprüft. Qurʾān-Rezitation bleibt echte Aufnahme.</div>
+      <div>
+        <button id="analyzeBtn" class="btn secondary" style="width:100%;margin-bottom:8px">Neu prüfen</button>
+        <button id="generateBtn" class="btn primary" style="width:100%">Audio erzeugen</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="playerWrap" class="player-wrap" hidden>
+    <div class="section-title">Audio-Vorschau</div>
+    <audio id="player" controls></audio>
+    <div id="downloadRow" class="download-row">
+      <a id="wavLink" class="btn secondary" download="dar-voice.wav">WAV speichern</a>
+      <button id="qaConfirmBtn" class="btn secondary">Aussprache bestätigen</button>
+    </div>
+  </div>
+</main>
+
+<aside class="panel side-panel">
+  <section class="side-section">
+    <div class="side-title">Produktion</div>
+    <div class="profile-grid">
+      <div class="profile-box"><small>Stimme</small><strong>Serhat</strong></div>
+      <div class="profile-box"><small>Profil</small><strong>warm · klar</strong></div>
+      <div class="profile-box"><small>Sprache</small><strong>Deutsch + Arabisch</strong></div>
+      <div class="profile-box"><small>Master</small><strong>−16 LUFS</strong></div>
+    </div>
+  </section>
+
+  <section class="side-section">
+    <div class="side-title">Qualitätsprüfung</div>
+    <div class="qa">
+      <div class="qa-item"><span>Aussprachebibliothek</span><b id="qaLex" class="warn">lädt</b></div>
+      <div class="qa-item"><span>Lokale Engine</span><b id="qaEngine" class="warn">prüfen</b></div>
+      <div class="qa-item"><span>LOCKED-Begriffe</span><b id="qaLocked" class="warn">–</b></div>
+      <div class="qa-item"><span>Audio vorhanden</span><b id="qaAudio" class="warn">nein</b></div>
+      <div class="qa-item"><span>Aussprache bestätigt</span><b id="qaConfirmed" class="warn">nein</b></div>
+    </div>
+  </section>
+
+  <section class="side-section">
+    <button id="publishBtn" class="btn secondary" style="width:100%" disabled>Für Kids-App veröffentlichen</button>
+    <div class="notice" style="margin-top:9px">Veröffentlichung bleibt gesperrt, bis Audio vorhanden und die Aussprache bestätigt ist.</div>
+  </section>
+
+  <section class="side-section">
+    <details>
+      <summary>Erweiterte Verbindung</summary>
+      <div class="advanced">
+        <label>Voice-Engine URL</label>
+        <input id="apiUrl" value="http://127.0.0.1:8787" autocapitalize="off" autocomplete="off">
+        <button id="healthBtn" class="btn quiet" style="width:100%;margin-top:8px">Engine erneut prüfen</button>
+        <div class="notice" style="margin-top:8px">Auf Smartphone/iPad wird später die geschützte Cloudflare-Tunnel-Adresse verwendet. Auf dem Mac kann die lokale Adresse bleiben.</div>
+      </div>
+    </details>
+  </section>
+  <div id="error" class="bad" style="font-size:11px;line-height:1.5"></div>
+</aside>
+</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio · Responsive PWA · Audio wird nicht in Git gespeichert</div>
+</div>
+</div>
+
+<div class="mobile-actions">
+  <button id="mobileAnalyzeBtn" class="btn secondary">Prüfen</button>
+  <button id="mobileGenerateBtn" class="btn primary">Audio erzeugen</button>
+</div>
+
+<script>
+const LOCKED=new Set(["DĀR AL TAWḤĪD","Dār al-Tawḥīd","Allāh","Qurʾān","Tawḥīd","ʿAqīdah","Ḥadīṯ","Ṣaḥābah","Duʿāʾ","Ṣalāh","Muḥammad","Ibrāhīm","Mūsā"]);
+let library={rules:[]},buckets=new Map(),lastAudio=null,engineOK=false,qaConfirmed=false,deferredInstall=null;
+const $=s=>document.querySelector(s);
+const api=()=>$("#apiUrl").value.replace(/\/$/,"");
+
+$("#apiUrl").value=localStorage.getItem("darVoiceApi")||"http://127.0.0.1:8787";
+$("#apiUrl").addEventListener("change",()=>{localStorage.setItem("darVoiceApi",$("#apiUrl").value);checkHealth()});
+
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
+function buildBuckets(rules){const m=new Map();for(const r of rules){const k=[...String(r.string_to_replace||"")][0];if(!k)continue;if(!m.has(k))m.set(k,[]);m.get(k).push(r)}for(const a of m.values())a.sort((x,y)=>String(y.string_to_replace).length-String(x.string_to_replace).length);return m}
+function analyze(text){const c=[...text],found=[],out=[];let i=0;while(i<c.length){let h=null;for(const r of(buckets.get(c[i])||[])){const n=[...String(r.string_to_replace||"")];let ok=n.length&&i+n.length<=c.length;for(let j=0;ok&&j<n.length;j++)if(c[i+j]!==n[j])ok=false;if(ok){h={r,len:n.length};break}}if(!h){out.push(c[i++]);continue}out.push(h.r.alias||h.r.string_to_replace);found.push(h.r);i+=h.len}return{prepared:out.join(""),found}}
+
+function resetAudioQA(){
+  qaConfirmed=false;$("#qaConfirmed").textContent="nein";$("#qaConfirmed").className="warn";
+  if(lastAudio){URL.revokeObjectURL(lastAudio);lastAudio=null}
+  $("#playerWrap").hidden=true;updatePublish()
+}
+function renderAnalysis(){
+  const text=$("#text").value,a=analyze(text);
+  $("#prepared").textContent=a.prepared;
+  $("#words").textContent=(text.trim().match(/\S+/g)||[]).length;
+  $("#charCounter").textContent=text.length.toLocaleString("de-DE")+" Zeichen";
+  const unique=[],seen=new Set();
+  for(const r of a.found){const k=r.canonical||r.string_to_replace;if(!seen.has(k)){seen.add(k);unique.push(r)}}
+  $("#terms").textContent=unique.length;
+  const lc=unique.filter(r=>LOCKED.has(r.canonical)||LOCKED.has(r.string_to_replace)).length;
+  $("#locked").textContent=lc;
+  $("#termList").innerHTML=unique.length?unique.map(r=>{const l=LOCKED.has(r.canonical)||LOCKED.has(r.string_to_replace);return'<span class="term '+(l?'locked':'verified')+'">'+esc(r.canonical||r.string_to_replace)+' · '+(l?'LOCKED':'VERIFIED')+'</span>'}).join(""):'<span class="term">Keine Bibliotheksbegriffe erkannt</span>';
+  $("#qaLocked").textContent=lc?"Audio-QA erforderlich":"keine";
+  $("#qaLocked").className=lc?"warn":"good";
+  updatePublish()
+}
+async function loadLibrary(){
+  try{
+    const r=await fetch("/data/pronunciation/pronunciation-rules.json",{cache:"no-store"});
+    if(!r.ok)throw Error("HTTP "+r.status);
+    library=await r.json();buckets=buildBuckets(library.rules||[]);
+    $("#qaLex").textContent=(library.counts?.canonicalTerms||"?")+" / "+(library.counts?.rules||"?");
+    $("#qaLex").className="good";renderAnalysis()
+  }catch(e){$("#qaLex").textContent="Fehler";$("#qaLex").className="bad";$("#error").textContent="Aussprachebibliothek konnte nicht geladen werden: "+e.message}
+}
+async function checkHealth(){
+  engineOK=false;$("#engineLabel").textContent="Engine wird geprüft …";$("#engineDot").className="dot";
+  try{
+    const r=await fetch(api()+"/health",{cache:"no-store"});const d=await r.json();engineOK=!!d.ok;
+    $("#engineLabel").textContent=engineOK?((d.provider||"Engine")+" bereit"):"Engine nicht bereit";
+    $("#engineDot").className="dot "+(engineOK?"ok":"bad");
+    $("#qaEngine").textContent=engineOK?"bereit":"nicht bereit";$("#qaEngine").className=engineOK?"good":"bad";
+    $("#error").textContent=engineOK?"":(d.error||"Lokale Engine ist nicht bereit.")
+  }catch(e){
+    $("#engineLabel").textContent="Engine offline";$("#engineDot").className="dot bad";
+    $("#qaEngine").textContent="offline";$("#qaEngine").className="bad";
+    $("#error").textContent="Voice Engine nicht erreichbar. Auf dem Mac zuerst die DĀR Voice Engine starten; auf Smartphone/iPad später die sichere Tunnel-Adresse verwenden."
+  }
+  updatePublish()
+}
+function updatePublish(){
+  const audio=!!lastAudio;
+  $("#qaAudio").textContent=audio?"ja":"nein";$("#qaAudio").className=audio?"good":"warn";
+  $("#publishBtn").disabled=!(engineOK&&audio&&qaConfirmed)
+}
+async function generate(){
+  resetAudioQA();
+  const btns=[$("#generateBtn"),$("#mobileGenerateBtn")];btns.forEach(b=>{b.disabled=true;b.textContent="Wird erzeugt …"});
+  $("#error").textContent="";
+  try{
+    const r=await fetch(api()+"/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:$("#text").value,voice:"Serhat",format:"wav"})});
+    if(!r.ok){let e={};try{e=await r.json()}catch{}throw Error(e.error||("HTTP "+r.status))}
+    const blob=await r.blob(),url=URL.createObjectURL(blob);lastAudio=url;
+    $("#player").src=url;$("#playerWrap").hidden=false;$("#wavLink").href=url;
+    $("#qaLocked").textContent="anhören & bestätigen";$("#qaLocked").className="warn";
+    $("#player").play().catch(()=>{});updatePublish();$("#playerWrap").scrollIntoView({behavior:"smooth",block:"nearest"})
+  }catch(e){$("#error").textContent=e.message}
+  finally{btns.forEach(b=>{b.disabled=false;b.textContent="Audio erzeugen"})}
+}
+function confirmQA(){
+  if(!lastAudio)return;
+  qaConfirmed=true;$("#qaConfirmed").textContent="bestätigt";$("#qaConfirmed").className="good";
+  $("#qaLocked").textContent="bestätigt";$("#qaLocked").className="good";updatePublish()
+}
+
+$("#text").addEventListener("input",()=>{resetAudioQA();renderAnalysis()});
+$("#analyzeBtn").onclick=renderAnalysis;$("#mobileAnalyzeBtn").onclick=renderAnalysis;
+$("#generateBtn").onclick=generate;$("#mobileGenerateBtn").onclick=generate;
+$("#healthBtn").onclick=checkHealth;$("#qaConfirmBtn").onclick=confirmQA;
+$("#publishBtn").onclick=()=>alert("R2/Access-Publish ist vorbereitet. Die Test-URL selbst wird vor dem produktiven Einsatz mit Cloudflare Access geschützt.");
+
+const isStandalone=window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;
+const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+if(isIOS&&!isStandalone){$("#installBtn").style.display="inline-flex";$("#installBtn").textContent="Als App nutzen"}
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstall=e;$("#installBtn").style.display="inline-flex"});
+$("#installBtn").onclick=async()=>{
+  if(deferredInstall){deferredInstall.prompt();await deferredInstall.userChoice;deferredInstall=null;$("#installBtn").style.display="none";return}
+  if(isIOS){alert("Auf iPhone/iPad: In Safari unten auf Teilen tippen und anschließend „Zum Home-Bildschirm“ wählen. Danach startet DĀR Voice Studio wie eine eigene App.")}
+};
+window.addEventListener("appinstalled",()=>{$("#installBtn").style.display="none"});
+
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js",{scope:"/voice-studio/"}).catch(()=>{}))}
+loadLibrary();checkHealth();
+</script>
+</body>
+</html>
