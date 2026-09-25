@@ -283,7 +283,7 @@
 })();
 
 
-/* JUMMAH_FRIDAY_MODE_V5
+/* JUMMAH_FRIDAY_MODE_V6
  * DĀR AL TAWḤĪD – besucherorientierter Jumuʿah-Bereich.
  * Theme-adaptiv, ohne interne Produkt-/Redaktionsinformationen.
  * Keine Änderung an OneSignal, Server-Scheduler oder anderen Push-Spuren.
@@ -390,10 +390,15 @@
       ".dar-jf-home-item__label{display:block;margin-bottom:3px;color:var(--jf-accent);font-size:8.8px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}",
       ".dar-jf-home-item__title{display:block;color:var(--jf-text);font-size:13px;font-weight:900;line-height:1.35}",
       ".dar-jf-home-item__text{display:block;margin-top:3px;color:var(--jf-muted);font-size:10.8px;line-height:1.43}",
-      ".dar-jf-salawat{margin-top:6px;padding-top:7px;border-top:1px solid color-mix(in srgb,var(--jf-line) 76%,transparent)}",
-      ".dar-jf-salawat__latin{display:block;color:var(--jf-text);font-size:12px;font-weight:850;line-height:1.4;letter-spacing:.005em}",
-      ".dar-jf-salawat__de{display:block;margin-top:2px;color:var(--jf-muted);font-size:10.4px;line-height:1.42}",
-      ".dar-jf-salawat__hint{display:block;margin-top:4px;color:var(--jf-accent);font-size:8.6px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}",
+      ".dar-jf-home-item.is-salawat{display:block;padding:15px 0 16px}",
+      ".dar-jf-home-item.is-salawat .dar-jf-home-item__label{font-size:10px;letter-spacing:.13em;margin-bottom:6px}",
+      ".dar-jf-home-item.is-salawat .dar-jf-home-item__title{font-size:15px;line-height:1.3}",
+      ".dar-jf-salawat{margin-top:10px;padding:10px 11px 9px;border:1px solid color-mix(in srgb,var(--jf-line) 92%,transparent);border-radius:13px;background:color-mix(in srgb,var(--jf-accent) 4%,transparent)}",
+      ".dar-jf-salawat__salla{display:block;color:var(--jf-accent);font-size:13px;font-weight:900;line-height:1.35;letter-spacing:.01em}",
+      ".dar-jf-salawat__latin{display:block;margin-top:5px;color:var(--jf-text);font-size:16px;font-weight:900;line-height:1.42;letter-spacing:.002em}",
+      ".dar-jf-salawat__de{display:block;margin-top:5px;color:var(--jf-muted);font-size:11.3px;line-height:1.46}",
+      ".dar-jf-salawat__source{display:block;margin-top:6px;color:var(--jf-muted);font-size:9.4px;line-height:1.35}",
+      ".dar-jf-salawat__hint{display:block;margin-bottom:3px;color:var(--jf-accent);font-size:8.7px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}",
       ".dar-jf-home-item__time{min-width:74px;text-align:right}",
       ".dar-jf-home-item__time b{display:block;color:var(--jf-text);font-size:15px;line-height:1.1}",
       ".dar-jf-home-item__time span{display:block;margin-top:3px;color:var(--jf-muted);font-size:8.7px;letter-spacing:.08em;text-transform:uppercase}",
@@ -426,7 +431,7 @@
       ".dar-jf-note{font-size:10.5px!important;margin-top:10px!important;color:var(--jf-muted)!important}",
       "html[data-theme='light'] .dar-jf-home,html[data-theme='soft'] .dar-jf-home{background:color-mix(in srgb,var(--card,#fff) 96%,transparent)}",
       "html[data-theme='royal'] .dar-jf-home,html[data-theme='bordeaux'] .dar-jf-home,html[data-theme='dar-al-layl'] .dar-jf-home,html[data-theme='dark'] .dar-jf-home{background:color-mix(in srgb,var(--card,#111) 92%,transparent)}",
-      "@media(max-width:560px){.dar-jf-home{margin:14px 0 18px;border-radius:19px}.dar-jf-inner{padding:15px 14px 13px}.dar-jf-home-item{grid-template-columns:minmax(0,1fr) auto;padding:10px 0}.dar-jf-home-item__time{min-width:66px}.dar-jf-salawat__latin{font-size:11.6px}.dar-jf-more-wrap{padding-top:13px}.dar-jf-more{min-height:62px;grid-template-columns:minmax(0,1fr) 38px;gap:12px;padding:10px 10px 10px 13px;border-radius:15px}.dar-jf-more-arrow{width:36px;height:36px;font-size:19px}.dar-jf-facts{grid-template-columns:1fr}.dar-jf-fact:nth-child(odd){border-right:0}.dar-jf-fact+.dar-jf-fact{border-top:1px solid var(--jf-line)}}"
+      "@media(max-width:560px){.dar-jf-home{margin:14px 0 18px;border-radius:19px}.dar-jf-inner{padding:15px 14px 13px}.dar-jf-home-item{grid-template-columns:minmax(0,1fr) auto;padding:10px 0}.dar-jf-home-item__time{min-width:66px}.dar-jf-home-item.is-salawat{padding:14px 0 15px}.dar-jf-home-item.is-salawat .dar-jf-home-item__title{font-size:14.6px}.dar-jf-salawat{padding:9px 10px 9px}.dar-jf-salawat__salla{font-size:12.5px}.dar-jf-salawat__latin{font-size:15.5px}.dar-jf-salawat__de{font-size:11px}.dar-jf-more-wrap{padding-top:13px}.dar-jf-more{min-height:62px;grid-template-columns:minmax(0,1fr) 38px;gap:12px;padding:10px 10px 10px 13px;border-radius:15px}.dar-jf-more-arrow{width:36px;height:36px;font-size:19px}.dar-jf-facts{grid-template-columns:1fr}.dar-jf-fact:nth-child(odd){border-right:0}.dar-jf-fact+.dar-jf-fact{border-top:1px solid var(--jf-line)}}"
     ].join("\n");
     document.head.appendChild(el);
   }
@@ -454,14 +459,16 @@
           '</p>'+
 
           '<div class="dar-jf-home-stack">'+
-            '<div class="dar-jf-home-item">'+
+            '<div class="dar-jf-home-item is-salawat">'+
               '<div class="dar-jf-home-item__copy">'+
                 '<span class="dar-jf-home-item__label">Ṣalāh auf den Propheten ﷺ</span>'+
-                '<span class="dar-jf-home-item__title">Am Freitag vermehrt empfohlen</span>'+
+                '<span class="dar-jf-home-item__title">Am Freitag besonders vermehren</span>'+
                 '<span class="dar-jf-salawat">'+
+                  '<span class="dar-jf-salawat__hint">Zum Mitlesen</span>'+
+                  '<span class="dar-jf-salawat__salla">Ṣallallāhu ʿalayhi wa-sallam</span>'+
                   '<span class="dar-jf-salawat__latin">Allāhumma ṣalli wa sallim ʿalā Muḥammad</span>'+
                   '<span class="dar-jf-salawat__de">O Allah, sende Ṣalāh und Frieden auf Muḥammad.</span>'+
-                  '<span class="dar-jf-salawat__hint">Segenswunsch</span>'+
+                  '<span class="dar-jf-salawat__source">Überliefert von Aws ibn Aws.</span>'+
                 '</span>'+
               '</div>'+
             '</div>'+
@@ -537,7 +544,7 @@
         '<div class="dar-jf-callout">'+
           '<strong>Ṣalāh auf den Propheten ﷺ</strong>'+
           '<p>Für den Freitag ist überliefert, die Ṣalāh auf den Propheten ﷺ zu vermehren. Eine bestimmte erfundene Anzahl wird dabei nicht festgelegt.</p>'+
-          '<div class="dar-jf-salawat"><span class="dar-jf-salawat__latin">Allāhumma ṣalli wa sallim ʿalā Muḥammad</span><span class="dar-jf-salawat__de">O Allah, sende Ṣalāh und Frieden auf Muḥammad.</span></div>'+
+          '<div class="dar-jf-salawat"><span class="dar-jf-salawat__hint">Zum Mitlesen</span><span class="dar-jf-salawat__salla">Ṣallallāhu ʿalayhi wa-sallam</span><span class="dar-jf-salawat__latin">Allāhumma ṣalli wa sallim ʿalā Muḥammad</span><span class="dar-jf-salawat__de">O Allah, sende Ṣalāh und Frieden auf Muḥammad.</span></div>'+
           '<span class="dar-jf-source">Überlieferung von Aws ibn Aws · authentisch überliefert</span>'+
         '</div>'+
         '<div class="dar-jf-callout">'+
@@ -610,7 +617,7 @@
   }
 
   global.DAR_JUMMAH_FRIDAY_TEST={
-    build:"v5",
+    build:"v6",
     refresh:refresh,
     state:currentState
   };
