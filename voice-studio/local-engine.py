@@ -303,6 +303,220 @@ def unlock_audio_lock(key:str):
     audio_lock_path(key).unlink(missing_ok=True)
     return key
 
+def save_user_override(rule:dict):
+    global USER_OVERRIDE_DATA
+    needle=str(rule.get("string_to_replace","")).strip()
+    if not needle:
+        raise ValueError("Zu lernendes Wort fehlt.")
+    rules=list((USER_OVERRIDE_DATA or {}).get("rules") or [])
+    rules=[r for r in rules if str(r.get("string_to_replace",""))!=needle]
+    rules.insert(0,rule)
+    USER_OVERRIDE_DATA={
+        "schemaVersion":2,
+        "updatedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "rules":rules,
+    }
+    atomic_write_json(USER_OVERRIDES_FILE,USER_OVERRIDE_DATA)
+    rebuild_runtime_rules()
+    return rule
+
+def combined_search_rules():
+    seen=set();out=[]
+    sources=[
+        ("gelernt",list((USER_OVERRIDE_DATA or {}).get("rules") or [])),
+        ("online",ONLINE_RULES),
+        ("installiert",BASE_RULES),
+    ]
+    for source,rules in sources:
+        for r in rules:
+            key=(str(r.get("string_to_replace","")),str(r.get("tts_text","")))
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append((source,r))
+    return out
+
+def pronunciation_search(query:str,limit:int=10):
+    q=normalize_lookup(query)
+    if not q:
+        return []
+    scored=[]
+    for source,r in combined_search_rules():
+        values=[
+            str(r.get("string_to_replace","")),
+            str(r.get("canonical","")),
+            str(r.get("alias","")),
+        ]
+        norm=[normalize_lookup(v) for v in values if v]
+        if not norm:
+            continue
+        score=max(difflib.SequenceMatcher(None,q,v).ratio() for v in norm)
+        if any(v==q for v in norm): score=1.0
+        elif any(q in v or v in q for v in norm if min(len(q),len(v))>=4): score=max(score,0.92)
+        if score<0.48:
+            continue
+        scored.append((score,0 if source=="gelernt" else 1 if source=="online" else 2,source,r))
+    scored.sort(key=lambda x:(-x[0],x[1],-len(str(x[3].get("string_to_replace","")))))
+    out=[];seen=set()
+    for score,_,source,r in scored:
+        key=(str(r.get("canonical") or r.get("string_to_replace")),str(r.get("tts_text","")))
+        if key in seen: continue
+        seen.add(key)
+        out.append({
+            "source":source,
+            "score":round(float(score),3),
+            "input":str(r.get("string_to_replace","")),
+            "canonical":str(r.get("canonical") or r.get("string_to_replace","")),
+            "alias":str(r.get("alias","")),
+            "ttsText":str(r.get("tts_text","")),
+            "ipa":str(r.get("ipa","")),
+            "category":str(r.get("category","")),
+            "audioLockKey":str(r.get("audio_lock_key","")),
+            "requiredHonorificKey":str(r.get("required_honorific_key","")),
+            "voiceLock":str(r.get("voice_lock","")),
+        })
+        if len(out)>=max(1,min(25,int(limit))): break
+    return out
+
+def sync_online_pronunciation_library():
+    global ONLINE_LIB,ONLINE_RULES
+    req=urllib.request.Request(ONLINE_LIBRARY_URL,headers={"User-Agent":"DARVoiceStudio/2.3"})
+    with urllib.request.urlopen(req,timeout=15) as resp:
+        raw=resp.read()
+    data=json.loads(raw.decode("utf-8"))
+    rules=validate_online_library(data)
+    cached={
+        "schemaVersion":1,
+        "syncedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "source":ONLINE_LIBRARY_URL,
+        "rules":rules,
+    }
+    atomic_write_json(ONLINE_LIBRARY_CACHE,cached)
+    ONLINE_LIB=cached
+    ONLINE_RULES=rules
+    rebuild_runtime_rules()
+    append_learning_log("online_sync",rules=len(rules))
+    return {"rules":len(rules),"syncedAt":cached["syncedAt"]}
+
+def find_learning_rule(term:str,tts_text:str="",canonical:str=""):
+    tts_text=str(tts_text or "").strip()
+    canonical=str(canonical or "").strip()
+    term=str(term or "").strip()
+    pools=[list((USER_OVERRIDE_DATA or {}).get("rules") or []),ONLINE_RULES,BASE_RULES]
+    if tts_text:
+        for rules in pools:
+            for r in rules:
+                if str(r.get("tts_text","")).strip()==tts_text and (not canonical or str(r.get("canonical") or r.get("string_to_replace"))==canonical):
+                    return r
+    nq=normalize_lookup(term)
+    for rules in pools:
+        for r in rules:
+            if normalize_lookup(r.get("string_to_replace",""))==nq or normalize_lookup(r.get("canonical",""))==nq:
+                return r
+    return None
+
+def learning_lock_key(term:str,existing_key:str=""):
+    if existing_key:
+        return existing_key
+    digest=hashlib.sha1(normalize_lookup(term).encode("utf-8")).hexdigest()[:12]
+    return "learned_"+digest
+
+def create_learning_preview(term:str,tts_text:str="",canonical:str=""):
+    term=str(term or "").strip()
+    if not term:
+        raise ValueError("Wort oder Name fehlt.")
+    rule=find_learning_rule(term,tts_text,canonical)
+    effective_tts=str(tts_text or (rule or {}).get("tts_text","")).strip()
+    if not effective_tts:
+        raise ValueError("Keine Sprechform gefunden. Online suchen oder die arabische Sprechform eintragen.")
+    if not re.search(r"[\u0600-\u06ff]",effective_tts):
+        raise ValueError("Die manuelle Sprechform muss in arabischer Schrift angegeben werden.")
+    model=load_model()
+    preview_id=uuid.uuid4().hex[:16]
+    existing_key=str((rule or {}).get("audio_lock_key",""))
+    lock_key=learning_lock_key(term,existing_key)
+    seed=3000+(int(preview_id[:8],16)%800000)
+    wav,metrics=render_segment_with_qa(model,effective_tts,"ar","narration",True,seed_base=seed)
+    path=LEARNING_PENDING_DIR/f"{preview_id}.wav"
+    save_wav(path,wav,int(model.sr))
+    meta={
+        "id":preview_id,
+        "term":term,
+        "canonical":str(canonical or (rule or {}).get("canonical") or term),
+        "tts_text":effective_tts,
+        "alias":str((rule or {}).get("alias","")),
+        "ipa":str((rule or {}).get("ipa","")),
+        "category":str((rule or {}).get("category","USER LEARNED")),
+        "required_honorific_key":str((rule or {}).get("required_honorific_key","")),
+        "audio_lock_key":lock_key,
+        "path":str(path),
+        "sample_rate":int(model.sr),
+        "metrics":metrics,
+        "createdAt":time.time(),
+    }
+    with LEARNING_LOCK:
+        # Alte Vorschauen aufräumen, damit der Ordner klein bleibt.
+        old=list(LEARNING_PREVIEWS.values())
+        LEARNING_PREVIEWS.clear()
+        LEARNING_PREVIEWS[preview_id]=meta
+    for item in old:
+        try: Path(item.get("path","")).unlink(missing_ok=True)
+        except Exception: pass
+    append_learning_log("preview",term=term,canonical=meta["canonical"],lockKey=lock_key)
+    return meta
+
+def confirm_learning_preview(preview_id:str,input_term:str=""):
+    with LEARNING_LOCK:
+        meta=dict(LEARNING_PREVIEWS.get(str(preview_id or "")) or {})
+    if not meta:
+        raise ValueError("Der Aussprache-Test ist nicht mehr verfügbar. Bitte neu testen.")
+    src=Path(meta["path"])
+    if not src.exists():
+        raise ValueError("Test-Audio fehlt. Bitte neu testen.")
+    term=str(input_term or meta.get("term","")).strip()
+    if not term:
+        raise ValueError("Wort oder Name fehlt.")
+    lock_key=str(meta["audio_lock_key"])
+    dst=audio_lock_path(lock_key)
+    tmp=dst.with_suffix(".learn.tmp.wav")
+    shutil.copy2(src,tmp)
+    os.replace(tmp,dst)
+    rule={
+        "category":"USER LEARNED",
+        "canonical":str(meta.get("canonical") or term),
+        "string_to_replace":term,
+        "alias":str(meta.get("alias") or term),
+        "ipa":str(meta.get("ipa","")),
+        "priority":"user-master",
+        "tts_text":str(meta["tts_text"]),
+        "tts_language":"ar",
+        "tts_strategy":"user-confirmed-audio-learning-v1",
+        "voice_lock":"MASTER",
+        "qa_tier":"critical",
+        "audio_lock_key":lock_key,
+        "audio_lock_policy":"CONFIRMED_WAV",
+        "learned_at":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+    }
+    if meta.get("required_honorific_key"):
+        rule["required_honorific_key"]=meta["required_honorific_key"]
+    save_user_override(rule)
+    append_learning_log("confirmed",term=term,canonical=rule["canonical"],lockKey=lock_key)
+    with LEARNING_LOCK:
+        LEARNING_PREVIEWS.pop(str(preview_id),None)
+    try: src.unlink(missing_ok=True)
+    except Exception: pass
+    return rule
+
+def learning_state():
+    user_rules=list((USER_OVERRIDE_DATA or {}).get("rules") or [])
+    return {
+        "learned":len(user_rules),
+        "onlineRules":len(ONLINE_RULES),
+        "onlineSyncedAt":(ONLINE_LIB or {}).get("syncedAt"),
+        "onlineUrl":ONLINE_LIBRARY_URL,
+        "learnedTerms":[str(r.get("string_to_replace","")) for r in user_rules[:50]],
+    }
+
 def patch_torch_load_for_device(device:str):
     """Chatterbox official macOS workaround: force checkpoint loads onto MPS/CPU."""
     global TORCH_LOAD_ORIGINAL
@@ -358,6 +572,7 @@ def get_status():
     out["honorific_policy_enabled"]=True
     out["honorific_name_variants"]=sum(1 for r in RULES if r.get("required_honorific_key"))
     out["honorific_audio_keys"]=sorted(k for k in HONORIFIC_KEYS if k in HONORIFIC_TTS_BY_KEY)
+    out["pronunciation_learning"]=learning_state()
     return out
 
 def source_has_honorific(text:str,pos:int,required_key:str=""):
@@ -1335,7 +1550,9 @@ class H(BaseHTTPRequestHandler):
         elif p in ("/studio","/studio/","/studio/index.html"):
             self.send_file(APP_HOME/"studio.html","text/html; charset=utf-8")
         elif p=="/data/pronunciation/pronunciation-rules.json":
-            self.send_file(PRON,"application/json; charset=utf-8")
+            self.send_json(200,LIB)
+        elif p=="/learning/state":
+            self.send_json(200,{"ok":True,**learning_state()})
         elif p=="/data/pronunciation/voice-production-profile.json":
             self.send_file(PROFILE,"application/json; charset=utf-8")
         elif p=="/watermark-my-logo-full.png":
@@ -1394,6 +1611,46 @@ class H(BaseHTTPRequestHandler):
                 })
             except Exception as e:
                 return self.send_json(400,{"ok":False,"error":str(e)})
+
+        if p=="/learning/search":
+            try:
+                query=str(data.get("query","")).strip()
+                if not query: raise ValueError("Suchwort fehlt.")
+                return self.send_json(200,{"ok":True,"query":query,"results":pronunciation_search(query,int(data.get("limit",10) or 10)),**learning_state()})
+            except Exception as e:
+                return self.send_json(400,{"ok":False,"error":str(e)})
+
+        if p=="/learning/sync":
+            try:
+                result=sync_online_pronunciation_library()
+                return self.send_json(200,{"ok":True,**result,**learning_state()})
+            except Exception as e:
+                return self.send_json(502,{"ok":False,"error":"Online-Wortschatz konnte nicht synchronisiert werden: "+str(e),**learning_state()})
+
+        if p=="/learning/preview":
+            try:
+                meta=create_learning_preview(
+                    str(data.get("term","")),
+                    str(data.get("ttsText","")),
+                    str(data.get("canonical","")),
+                )
+                b=Path(meta["path"]).read_bytes()
+                self.send_response(200)
+                self.send_header("Content-Type","audio/wav")
+                self.send_header("Content-Length",str(len(b)))
+                self.send_header("X-Learning-Preview-Id",meta["id"])
+                self.send_header("X-Learning-Lock-Key",meta["audio_lock_key"])
+                self.cors();self.end_headers();self.wfile.write(b)
+                return
+            except Exception as e:
+                return self.send_json(400,{"ok":False,"error":str(e)})
+
+        if p=="/learning/confirm":
+            try:
+                rule=confirm_learning_preview(str(data.get("previewId","")),str(data.get("term","")))
+                return self.send_json(200,{"ok":True,"rule":rule,**learning_state()})
+            except Exception as e:
+                return self.send_json(400,{"ok":False,"error":str(e),**learning_state()})
 
         if p=="/confirm-core-audio":
             try:
