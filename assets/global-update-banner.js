@@ -69,6 +69,10 @@
   }
 
   function show(opts) {
+    hide();
+    return false;
+    /* retired large top banner */
+
     opts = opts || {};
     if (!isAppExperience()) return false;
     var build = String(opts.buildId || root.__darRemoteBuildId || "").trim();
