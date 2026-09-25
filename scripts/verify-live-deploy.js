@@ -88,13 +88,13 @@ async function main() {
       "service-worker.js"
     ]);
     const voiceVersionOk = await waitForStatus(`${SITE_URL}/voice-studio/version.json`, 200);
-    const voiceSetupOk = await waitForStatus(
-      `${SITE_URL}/voice-studio/install-mac.command?setup=10`,
-      200
+    const voiceSetupOk = await waitForHtmlIncludes(
+      `${SITE_URL}/voice-studio/install-mac.command?setup=11`,
+      ["DĀR Voice Studio.app", "WKWebView", "swiftc"]
     );
     const voiceSwOk = await waitForHtmlIncludes(
-      `${SITE_URL}/voice-studio/service-worker.js`,
-      ["dar-voice-studio-v10"]
+      `${SITE_URL}/voice-studio/sw-v11.js`,
+      ["dar-voice-studio-v11"]
     );
     const pronunciationOk = await waitForStatus(
       `${SITE_URL}/data/pronunciation/pronunciation-rules.json`,

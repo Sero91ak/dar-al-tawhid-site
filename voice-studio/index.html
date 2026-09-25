@@ -11,7 +11,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="DĀR Voice Studio">
 <meta name="description" content="Private Sprachproduktion für DĀR AL TAWḤĪD Kids">
-<link rel="manifest" href="manifest.webmanifest?v=10">
+<link rel="manifest" href="manifest.webmanifest?v=11">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="icon" href="/app-icon-192.png">
 <title>DĀR AL TAWḤĪD – Voice Studio</title>
@@ -473,7 +473,7 @@ input{
     <button id="installEngineBtn" class="btn secondary" style="width:100%;margin-bottom:8px">Mac-App installieren / aktualisieren</button>
     <div id="setupCommandWrap" style="display:none;margin-bottom:8px">
       <label for="setupCommand">Einmaliger Installationsbefehl</label>
-      <textarea id="setupCommand" readonly spellcheck="false" style="height:86px;min-height:86px;resize:none;font-size:11px;line-height:1.4;padding:10px">curl -fsSL 'https://dar-al-tawhid.de/voice-studio/install-mac.command?setup=10' | /bin/bash</textarea>
+      <textarea id="setupCommand" readonly spellcheck="false" style="height:86px;min-height:86px;resize:none;font-size:11px;line-height:1.4;padding:10px">curl -fsSL 'https://dar-al-tawhid.de/voice-studio/install-mac.command?setup=11' | /bin/bash</textarea>
       <div class="notice" style="margin-top:6px">Einmal im Terminal ausführen. Danach findest du „DĀR Voice Studio“ als eigenständige Mac-App unter ~/Applications und kannst sie über Spotlight/Launchpad starten.</div>
     </div>
     <button id="healthBtn" class="btn quiet" style="width:100%;margin-top:8px">Verbindung erneut prüfen</button>
@@ -754,7 +754,7 @@ $("#installBtn").onclick=async()=>{
 window.addEventListener("appinstalled",()=>{$("#installBtn").style.display="none"});
 
 if(!IS_LOCAL&&"serviceWorker" in navigator){
-  window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js",{scope:"/voice-studio/"}).catch(()=>{}));
+  window.addEventListener("load",()=>navigator.serviceWorker.register("sw-v11.js",{scope:"/voice-studio/"}).catch(()=>{}));
 }
 if(IS_LOCAL){
   const setup=$("#engineSetupSection");
