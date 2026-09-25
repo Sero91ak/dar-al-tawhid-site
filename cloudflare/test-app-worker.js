@@ -193,7 +193,14 @@ export default {
     if (url.pathname === "/test/voice-studio" || url.pathname === "/test/voice-studio/") {
       const voiceUrl = new URL(request.url);
       voiceUrl.pathname = "/test/voice-studio/index.html";
-      return env.ASSETS.fetch(new Request(voiceUrl.toString(), request));
+      return new Response(null, {
+        status: 302,
+        headers: {
+          "Location": voiceUrl.toString(),
+          "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+          "Pragma": "no-cache"
+        }
+      });
     }
 
     if (url.pathname === "/test" || url.pathname === "/test/") {
