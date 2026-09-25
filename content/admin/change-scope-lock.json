@@ -95,7 +95,10 @@
     "assets/qibla-quick-view.js",
     "assets/qibla-quick-view.css",
     "assets/global-update-banner.js",
-    "assets/global-update-banner.css"
+    "assets/global-update-banner.css",
+    "assets/jummah-friday.js",
+    "data/jummah-series.json",
+    "test/service-worker.js"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -115,6 +118,24 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "jummah-friday-production-takeover-2026-09-25",
+      "approvedBy": "user-explicit-produktionsuebernahme-jetzt-jummah-test-zu-ios-pwa-web",
+      "reason": "Nutzer: Jumuʿah-System aus Test-App vollständig produktiv übernehmen (iOS, Besucher-PWA, öffentliche Webseite). Test bleibt Vorstufe mit internem Serienwächter.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "assets/jummah-friday.js",
+        "data/jummah-series.json",
+        "index.html",
+        "test/index.html",
+        "test/assets/dar-setup-hub.js",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
     {
       "id": "kids-standalone-test-app-2026-09-25",
       "approvedBy": "user-explicit-kids-eigenstaendig-testphase-harmonieren-nicht-vermischen",
