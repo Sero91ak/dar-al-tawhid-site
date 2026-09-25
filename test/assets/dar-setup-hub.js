@@ -283,7 +283,7 @@
 })();
 
 
-/* JUMMAH_FRIDAY_MODE_V4
+/* JUMMAH_FRIDAY_MODE_V5
  * DĀR AL TAWḤĪD – besucherorientierter Jumuʿah-Bereich.
  * Theme-adaptiv, ohne interne Produkt-/Redaktionsinformationen.
  * Keine Änderung an OneSignal, Server-Scheduler oder anderen Push-Spuren.
@@ -435,8 +435,8 @@
     var old=document.getElementById(HOME_ID),st=currentState();
     if(!st.friday||st.ended){if(old)old.remove();return;}
 
-    var mount=document.getElementById("focusFeedMount");
-    if(!mount||!mount.parentNode)return;
+    var shell=document.querySelector(".home-v380-shell");
+    if(!shell)return;
 
     var last=st.window.lastStart?fmt(st.window.lastStart,st.settings):"nach ʿAṣr";
     var mag=st.window.maghrib?fmt(st.window.maghrib,st.settings):"nach Standort";
@@ -501,7 +501,7 @@
 
     var box=document.createElement("div");
     box.innerHTML=html;
-    mount.parentNode.insertBefore(box.firstElementChild,mount);
+    shell.insertBefore(box.firstElementChild,shell.firstChild);
   }
 
   function renderDetail(){
@@ -610,7 +610,7 @@
   }
 
   global.DAR_JUMMAH_FRIDAY_TEST={
-    build:"v4",
+    build:"v5",
     refresh:refresh,
     state:currentState
   };

@@ -73,6 +73,10 @@
 /test/version.json
   Cache-Control: no-cache, must-revalidate, max-age=0
 
+/test/assets/dar-setup-hub.js
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  Pragma: no-cache
+
 /test/kids/
   Cache-Control: no-store, no-cache, must-revalidate, max-age=0
   CDN-Cache-Control: no-store
