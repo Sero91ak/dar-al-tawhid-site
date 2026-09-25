@@ -607,11 +607,11 @@ function updateEngineUI(data){
   $("#engineDot").className="dot "+(engineOK?"ok":"bad");
   $("#qaEngine").textContent=engineOK?"bereit":"offline";
   $("#qaEngine").className=engineOK?"good":"bad";
-  $("#startEngineBtn").textContent=engineOK?"Engine läuft":"Engine starten";
-  $("#startEngineBtn").disabled=engineOK;
+  $("#startEngineBtn").textContent=engineOK?"Mac-App öffnen":"Engine / Mac-App starten";
+  $("#startEngineBtn").disabled=false;
   $("#engineHelp").textContent=engineOK
-    ?("Eigene Stimme aktiv · "+(data.provider||"Chatterbox V3")+" · Referenz geladen")
-    :"Engine ist auf diesem Mac noch nicht erreichbar. Einmal einrichten oder starten.";
+    ?("Eigene Stimme aktiv · "+(data.provider||"Chatterbox V3")+" · Für die Arbeit ohne Safari jetzt „Mac-App öffnen“.")
+    :"Engine ist auf diesem Mac noch nicht erreichbar. Mac-App einmal installieren/aktualisieren und danach starten.";
 }
 async function checkHealth({quiet=false}={}){
   if(!quiet){
