@@ -278,14 +278,19 @@ def get_status():
     out["honorific_audio_keys"]=sorted(k for k in HONORIFIC_KEYS if k in HONORIFIC_TTS_BY_KEY)
     return out
 
-def source_has_honorific(text:str,pos:int,required_key:str):
+def source_has_honorific(text:str,pos:int,required_key:str=""):
     tail=str(text or "")[max(0,int(pos)):]
     # Erlaubt übliche Zwischenzeichen wie Leerzeichen, Komma oder Klammer.
     tail=tail.lstrip()
     tail=tail.lstrip(".,،;؛:!?؟…·-–—()[]{}«»\\\"“”„‘’ ")
-    for form in HONORIFIC_SOURCE_FORMS.get(required_key,[]):
-        if tail.startswith(form):
-            return True
+    # Jede bereits ausdrücklich geschriebene Lobpreisung blockiert die Auto-Ergänzung,
+    # damit niemals zwei Formeln hintereinander gesprochen werden.
+    keys=[required_key] if required_key else []
+    keys += [k for k in HONORIFIC_SOURCE_FORMS if k not in keys]
+    for key in keys:
+        for form in HONORIFIC_SOURCE_FORMS.get(key,[]):
+            if tail.startswith(form):
+                return True
     return False
 
 def prepare(text:str):
