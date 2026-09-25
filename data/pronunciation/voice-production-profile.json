@@ -1,11 +1,11 @@
 {
-  "schemaVersion": 3,
-  "id": "dar-own-voice-narration-v2.1",
+  "schemaVersion": 4,
+  "id": "dar-own-voice-narration-v2.1.1",
   "updatedAt": "2026-09-25",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
-  "productionGoal": "Production-grade, warm, fluent narration with deterministic pronunciation, sentence-level contextual prosody, anti-hold QA and controlled rescue rendering. Human listening remains mandatory for final MASTER approval.",
+  "productionGoal": "Production-grade, warm, fluent narration with deterministic pronunciation, sentence-level contextual prosody, anti-hold QA and persistent user-confirmed audio locks for critical core terms.",
   "delivery": {
     "genderPresentation": "male",
     "character": [
@@ -73,7 +73,10 @@
       "legacy alias fallback"
     ],
     "dialectPolicy": "Do not silently substitute dialectal realizations for the Standard/Classical target.",
-    "connectedSpeech": "Apply Standard/Classical connected speech and article assimilation; do not split locked phrases internally."
+    "connectedSpeech": "Apply Standard/Classical connected speech and article assimilation; do not split locked phrases internally.",
+    "audioLockField": "audio_lock_key",
+    "audioLockPolicyField": "audio_lock_policy",
+    "corePauseForm": "Critical standalone Arabic terms use explicit final sukūn to stabilize word-final consonants."
   },
   "prosody": {
     "automatic": true,
@@ -343,11 +346,44 @@
     "rescueMinWords": 9,
     "rescueMinChars": 90,
     "longSegmentSecondsPerWord": 0.85,
-    "longSegmentBaseSeconds": 2.5
+    "longSegmentBaseSeconds": 2.5,
+    "coreAudioLockRequiredForRepeatability": true,
+    "coreAudioCandidateSinglePerRender": true,
+    "coreAudioConfirmedNeverResynthesized": true
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
     "narration": "own-voice-production",
     "music": false
+  },
+  "corePronunciationLocks": {
+    "policy": "User-confirmed local WAV overrides fresh TTS synthesis for critical core terms.",
+    "storage": "~/SerhatVoice/MasterPronunciations",
+    "confirmEndpoint": "/confirm-core-audio",
+    "unlockEndpoint": "/unlock-core-audio",
+    "keys": {
+      "quran": {
+        "display": "Qurʾān",
+        "ttsText": "قُرْآنْ"
+      },
+      "al_quran": {
+        "display": "al-Qurʾān",
+        "ttsText": "الْقُرْآنْ"
+      },
+      "tawhid": {
+        "display": "Tawḥīd",
+        "ttsText": "تَوْحِيدْ"
+      },
+      "iman": {
+        "display": "Īmān",
+        "ttsText": "إِيمَانْ"
+      },
+      "ihsan": {
+        "display": "Iḥsān",
+        "ttsText": "إِحْسَانْ"
+      }
+    },
+    "firstUse": "Until a user-confirmed WAV exists, render one stable candidate per key and reuse it within the same production. Never randomize the same core key multiple times in one render.",
+    "confirmation": "Only the explicit QA confirmation action may promote pending candidate WAVs to persistent locks."
   }
 }
