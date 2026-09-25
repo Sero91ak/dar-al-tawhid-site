@@ -33,7 +33,8 @@ async function main() {
     `${SITE_URL}/test/kids/shell.html`,
     `${SITE_URL}/test/kids/start`,
     `${SITE_URL}/test/kids/start.html`,
-    `${SITE_URL}/test/kids/?kv=20260925-12`
+    `${SITE_URL}/test/kids/?kv=20260925-12`,
+    `${SITE_URL}/test/kids/v12-alive.txt`
   ];
   const prefixes = [`${new URL(SITE_URL).hostname}/test/kids`];
   for (const body of [{ files }, { prefixes }]) {

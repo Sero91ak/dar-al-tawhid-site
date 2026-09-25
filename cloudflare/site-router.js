@@ -36,11 +36,35 @@ function iosNativeHeaders(assetResponse) {
   return headers;
 }
 
+const KIDS_MIRROR = "https://dar-al-tawhid-test.sero91ak.workers.dev";
+
+async function fetchKidsMirror(pathname, search) {
+  const path = pathname === "/test/kids" ? "/test/kids/" : pathname;
+  const dest = `${KIDS_MIRROR}${path}${search || ""}`;
+  const res = await fetch(dest, { method: "GET", redirect: "manual" });
+  if (res.status < 300 || res.status >= 400) return res;
+  const loc = res.headers.get("Location");
+  if (!loc) return res;
+  const next = new URL(loc, dest);
+  next.protocol = "https:";
+  next.hostname = "dar-al-tawhid-test.sero91ak.workers.dev";
+  return fetch(next.toString(), { method: "GET", redirect: "follow" });
+}
+
+function kidsHeaders(assetResponse) {
+  const headers = new Headers(assetResponse.headers);
+  headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+  headers.set("CDN-Cache-Control", "no-store");
+  headers.set("Cloudflare-CDN-Cache-Control", "no-store");
+  headers.set("Pragma", "no-cache");
+  headers.set("X-Kids-Build", "kids-shell-v12-start1");
+  headers.delete("ETag");
+  headers.delete("Content-Length");
+  return headers;
+}
+
 export default {
   async fetch(request, env) {
-    if (request.headers.get("X-Kids-Asset") === "1") {
-      return env.ASSETS.fetch(request);
-    }
     const url = new URL(request.url);
     const isRoot = url.pathname === "/" || url.pathname === "/index.html";
     const ua = String(request.headers.get("User-Agent") || "");
@@ -83,24 +107,8 @@ export default {
     }
 
     if (kidsPath && (request.method === "GET" || request.method === "HEAD")) {
-      const assetHeaders = new Headers();
-      assetHeaders.set("X-Kids-Asset", "1");
-      const assetUrl = new URL(request.url);
-      if (assetUrl.pathname === "/test/kids" || assetUrl.pathname === "/test/kids/") {
-        assetUrl.pathname = "/test/kids/index.html";
-      }
-      const assetRequest = new Request(assetUrl.toString(), {
-        method: "GET",
-        headers: assetHeaders
-      });
-      const assetResponse = await env.ASSETS.fetch(assetRequest);
-      const headers = new Headers(assetResponse.headers);
-      headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
-      headers.set("CDN-Cache-Control", "no-store");
-      headers.set("Cloudflare-CDN-Cache-Control", "no-store");
-      headers.set("X-Kids-Build", "kids-shell-v12-start1");
-      headers.delete("ETag");
-      headers.delete("Content-Length");
+      const assetResponse = await fetchKidsMirror(url.pathname, url.search);
+      const headers = kidsHeaders(assetResponse);
       if (request.method === "HEAD") {
         return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
       }
