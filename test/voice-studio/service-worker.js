@@ -1,8 +1,8 @@
-const CACHE="dar-voice-studio-v2";
+const CACHE="dar-voice-studio-v3";
 const SHELL=[
-  "/test/voice-studio/",
-  "/test/voice-studio/index.html",
-  "/test/voice-studio/manifest.webmanifest",
+  "/voice-studio/",
+  "/voice-studio/index.html",
+  "/voice-studio/manifest.webmanifest",
   "/app-icon-192.png",
   "/app-icon-512.png",
   "/apple-touch-icon.png"
@@ -18,7 +18,7 @@ self.addEventListener("fetch",event=>{
   if(req.method!=="GET")return;
   const url=new URL(req.url);
   if(url.origin!==location.origin)return;
-  const isFresh=url.pathname==="/data/pronunciation/pronunciation-rules.json"||url.pathname.endsWith("/version.json")||url.pathname.endsWith("/index.html")||url.pathname==="/test/voice-studio/";
+  const isFresh=url.pathname==="/data/pronunciation/pronunciation-rules.json"||url.pathname.endsWith("/version.json")||url.pathname.endsWith("/index.html")||url.pathname==="/voice-studio/";
   if(isFresh){
     event.respondWith(fetch(req).then(res=>{const copy=res.clone();caches.open(CACHE).then(c=>c.put(req,copy));return res}).catch(()=>caches.match(req)));
     return;
