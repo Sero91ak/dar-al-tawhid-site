@@ -89,7 +89,8 @@
     "assets/dar-ios-oversize-copy.css",
     "test/assets/dar-ios-oversize-copy.css",
     "kids/",
-    "KIDS.md"
+    "KIDS.md",
+    "test/kids/"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -117,6 +118,7 @@
         "content/admin/change-scope-lock.json",
         "kids/",
         "KIDS.md",
+        "test/kids/",
         "_redirects",
         "_headers"
       ],

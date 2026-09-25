@@ -1,19 +1,13 @@
 # DĀR AL TAWḤĪD Kids
 
-Eigenständige Kids-App (Testphase). Liegt **nicht** in der Besucher-App.
+Eigenständige Kids-Test-App. Nicht die Besucher-App.
 
-## GitHub (für Programmierer)
+## Der Link, den du nutzt
 
-Ordner:
+https://dar-al-tawhid.de/test/kids/?darsw=1005
 
-https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/kids
+Kurz: https://dar-al-tawhid.de/test/kids/
 
-Test-App:
+## GitHub
 
-https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/kids/test
-
-Diese Datei (`KIDS.md`) steht in der Repo-Wurzel, damit Kids in der Dateiliste sichtbar ist.
-
-## Web (nach Deploy)
-
-https://dar-al-tawhid.de/kids/test/
+https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/test/kids
