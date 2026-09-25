@@ -43,7 +43,42 @@ export default {
     const ua = String(request.headers.get("User-Agent") || "");
     const nativeIos = /DarAlTawhid-iOS/i.test(ua);
     const kidsPath = url.pathname === "/test/kids" || url.pathname.startsWith("/test/kids/");
+    const voicePath = url.pathname === "/voice-studio" || url.pathname.startsWith("/voice-studio/");
+    const legacyVoicePath = url.pathname === "/test/voice-studio" || url.pathname.startsWith("/test/voice-studio/");
     const kidsMirrorHost = "dar-al-tawhid-site.sero91ak.workers.dev"; // kids public origin v12
+
+    if ((request.method === "GET" || request.method === "HEAD") && legacyVoicePath) {
+      const target = new URL(request.url);
+      const suffix = url.pathname.slice("/test/voice-studio".length);
+      target.pathname = "/voice-studio" + (suffix || "/");
+      return Response.redirect(target.toString(), 301);
+    }
+
+    if ((request.method === "GET" || request.method === "HEAD") && url.pathname === "/voice-studio") {
+      const target = new URL(request.url);
+      target.pathname = "/voice-studio/";
+      return Response.redirect(target.toString(), 308);
+    }
+
+    if ((request.method === "GET" || request.method === "HEAD") && voicePath) {
+      const assetResponse = await env.ASSETS.fetch(request);
+      const headers = new Headers(assetResponse.headers);
+      headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+      headers.set("CDN-Cache-Control", "no-store");
+      headers.set("Cloudflare-CDN-Cache-Control", "no-store");
+      headers.set("Pragma", "no-cache");
+      headers.set("X-DAR-Voice-Studio", "voice-studio-v4");
+      headers.delete("ETag");
+      headers.delete("Content-Length");
+      if (request.method === "HEAD") {
+        return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
+      }
+      return new Response(assetResponse.body, {
+        status: assetResponse.status,
+        statusText: assetResponse.statusText,
+        headers
+      });
+    }
 
     if (kidsPath && (request.method === "GET" || request.method === "HEAD") && url.hostname !== kidsMirrorHost) {
       const mirror = new URL(request.url);
