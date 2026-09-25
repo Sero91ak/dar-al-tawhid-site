@@ -92,7 +92,7 @@ def prepare(text:str):
                 hit=r;break
         if not hit:
             out.append(text[pos]);pos+=1;continue
-        out.append(str(hit.get("alias") or hit["string_to_replace"]))
+        out.append(str(hit.get("tts_text") or hit.get("alias") or hit["string_to_replace"]))
         found.append(hit)
         pos+=len(str(hit["string_to_replace"]))
     return "".join(out),found
@@ -231,13 +231,81 @@ def split_chunks(text:str,max_chars:int=280):
     if current:chunks.append(current)
     return [c for c in chunks if c.strip()]
 
-def render_with_model(model,text:str):
+ARABIC_CHAR_RE=re.compile(r"[\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff]")
+
+def split_language_segments(text:str):
+    """Trennt Deutsch und Arabisch, damit Chatterbox nie beide Sprachen
+    mit demselben language_id in einem Generate-Aufruf sprechen muss.
+    """
+    segments=[]
+    buf=[]
+    current_lang=None
+
+    def flush():
+        nonlocal buf,current_lang
+        value="".join(buf).strip()
+        if value:
+            segments.append((current_lang or "de",value))
+        buf=[]
+        current_lang=None
+
+    for ch in str(text or ""):
+        if ARABIC_CHAR_RE.search(ch):
+            char_lang="ar"
+        elif ch.isalpha() or ch.isdigit():
+            char_lang="de"
+        else:
+            char_lang=None
+
+        if char_lang is None:
+            buf.append(ch)
+            continue
+
+        if current_lang is None:
+            current_lang=char_lang
+            buf.append(ch)
+            continue
+
+        if char_lang==current_lang:
+            buf.append(ch)
+            continue
+
+        # Sprachwechsel: neutrale Leer-/Satzzeichen bleiben beim vorherigen Segment.
+        flush()
+        current_lang=char_lang
+        buf.append(ch)
+
+    flush()
+
+    # Direkt benachbarte gleiche Sprachsegmente wieder zusammenführen.
+    merged=[]
+    for lang,value in segments:
+        if merged and merged[-1][0]==lang:
+            merged[-1]=(lang,(merged[-1][1]+" "+value).strip())
+        else:
+            merged.append((lang,value))
+    return merged
+
+def build_render_plan(text:str):
+    plan=[]
+    for lang,segment in split_language_segments(text):
+        max_chars=180 if lang=="ar" else 280
+        for chunk in split_chunks(segment,max_chars=max_chars):
+            if chunk.strip():
+                plan.append((lang,chunk.strip()))
+    return plan
+
+def render_with_model(model,text:str,language_id:str):
     import torch
+    # Chatterbox weist selbst darauf hin, dass eine Referenzstimme aus einer
+    # anderen Sprache den Akzent beeinflussen kann. Für arabische Segmente
+    # wird CFG deshalb auf 0 gesetzt; Deutsch behält die bisherige Führung.
+    cfg=0.0 if language_id=="ar" else 0.30
     kwargs=dict(
-        language_id="de",
+        language_id=language_id,
         audio_prompt_path=str(REF),
         exaggeration=0.22,
-        cfg_weight=0.30,
+        cfg_weight=cfg,
         temperature=0.55
     )
     with torch.inference_mode():
@@ -305,9 +373,12 @@ def generate(text:str,prepared:str=""):
     if not REF.exists():
         raise RuntimeError("Referenzstimme fehlt: "+str(REF))
 
-    speak=prepared.strip() if prepared.strip() else prepare(text)[0]
-    chunks=split_chunks(speak)
-    if not chunks:
+    # Client-"prepared" wird bewusst ignoriert: ältere Studio-Versionen senden
+    # noch Kunstlautungen wie "Tauhiid". Die Engine baut den Sprechtext selbst
+    # aus der aktuellen Bibliothek und den nativen arabischen TTS-Formen.
+    speak=prepare(text)[0]
+    plan=build_render_plan(speak)
+    if not plan:
         raise ValueError("Sprechtext ist leer.")
 
     if not RENDER_LOCK.acquire(blocking=False):
@@ -326,35 +397,40 @@ def generate(text:str,prepared:str=""):
         import torch
         model=load_model()
         outputs=[]
-        total=len(chunks)
+        total=len(plan)
 
-        for idx,chunk in enumerate(chunks,1):
+        for idx,(lang,chunk) in enumerate(plan,1):
             pct=8+int(((idx-1)/max(1,total))*78)
-            set_status(progress=pct,message=f"Abschnitt {idx}/{total} wird gesprochen …")
+            lang_label="Arabisch" if lang=="ar" else "Deutsch"
+            set_status(progress=pct,message=f"{lang_label} · Abschnitt {idx}/{total} …")
+            print(f"[DĀR Voice] segment {idx}/{total} lang={lang}: {chunk}",flush=True)
             torch.manual_seed(2026+idx-1)
             try:
-                wav=render_with_model(model,chunk)
+                wav=render_with_model(model,chunk,lang)
             except Exception as first_error:
                 # Bei MPS-Problemen einmal sauber auf CPU wiederholen.
                 if MODEL_DEVICE=="mps":
                     print("[DĀR Voice] MPS render failed, retry CPU:",first_error,flush=True)
-                    set_status(message="MPS-Fallback: Render wird auf CPU wiederholt …")
+                    set_status(message=f"{lang_label} · MPS-Fallback auf CPU …")
                     model=load_model(force_device="cpu")
-                    wav=render_with_model(model,chunk)
+                    wav=render_with_model(model,chunk,lang)
                 else:
                     raise
-            outputs.append(wav.detach().float().cpu())
+            outputs.append((wav.detach().float().cpu(),lang,chunk))
 
         if len(outputs)==1:
-            full=outputs[0]
+            full=outputs[0][0]
         else:
             sr=int(model.sr)
-            silence=torch.zeros((1,int(sr*0.18)),dtype=outputs[0].dtype)
             joined=[]
-            for i,w in enumerate(outputs):
+            for i,(w,lang,chunk) in enumerate(outputs):
                 if w.ndim==1:w=w.unsqueeze(0)
                 joined.append(w)
-                if i<len(outputs)-1:joined.append(silence)
+                if i<len(outputs)-1:
+                    next_lang=outputs[i+1][1]
+                    # Kurzer Übergang beim Sprachwechsel; längere Pause am Satzende.
+                    pause_s=0.16 if re.search(r"[.!?؟…]$",chunk) else (0.055 if lang!=next_lang else 0.09)
+                    joined.append(torch.zeros((1,int(sr*pause_s)),dtype=w.dtype))
             full=torch.cat(joined,dim=-1)
 
         set_status(progress=90,message="WAV wird gespeichert …")
@@ -465,6 +541,9 @@ class H(BaseHTTPRequestHandler):
                 "mps_available":mps_available,
                 "reference":str(REF),
                 "reference_exists":REF.exists(),
+                "mixed_language_segmentation":True,
+                "arabic_language_id":"ar",
+                "german_language_id":"de",
                 **get_status()
             })
         elif p in ("/studio","/studio/","/studio/index.html"):
