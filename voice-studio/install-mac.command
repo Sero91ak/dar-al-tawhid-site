@@ -21,12 +21,12 @@ say_status() {
 say_status "DĀR Voice Studio wird eingerichtet …"
 
 # Aktuelle Studio-Dateien lokal spiegeln.
-curl -fsSL "$SITE/voice-studio/local-engine.py?setup=10" -o "$TARGET/local-engine.py"
-curl -fsSL "$SITE/voice-studio/index.html?setup=10" -o "$TARGET/studio.html"
-curl -fsSL "$SITE/data/pronunciation/pronunciation-rules.json?setup=10" -o "$TARGET/pronunciation-rules.json"
-curl -fsSL "$SITE/data/pronunciation/voice-production-profile.json?setup=10" -o "$TARGET/voice-production-profile.json"
-curl -fsSL "$SITE/watermark-my-logo-full.png?setup=10" -o "$TARGET/watermark-my-logo-full.png" || true
-curl -fsSL "$SITE/app-icon-512.png?setup=10" -o "$TARGET/app-icon-512.png" || true
+curl -fsSL "$SITE/voice-studio/local-engine.py?setup=11" -o "$TARGET/local-engine.py"
+curl -fsSL "$SITE/voice-studio/index.html?setup=11" -o "$TARGET/studio.html"
+curl -fsSL "$SITE/data/pronunciation/pronunciation-rules.json?setup=11" -o "$TARGET/pronunciation-rules.json"
+curl -fsSL "$SITE/data/pronunciation/voice-production-profile.json?setup=11" -o "$TARGET/voice-production-profile.json"
+curl -fsSL "$SITE/watermark-my-logo-full.png?setup=11" -o "$TARGET/watermark-my-logo-full.png" || true
+curl -fsSL "$SITE/app-icon-512.png?setup=11" -o "$TARGET/app-icon-512.png" || true
 
 # Vorhandene Stimmreferenz bevorzugen.
 REF="$VOICE_HOME/Serhat_Adobe_MASTER.wav"
