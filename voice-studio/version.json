@@ -1,8 +1,8 @@
 {
-  "version": "2.1.0",
-  "updatedAt": "2026-09-25T20:04:00+02:00",
+  "version": "2.1.1",
+  "updatedAt": "2026-09-25T20:21:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
-  "engine": "local-chatterbox-v3.1",
+  "engine": "local-chatterbox-v3.1.1",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v11",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
@@ -20,7 +20,7 @@
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-raw",
-  "engineVersion": "sentence-context-prosody-anti-hold-qa-v3",
+  "engineVersion": "persistent-core-pronunciation-audio-lock-v4",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -83,7 +83,19 @@
     "speechRateQa": true,
     "sustainedHoldQa": true,
     "deterministicLongSegmentRescue": true,
-    "masterSegmentsNeverSplit": true
+    "masterSegmentsNeverSplit": true,
+    "coreAudioLocks": true,
+    "coreAudioLockKeys": [
+      "quran",
+      "al_quran",
+      "tawhid",
+      "iman",
+      "ihsan"
+    ],
+    "coreAudioLockVariants": 24,
+    "explicitFinalSukunForCoreTerms": true,
+    "confirmedCoreAudioNeverResynthesized": true,
+    "singleCoreCandidatePerRender": true
   },
   "releaseSafety": {
     "stagedInstaller": true,
@@ -91,7 +103,8 @@
     "pronunciationRegression": true,
     "backupBeforeReplace": true,
     "githubActionsValidation": true,
-    "profileSchema": 3,
-    "segmentProsodyRegression": true
+    "profileSchema": 4,
+    "segmentProsodyRegression": true,
+    "coreAudioLockValidation": true
   }
 }
