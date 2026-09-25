@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#06131f">
 <link rel="manifest" href="/test/kids/manifest.webmanifest">
-<link rel="apple-touch-icon" href="/test/kids/icons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/test/kids/icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/test/kids/icons/apple-touch-icon.png?v=logo23">
+<link rel="icon" type="image/png" sizes="192x192" href="/test/kids/icons/icon-192.png?v=logo23">
+<link rel="icon" type="image/png" sizes="512x512" href="/test/kids/icons/icon-512.png?v=logo23">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="DĀR AL TAWḤĪD KIDS">
@@ -2216,7 +2217,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon">KIDS · V0.23</div>
+  <div class="dev-ribbon">KIDS · V0.24</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2635,7 +2636,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab22";
+const KIDS_BUILD_ID="kids-shell-v12-tab23";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -2774,6 +2775,22 @@ var quranMode="listen";
 var speakAlongTimer=0;
 var quranAudio=document.getElementById("quranAudio");
 var duaAudio=new Audio();
+var KIDS_APP_ICON_192="/test/kids/icons/icon-192.png?v=logo23";
+var KIDS_APP_ICON_512="/test/kids/icons/icon-512.png?v=logo23";
+function kidsNowPlaying(title, artist){
+  try{
+    if(!("mediaSession" in navigator)) return;
+    navigator.mediaSession.metadata=new MediaMetadata({
+      title:String(title||"DĀR AL TAWḤĪD Kids"),
+      artist:String(artist||"DĀR AL TAWḤĪD Kids"),
+      album:"DĀR AL TAWḤĪD Kids",
+      artwork:[
+        {src:KIDS_APP_ICON_192,sizes:"192x192",type:"image/png"},
+        {src:KIDS_APP_ICON_512,sizes:"512x512",type:"image/png"}
+      ]
+    });
+  }catch(e){}
+}
 var duaAudioPlaying=false;
 var recitationRecognition=null;
 var wordAudioContext=null;
@@ -3898,6 +3915,7 @@ function playCurrent(after){
   clearTimeout(speakAlongTimer);
   var v=currentSurah.verses[currentAyahIndex];
   quranAudio.src=audioUrl(currentSurah.id,v.id);
+  kidsNowPlaying((v&&(v.ar||v.de))||"Qurʾān","DĀR AL TAWḤĪD Kids");
   quranAudio.play().then(function(){
     setLessonStep("listen");
     updateLearnStatus("Hör die Āyah einmal ganz in Ruhe.",false);
@@ -3915,6 +3933,7 @@ document.getElementById("recordingPlayback").addEventListener("click",function()
   var audio=document.getElementById("recitationPlaybackAudio");
   if(!recordingUrl)return;
   if(audio.paused){
+    kidsNowPlaying("Meine Aufnahme","DĀR AL TAWḤĪD Kids");
     audio.play();
     this.textContent="■ Aufnahme stoppen";
   }else{
@@ -4159,6 +4178,7 @@ function playDuaQuran(refs,pos){
     duaAudioPlaying=false;
     if(btn)btn.textContent=" Qurʾān hören";
   };
+  kidsNowPlaying("Duʿāʾ","DĀR AL TAWḤĪD Kids");
   duaAudio.play().catch(function(){
     duaAudioPlaying=false;
     if(btn)btn.textContent=" Qurʾān hören";
