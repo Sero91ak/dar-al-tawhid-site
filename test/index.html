@@ -13564,63 +13564,60 @@ body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:no
 </style>
 
 
-<style id="qibla-quick-sheet-v1">
-html.qibla-quick-sheet-open,html.qibla-quick-sheet-open body{overflow:hidden!important;overscroll-behavior:none}
+<style id="qibla-quick-sheet-v2">
+html.qibla-quick-sheet-open,html.qibla-quick-sheet-open body{overflow:hidden!important;overscroll-behavior:none;background:#07080a!important}
 html.qibla-quick-sheet-open #bottomNav,
 html.qibla-quick-sheet-open .bottom-nav,
 html.qibla-quick-sheet-open .top-shell,
 html.qibla-quick-sheet-open .header,
 html.qibla-quick-sheet-open #appView{pointer-events:none!important}
 html.qibla-quick-sheet-open #bottomNav{opacity:0!important;visibility:hidden!important}
-.qibla-quick-sheet-backdrop{
-  position:fixed;inset:0;z-index:4200;
-  display:grid;place-items:center;
-  padding:max(10px,env(safe-area-inset-top)) 14px max(14px,env(safe-area-inset-bottom));
-  background:color-mix(in srgb,var(--theme-page-bg,var(--bg,#050706)) 28%,#000 72%);
-  backdrop-filter:blur(18px) saturate(1.1);-webkit-backdrop-filter:blur(18px) saturate(1.1);
-  opacity:0;transition:opacity .34s ease;
+#qiblaQuickSheet.qibla-quick-sheet-backdrop{
+  position:fixed!important;inset:0!important;z-index:2147483000!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  padding:max(12px,env(safe-area-inset-top)) 16px max(16px,env(safe-area-inset-bottom))!important;
+  background:rgba(5,6,8,.88)!important;
+  backdrop-filter:blur(22px) saturate(1.15)!important;-webkit-backdrop-filter:blur(22px) saturate(1.15)!important;
+  opacity:0;transition:opacity .28s ease;
 }
-.qibla-quick-sheet-backdrop.is-open{opacity:1}
-.qibla-quick-sheet{
-  width:min(100%,430px);
-  max-height:min(86dvh,720px);
-  overflow:hidden;
-  display:flex;flex-direction:column;align-items:center;
-  border:1px solid color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 34%,transparent);
-  border-radius:32px;
-  background:
-    radial-gradient(120% 80% at 50% 0%,color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 16%,transparent),transparent 58%),
-    linear-gradient(180deg,color-mix(in srgb,var(--theme-surface,var(--card,#14120e)) 94%,#fff 6%),var(--theme-page-bg,var(--bg,#0a0907)));
-  color:var(--theme-text,var(--text,#f5efe1));
-  box-shadow:0 28px 80px rgba(0,0,0,.5),inset 0 1px 0 color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 22%,transparent);
-  transform:translateY(22px) rotate(var(--qibla-lock-rot,0deg));
-  transform-origin:center center;
-  transition:transform .34s cubic-bezier(.2,.82,.2,1),opacity .34s ease;
-  padding:12px 16px 18px;
-  text-align:center;
+#qiblaQuickSheet.qibla-quick-sheet-backdrop.is-open{opacity:1}
+#qiblaQuickSheet .qibla-quick-sheet{
+  width:min(100%,420px)!important;
+  min-height:min(78dvh,620px)!important;
+  max-height:min(90dvh,760px)!important;
+  overflow:visible!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;
+  border:1px solid rgba(239,215,142,.32)!important;
+  border-radius:28px!important;
+  background:linear-gradient(180deg,#17140f 0%,#0c0b09 100%)!important;
+  color:#f5efe1!important;
+  box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(239,215,142,.18)!important;
+  transform:none!important;
+  padding:14px 18px 22px!important;
+  text-align:center!important;
 }
-.qibla-quick-sheet-backdrop.is-open .qibla-quick-sheet{transform:rotate(var(--qibla-lock-rot,0deg))}
-.qibla-quick-sheet__handle{width:42px;height:4px;border-radius:999px;margin:2px auto 10px;background:color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 42%,transparent)}
-.qibla-quick-sheet__head{width:100%;display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:start;margin:0 0 4px}
-.qibla-quick-sheet__kicker{margin:0;justify-self:start;font:800 10px/1.2 Georgia,serif;letter-spacing:.2em;color:var(--theme-accent,var(--gold2,#efd78e))}
-.qibla-quick-sheet__head h3{margin:0;justify-self:start;font-family:Georgia,"Times New Roman",serif;font-size:26px;font-weight:500;color:var(--theme-accent,var(--gold2,#efd78e));line-height:1.08}
-.qibla-quick-sheet__close{grid-column:2;grid-row:1/span 2;width:38px;height:38px;border:1px solid color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 24%,transparent);border-radius:999px;background:color-mix(in srgb,var(--theme-surface,var(--card,#14120e)) 80%,transparent);color:var(--theme-text,var(--text,#f5efe1));font-size:22px}
-.qibla-quick-stage{width:100%;display:flex;flex-direction:column;align-items:center;gap:8px}
-.qibla-quick-sheet .qibla-pro-head,
-.qibla-quick-sheet .qibla-info-pro,
-.qibla-quick-sheet .qibla-action-row,
-.qibla-quick-sheet .qibla-fiqh-line,
-.qibla-quick-sheet .qibla-orient-hint,
-.qibla-quick-sheet #startQiblaBtn,
-.qibla-quick-sheet #stopQiblaBtn{display:none!important}
-.qibla-quick-sheet .qibla-layout-pro{display:block!important;width:100%}
-.qibla-quick-sheet .qibla-compass-pro{width:min(72vw,250px)!important;max-width:250px;margin:4px auto 0}
-.qibla-quick-city{margin:0;font-size:13px;font-weight:700;color:var(--theme-text,var(--text,#f5efe1))}
-.qibla-quick-live{margin:0;min-height:22px;font-size:13px;font-weight:800;letter-spacing:.04em;color:var(--theme-accent,var(--gold2,#efd78e))}
-.qibla-quick-hint{margin:2px 0 0;max-width:32ch;font-size:11px;line-height:1.4;color:var(--theme-muted,var(--muted,#b8ae97))}
-.qibla-quick-sheet .qibla-compass-pro.qibla-aligned .qibla-compass-face{box-shadow:0 0 0 3px color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 55%,transparent),0 0 28px color-mix(in srgb,var(--theme-accent,var(--gold2,#efd78e)) 35%,transparent)}
-html[data-theme="eisgold"] .qibla-quick-sheet{background:linear-gradient(180deg,#16140f,#0c0b08)}
-html[data-theme="light"] .qibla-quick-sheet,html[data-theme="ivory"] .qibla-quick-sheet{background:linear-gradient(180deg,#f7f1e4,#efe6d2)}
+#qiblaQuickSheet .qibla-quick-sheet__handle{width:42px;height:4px;border-radius:999px;margin:2px auto 12px;background:rgba(239,215,142,.4)}
+#qiblaQuickSheet .qibla-quick-sheet__head{width:100%;display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:start;margin:0 0 10px}
+#qiblaQuickSheet .qibla-quick-sheet__kicker{margin:0;justify-self:start;font:800 10px/1.2 Georgia,serif;letter-spacing:.2em;color:#efd78e}
+#qiblaQuickSheet .qibla-quick-sheet__head h3{margin:0;justify-self:start;font-family:Georgia,"Times New Roman",serif;font-size:28px;font-weight:500;color:#efd78e;line-height:1.08}
+#qiblaQuickSheet .qibla-quick-sheet__close{grid-column:2;grid-row:1/span 2;width:40px;height:40px;border:1px solid rgba(239,215,142,.24);border-radius:999px;background:rgba(20,18,14,.8);color:#f5efe1;font-size:22px}
+#qiblaQuickSheet .qibla-quick-stage{width:100%!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:10px!important;flex:1 1 auto}
+#qiblaQuickSheet .qibla-pro-head,
+#qiblaQuickSheet .qibla-info-pro,
+#qiblaQuickSheet .qibla-action-row,
+#qiblaQuickSheet .qibla-fiqh-line,
+#qiblaQuickSheet .qibla-orient-hint,
+#qiblaQuickSheet #startQiblaBtn,
+#qiblaQuickSheet #stopQiblaBtn{display:none!important}
+#qiblaQuickSheet .qibla-layout-pro{display:block!important;width:100%}
+#qiblaQuickSheet .qibla-compass-pro{width:240px!important;max-width:72vw!important;height:auto!important;margin:8px auto 0!important;display:block!important}
+#qiblaQuickSheet .qibla-compass-face{width:240px!important;height:240px!important;max-width:72vw!important;max-height:72vw!important;aspect-ratio:1!important;display:block!important;margin:0 auto}
+#qiblaQuickSheet .qibla-bearing-readout{display:block!important;margin-top:8px;font-size:22px;font-weight:800;color:#efd78e}
+#qiblaQuickSheet .qibla-quick-city{margin:0;font-size:14px;font-weight:700;color:#f5efe1}
+#qiblaQuickSheet .qibla-quick-live{margin:0;min-height:22px;font-size:14px;font-weight:800;letter-spacing:.04em;color:#efd78e}
+#qiblaQuickSheet .qibla-quick-hint{margin:4px 0 0;max-width:34ch;font-size:12px;line-height:1.45;color:#b8ae97}
+html[data-theme="light"] #qiblaQuickSheet .qibla-quick-sheet,html[data-theme="ivory"] #qiblaQuickSheet .qibla-quick-sheet{background:linear-gradient(180deg,#f7f1e4,#efe6d2)!important;color:#1b1710!important}
+html[data-theme="light"] #qiblaQuickSheet .qibla-quick-city,html[data-theme="ivory"] #qiblaQuickSheet .qibla-quick-city{color:#1b1710}
 </style>
 <style id="home-push-reminders-v379">
 /* Startseite: kompakte Erinnerungszeile, themeabhängig */
@@ -25588,8 +25585,8 @@ function qiblaScreenAngle(){
 function syncQiblaSheetOrientation(){
   const sheet=document.querySelector("#qiblaQuickSheet .qibla-quick-sheet");
   if(!sheet)return;
-  const angle=qiblaScreenAngle();
-  sheet.style.setProperty("--qibla-lock-rot",(-angle)+"deg");
+  sheet.style.removeProperty("--qibla-lock-rot");
+  sheet.style.transform="none";
 }
 function setQiblaNativeOrientationLock(on){
   try{
