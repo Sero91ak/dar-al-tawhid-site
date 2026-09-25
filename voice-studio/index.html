@@ -828,6 +828,38 @@ $("#installEngineBtn").onclick=async()=>{
 };
 $("#qaConfirmBtn").onclick=confirmQA;
 
+// Hardware-Tastaturen: Mac, iMac und iPad Magic Keyboard.
+// Standard-Bearbeitung (⌘C/⌘V/⌘X/⌘A/⌘Z) niemals abfangen;
+// nur Voice-Studio-eigene Befehle ergänzen.
+window.addEventListener("keydown",e=>{
+  const mod=e.metaKey||e.ctrlKey;
+  if(!mod)return;
+
+  if(e.key==="Enter"&&!e.shiftKey&&!e.altKey){
+    e.preventDefault();
+    generate();
+    return;
+  }
+  if(e.key==="Enter"&&e.shiftKey&&!e.altKey){
+    e.preventDefault();
+    manualAnalyze();
+    return;
+  }
+  if((e.key==="k"||e.key==="K")&&!e.shiftKey&&!e.altKey){
+    e.preventDefault();
+    const field=$("#text");
+    field?.focus();
+    return;
+  }
+});
+
+for(const b of [$("#generateBtn"),$("#mobileGenerateBtn")].filter(Boolean)){
+  b.title="Audio erzeugen · ⌘↩";
+}
+for(const b of [$("#analyzeBtn"),$("#mobileAnalyzeBtn")].filter(Boolean)){
+  b.title="Neu prüfen · ⇧⌘↩";
+}
+
 const isStandalone=window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;
 const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 if(isIOS&&!isStandalone){$("#installBtn").style.display="inline-flex";$("#installBtn").textContent="Als App nutzen"}
