@@ -1,11 +1,11 @@
 {
-  "schemaVersion": 5,
-  "id": "dar-own-voice-narration-v2.1.2",
+  "schemaVersion": 6,
+  "id": "dar-own-voice-narration-v2.2",
   "updatedAt": "2026-09-26",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
-  "productionGoal": "Production-grade, warm, fluent narration with deterministic pronunciation, sentence-level contextual prosody, anti-hold QA and persistent user-confirmed audio locks for critical core terms.",
+  "productionGoal": "Production-grade Serhat narration with deterministic pronunciation, persistent core/name audio locks, and mandatory spoken honorifics for the Prophet Muḥammad and known Ṣaḥābah/Ṣaḥābiyyāt.",
   "delivery": {
     "genderPresentation": "male",
     "character": [
@@ -349,7 +349,9 @@
     "longSegmentBaseSeconds": 2.5,
     "coreAudioLockRequiredForRepeatability": true,
     "coreAudioCandidateSinglePerRender": true,
-    "coreAudioConfirmedNeverResynthesized": true
+    "coreAudioConfirmedNeverResynthesized": true,
+    "requiredHonorificRegression": true,
+    "duplicateHonorificGuard": true
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
@@ -397,11 +399,62 @@
       "umar_ibn_al_khattab": {
         "display": "ʿUmar ibn al-Khaṭṭāb",
         "ttsText": "عُمَرُ بْنُ الْخَطَّابْ"
+      },
+      "salawat_prophet": {
+        "display": "ﷺ",
+        "ttsText": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ"
+      },
+      "radiyallahu_anhu": {
+        "display": "raḍiya llāhu ʿanhu",
+        "ttsText": "رَضِيَ اللَّهُ عَنْهُ"
+      },
+      "radiyallahu_anha": {
+        "display": "raḍiya llāhu ʿanhā",
+        "ttsText": "رَضِيَ اللَّهُ عَنْهَا"
+      },
+      "radiyallahu_anhuma": {
+        "display": "raḍiya llāhu ʿanhumā",
+        "ttsText": "رَضِيَ اللَّهُ عَنْهُمَا"
+      },
+      "radiyallahu_anhum": {
+        "display": "raḍiya llāhu ʿanhum",
+        "ttsText": "رَضِيَ اللَّهُ عَنْهُمْ"
       }
     },
     "firstUse": "Until a user-confirmed WAV exists, render exactly one candidate per key per production and reuse it throughout that production. A new production may use a new controlled seed so a rejected candidate can be replaced.",
     "confirmation": "Only the explicit QA confirmation action may promote pending candidate WAVs to persistent locks.",
     "afterConfirmation": "Once confirmed, the stored local WAV is reused byte-for-byte as the source segment and is never freshly synthesized unless explicitly unlocked.",
     "nameAliasPolicy": "Common German/Latin variants such as Omar and al-Chattab map to the same confirmed Arabic pronunciation lock."
+  },
+  "requiredHonorifics": {
+    "enabled": true,
+    "duplicateProtection": true,
+    "prophet": {
+      "matchPolicy": "Standalone Prophet Muḥammad variants only; longer names such as Muḥammad ibn Sīrīn are not treated as the Prophet.",
+      "key": "salawat_prophet",
+      "spoken": "ṣallā llāhu ʿalayhi wa-sallam",
+      "ttsText": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ"
+    },
+    "sahabi": {
+      "key": "radiyallahu_anhu",
+      "spoken": "raḍiya llāhu ʿanhu",
+      "ttsText": "رَضِيَ اللَّهُ عَنْهُ"
+    },
+    "sahabiyyah": {
+      "key": "radiyallahu_anha",
+      "spoken": "raḍiya llāhu ʿanhā",
+      "ttsText": "رَضِيَ اللَّهُ عَنْهَا"
+    },
+    "explicitSupported": {
+      "dual": {
+        "key": "radiyallahu_anhuma",
+        "ttsText": "رَضِيَ اللَّهُ عَنْهُمَا"
+      },
+      "plural": {
+        "key": "radiyallahu_anhum",
+        "ttsText": "رَضِيَ اللَّهُ عَنْهُمْ"
+      }
+    },
+    "behavior": "If the required honorific is absent, append it to the internal speak text. If any supported honorific is already explicitly written immediately after the name, do not add another one."
   }
 }
