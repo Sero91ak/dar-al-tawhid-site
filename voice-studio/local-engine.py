@@ -142,8 +142,19 @@ def split_audio_locked_spans(text:str):
         pos=end
     return out
 
+def discard_pending_audio_locks():
+    global PENDING_AUDIO_LOCKS,PENDING_AUDIO_RENDER_ID
+    with AUDIO_LOCK_STATE_LOCK:
+        old=list(PENDING_AUDIO_LOCKS.values())
+        PENDING_AUDIO_LOCKS={}
+        PENDING_AUDIO_RENDER_ID=""
+    for p in old:
+        try: Path(p).unlink(missing_ok=True)
+        except Exception: pass
+
 def stage_pending_audio_locks(render_id:str,candidates:dict,sr:int):
     global PENDING_AUDIO_LOCKS,PENDING_AUDIO_RENDER_ID
+    discard_pending_audio_locks()
     paths={}
     for key,wav in candidates.items():
         path=PENDING_AUDIO_DIR/f"{render_id}-{key}.wav"
@@ -957,6 +968,9 @@ def generate(text:str,prepared:str="",style:str="auto"):
     if not RENDER_LOCK.acquire(blocking=False):
         raise RuntimeError("Es läuft bereits eine Audio-Erzeugung.")
 
+    # Ein neuer Render macht jeden unbestätigten Kandidaten des vorherigen Renders ungültig.
+    discard_pending_audio_locks()
+
     doc_mode=resolve_prosody_mode(text,style)
     master_forms={
         str(r.get("tts_text",""))
@@ -1051,7 +1065,7 @@ def generate(text:str,prepared:str="",style:str="auto"):
         if fatal:
             raise RuntimeError("Finale Audio-QA fehlgeschlagen: "+", ".join(fatal))
 
-        staged_audio_locks=stage_pending_audio_locks(render_id,new_audio_lock_candidates,sr) if new_audio_lock_candidates else []
+        staged_audio_locks=stage_pending_audio_locks(render_id,new_audio_lock_candidates,sr)
 
         qa_summary={
             "mode":doc_mode,
