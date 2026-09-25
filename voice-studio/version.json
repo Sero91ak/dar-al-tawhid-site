@@ -1,8 +1,8 @@
 {
-  "version": "2.1.1",
-  "updatedAt": "2026-09-25T20:25:00+02:00",
+  "version": "2.1.2",
+  "updatedAt": "2026-09-26T01:35:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
-  "engine": "local-chatterbox-v3.1.1",
+  "engine": "local-chatterbox-v3.1.2",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v11",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
@@ -20,7 +20,7 @@
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-raw",
-  "engineVersion": "persistent-core-pronunciation-audio-lock-v4",
+  "engineVersion": "core-terms-and-sahabah-name-audio-lock-v5",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -90,15 +90,25 @@
       "al_quran",
       "tawhid",
       "iman",
-      "ihsan"
+      "ihsan",
+      "abu_bakr",
+      "abu_bakr_siddiq",
+      "umar",
+      "umar_ibn_al_khattab"
     ],
-    "coreAudioLockVariants": 24,
+    "coreAudioLockVariants": 52,
     "explicitFinalSukunForCoreTerms": true,
     "confirmedCoreAudioNeverResynthesized": true,
     "singleCoreCandidatePerRender": true,
     "unconfirmedCoreCandidateRotation": true,
     "stalePendingCandidateInvalidation": true,
-    "pendingCandidatesBoundToLatestRender": true
+    "pendingCandidatesBoundToLatestRender": true,
+    "commonNameAliases": [
+      "Omar",
+      "Umar ibn al-Chattab",
+      "Omar ibn al-Chattab",
+      "Omar ibn al-Khattab"
+    ]
   },
   "releaseSafety": {
     "stagedInstaller": true,
@@ -106,8 +116,9 @@
     "pronunciationRegression": true,
     "backupBeforeReplace": true,
     "githubActionsValidation": true,
-    "profileSchema": 4,
+    "profileSchema": 5,
     "segmentProsodyRegression": true,
-    "coreAudioLockValidation": true
+    "coreAudioLockValidation": true,
+    "coreNameAliasValidation": true
   }
 }
