@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SITE="https://dar-al-tawhid.de"
-RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/5b24a7ce520844aedd11716875d40e7379036aff"
+RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/847d2b249ce432a265342bde193a8b4d0b48c49a"
 TARGET="$HOME/Applications/DAR-Voice-Studio"
 VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
@@ -458,8 +458,8 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>1.5.2</string>
-  <key>CFBundleShortVersionString</key><string>1.5.2</string>
+  <key>CFBundleVersion</key><string>1.5.3</string>
+  <key>CFBundleShortVersionString</key><string>1.5.3</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>
