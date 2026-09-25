@@ -26,9 +26,7 @@ export default {
       const target = new URL(request.url);
       target.pathname = "/test/kids/start";
       target.searchParams.delete("darsw");
-      if (!target.searchParams.has("kv")) {
-        target.searchParams.set("kv", "kids-shell-v12-start1");
-      }
+      target.searchParams.set("kv", "kids-shell-v12-tab12");
       return Response.redirect(target.toString(), 307);
     }
 

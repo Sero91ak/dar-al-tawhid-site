@@ -152,6 +152,7 @@
         "scripts/kids-design-guard.js",
         "scripts/app-health-check.js",
         "cloudflare/test-app-worker.js",
+        "cloudflare/site-router.js",
         "wrangler.test.toml",
         "scripts/purge-test-kids-cache.js",
         "scripts/verify-test-app-deploy.js",

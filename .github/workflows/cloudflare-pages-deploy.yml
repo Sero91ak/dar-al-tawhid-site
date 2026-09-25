@@ -24,6 +24,7 @@ on:
       - wrangler.toml
       - _headers
       - _redirects
+      - test/kids/**
       - .assetsignore
       - package.json
       - scripts/cf-pages-build.js
