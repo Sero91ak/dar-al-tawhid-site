@@ -30,6 +30,9 @@ async function main() {
     `${SITE_URL}/test/kids/index.html`,
     `${SITE_URL}/test/kids/version.json`,
     `${SITE_URL}/test/kids/manifest.webmanifest`,
+    `${SITE_URL}/test/kids/shell.html`,
+    `${SITE_URL}/test/kids/start`,
+    `${SITE_URL}/test/kids/start.html`,
     `${SITE_URL}/test/kids/?kv=20260925-12`
   ];
   const prefixes = [`${new URL(SITE_URL).hostname}/test/kids`];
