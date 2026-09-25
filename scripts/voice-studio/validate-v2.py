@@ -142,7 +142,7 @@ def main():
     except SyntaxError as e:
         fail(f"engine syntax error: {e}")
     functions={n.name for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))}
-    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav"}:
+    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","discard_pending_audio_locks","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav"}:
         if required not in functions: fail(f"engine missing production function: {required}")
     for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","/confirm-core-audio","audio_lock_pending","session_audio_locks"}:
         if marker not in engine_source: fail(f"engine missing QA/audio-lock marker: {marker}")
