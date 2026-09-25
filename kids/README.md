@@ -4,7 +4,7 @@ Eigenständige Kids-App. **Nicht** Teil der Besucher-App (`/` ) und **nicht** Te
 
 ## GitHub
 
-https://github.com/Sero91ak/dar-al-tawhid-site/tree/cursor/kids-standalone-test-1835/kids
+https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/kids
 
 
 ## Testphase (jetzt)

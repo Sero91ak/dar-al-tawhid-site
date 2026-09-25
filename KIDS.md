@@ -6,11 +6,11 @@ Eigenständige Kids-App (Testphase). Liegt **nicht** in der Besucher-App.
 
 Ordner:
 
-https://github.com/Sero91ak/dar-al-tawhid-site/tree/cursor/kids-standalone-test-1835/kids
+https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/kids
 
 Test-App:
 
-https://github.com/Sero91ak/dar-al-tawhid-site/tree/cursor/kids-standalone-test-1835/kids/test
+https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/kids/test
 
 Diese Datei (`KIDS.md`) steht in der Repo-Wurzel, damit Kids in der Dateiliste sichtbar ist.
 
