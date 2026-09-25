@@ -42,6 +42,44 @@ export default {
     const isRoot = url.pathname === "/" || url.pathname === "/index.html";
     const ua = String(request.headers.get("User-Agent") || "");
     const nativeIos = /DarAlTawhid-iOS/i.test(ua);
+    const kidsPath = url.pathname.replace(/\/+$/, "") || "/";
+    const kidsEntry =
+      kidsPath === "/test/kids"
+      || kidsPath === "/test/kids/start"
+      || kidsPath === "/test/kids/start.html"
+      || kidsPath === "/test/kids/index.html";
+
+    if (kidsEntry) {
+      const target = new URL("/test/kids/start.html", url.origin);
+      const assetResponse = await env.ASSETS.fetch(new Request(target.toString(), { method: "GET" }));
+      const headers = new Headers(assetResponse.headers);
+      headers.set("Content-Type", "text/html; charset=utf-8");
+      headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+      headers.set("Pragma", "no-cache");
+      headers.set("CDN-Cache-Control", "no-store");
+      headers.set("Cloudflare-CDN-Cache-Control", "no-store");
+      headers.delete("ETag");
+      headers.delete("Location");
+      return new Response(assetResponse.body, {
+        status: 200,
+        statusText: "OK",
+        headers
+      });
+    }
+
+    if (kidsPath === "/test/kids" || url.pathname.startsWith("/test/kids/")) {
+      const assetResponse = await env.ASSETS.fetch(request);
+      const headers = new Headers(assetResponse.headers);
+      headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+      headers.set("CDN-Cache-Control", "no-store");
+      headers.set("Cloudflare-CDN-Cache-Control", "no-store");
+      headers.delete("ETag");
+      return new Response(assetResponse.body, {
+        status: assetResponse.status,
+        statusText: assetResponse.statusText,
+        headers
+      });
+    }
 
     if ((request.method === "GET" || request.method === "HEAD") && isRoot && nativeIos) {
       const assetResponse = await env.ASSETS.fetch(request);

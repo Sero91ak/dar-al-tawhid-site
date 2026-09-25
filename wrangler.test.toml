@@ -18,16 +18,6 @@ watch_paths = [
 
 [assets]
 directory = "."
-binding = "ASSETS"
-run_worker_first = true
-html_handling = "none"
 
-# Path-spezifische Routen: liefern den Test-Worker unter der öffentlichen Domain.
-# Ohne diese Bindung bedient der Live-Worker (Custom Domain) weiterhin /test/* mit altem Snapshot.
-[[routes]]
-pattern = "dar-al-tawhid.de/test"
-zone_name = "dar-al-tawhid.de"
-
-[[routes]]
-pattern = "dar-al-tawhid.de/test/*"
-zone_name = "dar-al-tawhid.de"
+# Keine Custom-Domain-Routen: dar-al-tawhid.de/test/kids/ kommt vom Besucher-Worker.
+# Isolierter Test bleibt auf workers.dev.
