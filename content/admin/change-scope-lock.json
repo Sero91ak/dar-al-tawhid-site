@@ -98,7 +98,8 @@
     "assets/global-update-banner.css",
     "assets/jummah-friday.js",
     "data/jummah-series.json",
-    "test/service-worker.js"
+    "test/service-worker.js",
+    "test/assets/jummah-activate-notice.js"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -132,7 +133,8 @@
         "version.json",
         "test/version.json",
         "service-worker.js",
-        "test/service-worker.js"
+        "test/service-worker.js",
+        "test/assets/jummah-activate-notice.js"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     },
