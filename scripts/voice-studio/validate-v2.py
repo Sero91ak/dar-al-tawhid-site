@@ -46,9 +46,10 @@ def classify(text):
         return "kids_story"
     if any(x in low for x in ["heute lernen wir","kids","kinder","gemeinsam lernen"]):
         return "kids_lesson"
-    if s.count(",")>=3 or s.count(";")>=2 or ":" in s:
+    words=len(re.findall(r"\S+",s))
+    if s.count(",")>=3 or s.count(";")>=2 or ":" in s or (s.count(",")>=1 and " und " in low and words<=20):
         return "list"
-    if any(x in low for x in ["bedeutet","lernen wir","erklärt","grundlage","pflicht","wir beten","wir finden"]):
+    if any(x in low for x in ["bedeutet","lernen wir","erklärt","grundlage","pflicht","wir beten","wir finden","liest","bereiten wir uns","folgen"]):
         return "teaching"
     return "narration"
 
