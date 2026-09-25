@@ -88,14 +88,22 @@ async function main() {
       "service-worker.js"
     ]);
     const voiceVersionOk = await waitForStatus(`${SITE_URL}/voice-studio/version.json`, 200);
+    const voiceSetupOk = await waitForStatus(
+      `${SITE_URL}/voice-studio/DAR-Voice-Studio-Setup.app.zip?v=8`,
+      200
+    );
+    const voiceSwOk = await waitForHtmlIncludes(
+      `${SITE_URL}/voice-studio/service-worker.js`,
+      ["dar-voice-studio-v8"]
+    );
     const pronunciationOk = await waitForStatus(
       `${SITE_URL}/data/pronunciation/pronunciation-rules.json`,
       200
     );
 
-    if (!visitorOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
+    if (!visitorOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !voiceSetupOk || !voiceSwOk || !pronunciationOk) {
       console.error(
-        `verify: Besucher-App fehlgeschlagen (build=${visitorBuild}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
+        `verify: Besucher-App fehlgeschlagen (build=${visitorBuild}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, voice-setup=${voiceSetupOk ? "ok" : "fail"}, voice-sw=${voiceSwOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
       );
       failed += 1;
     } else {
