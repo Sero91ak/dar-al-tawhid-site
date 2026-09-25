@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SITE="https://dar-al-tawhid.de"
-RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/847d2b249ce432a265342bde193a8b4d0b48c49a"
+RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/7241ae8bbde306956840a5deb950163b63ab9453"
 TARGET="$HOME/Applications/DAR-Voice-Studio"
 VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
@@ -89,6 +89,13 @@ if ! "$PY" -c 'from chatterbox.mtl_tts import ChatterboxMultilingualTTS' >/dev/n
   say_status "Chatterbox wird einmalig installiert …"
   "$PY" -m pip install --upgrade pip setuptools wheel
   "$PY" -m pip install chatterbox-tts
+fi
+
+# Vor jedem Start Syntax der lokalen Engine prüfen. So kann eine beschädigte
+# Aktualisierung niemals mehr eine nicht startbare Mac-App hinterlassen.
+if ! "$PY" -m py_compile "$TARGET/local-engine.py"; then
+  echo "FEHLER: Die Voice-Engine-Datei ist syntaktisch ungültig. Installation abgebrochen."
+  exit 1
 fi
 
 if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
@@ -190,18 +197,24 @@ import Darwin
 final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
     private var window: NSWindow!
     private var webView: WKWebView!
+    private var engineProcess: Process?
+    private var engineOutHandle: FileHandle?
+    private var engineErrHandle: FileHandle?
+
     private let studioURL = URL(string: "http://127.0.0.1:8787/studio/")!
     private let healthURL = URL(string: "http://127.0.0.1:8787/health")!
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.regular)
+        buildMenus()
 
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/1.0"
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/1.1"
 
         webView = WKWebView(frame: .zero, configuration: config)
         webView.navigationDelegate = self
+        webView.allowsBackForwardNavigationGestures = true
 
         window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 1500, height: 940),
@@ -220,43 +233,130 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
         NSApp.activate(ignoringOtherApps: true)
 
         showLoading()
-        kickEngine()
+        ensureEngine()
         waitForEngine(attempt: 0)
     }
 
-    private func kickEngine() {
-        let task = Process()
-        task.executableURL = URL(fileURLWithPath: "/bin/launchctl")
-        task.arguments = ["kickstart", "-k", "gui/\(getuid())/com.daraltawhid.voice-engine"]
-        try? task.run()
-
-        // launchctl ist auf einzelnen macOS-Versionen unzuverlässig. Wenn der
-        // Dienst nach kurzer Zeit nicht antwortet, startet die App die lokale
-        // Engine selbst – ohne sudo und ohne Browser.
-        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 1.5) { [weak self] in
-            self?.startEngineDirectlyIfNeeded()
-        }
+    private func menuItem(_ title: String, action: Selector?, key: String = "",
+                          modifiers: NSEvent.ModifierFlags = [.command],
+                          target: AnyObject? = nil) -> NSMenuItem {
+        let item = NSMenuItem(title: title, action: action, keyEquivalent: key)
+        item.keyEquivalentModifierMask = key.isEmpty ? [] : modifiers
+        item.target = target
+        return item
     }
 
-    private func startEngineDirectlyIfNeeded() {
+    private func buildMenus() {
+        let main = NSMenu()
+        NSApp.mainMenu = main
+
+        let appRoot = NSMenuItem()
+        main.addItem(appRoot)
+        let appMenu = NSMenu(title: "DĀR Voice Studio")
+        appRoot.submenu = appMenu
+        appMenu.addItem(menuItem("Über DĀR Voice Studio", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:))))
+        appMenu.addItem(.separator())
+        appMenu.addItem(menuItem("DĀR Voice Studio ausblenden", action: #selector(NSApplication.hide(_:)), key: "h"))
+        let hideOthers = menuItem("Andere ausblenden", action: #selector(NSApplication.hideOtherApplications(_:)), key: "h", modifiers: [.command, .option])
+        appMenu.addItem(hideOthers)
+        appMenu.addItem(menuItem("Alle einblenden", action: #selector(NSApplication.unhideAllApplications(_:))))
+        appMenu.addItem(.separator())
+        appMenu.addItem(menuItem("DĀR Voice Studio beenden", action: #selector(NSApplication.terminate(_:)), key: "q"))
+
+        let fileRoot = NSMenuItem()
+        main.addItem(fileRoot)
+        let fileMenu = NSMenu(title: "Ablage")
+        fileRoot.submenu = fileMenu
+        fileMenu.addItem(menuItem("Fenster schließen", action: #selector(NSWindow.performClose(_:)), key: "w"))
+
+        let editRoot = NSMenuItem()
+        main.addItem(editRoot)
+        let editMenu = NSMenu(title: "Bearbeiten")
+        editRoot.submenu = editMenu
+
+        editMenu.addItem(menuItem("Widerrufen", action: Selector(("undo:")), key: "z"))
+        editMenu.addItem(menuItem("Wiederholen", action: Selector(("redo:")), key: "z", modifiers: [.command, .shift]))
+        editMenu.addItem(.separator())
+        editMenu.addItem(menuItem("Ausschneiden", action: Selector(("cut:")), key: "x"))
+        editMenu.addItem(menuItem("Kopieren", action: Selector(("copy:")), key: "c"))
+        editMenu.addItem(menuItem("Einsetzen", action: Selector(("paste:")), key: "v"))
+        editMenu.addItem(menuItem("Einsetzen und Stil anpassen", action: Selector(("pasteAsPlainText:")), key: "v", modifiers: [.command, .option, .shift]))
+        editMenu.addItem(menuItem("Löschen", action: Selector(("delete:"))))
+        editMenu.addItem(.separator())
+        editMenu.addItem(menuItem("Alles auswählen", action: Selector(("selectAll:")), key: "a"))
+
+        let viewRoot = NSMenuItem()
+        main.addItem(viewRoot)
+        let viewMenu = NSMenu(title: "Darstellung")
+        viewRoot.submenu = viewMenu
+        viewMenu.addItem(menuItem("Neu laden", action: #selector(reloadStudio(_:)), key: "r", target: self))
+        viewMenu.addItem(.separator())
+        viewMenu.addItem(menuItem("Vergrößern", action: #selector(zoomIn(_:)), key: "+", target: self))
+        viewMenu.addItem(menuItem("Verkleinern", action: #selector(zoomOut(_:)), key: "-", target: self))
+        viewMenu.addItem(menuItem("Originalgröße", action: #selector(resetZoom(_:)), key: "0", target: self))
+        viewMenu.addItem(.separator())
+        viewMenu.addItem(menuItem("Vollbild", action: #selector(toggleFullScreen(_:)), key: "f", modifiers: [.command, .control], target: self))
+
+        let windowRoot = NSMenuItem()
+        main.addItem(windowRoot)
+        let windowMenu = NSMenu(title: "Fenster")
+        windowRoot.submenu = windowMenu
+        windowMenu.addItem(menuItem("Minimieren", action: #selector(NSWindow.performMiniaturize(_:)), key: "m"))
+        windowMenu.addItem(menuItem("Zoom", action: #selector(NSWindow.performZoom(_:))))
+        NSApp.windowsMenu = windowMenu
+    }
+
+    @objc private func reloadStudio(_ sender: Any?) {
+        webView.reload()
+    }
+
+    @objc private func zoomIn(_ sender: Any?) {
+        webView.pageZoom = min(webView.pageZoom + 0.10, 2.0)
+    }
+
+    @objc private func zoomOut(_ sender: Any?) {
+        webView.pageZoom = max(webView.pageZoom - 0.10, 0.5)
+    }
+
+    @objc private func resetZoom(_ sender: Any?) {
+        webView.pageZoom = 1.0
+    }
+
+    @objc private func toggleFullScreen(_ sender: Any?) {
+        window.toggleFullScreen(sender)
+    }
+
+    private func ensureEngine() {
         var request = URLRequest(url: healthURL)
         request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         request.timeoutInterval = 1.0
 
         URLSession.shared.dataTask(with: request) { [weak self] _, response, error in
-            guard let self else { return }
+            guard let self = self else { return }
             let ok = (response as? HTTPURLResponse)?.statusCode == 200 && error == nil
-            if ok { return }
+            if !ok {
+                self.startEngineDirectly()
+            }
+        }.resume()
+    }
 
-            let home = FileManager.default.homeDirectoryForCurrentUser
+    private func startEngineDirectly() {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let self = self else { return }
+            if let p = self.engineProcess, p.isRunning { return }
+
+            let fm = FileManager.default
+            let home = fm.homeDirectoryForCurrentUser
             let target = home.appendingPathComponent("Applications/DAR-Voice-Studio")
             let python = home.appendingPathComponent("SerhatVoice/.venv/bin/python")
             let engine = target.appendingPathComponent("local-engine.py")
             let adobe = home.appendingPathComponent("SerhatVoice/Serhat_Adobe_MASTER.wav")
             let fallback = home.appendingPathComponent("SerhatVoice/Serhat_FINAL_REF.wav")
 
-            guard FileManager.default.isExecutableFile(atPath: python.path),
-                  FileManager.default.fileExists(atPath: engine.path) else { return }
+            guard fm.isExecutableFile(atPath: python.path),
+                  fm.fileExists(atPath: engine.path) else {
+                return
+            }
 
             let process = Process()
             process.executableURL = python
@@ -266,26 +366,40 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
             var env = ProcessInfo.processInfo.environment
             env["DAR_VOICE_APP_HOME"] = target.path
             env["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
-            if FileManager.default.fileExists(atPath: adobe.path) {
+            if fm.fileExists(atPath: adobe.path) {
                 env["SERHAT_VOICE_REF"] = adobe.path
-            } else if FileManager.default.fileExists(atPath: fallback.path) {
+            } else if fm.fileExists(atPath: fallback.path) {
                 env["SERHAT_VOICE_REF"] = fallback.path
             }
             process.environment = env
 
-            let log = target.appendingPathComponent("engine.log").path
-            let err = target.appendingPathComponent("engine-error.log").path
-            FileManager.default.createFile(atPath: log, contents: nil)
-            FileManager.default.createFile(atPath: err, contents: nil)
-            process.standardOutput = FileHandle(forWritingAtPath: log)
-            process.standardError = FileHandle(forWritingAtPath: err)
+            let logURL = target.appendingPathComponent("engine.log")
+            let errURL = target.appendingPathComponent("engine-error.log")
+            if !fm.fileExists(atPath: logURL.path) { fm.createFile(atPath: logURL.path, contents: nil) }
+            if !fm.fileExists(atPath: errURL.path) { fm.createFile(atPath: errURL.path, contents: nil) }
+
+            let out = FileHandle(forWritingAtPath: logURL.path)
+            let err = FileHandle(forWritingAtPath: errURL.path)
+            try? out?.seekToEnd()
+            try? err?.seekToEnd()
+            process.standardOutput = out
+            process.standardError = err
+
+            self.engineProcess = process
+            self.engineOutHandle = out
+            self.engineErrHandle = err
+
+            process.terminationHandler = { [weak self] _ in
+                self?.engineProcess = nil
+            }
 
             do {
                 try process.run()
             } catch {
-                NSLog("DĀR Voice direct engine start failed: \(error)")
+                NSLog("DĀR Voice engine start failed: \(error)")
+                self.engineProcess = nil
             }
-        }.resume()
+        }
     }
 
     private func showLoading() {
@@ -293,8 +407,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
         <!doctype html><html><head><meta charset="utf-8">
         <style>
         html,body{margin:0;height:100%;background:#061318;color:#f5f1e8;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
-        body{display:grid;place-items:center}
-        .box{text-align:center}
+        body{display:grid;place-items:center}.box{text-align:center}
         .brand{font-family:Georgia,serif;letter-spacing:.15em;color:#e8d29a;font-weight:700;font-size:18px}
         .sub{margin-top:12px;color:#91a4a8;font-size:13px}
         .dot{width:8px;height:8px;border-radius:50%;background:#73bea1;display:inline-block;margin-right:8px;box-shadow:0 0 0 5px rgba(115,190,161,.10)}
@@ -312,7 +425,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
         request.timeoutInterval = 1.5
 
         URLSession.shared.dataTask(with: request) { [weak self] _, response, error in
-            guard let self else { return }
+            guard let self = self else { return }
             let ok = (response as? HTTPURLResponse)?.statusCode == 200 && error == nil
             if ok {
                 DispatchQueue.main.async {
@@ -321,7 +434,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
                 return
             }
 
-            if attempt < 60 {
+            if attempt == 8 || attempt == 24 {
+                self.startEngineDirectly()
+            }
+
+            if attempt < 80 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
                     self.waitForEngine(attempt: attempt + 1)
                 }
@@ -333,16 +450,35 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
         }.resume()
     }
 
+    private func escapedHTML(_ text: String) -> String {
+        text
+            .replacingOccurrences(of: "&", with: "&amp;")
+            .replacingOccurrences(of: "<", with: "&lt;")
+            .replacingOccurrences(of: ">", with: "&gt;")
+    }
+
+    private func errorTail() -> String {
+        let path = FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent("Applications/DAR-Voice-Studio/engine-error.log")
+        guard let data = try? Data(contentsOf: path),
+              let text = String(data: data, encoding: .utf8) else { return "" }
+        return String(text.suffix(5000))
+    }
+
     private func showFailure() {
+        let details = escapedHTML(errorTail())
+        let detailBlock = details.isEmpty ? "" : "<pre>\(details)</pre>"
         let html = """
         <!doctype html><html><head><meta charset="utf-8">
         <style>
         html,body{margin:0;height:100%;background:#061318;color:#f5f1e8;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
-        body{display:grid;place-items:center}.box{max-width:560px;padding:36px;text-align:center}
+        body{display:grid;place-items:center}.box{width:min(760px,85vw);padding:36px;text-align:center}
         h1{font-size:21px}p{color:#9cafb4;line-height:1.55}
+        pre{text-align:left;white-space:pre-wrap;max-height:320px;overflow:auto;background:#031016;border:1px solid rgba(255,255,255,.1);padding:14px;border-radius:12px;color:#e8c7c7;font-size:11px}
         </style></head><body><div class="box">
         <h1>Serhat Engine konnte nicht gestartet werden</h1>
-        <p>Schließe die App und starte sie erneut. Falls der Fehler bleibt, liegt das Protokoll unter ~/Applications/DAR-Voice-Studio/engine-error.log.</p>
+        <p>Die App hat die Engine automatisch erneut gestartet. Unten steht der aktuelle Fehler aus dem lokalen Protokoll.</p>
+        \(detailBlock)
         </div></body></html>
         """
         webView.loadHTMLString(html, baseURL: nil)
@@ -364,6 +500,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         true
+    }
+
+    func applicationWillTerminate(_ notification: Notification) {
+        if let p = engineProcess, p.isRunning {
+            p.terminate()
+        }
+        try? engineOutHandle?.close()
+        try? engineErrHandle?.close()
     }
 }
 
@@ -458,8 +602,8 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>1.5.3</string>
-  <key>CFBundleShortVersionString</key><string>1.5.3</string>
+  <key>CFBundleVersion</key><string>1.6.0</string>
+  <key>CFBundleShortVersionString</key><string>1.6.0</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>
