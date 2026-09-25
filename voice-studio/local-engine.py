@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import gc, json, os, re, shutil, subprocess, threading, time, traceback, uuid
+import difflib, gc, hashlib, json, os, re, shutil, subprocess, threading, time, traceback, unicodedata, urllib.request, uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
@@ -43,49 +43,131 @@ PENDING_AUDIO_DIR=MASTER_AUDIO_DIR/"pending"
 MASTER_AUDIO_DIR.mkdir(parents=True,exist_ok=True)
 PENDING_AUDIO_DIR.mkdir(parents=True,exist_ok=True)
 MASTER_AUDIO_MANIFEST=MASTER_AUDIO_DIR/"manifest.json"
+LEARNING_HOME=VOICE_HOME/"PronunciationLearning"
+LEARNING_PENDING_DIR=LEARNING_HOME/"pending"
+USER_OVERRIDES_FILE=LEARNING_HOME/"user-overrides.json"
+ONLINE_LIBRARY_CACHE=LEARNING_HOME/"online-library.json"
+LEARNING_LOG=LEARNING_HOME/"learning-log.jsonl"
+LEARNING_HOME.mkdir(parents=True,exist_ok=True)
+LEARNING_PENDING_DIR.mkdir(parents=True,exist_ok=True)
+ONLINE_LIBRARY_URL=os.environ.get(
+    "DAR_VOICE_ONLINE_LIBRARY_URL",
+    "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/data/pronunciation/pronunciation-rules.json"
+)
+LEARNING_LOCK=threading.Lock()
+LEARNING_PREVIEWS={}
 
-LIB=json.load(PRON.open(encoding="utf-8"))
+def load_json_file(path:Path,default):
+    try:
+        if path.exists():
+            return json.loads(path.read_text(encoding="utf-8"))
+    except Exception as e:
+        print("[DĀR Voice] JSON load warning",path,e,flush=True)
+    return default
+
+def atomic_write_json(path:Path,data):
+    path.parent.mkdir(parents=True,exist_ok=True)
+    tmp=path.with_suffix(path.suffix+".tmp")
+    tmp.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+    os.replace(tmp,path)
+
+def normalize_lookup(value:str):
+    text=unicodedata.normalize("NFKD",str(value or "").casefold())
+    text="".join(ch for ch in text if not unicodedata.combining(ch))
+    text=text.replace("ʿ","").replace("ʾ","").replace("’","").replace("'","")
+    text=text.replace("š","sh").replace("ǧ","j").replace("ḏ","dh").replace("ṯ","th")
+    text=re.sub(r"[^a-z0-9\\u0600-\\u06ff]+"," ",text)
+    return re.sub(r"\\s+"," ",text).strip()
+
+def append_learning_log(event:str,**payload):
+    record={"at":time.strftime("%Y-%m-%dT%H:%M:%S%z"),"event":event,**payload}
+    try:
+        with LEARNING_LOG.open("a",encoding="utf-8") as fh:
+            fh.write(json.dumps(record,ensure_ascii=False)+"\\n")
+    except Exception as e:
+        print("[DĀR Voice] learning log warning",e,flush=True)
+
+def validate_online_library(data):
+    rules=(data or {}).get("rules") or []
+    if len(rules)<1000:
+        raise ValueError("Online-Wortschatz ist unvollständig.")
+    good=[]
+    for r in rules:
+        needle=str(r.get("string_to_replace","")).strip()
+        tts=str(r.get("tts_text","")).strip()
+        if not needle or not tts:
+            continue
+        if not re.search(r"[\\u0600-\\u06ff]",tts):
+            continue
+        good.append(r)
+    if len(good)<1000:
+        raise ValueError("Online-Wortschatz enthält zu wenige gültige arabische Sprechformen.")
+    return good
+
+BASE_LIB=json.load(PRON.open(encoding="utf-8"))
 VOICE_PROFILE=json.load(PROFILE.open(encoding="utf-8"))
-RULES=sorted(LIB.get("rules",[]),key=lambda r:len(str(r.get("string_to_replace",""))),reverse=True)
+BASE_RULES=list(BASE_LIB.get("rules",[]))
+USER_OVERRIDE_DATA=load_json_file(USER_OVERRIDES_FILE,{"schemaVersion":1,"rules":[]})
+ONLINE_LIB=load_json_file(ONLINE_LIBRARY_CACHE,{"schemaVersion":1,"rules":[],"syncedAt":None})
+ONLINE_RULES=list((ONLINE_LIB or {}).get("rules") or [])
+HONORIFIC_KEYS={"salawat_prophet","radiyallahu_anhu","radiyallahu_anha","radiyallahu_anhuma","radiyallahu_anhum"}
+
 PROSODY_MODES=(VOICE_PROFILE.get("prosody") or {}).get("modes",{})
 CONTEXT_CONFIG=VOICE_PROFILE.get("contextDetection") or {}
 QA_CONFIG=VOICE_PROFILE.get("qualityAssurance") or {}
 CONTINUITY_CONFIG=VOICE_PROFILE.get("continuity") or {}
-MASTER_TTS={
-    str(r.get("tts_text",""))
-    for r in RULES
-    if r.get("voice_lock")=="MASTER" and r.get("tts_text")
-}
-AUDIO_LOCK_BY_TTS={
-    str(r.get("tts_text","")):str(r.get("audio_lock_key",""))
-    for r in RULES
-    if r.get("tts_text") and r.get("audio_lock_key")
-}
+
+LIB={}
+RULES=[]
+MASTER_TTS=set()
+AUDIO_LOCK_BY_TTS={}
 AUDIO_LOCK_LABELS={}
-for _r in RULES:
-    _key=str(_r.get("audio_lock_key",""))
-    if _key and _key not in AUDIO_LOCK_LABELS:
-        AUDIO_LOCK_LABELS[_key]=str(_r.get("canonical") or _r.get("string_to_replace") or _key)
-AUDIO_LOCK_FORMS=sorted(AUDIO_LOCK_BY_TTS,key=len,reverse=True)
-HONORIFIC_KEYS={"salawat_prophet","radiyallahu_anhu","radiyallahu_anha","radiyallahu_anhuma","radiyallahu_anhum"}
+AUDIO_LOCK_FORMS=[]
 HONORIFIC_TTS_BY_KEY={}
 HONORIFIC_RULE_BY_KEY={}
-HONORIFIC_SOURCE_FORMS={key:[] for key in HONORIFIC_KEYS}
-for _r in RULES:
-    _key=str(_r.get("audio_lock_key",""))
-    if _key in HONORIFIC_KEYS:
-        _tts=str(_r.get("tts_text",""))
-        _src=str(_r.get("string_to_replace",""))
-        if _tts and _key not in HONORIFIC_TTS_BY_KEY:
-            HONORIFIC_TTS_BY_KEY[_key]=_tts
-            HONORIFIC_RULE_BY_KEY[_key]=_r
-        if _src:
-            HONORIFIC_SOURCE_FORMS.setdefault(_key,[]).append(_src)
-for _key in list(HONORIFIC_SOURCE_FORMS):
-    HONORIFIC_SOURCE_FORMS[_key]=sorted(set(HONORIFIC_SOURCE_FORMS[_key]),key=len,reverse=True)
-AUDIO_LOCK_STATE_LOCK=threading.Lock()
-PENDING_AUDIO_LOCKS={}
-PENDING_AUDIO_RENDER_ID=""
+HONORIFIC_SOURCE_FORMS={}
+
+def rebuild_runtime_rules():
+    global LIB,RULES,MASTER_TTS,AUDIO_LOCK_BY_TTS,AUDIO_LOCK_LABELS,AUDIO_LOCK_FORMS
+    global HONORIFIC_TTS_BY_KEY,HONORIFIC_RULE_BY_KEY,HONORIFIC_SOURCE_FORMS
+    user_rules=list((USER_OVERRIDE_DATA or {}).get("rules") or [])
+    # User-bestätigte Regeln stehen zuerst und überschreiben bei gleicher Schreibweise die Basisbibliothek.
+    RULES=sorted(user_rules+BASE_RULES,key=lambda r:len(str(r.get("string_to_replace",""))),reverse=True)
+    LIB=dict(BASE_LIB)
+    LIB["rules"]=RULES
+    counts=dict(BASE_LIB.get("counts") or {})
+    counts["rules"]=len(RULES)
+    counts["userLearnedRules"]=len(user_rules)
+    counts["onlineSearchRules"]=len(ONLINE_RULES)
+    LIB["counts"]=counts
+    MASTER_TTS={str(r.get("tts_text","")) for r in RULES if r.get("voice_lock")=="MASTER" and r.get("tts_text")}
+    AUDIO_LOCK_BY_TTS={
+        str(r.get("tts_text","")):str(r.get("audio_lock_key",""))
+        for r in RULES if r.get("tts_text") and r.get("audio_lock_key")
+    }
+    AUDIO_LOCK_LABELS={}
+    for r in RULES:
+        key=str(r.get("audio_lock_key",""))
+        if key and key not in AUDIO_LOCK_LABELS:
+            AUDIO_LOCK_LABELS[key]=str(r.get("canonical") or r.get("string_to_replace") or key)
+    AUDIO_LOCK_FORMS=sorted(AUDIO_LOCK_BY_TTS,key=len,reverse=True)
+    HONORIFIC_TTS_BY_KEY={}
+    HONORIFIC_RULE_BY_KEY={}
+    HONORIFIC_SOURCE_FORMS={key:[] for key in HONORIFIC_KEYS}
+    for r in RULES:
+        key=str(r.get("audio_lock_key",""))
+        if key in HONORIFIC_KEYS:
+            tts=str(r.get("tts_text",""))
+            src=str(r.get("string_to_replace",""))
+            if tts and key not in HONORIFIC_TTS_BY_KEY:
+                HONORIFIC_TTS_BY_KEY[key]=tts
+                HONORIFIC_RULE_BY_KEY[key]=r
+            if src:
+                HONORIFIC_SOURCE_FORMS.setdefault(key,[]).append(src)
+    for key in list(HONORIFIC_SOURCE_FORMS):
+        HONORIFIC_SOURCE_FORMS[key]=sorted(set(HONORIFIC_SOURCE_FORMS[key]),key=len,reverse=True)
+
+rebuild_runtime_rules()
 
 MODEL=None
 MODEL_DEVICE=None
