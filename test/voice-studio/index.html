@@ -156,6 +156,229 @@ input{width:100%;background:#071927;color:var(--ink);border:1px solid var(--line
   .topbar{padding-top:4px}
   .install-btn{display:none!important}
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   DĀR AL TAWḤĪD VOICE STUDIO — PROFESSIONAL CONTINUOUS SURFACE
+   Keine Dashboard-Karten: durchgehende Studiofläche, feine Linien.
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --bg:#061318;
+  --bg2:#071b22;
+  --panel:#081b24;
+  --panel2:#0a202a;
+  --ink:#f5f1e8;
+  --muted:#9cafb4;
+  --soft:#71868b;
+  --line:rgba(210,229,226,.105);
+  --line-strong:rgba(210,229,226,.17);
+  --gold:#cdb071;
+  --gold2:#e8d29a;
+  --green:#71a899;
+  --cyan:#6f9eaa;
+  --radius:0px;
+  --shadow:none;
+}
+html{background:#061318}
+body{
+  background:
+    radial-gradient(1200px 760px at -8% -8%,rgba(75,122,118,.13),transparent 58%),
+    radial-gradient(1000px 640px at 108% 16%,rgba(53,91,113,.13),transparent 60%),
+    linear-gradient(135deg,#061318 0%,#071a21 48%,#081b25 100%);
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background:
+    linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.009) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 78%);
+}
+.app{padding-top:var(--safe-top)}
+.shell{max-width:1920px}
+.topbar{
+  min-height:78px;
+  padding:10px 4px 14px;
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg,rgba(6,19,24,.97),rgba(6,19,24,.87) 74%,rgba(6,19,24,.68));
+  box-shadow:none;
+}
+.brand-wrap{gap:11px}
+.brand-mark{
+  width:48px;height:48px;border:0;border-radius:0;background:transparent;box-shadow:none;overflow:visible;
+  display:grid;place-items:center;flex:none
+}
+.brand-mark img{
+  display:block;width:48px;height:48px;object-fit:contain;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.24))
+}
+.brand{font-size:13px;color:var(--gold2);letter-spacing:.145em}
+.brand-sub{color:#7f9499;letter-spacing:.055em}
+.status{
+  border-color:var(--line);background:rgba(7,26,33,.58);
+  border-radius:9px;padding:8px 11px
+}
+.workspace{
+  gap:0;
+  background:linear-gradient(180deg,rgba(8,28,36,.76),rgba(6,20,27,.74));
+  border-bottom:1px solid var(--line);
+  min-height:calc(100dvh - 104px);
+}
+.panel{
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+.editor-panel{
+  padding:clamp(18px,1.85vw,34px) clamp(18px,2.15vw,42px) 28px;
+  border-right:1px solid var(--line)!important;
+}
+.side-panel{
+  padding:24px 22px;
+  border-left:0!important;
+  background:linear-gradient(180deg,rgba(6,20,27,.34),rgba(8,28,36,.21))!important;
+  top:79px;
+  max-height:calc(100dvh - 80px)
+}
+.heading-row{margin-bottom:18px}
+h1{font-weight:730;letter-spacing:-.038em}
+.lead{color:#91a6ab;max-width:820px}
+.badge{
+  background:transparent;border:0;border-left:1px solid var(--line);
+  border-radius:0;padding:4px 9px;color:#82979d;font-weight:750
+}
+.badges .badge:first-child{border-left:0}
+.textbox-wrap{
+  border-top:1px solid var(--line-strong);
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg,rgba(2,14,19,.30),rgba(2,14,19,.10));
+}
+textarea{
+  border:0!important;border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:22px 6px 48px;
+  line-height:1.7;
+}
+textarea:focus{box-shadow:none!important}
+.counter{
+  right:4px;bottom:9px;border:0;border-radius:0;background:transparent;
+  color:#62777c;padding:3px 0
+}
+.stats{
+  margin:0 0 18px;
+  border-bottom:1px solid var(--line);
+  gap:0
+}
+.stat{
+  border:0;border-right:1px solid var(--line);border-radius:0;background:transparent;
+  padding:12px 14px
+}
+.stat:first-child{padding-left:2px}
+.stat:last-child{border-right:0}
+.stat b{font-size:20px;font-weight:680}
+.stat span{color:#71868b}
+.section-title{color:#8da0a5;font-size:10px;letter-spacing:.13em}
+.term-list{
+  max-height:128px;padding:0 0 2px;
+  scrollbar-width:thin
+}
+.term{
+  background:rgba(111,158,170,.05);
+  border:1px solid rgba(138,175,181,.13);
+  border-radius:8px;padding:6px 8px
+}
+.term.locked{background:rgba(205,176,113,.05);border-color:rgba(205,176,113,.25)}
+.term.verified{background:rgba(113,168,153,.045);border-color:rgba(113,168,153,.2)}
+.preview-grid{
+  grid-template-columns:minmax(0,1fr) minmax(210px,.32fr);
+  margin-top:20px;padding-top:18px;border-top:1px solid var(--line);
+}
+.preview{
+  border:0;border-radius:0;
+  border-left:2px solid rgba(113,168,153,.26);
+  background:rgba(3,16,21,.22);
+  padding:12px 14px;min-height:100px
+}
+.actions-card{
+  border:0;border-radius:0;background:transparent;
+  border-left:1px solid var(--line);
+  padding:0 0 0 16px
+}
+.btn{border-radius:9px;min-height:43px;font-weight:750}
+.primary{
+  background:linear-gradient(180deg,#d2b878,#bea05d);
+  box-shadow:0 8px 22px rgba(0,0,0,.13);
+  color:#0b1d22
+}
+.secondary,.quiet{
+  background:rgba(255,255,255,.026);
+  border:1px solid var(--line);
+  color:#d6dfdf
+}
+.player-wrap{
+  margin-top:18px;padding:16px 0 0;
+  border:0;border-top:1px solid var(--line);border-radius:0;background:transparent
+}
+audio{filter:saturate(.65)}
+.side-section{
+  padding:0 0 18px;margin-bottom:18px;border-bottom:1px solid var(--line)
+}
+.side-title{color:#768b90;letter-spacing:.13em}
+.profile-grid{
+  display:grid;grid-template-columns:1fr;gap:0;
+  border-top:1px solid var(--line)
+}
+.profile-box{
+  border:0;border-bottom:1px solid var(--line);border-radius:0;
+  background:transparent;padding:10px 0;display:flex;justify-content:space-between;align-items:center;gap:16px
+}
+.profile-box small{margin:0;color:#72858a}
+.profile-box strong{font-size:12px;font-weight:650;color:#d7dfdf;text-align:right}
+.qa-item{padding:10px 0}
+details{
+  border:0;border-radius:0;background:transparent;border-top:1px solid var(--line)
+}
+summary{padding:11px 0}
+.advanced{padding:0 0 12px}
+input{
+  border-radius:8px;background:rgba(1,14,19,.34);
+  border-color:var(--line)
+}
+.footer{color:#5d7478;padding-top:14px}
+.mobile-actions{
+  border-radius:12px;
+  background:rgba(6,20,26,.92);
+  border-color:var(--line);
+  box-shadow:0 18px 50px rgba(0,0,0,.34)
+}
+@media(min-width:1420px){
+  .editor-panel{padding-left:48px;padding-right:48px}
+  .side-panel{padding-left:28px;padding-right:28px}
+}
+@media(max-width:799px){
+  body{
+    background:
+      radial-gradient(700px 460px at -15% -5%,rgba(75,122,118,.12),transparent 58%),
+      linear-gradient(160deg,#061318,#071b22 58%,#081b25);
+  }
+  .topbar{border-bottom:1px solid var(--line);background:rgba(6,19,24,.91)}
+  .brand-mark,.brand-mark img{width:42px;height:42px}
+  .workspace{background:transparent}
+  .editor-panel{
+    padding-top:18px;
+    border-right:0!important;
+    border-bottom:1px solid var(--line)!important
+  }
+  .side-panel{
+    background:rgba(7,24,31,.35)!important;
+    margin-top:0;border-top:0!important
+  }
+  .textbox-wrap{margin-left:-1px;margin-right:-1px}
+  textarea{padding-left:2px;padding-right:2px}
+  .stats{margin-left:0;margin-right:0}
+  .preview-grid{margin-top:17px}
+}
 </style>
 </head>
 <body>
@@ -163,7 +386,7 @@ input{width:100%;background:#071927;color:var(--ink);border:1px solid var(--line
 <div class="shell">
 <header class="topbar">
   <div class="brand-wrap">
-    <div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 17.3V7.9c0-.7.4-1.3 1-1.6L11 3v13l-6 3.2c-.5.3-1-.1-1-.7Z" stroke="#d9b66f" stroke-width="1.4"/><path d="M20 17.3V7.9c0-.7-.4-1.3-1-1.6L13 3v13l6 3.2c.5.3 1-.1 1-.7Z" stroke="#d9b66f" stroke-width="1.4"/><path d="M11 16h2" stroke="#f0d59a" stroke-width="1.4"/></svg></div>
+    <div class="brand-mark" aria-hidden="true"><img src="/watermark-my-logo-full.png" alt=""></div>
     <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
