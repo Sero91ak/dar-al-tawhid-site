@@ -393,7 +393,7 @@ input,select{
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark" aria-hidden="true"><img src="/watermark-my-logo-full.png" alt=""></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.0 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.1 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="installBtn" class="btn quiet install-btn">App installieren</button>
@@ -405,7 +405,7 @@ input,select{
 <main class="panel editor-panel">
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
-    <div class="badges"><span class="badge">SERHAT VOICE 2.0</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
+    <div class="badges"><span class="badge">SERHAT VOICE 2.1</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
   </div>
 
   <div class="textbox-wrap">
@@ -482,6 +482,7 @@ input,select{
       <div class="qa-item"><span>Arabische Master-Referenz</span><b id="qaArabicRef" class="warn">Fallback</b></div>
       <div class="qa-item"><span>LOCKED-Begriffe</span><b id="qaLocked" class="warn">–</b></div>
       <div class="qa-item"><span>Technische Audio-QA</span><b id="qaTechnical" class="warn">wartet</b></div>
+      <div class="qa-item"><span>Satzfluss / Kontinuität</span><b id="qaContinuity" class="warn">wartet</b></div>
       <div class="qa-item"><span>Audio vorhanden</span><b id="qaAudio" class="warn">nein</b></div>
       <div class="qa-item"><span>Aussprache bestätigt</span><b id="qaConfirmed" class="warn">nein</b></div>
     </div>
@@ -507,7 +508,7 @@ input,select{
   <div id="error" class="bad" style="font-size:11px;line-height:1.5"></div>
 </aside>
 </div>
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.0 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.1 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
 </div>
 </div>
 
@@ -576,6 +577,10 @@ function resetAudioQA(){
   qaConfirmed=false;
   $("#qaConfirmed").textContent="nein";
   $("#qaConfirmed").className="warn";
+  if($("#qaContinuity")){
+    $("#qaContinuity").textContent="wartet";
+    $("#qaContinuity").className="warn";
+  }
   if(lastAudio){URL.revokeObjectURL(lastAudio);lastAudio=null}
   $("#player").removeAttribute("src");
   $("#playerWrap").hidden=true;
@@ -842,7 +847,15 @@ async function generate(){
     const finalIssues=qa?.final?.issues||[];
     $("#qaTechnical").textContent=finalIssues.length?"prüfen":"bestanden";
     $("#qaTechnical").className=finalIssues.length?"warn":"good";
-    setMessage("Audio fertig. Bitte anhören und die Aussprache bestätigen.","good");
+    const segmentModes=Array.isArray(qa?.segment_modes)?qa.segment_modes:[];
+    const rescued=Number(qa?.rescued_segments||0);
+    if($("#qaContinuity")){
+      $("#qaContinuity").textContent=rescued
+        ?("Rescue "+rescued+" · "+Math.max(1,segmentModes.length)+" Modus")
+        :(Math.max(1,segmentModes.length)+" Modus · flüssig");
+      $("#qaContinuity").className=rescued?"warn":"good";
+    }
+    setMessage("Audio fertig. Satzfluss und technische QA sind geprüft; bitte jetzt die Aussprache anhören und bestätigen.","good");
     $("#player").play().catch(()=>{});
     $("#playerWrap").scrollIntoView({behavior:"smooth",block:"nearest"});
   }catch(e){
