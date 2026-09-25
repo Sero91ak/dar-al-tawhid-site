@@ -188,10 +188,13 @@ def main():
         "enabled","clickableDetectedTerms","textSelectionCapture","manualUnknownTermEntry",
         "manualArabicTtsRequiredWhenNoRuleFound","isolatedPreviewBeforeSave",
         "explicitHumanConfirmationRequired","confirmedPreviewBecomesPersistentAudioLock",
-        "userRuleOverridesBaseRule","onlineRulesNeverAutoPromoteToMaster","vocabularyExpandsPersistently"
+        "userRuleOverridesBaseRule","onlineRulesNeverAutoPromoteToMaster","vocabularyExpandsPersistently",
+        "automaticOnlineSync","onlineRulesAreSuggestionsOnly"
     )
     for flag in required_learning_flags:
         if not learning.get(flag): fail("pronunciation learning policy missing: "+flag)
+    if int(learning.get("automaticOnlineSyncHours",0))!=24:
+        fail("pronunciation learning auto-sync must be 24 hours")
 
     required_name_rules=[r for r in rules if r.get("required_honorific_key")]
     male_required=[r for r in required_name_rules if r.get("required_honorific_key")=="radiyallahu_anhu"]
@@ -223,9 +226,9 @@ def main():
     except SyntaxError as e:
         fail(f"engine syntax error: {e}")
     functions={n.name for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))}
-    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","discard_pending_audio_locks","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav","source_has_honorific","rebuild_runtime_rules","pronunciation_search","sync_online_pronunciation_library","create_learning_preview","confirm_learning_preview","save_user_override","learning_state"}:
+    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","discard_pending_audio_locks","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav","source_has_honorific","rebuild_runtime_rules","pronunciation_search","sync_online_pronunciation_library","create_learning_preview","confirm_learning_preview","save_user_override","learning_state","online_sync_is_stale","refresh_online_library_if_stale"}:
         if required not in functions: fail(f"engine missing production function: {required}")
-    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","/confirm-core-audio","audio_lock_pending","session_audio_locks","required_honorific_key","honorificPolicyEnabled","/learning/search","/learning/sync","/learning/preview","/learning/confirm","USER_OVERRIDES_FILE","ONLINE_LIBRARY_CACHE","CONFIRMED_WAV"}:
+    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","/confirm-core-audio","audio_lock_pending","session_audio_locks","required_honorific_key","honorificPolicyEnabled","/learning/search","/learning/sync","/learning/preview","/learning/confirm","USER_OVERRIDES_FILE","ONLINE_LIBRARY_CACHE","CONFIRMED_WAV","autoSyncHours"}:
         if marker not in engine_source: fail(f"engine missing QA/audio-lock marker: {marker}")
 
     for case in fixtures.get("cases",[]):
