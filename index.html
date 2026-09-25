@@ -13607,25 +13607,32 @@ body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:no
 
 <style id="qibla-quick-sheet-v1">/* retired: Qibla Quick View uses assets/qibla-quick-view.css */</style>
 <style id="dar-qibla-pop-v3">
-html.dar-qibla-pop-open,html.dar-qibla-pop-open body{overflow:hidden!important;touch-action:none}
+html.dar-qibla-pop-open,html.dar-qibla-pop-open body{overflow:hidden!important;touch-action:none;overscroll-behavior:none}
+html.dar-qibla-pop-open #appView,html.dar-qibla-pop-open #bottomNav,html.dar-qibla-pop-open .bottom-nav,html.dar-qibla-pop-open .float-actions{pointer-events:none!important}
 #darQiblaPop{
   position:fixed!important;inset:0!important;z-index:2147483646!important;
   display:flex!important;align-items:center!important;justify-content:center!important;
   padding:0!important;margin:0!important;box-sizing:border-box!important;
-  width:100vw!important;height:100vh!important;height:100dvh!important;
+  width:100%!important;height:100%!important;
   background:
     radial-gradient(ellipse 90% 70% at 50% 42%,rgba(239,215,142,.14),transparent 46%),
-    radial-gradient(circle at 50% 40%,rgba(18,16,12,.35),rgba(3,3,5,.88) 72%)!important;
+    radial-gradient(circle at 50% 40%,rgba(18,16,12,.35),rgba(3,3,5,.88) 72%);
   -webkit-backdrop-filter:blur(22px) saturate(1.1);backdrop-filter:blur(22px) saturate(1.1);
-  opacity:1!important;visibility:visible!important;pointer-events:auto!important;
-  transform-origin:50% 50%
+  opacity:0;visibility:visible;pointer-events:auto;
+  transition:opacity 360ms cubic-bezier(0.22,1,0.36,1);
+  will-change:opacity
 }
+#darQiblaPop.is-open{opacity:1}
 #darQiblaPop .dq-frame{
   width:min(100vw,430px)!important;max-width:100%!important;
   display:flex!important;flex-direction:column!important;align-items:center!important;
   padding:max(18px,env(safe-area-inset-top,0px)) 22px max(22px,env(safe-area-inset-bottom,0px))!important;
-  color:#f4eee1
+  color:#f4eee1;
+  transform:translate3d(0,40px,0);
+  transition:transform 360ms cubic-bezier(0.22,1,0.36,1);
+  will-change:transform
 }
+#darQiblaPop.is-open .dq-frame{transform:translate3d(0,0,0)}
 #darQiblaPop .dq-bar{
   width:100%;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:0 0 10px
 }
@@ -13639,11 +13646,8 @@ html.dar-qibla-pop-open,html.dar-qibla-pop-open body{overflow:hidden!important;t
 #darQiblaPop .dq-svg{
   display:block!important;width:min(82vw,340px)!important;height:min(82vw,340px)!important;
   min-width:260px!important;min-height:260px!important;max-width:340px!important;max-height:340px!important;
-  margin:4px auto 8px!important;overflow:visible!important;opacity:1!important;visibility:visible!important;
-  transform:none!important
+  margin:4px auto 8px!important;overflow:visible!important;opacity:1!important;visibility:visible!important
 }
-#darQiblaPop.is-searching .dq-svg{filter:drop-shadow(0 0 16px rgba(239,215,142,.22))}
-#darQiblaPop.is-near .dq-svg{filter:drop-shadow(0 0 24px rgba(239,215,142,.42))}
 #darQiblaPop.is-locked .dq-svg{filter:drop-shadow(0 0 36px rgba(255,236,170,.8)) drop-shadow(0 0 14px #efd78e)}
 #darQiblaPop .dq-deg{
   margin:8px 0 0!important;text-align:center;font:800 40px/1 system-ui,-apple-system,sans-serif;
@@ -25489,8 +25493,22 @@ async function startQiblaCompass(){
   }
   enableQiblaStaticFallback(getBearing(),settings,status,startBtn,stopBtn);
 }
-var darQiblaLive={headingHandler:null,watchId:null,orientLock:null,heading:null,bearing:0,locked:false};
-function closeQiblaQuickSheet(){
+var darQiblaLive={phase:"closed",headingHandler:null,watchId:null,visHandler:null,raf:0,openTimer:0,closeTimer:0,bearing:0,rawHeading:null,targetU:null,displayU:null,lastStamp:0,aligned:false,source:null,lastHeading:null};
+function darQiblaNorm(d){d=Number(d);if(!Number.isFinite(d))return 0;d%=360;if(d<0)d+=360;return d}
+function darQiblaDelta(from,to){return ((darQiblaNorm(to)-darQiblaNorm(from)+540)%360)-180}
+function darQiblaUnwrap(prev,sample){sample=darQiblaNorm(sample);if(prev==null)return sample;return prev+darQiblaDelta(prev,sample)}
+function darQiblaNativeHeading(){
+  try{
+    var n=window.DAR_NATIVE_HEADING||window.DAR_COMPASS_HEADING||window.DAR_HEADING;
+    if(n==null)return null;
+    if(typeof n==="number"&&Number.isFinite(n))return darQiblaNorm(n);
+    var t=Number(n.trueHeading),m=Number(n.magneticHeading||n.heading);
+    if(Number.isFinite(t)&&t>=0)return darQiblaNorm(t);
+    if(Number.isFinite(m)&&m>=0)return darQiblaNorm(m);
+  }catch(e){}
+  return null;
+}
+function darQiblaStopCompass(){
   try{
     if(darQiblaLive.headingHandler){
       window.removeEventListener("deviceorientation",darQiblaLive.headingHandler,true);
@@ -25501,95 +25519,108 @@ function closeQiblaQuickSheet(){
       navigator.geolocation.clearWatch(darQiblaLive.watchId);
       darQiblaLive.watchId=null;
     }
-    if(darQiblaLive.orientLock){
-      window.removeEventListener("orientationchange",darQiblaLive.orientLock);
-      window.removeEventListener("resize",darQiblaLive.orientLock);
-      darQiblaLive.orientLock=null;
+    if(darQiblaLive.raf){cancelAnimationFrame(darQiblaLive.raf);darQiblaLive.raf=0}
+    if(darQiblaLive.visHandler){
+      document.removeEventListener("visibilitychange",darQiblaLive.visHandler);
+      darQiblaLive.visHandler=null;
     }
-    if(screen.orientation&&screen.orientation.unlock)screen.orientation.unlock();
   }catch(e){}
+  darQiblaLive.source=null;
+}
+function darQiblaTeardown(){
+  darQiblaStopCompass();
+  if(darQiblaLive.openTimer){clearTimeout(darQiblaLive.openTimer);darQiblaLive.openTimer=0}
+  if(darQiblaLive.closeTimer){clearTimeout(darQiblaLive.closeTimer);darQiblaLive.closeTimer=0}
   var el=document.getElementById("darQiblaPop")||document.getElementById("darQiblaLive");
   if(el)el.remove();
   document.documentElement.classList.remove("dar-qibla-pop-open","dar-qibla-live-open");
   document.body.classList.remove("dar-qibla-pop-open","dar-qibla-live-open");
+  darQiblaLive.phase="closed";
 }
-function darQiblaKeepPortrait(){
-  var root=document.getElementById("darQiblaPop");
-  if(!root)return;
-  var ang=0;
-  try{
-    if(screen.orientation&&typeof screen.orientation.angle==="number")ang=screen.orientation.angle;
-    else if(typeof window.orientation==="number")ang=window.orientation;
-  }catch(e){}
-  ang=((ang%360)+360)%360;
-  if(ang===90||ang===270){
-    var w=Math.max(window.innerWidth,window.innerHeight);
-    var h=Math.min(window.innerWidth,window.innerHeight);
-    root.style.width=h+"px";
-    root.style.height=w+"px";
-    root.style.transform="rotate("+((ang===90)?-90:90)+"deg)";
-  }else{
-    root.style.width="";
-    root.style.height="";
-    root.style.transform="";
+function closeQiblaQuickSheet(){
+  if(darQiblaLive.phase==="closed"||darQiblaLive.phase==="closing")return;
+  darQiblaLive.phase="closing";
+  var el=document.getElementById("darQiblaPop");
+  if(!el){darQiblaTeardown();return}
+  el.classList.remove("is-open");
+  var done=false;
+  var finish=function(){
+    if(done)return;done=true;
+    el.removeEventListener("transitionend",onEnd);
+    darQiblaTeardown();
+  };
+  var onEnd=function(ev){if(ev.target===el&&(ev.propertyName==="opacity"||!ev.propertyName))finish()};
+  el.addEventListener("transitionend",onEnd);
+  darQiblaLive.closeTimer=setTimeout(finish,480);
+}
+function darQiblaAcceptHeading(h,stamp){
+  if(typeof h!=="number"||!Number.isFinite(h))return;
+  if(stamp&&darQiblaLive.lastStamp&&stamp<darQiblaLive.lastStamp)return;
+  if(stamp)darQiblaLive.lastStamp=stamp;
+  h=darQiblaNorm(h);
+  if(darQiblaLive.rawHeading!=null&&Math.abs(darQiblaDelta(darQiblaLive.rawHeading,h))<0.4)return;
+  darQiblaLive.rawHeading=h;
+  darQiblaLive.lastHeading=h;
+  var next=darQiblaUnwrap(darQiblaLive.targetU,h);
+  darQiblaLive.targetU=next;
+  if(darQiblaLive.displayU==null)darQiblaLive.displayU=next;
+}
+function darQiblaWebHeading(ev){
+  if(!ev)return;
+  var h=null;
+  if(typeof ev.webkitCompassHeading==="number"&&!Number.isNaN(ev.webkitCompassHeading)){
+    darQiblaLive.source="webkit";
+    h=ev.webkitCompassHeading;
+  }else if(darQiblaLive.source==="webkit"){
+    return;
+  }else if(ev.absolute&&typeof ev.alpha==="number"&&!Number.isNaN(ev.alpha)){
+    darQiblaLive.source="absolute";
+    h=(360-ev.alpha+360)%360;
+  }else if(!darQiblaLive.source&&typeof ev.alpha==="number"&&!Number.isNaN(ev.alpha)){
+    h=(360-ev.alpha+360)%360;
   }
+  if(h==null)return;
+  darQiblaAcceptHeading(h,ev.timeStamp);
 }
-function darQiblaLiveHeading(ev){
-  if(!ev)return null;
-  var beta=typeof ev.beta==="number"?ev.beta:0;
-  var gamma=typeof ev.gamma==="number"?ev.gamma:0;
-  if(Math.abs(beta)>32||Math.abs(gamma)>28)return "tilt";
-  if(typeof ev.webkitCompassHeading==="number"&&!Number.isNaN(ev.webkitCompassHeading))return ev.webkitCompassHeading;
-  if(typeof ev.alpha==="number"&&!Number.isNaN(ev.alpha))return (360-ev.alpha+360)%360;
-  return null;
-}
-function darQiblaSetMode(mode){
-  var root=document.getElementById("darQiblaPop");
-  if(!root)return;
-  root.classList.toggle("is-searching",mode==="search");
-  root.classList.toggle("is-near",mode==="near");
-  root.classList.toggle("is-locked",mode==="lock");
-}
-function darQiblaLivePaint(extraStatus){
+function darQiblaTick(){
+  if(darQiblaLive.phase!=="open"&&darQiblaLive.phase!=="opening")return;
+  var native=darQiblaNativeHeading();
+  if(native!=null){
+    darQiblaLive.source="native";
+    darQiblaAcceptHeading(native,performance.now());
+  }
   var dial=document.getElementById("darQiblaDial");
-  var petal=document.getElementById("darQiblaPetal");
   var degEl=document.getElementById("darQiblaDeg");
   var status=document.getElementById("darQiblaStatus");
-  var b=((Number(darQiblaLive.bearing)||0)+360)%360;
-  var h=darQiblaLive.heading;
-  if(typeof h==="number")h=((h+360)%360);
-  if(dial)dial.setAttribute("transform","rotate("+(-(typeof h==="number"?h:0))+" 160 160)");
-  if(petal)petal.setAttribute("transform","rotate("+b+" 160 160)");
+  var root=document.getElementById("darQiblaPop");
+  var b=darQiblaNorm(darQiblaLive.bearing);
   if(degEl)degEl.textContent=Math.round(b)+"°";
-  if(extraStatus==="tilt"){
-    darQiblaSetMode("search");
-    if(status)status.textContent="Flach halten — nur waagrecht suchen";
-    return;
+  if(darQiblaLive.targetU!=null){
+    if(darQiblaLive.displayU==null)darQiblaLive.displayU=darQiblaLive.targetU;
+    var d=darQiblaLive.targetU-darQiblaLive.displayU;
+    var ad=Math.abs(d);
+    var a=ad>12?0.42:ad>3?0.28:0.16;
+    if(ad<0.35)darQiblaLive.displayU=darQiblaLive.targetU;
+    else darQiblaLive.displayU+=d*a;
+    if(dial)dial.setAttribute("transform","rotate("+(-darQiblaLive.displayU)+" 160 160)");
   }
-  if(typeof h!=="number"){
-    darQiblaSetMode("search");
-    if(status)status.textContent="Suche… Handy flach halten";
-    darQiblaLive.locked=false;
-    return;
-  }
-  var turn=((b-h+360)%360);
-  var delta=Math.min(Math.abs(turn),360-Math.abs(turn));
-  if(delta<=6){
-    if(!darQiblaLive.locked){
-      darQiblaLive.locked=true;
+  var heading=darQiblaLive.rawHeading;
+  if(typeof heading==="number"){
+    var off=Math.abs(darQiblaDelta(heading,b));
+    if(!darQiblaLive.aligned&&off<=2.5){
+      darQiblaLive.aligned=true;
       try{if(typeof triggerLightHapticFeedback==="function")triggerLightHapticFeedback()}catch(e){}
+    }else if(darQiblaLive.aligned&&off>4){
+      darQiblaLive.aligned=false;
     }
-    darQiblaSetMode("lock");
-    if(status)status.textContent="Qibla gefunden";
-  }else if(delta<=18){
-    darQiblaLive.locked=false;
-    darQiblaSetMode("near");
-    if(status)status.textContent="Fast da";
-  }else{
-    darQiblaLive.locked=false;
-    darQiblaSetMode("search");
-    if(status)status.textContent="Drehe waagrecht, bis Gold oben ist";
   }
+  if(root)root.classList.toggle("is-locked",!!darQiblaLive.aligned);
+  if(status){
+    if(typeof heading!=="number")status.textContent="Suche… Handy flach halten";
+    else if(darQiblaLive.aligned)status.textContent="Qibla gefunden";
+    else status.textContent="Ausrichten";
+  }
+  darQiblaLive.raf=requestAnimationFrame(darQiblaTick);
 }
 function darQiblaApplyLoc(lat,lon,city){
   try{
@@ -25600,7 +25631,6 @@ function darQiblaApplyLoc(lat,lon,city){
   darQiblaLive.bearing=typeof qiblaBearing==="function"?qiblaBearing(lat,lon):0;
   var cityEl=document.getElementById("darQiblaCity");
   if(cityEl&&city)cityEl.textContent=city;
-  darQiblaLivePaint();
 }
 function darQiblaSvg(){
   var ticks="", nums="";
@@ -25619,32 +25649,50 @@ function darQiblaSvg(){
     var x=160+Math.cos(rad)*r;
     var y=160+Math.sin(rad)*r;
     if(card[n]){
-      nums+='<text x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" text-anchor="middle" dominant-baseline="middle" fill="#fff6d2" font-family="Georgia,serif" font-size="15" font-weight="700" letter-spacing="1.5">'+card[n]+'</text>';
+      nums+='<text x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" text-anchor="middle" dominant-baseline="middle" fill="#fff6d2" font-family="Georgia,serif" font-size="15" font-weight="700">'+card[n]+'</text>';
     }else{
       nums+='<text x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" text-anchor="middle" dominant-baseline="middle" fill="#e8d7a0" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="800">'+n+'</text>';
     }
   }
-  return ''+
-    '<svg class="dq-svg" viewBox="0 0 320 320" width="320" height="320" aria-hidden="true">'+
-      '<defs>'+
-        '<radialGradient id="dqGlow" cx="50%" cy="42%" r="58%"><stop offset="0%" stop-color="rgba(239,215,142,.22)"/><stop offset="70%" stop-color="rgba(12,10,8,.96)"/></radialGradient>'+
-        '<linearGradient id="dqPetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fffce6"/><stop offset="38%" stop-color="#efd78e"/><stop offset="100%" stop-color="rgba(239,215,142,0)"/></linearGradient>'+
-        '<filter id="dqBloom"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'+
-      '</defs>'+
-      '<circle cx="160" cy="160" r="154" fill="none" stroke="rgba(239,215,142,.28)" stroke-width="1.2"/>'+
-      '<circle cx="160" cy="160" r="146" fill="url(#dqGlow)" stroke="rgba(239,215,142,.5)" stroke-width="1.6"/>'+
-      '<polygon points="160,10 166,22 154,22" fill="#fff6d2" filter="url(#dqBloom)"/>'+
-      '<g id="darQiblaDial">'+ticks+nums+
-        '<g id="darQiblaPetal" filter="url(#dqBloom)">'+
-          '<path d="M160 28 L172 78 L163 132 L157 132 L148 78 Z" fill="url(#dqPetal)"/>'+
-          '<circle cx="160" cy="30" r="5.5" fill="#fff8dc"/>'+
-        '</g>'+
-      '</g>'+
-      '<circle cx="160" cy="160" r="26" fill="#14110d" stroke="rgba(239,215,142,.55)" stroke-width="1.4"/>'+
-      '<text x="160" y="168" text-anchor="middle" font-size="22">🕋</text>'+
-    '</svg>';
+  return '<svg class="dq-svg" viewBox="0 0 320 320" width="320" height="320" aria-hidden="true">'+
+    '<defs><radialGradient id="dqGlow" cx="50%" cy="42%" r="58%"><stop offset="0%" stop-color="rgba(239,215,142,.22)"/><stop offset="70%" stop-color="rgba(12,10,8,.96)"/></radialGradient></defs>'+
+    '<circle cx="160" cy="160" r="154" fill="none" stroke="rgba(239,215,142,.28)" stroke-width="1.2"/>'+
+    '<circle cx="160" cy="160" r="146" fill="url(#dqGlow)" stroke="rgba(239,215,142,.5)" stroke-width="1.6"/>'+
+    '<polygon points="160,10 166,22 154,22" fill="#fff6d2"/>'+
+    '<g id="darQiblaDial">'+ticks+nums+'</g>'+
+    '<circle cx="160" cy="160" r="26" fill="#14110d" stroke="rgba(239,215,142,.55)" stroke-width="1.4"/>'+
+    '<text x="160" y="168" text-anchor="middle" font-size="22">🕋</text>'+
+  '</svg>';
 }
-async function darQiblaLiveBoot(orientPromise){
+function darQiblaStartCompass(){
+  if(darQiblaLive.headingHandler||darQiblaLive.raf)return;
+  if(darQiblaLive.lastHeading!=null){
+    darQiblaLive.rawHeading=darQiblaLive.lastHeading;
+    darQiblaLive.targetU=darQiblaLive.lastHeading;
+    darQiblaLive.displayU=darQiblaLive.lastHeading;
+  }
+  if(darQiblaNativeHeading()==null && !darQiblaLive.headingHandler){
+    darQiblaLive.headingHandler=darQiblaWebHeading;
+    window.addEventListener("deviceorientation",darQiblaWebHeading,true);
+  }
+  if(!darQiblaLive.visHandler){
+    darQiblaLive.visHandler=function(){
+      if(document.visibilityState==="hidden"){
+        if(darQiblaLive.raf){cancelAnimationFrame(darQiblaLive.raf);darQiblaLive.raf=0}
+        if(darQiblaLive.headingHandler){
+          window.removeEventListener("deviceorientation",darQiblaLive.headingHandler,true);
+          darQiblaLive.headingHandler=null;
+        }
+      }else if(darQiblaLive.phase==="open"||darQiblaLive.phase==="opening"){
+        darQiblaLive.source=null;darQiblaLive.lastStamp=0;
+        darQiblaStartCompass();
+      }
+    };
+    document.addEventListener("visibilitychange",darQiblaLive.visHandler);
+  }
+  if(!darQiblaLive.raf)darQiblaLive.raf=requestAnimationFrame(darQiblaTick);
+}
+function darQiblaLiveBoot(orientPromise){
   var status=document.getElementById("darQiblaStatus");
   var s=typeof getPrayerSettings==="function"?getPrayerSettings():{};
   try{
@@ -25656,59 +25704,53 @@ async function darQiblaLiveBoot(orientPromise){
   if(typeof hasPrayerLocation==="function"?hasPrayerLocation(s):Number.isFinite(Number(s&&s.lat))){
     darQiblaApplyLoc(s.lat,s.lon,s.city);
   }
-  try{
-    if(typeof requestBrowserPosition==="function"){
-      var pos=await requestBrowserPosition();
+  Promise.resolve(orientPromise).catch(function(){}).then(function(){darQiblaStartCompass()});
+  if(typeof requestBrowserPosition==="function"){
+    requestBrowserPosition().then(function(pos){
       var lat=pos.coords.latitude,lon=pos.coords.longitude;
       var city=s.city;
-      try{if(typeof reversePrayerCity==="function")city=await reversePrayerCity(lat,lon)}catch(e){}
-      darQiblaApplyLoc(lat,lon,city);
-    }
-  }catch(e){
-    if(status&&!(s&&s.lat))status.textContent="Standort erlauben, dann startet die Suche.";
-  }
-  try{await orientPromise}catch(e){}
-  darQiblaLive.headingHandler=function(ev){
-    var h=darQiblaLiveHeading(ev);
-    if(h==="tilt"){darQiblaLivePaint("tilt");return;}
-    if(typeof h!=="number")return;
-    darQiblaLive.heading=h;
-    darQiblaLivePaint();
-  };
-  window.addEventListener("deviceorientation",darQiblaLive.headingHandler,true);
-  window.addEventListener("deviceorientationabsolute",darQiblaLive.headingHandler,true);
-  if(navigator.geolocation&&navigator.geolocation.watchPosition){
-    darQiblaLive.watchId=navigator.geolocation.watchPosition(function(pos){
-      var lat=pos.coords.latitude,lon=pos.coords.longitude;
-      darQiblaApplyLoc(lat,lon,null);
-      if(typeof reversePrayerCity==="function"){
-        reversePrayerCity(lat,lon).then(function(city){darQiblaApplyLoc(lat,lon,city)}).catch(function(){});
-      }
-    },function(){},{enableHighAccuracy:true,maximumAge:2500,timeout:10000});
+      var apply=function(c){darQiblaApplyLoc(lat,lon,c||city)};
+      if(typeof reversePrayerCity==="function") reversePrayerCity(lat,lon).then(apply).catch(function(){apply(city)});
+      else apply(city);
+    }).catch(function(){
+      if(status&&!(s&&s.lat))status.textContent="Standort erlauben, dann startet die Suche.";
+    });
   }
 }
 function openQiblaQuickSheet(){
+  if(darQiblaLive.phase==="opening"||darQiblaLive.phase==="open")return;
+  if(darQiblaLive.phase==="closing")return;
   try{if(typeof triggerLightHapticFeedback==="function")triggerLightHapticFeedback()}catch(e){}
-  closeQiblaQuickSheet();
-  darQiblaLive.heading=null;darQiblaLive.bearing=0;darQiblaLive.locked=false;
   var orientP=Promise.resolve("ok");
   try{
     if(window.DeviceOrientationEvent&&typeof DeviceOrientationEvent.requestPermission==="function"){
       orientP=DeviceOrientationEvent.requestPermission();
     }
   }catch(e){}
-  try{if(screen.orientation&&screen.orientation.lock)screen.orientation.lock("portrait").catch(function(){})}catch(e){}
+  darQiblaLive.phase="opening";
+  darQiblaLive.aligned=false;
+  darQiblaLive.rawHeading=null;
+  darQiblaLive.targetU=null;
+  darQiblaLive.displayU=darQiblaLive.lastHeading;
+  darQiblaLive.lastStamp=0;
+  darQiblaLive.source=null;
   var root=document.createElement("div");
   root.id="darQiblaPop";
-  root.className="is-searching";
-  root.innerHTML='<div class="dq-frame"><div class="dq-bar"><div><p class="dq-kicker">Qibla</p><h3 class="dq-title">Suche</h3></div><button type="button" class="dq-x" data-qibla-live-close aria-label="Schließen">×</button></div>'+darQiblaSvg()+'<p class="dq-deg" id="darQiblaDeg">—°</p><p class="dq-city" id="darQiblaCity">Suche…</p><p class="dq-status" id="darQiblaStatus">Live-Suche startet…</p><p class="dq-hint">Nur waagrecht. Die goldene Spitze zeigt zur Kaaba — drehe, bis sie unter der Kerbe steht.</p></div>';
+  root.innerHTML='<div class="dq-frame"><div class="dq-bar"><div><p class="dq-kicker">Qibla</p><h3 class="dq-title">Suche</h3></div><button type="button" class="dq-x" data-qibla-live-close aria-label="Schließen">×</button></div>'+darQiblaSvg()+'<p class="dq-deg" id="darQiblaDeg">—°</p><p class="dq-city" id="darQiblaCity">Suche…</p><p class="dq-status" id="darQiblaStatus">Live-Suche startet…</p><p class="dq-hint">Die Kerbe oben markiert die Blickrichtung. Drehe, bis die Qibla dort steht.</p></div>';
   document.body.appendChild(root);
   document.documentElement.classList.add("dar-qibla-pop-open");
   document.body.classList.add("dar-qibla-pop-open");
-  darQiblaKeepPortrait();
-  darQiblaLive.orientLock=darQiblaKeepPortrait;
-  window.addEventListener("orientationchange",darQiblaKeepPortrait);
-  window.addEventListener("resize",darQiblaKeepPortrait);
+  void root.offsetHeight;
+  requestAnimationFrame(function(){root.classList.add("is-open")});
+  darQiblaLive.openTimer=setTimeout(function(){if(darQiblaLive.phase==="opening")darQiblaLive.phase="open"},400);
+  var opened=false;
+  var markOpen=function(ev){
+    if(opened)return;
+    if(ev&&ev.target!==root)return;
+    opened=true;
+    if(darQiblaLive.phase==="opening")darQiblaLive.phase="open";
+  };
+  root.addEventListener("transitionend",markOpen);
   root.addEventListener("click",function(ev){if(ev.target===root)closeQiblaQuickSheet()});
   var closeBtn=root.querySelector("[data-qibla-live-close]");
   if(closeBtn)closeBtn.onclick=function(ev){ev.preventDefault();ev.stopPropagation();closeQiblaQuickSheet()};
@@ -27494,7 +27536,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1023";
+const APP_BUILD_ID="app-shell-v1024";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
