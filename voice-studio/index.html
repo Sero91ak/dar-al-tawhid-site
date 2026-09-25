@@ -11,7 +11,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="DĀR Voice Studio">
 <meta name="description" content="Private Sprachproduktion für DĀR AL TAWḤĪD Kids">
-<link rel="manifest" href="manifest.webmanifest?v=5">
+<link rel="manifest" href="manifest.webmanifest?v=6">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="icon" href="/app-icon-192.png">
 <title>DĀR AL TAWḤĪD – Voice Studio</title>
@@ -434,7 +434,7 @@ input{
     <div class="section-title">Audio-Vorschau</div>
     <audio id="player" controls></audio>
     <div id="downloadRow" class="download-row">
-      <a id="wavLink" class="btn secondary" download="dar-serhat-voice.mp3">MP3 speichern</a>
+      <a id="wavLink" class="btn secondary" download="dar-serhat-voice.wav">WAV speichern</a>
       <button id="qaConfirmBtn" class="btn secondary">Aussprache bestätigen</button>
     </div>
   </div>
@@ -447,7 +447,7 @@ input{
       <div class="profile-box"><small>Stimme</small><strong>Serhat</strong></div>
       <div class="profile-box"><small>Profil</small><strong>warm · klar</strong></div>
       <div class="profile-box"><small>Sprache</small><strong>Deutsch + Arabisch</strong></div>
-      <div class="profile-box"><small>Ausgabe</small><strong>Cloud MP3</strong></div>
+      <div class="profile-box"><small>Engine</small><strong>Chatterbox V3 · MPS</strong></div>
     </div>
   </section>
 
@@ -455,7 +455,7 @@ input{
     <div class="side-title">Qualitätsprüfung</div>
     <div class="qa">
       <div class="qa-item"><span>Aussprachebibliothek</span><b id="qaLex" class="warn">lädt</b></div>
-      <div class="qa-item"><span>Cloud Engine</span><b id="qaEngine" class="warn">prüfen</b></div>
+      <div class="qa-item"><span>Serhat Engine</span><b id="qaEngine" class="warn">prüfen</b></div>
       <div class="qa-item"><span>LOCKED-Begriffe</span><b id="qaLocked" class="warn">–</b></div>
       <div class="qa-item"><span>Audio vorhanden</span><b id="qaAudio" class="warn">nein</b></div>
       <div class="qa-item"><span>Aussprache bestätigt</span><b id="qaConfirmed" class="warn">nein</b></div>
@@ -464,13 +464,15 @@ input{
 
   <section class="side-section">
     <div class="side-title">Kids-App</div>
-    <div class="notice">Audio zuerst erzeugen, anhören und die Aussprache bestätigen. Danach kannst du die fertige MP3 direkt speichern. Die automatische Kids-App-Ablage wird separat an den Audio-Speicher angebunden.</div>
+    <div class="notice">Audio zuerst erzeugen, anhören und die Aussprache bestätigen. Danach kannst du die fertige WAV direkt speichern. Die automatische Kids-App-Ablage wird separat an den Audio-Speicher angebunden.</div>
   </section>
 
-  <section class="side-section">
-    <div class="side-title">Cloud-Verbindung</div>
-    <button id="healthBtn" class="btn quiet" style="width:100%">Verbindung erneut prüfen</button>
-    <div class="notice" style="margin-top:9px">Die Voice Engine läuft serverseitig. Mac, iPhone und iPad benötigen keine lokale 127.0.0.1-Verbindung mehr.</div>
+  <section id="engineSetupSection" class="side-section">
+    <div class="side-title">Serhat Engine</div>
+    <button id="startEngineBtn" class="btn primary" style="width:100%;margin-bottom:8px">Engine starten</button>
+    <a id="installEngineBtn" class="btn secondary" style="width:100%;text-decoration:none;display:flex;align-items:center;justify-content:center" href="/voice-studio/install-mac.command" download="DĀR-Voice-Studio-install.command">Einmal auf Mac einrichten</a>
+    <button id="healthBtn" class="btn quiet" style="width:100%;margin-top:8px">Verbindung erneut prüfen</button>
+    <div id="engineHelp" class="notice" style="margin-top:9px">Beim ersten Mal „Einmal auf Mac einrichten“ laden und die Datei mit Rechtsklick → Öffnen starten. Danach startet die Serhat Engine automatisch mit dem Mac.</div>
   </section>
   <div id="error" class="bad" style="font-size:11px;line-height:1.5"></div>
 </aside>
@@ -486,7 +488,7 @@ input{
 
 <script>
 const LOCKED=new Set(["DĀR AL TAWḤĪD","Dār al-Tawḥīd","Allāh","Qurʾān","Tawḥīd","ʿAqīdah","Ḥadīṯ","Ṣaḥābah","Duʿāʾ","Ṣalāh","Muḥammad","Ibrāhīm","Mūsā"]);
-const CLOUD_API="https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api";
+const LOCAL_API="http://127.0.0.1:8787";
 let library={rules:[]},buckets=new Map(),lastAudio=null,engineOK=false,qaConfirmed=false,deferredInstall=null;
 const $=s=>document.querySelector(s);
 
@@ -495,6 +497,16 @@ function setMessage(text,type="bad"){
   const el=$("#error");
   el.textContent=text||"";
   el.className=text?(type==="good"?"good":type==="warn"?"warn":"bad"):"";
+}
+function localRequest(path,options={}){
+  const url=LOCAL_API+path;
+  const base={...options,mode:"cors",cache:"no-store"};
+  try{
+    const req=new Request(url,{...base,targetAddressSpace:"loopback"});
+    return fetch(req);
+  }catch(_){
+    return fetch(url,base);
+  }
 }
 function buildBuckets(rules){
   const m=new Map();
@@ -559,13 +571,13 @@ function renderAnalysis(){
 }
 async function manualAnalyze(){
   renderAnalysis();
-  const btns=[$("#analyzeBtn"),$("#mobileAnalyzeBtn")];
+  const btns=[$("#analyzeBtn"),$("#mobileAnalyzeBtn")].filter(Boolean);
   const labels=btns.map(b=>b.textContent);
   btns.forEach(b=>{b.disabled=true;b.textContent="Geprüft ✓"});
-  setMessage("Ausspracheanalyse wurde aktualisiert.","good");
+  setMessage("Ausspracheanalyse aktualisiert.","good");
   setTimeout(()=>{
     btns.forEach((b,i)=>{b.disabled=false;b.textContent=labels[i]});
-    if($("#error").textContent==="Ausspracheanalyse wurde aktualisiert.")setMessage("");
+    if($("#error").textContent==="Ausspracheanalyse aktualisiert.")setMessage("");
   },900);
 }
 async function loadLibrary(){
@@ -583,31 +595,51 @@ async function loadLibrary(){
     setMessage("Aussprachebibliothek konnte nicht geladen werden: "+e.message);
   }
 }
-async function checkHealth(){
-  engineOK=false;
-  $("#engineLabel").textContent="Cloud Engine wird geprüft …";
-  $("#engineDot").className="dot";
-  $("#qaEngine").textContent="prüft";
-  $("#qaEngine").className="warn";
-  try{
-    const r=await fetch(CLOUD_API+"/health",{cache:"no-store",mode:"cors"});
-    const d=await r.json().catch(()=>({}));
-    engineOK=!!d.ok;
-    $("#engineLabel").textContent=engineOK?(d.provider||"Cloud Engine")+" bereit":"Cloud Engine nicht bereit";
-    $("#engineDot").className="dot "+(engineOK?"ok":"bad");
-    $("#qaEngine").textContent=engineOK?"bereit":"nicht bereit";
-    $("#qaEngine").className=engineOK?"good":"bad";
-    if(engineOK)setMessage("");
-    else setMessage(d.error||"Cloud Voice ist serverseitig noch nicht verbunden.");
-  }catch(e){
-    $("#engineLabel").textContent="Cloud Engine offline";
-    $("#engineDot").className="dot bad";
-    $("#qaEngine").textContent="offline";
-    $("#qaEngine").className="bad";
-    setMessage("Cloud Voice Engine nicht erreichbar. Bitte Verbindung erneut prüfen.");
+function updateEngineUI(data){
+  engineOK=!!data?.ok;
+  $("#engineLabel").textContent=engineOK?"Serhat Engine bereit":"Engine nicht gestartet";
+  $("#engineDot").className="dot "+(engineOK?"ok":"bad");
+  $("#qaEngine").textContent=engineOK?"bereit":"offline";
+  $("#qaEngine").className=engineOK?"good":"bad";
+  $("#startEngineBtn").textContent=engineOK?"Engine läuft":"Engine starten";
+  $("#startEngineBtn").disabled=engineOK;
+  $("#engineHelp").textContent=engineOK
+    ?("Eigene Stimme aktiv · "+(data.provider||"Chatterbox V3")+" · Referenz geladen")
+    :"Engine ist auf diesem Mac noch nicht erreichbar. Einmal einrichten oder starten.";
+}
+async function checkHealth({quiet=false}={}){
+  if(!quiet){
+    $("#engineLabel").textContent="Engine wird geprüft …";
+    $("#engineDot").className="dot";
+    $("#qaEngine").textContent="prüft";
+    $("#qaEngine").className="warn";
   }
-  updateQA();
-  return engineOK;
+  try{
+    const r=await localRequest("/health");
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||!d.ok)throw Error(d.error||"Engine nicht bereit");
+    updateEngineUI(d);
+    if(!quiet)setMessage("");
+    return true;
+  }catch(_){
+    updateEngineUI({ok:false});
+    if(!quiet)setMessage("Serhat Engine ist noch nicht gestartet. Klicke rechts auf „Engine starten“; beim ersten Mal vorher „Einmal auf Mac einrichten“.","warn");
+    return false;
+  }
+}
+async function startEngine(){
+  setMessage("Serhat Engine wird gestartet …","warn");
+  $("#startEngineBtn").disabled=true;
+  try{ window.location.href="darvoice://start"; }catch(_){}
+  for(let i=0;i<18;i++){
+    await new Promise(r=>setTimeout(r,900));
+    if(await checkHealth({quiet:true})){
+      setMessage("Serhat Engine ist bereit.","good");
+      return;
+    }
+  }
+  $("#startEngineBtn").disabled=false;
+  setMessage("Die Engine konnte nicht automatisch gestartet werden. Falls sie noch nie eingerichtet wurde, klicke auf „Einmal auf Mac einrichten“.","warn");
 }
 function updateQA(){
   const audio=!!lastAudio;
@@ -616,24 +648,22 @@ function updateQA(){
 }
 async function generate(){
   resetAudioQA();
-  const btns=[$("#generateBtn"),$("#mobileGenerateBtn")];
+  const btns=[$("#generateBtn"),$("#mobileGenerateBtn")].filter(Boolean);
   const old=btns.map(b=>b.textContent);
   btns.forEach(b=>{b.disabled=true;b.textContent="Wird erzeugt …"});
   setMessage("");
   try{
     if(!engineOK){
       const ok=await checkHealth();
-      if(!ok)throw Error("Cloud Engine ist noch nicht bereit.");
+      if(!ok)throw Error("Serhat Engine ist offline. Bitte zuerst rechts „Engine starten“.");
     }
     const text=$("#text").value.trim();
     if(!text)throw Error("Bitte zuerst einen Text eingeben.");
     const analysis=analyze(text);
-    const r=await fetch(CLOUD_API+"/generate",{
+    const r=await localRequest("/generate",{
       method:"POST",
-      mode:"cors",
-      cache:"no-store",
       headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({text,prepared:analysis.prepared,voice:"Serhat"})
+      body:JSON.stringify({text,prepared:analysis.prepared,voice:"Serhat",format:"wav"})
     });
     if(!r.ok){
       let e={};
@@ -647,14 +677,12 @@ async function generate(){
     $("#player").src=url;
     $("#playerWrap").hidden=false;
     $("#wavLink").href=url;
-    const type=(blob.type||r.headers.get("Content-Type")||"audio/mpeg").toLowerCase();
-    const ext=type.includes("wav")?"wav":"mp3";
-    $("#wavLink").download="dar-serhat-voice."+ext;
-    $("#wavLink").textContent=ext.toUpperCase()+" speichern";
+    $("#wavLink").download="dar-serhat-voice.wav";
+    $("#wavLink").textContent="WAV speichern";
     $("#qaLocked").textContent="anhören & bestätigen";
     $("#qaLocked").className="warn";
     updateQA();
-    setMessage("Audio wurde erzeugt. Bitte anhören und anschließend die Aussprache bestätigen.","good");
+    setMessage("Audio wurde mit deiner Serhat-Stimme erzeugt. Bitte anhören und die Aussprache bestätigen.","good");
     $("#player").play().catch(()=>{});
     $("#playerWrap").scrollIntoView({behavior:"smooth",block:"nearest"});
   }catch(e){
@@ -673,7 +701,7 @@ function confirmQA(){
   $("#qaConfirmed").className="good";
   $("#qaLocked").textContent="bestätigt";
   $("#qaLocked").className="good";
-  setMessage("Aussprache bestätigt. Die fertige Audiodatei kann jetzt gespeichert werden.","good");
+  setMessage("Aussprache bestätigt. Die WAV kann jetzt gespeichert werden.","good");
 }
 
 $("#text").addEventListener("input",()=>{resetAudioQA();renderAnalysis()});
@@ -681,7 +709,8 @@ $("#analyzeBtn").onclick=manualAnalyze;
 $("#mobileAnalyzeBtn").onclick=manualAnalyze;
 $("#generateBtn").onclick=generate;
 $("#mobileGenerateBtn").onclick=generate;
-$("#healthBtn").onclick=checkHealth;
+$("#healthBtn").onclick=()=>checkHealth();
+$("#startEngineBtn").onclick=startEngine;
 $("#qaConfirmBtn").onclick=confirmQA;
 
 const isStandalone=window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;
@@ -704,7 +733,7 @@ if("serviceWorker" in navigator){
   window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js",{scope:"/voice-studio/"}).catch(()=>{}));
 }
 loadLibrary();
-checkHealth();
+checkHealth({quiet:true});
 </script>
 </body>
 </html>

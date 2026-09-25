@@ -1,5 +1,9 @@
 {
-  "version": "1.0.4",
-  "updatedAt": "2026-09-25T11:20:00+02:00",
-  "deployTrigger": "voice-studio-clean-deploy"
+  "version": "1.1.0",
+  "updatedAt": "2026-09-25T11:32:00+02:00",
+  "deployTrigger": "voice-studio-clean-deploy",
+  "engine": "local-chatterbox-v3",
+  "provider": "self-produced",
+  "cache": "dar-voice-studio-v6",
+  "localInstaller": "/voice-studio/install-mac.command"
 }

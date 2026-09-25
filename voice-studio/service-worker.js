@@ -4,6 +4,8 @@ const SHELL=[
   "/voice-studio/index.html",
   "/voice-studio/manifest.webmanifest",
   "/voice-studio/version.json",
+  "/voice-studio/install-mac.command",
+  "/voice-studio/local-engine.py",
   "/data/pronunciation/pronunciation-rules.json",
   "/watermark-my-logo-full.png",
   "/app-icon-192.png",
