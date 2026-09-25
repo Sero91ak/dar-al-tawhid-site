@@ -11,7 +11,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="DĀR Voice Studio">
 <meta name="description" content="Private Sprachproduktion für DĀR AL TAWḤĪD Kids">
-<link rel="manifest" href="manifest.webmanifest?v=4">
+<link rel="manifest" href="manifest.webmanifest?v=5">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="icon" href="/app-icon-192.png">
 <title>DĀR AL TAWḤĪD – Voice Studio</title>
@@ -434,7 +434,7 @@ input{
     <div class="section-title">Audio-Vorschau</div>
     <audio id="player" controls></audio>
     <div id="downloadRow" class="download-row">
-      <a id="wavLink" class="btn secondary" download="dar-voice.wav">WAV speichern</a>
+      <a id="wavLink" class="btn secondary" download="dar-serhat-voice.mp3">MP3 speichern</a>
       <button id="qaConfirmBtn" class="btn secondary">Aussprache bestätigen</button>
     </div>
   </div>
@@ -447,7 +447,7 @@ input{
       <div class="profile-box"><small>Stimme</small><strong>Serhat</strong></div>
       <div class="profile-box"><small>Profil</small><strong>warm · klar</strong></div>
       <div class="profile-box"><small>Sprache</small><strong>Deutsch + Arabisch</strong></div>
-      <div class="profile-box"><small>Master</small><strong>−16 LUFS</strong></div>
+      <div class="profile-box"><small>Ausgabe</small><strong>Cloud MP3</strong></div>
     </div>
   </section>
 
@@ -455,7 +455,7 @@ input{
     <div class="side-title">Qualitätsprüfung</div>
     <div class="qa">
       <div class="qa-item"><span>Aussprachebibliothek</span><b id="qaLex" class="warn">lädt</b></div>
-      <div class="qa-item"><span>Lokale Engine</span><b id="qaEngine" class="warn">prüfen</b></div>
+      <div class="qa-item"><span>Cloud Engine</span><b id="qaEngine" class="warn">prüfen</b></div>
       <div class="qa-item"><span>LOCKED-Begriffe</span><b id="qaLocked" class="warn">–</b></div>
       <div class="qa-item"><span>Audio vorhanden</span><b id="qaAudio" class="warn">nein</b></div>
       <div class="qa-item"><span>Aussprache bestätigt</span><b id="qaConfirmed" class="warn">nein</b></div>
@@ -463,20 +463,14 @@ input{
   </section>
 
   <section class="side-section">
-    <button id="publishBtn" class="btn secondary" style="width:100%" disabled>Für Kids-App veröffentlichen</button>
-    <div class="notice" style="margin-top:9px">Veröffentlichung bleibt gesperrt, bis Audio vorhanden und die Aussprache bestätigt ist.</div>
+    <div class="side-title">Kids-App</div>
+    <div class="notice">Audio zuerst erzeugen, anhören und die Aussprache bestätigen. Danach kannst du die fertige MP3 direkt speichern. Die automatische Kids-App-Ablage wird separat an den Audio-Speicher angebunden.</div>
   </section>
 
   <section class="side-section">
-    <details>
-      <summary>Erweiterte Verbindung</summary>
-      <div class="advanced">
-        <label>Voice-Engine URL</label>
-        <input id="apiUrl" value="http://127.0.0.1:8787" autocapitalize="off" autocomplete="off">
-        <button id="healthBtn" class="btn quiet" style="width:100%;margin-top:8px">Engine erneut prüfen</button>
-        <div class="notice" style="margin-top:8px">Auf Smartphone/iPad wird später die geschützte Cloudflare-Tunnel-Adresse verwendet. Auf dem Mac kann die lokale Adresse bleiben.</div>
-      </div>
-    </details>
+    <div class="side-title">Cloud-Verbindung</div>
+    <button id="healthBtn" class="btn quiet" style="width:100%">Verbindung erneut prüfen</button>
+    <div class="notice" style="margin-top:9px">Die Voice Engine läuft serverseitig. Mac, iPhone und iPad benötigen keine lokale 127.0.0.1-Verbindung mehr.</div>
   </section>
   <div id="error" class="bad" style="font-size:11px;line-height:1.5"></div>
 </aside>
@@ -492,21 +486,53 @@ input{
 
 <script>
 const LOCKED=new Set(["DĀR AL TAWḤĪD","Dār al-Tawḥīd","Allāh","Qurʾān","Tawḥīd","ʿAqīdah","Ḥadīṯ","Ṣaḥābah","Duʿāʾ","Ṣalāh","Muḥammad","Ibrāhīm","Mūsā"]);
+const CLOUD_API="https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api";
 let library={rules:[]},buckets=new Map(),lastAudio=null,engineOK=false,qaConfirmed=false,deferredInstall=null;
 const $=s=>document.querySelector(s);
-const api=()=>$("#apiUrl").value.replace(/\/$/,"");
-
-$("#apiUrl").value=localStorage.getItem("darVoiceApi")||"http://127.0.0.1:8787";
-$("#apiUrl").addEventListener("change",()=>{localStorage.setItem("darVoiceApi",$("#apiUrl").value);checkHealth()});
 
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
-function buildBuckets(rules){const m=new Map();for(const r of rules){const k=[...String(r.string_to_replace||"")][0];if(!k)continue;if(!m.has(k))m.set(k,[]);m.get(k).push(r)}for(const a of m.values())a.sort((x,y)=>String(y.string_to_replace).length-String(x.string_to_replace).length);return m}
-function analyze(text){const c=[...text],found=[],out=[];let i=0;while(i<c.length){let h=null;for(const r of(buckets.get(c[i])||[])){const n=[...String(r.string_to_replace||"")];let ok=n.length&&i+n.length<=c.length;for(let j=0;ok&&j<n.length;j++)if(c[i+j]!==n[j])ok=false;if(ok){h={r,len:n.length};break}}if(!h){out.push(c[i++]);continue}out.push(h.r.alias||h.r.string_to_replace);found.push(h.r);i+=h.len}return{prepared:out.join(""),found}}
-
+function setMessage(text,type="bad"){
+  const el=$("#error");
+  el.textContent=text||"";
+  el.className=text?(type==="good"?"good":type==="warn"?"warn":"bad"):"";
+}
+function buildBuckets(rules){
+  const m=new Map();
+  for(const r of rules){
+    const k=[...String(r.string_to_replace||"")][0];
+    if(!k)continue;
+    if(!m.has(k))m.set(k,[]);
+    m.get(k).push(r);
+  }
+  for(const a of m.values())a.sort((x,y)=>String(y.string_to_replace).length-String(x.string_to_replace).length);
+  return m;
+}
+function analyze(text){
+  const c=[...text],found=[],out=[];
+  let i=0;
+  while(i<c.length){
+    let h=null;
+    for(const r of(buckets.get(c[i])||[])){
+      const n=[...String(r.string_to_replace||"")];
+      let ok=n.length&&i+n.length<=c.length;
+      for(let j=0;ok&&j<n.length;j++)if(c[i+j]!==n[j])ok=false;
+      if(ok){h={r,len:n.length};break}
+    }
+    if(!h){out.push(c[i++]);continue}
+    out.push(h.r.alias||h.r.string_to_replace);
+    found.push(h.r);
+    i+=h.len;
+  }
+  return{prepared:out.join(""),found};
+}
 function resetAudioQA(){
-  qaConfirmed=false;$("#qaConfirmed").textContent="nein";$("#qaConfirmed").className="warn";
+  qaConfirmed=false;
+  $("#qaConfirmed").textContent="nein";
+  $("#qaConfirmed").className="warn";
   if(lastAudio){URL.revokeObjectURL(lastAudio);lastAudio=null}
-  $("#playerWrap").hidden=true;updatePublish()
+  $("#player").removeAttribute("src");
+  $("#playerWrap").hidden=true;
+  updateQA();
 }
 function renderAnalysis(){
   const text=$("#text").value,a=analyze(text);
@@ -514,82 +540,171 @@ function renderAnalysis(){
   $("#words").textContent=(text.trim().match(/\S+/g)||[]).length;
   $("#charCounter").textContent=text.length.toLocaleString("de-DE")+" Zeichen";
   const unique=[],seen=new Set();
-  for(const r of a.found){const k=r.canonical||r.string_to_replace;if(!seen.has(k)){seen.add(k);unique.push(r)}}
+  for(const r of a.found){
+    const k=r.canonical||r.string_to_replace;
+    if(!seen.has(k)){seen.add(k);unique.push(r)}
+  }
   $("#terms").textContent=unique.length;
   const lc=unique.filter(r=>LOCKED.has(r.canonical)||LOCKED.has(r.string_to_replace)).length;
   $("#locked").textContent=lc;
-  $("#termList").innerHTML=unique.length?unique.map(r=>{const l=LOCKED.has(r.canonical)||LOCKED.has(r.string_to_replace);return'<span class="term '+(l?'locked':'verified')+'">'+esc(r.canonical||r.string_to_replace)+' · '+(l?'LOCKED':'VERIFIED')+'</span>'}).join(""):'<span class="term">Keine Bibliotheksbegriffe erkannt</span>';
+  $("#termList").innerHTML=unique.length
+    ?unique.map(r=>{
+      const l=LOCKED.has(r.canonical)||LOCKED.has(r.string_to_replace);
+      return '<span class="term '+(l?'locked':'verified')+'">'+esc(r.canonical||r.string_to_replace)+' · '+(l?'LOCKED':'VERIFIED')+'</span>';
+    }).join("")
+    :'<span class="term">Keine Bibliotheksbegriffe erkannt</span>';
   $("#qaLocked").textContent=lc?"Audio-QA erforderlich":"keine";
   $("#qaLocked").className=lc?"warn":"good";
-  updatePublish()
+  updateQA();
+}
+async function manualAnalyze(){
+  renderAnalysis();
+  const btns=[$("#analyzeBtn"),$("#mobileAnalyzeBtn")];
+  const labels=btns.map(b=>b.textContent);
+  btns.forEach(b=>{b.disabled=true;b.textContent="Geprüft ✓"});
+  setMessage("Ausspracheanalyse wurde aktualisiert.","good");
+  setTimeout(()=>{
+    btns.forEach((b,i)=>{b.disabled=false;b.textContent=labels[i]});
+    if($("#error").textContent==="Ausspracheanalyse wurde aktualisiert.")setMessage("");
+  },900);
 }
 async function loadLibrary(){
   try{
     const r=await fetch("/data/pronunciation/pronunciation-rules.json",{cache:"no-store"});
     if(!r.ok)throw Error("HTTP "+r.status);
-    library=await r.json();buckets=buildBuckets(library.rules||[]);
+    library=await r.json();
+    buckets=buildBuckets(library.rules||[]);
     $("#qaLex").textContent=(library.counts?.canonicalTerms||"?")+" / "+(library.counts?.rules||"?");
-    $("#qaLex").className="good";renderAnalysis()
-  }catch(e){$("#qaLex").textContent="Fehler";$("#qaLex").className="bad";$("#error").textContent="Aussprachebibliothek konnte nicht geladen werden: "+e.message}
+    $("#qaLex").className="good";
+    renderAnalysis();
+  }catch(e){
+    $("#qaLex").textContent="Fehler";
+    $("#qaLex").className="bad";
+    setMessage("Aussprachebibliothek konnte nicht geladen werden: "+e.message);
+  }
 }
 async function checkHealth(){
-  engineOK=false;$("#engineLabel").textContent="Engine wird geprüft …";$("#engineDot").className="dot";
+  engineOK=false;
+  $("#engineLabel").textContent="Cloud Engine wird geprüft …";
+  $("#engineDot").className="dot";
+  $("#qaEngine").textContent="prüft";
+  $("#qaEngine").className="warn";
   try{
-    const r=await fetch(api()+"/health",{cache:"no-store"});const d=await r.json();engineOK=!!d.ok;
-    $("#engineLabel").textContent=engineOK?((d.provider||"Engine")+" bereit"):"Engine nicht bereit";
+    const r=await fetch(CLOUD_API+"/health",{cache:"no-store",mode:"cors"});
+    const d=await r.json().catch(()=>({}));
+    engineOK=!!d.ok;
+    $("#engineLabel").textContent=engineOK?(d.provider||"Cloud Engine")+" bereit":"Cloud Engine nicht bereit";
     $("#engineDot").className="dot "+(engineOK?"ok":"bad");
-    $("#qaEngine").textContent=engineOK?"bereit":"nicht bereit";$("#qaEngine").className=engineOK?"good":"bad";
-    $("#error").textContent=engineOK?"":(d.error||"Lokale Engine ist nicht bereit.")
+    $("#qaEngine").textContent=engineOK?"bereit":"nicht bereit";
+    $("#qaEngine").className=engineOK?"good":"bad";
+    if(engineOK)setMessage("");
+    else setMessage(d.error||"Cloud Voice ist serverseitig noch nicht verbunden.");
   }catch(e){
-    $("#engineLabel").textContent="Engine offline";$("#engineDot").className="dot bad";
-    $("#qaEngine").textContent="offline";$("#qaEngine").className="bad";
-    $("#error").textContent="Voice Engine nicht erreichbar. Auf dem Mac zuerst die DĀR Voice Engine starten; auf Smartphone/iPad später die sichere Tunnel-Adresse verwenden."
+    $("#engineLabel").textContent="Cloud Engine offline";
+    $("#engineDot").className="dot bad";
+    $("#qaEngine").textContent="offline";
+    $("#qaEngine").className="bad";
+    setMessage("Cloud Voice Engine nicht erreichbar. Bitte Verbindung erneut prüfen.");
   }
-  updatePublish()
+  updateQA();
+  return engineOK;
 }
-function updatePublish(){
+function updateQA(){
   const audio=!!lastAudio;
-  $("#qaAudio").textContent=audio?"ja":"nein";$("#qaAudio").className=audio?"good":"warn";
-  $("#publishBtn").disabled=!(engineOK&&audio&&qaConfirmed)
+  $("#qaAudio").textContent=audio?"ja":"nein";
+  $("#qaAudio").className=audio?"good":"warn";
 }
 async function generate(){
   resetAudioQA();
-  const btns=[$("#generateBtn"),$("#mobileGenerateBtn")];btns.forEach(b=>{b.disabled=true;b.textContent="Wird erzeugt …"});
-  $("#error").textContent="";
+  const btns=[$("#generateBtn"),$("#mobileGenerateBtn")];
+  const old=btns.map(b=>b.textContent);
+  btns.forEach(b=>{b.disabled=true;b.textContent="Wird erzeugt …"});
+  setMessage("");
   try{
-    const r=await fetch(api()+"/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:$("#text").value,voice:"Serhat",format:"wav"})});
-    if(!r.ok){let e={};try{e=await r.json()}catch{}throw Error(e.error||("HTTP "+r.status))}
-    const blob=await r.blob(),url=URL.createObjectURL(blob);lastAudio=url;
-    $("#player").src=url;$("#playerWrap").hidden=false;$("#wavLink").href=url;
-    $("#qaLocked").textContent="anhören & bestätigen";$("#qaLocked").className="warn";
-    $("#player").play().catch(()=>{});updatePublish();$("#playerWrap").scrollIntoView({behavior:"smooth",block:"nearest"})
-  }catch(e){$("#error").textContent=e.message}
-  finally{btns.forEach(b=>{b.disabled=false;b.textContent="Audio erzeugen"})}
+    if(!engineOK){
+      const ok=await checkHealth();
+      if(!ok)throw Error("Cloud Engine ist noch nicht bereit.");
+    }
+    const text=$("#text").value.trim();
+    if(!text)throw Error("Bitte zuerst einen Text eingeben.");
+    const analysis=analyze(text);
+    const r=await fetch(CLOUD_API+"/generate",{
+      method:"POST",
+      mode:"cors",
+      cache:"no-store",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({text,prepared:analysis.prepared,voice:"Serhat"})
+    });
+    if(!r.ok){
+      let e={};
+      try{e=await r.json()}catch{}
+      throw Error(e.error||("Audio-Fehler HTTP "+r.status));
+    }
+    const blob=await r.blob();
+    if(!blob.size)throw Error("Die Engine hat eine leere Audiodatei geliefert.");
+    const url=URL.createObjectURL(blob);
+    lastAudio=url;
+    $("#player").src=url;
+    $("#playerWrap").hidden=false;
+    $("#wavLink").href=url;
+    const type=(blob.type||r.headers.get("Content-Type")||"audio/mpeg").toLowerCase();
+    const ext=type.includes("wav")?"wav":"mp3";
+    $("#wavLink").download="dar-serhat-voice."+ext;
+    $("#wavLink").textContent=ext.toUpperCase()+" speichern";
+    $("#qaLocked").textContent="anhören & bestätigen";
+    $("#qaLocked").className="warn";
+    updateQA();
+    setMessage("Audio wurde erzeugt. Bitte anhören und anschließend die Aussprache bestätigen.","good");
+    $("#player").play().catch(()=>{});
+    $("#playerWrap").scrollIntoView({behavior:"smooth",block:"nearest"});
+  }catch(e){
+    setMessage(e.message||String(e));
+  }finally{
+    btns.forEach((b,i)=>{b.disabled=false;b.textContent=old[i]});
+  }
 }
 function confirmQA(){
-  if(!lastAudio)return;
-  qaConfirmed=true;$("#qaConfirmed").textContent="bestätigt";$("#qaConfirmed").className="good";
-  $("#qaLocked").textContent="bestätigt";$("#qaLocked").className="good";updatePublish()
+  if(!lastAudio){
+    setMessage("Zuerst Audio erzeugen und anhören.");
+    return;
+  }
+  qaConfirmed=true;
+  $("#qaConfirmed").textContent="bestätigt";
+  $("#qaConfirmed").className="good";
+  $("#qaLocked").textContent="bestätigt";
+  $("#qaLocked").className="good";
+  setMessage("Aussprache bestätigt. Die fertige Audiodatei kann jetzt gespeichert werden.","good");
 }
 
 $("#text").addEventListener("input",()=>{resetAudioQA();renderAnalysis()});
-$("#analyzeBtn").onclick=renderAnalysis;$("#mobileAnalyzeBtn").onclick=renderAnalysis;
-$("#generateBtn").onclick=generate;$("#mobileGenerateBtn").onclick=generate;
-$("#healthBtn").onclick=checkHealth;$("#qaConfirmBtn").onclick=confirmQA;
-$("#publishBtn").onclick=()=>alert("R2/Access-Publish ist vorbereitet. Die Test-URL selbst wird vor dem produktiven Einsatz mit Cloudflare Access geschützt.");
+$("#analyzeBtn").onclick=manualAnalyze;
+$("#mobileAnalyzeBtn").onclick=manualAnalyze;
+$("#generateBtn").onclick=generate;
+$("#mobileGenerateBtn").onclick=generate;
+$("#healthBtn").onclick=checkHealth;
+$("#qaConfirmBtn").onclick=confirmQA;
 
 const isStandalone=window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;
 const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 if(isIOS&&!isStandalone){$("#installBtn").style.display="inline-flex";$("#installBtn").textContent="Als App nutzen"}
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstall=e;$("#installBtn").style.display="inline-flex"});
 $("#installBtn").onclick=async()=>{
-  if(deferredInstall){deferredInstall.prompt();await deferredInstall.userChoice;deferredInstall=null;$("#installBtn").style.display="none";return}
-  if(isIOS){alert("Auf iPhone/iPad: In Safari unten auf Teilen tippen und anschließend „Zum Home-Bildschirm“ wählen. Danach startet DĀR Voice Studio wie eine eigene App.")}
+  if(deferredInstall){
+    deferredInstall.prompt();
+    await deferredInstall.userChoice;
+    deferredInstall=null;
+    $("#installBtn").style.display="none";
+    return;
+  }
+  if(isIOS)alert("Auf iPhone/iPad: In Safari auf Teilen tippen und anschließend „Zum Home-Bildschirm“ wählen.");
 };
 window.addEventListener("appinstalled",()=>{$("#installBtn").style.display="none"});
 
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js",{scope:"/voice-studio/"}).catch(()=>{}))}
-loadLibrary();checkHealth();
+if("serviceWorker" in navigator){
+  window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js",{scope:"/voice-studio/"}).catch(()=>{}));
+}
+loadLibrary();
+checkHealth();
 </script>
 </body>
 </html>
