@@ -100,8 +100,8 @@ def prepare(text:str):
 def quran_guard(text:str):
     """Nur echte zusammenhängende arabische Passagen blockieren.
 
-    Einzelne arabische Fachbegriffe/Namen in einem deutschen Satz (z. B.
-    الله, الإسلام, القرآن, التوحيد) sind ausdrücklich erlaubt.
+    Einzelne arabische Fachbegriffe/Namen in einem deutschen Satz
+    sind ausdrücklich erlaubt.
     """
     value=str(text or "")
     arabic_chars=len(re.findall(r"[\u0600-\u06ff]",value))
@@ -111,7 +111,28 @@ def quran_guard(text:str):
     max_run=0
     run=0
     arabic_tokens=0
-    punctuation=re.compile(r'^[\.,،؛:!?؟…·\-–—()\[\]{}«»"“”„‘’]+
+    punctuation_chars=set('.,،؛:!?؟…·-–—()[]{}«»"“”„‘’')
+
+    for token in re.findall(r"\S+",value):
+        has_arabic=bool(re.search(r"[\u0600-\u06ff]",token))
+        has_latin=bool(re.search(r"[A-Za-zÀ-ÖØ-öø-ÿ]",token))
+        punctuation_only=bool(token) and all(ch in punctuation_chars for ch in token)
+
+        if has_arabic and not has_latin:
+            run+=1
+            arabic_tokens+=1
+            max_run=max(max_run,run)
+        elif punctuation_only:
+            continue
+        else:
+            run=0
+
+    letters=len(re.findall(r"[A-Za-zÀ-ÖØ-öø-ÿ\u0600-\u06ff]",value))
+    arabic_ratio=arabic_chars/max(1,letters)
+
+    if max_run>=4 or (arabic_ratio>=0.70 and arabic_tokens>=4):
+        raise ValueError("Zusammenhängende arabische Qurʾān-/Rezitationspassage erkannt. Verwende dafür echte Rezitation.")
+
 def choose_device():
     forced=str(os.environ.get("DAR_VOICE_DEVICE","")).strip().lower()
     if forced in ("mps","cpu"):
@@ -347,6 +368,10 @@ def generate(text:str,prepared:str=""):
     finally:
         RENDER_LOCK.release()
 
+class VoiceHTTPServer(ThreadingHTTPServer):
+    allow_reuse_address=True
+    daemon_threads=True
+
 class H(BaseHTTPRequestHandler):
     def cors(self):
         origin=self.headers.get("Origin","")
@@ -476,7 +501,7 @@ if __name__=="__main__":
     print("Referenz:",REF,flush=True)
     # Modell im Hintergrund vorladen; HTTP bleibt sofort erreichbar.
     threading.Thread(target=warm_model,daemon=True).start()
-    ThreadingHTTPServer((HOST,PORT),H).serve_forever()
+    VoiceHTTPServer((HOST,PORT),H).serve_forever()
 )
     for token in re.findall(r"\S+",value):
         has_arabic=bool(re.search(r"[\u0600-\u06ff]",token))
