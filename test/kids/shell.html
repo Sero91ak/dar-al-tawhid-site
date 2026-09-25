@@ -1118,7 +1118,7 @@ html,body{background:#06131f!important}
 
 /* HOME — clearer action hierarchy */
 #view-today .hero{
-  --art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=18");
+  --art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=19");
   min-height:clamp(292px,51vw,390px)!important;
   background:#102936!important;
 }
@@ -1440,7 +1440,7 @@ body{position:fixed!important;inset:0!important;touch-action:manipulation}
 .nav-btn[data-target="parents"] .ico{background-image:url("/test/kids/assets/kids-icons/parents-real-v12.png?v=1")!important}
 .picker-icon{background-image:url("/test/kids/assets/kids-icons/quran-real-v12.png?v=1")!important;background-size:76%!important}
 .icon-book{background-image:url("/test/kids/assets/kids-icons/quran-real-v12.png?v=1")!important}.icon-headphones,.icon-volume{background-image:url("/test/kids/assets/kids-icons/headphones-real-v12.png?v=1")!important}.icon-dua{background-image:url("/test/kids/assets/kids-icons/dua-real-v12.png?v=1")!important}.icon-star,.icon-spark{background-image:url("/test/kids/assets/kids-icons/spark-real-v12.png?v=1")!important}.icon-play{background-image:url("/test/kids/assets/kids-icons/play-real-v12.png?v=1")!important}.icon-mic{background-image:url("/test/kids/assets/kids-icons/mic-real-v12.png?v=1")!important}.icon-lock{background-image:url("/test/kids/assets/kids-icons/lock-real-v12.png?v=1")!important}.icon-moon{background-image:url("/test/kids/assets/kids-icons/moon-real-v12.png?v=1")!important}.icon-heart{background-image:url("/test/kids/assets/kids-icons/heart-real-v12.png?v=1")!important}.icon-library{background-image:url("/test/kids/assets/kids-icons/library-real-v12.png?v=1")!important}.icon-droplet{background-image:url("/test/kids/assets/kids-icons/water-real-v12.png?v=1")!important}.icon-cloud{background-image:url("/test/kids/assets/kids-icons/cloud-real-v12.png?v=1")!important}.icon-sun{background-image:url("/test/kids/assets/kids-icons/sun-real-v12.png?v=1")!important}.icon-settings,.icon-parents{background-image:url("/test/kids/assets/kids-icons/parents-real-v12.png?v=1")!important}.icon-home{background-image:url("/test/kids/assets/kids-icons/home-real-v12.png?v=1")!important}.icon-food{background-image:url("/test/kids/assets/kids-icons/food-real-v12.png?v=1")!important}.icon-speech{background-image:url("/test/kids/assets/kids-icons/speech-real-v12.png?v=1")!important}.icon-coin{background-image:url("/test/kids/assets/kids-icons/coin-real-v12.png?v=1")!important}.icon-palm{background-image:url("/test/kids/assets/kids-icons/palm-real-v12.png?v=1")!important}.icon-help{background-image:url("/test/kids/assets/kids-icons/help-real-v12.png?v=1")!important}.icon-door{background-image:url("/test/kids/assets/kids-icons/door-real-v12.png?v=1")!important}.icon-mosque{background-image:url("/test/kids/assets/kids-icons/mosque-real-v12.png?v=1")!important}.icon-shield{background-image:url("/test/kids/assets/kids-icons/shield-real-v12.png?v=1")!important}
-#view-today .hero{--art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=18")!important}
+#view-today .hero{--art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=19")!important}
 #view-today .hero::before{background-image:var(--art)!important;background-position:center!important;background-size:cover!important}
 /* KIDS_REAL_ASSET_ICON_FINAL_V11_END */
 
@@ -1884,7 +1884,7 @@ html,body{
   50%{transform:translateY(-12px) scale(1.08)}
 }
 #view-today .hero{
-  --art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=18")!important;
+  --art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=19")!important;
   display:flex;flex-direction:column;justify-content:flex-start;
   margin:calc(-1 * var(--safe-top)) -16px 0;
   width:calc(100% + 32px);
@@ -2015,7 +2015,8 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 @keyframes kidPop{0%{transform:scale(1)}42%{transform:scale(1.06)}100%{transform:scale(1)}}
 .quiz-scene-symbol,.knowledge-symbol .kid-icon,.dua-scene-symbol,.quiz-scene:after{display:none!important}
 
-.sky-sun,.sky-nightmoon{
+ .sky-sun,.sky-nightmoon{display:none!important}
+.sky-sun-off,.sky-nightmoon{
   position:absolute;width:clamp(46px,13vw,78px);height:clamp(46px,13vw,78px);
   border-radius:50%;left:68%;pointer-events:none;
   transition:top 2.4s linear,opacity 2.4s linear,transform 2.4s linear;
@@ -2107,6 +2108,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
         <button type="button" data-gender="boy">Junge</button>
         <button type="button" data-gender="girl">Mädchen</button>
       </div>
+      <button type="button" class="ghost" data-back="hello" style="margin-top:8px;width:100%">Zurück</button>
     </div>
     <div class="step" data-step="age">
       <h2>Wie alt?</h2>
@@ -2116,12 +2118,14 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
         <button type="button" data-join-age="6–8">6–8</button>
       </div>
       <button type="button" data-join-age="9–10" style="margin-top:10px;width:100%">9–10</button>
+      <button type="button" class="ghost" data-back="who" style="margin-top:8px;width:100%">Zurück</button>
     </div>
     <div class="step" data-step="place">
       <h2>Wetter am Ort</h2>
       <p>Wenn du den Ort erlaubst, zeigt die App Sonne oder Mond zur richtigen Zeit und Regen nur, wenn es dort wirklich regnet. Ohne Erlaubnis bleibt es klar und folgt nur der Uhr.</p>
       <button type="button" id="joinPlace">Ort erlauben</button>
       <button type="button" class="ghost" id="joinPlaceSkip" style="margin-top:8px;width:100%">Ohne Ort weiter</button>
+      <button type="button" class="ghost" data-back="age" style="margin-top:8px;width:100%">Zurück</button>
     </div>
     <div class="step" data-step="name">
       <h2>Name merken</h2>
@@ -2129,13 +2133,14 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
       <input id="joinName" maxlength="24" placeholder="Name des Kindes" autocomplete="off">
       <input id="joinPass" type="password" maxlength="40" placeholder="Passwort" autocomplete="new-password">
       <button type="button" id="joinSave">Kinderwelt öffnen</button>
+      <button type="button" class="ghost" data-back="place" style="margin-top:8px;width:100%">Zurück</button>
     </div>
   </div>
 </div>
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon">KIDS · V0.19</div>
+  <div class="dev-ribbon">KIDS · V0.20</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2145,8 +2150,6 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
         <div id="kidsSky" class="kids-sky" aria-hidden="true">
-          <div class="sky-sun"></div>
-          <div class="sky-nightmoon"></div>
           <div class="sky-rays"></div>
           <div class="sky-stars"></div>
           <div class="sky-rain"></div>
@@ -2549,7 +2552,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab18";
+const KIDS_BUILD_ID="kids-shell-v12-tab19";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -4763,6 +4766,7 @@ fetchCatalog();
     });
   }
   document.getElementById("joinNextHello").addEventListener("click",function(){step("who")});
+  join.querySelectorAll("[data-back]").forEach(function(b){b.addEventListener("click",function(){step(b.getAttribute("data-back"))})});
   join.querySelectorAll("[data-gender]").forEach(function(b){
     b.addEventListener("click",function(){draft.gender=b.getAttribute("data-gender");step("age")});
   });
