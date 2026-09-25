@@ -38,6 +38,11 @@ HOST="127.0.0.1"
 PORT=8787
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
+MASTER_AUDIO_DIR=VOICE_HOME/"MasterPronunciations"
+PENDING_AUDIO_DIR=MASTER_AUDIO_DIR/"pending"
+MASTER_AUDIO_DIR.mkdir(parents=True,exist_ok=True)
+PENDING_AUDIO_DIR.mkdir(parents=True,exist_ok=True)
+MASTER_AUDIO_MANIFEST=MASTER_AUDIO_DIR/"manifest.json"
 
 LIB=json.load(PRON.open(encoding="utf-8"))
 VOICE_PROFILE=json.load(PROFILE.open(encoding="utf-8"))
@@ -51,6 +56,20 @@ MASTER_TTS={
     for r in RULES
     if r.get("voice_lock")=="MASTER" and r.get("tts_text")
 }
+AUDIO_LOCK_BY_TTS={
+    str(r.get("tts_text","")):str(r.get("audio_lock_key",""))
+    for r in RULES
+    if r.get("tts_text") and r.get("audio_lock_key")
+}
+AUDIO_LOCK_LABELS={}
+for _r in RULES:
+    _key=str(_r.get("audio_lock_key",""))
+    if _key and _key not in AUDIO_LOCK_LABELS:
+        AUDIO_LOCK_LABELS[_key]=str(_r.get("canonical") or _r.get("string_to_replace") or _key)
+AUDIO_LOCK_FORMS=sorted(AUDIO_LOCK_BY_TTS,key=len,reverse=True)
+AUDIO_LOCK_STATE_LOCK=threading.Lock()
+PENDING_AUDIO_LOCKS={}
+PENDING_AUDIO_RENDER_ID=""
 
 MODEL=None
 MODEL_DEVICE=None
@@ -58,6 +77,111 @@ MODEL_LOCK=threading.Lock()
 RENDER_LOCK=threading.Lock()
 STATUS_LOCK=threading.Lock()
 TORCH_LOAD_ORIGINAL=None
+
+def audio_lock_key_for_chunk(text:str):
+    return AUDIO_LOCK_BY_TTS.get(str(text or "").strip(),"")
+
+def audio_lock_path(key:str):
+    safe=re.sub(r"[^a-z0-9_-]+","_",str(key or "").lower()).strip("_")
+    return MASTER_AUDIO_DIR/f"{safe}.wav"
+
+def confirmed_audio_lock_keys():
+    return sorted(key for key in set(AUDIO_LOCK_BY_TTS.values()) if key and audio_lock_path(key).exists())
+
+def pending_audio_lock_keys():
+    with AUDIO_LOCK_STATE_LOCK:
+        return sorted(PENDING_AUDIO_LOCKS)
+
+def load_locked_wav(path:Path,target_sr:int):
+    import numpy as np, torch, wave
+    with wave.open(str(path),"rb") as wf:
+        channels=wf.getnchannels()
+        width=wf.getsampwidth()
+        sr=wf.getframerate()
+        frames=wf.readframes(wf.getnframes())
+    if width!=2:
+        raise RuntimeError(f"MASTER-Audio hat nicht unterstützte Sample-Breite: {width}")
+    arr=np.frombuffer(frames,dtype=np.int16).astype(np.float32)/32767.0
+    if channels>1:
+        arr=arr.reshape(-1,channels).mean(axis=1)
+    w=torch.from_numpy(arr).view(1,-1)
+    if int(sr)!=int(target_sr) and w.shape[-1]>1:
+        new_len=max(1,round(w.shape[-1]*float(target_sr)/float(sr)))
+        w=torch.nn.functional.interpolate(w.unsqueeze(0),size=new_len,mode="linear",align_corners=False).squeeze(0)
+    return w
+
+def split_audio_locked_spans(text:str):
+    value=str(text or "")
+    if not AUDIO_LOCK_FORMS:
+        return [("text",value)] if value else []
+    out=[];pos=0
+    while pos<len(value):
+        hit=None;hit_pos=None
+        for form in AUDIO_LOCK_FORMS:
+            idx=value.find(form,pos)
+            if idx<0: continue
+            if hit_pos is None or idx<hit_pos or (idx==hit_pos and len(form)>len(hit or "")):
+                hit=form;hit_pos=idx
+        if hit is None:
+            if pos<len(value): out.append(("text",value[pos:]))
+            break
+        if hit_pos>pos:
+            out.append(("text",value[pos:hit_pos]))
+        out.append(("lock",hit))
+        pos=hit_pos+len(hit)
+    return out
+
+def stage_pending_audio_locks(render_id:str,candidates:dict,sr:int):
+    global PENDING_AUDIO_LOCKS,PENDING_AUDIO_RENDER_ID
+    paths={}
+    for key,wav in candidates.items():
+        path=PENDING_AUDIO_DIR/f"{render_id}-{key}.wav"
+        save_wav(path,wav,sr)
+        if path.exists() and path.stat().st_size>44:
+            paths[key]=path
+    with AUDIO_LOCK_STATE_LOCK:
+        PENDING_AUDIO_LOCKS=paths
+        PENDING_AUDIO_RENDER_ID=render_id
+    return sorted(paths)
+
+def confirm_pending_audio_locks():
+    global PENDING_AUDIO_LOCKS,PENDING_AUDIO_RENDER_ID
+    with AUDIO_LOCK_STATE_LOCK:
+        pending=dict(PENDING_AUDIO_LOCKS)
+        render_id=PENDING_AUDIO_RENDER_ID
+    confirmed=[]
+    for key,src in pending.items():
+        if not Path(src).exists():
+            continue
+        dst=audio_lock_path(key)
+        tmp=dst.with_suffix(".tmp.wav")
+        shutil.copy2(src,tmp)
+        os.replace(tmp,dst)
+        confirmed.append(key)
+    if confirmed:
+        manifest={
+            "schemaVersion":1,
+            "updatedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+            "sourceRenderId":render_id,
+            "confirmed":{key:{"file":audio_lock_path(key).name,"label":AUDIO_LOCK_LABELS.get(key,key)} for key in confirmed_audio_lock_keys()},
+        }
+        tmp=MASTER_AUDIO_MANIFEST.with_suffix(".tmp.json")
+        tmp.write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+        os.replace(tmp,MASTER_AUDIO_MANIFEST)
+    with AUDIO_LOCK_STATE_LOCK:
+        for p in PENDING_AUDIO_LOCKS.values():
+            try: Path(p).unlink(missing_ok=True)
+            except Exception: pass
+        PENDING_AUDIO_LOCKS={}
+        PENDING_AUDIO_RENDER_ID=""
+    return sorted(confirmed)
+
+def unlock_audio_lock(key:str):
+    key=str(key or "").strip()
+    if key not in set(AUDIO_LOCK_BY_TTS.values()):
+        raise ValueError("Unbekannter Kern-Audio-Lock.")
+    audio_lock_path(key).unlink(missing_ok=True)
+    return key
 
 def patch_torch_load_for_device(device:str):
     """Chatterbox official macOS workaround: force checkpoint loads onto MPS/CPU."""
@@ -108,6 +232,9 @@ def get_status():
     out["reference_ar"]=str(REF_AR)
     out["arabic_reference_dedicated"]=ARABIC_DEDICATED_REFERENCE
     out["output_dir"]=str(OUTPUT)
+    out["audio_lock_confirmed"]=confirmed_audio_lock_keys()
+    out["audio_lock_pending"]=pending_audio_lock_keys()
+    out["audio_lock_total"]=len(set(AUDIO_LOCK_BY_TTS.values()))
     return out
 
 def prepare(text:str):
@@ -316,11 +443,15 @@ def split_language_segments(text:str):
 
 def build_render_plan(text:str):
     plan=[]
-    for lang,segment in split_language_segments(text):
-        max_chars=180 if lang=="ar" else 280
-        for chunk in split_chunks(segment,max_chars=max_chars):
-            if chunk.strip():
-                plan.append((lang,chunk.strip()))
+    for kind,value in split_audio_locked_spans(text):
+        if kind=="lock":
+            plan.append(("ar",value.strip()))
+            continue
+        for lang,segment in split_language_segments(value):
+            max_chars=180 if lang=="ar" else 280
+            for chunk in split_chunks(segment,max_chars=max_chars):
+                if chunk.strip():
+                    plan.append((lang,chunk.strip()))
     return plan
 
 def detect_prosody_mode(text:str):
@@ -383,6 +514,12 @@ def prosody_settings(mode:str,language_id:str,text:str=""):
         # Guard rail: short Arabic terms should remain neutral and compact.
         exaggeration=min(exaggeration,0.16)
         temperature=min(temperature,0.48)
+
+    if audio_lock_key_for_chunk(text):
+        # Kernbegriffe müssen maximal stabil und nicht expressiv gesprochen werden.
+        exaggeration=min(exaggeration,0.08)
+        temperature=min(temperature,0.36)
+        cfg=0.0
 
     return {
         "exaggeration":exaggeration,
@@ -831,25 +968,53 @@ def generate(text:str,prepared:str="",style:str="auto"):
         outputs=[]
         qa_segments=[]
         total=len(plan)
+        render_id=uuid.uuid4().hex[:12]
+        session_audio_locks={}
+        new_audio_lock_candidates={}
 
         for idx,(lang,chunk) in enumerate(plan,1):
             pct=8+int(((idx-1)/max(1,total))*78)
             lang_label="Arabisch" if lang=="ar" else "Deutsch"
             mode=resolve_segment_prosody(chunk,doc_mode,style)
-            critical=lang=="ar" and any(x and x in chunk for x in master_forms)
+            audio_lock_key=audio_lock_key_for_chunk(chunk)
+            critical=bool(audio_lock_key) or (lang=="ar" and any(x and x in chunk for x in master_forms))
             set_status(progress=pct,message=f"{lang_label} · {mode} · Abschnitt {idx}/{total} …")
-            print(f"[DĀR Voice] segment {idx}/{total} lang={lang} mode={mode} critical={critical}: {chunk}",flush=True)
+            print(f"[DĀR Voice] segment {idx}/{total} lang={lang} mode={mode} critical={critical} lock={audio_lock_key or '-'}: {chunk}",flush=True)
 
-            try:
-                wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical)
-            except Exception as first_error:
-                if MODEL_DEVICE=="mps":
-                    print("[DĀR Voice] MPS render failed, retry CPU:",first_error,flush=True)
-                    set_status(message=f"{lang_label} · MPS-Fallback auf CPU …")
-                    model=load_model(force_device="cpu")
+            locked_path=audio_lock_path(audio_lock_key) if audio_lock_key else None
+            if audio_lock_key and locked_path.exists():
+                wav=load_locked_wav(locked_path,int(model.sr))
+                metrics=audio_quality_metrics(wav,int(model.sr),chunk,lang,mode)
+                hard=[x for x in metrics["issues"] if x in ("empty_audio","non_finite","near_silence","low_peak","clipping","too_short")]
+                if hard:
+                    raise RuntimeError("Bestätigter Kern-Audio-Lock ist technisch beschädigt: "+audio_lock_key)
+                metrics["attempt"]=0
+                metrics["critical"]=True
+                metrics["rescued"]=False
+                metrics["audio_lock"]="confirmed"
+            elif audio_lock_key and audio_lock_key in session_audio_locks:
+                wav=session_audio_locks[audio_lock_key].clone()
+                metrics=audio_quality_metrics(wav,int(model.sr),chunk,lang,mode)
+                metrics["attempt"]=0
+                metrics["critical"]=True
+                metrics["rescued"]=False
+                metrics["audio_lock"]="session_reuse"
+            else:
+                try:
                     wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical)
-                else:
-                    raise
+                except Exception as first_error:
+                    if MODEL_DEVICE=="mps":
+                        print("[DĀR Voice] MPS render failed, retry CPU:",first_error,flush=True)
+                        set_status(message=f"{lang_label} · MPS-Fallback auf CPU …")
+                        model=load_model(force_device="cpu")
+                        wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical)
+                    else:
+                        raise
+                if audio_lock_key:
+                    wav=wav.detach().float().cpu()
+                    session_audio_locks[audio_lock_key]=wav.clone()
+                    new_audio_lock_candidates[audio_lock_key]=wav.clone()
+                    metrics["audio_lock"]="candidate"
 
             qa_segments.append({
                 "index":idx,
@@ -869,11 +1034,16 @@ def generate(text:str,prepared:str="",style:str="auto"):
         if fatal:
             raise RuntimeError("Finale Audio-QA fehlgeschlagen: "+", ".join(fatal))
 
+        staged_audio_locks=stage_pending_audio_locks(render_id,new_audio_lock_candidates,sr) if new_audio_lock_candidates else []
+
         qa_summary={
             "mode":doc_mode,
             "segment_modes":sorted({x.get("mode","narration") for x in qa_segments}),
             "rescued_segments":sum(1 for x in qa_segments if x.get("rescued")),
             "continuity_engine":"sentence-context-2.1",
+            "render_id":render_id,
+            "audio_lock_confirmed":confirmed_audio_lock_keys(),
+            "audio_lock_pending":staged_audio_locks,
             "segments":qa_segments,
             "final":final_metrics,
             "arabic_reference_dedicated":ARABIC_DEDICATED_REFERENCE,
@@ -1050,10 +1220,29 @@ class H(BaseHTTPRequestHandler):
                         str(r.get("canonical") or r.get("string_to_replace"))
                         for r in found if r.get("voice_lock")=="REVIEW"
                     }),
+                    "audioLocks":sorted({
+                        str(r.get("audio_lock_key"))
+                        for r in found if r.get("audio_lock_key")
+                    }),
+                    "audioLocksConfirmed":confirmed_audio_lock_keys(),
                     "arabicReferenceDedicated":ARABIC_DEDICATED_REFERENCE
                 })
             except Exception as e:
                 return self.send_json(400,{"ok":False,"error":str(e)})
+
+        if p=="/confirm-core-audio":
+            try:
+                confirmed=confirm_pending_audio_locks()
+                return self.send_json(200,{"ok":True,"confirmed":confirmed,"status":get_status()})
+            except Exception as e:
+                return self.send_json(500,{"ok":False,"error":str(e),"status":get_status()})
+
+        if p=="/unlock-core-audio":
+            try:
+                key=unlock_audio_lock(str(data.get("key","")))
+                return self.send_json(200,{"ok":True,"unlocked":key,"status":get_status()})
+            except Exception as e:
+                return self.send_json(400,{"ok":False,"error":str(e),"status":get_status()})
 
         if p=="/generate":
             try:
