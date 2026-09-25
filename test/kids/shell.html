@@ -1702,74 +1702,66 @@ body{position:fixed!important;inset:0!important;touch-action:manipulation}
 }
 /* KIDS_UI_OVERHAUL_V12_END */
 
-/* KIDS_COMPACT_EDGE_V12r
-   Widescreen/widget: volle Breite, wenig Seitenluft.
-   Tab-Leiste flach, ohne doppelte Safe-Area. Touch bleibt >=44px. */
-html,body,.app,.ambient{
+/* KIDS_OVAL_TAB_FIT_V12s
+   Kindgerechte ovale Glas-Dock wie zuvor. Nur die Breite der Tab-Fläche enger.
+   Kein abgeschnittener Erwachsenen-Balken, keine Extra-Linie, keine eckigen Tabs. */
+html,body{
+  min-height:100dvh;
+  min-height:100svh;
+  background:
+    radial-gradient(circle at 9% 55%,rgba(237,190,105,.12),transparent 30%),
+    linear-gradient(165deg,#071522 0%,#0d2942 48%,#174e68 100%);
+}
+.app,.ambient{
   width:100%!important;
-  max-width:none!important;
+  min-height:100dvh;
+  min-height:100svh;
 }
 .shell{
-  width:100%!important;
-  max-width:none!important;
-  padding:calc(var(--safe-top) + 2px) max(10px,env(safe-area-inset-right)) calc(64px + env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))!important;
-}
-.hero{
-  min-height:min(38vh,268px)!important;
-  border-radius:22px!important;
-}
-.brand-line{margin-bottom:8px!important}
-.resume-card,.journey,.choice,.daily-step,.story-row,.parent-card,.quran-hero,.full-quran{
-  width:100%!important;
+  padding-bottom:calc(108px + env(safe-area-inset-bottom))!important;
 }
 .bottom-nav{
-  left:max(6px,env(safe-area-inset-left))!important;
-  right:max(6px,env(safe-area-inset-right))!important;
-  bottom:0!important;
-  transform:none!important;
-  width:auto!important;
-  min-height:0!important;
+  left:50%!important;
+  right:auto!important;
+  transform:translateX(-50%)!important;
+  width:min(calc(100% - 48px), 430px)!important;
+  bottom:max(12px, env(safe-area-inset-bottom))!important;
+  min-height:58px!important;
   height:auto!important;
-  padding:4px 4px max(6px,env(safe-area-inset-bottom))!important;
-  gap:0!important;
-  border-radius:20px 20px 0 0!important;
-  background:rgba(10,24,38,.42)!important;
-  border:1px solid rgba(255,255,255,.18)!important;
-  border-bottom:0!important;
-  box-shadow:0 -8px 28px rgba(0,0,0,.18),inset 0 1px rgba(255,255,255,.18)!important;
+  padding:6px 7px!important;
+  gap:4px!important;
+  border-radius:999px!important;
+  background:rgba(10,24,38,.38)!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  box-shadow:0 12px 36px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.2)!important;
   backdrop-filter:blur(28px) saturate(1.55)!important;
   -webkit-backdrop-filter:blur(28px) saturate(1.55)!important;
 }
 .nav-btn{
-  min-height:44px!important;
-  max-height:50px!important;
-  padding:3px 2px 2px!important;
-  gap:1px!important;
-  border-radius:14px!important;
+  min-height:48px!important;
+  max-height:none!important;
+  padding:6px 4px!important;
+  gap:3px!important;
+  border-radius:999px!important;
   background:transparent!important;
 }
 .nav-btn .ico{
-  width:22px!important;
-  height:22px!important;
+  width:26px!important;
+  height:26px!important;
 }
 .nav-btn .lab{
-  font-size:9px!important;
-  line-height:1.05!important;
-  font-weight:800!important;
-  letter-spacing:0!important;
+  font-size:10px!important;
+  line-height:1.1!important;
+  font-weight:850!important;
 }
 .nav-btn.active{
-  background:linear-gradient(145deg,rgba(226,189,114,.18),rgba(115,201,193,.08))!important;
+  background:linear-gradient(145deg,rgba(226,189,114,.16),rgba(115,201,193,.08))!important;
 }
 @media(min-width:700px){
-  .shell{padding-left:max(12px,env(safe-area-inset-left))!important;padding-right:max(12px,env(safe-area-inset-right))!important}
-  .bottom-nav{min-height:0!important}
-  .nav-btn{min-height:46px!important}
+  .bottom-nav{width:min(calc(100% - 88px), 480px)!important;min-height:62px!important}
 }
 @media(max-width:380px){
-  .bottom-nav{min-height:0!important}
-  .nav-btn{min-height:44px!important}
-  .nav-btn .ico{width:20px!important;height:20px!important}
+  .bottom-nav{width:calc(100% - 32px)!important;min-height:54px!important}
 }
 
 </style>

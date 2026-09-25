@@ -10,9 +10,9 @@ Verbindlich für `/test/kids/` und alle künftigen Kids-Erweiterungen.
 
 ## Navigation
 
-- Die Tab-Leiste Heute · Geschichten · Qurʾān · Eltern bleibt angeheftet.
-- Sie ist eine **gläserne Bar**: `backdrop-filter`, leichte Sättigung, feine Kontur, dezenter Schatten.
-- Kompakt in der Höhe: eine Safe-Area, enger Icon–Label-Abstand, Touch-Ziele mindestens 44px.
+- Die Tab-Leiste Heute · Geschichten · Qurʾān · Eltern bleibt eine **ovale, schwebende Glas-Kapsel**.
+- Kindgerecht: runde Tab-Buttons, keine eckige Erwachsenen-Leiste, kein abgeschnittener Balken unten.
+- Nur die **Breite** der Kapsel ist enger als ein Vollbreiten-Balken. Touch-Ziele bleiben oval und großzügig.
 
 ## Icons – keine System-Emojis (`KIDS_NO_SYSTEM_EMOJI`)
 
