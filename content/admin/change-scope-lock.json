@@ -123,7 +123,12 @@
         "_redirects",
         "_headers",
         "scripts/kids-design-guard.js",
-        "scripts/app-health-check.js"
+        "scripts/app-health-check.js",
+        "cloudflare/test-app-worker.js",
+        "wrangler.test.toml",
+        "scripts/purge-test-kids-cache.js",
+        "scripts/verify-test-app-deploy.js",
+        ".github/workflows/deploy-test-app.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     },

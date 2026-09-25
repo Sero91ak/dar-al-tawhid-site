@@ -148,6 +148,38 @@ async function fetchVersionBuild(base) {
   console.log(
     `Dar Test live OK — public und workers.dev liefern identisch ${TEST_EXPECT_BUILD}.`
   );
+
+  const kidsPath = path.join(ROOT_DIR, "test/kids/version.json");
+  if (fs.existsSync(kidsPath)) {
+    const kidsExpect = JSON.parse(fs.readFileSync(kidsPath, "utf8")).buildId;
+    async function waitKids(label, base) {
+      for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
+        const url = `${base}/kids/version.json?v=${Date.now()}`;
+        const { status, text, cf } = await fetchText(url);
+        let buildId = "";
+        try {
+          buildId = JSON.parse(text).buildId || "";
+        } catch (e) {
+          buildId = "";
+        }
+        const ok = status === 200 && buildId === kidsExpect;
+        console.log(
+          `${label} kids: ${url} -> ${status} cf=${cf} buildId=${buildId || "?"} expect=${kidsExpect} ok=${ok} (attempt ${attempt}/${ATTEMPTS})`
+        );
+        if (ok) return true;
+        if (attempt < ATTEMPTS) await sleep(DELAY_MS);
+      }
+      return false;
+    }
+    const kidsPub = await waitKids("public", publicBase);
+    const kidsDev = await waitKids("workers.dev", workersBase);
+    if (!kidsPub || !kidsDev) {
+      throw new Error(
+        `Kids Test nicht auf ${kidsExpect}. Nur Dar-Test-Worker + Cache /test/kids — kein Besucher-Workers-Build.`
+      );
+    }
+    console.log(`Kids Test live OK — ${kidsExpect}`);
+  }
 })().catch((error) => {
   console.error(error.message || error);
   process.exit(1);

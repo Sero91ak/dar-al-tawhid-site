@@ -23,7 +23,10 @@ export default {
     const bust = /\/test\/(index\.html)?$/.test(path)
       || /dar-quran-player\.(js|css)$/.test(path)
       || path.endsWith("/test/version.json")
-      || path.endsWith("/test/service-worker.js");
+      || path.endsWith("/test/service-worker.js")
+      || path === "/test/kids"
+      || path === "/test/kids/"
+      || path.startsWith("/test/kids/");
     if (!bust || !asset) return asset;
     const out = new Response(asset.body, asset);
     out.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");

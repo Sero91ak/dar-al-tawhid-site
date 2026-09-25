@@ -32,6 +32,7 @@ on:
       - scripts/test-app-health-check.js
       - scripts/verify-test-app-deploy.js
       - scripts/purge-cloudflare-cache.js
+      - scripts/purge-test-kids-cache.js
       - package.json
       - _headers
       - .assetsignore
@@ -94,6 +95,16 @@ jobs:
           EXPECT_BUILD_TEST="$(node -e "console.log(JSON.parse(require('fs').readFileSync('test/version.json','utf8')).buildId)")"
           export EXPECT_BUILD_TEST
           node scripts/purge-cloudflare-cache.js
+        continue-on-error: true
+
+      - name: Cloudflare-Cache nur für /test/kids leeren
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CLOUDFLARE_GLOBAL_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
+          SITE_URL: "https://dar-al-tawhid.de"
+        run: node scripts/purge-test-kids-cache.js
         continue-on-error: true
 
       - name: Dar Test verifizieren (öffentlich + workers.dev)
