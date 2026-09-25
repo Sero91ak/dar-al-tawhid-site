@@ -9107,10 +9107,32 @@ html[data-theme="bordeaux"] .post-after-panel,html[data-theme="bordeaux"] .relat
 html[data-theme] #appChromeDock #bottomNav.bottom-nav,html[data-theme] #bottomNav.bottom-nav{position:fixed!important;top:auto!important;left:50%!important;right:auto!important;bottom:calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm)!important;transform:translateX(-50%)!important;-webkit-transform:translateX(-50%)!important;margin-left:0!important;margin-right:0!important;contain:none!important;width:var(--dar-nav-width,min(clamp(21rem,66vw,54.5rem),calc(100vw - 2 * max(10px,env(safe-area-inset-left,0px),2.2vw))))!important;max-width:min(900px,calc(100vw - 2 * max(10px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px))))!important}
 .new-posts-banner{position:fixed;top:0;left:0;right:0;z-index:1200;display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top));background:linear-gradient(135deg,rgba(239,215,142,.18),rgba(155,122,60,.12));border:1px solid rgba(239,215,142,.45);border-bottom:2px solid rgba(239,215,142,.65);border-radius:0 0 22px 22px;backdrop-filter:blur(12px);cursor:pointer;transition:transform .3s ease,opacity .3s ease;transform:translateY(0);opacity:1}.new-posts-banner.is-app-version{background:linear-gradient(135deg,rgba(120,165,235,.16),rgba(239,215,142,.14));border-color:rgba(160,195,255,.42);border-bottom-color:rgba(160,195,255,.55)}.new-posts-banner.is-app-version .new-posts-text{color:#eef4ff}.new-posts-banner.is-app-version .new-posts-refresh{color:#eef4ff;background:rgba(140,190,255,.18);border-color:rgba(140,190,255,.38)}.new-posts-banner.hidden{transform:translateY(-120%);opacity:0;pointer-events:none}.new-posts-icon{font-size:18px}.new-posts-text{color:var(--gold2);font-size:14px;font-weight:900;letter-spacing:.02em}.new-posts-refresh{color:var(--cream);font-size:11px;font-weight:900;background:rgba(239,215,142,.15);border:1px solid rgba(239,215,142,.35);border-radius:999px;padding:4px 10px}
 /* UPDATE_SOFT_BANNER_V628: kein blockierendes Modal — nur blauer Top-Banner */
-.app-update-modal,.app-update-modal[hidden]{display:none!important;visibility:hidden!important;pointer-events:none!important}
-.app-update-modal__backdrop,.app-update-modal__panel{display:none!important}
-body.app-update-modal-open{overflow:auto!important;touch-action:auto!important}
-body.app-update-modal-open .app-bar,body.app-update-modal-open #bottomNav,body.app-update-modal-open .float-actions{pointer-events:auto!important}
+html.dar-ios-native-app .app-update-modal[hidden]{display:none!important}
+html.dar-ios-native-app .app-update-modal:not([hidden]){
+  display:flex!important;visibility:visible!important;pointer-events:auto!important;
+  position:fixed;inset:0;z-index:2147483646;align-items:center;justify-content:center;
+  padding:max(18px,env(safe-area-inset-top)) 18px max(18px,env(safe-area-inset-bottom));
+}
+html.dar-ios-native-app .app-update-modal:not([hidden]) .app-update-modal__backdrop{
+  display:block!important;position:absolute;inset:0;background:rgba(6,7,10,.72);
+}
+html.dar-ios-native-app .app-update-modal:not([hidden]) .app-update-modal__panel{
+  display:block!important;position:relative;z-index:1;width:min(100%,380px);
+  border-radius:24px;padding:22px 20px 18px;text-align:center;
+  border:1px solid rgba(239,215,142,.28);
+  background:linear-gradient(180deg,#17140f,#0d0c0a);
+  box-shadow:0 28px 80px rgba(0,0,0,.5);
+  color:#f5efe1;
+}
+html.dar-ios-native-app .app-update-modal__badge{display:inline-block;margin:0 0 10px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#efd78e}
+html.dar-ios-native-app .app-update-modal__panel h2{margin:0 0 8px;font-family:Georgia,serif;font-size:24px;color:#efd78e}
+html.dar-ios-native-app .app-update-modal__panel p{margin:0 0 16px;font-size:14px;line-height:1.45;color:#cfc6b4}
+html.dar-ios-native-app .app-update-modal__btn{
+  appearance:none;border:0;border-radius:999px;min-height:46px;width:100%;
+  font:inherit;font-weight:800;font-size:15px;color:#16120d;background:linear-gradient(180deg,#f3e2b0,#d7b56a);cursor:pointer
+}
+html.dar-ios-native-app body.app-update-modal-open{overflow:hidden!important}
+html.dar-ios-native-app #newPostsBanner.is-app-version{display:flex!important}
 body.is-area-route #newPostsBanner.is-app-version{display:flex!important}
 .new-posts-banner.is-app-version{background:linear-gradient(135deg,rgba(56,132,255,.92),rgba(36,98,220,.88))!important;border-color:rgba(120,180,255,.55)!important;border-bottom-color:rgba(160,205,255,.7)!important;box-shadow:0 10px 28px rgba(20,60,140,.28)}
 .new-posts-banner.is-app-version .new-posts-text,.new-posts-banner.is-app-version .new-posts-icon{color:#fff!important}
@@ -27458,7 +27480,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1020";
+const APP_BUILD_ID="app-shell-v1021";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -29002,9 +29024,25 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       updateModalLocked = false;
       document.body.classList.remove('app-update-modal-open');
     }
+    function iosNativeShell(){
+      try{return (typeof isOfficialIosApp==="function"&&isOfficialIosApp())||!!window.DAR_IOS_NATIVE_APP||/DarAlTawhid-iOS/i.test(String(navigator.userAgent||""))}catch(e){return false}
+    }
     function showUpdateModal(mode, label) {
-      /* Legacy-API: Modal ist deaktiviert — immer weicher blauer Top-Banner */
       hideUpdateModal();
+      if (iosNativeShell()) {
+        var modal = getUpdateModal();
+        if (modal) {
+          var title = modal.querySelector('#appUpdateModalTitle');
+          var text = modal.querySelector('#appUpdateModalText');
+          if (title) title.textContent = mode === 'recovery' ? 'App-Update erforderlich' : 'Neue Version verfügbar';
+          if (text) text.textContent = label || 'Darstellung und Funktionen wurden aktualisiert. Tippe auf Jetzt aktualisieren.';
+          modal.hidden = false;
+          document.body.classList.add('app-update-modal-open');
+          updateModalLocked = true;
+          window.__darAppVersionAvailable = true;
+          return;
+        }
+      }
       updateModalLocked = false;
       showBanner(mode === 'recovery' ? 'recovery' : 'version', label);
     }
@@ -29249,7 +29287,8 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       if (typeof updateHomeAppStatusUi === 'function') updateHomeAppStatusUi();
     }
     function showVersionBanner() {
-      showBanner('version', 'Neue Version verfügbar');
+      if (iosNativeShell()) showUpdateModal('version', 'Neue Version verfügbar. Tippe auf Jetzt aktualisieren.');
+      else showBanner('version', 'Neue Version verfügbar');
     }
     function showPostsBanner(label) {
       showBanner('posts', label);
