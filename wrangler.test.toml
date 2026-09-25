@@ -8,6 +8,9 @@ compatibility_date = "2026-08-01"
 compatibility_flags = ["nodejs_compat"]
 workers_dev = true
 
+# Keine Custom-Domain-Routen (leere Liste, nicht unter [assets]).
+routes = []
+
 # Workers Builds nur bei Test-/Kids-Dateien, nicht bei jedem Repo-Commit.
 [build]
 watch_paths = [
@@ -19,7 +22,3 @@ watch_paths = [
 [assets]
 directory = "."
 binding = "ASSETS"
-
-# Explizit leer: alte dar-al-tawhid.de/test*-Routen müssen beim Deploy weg.
-# Sonst treffen Test-Worker und Besucher-Worker gleichzeitig auf /test/kids → 1101.
-routes = []
