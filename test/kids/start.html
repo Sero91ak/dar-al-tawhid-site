@@ -1978,6 +1978,70 @@ html,body{
 
 
 
+
+/* KIDS_SKY_WORLD_V15 — eine Himmelswelt für alle Seiten, skaliert mit dem Gerät */
+.kids-sky{position:fixed;inset:0;z-index:4;pointer-events:none;overflow:hidden}
+.sky-wash{position:absolute;inset:0;transition:background 1.2s ease}
+.app[data-sky="dawn"] .sky-wash{background:linear-gradient(180deg,rgba(255,186,120,.16),transparent 42%)}
+.app[data-sky="day"] .sky-wash{background:linear-gradient(180deg,rgba(255,214,140,.10),transparent 36%)}
+.app[data-sky="dusk"] .sky-wash{background:linear-gradient(180deg,rgba(88,42,72,.18),transparent 48%)}
+.app[data-sky="night"] .sky-wash{background:linear-gradient(180deg,rgba(3,10,22,.42),rgba(3,10,22,.18) 55%,transparent 100%)}
+.sky-rays{position:absolute;left:50%;top:-20vh;width:140vw;height:80vh;margin-left:-70vw;opacity:0;
+  background:repeating-conic-gradient(from 0deg at 50% 0%,rgba(255,236,180,0) 0 8deg,rgba(255,236,180,.16) 8deg 11deg);
+  transform-origin:50% 0;animation:skyRays 48s linear infinite}
+.app[data-sky="day"] .sky-rays,.app[data-sky="dawn"] .sky-rays{opacity:.85}
+@keyframes skyRays{to{transform:rotate(360deg)}}
+.sky-moon{position:absolute;top:7vh;right:8vw;width:clamp(36px,8vw,64px);height:clamp(36px,8vw,64px);border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#fff7d6,#f0d48a 60%,#c9a15a);
+  box-shadow:0 0 24px rgba(255,220,140,.55);opacity:0;transition:opacity .8s}
+.app[data-sky="night"] .sky-moon,.app[data-sky="dusk"] .sky-moon{opacity:.95}
+.app[data-sky="dusk"] .sky-moon{opacity:.55;top:12vh}
+.sky-cloud{position:absolute;height:clamp(28px,6vw,54px);border-radius:999px;background:rgba(255,255,255,.28);
+  filter:blur(.4px);animation:skyCloud linear infinite}
+.sky-cloud:before,.sky-cloud:after{content:"";position:absolute;border-radius:50%;background:inherit}
+.sky-cloud:before{width:46%;height:140%;left:14%;bottom:0}
+.sky-cloud:after{width:38%;height:120%;right:16%;bottom:4%}
+.app[data-sky="night"] .sky-cloud{background:rgba(180,200,230,.14)}
+@keyframes skyCloud{from{transform:translateX(-30vw)}to{transform:translateX(110vw)}}
+.sky-star{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;opacity:0;
+  box-shadow:0 0 6px rgba(255,255,255,.8);animation:skyTwinkle 3.2s ease-in-out infinite}
+.app[data-sky="night"] .sky-star,.app[data-sky="dusk"] .sky-star{opacity:.9}
+@keyframes skyTwinkle{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.25)}}
+.sky-drop{position:absolute;top:-8vh;width:2px;height:clamp(10px,2.2vh,18px);border-radius:2px;
+  background:linear-gradient(180deg,transparent,rgba(210,230,255,.75));opacity:0;animation:skyRain linear infinite}
+.app[data-weather="rain"] .sky-drop,.app[data-weather="storm"] .sky-drop{opacity:.8}
+@keyframes skyRain{to{transform:translateY(110vh)}}
+.sky-lantern{position:absolute;width:clamp(10px,2vw,14px);height:clamp(16px,3vw,22px);border-radius:8px 8px 5px 5px;
+  background:radial-gradient(circle at 50% 30%,#fff6d0,#e2bd72 60%,#a87432);opacity:0;
+  box-shadow:0 0 16px rgba(226,189,114,.75);animation:skyLantern 2.8s ease-in-out infinite}
+.app[data-sky="night"] .sky-lantern,.app[data-sky="dusk"] .sky-lantern{opacity:.9}
+@keyframes skyLantern{50%{filter:brightness(1.25);transform:translateY(-4px)}}
+.sky-mote{position:absolute;width:4px;height:4px;border-radius:50%;background:#ffe7a8;opacity:0;
+  box-shadow:0 0 8px #ffe7a8;animation:skyMote 9s ease-in-out infinite}
+.app[data-sky="night"] .sky-mote,.app[data-sky="dusk"] .sky-mote{opacity:.75}
+.app[data-age="9–10"] .sky-mote{opacity:.35}
+@keyframes skyMote{0%{transform:translate(0,8px)}50%{transform:translate(12px,-18px)}100%{transform:translate(-8px,6px)}}
+.sky-flash{position:absolute;inset:0;background:rgba(255,255,255,.0);opacity:0}
+.app[data-weather="storm"][data-age="9–10"] .sky-flash.bolt{animation:skyBolt .45s ease}
+@keyframes skyBolt{0%{opacity:0}15%{opacity:.55}40%{opacity:.05}55%{opacity:.35}100%{opacity:0}}
+.sky-bird{position:absolute;top:18vh;left:-8vw;width:18px;height:8px;opacity:0;
+  border-top:2px solid rgba(255,255,255,.7);border-radius:50% 50% 0 0;animation:skyBird 22s linear infinite}
+.app[data-view="stories"] .sky-bird,.app[data-view="today"][data-sky="day"] .sky-bird{opacity:.8}
+@keyframes skyBird{to{transform:translateX(120vw)}}
+.app[data-view="parents"] .sky-drop,
+.app[data-view="parents"] .sky-flash,
+.app[data-view="parents"] .sky-bird,
+.app[data-view="parents"] .sky-mote{opacity:0!important}
+.app[data-calm="1"] .sky-drop,.app[data-calm="1"] .sky-flash,.app[data-calm="1"] .sky-bird{opacity:0!important}
+.app[data-calm="1"] .sky-rays{opacity:.25}
+.app[data-age="4–5"] .page-head h2{animation:kidsBalloon 3.6s ease-in-out infinite}
+.app[data-age="9–10"] #view-today .wm-kids span{animation:none}
+.quiz-scene-symbol,.knowledge-symbol .kid-icon,.dua-scene-symbol,.quiz-scene:after{display:none!important}
+@media(prefers-reduced-motion:reduce){
+  .kids-sky *{animation:none!important}
+  .app[data-age="4–5"] .page-head h2,#view-today .wm-kids span{animation:none!important}
+}
+
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&display=swap">
 </head>
@@ -1996,7 +2060,19 @@ html,body{
 </div>
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon">KIDS · V0.15</div>
+  <div id="kidsSky" class="kids-sky" aria-hidden="true">
+    <div class="sky-wash"></div>
+    <div class="sky-rays"></div>
+    <div class="sky-moon"></div>
+    <div class="sky-clouds"></div>
+    <div class="sky-stars"></div>
+    <div class="sky-rain"></div>
+    <div class="sky-lanterns"></div>
+    <div class="sky-motes"></div>
+    <div class="sky-bird"></div>
+    <div class="sky-flash"></div>
+  </div>
+  <div class="dev-ribbon">KIDS · V0.16</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2399,7 +2475,7 @@ html,body{
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab14";
+const KIDS_BUILD_ID="kids-shell-v12-tab15";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -4406,6 +4482,112 @@ fetchVerifiedKnowledge();
 fetchCatalog();
 })();
 </script>
+
+<script>
+(function(){
+  var app=document.querySelector(".app");
+  var sky=document.getElementById("kidsSky");
+  if(!app||!sky)return;
+  function skyName(h){
+    if(h<6)return"night";
+    if(h<8)return"dawn";
+    if(h<17)return"day";
+    if(h<20)return"dusk";
+    return"night";
+  }
+  function weatherName(){
+    var d=new Date();
+    var n=d.getFullYear()*400+(d.getMonth()+1)*32+d.getDate();
+    var age=app.getAttribute("data-age")||"6–8";
+    var bag=n%7;
+    if(age==="4–5")return bag>=5?"rain":"clear";
+    if(age==="9–10"&&bag===0)return"storm";
+    if(bag>=4)return"rain";
+    return"clear";
+  }
+  function paint(){
+    var now=new Date();
+    app.setAttribute("data-sky",skyName(now.getHours()));
+    app.setAttribute("data-weather",weatherName());
+    var view=document.querySelector(".view.active");
+    var id=view&&view.id?view.id.replace("view-",""):"today";
+    app.setAttribute("data-view",id);
+    var calm=document.querySelector(".modal.open");
+    app.setAttribute("data-calm",calm?"1":"0");
+  }
+  function fill(sel,count,cls,setup){
+    var box=sky.querySelector(sel);
+    if(!box)return;
+    box.textContent="";
+    var w=Math.max(window.innerWidth,320);
+    var n=Math.round(count*(w/390));
+    n=Math.max(count-4,Math.min(n,count+18));
+    for(var i=0;i<n;i++){
+      var el=document.createElement("i");
+      el.className=cls;
+      setup(el,i,n);
+      box.appendChild(el);
+    }
+  }
+  function build(){
+    fill(".sky-clouds",4,"sky-cloud",function(el,i){
+      el.style.top=(6+i*7)+"vh";
+      el.style.width=(18+i*6)+"vw";
+      el.style.animationDuration=(28+i*8)+"s";
+      el.style.animationDelay=(-i*6)+"s";
+      el.style.opacity=String(0.28+i*0.08);
+    });
+    fill(".sky-stars",22,"sky-star",function(el,i,n){
+      el.style.left=((i*37)%100)+"%";
+      el.style.top=((i*17)%42)+"vh";
+      el.style.animationDelay=(i%7)*0.35+"s";
+      el.style.width=el.style.height=(i%4===0?"4px":"2px");
+    });
+    fill(".sky-rain",36,"sky-drop",function(el,i){
+      el.style.left=((i*13)%100)+"%";
+      el.style.animationDuration=(0.9+(i%5)*0.18)+"s";
+      el.style.animationDelay=(-i*0.12)+"s";
+      el.style.opacity=String(0.35+(i%4)*0.12);
+    });
+    fill(".sky-lanterns",3,"sky-lantern",function(el,i){
+      el.style.left=(12+i*34)+"%";
+      el.style.top=(22+i*6)+"vh";
+      el.style.animationDelay=(i*0.4)+"s";
+    });
+    fill(".sky-motes",8,"sky-mote",function(el,i){
+      el.style.left=(8+(i*11)%80)+"%";
+      el.style.top=(12+(i*9)%50)+"vh";
+      el.style.animationDelay=(i*0.7)+"s";
+    });
+  }
+  build();
+  var resizeTimer=0;
+  window.addEventListener("resize",function(){
+    clearTimeout(resizeTimer);
+    resizeTimer=setTimeout(build,180);
+  });
+  paint();
+  setInterval(paint,30000);
+  if("MutationObserver" in window){
+    var mo=new MutationObserver(paint);
+    mo.observe(app,{attributes:true,attributeFilter:["data-age"],subtree:false});
+    document.querySelectorAll(".view,.modal").forEach(function(el){
+      mo.observe(el,{attributes:true,attributeFilter:["class"]});
+    });
+  }
+  var flash=sky.querySelector(".sky-flash");
+  setInterval(function(){
+    if(app.getAttribute("data-weather")!=="storm")return;
+    if(app.getAttribute("data-age")!=="9–10")return;
+    if(app.getAttribute("data-calm")==="1")return;
+    if(Math.random()>0.35)return;
+    flash.classList.remove("bolt");
+    void flash.offsetWidth;
+    flash.classList.add("bolt");
+  },14000);
+})();
+</script>
+
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
