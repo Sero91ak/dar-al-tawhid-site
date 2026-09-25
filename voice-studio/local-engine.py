@@ -517,8 +517,27 @@ def learning_state():
         "onlineRules":len(ONLINE_RULES),
         "onlineSyncedAt":(ONLINE_LIB or {}).get("syncedAt"),
         "onlineUrl":ONLINE_LIBRARY_URL,
+        "autoSyncHours":24,
         "learnedTerms":[str(r.get("string_to_replace","")) for r in user_rules[:50]],
     }
+
+def online_sync_is_stale(max_age_hours:int=24):
+    try:
+        if not ONLINE_LIBRARY_CACHE.exists():
+            return True
+        age=time.time()-ONLINE_LIBRARY_CACHE.stat().st_mtime
+        return age>max(1,int(max_age_hours))*3600
+    except Exception:
+        return True
+
+def refresh_online_library_if_stale():
+    if not online_sync_is_stale(24):
+        return
+    try:
+        result=sync_online_pronunciation_library()
+        print("[DĀR Voice] online pronunciation sync",result,flush=True)
+    except Exception as e:
+        print("[DĀR Voice] online pronunciation sync skipped:",e,flush=True)
 
 def patch_torch_load_for_device(device:str):
     """Chatterbox official macOS workaround: force checkpoint loads onto MPS/CPU."""
@@ -1699,4 +1718,5 @@ if __name__=="__main__":
     print("Referenz:",REF,flush=True)
     # Modell im Hintergrund vorladen; HTTP bleibt sofort erreichbar.
     threading.Thread(target=warm_model,daemon=True).start()
+    threading.Thread(target=refresh_online_library_if_stale,daemon=True).start()
     VoiceHTTPServer((HOST,PORT),H).serve_forever()
