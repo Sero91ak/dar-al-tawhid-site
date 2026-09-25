@@ -452,14 +452,18 @@
     var next=st.cadence.next?fmt(st.cadence.next,st.settings):(st.last?"Duʿāʾ-Zeit":"bis Maghrib");
     var last=st.window.lastStart?fmt(st.window.lastStart,st.settings):"nach ʿAṣr";
     var mag=st.window.maghrib?fmt(st.window.maghrib,st.settings):"nach Standort";
-    var html='<section id="'+HOME_ID+'" class="dar-jf-home" aria-label="Jumuʿah am Freitag"><div class="dar-jf-inner">'+
+    var sig=[st.last,next,last,mag].join("|");
+    var html='<section id="'+HOME_ID+'" class="dar-jf-home" data-jf-sig="'+esc(sig)+'" aria-label="Jumuʿah am Freitag"><div class="dar-jf-inner">'+
       '<div class="dar-jf-kicker">'+(st.last?'LETZTE ZEIT VOR MAGHRIB':'JUMUʿAH · FREITAG')+'</div>'+
       '<h2>'+(st.last?'Nutze diese Zeit für Duʿāʾ':'Vermehre heute die Ṣalāh auf den Propheten ﷺ')+'</h2>'+
       '<p class="dar-jf-lead">'+(st.last?'Suche die besondere Zeit am Freitag in der letzten Zeit nach ʿAṣr und bitte Allah mit Gegenwart des Herzens.':'Der Prophet ﷺ ermunterte dazu, am Freitag vermehrt Ṣalāh auf ihn zu sprechen.')+'</p>'+
       '<span class="dar-jf-source">'+(st.last?'Sunan Abī Dāwūd 1048 · als ṣaḥīḥ eingestuft':'Aws ibn Aws · Überlieferung zum Freitag · Isnād ṣaḥīḥ')+'</span>'+
       '<div class="dar-jf-chips"><span class="dar-jf-chip'+(st.last?' live':'')+'">Nächste Erinnerung <b>'+esc(next)+'</b></span><span class="dar-jf-chip">Letzte Zeit <b>'+esc(last)+'</b></span><span class="dar-jf-chip">Maghrib <b>'+esc(mag)+'</b></span></div>'+
       '<button type="button" class="dar-jf-open" data-dar-jf-open="1">Jumuʿah öffnen</button></div></section>';
-    if(old){old.outerHTML=html;return;}
+    if(old){
+      if(old.getAttribute("data-jf-sig")===sig)return;
+      old.outerHTML=html;return;
+    }
     var box=document.createElement("div");box.innerHTML=html;mount.parentNode.insertBefore(box.firstElementChild,mount);
   }
 
@@ -475,7 +479,9 @@
     var old=document.getElementById(DETAIL_ID);if(old)old.remove();
     var st=currentState(),asr=st.window.asr?fmt(st.window.asr,st.settings):"Standort nötig",mag=st.window.maghrib?fmt(st.window.maghrib,st.settings):"Standort nötig",last=st.window.lastStart?fmt(st.window.lastStart,st.settings):"nach ʿAṣr";
     var rhythm=st.cadence.items.length?st.cadence.items.map(function(d){return fmt(d,st.settings);}).join(" · "):"09:00 · 11:00 · 13:00 · … · bis Maghrib";
-    var wrap=document.createElement("div");wrap.id=DETAIL_ID;wrap.className="dar-jf-detail";
+    var sig=[st.friday,st.last,asr,last,mag,rhythm].join("|");
+    if(old&&old.getAttribute("data-jf-sig")===sig)return;
+    var wrap=document.createElement("div");wrap.id=DETAIL_ID;wrap.className="dar-jf-detail";wrap.setAttribute("data-jf-sig",sig);
     wrap.innerHTML=
       '<section class="dar-jf-section"><div class="dar-jf-kicker">FREITAGSROUTINE</div><h2>Jumuʿah bewusst leben</h2>'+
       '<p>Am Freitag stehen Ṣalāh auf den Propheten ﷺ, Vorbereitung auf Jumuʿah, Dhikr und Duʿāʾ besonders im Fokus.</p>'+
