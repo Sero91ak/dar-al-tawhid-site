@@ -53,6 +53,17 @@ def classify(text):
         return "teaching"
     return "narration"
 
+def classify_segment(text,doc_mode,requested="auto"):
+    requested=str(requested or "auto").strip()
+    if requested!="auto":
+        return requested
+    local=classify(text)
+    if local!="narration":
+        return local
+    if doc_mode in {"kids_story","kids_lesson","teaching","gentle","serious","dua","list"}:
+        return doc_mode
+    return "narration"
+
 def main():
     if len(sys.argv)!=5:
         fail("usage: validate-v2.py pronunciation-rules.json voice-production-profile.json local-engine.py voice-regression-fixtures.json")
@@ -85,14 +96,25 @@ def main():
     modes=set((prof.get("prosody") or {}).get("modes",{}))
     missing=required_modes-modes
     if missing: fail("missing prosody modes: "+", ".join(sorted(missing)))
-    if int(prof.get("schemaVersion",0))<2: fail("voice profile schemaVersion must be >=2")
+    if int(prof.get("schemaVersion",0))<3: fail("voice profile schemaVersion must be >=3")
     qa=prof.get("qualityAssurance") or {}
     if int(qa.get("maxRenderAttempts",0))<2: fail("QA maxRenderAttempts must be >=2")
+    if int(qa.get("maxInternalSilenceMsWithPunctuation",0))<900: fail("QA punctuation-pause guard missing")
+    if int(qa.get("minSpeechRateWords",0))<4: fail("QA speech-rate minimum sample size missing")
+    if not isinstance(qa.get("minSpeechRateWpmByMode"),dict): fail("QA speech-rate mode thresholds missing")
+    if int(qa.get("maxSustainedEnergyPlateauMs",0))<700: fail("QA sustained-hold guard missing")
+    if not bool(qa.get("rescueLongSegments")): fail("QA long-segment rescue must be enabled")
 
+    engine_source=Path(engine_path).read_text(encoding="utf-8")
     try:
-        ast.parse(Path(engine_path).read_text(encoding="utf-8"))
+        tree=ast.parse(engine_source)
     except SyntaxError as e:
         fail(f"engine syntax error: {e}")
+    functions={n.name for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))}
+    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments"}:
+        if required not in functions: fail(f"engine missing production function: {required}")
+    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow"}:
+        if marker not in engine_source: fail(f"engine missing QA marker: {marker}")
 
     for case in fixtures.get("cases",[]):
         speech=prepare(case["text"],rules)
@@ -106,6 +128,16 @@ def main():
         if mode!=case.get("expectedMode"):
             fail(f"fixture {case['id']} mode {mode} != {case.get('expectedMode')}")
 
+    segment_cases=fixtures.get("segmentCases",[])
+    if len(segment_cases)<5: fail("too few sentence-level prosody regression cases")
+    for case in segment_cases:
+        doc_mode=classify(case["documentText"])
+        if doc_mode!=case.get("expectedDocumentMode"):
+            fail(f"segment fixture {case['id']} document mode {doc_mode} != {case.get('expectedDocumentMode')}")
+        mode=classify_segment(case["segmentText"],doc_mode,case.get("requested","auto"))
+        if mode!=case.get("expectedSegmentMode"):
+            fail(f"segment fixture {case['id']} mode {mode} != {case.get('expectedSegmentMode')}")
+
     masters=[r for r in rules if r.get("voice_lock")=="MASTER"]
     if len(masters)<20: fail(f"too few MASTER pronunciation variants: {len(masters)}")
 
@@ -115,6 +147,7 @@ def main():
         "pronunciationGroups":len(ipa_groups),
         "masterVariants":len(masters),
         "regressionCases":len(fixtures.get("cases",[])),
+        "segmentRegressionCases":len(fixtures.get("segmentCases",[])),
         "profileSchema":prof.get("schemaVersion")
     },ensure_ascii=False))
 
