@@ -1118,7 +1118,7 @@ html,body{background:#06131f!important}
 
 /* HOME — clearer action hierarchy */
 #view-today .hero{
-  --art:url("/test/kids/assets/kids-art/home-journey-v11-clean2.jpg?v=11-rule1");
+  --art:url("/test/kids/assets/kids-brand/hero-sky-open.png?v=13");
   min-height:clamp(292px,51vw,390px)!important;
   background:#102936!important;
 }
@@ -1440,7 +1440,7 @@ body{position:fixed!important;inset:0!important;touch-action:manipulation}
 .nav-btn[data-target="parents"] .ico{background-image:url("/test/kids/assets/kids-icons/parents-real-v12.png?v=1")!important}
 .picker-icon{background-image:url("/test/kids/assets/kids-icons/quran-real-v12.png?v=1")!important;background-size:76%!important}
 .icon-book{background-image:url("/test/kids/assets/kids-icons/quran-real-v12.png?v=1")!important}.icon-headphones,.icon-volume{background-image:url("/test/kids/assets/kids-icons/headphones-real-v12.png?v=1")!important}.icon-dua{background-image:url("/test/kids/assets/kids-icons/dua-real-v12.png?v=1")!important}.icon-star,.icon-spark{background-image:url("/test/kids/assets/kids-icons/spark-real-v12.png?v=1")!important}.icon-play{background-image:url("/test/kids/assets/kids-icons/play-real-v12.png?v=1")!important}.icon-mic{background-image:url("/test/kids/assets/kids-icons/mic-real-v12.png?v=1")!important}.icon-lock{background-image:url("/test/kids/assets/kids-icons/lock-real-v12.png?v=1")!important}.icon-moon{background-image:url("/test/kids/assets/kids-icons/moon-real-v12.png?v=1")!important}.icon-heart{background-image:url("/test/kids/assets/kids-icons/heart-real-v12.png?v=1")!important}.icon-library{background-image:url("/test/kids/assets/kids-icons/library-real-v12.png?v=1")!important}.icon-droplet{background-image:url("/test/kids/assets/kids-icons/water-real-v12.png?v=1")!important}.icon-cloud{background-image:url("/test/kids/assets/kids-icons/cloud-real-v12.png?v=1")!important}.icon-sun{background-image:url("/test/kids/assets/kids-icons/sun-real-v12.png?v=1")!important}.icon-settings,.icon-parents{background-image:url("/test/kids/assets/kids-icons/parents-real-v12.png?v=1")!important}.icon-home{background-image:url("/test/kids/assets/kids-icons/home-real-v12.png?v=1")!important}.icon-food{background-image:url("/test/kids/assets/kids-icons/food-real-v12.png?v=1")!important}.icon-speech{background-image:url("/test/kids/assets/kids-icons/speech-real-v12.png?v=1")!important}.icon-coin{background-image:url("/test/kids/assets/kids-icons/coin-real-v12.png?v=1")!important}.icon-palm{background-image:url("/test/kids/assets/kids-icons/palm-real-v12.png?v=1")!important}.icon-help{background-image:url("/test/kids/assets/kids-icons/help-real-v12.png?v=1")!important}.icon-door{background-image:url("/test/kids/assets/kids-icons/door-real-v12.png?v=1")!important}.icon-mosque{background-image:url("/test/kids/assets/kids-icons/mosque-real-v12.png?v=1")!important}.icon-shield{background-image:url("/test/kids/assets/kids-icons/shield-real-v12.png?v=1")!important}
-#view-today .hero{--art:url("/test/kids/assets/kids-art/home-journey-v11-clean2.jpg?v=11-rule1")!important}
+#view-today .hero{--art:url("/test/kids/assets/kids-brand/hero-sky-open.png?v=13")!important}
 #view-today .hero::before{background-image:var(--art)!important;background-position:center!important;background-size:cover!important}
 /* KIDS_REAL_ASSET_ICON_FINAL_V11_END */
 
@@ -1830,55 +1830,98 @@ html,body{
 }
 
 
-/* KIDS_BRAND_FLOW_V11
-   Oben Willkommen-Titel. Darunter klar getrennte Inhalte, nichts verschluckt sich. */
-#view-today{position:relative}
+/* KIDS_HERO_STAGE_V13
+   Freie Titelseite: Himmel als Welt, Typo als Marke, keine Bildbox. */
+#view-today{position:relative;z-index:2}
 #view-today .brand-line{
   position:absolute;left:0;right:0;top:0;z-index:6;
   margin:0;padding:0;height:0;overflow:visible;justify-content:flex-end
 }
 #view-today .brand-line .brand{display:none}
 #view-today .profile-dot{
-  position:absolute;top:max(10px, env(safe-area-inset-top, 0px));right:12px;z-index:8
+  position:absolute;top:max(12px, env(safe-area-inset-top, 0px));right:14px;z-index:8
 }
-#view-today .hero .cloud,
-#view-today .hero .city,
-#view-today .hero .arch,
-#view-today .hero .dune,
-#view-today .hero .lantern{display:none!important}
+#view-today .hero .city{display:none!important}
+#view-today .hero .cloud{
+  display:block!important;z-index:2;opacity:.28;top:18%;width:120px;height:28px;animation-duration:38s
+}
+#view-today .hero .dune{
+  display:block!important;z-index:2;left:0;right:0;bottom:0;height:28%;
+  background:linear-gradient(180deg,transparent,rgba(6,19,31,.55) 70%,rgba(6,19,31,.82));
+  opacity:1;pointer-events:none
+}
+#view-today .hero .arch{
+  display:block!important;position:absolute;inset:0;z-index:3;pointer-events:none;
+  width:auto;height:auto;right:auto;bottom:auto;border:0;border-radius:0;opacity:1;
+  background:
+    radial-gradient(ellipse 46% 70% at -6% -8%, transparent 62%, rgba(232,193,110,.28) 63%, rgba(232,193,110,.08) 66%, transparent 68%),
+    radial-gradient(ellipse 46% 70% at 106% -8%, transparent 62%, rgba(232,193,110,.28) 63%, rgba(232,193,110,.08) 66%, transparent 68%);
+}
+#view-today .hero .lantern{
+  display:block!important;z-index:3;font-size:0;width:16px;height:26px;right:16%;top:26%;
+  border:0;border-radius:9px 9px 5px 5px;
+  background:radial-gradient(circle at 50% 32%,#fff6d2,#e2bd72 55%,#b8863a);
+  box-shadow:0 0 22px rgba(226,189,114,.85),0 10px 18px rgba(0,0,0,.2);
+  animation:lantern 2.8s ease-in-out infinite
+}
+#view-today .hero .lantern::after{
+  content:"";position:absolute;left:50%;top:100%;width:2px;height:18px;background:rgba(226,189,114,.55);transform:translateX(-50%)
+}
 #view-today .kids-wordmark{
-  display:block!important;
-  position:absolute;z-index:5;left:50%;top:max(10px, calc(env(safe-area-inset-top, 0px) + 8px));
-  transform:translateX(-50%);
-  width:min(86vw, 340px);
-  filter:drop-shadow(0 10px 18px rgba(6,19,31,.45))
+  display:flex!important;flex-direction:column;align-items:center;gap:2px;
+  position:relative;z-index:5;
+  margin:calc(env(safe-area-inset-top, 0px) + 18px) auto 0;
+  width:auto;max-width:92%;
+  transform:none;filter:none;text-align:center
 }
-#view-today .kids-wordmark img{display:block;width:100%;height:auto}
+#view-today .kids-wordmark img{display:none!important}
+#view-today .wm-dar{
+  display:block;font-family:"Cinzel",Georgia,serif;font-weight:700;
+  font-size:clamp(13px,3.6vw,18px);letter-spacing:.22em;color:#f3e0b0;
+  text-shadow:0 2px 14px rgba(6,19,31,.55)
+}
+#view-today .wm-kids{
+  display:flex;gap:.02em;line-height:.9;font-family:"Fredoka",system-ui,sans-serif;
+  font-weight:700;font-size:clamp(44px,14vw,76px);
+  filter:drop-shadow(0 8px 16px rgba(6,19,31,.4))
+}
+#view-today .wm-kids span{display:inline-block}
+#view-today .wm-kids .k{color:#f0c65a}
+#view-today .wm-kids .i{color:#5ec8f2}
+#view-today .wm-kids .d{color:#f06aa8}
+#view-today .wm-kids .s{color:#6ed18c}
 #view-today .hero{
-  --art:url("/test/kids/assets/kids-brand/welcome-sky.png")!important;
-  margin:0 -16px 0;
+  --art:url("/test/kids/assets/kids-brand/hero-sky-open.png?v=13")!important;
+  display:flex;flex-direction:column;justify-content:space-between;
+  margin:calc(-1 * var(--safe-top)) -16px 0;
   width:calc(100% + 32px);
   border:0!important;
-  border-radius:0 0 28px 28px!important;
-  min-height:clamp(250px, 62vw, 320px)!important;
-  box-shadow:0 24px 40px rgba(6,19,31,.28)!important;
-  background:#0a2433!important;
+  border-radius:0 0 42px 42px!important;
+  min-height:clamp(430px,118vw,620px)!important;
+  box-shadow:none!important;
+  background:#071828!important;
   overflow:hidden
 }
 #view-today .hero::before{
   background-image:var(--art)!important;
   background-size:cover!important;
-  background-position:center 18%!important;
-  filter:none!important;opacity:1!important;transform:none!important
+  background-position:center 42%!important;
+  filter:saturate(1.05) contrast(1.02)!important;opacity:1!important;transform:none!important
 }
 #view-today .hero::after{
   background:
-    radial-gradient(ellipse 90% 70% at 50% 18%, rgba(6,19,31,.18), transparent 58%),
-    linear-gradient(180deg, rgba(6,19,31,.22) 0%, transparent 22%, rgba(6,19,31,.55) 78%, #06131f 100%)!important
+    linear-gradient(180deg, rgba(7,20,32,.28) 0%, transparent 22%, transparent 48%, rgba(7,20,32,.42) 78%, #06131f 100%),
+    radial-gradient(ellipse 70% 40% at 50% 18%, rgba(7,24,40,.18), transparent 70%)!important
 }
 #view-today .hero-copy{
-  left:18px;right:18px;bottom:16px;max-width:none;text-align:center;
-  text-shadow:0 6px 18px rgba(6,19,31,.55)
+  position:relative!important;left:auto!important;right:auto!important;bottom:auto!important;
+  z-index:5;max-width:none;text-align:center;
+  padding:8px 22px 30px;margin:0;
+  text-shadow:0 8px 22px rgba(6,19,31,.55)
+}
+#view-today .hero-salam{
+  margin:0 0 8px;font-family:"Cinzel",Georgia,serif!important;font-weight:600;
+  font-size:clamp(16px,4.6vw,22px);letter-spacing:.04em;color:#ffe7b4!important
 }
 #view-today .hero-kicker,
 #view-today .hero h1,
@@ -1891,9 +1934,13 @@ html,body{
 .page-head h2,.page-head p,.section-title{
   font-family:"Fredoka",system-ui,sans-serif!important;letter-spacing:0
 }
-#view-today .hero-kicker{font-size:11px;font-weight:700;letter-spacing:.12em}
-#view-today .hero h1{font-size:clamp(20px,5.4vw,26px)!important;margin:4px 0 4px;font-weight:700;max-width:none}
-#view-today .hero p{font-size:13px!important;max-width:none;margin:0 auto}
+#view-today .hero-kicker{
+  font-size:clamp(12px,3.2vw,14px);font-weight:700;letter-spacing:.18em;color:#ffe4a3;text-transform:uppercase
+}
+#view-today .hero h1{
+  font-size:clamp(26px,7.2vw,40px)!important;margin:6px 0 8px;font-weight:700;max-width:none;line-height:1.12
+}
+#view-today .hero p{font-size:clamp(13px,3.6vw,16px)!important;max-width:28em;margin:0 auto;color:rgba(255,255,255,.9)!important}
 .section-title::after{display:none!important;content:none!important}
 #view-today .resume,
 #view-today .daily-journey,
@@ -1902,7 +1949,7 @@ html,body{
 #view-today .gentle-note,
 #view-today .section-title{position:relative;z-index:3}
 #view-today .resume{
-  margin-top:16px!important;
+  margin-top:18px!important;
   border:0!important;border-radius:22px;
   background:rgba(12,38,54,.92)!important;
   box-shadow:0 12px 24px rgba(0,0,0,.18)!important
@@ -1916,12 +1963,24 @@ html,body{
 #view-today .choice,
 #view-today .knowledge-card{border:0!important;box-shadow:0 14px 28px rgba(0,0,0,.14)!important}
 #view-today .gentle-note{background:transparent;border:0;opacity:.9}
+@media(min-width:700px){
+  #view-today .hero{
+    margin-left:max(-22px, calc(-1 * env(safe-area-inset-left)));
+    margin-right:max(-22px, calc(-1 * env(safe-area-inset-right)));
+    width:auto;min-height:560px!important
+  }
+}
+@media(max-width:380px){
+  #view-today .hero{min-height:clamp(400px,132vw,520px)!important}
+  #view-today .wm-kids{font-size:42px}
+}
+
 
 
 
 
 </style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&display=swap">
 </head>
 <body>
 <div id="kidsUpdateLayer" class="kids-update-layer">
@@ -1938,7 +1997,7 @@ html,body{
 </div>
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon">KIDS · V0.13</div>
+  <div class="dev-ribbon">KIDS · V0.14</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -1947,16 +2006,20 @@ html,body{
       </div>
 
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
-        <div class="kids-wordmark"><img src="/test/kids/assets/kids-brand/logo-mark.png?v=tab12" alt="DĀR AL TAWḤĪD Kids"></div>
+        <div class="kids-wordmark">
+          <span class="wm-dar">DĀR AL TAWḤĪD</span>
+          <span class="wm-kids" aria-hidden="true"><span class="k">K</span><span class="i">i</span><span class="d">d</span><span class="s">s</span></span>
+        </div>
         <div class="cloud"></div>
         <div class="city"></div>
         <div class="arch"></div>
         <div class="dune"></div>
         <div class="lantern"></div>
         <div class="hero-copy">
-          <div class="hero-kicker">WILLKOMMEN</div>
+          <p class="hero-salam">Assalāmu ʿalaikum</p>
+          <div class="hero-kicker">Willkommen</div>
           <h1>Hier ist deine Kinderwelt</h1>
-          <p>Geschichten, Qurʾān und Duʿāʾ — ganz in Ruhe.</p>
+          <p>Geschichten, Qurʾān und Duʿāʾ – ganz in Ruhe.</p>
         </div>
       </div>
 
@@ -2331,7 +2394,7 @@ html,body{
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab12";
+const KIDS_BUILD_ID="kids-shell-v12-tab13";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
