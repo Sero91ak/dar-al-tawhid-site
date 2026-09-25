@@ -122,7 +122,7 @@ def main():
     modes=set((prof.get("prosody") or {}).get("modes",{}))
     missing=required_modes-modes
     if missing: fail("missing prosody modes: "+", ".join(sorted(missing)))
-    if int(prof.get("schemaVersion",0))<6: fail("voice profile schemaVersion must be >=6")
+    if int(prof.get("schemaVersion",0))<7: fail("voice profile schemaVersion must be >=7")
     qa=prof.get("qualityAssurance") or {}
     if int(qa.get("maxRenderAttempts",0))<2: fail("QA maxRenderAttempts must be >=2")
     if int(qa.get("maxInternalSilenceMsWithPunctuation",0))<900: fail("QA punctuation-pause guard missing")
@@ -179,6 +179,19 @@ def main():
     if not honorific_policy.get("duplicateProtection"): fail("required honorific duplicate protection missing")
     if not bool(qa.get("requiredHonorificRegression")): fail("required honorific regression QA missing")
     if not bool(qa.get("duplicateHonorificGuard")): fail("duplicate honorific QA guard missing")
+    if not bool(qa.get("pronunciationLearningRegression")): fail("pronunciation learning regression QA missing")
+    if not bool(qa.get("onlineRuleValidation")): fail("online rule validation QA missing")
+    if not bool(qa.get("learnedRuleRequiresConfirmedAudio")): fail("learned rule confirmed-audio QA missing")
+
+    learning=prof.get("pronunciationLearning") or {}
+    required_learning_flags=(
+        "enabled","clickableDetectedTerms","textSelectionCapture","manualUnknownTermEntry",
+        "manualArabicTtsRequiredWhenNoRuleFound","isolatedPreviewBeforeSave",
+        "explicitHumanConfirmationRequired","confirmedPreviewBecomesPersistentAudioLock",
+        "userRuleOverridesBaseRule","onlineRulesNeverAutoPromoteToMaster","vocabularyExpandsPersistently"
+    )
+    for flag in required_learning_flags:
+        if not learning.get(flag): fail("pronunciation learning policy missing: "+flag)
 
     required_name_rules=[r for r in rules if r.get("required_honorific_key")]
     male_required=[r for r in required_name_rules if r.get("required_honorific_key")=="radiyallahu_anhu"]
@@ -210,9 +223,9 @@ def main():
     except SyntaxError as e:
         fail(f"engine syntax error: {e}")
     functions={n.name for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))}
-    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","discard_pending_audio_locks","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav","source_has_honorific"}:
+    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","discard_pending_audio_locks","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav","source_has_honorific","rebuild_runtime_rules","pronunciation_search","sync_online_pronunciation_library","create_learning_preview","confirm_learning_preview","save_user_override","learning_state"}:
         if required not in functions: fail(f"engine missing production function: {required}")
-    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","/confirm-core-audio","audio_lock_pending","session_audio_locks","required_honorific_key","honorificPolicyEnabled"}:
+    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","/confirm-core-audio","audio_lock_pending","session_audio_locks","required_honorific_key","honorificPolicyEnabled","/learning/search","/learning/sync","/learning/preview","/learning/confirm","USER_OVERRIDES_FILE","ONLINE_LIBRARY_CACHE","CONFIRMED_WAV"}:
         if marker not in engine_source: fail(f"engine missing QA/audio-lock marker: {marker}")
 
     for case in fixtures.get("cases",[]):
@@ -253,6 +266,7 @@ def main():
         "requiredHonorificMaleVariants":len(male_required),
         "requiredHonorificFemaleVariants":len(female_required),
         "requiredHonorificProphetVariants":len(prophet_required),
+        "pronunciationLearning":True,
         "profileSchema":prof.get("schemaVersion")
     },ensure_ascii=False))
 
