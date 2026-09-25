@@ -1,6 +1,6 @@
 {
-  "version": "1.8.0",
-  "updatedAt": "2026-09-25T19:40:00+02:00",
+  "version": "2.0.0",
+  "updatedAt": "2026-09-25T19:58:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "local-chatterbox-v3",
   "provider": "self-produced",
@@ -14,13 +14,13 @@
     "fallbackReference": "~/SerhatVoice/Serhat_FINAL_REF.wav"
   },
   "setupMethod": "native-macos-wkwebview-existing-serhatvoice",
-  "setupCommand": "curl -fsSL 'https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/d59b520efdb6b6d1e883ce1d390a2ec265dfbf75/voice-studio/install-mac.command' | /bin/bash",
+  "setupCommand": "curl -fsSL 'https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/voice-studio/install-mac.command' | /bin/bash",
   "macApp": "~/Applications/DĀR Voice Studio.app",
   "macAppRuntime": "native WKWebView + retained local Chatterbox process + native edit menu",
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-raw",
-  "engineVersion": "full-native-lexicon-smooth-crossfade",
+  "engineVersion": "prosody-auto-dual-reference-qa-v2",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -53,11 +53,34 @@
     "arabicLanguageId": "ar",
     "nativeArabicTtsRules": 3727,
     "pronunciationGroups": 870,
-    "fullPronunciationCoverage": true,
+    "masterVariants": 43,
+    "curatedReviewGroups": 207,
+    "automaticProsody": true,
+    "prosodyModes": [
+      "narration",
+      "kids_story",
+      "kids_lesson",
+      "teaching",
+      "gentle",
+      "serious",
+      "question",
+      "list",
+      "dua"
+    ],
+    "dualReferenceSupport": true,
+    "arabicReferencePath": "~/SerhatVoice/Serhat_AR_MASTER.wav",
+    "arabicReferenceOptional": true,
+    "renderQaRetries": 2,
     "boundarySilenceTrim": true,
-    "languageCrossfadeMs": 32,
+    "dynamicCrossfade": true,
     "gentleLevelMatching": true,
-    "stableSegmentSeed": true,
-    "shortArabicNeutralProsody": true
+    "humanMasterApprovalRequired": true
+  },
+  "releaseSafety": {
+    "stagedInstaller": true,
+    "pyCompilePreflight": true,
+    "pronunciationRegression": true,
+    "backupBeforeReplace": true,
+    "githubActionsValidation": true
   }
 }
