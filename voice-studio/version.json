@@ -1,6 +1,6 @@
 {
-  "version": "1.5.0",
-  "updatedAt": "2026-09-25T13:08:00+02:00",
+  "version": "1.5.1",
+  "updatedAt": "2026-09-25T13:18:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "local-chatterbox-v3",
   "provider": "self-produced",
@@ -14,7 +14,7 @@
     "fallbackReference": "~/SerhatVoice/Serhat_FINAL_REF.wav"
   },
   "setupMethod": "native-macos-wkwebview-existing-serhatvoice",
-  "setupCommand": "curl -fsSL 'https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/voice-studio/install-mac.command?native=142' | /bin/bash",
+  "setupCommand": "curl -fsSL 'https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/de7426df317ff722857b7fd0e0e5436a843b22b2/voice-studio/install-mac.command' | /bin/bash",
   "macApp": "~/Applications/DĀR Voice Studio.app",
   "macAppRuntime": "native WKWebView + local Chatterbox engine",
   "browserRequiredAfterInstall": false,
@@ -24,5 +24,6 @@
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
-  "renderTimeoutMinutes": 15
+  "renderTimeoutMinutes": 15,
+  "launchctlFallback": "direct-engine-start-no-sudo"
 }
