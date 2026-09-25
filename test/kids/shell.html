@@ -528,19 +528,45 @@ html,body{background:#06131f!important}
   html,body,.app{background-color:#06131f!important}
 }
 
-/* KIDS_UPDATE_UI_V3 */
-.kids-update-layer,.kids-update-layer.show{display:none!important}
+/* KIDS_UPDATE_UI_V4 — kinderfreundliche Update-Fläche, nur Kids */
+.kids-update-layer{
+  position:fixed;inset:0 auto auto 0;right:0;z-index:80;
+  display:flex;justify-content:center;align-items:flex-start;
+  padding:calc(10px + env(safe-area-inset-top)) 14px 0;
+  pointer-events:none;
+  transform:translate3d(0,-120%,0);
+  transition:transform 480ms cubic-bezier(.16,.84,.32,1);
+}
+.kids-update-layer.is-open{
+  pointer-events:auto;
+  transform:translate3d(0,0,0);
+}
 .kids-update-card{
-  width:min(100%,430px);border:1px solid rgba(226,189,114,.28);border-radius:30px;
-  padding:26px 22px;text-align:center;background:#0b2133;box-shadow:0 24px 70px rgba(0,0,0,.46)
+  width:min(100%,430px);
+  position:relative;
+  border:1px solid rgba(226,189,114,.34);
+  border-radius:0 0 26px 26px;
+  padding:16px 16px 14px;
+  text-align:left;
+  background:linear-gradient(180deg,rgba(12,38,58,.96),rgba(8,26,40,.94));
+  box-shadow:0 18px 40px rgba(0,0,0,.32);
+  -webkit-backdrop-filter:blur(18px) saturate(1.2);
+  backdrop-filter:blur(18px) saturate(1.2);
 }
-.kids-update-mark{font-size:32px;margin-bottom:10px}
-.kids-update-card h2{margin:0 0 8px;font-size:24px}
-.kids-update-card p{margin:0;color:rgba(255,255,255,.72);font-size:13px;line-height:1.5}
+.kids-update-icon-wrap{
+  width:46px;height:46px;margin:0 0 8px;
+  display:grid;place-items:center;
+}
+.kids-update-icon-wrap .kid-icon{width:42px;height:42px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.28))}
+.kids-update-card h2{margin:0 0 6px;font-size:20px;line-height:1.15;color:#fff8e8}
+.kids-update-card p{margin:0;color:rgba(255,248,232,.78);font-size:13px;line-height:1.45}
 .kids-update-card button{
-  width:100%;margin-top:20px;min-height:54px;border:0;border-radius:18px;
-  background:#e2bd72;color:#102030;font-weight:950;font-size:15px
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;margin-top:14px;min-height:52px;border:0;border-radius:999px;
+  background:linear-gradient(180deg,#f0d08a,#d7b15a);color:#102030;
+  font-weight:950;font-size:15px;cursor:pointer
 }
+.kids-update-card button .kid-icon{width:22px;height:22px}
 
 /* KIDS_AI_ART_V7_START — generated artwork backgrounds */
 /* KIDS_SEAMLESS_WASH_V11
@@ -1764,12 +1790,14 @@ html,body{
 }
 
 </style>
-<link rel="stylesheet" href="/assets/global-update-banner.css?v=1">
 </head>
 <body>
-    <h2 id="kidsUpdateTitle">App-Aktualisierung bereit</h2>
-    <p id="kidsUpdateText">Die Kinder-App wurde aktualisiert. Tippe einmal auf Aktualisieren, damit die neue Oberfläche vollständig geladen wird.</p>
-    <button id="kidsUpdateButton" type="button">Jetzt aktualisieren</button>
+<div id="kidsUpdateLayer" class="kids-update-layer" hidden>
+  <div class="kids-update-card" role="dialog" aria-labelledby="kidsUpdateTitle" aria-describedby="kidsUpdateText">
+    <div class="kids-update-icon-wrap" aria-hidden="true"><span class="kid-icon icon-spark"></span></div>
+    <h2 id="kidsUpdateTitle">Etwas Neues ist da</h2>
+    <p id="kidsUpdateText">Tippe auf den goldenen Knopf. Dann lädt deine Kinder-App die neue, schöne Oberfläche.</p>
+    <button id="kidsUpdateButton" type="button"><span class="kid-icon icon-play" aria-hidden="true"></span>Jetzt aktualisieren</button>
   </div>
 </div>
 <div class="app">
@@ -2166,29 +2194,28 @@ html,body{
 <audio id="quranAudio" preload="none" playsinline></audio>
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
-<script src="/assets/global-update-banner.js?v=1"></script>
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab2";
+const KIDS_BUILD_ID="kids-shell-v12-tab3";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
-  function kidsStandalone(){
-    try{
-      return navigator.standalone===true || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
-    }catch(e){return false}
-  }
+  var pendingKidsBuild="";
   function kidsShowUpdate(title,text,targetBuild){
-    if(window.DARGlobalUpdate){
-      window.DARGlobalUpdate.show({
-        buildId: targetBuild,
-        localBuild: KIDS_BUILD_ID,
-        title: title||"Neue Version verfügbar",
-        text: "Eine neue Version von DĀR AL TAWḤĪD ist bereit.",
-        apply: function(){ kidsHardReload(targetBuild); }
-      });
-      return;
+    pendingKidsBuild=String(targetBuild||KIDS_BUILD_ID);
+    var layer=document.getElementById("kidsUpdateLayer");
+    var h=document.getElementById("kidsUpdateTitle");
+    var p=document.getElementById("kidsUpdateText");
+    var btn=document.getElementById("kidsUpdateButton");
+    if(h)h.textContent=title||"Etwas Neues ist da";
+    if(p)p.textContent=text||"Tippe auf den goldenen Knopf. Dann lädt deine Kinder-App die neue, schöne Oberfläche.";
+    if(btn && !btn.dataset.bound){
+      btn.dataset.bound="1";
+      btn.addEventListener("click",function(){ kidsHardReload(pendingKidsBuild); });
     }
-    kidsHardReload(targetBuild);
+    if(layer){
+      layer.hidden=false;
+      requestAnimationFrame(function(){ layer.classList.add("is-open"); });
+    }
   }
   function kidsHardReload(targetBuild){
     var want=String(targetBuild||KIDS_BUILD_ID);
@@ -2209,7 +2236,7 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
       var j=await r.json();
       var remote=String(j.buildId||"").trim();
       if(remote && remote!==KIDS_BUILD_ID){
-        kidsShowUpdate("Neue Version verfügbar","Tippe auf Aktualisieren. Die neue Oberfläche muss vollständig neu geladen werden — nicht nur der Button.",remote);
+        kidsShowUpdate("Etwas Neues ist da","Tippe auf den goldenen Knopf. Dann lädt deine Kinder-App die neue, schöne Oberfläche.",remote);
       }else if(remote===KIDS_BUILD_ID){
         try{localStorage.setItem(KIDS_BUILD_SEEN_KEY,KIDS_BUILD_ID)}catch(e){}
       }

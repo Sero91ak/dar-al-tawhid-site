@@ -7,6 +7,7 @@
   function isTest() {
     try {
       var p = String(location.pathname || "");
+      if (p.indexOf("/test/kids") === 0 || p.indexOf("/kids") === 0) return false;
       return p.indexOf("/test/") === 0 || p === "/test";
     } catch (e) {
       return false;

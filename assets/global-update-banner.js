@@ -10,7 +10,8 @@
   function isAppExperience() {
     try {
       var path = String(location.pathname || "");
-      if (path.indexOf("/test") === 0 || path.indexOf("/kids") === 0) return true;
+      if (path.indexOf("/test/kids") === 0 || path.indexOf("/kids") === 0) return false;
+      if (path.indexOf("/test") === 0) return true;
       if (root.DAR_IOS_NATIVE_APP || root.DAR_ANDROID_NATIVE_APP || root.DAR_OFFICIAL_IOS_APP) return true;
       var html = document.documentElement;
       if (html.classList.contains("dar-ios-native-app") || html.classList.contains("dar-android-native-app")) return true;
