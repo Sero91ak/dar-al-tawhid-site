@@ -15,10 +15,13 @@
 /bibliothek https://t.me/dar_al_tauhid1 302
 /community https://t.me/dar_al_tauhid1 302
 
-# DĀR AL TAWḤĪD Kids — nur /test/kids/ (kein /kids/test/)
+# DĀR AL TAWḤĪD Kids — öffentliche Test-URL
 /kids /test/kids/ 302
 /kids/ /test/kids/ 302
 /test/kids /test/kids/ 301
-/test/kids/ /test/kids/index.html 200
+/test/kids/ /test/kids/shell.html 200
+/test/kids/index.html /test/kids/shell.html 200
+/test/kids/start /test/kids/shell.html 200
+/test/kids/start.html /test/kids/shell.html 200
 
 
