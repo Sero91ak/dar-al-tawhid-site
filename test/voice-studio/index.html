@@ -38,7 +38,7 @@ button,a,input,textarea{touch-action:manipulation}
 button{color:inherit}
 button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid rgba(217,182,111,.72);outline-offset:2px}
 .app{width:100%;min-height:100dvh;padding:var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left)}
-.shell{width:100%;max-width:1780px;margin:0 auto;min-height:calc(100dvh - var(--safe-top) - var(--safe-bottom));display:flex;flex-direction:column}
+.shell{width:100%;max-width:1920px;margin:0 auto;min-height:calc(100dvh - var(--safe-top) - var(--safe-bottom));display:flex;flex-direction:column}
 .topbar{
   min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:10px 6px 14px;position:sticky;top:0;z-index:30;
@@ -132,6 +132,25 @@ input{width:100%;background:#071927;color:var(--ink);border:1px solid var(--line
   .status{max-width:42vw}
   .profile-grid{grid-template-columns:1fr}
   .stats{grid-template-columns:repeat(3,1fr)}
+  .editor-panel{padding-left:max(11px,var(--safe-left));padding-right:max(11px,var(--safe-right))}
+  textarea{min-height:260px;height:40dvh}
+}
+@media(max-height:560px) and (orientation:landscape){
+  .app{padding-top:0}
+  .topbar{position:relative;min-height:54px;padding-top:6px;padding-bottom:7px}
+  .workspace{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.55fr)}
+  .editor-panel{padding:12px 14px 78px;border-radius:0}
+  .side-panel{position:relative;top:auto;max-height:none;margin:0;border-radius:0;padding:12px}
+  .heading-row{margin-bottom:8px}.lead,.badges{display:none}h1{font-size:23px}
+  textarea{height:48dvh;min-height:190px;max-height:300px;padding:11px 12px 40px}
+  .stats{margin:7px 0}.term-list{max-height:70px}.preview-grid{display:none}
+  .mobile-actions{display:grid;grid-template-columns:.42fr 1fr}
+  .footer{display:none}
+}
+@media(min-width:1921px){
+  .shell{max-width:none}
+  .workspace{grid-template-columns:minmax(0,2fr) 430px}
+  .editor-panel{padding-left:clamp(30px,2.5vw,54px);padding-right:clamp(30px,2.5vw,54px)}
 }
 @media(display-mode:standalone){
   .topbar{padding-top:4px}
