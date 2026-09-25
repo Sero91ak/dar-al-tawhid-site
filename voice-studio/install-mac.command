@@ -13,6 +13,16 @@ PLIST="$APP/Contents/Info.plist"
 LAUNCH="$HOME/Library/LaunchAgents/com.daraltawhid.voice-engine.plist"
 LABEL="com.daraltawhid.voice-engine"
 
+# Vor einem Update muss die bereits laufende App wirklich beendet werden.
+# Sonst aktiviert macOS am Ende nur die alte Binary erneut.
+osascript -e 'tell application id "de.dar-al-tawhid.voice-studio" to quit' >/dev/null 2>&1 || true
+pkill -TERM -x DARVoiceStudio >/dev/null 2>&1 || true
+sleep 1
+pkill -KILL -x DARVoiceStudio >/dev/null 2>&1 || true
+
+# Altes App-Bundle vollständig entfernen, damit keine stale Binary/Resources
+# im Bundle verbleiben. Die lokalen Voice-Daten unter TARGET bleiben erhalten.
+rm -rf "$APP"
 mkdir -p "$TARGET" "$VOICE_HOME" "$MACOS" "$RESOURCES" "$HOME/Library/LaunchAgents"
 
 say_status() {
@@ -602,8 +612,8 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>1.6.0</string>
-  <key>CFBundleShortVersionString</key><string>1.6.0</string>
+  <key>CFBundleVersion</key><string>1.6.1</string>
+  <key>CFBundleShortVersionString</key><string>1.6.1</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>
@@ -625,9 +635,20 @@ cat > "$PLIST" <<'PLIST'
 PLIST
 /usr/bin/plutil -lint "$PLIST" >/dev/null
 
-# App bei LaunchServices registrieren, dann öffnen.
+# Lokales ad-hoc Codesigning nach jedem Neuaufbau. Dadurch behandelt macOS
+# Bundle, Binary, Info.plist und Ressourcen als eine konsistente neue App.
+if command -v codesign >/dev/null 2>&1; then
+  codesign --force --deep --sign - "$APP" >/dev/null 2>&1 || true
+fi
+
+# Alte LaunchServices-Zuordnung entfernen und die frisch gebaute App registrieren.
 LSREGISTER="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
+"$LSREGISTER" -u "$APP" >/dev/null 2>&1 || true
 "$LSREGISTER" -f "$APP" >/dev/null 2>&1 || true
 
-say_status "DĀR Voice Studio ist als Mac-App installiert."
-open "$APP"
+# Finder/LaunchServices kurz Zeit geben, die neue Binary zu übernehmen.
+sleep 1
+
+# App bei LaunchServices registrieren, dann öffnen.
+say_status "DĀR Voice Studio 1.6.1 ist installiert."
+open -n "$APP"
