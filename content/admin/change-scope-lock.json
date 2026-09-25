@@ -87,7 +87,8 @@
     "test/assets/app-soft-boot.js",
     "test/assets/app-soft-boot.css",
     "assets/dar-ios-oversize-copy.css",
-    "test/assets/dar-ios-oversize-copy.css"
+    "test/assets/dar-ios-oversize-copy.css",
+    "kids/"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -107,6 +108,18 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "kids-standalone-test-app-2026-09-25",
+      "approvedBy": "user-explicit-kids-eigenstaendig-testphase-harmonieren-nicht-vermischen",
+      "reason": "Nutzer: DĀR AL TAWḤĪD Kids als eigenständige Test-App im eigenen Bereich; darf von der Haupt-App Daten ziehen, darf sich nicht mit der Besucher-App vermischen. Noch keine Live-Kids-App.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "kids/",
+        "_redirects",
+        "_headers"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
     {
       "id": "quiz-end-back-hang-2026-09-24",
       "approvedBy": "user-explicit-quiz-beenden-zurueck-haengt-ios-web-alle-apps",
