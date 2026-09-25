@@ -341,10 +341,16 @@ details{
 }
 summary{padding:11px 0}
 .advanced{padding:0 0 12px}
-input{
-  border-radius:8px;background:rgba(1,14,19,.34);
-  border-color:var(--line)
+input,select{
+  border-radius:8px;background:rgba(1,14,19,.58);
+  border:1px solid var(--line);color:var(--text);
+  font:inherit
 }
+.style-control{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.style-control label{display:block;color:var(--muted);font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}
+.style-control select{width:100%;height:38px;padding:0 10px;outline:none}
+.style-control .notice{margin-top:7px}
+
 .footer{color:#5d7478;padding-top:14px}
 .mobile-actions{
   border-radius:12px;
@@ -449,6 +455,22 @@ input{
       <div class="profile-box"><small>Sprache</small><strong>Deutsch + Arabisch · segmentiert</strong></div>
       <div class="profile-box"><small>Engine</small><strong>Chatterbox V3 · MPS</strong></div>
     </div>
+    <div class="style-control">
+      <label for="styleMode">Sprechweise / Prosodie</label>
+      <select id="styleMode">
+        <option value="auto">Auto · Satz & Thema erkennen</option>
+        <option value="kids_story">Kinder-Geschichte</option>
+        <option value="kids_lesson">Kinder-Unterricht</option>
+        <option value="teaching">Unterricht</option>
+        <option value="narration">Erzählung</option>
+        <option value="gentle">Sanft</option>
+        <option value="serious">Ernst</option>
+        <option value="question">Frage</option>
+        <option value="list">Aufzählung</option>
+        <option value="dua">Duʿāʾ / Bittgebet</option>
+      </select>
+      <div class="notice">Auto passt Betonung, Ruhe und Pausen an den Satz an. Eine manuelle Auswahl überschreibt nur die Prosodie, niemals die Aussprachebibliothek.</div>
+    </div>
   </section>
 
   <section class="side-section">
@@ -456,7 +478,10 @@ input{
     <div class="qa">
       <div class="qa-item"><span>Aussprachebibliothek</span><b id="qaLex" class="warn">lädt</b></div>
       <div class="qa-item"><span>Serhat Engine</span><b id="qaEngine" class="warn">prüfen</b></div>
+      <div class="qa-item"><span>Prosodie</span><b id="qaProsody" class="warn">Auto</b></div>
+      <div class="qa-item"><span>Arabische Master-Referenz</span><b id="qaArabicRef" class="warn">Fallback</b></div>
       <div class="qa-item"><span>LOCKED-Begriffe</span><b id="qaLocked" class="warn">–</b></div>
+      <div class="qa-item"><span>Technische Audio-QA</span><b id="qaTechnical" class="warn">wartet</b></div>
       <div class="qa-item"><span>Audio vorhanden</span><b id="qaAudio" class="warn">nein</b></div>
       <div class="qa-item"><span>Aussprache bestätigt</span><b id="qaConfirmed" class="warn">nein</b></div>
     </div>
@@ -493,6 +518,10 @@ input{
 
 <script>
 const LOCKED=new Set(["DĀR AL TAWḤĪD","Dār al-Tawḥīd","Allāh","Qurʾān","Tawḥīd","ʿAqīdah","Ḥadīṯ","Ṣaḥābah","Duʿāʾ","Ṣalāh","Muḥammad","Ibrāhīm","Mūsā"]);
+const PROSODY_LABELS={
+  auto:"Auto",narration:"Erzählung",kids_story:"Kinder-Geschichte",kids_lesson:"Kinder-Unterricht",
+  teaching:"Unterricht",gentle:"Sanft",serious:"Ernst",question:"Frage",list:"Aufzählung",dua:"Duʿāʾ"
+};
 const IS_LOCAL=location.hostname==="127.0.0.1"||location.hostname==="localhost";
 const LOCAL_API=IS_LOCAL?"":"http://127.0.0.1:8787";
 let library={rules:[]},buckets=new Map(),lastAudio=null,engineOK=false,modelReady=false,qaConfirmed=false,deferredInstall=null;
@@ -563,20 +592,42 @@ function renderAnalysis(){
     if(!seen.has(k)){seen.add(k);unique.push(r)}
   }
   $("#terms").textContent=unique.length;
-  const lc=unique.filter(r=>LOCKED.has(r.canonical)||LOCKED.has(r.string_to_replace)).length;
+  const lc=unique.filter(r=>r.voice_lock==="MASTER"||LOCKED.has(r.canonical)||LOCKED.has(r.string_to_replace)).length;
   $("#locked").textContent=lc;
   $("#termList").innerHTML=unique.length
     ?unique.map(r=>{
-      const l=LOCKED.has(r.canonical)||LOCKED.has(r.string_to_replace);
-      return '<span class="term '+(l?'locked':'verified')+'">'+esc(r.canonical||r.string_to_replace)+' · '+(l?'LOCKED':'VERIFIED')+'</span>';
+      const master=r.voice_lock==="MASTER";
+      const l=master||LOCKED.has(r.canonical)||LOCKED.has(r.string_to_replace);
+      const label=master?"MASTER":(l?"LOCKED":r.voice_lock==="REVIEW"?"REVIEW":"VERIFIED");
+      return '<span class="term '+(l?'locked':'verified')+'">'+esc(r.canonical||r.string_to_replace)+' · '+label+'</span>';
     }).join("")
     :'<span class="term">Keine Bibliotheksbegriffe erkannt</span>';
   $("#qaLocked").textContent=lc?"Audio-QA erforderlich":"keine";
   $("#qaLocked").className=lc?"warn":"good";
   updateQA();
 }
+async function analyzeProsody(){
+  if(!engineOK)return null;
+  try{
+    const r=await localRequest("/analyze",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({text:$("#text").value.trim(),style:$("#styleMode").value})
+    });
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||!d.ok)return null;
+    $("#qaProsody").textContent=PROSODY_LABELS[d.mode]||d.mode||"Auto";
+    $("#qaProsody").className="good";
+    $("#qaArabicRef").textContent=d.arabicReferenceDedicated?"Serhat AR MASTER":"Serhat DE Fallback";
+    $("#qaArabicRef").className=d.arabicReferenceDedicated?"good":"warn";
+    if(d.prepared)$("#prepared").textContent=d.prepared;
+    return d;
+  }catch(_){return null}
+}
+
 async function manualAnalyze(){
   renderAnalysis();
+  await analyzeProsody();
   const btns=[$("#analyzeBtn"),$("#mobileAnalyzeBtn")].filter(Boolean);
   const labels=btns.map(b=>b.textContent);
   btns.forEach(b=>{b.disabled=true;b.textContent="Geprüft ✓"});
@@ -622,6 +673,10 @@ function updateEngineUI(data){
   $("#qaEngine").className=engineOK&&!modelError?(modelReady?"good":"warn"):"bad";
   $("#startEngineBtn").textContent=engineOK?"Mac-App öffnen":"Engine / Mac-App starten";
   $("#startEngineBtn").disabled=false;
+
+  const arDedicated=!!(data?.reference_arabic_dedicated||data?.arabic_reference_dedicated);
+  $("#qaArabicRef").textContent=arDedicated?"Serhat AR MASTER":"Serhat DE Fallback";
+  $("#qaArabicRef").className=arDedicated?"good":"warn";
 
   if(modelError&&data?.last_error){
     $("#engineHelp").textContent="Modellfehler: "+data.last_error;
@@ -751,7 +806,7 @@ async function generate(){
       r=await localRequest("/generate",{
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({text,prepared:analysis.prepared,voice:"Serhat",format:"wav"}),
+        body:JSON.stringify({text,prepared:analysis.prepared,voice:"Serhat",format:"wav",style:$("#styleMode").value}),
         signal:controller.signal
       });
     }finally{
@@ -778,6 +833,15 @@ async function generate(){
     $("#qaLocked").textContent="anhören & bestätigen";
     $("#qaLocked").className="warn";
     updateQA();
+    const finalStatus=await getEngineStatus();
+    const qa=finalStatus?.last_qa;
+    if(qa?.mode){
+      $("#qaProsody").textContent=PROSODY_LABELS[qa.mode]||qa.mode;
+      $("#qaProsody").className="good";
+    }
+    const finalIssues=qa?.final?.issues||[];
+    $("#qaTechnical").textContent=finalIssues.length?"prüfen":"bestanden";
+    $("#qaTechnical").className=finalIssues.length?"warn":"good";
     setMessage("Audio fertig. Bitte anhören und die Aussprache bestätigen.","good");
     $("#player").play().catch(()=>{});
     $("#playerWrap").scrollIntoView({behavior:"smooth",block:"nearest"});
@@ -806,6 +870,7 @@ function confirmQA(){
 }
 
 $("#text").addEventListener("input",()=>{resetAudioQA();renderAnalysis()});
+$("#styleMode").addEventListener("change",()=>{resetAudioQA();manualAnalyze()});
 $("#analyzeBtn").onclick=manualAnalyze;
 $("#mobileAnalyzeBtn").onclick=manualAnalyze;
 $("#generateBtn").onclick=generate;
@@ -895,7 +960,7 @@ if(IS_LOCAL){
   }
 }
 loadLibrary();
-checkHealth({quiet:true});
+checkHealth({quiet:true}).then(()=>analyzeProsody());
 setInterval(()=>checkHealth({quiet:true}),5000);
 </script>
 </body>
