@@ -149,7 +149,7 @@ export default {
     const url = new URL(request.url);
     const KIDS_SHELL_REV = "20260924-11-seamless2";
     const isKidsPath = /^\/test\/kids(?:\/|$)/.test(url.pathname);
-    const isVoiceStudioPath = /^\/test\/voice-studio(?:\/|$)/.test(url.pathname);
+    const isVoiceStudioPath = /^\/(?:test\/)?voice-studio(?:\/|$)/.test(url.pathname);
 
     if ((url.pathname === "/test/kids" || url.pathname === "/test/kids/") && url.searchParams.get("kv") !== KIDS_SHELL_REV) {
       url.pathname = "/test/kids/";
@@ -190,9 +190,15 @@ export default {
       return Response.redirect(kidsUrl.toString(), 302);
     }
 
-    if (url.pathname === "/test/voice-studio" || url.pathname === "/test/voice-studio/") {
+    if (
+      url.pathname === "/test/voice-studio" ||
+      url.pathname === "/test/voice-studio/" ||
+      url.pathname === "/voice-studio" ||
+      url.pathname === "/voice-studio/"
+    ) {
       const voiceUrl = new URL(request.url);
       voiceUrl.pathname = "/test/voice-studio/index.html";
+      voiceUrl.searchParams.set("vs", "3");
       return new Response(null, {
         status: 302,
         headers: {
