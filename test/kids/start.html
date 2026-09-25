@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#06131f">
+<meta name="theme-color" content="#0c2636">
 <link rel="manifest" href="/test/kids/manifest.webmanifest">
 <link rel="apple-touch-icon" sizes="180x180" href="/test/kids/icons/apple-touch-icon.png?v=logo23">
 <link rel="icon" type="image/png" sizes="192x192" href="/test/kids/icons/icon-192.png?v=logo23">
 <link rel="icon" type="image/png" sizes="512x512" href="/test/kids/icons/icon-512.png?v=logo23">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DĀR AL TAWḤĪD KIDS">
 <title>DĀR AL TAWḤĪD KIDS – Kinderwelt</title>
 <style>
@@ -1974,6 +1974,51 @@ html,body{
   #view-today .hero-salam{font-size:12px}
 }
 
+/* KIDS_EDGE_FILL_V24 — kein Mond-Logo oben, keine Farbkante, vollflächig oversized */
+#view-today .brand-line,
+#view-today .profile-dot{display:none!important}
+.sky-sun,.sky-nightmoon,.sky-sun-off{display:none!important;opacity:0!important}
+.app::before{height:0!important;opacity:0!important;background:transparent!important}
+html,body,.app,.ambient{
+  background:#0c2636!important;
+  background-image:none!important;
+}
+.app[data-gender="boy"],.app[data-gender="girl"]{
+  background:#0c2636!important;
+  background-image:none!important;
+}
+#view-today .hero{
+  width:100vw!important;
+  max-width:100vw!important;
+  margin-left:calc(50% - 50vw)!important;
+  margin-right:calc(50% - 50vw)!important;
+  margin-top:calc(-1 * (var(--safe-top) + 8px))!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  min-height:clamp(420px,108vw,560px)!important;
+  overflow:hidden!important;
+  background:#0c2636!important;
+}
+#view-today .hero::before{
+  inset:-12% -10% -8%!important;
+  background-size:cover!important;
+  background-position:center 18%!important;
+  transform:scale(1.08)!important;
+  filter:saturate(1.08) contrast(1.02) brightness(1.02)!important;
+}
+#view-today .hero::after{
+  background:linear-gradient(180deg,rgba(12,38,54,0) 48%,rgba(12,38,54,.55) 78%,#0c2636 100%)!important;
+}
+#view-today .resume,
+#view-today .daily-journey,
+#view-today .choice,
+#view-today .knowledge-card{
+  background:rgba(10,34,48,.94)!important;
+}
+@media(min-width:700px){
+  #view-today .hero{min-height:520px!important}
+}
+
 
 
 
@@ -2217,7 +2262,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon">KIDS · V0.24</div>
+  <div class="dev-ribbon">KIDS · V0.25</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2636,7 +2681,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab23";
+const KIDS_BUILD_ID="kids-shell-v12-tab24";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
