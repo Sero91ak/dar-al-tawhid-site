@@ -115,33 +115,6 @@ export default {
         return new Response(body, { status: 200, headers });
       }
 
-      const isKidsDocument = url.pathname === "/test/kids"
-        || url.pathname === "/test/kids/"
-        || url.pathname === "/test/kids/index.html"
-        || url.pathname === "/test/kids/start"
-        || url.pathname === "/test/kids/start.html"
-        || url.pathname === "/test/kids/shell.html"
-        || url.pathname === "/test/kids/shell";
-      if (isKidsDocument) {
-        const headers = kidsHeaders(new Response(""));
-        headers.set("Content-Type", "text/html; charset=utf-8");
-        const html = `<!doctype html>
-<html lang="de">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b1220">
-<title>DĀR AL TAWḤĪD Kids</title>
-<style>html,body{margin:0;height:100%;background:#0b1220}iframe{display:block;width:100%;height:100%;border:0}</style>
-</head>
-<body>
-<iframe src="${KIDS_MIRROR}/test/kids/" title="DĀR AL TAWḤĪD Kids" allow="autoplay *; fullscreen *; geolocation *"></iframe>
-</body>
-</html>`;
-        if (request.method === "HEAD") return new Response(null, { status: 200, headers });
-        return new Response(html, { status: 200, headers });
-      }
-
       const assetResponse = await fetchKidsMirror(url.pathname, url.search);
       const headers = kidsHeaders(assetResponse);
       if (request.method === "HEAD") {

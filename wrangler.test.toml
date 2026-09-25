@@ -1,6 +1,7 @@
 # Cloudflare Worker — Dar Test App (isoliert von Besucher-App)
 # workers.dev: https://dar-al-tawhid-test.sero91ak.workers.dev/test/
-# Öffentlich:  https://dar-al-tawhid.de/test/  (Route hat Vorrang vor Live-Custom-Domain)
+# Keine Custom-Domain auf dar-al-tawhid.de. Öffentliches /test/kids läuft über dar-al-tawhid-site.
+# Worker dar-al-tawhid-kids darf keine Route auf /test/kids oder /test/kids/* haben.
 
 name = "dar-al-tawhid-test"
 main = "cloudflare/test-app-worker.js"
