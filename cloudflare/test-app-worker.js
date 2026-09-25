@@ -20,11 +20,14 @@ export default {
 
     const path = url.pathname;
     const kids = path === "/test/kids" || path.startsWith("/test/kids/");
-    if (kids) {
+    if (kids && url.hostname !== "kids-assets.internal" && request.headers.get("X-Kids-Asset") !== "1") {
       const assetPath = path === "/test/kids" || path === "/test/kids/"
         ? "/test/kids/index.html"
         : path;
-      const assetResponse = await env.ASSETS.fetch(new Request(`https://kids-assets.internal${assetPath}${url.search}`, { method: "GET" }));
+      const assetResponse = await env.ASSETS.fetch(new Request(`https://kids-assets.internal${assetPath}${url.search}`, {
+        method: "GET",
+        headers: { "X-Kids-Asset": "1" }
+      }));
       const headers = new Headers(assetResponse.headers);
       headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
       headers.set("CDN-Cache-Control", "no-store");
