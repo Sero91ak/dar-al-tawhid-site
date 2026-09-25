@@ -91,6 +91,15 @@ details{border:1px solid var(--line);border-radius:14px;background:rgba(255,255,
 label{display:block;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-weight:800;margin:0 0 6px}
 input{width:100%;background:#071927;color:var(--ink);border:1px solid var(--line);border-radius:11px;padding:10px 11px;font-size:12px}
 .notice{font-size:11px;line-height:1.5;color:var(--muted)}
+.term.clickable{cursor:pointer;font-family:inherit}.term.clickable:hover{border-color:rgba(205,176,113,.42);color:#f0d59a}
+.learning-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0}
+.learning-results{display:grid;gap:6px;max-height:220px;overflow:auto;margin:8px 0}
+.learning-result{width:100%;text-align:left;border:1px solid var(--line);background:rgba(255,255,255,.026);border-radius:9px;padding:9px 10px;cursor:pointer}
+.learning-result.active{border-color:rgba(205,176,113,.55);background:rgba(205,176,113,.07)}
+.learning-result b{display:block;font-size:12px}.learning-result small{display:block;color:var(--muted);font-size:9px;margin-top:3px;line-height:1.35}
+.learning-arabic{font-family:"Geeza Pro","Noto Naskh Arabic",serif;font-size:18px!important;text-align:right;direction:rtl}
+.learning-status{font-size:10px;color:var(--muted);line-height:1.45;margin-top:7px}
+.learning-player{width:100%;margin:7px 0;height:36px}
 .footer{padding:13px 4px 4px;color:#6f8290;font-size:10px;text-align:center}
 .mobile-actions{display:none}
 @media(min-width:1420px){
@@ -490,6 +499,27 @@ input,select{
     </div>
   </section>
 
+  <section class="side-section" id="learningSection">
+    <div class="side-title">Aussprache lernen</div>
+    <div class="notice">Klicke oben einen erkannten Begriff an oder trage ein Wort/einen Namen ein. Die App sucht zuerst in deinem gelernten Wortschatz, dann online und in der installierten Bibliothek.</div>
+    <label for="learnTerm" style="margin-top:10px">Falsch ausgesprochenes Wort / Name</label>
+    <input id="learnTerm" autocomplete="off" spellcheck="false" placeholder="z. B. Ṣaḥābah, Qurʾān, ʿUmar ibn al-Khaṭṭāb">
+    <div class="learning-actions">
+      <button id="learnSelectionBtn" class="btn quiet" type="button">Textauswahl</button>
+      <button id="learnSearchBtn" class="btn secondary" type="button">Korrektur suchen</button>
+    </div>
+    <div id="learnResults" class="learning-results"></div>
+    <label for="learnArabic">Arabische Sprechform · nur falls keine passende Korrektur gefunden wird</label>
+    <input id="learnArabic" class="learning-arabic" autocomplete="off" spellcheck="false" placeholder="z. B. صَحَابَة">
+    <div class="learning-actions">
+      <button id="learnPreviewBtn" class="btn secondary" type="button">Neue Aussprache testen</button>
+      <button id="learnConfirmBtn" class="btn primary" type="button" disabled>So merken</button>
+    </div>
+    <audio id="learnPlayer" class="learning-player" controls hidden></audio>
+    <button id="learnSyncBtn" class="btn quiet" type="button" style="width:100%">Online-Wortschatz aktualisieren</button>
+    <div id="learnState" class="learning-status">Lernwortschatz wird geladen …</div>
+  </section>
+
   <section class="side-section">
     <div class="side-title">Kids-App</div>
     <div class="notice">Audio zuerst erzeugen, anhören und die Aussprache bestätigen. Danach kannst du die fertige WAV direkt speichern. Die automatische Kids-App-Ablage wird separat an den Audio-Speicher angebunden.</div>
@@ -510,7 +540,7 @@ input,select{
   <div id="error" class="bad" style="font-size:11px;line-height:1.5"></div>
 </aside>
 </div>
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.2.0 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.3.0 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
 </div>
 </div>
 
@@ -528,6 +558,7 @@ const PROSODY_LABELS={
 const IS_LOCAL=location.hostname==="127.0.0.1"||location.hostname==="localhost";
 const LOCAL_API=IS_LOCAL?"":"http://127.0.0.1:8787";
 let library={rules:[]},buckets=new Map(),lastAudio=null,engineOK=false,modelReady=false,qaConfirmed=false,deferredInstall=null;
+let learningResults=[],learningCandidate=null,learningPreviewId="",learningPreviewUrl=null;
 const $=s=>document.querySelector(s);
 
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
@@ -614,7 +645,8 @@ function renderAnalysis(){
       const master=r.voice_lock==="MASTER";
       const l=master||LOCKED.has(r.canonical)||LOCKED.has(r.string_to_replace);
       const label=master?"MASTER":(l?"LOCKED":r.voice_lock==="REVIEW"?"REVIEW":"VERIFIED");
-      return '<span class="term '+(l?'locked':'verified')+'">'+esc(r.canonical||r.string_to_replace)+' · '+label+'</span>';
+      const term=String(r.string_to_replace||r.canonical||"");
+      return '<button type="button" class="term clickable '+(l?'locked':'verified')+'" data-learning-term="'+esc(term)+'" title="Aussprache prüfen / korrigieren">'+esc(r.canonical||r.string_to_replace)+' · '+label+'</button>';
     }).join("")
     :'<span class="term">Keine Bibliotheksbegriffe erkannt</span>';
   $("#qaLocked").textContent=lc?"Audio-QA erforderlich":"keine";
@@ -652,6 +684,120 @@ async function analyzeProsody(){
     if(d.prepared)$("#prepared").textContent=d.prepared;
     return d;
   }catch(_){return null}
+}
+
+function clearLearningPreview(){
+  learningPreviewId="";
+  $("#learnConfirmBtn").disabled=true;
+  const p=$("#learnPlayer");
+  if(learningPreviewUrl){URL.revokeObjectURL(learningPreviewUrl);learningPreviewUrl=null}
+  p.pause();p.removeAttribute("src");p.hidden=true;
+}
+function renderLearningState(d={}){
+  const learned=Number(d.learned||0),online=Number(d.onlineRules||0);
+  const synced=d.onlineSyncedAt?(" · online "+String(d.onlineSyncedAt).replace("T"," ").slice(0,16)):"";
+  $("#learnState").textContent=learned+" dauerhaft gelernte Wörter · "+online+" Online-Regeln"+synced;
+}
+async function loadLearningState(){
+  if(!engineOK){$("#learnState").textContent="Engine starten, um den Lernwortschatz zu verwenden.";return}
+  try{
+    const r=await localRequest("/learning/state");
+    const d=await r.json();
+    if(r.ok&&d.ok)renderLearningState(d);
+  }catch(_){$("#learnState").textContent="Lernwortschatz derzeit nicht erreichbar."}
+}
+function renderLearningResults(results){
+  learningResults=Array.isArray(results)?results:[];
+  learningCandidate=null;
+  clearLearningPreview();
+  const wrap=$("#learnResults");
+  if(!learningResults.length){wrap.innerHTML='<div class="notice">Keine passende Regel gefunden. Du kannst unten eine arabische Sprechform eintragen und testen.</div>';return}
+  wrap.innerHTML=learningResults.map((r,i)=>{
+    const pct=Math.round(Number(r.score||0)*100);
+    return '<button type="button" class="learning-result" data-learning-index="'+i+'"><b>'+esc(r.canonical||r.input)+'</b><small>'+esc(r.ttsText||"")+' · '+esc(r.source||"Bibliothek")+' · Treffer '+pct+'%</small></button>';
+  }).join("");
+}
+function selectLearningCandidate(index){
+  const r=learningResults[Number(index)];
+  if(!r)return;
+  learningCandidate=r;
+  clearLearningPreview();
+  document.querySelectorAll(".learning-result").forEach((el,i)=>el.classList.toggle("active",i===Number(index)));
+  $("#learnArabic").value=r.ttsText||"";
+  setMessage("Korrektur ausgewählt. Jetzt „Neue Aussprache testen“ und anhören.","good");
+}
+async function searchLearning(termOverride=""){
+  const term=String(termOverride||$("#learnTerm").value||"").trim();
+  if(!term){setMessage("Bitte zuerst ein falsch ausgesprochenes Wort oder einen Namen auswählen/eintragen.");return}
+  $("#learnTerm").value=term;
+  clearLearningPreview();
+  try{
+    const r=await localRequest("/learning/search",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({query:term,limit:10})});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||!d.ok)throw Error(d.error||"Korrektursuche fehlgeschlagen.");
+    renderLearningResults(d.results||[]);renderLearningState(d);
+    if((d.results||[]).length&&Number(d.results[0].score||0)>=.96)selectLearningCandidate(0);
+  }catch(e){setMessage(e.message||String(e))}
+}
+function takeTextSelection(){
+  const ta=$("#text");
+  let value=ta.value.slice(ta.selectionStart,ta.selectionEnd).trim();
+  if(!value){
+    const p=ta.selectionStart||0,left=ta.value.slice(0,p),right=ta.value.slice(p);
+    const a=(left.match(/[^\\s,.!?;:()]+$/)||[""])[0],b=(right.match(/^[^\\s,.!?;:()]+/)||[""])[0];
+    value=(a+b).trim();
+  }
+  if(!value){setMessage("Markiere zuerst das falsch ausgesprochene Wort im Text.");return}
+  $("#learnTerm").value=value;
+  $("#learningSection").scrollIntoView({behavior:"smooth",block:"start"});
+  searchLearning(value);
+}
+async function previewLearning(){
+  const term=$("#learnTerm").value.trim();
+  const tts=$("#learnArabic").value.trim()||(learningCandidate?.ttsText||"");
+  if(!term){setMessage("Wort oder Name fehlt.");return}
+  if(!tts){setMessage("Wähle eine gefundene Korrektur oder trage die arabische Sprechform ein.");return}
+  clearLearningPreview();
+  const btn=$("#learnPreviewBtn"),old=btn.textContent;btn.disabled=true;btn.textContent="Erzeuge Test …";
+  try{
+    const r=await localRequest("/learning/preview",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({term,ttsText:tts,canonical:learningCandidate?.canonical||term})});
+    if(!r.ok){const d=await r.json().catch(()=>({}));throw Error(d.error||"Test-Audio konnte nicht erzeugt werden.")}
+    const blob=await r.blob();
+    learningPreviewId=r.headers.get("X-Learning-Preview-Id")||"";
+    if(!learningPreviewId)throw Error("Test-ID fehlt.");
+    learningPreviewUrl=URL.createObjectURL(blob);
+    const p=$("#learnPlayer");p.src=learningPreviewUrl;p.hidden=false;
+    $("#learnConfirmBtn").disabled=false;
+    await p.play().catch(()=>{});
+    setMessage("Hör genau hin. Nur wenn die Aussprache stimmt, „So merken“ drücken.","warn");
+  }catch(e){setMessage(e.message||String(e))}
+  finally{btn.disabled=false;btn.textContent=old}
+}
+async function confirmLearning(){
+  if(!learningPreviewId){setMessage("Zuerst eine neue Aussprache testen und anhören.");return}
+  const term=$("#learnTerm").value.trim(),btn=$("#learnConfirmBtn"),old=btn.textContent;btn.disabled=true;btn.textContent="Wird gelernt …";
+  try{
+    const r=await localRequest("/learning/confirm",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({previewId:learningPreviewId,term})});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||!d.ok)throw Error(d.error||"Aussprache konnte nicht gespeichert werden.");
+    clearLearningPreview();renderLearningState(d);
+    await loadLibrary();
+    setMessage("Gespeichert: „"+term+"“ ist jetzt Teil deines dauerhaften Lernwortschatzes und nutzt diese bestätigte Aussprache.","good");
+    await searchLearning(term);
+  }catch(e){setMessage(e.message||String(e));btn.disabled=false}
+  finally{if(btn)btn.textContent=old}
+}
+async function syncLearning(){
+  const btn=$("#learnSyncBtn"),old=btn.textContent;btn.disabled=true;btn.textContent="Online wird aktualisiert …";
+  try{
+    const r=await localRequest("/learning/sync",{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||!d.ok)throw Error(d.error||"Online-Wortschatz konnte nicht aktualisiert werden.");
+    renderLearningState(d);
+    setMessage("Online-Wortschatz aktualisiert: "+Number(d.rules||d.onlineRules||0).toLocaleString("de-DE")+" Regeln stehen für Korrektursuchen bereit.","good");
+    if($("#learnTerm").value.trim())await searchLearning();
+  }catch(e){setMessage(e.message||String(e))}
+  finally{btn.disabled=false;btn.textContent=old}
 }
 
 async function manualAnalyze(){
@@ -711,6 +857,9 @@ function updateEngineUI(data){
     $("#qaHonorific").textContent=count?(count+" Namensvarianten · Pflicht aktiv"):"Pflicht aktiv";
     $("#qaHonorific").className="good";
   }
+
+  if(engineOK&&data?.pronunciation_learning)renderLearningState(data.pronunciation_learning);
+  else if(engineOK)loadLearningState();
 
   if(modelError&&data?.last_error){
     $("#engineHelp").textContent="Modellfehler: "+data.last_error;
@@ -943,6 +1092,26 @@ async function confirmQA(){
     if(btn){btn.disabled=false;btn.textContent=old}
   }
 }
+
+$("#termList").addEventListener("click",e=>{
+  const btn=e.target.closest("[data-learning-term]");
+  if(!btn)return;
+  const term=btn.getAttribute("data-learning-term")||"";
+  $("#learnTerm").value=term;
+  $("#learningSection").scrollIntoView({behavior:"smooth",block:"start"});
+  searchLearning(term);
+});
+$("#learnResults").addEventListener("click",e=>{
+  const btn=e.target.closest("[data-learning-index]");
+  if(btn)selectLearningCandidate(btn.getAttribute("data-learning-index"));
+});
+$("#learnSelectionBtn").onclick=takeTextSelection;
+$("#learnSearchBtn").onclick=()=>searchLearning();
+$("#learnPreviewBtn").onclick=previewLearning;
+$("#learnConfirmBtn").onclick=confirmLearning;
+$("#learnSyncBtn").onclick=syncLearning;
+$("#learnTerm").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();searchLearning()}});
+$("#learnArabic").addEventListener("input",clearLearningPreview);
 
 $("#text").addEventListener("input",()=>{resetAudioQA();renderAnalysis()});
 $("#styleMode").addEventListener("change",()=>{resetAudioQA();manualAnalyze()});
