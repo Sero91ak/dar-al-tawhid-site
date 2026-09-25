@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SITE="https://dar-al-tawhid.de"
-RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/c5db14b614d284eb17fbf9a3077c8f98ebccb536"
+RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/bcc323c8ea2aa76c90553eba504b128629877e66"
 TARGET="$HOME/Applications/DAR-Voice-Studio"
 VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
@@ -112,6 +112,16 @@ if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
   brew install ffmpeg >/dev/null 2>&1 || true
 fi
 
+FFMPEG_BIN="$(command -v ffmpeg 2>/dev/null || true)"
+if [ -z "$FFMPEG_BIN" ]; then
+  for cand in /opt/homebrew/bin/ffmpeg /usr/local/bin/ffmpeg /opt/local/bin/ffmpeg; do
+    if [ -x "$cand" ]; then
+      FFMPEG_BIN="$cand"
+      break
+    fi
+  done
+fi
+
 # Vorherige Engine/LaunchAgent-Reste sauber lösen.
 pkill -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
 launchctl bootout "gui/$UID/$LABEL" >/dev/null 2>&1 || true
@@ -138,6 +148,8 @@ cat > "$LAUNCH" <<PLIST
     <key>DAR_VOICE_APP_HOME</key><string>$TARGET</string>
     <key>SERHAT_VOICE_REF</key><string>$REF</string>
     <key>PYTORCH_ENABLE_MPS_FALLBACK</key><string>1</string>
+    <key>PATH</key><string>/opt/homebrew/bin:/usr/local/bin:/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    <key>DAR_FFMPEG_BIN</key><string>$FFMPEG_BIN</string>
   </dict>
   <key>RunAtLoad</key><true/>
   <key>KeepAlive</key><true/>
@@ -376,6 +388,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
             var env = ProcessInfo.processInfo.environment
             env["DAR_VOICE_APP_HOME"] = target.path
             env["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
+            env["PATH"] = "/opt/homebrew/bin:/usr/local/bin:/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+            for ffmpeg in ["/opt/homebrew/bin/ffmpeg", "/usr/local/bin/ffmpeg", "/opt/local/bin/ffmpeg"] {
+                if FileManager.default.isExecutableFile(atPath: ffmpeg) {
+                    env["DAR_FFMPEG_BIN"] = ffmpeg
+                    break
+                }
+            }
             if fm.fileExists(atPath: adobe.path) {
                 env["SERHAT_VOICE_REF"] = adobe.path
             } else if fm.fileExists(atPath: fallback.path) {
@@ -612,8 +631,8 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>1.6.2</string>
-  <key>CFBundleShortVersionString</key><string>1.6.2</string>
+  <key>CFBundleVersion</key><string>1.6.3</string>
+  <key>CFBundleShortVersionString</key><string>1.6.3</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>
