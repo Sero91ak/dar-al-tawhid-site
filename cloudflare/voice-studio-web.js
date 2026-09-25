@@ -58,8 +58,31 @@ function assertVoiceRateLimit(request, chars) {
 
 function looksLikeLongArabicRecitation(text) {
   const value = String(text || "");
-  const arabic = (value.match(/[\u0600-\u06ff]/g) || []).length;
-  return arabic >= 24 && arabic / Math.max(1, value.length) > 0.22;
+  const arabicChars = (value.match(/[\u0600-\u06ff]/g) || []).length;
+  if (arabicChars < 24) return false;
+
+  let run = 0;
+  let maxRun = 0;
+  let arabicTokens = 0;
+  const punctuation = /^[\.,،؛:!?؟…·\-–—()\[\]{}«»"“”„‘’]+$/;
+
+  for (const token of value.match(/\S+/g) || []) {
+    const hasArabic = /[\u0600-\u06ff]/.test(token);
+    const hasLatin = /[A-Za-zÀ-ÖØ-öø-ÿ]/.test(token);
+    if (hasArabic && !hasLatin) {
+      run += 1;
+      arabicTokens += 1;
+      maxRun = Math.max(maxRun, run);
+    } else if (punctuation.test(token)) {
+      continue;
+    } else {
+      run = 0;
+    }
+  }
+
+  const letters = (value.match(/[A-Za-zÀ-ÖØ-öø-ÿ\u0600-\u06ff]/g) || []).length;
+  const arabicRatio = arabicChars / Math.max(1, letters);
+  return maxRun >= 4 || (arabicRatio >= 0.70 && arabicTokens >= 4);
 }
 
 export async function handleVoiceStudioWebRequest(request, env, cors) {
