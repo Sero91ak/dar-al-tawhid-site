@@ -5863,6 +5863,22 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "voice-studio-cloud-engine-functional-2026-09-25",
+      "approvedBy": "user-explicit-voice-studio-no-functions-anywhere",
+      "reason": "Nutzer: Voice Studio hat keine funktionierenden Aktionen. Lokale 127.0.0.1-Abhängigkeit entfernen und Erzeugen/Prüfen über die vorhandene serverseitige DĀR-Voice-Infrastruktur funktionsfähig machen.",
+      "paths": [
+        "cloudflare/voice-studio-web.js",
+        "cloudflare/worker.js",
+        ".github/workflows/deploy-admin-publisher.yml",
+        ".github/workflows/sync-admin-publisher-secrets.yml",
+        "voice-studio/index.html",
+        "voice-studio/service-worker.js",
+        "voice-studio/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

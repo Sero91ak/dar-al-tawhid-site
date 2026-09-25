@@ -83,6 +83,7 @@ import {
 export { PrayerStatusStore } from "./prayer-status-store.js";
 export { VideoStudioStore } from "./video-studio/job-store.js";
 import { handleVideoStudioRequest, resumeStuckVideoStudioJobs } from "./video-studio/index.js";
+import { handleVoiceStudioWebRequest } from "./voice-studio-web.js";
 import {
   readLibraryCatalog,
   saveLibraryPublication,
@@ -179,6 +180,12 @@ export default {
           videoStudioShotstackHost: String(env.SHOTSTACK_HOST || "https://api.shotstack.io/edit/stage"),
           scheduler: "ready"
         }, cors);
+      }
+
+      // DĀR Voice Studio – Cloud Engine für die Produktionsoberfläche.
+      if (url.pathname.startsWith("/voice-studio/api")) {
+        const voiceStudioResponse = await handleVoiceStudioWebRequest(request, env, cors);
+        if (voiceStudioResponse) return voiceStudioResponse;
       }
 
       // DAR KI-Video-Studio (Admin only; approve = no visitor push)
