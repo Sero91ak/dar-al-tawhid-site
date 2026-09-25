@@ -67,6 +67,22 @@ for _r in RULES:
     if _key and _key not in AUDIO_LOCK_LABELS:
         AUDIO_LOCK_LABELS[_key]=str(_r.get("canonical") or _r.get("string_to_replace") or _key)
 AUDIO_LOCK_FORMS=sorted(AUDIO_LOCK_BY_TTS,key=len,reverse=True)
+HONORIFIC_KEYS={"salawat_prophet","radiyallahu_anhu","radiyallahu_anha","radiyallahu_anhuma","radiyallahu_anhum"}
+HONORIFIC_TTS_BY_KEY={}
+HONORIFIC_RULE_BY_KEY={}
+HONORIFIC_SOURCE_FORMS={key:[] for key in HONORIFIC_KEYS}
+for _r in RULES:
+    _key=str(_r.get("audio_lock_key",""))
+    if _key in HONORIFIC_KEYS:
+        _tts=str(_r.get("tts_text",""))
+        _src=str(_r.get("string_to_replace",""))
+        if _tts and _key not in HONORIFIC_TTS_BY_KEY:
+            HONORIFIC_TTS_BY_KEY[_key]=_tts
+            HONORIFIC_RULE_BY_KEY[_key]=_r
+        if _src:
+            HONORIFIC_SOURCE_FORMS.setdefault(_key,[]).append(_src)
+for _key in list(HONORIFIC_SOURCE_FORMS):
+    HONORIFIC_SOURCE_FORMS[_key]=sorted(set(HONORIFIC_SOURCE_FORMS[_key]),key=len,reverse=True)
 AUDIO_LOCK_STATE_LOCK=threading.Lock()
 PENDING_AUDIO_LOCKS={}
 PENDING_AUDIO_RENDER_ID=""
@@ -257,7 +273,20 @@ def get_status():
     out["audio_lock_confirmed"]=confirmed_audio_lock_keys()
     out["audio_lock_pending"]=pending_audio_lock_keys()
     out["audio_lock_total"]=len(set(AUDIO_LOCK_BY_TTS.values()))
+    out["honorific_policy_enabled"]=True
+    out["honorific_name_variants"]=sum(1 for r in RULES if r.get("required_honorific_key"))
+    out["honorific_audio_keys"]=sorted(k for k in HONORIFIC_KEYS if k in HONORIFIC_TTS_BY_KEY)
     return out
+
+def source_has_honorific(text:str,pos:int,required_key:str):
+    tail=str(text or "")[max(0,int(pos)):]
+    # Erlaubt übliche Zwischenzeichen wie Leerzeichen, Komma oder Klammer.
+    tail=tail.lstrip()
+    tail=tail.lstrip(".,،;؛:!?؟…·-–—()[]{}«»\\\"“”„‘’ ")
+    for form in HONORIFIC_SOURCE_FORMS.get(required_key,[]):
+        if tail.startswith(form):
+            return True
+    return False
 
 def prepare(text:str):
     pos=0;out=[];found=[]
@@ -269,9 +298,22 @@ def prepare(text:str):
                 hit=r;break
         if not hit:
             out.append(text[pos]);pos+=1;continue
-        out.append(str(hit.get("tts_text") or hit.get("alias") or hit["string_to_replace"]))
+
+        needle=str(hit.get("string_to_replace",""))
+        out.append(str(hit.get("tts_text") or hit.get("alias") or needle))
         found.append(hit)
-        pos+=len(str(hit["string_to_replace"]))
+        next_pos=pos+len(needle)
+
+        required_key=str(hit.get("required_honorific_key",""))
+        if required_key:
+            honorific_tts=HONORIFIC_TTS_BY_KEY.get(required_key,"")
+            if honorific_tts and not source_has_honorific(text,next_pos,required_key):
+                out.append(" "+honorific_tts)
+                honorific_rule=HONORIFIC_RULE_BY_KEY.get(required_key)
+                if honorific_rule:
+                    found.append(honorific_rule)
+
+        pos=next_pos
     return "".join(out),found
 
 def quran_guard(text:str):
@@ -1256,6 +1298,11 @@ class H(BaseHTTPRequestHandler):
                         for r in found if r.get("audio_lock_key")
                     }),
                     "audioLocksConfirmed":confirmed_audio_lock_keys(),
+                    "honorificPolicyEnabled":True,
+                    "requiredHonorificNames":sorted({
+                        str(r.get("canonical") or r.get("string_to_replace"))
+                        for r in found if r.get("required_honorific_key")
+                    }),
                     "arabicReferenceDedicated":ARABIC_DEDICATED_REFERENCE
                 })
             except Exception as e:
