@@ -607,89 +607,97 @@
   }
 })(window);
 
-
-/* TEST_UPDATE_PROMPT_BRIDGE_V1013
- * Übergangsbrücke: auch eine noch geladene alte Test-Hülle (z. B. v1006)
- * bekommt bei neuer /test/version.json ein echtes "Jetzt aktualisieren"-Modal.
- * Keine Push-/OneSignal-Logik.
+/* TEST_UPDATE_BLUE_BANNER_COMPAT_V1016
+ * Übergangsschutz für alte Test-App-Hüllen:
+ * niemals blockierendes Update-Modal, ausschließlich blauer Top-Hinweis.
  */
 (function () {
   "use strict";
   if (String(location.pathname || "").indexOf("/test") !== 0) return;
 
-  var STYLE_ID = "dar-test-update-bridge-style-v1013";
-  var busy = false;
+  var STYLE_ID="dar-test-update-blue-compat-v1016";
+  var busy=false;
+  var lastRemoteId="";
 
-  function buildNum(id) {
-    var m = String(id || "").match(/app-shell-v(\d+)/);
-    return m ? parseInt(m[1], 10) : 0;
+  function buildNum(id){
+    var m=String(id||"").match(/app-shell-v(\d+)/);
+    return m?parseInt(m[1],10):0;
   }
 
-  function localBuildId() {
-    try {
-      if (typeof window.__DAR_EXPECTED_BUILD === "string" && window.__DAR_EXPECTED_BUILD) return window.__DAR_EXPECTED_BUILD;
-    } catch (e) {}
-    try {
-      if (typeof APP_BUILD_ID === "string" && APP_BUILD_ID) return APP_BUILD_ID;
-    } catch (e2) {}
+  function localBuildId(){
+    try{
+      if(typeof window.__DAR_EXPECTED_BUILD==="string"&&window.__DAR_EXPECTED_BUILD)return window.__DAR_EXPECTED_BUILD;
+    }catch(e){}
+    try{
+      if(typeof APP_BUILD_ID==="string"&&APP_BUILD_ID)return APP_BUILD_ID;
+    }catch(e2){}
     return "";
   }
 
-  function ensureBridgeStyle() {
-    if (document.getElementById(STYLE_ID)) return;
-    var s = document.createElement("style");
-    s.id = STYLE_ID;
-    s.textContent = [
-      "html body .app-update-modal[data-test-update-bridge='1']{position:fixed!important;inset:0!important;z-index:2147483000!important;display:flex!important;visibility:visible!important;pointer-events:auto!important;align-items:center!important;justify-content:center!important;padding:max(18px,env(safe-area-inset-top,0px)) 18px max(18px,env(safe-area-inset-bottom,0px))!important}",
-      "html body .app-update-modal[data-test-update-bridge='1'] .app-update-modal__backdrop{display:block!important;position:absolute!important;inset:0!important;background:rgba(2,7,15,.74)!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important}",
-      "html body .app-update-modal[data-test-update-bridge='1'] .app-update-modal__panel{display:block!important;position:relative!important;width:min(92vw,430px)!important;margin:auto!important;padding:24px 22px 21px!important;border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 42%,transparent)!important;border-radius:22px!important;background:radial-gradient(circle at 82% 0%,color-mix(in srgb,var(--gold2,#efd78e) 13%,transparent),transparent 40%),linear-gradient(160deg,rgba(8,23,43,.985),rgba(5,12,23,.99))!important;box-shadow:0 28px 80px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.04)!important}",
-      "html body .app-update-modal[data-test-update-bridge='1'] .app-update-modal__badge{display:inline-block!important;margin-bottom:9px!important;color:var(--gold2,#efd78e)!important;font-size:10px!important;font-weight:900!important;letter-spacing:.16em!important;text-transform:uppercase!important}",
-      "html body .app-update-modal[data-test-update-bridge='1'] h2{margin:0 0 9px!important;color:var(--gold2,#efd78e)!important;font-family:var(--serif,Georgia,serif)!important;font-size:clamp(25px,7vw,32px)!important;line-height:1.08!important}",
-      "html body .app-update-modal[data-test-update-bridge='1'] p{margin:0!important;color:var(--cream,#fff6dc)!important;font-size:13.5px!important;line-height:1.6!important;opacity:.9!important}",
-      "html body .app-update-modal[data-test-update-bridge='1'] .app-update-modal__btn{display:block!important;width:100%!important;min-height:48px!important;margin-top:18px!important;border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 58%,transparent)!important;border-radius:14px!important;background:linear-gradient(180deg,color-mix(in srgb,var(--gold2,#efd78e) 22%,transparent),color-mix(in srgb,var(--gold2,#efd78e) 10%,transparent))!important;color:var(--cream,#fff6dc)!important;font-weight:900!important;font-size:14px!important}",
-      "body.app-update-modal-open{overflow:hidden!important;touch-action:none!important}"
+  function forceNoModalStyle(){
+    if(document.getElementById(STYLE_ID))return;
+    var s=document.createElement("style");
+    s.id=STYLE_ID;
+    s.textContent=[
+      "html body .app-update-modal,html body .app-update-modal[hidden],html body .app-update-modal[data-test-update-bridge='1']{display:none!important;visibility:hidden!important;pointer-events:none!important}",
+      "html body .app-update-modal__backdrop,html body .app-update-modal__panel{display:none!important}",
+      "body.app-update-modal-open{overflow:auto!important;touch-action:auto!important}"
     ].join("\n");
     document.head.appendChild(s);
   }
 
-  function showBridge(remoteId) {
-    var modal = document.getElementById("appUpdateModal");
-    var btn = document.getElementById("appUpdateModalBtn");
-    if (!modal || !btn) return false;
+  function hideWrongModal(){
+    forceNoModalStyle();
+    var modal=document.getElementById("appUpdateModal");
+    if(modal){
+      modal.hidden=true;
+      modal.setAttribute("hidden","");
+      modal.removeAttribute("data-test-update-bridge");
+    }
+    document.body.classList.remove("app-update-modal-open");
+  }
 
-    ensureBridgeStyle();
-    window.__darRemoteBuildId = remoteId;
-    window.__darAppVersionAvailable = true;
+  function showBlueBanner(remoteId, recovery){
+    hideWrongModal();
+    var banner=document.getElementById("newPostsBanner");
+    if(!banner)return false;
 
-    var title = document.getElementById("appUpdateModalTitle");
-    var text = document.getElementById("appUpdateModalText");
-    if (title) title.textContent = "Neue Test-App-Version verfügbar";
-    if (text) text.textContent = "Die Test-App wurde neu aufgebaut. Tippe auf „Jetzt aktualisieren“, um den neuen Jumuʿah-Bereich und die aktuelle Oberfläche zu laden.";
-    btn.textContent = "Jetzt aktualisieren";
+    lastRemoteId=String(remoteId||lastRemoteId||window.__darRemoteBuildId||"").trim();
+    if(lastRemoteId)window.__darRemoteBuildId=lastRemoteId;
+    window.__darAppVersionAvailable=true;
+    window.__darNewPostsAvailable=false;
 
-    modal.setAttribute("data-test-update-bridge", "1");
-    modal.hidden = false;
-    modal.removeAttribute("hidden");
-    document.body.classList.add("app-update-modal-open");
+    var icon=banner.querySelector(".new-posts-icon");
+    var text=banner.querySelector(".new-posts-text");
+    var refresh=banner.querySelector(".new-posts-refresh");
 
-    if (!btn.__darTestUpdateBridgeBound) {
-      btn.__darTestUpdateBridgeBound = true;
-      btn.addEventListener("click", function () {
-        try {
-          var target = String(window.__darRemoteBuildId || "");
-          try {
-            sessionStorage.setItem("dar_version_update_pending", JSON.stringify({ buildId: target, at: Date.now() }));
-          } catch (e) {}
-          if (typeof window.hardRefreshApp === "function") {
+    banner.classList.remove("is-app-repair");
+    banner.classList.add("is-app-version");
+    if(icon)icon.textContent=recovery?"⟳":"↑";
+    if(text)text.textContent=recovery?"App-Update erforderlich":"Neue Version verfügbar";
+    if(refresh)refresh.textContent=recovery?"Jetzt aktualisieren":"Aktualisieren";
+    banner.setAttribute("aria-label",recovery?"App-Update erforderlich":"Neue Version laden");
+    banner.classList.remove("hidden");
+    banner.style.setProperty("display","flex","important");
+
+    if(!banner.__darBlueCompatBound){
+      banner.__darBlueCompatBound=true;
+      banner.addEventListener("click",function(){
+        try{
+          var target=String(lastRemoteId||window.__darRemoteBuildId||"");
+          if(target){
+            try{sessionStorage.setItem("dar_version_update_pending",JSON.stringify({buildId:target,at:Date.now()}));}catch(e){}
+          }
+          if(typeof window.hardRefreshApp==="function"){
             window.hardRefreshApp();
             return;
           }
-        } catch (e2) {}
-        try {
-          var u = new URL(location.href);
-          u.searchParams.set("update", String(Date.now()));
+        }catch(e2){}
+        try{
+          var u=new URL(location.href);
+          u.searchParams.set("update",String(Date.now()));
           location.replace(u.toString());
-        } catch (e3) {
+        }catch(e3){
           location.reload();
         }
       });
@@ -697,33 +705,54 @@
     return true;
   }
 
-  async function check() {
-    if (busy || !navigator.onLine) return;
-    busy = true;
-    try {
-      var local = localBuildId();
-      var r = await fetch("/test/version.json?bridge=" + Date.now(), { cache: "no-store" });
-      if (!r.ok) return;
-      var remote = await r.json();
-      var remoteId = String(remote && remote.buildId || "").trim();
-      if (!remoteId || !local || remoteId === local) return;
-      if (buildNum(remoteId) <= buildNum(local)) return;
-      showBridge(remoteId);
-    } catch (e) {
-    } finally {
-      busy = false;
+  async function check(){
+    if(busy||!navigator.onLine)return;
+    busy=true;
+    try{
+      var local=localBuildId();
+      var r=await fetch("/test/version.json?blue="+Date.now(),{cache:"no-store"});
+      if(!r.ok)return;
+      var remote=await r.json();
+      var remoteId=String(remote&&remote.buildId||"").trim();
+      if(!remoteId||!local||remoteId===local){
+        hideWrongModal();
+        return;
+      }
+      if(buildNum(remoteId)<=buildNum(local)){
+        hideWrongModal();
+        return;
+      }
+      showBlueBanner(remoteId,false);
+    }catch(e){
+      hideWrongModal();
+    }finally{
+      busy=false;
     }
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () { setTimeout(check, 350); }, { once: true });
-  } else {
-    setTimeout(check, 350);
+  function watchWrongModal(){
+    var modal=document.getElementById("appUpdateModal");
+    if(!modal||modal.__darBlueCompatObserved)return;
+    modal.__darBlueCompatObserved=true;
+    new MutationObserver(function(){
+      if(!modal.hidden||!modal.hasAttribute("hidden")||modal.hasAttribute("data-test-update-bridge")){
+        showBlueBanner(lastRemoteId||window.__darRemoteBuildId||"",false);
+      }
+    }).observe(modal,{attributes:true,attributeFilter:["hidden","style","class","data-test-update-bridge"]});
   }
-  window.addEventListener("pageshow", function () { setTimeout(check, 250); });
-  window.addEventListener("online", function () { setTimeout(check, 250); });
-  document.addEventListener("visibilitychange", function () {
-    if (!document.hidden) setTimeout(check, 250);
-  });
-  setInterval(check, 60 * 1000);
+
+  function boot(){
+    forceNoModalStyle();
+    hideWrongModal();
+    watchWrongModal();
+    setTimeout(check,250);
+  }
+
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});
+  else boot();
+
+  window.addEventListener("pageshow",function(){setTimeout(check,180);});
+  window.addEventListener("online",function(){setTimeout(check,180);});
+  document.addEventListener("visibilitychange",function(){if(!document.hidden)setTimeout(check,180);});
+  setInterval(check,60*1000);
 })();
