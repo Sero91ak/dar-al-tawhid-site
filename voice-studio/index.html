@@ -814,7 +814,9 @@ async function manualAnalyze(){
 }
 async function loadLibrary(){
   try{
-    const r=await fetch(IS_LOCAL?"/data/pronunciation/pronunciation-rules.json":"/data/pronunciation/pronunciation-rules.json",{cache:"no-store"});
+    const r=engineOK
+      ?await localRequest("/data/pronunciation/pronunciation-rules.json")
+      :await fetch("/data/pronunciation/pronunciation-rules.json",{cache:"no-store"});
     if(!r.ok)throw Error("HTTP "+r.status);
     library=await r.json();
     buckets=buildBuckets(library.rules||[]);
