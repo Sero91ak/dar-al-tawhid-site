@@ -2044,6 +2044,52 @@ html,body,.app,.ambient{
   #view-today .hero{min-height:520px!important}
 }
 
+/* KIDS_TRUE_EDGE_V28
+   Scroll-Container bis y=0 hinter die Statusleiste.
+   Kein fester Safe-Area-Block. Inset nur an X, Wordmark, Page-Head, Tabs. */
+html,body,.app,.ambient{
+  margin:0!important;
+  padding:0!important;
+  background:#0c2636!important;
+  background-image:none!important;
+}
+.app::before{content:none!important;display:none!important;height:0!important;opacity:0!important}
+.shell{
+  padding-top:0!important;
+  padding-left:max(16px, env(safe-area-inset-left, 0px))!important;
+  padding-right:max(16px, env(safe-area-inset-right, 0px))!important;
+}
+#view-today .hero{
+  margin-top:0!important;
+  width:100vw!important;
+  max-width:100vw!important;
+  margin-left:calc(50% - 50vw)!important;
+  margin-right:calc(50% - 50vw)!important;
+  border-radius:0!important;
+}
+#view-today .kids-wordmark{
+  margin-top:max(10px, env(safe-area-inset-top, 0px))!important;
+}
+.page-head{
+  padding-top:max(12px, env(safe-area-inset-top, 0px))!important;
+  margin-top:0!important;
+}
+.modal-shell,
+#quranModal .modal-shell{
+  padding-top:0!important;
+}
+.modal-top,
+#quranModal .modal-top{
+  padding-top:max(8px, env(safe-area-inset-top, 0px))!important;
+}
+.dev-ribbon{
+  top:max(8px, env(safe-area-inset-top, 0px))!important;
+}
+.kids-join{
+  padding:max(12px, env(safe-area-inset-top, 0px)) 22px max(22px, env(safe-area-inset-bottom, 0px))!important;
+}
+.kids-update-layer{top:0!important}
+
 
 
 
@@ -2292,7 +2338,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon">KIDS · V0.27</div>
+  <div class="dev-ribbon">KIDS · V0.28</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2711,7 +2757,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab26";
+const KIDS_BUILD_ID="kids-shell-v12-tab27";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
