@@ -29,19 +29,24 @@ async function main() {
     `${SITE_URL}/test/kids/`,
     `${SITE_URL}/test/kids/index.html`,
     `${SITE_URL}/test/kids/version.json`,
-    `${SITE_URL}/test/kids/manifest.webmanifest`
+    `${SITE_URL}/test/kids/manifest.webmanifest`,
+    `${SITE_URL}/test/kids/?kv=20260925-12`
   ];
-  const res = await fetch(`https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/purge_cache`, {
-    method: "POST",
-    headers: authHeaders(),
-    body: JSON.stringify({ files })
-  });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok || data.success === false) {
-    const msg = data.errors?.map((e) => e.message).join("; ") || res.statusText;
-    throw new Error(`Kids-Cache-Purge fehlgeschlagen: ${msg}`);
+  const prefixes = [`${new URL(SITE_URL).hostname}/test/kids`];
+  for (const body of [{ files }, { prefixes }]) {
+    const res = await fetch(`https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/purge_cache`, {
+      method: "POST",
+      headers: authHeaders(),
+      body: JSON.stringify(body)
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || data.success === false) {
+      const msg = data.errors?.map((e) => e.message).join("; ") || res.statusText;
+      console.warn("Kids-Cache-Purge Teil fehlgeschlagen:", msg);
+      continue;
+    }
+    console.log("Kids Test Cache geleert:", Object.keys(body)[0], data.result?.id || "ok");
   }
-  console.log("Kids Test Cache geleert:", files.length, data.result?.id || "ok");
 }
 
 main().catch((err) => {
