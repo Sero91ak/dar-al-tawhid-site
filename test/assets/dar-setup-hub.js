@@ -283,7 +283,7 @@
 })();
 
 
-/* JUMMAH_FRIDAY_MODE_V2
+/* JUMMAH_FRIDAY_MODE_V3
  * DĀR AL TAWḤĪD – besucherorientierter Jumuʿah-Bereich.
  * Theme-adaptiv, ohne interne Produkt-/Redaktionsinformationen.
  * Keine Änderung an OneSignal, Server-Scheduler oder anderen Push-Spuren.
@@ -375,44 +375,40 @@
     el.id=STYLE_ID;
     el.textContent=[
       ".dar-jf-home,.dar-jf-detail{--jf-accent:var(--gold2,#c9a96a);--jf-text:var(--ink,var(--cream,#f6f0e2));--jf-muted:var(--muted,#9f9a90);--jf-line:var(--line2,var(--line,rgba(128,128,128,.22)));--jf-surface:var(--card,transparent);color:var(--jf-text)}",
-
-      ".dar-jf-home{position:relative;margin:18px 0 22px;padding:0;border:1px solid var(--jf-line);border-radius:22px;background:var(--jf-surface);box-shadow:none;overflow:hidden}",
-      ".dar-jf-home:before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--jf-accent);opacity:.72;pointer-events:none}",
-      ".dar-jf-inner{position:relative;padding:19px 18px 17px}",
-      ".dar-jf-kicker{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--jf-accent);font-weight:900}",
-      ".dar-jf-home h2,.dar-jf-detail h2,.dar-jf-detail h3{font-family:var(--serif,Georgia,serif);color:var(--jf-text);margin:6px 0 8px;line-height:1.15}",
-      ".dar-jf-home h2{font-size:clamp(23px,5.8vw,31px);max-width:760px}",
-      ".dar-jf-home p,.dar-jf-detail p{margin:0;color:var(--jf-muted);line-height:1.58}",
-      ".dar-jf-lead{font-size:14px!important;max-width:720px}",
-      ".dar-jf-source{display:block;margin-top:8px;color:var(--jf-muted);font-size:10.5px;line-height:1.45}",
-
-      ".dar-jf-time-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:15px 0 14px;padding:11px 0;border-top:1px solid var(--jf-line);border-bottom:1px solid var(--jf-line)}",
-      ".dar-jf-time{display:flex;flex-direction:column;gap:2px;min-width:108px}",
-      ".dar-jf-time span{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--jf-muted);font-weight:850}",
-      ".dar-jf-time b{font-size:13px;color:var(--jf-text);font-weight:850}",
-      ".dar-jf-time.is-accent b{color:var(--jf-accent)}",
-
-      ".dar-jf-entry{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:2px;padding:13px 0 2px;border:0;background:transparent;color:var(--jf-text);text-align:left;font:inherit;cursor:pointer}",
-      ".dar-jf-entry-copy{display:flex;flex-direction:column;gap:3px;min-width:0}",
-      ".dar-jf-entry-copy strong{font-size:13.5px;font-weight:900;color:var(--jf-text)}",
-      ".dar-jf-entry-copy small{font-size:10.5px;line-height:1.35;color:var(--jf-muted)}",
-      ".dar-jf-entry-arrow{flex:0 0 34px;width:34px;height:34px;border:1px solid var(--jf-line);border-radius:50%;display:grid;place-items:center;color:var(--jf-accent);font-size:22px;line-height:1;transition:transform .18s ease,border-color .18s ease}",
-      ".dar-jf-entry:active .dar-jf-entry-arrow{transform:translateX(2px)}",
-      ".dar-jf-entry:hover .dar-jf-entry-arrow{border-color:color-mix(in srgb,var(--jf-accent) 58%,var(--jf-line))}",
-
+      ".dar-jf-home{position:relative;margin:16px 0 20px;padding:0;border:1px solid var(--jf-line);border-radius:21px;background:var(--jf-surface);box-shadow:none;overflow:hidden}",
+      ".dar-jf-home:before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--jf-accent);opacity:.7;pointer-events:none}",
+      ".dar-jf-inner{position:relative;padding:16px 17px 13px}",
+      ".dar-jf-kicker{font-size:9px;letter-spacing:.17em;text-transform:uppercase;color:var(--jf-accent);font-weight:900}",
+      ".dar-jf-home h2,.dar-jf-detail h2,.dar-jf-detail h3{font-family:var(--serif,Georgia,serif);color:var(--jf-text);margin:5px 0 7px;line-height:1.14}",
+      ".dar-jf-home h2{font-size:clamp(22px,5.3vw,29px);max-width:760px}",
+      ".dar-jf-home p,.dar-jf-detail p{margin:0;color:var(--jf-muted);line-height:1.53}",
+      ".dar-jf-lead{font-size:13px!important;max-width:760px}",
+      ".dar-jf-source{display:block;margin-top:6px;color:var(--jf-muted);font-size:9.8px;line-height:1.4}",
+      ".dar-jf-home-stack{margin-top:13px;border-top:1px solid var(--jf-line)}",
+      ".dar-jf-home-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 14px;align-items:center;padding:11px 0;border-bottom:1px solid var(--jf-line)}",
+      ".dar-jf-home-item__copy{min-width:0}",
+      ".dar-jf-home-item__label{display:block;margin-bottom:3px;color:var(--jf-accent);font-size:8.8px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}",
+      ".dar-jf-home-item__title{display:block;color:var(--jf-text);font-size:13px;font-weight:900;line-height:1.35}",
+      ".dar-jf-home-item__text{display:block;margin-top:3px;color:var(--jf-muted);font-size:10.8px;line-height:1.43}",
+      ".dar-jf-home-item__time{min-width:74px;text-align:right}",
+      ".dar-jf-home-item__time b{display:block;color:var(--jf-text);font-size:15px;line-height:1.1}",
+      ".dar-jf-home-item__time span{display:block;margin-top:3px;color:var(--jf-muted);font-size:8.7px;letter-spacing:.08em;text-transform:uppercase}",
+      ".dar-jf-home-item.is-active .dar-jf-home-item__label,.dar-jf-home-item.is-active .dar-jf-home-item__time b{color:var(--jf-accent)}",
+      ".dar-jf-more{width:100%;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:11px 0 1px;border:0;background:transparent;color:var(--jf-text);font:inherit;text-align:left;cursor:pointer}",
+      ".dar-jf-more span:first-child{font-size:11.5px;font-weight:850}",
+      ".dar-jf-more small{display:block;margin-top:2px;color:var(--jf-muted);font-size:9.5px;font-weight:600}",
+      ".dar-jf-more-arrow{flex:0 0 auto;color:var(--jf-accent);font-size:21px;line-height:1}",
       ".dar-jf-detail{margin:14px 0 4px;border-top:1px solid var(--jf-line)}",
       ".dar-jf-section{padding:18px 2px;border-bottom:1px solid var(--jf-line)}",
       ".dar-jf-section:last-child{border-bottom:0}",
       ".dar-jf-detail h2{font-size:clamp(23px,5.5vw,30px)}",
       ".dar-jf-detail h3{font-size:18px}",
       ".dar-jf-detail-lead{font-size:13.5px!important;max-width:720px}",
-
       ".dar-jf-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:14px;border-top:1px solid var(--jf-line);border-bottom:1px solid var(--jf-line)}",
       ".dar-jf-fact{padding:12px 10px}",
       ".dar-jf-fact:nth-child(odd){border-right:1px solid var(--jf-line)}",
       ".dar-jf-fact span{display:block;color:var(--jf-muted);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;font-weight:850;margin-bottom:3px}",
       ".dar-jf-fact b{display:block;color:var(--jf-text);font-size:13px;font-weight:850}",
-
       ".dar-jf-callout{padding:14px 0;border-bottom:1px solid var(--jf-line)}",
       ".dar-jf-callout:last-child{border-bottom:0}",
       ".dar-jf-callout strong{display:block;color:var(--jf-text);font-size:13.5px;margin-bottom:5px}",
@@ -420,11 +416,9 @@
       ".dar-jf-khutbah blockquote{margin:12px 0;padding:1px 0 1px 13px;border-left:2px solid color-mix(in srgb,var(--jf-accent) 64%,transparent);color:var(--jf-text);line-height:1.62;font-size:13.5px}",
       ".dar-jf-khutbah p{margin:10px 0;font-size:13px}",
       ".dar-jf-note{font-size:10.5px!important;margin-top:10px!important;color:var(--jf-muted)!important}",
-
-      "html[data-theme='light'] .dar-jf-home,html[data-theme='soft'] .dar-jf-home{background:color-mix(in srgb,var(--card,#fff) 94%,transparent)}",
-      "html[data-theme='royal'] .dar-jf-home,html[data-theme='bordeaux'] .dar-jf-home,html[data-theme='dar-al-layl'] .dar-jf-home,html[data-theme='dark'] .dar-jf-home{background:color-mix(in srgb,var(--card,#111) 88%,transparent)}",
-
-      "@media(max-width:560px){.dar-jf-home{margin:15px 0 20px;border-radius:19px}.dar-jf-inner{padding:17px 15px 15px}.dar-jf-time-row{gap:10px}.dar-jf-time{min-width:calc(50% - 8px)}.dar-jf-facts{grid-template-columns:1fr}.dar-jf-fact:nth-child(odd){border-right:0}.dar-jf-fact+.dar-jf-fact{border-top:1px solid var(--jf-line)}.dar-jf-entry{padding-top:12px}.dar-jf-entry-arrow{width:36px;height:36px;flex-basis:36px}}"
+      "html[data-theme='light'] .dar-jf-home,html[data-theme='soft'] .dar-jf-home{background:color-mix(in srgb,var(--card,#fff) 96%,transparent)}",
+      "html[data-theme='royal'] .dar-jf-home,html[data-theme='bordeaux'] .dar-jf-home,html[data-theme='dar-al-layl'] .dar-jf-home,html[data-theme='dark'] .dar-jf-home{background:color-mix(in srgb,var(--card,#111) 92%,transparent)}",
+      "@media(max-width:560px){.dar-jf-home{margin:14px 0 18px;border-radius:19px}.dar-jf-inner{padding:15px 14px 12px}.dar-jf-home-item{grid-template-columns:minmax(0,1fr) auto;padding:10px 0}.dar-jf-home-item__time{min-width:66px}.dar-jf-facts{grid-template-columns:1fr}.dar-jf-fact:nth-child(odd){border-right:0}.dar-jf-fact+.dar-jf-fact{border-top:1px solid var(--jf-line)}}"
     ].join("\n");
     document.head.appendChild(el);
   }
@@ -443,25 +437,44 @@
     var html=
       '<section id="'+HOME_ID+'" class="dar-jf-home" data-jf-sig="'+esc(sig)+'" aria-label="Jumuʿah am Freitag">'+
         '<div class="dar-jf-inner">'+
-          '<div class="dar-jf-kicker">'+(st.last?'JUMUʿAH · BESONDERE DUʿĀʾ-ZEIT':'JUMUʿAH · FREITAG')+'</div>'+
-          '<h2>'+(st.last?'Zeit für Duʿāʾ vor Maghrib':'Ṣalāh auf den Propheten ﷺ am Freitag')+'</h2>'+
+          '<div class="dar-jf-kicker">JUMUʿAH · FREITAG</div>'+
+          '<h2>'+(st.last?'Besondere Zeit für Duʿāʾ':'Der Freitag')+'</h2>'+
           '<p class="dar-jf-lead">'+
             (st.last
-              ?'Zu den besonders beachteten Zeiten am Freitag gehört die letzte Zeit nach ʿAṣr. Sie eignet sich für Duʿāʾ, Dhikr und aufrichtige Hinwendung zu Allah.'
-              :'Am Freitag ist die vermehrte Ṣalāh auf den Propheten ﷺ besonders empfohlen. Der Jumuʿah-Bereich sammelt dazu authentische Hinweise, Duʿāʾ und einen kurzen Freitagsimpuls.')+
+              ?'Die letzte Zeit vor Maghrib wird besonders für Duʿāʾ, Dhikr und die Hinwendung zu Allah genutzt.'
+              :'Am Freitag stehen Ṣalāh auf den Propheten ﷺ, Duʿāʾ und die Erinnerung an zentrale Themen des Dīn im Mittelpunkt.')+
           '</p>'+
-          '<span class="dar-jf-source">'+
-            (st.last
-              ?'Sunan Abī Dāwūd 1048 · Sunan an-Nasāʾī 1389'
-              :'Überlieferung von Aws ibn Aws über die vermehrte Ṣalāh am Freitag')+
-          '</span>'+
-          '<div class="dar-jf-time-row">'+
-            '<div class="dar-jf-time is-accent"><span>Besondere Zeit</span><b>'+esc(last)+'</b></div>'+
-            '<div class="dar-jf-time"><span>Maghrib</span><b>'+esc(mag)+'</b></div>'+
+
+          '<div class="dar-jf-home-stack">'+
+            '<div class="dar-jf-home-item">'+
+              '<div class="dar-jf-home-item__copy">'+
+                '<span class="dar-jf-home-item__label">Ṣalāh auf den Propheten ﷺ</span>'+
+                '<span class="dar-jf-home-item__title">Am Freitag vermehrt empfohlen</span>'+
+                '<span class="dar-jf-home-item__text">Überliefert von Aws ibn Aws.</span>'+
+              '</div>'+
+            '</div>'+
+
+            '<div class="dar-jf-home-item'+(st.last?' is-active':'')+'">'+
+              '<div class="dar-jf-home-item__copy">'+
+                '<span class="dar-jf-home-item__label">'+(st.last?'Jetzt besonders beachten':'Duʿāʾ · besondere Zeit')+'</span>'+
+                '<span class="dar-jf-home-item__title">'+(st.last?'Zeit vor Maghrib':'Letzte Zeit nach ʿAṣr')+'</span>'+
+                '<span class="dar-jf-home-item__text">Bis zum Eintritt von Maghrib.</span>'+
+              '</div>'+
+              '<div class="dar-jf-home-item__time"><b>'+esc(last)+'</b><span>bis '+esc(mag)+'</span></div>'+
+            '</div>'+
+
+            '<div class="dar-jf-home-item">'+
+              '<div class="dar-jf-home-item__copy">'+
+                '<span class="dar-jf-home-item__label">Freitagsimpuls</span>'+
+                '<span class="dar-jf-home-item__title">Tawḥīd – Warum wir erschaffen wurden</span>'+
+                '<span class="dar-jf-home-item__text">Allah allein zu dienen ist die Grundlage jeder ʿIbādah. Qurʾān 51:56.</span>'+
+              '</div>'+
+            '</div>'+
           '</div>'+
-          '<button type="button" class="dar-jf-entry" data-dar-jf-open="1" aria-label="Jumuʿah-Bereich öffnen">'+
-            '<span class="dar-jf-entry-copy"><strong>Jumuʿah-Bereich</strong><small>Freitagsimpuls · Duʿāʾ · Sunnah</small></span>'+
-            '<span class="dar-jf-entry-arrow" aria-hidden="true">›</span>'+
+
+          '<button type="button" class="dar-jf-more" data-dar-jf-open="1" aria-label="Mehr zu Jumuʿah öffnen">'+
+            '<span><span>Mehr zu Jumuʿah</span><small>Sunnah · Duʿāʾ · Freitagsimpuls</small></span>'+
+            '<span class="dar-jf-more-arrow" aria-hidden="true">›</span>'+
           '</button>'+
         '</div>'+
       '</section>';
@@ -582,7 +595,7 @@
   }
 
   global.DAR_JUMMAH_FRIDAY_TEST={
-    build:"v2",
+    build:"v3",
     refresh:refresh,
     state:currentState
   };

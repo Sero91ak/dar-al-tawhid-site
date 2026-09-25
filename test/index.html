@@ -29338,7 +29338,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     function showRecoveryBanner(label) {
       if (!canShowRecoveryBanner()) return false;
       rememberRecoveryBannerShown();
-      showBanner('recovery', label || 'App-Update erforderlich');
+      showUpdateModal('recovery', label || 'App-Update erforderlich');
       setTimeout(function() {
         if (typeof isAppViewStuck === 'function' && isAppViewStuck() && typeof window.__darScheduleBootRepair === 'function') {
           window.__darScheduleBootRepair('recovery-banner', 5000);
