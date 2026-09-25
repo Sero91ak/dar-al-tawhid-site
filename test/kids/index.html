@@ -1830,48 +1830,53 @@ html,body{
 }
 
 
-/* KIDS_BRAND_FLOW_V9
-   Oben genau die Logo-Beschriftung. Darunter kinderfreundliche, fließende Startseite. */
-.kids-wordmark{
-  position:absolute;z-index:6;
-  top:max(8px, calc(env(safe-area-inset-top, 0px) + 4px));
-  left:12px;
-  width:min(78vw, 310px);
-  pointer-events:none;
-  filter:drop-shadow(0 8px 16px rgba(0,0,0,.45));
-}
-.kids-wordmark img{
-  display:block;width:100%;height:auto;
-}
+/* KIDS_BRAND_FLOW_V10
+   Titel ist Teil der Szene, zentriert, groß. Unten weiche Schattierung in die Startseite. */
 #view-today{position:relative}
 #view-today .brand-line{
   position:absolute;left:0;right:0;top:0;z-index:6;
   margin:0;padding:0;height:0;overflow:visible;justify-content:flex-end
 }
-#view-today .brand-line .brand{display:none}
+#view-today .brand-line .brand,
+#view-today .kids-wordmark{display:none!important}
 #view-today .profile-dot{
   position:absolute;top:max(10px, env(safe-area-inset-top, 0px));right:12px;z-index:7
 }
+#view-today .hero .cloud,
+#view-today .hero .city,
+#view-today .hero .arch,
+#view-today .hero .dune,
+#view-today .hero .lantern{display:none!important}
 #view-today .hero{
-  margin:0 -16px -70px;
+  --art:url("/test/kids/assets/kids-brand/home-title-hero.png")!important;
+  margin:0 -16px -48px;
   width:calc(100% + 32px);
   border:0!important;
   border-radius:0!important;
-  min-height:clamp(390px, 92vw, 580px)!important;
+  min-height:clamp(420px, 118vw, 640px)!important;
   box-shadow:none!important;
+  background:#06131f!important
+}
+#view-today .hero::before{
+  background-image:var(--art)!important;
+  background-size:cover!important;
+  background-position:center top!important;
+  filter:none!important;
+  opacity:1!important;
+  transform:none!important
 }
 #view-today .hero::after{
   background:
     linear-gradient(180deg,
-      rgba(6,19,31,.08) 0%,
-      transparent 18%,
-      rgba(6,19,31,.12) 48%,
-      rgba(6,19,31,.55) 72%,
-      rgba(6,19,31,.92) 88%,
+      rgba(6,19,31,.20) 0%,
+      transparent 16%,
+      transparent 52%,
+      rgba(6,19,31,.35) 70%,
+      rgba(6,19,31,.82) 86%,
       #06131f 100%)!important
 }
 #view-today .hero-copy{
-  left:16px;right:16px;bottom:86px;max-width:none
+  left:18px;right:18px;bottom:58px;max-width:none;text-align:left
 }
 #view-today .hero-kicker,
 #view-today .hero h1,
@@ -1887,43 +1892,29 @@ html,body{
   font-family:"Fredoka",system-ui,sans-serif!important;
   letter-spacing:0
 }
-#view-today .hero-kicker{
-  font-size:12px;font-weight:700;letter-spacing:.08em
-}
-#view-today .hero h1{
-  font-weight:700;letter-spacing:-.02em
-}
+#view-today .hero h1{font-weight:700}
 .section-title::after{display:none!important;content:none!important}
 #view-today .resume,
 #view-today .daily-journey,
 #view-today .big-choice-grid,
 #view-today .knowledge-card,
 #view-today .gentle-note,
-#view-today .section-title{
-  position:relative;z-index:3
-}
+#view-today .section-title{position:relative;z-index:3}
 #view-today .resume{
-  margin-top:0;
-  border:0!important;
-  border-radius:22px;
-  background:linear-gradient(180deg, rgba(6,19,31,0), rgba(10,32,46,.55) 35%, rgba(12,38,54,.78))!important;
-  box-shadow:none!important;
+  margin-top:0;border:0!important;border-radius:22px;
+  background:linear-gradient(180deg, rgba(6,19,31,0), rgba(10,32,46,.5) 40%, rgba(12,38,54,.82))!important;
+  box-shadow:none!important
 }
 #view-today .daily-journey{
-  margin-top:6px;
-  border:0!important;
-  background:linear-gradient(180deg, rgba(12,38,54,.25), rgba(12,38,54,.62))!important;
-  box-shadow:none!important;
+  margin-top:6px;border:0!important;
+  background:linear-gradient(180deg, rgba(12,38,54,.2), rgba(12,38,54,.6))!important;
+  box-shadow:none!important
 }
 #view-today .section-title{margin:14px 4px 8px;font-weight:700}
-#view-today .choice{
-  box-shadow:0 14px 28px rgba(0,0,0,.14)!important
-}
-#view-today .knowledge-card{
-  border:0!important;
-  box-shadow:0 14px 28px rgba(0,0,0,.14)!important
-}
+#view-today .choice,
+#view-today .knowledge-card{border:0!important;box-shadow:0 14px 28px rgba(0,0,0,.14)!important}
 #view-today .gentle-note{background:transparent;border:0;opacity:.9}
+
 
 
 </style>
@@ -1952,8 +1943,7 @@ html,body{
         <div class="profile-dot"></div>
       </div>
 
-      <div class="hero" aria-label="Islamische Kinder-Abenteuerwelt">
-        <div class="kids-wordmark" aria-label="DĀR AL TAWḤĪD Kids"><img src="/test/kids/assets/kids-brand/logo-mark.png" alt="DĀR AL TAWḤĪD Kids"></div>
+      <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
         <div class="cloud"></div>
         <div class="city"></div>
         <div class="arch"></div>
@@ -2337,7 +2327,7 @@ html,body{
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab9";
+const KIDS_BUILD_ID="kids-shell-v12-tab10";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
