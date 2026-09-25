@@ -89,12 +89,12 @@ async function main() {
     ]);
     const voiceVersionOk = await waitForStatus(`${SITE_URL}/voice-studio/version.json`, 200);
     const voiceSetupOk = await waitForStatus(
-      `${SITE_URL}/voice-studio/DAR-Voice-Studio-Setup.app.zip?v=8`,
+      `${SITE_URL}/voice-studio/install-mac.command?setup=9`,
       200
     );
     const voiceSwOk = await waitForHtmlIncludes(
       `${SITE_URL}/voice-studio/service-worker.js`,
-      ["dar-voice-studio-v8"]
+      ["dar-voice-studio-v9"]
     );
     const pronunciationOk = await waitForStatus(
       `${SITE_URL}/data/pronunciation/pronunciation-rules.json`,

@@ -1,11 +1,10 @@
 {
-  "version": "1.2.1",
-  "updatedAt": "2026-09-25T11:50:00+02:00",
+  "version": "1.3.0",
+  "updatedAt": "2026-09-25T11:58:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "local-chatterbox-v3",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v8",
-  "setupApp": "/voice-studio/DAR-Voice-Studio-Setup.app.zip?v=8",
+  "cache": "dar-voice-studio-v9",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -13,5 +12,7 @@
     "path": "~/SerhatVoice/.venv",
     "preferredReference": "~/SerhatVoice/Serhat_Adobe_MASTER.wav",
     "fallbackReference": "~/SerhatVoice/Serhat_FINAL_REF.wav"
-  }
+  },
+  "setupMethod": "terminal-one-liner-existing-serhatvoice",
+  "setupCommand": "curl -fsSL 'https://dar-al-tawhid.de/voice-studio/install-mac.command?setup=9' | /bin/bash"
 }

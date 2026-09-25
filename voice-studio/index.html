@@ -11,7 +11,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="DĀR Voice Studio">
 <meta name="description" content="Private Sprachproduktion für DĀR AL TAWḤĪD Kids">
-<link rel="manifest" href="manifest.webmanifest?v=6">
+<link rel="manifest" href="manifest.webmanifest?v=9">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="icon" href="/app-icon-192.png">
 <title>DĀR AL TAWḤĪD – Voice Studio</title>
@@ -470,9 +470,14 @@ input{
   <section id="engineSetupSection" class="side-section">
     <div class="side-title">Serhat Engine</div>
     <button id="startEngineBtn" class="btn primary" style="width:100%;margin-bottom:8px">Engine starten</button>
-    <a id="installEngineBtn" class="btn secondary" style="width:100%;text-decoration:none;display:flex;align-items:center;justify-content:center" href="/voice-studio/DAR-Voice-Studio-Setup.app.zip?v=8" download="DĀR Voice Studio Setup.app.zip">Einmal auf Mac einrichten</a>
+    <button id="installEngineBtn" class="btn secondary" style="width:100%;margin-bottom:8px">Einmalig einrichten · Befehl kopieren</button>
+    <div id="setupCommandWrap" style="display:none;margin-bottom:8px">
+      <label for="setupCommand">Terminal-Befehl</label>
+      <textarea id="setupCommand" readonly spellcheck="false" style="height:86px;min-height:86px;resize:none;font-size:11px;line-height:1.4;padding:10px">curl -fsSL 'https://dar-al-tawhid.de/voice-studio/install-mac.command?setup=9' | /bin/bash</textarea>
+      <div class="notice" style="margin-top:6px">Terminal öffnen → Befehl einfügen → Enter. Deine vorhandene SerhatVoice-Umgebung wird verwendet; keine neue Voice-App und kein Gatekeeper-Download.</div>
+    </div>
     <button id="healthBtn" class="btn quiet" style="width:100%;margin-top:8px">Verbindung erneut prüfen</button>
-    <div id="engineHelp" class="notice" style="margin-top:9px">Deine SerhatVoice-Umgebung ist bereits vorbereitet. Falls die Engine noch nicht eingerichtet ist: Setup-ZIP laden, ZIP öffnen und „DĀR Voice Studio Setup“ mit Rechtsklick → Öffnen starten. Keine .command-Datei direkt öffnen.</div>
+    <div id="engineHelp" class="notice" style="margin-top:9px">Deine vorhandene Chatterbox-/SerhatVoice-Umgebung wird direkt verwendet. Einmal Terminal-Setup ausführen; danach startet die Engine automatisch mit dem Mac.</div>
   </section>
   <div id="error" class="bad" style="font-size:11px;line-height:1.5"></div>
 </aside>
@@ -641,7 +646,7 @@ async function startEngine(){
     }
   }
   $("#startEngineBtn").disabled=false;
-  setMessage("Die Engine konnte nicht automatisch gestartet werden. Falls sie noch nie eingerichtet wurde, klicke auf „Einmal auf Mac einrichten“.","warn");
+  setMessage("Engine noch nicht eingerichtet. Klicke auf „Einmalig einrichten · Befehl kopieren“, führe den einen Terminal-Befehl aus und prüfe danach erneut.","warn");
 }
 function updateQA(){
   const audio=!!lastAudio;
@@ -713,6 +718,23 @@ $("#generateBtn").onclick=generate;
 $("#mobileGenerateBtn").onclick=generate;
 $("#healthBtn").onclick=()=>checkHealth();
 $("#startEngineBtn").onclick=startEngine;
+$("#installEngineBtn").onclick=async()=>{
+  const wrap=$("#setupCommandWrap");
+  const field=$("#setupCommand");
+  wrap.style.display="block";
+  field.focus();
+  field.select();
+  let copied=false;
+  try{
+    await navigator.clipboard.writeText(field.value);
+    copied=true;
+  }catch(_){
+    try{copied=document.execCommand("copy")}catch(_){}
+  }
+  setMessage(copied
+    ?"Setup-Befehl kopiert. Terminal öffnen, einfügen und Enter drücken."
+    :"Terminal öffnen und den angezeigten Setup-Befehl kopieren/einfügen.","good");
+};
 $("#qaConfirmBtn").onclick=confirmQA;
 
 const isStandalone=window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;
@@ -738,6 +760,7 @@ if(IS_LOCAL){
   const setup=$("#engineSetupSection");
   if(setup){
     $("#installEngineBtn").style.display="none";
+    $("#setupCommandWrap").style.display="none";
     $("#startEngineBtn").style.display="none";
     $("#engineHelp").textContent="Lokales Produktionsstudio · Serhat Engine und Oberfläche laufen gemeinsam auf diesem Mac.";
   }
