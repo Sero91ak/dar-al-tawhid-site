@@ -5,13 +5,38 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0c2636">
 <link rel="manifest" href="/test/kids/manifest.webmanifest">
-<link rel="apple-touch-icon" sizes="180x180" href="/test/kids/icons/apple-touch-icon.png?v=logo23">
-<link rel="icon" type="image/png" sizes="192x192" href="/test/kids/icons/icon-192.png?v=logo23">
-<link rel="icon" type="image/png" sizes="512x512" href="/test/kids/icons/icon-512.png?v=logo23">
+<link rel="apple-touch-icon" sizes="180x180" href="/test/kids/icons/apple-touch-icon.png?v=logo25">
+<link rel="icon" type="image/png" sizes="32x32" href="/test/kids/icons/favicon-32.png?v=logo25">
+<link rel="icon" type="image/png" sizes="48x48" href="/test/kids/icons/favicon-48.png?v=logo25">
+<link rel="icon" type="image/png" sizes="192x192" href="/test/kids/icons/icon-192.png?v=logo25">
+<link rel="icon" type="image/png" sizes="512x512" href="/test/kids/icons/icon-512.png?v=logo25">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="DĀR AL TAWḤĪD KIDS">
-<title>DĀR AL TAWḤĪD KIDS – Kinderwelt</title>
+<meta name="apple-mobile-web-app-title" content="DĀR AL TAWḤĪD Kids">
+<meta name="application-name" content="DĀR AL TAWḤĪD Kids">
+<meta name="msapplication-TileColor" content="#0c2636">
+<meta name="msapplication-TileImage" content="/test/kids/icons/icon-192.png?v=logo25">
+<title>DĀR AL TAWḤĪD Kids</title>
+<meta name="description" content="Die Kinderwelt von DĀR AL TAWḤĪD – Geschichten, Qurʾān und Duʿāʾ.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="DĀR AL TAWḤĪD Kids">
+<meta property="og:title" content="DĀR AL TAWḤĪD Kids">
+<meta property="og:description" content="Die Kinderwelt von DĀR AL TAWḤĪD – Geschichten, Qurʾān und Duʿāʾ.">
+<meta property="og:url" content="https://dar-al-tawhid.de/test/kids/start">
+<meta property="og:image" content="https://dar-al-tawhid.de/test/kids/icons/og-1200x630.jpg?v=logo25">
+<meta property="og:image:secure_url" content="https://dar-al-tawhid.de/test/kids/icons/og-1200x630.jpg?v=logo25">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DĀR AL TAWḤĪD Kids">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DĀR AL TAWḤĪD Kids">
+<meta name="twitter:description" content="Die Kinderwelt von DĀR AL TAWḤĪD – Geschichten, Qurʾān und Duʿāʾ.">
+<meta name="twitter:image" content="https://dar-al-tawhid.de/test/kids/icons/og-1200x630.jpg?v=logo25">
+<meta itemprop="name" content="DĀR AL TAWḤĪD Kids">
+<meta itemprop="image" content="https://dar-al-tawhid.de/test/kids/icons/share-square.jpg?v=logo25">
 <style>
 :root{
   --ink:#f9f3e8;
@@ -2262,7 +2287,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon">KIDS · V0.25</div>
+  <div class="dev-ribbon">KIDS · V0.26</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2681,7 +2706,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab24";
+const KIDS_BUILD_ID="kids-shell-v12-tab25";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -2820,8 +2845,8 @@ var quranMode="listen";
 var speakAlongTimer=0;
 var quranAudio=document.getElementById("quranAudio");
 var duaAudio=new Audio();
-var KIDS_APP_ICON_192="/test/kids/icons/icon-192.png?v=logo23";
-var KIDS_APP_ICON_512="/test/kids/icons/icon-512.png?v=logo23";
+var KIDS_APP_ICON_192="/test/kids/icons/icon-192.png?v=logo25";
+var KIDS_APP_ICON_512="/test/kids/icons/icon-512.png?v=logo25";
 function kidsNowPlaying(title, artist){
   try{
     if(!("mediaSession" in navigator)) return;
