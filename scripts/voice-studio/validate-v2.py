@@ -96,7 +96,7 @@ def main():
     modes=set((prof.get("prosody") or {}).get("modes",{}))
     missing=required_modes-modes
     if missing: fail("missing prosody modes: "+", ".join(sorted(missing)))
-    if int(prof.get("schemaVersion",0))<3: fail("voice profile schemaVersion must be >=3")
+    if int(prof.get("schemaVersion",0))<4: fail("voice profile schemaVersion must be >=4")
     qa=prof.get("qualityAssurance") or {}
     if int(qa.get("maxRenderAttempts",0))<2: fail("QA maxRenderAttempts must be >=2")
     if int(qa.get("maxInternalSilenceMsWithPunctuation",0))<900: fail("QA punctuation-pause guard missing")
@@ -104,6 +104,37 @@ def main():
     if not isinstance(qa.get("minSpeechRateWpmByMode"),dict): fail("QA speech-rate mode thresholds missing")
     if int(qa.get("maxSustainedEnergyPlateauMs",0))<700: fail("QA sustained-hold guard missing")
     if not bool(qa.get("rescueLongSegments")): fail("QA long-segment rescue must be enabled")
+    if not bool(qa.get("coreAudioLockRequiredForRepeatability")): fail("core audio-lock repeatability policy missing")
+    if not bool(qa.get("coreAudioCandidateSinglePerRender")): fail("core audio single-candidate policy missing")
+    if not bool(qa.get("coreAudioConfirmedNeverResynthesized")): fail("confirmed core audio must never be resynthesized")
+
+    core=prof.get("corePronunciationLocks") or {}
+    expected_core={
+        "quran":"قُرْآنْ",
+        "al_quran":"الْقُرْآنْ",
+        "tawhid":"تَوْحِيدْ",
+        "iman":"إِيمَانْ",
+        "ihsan":"إِحْسَانْ",
+    }
+    if set((core.get("keys") or {}).keys())!=set(expected_core):
+        fail("core pronunciation-lock keys are incomplete")
+    audio_lock_variants=0
+    seen_core={k:0 for k in expected_core}
+    for r in rules:
+        key=str(r.get("audio_lock_key",""))
+        if not key:
+            continue
+        audio_lock_variants+=1
+        if key not in expected_core:
+            fail(f"unknown audio_lock_key: {key}")
+        if str(r.get("audio_lock_policy",""))!="CONFIRMED_WAV":
+            fail(f"wrong audio lock policy for {r.get('string_to_replace')}")
+        if str(r.get("tts_text",""))!=expected_core[key]:
+            fail(f"wrong locked TTS form for {r.get('string_to_replace')}: {r.get('tts_text')}")
+        seen_core[key]+=1
+    missing_core=[k for k,v in seen_core.items() if v<4]
+    if missing_core:
+        fail("too few audio-locked variants for: "+", ".join(sorted(missing_core)))
 
     engine_source=Path(engine_path).read_text(encoding="utf-8")
     try:
@@ -111,10 +142,10 @@ def main():
     except SyntaxError as e:
         fail(f"engine syntax error: {e}")
     functions={n.name for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))}
-    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments"}:
+    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav"}:
         if required not in functions: fail(f"engine missing production function: {required}")
-    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow"}:
-        if marker not in engine_source: fail(f"engine missing QA marker: {marker}")
+    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","/confirm-core-audio","audio_lock_pending","session_audio_locks"}:
+        if marker not in engine_source: fail(f"engine missing QA/audio-lock marker: {marker}")
 
     for case in fixtures.get("cases",[]):
         speech=prepare(case["text"],rules)
@@ -148,6 +179,8 @@ def main():
         "masterVariants":len(masters),
         "regressionCases":len(fixtures.get("cases",[])),
         "segmentRegressionCases":len(fixtures.get("segmentCases",[])),
+        "audioLockVariants":audio_lock_variants,
+        "audioLockKeys":sorted(k for k,v in seen_core.items() if v),
         "profileSchema":prof.get("schemaVersion")
     },ensure_ascii=False))
 
