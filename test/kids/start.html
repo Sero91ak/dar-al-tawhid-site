@@ -1830,103 +1830,104 @@ html,body{
 }
 
 
-/* KIDS_BRAND_FLOW_V8
-   Logo oben links wie Markenzeichen. Keine aufgeklebten Kästen, weiche Übergänge. */
+/* KIDS_BRAND_FLOW_V9
+   Oben genau die Logo-Beschriftung. Darunter kinderfreundliche, fließende Startseite. */
 .kids-wordmark{
   position:absolute;z-index:6;
-  top:max(6px, env(safe-area-inset-top, 0px));
-  left:10px;
-  width:min(58vw, 228px);
+  top:max(8px, calc(env(safe-area-inset-top, 0px) + 4px));
+  left:12px;
+  width:min(78vw, 310px);
   pointer-events:none;
-  filter:drop-shadow(0 10px 18px rgba(0,0,0,.38));
+  filter:drop-shadow(0 8px 16px rgba(0,0,0,.45));
 }
 .kids-wordmark img{
   display:block;width:100%;height:auto;
-  -webkit-mask-image:radial-gradient(120% 90% at 50% 45%,#000 72%,transparent 100%);
-  mask-image:radial-gradient(120% 90% at 50% 45%,#000 72%,transparent 100%);
 }
-#view-today{
-  position:relative;
-}
+#view-today{position:relative}
 #view-today .brand-line{
   position:absolute;left:0;right:0;top:0;z-index:6;
-  margin:0;padding:0;height:0;overflow:visible;
-  justify-content:flex-end;
+  margin:0;padding:0;height:0;overflow:visible;justify-content:flex-end
 }
 #view-today .brand-line .brand{display:none}
 #view-today .profile-dot{
   position:absolute;top:max(10px, env(safe-area-inset-top, 0px));right:12px;z-index:7
 }
 #view-today .hero{
-  margin:0 -16px 0;
+  margin:0 -16px -70px;
   width:calc(100% + 32px);
   border:0!important;
-  border-radius:0 0 42px 42px!important;
-  min-height:clamp(340px, 78vw, 520px)!important;
-  box-shadow:0 28px 50px rgba(0,0,0,.22);
+  border-radius:0!important;
+  min-height:clamp(390px, 92vw, 580px)!important;
+  box-shadow:none!important;
 }
 #view-today .hero::after{
   background:
-    linear-gradient(180deg, rgba(6,19,31,.12) 0%, transparent 22%, rgba(6,19,31,.18) 58%, rgba(6,19,31,.88) 88%, #06131f 100%)!important
+    linear-gradient(180deg,
+      rgba(6,19,31,.08) 0%,
+      transparent 18%,
+      rgba(6,19,31,.12) 48%,
+      rgba(6,19,31,.55) 72%,
+      rgba(6,19,31,.92) 88%,
+      #06131f 100%)!important
 }
 #view-today .hero-copy{
-  left:18px;right:18px;bottom:36px;max-width:none
+  left:16px;right:16px;bottom:86px;max-width:none
+}
+#view-today .hero-kicker,
+#view-today .hero h1,
+#view-today .hero p,
+#view-today .section-title,
+#view-today .resume strong,
+#view-today .daily-head strong,
+#view-today .choice strong,
+#view-today .gentle-note,
+.page-head h2,
+.page-head p,
+.section-title{
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  letter-spacing:0
 }
 #view-today .hero-kicker{
-  font-family:"Cinzel",Georgia,serif;
-  letter-spacing:.18em;
+  font-size:12px;font-weight:700;letter-spacing:.08em
 }
-#view-today .hero h1,
-.page-head h2,
-#view-today .section-title,
-.section-title{
-  font-family:"Cinzel",Georgia,serif!important;
-  font-weight:700;
-  letter-spacing:.01em;
+#view-today .hero h1{
+  font-weight:700;letter-spacing:-.02em
 }
-#view-today .hero p{
-  font-family:"Fredoka",system-ui,sans-serif;
-  font-weight:500;
-}
-.section-title::after{display:none!important;content:none!important;background:none!important;height:0!important}
+.section-title::after{display:none!important;content:none!important}
 #view-today .resume,
 #view-today .daily-journey,
 #view-today .big-choice-grid,
 #view-today .knowledge-card,
-#view-today .gentle-note{
+#view-today .gentle-note,
+#view-today .section-title{
   position:relative;z-index:3
 }
 #view-today .resume{
-  margin-top:-28px;
+  margin-top:0;
   border:0!important;
-  background:linear-gradient(180deg, rgba(16,41,54,.0), rgba(16,41,54,.72) 28%, rgba(18,48,64,.9))!important;
-  box-shadow:0 -24px 40px rgba(6,19,31,.18), 0 16px 30px rgba(0,0,0,.16)!important;
+  border-radius:22px;
+  background:linear-gradient(180deg, rgba(6,19,31,0), rgba(10,32,46,.55) 35%, rgba(12,38,54,.78))!important;
+  box-shadow:none!important;
 }
 #view-today .daily-journey{
-  margin-top:8px;
+  margin-top:6px;
   border:0!important;
-  background:linear-gradient(180deg, rgba(18,48,64,.35), rgba(18,48,64,.82))!important;
-  box-shadow:0 -18px 28px rgba(6,19,31,.12)!important;
+  background:linear-gradient(180deg, rgba(12,38,54,.25), rgba(12,38,54,.62))!important;
+  box-shadow:none!important;
 }
-#view-today .section-title{
-  margin:18px 4px 8px;
-}
+#view-today .section-title{margin:14px 4px 8px;font-weight:700}
 #view-today .choice{
-  box-shadow:0 18px 32px rgba(0,0,0,.16)!important;
+  box-shadow:0 14px 28px rgba(0,0,0,.14)!important
 }
 #view-today .knowledge-card{
   border:0!important;
-  box-shadow:0 -16px 28px rgba(6,19,31,.16), 0 16px 28px rgba(0,0,0,.16)!important;
+  box-shadow:0 14px 28px rgba(0,0,0,.14)!important
 }
-#view-today .gentle-note{
-  background:transparent;border:0;opacity:.86
-}
-.page-head .kicker{
-  font-family:"Cinzel",Georgia,serif;
-}
+#view-today .gentle-note{background:transparent;border:0;opacity:.9}
+
 
 </style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Fredoka:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap">
 </head>
 <body>
 <div id="kidsUpdateLayer" class="kids-update-layer">
@@ -1948,11 +1949,11 @@ html,body{
   <main class="shell">
     <section id="view-today" class="view active">
       <div class="brand-line">
-        <div class="kids-wordmark" aria-label="DĀR AL TAWḤĪD Kids"><img src="/test/kids/assets/kids-brand/logo-mark.png" alt="DĀR AL TAWḤĪD Kids"></div>
         <div class="profile-dot"></div>
       </div>
 
       <div class="hero" aria-label="Islamische Kinder-Abenteuerwelt">
+        <div class="kids-wordmark" aria-label="DĀR AL TAWḤĪD Kids"><img src="/test/kids/assets/kids-brand/logo-mark.png" alt="DĀR AL TAWḤĪD Kids"></div>
         <div class="cloud"></div>
         <div class="city"></div>
         <div class="arch"></div>
@@ -2336,7 +2337,7 @@ html,body{
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab8";
+const KIDS_BUILD_ID="kids-shell-v12-tab9";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
