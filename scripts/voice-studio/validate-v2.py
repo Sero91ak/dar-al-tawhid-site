@@ -96,7 +96,7 @@ def main():
     modes=set((prof.get("prosody") or {}).get("modes",{}))
     missing=required_modes-modes
     if missing: fail("missing prosody modes: "+", ".join(sorted(missing)))
-    if int(prof.get("schemaVersion",0))<4: fail("voice profile schemaVersion must be >=4")
+    if int(prof.get("schemaVersion",0))<5: fail("voice profile schemaVersion must be >=5")
     qa=prof.get("qualityAssurance") or {}
     if int(qa.get("maxRenderAttempts",0))<2: fail("QA maxRenderAttempts must be >=2")
     if int(qa.get("maxInternalSilenceMsWithPunctuation",0))<900: fail("QA punctuation-pause guard missing")
@@ -115,6 +115,10 @@ def main():
         "tawhid":"تَوْحِيدْ",
         "iman":"إِيمَانْ",
         "ihsan":"إِحْسَانْ",
+        "abu_bakr":"أَبُو بَكْرْ",
+        "abu_bakr_siddiq":"أَبُو بَكْرٍ الصِّدِّيقْ",
+        "umar":"عُمَرْ",
+        "umar_ibn_al_khattab":"عُمَرُ بْنُ الْخَطَّابْ",
     }
     if set((core.get("keys") or {}).keys())!=set(expected_core):
         fail("core pronunciation-lock keys are incomplete")
@@ -135,6 +139,9 @@ def main():
     missing_core=[k for k,v in seen_core.items() if v<4]
     if missing_core:
         fail("too few audio-locked variants for: "+", ".join(sorted(missing_core)))
+    for required_alias in ("Omar","omar","Umar ibn al-Chattab","Omar ibn al-Chattab","Omar ibn al-Khattab"):
+        if required_alias not in seen:
+            fail("missing common name alias: "+required_alias)
 
     engine_source=Path(engine_path).read_text(encoding="utf-8")
     try:
