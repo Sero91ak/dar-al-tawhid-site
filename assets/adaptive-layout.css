@@ -8,7 +8,17 @@
 html[data-theme] {
   --layout-content-max: 100%;
   --layout-reader-max: 100%;
-  --layout-navigation-max: 100%;
+  --dar-nav-gutter: max(10px, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px), 2.2vw);
+  /* Compact floating max: grows with viewport, never full-bleed. */
+  --dar-nav-max: min(56.25rem, clamp(20.5rem, 62vw, 52rem));
+  --dar-nav-width: min(var(--dar-nav-max), calc(100vw - 2 * var(--dar-nav-gutter)));
+  --layout-navigation-max: var(--dar-nav-width);
+  --dar-nav-height: clamp(60px, 5.6vh + 36px, 76px);
+  --dar-nav-pad-y: clamp(4px, 0.55vh, 8px);
+  --dar-nav-pad-x: clamp(4px, 0.9vw, 10px);
+  --dar-nav-icon: clamp(17px, 0.35vw + 16px, 22px);
+  --dar-nav-label: clamp(8.5px, 0.22vw + 8px, 11px);
+  --dar-nav-radius: clamp(24px, 2.4vw, 32px);
   --layout-card-min: 250px;
   --layout-page-gutter: clamp(12px, 2.4vw, 28px);
   --layout-rail-width: 0px;
@@ -36,7 +46,7 @@ html[data-theme] {
     --layout-shell-max: 100%;
     --layout-content-max: 100%;
     --layout-reader-max: 100%;
-    --layout-navigation-max: 100%;
+    --layout-navigation-max: var(--dar-nav-width);
     --layout-page-gutter: clamp(14px, 2.2vw, 28px);
   }
 }
@@ -55,7 +65,32 @@ html[data-layout="expanded"] {
   html[data-layout="expanded"] {
     --layout-content-max: 100%;
     --layout-reader-max: 100%;
-    --layout-navigation-max: 100%;
+    --dar-nav-max: min(56.25rem, clamp(24rem, 54vw, 54rem));
+    --dar-nav-width: min(var(--dar-nav-max), calc(100vw - 2 * var(--dar-nav-gutter)));
+    --layout-navigation-max: var(--dar-nav-width);
+    --dar-nav-height: clamp(62px, 5.2vh + 38px, 78px);
+  }
+}
+
+@media (min-width: 900px) {
+  :root,
+  html[data-theme] {
+    --dar-nav-max: min(56.25rem, clamp(26rem, 48vw, 54.5rem));
+    --dar-nav-width: min(var(--dar-nav-max), calc(100vw - 2 * var(--dar-nav-gutter)));
+    --layout-navigation-max: var(--dar-nav-width);
+    --dar-nav-height: clamp(64px, 4.8vh + 40px, 80px);
+    --dar-nav-icon: clamp(18px, 0.32vw + 16px, 23px);
+    --dar-nav-label: clamp(9px, 0.18vw + 8.2px, 11.5px);
+  }
+}
+
+/* Landscape / fold open: keep side air, grow modestly with short edge */
+@media (orientation: landscape) and (min-width: 600px) {
+  :root,
+  html[data-theme] {
+    --dar-nav-max: min(56.25rem, clamp(23rem, 50vw, 50rem), calc(100vh * 1.55));
+    --dar-nav-width: min(var(--dar-nav-max), calc(100vw - 2 * var(--dar-nav-gutter)));
+    --layout-navigation-max: var(--dar-nav-width);
   }
 }
 
@@ -208,40 +243,67 @@ html[data-layout="expanded"] .qov-sheet {
   margin-right: auto;
 }
 
-/* Bottom nav: centered on Fold/tablet — NEVER left rail */
-html[data-theme][data-layout="medium"] #appChromeDock #bottomNav.bottom-nav,
-html[data-theme][data-layout="medium"] #bottomNav.bottom-nav,
-html[data-layout="medium"] #appChromeDock #bottomNav.bottom-nav,
-html[data-layout="medium"] #bottomNav.bottom-nav,
-html[data-theme][data-layout="expanded"] #appChromeDock #bottomNav.bottom-nav,
-html[data-theme][data-layout="expanded"] #bottomNav.bottom-nav,
-html[data-layout="expanded"] #appChromeDock #bottomNav.bottom-nav,
-html[data-layout="expanded"] #bottomNav.bottom-nav {
+/* Bottom nav: floating centered capsule — NEVER a full-bleed bar */
+html[data-theme] #appChromeDock #bottomNav.bottom-nav,
+html[data-theme] #bottomNav.bottom-nav,
+#appChromeDock #bottomNav.bottom-nav,
+#bottomNav.bottom-nav,
+html[data-layout] #appChromeDock #bottomNav.bottom-nav,
+html[data-layout] #bottomNav.bottom-nav {
   left: 50% !important;
   right: auto !important;
   top: auto !important;
-  width: min(var(--layout-navigation-max), calc(100vw - 28px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px))) !important;
-  max-width: var(--layout-navigation-max) !important;
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
+  width: var(--dar-nav-width) !important;
+  max-width: min(900px, calc(100vw - 2 * var(--dar-nav-gutter))) !important;
+  height: var(--dar-nav-height) !important;
+  min-height: var(--dar-nav-height) !important;
+  max-height: var(--dar-nav-height) !important;
+  padding: var(--dar-nav-pad-y) var(--dar-nav-pad-x) !important;
+  border-radius: var(--dar-nav-radius) !important;
   transform: translateX(-50%) !important;
   -webkit-transform: translateX(-50%) !important;
   flex-direction: row !important;
   bottom: calc(max(7px, calc(env(safe-area-inset-bottom) - 18px)) + 3mm) !important;
-  padding: 6px 8px !important;
-  border-radius: 999px !important;
+  transition:
+    width .28s ease,
+    max-width .28s ease,
+    height .28s ease,
+    min-height .28s ease,
+    padding .28s ease,
+    border-radius .28s ease,
+    transform .28s ease,
+    bottom .28s ease !important;
 }
 
-html[data-layout="medium"] body.has-bottom-nav,
-html[data-layout="expanded"] body.has-bottom-nav {
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn,
+#bottomNav.bottom-nav .bottom-nav-btn {
+  font-size: var(--dar-nav-label) !important;
+  min-height: calc(var(--dar-nav-height) - 10px) !important;
+  padding: clamp(4px, 0.5vh, 7px) clamp(2px, 0.4vw, 6px) !important;
+}
+
+html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
+#bottomNav.bottom-nav .bottom-nav-btn .nav-icon {
+  font-size: var(--dar-nav-icon) !important;
+  width: var(--dar-nav-icon) !important;
+  height: var(--dar-nav-icon) !important;
+}
+
+html[data-theme] body.is-post-route #bottomNav.bottom-nav.post-nav-hidden,
+body.is-post-route #bottomNav.bottom-nav.post-nav-hidden {
+  transform: translateX(-50%) translateY(120%) !important;
+  -webkit-transform: translateX(-50%) translateY(120%) !important;
+}
+
+html[data-layout] body.has-bottom-nav,
+body.has-bottom-nav {
   padding-left: 0 !important;
-  padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+  padding-bottom: calc(var(--dar-nav-height) + env(safe-area-inset-bottom, 0px) + 22px) !important;
 }
 
-html[data-layout="medium"] body.has-bottom-nav .float-actions,
-html[data-layout="expanded"] body.has-bottom-nav .float-actions {
-  bottom: calc(76px + 0.5cm + max(0px, calc(env(safe-area-inset-bottom) - 22px)) + 3mm);
+html[data-layout] body.has-bottom-nav .float-actions,
+body.has-bottom-nav .float-actions {
+  bottom: calc(var(--dar-nav-height) + 0.5cm + max(0px, calc(env(safe-area-inset-bottom) - 22px)) + 3mm);
 }
 
 html.adaptive-keyboard-open #bottomNav.bottom-nav {

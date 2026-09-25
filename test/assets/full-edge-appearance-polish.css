@@ -357,12 +357,13 @@ html[data-theme] body.is-feed-fullscreen .sf-filters {
 /* Floating bottom nav like iOS (overrides full-bleed lock) */
 html[data-theme] #bottomNav.bottom-nav,
 html[data-theme] .bottom-nav {
-  left: max(12px, env(safe-area-inset-left, 0px)) !important;
-  right: max(12px, env(safe-area-inset-right, 0px)) !important;
-  width: auto !important;
-  max-width: none !important;
-  transform: none !important;
-  bottom: max(14px, calc(env(safe-area-inset-bottom, 0px) + 8px)) !important;
+  left: 50% !important;
+  right: auto !important;
+  width: var(--dar-nav-width, min(clamp(21rem, 66vw, 54.5rem), calc(100vw - 2 * max(12px, env(safe-area-inset-left, 0px), 2.2vw)))) !important;
+  max-width: min(900px, calc(100vw - 2 * max(12px, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px)))) !important;
+  transform: translateX(-50%) !important;
+  -webkit-transform: translateX(-50%) !important;
+  bottom: calc(max(7px, calc(env(safe-area-inset-bottom) - 18px)) + 3mm) !important;
 }
 
 html[data-theme] body.has-bottom-nav {
