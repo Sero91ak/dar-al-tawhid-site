@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 1,
-  "purpose": "Regression fixtures for DĀR Voice Studio 2.0. These are structural pronunciation/prosody checks, not replacements for final human audio QA.",
+  "schemaVersion": 2,
+  "purpose": "Regression fixtures for DĀR Voice Studio 2.1. Structural pronunciation, document prosody and sentence-level contextual prosody checks; not a replacement for final human audio QA.",
   "cases": [
     {
       "id": "brand",
@@ -173,6 +173,48 @@
         "مُوسَى"
       ],
       "expectedMode": "kids_story"
+    }
+  ],
+  "segmentCases": [
+    {
+      "id": "inherit-kids-story",
+      "documentText": "Es war einmal eine kleine Geschichte. Dann ging er ruhig nach Hause.",
+      "segmentText": "Dann ging er ruhig nach Hause.",
+      "requested": "auto",
+      "expectedDocumentMode": "kids_story",
+      "expectedSegmentMode": "kids_story"
+    },
+    {
+      "id": "local-serious-override",
+      "documentText": "Wir lernen heute mehrere Dinge. Achtung: Das ist verboten.",
+      "segmentText": "Achtung: Das ist verboten.",
+      "requested": "auto",
+      "expectedDocumentMode": "serious",
+      "expectedSegmentMode": "serious"
+    },
+    {
+      "id": "question-inside-teaching",
+      "documentText": "Heute lernen wir eine Grundlage. Was bedeutet Tawḥīd?",
+      "segmentText": "Was bedeutet Tawḥīd?",
+      "requested": "auto",
+      "expectedDocumentMode": "question",
+      "expectedSegmentMode": "question"
+    },
+    {
+      "id": "manual-style-lock",
+      "documentText": "Warum lernen wir das?",
+      "segmentText": "Warum lernen wir das?",
+      "requested": "gentle",
+      "expectedDocumentMode": "question",
+      "expectedSegmentMode": "gentle"
+    },
+    {
+      "id": "arabic-inherit-kids-lesson",
+      "documentText": "Heute lernen wir über Allah.",
+      "segmentText": "اللَّه",
+      "requested": "auto",
+      "expectedDocumentMode": "kids_lesson",
+      "expectedSegmentMode": "kids_lesson"
     }
   ]
 }
