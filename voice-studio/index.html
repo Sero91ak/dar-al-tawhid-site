@@ -484,6 +484,7 @@ input,select{
       <div class="qa-item"><span>Technische Audio-QA</span><b id="qaTechnical" class="warn">wartet</b></div>
       <div class="qa-item"><span>Satzfluss / Kontinuität</span><b id="qaContinuity" class="warn">wartet</b></div>
       <div class="qa-item"><span>Kern-Aussprache-Lock</span><b id="qaCoreLock" class="warn">prüfen</b></div>
+      <div class="qa-item"><span>Lobpreisungen</span><b id="qaHonorific" class="warn">Pflicht prüfen</b></div>
       <div class="qa-item"><span>Audio vorhanden</span><b id="qaAudio" class="warn">nein</b></div>
       <div class="qa-item"><span>Aussprache bestätigt</span><b id="qaConfirmed" class="warn">nein</b></div>
     </div>
@@ -586,6 +587,10 @@ function resetAudioQA(){
     $("#qaCoreLock").textContent="prüfen";
     $("#qaCoreLock").className="warn";
   }
+  if($("#qaHonorific")){
+    $("#qaHonorific").textContent="Pflicht prüfen";
+    $("#qaHonorific").className="warn";
+  }
   if(lastAudio){URL.revokeObjectURL(lastAudio);lastAudio=null}
   $("#player").removeAttribute("src");
   $("#playerWrap").hidden=true;
@@ -636,6 +641,13 @@ async function analyzeProsody(){
       const locked=needed.filter(x=>confirmed.has(x)).length;
       $("#qaCoreLock").textContent=needed.length?(locked+"/"+needed.length+" bestätigt"):"nicht benötigt";
       $("#qaCoreLock").className=(!needed.length||locked===needed.length)?"good":"warn";
+    }
+    if($("#qaHonorific")){
+      const names=Array.isArray(d.requiredHonorificNames)?d.requiredHonorificNames:[];
+      $("#qaHonorific").textContent=d.honorificPolicyEnabled
+        ?(names.length?(names.length+" automatisch gesprochen"):"Pflicht aktiv")
+        :"nicht aktiv";
+      $("#qaHonorific").className=d.honorificPolicyEnabled?"good":"bad";
     }
     if(d.prepared)$("#prepared").textContent=d.prepared;
     return d;
@@ -694,6 +706,11 @@ function updateEngineUI(data){
   const arDedicated=!!(data?.reference_arabic_dedicated||data?.arabic_reference_dedicated);
   $("#qaArabicRef").textContent=arDedicated?"Serhat AR MASTER":"Serhat DE Fallback";
   $("#qaArabicRef").className=arDedicated?"good":"warn";
+  if($("#qaHonorific")&&data?.honorific_policy_enabled){
+    const count=Number(data?.honorific_name_variants||0);
+    $("#qaHonorific").textContent=count?(count+" Namensvarianten · Pflicht aktiv"):"Pflicht aktiv";
+    $("#qaHonorific").className="good";
+  }
 
   if(modelError&&data?.last_error){
     $("#engineHelp").textContent="Modellfehler: "+data.last_error;
