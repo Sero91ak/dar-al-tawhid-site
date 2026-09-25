@@ -1,0 +1,121 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+import ast, json, re, sys
+from pathlib import Path
+
+ARABIC_RE=re.compile(r"[\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff]")
+LATIN_RE=re.compile(r"[A-Za-zÀ-ÖØ-öø-ÿ]")
+
+def fail(msg):
+    print("VOICE-STUDIO-V2 VALIDATION FAILED:",msg,file=sys.stderr)
+    raise SystemExit(1)
+
+def load(path):
+    try:
+        return json.loads(Path(path).read_text(encoding="utf-8"))
+    except Exception as e:
+        fail(f"{path}: {e}")
+
+def prepare(text,rules):
+    rules=sorted(rules,key=lambda r:len(str(r.get("string_to_replace",""))),reverse=True)
+    pos=0;out=[]
+    while pos<len(text):
+        hit=None
+        for r in rules:
+            needle=str(r.get("string_to_replace",""))
+            if needle and text.startswith(needle,pos):
+                hit=r;break
+        if not hit:
+            out.append(text[pos]);pos+=1;continue
+        out.append(str(hit.get("tts_text") or hit.get("alias") or hit["string_to_replace"]))
+        pos+=len(str(hit["string_to_replace"]))
+    return "".join(out)
+
+def classify(text):
+    s=str(text or "").strip()
+    low=s.casefold()
+    if "?" in s or "؟" in s:
+        return "question"
+    if any(x in low for x in ["duʿāʾ","dua","wir bitten allah","bitten wir allah"]):
+        return "dua"
+    if any(x in low for x in ["achtung","warnung","verboten","sehr ernst","gefahr"]):
+        return "serious"
+    if any(x in low for x in ["ganz ruhig","sanft","behutsam","schritt für schritt"]):
+        return "gentle"
+    if any(x in low for x in ["eines tages","geschichte","komm, wir entdecken","es war einmal"]):
+        return "kids_story"
+    if any(x in low for x in ["heute lernen wir","kids","kinder","gemeinsam lernen"]):
+        return "kids_lesson"
+    if s.count(",")>=3 or s.count(";")>=2 or ":" in s:
+        return "list"
+    if any(x in low for x in ["bedeutet","lernen wir","erklärt","grundlage","pflicht","wir beten","wir finden"]):
+        return "teaching"
+    return "narration"
+
+def main():
+    if len(sys.argv)!=5:
+        fail("usage: validate-v2.py pronunciation-rules.json voice-production-profile.json local-engine.py voice-regression-fixtures.json")
+    pron,profile,engine_path,fixtures_path=sys.argv[1:]
+    lib=load(pron); prof=load(profile); fixtures=load(fixtures_path)
+    rules=lib.get("rules") or []
+    if len(rules)<3700: fail(f"too few pronunciation rules: {len(rules)}")
+    if int(lib.get("counts",{}).get("canonicalTerms",0))<900: fail("canonical term count regressed")
+
+    seen={}
+    ipa_groups={}
+    for idx,r in enumerate(rules):
+        needle=str(r.get("string_to_replace",""))
+        if not needle: fail(f"rule {idx} has empty string_to_replace")
+        tts=str(r.get("tts_text",""))
+        if not tts or not ARABIC_RE.search(tts): fail(f"rule has no native Arabic tts_text: {needle}")
+        if LATIN_RE.search(tts): fail(f"Arabic tts_text contains Latin letters: {needle} -> {tts}")
+        if r.get("tts_language")!="ar": fail(f"wrong tts_language for {needle}")
+        if needle in seen and seen[needle]!=tts: fail(f"conflicting duplicate rule for {needle}")
+        seen[needle]=tts
+        ipa=str(r.get("ipa",""))
+        ipa_groups.setdefault(ipa,set()).add(tts)
+
+    conflicts=[(ipa,vals) for ipa,vals in ipa_groups.items() if ipa and len(vals)>1]
+    if conflicts:
+        ipa,vals=conflicts[0]
+        fail(f"one pronunciation group has multiple TTS forms: {ipa} -> {sorted(vals)[:3]}")
+
+    required_modes={"narration","kids_story","kids_lesson","teaching","gentle","serious","question","list","dua"}
+    modes=set((prof.get("prosody") or {}).get("modes",{}))
+    missing=required_modes-modes
+    if missing: fail("missing prosody modes: "+", ".join(sorted(missing)))
+    if int(prof.get("schemaVersion",0))<2: fail("voice profile schemaVersion must be >=2")
+    qa=prof.get("qualityAssurance") or {}
+    if int(qa.get("maxRenderAttempts",0))<2: fail("QA maxRenderAttempts must be >=2")
+
+    try:
+        ast.parse(Path(engine_path).read_text(encoding="utf-8"))
+    except SyntaxError as e:
+        fail(f"engine syntax error: {e}")
+
+    for case in fixtures.get("cases",[]):
+        speech=prepare(case["text"],rules)
+        for expected in case.get("expectedTts",[]):
+            # Fixtures use stable fragments, because full generated diacritics can be richer.
+            compact=re.sub(r"[\u064b-\u065f\u0670]","",speech)
+            exp=re.sub(r"[\u064b-\u065f\u0670]","",expected)
+            if exp not in compact:
+                fail(f"fixture {case['id']} missing TTS fragment {expected}; got {speech}")
+        mode=classify(case["text"])
+        if mode!=case.get("expectedMode"):
+            fail(f"fixture {case['id']} mode {mode} != {case.get('expectedMode')}")
+
+    masters=[r for r in rules if r.get("voice_lock")=="MASTER"]
+    if len(masters)<20: fail(f"too few MASTER pronunciation variants: {len(masters)}")
+
+    print(json.dumps({
+        "ok":True,
+        "rules":len(rules),
+        "pronunciationGroups":len(ipa_groups),
+        "masterVariants":len(masters),
+        "regressionCases":len(fixtures.get("cases",[])),
+        "profileSchema":prof.get("schemaVersion")
+    },ensure_ascii=False))
+
+if __name__=="__main__":
+    main()
