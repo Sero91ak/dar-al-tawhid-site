@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/assets/dar-app-chrome.css?v=1">
 <script src="/assets/dar-app-chrome.js?v=1"></script>
 
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1021";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1023";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -59,7 +59,7 @@ html[data-theme="light"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="lig
 
 <script>/* ANDROID_FULL_RELOAD_V665: PWA/Standalone wie iOS — kein Hängen auf Chrome-Splash */(function(){try{var ua=String(navigator.userAgent||"");if(!/Android/i.test(ua))return;document.documentElement.classList.add("is-android");window.addEventListener("pageshow",function(ev){if(ev&&ev.persisted)location.reload()});}catch(e){}})();</script>
 
-<script>/* IOS_NATIVE_FORCE_SHELL_V1005: alte Hülle holt version.json und lädt neu */(function(){try{var ua=String(navigator.userAgent||"");if(!/DarAlTawhid-iOS/i.test(ua)&&!window.DAR_IOS_NATIVE_APP)return;window.DAR_IOS_NATIVE_APP=true;window.DAR_OFFICIAL_IOS_APP=true;try{document.documentElement.classList.add("dar-ios-native-app")}catch(e0){}var BUILD=String(window.__DAR_EXPECTED_BUILD||"");var ONCE="dar_ios_native_force_count_v1005";function num(id){var m=String(id||"").match(/v(\d+)/);return m?parseInt(m[1],10):0}function unreg(){try{if("serviceWorker"in navigator){navigator.serviceWorker.getRegistrations().then(function(rs){(rs||[]).forEach(function(r){try{if(String(r.scope||"").indexOf("/push/onesignal")>=0)return;r.unregister()}catch(e1){}})}).catch(function(){})}}catch(e2){}}function go(){try{var n=Number(sessionStorage.getItem(ONCE)||0)||0;if(n>=2)return;sessionStorage.setItem(ONCE,String(n+1))}catch(e3){}var h=location.hash||"#home";var base=location.pathname||"/";location.replace(base+(base.indexOf("?")>=0?"&":"?")+"ios-shell="+Date.now()+"&darsw="+Date.now()+h)}unreg();try{if("caches"in window){caches.keys().then(function(keys){return Promise.all((keys||[]).map(function(k){return caches.delete(k)}))}).catch(function(){})}}catch(e4){}var ver=String(location.pathname||"").indexOf("/test")===0?"/test/version.json":"/version.json";fetch(ver+"?ios="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(remote){if(!remote||!remote.buildId)return;if(num(remote.buildId)>num(BUILD)&&num(BUILD)>0)go()}).catch(function(){})}catch(e){}})();</script>
+<script>/* IOS_NATIVE_FORCE_SHELL_V1005: alte Hülle holt version.json und lädt neu */(function(){try{var ua=String(navigator.userAgent||"");if(!/DarAlTawhid-iOS/i.test(ua)&&!window.DAR_IOS_NATIVE_APP)return;window.DAR_IOS_NATIVE_APP=true;window.DAR_OFFICIAL_IOS_APP=true;try{document.documentElement.classList.add("dar-ios-native-app")}catch(e0){}var BUILD=String(window.__DAR_EXPECTED_BUILD||"");var ONCE="dar_ios_native_force_count_v1016";function num(id){var m=String(id||"").match(/v(\d+)/);return m?parseInt(m[1],10):0}function unreg(){try{if("serviceWorker"in navigator){navigator.serviceWorker.getRegistrations().then(function(rs){(rs||[]).forEach(function(r){try{if(String(r.scope||"").indexOf("/push/onesignal")>=0)return;r.unregister()}catch(e1){}})}).catch(function(){})}}catch(e2){}}function go(){try{var n=Number(sessionStorage.getItem(ONCE)||0)||0;if(n>=2)return;sessionStorage.setItem(ONCE,String(n+1))}catch(e3){}var h=location.hash||"#home";var base=location.pathname||"/";location.replace(base+(base.indexOf("?")>=0?"&":"?")+"ios-shell="+Date.now()+"&darsw="+Date.now()+h)}unreg();try{if("caches"in window){caches.keys().then(function(keys){return Promise.all((keys||[]).map(function(k){return caches.delete(k)}))}).catch(function(){})}}catch(e4){}var ver=String(location.pathname||"").indexOf("/test")===0?"/test/version.json":"/version.json";fetch(ver+"?ios="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(remote){if(!remote||!remote.buildId)return;if(num(remote.buildId)>num(BUILD)&&num(BUILD)>0)go()}).catch(function(){})}catch(e){}})();</script>
 <script>/* VISUAL_PAST_PURGE_V588: alte Optik-Caches löschen – aktuelle Darstellung bleibt Autorität */(function(){var BUILD=String(window.__DAR_EXPECTED_BUILD||"");var KEY="dar_visual_authority_build_v1";var ONCE="dar_visual_past_purge_once_v588";function num(id){var m=String(id||"").match(/v(\d+)/);return m?parseInt(m[1],10):0}function wipe(){if(!("caches"in window))return Promise.resolve();return caches.keys().then(function(keys){return Promise.all(keys.filter(function(k){return /^dar-al-tawhid-offline-light-/i.test(k)}).map(function(k){return caches.delete(k)}))})}function bustReload(tag){try{if(sessionStorage.getItem(ONCE)===BUILD+"|"+tag)return;sessionStorage.setItem(ONCE,BUILD+"|"+tag)}catch(e){}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?"+tag+"="+Date.now()+h)}try{var prev=localStorage.getItem(KEY)||"";var localN=num(BUILD);var prevN=num(prev);if(prevN>localN&&localN>0){wipe().then(function(){if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){try{g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}catch(e){}}).catch(function(){})}bustReload("visual-stale")}).catch(function(){bustReload("visual-stale")});return}if(localN>prevN){wipe().then(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}bustReload("visual-new")}).catch(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}});return}if(!prev&&BUILD){try{localStorage.setItem(KEY,BUILD)}catch(e){}}if(localN>0&&"caches"in window){caches.keys().then(function(keys){keys.forEach(function(k){if(!/^dar-al-tawhid-offline-light-/i.test(k))return;var kn=num(k);if(kn&&kn<localN)caches.delete(k)})}).catch(function(){})}}catch(e){}try{var path=String(location.pathname||"");var ver=path.indexOf("/test")===0?"/test/version.json":"/version.json";fetch(ver,{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(remote){if(!remote||!remote.buildId)return;var remoteN=num(remote.buildId);if(remoteN>localN&&localN>0){wipe().then(function(){bustReload("visual-remote")}).catch(function(){bustReload("visual-remote")})}}).catch(function(){})}catch(e){}})();</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
@@ -9107,10 +9107,32 @@ html[data-theme="bordeaux"] .post-after-panel,html[data-theme="bordeaux"] .relat
 html[data-theme] #appChromeDock #bottomNav.bottom-nav,html[data-theme] #bottomNav.bottom-nav{position:fixed!important;top:auto!important;left:50%!important;right:auto!important;bottom:calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm)!important;transform:translateX(-50%)!important;-webkit-transform:translateX(-50%)!important;margin-left:0!important;margin-right:0!important;contain:none!important;width:var(--dar-nav-width,min(clamp(21rem,66vw,54.5rem),calc(100vw - 2 * max(10px,env(safe-area-inset-left,0px),2.2vw))))!important;max-width:min(900px,calc(100vw - 2 * max(10px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px))))!important}
 .new-posts-banner{position:fixed;top:0;left:0;right:0;z-index:1200;display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top));background:linear-gradient(135deg,rgba(239,215,142,.18),rgba(155,122,60,.12));border:1px solid rgba(239,215,142,.45);border-bottom:2px solid rgba(239,215,142,.65);border-radius:0 0 22px 22px;backdrop-filter:blur(12px);cursor:pointer;transition:transform .3s ease,opacity .3s ease;transform:translateY(0);opacity:1}.new-posts-banner.is-app-version{background:linear-gradient(135deg,rgba(120,165,235,.16),rgba(239,215,142,.14));border-color:rgba(160,195,255,.42);border-bottom-color:rgba(160,195,255,.55)}.new-posts-banner.is-app-version .new-posts-text{color:#eef4ff}.new-posts-banner.is-app-version .new-posts-refresh{color:#eef4ff;background:rgba(140,190,255,.18);border-color:rgba(140,190,255,.38)}.new-posts-banner.hidden{transform:translateY(-120%);opacity:0;pointer-events:none}.new-posts-icon{font-size:18px}.new-posts-text{color:var(--gold2);font-size:14px;font-weight:900;letter-spacing:.02em}.new-posts-refresh{color:var(--cream);font-size:11px;font-weight:900;background:rgba(239,215,142,.15);border:1px solid rgba(239,215,142,.35);border-radius:999px;padding:4px 10px}
 /* UPDATE_SOFT_BANNER_V628: kein blockierendes Modal — nur blauer Top-Banner */
-.app-update-modal,.app-update-modal[hidden]{display:none!important;visibility:hidden!important;pointer-events:none!important}
-.app-update-modal__backdrop,.app-update-modal__panel{display:none!important}
-body.app-update-modal-open{overflow:auto!important;touch-action:auto!important}
-body.app-update-modal-open .app-bar,body.app-update-modal-open #bottomNav,body.app-update-modal-open .float-actions{pointer-events:auto!important}
+html.dar-ios-native-app .app-update-modal[hidden]{display:none!important}
+html.dar-ios-native-app .app-update-modal:not([hidden]){
+  display:flex!important;visibility:visible!important;pointer-events:auto!important;
+  position:fixed;inset:0;z-index:2147483646;align-items:center;justify-content:center;
+  padding:max(18px,env(safe-area-inset-top)) 18px max(18px,env(safe-area-inset-bottom));
+}
+html.dar-ios-native-app .app-update-modal:not([hidden]) .app-update-modal__backdrop{
+  display:block!important;position:absolute;inset:0;background:rgba(6,7,10,.72);
+}
+html.dar-ios-native-app .app-update-modal:not([hidden]) .app-update-modal__panel{
+  display:block!important;position:relative;z-index:1;width:min(100%,380px);
+  border-radius:24px;padding:22px 20px 18px;text-align:center;
+  border:1px solid rgba(239,215,142,.28);
+  background:linear-gradient(180deg,#17140f,#0d0c0a);
+  box-shadow:0 28px 80px rgba(0,0,0,.5);
+  color:#f5efe1;
+}
+html.dar-ios-native-app .app-update-modal__badge{display:inline-block;margin:0 0 10px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#efd78e}
+html.dar-ios-native-app .app-update-modal__panel h2{margin:0 0 8px;font-family:Georgia,serif;font-size:24px;color:#efd78e}
+html.dar-ios-native-app .app-update-modal__panel p{margin:0 0 16px;font-size:14px;line-height:1.45;color:#cfc6b4}
+html.dar-ios-native-app .app-update-modal__btn{
+  appearance:none;border:0;border-radius:999px;min-height:46px;width:100%;
+  font:inherit;font-weight:800;font-size:15px;color:#16120d;background:linear-gradient(180deg,#f3e2b0,#d7b56a);cursor:pointer
+}
+html.dar-ios-native-app body.app-update-modal-open{overflow:hidden!important}
+html.dar-ios-native-app #newPostsBanner.is-app-version{display:flex!important}
 body.is-area-route #newPostsBanner.is-app-version{display:flex!important}
 .new-posts-banner.is-app-version{background:linear-gradient(135deg,rgba(56,132,255,.92),rgba(36,98,220,.88))!important;border-color:rgba(120,180,255,.55)!important;border-bottom-color:rgba(160,205,255,.7)!important;box-shadow:0 10px 28px rgba(20,60,140,.28)}
 .new-posts-banner.is-app-version .new-posts-text,.new-posts-banner.is-app-version .new-posts-icon{color:#fff!important}
@@ -10464,7 +10486,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/test/assets/dar-setup-hub.js?v=1019" defer></script><!-- DAR_SETUP_HUB_V1 -->
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <script src="/assets/adaptive-layout.js?v=10" defer></script>
-<script src="/assets/qibla-quick-view.js?v=1" defer></script>
+<script src="/assets/qibla-quick-view.js?v=2" defer></script>
 <script src="/test/assets/fold-split.js?v=937" defer></script>
 <script src="/assets/scholars-index.js?v=587" defer></script>
 <script src="/test/assets/prophets/prophets.js?v=33" defer></script>
@@ -12107,7 +12129,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/test/assets/ilm-research-chat.css?v=980">
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=791">
 <link rel="stylesheet" href="/assets/adaptive-layout.css?v=645">
-<link rel="stylesheet" href="/assets/qibla-quick-view.css?v=1">
+<link rel="stylesheet" href="/assets/qibla-quick-view.css?v=2">
 <link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=668">
 <link rel="stylesheet" href="/test/assets/dar-setup-hub.css?v=8"><!-- DAR_SETUP_HUB_V1 -->
 <link rel="stylesheet" href="/test/assets/dar-top-chrome-fix.css?v=2"><!-- DAR_TOP_CHROME_FIX -->
@@ -13567,6 +13589,7 @@ body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:no
 
 
 <style id="qibla-quick-sheet-v1">/* retired: Qibla Quick View uses assets/qibla-quick-view.css */</style>
+<style id="dar-qibla-live-v1">/* retired: uses assets/qibla-quick-view.css */</style>
 <style id="home-push-reminders-v379">
 /* Startseite: kompakte Erinnerungszeile, themeabhängig */
 .home-push-strip{
@@ -25527,85 +25550,34 @@ async function startQiblaCompass(){
   }
   enableQiblaStaticFallback(getBearing(),settings,status,startBtn,stopBtn);
 }
-function qiblaScreenAngle(){
-  const a=(screen.orientation&&typeof screen.orientation.angle==="number")?screen.orientation.angle:(typeof window.orientation==="number"?window.orientation:0);
-  return ((Number(a)||0)%360+360)%360;
-}
-function syncQiblaSheetOrientation(){
-  const sheet=document.querySelector("#qiblaQuickSheet .qibla-quick-sheet");
-  if(!sheet)return;
-  const angle=qiblaScreenAngle();
-  sheet.style.setProperty("--qibla-lock-rot",(-angle)+"deg");
-}
-function setQiblaNativeOrientationLock(on){
+var darQiblaLive={headingHandler:null,watchId:null};
+function closeQiblaQuickSheet(){
+  try{if(window.DARQiblaQuickView&&typeof window.DARQiblaQuickView.close==="function")window.DARQiblaQuickView.close()}catch(e){}
   try{
-    if(window.webkit&&webkit.messageHandlers&&webkit.messageHandlers.darOrientation){
-      webkit.messageHandlers.darOrientation.postMessage({lock:on?"portrait":"unlock"});
+    if(darQiblaLive.headingHandler){
+      window.removeEventListener("deviceorientation",darQiblaLive.headingHandler,true);
+      window.removeEventListener("deviceorientationabsolute",darQiblaLive.headingHandler,true);
+      darQiblaLive.headingHandler=null;
+    }
+    if(darQiblaLive.watchId!=null&&navigator.geolocation){
+      navigator.geolocation.clearWatch(darQiblaLive.watchId);
+      darQiblaLive.watchId=null;
     }
   }catch(e){}
-  try{
-    if(on&&screen.orientation&&typeof screen.orientation.lock==="function")screen.orientation.lock("portrait").catch(function(){});
-    if(!on&&screen.orientation&&typeof screen.orientation.unlock==="function")screen.orientation.unlock();
-  }catch(e){}
-}
-function renderQiblaQuickStage(){
-  const settings=getPrayerSettings();
-  const hasLoc=hasPrayerLocation(settings);
-  const bearing=hasLoc?qiblaBearing(settings.lat,settings.lon):0;
-  const city=hasLoc?esc(settings.city||"Standort"):"Standort wird gesucht…";
-  return `<div class="qibla-quick-stage">${qiblaCompassMarkup(bearing)}<p class="qibla-quick-city" id="qiblaQuickCity">${city}</p><p id="qiblaStatus" class="qibla-quick-live" aria-live="polite">Suche startet…</p><p class="qibla-quick-hint">Handy flach halten. Drehen ändert nur die Nadel — das Fenster bleibt waagerecht.</p><button id="startQiblaBtn" type="button" hidden>Start</button><button id="stopQiblaBtn" type="button" hidden>Stopp</button></div>`;
-}
-function closeQiblaQuickSheet(){
-  try{stopQiblaCompass()}catch(e){}
-  try{setQiblaNativeOrientationLock(false)}catch(e){}
-  if(window.DARQiblaQuickView&&typeof window.DARQiblaQuickView.close==="function"){window.DARQiblaQuickView.close()}
-  const el=document.getElementById("qiblaQuickSheet");
+  const el=document.getElementById("qiblaQuickSheet")||document.getElementById("darQiblaLive");
   if(el)el.remove();
-  document.body.classList.remove("qibla-quick-sheet-open");
-  document.documentElement.classList.remove("qibla-quick-sheet-open");
+  document.body.classList.remove("qibla-quick-sheet-open","dar-qibla-live-open");
+  document.documentElement.classList.remove("qibla-quick-sheet-open","dar-qibla-live-open");
 }
 function openQiblaQuickSheet(){
   try{if(typeof triggerLightHapticFeedback==="function")triggerLightHapticFeedback()}catch(e){}
   try{stopQiblaCompass()}catch(e){}
-  try{setQiblaNativeOrientationLock(true)}catch(e){}
   if(window.DARQiblaQuickView&&typeof window.DARQiblaQuickView.open==="function"){window.DARQiblaQuickView.open();return}
 }
-async function runQiblaSheetAutoStart(){
-  if(!document.getElementById("qiblaQuickSheet"))return;
-  const status=$("qiblaStatus");
-  if(!hasPrayerLocation()){
-    if(status)status.textContent="Standort wird ermittelt…";
-    try{
-      if(!navigator.geolocation)throw new Error("no geo");
-      const pos=await requestBrowserPosition();
-      const lat=pos.coords.latitude,lon=pos.coords.longitude;
-      const city=await reversePrayerCity(lat,lon);
-      setPrayerSettings({lat,lon,city,locationGranted:true});
-      const sheet=document.querySelector("#qiblaQuickSheet .qibla-quick-sheet");
-      if(sheet){
-        const oldHead=sheet.querySelector(".qibla-quick-sheet__head");
-        const handle=sheet.querySelector(".qibla-quick-sheet__handle");
-        const stage=renderQiblaQuickStage();
-        sheet.innerHTML=`${handle?handle.outerHTML:""}${oldHead?oldHead.outerHTML:""}${stage}`;
-        sheet.querySelector(".qibla-quick-sheet__close")?.addEventListener("click",closeQiblaQuickSheet);
-      }
-      const startBtn=$("startQiblaBtn"); if(startBtn) startBtn.onclick=startQiblaCompass;
-      const stopBtn=$("stopQiblaBtn"); if(stopBtn) stopBtn.onclick=stopQiblaCompass;
-    }catch(e){
-      if(status)status.textContent="Bitte Standort erlauben, dann startet die Suche.";
-      return;
-    }
-  }
-  const cityEl=$("qiblaQuickCity");
-  if(cityEl)cityEl.textContent=getPrayerSettings().city||"Standort";
-  if(status)status.textContent="Kompass wird ausgerichtet…";
-  startQiblaCompass();
-}
-function openQiblaFromFloat(){
-  openQiblaQuickSheet();
-}
+function openQiblaFromFloat(){openQiblaQuickSheet()}
 window.openQiblaQuickSheet=openQiblaQuickSheet;
 window.closeQiblaQuickSheet=closeQiblaQuickSheet;
+
 async function runQiblaAutoStart(){
   const panel=document.querySelector(".qibla-pro-section");
   if(panel){const top=Math.max(0,panel.getBoundingClientRect().top+window.scrollY-scrollChromeOffset()-16);if(window.DARScrollManager?.stableScrollTo)window.DARScrollManager.stableScrollTo(top,{force:true});else window.scrollTo({top,behavior:"auto"})}
@@ -27384,7 +27356,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1021";
+const APP_BUILD_ID="app-shell-v1023";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -28928,9 +28900,25 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       updateModalLocked = false;
       document.body.classList.remove('app-update-modal-open');
     }
+    function iosNativeShell(){
+      try{return (typeof isOfficialIosApp==="function"&&isOfficialIosApp())||!!window.DAR_IOS_NATIVE_APP||/DarAlTawhid-iOS/i.test(String(navigator.userAgent||""))}catch(e){return false}
+    }
     function showUpdateModal(mode, label) {
-      /* Legacy-API: Modal ist deaktiviert — immer weicher blauer Top-Banner */
       hideUpdateModal();
+      if (iosNativeShell()) {
+        var modal = getUpdateModal();
+        if (modal) {
+          var title = modal.querySelector('#appUpdateModalTitle');
+          var text = modal.querySelector('#appUpdateModalText');
+          if (title) title.textContent = mode === 'recovery' ? 'App-Update erforderlich' : 'Neue Version verfügbar';
+          if (text) text.textContent = label || 'Darstellung und Funktionen wurden aktualisiert. Tippe auf Jetzt aktualisieren.';
+          modal.hidden = false;
+          document.body.classList.add('app-update-modal-open');
+          updateModalLocked = true;
+          window.__darAppVersionAvailable = true;
+          return;
+        }
+      }
       updateModalLocked = false;
       showBanner(mode === 'recovery' ? 'recovery' : 'version', label);
     }
@@ -29175,7 +29163,8 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       if (typeof updateHomeAppStatusUi === 'function') updateHomeAppStatusUi();
     }
     function showVersionBanner() {
-      showBanner('version', 'Neue Version verfügbar');
+      if (iosNativeShell()) showUpdateModal('version', 'Neue Version verfügbar. Tippe auf Jetzt aktualisieren.');
+      else showBanner('version', 'Neue Version verfügbar');
     }
     function showPostsBanner(label) {
       showBanner('posts', label);

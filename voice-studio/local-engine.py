@@ -34,6 +34,29 @@ MODEL_DEVICE=None
 MODEL_LOCK=threading.Lock()
 RENDER_LOCK=threading.Lock()
 STATUS_LOCK=threading.Lock()
+TORCH_LOAD_ORIGINAL=None
+
+def patch_torch_load_for_device(device:str):
+    """Chatterbox official macOS workaround: force checkpoint loads onto MPS/CPU."""
+    global TORCH_LOAD_ORIGINAL
+    import torch
+    if TORCH_LOAD_ORIGINAL is None:
+        TORCH_LOAD_ORIGINAL=torch.load
+    original=TORCH_LOAD_ORIGINAL
+    map_location=torch.device(device)
+    def patched_torch_load(*args,**kwargs):
+        if "map_location" not in kwargs:
+            kwargs["map_location"]=map_location
+        return original(*args,**kwargs)
+    torch.load=patched_torch_load
+
+def restore_torch_load():
+    global TORCH_LOAD_ORIGINAL
+    if TORCH_LOAD_ORIGINAL is None:
+        return
+    import torch
+    torch.load=TORCH_LOAD_ORIGINAL
+
 STATUS={
     "model_state":"not_loaded",
     "model_device":None,
@@ -108,11 +131,25 @@ def load_model(force_device=None):
                     try: torch.mps.empty_cache()
                     except Exception: pass
 
+            # Offizieller Chatterbox-Mac-Workaround: torch.load braucht auf
+            # Apple Silicon ein explizites map_location für MPS.
+            patch_torch_load_for_device(target)
             try:
-                model=ChatterboxMultilingualTTS.from_pretrained(device=target,t3_model="v3")
-            except TypeError:
-                # Kompatibilität mit Chatterbox-Versionen ohne t3_model-Parameter.
-                model=ChatterboxMultilingualTTS.from_pretrained(device=target)
+                try:
+                    model=ChatterboxMultilingualTTS.from_pretrained(device=target,t3_model="v3")
+                except TypeError:
+                    # Kompatibilität mit Chatterbox-Versionen ohne t3_model-Parameter.
+                    model=ChatterboxMultilingualTTS.from_pretrained(device=target)
+            finally:
+                restore_torch_load()
+
+            # Einige Versionen laden intern zunächst auf CPU; nach dem Laden
+            # noch einmal sicherstellen, dass das Modell wirklich auf target liegt.
+            if hasattr(model,"to") and str(getattr(model,"device","")) != target:
+                try:
+                    model.to(target)
+                except Exception:
+                    pass
 
             MODEL=model
             MODEL_DEVICE=target
@@ -351,6 +388,29 @@ class H(BaseHTTPRequestHandler):
             })
         elif p=="/status":
             self.send_json(200,{"ok":True,**get_status()})
+        elif p=="/diagnostics":
+            import sys, platform
+            try:
+                import torch
+                torch_version=getattr(torch,"__version__","?")
+                mps_available=bool(torch.backends.mps.is_available())
+                mps_built=bool(torch.backends.mps.is_built())
+            except Exception as e:
+                torch_version="error: "+str(e)
+                mps_available=False
+                mps_built=False
+            self.send_json(200,{
+                "ok":True,
+                "python":sys.version.split()[0],
+                "platform":platform.platform(),
+                "machine":platform.machine(),
+                "torch":torch_version,
+                "mps_built":mps_built,
+                "mps_available":mps_available,
+                "reference":str(REF),
+                "reference_exists":REF.exists(),
+                **get_status()
+            })
         elif p in ("/studio","/studio/","/studio/index.html"):
             self.send_file(APP_HOME/"studio.html","text/html; charset=utf-8")
         elif p=="/data/pronunciation/pronunciation-rules.json":
