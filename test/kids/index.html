@@ -1118,7 +1118,7 @@ html,body{background:#06131f!important}
 
 /* HOME — clearer action hierarchy */
 #view-today .hero{
-  --art:url("/test/kids/assets/kids-brand/hero-sky-open.png?v=13");
+  --art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=14");
   min-height:clamp(292px,51vw,390px)!important;
   background:#102936!important;
 }
@@ -1440,7 +1440,7 @@ body{position:fixed!important;inset:0!important;touch-action:manipulation}
 .nav-btn[data-target="parents"] .ico{background-image:url("/test/kids/assets/kids-icons/parents-real-v12.png?v=1")!important}
 .picker-icon{background-image:url("/test/kids/assets/kids-icons/quran-real-v12.png?v=1")!important;background-size:76%!important}
 .icon-book{background-image:url("/test/kids/assets/kids-icons/quran-real-v12.png?v=1")!important}.icon-headphones,.icon-volume{background-image:url("/test/kids/assets/kids-icons/headphones-real-v12.png?v=1")!important}.icon-dua{background-image:url("/test/kids/assets/kids-icons/dua-real-v12.png?v=1")!important}.icon-star,.icon-spark{background-image:url("/test/kids/assets/kids-icons/spark-real-v12.png?v=1")!important}.icon-play{background-image:url("/test/kids/assets/kids-icons/play-real-v12.png?v=1")!important}.icon-mic{background-image:url("/test/kids/assets/kids-icons/mic-real-v12.png?v=1")!important}.icon-lock{background-image:url("/test/kids/assets/kids-icons/lock-real-v12.png?v=1")!important}.icon-moon{background-image:url("/test/kids/assets/kids-icons/moon-real-v12.png?v=1")!important}.icon-heart{background-image:url("/test/kids/assets/kids-icons/heart-real-v12.png?v=1")!important}.icon-library{background-image:url("/test/kids/assets/kids-icons/library-real-v12.png?v=1")!important}.icon-droplet{background-image:url("/test/kids/assets/kids-icons/water-real-v12.png?v=1")!important}.icon-cloud{background-image:url("/test/kids/assets/kids-icons/cloud-real-v12.png?v=1")!important}.icon-sun{background-image:url("/test/kids/assets/kids-icons/sun-real-v12.png?v=1")!important}.icon-settings,.icon-parents{background-image:url("/test/kids/assets/kids-icons/parents-real-v12.png?v=1")!important}.icon-home{background-image:url("/test/kids/assets/kids-icons/home-real-v12.png?v=1")!important}.icon-food{background-image:url("/test/kids/assets/kids-icons/food-real-v12.png?v=1")!important}.icon-speech{background-image:url("/test/kids/assets/kids-icons/speech-real-v12.png?v=1")!important}.icon-coin{background-image:url("/test/kids/assets/kids-icons/coin-real-v12.png?v=1")!important}.icon-palm{background-image:url("/test/kids/assets/kids-icons/palm-real-v12.png?v=1")!important}.icon-help{background-image:url("/test/kids/assets/kids-icons/help-real-v12.png?v=1")!important}.icon-door{background-image:url("/test/kids/assets/kids-icons/door-real-v12.png?v=1")!important}.icon-mosque{background-image:url("/test/kids/assets/kids-icons/mosque-real-v12.png?v=1")!important}.icon-shield{background-image:url("/test/kids/assets/kids-icons/shield-real-v12.png?v=1")!important}
-#view-today .hero{--art:url("/test/kids/assets/kids-brand/hero-sky-open.png?v=13")!important}
+#view-today .hero{--art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=14")!important}
 #view-today .hero::before{background-image:var(--art)!important;background-position:center!important;background-size:cover!important}
 /* KIDS_REAL_ASSET_ICON_FINAL_V11_END */
 
@@ -1830,8 +1830,8 @@ html,body{
 }
 
 
-/* KIDS_HERO_STAGE_V13
-   Freie Titelseite: Himmel als Welt, Typo als Marke, keine Bildbox. */
+/* KIDS_HERO_STAGE_V14
+   Kompakt, warm, ballonhaft – Titel und Begrüßung als eine Kinderwelt. */
 #view-today{position:relative;z-index:2}
 #view-today .brand-line{
   position:absolute;left:0;right:0;top:0;z-index:6;
@@ -1839,89 +1839,83 @@ html,body{
 }
 #view-today .brand-line .brand{display:none}
 #view-today .profile-dot{
-  position:absolute;top:max(12px, env(safe-area-inset-top, 0px));right:14px;z-index:8
+  position:absolute;top:max(10px, env(safe-area-inset-top, 0px));right:12px;z-index:8
 }
-#view-today .hero .city{display:none!important}
-#view-today .hero .cloud{
-  display:block!important;z-index:2;opacity:.28;top:18%;width:120px;height:28px;animation-duration:38s
-}
-#view-today .hero .dune{
-  display:block!important;z-index:2;left:0;right:0;bottom:0;height:28%;
-  background:linear-gradient(180deg,transparent,rgba(6,19,31,.55) 70%,rgba(6,19,31,.82));
-  opacity:1;pointer-events:none
-}
-#view-today .hero .arch{
-  display:block!important;position:absolute;inset:0;z-index:3;pointer-events:none;
-  width:auto;height:auto;right:auto;bottom:auto;border:0;border-radius:0;opacity:1;
-  background:
-    radial-gradient(ellipse 46% 70% at -6% -8%, transparent 62%, rgba(232,193,110,.28) 63%, rgba(232,193,110,.08) 66%, transparent 68%),
-    radial-gradient(ellipse 46% 70% at 106% -8%, transparent 62%, rgba(232,193,110,.28) 63%, rgba(232,193,110,.08) 66%, transparent 68%);
-}
-#view-today .hero .lantern{
-  display:block!important;z-index:3;font-size:0;width:16px;height:26px;right:16%;top:26%;
-  border:0;border-radius:9px 9px 5px 5px;
-  background:radial-gradient(circle at 50% 32%,#fff6d2,#e2bd72 55%,#b8863a);
-  box-shadow:0 0 22px rgba(226,189,114,.85),0 10px 18px rgba(0,0,0,.2);
-  animation:lantern 2.8s ease-in-out infinite
-}
-#view-today .hero .lantern::after{
-  content:"";position:absolute;left:50%;top:100%;width:2px;height:18px;background:rgba(226,189,114,.55);transform:translateX(-50%)
-}
+#view-today .hero .city,
+#view-today .hero .cloud,
+#view-today .hero .arch,
+#view-today .hero .dune,
+#view-today .hero .lantern{display:none!important}
 #view-today .kids-wordmark{
-  display:flex!important;flex-direction:column;align-items:center;gap:2px;
+  display:flex!important;flex-direction:column;align-items:center;gap:0;
   position:relative;z-index:5;
-  margin:calc(env(safe-area-inset-top, 0px) + 18px) auto 0;
-  width:auto;max-width:92%;
+  margin:calc(env(safe-area-inset-top, 0px) + 8px) auto 4px;
+  width:min(92%, 420px);
   transform:none;filter:none;text-align:center
 }
 #view-today .kids-wordmark img{display:none!important}
-#view-today .wm-dar{
-  display:block;font-family:"Cinzel",Georgia,serif;font-weight:700;
-  font-size:clamp(13px,3.6vw,18px);letter-spacing:.22em;color:#f3e0b0;
-  text-shadow:0 2px 14px rgba(6,19,31,.55)
+#view-today .wm-dar{display:none}
+#view-today .wm-dar-svg{
+  display:block;width:min(92vw,340px);height:42px;margin:0 auto;
+  overflow:visible;filter:drop-shadow(0 4px 10px rgba(8,24,36,.35))
 }
 #view-today .wm-kids{
-  display:flex;gap:.02em;line-height:.9;font-family:"Fredoka",system-ui,sans-serif;
-  font-weight:700;font-size:clamp(44px,14vw,76px);
-  filter:drop-shadow(0 8px 16px rgba(6,19,31,.4))
+  display:flex;justify-content:center;align-items:flex-end;gap:.04em;
+  line-height:.86;font-family:"Fredoka",system-ui,sans-serif;
+  font-weight:700;font-size:clamp(40px,12.5vw,64px);
+  margin-top:-2px
 }
-#view-today .wm-kids span{display:inline-block}
-#view-today .wm-kids .k{color:#f0c65a}
-#view-today .wm-kids .i{color:#5ec8f2}
-#view-today .wm-kids .d{color:#f06aa8}
-#view-today .wm-kids .s{color:#6ed18c}
+#view-today .wm-kids span{
+  display:inline-block;
+  -webkit-text-stroke:4px rgba(255,255,255,.55);
+  paint-order:stroke fill;
+  text-shadow:
+    0 2px 0 rgba(255,255,255,.7),
+    0 6px 0 rgba(40,22,8,.16),
+    0 12px 18px rgba(8,24,36,.28);
+  animation:kidsBalloon 2.6s ease-in-out infinite
+}
+#view-today .wm-kids .k{color:#ffd45e;rotate:-8deg;animation-delay:0s}
+#view-today .wm-kids .i{color:#62d4ff;rotate:6deg;animation-delay:.12s}
+#view-today .wm-kids .d{color:#ff7ab8;rotate:-4deg;animation-delay:.24s}
+#view-today .wm-kids .s{color:#74e08f;rotate:8deg;animation-delay:.36s}
+@keyframes kidsBalloon{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-5px) scale(1.04)}
+}
 #view-today .hero{
-  --art:url("/test/kids/assets/kids-brand/hero-sky-open.png?v=13")!important;
-  display:flex;flex-direction:column;justify-content:space-between;
+  --art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=14")!important;
+  display:flex;flex-direction:column;justify-content:flex-start;
   margin:calc(-1 * var(--safe-top)) -16px 0;
   width:calc(100% + 32px);
   border:0!important;
-  border-radius:0 0 42px 42px!important;
-  min-height:clamp(430px,118vw,620px)!important;
-  box-shadow:none!important;
-  background:#071828!important;
+  border-radius:0 0 34px 34px!important;
+  min-height:clamp(300px,84vw,372px)!important;
+  box-shadow:0 18px 36px rgba(8,30,44,.22)!important;
+  background:#1b4a68!important;
   overflow:hidden
 }
 #view-today .hero::before{
   background-image:var(--art)!important;
   background-size:cover!important;
-  background-position:center 42%!important;
-  filter:saturate(1.05) contrast(1.02)!important;opacity:1!important;transform:none!important
+  background-position:center 28%!important;
+  filter:saturate(1.12) contrast(1.04) brightness(1.04)!important;
+  opacity:1!important;transform:none!important
 }
 #view-today .hero::after{
   background:
-    linear-gradient(180deg, rgba(7,20,32,.28) 0%, transparent 22%, transparent 48%, rgba(7,20,32,.42) 78%, #06131f 100%),
-    radial-gradient(ellipse 70% 40% at 50% 18%, rgba(7,24,40,.18), transparent 70%)!important
+    linear-gradient(180deg, rgba(18,48,70,.10) 0%, transparent 18%, transparent 46%, rgba(12,36,52,.38) 72%, rgba(8,28,42,.78) 100%)!important
 }
 #view-today .hero-copy{
   position:relative!important;left:auto!important;right:auto!important;bottom:auto!important;
   z-index:5;max-width:none;text-align:center;
-  padding:8px 22px 30px;margin:0;
-  text-shadow:0 8px 22px rgba(6,19,31,.55)
+  margin-top:auto;padding:6px 18px 16px;
+  text-shadow:0 4px 14px rgba(8,24,36,.45)
 }
 #view-today .hero-salam{
-  margin:0 0 8px;font-family:"Cinzel",Georgia,serif!important;font-weight:600;
-  font-size:clamp(16px,4.6vw,22px);letter-spacing:.04em;color:#ffe7b4!important
+  margin:0 auto 6px;max-width:22em;line-height:1.35;
+  font-family:"Fredoka",system-ui,sans-serif!important;font-weight:600;
+  font-size:clamp(12px,3.4vw,15px);letter-spacing:.01em;color:#fff4d4!important
 }
 #view-today .hero-kicker,
 #view-today .hero h1,
@@ -1935,12 +1929,14 @@ html,body{
   font-family:"Fredoka",system-ui,sans-serif!important;letter-spacing:0
 }
 #view-today .hero-kicker{
-  font-size:clamp(12px,3.2vw,14px);font-weight:700;letter-spacing:.18em;color:#ffe4a3;text-transform:uppercase
+  display:inline-block;margin:0 auto 4px;padding:4px 12px;
+  font-size:11px;font-weight:700;letter-spacing:.16em;color:#3a2a12;
+  text-transform:uppercase;background:rgba(255,214,120,.92);border-radius:999px
 }
 #view-today .hero h1{
-  font-size:clamp(26px,7.2vw,40px)!important;margin:6px 0 8px;font-weight:700;max-width:none;line-height:1.12
+  font-size:clamp(22px,6.2vw,32px)!important;margin:6px 0 4px;font-weight:700;max-width:none;line-height:1.12
 }
-#view-today .hero p{font-size:clamp(13px,3.6vw,16px)!important;max-width:28em;margin:0 auto;color:rgba(255,255,255,.9)!important}
+#view-today .hero p{font-size:clamp(12px,3.4vw,15px)!important;max-width:26em;margin:0 auto;color:rgba(255,255,255,.92)!important}
 .section-title::after{display:none!important;content:none!important}
 #view-today .resume,
 #view-today .daily-journey,
@@ -1949,7 +1945,7 @@ html,body{
 #view-today .gentle-note,
 #view-today .section-title{position:relative;z-index:3}
 #view-today .resume{
-  margin-top:18px!important;
+  margin-top:14px!important;
   border:0!important;border-radius:22px;
   background:rgba(12,38,54,.92)!important;
   box-shadow:0 12px 24px rgba(0,0,0,.18)!important
@@ -1967,13 +1963,16 @@ html,body{
   #view-today .hero{
     margin-left:max(-22px, calc(-1 * env(safe-area-inset-left)));
     margin-right:max(-22px, calc(-1 * env(safe-area-inset-right)));
-    width:auto;min-height:560px!important
+    width:auto;min-height:390px!important
   }
+  #view-today .wm-kids{font-size:68px}
 }
 @media(max-width:380px){
-  #view-today .hero{min-height:clamp(400px,132vw,520px)!important}
-  #view-today .wm-kids{font-size:42px}
+  #view-today .hero{min-height:clamp(286px,92vw,340px)!important}
+  #view-today .wm-kids{font-size:38px}
+  #view-today .hero-salam{font-size:12px}
 }
+
 
 
 
@@ -1997,7 +1996,7 @@ html,body{
 </div>
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon">KIDS · V0.14</div>
+  <div class="dev-ribbon">KIDS · V0.15</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2008,6 +2007,12 @@ html,body{
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
         <div class="kids-wordmark">
           <span class="wm-dar">DĀR AL TAWḤĪD</span>
+          <svg class="wm-dar-svg" viewBox="0 0 340 46" aria-hidden="true">
+            <path id="wmArc" d="M16 34 C 92 8, 248 8, 324 34" fill="none"></path>
+            <text fill="#f7e3b4" font-size="16" font-family="Fredoka, system-ui, sans-serif" font-weight="700" letter-spacing="3.2">
+              <textPath href="#wmArc" startOffset="50%" text-anchor="middle">DĀR AL TAWḤĪD</textPath>
+            </text>
+          </svg>
           <span class="wm-kids" aria-hidden="true"><span class="k">K</span><span class="i">i</span><span class="d">d</span><span class="s">s</span></span>
         </div>
         <div class="cloud"></div>
@@ -2016,7 +2021,7 @@ html,body{
         <div class="dune"></div>
         <div class="lantern"></div>
         <div class="hero-copy">
-          <p class="hero-salam">Assalāmu ʿalaikum</p>
+          <p class="hero-salam">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</p>
           <div class="hero-kicker">Willkommen</div>
           <h1>Hier ist deine Kinderwelt</h1>
           <p>Geschichten, Qurʾān und Duʿāʾ – ganz in Ruhe.</p>
@@ -2394,7 +2399,7 @@ html,body{
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab13";
+const KIDS_BUILD_ID="kids-shell-v12-tab14";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
