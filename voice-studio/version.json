@@ -1,6 +1,6 @@
 {
   "version": "2.1.1",
-  "updatedAt": "2026-09-25T20:21:00+02:00",
+  "updatedAt": "2026-09-25T20:25:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "local-chatterbox-v3.1.1",
   "provider": "self-produced",
@@ -95,7 +95,10 @@
     "coreAudioLockVariants": 24,
     "explicitFinalSukunForCoreTerms": true,
     "confirmedCoreAudioNeverResynthesized": true,
-    "singleCoreCandidatePerRender": true
+    "singleCoreCandidatePerRender": true,
+    "unconfirmedCoreCandidateRotation": true,
+    "stalePendingCandidateInvalidation": true,
+    "pendingCandidatesBoundToLatestRender": true
   },
   "releaseSafety": {
     "stagedInstaller": true,
