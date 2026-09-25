@@ -11,7 +11,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="DĀR Voice Studio">
 <meta name="description" content="Private Sprachproduktion für DĀR AL TAWḤĪD Kids">
-<link rel="manifest" href="/test/voice-studio/manifest.webmanifest?v=2">
+<link rel="manifest" href="manifest.webmanifest?v=3">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="icon" href="/app-icon-192.png">
 <title>DĀR AL TAWḤĪD – Voice Studio</title>
@@ -588,7 +588,7 @@ $("#installBtn").onclick=async()=>{
 };
 window.addEventListener("appinstalled",()=>{$("#installBtn").style.display="none"});
 
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/test/voice-studio/service-worker.js",{scope:"/test/voice-studio/"}).catch(()=>{}))}
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js",{scope:"/voice-studio/"}).catch(()=>{}))}
 loadLibrary();checkHealth();
 </script>
 </body>
