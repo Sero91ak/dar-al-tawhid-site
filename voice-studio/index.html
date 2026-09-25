@@ -422,7 +422,7 @@ input{
       <div id="prepared" class="preview">–</div>
     </div>
     <div class="actions-card">
-      <div class="notice">Vor dem Rendern werden LOCKED- und VERIFIED-Begriffe geprüft. Einzelne arabische Begriffe sind erlaubt; nur zusammenhängende Qurʾān-Rezitation bleibt echte Aufnahme.</div>
+      <div class="notice">Vor dem Rendern werden LOCKED- und VERIFIED-Begriffe geprüft. Arabische Fachbegriffe werden nativ gesprochen und weich mit dem deutschen Satz verbunden; nur zusammenhängende Qurʾān-Rezitation bleibt echte Aufnahme.</div>
       <div>
         <button id="analyzeBtn" class="btn secondary" style="width:100%;margin-bottom:8px">Neu prüfen</button>
         <button id="generateBtn" class="btn primary" style="width:100%">Audio erzeugen</button>
@@ -592,7 +592,10 @@ async function loadLibrary(){
     if(!r.ok)throw Error("HTTP "+r.status);
     library=await r.json();
     buckets=buildBuckets(library.rules||[]);
-    $("#qaLex").textContent=(library.counts?.canonicalTerms||"?")+" / "+(library.counts?.rules||"?");
+    const canon=library.counts?.canonicalTerms||"?";
+    const rules=library.counts?.rules||"?";
+    const native=library.counts?.nativeArabicTtsRules||0;
+    $("#qaLex").textContent=canon+" / "+rules+(native?(" · "+native+" native"):"");
     $("#qaLex").className="good";
     renderAnalysis();
   }catch(e){
