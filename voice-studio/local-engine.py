@@ -12,13 +12,27 @@ APP_HOME=Path(os.environ.get("DAR_VOICE_APP_HOME",str(Path.home()/"Applications"
 PRON=APP_HOME/"pronunciation-rules.json"
 PROFILE=APP_HOME/"voice-production-profile.json"
 VOICE_HOME=Path.home()/"SerhatVoice"
+
+def first_existing(paths):
+    for p in paths:
+        if p and Path(p).expanduser().exists():
+            return Path(p).expanduser()
+    return Path(paths[-1]).expanduser() if paths else Path("")
+
 _ref_env=os.environ.get("SERHAT_VOICE_REF")
-if _ref_env:
-    REF=Path(_ref_env).expanduser()
-else:
-    _adobe=VOICE_HOME/"Serhat_Adobe_MASTER.wav"
-    _final=VOICE_HOME/"Serhat_FINAL_REF.wav"
-    REF=_adobe if _adobe.exists() else _final
+REF_DE=first_existing([
+    _ref_env,
+    VOICE_HOME/"Serhat_Adobe_MASTER.wav",
+    VOICE_HOME/"Serhat_FINAL_REF.wav",
+])
+
+_ar_ref_env=os.environ.get("SERHAT_VOICE_REF_AR")
+_ar_master=VOICE_HOME/"Serhat_AR_MASTER.wav"
+REF_AR=first_existing([_ar_ref_env,_ar_master,REF_DE])
+ARABIC_DEDICATED_REFERENCE=REF_AR.exists() and REF_DE.exists() and REF_AR.resolve()!=REF_DE.resolve()
+
+# Backward-compatible name used by older status/error paths.
+REF=REF_DE
 
 HOST="127.0.0.1"
 PORT=8787
@@ -28,6 +42,15 @@ OUTPUT.mkdir(parents=True,exist_ok=True)
 LIB=json.load(PRON.open(encoding="utf-8"))
 VOICE_PROFILE=json.load(PROFILE.open(encoding="utf-8"))
 RULES=sorted(LIB.get("rules",[]),key=lambda r:len(str(r.get("string_to_replace",""))),reverse=True)
+PROSODY_MODES=(VOICE_PROFILE.get("prosody") or {}).get("modes",{})
+CONTEXT_CONFIG=VOICE_PROFILE.get("contextDetection") or {}
+QA_CONFIG=VOICE_PROFILE.get("qualityAssurance") or {}
+CONTINUITY_CONFIG=VOICE_PROFILE.get("continuity") or {}
+MASTER_TTS={
+    str(r.get("tts_text",""))
+    for r in RULES
+    if r.get("voice_lock")=="MASTER" and r.get("tts_text")
+}
 
 MODEL=None
 MODEL_DEVICE=None
@@ -68,6 +91,8 @@ STATUS={
     "model_loaded_at":None,
     "render_started_at":None,
     "render_finished_at":None,
+    "prosody_mode":"narration",
+    "last_qa":{},
 }
 
 def set_status(**updates):
@@ -77,8 +102,11 @@ def set_status(**updates):
 def get_status():
     with STATUS_LOCK:
         out=dict(STATUS)
-    out["reference"]=str(REF)
-    out["reference_exists"]=REF.exists()
+    out["reference"]=str(REF_DE)
+    out["reference_exists"]=REF_DE.exists()
+    out["reference_de"]=str(REF_DE)
+    out["reference_ar"]=str(REF_AR)
+    out["arabic_reference_dedicated"]=ARABIC_DEDICATED_REFERENCE
     out["output_dir"]=str(OUTPUT)
     return out
 
@@ -295,18 +323,73 @@ def build_render_plan(text:str):
                 plan.append((lang,chunk.strip()))
     return plan
 
-def render_with_model(model,text:str,language_id:str):
-    import torch
-    # Arabische Einzelbegriffe sollen neutral und flüssig gesprochen werden,
-    # nicht wie isolierte dramatische Clips. Deutsch behält das bisherige Profil.
+def detect_prosody_mode(text:str):
+    value=str(text or "").strip()
+    low=value.casefold()
+
+    if "?" in value or "؟" in value:
+        return "question"
+
+    checks=[
+        ("dua",CONTEXT_CONFIG.get("dua") or ["duʿāʾ","dua","wir bitten allah","bitten wir allah"]),
+        ("serious",CONTEXT_CONFIG.get("serious") or ["achtung","warnung","verboten","sehr ernst","gefahr"]),
+        ("gentle",CONTEXT_CONFIG.get("gentle") or ["ganz ruhig","sanft","behutsam","schritt für schritt"]),
+        ("kids_story",CONTEXT_CONFIG.get("kidsStory") or ["eines tages","geschichte","es war einmal","komm, wir entdecken"]),
+        ("kids_lesson",CONTEXT_CONFIG.get("kidsLesson") or ["heute lernen wir","kids","kinder","gemeinsam lernen"]),
+    ]
+    for mode,needles in checks:
+        if any(str(x).casefold() in low for x in needles):
+            return mode
+
+    if value.count(",")>=3 or value.count(";")>=2 or ":" in value:
+        return "list"
+
+    teaching=CONTEXT_CONFIG.get("teaching") or ["bedeutet","lernen wir","erklärt","grundlage","pflicht","wir beten","wir finden"]
+    if any(str(x).casefold() in low for x in teaching):
+        return "teaching"
+    return "narration"
+
+def resolve_prosody_mode(text:str,requested:str="auto"):
+    requested=str(requested or "auto").strip()
+    if requested!="auto" and requested in PROSODY_MODES:
+        return requested
+    mode=detect_prosody_mode(text)
+    return mode if mode in PROSODY_MODES else "narration"
+
+def prosody_settings(mode:str,language_id:str,text:str=""):
+    mode_cfg=PROSODY_MODES.get(mode) or PROSODY_MODES.get("narration") or {}
+    lang_cfg=mode_cfg.get(language_id) or {}
     is_ar=language_id=="ar"
-    short_ar=is_ar and len(str(text).strip())<=48
+    short_ar=is_ar and len(re.sub(r"\s+","",str(text or "")))<=48
+
+    exaggeration=float(lang_cfg.get("exaggeration",0.12 if short_ar else (0.18 if is_ar else 0.22)))
+    cfg=float(lang_cfg.get("cfgWeight",0.0 if is_ar else 0.30))
+    temperature=float(lang_cfg.get("temperature",0.44 if short_ar else (0.50 if is_ar else 0.55)))
+
+    if short_ar:
+        # Guard rail: short Arabic terms should remain neutral and compact.
+        exaggeration=min(exaggeration,0.16)
+        temperature=min(temperature,0.48)
+
+    return {
+        "exaggeration":exaggeration,
+        "cfg_weight":cfg,
+        "temperature":temperature,
+        "sentence_pause_ms":int(mode_cfg.get("sentencePauseMs",92)),
+        "soft_pause_ms":int(mode_cfg.get("softPauseMs",34)),
+        "crossfade_ms":int(mode_cfg.get("crossfadeMs",28)),
+    }
+
+def render_with_model(model,text:str,language_id:str,mode:str="narration"):
+    import torch
+    p=prosody_settings(mode,language_id,text)
+    ref=REF_AR if language_id=="ar" and REF_AR.exists() else REF_DE
     kwargs=dict(
         language_id=language_id,
-        audio_prompt_path=str(REF),
-        exaggeration=0.12 if short_ar else (0.18 if is_ar else 0.22),
-        cfg_weight=0.0 if is_ar else 0.30,
-        temperature=0.44 if short_ar else (0.50 if is_ar else 0.55)
+        audio_prompt_path=str(ref),
+        exaggeration=p["exaggeration"],
+        cfg_weight=p["cfg_weight"],
+        temperature=p["temperature"]
     )
     with torch.inference_mode():
         return model.generate(text,**kwargs)
@@ -349,20 +432,119 @@ def segment_rms(wav):
         return 0.0
     return float(torch.sqrt(torch.mean(w*w)+1e-12).item())
 
+def audio_quality_metrics(wav,sr:int,text:str,language_id:str):
+    import torch
+    w=normalize_segment_shape(wav)
+    metrics={
+        "duration_s":0.0,
+        "rms":0.0,
+        "peak":0.0,
+        "clipping_ratio":0.0,
+        "max_internal_silence_ms":0,
+        "issues":[],
+    }
+    if not w.numel():
+        metrics["issues"].append("empty_audio")
+        return metrics
+
+    finite=bool(torch.isfinite(w).all().item())
+    if not finite:
+        metrics["issues"].append("non_finite")
+        return metrics
+
+    duration=w.shape[-1]/max(1,int(sr))
+    rms=float(torch.sqrt(torch.mean(w*w)+1e-12).item())
+    peak=float(w.abs().max().item())
+    clipping=float((w.abs()>=0.995).float().mean().item())
+
+    metrics.update({
+        "duration_s":round(duration,3),
+        "rms":round(rms,6),
+        "peak":round(peak,6),
+        "clipping_ratio":round(clipping,6),
+    })
+
+    min_rms=float(QA_CONFIG.get("minRms",0.0015))
+    min_peak=float(QA_CONFIG.get("minPeak",0.01))
+    max_clip=float(QA_CONFIG.get("maxClippingRatio",0.02))
+    if rms<min_rms: metrics["issues"].append("near_silence")
+    if peak<min_peak: metrics["issues"].append("low_peak")
+    if clipping>max_clip: metrics["issues"].append("clipping")
+
+    # Internal hold/pause detection uses 10 ms energy frames and intentionally
+    # ignores expected punctuation pauses.
+    env=w.abs().amax(dim=0)
+    frame=max(1,int(sr*0.010))
+    count=env.numel()//frame
+    if count>=3 and peak>0:
+        framed=env[:count*frame].reshape(count,frame).mean(dim=1)
+        threshold=max(peak*0.012,0.0004)
+        silent=(framed<threshold).tolist()
+        longest=run=0
+        for flag in silent[1:-1]:
+            if flag:
+                run+=1;longest=max(longest,run)
+            else:
+                run=0
+        silence_ms=longest*10
+        metrics["max_internal_silence_ms"]=silence_ms
+        limit=int(QA_CONFIG.get("maxInternalSilenceMsWithoutPunctuation",700))
+        if silence_ms>limit and not re.search(r"[.!?؟…,:;،؛]",str(text)):
+            metrics["issues"].append("unexpected_internal_hold")
+
+    if language_id=="ar":
+        letters=len(ARABIC_CHAR_RE.findall(str(text)))
+        if 0<letters<=24:
+            max_dur=float(QA_CONFIG.get("shortArabicMaxSecondsBase",1.2))+letters*float(QA_CONFIG.get("shortArabicMaxSecondsPerLetter",0.34))
+            if duration>max_dur:
+                metrics["issues"].append("short_arabic_too_long")
+    else:
+        visible=len(re.findall(r"[A-Za-zÀ-ÖØ-öø-ÿ0-9]",str(text)))
+        max_dur=max(8.0,visible*0.28+4.0)
+        if duration>max_dur:
+            metrics["issues"].append("segment_too_long")
+
+    if duration<0.12:
+        metrics["issues"].append("too_short")
+    return metrics
+
+def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool=False):
+    import torch
+    attempts=max(1,int(QA_CONFIG.get("maxRenderAttempts",2)))
+    seed_offset=max(1,int(QA_CONFIG.get("retrySeedOffset",97)))
+    last=None
+
+    for attempt in range(attempts):
+        torch.manual_seed(2026+attempt*seed_offset)
+        wav=render_with_model(model,text,language_id,mode)
+        metrics=audio_quality_metrics(wav,int(model.sr),text,language_id)
+        metrics["attempt"]=attempt+1
+        metrics["critical"]=bool(critical)
+        last=(wav,metrics)
+        if not metrics["issues"]:
+            return wav,metrics
+        print(f"[DĀR Voice] QA retry {attempt+1}/{attempts} lang={language_id} mode={mode}: {metrics['issues']}",flush=True)
+
+    issues=", ".join(last[1]["issues"]) if last else "unknown"
+    raise RuntimeError(f"Audio-QA fehlgeschlagen ({language_id}/{mode}): {issues}")
+
 def gently_level_segments(items):
     """Kleine Pegelsprünge glätten, ohne die natürliche Dynamik plattzumachen."""
     import statistics
-    levels=[segment_rms(w) for w,_,_ in items]
+    levels=[segment_rms(item[0]) for item in items]
     valid=[x for x in levels if x>1e-5]
     if not valid:
         return items
     target=float(statistics.median(valid))
+    clamp=CONTINUITY_CONFIG.get("gainClamp") or [0.88,1.14]
+    lo=float(clamp[0]);hi=float(clamp[1])
     out=[]
-    for (w,lang,chunk),level in zip(items,levels):
+    for item,level in zip(items,levels):
+        w=item[0]
         if level>1e-5:
-            gain=max(0.88,min(1.14,target/level))
+            gain=max(lo,min(hi,target/level))
             w=(w*gain).clamp(-0.995,0.995)
-        out.append((w,lang,chunk))
+        out.append((w,*item[1:]))
     return out
 
 def crossfade_audio(left,right,sr:int,seconds:float):
@@ -385,36 +567,42 @@ def join_rendered_segments(items,sr:int):
         raise RuntimeError("Keine Audiosegmente erzeugt.")
 
     cleaned=[]
-    for wav,lang,chunk in items:
-        cleaned.append((trim_segment_edges(wav,sr),lang,chunk))
+    for item in items:
+        wav=item[0]
+        cleaned.append((trim_segment_edges(wav,sr),*item[1:]))
     cleaned=gently_level_segments(cleaned)
 
     full=cleaned[0][0]
     prev_lang=cleaned[0][1]
     prev_chunk=cleaned[0][2]
+    prev_mode=cleaned[0][3]
 
-    for wav,lang,chunk in cleaned[1:]:
+    for item in cleaned[1:]:
+        wav,lang,chunk,mode=item[0],item[1],item[2],item[3]
         sentence_end=bool(re.search(r"[.!?؟…]$",prev_chunk.strip()))
         soft_pause=bool(re.search(r"[,،;؛:]$",prev_chunk.strip()))
+        p=prosody_settings(prev_mode,prev_lang,prev_chunk)
 
         if sentence_end:
-            # Satzende darf atmen, aber ohne die alte 160-ms-Zwangspause.
-            silence=torch.zeros((1,max(1,int(sr*0.085))),dtype=full.dtype)
+            pause=max(0,int(p["sentence_pause_ms"]))
+            silence=torch.zeros((1,max(1,int(sr*pause/1000))),dtype=full.dtype)
             full=torch.cat([full,silence,wav],dim=-1)
         elif soft_pause:
-            silence=torch.zeros((1,max(1,int(sr*0.035))),dtype=full.dtype)
+            pause=max(0,int(p["soft_pause_ms"]))
+            silence=torch.zeros((1,max(1,int(sr*pause/1000))),dtype=full.dtype)
             full=torch.cat([full,silence,wav],dim=-1)
         else:
-            # Sprachwechsel in einem laufenden Satz: keine Pause, sondern
-            # 26–32 ms Überblendung. Dadurch kein Stoppen/Neuansetzen.
-            xfade=0.032 if prev_lang!=lang else 0.022
-            full=crossfade_audio(full,wav,sr,xfade)
+            ms=max(8,int(p["crossfade_ms"]))
+            if prev_lang==lang:
+                ms=min(ms,22)
+            full=crossfade_audio(full,wav,sr,ms/1000.0)
 
         prev_lang=lang
         prev_chunk=chunk
+        prev_mode=mode
 
-    # Mini-Fades verhindern Klicks am Dateianfang/-ende.
-    edge=max(1,min(int(sr*0.012),full.shape[-1]//4))
+    edge_ms=int(CONTINUITY_CONFIG.get("outputEdgeFadeMs",12))
+    edge=max(1,min(int(sr*edge_ms/1000),full.shape[-1]//4))
     if edge>1:
         fade=torch.linspace(0.0,1.0,edge,dtype=full.dtype).view(1,-1)
         full[...,:edge]*=fade
@@ -478,15 +666,12 @@ def postprocess(src:Path):
         print("[DĀR Voice] ffmpeg fallback:",p.stderr[-1200:],flush=True)
     return src
 
-def generate(text:str,prepared:str=""):
+def generate(text:str,prepared:str="",style:str="auto"):
     quran_guard(text)
-    if not REF.exists():
-        raise RuntimeError("Referenzstimme fehlt: "+str(REF))
+    if not REF_DE.exists():
+        raise RuntimeError("Referenzstimme fehlt: "+str(REF_DE))
 
-    # Client-"prepared" wird bewusst ignoriert: ältere Studio-Versionen senden
-    # noch Kunstlautungen wie "Tauhiid". Die Engine baut den Sprechtext selbst
-    # aus der aktuellen Bibliothek und den nativen arabischen TTS-Formen.
-    speak=prepare(text)[0]
+    speak,found=prepare(text)
     plan=build_render_plan(speak)
     if not plan:
         raise ValueError("Sprechtext ist leer.")
@@ -494,48 +679,78 @@ def generate(text:str,prepared:str=""):
     if not RENDER_LOCK.acquire(blocking=False):
         raise RuntimeError("Es läuft bereits eine Audio-Erzeugung.")
 
+    doc_mode=resolve_prosody_mode(text,style)
+    master_forms={
+        str(r.get("tts_text",""))
+        for r in found
+        if r.get("voice_lock")=="MASTER" and r.get("tts_text")
+    }
+
     set_status(
         render_state="rendering",
         progress=1,
         render_started_at=time.time(),
         render_finished_at=None,
         last_error="",
-        message="Audio wird vorbereitet …"
+        prosody_mode=doc_mode,
+        last_qa={},
+        message=f"Audio wird vorbereitet · {doc_mode} …"
     )
 
     try:
-        import torch
         model=load_model()
         outputs=[]
+        qa_segments=[]
         total=len(plan)
 
         for idx,(lang,chunk) in enumerate(plan,1):
             pct=8+int(((idx-1)/max(1,total))*78)
             lang_label="Arabisch" if lang=="ar" else "Deutsch"
-            set_status(progress=pct,message=f"{lang_label} · Abschnitt {idx}/{total} …")
-            print(f"[DĀR Voice] segment {idx}/{total} lang={lang}: {chunk}",flush=True)
-            # Gleicher Seed pro Segment stabilisiert Timbre und Sprechhaltung
-            # über Deutsch/Arabisch-Grenzen hinweg.
-            torch.manual_seed(2026)
+            mode="question" if ("?" in chunk or "؟" in chunk) and doc_mode not in ("serious","dua") else doc_mode
+            critical=lang=="ar" and any(x and x in chunk for x in master_forms)
+            set_status(progress=pct,message=f"{lang_label} · {mode} · Abschnitt {idx}/{total} …")
+            print(f"[DĀR Voice] segment {idx}/{total} lang={lang} mode={mode} critical={critical}: {chunk}",flush=True)
+
             try:
-                wav=render_with_model(model,chunk,lang)
+                wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical)
             except Exception as first_error:
-                # Bei MPS-Problemen einmal sauber auf CPU wiederholen.
                 if MODEL_DEVICE=="mps":
                     print("[DĀR Voice] MPS render failed, retry CPU:",first_error,flush=True)
                     set_status(message=f"{lang_label} · MPS-Fallback auf CPU …")
                     model=load_model(force_device="cpu")
-                    wav=render_with_model(model,chunk,lang)
+                    wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical)
                 else:
                     raise
-            outputs.append((wav.detach().float().cpu(),lang,chunk))
+
+            qa_segments.append({
+                "index":idx,
+                "language":lang,
+                "mode":mode,
+                "critical":critical,
+                **metrics
+            })
+            outputs.append((wav.detach().float().cpu(),lang,chunk,mode,metrics))
 
         sr=int(model.sr)
         full=join_rendered_segments(outputs,sr)
+        final_metrics=audio_quality_metrics(full,sr,text,"de")
+        # Final composite may legitimately contain punctuation pauses; only hard
+        # signal defects are fatal here.
+        fatal=[x for x in final_metrics["issues"] if x in ("empty_audio","non_finite","near_silence","low_peak","clipping","too_short")]
+        if fatal:
+            raise RuntimeError("Finale Audio-QA fehlgeschlagen: "+", ".join(fatal))
+
+        qa_summary={
+            "mode":doc_mode,
+            "segments":qa_segments,
+            "final":final_metrics,
+            "arabic_reference_dedicated":ARABIC_DEDICATED_REFERENCE,
+        }
+        set_status(last_qa=qa_summary)
 
         set_status(progress=90,message="WAV wird gespeichert …")
         raw=OUTPUT/f"dar_voice_{uuid.uuid4().hex[:10]}.wav"
-        save_wav(raw,full,int(model.sr))
+        save_wav(raw,full,sr)
         if not raw.exists() or raw.stat().st_size<=44:
             raise RuntimeError("WAV-Datei wurde nicht korrekt geschrieben.")
 
@@ -544,7 +759,7 @@ def generate(text:str,prepared:str=""):
         set_status(
             render_state="done",
             progress=100,
-            message="Audio fertig",
+            message=f"Audio fertig · {doc_mode}",
             last_output=str(out),
             render_finished_at=time.time(),
             last_error=""
@@ -610,6 +825,8 @@ class H(BaseHTTPRequestHandler):
                 "ok":ok,
                 "provider":"Chatterbox Multilingual V3",
                 "reference_exists":ok,
+                "reference_arabic_dedicated":ARABIC_DEDICATED_REFERENCE,
+                "prosody_mode":st.get("prosody_mode","narration"),
                 "model_state":st["model_state"],
                 "model_device":st["model_device"],
                 "render_state":st["render_state"],
@@ -642,6 +859,10 @@ class H(BaseHTTPRequestHandler):
                 "reference":str(REF),
                 "reference_exists":REF.exists(),
                 "mixed_language_segmentation":True,
+                "voice_studio_2":True,
+                "prosody_modes":sorted(PROSODY_MODES.keys()),
+                "master_pronunciation_forms":len(MASTER_TTS),
+                "arabic_reference_dedicated":ARABIC_DEDICATED_REFERENCE,
                 "arabic_language_id":"ar",
                 "german_language_id":"de",
                 "boundary_silence_trim":True,
@@ -676,12 +897,39 @@ class H(BaseHTTPRequestHandler):
                 threading.Thread(target=warm_model,daemon=True).start()
             return self.send_json(202,{"ok":True,**get_status()})
 
+        if p=="/analyze":
+            try:
+                text=str(data.get("text","")).strip()
+                style=str(data.get("style","auto")).strip() or "auto"
+                if not text: raise ValueError("Text fehlt.")
+                prepared,found=prepare(text)
+                mode=resolve_prosody_mode(text,style)
+                plan=build_render_plan(prepared)
+                return self.send_json(200,{
+                    "ok":True,
+                    "mode":mode,
+                    "prepared":prepared,
+                    "segments":[{"language":lang,"text":chunk} for lang,chunk in plan],
+                    "masterTerms":sorted({
+                        str(r.get("canonical") or r.get("string_to_replace"))
+                        for r in found if r.get("voice_lock")=="MASTER"
+                    }),
+                    "reviewTerms":sorted({
+                        str(r.get("canonical") or r.get("string_to_replace"))
+                        for r in found if r.get("voice_lock")=="REVIEW"
+                    }),
+                    "arabicReferenceDedicated":ARABIC_DEDICATED_REFERENCE
+                })
+            except Exception as e:
+                return self.send_json(400,{"ok":False,"error":str(e)})
+
         if p=="/generate":
             try:
                 text=str(data.get("text","")).strip()
                 prepared=str(data.get("prepared","")).strip()
+                style=str(data.get("style","auto")).strip() or "auto"
                 if not text:raise ValueError("Text fehlt.")
-                out=generate(text,prepared)
+                out=generate(text,prepared,style)
                 b=out.read_bytes()
                 self.send_response(200)
                 self.send_header("Content-Type","audio/wav")
