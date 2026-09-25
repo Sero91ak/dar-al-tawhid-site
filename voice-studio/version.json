@@ -1,6 +1,6 @@
 {
-  "version": "1.6.1",
-  "updatedAt": "2026-09-25T17:38:00+02:00",
+  "version": "1.6.2",
+  "updatedAt": "2026-09-25T17:48:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "local-chatterbox-v3",
   "provider": "self-produced",
@@ -14,13 +14,13 @@
     "fallbackReference": "~/SerhatVoice/Serhat_FINAL_REF.wav"
   },
   "setupMethod": "native-macos-wkwebview-existing-serhatvoice",
-  "setupCommand": "curl -fsSL 'https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/b5e96e454c95c08ba45315589105dd488d19b756/voice-studio/install-mac.command' | /bin/bash",
+  "setupCommand": "curl -fsSL 'https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/e2d03d6ec00ac08214ef7845e0332bc381d35079/voice-studio/install-mac.command' | /bin/bash",
   "macApp": "~/Applications/DĀR Voice Studio.app",
   "macAppRuntime": "native WKWebView + retained local Chatterbox process + native edit menu",
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-raw",
-  "engineVersion": "mixed-arabic-guard-syntax-fixed",
+  "engineVersion": "clean-single-copy-engine",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -44,5 +44,6 @@
       "⌘K Textfeld fokussieren"
     ]
   },
-  "macAppUpdatePolicy": "terminate-running-app + remove-bundle + rebuild + ad-hoc-sign + launchservices-reregister"
+  "macAppUpdatePolicy": "terminate-running-app + remove-bundle + rebuild + ad-hoc-sign + launchservices-reregister",
+  "engineIntegrity": "py_compile preflight + duplicate-tail removed"
 }
