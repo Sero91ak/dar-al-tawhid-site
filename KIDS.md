@@ -4,7 +4,7 @@ Eigenständige Kids-Test-App. Nicht die Besucher-App.
 
 ## Der Link, den du nutzt
 
-https://dar-al-tawhid.de/test/kids/?darsw=1005
+https://dar-al-tawhid.de/test/kids/?darsw=1012&kv=20260925-12
 
 Kurz: https://dar-al-tawhid.de/test/kids/
 

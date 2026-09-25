@@ -141,6 +141,13 @@ if (!fs.existsSync(path.join(ROOT, "scripts/send-post-push.js"))) fail("send-pos
 const edgeToEdgeFails = require("./edge-to-edge-theme-guard.js").runEdgeToEdgeThemeGuard();
 if (edgeToEdgeFails) failed += edgeToEdgeFails;
 
+try {
+  const kidsDesignFails = require("./kids-design-guard.js").runKidsDesignGuard();
+  if (kidsDesignFails) failed += kidsDesignFails;
+} catch (e) {
+  fail(`kids-design-guard: ${e.message}`);
+}
+
 const repoIntegrityFails = require("./repo-integrity-guard.js").runRepoIntegrityGuard();
 if (repoIntegrityFails) failed += repoIntegrityFails;
 

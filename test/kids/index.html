@@ -269,7 +269,9 @@ linear-gradient(180deg,#356987 0%,#638f91 50%,#c28d61 100%)}
   content:"";position:absolute;left:16%;bottom:35px;width:114px;height:70px;background:#173543;
   clip-path:polygon(0 100%,0 42%,16% 42%,16% 30%,31% 30%,31% 42%,48% 42%,48% 18%,62% 18%,62% 42%,80% 42%,80% 34%,100% 34%,100% 100%);opacity:.86
 }
-.story-copy{padding:16px}
+.story-copy{padding:16px 18px 16px 16px;display:grid;grid-template-columns:minmax(0,1fr) 44px;column-gap:10px;align-items:center}
+.story-copy .meta,.story-copy h3,.story-copy p{grid-column:1;max-width:100%}
+.story-copy .story-go{grid-column:2;grid-row:1 / span 3;align-self:center;justify-self:center;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.16);font-size:22px;color:rgba(255,255,255,.82);flex:none}
 .story-copy .meta{font-size:11px;font-weight:850;color:var(--sage);letter-spacing:.05em}
 .story-copy h3{font-size:22px;margin:6px 0}
 .story-copy p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
@@ -816,29 +818,29 @@ html,body{background:#06131f!important}
 /* KIDS_REAL_ASSET_ICON_SYSTEM_V11
    Mandatory: committed realistic image assets, never OS/system emoji glyphs. */
 .kid-icon,.scene-icon,.daily-inline-icon{display:inline-block;flex:none;background-repeat:no-repeat!important;background-position:center!important;background-size:contain!important}
-.icon-book{background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=3")!important}
-.icon-headphones,.icon-volume{background-image:url("/test/kids/assets/kids-icons/headphones-real-v11.png?v=3")!important}
-.icon-dua{background-image:url("/test/kids/assets/kids-icons/dua-real-v11.png?v=3")!important}
-.icon-star,.icon-spark{background-image:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=3")!important}
-.icon-play{background-image:url("/test/kids/assets/kids-icons/play-real-v11.png?v=3")!important}
-.icon-mic{background-image:url("/test/kids/assets/kids-icons/mic-real-v11.png?v=3")!important}
-.icon-lock{background-image:url("/test/kids/assets/kids-icons/lock-real-v11.png?v=3")!important}
-.icon-moon{background-image:url("/test/kids/assets/kids-icons/moon-real-v11.png?v=3")!important}
-.icon-heart{background-image:url("/test/kids/assets/kids-icons/heart-real-v11.png?v=3")!important}
-.icon-library{background-image:url("/test/kids/assets/kids-icons/library-real-v11.png?v=3")!important}
-.icon-droplet{background-image:url("/test/kids/assets/kids-icons/water-real-v11.png?v=3")!important}
-.icon-cloud{background-image:url("/test/kids/assets/kids-icons/cloud-real-v11.png?v=3")!important}
-.icon-sun{background-image:url("/test/kids/assets/kids-icons/sun-real-v11.png?v=3")!important}
-.icon-settings,.icon-parents{background-image:url("/test/kids/assets/kids-icons/parents-real-v11.png?v=3")!important}
-.icon-home{background-image:url("/test/kids/assets/kids-icons/home-real-v11.png?v=3")!important}
-.icon-food{background-image:url("/test/kids/assets/kids-icons/food-real-v11.png?v=3")!important}
-.icon-speech{background-image:url("/test/kids/assets/kids-icons/speech-real-v11.png?v=3")!important}
-.icon-coin{background-image:url("/test/kids/assets/kids-icons/coin-real-v11.png?v=3")!important}
-.icon-palm{background-image:url("/test/kids/assets/kids-icons/palm-real-v11.png?v=3")!important}
-.icon-help{background-image:url("/test/kids/assets/kids-icons/help-real-v11.png?v=3")!important}
-.icon-door{background-image:url("/test/kids/assets/kids-icons/door-real-v11.png?v=3")!important}
-.icon-mosque{background-image:url("/test/kids/assets/kids-icons/mosque-real-v11.png?v=3")!important}
-.icon-shield{background-image:url("/test/kids/assets/kids-icons/shield-real-v11.png?v=3")!important}
+.icon-book{background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=12")!important}
+.icon-headphones,.icon-volume{background-image:url("/test/kids/assets/kids-icons/headphones-real-v11.png?v=12")!important}
+.icon-dua{background-image:url("/test/kids/assets/kids-icons/dua-real-v11.png?v=12")!important}
+.icon-star,.icon-spark{background-image:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=12")!important}
+.icon-play{background-image:url("/test/kids/assets/kids-icons/play-real-v11.png?v=12")!important}
+.icon-mic{background-image:url("/test/kids/assets/kids-icons/mic-real-v11.png?v=12")!important}
+.icon-lock{background-image:url("/test/kids/assets/kids-icons/lock-real-v11.png?v=12")!important}
+.icon-moon{background-image:url("/test/kids/assets/kids-icons/moon-real-v11.png?v=12")!important}
+.icon-heart{background-image:url("/test/kids/assets/kids-icons/heart-real-v11.png?v=12")!important}
+.icon-library{background-image:url("/test/kids/assets/kids-icons/library-real-v11.png?v=12")!important}
+.icon-droplet{background-image:url("/test/kids/assets/kids-icons/water-real-v11.png?v=12")!important}
+.icon-cloud{background-image:url("/test/kids/assets/kids-icons/cloud-real-v11.png?v=12")!important}
+.icon-sun{background-image:url("/test/kids/assets/kids-icons/sun-real-v11.png?v=12")!important}
+.icon-settings,.icon-parents{background-image:url("/test/kids/assets/kids-icons/parents-real-v11.png?v=12")!important}
+.icon-home{background-image:url("/test/kids/assets/kids-icons/home-real-v11.png?v=12")!important}
+.icon-food{background-image:url("/test/kids/assets/kids-icons/food-real-v11.png?v=12")!important}
+.icon-speech{background-image:url("/test/kids/assets/kids-icons/speech-real-v11.png?v=12")!important}
+.icon-coin{background-image:url("/test/kids/assets/kids-icons/coin-real-v11.png?v=12")!important}
+.icon-palm{background-image:url("/test/kids/assets/kids-icons/palm-real-v11.png?v=12")!important}
+.icon-help{background-image:url("/test/kids/assets/kids-icons/help-real-v11.png?v=12")!important}
+.icon-door{background-image:url("/test/kids/assets/kids-icons/door-real-v11.png?v=12")!important}
+.icon-mosque{background-image:url("/test/kids/assets/kids-icons/mosque-real-v11.png?v=12")!important}
+.icon-shield{background-image:url("/test/kids/assets/kids-icons/shield-real-v11.png?v=12")!important}
 .daily-inline-icon{width:20px;height:20px;vertical-align:-5px;margin-right:7px}.scene-icon{width:100%;height:100%}
 
 /* KIDS_SCREENSHOT_FIX_V11
@@ -951,31 +953,31 @@ html,body{background:#06131f!important}
   background-size:contain!important;
 }
 .choice.quran .icon,.quran-hero .book,.nav-btn[data-target="quran"] .ico,.picker-icon{
-  background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=1")!important;
+  background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=12")!important;
 }
 .choice.story .icon,.nav-btn[data-target="stories"] .ico,#quickLearn112 .qa-icon{
-  background-image:url("/test/kids/assets/kids-icons/mic-real-v11.png?v=1")!important;
+  background-image:url("/test/kids/assets/kids-icons/mic-real-v11.png?v=12")!important;
 }
 .choice.dua .icon,.dua-scene-symbol .kid-icon{
-  background-image:url("/test/kids/assets/kids-icons/dua-real-v11.png?v=1")!important;
+  background-image:url("/test/kids/assets/kids-icons/dua-real-v11.png?v=12")!important;
 }
 .choice.quiz .icon,.nav-btn[data-target="today"] .ico,.knowledge-symbol .kid-icon,.quiz-scene-symbol .kid-icon,.quiz-finish .star .kid-icon{
-  background-image:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=1")!important;
+  background-image:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=12")!important;
 }
 .resume-icon,#resumeQuran .qa-icon{
-  background-image:url("/test/kids/assets/kids-icons/play-real-v11.png?v=1")!important;
+  background-image:url("/test/kids/assets/kids-icons/play-real-v11.png?v=12")!important;
 }
 .story-row[data-story="water"] .story-thumb{
-  background-image:url("/test/kids/assets/kids-icons/water-real-v11.png?v=1")!important;
+  background-image:url("/test/kids/assets/kids-icons/water-real-v11.png?v=12")!important;
 }
 .story-row[data-story="helper"] .story-thumb{
-  background-image:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=1")!important;
+  background-image:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=12")!important;
 }
 .story-row[data-story="kindword"] .story-thumb{
-  background-image:url("/test/kids/assets/kids-icons/cloud-real-v11.png?v=1")!important;
+  background-image:url("/test/kids/assets/kids-icons/cloud-real-v11.png?v=12")!important;
 }
 .story-row.verified .story-thumb{
-  background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=1")!important;
+  background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=12")!important;
 }
 .story-thumb{
   color:transparent!important;
@@ -999,11 +1001,11 @@ html,body{background:#06131f!important}
 /* Realistic controls instead of tiny sprite-style system-look icons. */
 #storyPlay::before,#recordingPlayback::before,.dua-quran-audio::before,
 #knowledgeListen::before,.quiz-listen::before,#ayahPlay::before,.dua-listen::before{
-  background-image:url("/test/kids/assets/kids-icons/play-real-v11.png?v=1")!important;
+  background-image:url("/test/kids/assets/kids-icons/play-real-v11.png?v=12")!important;
   background-size:contain!important;background-position:center!important;
 }
 #speakAlong::before,.learn-status.you::before{
-  background-image:url("/test/kids/assets/kids-icons/mic-real-v11.png?v=1")!important;
+  background-image:url("/test/kids/assets/kids-icons/mic-real-v11.png?v=12")!important;
   background-size:contain!important;background-position:center!important;
 }
 
@@ -1086,7 +1088,7 @@ html,body{background:#06131f!important}
 }
 #view-today .knowledge-card .kicon{
   color:transparent!important;font-size:0!important;
-  background:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=2") center/contain no-repeat;
+  background:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=12") center/contain no-repeat;
   width:58px;height:58px;flex:none
 }
 #view-today .knowledge-card .kcopy strong,#view-today .knowledge-card .kcopy span{
@@ -1130,17 +1132,17 @@ html,body{background:#06131f!important}
 #storyModal[data-story="water"] .story-orb{
   background:
     radial-gradient(circle at center,rgba(75,175,214,.18),rgba(7,26,39,.94) 72%),
-    url("/test/kids/assets/kids-icons/water-real-v11.png?v=2") center/128px auto no-repeat!important
+    url("/test/kids/assets/kids-icons/water-real-v11.png?v=12") center/128px auto no-repeat!important
 }
 #storyModal[data-story="helper"] .story-orb{
   background:
     radial-gradient(circle at center,rgba(226,189,114,.16),rgba(7,26,39,.94) 72%),
-    url("/test/kids/assets/kids-icons/spark-real-v11.png?v=2") center/132px auto no-repeat!important
+    url("/test/kids/assets/kids-icons/spark-real-v11.png?v=12") center/132px auto no-repeat!important
 }
 #storyModal[data-story="kindword"] .story-orb{
   background:
     radial-gradient(circle at center,rgba(159,145,214,.14),rgba(7,26,39,.94) 72%),
-    url("/test/kids/assets/kids-icons/cloud-real-v11.png?v=2") center/150px auto no-repeat!important
+    url("/test/kids/assets/kids-icons/cloud-real-v11.png?v=12") center/150px auto no-repeat!important
 }
 
 /* QUR'AN — banner becomes its own component, grid is independent */
@@ -1188,7 +1190,7 @@ html,body{background:#06131f!important}
 }
 .knowledge-symbol .kid-icon{
   width:92px!important;height:92px!important;
-  background-image:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=2")!important;
+  background-image:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=12")!important;
   background-size:contain!important;background-position:center!important
 }
 .knowledge-exact{
@@ -1231,7 +1233,7 @@ html,body{background:#06131f!important}
 .dua-scene.food,.dua-scene.family{--dua-art:url("/test/kids/assets/kids-art/dua-home-v11.jpg?v=11-creative1")}
 .dua-scene-symbol{position:relative;z-index:2}
 .dua-scene-symbol .kid-icon{
-  background-image:url("/test/kids/assets/kids-icons/dua-real-v11.png?v=2")!important;
+  background-image:url("/test/kids/assets/kids-icons/dua-real-v11.png?v=12")!important;
   background-size:contain!important;background-position:center!important
 }
 .dua-meaning{
@@ -1353,29 +1355,29 @@ body{position:fixed!important;inset:0!important;touch-action:manipulation}
 
 /* KIDS_REAL_ASSET_ICON_FINAL_V11 */
 .profile-dot,.choice .icon,.resume-icon,.story-thumb,.quran-hero .book,.qa-icon,.verse-badge,.ficon,.nav-btn .ico,.picker-icon,.knowledge-symbol .kid-icon,.quiz-scene-symbol .kid-icon,.dua-scene-symbol .kid-icon,.quiz-finish .star .kid-icon{color:transparent!important;font-size:0!important;background-repeat:no-repeat!important;background-position:center!important;background-size:contain!important}
-.profile-dot{background-image:url("/test/kids/assets/kids-icons/moon-real-v11.png?v=3")!important;background-size:82%!important}
-.choice.story .icon{background-image:url("/test/kids/assets/kids-icons/headphones-real-v11.png?v=3")!important}
-.choice.quran .icon{background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=3")!important}
-.choice.dua .icon{background-image:url("/test/kids/assets/kids-icons/dua-real-v11.png?v=3")!important}
-.choice.quiz .icon{background-image:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=3")!important}
-.resume-icon{background-image:url("/test/kids/assets/kids-icons/play-real-v11.png?v=3")!important;background-size:76%!important}
-.story-row[data-story="water"] .story-thumb{background-image:url("/test/kids/assets/kids-icons/water-real-v11.png?v=3")!important;background-size:76%!important}
-.story-row[data-story="helper"] .story-thumb{background-image:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=3")!important;background-size:76%!important}
-.story-row[data-story="kindword"] .story-thumb{background-image:url("/test/kids/assets/kids-icons/cloud-real-v11.png?v=3")!important;background-size:78%!important}
-.story-row.verified .story-thumb{background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=3")!important;background-size:74%!important}
-.quran-hero .book{background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=3")!important}
-#quickLearn112 .qa-icon{background-image:url("/test/kids/assets/kids-icons/mic-real-v11.png?v=3")!important}
-#resumeQuran .qa-icon{background-image:url("/test/kids/assets/kids-icons/play-real-v11.png?v=3")!important}
-.verse-card[data-quran-ref="2:255"] .verse-badge{background-image:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=3")!important;background-size:72%!important}
-.verse-card[data-quran-ref="20:114"] .verse-badge{background-image:url("/test/kids/assets/kids-icons/library-real-v11.png?v=3")!important;background-size:76%!important}
-.verse-card[data-quran-ref="17:24"] .verse-badge{background-image:url("/test/kids/assets/kids-icons/heart-real-v11.png?v=3")!important;background-size:76%!important}
-.full-quran .ficon{background-image:url("/test/kids/assets/kids-icons/library-real-v11.png?v=3")!important;background-size:72%!important}
-.nav-btn[data-target="today"] .ico{background-image:url("/test/kids/assets/kids-icons/sun-real-v11.png?v=3")!important}
-.nav-btn[data-target="stories"] .ico{background-image:url("/test/kids/assets/kids-icons/headphones-real-v11.png?v=3")!important}
-.nav-btn[data-target="quran"] .ico{background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=3")!important}
-.nav-btn[data-target="parents"] .ico{background-image:url("/test/kids/assets/kids-icons/parents-real-v11.png?v=3")!important}
-.picker-icon{background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=3")!important;background-size:76%!important}
-.icon-book{background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=3")!important}.icon-headphones,.icon-volume{background-image:url("/test/kids/assets/kids-icons/headphones-real-v11.png?v=3")!important}.icon-dua{background-image:url("/test/kids/assets/kids-icons/dua-real-v11.png?v=3")!important}.icon-star,.icon-spark{background-image:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=3")!important}.icon-play{background-image:url("/test/kids/assets/kids-icons/play-real-v11.png?v=3")!important}.icon-mic{background-image:url("/test/kids/assets/kids-icons/mic-real-v11.png?v=3")!important}.icon-lock{background-image:url("/test/kids/assets/kids-icons/lock-real-v11.png?v=3")!important}.icon-moon{background-image:url("/test/kids/assets/kids-icons/moon-real-v11.png?v=3")!important}.icon-heart{background-image:url("/test/kids/assets/kids-icons/heart-real-v11.png?v=3")!important}.icon-library{background-image:url("/test/kids/assets/kids-icons/library-real-v11.png?v=3")!important}.icon-droplet{background-image:url("/test/kids/assets/kids-icons/water-real-v11.png?v=3")!important}.icon-cloud{background-image:url("/test/kids/assets/kids-icons/cloud-real-v11.png?v=3")!important}.icon-sun{background-image:url("/test/kids/assets/kids-icons/sun-real-v11.png?v=3")!important}.icon-settings,.icon-parents{background-image:url("/test/kids/assets/kids-icons/parents-real-v11.png?v=3")!important}.icon-home{background-image:url("/test/kids/assets/kids-icons/home-real-v11.png?v=3")!important}.icon-food{background-image:url("/test/kids/assets/kids-icons/food-real-v11.png?v=3")!important}.icon-speech{background-image:url("/test/kids/assets/kids-icons/speech-real-v11.png?v=3")!important}.icon-coin{background-image:url("/test/kids/assets/kids-icons/coin-real-v11.png?v=3")!important}.icon-palm{background-image:url("/test/kids/assets/kids-icons/palm-real-v11.png?v=3")!important}.icon-help{background-image:url("/test/kids/assets/kids-icons/help-real-v11.png?v=3")!important}.icon-door{background-image:url("/test/kids/assets/kids-icons/door-real-v11.png?v=3")!important}.icon-mosque{background-image:url("/test/kids/assets/kids-icons/mosque-real-v11.png?v=3")!important}.icon-shield{background-image:url("/test/kids/assets/kids-icons/shield-real-v11.png?v=3")!important}
+.profile-dot{background-image:url("/test/kids/assets/kids-icons/moon-real-v11.png?v=12")!important;background-size:82%!important}
+.choice.story .icon{background-image:url("/test/kids/assets/kids-icons/headphones-real-v11.png?v=12")!important}
+.choice.quran .icon{background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=12")!important}
+.choice.dua .icon{background-image:url("/test/kids/assets/kids-icons/dua-real-v11.png?v=12")!important}
+.choice.quiz .icon{background-image:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=12")!important}
+.resume-icon{background-image:url("/test/kids/assets/kids-icons/play-real-v11.png?v=12")!important;background-size:76%!important}
+.story-row[data-story="water"] .story-thumb{background-image:url("/test/kids/assets/kids-icons/water-real-v11.png?v=12")!important;background-size:76%!important}
+.story-row[data-story="helper"] .story-thumb{background-image:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=12")!important;background-size:76%!important}
+.story-row[data-story="kindword"] .story-thumb{background-image:url("/test/kids/assets/kids-icons/cloud-real-v11.png?v=12")!important;background-size:78%!important}
+.story-row.verified .story-thumb{background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=12")!important;background-size:74%!important}
+.quran-hero .book{background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=12")!important}
+#quickLearn112 .qa-icon{background-image:url("/test/kids/assets/kids-icons/mic-real-v11.png?v=12")!important}
+#resumeQuran .qa-icon{background-image:url("/test/kids/assets/kids-icons/play-real-v11.png?v=12")!important}
+.verse-card[data-quran-ref="2:255"] .verse-badge{background-image:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=12")!important;background-size:72%!important}
+.verse-card[data-quran-ref="20:114"] .verse-badge{background-image:url("/test/kids/assets/kids-icons/library-real-v11.png?v=12")!important;background-size:76%!important}
+.verse-card[data-quran-ref="17:24"] .verse-badge{background-image:url("/test/kids/assets/kids-icons/heart-real-v11.png?v=12")!important;background-size:76%!important}
+.full-quran .ficon{background-image:url("/test/kids/assets/kids-icons/library-real-v11.png?v=12")!important;background-size:72%!important}
+.nav-btn[data-target="today"] .ico{background-image:url("/test/kids/assets/kids-icons/sun-real-v11.png?v=12")!important}
+.nav-btn[data-target="stories"] .ico{background-image:url("/test/kids/assets/kids-icons/headphones-real-v11.png?v=12")!important}
+.nav-btn[data-target="quran"] .ico{background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=12")!important}
+.nav-btn[data-target="parents"] .ico{background-image:url("/test/kids/assets/kids-icons/parents-real-v11.png?v=12")!important}
+.picker-icon{background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=12")!important;background-size:76%!important}
+.icon-book{background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=12")!important}.icon-headphones,.icon-volume{background-image:url("/test/kids/assets/kids-icons/headphones-real-v11.png?v=12")!important}.icon-dua{background-image:url("/test/kids/assets/kids-icons/dua-real-v11.png?v=12")!important}.icon-star,.icon-spark{background-image:url("/test/kids/assets/kids-icons/spark-real-v11.png?v=12")!important}.icon-play{background-image:url("/test/kids/assets/kids-icons/play-real-v11.png?v=12")!important}.icon-mic{background-image:url("/test/kids/assets/kids-icons/mic-real-v11.png?v=12")!important}.icon-lock{background-image:url("/test/kids/assets/kids-icons/lock-real-v11.png?v=12")!important}.icon-moon{background-image:url("/test/kids/assets/kids-icons/moon-real-v11.png?v=12")!important}.icon-heart{background-image:url("/test/kids/assets/kids-icons/heart-real-v11.png?v=12")!important}.icon-library{background-image:url("/test/kids/assets/kids-icons/library-real-v11.png?v=12")!important}.icon-droplet{background-image:url("/test/kids/assets/kids-icons/water-real-v11.png?v=12")!important}.icon-cloud{background-image:url("/test/kids/assets/kids-icons/cloud-real-v11.png?v=12")!important}.icon-sun{background-image:url("/test/kids/assets/kids-icons/sun-real-v11.png?v=12")!important}.icon-settings,.icon-parents{background-image:url("/test/kids/assets/kids-icons/parents-real-v11.png?v=12")!important}.icon-home{background-image:url("/test/kids/assets/kids-icons/home-real-v11.png?v=12")!important}.icon-food{background-image:url("/test/kids/assets/kids-icons/food-real-v11.png?v=12")!important}.icon-speech{background-image:url("/test/kids/assets/kids-icons/speech-real-v11.png?v=12")!important}.icon-coin{background-image:url("/test/kids/assets/kids-icons/coin-real-v11.png?v=12")!important}.icon-palm{background-image:url("/test/kids/assets/kids-icons/palm-real-v11.png?v=12")!important}.icon-help{background-image:url("/test/kids/assets/kids-icons/help-real-v11.png?v=12")!important}.icon-door{background-image:url("/test/kids/assets/kids-icons/door-real-v11.png?v=12")!important}.icon-mosque{background-image:url("/test/kids/assets/kids-icons/mosque-real-v11.png?v=12")!important}.icon-shield{background-image:url("/test/kids/assets/kids-icons/shield-real-v11.png?v=12")!important}
 #view-today .hero{--art:url("/test/kids/assets/kids-art/home-journey-v11-clean2.jpg?v=11-rule1")!important}
 #view-today .hero::before{background-image:var(--art)!important;background-position:center!important;background-size:cover!important}
 /* KIDS_REAL_ASSET_ICON_FINAL_V11_END */
@@ -1529,6 +1531,177 @@ body{position:fixed!important;inset:0!important;touch-action:manipulation}
 }
 /* KIDS_CHILD_CONTROLS_V11_END */
 
+/* KIDS_UI_OVERHAUL_V12
+   Edge-to-edge shell, glass tab bar, floating cut-out icons, story chevrons,
+   Qurʾān recitation hierarchy. KIDS_NO_SYSTEM_EMOJI */
+.shell{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:calc(var(--safe-top) + 8px) max(16px,env(safe-area-inset-right)) calc(118px + var(--safe-bottom)) max(16px,env(safe-area-inset-left))!important;
+}
+.modal-shell{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:calc(var(--safe-top) + 10px) max(16px,env(safe-area-inset-right)) calc(16px + var(--safe-bottom)) max(16px,env(safe-area-inset-left))!important;
+}
+.app,.ambient{width:100%!important}
+
+.bottom-nav{
+  left:max(10px,env(safe-area-inset-left))!important;
+  right:max(10px,env(safe-area-inset-right))!important;
+  transform:none!important;
+  width:auto!important;
+  min-height:86px!important;
+  padding:10px 8px calc(10px + env(safe-area-inset-bottom))!important;
+  gap:6px!important;
+  border-radius:32px!important;
+  background:rgba(10,24,38,.38)!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  box-shadow:0 12px 36px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.2)!important;
+  backdrop-filter:blur(28px) saturate(1.55)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(1.55)!important;
+}
+.nav-btn{min-height:64px!important;background:transparent!important}
+.nav-btn .ico{
+  width:30px!important;height:30px!important;
+  background-color:transparent!important;
+  border:0!important;
+  filter:drop-shadow(0 6px 10px rgba(0,0,0,.28));
+}
+.nav-btn.active{
+  background:linear-gradient(145deg,rgba(226,189,114,.16),rgba(115,201,193,.08))!important;
+}
+
+.profile-dot,
+.choice .icon,
+.resume-icon,
+.story-thumb,
+.quran-hero .book,
+.qa-icon,
+.verse-badge,
+.ficon,
+.nav-btn .ico,
+.picker-icon,
+.dicon,
+.daily-inline-icon,
+.kid-icon{
+  background-color:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  color:transparent!important;
+  font-size:0!important;
+  background-repeat:no-repeat!important;
+  background-position:center!important;
+  background-size:contain!important;
+  filter:drop-shadow(0 8px 14px rgba(0,0,0,.24));
+}
+.profile-dot{
+  width:44px!important;height:44px!important;border-radius:0!important;
+  background-image:url("/test/kids/assets/kids-icons/moon-real-v11.png?v=12")!important;
+  background-size:78% auto!important;
+  background-position:center 48%!important;
+}
+.choice{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 46px!important;
+  grid-template-rows:auto auto 1fr!important;
+  align-items:start!important;
+  padding:18px 14px 16px 18px!important;
+}
+.choice .icon{
+  width:52px!important;height:52px!important;
+  margin:0 0 16px!important;
+  grid-column:1;
+  border-radius:0!important;
+}
+.choice strong,.choice small{grid-column:1;max-width:100%!important;padding-right:6px}
+.choice .arrow{
+  position:static!important;
+  grid-column:2;
+  grid-row:1 / span 3;
+  align-self:center!important;
+  justify-self:end!important;
+  width:38px!important;height:38px!important;
+  margin:0!important;
+}
+.daily-step{gap:14px!important;padding:12px 14px!important;min-height:72px}
+.daily-step .dicon,.daily-inline-icon{
+  width:36px!important;height:36px!important;display:block!important;
+  margin:0!important;vertical-align:middle;
+}
+.daily-step .dtxt{padding-right:6px}
+.resume-icon,.verse-badge,.ficon,.quran-hero .book,.qa-icon,.story-thumb{
+  border-radius:0!important;
+  background-color:transparent!important;
+}
+.verse-badge,.ficon{width:54px!important;height:54px!important}
+.story-row{
+  display:grid!important;
+  grid-template-columns:68px minmax(0,1fr) 40px!important;
+  align-items:center!important;
+  column-gap:12px!important;
+  padding:12px 10px 12px 12px!important;
+}
+.story-thumb{width:64px!important;height:64px!important}
+.story-row-copy{min-width:0}
+.story-row .chev{
+  margin:0!important;
+  width:36px;height:36px;display:grid;place-items:center;
+  border-radius:50%;background:rgba(0,0,0,.14);
+}
+.full-quran .ficon{
+  background-image:url("/test/kids/assets/kids-icons/quran-real-v11.png?v=12")!important;
+  background-size:contain!important;
+}
+
+#quranModal .modal-shell{padding-top:calc(var(--safe-top) + 14px)!important}
+#quranModal .modal-top{padding:8px 0 12px!important;gap:14px}
+#quranModal .progress-dots{margin:10px 0 8px!important}
+#quranModal .lesson-steps{margin:8px 0 16px!important;gap:8px!important}
+#quranModal .lesson-step{min-height:46px!important;border-radius:16px!important;font-size:10px!important;padding:8px 6px!important}
+#quranModal .ayah-stage{padding:10px 4px 12px!important}
+#quranModal .learn-status{margin-bottom:14px!important}
+#quranModal .word-coach{margin:8px auto 16px!important;padding:12px 14px!important}
+#quranModal .quran-controls{padding-top:12px!important}
+#quranModal .main-actions{gap:14px!important}
+#quranModal .big-play,#quranModal .big-speak{
+  min-height:56px!important;max-height:58px;
+  min-width:138px!important;max-width:168px!important;
+  border-radius:999px!important;
+  padding:10px 20px!important;
+}
+#quranModal .lesson-nav{gap:12px!important;margin-top:12px!important}
+#quranModal .lesson-nav button{
+  min-height:44px!important;max-width:148px!important;
+  border-radius:999px!important;
+}
+.surah-grid::before,.quran-hero::before,.story-scene::before,#view-today .hero::before{
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+}
+.surah-grid::before{
+  background-size:cover,cover!important;
+}
+
+@media(min-width:700px){
+  .shell{padding-left:max(22px,env(safe-area-inset-left))!important;padding-right:max(22px,env(safe-area-inset-right))!important}
+  .big-choice-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .story-list{grid-template-columns:1fr 1fr}
+  .bottom-nav{min-height:92px!important}
+}
+@media(min-width:1100px){
+  .big-choice-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+  .surah-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+}
+@media(max-width:380px){
+  .choice .icon{width:46px!important;height:46px!important;margin-bottom:14px!important}
+  .bottom-nav{min-height:80px!important}
+}
+/* KIDS_UI_OVERHAUL_V12_END */
+
 </style>
 </head>
 <body>
@@ -1542,7 +1715,7 @@ body{position:fixed!important;inset:0!important;touch-action:manipulation}
 </div>
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon">KIDS · V0.11</div>
+  <div class="dev-ribbon">KIDS · V0.12</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -1639,6 +1812,7 @@ body{position:fixed!important;inset:0!important;touch-action:manipulation}
           <div class="meta">ADAB · FREI VERFASST · CA. 3 MIN.</div>
           <h3>Die gefundene Münze</h3>
           <p>Adam entdeckt etwas, das ihm nicht gehört. Was wird er tun?</p>
+          <span class="story-go" aria-hidden="true">›</span>
         </div>
       </article>
 
@@ -1646,17 +1820,17 @@ body{position:fixed!important;inset:0!important;touch-action:manipulation}
       <div class="story-list">
         <article class="story-row" data-story="water">
           <div class="story-thumb"></div>
-          <div><h3>Das Glas Wasser</h3><div class="meta">Adab · frei verfasst</div><div class="time">ca. 2 Min.</div></div>
+          <div class="story-row-copy"><h3>Das Glas Wasser</h3><div class="meta">Adab · frei verfasst</div><div class="time">ca. 2 Min.</div></div>
           <div class="chev">›</div>
         </article>
         <article class="story-row" data-story="helper">
-          <div class="story-thumb" style="background:rgba(115,201,193,.12)" aria-hidden="true"></div>
-          <div><h3>Der leise Helfer</h3><div class="meta">Adab · frei verfasst</div><div class="time">ca. 3 Min.</div></div>
+          <div class="story-thumb" aria-hidden="true"></div>
+          <div class="story-row-copy"><h3>Der leise Helfer</h3><div class="meta">Adab · frei verfasst</div><div class="time">ca. 3 Min.</div></div>
           <div class="chev">›</div>
         </article>
         <article class="story-row" data-story="kindword">
-          <div class="story-thumb" style="background:rgba(159,145,214,.12)"></div>
-          <div><h3>Das gute Wort</h3><div class="meta">Adab · frei verfasst</div><div class="time">ca. 3 Min.</div></div>
+          <div class="story-thumb"></div>
+          <div class="story-row-copy"><h3>Das gute Wort</h3><div class="meta">Adab · frei verfasst</div><div class="time">ca. 3 Min.</div></div>
           <div class="chev">›</div>
         </article>
       </div>
@@ -1934,7 +2108,7 @@ body{position:fixed!important;inset:0!important;touch-action:manipulation}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v11-childcontrols1";
+const KIDS_BUILD_ID="kids-shell-v12-glasswide1";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -1957,7 +2131,7 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
   function kidsHardReload(targetBuild){
     try{localStorage.setItem(KIDS_BUILD_SEEN_KEY,targetBuild||KIDS_BUILD_ID)}catch(e){}
     var u=new URL(location.href);
-    u.searchParams.set("kv","20260924-8");
+    u.searchParams.set("kv","20260925-12");
     u.searchParams.set("cb",String(Date.now()));
     location.replace(u.toString());
   }
@@ -2155,8 +2329,8 @@ function renderAuthenticStories(){
     row.className="story-row verified";
     row.dataset.story=s.id;
     row.innerHTML=
-      '<div class="story-thumb" style="background:rgba(82,196,132,.10)">'+kidsIconMarkup(kidsIconName(s.symbol,"book"),"scene-icon")+'</div>'+
-      '<div><h3>'+s.title+'</h3><div class="meta">'+s.category+'</div>'+
+      '<div class="story-thumb">'+kidsIconMarkup(kidsIconName(s.symbol,"book"),"scene-icon")+'</div>'+
+      '<div class="story-row-copy"><h3>'+s.title+'</h3><div class="meta">'+s.category+'</div>'+
       '<div class="story-verify">✓ GEPRÜFT · '+String((s.sourceRefs||[])[0]||"Qurʾān")+'</div>'+
       '<div class="time">'+s.duration+'</div></div><div class="chev">›</div>';
     row.addEventListener("click",function(){openStory(s.id)});
@@ -2244,7 +2418,7 @@ function updateDailyJourney(){
   plan.forEach(function(s,i){
     var b=document.createElement("button");
     b.className="daily-step"+(dailyDone(s.id)?" done":(i===firstOpen?" current":""));
-    b.innerHTML='<span class="dnum">'+(dailyDone(s.id)?"✓":(i+1))+'</span><span class="dtxt"><strong>'+kidsIconMarkup(s.icon,"daily-inline-icon")+s.title+'</strong><small>'+s.hint+'</small></span><span class="dstate">'+(dailyDone(s.id)?"✓":"›")+'</span>';
+    b.innerHTML='<span class="dnum">'+(dailyDone(s.id)?"✓":(i+1))+'</span><span class="dicon">'+kidsIconMarkup(s.icon,"daily-inline-icon")+'</span><span class="dtxt"><strong>'+s.title+'</strong><small>'+s.hint+'</small></span><span class="dstate">'+(dailyDone(s.id)?"✓":"›")+'</span>';
     b.addEventListener("click",function(){launchDailyStep(s.id)});
     box.appendChild(b);
   });

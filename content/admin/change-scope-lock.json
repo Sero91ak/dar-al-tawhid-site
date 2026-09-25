@@ -90,7 +90,8 @@
     "test/assets/dar-ios-oversize-copy.css",
     "kids/",
     "KIDS.md",
-    "test/kids/"
+    "test/kids/",
+    "scripts/kids-design-guard.js"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -120,7 +121,9 @@
         "KIDS.md",
         "test/kids/",
         "_redirects",
-        "_headers"
+        "_headers",
+        "scripts/kids-design-guard.js",
+        "scripts/app-health-check.js"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     },
