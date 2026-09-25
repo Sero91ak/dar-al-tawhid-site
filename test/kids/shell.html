@@ -528,14 +528,14 @@ html,body{background:#06131f!important}
   html,body,.app{background-color:#06131f!important}
 }
 
-/* KIDS_UPDATE_UI_V4 — kinderfreundliche Update-Fläche, nur Kids */
+/* KIDS_UPDATE_UI_V5 — spielerische, freudige Kids-Update-Karte */
 .kids-update-layer{
   position:fixed;top:0;left:0;right:0;z-index:2147483000!important;
   display:flex!important;justify-content:center;align-items:flex-start;
-  padding:calc(10px + env(safe-area-inset-top,0px)) 14px 0;
+  padding:calc(12px + env(safe-area-inset-top,0px)) 16px 0;
   pointer-events:none;
   transform:translate3d(0,-140%,0);
-  transition:transform 480ms cubic-bezier(.16,.84,.32,1);
+  transition:transform 560ms cubic-bezier(.18,1.12,.32,1);
   visibility:hidden;
 }
 .kids-update-layer.is-open{
@@ -544,31 +544,64 @@ html,body{background:#06131f!important}
   visibility:visible;
 }
 .kids-update-card{
-  width:min(100%,430px);
+  width:min(100%,400px);
   position:relative;
-  border:1px solid rgba(226,189,114,.34);
-  border-radius:0 0 26px 26px;
-  padding:16px 16px 14px;
-  text-align:left;
-  background:linear-gradient(180deg,rgba(12,38,58,.96),rgba(8,26,40,.94));
-  box-shadow:0 18px 40px rgba(0,0,0,.32);
-  -webkit-backdrop-filter:blur(18px) saturate(1.2);
-  backdrop-filter:blur(18px) saturate(1.2);
+  overflow:hidden;
+  border:1px solid rgba(240,208,138,.55);
+  border-radius:28px;
+  padding:18px 18px 16px;
+  text-align:center;
+  background:
+    radial-gradient(circle at 18% 0%,rgba(240,208,138,.28),transparent 42%),
+    radial-gradient(circle at 92% 12%,rgba(115,201,193,.22),transparent 36%),
+    linear-gradient(165deg,#1c4d68 0%,#123a52 48%,#1a5854 100%);
+  box-shadow:0 18px 40px rgba(0,0,0,.34),0 0 0 1px rgba(255,255,255,.06) inset;
+}
+.kids-update-card:before{
+  content:"";position:absolute;left:-20%;top:-40%;width:140%;height:70%;
+  background:linear-gradient(180deg,rgba(255,255,255,.16),transparent 70%);
+  pointer-events:none;
 }
 .kids-update-icon-wrap{
-  width:46px;height:46px;margin:0 0 8px;
+  width:64px;height:64px;margin:0 auto 10px;
   display:grid;place-items:center;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#ffe9b0,#e2bd72 58%,#c49a48);
+  box-shadow:0 10px 22px rgba(226,189,114,.38);
+  animation:kidsUpdateIconPop 900ms cubic-bezier(.18,1.2,.32,1) both;
 }
-.kids-update-icon-wrap .kid-icon{width:42px;height:42px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.28))}
-.kids-update-card h2{margin:0 0 6px;font-size:20px;line-height:1.15;color:#fff8e8}
-.kids-update-card p{margin:0;color:rgba(255,248,232,.78);font-size:13px;line-height:1.45}
-.kids-update-card button{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  width:100%;margin-top:14px;min-height:52px;border:0;border-radius:999px;
-  background:linear-gradient(180deg,#f0d08a,#d7b15a);color:#102030;
-  font-weight:950;font-size:15px;cursor:pointer
+.kids-update-icon-wrap .kid-icon{width:38px;height:38px;filter:drop-shadow(0 3px 6px rgba(80,50,10,.25))}
+.kids-update-kicker{
+  margin:0 0 4px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:900;color:#f0d08a
 }
-.kids-update-card button .kid-icon{width:22px;height:22px}
+.kids-update-card h2{margin:0 0 6px;font-size:22px;line-height:1.12;color:#fff8e8;font-weight:800}
+.kids-update-card p{margin:0 auto;max-width:28em;color:rgba(255,248,232,.86);font-size:13.5px;line-height:1.42}
+.kids-update-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;margin-top:16px;min-height:58px;border:0;border-radius:999px;
+  background:linear-gradient(180deg,#ffe39a 0%,#e2bd72 52%,#c9a24e 100%);
+  color:#102030;font-weight:950;font-size:17px;cursor:pointer;
+  box-shadow:0 10px 20px rgba(201,162,78,.38),inset 0 1px 0 rgba(255,255,255,.55);
+  animation:kidsUpdateBtnPulse 1.8s ease-in-out infinite;
+  transition:transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+.kids-update-btn .kid-icon{width:24px;height:24px}
+.kids-update-btn:hover{filter:brightness(1.06);transform:translateY(-1px) scale(1.02)}
+.kids-update-btn:active{
+  transform:scale(.94);
+  animation:none;
+  box-shadow:0 4px 10px rgba(201,162,78,.28),inset 0 2px 6px rgba(80,50,10,.18);
+}
+@keyframes kidsUpdateIconPop{
+  0%{transform:scale(.4);opacity:0}
+  70%{transform:scale(1.12)}
+  100%{transform:scale(1);opacity:1}
+}
+@keyframes kidsUpdateBtnPulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.035)}
+}
 
 /* KIDS_AI_ART_V7_START — generated artwork backgrounds */
 /* KIDS_SEAMLESS_WASH_V11
@@ -1797,9 +1830,10 @@ html,body{
 <div id="kidsUpdateLayer" class="kids-update-layer">
   <div class="kids-update-card" role="dialog" aria-labelledby="kidsUpdateTitle" aria-describedby="kidsUpdateText">
     <div class="kids-update-icon-wrap" aria-hidden="true"><span class="kid-icon icon-spark"></span></div>
-    <h2 id="kidsUpdateTitle">Etwas Neues ist da</h2>
-    <p id="kidsUpdateText">Tippe auf den goldenen Knopf. Dann lädt deine Kinder-App die neue, schöne Oberfläche.</p>
-    <button id="kidsUpdateButton" type="button"><span class="kid-icon icon-play" aria-hidden="true"></span>Jetzt aktualisieren</button>
+    <p class="kids-update-kicker">Für dich</p>
+    <h2 id="kidsUpdateTitle">Eine Überraschung</h2>
+    <p id="kidsUpdateText">Tippe auf den leuchtenden Knopf. Es geht gleich fröhlich weiter.</p>
+    <button id="kidsUpdateButton" class="kids-update-btn" type="button"><span class="kid-icon icon-play" aria-hidden="true"></span><span>Los geht's</span></button>
   </div>
 </div>
 <div class="app">
@@ -2197,12 +2231,12 @@ html,body{
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab4";
+const KIDS_BUILD_ID="kids-shell-v12-tab5";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
   var pendingKidsBuild="";
-  var SEEN_KEY="darKidsFriendlyUpdateSeenV4";
+  var SEEN_KEY="darKidsFriendlyUpdateSeenV5";
   function kidsWantPreview(){
     try{
       if(/(?:^|[?&])demo=update(?:&|$)/.test(String(location.search||""))) return true;
@@ -2215,8 +2249,8 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
     var h=document.getElementById("kidsUpdateTitle");
     var p=document.getElementById("kidsUpdateText");
     var btn=document.getElementById("kidsUpdateButton");
-    if(h)h.textContent=title||"Etwas Neues ist da";
-    if(p)p.textContent=text||"Tippe auf den goldenen Knopf. Dann lädt deine Kinder-App die neue, schöne Oberfläche.";
+    if(h)h.textContent=title||"Eine Überraschung";
+    if(p)p.textContent=text||"Tippe auf den leuchtenden Knopf. Es geht gleich fröhlich weiter.";
     if(btn && !btn.dataset.bound){
       btn.dataset.bound="1";
       btn.addEventListener("click",function(){
@@ -2247,7 +2281,7 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
       var j=await r.json();
       var remote=String(j.buildId||"").trim();
       if(remote && remote!==KIDS_BUILD_ID){
-        kidsShowUpdate("Etwas Neues ist da","Tippe auf den goldenen Knopf. Dann lädt deine Kinder-App die neue, schöne Oberfläche.",remote);
+        kidsShowUpdate("Eine Überraschung","Tippe auf den leuchtenden Knopf. Es geht gleich fröhlich weiter.",remote);
       }else if(remote===KIDS_BUILD_ID){
         try{localStorage.setItem(KIDS_BUILD_SEEN_KEY,KIDS_BUILD_ID)}catch(e){}
       }
@@ -2255,7 +2289,7 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
   }
   function kidsBootUpdate(){
     if(kidsWantPreview()){
-      kidsShowUpdate("Etwas Neues ist da","Tippe auf den goldenen Knopf. Dann lädt deine Kinder-App die neue, schöne Oberfläche.",KIDS_BUILD_ID);
+      kidsShowUpdate("Eine Überraschung","Tippe auf den leuchtenden Knopf. Es geht gleich fröhlich weiter.",KIDS_BUILD_ID);
       return;
     }
     kidsCheckRemoteVersion();
