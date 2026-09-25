@@ -73,14 +73,9 @@
 /test/version.json
   Cache-Control: no-cache, must-revalidate, max-age=0
 
-/kids/test/
-  Cache-Control: no-cache, must-revalidate, max-age=0
-
-/kids/test/*
-  Cache-Control: no-cache, must-revalidate, max-age=0
-
 /test/kids/
   Cache-Control: no-cache, must-revalidate, max-age=0
+
 
 /test/kids/*
   Cache-Control: no-cache, must-revalidate, max-age=0
