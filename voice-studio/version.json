@@ -1,6 +1,6 @@
 {
-  "version": "1.6.3",
-  "updatedAt": "2026-09-25T18:04:00+02:00",
+  "version": "1.7.0",
+  "updatedAt": "2026-09-25T18:18:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "local-chatterbox-v3",
   "provider": "self-produced",
@@ -14,13 +14,13 @@
     "fallbackReference": "~/SerhatVoice/Serhat_FINAL_REF.wav"
   },
   "setupMethod": "native-macos-wkwebview-existing-serhatvoice",
-  "setupCommand": "curl -fsSL 'https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/8e3076acac20253b706aecbcb1a973a24defa9aa/voice-studio/install-mac.command' | /bin/bash",
+  "setupCommand": "curl -fsSL 'https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/639c334a14af6588a3249a7aa03af5968ef4f1ef/voice-studio/install-mac.command' | /bin/bash",
   "macApp": "~/Applications/DĀR Voice Studio.app",
   "macAppRuntime": "native WKWebView + retained local Chatterbox process + native edit menu",
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-raw",
-  "engineVersion": "ffmpeg-absolute-path-fallback",
+  "engineVersion": "de-ar-segmented-native-script",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -46,5 +46,13 @@
   },
   "macAppUpdatePolicy": "terminate-running-app + remove-bundle + rebuild + ad-hoc-sign + launchservices-reregister",
   "engineIntegrity": "py_compile preflight + duplicate-tail removed",
-  "audioMastering": "absolute ffmpeg path + raw WAV fallback"
+  "audioMastering": "absolute ffmpeg path + raw WAV fallback",
+  "pronunciationRuntime": {
+    "mixedLanguageSegmentation": true,
+    "germanLanguageId": "de",
+    "arabicLanguageId": "ar",
+    "arabicCfgWeight": 0,
+    "coreTermsNativeArabicScript": true,
+    "clientPreparedIgnored": true
+  }
 }
