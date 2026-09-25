@@ -483,6 +483,7 @@ input,select{
       <div class="qa-item"><span>LOCKED-Begriffe</span><b id="qaLocked" class="warn">–</b></div>
       <div class="qa-item"><span>Technische Audio-QA</span><b id="qaTechnical" class="warn">wartet</b></div>
       <div class="qa-item"><span>Satzfluss / Kontinuität</span><b id="qaContinuity" class="warn">wartet</b></div>
+      <div class="qa-item"><span>Kern-Aussprache-Lock</span><b id="qaCoreLock" class="warn">prüfen</b></div>
       <div class="qa-item"><span>Audio vorhanden</span><b id="qaAudio" class="warn">nein</b></div>
       <div class="qa-item"><span>Aussprache bestätigt</span><b id="qaConfirmed" class="warn">nein</b></div>
     </div>
@@ -581,6 +582,10 @@ function resetAudioQA(){
     $("#qaContinuity").textContent="wartet";
     $("#qaContinuity").className="warn";
   }
+  if($("#qaCoreLock")){
+    $("#qaCoreLock").textContent="prüfen";
+    $("#qaCoreLock").className="warn";
+  }
   if(lastAudio){URL.revokeObjectURL(lastAudio);lastAudio=null}
   $("#player").removeAttribute("src");
   $("#playerWrap").hidden=true;
@@ -625,6 +630,13 @@ async function analyzeProsody(){
     $("#qaProsody").className="good";
     $("#qaArabicRef").textContent=d.arabicReferenceDedicated?"Serhat AR MASTER":"Serhat DE Fallback";
     $("#qaArabicRef").className=d.arabicReferenceDedicated?"good":"warn";
+    if($("#qaCoreLock")){
+      const needed=Array.isArray(d.audioLocks)?d.audioLocks:[];
+      const confirmed=new Set(Array.isArray(d.audioLocksConfirmed)?d.audioLocksConfirmed:[]);
+      const locked=needed.filter(x=>confirmed.has(x)).length;
+      $("#qaCoreLock").textContent=needed.length?(locked+"/"+needed.length+" bestätigt"):"nicht benötigt";
+      $("#qaCoreLock").className=(!needed.length||locked===needed.length)?"good":"warn";
+    }
     if(d.prepared)$("#prepared").textContent=d.prepared;
     return d;
   }catch(_){return null}
@@ -855,7 +867,15 @@ async function generate(){
         :(Math.max(1,segmentModes.length)+" Modus · flüssig");
       $("#qaContinuity").className=rescued?"warn":"good";
     }
-    setMessage("Audio fertig. Satzfluss und technische QA sind geprüft; bitte jetzt die Aussprache anhören und bestätigen.","good");
+    if($("#qaCoreLock")){
+      const pending=Array.isArray(qa?.audio_lock_pending)?qa.audio_lock_pending:[];
+      const confirmedLocks=Array.isArray(qa?.audio_lock_confirmed)?qa.audio_lock_confirmed:[];
+      $("#qaCoreLock").textContent=pending.length
+        ?(pending.length+" warten auf Bestätigung")
+        :(confirmedLocks.length?confirmedLocks.length+" dauerhaft gesperrt":"keine");
+      $("#qaCoreLock").className=pending.length?"warn":"good";
+    }
+    setMessage("Audio fertig. Satzfluss und technische QA sind geprüft; bitte jetzt besonders die Kernbegriffe anhören und erst dann bestätigen.","good");
     $("#player").play().catch(()=>{});
     $("#playerWrap").scrollIntoView({behavior:"smooth",block:"nearest"});
   }catch(e){
@@ -869,17 +889,42 @@ async function generate(){
     checkHealth({quiet:true});
   }
 }
-function confirmQA(){
+async function confirmQA(){
   if(!lastAudio){
-    setMessage("Zuerst Audio erzeugen und anhören.");
+    setMessage("Zuerst Audio erzeugen und vollständig anhören.");
     return;
   }
-  qaConfirmed=true;
-  $("#qaConfirmed").textContent="bestätigt";
-  $("#qaConfirmed").className="good";
-  $("#qaLocked").textContent="bestätigt";
-  $("#qaLocked").className="good";
-  setMessage("Aussprache bestätigt. Die WAV kann jetzt gespeichert werden.","good");
+  const btn=$("#qaConfirmBtn");
+  const old=btn?.textContent||"Aussprache bestätigen";
+  if(btn){btn.disabled=true;btn.textContent="Wird gesperrt …"}
+  try{
+    const r=await localRequest("/confirm-core-audio",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:"{}"
+    });
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||!d.ok)throw Error(d.error||"Kern-Audio-Lock konnte nicht gespeichert werden.");
+    qaConfirmed=true;
+    $("#qaConfirmed").textContent="bestätigt";
+    $("#qaConfirmed").className="good";
+    $("#qaLocked").textContent="bestätigt";
+    $("#qaLocked").className="good";
+    if($("#qaCoreLock")){
+      const total=Number(d?.status?.audio_lock_total||0);
+      const confirmed=Array.isArray(d?.status?.audio_lock_confirmed)?d.status.audio_lock_confirmed.length:0;
+      $("#qaCoreLock").textContent=confirmed+(total?("/"+total):"")+" dauerhaft gesperrt";
+      $("#qaCoreLock").className="good";
+    }
+    const justLocked=Array.isArray(d.confirmed)&&d.confirmed.length;
+    setMessage(justLocked
+      ?("Aussprache bestätigt. "+d.confirmed.length+" Kern-Audio-Segment(e) wurden dauerhaft lokal gesperrt.")
+      :"Aussprache bestätigt. Bereits gespeicherte Kern-Audio-Locks bleiben unverändert.","good");
+  }catch(e){
+    setMessage(e.message||String(e));
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent=old}
+  }
 }
 
 $("#text").addEventListener("input",()=>{resetAudioQA();renderAnalysis()});
