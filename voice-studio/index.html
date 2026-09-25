@@ -495,7 +495,7 @@ input{
 const LOCKED=new Set(["DĀR AL TAWḤĪD","Dār al-Tawḥīd","Allāh","Qurʾān","Tawḥīd","ʿAqīdah","Ḥadīṯ","Ṣaḥābah","Duʿāʾ","Ṣalāh","Muḥammad","Ibrāhīm","Mūsā"]);
 const IS_LOCAL=location.hostname==="127.0.0.1"||location.hostname==="localhost";
 const LOCAL_API=IS_LOCAL?"":"http://127.0.0.1:8787";
-let library={rules:[]},buckets=new Map(),lastAudio=null,engineOK=false,qaConfirmed=false,deferredInstall=null;
+let library={rules:[]},buckets=new Map(),lastAudio=null,engineOK=false,modelReady=false,qaConfirmed=false,deferredInstall=null;
 const $=s=>document.querySelector(s);
 
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
@@ -603,16 +603,48 @@ async function loadLibrary(){
 }
 function updateEngineUI(data){
   engineOK=!!data?.ok;
-  $("#engineLabel").textContent=engineOK?"Serhat Engine bereit":"Engine nicht gestartet";
-  $("#engineDot").className="dot "+(engineOK?"ok":"bad");
-  $("#qaEngine").textContent=engineOK?"bereit":"offline";
-  $("#qaEngine").className=engineOK?"good":"bad";
+  modelReady=data?.model_state==="ready";
+  const loading=data?.model_state==="loading";
+  const modelError=data?.model_state==="error";
+
+  $("#engineLabel").textContent=!engineOK
+    ?"Engine nicht gestartet"
+    :loading?"Stimm-Modell wird geladen …"
+    :modelReady?"Serhat Engine bereit"
+    :modelError?"Stimm-Modell Fehler"
+    :"Engine verbunden · Modell wartet";
+
+  $("#engineDot").className="dot "+(engineOK&&!modelError?"ok":"bad");
+  $("#qaEngine").textContent=!engineOK?"offline":loading?"lädt":modelReady?"bereit":modelError?"Fehler":"verbunden";
+  $("#qaEngine").className=engineOK&&!modelError?(modelReady?"good":"warn"):"bad";
   $("#startEngineBtn").textContent=engineOK?"Mac-App öffnen":"Engine / Mac-App starten";
   $("#startEngineBtn").disabled=false;
-  $("#engineHelp").textContent=engineOK
-    ?("Eigene Stimme aktiv · "+(data.provider||"Chatterbox V3")+" · Für die Arbeit ohne Safari jetzt „Mac-App öffnen“.")
-    :"Engine ist auf diesem Mac noch nicht erreichbar. Mac-App einmal installieren/aktualisieren und danach starten.";
+
+  if(modelError&&data?.last_error){
+    $("#engineHelp").textContent="Modellfehler: "+data.last_error;
+  }else if(modelReady){
+    $("#engineHelp").textContent="Eigene Stimme aktiv · "+(data.provider||"Chatterbox V3")+" · "+String(data.model_device||"").toUpperCase()+" · renderbereit";
+  }else if(loading){
+    $("#engineHelp").textContent="Chatterbox V3 wird geladen. Beim ersten Start kann das einige Minuten dauern.";
+  }else{
+    $("#engineHelp").textContent="Engine verbunden. Das Stimm-Modell wird beim ersten Render automatisch geladen.";
+  }
 }
+
+async function getEngineStatus(){
+  try{
+    const r=await localRequest("/status");
+    if(!r.ok)return null;
+    return await r.json();
+  }catch(_){return null}
+}
+
+async function warmupModel(){
+  try{
+    await localRequest("/warmup",{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"});
+  }catch(_){}
+}
+
 async function checkHealth({quiet=false}={}){
   if(!quiet){
     $("#engineLabel").textContent="Engine wird geprüft …";
@@ -625,60 +657,114 @@ async function checkHealth({quiet=false}={}){
     const d=await r.json().catch(()=>({}));
     if(!r.ok||!d.ok)throw Error(d.error||"Engine nicht bereit");
     updateEngineUI(d);
-    if(!quiet)setMessage("");
+    if(d.model_state!=="ready"&&d.model_state!=="loading")warmupModel();
+    if(!quiet&&!d.last_error)setMessage("");
     return true;
   }catch(_){
     updateEngineUI({ok:false});
-    if(!quiet)setMessage("Serhat Engine ist noch nicht gestartet. Klicke rechts auf „Engine starten“; beim ersten Mal vorher „Einmal auf Mac einrichten“.","warn");
+    if(!quiet)setMessage("Serhat Engine ist noch nicht gestartet.","warn");
     return false;
   }
 }
+
+async function waitForModel(btns){
+  if(modelReady)return true;
+  await warmupModel();
+  const deadline=Date.now()+10*60*1000;
+  while(Date.now()<deadline){
+    const st=await getEngineStatus();
+    if(!st){await new Promise(r=>setTimeout(r,1200));continue}
+    updateEngineUI({ok:true,provider:"Chatterbox Multilingual V3",...st});
+    if(st.model_state==="ready")return true;
+    if(st.model_state==="error")throw Error("Stimm-Modell konnte nicht geladen werden: "+(st.last_error||"unbekannter Fehler"));
+    btns.forEach(b=>b.textContent="Modell wird geladen …");
+    setMessage(st.message||"Chatterbox V3 wird geladen …","warn");
+    await new Promise(r=>setTimeout(r,1200));
+  }
+  throw Error("Das Stimm-Modell wurde nach 10 Minuten nicht renderbereit.");
+}
+
 async function startEngine(){
   if(IS_LOCAL){await checkHealth();return}
   setMessage("Serhat Engine wird gestartet …","warn");
   $("#startEngineBtn").disabled=true;
-  try{ window.location.href="darvoice://start"; }catch(_){}
+  try{window.location.href="darvoice://start"}catch(_){}
   for(let i=0;i<18;i++){
     await new Promise(r=>setTimeout(r,900));
     if(await checkHealth({quiet:true})){
-      setMessage("Serhat Engine ist bereit.","good");
+      setMessage("Serhat Engine ist verbunden.","good");
+      $("#startEngineBtn").disabled=false;
       return;
     }
   }
   $("#startEngineBtn").disabled=false;
-  setMessage("Engine noch nicht eingerichtet. Klicke auf „Einmalig einrichten · Befehl kopieren“, führe den einen Terminal-Befehl aus und prüfe danach erneut.","warn");
+  setMessage("Engine nicht erreichbar. Bitte Mac-App/Engine aktualisieren.","warn");
 }
+
 function updateQA(){
   const audio=!!lastAudio;
   $("#qaAudio").textContent=audio?"ja":"nein";
   $("#qaAudio").className=audio?"good":"warn";
 }
+
 async function generate(){
   resetAudioQA();
   const btns=[$("#generateBtn"),$("#mobileGenerateBtn")].filter(Boolean);
   const old=btns.map(b=>b.textContent);
-  btns.forEach(b=>{b.disabled=true;b.textContent="Wird erzeugt …"});
+  btns.forEach(b=>{b.disabled=true;b.textContent="Vorbereitung …"});
   setMessage("");
+  let progressTimer=null;
+
   try{
     if(!engineOK){
       const ok=await checkHealth();
-      if(!ok)throw Error("Serhat Engine ist offline. Bitte zuerst rechts „Engine starten“.");
+      if(!ok)throw Error("Serhat Engine ist offline.");
     }
+
     const text=$("#text").value.trim();
     if(!text)throw Error("Bitte zuerst einen Text eingeben.");
     const analysis=analyze(text);
-    const r=await localRequest("/generate",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({text,prepared:analysis.prepared,voice:"Serhat",format:"wav"})
-    });
+
+    await waitForModel(btns);
+    btns.forEach(b=>b.textContent="Stimme wird erzeugt …");
+    setMessage("Serhat-Stimme wird erzeugt …","warn");
+
+    progressTimer=setInterval(async()=>{
+      const st=await getEngineStatus();
+      if(!st)return;
+      if(st.render_state==="rendering"){
+        const pct=Number(st.progress||0);
+        btns.forEach(b=>b.textContent="Erzeugen "+pct+" %");
+        setMessage(st.message||("Audio wird erzeugt · "+pct+" %"),"warn");
+      }else if(st.render_state==="error"&&st.last_error){
+        setMessage("Renderfehler: "+st.last_error);
+      }
+    },900);
+
+    const controller=new AbortController();
+    const timeout=setTimeout(()=>controller.abort(),15*60*1000);
+    let r;
+    try{
+      r=await localRequest("/generate",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({text,prepared:analysis.prepared,voice:"Serhat",format:"wav"}),
+        signal:controller.signal
+      });
+    }finally{
+      clearTimeout(timeout);
+    }
+
     if(!r.ok){
       let e={};
       try{e=await r.json()}catch{}
-      throw Error(e.error||("Audio-Fehler HTTP "+r.status));
+      const detail=e?.status?.last_error||e.error||("Audio-Fehler HTTP "+r.status);
+      throw Error(detail);
     }
+
     const blob=await r.blob();
     if(!blob.size)throw Error("Die Engine hat eine leere Audiodatei geliefert.");
+
     const url=URL.createObjectURL(blob);
     lastAudio=url;
     $("#player").src=url;
@@ -689,13 +775,18 @@ async function generate(){
     $("#qaLocked").textContent="anhören & bestätigen";
     $("#qaLocked").className="warn";
     updateQA();
-    setMessage("Audio wurde mit deiner Serhat-Stimme erzeugt. Bitte anhören und die Aussprache bestätigen.","good");
+    setMessage("Audio fertig. Bitte anhören und die Aussprache bestätigen.","good");
     $("#player").play().catch(()=>{});
     $("#playerWrap").scrollIntoView({behavior:"smooth",block:"nearest"});
   }catch(e){
-    setMessage(e.message||String(e));
+    const msg=e?.name==="AbortError"
+      ?"Audio-Erzeugung wurde nach 15 Minuten abgebrochen. Bitte Engine-Protokoll prüfen."
+      :(e.message||String(e));
+    setMessage(msg);
   }finally{
+    if(progressTimer)clearInterval(progressTimer);
     btns.forEach((b,i)=>{b.disabled=false;b.textContent=old[i]});
+    checkHealth({quiet:true});
   }
 }
 function confirmQA(){
@@ -770,6 +861,7 @@ if(IS_LOCAL){
 }
 loadLibrary();
 checkHealth({quiet:true});
+setInterval(()=>checkHealth({quiet:true}),5000);
 </script>
 </body>
 </html>

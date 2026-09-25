@@ -1,6 +1,6 @@
 {
-  "version": "1.4.2",
-  "updatedAt": "2026-09-25T12:20:00+02:00",
+  "version": "1.5.0",
+  "updatedAt": "2026-09-25T13:08:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "local-chatterbox-v3",
   "provider": "self-produced",
@@ -19,5 +19,10 @@
   "macAppRuntime": "native WKWebView + local Chatterbox engine",
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
-  "setupSource": "github-raw"
+  "setupSource": "github-raw",
+  "engineVersion": "render-status-v2",
+  "modelWarmup": true,
+  "mpsFallback": true,
+  "renderProgress": true,
+  "renderTimeoutMinutes": 15
 }

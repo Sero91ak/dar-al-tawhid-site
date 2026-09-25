@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import json, os, re, subprocess, threading, uuid
+import gc, json, os, re, subprocess, threading, time, traceback, uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
+
+# Apple-Silicon: unsupported MPS ops dürfen auf CPU zurückfallen statt den Render abzubrechen.
+os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
 
 APP_HOME=Path(os.environ.get("DAR_VOICE_APP_HOME",str(Path.home()/"Applications"/"DAR-Voice-Studio"))).expanduser()
 PRON=APP_HOME/"pronunciation-rules.json"
@@ -16,15 +19,45 @@ else:
     _adobe=VOICE_HOME/"Serhat_Adobe_MASTER.wav"
     _final=VOICE_HOME/"Serhat_FINAL_REF.wav"
     REF=_adobe if _adobe.exists() else _final
+
 HOST="127.0.0.1"
 PORT=8787
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
+
 LIB=json.load(PRON.open(encoding="utf-8"))
 VOICE_PROFILE=json.load(PROFILE.open(encoding="utf-8"))
 RULES=sorted(LIB.get("rules",[]),key=lambda r:len(str(r.get("string_to_replace",""))),reverse=True)
+
 MODEL=None
+MODEL_DEVICE=None
 MODEL_LOCK=threading.Lock()
+RENDER_LOCK=threading.Lock()
+STATUS_LOCK=threading.Lock()
+STATUS={
+    "model_state":"not_loaded",
+    "model_device":None,
+    "render_state":"idle",
+    "progress":0,
+    "message":"Engine gestartet",
+    "last_error":"",
+    "last_output":"",
+    "model_loaded_at":None,
+    "render_started_at":None,
+    "render_finished_at":None,
+}
+
+def set_status(**updates):
+    with STATUS_LOCK:
+        STATUS.update(updates)
+
+def get_status():
+    with STATUS_LOCK:
+        out=dict(STATUS)
+    out["reference"]=str(REF)
+    out["reference_exists"]=REF.exists()
+    out["output_dir"]=str(OUTPUT)
+    return out
 
 def prepare(text:str):
     pos=0;out=[];found=[]
@@ -46,36 +79,226 @@ def quran_guard(text:str):
     if arabic>=24 and arabic/max(1,len(text))>.22:
         raise ValueError("Qurʾān-/Rezitationsaudio wird nicht synthetisch erzeugt. Verwende dafür echte Rezitation.")
 
-def load_model():
-    global MODEL
-    if MODEL is not None:return MODEL
+def choose_device():
+    forced=str(os.environ.get("DAR_VOICE_DEVICE","")).strip().lower()
+    if forced in ("mps","cpu"):
+        return forced
+    import torch
+    return "mps" if torch.backends.mps.is_available() else "cpu"
+
+def load_model(force_device=None):
+    global MODEL, MODEL_DEVICE
+    target=force_device or choose_device()
+    if MODEL is not None and MODEL_DEVICE==target:
+        return MODEL
+
     with MODEL_LOCK:
-        if MODEL is not None:return MODEL
-        import torch
-        from chatterbox.mtl_tts import ChatterboxMultilingualTTS
-        device="mps" if torch.backends.mps.is_available() else "cpu"
-        MODEL=ChatterboxMultilingualTTS.from_pretrained(device=device,t3_model="v3")
-    return MODEL
+        if MODEL is not None and MODEL_DEVICE==target:
+            return MODEL
+
+        set_status(model_state="loading",model_device=target,message=f"Chatterbox V3 wird auf {target.upper()} geladen …",last_error="")
+        try:
+            import torch
+            from chatterbox.mtl_tts import ChatterboxMultilingualTTS
+            # Beim Gerätewechsel altes Modell freigeben.
+            if MODEL is not None:
+                MODEL=None
+                gc.collect()
+                if torch.backends.mps.is_available():
+                    try: torch.mps.empty_cache()
+                    except Exception: pass
+
+            try:
+                model=ChatterboxMultilingualTTS.from_pretrained(device=target,t3_model="v3")
+            except TypeError:
+                # Kompatibilität mit Chatterbox-Versionen ohne t3_model-Parameter.
+                model=ChatterboxMultilingualTTS.from_pretrained(device=target)
+
+            MODEL=model
+            MODEL_DEVICE=target
+            set_status(
+                model_state="ready",
+                model_device=target,
+                model_loaded_at=time.time(),
+                message=f"Chatterbox V3 auf {target.upper()} bereit",
+                last_error=""
+            )
+            return MODEL
+        except Exception as e:
+            MODEL=None
+            MODEL_DEVICE=None
+            detail=f"{type(e).__name__}: {e}"
+            set_status(model_state="error",message="Modell konnte nicht geladen werden",last_error=detail)
+            print("[DĀR Voice] MODEL ERROR",detail,flush=True)
+            traceback.print_exc()
+            raise
+
+def warm_model():
+    try:
+        load_model()
+    except Exception:
+        pass
+
+def split_chunks(text:str,max_chars:int=280):
+    text=re.sub(r"\s+"," ",text).strip()
+    if len(text)<=max_chars:
+        return [text] if text else []
+    pieces=re.split(r"(?<=[.!?…])\s+",text)
+    chunks=[];current=""
+    for piece in pieces:
+        if len(piece)>max_chars:
+            words=piece.split()
+            for word in words:
+                candidate=(current+" "+word).strip()
+                if current and len(candidate)>max_chars:
+                    chunks.append(current);current=word
+                else:
+                    current=candidate
+            continue
+        candidate=(current+" "+piece).strip()
+        if current and len(candidate)>max_chars:
+            chunks.append(current);current=piece
+        else:
+            current=candidate
+    if current:chunks.append(current)
+    return [c for c in chunks if c.strip()]
+
+def render_with_model(model,text:str):
+    import torch
+    kwargs=dict(
+        language_id="de",
+        audio_prompt_path=str(REF),
+        exaggeration=0.22,
+        cfg_weight=0.30,
+        temperature=0.55
+    )
+    with torch.inference_mode():
+        return model.generate(text,**kwargs)
+
+def save_wav(path:Path,wav,sr:int):
+    tensor=wav.detach().float().cpu()
+    if tensor.ndim==1:
+        tensor=tensor.unsqueeze(0)
+    try:
+        import torchaudio as ta
+        ta.save(str(path),tensor,sr)
+        return
+    except Exception as first:
+        print("[DĀR Voice] torchaudio.save fallback:",first,flush=True)
+
+    # Robuster Fallback ohne TorchCodec/torchaudio-Backend.
+    import numpy as np, wave
+    arr=tensor.squeeze(0).numpy()
+    arr=np.nan_to_num(arr,nan=0.0,posinf=0.0,neginf=0.0)
+    peak=float(np.max(np.abs(arr))) if arr.size else 1.0
+    if peak>1.0: arr=arr/peak
+    pcm=(np.clip(arr,-1.0,1.0)*32767.0).astype(np.int16)
+    with wave.open(str(path),"wb") as wf:
+        wf.setnchannels(1)
+        wf.setsampwidth(2)
+        wf.setframerate(int(sr))
+        wf.writeframes(pcm.tobytes())
 
 def postprocess(src:Path):
     if subprocess.run(["/usr/bin/env","bash","-lc","command -v ffmpeg"],capture_output=True).returncode!=0:
         return src
     dst=src.with_name(src.stem+"_master.wav")
     filt="highpass=f=65,acompressor=threshold=-18dB:ratio=2.2:attack=15:release=180,alimiter=limit=0.95,loudnorm=I=-16:TP=-1.5:LRA=7"
-    p=subprocess.run(["ffmpeg","-y","-i",str(src),"-af",filt,str(dst)],capture_output=True)
-    return dst if p.returncode==0 and dst.exists() else src
+    p=subprocess.run(["ffmpeg","-y","-i",str(src),"-af",filt,str(dst)],capture_output=True,text=True)
+    if p.returncode==0 and dst.exists() and dst.stat().st_size>44:
+        return dst
+    if p.stderr:
+        print("[DĀR Voice] ffmpeg fallback:",p.stderr[-1200:],flush=True)
+    return src
 
 def generate(text:str,prepared:str=""):
     quran_guard(text)
-    if not REF.exists():raise RuntimeError("Referenzstimme fehlt: "+str(REF))
+    if not REF.exists():
+        raise RuntimeError("Referenzstimme fehlt: "+str(REF))
+
     speak=prepared.strip() if prepared.strip() else prepare(text)[0]
-    import torch,torchaudio as ta
-    model=load_model()
-    torch.manual_seed(2026)
-    wav=model.generate(speak,language_id="de",audio_prompt_path=str(REF),exaggeration=0.22,cfg_weight=0.30,temperature=0.55)
-    raw=OUTPUT/f"dar_voice_{uuid.uuid4().hex[:10]}.wav"
-    ta.save(str(raw),wav.cpu(),model.sr)
-    return postprocess(raw)
+    chunks=split_chunks(speak)
+    if not chunks:
+        raise ValueError("Sprechtext ist leer.")
+
+    if not RENDER_LOCK.acquire(blocking=False):
+        raise RuntimeError("Es läuft bereits eine Audio-Erzeugung.")
+
+    set_status(
+        render_state="rendering",
+        progress=1,
+        render_started_at=time.time(),
+        render_finished_at=None,
+        last_error="",
+        message="Audio wird vorbereitet …"
+    )
+
+    try:
+        import torch
+        model=load_model()
+        outputs=[]
+        total=len(chunks)
+
+        for idx,chunk in enumerate(chunks,1):
+            pct=8+int(((idx-1)/max(1,total))*78)
+            set_status(progress=pct,message=f"Abschnitt {idx}/{total} wird gesprochen …")
+            torch.manual_seed(2026+idx-1)
+            try:
+                wav=render_with_model(model,chunk)
+            except Exception as first_error:
+                # Bei MPS-Problemen einmal sauber auf CPU wiederholen.
+                if MODEL_DEVICE=="mps":
+                    print("[DĀR Voice] MPS render failed, retry CPU:",first_error,flush=True)
+                    set_status(message="MPS-Fallback: Render wird auf CPU wiederholt …")
+                    model=load_model(force_device="cpu")
+                    wav=render_with_model(model,chunk)
+                else:
+                    raise
+            outputs.append(wav.detach().float().cpu())
+
+        if len(outputs)==1:
+            full=outputs[0]
+        else:
+            sr=int(model.sr)
+            silence=torch.zeros((1,int(sr*0.18)),dtype=outputs[0].dtype)
+            joined=[]
+            for i,w in enumerate(outputs):
+                if w.ndim==1:w=w.unsqueeze(0)
+                joined.append(w)
+                if i<len(outputs)-1:joined.append(silence)
+            full=torch.cat(joined,dim=-1)
+
+        set_status(progress=90,message="WAV wird gespeichert …")
+        raw=OUTPUT/f"dar_voice_{uuid.uuid4().hex[:10]}.wav"
+        save_wav(raw,full,int(model.sr))
+        if not raw.exists() or raw.stat().st_size<=44:
+            raise RuntimeError("WAV-Datei wurde nicht korrekt geschrieben.")
+
+        set_status(progress=95,message="Audio-Mastering läuft …")
+        out=postprocess(raw)
+        set_status(
+            render_state="done",
+            progress=100,
+            message="Audio fertig",
+            last_output=str(out),
+            render_finished_at=time.time(),
+            last_error=""
+        )
+        return out
+    except Exception as e:
+        detail=f"{type(e).__name__}: {e}"
+        set_status(
+            render_state="error",
+            progress=0,
+            message="Audio-Erzeugung fehlgeschlagen",
+            last_error=detail,
+            render_finished_at=time.time()
+        )
+        print("[DĀR Voice] GENERATE ERROR",detail,flush=True)
+        traceback.print_exc()
+        raise
+    finally:
+        RENDER_LOCK.release()
 
 class H(BaseHTTPRequestHandler):
     def cors(self):
@@ -87,14 +310,17 @@ class H(BaseHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Methods","GET,POST,OPTIONS")
         self.send_header("Access-Control-Allow-Private-Network","true")
         self.send_header("Cache-Control","no-store")
+
     def send_json(self,status,obj):
         b=json.dumps(obj,ensure_ascii=False).encode()
         self.send_response(status)
         self.send_header("Content-Type","application/json; charset=utf-8")
         self.send_header("Content-Length",str(len(b)))
         self.cors();self.end_headers();self.wfile.write(b)
+
     def do_OPTIONS(self):
         self.send_response(204);self.cors();self.end_headers()
+
     def send_file(self,path:Path,content_type:str):
         if not path.exists():
             return self.send_json(404,{"error":"file not found"})
@@ -109,8 +335,22 @@ class H(BaseHTTPRequestHandler):
     def do_GET(self):
         p=urlparse(self.path).path
         if p=="/health":
+            st=get_status()
             ok=REF.exists()
-            self.send_json(200,{"ok":ok,"provider":"Chatterbox Multilingual V3","reference_exists":ok,"library":LIB.get("counts",{}),"profile":VOICE_PROFILE.get("delivery",{})})
+            self.send_json(200,{
+                "ok":ok,
+                "provider":"Chatterbox Multilingual V3",
+                "reference_exists":ok,
+                "model_state":st["model_state"],
+                "model_device":st["model_device"],
+                "render_state":st["render_state"],
+                "progress":st["progress"],
+                "last_error":st["last_error"],
+                "library":LIB.get("counts",{}),
+                "profile":VOICE_PROFILE.get("delivery",{})
+            })
+        elif p=="/status":
+            self.send_json(200,{"ok":True,**get_status()})
         elif p in ("/studio","/studio/","/studio/index.html"):
             self.send_file(APP_HOME/"studio.html","text/html; charset=utf-8")
         elif p=="/data/pronunciation/pronunciation-rules.json":
@@ -122,15 +362,22 @@ class H(BaseHTTPRequestHandler):
         elif p in ("/app-icon-192.png","/app-icon-512.png"):
             self.send_file(APP_HOME/"app-icon-512.png","image/png")
         elif p=="/":
-            self.send_response(302)
-            self.send_header("Location","/studio/")
-            self.end_headers()
-        else:self.send_json(404,{"error":"not found"})
+            self.send_response(302);self.send_header("Location","/studio/");self.end_headers()
+        else:
+            self.send_json(404,{"error":"not found"})
+
     def do_POST(self):
         p=urlparse(self.path).path
         n=int(self.headers.get("Content-Length","0") or 0)
         try:data=json.loads(self.rfile.read(n) or b"{}")
         except Exception:return self.send_json(400,{"error":"Ungültiges JSON"})
+
+        if p=="/warmup":
+            st=get_status()
+            if st["model_state"] not in ("loading","ready"):
+                threading.Thread(target=warm_model,daemon=True).start()
+            return self.send_json(202,{"ok":True,**get_status()})
+
         if p=="/generate":
             try:
                 text=str(data.get("text","")).strip()
@@ -143,12 +390,20 @@ class H(BaseHTTPRequestHandler):
                 self.send_header("Content-Length",str(len(b)))
                 self.send_header("Content-Disposition",'inline; filename="dar-serhat-voice.wav"')
                 self.cors();self.end_headers();self.wfile.write(b)
-            except Exception as e:return self.send_json(500,{"error":str(e)})
-        else:self.send_json(404,{"error":"not found"})
+            except RuntimeError as e:
+                status=409 if "bereits" in str(e) else 500
+                return self.send_json(status,{"error":str(e),"status":get_status()})
+            except Exception as e:
+                return self.send_json(500,{"error":str(e),"status":get_status()})
+        else:
+            self.send_json(404,{"error":"not found"})
+
     def log_message(self,fmt,*args):
-        print("[DĀR Voice]",fmt%args)
+        print("[DĀR Voice]",fmt%args,flush=True)
 
 if __name__=="__main__":
-    print("DĀR Voice Engine http://127.0.0.1:8787")
-    print("Referenz:",REF)
+    print("DĀR Voice Engine http://127.0.0.1:8787",flush=True)
+    print("Referenz:",REF,flush=True)
+    # Modell im Hintergrund vorladen; HTTP bleibt sofort erreichbar.
+    threading.Thread(target=warm_model,daemon=True).start()
     ThreadingHTTPServer((HOST,PORT),H).serve_forever()

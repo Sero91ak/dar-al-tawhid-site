@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SITE="https://dar-al-tawhid.de"
-RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/cc1e05084fe2896cd65bae167abc3253fa7d05ff"
+RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main"
 TARGET="$HOME/Applications/DAR-Voice-Studio"
 VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
@@ -22,12 +22,12 @@ say_status() {
 say_status "DĀR Voice Studio wird eingerichtet …"
 
 # Aktuelle Studio-Dateien lokal spiegeln.
-curl -fsSL "$RAW/voice-studio/local-engine.py?native=142" -o "$TARGET/local-engine.py"
-curl -fsSL "$RAW/voice-studio/index.html?native=142" -o "$TARGET/studio.html"
-curl -fsSL "$RAW/data/pronunciation/pronunciation-rules.json?native=142" -o "$TARGET/pronunciation-rules.json"
-curl -fsSL "$RAW/data/pronunciation/voice-production-profile.json?native=142" -o "$TARGET/voice-production-profile.json"
-curl -fsSL "$RAW/watermark-my-logo-full.png?native=142" -o "$TARGET/watermark-my-logo-full.png" || true
-curl -fsSL "$RAW/app-icon-512.png?native=142" -o "$TARGET/app-icon-512.png" || true
+curl -fsSL "$RAW/voice-studio/local-engine.py?native=150" -o "$TARGET/local-engine.py"
+curl -fsSL "$RAW/voice-studio/index.html?native=150" -o "$TARGET/studio.html"
+curl -fsSL "$RAW/data/pronunciation/pronunciation-rules.json?native=150" -o "$TARGET/pronunciation-rules.json"
+curl -fsSL "$RAW/data/pronunciation/voice-production-profile.json?native=150" -o "$TARGET/voice-production-profile.json"
+curl -fsSL "$RAW/watermark-my-logo-full.png?native=150" -o "$TARGET/watermark-my-logo-full.png" || true
+curl -fsSL "$RAW/app-icon-512.png?native=150" -o "$TARGET/app-icon-512.png" || true
 
 # Vorhandene Stimmreferenz bevorzugen.
 REF="$VOICE_HOME/Serhat_Adobe_MASTER.wav"
@@ -115,6 +115,7 @@ cat > "$LAUNCH" <<PLIST
   <dict>
     <key>DAR_VOICE_APP_HOME</key><string>$TARGET</string>
     <key>SERHAT_VOICE_REF</key><string>$REF</string>
+    <key>PYTORCH_ENABLE_MPS_FALLBACK</key><string>1</string>
   </dict>
   <key>RunAtLoad</key><true/>
   <key>KeepAlive</key><true/>
