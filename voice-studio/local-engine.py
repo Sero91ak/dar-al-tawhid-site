@@ -117,6 +117,14 @@ class H(BaseHTTPRequestHandler):
             self.send_file(PRON,"application/json; charset=utf-8")
         elif p=="/data/pronunciation/voice-production-profile.json":
             self.send_file(PROFILE,"application/json; charset=utf-8")
+        elif p=="/watermark-my-logo-full.png":
+            self.send_file(APP_HOME/"watermark-my-logo-full.png","image/png")
+        elif p in ("/app-icon-192.png","/app-icon-512.png"):
+            self.send_file(APP_HOME/"app-icon-512.png","image/png")
+        elif p=="/":
+            self.send_response(302)
+            self.send_header("Location","/studio/")
+            self.end_headers()
         else:self.send_json(404,{"error":"not found"})
     def do_POST(self):
         p=urlparse(self.path).path

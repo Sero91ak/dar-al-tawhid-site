@@ -11,7 +11,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="DĀR Voice Studio">
 <meta name="description" content="Private Sprachproduktion für DĀR AL TAWḤĪD Kids">
-<link rel="manifest" href="manifest.webmanifest?v=9">
+<link rel="manifest" href="manifest.webmanifest?v=10">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="icon" href="/app-icon-192.png">
 <title>DĀR AL TAWḤĪD – Voice Studio</title>
@@ -470,14 +470,14 @@ input{
   <section id="engineSetupSection" class="side-section">
     <div class="side-title">Serhat Engine</div>
     <button id="startEngineBtn" class="btn primary" style="width:100%;margin-bottom:8px">Engine starten</button>
-    <button id="installEngineBtn" class="btn secondary" style="width:100%;margin-bottom:8px">Einmalig einrichten · Befehl kopieren</button>
+    <button id="installEngineBtn" class="btn secondary" style="width:100%;margin-bottom:8px">Mac-App installieren / aktualisieren</button>
     <div id="setupCommandWrap" style="display:none;margin-bottom:8px">
-      <label for="setupCommand">Terminal-Befehl</label>
-      <textarea id="setupCommand" readonly spellcheck="false" style="height:86px;min-height:86px;resize:none;font-size:11px;line-height:1.4;padding:10px">curl -fsSL 'https://dar-al-tawhid.de/voice-studio/install-mac.command?setup=9' | /bin/bash</textarea>
-      <div class="notice" style="margin-top:6px">Terminal öffnen → Befehl einfügen → Enter. Deine vorhandene SerhatVoice-Umgebung wird verwendet; keine neue Voice-App und kein Gatekeeper-Download.</div>
+      <label for="setupCommand">Einmaliger Installationsbefehl</label>
+      <textarea id="setupCommand" readonly spellcheck="false" style="height:86px;min-height:86px;resize:none;font-size:11px;line-height:1.4;padding:10px">curl -fsSL 'https://dar-al-tawhid.de/voice-studio/install-mac.command?setup=10' | /bin/bash</textarea>
+      <div class="notice" style="margin-top:6px">Einmal im Terminal ausführen. Danach findest du „DĀR Voice Studio“ als eigenständige Mac-App unter ~/Applications und kannst sie über Spotlight/Launchpad starten.</div>
     </div>
     <button id="healthBtn" class="btn quiet" style="width:100%;margin-top:8px">Verbindung erneut prüfen</button>
-    <div id="engineHelp" class="notice" style="margin-top:9px">Deine vorhandene Chatterbox-/SerhatVoice-Umgebung wird direkt verwendet. Einmal Terminal-Setup ausführen; danach startet die Engine automatisch mit dem Mac.</div>
+    <div id="engineHelp" class="notice" style="margin-top:9px">Installiert „DĀR Voice Studio“ als eigenständige Mac-App unter Programme. Danach arbeitest du ohne Safari oder Browserleiste; deine vorhandene SerhatVoice-/Chatterbox-Engine wird automatisch verwendet.</div>
   </section>
   <div id="error" class="bad" style="font-size:11px;line-height:1.5"></div>
 </aside>
@@ -762,7 +762,10 @@ if(IS_LOCAL){
     $("#installEngineBtn").style.display="none";
     $("#setupCommandWrap").style.display="none";
     $("#startEngineBtn").style.display="none";
-    $("#engineHelp").textContent="Lokales Produktionsstudio · Serhat Engine und Oberfläche laufen gemeinsam auf diesem Mac.";
+    const nativeMac=/DĀRVoiceStudioMac\/1\.0/.test(navigator.userAgent);
+    $("#engineHelp").textContent=nativeMac
+      ?"Native Mac-App · Serhat Engine und Studio laufen lokal auf diesem Mac."
+      :"Lokales Produktionsstudio · Für die eigenständige Mac-App einmal auf der Website „Mac-App installieren / aktualisieren“ ausführen.";
   }
 }
 loadLibrary();
