@@ -18,7 +18,8 @@ say_status() {
 
 say_status "Einrichtung wird vorbereitet …"
 
-curl -fsSL "$SITE/voice-studio/local-engine.py?setup=6" -o "$TARGET/local-engine.py"
+curl -fsSL "$SITE/voice-studio/local-engine.py?setup=7" -o "$TARGET/local-engine.py"
+curl -fsSL "$SITE/voice-studio/index.html?setup=7" -o "$TARGET/studio.html"
 curl -fsSL "$SITE/data/pronunciation/pronunciation-rules.json?setup=6" -o "$TARGET/pronunciation-rules.json"
 curl -fsSL "$SITE/data/pronunciation/voice-production-profile.json?setup=6" -o "$TARGET/voice-production-profile.json"
 
@@ -94,9 +95,10 @@ VENV="$HOME/SerhatVoice/.venv"
 URL="${1:-}"
 OPEN_STUDIO=1
 [ "$URL" = "--background" ] && OPEN_STUDIO=0
+curl -fsSL "https://dar-al-tawhid.de/voice-studio/index.html?local=latest" -o "$TARGET/studio.html.new" >/dev/null 2>&1 && mv "$TARGET/studio.html.new" "$TARGET/studio.html" || rm -f "$TARGET/studio.html.new"
 
 if curl -fsS --max-time 1 "http://127.0.0.1:8787/health" >/dev/null 2>&1; then
-  [ "$OPEN_STUDIO" = "1" ] && open "https://dar-al-tawhid.de/voice-studio/?engine=running"
+  [ "$OPEN_STUDIO" = "1" ] && open "http://127.0.0.1:8787/studio/"
   exit 0
 fi
 
@@ -111,7 +113,7 @@ nohup "$VENV/bin/python" "$TARGET/local-engine.py" >> "$TARGET/engine.log" 2>&1 
 for i in $(seq 1 30); do
   sleep 1
   if curl -fsS --max-time 1 "http://127.0.0.1:8787/health" >/dev/null 2>&1; then
-    [ "$OPEN_STUDIO" = "1" ] && open "https://dar-al-tawhid.de/voice-studio/?engine=running"
+    [ "$OPEN_STUDIO" = "1" ] && open "http://127.0.0.1:8787/studio/"
     exit 0
   fi
 done

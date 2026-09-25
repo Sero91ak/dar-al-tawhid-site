@@ -488,7 +488,8 @@ input{
 
 <script>
 const LOCKED=new Set(["DĀR AL TAWḤĪD","Dār al-Tawḥīd","Allāh","Qurʾān","Tawḥīd","ʿAqīdah","Ḥadīṯ","Ṣaḥābah","Duʿāʾ","Ṣalāh","Muḥammad","Ibrāhīm","Mūsā"]);
-const LOCAL_API="http://127.0.0.1:8787";
+const IS_LOCAL=location.hostname==="127.0.0.1"||location.hostname==="localhost";
+const LOCAL_API=IS_LOCAL?"":"http://127.0.0.1:8787";
 let library={rules:[]},buckets=new Map(),lastAudio=null,engineOK=false,qaConfirmed=false,deferredInstall=null;
 const $=s=>document.querySelector(s);
 
@@ -582,7 +583,7 @@ async function manualAnalyze(){
 }
 async function loadLibrary(){
   try{
-    const r=await fetch("/data/pronunciation/pronunciation-rules.json",{cache:"no-store"});
+    const r=await fetch(IS_LOCAL?"/data/pronunciation/pronunciation-rules.json":"/data/pronunciation/pronunciation-rules.json",{cache:"no-store"});
     if(!r.ok)throw Error("HTTP "+r.status);
     library=await r.json();
     buckets=buildBuckets(library.rules||[]);
@@ -628,6 +629,7 @@ async function checkHealth({quiet=false}={}){
   }
 }
 async function startEngine(){
+  if(IS_LOCAL){await checkHealth();return}
   setMessage("Serhat Engine wird gestartet …","warn");
   $("#startEngineBtn").disabled=true;
   try{ window.location.href="darvoice://start"; }catch(_){}
@@ -729,8 +731,16 @@ $("#installBtn").onclick=async()=>{
 };
 window.addEventListener("appinstalled",()=>{$("#installBtn").style.display="none"});
 
-if("serviceWorker" in navigator){
+if(!IS_LOCAL&&"serviceWorker" in navigator){
   window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js",{scope:"/voice-studio/"}).catch(()=>{}));
+}
+if(IS_LOCAL){
+  const setup=$("#engineSetupSection");
+  if(setup){
+    $("#installEngineBtn").style.display="none";
+    $("#startEngineBtn").style.display="none";
+    $("#engineHelp").textContent="Lokales Produktionsstudio · Serhat Engine und Oberfläche laufen gemeinsam auf diesem Mac.";
+  }
 }
 loadLibrary();
 checkHealth({quiet:true});

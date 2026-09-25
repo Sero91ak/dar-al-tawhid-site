@@ -95,11 +95,28 @@ class H(BaseHTTPRequestHandler):
         self.cors();self.end_headers();self.wfile.write(b)
     def do_OPTIONS(self):
         self.send_response(204);self.cors();self.end_headers()
+    def send_file(self,path:Path,content_type:str):
+        if not path.exists():
+            return self.send_json(404,{"error":"file not found"})
+        b=path.read_bytes()
+        self.send_response(200)
+        self.send_header("Content-Type",content_type)
+        self.send_header("Content-Length",str(len(b)))
+        self.send_header("Cache-Control","no-store")
+        self.end_headers()
+        self.wfile.write(b)
+
     def do_GET(self):
         p=urlparse(self.path).path
         if p=="/health":
             ok=REF.exists()
             self.send_json(200,{"ok":ok,"provider":"Chatterbox Multilingual V3","reference_exists":ok,"library":LIB.get("counts",{}),"profile":VOICE_PROFILE.get("delivery",{})})
+        elif p in ("/studio","/studio/","/studio/index.html"):
+            self.send_file(APP_HOME/"studio.html","text/html; charset=utf-8")
+        elif p=="/data/pronunciation/pronunciation-rules.json":
+            self.send_file(PRON,"application/json; charset=utf-8")
+        elif p=="/data/pronunciation/voice-production-profile.json":
+            self.send_file(PROFILE,"application/json; charset=utf-8")
         else:self.send_json(404,{"error":"not found"})
     def do_POST(self):
         p=urlparse(self.path).path

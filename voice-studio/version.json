@@ -1,10 +1,12 @@
 {
-  "version": "1.1.1",
-  "updatedAt": "2026-09-25T11:36:00+02:00",
+  "version": "1.2.0",
+  "updatedAt": "2026-09-25T11:42:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "local-chatterbox-v3",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v6",
   "localInstaller": "/voice-studio/install-mac.command",
-  "setupApp": "/voice-studio/DAR-Voice-Studio-Setup.app.zip"
+  "setupApp": "/voice-studio/DAR-Voice-Studio-Setup.app.zip",
+  "productionSurface": "local-http://127.0.0.1:8787/studio/",
+  "remoteSurface": "/voice-studio/"
 }
