@@ -18,9 +18,25 @@ export default {
       return env.ASSETS.fetch(new Request(testVersionUrl.toString(), request));
     }
 
+    // Kids-Haupteinstieg immer auf die kanonische /start-Oberfläche führen.
+    // Dadurch nutzt /test/kids/ exakt dieselbe App-Shell wie der funktionierende
+    // /test/kids/start-Aufruf und alte darsw-Cache-Buster können keine ältere
+    // Root-Darstellung mit abgesetzter unterer Safe-Area mehr festhalten.
+    if (url.pathname === "/test/kids" || url.pathname === "/test/kids/") {
+      const target = new URL(request.url);
+      target.pathname = "/test/kids/start";
+      target.searchParams.delete("darsw");
+      if (!target.searchParams.has("kv")) {
+        target.searchParams.set("kv", "kids-shell-v12-start1");
+      }
+      return Response.redirect(target.toString(), 307);
+    }
+
     const asset = await env.ASSETS.fetch(request);
     const path = url.pathname;
-    const bust = /\/test\/(index\.html)?$/.test(path)
+    const kidsPath = path === "/test/kids" || path.startsWith("/test/kids/");
+    const bust = kidsPath
+      || /\/test\/(index\.html)?$/.test(path)
       || /dar-quran-player\.(js|css)$/.test(path)
       || path.endsWith("/test/version.json")
       || path.endsWith("/test/service-worker.js");
