@@ -52,7 +52,9 @@ jobs:
               'id="qaProsody"',
               'id="qaArabicRef"',
               'id="qaTechnical"',
+              'id="qaCoreLock"',
               '"/analyze"',
+              '"/confirm-core-audio"',
               'style:$("#styleMode").value',
           ]
           missing=[x for x in required if x not in html]
