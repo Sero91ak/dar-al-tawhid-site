@@ -1118,7 +1118,7 @@ html,body{background:#06131f!important}
 
 /* HOME — clearer action hierarchy */
 #view-today .hero{
-  --art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=19");
+  --art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=22");
   min-height:clamp(292px,51vw,390px)!important;
   background:#102936!important;
 }
@@ -1440,7 +1440,7 @@ body{position:fixed!important;inset:0!important;touch-action:manipulation}
 .nav-btn[data-target="parents"] .ico{background-image:url("/test/kids/assets/kids-icons/parents-real-v12.png?v=1")!important}
 .picker-icon{background-image:url("/test/kids/assets/kids-icons/quran-real-v12.png?v=1")!important;background-size:76%!important}
 .icon-book{background-image:url("/test/kids/assets/kids-icons/quran-real-v12.png?v=1")!important}.icon-headphones,.icon-volume{background-image:url("/test/kids/assets/kids-icons/headphones-real-v12.png?v=1")!important}.icon-dua{background-image:url("/test/kids/assets/kids-icons/dua-real-v12.png?v=1")!important}.icon-star,.icon-spark{background-image:url("/test/kids/assets/kids-icons/spark-real-v12.png?v=1")!important}.icon-play{background-image:url("/test/kids/assets/kids-icons/play-real-v12.png?v=1")!important}.icon-mic{background-image:url("/test/kids/assets/kids-icons/mic-real-v12.png?v=1")!important}.icon-lock{background-image:url("/test/kids/assets/kids-icons/lock-real-v12.png?v=1")!important}.icon-moon{background-image:url("/test/kids/assets/kids-icons/moon-real-v12.png?v=1")!important}.icon-heart{background-image:url("/test/kids/assets/kids-icons/heart-real-v12.png?v=1")!important}.icon-library{background-image:url("/test/kids/assets/kids-icons/library-real-v12.png?v=1")!important}.icon-droplet{background-image:url("/test/kids/assets/kids-icons/water-real-v12.png?v=1")!important}.icon-cloud{background-image:url("/test/kids/assets/kids-icons/cloud-real-v12.png?v=1")!important}.icon-sun{background-image:url("/test/kids/assets/kids-icons/sun-real-v12.png?v=2")!important}.icon-settings,.icon-parents{background-image:url("/test/kids/assets/kids-icons/parents-real-v12.png?v=1")!important}.icon-home{background-image:url("/test/kids/assets/kids-icons/home-real-v12.png?v=1")!important}.icon-food{background-image:url("/test/kids/assets/kids-icons/food-real-v12.png?v=1")!important}.icon-speech{background-image:url("/test/kids/assets/kids-icons/speech-real-v12.png?v=1")!important}.icon-coin{background-image:url("/test/kids/assets/kids-icons/coin-real-v12.png?v=1")!important}.icon-palm{background-image:url("/test/kids/assets/kids-icons/palm-real-v12.png?v=1")!important}.icon-help{background-image:url("/test/kids/assets/kids-icons/help-real-v12.png?v=1")!important}.icon-door{background-image:url("/test/kids/assets/kids-icons/door-real-v12.png?v=1")!important}.icon-mosque{background-image:url("/test/kids/assets/kids-icons/mosque-real-v12.png?v=1")!important}.icon-shield{background-image:url("/test/kids/assets/kids-icons/shield-real-v12.png?v=1")!important}
-#view-today .hero{--art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=19")!important}
+#view-today .hero{--art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=22")!important}
 #view-today .hero::before{background-image:var(--art)!important;background-position:center!important;background-size:cover!important}
 /* KIDS_REAL_ASSET_ICON_FINAL_V11_END */
 
@@ -1884,7 +1884,7 @@ html,body{
   50%{transform:translateY(-12px) scale(1.08)}
 }
 #view-today .hero{
-  --art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=19")!important;
+  --art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=22")!important;
   display:flex;flex-direction:column;justify-content:flex-start;
   margin:calc(-1 * var(--safe-top)) -16px 0;
   width:calc(100% + 32px);
@@ -2082,6 +2082,76 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
   .kids-sky *,#view-today .wm-dar-svg,#view-today .wm-kids span,.kid-pop{animation:none!important}
 }
 
+
+/* KIDS_QURAN_KID_V22 — eine klare Lernstufe, keine doppelten Wörter, kindliche Knöpfe */
+#quranModal .modal-shell{
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  background:
+    radial-gradient(ellipse 80% 40% at 80% 0%,rgba(226,189,114,.16),transparent 55%),
+    linear-gradient(180deg,#0a1c2c 0%,#071522 100%)!important;
+}
+#quranModal .modal-title strong,#quranModal .modal-title small,
+#quranModal .lesson-step,#quranModal .learn-status,
+#quranModal .ayah-tr,#quranModal .ayah-de,#quranModal .ayah-no,
+#quranModal .big-play,#quranModal .big-speak,#quranModal .lesson-nav button,
+#quranModal .quran-mini-note{
+  font-family:"Fredoka",system-ui,sans-serif!important;letter-spacing:0!important
+}
+#quranModal #wordCoach{display:none!important}
+#quranModal .progress-dots{margin:4px 0 8px!important}
+#quranModal .lesson-steps{margin:0 0 10px!important;gap:8px!important}
+#quranModal .lesson-step{
+  min-height:40px!important;border-radius:18px!important;font-size:12px!important;font-weight:700!important
+}
+#quranModal .learn-status{
+  display:block!important;max-width:22em;margin:0 auto 10px!important;
+  border:0!important;background:rgba(255,255,255,.07)!important;color:#fff3cf!important
+}
+#quranModal .ayah-stage{padding:4px 6px 8px!important;align-items:center!important}
+#quranModal .ayah-ar{
+  font-size:clamp(34px,8.4vw,52px)!important;line-height:1.7!important;
+  max-width:16em;margin:0 auto!important
+}
+#quranModal .qword{padding:.06em .1em;border-radius:.3em}
+#quranModal .qword.current{
+  transform:none!important;
+  color:#102030!important;
+  background:#e2bd72!important;
+  box-shadow:none!important
+}
+#quranModal .qword.correct{color:#bff4d1!important;background:transparent!important}
+#quranModal .mic-monitor{display:none!important}
+#quranModal .mic-monitor.live,#quranModal .mic-monitor.error{display:block!important}
+#quranModal .ayah-tr{margin-top:12px!important;font-size:15px!important;font-weight:600!important}
+#quranModal .ayah-de{font-size:13px!important}
+#quranModal .ayah-no{display:none!important}
+#quranModal .main-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important}
+#quranModal .big-play,#quranModal .big-speak{
+  min-height:56px!important;max-width:none!important;width:100%!important;
+  border-radius:22px!important;font-size:18px!important;font-weight:700!important
+}
+#quranModal .lesson-nav{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important}
+#quranModal .lesson-nav button{
+  min-height:44px!important;max-width:none!important;width:100%!important;
+  border-radius:18px!important;font-size:14px!important
+}
+#quranModal .quran-mini-note{font-size:12px!important;line-height:1.4!important;color:rgba(255,255,255,.55)!important}
+.app[data-age="4–5"] #quranModal .ayah-tr,
+.app[data-age="4–5"] #quranModal .ayah-de,
+.app[data-age="4–5"] #quranModal .ayah-no,
+.app[data-age="4–5"] #quranModal .quran-mini-note,
+.app[data-age="4–5"] #quranModal .progress-dots{display:none!important}
+.app[data-age="4–5"] #quranModal .ayah-ar{font-size:clamp(40px,11vw,64px)!important}
+.app[data-age="4–5"] #quranModal .lesson-step{font-size:13px!important;min-height:44px!important}
+.app[data-age="4–5"] #quranModal .big-play,
+.app[data-age="4–5"] #quranModal .big-speak{min-height:62px!important;font-size:20px!important}
+.app[data-age="6–8"] #quranModal .ayah-de{display:none!important}
+.app[data-age="9–10"] #quranModal #wordCoach{display:block!important;margin:0 auto 10px!important}
+#view-quran .page-head h2,#view-quran .page-head p,#view-quran .quran-hero h3,#view-quran .quran-hero p{
+  font-family:"Fredoka",system-ui,sans-serif!important
+}
+#view-quran .quran-hero{min-height:168px!important;border:0!important;border-radius:26px!important}
+
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&display=swap">
 </head>
@@ -2146,7 +2216,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon">KIDS · V0.22</div>
+  <div class="dev-ribbon">KIDS · V0.23</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2565,7 +2635,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab21";
+const KIDS_BUILD_ID="kids-shell-v12-tab22";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
