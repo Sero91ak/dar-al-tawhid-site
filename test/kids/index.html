@@ -2071,6 +2071,11 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 .kids-join .step{display:none}
 .kids-join .step.on{display:block}
 .profile-list{display:grid;gap:8px;margin-top:8px}
+.profile-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
+.profile-ask{display:grid;gap:8px;margin-top:10px}
+.profile-ask[hidden]{display:none}
+.profile-ask button,.kids-join .ghost{min-height:46px;border-radius:14px}
+
 .profile-list button{text-align:left;border-radius:14px;min-height:46px;border:0;background:rgba(255,255,255,.06);color:#fff;padding:8px 12px}
 
 @media(prefers-reduced-motion:reduce){
@@ -2129,12 +2134,13 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
     </div>
     <div class="step" data-step="name">
       <h2>Name merken</h2>
-      <p>Für Eltern: Name und Passwort bleiben nur auf diesem Gerät, als Prüfsumme, nicht als Klartext und nicht auf einem Server. So kann hier das Kind wechseln und später weitermachen.</p>
+      <p>Der Anmeldename wird intern gemerkt und kann nicht doppelt vergeben werden. Das Passwort geht nur als Prüfsumme mit.</p>
       <input id="joinName" maxlength="24" placeholder="Name des Kindes" autocomplete="off">
       <input id="joinPass" type="password" maxlength="40" placeholder="Passwort" autocomplete="new-password">
       <button type="button" id="joinSave">Kinderwelt öffnen</button>
       <button type="button" class="ghost" data-back="place" style="margin-top:8px;width:100%">Zurück</button>
     </div>
+      <button type="button" id="joinCancel" class="ghost" style="display:none;margin-top:10px;width:100%">Abbrechen</button>
   </div>
 </div>
 
@@ -2375,9 +2381,16 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
       <div class="parent-card" id="profileCard">
         <div class="label-row"><strong>Kinder auf diesem Gerät</strong><span style="color:var(--gold);font-size:12px">OHNE E-MAIL</span></div>
-        <p class="parent-note">Jedes Kind hat einen Namen und ein Passwort. Der Stand bleibt auf diesem Smartphone. Ein anderes Gerät hat seinen eigenen Stand. Nichts wird an uns geschickt.</p>
+        <p class="parent-note">Jeder Anmeldename gibt es nur einmal. Das Passwort wird nur als Prüfsumme gespeichert. Nur auf diesem Gerät entfernen lässt den Namen weiter gültig, damit man sich auf einem anderen Gerät anmelden kann. Komplett löschen sperrt den Namen dauerhaft.</p>
         <div id="profileList" class="profile-list"></div>
+        <div id="profileAsk" class="profile-ask" hidden>
+          <p id="profileAskText" class="parent-note"></p>
+          <button type="button" id="profileAskDevice">Nur auf diesem Gerät</button>
+          <button type="button" id="profileAskFull" class="ghost">Konto komplett löschen</button>
+          <button type="button" id="profileAskCancel" class="ghost">Abbrechen</button>
+        </div>
         <button type="button" id="profileAdd" class="daily-start" style="margin-top:10px">Weiteres Kind</button>
+        <button type="button" id="profileBring" class="ghost" style="margin-top:8px;width:100%">Vorhandenes Kind anmelden</button>
       </div>
 
     </section>
@@ -2552,7 +2565,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab19";
+const KIDS_BUILD_ID="kids-shell-v12-tab20";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -4685,14 +4698,20 @@ fetchCatalog();
 (function(){
   var KEY="kids.profiles.v1";
   var ACTIVE="kids.activeProfile";
+  var API="https://djyfkttjbdraynuxrzno.supabase.co/rest/v1/rpc/";
+  var APIKEY="sb_publishable_kR6b1SlL3uoVq4gbTFWKkQ_a2Rcfg2i";
   var join=document.getElementById("kidsJoin");
   var draft={gender:"boy",age:"6–8"};
+  var askId="";
   function load(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return []}}
   function save(list){localStorage.setItem(KEY,JSON.stringify(list))}
   function hash(pw){
     return crypto.subtle.digest("SHA-256",new TextEncoder().encode("dar-kids:"+pw)).then(function(buf){
       return Array.from(new Uint8Array(buf)).map(function(b){return ("0"+b.toString(16)).slice(-2)}).join("");
     });
+  }
+  function rpc(name,body){
+    return fetch(API+name,{method:"POST",headers:{"Content-Type":"application/json","apikey":APIKEY,"Authorization":"Bearer "+APIKEY},body:JSON.stringify(body)}).then(function(r){return r.json()}).catch(function(){return {ok:false,error:"Keine Verbindung. Bitte später noch einmal."}});
   }
   function bag(){
     var o={},i,k;
@@ -4723,46 +4742,81 @@ fetchCatalog();
   }
   function openJoin(from){
     join.classList.add("open");
+    var cancel=document.getElementById("joinCancel");
+    if(cancel)cancel.style.display=localStorage.getItem(ACTIVE)?"block":"none";
     step(from||"hello");
   }
   function closeJoin(){join.classList.remove("open")}
-  function rememberCurrent(){
+  function currentProfile(){
     var id=localStorage.getItem(ACTIVE);
-    if(!id)return;
-    var list=load();
-    var p=list.find(function(x){return x.id===id});
+    return load().find(function(x){return x.id===id})||null;
+  }
+  function rememberCurrent(){
+    var p=currentProfile();
     if(!p)return;
     p.data=bag();
     var app=document.querySelector(".app");
     p.gender=app&&app.getAttribute("data-gender")||p.gender;
     p.age=localStorage.getItem("kids.age")||p.age;
+    var list=load().map(function(x){return x.id===p.id?p:x});
     save(list);
+    if(p.pass)rpc("kids_save",{p_name:p.name,p_hash:p.pass,p_data:p.data,p_gender:p.gender,p_age:p.age});
   }
   function renderList(){
     var box=document.getElementById("profileList");
     if(!box)return;
     var cur=localStorage.getItem(ACTIVE);
-    box.innerHTML=load().map(function(p){
-      return '<button type="button" data-profile="'+p.id+'">'+(p.name||"Kind")+(p.id===cur?" · jetzt":"")+"</button>";
-    }).join("")||"<p class=\"parent-note\">Noch kein Kind gespeichert.</p>";
+    var rows=load();
+    box.innerHTML=rows.map(function(p){
+      return '<div class="profile-row"><button type="button" data-profile="'+p.id+'">'+(p.name||"Kind")+(p.id===cur?" · jetzt":"")+'</button><button type="button" class="ghost" data-del="'+p.id+'">Löschen</button></div>';
+    }).join("")||"<p class=\"parent-note\">Noch kein Kind auf diesem Gerät.</p>";
     box.querySelectorAll("[data-profile]").forEach(function(b){
       b.addEventListener("click",function(){switchTo(b.getAttribute("data-profile"))});
     });
+    box.querySelectorAll("[data-del]").forEach(function(b){
+      b.addEventListener("click",function(){openAsk(b.getAttribute("data-del"))});
+    });
+  }
+  function openAsk(id){
+    askId=id;
+    var p=load().find(function(x){return x.id===id});
+    var box=document.getElementById("profileAsk");
+    var text=document.getElementById("profileAskText");
+    if(!box||!p)return;
+    if(text)text.textContent=p.name+": Nur auf diesem Gerät entfernen, oder das Konto komplett löschen? Komplett bleibt der Name gesperrt und ist danach nicht mehr frei.";
+    box.hidden=false;
+  }
+  function removeLocal(id){
+    var list=load().filter(function(x){return x.id!==id});
+    save(list);
+    if(localStorage.getItem(ACTIVE)===id){
+      if(list[0])localStorage.setItem(ACTIVE,list[0].id);
+      else localStorage.removeItem(ACTIVE);
+    }
   }
   function switchTo(id){
-    var list=load();
-    var p=list.find(function(x){return x.id===id});
+    var p=load().find(function(x){return x.id===id});
     if(!p)return;
     var pw=window.prompt("Passwort für "+p.name);
     if(!pw)return;
     hash(pw).then(function(h){
-      if(h!==p.pass){window.alert("Das Passwort passt nicht.");return}
+      if(p.pass&&h!==p.pass){window.alert("Das Passwort passt nicht.");return}
       rememberCurrent();
-      applyBag(p.data||{});
-      localStorage.setItem(ACTIVE,p.id);
-      applyProfile(p);
-      renderList();
-      location.reload();
+      rpc("kids_login",{p_name:p.name,p_hash:h}).then(function(res){
+        if(res&&res.ok){
+          applyBag(res.data||{});
+          p.pass=h;p.gender=res.gender||p.gender;p.age=res.age||p.age;p.data=res.data||{};
+          save(load().map(function(x){return x.id===p.id?p:x}));
+        }else if(p.pass&&h===p.pass){
+          applyBag(p.data||{});
+        }else{
+          window.alert((res&&res.error)||"Anmeldung nicht möglich.");
+          return;
+        }
+        localStorage.setItem(ACTIVE,p.id);
+        applyProfile(p);
+        location.reload();
+      });
     });
   }
   document.getElementById("joinNextHello").addEventListener("click",function(){step("who")});
@@ -4778,34 +4832,91 @@ fetchCatalog();
     step("name");
   });
   document.getElementById("joinPlaceSkip").addEventListener("click",function(){step("name")});
+  var cancel=document.getElementById("joinCancel");
+  if(cancel)cancel.addEventListener("click",function(){if(localStorage.getItem(ACTIVE))closeJoin()});
   document.getElementById("joinSave").addEventListener("click",function(){
     var name=(document.getElementById("joinName").value||"").trim();
     var pw=document.getElementById("joinPass").value||"";
     if(name.length<2||pw.length<4){window.alert("Name und ein Passwort mit mindestens 4 Zeichen.");return}
     hash(pw).then(function(h){
       rememberCurrent();
-      var app=document.querySelector(".app");
-      if(app)app.setAttribute("data-gender",draft.gender);
-      var ageBtn=document.querySelector('.age-tabs [data-age="'+draft.age+'"]');
-      if(ageBtn)ageBtn.click();
-      var p={id:String(Date.now()),name:name,pass:h,gender:draft.gender,age:draft.age,data:bag()};
-      var list=load();
-      list.push(p);
-      save(list);
-      localStorage.setItem(ACTIVE,p.id);
-      closeJoin();
-      renderList();
+      rpc("kids_register",{p_name:name,p_hash:h,p_gender:draft.gender,p_age:draft.age,p_data:bag()}).then(function(res){
+        if(!res||res.ok!==true){window.alert((res&&res.error)||"Dieser Anmeldename ist schon vergeben.");return}
+        var app=document.querySelector(".app");
+        if(app)app.setAttribute("data-gender",draft.gender);
+        var ageBtn=document.querySelector('.age-tabs [data-age="'+draft.age+'"]');
+        if(ageBtn)ageBtn.click();
+        var p={id:String(Date.now()),name:name,pass:h,gender:draft.gender,age:draft.age,data:bag()};
+        var list=load();
+        list.push(p);
+        save(list);
+        localStorage.setItem(ACTIVE,p.id);
+        closeJoin();
+        renderList();
+      });
     });
   });
   var add=document.getElementById("profileAdd");
   if(add)add.addEventListener("click",function(){draft={gender:"boy",age:"6–8"};openJoin("who")});
+  var bring=document.getElementById("profileBring");
+  if(bring)bring.addEventListener("click",function(){
+    var name=window.prompt("Anmeldename");
+    if(!name)return;
+    var pw=window.prompt("Passwort");
+    if(!pw)return;
+    hash(pw).then(function(h){
+      rpc("kids_login",{p_name:name.trim(),p_hash:h}).then(function(res){
+        if(!res||res.ok!==true){window.alert((res&&res.error)||"Anmeldung nicht möglich.");return}
+        rememberCurrent();
+        var p={id:String(Date.now()),name:res.name||name.trim(),pass:h,gender:res.gender||"boy",age:res.age||"6–8",data:res.data||{}};
+        var list=load().filter(function(x){return (x.name||"").toLowerCase()!==p.name.toLowerCase()});
+        list.push(p);
+        save(list);
+        applyBag(p.data);
+        localStorage.setItem(ACTIVE,p.id);
+        applyProfile(p);
+        location.reload();
+      });
+    });
+  });
+  var askDevice=document.getElementById("profileAskDevice");
+  var askFull=document.getElementById("profileAskFull");
+  var askCancel=document.getElementById("profileAskCancel");
+  if(askCancel)askCancel.addEventListener("click",function(){document.getElementById("profileAsk").hidden=true});
+  if(askDevice)askDevice.addEventListener("click",function(){
+    removeLocal(askId);
+    document.getElementById("profileAsk").hidden=true;
+    renderList();
+    if(!localStorage.getItem(ACTIVE))location.reload();
+  });
+  if(askFull)askFull.addEventListener("click",function(){
+    var p=load().find(function(x){return x.id===askId});
+    if(!p)return;
+    var pw=window.prompt("Passwort zur Bestätigung für "+p.name);
+    if(!pw)return;
+    hash(pw).then(function(h){
+      if(p.pass&&h!==p.pass){window.alert("Das Passwort passt nicht.");return}
+      rpc("kids_delete_full",{p_name:p.name,p_hash:h}).then(function(res){
+        if(!res||res.ok!==true){window.alert((res&&res.error)||"Löschen nicht möglich.");return}
+        removeLocal(p.id);
+        document.getElementById("profileAsk").hidden=true;
+        renderList();
+        if(!localStorage.getItem(ACTIVE))location.reload();
+      });
+    });
+  });
   var active=localStorage.getItem(ACTIVE);
   var known=load().find(function(p){return p.id===active});
   if(known)applyProfile(known);
   else openJoin("hello");
   renderList();
+  load().forEach(function(p){
+    if(p.name&&p.pass)rpc("kids_register",{p_name:p.name,p_hash:p.pass,p_gender:p.gender||"boy",p_age:p.age||"6–8",p_data:p.data||{}});
+  });
+  window.addEventListener("pagehide",rememberCurrent);
 })();
 </script>
+
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
