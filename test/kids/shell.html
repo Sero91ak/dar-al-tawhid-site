@@ -34,7 +34,7 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;background:var(--deep);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Rounded","Avenir Next",system-ui,sans-serif}
-body{overflow-x:hidden}
+body{overflow-x:clip}
 button,input,select{font:inherit}
 button{color:inherit}
 .app{
@@ -1118,7 +1118,7 @@ html,body{background:#06131f!important}
 
 /* HOME — clearer action hierarchy */
 #view-today .hero{
-  --art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=14");
+  --art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=17");
   min-height:clamp(292px,51vw,390px)!important;
   background:#102936!important;
 }
@@ -1440,7 +1440,7 @@ body{position:fixed!important;inset:0!important;touch-action:manipulation}
 .nav-btn[data-target="parents"] .ico{background-image:url("/test/kids/assets/kids-icons/parents-real-v12.png?v=1")!important}
 .picker-icon{background-image:url("/test/kids/assets/kids-icons/quran-real-v12.png?v=1")!important;background-size:76%!important}
 .icon-book{background-image:url("/test/kids/assets/kids-icons/quran-real-v12.png?v=1")!important}.icon-headphones,.icon-volume{background-image:url("/test/kids/assets/kids-icons/headphones-real-v12.png?v=1")!important}.icon-dua{background-image:url("/test/kids/assets/kids-icons/dua-real-v12.png?v=1")!important}.icon-star,.icon-spark{background-image:url("/test/kids/assets/kids-icons/spark-real-v12.png?v=1")!important}.icon-play{background-image:url("/test/kids/assets/kids-icons/play-real-v12.png?v=1")!important}.icon-mic{background-image:url("/test/kids/assets/kids-icons/mic-real-v12.png?v=1")!important}.icon-lock{background-image:url("/test/kids/assets/kids-icons/lock-real-v12.png?v=1")!important}.icon-moon{background-image:url("/test/kids/assets/kids-icons/moon-real-v12.png?v=1")!important}.icon-heart{background-image:url("/test/kids/assets/kids-icons/heart-real-v12.png?v=1")!important}.icon-library{background-image:url("/test/kids/assets/kids-icons/library-real-v12.png?v=1")!important}.icon-droplet{background-image:url("/test/kids/assets/kids-icons/water-real-v12.png?v=1")!important}.icon-cloud{background-image:url("/test/kids/assets/kids-icons/cloud-real-v12.png?v=1")!important}.icon-sun{background-image:url("/test/kids/assets/kids-icons/sun-real-v12.png?v=1")!important}.icon-settings,.icon-parents{background-image:url("/test/kids/assets/kids-icons/parents-real-v12.png?v=1")!important}.icon-home{background-image:url("/test/kids/assets/kids-icons/home-real-v12.png?v=1")!important}.icon-food{background-image:url("/test/kids/assets/kids-icons/food-real-v12.png?v=1")!important}.icon-speech{background-image:url("/test/kids/assets/kids-icons/speech-real-v12.png?v=1")!important}.icon-coin{background-image:url("/test/kids/assets/kids-icons/coin-real-v12.png?v=1")!important}.icon-palm{background-image:url("/test/kids/assets/kids-icons/palm-real-v12.png?v=1")!important}.icon-help{background-image:url("/test/kids/assets/kids-icons/help-real-v12.png?v=1")!important}.icon-door{background-image:url("/test/kids/assets/kids-icons/door-real-v12.png?v=1")!important}.icon-mosque{background-image:url("/test/kids/assets/kids-icons/mosque-real-v12.png?v=1")!important}.icon-shield{background-image:url("/test/kids/assets/kids-icons/shield-real-v12.png?v=1")!important}
-#view-today .hero{--art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=14")!important}
+#view-today .hero{--art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=17")!important}
 #view-today .hero::before{background-image:var(--art)!important;background-position:center!important;background-size:cover!important}
 /* KIDS_REAL_ASSET_ICON_FINAL_V11_END */
 
@@ -1856,13 +1856,13 @@ html,body{
 #view-today .kids-wordmark img{display:none!important}
 #view-today .wm-dar{display:none}
 #view-today .wm-dar-svg{
-  display:block;width:min(92vw,340px);height:42px;margin:0 auto;
+  display:block;width:min(96vw,460px);height:56px;margin:0 auto;
   overflow:visible;filter:drop-shadow(0 4px 10px rgba(8,24,36,.35))
 }
 #view-today .wm-kids{
   display:flex;justify-content:center;align-items:flex-end;gap:.04em;
   line-height:.86;font-family:"Fredoka",system-ui,sans-serif;
-  font-weight:700;font-size:clamp(40px,12.5vw,64px);
+  font-weight:700;font-size:clamp(54px,17vw,88px);
   margin-top:-2px
 }
 #view-today .wm-kids span{
@@ -1881,16 +1881,16 @@ html,body{
 #view-today .wm-kids .s{color:#74e08f;rotate:8deg;animation-delay:.36s}
 @keyframes kidsBalloon{
   0%,100%{transform:translateY(0) scale(1)}
-  50%{transform:translateY(-5px) scale(1.04)}
+  50%{transform:translateY(-12px) scale(1.08)}
 }
 #view-today .hero{
-  --art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=14")!important;
+  --art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=17")!important;
   display:flex;flex-direction:column;justify-content:flex-start;
   margin:calc(-1 * var(--safe-top)) -16px 0;
   width:calc(100% + 32px);
   border:0!important;
   border-radius:0 0 34px 34px!important;
-  min-height:clamp(300px,84vw,372px)!important;
+  min-height:clamp(330px,92vw,410px)!important;
   box-shadow:0 18px 36px rgba(8,30,44,.22)!important;
   background:#1b4a68!important;
   overflow:hidden
@@ -1965,11 +1965,11 @@ html,body{
     margin-right:max(-22px, calc(-1 * env(safe-area-inset-right)));
     width:auto;min-height:390px!important
   }
-  #view-today .wm-kids{font-size:68px}
+  #view-today .wm-kids{font-size:92px}
 }
 @media(max-width:380px){
   #view-today .hero{min-height:clamp(286px,92vw,340px)!important}
-  #view-today .wm-kids{font-size:38px}
+  #view-today .wm-kids{font-size:48px}
   #view-today .hero-salam{font-size:12px}
 }
 
@@ -1979,67 +1979,43 @@ html,body{
 
 
 
-/* KIDS_SKY_WORLD_V15 — eine Himmelswelt für alle Seiten, skaliert mit dem Gerät */
-.kids-sky{position:fixed;inset:0;z-index:4;pointer-events:none;overflow:hidden}
-.sky-wash{position:absolute;inset:0;transition:background 1.2s ease}
-.app[data-sky="dawn"] .sky-wash{background:linear-gradient(180deg,rgba(255,186,120,.16),transparent 42%)}
-.app[data-sky="day"] .sky-wash{background:linear-gradient(180deg,rgba(255,214,140,.10),transparent 36%)}
-.app[data-sky="dusk"] .sky-wash{background:linear-gradient(180deg,rgba(88,42,72,.18),transparent 48%)}
-.app[data-sky="night"] .sky-wash{background:linear-gradient(180deg,rgba(3,10,22,.42),rgba(3,10,22,.18) 55%,transparent 100%)}
-.sky-rays{position:absolute;left:50%;top:-20vh;width:140vw;height:80vh;margin-left:-70vw;opacity:0;
-  background:repeating-conic-gradient(from 0deg at 50% 0%,rgba(255,236,180,0) 0 8deg,rgba(255,236,180,.16) 8deg 11deg);
-  transform-origin:50% 0;animation:skyRays 48s linear infinite}
-.app[data-sky="day"] .sky-rays,.app[data-sky="dawn"] .sky-rays{opacity:.85}
-@keyframes skyRays{to{transform:rotate(360deg)}}
-.sky-moon{position:absolute;top:7vh;right:8vw;width:clamp(36px,8vw,64px);height:clamp(36px,8vw,64px);border-radius:50%;
-  background:radial-gradient(circle at 35% 35%,#fff7d6,#f0d48a 60%,#c9a15a);
-  box-shadow:0 0 24px rgba(255,220,140,.55);opacity:0;transition:opacity .8s}
-.app[data-sky="night"] .sky-moon,.app[data-sky="dusk"] .sky-moon{opacity:.95}
-.app[data-sky="dusk"] .sky-moon{opacity:.55;top:12vh}
-.sky-cloud{position:absolute;height:clamp(28px,6vw,54px);border-radius:999px;background:rgba(255,255,255,.28);
-  filter:blur(.4px);animation:skyCloud linear infinite}
-.sky-cloud:before,.sky-cloud:after{content:"";position:absolute;border-radius:50%;background:inherit}
-.sky-cloud:before{width:46%;height:140%;left:14%;bottom:0}
-.sky-cloud:after{width:38%;height:120%;right:16%;bottom:4%}
-.app[data-sky="night"] .sky-cloud{background:rgba(180,200,230,.14)}
-@keyframes skyCloud{from{transform:translateX(-30vw)}to{transform:translateX(110vw)}}
+
+/* KIDS_SKY_WORLD_V16 — nur oben, fest am Bildschirm, Wetter vom Standort */
+.kids-sky{
+  position:absolute;inset:0;z-index:4;
+  height:auto;pointer-events:none;overflow:hidden;
+  -webkit-mask-image:linear-gradient(#000 0 68%,transparent 100%);
+  mask-image:linear-gradient(#000 0 68%,transparent 100%);
+}
+html:not([data-view="today"]) .kids-sky,
+html[data-calm="1"] .kids-sky{display:none}
 .sky-star{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;opacity:0;
-  box-shadow:0 0 6px rgba(255,255,255,.8);animation:skyTwinkle 3.2s ease-in-out infinite}
-.app[data-sky="night"] .sky-star,.app[data-sky="dusk"] .sky-star{opacity:.9}
-@keyframes skyTwinkle{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.25)}}
-.sky-drop{position:absolute;top:-8vh;width:2px;height:clamp(10px,2.2vh,18px);border-radius:2px;
-  background:linear-gradient(180deg,transparent,rgba(210,230,255,.75));opacity:0;animation:skyRain linear infinite}
-.app[data-weather="rain"] .sky-drop,.app[data-weather="storm"] .sky-drop{opacity:.8}
-@keyframes skyRain{to{transform:translateY(110vh)}}
-.sky-lantern{position:absolute;width:clamp(10px,2vw,14px);height:clamp(16px,3vw,22px);border-radius:8px 8px 5px 5px;
-  background:radial-gradient(circle at 50% 30%,#fff6d0,#e2bd72 60%,#a87432);opacity:0;
-  box-shadow:0 0 16px rgba(226,189,114,.75);animation:skyLantern 2.8s ease-in-out infinite}
-.app[data-sky="night"] .sky-lantern,.app[data-sky="dusk"] .sky-lantern{opacity:.9}
-@keyframes skyLantern{50%{filter:brightness(1.25);transform:translateY(-4px)}}
-.sky-mote{position:absolute;width:4px;height:4px;border-radius:50%;background:#ffe7a8;opacity:0;
-  box-shadow:0 0 8px #ffe7a8;animation:skyMote 9s ease-in-out infinite}
-.app[data-sky="night"] .sky-mote,.app[data-sky="dusk"] .sky-mote{opacity:.75}
-.app[data-age="9–10"] .sky-mote{opacity:.35}
-@keyframes skyMote{0%{transform:translate(0,8px)}50%{transform:translate(12px,-18px)}100%{transform:translate(-8px,6px)}}
-.sky-flash{position:absolute;inset:0;background:rgba(255,255,255,.0);opacity:0}
-.app[data-weather="storm"][data-age="9–10"] .sky-flash.bolt{animation:skyBolt .45s ease}
-@keyframes skyBolt{0%{opacity:0}15%{opacity:.55}40%{opacity:.05}55%{opacity:.35}100%{opacity:0}}
-.sky-bird{position:absolute;top:18vh;left:-8vw;width:18px;height:8px;opacity:0;
-  border-top:2px solid rgba(255,255,255,.7);border-radius:50% 50% 0 0;animation:skyBird 22s linear infinite}
-.app[data-view="stories"] .sky-bird,.app[data-view="today"][data-sky="day"] .sky-bird{opacity:.8}
-@keyframes skyBird{to{transform:translateX(120vw)}}
-.app[data-view="parents"] .sky-drop,
-.app[data-view="parents"] .sky-flash,
-.app[data-view="parents"] .sky-bird,
-.app[data-view="parents"] .sky-mote{opacity:0!important}
-.app[data-calm="1"] .sky-drop,.app[data-calm="1"] .sky-flash,.app[data-calm="1"] .sky-bird{opacity:0!important}
-.app[data-calm="1"] .sky-rays{opacity:.25}
-.app[data-age="4–5"] .page-head h2{animation:kidsBalloon 3.6s ease-in-out infinite}
-.app[data-age="9–10"] #view-today .wm-kids span{animation:none}
+  box-shadow:0 0 6px rgba(255,255,255,.85);animation:skyTwinkle 3.4s ease-in-out infinite}
+html[data-sky="night"] .sky-star,html[data-sky="dusk"] .sky-star{opacity:.85}
+@keyframes skyTwinkle{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
+.sky-drop{position:absolute;top:-12%;width:2px;height:14px;border-radius:2px;
+  background:linear-gradient(180deg,transparent,rgba(220,235,255,.8));opacity:0;
+  animation:skyRain 1.15s linear infinite}
+html[data-weather="rain"] .sky-drop{opacity:.7}
+@keyframes skyRain{to{transform:translateY(320px)}}
+.sky-rays{position:absolute;left:50%;top:-10%;width:160%;height:80%;margin-left:-80%;opacity:0;
+  background:repeating-conic-gradient(from 0deg at 50% 0%,rgba(255,236,180,0) 0 10deg,rgba(255,236,180,.14) 10deg 13deg);
+  transform-origin:50% 0;animation:skyRays 56s linear infinite}
+html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
+@keyframes skyRays{to{transform:rotate(360deg)}}
+#view-today .wm-dar-svg{animation:darGlow 3.4s ease-in-out infinite}
+@keyframes darGlow{
+  0%,100%{filter:drop-shadow(0 3px 8px rgba(8,24,36,.35)) brightness(1)}
+  50%{filter:drop-shadow(0 0 16px rgba(255,220,140,.95)) brightness(1.18)}
+}
+.choice:active,.resume:active,.nav-btn:active,.daily-step:active,.daily-start:active,
+.story-feature:active,.story-row:active,.surah-card:active,.verse-card:active,
+.quran-action:active,.close-btn:active,.quiz-answer:active,.dua-actions button:active,
+.kid-pop{animation:kidPop .34s cubic-bezier(.2,.85,.2,1)}
+@keyframes kidPop{0%{transform:scale(1)}42%{transform:scale(1.06)}100%{transform:scale(1)}}
 .quiz-scene-symbol,.knowledge-symbol .kid-icon,.dua-scene-symbol,.quiz-scene:after{display:none!important}
 @media(prefers-reduced-motion:reduce){
-  .kids-sky *{animation:none!important}
-  .app[data-age="4–5"] .page-head h2,#view-today .wm-kids span{animation:none!important}
+  .kids-sky *,#view-today .wm-dar-svg,#view-today .wm-kids span,.kid-pop{animation:none!important}
 }
 
 </style>
@@ -2060,19 +2036,7 @@ html,body{
 </div>
 <div class="app">
   <div class="ambient"></div>
-  <div id="kidsSky" class="kids-sky" aria-hidden="true">
-    <div class="sky-wash"></div>
-    <div class="sky-rays"></div>
-    <div class="sky-moon"></div>
-    <div class="sky-clouds"></div>
-    <div class="sky-stars"></div>
-    <div class="sky-rain"></div>
-    <div class="sky-lanterns"></div>
-    <div class="sky-motes"></div>
-    <div class="sky-bird"></div>
-    <div class="sky-flash"></div>
-  </div>
-  <div class="dev-ribbon">KIDS · V0.16</div>
+  <div class="dev-ribbon">KIDS · V0.17</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2081,11 +2045,16 @@ html,body{
       </div>
 
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
+        <div id="kidsSky" class="kids-sky" aria-hidden="true">
+          <div class="sky-rays"></div>
+          <div class="sky-stars"></div>
+          <div class="sky-rain"></div>
+        </div>
         <div class="kids-wordmark">
           <span class="wm-dar">DĀR AL TAWḤĪD</span>
-          <svg class="wm-dar-svg" viewBox="0 0 340 46" aria-hidden="true">
-            <path id="wmArc" d="M16 34 C 92 8, 248 8, 324 34" fill="none"></path>
-            <text fill="#f7e3b4" font-size="16" font-family="Fredoka, system-ui, sans-serif" font-weight="700" letter-spacing="3.2">
+          <svg class="wm-dar-svg" viewBox="0 0 340 64" aria-hidden="true">
+            <path id="wmArc" d="M12 50 C 90 14, 250 14, 328 50" fill="none"></path>
+            <text fill="#f7e3b4" font-size="22" font-family="Fredoka, system-ui, sans-serif" font-weight="700" letter-spacing="3.6">
               <textPath href="#wmArc" startOffset="50%" text-anchor="middle">DĀR AL TAWḤĪD</textPath>
             </text>
           </svg>
@@ -2475,7 +2444,7 @@ html,body{
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab15";
+const KIDS_BUILD_ID="kids-shell-v12-tab16";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -4483,10 +4452,12 @@ fetchCatalog();
 })();
 </script>
 
+
 <script>
 (function(){
   var app=document.querySelector(".app");
   var sky=document.getElementById("kidsSky");
+  var root=document.documentElement;
   if(!app||!sky)return;
   function skyName(h){
     if(h<6)return"night";
@@ -4495,96 +4466,85 @@ fetchCatalog();
     if(h<20)return"dusk";
     return"night";
   }
-  function weatherName(){
-    var d=new Date();
-    var n=d.getFullYear()*400+(d.getMonth()+1)*32+d.getDate();
-    var age=app.getAttribute("data-age")||"6–8";
-    var bag=n%7;
-    if(age==="4–5")return bag>=5?"rain":"clear";
-    if(age==="9–10"&&bag===0)return"storm";
-    if(bag>=4)return"rain";
+  function codeToWeather(code){
+    code=Number(code);
+    if(code>=95)return"storm";
+    if((code>=51&&code<=67)||(code>=80&&code<=82))return"rain";
     return"clear";
   }
+  var liveWeather="clear";
   function paint(){
     var now=new Date();
-    app.setAttribute("data-sky",skyName(now.getHours()));
-    app.setAttribute("data-weather",weatherName());
+    root.setAttribute("data-sky",skyName(now.getHours()));
+    root.setAttribute("data-weather",liveWeather);
     var view=document.querySelector(".view.active");
     var id=view&&view.id?view.id.replace("view-",""):"today";
-    app.setAttribute("data-view",id);
-    var calm=document.querySelector(".modal.open");
-    app.setAttribute("data-calm",calm?"1":"0");
+    root.setAttribute("data-view",id);
+    root.setAttribute("data-calm",document.querySelector(".modal.open")?"1":"0");
   }
-  function fill(sel,count,cls,setup){
-    var box=sky.querySelector(sel);
+  function loadWeather(lat,lon){
+    var url="https://api.open-meteo.com/v1/forecast?latitude="+lat+"&longitude="+lon+"&current=weather_code,is_day&timezone=auto";
+    fetch(url).then(function(r){return r.json()}).then(function(data){
+      var cur=data&&data.current;
+      if(!cur)return;
+      liveWeather=codeToWeather(cur.weather_code);
+      if(cur.is_day===0)root.setAttribute("data-sky","night");
+      if(cur.is_day===1&&skyName(new Date().getHours())==="night")root.setAttribute("data-sky","dusk");
+      paint();
+    }).catch(function(){});
+  }
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(pos){
+      loadWeather(pos.coords.latitude.toFixed(3),pos.coords.longitude.toFixed(3));
+    },function(){liveWeather="clear";paint();},{maximumAge:900000,timeout:8000});
+  }
+  function fillStars(){
+    var box=sky.querySelector(".sky-stars");
     if(!box)return;
     box.textContent="";
-    var w=Math.max(window.innerWidth,320);
-    var n=Math.round(count*(w/390));
-    n=Math.max(count-4,Math.min(n,count+18));
+    var n=Math.round(10*(Math.max(window.innerWidth,320)/390));
+    n=Math.max(8,Math.min(n,16));
     for(var i=0;i<n;i++){
       var el=document.createElement("i");
-      el.className=cls;
-      setup(el,i,n);
+      el.className="sky-star";
+      el.style.left=((i*29)%100)+"%";
+      el.style.top=((i*11)%46)+"%";
+      el.style.animationDelay=(i%6)*0.4+"s";
       box.appendChild(el);
     }
   }
-  function build(){
-    fill(".sky-clouds",4,"sky-cloud",function(el,i){
-      el.style.top=(6+i*7)+"vh";
-      el.style.width=(18+i*6)+"vw";
-      el.style.animationDuration=(28+i*8)+"s";
-      el.style.animationDelay=(-i*6)+"s";
-      el.style.opacity=String(0.28+i*0.08);
-    });
-    fill(".sky-stars",22,"sky-star",function(el,i,n){
-      el.style.left=((i*37)%100)+"%";
-      el.style.top=((i*17)%42)+"vh";
-      el.style.animationDelay=(i%7)*0.35+"s";
-      el.style.width=el.style.height=(i%4===0?"4px":"2px");
-    });
-    fill(".sky-rain",36,"sky-drop",function(el,i){
-      el.style.left=((i*13)%100)+"%";
-      el.style.animationDuration=(0.9+(i%5)*0.18)+"s";
-      el.style.animationDelay=(-i*0.12)+"s";
-      el.style.opacity=String(0.35+(i%4)*0.12);
-    });
-    fill(".sky-lanterns",3,"sky-lantern",function(el,i){
-      el.style.left=(12+i*34)+"%";
-      el.style.top=(22+i*6)+"vh";
-      el.style.animationDelay=(i*0.4)+"s";
-    });
-    fill(".sky-motes",8,"sky-mote",function(el,i){
-      el.style.left=(8+(i*11)%80)+"%";
-      el.style.top=(12+(i*9)%50)+"vh";
-      el.style.animationDelay=(i*0.7)+"s";
-    });
+  function fillRain(){
+    var box=sky.querySelector(".sky-rain");
+    if(!box)return;
+    box.textContent="";
+    var n=Math.round(14*(Math.max(window.innerWidth,320)/390));
+    n=Math.max(10,Math.min(n,22));
+    for(var i=0;i<n;i++){
+      var el=document.createElement("i");
+      el.className="sky-drop";
+      el.style.left=((i*17)%100)+"%";
+      el.style.animationDuration=(0.95+(i%4)*0.16)+"s";
+      el.style.animationDelay=(-i*0.11)+"s";
+      box.appendChild(el);
+    }
   }
-  build();
-  var resizeTimer=0;
-  window.addEventListener("resize",function(){
-    clearTimeout(resizeTimer);
-    resizeTimer=setTimeout(build,180);
-  });
+  fillStars();fillRain();
+  window.addEventListener("resize",function(){fillStars();fillRain()});
   paint();
   setInterval(paint,30000);
   if("MutationObserver" in window){
     var mo=new MutationObserver(paint);
-    mo.observe(app,{attributes:true,attributeFilter:["data-age"],subtree:false});
     document.querySelectorAll(".view,.modal").forEach(function(el){
       mo.observe(el,{attributes:true,attributeFilter:["class"]});
     });
   }
-  var flash=sky.querySelector(".sky-flash");
-  setInterval(function(){
-    if(app.getAttribute("data-weather")!=="storm")return;
-    if(app.getAttribute("data-age")!=="9–10")return;
-    if(app.getAttribute("data-calm")==="1")return;
-    if(Math.random()>0.35)return;
-    flash.classList.remove("bolt");
-    void flash.offsetWidth;
-    flash.classList.add("bolt");
-  },14000);
+  document.addEventListener("pointerdown",function(ev){
+    var el=ev.target.closest&&ev.target.closest(".choice,.resume,.nav-btn,.daily-step,.daily-start,.story-feature,.story-row,.surah-card,.verse-card,.quran-action,.close-btn,.quiz-answer");
+    if(!el)return;
+    el.classList.remove("kid-pop");
+    void el.offsetWidth;
+    el.classList.add("kid-pop");
+  },true);
 })();
 </script>
 
