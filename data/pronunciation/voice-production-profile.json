@@ -1,7 +1,7 @@
 {
-  "schemaVersion": 4,
-  "id": "dar-own-voice-narration-v2.1.1",
-  "updatedAt": "2026-09-25",
+  "schemaVersion": 5,
+  "id": "dar-own-voice-narration-v2.1.2",
+  "updatedAt": "2026-09-26",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
@@ -381,10 +381,27 @@
       "ihsan": {
         "display": "Iḥsān",
         "ttsText": "إِحْسَانْ"
+      },
+      "abu_bakr": {
+        "display": "Abū Bakr",
+        "ttsText": "أَبُو بَكْرْ"
+      },
+      "abu_bakr_siddiq": {
+        "display": "Abū Bakr aṣ-Ṣiddīq",
+        "ttsText": "أَبُو بَكْرٍ الصِّدِّيقْ"
+      },
+      "umar": {
+        "display": "ʿUmar",
+        "ttsText": "عُمَرْ"
+      },
+      "umar_ibn_al_khattab": {
+        "display": "ʿUmar ibn al-Khaṭṭāb",
+        "ttsText": "عُمَرُ بْنُ الْخَطَّابْ"
       }
     },
     "firstUse": "Until a user-confirmed WAV exists, render exactly one candidate per key per production and reuse it throughout that production. A new production may use a new controlled seed so a rejected candidate can be replaced.",
     "confirmation": "Only the explicit QA confirmation action may promote pending candidate WAVs to persistent locks.",
-    "afterConfirmation": "Once confirmed, the stored local WAV is reused byte-for-byte as the source segment and is never freshly synthesized unless explicitly unlocked."
+    "afterConfirmation": "Once confirmed, the stored local WAV is reused byte-for-byte as the source segment and is never freshly synthesized unless explicitly unlocked.",
+    "nameAliasPolicy": "Common German/Latin variants such as Omar and al-Chattab map to the same confirmed Arabic pronunciation lock."
   }
 }
