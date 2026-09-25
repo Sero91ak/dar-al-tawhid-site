@@ -739,14 +739,15 @@ def split_rescue_chunks(text:str):
         return [" ".join(words[:mid])," ".join(words[mid:])]
     return [value]
 
-def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool=False):
+def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool=False,seed_base:int=2026):
     import torch
     attempts=max(1,int(QA_CONFIG.get("maxRenderAttempts",2)))
     seed_offset=max(1,int(QA_CONFIG.get("retrySeedOffset",97)))
+    seed_base=max(1,int(seed_base))
     last=None
 
     for attempt in range(attempts):
-        torch.manual_seed(2026+attempt*seed_offset)
+        torch.manual_seed(seed_base+attempt*seed_offset)
         wav=render_with_model(model,text,language_id,mode)
         metrics=audio_quality_metrics(wav,int(model.sr),text,language_id,mode)
         metrics["attempt"]=attempt+1
@@ -768,7 +769,7 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
             rescued=[]
             rescue_metrics=[]
             for part_idx,part in enumerate(parts):
-                torch.manual_seed(2026+(attempts+part_idx)*seed_offset)
+                torch.manual_seed(seed_base+(attempts+part_idx)*seed_offset)
                 sub=render_with_model(model,part,language_id,mode)
                 subm=audio_quality_metrics(sub,int(model.sr),part,language_id,mode)
                 if subm["issues"]:
@@ -1012,13 +1013,18 @@ def generate(text:str,prepared:str="",style:str="auto"):
                 metrics["audio_lock"]="session_reuse"
             else:
                 try:
-                    wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical)
+                    core_seed=2026
+                    if audio_lock_key:
+                        render_salt=int(render_id[:8],16)
+                        key_salt=sum((i+1)*ord(ch) for i,ch in enumerate(audio_lock_key))
+                        core_seed=2026+((render_salt+key_salt*131)%900000)
+                    wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical,seed_base=core_seed)
                 except Exception as first_error:
                     if MODEL_DEVICE=="mps":
                         print("[DĀR Voice] MPS render failed, retry CPU:",first_error,flush=True)
                         set_status(message=f"{lang_label} · MPS-Fallback auf CPU …")
                         model=load_model(force_device="cpu")
-                        wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical)
+                        wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical,seed_base=core_seed)
                     else:
                         raise
                 if audio_lock_key:
