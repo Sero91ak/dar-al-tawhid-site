@@ -1,11 +1,11 @@
 {
-  "schemaVersion": 2,
-  "id": "dar-own-voice-narration-v2",
+  "schemaVersion": 3,
+  "id": "dar-own-voice-narration-v2.1",
   "updatedAt": "2026-09-25",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
-  "productionGoal": "Production-grade, warm and fluent narration with deterministic pronunciation. Human listening remains mandatory for final MASTER approval.",
+  "productionGoal": "Production-grade, warm, fluent narration with deterministic pronunciation, sentence-level contextual prosody, anti-hold QA and controlled rescue rendering. Human listening remains mandatory for final MASTER approval.",
   "delivery": {
     "genderPresentation": "male",
     "character": [
@@ -279,7 +279,10 @@
       "dua",
       "wir bitten allah",
       "bitten wir allah"
-    ]
+    ],
+    "segmentLevel": true,
+    "inheritDocumentModeWhenNeutral": true,
+    "manualOverrideLocksDocumentStyle": true
   },
   "continuity": {
     "trimBoundarySilence": true,
@@ -291,7 +294,21 @@
       0.88,
       1.14
     ],
-    "outputEdgeFadeMs": 12
+    "outputEdgeFadeMs": 12,
+    "segmentContextProsody": true,
+    "sameLanguageCrossfadeMaxMs": 22,
+    "languageCrossfadeMinMs": 14,
+    "sentencePauseFactors": {
+      "period": 1,
+      "question": 1.06,
+      "exclamation": 0.96,
+      "ellipsis": 1.16
+    },
+    "softPauseFactors": {
+      "comma": 0.86,
+      "semicolon": 1,
+      "colon": 1.08
+    }
   },
   "qualityAssurance": {
     "maxRenderAttempts": 2,
@@ -304,7 +321,29 @@
     "shortArabicMaxSecondsBase": 1.2,
     "shortArabicMaxSecondsPerLetter": 0.34,
     "requireHumanConfirmationForMaster": true,
-    "note": "Automatic QA catches technical silence/holding/clipping anomalies. It does not replace human semantic pronunciation review."
+    "note": "Automatic QA rejects technical silence, excessive punctuation pauses, suspicious sustained holds, clipping and implausibly slow/long segments. One controlled retry remains the default; non-MASTER long segments may use deterministic clause rescue. Human semantic pronunciation review is still mandatory.",
+    "maxInternalSilenceMsWithPunctuation": 1250,
+    "minSpeechRateWords": 6,
+    "minSpeechRateWpmByMode": {
+      "default": 78,
+      "gentle": 68,
+      "serious": 68,
+      "dua": 64,
+      "kids_story": 82,
+      "kids_lesson": 82,
+      "teaching": 76,
+      "list": 74,
+      "question": 78,
+      "narration": 78
+    },
+    "maxSustainedEnergyPlateauMs": 950,
+    "sustainedPlateauFrameMs": 20,
+    "sustainedPlateauRelativeDelta": 0.035,
+    "rescueLongSegments": true,
+    "rescueMinWords": 9,
+    "rescueMinChars": 90,
+    "longSegmentSecondsPerWord": 0.85,
+    "longSegmentBaseSeconds": 2.5
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
