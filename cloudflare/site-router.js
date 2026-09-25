@@ -45,7 +45,6 @@ export default {
     const kidsPath = url.pathname === "/test/kids" || url.pathname.startsWith("/test/kids/");
     const voicePath = url.pathname === "/voice-studio" || url.pathname.startsWith("/voice-studio/");
     const legacyVoicePath = url.pathname === "/test/voice-studio" || url.pathname.startsWith("/test/voice-studio/");
-    const kidsMirrorHost = "dar-al-tawhid-site.sero91ak.workers.dev"; // kids public origin v12
 
     if ((request.method === "GET" || request.method === "HEAD") && legacyVoicePath) {
       const target = new URL(request.url);
@@ -80,11 +79,15 @@ export default {
       });
     }
 
-    if (kidsPath && (request.method === "GET" || request.method === "HEAD") && url.hostname !== kidsMirrorHost) {
-      const mirror = new URL(request.url);
-      mirror.hostname = kidsMirrorHost;
-      const mirrorResponse = await fetch(new Request(mirror.toString(), request));
-      const headers = new Headers(mirrorResponse.headers);
+    if (kidsPath && (request.method === "GET" || request.method === "HEAD")) {
+      const assetPath = url.pathname === "/test/kids" || url.pathname === "/test/kids/"
+        ? "/test/kids/index.html"
+        : url.pathname;
+      const assetRequest = new Request(`https://kids-assets.internal${assetPath}${url.search}`, {
+        method: "GET"
+      });
+      const assetResponse = await env.ASSETS.fetch(assetRequest);
+      const headers = new Headers(assetResponse.headers);
       headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
       headers.set("CDN-Cache-Control", "no-store");
       headers.set("Cloudflare-CDN-Cache-Control", "no-store");
@@ -92,11 +95,11 @@ export default {
       headers.delete("ETag");
       headers.delete("Content-Length");
       if (request.method === "HEAD") {
-        return new Response(null, { status: mirrorResponse.status, statusText: mirrorResponse.statusText, headers });
+        return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
       }
-      return new Response(mirrorResponse.body, {
-        status: mirrorResponse.status,
-        statusText: mirrorResponse.statusText,
+      return new Response(assetResponse.body, {
+        status: assetResponse.status,
+        statusText: assetResponse.statusText,
         headers
       });
     }

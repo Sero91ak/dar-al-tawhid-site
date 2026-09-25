@@ -20,19 +20,20 @@ export default {
 
     const path = url.pathname;
     const kids = path === "/test/kids" || path.startsWith("/test/kids/");
-    if (kids && url.hostname === "dar-al-tawhid.de") {
-      const mirror = new URL(request.url);
-      mirror.hostname = "dar-al-tawhid-test.sero91ak.workers.dev";
-      const mirrorResponse = await fetch(new Request(mirror.toString(), request));
-      const headers = new Headers(mirrorResponse.headers);
+    if (kids) {
+      const assetPath = path === "/test/kids" || path === "/test/kids/"
+        ? "/test/kids/index.html"
+        : path;
+      const assetResponse = await env.ASSETS.fetch(new Request(`https://kids-assets.internal${assetPath}${url.search}`, { method: "GET" }));
+      const headers = new Headers(assetResponse.headers);
       headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
       headers.set("CDN-Cache-Control", "no-store");
       headers.set("Cloudflare-CDN-Cache-Control", "no-store");
       headers.set("X-Kids-Build", "kids-shell-v12-start1");
       headers.delete("ETag");
-      return new Response(mirrorResponse.body, {
-        status: mirrorResponse.status,
-        statusText: mirrorResponse.statusText,
+      return new Response(assetResponse.body, {
+        status: assetResponse.status,
+        statusText: assetResponse.statusText,
         headers
       });
     }
