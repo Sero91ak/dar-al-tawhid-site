@@ -21,6 +21,8 @@ watch_paths = [
   "manifest.json",
   "version.json",
   "assets/**",
+  "voice-studio/**",
+  "data/pronunciation/**",
   "cloudflare/site-router.js",
   "content/posts/**",
   "content/updates/daily.json",
