@@ -77,16 +77,31 @@ async function main() {
     const expectZakat = Number(process.env.EXPECT_ZAKAT_VERSION || 18);
     let visitorOk = await waitForHtmlIncludes(`${SITE_URL}/`, [visitorBuild]);
     if (!visitorOk) visitorOk = await waitForHtmlIncludes(`${SITE_URL}/index.html`, [visitorBuild]);
+
     const { text } = await fetchStatus(`${SITE_URL}/`);
     const zakatMatch = text.match(/zakat-app\.js\?v=(\d+)/);
     const zakatVer = zakatMatch ? Number(zakatMatch[1]) : 0;
-    if (!visitorOk || zakatVer < expectZakat) {
+
+    const voiceStudioOk = await waitForHtmlIncludes(`${SITE_URL}/voice-studio/`, [
+      "DĀR AL TAWḤĪD – Voice Studio",
+      "VOICE STUDIO · SERHAT VOICE",
+      "service-worker.js"
+    ]);
+    const voiceVersionOk = await waitForStatus(`${SITE_URL}/voice-studio/version.json`, 200);
+    const pronunciationOk = await waitForStatus(
+      `${SITE_URL}/data/pronunciation/pronunciation-rules.json`,
+      200
+    );
+
+    if (!visitorOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
       console.error(
-        `verify: Besucher-App fehlgeschlagen (build=${visitorBuild}, zakat=v${zakatVer || "?"})`
+        `verify: Besucher-App fehlgeschlagen (build=${visitorBuild}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
       );
       failed += 1;
     } else {
-      console.log(`verify: Besucher-App live OK (${visitorBuild}, zakat>=v${expectZakat})`);
+      console.log(
+        `verify: Besucher-App live OK (${visitorBuild}, zakat>=v${expectZakat}, Voice Studio + Aussprachebibliothek OK)`
+      );
     }
   }
 
