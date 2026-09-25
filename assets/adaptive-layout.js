@@ -3,7 +3,7 @@
  * Compact: Smartphone, Fold geschlossen, Tablet Hochformat → Einspalte
  * Expanded: Fold geöffnet, Tablet Querformat, große Breite → Zwei-Bereichs-Modus
  * Bottom-Nav bleibt unten — KEIN Left-Rail-Nav.
- * v8: verbindliche Tablet-Querformat / Fold Dual-Regel + State-sichere Orientation
+ * v9: Bottom-Nav immer zentrierte, adaptive Kapsel (Kids-Referenz, Fold/Tablet)
  */
 (function (global) {
   "use strict";
@@ -69,6 +69,20 @@
     return "calc(max(7px, calc(env(safe-area-inset-bottom) - 18px)) + 3mm)";
   }
 
+  /* Kids-like capsule: never 100% bar. Landscape/tablet stay compact. */
+  function capsuleWidthPx(width, height) {
+    var w = Number(width) || 0;
+    var h = Number(height) || 0;
+    if (w < 1) return 0;
+    var gutter = Math.max(20, Math.round(w * 0.045));
+    var avail = Math.max(280, w - gutter);
+    var landscape = h > 0 && w >= h;
+    var frac = landscape ? 0.56 : w >= 700 ? 0.62 : 0.94;
+    var cap = landscape ? 820 : w >= 900 ? 860 : 900;
+    var next = Math.min(cap, avail, Math.max(320, Math.round(w * frac)));
+    return next;
+  }
+
   function applyNavLayout(mode) {
     var nav = document.getElementById("bottomNav");
     if (!nav) return;
@@ -79,49 +93,29 @@
       return;
     }
 
-    /* NEVER left-rail nav — Fold dual is content split only */
+    var metrics = measureViewport();
+    var px = capsuleWidthPx(metrics.width, metrics.height);
+
+    /* NEVER left-rail or full-bleed bar. Viewport-based floating capsule. */
     nav.classList.remove("is-adaptive-rail");
-    var wide = mode === "medium" || mode === "expanded";
-    nav.classList.toggle("is-adaptive-centered", wide);
-
-    if (wide) {
-      nav.style.setProperty("position", "fixed", "important");
-      nav.style.setProperty("left", "50%", "important");
-      nav.style.setProperty("right", "auto", "important");
-      nav.style.setProperty(
-        "width",
-        "min(var(--layout-navigation-max, 800px), calc(100vw - 28px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)))",
-        "important"
-      );
-      nav.style.setProperty("max-width", "var(--layout-navigation-max, 800px)", "important");
-      nav.style.setProperty("top", "auto", "important");
-      nav.style.setProperty("bottom", navBottomCompact(), "important");
-      nav.style.setProperty("height", "auto", "important");
-      nav.style.setProperty("min-height", "0", "important");
-      nav.style.setProperty("max-height", "none", "important");
-      nav.style.setProperty("transform", "translateX(-50%)", "important");
-      nav.style.setProperty("-webkit-transform", "translateX(-50%)", "important");
-      nav.style.setProperty("flex-direction", "row", "important");
-      nav.style.setProperty("margin", "0", "important");
-      nav.style.setProperty("z-index", "40", "important");
-      return;
-    }
-
-    var inset = "14px";
-    try {
-      var w = measureViewport().width;
-      if (w <= 700) inset = "10px";
-    } catch (e) {}
+    nav.classList.add("is-adaptive-centered");
     nav.style.setProperty("position", "fixed", "important");
-    nav.style.setProperty("left", "max(" + inset + ", env(safe-area-inset-left))", "important");
-    nav.style.setProperty("right", "max(" + inset + ", env(safe-area-inset-right))", "important");
+    nav.style.setProperty("left", "50%", "important");
+    nav.style.setProperty("right", "auto", "important");
+    if (px > 0) {
+      nav.style.setProperty("width", px + "px", "important");
+      nav.style.setProperty("max-width", px + "px", "important");
+    } else {
+      nav.style.setProperty("width", "var(--dar-nav-width)", "important");
+      nav.style.setProperty("max-width", "min(820px, calc(100vw - 2 * var(--dar-nav-gutter)))", "important");
+    }
     nav.style.setProperty("top", "auto", "important");
     nav.style.setProperty("bottom", navBottomCompact(), "important");
-    nav.style.setProperty("width", "auto", "important");
-    nav.style.setProperty("max-width", "none", "important");
-    nav.style.setProperty("height", "auto", "important");
-    nav.style.setProperty("transform", "none", "important");
-    nav.style.setProperty("-webkit-transform", "none", "important");
+    nav.style.setProperty("height", "var(--dar-nav-height)", "important");
+    nav.style.setProperty("min-height", "var(--dar-nav-height)", "important");
+    nav.style.setProperty("max-height", "var(--dar-nav-height)", "important");
+    nav.style.setProperty("transform", "translateX(-50%)", "important");
+    nav.style.setProperty("-webkit-transform", "translateX(-50%)", "important");
     nav.style.setProperty("flex-direction", "row", "important");
     nav.style.setProperty("margin", "0", "important");
     nav.style.setProperty("z-index", "40", "important");
@@ -157,12 +151,12 @@
     var changed = mode !== currentMode;
     var prevDual = root.getAttribute("data-fold-dual") === "1";
 
+    root.style.setProperty("--layout-vw", metrics.width + "px");
+    root.style.setProperty("--layout-vh", metrics.height + "px");
     if (changed || force) {
       currentMode = mode;
       root.setAttribute("data-layout", mode);
       root.classList.remove("data-layout-expanded-legacy");
-      root.style.setProperty("--layout-vw", metrics.width + "px");
-      root.style.setProperty("--layout-vh", metrics.height + "px");
     }
 
     applyOrientationAttrs(metrics);
