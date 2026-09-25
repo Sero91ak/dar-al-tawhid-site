@@ -1,12 +1,14 @@
-/* GlobalUpdateBanner – einzige Update-UI für alle App-Shells */
+/* GlobalUpdateBanner – kantenbündig, eine Zeile, lesbarer Button */
 #darGlobalUpdateBanner{
-  position:fixed;
+  position:fixed!important;
   top:0;left:0;right:0;
   z-index:2147483646;
-  display:flex;
-  justify-content:center;
+  display:flex!important;
+  justify-content:stretch;
   pointer-events:none;
-  padding:0 12px 0;
+  padding:0!important;
+  margin:0!important;
+  width:100%!important;
   transform:translate3d(0,-110%,0);
   transition:transform 380ms cubic-bezier(.16,.84,.32,1);
   will-change:transform;
@@ -16,47 +18,57 @@
   pointer-events:auto;
 }
 #darGlobalUpdateBanner .gub-inner{
-  width:min(100%,560px);
-  margin-top:max(10px, env(safe-area-inset-top, 0px));
-  padding:12px 14px 12px 16px;
-  border-radius:0 0 18px 18px;
+  width:100%!important;
+  max-width:none!important;
+  margin:max(8px, env(safe-area-inset-top, 0px)) 10px 0!important;
+  padding:11px 12px 11px 16px!important;
+  border-radius:22px!important;
   color:#fff;
-  background:linear-gradient(180deg,#3a86ff 0%,#1d5ed8 58%,#174db8 100%);
-  box-shadow:0 10px 28px rgba(12,40,110,.32);
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:8px 12px;
-  align-items:center;
+  background:linear-gradient(180deg,#4b90ff 0%,#2a6ae6 55%,#1e56c8 100%);
+  box-shadow:0 12px 30px rgba(12,40,110,.28);
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  min-height:52px;
+  box-sizing:border-box;
 }
-#darGlobalUpdateBanner .gub-copy{min-width:0}
+#darGlobalUpdateBanner .gub-copy{
+  min-width:0;
+  flex:1 1 auto;
+  overflow:hidden;
+}
 #darGlobalUpdateBanner .gub-title{
-  margin:0;
-  font-size:14px;
-  font-weight:800;
+  margin:0!important;
+  font-size:15px!important;
+  font-weight:800!important;
   letter-spacing:.01em;
-  color:#fff;
+  color:#fff!important;
+  white-space:nowrap!important;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  line-height:1.2!important;
 }
 #darGlobalUpdateBanner .gub-text{
-  margin:2px 0 0;
-  font-size:12px;
-  line-height:1.35;
-  color:rgba(255,255,255,.9);
+  display:none!important;
 }
 #darGlobalUpdateBanner .gub-btn{
-  appearance:none;
-  border:0;
-  border-radius:999px;
-  min-height:36px;
-  padding:0 14px;
-  font:inherit;
-  font-size:13px;
-  font-weight:800;
-  color:#12306a;
-  background:#fff;
+  appearance:none;-webkit-appearance:none;
+  flex:0 0 auto;
+  border:0!important;
+  border-radius:999px!important;
+  min-height:38px!important;
+  padding:0 16px!important;
+  font:800 13px/1 system-ui,-apple-system,sans-serif!important;
+  letter-spacing:.02em;
+  color:#fff!important;
+  background:#101828!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.18) inset;
   cursor:pointer;
-  white-space:nowrap;
+  white-space:nowrap!important;
 }
 #darGlobalUpdateBanner.is-error .gub-inner{
   background:linear-gradient(180deg,#3d6bb8,#2457a8);
 }
-html.dar-global-update-open{/* banner overlays, no page lock */}
+html.dar-global-update-open{}

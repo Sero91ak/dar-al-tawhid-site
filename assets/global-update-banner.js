@@ -33,7 +33,7 @@
       el.setAttribute("aria-live", "polite");
       el.innerHTML =
         '<div class="gub-inner">' +
-          '<div class="gub-copy"><p class="gub-title">Neue Version verfügbar</p><p class="gub-text">Eine neue Version von DĀR AL TAWḤĪD ist bereit.</p></div>' +
+          '<div class="gub-copy"><p class="gub-title">Neue Version verfügbar</p></div>' +
           '<button type="button" class="gub-btn" data-gub-apply>Aktualisieren</button>' +
         "</div>";
       (document.body || document.documentElement).appendChild(el);
@@ -53,8 +53,8 @@
     var n = ensure();
     var t = n.querySelector(".gub-title");
     var p = n.querySelector(".gub-text");
-    if (t && title) t.textContent = title;
-    if (p && text) p.textContent = text;
+    if (t) t.textContent = title || "Neue Version verfügbar";
+    if (p) p.textContent = "";
   }
 
   function hide() {
@@ -69,10 +69,6 @@
   }
 
   function show(opts) {
-    hide();
-    return false;
-    /* retired large top banner */
-
     opts = opts || {};
     if (!isAppExperience()) return false;
     var build = String(opts.buildId || root.__darRemoteBuildId || "").trim();
