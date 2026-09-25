@@ -2244,8 +2244,9 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
   <div class="kids-join-card">
     <div class="step on" data-step="hello">
       <h2>Willkommen</h2>
-      <p>Wir richten die Kinderwelt einmal ein. Danach merkt sich dieses Gerät den Namen, das Alter und den letzten Platz. Ohne E-Mail.</p>
+      <p>Ein Konto ist freiwillig. Du kannst einfach spielen. Später kannst du unter Eltern ein Konto anlegen, wenn du den Fortschritt merken willst. Ohne E-Mail.</p>
       <button type="button" id="joinNextHello">Weiter</button>
+      <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Überspringen</button>
     </div>
     <div class="step" data-step="who">
       <h2>Für wen ist die Welt?</h2>
@@ -2255,6 +2256,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
         <button type="button" data-gender="girl">Mädchen</button>
       </div>
       <button type="button" class="ghost" data-back="hello" style="margin-top:8px;width:100%">Zurück</button>
+      <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Überspringen</button>
     </div>
     <div class="step" data-step="age">
       <h2>Wie alt?</h2>
@@ -2265,6 +2267,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
       </div>
       <button type="button" data-join-age="9–10" style="margin-top:10px;width:100%">9–10</button>
       <button type="button" class="ghost" data-back="who" style="margin-top:8px;width:100%">Zurück</button>
+      <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Überspringen</button>
     </div>
     <div class="step" data-step="place">
       <h2>Wetter am Ort</h2>
@@ -2272,13 +2275,15 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
       <button type="button" id="joinPlace">Ort erlauben</button>
       <button type="button" class="ghost" id="joinPlaceSkip" style="margin-top:8px;width:100%">Ohne Ort weiter</button>
       <button type="button" class="ghost" data-back="age" style="margin-top:8px;width:100%">Zurück</button>
+      <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Überspringen</button>
     </div>
     <div class="step" data-step="name">
       <h2>Name merken</h2>
-      <p>Der Anmeldename wird intern gemerkt und kann nicht doppelt vergeben werden. Das Passwort geht nur als Prüfsumme mit.</p>
+      <p>Nur wenn du ein Konto willst. Sonst einfach überspringen – du kommst direkt in die Kinderwelt.</p>
       <input id="joinName" maxlength="24" placeholder="Name des Kindes" autocomplete="off">
       <input id="joinPass" type="password" maxlength="40" placeholder="Passwort" autocomplete="new-password">
-      <button type="button" id="joinSave">Kinderwelt öffnen</button>
+      <button type="button" id="joinSave">Konto anlegen</button>
+      <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Ohne Konto weitermachen</button>
       <button type="button" class="ghost" data-back="place" style="margin-top:8px;width:100%">Zurück</button>
     </div>
       <button type="button" id="joinCancel" class="ghost" style="display:none;margin-top:10px;width:100%">Abbrechen</button>
@@ -2287,7 +2292,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon">KIDS · V0.26</div>
+  <div class="dev-ribbon">KIDS · V0.27</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2522,7 +2527,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
       <div class="parent-card" id="profileCard">
         <div class="label-row"><strong>Kinder auf diesem Gerät</strong><span style="color:var(--gold);font-size:12px">OHNE E-MAIL</span></div>
-        <p class="parent-note">Jeder Anmeldename gibt es nur einmal. Das Passwort wird nur als Prüfsumme gespeichert. Nur auf diesem Gerät entfernen lässt den Namen weiter gültig, damit man sich auf einem anderen Gerät anmelden kann. Komplett löschen sperrt den Namen dauerhaft.</p>
+        <p class="parent-note">Ein Konto ist freiwillig. Ohne Konto geht die Kinderwelt trotzdem. Wer speichern und auf einem anderen Gerät weitermachen will, legt hier Name und Passwort an. Jeder Anmeldename gibt es nur einmal.</p>
         <div id="profileList" class="profile-list"></div>
         <div id="profileAsk" class="profile-ask" hidden>
           <p id="profileAskText" class="parent-note"></p>
@@ -2530,7 +2535,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
           <button type="button" id="profileAskFull" class="ghost">Konto komplett löschen</button>
           <button type="button" id="profileAskCancel" class="ghost">Abbrechen</button>
         </div>
-        <button type="button" id="profileAdd" class="daily-start" style="margin-top:10px">Weiteres Kind</button>
+        <button type="button" id="profileAdd" class="daily-start" style="margin-top:10px">Konto anlegen</button>
         <button type="button" id="profileBring" class="ghost" style="margin-top:8px;width:100%">Vorhandenes Kind anmelden</button>
       </div>
 
@@ -2706,7 +2711,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab25";
+const KIDS_BUILD_ID="kids-shell-v12-tab26";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -4900,10 +4905,26 @@ fetchCatalog();
   function step(name){
     join.querySelectorAll(".step").forEach(function(s){s.classList.toggle("on",s.getAttribute("data-step")===name)});
   }
+  var GUEST="kids.guest.v1";
+  function skipJoin(){
+    localStorage.setItem(GUEST,"1");
+    var app=document.querySelector(".app");
+    if(app){
+      app.setAttribute("data-gender",draft.gender||"boy");
+      app.setAttribute("data-age",draft.age||"6–8");
+    }
+    try{localStorage.setItem("kids.age",draft.age||"6–8")}catch(e){}
+    var ageBtn=document.querySelector('.age-tabs [data-age="'+(draft.age||"6–8")+'"]');
+    if(ageBtn)ageBtn.click();
+    closeJoin();
+    renderList();
+  }
   function openJoin(from){
     join.classList.add("open");
     var cancel=document.getElementById("joinCancel");
-    if(cancel)cancel.style.display=localStorage.getItem(ACTIVE)?"block":"none";
+    var has=!!localStorage.getItem(ACTIVE);
+    join.querySelectorAll(".join-skip").forEach(function(b){b.style.display=has?"none":"block"});
+    if(cancel)cancel.style.display=has?"block":"none";
     step(from||"hello");
   }
   function closeJoin(){join.classList.remove("open")}
@@ -4936,6 +4957,8 @@ fetchCatalog();
     box.querySelectorAll("[data-del]").forEach(function(b){
       b.addEventListener("click",function(){openAsk(b.getAttribute("data-del"))});
     });
+    var addBtn=document.getElementById("profileAdd");
+    if(addBtn)addBtn.textContent=rows.length?"Weiteres Kind":"Konto anlegen";
   }
   function openAsk(id){
     askId=id;
@@ -5017,7 +5040,8 @@ fetchCatalog();
     });
   });
   var add=document.getElementById("profileAdd");
-  if(add)add.addEventListener("click",function(){draft={gender:"boy",age:"6–8"};openJoin("who")});
+  if(add)add.addEventListener("click",function(){draft={gender:"boy",age:"6–8"};openJoin(load().length?"who":"hello")});
+  join.querySelectorAll(".join-skip").forEach(function(b){b.addEventListener("click",skipJoin)});
   var bring=document.getElementById("profileBring");
   if(bring)bring.addEventListener("click",function(){
     var name=window.prompt("Anmeldename");
@@ -5068,8 +5092,11 @@ fetchCatalog();
   var active=localStorage.getItem(ACTIVE);
   var known=load().find(function(p){return p.id===active});
   if(known)applyProfile(known);
-  else openJoin("hello");
+  else if(localStorage.getItem(GUEST)==="1"){
+    closeJoin();
+  }else openJoin("hello");
   renderList();
+  if(add)add.textContent=load().length?"Weiteres Kind":"Konto anlegen";
   load().forEach(function(p){
     if(p.name&&p.pass)rpc("kids_register",{p_name:p.name,p_hash:p.pass,p_gender:p.gender||"boy",p_age:p.age||"6–8",p_data:p.data||{}});
   });
