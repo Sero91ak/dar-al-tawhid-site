@@ -69,6 +69,20 @@
     return "calc(max(7px, calc(env(safe-area-inset-bottom) - 18px)) + 3mm)";
   }
 
+  /* Kids-like capsule: never 100% bar. Landscape/tablet stay compact. */
+  function capsuleWidthPx(width, height) {
+    var w = Number(width) || 0;
+    var h = Number(height) || 0;
+    if (w < 1) return 0;
+    var gutter = Math.max(20, Math.round(w * 0.045));
+    var avail = Math.max(280, w - gutter);
+    var landscape = h > 0 && w >= h;
+    var frac = landscape ? 0.56 : w >= 700 ? 0.62 : 0.94;
+    var cap = landscape ? 820 : w >= 900 ? 860 : 900;
+    var next = Math.min(cap, avail, Math.max(320, Math.round(w * frac)));
+    return next;
+  }
+
   function applyNavLayout(mode) {
     var nav = document.getElementById("bottomNav");
     if (!nav) return;
@@ -79,14 +93,22 @@
       return;
     }
 
+    var metrics = measureViewport();
+    var px = capsuleWidthPx(metrics.width, metrics.height);
+
     /* NEVER left-rail or full-bleed bar. Viewport-based floating capsule. */
     nav.classList.remove("is-adaptive-rail");
     nav.classList.add("is-adaptive-centered");
     nav.style.setProperty("position", "fixed", "important");
     nav.style.setProperty("left", "50%", "important");
     nav.style.setProperty("right", "auto", "important");
-    nav.style.setProperty("width", "var(--dar-nav-width)", "important");
-    nav.style.setProperty("max-width", "min(900px, calc(100vw - 2 * var(--dar-nav-gutter)))", "important");
+    if (px > 0) {
+      nav.style.setProperty("width", px + "px", "important");
+      nav.style.setProperty("max-width", px + "px", "important");
+    } else {
+      nav.style.setProperty("width", "var(--dar-nav-width)", "important");
+      nav.style.setProperty("max-width", "min(820px, calc(100vw - 2 * var(--dar-nav-gutter)))", "important");
+    }
     nav.style.setProperty("top", "auto", "important");
     nav.style.setProperty("bottom", navBottomCompact(), "important");
     nav.style.setProperty("height", "var(--dar-nav-height)", "important");

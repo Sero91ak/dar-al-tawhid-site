@@ -186,8 +186,8 @@ html[data-theme] #appChromeDock #bottomNav.bottom-nav,
   backdrop-filter: blur(var(--bottom-nav-blur)) saturate(var(--bottom-nav-saturation)) !important;
   contain: none !important;
   isolation: auto !important;
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(-50%, 0, 0);
+  transform: translate3d(-50%, 0, 0);
 }
 
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
