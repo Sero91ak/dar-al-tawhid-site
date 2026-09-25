@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SITE="https://dar-al-tawhid.de"
-RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/0ba25ced689dd4db37ebed741d98a4e51fdd0c4e"
+RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/4d873f37e1194e5532381511b6f3ab9e65bf3a3f"
 TARGET="$HOME/Applications/DAR-Voice-Studio"
 VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
@@ -12,6 +12,13 @@ RESOURCES="$APP/Contents/Resources"
 PLIST="$APP/Contents/Info.plist"
 LAUNCH="$HOME/Library/LaunchAgents/com.daraltawhid.voice-engine.plist"
 LABEL="com.daraltawhid.voice-engine"
+STAGE="$TARGET/.update-stage-$"
+BACKUPS="$TARGET/backups"
+
+cleanup_stage() {
+  rm -rf "$STAGE" >/dev/null 2>&1 || true
+}
+trap cleanup_stage EXIT
 
 # Vor einem Update muss die bereits laufende App wirklich beendet werden.
 # Sonst aktiviert macOS am Ende nur die alte Binary erneut.
@@ -23,7 +30,9 @@ pkill -KILL -x DARVoiceStudio >/dev/null 2>&1 || true
 # Altes App-Bundle vollständig entfernen, damit keine stale Binary/Resources
 # im Bundle verbleiben. Die lokalen Voice-Daten unter TARGET bleiben erhalten.
 rm -rf "$APP"
-mkdir -p "$TARGET" "$VOICE_HOME" "$MACOS" "$RESOURCES" "$HOME/Library/LaunchAgents"
+mkdir -p "$TARGET" "$VOICE_HOME" "$MACOS" "$RESOURCES" "$HOME/Library/LaunchAgents" "$BACKUPS"
+rm -rf "$STAGE"
+mkdir -p "$STAGE"
 
 say_status() {
   /usr/bin/osascript -e "display notification \"$1\" with title \"DĀR Voice Studio\"" >/dev/null 2>&1 || true
@@ -31,13 +40,23 @@ say_status() {
 
 say_status "DĀR Voice Studio wird eingerichtet …"
 
-# Aktuelle Studio-Dateien lokal spiegeln.
-curl -fsSL "$RAW/voice-studio/local-engine.py?native=150" -o "$TARGET/local-engine.py"
-curl -fsSL "$RAW/voice-studio/index.html?native=150" -o "$TARGET/studio.html"
-curl -fsSL "$RAW/data/pronunciation/pronunciation-rules.json?native=150" -o "$TARGET/pronunciation-rules.json"
-curl -fsSL "$RAW/data/pronunciation/voice-production-profile.json?native=150" -o "$TARGET/voice-production-profile.json"
-curl -fsSL "$RAW/watermark-my-logo-full.png?native=150" -o "$TARGET/watermark-my-logo-full.png" || true
-curl -fsSL "$RAW/app-icon-512.png?native=150" -o "$TARGET/app-icon-512.png" || true
+# Neue Version zuerst vollständig in einen isolierten Staging-Ordner laden.
+# Die funktionierende Installation wird erst nach allen Prüfungen ersetzt.
+curl -fsSL "$RAW/voice-studio/local-engine.py?v=200" -o "$STAGE/local-engine.py"
+curl -fsSL "$RAW/voice-studio/index.html?v=200" -o "$STAGE/studio.html"
+curl -fsSL "$RAW/data/pronunciation/pronunciation-rules.json?v=200" -o "$STAGE/pronunciation-rules.json"
+curl -fsSL "$RAW/data/pronunciation/voice-production-profile.json?v=200" -o "$STAGE/voice-production-profile.json"
+curl -fsSL "$RAW/data/pronunciation/voice-regression-fixtures.json?v=200" -o "$STAGE/voice-regression-fixtures.json"
+curl -fsSL "$RAW/scripts/voice-studio/validate-v2.py?v=200" -o "$STAGE/validate-v2.py"
+curl -fsSL "$RAW/watermark-my-logo-full.png?v=200" -o "$STAGE/watermark-my-logo-full.png" || true
+curl -fsSL "$RAW/app-icon-512.png?v=200" -o "$STAGE/app-icon-512.png" || true
+
+for required in local-engine.py studio.html pronunciation-rules.json voice-production-profile.json voice-regression-fixtures.json validate-v2.py; do
+  if [ ! -s "$STAGE/$required" ]; then
+    echo "FEHLER: Update-Datei fehlt oder ist leer: $required"
+    exit 1
+  fi
+done
 
 # Vorhandene Stimmreferenz bevorzugen.
 REF="$VOICE_HOME/Serhat_Adobe_MASTER.wav"
@@ -62,6 +81,13 @@ APPLESCRIPT
     cp "$PICKED" "$VOICE_HOME/Serhat_Adobe_MASTER.wav"
     REF="$VOICE_HOME/Serhat_Adobe_MASTER.wav"
   fi
+fi
+
+# Optionale zweite Referenz für arabische Fachbegriffe. Sie wird nur benutzt,
+# wenn sie wirklich vorhanden ist; sonst bleibt die bestätigte deutsche Masterstimme aktiv.
+AR_REF="$VOICE_HOME/Serhat_AR_MASTER.wav"
+if [ ! -f "$AR_REF" ]; then
+  AR_REF=""
 fi
 
 # Bestehende funktionierende Umgebung wiederverwenden.
@@ -101,12 +127,34 @@ if ! "$PY" -c 'from chatterbox.mtl_tts import ChatterboxMultilingualTTS' >/dev/n
   "$PY" -m pip install chatterbox-tts
 fi
 
-# Vor jedem Start Syntax der lokalen Engine prüfen. So kann eine beschädigte
-# Aktualisierung niemals mehr eine nicht startbare Mac-App hinterlassen.
-if ! "$PY" -m py_compile "$TARGET/local-engine.py"; then
-  echo "FEHLER: Die Voice-Engine-Datei ist syntaktisch ungültig. Installation abgebrochen."
+# STRENGE VORPRÜFUNG: Erst Syntax und komplette Voice-2.0-Regression prüfen.
+# Bis hier wurde an der funktionierenden Installation noch nichts ersetzt.
+if ! "$PY" -m py_compile "$STAGE/local-engine.py"; then
+  echo "FEHLER: Neue Voice-Engine ist syntaktisch ungültig. Alte Installation bleibt unverändert."
   exit 1
 fi
+
+if ! "$PY" "$STAGE/validate-v2.py"     "$STAGE/pronunciation-rules.json"     "$STAGE/voice-production-profile.json"     "$STAGE/local-engine.py"     "$STAGE/voice-regression-fixtures.json"; then
+  echo "FEHLER: Voice-Studio-2.0-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
+  exit 1
+fi
+
+# Erst nach bestandener Prüfung sichern und atomar übernehmen.
+STAMP="$(date +%Y%m%d-%H%M%S)"
+BACKUP="$BACKUPS/$STAMP"
+mkdir -p "$BACKUP"
+for old in local-engine.py studio.html pronunciation-rules.json voice-production-profile.json voice-regression-fixtures.json validate-v2.py; do
+  [ -f "$TARGET/$old" ] && cp "$TARGET/$old" "$BACKUP/$old" || true
+done
+
+for fresh in local-engine.py studio.html pronunciation-rules.json voice-production-profile.json voice-regression-fixtures.json validate-v2.py; do
+  mv "$STAGE/$fresh" "$TARGET/$fresh"
+done
+for optional in watermark-my-logo-full.png app-icon-512.png; do
+  [ -s "$STAGE/$optional" ] && mv "$STAGE/$optional" "$TARGET/$optional" || true
+done
+
+echo "Voice Studio 2.0 Validierung bestanden. Backup: $BACKUP"
 
 if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
   brew install ffmpeg >/dev/null 2>&1 || true
@@ -147,6 +195,7 @@ cat > "$LAUNCH" <<PLIST
   <dict>
     <key>DAR_VOICE_APP_HOME</key><string>$TARGET</string>
     <key>SERHAT_VOICE_REF</key><string>$REF</string>
+    <key>SERHAT_VOICE_REF_AR</key><string>$AR_REF</string>
     <key>PYTORCH_ENABLE_MPS_FALLBACK</key><string>1</string>
     <key>PATH</key><string>/opt/homebrew/bin:/usr/local/bin:/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
     <key>DAR_FFMPEG_BIN</key><string>$FFMPEG_BIN</string>
@@ -186,7 +235,7 @@ done
 # Robuster Fallback ohne sudo/root und unabhängig von launchctl.
 if [ "$ENGINE_OK" -ne 1 ]; then
   echo "Starte Serhat Engine direkt …"
-  nohup env     DAR_VOICE_APP_HOME="$TARGET"     SERHAT_VOICE_REF="$REF"     PYTORCH_ENABLE_MPS_FALLBACK=1     "$VENV/bin/python" "$TARGET/local-engine.py"     >>"$TARGET/engine.log" 2>>"$TARGET/engine-error.log" </dev/null &
+  nohup env     DAR_VOICE_APP_HOME="$TARGET"     SERHAT_VOICE_REF="$REF"     SERHAT_VOICE_REF_AR="$AR_REF"     PYTORCH_ENABLE_MPS_FALLBACK=1     "$VENV/bin/python" "$TARGET/local-engine.py"     >>"$TARGET/engine.log" 2>>"$TARGET/engine-error.log" </dev/null &
   echo $! > "$TARGET/engine.pid"
 
   for i in $(seq 1 40); do
@@ -374,6 +423,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
             let engine = target.appendingPathComponent("local-engine.py")
             let adobe = home.appendingPathComponent("SerhatVoice/Serhat_Adobe_MASTER.wav")
             let fallback = home.appendingPathComponent("SerhatVoice/Serhat_FINAL_REF.wav")
+            let arabic = home.appendingPathComponent("SerhatVoice/Serhat_AR_MASTER.wav")
 
             guard fm.isExecutableFile(atPath: python.path),
                   fm.fileExists(atPath: engine.path) else {
@@ -399,6 +449,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
                 env["SERHAT_VOICE_REF"] = adobe.path
             } else if fm.fileExists(atPath: fallback.path) {
                 env["SERHAT_VOICE_REF"] = fallback.path
+            }
+            if fm.fileExists(atPath: arabic.path) {
+                env["SERHAT_VOICE_REF_AR"] = arabic.path
             }
             process.environment = env
 
@@ -631,8 +684,8 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>1.8.0</string>
-  <key>CFBundleShortVersionString</key><string>1.8.0</string>
+  <key>CFBundleVersion</key><string>2.0.0</string>
+  <key>CFBundleShortVersionString</key><string>2.0.0</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>
@@ -669,5 +722,5 @@ LSREGISTER="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchS
 sleep 1
 
 # App bei LaunchServices registrieren, dann öffnen.
-say_status "DĀR Voice Studio 1.6.1 ist installiert."
+say_status "DĀR Voice Studio 2.0 ist installiert."
 open -n "$APP"
