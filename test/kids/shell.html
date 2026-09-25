@@ -2243,6 +2243,12 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
     }catch(e){}
   }
   window.addEventListener("DOMContentLoaded",function(){
+    try{
+      if(/(?:^|[?&])demo=update(?:&|$)/.test(String(location.search||""))){
+        kidsShowUpdate("Etwas Neues ist da","Tippe auf den goldenen Knopf. Dann lädt deine Kinder-App die neue, schöne Oberfläche.",KIDS_BUILD_ID);
+        return;
+      }
+    }catch(e){}
     kidsCheckRemoteVersion();
   });
   window.addEventListener("focus",kidsCheckRemoteVersion);
