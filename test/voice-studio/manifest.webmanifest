@@ -2,9 +2,9 @@
   "name": "DĀR AL TAWḤĪD Voice Studio",
   "short_name": "DĀR Voice",
   "description": "Private Sprachproduktion für DĀR AL TAWḤĪD Kids",
-  "id": "/test/voice-studio/",
-  "start_url": "/test/voice-studio/?app=1",
-  "scope": "/test/voice-studio/",
+  "id": "/voice-studio/",
+  "start_url": "/voice-studio/?app=1",
+  "scope": "/voice-studio/",
   "display": "standalone",
   "display_override": [
     "window-controls-overlay",
@@ -35,7 +35,7 @@
     {
       "name": "Neue Erzählung",
       "short_name": "Neu",
-      "url": "/test/voice-studio/?new=1",
+      "url": "/voice-studio/?new=1",
       "icons": [
         {
           "src": "/app-icon-192.png",
