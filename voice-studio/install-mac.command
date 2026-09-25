@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SITE="https://dar-al-tawhid.de"
-RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/4d873f37e1194e5532381511b6f3ab9e65bf3a3f"
+RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/2a8e61bb0106b7b3301ee97c25109ff992e4e208"
 TARGET="$HOME/Applications/DAR-Voice-Studio"
 VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
@@ -281,7 +281,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
 
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/1.1"
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.0"
 
         webView = WKWebView(frame: .zero, configuration: config)
         webView.navigationDelegate = self
