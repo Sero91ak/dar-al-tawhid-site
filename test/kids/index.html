@@ -1118,7 +1118,7 @@ html,body{background:#06131f!important}
 
 /* HOME — clearer action hierarchy */
 #view-today .hero{
-  --art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=17");
+  --art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=18");
   min-height:clamp(292px,51vw,390px)!important;
   background:#102936!important;
 }
@@ -1440,7 +1440,7 @@ body{position:fixed!important;inset:0!important;touch-action:manipulation}
 .nav-btn[data-target="parents"] .ico{background-image:url("/test/kids/assets/kids-icons/parents-real-v12.png?v=1")!important}
 .picker-icon{background-image:url("/test/kids/assets/kids-icons/quran-real-v12.png?v=1")!important;background-size:76%!important}
 .icon-book{background-image:url("/test/kids/assets/kids-icons/quran-real-v12.png?v=1")!important}.icon-headphones,.icon-volume{background-image:url("/test/kids/assets/kids-icons/headphones-real-v12.png?v=1")!important}.icon-dua{background-image:url("/test/kids/assets/kids-icons/dua-real-v12.png?v=1")!important}.icon-star,.icon-spark{background-image:url("/test/kids/assets/kids-icons/spark-real-v12.png?v=1")!important}.icon-play{background-image:url("/test/kids/assets/kids-icons/play-real-v12.png?v=1")!important}.icon-mic{background-image:url("/test/kids/assets/kids-icons/mic-real-v12.png?v=1")!important}.icon-lock{background-image:url("/test/kids/assets/kids-icons/lock-real-v12.png?v=1")!important}.icon-moon{background-image:url("/test/kids/assets/kids-icons/moon-real-v12.png?v=1")!important}.icon-heart{background-image:url("/test/kids/assets/kids-icons/heart-real-v12.png?v=1")!important}.icon-library{background-image:url("/test/kids/assets/kids-icons/library-real-v12.png?v=1")!important}.icon-droplet{background-image:url("/test/kids/assets/kids-icons/water-real-v12.png?v=1")!important}.icon-cloud{background-image:url("/test/kids/assets/kids-icons/cloud-real-v12.png?v=1")!important}.icon-sun{background-image:url("/test/kids/assets/kids-icons/sun-real-v12.png?v=1")!important}.icon-settings,.icon-parents{background-image:url("/test/kids/assets/kids-icons/parents-real-v12.png?v=1")!important}.icon-home{background-image:url("/test/kids/assets/kids-icons/home-real-v12.png?v=1")!important}.icon-food{background-image:url("/test/kids/assets/kids-icons/food-real-v12.png?v=1")!important}.icon-speech{background-image:url("/test/kids/assets/kids-icons/speech-real-v12.png?v=1")!important}.icon-coin{background-image:url("/test/kids/assets/kids-icons/coin-real-v12.png?v=1")!important}.icon-palm{background-image:url("/test/kids/assets/kids-icons/palm-real-v12.png?v=1")!important}.icon-help{background-image:url("/test/kids/assets/kids-icons/help-real-v12.png?v=1")!important}.icon-door{background-image:url("/test/kids/assets/kids-icons/door-real-v12.png?v=1")!important}.icon-mosque{background-image:url("/test/kids/assets/kids-icons/mosque-real-v12.png?v=1")!important}.icon-shield{background-image:url("/test/kids/assets/kids-icons/shield-real-v12.png?v=1")!important}
-#view-today .hero{--art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=17")!important}
+#view-today .hero{--art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=18")!important}
 #view-today .hero::before{background-image:var(--art)!important;background-position:center!important;background-size:cover!important}
 /* KIDS_REAL_ASSET_ICON_FINAL_V11_END */
 
@@ -1884,7 +1884,7 @@ html,body{
   50%{transform:translateY(-12px) scale(1.08)}
 }
 #view-today .hero{
-  --art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=17")!important;
+  --art:url("/test/kids/assets/kids-brand/hero-warm-world.png?v=18")!important;
   display:flex;flex-direction:column;justify-content:flex-start;
   margin:calc(-1 * var(--safe-top)) -16px 0;
   width:calc(100% + 32px);
@@ -2014,6 +2014,64 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 .kid-pop{animation:kidPop .34s cubic-bezier(.2,.85,.2,1)}
 @keyframes kidPop{0%{transform:scale(1)}42%{transform:scale(1.06)}100%{transform:scale(1)}}
 .quiz-scene-symbol,.knowledge-symbol .kid-icon,.dua-scene-symbol,.quiz-scene:after{display:none!important}
+
+.sky-sun,.sky-nightmoon{
+  position:absolute;width:clamp(46px,13vw,78px);height:clamp(46px,13vw,78px);
+  border-radius:50%;left:68%;pointer-events:none;
+  transition:top 2.4s linear,opacity 2.4s linear,transform 2.4s linear;
+}
+.sky-sun{
+  background:radial-gradient(circle at 38% 38%,#fff8d4,#ffd15c 46%,#ef9b22);
+  box-shadow:0 0 34px rgba(255,196,70,.75);
+}
+.sky-nightmoon{
+  background:radial-gradient(circle at 35% 35%,#fff8e6,#f3d592 58%,#c9a15a);
+  box-shadow:0 0 22px rgba(255,220,150,.5);
+}
+#view-today .wm-dar-svg{width:min(100%,560px)!important;height:78px!important}
+#view-stories.view.active{animation:openSide .62s cubic-bezier(.16,1,.3,1)}
+#view-quran.view.active{animation:openRise .62s cubic-bezier(.16,1,.3,1)}
+#view-parents.view.active{animation:openCalm .62s cubic-bezier(.16,1,.3,1)}
+#view-today.view.active{animation:openHome .62s cubic-bezier(.16,1,.3,1)}
+@keyframes openHome{from{opacity:.2;transform:translateY(16px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes openSide{from{opacity:.15;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes openRise{from{opacity:.15;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes openCalm{from{opacity:.2;filter:blur(2px)}to{opacity:1;filter:none}}
+.modal.open .modal-shell{animation:openSheet .46s cubic-bezier(.16,1,.3,1)}
+@keyframes openSheet{from{opacity:.2;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
+.nav-btn.kid-pop{animation:kidLift .32s cubic-bezier(.2,.8,.2,1)}
+.close-btn.kid-pop{animation:kidBack .32s ease}
+.resume.kid-pop{animation:kidWide .34s cubic-bezier(.2,.85,.2,1)}
+@keyframes kidLift{40%{transform:translateY(-4px) scale(1.05)}}
+@keyframes kidBack{40%{transform:scale(.9) rotate(-8deg)}}
+@keyframes kidWide{42%{transform:scale(1.03)}}
+.app[data-age="4–5"] .kid-pop{animation-duration:.46s}
+.app[data-age="9–10"] .kid-pop{animation-duration:.22s}
+.app[data-gender="girl"]{--gold:#f2b7c9;--aqua:#f7c6d6}
+.app[data-gender="girl"] .app,.app[data-gender="girl"]{
+  background:
+    radial-gradient(circle at 88% 8%,rgba(242,150,180,.18),transparent 32%),
+    linear-gradient(165deg,#1a1430 0%,#3a2048 48%,#6a3a58 100%);
+}
+.app[data-gender="boy"]{
+  background:
+    radial-gradient(circle at 10% 0%,rgba(80,160,210,.16),transparent 28%),
+    linear-gradient(165deg,#071522 0%,#0d2942 48%,#14506a 100%);
+}
+.kids-join{position:fixed;inset:0;z-index:80;display:none;place-items:center;padding:22px;background:rgba(6,16,28,.72)}
+.kids-join.open{display:grid}
+.kids-join-card{width:min(100%,460px);border-radius:28px;padding:22px 18px;background:#10283a;color:#f9f3e8;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.kids-join h2{font-family:Fredoka,system-ui,sans-serif;margin:0 0 8px;font-size:28px}
+.kids-join p{margin:0 0 14px;line-height:1.45;color:rgba(255,255,255,.82)}
+.kids-join-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kids-join button,.kids-join-go{min-height:52px;border:0;border-radius:16px;background:#e2bd72;color:#1a2430;font-weight:800;cursor:pointer}
+.kids-join .ghost{background:rgba(255,255,255,.08);color:#fff}
+.kids-join input{width:100%;min-height:48px;border-radius:14px;border:0;margin:0 0 10px;padding:0 12px;background:rgba(255,255,255,.08);color:#fff}
+.kids-join .step{display:none}
+.kids-join .step.on{display:block}
+.profile-list{display:grid;gap:8px;margin-top:8px}
+.profile-list button{text-align:left;border-radius:14px;min-height:46px;border:0;background:rgba(255,255,255,.06);color:#fff;padding:8px 12px}
+
 @media(prefers-reduced-motion:reduce){
   .kids-sky *,#view-today .wm-dar-svg,#view-today .wm-kids span,.kid-pop{animation:none!important}
 }
@@ -2034,9 +2092,50 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
     </div>
   </div>
 </div>
+
+<div id="kidsJoin" class="kids-join">
+  <div class="kids-join-card">
+    <div class="step on" data-step="hello">
+      <h2>Willkommen</h2>
+      <p>Wir richten die Kinderwelt einmal ein. Danach merkt sich dieses Gerät den Namen, das Alter und den letzten Platz. Ohne E-Mail.</p>
+      <button type="button" id="joinNextHello">Weiter</button>
+    </div>
+    <div class="step" data-step="who">
+      <h2>Für wen ist die Welt?</h2>
+      <p>Jungen bekommen eine ruhige blau-goldene Welt. Mädchen eine warme rosa-goldene Welt. Das kannst du später bei den Eltern ändern.</p>
+      <div class="kids-join-row">
+        <button type="button" data-gender="boy">Junge</button>
+        <button type="button" data-gender="girl">Mädchen</button>
+      </div>
+    </div>
+    <div class="step" data-step="age">
+      <h2>Wie alt?</h2>
+      <p>Danach werden Schrift, Fragen und Bewegung passend.</p>
+      <div class="kids-join-row">
+        <button type="button" data-join-age="4–5">4–5</button>
+        <button type="button" data-join-age="6–8">6–8</button>
+      </div>
+      <button type="button" data-join-age="9–10" style="margin-top:10px;width:100%">9–10</button>
+    </div>
+    <div class="step" data-step="place">
+      <h2>Wetter am Ort</h2>
+      <p>Wenn du den Ort erlaubst, zeigt die App Sonne oder Mond zur richtigen Zeit und Regen nur, wenn es dort wirklich regnet. Ohne Erlaubnis bleibt es klar und folgt nur der Uhr.</p>
+      <button type="button" id="joinPlace">Ort erlauben</button>
+      <button type="button" class="ghost" id="joinPlaceSkip" style="margin-top:8px;width:100%">Ohne Ort weiter</button>
+    </div>
+    <div class="step" data-step="name">
+      <h2>Name merken</h2>
+      <p>Für Eltern: Name und Passwort bleiben nur auf diesem Gerät, als Prüfsumme, nicht als Klartext und nicht auf einem Server. So kann hier das Kind wechseln und später weitermachen.</p>
+      <input id="joinName" maxlength="24" placeholder="Name des Kindes" autocomplete="off">
+      <input id="joinPass" type="password" maxlength="40" placeholder="Passwort" autocomplete="new-password">
+      <button type="button" id="joinSave">Kinderwelt öffnen</button>
+    </div>
+  </div>
+</div>
+
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon">KIDS · V0.17</div>
+  <div class="dev-ribbon">KIDS · V0.18</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2046,6 +2145,8 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
         <div id="kidsSky" class="kids-sky" aria-hidden="true">
+          <div class="sky-sun"></div>
+          <div class="sky-nightmoon"></div>
           <div class="sky-rays"></div>
           <div class="sky-stars"></div>
           <div class="sky-rain"></div>
@@ -2054,7 +2155,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
           <span class="wm-dar">DĀR AL TAWḤĪD</span>
           <svg class="wm-dar-svg" viewBox="0 0 340 64" aria-hidden="true">
             <path id="wmArc" d="M12 50 C 90 14, 250 14, 328 50" fill="none"></path>
-            <text fill="#f7e3b4" font-size="22" font-family="Fredoka, system-ui, sans-serif" font-weight="700" letter-spacing="3.6">
+            <text fill="#f7e3b4" font-size="30" font-family="Fredoka, system-ui, sans-serif" font-weight="700" letter-spacing="3.6">
               <textPath href="#wmArc" startOffset="50%" text-anchor="middle">DĀR AL TAWḤĪD</textPath>
             </text>
           </svg>
@@ -2268,10 +2369,14 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
         <p class="parent-note">Der Fortschritt bleibt auf diesem Gerät. Keine Rangliste und kein Vergleich mit anderen Kindern.</p>
       </div>
 
-      <div class="parent-card">
-        <div class="label-row"><strong>Geplant</strong><span style="color:var(--soft);font-size:11px">NÄCHSTE SCHRITTE</span></div>
-        <p class="parent-note" style="margin-top:0">Eltern-PIN · Kinderprofile · Offline-Audio · Inhaltsfreigaben · Schlafenszeit-Modus · Fortschritt ohne Leistungsdruck.</p>
+
+      <div class="parent-card" id="profileCard">
+        <div class="label-row"><strong>Kinder auf diesem Gerät</strong><span style="color:var(--gold);font-size:12px">OHNE E-MAIL</span></div>
+        <p class="parent-note">Jedes Kind hat einen Namen und ein Passwort. Der Stand bleibt auf diesem Smartphone. Ein anderes Gerät hat seinen eigenen Stand. Nichts wird an uns geschickt.</p>
+        <div id="profileList" class="profile-list"></div>
+        <button type="button" id="profileAdd" class="daily-start" style="margin-top:10px">Weiteres Kind</button>
       </div>
+
     </section>
   </main>
 
@@ -2444,7 +2549,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab16";
+const KIDS_BUILD_ID="kids-shell-v12-tab17";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -2814,7 +2919,12 @@ function launchNextDailyStep(){
 function showTab(name){
   document.querySelectorAll(".view").forEach(function(v){v.classList.remove("active")});
   var view=document.getElementById("view-"+name);
-  if(view)view.classList.add("active");
+  if(view){
+    view.classList.add("active");
+    view.style.animation="none";
+    void view.offsetWidth;
+    view.style.animation="";
+  }
   document.querySelectorAll(".nav-btn").forEach(function(b){b.classList.toggle("active",b.dataset.target===name)});
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -4528,8 +4638,25 @@ fetchCatalog();
       box.appendChild(el);
     }
   }
+  function placeSky(){
+    var sun=sky.querySelector(".sky-sun");
+    var moon=sky.querySelector(".sky-nightmoon");
+    if(!sun||!moon)return;
+    var d=new Date();
+    var mins=d.getHours()*60+d.getMinutes();
+    var day=(mins-6*60)/(13*60);
+    day=Math.max(0,Math.min(1,day));
+    var night=(mins>=18*60)?(mins-18*60)/(12*60):((mins<6*60)?(mins+6*60)/(12*60):0);
+    if(mins>=6*60&&mins<18*60)night=0;
+    sun.style.top=(72-Math.sin(day*Math.PI)*58)+"%";
+    sun.style.opacity=String(mins>=5.5*60&&mins<=19*60?1:0);
+    moon.style.top=(72-Math.sin(Math.max(0,Math.min(1,night))*Math.PI)*58)+"%";
+    moon.style.opacity=String(mins<6*60||mins>=18*60?1:0);
+  }
   fillStars();fillRain();
   window.addEventListener("resize",function(){fillStars();fillRain()});
+  placeSky();
+  setInterval(placeSky,30000);
   paint();
   setInterval(paint,30000);
   if("MutationObserver" in window){
@@ -4543,11 +4670,138 @@ fetchCatalog();
     if(!el)return;
     el.classList.remove("kid-pop");
     void el.offsetWidth;
+    var fx="kid-pop";
+    if(el.classList.contains("nav-btn"))fx="kid-pop";
+    if(el.classList.contains("close-btn"))fx="kid-pop";
     el.classList.add("kid-pop");
   },true);
 })();
 </script>
 
+<script>
+(function(){
+  var KEY="kids.profiles.v1";
+  var ACTIVE="kids.activeProfile";
+  var join=document.getElementById("kidsJoin");
+  var draft={gender:"boy",age:"6–8"};
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return []}}
+  function save(list){localStorage.setItem(KEY,JSON.stringify(list))}
+  function hash(pw){
+    return crypto.subtle.digest("SHA-256",new TextEncoder().encode("dar-kids:"+pw)).then(function(buf){
+      return Array.from(new Uint8Array(buf)).map(function(b){return ("0"+b.toString(16)).slice(-2)}).join("");
+    });
+  }
+  function bag(){
+    var o={},i,k;
+    for(i=0;i<localStorage.length;i++){
+      k=localStorage.key(i);
+      if(k&&k.indexOf("kids.")===0&&k!==KEY&&k!==ACTIVE)o[k]=localStorage.getItem(k);
+    }
+    return o;
+  }
+  function applyBag(o){
+    var keys=[],i,k;
+    for(i=0;i<localStorage.length;i++){
+      k=localStorage.key(i);
+      if(k&&k.indexOf("kids.")===0&&k!==KEY&&k!==ACTIVE)keys.push(k);
+    }
+    keys.forEach(function(k){localStorage.removeItem(k)});
+    Object.keys(o||{}).forEach(function(k){localStorage.setItem(k,o[k])});
+  }
+  function applyProfile(p){
+    var app=document.querySelector(".app");
+    if(app)app.setAttribute("data-gender",p.gender||"boy");
+    var btn=document.querySelector('.age-tabs [data-age="'+p.age+'"]');
+    if(btn)btn.click();
+    else if(app)app.setAttribute("data-age",p.age||"6–8");
+  }
+  function step(name){
+    join.querySelectorAll(".step").forEach(function(s){s.classList.toggle("on",s.getAttribute("data-step")===name)});
+  }
+  function openJoin(from){
+    join.classList.add("open");
+    step(from||"hello");
+  }
+  function closeJoin(){join.classList.remove("open")}
+  function rememberCurrent(){
+    var id=localStorage.getItem(ACTIVE);
+    if(!id)return;
+    var list=load();
+    var p=list.find(function(x){return x.id===id});
+    if(!p)return;
+    p.data=bag();
+    var app=document.querySelector(".app");
+    p.gender=app&&app.getAttribute("data-gender")||p.gender;
+    p.age=localStorage.getItem("kids.age")||p.age;
+    save(list);
+  }
+  function renderList(){
+    var box=document.getElementById("profileList");
+    if(!box)return;
+    var cur=localStorage.getItem(ACTIVE);
+    box.innerHTML=load().map(function(p){
+      return '<button type="button" data-profile="'+p.id+'">'+(p.name||"Kind")+(p.id===cur?" · jetzt":"")+"</button>";
+    }).join("")||"<p class=\"parent-note\">Noch kein Kind gespeichert.</p>";
+    box.querySelectorAll("[data-profile]").forEach(function(b){
+      b.addEventListener("click",function(){switchTo(b.getAttribute("data-profile"))});
+    });
+  }
+  function switchTo(id){
+    var list=load();
+    var p=list.find(function(x){return x.id===id});
+    if(!p)return;
+    var pw=window.prompt("Passwort für "+p.name);
+    if(!pw)return;
+    hash(pw).then(function(h){
+      if(h!==p.pass){window.alert("Das Passwort passt nicht.");return}
+      rememberCurrent();
+      applyBag(p.data||{});
+      localStorage.setItem(ACTIVE,p.id);
+      applyProfile(p);
+      renderList();
+      location.reload();
+    });
+  }
+  document.getElementById("joinNextHello").addEventListener("click",function(){step("who")});
+  join.querySelectorAll("[data-gender]").forEach(function(b){
+    b.addEventListener("click",function(){draft.gender=b.getAttribute("data-gender");step("age")});
+  });
+  join.querySelectorAll("[data-join-age]").forEach(function(b){
+    b.addEventListener("click",function(){draft.age=b.getAttribute("data-join-age");step("place")});
+  });
+  document.getElementById("joinPlace").addEventListener("click",function(){
+    if(navigator.geolocation)navigator.geolocation.getCurrentPosition(function(){},function(){});
+    step("name");
+  });
+  document.getElementById("joinPlaceSkip").addEventListener("click",function(){step("name")});
+  document.getElementById("joinSave").addEventListener("click",function(){
+    var name=(document.getElementById("joinName").value||"").trim();
+    var pw=document.getElementById("joinPass").value||"";
+    if(name.length<2||pw.length<4){window.alert("Name und ein Passwort mit mindestens 4 Zeichen.");return}
+    hash(pw).then(function(h){
+      rememberCurrent();
+      var app=document.querySelector(".app");
+      if(app)app.setAttribute("data-gender",draft.gender);
+      var ageBtn=document.querySelector('.age-tabs [data-age="'+draft.age+'"]');
+      if(ageBtn)ageBtn.click();
+      var p={id:String(Date.now()),name:name,pass:h,gender:draft.gender,age:draft.age,data:bag()};
+      var list=load();
+      list.push(p);
+      save(list);
+      localStorage.setItem(ACTIVE,p.id);
+      closeJoin();
+      renderList();
+    });
+  });
+  var add=document.getElementById("profileAdd");
+  if(add)add.addEventListener("click",function(){draft={gender:"boy",age:"6–8"};openJoin("who")});
+  var active=localStorage.getItem(ACTIVE);
+  var known=load().find(function(p){return p.id===active});
+  if(known)applyProfile(known);
+  else openJoin("hello");
+  renderList();
+})();
+</script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
