@@ -20,4 +20,6 @@ watch_paths = [
 directory = "."
 binding = "ASSETS"
 
-# Keine Custom-Domain-Routen: zwei Worker auf dar-al-tawhid.de/test* erzeugen 1101.
+# Explizit leer: alte dar-al-tawhid.de/test*-Routen müssen beim Deploy weg.
+# Sonst treffen Test-Worker und Besucher-Worker gleichzeitig auf /test/kids → 1101.
+routes = []
