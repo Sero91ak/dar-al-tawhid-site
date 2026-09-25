@@ -530,16 +530,18 @@ html,body{background:#06131f!important}
 
 /* KIDS_UPDATE_UI_V4 — kinderfreundliche Update-Fläche, nur Kids */
 .kids-update-layer{
-  position:fixed;inset:0 auto auto 0;right:0;z-index:80;
-  display:flex;justify-content:center;align-items:flex-start;
-  padding:calc(10px + env(safe-area-inset-top)) 14px 0;
+  position:fixed;top:0;left:0;right:0;z-index:2147483000!important;
+  display:flex!important;justify-content:center;align-items:flex-start;
+  padding:calc(10px + env(safe-area-inset-top,0px)) 14px 0;
   pointer-events:none;
-  transform:translate3d(0,-120%,0);
+  transform:translate3d(0,-140%,0);
   transition:transform 480ms cubic-bezier(.16,.84,.32,1);
+  visibility:hidden;
 }
 .kids-update-layer.is-open{
   pointer-events:auto;
-  transform:translate3d(0,0,0);
+  transform:translate3d(0,0,0)!important;
+  visibility:visible;
 }
 .kids-update-card{
   width:min(100%,430px);
@@ -1792,7 +1794,7 @@ html,body{
 </style>
 </head>
 <body>
-<div id="kidsUpdateLayer" class="kids-update-layer" hidden>
+<div id="kidsUpdateLayer" class="kids-update-layer">
   <div class="kids-update-card" role="dialog" aria-labelledby="kidsUpdateTitle" aria-describedby="kidsUpdateText">
     <div class="kids-update-icon-wrap" aria-hidden="true"><span class="kid-icon icon-spark"></span></div>
     <h2 id="kidsUpdateTitle">Etwas Neues ist da</h2>
@@ -2195,11 +2197,18 @@ html,body{
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab3";
+const KIDS_BUILD_ID="kids-shell-v12-tab4";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
   var pendingKidsBuild="";
+  var SEEN_KEY="darKidsFriendlyUpdateSeenV4";
+  function kidsWantPreview(){
+    try{
+      if(/(?:^|[?&])demo=update(?:&|$)/.test(String(location.search||""))) return true;
+    }catch(e){}
+    try{ return localStorage.getItem(SEEN_KEY)!=="1"; }catch(e2){ return true; }
+  }
   function kidsShowUpdate(title,text,targetBuild){
     pendingKidsBuild=String(targetBuild||KIDS_BUILD_ID);
     var layer=document.getElementById("kidsUpdateLayer");
@@ -2210,12 +2219,14 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
     if(p)p.textContent=text||"Tippe auf den goldenen Knopf. Dann lädt deine Kinder-App die neue, schöne Oberfläche.";
     if(btn && !btn.dataset.bound){
       btn.dataset.bound="1";
-      btn.addEventListener("click",function(){ kidsHardReload(pendingKidsBuild); });
+      btn.addEventListener("click",function(){
+        try{ localStorage.setItem(SEEN_KEY,"1"); }catch(e){}
+        kidsHardReload(pendingKidsBuild);
+      });
     }
-    if(layer){
-      layer.hidden=false;
-      requestAnimationFrame(function(){ layer.classList.add("is-open"); });
-    }
+    if(!layer)return;
+    layer.removeAttribute("hidden");
+    layer.classList.add("is-open");
   }
   function kidsHardReload(targetBuild){
     var want=String(targetBuild||KIDS_BUILD_ID);
@@ -2242,15 +2253,15 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
       }
     }catch(e){}
   }
-  window.addEventListener("DOMContentLoaded",function(){
-    try{
-      if(/(?:^|[?&])demo=update(?:&|$)/.test(String(location.search||""))){
-        kidsShowUpdate("Etwas Neues ist da","Tippe auf den goldenen Knopf. Dann lädt deine Kinder-App die neue, schöne Oberfläche.",KIDS_BUILD_ID);
-        return;
-      }
-    }catch(e){}
+  function kidsBootUpdate(){
+    if(kidsWantPreview()){
+      kidsShowUpdate("Etwas Neues ist da","Tippe auf den goldenen Knopf. Dann lädt deine Kinder-App die neue, schöne Oberfläche.",KIDS_BUILD_ID);
+      return;
+    }
     kidsCheckRemoteVersion();
-  });
+  }
+  kidsBootUpdate();
+  window.addEventListener("DOMContentLoaded",kidsBootUpdate);
   window.addEventListener("focus",kidsCheckRemoteVersion);
   document.addEventListener("visibilitychange",function(){if(!document.hidden)kidsCheckRemoteVersion()});
   setInterval(kidsCheckRemoteVersion,60000);
