@@ -446,7 +446,7 @@ input{
     <div class="profile-grid">
       <div class="profile-box"><small>Stimme</small><strong>Serhat</strong></div>
       <div class="profile-box"><small>Profil</small><strong>warm · klar</strong></div>
-      <div class="profile-box"><small>Sprache</small><strong>Deutsch + Arabisch</strong></div>
+      <div class="profile-box"><small>Sprache</small><strong>Deutsch + Arabisch · segmentiert</strong></div>
       <div class="profile-box"><small>Engine</small><strong>Chatterbox V3 · MPS</strong></div>
     </div>
   </section>
@@ -537,7 +537,7 @@ function analyze(text){
       if(ok){h={r,len:n.length};break}
     }
     if(!h){out.push(c[i++]);continue}
-    out.push(h.r.alias||h.r.string_to_replace);
+    out.push(h.r.tts_text||h.r.alias||h.r.string_to_replace);
     found.push(h.r);
     i+=h.len;
   }
