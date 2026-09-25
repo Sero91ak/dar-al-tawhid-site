@@ -18,6 +18,9 @@ watch_paths = [
 
 [assets]
 directory = "."
+binding = "ASSETS"
+run_worker_first = true
+html_handling = "none"
 
 # Path-spezifische Routen: liefern den Test-Worker unter der öffentlichen Domain.
 # Ohne diese Bindung bedient der Live-Worker (Custom Domain) weiterhin /test/* mit altem Snapshot.

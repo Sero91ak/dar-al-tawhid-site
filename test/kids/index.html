@@ -2108,7 +2108,7 @@ body{position:fixed!important;inset:0!important;touch-action:manipulation}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-reload1";
+const KIDS_BUILD_ID="kids-shell-v12-start1";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -2118,15 +2118,7 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
     }catch(e){return false}
   }
   function kidsShowUpdate(title,text,targetBuild){
-    var layer=document.getElementById("kidsUpdateLayer");
-    var t=document.getElementById("kidsUpdateTitle");
-    var p=document.getElementById("kidsUpdateText");
-    var b=document.getElementById("kidsUpdateButton");
-    if(!layer||!b)return;
-    if(t&&title)t.textContent=title;
-    if(p&&text)p.textContent=text;
-    layer.dataset.targetBuild=targetBuild||KIDS_BUILD_ID;
-    layer.classList.add("show");
+    return;
   }
   function kidsHardReload(targetBuild){
     var want=String(targetBuild||KIDS_BUILD_ID);
@@ -2135,7 +2127,7 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
     }else{
       try{localStorage.removeItem(KIDS_BUILD_SEEN_KEY)}catch(e){}
     }
-    var u=new URL("/test/kids/start.html",location.origin);
+    var u=new URL("/test/kids/start",location.origin);
     u.searchParams.set("kv",want);
     u.searchParams.set("cb",String(Date.now()));
     location.replace(u.toString());

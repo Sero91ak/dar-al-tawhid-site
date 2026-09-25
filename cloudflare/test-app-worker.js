@@ -1,6 +1,7 @@
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const path = url.pathname.replace(/\/+$/, "") || "/";
 
     if (url.pathname === "/" || url.pathname === "/index.html") {
       return Response.redirect(`${url.origin}/test/${url.search || ""}`, 302);
@@ -18,16 +19,24 @@ export default {
       return env.ASSETS.fetch(new Request(testVersionUrl.toString(), request));
     }
 
-    const asset = await env.ASSETS.fetch(request);
-    const path = url.pathname;
-    const bust = /\/test\/(index\.html)?$/.test(path)
-      || /dar-quran-player\.(js|css)$/.test(path)
-      || path.endsWith("/test/version.json")
-      || path.endsWith("/test/service-worker.js");
-    if (!bust || !asset) return asset;
-    const out = new Response(asset.body, asset);
-    out.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
-    out.headers.set("Pragma", "no-cache");
-    return out;
+    const kidsEntry =
+      path === "/test/kids"
+      || path === "/test/kids/start"
+      || path === "/test/kids/start.html"
+      || path === "/test/kids/index.html";
+
+    if (kidsEntry) {
+      const fileUrl = new URL("/test/kids/start.html", url.origin);
+      const asset = await env.ASSETS.fetch(new Request(fileUrl.toString(), { method: "GET" }));
+      const headers = new Headers(asset.headers);
+      headers.set("Content-Type", "text/html; charset=utf-8");
+      headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+      headers.set("Pragma", "no-cache");
+      headers.set("CDN-Cache-Control", "no-store");
+      headers.delete("Location");
+      return new Response(asset.body, { status: 200, headers });
+    }
+
+    return env.ASSETS.fetch(request);
   }
 };
