@@ -266,15 +266,69 @@ app.delegate = delegate
 app.run()
 SWIFT
 
-# Swift-Compiler aus den Apple Command Line Tools verwenden.
-SWIFTC="$(xcrun --find swiftc 2>/dev/null || true)"
-if [ -z "$SWIFTC" ]; then
-  /usr/bin/osascript -e 'display dialog "Für die native DĀR Voice Studio Mac-App werden einmalig die kostenlosen Apple Command Line Tools benötigt. Bitte installieren und danach denselben Setup-Befehl erneut ausführen." buttons {"Installieren","Abbrechen"} default button 1 with icon caution'
-  xcode-select --install >/dev/null 2>&1 || true
-  exit 1
+# Native Mac-App bauen. Auf sehr neuen macOS-Versionen darf swiftc nicht
+# automatisch gegen die aktuelle Systemversion (z. B. macOS 27) targeten,
+# wenn die installierte Toolchain dafür noch keine Standardbibliothek hat.
+SWIFTC="$(xcrun --sdk macosx --find swiftc 2>/dev/null || true)"
+SDK_PATH="$(xcrun --sdk macosx --show-sdk-path 2>/dev/null || true)"
+ARCH="$(uname -m)"
+DEPLOY_TARGET="13.0"
+BUILD_OK=0
+
+if [ -n "$SWIFTC" ] && [ -n "$SDK_PATH" ]; then
+  echo "Baue native DĀR Voice Studio App …"
+  echo "Swift: $SWIFTC"
+  echo "SDK:   $SDK_PATH"
+  echo "Target: ${ARCH}-apple-macosx${DEPLOY_TARGET}"
+  if MACOSX_DEPLOYMENT_TARGET="$DEPLOY_TARGET" "$SWIFTC"       -sdk "$SDK_PATH"       -target "${ARCH}-apple-macosx${DEPLOY_TARGET}"       "$TARGET/VoiceStudioApp.swift"       -o "$MACOS/DARVoiceStudio"       -framework Cocoa       -framework WebKit; then
+    BUILD_OK=1
+  fi
 fi
 
-"$SWIFTC" "$TARGET/VoiceStudioApp.swift"   -o "$MACOS/DARVoiceStudio"   -framework Cocoa   -framework WebKit
+# Falls nur die Command Line Tools kaputt/veraltet sind, noch einmal explizit
+# mit einer vorhandenen Voll-Xcode-Installation versuchen.
+if [ "$BUILD_OK" -ne 1 ] && [ -d "/Applications/Xcode.app/Contents/Developer" ]; then
+  XSWIFTC="$(DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcrun --sdk macosx --find swiftc 2>/dev/null || true)"
+  XSDK="$(DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcrun --sdk macosx --show-sdk-path 2>/dev/null || true)"
+  if [ -n "$XSWIFTC" ] && [ -n "$XSDK" ]; then
+    echo "Erster Swift-Build fehlgeschlagen – versuche vollständiges Xcode …"
+    if MACOSX_DEPLOYMENT_TARGET="$DEPLOY_TARGET" "$XSWIFTC"         -sdk "$XSDK"         -target "${ARCH}-apple-macosx${DEPLOY_TARGET}"         "$TARGET/VoiceStudioApp.swift"         -o "$MACOS/DARVoiceStudio"         -framework Cocoa         -framework WebKit; then
+      BUILD_OK=1
+    fi
+  fi
+fi
+
+# Letzter Fallback: weiterhin als eigenständige .app unter Programme startbar,
+# aber mit einem app-modalen Chrome/Edge-Fenster ohne Tabs/Adressleiste.
+# So blockiert eine defekte Swift-Toolchain niemals die Voice-Studio-App.
+if [ "$BUILD_OK" -ne 1 ]; then
+  echo "Swift-Toolchain weiterhin inkompatibel – installiere robusten App-Fallback …"
+  cat > "$MACOS/DARVoiceStudio" <<'APPFALLBACK'
+#!/bin/bash
+set -e
+URL="http://127.0.0.1:8787/studio/"
+LABEL="com.daraltawhid.voice-engine"
+
+launchctl kickstart -k "gui/$UID/$LABEL" >/dev/null 2>&1 || true
+for i in $(seq 1 40); do
+  if curl -fsS --max-time 1 "http://127.0.0.1:8787/health" >/dev/null 2>&1; then
+    break
+  fi
+  sleep 0.5
+done
+
+if [ -x "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" ]; then
+  exec "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"     --app="$URL"     --user-data-dir="$HOME/Library/Application Support/DAR Voice Studio"     --no-first-run     --no-default-browser-check
+fi
+
+if [ -x "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge" ]; then
+  exec "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge"     --app="$URL"     --user-data-dir="$HOME/Library/Application Support/DAR Voice Studio"     --no-first-run     --no-default-browser-check
+fi
+
+open "$URL"
+APPFALLBACK
+fi
+
 chmod +x "$MACOS/DARVoiceStudio"
 
 # App-Icon aus bestehendem DĀR-Icon erzeugen.
@@ -297,8 +351,8 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>1.4.0</string>
-  <key>CFBundleShortVersionString</key><string>1.4</string>
+  <key>CFBundleVersion</key><string>1.4.3</string>
+  <key>CFBundleShortVersionString</key><string>1.4.3</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>
