@@ -1830,53 +1830,55 @@ html,body{
 }
 
 
-/* KIDS_BRAND_FLOW_V10
-   Titel ist Teil der Szene, zentriert, groß. Unten weiche Schattierung in die Startseite. */
+/* KIDS_BRAND_FLOW_V11
+   Oben Willkommen-Titel. Darunter klar getrennte Inhalte, nichts verschluckt sich. */
 #view-today{position:relative}
 #view-today .brand-line{
   position:absolute;left:0;right:0;top:0;z-index:6;
   margin:0;padding:0;height:0;overflow:visible;justify-content:flex-end
 }
-#view-today .brand-line .brand,
-#view-today .kids-wordmark{display:none!important}
+#view-today .brand-line .brand{display:none}
 #view-today .profile-dot{
-  position:absolute;top:max(10px, env(safe-area-inset-top, 0px));right:12px;z-index:7
+  position:absolute;top:max(10px, env(safe-area-inset-top, 0px));right:12px;z-index:8
 }
 #view-today .hero .cloud,
 #view-today .hero .city,
 #view-today .hero .arch,
 #view-today .hero .dune,
 #view-today .hero .lantern{display:none!important}
+#view-today .kids-wordmark{
+  display:block!important;
+  position:absolute;z-index:5;left:50%;top:max(10px, calc(env(safe-area-inset-top, 0px) + 8px));
+  transform:translateX(-50%);
+  width:min(86vw, 340px);
+  filter:drop-shadow(0 10px 18px rgba(6,19,31,.45))
+}
+#view-today .kids-wordmark img{display:block;width:100%;height:auto}
 #view-today .hero{
-  --art:url("/test/kids/assets/kids-brand/home-title-hero.png")!important;
-  margin:0 -16px -48px;
+  --art:url("/test/kids/assets/kids-brand/welcome-sky.png")!important;
+  margin:0 -16px 0;
   width:calc(100% + 32px);
   border:0!important;
-  border-radius:0!important;
-  min-height:clamp(420px, 118vw, 640px)!important;
-  box-shadow:none!important;
-  background:#06131f!important
+  border-radius:0 0 28px 28px!important;
+  min-height:clamp(250px, 62vw, 320px)!important;
+  box-shadow:0 24px 40px rgba(6,19,31,.28)!important;
+  background:#0a2433!important;
+  overflow:hidden
 }
 #view-today .hero::before{
   background-image:var(--art)!important;
   background-size:cover!important;
-  background-position:center top!important;
-  filter:none!important;
-  opacity:1!important;
-  transform:none!important
+  background-position:center 18%!important;
+  filter:none!important;opacity:1!important;transform:none!important
 }
 #view-today .hero::after{
   background:
-    linear-gradient(180deg,
-      rgba(6,19,31,.20) 0%,
-      transparent 16%,
-      transparent 52%,
-      rgba(6,19,31,.35) 70%,
-      rgba(6,19,31,.82) 86%,
-      #06131f 100%)!important
+    radial-gradient(ellipse 90% 70% at 50% 18%, rgba(6,19,31,.18), transparent 58%),
+    linear-gradient(180deg, rgba(6,19,31,.22) 0%, transparent 22%, rgba(6,19,31,.55) 78%, #06131f 100%)!important
 }
 #view-today .hero-copy{
-  left:18px;right:18px;bottom:58px;max-width:none;text-align:left
+  left:18px;right:18px;bottom:16px;max-width:none;text-align:center;
+  text-shadow:0 6px 18px rgba(6,19,31,.55)
 }
 #view-today .hero-kicker,
 #view-today .hero h1,
@@ -1886,13 +1888,12 @@ html,body{
 #view-today .daily-head strong,
 #view-today .choice strong,
 #view-today .gentle-note,
-.page-head h2,
-.page-head p,
-.section-title{
-  font-family:"Fredoka",system-ui,sans-serif!important;
-  letter-spacing:0
+.page-head h2,.page-head p,.section-title{
+  font-family:"Fredoka",system-ui,sans-serif!important;letter-spacing:0
 }
-#view-today .hero h1{font-weight:700}
+#view-today .hero-kicker{font-size:11px;font-weight:700;letter-spacing:.12em}
+#view-today .hero h1{font-size:clamp(20px,5.4vw,26px)!important;margin:4px 0 4px;font-weight:700;max-width:none}
+#view-today .hero p{font-size:13px!important;max-width:none;margin:0 auto}
 .section-title::after{display:none!important;content:none!important}
 #view-today .resume,
 #view-today .daily-journey,
@@ -1901,19 +1902,21 @@ html,body{
 #view-today .gentle-note,
 #view-today .section-title{position:relative;z-index:3}
 #view-today .resume{
-  margin-top:0;border:0!important;border-radius:22px;
-  background:linear-gradient(180deg, rgba(6,19,31,0), rgba(10,32,46,.5) 40%, rgba(12,38,54,.82))!important;
-  box-shadow:none!important
+  margin-top:16px!important;
+  border:0!important;border-radius:22px;
+  background:rgba(12,38,54,.92)!important;
+  box-shadow:0 12px 24px rgba(0,0,0,.18)!important
 }
 #view-today .daily-journey{
-  margin-top:6px;border:0!important;
-  background:linear-gradient(180deg, rgba(12,38,54,.2), rgba(12,38,54,.6))!important;
-  box-shadow:none!important
+  margin-top:12px;border:0!important;
+  background:rgba(12,38,54,.78)!important;
+  box-shadow:0 12px 24px rgba(0,0,0,.14)!important
 }
-#view-today .section-title{margin:14px 4px 8px;font-weight:700}
+#view-today .section-title{margin:18px 4px 8px;font-weight:700}
 #view-today .choice,
 #view-today .knowledge-card{border:0!important;box-shadow:0 14px 28px rgba(0,0,0,.14)!important}
 #view-today .gentle-note{background:transparent;border:0;opacity:.9}
+
 
 
 
@@ -1944,15 +1947,16 @@ html,body{
       </div>
 
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
+        <div class="kids-wordmark"><img src="/test/kids/assets/kids-brand/logo-mark.png" alt="DĀR AL TAWḤĪD Kids"></div>
         <div class="cloud"></div>
         <div class="city"></div>
         <div class="arch"></div>
         <div class="dune"></div>
         <div class="lantern"></div>
         <div class="hero-copy">
-          <div class="hero-kicker">DEINE HEUTIGE REISE</div>
-          <h1>Entdecke etwas Schönes.</h1>
-          <p>Eine Geschichte, eine Sūrah oder ein Duʿāʾ. Du entscheidest.</p>
+          <div class="hero-kicker">WILLKOMMEN</div>
+          <h1>Hier ist deine Kinderwelt</h1>
+          <p>Geschichten, Qurʾān und Duʿāʾ — ganz in Ruhe.</p>
         </div>
       </div>
 
@@ -2327,7 +2331,7 @@ html,body{
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab10";
+const KIDS_BUILD_ID="kids-shell-v12-tab11";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
