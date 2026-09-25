@@ -476,7 +476,7 @@
   function renderDetail(){
     var host=document.querySelector(".jummah-hub-page");
     if(!host)return;
-    var old=document.getElementById(DETAIL_ID);if(old)old.remove();
+    var old=document.getElementById(DETAIL_ID);
     var st=currentState(),asr=st.window.asr?fmt(st.window.asr,st.settings):"Standort nötig",mag=st.window.maghrib?fmt(st.window.maghrib,st.settings):"Standort nötig",last=st.window.lastStart?fmt(st.window.lastStart,st.settings):"nach ʿAṣr";
     var rhythm=st.cadence.items.length?st.cadence.items.map(function(d){return fmt(d,st.settings);}).join(" · "):"09:00 · 11:00 · 13:00 · … · bis Maghrib";
     var sig=[st.friday,st.last,asr,last,mag,rhythm].join("|");
@@ -496,6 +496,7 @@
       '<span class="dar-jf-source">Qurʾān 51:56 · Ṣaḥīḥ al-Buḫārī 7373 · Ṣaḥīḥ Muslim 30</span>'+
       '<p class="dar-jf-note">Der Impuls bleibt bewusst kurz. Zur Kürze der Khuṭbah: Ṣaḥīḥ Muslim 869. Eine formelle Jumuʿah-Khuṭbah und ihre fiqhrechtlichen Voraussetzungen werden getrennt behandelt.</p></section>'+
       '<section class="dar-jf-section"><div class="dar-jf-kicker">52 WOCHEN</div><h3>Jahresplan für Jumuʿah</h3><p>52 Themen sind vorbereitet. Automatisch ausgespielt werden später nur Inhalte, deren Qurʾān-, Sunnah- und Aṯār-Nachweise einzeln geprüft und freigegeben wurden.</p><div class="dar-jf-year">'+yearPreview()+'</div><p class="dar-jf-note">Vorschau zeigt die ersten 8 Themen · Gesamtplan: 52 · aktuell ist nur der erste Wochenimpuls als Testinhalt freigegeben.</p></section>';
+    if(old&&old.parentNode){old.parentNode.replaceChild(wrap,old);return;}
     var p=host.querySelector(".jummah-push-panel");
     if(p&&p.parentNode)p.parentNode.insertBefore(wrap,p.nextSibling);else host.insertBefore(wrap,host.firstChild);
   }
