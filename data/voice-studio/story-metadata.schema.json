@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DĀR AL TAWḤĪD Voice Story Metadata",
+  "type": "object",
+  "required": ["id","title","sourceText","voice","provider","pronunciationLibrary","qa","audio"],
+  "properties": {
+    "id": {"type":"string"},
+    "title": {"type":"string"},
+    "sourceText": {"type":"string"},
+    "preparedText": {"type":"string"},
+    "voice": {"const":"Serhat"},
+    "provider": {"type":"string"},
+    "pronunciationLibrary": {
+      "type":"object",
+      "required":["canonicalTerms","rules"],
+      "properties":{
+        "canonicalTerms":{"type":"integer"},
+        "rules":{"type":"integer"},
+        "version":{"type":"string"}
+      }
+    },
+    "qa": {
+      "type":"object",
+      "required":["lockedTermsReviewed","audioReviewed","quranRecitationSynthetic"],
+      "properties":{
+        "lockedTermsReviewed":{"type":"boolean"},
+        "audioReviewed":{"type":"boolean"},
+        "quranRecitationSynthetic":{"const":false}
+      }
+    },
+    "audio": {
+      "type":"object",
+      "required":["format"],
+      "properties":{
+        "format":{"enum":["wav","m4a","mp3"]},
+        "r2Key":{"type":["string","null"]},
+        "publicUrl":{"type":["string","null"]},
+        "durationSeconds":{"type":["number","null"]}
+      }
+    }
+  }
+}
