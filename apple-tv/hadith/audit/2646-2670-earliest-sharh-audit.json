@@ -1,0 +1,154 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-2646-2670",
+  "series": "2551-2750",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "Der 25er-Unterblock wurde unter Regel v6 einzeln aufgebaut und vollständig geprüft. Alle Datensätze besitzen eindeutige Quellen, sharhStatus=verified und konkrete Šarḥ-Nachweise. Der Block überschreitet die Seriengrenze: HAD-2646–2650 liegen in 2551-2650, HAD-2651–2670 in 2651-2750. Vor dem Schreiben wurden die vorgesehenen Quellennummern gegen den vorhandenen Apple-TV-Ḥadīṯ-Katalog auf ältere Dubletten geprüft. Unsichere Druckseiten wurden nicht geschätzt.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "appleTvScreensaverShowsSharh": true,
+    "perRecordImmediateActivation": true,
+    "blockActivationAllowed": true
+  },
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
+  "records": [
+    {
+      "id": "HAD-2646",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2647",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2648",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2649",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2650",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2651",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2652",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2653",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2654",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2655",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2656",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2657",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2658",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2659",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2660",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2661",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2662",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-2663",
+      "currentSharh": "Ibn ʿAbd al-Barr",
+      "auditStatus": "earlier-direct-commentary",
+      "note": "al-Istiḏkār 7/269 wurde als frühere direkte Erklärung vor späteren Muslim-Šurūḥ verwendet."
+    },
+    {
+      "id": "HAD-2664",
+      "currentSharh": "Ibn ʿAbd al-Barr",
+      "auditStatus": "earlier-direct-commentary",
+      "note": "al-Istiḏkār 7/269 wurde als frühere direkte Erklärung vor späteren Muslim-Šurūḥ verwendet."
+    },
+    {
+      "id": "HAD-2665",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2666",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2667",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2668",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2669",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    },
+    {
+      "id": "HAD-2670",
+      "currentSharh": "Ibn Baṭṭāl",
+      "auditStatus": "earliest-greifbar-after-al-Khattabi-check"
+    }
+  ]
+}
