@@ -11,16 +11,8 @@
     try {
       var path = String(location.pathname || "");
       if (path.indexOf("/test/kids") === 0 || path.indexOf("/kids") === 0) return false;
-      if (path.indexOf("/test") === 0) return true;
-      if (root.DAR_IOS_NATIVE_APP || root.DAR_ANDROID_NATIVE_APP || root.DAR_OFFICIAL_IOS_APP) return true;
-      var html = document.documentElement;
-      if (html.classList.contains("dar-ios-native-app") || html.classList.contains("dar-android-native-app")) return true;
-      if (html.classList.contains("is-standalone-pwa")) return true;
-      if (navigator.standalone === true) return true;
-      if (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) return true;
-      if (/DarAlTawhid-iOS|DarAlTawhidAndroid/i.test(String(navigator.userAgent || ""))) return true;
     } catch (e) {}
-    return false;
+    return true;
   }
 
   function ensure() {

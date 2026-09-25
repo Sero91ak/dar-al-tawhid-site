@@ -9106,45 +9106,23 @@ html[data-theme="bordeaux"] .post-after-panel,html[data-theme="bordeaux"] .relat
 #appChromeDock #bottomNav.bottom-nav,#bottomNav.bottom-nav{position:fixed!important;top:auto!important;left:50%!important;right:auto!important;bottom:calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm)!important;transform:translateX(-50%)!important;-webkit-transform:translateX(-50%)!important;pointer-events:auto!important;margin:0!important;width:var(--dar-nav-width,min(clamp(21rem,66vw,54.5rem),calc(100vw - 2 * max(10px,env(safe-area-inset-left,0px),2.2vw))))!important;max-width:min(900px,calc(100vw - 2 * max(10px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px))))!important;z-index:40!important;contain:none!important;will-change:auto!important}
 html[data-theme] #appChromeDock #bottomNav.bottom-nav,html[data-theme] #bottomNav.bottom-nav{position:fixed!important;top:auto!important;left:50%!important;right:auto!important;bottom:calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm)!important;transform:translateX(-50%)!important;-webkit-transform:translateX(-50%)!important;margin-left:0!important;margin-right:0!important;contain:none!important;width:var(--dar-nav-width,min(clamp(21rem,66vw,54.5rem),calc(100vw - 2 * max(10px,env(safe-area-inset-left,0px),2.2vw))))!important;max-width:min(900px,calc(100vw - 2 * max(10px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px))))!important}
 .new-posts-banner{position:fixed;top:0;left:0;right:0;z-index:1200;display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top));background:linear-gradient(135deg,rgba(239,215,142,.18),rgba(155,122,60,.12));border:1px solid rgba(239,215,142,.45);border-bottom:2px solid rgba(239,215,142,.65);border-radius:0 0 22px 22px;backdrop-filter:blur(12px);cursor:pointer;transition:transform .3s ease,opacity .3s ease;transform:translateY(0);opacity:1}.new-posts-banner.is-app-version{background:linear-gradient(135deg,rgba(120,165,235,.16),rgba(239,215,142,.14));border-color:rgba(160,195,255,.42);border-bottom-color:rgba(160,195,255,.55)}.new-posts-banner.is-app-version .new-posts-text{color:#eef4ff}.new-posts-banner.is-app-version .new-posts-refresh{color:#eef4ff;background:rgba(140,190,255,.18);border-color:rgba(140,190,255,.38)}.new-posts-banner.hidden{transform:translateY(-120%);opacity:0;pointer-events:none}.new-posts-icon{font-size:18px}.new-posts-text{color:var(--gold2);font-size:14px;font-weight:900;letter-spacing:.02em}.new-posts-refresh{color:var(--cream);font-size:11px;font-weight:900;background:rgba(239,215,142,.15);border:1px solid rgba(239,215,142,.35);border-radius:999px;padding:4px 10px}
-/* UPDATE_DROP_BANNER_V2: nur das heruntergleitende Update, Modal und Posts-Banner aus */
-.ios-shell-update-bar,
-html.dar-ios-native-app .ios-shell-update-bar,
+/* UPDATE_DROP_BANNER_V3: überall dasselbe Drop-down von oben, kein Mitten-Modal */
+#appUpdateModal,.app-update-modal,.app-update-modal[hidden],.app-update-modal:not([hidden]),
+html.dar-ios-native-app .app-update-modal,html.dar-ios-native-app .app-update-modal:not([hidden]),
+html.dar-android-native-app .app-update-modal{
+  display:none!important;visibility:hidden!important;pointer-events:none!important;opacity:0!important
+}
+.ios-shell-update-bar,html.dar-ios-native-app .ios-shell-update-bar,
+#newPostsBanner.is-app-version,#newPostsBanner.is-app-repair,
 html.dar-ios-native-app #newPostsBanner.is-app-version,
 html.dar-ios-native-app #newPostsBanner.is-app-repair,
-#newPostsBanner.is-app-version,#newPostsBanner.is-app-repair,
 body.is-area-route #newPostsBanner.is-app-version{
   display:none!important;visibility:hidden!important;pointer-events:none!important
 }
-.app-update-modal,.app-update-modal:not([hidden]),html.dar-ios-native-app .app-update-modal:not([hidden]){
-  display:none!important
-}
-#darGlobalUpdateBanner{
-  display:flex!important;visibility:visible!important
+#darGlobalUpdateBanner,html.dar-ios-native-app #darGlobalUpdateBanner,html.dar-android-native-app #darGlobalUpdateBanner{
+  display:flex!important;visibility:visible!important;opacity:1!important
 }
 
-.app-update-modal[hidden]{display:none!important}
-.app-update-modal:not([hidden]),html.dar-ios-native-app .app-update-modal:not([hidden]){
-  display:flex!important;align-items:center;justify-content:center;
-  position:fixed;inset:0;z-index:2147483002;visibility:visible!important;pointer-events:auto!important;
-  padding:max(18px,env(safe-area-inset-top)) 18px max(18px,env(safe-area-inset-bottom));
-}
-.app-update-modal__backdrop{display:block!important;position:absolute;inset:0;background:rgba(6,7,10,.72)}
-.app-update-modal__panel{
-  display:block!important;position:relative;z-index:1;width:min(100%,380px);
-  border-radius:24px;padding:22px 20px 18px;text-align:center;
-  border:1px solid rgba(239,215,142,.28);
-  background:linear-gradient(180deg,#17140f,#0d0c0a);
-  box-shadow:0 28px 80px rgba(0,0,0,.5);color:#f5efe1
-}
-.app-update-modal__badge{display:inline-block;margin:0 0 10px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#efd78e}
-.app-update-modal__panel h2{margin:0 0 8px;font-family:Georgia,serif;font-size:24px;color:#efd78e}
-.app-update-modal__panel p{margin:0 0 16px;font-size:14px;line-height:1.45;color:#cfc6b4}
-.app-update-modal__btn{
-  appearance:none;border:0;border-radius:999px;min-height:46px;width:100%;
-  font:inherit;font-weight:800;font-size:15px;color:#16120d;background:linear-gradient(180deg,#f3e2b0,#d7b56a);cursor:pointer
-}
-body.app-update-modal-open,html.dar-ios-native-app body.app-update-modal-open{overflow:hidden!important}
-html.dar-ios-native-app #newPostsBanner.is-app-version,html.dar-ios-native-app #newPostsBanner.is-app-repair,body.is-area-route #newPostsBanner.is-app-version{display:none!important}
 
 
 /* POST INTRO MODAL: Theme-Lesbarkeit */
@@ -10497,7 +10475,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <script src="/assets/adaptive-layout.js?v=10" defer></script>
 <script src="/assets/qibla-quick-view.js?v=2" defer></script>
-<script src="/assets/global-update-banner.js?v=2"></script>
+<script src="/assets/global-update-banner.js?v=3"></script>
 <script src="/test/assets/fold-split.js?v=937" defer></script>
 <script src="/assets/scholars-index.js?v=587" defer></script>
 <script src="/test/assets/prophets/prophets.js?v=33" defer></script>
@@ -12141,7 +12119,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=791">
 <link rel="stylesheet" href="/assets/adaptive-layout.css?v=645">
 <link rel="stylesheet" href="/assets/qibla-quick-view.css?v=2">
-<link rel="stylesheet" href="/assets/global-update-banner.css?v=2">
+<link rel="stylesheet" href="/assets/global-update-banner.css?v=3">
 <link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=668">
 <link rel="stylesheet" href="/test/assets/dar-setup-hub.css?v=8"><!-- DAR_SETUP_HUB_V1 -->
 <link rel="stylesheet" href="/test/assets/dar-top-chrome-fix.css?v=2"><!-- DAR_TOP_CHROME_FIX -->
@@ -27610,7 +27588,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1031";
+const APP_BUILD_ID="app-shell-v1032";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -29161,7 +29139,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       var modal = getUpdateModal();
       if (modal) return modal;
       var wrap = document.createElement('div');
-      wrap.innerHTML = `<div id="appUpdateModal" class="app-update-modal" hidden>
+      wrap.innerHTML = `<div id="appUpdateModal" class="app-update-modal" hidden style="display:none">
   <div class="app-update-modal__backdrop"></div>
   <div class="app-update-modal__panel" role="dialog" aria-modal="true" aria-labelledby="appUpdateModalTitle">
     <span class="app-update-modal__badge">App</span>
@@ -29179,25 +29157,27 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       hideUpdateModal();
       hideBanner();
       var title = mode === 'recovery' ? 'App-Update erforderlich' : 'Neue Version verfügbar';
+      var apply = function(){
+        var targetBuild = remoteBuildId || window.__darRemoteBuildId || '';
+        markVersionUpdatePending(targetBuild);
+        if (typeof hardRefreshApp === 'function') return hardRefreshApp();
+        location.reload();
+      };
       try{
-        if(window.DARGlobalUpdate && window.DARGlobalUpdate.show){
+        if(window.DARGlobalUpdate && typeof window.DARGlobalUpdate.show === 'function'){
           window.DARGlobalUpdate.show({
             buildId: remoteBuildId || window.__darRemoteBuildId || '',
             title: title,
             text: '',
-            apply: function(){
-              var targetBuild = remoteBuildId || window.__darRemoteBuildId || '';
-              markVersionUpdatePending(targetBuild);
-              if (typeof hardRefreshApp === 'function') return hardRefreshApp();
-              location.reload();
-            }
+            apply: apply
           });
           window.__darAppVersionAvailable = true;
           bannerMode = mode || 'version';
           return;
         }
       }catch(e){}
-      offerGlobalShellUpdate(mode, label);
+      bannerMode = mode || 'version';
+      window.__darAppVersionAvailable = true;
     }
     function showBanner(mode, label) {
       /* Nie blockierendes Modal — Besucher sollen die App weiter nutzen können */
