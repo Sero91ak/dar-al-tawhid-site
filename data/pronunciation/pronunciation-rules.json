@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "dar-al-tawhid-pronunciation-master",
   "title": "DĀR AL TAWḤĪD – Islamische Aussprachebibliothek",
   "updatedAt": "2026-09-24",
@@ -21,7 +21,8 @@
     "masterPronunciationGroups": 9,
     "reviewPronunciationGroups": 112,
     "autoPronunciationGroups": 749,
-    "curatedReviewGroups": 207
+    "curatedReviewGroups": 207,
+    "audioLockedCoreVariants": 24
   },
   "rules": [
     {
@@ -151,12 +152,14 @@
       "alias": "Tauhiid",
       "ipa": "/tawˈħiːd/",
       "priority": "core",
-      "tts_text": "تَوْحِيد",
+      "tts_text": "تَوْحِيدْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/tawˈħiːd/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "tawhid",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -165,12 +168,14 @@
       "alias": "Tauhiid",
       "ipa": "/tawˈħiːd/",
       "priority": "extended",
-      "tts_text": "تَوْحِيد",
+      "tts_text": "تَوْحِيدْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/tawˈħiːd/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "tawhid",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -179,12 +184,14 @@
       "alias": "Tauhiid",
       "ipa": "/tawˈħiːd/",
       "priority": "extended",
-      "tts_text": "تَوْحِيد",
+      "tts_text": "تَوْحِيدْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/tawˈħiːd/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "tawhid",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -193,12 +200,14 @@
       "alias": "Tauhiid",
       "ipa": "/tawˈħiːd/",
       "priority": "extended",
-      "tts_text": "تَوْحِيد",
+      "tts_text": "تَوْحِيدْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/tawˈħiːd/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "tawhid",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Branding & Grundbegriffe",
@@ -709,112 +718,128 @@
       "canonical": "Īmān",
       "string_to_replace": "Īmān",
       "alias": "Iimaan",
-      "ipa": "/iːmaːn/",
+      "ipa": "/ʔiːˈmaːn/",
       "priority": "core",
-      "tts_text": "إِيمَان",
+      "tts_text": "إِيمَانْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/iːmaːn/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "iman",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
       "canonical": "Iman",
       "string_to_replace": "Iman",
       "alias": "Iimaan",
-      "ipa": "/iːmaːn/",
+      "ipa": "/ʔiːˈmaːn/",
       "priority": "extended",
-      "tts_text": "إِيمَان",
+      "tts_text": "إِيمَانْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/iːmaːn/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "iman",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
       "canonical": "īmān",
       "string_to_replace": "īmān",
       "alias": "Iimaan",
-      "ipa": "/iːmaːn/",
+      "ipa": "/ʔiːˈmaːn/",
       "priority": "extended",
-      "tts_text": "إِيمَان",
+      "tts_text": "إِيمَانْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/iːmaːn/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "iman",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
       "canonical": "iman",
       "string_to_replace": "iman",
       "alias": "Iimaan",
-      "ipa": "/iːmaːn/",
+      "ipa": "/ʔiːˈmaːn/",
       "priority": "extended",
-      "tts_text": "إِيمَان",
+      "tts_text": "إِيمَانْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/iːmaːn/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "iman",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Branding & Grundbegriffe",
       "canonical": "Iḥsān",
       "string_to_replace": "Iḥsān",
       "alias": "Ihsaan",
-      "ipa": "/iħsaːn/",
+      "ipa": "/ʔiħˈsaːn/",
       "priority": "core",
-      "tts_text": "إِحْسَان",
+      "tts_text": "إِحْسَانْ",
       "tts_language": "ar",
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/iħsaːn/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "audio_lock_key": "ihsan",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
       "canonical": "Ihsan",
       "string_to_replace": "Ihsan",
       "alias": "Ihsaan",
-      "ipa": "/iħsaːn/",
+      "ipa": "/ʔiħˈsaːn/",
       "priority": "extended",
-      "tts_text": "إِحْسَان",
+      "tts_text": "إِحْسَانْ",
       "tts_language": "ar",
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/iħsaːn/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "audio_lock_key": "ihsan",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
       "canonical": "iḥsān",
       "string_to_replace": "iḥsān",
       "alias": "Ihsaan",
-      "ipa": "/iħsaːn/",
+      "ipa": "/ʔiħˈsaːn/",
       "priority": "extended",
-      "tts_text": "إِحْسَان",
+      "tts_text": "إِحْسَانْ",
       "tts_language": "ar",
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/iħsaːn/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "audio_lock_key": "ihsan",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
       "canonical": "ihsan",
       "string_to_replace": "ihsan",
       "alias": "Ihsaan",
-      "ipa": "/iħsaːn/",
+      "ipa": "/ʔiħˈsaːn/",
       "priority": "extended",
-      "tts_text": "إِحْسَان",
+      "tts_text": "إِحْسَانْ",
       "tts_language": "ar",
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/iħsaːn/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "audio_lock_key": "ihsan",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Branding & Grundbegriffe",
@@ -4435,12 +4460,14 @@
       "alias": "Qur-aan",
       "ipa": "/qurˈʔaːn/",
       "priority": "extended",
-      "tts_text": "قُرْآن",
+      "tts_text": "قُرْآنْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/qurˈʔaːn/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "quran",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -4449,12 +4476,14 @@
       "alias": "Qur-aan",
       "ipa": "/qurˈʔaːn/",
       "priority": "extended",
-      "tts_text": "قُرْآن",
+      "tts_text": "قُرْآنْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/qurˈʔaːn/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "quran",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -4463,12 +4492,14 @@
       "alias": "Qur-aan",
       "ipa": "/qurˈʔaːn/",
       "priority": "extended",
-      "tts_text": "قُرْآن",
+      "tts_text": "قُرْآنْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/qurˈʔaːn/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "quran",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -4477,12 +4508,14 @@
       "alias": "Qur-aan",
       "ipa": "/qurˈʔaːn/",
       "priority": "extended",
-      "tts_text": "قُرْآن",
+      "tts_text": "قُرْآنْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/qurˈʔaːn/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "quran",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -4491,12 +4524,14 @@
       "alias": "Qur-aan",
       "ipa": "/qurˈʔaːn/",
       "priority": "extended",
-      "tts_text": "قُرْآن",
+      "tts_text": "قُرْآنْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/qurˈʔaːn/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "quran",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -4505,12 +4540,14 @@
       "alias": "Qur-aan",
       "ipa": "/qurˈʔaːn/",
       "priority": "extended",
-      "tts_text": "قُرْآن",
+      "tts_text": "قُرْآنْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/qurˈʔaːn/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "quran",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Qurʾān & Qurʾān-Wissenschaften",
@@ -4519,12 +4556,14 @@
       "alias": "al-Qur-aan",
       "ipa": "/al.qurˈʔaːn/",
       "priority": "extended",
-      "tts_text": "الْقُرْآن",
+      "tts_text": "الْقُرْآنْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/al.qurˈʔaːn/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "al_quran",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -4533,12 +4572,14 @@
       "alias": "al-Qur-aan",
       "ipa": "/al.qurˈʔaːn/",
       "priority": "extended",
-      "tts_text": "الْقُرْآن",
+      "tts_text": "الْقُرْآنْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/al.qurˈʔaːn/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "al_quran",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -4547,12 +4588,14 @@
       "alias": "al-Qur-aan",
       "ipa": "/al.qurˈʔaːn/",
       "priority": "extended",
-      "tts_text": "الْقُرْآن",
+      "tts_text": "الْقُرْآنْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/al.qurˈʔaːn/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "al_quran",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -4561,12 +4604,14 @@
       "alias": "al-Qur-aan",
       "ipa": "/al.qurˈʔaːn/",
       "priority": "extended",
-      "tts_text": "الْقُرْآن",
+      "tts_text": "الْقُرْآنْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/al.qurˈʔaːn/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "al_quran",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -4575,12 +4620,14 @@
       "alias": "al-Qur-aan",
       "ipa": "/al.qurˈʔaːn/",
       "priority": "extended",
-      "tts_text": "الْقُرْآن",
+      "tts_text": "الْقُرْآنْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/al.qurˈʔaːn/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "al_quran",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -4589,12 +4636,14 @@
       "alias": "al-Qur-aan",
       "ipa": "/al.qurˈʔaːn/",
       "priority": "extended",
-      "tts_text": "الْقُرْآن",
+      "tts_text": "الْقُرْآنْ",
       "tts_language": "ar",
       "tts_strategy": "manual-native-script",
       "tts_group_ipa": "/al.qurˈʔaːn/",
       "voice_lock": "MASTER",
-      "qa_tier": "critical"
+      "qa_tier": "critical",
+      "audio_lock_key": "al_quran",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Qurʾān & Qurʾān-Wissenschaften",
@@ -52243,5 +52292,15 @@
     "lockPolicy": "MASTER > REVIEW > AUTO",
     "humanMasterApprovalRequired": true,
     "curatedReviewPolicy": "Curated forms are REVIEW until human audio confirmation upgrades them to MASTER."
+  },
+  "metadata": {
+    "audioLockPolicy": "Core pronunciation variants can be frozen as user-confirmed local WAV segments; confirmed WAV always overrides fresh synthesis.",
+    "audioLockKeys": [
+      "tawhid",
+      "iman",
+      "ihsan",
+      "quran",
+      "al_quran"
+    ]
   }
 }
