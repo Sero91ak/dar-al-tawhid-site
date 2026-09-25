@@ -480,6 +480,9 @@
     "confirmedPreviewBecomesPersistentAudioLock": true,
     "userRuleOverridesBaseRule": true,
     "onlineRulesNeverAutoPromoteToMaster": true,
-    "vocabularyExpandsPersistently": true
+    "vocabularyExpandsPersistently": true,
+    "automaticOnlineSync": true,
+    "automaticOnlineSyncHours": 24,
+    "onlineRulesAreSuggestionsOnly": true
   }
 }
