@@ -18,7 +18,8 @@ export default {
       return env.ASSETS.fetch(new Request(testVersionUrl.toString(), request));
     }
 
-    const asset = await env.ASSETS.fetch(request);
+    const assetReq = new Request(request, { cache: "no-store" });
+    const asset = await env.ASSETS.fetch(assetReq);
     const path = url.pathname;
     const bust = /\/test\/(index\.html)?$/.test(path)
       || /dar-quran-player\.(js|css)$/.test(path)
@@ -31,6 +32,8 @@ export default {
     const out = new Response(asset.body, asset);
     out.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
     out.headers.set("Pragma", "no-cache");
+    out.headers.set("CDN-Cache-Control", "no-store");
+    out.headers.set("Cloudflare-CDN-Cache-Control", "no-store");
     return out;
   }
 };

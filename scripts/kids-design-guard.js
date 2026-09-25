@@ -36,9 +36,9 @@ function runKidsDesignGuard() {
     "KIDS_REAL_ASSET_ICON_SYSTEM_V11",
     "backdrop-filter:blur(28px) saturate(1.55)",
     "width:100%!important",
-    "kids-icons/moon-real-v11.png",
-    "kids-icons/headphones-real-v11.png",
-    "kids-icons/quran-real-v11.png"
+    "kids-icons/moon-real-v12.png",
+    "kids-icons/headphones-real-v12.png",
+    "kids-icons/quran-real-v12.png"
   ];
   for (const n of needles) {
     if (!html.includes(n)) failed += fail(`${KIDS_HTML}: Marker fehlt: ${n}`);
@@ -56,7 +56,7 @@ function runKidsDesignGuard() {
   }
   const iconDir = path.join(ROOT, "test/kids/assets/kids-icons");
   if (!fs.existsSync(iconDir)) return fail("kids-icons Ordner fehlt");
-  const must = ["headphones-real-v11.png", "moon-real-v11.png", "sun-real-v11.png", "quran-real-v11.png", "parents-real-v11.png"];
+  const must = ["headphones-real-v12.png", "moon-real-v12.png", "sun-real-v12.png", "quran-real-v12.png", "parents-real-v12.png"];
   for (const f of must) {
     const buf = fs.readFileSync(path.join(iconDir, f));
     if (buf.slice(0, 8).toString("binary") !== "\x89PNG\r\n\x1a\n") {

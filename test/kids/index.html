@@ -1715,7 +1715,7 @@ body{position:fixed!important;inset:0!important;touch-action:manipulation}
 </div>
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon">KIDS · V0.12</div>
+  <div class="dev-ribbon">KIDS · V0.12r</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2108,7 +2108,7 @@ body{position:fixed!important;inset:0!important;touch-action:manipulation}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-glasswide1";
+const KIDS_BUILD_ID="kids-shell-v12-reload1";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -2129,9 +2129,14 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
     layer.classList.add("show");
   }
   function kidsHardReload(targetBuild){
-    try{localStorage.setItem(KIDS_BUILD_SEEN_KEY,targetBuild||KIDS_BUILD_ID)}catch(e){}
-    var u=new URL(location.href);
-    u.searchParams.set("kv","20260925-12");
+    var want=String(targetBuild||KIDS_BUILD_ID);
+    if(want===KIDS_BUILD_ID){
+      try{localStorage.setItem(KIDS_BUILD_SEEN_KEY,want)}catch(e){}
+    }else{
+      try{localStorage.removeItem(KIDS_BUILD_SEEN_KEY)}catch(e){}
+    }
+    var u=new URL("/test/kids/index.html",location.origin);
+    u.searchParams.set("kv",want);
     u.searchParams.set("cb",String(Date.now()));
     location.replace(u.toString());
   }
@@ -2142,7 +2147,9 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
       var j=await r.json();
       var remote=String(j.buildId||"").trim();
       if(remote && remote!==KIDS_BUILD_ID){
-        kidsShowUpdate("Neue Version verfügbar","Eine neue Version von DĀR AL TAWḤĪD KIDS ist bereit.",remote);
+        kidsShowUpdate("Neue Version verfügbar","Tippe auf Aktualisieren. Die neue Oberfläche muss vollständig neu geladen werden — nicht nur der Button.",remote);
+      }else if(remote===KIDS_BUILD_ID){
+        try{localStorage.setItem(KIDS_BUILD_SEEN_KEY,KIDS_BUILD_ID)}catch(e){}
       }
     }catch(e){}
   }
@@ -2152,11 +2159,6 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
       var layer=document.getElementById("kidsUpdateLayer");
       kidsHardReload(layer&&layer.dataset.targetBuild||KIDS_BUILD_ID);
     });
-    var seen="";
-    try{seen=String(localStorage.getItem(KIDS_BUILD_SEEN_KEY)||"")}catch(e){}
-    if(seen!==KIDS_BUILD_ID){
-      kidsShowUpdate("App-Aktualisierung bereit","Die Kinder-App wurde aktualisiert. Tippe einmal auf Aktualisieren, damit die neue Oberfläche vollständig geladen wird.",KIDS_BUILD_ID);
-    }
     kidsCheckRemoteVersion();
   });
   window.addEventListener("focus",kidsCheckRemoteVersion);
