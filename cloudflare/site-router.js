@@ -38,12 +38,14 @@ function iosNativeHeaders(assetResponse) {
 
 export default {
   async fetch(request, env) {
+    if (request.headers.get("X-Kids-Asset") === "1") {
+      return env.ASSETS.fetch(request);
+    }
     const url = new URL(request.url);
     const isRoot = url.pathname === "/" || url.pathname === "/index.html";
     const ua = String(request.headers.get("User-Agent") || "");
     const nativeIos = /DarAlTawhid-iOS/i.test(ua);
     const kidsPath = url.pathname === "/test/kids" || url.pathname.startsWith("/test/kids/");
-    const kidsAssetPass = url.hostname === "kids-assets.internal" || request.headers.get("X-Kids-Asset") === "1";
     const voicePath = url.pathname === "/voice-studio" || url.pathname.startsWith("/voice-studio/");
     const legacyVoicePath = url.pathname === "/test/voice-studio" || url.pathname.startsWith("/test/voice-studio/");
 
@@ -80,13 +82,16 @@ export default {
       });
     }
 
-    if (kidsPath && !kidsAssetPass && (request.method === "GET" || request.method === "HEAD")) {
-      const assetPath = url.pathname === "/test/kids" || url.pathname === "/test/kids/"
-        ? "/test/kids/index.html"
-        : url.pathname;
-      const assetRequest = new Request(`https://kids-assets.internal${assetPath}${url.search}`, {
+    if (kidsPath && (request.method === "GET" || request.method === "HEAD")) {
+      const assetHeaders = new Headers();
+      assetHeaders.set("X-Kids-Asset", "1");
+      const assetUrl = new URL(request.url);
+      if (assetUrl.pathname === "/test/kids" || assetUrl.pathname === "/test/kids/") {
+        assetUrl.pathname = "/test/kids/index.html";
+      }
+      const assetRequest = new Request(assetUrl.toString(), {
         method: "GET",
-        headers: { "X-Kids-Asset": "1" }
+        headers: assetHeaders
       });
       const assetResponse = await env.ASSETS.fetch(assetRequest);
       const headers = new Headers(assetResponse.headers);
