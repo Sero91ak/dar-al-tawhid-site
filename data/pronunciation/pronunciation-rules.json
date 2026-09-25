@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "id": "dar-al-tawhid-pronunciation-master",
   "title": "DĀR AL TAWḤĪD – Islamische Aussprachebibliothek",
   "updatedAt": "2026-09-26",
@@ -15,14 +15,17 @@
   },
   "counts": {
     "canonicalTerms": 902,
-    "rules": 3735,
+    "rules": 3755,
     "nativeArabicTtsRules": 3727,
     "nativeArabicTtsGroups": 870,
     "masterPronunciationGroups": 9,
     "reviewPronunciationGroups": 112,
     "autoPronunciationGroups": 749,
     "curatedReviewGroups": 207,
-    "audioLockedCoreVariants": 52
+    "audioLockedCoreVariants": 98,
+    "requiredHonorificNameVariants": 354,
+    "requiredHonorificMaleVariants": 276,
+    "requiredHonorificFemaleVariants": 74
   },
   "rules": [
     {
@@ -2855,7 +2858,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/sˤalˈlaː lˈlaːhu ʕaˈlajhi waˈsallam/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "salawat_prophet",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -2869,7 +2874,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/sˤalˈlaː lˈlaːhu ʕaˈlajhi waˈsallam/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "salawat_prophet",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -2883,7 +2890,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/sˤalˈlaː lˈlaːhu ʕaˈlajhi waˈsallam/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "salawat_prophet",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Allah, Lobpreisungen & Grußformeln",
@@ -2897,7 +2906,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/sˤalˈlaː lˈlaːhu ʕaˈlajhi waˈsallam/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "salawat_prophet",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -2911,7 +2922,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/sˤalˈlaː lˈlaːhu ʕaˈlajhi waˈsallam/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "salawat_prophet",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -2925,7 +2938,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/sˤalˈlaː lˈlaːhu ʕaˈlajhi waˈsallam/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "salawat_prophet",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -2939,7 +2954,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/sˤalˈlaː lˈlaːhu ʕaˈlajhi waˈsallam/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "salawat_prophet",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -2953,7 +2970,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/sˤalˈlaː lˈlaːhu ʕaˈlajhi waˈsallam/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "salawat_prophet",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -2967,7 +2986,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/sˤalˈlaː lˈlaːhu ʕaˈlajhi waˈsallam/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "salawat_prophet",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Allah, Lobpreisungen & Grußformeln",
@@ -3149,7 +3170,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhu/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhu",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -3163,7 +3186,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhu/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhu",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -3177,7 +3202,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhu/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhu",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Allah, Lobpreisungen & Grußformeln",
@@ -3191,7 +3218,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhaː/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anha",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -3205,7 +3234,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhaː/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anha",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -3219,7 +3250,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhaː/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anha",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Allah, Lobpreisungen & Grußformeln",
@@ -3233,7 +3266,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhumaː/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhuma",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -3247,7 +3282,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhumaː/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhuma",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -3261,7 +3298,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhumaː/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhuma",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Allah, Lobpreisungen & Grußformeln",
@@ -3275,7 +3314,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhum/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhum",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -3289,7 +3330,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhum/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhum",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Weitere Begriffe",
@@ -3303,7 +3346,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhum/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhum",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Allah, Lobpreisungen & Grußformeln",
@@ -9193,7 +9238,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/muˈħammad/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "salawat_prophet"
     },
     {
       "category": "Weitere Begriffe",
@@ -9207,7 +9253,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/muˈħammad/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "salawat_prophet"
     },
     {
       "category": "Weitere Begriffe",
@@ -9221,7 +9268,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/muˈħammad/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "salawat_prophet"
     },
     {
       "category": "Weitere Begriffe",
@@ -9235,7 +9283,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/muˈħammad/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "salawat_prophet"
     },
     {
       "category": "Qurʾān & Qurʾān-Wissenschaften",
@@ -20171,7 +20220,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "abu_bakr",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20187,7 +20237,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "abu_bakr",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20203,7 +20254,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "abu_bakr",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20219,7 +20271,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "abu_bakr",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -20235,7 +20288,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "abu_bakr_siddiq",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20251,7 +20305,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "abu_bakr_siddiq",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20267,7 +20322,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "abu_bakr_siddiq",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20283,7 +20339,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "abu_bakr_siddiq",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -20299,7 +20356,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20315,7 +20373,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20331,7 +20390,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20347,7 +20407,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20363,7 +20424,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20379,7 +20441,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -20395,7 +20458,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar_ibn_al_khattab",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20411,7 +20475,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar_ibn_al_khattab",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20427,7 +20492,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar_ibn_al_khattab",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20443,7 +20509,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar_ibn_al_khattab",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20459,7 +20526,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar_ibn_al_khattab",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20475,7 +20543,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar_ibn_al_khattab",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -20489,7 +20558,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕuθmaːn/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20503,7 +20573,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕuθmaːn/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20517,7 +20588,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕuθmaːn/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20531,7 +20603,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕuθmaːn/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20545,7 +20618,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕuθmaːn/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20559,7 +20633,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕuθmaːn/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -20573,7 +20648,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕuθmaːn ibn ʕaffaːn/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20587,7 +20663,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕuθmaːn ibn ʕaffaːn/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20601,7 +20678,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕuθmaːn ibn ʕaffaːn/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20615,7 +20693,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕuθmaːn ibn ʕaffaːn/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20629,7 +20708,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕuθmaːn ibn ʕaffaːn/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20643,7 +20723,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕuθmaːn ibn ʕaffaːn/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -20657,7 +20738,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕaliː/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20671,7 +20753,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕaliː/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20685,7 +20768,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕaliː/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20699,7 +20783,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕaliː/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20713,7 +20798,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕaliː/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20727,7 +20813,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕaliː/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -20741,7 +20828,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕaliː ibn abiː tˤaːlib/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20755,7 +20843,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕaliː ibn abiː tˤaːlib/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20769,7 +20858,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕaliː ibn abiː tˤaːlib/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20783,7 +20873,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕaliː ibn abiː tˤaːlib/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20797,7 +20888,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕaliː ibn abiː tˤaːlib/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20811,7 +20903,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕaliː ibn abiː tˤaːlib/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -20825,7 +20918,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/tˤalħah ibn ʕubajdillaːh/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20839,7 +20933,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/tˤalħah ibn ʕubajdillaːh/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20853,7 +20948,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/tˤalħah ibn ʕubajdillaːh/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20867,7 +20963,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/tˤalħah ibn ʕubajdillaːh/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20881,7 +20978,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/tˤalħah ibn ʕubajdillaːh/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20895,7 +20993,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/tˤalħah ibn ʕubajdillaːh/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -20909,7 +21008,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/az.zubajr ibn al.ʕawwaːm/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20923,7 +21023,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/az.zubajr ibn al.ʕawwaːm/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20937,7 +21038,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/az.zubajr ibn al.ʕawwaːm/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20951,7 +21053,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/az.zubajr ibn al.ʕawwaːm/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20965,7 +21068,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/az.zubajr ibn al.ʕawwaːm/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -20979,7 +21083,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/az.zubajr ibn al.ʕawwaːm/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -20993,7 +21098,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕabd ar.raħmaːn ibn ʕawf/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21007,7 +21113,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕabd ar.raħmaːn ibn ʕawf/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21021,7 +21128,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕabd ar.raħmaːn ibn ʕawf/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21035,7 +21143,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕabd ar.raħmaːn ibn ʕawf/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21049,7 +21158,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕabd ar.raħmaːn ibn ʕawf/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21063,7 +21173,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕabd ar.raħmaːn ibn ʕawf/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -21077,7 +21188,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/saʕd ibn abiː waqqaːsˤ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21091,7 +21203,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/saʕd ibn abiː waqqaːsˤ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21105,7 +21218,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/saʕd ibn abiː waqqaːsˤ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21119,7 +21233,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/saʕd ibn abiː waqqaːsˤ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21133,7 +21248,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/saʕd ibn abiː waqqaːsˤ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21147,7 +21263,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/saʕd ibn abiː waqqaːsˤ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -21161,7 +21278,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/saʕiːd ibn zajd/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21175,7 +21293,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/saʕiːd ibn zajd/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21189,7 +21308,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/saʕiːd ibn zajd/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21203,7 +21323,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/saʕiːd ibn zajd/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21217,7 +21338,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/saʕiːd ibn zajd/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21231,7 +21353,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/saʕiːd ibn zajd/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -21245,7 +21368,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ʕubajdah ibn al.d͡ʒarraːħ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21259,7 +21383,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ʕubajdah ibn al.d͡ʒarraːħ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21273,7 +21398,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ʕubajdah ibn al.d͡ʒarraːħ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21287,7 +21413,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ʕubajdah ibn al.d͡ʒarraːħ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21301,7 +21428,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ʕubajdah ibn al.d͡ʒarraːħ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21315,7 +21443,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ʕubajdah ibn al.d͡ʒarraːħ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -21329,7 +21458,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħamzah ibn ʕabd al.mutˤtˤalib/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21343,7 +21473,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħamzah ibn ʕabd al.mutˤtˤalib/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21357,7 +21488,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħamzah ibn ʕabd al.mutˤtˤalib/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21371,7 +21503,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħamzah ibn ʕabd al.mutˤtˤalib/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21385,7 +21518,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħamzah ibn ʕabd al.mutˤtˤalib/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21399,7 +21533,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħamzah ibn ʕabd al.mutˤtˤalib/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -21413,7 +21548,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/al.ʕabbaːs ibn ʕabd al.mutˤtˤalib/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21427,7 +21563,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/al.ʕabbaːs ibn ʕabd al.mutˤtˤalib/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21441,7 +21578,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/al.ʕabbaːs ibn ʕabd al.mutˤtˤalib/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21455,7 +21593,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/al.ʕabbaːs ibn ʕabd al.mutˤtˤalib/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21469,7 +21608,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/al.ʕabbaːs ibn ʕabd al.mutˤtˤalib/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21483,7 +21623,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/al.ʕabbaːs ibn ʕabd al.mutˤtˤalib/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -21497,7 +21638,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn ʕabbaːs/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21511,7 +21653,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn ʕabbaːs/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21525,7 +21668,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn ʕabbaːs/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21539,7 +21683,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn ʕabbaːs/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21553,7 +21698,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn ʕabbaːs/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21567,7 +21713,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn ʕabbaːs/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -21581,7 +21728,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ibn ʕabbaːs/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21595,7 +21743,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ibn ʕabbaːs/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21609,7 +21758,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ibn ʕabbaːs/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21623,7 +21773,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ibn ʕabbaːs/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21637,7 +21788,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ibn ʕabbaːs/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21651,7 +21803,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ibn ʕabbaːs/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -21665,7 +21818,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn masʕuːd/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21679,7 +21833,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn masʕuːd/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21693,7 +21848,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn masʕuːd/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21707,7 +21863,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn masʕuːd/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21721,7 +21878,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn masʕuːd/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21735,7 +21893,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn masʕuːd/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -21749,7 +21908,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ibn masʕuːd/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21763,7 +21923,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ibn masʕuːd/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21777,7 +21938,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ibn masʕuːd/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21791,7 +21953,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ibn masʕuːd/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21805,7 +21968,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ibn masʕuːd/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21819,7 +21983,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/ibn masʕuːd/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -21833,7 +21998,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn ʕumar/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21847,7 +22013,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn ʕumar/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21861,7 +22028,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn ʕumar/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21875,7 +22043,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn ʕumar/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21889,7 +22058,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn ʕumar/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21903,7 +22073,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn ʕumar/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -21917,7 +22088,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ibn ʕumar/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21931,7 +22103,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ibn ʕumar/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21945,7 +22118,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ibn ʕumar/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21959,7 +22133,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ibn ʕumar/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21973,7 +22148,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ibn ʕumar/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -21987,7 +22163,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ibn ʕumar/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -22001,7 +22178,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn ʕamr/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22015,7 +22193,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn ʕamr/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22029,7 +22208,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn ʕamr/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22043,7 +22223,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn ʕamr/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22057,7 +22238,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn ʕamr/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22071,7 +22253,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕabdullaːh ibn ʕamr/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -22085,7 +22268,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/abuː hurajrah/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22099,7 +22283,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/abuː hurajrah/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22113,7 +22298,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/abuː hurajrah/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22127,7 +22313,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/abuː hurajrah/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -22141,7 +22328,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/anas ibn maːlik/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22155,7 +22343,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/anas ibn maːlik/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22169,7 +22358,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/anas ibn maːlik/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22183,7 +22373,8 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/anas ibn maːlik/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "high",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -22197,7 +22388,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/d͡ʒaːbir ibn ʕabdillaːh/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22211,7 +22403,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/d͡ʒaːbir ibn ʕabdillaːh/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22225,7 +22418,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/d͡ʒaːbir ibn ʕabdillaːh/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22239,7 +22433,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/d͡ʒaːbir ibn ʕabdillaːh/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22253,7 +22448,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/d͡ʒaːbir ibn ʕabdillaːh/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22267,7 +22463,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/d͡ʒaːbir ibn ʕabdillaːh/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -22281,7 +22478,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː saʕiːd al.xudriː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22295,7 +22493,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː saʕiːd al.xudriː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22309,7 +22508,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː saʕiːd al.xudriː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22323,7 +22523,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː saʕiːd al.xudriː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22337,7 +22538,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː saʕiːd al.xudriː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22351,7 +22553,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː saʕiːd al.xudriː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -22365,7 +22568,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ðarr al.ɣifaːriː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22379,7 +22583,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ðarr al.ɣifaːriː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22393,7 +22598,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ðarr al.ɣifaːriː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22407,7 +22613,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ðarr al.ɣifaːriː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -22421,7 +22628,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ad.dardaːʔ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22435,7 +22643,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ad.dardaːʔ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22449,7 +22658,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ad.dardaːʔ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22463,7 +22673,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ad.dardaːʔ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22477,7 +22688,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ad.dardaːʔ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22491,7 +22703,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ad.dardaːʔ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -22505,7 +22718,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/muʕaːð ibn d͡ʒabal/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22519,7 +22733,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/muʕaːð ibn d͡ʒabal/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22533,7 +22748,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/muʕaːð ibn d͡ʒabal/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22547,7 +22763,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/muʕaːð ibn d͡ʒabal/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22561,7 +22778,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/muʕaːð ibn d͡ʒabal/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22575,7 +22793,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/muʕaːð ibn d͡ʒabal/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -22589,7 +22808,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ubajj ibn kaʕb/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22603,7 +22823,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ubajj ibn kaʕb/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22617,7 +22838,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ubajj ibn kaʕb/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22631,7 +22853,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ubajj ibn kaʕb/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22645,7 +22868,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ubajj ibn kaʕb/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22659,7 +22883,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ubajj ibn kaʕb/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -22673,7 +22898,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/zajd ibn θaːbit/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22687,7 +22913,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/zajd ibn θaːbit/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22701,7 +22928,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/zajd ibn θaːbit/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22715,7 +22943,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/zajd ibn θaːbit/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -22729,7 +22958,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/bilaːl ibn rabaːħ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22743,7 +22973,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/bilaːl ibn rabaːħ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22757,7 +22988,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/bilaːl ibn rabaːħ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22771,7 +23003,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/bilaːl ibn rabaːħ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -22785,7 +23018,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/salmaːn al.faːrisiː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22799,7 +23033,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/salmaːn al.faːrisiː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22813,7 +23048,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/salmaːn al.faːrisiː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22827,7 +23063,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/salmaːn al.faːrisiː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -22841,7 +23078,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/sˤuhajb ar.ruːmiː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22855,7 +23093,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/sˤuhajb ar.ruːmiː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22869,7 +23108,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/sˤuhajb ar.ruːmiː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22883,7 +23123,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/sˤuhajb ar.ruːmiː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -22897,7 +23138,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕammaːr ibn jaːsir/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22911,7 +23153,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕammaːr ibn jaːsir/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22925,7 +23168,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕammaːr ibn jaːsir/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22939,7 +23183,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕammaːr ibn jaːsir/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22953,7 +23198,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕammaːr ibn jaːsir/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22967,7 +23213,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕammaːr ibn jaːsir/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -22981,7 +23228,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/xabbaːb ibn al.aratt/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -22995,7 +23243,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/xabbaːb ibn al.aratt/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23009,7 +23258,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/xabbaːb ibn al.aratt/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23023,7 +23273,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/xabbaːb ibn al.aratt/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -23037,7 +23288,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħuðajfah ibn al.jamaːn/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23051,7 +23303,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħuðajfah ibn al.jamaːn/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23065,7 +23318,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħuðajfah ibn al.jamaːn/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23079,7 +23333,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħuðajfah ibn al.jamaːn/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -23093,7 +23348,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː muːsaː al.aʃʕariː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23107,7 +23363,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː muːsaː al.aʃʕariː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23121,7 +23378,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː muːsaː al.aʃʕariː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23135,7 +23393,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː muːsaː al.aʃʕariː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23149,7 +23408,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː muːsaː al.aʃʕariː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23163,7 +23423,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː muːsaː al.aʃʕariː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -23177,7 +23438,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕimraːn ibn ħusˤajn/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23191,7 +23453,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕimraːn ibn ħusˤajn/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23205,7 +23468,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕimraːn ibn ħusˤajn/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23219,7 +23483,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕimraːn ibn ħusˤajn/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23233,7 +23498,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕimraːn ibn ħusˤajn/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23247,7 +23513,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕimraːn ibn ħusˤajn/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -23261,7 +23528,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/samurah ibn d͡ʒundub/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23275,7 +23543,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/samurah ibn d͡ʒundub/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23289,7 +23558,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/samurah ibn d͡ʒundub/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23303,7 +23573,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/samurah ibn d͡ʒundub/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -23317,7 +23588,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/al.baraːʔ ibn ʕaːzib/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23331,7 +23603,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/al.baraːʔ ibn ʕaːzib/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23345,7 +23618,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/al.baraːʔ ibn ʕaːzib/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23359,7 +23633,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/al.baraːʔ ibn ʕaːzib/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23373,7 +23648,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/al.baraːʔ ibn ʕaːzib/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23387,7 +23663,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/al.baraːʔ ibn ʕaːzib/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -23401,7 +23678,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/zajd ibn arqam/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23415,7 +23693,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/zajd ibn arqam/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -23429,7 +23708,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕuqbah ibn ʕaːmir/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23443,7 +23723,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕuqbah ibn ʕaːmir/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23457,7 +23738,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕuqbah ibn ʕaːmir/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23471,7 +23753,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕuqbah ibn ʕaːmir/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23485,7 +23768,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕuqbah ibn ʕaːmir/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23499,7 +23783,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕuqbah ibn ʕaːmir/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -23513,7 +23798,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ajjuːb al.ansˤaːriː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23527,7 +23813,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ajjuːb al.ansˤaːriː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23541,7 +23828,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ajjuːb al.ansˤaːriː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23555,7 +23843,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/abuː ajjuːb al.ansˤaːriː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -23569,7 +23858,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/xaːlid ibn al.waliːd/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23583,7 +23873,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/xaːlid ibn al.waliːd/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23597,7 +23888,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/xaːlid ibn al.waliːd/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23611,7 +23903,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/xaːlid ibn al.waliːd/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -23625,7 +23918,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕamr ibn al.ʕaːsˤ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23639,7 +23933,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕamr ibn al.ʕaːsˤ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23653,7 +23948,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕamr ibn al.ʕaːsˤ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23667,7 +23963,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕamr ibn al.ʕaːsˤ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23681,7 +23978,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕamr ibn al.ʕaːsˤ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23695,7 +23993,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕamr ibn al.ʕaːsˤ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -23709,7 +24008,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/muʕaːwijah ibn abiː sufjaːn/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23723,7 +24023,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/muʕaːwijah ibn abiː sufjaːn/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23737,7 +24038,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/muʕaːwijah ibn abiː sufjaːn/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23751,7 +24053,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/muʕaːwijah ibn abiː sufjaːn/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23765,7 +24068,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/muʕaːwijah ibn abiː sufjaːn/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23779,7 +24083,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/muʕaːwijah ibn abiː sufjaːn/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -23793,7 +24098,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħasan ibn ʕaliː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23807,7 +24113,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħasan ibn ʕaliː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23821,7 +24128,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħasan ibn ʕaliː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23835,7 +24143,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħasan ibn ʕaliː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23849,7 +24158,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħasan ibn ʕaliː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23863,7 +24173,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħasan ibn ʕaliː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -23877,7 +24188,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħusajn ibn ʕaliː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23891,7 +24203,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħusajn ibn ʕaliː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23905,7 +24218,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħusajn ibn ʕaliː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23919,7 +24233,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħusajn ibn ʕaliː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23933,7 +24248,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħusajn ibn ʕaliː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Weitere Begriffe",
@@ -23947,7 +24263,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħusajn ibn ʕaliː/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -23961,7 +24278,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/faːtˤimah az.zahraːʔ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -23975,7 +24293,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/faːtˤimah az.zahraːʔ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -23989,7 +24308,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/faːtˤimah az.zahraːʔ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24003,7 +24323,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/faːtˤimah az.zahraːʔ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24017,7 +24338,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/faːtˤimah az.zahraːʔ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24031,7 +24353,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/faːtˤimah az.zahraːʔ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -24045,7 +24368,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/xadiːd͡ʒah bint xuwajlid/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24059,7 +24383,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/xadiːd͡ʒah bint xuwajlid/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24073,7 +24398,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/xadiːd͡ʒah bint xuwajlid/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24087,7 +24413,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/xadiːd͡ʒah bint xuwajlid/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -24101,7 +24428,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕaːʔiʃah bint abiː bakr/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24115,7 +24443,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕaːʔiʃah bint abiː bakr/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24129,7 +24458,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕaːʔiʃah bint abiː bakr/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24143,7 +24473,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕaːʔiʃah bint abiː bakr/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24157,7 +24488,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕaːʔiʃah bint abiː bakr/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24171,7 +24503,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ʕaːʔiʃah bint abiː bakr/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -24185,7 +24518,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħafsˤah bint ʕumar/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24199,7 +24533,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħafsˤah bint ʕumar/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24213,7 +24548,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħafsˤah bint ʕumar/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24227,7 +24563,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħafsˤah bint ʕumar/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24241,7 +24578,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħafsˤah bint ʕumar/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24255,7 +24593,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/ħafsˤah bint ʕumar/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -24269,7 +24608,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm salamah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24283,7 +24623,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm salamah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -24297,7 +24638,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/zajnab bint d͡ʒaħʃ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24311,7 +24653,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/zajnab bint d͡ʒaħʃ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24325,7 +24668,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/zajnab bint d͡ʒaħʃ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24339,7 +24683,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/zajnab bint d͡ʒaħʃ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -24353,7 +24698,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/sˤafijjah bint ħujajj/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24367,7 +24713,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/sˤafijjah bint ħujajj/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24381,7 +24728,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/sˤafijjah bint ħujajj/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24395,7 +24743,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/sˤafijjah bint ħujajj/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -24409,7 +24758,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/majmuːnah bint al.ħaːriθ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24423,7 +24773,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/majmuːnah bint al.ħaːriθ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24437,7 +24788,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/majmuːnah bint al.ħaːriθ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24451,7 +24803,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/majmuːnah bint al.ħaːriθ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -24465,7 +24818,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm ħabiːbah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24479,7 +24833,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm ħabiːbah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24493,7 +24848,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm ħabiːbah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24507,7 +24863,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm ħabiːbah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -24521,7 +24878,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/d͡ʒuwajrijjah bint al.ħaːriθ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24535,7 +24893,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/d͡ʒuwajrijjah bint al.ħaːriθ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24549,7 +24908,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/d͡ʒuwajrijjah bint al.ħaːriθ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24563,7 +24923,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/d͡ʒuwajrijjah bint al.ħaːriθ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -24577,7 +24938,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/sawdah bint zamʕah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24591,7 +24953,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/sawdah bint zamʕah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24605,7 +24968,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/sawdah bint zamʕah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24619,7 +24983,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/sawdah bint zamʕah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24633,7 +24998,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/sawdah bint zamʕah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24647,7 +25013,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/sawdah bint zamʕah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -24661,7 +25028,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/maːrijah al.qibtˤijjah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24675,7 +25043,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/maːrijah al.qibtˤijjah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24689,7 +25058,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/maːrijah al.qibtˤijjah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24703,7 +25073,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/maːrijah al.qibtˤijjah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -24717,7 +25088,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/asmaːʔ bint abiː bakr/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24731,7 +25103,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/asmaːʔ bint abiː bakr/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24745,7 +25118,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/asmaːʔ bint abiː bakr/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24759,7 +25133,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/asmaːʔ bint abiː bakr/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24773,7 +25148,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/asmaːʔ bint abiː bakr/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24787,7 +25163,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/asmaːʔ bint abiː bakr/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -24801,7 +25178,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm sulajm/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24815,7 +25193,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm sulajm/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -24829,7 +25208,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm ʕatˤijjah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24843,7 +25223,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm ʕatˤijjah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24857,7 +25238,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm ʕatˤijjah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24871,7 +25253,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm ʕatˤijjah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24885,7 +25268,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm ʕatˤijjah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24899,7 +25283,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm ʕatˤijjah/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -24913,7 +25298,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm ad.dardaːʔ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24927,7 +25313,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm ad.dardaːʔ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24941,7 +25328,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm ad.dardaːʔ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24955,7 +25343,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm ad.dardaːʔ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24969,7 +25358,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm ad.dardaːʔ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Weitere Begriffe",
@@ -24983,7 +25373,8 @@
       "tts_strategy": "scientific-transliteration-to-arabic-v2",
       "tts_group_ipa": "/umm ad.dardaːʔ/",
       "voice_lock": "AUTO",
-      "qa_tier": "standard"
+      "qa_tier": "standard",
+      "required_honorific_key": "radiyallahu_anha"
     },
     {
       "category": "Tābiʿīn, Salaf & Gelehrte",
@@ -52003,7 +52394,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/sˤalˈlaː lˈlaːhu ʕaˈlajhi waˈsallam/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "salawat_prophet",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Allah, Lobpreisungen & Grußformeln",
@@ -52059,7 +52452,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhu/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhu",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Allah, Lobpreisungen & Grußformeln",
@@ -52073,7 +52468,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhaː/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anha",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Allah, Lobpreisungen & Grußformeln",
@@ -52087,7 +52484,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhumaː/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhuma",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Allah, Lobpreisungen & Grußformeln",
@@ -52101,7 +52500,9 @@
       "tts_strategy": "curated-native-script-v2",
       "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhum/",
       "voice_lock": "REVIEW",
-      "qa_tier": "high"
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhum",
+      "audio_lock_policy": "CONFIRMED_WAV"
     },
     {
       "category": "Allah, Lobpreisungen & Grußformeln",
@@ -52321,7 +52722,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -52337,7 +52739,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -52353,7 +52756,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar_ibn_al_khattab",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -52369,7 +52773,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar_ibn_al_khattab",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -52385,7 +52790,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar_ibn_al_khattab",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -52401,7 +52807,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar_ibn_al_khattab",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -52417,7 +52824,8 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar_ibn_al_khattab",
-      "audio_lock_policy": "CONFIRMED_WAV"
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
     },
     {
       "category": "Ṣaḥābah, Ahl al-Bayt & frühe Generationen",
@@ -52433,6 +52841,327 @@
       "voice_lock": "REVIEW",
       "qa_tier": "critical",
       "audio_lock_key": "umar_ibn_al_khattab",
+      "audio_lock_policy": "CONFIRMED_WAV",
+      "required_honorific_key": "radiyallahu_anhu"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "Sallallahu alayhi wa sallam",
+      "string_to_replace": "Sallallahu alayhi wa sallam",
+      "alias": "Sallallaahu alaihi wa sallam",
+      "ipa": "/sˤalˈlaː lˈlaːhu ʕaˈlajhi waˈsallam/",
+      "priority": "core",
+      "tts_text": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/sˤalˈlaː lˈlaːhu ʕaˈlajhi waˈsallam/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "salawat_prophet",
+      "audio_lock_policy": "CONFIRMED_WAV"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "sallallahu alayhi wa sallam",
+      "string_to_replace": "sallallahu alayhi wa sallam",
+      "alias": "Sallallaahu alaihi wa sallam",
+      "ipa": "/sˤalˈlaː lˈlaːhu ʕaˈlajhi waˈsallam/",
+      "priority": "core",
+      "tts_text": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/sˤalˈlaː lˈlaːhu ʕaˈlajhi waˈsallam/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "salawat_prophet",
+      "audio_lock_policy": "CONFIRMED_WAV"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "Sallallahu alaihi wa sallam",
+      "string_to_replace": "Sallallahu alaihi wa sallam",
+      "alias": "Sallallaahu alaihi wa sallam",
+      "ipa": "/sˤalˈlaː lˈlaːhu ʕaˈlajhi waˈsallam/",
+      "priority": "core",
+      "tts_text": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/sˤalˈlaː lˈlaːhu ʕaˈlajhi waˈsallam/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "salawat_prophet",
+      "audio_lock_policy": "CONFIRMED_WAV"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "sallallahu alaihi wa sallam",
+      "string_to_replace": "sallallahu alaihi wa sallam",
+      "alias": "Sallallaahu alaihi wa sallam",
+      "ipa": "/sˤalˈlaː lˈlaːhu ʕaˈlajhi waˈsallam/",
+      "priority": "core",
+      "tts_text": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/sˤalˈlaː lˈlaːhu ʕaˈlajhi waˈsallam/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "salawat_prophet",
+      "audio_lock_policy": "CONFIRMED_WAV"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "raḍiya Allāhu ʿanhu",
+      "string_to_replace": "raḍiya Allāhu ʿanhu",
+      "alias": "Radiyallaahu anhu",
+      "ipa": "/radˤi.jalˈlaːhu ʕanhu/",
+      "priority": "core",
+      "tts_text": "رَضِيَ اللَّهُ عَنْهُ",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhu/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhu",
+      "audio_lock_policy": "CONFIRMED_WAV"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "Radiyallahu anhu",
+      "string_to_replace": "Radiyallahu anhu",
+      "alias": "Radiyallaahu anhu",
+      "ipa": "/radˤi.jalˈlaːhu ʕanhu/",
+      "priority": "core",
+      "tts_text": "رَضِيَ اللَّهُ عَنْهُ",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhu/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhu",
+      "audio_lock_policy": "CONFIRMED_WAV"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "radiyallahu anhu",
+      "string_to_replace": "radiyallahu anhu",
+      "alias": "Radiyallaahu anhu",
+      "ipa": "/radˤi.jalˈlaːhu ʕanhu/",
+      "priority": "core",
+      "tts_text": "رَضِيَ اللَّهُ عَنْهُ",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhu/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhu",
+      "audio_lock_policy": "CONFIRMED_WAV"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "Radi Allahu anhu",
+      "string_to_replace": "Radi Allahu anhu",
+      "alias": "Radiyallaahu anhu",
+      "ipa": "/radˤi.jalˈlaːhu ʕanhu/",
+      "priority": "core",
+      "tts_text": "رَضِيَ اللَّهُ عَنْهُ",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhu/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhu",
+      "audio_lock_policy": "CONFIRMED_WAV"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "radi Allahu anhu",
+      "string_to_replace": "radi Allahu anhu",
+      "alias": "Radiyallaahu anhu",
+      "ipa": "/radˤi.jalˈlaːhu ʕanhu/",
+      "priority": "core",
+      "tts_text": "رَضِيَ اللَّهُ عَنْهُ",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhu/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhu",
+      "audio_lock_policy": "CONFIRMED_WAV"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "raḍiya Allāhu ʿanhā",
+      "string_to_replace": "raḍiya Allāhu ʿanhā",
+      "alias": "Radiyallaahu anhaa",
+      "ipa": "/radˤi.jalˈlaːhu ʕanhaː/",
+      "priority": "core",
+      "tts_text": "رَضِيَ اللَّهُ عَنْهَا",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhaː/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anha",
+      "audio_lock_policy": "CONFIRMED_WAV"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "Radiyallahu anha",
+      "string_to_replace": "Radiyallahu anha",
+      "alias": "Radiyallaahu anhaa",
+      "ipa": "/radˤi.jalˈlaːhu ʕanhaː/",
+      "priority": "core",
+      "tts_text": "رَضِيَ اللَّهُ عَنْهَا",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhaː/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anha",
+      "audio_lock_policy": "CONFIRMED_WAV"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "radiyallahu anha",
+      "string_to_replace": "radiyallahu anha",
+      "alias": "Radiyallaahu anhaa",
+      "ipa": "/radˤi.jalˈlaːhu ʕanhaː/",
+      "priority": "core",
+      "tts_text": "رَضِيَ اللَّهُ عَنْهَا",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhaː/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anha",
+      "audio_lock_policy": "CONFIRMED_WAV"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "Radi Allahu anha",
+      "string_to_replace": "Radi Allahu anha",
+      "alias": "Radiyallaahu anhaa",
+      "ipa": "/radˤi.jalˈlaːhu ʕanhaː/",
+      "priority": "core",
+      "tts_text": "رَضِيَ اللَّهُ عَنْهَا",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhaː/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anha",
+      "audio_lock_policy": "CONFIRMED_WAV"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "radi Allahu anha",
+      "string_to_replace": "radi Allahu anha",
+      "alias": "Radiyallaahu anhaa",
+      "ipa": "/radˤi.jalˈlaːhu ʕanhaː/",
+      "priority": "core",
+      "tts_text": "رَضِيَ اللَّهُ عَنْهَا",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhaː/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anha",
+      "audio_lock_policy": "CONFIRMED_WAV"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "raḍiya Allāhu ʿanhumā",
+      "string_to_replace": "raḍiya Allāhu ʿanhumā",
+      "alias": "Radiyallaahu anhumaa",
+      "ipa": "/radˤi.jalˈlaːhu ʕanhumaː/",
+      "priority": "core",
+      "tts_text": "رَضِيَ اللَّهُ عَنْهُمَا",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhumaː/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhuma",
+      "audio_lock_policy": "CONFIRMED_WAV"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "Radiyallahu anhuma",
+      "string_to_replace": "Radiyallahu anhuma",
+      "alias": "Radiyallaahu anhumaa",
+      "ipa": "/radˤi.jalˈlaːhu ʕanhumaː/",
+      "priority": "core",
+      "tts_text": "رَضِيَ اللَّهُ عَنْهُمَا",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhumaː/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhuma",
+      "audio_lock_policy": "CONFIRMED_WAV"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "radiyallahu anhuma",
+      "string_to_replace": "radiyallahu anhuma",
+      "alias": "Radiyallaahu anhumaa",
+      "ipa": "/radˤi.jalˈlaːhu ʕanhumaː/",
+      "priority": "core",
+      "tts_text": "رَضِيَ اللَّهُ عَنْهُمَا",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhumaː/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhuma",
+      "audio_lock_policy": "CONFIRMED_WAV"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "raḍiya Allāhu ʿanhum",
+      "string_to_replace": "raḍiya Allāhu ʿanhum",
+      "alias": "Radiyallaahu anhum",
+      "ipa": "/radˤi.jalˈlaːhu ʕanhum/",
+      "priority": "core",
+      "tts_text": "رَضِيَ اللَّهُ عَنْهُمْ",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhum/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhum",
+      "audio_lock_policy": "CONFIRMED_WAV"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "Radiyallahu anhum",
+      "string_to_replace": "Radiyallahu anhum",
+      "alias": "Radiyallaahu anhum",
+      "ipa": "/radˤi.jalˈlaːhu ʕanhum/",
+      "priority": "core",
+      "tts_text": "رَضِيَ اللَّهُ عَنْهُمْ",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhum/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhum",
+      "audio_lock_policy": "CONFIRMED_WAV"
+    },
+    {
+      "category": "Allah, Lobpreisungen & Grußformeln",
+      "canonical": "radiyallahu anhum",
+      "string_to_replace": "radiyallahu anhum",
+      "alias": "Radiyallaahu anhum",
+      "ipa": "/radˤi.jalˈlaːhu ʕanhum/",
+      "priority": "core",
+      "tts_text": "رَضِيَ اللَّهُ عَنْهُمْ",
+      "tts_language": "ar",
+      "tts_strategy": "curated-native-script-v2",
+      "tts_group_ipa": "/radˤi.jalˈlaːhu ʕanhum/",
+      "voice_lock": "REVIEW",
+      "qa_tier": "critical",
+      "audio_lock_key": "radiyallahu_anhum",
       "audio_lock_policy": "CONFIRMED_WAV"
     }
   ],
@@ -52472,7 +53201,12 @@
       "abu_bakr",
       "abu_bakr_siddiq",
       "umar",
-      "umar_ibn_al_khattab"
+      "umar_ibn_al_khattab",
+      "salawat_prophet",
+      "radiyallahu_anhu",
+      "radiyallahu_anha",
+      "radiyallahu_anhuma",
+      "radiyallahu_anhum"
     ],
     "nameAliasCoverage": {
       "umar": [
@@ -52487,6 +53221,12 @@
         "Omar ibn al-Chattab",
         "Omar ibn al-Khattab"
       ]
+    },
+    "requiredHonorificPolicy": {
+      "prophet": "Standalone Muḥammad variants require ṣallā llāhu ʿalayhi wa-sallam unless already written.",
+      "sahabi": "Known male Ṣaḥābah require raḍiya llāhu ʿanhu unless already written.",
+      "sahabiyyah": "Known female Ṣaḥābiyyāt require raḍiya llāhu ʿanhā unless already written.",
+      "duplicateProtection": true
     }
   }
 }
