@@ -18,9 +18,26 @@ export default {
       return env.ASSETS.fetch(new Request(testVersionUrl.toString(), request));
     }
 
-    const asset = await env.ASSETS.fetch(request);
     const path = url.pathname;
     const kids = path === "/test/kids" || path.startsWith("/test/kids/");
+    if (kids && url.hostname === "dar-al-tawhid.de") {
+      const mirror = new URL(request.url);
+      mirror.hostname = "dar-al-tawhid-test.sero91ak.workers.dev";
+      const mirrorResponse = await fetch(new Request(mirror.toString(), request));
+      const headers = new Headers(mirrorResponse.headers);
+      headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+      headers.set("CDN-Cache-Control", "no-store");
+      headers.set("Cloudflare-CDN-Cache-Control", "no-store");
+      headers.set("X-Kids-Build", "kids-shell-v12-start1");
+      headers.delete("ETag");
+      return new Response(mirrorResponse.body, {
+        status: mirrorResponse.status,
+        statusText: mirrorResponse.statusText,
+        headers
+      });
+    }
+
+    const asset = await env.ASSETS.fetch(request);
     const bust = kids
       || /\/test\/(index\.html)?$/.test(path)
       || /dar-quran-player\.(js|css)$/.test(path)

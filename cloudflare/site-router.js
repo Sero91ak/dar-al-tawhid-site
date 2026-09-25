@@ -42,6 +42,29 @@ export default {
     const isRoot = url.pathname === "/" || url.pathname === "/index.html";
     const ua = String(request.headers.get("User-Agent") || "");
     const nativeIos = /DarAlTawhid-iOS/i.test(ua);
+    const kidsPath = url.pathname === "/test/kids" || url.pathname.startsWith("/test/kids/");
+    const kidsMirrorHost = "dar-al-tawhid-site.sero91ak.workers.dev";
+
+    if (kidsPath && (request.method === "GET" || request.method === "HEAD") && url.hostname !== kidsMirrorHost) {
+      const mirror = new URL(request.url);
+      mirror.hostname = kidsMirrorHost;
+      const mirrorResponse = await fetch(new Request(mirror.toString(), request));
+      const headers = new Headers(mirrorResponse.headers);
+      headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+      headers.set("CDN-Cache-Control", "no-store");
+      headers.set("Cloudflare-CDN-Cache-Control", "no-store");
+      headers.set("X-Kids-Build", "kids-shell-v12-start1");
+      headers.delete("ETag");
+      headers.delete("Content-Length");
+      if (request.method === "HEAD") {
+        return new Response(null, { status: mirrorResponse.status, statusText: mirrorResponse.statusText, headers });
+      }
+      return new Response(mirrorResponse.body, {
+        status: mirrorResponse.status,
+        statusText: mirrorResponse.statusText,
+        headers
+      });
+    }
 
     if ((request.method === "GET" || request.method === "HEAD") && isRoot && nativeIos) {
       const assetResponse = await env.ASSETS.fetch(request);

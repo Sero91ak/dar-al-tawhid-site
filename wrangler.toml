@@ -21,6 +21,7 @@ watch_paths = [
   "manifest.json",
   "version.json",
   "assets/**",
+  "cloudflare/site-router.js",
   "content/posts/**",
   "content/updates/daily.json",
   "q/**",
