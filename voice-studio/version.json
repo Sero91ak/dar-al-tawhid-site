@@ -1,6 +1,6 @@
 {
-  "version": "1.5.2",
-  "updatedAt": "2026-09-25T13:32:00+02:00",
+  "version": "1.6.0",
+  "updatedAt": "2026-09-25T17:05:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "local-chatterbox-v3",
   "provider": "self-produced",
@@ -14,16 +14,34 @@
     "fallbackReference": "~/SerhatVoice/Serhat_FINAL_REF.wav"
   },
   "setupMethod": "native-macos-wkwebview-existing-serhatvoice",
-  "setupCommand": "curl -fsSL 'https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/40353eddc43f87f42c1c3a935b307c97e8d011ee/voice-studio/install-mac.command' | /bin/bash",
+  "setupCommand": "curl -fsSL 'https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/872dc5bb38221e65c4e80ab58beb9cbb9fa1fb77/voice-studio/install-mac.command' | /bin/bash",
   "macApp": "~/Applications/DĀR Voice Studio.app",
-  "macAppRuntime": "native WKWebView + local Chatterbox engine",
+  "macAppRuntime": "native WKWebView + retained local Chatterbox process + native edit menu",
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-raw",
-  "engineVersion": "apple-silicon-map-location-v3",
+  "engineVersion": "mixed-arabic-guard-syntax-fixed",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
   "renderTimeoutMinutes": 15,
-  "launchctlFallback": "direct-engine-start-no-sudo"
+  "launchctlFallback": "direct-engine-start-no-sudo",
+  "keyboardShortcuts": {
+    "standard": [
+      "⌘C",
+      "⌘V",
+      "⌘X",
+      "⌘A",
+      "⌘Z",
+      "⇧⌘Z",
+      "⌘R",
+      "⌘W",
+      "⌘Q"
+    ],
+    "studio": [
+      "⌘↩ Audio erzeugen",
+      "⇧⌘↩ Neu prüfen",
+      "⌘K Textfeld fokussieren"
+    ]
+  }
 }
