@@ -383,7 +383,8 @@
         "ttsText": "إِحْسَانْ"
       }
     },
-    "firstUse": "Until a user-confirmed WAV exists, render one stable candidate per key and reuse it within the same production. Never randomize the same core key multiple times in one render.",
-    "confirmation": "Only the explicit QA confirmation action may promote pending candidate WAVs to persistent locks."
+    "firstUse": "Until a user-confirmed WAV exists, render exactly one candidate per key per production and reuse it throughout that production. A new production may use a new controlled seed so a rejected candidate can be replaced.",
+    "confirmation": "Only the explicit QA confirmation action may promote pending candidate WAVs to persistent locks.",
+    "afterConfirmation": "Once confirmed, the stored local WAV is reused byte-for-byte as the source segment and is never freshly synthesized unless explicitly unlocked."
   }
 }
