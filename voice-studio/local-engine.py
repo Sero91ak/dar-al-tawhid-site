@@ -141,10 +141,13 @@ def rebuild_runtime_rules():
     counts["onlineSearchRules"]=len(ONLINE_RULES)
     LIB["counts"]=counts
     MASTER_TTS={str(r.get("tts_text","")) for r in RULES if r.get("voice_lock")=="MASTER" and r.get("tts_text")}
-    AUDIO_LOCK_BY_TTS={
-        str(r.get("tts_text","")):str(r.get("audio_lock_key",""))
-        for r in RULES if r.get("tts_text") and r.get("audio_lock_key")
-    }
+    AUDIO_LOCK_BY_TTS={}
+    for r in RULES:
+        tts=str(r.get("tts_text",""))
+        key=str(r.get("audio_lock_key",""))
+        # RULES ist absichtlich user-first sortiert: der jüngste bestätigte Lernstand gewinnt.
+        if tts and key and tts not in AUDIO_LOCK_BY_TTS:
+            AUDIO_LOCK_BY_TTS[tts]=key
     AUDIO_LOCK_LABELS={}
     for r in RULES:
         key=str(r.get("audio_lock_key",""))
@@ -433,7 +436,7 @@ def create_learning_preview(term:str,tts_text:str="",canonical:str=""):
         raise ValueError("Die manuelle Sprechform muss in arabischer Schrift angegeben werden.")
     model=load_model()
     preview_id=uuid.uuid4().hex[:16]
-    existing_key=str((rule or {}).get("audio_lock_key",""))
+    existing_key=str((rule or {}).get("audio_lock_key","")) or str(AUDIO_LOCK_BY_TTS.get(effective_tts,""))
     lock_key=learning_lock_key(term,existing_key)
     seed=3000+(int(preview_id[:8],16)%800000)
     wav,metrics=render_segment_with_qa(model,effective_tts,"ar","narration",True,seed_base=seed)
