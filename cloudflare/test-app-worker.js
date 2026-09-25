@@ -190,23 +190,23 @@ export default {
       return Response.redirect(kidsUrl.toString(), 302);
     }
 
-    if (
-      url.pathname === "/test/voice-studio" ||
-      url.pathname === "/test/voice-studio/" ||
-      url.pathname === "/voice-studio" ||
-      url.pathname === "/voice-studio/"
-    ) {
+    if (url.pathname === "/test/voice-studio" || url.pathname === "/test/voice-studio/") {
       const voiceUrl = new URL(request.url);
       voiceUrl.pathname = "/test/voice-studio/index.html";
-      voiceUrl.searchParams.set("vs", "3");
-      return new Response(null, {
-        status: 302,
-        headers: {
-          "Location": voiceUrl.toString(),
-          "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
-          "Pragma": "no-cache"
-        }
-      });
+      return env.ASSETS.fetch(new Request(voiceUrl.toString(), request));
+    }
+
+    if (url.pathname === "/voice-studio" || url.pathname === "/voice-studio/" || url.pathname.startsWith("/voice-studio/")) {
+      const assetUrl = new URL(request.url);
+      let suffix = url.pathname.slice("/voice-studio".length);
+      if (!suffix || suffix === "/") suffix = "/index.html";
+      assetUrl.pathname = "/test/voice-studio" + suffix;
+      const asset = await env.ASSETS.fetch(new Request(assetUrl.toString(), request));
+      const out = new Response(asset.body, asset);
+      out.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+      out.headers.set("Pragma", "no-cache");
+      out.headers.set("X-DAR-Voice-Studio", "voice-studio-v3");
+      return out;
     }
 
     if (url.pathname === "/test" || url.pathname === "/test/") {
