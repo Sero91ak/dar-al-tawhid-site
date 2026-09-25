@@ -15,6 +15,11 @@ fi
 TARGET="$HOME/Applications/DAR-Voice-Studio"
 mkdir -p "$TARGET"
 
+if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
+  echo "Installiere einmalig ffmpeg für professionelles Audio-Mastering …"
+  brew install ffmpeg
+fi
+
 cat > "$TARGET/DĀR Voice Engine.command" <<EOF
 #!/bin/bash
 set -e
