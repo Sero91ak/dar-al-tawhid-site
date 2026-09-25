@@ -1,10 +1,11 @@
 {
-  "schemaVersion": 1,
-  "id": "dar-own-voice-narration",
-  "updatedAt": "2026-09-24",
+  "schemaVersion": 2,
+  "id": "dar-own-voice-narration-v2",
+  "updatedAt": "2026-09-25",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
+  "productionGoal": "Production-grade, warm and fluent narration with deterministic pronunciation. Human listening remains mandatory for final MASTER approval.",
   "delivery": {
     "genderPresentation": "male",
     "character": [
@@ -12,14 +13,39 @@
       "sanft",
       "klar",
       "ehrlich",
-      "ruhig"
+      "ruhig",
+      "natürlich",
+      "kindgerecht wenn passend"
     ],
     "avoid": [
       "metallisch",
       "hart",
       "werblich",
-      "hektisch"
+      "hektisch",
+      "abgehackt",
+      "übertrieben dramatisch",
+      "singend",
+      "stotternd"
     ]
+  },
+  "references": {
+    "german": {
+      "environment": "SERHAT_VOICE_REF",
+      "candidates": [
+        "~/SerhatVoice/Serhat_Adobe_MASTER.wav",
+        "~/SerhatVoice/Serhat_FINAL_REF.wav"
+      ],
+      "required": true
+    },
+    "arabic": {
+      "environment": "SERHAT_VOICE_REF_AR",
+      "candidates": [
+        "~/SerhatVoice/Serhat_AR_MASTER.wav"
+      ],
+      "required": false,
+      "fallback": "german",
+      "note": "A dedicated Arabic Serhat reference is supported automatically when present; otherwise the German master reference is used."
+    }
   },
   "preprocessing": {
     "reduceRoomReverb": true,
@@ -29,21 +55,253 @@
   "pronunciation": {
     "library": "/data/pronunciation/pronunciation-rules.json",
     "displayUsesCanonical": true,
-    "synthesisUsesAliasFallback": true,
-    "ipaIsReference": true,
+    "synthesisUsesNativeArabicTtsText": true,
+    "aliasIsLegacyFallbackOnly": true,
+    "ipaIsGroupingReference": true,
     "longestMatchFirst": true,
+    "masterLockField": "voice_lock",
+    "masterLockValue": "MASTER",
     "authoritativeSources": "/data/pronunciation/authoritative-sources.json",
     "phonemeReference": "/data/pronunciation/arabic-phoneme-reference.json",
     "brandOverrides": "/data/pronunciation/brand-pronunciation-overrides.json",
     "verificationOrder": [
+      "MASTER owner-approved speech form",
       "brand-owner-approved override",
+      "native Arabic TTS form shared by pronunciation group",
       "standard/classical Arabic phonology",
-      "canonical lexical rule",
-      "alias fallback",
-      "IPA reference"
+      "IPA grouping reference",
+      "legacy alias fallback"
     ],
     "dialectPolicy": "Do not silently substitute dialectal realizations for the Standard/Classical target.",
-    "connectedSpeech": "Apply Standard/Classical assimilation unless an exact brand override exists."
+    "connectedSpeech": "Apply Standard/Classical connected speech and article assimilation; do not split locked phrases internally."
+  },
+  "prosody": {
+    "automatic": true,
+    "manualOverride": true,
+    "modes": {
+      "narration": {
+        "label": "Erzählung",
+        "de": {
+          "exaggeration": 0.2,
+          "cfgWeight": 0.3,
+          "temperature": 0.52
+        },
+        "ar": {
+          "exaggeration": 0.15,
+          "cfgWeight": 0,
+          "temperature": 0.48
+        },
+        "sentencePauseMs": 92,
+        "softPauseMs": 34,
+        "crossfadeMs": 28
+      },
+      "kids_story": {
+        "label": "Kinder-Geschichte",
+        "de": {
+          "exaggeration": 0.27,
+          "cfgWeight": 0.28,
+          "temperature": 0.53
+        },
+        "ar": {
+          "exaggeration": 0.16,
+          "cfgWeight": 0,
+          "temperature": 0.47
+        },
+        "sentencePauseMs": 104,
+        "softPauseMs": 38,
+        "crossfadeMs": 30
+      },
+      "kids_lesson": {
+        "label": "Kinder-Unterricht",
+        "de": {
+          "exaggeration": 0.22,
+          "cfgWeight": 0.31,
+          "temperature": 0.5
+        },
+        "ar": {
+          "exaggeration": 0.14,
+          "cfgWeight": 0,
+          "temperature": 0.46
+        },
+        "sentencePauseMs": 96,
+        "softPauseMs": 34,
+        "crossfadeMs": 30
+      },
+      "teaching": {
+        "label": "Unterricht",
+        "de": {
+          "exaggeration": 0.17,
+          "cfgWeight": 0.33,
+          "temperature": 0.48
+        },
+        "ar": {
+          "exaggeration": 0.13,
+          "cfgWeight": 0,
+          "temperature": 0.45
+        },
+        "sentencePauseMs": 98,
+        "softPauseMs": 36,
+        "crossfadeMs": 28
+      },
+      "gentle": {
+        "label": "Sanft",
+        "de": {
+          "exaggeration": 0.12,
+          "cfgWeight": 0.32,
+          "temperature": 0.45
+        },
+        "ar": {
+          "exaggeration": 0.1,
+          "cfgWeight": 0,
+          "temperature": 0.43
+        },
+        "sentencePauseMs": 112,
+        "softPauseMs": 42,
+        "crossfadeMs": 30
+      },
+      "serious": {
+        "label": "Ernst",
+        "de": {
+          "exaggeration": 0.1,
+          "cfgWeight": 0.36,
+          "temperature": 0.43
+        },
+        "ar": {
+          "exaggeration": 0.09,
+          "cfgWeight": 0,
+          "temperature": 0.42
+        },
+        "sentencePauseMs": 122,
+        "softPauseMs": 44,
+        "crossfadeMs": 24
+      },
+      "question": {
+        "label": "Frage",
+        "de": {
+          "exaggeration": 0.23,
+          "cfgWeight": 0.3,
+          "temperature": 0.51
+        },
+        "ar": {
+          "exaggeration": 0.14,
+          "cfgWeight": 0,
+          "temperature": 0.46
+        },
+        "sentencePauseMs": 102,
+        "softPauseMs": 34,
+        "crossfadeMs": 28
+      },
+      "list": {
+        "label": "Aufzählung",
+        "de": {
+          "exaggeration": 0.15,
+          "cfgWeight": 0.34,
+          "temperature": 0.46
+        },
+        "ar": {
+          "exaggeration": 0.12,
+          "cfgWeight": 0,
+          "temperature": 0.44
+        },
+        "sentencePauseMs": 94,
+        "softPauseMs": 48,
+        "crossfadeMs": 26
+      },
+      "dua": {
+        "label": "Duʿāʾ / Bittgebet",
+        "de": {
+          "exaggeration": 0.1,
+          "cfgWeight": 0.32,
+          "temperature": 0.44
+        },
+        "ar": {
+          "exaggeration": 0.08,
+          "cfgWeight": 0,
+          "temperature": 0.41
+        },
+        "sentencePauseMs": 126,
+        "softPauseMs": 46,
+        "crossfadeMs": 24
+      }
+    }
+  },
+  "contextDetection": {
+    "order": [
+      "question",
+      "dua",
+      "serious",
+      "gentle",
+      "kids_story",
+      "kids_lesson",
+      "list",
+      "teaching",
+      "narration"
+    ],
+    "kidsStory": [
+      "eines tages",
+      "geschichte",
+      "es war einmal",
+      "komm, wir entdecken"
+    ],
+    "kidsLesson": [
+      "heute lernen wir",
+      "kids",
+      "kinder",
+      "gemeinsam lernen"
+    ],
+    "teaching": [
+      "bedeutet",
+      "lernen wir",
+      "erklärt",
+      "grundlage",
+      "pflicht",
+      "wir beten",
+      "wir finden"
+    ],
+    "gentle": [
+      "ganz ruhig",
+      "sanft",
+      "behutsam",
+      "schritt für schritt"
+    ],
+    "serious": [
+      "achtung",
+      "warnung",
+      "verboten",
+      "sehr ernst",
+      "gefahr"
+    ],
+    "dua": [
+      "duʿāʾ",
+      "dua",
+      "wir bitten allah",
+      "bitten wir allah"
+    ]
+  },
+  "continuity": {
+    "trimBoundarySilence": true,
+    "trimThresholdRelative": 0.0035,
+    "trimSafetyMs": 20,
+    "crossfadeLanguages": true,
+    "gentleLevelMatching": true,
+    "gainClamp": [
+      0.88,
+      1.14
+    ],
+    "outputEdgeFadeMs": 12
+  },
+  "qualityAssurance": {
+    "maxRenderAttempts": 2,
+    "retrySeedOffset": 97,
+    "rejectNonFinite": true,
+    "minRms": 0.0015,
+    "minPeak": 0.01,
+    "maxClippingRatio": 0.02,
+    "maxInternalSilenceMsWithoutPunctuation": 700,
+    "shortArabicMaxSecondsBase": 1.2,
+    "shortArabicMaxSecondsPerLetter": 0.34,
+    "requireHumanConfirmationForMaster": true,
+    "note": "Automatic QA catches technical silence/holding/clipping anomalies. It does not replace human semantic pronunciation review."
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
