@@ -168,7 +168,7 @@ jobs:
           TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
           TELEGRAM_CHANNEL_USERNAME: ${{ secrets.TELEGRAM_CHANNEL_USERNAME }}
           TELEGRAM_TOPICS_CHAT_ID: ${{ secrets.TELEGRAM_TOPICS_CHAT_ID }}
-          TELEGRAM_FORUM_CHAT_ID: ${{ secrets.TELEGRAM_FORUM_CHAT_ID }}\n          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}\n          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}\n          DAR_MALE_VOICE_ID: ${{ secrets.DAR_MALE_VOICE_ID }}
+          TELEGRAM_FORUM_CHAT_ID: ${{ secrets.TELEGRAM_FORUM_CHAT_ID }}
         run: |
           : > "$RUNNER_TEMP/missing-core-secrets.txt"
           SECRETS_JSON="$RUNNER_TEMP/core-secrets.json"
@@ -190,7 +190,7 @@ jobs:
             TELEGRAM_BOT_TOKEN: pick(process.env.TELEGRAM_BOT_TOKEN),
             TELEGRAM_CHANNEL_ID: pick(process.env.TELEGRAM_CHANNEL_ID),
             TELEGRAM_CHANNEL_USERNAME: pick(process.env.TELEGRAM_CHANNEL_USERNAME),
-            TELEGRAM_TOPICS_CHAT_ID: pick(process.env.TELEGRAM_TOPICS_CHAT_ID, process.env.TELEGRAM_FORUM_CHAT_ID),\n            ELEVENLABS_API_KEY: pick(process.env.ELEVENLABS_API_KEY),\n            ELEVENLABS_VOICE_ID: pick(process.env.ELEVENLABS_VOICE_ID, process.env.DAR_MALE_VOICE_ID),\n            DAR_MALE_VOICE_ID: pick(process.env.DAR_MALE_VOICE_ID, process.env.ELEVENLABS_VOICE_ID)
+            TELEGRAM_TOPICS_CHAT_ID: pick(process.env.TELEGRAM_TOPICS_CHAT_ID, process.env.TELEGRAM_FORUM_CHAT_ID)
           };
           const payload = {};
           const miss = [];
@@ -577,7 +577,7 @@ jobs:
           TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
           TELEGRAM_CHANNEL_USERNAME: ${{ secrets.TELEGRAM_CHANNEL_USERNAME }}
           TELEGRAM_TOPICS_CHAT_ID: ${{ secrets.TELEGRAM_TOPICS_CHAT_ID }}
-          TELEGRAM_FORUM_CHAT_ID: ${{ secrets.TELEGRAM_FORUM_CHAT_ID }}\n          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}\n          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}\n          DAR_MALE_VOICE_ID: ${{ secrets.DAR_MALE_VOICE_ID }}
+          TELEGRAM_FORUM_CHAT_ID: ${{ secrets.TELEGRAM_FORUM_CHAT_ID }}
         run: |
           : > "$RUNNER_TEMP/missing-core-secrets-final.txt"
           SECRETS_JSON="$RUNNER_TEMP/core-secrets-final.json"
@@ -599,7 +599,7 @@ jobs:
             TELEGRAM_BOT_TOKEN: pick(process.env.TELEGRAM_BOT_TOKEN),
             TELEGRAM_CHANNEL_ID: pick(process.env.TELEGRAM_CHANNEL_ID),
             TELEGRAM_CHANNEL_USERNAME: pick(process.env.TELEGRAM_CHANNEL_USERNAME),
-            TELEGRAM_TOPICS_CHAT_ID: pick(process.env.TELEGRAM_TOPICS_CHAT_ID, process.env.TELEGRAM_FORUM_CHAT_ID),\n            ELEVENLABS_API_KEY: pick(process.env.ELEVENLABS_API_KEY),\n            ELEVENLABS_VOICE_ID: pick(process.env.ELEVENLABS_VOICE_ID, process.env.DAR_MALE_VOICE_ID),\n            DAR_MALE_VOICE_ID: pick(process.env.DAR_MALE_VOICE_ID, process.env.ELEVENLABS_VOICE_ID)
+            TELEGRAM_TOPICS_CHAT_ID: pick(process.env.TELEGRAM_TOPICS_CHAT_ID, process.env.TELEGRAM_FORUM_CHAT_ID)
           };
           const payload = {};
           const miss = [];
