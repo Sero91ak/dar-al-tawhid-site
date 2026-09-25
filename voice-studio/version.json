@@ -1,8 +1,8 @@
 {
-  "version": "2.0.0",
-  "updatedAt": "2026-09-25T19:58:00+02:00",
+  "version": "2.1.0",
+  "updatedAt": "2026-09-25T20:04:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
-  "engine": "local-chatterbox-v3",
+  "engine": "local-chatterbox-v3.1",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v11",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
@@ -20,7 +20,7 @@
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-raw",
-  "engineVersion": "prosody-auto-dual-reference-qa-v2",
+  "engineVersion": "sentence-context-prosody-anti-hold-qa-v3",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -74,13 +74,24 @@
     "boundarySilenceTrim": true,
     "dynamicCrossfade": true,
     "gentleLevelMatching": true,
-    "humanMasterApprovalRequired": true
+    "humanMasterApprovalRequired": true,
+    "sentenceLevelProsody": true,
+    "documentContextInheritance": true,
+    "manualProsodyLock": true,
+    "antiHoldQa": true,
+    "punctuationPauseQa": true,
+    "speechRateQa": true,
+    "sustainedHoldQa": true,
+    "deterministicLongSegmentRescue": true,
+    "masterSegmentsNeverSplit": true
   },
   "releaseSafety": {
     "stagedInstaller": true,
     "pyCompilePreflight": true,
     "pronunciationRegression": true,
     "backupBeforeReplace": true,
-    "githubActionsValidation": true
+    "githubActionsValidation": true,
+    "profileSchema": 3,
+    "segmentProsodyRegression": true
   }
 }
