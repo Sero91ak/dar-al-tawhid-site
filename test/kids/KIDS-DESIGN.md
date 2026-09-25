@@ -5,14 +5,14 @@ Verbindlich für `/test/kids/` und alle künftigen Kids-Erweiterungen.
 ## Fläche
 
 - Edge-to-Edge / Widescreen: der App-Hintergrund füllt die verfügbare Breite.
-- Inhalte haben nur innere Sicherheitsabstände (`safe-area` + 16–22px).
+- Inhalte haben nur innere Sicherheitsabstände (`safe-area` + 10–12px).
 - Keine zentrierte schmale Webseiten-Spalte (kein künstliches `max-width` auf `.shell`).
 
 ## Navigation
 
 - Die Tab-Leiste Heute · Geschichten · Qurʾān · Eltern bleibt angeheftet.
 - Sie ist eine **gläserne Bar**: `backdrop-filter`, leichte Sättigung, feine Kontur, dezenter Schatten.
-- Kein massiver opaker Farbblock. Touch-Ziele bleiben großzügig.
+- Kompakt in der Höhe: eine Safe-Area, enger Icon–Label-Abstand, Touch-Ziele mindestens 44px.
 
 ## Icons – keine System-Emojis (`KIDS_NO_SYSTEM_EMOJI`)
 
