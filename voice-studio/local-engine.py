@@ -357,6 +357,18 @@ def resolve_prosody_mode(text:str,requested:str="auto"):
     mode=detect_prosody_mode(text)
     return mode if mode in PROSODY_MODES else "narration"
 
+def resolve_segment_prosody(text:str,doc_mode:str,requested:str="auto"):
+    """Auto darf innerhalb eines Dokuments natürlich reagieren; manuelle Auswahl bleibt strikt."""
+    requested=str(requested or "auto").strip()
+    if requested!="auto" and requested in PROSODY_MODES:
+        return requested
+    local=detect_prosody_mode(text)
+    if local!="narration" and local in PROSODY_MODES:
+        return local
+    if doc_mode in ("kids_story","kids_lesson","teaching","gentle","serious","dua","list"):
+        return doc_mode
+    return "narration"
+
 def prosody_settings(mode:str,language_id:str,text:str=""):
     mode_cfg=PROSODY_MODES.get(mode) or PROSODY_MODES.get("narration") or {}
     lang_cfg=mode_cfg.get(language_id) or {}
@@ -415,13 +427,13 @@ def trim_segment_edges(wav,sr:int):
     if peak<=1e-7:
         return w
 
-    # Etwa -49 dB relativ zum Segmentpeak; 20 ms Sicherheit an beiden Rändern.
-    threshold=max(peak*0.0035,1e-5)
+    # Profilgesteuerte Randstille: konservativ trimmen, Anlaute/Konsonanten schützen.
+    threshold=max(peak*float(CONTINUITY_CONFIG.get("trimThresholdRelative",0.0035)),1e-5)
     active=torch.nonzero(envelope>threshold).flatten()
     if active.numel()==0:
         return w
 
-    pad=max(1,int(sr*0.020))
+    pad=max(1,int(sr*float(CONTINUITY_CONFIG.get("trimSafetyMs",20))/1000.0))
     start=max(0,int(active[0].item())-pad)
     end=min(w.shape[-1],int(active[-1].item())+pad+1)
     return w[...,start:end]
@@ -433,7 +445,7 @@ def segment_rms(wav):
         return 0.0
     return float(torch.sqrt(torch.mean(w*w)+1e-12).item())
 
-def audio_quality_metrics(wav,sr:int,text:str,language_id:str):
+def audio_quality_metrics(wav,sr:int,text:str,language_id:str,mode:str="narration"):
     import torch
     w=normalize_segment_shape(wav)
     metrics={
@@ -442,6 +454,8 @@ def audio_quality_metrics(wav,sr:int,text:str,language_id:str):
         "peak":0.0,
         "clipping_ratio":0.0,
         "max_internal_silence_ms":0,
+        "max_sustained_plateau_ms":0,
+        "speech_rate_wpm":0.0,
         "issues":[],
     }
     if not w.numel():
@@ -472,8 +486,7 @@ def audio_quality_metrics(wav,sr:int,text:str,language_id:str):
     if peak<min_peak: metrics["issues"].append("low_peak")
     if clipping>max_clip: metrics["issues"].append("clipping")
 
-    # Internal hold/pause detection uses 10 ms energy frames and intentionally
-    # ignores expected punctuation pauses.
+    # 10-ms energy frames: echte interne Stille wird auch bei Satzzeichen begrenzt.
     env=w.abs().amax(dim=0)
     frame=max(1,int(sr*0.010))
     count=env.numel()//frame
@@ -489,9 +502,38 @@ def audio_quality_metrics(wav,sr:int,text:str,language_id:str):
                 run=0
         silence_ms=longest*10
         metrics["max_internal_silence_ms"]=silence_ms
-        limit=int(QA_CONFIG.get("maxInternalSilenceMsWithoutPunctuation",700))
-        if silence_ms>limit and not re.search(r"[.!?؟…,:;،؛]",str(text)):
-            metrics["issues"].append("unexpected_internal_hold")
+        has_punctuation=bool(re.search(r"[.!?؟…,:;،؛]",str(text)))
+        key="maxInternalSilenceMsWithPunctuation" if has_punctuation else "maxInternalSilenceMsWithoutPunctuation"
+        limit=int(QA_CONFIG.get(key,1250 if has_punctuation else 700))
+        if silence_ms>limit:
+            metrics["issues"].append("excessive_internal_pause" if has_punctuation else "unexpected_internal_hold")
+
+    # Sustained-hold guard: auffällig gleichförmige Energie über fast eine Sekunde
+    # ist bei kurzen Segmenten ein typisches Hängen/Dehnen des TTS-Modells.
+    plateau_frame_ms=max(10,int(QA_CONFIG.get("sustainedPlateauFrameMs",20)))
+    pframe=max(1,int(sr*plateau_frame_ms/1000))
+    pcount=env.numel()//pframe
+    if pcount>=4 and peak>0:
+        levels=env[:pcount*pframe].reshape(pcount,pframe).mean(dim=1).tolist()
+        active_floor=max(peak*0.05,0.0008)
+        delta=float(QA_CONFIG.get("sustainedPlateauRelativeDelta",0.035))
+        longest=run=0
+        prev=None
+        for level in levels:
+            if prev is not None and level>active_floor and prev>active_floor:
+                rel=abs(level-prev)/max(level,prev,1e-6)
+                if rel<=delta:
+                    run+=1;longest=max(longest,run)
+                else:
+                    run=0
+            else:
+                run=0
+            prev=level
+        plateau_ms=longest*plateau_frame_ms
+        metrics["max_sustained_plateau_ms"]=plateau_ms
+        word_count=len(re.findall(r"\S+",str(text)))
+        if plateau_ms>int(QA_CONFIG.get("maxSustainedEnergyPlateauMs",950)) and (language_id=="ar" or word_count<=8):
+            metrics["issues"].append("suspicious_sustained_hold")
 
     if language_id=="ar":
         letters=len(ARABIC_CHAR_RE.findall(str(text)))
@@ -500,14 +542,54 @@ def audio_quality_metrics(wav,sr:int,text:str,language_id:str):
             if duration>max_dur:
                 metrics["issues"].append("short_arabic_too_long")
     else:
-        visible=len(re.findall(r"[A-Za-zÀ-ÖØ-öø-ÿ0-9]",str(text)))
-        max_dur=max(8.0,visible*0.28+4.0)
-        if duration>max_dur:
-            metrics["issues"].append("segment_too_long")
+        words=re.findall(r"[A-Za-zÀ-ÖØ-öø-ÿ0-9][A-Za-zÀ-ÖØ-öø-ÿ0-9'’\-]*",str(text))
+        word_count=len(words)
+        if word_count:
+            wpm=(word_count/max(duration,0.1))*60.0
+            metrics["speech_rate_wpm"]=round(wpm,1)
+            min_words=int(QA_CONFIG.get("minSpeechRateWords",6))
+            floors=QA_CONFIG.get("minSpeechRateWpmByMode") or {}
+            floor=float(floors.get(mode,floors.get("default",78)))
+            if word_count>=min_words and wpm<floor:
+                metrics["issues"].append("speech_rate_too_slow")
+            max_dur=max(6.0,float(QA_CONFIG.get("longSegmentBaseSeconds",2.5))+word_count*float(QA_CONFIG.get("longSegmentSecondsPerWord",0.85)))
+            if duration>max_dur:
+                metrics["issues"].append("segment_too_long")
 
     if duration<0.12:
         metrics["issues"].append("too_short")
+    metrics["issues"]=list(dict.fromkeys(metrics["issues"]))
     return metrics
+
+def split_rescue_chunks(text:str):
+    """Nur lange, nicht-MASTER Segmente deterministisch in sichere Teilstücke zerlegen."""
+    value=re.sub(r"\s+"," ",str(text or "")).strip()
+    if not value:
+        return []
+    words=value.split()
+    min_words=max(6,int(QA_CONFIG.get("rescueMinWords",9)))
+    min_chars=max(60,int(QA_CONFIG.get("rescueMinChars",90)))
+    if len(words)<min_words and len(value)<min_chars:
+        return [value]
+
+    parts=[p.strip() for p in re.split(r"(?<=[,،;؛:])\s+",value) if p.strip()]
+    if len(parts)>=2 and max(map(len,parts))<len(value)*0.82:
+        return parts
+
+    # Bevorzugt an einer natürlichen deutschen Konjunktion nahe der Mitte trennen.
+    candidates=[m for m in re.finditer(r"\s+(?:und|aber|denn|doch|während|weil|wenn)\s+",value,flags=re.I)]
+    if candidates:
+        middle=len(value)/2
+        cut=min(candidates,key=lambda m:abs(m.start()-middle)).start()
+        left=value[:cut].strip()
+        right=value[cut:].strip()
+        if left and right:
+            return [left,right]
+
+    if len(words)>=min_words:
+        mid=max(1,min(len(words)-1,len(words)//2))
+        return [" ".join(words[:mid])," ".join(words[mid:])]
+    return [value]
 
 def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool=False):
     import torch
@@ -518,13 +600,47 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
     for attempt in range(attempts):
         torch.manual_seed(2026+attempt*seed_offset)
         wav=render_with_model(model,text,language_id,mode)
-        metrics=audio_quality_metrics(wav,int(model.sr),text,language_id)
+        metrics=audio_quality_metrics(wav,int(model.sr),text,language_id,mode)
         metrics["attempt"]=attempt+1
         metrics["critical"]=bool(critical)
+        metrics["rescued"]=False
         last=(wav,metrics)
         if not metrics["issues"]:
             return wav,metrics
         print(f"[DĀR Voice] QA retry {attempt+1}/{attempts} lang={language_id} mode={mode}: {metrics['issues']}",flush=True)
+
+    rescue_allowed={
+        "unexpected_internal_hold","excessive_internal_pause","suspicious_sustained_hold",
+        "short_arabic_too_long","segment_too_long","speech_rate_too_slow"
+    }
+    last_issues=set(last[1]["issues"]) if last else set()
+    if bool(QA_CONFIG.get("rescueLongSegments",True)) and not critical and last_issues and last_issues.issubset(rescue_allowed):
+        parts=split_rescue_chunks(text)
+        if len(parts)>1:
+            rescued=[]
+            rescue_metrics=[]
+            for part_idx,part in enumerate(parts):
+                torch.manual_seed(2026+(attempts+part_idx)*seed_offset)
+                sub=render_with_model(model,part,language_id,mode)
+                subm=audio_quality_metrics(sub,int(model.sr),part,language_id,mode)
+                if subm["issues"]:
+                    rescued=[]
+                    break
+                rescued.append((sub,language_id,part,mode,subm))
+                rescue_metrics.append(subm)
+            if rescued:
+                joined=join_rendered_segments(rescued,int(model.sr))
+                metrics=audio_quality_metrics(joined,int(model.sr),text,language_id,mode)
+                if not metrics["issues"]:
+                    metrics.update({
+                        "attempt":attempts,
+                        "critical":False,
+                        "rescued":True,
+                        "rescue_parts":len(parts),
+                        "rescue_metrics":rescue_metrics,
+                    })
+                    print(f"[DĀR Voice] segment rescued in {len(parts)} parts lang={language_id} mode={mode}",flush=True)
+                    return joined,metrics
 
     issues=", ".join(last[1]["issues"]) if last else "unknown"
     raise RuntimeError(f"Audio-QA fehlgeschlagen ({language_id}/{mode}): {issues}")
@@ -580,22 +696,34 @@ def join_rendered_segments(items,sr:int):
 
     for item in cleaned[1:]:
         wav,lang,chunk,mode=item[0],item[1],item[2],item[3]
-        sentence_end=bool(re.search(r"[.!?؟…]$",prev_chunk.strip()))
-        soft_pause=bool(re.search(r"[,،;؛:]$",prev_chunk.strip()))
+        prev_text=prev_chunk.strip()
+        sentence_end=bool(re.search(r"[.!?؟…]$",prev_text))
+        soft_pause=bool(re.search(r"[,،;؛:]$",prev_text))
         p=prosody_settings(prev_mode,prev_lang,prev_chunk)
 
         if sentence_end:
-            pause=max(0,int(p["sentence_pause_ms"]))
+            factors=CONTINUITY_CONFIG.get("sentencePauseFactors") or {}
+            if re.search(r"[?؟]$",prev_text): factor=float(factors.get("question",1.06))
+            elif prev_text.endswith("!"): factor=float(factors.get("exclamation",0.96))
+            elif prev_text.endswith("…"): factor=float(factors.get("ellipsis",1.16))
+            else: factor=float(factors.get("period",1.0))
+            pause=max(0,int(p["sentence_pause_ms"]*factor))
             silence=torch.zeros((1,max(1,int(sr*pause/1000))),dtype=full.dtype)
             full=torch.cat([full,silence,wav],dim=-1)
         elif soft_pause:
-            pause=max(0,int(p["soft_pause_ms"]))
+            factors=CONTINUITY_CONFIG.get("softPauseFactors") or {}
+            if re.search(r"[,،]$",prev_text): factor=float(factors.get("comma",0.86))
+            elif re.search(r"[;؛]$",prev_text): factor=float(factors.get("semicolon",1.0))
+            else: factor=float(factors.get("colon",1.08))
+            pause=max(0,int(p["soft_pause_ms"]*factor))
             silence=torch.zeros((1,max(1,int(sr*pause/1000))),dtype=full.dtype)
             full=torch.cat([full,silence,wav],dim=-1)
         else:
             ms=max(8,int(p["crossfade_ms"]))
             if prev_lang==lang:
-                ms=min(ms,22)
+                ms=min(ms,int(CONTINUITY_CONFIG.get("sameLanguageCrossfadeMaxMs",22)))
+            else:
+                ms=max(ms,int(CONTINUITY_CONFIG.get("languageCrossfadeMinMs",14)))
             full=crossfade_audio(full,wav,sr,ms/1000.0)
 
         prev_lang=lang
@@ -707,7 +835,7 @@ def generate(text:str,prepared:str="",style:str="auto"):
         for idx,(lang,chunk) in enumerate(plan,1):
             pct=8+int(((idx-1)/max(1,total))*78)
             lang_label="Arabisch" if lang=="ar" else "Deutsch"
-            mode="question" if ("?" in chunk or "؟" in chunk) and doc_mode not in ("serious","dua") else doc_mode
+            mode=resolve_segment_prosody(chunk,doc_mode,style)
             critical=lang=="ar" and any(x and x in chunk for x in master_forms)
             set_status(progress=pct,message=f"{lang_label} · {mode} · Abschnitt {idx}/{total} …")
             print(f"[DĀR Voice] segment {idx}/{total} lang={lang} mode={mode} critical={critical}: {chunk}",flush=True)
@@ -734,7 +862,7 @@ def generate(text:str,prepared:str="",style:str="auto"):
 
         sr=int(model.sr)
         full=join_rendered_segments(outputs,sr)
-        final_metrics=audio_quality_metrics(full,sr,text,"de")
+        final_metrics=audio_quality_metrics(full,sr,text,"de",doc_mode)
         # Final composite may legitimately contain punctuation pauses; only hard
         # signal defects are fatal here.
         fatal=[x for x in final_metrics["issues"] if x in ("empty_audio","non_finite","near_silence","low_peak","clipping","too_short")]
@@ -743,6 +871,9 @@ def generate(text:str,prepared:str="",style:str="auto"):
 
         qa_summary={
             "mode":doc_mode,
+            "segment_modes":sorted({x.get("mode","narration") for x in qa_segments}),
+            "rescued_segments":sum(1 for x in qa_segments if x.get("rescued")),
+            "continuity_engine":"sentence-context-2.1",
             "segments":qa_segments,
             "final":final_metrics,
             "arabic_reference_dedicated":ARABIC_DEDICATED_REFERENCE,
