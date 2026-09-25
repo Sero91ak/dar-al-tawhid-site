@@ -1,0 +1,62 @@
+name: Voice Studio 2 Validate
+
+on:
+  push:
+    paths:
+      - "voice-studio/**"
+      - "data/pronunciation/pronunciation-rules.json"
+      - "data/pronunciation/voice-production-profile.json"
+      - "data/pronunciation/voice-regression-fixtures.json"
+      - "scripts/voice-studio/validate-v2.py"
+      - ".github/workflows/voice-studio-v2-validate.yml"
+  pull_request:
+    paths:
+      - "voice-studio/**"
+      - "data/pronunciation/pronunciation-rules.json"
+      - "data/pronunciation/voice-production-profile.json"
+      - "data/pronunciation/voice-regression-fixtures.json"
+      - "scripts/voice-studio/validate-v2.py"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Compile Voice Engine
+        run: python -m py_compile voice-studio/local-engine.py
+
+      - name: Validate pronunciation and regression fixtures
+        run: |
+          python scripts/voice-studio/validate-v2.py \
+            data/pronunciation/pronunciation-rules.json \
+            data/pronunciation/voice-production-profile.json \
+            voice-studio/local-engine.py \
+            data/pronunciation/voice-regression-fixtures.json
+
+      - name: Validate Voice Studio UI hooks
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          html=Path("voice-studio/index.html").read_text(encoding="utf-8")
+          required=[
+              'id="styleMode"',
+              'id="qaProsody"',
+              'id="qaArabicRef"',
+              'id="qaTechnical"',
+              '"/analyze"',
+              'style:$("#styleMode").value',
+          ]
+          missing=[x for x in required if x not in html]
+          if missing:
+              raise SystemExit("Missing Voice Studio 2 UI hooks: "+", ".join(missing))
+          print("Voice Studio UI hooks OK")
+          PY
