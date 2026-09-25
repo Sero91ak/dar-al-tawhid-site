@@ -18,6 +18,27 @@ def load(path):
 
 def prepare(text,rules):
     rules=sorted(rules,key=lambda r:len(str(r.get("string_to_replace",""))),reverse=True)
+    honorific_keys={"salawat_prophet","radiyallahu_anhu","radiyallahu_anha","radiyallahu_anhuma","radiyallahu_anhum"}
+    honorific_tts={}
+    honorific_forms={k:[] for k in honorific_keys}
+    for r in rules:
+        key=str(r.get("audio_lock_key",""))
+        if key in honorific_keys:
+            if r.get("tts_text") and key not in honorific_tts:
+                honorific_tts[key]=str(r.get("tts_text"))
+            if r.get("string_to_replace"):
+                honorific_forms[key].append(str(r.get("string_to_replace")))
+    for key in honorific_forms:
+        honorific_forms[key]=sorted(set(honorific_forms[key]),key=len,reverse=True)
+
+    def has_explicit_honorific(pos):
+        tail=str(text or "")[pos:].lstrip()
+        tail=tail.lstrip(".,،;؛:!?؟…·-–—()[]{}«»\\\"“”„‘’ ")
+        for forms in honorific_forms.values():
+            if any(tail.startswith(form) for form in forms):
+                return True
+        return False
+
     pos=0;out=[]
     while pos<len(text):
         hit=None
@@ -27,8 +48,13 @@ def prepare(text,rules):
                 hit=r;break
         if not hit:
             out.append(text[pos]);pos+=1;continue
-        out.append(str(hit.get("tts_text") or hit.get("alias") or hit["string_to_replace"]))
-        pos+=len(str(hit["string_to_replace"]))
+        needle=str(hit.get("string_to_replace",""))
+        out.append(str(hit.get("tts_text") or hit.get("alias") or needle))
+        next_pos=pos+len(needle)
+        required_key=str(hit.get("required_honorific_key",""))
+        if required_key and required_key in honorific_tts and not has_explicit_honorific(next_pos):
+            out.append(" "+honorific_tts[required_key])
+        pos=next_pos
     return "".join(out)
 
 def classify(text):
@@ -96,7 +122,7 @@ def main():
     modes=set((prof.get("prosody") or {}).get("modes",{}))
     missing=required_modes-modes
     if missing: fail("missing prosody modes: "+", ".join(sorted(missing)))
-    if int(prof.get("schemaVersion",0))<5: fail("voice profile schemaVersion must be >=5")
+    if int(prof.get("schemaVersion",0))<6: fail("voice profile schemaVersion must be >=6")
     qa=prof.get("qualityAssurance") or {}
     if int(qa.get("maxRenderAttempts",0))<2: fail("QA maxRenderAttempts must be >=2")
     if int(qa.get("maxInternalSilenceMsWithPunctuation",0))<900: fail("QA punctuation-pause guard missing")
@@ -119,6 +145,11 @@ def main():
         "abu_bakr_siddiq":"أَبُو بَكْرٍ الصِّدِّيقْ",
         "umar":"عُمَرْ",
         "umar_ibn_al_khattab":"عُمَرُ بْنُ الْخَطَّابْ",
+        "salawat_prophet":"صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+        "radiyallahu_anhu":"رَضِيَ اللَّهُ عَنْهُ",
+        "radiyallahu_anha":"رَضِيَ اللَّهُ عَنْهَا",
+        "radiyallahu_anhuma":"رَضِيَ اللَّهُ عَنْهُمَا",
+        "radiyallahu_anhum":"رَضِيَ اللَّهُ عَنْهُمْ",
     }
     if set((core.get("keys") or {}).keys())!=set(expected_core):
         fail("core pronunciation-lock keys are incomplete")
@@ -143,15 +174,45 @@ def main():
         if required_alias not in seen:
             fail("missing common name alias: "+required_alias)
 
+    honorific_policy=prof.get("requiredHonorifics") or {}
+    if not honorific_policy.get("enabled"): fail("required honorific policy must be enabled")
+    if not honorific_policy.get("duplicateProtection"): fail("required honorific duplicate protection missing")
+    if not bool(qa.get("requiredHonorificRegression")): fail("required honorific regression QA missing")
+    if not bool(qa.get("duplicateHonorificGuard")): fail("duplicate honorific QA guard missing")
+
+    required_name_rules=[r for r in rules if r.get("required_honorific_key")]
+    male_required=[r for r in required_name_rules if r.get("required_honorific_key")=="radiyallahu_anhu"]
+    female_required=[r for r in required_name_rules if r.get("required_honorific_key")=="radiyallahu_anha"]
+    prophet_required=[r for r in required_name_rules if r.get("required_honorific_key")=="salawat_prophet"]
+    if len(required_name_rules)<340: fail(f"too few required-honorific name variants: {len(required_name_rules)}")
+    if len(male_required)<250: fail(f"too few male Ṣaḥābah honorific variants: {len(male_required)}")
+    if len(female_required)<60: fail(f"too few female Ṣaḥābiyyāt honorific variants: {len(female_required)}")
+    if len(prophet_required)<4: fail(f"too few Prophet Muḥammad honorific variants: {len(prophet_required)}")
+
+    salawat=expected_core["salawat_prophet"]
+    anhu=expected_core["radiyallahu_anhu"]
+    anha=expected_core["radiyallahu_anha"]
+    honorific_cases=[
+        ("prophet-auto","Muhammad sagte",salawat,1),
+        ("prophet-explicit","Muhammad ﷺ sagte",salawat,1),
+        ("sahabi-auto","Omar ibn al-Chattab sagte",anhu,1),
+        ("sahabi-explicit","Abū Bakr رضي الله عنه sagte",anhu,1),
+        ("sahabiyyah-auto","ʿĀʾišah bint Abī Bakr berichtete",anha,1),
+    ]
+    for cid,source,fragment,count in honorific_cases:
+        speech=prepare(source,rules)
+        if speech.count(fragment)!=count:
+            fail(f"honorific regression {cid}: expected {count} x {fragment}, got {speech}")
+
     engine_source=Path(engine_path).read_text(encoding="utf-8")
     try:
         tree=ast.parse(engine_source)
     except SyntaxError as e:
         fail(f"engine syntax error: {e}")
     functions={n.name for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))}
-    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","discard_pending_audio_locks","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav"}:
+    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","discard_pending_audio_locks","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav","source_has_honorific"}:
         if required not in functions: fail(f"engine missing production function: {required}")
-    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","/confirm-core-audio","audio_lock_pending","session_audio_locks"}:
+    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","/confirm-core-audio","audio_lock_pending","session_audio_locks","required_honorific_key","honorificPolicyEnabled"}:
         if marker not in engine_source: fail(f"engine missing QA/audio-lock marker: {marker}")
 
     for case in fixtures.get("cases",[]):
@@ -188,6 +249,10 @@ def main():
         "segmentRegressionCases":len(fixtures.get("segmentCases",[])),
         "audioLockVariants":audio_lock_variants,
         "audioLockKeys":sorted(k for k,v in seen_core.items() if v),
+        "requiredHonorificNameVariants":len(required_name_rules),
+        "requiredHonorificMaleVariants":len(male_required),
+        "requiredHonorificFemaleVariants":len(female_required),
+        "requiredHonorificProphetVariants":len(prophet_required),
         "profileSchema":prof.get("schemaVersion")
     },ensure_ascii=False))
 
