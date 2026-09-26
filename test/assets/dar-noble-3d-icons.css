@@ -8,10 +8,11 @@ img.dar3d-icon{
 }
 #bottomNav .bottom-nav-btn .nav-icon{
   box-sizing:border-box!important;
-  width:32px!important;
-  height:32px!important;
-  min-height:32px!important;
+  width:36px!important;
+  height:36px!important;
+  min-height:36px!important;
   padding:3px!important;
+  overflow:hidden!important;
   display:grid!important;
   place-items:center!important;
 }
