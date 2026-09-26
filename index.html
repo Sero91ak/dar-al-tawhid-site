@@ -35230,20 +35230,53 @@ html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn::before{
 }
 </style>
 
-<style id="dar-tab-kids-pop-v1039">
+<style id="dar-tab-kids-pop-v1040">
 html #bottomNav .dar-tab-plop-pill,
 html #bottomNav .dar-tab-loupe-lens,
 #darTabPeek{display:none!important}
+/* Kids 1:1: kidPop + kidLift. Nur Animation, keine Tab-/Schnellzugriff-Logik. */
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn:active,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn:active,
+html #bottomNav.bottom-nav .bottom-nav-btn:active,
 html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop{
-  animation:darKidTabLift .32s cubic-bezier(.2,.8,.2,1);
+  animation:kidPop .34s cubic-bezier(.2,.85,.2,1)!important;
+  filter:none!important;
 }
-@keyframes darKidTabLift{
-  0%{transform:none}
-  40%{transform:translateY(-4px) scale(1.05)}
-  100%{transform:none}
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.kid-pop,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.kid-pop,
+html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop{
+  animation:kidLift .32s cubic-bezier(.2,.8,.2,1)!important;
+}
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.kid-pop.is-pressed,
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.kid-pop:active,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.kid-pop.is-pressed,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.kid-pop:active,
+html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop.is-pressed,
+html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop:active{
+  filter:none!important;
+}
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.kid-pop .nav-icon,
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.kid-pop img.dar3d-icon,
+html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop .nav-icon,
+html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop img.dar3d-icon{
+  animation:kidLift .32s cubic-bezier(.2,.8,.2,1)!important;
+  filter:none!important;
+}
+@keyframes kidPop{
+  0%{transform:scale(1)!important;translate:0 0;scale:1}
+  42%{transform:scale(1.06)!important;translate:0 0;scale:1.06}
+  100%{transform:scale(1)!important;translate:0 0;scale:1}
+}
+@keyframes kidLift{
+  0%{transform:translateY(0) scale(1)!important;translate:0 0;scale:1}
+  40%{transform:translateY(-4px) scale(1.05)!important;translate:0 -4px;scale:1.05}
+  100%{transform:translateY(0) scale(1)!important;translate:0 0;scale:1}
 }
 @media (prefers-reduced-motion:reduce){
-  html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop{animation:none}
+  html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop,
+  html #bottomNav.bottom-nav .bottom-nav-btn:active,
+  html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop .nav-icon,
+  html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop img.dar3d-icon{animation:none!important}
 }
 </style>
 

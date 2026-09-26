@@ -123,6 +123,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-tab-kids-animation-exact-2026-09-26",
+      "approvedBy": "user-explicit-kids-animationsfunktion-1zu1-tab-schnellzugriff-unverändert",
+      "reason": "Nutzer: Kids-Animationsfunktion exakt uebernehmen. Tab-Funktion und Schnellzugriffe unveraendert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-tab-kids-click-2026-09-26",
       "approvedBy": "user-explicit-lupe-raus-kids-klick-schnellzugriff-behalten",
       "reason": "Nutzer: Lupen/Drag-Effekt komplett raus, normale smooth Klick-Funktion 1:1 wie Test Kids. Schnellzugriffe der Tableiste nicht beschaedigen.",
