@@ -1,11 +1,11 @@
 {
   "schemaVersion": 8,
-  "id": "dar-own-voice-narration-v2.7",
+  "id": "dar-own-voice-narration-v2.7.1",
   "updatedAt": "2026-09-26",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
-  "productionGoal": "Production-grade Serhat narration with deterministic Islamic-name pronunciation, verified online master-library merge, unresolved-term blocking, mandatory honorifics, persistent confirmed audio locks, and user-confirmed pronunciation learning.",
+  "productionGoal": "Production-grade Serhat narration with deterministic Islamic-name pronunciation, verified master-library merge, unresolved-term blocking, mandatory honorifics, persistent confirmed audio locks, immediate learned-rule activation, and automatic rerender of the current text after pronunciation confirmation.",
   "delivery": {
     "genderPresentation": "male",
     "character": [
@@ -370,7 +370,9 @@
     "aishahFemaleHonorificRegression": true,
     "islamicMasterLibraryRegression": true,
     "unknownIslamicTermDetectionRegression": true,
-    "masterLibraryPrecedenceRegression": true
+    "masterLibraryPrecedenceRegression": true,
+    "confirmedPronunciationAutoRerenderRegression": true,
+    "multiCorrectionAutoRerenderRegression": true
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
@@ -536,7 +538,19 @@
     "masterLibraryOnlineCachePath": "~/SerhatVoice/PronunciationLearning/islamic-master-library.json",
     "verifiedMasterMayAutoFillMissingRules": true,
     "masterNeverOverridesUserOrInstalled": true,
-    "unknownIslamicTermsMustBeReviewed": true
+    "unknownIslamicTermsMustBeReviewed": true,
+    "confirmedRuleTakesEffectImmediately": true,
+    "rerenderCurrentAudioAfterConfirmation": true,
+    "currentAudioBecomesStaleAfterCorrection": true,
+    "originalMasterSourceOfTruth": {
+      "fileName": "dar_al_tawhid_islamic_pronunciation_master.csv",
+      "rows": 3719,
+      "canonicalTerms": 894,
+      "sha256": "b629a50c27ee4b73c2a0bac3c0856dfc67f8c2fbf1b2ef8df4a69689a524b14b",
+      "policy": "Do not treat higher rule count as proof of complete import; preserve every original match form semantically and validate against the source-of-truth manifest when available."
+    },
+    "pendingAutoRerenderAcrossMultipleCorrections": true,
+    "rerenderOnlyAfterLastUnresolvedTerm": true
   },
   "productionRenderer": {
     "primaryAppleSilicon": "mlx-community/chatterbox-multilingual-v3",

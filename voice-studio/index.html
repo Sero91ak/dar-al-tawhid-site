@@ -402,7 +402,7 @@ input,select{
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark" aria-hidden="true"><img src="/watermark-my-logo-full.png" alt=""></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.7.0 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.7.1 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="installBtn" class="btn quiet install-btn">App installieren</button>
@@ -414,7 +414,7 @@ input,select{
 <main class="panel editor-panel">
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
-    <div class="badges"><span class="badge">SERHAT VOICE 2.7.0</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
+    <div class="badges"><span class="badge">SERHAT VOICE 2.7.1</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
   </div>
 
   <div class="textbox-wrap">
@@ -542,7 +542,7 @@ input,select{
   <div id="error" class="bad" style="font-size:11px;line-height:1.5"></div>
 </aside>
 </div>
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.7.0 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.7.1 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
 </div>
 </div>
 
@@ -559,7 +559,7 @@ const PROSODY_LABELS={
 };
 const IS_LOCAL=location.hostname==="127.0.0.1"||location.hostname==="localhost";
 const LOCAL_API=IS_LOCAL?"":"http://127.0.0.1:8787";
-let library={rules:[]},buckets=new Map(),lastAudio=null,engineOK=false,modelReady=false,qaConfirmed=false,deferredInstall=null;
+let library={rules:[]},buckets=new Map(),lastAudio=null,lastGeneratedText="",pendingAutoRerenderText="",engineOK=false,modelReady=false,qaConfirmed=false,deferredInstall=null;
 let learningResults=[],learningCandidate=null,learningPreviewId="",learningPreviewUrl=null;
 const $=s=>document.querySelector(s);
 
@@ -608,7 +608,7 @@ function analyze(text){
   }
   return{prepared:out.join(""),found};
 }
-function resetAudioQA(){
+function resetAudioQA(preservePendingRerender=false){
   qaConfirmed=false;
   $("#qaConfirmed").textContent="nein";
   $("#qaConfirmed").className="warn";
@@ -625,6 +625,8 @@ function resetAudioQA(){
     $("#qaHonorific").className="warn";
   }
   if(lastAudio){URL.revokeObjectURL(lastAudio);lastAudio=null}
+  lastGeneratedText="";
+  if(!preservePendingRerender)pendingAutoRerenderText="";
   $("#player").removeAttribute("src");
   $("#playerWrap").hidden=true;
   updateQA();
@@ -795,15 +797,38 @@ async function previewLearning(){
 }
 async function confirmLearning(){
   if(!learningPreviewId){setMessage("Zuerst eine neue Aussprache testen und anhören.");return}
-  const term=$("#learnTerm").value.trim(),btn=$("#learnConfirmBtn"),old=btn.textContent;btn.disabled=true;btn.textContent="Wird gelernt …";
+  const term=$("#learnTerm").value.trim(),btn=$("#learnConfirmBtn"),old=btn.textContent;
+  const currentText=$("#text").value.trim();
+  const rerenderCurrentAudio=!!currentText&&(
+    (!!lastAudio&&currentText===lastGeneratedText)||
+    (!!pendingAutoRerenderText&&currentText===pendingAutoRerenderText)
+  );
+  btn.disabled=true;btn.textContent="Wird gelernt …";
   try{
     const r=await localRequest("/learning/confirm",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({previewId:learningPreviewId,term})});
     const d=await r.json().catch(()=>({}));
     if(!r.ok||!d.ok)throw Error(d.error||"Aussprache konnte nicht gespeichert werden.");
     clearLearningPreview();renderLearningState(d);
     await loadLibrary();
-    setMessage("Gespeichert: „"+term+"“ ist jetzt Teil deines dauerhaften Lernwortschatzes und nutzt diese bestätigte Aussprache.","good");
     await searchLearning(term);
+    if(rerenderCurrentAudio){
+      pendingAutoRerenderText=currentText;
+      const postCorrection=await analyzeProsody();
+      const remaining=Array.isArray(postCorrection?.unresolvedIslamicTerms)?postCorrection.unresolvedIslamicTerms:[];
+      if(remaining.length){
+        resetAudioQA(true);
+        setMessage(
+          "Gespeichert: „"+term+"“. Die alte Audio ist veraltet. Noch "+remaining.length+
+          " ungeklärte Aussprache"+(remaining.length===1?"":"n")+" im Text. Nach der letzten Bestätigung wird derselbe Text automatisch neu erzeugt.",
+          "warn"
+        );
+      }else{
+        setMessage("Gespeichert: „"+term+"“. Alle offenen Aussprachen sind geklärt; derselbe Text wird jetzt automatisch neu erzeugt.","warn");
+        await generate({autoRerender:true});
+      }
+    }else{
+      setMessage("Gespeichert: „"+term+"“ ist sofort aktiv. Beim nächsten Erzeugen wird automatisch die bestätigte Aussprache verwendet.","good");
+    }
   }catch(e){setMessage(e.message||String(e));btn.disabled=false}
   finally{if(btn)btn.textContent=old}
 }
@@ -990,8 +1015,8 @@ function updateQA(){
   $("#qaAudio").className=audio?"good":"warn";
 }
 
-async function generate(){
-  resetAudioQA();
+async function generate({autoRerender=false}={}){
+  resetAudioQA(autoRerender);
   const btns=[$("#generateBtn"),$("#mobileGenerateBtn")].filter(Boolean);
   const old=btns.map(b=>b.textContent);
   btns.forEach(b=>{b.disabled=true;b.textContent="Vorbereitung …"});
@@ -1050,6 +1075,8 @@ async function generate(){
 
     const url=URL.createObjectURL(blob);
     lastAudio=url;
+    lastGeneratedText=text;
+    pendingAutoRerenderText="";
     $("#player").src=url;
     $("#playerWrap").hidden=false;
     $("#wavLink").href=url;

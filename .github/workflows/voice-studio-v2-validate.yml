@@ -119,6 +119,12 @@ jobs:
               'honorificPolicyEnabled',
               'unresolvedIslamicTerms',
               'Master-Bibliothek',
+              'lastGeneratedText',
+              'rerenderCurrentAudio',
+              'pendingAutoRerenderText',
+              'resetAudioQA(true)',
+              'Nach der letzten Bestätigung wird derselbe Text automatisch neu erzeugt',
+              'Alle offenen Aussprachen sind geklärt; derselbe Text wird jetzt automatisch neu erzeugt',
               'style:$("#styleMode").value',
           ]
           missing=[x for x in required if x not in html]
