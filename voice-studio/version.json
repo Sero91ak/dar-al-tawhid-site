@@ -1,6 +1,6 @@
 {
-  "version": "2.3.2",
-  "updatedAt": "2026-09-26T02:26:00+02:00",
+  "version": "2.3.3",
+  "updatedAt": "2026-09-26T02:32:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "local-chatterbox-v3.3",
   "provider": "self-produced",
@@ -16,11 +16,11 @@
   "setupMethod": "native-macos-wkwebview-existing-serhatvoice",
   "setupCommand": "curl -fsSL 'https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/voice-studio/install-mac.command' | /bin/bash",
   "macApp": "~/Applications/DĀR Voice Studio.app",
-  "macAppRuntime": "diagnostic launcher + native WKWebView + browser-app fallback + retained local Chatterbox process",
+  "macAppRuntime": "single engine owner: launch-agent first, controlled direct fallback, passive native WKWebView",
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-raw",
-  "engineVersion": "single-instance-engine-and-online-vocabulary-validation-fix",
+  "engineVersion": "single-owner-engine-stale-recovery-and-cache-quarantine",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -166,6 +166,13 @@
     "singleInstancePortBind": true,
     "bindBeforeModelWarmup": true,
     "existingHealthyEngineAccepted": true,
-    "onlineArabicUnicodeValidationFixed": true
+    "onlineArabicUnicodeValidationFixed": true,
+    "launchAgentKeepAliveDisabled": true,
+    "nativeWrapperPassiveEngineStartup": true,
+    "directFallbackBootsOutLaunchAgent": true,
+    "staleOwnPortListenerRecovery": true,
+    "foreignPortListenerProtection": true,
+    "corruptOnlineCacheQuarantine": true,
+    "uniqueAtomicCacheTempFiles": true
   }
 }
