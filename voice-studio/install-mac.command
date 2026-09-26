@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SITE="https://dar-al-tawhid.de"
-RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/5488683432308ade5e72ae1ed6931da1862b4d96"
+RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/80ee43eb1eecc5fe221634d38d8ae1976125d460"
 TARGET="$HOME/Applications/DAR-Voice-Studio"
 VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
@@ -41,14 +41,14 @@ say_status "DĀR Voice Studio wird eingerichtet …"
 
 # Neue Version zuerst vollständig in einen isolierten Staging-Ordner laden.
 # Die funktionierende Installation wird erst nach allen Prüfungen ersetzt.
-curl -fsSL "$RAW/voice-studio/local-engine.py?v=234" -o "$STAGE/local-engine.py"
-curl -fsSL "$RAW/voice-studio/index.html?v=234" -o "$STAGE/studio.html"
-curl -fsSL "$RAW/data/pronunciation/pronunciation-rules.json?v=234" -o "$STAGE/pronunciation-rules.json"
-curl -fsSL "$RAW/data/pronunciation/voice-production-profile.json?v=234" -o "$STAGE/voice-production-profile.json"
-curl -fsSL "$RAW/data/pronunciation/voice-regression-fixtures.json?v=234" -o "$STAGE/voice-regression-fixtures.json"
-curl -fsSL "$RAW/scripts/voice-studio/validate-v2.py?v=234" -o "$STAGE/validate-v2.py"
-curl -fsSL "$RAW/watermark-my-logo-full.png?v=234" -o "$STAGE/watermark-my-logo-full.png" || true
-curl -fsSL "$RAW/app-icon-512.png?v=234" -o "$STAGE/app-icon-512.png" || true
+curl -fsSL "$RAW/voice-studio/local-engine.py?v=240" -o "$STAGE/local-engine.py"
+curl -fsSL "$RAW/voice-studio/index.html?v=240" -o "$STAGE/studio.html"
+curl -fsSL "$RAW/data/pronunciation/pronunciation-rules.json?v=240" -o "$STAGE/pronunciation-rules.json"
+curl -fsSL "$RAW/data/pronunciation/voice-production-profile.json?v=240" -o "$STAGE/voice-production-profile.json"
+curl -fsSL "$RAW/data/pronunciation/voice-regression-fixtures.json?v=240" -o "$STAGE/voice-regression-fixtures.json"
+curl -fsSL "$RAW/scripts/voice-studio/validate-v2.py?v=240" -o "$STAGE/validate-v2.py"
+curl -fsSL "$RAW/watermark-my-logo-full.png?v=240" -o "$STAGE/watermark-my-logo-full.png" || true
+curl -fsSL "$RAW/app-icon-512.png?v=240" -o "$STAGE/app-icon-512.png" || true
 
 for required in local-engine.py studio.html pronunciation-rules.json voice-production-profile.json voice-regression-fixtures.json validate-v2.py; do
   if [ ! -s "$STAGE/$required" ]; then
@@ -153,7 +153,7 @@ for optional in watermark-my-logo-full.png app-icon-512.png; do
   [ -s "$STAGE/$optional" ] && mv "$STAGE/$optional" "$TARGET/$optional" || true
 done
 
-echo "Voice Studio 2.3.4 Validierung bestanden. Backup: $BACKUP"
+echo "Voice Studio 2.4.0 Validierung bestanden. Backup: $BACKUP"
 
 if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
   brew install ffmpeg >/dev/null 2>&1 || true
@@ -304,7 +304,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
 
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.3.4"
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.4.0"
 
         webView = WKWebView(frame: .zero, configuration: config)
         webView.navigationDelegate = self
@@ -757,8 +757,8 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>2.3.4</string>
-  <key>CFBundleShortVersionString</key><string>2.3.4</string>
+  <key>CFBundleVersion</key><string>2.4.0</string>
+  <key>CFBundleShortVersionString</key><string>2.4.0</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>
@@ -820,7 +820,7 @@ LSREGISTER="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchS
 sleep 1
 
 # App bei LaunchServices registrieren, dann öffnen.
-say_status "DĀR Voice Studio 2.3.4 ist installiert."
+say_status "DĀR Voice Studio 2.4.0 ist installiert."
 if ! open -n "$APP"; then
   echo "LaunchServices konnte die App nicht öffnen – starte Bundle-Executable direkt."
   "$APP/Contents/MacOS/DARVoiceStudio" >/dev/null 2>&1 &
