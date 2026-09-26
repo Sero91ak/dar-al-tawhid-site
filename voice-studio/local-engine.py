@@ -967,7 +967,11 @@ def prepare_reference_if_needed(model,language_id:str,exaggeration:float):
     if not hasattr(model,"prepare_conditionals"):
         return False
 
-    model.prepare_conditionals(str(ref),exaggeration=float(exaggeration))
+    try:
+        model.prepare_conditionals(str(ref),exaggeration=float(exaggeration))
+    except TypeError:
+        # Ältere Chatterbox-Versionen kennen den exaggeration-Parameter hier noch nicht.
+        model.prepare_conditionals(str(ref))
     MODEL_ACTIVE_REFERENCE=ref_key
     MODEL_REFERENCE_PREPARES+=1
     return True
