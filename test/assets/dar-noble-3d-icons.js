@@ -1,6 +1,6 @@
 /* Test-only: replace emoji glyphs with themed noble 3D objects */
 (function(){
-  const VER="v1";
+  const VER="1035";
   const BASE="/test/assets/dar-3d-icons/";
   const BY_NAV={
     home:"home.png",ilm:"ilm.png",recent:"posts.png",feed:"posts.png",
