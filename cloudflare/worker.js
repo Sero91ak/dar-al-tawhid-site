@@ -67,6 +67,7 @@ import {
   KIDS_CONTENT_MEDIA_LIMITS
 } from "./kids-content-media.js";
 import { sendKidsContentPush, kidsPushPreview } from "./kids-content-push.js";
+import { generateKidsCover, kidsCoverSafety } from "./kids-cover-image.js";
 import {
   readFeedIndex,
   saveFeedEntry,
@@ -453,6 +454,26 @@ export default {
           return json(result, cors);
         } catch (error) {
           return json({ ok: false, error: error?.message || String(error) }, cors, error?.status || 400);
+        }
+      }
+
+      if (url.pathname === "/api/admin/kids-content/cover/generate" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        try {
+          const generated = await generateKidsCover(env, input);
+          if (!generated.ok) {
+            return json({
+              ok: false,
+              error: generated.reason || "Kids-Cover fehlgeschlagen",
+              setupRequired: Boolean(generated.setupRequired),
+              safety: kidsCoverSafety()
+            }, cors, generated.setupRequired ? 503 : 502);
+          }
+          return json({ ok: true, cover: generated, safety: kidsCoverSafety() }, cors);
+        } catch (error) {
+          return json({ ok: false, error: error?.message || String(error), safety: kidsCoverSafety() }, cors, 502);
         }
       }
 
