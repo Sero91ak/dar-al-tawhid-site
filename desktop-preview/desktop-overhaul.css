@@ -745,3 +745,216 @@
 .desktop-overhaul-v18 .foundation-lead .foundation-link .meta{color:#9a7634!important}
 .desktop-overhaul-v18 .foundation-lead .foundation-link strong{color:#352f28!important}
 .desktop-overhaul-v18 .foundation-lead .foundation-link small{color:#847a6d!important}
+
+
+/* v22 — GLOBAL RESPONSIVE PRAYER RIBBON ABOVE PLAYER */
+.desktop-overhaul-v18 #prayerRiver.prayer-dock-river{
+  width:min(1160px,calc(100% - 32px))!important;
+  max-width:1160px!important;
+  min-height:0!important;
+  margin:12px auto 8px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:22px!important;
+  overflow:hidden!important;
+  background:
+    radial-gradient(520px 110px at 76% 10%,rgba(222,196,137,.12),transparent 70%),
+    linear-gradient(105deg,#20372f 0%,#2c493e 58%,#243d34 100%)!important;
+  box-shadow:0 12px 28px rgba(30,54,44,.10)!important;
+}
+.desktop-overhaul-v18 #prayerRiver.prayer-dock-river::before,
+.desktop-overhaul-v18 #prayerRiver.prayer-dock-river::after{
+  display:none!important;
+  content:none!important;
+}
+.desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-inner{
+  width:100%!important;
+  min-height:68px!important;
+  display:grid!important;
+  grid-template-columns:minmax(150px,1fr) minmax(150px,1fr) minmax(170px,.9fr) auto!important;
+  align-items:center!important;
+  gap:0!important;
+  padding:0 18px!important;
+  box-sizing:border-box!important;
+}
+.desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-current,
+.desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-next{
+  min-width:0!important;
+  padding:10px 16px 10px 0!important;
+}
+.desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-next{
+  padding-left:16px!important;
+  border-left:1px solid rgba(255,255,255,.11)!important;
+}
+.desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-label{
+  margin:0 0 3px!important;
+  color:#dcc588!important;
+  font-size:7px!important;
+  font-weight:850!important;
+  line-height:1!important;
+  letter-spacing:.16em!important;
+  text-transform:uppercase!important;
+  white-space:nowrap!important;
+}
+.desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-current b,
+.desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-next b{
+  display:block!important;
+  margin:0!important;
+  color:#fffaf0!important;
+  font-size:21px!important;
+  font-weight:500!important;
+  line-height:1.05!important;
+  white-space:nowrap!important;
+}
+.desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-current small,
+.desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-next small{
+  display:block!important;
+  margin-top:4px!important;
+  color:rgba(255,250,240,.68)!important;
+  font-size:9px!important;
+  line-height:1.15!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-count{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  min-width:0!important;
+  height:68px!important;
+  margin:0!important;
+  padding:0 18px!important;
+  border-left:1px solid rgba(255,255,255,.11)!important;
+  color:#f0d596!important;
+  font-size:24px!important;
+  font-weight:500!important;
+  line-height:1!important;
+  letter-spacing:.04em!important;
+  white-space:nowrap!important;
+}
+.desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-count span{
+  display:block!important;
+  margin-top:5px!important;
+  color:rgba(255,250,240,.58)!important;
+  font-size:6.5px!important;
+  font-weight:850!important;
+  line-height:1!important;
+  letter-spacing:.15em!important;
+  text-transform:uppercase!important;
+  white-space:nowrap!important;
+}
+.desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-locate{
+  align-self:stretch!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-width:120px!important;
+  margin:0!important;
+  padding:0 16px!important;
+  border:0!important;
+  border-left:1px solid rgba(255,255,255,.11)!important;
+  background:transparent!important;
+  color:#f2e4bd!important;
+  font-size:8.5px!important;
+  font-weight:800!important;
+  line-height:1.15!important;
+  text-align:center!important;
+  cursor:pointer!important;
+  touch-action:manipulation!important;
+}
+@media(max-width:900px){
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river{
+    width:calc(100% - 24px)!important;
+    margin:10px 12px 8px!important;
+    border-radius:20px!important;
+  }
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-inner{
+    min-height:74px!important;
+    grid-template-columns:minmax(130px,1fr) minmax(130px,1fr) minmax(150px,.9fr) 96px!important;
+    padding:0 12px!important;
+  }
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-current b,
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-next b{font-size:19px!important}
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-count{height:74px!important;font-size:21px!important;padding:0 12px!important}
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-locate{min-width:96px!important;padding:0 10px!important;font-size:8px!important}
+}
+@media(max-width:620px){
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river{
+    width:calc(100% - 20px)!important;
+    margin:9px 10px 7px!important;
+    border-radius:18px!important;
+  }
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-inner{
+    min-height:92px!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto!important;
+    grid-template-rows:54px 38px!important;
+    padding:0 10px!important;
+  }
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-current{
+    grid-column:1!important;
+    grid-row:1!important;
+    padding:8px 10px 7px 2px!important;
+  }
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-next{
+    grid-column:2!important;
+    grid-row:1!important;
+    padding:8px 10px 7px 12px!important;
+  }
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-count{
+    grid-column:3!important;
+    grid-row:1!important;
+    height:54px!important;
+    padding:0 4px 0 10px!important;
+    font-size:17px!important;
+  }
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-count span{
+    margin-top:4px!important;
+    font-size:5.5px!important;
+    letter-spacing:.10em!important;
+  }
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-locate{
+    grid-column:1/-1!important;
+    grid-row:2!important;
+    min-width:0!important;
+    min-height:38px!important;
+    padding:0!important;
+    border-left:0!important;
+    border-top:1px solid rgba(255,255,255,.10)!important;
+    justify-content:flex-start!important;
+    text-align:left!important;
+    color:#e8d29a!important;
+    font-size:8px!important;
+  }
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-label{font-size:6.5px!important;letter-spacing:.12em!important}
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-current b,
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-next b{font-size:17px!important}
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-current small,
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-next small{font-size:8px!important}
+}
+@media(max-width:390px){
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-inner{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    grid-template-rows:52px 40px 34px!important;
+    min-height:126px!important;
+  }
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-count{
+    grid-column:1/-1!important;
+    grid-row:2!important;
+    height:40px!important;
+    padding:0 2px!important;
+    border-left:0!important;
+    border-top:1px solid rgba(255,255,255,.09)!important;
+    flex-direction:row!important;
+    align-items:center!important;
+    gap:8px!important;
+    font-size:17px!important;
+  }
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-count span{margin:0!important}
+  .desktop-overhaul-v18 #prayerRiver.prayer-dock-river .prayer-locate{
+    grid-column:1/-1!important;
+    grid-row:3!important;
+    min-height:34px!important;
+  }
+}
