@@ -1,6 +1,6 @@
 /* Test-only: Islamic ʿilm 3D icons on every surface, including home-v380 */
 (function(){
-  const VER="1043";
+  const VER="1044";
   const BASE="/test/assets/dar-3d-icons/";
   const BY_NAV={
     home:"home.png",ilm:"ilm.png",recent:"posts.png",feed:"posts.png",post:"posts.png",
@@ -76,7 +76,12 @@
   }
   function fill(el,file,prio){
     if(!el||!file)return;
-    if(el.querySelector("img.dar3d-icon"))return;
+    const want=src(file);
+    const existing=el.querySelector("img.dar3d-icon");
+    if(existing){
+      if(existing.getAttribute("src")!==want)existing.setAttribute("src",want);
+      return;
+    }
     el.textContent="";
     el.appendChild(imgFor(file,prio));
   }
@@ -89,20 +94,22 @@
     const marks=[
       ".nav-icon",".feature-icon",".emoji-emblem",".folder-icon",".book-library-icon",
       ".home-v380-lib-card__ico",".home-v380-quran-hero__mark",".library-focus-teaser__icon",
-      ".zakat-home-teaser-icon",".quick-action-emoji",".home-discover-pdf-cover__fallback"
+      ".zakat-home-teaser-icon",".quick-action-emoji",".home-discover-pdf-cover__fallback",
+      ".prophets-spotlight__icon"
     ].join(",");
     document.querySelectorAll(marks).forEach(el=>{
-      const host=el.closest("[data-bottom-nav],[data-nav],[data-qa-action],[data-quran-continue],.quick-action");
+      const host=el.closest("[data-bottom-nav],[data-nav],[data-qa-action],[data-quran-continue],.quick-action,.prophets-spotlight");
       fill(el,fileFromHost(host,el));
     });
   }
   scan();
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",scan);
-  let t=0;
-  function queued(){clearTimeout(t);t=setTimeout(scan,30)}
+  document.addEventListener("dar:view-rendered",scan);
+  let scheduled=false;
+  function queued(){if(scheduled)return;scheduled=true;requestAnimationFrame(function(){scheduled=false;scan()})}
   if(typeof MutationObserver==="function"){
     const mo=new MutationObserver(queued);
-    mo.observe(document.documentElement,{childList:true,subtree:true});
+    mo.observe(document.documentElement,{childList:true,subtree:true,characterData:true});
   }
-  document.addEventListener("dar:view-rendered",scan);
+  window.__darNoble3dScan=scan;
 })();
