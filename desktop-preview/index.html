@@ -2254,7 +2254,7 @@ button,input,select{font:inherit}
 }
 
 </style>
-<link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=270">
+<link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=280">
 </head>
 <body class="desktop-overhaul-v18">
 <header class="site-header">
@@ -2992,8 +2992,8 @@ button,input,select{font:inherit}
   var x=splitPost(p);
   return '<article class="real-post"><div class="real-post-top"><div><div class="eyebrow">'+escBook(p.category||"Wissen")+'</div><h3>'+escBook(cleanTitle(p.title))+'</h3></div><span class="content-count">'+escBook(p.work||"")+'</span></div>'+
    (p.speaker?'<div class="speaker-line">'+escBook(p.speaker)+'</div>':"")+
-   '<div class="statement">'+escBook(full?x.statement:clip(x.statement,430)).replace(/\n/g,"<br>")+'</div>'+sourceHtml(p)+
-   (x.fazit?'<div class="fazit"><b>Fazit:</b> '+escBook(full?x.fazit:clip(x.fazit,260))+'</div>':"")+'</article>'
+   '<div class="statement">'+escBook(x.statement).replace(/\n/g,"<br>")+'</div>'+sourceHtml(p)+
+   (x.fazit?'<div class="fazit"><b>Fazit:</b> '+escBook(x.fazit)+'</div>':"")+'</article>'
  }
  function compactPostLink(p){
   return '<a class="list-row desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(p.id))+'"><span class="meta">'+escBook(p.category||"Beitrag")+'</span><strong>'+escBook(cleanTitle(p.title))+'</strong><small>'+escBook(p.speaker||"Lesen")+'</small></a>'
@@ -3053,10 +3053,10 @@ button,input,select{font:inherit}
  };
 
  renders.thema=function(){
-  var name=new URLSearchParams(location.search).get("name")||"",list=realData.posts.filter(function(x){return !name||x.category===name});
-  if(!list.length)list=realData.posts.slice(0,8);
-  return realIntro("WISSENSTHEMA",name||"Ausgewählte Inhalte","Aussagen mit direkt zugeordneten Quellen und Nachweisen.")+
-   '<section class="section reveal"><div class="real-list">'+list.slice(0,14).map(function(x){return postHtml(x,false)+'<a class="text-link desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'">Öffnen</a>'}).join("")+'</div></section>'+footer()
+  var name=new URLSearchParams(location.search).get("name")||"",list=realData.posts.filter(function(x){return !name||postCatKey(x.category)===postCatKey(name)||x.category===name});
+  if(!list.length)list=realData.posts;
+  return realIntro("WISSENSTHEMA",name||"Ausgewählte Inhalte","Jede Aussage kann direkt auf dieser Seite vollständig gelesen werden; Quelle und Direktnachweis bleiben unmittelbar zugeordnet.")+
+   '<section class="section reveal"><div class="inline-reader-list">'+list.map(function(x){return inlinePostDisclosure(x,false)}).join("")+'</div></section>'+footer()
  };
 
  renders.bibliothek=function(){
@@ -3160,8 +3160,8 @@ button,input,select{font:inherit}
  };
 
  renders.quellen=function(){
-  return realIntro("QUELLEN","Direktnachweise und verwendete Werke","Aussage, Quellenangabe und Direktnachweis bleiben unmittelbar zusammen.")+
-   '<section class="section reveal"><div class="real-list">'+realData.posts.slice(0,18).map(function(x){return '<article class="real-post"><div class="eyebrow">'+escBook(x.category||"Wissen")+'</div><h3>'+escBook(cleanTitle(x.title))+'</h3><div class="speaker-line">'+escBook(x.speaker||"")+'</div>'+sourceHtml(x)+'</article>'}).join("")+'</div></section>'+footer()
+  return realIntro("QUELLEN","Direktnachweise und verwendete Werke","Jede Aussage, ihre Quellenangabe und der Direktnachweis bleiben unmittelbar zusammen. Nichts wird gekürzt.")+
+   '<section class="section reveal"><div class="inline-reader-list sources-inline-readers">'+realData.posts.map(function(x){return inlinePostDisclosure(x,false)}).join("")+'</div></section>'+footer()
  };
 
  renders.suche=function(){
@@ -3211,15 +3211,25 @@ button,input,select{font:inherit}
  }
  function postExcerpt(p){
   var x=splitPost(p).statement||"";
-  x=x.replace(/^.*?sagte:\s*/i,"").replace(/^.*?sagte\s*/i,"");
-  return clip(x,190)
+  return x.replace(/^.*?sagte:\s*/i,"").replace(/^.*?sagte\s*/i,"")
+ }
+ function inlinePostDisclosure(p,open){
+  var x=splitPost(p),detailUrl=pUrl("beitrag","id="+encodeURIComponent(p.id));
+  return '<details class="inline-reader" '+(open?'open':'')+'>'+
+   '<summary><span class="inline-reader-meta">'+escBook(postCatLabel(postCatKey(p.category)))+'</span><strong>'+escBook(cleanTitle(p.title))+'</strong>'+(p.speaker?'<small>'+escBook(p.speaker)+'</small>':'')+'<span class="inline-reader-action">Aussage vollständig lesen</span></summary>'+
+   '<div class="inline-reader-body">'+
+    '<div class="statement">'+escBook(x.statement).replace(/\n/g,"<br>")+'</div>'+
+    (x.fazit?'<div class="fazit"><b>Fazit:</b> '+escBook(x.fazit)+'</div>':'')+
+    sourceHtml(p)+
+    '<a class="text-link desktop-link inline-reader-detail" data-page="beitrag" href="'+detailUrl+'">Beitrag als Einzelseite öffnen →</a>'+
+   '</div></details>'
  }
  function postSourceMini(p){
   var link=(p.links||[])[0];
   return '<div class="post-browser-source"><b>Quelle</b>'+escBook(p.work||p.reference||"")+(link?'<br><a target="_blank" rel="noopener" href="'+escBook(link.url)+'">'+escBook(link.label||"Direktnachweis")+' ↗</a>':'')+'</div>'
  }
  function renderPostBrowserRow(p){
-  return '<article class="post-browser-entry"><div class="post-browser-meta">'+escBook(postCatLabel(postCatKey(p.category)))+'</div><div class="post-browser-main"><h3><a class="desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(p.id))+'">'+escBook(cleanTitle(p.title))+'</a></h3><div class="post-browser-speaker">'+escBook(p.speaker||"")+'</div><p class="post-browser-excerpt">'+escBook(postExcerpt(p))+'</p></div>'+postSourceMini(p)+'</article>'
+  return inlinePostDisclosure(p,false)
  }
  function postCategories(){
   var keys=[];realData.posts.forEach(function(x){var k=postCatKey(x.category);if(k&&keys.indexOf(k)<0)keys.push(k)});
@@ -3348,7 +3358,7 @@ button,input,select{font:inherit}
   function paint(){
    var r=rows();if(status)status.textContent=r.length+" Treffer";
    var count=document.getElementById("duaBrowseCount");if(count)count.textContent=r.length+" Duʿāʾ";
-   if(list)list.innerHTML=r.slice(0,20).map(function(d){return '<a class="dua-browser-item desktop-link" data-page="dua" href="'+pUrl("dua","id="+encodeURIComponent(d.id))+'"><div class="eyebrow">'+escBook(d.category)+'</div><h3>'+escBook(d.title)+'</h3><div class="dua-ar" dir="rtl">'+escBook(d.arabic)+'</div><p>'+escBook(clip(d.german,150))+'</p></a>'}).join("")||'<div class="loading-line">Keine passenden Duʿāʾ gefunden.</div>'
+   if(list)list.innerHTML=r.slice(0,20).map(function(d){return '<article class="dua-browser-item dua-browser-full"><div class="eyebrow">'+escBook(d.category)+'</div><h3><a class="desktop-link" data-page="dua" href="'+pUrl("dua","id="+encodeURIComponent(d.id))+'">'+escBook(d.title)+'</a></h3><div class="dua-ar" dir="rtl">'+escBook(d.arabic)+'</div>'+(d.translit?'<p class="dua-tr">'+escBook(d.translit)+'</p>':'')+'<p class="dua-de">'+escBook(d.german)+'</p><div class="real-source"><b>Quelle:</b> '+escBook(d.source)+'</div><a class="text-link desktop-link" data-page="dua" href="'+pUrl("dua","id="+encodeURIComponent(d.id))+'">Einzelseite öffnen →</a></article>'}).join("")||'<div class="loading-line">Keine passenden Duʿāʾ gefunden.</div>'
   }
   input.oninput=paint;paint()
  }
