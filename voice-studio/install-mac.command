@@ -27,10 +27,9 @@ pkill -TERM -x DARVoiceStudio >/dev/null 2>&1 || true
 sleep 1
 pkill -KILL -x DARVoiceStudio >/dev/null 2>&1 || true
 
-# Altes App-Bundle vollständig entfernen, damit keine stale Binary/Resources
-# im Bundle verbleiben. Die lokalen Voice-Daten unter TARGET bleiben erhalten.
-rm -rf "$APP"
-mkdir -p "$TARGET" "$VOICE_HOME" "$MACOS" "$RESOURCES" "$HOME/Library/LaunchAgents" "$BACKUPS"
+# Die vorhandene App bleibt während Download, Validierung und Engine-Start unangetastet.
+# Erst ein vollständig gebautes und signiertes neues Bundle ersetzt sie atomar.
+mkdir -p "$TARGET" "$VOICE_HOME" "$HOME/Library/LaunchAgents" "$BACKUPS"
 rm -rf "$STAGE"
 mkdir -p "$STAGE"
 
@@ -154,7 +153,7 @@ for optional in watermark-my-logo-full.png app-icon-512.png; do
   [ -s "$STAGE/$optional" ] && mv "$STAGE/$optional" "$TARGET/$optional" || true
 done
 
-echo "Voice Studio 2.3.0 Validierung bestanden. Backup: $BACKUP"
+echo "Voice Studio 2.3.1 Validierung bestanden. Backup: $BACKUP"
 
 if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
   brew install ffmpeg >/dev/null 2>&1 || true
@@ -258,6 +257,16 @@ fi
 
 echo "Serhat Engine erreichbar: http://127.0.0.1:8787/health"
 
+# Native macOS-App wird zuerst vollständig in einem separaten Bundle gebaut.
+# Die bisher installierte App bleibt bis nach Build, plist-Lint und Codesign startbar.
+APP_BUILD="$TARGET/.DĀR Voice Studio.app.build"
+APP_PREVIOUS="$TARGET/.DĀR Voice Studio.app.previous"
+rm -rf "$APP_BUILD" "$APP_PREVIOUS"
+MACOS="$APP_BUILD/Contents/MacOS"
+RESOURCES="$APP_BUILD/Contents/Resources"
+PLIST="$APP_BUILD/Contents/Info.plist"
+mkdir -p "$MACOS" "$RESOURCES"
+
 # Native macOS-App: eigenes Fenster mit WKWebView, kein Safari/Chrome.
 cat > "$TARGET/VoiceStudioApp.swift" <<'SWIFT'
 import Cocoa
@@ -281,7 +290,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
 
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.3.0"
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.3.1"
 
         webView = WKWebView(frame: .zero, configuration: config)
         webView.navigationDelegate = self
@@ -613,7 +622,7 @@ if [ -n "$SWIFTC" ] && [ -n "$SDK_PATH" ]; then
   echo "Swift: $SWIFTC"
   echo "SDK:   $SDK_PATH"
   echo "Target: ${ARCH}-apple-macosx${DEPLOY_TARGET}"
-  if MACOSX_DEPLOYMENT_TARGET="$DEPLOY_TARGET" "$SWIFTC"       -sdk "$SDK_PATH"       -target "${ARCH}-apple-macosx${DEPLOY_TARGET}"       "$TARGET/VoiceStudioApp.swift"       -o "$MACOS/DARVoiceStudio"       -framework Cocoa       -framework WebKit; then
+  if MACOSX_DEPLOYMENT_TARGET="$DEPLOY_TARGET" "$SWIFTC"       -sdk "$SDK_PATH"       -target "${ARCH}-apple-macosx${DEPLOY_TARGET}"       "$TARGET/VoiceStudioApp.swift"       -o "$MACOS/DARVoiceStudioNative"       -framework Cocoa       -framework WebKit; then
     BUILD_OK=1
   fi
 fi
@@ -625,44 +634,78 @@ if [ "$BUILD_OK" -ne 1 ] && [ -d "/Applications/Xcode.app/Contents/Developer" ];
   XSDK="$(DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcrun --sdk macosx --show-sdk-path 2>/dev/null || true)"
   if [ -n "$XSWIFTC" ] && [ -n "$XSDK" ]; then
     echo "Erster Swift-Build fehlgeschlagen – versuche vollständiges Xcode …"
-    if MACOSX_DEPLOYMENT_TARGET="$DEPLOY_TARGET" "$XSWIFTC"         -sdk "$XSDK"         -target "${ARCH}-apple-macosx${DEPLOY_TARGET}"         "$TARGET/VoiceStudioApp.swift"         -o "$MACOS/DARVoiceStudio"         -framework Cocoa         -framework WebKit; then
+    if MACOSX_DEPLOYMENT_TARGET="$DEPLOY_TARGET" "$XSWIFTC"         -sdk "$XSDK"         -target "${ARCH}-apple-macosx${DEPLOY_TARGET}"         "$TARGET/VoiceStudioApp.swift"         -o "$MACOS/DARVoiceStudioNative"         -framework Cocoa         -framework WebKit; then
       BUILD_OK=1
     fi
   fi
 fi
 
-# Letzter Fallback: weiterhin als eigenständige .app unter Programme startbar,
-# aber mit einem app-modalen Chrome/Edge-Fenster ohne Tabs/Adressleiste.
-# So blockiert eine defekte Swift-Toolchain niemals die Voice-Studio-App.
+# Der Bundle-Einstieg ist immer ein kleiner robuster Launcher. Er schreibt ein eigenes
+# Startprotokoll, startet notfalls die lokale Engine und übergibt dann an die native WKWebView.
+# Falls die Swift-Toolchain keine Native-Binary bauen konnte, öffnet er die Studio-URL als
+# Chrome-/Edge-App-Fenster bzw. als letzten Fallback im Standardbrowser.
 if [ "$BUILD_OK" -ne 1 ]; then
-  echo "Swift-Toolchain weiterhin inkompatibel – installiere robusten App-Fallback …"
-  cat > "$MACOS/DARVoiceStudio" <<'APPFALLBACK'
+  echo "Swift-Toolchain weiterhin inkompatibel – Browser-App-Fallback wird verwendet."
+fi
+
+cat > "$MACOS/DARVoiceStudio" <<'APPSTART'
 #!/bin/bash
-set -e
+set -u
+
+TARGET="$HOME/Applications/DAR-Voice-Studio"
+VOICE_HOME="$HOME/SerhatVoice"
+VENV="$VOICE_HOME/.venv"
 URL="http://127.0.0.1:8787/studio/"
-LABEL="com.daraltawhid.voice-engine"
+HEALTH="http://127.0.0.1:8787/health"
+SELF_DIR="$(cd "$(dirname "$0")" && pwd)"
+NATIVE="$SELF_DIR/DARVoiceStudioNative"
+LOG="$TARGET/app-launch.log"
 
-launchctl kickstart -k "gui/$UID/$LABEL" >/dev/null 2>&1 || true
-for i in $(seq 1 40); do
-  if curl -fsS --max-time 1 "http://127.0.0.1:8787/health" >/dev/null 2>&1; then
-    break
+mkdir -p "$TARGET"
+touch "$LOG"
+
+{
+  echo ""
+  echo "=== $(date '+%Y-%m-%d %H:%M:%S') DĀR Voice Studio start ==="
+  echo "Executable: $0"
+  echo "Native: $NATIVE"
+
+  if ! /usr/bin/curl -fsS --max-time 1 "$HEALTH" >/dev/null 2>&1; then
+    echo "Engine nicht erreichbar – Direktstart."
+    if [ -x "$VENV/bin/python" ] && [ -f "$TARGET/local-engine.py" ]; then
+      /usr/bin/nohup /usr/bin/env         DAR_VOICE_APP_HOME="$TARGET"         PYTORCH_ENABLE_MPS_FALLBACK=1         PATH="/opt/homebrew/bin:/usr/local/bin:/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"         "$VENV/bin/python" "$TARGET/local-engine.py"         >>"$TARGET/engine.log" 2>>"$TARGET/engine-error.log" </dev/null &
+      echo "Engine PID: $!"
+    else
+      echo "Engine/Python fehlt: $VENV/bin/python / $TARGET/local-engine.py"
+    fi
+
+    for i in $(seq 1 40); do
+      /usr/bin/curl -fsS --max-time 1 "$HEALTH" >/dev/null 2>&1 && break
+      sleep 0.5
+    done
   fi
-  sleep 0.5
-done
 
-if [ -x "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" ]; then
-  exec "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"     --app="$URL"     --user-data-dir="$HOME/Library/Application Support/DAR Voice Studio"     --no-first-run     --no-default-browser-check
-fi
+  if [ -x "$NATIVE" ]; then
+    echo "Starte native WKWebView-App."
+    exec "$NATIVE"
+  fi
 
-if [ -x "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge" ]; then
-  exec "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge"     --app="$URL"     --user-data-dir="$HOME/Library/Application Support/DAR Voice Studio"     --no-first-run     --no-default-browser-check
-fi
+  echo "Native Binary fehlt – verwende Browser-App-Fallback."
+  if [ -x "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" ]; then
+    exec "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"       --app="$URL"       --user-data-dir="$HOME/Library/Application Support/DAR Voice Studio"       --no-first-run       --no-default-browser-check
+  fi
 
-open "$URL"
-APPFALLBACK
-fi
+  if [ -x "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge" ]; then
+    exec "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge"       --app="$URL"       --user-data-dir="$HOME/Library/Application Support/DAR Voice Studio"       --no-first-run       --no-default-browser-check
+  fi
+
+  /usr/bin/open "$URL"
+} >>"$LOG" 2>&1
+APPSTART
 
 chmod +x "$MACOS/DARVoiceStudio"
+[ -f "$MACOS/DARVoiceStudioNative" ] && chmod +x "$MACOS/DARVoiceStudioNative" || true
+
 
 # App-Icon aus bestehendem DĀR-Icon erzeugen.
 if [ -s "$TARGET/app-icon-512.png" ]; then
@@ -684,8 +727,8 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>2.3.0</string>
-  <key>CFBundleShortVersionString</key><string>2.3.0</string>
+  <key>CFBundleVersion</key><string>2.3.1</string>
+  <key>CFBundleShortVersionString</key><string>2.3.1</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>
@@ -710,7 +753,32 @@ PLIST
 # Lokales ad-hoc Codesigning nach jedem Neuaufbau. Dadurch behandelt macOS
 # Bundle, Binary, Info.plist und Ressourcen als eine konsistente neue App.
 if command -v codesign >/dev/null 2>&1; then
-  codesign --force --deep --sign - "$APP" >/dev/null 2>&1 || true
+  codesign --force --deep --sign - "$APP_BUILD" >/dev/null 2>&1 || true
+fi
+
+# Bundle vor dem Austausch technisch prüfen.
+if [ ! -x "$MACOS/DARVoiceStudio" ]; then
+  echo "FEHLER: Neuer App-Launcher fehlt. Die vorhandene App bleibt erhalten."
+  exit 1
+fi
+if command -v codesign >/dev/null 2>&1; then
+  codesign --verify --deep "$APP_BUILD" >/dev/null 2>&1 || {
+    echo "FEHLER: Neues App-Bundle ist nicht konsistent signiert. Die vorhandene App bleibt erhalten."
+    exit 1
+  }
+fi
+
+# Erst jetzt die alte App austauschen. Bei einem mv-Fehler wird sie wiederhergestellt.
+if [ -d "$APP" ]; then
+  mv "$APP" "$APP_PREVIOUS"
+fi
+if mv "$APP_BUILD" "$APP"; then
+  rm -rf "$APP_PREVIOUS"
+else
+  echo "FEHLER: Neues App-Bundle konnte nicht aktiviert werden."
+  rm -rf "$APP"
+  [ -d "$APP_PREVIOUS" ] && mv "$APP_PREVIOUS" "$APP"
+  exit 1
 fi
 
 # Alte LaunchServices-Zuordnung entfernen und die frisch gebaute App registrieren.
@@ -722,5 +790,14 @@ LSREGISTER="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchS
 sleep 1
 
 # App bei LaunchServices registrieren, dann öffnen.
-say_status "DĀR Voice Studio 2.3.0 ist installiert."
-open -n "$APP"
+say_status "DĀR Voice Studio 2.3.1 ist installiert."
+if ! open -n "$APP"; then
+  echo "LaunchServices konnte die App nicht öffnen – starte Bundle-Executable direkt."
+  "$APP/Contents/MacOS/DARVoiceStudio" >/dev/null 2>&1 &
+fi
+
+sleep 2
+if [ -f "$TARGET/app-launch.log" ]; then
+  echo "---- letzter App-Start ----"
+  tail -n 20 "$TARGET/app-launch.log" || true
+fi
