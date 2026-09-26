@@ -48,7 +48,7 @@ LEARNING_PENDING_DIR=LEARNING_HOME/"pending"
 USER_OVERRIDES_FILE=LEARNING_HOME/"user-overrides.json"
 ONLINE_LIBRARY_CACHE=LEARNING_HOME/"online-library.json"
 LEARNING_LOG=LEARNING_HOME/"learning-log.jsonl"
-RENDER_CACHE_DIR=VOICE_HOME/"RenderCache"/"v2"
+RENDER_CACHE_DIR=VOICE_HOME/"RenderCache"/"v3"
 LEARNING_HOME.mkdir(parents=True,exist_ok=True)
 LEARNING_PENDING_DIR.mkdir(parents=True,exist_ok=True)
 RENDER_CACHE_DIR.mkdir(parents=True,exist_ok=True)
@@ -479,7 +479,7 @@ def create_learning_preview(term:str,tts_text:str="",canonical:str=""):
         raise ValueError("Keine Sprechform gefunden. Online suchen oder die arabische Sprechform eintragen.")
     if not re.search(r"[\u0600-\u06ff]",effective_tts):
         raise ValueError("Die manuelle Sprechform muss in arabischer Schrift angegeben werden.")
-    model=load_model()
+    model=load_production_model()
     preview_id=uuid.uuid4().hex[:16]
     existing_key=str((rule or {}).get("audio_lock_key","")) or str(AUDIO_LOCK_BY_TTS.get(effective_tts,""))
     lock_key=learning_lock_key(term,existing_key)
@@ -645,6 +645,8 @@ def get_status():
     out["reference_cache_hits_total"]=MODEL_REFERENCE_CACHE_HITS
     out["render_cache"]=dict(RENDER_CACHE_STATS)
     out["production_backend"]=ACTIVE_BACKEND
+    if ACTIVE_BACKEND=="mlx" and out.get("model_state")=="ready":
+        out["model_device"]="mlx-metal"
     out["mlx_enabled"]=bool(MLX_ENABLED)
     out["mlx_model"]=MLX_MODEL_ID if MLX_ENABLED else None
     out["mlx_error"]=MLX_MODEL_ERROR
@@ -1120,6 +1122,7 @@ def render_cache_key(text:str,language_id:str,mode:str):
     payload={
         "schema":2,
         "model":"chatterbox-multilingual-v3",
+        "backend":str(ACTIVE_BACKEND),
         "text":str(text),
         "language":str(language_id),
         "mode":str(mode),
