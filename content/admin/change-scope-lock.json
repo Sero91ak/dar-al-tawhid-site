@@ -123,6 +123,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-tab-oval-overlap-hotfix-2026-09-26",
+      "approvedBy": "user-explicit-extremer-fehler-oval-ueberlappt-content-scheint-durch",
+      "reason": "Nutzer-Screenshot: Quiz-Oval ueberlappt Start, Quiz-Text scheint durch die Tableiste. 96px-Overlay und overflow:visible zuruecknehmen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-tab-oval-gpu-no-flex-jank-2026-09-26",
       "approvedBy": "user-explicit-oval-ruckelt-beim-tabwechsel-sanft",
       "reason": "Nutzer: Oval ist groß, aber Tabwechsel ruckelt/fackelt. Flex-Wachstum raus, Kapsel nur opacity/transform.",
