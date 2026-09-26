@@ -747,16 +747,21 @@ class MLXModelAdapter:
         self.model=model
         self.sr=int(getattr(model,"sample_rate",24000))
 
-def mlx_token_budget(text:str,language_id:str):
+def generation_token_budget(text:str,language_id:str):
     value=str(text or "").strip()
     chars=len(re.sub(r"\s+","",value))
     words=max(1,len(re.findall(r"\S+",value)))
-    # Genug Reserve für langsame, natürliche Sprache; weit unter dem upstream 1000-token
-    # runaway ceiling. 25 speech tokens ≈ 1 s Audio bei Chatterbox.
-    budget=int(105 + chars*2.0 + words*2.2)
+    # 25 speech tokens ≈ 1 s Audio. Für 140 DE-/90 AR-Zeichen reicht diese
+    # Reserve komfortabel für natürliche Sprechgeschwindigkeit, verhindert aber
+    # den 1000-token runaway des Upstream-Modells.
+    budget=int(90 + chars*1.55 + words*2.0)
     if language_id=="ar":
-        return max(170,min(420,budget))
-    return max(190,min(480,budget))
+        return max(150,min(300,budget))
+    return max(165,min(360,budget))
+
+def mlx_token_budget(text:str,language_id:str):
+    # Backward-compatible interner Alias.
+    return generation_token_budget(text,language_id)
 
 def _load_mlx_model_worker():
     global MLX_MODEL,MLX_MODEL_ERROR
@@ -1226,8 +1231,6 @@ def render_with_model(model,text:str,language_id:str,mode:str="narration"):
     import torch
     if getattr(model,"_dar_backend","torch")=="mlx":
         wav,meta=render_with_mlx(model,text,language_id,mode)
-        # Metadata wird am Tensor für diese eine Pipeline-Stufe separat zurückgegeben
-        # über Thread-local-like module state vermieden; QA ergänzt Backenddaten später.
         render_with_model._last_backend_meta=meta
         return wav
 
@@ -1242,9 +1245,42 @@ def render_with_model(model,text:str,language_id:str,mode:str="narration"):
     prepare_reference_if_needed(model,language_id,p["exaggeration"])
     if not hasattr(model,"prepare_conditionals") or getattr(model,"conds",None) is None:
         kwargs["audio_prompt_path"]=str(ref)
-    with torch.inference_mode():
-        wav=model.generate(text,**kwargs)
-    render_with_model._last_backend_meta={}
+
+    # Upstream Chatterbox Multilingual setzt max_new_tokens intern fest auf 1000.
+    # Für kurze Long-Form-Chunks ist das unnötig hoch und kann bei einer schlechten
+    # Sampling-Schleife minutenlang rechnen. Wir deckeln die interne T3-Inferenz,
+    # ohne die restliche Chatterbox-Pipeline oder Voice-Conditioning zu verändern.
+    cap=generation_token_budget(text,language_id)
+    original_inference=getattr(getattr(model,"t3",None),"inference",None)
+    state={"tokens":0,"hit":False}
+    if original_inference is not None:
+        def bounded_inference(*args,**inner_kwargs):
+            inner_kwargs["max_new_tokens"]=min(int(inner_kwargs.get("max_new_tokens",cap) or cap),int(cap))
+            result=original_inference(*args,**inner_kwargs)
+            try:
+                state["tokens"]=int(result.shape[-1])
+                state["hit"]=state["tokens"]>=int(cap)-3
+            except Exception:
+                pass
+            return result
+        model.t3.inference=bounded_inference
+
+    try:
+        with torch.inference_mode():
+            wav=model.generate(text,**kwargs)
+    finally:
+        if original_inference is not None:
+            model.t3.inference=original_inference
+
+    if state["hit"]:
+        raise GenerationTokenLimitReached(
+            f"PyTorch token ceiling reached ({state['tokens']}/{cap})"
+        )
+
+    render_with_model._last_backend_meta={
+        "torch_token_count":int(state["tokens"]),
+        "torch_max_tokens":int(cap),
+    }
     return wav
 
 render_with_model._last_backend_meta={}
