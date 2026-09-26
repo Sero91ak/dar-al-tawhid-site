@@ -267,8 +267,14 @@ function isFeedAssetRequest(url) {
     || url.pathname.startsWith('/assets/posts/');
 }
 
+function isKidsPath(url) {
+  const p = url.pathname || '';
+  return p === '/test/kids' || p.startsWith('/test/kids/');
+}
+
 function isAppShellRequest(url) {
   if (url.origin !== self.location.origin) return false;
+  if (isKidsPath(url)) return false;
   if (url.pathname === '/' || url.pathname === '/index.html') return true;
   if (url.pathname === '/test/' || url.pathname === '/test/index.html') return true;
   if (url.pathname === '/version.json' || url.pathname === '/test/version.json') return true;
@@ -307,6 +313,7 @@ function isProphetsCatalogRequest(url) {
 }
 
 function navigationShellKey(url) {
+  if (isKidsPath(url)) return url.pathname;
   return url.pathname.startsWith('/test') ? '/test/index.html' : '/index.html';
 }
 

@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1045';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1046';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -328,8 +328,14 @@ function isFeedAssetRequest(url) {
     || url.pathname.startsWith('/assets/posts/');
 }
 
+function isKidsPath(url) {
+  const p = url.pathname || '';
+  return p === '/test/kids' || p.startsWith('/test/kids/');
+}
+
 function isAppShellRequest(url) {
   if (url.origin !== self.location.origin) return false;
+  if (isKidsPath(url)) return false;
   if (url.pathname === '/' || url.pathname === '/index.html') return true;
   if (url.pathname === '/test/' || url.pathname === '/test/index.html') return true;
   if (url.pathname === '/version.json' || url.pathname === '/test/version.json') return true;
@@ -368,6 +374,7 @@ function isProphetsCatalogRequest(url) {
 }
 
 function navigationShellKey(url) {
+  if (isKidsPath(url)) return url.pathname;
   return url.pathname.startsWith('/test') ? '/test/index.html' : '/index.html';
 }
 
