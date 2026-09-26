@@ -261,6 +261,30 @@ export default {
       return new Response(html, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
     }
 
-    return env.ASSETS.fetch(request);
+    if ((request.method === "GET" || request.method === "HEAD") && !kidsPath && (
+      url.pathname === "/test" ||
+      url.pathname === "/test/" ||
+      url.pathname === "/test/index.html" ||
+      url.pathname === "/test/version.json" ||
+      url.pathname === "/test/service-worker.js" ||
+      url.pathname.startsWith("/test/assets/")
+    )) {
+      const assetResponse = await env.ASSETS.fetch(request);
+      const headers = new Headers(assetResponse.headers);
+      headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+      headers.set("CDN-Cache-Control", "no-store");
+      headers.set("Cloudflare-CDN-Cache-Control", "no-store");
+      headers.set("Pragma", "no-cache");
+      headers.set("X-DAR-Test-App", "isolated");
+      headers.delete("ETag");
+      if (request.method === "HEAD") {
+        return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
+      }
+      return new Response(assetResponse.body, {
+        status: assetResponse.status,
+        statusText: assetResponse.statusText,
+        headers
+      });
+    }
   }
 };
