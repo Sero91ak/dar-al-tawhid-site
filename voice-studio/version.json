@@ -1,6 +1,6 @@
 {
-  "version": "2.7.0",
-  "updatedAt": "2026-09-26T15:45:00+02:00",
+  "version": "2.7.1",
+  "updatedAt": "2026-09-26T16:10:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
@@ -20,7 +20,7 @@
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-raw",
-  "engineVersion": "supervised-mlx-watchdog+islamic-master-library-v1",
+  "engineVersion": "supervised-mlx-watchdog+islamic-master-library-v1+auto-rerender",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -148,7 +148,13 @@
     "unknownIslamicTermDetection": true,
     "unresolvedIslamicTermRenderBlock": true,
     "verifiedMasterAutoFillMissingRules": true,
-    "localAndUserRulesAlwaysWin": true
+    "localAndUserRulesAlwaysWin": true,
+    "learnedRuleImmediateActivation": true,
+    "confirmedCorrectionInvalidatesCurrentAudio": true,
+    "autoRerenderCurrentTextAfterCorrection": true,
+    "originalMasterSourceRows": 3719,
+    "originalMasterCanonicalTerms": 894,
+    "originalMasterSha256": "b629a50c27ee4b73c2a0bac3c0856dfc67f8c2fbf1b2ef8df4a69689a524b14b"
   },
   "releaseSafety": {
     "stagedInstaller": true,
@@ -205,7 +211,9 @@
     "islamicMasterLibraryValidation": true,
     "prophetSeedRegression": true,
     "masterLibraryPrecedenceRegression": true,
-    "unresolvedIslamicTermRegression": true
+    "unresolvedIslamicTermRegression": true,
+    "pronunciationCorrectionAutoRerenderRegression": true,
+    "sourceOfTruthCountRecorded": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
