@@ -1,0 +1,28 @@
+name: Verify Qurʾān Tadabbur
+
+on:
+  push:
+    paths:
+      - 'apple-tv/quran/tadabbur/**'
+      - '.github/workflows/verify-quran-tadabbur.yml'
+  pull_request:
+    paths:
+      - 'apple-tv/quran/tadabbur/**'
+      - '.github/workflows/verify-quran-tadabbur.yml'
+  workflow_dispatch:
+
+jobs:
+  verify-quran-tadabbur:
+    name: Verify Tadabbur catalog/index/batches
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Verify Qurʾān Tadabbur data
+        run: python3 apple-tv/quran/tadabbur/tools/verify_tadabbur_catalog.py
