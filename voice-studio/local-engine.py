@@ -192,6 +192,8 @@ MODEL_DEVICE=None
 MODEL_LOCK=threading.Lock()
 RENDER_LOCK=threading.Lock()
 STATUS_LOCK=threading.Lock()
+MODEL_ACTIVE_REFERENCE=None
+MODEL_REFERENCE_PREPARES=0
 
 # Persistente Kern-Aussprache-Locks haben einen eigenen Zustand.
 # Diese Initialisierung muss VOR jedem /health- oder /status-Aufruf existieren.
@@ -617,6 +619,8 @@ def get_status():
     out["honorific_name_variants"]=sum(1 for r in RULES if r.get("required_honorific_key"))
     out["honorific_audio_keys"]=sorted(k for k in HONORIFIC_KEYS if k in HONORIFIC_TTS_BY_KEY)
     out["pronunciation_learning"]=learning_state()
+    out["performance_engine"]="grouped-reference-conditioning-v1"
+    out["reference_prepares_total"]=MODEL_REFERENCE_PREPARES
     return out
 
 def source_has_honorific(text:str,pos:int,required_key:str=""):
@@ -706,7 +710,7 @@ def choose_device():
     return "mps" if torch.backends.mps.is_available() else "cpu"
 
 def load_model(force_device=None):
-    global MODEL, MODEL_DEVICE
+    global MODEL, MODEL_DEVICE, MODEL_ACTIVE_REFERENCE
     target=force_device or choose_device()
     if MODEL is not None and MODEL_DEVICE==target:
         return MODEL
@@ -749,6 +753,7 @@ def load_model(force_device=None):
 
             MODEL=model
             MODEL_DEVICE=target
+            MODEL_ACTIVE_REFERENCE=None
             set_status(
                 model_state="ready",
                 model_device=target,
@@ -940,17 +945,52 @@ def prosody_settings(mode:str,language_id:str,text:str=""):
         "crossfade_ms":int(mode_cfg.get("crossfadeMs",28)),
     }
 
+def reference_for_language(language_id:str):
+    return REF_AR if language_id=="ar" and REF_AR.exists() else REF_DE
+
+def prepare_reference_if_needed(model,language_id:str,exaggeration:float):
+    """Voice-Conditioning nur beim echten Referenzwechsel berechnen.
+
+    Die offizielle Chatterbox-generate()-Methode ruft prepare_conditionals bei jedem
+    audio_prompt_path erneut auf. Bei langen Dokumenten ist das unnötige Mehrarbeit.
+    """
+    global MODEL_ACTIVE_REFERENCE,MODEL_REFERENCE_PREPARES
+    ref=reference_for_language(language_id)
+    try:
+        ref_key=str(ref.resolve())
+    except Exception:
+        ref_key=str(ref)
+
+    if MODEL_ACTIVE_REFERENCE==ref_key and getattr(model,"conds",None) is not None:
+        return False
+
+    if not hasattr(model,"prepare_conditionals"):
+        return False
+
+    model.prepare_conditionals(str(ref),exaggeration=float(exaggeration))
+    MODEL_ACTIVE_REFERENCE=ref_key
+    MODEL_REFERENCE_PREPARES+=1
+    return True
+
 def render_with_model(model,text:str,language_id:str,mode:str="narration"):
     import torch
     p=prosody_settings(mode,language_id,text)
-    ref=REF_AR if language_id=="ar" and REF_AR.exists() else REF_DE
+    ref=reference_for_language(language_id)
     kwargs=dict(
         language_id=language_id,
-        audio_prompt_path=str(ref),
         exaggeration=p["exaggeration"],
         cfg_weight=p["cfg_weight"],
         temperature=p["temperature"]
     )
+
+    # Neue schnelle Route: Conditionals einmal vorbereiten und danach ohne
+    # audio_prompt_path wiederverwenden. Fallback bleibt kompatibel mit älteren Builds.
+    prepared=prepare_reference_if_needed(model,language_id,p["exaggeration"])
+    if not hasattr(model,"prepare_conditionals"):
+        kwargs["audio_prompt_path"]=str(ref)
+    elif getattr(model,"conds",None) is None:
+        kwargs["audio_prompt_path"]=str(ref)
+
     with torch.inference_mode():
         return model.generate(text,**kwargs)
 
@@ -1379,15 +1419,25 @@ def generate(text:str,prepared:str="",style:str="auto"):
 
     try:
         model=load_model()
-        outputs=[]
-        qa_segments=[]
+        outputs=[None]*len(plan)
+        qa_segments=[None]*len(plan)
         total=len(plan)
         render_id=uuid.uuid4().hex[:12]
         session_audio_locks={}
         new_audio_lock_candidates={}
+        render_started_perf=time.perf_counter()
+        prepares_before=MODEL_REFERENCE_PREPARES
 
-        for idx,(lang,chunk) in enumerate(plan,1):
-            pct=8+int(((idx-1)/max(1,total))*78)
+        # Performance: gleiche Sprache/Referenz zusammen erzeugen. Das Ergebnis wird
+        # anschließend wieder exakt in die ursprüngliche Textreihenfolge eingesetzt.
+        # Damit wechseln wir bei langen DE/AR-Dokumenten typischerweise nur 1–2× die
+        # teure Voice-Conditioning-Referenz statt bei jedem Fachbegriff.
+        execution_order=sorted(range(total),key=lambda i:(0 if plan[i][0]=="de" else 1,i))
+
+        for processed_pos,original_idx in enumerate(execution_order,1):
+            lang,chunk=plan[original_idx]
+            idx=original_idx+1
+            pct=8+int(((processed_pos-1)/max(1,total))*78)
             lang_label="Arabisch" if lang=="ar" else "Deutsch"
             mode=resolve_segment_prosody(chunk,doc_mode,style)
             audio_lock_key=audio_lock_key_for_chunk(chunk)
@@ -1435,15 +1485,17 @@ def generate(text:str,prepared:str="",style:str="auto"):
                     new_audio_lock_candidates[audio_lock_key]=wav.clone()
                     metrics["audio_lock"]="candidate"
 
-            qa_segments.append({
+            qa_segments[original_idx]={
                 "index":idx,
                 "language":lang,
                 "mode":mode,
                 "critical":critical,
                 **metrics
-            })
-            outputs.append((wav.detach().float().cpu(),lang,chunk,mode,metrics))
+            }
+            outputs[original_idx]=(wav.detach().float().cpu(),lang,chunk,mode,metrics)
 
+        outputs=[x for x in outputs if x is not None]
+        qa_segments=[x for x in qa_segments if x is not None]
         sr=int(model.sr)
         full=join_rendered_segments(outputs,sr)
         final_metrics=audio_quality_metrics(full,sr,text,"de",doc_mode)
@@ -1466,6 +1518,12 @@ def generate(text:str,prepared:str="",style:str="auto"):
             "segments":qa_segments,
             "final":final_metrics,
             "arabic_reference_dedicated":ARABIC_DEDICATED_REFERENCE,
+            "performance":{
+                "render_seconds":round(time.perf_counter()-render_started_perf,3),
+                "segments":total,
+                "reference_prepares":max(0,MODEL_REFERENCE_PREPARES-prepares_before),
+                "execution_strategy":"grouped-by-reference-v1",
+            },
         }
         set_status(last_qa=qa_summary)
 
