@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 import concurrent.futures, difflib, gc, hashlib, importlib.util, json, os, platform, re, shutil, subprocess, threading, time, traceback, unicodedata, urllib.request, uuid
+import multiprocessing as mp
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
@@ -203,13 +204,19 @@ RENDER_CACHE_STATS={"hits":0,"misses":0,"writes":0}
 RENDER_CACHE_MAX_BYTES=2*1024*1024*1024
 
 # Apple-Silicon Production Backend.
-MLX_MODEL=None
+# MLX läuft absichtlich in einem eigenen Prozess. Ein nativer Metal/MLX-Aufruf,
+# der festhängt, kann aus einem Python-Thread nicht sicher abgebrochen werden.
+# Der Elternprozess kann diesen Worker dagegen hart beenden und sauber neu starten.
 MLX_MODEL_ERROR=""
-MLX_CONDITIONALS={}
-MLX_WORKER=concurrent.futures.ThreadPoolExecutor(max_workers=1,thread_name_prefix="dar-mlx")
 MLX_MODEL_ID=os.environ.get("DAR_VOICE_MLX_MODEL","mlx-community/chatterbox-multilingual-v3")
 MLX_ENABLED=os.environ.get("DAR_VOICE_DISABLE_MLX","0")!="1" and platform.machine().lower()=="arm64"
 ACTIVE_BACKEND="mlx" if MLX_ENABLED and importlib.util.find_spec("mlx_audio") is not None else "torch"
+MLX_PROCESS_LOCK=threading.RLock()
+MLX_PROCESS=None
+MLX_CONN=None
+MLX_SR=24000
+MLX_PROCESS_GENERATION=0
+MLX_TIMEOUTS=0
 
 # Persistente Kern-Aussprache-Locks haben einen eigenen Zustand.
 # Diese Initialisierung muss VOR jedem /health- oder /status-Aufruf existieren.
@@ -650,6 +657,10 @@ def get_status():
     out["mlx_enabled"]=bool(MLX_ENABLED)
     out["mlx_model"]=MLX_MODEL_ID if MLX_ENABLED else None
     out["mlx_error"]=MLX_MODEL_ERROR
+    out["mlx_worker_supervised"]=True
+    out["mlx_worker_pid"]=int(MLX_PROCESS.pid) if MLX_PROCESS is not None and MLX_PROCESS.is_alive() else None
+    out["mlx_worker_generation"]=int(MLX_PROCESS_GENERATION)
+    out["mlx_watchdog_timeouts"]=int(MLX_TIMEOUTS)
     return out
 
 def source_honorific_match(text:str,pos:int,required_key:str=""):
@@ -751,11 +762,13 @@ def choose_device():
 class GenerationTokenLimitReached(RuntimeError):
     pass
 
+class GenerationTimeoutReached(RuntimeError):
+    pass
+
 class MLXModelAdapter:
     _dar_backend="mlx"
-    def __init__(self,model):
-        self.model=model
-        self.sr=int(getattr(model,"sample_rate",24000))
+    def __init__(self,sr:int=24000):
+        self.sr=int(sr or 24000)
 
 def generation_token_budget(text:str,language_id:str):
     value=str(text or "").strip()
@@ -773,18 +786,251 @@ def mlx_token_budget(text:str,language_id:str):
     # Backward-compatible interner Alias.
     return generation_token_budget(text,language_id)
 
-def _load_mlx_model_worker():
-    global MLX_MODEL,MLX_MODEL_ERROR
-    if MLX_MODEL is not None:
-        return MLX_MODEL
+def generation_timeout_seconds(text:str,language_id:str):
+    forced=str(os.environ.get("DAR_VOICE_SEGMENT_TIMEOUT_SECONDS","")).strip()
+    if forced:
+        try:
+            return max(20.0,min(180.0,float(forced)))
+        except Exception:
+            pass
+    chars=len(re.sub(r"\s+","",str(text or "")))
+    if language_id=="ar":
+        return max(32.0,min(60.0,22.0+chars*0.42))
+    return max(38.0,min(85.0,24.0+chars*0.42))
+
+def _mlx_process_main(conn,model_id:str):
+    """Persistenter MLX-Worker. Nur dieser Prozess besitzt Modell + Metal-Kontext."""
     try:
+        import numpy as np
         from mlx_audio.tts.utils import load_model as mlx_load_model
-        MLX_MODEL=mlx_load_model(MLX_MODEL_ID)
+
+        model=mlx_load_model(model_id)
+        sr=int(getattr(model,"sample_rate",24000) or 24000)
+        conditionals={}
+        conn.send({"kind":"ready","sr":sr,"pid":os.getpid()})
+
+        while True:
+            try:
+                cmd=conn.recv()
+            except EOFError:
+                break
+            op=str((cmd or {}).get("op",""))
+            if op=="stop":
+                break
+            if op not in ("warm","render"):
+                conn.send({"kind":"error","code":"bad_op","error":"Unbekannter MLX-Worker-Auftrag."})
+                continue
+
+            ref_path=str(cmd.get("ref_path",""))
+            exaggeration=float(cmd.get("exaggeration",0.2))
+            ref_key=(file_signature(Path(ref_path)),round(exaggeration,6))
+            conds=conditionals.get(ref_key)
+            if conds is None:
+                try:
+                    conds=model.prepare_conditionals(ref_path,sr,exaggeration)
+                except TypeError:
+                    try:
+                        conds=model.prepare_conditionals(ref_path,sr)
+                    except TypeError:
+                        conds=model.prepare_conditionals(ref_path)
+                conditionals[ref_key]=conds
+
+            if op=="warm":
+                conn.send({"kind":"warm","sr":sr})
+                continue
+
+            max_tokens=int(cmd.get("max_tokens",300))
+            result=None
+            try:
+                for item in model.generate(
+                    text=str(cmd.get("text","")),
+                    conds=conds,
+                    exaggeration=exaggeration,
+                    cfg_weight=float(cmd.get("cfg_weight",0.0)),
+                    temperature=float(cmd.get("temperature",0.5)),
+                    repetition_penalty=1.2,
+                    min_p=0.05,
+                    top_p=1.0,
+                    max_new_tokens=max_tokens,
+                    lang_code=str(cmd.get("language_id","de")),
+                    verbose=False,
+                ):
+                    result=item
+            except BaseException as e:
+                conn.send({
+                    "kind":"error","code":"generate_exception",
+                    "error":f"{type(e).__name__}: {e}",
+                    "traceback":traceback.format_exc()[-5000:],
+                })
+                continue
+
+            if result is None:
+                conn.send({"kind":"error","code":"empty","error":"MLX hat kein Audio geliefert."})
+                continue
+
+            token_count=int(getattr(result,"token_count",0) or 0)
+            if token_count>=max_tokens-3:
+                conn.send({
+                    "kind":"error","code":"token_limit",
+                    "error":f"MLX token ceiling reached ({token_count}/{max_tokens})",
+                })
+                continue
+
+            arr=np.asarray(result.audio,dtype=np.float32)
+            if arr.ndim>1:
+                arr=arr.reshape(-1)
+            arr=np.ascontiguousarray(arr,dtype=np.float32)
+            conn.send({
+                "kind":"result",
+                "sr":sr,
+                "audio":arr.tobytes(),
+                "samples":int(arr.size),
+                "meta":{
+                    "mlx_token_count":token_count,
+                    "mlx_max_tokens":max_tokens,
+                    "mlx_processing_seconds":round(float(getattr(result,"processing_time_seconds",0.0) or 0.0),3),
+                    "mlx_rtf":round(float(getattr(result,"real_time_factor",0.0) or 0.0),4),
+                },
+            })
+    except BaseException as e:
+        try:
+            conn.send({
+                "kind":"fatal","error":f"{type(e).__name__}: {e}",
+                "traceback":traceback.format_exc()[-5000:],
+            })
+        except Exception:
+            pass
+    finally:
+        try: conn.close()
+        except Exception: pass
+
+def _mlx_process_alive():
+    return MLX_PROCESS is not None and MLX_PROCESS.is_alive() and MLX_CONN is not None
+
+def _stop_mlx_process(reason:str=""):
+    global MLX_PROCESS,MLX_CONN
+    with MLX_PROCESS_LOCK:
+        proc=MLX_PROCESS
+        conn=MLX_CONN
+        MLX_PROCESS=None
+        MLX_CONN=None
+        if conn is not None:
+            try: conn.close()
+            except Exception: pass
+        if proc is not None and proc.is_alive():
+            try: proc.terminate()
+            except Exception: pass
+            try: proc.join(timeout=2.5)
+            except Exception: pass
+            if proc.is_alive():
+                try: proc.kill()
+                except Exception: pass
+                try: proc.join(timeout=1.0)
+                except Exception: pass
+        if reason:
+            print(f"[DĀR Voice] MLX worker stopped: {reason}",flush=True)
+
+def _start_mlx_process():
+    global MLX_PROCESS,MLX_CONN,MLX_SR,MLX_PROCESS_GENERATION,MLX_MODEL_ERROR
+    with MLX_PROCESS_LOCK:
+        if _mlx_process_alive():
+            return int(MLX_SR)
+        _stop_mlx_process("restart before start")
+        ctx=mp.get_context("spawn")
+        parent_conn,child_conn=ctx.Pipe(duplex=True)
+        proc=ctx.Process(
+            target=_mlx_process_main,
+            args=(child_conn,MLX_MODEL_ID),
+            name="dar-mlx-synth",
+            daemon=True,
+        )
+        MLX_PROCESS=proc
+        MLX_CONN=parent_conn
+        proc.start()
+        try: child_conn.close()
+        except Exception: pass
+
+        if not parent_conn.poll(180.0):
+            _stop_mlx_process("model start timeout")
+            MLX_MODEL_ERROR="MLX-Modellstart hat das 180-s-Limit überschritten."
+            raise GenerationTimeoutReached(MLX_MODEL_ERROR)
+        try:
+            msg=parent_conn.recv()
+        except EOFError as e:
+            _stop_mlx_process("model worker exited during start")
+            raise RuntimeError("MLX-Worker wurde beim Modellstart beendet.") from e
+        if msg.get("kind")!="ready":
+            detail=str(msg.get("error") or "MLX-Worker konnte nicht gestartet werden.")
+            _stop_mlx_process("model start error")
+            MLX_MODEL_ERROR=detail
+            raise RuntimeError(detail)
+
+        MLX_SR=int(msg.get("sr",24000) or 24000)
+        MLX_PROCESS_GENERATION+=1
         MLX_MODEL_ERROR=""
-        return MLX_MODEL
-    except Exception as e:
-        MLX_MODEL_ERROR=f"{type(e).__name__}: {e}"
-        raise
+        print(f"[DĀR Voice] MLX worker ready pid={msg.get('pid')} generation={MLX_PROCESS_GENERATION}",flush=True)
+        return int(MLX_SR)
+
+def _mlx_request(payload:dict,timeout_s:float,heartbeat:bool=True):
+    global MLX_TIMEOUTS
+    with MLX_PROCESS_LOCK:
+        _start_mlx_process()
+        if not _mlx_process_alive():
+            raise RuntimeError("MLX-Worker ist nicht verfügbar.")
+        try:
+            MLX_CONN.send(payload)
+        except Exception as e:
+            _stop_mlx_process("send failed")
+            raise RuntimeError("MLX-Auftrag konnte nicht gestartet werden.") from e
+
+        started=time.monotonic()
+        base_progress=int(get_status().get("progress",0) or 0)
+        next_heartbeat=2.0
+        while True:
+            elapsed=time.monotonic()-started
+            remaining=max(0.0,float(timeout_s)-elapsed)
+            if remaining<=0.0:
+                MLX_TIMEOUTS+=1
+                set_status(
+                    progress=max(base_progress,int(get_status().get("progress",0) or 0)),
+                    message=f"Abschnitt reagiert nicht · Rescue startet nach {int(round(timeout_s))} s …"
+                )
+                _stop_mlx_process(f"segment timeout after {timeout_s:.1f}s")
+                raise GenerationTimeoutReached(
+                    f"generation_timeout: MLX watchdog exceeded {timeout_s:.1f}s"
+                )
+
+            try:
+                ready=MLX_CONN.poll(min(0.35,remaining))
+            except (EOFError,OSError) as e:
+                _stop_mlx_process("poll failed")
+                raise RuntimeError("MLX-Worker-Verbindung wurde unterbrochen.") from e
+
+            if ready:
+                try:
+                    msg=MLX_CONN.recv()
+                except EOFError as e:
+                    _stop_mlx_process("worker exited")
+                    raise RuntimeError("MLX-Worker wurde während der Synthese beendet.") from e
+                kind=str(msg.get("kind",""))
+                if kind in ("result","warm"):
+                    return msg
+                code=str(msg.get("code",""))
+                detail=str(msg.get("error") or "Unbekannter MLX-Fehler.")
+                if code=="token_limit":
+                    raise GenerationTokenLimitReached(detail)
+                if kind=="fatal":
+                    _stop_mlx_process("fatal worker error")
+                raise RuntimeError(detail)
+
+            if heartbeat and elapsed>=next_heartbeat:
+                current=int(get_status().get("progress",base_progress) or base_progress)
+                pulse=min(86,max(current,base_progress+min(5,int(elapsed//8))))
+                set_status(
+                    progress=pulse,
+                    message=f"Synthese läuft · {int(elapsed)} s · Watchdog aktiv"
+                )
+                next_heartbeat+=2.0
 
 def load_mlx_model():
     global ACTIVE_BACKEND
@@ -792,8 +1038,8 @@ def load_mlx_model():
         raise RuntimeError("MLX Audio ist auf diesem System nicht verfügbar.")
     set_status(model_state="loading",model_device="mlx-metal",message="Chatterbox V3 · MLX wird geladen …",last_error="")
     try:
-        model=MLX_WORKER.submit(_load_mlx_model_worker).result()
-        adapter=MLXModelAdapter(model)
+        sr=_start_mlx_process()
+        adapter=MLXModelAdapter(sr)
         ACTIVE_BACKEND="mlx"
         set_status(
             model_state="ready",model_device="mlx-metal",model_loaded_at=time.time(),
@@ -814,59 +1060,28 @@ def load_production_model():
     ACTIVE_BACKEND="torch"
     return load_model()
 
-def _mlx_generate_worker(adapter,ref_path:str,text:str,language_id:str,mode:str,max_tokens:int):
-    import numpy as np, torch
-    model=adapter.model
-    p=prosody_settings(mode,language_id,text)
-    ref_sig=file_signature(Path(ref_path))
-    conds=MLX_CONDITIONALS.get(ref_sig)
-    if conds is None:
-        # String-Pfad wird vom MLX-Chatterbox-Port selbst auf 24 kHz geladen.
-        conds=model.prepare_conditionals(ref_path,int(getattr(model,"sample_rate",24000)),p["exaggeration"])
-        MLX_CONDITIONALS[ref_sig]=conds
-
-    result=None
-    for item in model.generate(
-        text=text,
-        conds=conds,
-        exaggeration=p["exaggeration"],
-        cfg_weight=p["cfg_weight"],
-        temperature=p["temperature"],
-        repetition_penalty=1.2,
-        min_p=0.05,
-        top_p=1.0,
-        max_new_tokens=int(max_tokens),
-        lang_code=language_id,
-        verbose=False,
-    ):
-        result=item
-    if result is None:
-        raise RuntimeError("MLX hat kein Audio geliefert.")
-
-    token_count=int(getattr(result,"token_count",0) or 0)
-    if token_count>=int(max_tokens)-3:
-        raise GenerationTokenLimitReached(
-            f"MLX token ceiling reached ({token_count}/{max_tokens})"
-        )
-
-    arr=np.asarray(result.audio,dtype=np.float32)
-    if arr.ndim>1:
-        arr=arr.reshape(-1)
-    wav=torch.from_numpy(arr.copy()).view(1,-1)
-    return wav,{
-        "mlx_token_count":token_count,
-        "mlx_max_tokens":int(max_tokens),
-        "mlx_processing_seconds":round(float(getattr(result,"processing_time_seconds",0.0) or 0.0),3),
-        "mlx_rtf":round(float(getattr(result,"real_time_factor",0.0) or 0.0),4),
-    }
-
 def render_with_mlx(model,text:str,language_id:str,mode:str):
+    import numpy as np, torch
     ref=reference_for_language(language_id)
+    p=prosody_settings(mode,language_id,text)
     budget=mlx_token_budget(text,language_id)
-    wav,meta=MLX_WORKER.submit(
-        _mlx_generate_worker,model,str(ref),text,language_id,mode,budget
-    ).result()
-    return wav,meta
+    timeout_s=generation_timeout_seconds(text,language_id)
+    msg=_mlx_request({
+        "op":"render",
+        "ref_path":str(ref),
+        "text":str(text),
+        "language_id":str(language_id),
+        "exaggeration":float(p["exaggeration"]),
+        "cfg_weight":float(p["cfg_weight"]),
+        "temperature":float(p["temperature"]),
+        "max_tokens":int(budget),
+    },timeout_s=timeout_s,heartbeat=True)
+    arr=np.frombuffer(msg.get("audio",b""),dtype=np.float32).copy()
+    expected=int(msg.get("samples",arr.size) or arr.size)
+    if arr.size!=expected or arr.size==0:
+        raise RuntimeError("MLX-Worker lieferte ein unvollständiges Audiosegment.")
+    wav=torch.from_numpy(arr).view(1,-1)
+    return wav,dict(msg.get("meta") or {})
 
 def load_model(force_device=None):
     global MODEL, MODEL_DEVICE, MODEL_ACTIVE_REFERENCE, MODEL_CONDITIONAL_CACHE, AUDIO_WAV_CACHE
@@ -936,18 +1151,15 @@ def warm_model():
     try:
         model=load_production_model()
         if getattr(model,"_dar_backend","torch")=="mlx":
-            # Konditionierung beider Referenzen im dedizierten MLX-Worker vorwärmen,
-            # ohne einen langen TTS-Render zu starten.
-            def _warm():
-                base=model.model
-                for lang,probe in (("de","Warmup"),("ar","تجربة")):
-                    ref=reference_for_language(lang)
-                    sig=file_signature(ref)
-                    if sig in MLX_CONDITIONALS:
-                        continue
-                    p=prosody_settings("narration",lang,probe)
-                    MLX_CONDITIONALS[sig]=base.prepare_conditionals(str(ref),int(getattr(base,"sample_rate",24000)),p["exaggeration"])
-            MLX_WORKER.submit(_warm).result()
+            # Modell + Referenzkonditionierung im überwachten Prozess vorwärmen.
+            for lang,probe in (("de","Warmup"),("ar","تجربة")):
+                ref=reference_for_language(lang)
+                p=prosody_settings("narration",lang,probe)
+                _mlx_request({
+                    "op":"warm",
+                    "ref_path":str(ref),
+                    "exaggeration":float(p["exaggeration"]),
+                },timeout_s=75.0,heartbeat=False)
         else:
             prepare_reference_if_needed(model,"de",prosody_settings("narration","de","Warmup")["exaggeration"])
             if REF_AR.exists() and file_signature(REF_AR)!=file_signature(REF_DE):
@@ -1449,15 +1661,15 @@ def audio_quality_metrics(wav,sr:int,text:str,language_id:str,mode:str="narratio
     metrics["issues"]=list(dict.fromkeys(metrics["issues"]))
     return metrics
 
-def split_rescue_chunks(text:str):
-    """Nur lange, nicht-MASTER Segmente deterministisch in sichere Teilstücke zerlegen."""
+def split_rescue_chunks(text:str,force:bool=False):
+    """Nicht-MASTER Segmente deterministisch teilen; bei Watchdog-Timeout auch kurze Problemsegmente."""
     value=re.sub(r"\s+"," ",str(text or "")).strip()
     if not value:
         return []
     words=value.split()
     min_words=max(6,int(QA_CONFIG.get("rescueMinWords",9)))
     min_chars=max(60,int(QA_CONFIG.get("rescueMinChars",90)))
-    if len(words)<min_words and len(value)<min_chars:
+    if not force and len(words)<min_words and len(value)<min_chars:
         return [value]
 
     parts=[p.strip() for p in re.split(r"(?<=[,،;؛:])\s+",value) if p.strip()]
@@ -1474,7 +1686,8 @@ def split_rescue_chunks(text:str):
         if left and right:
             return [left,right]
 
-    if len(words)>=min_words:
+    split_floor=2 if force else min_words
+    if len(words)>=split_floor:
         mid=max(1,min(len(words)-1,len(words)//2))
         return [" ".join(words[:mid])," ".join(words[mid:])]
     return [value]
@@ -1490,6 +1703,14 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
         torch.manual_seed(seed_base+attempt*seed_offset)
         try:
             wav=render_with_model(model,text,language_id,mode)
+        except GenerationTimeoutReached as e:
+            print(f"[DĀR Voice] watchdog rescue: {e}",flush=True)
+            last=(None,{"issues":["generation_timeout"],"attempt":attempt+1,"critical":bool(critical),"rescued":False})
+            # Kritische MASTER-Kandidaten dürfen nicht geteilt werden. Ein zweiter
+            # Versuch startet automatisch einen frisch initialisierten MLX-Prozess.
+            if critical and attempt+1<attempts:
+                continue
+            break
         except GenerationTokenLimitReached as e:
             print(f"[DĀR Voice] bounded generation rescue: {e}",flush=True)
             last=(None,{"issues":["generation_token_limit"],"attempt":attempt+1,"critical":bool(critical),"rescued":False})
@@ -1506,11 +1727,11 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
 
     rescue_allowed={
         "unexpected_internal_hold","excessive_internal_pause","suspicious_sustained_hold",
-        "short_arabic_too_long","segment_too_long","speech_rate_too_slow","generation_token_limit"
+        "short_arabic_too_long","segment_too_long","speech_rate_too_slow","generation_token_limit","generation_timeout"
     }
     last_issues=set(last[1]["issues"]) if last else set()
     if bool(QA_CONFIG.get("rescueLongSegments",True)) and not critical and last_issues and last_issues.issubset(rescue_allowed):
-        parts=split_rescue_chunks(text)
+        parts=split_rescue_chunks(text,force=("generation_timeout" in last_issues))
         if len(parts)>1:
             rescued=[]
             rescue_metrics=[]
@@ -1518,7 +1739,7 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
                 torch.manual_seed(seed_base+(attempts+part_idx)*seed_offset)
                 try:
                     sub=render_with_model(model,part,language_id,mode)
-                except GenerationTokenLimitReached:
+                except (GenerationTokenLimitReached,GenerationTimeoutReached):
                     rescued=[]
                     break
                 subm=audio_quality_metrics(sub,int(model.sr),part,language_id,mode)
@@ -1791,6 +2012,11 @@ def generate(text:str,prepared:str="",style:str="auto"):
                             core_seed=2026+((render_salt+key_salt*131)%900000)
                         wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical,seed_base=core_seed)
                     except Exception as first_error:
+                        if getattr(model,"_dar_backend","torch")=="mlx" and "generation_timeout" in str(first_error):
+                            # Nach einem echten stuck inference wurde der MLX-Prozess bereits
+                            # hart beendet. Kein unüberwachtes In-Process-Fallback starten.
+                            print("[DĀR Voice] MLX watchdog stopped stuck inference:",first_error,flush=True)
+                            raise
                         if getattr(model,"_dar_backend","torch")=="mlx":
                             print("[DĀR Voice] MLX segment failed, retry PyTorch/MPS:",first_error,flush=True)
                             set_status(message=f"{lang_label} · MLX-Fallback auf PyTorch/MPS …")
