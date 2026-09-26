@@ -5153,4 +5153,21 @@ fetchCatalog();
 
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
 <script src="/test/kids/content-studio-feed.js?v=studio1"></script>\n</body>
+
+<style id="kids-quiz-scroll-v1">
+#quizModal.modal{touch-action:pan-y!important}
+#quizModal .modal-shell{min-height:0!important}
+#quizModal .quiz-stage,
+#quizModal #quizBody{
+  flex:1 1 auto!important;
+  min-height:0!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior:contain!important;
+  touch-action:pan-y!important;
+  padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))!important;
+}
+</style>
+
 </html>

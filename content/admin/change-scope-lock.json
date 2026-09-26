@@ -123,6 +123,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-quiz-scroll-2026-09-26",
+      "approvedBy": "user-explicit-kids-quiz-kann-nicht-scrollen",
+      "reason": "Nutzer: Kids Quiz-Bereich laesst sich nicht scrollen. overflow/touch-action am Quiz-Modal.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/kids/index.html",
+        "test/kids/shell.html",
+        "test/kids/start.html",
+        "test/kids/version.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-tab-revert-to-v1041-plop-2026-09-26",
       "approvedBy": "user-explicit-zurueck-zu-letztem-funktionierenden-plop-vor-grossem-oval",
       "reason": "Nutzer: komplett zurueck zum Stand als Plop funktionierte, kurz bevor das grosse 3D-Oval gebaut wurde.",
