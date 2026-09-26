@@ -35,6 +35,26 @@
   if (typeof location === "undefined") return;
   if ((location.pathname || "").indexOf("/admin") === 0) return;
 
+  /* PUBLIC WEBSITE HARD GATE v1 */
+  try {
+    var __darUa = String(navigator.userAgent || "");
+    var __darNative =
+      /DarAlTawhid-iOS|DarAlTawhidOfficialIOS|DarAlTawhidAndroid/i.test(__darUa) ||
+      window.DAR_OFFICIAL_IOS_APP === true ||
+      window.DAR_IOS_NATIVE_APP === true ||
+      window.DAR_ANDROID_NATIVE_APP === true;
+    var __darPath = String(location.pathname || "");
+    var __darPublicRoot = (__darPath === "/" || __darPath === "/index.html");
+    if (!__darNative && __darPublicRoot) {
+      var __darParams = new URLSearchParams(location.search || "");
+      ["homescreen","app","mobile","source","darsw"].forEach(function (k) { __darParams.delete(k); });
+      if (!__darParams.get("page")) __darParams.set("page", "start");
+      var __darDest = "/desktop-preview/?" + __darParams.toString();
+      location.replace(__darDest);
+      return;
+    }
+  } catch (__darGateErr) {}
+
   var isTest = /\/test(?:\/|$)/.test(location.pathname || "");
   var VERSION_STATE_KEY = "dar_app_version_state_v1";
   var HADITH_GATE_ID = "dar-hadith-library-gate";
