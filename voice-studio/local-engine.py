@@ -812,28 +812,38 @@ def detect_unresolved_islamic_terms(text:str,limit:int=12):
         if not distinctive:
             i+=1
             continue
+
         end=min(len(tokens),i+5)
         candidates=[]
         for j in range(i+1,end+1):
             phrase=" ".join(tokens[i:j]).strip()
             if phrase:
-                candidates.append(phrase)
-        chosen=None
-        for phrase in reversed(candidates):
-            norm=normalize_lookup(phrase)
-            if norm in MASTER_ALIAS_INDEX:
-                chosen=None
+                candidates.append((phrase,j-i))
+
+        # Exakte bekannte Mehrwortnamen haben immer Vorrang. So wird z. B.
+        # „ʿAbdullāh ibn Masʿūd sagte“ nicht als unbekannter Vierwortname markiert.
+        exact=None
+        for phrase,width in reversed(candidates):
+            if normalize_lookup(phrase) in MASTER_ALIAS_INDEX:
+                exact=(phrase,width)
                 break
-            # Wenn ein längerer Kandidat nur normale Folgewörter enthält, lieber
-            # den kürzesten markanten Namen/Begriff melden.
+        if exact:
+            i+=max(1,int(exact[1]))
+            continue
+
+        best=None
+        for phrase,width in candidates:
             suggestions=master_suggestions(phrase,3)
-            if suggestions and suggestions[0]["score"]>=0.78:
-                chosen=(phrase,suggestions)
-                break
-        if chosen is None:
+            score=float((suggestions[0] or {}).get("score",0)) if suggestions else 0.0
+            if best is None or score>best[0]:
+                best=(score,phrase,width,suggestions)
+        if best and best[0]>=0.78:
+            _,phrase,width,suggestions=best
+            chosen=(phrase,suggestions)
+        else:
             norm=normalize_lookup(token)
-            if norm not in MASTER_ALIAS_INDEX:
-                chosen=(token,master_suggestions(token,3))
+            chosen=None if norm in MASTER_ALIAS_INDEX else (token,master_suggestions(token,3))
+
         if chosen:
             phrase,suggestions=chosen
             norm=normalize_lookup(phrase)
