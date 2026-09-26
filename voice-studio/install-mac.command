@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SITE="https://dar-al-tawhid.de"
-RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/c53ea1b991c148cd9c59546bf3fd5c2d58a3c69b"
+RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/3c82e2e41731532f8a8ef613e7019a48faa4f2d9"
 TARGET="$HOME/Applications/DAR-Voice-Studio"
 VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
@@ -149,7 +149,7 @@ if ! "$PY" -m py_compile "$STAGE/local-engine.py"; then
 fi
 
 if ! "$PY" "$STAGE/validate-v2.py"     "$STAGE/pronunciation-rules.json"     "$STAGE/voice-production-profile.json"     "$STAGE/local-engine.py"     "$STAGE/voice-regression-fixtures.json"; then
-  echo "FEHLER: Voice-Studio-2.3.0-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
+  echo "FEHLER: Voice-Studio-2.7.0-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
   exit 1
 fi
 
