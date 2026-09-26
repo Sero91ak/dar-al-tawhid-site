@@ -559,7 +559,7 @@ const PROSODY_LABELS={
 };
 const IS_LOCAL=location.hostname==="127.0.0.1"||location.hostname==="localhost";
 const LOCAL_API=IS_LOCAL?"":"http://127.0.0.1:8787";
-let library={rules:[]},buckets=new Map(),lastAudio=null,lastGeneratedText="",engineOK=false,modelReady=false,qaConfirmed=false,deferredInstall=null;
+let library={rules:[]},buckets=new Map(),lastAudio=null,lastGeneratedText="",pendingAutoRerenderText="",engineOK=false,modelReady=false,qaConfirmed=false,deferredInstall=null;
 let learningResults=[],learningCandidate=null,learningPreviewId="",learningPreviewUrl=null;
 const $=s=>document.querySelector(s);
 
@@ -608,7 +608,7 @@ function analyze(text){
   }
   return{prepared:out.join(""),found};
 }
-function resetAudioQA(){
+function resetAudioQA(preservePendingRerender=false){
   qaConfirmed=false;
   $("#qaConfirmed").textContent="nein";
   $("#qaConfirmed").className="warn";
@@ -626,6 +626,7 @@ function resetAudioQA(){
   }
   if(lastAudio){URL.revokeObjectURL(lastAudio);lastAudio=null}
   lastGeneratedText="";
+  if(!preservePendingRerender)pendingAutoRerenderText="";
   $("#player").removeAttribute("src");
   $("#playerWrap").hidden=true;
   updateQA();
@@ -798,7 +799,10 @@ async function confirmLearning(){
   if(!learningPreviewId){setMessage("Zuerst eine neue Aussprache testen und anhören.");return}
   const term=$("#learnTerm").value.trim(),btn=$("#learnConfirmBtn"),old=btn.textContent;
   const currentText=$("#text").value.trim();
-  const rerenderCurrentAudio=!!lastAudio&&!!currentText&&currentText===lastGeneratedText;
+  const rerenderCurrentAudio=!!currentText&&(
+    (!!lastAudio&&currentText===lastGeneratedText)||
+    (!!pendingAutoRerenderText&&currentText===pendingAutoRerenderText)
+  );
   btn.disabled=true;btn.textContent="Wird gelernt …";
   try{
     const r=await localRequest("/learning/confirm",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({previewId:learningPreviewId,term})});
@@ -808,8 +812,20 @@ async function confirmLearning(){
     await loadLibrary();
     await searchLearning(term);
     if(rerenderCurrentAudio){
-      setMessage("Gespeichert: „"+term+"“. Die bisherige Audio ist jetzt veraltet und wird automatisch mit der bestätigten Aussprache neu erzeugt.","warn");
-      await generate();
+      pendingAutoRerenderText=currentText;
+      const postCorrection=await analyzeProsody();
+      const remaining=Array.isArray(postCorrection?.unresolvedIslamicTerms)?postCorrection.unresolvedIslamicTerms:[];
+      if(remaining.length){
+        resetAudioQA(true);
+        setMessage(
+          "Gespeichert: „"+term+"“. Die alte Audio ist veraltet. Noch "+remaining.length+
+          " ungeklärte Aussprache"+(remaining.length===1?"":"n")+" im Text. Nach der letzten Bestätigung wird derselbe Text automatisch neu erzeugt.",
+          "warn"
+        );
+      }else{
+        setMessage("Gespeichert: „"+term+"“. Alle offenen Aussprachen sind geklärt; derselbe Text wird jetzt automatisch neu erzeugt.","warn");
+        await generate({autoRerender:true});
+      }
     }else{
       setMessage("Gespeichert: „"+term+"“ ist sofort aktiv. Beim nächsten Erzeugen wird automatisch die bestätigte Aussprache verwendet.","good");
     }
@@ -999,8 +1015,8 @@ function updateQA(){
   $("#qaAudio").className=audio?"good":"warn";
 }
 
-async function generate(){
-  resetAudioQA();
+async function generate({autoRerender=false}={}){
+  resetAudioQA(autoRerender);
   const btns=[$("#generateBtn"),$("#mobileGenerateBtn")].filter(Boolean);
   const old=btns.map(b=>b.textContent);
   btns.forEach(b=>{b.disabled=true;b.textContent="Vorbereitung …"});
@@ -1060,6 +1076,7 @@ async function generate(){
     const url=URL.createObjectURL(blob);
     lastAudio=url;
     lastGeneratedText=text;
+    pendingAutoRerenderText="";
     $("#player").src=url;
     $("#playerWrap").hidden=false;
     $("#wavLink").href=url;
