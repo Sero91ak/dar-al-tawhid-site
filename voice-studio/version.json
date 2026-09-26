@@ -1,6 +1,6 @@
 {
-  "version": "2.3.4",
-  "updatedAt": "2026-09-26T02:38:00+02:00",
+  "version": "2.4.0",
+  "updatedAt": "2026-09-26T07:10:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "local-chatterbox-v3.3",
   "provider": "self-produced",
@@ -20,7 +20,7 @@
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-raw",
-  "engineVersion": "audio-lock-runtime-health-fix-with-real-smoke-test",
+  "engineVersion": "grouped-reference-conditioning-v1",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -177,6 +177,18 @@
     "audioLockStateInitializedBeforeHealth": true,
     "healthStatusRuntimeSmokeTest": true,
     "pendingAudioLockStateSmokeTest": true,
-    "startupNameErrorRegressionGuard": true
+    "startupNameErrorRegressionGuard": true,
+    "groupedRenderRegression": true,
+    "voiceConditioningReuse": true,
+    "olderChatterboxPrepareConditionalsFallback": true
+  },
+  "performance": {
+    "reusableVoiceConditioning": true,
+    "groupedMultilingualExecution": true,
+    "outputOrderPreserved": true,
+    "confirmedAudioLocksUnchanged": true,
+    "renderTimingMetrics": true,
+    "referencePrepareMetrics": true,
+    "chunkLimitPolicy": "German 280 chars, Arabic 180 chars; keep below official multilingual ~300-char generation ceiling"
   }
 }
