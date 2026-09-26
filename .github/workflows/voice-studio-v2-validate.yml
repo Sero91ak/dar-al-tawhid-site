@@ -31,6 +31,9 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Validate Mac installer shell syntax
+        run: bash -n voice-studio/install-mac.command
+
       - name: Compile Voice Engine
         run: python -m py_compile voice-studio/local-engine.py
 
