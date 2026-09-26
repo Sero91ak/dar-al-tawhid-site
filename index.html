@@ -35230,53 +35230,78 @@ html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn::before{
 }
 </style>
 
-<style id="dar-tab-kids-pop-v1040">
+<style id="dar-tab-kids-pop-v1041">
 html #bottomNav .dar-tab-plop-pill,
 html #bottomNav .dar-tab-loupe-lens,
 #darTabPeek{display:none!important}
-/* Kids 1:1: kidPop + kidLift. Nur Animation, keine Tab-/Schnellzugriff-Logik. */
+/* Oval weiter ums 3D-Bild (Kids-Kapsel), weicher Plop, ohne Doppelsprung. */
+html #appChromeDock #bottomNav.bottom-nav,
+html.dar-ios-native-app #bottomNav.bottom-nav,
+html #bottomNav.bottom-nav{
+  gap:2px!important;
+  padding:6px 6px!important;
+}
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn,
+html #bottomNav.bottom-nav .bottom-nav-btn{
+  max-width:none!important;
+  min-width:0!important;
+  padding:8px 10px!important;
+  border-radius:999px!important;
+  overflow:visible!important;
+}
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.active,
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
 html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn:active,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.active,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
 html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn:active,
-html #bottomNav.bottom-nav .bottom-nav-btn:active,
-html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop{
-  animation:kidPop .34s cubic-bezier(.2,.85,.2,1)!important;
+html #bottomNav.bottom-nav .bottom-nav-btn.active,
+html #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
+html #bottomNav.bottom-nav .bottom-nav-btn:active{
+  background:linear-gradient(145deg,rgba(226,189,114,.16),rgba(115,201,193,.08))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.06)!important;
+  border-radius:999px!important;
+}
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.active img.dar3d-icon,
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.is-pressed .nav-icon,
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn:active .nav-icon,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.active img.dar3d-icon,
+html #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
+html #bottomNav.bottom-nav .bottom-nav-btn.active img.dar3d-icon{
+  transform:none!important;
+}
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.is-pressed:not(.is-hold-arming):not(.is-hold-feedback),
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn:active,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.is-pressed:not(.is-hold-arming):not(.is-hold-feedback),
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn:active,
+html #bottomNav.bottom-nav .bottom-nav-btn.is-pressed:not(.is-hold-arming):not(.is-hold-feedback),
+html #bottomNav.bottom-nav .bottom-nav-btn:active{
+  transform:none!important;
   filter:none!important;
 }
 html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.kid-pop,
 html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.kid-pop,
 html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop{
-  animation:kidLift .32s cubic-bezier(.2,.8,.2,1)!important;
-}
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.kid-pop.is-pressed,
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.kid-pop:active,
-html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.kid-pop.is-pressed,
-html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.kid-pop:active,
-html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop.is-pressed,
-html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop:active{
+  animation:kidLift .4s cubic-bezier(.22,1,.36,1)!important;
   filter:none!important;
 }
 html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.kid-pop .nav-icon,
 html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.kid-pop img.dar3d-icon,
 html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop .nav-icon,
 html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop img.dar3d-icon{
-  animation:kidLift .32s cubic-bezier(.2,.8,.2,1)!important;
-  filter:none!important;
-}
-@keyframes kidPop{
-  0%{transform:scale(1)!important;translate:0 0;scale:1}
-  42%{transform:scale(1.06)!important;translate:0 0;scale:1.06}
-  100%{transform:scale(1)!important;translate:0 0;scale:1}
+  animation:none!important;
+  transform:none!important;
 }
 @keyframes kidLift{
   0%{transform:translateY(0) scale(1)!important;translate:0 0;scale:1}
-  40%{transform:translateY(-4px) scale(1.05)!important;translate:0 -4px;scale:1.05}
+  42%{transform:translateY(-2px) scale(1.025)!important;translate:0 -2px;scale:1.025}
   100%{transform:translateY(0) scale(1)!important;translate:0 0;scale:1}
 }
 @media (prefers-reduced-motion:reduce){
-  html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop,
-  html #bottomNav.bottom-nav .bottom-nav-btn:active,
-  html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop .nav-icon,
-  html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop img.dar3d-icon{animation:none!important}
+  html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop{animation:none!important}
 }
 </style>
 
