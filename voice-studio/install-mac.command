@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SITE="https://dar-al-tawhid.de"
-RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/ebffc7624a820db805be9047f7e5da4b251f2bb4"
+RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/88ce12ae92de22d4d6e7ade1b197388ea86b93af"
 TARGET="$HOME/Applications/DAR-Voice-Studio"
 VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
@@ -41,14 +41,14 @@ say_status "DĀR Voice Studio wird eingerichtet …"
 
 # Neue Version zuerst vollständig in einen isolierten Staging-Ordner laden.
 # Die funktionierende Installation wird erst nach allen Prüfungen ersetzt.
-curl -fsSL "$RAW/voice-studio/local-engine.py?v=230" -o "$STAGE/local-engine.py"
-curl -fsSL "$RAW/voice-studio/index.html?v=230" -o "$STAGE/studio.html"
-curl -fsSL "$RAW/data/pronunciation/pronunciation-rules.json?v=230" -o "$STAGE/pronunciation-rules.json"
-curl -fsSL "$RAW/data/pronunciation/voice-production-profile.json?v=230" -o "$STAGE/voice-production-profile.json"
-curl -fsSL "$RAW/data/pronunciation/voice-regression-fixtures.json?v=230" -o "$STAGE/voice-regression-fixtures.json"
-curl -fsSL "$RAW/scripts/voice-studio/validate-v2.py?v=230" -o "$STAGE/validate-v2.py"
-curl -fsSL "$RAW/watermark-my-logo-full.png?v=230" -o "$STAGE/watermark-my-logo-full.png" || true
-curl -fsSL "$RAW/app-icon-512.png?v=230" -o "$STAGE/app-icon-512.png" || true
+curl -fsSL "$RAW/voice-studio/local-engine.py?v=231" -o "$STAGE/local-engine.py"
+curl -fsSL "$RAW/voice-studio/index.html?v=231" -o "$STAGE/studio.html"
+curl -fsSL "$RAW/data/pronunciation/pronunciation-rules.json?v=231" -o "$STAGE/pronunciation-rules.json"
+curl -fsSL "$RAW/data/pronunciation/voice-production-profile.json?v=231" -o "$STAGE/voice-production-profile.json"
+curl -fsSL "$RAW/data/pronunciation/voice-regression-fixtures.json?v=231" -o "$STAGE/voice-regression-fixtures.json"
+curl -fsSL "$RAW/scripts/voice-studio/validate-v2.py?v=231" -o "$STAGE/validate-v2.py"
+curl -fsSL "$RAW/watermark-my-logo-full.png?v=231" -o "$STAGE/watermark-my-logo-full.png" || true
+curl -fsSL "$RAW/app-icon-512.png?v=231" -o "$STAGE/app-icon-512.png" || true
 
 for required in local-engine.py studio.html pronunciation-rules.json voice-production-profile.json voice-regression-fixtures.json validate-v2.py; do
   if [ ! -s "$STAGE/$required" ]; then
