@@ -123,6 +123,29 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-kids-tab-optics-3d-live-2026-09-26",
+      "approvedBy": "user-explicit-kids-tab-optik-3d-sofort-live-ios-test-web",
+      "reason": "Nutzer: Kids-Tab-Leiste (Darstellung, Größe, Touchfläche) 1:1 in Test-App, iOS-native App und alle Web-Apps; 3D-Bilder sofort live. Kids-App bleibt eigene App.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/dar-3d-icons/",
+        "assets/dar-noble-3d-icons.css",
+        "assets/dar-noble-3d-icons.js",
+        "assets/dar-bottom-nav-glass.css",
+        "test/assets/dar-noble-3d-icons.js",
+        "test/assets/dar-noble-3d-icons.css",
+        "test/assets/dar-3d-icons/",
+        "cloudflare/site-router.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "jummah-friday-production-takeover-2026-09-25",
       "approvedBy": "user-explicit-produktionsuebernahme-jetzt-jummah-test-zu-ios-pwa-web",
       "reason": "Nutzer: Jumuʿah-System aus Test-App vollständig produktiv übernehmen (iOS, Besucher-PWA, öffentliche Webseite). Test bleibt Vorstufe mit internem Serienwächter.",

@@ -286,5 +286,14 @@ export default {
         headers
       });
     }
+
+    try {
+      return await env.ASSETS.fetch(request);
+    } catch (err) {
+      return new Response("Not Found", {
+        status: 404,
+        headers: { "content-type": "text/plain; charset=utf-8" }
+      });
+    }
   }
 };

@@ -1,6 +1,6 @@
 /* Test-only: Islamic ʿilm 3D icons. No document-wide observer (avoids hang). */
 (function(){
-  const VER="1050";
+  const VER="1051";
   const BASE="/test/assets/dar-3d-icons/";
   const BY_NAV={
     home:"home.png",ilm:"ilm.png",recent:"posts.png",feed:"posts.png",post:"posts.png",
