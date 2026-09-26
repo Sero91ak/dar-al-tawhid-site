@@ -1842,3 +1842,457 @@
     font-size:15.5px!important;
   }
 }
+
+
+/* v26 — ISOLATED PLAYER + RESPONSIVE PLAYER/PRAYER CLUSTER */
+.top-tools-cluster.top-tools-v26{
+  width:min(980px,calc(100% - 40px))!important;
+  max-width:980px!important;
+  margin:12px auto 16px!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr)!important;
+  gap:10px!important;
+  align-items:stretch!important;
+}
+.top-tools-v26 .top-tool-card{
+  min-width:0!important;
+  width:100%!important;
+  height:104px!important;
+  margin:0!important;
+}
+
+/* completely isolated Quran player */
+.qa26-wrap{
+  width:100%!important;
+  height:104px!important;
+  margin:0!important;
+}
+#quranAudioPlayer.qa26-player{
+  width:100%!important;
+  height:104px!important;
+  min-height:104px!important;
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  grid-template-rows:55px 49px!important;
+  padding:0!important;
+  margin:0!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:24px!important;
+  box-sizing:border-box!important;
+  background:
+    radial-gradient(260px 80px at 16% 0%,rgba(255,255,255,.055),transparent 72%),
+    radial-gradient(260px 90px at 84% 56%,rgba(196,158,87,.05),transparent 76%),
+    linear-gradient(105deg,#111d27 0%,#1a2c35 42%,#213a32 100%)!important;
+  box-shadow:0 10px 24px rgba(12,21,25,.12),inset 0 0 0 1px rgba(224,198,139,.09)!important;
+  color:#fffaf0!important;
+}
+.qa26-main{
+  grid-row:1!important;
+  display:grid!important;
+  grid-template-columns:30px 44px minmax(0,1fr) 30px!important;
+  align-items:center!important;
+  min-width:0!important;
+  width:100%!important;
+  height:55px!important;
+  padding:0 8px!important;
+  box-sizing:border-box!important;
+}
+.qa26-nav{
+  display:grid!important;
+  place-items:center!important;
+  width:30px!important;
+  height:55px!important;
+  min-width:30px!important;
+  min-height:44px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  color:#d8bd80!important;
+  font-size:19px!important;
+  line-height:1!important;
+  cursor:pointer!important;
+  touch-action:manipulation!important;
+}
+.qa26-prev{grid-column:1!important}
+.qa26-play{
+  grid-column:2!important;
+  display:grid!important;
+  place-items:center!important;
+  align-self:center!important;
+  justify-self:center!important;
+  width:40px!important;
+  height:40px!important;
+  min-width:40px!important;
+  min-height:40px!important;
+  margin:0!important;
+  padding:0!important;
+  border:1px solid rgba(227,202,147,.25)!important;
+  border-radius:50%!important;
+  background:linear-gradient(180deg,#fffdf7,#eee0c1)!important;
+  color:#1b2c27!important;
+  font-size:13px!important;
+  box-shadow:0 5px 12px rgba(7,14,17,.14)!important;
+  cursor:pointer!important;
+  touch-action:manipulation!important;
+}
+.qa26-now{
+  grid-column:3!important;
+  min-width:0!important;
+  width:100%!important;
+  height:55px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  padding:0 10px!important;
+  overflow:hidden!important;
+  box-sizing:border-box!important;
+}
+.qa26-kicker{
+  color:#d9bf84!important;
+  font-size:6.5px!important;
+  font-weight:800!important;
+  line-height:1!important;
+  letter-spacing:.13em!important;
+  text-transform:uppercase!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.qa26-title{
+  width:100%!important;
+  min-width:0!important;
+  margin-top:3px!important;
+  color:#fffdf8!important;
+  font-size:12.5px!important;
+  font-weight:600!important;
+  line-height:1.15!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.qa26-progress{
+  width:100%!important;
+  height:1px!important;
+  margin-top:6px!important;
+  overflow:hidden!important;
+  background:rgba(255,255,255,.12)!important;
+}
+.qa26-progress i{
+  display:block!important;
+  width:0;
+  height:100%!important;
+  background:linear-gradient(90deg,#b99350,#ead394)!important;
+}
+.qa26-next{grid-column:4!important}
+
+.qa26-controls{
+  grid-row:2!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.05fr) 68px minmax(0,1.55fr)!important;
+  width:100%!important;
+  min-width:0!important;
+  height:49px!important;
+  border-top:1px solid rgba(230,211,166,.14)!important;
+  overflow:visible!important;
+  box-sizing:border-box!important;
+}
+.qa26-field{
+  position:relative!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  min-width:0!important;
+  width:100%!important;
+  height:49px!important;
+  padding:4px 9px!important;
+  margin:0!important;
+  overflow:visible!important;
+  border-right:1px solid rgba(230,211,166,.12)!important;
+  background:rgba(255,255,255,.012)!important;
+  box-sizing:border-box!important;
+  cursor:pointer!important;
+}
+.qa26-field:last-child{border-right:0!important}
+.qa26-field::before,
+.qa26-field:before{
+  display:none!important;
+  content:none!important;
+  pointer-events:none!important;
+}
+.qa26-field > span{
+  display:block!important;
+  margin:0 0 2px!important;
+  padding:0!important;
+  color:#dec789!important;
+  font-size:6.7px!important;
+  font-weight:850!important;
+  line-height:1!important;
+  letter-spacing:.10em!important;
+  text-transform:uppercase!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  pointer-events:none!important;
+}
+.qa26-field select{
+  position:relative!important;
+  z-index:20!important;
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  height:30px!important;
+  min-height:30px!important;
+  margin:0!important;
+  padding:0 20px 0 0!important;
+  border:0!important;
+  outline:0!important;
+  border-radius:6px!important;
+  color:#fffdf7!important;
+  -webkit-text-fill-color:#fffdf7!important;
+  background:transparent!important;
+  font-size:11px!important;
+  font-weight:700!important;
+  line-height:30px!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  cursor:pointer!important;
+  touch-action:manipulation!important;
+  appearance:auto!important;
+  -webkit-appearance:menulist!important;
+}
+.qa26-reciter select{font-size:10.4px!important}
+.qa26-field select:hover{background:rgba(255,255,255,.04)!important}
+.qa26-field select:focus{
+  outline:1px solid rgba(226,202,142,.8)!important;
+  outline-offset:1px!important;
+}
+
+/* prayer card matched to player */
+.top-tools-v26 #prayerRiver.prayer26{
+  width:100%!important;
+  max-width:none!important;
+  height:104px!important;
+  min-height:104px!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:24px!important;
+  overflow:hidden!important;
+  background:
+    radial-gradient(300px 90px at 70% 4%,rgba(222,196,137,.11),transparent 72%),
+    linear-gradient(105deg,#20372f 0%,#2c493e 58%,#243d34 100%)!important;
+  box-shadow:0 10px 24px rgba(30,54,44,.10)!important;
+}
+.top-tools-v26 #prayerRiver.prayer26 .prayer-inner{
+  width:100%!important;
+  height:104px!important;
+  min-height:104px!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  grid-template-rows:58px 46px!important;
+  padding:0 10px!important;
+  gap:0!important;
+  box-sizing:border-box!important;
+}
+.top-tools-v26 #prayerRiver.prayer26 .prayer-current,
+.top-tools-v26 #prayerRiver.prayer26 .prayer-next{
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  min-width:0!important;
+  width:100%!important;
+  height:58px!important;
+  padding:7px 10px!important;
+  box-sizing:border-box!important;
+}
+.top-tools-v26 #prayerRiver.prayer26 .prayer-current{
+  grid-column:1!important;
+  grid-row:1!important;
+  padding-left:4px!important;
+}
+.top-tools-v26 #prayerRiver.prayer26 .prayer-next{
+  grid-column:2!important;
+  grid-row:1!important;
+  border-left:1px solid rgba(255,255,255,.11)!important;
+}
+.top-tools-v26 #prayerRiver.prayer26 .prayer-label{
+  margin:0 0 2px!important;
+  color:#dcc588!important;
+  font-size:6.4px!important;
+  font-weight:850!important;
+  line-height:1!important;
+  letter-spacing:.13em!important;
+  text-transform:uppercase!important;
+  white-space:nowrap!important;
+}
+.top-tools-v26 #prayerRiver.prayer26 .prayer-current b,
+.top-tools-v26 #prayerRiver.prayer26 .prayer-next b{
+  display:block!important;
+  margin:0!important;
+  color:#fffaf0!important;
+  font-size:18px!important;
+  font-weight:500!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+}
+.top-tools-v26 #prayerRiver.prayer26 .prayer-current small,
+.top-tools-v26 #prayerRiver.prayer26 .prayer-next small{
+  display:block!important;
+  min-width:0!important;
+  margin-top:3px!important;
+  color:rgba(255,250,240,.68)!important;
+  font-size:7.8px!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.top-tools-v26 #prayerRiver.prayer26 .prayer-count{
+  grid-column:1!important;
+  grid-row:2!important;
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:8px!important;
+  min-width:0!important;
+  width:100%!important;
+  height:46px!important;
+  padding:0 10px 0 4px!important;
+  margin:0!important;
+  border-top:1px solid rgba(255,255,255,.10)!important;
+  border-left:0!important;
+  color:#f0d596!important;
+  font-size:17px!important;
+  font-weight:500!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+  box-sizing:border-box!important;
+}
+.top-tools-v26 #prayerRiver.prayer26 .prayer-count span{
+  display:block!important;
+  margin:0!important;
+  color:rgba(255,250,240,.58)!important;
+  font-size:5.6px!important;
+  font-weight:850!important;
+  line-height:1!important;
+  letter-spacing:.10em!important;
+  text-transform:uppercase!important;
+  white-space:nowrap!important;
+}
+.top-tools-v26 #prayerRiver.prayer26 .prayer-locate{
+  grid-column:2!important;
+  grid-row:2!important;
+  align-self:stretch!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  width:100%!important;
+  min-width:0!important;
+  height:46px!important;
+  min-height:46px!important;
+  margin:0!important;
+  padding:0 10px!important;
+  border:0!important;
+  border-left:1px solid rgba(255,255,255,.11)!important;
+  border-top:1px solid rgba(255,255,255,.10)!important;
+  background:transparent!important;
+  color:#f2e4bd!important;
+  font-size:7.6px!important;
+  font-weight:800!important;
+  line-height:1.1!important;
+  text-align:left!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  cursor:pointer!important;
+  touch-action:manipulation!important;
+  box-sizing:border-box!important;
+}
+
+/* landscape tablets stay side-by-side */
+@media (min-width:900px) and (max-width:1180px){
+  .top-tools-cluster.top-tools-v26{
+    width:calc(100% - 28px)!important;
+    max-width:940px!important;
+    grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)!important;
+    gap:9px!important;
+  }
+}
+
+/* portrait tablets + phones: stack with full readability */
+@media (max-width:899px){
+  .top-tools-cluster.top-tools-v26{
+    width:min(680px,calc(100% - 20px))!important;
+    max-width:680px!important;
+    margin:9px auto 14px!important;
+    grid-template-columns:1fr!important;
+    gap:8px!important;
+  }
+  .top-tools-v26 .top-tool-card{
+    height:102px!important;
+    min-height:102px!important;
+  }
+  .qa26-wrap,
+  #quranAudioPlayer.qa26-player,
+  .top-tools-v26 #prayerRiver.prayer26{
+    height:102px!important;
+    min-height:102px!important;
+  }
+  #quranAudioPlayer.qa26-player{
+    grid-template-rows:54px 48px!important;
+  }
+  .qa26-main{
+    grid-template-rows:54px!important;
+    height:54px!important;
+  }
+  .qa26-nav,
+  .qa26-now{height:54px!important}
+  .qa26-controls,
+  .qa26-field{height:48px!important;min-height:48px!important}
+  .top-tools-v26 #prayerRiver.prayer26 .prayer-inner{
+    height:102px!important;
+    min-height:102px!important;
+    grid-template-rows:58px 44px!important;
+  }
+  .top-tools-v26 #prayerRiver.prayer26 .prayer-current,
+  .top-tools-v26 #prayerRiver.prayer26 .prayer-next{height:58px!important}
+  .top-tools-v26 #prayerRiver.prayer26 .prayer-count,
+  .top-tools-v26 #prayerRiver.prayer26 .prayer-locate{
+    height:44px!important;
+    min-height:44px!important;
+  }
+}
+
+/* very small smartphones */
+@media (max-width:390px){
+  .top-tools-cluster.top-tools-v26{
+    width:calc(100% - 16px)!important;
+    gap:7px!important;
+  }
+  .qa26-controls{
+    grid-template-columns:minmax(0,1.03fr) 58px minmax(0,1.62fr)!important;
+  }
+  .qa26-field{
+    padding-left:6px!important;
+    padding-right:6px!important;
+  }
+  .qa26-field > span{font-size:6.2px!important}
+  .qa26-field select{
+    font-size:9.8px!important;
+    padding-right:16px!important;
+  }
+  .top-tools-v26 #prayerRiver.prayer26 .prayer-current b,
+  .top-tools-v26 #prayerRiver.prayer26 .prayer-next b{
+    font-size:16.5px!important;
+  }
+  .top-tools-v26 #prayerRiver.prayer26 .prayer-count{
+    font-size:15.5px!important;
+  }
+}
