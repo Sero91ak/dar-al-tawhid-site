@@ -33,8 +33,8 @@ export default {
     const asset = await env.ASSETS.fetch(request);
     const path = url.pathname;
     const kidsPath = path === "/test/kids" || path.startsWith("/test/kids/");
-    const bust = kidsPath
-      || /\/test\/(index\.html)?$/.test(path)
+    if (kidsPath) return asset;
+    const bust = /\/test\/(index\.html)?$/.test(path)
       || /dar-quran-player\.(js|css)$/.test(path)
       || path.endsWith("/test/version.json")
       || path.endsWith("/test/service-worker.js");

@@ -34,6 +34,7 @@
 
   if (typeof location === "undefined") return;
   if ((location.pathname || "").indexOf("/admin") === 0) return;
+  if (/^\/test\/kids(?:\/|$)/.test(location.pathname || "")) return;
 
   /* PUBLIC WEBSITE HARD GATE v1 */
   try {
@@ -55,7 +56,7 @@
     }
   } catch (__darGateErr) {}
 
-  var isTest = /\/test(?:\/|$)/.test(location.pathname || "");
+  var isTest = /^\/test(?:\/(?!kids(?:\/|$))|$)/.test(location.pathname || "");
   var VERSION_STATE_KEY = "dar_app_version_state_v1";
   var HADITH_GATE_ID = "dar-hadith-library-gate";
   var TAG_CLASS_RE = /(chip|chips|badge|pill|tag|tags|keyword|keywords)/i;
