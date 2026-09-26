@@ -1,13 +1,13 @@
 /* Test-only: replace emoji glyphs with themed noble 3D objects */
 (function(){
-  const VER="1036";
+  const VER="1037";
   const BASE="/test/assets/dar-3d-icons/";
   const BY_NAV={
     home:"home.png",ilm:"ilm.png",recent:"posts.png",feed:"posts.png",
     quran:"quran.png",more:"more.png",duas:"dua.png",dua:"dua.png","dua-cat":"dua.png",
     hadith:"hadith.png",scholars:"scholars.png",books:"library.png",book:"library.png",
     bibliothek:"library.png",topics:"library.png",topic:"library.png",
-    prayer:"prayer.png",jummah:"prayer.png",qibla:"qibla.png",zakat:"zakat.png",
+    prayer:"prayer.png",jummah:"jummah.png",qibla:"qibla.png",zakat:"zakat.png",
     ramadan:"ramadan.png",saved:"saved.png",settings:"settings.png",quiz:"quiz.png",
     calendar:"calendar.png",notifications:"bell.png",account:"lock.png",about:"scale.png",
     wasiyyah:"wasiyyah.png",widgets:"widgets.png","image-editor":"image.png",
