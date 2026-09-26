@@ -123,6 +123,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-tab-plop-smooth-2026-09-26",
+      "approvedBy": "user-explicit-tableiste-butterweich-plopp-wie-kids-apple-live",
+      "reason": "Nutzer: Tab-Leiste kalt/springt, bleibt leicht am alten Tab. Butterweich mit leichtem Plopp wie Kids/Apple, Test+iOS+Web. Kids unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-tab-same-size-landscape-portrait-2026-09-26",
       "approvedBy": "user-explicit-querformat-gleiche-groesse-wie-hochformat-ueberall-live",
       "reason": "Nutzer: Querformat muss dieselbe Tab-Leisten-Breite wie Hochformat haben; aktuell wird sie im Querformat groß. Überall live außer Kids.",

@@ -12341,8 +12341,7 @@ body.is-home-route .view-head h2.home-start-title,
   color:rgba(232,212,160,.92)!important;
   -webkit-text-fill-color:rgba(232,212,160,.92)!important;
   text-shadow:none!important;
-  filter:none!important;
-  transform:none!important;
+  /* transform owned by tab-plop */
   white-space:normal!important;
   overflow:visible!important;
   min-width:0!important;
@@ -22675,7 +22674,7 @@ function rememberIlmReturnRoute(route=currentRoute,scroll=window.scrollY||0){try
 function getIlmReturnRoute(){try{const saved=JSON.parse(sessionStorage.getItem("darIlmReturnRouteV1")||"null");if(saved&&saved.route&&saved.route.view&&saved.route.view!=="ilm")return saved}catch(e){}return {route:{view:"home",value:""},scroll:0}}
 function exitIlmChat(){const saved=getIlmReturnRoute();const target=saved.route||{view:"home",value:""};const y=Number(saved.scroll)||0;window.__restoreScrollY=y;navigate(target.view,target.value||"",{skipPush:true,noAnim:true});requestAnimationFrame(()=>requestAnimationFrame(()=>{try{window.DARScrollManager?.stableScrollTo?.(y,{force:true})}catch(e){window.scrollTo({top:y,behavior:"auto"})}}))}
 function navigateBottomNavTab(tab,swipeDir){if(!tab)return;closeTransientNavOverlays();if(tab==="home"){if(isExactBottomTabRoot("home")){scrollTabRootToTop("home");return}if(bottomNavTabForRoute(currentRoute)==="home"&&currentRoute.view!=="home"){clearQuranReturnState();clearNavStack();window.__restoreScrollY=0;navigateToTabRootReplace("home","");return}hardGoHome();return}const root=bottomTabRootRoute(tab);if(!root)return;if(tab==="quran"&&typeof resetQuranOverviewToStart==="function")resetQuranOverviewToStart();if(bottomNavTabForRoute(currentRoute)===tab){if(tab==="quran"){navigateToTabRootReplace(root.view,root.value);return}if(isExactBottomTabRoot(tab)){scrollTabRootToTop(tab);return}navigateToTabRootReplace(root.view,root.value);return}const performanceMode=document.documentElement.classList.contains("dar-test-performance-v1");if(!performanceMode){if(!swipeDir){const curIdx=bottomNavTabIndex(bottomNavTabForRoute(currentRoute));const nextIdx=bottomNavTabIndex(tab);if(nextIdx>curIdx)swipeDir="left";else if(nextIdx<curIdx)swipeDir="right"}if(swipeDir)window.__tabSwipeDir=swipeDir}else window.__tabSwipeDir=null;saveNavScroll(currentRoute);if(tab==="ilm")rememberIlmReturnRoute(currentRoute,window.scrollY||0);window.__restoreScrollY=getNavScroll(root);clearNavStack();navigate(root.view,root.value||"",{skipPush:true,noAnim:true})}
-function updateBottomNav(route){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const tab=btn.getAttribute("data-bottom-nav");const active=tab===bottomNavTabForRoute(route);btn.classList.toggle("active",active);if(active)btn.setAttribute("aria-current","page");else btn.removeAttribute("aria-current")});updateBottomNavPill();try{syncQuickAccessRail()}catch(e){}}
+function updateBottomNav(route){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const tab=btn.getAttribute("data-bottom-nav");const active=tab===bottomNavTabForRoute(route);btn.classList.toggle("active",active);if(active)btn.setAttribute("aria-current","page");else btn.removeAttribute("aria-current")});updateBottomNavPill();const activeBtn=document.querySelector("[data-bottom-nav].active");if(activeBtn)try{moveTabPlopPill(activeBtn,false)}catch(e){}try{syncQuickAccessRail()}catch(e){}}
 let postNavLastY=0;
 function updatePostNavVisibility(){
   const nav=$("bottomNav");
@@ -22692,7 +22691,10 @@ function updatePostNavVisibility(){
   postNavLastY=y;
 }
 function updateBottomNavPill(){const metrics=bottomNavMetrics();const active=document.querySelector("[data-bottom-nav].active");if(!metrics.length||!active)return;const tab=active.getAttribute("data-bottom-nav");const m=metrics.find(x=>x.tab===tab);if(m)setBottomNavPill(m.left,m.width,false)}
-function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{if(btn.dataset.bottomNavBound==="1")return;btn.dataset.bottomNavBound="1";const tab=btn.getAttribute("data-bottom-nav");if(tab==="more"){btn.classList.add("bottom-nav-more");bindNavLongPressTrigger(btn,"more");return}if(tab==="quran"){btn.classList.add("bottom-nav-quran");bindNavLongPressTrigger(btn,"quran");return}let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<380){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const t=btn.getAttribute("data-bottom-nav");try{btn.blur()}catch(e){}if(!t)return;navigateBottomNavTab(t)};const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",()=>btn.classList.add("is-pressed"),{passive:true});btn.addEventListener("pointerup",ev=>{pressOff();if(ev.cancelable)ev.preventDefault();run(ev,true)},{passive:false});btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.addEventListener("click",ev=>run(ev,false))})}
+function ensureTabPlopPill(){const nav=$("bottomNav");if(!nav)return null;let pill=nav.querySelector(".dar-tab-plop-pill");if(!pill){pill=document.createElement("span");pill.className="dar-tab-plop-pill";pill.setAttribute("aria-hidden","true");nav.insertBefore(pill,nav.firstChild)}return pill}
+function moveTabPlopPill(btn,plop){const nav=$("bottomNav");const pill=ensureTabPlopPill();if(!nav||!pill||!btn)return;const nr=nav.getBoundingClientRect(),br=btn.getBoundingClientRect();const x=Math.round(br.left-nr.left),w=Math.round(br.width);pill.style.setProperty("--tab-pill-x",x+"px");pill.style.width=w+"px";if(plop){pill.classList.remove("is-plopping");btn.classList.remove("is-plop");try{pill.offsetWidth}catch(e){}pill.classList.add("is-plopping");btn.classList.add("is-plop");clearTimeout(window.__darTabPlopT);window.__darTabPlopT=setTimeout(()=>{try{pill.classList.remove("is-plopping");btn.classList.remove("is-plop")}catch(e){}},420)}}
+function previewBottomNavTab(btn){if(!btn)return;document.querySelectorAll("[data-bottom-nav]").forEach(x=>{const on=x===btn;x.classList.toggle("active",on);if(on)x.setAttribute("aria-current","page");else x.removeAttribute("aria-current")});try{moveTabPlopPill(btn,true)}catch(e){}}
+function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{if(btn.dataset.bottomNavBound==="1")return;btn.dataset.bottomNavBound="1";const tab=btn.getAttribute("data-bottom-nav");if(tab==="more"){btn.classList.add("bottom-nav-more");bindNavLongPressTrigger(btn,"more")}else if(tab==="quran"){btn.classList.add("bottom-nav-quran");bindNavLongPressTrigger(btn,"quran")}const pressOn=()=>{btn.classList.add("is-pressed");previewBottomNavTab(btn)};const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",pressOn,{passive:true});btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);if(tab==="more"||tab==="quran"){btn.addEventListener("pointerup",pressOff,{passive:true});return}let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<380){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const t=btn.getAttribute("data-bottom-nav");try{btn.blur()}catch(e){}if(!t)return;navigateBottomNavTab(t)};btn.addEventListener("pointerup",ev=>{pressOff();if(ev.cancelable)ev.preventDefault();run(ev,true)},{passive:false});btn.addEventListener("click",ev=>run(ev,false))})}
 const navigateToPage=navigate;
 function renderPage(pageId,params={}){return navigate(pageId,params.value||"",params)}
 const saveScrollPosition=saveNavScroll;
@@ -35546,8 +35548,6 @@ html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn{
   overflow:visible!important;
   pointer-events:auto!important;
   box-shadow:none!important;border:0!important;
-  filter:none!important;
-  transform:none!important;
 }
 html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn > *,
 html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn > *{
@@ -35590,4 +35590,63 @@ html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn::before{
   html #appChromeDock #bottomNav.bottom-nav{width:calc(100% - 28px)!important;min-height:64px!important}
 }
 </style>
+
+<style id="dar-tab-plop-v1035">
+@property --tab-pill-x {syntax:"<length>";inherits:false;initial-value:0px;}
+html #bottomNav.bottom-nav,html.dar-ios-native-app #bottomNav.bottom-nav{overflow:visible!important}
+html #bottomNav.bottom-nav .dar-tab-plop-pill{
+  position:absolute;top:6px;bottom:6px;left:0;z-index:0;pointer-events:none;
+  width:64px;border-radius:999px;
+  background:linear-gradient(145deg,rgba(226,189,114,.24),rgba(115,201,193,.12));
+  box-shadow:inset 0 1px rgba(255,255,255,.1);
+  transform:translate3d(var(--tab-pill-x,0px),0,0);
+  transition:transform .38s cubic-bezier(.22,1.18,.36,1),width .38s cubic-bezier(.22,1.18,.36,1);
+  will-change:transform,width;
+}
+html #bottomNav.bottom-nav .dar-tab-plop-pill.is-plopping{
+  animation:darTabPillPlop .42s cubic-bezier(.22,1.45,.36,1);
+}
+@keyframes darTabPillPlop{
+  0%{filter:brightness(1);transform:translate3d(var(--tab-pill-x,0px),0,0) scale(.92)}
+  52%{filter:brightness(1.16);transform:translate3d(var(--tab-pill-x,0px),0,0) scale(1.05)}
+  100%{filter:brightness(1);transform:translate3d(var(--tab-pill-x,0px),0,0) scale(1)}
+}
+html #bottomNav.bottom-nav .bottom-nav-btn,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn{
+  transform:translateZ(0);
+  transition:transform .28s cubic-bezier(.22,1.35,.36,1),color .2s ease,filter .2s ease!important;
+  z-index:1;
+  background:transparent!important;
+}
+html #bottomNav.bottom-nav .bottom-nav-btn.active,
+html #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
+html #bottomNav.bottom-nav .bottom-nav-btn:active,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.active,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn:active{
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
+html #bottomNav.bottom-nav .bottom-nav-btn:active{
+  transform:scale(.92)!important;
+}
+html #bottomNav.bottom-nav .bottom-nav-btn.is-plop{
+  animation:darTabBtnPlop .4s cubic-bezier(.22,1.4,.36,1);
+}
+@keyframes darTabBtnPlop{
+  0%{transform:scale(.92)}
+  55%{transform:scale(1.06)}
+  100%{transform:scale(1)}
+}
+html #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon{
+  transform:translateY(-1px) scale(1.06);
+  transition:transform .32s cubic-bezier(.22,1.25,.36,1),filter .2s ease;
+}
+@media (prefers-reduced-motion:reduce){
+  html #bottomNav.bottom-nav .dar-tab-plop-pill,
+  html #bottomNav.bottom-nav .bottom-nav-btn{transition:none!important;animation:none!important}
+}
+</style>
+
 </html>
