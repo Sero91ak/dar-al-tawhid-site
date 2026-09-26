@@ -196,7 +196,7 @@ def _rule_person_metadata(rule):
         person_type="scholar"
     return category,person_type,gender
 
-def derive_master_entries_from_rules(rules):
+def derive_master_entries_from_rules(rules,origin:str="installed-rules",qa_status:str="installed-curated"):
     grouped={}
     for r in rules:
         canonical=str(r.get("canonical") or r.get("string_to_replace") or "").strip()
@@ -219,11 +219,11 @@ def derive_master_entries_from_rules(rules):
             "tts_language":"ar",
             "required_honorific_key":str(r.get("required_honorific_key","")),
             "voice_lock":str(r.get("voice_lock","")),
-            "qaStatus":"installed-curated",
+            "qaStatus":qa_status,
             "status":"verified",
             "autoUse":True,
-            "sourceIds":["installed_user_curated_rules"],
-            "origin":"installed-rules",
+            "sourceIds":["installed_user_curated_rules" if origin=="installed-rules" else "online_pronunciation_rules"],
+            "origin":origin,
         })
         if needle not in item["aliases"]:
             item["aliases"].append(needle)
@@ -234,13 +234,26 @@ def derive_master_entries_from_rules(rules):
 
 def build_master_library():
     derived=derive_master_entries_from_rules(
-        list((USER_OVERRIDE_DATA or {}).get("rules") or [])+BASE_RULES
+        list((USER_OVERRIDE_DATA or {}).get("rules") or [])+BASE_RULES,
+        origin="installed-rules",
+        qa_status="installed-curated",
     )
     installed=validate_master_library(INSTALLED_MASTER_LIB)
     online=validate_master_library(ONLINE_MASTER_LIB)
+    online_derived=derive_master_entries_from_rules(
+        ONLINE_RULES,
+        origin="online-rules",
+        qa_status="online-curated",
+    )
     merged={}
-    # Höchste Priorität zuerst: lokale/bestätigte Regeln > installierter Seed > Online-Seed.
-    for source,entries in (("installed-rules",derived),("installed-seed",installed),("online-master",online)):
+    # Höchste Priorität zuerst: lokale/bestätigte Regeln > installierter Seed >
+    # verifizierter Master-Seed > online synchronisierte geprüfte Aussprache-Regeln.
+    for source,entries in (
+        ("installed-rules",derived),
+        ("installed-seed",installed),
+        ("online-master",online),
+        ("online-rules",online_derived),
+    ):
         for e in entries:
             key=normalize_lookup(e.get("canonical",""))
             if not key:
