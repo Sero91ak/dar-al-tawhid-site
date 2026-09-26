@@ -42,7 +42,8 @@ say_status "DĀR Voice Studio wird eingerichtet …"
 # Neue Version zuerst vollständig in einen isolierten Staging-Ordner laden.
 # Die funktionierende Installation wird erst nach allen Prüfungen ersetzt.
 curl -fsSL "$RAW/voice-studio/local-engine.py?v=271" -o "$STAGE/local-engine.py"
-curl -fsSL "$RAW/voice-studio/index.html?v=271" -o "$STAGE/studio.html"
+curl -fsSL "$RAW/voice-studio/index.html?v=272" -o "$STAGE/studio.html"
+curl -fsSL "$RAW/voice-studio/content-studio.js?v=272" -o "$STAGE/content-studio.js"
 curl -fsSL "$RAW/data/pronunciation/pronunciation-rules.json?v=271" -o "$STAGE/pronunciation-rules.json"
 curl -fsSL "$RAW/data/pronunciation/voice-production-profile.json?v=271" -o "$STAGE/voice-production-profile.json"
 curl -fsSL "$RAW/data/pronunciation/islamic-master-library.json?v=271" -o "$STAGE/islamic-master-library.json"
@@ -51,7 +52,7 @@ curl -fsSL "$RAW/scripts/voice-studio/validate-v2.py?v=271" -o "$STAGE/validate-
 curl -fsSL "$RAW/watermark-my-logo-full.png?v=271" -o "$STAGE/watermark-my-logo-full.png" || true
 curl -fsSL "$RAW/app-icon-512.png?v=271" -o "$STAGE/app-icon-512.png" || true
 
-for required in local-engine.py studio.html pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for required in local-engine.py studio.html content-studio.js pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   if [ ! -s "$STAGE/$required" ]; then
     echo "FEHLER: Update-Datei fehlt oder ist leer: $required"
     exit 1
@@ -157,11 +158,11 @@ fi
 STAMP="$(date +%Y%m%d-%H%M%S)"
 BACKUP="$BACKUPS/$STAMP"
 mkdir -p "$BACKUP"
-for old in local-engine.py studio.html pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for old in local-engine.py studio.html content-studio.js pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   [ -f "$TARGET/$old" ] && cp "$TARGET/$old" "$BACKUP/$old" || true
 done
 
-for fresh in local-engine.py studio.html pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for fresh in local-engine.py studio.html content-studio.js pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   mv "$STAGE/$fresh" "$TARGET/$fresh"
 done
 for optional in watermark-my-logo-full.png app-icon-512.png; do
