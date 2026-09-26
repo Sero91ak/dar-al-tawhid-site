@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import ast, json, re, sys
+import ast, json, re, sys, shutil, subprocess
 from pathlib import Path
 
 ARABIC_RE=re.compile(r"[\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff]")
@@ -306,6 +306,37 @@ def main():
     masters=[r for r in rules if r.get("voice_lock")=="MASTER"]
     if len(masters)<20: fail(f"too few MASTER pronunciation variants: {len(masters)}")
 
+    root=Path(__file__).resolve().parents[2]
+    engine_dir=Path(engine_path).resolve().parent
+    repo_studio=root/"voice-studio/content-studio.js"
+    staged_studio=engine_dir/"content-studio.js"
+    studio_js=staged_studio if staged_studio.exists() else repo_studio
+    if not studio_js.exists():
+        fail("content-studio.js missing next to local engine or in repository")
+    studio_source=studio_js.read_text(encoding="utf-8")
+    for required in ("effectiveKind()","effectiveTarget()","quizDraft","gameDraft","checkpointPackage","productionPhase","generateCover({internal:true})","sendPush:effectiveTarget()===\"kids\""):
+        if required not in studio_source: fail("content studio workflow marker missing: "+required)
+
+    integration_paths=[]
+    kids_admin_js=root/"cloudflare/kids-content-admin.js"
+    kids_feed_js=root/"test/kids/content-studio-feed.js"
+    if kids_admin_js.exists() and kids_feed_js.exists():
+        admin_source=kids_admin_js.read_text(encoding="utf-8")
+        feed_source=kids_feed_js.read_text(encoding="utf-8")
+        for required in ("normalizeQuiz","normalizeGame","normalizeProduction","test-published","live-published","genau eine richtige Antwort nötig"):
+            if required not in admin_source: fail("kids content server marker missing: "+required)
+        for required in ("studioNewSection","openDeepLink","data-studio-content","renderQuiz","renderGame","studio-audio"):
+            if required not in feed_source: fail("kids content feed marker missing: "+required)
+        integration_paths.extend((kids_admin_js,kids_feed_js))
+
+    node=shutil.which("node")
+    if node:
+        for path in (studio_js,*integration_paths):
+            check=subprocess.run([node,"--check",str(path)],capture_output=True,text=True)
+            if check.returncode!=0:
+                try: label=path.relative_to(root)
+                except ValueError: label=path.name
+                fail(f"JavaScript syntax error in {label}: {check.stderr.strip()}")
     print(json.dumps({
         "ok":True,
         "rules":len(rules),
@@ -322,7 +353,8 @@ def main():
         "pronunciationLearning":True,
         "masterLibraryEntries":len(master_entries),
         "masterProphets":len(prophet_entries),
-        "profileSchema":prof.get("schemaVersion")
+        "profileSchema":prof.get("schemaVersion"),
+        "contentStudioValidation":True
     },ensure_ascii=False))
 
 if __name__=="__main__":

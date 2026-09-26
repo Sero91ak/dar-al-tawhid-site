@@ -1,6 +1,6 @@
 {
   "version": "2.7.2",
-  "updatedAt": "2026-09-26T19:16:00+02:00",
+  "updatedAt": "2026-09-26T19:35:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
@@ -216,7 +216,11 @@
     "sourceOfTruthCountRecorded": true,
     "antiTwentyPercentStallGuard": true,
     "dynamicSpeechTokenCeiling": true,
-    "supervisedWorkerWatchdog": true
+    "supervisedWorkerWatchdog": true,
+    "contentStudioValidation": true,
+    "contentStudioJavaScriptSyntaxValidation": true,
+    "contentStudioServerPublishValidation": true,
+    "contentStudioMacPackagingValidation": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -268,5 +272,22 @@
     "hardSegmentWatchdog": true,
     "stuckWorkerKillAndRestart": true,
     "completedSegmentProgress": true
+  },
+  "contentStudio": {
+    "enabled": true,
+    "lanes": [
+      "kids-story",
+      "kids-quiz",
+      "kids-game",
+      "ios-content"
+    ],
+    "structuredQuizEditor": true,
+    "structuredGameEditor": true,
+    "parallelVoiceAndCoverPreparation": true,
+    "persistentProductionCheckpoints": true,
+    "stagingBeforeLive": true,
+    "kidsProfileAwareFeed": true,
+    "deepLinkReady": true,
+    "macInstallerPackagesContentStudio": true
   }
 }
