@@ -382,6 +382,7 @@ linear-gradient(180deg,#356987 0%,#638f91 50%,#c28d61 100%)}
 input[type=range]{width:100%;accent-color:var(--gold)}
 
 .bottom-nav{
+  pointer-events:auto;isolation:isolate;touch-action:manipulation;
   position:fixed;z-index:30;left:50%;transform:translateX(-50%);bottom:max(8px,env(safe-area-inset-bottom));
   width:min(calc(100% - 20px),740px);display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:7px;
   background:rgba(5,17,27,.88);border:1px solid rgba(255,255,255,.11);border-radius:26px;
@@ -2126,11 +2127,9 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
   0%,100%{filter:drop-shadow(0 3px 8px rgba(8,24,36,.35)) brightness(1)}
   50%{filter:drop-shadow(0 0 16px rgba(255,220,140,.95)) brightness(1.18)}
 }
-.choice:active,.resume:active,.nav-btn:active,.daily-step:active,.daily-start:active,
-.story-feature:active,.story-row:active,.surah-card:active,.verse-card:active,
-.quran-action:active,.close-btn:active,.quiz-answer:active,.dua-actions button:active,
-.kid-pop{animation:kidPop .34s cubic-bezier(.2,.85,.2,1)}
-@keyframes kidPop{0%{transform:scale(1)}42%{transform:scale(1.06)}100%{transform:scale(1)}}
+.nav-btn:active,.nav-btn.kid-pop{animation:kidLift .32s cubic-bezier(.2,.8,.2,1)}
+html.kids-tab-hit-lock .view,html.kids-tab-hit-lock .view *{pointer-events:none!important}
+html.kids-tab-hit-lock .bottom-nav,html.kids-tab-hit-lock .bottom-nav *{pointer-events:auto!important}
 .quiz-scene-symbol,.knowledge-symbol .kid-icon,.dua-scene-symbol,.quiz-scene:after{display:none!important}
 
  .sky-sun,.sky-nightmoon{display:none!important}
@@ -2148,14 +2147,6 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
   box-shadow:0 0 22px rgba(255,220,150,.5);
 }
 #view-today .wm-dar-svg{width:min(100%,560px)!important;height:78px!important}
-#view-stories.view.active{animation:openSide .62s cubic-bezier(.16,1,.3,1)}
-#view-quran.view.active{animation:openRise .62s cubic-bezier(.16,1,.3,1)}
-#view-parents.view.active{animation:openCalm .62s cubic-bezier(.16,1,.3,1)}
-#view-today.view.active{animation:openHome .62s cubic-bezier(.16,1,.3,1)}
-@keyframes openHome{from{opacity:.2;transform:translateY(16px) scale(.985)}to{opacity:1;transform:none}}
-@keyframes openSide{from{opacity:.15;transform:translateX(28px)}to{opacity:1;transform:none}}
-@keyframes openRise{from{opacity:.15;transform:translateY(26px)}to{opacity:1;transform:none}}
-@keyframes openCalm{from{opacity:.2;filter:blur(2px)}to{opacity:1;filter:none}}
 .modal.open .modal-shell{animation:openSheet .46s cubic-bezier(.16,1,.3,1)}
 @keyframes openSheet{from{opacity:.2;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
 .nav-btn.kid-pop{animation:kidLift .32s cubic-bezier(.2,.8,.2,1)}
@@ -3143,16 +3134,14 @@ function launchNextDailyStep(){
 function showTab(name){
   document.querySelectorAll(".view").forEach(function(v){v.classList.remove("active")});
   var view=document.getElementById("view-"+name);
-  if(view){
-    view.classList.add("active");
-    view.style.animation="none";
-    void view.offsetWidth;
-    view.style.animation="";
-  }
+  if(view) view.classList.add("active");
   document.querySelectorAll(".nav-btn").forEach(function(b){b.classList.toggle("active",b.dataset.target===name)});
+  document.documentElement.classList.add("kids-tab-hit-lock");
+  clearTimeout(window.__kidsTabHitLockT);
+  window.__kidsTabHitLockT=setTimeout(function(){document.documentElement.classList.remove("kids-tab-hit-lock")},400);
   window.scrollTo({top:0,behavior:"smooth"});
 }
-document.querySelectorAll(".nav-btn").forEach(function(b){b.addEventListener("click",function(){showTab(b.dataset.target)})});
+document.querySelectorAll(".nav-btn").forEach(function(b){b.addEventListener("click",function(ev){if(ev){ev.preventDefault();ev.stopPropagation()}showTab(b.dataset.target)})});
 document.querySelectorAll("[data-go]").forEach(function(b){
   b.addEventListener("click",function(){
     showTab(b.dataset.go);
@@ -4893,14 +4882,14 @@ fetchCatalog();
     });
   }
   document.addEventListener("pointerdown",function(ev){
-    var el=ev.target.closest&&ev.target.closest(".choice,.resume,.nav-btn,.daily-step,.daily-start,.story-feature,.story-row,.surah-card,.verse-card,.quran-action,.close-btn,.quiz-answer");
+    if(!(ev.target.closest&&ev.target.closest(".bottom-nav")))return;
+    var el=ev.target.closest(".nav-btn");
     if(!el)return;
+    ev.stopPropagation();
     el.classList.remove("kid-pop");
     void el.offsetWidth;
-    var fx="kid-pop";
-    if(el.classList.contains("nav-btn"))fx="kid-pop";
-    if(el.classList.contains("close-btn"))fx="kid-pop";
     el.classList.add("kid-pop");
+    el.addEventListener("animationend",function(){el.classList.remove("kid-pop")},{once:true});
   },true);
 })();
 </script>
