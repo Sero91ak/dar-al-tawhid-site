@@ -97,6 +97,30 @@ TVQuranTadabburCard(
 7. nur einen vollständig validierten Stand aktiv cachen,
 8. bei Netzwerk- oder Datenfehlern den letzten gültigen Cache behalten.
 
+## Datenprüfung vor jedem neuen Batch
+
+Nach jeder Änderung an `catalog.json`, `entries-index.json`, `entries.json` oder `entries-batch-*.json` muss der Tadabbur-Prüfer laufen:
+
+```bash
+python3 apple-tv/quran/tadabbur/tools/verify_tadabbur_catalog.py
+```
+
+Die vollständige Prüfanweisung steht hier:
+
+```text
+apple-tv/quran/tadabbur/VERIFY.md
+```
+
+Der Prüfer kontrolliert unter anderem:
+
+- Katalogzählung gegen Indexzählung,
+- Dateiliste im Katalog gegen Dateiliste im Index,
+- tatsächliche Eintragsanzahl pro Batch,
+- doppelte Referenzen,
+- Pflichtfelder,
+- Gesamtzahl `5102`, solange kein neuer geprüfter Batch registriert wurde,
+- letzten Referenzstand `114:6` im aktuellen Durchgang.
+
 ## Lookup-Regel
 
 Versreferenzen sind kanonisch:
@@ -175,6 +199,8 @@ Die App rendert ausschließlich geprüfte GitHub-Daten oder den festen Fallback.
 10. Letzter vollständiger Tadabbur-Cache bleibt nutzbar.
 11. Vers ohne geprüften Eintrag öffnen.
 12. Nur der feste Fallback erscheint.
+13. Prüfer ausführen: `python3 apple-tv/quran/tadabbur/tools/verify_tadabbur_catalog.py`.
+14. Ergebnis muss `TADABBUR VERIFY OK` sein.
 
 ## Schlussregel
 
