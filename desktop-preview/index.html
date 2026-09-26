@@ -2254,7 +2254,7 @@ button,input,select{font:inherit}
 }
 
 </style>
-<link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=281">
+<link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=282">
 </head>
 <body class="desktop-overhaul-v18">
 <header class="site-header">
@@ -2944,15 +2944,13 @@ button,input,select{font:inherit}
  }
  function loadDesktopContent(){
   return Promise.all([
-   fetchJsonSafe("/data/desktop-posts-index.json").catch(function(){
-    return fetchJsonSafe("/desktop-preview/posts.json").then(function(rows){return{posts:Array.isArray(rows)?rows:[]}}).catch(function(){
+   fetchJsonSafe("/desktop-preview/posts.json").then(function(rows){return{posts:Array.isArray(rows)?rows:[]}}).catch(function(){
      return fetchJsonSafe("/content/posts/posts-index.json").then(function(idx){
       return{posts:(idx.files||[]).slice().reverse().map(function(x){
        var id=String(x.name||"").replace(/\.md$/,""),slug=id.replace(/^\d{4}-\d{2}-\d{2}-/,"");
        return{id:id,file:x.name,title:slug.replace(/-/g," "),category:(slug.split("-")[0]||"Beitrag"),topic:"",speaker:"",work:"",reference:"",body:"",links:[]}
       })}
      })
-    })
    }),
    fetchJsonSafe("/data/books-library.json").catch(function(){return{books:[]}}),
    fetchJsonSafe("/data/library-publications.json").catch(function(){return{publications:[]}}),
@@ -3161,7 +3159,7 @@ button,input,select{font:inherit}
 
  renders.quellen=function(){
   return realIntro("QUELLEN","Direktnachweise und verwendete Werke","Jede Aussage, ihre Quellenangabe und der Direktnachweis bleiben unmittelbar zusammen. Nichts wird gekürzt.")+
-   '<section class="section reveal"><div class="inline-reader-list sources-inline-readers">'+realData.posts.map(function(x){return inlinePostDisclosure(x,false)}).join("")+'</div></section>'+footer()
+   '<section class="section reveal"><div id="sourcesFullList" class="inline-reader-list sources-inline-readers"><div class="loading-line">Aussagen und Direktnachweise werden geladen …</div></div></section>'+footer()
  };
 
  renders.suche=function(){
@@ -3223,6 +3221,39 @@ button,input,select{font:inherit}
     sourceHtml(p)+
     '<a class="text-link desktop-link inline-reader-detail" data-page="beitrag" href="'+detailUrl+'">Beitrag als Einzelseite öffnen →</a>'+
    '</div></details>'
+ }
+ function loadFullPostRows(){
+  if(realData.posts&&realData.posts.length)return Promise.resolve(realData.posts);
+  return fetchJsonSafe("/desktop-preview/posts.json").then(function(rows){
+   realData.posts=Array.isArray(rows)?rows:[];
+   return realData.posts
+  }).catch(function(){
+   return fetchJsonSafe("/content/posts/posts-index.json").then(function(idx){
+    var files=(idx&&idx.files)||[];
+    return Promise.all(files.slice().reverse().map(function(x){
+     var file=String(x.name||"");
+     return fetch("/content/posts/"+file,{cache:"force-cache"}).then(function(r){
+      if(!r.ok)throw new Error(file+" "+r.status);
+      return r.text()
+     }).then(function(md){
+      var parsed=parsePostMarkdown(md,file);
+      return parsed||null
+     }).catch(function(){return null})
+    })).then(function(rows){
+     realData.posts=rows.filter(Boolean);
+     return realData.posts
+    })
+   })
+  })
+ }
+ initSourcesReal=function(){
+  var out=document.getElementById("sourcesFullList");if(!out)return;
+  out.innerHTML='<div class="loading-line">Aussagen und Direktnachweise werden geladen …</div>';
+  loadFullPostRows().then(function(rows){
+   out.innerHTML=rows.length?rows.map(function(x){return inlinePostDisclosure(x,false)}).join(""):'<div class="loading-line">Derzeit konnten keine Aussagen geladen werden.</div>'
+  }).catch(function(){
+   out.innerHTML='<div class="loading-line">Die Aussagen konnten gerade nicht geladen werden. Bitte die Seite erneut öffnen.</div>'
+  })
  }
  function postSourceMini(p){
   var link=(p.links||[])[0];
@@ -3494,6 +3525,7 @@ button,input,select{font:inherit}
  function initPostBrowser(){
   var input=document.getElementById("postSmartSearch"),listEl=document.getElementById("postBrowseList"),pager=document.getElementById("postPagination"),count=document.getElementById("postBrowseCount"),status=document.getElementById("postSmartStatus");
   if(!input||!listEl)return;
+  if(!realData.posts.length){loadFullPostRows().then(function(){initPostBrowser()}).catch(function(){});return}
   var params=new URLSearchParams(location.search),cat=params.get("cat")||"",page=Math.max(1,Number(params.get("pg")||1)),pageSize=10;
   function filtered(){
    var term=input.value.trim();
