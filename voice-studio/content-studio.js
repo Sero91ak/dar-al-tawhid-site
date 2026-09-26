@@ -351,8 +351,8 @@ function renderCover(url){
   box.querySelector("img")?.remove();
   const img=document.createElement("img");img.src=url;img.alt="Cover Vorschau";box.prepend(img);
 }
-async function generateCover(){
-  if(busy)return;
+async function generateCover({internal=false}={}){
+  if(busy&&!internal)return;
   if(!workerSecret()){setStudioMessage("Admin-Verbindung fehlt. Unter „Admin-Verbindung“ Secret eintragen.","warn");return}
   const f=fields();
   if(!f.title&&!f.topic&&!f.text){setStudioMessage("Für ein Cover zuerst Titel oder Text eingeben.","warn");return}
@@ -368,22 +368,34 @@ async function generateCover(){
 }
 async function produce(){
   if(busy)return;
-  busy=true;setStudioMessage("Produktion läuft: Stimme und Cover werden parallel vorbereitet …","warn");
+  captureStructuredEditor();
+  busy=true;setProductionPhase("producing");setStudioMessage("Produktion läuft parallel: Stimme, Cover und Paket werden vorbereitet …","warn");
   try{
+    const needsVoice=!!q("csModeListen")?.checked;
+    const script=voiceScript();
+    if((studioKind==="story"||studioKind==="ios")&&!String(q("text")?.value||"").trim())throw Error("Text fehlt.");
+    if(studioKind==="quiz"&&!quizDraft.some(x=>String(x.question||"").trim()))throw Error("Mindestens eine Quiz-Frage fehlt.");
+    if(studioKind==="game"&&!String(gameDraft.instructions||"").trim())throw Error("Spielanleitung fehlt.");
+    if(needsVoice&&!script)throw Error("Sprechtext fehlt.");
+    if((studioKind==="quiz"||studioKind==="game")&&script)q("text").value=script;
     const tasks=[];
-    const text=String(q("text")?.value||"").trim();
-    if(!text)throw Error("Geschichtentext fehlt.");
-    if(!lastAudio||lastGeneratedText!==text)tasks.push(generate());
-    if(!coverFile&&!coverRemoteUrl&&!coverAsset&&workerSecret())tasks.push(generateCover());
+    if(needsVoice&&(!lastAudio||lastGeneratedText!==script))tasks.push(generate());
+    if(!coverFile&&!coverRemoteUrl&&!coverAsset&&workerSecret())tasks.push(generateCover({internal:true}));
     await Promise.all(tasks);
-    setStudioMessage("Produktion vorbereitet. Audio anhören, Aussprache bestätigen und dann Test veröffentlichen.","good");
-  }catch(e){setStudioMessage(e.message||String(e),"bad")}
-  finally{busy=false;refreshQa()}
+    if(workerSecret()&&!coverAsset?.url&&(coverFile||coverRemoteUrl))await uploadCover();
+    setProductionPhase(needsVoice&&!qaConfirmed?"awaiting-qa":"ready");
+    if(workerSecret())await checkpointPackage(productionPhase);
+    setStudioMessage(needsVoice&&!qaConfirmed?"Audio und Cover vorbereitet. Aussprache anhören und bestätigen; danach ist Test-Publish frei.":"Produktionspaket ist bereit für den Test-Publish.","good");
+  }catch(e){
+    setProductionPhase("error",e.message||String(e));
+    if(workerSecret()&&contentId){try{await checkpointPackage("error",productionError)}catch{}}
+    setStudioMessage(e.message||String(e),"bad");
+  }finally{busy=false;refreshQa()}
 }
 async function ensureId(){
   if(contentId)return contentId;
   if(!workerSecret())throw Error("Admin-Verbindung fehlt.");
-  const d=await adminApi("/api/admin/kids-content/id",{method:"POST",body:JSON.stringify({kind:studioKind,title:q("csTitle")?.value||""})});
+  const d=await adminApi("/api/admin/kids-content/id",{method:"POST",body:JSON.stringify({kind:effectiveKind(),title:q("csTitle")?.value||""})});
   contentId=d.id||"";if(!contentId)throw Error("Content-ID konnte nicht erstellt werden.");
   return contentId;
 }
@@ -432,13 +444,20 @@ async function prepareAssets(){
   if(f.modes.listen&&!audioAsset?.url)jobs.push(uploadAudio());
   await Promise.all(jobs);
 }
+async function checkpointPackage(phase=productionPhase,error=""){
+  await ensureId();
+  productionPhase=phase||productionPhase;productionError=error||"";
+  const payload={...fields(),id:contentId,staging:true,status:"draft",production:{phase:productionPhase,error:productionError}};
+  const d=await adminApi("/api/admin/kids-content/save",{method:"POST",body:JSON.stringify(payload)});
+  savedRevision=d.item?.revision||savedRevision;return d.item;
+}
 async function saveDraftRemote(withAssets){
   if(busy)return null;
   busy=true;contentStatus="draft";renderStatus();
   try{
     await ensureId();
     if(withAssets)await prepareAssets();
-    const payload={...fields(),id:contentId,staging:true,status:"draft"};
+    const payload={...fields(),id:contentId,staging:true,status:"draft",production:{phase:productionPhase,error:productionError}};
     const d=await adminApi("/api/admin/kids-content/save",{method:"POST",body:JSON.stringify(payload)});
     savedRevision=d.item?.revision||savedRevision;contentStatus=d.item?.status||"draft";renderStatus();
     setStudioMessage("Entwurf sicher im Staging gespeichert.","good");await loadLibrary();return d.item;
@@ -451,12 +470,13 @@ async function publishTest(){
   try{
     await ensureId();
     await prepareAssets();
-    const payload={...fields(),id:contentId,staging:true,status:"review"};
+    setProductionPhase("ready");
+    const payload={...fields(),id:contentId,staging:true,status:"review",production:{phase:"ready",error:""}};
     const saved=await adminApi("/api/admin/kids-content/save",{method:"POST",body:JSON.stringify(payload)});
     savedRevision=saved.item?.revision||0;
     const pub=await adminApi("/api/admin/kids-content/publish",{method:"POST",body:JSON.stringify({id:contentId,live:false,sendPush:false})});
-    contentStatus="published";stagingPublished=true;renderStatus();
-    setStudioMessage("In Test-Kids veröffentlicht. Kein Besucher-Push wurde gesendet.","good");await loadLibrary();
+    contentStatus="published";stagingPublished=true;setProductionPhase("test-published");renderStatus();
+    setStudioMessage(effectiveTarget()==="ios"?"iOS-Paket im Staging veröffentlicht. Kein Besucher-Push wurde gesendet.":"In Test-Kids veröffentlicht. Kein Besucher-Push wurde gesendet.","good");await loadLibrary();
     return pub;
   }catch(e){contentStatus="draft";renderStatus();setStudioMessage(e.message||String(e),"bad")}
   finally{busy=false;refreshQa()}
@@ -467,7 +487,7 @@ async function publishLive(){
   busy=true;renderStatus();
   try{
     const pub=await adminApi("/api/admin/kids-content/publish",{method:"POST",body:JSON.stringify({id:contentId,live:true,sendPush:true,triggerDeploy:true})});
-    contentStatus="published";renderStatus();
+    contentStatus="published";setProductionPhase("live-published");renderStatus();
     const p=pub.push||{};
     setStudioMessage(p.sent?"Live veröffentlicht · Kids-Push gesendet.":"Live veröffentlicht · Push: "+(p.reason||"kein Empfänger"),p.sent?"good":"warn");
   }catch(e){setStudioMessage(e.message||String(e),"bad")}
