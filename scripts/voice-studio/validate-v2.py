@@ -122,7 +122,7 @@ def main():
     modes=set((prof.get("prosody") or {}).get("modes",{}))
     missing=required_modes-modes
     if missing: fail("missing prosody modes: "+", ".join(sorted(missing)))
-    if int(prof.get("schemaVersion",0))<7: fail("voice profile schemaVersion must be >=7")
+    if int(prof.get("schemaVersion",0))<8: fail("voice profile schemaVersion must be >=8")
     qa=prof.get("qualityAssurance") or {}
     if int(qa.get("maxRenderAttempts",0))<2: fail("QA maxRenderAttempts must be >=2")
     if int(qa.get("maxInternalSilenceMsWithPunctuation",0))<900: fail("QA punctuation-pause guard missing")
@@ -182,6 +182,19 @@ def main():
     if not bool(qa.get("pronunciationLearningRegression")): fail("pronunciation learning regression QA missing")
     if not bool(qa.get("onlineRuleValidation")): fail("online rule validation QA missing")
     if not bool(qa.get("learnedRuleRequiresConfirmedAudio")): fail("learned rule confirmed-audio QA missing")
+    if not bool(qa.get("boundedGenerationRegression")): fail("bounded generation QA missing")
+    if not bool(qa.get("mlxFallbackRegression")): fail("MLX fallback QA missing")
+    if not bool(qa.get("backendIdentityVisible")): fail("backend identity QA missing")
+
+    renderer=prof.get("productionRenderer") or {}
+    if renderer.get("framework")!="mlx-audio": fail("MLX production renderer policy missing")
+    if renderer.get("primaryAppleSilicon")!="mlx-community/chatterbox-multilingual-v3": fail("wrong MLX model policy")
+    if int(renderer.get("germanChunkMaxChars",0))>140: fail("German chunk ceiling too high")
+    if int(renderer.get("arabicChunkMaxChars",0))>90: fail("Arabic chunk ceiling too high")
+    if int(renderer.get("germanMaxNewTokens",0))>360: fail("German token ceiling too high")
+    if int(renderer.get("arabicMaxNewTokens",0))>300: fail("Arabic token ceiling too high")
+    for flag in ("voiceCloning","boundedGeneration","tokenCeilingRescue","preservePronunciationRules","preserveConfirmedAudioLocks","preserveHonorificPolicy","preserveTechnicalQa","preserveAntiStutterQa","preserveAntiHoldQa"):
+        if not renderer.get(flag): fail("production renderer policy missing: "+flag)
 
     learning=prof.get("pronunciationLearning") or {}
     required_learning_flags=(
@@ -226,9 +239,9 @@ def main():
     except SyntaxError as e:
         fail(f"engine syntax error: {e}")
     functions={n.name for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))}
-    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","discard_pending_audio_locks","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav","source_has_honorific","rebuild_runtime_rules","pronunciation_search","sync_online_pronunciation_library","create_learning_preview","confirm_learning_preview","save_user_override","learning_state","online_sync_is_stale","refresh_online_library_if_stale","file_signature","render_cache_key","load_render_cache","save_render_cache","cleanup_render_cache","reference_for_language","prepare_reference_if_needed"}:
+    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","discard_pending_audio_locks","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav","source_has_honorific","rebuild_runtime_rules","pronunciation_search","sync_online_pronunciation_library","create_learning_preview","confirm_learning_preview","save_user_override","learning_state","online_sync_is_stale","refresh_online_library_if_stale","file_signature","render_cache_key","load_render_cache","save_render_cache","cleanup_render_cache","reference_for_language","prepare_reference_if_needed","generation_token_budget","load_mlx_model","load_production_model","render_with_mlx"}:
         if required not in functions: fail(f"engine missing production function: {required}")
-    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","/confirm-core-audio","audio_lock_pending","session_audio_locks","required_honorific_key","honorificPolicyEnabled","/learning/search","/learning/sync","/learning/preview","/learning/confirm","USER_OVERRIDES_FILE","ONLINE_LIBRARY_CACHE","CONFIRMED_WAV","autoSyncHours","AUDIO_LOCK_STATE_LOCK=threading.RLock()","PENDING_AUDIO_LOCKS={}","PENDING_AUDIO_RENDER_ID=\"\"","MODEL_CONDITIONAL_CACHE={}","RENDER_CACHE_DIR","persistent-conditionals+segment-cache-v2"}:
+    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","/confirm-core-audio","audio_lock_pending","session_audio_locks","required_honorific_key","honorificPolicyEnabled","/learning/search","/learning/sync","/learning/preview","/learning/confirm","USER_OVERRIDES_FILE","ONLINE_LIBRARY_CACHE","CONFIRMED_WAV","autoSyncHours","AUDIO_LOCK_STATE_LOCK=threading.RLock()","PENDING_AUDIO_LOCKS={}","PENDING_AUDIO_RENDER_ID=\"\"","MODEL_CONDITIONAL_CACHE={}","RENDER_CACHE_DIR","persistent-conditionals+segment-cache-v2","mlx-community/chatterbox-multilingual-v3","GenerationTokenLimitReached","max_new_tokens","production_backend"}:
         if marker not in engine_source: fail(f"engine missing QA/audio-lock marker: {marker}")
     state_pos=engine_source.find("AUDIO_LOCK_STATE_LOCK=threading.RLock()")
     pending_fn_pos=engine_source.find("def pending_audio_lock_keys")
