@@ -2254,7 +2254,7 @@ button,input,select{font:inherit}
 }
 
 </style>
-<link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=210">
+<link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=220">
 </head>
 <body>
 <header class="site-header">
@@ -2286,6 +2286,8 @@ button,input,select{font:inherit}
   </div>
  </div>
 </section>
+
+<section id="prayerRiver" class="prayer-river prayer-dock-river" aria-label="Gebetszeiten"><div class="prayer-inner"><div class="prayer-current"><div class="prayer-label">Aktuelle Gebetszeit</div><b id="prCurrent">—</b><small id="prLocation">Standort noch nicht gewählt</small></div><div class="prayer-next"><div class="prayer-label">Nächstes Gebet</div><b id="prNext">—</b><small id="prNextTime">—</small></div><div id="prCountdown" class="prayer-count">--:--:--<span>bis zum nächsten Gebet</span></div><button id="prLocate" class="prayer-locate" type="button">Standort verwenden</button></div></section>
 
 <div class="player-wrap">
  <section id="quranAudioPlayer" class="quran-player qa-player-v20" aria-label="Qurʾān-Player">
@@ -2346,7 +2348,7 @@ button,input,select{font:inherit}
  function start(){
   return intro("start")+
   '<section class="hero reveal"><div><div class="hero-ar" dir="rtl">ٱهْدِنَا ٱلصِّرَاطَ ٱلْمُسْتَقِيمَ</div><div class="hero-trans">„Leite uns den geraden Weg.“</div><span class="hero-ref">Qurʾān · al-Fātiḥah 1:6</span></div><div class="hero-note">Beginne mit dem Qurʾān, lies einen Beitrag oder öffne direkt die Bibliothek. Der Qurʾān-Player bleibt beim Wechsel zwischen den Bereichen aktiv.</div></section>'+
-  '<section id="prayerRiver" class="prayer-river reveal"><div class="prayer-inner"><div class="prayer-current"><div class="prayer-label">Aktuelle Gebetszeit</div><b id="prCurrent">—</b><small id="prLocation">Standort noch nicht gewählt</small></div><div class="prayer-next"><div class="prayer-label">Nächstes Gebet</div><b id="prNext">—</b><small id="prNextTime">—</small></div><div id="prCountdown" class="prayer-count">--:--:--<span>bis zum nächsten Gebet</span></div><button id="prLocate" class="prayer-locate" type="button">Standort verwenden</button></div></section>'+
+  ''+
   '<section class="section parchment reveal"><div class="section-head"><h2>Im Fokus</h2><a class="text-link desktop-link" href="'+p("beitraege")+'" data-page="beitraege">Alle Beiträge</a></div><div class="grid-12"><div class="feature">'+
   '<a class="rule-card desktop-link" href="'+p("beitrag","id=ibn-sirin")+'" data-page="beitrag"><div class="kicker">ĀṮĀR · QUELLENMETHODIK</div><h3>Dieses Wissen ist Dīn</h3><p>Ibn Sīrīn über die Sorgfalt, von wem religiöses Wissen genommen wird.</p></a>'+
   '<a class="rule-card desktop-link" href="'+p("quran")+'" data-page="quran"><div class="kicker">QURʾĀN</div><h3>In der Buchansicht weiterlesen</h3><p>Arabisch und Deutsch direkt auf aufgeschlagenen Seiten lesen.</p></a></div><div class="side-stack">'+
@@ -2415,7 +2417,7 @@ button,input,select{font:inherit}
  }
  function gebetszeiten(){
   return intro("gebetszeiten")+
-  '<section id="prayerRiver" class="prayer-river reveal"><div class="prayer-inner"><div class="prayer-current"><div class="prayer-label">Aktuelle Gebetszeit</div><b id="prCurrent">—</b><small id="prLocation">Standort noch nicht gewählt</small></div><div class="prayer-next"><div class="prayer-label">Nächstes Gebet</div><b id="prNext">—</b><small id="prNextTime">—</small></div><div id="prCountdown" class="prayer-count">--:--:--<span>bis zum nächsten Gebet</span></div><button id="prLocate" class="prayer-locate" type="button">Standort verwenden</button></div></section>'+
+  ''+
   '<section class="section reveal"><div id="fullPrayerGrid" class="prayer-grid"><div class="prayer"><span>Fajr</span><b>--:--</b></div><div class="prayer"><span>Sonnenaufgang</span><b>--:--</b></div><div class="prayer"><span>Ẓuhr</span><b>--:--</b></div><div class="prayer"><span>ʿAṣr</span><b>--:--</b></div><div class="prayer"><span>Maghrib</span><b>--:--</b></div><div class="prayer"><span>ʿIshāʾ</span><b>--:--</b></div></div></section>'+footer()
  }
  function mehr(){
@@ -2466,7 +2468,7 @@ button,input,select{font:inherit}
   document.querySelectorAll("#mainNav [data-page]").forEach(function(a){a.classList.toggle("active",a.getAttribute("data-page")===key)});
   initReveal();
   if(key==="quran")initBook();
-  if(key==="start"||key==="gebetszeiten")initPrayerTicker();
+  if(document.getElementById("prayerRiver"))initPrayerTicker();
   if(key==="zakat")initZakat();
   if(key==="einstellungen")initSettings();
   initRealPage(key);
@@ -2993,7 +2995,7 @@ button,input,select{font:inherit}
   var posts=realData.posts.slice(0,4),duas=realData.duas.slice(0,2),pubs=realData.publications.slice(0,4),props=realData.prophets.slice(0,5);
   return realIntro("DĀR AL TAWḤĪD","Qurʾān, Sunnah und überliefertes Wissen.","Lies den Qurʾān, höre Rezitation, öffne geprüfte Beiträge, Duʿāʾ, Werke und Quellen.")+
    '<section class="hero reveal"><div><div class="hero-ar" dir="rtl">ٱهْدِنَا ٱلصِّرَاطَ ٱلْمُسْتَقِيمَ</div><div class="hero-trans">„Leite uns den geraden Weg.“</div><span class="hero-ref">Qurʾān · al-Fātiḥah 1:6</span></div><div class="hero-note">Qurʾān lesen oder hören, Wissen nachschlagen und Quellen direkt öffnen.</div></section>'+
-   '<section id="prayerRiver" class="prayer-river reveal"><div class="prayer-inner"><div class="prayer-current"><div class="prayer-label">Aktuelle Gebetszeit</div><b id="prCurrent">—</b><small id="prLocation">Standort wählen</small></div><div class="prayer-next"><div class="prayer-label">Nächstes Gebet</div><b id="prNext">—</b><small id="prNextTime">—</small></div><div id="prCountdown" class="prayer-count">--:--:--<span>bis zum nächsten Gebet</span></div><button id="prLocate" class="prayer-locate" type="button">Standort verwenden</button></div></section>'+
+   ''+
    '<section class="section parchment reveal"><div class="section-head"><h2>Ausgewählte Beiträge</h2><a class="text-link desktop-link" data-page="beitraege" href="'+pUrl("beitraege")+'">Alle Beiträge</a></div><div class="two-reading-cols">'+posts.map(function(x){return '<a class="rule-card desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'"><div class="kicker">'+escBook(x.category||"Wissen")+'</div><h3>'+escBook(cleanTitle(x.title))+'</h3><p>'+escBook(x.speaker||x.work||"")+'</p></a>'}).join("")+'</div></section>'+
    '<section class="section reveal"><div class="section-head"><h2>Duʿāʾ</h2><a class="text-link desktop-link" data-page="dua" href="'+pUrl("dua")+'">Alle Duʿāʾ</a></div><div class="two-reading-cols">'+duas.map(function(d){return '<a class="dua-real desktop-link" data-page="dua" href="'+pUrl("dua","id="+encodeURIComponent(d.id))+'"><div class="eyebrow">'+escBook(d.category)+'</div><h3>'+escBook(d.title)+'</h3><div class="dua-ar" dir="rtl">'+escBook(d.arabic)+'</div><div class="real-source"><b>Quelle:</b> '+escBook(d.source)+'</div></a>'}).join("")+'</div></section>'+
    '<section class="section parchment reveal"><div class="section-head"><h2>Bibliothek</h2><a class="text-link desktop-link" data-page="bibliothek" href="'+pUrl("bibliothek")+'">Alle Werke</a></div><div class="real-cover-grid">'+pubs.map(function(b){return '<a class="real-cover desktop-link" data-page="werk" href="'+pUrl("werk","type=pub&id="+encodeURIComponent(b.id))+'"><div class="real-cover-visual">'+(b.coverUrl?'<img src="'+escBook(b.coverUrl)+'" alt="">':"")+'</div><h3>'+escBook(b.title)+'</h3><small>'+escBook(b.category||"Publikation")+(b.publishedAt?' · '+escBook(b.publishedAt):"")+'</small></a>'}).join("")+'</div></section>'+
@@ -3219,7 +3221,7 @@ button,input,select{font:inherit}
   var lead=posts[0],rest=posts.slice(1,4);
   return realIntro("DĀR AL TAWḤĪD","Qurʾān, Sunnah und überliefertes Wissen.","Lies den Qurʾān, höre Rezitation, öffne geprüfte Beiträge, Duʿāʾ, Werke und Quellen.")+
    '<section class="hero reveal"><div><div class="hero-ar" dir="rtl">ٱهْدِنَا ٱلصِّرَاطَ ٱلْمُسۡتَقِيمَ</div><div class="hero-trans">„Leite uns den geraden Weg.“</div><span class="hero-ref">Qurʾān · al-Fātiḥah 1:6</span></div><div class="hero-note">Qurʾān lesen oder hören, Wissen nachschlagen und Quellen direkt öffnen.</div></section>'+
-   '<section id="prayerRiver" class="prayer-river reveal"><div class="prayer-inner"><div class="prayer-current"><div class="prayer-label">Aktuelle Gebetszeit</div><b id="prCurrent">—</b><small id="prLocation">Standort wählen</small></div><div class="prayer-next"><div class="prayer-label">Nächstes Gebet</div><b id="prNext">—</b><small id="prNextTime">—</small></div><div id="prCountdown" class="prayer-count">--:--:--<span>bis zum nächsten Gebet</span></div><button id="prLocate" class="prayer-locate" type="button">Standort verwenden</button></div></section>'+
+   ''+
    '<section class="focus-editorial reveal"><div class="section-head"><h2>Im Fokus</h2><a class="text-link desktop-link" data-page="beitraege" href="'+pUrl("beitraege")+'">Alle Beiträge</a></div><div class="focus-layout">'+
    (lead?'<a class="focus-feature desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(lead.id))+'"><div class="eyebrow">'+escBook(postCatLabel(postCatKey(lead.category)))+'</div><h3>'+escBook(cleanTitle(lead.title))+'</h3><p>'+escBook(postExcerpt(lead))+'</p></a>':'')+
    '<div class="focus-side">'+rest.map(function(x){return '<a class="focus-mini desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'"><div class="eyebrow">'+escBook(postCatLabel(postCatKey(x.category)))+'</div><h3>'+escBook(cleanTitle(x.title))+'</h3><p>'+escBook(x.speaker||x.work||"")+'</p></a>'}).join("")+'</div></div></section>'+
@@ -3749,7 +3751,7 @@ button,input,select{font:inherit}
   var lead=posts[0],rest=posts.slice(1,4);
   return realIntro("DĀR AL TAWḤĪD","Qurʾān, Sunnah und überliefertes Wissen.","Beginne mit den Grundlagen des Dīn, lies den Qurʾān und öffne Aussagen mit ihren Quellen.")+
    '<section class="hero reveal"><div><div class="hero-ar" dir="rtl">ٱهْدِنَا ٱلصِّرَاطَ ٱلْمُسۡتَقِيمَ</div><div class="hero-trans">„Leite uns den geraden Weg.“</div><span class="hero-ref">Qurʾān · al-Fātiḥah 1:6</span></div><div class="hero-note">Tawḥīd und Īmān als Grundlagen, danach Qurʾān, Sunnah, Wissen und Quellen.</div></section>'+
-   '<section id="prayerRiver" class="prayer-river reveal"><div class="prayer-inner"><div class="prayer-current"><div class="prayer-label">Aktuelle Gebetszeit</div><b id="prCurrent">—</b><small id="prLocation">Standort wählen</small></div><div class="prayer-next"><div class="prayer-label">Nächstes Gebet</div><b id="prNext">—</b><small id="prNextTime">—</small></div><div id="prCountdown" class="prayer-count">--:--:--<span>bis zum nächsten Gebet</span></div><button id="prLocate" class="prayer-locate" type="button">Standort verwenden</button></div></section>'+
+   ''+
    foundationSection()+
    '<section class="focus-editorial reveal"><div class="section-head"><h2>Neu & ausgewählt</h2><a class="text-link desktop-link" data-page="beitraege" href="'+pUrl("beitraege")+'">Alle Beiträge</a></div><div class="focus-layout">'+
    (lead?'<a class="focus-feature desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(lead.id))+'"><div class="eyebrow">'+escBook(postCatLabel(postCatKey(lead.category)))+'</div><h3>'+escBook(cleanTitle(lead.title))+'</h3><p>'+escBook(postExcerpt(lead))+'</p></a>':'')+
@@ -3791,7 +3793,7 @@ button,input,select{font:inherit}
       '<article class="foundation-topic"><div class="foundation-label">FIQH</div><h3>Handeln mit Wissen</h3><p>Rechtsfragen werden geordnet nach Themen und mit zugehörigen Quellen dargestellt.</p><div class="topic-links">'+fiqh.slice(0,3).map(function(x){return '<a class="desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'">'+escBook(cleanTitle(x.title))+' →</a>'}).join("")+'</div></article>'+
     '</div>'+
    '</section>'+
-   '<section id="prayerRiver" class="prayer-river reveal"><div class="prayer-inner"><div class="prayer-current"><div class="prayer-label">Aktuelle Gebetszeit</div><b id="prCurrent">—</b><small id="prLocation">Standort wählen</small></div><div class="prayer-next"><div class="prayer-label">Nächstes Gebet</div><b id="prNext">—</b><small id="prNextTime">—</small></div><div id="prCountdown" class="prayer-count">--:--:--<span>bis zum nächsten Gebet</span></div><button id="prLocate" class="prayer-locate" type="button">Standort verwenden</button></div></section>'+
+   ''+
    '<section class="section reveal"><div class="section-head"><h2>Duʿāʾ</h2><a class="text-link desktop-link" data-page="dua" href="'+pUrl("dua")+'">Alle Duʿāʾ</a></div><div class="two-reading-cols">'+duas.map(function(d){return '<a class="dua-real desktop-link" data-page="dua" href="'+pUrl("dua","id="+encodeURIComponent(d.id))+'"><div class="eyebrow">'+escBook(d.category)+'</div><h3>'+escBook(d.title)+'</h3><div class="dua-ar" dir="rtl">'+escBook(d.arabic)+'</div><div class="real-source"><b>Quelle:</b> '+escBook(d.source)+'</div></a>'}).join("")+'</div></section>'+
    '<section class="section parchment reveal"><div class="section-head"><h2>Bibliothek</h2><a class="text-link desktop-link" data-page="bibliothek" href="'+pUrl("bibliothek")+'">Alle Werke</a></div><div class="real-cover-grid">'+pubs.map(function(b){return '<a class="real-cover desktop-link" data-page="werk" href="'+pUrl("werk","type=pub&id="+encodeURIComponent(b.id))+'"><div class="real-cover-visual">'+(b.coverUrl?'<img src="'+escBook(b.coverUrl)+'" alt="">':"")+'</div><h3>'+escBook(b.title)+'</h3><small>'+escBook(b.category||"Publikation")+(b.publishedAt?' · '+escBook(b.publishedAt):"")+'</small></a>'}).join("")+'</div></section>'+footer()
  };
@@ -3814,6 +3816,6 @@ button,input,select{font:inherit}
 })();
 </script>
 <!-- desktop-content-sync-v12 -->
-<script defer src="/desktop-preview/desktop-overhaul.js?v=210"></script>
+<script defer src="/desktop-preview/desktop-overhaul.js?v=220"></script>
 </body>
 </html>
