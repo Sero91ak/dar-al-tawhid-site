@@ -271,6 +271,7 @@ function switchKind(kind){
   else if(studioKind==="quiz"){title.textContent="Kids-Quiz produzieren";lead.textContent="Fragen, Antworten, Erklärung und Serhat-Stimme als eigenes geprüftes Quiz-Paket.";q("styleMode").value="kids_lesson"}
   else if(studioKind==="game"){title.textContent="Kids-Spiel produzieren";lead.textContent="Spielinhalt und wiederverwendbare Serhat-Sprachbausteine getrennt von Geschichten produzieren.";q("styleMode").value="kids_lesson"}
   else{title.textContent="iOS Content Studio";lead.textContent="Text, Serhat-Stimme, Cover und Metadaten als separates Paket für die offizielle iOS-App.";q("styleMode").value="narration"}
+  q("csPublishTest").textContent=studioKind==="ios"?"iOS Staging veröffentlichen":"In Test-Kids veröffentlichen";q("csPublishLive").textContent=studioKind==="ios"?"iOS Live veröffentlichen":"Live veröffentlichen";
   contentId="";savedRevision=0;stagingPublished=false;contentStatus="draft";setProductionPhase("draft");restoreDraft();renderKindEditor();refreshQa();loadLibrary();
 }
 function saveConnection(){
@@ -308,10 +309,10 @@ function fields(){
       text:!!text,
       cover:!!coverAsset?.url,
       audio:!q("csModeListen")?.checked||!!audioAsset?.url,
-      pronunciation:!q("csModeListen")?.checked||Boolean(qaConfirmed),
+      pronunciation:!q("csModeListen")?.checked||Boolean(qaConfirmed)||Boolean(audioAsset?.url&&contentId),
       source:true
     },
-    push:{enabled:true}
+    push:{enabled:effectiveTarget()==="kids"}
   };
 }
 function persistDraft(){
@@ -483,13 +484,13 @@ async function publishTest(){
 }
 async function publishLive(){
   if(busy||!stagingPublished)return;
-  if(!confirm("Diese geprüfte Version jetzt LIVE in Kids veröffentlichen und den passenden Kids-Push senden?"))return;
+  if(!confirm(effectiveTarget()==="ios"?"Diese geprüfte Version jetzt LIVE für die iOS-Inhalte veröffentlichen?":"Diese geprüfte Version jetzt LIVE in Kids veröffentlichen und den passenden Kids-Push senden?"))return;
   busy=true;renderStatus();
   try{
-    const pub=await adminApi("/api/admin/kids-content/publish",{method:"POST",body:JSON.stringify({id:contentId,live:true,sendPush:true,triggerDeploy:true})});
+    const pub=await adminApi("/api/admin/kids-content/publish",{method:"POST",body:JSON.stringify({id:contentId,live:true,sendPush:effectiveTarget()==="kids",triggerDeploy:true})});
     contentStatus="published";setProductionPhase("live-published");renderStatus();
     const p=pub.push||{};
-    setStudioMessage(p.sent?"Live veröffentlicht · Kids-Push gesendet.":"Live veröffentlicht · Push: "+(p.reason||"kein Empfänger"),p.sent?"good":"warn");
+    setStudioMessage(effectiveTarget()==="ios"?"iOS-Inhalt live veröffentlicht.":(p.sent?"Live veröffentlicht · Kids-Push gesendet.":"Live veröffentlicht · Push: "+(p.reason||"kein Empfänger")),effectiveTarget()==="ios"||p.sent?"good":"warn");
   }catch(e){setStudioMessage(e.message||String(e),"bad")}
   finally{busy=false;renderStatus();refreshQa()}
 }
@@ -527,6 +528,7 @@ function refreshQa(){
   const contentOk=studioKind==="quiz"?quizOk:studioKind==="game"?gameOk:Boolean(text);
   paintQa("csQaText",contentOk,contentOk?(studioKind==="quiz"?"Fragen bereit":studioKind==="game"?"Spiel bereit":"bereit"):"fehlt");
   paintQa("csQaCover",cover,cover?"bereit":"fehlt");paintQa("csQaAudio",audio,audio?"bereit":"fehlt");paintQa("csQaPron",pron,pron?"bestätigt":"offen");
+  if(productionPhase==="awaiting-qa"&&contentOk&&cover&&audio&&pron)productionPhase="ready";
   const test=q("csPublishTest");if(test)test.disabled=busy||!contentOk||!cover||!audio||!pron||!q("csTitle")?.value.trim();
   renderStatus();
 }
