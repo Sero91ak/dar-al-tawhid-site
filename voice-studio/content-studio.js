@@ -15,6 +15,10 @@ let coverRemoteUrl="";
 let coverAsset=null;
 let audioAsset=null;
 let contentStatus="draft";
+let productionPhase="draft";
+let productionError="";
+let quizDraft=[];
+let gameDraft={type:"choice",summary:"",instructions:"",voiceCues:[]};
 let busy=false;
 
 function q(id){return document.getElementById(id)}
@@ -47,6 +51,12 @@ function setStudioMessage(msg,type=""){
   el.className="cs-message "+(type||"");
 }
 function statusLabel(){
+  if(productionPhase==="producing")return"Produktion läuft";
+  if(productionPhase==="awaiting-qa")return"QA erforderlich";
+  if(productionPhase==="ready")return"Bereit";
+  if(productionPhase==="test-published")return"Test veröffentlicht";
+  if(productionPhase==="live-published")return"Live veröffentlicht";
+  if(productionPhase==="error")return"Fehler";
   if(contentStatus==="published"&&stagingPublished)return"Test veröffentlicht";
   if(contentStatus==="review")return"Prüfung";
   if(contentStatus==="published")return"Veröffentlicht";
@@ -84,6 +94,11 @@ function injectStyles(){
   .cs-qa{display:grid;gap:6px}.cs-check{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:10px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)}.cs-check:last-child{border:0}.cs-check b{font-size:10px}
   .cs-library{display:grid;gap:6px;max-height:180px;overflow:auto}.cs-item{border:1px solid var(--line);border-radius:9px;padding:8px;background:rgba(255,255,255,.025);cursor:pointer}.cs-item b{display:block;font-size:11px}.cs-item small{font-size:9px;color:#7f9499}
   .cs-disabled-pane{padding:20px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025);color:#879a9e;font-size:12px;line-height:1.6}
+  .cs-structured{margin:0 0 14px;padding:14px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.018)}
+  .cs-structured[hidden]{display:none}.cs-structured h3{margin:0 0 10px;font-size:13px;color:#f0d59a}
+  .cs-question{padding:12px;border:1px solid rgba(255,255,255,.07);border-radius:12px;background:rgba(0,0,0,.12);margin:8px 0}
+  .cs-question-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.cs-question-head b{font-size:11px}.cs-question-head button{border:0;background:transparent;color:#df8686;cursor:pointer;font-size:11px}
+  .cs-answer-grid,.cs-inline-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.cs-add{width:100%;margin-top:8px}
   @media(max-width:900px){.cs-grid{grid-template-columns:1fr 1fr}.cs-field.span4{grid-column:1/-1}}
   @media(max-width:600px){.cs-grid{grid-template-columns:1fr}.cs-field.span2,.cs-field.span4{grid-column:1}.cs-actions{grid-template-columns:1fr}}
   `;
@@ -109,9 +124,7 @@ function metaHtml(){
       <div class="cs-field"><label>Modus</label><div class="cs-modes"><label><input id="csModeRead" type="checkbox" checked> Lesen</label><label><input id="csModeListen" type="checkbox" checked> Hören</label></div></div>
       <div class="cs-field span4"><label for="csSources">Quellen / Nachweise</label><textarea id="csSources" placeholder="Eine Quelle pro Zeile, z. B. Qurʾān 11:36–44"></textarea></div>
     </div>
-  </section>`;
-}
-function publishHtml(){
+  </section>\n  <section id="csStructured" class="cs-structured" hidden><div id="csStructuredBody"></div></section>`;\n}\nfunction publishHtml(){
   return `<section id="csPublishSection" class="side-section">
     <div class="side-title">Content Studio · Kids</div>
     <div class="cs-status-row"><span class="notice">Produktionspaket</span><span id="csStatus" class="cs-status" data-status="draft">Entwurf</span></div>
@@ -167,6 +180,7 @@ function mount(){
   q("csSecret").value=workerSecret();
   bind();
   restoreDraft();
+  renderKindEditor();
   renderStatus();
   refreshQa();
   loadLibrary();
