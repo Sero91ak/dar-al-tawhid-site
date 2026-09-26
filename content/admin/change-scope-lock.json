@@ -5934,6 +5934,27 @@
         ".github/workflows/cloudflare-pages-deploy.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "content-studio-kids-pipeline-2026-09-26",
+      "approvedBy": "user-explicit-studio-kids-full-pipeline-2026-09-26",
+      "reason": "Nutzer: Voice Studio streng zur zentralen DĀR Content-Studio-Pipeline ausbauen; Kids Geschichten/Quiz/Spiele/iOS trennen, Story-Audio+Cover produzieren, Test-Kids-Feed profilabhängig anbinden und Deep-Links vorbereiten. Bestehende OneSignal-Kids-Spur nicht umbauen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "voice-studio/content-studio.js",
+        "voice-studio/index.html",
+        "voice-studio/local-engine.py",
+        "voice-studio/install-mac.command",
+        "voice-studio/sw-v11.js",
+        "voice-studio/version.json",
+        "scripts/voice-studio/validate-v2.py",
+        "test/kids/content-studio-feed.js",
+        "test/kids/start.html",
+        "test/kids/shell.html",
+        "test/kids/index.html",
+        "test/kids/version.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
