@@ -494,3 +494,25 @@ html.is-standalone-pwa :is(.top-shell,.header,.sf-top,.qov-header,.app-bar)::aft
   }
 }
 
+
+/* Adult dock only: no Kids oval, no sticky-hover ghost, full tab hit-target */
+html #bottomNav.bottom-nav,
+html.dar-ios-native-app #bottomNav.bottom-nav,
+html.dar-test-performance-v1 #bottomNav.bottom-nav{
+  overflow:visible!important;
+  pointer-events:auto!important;
+}
+html #bottomNav.bottom-nav .bottom-nav-btn{
+  pointer-events:auto!important;
+  isolation:isolate;
+  overflow:visible!important;
+}
+html #bottomNav.bottom-nav .bottom-nav-btn > *{
+  pointer-events:none!important;
+  position:relative;
+  z-index:1;
+}
+html #bottomNav.bottom-nav .bottom-nav-btn:hover:not(.active)::before,
+html #bottomNav.bottom-nav .bottom-nav-btn:hover:not(.active):not(.is-pressed)::before{
+  opacity:0!important;
+}

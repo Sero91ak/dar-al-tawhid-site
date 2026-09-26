@@ -1,0 +1,101 @@
+/* Live + web/iOS/Android (not Kids): larger 3D in existing slots, inset from rim, no two-line labels */
+img.dar3d-icon{
+  display:block;
+  object-fit:contain;
+  object-position:center;
+  pointer-events:none;
+  filter:drop-shadow(0 1px 4px rgba(0,0,0,.35));
+}
+#bottomNav .bottom-nav-btn .nav-icon{
+  box-sizing:border-box!important;
+  width:36px!important;
+  height:36px!important;
+  min-height:36px!important;
+  padding:3px!important;
+  overflow:hidden!important;
+  display:grid!important;
+  place-items:center!important;
+}
+#bottomNav .bottom-nav-btn .nav-icon img.dar3d-icon{
+  width:100%!important;
+  height:100%!important;
+}
+#bottomNav .bottom-nav-btn > span:not(.nav-icon){
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  max-width:100%!important;
+}
+.feature-icon,
+.folder-icon,
+.book-library-icon,
+.emoji-emblem,
+.dua-theme-card__icon,
+.topics-theme-card__icon,
+.dua-row__icon,
+.post-row__icon{
+  box-sizing:border-box!important;
+  padding:4px!important;
+}
+.feature-icon img.dar3d-icon,
+.folder-icon img.dar3d-icon,
+.book-library-icon img.dar3d-icon,
+.emoji-emblem img.dar3d-icon,
+.dua-theme-card__icon img.dar3d-icon,
+.topics-theme-card__icon img.dar3d-icon,
+.dua-row__icon img.dar3d-icon,
+.post-row__icon img.dar3d-icon,
+.quick-action-emoji img.dar3d-icon,
+.library-focus-teaser__icon img.dar3d-icon,
+.zakat-home-teaser-icon img.dar3d-icon,
+.home-discover-pdf-cover__fallback img.dar3d-icon{
+  width:100%!important;
+  height:100%!important;
+}
+.home-v380-lib-card__ico,
+.home-v380-lib-card--noble .home-v380-lib-card__ico{
+  box-sizing:border-box!important;
+  width:42px!important;
+  height:42px!important;
+  flex:0 0 42px!important;
+  padding:4px!important;
+}
+.home-v380-lib-card__ico img.dar3d-icon{
+  width:100%!important;
+  height:100%!important;
+}
+.home-v380-lib-card--compact h3,
+.home-v380-lib-card--noble h3{
+  white-space:nowrap!important;
+  -webkit-line-clamp:1!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.home-v380-quran-hero__mark{
+  box-sizing:border-box!important;
+  width:36px!important;
+  height:36px!important;
+  flex:0 0 36px!important;
+  padding:3px!important;
+  display:grid!important;
+  place-items:center!important;
+  opacity:1!important;
+}
+.home-v380-quran-hero__mark img.dar3d-icon{
+  width:100%!important;
+  height:100%!important;
+}
+.more-feature-row .feature-icon{
+  padding:4px!important;
+}
+.more-feature-row h4{
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.quick-action-emoji{
+  box-sizing:border-box!important;
+  width:28px!important;
+  height:28px!important;
+  padding:3px!important;
+}
