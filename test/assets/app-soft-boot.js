@@ -3,6 +3,25 @@
  * v672 · Android-Native: Soft-Boot überspringen (kein Logo-Hang). v670 · Titel DĀR AL TAWḤĪD; Leiste rund (CSS in index). Overlay nie auf <html>.
  */
 (function () {
+  /* PUBLIC WEBSITE: NEVER SHOW APP SOFT BOOT */
+  try {
+    var __darBootUa = String(navigator.userAgent || "");
+    var __darBootPath = String(location.pathname || "");
+    var __darBootNative =
+      /DarAlTawhid-iOS|DarAlTawhidOfficialIOS|DarAlTawhidAndroid/i.test(__darBootUa) ||
+      window.DAR_OFFICIAL_IOS_APP === true ||
+      window.DAR_IOS_NATIVE_APP === true ||
+      window.DAR_ANDROID_NATIVE_APP === true;
+    if (!__darBootNative && (__darBootPath === "/" || __darBootPath === "/index.html")) {
+      try { if (document.documentElement) document.documentElement.style.visibility = "hidden"; } catch (__e) {}
+      var __p = new URLSearchParams(location.search || "");
+      var __page = (__p.get("page") || "start").toLowerCase();
+      ["homescreen","app","mobile","source","darsw"].forEach(function (k) { __p.delete(k); });
+      __p.set("page", __page);
+      location.replace("/desktop-preview/?" + __p.toString());
+      return;
+    }
+  } catch (__darPublicGateErr) {}
   if (window.__darSoftBootInstalled) return;
   window.__darSoftBootInstalled = true;
 
