@@ -1,6 +1,6 @@
 /* Test-only: Islamic ʿilm 3D icons on every surface, including home-v380 */
 (function(){
-  const VER="1040";
+  const VER="1041";
   const BASE="/test/assets/dar-3d-icons/";
   const BY_NAV={
     home:"home.png",ilm:"ilm.png",recent:"posts.png",feed:"posts.png",post:"posts.png",
@@ -79,16 +79,6 @@
     el.textContent="";
     el.appendChild(imgFor(file));
   }
-  function prependSlot(host,file){
-    if(!host||!file)return;
-    if(host.querySelector(":scope > .dar3d-slot, :scope > img.dar3d-icon"))return;
-    const slot=document.createElement("span");
-    slot.className="dar3d-slot";
-    slot.setAttribute("aria-hidden","true");
-    slot.appendChild(imgFor(file));
-    host.insertBefore(slot,host.firstChild);
-    host.classList.add("dar3d-has-icon");
-  }
   function scan(){
     document.querySelectorAll("#bottomNav [data-bottom-nav]").forEach(btn=>{
       const icon=btn.querySelector(".nav-icon");
@@ -103,9 +93,6 @@
     document.querySelectorAll(marks).forEach(el=>{
       const host=el.closest("[data-bottom-nav],[data-nav],[data-qa-action],[data-quran-continue],.quick-action");
       fill(el,fileFromHost(host,el));
-    });
-    document.querySelectorAll(".home-v380-open-row[data-nav],.home-v380-post-preview[data-nav],.home-v380-popular-row[data-nav]").forEach(host=>{
-      prependSlot(host,fileFromHost(host,null));
     });
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",scan);
