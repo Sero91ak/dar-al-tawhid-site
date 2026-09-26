@@ -2198,6 +2198,13 @@ def postprocess(src:Path):
 
 def generate(text:str,prepared:str="",style:str="auto"):
     quran_guard(text)
+    unresolved=detect_unresolved_islamic_terms(text)
+    if unresolved:
+        terms=", ".join(str(x.get("term","")) for x in unresolved[:6])
+        raise ValueError(
+            "Ungeprüfte islamische Namen/Begriffe erkannt: "+terms+
+            ". Bitte zuerst in der Ausspracheanalyse prüfen oder im Lernzentrum bestätigen."
+        )
     if not REF_DE.exists():
         raise RuntimeError("Referenzstimme fehlt: "+str(REF_DE))
 
@@ -2492,6 +2499,23 @@ class H(BaseHTTPRequestHandler):
             self.send_file(APP_HOME/"studio.html","text/html; charset=utf-8")
         elif p=="/data/pronunciation/pronunciation-rules.json":
             self.send_json(200,LIB)
+        elif p=="/data/pronunciation/islamic-master-library.json":
+            sources={}
+            sources.update((INSTALLED_MASTER_LIB or {}).get("sources") or {})
+            sources.update((ONLINE_MASTER_LIB or {}).get("sources") or {})
+            self.send_json(200,{
+                "schemaVersion":1,
+                "libraryId":"dar-al-tawhid-islamic-pronunciation-master-runtime",
+                "entries":MASTER_ENTRIES,
+                "sources":sources,
+                "counts":{
+                    "entries":len(MASTER_ENTRIES),
+                    "autoRules":len(MASTER_RULES),
+                    "sahaba":sum(1 for e in MASTER_ENTRIES if e.get("personType")=="sahabi"),
+                    "sahabiyyat":sum(1 for e in MASTER_ENTRIES if e.get("personType")=="sahabiyyah"),
+                    "prophets":sum(1 for e in MASTER_ENTRIES if e.get("personType")=="prophet"),
+                }
+            })
         elif p=="/learning/state":
             self.send_json(200,{"ok":True,**learning_state()})
         elif p=="/data/pronunciation/voice-production-profile.json":
@@ -2525,6 +2549,7 @@ class H(BaseHTTPRequestHandler):
                 prepared,found=prepare(text)
                 mode=resolve_prosody_mode(text,style)
                 plan=build_render_plan(prepared)
+                unresolved=detect_unresolved_islamic_terms(text)
                 return self.send_json(200,{
                     "ok":True,
                     "mode":mode,
@@ -2548,6 +2573,18 @@ class H(BaseHTTPRequestHandler):
                         str(r.get("canonical") or r.get("string_to_replace"))
                         for r in found if r.get("required_honorific_key")
                     }),
+                    "unresolvedIslamicTerms":unresolved,
+                    "librarySuggestions":[
+                        {"term":x.get("term",""),"suggestions":x.get("suggestions") or []}
+                        for x in unresolved
+                    ],
+                    "masterLibrary":{
+                        "entries":len(MASTER_ENTRIES),
+                        "autoRules":len(MASTER_RULES),
+                        "sahaba":sum(1 for e in MASTER_ENTRIES if e.get("personType")=="sahabi"),
+                        "sahabiyyat":sum(1 for e in MASTER_ENTRIES if e.get("personType")=="sahabiyyah"),
+                        "prophets":sum(1 for e in MASTER_ENTRIES if e.get("personType")=="prophet"),
+                    },
                     "arabicReferenceDedicated":ARABIC_DEDICATED_REFERENCE
                 })
             except Exception as e:
