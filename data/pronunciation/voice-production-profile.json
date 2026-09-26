@@ -371,7 +371,8 @@
     "islamicMasterLibraryRegression": true,
     "unknownIslamicTermDetectionRegression": true,
     "masterLibraryPrecedenceRegression": true,
-    "confirmedPronunciationAutoRerenderRegression": true
+    "confirmedPronunciationAutoRerenderRegression": true,
+    "multiCorrectionAutoRerenderRegression": true
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
@@ -547,7 +548,9 @@
       "canonicalTerms": 894,
       "sha256": "b629a50c27ee4b73c2a0bac3c0856dfc67f8c2fbf1b2ef8df4a69689a524b14b",
       "policy": "Do not treat higher rule count as proof of complete import; preserve every original match form semantically and validate against the source-of-truth manifest when available."
-    }
+    },
+    "pendingAutoRerenderAcrossMultipleCorrections": true,
+    "rerenderOnlyAfterLastUnresolvedTerm": true
   },
   "productionRenderer": {
     "primaryAppleSilicon": "mlx-community/chatterbox-multilingual-v3",
