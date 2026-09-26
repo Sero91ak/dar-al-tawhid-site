@@ -123,6 +123,22 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-tab-loupe-scrub-2026-09-26",
+      "approvedBy": "user-explicit-tableiste-lupe-halten-gleit-kein-ruckler",
+      "reason": "Nutzer: Tab-Leiste ruckelt; Halten und nach links/rechts gleiten wie Lupe bei Apple/WhatsApp. Sensibel, Test+iOS+Web. Kids unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/adaptive-layout.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-tab-plop-smooth-2026-09-26",
       "approvedBy": "user-explicit-tableiste-butterweich-plopp-wie-kids-apple-live",
       "reason": "Nutzer: Tab-Leiste kalt/springt, bleibt leicht am alten Tab. Butterweich mit leichtem Plopp wie Kids/Apple, Test+iOS+Web. Kids unverändert.",

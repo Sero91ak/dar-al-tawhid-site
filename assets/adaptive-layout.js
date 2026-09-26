@@ -89,6 +89,7 @@
   function applyNavLayout(mode, opts) {
     var nav = document.getElementById("bottomNav");
     if (!nav) return;
+    if (nav.classList.contains("is-tab-loupe")) return;
     if (document.body && document.body.classList.contains("is-ilm-chat-route")) {
       return;
     }
