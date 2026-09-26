@@ -1,6 +1,6 @@
 {
-  "version": "2.3.1",
-  "updatedAt": "2026-09-26T02:18:00+02:00",
+  "version": "2.3.2",
+  "updatedAt": "2026-09-26T02:26:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "local-chatterbox-v3.3",
   "provider": "self-produced",
@@ -20,7 +20,7 @@
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-raw",
-  "engineVersion": "persistent-pronunciation-learning-center-v7-launch-recovery",
+  "engineVersion": "single-instance-engine-and-online-vocabulary-validation-fix",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -162,6 +162,10 @@
     "atomicAppBundleSwap": true,
     "oldAppPreservedUntilValidated": true,
     "launchDiagnosticLog": true,
-    "nativeLauncherFallback": true
+    "nativeLauncherFallback": true,
+    "singleInstancePortBind": true,
+    "bindBeforeModelWarmup": true,
+    "existingHealthyEngineAccepted": true,
+    "onlineArabicUnicodeValidationFixed": true
   }
 }
