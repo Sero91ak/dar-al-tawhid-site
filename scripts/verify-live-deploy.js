@@ -84,8 +84,9 @@ async function main() {
 
     const voiceStudioOk = await waitForHtmlIncludes(`${SITE_URL}/voice-studio/`, [
       "DĀR AL TAWḤĪD – Voice Studio",
-      "VOICE STUDIO · SERHAT VOICE",
-      "service-worker.js"
+      "SERHAT VOICE",
+      "sw-v11.js",
+      "content-studio.js"
     ]);
     const voiceVersionOk = await waitForStatus(`${SITE_URL}/voice-studio/version.json`, 200);
     const pronunciationOk = await waitForStatus(
