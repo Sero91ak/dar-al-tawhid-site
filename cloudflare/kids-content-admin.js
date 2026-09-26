@@ -291,6 +291,8 @@ export async function publishKidsContentEntry(env, input, helpers) {
 
   const candidate = normalizeKidsContentItem({
     ...draft,
+    ...(input?.cover ? { cover: { ...(draft.cover || {}), ...input.cover } } : {}),
+    ...(input?.audio ? { audio: { ...(draft.audio || {}), ...input.audio } } : {}),
     status: "published",
     publishedAt: draft.publishedAt || nowIso,
     publishedRevision: draft.revision,
