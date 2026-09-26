@@ -915,3 +915,247 @@
   font-size:7px!important;
   line-height:1!important;
 }
+
+
+/* v20 — STRUCTURAL RESPONSIVE PLAYER, NO HIDDEN CONTROLS */
+.player-wrap{
+  width:min(920px,calc(100% - 32px))!important;
+  max-width:920px!important;
+  margin:14px auto 18px!important;
+  overflow:visible!important;
+}
+#quranAudioPlayer.qa-player-v20{
+  position:relative!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  min-height:68px!important;
+  height:auto!important;
+  display:grid!important;
+  grid-template-columns:34px 50px minmax(180px,1fr) minmax(330px,390px) 34px!important;
+  grid-template-rows:68px!important;
+  align-items:stretch!important;
+  gap:0!important;
+  padding:0 8px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  border-radius:34px!important;
+}
+#quranAudioPlayer.qa-player-v20 > *{box-sizing:border-box!important;min-width:0!important}
+#quranAudioPlayer.qa-player-v20 .player-prev{
+  grid-column:1!important;grid-row:1!important;
+  display:grid!important;place-items:center!important;
+  width:34px!important;height:68px!important;min-width:34px!important;min-height:44px!important;
+  margin:0!important;padding:0!important;border:0!important;
+  cursor:pointer!important;touch-action:manipulation!important;
+}
+#quranAudioPlayer.qa-player-v20 .player-play{
+  grid-column:2!important;grid-row:1!important;
+  align-self:center!important;justify-self:center!important;
+  display:grid!important;place-items:center!important;
+  width:46px!important;height:46px!important;min-width:46px!important;min-height:46px!important;
+  margin:0!important;padding:0!important;
+  cursor:pointer!important;touch-action:manipulation!important;
+}
+#quranAudioPlayer.qa-player-v20 .player-now{
+  grid-column:3!important;grid-row:1!important;
+  display:flex!important;flex-direction:column!important;justify-content:center!important;
+  min-width:0!important;overflow:hidden!important;
+  padding:0 14px!important;
+}
+#quranAudioPlayer.qa-player-v20 .player-kicker{
+  margin:0!important;
+  font-size:7px!important;line-height:1!important;letter-spacing:.14em!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+}
+#quranAudioPlayer.qa-player-v20 .player-title{
+  display:block!important;
+  width:100%!important;min-width:0!important;max-width:100%!important;
+  margin:4px 0 0!important;
+  font-size:13px!important;line-height:1.18!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+}
+#quranAudioPlayer.qa-player-v20 .player-progress{
+  display:block!important;
+  width:100%!important;height:1px!important;min-height:1px!important;
+  margin:8px 0 0!important;padding:0!important;
+  overflow:hidden!important;
+}
+#quranAudioPlayer.qa-player-v20 .player-controls-row{
+  grid-column:4!important;grid-row:1!important;
+  display:grid!important;
+  grid-template-columns:minmax(110px,1fr) 72px minmax(140px,1.25fr)!important;
+  grid-template-rows:68px!important;
+  min-width:0!important;width:100%!important;height:68px!important;
+  align-items:stretch!important;
+  overflow:hidden!important;
+  border-left:1px solid rgba(230,211,166,.14)!important;
+}
+#quranAudioPlayer.qa-player-v20 .player-controls-row .player-field{
+  position:static!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:stretch!important;
+  gap:3px!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:68px!important;
+  min-height:68px!important;
+  margin:0!important;
+  padding:7px 10px!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-right:1px solid rgba(230,211,166,.12)!important;
+  background:transparent!important;
+}
+#quranAudioPlayer.qa-player-v20 .player-controls-row .player-field:last-child{border-right:0!important}
+#quranAudioPlayer.qa-player-v20 .player-controls-row .player-field label{
+  position:static!important;
+  display:block!important;
+  width:100%!important;
+  margin:0!important;padding:0!important;
+  font-size:7px!important;font-weight:850!important;line-height:1!important;letter-spacing:.14em!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+  pointer-events:none!important;
+}
+#quranAudioPlayer.qa-player-v20 .player-controls-row .player-field select{
+  position:static!important;
+  display:block!important;
+  width:100%!important;min-width:0!important;max-width:100%!important;
+  height:32px!important;min-height:32px!important;
+  margin:0!important;padding:0 20px 0 0!important;
+  border:0!important;outline:0!important;
+  background:transparent!important;
+  font-size:11.5px!important;font-weight:700!important;line-height:32px!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+  cursor:pointer!important;touch-action:manipulation!important;
+  appearance:auto!important;-webkit-appearance:menulist!important;
+}
+#quranAudioPlayer.qa-player-v20 .player-controls-row .player-field select:focus{
+  outline:2px solid rgba(222,193,126,.7)!important;
+  outline-offset:1px!important;border-radius:7px!important;
+}
+#quranAudioPlayer.qa-player-v20 .player-step{
+  grid-column:5!important;grid-row:1!important;
+  display:grid!important;place-items:center!important;
+  width:34px!important;height:68px!important;min-width:34px!important;min-height:44px!important;
+  margin:0!important;padding:0!important;border:0!important;
+  cursor:pointer!important;touch-action:manipulation!important;
+}
+
+/* iPad / Tablet / Split View: controls always visible in complete second row */
+@media (max-width:1024px){
+  .player-wrap{width:min(760px,calc(100% - 24px))!important;max-width:760px!important}
+  #quranAudioPlayer.qa-player-v20{
+    grid-template-columns:40px 54px minmax(0,1fr) 40px!important;
+    grid-template-rows:64px 60px!important;
+    min-height:124px!important;
+    padding:0 10px 8px!important;
+    border-radius:28px!important;
+  }
+  #quranAudioPlayer.qa-player-v20 .player-prev{
+    grid-column:1!important;grid-row:1!important;width:40px!important;height:64px!important
+  }
+  #quranAudioPlayer.qa-player-v20 .player-play{
+    grid-column:2!important;grid-row:1!important;width:48px!important;height:48px!important
+  }
+  #quranAudioPlayer.qa-player-v20 .player-now{
+    grid-column:3!important;grid-row:1!important;padding:0 12px!important
+  }
+  #quranAudioPlayer.qa-player-v20 .player-step{
+    grid-column:4!important;grid-row:1!important;width:40px!important;height:64px!important
+  }
+  #quranAudioPlayer.qa-player-v20 .player-controls-row{
+    grid-column:1/-1!important;grid-row:2!important;
+    grid-template-columns:minmax(0,1.15fr) minmax(86px,.62fr) minmax(0,1.35fr)!important;
+    grid-template-rows:60px!important;
+    width:100%!important;height:60px!important;
+    border-left:0!important;border-top:1px solid rgba(230,211,166,.14)!important;
+    overflow:hidden!important;
+  }
+  #quranAudioPlayer.qa-player-v20 .player-controls-row .player-field{
+    display:flex!important;
+    width:100%!important;height:60px!important;min-height:60px!important;
+    padding:7px 12px!important;
+  }
+  #quranAudioPlayer.qa-player-v20 .player-controls-row .player-field select{
+    height:33px!important;min-height:33px!important;font-size:12px!important;line-height:33px!important
+  }
+}
+
+/* Smartphone: Sūrah + Āyah, then Rezitator full width. Nothing hidden. */
+@media (max-width:600px){
+  .player-wrap{
+    width:calc(100% - 20px)!important;
+    max-width:none!important;
+    margin:10px 10px 18px!important;
+  }
+  #quranAudioPlayer.qa-player-v20{
+    grid-template-columns:40px 54px minmax(0,1fr) 40px!important;
+    grid-template-rows:66px 116px!important;
+    min-height:182px!important;
+    padding:0 10px 8px!important;
+    border-radius:27px!important;
+  }
+  #quranAudioPlayer.qa-player-v20 .player-prev{
+    grid-column:1!important;grid-row:1!important;width:40px!important;height:66px!important
+  }
+  #quranAudioPlayer.qa-player-v20 .player-play{
+    grid-column:2!important;grid-row:1!important;width:48px!important;height:48px!important
+  }
+  #quranAudioPlayer.qa-player-v20 .player-now{
+    grid-column:3!important;grid-row:1!important;padding:0 10px!important
+  }
+  #quranAudioPlayer.qa-player-v20 .player-step{
+    grid-column:4!important;grid-row:1!important;width:40px!important;height:66px!important
+  }
+  #quranAudioPlayer.qa-player-v20 .player-controls-row{
+    grid-column:1/-1!important;grid-row:2!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1.25fr) minmax(94px,.75fr)!important;
+    grid-template-rows:56px 60px!important;
+    width:100%!important;height:116px!important;
+    border-left:0!important;border-top:1px solid rgba(230,211,166,.14)!important;
+    overflow:hidden!important;
+  }
+  #quranAudioPlayer.qa-player-v20 .player-controls-row .player-surah{
+    grid-column:1!important;grid-row:1!important;
+    display:flex!important;border-right:1px solid rgba(230,211,166,.12)!important
+  }
+  #quranAudioPlayer.qa-player-v20 .player-controls-row .player-ayah{
+    grid-column:2!important;grid-row:1!important;
+    display:flex!important;border-right:0!important
+  }
+  #quranAudioPlayer.qa-player-v20 .player-controls-row .player-reciter{
+    grid-column:1/-1!important;grid-row:2!important;
+    display:flex!important;
+    border-right:0!important;border-top:1px solid rgba(230,211,166,.12)!important
+  }
+  #quranAudioPlayer.qa-player-v20 .player-controls-row .player-field{
+    position:static!important;
+    width:100%!important;max-width:none!important;
+    height:auto!important;min-height:0!important;
+    padding:6px 10px!important;
+    overflow:hidden!important;
+  }
+  #quranAudioPlayer.qa-player-v20 .player-controls-row .player-field label{
+    font-size:7.5px!important;line-height:1!important
+  }
+  #quranAudioPlayer.qa-player-v20 .player-controls-row .player-field select{
+    width:100%!important;height:34px!important;min-height:34px!important;
+    padding:0 22px 0 0!important;
+    font-size:13px!important;line-height:34px!important
+  }
+}
+@media (max-width:390px){
+  #quranAudioPlayer.qa-player-v20{
+    grid-template-columns:38px 50px minmax(0,1fr) 38px!important;
+  }
+  #quranAudioPlayer.qa-player-v20 .player-title{font-size:12px!important}
+  #quranAudioPlayer.qa-player-v20 .player-controls-row{
+    grid-template-columns:minmax(0,1.2fr) minmax(84px,.8fr)!important;
+  }
+  #quranAudioPlayer.qa-player-v20 .player-controls-row .player-field select{font-size:12px!important}
+}
