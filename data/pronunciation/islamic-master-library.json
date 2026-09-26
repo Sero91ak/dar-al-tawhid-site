@@ -1,0 +1,685 @@
+{
+  "schemaVersion": 1,
+  "libraryId": "dar-al-tawhid-islamic-pronunciation-master",
+  "updatedAt": "2026-09-26",
+  "policy": {
+    "precedence": [
+      "user-confirmed-local",
+      "installed-pronunciation-rules",
+      "verified-master-library",
+      "online-suggestions"
+    ],
+    "verifiedMasterMayAutoFillMissingRules": true,
+    "onlineSuggestionsNeverOverrideInstalledOrUserRules": true,
+    "persistentAudioMasterRequiresHumanConfirmation": true,
+    "unknownIslamicTermsMustBeSurfaced": true
+  },
+  "sources": {
+    "quran_named_prophets_islamweb_65657": {
+      "type": "web-verification",
+      "title": "عدد الأنبياء والرسل المذكورين في القرآن وأسماؤهم وأسماء آبائهم",
+      "publisher": "Islamweb",
+      "url": "https://islamweb.net/ar/fatwa/65657/",
+      "scope": "25 im Qurʾān namentlich genannte Propheten",
+      "checkedAt": "2026-09-26"
+    },
+    "installed_user_curated_rules": {
+      "type": "local-curated",
+      "title": "DĀR AL TAWḤĪD vorhandene Aussprachebibliothek",
+      "scope": "Bestehende Ṣaḥābah-, Ṣaḥābiyyāt-, Namen-, Honorific- und Fachbegriffsvarianten",
+      "policy": "Wird zur Laufzeit automatisch in den Master-Index übernommen und hat Vorrang vor Online-Einträgen."
+    }
+  },
+  "derivedCollections": [
+    {
+      "id": "existing_sahaba",
+      "source": "installed_user_curated_rules",
+      "selector": {
+        "required_honorific_key": "radiyallahu_anhu"
+      },
+      "category": "sahabi",
+      "personType": "sahabi",
+      "gender": "male"
+    },
+    {
+      "id": "existing_sahabiyyat",
+      "source": "installed_user_curated_rules",
+      "selector": {
+        "required_honorific_key": "radiyallahu_anha"
+      },
+      "category": "sahabiyyah",
+      "personType": "sahabiyyah",
+      "gender": "female"
+    },
+    {
+      "id": "existing_prophet_muhammad",
+      "source": "installed_user_curated_rules",
+      "selector": {
+        "required_honorific_key": "salawat_prophet"
+      },
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male"
+    }
+  ],
+  "entries": [
+    {
+      "id": "prophet_adam",
+      "canonical": "Ādam",
+      "arabic": "آدَم",
+      "transliteration": "Ādam",
+      "aliases": [
+        "Adam",
+        "Ādam"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "آدَم",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_idris",
+      "canonical": "Idrīs",
+      "arabic": "إِدْرِيس",
+      "transliteration": "Idrīs",
+      "aliases": [
+        "Idris",
+        "Idrīs"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "إِدْرِيس",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_nuh",
+      "canonical": "Nūḥ",
+      "arabic": "نُوح",
+      "transliteration": "Nūḥ",
+      "aliases": [
+        "Nuh",
+        "Nūḥ"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "نُوح",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_hud",
+      "canonical": "Hūd",
+      "arabic": "هُود",
+      "transliteration": "Hūd",
+      "aliases": [
+        "Hud",
+        "Hūd"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "هُود",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_salih",
+      "canonical": "Ṣāliḥ",
+      "arabic": "صَالِح",
+      "transliteration": "Ṣāliḥ",
+      "aliases": [
+        "Salih",
+        "Saleh",
+        "Ṣāliḥ"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "صَالِح",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_ibrahim",
+      "canonical": "Ibrāhīm",
+      "arabic": "إِبْرَاهِيم",
+      "transliteration": "Ibrāhīm",
+      "aliases": [
+        "Ibrahim",
+        "Ibrāhīm"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "إِبْرَاهِيم",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_lut",
+      "canonical": "Lūṭ",
+      "arabic": "لُوط",
+      "transliteration": "Lūṭ",
+      "aliases": [
+        "Lut",
+        "Lūṭ"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "لُوط",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_ismail",
+      "canonical": "Ismāʿīl",
+      "arabic": "إِسْمَاعِيل",
+      "transliteration": "Ismāʿīl",
+      "aliases": [
+        "Ismail",
+        "Ismāil",
+        "Ismāʿīl"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "إِسْمَاعِيل",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_ishaq",
+      "canonical": "Isḥāq",
+      "arabic": "إِسْحَاق",
+      "transliteration": "Isḥāq",
+      "aliases": [
+        "Ishaq",
+        "Ishak",
+        "Isḥāq"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "إِسْحَاق",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_yaqub",
+      "canonical": "Yaʿqūb",
+      "arabic": "يَعْقُوب",
+      "transliteration": "Yaʿqūb",
+      "aliases": [
+        "Yaqub",
+        "Yaqoub",
+        "Yaʿqūb"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "يَعْقُوب",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_yusuf",
+      "canonical": "Yūsuf",
+      "arabic": "يُوسُف",
+      "transliteration": "Yūsuf",
+      "aliases": [
+        "Yusuf",
+        "Yūsuf"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "يُوسُف",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_ayyub",
+      "canonical": "Ayyūb",
+      "arabic": "أَيُّوب",
+      "transliteration": "Ayyūb",
+      "aliases": [
+        "Ayyub",
+        "Ayub",
+        "Ayyūb"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "أَيُّوب",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_shuayb",
+      "canonical": "Šuʿayb",
+      "arabic": "شُعَيْب",
+      "transliteration": "Šuʿayb",
+      "aliases": [
+        "Shuayb",
+        "Shuʿayb",
+        "Šuʿayb"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "شُعَيْب",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_musa",
+      "canonical": "Mūsā",
+      "arabic": "مُوسَى",
+      "transliteration": "Mūsā",
+      "aliases": [
+        "Musa",
+        "Mūsā"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "مُوسَى",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_harun",
+      "canonical": "Hārūn",
+      "arabic": "هَارُون",
+      "transliteration": "Hārūn",
+      "aliases": [
+        "Harun",
+        "Haroon",
+        "Hārūn"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "هَارُون",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_dhul_kifl",
+      "canonical": "Ḏū al-Kifl",
+      "arabic": "ذُو الْكِفْل",
+      "transliteration": "Ḏū al-Kifl",
+      "aliases": [
+        "Dhu al-Kifl",
+        "Dhul-Kifl",
+        "Ḏū al-Kifl"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "ذُو الْكِفْل",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_dawud",
+      "canonical": "Dāwūd",
+      "arabic": "دَاوُود",
+      "transliteration": "Dāwūd",
+      "aliases": [
+        "Dawud",
+        "Daud",
+        "Dāwūd"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "دَاوُود",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_sulayman",
+      "canonical": "Sulaymān",
+      "arabic": "سُلَيْمَان",
+      "transliteration": "Sulaymān",
+      "aliases": [
+        "Sulaiman",
+        "Suleiman",
+        "Sulayman",
+        "Sulaymān"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "سُلَيْمَان",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_ilyas",
+      "canonical": "Ilyās",
+      "arabic": "إِلْيَاس",
+      "transliteration": "Ilyās",
+      "aliases": [
+        "Ilyas",
+        "Ilyās"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "إِلْيَاس",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_alyasa",
+      "canonical": "al-Yasaʿ",
+      "arabic": "الْيَسَع",
+      "transliteration": "al-Yasaʿ",
+      "aliases": [
+        "al-Yasa",
+        "al-Yasaʿ",
+        "Alyasa"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "الْيَسَع",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_yunus",
+      "canonical": "Yūnus",
+      "arabic": "يُونُس",
+      "transliteration": "Yūnus",
+      "aliases": [
+        "Yunus",
+        "Younus",
+        "Yūnus"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "يُونُس",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_zakariyya",
+      "canonical": "Zakariyyā",
+      "arabic": "زَكَرِيَّا",
+      "transliteration": "Zakariyyā",
+      "aliases": [
+        "Zakariya",
+        "Zakariyya",
+        "Zakariyyā"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "زَكَرِيَّا",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_yahya",
+      "canonical": "Yaḥyā",
+      "arabic": "يَحْيَى",
+      "transliteration": "Yaḥyā",
+      "aliases": [
+        "Yahya",
+        "Yaḥyā"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "يَحْيَى",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_isa",
+      "canonical": "ʿĪsā",
+      "arabic": "عِيسَى",
+      "transliteration": "ʿĪsā",
+      "aliases": [
+        "Isa",
+        "Eesa",
+        "ʿIsa",
+        "ʿĪsā"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "عِيسَى",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "prophet_muhammad",
+      "canonical": "Muḥammad",
+      "arabic": "مُحَمَّد",
+      "transliteration": "Muḥammad",
+      "aliases": [
+        "Muhammad",
+        "Mohammad",
+        "Mohammed",
+        "Muḥammad"
+      ],
+      "category": "prophet",
+      "personType": "prophet",
+      "gender": "male",
+      "tts_text": "مُحَمَّد",
+      "tts_language": "ar",
+      "required_honorific_key": "salawat_prophet",
+      "voice_lock": "REVIEW",
+      "qaStatus": "source-verified",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "quran_named_prophets_islamweb_65657"
+      ],
+      "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    }
+  ]
+}
