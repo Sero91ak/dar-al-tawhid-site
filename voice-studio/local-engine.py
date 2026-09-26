@@ -2216,6 +2216,47 @@ def find_ffmpeg():
             return candidate
     return None
 
+def app_delivery_audio(src:Path):
+    src=Path(src)
+    if not src.exists() or src.stat().st_size<=44:
+        raise RuntimeError("Für die Kids-App ist noch keine gültige Audio vorhanden.")
+    ffmpeg=find_ffmpeg()
+    if not ffmpeg:
+        raise RuntimeError("ffmpeg fehlt – kompakte Kids-App-Audio kann nicht erstellt werden.")
+
+    publish_dir=OUTPUT/"publish"
+    publish_dir.mkdir(parents=True,exist_ok=True)
+    signature=file_signature(src)
+    digest=hashlib.sha1(signature.encode("utf-8")).hexdigest()[:16]
+    dst=publish_dir/f"dar_kids_{digest}.m4a"
+    if dst.exists() and dst.stat().st_size>1024:
+        return dst
+
+    tmp=dst.with_suffix(".tmp.m4a")
+    cmd=[
+        ffmpeg,"-y","-i",str(src),
+        "-vn","-ac","1","-ar","24000",
+        "-c:a","aac","-b:a","72k",
+        "-movflags","+faststart",
+        str(tmp)
+    ]
+    p=subprocess.run(cmd,capture_output=True,text=True)
+    if p.returncode!=0 or not tmp.exists() or tmp.stat().st_size<=1024:
+        try: tmp.unlink(missing_ok=True)
+        except Exception: pass
+        detail=(p.stderr or "")[-1200:]
+        raise RuntimeError("Kids-App-Audio konnte nicht komprimiert werden. "+detail)
+    os.replace(tmp,dst)
+
+    # Alte Delivery-Dateien klein halten; Master-WAV und RenderCache bleiben unangetastet.
+    try:
+        files=sorted(publish_dir.glob("dar_kids_*.m4a"),key=lambda x:x.stat().st_mtime,reverse=True)
+        for old in files[12:]:
+            old.unlink(missing_ok=True)
+    except Exception:
+        pass
+    return dst
+
 def postprocess(src:Path):
     ffmpeg=find_ffmpeg()
     if not ffmpeg:
@@ -2558,6 +2599,21 @@ class H(BaseHTTPRequestHandler):
             })
         elif p=="/learning/state":
             self.send_json(200,{"ok":True,**learning_state()})
+        elif p=="/publish-audio":
+            try:
+                st=get_status()
+                src=Path(str(st.get("last_output") or ""))
+                delivery=app_delivery_audio(src)
+                b=delivery.read_bytes()
+                self.send_response(200)
+                self.send_header("Content-Type","audio/mp4")
+                self.send_header("Content-Length",str(len(b)))
+                self.send_header("Content-Disposition",'inline; filename="dar-kids-story.m4a"')
+                self.send_header("X-DAR-Audio-Bytes",str(len(b)))
+                self.send_header("X-DAR-Audio-Codec","aac-72k-mono")
+                self.cors();self.end_headers();self.wfile.write(b)
+            except Exception as e:
+                return self.send_json(409,{"ok":False,"error":str(e)})
         elif p=="/data/pronunciation/voice-production-profile.json":
             self.send_file(PROFILE,"application/json; charset=utf-8")
         elif p=="/watermark-my-logo-full.png":
