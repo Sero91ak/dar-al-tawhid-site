@@ -256,6 +256,23 @@ def build_master_library():
                     if alias not in aliases:
                         aliases.append(alias)
                 item["aliases"]=aliases
+                # Aussprache/tts_text der höher priorisierten lokalen Regel bleibt
+                # unangetastet. Verifizierte Seed-Metadaten dürfen aber einen bisher
+                # generischen "term"-Eintrag fachlich präzisieren (z. B. Mūsā -> Prophet).
+                incoming_person=str(e.get("personType") or "")
+                current_person=str(item.get("personType") or "")
+                if incoming_person and incoming_person!="term" and current_person in ("","term"):
+                    item["personType"]=incoming_person
+                    item["category"]=str(e.get("category") or item.get("category") or "")
+                if not str(item.get("gender") or "") and str(e.get("gender") or ""):
+                    item["gender"]=str(e.get("gender"))
+                if not str(item.get("required_honorific_key") or "") and str(e.get("required_honorific_key") or ""):
+                    item["required_honorific_key"]=str(e.get("required_honorific_key"))
+                source_ids=list(item.get("sourceIds") or [])
+                for source_id in e.get("sourceIds") or []:
+                    if source_id not in source_ids:
+                        source_ids.append(source_id)
+                item["sourceIds"]=source_ids
     return list(merged.values())
 
 def master_rules_from_entries(entries,blocked_needles):
