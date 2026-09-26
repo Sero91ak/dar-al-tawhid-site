@@ -1,11 +1,11 @@
 {
   "schemaVersion": 8,
-  "id": "dar-own-voice-narration-v2.6",
+  "id": "dar-own-voice-narration-v2.7",
   "updatedAt": "2026-09-26",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
-  "productionGoal": "Production-grade Serhat narration with deterministic pronunciation, mandatory honorifics, persistent confirmed audio locks, and a user-driven pronunciation learning loop that can search current online rules without silently promoting unreviewed audio.",
+  "productionGoal": "Production-grade Serhat narration with deterministic Islamic-name pronunciation, verified online master-library merge, unresolved-term blocking, mandatory honorifics, persistent confirmed audio locks, and user-confirmed pronunciation learning.",
   "delivery": {
     "genderPresentation": "male",
     "character": [
@@ -76,7 +76,16 @@
     "connectedSpeech": "Apply Standard/Classical connected speech and article assimilation; do not split locked phrases internally.",
     "audioLockField": "audio_lock_key",
     "audioLockPolicyField": "audio_lock_policy",
-    "corePauseForm": "Critical standalone Arabic terms use explicit final sukūn to stabilize word-final consonants."
+    "corePauseForm": "Critical standalone Arabic terms use explicit final sukūn to stabilize word-final consonants.",
+    "islamicMasterLibrary": "/data/pronunciation/islamic-master-library.json",
+    "masterLibraryPolicy": {
+      "installedRulesFirst": true,
+      "verifiedSeedMayFillMissingRules": true,
+      "onlineVerifiedSeedMayFillMissingRules": true,
+      "onlineNeverOverridesUserOrInstalledRules": true,
+      "persistentAudioMasterRequiresHumanConfirmation": true,
+      "unknownIslamicTermsBlockedBeforeRender": true
+    }
   },
   "prosody": {
     "automatic": true,
@@ -358,7 +367,10 @@
     "boundedGenerationRegression": true,
     "mlxFallbackRegression": true,
     "backendIdentityVisible": true,
-    "aishahFemaleHonorificRegression": true
+    "aishahFemaleHonorificRegression": true,
+    "islamicMasterLibraryRegression": true,
+    "unknownIslamicTermDetectionRegression": true,
+    "masterLibraryPrecedenceRegression": true
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
@@ -501,8 +513,9 @@
     "onlineSource": "GitHub main pronunciation-rules.json",
     "searchOrder": [
       "user-confirmed",
-      "online-cache",
-      "installed-library"
+      "installed-library",
+      "verified-master-library",
+      "online-cache"
     ],
     "clickableDetectedTerms": true,
     "textSelectionCapture": true,
@@ -516,7 +529,14 @@
     "vocabularyExpandsPersistently": true,
     "automaticOnlineSync": true,
     "automaticOnlineSyncHours": 24,
-    "onlineRulesAreSuggestionsOnly": true
+    "onlineRulesAreSuggestionsOnly": true,
+    "masterLibraryEnabled": true,
+    "masterLibraryInstalledPath": "islamic-master-library.json",
+    "masterLibraryOnlineSource": "GitHub main islamic-master-library.json",
+    "masterLibraryOnlineCachePath": "~/SerhatVoice/PronunciationLearning/islamic-master-library.json",
+    "verifiedMasterMayAutoFillMissingRules": true,
+    "masterNeverOverridesUserOrInstalled": true,
+    "unknownIslamicTermsMustBeReviewed": true
   },
   "productionRenderer": {
     "primaryAppleSilicon": "mlx-community/chatterbox-multilingual-v3",

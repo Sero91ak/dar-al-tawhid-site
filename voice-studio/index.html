@@ -402,7 +402,7 @@ input,select{
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark" aria-hidden="true"><img src="/watermark-my-logo-full.png" alt=""></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.6.1 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.7.0 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="installBtn" class="btn quiet install-btn">App installieren</button>
@@ -414,7 +414,7 @@ input,select{
 <main class="panel editor-panel">
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
-    <div class="badges"><span class="badge">SERHAT VOICE 2.6.1</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
+    <div class="badges"><span class="badge">SERHAT VOICE 2.7.0</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
   </div>
 
   <div class="textbox-wrap">
@@ -542,7 +542,7 @@ input,select{
   <div id="error" class="bad" style="font-size:11px;line-height:1.5"></div>
 </aside>
 </div>
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.6.1 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.7.0 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
 </div>
 </div>
 
@@ -684,6 +684,22 @@ async function analyzeProsody(){
       $("#qaHonorific").className=d.honorificPolicyEnabled?"good":"bad";
     }
     if(d.prepared)$("#prepared").textContent=d.prepared;
+    const unresolved=Array.isArray(d.unresolvedIslamicTerms)?d.unresolvedIslamicTerms:[];
+    if(unresolved.length){
+      const first=unresolved[0]||{};
+      $("#learnTerm").value=first.term||"";
+      const suggestions=Array.isArray(first.suggestions)?first.suggestions.map(x=>({
+        score:x.score,
+        canonical:x.canonical,
+        input:first.term,
+        ttsText:x.arabic,
+        category:x.category,
+        source:x.origin||"Master-Library",
+        requiredHonorificKey:x.requiredHonorificKey||""
+      })):[];
+      renderLearningResults(suggestions);
+      $("#learningSection").scrollIntoView({behavior:"smooth",block:"nearest"});
+    }
     return d;
   }catch(_){return null}
 }
@@ -696,9 +712,11 @@ function clearLearningPreview(){
   p.pause();p.removeAttribute("src");p.hidden=true;
 }
 function renderLearningState(d={}){
-  const learned=Number(d.learned||0),online=Number(d.onlineRules||0);
+  const learned=Number(d.learned||0),online=Number(d.onlineRules||0),master=Number(d.masterEntries||0);
+  const prophets=Number(d.masterProphets||0),sahaba=Number(d.masterSahaba||0),sahabiyyat=Number(d.masterSahabiyyat||0);
   const synced=d.onlineSyncedAt?(" · online "+String(d.onlineSyncedAt).replace("T"," ").slice(0,16)):"";
-  $("#learnState").textContent=learned+" dauerhaft gelernte Wörter · "+online+" Online-Regeln"+synced;
+  $("#learnState").textContent=learned+" dauerhaft gelernt · "+master+" Master-Einträge ("+
+    prophets+" Propheten · "+sahaba+" Ṣaḥābah · "+sahabiyyat+" Ṣaḥābiyyāt) · "+online+" Online-Regeln"+synced;
 }
 async function loadLearningState(){
   if(!engineOK){$("#learnState").textContent="Engine starten, um den Lernwortschatz zu verwenden.";return}
@@ -796,7 +814,8 @@ async function syncLearning(){
     const d=await r.json().catch(()=>({}));
     if(!r.ok||!d.ok)throw Error(d.error||"Online-Wortschatz konnte nicht aktualisiert werden.");
     renderLearningState(d);
-    setMessage("Online-Wortschatz aktualisiert: "+Number(d.rules||d.onlineRules||0).toLocaleString("de-DE")+" Regeln stehen für Korrektursuchen bereit.","good");
+    setMessage("Online-Bibliotheken aktualisiert: "+Number(d.rules||d.onlineRules||0).toLocaleString("de-DE")+
+      " Regeln · "+Number(d.masterEntries||0).toLocaleString("de-DE")+" Master-Einträge. Bestätigte lokale MASTER-Locks bleiben unverändert.","good");
     if($("#learnTerm").value.trim())await searchLearning();
   }catch(e){setMessage(e.message||String(e))}
   finally{btn.disabled=false;btn.textContent=old}
@@ -804,15 +823,21 @@ async function syncLearning(){
 
 async function manualAnalyze(){
   renderAnalysis();
-  await analyzeProsody();
+  const result=await analyzeProsody();
   const btns=[$("#analyzeBtn"),$("#mobileAnalyzeBtn")].filter(Boolean);
   const labels=btns.map(b=>b.textContent);
   btns.forEach(b=>{b.disabled=true;b.textContent="Geprüft ✓"});
-  setMessage("Ausspracheanalyse aktualisiert.","good");
+  const unresolved=Array.isArray(result?.unresolvedIslamicTerms)?result.unresolvedIslamicTerms:[];
+  if(unresolved.length){
+    const names=unresolved.slice(0,4).map(x=>x.term).join(", ");
+    setMessage("Noch nicht sicher in der Master-Bibliothek: "+names+". Bitte unten prüfen, bevor Audio erzeugt wird.","warn");
+  }else{
+    setMessage("Ausspracheanalyse aktualisiert · islamische Master-Bibliothek geprüft.","good");
+  }
   setTimeout(()=>{
     btns.forEach((b,i)=>{b.disabled=false;b.textContent=labels[i]});
-    if($("#error").textContent==="Ausspracheanalyse aktualisiert.")setMessage("");
-  },900);
+    if(!unresolved.length&&$("#error").textContent.includes("Master-Bibliothek geprüft"))setMessage("");
+  },1200);
 }
 async function loadLibrary(){
   try{

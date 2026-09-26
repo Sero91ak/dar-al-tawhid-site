@@ -6,6 +6,7 @@ on:
       - "voice-studio/**"
       - "data/pronunciation/pronunciation-rules.json"
       - "data/pronunciation/voice-production-profile.json"
+      - "data/pronunciation/islamic-master-library.json"
       - "data/pronunciation/voice-regression-fixtures.json"
       - "scripts/voice-studio/validate-v2.py"
       - ".github/workflows/voice-studio-v2-validate.yml"
@@ -14,6 +15,7 @@ on:
       - "voice-studio/**"
       - "data/pronunciation/pronunciation-rules.json"
       - "data/pronunciation/voice-production-profile.json"
+      - "data/pronunciation/islamic-master-library.json"
       - "data/pronunciation/voice-regression-fixtures.json"
       - "scripts/voice-studio/validate-v2.py"
 
@@ -51,6 +53,7 @@ jobs:
           home.mkdir(parents=True)
           shutil.copy2(root/"data/pronunciation/pronunciation-rules.json",app/"pronunciation-rules.json")
           shutil.copy2(root/"data/pronunciation/voice-production-profile.json",app/"voice-production-profile.json")
+          shutil.copy2(root/"data/pronunciation/islamic-master-library.json",app/"islamic-master-library.json")
           os.environ["DAR_VOICE_APP_HOME"]=str(app)
           os.environ["HOME"]=str(home)
 
@@ -65,7 +68,17 @@ jobs:
           assert hasattr(mod,"AUDIO_LOCK_STATE_LOCK")
           assert hasattr(mod,"PENDING_AUDIO_LOCKS")
           assert hasattr(mod,"PENDING_AUDIO_RENDER_ID")
-          print("Voice Engine runtime smoke OK",status["audio_lock_pending"])
+          state=mod.learning_state()
+          assert state["masterEntries"] >= 25, state
+          assert state["masterProphets"] >= 25, state
+          prepared,found=mod.prepare("Mūsā und ʿĀʾišah")
+          assert "مُوسَى" in prepared, prepared
+          assert "عَائِشَة" in prepared, prepared
+          assert "رَضِيَ اللَّهُ عَنْهَا" in prepared, prepared
+          assert mod.detect_unresolved_islamic_terms("Mūsā sagte") == []
+          unknown=mod.detect_unresolved_islamic_terms("ʿAbdulx al-Majhūl sagte")
+          assert unknown, unknown
+          print("Voice Engine runtime smoke OK",state["masterEntries"],state["masterProphets"])
           PY
 
       - name: Validate pronunciation and regression fixtures
@@ -104,6 +117,8 @@ jobs:
               '"/learning/preview"',
               '"/learning/confirm"',
               'honorificPolicyEnabled',
+              'unresolvedIslamicTerms',
+              'Master-Bibliothek',
               'style:$("#styleMode").value',
           ]
           missing=[x for x in required if x not in html]

@@ -95,9 +95,36 @@ def main():
         fail("usage: validate-v2.py pronunciation-rules.json voice-production-profile.json local-engine.py voice-regression-fixtures.json")
     pron,profile,engine_path,fixtures_path=sys.argv[1:]
     lib=load(pron); prof=load(profile); fixtures=load(fixtures_path)
+    master_path=Path(pron).with_name("islamic-master-library.json")
+    if not master_path.exists():
+        fail("islamic-master-library.json missing next to pronunciation-rules.json")
+    master=load(master_path)
+    master_entries=master.get("entries") or []
     rules=lib.get("rules") or []
     if len(rules)<3700: fail(f"too few pronunciation rules: {len(rules)}")
     if int(lib.get("counts",{}).get("canonicalTerms",0))<900: fail("canonical term count regressed")
+
+    if int(master.get("schemaVersion",0))<1: fail("master library schemaVersion missing")
+    prophet_entries=[e for e in master_entries if str(e.get("personType",""))=="prophet"]
+    if len(prophet_entries)<25: fail(f"too few verified prophet master entries: {len(prophet_entries)}")
+    expected_prophets={
+        "Ādam","Idrīs","Nūḥ","Hūd","Ṣāliḥ","Ibrāhīm","Lūṭ","Ismāʿīl","Isḥāq","Yaʿqūb",
+        "Yūsuf","Ayyūb","Šuʿayb","Mūsā","Hārūn","Ḏū al-Kifl","Dāwūd","Sulaymān","Ilyās",
+        "al-Yasaʿ","Yūnus","Zakariyyā","Yaḥyā","ʿĪsā","Muḥammad"
+    }
+    got_prophets={str(e.get("canonical","")) for e in prophet_entries}
+    missing_prophets=expected_prophets-got_prophets
+    if missing_prophets: fail("master prophet entries missing: "+", ".join(sorted(missing_prophets)))
+    for e in master_entries:
+        canonical=str(e.get("canonical","")).strip()
+        tts=str(e.get("tts_text") or e.get("arabic") or "").strip()
+        if not canonical: fail("master entry missing canonical")
+        if not tts or not ARABIC_RE.search(tts): fail(f"master entry has no Arabic tts_text: {canonical}")
+        if e.get("status")=="verified" and not bool(e.get("autoUse")):
+            fail(f"verified master entry is not enabled for controlled auto-use: {canonical}")
+    policy=master.get("policy") or {}
+    for flag in ("verifiedMasterMayAutoFillMissingRules","onlineSuggestionsNeverOverrideInstalledOrUserRules","persistentAudioMasterRequiresHumanConfirmation","unknownIslamicTermsMustBeSurfaced"):
+        if not policy.get(flag): fail("master library policy missing: "+flag)
 
     seen={}
     ipa_groups={}
@@ -186,6 +213,9 @@ def main():
     if not bool(qa.get("boundedGenerationRegression")): fail("bounded generation QA missing")
     if not bool(qa.get("mlxFallbackRegression")): fail("MLX fallback QA missing")
     if not bool(qa.get("backendIdentityVisible")): fail("backend identity QA missing")
+    if not bool(qa.get("islamicMasterLibraryRegression")): fail("Islamic master-library QA missing")
+    if not bool(qa.get("unknownIslamicTermDetectionRegression")): fail("unknown Islamic-term detection QA missing")
+    if not bool(qa.get("masterLibraryPrecedenceRegression")): fail("master-library precedence QA missing")
 
     renderer=prof.get("productionRenderer") or {}
     if renderer.get("framework")!="mlx-audio": fail("MLX production renderer policy missing")
@@ -203,7 +233,9 @@ def main():
         "manualArabicTtsRequiredWhenNoRuleFound","isolatedPreviewBeforeSave",
         "explicitHumanConfirmationRequired","confirmedPreviewBecomesPersistentAudioLock",
         "userRuleOverridesBaseRule","onlineRulesNeverAutoPromoteToMaster","vocabularyExpandsPersistently",
-        "automaticOnlineSync","onlineRulesAreSuggestionsOnly"
+        "automaticOnlineSync","onlineRulesAreSuggestionsOnly","masterLibraryEnabled",
+        "verifiedMasterMayAutoFillMissingRules","masterNeverOverridesUserOrInstalled",
+        "unknownIslamicTermsMustBeReviewed"
     )
     for flag in required_learning_flags:
         if not learning.get(flag): fail("pronunciation learning policy missing: "+flag)
@@ -240,9 +272,9 @@ def main():
     except SyntaxError as e:
         fail(f"engine syntax error: {e}")
     functions={n.name for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))}
-    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","discard_pending_audio_locks","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav","source_has_honorific","rebuild_runtime_rules","pronunciation_search","sync_online_pronunciation_library","create_learning_preview","confirm_learning_preview","save_user_override","learning_state","online_sync_is_stale","refresh_online_library_if_stale","file_signature","render_cache_key","load_render_cache","save_render_cache","cleanup_render_cache","reference_for_language","prepare_reference_if_needed","generation_token_budget","generation_timeout_seconds","_mlx_process_main","_start_mlx_process","_stop_mlx_process","load_mlx_model","load_production_model","render_with_mlx"}:
+    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","discard_pending_audio_locks","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav","source_has_honorific","rebuild_runtime_rules","derive_master_entries_from_rules","build_master_library","master_rules_from_entries","master_suggestions","detect_unresolved_islamic_terms","pronunciation_search","sync_online_pronunciation_library","create_learning_preview","confirm_learning_preview","save_user_override","learning_state","online_sync_is_stale","refresh_online_library_if_stale","file_signature","render_cache_key","load_render_cache","save_render_cache","cleanup_render_cache","reference_for_language","prepare_reference_if_needed","generation_token_budget","generation_timeout_seconds","_mlx_process_main","_start_mlx_process","_stop_mlx_process","load_mlx_model","load_production_model","render_with_mlx"}:
         if required not in functions: fail(f"engine missing production function: {required}")
-    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","generation_timeout","MLX_PROCESS_LOCK=threading.RLock()","MLX worker stopped","Watchdog aktiv","/confirm-core-audio","audio_lock_pending","session_audio_locks","required_honorific_key","honorificPolicyEnabled","/learning/search","/learning/sync","/learning/preview","/learning/confirm","USER_OVERRIDES_FILE","ONLINE_LIBRARY_CACHE","CONFIRMED_WAV","autoSyncHours","AUDIO_LOCK_STATE_LOCK=threading.RLock()","PENDING_AUDIO_LOCKS={}","PENDING_AUDIO_RENDER_ID=\"\"","MODEL_CONDITIONAL_CACHE={}","RENDER_CACHE_DIR","persistent-conditionals+segment-cache-v2","mlx-community/chatterbox-multilingual-v3","GenerationTokenLimitReached","GenerationTimeoutReached","max_new_tokens","production_backend"}:
+    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","generation_timeout","MLX_PROCESS_LOCK=threading.RLock()","MLX worker stopped","Watchdog aktiv","/confirm-core-audio","audio_lock_pending","session_audio_locks","required_honorific_key","honorificPolicyEnabled","/learning/search","/learning/sync","/learning/preview","/learning/confirm","USER_OVERRIDES_FILE","ONLINE_LIBRARY_CACHE","MASTER_LIBRARY_CACHE","MASTER_LIBRARY_URL","islamic-master-library.json","unresolvedIslamicTerms","librarySuggestions","Ungeprüfte islamische Namen/Begriffe erkannt","user_rules+BASE_RULES+MASTER_RULES","CONFIRMED_WAV","autoSyncHours","AUDIO_LOCK_STATE_LOCK=threading.RLock()","PENDING_AUDIO_LOCKS={}","PENDING_AUDIO_RENDER_ID=\"\"","MODEL_CONDITIONAL_CACHE={}","RENDER_CACHE_DIR","persistent-conditionals+segment-cache-v2","mlx-community/chatterbox-multilingual-v3","GenerationTokenLimitReached","GenerationTimeoutReached","max_new_tokens","production_backend"}:
         if marker not in engine_source: fail(f"engine missing QA/audio-lock marker: {marker}")
     state_pos=engine_source.find("AUDIO_LOCK_STATE_LOCK=threading.RLock()")
     pending_fn_pos=engine_source.find("def pending_audio_lock_keys")
@@ -288,6 +320,8 @@ def main():
         "requiredHonorificFemaleVariants":len(female_required),
         "requiredHonorificProphetVariants":len(prophet_required),
         "pronunciationLearning":True,
+        "masterLibraryEntries":len(master_entries),
+        "masterProphets":len(prophet_entries),
         "profileSchema":prof.get("schemaVersion")
     },ensure_ascii=False))
 

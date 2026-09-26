@@ -1,6 +1,6 @@
 {
-  "version": "2.6.1",
-  "updatedAt": "2026-09-26T15:22:55+02:00",
+  "version": "2.7.0",
+  "updatedAt": "2026-09-26T15:45:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
@@ -20,7 +20,7 @@
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-raw",
-  "engineVersion": "supervised-mlx-process-watchdog-v2",
+  "engineVersion": "supervised-mlx-watchdog+islamic-master-library-v1",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -99,7 +99,8 @@
       "radiyallahu_anhu",
       "radiyallahu_anha",
       "radiyallahu_anhuma",
-      "radiyallahu_anhum"
+      "radiyallahu_anhum",
+      "aishah"
     ],
     "coreAudioLockVariants": 98,
     "explicitFinalSukunForCoreTerms": true,
@@ -139,7 +140,15 @@
     "explicitListenBeforeSave": true,
     "confirmedCandidateBecomesPersistentAudioLock": true,
     "sharedConfirmedLockAcrossSpellingVariants": true,
-    "vocabularyPersistsAcrossAppUpdates": true
+    "vocabularyPersistsAcrossAppUpdates": true,
+    "islamicMasterLibrary": true,
+    "islamicMasterLibraryPath": "~/Applications/DAR-Voice-Studio/islamic-master-library.json",
+    "islamicMasterLibraryOnline": true,
+    "derivedExistingRules": true,
+    "unknownIslamicTermDetection": true,
+    "unresolvedIslamicTermRenderBlock": true,
+    "verifiedMasterAutoFillMissingRules": true,
+    "localAndUserRulesAlwaysWin": true
   },
   "releaseSafety": {
     "stagedInstaller": true,
@@ -192,7 +201,11 @@
     "hardTimeoutRecovery": true,
     "timeoutRescueSplit": true,
     "watchdogHeartbeatStatus": true,
-    "stuckInferenceCannotBlockServerForever": true
+    "stuckInferenceCannotBlockServerForever": true,
+    "islamicMasterLibraryValidation": true,
+    "prophetSeedRegression": true,
+    "masterLibraryPrecedenceRegression": true,
+    "unresolvedIslamicTermRegression": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -233,6 +246,8 @@
     "automaticWorkerRestartAfterTimeout": true,
     "timeoutRescueSplit": true,
     "segmentWatchdog": "dynamic 32–85 s by language/text length",
-    "watchdogHeartbeatStatus": true
+    "watchdogHeartbeatStatus": true,
+    "masterLibraryMergeAtStartup": true,
+    "onlineMasterSyncHours": 24
   }
 }
