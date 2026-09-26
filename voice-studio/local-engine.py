@@ -48,8 +48,10 @@ LEARNING_PENDING_DIR=LEARNING_HOME/"pending"
 USER_OVERRIDES_FILE=LEARNING_HOME/"user-overrides.json"
 ONLINE_LIBRARY_CACHE=LEARNING_HOME/"online-library.json"
 LEARNING_LOG=LEARNING_HOME/"learning-log.jsonl"
+RENDER_CACHE_DIR=VOICE_HOME/"RenderCache"/"v2"
 LEARNING_HOME.mkdir(parents=True,exist_ok=True)
 LEARNING_PENDING_DIR.mkdir(parents=True,exist_ok=True)
+RENDER_CACHE_DIR.mkdir(parents=True,exist_ok=True)
 ONLINE_LIBRARY_URL=os.environ.get(
     "DAR_VOICE_ONLINE_LIBRARY_URL",
     "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/data/pronunciation/pronunciation-rules.json"
@@ -194,6 +196,11 @@ RENDER_LOCK=threading.Lock()
 STATUS_LOCK=threading.Lock()
 MODEL_ACTIVE_REFERENCE=None
 MODEL_REFERENCE_PREPARES=0
+MODEL_REFERENCE_CACHE_HITS=0
+MODEL_CONDITIONAL_CACHE={}
+AUDIO_WAV_CACHE={}
+RENDER_CACHE_STATS={"hits":0,"misses":0,"writes":0}
+RENDER_CACHE_MAX_BYTES=2*1024*1024*1024
 
 # Persistente Kern-Aussprache-Locks haben einen eigenen Zustand.
 # Diese Initialisierung muss VOR jedem /health- oder /status-Aufruf existieren.
@@ -223,6 +230,10 @@ def pending_audio_lock_keys():
 
 def load_locked_wav(path:Path,target_sr:int):
     import numpy as np, torch, wave
+    cache_key=(str(path),int(target_sr),file_signature(path))
+    cached=AUDIO_WAV_CACHE.get(cache_key)
+    if cached is not None:
+        return cached.clone()
     with wave.open(str(path),"rb") as wf:
         channels=wf.getnchannels()
         width=wf.getsampwidth()
@@ -237,6 +248,7 @@ def load_locked_wav(path:Path,target_sr:int):
     if int(sr)!=int(target_sr) and w.shape[-1]>1:
         new_len=max(1,round(w.shape[-1]*float(target_sr)/float(sr)))
         w=torch.nn.functional.interpolate(w.unsqueeze(0),size=new_len,mode="linear",align_corners=False).squeeze(0)
+    AUDIO_WAV_CACHE[cache_key]=w.clone()
     return w
 
 def split_audio_locked_spans(text:str):
@@ -619,8 +631,10 @@ def get_status():
     out["honorific_name_variants"]=sum(1 for r in RULES if r.get("required_honorific_key"))
     out["honorific_audio_keys"]=sorted(k for k in HONORIFIC_KEYS if k in HONORIFIC_TTS_BY_KEY)
     out["pronunciation_learning"]=learning_state()
-    out["performance_engine"]="grouped-reference-conditioning-v1"
+    out["performance_engine"]="persistent-conditionals+segment-cache-v2"
     out["reference_prepares_total"]=MODEL_REFERENCE_PREPARES
+    out["reference_cache_hits_total"]=MODEL_REFERENCE_CACHE_HITS
+    out["render_cache"]=dict(RENDER_CACHE_STATS)
     return out
 
 def source_has_honorific(text:str,pos:int,required_key:str=""):
@@ -710,7 +724,7 @@ def choose_device():
     return "mps" if torch.backends.mps.is_available() else "cpu"
 
 def load_model(force_device=None):
-    global MODEL, MODEL_DEVICE, MODEL_ACTIVE_REFERENCE
+    global MODEL, MODEL_DEVICE, MODEL_ACTIVE_REFERENCE, MODEL_CONDITIONAL_CACHE, AUDIO_WAV_CACHE
     target=force_device or choose_device()
     if MODEL is not None and MODEL_DEVICE==target:
         return MODEL
@@ -754,6 +768,8 @@ def load_model(force_device=None):
             MODEL=model
             MODEL_DEVICE=target
             MODEL_ACTIVE_REFERENCE=None
+            MODEL_CONDITIONAL_CACHE={}
+            AUDIO_WAV_CACHE={}
             set_status(
                 model_state="ready",
                 model_device=target,
@@ -773,7 +789,14 @@ def load_model(force_device=None):
 
 def warm_model():
     try:
-        load_model()
+        model=load_model()
+        # Produktions-Warmup: beide tatsächlich vorhandenen Referenzen einmal konditionieren.
+        prepare_reference_if_needed(model,"de",prosody_settings("narration","de","Warmup")["exaggeration"])
+        if REF_AR.exists() and file_signature(REF_AR)!=file_signature(REF_DE):
+            prepare_reference_if_needed(model,"ar",prosody_settings("narration","ar","تجربة")["exaggeration"])
+        # Deutsch als häufigsten Startzustand aktiv lassen.
+        prepare_reference_if_needed(model,"de",prosody_settings("narration","de","Warmup")["exaggeration"])
+        cleanup_render_cache()
     except Exception:
         pass
 
@@ -945,23 +968,103 @@ def prosody_settings(mode:str,language_id:str,text:str=""):
         "crossfade_ms":int(mode_cfg.get("crossfadeMs",28)),
     }
 
+def file_signature(path:Path):
+    try:
+        st=path.stat()
+        return f"{path.resolve()}|{st.st_size}|{st.st_mtime_ns}"
+    except Exception:
+        return str(path)
+
+def render_cache_key(text:str,language_id:str,mode:str):
+    p=prosody_settings(mode,language_id,text)
+    payload={
+        "schema":2,
+        "model":"chatterbox-multilingual-v3",
+        "text":str(text),
+        "language":str(language_id),
+        "mode":str(mode),
+        "reference":file_signature(reference_for_language(language_id)),
+        "exaggeration":round(float(p["exaggeration"]),6),
+        "cfg_weight":round(float(p["cfg_weight"]),6),
+        "temperature":round(float(p["temperature"]),6),
+    }
+    raw=json.dumps(payload,ensure_ascii=False,sort_keys=True,separators=(",",":")).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()
+
+def render_cache_path(key:str):
+    return RENDER_CACHE_DIR/f"{key}.wav"
+
+def load_render_cache(text:str,language_id:str,mode:str,target_sr:int):
+    key=render_cache_key(text,language_id,mode)
+    path=render_cache_path(key)
+    if not path.exists() or path.stat().st_size<=44:
+        RENDER_CACHE_STATS["misses"]+=1
+        return None,None,key
+    try:
+        wav=load_locked_wav(path,target_sr)
+        metrics=audio_quality_metrics(wav,target_sr,text,language_id,mode)
+        hard=[x for x in metrics["issues"] if x in ("empty_audio","non_finite","near_silence","low_peak","clipping","too_short")]
+        if hard:
+            path.unlink(missing_ok=True)
+            RENDER_CACHE_STATS["misses"]+=1
+            return None,None,key
+        try: os.utime(path,None)
+        except Exception: pass
+        RENDER_CACHE_STATS["hits"]+=1
+        metrics["attempt"]=0
+        metrics["critical"]=False
+        metrics["rescued"]=False
+        metrics["segment_cache"]="hit"
+        return wav,metrics,key
+    except Exception:
+        try: path.unlink(missing_ok=True)
+        except Exception: pass
+        RENDER_CACHE_STATS["misses"]+=1
+        return None,None,key
+
+def save_render_cache(key:str,wav,sr:int):
+    if not key:
+        return
+    path=render_cache_path(key)
+    tmp=path.with_name(path.name+f".tmp.{os.getpid()}.{uuid.uuid4().hex[:8]}.wav")
+    try:
+        save_wav(tmp,wav,sr)
+        if tmp.exists() and tmp.stat().st_size>44:
+            os.replace(tmp,path)
+            RENDER_CACHE_STATS["writes"]+=1
+    finally:
+        try: tmp.unlink(missing_ok=True)
+        except Exception: pass
+
+def cleanup_render_cache():
+    try:
+        files=[p for p in RENDER_CACHE_DIR.glob("*.wav") if p.is_file()]
+        total=sum(p.stat().st_size for p in files)
+        if total<=RENDER_CACHE_MAX_BYTES:
+            return
+        for p in sorted(files,key=lambda x:x.stat().st_mtime):
+            size=p.stat().st_size
+            p.unlink(missing_ok=True)
+            total-=size
+            if total<=int(RENDER_CACHE_MAX_BYTES*0.85):
+                break
+    except Exception as e:
+        print("[DĀR Voice] render cache cleanup warning",e,flush=True)
+
 def reference_for_language(language_id:str):
     return REF_AR if language_id=="ar" and REF_AR.exists() else REF_DE
 
 def prepare_reference_if_needed(model,language_id:str,exaggeration:float):
-    """Voice-Conditioning nur beim echten Referenzwechsel berechnen.
-
-    Die offizielle Chatterbox-generate()-Methode ruft prepare_conditionals bei jedem
-    audio_prompt_path erneut auf. Bei langen Dokumenten ist das unnötige Mehrarbeit.
-    """
-    global MODEL_ACTIVE_REFERENCE,MODEL_REFERENCE_PREPARES
+    """Voice-Conditioning pro Referenz nur einmal je Modell-Lebensdauer berechnen."""
+    global MODEL_ACTIVE_REFERENCE,MODEL_REFERENCE_PREPARES,MODEL_REFERENCE_CACHE_HITS
     ref=reference_for_language(language_id)
-    try:
-        ref_key=str(ref.resolve())
-    except Exception:
-        ref_key=str(ref)
+    ref_key=file_signature(ref)
 
-    if MODEL_ACTIVE_REFERENCE==ref_key and getattr(model,"conds",None) is not None:
+    cached=MODEL_CONDITIONAL_CACHE.get(ref_key)
+    if cached is not None:
+        model.conds=cached
+        MODEL_ACTIVE_REFERENCE=ref_key
+        MODEL_REFERENCE_CACHE_HITS+=1
         return False
 
     if not hasattr(model,"prepare_conditionals"):
@@ -970,8 +1073,8 @@ def prepare_reference_if_needed(model,language_id:str,exaggeration:float):
     try:
         model.prepare_conditionals(str(ref),exaggeration=float(exaggeration))
     except TypeError:
-        # Ältere Chatterbox-Versionen kennen den exaggeration-Parameter hier noch nicht.
         model.prepare_conditionals(str(ref))
+    MODEL_CONDITIONAL_CACHE[ref_key]=model.conds
     MODEL_ACTIVE_REFERENCE=ref_key
     MODEL_REFERENCE_PREPARES+=1
     return True
@@ -1468,26 +1571,36 @@ def generate(text:str,prepared:str="",style:str="auto"):
                 metrics["rescued"]=False
                 metrics["audio_lock"]="session_reuse"
             else:
-                try:
-                    core_seed=2026
-                    if audio_lock_key:
-                        render_salt=int(render_id[:8],16)
-                        key_salt=sum((i+1)*ord(ch) for i,ch in enumerate(audio_lock_key))
-                        core_seed=2026+((render_salt+key_salt*131)%900000)
-                    wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical,seed_base=core_seed)
-                except Exception as first_error:
-                    if MODEL_DEVICE=="mps":
-                        print("[DĀR Voice] MPS render failed, retry CPU:",first_error,flush=True)
-                        set_status(message=f"{lang_label} · MPS-Fallback auf CPU …")
-                        model=load_model(force_device="cpu")
+                cached_wav=cached_metrics=None
+                cache_key=""
+                if not audio_lock_key:
+                    cached_wav,cached_metrics,cache_key=load_render_cache(chunk,lang,mode,int(model.sr))
+                if cached_wav is not None:
+                    wav,metrics=cached_wav,cached_metrics
+                else:
+                    try:
+                        core_seed=2026
+                        if audio_lock_key:
+                            render_salt=int(render_id[:8],16)
+                            key_salt=sum((i+1)*ord(ch) for i,ch in enumerate(audio_lock_key))
+                            core_seed=2026+((render_salt+key_salt*131)%900000)
                         wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical,seed_base=core_seed)
-                    else:
-                        raise
-                if audio_lock_key:
-                    wav=wav.detach().float().cpu()
-                    session_audio_locks[audio_lock_key]=wav.clone()
-                    new_audio_lock_candidates[audio_lock_key]=wav.clone()
-                    metrics["audio_lock"]="candidate"
+                    except Exception as first_error:
+                        if MODEL_DEVICE=="mps":
+                            print("[DĀR Voice] MPS render failed, retry CPU:",first_error,flush=True)
+                            set_status(message=f"{lang_label} · MPS-Fallback auf CPU …")
+                            model=load_model(force_device="cpu")
+                            wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical,seed_base=core_seed)
+                        else:
+                            raise
+                    if not audio_lock_key:
+                        save_render_cache(cache_key,wav,int(model.sr))
+                        metrics["segment_cache"]="miss"
+                    if audio_lock_key:
+                        wav=wav.detach().float().cpu()
+                        session_audio_locks[audio_lock_key]=wav.clone()
+                        new_audio_lock_candidates[audio_lock_key]=wav.clone()
+                        metrics["audio_lock"]="candidate"
 
             qa_segments[original_idx]={
                 "index":idx,
@@ -1526,7 +1639,10 @@ def generate(text:str,prepared:str="",style:str="auto"):
                 "render_seconds":round(time.perf_counter()-render_started_perf,3),
                 "segments":total,
                 "reference_prepares":max(0,MODEL_REFERENCE_PREPARES-prepares_before),
-                "execution_strategy":"grouped-by-reference-v1",
+                "reference_cache_hits_total":MODEL_REFERENCE_CACHE_HITS,
+                "segment_cache_hits":sum(1 for x in qa_segments if x.get("segment_cache")=="hit"),
+                "segment_cache_misses":sum(1 for x in qa_segments if x.get("segment_cache")=="miss"),
+                "execution_strategy":"persistent-conditionals+segment-cache-v2",
             },
         }
         set_status(last_qa=qa_summary)
@@ -1539,6 +1655,7 @@ def generate(text:str,prepared:str="",style:str="auto"):
 
         set_status(progress=95,message="Audio-Mastering läuft …")
         out=postprocess(raw)
+        cleanup_render_cache()
         set_status(
             render_state="done",
             progress=100,
