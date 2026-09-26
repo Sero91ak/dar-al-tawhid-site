@@ -59,8 +59,6 @@ function kidsHeaders(assetResponse) {
   headers.delete("Content-Length");
   return headers;
 }
-}
-
 
 function browserManifestResponse(request) {
   const manifest = {
@@ -92,7 +90,7 @@ function browserManifestResponse(request) {
 }
 
 function publicWebsiteAddon() {
-  return \`
+  return `
 <style id="darPublicWebsiteOnlyV1">
 #darIosAppStorePromo{display:none;width:min(1180px,calc(100% - 28px));margin:26px auto 38px;padding:17px 18px;border:1px solid rgba(152,116,57,.22);border-radius:24px;background:linear-gradient(105deg,#121d25,#1b2d34 52%,#213a32);box-shadow:0 14px 34px rgba(14,25,28,.13);color:#fffaf0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 #darIosAppStorePromo.is-visible{display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:14px}
@@ -157,7 +155,7 @@ function publicWebsiteAddon() {
     }
   }catch(eCache){}
 })();
-</script>\`;
+</script>`;
 }
 
 export default {
@@ -253,8 +251,8 @@ export default {
 
       let html = await assetResponse.text();
       if (assetResponse.ok) {
-        const styleTag = '<link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=181">';
-        const scriptTag = '<script defer src="/desktop-preview/desktop-overhaul.js?v=181"><\/script>';
+        const styleTag = '<link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=183">';
+        const scriptTag = '<script defer src="/desktop-preview/desktop-overhaul.js?v=183"><\/script>';
         if (!html.includes("desktop-overhaul.css")) html = html.replace("</head>", styleTag + "</head>");
         if (!html.includes("desktop-overhaul.js")) html = html.replace("</body>", scriptTag + "</body>");
         if (!html.includes("darPublicWebsiteGuardV1")) html = html.replace("</body>", publicWebsiteAddon() + "</body>");
