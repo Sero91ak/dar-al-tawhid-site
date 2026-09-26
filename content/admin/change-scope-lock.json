@@ -123,6 +123,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-landscape-tab-retract-smooth-2026-09-26",
+      "approvedBy": "user-explicit-test-tab-zieht-sich-querformat-sanft-live-ios",
+      "reason": "Nutzer: Test-App zieht Tab-Leiste beim Querlegen butterweich zurück. Native iOS und Web-Apps bleiben nach letztem Größen-Fix groß stehen. Funktion 1:1 übernehmen. Kids unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/adaptive-layout.js",
+        "assets/adaptive-layout.css",
+        "assets/dar-landscape-kids-shell.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-live-ios-inherit-test-landscape-size-2026-09-26",
       "approvedBy": "user-explicit-test-groesse-sofort-live-ios-web",
       "reason": "Nutzer: Test-App Querformat/Größe korrekt; native iOS und Web-Apps haben es nicht übernommen. Sofort live pushen. Kids unverändert.",

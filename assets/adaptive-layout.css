@@ -85,13 +85,19 @@ html[data-layout="expanded"] {
 }
 
 /* Landscape / fold open: keep side air, grow modestly with short edge */
-@media (orientation: landscape) and (min-width: 600px) {
+@media (orientation: landscape) {
   :root,
-  html[data-theme] {
-    --dar-nav-max: min(46.25rem, clamp(22rem, 48vw, 46.25rem), calc(100vh * 1.45));
-    --dar-nav-width: min(var(--dar-nav-max), calc(100vw - 2 * var(--dar-nav-gutter)));
+  html[data-theme],
+  html.dar-ios-native-app {
+    --dar-nav-max: min(460px, 52vw, calc(100vw - 48px));
+    --dar-nav-width: min(460px, 52vw, calc(100vw - 48px));
     --layout-navigation-max: var(--dar-nav-width);
   }
+}
+
+html #bottomNav.bottom-nav,
+html.dar-ios-native-app #bottomNav.bottom-nav {
+  transition: width .5s cubic-bezier(.22,1,.36,1), max-width .5s cubic-bezier(.22,1,.36,1), transform .5s cubic-bezier(.22,1,.36,1), bottom .5s cubic-bezier(.22,1,.36,1);
 }
 
 /* Full-bleed shell — no extra gutters (Aug-4 Seitenverhältnis) */
@@ -249,7 +255,8 @@ html[data-theme] #bottomNav.bottom-nav,
 #appChromeDock #bottomNav.bottom-nav,
 #bottomNav.bottom-nav,
 html[data-layout] #appChromeDock #bottomNav.bottom-nav,
-html[data-layout] #bottomNav.bottom-nav {
+html[data-layout] #bottomNav.bottom-nav,
+html.dar-ios-native-app #bottomNav.bottom-nav {
   left: 50% !important;
   right: auto !important;
   top: auto !important;
@@ -265,14 +272,14 @@ html[data-layout] #bottomNav.bottom-nav {
   flex-direction: row !important;
   bottom: calc(max(7px, calc(env(safe-area-inset-bottom) - 18px)) + 3mm) !important;
   transition:
-    width .28s ease,
-    max-width .28s ease,
-    height .28s ease,
-    min-height .28s ease,
-    padding .28s ease,
-    border-radius .28s ease,
-    transform .28s ease,
-    bottom .28s ease !important;
+    width .5s cubic-bezier(.22,1,.36,1),
+    max-width .5s cubic-bezier(.22,1,.36,1),
+    height .5s cubic-bezier(.22,1,.36,1),
+    min-height .5s cubic-bezier(.22,1,.36,1),
+    padding .5s cubic-bezier(.22,1,.36,1),
+    border-radius .5s cubic-bezier(.22,1,.36,1),
+    transform .5s cubic-bezier(.22,1,.36,1),
+    bottom .5s cubic-bezier(.22,1,.36,1) !important;
 }
 
 html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn,

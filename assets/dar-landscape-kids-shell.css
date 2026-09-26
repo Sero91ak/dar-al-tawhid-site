@@ -65,13 +65,14 @@
   }
 }
 
-@media (orientation: landscape), (min-width: 700px) {
+@media (orientation: landscape) {
   html #appChromeDock #bottomNav.bottom-nav,
   html #bottomNav.bottom-nav,
   html.dar-ios-native-app #appChromeDock #bottomNav.bottom-nav,
   html.dar-ios-native-app #bottomNav.bottom-nav {
-    width: min(740px, 72vw, calc(100vw - 48px)) !important;
-    max-width: min(740px, calc(100vw - 48px)) !important;
+    width: min(460px, 52vw, calc(100vw - 48px)) !important;
+    max-width: min(460px, 52vw, calc(100vw - 48px)) !important;
+    transition: width .5s cubic-bezier(.22,1,.36,1), max-width .5s cubic-bezier(.22,1,.36,1), transform .5s cubic-bezier(.22,1,.36,1) !important;
   }
   html #appView.view,
   html body #appView.view,

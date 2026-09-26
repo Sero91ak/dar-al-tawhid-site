@@ -69,18 +69,16 @@
     return "calc(max(7px, calc(env(safe-area-inset-bottom) - 18px)) + 3mm)";
   }
 
-  /* Kids-like capsule: never 100% bar. Landscape/tablet stay compact. */
-  function capsuleWidthPx(width, height) {
+  /* Portrait: nearly full. Landscape: pull back to ~52vw / 460px like Test. */
+  var NAV_EASE = "width .5s cubic-bezier(.22,1,.36,1), max-width .5s cubic-bezier(.22,1,.36,1), transform .5s cubic-bezier(.22,1,.36,1), bottom .5s cubic-bezier(.22,1,.36,1)";
+  var NAV_W_PORTRAIT = "min(460px, calc(100vw - 40px))";
+  var NAV_W_LANDSCAPE = "min(460px, 52vw, calc(100vw - 48px))";
+
+  function capsuleWidthCss(width, height) {
     var w = Number(width) || 0;
     var h = Number(height) || 0;
-    if (w < 1) return 0;
-    var gutter = Math.max(20, Math.round(w * 0.045));
-    var avail = Math.max(280, w - gutter);
     var landscape = h > 0 && w >= h;
-    var frac = landscape ? 0.72 : w >= 700 ? 0.68 : 0.94;
-    var cap = landscape ? 820 : w >= 900 ? 860 : 900;
-    var next = Math.min(cap, avail, Math.max(320, Math.round(w * frac)));
-    return next;
+    return landscape ? NAV_W_LANDSCAPE : NAV_W_PORTRAIT;
   }
 
   function applyNavLayout(mode) {
@@ -94,7 +92,8 @@
     }
 
     var metrics = measureViewport();
-    var px = capsuleWidthPx(metrics.width, metrics.height);
+    var cssW = capsuleWidthCss(metrics.width, metrics.height);
+    nav.classList.toggle("is-nav-landscape", metrics.width >= metrics.height);
 
     /* NEVER left-rail or full-bleed bar. Viewport-based floating capsule. */
     nav.classList.remove("is-adaptive-rail");
@@ -102,16 +101,12 @@
     nav.style.setProperty("position", "fixed", "important");
     nav.style.setProperty("left", "50%", "important");
     nav.style.setProperty("right", "auto", "important");
-    if (px > 0) {
-      nav.style.setProperty("width", px + "px", "important");
-      nav.style.setProperty("max-width", px + "px", "important");
-      try {
-        document.documentElement.style.setProperty("--dar-nav-width", px + "px");
-      } catch (e) {}
-    } else {
-      nav.style.setProperty("width", "var(--dar-nav-width)", "important");
-      nav.style.setProperty("max-width", "min(820px, calc(100vw - 2 * var(--dar-nav-gutter)))", "important");
-    }
+    nav.style.setProperty("transition", NAV_EASE, "important");
+    nav.style.setProperty("width", cssW, "important");
+    nav.style.setProperty("max-width", cssW, "important");
+    try {
+      document.documentElement.style.setProperty("--dar-nav-width", cssW);
+    } catch (e) {}
     nav.style.setProperty("top", "auto", "important");
     nav.style.setProperty("bottom", navBottomCompact(), "important");
     nav.style.setProperty("height", "auto", "important");
