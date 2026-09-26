@@ -2296,3 +2296,225 @@
     font-size:15.5px!important;
   }
 }
+
+
+/* v27 — EQUAL-SIZE PLAYER + PRAYER CARDS */
+:root{
+  --dar-top-tools-max:900px;
+  --dar-top-card-h:92px;
+  --dar-top-card-radius:22px;
+}
+
+/* Desktop / landscape: exact 50/50 pair */
+.top-tools-cluster.top-tools-v26{
+  width:min(var(--dar-top-tools-max),calc(100% - 40px))!important;
+  max-width:var(--dar-top-tools-max)!important;
+  margin:11px auto 15px!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  gap:10px!important;
+  align-items:stretch!important;
+}
+.top-tools-v26 .top-tool-card{
+  width:100%!important;
+  min-width:0!important;
+  height:var(--dar-top-card-h)!important;
+  min-height:var(--dar-top-card-h)!important;
+  max-height:var(--dar-top-card-h)!important;
+  margin:0!important;
+}
+
+/* Quran player = exact same outer size as prayer card */
+.top-tools-v26 .qa26-wrap,
+.top-tools-v26 #quranAudioPlayer.qa26-player{
+  width:100%!important;
+  max-width:none!important;
+  height:var(--dar-top-card-h)!important;
+  min-height:var(--dar-top-card-h)!important;
+  max-height:var(--dar-top-card-h)!important;
+  margin:0!important;
+}
+.top-tools-v26 #quranAudioPlayer.qa26-player{
+  grid-template-rows:48px 44px!important;
+  border-radius:var(--dar-top-card-radius)!important;
+}
+.top-tools-v26 .qa26-main{
+  height:48px!important;
+  grid-template-columns:28px 40px minmax(0,1fr) 28px!important;
+  grid-template-rows:48px!important;
+  padding:0 7px!important;
+}
+.top-tools-v26 .qa26-nav{
+  width:28px!important;
+  min-width:28px!important;
+  height:48px!important;
+  min-height:44px!important;
+  font-size:17px!important;
+}
+.top-tools-v26 .qa26-play{
+  width:36px!important;
+  height:36px!important;
+  min-width:36px!important;
+  min-height:36px!important;
+  font-size:12px!important;
+}
+.top-tools-v26 .qa26-now{
+  height:48px!important;
+  padding:0 8px!important;
+}
+.top-tools-v26 .qa26-kicker{
+  font-size:5.9px!important;
+  letter-spacing:.12em!important;
+}
+.top-tools-v26 .qa26-title{
+  margin-top:2px!important;
+  font-size:11.6px!important;
+}
+.top-tools-v26 .qa26-progress{
+  margin-top:4px!important;
+}
+
+/* second player row: readable selections without wasting height */
+.top-tools-v26 .qa26-controls{
+  height:44px!important;
+  grid-template-rows:44px!important;
+  grid-template-columns:minmax(120px,1.05fr) 64px minmax(170px,1.55fr)!important;
+}
+.top-tools-v26 .qa26-field{
+  height:44px!important;
+  min-height:44px!important;
+  padding:3px 8px!important;
+}
+.top-tools-v26 .qa26-field > span{
+  margin-bottom:1px!important;
+  font-size:6.1px!important;
+  letter-spacing:.09em!important;
+}
+.top-tools-v26 .qa26-field select{
+  height:28px!important;
+  min-height:28px!important;
+  line-height:28px!important;
+  padding-right:18px!important;
+  font-size:10.4px!important;
+}
+.top-tools-v26 .qa26-reciter select{
+  font-size:9.9px!important;
+}
+
+/* Prayer card = exactly same width + height */
+.top-tools-v26 #prayerRiver.prayer26{
+  width:100%!important;
+  max-width:none!important;
+  height:var(--dar-top-card-h)!important;
+  min-height:var(--dar-top-card-h)!important;
+  max-height:var(--dar-top-card-h)!important;
+  margin:0!important;
+  border-radius:var(--dar-top-card-radius)!important;
+}
+.top-tools-v26 #prayerRiver.prayer26 .prayer-inner{
+  width:100%!important;
+  height:var(--dar-top-card-h)!important;
+  min-height:var(--dar-top-card-h)!important;
+  max-height:var(--dar-top-card-h)!important;
+  grid-template-rows:50px 42px!important;
+  padding:0 9px!important;
+}
+.top-tools-v26 #prayerRiver.prayer26 .prayer-current,
+.top-tools-v26 #prayerRiver.prayer26 .prayer-next{
+  height:50px!important;
+  padding:6px 9px!important;
+}
+.top-tools-v26 #prayerRiver.prayer26 .prayer-current{
+  padding-left:3px!important;
+}
+.top-tools-v26 #prayerRiver.prayer26 .prayer-label{
+  margin-bottom:2px!important;
+  font-size:5.9px!important;
+  letter-spacing:.11em!important;
+}
+.top-tools-v26 #prayerRiver.prayer26 .prayer-current b,
+.top-tools-v26 #prayerRiver.prayer26 .prayer-next b{
+  font-size:16.8px!important;
+}
+.top-tools-v26 #prayerRiver.prayer26 .prayer-current small,
+.top-tools-v26 #prayerRiver.prayer26 .prayer-next small{
+  margin-top:2px!important;
+  font-size:7.2px!important;
+}
+.top-tools-v26 #prayerRiver.prayer26 .prayer-count{
+  height:42px!important;
+  padding:0 8px 0 3px!important;
+  gap:7px!important;
+  font-size:15.8px!important;
+}
+.top-tools-v26 #prayerRiver.prayer26 .prayer-count span{
+  font-size:5.1px!important;
+  letter-spacing:.09em!important;
+}
+.top-tools-v26 #prayerRiver.prayer26 .prayer-locate{
+  height:42px!important;
+  min-height:42px!important;
+  padding:0 9px!important;
+  font-size:7.1px!important;
+}
+
+/* Large + medium tablets: still equal 50/50 until it becomes too narrow */
+@media (min-width:820px) and (max-width:1180px){
+  .top-tools-cluster.top-tools-v26{
+    width:min(900px,calc(100% - 28px))!important;
+    max-width:900px!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    gap:9px!important;
+  }
+}
+
+/* Narrow tablet / phone: same dimensions, stacked instead of squeezed */
+@media (max-width:819px){
+  .top-tools-cluster.top-tools-v26{
+    width:min(680px,calc(100% - 20px))!important;
+    max-width:680px!important;
+    grid-template-columns:1fr!important;
+    gap:8px!important;
+    margin:9px auto 14px!important;
+  }
+  .top-tools-v26 .top-tool-card,
+  .top-tools-v26 .qa26-wrap,
+  .top-tools-v26 #quranAudioPlayer.qa26-player,
+  .top-tools-v26 #prayerRiver.prayer26{
+    width:100%!important;
+    height:92px!important;
+    min-height:92px!important;
+    max-height:92px!important;
+  }
+  .top-tools-v26 #quranAudioPlayer.qa26-player{
+    grid-template-rows:48px 44px!important;
+  }
+  .top-tools-v26 #prayerRiver.prayer26 .prayer-inner{
+    height:92px!important;
+    min-height:92px!important;
+    max-height:92px!important;
+    grid-template-rows:50px 42px!important;
+  }
+}
+
+/* Very small phones: preserve usability; equal-width cards remain stacked */
+@media (max-width:390px){
+  .top-tools-cluster.top-tools-v26{
+    width:calc(100% - 16px)!important;
+    gap:7px!important;
+  }
+  .top-tools-v26 .qa26-controls{
+    grid-template-columns:minmax(0,1.02fr) 56px minmax(0,1.68fr)!important;
+  }
+  .top-tools-v26 .qa26-field{
+    padding-left:5px!important;
+    padding-right:5px!important;
+  }
+  .top-tools-v26 .qa26-field select{
+    font-size:9.5px!important;
+    padding-right:15px!important;
+  }
+  .top-tools-v26 .qa26-reciter select{
+    font-size:9.1px!important;
+  }
+}
