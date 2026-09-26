@@ -192,6 +192,13 @@ MODEL_DEVICE=None
 MODEL_LOCK=threading.Lock()
 RENDER_LOCK=threading.Lock()
 STATUS_LOCK=threading.Lock()
+
+# Persistente Kern-Aussprache-Locks haben einen eigenen Zustand.
+# Diese Initialisierung muss VOR jedem /health- oder /status-Aufruf existieren.
+AUDIO_LOCK_STATE_LOCK=threading.RLock()
+PENDING_AUDIO_LOCKS={}
+PENDING_AUDIO_RENDER_ID=""
+
 TORCH_LOAD_ORIGINAL=None
 
 AUDIO_LOCK_EDGE_CHARS=" \t\r\n.,،;؛:!?؟…·-–—()[]{}«»\\\"“”„‘’"
