@@ -153,7 +153,7 @@ for optional in watermark-my-logo-full.png app-icon-512.png; do
   [ -s "$STAGE/$optional" ] && mv "$STAGE/$optional" "$TARGET/$optional" || true
 done
 
-echo "Voice Studio 2.3.2 Validierung bestanden. Backup: $BACKUP"
+echo "Voice Studio 2.3.3 Validierung bestanden. Backup: $BACKUP"
 
 if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
   brew install ffmpeg >/dev/null 2>&1 || true
@@ -200,7 +200,7 @@ cat > "$LAUNCH" <<PLIST
     <key>DAR_FFMPEG_BIN</key><string>$FFMPEG_BIN</string>
   </dict>
   <key>RunAtLoad</key><true/>
-  <key>KeepAlive</key><true/>
+  <key>KeepAlive</key><false/>
   <key>StandardOutPath</key><string>$TARGET/engine.log</string>
   <key>StandardErrorPath</key><string>$TARGET/engine-error.log</string>
 </dict>
@@ -231,10 +231,24 @@ for i in $(seq 1 20); do
   sleep 0.5
 done
 
-# Robuster Fallback ohne sudo/root und unabhängig von launchctl.
+# Robuster Fallback: LaunchAgent zuerst vollständig aus dem Spiel nehmen,
+# damit nie LaunchAgent + Direktstart gleichzeitig um Port 8787 konkurrieren.
 if [ "$ENGINE_OK" -ne 1 ]; then
-  echo "Starte Serhat Engine direkt …"
-  nohup env     DAR_VOICE_APP_HOME="$TARGET"     SERHAT_VOICE_REF="$REF"     SERHAT_VOICE_REF_AR="$AR_REF"     PYTORCH_ENABLE_MPS_FALLBACK=1     "$VENV/bin/python" "$TARGET/local-engine.py"     >>"$TARGET/engine.log" 2>>"$TARGET/engine-error.log" </dev/null &
+  echo "LaunchAgent antwortet nicht – wechsle auf genau einen Direktstart …"
+  launchctl bootout "gui/$UID/$LABEL" >/dev/null 2>&1 || true
+  launchctl bootout "gui/$UID" "$LAUNCH" >/dev/null 2>&1 || true
+  launchctl remove "$LABEL" >/dev/null 2>&1 || true
+  pkill -TERM -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
+  sleep 1
+  pkill -KILL -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
+
+  nohup env \
+    DAR_VOICE_APP_HOME="$TARGET" \
+    SERHAT_VOICE_REF="$REF" \
+    SERHAT_VOICE_REF_AR="$AR_REF" \
+    PYTORCH_ENABLE_MPS_FALLBACK=1 \
+    "$VENV/bin/python" "$TARGET/local-engine.py" \
+    >>"$TARGET/engine.log" 2>>"$TARGET/engine-error.log" </dev/null &
   echo $! > "$TARGET/engine.pid"
 
   for i in $(seq 1 40); do
@@ -290,7 +304,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
 
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.3.2"
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.3.3"
 
         webView = WKWebView(frame: .zero, configuration: config)
         webView.navigationDelegate = self
@@ -313,7 +327,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
         NSApp.activate(ignoringOtherApps: true)
 
         showLoading()
-        ensureEngine()
         waitForEngine(attempt: 0)
     }
 
@@ -525,10 +538,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
                 return
             }
 
-            if attempt == 8 || attempt == 24 {
-                self.startEngineDirectly()
-            }
-
             if attempt < 80 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
                     self.waitForEngine(attempt: attempt + 1)
@@ -671,9 +680,29 @@ touch "$LOG"
   echo "Native: $NATIVE"
 
   if ! /usr/bin/curl -fsS --max-time 1 "$HEALTH" >/dev/null 2>&1; then
-    echo "Engine nicht erreichbar – Direktstart."
+    echo "Engine nicht erreichbar – versuche genau einen LaunchAgent-Start."
+    launchctl kickstart -k "gui/$UID/com.daraltawhid.voice-engine" >/dev/null 2>&1 || true
+
+    for i in $(seq 1 16); do
+      /usr/bin/curl -fsS --max-time 1 "$HEALTH" >/dev/null 2>&1 && break
+      sleep 0.4
+    done
+  fi
+
+  if ! /usr/bin/curl -fsS --max-time 1 "$HEALTH" >/dev/null 2>&1; then
+    echo "LaunchAgent ohne Health – stoppe nur eigene alte Engine und starte einmal direkt."
+    launchctl bootout "gui/$UID/com.daraltawhid.voice-engine" >/dev/null 2>&1 || true
+    pkill -TERM -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
+    sleep 1
+    pkill -KILL -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
+
     if [ -x "$VENV/bin/python" ] && [ -f "$TARGET/local-engine.py" ]; then
-      /usr/bin/nohup /usr/bin/env         DAR_VOICE_APP_HOME="$TARGET"         PYTORCH_ENABLE_MPS_FALLBACK=1         PATH="/opt/homebrew/bin:/usr/local/bin:/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"         "$VENV/bin/python" "$TARGET/local-engine.py"         >>"$TARGET/engine.log" 2>>"$TARGET/engine-error.log" </dev/null &
+      /usr/bin/nohup /usr/bin/env \
+        DAR_VOICE_APP_HOME="$TARGET" \
+        PYTORCH_ENABLE_MPS_FALLBACK=1 \
+        PATH="/opt/homebrew/bin:/usr/local/bin:/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin" \
+        "$VENV/bin/python" "$TARGET/local-engine.py" \
+        >>"$TARGET/engine.log" 2>>"$TARGET/engine-error.log" </dev/null &
       echo "Engine PID: $!"
     else
       echo "Engine/Python fehlt: $VENV/bin/python / $TARGET/local-engine.py"
@@ -684,6 +713,7 @@ touch "$LOG"
       sleep 0.5
     done
   fi
+
 
   if [ -x "$NATIVE" ]; then
     echo "Starte native WKWebView-App."
@@ -727,8 +757,8 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>2.3.2</string>
-  <key>CFBundleShortVersionString</key><string>2.3.2</string>
+  <key>CFBundleVersion</key><string>2.3.3</string>
+  <key>CFBundleShortVersionString</key><string>2.3.3</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>
@@ -790,7 +820,7 @@ LSREGISTER="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchS
 sleep 1
 
 # App bei LaunchServices registrieren, dann öffnen.
-say_status "DĀR Voice Studio 2.3.2 ist installiert."
+say_status "DĀR Voice Studio 2.3.3 ist installiert."
 if ! open -n "$APP"; then
   echo "LaunchServices konnte die App nicht öffnen – starte Bundle-Executable direkt."
   "$APP/Contents/MacOS/DARVoiceStudio" >/dev/null 2>&1 &
