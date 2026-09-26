@@ -124,7 +124,10 @@ function metaHtml(){
       <div class="cs-field"><label>Modus</label><div class="cs-modes"><label><input id="csModeRead" type="checkbox" checked> Lesen</label><label><input id="csModeListen" type="checkbox" checked> Hören</label></div></div>
       <div class="cs-field span4"><label for="csSources">Quellen / Nachweise</label><textarea id="csSources" placeholder="Eine Quelle pro Zeile, z. B. Qurʾān 11:36–44"></textarea></div>
     </div>
-  </section>\n  <section id="csStructured" class="cs-structured" hidden><div id="csStructuredBody"></div></section>`;\n}\nfunction publishHtml(){
+  </section>
+  <section id="csStructured" class="cs-structured" hidden><div id="csStructuredBody"></div></section>`;
+}
+function publishHtml(){
   return `<section id="csPublishSection" class="side-section">
     <div class="side-title">Content Studio · Kids</div>
     <div class="cs-status-row"><span class="notice">Produktionspaket</span><span id="csStatus" class="cs-status" data-status="draft">Entwurf</span></div>
