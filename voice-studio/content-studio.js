@@ -497,7 +497,7 @@ async function loadLibrary(){
   const box=q("csLibrary");if(!box||!workerSecret()){if(box)box.innerHTML='<div class="notice">Admin-Verbindung herstellen, um Staging-Inhalte zu laden.</div>';return}
   try{
     const d=await adminApi("/api/admin/kids-content?staging=1",{method:"GET"});
-    const items=(d.index?.items||[]).filter(x=>x.kind===studioKind).slice(0,30);
+    const items=(d.index?.items||[]).filter(x=>studioKind==="ios"?x.appTarget==="ios":x.kind===effectiveKind()&&x.appTarget!=="ios").slice(0,30);
     box.innerHTML=items.length?items.map(x=>`<button class="cs-item" data-cs-item="${escapeHtml(x.id)}"><b>${escapeHtml(x.title||x.id)}</b><small>${escapeHtml(x.status)} · r${Number(x.revision||1)} · ${Number(x.ageMin)}–${Number(x.ageMax)} J.</small></button>`).join(""):'<div class="notice">Noch keine Inhalte in diesem Bereich.</div>';
   }catch(e){box.innerHTML='<div class="notice">Staging-Bibliothek nicht erreichbar: '+escapeHtml(e.message||String(e))+'</div>'}
 }
@@ -505,23 +505,29 @@ async function loadRemoteItem(id){
   try{
     const d=await adminApi("/api/admin/kids-content?staging=1",{method:"GET"});
     const x=(d.index?.items||[]).find(i=>i.id===id);if(!x)return;
-    studioKind=x.kind||"story";contentId=x.id;savedRevision=x.revision||0;contentStatus=x.status||"draft";stagingPublished=x.status==="published";
+    studioKind=x.appTarget==="ios"?"ios":(x.kind||"story");contentId=x.id;savedRevision=x.revision||0;contentStatus=x.status||"draft";stagingPublished=x.status==="published";productionPhase=x.production?.phase||(stagingPublished?"test-published":"draft");productionError=x.production?.error||"";
     document.querySelectorAll("[data-cs-kind]").forEach(b=>b.classList.toggle("active",b.dataset.csKind===studioKind));
     q("csTitle").value=x.title||"";q("csCategory").value=x.category||"";q("csTopic").value=x.topic||"";q("csProphet").value=x.prophetId||"";
     q("csAgeMin").value=String(x.ageMin||4);q("csAgeMax").value=String(x.ageMax||10);q("csModeRead").checked=x.modes?.read!==false;q("csModeListen").checked=x.modes?.listen!==false;
     q("csSources").value=(x.sourceRefs||[]).join("\n");q("text").value=x.text||"";coverAsset=x.cover?.url?x.cover:null;audioAsset=x.audio?.url?x.audio:null;
-    coverFile=null;coverRemoteUrl="";if(coverAsset?.url)renderCover(coverAsset.url);q("csCoverTitle").textContent=x.title||"Geschichte";
-    if(typeof renderAnalysis==="function")renderAnalysis();renderStatus();refreshQa();setStudioMessage("Staging-Paket geladen.","good");
+    quizDraft=Array.isArray(x.quiz?.questions)?x.quiz.questions:[];gameDraft=x.game&&typeof x.game==="object"?x.game:{type:"choice",summary:"",instructions:"",voiceCues:[]};
+    coverFile=null;coverRemoteUrl="";if(coverAsset?.url)renderCover(coverAsset.url);q("csCoverTitle").textContent=x.title||"Inhalt";
+    renderKindEditor();if(typeof renderAnalysis==="function")renderAnalysis();renderStatus();refreshQa();setStudioMessage("Staging-Paket geladen.","good");
   }catch(e){setStudioMessage(e.message||String(e),"bad")}
 }
 function refreshQa(){
   if(!q("csQaText"))return;
-  const text=String(q("text")?.value||"").trim(),same=!!lastAudio&&lastGeneratedText===text;
+  captureStructuredEditor();
+  const text=String(q("text")?.value||"").trim(),script=voiceScript(),same=!!lastAudio&&lastGeneratedText===script;
   const cover=!!(coverFile||coverRemoteUrl||coverAsset?.url);
   const audio=!q("csModeListen")?.checked||same||!!audioAsset?.url;
   const pron=!q("csModeListen")?.checked||Boolean(qaConfirmed&&same)||Boolean(audioAsset?.url&&contentId);
-  paintQa("csQaText",!!text,text?"bereit":"fehlt");paintQa("csQaCover",cover,cover?"bereit":"fehlt");paintQa("csQaAudio",audio,audio?"bereit":"fehlt");paintQa("csQaPron",pron,pron?"bestätigt":"offen");
-  const test=q("csPublishTest");if(test)test.disabled=busy||!text||!cover||!audio||!pron||!q("csTitle")?.value.trim();
+  const quizOk=quizDraft.length>0&&quizDraft.every(x=>String(x.question||"").trim()&&(x.answers||[]).filter(a=>String(a.label||"").trim()).length>=2&&(x.answers||[]).filter(a=>a.correct).length===1);
+  const gameOk=Boolean(String(gameDraft.instructions||"").trim());
+  const contentOk=studioKind==="quiz"?quizOk:studioKind==="game"?gameOk:Boolean(text);
+  paintQa("csQaText",contentOk,contentOk?(studioKind==="quiz"?"Fragen bereit":studioKind==="game"?"Spiel bereit":"bereit"):"fehlt");
+  paintQa("csQaCover",cover,cover?"bereit":"fehlt");paintQa("csQaAudio",audio,audio?"bereit":"fehlt");paintQa("csQaPron",pron,pron?"bestätigt":"offen");
+  const test=q("csPublishTest");if(test)test.disabled=busy||!contentOk||!cover||!audio||!pron||!q("csTitle")?.value.trim();
   renderStatus();
 }
 function paintQa(id,ok,label){const el=q(id);if(!el)return;el.textContent=label;el.className=ok?"good":"warn"}
