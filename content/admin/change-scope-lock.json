@@ -123,6 +123,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-kids-oval-press-and-kids-update-isolate-2026-09-26",
+      "approvedBy": "user-explicit-kids-oval-tipp-sichtbar-kids-autonom-kein-fremd-update",
+      "reason": "Nutzer: Oval muss beim Tippen sichtbar und deckungsgleich mit der Touchfläche sein (wie Kids-Bild). Kids-App zeigt fälschlich Aktualisierung bei Dar-Test/iOS-Änderungen und muss autonom bleiben.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/dar-bottom-nav-glass.css",
+        "cloudflare/site-router.js",
+        "cloudflare/test-app-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-kids-tab-optics-3d-live-2026-09-26",
       "approvedBy": "user-explicit-kids-tab-optik-3d-sofort-live-ios-test-web",
       "reason": "Nutzer: Kids-Tab-Leiste (Darstellung, Größe, Touchfläche) 1:1 in Test-App, iOS-native App und alle Web-Apps; 3D-Bilder sofort live. Kids-App bleibt eigene App.",

@@ -48,6 +48,19 @@ async function fetchKidsMirror(pathname, search) {
   return fetch(next.toString(), { method: "GET", redirect: "follow" });
 }
 
+function isolateKidsUpdateHtml(html) {
+  if (typeof html !== "string" || html.indexOf("kidsWantPreview") < 0) return html;
+  html = html.replace(
+    /try\{\s*return localStorage\.getItem\(SEEN_KEY\)!=="1";\s*\}catch\(e2\)\{\s*return true;\s*\}/g,
+    'try{return /(?:^|[?&])demo=update(?:&|$)/.test(String(location.search||""));}catch(e2){return false;}'
+  );
+  html = html.replace(
+    /if\(remote && remote!==KIDS_BUILD_ID\)/g,
+    'if(remote && remote.indexOf("kids-shell-")===0 && remote!==KIDS_BUILD_ID)'
+  );
+  return html;
+}
+
 function kidsHeaders(assetResponse) {
   const headers = new Headers(assetResponse.headers);
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
@@ -214,10 +227,22 @@ export default {
         return new Response(body, { status: 200, headers });
       }
 
-      const assetResponse = await fetchKidsMirror(url.pathname, url.search);
+      let assetResponse = null;
+      try {
+        assetResponse = await fetchKidsMirror(url.pathname, url.search);
+      } catch (e) {}
+      if (!assetResponse || assetResponse.status >= 400) {
+        assetResponse = await env.ASSETS.fetch(request);
+      }
       const headers = kidsHeaders(assetResponse);
       if (request.method === "HEAD") {
         return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
+      }
+      const type = String(assetResponse.headers.get("content-type") || "");
+      if (type.includes("text/html")) {
+        const html = isolateKidsUpdateHtml(await assetResponse.text());
+        headers.set("Content-Type", "text/html; charset=utf-8");
+        return new Response(html, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
       }
       return new Response(assetResponse.body, {
         status: assetResponse.status,

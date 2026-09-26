@@ -293,9 +293,10 @@ html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
 .bottom-nav .bottom-nav-btn.active,
 .bottom-nav .bottom-nav-btn.is-pressed {
   color: var(--bottom-tab-active-text) !important;
-  background: transparent !important;
-  box-shadow: none !important;
+  background: linear-gradient(145deg,rgba(226,189,114,.22),rgba(115,201,193,.12)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.08) !important;
   filter: none !important;
+  border-radius: 999px !important;
 }
 
 html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.active::before,

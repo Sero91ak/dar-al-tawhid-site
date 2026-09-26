@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <!-- pages-deploy-stamp:1786154200000 -->
-<!-- workers-deploy-stamp:1790435311239 -->
+<!-- workers-deploy-stamp:1790436263550 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <link rel="stylesheet" href="/assets/dar-app-chrome.css?v=1">
@@ -22580,7 +22580,7 @@ function updatePostNavVisibility(){
   postNavLastY=y;
 }
 function updateBottomNavPill(){const metrics=bottomNavMetrics();const active=document.querySelector("[data-bottom-nav].active");if(!metrics.length||!active)return;const tab=active.getAttribute("data-bottom-nav");const m=metrics.find(x=>x.tab===tab);if(m)setBottomNavPill(m.left,m.width,false)}
-function bindBottomNav(){const performanceMode=document.documentElement.classList.contains("dar-ios-native-app");document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{if(btn.dataset.bottomNavBound==="1")return;btn.dataset.bottomNavBound="1";const tab=btn.getAttribute("data-bottom-nav");if(tab==="more"){btn.classList.add("bottom-nav-more");bindNavLongPressTrigger(btn,"more");return}if(tab==="quran"){btn.classList.add("bottom-nav-quran");bindNavLongPressTrigger(btn,"quran");return}let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<380){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const t=btn.getAttribute("data-bottom-nav");try{btn.blur()}catch(e){}if(!t)return;navigateBottomNavTab(t)};const pressOff=()=>btn.classList.remove("is-pressed");if(!performanceMode)btn.addEventListener("pointerdown",()=>btn.classList.add("is-pressed"),{passive:true});btn.addEventListener("pointerup",ev=>{pressOff();if(ev.cancelable)ev.preventDefault();run(ev,true)},{passive:false});btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.addEventListener("click",ev=>run(ev,false))})}
+function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{if(btn.dataset.bottomNavBound==="1")return;btn.dataset.bottomNavBound="1";const tab=btn.getAttribute("data-bottom-nav");if(tab==="more"){btn.classList.add("bottom-nav-more");bindNavLongPressTrigger(btn,"more");return}if(tab==="quran"){btn.classList.add("bottom-nav-quran");bindNavLongPressTrigger(btn,"quran");return}let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<380){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const t=btn.getAttribute("data-bottom-nav");try{btn.blur()}catch(e){}if(!t)return;navigateBottomNavTab(t)};const pressOff=()=>btn.classList.remove("is-pressed");btn.addEventListener("pointerdown",()=>btn.classList.add("is-pressed"),{passive:true});btn.addEventListener("pointerup",ev=>{pressOff();if(ev.cancelable)ev.preventDefault();run(ev,true)},{passive:false});btn.addEventListener("pointercancel",pressOff);btn.addEventListener("pointerleave",pressOff);btn.addEventListener("click",ev=>run(ev,false))})}
 const navigateToPage=navigate;
 function renderPage(pageId,params={}){return navigate(pageId,params.value||"",params)}
 const saveScrollPosition=saveNavScroll;
@@ -27550,7 +27550,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1028";
+const APP_BUILD_ID="app-shell-v1029";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -28895,10 +28895,8 @@ function bindNavLongPressTrigger(btn,profile){
     startY=ev.clientY;
     activePointerId=ev.pointerId;
     if(longPressTimer){clearTimeout(longPressTimer);longPressTimer=null}
-    if(!performanceMode){
-      btn.classList.add("is-pressed");
-      btn.classList.add("is-hold-arming");
-    }
+    btn.classList.add("is-pressed");
+    btn.classList.add("is-hold-arming");
     longPressTimer=window.setTimeout(()=>{
       longPressTimer=null;
       fireLongPressMenu();
@@ -34167,14 +34165,11 @@ html.dar-ios-native-app #appView.view.page-enter-forward,
 html.dar-ios-native-app #appView.view.page-enter-back,
 html.dar-ios-native-app #appView.view.tab-swipe-left,
 html.dar-ios-native-app #appView.view.tab-swipe-right{animation:none!important;transform:none!important;-webkit-transform:none!important;transition:none!important;will-change:auto!important}
-html.dar-ios-native-app #bottomNav.bottom-nav{transform:translate3d(0,0,0)!important;-webkit-transform:translate3d(0,0,0)!important;backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important;will-change:transform!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:var(--bg)!important;box-shadow:0 2px 10px rgba(0,0,0,.12)!important}
+html.dar-ios-native-app #bottomNav.bottom-nav{backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important}
 html.dar-ios-native-app #bottomNav .bottom-nav-btn,
 html.dar-ios-native-app #bottomNav .bottom-nav-btn .nav-icon,
-html.dar-ios-native-app #bottomNav .bottom-nav-btn.active,
-html.dar-ios-native-app #bottomNav .bottom-nav-btn:active,
-html.dar-ios-native-app #bottomNav .bottom-nav-btn.is-pressed,
 html.dar-ios-native-app #bottomNav .bottom-nav-btn.is-hold-arming,
-html.dar-ios-native-app #bottomNav .bottom-nav-btn.is-hold-feedback{animation:none!important;transition:none!important;transform:none!important;-webkit-transform:none!important;filter:none!important;box-shadow:none!important;background:transparent!important}
+html.dar-ios-native-app #bottomNav .bottom-nav-btn.is-hold-feedback{animation:none!important;transition:none!important;transform:none!important;-webkit-transform:none!important;filter:none!important}
 html.dar-ios-native-app :where(.top-edge-fade,.top-swim-aura){display:none!important}
 html.dar-ios-native-app #appView *,
 html.dar-ios-native-app .top-shell *,
@@ -35156,14 +35151,15 @@ html.dar-ios-native-app #bottomNav.bottom-nav{
   }
 }
 </style>
-<style id="dar-adult-kids-tab-optics-v1028">
-/* Kids-Tab-Optik 1:1: Oval, Größe, Glas, Touchfläche. Aktiv nur als Button-Hintergrund, kein Hover-::before. */
-html #bottomNav.bottom-nav,
-html.dar-ios-native-app #bottomNav.bottom-nav,
-html.dar-test-performance-v1 #bottomNav.bottom-nav,
-html #appChromeDock #bottomNav.bottom-nav{
+<style id="dar-adult-kids-tab-optics-v1029">
+/* Kids-Oval 1:1: sichtbare Tipp-Kapsel = Touchfläche. Kein Hover-Geist. */
+html #appChromeDock #bottomNav.bottom-nav,
+html[data-theme] #appChromeDock #bottomNav.bottom-nav,
+html.dar-ios-native-app #appChromeDock #bottomNav.bottom-nav,
+html.dar-ios-native-app #bottomNav.bottom-nav{
   left:50%!important;right:auto!important;
   transform:translate3d(-50%,0,0)!important;
+  -webkit-transform:translate3d(-50%,0,0)!important;
   width:min(calc(100% - 40px),460px)!important;
   bottom:max(12px,env(safe-area-inset-bottom))!important;
   min-height:68px!important;height:auto!important;max-height:none!important;
@@ -35177,64 +35173,65 @@ html #appChromeDock #bottomNav.bottom-nav{
   backdrop-filter:blur(28px) saturate(1.55)!important;
   -webkit-backdrop-filter:blur(28px) saturate(1.55)!important;
 }
-html[data-theme="light"] #bottomNav.bottom-nav,
-html[data-theme="eisgold"] #bottomNav.bottom-nav,
-html[data-theme="soft"] #bottomNav.bottom-nav{
+html[data-theme="light"] #appChromeDock #bottomNav.bottom-nav,
+html[data-theme="eisgold"] #appChromeDock #bottomNav.bottom-nav,
+html[data-theme="soft"] #appChromeDock #bottomNav.bottom-nav{
   background:rgba(255,252,242,.44)!important;
   border-color:rgba(155,122,60,.22)!important;
 }
-html #bottomNav.bottom-nav .bottom-nav-btn{
-  position:relative!important;z-index:1!important;
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn{
+  flex:1 1 0!important;
+  min-width:0!important;
   min-height:56px!important;max-height:none!important;
   padding:6px 4px!important;gap:3px!important;
   border-radius:999px!important;
   background:transparent!important;
   overflow:visible!important;
   pointer-events:auto!important;
-  isolation:isolate;
   box-shadow:none!important;border:0!important;
+  filter:none!important;
+  transform:none!important;
 }
-html #bottomNav.bottom-nav .bottom-nav-btn > *{
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn > *,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn > *{
   pointer-events:none!important;position:relative;z-index:2;
 }
-html #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
   width:32px!important;height:32px!important;
   min-width:32px!important;min-height:32px!important;
-  padding:0!important;overflow:visible!important;
-  display:grid!important;place-items:center!important;
 }
-html #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon{
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon{
   width:32px!important;height:32px!important;object-fit:contain!important;
-  pointer-events:none!important;
 }
-html #bottomNav.bottom-nav .bottom-nav-btn > span:not(.nav-icon){
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn > span:not(.nav-icon){
   font-size:11px!important;line-height:1.1!important;font-weight:850!important;
 }
-html #bottomNav.bottom-nav .bottom-nav-btn.active{
-  background:linear-gradient(145deg,rgba(226,189,114,.16),rgba(115,201,193,.08))!important;
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.active,
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn:active,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.active,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn:active{
+  background:linear-gradient(145deg,rgba(226,189,114,.22),rgba(115,201,193,.12))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.08)!important;
+  border-radius:999px!important;
 }
-html #bottomNav.bottom-nav .bottom-nav-btn:hover:not(.active),
-html #bottomNav.bottom-nav .bottom-nav-btn.is-pressed:not(.active){
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn:hover:not(.active):not(.is-pressed):not(:active),
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn:hover:not(.active):not(.is-pressed){
   background:transparent!important;
 }
-html #bottomNav.bottom-nav .bottom-nav-btn::before,
-html #bottomNav.bottom-nav .bottom-nav-btn.active::before,
-html #bottomNav.bottom-nav .bottom-nav-btn:hover::before,
-html #bottomNav.bottom-nav .bottom-nav-btn:active::before,
-html #bottomNav.bottom-nav .bottom-nav-btn.is-pressed::before{
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn::before,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn::before{
   content:none!important;display:none!important;opacity:0!important;
-  pointer-events:none!important;background:none!important;border:0!important;box-shadow:none!important;
 }
 @media(min-width:700px){
-  html #bottomNav.bottom-nav{width:min(calc(100% - 80px),520px)!important;min-height:72px!important}
-  html #bottomNav.bottom-nav .bottom-nav-btn{min-height:60px!important}
-  html #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
-  html #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon{width:34px!important;height:34px!important}
+  html #appChromeDock #bottomNav.bottom-nav{width:min(calc(100% - 80px),520px)!important;min-height:72px!important}
+  html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn{min-height:60px!important}
 }
 @media(max-width:380px){
-  html #bottomNav.bottom-nav{width:calc(100% - 28px)!important;min-height:64px!important}
-  html #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
-  html #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon{width:30px!important;height:30px!important}
+  html #appChromeDock #bottomNav.bottom-nav{width:calc(100% - 28px)!important;min-height:64px!important}
 }
 </style>
 </html>
