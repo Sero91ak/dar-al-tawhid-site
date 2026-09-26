@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1024';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1025';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -547,6 +547,25 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
 
   const ua = String(request.headers.get('User-Agent') || '');
+  // PUBLIC WEBSITE ROOT GATE v1
+  const nativeAppRequest = /DarAlTawhid-iOS|DarAlTawhidOfficialIOS|DarAlTawhidAndroid/i.test(ua);
+  const publicRootNavigation =
+    !nativeAppRequest &&
+    url.origin === self.location.origin &&
+    (url.pathname === '/' || url.pathname === '/index.html') &&
+    (request.mode === 'navigate' || request.destination === 'document');
+
+  if (publicRootNavigation) {
+    const websiteUrl = new URL('/desktop-preview/index.html', self.location.origin);
+    const page = url.searchParams.get('page') || 'start';
+    websiteUrl.searchParams.set('page', page);
+    event.respondWith(
+      fetch(websiteUrl.toString(), { cache: 'no-store', redirect: 'follow' })
+        .catch(() => fetch('/desktop-preview/index.html?page=start', { cache: 'no-store' }))
+    );
+    return;
+  }
+
   if (/DarAlTawhid-iOS/i.test(ua) && (request.mode === 'navigate' || isAppShellRequest(url) || request.destination === 'document')) {
     event.respondWith(fetch(request, { cache: 'no-store' }));
     return;
