@@ -357,7 +357,8 @@
     "learnedRuleRequiresConfirmedAudio": true,
     "boundedGenerationRegression": true,
     "mlxFallbackRegression": true,
-    "backendIdentityVisible": true
+    "backendIdentityVisible": true,
+    "aishahFemaleHonorificRegression": true
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
@@ -425,6 +426,12 @@
       "radiyallahu_anhum": {
         "display": "raḍiya llāhu ʿanhum",
         "ttsText": "رَضِيَ اللَّهُ عَنْهُمْ"
+      },
+      "aishah": {
+        "display": "ʿĀʾishah",
+        "ttsText": "عَائِشَة",
+        "requiredHonorificKey": "radiyallahu_anha",
+        "note": "Standalone name is female; always pair with raḍiya llāhu ʿanhā unless an explicit supported honorific is already present."
       }
     },
     "firstUse": "Until a user-confirmed WAV exists, render exactly one candidate per key per production and reuse it throughout that production. A new production may use a new controlled seed so a rejected candidate can be replaced.",
@@ -449,7 +456,8 @@
     "sahabiyyah": {
       "key": "radiyallahu_anha",
       "spoken": "raḍiya llāhu ʿanhā",
-      "ttsText": "رَضِيَ اللَّهُ عَنْهَا"
+      "ttsText": "رَضِيَ اللَّهُ عَنْهَا",
+      "singularFemale": true
     },
     "explicitSupported": {
       "dual": {
@@ -461,7 +469,29 @@
         "ttsText": "رَضِيَ اللَّهُ عَنْهُمْ"
       }
     },
-    "behavior": "If the required honorific is absent, append it to the internal speak text. If any supported honorific is already explicitly written immediately after the name, do not add another one."
+    "behavior": "If the required honorific is absent, append it to the internal speak text. If any supported honorific is already explicitly written immediately after the name, do not add another one.",
+    "aishah": {
+      "nameForms": [
+        "ʿĀʾišah",
+        "ʿĀʾishah",
+        "ʿĀʾiša",
+        "Aishah",
+        "Aisha",
+        "ʿāʾišah",
+        "ʿāʾishah",
+        "aishah",
+        "aisha",
+        "ʿĀʾišah bint Abī Bakr",
+        "Aishah bint Abi Bakr"
+      ],
+      "ttsText": "عَائِشَة",
+      "requiredHonorificKey": "radiyallahu_anha",
+      "forbiddenAutomaticHonorificKeys": [
+        "radiyallahu_anhu",
+        "radiyallahu_anhuma",
+        "radiyallahu_anhum"
+      ]
+    }
   },
   "pronunciationLearning": {
     "enabled": true,
