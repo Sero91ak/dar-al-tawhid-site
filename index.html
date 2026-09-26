@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/assets/dar-app-chrome.css?v=1">
 <script src="/assets/dar-app-chrome.js?v=1"></script>
 
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1042";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1043";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script id="dar-browser-desktop-router-v833">
 (function(){
   try{
@@ -27557,7 +27557,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1042";
+const APP_BUILD_ID="app-shell-v1043";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -35231,91 +35231,59 @@ html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn::before{
 }
 </style>
 
-<style id="dar-tab-kids-pop-v1042">
+<style id="dar-tab-kids-pop-v1043">
 html #bottomNav .dar-tab-plop-pill,
 html #bottomNav .dar-tab-loupe-lens,
 #darTabPeek{display:none!important}
-/* Kids-Oval: feste Kapsel ~92px ums 3D-Bild, weicher Plop, kein Doppelsprung. */
-html #appChromeDock #bottomNav.bottom-nav,
-html.dar-ios-native-app #bottomNav.bottom-nav,
-html #bottomNav.bottom-nav{
-  width:min(calc(100vw - 24px),460px)!important;
-  max-width:min(460px,calc(100vw - 24px))!important;
-  gap:0!important;
-  padding:6px 6px!important;
+/* Kids: Oval = ganzer aktiver Button (Icon+Text), sichtbar, nicht nur Icon-Kreis. */
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn::before,
+html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn::before,
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn::before,
+html #bottomNav.bottom-nav .bottom-nav-btn::before{
+  content:none!important;display:none!important;opacity:0!important
 }
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn,
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn,
 html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn,
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn,
 html #bottomNav.bottom-nav .bottom-nav-btn{
-  position:relative!important;
-  z-index:1;
+  flex:1 1 0!important;
   max-width:none!important;
   min-width:0!important;
-  padding:8px 4px!important;
+  min-height:56px!important;
+  padding:6px 8px!important;
+  gap:3px!important;
   border-radius:999px!important;
   overflow:visible!important;
   background:transparent!important;
   box-shadow:none!important;
-  will-change:auto;
-  transition:background-color .28s cubic-bezier(.22,1,.36,1)!important;
+  transition:background-color .28s cubic-bezier(.22,1,.36,1),box-shadow .28s cubic-bezier(.22,1,.36,1)!important;
 }
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn::before,
-html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn::before,
-html #bottomNav.bottom-nav .bottom-nav-btn::before{
-  content:""!important;
-  display:block!important;
-  opacity:0!important;
-  pointer-events:none!important;
-  position:absolute!important;
-  z-index:0!important;
-  left:50%!important;
-  top:4px!important;
-  bottom:4px!important;
-  width:92px!important;
-  min-width:92px!important;
-  transform:translateX(-50%)!important;
-  border-radius:999px!important;
-  background:linear-gradient(145deg,rgba(226,189,114,.16),rgba(115,201,193,.08))!important;
-  box-shadow:inset 0 1px rgba(255,255,255,.06)!important;
-  transition:opacity .28s cubic-bezier(.22,1,.36,1)!important;
-}
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.active::before,
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.is-pressed::before,
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn:active::before,
-html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.active::before,
-html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.is-pressed::before,
-html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn:active::before,
-html #bottomNav.bottom-nav .bottom-nav-btn.active::before,
-html #bottomNav.bottom-nav .bottom-nav-btn.is-pressed::before,
-html #bottomNav.bottom-nav .bottom-nav-btn:active::before{
-  opacity:1!important;
-}
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.active,
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn:active,
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.active,
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn:active,
 html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.active,
 html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
 html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn:active,
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.active,
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
+html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn:active,
 html #bottomNav.bottom-nav .bottom-nav-btn.active,
 html #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
 html #bottomNav.bottom-nav .bottom-nav-btn:active{
-  background:transparent!important;
-  box-shadow:none!important;
+  background:linear-gradient(145deg,rgba(226,189,114,.22),rgba(115,201,193,.12))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.08)!important;
+  border-radius:999px!important;
 }
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn > *,
-html #bottomNav.bottom-nav .bottom-nav-btn > *{position:relative;z-index:2}
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.active img.dar3d-icon,
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.is-pressed .nav-icon,
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn:active .nav-icon,
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.active img.dar3d-icon,
 html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
 html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.active img.dar3d-icon,
 html #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
 html #bottomNav.bottom-nav .bottom-nav-btn.active img.dar3d-icon{
   transform:none!important;
 }
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.is-pressed:not(.is-hold-arming):not(.is-hold-feedback),
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn:active,
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.is-pressed:not(.is-hold-arming):not(.is-hold-feedback),
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn:active,
 html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.is-pressed:not(.is-hold-arming):not(.is-hold-feedback),
 html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn:active,
 html #bottomNav.bottom-nav .bottom-nav-btn.is-pressed:not(.is-hold-arming):not(.is-hold-feedback),
@@ -35323,14 +35291,14 @@ html #bottomNav.bottom-nav .bottom-nav-btn:active{
   transform:none!important;
   filter:none!important;
 }
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.kid-pop,
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.kid-pop,
 html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.kid-pop,
 html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop{
   animation:kidLift .38s cubic-bezier(.22,1,.36,1)!important;
   filter:none!important;
 }
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.kid-pop .nav-icon,
-html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.kid-pop img.dar3d-icon,
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.kid-pop .nav-icon,
+html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.kid-pop img.dar3d-icon,
 html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop .nav-icon,
 html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop img.dar3d-icon{
   animation:none!important;
@@ -35343,7 +35311,6 @@ html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop img.dar3d-icon{
 }
 @media (prefers-reduced-motion:reduce){
   html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop{animation:none!important}
-  html #bottomNav.bottom-nav .bottom-nav-btn::before{transition:none!important}
 }
 </style>
 
