@@ -2254,7 +2254,7 @@ button,input,select{font:inherit}
 }
 
 </style>
-<link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=191">
+<link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=200">
 </head>
 <body>
 <header class="site-header">
@@ -2288,7 +2288,7 @@ button,input,select{font:inherit}
 </section>
 
 <div class="player-wrap">
- <section id="quranAudioPlayer" class="quran-player" aria-label="Qurʾān-Player">
+ <section id="quranAudioPlayer" class="quran-player qa-player-v20" aria-label="Qurʾān-Player">
   <button id="qaPrev" class="player-prev" type="button" aria-label="Vorherige Āyah">‹</button>
   <button id="qaPlay" class="player-play" type="button" aria-label="Wiedergabe">▶</button>
   <div class="player-now">
@@ -2296,9 +2296,11 @@ button,input,select{font:inherit}
    <div id="qaTitle" class="player-title">al-Fātiḥah · Āyah 1</div>
    <div class="player-progress"><i id="qaProgress"></i></div>
   </div>
-  <div class="player-field"><label for="qaSurah">Sūrah</label><select id="qaSurah"></select></div>
-  <div class="player-field"><label for="qaAyah">Āyah</label><select id="qaAyah"></select></div>
-  <div class="player-field reciter"><label for="qaReciter">Rezitator</label><select id="qaReciter"></select></div>
+  <div class="player-controls-row" aria-label="Qurʾān-Auswahl">
+   <div class="player-field player-surah"><label for="qaSurah">Sūrah</label><select id="qaSurah" aria-label="Sūrah auswählen"></select></div>
+   <div class="player-field player-ayah"><label for="qaAyah">Āyah</label><select id="qaAyah" aria-label="Āyah auswählen"></select></div>
+   <div class="player-field player-reciter reciter"><label for="qaReciter">Rezitator</label><select id="qaReciter" aria-label="Rezitator auswählen"></select></div>
+  </div>
   <button id="qaNext" class="player-step" type="button" aria-label="Nächste Āyah">›</button>
  </section>
  <audio id="qaAudio" preload="metadata"></audio>
@@ -3812,6 +3814,6 @@ button,input,select{font:inherit}
 })();
 </script>
 <!-- desktop-content-sync-v12 -->
-<script defer src="/desktop-preview/desktop-overhaul.js?v=191"><\/script>
+<script defer src="/desktop-preview/desktop-overhaul.js?v=200"></script>
 </body>
 </html>
