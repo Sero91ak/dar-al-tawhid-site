@@ -173,6 +173,34 @@
         "مُوسَى"
       ],
       "expectedMode": "kids_story"
+    },
+    {
+      "id": "aishah-female-auto",
+      "text": "ʿĀʾishah berichtete diesen Ḥadīṯ.",
+      "expectedTts": [
+        "عَائِشَة",
+        "رَضِيَ اللَّهُ عَنْهَا",
+        "حَدِيث"
+      ],
+      "expectedMode": "narration"
+    },
+    {
+      "id": "aisha-ascii-female-auto",
+      "text": "Aisha berichtete.",
+      "expectedTts": [
+        "عَائِشَة",
+        "رَضِيَ اللَّهُ عَنْهَا"
+      ],
+      "expectedMode": "narration"
+    },
+    {
+      "id": "aishah-full-female-auto",
+      "text": "ʿĀʾišah bint Abī Bakr berichtete.",
+      "expectedTts": [
+        "عَائِشَة بِنْت أَبِي بَكْر",
+        "رَضِيَ اللَّهُ عَنْهَا"
+      ],
+      "expectedMode": "narration"
     }
   ],
   "segmentCases": [
