@@ -123,6 +123,27 @@
   ],
   "unlockedScopes": [
     {
+      "id": "isolate-kids-from-dar-nav-updates-2026-09-26",
+      "approvedBy": "user-explicit-kids-getrennt-keine-aktualisierung-test-ios-web-muessen-aenderung-bekommen",
+      "reason": "Nutzer: Kids darf keine Aktualisierung von DAR-Test/Visitor bekommen und muss getrennt bleiben. Oval-Nav muss in DAR Test, iOS und Web ankommen. iOS-Build-ID synchronisieren, Kids-Cache-Purge bei Test-Deploys stoppen, Kids-Preview-Overlay nur bei echter Kids-Build-Differenz.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "assets/live-boot.js",
+        "cloudflare/test-app-worker.js",
+        ".github/workflows/deploy-test-app.yml",
+        "test/kids/start.html",
+        "test/kids/index.html",
+        "test/kids/shell.html"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "jummah-friday-production-takeover-2026-09-25",
       "approvedBy": "user-explicit-produktionsuebernahme-jetzt-jummah-test-zu-ios-pwa-web",
       "reason": "Nutzer: Jumuʿah-System aus Test-App vollständig produktiv übernehmen (iOS, Besucher-PWA, öffentliche Webseite). Test bleibt Vorstufe mit internem Serienwächter.",

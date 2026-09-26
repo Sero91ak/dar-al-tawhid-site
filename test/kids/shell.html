@@ -2766,9 +2766,8 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
   var SEEN_KEY="darKidsFriendlyUpdateSeenV8";
   function kidsWantPreview(){
     try{
-      if(/(?:^|[?&])demo=update(?:&|$)/.test(String(location.search||""))) return true;
-    }catch(e){}
-    try{ return localStorage.getItem(SEEN_KEY)!=="1"; }catch(e2){ return true; }
+      return /(?:^|[?&])demo=update(?:&|$)/.test(String(location.search||""));
+    }catch(e){ return false; }
   }
   function kidsShowUpdate(title,text,targetBuild){
     pendingKidsBuild=String(targetBuild||KIDS_BUILD_ID);

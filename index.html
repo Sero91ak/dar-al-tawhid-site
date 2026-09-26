@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/assets/dar-app-chrome.css?v=1">
 <script src="/assets/dar-app-chrome.js?v=1"></script>
 
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1018";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1026";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script id="dar-browser-desktop-router-v833">
 (function(){
   try{
@@ -27536,7 +27536,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1025";
+const APP_BUILD_ID="app-shell-v1026";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -29122,7 +29122,7 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){var n
 <script>
 window.addEventListener("online",function(){updateOfflineBox();flushOfflineQueue().catch(()=>{});refreshContent({forceRender:true})});
 window.addEventListener("offline",function(){updateOfflineBox()});
-window.addEventListener("focus",function(){scheduleRefreshContent({forceRender:false},900)});window.addEventListener("pageshow",function(ev){/* VISUAL_BFCACHE_GUARD_V588 */if(ev&&ev.persisted){try{var b=String(window.__DAR_EXPECTED_BUILD||APP_BUILD_ID||"");var s=localStorage.getItem("dar_visual_authority_build_v1")||"";if(s&&b&&s!==b){location.reload();return}fetch((String(location.pathname||"").indexOf("/test")===0?"/test/version.json":"/version.json"),{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(remote){if(remote&&remote.buildId&&String(remote.buildId)!==b)location.reload()}).catch(function(){})}catch(e){}}});
+window.addEventListener("focus",function(){scheduleRefreshContent({forceRender:false},900)});window.addEventListener("pageshow",function(ev){/* VISUAL_BFCACHE_GUARD_V588 */if(ev&&ev.persisted){try{var b=String(window.__DAR_EXPECTED_BUILD||APP_BUILD_ID||"");var s=localStorage.getItem("dar_visual_authority_build_v1")||"";if(s&&b&&s!==b){location.reload();return}fetch((function(){var p=String(location.pathname||"");if(p.indexOf("/test/kids")===0)return"/test/kids/version.json";return p.indexOf("/test")===0?"/test/version.json":"/version.json"})(),{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(remote){if(remote&&remote.buildId&&String(remote.buildId)!==b)location.reload()}).catch(function(){})}catch(e){}}});
 document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")scheduleRefreshContent({forceRender:false},400)});
 </script>
 <script>
@@ -29264,7 +29264,12 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       try { sessionStorage.setItem(RECOVERY_BANNER_KEY, JSON.stringify({ at: Date.now(), shown: true })); } catch (e) {}
     }
     function getUpdateBtn() { return document.getElementById('homeRefreshBtn'); }
-    function versionJsonPath() { return String(location.pathname || '').indexOf('/test') >= 0 ? '/test/version.json' : '/version.json'; }
+    function versionJsonPath() {
+      var p = String(location.pathname || '');
+      if (p.indexOf('/test/kids') === 0) return '/test/kids/version.json';
+      if (p.indexOf('/test') === 0) return '/test/version.json';
+      return '/version.json';
+    }
     function readVersionState() {
       try {
         var raw = localStorage.getItem(VERSION_STATE_KEY);
@@ -29279,7 +29284,9 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     }
     function isCanonicalShellBuildId(buildId) {
       var id = String(buildId || '').trim();
-      var testApp = String(location.pathname || '').indexOf('/test') === 0;
+      var p = String(location.pathname || '');
+      if (p.indexOf('/test/kids') === 0) return /^kids-shell-/.test(id);
+      var testApp = p.indexOf('/test') === 0;
       return testApp ? /^app-shell-v\d+(?:-test)?$/.test(id) : /^app-shell-v\d+$/.test(id);
     }
     function writeVersionState(patch) {
@@ -29605,7 +29612,8 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     }
     async function seedVersionStateOnBoot() {
       if (typeof APP_BUILD_ID !== 'string' || !APP_BUILD_ID) return;
-      var versionPath = String(location.pathname || '').indexOf('/test') >= 0 ? '/test/version.json' : '/version.json';
+      var p = String(location.pathname || '');
+      var versionPath = p.indexOf('/test/kids') === 0 ? '/test/kids/version.json' : (p.indexOf('/test') === 0 ? '/test/version.json' : '/version.json');
       try {
         var vr = await fetch(versionPath, { cache: 'no-store' });
         if (!vr.ok) return;
@@ -35142,7 +35150,7 @@ html.dar-ios-native-app #bottomNav.bottom-nav{
   }
 }
 </style>
-<style id="dar-kids-oval-tabs-v1025">
+<style id="dar-kids-oval-tabs-v1026">
 html #bottomNav.bottom-nav,
 html.dar-ios-native-app #bottomNav.bottom-nav{
   border-radius:999px!important;
@@ -35164,6 +35172,7 @@ html[data-theme="soft"] #bottomNav.bottom-nav{
 }
 html #bottomNav.bottom-nav .bottom-nav-btn,
 html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn{
+  position:relative!important;
   border-radius:999px!important;
   min-height:56px!important;
   padding:6px 4px!important;
@@ -35203,4 +35212,19 @@ html #bottomNav.bottom-nav .bottom-nav-btn:hover:not(.active)::before{
   opacity:.55!important;
 }
 </style>
+<script>
+(function(){
+  function pinOval(){
+    var src=document.getElementById("dar-kids-oval-tabs-v1026");
+    if(!src)return;
+    var live=document.getElementById("dar-kids-oval-tabs-live");
+    if(!live){live=document.createElement("style");live.id="dar-kids-oval-tabs-live";}
+    live.textContent=src.textContent;
+    document.documentElement.appendChild(live);
+  }
+  pinOval();
+  document.addEventListener("DOMContentLoaded",pinOval);
+  window.addEventListener("pageshow",pinOval);
+})();
+</script>
 </html>
