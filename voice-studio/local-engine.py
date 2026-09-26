@@ -2578,6 +2578,8 @@ class H(BaseHTTPRequestHandler):
             })
         elif p in ("/studio","/studio/","/studio/index.html"):
             self.send_file(APP_HOME/"studio.html","text/html; charset=utf-8")
+        elif p=="/studio/content-studio.js":
+            self.send_file(APP_HOME/"content-studio.js","application/javascript; charset=utf-8")
         elif p=="/data/pronunciation/pronunciation-rules.json":
             self.send_json(200,LIB)
         elif p=="/data/pronunciation/islamic-master-library.json":
