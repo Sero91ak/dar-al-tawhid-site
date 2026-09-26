@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 7,
-  "id": "dar-own-voice-narration-v2.3",
+  "schemaVersion": 8,
+  "id": "dar-own-voice-narration-v2.6",
   "updatedAt": "2026-09-26",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
@@ -354,7 +354,10 @@
     "duplicateHonorificGuard": true,
     "pronunciationLearningRegression": true,
     "onlineRuleValidation": true,
-    "learnedRuleRequiresConfirmedAudio": true
+    "learnedRuleRequiresConfirmedAudio": true,
+    "boundedGenerationRegression": true,
+    "mlxFallbackRegression": true,
+    "backendIdentityVisible": true
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
@@ -484,5 +487,27 @@
     "automaticOnlineSync": true,
     "automaticOnlineSyncHours": 24,
     "onlineRulesAreSuggestionsOnly": true
+  },
+  "productionRenderer": {
+    "primaryAppleSilicon": "mlx-community/chatterbox-multilingual-v3",
+    "framework": "mlx-audio",
+    "languages": [
+      "de",
+      "ar"
+    ],
+    "voiceCloning": true,
+    "boundedGeneration": true,
+    "germanChunkMaxChars": 140,
+    "arabicChunkMaxChars": 90,
+    "germanMaxNewTokens": 360,
+    "arabicMaxNewTokens": 300,
+    "tokenCeilingRescue": true,
+    "fallback": "PyTorch/MPS Chatterbox Multilingual V3",
+    "preservePronunciationRules": true,
+    "preserveConfirmedAudioLocks": true,
+    "preserveHonorificPolicy": true,
+    "preserveTechnicalQa": true,
+    "preserveAntiStutterQa": true,
+    "preserveAntiHoldQa": true
   }
 }
