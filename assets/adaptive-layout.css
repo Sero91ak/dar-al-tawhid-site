@@ -85,12 +85,11 @@ html[data-layout="expanded"] {
 }
 
 /* Landscape / fold open: keep side air, grow modestly with short edge */
-@media (orientation: landscape) {
+@media (orientation: landscape) and (min-width: 600px) {
   :root,
-  html[data-theme],
-  html.dar-ios-native-app {
-    --dar-nav-max: min(460px, 52vw, calc(100vw - 48px));
-    --dar-nav-width: min(460px, 52vw, calc(100vw - 48px));
+  html[data-theme] {
+    --dar-nav-max: min(46.25rem, clamp(22rem, 56vw, 46.25rem), calc(100vh * 1.45));
+    --dar-nav-width: min(var(--dar-nav-max), calc(100vw - 2 * var(--dar-nav-gutter)));
     --layout-navigation-max: var(--dar-nav-width);
   }
 }

@@ -68,11 +68,8 @@
 @media (orientation: landscape) {
   html #appChromeDock #bottomNav.bottom-nav,
   html #bottomNav.bottom-nav,
-  html.dar-ios-native-app #appChromeDock #bottomNav.bottom-nav,
   html.dar-ios-native-app #bottomNav.bottom-nav {
-    width: min(460px, 52vw, calc(100vw - 48px)) !important;
-    max-width: min(460px, 52vw, calc(100vw - 48px)) !important;
-    transition: width .5s cubic-bezier(.22,1,.36,1), max-width .5s cubic-bezier(.22,1,.36,1), transform .5s cubic-bezier(.22,1,.36,1) !important;
+    transition: width .48s cubic-bezier(.22,1,.36,1), max-width .48s cubic-bezier(.22,1,.36,1) !important;
   }
   html #appView.view,
   html body #appView.view,

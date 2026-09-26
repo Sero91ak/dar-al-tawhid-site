@@ -69,19 +69,24 @@
     return "calc(max(7px, calc(env(safe-area-inset-bottom) - 18px)) + 3mm)";
   }
 
-  /* Portrait: nearly full. Landscape: pull back to ~52vw / 460px like Test. */
-  var NAV_EASE = "width .5s cubic-bezier(.22,1,.36,1), max-width .5s cubic-bezier(.22,1,.36,1), transform .5s cubic-bezier(.22,1,.36,1), bottom .5s cubic-bezier(.22,1,.36,1)";
-  var NAV_W_PORTRAIT = "min(460px, calc(100vw - 40px))";
-  var NAV_W_LANDSCAPE = "min(460px, 52vw, calc(100vw - 48px))";
+  /* Portrait ~94% width; landscape ~56% — plain px so WebKit can ease. */
+  var NAV_EASE = "width .48s cubic-bezier(.22,1,.36,1), max-width .48s cubic-bezier(.22,1,.36,1)";
+  var widthLockUntil = 0;
+  var lastLandscape = null;
 
-  function capsuleWidthCss(width, height) {
+  function capsuleWidthPx(width, height) {
     var w = Number(width) || 0;
     var h = Number(height) || 0;
+    if (w < 1) return 0;
+    var gutter = Math.max(24, Math.round(w * 0.04));
+    var avail = Math.max(280, w - gutter);
     var landscape = h > 0 && w >= h;
-    return landscape ? NAV_W_LANDSCAPE : NAV_W_PORTRAIT;
+    var frac = landscape ? 0.56 : w >= 700 ? 0.62 : 0.94;
+    var cap = landscape ? 560 : w >= 900 ? 860 : 900;
+    return Math.min(cap, avail, Math.max(300, Math.round(w * frac)));
   }
 
-  function applyNavLayout(mode) {
+  function applyNavLayout(mode, opts) {
     var nav = document.getElementById("bottomNav");
     if (!nav) return;
     if (document.body && document.body.classList.contains("is-ilm-chat-route")) {
@@ -92,21 +97,19 @@
     }
 
     var metrics = measureViewport();
-    var cssW = capsuleWidthCss(metrics.width, metrics.height);
-    nav.classList.toggle("is-nav-landscape", metrics.width >= metrics.height);
+    var landscape = metrics.height > 0 && metrics.width >= metrics.height;
+    var target = capsuleWidthPx(metrics.width, metrics.height);
+    var now = Date.now();
+    var orientChanged = lastLandscape !== null && lastLandscape !== landscape;
+    var forceWidth = opts && opts.forceWidth;
 
-    /* NEVER left-rail or full-bleed bar. Viewport-based floating capsule. */
+    nav.classList.toggle("is-nav-landscape", landscape);
     nav.classList.remove("is-adaptive-rail");
     nav.classList.add("is-adaptive-centered");
     nav.style.setProperty("position", "fixed", "important");
     nav.style.setProperty("left", "50%", "important");
     nav.style.setProperty("right", "auto", "important");
     nav.style.setProperty("transition", NAV_EASE, "important");
-    nav.style.setProperty("width", cssW, "important");
-    nav.style.setProperty("max-width", cssW, "important");
-    try {
-      document.documentElement.style.setProperty("--dar-nav-width", cssW);
-    } catch (e) {}
     nav.style.setProperty("top", "auto", "important");
     nav.style.setProperty("bottom", navBottomCompact(), "important");
     nav.style.setProperty("height", "auto", "important");
@@ -117,6 +120,29 @@
     nav.style.setProperty("flex-direction", "row", "important");
     nav.style.setProperty("margin", "0", "important");
     nav.style.setProperty("z-index", "40", "important");
+
+    if (target > 0 && (forceWidth || orientChanged || now >= widthLockUntil)) {
+      var from = Math.round((nav.getBoundingClientRect() && nav.getBoundingClientRect().width) || target);
+      if (orientChanged && Math.abs(from - target) > 8) {
+        nav.style.setProperty("width", from + "px", "important");
+        nav.style.setProperty("max-width", from + "px", "important");
+        try {
+          nav.offsetWidth;
+        } catch (e) {}
+        global.requestAnimationFrame(function () {
+          nav.style.setProperty("width", target + "px", "important");
+          nav.style.setProperty("max-width", target + "px", "important");
+        });
+        widthLockUntil = now + 500;
+      } else {
+        nav.style.setProperty("width", target + "px", "important");
+        nav.style.setProperty("max-width", target + "px", "important");
+      }
+      try {
+        document.documentElement.style.setProperty("--dar-nav-width", target + "px");
+      } catch (e2) {}
+    }
+    lastLandscape = landscape;
   }
 
   function applyKeyboardState(metrics) {
@@ -201,14 +227,18 @@
 
   function scheduleOrientBurst() {
     clearOrientTimers();
-    scheduleApply(true);
-    [50, 150, 350, 700].forEach(function (ms) {
+    [0, 90, 180].forEach(function (ms) {
       orientTimers.push(
         setTimeout(function () {
-          applyLayout(true);
+          applyLayout(false);
         }, ms)
       );
     });
+    orientTimers.push(
+      setTimeout(function () {
+        applyNavLayout(currentMode, { forceWidth: true });
+      }, 520)
+    );
   }
 
   function syncNav() {
