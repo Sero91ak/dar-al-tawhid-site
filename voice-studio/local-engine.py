@@ -652,20 +652,22 @@ def get_status():
     out["mlx_error"]=MLX_MODEL_ERROR
     return out
 
-def source_has_honorific(text:str,pos:int,required_key:str=""):
-    tail=str(text or "")[max(0,int(pos)):]
-    # Erlaubt übliche Zwischenzeichen wie Leerzeichen, Komma oder Klammer.
-    tail=tail.lstrip()
-    tail=tail.lstrip(".,،;؛:!?؟…·-–—()[]{}«»\\\"“”„‘’ ")
-    # Jede bereits ausdrücklich geschriebene Lobpreisung blockiert die Auto-Ergänzung,
-    # damit niemals zwei Formeln hintereinander gesprochen werden.
+def source_honorific_match(text:str,pos:int,required_key:str=""):
+    value=str(text or "")
+    i=max(0,int(pos))
+    while i<len(value) and (value[i].isspace() or value[i] in ".,،;؛:!?؟…·-–—()[]{}«»\\\"“”„‘’"):
+        i+=1
+    prefix=value[max(0,int(pos)):i]
     keys=[required_key] if required_key else []
     keys += [k for k in HONORIFIC_SOURCE_FORMS if k not in keys]
     for key in keys:
         for form in HONORIFIC_SOURCE_FORMS.get(key,[]):
-            if tail.startswith(form):
-                return True
-    return False
+            if value.startswith(form,i):
+                return {"key":key,"form":form,"start":i,"end":i+len(form),"prefix":prefix}
+    return None
+
+def source_has_honorific(text:str,pos:int,required_key:str=""):
+    return source_honorific_match(text,pos,required_key) is not None
 
 def prepare(text:str):
     pos=0;out=[];found=[]
@@ -686,11 +688,19 @@ def prepare(text:str):
         required_key=str(hit.get("required_honorific_key",""))
         if required_key:
             honorific_tts=HONORIFIC_TTS_BY_KEY.get(required_key,"")
-            if honorific_tts and not source_has_honorific(text,next_pos,required_key):
-                out.append(" "+honorific_tts)
+            explicit=source_honorific_match(text,next_pos,required_key)
+            if honorific_tts:
                 honorific_rule=HONORIFIC_RULE_BY_KEY.get(required_key)
-                if honorific_rule:
-                    found.append(honorific_rule)
+                if explicit:
+                    prefix=str(explicit.get("prefix",""))
+                    out.append((prefix if prefix else " ")+honorific_tts)
+                    next_pos=int(explicit["end"])
+                    if honorific_rule:
+                        found.append(honorific_rule)
+                else:
+                    out.append(" "+honorific_tts)
+                    if honorific_rule:
+                        found.append(honorific_rule)
 
         pos=next_pos
     return "".join(out),found
