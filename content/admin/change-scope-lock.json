@@ -123,6 +123,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-tab-revert-to-v1041-plop-2026-09-26",
+      "approvedBy": "user-explicit-zurueck-zu-letztem-funktionierenden-plop-vor-grossem-oval",
+      "reason": "Nutzer: komplett zurueck zum Stand als Plop funktionierte, kurz bevor das grosse 3D-Oval gebaut wurde.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-tab-restore-3d-plop-2026-09-26",
       "approvedBy": "user-explicit-keine-aenderung-3d-plop-weg",
       "reason": "Nutzer sieht keine Aenderung, leichter 3D-Plop ist weg. Plop nur am Icon, Oval bleibt im eigenen Tab.",
