@@ -121,6 +121,9 @@ jobs:
               'Master-Bibliothek',
               'lastGeneratedText',
               'rerenderCurrentAudio',
+              'pendingAutoRerenderText',
+              'resetAudioQA(true)',
+              'Nach der letzten Bestätigung wird derselbe Text automatisch neu erzeugt',
               'automatisch mit der bestätigten Aussprache neu erzeugt',
               'style:$("#styleMode").value',
           ]
