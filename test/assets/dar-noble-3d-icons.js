@@ -1,6 +1,6 @@
 /* Test-only: Islamic ʿilm 3D icons on every surface, including home-v380 */
 (function(){
-  const VER="1039";
+  const VER="1040";
   const BASE="/test/assets/dar-3d-icons/";
   const BY_NAV={
     home:"home.png",ilm:"ilm.png",recent:"posts.png",feed:"posts.png",post:"posts.png",
