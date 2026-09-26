@@ -48,6 +48,36 @@ function normalizeQuestionBank(value) {
   return out;
 }
 
+function normalizeQuiz(raw) {
+  const src = raw && typeof raw === "object" && !Array.isArray(raw) ? raw : {};
+  const questions = Array.isArray(src.questions) ? src.questions.slice(0, 100).map((q) => {
+    const answers = Array.isArray(q?.answers) ? q.answers.slice(0, 6).map((a) => ({ label: clean(a?.label || a?.text, 300), correct: Boolean(a?.correct) })).filter((a) => a.label) : [];
+    return {
+      question: clean(q?.question, 700),
+      answers,
+      success: clean(q?.success || "Richtig.", 700),
+      retry: clean(q?.retry || "Versuche es noch einmal.", 700)
+    };
+  }).filter((q) => q.question && q.answers.length >= 2) : [];
+  return { questions };
+}
+
+function normalizeGame(raw) {
+  const src = raw && typeof raw === "object" && !Array.isArray(raw) ? raw : {};
+  return {
+    type: clean(src.type || "choice", 80),
+    summary: clean(src.summary, 700),
+    instructions: clean(src.instructions, 5000),
+    voiceCues: asArray(src.voiceCues, 120)
+  };
+}
+
+function normalizeProduction(raw) {
+  const src = raw && typeof raw === "object" && !Array.isArray(raw) ? raw : {};
+  const allowed = new Set(["draft","producing","awaiting-qa","ready","test-published","live-published","error"]);
+  const phase = clean(src.phase || "draft", 40);
+  return { phase: allowed.has(phase) ? phase : "draft", error: clean(src.error, 900) };
+}
 function normalizeAsset(raw, type) {
   const obj = raw && typeof raw === "object" ? raw : {};
   return {
@@ -108,8 +138,9 @@ export function normalizeKidsContentItem(raw, nowIso = new Date().toISOString())
       codec: clean(source?.audio?.codec, 60)
     },
     question: normalizeQuestionBank(source.question),
-    quiz: source.quiz && typeof source.quiz === "object" ? source.quiz : null,
-    game: source.game && typeof source.game === "object" ? source.game : null,
+    quiz: normalizeQuiz(source.quiz),
+    game: normalizeGame(source.game),
+    production: normalizeProduction(source.production),
     featured: Boolean(source.featured),
     newUntil: source.newUntil ? clean(source.newUntil, 80) : null,
     createdAt: clean(source.createdAt || nowIso, 80),
@@ -142,28 +173,34 @@ export function validateKidsContentForPublish(item) {
   if (item.ageMin > item.ageMax) errors.push("Altersbereich ungültig");
   if (!item.modes.read && !item.modes.listen) errors.push("Mindestens Lesen oder Hören muss aktiv sein");
 
+  const needsVisual = ["story","lesson","quiz","game"].includes(item.kind);
+  if (needsVisual && !item.cover?.url) errors.push("Cover fehlt");
+  if (item.modes.listen && !item.audio?.url) errors.push("Audio fehlt");
+  if (item.modes.listen && !item.qa?.pronunciation) errors.push("Aussprache muss bestätigt sein");
+  if (item.modes.listen && !item.qa?.audio) errors.push("Audio-QA fehlt");
+  if (needsVisual && !item.qa?.cover) errors.push("Cover-QA fehlt");
+
   if (item.kind === "story" || item.kind === "lesson") {
     if (!item.text) errors.push("Text fehlt");
-    if (!item.cover?.url) errors.push("Cover fehlt");
-    if (item.modes.listen && !item.audio?.url) errors.push("Audio fehlt");
-    if (item.modes.listen && !item.qa?.pronunciation) errors.push("Aussprache muss bestätigt sein");
     if (!item.qa?.text) errors.push("Text-QA fehlt");
-    if (!item.qa?.cover) errors.push("Cover-QA fehlt");
-    if (item.modes.listen && !item.qa?.audio) errors.push("Audio-QA fehlt");
   }
 
   if (item.kind === "quiz") {
-    const count = Number(item.quiz?.questions?.length || 0);
-    if (!count) errors.push("Quiz-Fragen fehlen");
+    const qs = Array.isArray(item.quiz?.questions) ? item.quiz.questions : [];
+    if (!qs.length) errors.push("Quiz-Fragen fehlen");
+    qs.forEach((q, index) => {
+      if (!q.question) errors.push(`Quiz-Frage ${index + 1} fehlt`);
+      if (!Array.isArray(q.answers) || q.answers.length < 2) errors.push(`Quiz-Frage ${index + 1}: mindestens zwei Antworten nötig`);
+      if ((q.answers || []).filter((a) => a.correct).length !== 1) errors.push(`Quiz-Frage ${index + 1}: genau eine richtige Antwort nötig`);
+    });
   }
 
   if (item.kind === "game") {
-    if (!item.game || typeof item.game !== "object") errors.push("Spiel-Konfiguration fehlt");
+    if (!item.game?.instructions) errors.push("Spielanleitung fehlt");
+    if (item.modes.listen && !(item.game?.voiceCues || []).length && !item.text) errors.push("Sprachbausteine oder Sprechtext fehlen");
   }
-
   return errors;
 }
-
 function indexPath(env, staging) {
   return clean(
     staging
@@ -293,6 +330,7 @@ export async function publishKidsContentEntry(env, input, helpers) {
     ...draft,
     ...(input?.cover ? { cover: { ...(draft.cover || {}), ...input.cover } } : {}),
     ...(input?.audio ? { audio: { ...(draft.audio || {}), ...input.audio } } : {}),
+    production: { ...(draft.production || {}), phase: live ? "live-published" : "test-published", error: "" },
     status: "published",
     publishedAt: draft.publishedAt || nowIso,
     publishedRevision: draft.revision,

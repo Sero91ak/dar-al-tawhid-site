@@ -213,12 +213,14 @@ function openItem(id) {
     initial = mode;
     body.querySelectorAll("[data-studio-mode]").forEach(b => b.classList.toggle("active", b.dataset.studioMode === mode));
     if (item.kind === "quiz") {
-      payload.innerHTML = renderQuiz(item);
+      const voice = modes.listen && mode !== "read" ? '<audio class="studio-audio" controls playsinline preload="metadata" src="'+esc(abs(item.audio.url))+'"></audio>' : "";
+      payload.innerHTML = voice + renderQuiz(item);
       bindQuiz(item);
       return;
     }
     if (item.kind === "game") {
-      payload.innerHTML = renderGame(item);
+      const voice = modes.listen && mode !== "read" ? '<audio class="studio-audio" controls playsinline preload="metadata" src="'+esc(abs(item.audio.url))+'"></audio>' : "";
+      payload.innerHTML = voice + renderGame(item);
       return;
     }
     if (mode === "listen" && modes.listen) {
@@ -233,7 +235,7 @@ function openItem(id) {
     }
   }
   body.querySelectorAll("[data-studio-mode]").forEach(b => b.addEventListener("click", () => paint(b.dataset.studioMode)));
-  paint(item.kind === "quiz" || item.kind === "game" ? "read" : initial);
+  paint(initial);
   const modal = document.getElementById("studioContentModal");
   modal.classList.add("open");
   modal.setAttribute("aria-hidden","false");

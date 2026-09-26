@@ -15,6 +15,10 @@ let coverRemoteUrl="";
 let coverAsset=null;
 let audioAsset=null;
 let contentStatus="draft";
+let productionPhase="draft";
+let productionError="";
+let quizDraft=[];
+let gameDraft={type:"choice",summary:"",instructions:"",voiceCues:[]};
 let busy=false;
 
 function q(id){return document.getElementById(id)}
@@ -47,6 +51,12 @@ function setStudioMessage(msg,type=""){
   el.className="cs-message "+(type||"");
 }
 function statusLabel(){
+  if(productionPhase==="producing")return"Produktion läuft";
+  if(productionPhase==="awaiting-qa")return"QA erforderlich";
+  if(productionPhase==="ready")return"Bereit";
+  if(productionPhase==="test-published")return"Test veröffentlicht";
+  if(productionPhase==="live-published")return"Live veröffentlicht";
+  if(productionPhase==="error")return"Fehler";
   if(contentStatus==="published"&&stagingPublished)return"Test veröffentlicht";
   if(contentStatus==="review")return"Prüfung";
   if(contentStatus==="published")return"Veröffentlicht";
@@ -84,6 +94,11 @@ function injectStyles(){
   .cs-qa{display:grid;gap:6px}.cs-check{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:10px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)}.cs-check:last-child{border:0}.cs-check b{font-size:10px}
   .cs-library{display:grid;gap:6px;max-height:180px;overflow:auto}.cs-item{border:1px solid var(--line);border-radius:9px;padding:8px;background:rgba(255,255,255,.025);cursor:pointer}.cs-item b{display:block;font-size:11px}.cs-item small{font-size:9px;color:#7f9499}
   .cs-disabled-pane{padding:20px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025);color:#879a9e;font-size:12px;line-height:1.6}
+  .cs-structured{margin:0 0 14px;padding:14px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.018)}
+  .cs-structured[hidden]{display:none}.cs-structured h3{margin:0 0 10px;font-size:13px;color:#f0d59a}
+  .cs-question{padding:12px;border:1px solid rgba(255,255,255,.07);border-radius:12px;background:rgba(0,0,0,.12);margin:8px 0}
+  .cs-question-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.cs-question-head b{font-size:11px}.cs-question-head button{border:0;background:transparent;color:#df8686;cursor:pointer;font-size:11px}
+  .cs-answer-grid,.cs-inline-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.cs-add{width:100%;margin-top:8px}
   @media(max-width:900px){.cs-grid{grid-template-columns:1fr 1fr}.cs-field.span4{grid-column:1/-1}}
   @media(max-width:600px){.cs-grid{grid-template-columns:1fr}.cs-field.span2,.cs-field.span4{grid-column:1}.cs-actions{grid-template-columns:1fr}}
   `;
@@ -109,7 +124,8 @@ function metaHtml(){
       <div class="cs-field"><label>Modus</label><div class="cs-modes"><label><input id="csModeRead" type="checkbox" checked> Lesen</label><label><input id="csModeListen" type="checkbox" checked> Hören</label></div></div>
       <div class="cs-field span4"><label for="csSources">Quellen / Nachweise</label><textarea id="csSources" placeholder="Eine Quelle pro Zeile, z. B. Qurʾān 11:36–44"></textarea></div>
     </div>
-  </section>`;
+  </section>
+  <section id="csStructured" class="cs-structured" hidden><div id="csStructuredBody"></div></section>`;
 }
 function publishHtml(){
   return `<section id="csPublishSection" class="side-section">
@@ -167,6 +183,7 @@ function mount(){
   q("csSecret").value=workerSecret();
   bind();
   restoreDraft();
+  renderKindEditor();
   renderStatus();
   refreshQa();
   loadLibrary();
@@ -174,8 +191,16 @@ function mount(){
 function bind(){
   document.querySelectorAll("[data-cs-kind]").forEach(btn=>btn.addEventListener("click",()=>switchKind(btn.dataset.csKind)));
   q("csTitle")?.addEventListener("input",()=>{q("csCoverTitle").textContent=q("csTitle").value||"Neue Geschichte";persistDraft();refreshQa()});
-  ["csCategory","csTopic","csProphet","csAgeMin","csAgeMax","csModeRead","csModeListen","csSources"].forEach(id=>q(id)?.addEventListener("change",persistDraft));
+  ["csCategory","csTopic","csProphet","csAgeMin","csAgeMax","csModeRead","csModeListen","csSources"].forEach(id=>q(id)?.addEventListener("change",()=>{persistDraft();refreshQa()}));
   q("text")?.addEventListener("input",()=>{persistDraft();refreshQa()});
+  q("csStructured")?.addEventListener("input",()=>{captureStructuredEditor();persistDraft();refreshQa()});
+  q("csStructured")?.addEventListener("change",()=>{captureStructuredEditor();persistDraft();refreshQa()});
+  q("csStructured")?.addEventListener("click",e=>{
+    const add=e.target.closest?.("[data-cs-add-question]");
+    if(add){quizDraft.push(blankQuizQuestion());renderKindEditor();persistDraft();refreshQa();return}
+    const remove=e.target.closest?.("[data-cs-remove-question]");
+    if(remove){quizDraft.splice(Number(remove.dataset.csRemoveQuestion),1);if(!quizDraft.length)quizDraft.push(blankQuizQuestion());renderKindEditor();persistDraft();refreshQa()}
+  });
   q("csCoverChoose")?.addEventListener("click",()=>q("csCoverFile").click());
   q("csCoverFile")?.addEventListener("change",e=>handleCoverFile(e.target.files?.[0]));
   q("csCover")?.addEventListener("click",()=>q("csCoverFile").click());
@@ -194,35 +219,63 @@ function bind(){
   });
   setInterval(refreshQa,1200);
 }
-function switchKind(kind){
-  studioKind=kind||"story";
-  document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.toggle("active",x.dataset.csKind===studioKind));
-  const story=studioKind==="story";
-  const ios=studioKind==="ios";
-  q("csMeta").hidden=ios;
-  q("csPublishSection").hidden=ios;
-  q("csLibrarySection").hidden=ios;
-  const title=document.querySelector(".editor-panel h1");
-  const lead=document.querySelector(".editor-panel .lead");
-  if(story){
-    title.textContent="Kids-Geschichte produzieren";
-    lead.textContent="Text, Serhat-Stimme, Cover und Altersfreigabe als ein Paket produzieren und direkt in die Kids-App veröffentlichen.";
-    q("styleMode").value="kids_story";
-  }else if(studioKind==="quiz"){
-    title.textContent="Kids-Quiz produzieren";
-    lead.textContent="Fragen, Antworten und Serhat-Sprachbausteine werden getrennt von Geschichten verwaltet.";
-    q("csCategory").value="Quiz · geprüft";
-    q("styleMode").value="kids_lesson";
+function effectiveKind(){return studioKind==="ios"?"lesson":studioKind}
+function effectiveTarget(){return studioKind==="ios"?"ios":"kids"}
+function draftKey(kind=studioKind){return STUDIO_DRAFT_KEY+"."+kind}
+function blankQuizQuestion(){return{question:"",answers:[{label:"",correct:true},{label:"",correct:false}],success:"Richtig.",retry:"Versuche es noch einmal."}}
+function setProductionPhase(phase,error=""){productionPhase=phase||"draft";productionError=error||"";renderStatus()}
+function resetEditorForKind(){
+  q("csTitle").value="";q("csTopic").value="";q("csProphet").value="";q("csSources").value="";q("text").value="";
+  q("csAgeMin").value="6";q("csAgeMax").value="10";q("csModeRead").checked=true;q("csModeListen").checked=true;
+  q("csCategory").value=studioKind==="quiz"?"Quiz · geprüft":studioKind==="game"?"Spiel":studioKind==="ios"?"iOS · Inhalt":"Qurʾān · geprüft";
+  coverFile=null;coverRemoteUrl="";coverAsset=null;audioAsset=null;quizDraft=[];gameDraft={type:"choice",summary:"",instructions:"",voiceCues:[]};
+  q("csCover")?.querySelector("img")?.remove();q("csCoverTitle").textContent="Neuer Inhalt";
+}
+function renderKindEditor(){
+  const wrap=q("csStructured"),body=q("csStructuredBody");if(!wrap||!body)return;
+  if(studioKind==="quiz"){
+    wrap.hidden=false;if(!quizDraft.length)quizDraft=[blankQuizQuestion()];
+    body.innerHTML="<h3>Quiz-Aufbau</h3>"+quizDraft.map((item,i)=>{
+      const answers=Array.isArray(item.answers)?item.answers:[];
+      const opts=[0,1,2,3].map(ai=>"<option value=\""+ai+"\" "+(answers[ai]?.correct?"selected":"")+">"+String.fromCharCode(65+ai)+"</option>").join("");
+      const ans=[0,1,2,3].map(ai=>{const a=answers[ai]||{};return "<div class=\"cs-field\"><label>Antwort "+String.fromCharCode(65+ai)+"</label><input data-q-answer=\""+ai+"\" data-q-index=\""+i+"\" value=\""+escapeHtml(a.label||"")+"\"></div>"}).join("");
+      return "<div class=\"cs-question\" data-cs-question=\""+i+"\"><div class=\"cs-question-head\"><b>Frage "+(i+1)+"</b><button type=\"button\" data-cs-remove-question=\""+i+"\">Entfernen</button></div><div class=\"cs-field\"><label>Frage</label><input data-q-field=\"question\" data-q-index=\""+i+"\" value=\""+escapeHtml(item.question||"")+"\"></div><div class=\"cs-answer-grid\">"+ans+"</div><div class=\"cs-inline-grid\" style=\"margin-top:8px\"><div class=\"cs-field\"><label>Richtige Antwort</label><select data-q-field=\"correctIndex\" data-q-index=\""+i+"\">"+opts+"</select></div><div class=\"cs-field\"><label>Erfolg</label><input data-q-field=\"success\" data-q-index=\""+i+"\" value=\""+escapeHtml(item.success||"Richtig.")+"\"></div></div><div class=\"cs-field\" style=\"margin-top:8px\"><label>Nochmal versuchen</label><input data-q-field=\"retry\" data-q-index=\""+i+"\" value=\""+escapeHtml(item.retry||"Versuche es noch einmal.")+"\"></div></div>";
+    }).join("")+"<button class=\"btn quiet cs-add\" type=\"button\" data-cs-add-question>+ Frage hinzufügen</button>";
   }else if(studioKind==="game"){
-    title.textContent="Kids-Spiel produzieren";
-    lead.textContent="Spielinhalte und wiederverwendbare Serhat-Sprachbausteine werden als eigenes Content-Paket verwaltet.";
-    q("csCategory").value="Spiel";
-    q("styleMode").value="kids_lesson";
-  }else{
-    title.textContent="iOS Content Studio";
-    lead.textContent="Der gleiche Paketstandard ist für die offizielle iOS-App vorbereitet. Live-Anbindung folgt nach dem Kids-Staging-Test.";
+    wrap.hidden=false;
+    body.innerHTML="<h3>Spiel-Aufbau</h3><div class=\"cs-inline-grid\"><div class=\"cs-field\"><label>Spieltyp</label><select id=\"csGameType\"><option value=\"choice\">Auswahlspiel</option><option value=\"listen\">Hörspiel</option><option value=\"memory\">Merkspiel</option><option value=\"sequence\">Reihenfolge</option></select></div><div class=\"cs-field\"><label>Kurzbeschreibung</label><input id=\"csGameSummary\" value=\""+escapeHtml(gameDraft.summary||"")+"\"></div></div><div class=\"cs-field\" style=\"margin-top:8px\"><label>Anleitung</label><textarea id=\"csGameInstructions\">"+escapeHtml(gameDraft.instructions||"")+"</textarea></div><div class=\"cs-field\" style=\"margin-top:8px\"><label>Serhat-Sprachbausteine · eine Zeile pro Satz</label><textarea id=\"csGameVoiceCues\" placeholder=\"Sehr gut!&#10;Versuche es noch einmal.\">"+escapeHtml((gameDraft.voiceCues||[]).join("\\n"))+"</textarea></div>";
+    q("csGameType").value=gameDraft.type||"choice";
+  }else{wrap.hidden=true;body.innerHTML=""}
+}
+function captureStructuredEditor(){
+  if(studioKind==="quiz"){
+    document.querySelectorAll("[data-cs-question]").forEach(node=>{
+      const i=Number(node.dataset.csQuestion),item=quizDraft[i]||blankQuizQuestion();
+      item.question=node.querySelector('[data-q-field="question"]')?.value||"";item.success=node.querySelector('[data-q-field="success"]')?.value||"Richtig.";item.retry=node.querySelector('[data-q-field="retry"]')?.value||"Versuche es noch einmal.";
+      const correct=Number(node.querySelector('[data-q-field="correctIndex"]')?.value||0);
+      item.answers=[0,1,2,3].map(ai=>({label:node.querySelector('[data-q-answer="'+ai+'"]')?.value||"",correct:ai===correct})).filter(a=>String(a.label||"").trim());quizDraft[i]=item;
+    });
+  }else if(studioKind==="game"){
+    gameDraft={type:q("csGameType")?.value||gameDraft.type||"choice",summary:q("csGameSummary")?.value||"",instructions:q("csGameInstructions")?.value||"",voiceCues:String(q("csGameVoiceCues")?.value||"").split(/\n+/).map(x=>x.trim()).filter(Boolean)};
   }
-  contentId="";savedRevision=0;stagingPublished=false;contentStatus="draft";renderStatus();refreshQa();loadLibrary();
+}
+function voiceScript(){
+  captureStructuredEditor();
+  if(studioKind==="quiz")return quizDraft.map(item=>[item.question,...(item.answers||[]).map(a=>a.label),item.success,item.retry].filter(Boolean).join(". ")).filter(Boolean).join("\n\n");
+  if(studioKind==="game")return [gameDraft.instructions,...(gameDraft.voiceCues||[])].filter(Boolean).join("\n\n");
+  return String(q("text")?.value||"").trim();
+}
+function switchKind(kind){
+  persistDraft();studioKind=kind||"story";
+  document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.toggle("active",x.dataset.csKind===studioKind));
+  const title=document.querySelector(".editor-panel h1"),lead=document.querySelector(".editor-panel .lead");
+  resetEditorForKind();
+  if(studioKind==="story"){title.textContent="Kids-Geschichte produzieren";lead.textContent="Text, Serhat-Stimme, Cover und Altersfreigabe als ein Paket produzieren und direkt in die Kids-App veröffentlichen.";q("styleMode").value="kids_story"}
+  else if(studioKind==="quiz"){title.textContent="Kids-Quiz produzieren";lead.textContent="Fragen, Antworten, Erklärung und Serhat-Stimme als eigenes geprüftes Quiz-Paket.";q("styleMode").value="kids_lesson"}
+  else if(studioKind==="game"){title.textContent="Kids-Spiel produzieren";lead.textContent="Spielinhalt und wiederverwendbare Serhat-Sprachbausteine getrennt von Geschichten produzieren.";q("styleMode").value="kids_lesson"}
+  else{title.textContent="iOS Content Studio";lead.textContent="Text, Serhat-Stimme, Cover und Metadaten als separates Paket für die offizielle iOS-App.";q("styleMode").value="narration"}
+  q("csPublishTest").textContent=studioKind==="ios"?"iOS Staging veröffentlichen":"In Test-Kids veröffentlichen";q("csPublishLive").textContent=studioKind==="ios"?"iOS Live veröffentlichen":"Live veröffentlichen";
+  contentId="";savedRevision=0;stagingPublished=false;contentStatus="draft";setProductionPhase("draft");restoreDraft();renderKindEditor();refreshQa();loadLibrary();
 }
 function saveConnection(){
   try{
@@ -233,11 +286,12 @@ function saveConnection(){
   loadLibrary();
 }
 function fields(){
+  captureStructuredEditor();
   const text=String(q("text")?.value||"").trim();
   return{
     id:contentId,
-    kind:studioKind,
-    appTarget:"kids",
+    kind:effectiveKind(),
+    appTarget:effectiveTarget(),
     status:contentStatus,
     title:String(q("csTitle")?.value||"").trim(),
     category:String(q("csCategory")?.value||"").trim(),
@@ -250,36 +304,42 @@ function fields(){
     sourceRefs:String(q("csSources")?.value||"").split(/\n+/).map(x=>x.trim()).filter(Boolean),
     cover:coverAsset||{},
     audio:audioAsset||{},
+    quiz:studioKind==="quiz"?{questions:quizDraft.map(x=>({...x,answers:(x.answers||[]).filter(a=>String(a.label||"").trim())}))}:null,
+    game:studioKind==="game"?{...gameDraft,voiceCues:[...(gameDraft.voiceCues||[])]}:null,
+    production:{phase:productionPhase,error:productionError},
     verification:"studio-review",
     qa:{
       text:!!text,
       cover:!!coverAsset?.url,
       audio:!q("csModeListen")?.checked||!!audioAsset?.url,
-      pronunciation:!q("csModeListen")?.checked||Boolean(qaConfirmed),
+      pronunciation:!q("csModeListen")?.checked||Boolean(qaConfirmed)||Boolean(audioAsset?.url&&contentId),
       source:true
     },
-    push:{enabled:true}
+    push:{enabled:effectiveTarget()==="kids"}
   };
 }
 function persistDraft(){
   try{
-    localStorage.setItem(STUDIO_DRAFT_KEY,JSON.stringify({
+    captureStructuredEditor();
+    localStorage.setItem(draftKey(),JSON.stringify({
       kind:studioKind,title:q("csTitle")?.value||"",category:q("csCategory")?.value||"",
       topic:q("csTopic")?.value||"",prophetId:q("csProphet")?.value||"",
       ageMin:q("csAgeMin")?.value||"6",ageMax:q("csAgeMax")?.value||"10",
       read:q("csModeRead")?.checked!==false,listen:q("csModeListen")?.checked!==false,
-      sources:q("csSources")?.value||""
+      sources:q("csSources")?.value||"",text:q("text")?.value||"",quiz:quizDraft,game:gameDraft
     }));
   }catch{}
 }
 function restoreDraft(){
   try{
-    const d=JSON.parse(localStorage.getItem(STUDIO_DRAFT_KEY)||"null");if(!d)return;
-    q("csTitle").value=d.title||"";q("csCategory").value=d.category||"Qurʾān · geprüft";
+    const d=JSON.parse(localStorage.getItem(draftKey())||"null");if(!d)return;
+    q("csTitle").value=d.title||"";q("csCategory").value=d.category||(studioKind==="quiz"?"Quiz · geprüft":studioKind==="game"?"Spiel":studioKind==="ios"?"iOS · Inhalt":"Qurʾān · geprüft");
     q("csTopic").value=d.topic||"";q("csProphet").value=d.prophetId||"";
     q("csAgeMin").value=d.ageMin||"6";q("csAgeMax").value=d.ageMax||"10";
     q("csModeRead").checked=d.read!==false;q("csModeListen").checked=d.listen!==false;
-    q("csSources").value=d.sources||"";q("csCoverTitle").textContent=d.title||"Neue Geschichte";
+    q("csSources").value=d.sources||"";q("text").value=d.text||"";
+    quizDraft=Array.isArray(d.quiz)?d.quiz:[];gameDraft=d.game&&typeof d.game==="object"?d.game:{type:"choice",summary:"",instructions:"",voiceCues:[]};
+    q("csCoverTitle").textContent=d.title||"Neuer Inhalt";
   }catch{}
 }
 function handleCoverFile(file){
@@ -295,8 +355,8 @@ function renderCover(url){
   box.querySelector("img")?.remove();
   const img=document.createElement("img");img.src=url;img.alt="Cover Vorschau";box.prepend(img);
 }
-async function generateCover(){
-  if(busy)return;
+async function generateCover({internal=false}={}){
+  if(busy&&!internal)return;
   if(!workerSecret()){setStudioMessage("Admin-Verbindung fehlt. Unter „Admin-Verbindung“ Secret eintragen.","warn");return}
   const f=fields();
   if(!f.title&&!f.topic&&!f.text){setStudioMessage("Für ein Cover zuerst Titel oder Text eingeben.","warn");return}
@@ -312,22 +372,34 @@ async function generateCover(){
 }
 async function produce(){
   if(busy)return;
-  busy=true;setStudioMessage("Produktion läuft: Stimme und Cover werden parallel vorbereitet …","warn");
+  captureStructuredEditor();
+  busy=true;setProductionPhase("producing");setStudioMessage("Produktion läuft parallel: Stimme, Cover und Paket werden vorbereitet …","warn");
   try{
+    const needsVoice=!!q("csModeListen")?.checked;
+    const script=voiceScript();
+    if((studioKind==="story"||studioKind==="ios")&&!String(q("text")?.value||"").trim())throw Error("Text fehlt.");
+    if(studioKind==="quiz"&&!quizDraft.some(x=>String(x.question||"").trim()))throw Error("Mindestens eine Quiz-Frage fehlt.");
+    if(studioKind==="game"&&!String(gameDraft.instructions||"").trim())throw Error("Spielanleitung fehlt.");
+    if(needsVoice&&!script)throw Error("Sprechtext fehlt.");
+    if((studioKind==="quiz"||studioKind==="game")&&script)q("text").value=script;
     const tasks=[];
-    const text=String(q("text")?.value||"").trim();
-    if(!text)throw Error("Geschichtentext fehlt.");
-    if(!lastAudio||lastGeneratedText!==text)tasks.push(generate());
-    if(!coverFile&&!coverRemoteUrl&&!coverAsset&&workerSecret())tasks.push(generateCover());
+    if(needsVoice&&(!lastAudio||lastGeneratedText!==script))tasks.push(generate());
+    if(!coverFile&&!coverRemoteUrl&&!coverAsset&&workerSecret())tasks.push(generateCover({internal:true}));
     await Promise.all(tasks);
-    setStudioMessage("Produktion vorbereitet. Audio anhören, Aussprache bestätigen und dann Test veröffentlichen.","good");
-  }catch(e){setStudioMessage(e.message||String(e),"bad")}
-  finally{busy=false;refreshQa()}
+    if(workerSecret()&&!coverAsset?.url&&(coverFile||coverRemoteUrl))await uploadCover();
+    setProductionPhase(needsVoice&&!qaConfirmed?"awaiting-qa":"ready");
+    if(workerSecret())await checkpointPackage(productionPhase);
+    setStudioMessage(needsVoice&&!qaConfirmed?"Audio und Cover vorbereitet. Aussprache anhören und bestätigen; danach ist Test-Publish frei.":"Produktionspaket ist bereit für den Test-Publish.","good");
+  }catch(e){
+    setProductionPhase("error",e.message||String(e));
+    if(workerSecret()&&contentId){try{await checkpointPackage("error",productionError)}catch{}}
+    setStudioMessage(e.message||String(e),"bad");
+  }finally{busy=false;refreshQa()}
 }
 async function ensureId(){
   if(contentId)return contentId;
   if(!workerSecret())throw Error("Admin-Verbindung fehlt.");
-  const d=await adminApi("/api/admin/kids-content/id",{method:"POST",body:JSON.stringify({kind:studioKind,title:q("csTitle")?.value||""})});
+  const d=await adminApi("/api/admin/kids-content/id",{method:"POST",body:JSON.stringify({kind:effectiveKind(),title:q("csTitle")?.value||""})});
   contentId=d.id||"";if(!contentId)throw Error("Content-ID konnte nicht erstellt werden.");
   return contentId;
 }
@@ -376,13 +448,20 @@ async function prepareAssets(){
   if(f.modes.listen&&!audioAsset?.url)jobs.push(uploadAudio());
   await Promise.all(jobs);
 }
+async function checkpointPackage(phase=productionPhase,error=""){
+  await ensureId();
+  productionPhase=phase||productionPhase;productionError=error||"";
+  const payload={...fields(),id:contentId,staging:true,status:"draft",production:{phase:productionPhase,error:productionError}};
+  const d=await adminApi("/api/admin/kids-content/save",{method:"POST",body:JSON.stringify(payload)});
+  savedRevision=d.item?.revision||savedRevision;return d.item;
+}
 async function saveDraftRemote(withAssets){
   if(busy)return null;
   busy=true;contentStatus="draft";renderStatus();
   try{
     await ensureId();
     if(withAssets)await prepareAssets();
-    const payload={...fields(),id:contentId,staging:true,status:"draft"};
+    const payload={...fields(),id:contentId,staging:true,status:"draft",production:{phase:productionPhase,error:productionError}};
     const d=await adminApi("/api/admin/kids-content/save",{method:"POST",body:JSON.stringify(payload)});
     savedRevision=d.item?.revision||savedRevision;contentStatus=d.item?.status||"draft";renderStatus();
     setStudioMessage("Entwurf sicher im Staging gespeichert.","good");await loadLibrary();return d.item;
@@ -395,25 +474,26 @@ async function publishTest(){
   try{
     await ensureId();
     await prepareAssets();
-    const payload={...fields(),id:contentId,staging:true,status:"review"};
+    setProductionPhase("ready");
+    const payload={...fields(),id:contentId,staging:true,status:"review",production:{phase:"ready",error:""}};
     const saved=await adminApi("/api/admin/kids-content/save",{method:"POST",body:JSON.stringify(payload)});
     savedRevision=saved.item?.revision||0;
     const pub=await adminApi("/api/admin/kids-content/publish",{method:"POST",body:JSON.stringify({id:contentId,live:false,sendPush:false})});
-    contentStatus="published";stagingPublished=true;renderStatus();
-    setStudioMessage("In Test-Kids veröffentlicht. Kein Besucher-Push wurde gesendet.","good");await loadLibrary();
+    contentStatus="published";stagingPublished=true;setProductionPhase("test-published");renderStatus();
+    setStudioMessage(effectiveTarget()==="ios"?"iOS-Paket im Staging veröffentlicht. Kein Besucher-Push wurde gesendet.":"In Test-Kids veröffentlicht. Kein Besucher-Push wurde gesendet.","good");await loadLibrary();
     return pub;
   }catch(e){contentStatus="draft";renderStatus();setStudioMessage(e.message||String(e),"bad")}
   finally{busy=false;refreshQa()}
 }
 async function publishLive(){
   if(busy||!stagingPublished)return;
-  if(!confirm("Diese geprüfte Version jetzt LIVE in Kids veröffentlichen und den passenden Kids-Push senden?"))return;
+  if(!confirm(effectiveTarget()==="ios"?"Diese geprüfte Version jetzt LIVE für die iOS-Inhalte veröffentlichen?":"Diese geprüfte Version jetzt LIVE in Kids veröffentlichen und den passenden Kids-Push senden?"))return;
   busy=true;renderStatus();
   try{
-    const pub=await adminApi("/api/admin/kids-content/publish",{method:"POST",body:JSON.stringify({id:contentId,live:true,sendPush:true,triggerDeploy:true})});
-    contentStatus="published";renderStatus();
+    const pub=await adminApi("/api/admin/kids-content/publish",{method:"POST",body:JSON.stringify({id:contentId,live:true,sendPush:effectiveTarget()==="kids",triggerDeploy:true})});
+    contentStatus="published";setProductionPhase("live-published");renderStatus();
     const p=pub.push||{};
-    setStudioMessage(p.sent?"Live veröffentlicht · Kids-Push gesendet.":"Live veröffentlicht · Push: "+(p.reason||"kein Empfänger"),p.sent?"good":"warn");
+    setStudioMessage(effectiveTarget()==="ios"?"iOS-Inhalt live veröffentlicht.":(p.sent?"Live veröffentlicht · Kids-Push gesendet.":"Live veröffentlicht · Push: "+(p.reason||"kein Empfänger")),effectiveTarget()==="ios"||p.sent?"good":"warn");
   }catch(e){setStudioMessage(e.message||String(e),"bad")}
   finally{busy=false;renderStatus();refreshQa()}
 }
@@ -421,7 +501,7 @@ async function loadLibrary(){
   const box=q("csLibrary");if(!box||!workerSecret()){if(box)box.innerHTML='<div class="notice">Admin-Verbindung herstellen, um Staging-Inhalte zu laden.</div>';return}
   try{
     const d=await adminApi("/api/admin/kids-content?staging=1",{method:"GET"});
-    const items=(d.index?.items||[]).filter(x=>x.kind===studioKind).slice(0,30);
+    const items=(d.index?.items||[]).filter(x=>studioKind==="ios"?x.appTarget==="ios":x.kind===effectiveKind()&&x.appTarget!=="ios").slice(0,30);
     box.innerHTML=items.length?items.map(x=>`<button class="cs-item" data-cs-item="${escapeHtml(x.id)}"><b>${escapeHtml(x.title||x.id)}</b><small>${escapeHtml(x.status)} · r${Number(x.revision||1)} · ${Number(x.ageMin)}–${Number(x.ageMax)} J.</small></button>`).join(""):'<div class="notice">Noch keine Inhalte in diesem Bereich.</div>';
   }catch(e){box.innerHTML='<div class="notice">Staging-Bibliothek nicht erreichbar: '+escapeHtml(e.message||String(e))+'</div>'}
 }
@@ -429,23 +509,30 @@ async function loadRemoteItem(id){
   try{
     const d=await adminApi("/api/admin/kids-content?staging=1",{method:"GET"});
     const x=(d.index?.items||[]).find(i=>i.id===id);if(!x)return;
-    studioKind=x.kind||"story";contentId=x.id;savedRevision=x.revision||0;contentStatus=x.status||"draft";stagingPublished=x.status==="published";
+    studioKind=x.appTarget==="ios"?"ios":(x.kind||"story");contentId=x.id;savedRevision=x.revision||0;contentStatus=x.status||"draft";stagingPublished=x.status==="published";productionPhase=x.production?.phase||(stagingPublished?"test-published":"draft");productionError=x.production?.error||"";
     document.querySelectorAll("[data-cs-kind]").forEach(b=>b.classList.toggle("active",b.dataset.csKind===studioKind));
     q("csTitle").value=x.title||"";q("csCategory").value=x.category||"";q("csTopic").value=x.topic||"";q("csProphet").value=x.prophetId||"";
     q("csAgeMin").value=String(x.ageMin||4);q("csAgeMax").value=String(x.ageMax||10);q("csModeRead").checked=x.modes?.read!==false;q("csModeListen").checked=x.modes?.listen!==false;
     q("csSources").value=(x.sourceRefs||[]).join("\n");q("text").value=x.text||"";coverAsset=x.cover?.url?x.cover:null;audioAsset=x.audio?.url?x.audio:null;
-    coverFile=null;coverRemoteUrl="";if(coverAsset?.url)renderCover(coverAsset.url);q("csCoverTitle").textContent=x.title||"Geschichte";
-    if(typeof renderAnalysis==="function")renderAnalysis();renderStatus();refreshQa();setStudioMessage("Staging-Paket geladen.","good");
+    quizDraft=Array.isArray(x.quiz?.questions)?x.quiz.questions:[];gameDraft=x.game&&typeof x.game==="object"?x.game:{type:"choice",summary:"",instructions:"",voiceCues:[]};
+    coverFile=null;coverRemoteUrl="";if(coverAsset?.url)renderCover(coverAsset.url);q("csCoverTitle").textContent=x.title||"Inhalt";
+    renderKindEditor();if(typeof renderAnalysis==="function")renderAnalysis();renderStatus();refreshQa();setStudioMessage("Staging-Paket geladen.","good");
   }catch(e){setStudioMessage(e.message||String(e),"bad")}
 }
 function refreshQa(){
   if(!q("csQaText"))return;
-  const text=String(q("text")?.value||"").trim(),same=!!lastAudio&&lastGeneratedText===text;
+  captureStructuredEditor();
+  const text=String(q("text")?.value||"").trim(),script=voiceScript(),same=!!lastAudio&&lastGeneratedText===script;
   const cover=!!(coverFile||coverRemoteUrl||coverAsset?.url);
   const audio=!q("csModeListen")?.checked||same||!!audioAsset?.url;
   const pron=!q("csModeListen")?.checked||Boolean(qaConfirmed&&same)||Boolean(audioAsset?.url&&contentId);
-  paintQa("csQaText",!!text,text?"bereit":"fehlt");paintQa("csQaCover",cover,cover?"bereit":"fehlt");paintQa("csQaAudio",audio,audio?"bereit":"fehlt");paintQa("csQaPron",pron,pron?"bestätigt":"offen");
-  const test=q("csPublishTest");if(test)test.disabled=busy||!text||!cover||!audio||!pron||!q("csTitle")?.value.trim();
+  const quizOk=quizDraft.length>0&&quizDraft.every(x=>String(x.question||"").trim()&&(x.answers||[]).filter(a=>String(a.label||"").trim()).length>=2&&(x.answers||[]).filter(a=>a.correct).length===1);
+  const gameOk=Boolean(String(gameDraft.instructions||"").trim());
+  const contentOk=studioKind==="quiz"?quizOk:studioKind==="game"?gameOk:Boolean(text);
+  paintQa("csQaText",contentOk,contentOk?(studioKind==="quiz"?"Fragen bereit":studioKind==="game"?"Spiel bereit":"bereit"):"fehlt");
+  paintQa("csQaCover",cover,cover?"bereit":"fehlt");paintQa("csQaAudio",audio,audio?"bereit":"fehlt");paintQa("csQaPron",pron,pron?"bestätigt":"offen");
+  if(productionPhase==="awaiting-qa"&&contentOk&&cover&&audio&&pron)productionPhase="ready";
+  const test=q("csPublishTest");if(test)test.disabled=busy||!contentOk||!cover||!audio||!pron||!q("csTitle")?.value.trim();
   renderStatus();
 }
 function paintQa(id,ok,label){const el=q(id);if(!el)return;el.textContent=label;el.className=ok?"good":"warn"}
