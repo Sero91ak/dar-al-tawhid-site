@@ -22463,7 +22463,7 @@ function rememberPostBrowseFromRoute(fromRoute){
 function getPostBrowseIds(){
   try{const raw=sessionStorage.getItem(POST_BROWSE_KEY);const ctx=raw?JSON.parse(raw):null;return Array.isArray(ctx?.ids)?ctx.ids.map(String):[]}catch(e){return[]}
 }
-function navigate(view,value="",opts={}){if(view==="appstore"){markLiveAppStoreUpdatesSeen();openAppStore(value);return}if(isVisitorTestOnlyView(view)){view="more";value=""}const from=currentRoute&&currentRoute.view?{...currentRoute}:readRoute();const to={view,value};const skipPush=!!opts.skipPush;if(!routeEqual(from,to))saveNavScroll(from);if(from.view==="feed"&&!routeEqual(from,to)&&window.DAR_PREMIUM_FEED?.saveState)window.DAR_PREMIUM_FEED.saveState();if(view==="post"&&value&&from.view!=="post")rememberPostBrowseFromRoute(from);if(!skipPush&&!routeEqual(from,to)){const keepReturn=isDetailRoute(from)&&isDetailRoute(to)&&from.view===to.view;if(!keepReturn)pushNavState(from);if(view==="home"){clearStickyPushLaunchParams();clearNavStack()}}if(view==="home")clearStickyPushLaunchParams();if(view==="quran-surah"&&from.view==="quran")saveQuranListScroll();if(view==="home"||(view==="quran"&&from.view==="home"))clearQuranReturnState();if(!routeEqual(from,to)&&!skipPush&&!opts.noAnim)window.__pageNavDir="forward";window.__smoothNav=!isDetailRoute(to)||routeEqual(from,to);location.hash=routeToHash(view,value)}
+function navigate(view,value="",opts={}){if(view==="qibla"){try{openQiblaQuickSheet()}catch(e){}return}if(view==="appstore"){markLiveAppStoreUpdatesSeen();openAppStore(value);return}if(isVisitorTestOnlyView(view)){view="more";value=""}const from=currentRoute&&currentRoute.view?{...currentRoute}:readRoute();const to={view,value};const skipPush=!!opts.skipPush;if(!routeEqual(from,to))saveNavScroll(from);if(from.view==="feed"&&!routeEqual(from,to)&&window.DAR_PREMIUM_FEED?.saveState)window.DAR_PREMIUM_FEED.saveState();if(view==="post"&&value&&from.view!=="post")rememberPostBrowseFromRoute(from);if(!skipPush&&!routeEqual(from,to)){const keepReturn=isDetailRoute(from)&&isDetailRoute(to)&&from.view===to.view;if(!keepReturn)pushNavState(from);if(view==="home"){clearStickyPushLaunchParams();clearNavStack()}}if(view==="home")clearStickyPushLaunchParams();if(view==="quran-surah"&&from.view==="quran")saveQuranListScroll();if(view==="home"||(view==="quran"&&from.view==="home"))clearQuranReturnState();if(!routeEqual(from,to)&&!skipPush&&!opts.noAnim)window.__pageNavDir="forward";window.__smoothNav=!isDetailRoute(to)||routeEqual(from,to);location.hash=routeToHash(view,value)}
 function goBack(){if(currentRoute.view==="home")return;window.__pageNavDir="back";const stack=getNavStack();if(stack.length){const prev=stack.pop();setNavStack(stack);window.__restoreScrollY=Number(prev?.scroll!=null?prev.scroll:getNavScroll(prev))||0;navigate(prev.view,prev.value||"",{skipPush:true,noAnim:true});return}const parent=parentRoute(currentRoute);window.__restoreScrollY=getNavScroll(parent);navigate(parent.view,parent.value||"",{skipPush:true,noAnim:true})}
 function readRoute(){
   migrateLegacyTopicsRoute();
@@ -22472,6 +22472,12 @@ function readRoute(){
   const head=bare.split("/")[0]||"";
   if((!head||head==="home"||head==="start")&&!bare.includes("/")){const fromQuery=parsePushPostIdFromUrl(location.href);if(fromQuery)return{view:"post",value:fromQuery}}
   const route=parseRouteFromHash(rawHash);
+  if(route.view==="qibla"){
+    const keep=(typeof currentRoute==="object"&&currentRoute&&currentRoute.view&&currentRoute.view!=="qibla")?{view:currentRoute.view,value:currentRoute.value||""}:{view:"home",value:""};
+    try{history.replaceState(null,"",location.pathname+(location.search||"")+(keep.view==="home"?"#home":routeToHash(keep.view,keep.value||"")))}catch(e){}
+    queueMicrotask(function(){try{openQiblaQuickSheet()}catch(e){}});
+    return keep;
+  }
   const slug=normalizeRouteSlug(head);
   if(slug&&slug!==normalizeRouteSlug(route.view)&&ROUTE_ALIASES[slug])canonicalizeRouteHash(route);
   else if(head==="feed"&&bare.startsWith("feed/topics"))canonicalizeRouteHash(route);
@@ -27536,7 +27542,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1025";
+const APP_BUILD_ID="app-shell-v1026";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -28189,7 +28195,7 @@ function render(){
     else if(currentRoute.view==="news")html=renderNews();
     else if(currentRoute.view==="settings")html=renderSettings();
     else if(currentRoute.view==="jummah")html=renderJummah();
-    else if(currentRoute.view==="qibla"){html=typeof renderMore==="function"?renderMore():renderQiblaPage();if(!(window.DARQiblaQuickView&&window.DARQiblaQuickView.isOpen&&window.DARQiblaQuickView.isOpen()))queueMicrotask(()=>{try{openQiblaQuickSheet()}catch(e){}});}
+    else if(currentRoute.view==="qibla"){html="";queueMicrotask(()=>{try{openQiblaQuickSheet()}catch(e){}});}
     else if(currentRoute.view==="image-editor")html=renderImageEditor();
     else if(currentRoute.view==="image-editor-test")html=renderImageEditorTest();
     else if(currentRoute.view==="quran")html=renderQuranFoldRoute("quran");
