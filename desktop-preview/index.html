@@ -2254,7 +2254,7 @@ button,input,select{font:inherit}
 }
 
 </style>
-<link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=280">
+<link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=281">
 </head>
 <body class="desktop-overhaul-v18">
 <header class="site-header">
@@ -3527,7 +3527,7 @@ button,input,select{font:inherit}
   function paint(){
    var r=rows();if(status)status.textContent=r.length+" Treffer";
    var count=document.getElementById("duaBrowseCount");if(count)count.textContent=r.length+" Duʿāʾ";
-   if(list)list.innerHTML=r.slice(0,20).map(function(d){return '<a class="dua-browser-item desktop-link" data-page="dua" href="'+pUrl("dua","id="+encodeURIComponent(d.id))+'"><div class="eyebrow">'+escBook(d.category)+'</div><h3>'+escBook(d.title)+'</h3><div class="dua-ar" dir="rtl">'+escBook(d.arabic)+'</div><p>'+escBook(clip(d.german,150))+'</p></a>'}).join("")||'<div class="loading-line">Keine passenden Duʿāʾ gefunden.</div>'
+   if(list)list.innerHTML=r.slice(0,20).map(function(d){return '<a class="dua-browser-item desktop-link" data-page="dua" href="'+pUrl("dua","id="+encodeURIComponent(d.id))+'"><div class="eyebrow">'+escBook(d.category)+'</div><h3>'+escBook(d.title)+'</h3><div class="dua-ar" dir="rtl">'+escBook(d.arabic)+'</div><p>'+escBook(d.german)+'</p></a>'}).join("")||'<div class="loading-line">Keine passenden Duʿāʾ gefunden.</div>'
   }
   input.oninput=paint;paint()
  }
