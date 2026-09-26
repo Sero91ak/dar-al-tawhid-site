@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SITE="https://dar-al-tawhid.de"
-RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/33af283c532277947c3a42336ea2b637d445c05a"
+RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/c53ea1b991c148cd9c59546bf3fd5c2d58a3c69b"
 TARGET="$HOME/Applications/DAR-Voice-Studio"
 VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
