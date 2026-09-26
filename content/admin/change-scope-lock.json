@@ -123,6 +123,26 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-landscape-kids-centered-2026-09-26",
+      "approvedBy": "user-explicit-querformat-wie-kids-zentriert-sofort-live",
+      "reason": "Nutzer: Querformat Phone/Tablet in Test/iOS/Web zu eng, Schrift verschwindet. Baustil wie Kids (zentriert, lesbar) sofort live. Kids-App unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/adaptive-layout.js",
+        "assets/adaptive-layout.css",
+        "assets/fold-split.js",
+        "assets/fold-split.css",
+        "assets/dar-landscape-kids-shell.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-kids-oval-press-and-kids-update-isolate-2026-09-26",
       "approvedBy": "user-explicit-kids-oval-tipp-sichtbar-kids-autonom-kein-fremd-update",
       "reason": "Nutzer: Oval muss beim Tippen sichtbar und deckungsgleich mit der Touchfläche sein (wie Kids-Bild). Kids-App zeigt fälschlich Aktualisierung bei Dar-Test/iOS-Änderungen und muss autonom bleiben.",

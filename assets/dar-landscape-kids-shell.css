@@ -1,0 +1,77 @@
+/* Adult landscape/tablet: Kids-Baustil — zentrierte Lesespalte, kein enges Dual-Rail. */
+@media (orientation: landscape), (min-width: 700px) {
+  html #appView.view,
+  html body #appView.view,
+  html .view,
+  html .dar-fold {
+    width: min(860px, calc(100% - 44px)) !important;
+    max-width: min(860px, calc(100% - 44px)) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+  }
+  html #appView.view,
+  html body #appView.view,
+  html .view {
+    padding-left: max(22px, env(safe-area-inset-left, 0px)) !important;
+    padding-right: max(22px, env(safe-area-inset-right, 0px)) !important;
+  }
+  html .view-head h2,
+  html .home-start-title,
+  html .topics-hub h2,
+  html .feed-head h2 {
+    font-size: clamp(28px, 4.2vw, 40px) !important;
+    line-height: 1.15 !important;
+    white-space: normal !important;
+    overflow: visible !important;
+  }
+  html .search-line,
+  html .search-pro-panel .search-line {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    gap: 10px !important;
+    align-items: stretch !important;
+  }
+  html .search-input-shell {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  html .search-input-shell .search,
+  html .search-input-shell .search-input-field {
+    width: 100% !important;
+    min-width: 0 !important;
+    font-size: 15px !important;
+    white-space: nowrap !important;
+  }
+  html .advanced-toggle {
+    white-space: nowrap !important;
+    flex: 0 0 auto !important;
+  }
+  html .dar-fold[data-fold-mode="dual"] {
+    grid-template-columns: 1fr !important;
+  }
+  html .dar-fold__pane {
+    padding-left: 0 !important;
+  }
+}
+
+@media (orientation: landscape) and (max-width: 1099px) {
+  html .search-line,
+  html .search-pro-panel .search-line {
+    grid-template-columns: 1fr !important;
+  }
+  html .advanced-toggle {
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 1400px) and (min-height: 700px) {
+  html[data-layout="expanded"] .dar-fold[data-fold-mode="dual"],
+  html.is-fold-dual .dar-fold[data-fold-mode="dual"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    grid-template-columns:
+      clamp(320px, 34%, 380px)
+      minmax(0, 1fr) !important;
+  }
+}

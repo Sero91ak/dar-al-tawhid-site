@@ -9,11 +9,10 @@
   "use strict";
 
   var COMPACT_MAX = 599;
-  /* Ab dieser Breite + Querformat: Dual (Tablet landscape, Fold landscape) */
-  var EXPANDED_MIN = 700;
-  /* Portrait mit sehr großer Breite: Fold offen / Desktop (nicht Tablet-Hochformat ~768–834) */
-  var EXPANDED_PORTRAIT_MIN = 840;
-  var EXPANDED_MIN_HEIGHT = 480;
+  /* Dual nur Desktop: Phone/Tablet-Querformat bleibt Einspalte wie Kids. */
+  var EXPANDED_MIN = 1400;
+  var EXPANDED_PORTRAIT_MIN = 1400;
+  var EXPANDED_MIN_HEIGHT = 700;
   var currentMode = "";
   var rafId = 0;
   var started = false;
@@ -50,9 +49,10 @@
     if (!Number.isFinite(w)) w = 0;
     if (!Number.isFinite(h)) h = 0;
     if (w < EXPANDED_MIN) return false;
-    if (w >= h) return true; /* landscape / square-ish */
-    if (w >= EXPANDED_PORTRAIT_MIN) return true; /* Fold open / desktop portrait */
-    return false; /* Tablet portrait 700–899 */
+    if (h < EXPANDED_MIN_HEIGHT) return false;
+    if (w >= h) return true;
+    if (w >= EXPANDED_PORTRAIT_MIN) return true;
+    return false;
   }
 
   function resolveLayoutMode(width, height) {
