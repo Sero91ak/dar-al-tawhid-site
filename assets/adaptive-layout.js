@@ -69,7 +69,7 @@
     return "calc(max(7px, calc(env(safe-area-inset-bottom) - 18px)) + 3mm)";
   }
 
-  /* Portrait ~94% width; landscape ~56% — plain px so WebKit can ease. */
+  /* Same absolute width as portrait: size from the short edge, never the wide landscape span. */
   var NAV_EASE = "width .48s cubic-bezier(.22,1,.36,1), max-width .48s cubic-bezier(.22,1,.36,1)";
   var widthLockUntil = 0;
   var lastLandscape = null;
@@ -78,12 +78,12 @@
     var w = Number(width) || 0;
     var h = Number(height) || 0;
     if (w < 1) return 0;
-    var gutter = Math.max(24, Math.round(w * 0.04));
-    var avail = Math.max(280, w - gutter);
-    var landscape = h > 0 && w >= h;
-    var frac = landscape ? 0.56 : w >= 700 ? 0.62 : 0.94;
-    var cap = landscape ? 560 : w >= 900 ? 860 : 900;
-    return Math.min(cap, avail, Math.max(300, Math.round(w * frac)));
+    var short = h > 0 ? Math.min(w, h) : w;
+    var gutter = Math.max(24, Math.round(short * 0.04));
+    var avail = Math.max(280, short - gutter);
+    var frac = short >= 700 ? 0.62 : 0.94;
+    var cap = short >= 900 ? 860 : 900;
+    return Math.min(cap, avail, Math.max(300, Math.round(short * frac)));
   }
 
   function applyNavLayout(mode, opts) {

@@ -123,6 +123,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-tab-same-size-landscape-portrait-2026-09-26",
+      "approvedBy": "user-explicit-querformat-gleiche-groesse-wie-hochformat-ueberall-live",
+      "reason": "Nutzer: Querformat muss dieselbe Tab-Leisten-Breite wie Hochformat haben; aktuell wird sie im Querformat groß. Überall live außer Kids.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/adaptive-layout.js",
+        "assets/adaptive-layout.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-tab-retract-px-animation-2026-09-26",
       "approvedBy": "user-explicit-test-sanftes-zurueckziehen-wiederherstellen-live-ios",
       "reason": "Nutzer: Test-App hat das sanfte Zurückziehen verloren; iOS/Web haben es nie bekommen. Pixel-Animation 94%→56% beim Querlegen und zurück, Test+iOS+Web. Kids unverändert.",
