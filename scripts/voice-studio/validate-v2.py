@@ -150,6 +150,7 @@ def main():
         "radiyallahu_anha":"رَضِيَ اللَّهُ عَنْهَا",
         "radiyallahu_anhuma":"رَضِيَ اللَّهُ عَنْهُمَا",
         "radiyallahu_anhum":"رَضِيَ اللَّهُ عَنْهُمْ",
+        "aishah":"عَائِشَة",
     }
     if set((core.get("keys") or {}).keys())!=set(expected_core):
         fail("core pronunciation-lock keys are incomplete")
