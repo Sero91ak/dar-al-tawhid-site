@@ -123,6 +123,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-live-ios-inherit-test-landscape-size-2026-09-26",
+      "approvedBy": "user-explicit-test-groesse-sofort-live-ios-web",
+      "reason": "Nutzer: Test-App Querformat/Größe korrekt; native iOS und Web-Apps haben es nicht übernommen. Sofort live pushen. Kids unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/adaptive-layout.js",
+        "assets/dar-landscape-kids-shell.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-landscape-kids-centered-2026-09-26",
       "approvedBy": "user-explicit-querformat-wie-kids-zentriert-sofort-live",
       "reason": "Nutzer: Querformat Phone/Tablet in Test/iOS/Web zu eng, Schrift verschwindet. Baustil wie Kids (zentriert, lesbar) sofort live. Kids-App unverändert.",

@@ -10473,7 +10473,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/test/assets/dar-setup-hub.js?v=1025" defer></script><!-- DAR_SETUP_HUB_V1 -->
 <script src="/assets/jummah-friday.js?v=1" defer></script><!-- DAR_JUMMAH_FRIDAY_SHARED_V1 -->
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
-<script src="/assets/adaptive-layout.js?v=11" defer></script>
+<script src="/assets/adaptive-layout.js?v=12" defer></script>
 <script src="/assets/qibla-quick-view.js?v=2" defer></script>
 <script src="/assets/global-update-banner.js?v=3"></script>
 <script src="/assets/fold-split.js?v=4" defer></script>
@@ -12118,7 +12118,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/test/assets/ilm-research-chat.css?v=980">
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=791">
 <link rel="stylesheet" href="/assets/adaptive-layout.css?v=646">
-<link rel="stylesheet" href="/assets/dar-landscape-kids-shell.css?v=1"><!-- DAR_LANDSCAPE_KIDS_SHELL -->
+<link rel="stylesheet" href="/assets/dar-landscape-kids-shell.css?v=2"><!-- DAR_LANDSCAPE_KIDS_SHELL -->
 
 <link rel="stylesheet" href="/assets/qibla-quick-view.css?v=2">
 <link rel="stylesheet" href="/assets/global-update-banner.css?v=3">
@@ -35514,7 +35514,7 @@ html #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon{
   object-fit:contain!important;
 }
 </style>
-<style id="dar-adult-kids-tab-optics-v1029">
+<style id="dar-adult-kids-tab-optics-v1031">
 /* Kids-Oval 1:1: sichtbare Tipp-Kapsel = Touchfläche. Kein Hover-Geist. */
 html #appChromeDock #bottomNav.bottom-nav,
 html[data-theme] #appChromeDock #bottomNav.bottom-nav,
@@ -35589,9 +35589,17 @@ html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn::before,
 html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn::before{
   content:none!important;display:none!important;opacity:0!important;
 }
-@media(min-width:700px){
-  html #appChromeDock #bottomNav.bottom-nav{width:min(calc(100% - 80px),520px)!important;min-height:72px!important}
-  html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn{min-height:60px!important}
+@media (orientation:landscape),(min-width:700px){
+  html #appChromeDock #bottomNav.bottom-nav,
+  html #bottomNav.bottom-nav,
+  html.dar-ios-native-app #appChromeDock #bottomNav.bottom-nav,
+  html.dar-ios-native-app #bottomNav.bottom-nav{
+    width:min(740px,72vw,calc(100vw - 48px))!important;
+    max-width:min(740px,calc(100vw - 48px))!important;
+    min-height:68px!important;
+  }
+  html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn,
+  html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn{min-height:56px!important}
 }
 @media(max-width:380px){
   html #appChromeDock #bottomNav.bottom-nav{width:calc(100% - 28px)!important;min-height:64px!important}

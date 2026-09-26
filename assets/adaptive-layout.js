@@ -77,7 +77,7 @@
     var gutter = Math.max(20, Math.round(w * 0.045));
     var avail = Math.max(280, w - gutter);
     var landscape = h > 0 && w >= h;
-    var frac = landscape ? 0.56 : w >= 700 ? 0.62 : 0.94;
+    var frac = landscape ? 0.72 : w >= 700 ? 0.68 : 0.94;
     var cap = landscape ? 820 : w >= 900 ? 860 : 900;
     var next = Math.min(cap, avail, Math.max(320, Math.round(w * frac)));
     return next;
@@ -105,15 +105,18 @@
     if (px > 0) {
       nav.style.setProperty("width", px + "px", "important");
       nav.style.setProperty("max-width", px + "px", "important");
+      try {
+        document.documentElement.style.setProperty("--dar-nav-width", px + "px");
+      } catch (e) {}
     } else {
       nav.style.setProperty("width", "var(--dar-nav-width)", "important");
       nav.style.setProperty("max-width", "min(820px, calc(100vw - 2 * var(--dar-nav-gutter)))", "important");
     }
     nav.style.setProperty("top", "auto", "important");
     nav.style.setProperty("bottom", navBottomCompact(), "important");
-    nav.style.setProperty("height", "var(--dar-nav-height)", "important");
-    nav.style.setProperty("min-height", "var(--dar-nav-height)", "important");
-    nav.style.setProperty("max-height", "var(--dar-nav-height)", "important");
+    nav.style.setProperty("height", "auto", "important");
+    nav.style.setProperty("min-height", "68px", "important");
+    nav.style.setProperty("max-height", "none", "important");
     nav.style.setProperty("transform", "translateX(-50%)", "important");
     nav.style.setProperty("-webkit-transform", "translateX(-50%)", "important");
     nav.style.setProperty("flex-direction", "row", "important");
@@ -264,9 +267,46 @@
     });
   }
 
+  var PLACE_KEY = "darAdaptiveNavPlaceV1";
+  var COLLAPSE_KEY = "darAdaptiveNavCollapsedV1";
+  function getPlacement() {
+    try {
+      var v = localStorage.getItem(PLACE_KEY);
+      return v === "leading" ? "leading" : "trailing";
+    } catch (e) {
+      return "trailing";
+    }
+  }
+  function setPlacement(v) {
+    var next = v === "leading" ? "leading" : "trailing";
+    try {
+      localStorage.setItem(PLACE_KEY, next);
+    } catch (e) {}
+    applyLayout(true);
+    return next;
+  }
+  function getCollapsed() {
+    try {
+      return localStorage.getItem(COLLAPSE_KEY) === "1";
+    } catch (e) {
+      return false;
+    }
+  }
+  function setCollapsed(on) {
+    try {
+      localStorage.setItem(COLLAPSE_KEY, on ? "1" : "0");
+    } catch (e) {}
+    applyLayout(true);
+    return !!on;
+  }
+
   var api = {
     resolveLayoutMode: resolveLayoutMode,
     isDualViewport: isDualViewport,
+    getPlacement: getPlacement,
+    setPlacement: setPlacement,
+    getCollapsed: getCollapsed,
+    setCollapsed: setCollapsed,
     getMode: function () {
       return currentMode || resolveLayoutMode(measureViewport().width, measureViewport().height);
     },

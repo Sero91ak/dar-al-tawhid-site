@@ -65,6 +65,21 @@
   }
 }
 
+@media (orientation: landscape), (min-width: 700px) {
+  html #appChromeDock #bottomNav.bottom-nav,
+  html #bottomNav.bottom-nav,
+  html.dar-ios-native-app #appChromeDock #bottomNav.bottom-nav,
+  html.dar-ios-native-app #bottomNav.bottom-nav {
+    width: min(740px, 72vw, calc(100vw - 48px)) !important;
+    max-width: min(740px, calc(100vw - 48px)) !important;
+  }
+  html #appView.view,
+  html body #appView.view,
+  html .view {
+    padding-bottom: calc(108px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
 @media (min-width: 1400px) and (min-height: 700px) {
   html[data-layout="expanded"] .dar-fold[data-fold-mode="dual"],
   html.is-fold-dual .dar-fold[data-fold-mode="dual"] {

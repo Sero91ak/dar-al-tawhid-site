@@ -10522,7 +10522,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/jummah-friday.js?v=1" defer></script><!-- DAR_JUMMAH_FRIDAY_SHARED_V1 -->
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <script src="/assets/dar-quran-player.js?v=956" defer></script>
-<script src="/assets/adaptive-layout.js?v=11" defer></script>
+<script src="/assets/adaptive-layout.js?v=12" defer></script>
 <script src="/assets/qibla-quick-view.js?v=2" defer></script>
 <script src="/assets/global-update-banner.js?v=3"></script>
 <script src="/assets/fold-split.js?v=4" defer></script>
@@ -12145,7 +12145,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/dar-account-visibility.css?v=11">
 <link rel="stylesheet" href="/assets/scholars-index.css?v=588">
 <link rel="stylesheet" href="/assets/adaptive-layout.css?v=646">
-<link rel="stylesheet" href="/assets/dar-landscape-kids-shell.css?v=1"><!-- DAR_LANDSCAPE_KIDS_SHELL -->
+<link rel="stylesheet" href="/assets/dar-landscape-kids-shell.css?v=2"><!-- DAR_LANDSCAPE_KIDS_SHELL -->
 
 <link rel="stylesheet" href="/assets/qibla-quick-view.css?v=2">
 <link rel="stylesheet" href="/assets/global-update-banner.css?v=3">
@@ -21101,7 +21101,8 @@ function normalizeTheme(theme){if(theme==="emerald"||theme==="smaragd"||theme===
 function getTheme(){try{return normalizeTheme(localStorage.getItem(THEME_KEY))}catch(e){return"dark"}}
 function applyTheme(theme){const next=normalizeTheme(theme);const info=THEME_META[next]||THEME_META.dark;const root=document.documentElement;root.classList.add("theme-switching");try{if(typeof window.__darClearStickyThemeFills==="function")window.__darClearStickyThemeFills();root.style.removeProperty("background");root.style.removeProperty("background-color");root.style.removeProperty("background-image");root.style.removeProperty("--theme-page-bg");if(document.body){document.body.style.removeProperty("background");document.body.style.removeProperty("background-color");document.body.style.removeProperty("background-image")}root.style.setProperty("--dar-boot-fill",info.color);window.__DAR_BOOT_FILL=info.color}catch(e){}root.setAttribute("data-theme",next);root.setAttribute("data-theme-name",info.label);try{localStorage.setItem(THEME_KEY,next);localStorage.setItem(THEME_SETTINGS_KEY,JSON.stringify({theme:next,label:info.label,assetVariant:info.asset,updatedAt:Date.now()}))}catch(e){}const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=info.color;const tile=document.querySelector('meta[name="msapplication-TileColor"]');if(tile)tile.content=info.color;const sb=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content="black-translucent";const logo=document.querySelector(".logo");if(logo){logo.title="DĀR AL TAWḤĪD";if(!logo.getAttribute("data-logo-ready")){logo.setAttribute("data-logo-ready","1");logo.onerror=function(){this.onerror=null;this.src="/watermark-my-logo-full.png?v=fallback"};if(!logo.getAttribute("src")||logo.getAttribute("src").indexOf("watermark-my-logo")<0)logo.src="/watermark-my-logo-full.png"}}document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.classList.toggle("is-active",btn.getAttribute("data-theme-select")===next);btn.setAttribute("aria-pressed",btn.getAttribute("data-theme-select")===next?"true":"false")});try{window.dispatchEvent(new CustomEvent("dar-theme-change",{detail:{theme:next,...info}}))}catch(e){}requestAnimationFrame(()=>requestAnimationFrame(()=>{root.classList.remove("theme-switching");try{if(typeof window.__darSyncThemeFillMeta==="function")window.__darSyncThemeFillMeta();if(typeof window.__darClearStickyThemeFills==="function")window.__darClearStickyThemeFills()}catch(e){}}))}
 function initTheme(){applyTheme(getTheme())}
-function bindThemeControls(){document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.onclick=()=>{const apply=()=>applyTheme(btn.getAttribute("data-theme-select"));if(window.DARScrollManager?.withScrollPreserved)window.DARScrollManager.withScrollPreserved(apply);else apply()}})}
+function bindThemeControls(){document.querySelectorAll("[data-theme-select]").forEach(btn=>{btn.onclick=()=>{const apply=()=>applyTheme(btn.getAttribute("data-theme-select"));if(window.DARScrollManager?.withScrollPreserved)window.DARScrollManager.withScrollPreserved(apply);else apply()}});document.querySelectorAll("[data-nav-placement]").forEach(btn=>{btn.onclick=()=>{const v=btn.getAttribute("data-nav-placement")==="leading"?"leading":"trailing";if(window.DarAdaptiveLayout?.setPlacement)window.DarAdaptiveLayout.setPlacement(v);document.querySelectorAll("[data-nav-placement]").forEach(x=>x.classList.toggle("is-active",x.getAttribute("data-nav-placement")===v))}});const col=document.querySelector("[data-nav-collapsed]");if(col)col.onchange=()=>{if(window.DarAdaptiveLayout?.setCollapsed)window.DarAdaptiveLayout.setCollapsed(!!col.checked)}}
+function renderAdaptiveNavPanel(){const place=(window.DarAdaptiveLayout&&window.DarAdaptiveLayout.getPlacement&&window.DarAdaptiveLayout.getPlacement())||"trailing";const collapsed=!!(window.DarAdaptiveLayout&&window.DarAdaptiveLayout.getCollapsed&&window.DarAdaptiveLayout.getCollapsed());return `<section class="theme-switch-panel premium-surface" id="adaptiveNavPanel"><div class="theme-switch-head"><h3>Navigation (Querformat)</h3><p class="theme-switch-note">Seitliche Leiste links oder rechts. Wird auf diesem Gerät gespeichert.</p></div><div class="theme-switch-row" style="grid-template-columns:repeat(2,minmax(0,1fr))"><button type="button" class="theme-switch-btn${place==="trailing"?" is-active":""}" data-nav-placement="trailing">Rechts</button><button type="button" class="theme-switch-btn${place==="leading"?" is-active":""}" data-nav-placement="leading">Links</button></div><label style="display:flex;gap:8px;align-items:center;margin-top:10px"><input type="checkbox" data-nav-collapsed ${collapsed?"checked":""}> Leiste minimieren</label></section>`}
 
 const DAR_APP_ICON_KEY="darAppIconV1";
 const DAR_APP_ICONS=[
@@ -26595,7 +26596,7 @@ function renderDarSetupHubHtml(){
 }
 function renderSettings(){
   const liveActivity=`<section class="settings-live-row" aria-label="Live Activity"><span class="settings-live-icon" aria-hidden="true">◷</span><span><b>Live Activity</b><small>Gebets-Countdown auf Sperrbildschirm und Dynamic Island</small></span><span class="settings-off-badge">Aus</span></section>`;
-  return `${renderDarSetupHubHtml()}${setHeader("Einstellungen","Mitteilungen, Darstellung und Lesbarkeit.","","settings-page-head")}<div class="settings-one-page settings-flat-live-v1">${renderNotificationCenter({embedded:true})}<div class="settings-section-label"><b>Darstellung</b><span>Farben, Icon und Schrift</span></div>${renderThemeSwitchPanel()}${renderAppIconPanel()}${renderFontSettingsPanel()}<div class="settings-section-label"><b>Demnächst</b><span>Noch nicht aktiviert</span></div>${liveActivity}<p class="settings-save-note">Änderungen werden automatisch auf diesem Gerät gespeichert.</p></div>`
+  return `${renderDarSetupHubHtml()}${setHeader("Einstellungen","Mitteilungen, Darstellung und Lesbarkeit.","","settings-page-head")}<div class="settings-one-page settings-flat-live-v1">${renderNotificationCenter({embedded:true})}<div class="settings-section-label"><b>Darstellung</b><span>Farben, Icon und Schrift</span></div>${renderThemeSwitchPanel()}${typeof renderAdaptiveNavPanel==="function"?renderAdaptiveNavPanel():""}${renderAppIconPanel()}${renderFontSettingsPanel()}<div class="settings-section-label"><b>Demnächst</b><span>Noch nicht aktiviert</span></div>${liveActivity}<p class="settings-save-note">Änderungen werden automatisch auf diesem Gerät gespeichert.</p></div>`
 }
 function renderJummah(){const s=getPrayerSettings();const manual=jummahPref(s,"jummahUseManualTime");const manualTime=normalizeTimeHHMM(s.jummahManualTime,"13:30");const advance=normalizeJummahAdvanceMinutes(s.jummahAdvanceMinutes);const on=jummahPref(s,"jummahNotifications");const timeLabel=manual?manualTime:(hasPrayerLocation(s)?jummahAutoDhuhrLabel(s):"Standort");return `${setPageHeader("Jumuʿah","Freitagsgebet und Erinnerung.","Jumuʿah")}<section class="prayer-panel prayer-page-noble jummah-hub-page">${renderJummahPushPanel()}<div class="qibla-data-grid jummah-hub-meta"><div class="qibla-data-item"><b>Erinnerung</b><span>${on?"Aktiv":"Aus"}</span></div><div class="qibla-data-item"><b>Vorlauf</b><span>${advance} Min</span></div><div class="qibla-data-item"><b>Zeit</b><span>${esc(timeLabel)}</span></div><div class="qibla-data-item"><b>Ort</b><span>${esc(s.city||"—")}</span></div></div><div class="prayer-action-row jummah-hub-nav"><button class="prayer-action-btn" type="button" data-nav="prayer">Gebetszeiten</button></div></section>`}
 function renderQiblaPage(){const settings=getPrayerSettings();return `${setPageHeader("Qibla","","Qibla")}<section class="prayer-panel prayer-page-noble qibla-hub-page">${renderQiblaProPanel(settings)}<div class="prayer-controls-compact qibla-hub-tools"><div class="prayer-settings-grid"><input id="prayerCityInput" class="filter-select" value="${esc(settings.city||"")}" placeholder="Ort" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button><button id="useLocationBtn" class="prayer-action-btn" type="button">Standort</button></div></div></section>`}
@@ -26806,7 +26807,7 @@ function renderMoreQuickAccessSection(){
 
 function renderIosShellUpdateBar(){return""}
 function bindIosShellUpdateBar(){const btn=$("iosShellUpdateBtn");if(!btn||btn.dataset.bound==="1")return;btn.dataset.bound="1";btn.onclick=function(){if(typeof hardRefreshApp==="function")hardRefreshApp();else location.reload()}}
-function renderMore(){const groups=["Lernen & Wissen","Alltag & Gebet","Werkzeuge & Assistenten","Persönlich","App"];const items=featureCatalog();return `${setPageHeader("Mehr","Funktionen geordnet nach Lernen, Alltag, Werkzeugen und Einstellungen","Mehr")}${renderMoreQuickAccessSection()}${renderZakatMoreFocus()}<section class="feature-section"><div class="feature-head"><div><h3>Funktion suchen</h3><span>Tippe z. B. Qibla, Rechner oder Qurʾān.</span></div></div><input id="moreFeatureSearch" class="more-search" type="search" placeholder="Funktion suchen…" autocomplete="off"></section>${groups.map(group=>renderMoreGroup(group,items.filter(item=>item.group===group))).join("")}`}
+function renderMore(){const groups=["Lernen & Wissen","Alltag & Gebet","Werkzeuge & Assistenten","Persönlich","App"];const items=featureCatalog();return `${setPageHeader("Mehr","Funktionen geordnet nach Lernen, Alltag, Werkzeugen und Einstellungen","Mehr")}${renderMoreQuickAccessSection()}${typeof renderAdaptiveNavPanel==="function"?renderAdaptiveNavPanel():""}${renderZakatMoreFocus()}<section class="feature-section"><div class="feature-head"><div><h3>Funktion suchen</h3><span>Tippe z. B. Qibla, Rechner oder Qurʾān.</span></div></div><input id="moreFeatureSearch" class="more-search" type="search" placeholder="Funktion suchen…" autocomplete="off"></section>${groups.map(group=>renderMoreGroup(group,items.filter(item=>item.group===group))).join("")}`}
 function notificationToggleButton(id,on,label){return `<button type="button" id="${id}" class="notification-toggle ${on?"is-on":""}" role="switch" aria-checked="${on?"true":"false"}" aria-label="${esc(label)}"></button>`}
 function renderNotificationCenter({embedded=false}={}){
   const s=getPrayerSettings();
@@ -35153,7 +35154,7 @@ html.dar-ios-native-app #bottomNav.bottom-nav{
   }
 }
 </style>
-<style id="dar-adult-kids-tab-optics-v1029">
+<style id="dar-adult-kids-tab-optics-v1031">
 /* Kids-Oval 1:1: sichtbare Tipp-Kapsel = Touchfläche. Kein Hover-Geist. */
 html #appChromeDock #bottomNav.bottom-nav,
 html[data-theme] #appChromeDock #bottomNav.bottom-nav,
@@ -35228,9 +35229,17 @@ html[data-theme] #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn::before,
 html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn::before{
   content:none!important;display:none!important;opacity:0!important;
 }
-@media(min-width:700px){
-  html #appChromeDock #bottomNav.bottom-nav{width:min(calc(100% - 80px),520px)!important;min-height:72px!important}
-  html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn{min-height:60px!important}
+@media (orientation:landscape),(min-width:700px){
+  html #appChromeDock #bottomNav.bottom-nav,
+  html #bottomNav.bottom-nav,
+  html.dar-ios-native-app #appChromeDock #bottomNav.bottom-nav,
+  html.dar-ios-native-app #bottomNav.bottom-nav{
+    width:min(740px,72vw,calc(100vw - 48px))!important;
+    max-width:min(740px,calc(100vw - 48px))!important;
+    min-height:68px!important;
+  }
+  html #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn,
+  html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn{min-height:56px!important}
 }
 @media(max-width:380px){
   html #appChromeDock #bottomNav.bottom-nav{width:calc(100% - 28px)!important;min-height:64px!important}
