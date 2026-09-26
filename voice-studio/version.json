@@ -1,6 +1,6 @@
 {
-  "version": "2.3.3",
-  "updatedAt": "2026-09-26T02:32:00+02:00",
+  "version": "2.3.4",
+  "updatedAt": "2026-09-26T02:38:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "local-chatterbox-v3.3",
   "provider": "self-produced",
@@ -20,7 +20,7 @@
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-raw",
-  "engineVersion": "single-owner-engine-stale-recovery-and-cache-quarantine",
+  "engineVersion": "audio-lock-runtime-health-fix-with-real-smoke-test",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -173,6 +173,10 @@
     "staleOwnPortListenerRecovery": true,
     "foreignPortListenerProtection": true,
     "corruptOnlineCacheQuarantine": true,
-    "uniqueAtomicCacheTempFiles": true
+    "uniqueAtomicCacheTempFiles": true,
+    "audioLockStateInitializedBeforeHealth": true,
+    "healthStatusRuntimeSmokeTest": true,
+    "pendingAudioLockStateSmokeTest": true,
+    "startupNameErrorRegressionGuard": true
   }
 }
