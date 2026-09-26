@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/assets/dar-app-chrome.css?v=1">
 <script src="/assets/dar-app-chrome.js?v=1"></script>
 
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1041";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1042";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>
 /* v661 · Theme-Fill SOFORT — nur Boot-Fill, kein Inline --theme-page-bg */
 (function(){
@@ -10471,7 +10471,6 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/html2canvas.min.js" defer></script>
 <script src="/test/assets/premium-feed-app.js?v=101" defer></script>
 <script src="/test/assets/dar-setup-hub.js?v=1025" defer></script><!-- DAR_SETUP_HUB_V1 -->
-<script src="/test/assets/dar-noble-3d-icons.js?v=1041" defer></script><!-- DAR_NOBLE_3D_TEST -->
 <script src="/assets/jummah-friday.js?v=1" defer></script><!-- DAR_JUMMAH_FRIDAY_SHARED_V1 -->
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
 <script src="/assets/adaptive-layout.js?v=10" defer></script>
@@ -12123,7 +12122,12 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/global-update-banner.css?v=3">
 <link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=668">
 <link rel="stylesheet" href="/test/assets/dar-setup-hub.css?v=8"><!-- DAR_SETUP_HUB_V1 -->
-<link rel="stylesheet" href="/test/assets/dar-noble-3d-icons.css?v=1041"><!-- DAR_NOBLE_3D_TEST -->
+<link rel="stylesheet" href="/test/assets/dar-noble-3d-icons.css?v=1042"><!-- DAR_NOBLE_3D_TEST -->
+<link rel="preload" as="image" href="/test/assets/dar-3d-icons/home.png?v=1042">
+<link rel="preload" as="image" href="/test/assets/dar-3d-icons/ilm.png?v=1042">
+<link rel="preload" as="image" href="/test/assets/dar-3d-icons/posts.png?v=1042">
+<link rel="preload" as="image" href="/test/assets/dar-3d-icons/quran.png?v=1042">
+<link rel="preload" as="image" href="/test/assets/dar-3d-icons/more.png?v=1042">
 <link rel="stylesheet" href="/test/assets/dar-top-chrome-fix.css?v=2"><!-- DAR_TOP_CHROME_FIX -->
 <link rel="stylesheet" href="/test/assets/dar-ios-oversize-copy.css?v=6"><!-- DAR_IOS_OVERSIZE_COPY -->
 <link rel="stylesheet" href="/test/assets/full-edge-appearance-polish.css?v=666">
@@ -20967,14 +20971,15 @@ html body .post-reader-main .post-source-oval.post-source-module .post-after-lin
 </div>
 <div id="appChromeDock" class="app-chrome-dock" data-nav-dock="bottom">
 <nav id="bottomNav" class="bottom-nav" aria-label="Hauptnavigation">
-  <button class="bottom-nav-btn" type="button" data-bottom-nav="home" aria-label="Startseite"><span class="nav-icon" aria-hidden="true">⌂</span><span>Start</span></button>
-  <button class="bottom-nav-btn" type="button" id="bottomNavSecondary" data-bottom-nav="ilm" aria-label="ʿIlm"><span class="nav-icon nav-icon--emoji" aria-hidden="true">📚</span><span>ʿIlm</span></button>
-  <button class="bottom-nav-btn" type="button" data-bottom-nav="recent" aria-label="Beiträge"><span class="nav-icon" aria-hidden="true">✦</span><span>Beiträge</span></button>
-  <button class="bottom-nav-btn" type="button" data-bottom-nav="quran" aria-label="Qurʾān öffnen. Gedrückt halten für Schnellzugriff."><span class="nav-icon nav-icon--emoji" aria-hidden="true">📖</span><span>Qurʾān</span></button>
-  <button class="bottom-nav-btn" type="button" data-bottom-nav="more" aria-label="Mehr öffnen. Gedrückt halten für Schnellzugriff."><span class="nav-icon" aria-hidden="true">☰</span><span>Mehr</span></button>
+  <button class="bottom-nav-btn" type="button" data-bottom-nav="home" aria-label="Startseite"><span class="nav-icon" aria-hidden="true"><img class="dar3d-icon" src="/test/assets/dar-3d-icons/home.png?v=1042" alt="" decoding="sync" fetchpriority="high"></span><span>Start</span></button>
+  <button class="bottom-nav-btn" type="button" id="bottomNavSecondary" data-bottom-nav="ilm" aria-label="ʿIlm"><span class="nav-icon nav-icon--emoji" aria-hidden="true"><img class="dar3d-icon" src="/test/assets/dar-3d-icons/ilm.png?v=1042" alt="" decoding="sync" fetchpriority="high"></span><span>ʿIlm</span></button>
+  <button class="bottom-nav-btn" type="button" data-bottom-nav="recent" aria-label="Beiträge"><span class="nav-icon" aria-hidden="true"><img class="dar3d-icon" src="/test/assets/dar-3d-icons/posts.png?v=1042" alt="" decoding="sync" fetchpriority="high"></span><span>Beiträge</span></button>
+  <button class="bottom-nav-btn" type="button" data-bottom-nav="quran" aria-label="Qurʾān öffnen. Gedrückt halten für Schnellzugriff."><span class="nav-icon nav-icon--emoji" aria-hidden="true"><img class="dar3d-icon" src="/test/assets/dar-3d-icons/quran.png?v=1042" alt="" decoding="sync" fetchpriority="high"></span><span>Qurʾān</span></button>
+  <button class="bottom-nav-btn" type="button" data-bottom-nav="more" aria-label="Mehr öffnen. Gedrückt halten für Schnellzugriff."><span class="nav-icon" aria-hidden="true"><img class="dar3d-icon" src="/test/assets/dar-3d-icons/more.png?v=1042" alt="" decoding="sync" fetchpriority="high"></span><span>Mehr</span></button>
 </nav>
 </div>
-<script>!function(){try{var n=document.getElementById("bottomNav"),d=document.getElementById("appChromeDock"),q=document.getElementById("quickAccessLayer"),s=document.getElementById("bottomNavSecondary");var isTest=location.pathname.indexOf("/test/")===0||location.pathname==="/test";if(s){if(isTest){s.setAttribute("data-bottom-nav","ilm");s.setAttribute("aria-label","ʿIlm");s.innerHTML='<span class="nav-icon nav-icon--emoji" aria-hidden="true">📚</span><span>ʿIlm</span>'}else{s.setAttribute("data-bottom-nav","quiz");s.setAttribute("aria-label","Quiz");s.innerHTML='<span class="nav-icon nav-icon--emoji" aria-hidden="true">🧠</span><span>Quiz</span>'}}if(!n||!d)return;if(n.parentElement!==d)d.appendChild(n);if(d.parentElement!==document.body)document.body.appendChild(d);if(q&&q.parentElement!==document.body)document.body.appendChild(q);document.body.classList.add("has-bottom-nav")}catch(e){}}();</script>
+<script src="/test/assets/dar-noble-3d-icons.js?v=1042"></script><!-- DAR_NOBLE_3D_TEST -->
+<script>!function(){try{var n=document.getElementById("bottomNav"),d=document.getElementById("appChromeDock"),q=document.getElementById("quickAccessLayer"),s=document.getElementById("bottomNavSecondary");var isTest=location.pathname.indexOf("/test/")===0||location.pathname==="/test";if(s){if(isTest){s.setAttribute("data-bottom-nav","ilm");s.setAttribute("aria-label","ʿIlm");s.innerHTML='<span class="nav-icon nav-icon--emoji" aria-hidden="true"><img class="dar3d-icon" src="/test/assets/dar-3d-icons/ilm.png?v=1042" alt="" decoding="sync" fetchpriority="high"></span><span>ʿIlm</span>'}else{s.setAttribute("data-bottom-nav","quiz");s.setAttribute("aria-label","Quiz");s.innerHTML='<span class="nav-icon nav-icon--emoji" aria-hidden="true">🧠</span><span>Quiz</span>'}}if(!n||!d)return;if(n.parentElement!==d)d.appendChild(n);if(d.parentElement!==document.body)document.body.appendChild(d);if(q&&q.parentElement!==document.body)document.body.appendChild(q);document.body.classList.add("has-bottom-nav")}catch(e){}}();</script>
 <script>document.documentElement.classList.add("dar-test-performance-v1");</script>
 <script>!function(){try{if(!/DarAlTawhid-iOS/i.test(String(navigator.userAgent||"")))return;if(document.documentElement.classList.contains("dar-ios-native-tabs"))return;function show(){try{if(document.documentElement.classList.contains("is-quran-player-route")||document.body.classList.contains("dar-quran-player-open"))return;document.documentElement.classList.remove("dar-soft-booting");var n=document.getElementById("bottomNav");if(!n)return;n.removeAttribute("hidden");n.style.setProperty("display","flex","important");n.style.setProperty("visibility","visible","important");n.style.setProperty("opacity","1","important");n.style.setProperty("pointer-events","auto","important");n.style.setProperty("z-index","80","important");document.body&&document.body.classList.add("has-bottom-nav")}catch(e){}}show();document.addEventListener("DOMContentLoaded",show);setTimeout(show,200);setTimeout(show,800);setTimeout(show,2000)}catch(e){}}();</script>
 <div class="float-actions" id="floatActions" hidden aria-hidden="true" data-mode="disabled">
@@ -27632,7 +27637,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1041";
+const APP_BUILD_ID="app-shell-v1042";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}

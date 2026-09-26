@@ -1,6 +1,6 @@
 /* Test-only: Islamic ʿilm 3D icons on every surface, including home-v380 */
 (function(){
-  const VER="1041";
+  const VER="1042";
   const BASE="/test/assets/dar-3d-icons/";
   const BY_NAV={
     home:"home.png",ilm:"ilm.png",recent:"posts.png",feed:"posts.png",post:"posts.png",
@@ -29,12 +29,13 @@
     "🌼":"dua.png","💧":"dua.png","🤝":"dua.png","📄":"library.png","🗂️":"ilm.png","🔍":"ilm.png"
   };
   function src(file){return BASE+file+"?v="+VER}
-  function imgFor(file){
+  function imgFor(file,prio){
     const im=document.createElement("img");
     im.className="dar3d-icon";
     im.alt="";
-    im.decoding="async";
     im.src=src(file);
+    if(prio==="high"){im.decoding="sync";im.fetchPriority="high"}
+    else{im.decoding="async";im.fetchPriority="low"}
     return im;
   }
   function fileFromHost(host,el){
@@ -73,17 +74,17 @@
     if(nav==="post"||nav==="recent")return "posts.png";
     return "";
   }
-  function fill(el,file){
+  function fill(el,file,prio){
     if(!el||!file)return;
     if(el.querySelector("img.dar3d-icon"))return;
     el.textContent="";
-    el.appendChild(imgFor(file));
+    el.appendChild(imgFor(file,prio));
   }
   function scan(){
     document.querySelectorAll("#bottomNav [data-bottom-nav]").forEach(btn=>{
       const icon=btn.querySelector(".nav-icon");
       const file=BY_NAV[String(btn.getAttribute("data-bottom-nav")||"")];
-      fill(icon,file);
+      fill(icon,file,"high");
     });
     const marks=[
       ".nav-icon",".feature-icon",".emoji-emblem",".folder-icon",".book-library-icon",
@@ -95,16 +96,13 @@
       fill(el,fileFromHost(host,el));
     });
   }
+  scan();
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",scan);
-  else scan();
   let t=0;
-  function queued(){clearTimeout(t);t=setTimeout(scan,50)}
+  function queued(){clearTimeout(t);t=setTimeout(scan,30)}
   if(typeof MutationObserver==="function"){
     const mo=new MutationObserver(queued);
     mo.observe(document.documentElement,{childList:true,subtree:true});
   }
-  document.addEventListener("dar:view-rendered",queued);
-  setTimeout(scan,300);
-  setTimeout(scan,1200);
-  setTimeout(scan,2800);
+  document.addEventListener("dar:view-rendered",scan);
 })();
