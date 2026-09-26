@@ -126,6 +126,20 @@ if ! "$PY" -c 'from chatterbox.mtl_tts import ChatterboxMultilingualTTS' >/dev/n
   "$PY" -m pip install chatterbox-tts
 fi
 
+# Apple Silicon: MLX ist der primäre Production-Renderer. Er nutzt Apples Metal/MLX
+# statt PyTorch/MPS und unterstützt Chatterbox Multilingual v3 inkl. Voice Cloning.
+if [ "$(uname -m)" = "arm64" ]; then
+  if ! "$PY" -c 'import mlx, mlx_audio' >/dev/null 2>&1; then
+    say_status "MLX High-Speed Engine wird einmalig installiert …"
+    "$PY" -m pip install --upgrade 'mlx-audio>=0.5.6,<0.6'
+  fi
+  if "$PY" -c 'import mlx, mlx_audio' >/dev/null 2>&1; then
+    echo "MLX High-Speed Engine: bereit"
+  else
+    echo "Hinweis: MLX konnte nicht aktiviert werden. PyTorch/MPS bleibt als sicherer Fallback aktiv."
+  fi
+fi
+
 # STRENGE VORPRÜFUNG: Erst Syntax und komplette Voice-2.0-Regression prüfen.
 # Bis hier wurde an der funktionierenden Installation noch nichts ersetzt.
 if ! "$PY" -m py_compile "$STAGE/local-engine.py"; then
@@ -196,6 +210,7 @@ cat > "$LAUNCH" <<PLIST
     <key>SERHAT_VOICE_REF</key><string>$REF</string>
     <key>SERHAT_VOICE_REF_AR</key><string>$AR_REF</string>
     <key>PYTORCH_ENABLE_MPS_FALLBACK</key><string>1</string>
+    <key>DAR_VOICE_DISABLE_MLX</key><string>0</string>
     <key>PATH</key><string>/opt/homebrew/bin:/usr/local/bin:/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
     <key>DAR_FFMPEG_BIN</key><string>$FFMPEG_BIN</string>
   </dict>
@@ -247,6 +262,7 @@ if [ "$ENGINE_OK" -ne 1 ]; then
     SERHAT_VOICE_REF="$REF" \
     SERHAT_VOICE_REF_AR="$AR_REF" \
     PYTORCH_ENABLE_MPS_FALLBACK=1 \
+    DAR_VOICE_DISABLE_MLX=0 \
     "$VENV/bin/python" "$TARGET/local-engine.py" \
     >>"$TARGET/engine.log" 2>>"$TARGET/engine-error.log" </dev/null &
   echo $! > "$TARGET/engine.pid"
@@ -700,6 +716,7 @@ touch "$LOG"
       /usr/bin/nohup /usr/bin/env \
         DAR_VOICE_APP_HOME="$TARGET" \
         PYTORCH_ENABLE_MPS_FALLBACK=1 \
+        DAR_VOICE_DISABLE_MLX=0 \
         PATH="/opt/homebrew/bin:/usr/local/bin:/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin" \
         "$VENV/bin/python" "$TARGET/local-engine.py" \
         >>"$TARGET/engine.log" 2>>"$TARGET/engine-error.log" </dev/null &
