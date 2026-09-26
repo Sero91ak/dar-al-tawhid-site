@@ -49,3 +49,55 @@ img.dar3d-icon{
   width:22px;
   height:22px;
 }
+.home-v380-lib-card__ico img.dar3d-icon,
+.library-focus-teaser__icon img.dar3d-icon,
+.zakat-home-teaser-icon img.dar3d-icon{
+  width:22px;
+  height:22px;
+}
+.home-v380-quran-hero__mark{
+  display:grid;
+  place-items:center;
+}
+.home-v380-quran-hero__mark img.dar3d-icon{
+  width:28px;
+  height:28px;
+}
+.quick-action-emoji{
+  display:grid;
+  place-items:center;
+}
+.quick-action-emoji img.dar3d-icon{
+  width:20px;
+  height:20px;
+}
+.dar3d-slot{
+  flex:0 0 32px;
+  width:32px;
+  height:32px;
+  display:grid;
+  place-items:center;
+}
+.dar3d-slot img.dar3d-icon{
+  width:26px;
+  height:26px;
+}
+.home-v380-post-preview.dar3d-has-icon{
+  display:grid;
+  grid-template-columns:32px minmax(0,1fr);
+  column-gap:10px;
+  align-items:start;
+}
+.home-v380-post-preview.dar3d-has-icon > .dar3d-slot{
+  grid-row:1 / span 6;
+  align-self:start;
+  margin-top:2px;
+}
+.home-discover-pdf-cover__fallback{
+  display:grid;
+  place-items:center;
+}
+.home-discover-pdf-cover__fallback img.dar3d-icon{
+  width:28px;
+  height:28px;
+}
