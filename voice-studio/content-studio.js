@@ -282,11 +282,12 @@ function saveConnection(){
   loadLibrary();
 }
 function fields(){
+  captureStructuredEditor();
   const text=String(q("text")?.value||"").trim();
   return{
     id:contentId,
-    kind:studioKind,
-    appTarget:"kids",
+    kind:effectiveKind(),
+    appTarget:effectiveTarget(),
     status:contentStatus,
     title:String(q("csTitle")?.value||"").trim(),
     category:String(q("csCategory")?.value||"").trim(),
@@ -299,6 +300,9 @@ function fields(){
     sourceRefs:String(q("csSources")?.value||"").split(/\n+/).map(x=>x.trim()).filter(Boolean),
     cover:coverAsset||{},
     audio:audioAsset||{},
+    quiz:studioKind==="quiz"?{questions:quizDraft.map(x=>({...x,answers:(x.answers||[]).filter(a=>String(a.label||"").trim())}))}:null,
+    game:studioKind==="game"?{...gameDraft,voiceCues:[...(gameDraft.voiceCues||[])]}:null,
+    production:{phase:productionPhase,error:productionError},
     verification:"studio-review",
     qa:{
       text:!!text,
@@ -312,23 +316,26 @@ function fields(){
 }
 function persistDraft(){
   try{
-    localStorage.setItem(STUDIO_DRAFT_KEY,JSON.stringify({
+    captureStructuredEditor();
+    localStorage.setItem(draftKey(),JSON.stringify({
       kind:studioKind,title:q("csTitle")?.value||"",category:q("csCategory")?.value||"",
       topic:q("csTopic")?.value||"",prophetId:q("csProphet")?.value||"",
       ageMin:q("csAgeMin")?.value||"6",ageMax:q("csAgeMax")?.value||"10",
       read:q("csModeRead")?.checked!==false,listen:q("csModeListen")?.checked!==false,
-      sources:q("csSources")?.value||""
+      sources:q("csSources")?.value||"",text:q("text")?.value||"",quiz:quizDraft,game:gameDraft
     }));
   }catch{}
 }
 function restoreDraft(){
   try{
-    const d=JSON.parse(localStorage.getItem(STUDIO_DRAFT_KEY)||"null");if(!d)return;
-    q("csTitle").value=d.title||"";q("csCategory").value=d.category||"Qurʾān · geprüft";
+    const d=JSON.parse(localStorage.getItem(draftKey())||"null");if(!d)return;
+    q("csTitle").value=d.title||"";q("csCategory").value=d.category||(studioKind==="quiz"?"Quiz · geprüft":studioKind==="game"?"Spiel":studioKind==="ios"?"iOS · Inhalt":"Qurʾān · geprüft");
     q("csTopic").value=d.topic||"";q("csProphet").value=d.prophetId||"";
     q("csAgeMin").value=d.ageMin||"6";q("csAgeMax").value=d.ageMax||"10";
     q("csModeRead").checked=d.read!==false;q("csModeListen").checked=d.listen!==false;
-    q("csSources").value=d.sources||"";q("csCoverTitle").textContent=d.title||"Neue Geschichte";
+    q("csSources").value=d.sources||"";q("text").value=d.text||"";
+    quizDraft=Array.isArray(d.quiz)?d.quiz:[];gameDraft=d.game&&typeof d.game==="object"?d.game:{type:"choice",summary:"",instructions:"",voiceCues:[]};
+    q("csCoverTitle").textContent=d.title||"Neuer Inhalt";
   }catch{}
 }
 function handleCoverFile(file){
