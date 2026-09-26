@@ -123,6 +123,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-tab-oval-gpu-no-flex-jank-2026-09-26",
+      "approvedBy": "user-explicit-oval-ruckelt-beim-tabwechsel-sanft",
+      "reason": "Nutzer: Oval ist groß, aber Tabwechsel ruckelt/fackelt. Flex-Wachstum raus, Kapsel nur opacity/transform.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-tab-active-grows-kids-oval-2026-09-26",
       "approvedBy": "user-explicit-oval-immer-noch-klein-live-oder-unmoeglich",
       "reason": "Nutzer: Oval bleibt klein. Live war durch, aber 5 Tabs machen 71px-Kreis. Aktiver Tab waechst auf 96px wie Kids.",
