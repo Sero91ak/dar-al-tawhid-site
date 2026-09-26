@@ -97,7 +97,7 @@ def validate_online_library(data):
         tts=str(r.get("tts_text","")).strip()
         if not needle or not tts:
             continue
-        if not re.search(r"[\\u0600-\\u06ff]",tts):
+        if not any("\u0600" <= ch <= "\u06ff" for ch in tts):
             continue
         good.append(r)
     if len(good)<1000:
@@ -1713,10 +1713,40 @@ class H(BaseHTTPRequestHandler):
     def log_message(self,fmt,*args):
         print("[DĀR Voice]",fmt%args,flush=True)
 
-if __name__=="__main__":
-    print("DĀR Voice Engine http://127.0.0.1:8787",flush=True)
+def existing_engine_health(timeout:float=0.6):
+    try:
+        req=urllib.request.Request(f"http://{HOST}:{PORT}/health",headers={"Cache-Control":"no-cache"})
+        with urllib.request.urlopen(req,timeout=timeout) as resp:
+            return int(getattr(resp,"status",0) or 0)==200
+    except Exception:
+        return False
+
+def serve_single_instance():
+    print(f"DĀR Voice Engine http://{HOST}:{PORT}",flush=True)
     print("Referenz:",REF,flush=True)
-    # Modell im Hintergrund vorladen; HTTP bleibt sofort erreichbar.
-    threading.Thread(target=warm_model,daemon=True).start()
-    threading.Thread(target=refresh_online_library_if_stale,daemon=True).start()
-    VoiceHTTPServer((HOST,PORT),H).serve_forever()
+
+    # ZUERST den Port binden. Erst danach Modell/Online-Sync starten.
+    # Dadurch kann ein zweiter Starter niemals parallel ein zweites Chatterbox-Modell laden.
+    try:
+        server=VoiceHTTPServer((HOST,PORT),H)
+    except OSError as e:
+        if getattr(e,"errno",None) in (48,98):
+            # macOS 48 / Linux 98 = address already in use.
+            # Wenn dort bereits unsere gesunde Engine antwortet, ist das KEIN Fehler.
+            for _ in range(16):
+                if existing_engine_health():
+                    print("[DĀR Voice] Engine läuft bereits auf Port 8787 – Doppelstart wird sauber beendet.",flush=True)
+                    return 0
+                time.sleep(0.25)
+            print("[DĀR Voice] Port 8787 ist belegt, aber keine gültige Serhat-Engine antwortet.",flush=True)
+        raise
+
+    with server:
+        # Modell und Online-Wortschatz erst nach erfolgreichem exklusivem Bind vorladen.
+        threading.Thread(target=warm_model,daemon=True).start()
+        threading.Thread(target=refresh_online_library_if_stale,daemon=True).start()
+        server.serve_forever()
+    return 0
+
+if __name__=="__main__":
+    raise SystemExit(serve_single_instance())
