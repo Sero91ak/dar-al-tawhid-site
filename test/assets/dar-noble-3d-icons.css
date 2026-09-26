@@ -1,0 +1,51 @@
+/* Test-only noble 3D object icons — does not change live app */
+img.dar3d-icon{
+  width:1.2em;
+  height:1.2em;
+  object-fit:contain;
+  display:block;
+  pointer-events:none;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.42));
+}
+.bottom-nav-btn .nav-icon{
+  display:grid;
+  place-items:center;
+  min-height:22px;
+}
+.bottom-nav-btn .nav-icon img.dar3d-icon{
+  width:22px;
+  height:22px;
+}
+.feature-icon{
+  overflow:visible;
+}
+.feature-icon img.dar3d-icon{
+  width:28px;
+  height:28px;
+}
+.more-feature-row--hub .feature-icon img.dar3d-icon{
+  width:34px;
+  height:34px;
+}
+.emoji-emblem{
+  display:inline-grid;
+  place-items:center;
+}
+.emoji-emblem img.dar3d-icon{
+  width:22px;
+  height:22px;
+}
+.folder-icon img.dar3d-icon,
+.book-library-icon img.dar3d-icon,
+.dua-theme-card__icon img.dar3d-icon,
+.topics-theme-card__icon img.dar3d-icon,
+.dua-row__icon img.dar3d-icon,
+.post-row__icon img.dar3d-icon{
+  width:26px;
+  height:26px;
+}
+.series-card.has-icon .emoji-emblem img.dar3d-icon,
+.pinned-card.has-icon .emoji-emblem img.dar3d-icon{
+  width:22px;
+  height:22px;
+}
