@@ -37,6 +37,37 @@ jobs:
       - name: Compile Voice Engine
         run: python -m py_compile voice-studio/local-engine.py
 
+      - name: Smoke-test Voice Engine runtime state
+        run: |
+          python - <<'PY'
+          import importlib.util, os, shutil, tempfile
+          from pathlib import Path
+
+          root=Path.cwd()
+          tmp=Path(tempfile.mkdtemp(prefix="dar-voice-smoke-"))
+          app=tmp/"studio"
+          home=tmp/"home"
+          app.mkdir(parents=True)
+          home.mkdir(parents=True)
+          shutil.copy2(root/"data/pronunciation/pronunciation-rules.json",app/"pronunciation-rules.json")
+          shutil.copy2(root/"data/pronunciation/voice-production-profile.json",app/"voice-production-profile.json")
+          os.environ["DAR_VOICE_APP_HOME"]=str(app)
+          os.environ["HOME"]=str(home)
+
+          spec=importlib.util.spec_from_file_location("dar_voice_engine_smoke",root/"voice-studio/local-engine.py")
+          mod=importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(mod)
+
+          status=mod.get_status()
+          assert isinstance(status,dict)
+          assert "audio_lock_pending" in status
+          assert isinstance(status["audio_lock_pending"],list)
+          assert hasattr(mod,"AUDIO_LOCK_STATE_LOCK")
+          assert hasattr(mod,"PENDING_AUDIO_LOCKS")
+          assert hasattr(mod,"PENDING_AUDIO_RENDER_ID")
+          print("Voice Engine runtime smoke OK",status["audio_lock_pending"])
+          PY
+
       - name: Validate pronunciation and regression fixtures
         run: |
           python scripts/voice-studio/validate-v2.py \
