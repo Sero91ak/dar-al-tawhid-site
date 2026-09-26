@@ -188,8 +188,16 @@ function mount(){
 function bind(){
   document.querySelectorAll("[data-cs-kind]").forEach(btn=>btn.addEventListener("click",()=>switchKind(btn.dataset.csKind)));
   q("csTitle")?.addEventListener("input",()=>{q("csCoverTitle").textContent=q("csTitle").value||"Neue Geschichte";persistDraft();refreshQa()});
-  ["csCategory","csTopic","csProphet","csAgeMin","csAgeMax","csModeRead","csModeListen","csSources"].forEach(id=>q(id)?.addEventListener("change",persistDraft));
+  ["csCategory","csTopic","csProphet","csAgeMin","csAgeMax","csModeRead","csModeListen","csSources"].forEach(id=>q(id)?.addEventListener("change",()=>{persistDraft();refreshQa()}));
   q("text")?.addEventListener("input",()=>{persistDraft();refreshQa()});
+  q("csStructured")?.addEventListener("input",()=>{captureStructuredEditor();persistDraft();refreshQa()});
+  q("csStructured")?.addEventListener("change",()=>{captureStructuredEditor();persistDraft();refreshQa()});
+  q("csStructured")?.addEventListener("click",e=>{
+    const add=e.target.closest?.("[data-cs-add-question]");
+    if(add){quizDraft.push(blankQuizQuestion());renderKindEditor();persistDraft();refreshQa();return}
+    const remove=e.target.closest?.("[data-cs-remove-question]");
+    if(remove){quizDraft.splice(Number(remove.dataset.csRemoveQuestion),1);if(!quizDraft.length)quizDraft.push(blankQuizQuestion());renderKindEditor();persistDraft();refreshQa()}
+  });
   q("csCoverChoose")?.addEventListener("click",()=>q("csCoverFile").click());
   q("csCoverFile")?.addEventListener("change",e=>handleCoverFile(e.target.files?.[0]));
   q("csCover")?.addEventListener("click",()=>q("csCoverFile").click());
@@ -208,35 +216,62 @@ function bind(){
   });
   setInterval(refreshQa,1200);
 }
-function switchKind(kind){
-  studioKind=kind||"story";
-  document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.toggle("active",x.dataset.csKind===studioKind));
-  const story=studioKind==="story";
-  const ios=studioKind==="ios";
-  q("csMeta").hidden=ios;
-  q("csPublishSection").hidden=ios;
-  q("csLibrarySection").hidden=ios;
-  const title=document.querySelector(".editor-panel h1");
-  const lead=document.querySelector(".editor-panel .lead");
-  if(story){
-    title.textContent="Kids-Geschichte produzieren";
-    lead.textContent="Text, Serhat-Stimme, Cover und Altersfreigabe als ein Paket produzieren und direkt in die Kids-App veröffentlichen.";
-    q("styleMode").value="kids_story";
-  }else if(studioKind==="quiz"){
-    title.textContent="Kids-Quiz produzieren";
-    lead.textContent="Fragen, Antworten und Serhat-Sprachbausteine werden getrennt von Geschichten verwaltet.";
-    q("csCategory").value="Quiz · geprüft";
-    q("styleMode").value="kids_lesson";
+function effectiveKind(){return studioKind==="ios"?"lesson":studioKind}
+function effectiveTarget(){return studioKind==="ios"?"ios":"kids"}
+function draftKey(kind=studioKind){return STUDIO_DRAFT_KEY+"."+kind}
+function blankQuizQuestion(){return{question:"",answers:[{label:"",correct:true},{label:"",correct:false}],success:"Richtig.",retry:"Versuche es noch einmal."}}
+function setProductionPhase(phase,error=""){productionPhase=phase||"draft";productionError=error||"";renderStatus()}
+function resetEditorForKind(){
+  q("csTitle").value="";q("csTopic").value="";q("csProphet").value="";q("csSources").value="";q("text").value="";
+  q("csAgeMin").value="6";q("csAgeMax").value="10";q("csModeRead").checked=true;q("csModeListen").checked=true;
+  q("csCategory").value=studioKind==="quiz"?"Quiz · geprüft":studioKind==="game"?"Spiel":studioKind==="ios"?"iOS · Inhalt":"Qurʾān · geprüft";
+  coverFile=null;coverRemoteUrl="";coverAsset=null;audioAsset=null;quizDraft=[];gameDraft={type:"choice",summary:"",instructions:"",voiceCues:[]};
+  q("csCover")?.querySelector("img")?.remove();q("csCoverTitle").textContent="Neuer Inhalt";
+}
+function renderKindEditor(){
+  const wrap=q("csStructured"),body=q("csStructuredBody");if(!wrap||!body)return;
+  if(studioKind==="quiz"){
+    wrap.hidden=false;if(!quizDraft.length)quizDraft=[blankQuizQuestion()];
+    body.innerHTML="<h3>Quiz-Aufbau</h3>"+quizDraft.map((item,i)=>{
+      const answers=Array.isArray(item.answers)?item.answers:[];
+      const opts=[0,1,2,3].map(ai=>"<option value=\""+ai+"\" "+(answers[ai]?.correct?"selected":"")+">"+String.fromCharCode(65+ai)+"</option>").join("");
+      const ans=[0,1,2,3].map(ai=>{const a=answers[ai]||{};return "<div class=\"cs-field\"><label>Antwort "+String.fromCharCode(65+ai)+"</label><input data-q-answer=\""+ai+"\" data-q-index=\""+i+"\" value=\""+escapeHtml(a.label||"")+"\"></div>"}).join("");
+      return "<div class=\"cs-question\" data-cs-question=\""+i+"\"><div class=\"cs-question-head\"><b>Frage "+(i+1)+"</b><button type=\"button\" data-cs-remove-question=\""+i+"\">Entfernen</button></div><div class=\"cs-field\"><label>Frage</label><input data-q-field=\"question\" data-q-index=\""+i+"\" value=\""+escapeHtml(item.question||"")+"\"></div><div class=\"cs-answer-grid\">"+ans+"</div><div class=\"cs-inline-grid\" style=\"margin-top:8px\"><div class=\"cs-field\"><label>Richtige Antwort</label><select data-q-field=\"correctIndex\" data-q-index=\""+i+"\">"+opts+"</select></div><div class=\"cs-field\"><label>Erfolg</label><input data-q-field=\"success\" data-q-index=\""+i+"\" value=\""+escapeHtml(item.success||"Richtig.")+"\"></div></div><div class=\"cs-field\" style=\"margin-top:8px\"><label>Nochmal versuchen</label><input data-q-field=\"retry\" data-q-index=\""+i+"\" value=\""+escapeHtml(item.retry||"Versuche es noch einmal.")+"\"></div></div>";
+    }).join("")+"<button class=\"btn quiet cs-add\" type=\"button\" data-cs-add-question>+ Frage hinzufügen</button>";
   }else if(studioKind==="game"){
-    title.textContent="Kids-Spiel produzieren";
-    lead.textContent="Spielinhalte und wiederverwendbare Serhat-Sprachbausteine werden als eigenes Content-Paket verwaltet.";
-    q("csCategory").value="Spiel";
-    q("styleMode").value="kids_lesson";
-  }else{
-    title.textContent="iOS Content Studio";
-    lead.textContent="Der gleiche Paketstandard ist für die offizielle iOS-App vorbereitet. Live-Anbindung folgt nach dem Kids-Staging-Test.";
+    wrap.hidden=false;
+    body.innerHTML="<h3>Spiel-Aufbau</h3><div class=\"cs-inline-grid\"><div class=\"cs-field\"><label>Spieltyp</label><select id=\"csGameType\"><option value=\"choice\">Auswahlspiel</option><option value=\"listen\">Hörspiel</option><option value=\"memory\">Merkspiel</option><option value=\"sequence\">Reihenfolge</option></select></div><div class=\"cs-field\"><label>Kurzbeschreibung</label><input id=\"csGameSummary\" value=\""+escapeHtml(gameDraft.summary||"")+"\"></div></div><div class=\"cs-field\" style=\"margin-top:8px\"><label>Anleitung</label><textarea id=\"csGameInstructions\">"+escapeHtml(gameDraft.instructions||"")+"</textarea></div><div class=\"cs-field\" style=\"margin-top:8px\"><label>Serhat-Sprachbausteine · eine Zeile pro Satz</label><textarea id=\"csGameVoiceCues\" placeholder=\"Sehr gut!&#10;Versuche es noch einmal.\">"+escapeHtml((gameDraft.voiceCues||[]).join("\\n"))+"</textarea></div>";
+    q("csGameType").value=gameDraft.type||"choice";
+  }else{wrap.hidden=true;body.innerHTML=""}
+}
+function captureStructuredEditor(){
+  if(studioKind==="quiz"){
+    document.querySelectorAll("[data-cs-question]").forEach(node=>{
+      const i=Number(node.dataset.csQuestion),item=quizDraft[i]||blankQuizQuestion();
+      item.question=node.querySelector('[data-q-field="question"]')?.value||"";item.success=node.querySelector('[data-q-field="success"]')?.value||"Richtig.";item.retry=node.querySelector('[data-q-field="retry"]')?.value||"Versuche es noch einmal.";
+      const correct=Number(node.querySelector('[data-q-field="correctIndex"]')?.value||0);
+      item.answers=[0,1,2,3].map(ai=>({label:node.querySelector('[data-q-answer="'+ai+'"]')?.value||"",correct:ai===correct})).filter(a=>String(a.label||"").trim());quizDraft[i]=item;
+    });
+  }else if(studioKind==="game"){
+    gameDraft={type:q("csGameType")?.value||gameDraft.type||"choice",summary:q("csGameSummary")?.value||"",instructions:q("csGameInstructions")?.value||"",voiceCues:String(q("csGameVoiceCues")?.value||"").split(/\n+/).map(x=>x.trim()).filter(Boolean)};
   }
-  contentId="";savedRevision=0;stagingPublished=false;contentStatus="draft";renderStatus();refreshQa();loadLibrary();
+}
+function voiceScript(){
+  captureStructuredEditor();
+  if(studioKind==="quiz")return quizDraft.map(item=>[item.question,...(item.answers||[]).map(a=>a.label),item.success,item.retry].filter(Boolean).join(". ")).filter(Boolean).join("\n\n");
+  if(studioKind==="game")return [gameDraft.instructions,...(gameDraft.voiceCues||[])].filter(Boolean).join("\n\n");
+  return String(q("text")?.value||"").trim();
+}
+function switchKind(kind){
+  persistDraft();studioKind=kind||"story";
+  document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.toggle("active",x.dataset.csKind===studioKind));
+  const title=document.querySelector(".editor-panel h1"),lead=document.querySelector(".editor-panel .lead");
+  resetEditorForKind();
+  if(studioKind==="story"){title.textContent="Kids-Geschichte produzieren";lead.textContent="Text, Serhat-Stimme, Cover und Altersfreigabe als ein Paket produzieren und direkt in die Kids-App veröffentlichen.";q("styleMode").value="kids_story"}
+  else if(studioKind==="quiz"){title.textContent="Kids-Quiz produzieren";lead.textContent="Fragen, Antworten, Erklärung und Serhat-Stimme als eigenes geprüftes Quiz-Paket.";q("styleMode").value="kids_lesson"}
+  else if(studioKind==="game"){title.textContent="Kids-Spiel produzieren";lead.textContent="Spielinhalt und wiederverwendbare Serhat-Sprachbausteine getrennt von Geschichten produzieren.";q("styleMode").value="kids_lesson"}
+  else{title.textContent="iOS Content Studio";lead.textContent="Text, Serhat-Stimme, Cover und Metadaten als separates Paket für die offizielle iOS-App.";q("styleMode").value="narration"}
+  contentId="";savedRevision=0;stagingPublished=false;contentStatus="draft";setProductionPhase("draft");restoreDraft();renderKindEditor();refreshQa();loadLibrary();
 }
 function saveConnection(){
   try{
